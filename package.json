@@ -41,10 +41,10 @@
     "purecss": "^0.6.0",
     "q": "^1.4.1",
     "uppercamelcase": "^1.1.0",
-    "vue": "^1.0.26",
-    "vue-loader": "^8.5.3",
+    "vue": "^2.0.0-beta.5",
+    "vue-loader": "^9.2.0",
     "vue-markdown-loader": "^0.4.0",
     "vue-popup": "^0.1.8",
-    "vue-router": "^0.7.13"
+    "vue-router": "^2.0.0-beta.2"
   }
 }

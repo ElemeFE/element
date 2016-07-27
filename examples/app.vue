@@ -263,52 +263,54 @@
 </style>
 
 <template>
-  <div class="pure-g">
-    <div class="pure-u-1-6 app__sidebar pure-menu pure-menu-scrollable app__menu">
-      <a class="pure-menu-heading app__brand" v-link="'/'">
-        <span class="app__eleme">ELEME</span>NT
-      </a>
+  <div id="app">
+    <div class="pure-g">
+      <div class="pure-u-1-6 app__sidebar pure-menu pure-menu-scrollable app__menu">
+        <router-link class="pure-menu-heading app__brand" to="/">
+          <span class="app__eleme">ELEME</span>NT
+        </router-link>
 
-      <template v-for="nav in navs">
-        <a
-          href="#"
-          @click.prevent="navState.$set($index, !navState[$index] || false)"
-          class="pure-menu-heading app__menu__label"
-          :class="{ 'unfold': !navState[$index] }"
-          v-text="nav.group"></a>
-        <ul
-          class="pure-menu-list"
-          transition="slidedown"
-          v-show="!navState[$index]"
-          :style="{
-            maxHeight: nav.list.length * 44 + 'px'
-          }">
-          <li
-            class="pure-menu-item app__menu__item"
-            v-for="item in nav.list"
-            v-if="!item.disabled">
-            <a
-              class="pure-menu-link app__menu__link"
-              v-link="{ path: item.path, activeClass: 'active' }"
-              v-text="item.name"></a>
-          </li>
-        </ul>
-      </template>
+        <template v-for="(nav, key) in navs">
+          <a
+            href="#"
+            @click.prevent="navState.$set(key, !navState[key] || false)"
+            class="pure-menu-heading app__menu__label"
+            :class="{ 'unfold': !navState[key] }"
+            v-text="nav.group"></a>
+          <ul
+            class="pure-menu-list"
+            transition="slidedown"
+            v-show="!navState[key]"
+            :style="{
+              maxHeight: nav.list.length * 44 + 'px'
+            }">
+            <li
+              class="pure-menu-item app__menu__item"
+              v-for="item in nav.list"
+              v-if="!item.disabled">
+              <router-link
+                class="pure-menu-link app__menu__link"
+                :to="{ path: item.path, activeClass: 'active' }"
+                v-text="item.name"></router-link>
+            </li>
+          </ul>
+        </template>
 
+      </div>
+      <div class="pure-u-5-6 app__content">
+        <header class="app__header">
+          <h1 class="app__headline">{{ $route.title || 'element 后台组件' }}</h1>
+        </header>
+        <section class="app__main" ref="main">
+          <p class="app__description">{{ $route.description }}</p>
+          <router-view></router-view>
+        </section>
+        <toc main=".app__main"></toc>
+      </div>
     </div>
-    <div class="pure-u-5-6 app__content">
-      <header class="app__header">
-        <h1 class="app__headline">{{ $route.title || 'element 后台组件' }}</h1>
-      </header>
-      <section class="app__main" v-el:main>
-        <p class="app__description">{{ $route.description }}</p>
-        <router-view></router-view>
-      </section>
-      <toc main=".app__main"></toc>
-    </div>
+
+    <button class="hljs__button" ref="button"></button>
   </div>
-
-  <button class="hljs__button" v-el:button></button>
 </template>
 
 <script>
@@ -341,10 +343,10 @@
       this.navs = navs;
     },
 
-    ready() {
+    mounted() {
       this.mainContent = document.querySelector('.app__content');
 
-      E.delegate(this.$els.main, '.hljs__button', 'click.highlight', e => {
+      E.delegate(this.$refs.main, '.hljs__button', 'click.highlight', e => {
         const parent = e.target.parentNode;
 
         toggleClass(parent, 'open');
@@ -352,7 +354,7 @@
     },
 
     beforeDestroy() {
-      E.undelegate(this.$els.main, '.hljs', 'click.highlight');
+      E.undelegate(this.$refs.main, '.hljs', 'click.highlight');
     },
 
     watch: {

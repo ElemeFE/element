@@ -1,40 +1,36 @@
 import navConfig from './nav.config.json';
 
 const registerRoute = (config) => {
-  let route = {};
-  config.map(nav => nav.list.map(page => {
-    try {
-      route[page.path] = page.path !== '/changelog' ? {
-        component: require(`./docs${page.path}.md`),
-        title: page.title || page.name,
-        description: page.description
-      } : {
-        component: require('../CHANGELOG.md'),
-        title: page.title || page.name,
-        description: page.description
-      };
-    } catch (e) {
-      console.error(e);
-      page.disabled = true;
-    }
-  }));
+  let route = [];
+  config
+    .map(nav =>
+      nav.list.map(page => {
+        if (page.path === '/changelog') return;
+        const component = require(`./docs${page.path}.md`);
+
+        route.push({
+          path: page.path,
+          title: page.title || page.name,
+          description: page.description,
+          component: component.default || component
+        });
+      })
+    );
 
   return { route, navs: config };
 };
 
 const route = registerRoute(navConfig);
 
-export const navs = route.navs;
-export default function configRouter(router) {
-  router.map(Object.assign({
-    '*': {
-      component: require('./docs/home.md')
-    }
-  }, route.route));
+route.route.push({
+  path: '/changelog',
+  component: require('../CHANGELOG.md')
+});
 
-  router.beforeEach(transition => {
-    document.title = transition.to.title || document.title;
-    transition.to.router.app.$broadcast('element.example.reload');
-    transition.next();
-  });
-};
+route.route.push({
+  path: '*',
+  component: require('./docs/home.md')
+});
+
+export const navs = route.navs;
+export default route.route;

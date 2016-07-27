@@ -34,20 +34,20 @@
   module.exports = {
     data() {
       return {
-        switch: true
+        value: true
       }
     },
 
     computed: {
       effect() {
-        return this.switch ? 'dark' : 'light';
+        return this.value ? 'dark' : 'light';
       }
     }
   }
 </script>
 
 <el-switch
-  :value.sync="switch"
+  v-model="value"
   on-text="黑色"
   off-text="白色"
   on-color="#1f2d3d"

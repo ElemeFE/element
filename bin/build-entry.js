@@ -10,6 +10,8 @@ var ISNTALL_COMPONENT_TEMPLATE = `  Vue.component({{name}}.name, {{name}});`
 var MAIN_TEMPLATE = `{{include}}
 
 const install = function(Vue) {
+  if (install.installed) return;
+
 {{install}}
 
   Vue.use(Loading);

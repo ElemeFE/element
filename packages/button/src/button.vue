@@ -10,9 +10,9 @@
       }
     ]"
   >
-    <i class="el-icon-loading" v-if="loading"></i><i :class="'el-icon-' + icon" v-if="icon && !loading"></i><span v-if="_slotContents && _slotContents.default">
-      <slot></slot>
-    </span>
+    <i class="el-icon-loading" v-if="loading"></i>
+    <i :class="'el-icon-' + icon" v-if="icon && !loading"></i>
+    <slot></slot>
   </button>
 </template>
 <script>
