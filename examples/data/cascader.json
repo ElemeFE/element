@@ -1,0 +1,29 @@
+[
+  {
+    "label": "普通业务",
+    "value": "普通业务",
+    "children": [
+      {
+        "label": "业务1",
+        "value": "业务1",
+        "children": [
+          {
+            "label": "业务5",
+            "value": "业务5",
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "业务2",
+        "value": "业务2",
+        "children": []
+      }
+    ]
+  },
+  {
+    "label": "会员业务",
+    "value": "会员业务",
+    "children": []
+  }
+]

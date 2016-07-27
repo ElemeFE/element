@@ -1,0 +1,17 @@
+{
+  "name": "el-popover",
+  "version": "0.0.0",
+  "description": "A popover component for Vue.js.",
+  "keywords": [
+    "element",
+    "vue",
+    "component"
+  ],
+  "main": "./lib/index.js",
+  "repository": "https://github.com/element-component/element/tree/master/packages/popover",
+  "author": "elemefe",
+  "license": "MIT",
+  "devDependencies": {
+    "wind-dom": "0.0.3"
+  }
+}

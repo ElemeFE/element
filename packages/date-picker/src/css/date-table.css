@@ -1,0 +1,75 @@
+@import "./vars.css";
+
+@component-namespace el {
+  @b date-table {
+    font-size: 12px;
+    min-width: 224px;
+    user-select: none;
+
+    @when week-mode {
+      .el-date-table__row {
+        &:hover {
+          background-color: var(--datepicker-cell-hover-color);
+        }
+
+        &.current {
+          background-color: var(--datepicker-inrange-color);
+        }
+      }
+    }
+
+    td {
+      width: 32px;
+      height: 32px;
+      box-sizing: border-box;
+      text-align: center;
+      cursor: pointer;
+
+      &.next-month,
+      &.prev-month {
+        color: var(--datepicker-off-color);
+      }
+
+      &.today {
+        color: var(--datepicker-text-hover-color);
+      }
+
+      &.available:hover {
+        background-color: var(--datepicker-cell-hover-color);
+      }
+
+      &.in-range {
+        background-color: var(--datepicker-inrange-color);
+        &:hover {
+          background-color: var(--datepicker-inrange-hover-color);
+        }
+      }
+
+      &.current,
+      &.start-date,
+      &.end-date {
+        background-color: var(--datepicker-active-color) !important;
+        color: #fff;
+      }
+
+      &.disabled {
+        background-color: #f4f4f4;
+        opacity: 1;
+        cursor: not-allowed;
+        color: #ccc;
+        text-decoration: line-through;
+      }
+
+      &.week {
+        font-size: 80%;
+        color: var(--datepicker-header-color);
+      }
+    }
+
+    th {
+      padding: 5px;
+      color: var(--datepicker-header-color);
+      font-weight: 400;
+    }
+  }
+}

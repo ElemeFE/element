@@ -1,0 +1,120 @@
+@charset "UTF-8";
+@import "./common/var.css";
+
+@component-namespace el {
+  @b slider {
+    @e runway {
+      width: 100%;
+      height: 4px;
+      margin: 20px 0;
+      background-color: #E5E9F2;
+      border-radius: 3px;
+      position: relative;
+      cursor: pointer;
+      vertical-align: middle;
+
+      &.show-input {
+        margin-right: 160px;
+        width: auto;
+      }
+    }
+
+    @e input {
+      float: right;
+      margin-top: -10px;
+
+      & .el-input {
+        width: 130px;
+      }
+    }
+
+    @e bar {
+      height: 4px;
+      background-color: #20A0FF;
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px;
+      position: absolute;
+    }
+
+    @e button-wrapper {
+      size: 36px;
+      position: absolute;
+      z-index: 1001;
+      top: -16px;
+      transform: translateX(-50%);
+      background-color: transparent;
+    }
+
+    @e button {
+      size: 12px;
+      background-color: #20A0FF;
+      border-radius: 50%;
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      cursor: pointer;
+      transition: .2s;
+
+      &:hover,
+      &.hover,
+      &.dragging {
+        transform: scale(1.5);
+        background-color: #1d8ce0;
+      }
+    }
+
+    @e pop {
+      @utils-user-select none;
+      font-size: 12px;
+      line-height: 26px;
+      text-align: center;
+      size: 26px;
+      border-radius: 50%;
+      background-color: #20A0FF;
+      color: #fff;
+      cursor: default;
+      z-index: var(--index-top);
+
+      &::before {
+        triangle: 9px top #20A0FF;
+        position: absolute;
+        top: -14px;
+        left: 4px;
+      }
+
+      &::after {
+        triangle: 9px bottom #20A0FF;
+        position: absolute;
+        bottom: -14px;
+        left: 4px;
+      }
+
+      &.top::after {
+        content: '';
+      }
+
+      &.bottom::before {
+        content: '';
+      }
+    }
+
+    @e stop {
+      position: absolute;
+      size: 4px;
+      border-radius: 50%;
+      background-color: #c0ccda;
+      transform: translateX(-50%);
+    }
+
+    .popper-fade-transition {
+      transition: transform .3s, opacity .3s;
+      transform-origin: center bottom;
+    }
+
+    .popper-fade-enter,
+    .popper-fade-leave {
+      transform: scale(0.1);
+      opacity: 0;
+    }
+  }
+}

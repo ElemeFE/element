@@ -1,0 +1,47 @@
+@charset "UTF-8";
+@import "./common/var.css";
+
+@component-namespace el {
+
+  @b select-dropdown {
+    @e item {
+      font-size: 14px;
+      padding: 8px 10px;
+      position: relative;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: #475669;
+      height: 36px;
+      line-height: 1.5;
+      box-sizing: border-box;
+      cursor: pointer;
+
+      @when disabled {
+        color: #c0ccda;
+        cursor: not-allowed;
+
+        &:hover {
+          background-color: #fff;
+        }
+      }
+
+      &.hover {
+        background-color: #e5e9f2;
+      }
+
+      &.selected {
+        color: #fff;
+        background-color: #20A0FF;
+
+        &.hover {
+          background-color: #1D8CE0;
+        }
+      }
+
+      & span {
+        line-height: 1.5 !important;
+      }
+    }
+  }
+}

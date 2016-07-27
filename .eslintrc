@@ -1,0 +1,9 @@
+{
+  "plugins": ['vue'],
+  "extends": 'elemefe',
+  "parserOptions": {
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true
+    }
+  }
+}

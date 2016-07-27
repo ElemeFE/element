@@ -1,0 +1,17 @@
+{
+  "name": "el-slider",
+  "version": "0.0.0",
+  "description": "A slider component for Vue.js.",
+  "keywords": [
+    "element",
+    "vue",
+    "component"
+  ],
+  "main": "./lib/index.js",
+  "repository": "https://github.com/element-component/element/tree/master/packages/slider",
+  "author": "elemefe",
+  "license": "MIT",
+  "dependencies": {
+    "wind-dom": "0.0.3"
+  }
+}

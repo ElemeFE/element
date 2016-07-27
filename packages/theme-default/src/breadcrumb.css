@@ -1,0 +1,38 @@
+@charset "UTF-8";
+@import "./common/var.css";
+
+@component-namespace el {
+
+  @b breadcrumb {
+    font-size:13px;
+    color:#475669;
+    @utils-clearfix;
+
+    @e separator {
+      margin: 0 8px;
+      color: #c0ccda;
+    }
+    @e item {
+      float: left;
+
+      &:not(:last-child) {
+        .el-breadcrumb__item__text {
+          transition: color .15s linear;
+
+          &:hover {
+            color: var(--color-primary);
+            cursor: pointer;
+          }
+        }
+      }
+
+      &:last-child {
+        color: #99a9bf;
+
+        .el-breadcrumb__separator {
+          display: none;
+        }
+      }
+    }
+  }
+}

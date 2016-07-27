@@ -1,0 +1,18 @@
+{
+  "name": "el-tag",
+  "version": "1.0.1",
+  "description": "A input component for Vue.",
+  "main": "lib/index.js",
+  "keywords": [
+    "element",
+    "vue",
+    "component",
+    "input"
+  ],
+  "author": "haipingZeng <haiping.zeng@ele.me>",
+  "license": "MIT",
+  "repository": "https://github.com/element-component/element/tree/master/packages/tag",
+  "devDependencies": {
+    "vue-clickoutside": "0.0.4"
+  }
+}

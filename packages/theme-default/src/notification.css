@@ -1,0 +1,78 @@
+@charset "UTF-8";
+@import "./common/var.css";
+
+@component-namespace el {
+
+  @b notification {
+    width: 330px;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 2px;
+    position: fixed;
+    right: 16px;
+    background-color: #fff;
+    box-shadow: 0 0 6px rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .12);
+    transition: opacity 0.3s, transform .3s, right .3s, top 0.4s;
+    overflow: hidden;
+    z-index: 1000;
+
+    @e group {
+      & span {
+        font-size: 16px;
+        color: #1f2d3d;
+      }
+
+      & p {
+        font-size: 14px;
+        line-height: 21px;
+        margin: 10px 0 0 0;
+        color: #8492a6;
+        text-align: justify;
+      }
+    }
+
+    @e icon {
+      size: 40px;
+      font-size: 40px;
+      float: left;
+      position: relative;
+      top: 3px;
+    }
+
+    @e closeBtn {
+      position: absolute 20px 20px * *;
+      cursor: pointer;
+      color: #C0CCDA;
+      font-size: 14px;
+
+      &:hover {
+        color: #99A9BF;
+      }
+    }
+
+    & .el-icon-circle-check {
+      color: #13ce66;
+    }
+
+    & .el-icon-circle-cross {
+      color: #ff4949;
+    }
+
+    & .el-icon-information {
+      color: #50bfff;
+    }
+
+    & .el-icon-warning {
+      color: #f7ba2a;
+    }
+  }
+
+  .el-notification-fade-enter {
+    transform: translateX(100%);
+    right: 0;
+  }
+
+  .el-notification-fade-leave {
+    opacity: 0;
+  }
+}

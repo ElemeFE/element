@@ -1,0 +1,16 @@
+{
+  "name": "el-select-dropdown",
+  "version": "0.0.0",
+  "description": "A select-dropdown component for Vue.js.",
+  "keywords": [
+    "element",
+    "vue",
+    "component"
+  ],
+  "main": "./lib/index.js",
+  "repository": "https://github.com/element-component/element/tree/master/packages/select-dropdown",
+  "author": "elemefe",
+  "license": "MIT",
+  "dependencies": {
+  }
+}

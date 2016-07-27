@@ -1,0 +1,55 @@
+@charset "UTF-8";
+@import "../common/var.css";
+
+@component-namespace element-core {
+
+  @b input {
+    background-color: var(--input-fill);
+    border: var(--input-border);
+    border-radius: var(--input-border-radius);
+    box-sizing: border-box;
+    color: var(--input-color);
+    cursor: text;
+    display: inline-block;
+    font-size: var(--input-font-size);
+    min-height: var(--input-height);
+    min-width: var(--input-width);
+    padding: 2px;
+    position: relative;
+    vertical-align: middle;
+
+    @when disabled {
+      background-color: var(--input-fill-disabled);
+      border-color: inherit;
+      box-shadow: none;
+      color: var(--input-color-disabled);
+      cursor: not-allowed;
+    }
+
+    @when readonly {
+      cursor: pointer;
+    }
+
+    @when multiple {
+      cursor: text;
+    }
+
+    &:hover,
+    &.is-active {
+      border-color: var(--input-focus-border);
+      box-shadow: var(--input-shadow-hover);
+    }
+
+    @e original {
+      background-color: inherit;
+      border: none;
+      box-sizing: border-box;
+      cursor: inherit;
+      height: 100%;
+      line-height: 1.2;
+      outline: none;
+      padding: 5px 7px;
+      width: auto;
+    }
+  }
+}

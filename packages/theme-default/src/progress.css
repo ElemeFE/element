@@ -1,0 +1,59 @@
+@charset "UTF-8";
+@import "./common/var.css";
+
+@component-namespace el {
+  @b progress {
+    height: 4px;
+    border-radius: 2px;
+    background-color: #e5e9f2;
+    overflow: hidden;
+    position: relative;
+
+    @e bar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      border-radius: 2px 0 0 2px;
+    }
+    @m green {
+      .el-progress__bar {
+        background-color: var(--color-success);
+      }
+    }
+    @m blue {
+      .el-progress__bar {
+        background-color: var(--color-primary);
+      }
+    }
+    @m green-stripe {
+      .el-progress__bar {
+        background: linear-gradient(45deg, var(--color-success) 25%, #5adc94 25%, #5adc94 75%, var(--color-success) 75%);
+        background-size: 16px 100%;
+        animation: progress 1.5s linear infinite;
+      }
+    }
+    @m blue-stripe {
+      .el-progress__bar {
+        background: linear-gradient(45deg, var(--color-primary) 25%, #63bcff 25%, #63bcff 75%, var(--color-primary) 75%);
+        background-size: 16px 100%;
+        animation: progress 1.5s linear infinite;
+      }
+    }
+    @m large {
+      height: 6px;
+    }
+    @m small {
+      height: 2px;
+    }
+  }
+}
+
+@keyframes progress {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 32px 0;
+  }
+}

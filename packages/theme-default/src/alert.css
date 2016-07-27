@@ -1,0 +1,89 @@
+@charset "UTF-8";
+@import "./common/var.css";
+
+@component-namespace el {
+
+  @b alert {
+    width: 100%;
+    padding: 8px 16px;
+    margin: 0;
+    box-sizing: border-box;
+    border-radius: 4px;
+    position: relative;
+    background-color: #fff;
+    overflow: hidden;
+    color: #fff;
+    opacity: 1;
+    display: table;
+
+    @modifier success {
+      background-color: #13ce66;
+    }
+
+    @modifier info {
+      background-color: #50bfff;
+    }
+
+    @modifier warning {
+      background-color: #f7ba2a;
+    }
+
+    @modifier error {
+      background-color: #ff4949;
+    }
+
+    @e content {
+      display: table-cell;
+      padding-left: 8px;
+    }
+
+    @e icon {
+      font-size: 16px;
+      width: 16px;
+      display: table-cell;
+      color: #fff;
+      vertical-align: middle;
+      @when big {
+        font-size: 28px;
+        width: 28px;
+      }
+    }
+
+    @e title {
+      font-size: 13px;
+      line-height: 18px;
+      @when bold {
+        font-weight: bold;
+      }
+    }
+
+    & .el-alert__description {
+      color: #fff;
+      font-size: 12px;
+      margin: 5px 0 0 0;
+    }
+
+    @e closebtn {
+      font-size: 12px;
+      color: #fff;
+      opacity: 1;
+      position: absolute 12px 15px * *;
+      cursor: pointer;
+
+      @when customed {
+        font-style: normal;
+        font-size: 13px;
+        top: 9px;
+      }
+    }
+  }
+
+  .el-alert-fade-transition {
+    transition: opacity .2s;
+  }
+
+  .el-alert-fade-enter,
+  .el-alert-fade-leave {
+    opacity: 0;
+  }
+}

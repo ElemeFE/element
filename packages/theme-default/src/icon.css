@@ -1,0 +1,151 @@
+@font-face {
+    font-family: 'element-icons';
+    src:
+        url('fonts/element-icons.ttf?deq2r7') format('truetype'),
+        url('fonts/element-icons.woff?deq2r7') format('woff'),
+        url('fonts/element-icons.svg?deq2r7#element-icons') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="el-icon-"], [class*=" el-icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'element-icons' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    vertical-align: bottom;
+    display: inline-block;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.el-icon-search:before {
+    content: "\e90e";
+}
+.el-icon-share:before {
+    content: "\e900";
+}
+.el-icon-setting:before {
+    content: "\e901";
+}
+.el-icon-circle-cross:before {
+    content: "\e902";
+}
+.el-icon-warning:before {
+    content: "\e903";
+}
+.el-icon-information:before {
+    content: "\e904";
+}
+.el-icon-circle-check:before {
+    content: "\e905";
+}
+.el-icon-delete:before {
+    content: "\e906";
+}
+.el-icon-d-arrow-left:before {
+    content: "\e907";
+}
+.el-icon-d-arrow-right:before {
+    content: "\e908";
+}
+.el-icon-picture:before {
+    content: "\e909";
+}
+.el-icon-upload:before {
+    content: "\e90a";
+}
+.el-icon-menu:before {
+    content: "\e90b";
+}
+.el-icon-time:before {
+    content: "\e90c";
+}
+.el-icon-circle-close:before {
+    content: "\e90d";
+}
+.el-icon-arrow-down:before {
+    content: "\e90f";
+}
+.el-icon-arrow-up:before {
+    content: "\e910";
+}
+.el-icon-arrow-right:before {
+    content: "\e911";
+}
+.el-icon-arrow-left:before {
+    content: "\e912";
+}
+.el-icon-close:before {
+    content: "\e913";
+}
+.el-icon-document:before {
+    content: "\e914";
+}
+.el-icon-d-caret:before {
+    content: "\e915";
+}
+.el-icon-date:before {
+    content: "\e916";
+}
+.el-icon-message:before {
+    content: "\e917";
+}
+.el-icon-loading:before {
+    content: "\e918";
+}
+.el-icon-ellipsis:before {
+    content: "\e919";
+}
+.el-icon-plus:before {
+    content: "\e91a";
+}
+.el-icon-caret-left:before {
+    content: "\e91b";
+}
+.el-icon-caret-right:before {
+    content: "\e91c";
+}
+.el-icon-caret-bottom:before {
+    content: "\e91d";
+}
+.el-icon-edit:before {
+    content: "\e91e";
+}
+.el-icon-caret-top:before {
+    content: "\e91f";
+}
+.el-icon-check:before {
+    content: "\e920";
+}
+.el-icon-minus:before {
+    content: "\e921";
+}
+.el-icon-angle-left:before {
+    content: "\f104";
+}
+.el-icon-angle-right:before {
+    content: "\f105";
+}
+.el-icon-truck:before {
+    content: "\e922";
+}
+
+.el-icon-loading {
+  animation: rotating 1s linear infinite;
+}
+
+@keyframes rotating {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}

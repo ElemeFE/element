@@ -1,0 +1,50 @@
+{
+  "name": "element-ui",
+  "version": "0.1.9",
+  "description": "A Component Library for Vue.js.",
+  "main": "lib/index.js",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "scripts": {
+    "dev": "node bin/build-entry.js && cooking watch -c scripts/cooking.demo.js",
+    "dist": "rm -rf lib && cooking build -p && cooking build -c scripts/cooking.component.js -p",
+    "deploy": "cooking build -c scripts/cooking.demo.js -p",
+    "gh-docs": "cooking build -c scripts/cooking.demo.js -p && gh-pages -d examples/element-ui --remote origin",
+    "prepublish": "make dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:eleme/element-ui.git"
+  },
+  "keywords": [
+    "eleme",
+    "vue",
+    "components"
+  ],
+  "bugs": {
+    "url": "https://github.com/eleme/element-ui/issues"
+  },
+  "dependencies": {
+    "object-assign": "^4.1.0"
+  },
+  "devDependencies": {
+    "file-save": "^0.2.0",
+    "gh-pages": "^0.11.0",
+    "highlight.js": "^9.3.0",
+    "json-templater": "^1.0.4",
+    "lerna": "2.0.0-beta.18",
+    "markdown-it-toc-and-anchor": "^4.1.1",
+    "oui-dom-events": "^0.2.1",
+    "postcss": "^5.0.21",
+    "purecss": "^0.6.0",
+    "q": "^1.4.1",
+    "uppercamelcase": "^1.1.0",
+    "vue": "^1.0.26",
+    "vue-loader": "^8.5.3",
+    "vue-markdown-loader": "^0.4.0",
+    "vue-popup": "^0.1.8",
+    "vue-router": "^0.7.13"
+  }
+}

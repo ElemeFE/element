@@ -1,0 +1,162 @@
+@charset "UTF-8";
+@import "./common/var.css";
+
+@component-namespace el {
+
+  @b message-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    background-color: #fff;
+    width: 420px;
+    border-radius: 3px;
+    font-size: 16px;
+    -webkit-user-select: none;
+    overflow: hidden;
+    backface-visibility: hidden;
+
+    @e header {
+      padding: 20px 20px 0;
+    }
+
+    @e content {
+      padding: 30px 20px;
+      color: #475669;
+      font-size: 14px;
+      position: relative;
+    }
+
+    @e close {
+      display: inline-block;
+      position: absolute;
+      top: 19px;
+      right: 20px;
+      color: #999;
+      cursor: pointer;
+      line-height: 20px;
+      text-align: center;
+    }
+
+    @e input {
+      & > input {
+        border: 1px solid #dedede;
+        border-radius: 5px;
+        padding: 4px 5px;
+        margin-top: 10px;
+        width: 100%;
+        box-sizing: border-box;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        outline: none;
+      }
+    }
+
+    @e errormsg {
+      color: red;
+      font-size: 12px;
+      min-height: 16px;
+    }
+
+    @e title {
+      padding-left: 0;
+      margin-bottom: 0;
+      font-size: 16px;
+      font-weight: bold;
+      height: 18px;
+      color: #333;
+    }
+
+    @e message {
+      margin: 0;
+
+      & p {
+        margin: 0;
+        line-height: 1.4;
+      }
+    }
+
+    @e btns {
+      padding: 10px 20px 15px;
+      text-align: right;
+
+      & button:nth-child(2) {
+        margin-left: 10px;
+      }
+    }
+
+    @e btns-reverse {
+      flex-direction: row-reverse;
+    }
+
+    @e status {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 36px !important;
+
+      &.el-icon-circle-check {
+        color: #13ce66;
+      }
+
+      &.el-icon-information {
+        color: #50bfff;
+      }
+
+      &.el-icon-warning {
+        color: #f7ba2a;
+      }
+
+      &.el-icon-circle-cross {
+        color: #ff4949;
+      }
+    }
+  }
+}
+
+.msgbox-bounce-enter {
+  -webkit-animation: msgbox-bounce-in .3s cubic-bezier(0.3, 0, 0, 1.5);
+  animation: msgbox-bounce-in .3s cubic-bezier(0.3, 0, 0, 1.5);
+}
+
+.msgbox-bounce-leave {
+  -webkit-animation: msgbox-bounce-out .2s cubic-bezier(0.895, 0.03, 0.685, 0.22);
+  animation: msgbox-bounce-out .2s cubic-bezier(0.895, 0.03, 0.685, 0.22);
+}
+
+@keyframes msgbox-bounce-in {
+  0% {
+    transform: translate3d(-50%, -50%, 0) scale(0.8);
+  }
+  100% {
+    transform: translate3d(-50%, -50%, 0) scale(1);
+  }
+}
+
+@keyframes msgbox-bounce-out {
+  0% {
+    transform: translate3d(-50%, -50%, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(-50%, -50%, 0) scale(0.7);
+  }
+}
+
+@-webkit-keyframes msgbox-bounce-in {
+  0% {
+    -webkit-transform: translate3d(-50%, -50%, 0) scale(0.8);
+  }
+  100% {
+    -webkit-transform: translate3d(-50%, -50%, 0) scale(1);
+  }
+}
+
+@-webkit-keyframes msgbox-bounce-out {
+  0% {
+    -webkit-transform: translate3d(-50%, -50%, 0) scale(1);
+  }
+  100% {
+    -webkit-transform: translate3d(-50%, -50%, 0) scale(0.7);
+  }
+}

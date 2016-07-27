@@ -1,0 +1,16 @@
+{
+  "name": "el-tooltip",
+  "version": "0.0.0",
+  "description": "A tooltip component for Vue.js.",
+  "keywords": [
+    "element",
+    "vue",
+    "component"
+  ],
+  "main": "./lib/index.js",
+  "repository": "https://github.com/element-component/element/tree/master/packages/tooltip",
+  "author": "elemefe",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {}
+}

@@ -1,0 +1,15 @@
+{
+  "name": "el-alert",
+  "version": "0.0.0",
+  "description": "A alert component for Vue.js.",
+  "keywords": [
+    "element",
+    "vue",
+    "component"
+  ],
+  "main": "./lib/index.js",
+  "repository": "https://github.com/element-component/element/tree/master/packages/alert",
+  "author": "elemefe",
+  "license": "MIT",
+  "dependencies": {}
+}

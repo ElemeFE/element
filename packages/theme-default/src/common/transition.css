@@ -1,0 +1,111 @@
+@charset "UTF-8";
+@import './var.css';
+
+.fade-in-transition {
+  opacity: 1;
+  transition: var(--fade-transition);
+}
+
+.fade-in-linear-transition {
+  opacity: 1;
+  transition: var(--fade-linear-transition);
+}
+
+.fade-in-enter,
+.fade-in-leave,
+.fade-in-linear-enter,
+.fade-in-linear-leave {
+  opacity: 0;
+}
+
+.md-fade-center-transition {
+  opacity: 1;
+  transform: scaleY(1);
+  transition: var(--md-fade-transition);
+  transform-origin: center center;
+}
+.md-fade-center-enter,
+.md-fade-center-leave {
+  opacity: 0;
+  transform: scaleY(0);
+}
+
+.md-fade-bottom-transition {
+  opacity: 1;
+  transform: scaleY(1);
+  transition: var(--md-fade-transition);
+  transform-origin: center top;
+}
+.md-fade-bottom-enter,
+.md-fade-bottom-leave {
+  opacity: 0;
+  transform: scaleY(0);
+}
+
+.md-fade-top-transition {
+  opacity: 1;
+  transform: scaleY(1);
+  transition: var(--md-fade-transition);
+  transform-origin: center bottom;
+}
+
+.md-fade-top-enter,
+.md-fade-top-leave {
+  opacity: 0;
+  transform: scaleY(0);
+}
+
+.md-fade-left-transition {
+  opacity: 1;
+  transform: scaleX(1);
+  transition: var(--md-fade-transition);
+  transform-origin: right center;
+}
+.md-fade-left-enter,
+.md-fade-left-leave {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.md-fade-right-transition {
+  opacity: 1;
+  transform: scaleX(1);
+  transition: var(--md-fade-transition);
+  transform-origin: left center;
+}
+.md-fade-right-enter,
+.md-fade-right-leave {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.zoom-x-transition {
+  transform: scaleX(1);
+  transition: var(--md-fade-transition);
+  transform-origin: center center;
+}
+.zoom-x-enter,
+.zoom-x-leave {
+  transform: scaleX(0);
+}
+
+.slide-in-bottom-enter {
+  animation: slideInBottomEnter .3s;
+}
+.slide-in-bottom-leave {
+  animation: slideInBottomLeave .3s;
+}
+
+@keyframes slideInBottomEnter {
+  0% {
+    opacity: 0;
+    transform: translate3d(0,50%,0);
+  }
+}
+
+@keyframes slideInBottomLeave {
+  to {
+    opacity: 0;
+    transform: translate3d(0,50%,0);
+  }
+}

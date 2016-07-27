@@ -1,0 +1,15 @@
+{
+  "name": "el-checkbox",
+  "version": "1.0.2",
+  "description": "A checkbox component for Vue.",
+  "keywords": [
+    "element",
+    "vue",
+    "component"
+  ],
+  "main": "./lib/index.js",
+  "repository": "https://github.com/element-component/element/tree/master/packages/checkbox",
+  "author": "haiping.zeng@ele.me",
+  "license": "MIT",
+  "dependencies": {}
+}

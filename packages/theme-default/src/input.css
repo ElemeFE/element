@@ -1,0 +1,199 @@
+@charset "UTF-8";
+@import "./common/var.css";
+
+@component-namespace el {
+  @b input {
+    position: relative;
+    
+    @e inner {
+      display: block;
+      padding: 3px 10px;
+      box-sizing: border-box;
+      width: 100%;
+      height: var(--input-height);
+      font-size: var(--font-size-base);
+      color: var(--input-color);
+      background-color: #fff;
+      background-image: none;
+      border: var(--input-border);
+      border-radius: 4px;
+      transition: var(--border-transition-base);
+      outline: none;
+
+      &::placeholder {
+        color: var(--input-placeholder-color);
+      }
+
+      &:hover {
+        border-color: var(--input-hover-border);
+      }
+      &:focus {
+        outline: none;
+        border-color: var(--input-focus-border);
+      }
+    }
+
+    @e icon {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translate(0, -50%);
+      color: var(--input-icon-color);
+
+      & + .el-input__inner {
+        padding-right: 35px;
+      }
+    }
+
+    @when active {
+      .el-input__inner {
+        outline: none;
+        border-color: var(--input-focus-border);
+      }
+    }
+
+    @when disabled {
+      .el-input__inner {
+        background-color: var(--disabled-fill-base);
+        border-color: var(--disabled-border-base);
+        color: var(--disabled-color-base);
+        cursor: not-allowed;
+
+        &::placeholder {
+          color: var(--input-disabled-placeholder-color);
+        }
+      }
+    }
+
+    .el-icon-loading {
+      animation: validating-rotating 1s linear infinite;
+    }
+  }
+
+  @b input-large {
+    & .el-input__inner {
+      font-size: var(--input-large-font-size);
+      height: var(--input-large-height);
+    }
+  }
+  @b input-small {
+    & .el-input__inner {
+      font-size: var(--input-small-font-size);
+      height: var(--input-small-height);
+    }
+  }
+  @b input-mini {
+    & .el-input__inner {
+      font-size: var(--input-mini-font-size);
+      height: var(--input-mini-height);
+    }
+  }
+
+  @b input-group {
+    display: table;
+
+    & .el-input {
+      vertical-align: middle;
+      display: table-cell;
+    }
+    @e label {
+      padding: 0 10px;
+      font-size: 13px;
+    }
+    @e prepend {
+      vertical-align: middle;
+      display: table-cell;
+      position: relative;
+      border: var(--border-base);
+      border-right: 0;
+      border-radius: 4px;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+
+      & .el-dropdown--text {
+        padding: 0 10px;
+      }
+    }
+    @e append {
+      vertical-align: middle;
+      display: table-cell;
+      position: relative;
+      border: var(--border-base);
+      border-left: 0;
+      border-radius: 4px;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    & .el-input:first-child {
+      .el-input__inner {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+    }
+    & .el-input:last-child {
+      .el-input__inner {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+    }
+    & .el-input:not(:first-child):not(:last-child) {
+      .el-input__inner {
+        border-radius: 0;
+      }
+    }
+  }
+
+  @b textarea {
+
+    @e inner {
+      display: block;
+      resize: vertical;
+      padding: 10px 5px;
+      box-sizing: border-box;
+      width: 100%;
+      min-height: 88px;
+      font-size: var(--font-size-base);
+      color: #666;
+      background-color: #fff;
+      background-image: none;
+      border: var(--input-border);
+      border-radius: 4px;
+      transition: var(--border-transition-base);
+
+      &::placeholder {
+        color: var(--input-placeholder-color);
+      }
+
+      &:hover {
+        border-color: var(--input-hover-border);
+      }
+
+      &:focus {
+        outline: none;
+        border-color: var(--input-focus-border);
+      }
+    }
+
+    @when disabled {
+      .el-textarea__inner {
+        background-color: var(--disabled-fill-base);
+        border-color: var(--disabled-border-base);
+        color: var(--disabled-color-base);
+        cursor: not-allowed;
+
+        &::placeholder {
+          color: var(--input-disabled-placeholder-color);
+        }
+      }
+    }
+  }
+}
+
+@keyframes validating-rotating {
+  0% {
+    transform: translate(0, -50%) rotateZ(0deg);
+  }
+  100% {
+    transform: translate(0, -50%) rotateZ(360deg);
+  }
+}

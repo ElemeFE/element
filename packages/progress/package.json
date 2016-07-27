@@ -1,0 +1,17 @@
+{
+  "name": "el-progress",
+  "version": "1.0.1",
+  "description": "A progress component for Vue.",
+  "main": "lib/index.js",
+  "keywords": [
+    "element",
+    "vue",
+    "component",
+    "progress"
+  ],
+  "author": "haiping.zeng <haiping.zeng@ele.me>",
+  "license": "MIT",
+  "repository": "https://github.com/element-component/element/tree/master/packages/progress",
+  "devDependencies": {
+  }
+}

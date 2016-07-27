@@ -1,0 +1,29 @@
+@charset "UTF-8";
+@import "./common/var.css";
+/*@import "./core/dropdown.css";*/
+@import "./core/tag.css";
+@import "./core/input.css";
+
+@component-namespace element {
+  @b input {
+    display: inline-block;
+    font-size: var(--input-font-size);
+    position: relative;
+
+    @e placeholder {
+      background-color: #fff;
+      color: var(--input-border-color);
+      left: 4px;
+      padding: 0 2px;
+      position: absolute;
+      top: calc(var(--input-height) / 2 - var(--input-font-size) + 4);
+      transition: all 0.2s ease-out;
+      z-index: var(--index-normal);
+
+      @when enter {
+        color: var(--input-border-color-hover);
+        top: calc((-var(--input-height) + var(--input-font-size)) / 2 + 1);
+      }
+    }
+  }
+}

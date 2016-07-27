@@ -1,0 +1,118 @@
+@import './vars.css';
+
+@component-namespace el {
+  @b date-range-picker {
+    table {
+      table-layout: fixed;
+      width: 100%;
+    }
+
+    .el-picker-panel__body {
+      min-width: 513px;
+    }
+
+    .el-picker-panel__content {
+      margin: 0;
+    }
+
+    @e editor {
+      flex: 1;
+      margin: 0 5px;
+      position: relative;
+      border: 1px solid #c0ccda;
+      border-radius: 4px;
+      padding: 5px 10px;
+      box-sizing: border-box;
+      height: 28px;
+      outline: none;
+      appearance: none;
+      transition: border 0.3s;
+
+      &:hover {
+        border-color: #20a0ff;
+      }
+    }
+
+    @e header {
+      position: relative;
+      text-align: center;
+      height: 28px;
+
+      button {
+        float: left;
+      }
+
+      div {
+        font-size: 14px;
+        margin-right: 50px;
+      }
+    }
+
+    @e content {
+      float: left;
+      width: 50%;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 16px;
+
+      @when left {
+        border-right: 1px solid var(--datepicker-inner-border-color);
+      }
+
+      @when right {
+        .el-date-range-picker__header {
+          button {
+            float: right;
+          }
+
+          div {
+            margin-left: 50px;
+            margin-right: 50px;
+          }
+        }
+      }
+    }
+
+    @e editors-wrap {
+      padding-right: 10px;
+      display: inline-block;
+      width: 50%;
+      box-sizing: border-box;
+      display: flex;
+
+      @when right {
+        padding-left: 10px;
+        text-align: right;
+      }
+    }
+
+    @e time-header {
+      position: relative;
+      border-bottom: 1px solid var(--datepicker-inner-border-color);
+      font-size: 0;
+      padding: 8px 5px 5px 5px;
+      display: flex;
+
+      > .el-icon-arrow-right {
+        position: absolute;
+        left: 50%;
+        margin-left: -10px;
+        margin-top: 5px;
+        font-size: 20px;
+        color: var(--datepicker-icon-color);
+      }
+    }
+
+    @e time-picker-wrap {
+      position: relative;
+
+      .el-picker-panel {
+        position: absolute;
+        top: 13px;
+        right: 0;
+        z-index: 1;
+        background: #fff;
+      }
+    }
+  }
+}

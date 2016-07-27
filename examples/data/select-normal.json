@@ -1,0 +1,32 @@
+[
+  {
+    "label": "选项1",
+    "value": "结果1",
+    "remark": "remark1"
+  },
+  {
+    "label": "选项2",
+    "value": "结果2",
+    "remark": "remark2"
+  },
+  {
+    "label": "选项3",
+    "value": "结果3",
+    "remark": "remark3"
+  },
+  {
+    "label": "选项4",
+    "value": "结果4",
+    "remark": "remark4"
+  },
+  {
+    "label": "选项5",
+    "value": "结果5",
+    "remark": "remark5"
+  },
+  {
+    "label": "选项6",
+    "value": "结果6",
+    "remark": "remark6"
+  }
+]

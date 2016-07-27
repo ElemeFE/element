@@ -1,0 +1,222 @@
+[
+  {
+    "group": "使用说明",
+    "list": [
+      {
+        "path": "/quickstart",
+        "name": "快速上手"
+      },
+      {
+        "path": "/development",
+        "name": "开发指南"
+      },
+      {
+        "path": "/changelog",
+        "name": "更新日志"
+      }
+    ]
+  },
+  {
+    "group": "设计指南",
+    "list": [
+      {
+        "path": "/menu",
+        "name": "导航",
+        "description": "导航(Navigation) 可以解决用户在访问页面时：在哪里，去哪里，怎么去的问题。一般导航会有「侧栏导航」和「顶部导航」2种类型。"
+      }
+    ]
+  },
+  {
+    "group": "Basic",
+    "list": [
+      {
+        "path": "/button",
+        "name": "按钮 (button)",
+        "title": "Button 按钮",
+        "description": "常用的操作按钮"
+      },
+      {
+        "path": "/icon",
+        "name": "图标 (icon)",
+        "title": "Icon 图标"
+      },
+      {
+        "path": "/tag",
+        "name": "标签 (tag)",
+        "title": "Tag 标签",
+        "description": "Tag 标签"
+      },
+      {
+        "path": "/dialog",
+        "name": "对话框 (dialog)",
+        "title": "Dialog 对话框",
+        "description": "在保留当前页面状态的情况下, 告知用户信息并承载相关操作。"
+      },
+      {
+        "path": "/message-box",
+        "name": "弹框 (message-box)",
+        "title": "message-box 弹框"
+      },
+      {
+        "path": "/popover",
+        "name": "弹出框 (popover)",
+        "title": "popover 弹出框",
+        "description": "收纳具体内容和相关操作, 激活后弹出展现"
+      },
+      {
+        "path": "/tooltip",
+        "name": "文字提示 (tooltip)",
+        "title": "tooltip 文字提示",
+        "description": "优雅地展示文字提示信息"
+      },
+      {
+        "path": "/alert",
+        "name": "警告 (alert)",
+        "title": "alert 警告",
+        "description": "用于页面中展示重要的提示信息"
+      },
+      {
+        "path": "/notification",
+        "name": "通知 (notification)",
+        "title": "notification 通知",
+        "description": "悬浮出现在页面右上角, 显示全局的通知提醒消息"
+      },
+      {
+        "path": "/loading",
+        "name": "加载 (loading)",
+        "title": "loading 加载",
+        "description": "加载数据时显示"
+      }
+    ]
+  },
+  {
+    "group": "Form",
+    "list": [
+      {
+        "path": "/autocomplete",
+        "name": "自动完成 (autocomplete)",
+        "title": "Autocomplete 自动完成"
+      },
+      {
+        "path": "/select",
+        "name": "选择器 (select)",
+        "title": "Select 选择器",
+        "description": "当选项过多时, 使用下拉菜单展示并选择内容"
+      },
+      {
+        "path": "/checkbox",
+        "name": "多选框 (checkbox)",
+        "title": "Checkbox 多选框",
+        "description": "用于在多个可选项中进行多项选择。"
+      },
+      {
+        "path": "/radio",
+        "name": "单选框 (radio)",
+        "title": "Radio 单选框",
+        "description": "用于在多个备选项选中单个选项。"
+      },
+      {
+        "path": "/input",
+        "name": "输入框 (input)",
+        "title": "Input 输入框"
+      },
+      {
+        "path": "/input-number",
+        "name": "计数器 (input-number)",
+        "title": "Input Number 计数器"
+      },
+      {
+        "path": "/switch",
+        "name": "开关 (switch)",
+        "title": "Switch 开关",
+        "description": "用于两种对立状态的切换。"
+      },
+      {
+        "path": "/time-picker",
+        "name": "时间选择器（time-picker）",
+        "title": "时间选择器",
+        "description": "用于选择或输入时间"
+      },
+      {
+        "path": "/date-picker",
+        "name": "日期选择器（date-picker）",
+        "title": "日期选择器",
+        "description": "用于选择或输入时间"
+      },
+      {
+        "path": "/datetime-picker",
+        "name": "日期时间选择器",
+        "title": "日期时间选择器",
+        "description": "用于选择或输入日期时间"
+      },
+      {
+        "path": "/upload",
+        "name": "上传 (upload)",
+        "title": "upload 上传",
+        "description": "文件上传组件"
+      },
+      {
+        "path": "/form",
+        "name": "表单 (form)",
+        "title": "form 表单",
+        "description": "一个多功能的并带有字段验证的表单组件"
+      },
+      {
+        "path": "/slider",
+        "name": "滑块 (slider)",
+        "title": "slider 滑块",
+        "description": "通过拖动滑块在一个固定区间内进行选择"
+      }
+    ]
+  },
+  {
+    "group": "Nav",
+    "list": [
+      {
+        "path": "/tabs",
+        "name": "标签页 (tabs)",
+        "title": "tabs 标签页",
+        "description": "富展现的标签页"
+      },
+      {
+        "path": "/breadcrumb",
+        "name": "面包屑 (breadcrumb)",
+        "title": "breadcrumb 面包屑",
+        "description": ""
+      },
+      {
+        "path": "/dropdown",
+        "name": "下拉菜单 (dropdown)",
+        "title": "Dropdown 下拉菜单"
+      }
+    ]
+  },
+  {
+    "group": "Data",
+    "list": [
+      {
+        "path": "/table",
+        "name": "表格 (table)",
+        "title": "Table 表格",
+        "description": "用于展示多条结构类似的数据, 可对数据进行排序、筛选、对比或其他自定义操作。"
+      },
+      {
+        "path": "/progress",
+        "name": "进度条 (progress)",
+        "title": "progress 进度条",
+        "description": ""
+      },
+      {
+        "path": "/pagination",
+        "name": "分页 (pagination)",
+        "title": "Pagination 分页",
+        "description": "当数据量过多时, 使用分页分解数据"
+      },
+      {
+        "path": "/tree",
+        "name": "tree (tree)",
+        "title": "tree"
+      }
+    ]
+  }
+]

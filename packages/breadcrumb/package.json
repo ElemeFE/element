@@ -1,0 +1,16 @@
+{
+  "name": "el-breadcrumb",
+  "version": "1.0.0",
+  "description": "A breadcrumb component for Vue.",
+  "keywords": [
+    "element",
+    "vue",
+    "component"
+  ],
+  "main": "./lib/index.js",
+  "repository": "https://github.com/element-component/element/tree/master/packages/breadcrumb",
+  "author": "haiping.zeng<haiping.zeng@ele.me>",
+  "license": "MIT",
+  "dependencies": {
+  }
+}

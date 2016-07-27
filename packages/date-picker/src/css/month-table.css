@@ -1,0 +1,31 @@
+@import "./vars.css";
+
+@component-namespace el {
+  @b month-table {
+    font-size: 12px;
+    margin: -1px;
+
+    td {
+      text-align: center;
+      padding: 20px 3px;
+      cursor: pointer;
+
+      .cell {
+        width: 48px;
+        height: 32px;
+        display: block;
+        line-height: 32px;
+        color: var(--datepicker-color);
+
+        &:hover {
+          background-color: var(--datepicker-cell-hover-color);
+        }
+      }
+
+      &.current .cell {
+        background-color: var(--datepicker-active-color) !important;
+        color: #fff;
+      }
+    }
+  }
+}

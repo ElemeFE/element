@@ -1,0 +1,15 @@
+{
+  "name": "el-pagination",
+  "version": "0.0.0",
+  "description": "A pagination component for Vue.js.",
+  "keywords": [
+    "element",
+    "vue",
+    "component"
+  ],
+  "main": "./lib/index.js",
+  "repository": "https://github.com/element-component/element/tree/master/packages/pagination",
+  "author": "qingwei-li<qingwei.li@ele.me>",
+  "license": "MIT",
+  "dependencies": {}
+}

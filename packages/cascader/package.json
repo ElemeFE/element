@@ -1,0 +1,18 @@
+{
+  "name": "el-cascader",
+  "version": "1.0.1",
+  "description": "A cascader component for Vue.",
+  "keywords": [
+    "element",
+    "vue",
+    "component"
+  ],
+  "main": "./lib/index.js",
+  "repository": "https://github.com/element-component/element/tree/master/packages/cascader",
+  "author": "qingwei-li<qingwei.li@ele.me>",
+  "license": "MIT",
+  "dependencies": {
+    "object-equal": "^1.0.0",
+    "vue-clickoutside": "0.0.4"
+  }
+}

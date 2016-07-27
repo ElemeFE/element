@@ -1,0 +1,123 @@
+@charset "UTF-8";
+@import "./common/var.css";
+
+@component-namespace el {
+
+  @b switch {
+    display: inline-block;
+    position: relative;
+    line-height: 20px;
+    font-size: 14px;
+    @when disabled {
+      & .el-switch__core,
+      & .el-switch__label {
+        cursor: not-allowed;
+      }
+    }
+
+    @e label {
+      position: absolute;
+      z-index: 10;
+      size: 46px 22px;
+      left: 0;
+      top: 0;
+      display: inline-block;
+      font-size: 14px;
+      cursor: pointer;
+      user-select: none;
+      @m left {
+        i {
+          left: 6px;
+        }
+      }
+      @m right {
+        i {
+          right: 6px;
+        }
+      }
+      & * {
+        line-height: 1;
+        top: 4px;
+        position: absolute;
+        font-size: 14px;
+        display: inline-block;
+        color: var(--color-white);
+      }
+    }
+
+    @e input {
+      &:checked + .el-switch__core {
+        border-color: var(--switch-on-color);
+        background-color: var(--switch-on-color);
+      }
+    }
+
+    @e core {
+      margin: 0;
+      display: inline-block;
+      vertical-align: middle;
+      position: relative;
+      size: 46px 22px;
+      border: 1px solid var(--switch-off-color);
+      outline: none;
+      border-radius: 12px;
+      box-sizing: border-box;
+      background: var(--switch-off-color);
+      cursor: pointer;
+      transition: border-color .3s, background-color .3s;
+
+      & .el-switch__button {
+        position: absolute 0 * * 0;
+        border-radius: 15px;
+        transition: transform .3s;
+        size: 16px;
+        z-index: 100;
+        background-color: var(--color-white);
+      }
+    }
+
+    @when disabled {
+      .el-switch__core {
+        border-color: var(--switch-disabled-color);
+        background: var(--switch-disabled-color);
+
+        & span {
+          background-color: var(--switch-disabled-text-color);
+        }
+
+        & ~ .el-switch__label * {
+          color: var(--switch-disabled-text-color);
+        }
+      }
+
+      .el-switch__input:checked + .el-switch__core {
+        border-color: var(--switch-disabled-color);
+        background-color: var(--switch-disabled-color);
+      }
+    }
+
+    @modifier wide {
+      .el-switch__label {
+        &.el-switch__label--left {
+          span {
+            left: 10px;
+          }
+        }
+        &.el-switch__label--right {
+          span {
+            right: 10px;
+          }
+        }
+      }
+    }
+
+    & .label-fade-transition {
+      transition: .2s;
+    }
+
+    & .label-fade-enter,
+    & .label-fade-leave {
+      opacity: 0;
+    }
+  }
+}

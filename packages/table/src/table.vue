@@ -1,0 +1,441 @@
+<template>
+  <div class="el-table" :class="{ 'el-table--fit': fit, 'el-table--striped': stripe, 'el-table--border': border }" @mouseleave="handleMouseLeave($event)">
+    <div class="hidden-columns" v-el:hidden-columns><slot></slot></div>
+    <div class="el-table__header-wrapper">
+      <table-header :columns="columns" :all-selected.sync="allSelected" :selection.sync="selection" :style="{ width: bodyWidth ? bodyWidth + 'px' : '' }" :border="border"></table-header>
+    </div>
+    <div class="el-table__body-wrapper">
+      <table-body :columns="columns" :selection.sync="selection" :data="data | orderBy sortingProperty sortingDirection" :style="{ width: bodyWidth ? bodyWidth - (showVScrollBar ? gutterWidth : 0 ) + 'px' : '' }"></table-body>
+    </div>
+    <div class="el-table__fixed" :style="{ width: fixedBodyWidth ? fixedBodyWidth + 'px' : '' }" v-el:fixed>
+      <div class="el-table__fixed-header-wrapper" v-if="fixedColumnCount > 0">
+        <table-header :columns="fixedColumns" :all-selected.sync="allSelected" :selection.sync="selection" :style="{ width: fixedBodyWidth ? fixedBodyWidth + 'px' : '' }" :border="border"></table-header>
+      </div>
+      <div class="el-table__fixed-body-wrapper" v-if="fixedColumnCount > 0" :style="{ top: headerHeight + 'px' }">
+        <table-body :columns="fixedColumns" fixed :selection.sync="selection" :data="data | orderBy sortingProperty sortingDirection" :style="{ width: fixedBodyWidth ? fixedBodyWidth + 'px' : '' }"></table-body>
+      </div>
+    </div>
+    <div class="el-table__column-resize-proxy" v-el:resize-proxy v-show="resizeProxyVisible"></div>
+    <slot name="bottom"></slot>
+  </div>
+</template>
+
+<script type="text/babel">
+  import Vue from 'vue';
+  import throttle from 'throttle-debounce/throttle';
+  import debounce from 'throttle-debounce/debounce';
+  import { getScrollBarWidth } from './util';
+
+  let gridIdSeed = 1;
+  let GUTTER_WIDTH;
+
+  import TableBody from './table-body.vue';
+  import TableHeader from './table-header.vue';
+
+  export default {
+    name: 'el-table',
+
+    props: {
+      data: {
+        type: Array,
+        default: function() {
+          return [];
+        }
+      },
+
+      width: String,
+
+      height: String,
+
+      fit: {
+        type: Boolean,
+        default: true
+      },
+
+      stripe: {
+        type: Boolean,
+        default: false
+      },
+
+      border: {
+        type: Boolean,
+        default: false
+      },
+
+      fixedColumnCount: {
+        type: Number,
+        default: 0
+      },
+
+      selectionMode: {
+        type: String,
+        default: 'none'
+      },
+
+      selection: {},
+
+      allowNoSelection: {
+        type: Boolean,
+        default: false
+      },
+
+      gutterWidth: {
+        default: 0
+      }
+    },
+
+    events: {
+      onresize() {
+        Vue.nextTick(() => {
+          this.$calcColumns();
+        });
+      }
+    },
+
+    partials: {
+      default: '<div>{{column.label}}</div>'
+    },
+
+    components: {
+      TableHeader,
+      TableBody
+    },
+
+    methods: {
+      doOnDataChange(data) {
+        data = data || [];
+
+        if (this.selectionMode === 'single') {
+          const oldSelection = this.selected;
+          if (oldSelection === null) {
+            if (!this.allowNoSelection) {
+              this.selected = data[0];
+              if (this.selected !== oldSelection) {
+                this.$emit('selection-change', this.selected);
+              }
+            }
+          } else if (data.indexOf(oldSelection) === -1) {
+            if (!this.allowNoSelection) {
+              this.selected = data[0];
+            } else {
+              this.selected = null;
+            }
+            if (this.selected !== oldSelection) {
+              this.$emit('selection-change', this.selected);
+            }
+          }
+        }
+      },
+
+      toggleAllSelection() {
+        setTimeout(() => {
+          this.data.forEach(item => {
+            item.$selected = this.allSelected;
+          });
+        }, 0);
+      },
+
+      $calcColumns() {
+        let fit = this.fit;
+        let columns = this.columns;
+
+        let bodyWidth = this.$el.clientWidth;
+        let bodyMinWidth = 0;
+
+        let flattenColumns = [];
+
+        columns.forEach((column) => {
+          if (column.isColumnGroup) {
+            flattenColumns.push.apply(flattenColumns, column.columns);
+          } else {
+            flattenColumns.push(column);
+          }
+        });
+
+        if (fit) {
+          let flexColumns = [];
+          let definedWidthColumnsWidth = 0;
+          let definedMinWidthSum = 0;
+
+          flattenColumns.forEach((column) => {
+            definedMinWidthSum += column.minWidth || 80;
+            bodyMinWidth += column.width || column.minWidth || 80;
+
+            if (typeof column.width === 'number') {
+              definedWidthColumnsWidth += column.width;
+            } else {
+              flexColumns.push(column);
+            }
+          });
+
+          if (bodyMinWidth < bodyWidth - this.gutterWidth) { // do not have scroll bar.
+            let flexWidthTotal = bodyWidth - this.gutterWidth - columns.length - bodyMinWidth;
+            let flexWidthPerColumn = Math.floor(flexWidthTotal / flexColumns.length);
+            let flexWidthFirstColumn = flexWidthTotal - flexWidthPerColumn * flexColumns.length + flexWidthPerColumn;
+
+            flexColumns.forEach((column, index) => {
+              if (index === 0) {
+                column.realWidth = (column.minWidth || 80) + flexWidthFirstColumn;
+              } else {
+                column.realWidth = (column.minWidth || 80) + flexWidthPerColumn;
+              }
+            });
+          } else { // need horizontal scroll bar.
+            this.showHScrollBar = true;
+            flexColumns.forEach(function(column) {
+              column.realWidth = column.minWidth;
+            });
+          }
+
+          this.bodyWidth = Math.max(bodyMinWidth, bodyWidth);
+        } else {
+          flattenColumns.forEach((column) => {
+            if (!column.width && !column.minWidth) {
+              column.realWidth = 80;
+            }
+
+            bodyMinWidth += column.realWidth;
+          });
+          this.showHScrollBar = bodyMinWidth > bodyWidth;
+
+          this.bodyWidth = bodyMinWidth;
+        }
+
+        if (this.styleNode) {
+          let styleSheet = this.styleNode.sheet;
+
+          for (let i = 0, j = styleSheet.cssRules.length; i < j; i++) {
+            styleSheet.deleteRule(0);
+          }
+
+          columns.forEach(function(column) {
+            const addRule = function(rule) {
+              styleSheet.insertRule(rule, styleSheet.cssRules.length);
+            };
+
+            if (column.isColumnGroup) {
+              let childColumns = column.columns;
+              let groupWidth = 0;
+              childColumns.forEach(function(childColumn) {
+                groupWidth += childColumn.realWidth;
+                addRule(`.${childColumn.id}, .${childColumn.id} > div { width: ${childColumn.realWidth}px; }`);
+              });
+
+              addRule(`.${column.id}, .${column.id} > div { width: ${groupWidth}px; }`);
+            } else {
+              addRule(`.${column.id}, .${column.id} > div { width: ${column.realWidth}px; }`);
+            }
+          });
+        }
+
+        if (this.fixedColumnCount > 0) {
+          let fixedBodyWidth = 0;
+          let fixedColumnCount = this.fixedColumnCount;
+
+          columns.forEach(function(column, index) {
+            if (index < fixedColumnCount) {
+              fixedBodyWidth += column.realWidth;
+            }
+          });
+
+          this.fixedBodyWidth = fixedBodyWidth;
+        }
+
+        Vue.nextTick(() => {
+          this.headerHeight = this.$el.querySelector('.el-table__header-wrapper').offsetHeight;
+        });
+      },
+
+      $calcHeight(height) {
+        if (typeof height === 'string' && /^\d+$/.test(height)) {
+          height = Number(height);
+        }
+
+        if (!isNaN(height) && this.$el) {
+          const headerHeight = this.headerHeight = this.$el.querySelector('.el-table__header-wrapper').offsetHeight;
+          const bodyHeight = (height - headerHeight);
+          const gridWrapper = this.$el.querySelector('.el-table__body-wrapper');
+          gridWrapper.style.height = bodyHeight + 'px';
+
+          this.$el.style.height = height + 'px';
+          this.$els.fixed.style.height = height + 'px';
+
+          const fixedBodyWrapper = this.$el.querySelector('.el-table__fixed-body-wrapper');
+          if (fixedBodyWrapper) {
+            fixedBodyWrapper.style.height = (this.showHScrollBar ? gridWrapper.offsetHeight - this.gutterWidth : gridWrapper.offsetHeight) + 'px';
+          }
+        }
+      },
+
+      handleMouseLeave() {
+        this.hoverRowIndex = null;
+        const hoverState = this.hoverState;
+        if (hoverState) {
+          this.hoverState = null;
+        }
+      },
+
+      updateScrollInfo() {
+        Vue.nextTick(() => {
+          if (this.$el) {
+            let gridBodyWrapper = this.$el.querySelector('.el-table__body-wrapper');
+            let gridBody = this.$el.querySelector('.el-table__body-wrapper .el-table__body');
+
+            this.showVScrollBar = gridBody.offsetHeight > gridBodyWrapper.offsetHeight;
+          }
+        });
+      },
+
+      doRender() {
+        let bodyWrapper = this.$el.querySelector('.el-table__body-wrapper');
+        let headerWrapper = this.$el.querySelector('.el-table__header-wrapper');
+        const el = this.$el;
+
+        if (!this.$ready) {
+          bodyWrapper.addEventListener('scroll', function() {
+            headerWrapper.scrollLeft = this.scrollLeft;
+            let fixedBodyWrapper = el.querySelector('.el-table__fixed-body-wrapper');
+            if (fixedBodyWrapper) {
+              fixedBodyWrapper.scrollTop = this.scrollTop;
+            }
+          });
+        }
+
+        this.$calcColumns();
+
+        if (!this.$ready && this.fit) {
+          this.windowResizeListener = throttle(100, () => {
+            this.$calcColumns();
+          });
+          window.addEventListener('resize', this.windowResizeListener);
+        }
+
+        Vue.nextTick(() => {
+          if (this.height) {
+            this.$calcHeight(this.height);
+          }
+        });
+      }
+    },
+
+    created() {
+      this.gridId = 'grid_' + gridIdSeed + '_';
+
+      if (GUTTER_WIDTH === undefined) {
+        GUTTER_WIDTH = getScrollBarWidth();
+      }
+      this.gutterWidth = GUTTER_WIDTH;
+
+      this.debouncedReRender = debounce(50, () => {
+        this.doRender();
+      });
+    },
+
+    computed: {
+      selection() {
+        if (this.selectionMode === 'multiple') {
+          const data = this.data || [];
+          return data.filter(function(item) {
+            return item.$selected === true;
+          });
+        } else if (this.selectionMode === 'single') {
+          return this.selected;
+        } else {
+          return null;
+        }
+      },
+
+      fixedColumns() {
+        const columns = this.columns || [];
+        const fixedColumnCount = this.fixedColumnCount;
+        return columns.filter(function(item, index) {
+          return index < fixedColumnCount;
+        });
+      }
+    },
+
+    watch: {
+      fixedColumnCount() {
+        this.debouncedReRender();
+      },
+
+      selection(val) {
+        this.$emit('selection-change', val);
+        if (this.selectionMode === 'multiple') {
+          this.allSelected = val.length === this.data.length;
+        }
+      },
+
+      visibleFilter(val) {
+        this.$broadcast('toggleFilterPopup', val);
+      },
+
+      height(value) {
+        this.$calcHeight(value);
+      },
+
+      data(newVal) {
+        this.doOnDataChange(newVal);
+        this.updateScrollInfo();
+      }
+    },
+
+    beforeCompile() {
+      const styleNode = document.createElement('style');
+      styleNode.type = 'text/css';
+      styleNode.rel = 'stylesheet';
+      styleNode.title = 'Grid Column Style';
+      document.getElementsByTagName('head')[0].appendChild(styleNode);
+
+      this.styleNode = styleNode;
+
+      if (this.data && this.selectionMode === 'multiple') {
+        this.data = this.data.map(item => Object.assign({ '$selected': false }, item));
+      }
+    },
+
+    destroyed() {
+      if (this.styleNode) {
+        this.styleNode.parentNode.removeChild(this.styleNode);
+      }
+
+      if (this.windowResizeListener) {
+        window.removeEventListener('resize', this.windowResizeListener);
+      }
+    },
+
+    ready() {
+      this.doRender();
+
+      this.$ready = true;
+      if (this.data) {
+        this.doOnDataChange(this.data);
+      }
+      this.updateScrollInfo();
+      if (this.fixedColumnCount > 0) {
+        this.$nextTick(() => {
+          this.$els.fixed.style.height = this.$el.clientHeight + 'px';
+        });
+      }
+    },
+
+    data() {
+      return {
+        showHScrollBar: false,
+        showVScrollBar: false,
+        hoverRowIndex: null,
+        headerHeight: 35,
+        selected: null,
+        allSelected: false,
+        columns: [],
+        resizeProxyVisible: false,
+        bodyWidth: '',
+        fixedBodyWidth: '',
+        sortingColumn: null,
+        sortingProperty: null,
+        sortingDirection: 1,
+        visibleFilter: null
+      };
+    }
+  };
+</script>
