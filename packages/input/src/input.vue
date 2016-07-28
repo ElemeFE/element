@@ -12,20 +12,20 @@
         :name="name"
         class="el-input__inner"
         :placeholder="placeholder"
-        v-model="value"
+        v-model="currentValue"
         :disabled="disabled"
         :readonly="readonly"
-        @focus="$emit('onfocus', value)"
+        @focus="$emit('onfocus', currentValue)"
         @blur="handleBlur"
         :number="number"
         :maxlength="maxlength"
         :minlength="minlength"
         :autocomplete="autoComplete"
-        v-el:input
+        ref="input"
       >
     </template>
     <!-- 写成垂直的方式会导致 placeholder 失效, 蜜汁bug -->
-    <textarea v-else v-model="value" class="el-textarea__inner" :name="name" :placeholder="placeholder" :disabled="disabled" :readonly="readonly" @focus="$emit('onfocus', value)" @blur="handleBlur"></textarea>
+    <textarea v-else v-model="currentValue" class="el-textarea__inner" :name="name" :placeholder="placeholder" :disabled="disabled" :readonly="readonly" @focus="$emit('onfocus', val)" @blur="handleBlur"></textarea>
   </div>
 </template>
 <script>
@@ -37,9 +37,7 @@
     mixins: [emitter],
 
     props: {
-      value: {
-        required: true
-      },
+      value: {},
       placeholder: {
         type: String,
         default: ''
@@ -79,26 +77,43 @@
       maxlength: Number,
       minlength: Number
     },
-    events: {
-      inputSelect() {
-        this.$els.input.select();
-      }
-    },
+
     methods: {
       handleBlur(event) {
-        this.$emit('onblur', this.value);
-        this.dispatch('form-item', 'el.form.blur', [this.value]);
+        this.$emit('onblur', this.currentValue);
+        this.dispatch('form-item', 'el.form.blur', [this.currentValue]);
+      },
+
+      inputSelect() {
+        this.$refs.input.select();
       }
     },
+
+    data() {
+      return {
+        currentValue: ''
+      };
+    },
+
+    created() {
+      this.$on('inputSelect', this.inputSelect);
+    },
+
     computed: {
       validating() {
         return this.$parent.validating;
       }
     },
+
     watch: {
       'value'(val) {
-        this.$emit('onchange', this.value);
-        this.dispatch('form-item', 'el.form.change', this.value);
+        this.currentValue = val;
+      },
+
+      'currentValue'(val) {
+        this.$emit('input', val);
+        this.$emit('onchange', val);
+        this.dispatch('form-item', 'el.form.change', val);
       }
     }
   };

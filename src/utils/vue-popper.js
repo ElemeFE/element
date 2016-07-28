@@ -1,8 +1,8 @@
 import PopperJS from './popper';
 
 /**
- * @param {HTMLElement} [reference=$els.reference] - The reference element used to position the popper.
- * @param {HTMLElement} [popper=$els.popper] - The HTML element used as popper, or a configuration used to generate the popper.
+ * @param {HTMLElement} [reference=$refs.reference] - The reference element used to position the popper.
+ * @param {HTMLElement} [popper=$refs.popper] - The HTML element used as popper, or a configuration used to generate the popper.
  * @param {String} [placement=button] - Placement of the popper accepted values: top(-start, -end), right(-start, -end), bottom(-start, -right), left(-start, -end)
  * @param {Number} [offset=0] - Amount of pixels the popper will be shifted (can be negative).
  * @param {Boolean} [visible=false] Visibility of the popup element.
@@ -47,8 +47,8 @@ export default {
         return;
       }
 
-      this.popper = this.popper || this.$els.popper;
-      this.reference = this.reference || this.$els.reference;
+      this.popper = this.popper || this.$refs.popper;
+      this.reference = this.reference || this.$refs.reference;
 
       if (!this.popper || !this.reference) {
         return;

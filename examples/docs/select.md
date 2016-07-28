@@ -1,8 +1,5 @@
 <script>
   export default {
-    created() {
-      this.template = '<span>label: {{ label }}, value: {{ value }}</span>';
-    },
     data() {
       return {
         options: [{
@@ -128,13 +125,13 @@
 
 ## 基本用法
 
-<el-select :value.sync="value">
+<el-select v-model="value">
   <el-option v-for="item in options" :label="item.label" :value="item.value"></el-option>
 </el-select>
 
 ```html
 <template>
-<el-select :value.sync="value">
+<el-select v-model="value">
   <el-option
     v-for="item in options"
     :label="item.label"
@@ -172,13 +169,13 @@
 
 ## 禁用状态
 
-<el-select :value.sync="value2" disabled>
+<el-select v-model="value2" disabled>
   <el-option v-for="item in options" :label="item.label" :value="item.value"></el-option>
 </el-select>
 
 ```html
 <template>
-  <el-select :value.sync="value2" disabled>
+  <el-select v-model="value2" disabled>
     <el-option
       v-for="item in options"
       :label="item.label"
@@ -216,13 +213,13 @@
 
 ## 有禁用选项
 
-<el-select :value.sync="value3">
+<el-select v-model="value3">
   <el-option v-for="item in options2" :label="item.label" :value="item.value" :disabled="item.disabled"></el-option>
 </el-select>
 
 ```html
 <template>
-  <el-select :value.sync="value3">
+  <el-select v-model="value3">
     <el-option
       v-for="item in options2"
       :label="item.label"
@@ -262,13 +259,13 @@
 
 ## 可清空单选
 
-<el-select :value.sync="value4" clearable>
+<el-select v-model="value4" clearable>
   <el-option v-for="item in options" :label="item.label" :value="item.value"></el-option>
 </el-select>
 
 ```html
 <template>
-<el-select :value.sync="value4" clearable>
+<el-select v-model="value4" clearable>
   <el-option
     v-for="item in options"
     :label="item.label"
@@ -306,7 +303,7 @@
 
 ## 指定初始被选项
 
-<el-select :value.sync="value5">
+<el-select v-model="value5">
   <el-option v-for="item in options" :label="item.label" :value="item.value" :selected="item.value === '选项2'"></el-option>
 </el-select>
 
@@ -314,7 +311,7 @@
 
 ```html
 <template>
-  <el-select :value.sync="value5">
+  <el-select v-model="value5">
     <el-option
       v-for="item in options"
       :label="item.label"
@@ -355,7 +352,7 @@
 
 ```html
 <template>
-  <el-select :value.sync="value5">
+  <el-select v-model="value5">
     <el-option
       v-for="item in options"
       :label="item.label"
@@ -393,32 +390,29 @@
 
 ## 自定义模板
 
-<el-select :value.sync="value6">
+<el-select v-model="value6">
   <el-option
     v-for="item in options"
     :label="item.label"
-    :value="item.value"
-    :template="template">
+    :value="item.value">
+    <span>label: {{ item.label }}, value: {{ item.value }}</span>
   </el-option>
 </el-select>
 
 ```html
 <template>
-  <el-select :value.sync="value6">
+  <el-select v-model="value6">
     <el-option
       v-for="item in options"
       :label="item.label"
-      :value="item.value"
-      :template="optionTemplate">
+      :value="item.value">
+      <span>label: {{ item.label }}, value: {{ item.value }}</span>
     </el-option>
   </el-select>
 </template>
 
 <script>
   export default {
-    cerated () {
-      this.optionTemplate = '<span>label: {{ label }}, value: {{ value }}</span>';
-    },
     data() {
       return {
         options: [{
@@ -446,7 +440,7 @@
 
 ## 多选
 
-<el-select :value.sync="value7" multiple>
+<el-select v-model="value7" multiple>
   <el-option
     v-for="item in options"
     :label="item.label"
@@ -456,7 +450,7 @@
 
 ```html
 <template>
-  <el-select :value.sync="value7" multiple>
+  <el-select v-model="value7" multiple>
     <el-option
       v-for="item in options"
       :label="item.label"
@@ -494,13 +488,13 @@
 
 ## 自定义宽度
 
-<el-select :value.sync="value8" :width="300" :dropdown-width="350">
+<el-select v-model="value8" :width="300" :dropdown-width="350">
   <el-option v-for="item in options" :label="item.label" :value="item.value"></el-option>
 </el-select>
 
 ```html
 <template>
-  <el-select :value.sync="value8" :width="300" :dropdown-width="350">
+  <el-select v-model="value8" :width="300" :dropdown-width="350">
     <el-option
       v-for="item in options"
       :label="item.label"
@@ -538,7 +532,7 @@
 
 ## 分组
 
-<el-select :value.sync="value9">
+<el-select v-model="value9">
   <el-option-group v-for="group in options3" :label="group.label">
     <el-option v-for="item in group.options" :label="item.label" :value="item.value"></el-option>
   </el-option-group>
@@ -546,7 +540,7 @@
 
 ```html
 <template>
-  <el-select :value.sync="value9">
+  <el-select v-model="value9">
     <el-option-group v-for="group in options3" :label="group.label">
       <el-option
         v-for="item in group.options"
@@ -592,13 +586,13 @@
 
 ## 选项较多时的交互
 
-<el-select :value.sync="value10">
+<el-select v-model="value10">
   <el-option v-for="item in options4" :label="item.label" :value="item.value"></el-option>
 </el-select>
 
 ```html
 <template>
-  <el-select :value.sync="value10">
+  <el-select v-model="value10">
     <el-option
       v-for="item in options4"
       :label="item.label"
@@ -654,13 +648,13 @@
 
 ## 可搜索
 
-<el-select :value.sync="value11" filterable>
+<el-select v-model="value11" filterable>
   <el-option v-for="item in options" :label="item.label" :value="item.value"></el-option>
 </el-select>
 
 ```html
 <template>
-  <el-select :value.sync="value11" filterable>
+  <el-select v-model="value11" filterable>
     <el-option
       v-for="item in options"
       :label="item.label"
@@ -698,14 +692,14 @@
 
 ## 服务端搜索
 
-<el-select :value.sync="value12" multiple filterable remote :remote-method="remoteMethod" :loading="loading">
+<el-select v-model="value12" multiple filterable remote :remote-method="remoteMethod" :loading="loading">
   <el-option v-for="item in options5" :label="item.label" :value="item.value"></el-option>
 </el-select>
 
 ```html
 <template>
   <el-select
-    :value.sync="value12"
+    v-model="value12"
     multiple
     filterable
     remote
@@ -776,4 +770,3 @@
 | label | 选项的标签，若不设置则默认与 `value` 相同 | string/number | | |
 | disabled | 是否禁用该选项 | boolean | | false |
 | selected | 选项是否被初始选中 | boolean | | false |
-| template | 选项的自定义模板 | String | | `<span>{{ label }}</span>`  |

@@ -5,7 +5,9 @@
     class="el-select-dropdown__item"
     v-show="queryPassed"
     :class="{ 'selected': itemSelected(), 'is-disabled': disabled, 'hover': parent.hoverIndex === index }">
-    <include></include>
+    <slot>
+      <span>{{ label }}</span>
+    </slot>
   </li>
 </template>
 
@@ -32,10 +34,6 @@
       disabled: {
         type: Boolean,
         default: false
-      },
-      template: {
-        type: String,
-        default: '<span>{{ label }}</span>'
       }
     },
 
@@ -48,16 +46,18 @@
       };
     },
 
+    computed: {
+      currentSelected() {
+        return this.selected || (this.$parent.multiple ? this.$parent.value.indexOf(this.value) > -1 : this.$parent.value === this.value);
+      }
+    },
+
     watch: {
-      selected(val) {
+      currentSelected(val) {
         if (val === true) {
           this.dispatch('select', 'addOptionToValue', this);
         }
       }
-    },
-
-    partials: {
-      'el-selectmenu-default': '<span>{{ label }}</span>'
     },
 
     methods: {
@@ -94,22 +94,17 @@
     },
 
     created() {
-      // Vue 1.x 需要禁用缓存；2.0 不需要配置
-      this.$options._linkerCachable = false;
       this.parent = this.$parent;
       while (!this.parent.isSelect) {
         this.parent = this.parent.$parent;
       }
       this.label = this.label || ((typeof this.value === 'string' || typeof this.value === 'number') ? this.value : '');
-      this.selected = this.selected || (this.parent.multiple ? this.parent.value.indexOf(this.value) > -1 : this.parent.value === this.value);
       this.parent.options.push(this);
       this.parent.optionsCount++;
       this.parent.filteredOptionsCount++;
       this.index = this.parent.options.indexOf(this);
 
-      this.$options.template = this.$options.template.replace(/<include><\/include>/g, this.template);
-
-      if (this.selected === true) {
+      if (this.currentSelected === true) {
         this.dispatch('select', 'addOptionToValue', this);
       }
 

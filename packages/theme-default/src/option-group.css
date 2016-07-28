@@ -7,6 +7,12 @@
     margin: 0;
     padding: 0;
 
+    @e wrap {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
     @e title {
       padding-left: 10px;
       font-size: 12px;
