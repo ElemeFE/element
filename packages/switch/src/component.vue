@@ -11,7 +11,7 @@
       @click="handleMiscClick"
       :style="{ 'width': width + 'px' }"
       transition="label-fade">
-      <i class="{{ onIconClass }}" v-if="onIconClass"></i>
+      <i :class="[onIconClass]" v-if="onIconClass"></i>
       <span v-if="onText">{{ onText }}</span>
     </div>
     <div
@@ -20,7 +20,7 @@
       @click="handleMiscClick"
       :style="{ 'width': width + 'px' }"
       transition="label-fade">
-      <i class="{{ offIconClass }}" v-if="offIconClass"></i>
+      <i :class="[offIconClass]" v-if="offIconClass"></i>
       <span v-if="offText">{{ offText }}</span>
     </div>
   </div>

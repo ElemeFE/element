@@ -1,6 +1,6 @@
 <template>
   <div class="el-dialog__wrapper" v-if="visible" transition="dialog-fade" @click.self="handleWrapperClick">
-    <div class="el-dialog {{ sizeClass }} {{ customClass }}" v-el:dialog :style="{ 'margin-bottom': size !== 'full' ? '50px' : '', 'top': size !== 'full' ? dynamicTop + 'px' : '0' }">
+    <div class="el-dialog" :class="[sizeClass, customClass]" v-el:dialog :style="{ 'margin-bottom': size !== 'full' ? '50px' : '', 'top': size !== 'full' ? dynamicTop + 'px' : '0' }">
       <div class="el-dialog__header">
         <span class="el-dialog__title">{{title}}</span>
         <div class="el-dialog__headerbtn">
