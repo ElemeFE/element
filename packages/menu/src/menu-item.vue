@@ -9,31 +9,31 @@
     mixins: [emitter],
 
     props: {
-      key: {
+      index: {
         type: String,
         required: true
+      },
+      disabled: {
+        type: Boolean,
+        required: false
       }
     },
-    data() {
-      return {
-        active: false
-      };
-    },
     computed: {
-      keyPath() {
-        return this.$parent.keyPath ? this.$parent.keyPath.concat(this.key) : [this.key];
+      indexPath() {
+        return this.$parent.indexPath ? this.$parent.indexPath.concat(this.index) : [this.index];
+      },
+      activeIndex() {
+        return this.$parent.activeIndex;
+      },
+      active() {
+        return this.index === this.activeIndex;
       }
     },
     methods: {
       handleClick() {
         if (!this.active) {
-          this.dispatch('menu', 'select-key', [this.key, this.keyPath]);
+          this.dispatch('menu', 'select-key', [this.index, this.indexPath]);
         }
-      }
-    },
-    events: {
-      'select-key': function(key) {
-        this.active = key === this.key;
       }
     }
   };
@@ -47,6 +47,8 @@
       'is-disabled': disabled
     }">
     <slot></slot>
-    <span class="el-menu-item__bar" v-if="active" transition="zoom-x"></span>
+    <transition name="fade" mode="out-in">
+      <span class="el-menu-item__bar" v-if="active"></span>
+    </transition>
   </li>
 </template>

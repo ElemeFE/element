@@ -51,6 +51,8 @@ import Progress from '../packages/progress/index.js';
 import Spinner from '../packages/spinner/index.js';
 
 const install = function(Vue) {
+  if (install.installed) return;
+
   Vue.component(Group.name, Group);
   Vue.component(SelectDropdown.name, SelectDropdown);
   Vue.component(Pagination.name, Pagination);
@@ -100,13 +102,13 @@ const install = function(Vue) {
   Vue.component(Progress.name, Progress);
   Vue.component(Spinner.name, Spinner);
 
-  Vue.use(Loading);
+  // Vue.use(Loading);
 
-  Vue.prototype.$msgbox = MessageBox;
-  Vue.prototype.$alert = MessageBox.alert;
-  Vue.prototype.$confirm = MessageBox.confirm;
-  Vue.prototype.$prompt = MessageBox.prompt;
-  Vue.prototype.$notify = Notification;
+  // Vue.prototype.$msgbox = MessageBox;
+  // Vue.prototype.$alert = MessageBox.alert;
+  // Vue.prototype.$confirm = MessageBox.confirm;
+  // Vue.prototype.$prompt = MessageBox.prompt;
+  // Vue.prototype.$notify = Notification;
 };
 
 // auto install

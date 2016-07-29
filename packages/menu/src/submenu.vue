@@ -9,7 +9,7 @@
     mixins: [emitter],
 
     props: {
-      key: {
+      index: {
         type: String,
         required: true
       }
@@ -20,32 +20,35 @@
       };
     },
     computed: {
-      keyPath() {
-        return this.$parent.keyPath ? this.$parent.keyPath.concat(this.key) : [this.key];
+      indexPath() {
+        return this.$parent.indexPath ? this.$parent.indexPath.concat(this.index) : [this.index];
+      },
+      activeIndex() {
+        return this.$parent.activeIndex;
       }
     },
     methods: {
       handleClick() {
         if (!this.opened) {
-          this.dispatch('menu', 'expand-menu', [this.key, this.keyPath]);
+          this.dispatch('menu', 'expand-menu', [this.index, this.indexPath]);
           this.opened = true;
         } else {
-          this.dispatch('menu', 'collapse-menu', [this.key, this.keyPath]);
+          this.dispatch('menu', 'collapse-menu', [this.index, this.indexPath]);
           this.opened = false;
         }
       }
     },
-    events: {
-      'close-menu': function(openedKeys) {
-        if (openedKeys && openedKeys.indexOf(this.key) === -1) {
+    mounted() {
+      this.$on('close-menu', (openedIndexs) => {
+        if (openedIndexs && openedIndexs.indexOf(this.index) === -1) {
           this.opened = false;
         }
-      },
-      'open-menu': function(keysArray) {
-        if (keysArray && keysArray.indexOf(this.key) !== -1) {
+      });
+      this.$on('open-menu', (IndexsArray) => {
+        if (IndexsArray && IndexsArray.indexOf(this.index) !== -1) {
           this.opened = true;
         }
-      }
+      });
     }
   };
 </script>
