@@ -3,7 +3,8 @@
   "extends": 'elemefe',
   "parserOptions": {
     "ecmaFeatures": {
-      "experimentalObjectRestSpread": true
+      "experimentalObjectRestSpread": true,
+      "jsx": true
     }
   }
 }

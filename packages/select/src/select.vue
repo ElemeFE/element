@@ -228,7 +228,10 @@
             return;
           }
           this.valueChangeBySelected = true;
-          this.$emit('input', val.map(item => item.value));
+          const result = val.map(item => item.value);
+
+          this.$emit('input', result);
+          this.$emit('change', result);
           if (this.selected.length > 0) {
             this.currentPlaceholder = '';
           } else {
@@ -246,6 +249,7 @@
         } else {
           if (val.value) {
             this.$emit('input', val.value);
+            this.$emit('change', val.value);
           }
         }
       },

@@ -1,11 +1,12 @@
 <template>
-  <ul @click="onPagerClick($event)" class="el-pager">
+  <ul @click="onPagerClick" class="el-pager">
     <li
       :class="{ active: currentPage === 1 }"
       v-if="pageCount > 0"
       class="number">1</li>
     <li
-      class="el-icon ellipsis btn-quickprev {{quickprevIconClass}}"
+      class="el-icon ellipsis btn-quickprev"
+      :class="[quickprevIconClass]"
       v-if="showPrevMore"
       @mouseenter="quickprevIconClass = 'el-icon-d-arrow-left'"
       @mouseleave="quickprevIconClass = 'el-icon-ellipsis'"
@@ -13,10 +14,11 @@
     </li>
     <li
       v-for="pager in pagers"
-      :class="{ active: $parent.currentPage === pager }"
+      :class="{ active: currentPage === pager }"
       class="number">{{ pager }}</li>
     <li
-      class="el-icon ellipsis btn-quicknext {{quicknextIconClass}}"
+      class="el-icon ellipsis btn-quicknext"
+      :class="[quicknextIconClass]"
       v-if="showNextMore"
       @mouseenter="quicknextIconClass = 'el-icon-d-arrow-right'"
       @mouseleave="quicknextIconClass = 'el-icon-ellipsis'"
@@ -29,7 +31,7 @@
   </ul>
 </template>
 
-<script type="text/ecmascript-6">
+<script type="text/babel">
   export default {
     name: 'ElPager',
 
@@ -68,10 +70,8 @@
           }
         }
 
-        this.currentPage = newPage;
-
         if (newPage !== currentPage) {
-          this.$emit('current-change', newPage);
+          this.$emit('currentChange', newPage);
         }
       }
     },
