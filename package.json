@@ -30,6 +30,9 @@
     "object-assign": "^4.1.0"
   },
   "devDependencies": {
+    "babel-helper-vue-jsx-merge-props": "^1.0.1",
+    "babel-plugin-syntax-jsx": "^6.8.0",
+    "babel-plugin-transform-vue-jsx": "^1.1.1",
     "file-save": "^0.2.0",
     "gh-pages": "^0.11.0",
     "highlight.js": "^9.3.0",
@@ -42,7 +45,7 @@
     "q": "^1.4.1",
     "uppercamelcase": "^1.1.0",
     "vue": "^2.0.0-beta.5",
-    "vue-loader": "^9.2.0",
+    "vue-loader": "^9.2.3",
     "vue-markdown-loader": "^0.4.0",
     "vue-popup": "^0.1.8",
     "vue-router": "^2.0.0-beta.2"
