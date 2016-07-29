@@ -14,13 +14,13 @@ const install = function(Vue) {
 
 {{install}}
 
-  Vue.use(Loading);
+  // Vue.use(Loading);
 
-  Vue.prototype.$msgbox = MessageBox;
-  Vue.prototype.$alert = MessageBox.alert;
-  Vue.prototype.$confirm = MessageBox.confirm;
-  Vue.prototype.$prompt = MessageBox.prompt;
-  Vue.prototype.$notify = Notification;
+  // Vue.prototype.$msgbox = MessageBox;
+  // Vue.prototype.$alert = MessageBox.alert;
+  // Vue.prototype.$confirm = MessageBox.confirm;
+  // Vue.prototype.$prompt = MessageBox.prompt;
+  // Vue.prototype.$notify = Notification;
 };
 
 // auto install

@@ -14,7 +14,7 @@
     },
     methods: {
       handleClose(tag) {
-        this.tags.$remove(tag);
+        this.tags.splice(this.tags.indexOf(tag), 1);
       }
     }
   }
@@ -55,6 +55,7 @@
     v-for="tag in tags"
     :closable="true"
     :type="tag.type"
+    :key="tag"
     @close="handleClose(tag)"
   >
   {{tag.name}}

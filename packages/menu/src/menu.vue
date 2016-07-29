@@ -23,10 +23,11 @@
         type: String,
         default: ''
       },
-      activeKey: {
-        type: String
+      defaultActive: {
+        type: String,
+        default: ''
       },
-      openedKeys: {
+      defaultOpeneds: {
         type: Array,
         default() {
           return [];
@@ -39,35 +40,42 @@
       uniqueOpend: Boolean,
       router: Boolean
     },
-    ready() {
-      this.broadcast('menu-item', 'select-key', this.activeKey);
-      this.broadcast('submenu', 'open-menu', this.openedKeys);
+    data() {
+      return {
+        activeIndex: this.defaultActive,
+        openedMenus: this.defaultOpeneds
+      };
     },
-    events: {
-      'expand-menu': function(key, keyPath) {
-        this.openedKeys.push(key);
+    methods: {
+      handleMenuExpand(key, keyPath) {
+        this.openedMenus.push(key);
 
         if (this.uniqueOpend) {
           this.broadcast('submenu', 'close-menu', keyPath);
-          this.openedKeys = this.openedKeys.filter((key) => {
+          this.openedMenus = this.openedMenus.filter((key) => {
             return keyPath.indexOf(key) !== -1;
           });
         }
         this.$emit('open', key, keyPath);
       },
-      'collapse-menu': function(key, keyPath) {
-        this.openedKeys.$remove(key);
+      handleMenuCollapse(key, keyPath) {
+        this.openedMenus.splice(this.openedMenus.indexOf(key), 1);
         this.$emit('close', key, keyPath);
       },
-      'select-key': function(key, keyPath) {
-        this.activeKey = key;
-        this.broadcast('menu-item', 'select-key', key);
+      handleSelect(key, keyPath) {
+        this.activeIndex = key;
         this.$emit('select', key, keyPath);
 
         if (this.router) {
           this.$route.router.go(key);
         }
       }
+    },
+    mounted() {
+      this.broadcast('submenu', 'open-menu', this.openedMenus);
+      this.$on('expand-menu', this.handleMenuExpand);
+      this.$on('collapse-menu', this.handleMenuCollapse);
+      this.$on('select-key', this.handleSelect);
     }
   };
 </script>
