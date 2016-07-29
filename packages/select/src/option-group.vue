@@ -1,10 +1,12 @@
 <template>
-  <li class="el-select-group__title">{{ label }}</li>
-  <li>
-    <ul class="el-select-group">
-      <slot></slot>
-    </ul>
-  </li>
+  <ul class="el-select-group__wrap">
+    <li class="el-select-group__title">{{ label }}</li>
+    <li>
+      <ul class="el-select-group">
+        <slot></slot>
+      </ul>
+    </li>
+  </ul>
 </template>
 
 <script type="text/babel">

@@ -1,12 +1,12 @@
 <template>
   <div class="el-select" :class="{ 'is-multiple': multiple, 'is-small': size === 'small' }">
-    <div class="el-select__tags" v-if="multiple" @click.stop="toggleMenu" v-el:tags :style="{ 'max-width': width - 36 + 'px' }">
+    <div class="el-select__tags" v-if="multiple" @click.stop="toggleMenu" ref="tags" :style="{ 'max-width': inputWidth - 36 + 'px' }">
       <el-tag
       v-for="item in selected"
       closable
       :hit="item.hitState"
       type="primary"
-      @click="deleteTag($event, item)"
+      @click.native="deleteTag($event, item)"
       close-transition>{{ item.label }}</el-tag>
 
       <input
@@ -23,33 +23,33 @@
         :debounce="remote ? 300 : 0"
         v-if="filterable"
         :style="{ width: inputLength + 'px' }"
-        v-el:input>
+        ref="input">
     </div>
     <el-input
-      v-el:reference
-      :value.sync="selectedLabel"
+      ref="reference"
+      v-model="selectedLabel"
       type="text"
-      :placeholder="placeholder"
+      :placeholder="currentPlaceholder"
       :name="name"
       :disabled="disabled"
       :readonly="!filterable || multiple"
-      @click="toggleMenu"
-      @keyup="debouncedOnInputChange"
-      @keydown.down.prevent="navigateOptions('next')"
-      @keydown.up.prevent="navigateOptions('prev')"
-      @keydown.enter.prevent="selectOption"
-      @keydown.esc.prevent="visible = false"
-      @keydown.tab="visible = false"
-      @mouseenter="inputHovering = true"
-      @mouseleave="inputHovering = false"
+      @click.native="toggleMenu"
+      @keyup.native="debouncedOnInputChange"
+      @keydown.native.down.prevent="navigateOptions('next')"
+      @keydown.native.up.prevent="navigateOptions('prev')"
+      @keydown.native.enter.prevent="selectOption"
+      @keydown.native.esc.prevent="visible = false"
+      @keydown.native.tab="visible = false"
+      @mouseenter.native="inputHovering = true"
+      @mouseleave.native="inputHovering = false"
       :icon="showCloseIcon ? 'circle-close' : 'caret-top'"
-      :style="{ 'width': width + 'px' }"
-      v-element-clickoutside="visible = false">
+      :style="{ 'width': inputWidth + 'px' }"
+      v-element-clickoutside="handleClose">
     </el-input>
     <el-select-menu
-      v-el:popper
+      ref="popper"
       v-show="visible && nodataText !== false"
-      transition="md-fade-bottom"
+      transition="fade"
       :style="{ 'width': dropdownWidth ? dropdownWidth + 'px' : '100%' }">
       <ul class="el-select-dropdown__list" v-show="options.length > 0 && filteredOptionsCount > 0">
         <slot></slot>
@@ -65,6 +65,7 @@
   import ElSelectMenu from 'packages/select-dropdown/index.js';
   import ElTag from 'packages/tag/index.js';
   import debounce from 'throttle-debounce/debounce';
+  import Clickoutside from 'main/utils/clickoutside';
 
   export default {
     mixins: [emitter],
@@ -80,6 +81,8 @@
 
       showCloseIcon() {
         let criteria = this.clearable && this.inputHovering && !this.multiple && this.options.indexOf(this.selected) > -1;
+        if (!this.$el) return false;
+
         let icon = this.$el.querySelector('.el-input__icon');
         if (icon) {
           if (criteria) {
@@ -109,6 +112,14 @@
           }
         }
         return null;
+      },
+
+      inputWidth() {
+        if (!this.width) {
+          return this.multiple ? 220 : 180;
+        }
+
+        return this.width;
       }
     },
 
@@ -119,7 +130,7 @@
     },
 
     directives: {
-      ElementClickoutside: require('vue-clickoutside')
+      ElementClickoutside: Clickoutside
     },
 
     props: {
@@ -161,7 +172,8 @@
         voidRemoteQuery: false,
         bottomOverflowBeforeHidden: 0,
         optionsAllDisabled: false,
-        inputHovering: false
+        inputHovering: false,
+        currentPlaceholder: ''
       };
     },
 
@@ -172,7 +184,12 @@
         }
       },
 
+      placeholder(val) {
+        this.currentPlaceholder = val;
+      },
+
       value(val) {
+        this.$emit('input', val);
         this.$emit('change', val);
         if (this.valueChangeBySelected) {
           this.valueChangeBySelected = false;
@@ -211,11 +228,11 @@
             return;
           }
           this.valueChangeBySelected = true;
-          this.value = val.map(item => item.value);
+          this.$emit('input', val.map(item => item.value));
           if (this.selected.length > 0) {
-            this.placeholder = '';
+            this.currentPlaceholder = '';
           } else {
-            this.placeholder = this.cachedPlaceHolder;
+            this.currentPlaceholder = this.cachedPlaceHolder;
           }
           this.$nextTick(() => {
             this.resetInputHeight();
@@ -223,17 +240,20 @@
           if (this.filterable) {
             this.query = '';
             this.hoverIndex = -1;
-            this.$els.input.focus();
+            this.$refs.input.focus();
             this.inputLength = 20;
           }
         } else {
           if (val.value) {
-            this.value = val.value;
+            this.$emit('input', val.value);
           }
         }
       },
 
       query(val) {
+        this.$nextTick(() => {
+          this.broadcast('select-dropdown', 'updatePopper');
+        });
         if (this.multiple && this.filterable) {
           this.resetInputHeight();
         }
@@ -258,13 +278,13 @@
         if (!val) {
           this.$el.querySelector('.el-input__icon').classList.remove('is-reverse');
           this.broadcast('select-dropdown', 'destroyPopper');
-          if (this.$els.input) {
-            this.$els.input.blur();
+          if (this.$refs.input) {
+            this.$refs.input.blur();
           }
           this.resetHoverIndex();
           if (!this.multiple) {
             if (this.dropdownUl && this.selected.$el) {
-              this.bottomOverflowBeforeHidden = this.selected.$el.getBoundingClientRect().bottom - this.$els.popper.getBoundingClientRect().bottom;
+              this.bottomOverflowBeforeHidden = this.selected.$el.getBoundingClientRect().bottom - this.$refs.popper.$el.getBoundingClientRect().bottom;
             }
             if (this.selected && this.selected.value) {
               this.selectedLabel = this.selected.label;
@@ -282,13 +302,13 @@
           if (this.filterable) {
             this.query = this.selectedLabel;
             if (this.multiple) {
-              this.$els.input.focus();
+              this.$refs.input.focus();
             } else {
               this.broadcast('input', 'inputSelect');
             }
           }
           if (!this.dropdownUl) {
-            let dropdownChildNodes = this.$els.popper.childNodes;
+            let dropdownChildNodes = this.$refs.popper.$el.childNodes;
             this.dropdownUl = [].filter.call(dropdownChildNodes, item => item.tagName === 'UL')[0];
           }
           if (!this.multiple && this.dropdownUl) {
@@ -305,6 +325,10 @@
     },
 
     methods: {
+      handleClose() {
+        this.visible = false;
+      },
+
       toggleLastOptionHitState(hit) {
         if (!Array.isArray(this.selected)) return;
         const option = this.selected[this.selected.length - 1];
@@ -340,21 +364,21 @@
       },
 
       managePlaceholder() {
-        if (this.placeholder !== '') {
-          this.placeholder = this.$els.input.value ? '' : this.cachedPlaceHolder;
+        if (this.currentPlaceholder !== '') {
+          this.currentPlaceholder = this.$refs.input.value ? '' : this.cachedPlaceHolder;
         }
       },
 
       resetInputState(e) {
         if (e.keyCode !== 8) this.toggleLastOptionHitState(false);
-        this.inputLength = this.$els.input.value.length * 12 + 20;
+        this.inputLength = this.$refs.input.value.length * 12 + 20;
       },
 
       resetInputHeight() {
         this.$nextTick(() => {
-          let inputChildNodes = this.$els.reference.childNodes;
+          let inputChildNodes = this.$refs.reference.$el.childNodes;
           let input = [].filter.call(inputChildNodes, item => item.tagName === 'INPUT')[0];
-          input.style.height = Math.max(this.$els.tags.clientHeight + 6, this.size === 'small' ? 28 : 36) + 'px';
+          input.style.height = Math.max(this.$refs.tags.clientHeight + 6, this.size === 'small' ? 28 : 36) + 'px';
           this.broadcast('select-dropdown', 'updatePopper');
         });
       },
@@ -429,8 +453,8 @@
       },
 
       resetScrollTop() {
-        let bottomOverflowDistance = this.options[this.hoverIndex].$el.getBoundingClientRect().bottom - this.$els.popper.getBoundingClientRect().bottom;
-        let topOverflowDistance = this.options[this.hoverIndex].$el.getBoundingClientRect().top - this.$els.popper.getBoundingClientRect().top;
+        let bottomOverflowDistance = this.options[this.hoverIndex].$el.getBoundingClientRect().bottom - this.$refs.popper.$el.getBoundingClientRect().bottom;
+        let topOverflowDistance = this.options[this.hoverIndex].$el.getBoundingClientRect().top - this.$refs.popper.$el.getBoundingClientRect().top;
         if (bottomOverflowDistance > 0) {
           this.dropdownUl.scrollTop += bottomOverflowDistance;
         }
@@ -468,14 +492,12 @@
     },
 
     created() {
-      this.cachedPlaceHolder = this.placeholder;
+      this.cachedPlaceHolder = this.currentPlaceholder = this.placeholder;
       if (this.multiple) {
         this.selectedInit = true;
         this.selected = [];
       }
-      if (!this.width) {
-        this.width = this.multiple ? 220 : 180;
-      }
+
       this.debouncedOnInputChange = debounce(this.debounce, () => {
         this.onInputChange();
       });

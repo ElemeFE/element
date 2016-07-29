@@ -28,14 +28,16 @@
         if (this.popper) {
           this.popper.update();
         } else {
-          this.popper = new Popper(this.$parent.$els.reference, this.$el, {
-            gpuAcceleration: false,
-            placement: 'bottom-start',
-            boundariesPadding: 0,
-            forceAbsolute: true
-          });
-          this.popper.onCreate(popper => {
-            this.resetTransformOrigin(popper);
+          this.$nextTick(() => {
+            this.popper = new Popper(this.$parent.$refs.reference.$el, this.$el, {
+              gpuAcceleration: false,
+              placement: 'bottom-start',
+              boundariesPadding: 0,
+              forceAbsolute: true
+            });
+            this.popper.onCreate(popper => {
+              this.resetTransformOrigin(popper);
+            });
           });
         }
       },
