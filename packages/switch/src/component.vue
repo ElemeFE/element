@@ -2,27 +2,29 @@
   <div class="el-switch" :class="{ 'is-disabled': disabled, 'el-switch--wide': hasText, 'el-switch--color': onColor || offColor }">
     <div class="el-switch__mask" v-show="disabled"></div>
     <input class="el-switch__input" type="checkbox" v-model="value" :name="name" :disabled="disabled" style="display: none;">
-    <span class="el-switch__core" v-el:core @click="handleMiscClick" :style="{ 'width': width + 'px' }">
-      <span class="el-switch__button" v-el:button></span>
+    <span class="el-switch__core" ref="core" @click="handleMiscClick" :style="{ 'width': coreWidth + 'px' }">
+      <span class="el-switch__button" ref="button"></span>
     </span>
-    <div
-      class="el-switch__label el-switch__label--left"
-      v-show="value"
-      @click="handleMiscClick"
-      :style="{ 'width': width + 'px' }"
-      transition="label-fade">
-      <i :class="[onIconClass]" v-if="onIconClass"></i>
-      <span v-if="onText">{{ onText }}</span>
-    </div>
-    <div
-      class="el-switch__label el-switch__label--right"
-      v-show="!value"
-      @click="handleMiscClick"
-      :style="{ 'width': width + 'px' }"
-      transition="label-fade">
-      <i :class="[offIconClass]" v-if="offIconClass"></i>
-      <span v-if="offText">{{ offText }}</span>
-    </div>
+    <transition name="label-fade">
+      <div
+        class="el-switch__label el-switch__label--left"
+        v-show="value"
+        @click="handleMiscClick"
+        :style="{ 'width': coreWidth + 'px' }">
+        <i :class="[onIconClass]" v-if="onIconClass"></i>
+        <span v-if="onText">{{ onText }}</span>
+      </div>
+    </transition>
+    <transition name="label-fade">
+      <div
+        class="el-switch__label el-switch__label--right"
+        v-show="!value"
+        @click="handleMiscClick"
+        :style="{ 'width': coreWidth + 'px' }">
+        <i :class="[offIconClass]" v-if="offIconClass"></i>
+        <span v-if="offText">{{ offText }}</span>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -71,6 +73,11 @@
         default: ''
       }
     },
+    data() {
+      return {
+        coreWidth: 0
+      };
+    },
     computed: {
       hasText() {
         return this.onText || this.offText;
@@ -82,30 +89,31 @@
           this.handleCoreColor();
         }
         this.handleButtonTransform();
+        this.$emit('change');
       }
     },
     methods: {
       handleMiscClick() {
         if (!this.disabled) {
-          this.value = !this.value;
+          this.$emit('input', !this.value);
         }
       },
       handleButtonTransform() {
-        this.$els.button.style.transform = this.value ? `translate3d(${ this.width - 20 }px, 2px, 0)` : 'translate3d(2px, 2px, 0)';
+        this.$refs.button.style.transform = this.value ? `translate3d(${ this.coreWidth - 20 }px, 2px, 0)` : 'translate3d(2px, 2px, 0)';
       },
       handleCoreColor() {
         if (this.value) {
-          this.$els.core.style.borderColor = this.onColor;
-          this.$els.core.style.backgroundColor = this.onColor;
+          this.$refs.core.style.borderColor = this.onColor;
+          this.$refs.core.style.backgroundColor = this.onColor;
         } else {
-          this.$els.core.style.borderColor = this.offColor;
-          this.$els.core.style.backgroundColor = this.offColor;
+          this.$refs.core.style.borderColor = this.offColor;
+          this.$refs.core.style.backgroundColor = this.offColor;
         }
       }
     },
-    ready() {
+    mounted() {
       if (this.width === 0) {
-        this.width = this.hasText ? 58 : 46;
+        this.coreWidth = this.hasText ? 58 : 46;
       }
       this.handleButtonTransform();
       if ((this.onColor || this.offColor) && !this.disabled) {

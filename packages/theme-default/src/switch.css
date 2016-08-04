@@ -16,6 +16,7 @@
     }
 
     @e label {
+      transition: .2s;
       position: absolute;
       z-index: 10;
       size: 46px 22px;
@@ -111,12 +112,8 @@
       }
     }
 
-    & .label-fade-transition {
-      transition: .2s;
-    }
-
     & .label-fade-enter,
-    & .label-fade-leave {
+    & .label-fade-leave-active {
       opacity: 0;
     }
   }

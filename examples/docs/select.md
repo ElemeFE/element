@@ -115,7 +115,7 @@
           this.loading = true;
           setTimeout(() => {
             this.loading = false;
-            this.options5 = this.states.filter(item => item.toLowerCase().indexOf(query) > -1).map(item => { return { value: item, label: item }; });
+            this.options5 = this.states.filter(item => item.toLowerCase().indexOf(query.toLowerCase()) > -1).map(item => { return { value: item, label: item }; });
           }, 200);
         }
       }

@@ -424,6 +424,9 @@
       toggleMenu() {
         if (!this.disabled) {
           this.visible = !this.visible;
+          if (this.remote && this.visible) {
+            this.selectedLabel = '';
+          }
         }
       },
 
@@ -475,6 +478,7 @@
         event.stopPropagation();
         this.selected = {};
         this.selectedLabel = '';
+        this.$emit('input', '');
         this.visible = false;
       },
 

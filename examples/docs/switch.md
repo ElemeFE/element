@@ -7,14 +7,26 @@
   }
 </style>
 
+<script>
+  export default {
+    data() {
+      return {
+        value1: true,
+        value2: true,
+        value3: true
+      }
+    }
+  };
+</script>
+
 ## 基本用法
 
 <div class="demo-box demo-switch">
-  <el-switch></el-switch>
+  <el-switch v-model="value1"></el-switch>
 </div>
 
 ```html
-<el-switch></el-switch>
+<el-switch v-model="value1"></el-switch>
 ```
 
 ## 禁用状态
@@ -36,13 +48,13 @@
 ## 自定义颜色
 
 <div class="demo-box demo-switch">
-  <el-switch on-color="#13ce66" off-color="#ff4949"></el-switch>
-  <el-switch on-color="#13ce66" off-color="#ff4949" on-text="" off-text=""></el-switch>
+  <el-switch on-color="#13ce66" off-color="#ff4949" v-model="value2"></el-switch>
+  <el-switch on-color="#13ce66" off-color="#ff4949" on-text="" off-text="" v-model="value3"></el-switch>
 </div>
 
 ```html
-<el-switch on-color="#13ce66" off-color="#ff4949"></el-switch>
-<el-switch on-color="#13ce66" off-color="#ff4949" on-text="" off-text=""></el-switch>
+<el-switch on-color="#13ce66" off-color="#ff4949" v-model="value2"></el-switch>
+<el-switch on-color="#13ce66" off-color="#ff4949" on-text="" off-text="" v-model="value3"></el-switch>
 ```
 
 ## API
@@ -58,4 +70,4 @@
 | on-color  | switch 打开时的背景色    | string   | | |
 | off-color  | switch 关闭时的背景色    | string   | | |
 | name  | 对应 input 的 name 属性    | string   | | |
-
+| change  | value 发生变化时的回调函数    | function   | | |
