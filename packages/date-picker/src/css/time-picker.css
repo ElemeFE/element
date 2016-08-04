@@ -25,6 +25,7 @@
         position: absolute;
         font-size: 14px;
         margin-top: -8px;
+        line-height: 16px;
         z-index: 1;
       }
 
@@ -43,6 +44,7 @@
       border-top: 1px solid var(--datepicker-inner-border-color);
       padding: 4px;
       height: 36px;
+      line-height: 25px;
       text-align: right;
       box-sizing: border-box;
     }
