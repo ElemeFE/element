@@ -1,20 +1,21 @@
 <template>
   <div
     class="el-tooltip"
-    @mouseenter="visible = true"
-    @mouseleave="visible = false">
-    <div class="el-tooltip__rel" v-el:reference>
+    @mouseenter="showPopper = true"
+    @mouseleave="showPopper = false">
+    <div class="el-tooltip__rel" ref="reference">
       <slot></slot>
     </div>
 
-    <div
-      class="el-tooltip__popper"
-      :class="['is-' + effect]"
-      v-el:popper
-      v-show="!disabled && visible"
-      :transition="transition">
-      <slot name="content"><div v-text="content"></div></slot>
-    </div>
+    <transition :name="transition">
+      <div
+        class="el-tooltip__popper"
+        :class="['is-' + effect]"
+        ref="popper"
+        v-show="!disabled && showPopper">
+        <slot name="content"><div v-text="content"></div></slot>
+      </div>
+    </transition>
   </div>
 </template>
 

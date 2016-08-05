@@ -6,8 +6,13 @@
   transition: var(--fade-transition);
 }
 
-.fade-in-linear-transition {
+.fade-in-linear-enter-active {
   opacity: 1;
+  transition: var(--fade-linear-transition);
+}
+
+.fade-in-linear-leave-active {
+  opacity: 0;
   transition: var(--fade-linear-transition);
 }
 

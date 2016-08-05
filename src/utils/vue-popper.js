@@ -34,9 +34,21 @@ export default {
     }
   },
 
+  data() {
+    return {
+      showPopper: false
+    };
+  },
+
   watch: {
-    'visible'(val) {
-      if (this.popperDestroying) return;
+    visible: {
+      immediate: true,
+      handler(val) {
+        this.showPopper = val;
+      }
+    },
+
+    showPopper(val) {
       val ? this.updatePopper() : this.destroyPopper();
     }
   },
@@ -47,32 +59,32 @@ export default {
         return;
       }
 
-      this.popper = this.popper || this.$refs.popper;
-      this.reference = this.reference || this.$refs.reference;
+      const options = this.options;
+      const popper = this.popper || this.$refs.popper;
+      const reference = this.reference || this.$refs.reference;
 
-      if (!this.popper || !this.reference) {
-        return;
-      }
-
+      if (!popper || !reference) return;
       if (this.visibleArrow) {
-        this.appendArrow(this.popper);
+        this.appendArrow(popper);
       }
 
       if (this.popperJS && this.popperJS.hasOwnProperty('destroy')) {
         this.popperJS.destroy();
       }
 
-      this.$set('options.placement', this.placement);
-      this.$set('options.offset', this.offset);
+      options.placement = this.placement;
+      options.offset = this.offset;
 
-      this.popperJS = new PopperJS(
-        this.reference,
-        this.popper,
-        this.options
-      );
-      this.popperJS.onCreate(popper => {
-        this.resetTransformOrigin(popper);
-        this.$emit('created', this);
+      this.$nextTick(() => {
+        this.popperJS = new PopperJS(
+          reference,
+          popper,
+          options
+        );
+        this.popperJS.onCreate(popper => {
+          this.resetTransformOrigin(popper);
+          this.$emit('created', this);
+        });
       });
     },
 
@@ -85,7 +97,7 @@ export default {
     },
 
     doDestroy() {
-      if (this.visible) return;
+      if (this.showPopper) return;
 
       this.popperJS._popper.removeEventListener('transitionend', this.doDestroy);
       this.popperJS.destroy();
