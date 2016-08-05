@@ -78,7 +78,7 @@ export default {
           }, 200);
         });
       } else {
-        if (reference.hasChildNodes()) {
+        if ([].slice.call(reference.children).length) {
           const children = reference.childNodes;
 
           for (let i = 0; i < children.length; i++) {
