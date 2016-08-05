@@ -28,28 +28,28 @@
   transition: all .3s cubic-bezier(.55,0,.1,1);
 }
 .md-fade-center-enter,
-.md-fade-center-leave {
-  opacity: 0;
-  transform: scaleY(0);
-}
+.md-fade-center-leave,
 .md-fade-center-leave-active {
   opacity: 0;
   transform: scaleY(0);
 }
 
-.md-fade-bottom-transition {
+.md-fade-bottom-enter-active,
+.md-fade-bottom-leave-active {
   opacity: 1;
   transform: scaleY(1);
   transition: var(--md-fade-transition);
   transform-origin: center top;
 }
 .md-fade-bottom-enter,
-.md-fade-bottom-leave {
+.md-fade-bottom-leave,
+.md-fade-bottom-leave-active {
   opacity: 0;
   transform: scaleY(0);
 }
 
-.md-fade-top-transition {
+.md-fade-top-enter-active,
+.md-fade-top-leave-active {
   opacity: 1;
   transform: scaleY(1);
   transition: var(--md-fade-transition);
@@ -57,40 +57,47 @@
 }
 
 .md-fade-top-enter,
-.md-fade-top-leave {
+.md-fade-top-leave,
+.md-fade-top-leave-active {
   opacity: 0;
   transform: scaleY(0);
 }
 
-.md-fade-left-transition {
+.md-fade-left-enter-active,
+.md-fade-left-leave-active {
   opacity: 1;
   transform: scaleX(1);
   transition: var(--md-fade-transition);
   transform-origin: right center;
 }
 .md-fade-left-enter,
-.md-fade-left-leave {
+.md-fade-left-leave,
+.md-fade-left-leave-active {
   opacity: 0;
   transform: scaleX(0);
 }
 
-.md-fade-right-transition {
+.md-fade-right-enter-active,
+.md-fade-right-leave-active {
   opacity: 1;
   transform: scaleX(1);
   transition: var(--md-fade-transition);
   transform-origin: left center;
 }
 .md-fade-right-enter,
-.md-fade-right-leave {
+.md-fade-right-leave,
+.md-fade-right-leave-active {
   opacity: 0;
   transform: scaleX(0);
 }
 
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
   transition: opacity .3s cubic-bezier(.645,.045,.355,1);
 }
 .fade-enter,
-.fade-leave {
+.fade-leave,
+.fade-leave-active {
   opacity: 0;
 }
 
