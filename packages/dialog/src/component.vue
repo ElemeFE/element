@@ -1,16 +1,20 @@
 <template>
-  <div class="el-dialog__wrapper" v-if="visible" transition="dialog-fade" @click.self="handleWrapperClick">
-    <div class="el-dialog" :class="[sizeClass, customClass]" v-el:dialog :style="{ 'margin-bottom': size !== 'full' ? '50px' : '', 'top': size !== 'full' ? dynamicTop + 'px' : '0' }">
-      <div class="el-dialog__header">
-        <span class="el-dialog__title">{{title}}</span>
-        <div class="el-dialog__headerbtn">
-          <i class="el-dialog__close el-icon el-icon-close" @click='close()'></i>
+  <transition name="dialog-fade">
+    <div class="el-dialog__wrapper" v-show="value" @click.self="handleWrapperClick">
+      <div class="el-dialog" :class="[sizeClass, customClass]" ref="dialog" :style="{ 'margin-bottom': size !== 'full' ? '50px' : '', 'top': size !== 'full' ? dynamicTop + 'px' : '0' }">
+        <div class="el-dialog__header">
+          <span class="el-dialog__title">{{title}}</span>
+          <div class="el-dialog__headerbtn">
+            <i class="el-dialog__close el-icon el-icon-close" @click='close()'></i>
+          </div>
+        </div>
+        <div class="el-dialog__body"><slot></slot></div>
+        <div class="el-dialog__footer">
+          <slot name="footer"></slot>
         </div>
       </div>
-      <div class="el-dialog__body"><slot></slot></div>
-      <slot name="footer"></slot>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -60,9 +64,14 @@
     },
 
     watch: {
-      visible(val) {
+      value(val) {
         if (val) {
-          this.$els.dialog.scrollTop = 0;
+          this.$emit('open');
+          this.$nextTick(() => {
+            this.$refs.dialog.scrollTop = 0;
+          });
+        } else {
+          this.$emit('close');
         }
       }
     },
@@ -76,7 +85,7 @@
     methods: {
       handleWrapperClick() {
         if (this.closeOnClickModal) {
-          this.visible = false;
+          this.$emit('input', false);
         }
       },
 
@@ -85,8 +94,8 @@
       }
     },
 
-    ready() {
-      if (this.visible) {
+    mounted() {
+      if (this.value) {
         this.rendered = true;
         this.open();
       }

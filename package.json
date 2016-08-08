@@ -47,7 +47,7 @@
     "vue": "^2.0.0-beta.5",
     "vue-loader": "^9.2.3",
     "vue-markdown-loader": "^0.4.0",
-    "vue-popup": "^0.1.8",
+    "vue-popup": "^0.2.1",
     "vue-router": "^2.0.0-beta.2"
   }
 }
