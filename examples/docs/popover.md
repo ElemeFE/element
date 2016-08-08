@@ -117,7 +117,7 @@
 
 <div class="demo-box demo-popover">
   <el-popover
-    v-ref:popover1
+    ref="popover1"
     placement="top-start"
     title="标题"
     width="200"
@@ -126,7 +126,7 @@
   </el-popover>
 
   <el-popover
-    v-ref:popover2
+    ref="popover2"
     placement="bottom"
     title="标题"
     width="200"
@@ -135,7 +135,7 @@
   </el-popover>
 
   <el-popover
-    v-ref:popover3
+    ref="popover3"
     placement="right"
     title="标题"
     width="200"
@@ -146,13 +146,13 @@
   <el-button v-popover:popover1>hover 激活</el-button>
   <el-button v-popover:popover2>click 激活</el-button>
 
-  <el-input :value="model" v-popover:popover3 placeholder="focus 激活"></el-input>
+  <el-input v-model="model" v-popover:popover3 placeholder="focus 激活"></el-input>
 </div>
 
 
 ```html
 <el-popover
-  v-ref:popover1
+  ref="popover1"
   placement="top-start"
   title="标题"
   width="200"
@@ -161,7 +161,7 @@
 </el-popover>
 
 <el-popover
-  v-ref:popover2
+  ref="popover2"
   placement="bottom"
   title="标题"
   width="200"
@@ -170,7 +170,7 @@
 </el-popover>
 
 <el-popover
-  v-ref:popover3
+  ref="popover3"
   placement="right"
   title="标题"
   width="200"
@@ -188,7 +188,7 @@
 
 <div class="demo-box demo-popover">
   <el-popover
-    v-ref:popover4
+    ref="popover4"
     placement="right"
     width="400"
     trigger="click">
@@ -204,7 +204,7 @@
 
 ```html
 <el-popover
-  v-ref:popover4
+  ref="popover4"
   placement="right"
   width="400"
   trigger="click">
@@ -224,7 +224,7 @@
 
 <div class="demo-box demo-popover">
   <el-popover
-    v-ref:popover5
+    ref="popover5"
     placement="top"
     width="160"
     :visible.sync="visible2">
@@ -240,7 +240,7 @@
 
 ```html
 <el-popover
-  v-ref:popover5
+  ref="popover5"
   placement="top"
   width="160"
   :visible.sync="visible2">
