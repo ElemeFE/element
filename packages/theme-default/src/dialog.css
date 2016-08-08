@@ -8,7 +8,6 @@
     position: relative;
     margin-left: auto;
     margin-right: auto;
-    overflow: hidden;
     background: #fff;
     border-radius: 2px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
@@ -69,20 +68,18 @@
       float: right;
     }
 
-    & *[slot=footer] {
+    @e footer {
       padding: 10px 20px 15px;
       text-align: right;
-      width: 100%;
-      display: block;
       box-sizing: border-box;
     }
   }
 
-  .dialog-fade-enter {
+  .dialog-fade-enter-active {
     animation: dialog-fade-in .3s;
   }
 
-  .dialog-fade-leave {
+  .dialog-fade-leave-active {
     animation: dialog-fade-out .3s;
   }
 
