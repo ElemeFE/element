@@ -1,6 +1,6 @@
 <template>
   <transition name="dialog-fade">
-    <div class="el-dialog__wrapper" v-show="visible" @click.self="handleWrapperClick">
+    <div class="el-dialog__wrapper" v-show="value" @click.self="handleWrapperClick">
       <div class="el-dialog" :class="[sizeClass, customClass]" ref="dialog" :style="{ 'margin-bottom': size !== 'full' ? '50px' : '', 'top': size !== 'full' ? dynamicTop + 'px' : '0' }">
         <div class="el-dialog__header">
           <span class="el-dialog__title">{{title}}</span>
@@ -64,7 +64,7 @@
     },
 
     watch: {
-      computedVisible(val) {
+      value(val) {
         if (val) {
           this.$emit('open');
           this.$nextTick(() => {
@@ -85,7 +85,7 @@
     methods: {
       handleWrapperClick() {
         if (this.closeOnClickModal) {
-          this.computedVisible = false;
+          this.$emit('input', false);
         }
       },
 
@@ -95,7 +95,7 @@
     },
 
     mounted() {
-      if (this.visible) {
+      if (this.value) {
         this.rendered = true;
         this.open();
       }

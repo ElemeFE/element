@@ -63,7 +63,7 @@
 <el-button :plain="true" v-on:click.native="dialogVisible = true">点击打开 Dialog</el-button>
 
 <div class="demo-box demo-dialog">
-  <el-dialog title="提示" :visible="dialogVisible" @open="dialogVisible = true" @close="dialogVisible = false">
+  <el-dialog title="提示" v-model="dialogVisible">
     <span>这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息</span>
     <span slot="footer" class="dialog-footer">
       <el-button @click.native="dialogVisible = false">取 消</el-button>
@@ -75,7 +75,7 @@
 ```html
 <el-button :plain="true" v-on:click.native="dialogVisible = true">点击打开 Dialog</el-button>
 
-<el-dialog title="提示" :visible="dialogVisible" @open="dialogVisible = true" @close="dialogVisible = false">
+<el-dialog title="提示" v-model="dialogVisible">
   <span>这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息</span>
   <span slot="footer" class="dialog-footer">
     <el-button @click.native="dialogVisible = false">取 消</el-button>
@@ -89,7 +89,7 @@
 <el-button :plain="true" v-on:click.native="dialogTinyVisible = true">点击打开小尺寸 Dialog</el-button>
 
 <div class="demo-box demo-dialog">
-  <el-dialog title="提示" :visible="dialogTinyVisible" size="tiny" @open="dialogTinyVisible = true" @close="dialogTinyVisible = false">
+  <el-dialog title="提示" v-model="dialogTinyVisible" size="tiny">
     <span>这是一段内容</span>
     <span slot="footer" class="dialog-footer">
       <el-button @click.native="dialogTinyVisible = false">取 消</el-button>
@@ -101,7 +101,7 @@
 ```html
 <el-button :plain="true" v-on:click.native="dialogTinyVisible = true">点击打开小尺寸 Dialog</el-button>
 
-<el-dialog title="提示" :visible="dialogTinyVisible" size="tiny" @open="dialogTinyVisible = true" @close="dialogTinyVisible = false">
+<el-dialog title="提示" v-model="dialogTinyVisible" size="tiny">
   <span>这是一段内容</span>
   <span slot="footer" class="dialog-footer">
     <el-button @click.native="dialogTinyVisible = false">取 消</el-button>
@@ -113,7 +113,7 @@
 <el-button v-on:click.native="dialogFullVisible = true">点击打开全屏幕 Dialog</el-button>
 
 <div class="demo-box demo-dialog">
-  <el-dialog title="提示" :visible="dialogFullVisible" size="full" @open="dialogFullVisible = true" @close="dialogFullVisible = false">
+  <el-dialog title="提示" v-model="dialogFullVisible" size="full">
     <img src="http://placekitten.com/1920/1280" class="full-image">
   </el-dialog>
 </div>
@@ -121,7 +121,7 @@
 ```html
 <el-button v-on:click.native="dialogFullVisible = true">点击打开全屏幕 Dialog</el-button>
 
-<el-dialog title="提示" :visible="dialogFullVisible" size="full" @open="dialogFullVisible = true" @close="dialogFullVisible = false">
+<el-dialog title="提示" v-model="dialogFullVisible" size="full">
   <img src="http://placekitten.com/1920/1280">
 </el-dialog>
 ```
@@ -132,9 +132,7 @@
 
 <div class="demo-box demo-dialog">
   <el-dialog title="提示"
-    :visible="dialogStubbornVisible"
-    @open="dialogStubbornVisible = true"
-    @close="dialogStubbornVisible = false"
+    v-model="dialogStubbornVisible"
     :close-on-click-modal="false"
     :close-on-press-escape="false">
     <span>这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息</span>
@@ -145,9 +143,7 @@
 <el-button v-on:click.native="dialogStubbornVisible = true">打开 Dialog，点击 modal 或按下 esc 关闭无法将其关闭</el-button>
 
 <el-dialog title="提示"
-  :visible="dialogStubbornVisible"
-  @open="dialogStubbornVisible = true"
-  @close="dialogStubbornVisible = false"
+  v-model="dialogStubbornVisible"
   :close-on-click-modal="false"
   :close-on-press-escape="false">
   <span>这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息</span>
@@ -159,7 +155,7 @@
 <el-button v-on:click.native="dialogTableVisible = true">打开嵌套表格的 Dialog</el-button>
 
 <div class="demo-box demo-dialog">
-  <el-dialog title="收货地址" :visible="dialogTableVisible" @open="dialogTableVisible = true" @close="dialogTableVisible = false">
+  <el-dialog title="收货地址" v-model="dialogTableVisible">
     <el-table :data="gridData">
       <el-table-column property="date" label="日期" width="150"></el-table-column>
       <el-table-column property="name" label="姓名" width="200"></el-table-column>
@@ -171,8 +167,8 @@
 <el-button v-on:click.native="dialogFormVisible = true">打开嵌套表单的 Dialog</el-button>
 
 <div class="demo-box demo-dialog">
-  <el-dialog title="收货地址" :visible="dialogFormVisible" @open="dialogFormVisible = true" @close="dialogFormVisible = false">
-    <el-form :models="form" v-ref:form>
+  <el-dialog title="收货地址" v-model="dialogFormVisible">
+    <el-form :models="form">
       <el-form-item label="活动名称" :label-width="formLabelWidth">
         <el-input :model.sync="form.name" auto-complete="off"></el-input>
       </el-form-item>
@@ -193,7 +189,7 @@
 ```html
 <el-button v-on:click.native="dialogTableVisible = true">打开嵌套表格的 Dialog</el-button>
 
-<el-dialog title="收货地址" :visible="dialogTableVisible" @open="dialogTableVisible = true" @close="dialogTableVisible = false">
+<el-dialog title="收货地址" v-model="dialogTableVisible">
   <el-table :data="gridData">
     <el-table-column property="date" label="日期" width="150"></el-table-column>
     <el-table-column property="name" label="姓名" width="200"></el-table-column>
@@ -203,8 +199,8 @@
 
 <el-button v-on:click.native="dialogFormVisible = true">打开嵌套表单的 Dialog</el-button>
 
-<el-dialog title="收货地址" :visible="dialogFormVisible" @open="dialogFormVisible = true" @close="dialogFormVisible = false">
-  <el-form :models="form" v-ref:form>
+<el-dialog title="收货地址" v-model="dialogFormVisible">
+  <el-form :models="form">
     <el-form-item label="活动名称" :label-width="formLabelWidth">
       <el-input :model.sync="form.name" auto-complete="off"></el-input>
     </el-form-item>
@@ -236,3 +232,10 @@
 |------|--------|
 | - | dialog 的内容 |
 | footer | dialog 按钮操作区的内容 |
+
+## 方法
+每个 el-dialog 实例都暴露了如下方法，用于在不使用 v-model 的情况下打开 / 关闭实例：
+| 方法名 | 说明 |
+|------|--------|
+| open | 打开当前实例 |
+| close | 关闭当前实例 |
