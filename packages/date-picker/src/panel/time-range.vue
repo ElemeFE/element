@@ -8,7 +8,7 @@
         <div class="el-time-range-picker__header">开始时间</div>
         <div class="el-time-range-picker__body el-time-panel__content">
           <time-spinner
-            v-ref:min-spinner
+            ref="minSpinner"
             :show-seconds="showSeconds"
             @change="handleMinChange"
             @select-range="setMinSelectionRange"
@@ -22,7 +22,7 @@
         <div class="el-time-range-picker__header">结束时间</div>
         <div class="el-time-range-picker__body el-time-panel__content">
           <time-spinner
-            v-ref:max-spinner
+            ref="maxSpinner"
             :show-seconds="showSeconds"
             @change="handleMaxChange"
             @select-range="setMaxSelectionRange"

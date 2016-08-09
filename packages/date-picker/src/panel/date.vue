@@ -26,7 +26,7 @@
               type="text"
               class="el-date-picker__editor">
             <time-picker
-              v-ref:timepicker
+              ref="timepicker"
               :date="date"
               @pick="handleTimePick"
               v-show="timePickerVisible">
@@ -75,7 +75,7 @@
             :disabled-date="disabledDate">
           </date-table>
           <year-table
-            v-ref:year-table
+            ref="yearTable"
             :year="year"
             v-show="currentView === 'year'"
             @pick="handleYearPick">

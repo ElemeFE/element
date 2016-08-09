@@ -99,7 +99,6 @@
       handleClick(item) {
         if (!item.disabled) {
           this.$emit('pick', item.value);
-          this.value = item.value;
         }
       }
     },

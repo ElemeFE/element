@@ -1,43 +1,46 @@
 <template>
-  <div
-    @mouseenter="emitSelectRange('hours')"
-    class="el-time-spinner__wrapper"
-    v-el:hour>
-    <ul class="el-time-spinner__list">
-      <li
-        @click="handleClick('hours', { value: hour, disabled: disabled }, true)"
-        v-for="(hour, disabled) in hoursList"
-        track-by="$index"
-        class="el-time-spinner__item"
-        :class="{ 'active': hour === hours, 'disabled': disabled }"
-        v-text="hour"></li>
-    </ul>
-  </div>
-  <div
-    @mouseenter="emitSelectRange('minutes')"
-    class="el-time-spinner__wrapper"
-    v-el:minute>
-    <ul class="el-time-spinner__list">
-      <li
-        @click="handleClick('minutes', minute, true)"
-        v-for="minute in 60"
-        class="el-time-spinner__item"
-        :class="{ 'active': minute === minutes }"
-        v-text="minute"></li>
-    </ul>
-  </div>
-  <div
-    @mouseenter="emitSelectRange('seconds')"
-    class="el-time-spinner__wrapper"
-    v-el:second>
-    <ul class="el-time-spinner__list">
-      <li
-        @click="handleClick('seconds', second, true)"
-        v-for="second in 60"
-        class="el-time-spinner__item"
-        :class="{ 'active': second === seconds }"
-        v-text="second"></li>
-    </ul>
+  <div class="el-time-spinner">
+    {{hours}}
+    <div
+      @mouseenter="emitSelectRange('hours')"
+      class="el-time-spinner__wrapper"
+      ref="hour">
+      <ul class="el-time-spinner__list">
+        <li
+          @click="handleClick('hours', { value: hour, disabled: disabled }, true)"
+          v-for="(disabled, hour) in hoursList"
+          track-by="$index"
+          class="el-time-spinner__item"
+          :class="{ 'active': hour === hours, 'disabled': disabled }"
+          v-text="hour"></li>
+      </ul>
+    </div>
+    <div
+      @mouseenter="emitSelectRange('minutes')"
+      class="el-time-spinner__wrapper"
+      ref="minute">
+      <ul class="el-time-spinner__list">
+        <li
+          @click="handleClick('minutes', key, true)"
+          v-for="(minute, key) in 60"
+          class="el-time-spinner__item"
+          :class="{ 'active': key === minutes }"
+          v-text="key"></li>
+      </ul>
+    </div>
+    <div
+      @mouseenter="emitSelectRange('seconds')"
+      class="el-time-spinner__wrapper"
+      ref="second">
+      <ul class="el-time-spinner__list">
+        <li
+          @click="handleClick('seconds', key, true)"
+          v-for="(second, key) in 60"
+          class="el-time-spinner__item"
+          :class="{ 'active': key === seconds }"
+          v-text="key"></li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -70,27 +73,28 @@
     },
 
     watch: {
-      hours(newVal, oldVal) {
+      hoursPrivate(newVal, oldVal) {
         if (!(newVal >= 0 && newVal <= 23)) {
-          this.hours = oldVal;
+          this.hoursPrivate = oldVal;
         }
-        this.$els.hour.scrollTop = Math.max(0, (this.hours - 2.5) * 32 + 80);
+        this.$refs.hour.scrollTop = Math.max(0, (this.hoursPrivate - 2.5) * 32 + 80);
+
         this.$emit('change', { hours: newVal });
       },
 
-      minutes(newVal, oldVal) {
+      minutesPrivate(newVal, oldVal) {
         if (!(newVal >= 0 && newVal <= 59)) {
-          this.minutes = oldVal;
+          this.minutesPrivate = oldVal;
         }
-        this.$els.minute.scrollTop = Math.max(0, (this.minutes - 2.5) * 32 + 80);
+        this.$refs.minute.scrollTop = Math.max(0, (this.minutesPrivate - 2.5) * 32 + 80);
         this.$emit('change', { minutes: newVal });
       },
 
-      seconds(newVal, oldVal) {
+      secondsPrivate(newVal, oldVal) {
         if (!(newVal >= 0 && newVal <= 59)) {
-          this.seconds = oldVal;
+          this.secondsPrivate = oldVal;
         }
-        this.$els.second.scrollTop = Math.max(0, (this.seconds - 2.5) * 32 + 80);
+        this.$refs.second.scrollTop = Math.max(0, (this.secondsPrivate - 2.5) * 32 + 80);
         this.$emit('change', { seconds: newVal });
       }
     },
@@ -101,9 +105,17 @@
       }
     },
 
+    data() {
+      return {
+        hoursPrivate: 0,
+        minutesPrivate: 0,
+        secondsPrivate: 0
+      };
+    },
+
     methods: {
       focusEditor(type) {
-        const editor = this.$els[type + 'Editor'];
+        const editor = this.$refs[type + 'Editor'];
         if (editor) {
           editor.focus();
         }
@@ -114,7 +126,7 @@
           return;
         }
 
-        this[type] = value.value >= 0 ? value.value : value;
+        this[type + 'Private'] = value.value >= 0 ? value.value : value;
 
         this.emitSelectRange(type);
       },
@@ -130,9 +142,9 @@
       },
 
       ajustScrollTop() {
-        this.$els.hour.scrollTop = Math.max(0, (this.hours - 2.5) * 32 + 80);
-        this.$els.minute.scrollTop = Math.max(0, (this.minutes - 2.5) * 32 + 80);
-        this.$els.second.scrollTop = Math.max(0, (this.seconds - 2.5) * 32 + 80);
+        this.$refs.hour.scrollTop = Math.max(0, (this.hours - 2.5) * 32 + 80);
+        this.$refs.minute.scrollTop = Math.max(0, (this.minutes - 2.5) * 32 + 80);
+        this.$refs.second.scrollTop = Math.max(0, (this.seconds - 2.5) * 32 + 80);
       }
     }
   };
