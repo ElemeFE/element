@@ -65,11 +65,11 @@
 </script>
 
 ## 基本用法
-<el-button @click="open">打开 Alert</el-button>
+<el-button @click.native="open">打开 Alert</el-button>
 
 ```html
 <template>
-  <el-button @click="open">打开 Message Box</el-button>
+  <el-button @click.native="open">打开 Message Box</el-button>
 </template>
 
 <script>
@@ -85,11 +85,11 @@
 
 ## 返回 Promise
 
-<el-button @click="open2">打开 alert</el-button>
+<el-button @click.native="open2">打开 alert</el-button>
 
 ```html
 <template>
-  <el-button @click="open4">打开 alert</el-button>
+  <el-button @click.native="open2">打开 alert</el-button>
 </template>
 
 <script>
@@ -105,11 +105,11 @@
 </script>
 ```
 
-<el-button @click="open3">打开 confirm</el-button>
+<el-button @click.native="open3">打开 confirm</el-button>
 
 ```html
 <template>
-  <el-button @click="open5">打开 confirm</el-button>
+  <el-button @click.native="open3">打开 confirm</el-button>
 </template>
 
 <script>
@@ -132,11 +132,11 @@
   }
 </script>
 ```
-<el-button @click="open4">打开 prompt</el-button>
+<el-button @click.native="open4">打开 prompt</el-button>
 
 ```html
 <template>
-  <el-button @click="open6">打开 prompt</el-button>
+  <el-button @click.native="open4">打开 prompt</el-button>
 </template>
 
 <script>
@@ -157,11 +157,11 @@
 </script>
 ```
 
-<el-button @click="open5">打开 Message Box</el-button>
+<el-button @click.native="open5">打开 Message Box</el-button>
 
 ```html
 <template>
-  <el-button @click="open3">打开 Message Box</el-button>
+  <el-button @click.native="open5">打开 Message Box</el-button>
 </template>
 
 <script>
@@ -183,11 +183,11 @@
 
 ## 更多配置项
 
-<el-button @click="open6">打开 Message Box</el-button>
+<el-button @click.native="open6">打开 Message Box</el-button>
 
 ```html
 <template>
-  <el-button @click="open2">打开 Message Box</el-button>
+  <el-button @click.native="open6">打开 Message Box</el-button>
 </template>
 
 <script>

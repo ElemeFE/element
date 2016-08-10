@@ -115,12 +115,12 @@
   }
 }
 
-.msgbox-bounce-enter {
+.msgbox-bounce-enter-active {
   -webkit-animation: msgbox-bounce-in .3s cubic-bezier(0.3, 0, 0, 1.5);
   animation: msgbox-bounce-in .3s cubic-bezier(0.3, 0, 0, 1.5);
 }
 
-.msgbox-bounce-leave {
+.msgbox-bounce-leave-active {
   -webkit-animation: msgbox-bounce-out .2s cubic-bezier(0.895, 0.03, 0.685, 0.22);
   animation: msgbox-bounce-out .2s cubic-bezier(0.895, 0.03, 0.685, 0.22);
 }
