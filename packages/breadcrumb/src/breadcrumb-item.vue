@@ -6,18 +6,12 @@
 <script>
   export default {
     name: 'ElBreadcrumbItem',
-
-    props: {
-    },
     data() {
       return {
         separator: ''
       };
     },
-    methods: {
-
-    },
-    ready() {
+    mounted() {
       this.separator = this.$parent.separator;
     }
   };
