@@ -74,6 +74,8 @@
       color: #fff;
       cursor: default;
       z-index: var(--index-top);
+      transition: transform .3s, opacity .3s;
+      transform-origin: center bottom;
 
       &::before {
         triangle: 9px top #20A0FF;
@@ -106,13 +108,8 @@
       transform: translateX(-50%);
     }
 
-    .popper-fade-transition {
-      transition: transform .3s, opacity .3s;
-      transform-origin: center bottom;
-    }
-
     .popper-fade-enter,
-    .popper-fade-leave {
+    .popper-fade-leave-active {
       transform: scale(0.1);
       opacity: 0;
     }

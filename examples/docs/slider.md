@@ -1,5 +1,16 @@
 <script>
   export default {
+    data() {
+      return {
+        value1: 0,
+        value2: 50,
+        value3: null,
+        value4: null,
+        value5: null,
+        value6: null,
+        value7: null
+      };
+    },
     methods: {
       onChange(value) {
         console.log(value);
@@ -10,55 +21,55 @@
 
 ## 基本用法
 
-<el-slider></el-slider>
+<el-slider v-model="value1"></el-slider>
 
 ```html
-<el-slider></el-slider>
+<el-slider v-model="value1"></el-slider>
 ```
 
 ## 定义初始值
 
-<el-slider :value="50"></el-slider>
+<el-slider v-model="value2"></el-slider>
 
 ```html
-<el-slider :value="50"></el-slider>
+<el-slider v-model="value2"></el-slider>
 ```
 
 ## 定义区间
 
-<el-slider :min="20" :max="80"></el-slider>
+<el-slider :min="20" :max="80" v-model="value3"></el-slider>
 
 ```html
-<el-slider :min="20" :max="80"></el-slider>
+<el-slider :min="20" :max="80" v-model="value3"></el-slider>
 ```
 
 ## 定义步长
 
-<el-slider :step="10"></el-slider>
+<el-slider :step="10" v-model="value4"></el-slider>
 
 ```html
-<el-slider :step="10"></el-slider>
+<el-slider :step="10" v-model="value4"></el-slider>
 ```
 
 ## 显示间断点
 
-<el-slider :step="10" show-stops></el-slider>
+<el-slider :step="10" show-stops v-model="value5"></el-slider>
 
 ```html
-<el-slider :step="10" show-stops></el-slider>
+<el-slider :step="10" show-stops v-model="value5"></el-slider>
 ```
 
 ## 带有输入框
 
-<el-slider show-input></el-slider>
+<el-slider show-input v-model="value6"></el-slider>
 
 ```html
-<el-slider show-input></el-slider>
+<el-slider show-input v-model="value6"></el-slider>
 ```
 
 ## 回调函数
 
-<el-slider @change="onChange"></el-slider>
+<el-slider @change="onChange" v-model="value7"></el-slider>
 
 ```html
 <template>
