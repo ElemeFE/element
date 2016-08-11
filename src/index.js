@@ -2,7 +2,6 @@ import Group from '../packages/group/index.js';
 import SelectDropdown from '../packages/select-dropdown/index.js';
 import Pagination from '../packages/pagination/index.js';
 import Dialog from '../packages/dialog/index.js';
-import Cascader from '../packages/cascader/index.js';
 import Autocomplete from '../packages/autocomplete/index.js';
 import Dropdown from '../packages/dropdown/index.js';
 import DropdownItem from '../packages/dropdown-item/index.js';
@@ -57,7 +56,6 @@ const install = function(Vue) {
   Vue.component(SelectDropdown.name, SelectDropdown);
   Vue.component(Pagination.name, Pagination);
   Vue.component(Dialog.name, Dialog);
-  Vue.component(Cascader.name, Cascader);
   Vue.component(Autocomplete.name, Autocomplete);
   Vue.component(Dropdown.name, Dropdown);
   Vue.component(DropdownItem.name, DropdownItem);
@@ -122,7 +120,6 @@ module.exports = {
   SelectDropdown,
   Pagination,
   Dialog,
-  Cascader,
   Autocomplete,
   Dropdown,
   DropdownItem,
