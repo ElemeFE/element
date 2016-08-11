@@ -74,12 +74,12 @@
 ## 基本用法
 
 <div class="demo-box demo-notification">
-  <el-button :plain="true" v-on:click="open">点击展示 Notification</el-button>
+  <el-button :plain="true" v-on:click.native="open">点击展示 Notification</el-button>
 </div>
 
 ```html
 <template>
-  <el-button :plain="true" v-on:click="open">点击展示 Notification</el-button>
+  <el-button :plain="true" v-on:click.native="open">点击展示 Notification</el-button>
 </template>
 
 <script>
@@ -99,18 +99,18 @@
 ## 带有 icon
 
 <div class="demo-box demo-notification">
-  <el-button :plain="true" v-on:click="open2">成功</el-button>
-  <el-button :plain="true" v-on:click="open3">警告</el-button>
-  <el-button :plain="true" v-on:click="open4">消息</el-button>
-  <el-button :plain="true" v-on:click="open5">错误</el-button>
+  <el-button :plain="true" v-on:click.native="open2">成功</el-button>
+  <el-button :plain="true" v-on:click.native="open3">警告</el-button>
+  <el-button :plain="true" v-on:click.native="open4">消息</el-button>
+  <el-button :plain="true" v-on:click.native="open5">错误</el-button>
 </div>
 
 ```html
 <template>
-  <el-button :plain="true" v-on:click="open2">成功</el-button>
-  <el-button :plain="true" v-on:click="open3">警告</el-button>
-  <el-button :plain="true" v-on:click="open4">消息</el-button>
-  <el-button :plain="true" v-on:click="open5">错误</el-button>
+  <el-button :plain="true" v-on:click.native="open2">成功</el-button>
+  <el-button :plain="true" v-on:click.native="open3">警告</el-button>
+  <el-button :plain="true" v-on:click.native="open4">消息</el-button>
+  <el-button :plain="true" v-on:click.native="open5">错误</el-button>
 </template>
 
 <script>
@@ -154,12 +154,12 @@
 
 ## 不会自动关闭
 <div class="demo-box demo-notification">
-  <el-button :plain="true" v-on:click="open6">不会自动关闭的 Notification</el-button>
+  <el-button :plain="true" v-on:click.native="open6">不会自动关闭的 Notification</el-button>
 </div>
 
 ```html
 <template>
-  <el-button :plain="true" v-on:click="open6">不会自动关闭的 Notification</el-button>
+  <el-button :plain="true" v-on:click.native="open6">不会自动关闭的 Notification</el-button>
 </template>
 
 <script>
@@ -179,12 +179,12 @@
 
 ## 回调函数
 <div class="demo-box demo-notification">
-  <el-button :plain="true" v-on:click="open7">带有回调函数的 Notification</el-button>
+  <el-button :plain="true" v-on:click.native="open7">带有回调函数的 Notification</el-button>
 </div>
 
 ```html
 <template>
-  <el-button :plain="true" v-on:click="open7">带有回调函数的 Notification</el-button>
+  <el-button :plain="true" v-on:click.native="open7">带有回调函数的 Notification</el-button>
 </template>
 
 <script>
