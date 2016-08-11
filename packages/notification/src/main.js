@@ -19,7 +19,8 @@ var Notification = function(options) {
   });
   instance.id = id;
   instance.vm = instance.$mount();
-  instance.vm.$appendTo('body');
+  document.body.appendChild(instance.vm.$el);
+  instance.vm.visible = true;
   instance.dom = instance.vm.$el;
 
   var topDist = 0;
@@ -46,7 +47,7 @@ Notification.close = function(id, userOnClose) {
 
   if (len > 1) {
     for (i = index; i < len - 1 ; i++) {
-      instances[i].dom.style.top = parseInt(instances[i].dom.style.top, 10) - removedHeight - 10 + 'px';
+      instances[i].dom.style.top = parseInt(instances[i].dom.style.top, 10) - removedHeight - 16 + 'px';
     }
   }
 };

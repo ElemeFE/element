@@ -15,6 +15,7 @@
     color: #fff;
     opacity: 1;
     display: table;
+    transition: opacity .2s;
 
     @modifier success {
       background-color: #13ce66;
@@ -78,12 +79,8 @@
     }
   }
 
-  .el-alert-fade-transition {
-    transition: opacity .2s;
-  }
-
   .el-alert-fade-enter,
-  .el-alert-fade-leave {
+  .el-alert-fade-leave-active {
     opacity: 0;
   }
 }

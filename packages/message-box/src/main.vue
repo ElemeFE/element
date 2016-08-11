@@ -1,23 +1,25 @@
 <template>
   <div class="el-message-box__wrapper">
-    <div class="el-message-box" v-if="rendered" v-show="visible" transition="msgbox-bounce">
-      <div class="el-message-box__header" v-if="title !== ''">
-        <div class="el-message-box__title">{{ title }}</div>
-        <i class="el-message-box__close el-icon-close" @click="handleAction('cancel')" v-if="showClose"></i>
-      </div>
-      <div class="el-message-box__content" v-if="message !== ''">
-        <div class="el-message-box__status {{ typeClass }}"></div>
-        <div class="el-message-box__message" :style="{ 'margin-left': type ? '50px' : '0' }"><p>{{ message }}</p></div>
-        <div class="el-message-box__input" v-show="showInput">
-          <input type="text" v-model="inputValue" :placeholder="inputPlaceholder" v-el:input />
-          <div class="el-message-box__errormsg" :style="{ visibility: !!editorErrorMessage ? 'visible' : 'hidden' }">{{editorErrorMessage}}</div>
+    <transition name="msgbox-bounce">
+      <div class="el-message-box" v-show="value">
+        <div class="el-message-box__header" v-if="title !== ''">
+          <div class="el-message-box__title">{{ title }}</div>
+          <i class="el-message-box__close el-icon-close" @click="handleAction('cancel')" v-if="showClose"></i>
+        </div>
+        <div class="el-message-box__content" v-if="message !== ''">
+          <div class="el-message-box__status" :class="[ typeClass ]"></div>
+          <div class="el-message-box__message" :style="{ 'margin-left': type ? '50px' : '0' }"><p>{{ message }}</p></div>
+          <div class="el-message-box__input" v-show="showInput">
+            <input type="text" v-model="inputValue" :placeholder="inputPlaceholder" ref="input" />
+            <div class="el-message-box__errormsg" :style="{ visibility: !!editorErrorMessage ? 'visible' : 'hidden' }">{{editorErrorMessage}}</div>
+          </div>
+        </div>
+        <div class="el-message-box__btns">
+          <el-button :class="[ cancelButtonClasses ]" v-show="showCancelButton" @click.native="handleAction('cancel')">{{ cancelButtonText }}</el-button>
+          <el-button :class="[ confirmButtonClasses ]" v-show="showConfirmButton" @click.native="handleAction('confirm')" type="primary">{{ confirmButtonText }}</el-button>
         </div>
       </div>
-      <div class="el-message-box__btns">
-        <el-button class="{{ cancelButtonClasses }}" v-show="showCancelButton" @click="handleAction('cancel')">{{ cancelButtonText }}</el-button>
-        <el-button class="{{ confirmButtonClasses }}" v-show="showConfirmButton" @click="handleAction('confirm')" type="primary">{{ confirmButtonText }}</el-button>
-      </div>
-    </div>
+    </transition>
   </div>
 </template>
 
@@ -34,8 +36,6 @@
   import Popup from 'vue-popup';
 
   export default {
-    name: 'el-message-box',
-
     mixins: [ Popup ],
 
     props: {
@@ -68,12 +68,27 @@
     },
 
     methods: {
+      doClose() {
+        this.value = false;
+        this._closing = true;
+
+        this.onClose && this.onClose();
+
+        if (this.modal) {
+          document.body.style.overflow = this.bodyOverflow;
+        }
+
+        if (!this.transition) {
+          this.doAfterClose();
+        }
+      },
+
       handleAction(action) {
         if (this.$type === 'prompt' && action === 'confirm' && !this.validate()) {
           return;
         }
         var callback = this.callback;
-        this.visible = false;
+        this.value = false;
         callback(action);
       },
 
@@ -109,11 +124,11 @@
         }
       },
 
-      visible(val) {
+      value(val) {
         if (val && this.$type === 'prompt') {
           setTimeout(() => {
-            if (this.$els.input) {
-              this.$els.input.focus();
+            if (this.$refs.input) {
+              this.$refs.input.focus();
             }
           }, 500);
         }
