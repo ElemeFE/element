@@ -11,9 +11,6 @@
   "dialog": [
     "./packages/dialog/index.js"
   ],
-  "cascader": [
-    "./packages/cascader/index.js"
-  ],
   "autocomplete": [
     "./packages/autocomplete/index.js"
   ],
