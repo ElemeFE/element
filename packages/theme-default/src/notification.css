@@ -72,7 +72,7 @@
     right: 0;
   }
 
-  .el-notification-fade-leave {
+  .el-notification-fade-leave-active {
     opacity: 0;
   }
 }
