@@ -1,32 +1,34 @@
 <template>
-  <div
-    v-show="visible"
-    transition="md-fade-bottom"
-    class="el-time-panel">
-    <div class="el-time-panel__content">
-      <time-spinner
-        ref="spinner"
-        @change="handleChange"
-        :show-seconds="showSeconds"
-        @select-range="setSelectionRange"
-        :hours="hours"
-        :minutes="minutes"
-        :seconds="seconds">
-      </time-spinner>
+  <transition name="md-fade-bottom">
+    <div
+      v-show="visible"
+      class="el-time-panel">
+      <div class="el-time-panel__content">
+        <time-spinner
+          ref="spinner"
+          @change="handleChange"
+          :show-seconds="showSeconds"
+          @select-range="setSelectionRange"
+          :hours="hours"
+          :minutes="minutes"
+          :seconds="seconds">
+        </time-spinner>
+      </div>
+      <div class="el-time-panel__footer">
+        <button
+          class="el-time-panel__btn cancel"
+          @click="handleCancel()">取消</button>
+        <button
+          class="el-time-panel__btn confirm"
+          @click="handleConfirm()">确定</button>
+      </div>
     </div>
-    <div class="el-time-panel__footer">
-      <button
-        class="el-time-panel__btn
-        cancel" @click="handleCancel()">取消</button>
-      <button
-        class="el-time-panel__btn confirm"
-        @click="handleConfirm()">确定</button>
-    </div>
-  </div>
+  </transition>
 </template>
 
 <script type="text/ecmascript-6">
   import { limitRange } from '../util';
+  import Vue from 'vue';
 
   export default {
     components: {
@@ -34,33 +36,41 @@
     },
 
     props: {
-      format: {
-        default: 'HH:mm:ss'
+      date: {
+        default: new Date()
       },
 
-      value: {},
-
-      visible: Boolean,
-
-      selectableRange: {}
+      visible: false
     },
 
     watch: {
       value(newVal) {
+        let date;
         if (newVal instanceof Date) {
-          this.date = newVal;
+          date = limitRange(newVal, this.selectableRange);
         } else if (!newVal) {
-          this.date = new Date();
+          date = new Date();
         }
+
+        this.hours = date.getHours();
+        this.minutes = date.getMinutes();
+        this.seconds = date.getSeconds();
+        this.handleConfirm(true);
+      },
+
+      selectableRange(val) {
+        this.$refs.spinner.selectableRange = val;
       }
     },
 
     data() {
       return {
-        date: new Date(),
+        format: 'HH:mm:ss',
+        value: '',
         hours: 0,
         minutes: 0,
-        seconds: 0
+        seconds: 0,
+        selectableRange: []
       };
     },
 
@@ -97,20 +107,13 @@
       },
 
       handleConfirm(visible = false, first) {
-        const spinner = this.$refs.spinner;
-        let date = new Date();
+        const date = new Date(limitRange(this.date, this.selectableRange));
 
-        const { hours, minutes, seconds } = spinner;
-        date.setHours(hours);
-        date.setMinutes(minutes);
-        date.setSeconds(seconds);
-
-        this.date = date = limitRange(date, this.selectableRange);
         this.$emit('pick', date, visible, first);
       },
 
-      focusEditor(...args) {
-        return this.$refs.spinner.focusEditor(...args);
+      focusEditor(val) {
+        return this.$refs.spinner.focusEditor(val);
       },
 
       ajustScrollTop() {
@@ -119,13 +122,15 @@
     },
 
     created() {
+      !this.date && Vue.set(this, 'date', new Date());
+      !this.visible && Vue.set(this, 'visible', false);
+
       this.hours = this.date.getHours();
       this.minutes = this.date.getMinutes();
       this.seconds = this.date.getSeconds();
     },
 
     mounted() {
-      this.$refs.spinner.selectableRange = this.selectableRange;
       this.$nextTick(() => this.handleConfirm(true, true));
     }
   };

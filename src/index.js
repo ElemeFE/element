@@ -1,6 +1,6 @@
 // import Group from '../packages/group/index.js';
 // import SelectDropdown from '../packages/select-dropdown/index.js';
-// import Pagination from '../packages/pagination/index.js';
+import Pagination from '../packages/pagination/index.js';
 // import Dialog from '../packages/dialog/index.js';
 // import Cascader from '../packages/cascader/index.js';
 // import Autocomplete from '../packages/autocomplete/index.js';
@@ -20,7 +20,7 @@
 // import Switch from '../packages/switch/index.js';
 import Select from '../packages/select/index.js';
 import Option from '../packages/option/index.js';
-// import OptionGroup from '../packages/option-group/index.js';
+import OptionGroup from '../packages/option-group/index.js';
 // import Button from '../packages/button/index.js';
 // import ButtonGroup from '../packages/button-group/index.js';
 // import Table from '../packages/table/index.js';
@@ -37,7 +37,7 @@ import TimePicker from '../packages/time-picker/index.js';
 // import FormItem from '../packages/form-item/index.js';
 // import Tabs from '../packages/tabs/index.js';
 // import TabPane from '../packages/tab-pane/index.js';
-// import Tag from '../packages/tag/index.js';
+import Tag from '../packages/tag/index.js';
 // import Tree from '../packages/tree/index.js';
 // import Alert from '../packages/alert/index.js';
 // import Notification from '../packages/notification/index.js';
@@ -55,7 +55,7 @@ const install = function(Vue) {
 
   // Vue.component(Group.name, Group);
   // Vue.component(SelectDropdown.name, SelectDropdown);
-  // Vue.component(Pagination.name, Pagination);
+  Vue.component(Pagination.name, Pagination);
   // Vue.component(Dialog.name, Dialog);
   // Vue.component(Cascader.name, Cascader);
   // Vue.component(Autocomplete.name, Autocomplete);
@@ -75,7 +75,7 @@ const install = function(Vue) {
   // Vue.component(Switch.name, Switch);
   Vue.component(Select.name, Select);
   Vue.component(Option.name, Option);
-  // Vue.component(OptionGroup.name, OptionGroup);
+  Vue.component(OptionGroup.name, OptionGroup);
   // Vue.component(Button.name, Button);
   // Vue.component(ButtonGroup.name, ButtonGroup);
   // Vue.component(Table.name, Table);
@@ -91,7 +91,7 @@ const install = function(Vue) {
   // Vue.component(FormItem.name, FormItem);
   // Vue.component(Tabs.name, Tabs);
   // Vue.component(TabPane.name, TabPane);
-  // Vue.component(Tag.name, Tag);
+  Vue.component(Tag.name, Tag);
   // Vue.component(Tree.name, Tree);
   // Vue.component(Alert.name, Alert);
   // Vue.component(Slider.name, Slider);
@@ -120,7 +120,7 @@ module.exports = {
   install,
   // Group,
   // SelectDropdown,
-  // Pagination,
+  Pagination,
   // Dialog,
   // Cascader,
   // Autocomplete,
@@ -140,7 +140,7 @@ module.exports = {
   // Switch,
   Select,
   Option,
-  // OptionGroup,
+  OptionGroup,
   // Button,
   // ButtonGroup,
   // Table,
@@ -157,7 +157,7 @@ module.exports = {
   // FormItem,
   // Tabs,
   // TabPane,
-  // Tag,
+  Tag
   // Tree,
   // Alert,
   // Notification,

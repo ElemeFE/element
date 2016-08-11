@@ -50,7 +50,14 @@
               picker.$emit('pick', [start, end]);
             }
           }]
-        }
+        },
+        value1: '',
+        value2: '',
+        value3: '',
+        value4: '',
+        value5: '',
+        value6: '',
+        value7: ''
       };
     }
   };
@@ -63,12 +70,14 @@
 以『日』为基本单位
 
 <el-date-picker
+  v-model="value1"
   type="date"
   placeholder="选择日期">
 </el-date-picker>
 
 ```html
 <el-date-picker
+  v-model="value"
   type="date"
   placeholder="选择日期">
 </el-date-picker>
@@ -79,6 +88,7 @@
 以『周』为基本单位
 
 <el-date-picker
+  v-model="value2"
   type="week"
   format="yyyy 第 WW 周"
   placeholder="选择周">
@@ -86,6 +96,7 @@
 
 ```html
 <el-date-picker
+  v-model="value"
   type="week"
   format="yyyy 第 WW 周"
   placeholder="选择周">
@@ -97,12 +108,14 @@
 以『月』为基本单位
 
 <el-date-picker
+  v-model="value3"
   type="month"
   placeholder="选择月">
 </el-date-picker>
 
 ```html
 <el-date-picker
+  v-model="value"
   type="month"
   placeholder="选择月">
 </el-date-picker>
@@ -113,12 +126,14 @@
 以『年』为基本单位
 
 <el-date-picker
+  v-model="value4"
   type="year"
   placeholder="选择日期">
 </el-date-picker>
 
 ```html
 <el-date-picker
+  v-model="value"
   type="year"
   placeholder="选择日期">
 </el-date-picker>
@@ -129,6 +144,7 @@
 左侧区域可配置快捷选项，例如『今天』、『昨天』等
 
 <el-date-picker
+  v-model="value5"
   type="date"
   placeholder="选择日期"
   :picker-options="pickerOptions1">
@@ -136,6 +152,7 @@
 
 ```html
 <el-date-picker
+  v-model="value"
   type="date"
   placeholder="选择日期"
   :picker-options="pickerOptions1">
@@ -166,7 +183,8 @@
               picker.$emit('pick', date);
             }
           }]
-        }
+        },
+        value: ''
       };
     }
   };
@@ -180,6 +198,7 @@
 在一个选择器中选择
 
 <el-date-picker
+  v-model="value6"
   type="daterange"
   placeholder="选择日期范围"
   style="width: 220px">
@@ -187,6 +206,7 @@
 
 ```html
 <el-date-picker
+  v-model="value"
   type="daterange"
   placeholder="选择日期范围"
   style="width: 220px">
@@ -198,6 +218,7 @@
 左侧区域可配置快捷选项，例如『最近一周』、『最近一个月』等
 
 <el-date-picker
+  v-model="value7"
   type="daterange"
   placeholder="选择日期范围"
   :picker-options="pickerOptions2"
@@ -206,6 +227,7 @@
 
 ```html
 <el-date-picker
+  v-model="value"
   type="daterange"
   placeholder="选择日期范围"
   :picker-options="pickerOptions2"
@@ -242,7 +264,8 @@
               picker.$emit('pick', [start, end]);
             }
           }]
-        }
+        },
+        value: ''
       };
     }
   };

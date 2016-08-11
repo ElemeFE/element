@@ -9,7 +9,7 @@
         <li
           @click="handleClick('hours', { value: hour, disabled: disabled }, true)"
           v-for="(disabled, hour) in hoursList"
-          track-by="$index"
+          track-by="hour"
           class="el-time-spinner__item"
           :class="{ 'active': hour === hours, 'disabled': disabled }"
           v-text="hour"></li>
@@ -67,9 +67,7 @@
       showSeconds: {
         type: Boolean,
         default: true
-      },
-
-      selectableRange: {}
+      }
     },
 
     watch: {
@@ -109,7 +107,8 @@
       return {
         hoursPrivate: 0,
         minutesPrivate: 0,
-        secondsPrivate: 0
+        secondsPrivate: 0,
+        selectableRange: []
       };
     },
 

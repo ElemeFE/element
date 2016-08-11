@@ -392,24 +392,30 @@
 
         if (clickNormalCell && this.selectionMode === 'range') {
           if (this.minDate && this.maxDate) {
-            this.minDate = new Date(newDate.getTime());
-            this.maxDate = null;
+            const minDate = new Date(newDate.getTime());
+            const maxDate = null;
+
+            this.$emit('pick', { minDate, maxDate }, false);
             this.rangeState.selecting = true;
             this.markRange(this.minDate);
           } else if (this.minDate && !this.maxDate) {
             if (newDate >= this.minDate) {
-              this.maxDate = new Date(newDate.getTime());
+              const maxDate = new Date(newDate.getTime());
               this.rangeState.selecting = false;
 
               this.$emit('pick', {
                 minDate: this.minDate,
-                maxDate: this.maxDate
+                maxDate
               });
             } else {
-              this.minDate = new Date(newDate.getTime());
+              const minDate = new Date(newDate.getTime());
+
+              this.$emit('pick', { minDate, maxDate: this.maxDate }, false);
             }
           } else if (!this.minDate) {
-            this.minDate = new Date(newDate.getTime());
+            const minDate = new Date(newDate.getTime());
+
+            this.$emit('pick', { minDate, maxDate: this.maxDate }, false);
             this.rangeState.selecting = true;
             this.markRange(this.minDate);
           }
@@ -420,11 +426,11 @@
         } else if (selectionMode === 'week') {
           var weekNumber = getWeekNumber(newDate);
 
-          this.value = newDate.getFullYear() + 'w' + weekNumber;
+          const value = newDate.getFullYear() + 'w' + weekNumber;
           this.$emit('pick', {
             year: newDate.getFullYear(),
             week: weekNumber,
-            value: this.value,
+            value: value,
             date: newDate
           });
         }

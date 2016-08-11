@@ -50,7 +50,23 @@
               picker.$emit('pick', [start, end]);
             }
           }]
-        }
+        },
+        value1: '',
+        value2: '',
+        value3: new Date(),
+        value4: '',
+        value5: '',
+        value6: '',
+        value7: '',
+        value8: '',
+        value9: '',
+        value10: '',
+        value11: '',
+        value12: '',
+        value13: '',
+        value14: '',
+        value15: '',
+        value16: ''
       };
     }
   };
@@ -64,20 +80,24 @@
 
 <div class="demo-box">
   <el-date-picker
+    v-model="value1"
     type="date"
     placeholder="选择日期">
   </el-date-picker>
   <el-time-picker
+    v-model="value1"
     placeholder="选择时间">
   </el-date-picker>
 </div>
 
 ```html
 <el-date-picker
+  v-model="value"
   type="date"
   placeholder="选择日期">
 </el-date-picker>
 <el-time-picker
+  v-model="value"
   placeholder="选择时间">
 </el-time-picker>
 ```
@@ -88,6 +108,7 @@
 
 <div class="demo-box">
   <el-date-picker
+    v-model="value2"
     type="datetime"
     placeholder="选择日期时间">
   </el-date-picker>
@@ -95,6 +116,7 @@
 
 ```html
 <el-date-picker
+  v-model="value"
   type="datetime"
   placeholder="选择日期时间">
 </el-date-picker>
@@ -106,22 +128,26 @@
 
 <div class="demo-box">
   <el-date-picker
+   v-model="value3"
     type="date"
     :picker-options="pickerOptions1"
     placeholder="选择日期">
   </el-date-picker>
   <el-time-picker
+   v-model="value3"
     placeholder="选择时间">
   </el-time-picker>
 </div>
 
 ```html
 <el-date-picker
+  v-model="value"
   type="date"
   placeholder="选择日期"
  :picker-options="pickerOptions1">
 </el-date-picker>
 <el-time-picker
+  v-model="value"
   placeholder="选择时间">
 </el-time-picker>
 
@@ -150,7 +176,8 @@
               picker.$emit('pick', date);
             }
           }]
-        }
+        },
+        value: new Date()
       };
     }
   };
@@ -163,6 +190,7 @@
 
 <div class="demo-box">
   <el-date-picker
+    v-model="value4"
     type="datetime"
     placeholder="选择日期时间"
     :picker-options="pickerOptions1">
@@ -171,6 +199,7 @@
 
 ```html
 <el-date-picker
+  v-model="value"
   type="datetime"
   placeholder="选择日期时间"
   :picker-options="pickerOptions1"
@@ -202,7 +231,8 @@
               picker.$emit('pick', date);
             }
           }]
-        }
+        },
+        value: ''
       };
     }
   };
@@ -217,10 +247,12 @@
 
 <div class="demo-box">
   <el-date-picker
+    v-model="value5"
     type="datetime"
     placeholder="选择开始时间">
   </el-date-picker>
   <el-date-picker
+    v-model="value6"
     type="datetime"
     placeholder="选择结束时间">
   </el-date-picker>
@@ -228,10 +260,12 @@
 
 ```html
 <el-date-picker
+  v-model="startTime"
   type="datetime"
   placeholder="选择开始时间">
 </el-date-picker>
 <el-date-picker
+  v-model="endTime"
   type="datetime"
   placeholder="选择结束时间">
 </el-date-picker>
@@ -243,6 +277,7 @@
 
 <div class="demo-box">
   <el-date-picker
+    v-model="value7"
     type="datetimerange"
     placeholder="选择时间范围"
     style="width:340px">
@@ -251,6 +286,7 @@
 
 ```html
 <el-date-picker
+  v-model="value"
   type="datetimerange"
   placeholder="选择时间范围"
   style="width:340px">
@@ -263,6 +299,7 @@
 
 <div class="demo-box">
   <el-date-picker
+    v-model="value8"
     type="datetimerange"
     :picker-options="pickerOptions2"
     placeholder="选择时间范围"
@@ -272,6 +309,7 @@
 
 ```html
 <el-date-picker
+  v-model="value"
   type="datetimerange"
   :picker-options="pickerOptions2"
   placeholder="选择时间范围"
@@ -282,6 +320,7 @@
   module.exports = {
     data() {
       return {
+        value: '',
         pickerOptions2: {
           shortcuts: [{
             text: '最近一周',
@@ -321,11 +360,13 @@
 
 <div class="demo-box">
   <el-date-picker
+    v-model="value9"
     type="daterange"
     placeholder="选择日期范围"
     style="width:220px">
   </el-date-picker>
   <el-time-picker
+    v-model="value10"
     is-range
     placeholder="选择时间范围">
   </el-time-picker>
@@ -333,11 +374,13 @@
 
 ```html
 <el-date-picker
+  v-model="date"
   type="daterange"
   placeholder="选择日期范围"
   style="width:220px">
 </el-date-picker>
 <el-time-picker
+  v-model="time"
   is-range
   placeholder="选择时间范围">
 </el-time-picker>
@@ -350,10 +393,12 @@
 
 <div class="demo-box">
   <el-date-picker
+    v-model="value11"
     type="week"
     placeholder="选择开始周">
   </el-date-picker>
   <el-date-picker
+    v-model="value12"
     type="week"
     placeholder="选择结束周">
   </el-date-picker>
@@ -361,10 +406,12 @@
 
 ```html
 <el-date-picker
+  v-model="startWeek"
   type="week"
   placeholder="选择开始周">
 </el-date-picker>
 <el-date-picker
+  v-model="endWeek"
   type="week"
   placeholder="选择结束周">
 </el-date-picker>
@@ -374,10 +421,12 @@
 
 <div class="demo-box">
   <el-date-picker
+    v-model="value13"
     type="month"
     placeholder="选择开始月">
   </el-date-picker>
   <el-date-picker
+    v-model="value14"
     type="month"
     placeholder="选择结束月">
   </el-date-picker>
@@ -385,10 +434,12 @@
 
 ```html
 <el-date-picker
+  v-model="startMonth"
   type="month"
   placeholder="选择开始月">
 </el-date-picker>
 <el-date-picker
+  v-model="endMonth"
   type="month"
   placeholder="选择结束月">
 </el-date-picker>
@@ -398,10 +449,12 @@
 
 <div class="demo-box">
   <el-date-picker
+    v-model="value15"
     type="year"
     placeholder="选择开始年">
   </el-date-picker>
   <el-date-picker
+    v-model="value16"
     type="year"
     placeholder="选择结束年">
   </el-date-picker>
@@ -409,10 +462,12 @@
 
 ```html
 <el-date-picker
+  v-model="startYear"
   type="year"
   placeholder="选择开始年">
 </el-date-picker>
 <el-date-picker
+  v-model="endYear"
   type="year"
   placeholder="选择结束年">
 </el-date-picker>

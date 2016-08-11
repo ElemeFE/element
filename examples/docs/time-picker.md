@@ -8,9 +8,9 @@
 
 ## 固定时间点
 提供几个固定的时间点供用户选择。
-{{value}}
 <div class="demo-box">
   <el-time-select
+    v-model="value1"
     :picker-options="{
       start: '08:30',
       step: '00:15',
@@ -37,7 +37,7 @@
 
 <div class="demo-box">
   <el-time-picker
-    v-model="value"
+    v-model="value2"
     placeholder="任意时间点">
   </el-time-picker>
 </div>
@@ -52,6 +52,7 @@
 ### 通用 - 手动输入规则
 <div class="demo-box">
   <el-time-picker
+    v-model="value3"
     placeholder="任意时间点">
   </el-time-picker>
 </div>
@@ -67,6 +68,7 @@
 
 <div class="demo-box">
   <el-time-picker
+    v-model="value4"
     :picker-options="{
       selectableRange: '18:30:00 - 20:30:00'
     }"
@@ -187,6 +189,7 @@
 <div class="demo-box">
   <el-time-picker
     is-range
+    v-model="value5"
     placeholder="选择时间范围">
   </el-time-picker>
 </div>
@@ -194,6 +197,7 @@
 ```html
 <el-time-picker
   is-range
+  v-model="value"
   placeholder="选择时间范围">
 </el-time-picker>
 ```
@@ -202,7 +206,11 @@
   export default {
     data() {
       return {
-        value: '',
+        value1: '',
+        value2: '',
+        value3: '',
+        value4: '',
+        value5: '',
         startTime: '',
         endTime: '',
         startTime2: '',

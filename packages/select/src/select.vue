@@ -46,16 +46,17 @@
       :style="{ 'width': inputWidth + 'px' }"
       v-element-clickoutside="handleClose">
     </el-input>
-    <el-select-menu
-      ref="popper"
-      v-show="visible && nodataText !== false"
-      transition="fade"
-      :style="{ 'width': dropdownWidth ? dropdownWidth + 'px' : '100%' }">
-      <ul class="el-select-dropdown__list" v-show="options.length > 0 && filteredOptionsCount > 0">
-        <slot></slot>
-      </ul>
-      <p class="el-select-dropdown__nodata" v-if="nodataText">{{ nodataText }}</p>
-    </el-select-menu>
+    <transition name="md-fade-bottom">
+      <el-select-menu
+        ref="popper"
+        v-show="visible && nodataText !== false"
+        :style="{ 'width': dropdownWidth ? dropdownWidth + 'px' : '100%' }">
+        <ul class="el-select-dropdown__list" v-show="options.length > 0 && filteredOptionsCount > 0">
+          <slot></slot>
+        </ul>
+        <p class="el-select-dropdown__nodata" v-if="nodataText">{{ nodataText }}</p>
+      </el-select-menu>
+    </transition>
   </div>
 </template>
 
@@ -195,7 +196,7 @@
           this.valueChangeBySelected = false;
           return;
         }
-        if (this.multiple && Object.prototype.toString.call(val) === '[object Array]') {
+        if (this.multiple && Array.isArray(val)) {
           this.$nextTick(() => {
             this.resetInputHeight();
           });
