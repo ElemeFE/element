@@ -7,9 +7,7 @@
         type: String,
         required: true
       },
-      key: {
-        type: String
-      }
+      name: String
     },
 
     data() {
@@ -18,7 +16,8 @@
         transition: '',
         paneStyle: {
           position: 'relative'
-        }
+        },
+        key: ''
       };
     },
 
@@ -28,17 +27,20 @@
       }
     },
 
-    events: {
-    },
-
     computed: {
       show() {
-        return this.$parent.activeKey === this.key;
+        return this.$parent.currentName === this.key;
       }
     },
 
     watch: {
-      '$parent.activeKey'(newValue, oldValue) {
+      name: {
+        immediate: true,
+        handler(val) {
+          this.key = val;
+        }
+      },
+      '$parent.currentName'(newValue, oldValue) {
         if (this.key === newValue) {
           this.transition = newValue > oldValue ? 'slideInRight' : 'slideInLeft';
         }

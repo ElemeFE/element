@@ -11,12 +11,8 @@
     props: {
       type: String,
       tabPosition: String,
-      defaultActiveKey: {
-        type: String
-      },
-      activeKey: {
-        type: String
-      },
+      defaultActiveName: String,
+      activeName: String,
       closable: false,
       tabWidth: 0
     },
@@ -25,34 +21,22 @@
       return {
         tabs: [],
         children: null,
-        activeTab: null
+        activeTab: null,
+        currentName: 0,
+        barStyle: ''
       };
     },
 
-    computed: {
-      barStyle: {
-        cache: false,
-        get() {
-          if (this.type) return {};
-          var style = {};
-          var offset = 0;
-          var tabWidth = 0;
-
-          this.tabs.every((tab, index) => {
-            let $el = this.$refs.tabs[index].$el;
-            if (tab.key !== this.activeKey) {
-              offset += $el.clientWidth;
-              return true;
-            } else {
-              tabWidth = $el.clientWidth;
-              return false;
-            }
-          });
-
-          style.width = tabWidth + 'px';
-          style.transform = `translateX(${offset}px)`;
-          return style;
+    watch: {
+      activeName: {
+        immediate: true,
+        handler(val) {
+          this.currentName = val || 0;
         }
+      },
+
+      'currentName'() {
+        this.calcBarStyle();
       }
     },
 
@@ -67,27 +51,49 @@
           this.tabs.splice(index, 1);
         }
 
-        if (tab.key === this.activeKey) {
+        if (tab.key === this.currentName) {
           let deleteIndex = this.$children.indexOf(tab);
           let nextChild = this.$children[deleteIndex + 1];
           let prevChild = this.$children[deleteIndex - 1];
 
-          this.activeKey = nextChild ? nextChild.key : prevChild ? prevChild.key : '-1';
+          this.currentName = nextChild ? nextChild.key : prevChild ? prevChild.key : '-1';
         }
         this.$emit('tab.remove', tab);
       },
       handleTabClick(tab) {
-        this.activeKey = tab.key;
+        this.currentName = tab.key;
         this.$emit('tab.click', tab);
+      },
+      calcBarStyle() {
+        if (this.type) return {};
+        var style = {};
+        var offset = 0;
+        var tabWidth = 0;
+
+        this.tabs.every((tab, index) => {
+          let $el = this.$refs.tabs[index].$el;
+          if (tab.key !== this.currentName) {
+            offset += $el.clientWidth;
+            return true;
+          } else {
+            tabWidth = $el.clientWidth;
+            return false;
+          }
+        });
+
+        style.width = tabWidth + 'px';
+        style.transform = `translateX(${offset}px)`;
+
+        this.barStyle = style;
       }
     },
-    ready() {
-      if (!this.activeKey) {
-        this.activeKey = this.defaultActiveKey || this.$children[0].key;
+
+    mounted() {
+      if (!this.currentName) {
+        this.currentName = this.defaultActiveName || this.$children[0].key;
       }
-      this.$children.forEach(tab => {
-        this.tabs.push(tab);
-      });
+      this.$children.forEach(tab => this.tabs.push(tab));
+      this.$nextTick(() => this.calcBarStyle());
     }
   };
 </script>
@@ -97,13 +103,17 @@
     <div class="el-tabs__header">
       <el-tab
         v-for="tab in tabs"
-        v-ref:tabs
+        ref="tabs"
         :tab="tab"
         :closable="closable"
         @onremove="removeTab"
-        @click="handleTabClick(tab)"
-      ></el-tab>
-      <div class="el-tabs__active-bar" v-bind:style="barStyle" v-if="!this.type && tabs.length > 0"></div>
+        @click.native="handleTabClick(tab)">
+      </el-tab>
+      <div
+        class="el-tabs__active-bar"
+        :style="barStyle"
+        v-if="!this.type && tabs.length > 0">
+      </div>
     </div>
 
     <div class="el-tabs__content">

@@ -1,7 +1,4 @@
 {
-  "group": [
-    "./packages/group/index.js"
-  ],
   "select-dropdown": [
     "./packages/select-dropdown/index.js"
   ],
