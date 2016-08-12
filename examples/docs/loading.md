@@ -64,14 +64,14 @@
 
 ## 基本用法
 
-<el-button :plain="true" v-on:click="loading = !loading">打开 / 关闭 loading</el-button>
+<el-button :plain="true" v-on:click.native="loading = !loading">打开 / 关闭 loading</el-button>
 
 <div v-loading="loading" class="el-loading-demo">
   <p>点击上面的按钮，本区域显示 loading 遮罩</p>
 </div>
 
 ```html
-<el-button :plain="true" v-on:click="loading = !loading">打开 / 关闭 loading</el-button>
+<el-button :plain="true" v-on:click.native="loading = !loading">打开 / 关闭 loading</el-button>
 
 <div v-loading="loading" class="el-loading-demo">
   <p>点击上面的按钮，本区域显示 loading 遮罩</p>
@@ -82,14 +82,14 @@
 
 loading 遮罩默认插入至绑定了 `v-loading` 指令的元素上。通过添加 `body` 修饰符，可以使遮罩插入至 body 上
 
-<el-button :plain="true" v-on:click="loading2 = !loading2">打开 / 关闭 loading</el-button>
+<el-button :plain="true" v-on:click.native="loading2 = !loading2">打开 / 关闭 loading</el-button>
 
 <div v-loading.body="loading2" class="el-loading-demo">
   <p>点击上面的按钮，本区域显示 loading 遮罩</p>
 </div>
 
 ```html
-<el-button :plain="true" v-on:click="loading2 = !loading2">打开 / 关闭 loading</el-button>
+<el-button :plain="true" v-on:click.native="loading2 = !loading2">打开 / 关闭 loading</el-button>
 
 <div v-loading.body="loading2" class="el-loading-demo">
   <p>点击上面的按钮，本区域显示 loading 遮罩</p>
@@ -98,13 +98,13 @@ loading 遮罩默认插入至绑定了 `v-loading` 指令的元素上。通过�
 
 当需要全屏遮罩时，可使用 `fullscreen` 修饰符（此时遮罩会插入至 body 上）
 
-<el-button :plain="true" v-on:click="openFullScreen" v-loading.fullscreen="fullscreenLoading">打开全屏 loading</el-button>
+<el-button :plain="true" v-on:click.native="openFullScreen" v-loading.fullscreen="fullscreenLoading">打开全屏 loading</el-button>
 
 ```html
 <template>
   <el-button
     :plain="true"
-    v-on:click="openFullScreen"
+    v-on:click.native="openFullScreen"
     v-loading.fullscreen="fullscreenLoading">
     打开全屏 loading
   </el-button>
