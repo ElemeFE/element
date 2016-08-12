@@ -24,17 +24,15 @@
         }
       }
     },
-    ready() {
+    mounted() {
       document.body.appendChild(this.$el);
-      // this.$el.appendTo('body');
 
       this.$nextTick(() => {
         this.popper = new Popper(this.$parent.$el, this.$el, { gpuAcceleration: false, placement: `bottom-${this.menuAlign}` });
       });
     },
 
-    beforeDestroy() {
-      this.$remove();
+    destroyed() {
       setTimeout(() => {
         this.popper.destroy();
       }, 300);
