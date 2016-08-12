@@ -31,32 +31,32 @@
 ### 单个勾选框，逻辑值
 
 <div class="demo-box demo-checkbox">
-  <el-checkbox class="checkbox" :value.sync="checked">{{checked | json}}</el-checkbox>
+  <el-checkbox class="checkbox" v-model="checked">{{ checked }}</el-checkbox>
 </div>
 
 ```html
-<el-checkbox class="checkbox" :value.sync="checked">{{checked | json}}</el-checkbox>
+<el-checkbox class="checkbox" v-model="checked">{{ checked }}</el-checkbox>
 ```
 
 ### 多个勾选框，绑定到同一个数组
 
 <div class="demo-box demo-checkbox">
-  <el-checkbox class="checkbox" :value.sync="checkList" label="复选框 A"></el-checkbox>
-  <el-checkbox class="checkbox" :value.sync="checkList" label="复选框 B"></el-checkbox>
-  <el-checkbox class="checkbox" :value.sync="checkList" label="复选框 C"></el-checkbox>
-  <el-checkbox class="checkbox" :value.sync="checkList" label="禁用" disabled></el-checkbox>
-  <el-checkbox class="checkbox" :value.sync="checkList" label="选中且禁用" disabled></el-checkbox>
+  <el-checkbox class="checkbox" v-model="checkList" label="复选框 A"></el-checkbox>
+  <el-checkbox class="checkbox" v-model="checkList" label="复选框 B"></el-checkbox>
+  <el-checkbox class="checkbox" v-model="checkList" label="复选框 C"></el-checkbox>
+  <el-checkbox class="checkbox" v-model="checkList" label="禁用" disabled></el-checkbox>
+  <el-checkbox class="checkbox" v-model="checkList" label="选中且禁用" disabled></el-checkbox>
 </div>
 
-<p>{{checkList | json}}</p>
+<p>{{ checkList }}</p>
 
 ```html
 <template>
-  <el-checkbox class="checkbox" :value.sync="checkList" label="复选框 A"></el-checkbox>
-  <el-checkbox class="checkbox" :value.sync="checkList" label="复选框 B"></el-checkbox>
-  <el-checkbox class="checkbox" :value.sync="checkList" label="复选框 C"></el-checkbox>
-  <el-checkbox class="checkbox" :value.sync="checkList" label="禁用" disabled></el-checkbox>
-  <el-checkbox class="checkbox" :value.sync="checkList" label="选中且禁用" disabled></el-checkbox>
+  <el-checkbox class="checkbox" v-model="checkList" label="复选框 A"></el-checkbox>
+  <el-checkbox class="checkbox" v-model="checkList" label="复选框 B"></el-checkbox>
+  <el-checkbox class="checkbox" v-model="checkList" label="复选框 C"></el-checkbox>
+  <el-checkbox class="checkbox" v-model="checkList" label="禁用" disabled></el-checkbox>
+  <el-checkbox class="checkbox" v-model="checkList" label="选中且禁用" disabled></el-checkbox>
 </template>
 
 <script>
@@ -75,20 +75,20 @@
 <div class="demo-box demo-checkbox">
   <el-checkbox
     class="checkbox"
-    :value.sync="name"
+    v-model="name"
     :true-label="a"
-    :false-label="b"
-    >
-  </el-checkbox>{{name}}
+    :false-label="b">
+    {{name}}
+  </el-checkbox>
 </div>
 
 ```html
 <el-checkbox
   class="checkbox"
-  :value.sync="name"
+  v-model="name"
   :true-label="a"
-  :false-label="b"
-  >
+  :false-label="b">
+  {{name}}
 </el-checkbox>
 ```
 
