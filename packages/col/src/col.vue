@@ -1,12 +1,13 @@
 <template>
-  <div class="el-col"
+  <div
+    class="el-col"
     :class="[
       'el-col-' + span,
       offset ? 'el-col-offset-' + offset : '',
       pull ? 'el-col-pull-' + pull : '',
       push ? 'el-col-push-' + push : ''
     ]"
-    v-bind:style="style"
+    :style="style"
   >
     <slot></slot>
   </div>
@@ -20,21 +21,16 @@
         type: Number,
         required: true
       },
-      offset: {
-        type: Number
-      },
-      pull: {
-        type: Number
-      },
-      push: {
-        type: Number
-      }
+      offset: Number,
+      pull: Number,
+      push: Number
     },
 
     computed: {
       gutter() {
         return this.$parent.gutter;
       },
+
       style() {
         var ret = {};
 
@@ -45,11 +41,6 @@
 
         return ret;
       }
-    },
-
-    data() {
-      return {
-      };
     }
   };
 </script>
