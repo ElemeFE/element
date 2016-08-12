@@ -1,34 +1,36 @@
 <template>
   <div class="el-dropdown"
     :class="{'el-dropdown--text': type === 'text'}"
-    v-clickoutside="hide()"
+    v-clickoutside="hide"
   >
-    <!-- 带独立的下拉菜单按钮 -->
+    <!-- 分割的下拉按钮 -->
     <el-button-group v-if="iconSeparate">
-      <el-button :size="size" :type="type" @click="$emit('mainclick')">{{text}}</el-button>
+      <el-button :size="size" :type="type" @click.native="$emit('mainclick')">{{text}}</el-button>
       <el-button
         :size="size"
         :type="type"
         class="el-dropdown__icon-button"
-        @mouseenter="handleMouseEnter"
-        @mouseleave="handleMouseLeave"
-        @click="handleClick">
+        @mouseenter.native="handleMouseEnter"
+        @mouseleave.native="handleMouseLeave"
+        @click.native="handleClick">
         <i class="el-dropdown__icon el-icon-caret-bottom"></i>
       </el-button>
     </el-button-group>
-    <!-- 不带独立的下拉菜单按钮 -->
-    <el-button :size="size" :type="type" @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave" @click="handleClick" v-else>
+    <!-- 不分割的下拉按钮 -->
+    <el-button :size="size" :type="type" @mouseenter.native="handleMouseEnter" @mouseleave.native="handleMouseLeave" @click.native="handleClick" v-else>
       {{text}}<i class="el-dropdown__icon el-icon-caret-bottom"></i>
     </el-button>
     <!-- 下拉菜单 -->
-    <el-dropdown-menu
-      v-ref:menu
-      v-if="visible"
-      @mouseenter="handleMouseEnter"
-      @mouseleave="handleMouseLeave"
-    >
-      <slot></slot>
-    </el-dropdown-menu>
+    <transition name="md-fade-bottom">
+      <el-dropdown-menu
+        ref:menu
+        v-if="visible"
+        @mouseenter.native="handleMouseEnter"
+        @mouseleave.native="handleMouseLeave"
+      >
+        <slot></slot>
+      </el-dropdown-menu>
+    </transition>
   </div>
 </template>
 <script>
@@ -42,7 +44,7 @@
   import ElButtonGroup from 'packages/button-group/index.js';
   import ElDropdownMenu from './dropdown-menu.vue';
   import Vue from 'vue';
-  import VueClickoutside from 'vue-clickoutside';
+  import VueClickoutside from 'main/utils/clickoutside.js';
   Vue.use(VueClickoutside);
 
   export default {
