@@ -100,22 +100,22 @@ const install = function(Vue) {
   Vue.component(Progress.name, Progress);
   Vue.component(Spinner.name, Spinner);
 
-  // Vue.use(Loading);
+  Vue.use(Loading);
 
-  // Vue.prototype.$msgbox = MessageBox;
-  // Vue.prototype.$alert = MessageBox.alert;
-  // Vue.prototype.$confirm = MessageBox.confirm;
-  // Vue.prototype.$prompt = MessageBox.prompt;
-  // Vue.prototype.$notify = Notification;
+  Vue.prototype.$msgbox = MessageBox;
+  Vue.prototype.$alert = MessageBox.alert;
+  Vue.prototype.$confirm = MessageBox.confirm;
+  Vue.prototype.$prompt = MessageBox.prompt;
+  Vue.prototype.$notify = Notification;
 };
 
-// auto install
+auto install
 if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue);
 };
 
 module.exports = {
-  install,
+  install
   Group,
   SelectDropdown,
   Pagination,

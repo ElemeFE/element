@@ -33,6 +33,7 @@
     "babel-helper-vue-jsx-merge-props": "^1.0.1",
     "babel-plugin-syntax-jsx": "^6.8.0",
     "babel-plugin-transform-vue-jsx": "^3.1.0",
+    "babel-preset-es2015-loose": "^7.0.0",
     "file-save": "^0.2.0",
     "gh-pages": "^0.11.0",
     "highlight.js": "^9.3.0",

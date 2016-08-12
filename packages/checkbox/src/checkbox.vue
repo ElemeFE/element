@@ -16,11 +16,10 @@
         :false-value="falseLabel"
         v-model="_value"
         type="checkbox"
-        @change="$emit('on-change', checked)"
         @focus="focus = true"
         @blur="focus = false"
         :disabled="isLimit || disabled"
-        v-el: checkbox>
+        ref="checkbox">
       <input
         v-else
         class="el-checkbox__original"
@@ -29,16 +28,16 @@
         @focus="focus = true"
         @blur="focus = false"
         type="checkbox"
-        @change="$emit('on-change', checked)"
         :disabled="isLimit || disabled">
     </span>
     <span class="el-checkbox__label">
       <slot></slot>
-      <template v-if="!_slotContents">{{label}}</template>
+      <template v-if="!$slots || !$slots.default">{{label}}</template>
     </span>
   </label>
 </template>
 <script>
+  import Emitter from 'main/mixins/emitter';
   /**
    * checkbox
    * @module components/basic/checkbox
@@ -56,10 +55,10 @@
   export default {
     name: 'ElCheckbox',
 
+    mixins: [Emitter],
+
     props: {
-      value: {
-        type: [Array, Boolean, String]
-      },
+      value: {},
       label: {
         type: String
       },
@@ -80,9 +79,9 @@
         },
         set(newValue) {
           if (this.value !== undefined) {
-            this.value = newValue;
+            this.$emit('input', newValue);
           } else {
-            this.$parent.value = newValue;
+            this.$parent.$emit('input', newValue);
           }
         }
       },
@@ -106,24 +105,21 @@
       };
     },
 
-    events: {
-      ['element.checkbox.disabled']() {
-        if (this.checked) {
-          return;
-        }
-
-        this.isLimit = true;
-      },
-
-      ['element.checkbox.enabled']() {
-        this.isLimit = false;
+    watch: {
+      checked(sure) {
+        this.$emit('on-change', sure);
+        this.dispatch('element.checkbox', sure);
       }
     },
 
-    watch: {
-      checked(sure) {
-        this.$dispatch('element.checkbox', sure);
-      }
+    created() {
+      this.$on('element.checkbox.disabled', () => {
+        if (this.checked) return;
+        this.isLimit = true;
+      });
+      this.$on('element.checkbox.enabled', () => {
+        this.isLimit = false;
+      });
     }
   };
 </script>

@@ -1,11 +1,11 @@
-export default {
+class Transition {
   beforeEnter(el) {
     el.dataset.oldPaddingTop = el.style.paddingTop;
     el.dataset.oldPaddingBottom = el.style.paddingBottom;
     el.style.height = '0';
     el.style.paddingTop = 0;
     el.style.paddingBottom = 0;
-  },
+  }
 
   enter(el) {
     el.dataset.oldOverflow = el.style.overflow;
@@ -22,13 +22,13 @@ export default {
     }
 
     el.style.overflow = 'hidden';
-  },
+  }
 
   afterEnter(el) {
     el.style.display = '';
     el.style.height = '';
     el.style.overflow = el.dataset.oldOverflow;
-  },
+  }
 
   beforeLeave(el) {
     el.dataset.oldPaddingTop = el.style.paddingTop;
@@ -40,7 +40,7 @@ export default {
       el.style.height = el.scrollHeight + 'px';
     }
     el.style.overflow = 'hidden';
-  },
+  }
 
   leave(el) {
     if (el.scrollHeight !== 0) {
@@ -50,12 +50,31 @@ export default {
         el.style.paddingBottom = 0;
       });
     }
-  },
+  }
 
   afterLeave(el) {
     el.style.display = el.style.height = '';
     el.style.overflow = el.dataset.oldOverflow;
     el.style.paddingTop = el.dataset.oldPaddingTop;
     el.style.paddingBottom = el.dataset.oldPaddingBottom;
+  }
+};
+
+export default {
+  functional: true,
+  render(h, { children }) {
+    const data = {
+      props: {
+        appear: true
+      },
+      on: new Transition()
+    };
+
+    children = children.map(item => {
+      item.data.class = ['collapse-transition'];
+      return item;
+    });
+
+    return h('transition', data, children);
   }
 };

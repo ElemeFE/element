@@ -91,7 +91,6 @@
         this.suggestionVisible = false;
       },
       select(index) {
-        debugger;
         if (this.suggestions && this.suggestions[index]) {
           this.$emit('input', this.suggestions[index].value);
           this.$nextTick(() => {

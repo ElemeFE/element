@@ -12,6 +12,7 @@
         required: true
       }
     },
+
     watch: {
       value(value) {
         this.dispatch('form-item', 'el.form.change', value);
