@@ -69,7 +69,8 @@ exports.install = Vue => {
               el.originalPosition = document.body.style.position;
 
               ['top', 'left'].forEach(property => {
-                el.maskStyle[property] = el.getBoundingClientRect()[property] + document.body[`scroll${ property[0].toUpperCase() + property.slice(1) }`] + 'px';
+                let scroll = property === 'top' ? 'scrollTop' : 'scrollLeft';
+                el.maskStyle[property] = el.getBoundingClientRect()[property] + document.body[scroll] + document.documentElement[scroll] + 'px';
               });
               ['height', 'width'].forEach(property => {
                 el.maskStyle[property] = el.getBoundingClientRect()[property] + 'px';
