@@ -1,5 +1,5 @@
 exports.install = Vue => {
-  let insertDom = (parent, directive) => {
+  let insertDom = (parent, directive, binding) => {
     if (!directive.domVisible) {
       Object.keys(directive.maskStyle).forEach(property => {
         directive.mask.style[property] = directive.maskStyle[property];
@@ -12,7 +12,7 @@ exports.install = Vue => {
       if (directive.originalPosition !== 'absolute') {
         parent.style.position = 'relative';
       }
-      if (directive.modifiers.fullscreen) {
+      if (binding.modifiers.fullscreen) {
         parent.style.overflow = 'hidden';
       }
       directive.mask.style.display = 'block';
@@ -26,19 +26,19 @@ exports.install = Vue => {
   };
 
   Vue.directive('loading', {
-    bind: function() {
-      this.mask = document.createElement('div');
-      this.mask.className = 'el-loading-mask';
-      this.maskStyle = {
+    bind: function(el) {
+      el.mask = document.createElement('div');
+      el.mask.className = 'el-loading-mask';
+      el.maskStyle = {
         position: 'absolute',
         zIndex: '10000',
         backgroundColor: 'rgba(0, 0, 0, .7)',
         margin: '0'
       };
 
-      this.spinner = document.createElement('i');
-      this.spinner.className = 'el-icon-loading';
-      this.spinnerStyle = {
+      el.spinner = document.createElement('i');
+      el.spinner.className = 'el-icon-loading';
+      el.spinnerStyle = {
         color: '#ddd',
         fontSize: '32px',
         position: 'absolute',
@@ -50,69 +50,69 @@ exports.install = Vue => {
       };
     },
 
-    update: function(val) {
-      if (val) {
+    update: function(el, binding) {
+      if (binding.value) {
         Vue.nextTick(() => {
-          if (this.modifiers.fullscreen) {
-            this.originalPosition = document.body.style.position;
-            this.originalOverflow = document.body.style.overflow;
+          if (binding.modifiers.fullscreen) {
+            el.originalPosition = document.body.style.position;
+            el.originalOverflow = document.body.style.overflow;
 
             ['top', 'right', 'bottom', 'left'].forEach(property => {
-              this.maskStyle[property] = '0';
+              el.maskStyle[property] = '0';
             });
-            this.maskStyle.position = 'fixed';
-            this.spinnerStyle.position = 'fixed';
+            el.maskStyle.position = 'fixed';
+            el.spinnerStyle.position = 'fixed';
 
-            insertDom(document.body, this);
+            insertDom(document.body, el, binding);
           } else {
-            if (this.modifiers.body) {
-              this.originalPosition = document.body.style.position;
+            if (binding.modifiers.body) {
+              el.originalPosition = document.body.style.position;
 
               ['top', 'left'].forEach(property => {
-                this.maskStyle[property] = this.el.getBoundingClientRect()[property] + document.body[`scroll${ property[0].toUpperCase() + property.slice(1) }`] + 'px';
+                el.maskStyle[property] = el.getBoundingClientRect()[property] + document.body[`scroll${ property[0].toUpperCase() + property.slice(1) }`] + 'px';
               });
               ['height', 'width'].forEach(property => {
-                this.maskStyle[property] = this.el.getBoundingClientRect()[property] + 'px';
+                el.maskStyle[property] = el.getBoundingClientRect()[property] + 'px';
               });
 
-              insertDom(document.body, this);
+              insertDom(document.body, el, binding);
             } else {
-              this.originalPosition = this.el.style.position;
+              el.originalPosition = el.style.position;
 
               ['top', 'right', 'bottom', 'left'].forEach(property => {
-                this.maskStyle[property] = '0';
+                el.maskStyle[property] = '0';
               });
 
-              insertDom(this.el, this);
+              insertDom(el, el, binding);
             }
           }
         });
       } else {
-        if (this.domVisible) {
-          this.mask.style.display = 'none';
-          this.spinner.style.display = 'none';
-          this.domVisible = false;
+        if (el.domVisible) {
+          el.mask.style.display = 'none';
+          el.spinner.style.display = 'none';
+          el.domVisible = false;
 
-          if (this.modifiers.fullscreen) {
-            document.body.style.overflow = this.originalOverflow;
+          if (binding.modifiers.fullscreen) {
+            document.body.style.overflow = el.originalOverflow;
           }
-          if (this.modifiers.fullscreen || this.modifiers.body) {
-            document.body.style.position = this.originalPosition;
+          if (binding.modifiers.fullscreen || binding.modifiers.body) {
+            document.body.style.position = el.originalPosition;
           } else {
-            this.el.style.position = this.originalPosition;
+            el.style.position = el.originalPosition;
           }
         }
       }
     },
 
-    unbind: function() {
-      if (this.domInserted) {
-        if (this.modifiers.fullscreen || this.modifiers.body) {
-          document.body.removeChild(this.mask);
-          this.mask.removeChild(this.spinner);
+    unbind: function(el, binding) {
+      if (el.domInserted) {
+        if (binding.modifiers.fullscreen || binding.modifiers.body) {
+          document.body.removeChild(el.mask);
+          el.mask.removeChild(el.spinner);
         } else {
-          this.el.removeChild(this.mask);
-          this.mask.removeChild(this.spinner);
+          el.removeChild(el.mask);
+          el.mask.removeChild(el.spinner);
         }
       }
     }
