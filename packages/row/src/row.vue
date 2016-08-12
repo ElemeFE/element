@@ -1,5 +1,5 @@
 <template>
-  <div class="el-row" v-bind:style="style">
+  <div class="el-row" :style="style">
     <slot></slot>
   </div>
 </template>
@@ -8,9 +8,7 @@
     name: 'ElRow',
 
     props: {
-      gutter: {
-        type: Number
-      }
+      gutter: Number
     },
 
     computed: {
@@ -24,11 +22,6 @@
 
         return ret;
       }
-    },
-
-    data() {
-      return {
-      };
     }
   };
 </script>
