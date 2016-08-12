@@ -1,18 +1,19 @@
 <template>
-  <div
-    v-show="visible"
-    class="el-picker-panel time-select"
-    transition="md-fade-bottom">
-    <div class="el-picker-panel__content">
-      <div class="time-select-item"
-        v-for="item in items"
-        :class="{ selected: value === item.value, disabled: item.disabled }"
-        :disabled="item.disabled"
-        @click="handleClick(item)">
-        {{ item.value }}
+  <transition name="md-fade-bottom">
+    <div
+      v-show="visible"
+      class="el-picker-panel time-select">
+      <div class="el-picker-panel__content">
+        <div class="time-select-item"
+          v-for="item in items"
+          :class="{ selected: value === item.value, disabled: item.disabled }"
+          :disabled="item.disabled"
+          @click="handleClick(item)">
+          {{ item.value }}
+        </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script type="text/ecmascript-6">
@@ -67,26 +68,6 @@
   };
 
   export default {
-    props: {
-      start: {
-        default: '09:00'
-      },
-
-      end: {
-        default: '18:00'
-      },
-
-      step: {
-        default: '00:30'
-      },
-
-      value: {},
-
-      visible: Boolean,
-
-      minTime: {}
-    },
-
     watch: {
       minTime(val) {
         if (this.value && val && compareTime(this.value, val) === -1) {
@@ -99,9 +80,19 @@
       handleClick(item) {
         if (!item.disabled) {
           this.$emit('pick', item.value);
-          this.value = item.value;
         }
       }
+    },
+
+    data() {
+      return {
+        start: '09:00',
+        end: '18:00',
+        step: '00:30',
+        value: '',
+        visible: false,
+        minTime: ''
+      };
     },
 
     computed: {

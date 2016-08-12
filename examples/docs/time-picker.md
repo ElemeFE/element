@@ -8,9 +8,9 @@
 
 ## 固定时间点
 提供几个固定的时间点供用户选择。
-
 <div class="demo-box">
   <el-time-select
+    v-model="value1"
     :picker-options="{
       start: '08:30',
       step: '00:15',
@@ -22,7 +22,7 @@
 
 ```html
 <el-time-select
-  :value.sync="value"
+  v-model="value"
   :picker-options="{
     start: '08:30',
     step: '00:15',
@@ -37,13 +37,14 @@
 
 <div class="demo-box">
   <el-time-picker
+    v-model="value2"
     placeholder="任意时间点">
   </el-time-picker>
 </div>
 
 ```html
 <el-time-picker
-  :value.sync="value"
+  v-model="value"
   placeholder="任意时间点">
 </el-time-picker>
 ```
@@ -51,13 +52,14 @@
 ### 通用 - 手动输入规则
 <div class="demo-box">
   <el-time-picker
+    v-model="value3"
     placeholder="任意时间点">
   </el-time-picker>
 </div>
 
 ```html
 <el-time-picker
-  :value.sync="value"
+  v-model="value"
   placeholder="任意时间点">
 </el-time-picker>
 ```
@@ -66,6 +68,7 @@
 
 <div class="demo-box">
   <el-time-picker
+    v-model="value4"
     :picker-options="{
       selectableRange: '18:30:00 - 20:30:00'
     }"
@@ -75,7 +78,7 @@
 
 ```html
 <el-time-picker
-  :value.sync="value"
+  v-model="value"
   :picker-options="{
     selectableRange: '18:30:00 - 20:30:00'
   }"
@@ -92,7 +95,7 @@
 <div class="demo-box">
   <el-time-select
     placeholder="起始时间"
-    :value.sync="startTime"
+    v-model="startTime"
     :picker-options="{
       start: '08:30',
       step: '00:15',
@@ -101,7 +104,7 @@
   </el-time-select>
   <el-time-select
     placeholder="结束时间"
-    :value.sync="endTime"
+    v-model="endTime"
     :picker-options="{
       start: '08:30',
       step: '00:15',
@@ -114,7 +117,7 @@
 ```html
 <el-time-select
   placeholder="起始时间"
-  :value.sync="startTime"
+  v-model="startTime"
   :picker-options="{
     start: '08:30',
     step: '00:15',
@@ -123,7 +126,7 @@
 </el-time-select>
 <el-time-select
   placeholder="结束时间"
-  :value.sync="endTime"
+  v-model="endTime"
   :picker-options="{
     start: '08:30',
     step: '00:15',
@@ -139,7 +142,7 @@
 <div class="demo-box">
   <el-time-select
     placeholder="起始时间"
-    :value.sync="startTime2"
+    v-model="startTime2"
     :picker-options="{
       start: '08:30',
       step: '00:15',
@@ -148,7 +151,7 @@
   </el-time-select>
   <el-time-select
     placeholder="结束时间"
-    :value.sync="endTime2"
+    v-model="endTime2"
     :picker-options="{
       start: '08:30',
       step: '00:15',
@@ -161,7 +164,7 @@
 ```html
 <el-time-select
   placeholder="起始时间"
-  :value.sync="startTime2"
+  v-model="startTime2"
   :picker-options="{
     start: '08:30',
     step: '00:15',
@@ -170,7 +173,7 @@
 </el-time-select>
 <el-time-select
   placeholder="结束时间"
-  :value.sync="endTime2"
+  v-model="endTime2"
   :picker-options="{
     start: '08:30',
     step: '00:15',
@@ -186,6 +189,7 @@
 <div class="demo-box">
   <el-time-picker
     is-range
+    v-model="value5"
     placeholder="选择时间范围">
   </el-time-picker>
 </div>
@@ -193,6 +197,7 @@
 ```html
 <el-time-picker
   is-range
+  v-model="value"
   placeholder="选择时间范围">
 </el-time-picker>
 ```
@@ -201,6 +206,11 @@
   export default {
     data() {
       return {
+        value1: '',
+        value2: '',
+        value3: '',
+        value4: '',
+        value5: '',
         startTime: '',
         endTime: '',
         startTime2: '',

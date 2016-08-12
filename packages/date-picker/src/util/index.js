@@ -143,7 +143,7 @@ export const getRangeHours = function(ranges) {
 };
 
 export const limitRange = function(date, ranges) {
-  if (!ranges) return date;
+  if (!ranges || !ranges.length) return date;
 
   const len = ranges.length;
   const format = 'HH:mm:ss';

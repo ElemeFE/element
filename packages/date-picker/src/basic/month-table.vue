@@ -65,7 +65,7 @@
         if (target.tagName !== 'A') return;
         const column = target.parentNode.cellIndex;
         const row = target.parentNode.parentNode.rowIndex;
-        const month = this.month = row * 4 + column;
+        const month = row * 4 + column;
 
         this.$emit('pick', month);
       }

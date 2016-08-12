@@ -1,31 +1,29 @@
 <template>
   <span
     class="el-date-editor"
-    v-clickoutside="pickerVisible = false"
+    v-clickoutside="handleClose"
     :class="{
       'is-have-trigger': haveTrigger,
       'is-active': pickerVisible,
-      'is-filled': !!this.value,
-      'is-lg': size === 'lg', 'is-sm': size === 'sm'
+      'is-filled': !!this.value
     }">
 
     <input
-      lazy
       class="el-date-editor__editor"
       :readonly="readonly"
       :type="editorType"
       :placeholder="placeholder"
-      :style="{ height: height ? height + 'px' : '' }"
       @focus="handleFocus"
       @blur="handleBlur"
-      @keydown="handleKeydown($event)"
-      @keyup="handleKeyup($event)"
-      v-el:reference
-      v-model="visualValue" />
+      @keydown="handleKeydown"
+      @keyup="handleKeyup"
+      ref="reference"
+      v-model.lazy="visualValue" />
 
     <span
       @click="togglePicker()"
-      class="el-date-editor__trigger el-icon {{triggerClass}}"
+      class="el-date-editor__trigger el-icon"
+      :class="[triggerClass]"
       v-if="haveTrigger">
     </span>
   </span>
@@ -33,6 +31,7 @@
 
 <script>
 import Vue from 'vue';
+import Clickoutside from 'main/utils/clickoutside';
 import { merge, formatDate, parseDate, getWeekNumber } from './util';
 import Popper from 'main/utils/popper.js';
 
@@ -189,7 +188,7 @@ export default {
   },
 
   directives: {
-    clickoutside: require('vue-clickoutside')
+    Clickoutside
   },
 
   data() {
@@ -254,11 +253,11 @@ export default {
           const parsedValue = parser(value, this.format || DEFAULT_FORMATS[type]);
 
           if (parsedValue) {
-            this.value = parsedValue;
+            this.$emit('input', parsedValue);
           }
           return;
         }
-        this.value = value;
+        this.$emit('input', value);
       }
     },
 
@@ -268,6 +267,10 @@ export default {
   },
 
   methods: {
+    handleClose() {
+      this.pickerVisible = false;
+    },
+
     handleFocus() {
       const type = this.type;
 
@@ -331,7 +334,8 @@ export default {
       const parsedValue = parser(value, this.format || DEFAULT_FORMATS[type]);
 
       if (!parsedValue) return;
-      this.picker.value = this.value = parsedValue;
+      this.picker.value = parsedValue;
+      this.$emit('input', parsedValue);
 
       if (this.type.indexOf('date') > -1) return;
 
@@ -389,8 +393,7 @@ export default {
     showPicker() {
       if (!this.picker) {
         this.picker = new Vue(merge({
-          el: document.createElement('div'),
-          replace: true
+          el: document.createElement('div')
         }, this.panel));
         this.picker.showTime = this.type === 'datetime' || this.type === 'datetimerange';
         this.picker.selectionMode = this.selectionMode;
@@ -427,7 +430,7 @@ export default {
         this.picker.resetView && this.picker.resetView();
 
         this.picker.$on('pick', (date, visible = false) => {
-          this.value = date;
+          this.$emit('input', date);
 
           if (!visible) {
             this.pickerVisible = this.picker.visible = false;
@@ -437,8 +440,8 @@ export default {
 
         this.picker.$on('select-range', (start, end) => {
           setTimeout(() => {
-            this.$els.reference.setSelectionRange(start, end);
-            this.$els.reference.focus();
+            this.$refs.reference.setSelectionRange(start, end);
+            this.$refs.reference.focus();
           }, 0);
         });
       } else {
@@ -451,7 +454,7 @@ export default {
           return;
         }
 
-        this.popper = new Popper(this.$els.reference, this.picker.$el, {
+        this.popper = new Popper(this.$refs.reference, this.picker.$el, {
           gpuAcceleration: false,
           placement: 'bottom-start',
           boundariesPadding: 0,

@@ -49,7 +49,7 @@ export default {
     const TEMPLATE_MAP = {
       prev: <prev></prev>,
       jumper: <jumper></jumper>,
-      pager: <pager prop-currentPage={ this.internalCurrentPage } prop-pageCount={ this.pageCount } on-currentChange={ this.handleCurrentChange }></pager>,
+      pager: <pager currentPage={ this.internalCurrentPage } pageCount={ this.pageCount } on-currentChange={ this.handleCurrentChange }></pager>,
       next: <next></next>,
       sizes: <sizes></sizes>,
       slot: <slot></slot>,
@@ -118,15 +118,15 @@ export default {
         return (
           <span class="el-pagination__sizes">
             <el-select
-              prop-size="small"
-              prop-value={ this.$parent.internalPageSize }
+              size="small"
+              value={ this.$parent.internalPageSize }
               on-change={ this.handleChange }
-              prop-width={ 110 }>
+              width={ 110 }>
               {
                 this.$parent.pageSizes.map(item =>
                     <el-option
-                      prop-value={ item }
-                      prop-label={ item + ' 条/页' }>
+                      value={ item }
+                      label={ item + ' 条/页' }>
                     </el-option>
                   )
               }

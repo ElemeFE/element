@@ -1,139 +1,113 @@
 <template>
-  <div
-    v-show="visible"
-    transition="md-fade-bottom"
-    class="el-picker-panel el-date-picker">
-    <div class="el-picker-panel__body-wrapper">
-      <slot name="sidebar" class="el-picker-panel__sidebar"></slot>
-      <div class="el-picker-panel__sidebar" v-if="shortcuts">
-        <button
-          class="el-picker-panel__shortcut"
-          v-for="shortcut in shortcuts"
-          @click="handleShortcutClick(shortcut)">{{ shortcut.text }}</button>
-      </div>
-      <div class="el-picker-panel__body">
-       <div class="el-date-picker__time-header" v-if="showTime">
-          <input
-            placehoder="选择日期"
-            type="text"
-            v-model="visibleDate"
-            class="el-date-picker__editor">
-          <span class="el-date-picker__editor">
-            <input
-              @focus="timePickerVisible = true"
-              v-model="visibleTime"
-              placehoder="选择时间"
-              type="text"
-              class="el-date-picker__editor">
-            <time-picker
-              v-ref:timepicker
-              :date="date"
-              @pick="handleTimePick"
-              v-show="timePickerVisible">
-            </time-picker>
-          </span>
-        </div>
-        <div class="el-date-picker__header" v-show="currentView !== 'time'">
-          <button
-            @click="prevYear"
-            class="el-picker-panel__icon-btn el-date-picker__prev-btn el-icon-d-arrow-left">
-          </button>
-          <button
-            @click="prevMonth"
-            v-show="currentView === 'date'"
-            class="el-picker-panel__icon-btn el-date-picker__prev-btn el-icon-arrow-left">
-          </button>
-          <span
-            @click="showYearPicker"
-            class="el-date-picker__header-label">{{ yearLabel }}</span>
-          <span
-            @click="showMonthPicker"
-            v-show="currentView === 'date'"
-            class="el-date-picker__header-label"
-            :class="{ active: currentView === 'month' }">{{ month + 1 }}月</span>
-          <button
-            @click="nextYear"
-            class="el-picker-panel__icon-btn el-date-picker__next-btn el-icon-d-arrow-right">
-          </button>
-          <button
-            @click="nextMonth"
-            v-show="currentView === 'date'"
-            class="el-picker-panel__icon-btn el-date-picker__next-btn el-icon-arrow-right">
-          </button>
-        </div>
-
-        <div class="el-picker-panel__content">
-          <date-table
-            v-show="currentView === 'date'"
-            @pick="handleDatePick"
-            :year="year"
-            :month="month"
-            :date="date"
-            :value="value"
-            :week="week"
-            :selection-mode="selectionMode"
-            :disabled-date="disabledDate">
-          </date-table>
-          <year-table
-            v-ref:year-table
-            :year="year"
-            v-show="currentView === 'year'"
-            @pick="handleYearPick">
-          </year-table>
-          <month-table
-            :month="month"
-            v-show="currentView === 'month'"
-            @pick="handleMonthPick">
-          </month-table>
-        </div>
-      </div>
-    </div>
-
+  <transition name="md-fade-bottom">
     <div
-      class="el-picker-panel__footer"
-      v-show="footerVisible && currentView === 'date'">
-      <a
-        href="JavaScript:"
-        class="el-picker-panel__link-btn"
-        @click="changeToToday">{{ $t('datepicker.today') }}</a>
-      <button
-        class="el-picker-panel__btn"
-        @click="confirm">{{ $t('datepicker.confirm') }}</button>
+      v-show="visible"
+      class="el-picker-panel el-date-picker">
+      <div class="el-picker-panel__body-wrapper">
+        <slot name="sidebar" class="el-picker-panel__sidebar"></slot>
+        <div class="el-picker-panel__sidebar" v-if="shortcuts">
+          <button
+            class="el-picker-panel__shortcut"
+            v-for="shortcut in shortcuts"
+            @click="handleShortcutClick(shortcut)">{{ shortcut.text }}</button>
+        </div>
+        <div class="el-picker-panel__body">
+         <div class="el-date-picker__time-header" v-if="showTime">
+            <input
+              placehoder="选择日期"
+              type="text"
+              v-model="visibleDate"
+              class="el-date-picker__editor">
+            <span style="position: relative" v-clickoutside="closeTimePicker">
+              <input
+                @focus="timePickerVisible = true"
+                v-model="visibleTime"
+                placehoder="选择时间"
+                type="text"
+                class="el-date-picker__editor">
+              <time-picker
+                ref="timepicker"
+                :date="date"
+                @pick="handleTimePick"
+                :visible="timePickerVisible">
+              </time-picker>
+            </span>
+          </div>
+          <div class="el-date-picker__header" v-show="currentView !== 'time'">
+            <button
+              @click="prevYear"
+              class="el-picker-panel__icon-btn el-date-picker__prev-btn el-icon-d-arrow-left">
+            </button>
+            <button
+              @click="prevMonth"
+              v-show="currentView === 'date'"
+              class="el-picker-panel__icon-btn el-date-picker__prev-btn el-icon-arrow-left">
+            </button>
+            <span
+              @click="showYearPicker"
+              class="el-date-picker__header-label">{{ yearLabel }}</span>
+            <span
+              @click="showMonthPicker"
+              v-show="currentView === 'date'"
+              class="el-date-picker__header-label"
+              :class="{ active: currentView === 'month' }">{{ month + 1 }}月</span>
+            <button
+              @click="nextYear"
+              class="el-picker-panel__icon-btn el-date-picker__next-btn el-icon-d-arrow-right">
+            </button>
+            <button
+              @click="nextMonth"
+              v-show="currentView === 'date'"
+              class="el-picker-panel__icon-btn el-date-picker__next-btn el-icon-arrow-right">
+            </button>
+          </div>
+
+          <div class="el-picker-panel__content">
+            <date-table
+              v-show="currentView === 'date'"
+              @pick="handleDatePick"
+              :year="year"
+              :month="month"
+              :date="date"
+              :value="value"
+              :week="week"
+              :selection-mode="selectionMode"
+              :disabled-date="disabledDate">
+            </date-table>
+            <year-table
+              ref="yearTable"
+              :year="year"
+              v-show="currentView === 'year'"
+              @pick="handleYearPick">
+            </year-table>
+            <month-table
+              :month="month"
+              v-show="currentView === 'month'"
+              @pick="handleMonthPick">
+            </month-table>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="el-picker-panel__footer"
+        v-show="footerVisible && currentView === 'date'">
+        <a
+          href="JavaScript:"
+          class="el-picker-panel__link-btn"
+          @click="changeToToday">{{ $t('datepicker.today') }}</a>
+        <button
+          class="el-picker-panel__btn"
+          @click="confirm">{{ $t('datepicker.confirm') }}</button>
+      </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script type="text/ecmascript-6">
   import { $t, formatDate, parseDate } from '../util';
 
   export default {
-    props: {
-      currentView: {
-        default: 'date'
-      },
-
-      date: {
-        default() {
-          return new Date();
-        }
-      },
-
-      disabledDate: {},
-
-      value: {},
-
-      showTime: Boolean,
-
-      selectionMode: {
-        type: String,
-        default: 'day'
-      },
-
-      shortcuts: {},
-
-      visible: Boolean
-    },
-
     watch: {
       value(newVal) {
         if (this.selectionMode === 'day' && newVal instanceof Date) {
@@ -144,7 +118,7 @@
       },
 
       timePickerVisible(val) {
-        if (val) this.$refs.timepicker.ajustScrollTop();
+        if (val) this.$nextTick(() => this.$refs.timepicker.ajustScrollTop());
       },
 
       selectionMode(newVal) {
@@ -163,11 +137,8 @@
       }
     },
 
-    ready() {
-      if (this.date && !this.year) {
-        this.year = this.date.getFullYear();
-        this.month = this.date.getMonth();
-      }
+    directives: {
+      Clickoutside: require('main/utils/clickoutside').default
     },
 
     methods: {
@@ -276,8 +247,10 @@
         this.resetDate();
       },
 
-      handleYearPick(year) {
+      handleYearPick(year, close = true) {
         this.year = year;
+        if (!close) return;
+
         this.date.setFullYear(year);
         if (this.selectionMode === 'year') {
           this.$emit('pick', year);
@@ -311,6 +284,10 @@
           this.year = this.date.getFullYear();
           this.month = this.date.getMonth();
         }
+      },
+
+      closeTimePicker() {
+        this.timePickerVisible = false;
       }
     },
 
@@ -321,14 +298,27 @@
       DateTable: require('../basic/date-table')
     },
 
-    compiled() {
+    mounted() {
       if (this.selectionMode === 'month') {
         this.currentView = 'month';
+      }
+
+      if (this.date && !this.year) {
+        this.year = this.date.getFullYear();
+        this.month = this.date.getMonth();
       }
     },
 
     data() {
       return {
+        date: new Date(),
+        value: '',
+        showTime: false,
+        selectionMode: 'day',
+        shortcuts: '',
+        visible: false,
+        currentView: 'date',
+        disabledDate: '',
         year: null,
         month: null,
         week: null,

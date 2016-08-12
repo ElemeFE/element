@@ -59,17 +59,17 @@
 
     methods: {
       nextTenYear() {
-        this.year += 10;
+        this.$emit('pick', this.year + 10, false);
       },
 
       prevTenYear() {
-        this.year -= 10;
+        this.$emit('pick', this.year - 10, false);
       },
 
       handleYearTableClick(event) {
         const target = event.target;
         if (target.tagName === 'A') {
-          const year = this.year = parseInt(target.textContent || target.innerText, 10);
+          const year = parseInt(target.textContent || target.innerText, 10);
           this.$emit('pick', year);
         }
       }

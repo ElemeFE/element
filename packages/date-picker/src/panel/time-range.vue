@@ -1,48 +1,49 @@
 <template>
-  <div
-    v-show="visible"
-    transition="md-fade-bottom"
-    class="el-time-range-picker el-picker-panel">
-    <div class="el-time-range-picker__content">
-      <div class="el-time-range-picker__cell">
-        <div class="el-time-range-picker__header">开始时间</div>
-        <div class="el-time-range-picker__body el-time-panel__content">
-          <time-spinner
-            v-ref:min-spinner
-            :show-seconds="showSeconds"
-            @change="handleMinChange"
-            @select-range="setMinSelectionRange"
-            :hours="minHours"
-            :minutes="minMinutes"
-            :seconds="minSeconds">
-          </time-spinner>
+  <transition name="md-fade-bottom">
+    <div
+      v-show="visible"
+      class="el-time-range-picker el-picker-panel">
+      <div class="el-time-range-picker__content">
+        <div class="el-time-range-picker__cell">
+          <div class="el-time-range-picker__header">开始时间</div>
+          <div class="el-time-range-picker__body el-time-panel__content">
+            <time-spinner
+              ref="minSpinner"
+              :show-seconds="showSeconds"
+              @change="handleMinChange"
+              @select-range="setMinSelectionRange"
+              :hours="minHours"
+              :minutes="minMinutes"
+              :seconds="minSeconds">
+            </time-spinner>
+          </div>
+        </div>
+        <div class="el-time-range-picker__cell">
+          <div class="el-time-range-picker__header">结束时间</div>
+          <div class="el-time-range-picker__body el-time-panel__content">
+            <time-spinner
+              ref="maxSpinner"
+              :show-seconds="showSeconds"
+              @change="handleMaxChange"
+              @select-range="setMaxSelectionRange"
+              :hours="maxHours"
+              :minutes="maxMinutes"
+              :seconds="maxSeconds">
+            </time-spinner>
+          </div>
         </div>
       </div>
-      <div class="el-time-range-picker__cell">
-        <div class="el-time-range-picker__header">结束时间</div>
-        <div class="el-time-range-picker__body el-time-panel__content">
-          <time-spinner
-            v-ref:max-spinner
-            :show-seconds="showSeconds"
-            @change="handleMaxChange"
-            @select-range="setMaxSelectionRange"
-            :hours="maxHours"
-            :minutes="maxMinutes"
-            :seconds="maxSeconds">
-          </time-spinner>
-        </div>
+      <div class="el-time-panel__footer">
+        <button
+          class="el-time-panel__btn cancel"
+          @click="handleCancel()">取消</button>
+        <button
+          class="el-time-panel__btn confirm"
+          @click="handleConfirm()"
+          :disabled="btnDisabled">确定</button>
       </div>
     </div>
-    <div class="el-time-panel__footer">
-      <button
-        class="el-time-panel__btn cancel"
-        @click="handleCancel()">取消</button>
-      <button
-        class="el-time-panel__btn confirm"
-        @click="handleConfirm()"
-        :disabled="btnDisabled">确定</button>
-    </div>
-  </div>
+  </transition>
 </template>
 
 <script type="text/ecmascript-6">
@@ -62,127 +63,36 @@
       TimeSpinner: require('../basic/time-spinner')
     },
 
-    props: {
-      minTime: {
-        default() {
-          return new Date();
-        }
-      },
-
-      maxTime: {
-        default() {
-          const date = new Date();
-          date.setHours(date.getHours() + 1);
-          return date;
-        }
-      },
-
-      format: {
-        default: 'HH:mm:ss'
-      },
-
-      visible: Boolean
-    },
-
     computed: {
       showSeconds() {
         return (this.format || '').indexOf('ss') !== -1;
-      },
-
-      minHours: {
-        get() {
-          if (this.minTime) {
-            return this.minTime.getHours();
-          }
-          return 0;
-        },
-        set(hours) {
-          if (this.minTime) {
-            this.minTime.setHours(hours);
-          }
-        }
-      },
-
-      minMinutes: {
-        get() {
-          if (this.minTime) {
-            return this.minTime.getMinutes();
-          }
-          return 0;
-        },
-        set(minutes) {
-          if (this.minTime) {
-            this.minTime.setMinutes(minutes);
-          }
-        }
-      },
-
-      minSeconds: {
-        get() {
-          if (this.minTime) {
-            return this.minTime.getSeconds();
-          }
-          return 0;
-        },
-        set(seconds) {
-          if (this.minTime) {
-            this.minTime.setSeconds(seconds);
-          }
-        }
-      },
-
-      maxHours: {
-        get() {
-          if (this.maxTime) {
-            return this.maxTime.getHours();
-          }
-          return 0;
-        },
-        set(hours) {
-          if (this.maxTime) {
-            this.maxTime.setHours(hours);
-          }
-        }
-      },
-
-      maxMinutes: {
-        get() {
-          if (this.maxTime) {
-            return this.maxTime.getMinutes();
-          }
-          return 0;
-        },
-        set(minutes) {
-          if (this.maxTime) {
-            this.maxTime.setMinutes(minutes);
-          }
-        }
-      },
-
-      maxSeconds: {
-        get() {
-          if (this.maxTime) {
-            return this.maxTime.getSeconds();
-          }
-          return 0;
-        },
-        set(seconds) {
-          if (this.maxTime) {
-            this.maxTime.setSeconds(seconds);
-          }
-        }
       }
     },
 
     data() {
+      const minTime = new Date();
+      const date = new Date();
+      date.setHours(date.getHours() + 1);
+      const maxTime = date;
+
       return {
-        btnDisabled: isDisabled(this.minTime, this.maxTime)
+        minTime: minTime,
+        maxTime: maxTime,
+        btnDisabled: isDisabled(minTime, maxTime),
+        maxHours: minTime.getHours(),
+        maxMinutes: minTime.getMinutes(),
+        maxSeconds: minTime.getSeconds(),
+        minHours: maxTime.getHours(),
+        minMinutes: maxTime.getMinutes(),
+        minSeconds: maxTime.getSeconds(),
+        format: 'HH:mm:ss',
+        visible: false
       };
     },
 
     methods: {
       handleCancel() {
-        this.$emit('pick', null);
+        this.$emit('pick');
       },
 
       handleChange() {
@@ -192,16 +102,35 @@
       },
 
       handleMaxChange(date) {
-        if (date.hours !== undefined) this.maxHours = date.hours;
-        if (date.minutes !== undefined) this.maxMinutes = date.minutes;
-        if (date.seconds !== undefined) this.maxSeconds = date.seconds;
+        if (date.hours !== undefined) {
+          this.maxTime.setHours(date.hours);
+          this.maxHours = this.maxTime.getHours();
+        }
+        if (date.minutes !== undefined) {
+          this.maxTime.setMinutes(date.minutes);
+          this.maxMinutes = this.maxTime.getMinutes();
+        }
+        if (date.seconds !== undefined) {
+          this.maxTime.setSeconds(date.seconds);
+          this.maxSeconds = this.maxTime.getSeconds();
+        }
         this.handleChange();
       },
 
       handleMinChange(date) {
-        if (date.hours !== undefined) this.minHours = date.hours;
-        if (date.minutes !== undefined) this.minMinutes = date.minutes;
-        if (date.seconds !== undefined) this.minSeconds = date.seconds;
+        if (date.hours !== undefined) {
+          this.minTime.setHours(date.hours);
+          this.minHours = this.minTime.getHours();
+        }
+        if (date.minutes !== undefined) {
+          this.minTime.setMinutes(date.minutes);
+          this.minMinutes = this.minTime.getMinutes();
+        }
+        if (date.seconds !== undefined) {
+          this.minTime.setSeconds(date.seconds);
+          this.minSeconds = this.minTime.getSeconds();
+        }
+
         this.handleChange();
       },
 
@@ -228,8 +157,8 @@
         this.$refs.maxSpinner.ajustScrollTop();
       },
 
-      focusEditor(...args) {
-        return this.$refs.minSpinner.focusEditor(...args);
+      focusEditor(val) {
+        return this.$refs.minSpinner.focusEditor(val);
       }
     },
 
