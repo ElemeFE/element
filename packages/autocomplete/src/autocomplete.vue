@@ -1,36 +1,54 @@
 <template>
-  <div class="el-autocomplete">
+  <div class="el-autocomplete" v-clickoutside="handleBlur">
     <el-input
       :value="value"
       :disabled="disabled"
       :placeholder="placeholder"
-      :name = 'name'
+      :name='name'
       @onchange="handleChange"
-      @onfocus="handleFocus()"
-      @onblur="handleBlur()"
-      @keydown.up="highlight(highlightedIndex - 1)"
-      @keydown.down="highlight(highlightedIndex + 1)"
-      @keydown.enter="select(highlightedIndex)"
+      @onfocus="handleFocus"
+      @keydown.up.native="highlight(highlightedIndex - 1)"
+      @keydown.down.native="highlight(highlightedIndex + 1)"
+      @keydown.enter.native="select(highlightedIndex)"
     ></el-input>
-    <ul
-      v-show="showSuggestions && !loading && suggestions.length > 0"
-      class="el-autocomplete__suggestions"
-      :class="[partial ? partial.name : '']"
-      transition="md-fade-bottom"
-      v-el:suggestions
-    >
-      <li :class="{'highlighted': highlightedIndex === $index}" @click="select($index)" v-for="item in suggestions">{{item.display}}</li>
-    </ul>
-    <div
-      v-show="showSuggestions && loading"
-      class="el-autocomplete__suggestions is-loading"
-    >
-      <i class="el-icon-loading"></i>
-    </div>
+    <transition name="md-fade-bottom">
+      <ul
+        v-show="suggestionVisible && !loading && suggestions.length > 0"
+        class="el-autocomplete__suggestions"
+        ref="suggestions"
+      >
+        <li
+          v-if="!customItem"
+          :class="{'highlighted': highlightedIndex === index}"
+          @click="select(index)"
+          v-for="(item, index) in suggestions">
+          {{item.display}}
+        </li>
+        <component
+          v-else
+          :is="customItem"
+          @click.native="select(index)"
+          v-for="(item, index) in suggestions"
+          :item="item"
+          :index="index">
+        </component>
+      </ul>
+    </transition>
+    <transition name="md-fade-bottom">
+      <div
+        v-show="suggestionVisible && loading"
+        class="el-autocomplete__suggestions is-loading"
+      >
+        <i class="el-icon-loading"></i>
+      </div>
+    </transition>
   </div>
 </template>
 <script>
   import ElInput from 'packages/input/index.js';
+  import Vue from 'vue';
+  import VueClickoutside from 'main/utils/clickoutside';
+  Vue.use(VueClickoutside);
 
   export default {
     name: 'ElAutocomplete',
@@ -42,61 +60,58 @@
       placeholder: String,
       disabled: Boolean,
       name: String,
-      suggestions: [Array, Object],
       value: String,
-      showOnUpDown: Boolean,
-      partial: Object
+      fetchSuggestions: Function,
+      triggerOnfocus: {
+        type: Boolean,
+        default: true
+      },
+      customItem: String
     },
     data() {
       return {
-        showSuggestions: false,
+        suggestions: [],
+        suggestionVisible: false,
         inputFocusing: false,
         loading: false,
         highlightedIndex: -1
       };
     },
-    created() {
-      if (this.partial) {
-        this.$options.template = this.$options.template.replace(/(item\sin\ssuggestions">)(?:.|\s)*?(<)/, '$1' + this.partial.template + '$2');
-      }
-    },
-    watch: {
-      'suggestions'(val) {
-        if (val && val.then) {
-          this.loading = true;
-          this.suggestions.then((res) => {
-            this.loading = false;
-            this.suggestions = res;
-          });
-        }
-      }
-    },
     methods: {
       handleChange(value) {
-        this.value = value;
-        this.showSuggestions = true;
+        this.$emit('input', value);
+        this.showSuggestions(value);
       },
       handleFocus() {
-        if (!this.showOnUpDown) {
-          this.showSuggestions = true;
+        if (this.triggerOnfocus) {
+          this.showSuggestions(this.value);
         }
       },
       handleBlur() {
-        this.showSuggestions = false;
+        this.suggestionVisible = false;
       },
       select(index) {
+        debugger;
         if (this.suggestions && this.suggestions[index]) {
-          this.value = this.suggestions[index].value;
+          this.$emit('input', this.suggestions[index].value);
           this.$nextTick(() => {
-            this.showSuggestions = false;
+            this.suggestionVisible = false;
           });
         }
+      },
+      showSuggestions(value) {
+        this.suggestionVisible = true;
+        this.loading = true;
+        this.fetchSuggestions(value, (suggestions) => {
+          this.loading = false;
+          this.suggestions = suggestions;
+        });
       },
       getSuggestionElement(index) {
         if (!this.suggestions || !this.suggestions[index]) {
           return null;
         } else {
-          return this.$els.suggestions.children[index];
+          return this.$refs.suggestions.children[index];
         }
       },
       highlight(index) {
@@ -107,7 +122,7 @@
         }
 
         var elSelect = this.getSuggestionElement(index);
-        var elSuggestions = this.$els.suggestions;
+        var elSuggestions = this.$refs.suggestions;
         var scrollTop = elSuggestions.scrollTop;
         var offsetTop = elSelect.offsetTop;
 
@@ -121,7 +136,7 @@
         this.highlightedIndex = index;
 
         if (this.showOnUpDown) {
-          this.showSuggestions = true;
+          this.suggestionVisible = true;
         }
       }
     }

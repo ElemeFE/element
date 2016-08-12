@@ -3,9 +3,7 @@
     .el-autocomplete {
       width: 180px;
     }
-    .el-autocomplete__suggestions.my-autocomplete-suggestions {
-      width: 300px;
-
+    .my-suggestions-item {
       & .remark {
         float: right;
         font-size: 13px;
@@ -14,8 +12,28 @@
   }
 </style>
 <script>
-  var $q = require('q');
-
+  var Vue = require('vue');
+  Vue.component('my-item', {
+    functional: true,
+    render: function (h, ctx) {
+      var item = ctx.props.item;
+      return h('li', {
+        attrs: { class: 'my-suggestions-item' }
+      }, [
+        h('span', { attrs: { class: 'label' } }, ['选项' + ctx.props.index]),
+        h('span', { attrs: { class: 'remark' } }, [item.display])
+      ]);
+    },
+    props: {
+      item: {
+        type: Object,
+        required: true
+      },
+      index: {
+        type: Number
+      }
+    }
+  });
   export default {
     data() {
       return {
@@ -24,10 +42,7 @@
         state2: '',
         state3: '',
         state4: '',
-        myPartial: {
-          name: 'my-autocomplete-suggestions',
-          template: '<span class="label">选项{{$index}}</span><span class="remark">{{item.display}}</span>'
-        }
+        timeout: null
       }
     },
     methods: {
@@ -52,32 +67,28 @@
 
         return result;
       },
-      querySearch(query, simulateQuery) {
+      querySearch(queryString, cb) {
         var states = this.states;
-        var results = query ? states.filter(this.createStateFilter(query)) : states,
-            deferred;
+        var results = queryString ? states.filter(this.createStateFilter(queryString)) : states;
         
-        if (simulateQuery) {
-          if (!query) { return []; }
-
-          deferred = $q.defer();
-
-          setTimeout(() => {
-            deferred.resolve(results);
-          }, Math.random() * 3000, false);
-
-          return deferred.promise;
-        } else {
-          return results;
-        }
+        cb(results);
       },
-      createStateFilter(query) {
+      querySearchAsync(queryString, cb) {
+        var states = this.states;
+        var results = queryString ? states.filter(this.createStateFilter(queryString)) : states;
+
+        clearTimeout(this.timeout);
+        this.timeout = setTimeout(() => {
+          cb(results);
+        }, 3000 * Math.random());
+      },
+      createStateFilter(queryString) {
         return (state) => {
-          return (state.value.indexOf(query.toLowerCase()) === 0);
+          return (state.value.indexOf(queryString.toLowerCase()) === 0);
         };
       }
     },
-    ready() {
+    mounted() {
       this.states = this.loadAll();
     }
   };
@@ -87,24 +98,25 @@
 
 <div class="demo-box">
   <el-autocomplete
-    :value.sync = "state1"
-    :suggestions = "querySearch(state1)"
-    placeholder = "请输入内容"
+    v-model="state1"
+    :fetch-suggestions="querySearch"
+    placeholder="请输入内容"
   ></el-autocomplete>
 </div>
 
 ```html
 <template>
   <el-autocomplete
-    :value.sync = "state1"
-    :suggestions = "querySearch(state1)"
-    placeholder = "请输入内容"
+    v-model="state1"
+    :fetch-suggestions="querySearch"
+    placeholder="请输入内容"
   ></el-autocomplete>
 </template>
 <script>
   export default {
     data() {
       return {
+        states: [],
         state1: ''
       }
     },
@@ -130,62 +142,71 @@
 
         return result;
       },
-      querySearch(query, simulateQuery) {
+      querySearch(queryString, callback) {
         var states = this.states;
-        var results = query ? states.filter(this.createStateFilter(query)) : states,
-            deferred;
+        var results = queryString ? states.filter(this.createStateFilter(queryString)) : states;
         
-        if (simulateQuery) {
-          if (!query) { return []; }
-
-          deferred = $q.defer();
-
-          setTimeout(() => {
-            deferred.resolve(results);
-          }, Math.random() * 3000, false);
-
-          return deferred.promise;
-        } else {
-          return results;
-        }
+        callback(results);
       },
-      createStateFilter(query) {
+      createStateFilter(queryString) {
         return (state) => {
-          return (state.value.indexOf(query.toLowerCase()) === 0);
+          return (state.value.indexOf(queryString.toLowerCase()) === 0);
         };
       }
     },
-    ready() {
+    mounted() {
       this.states = this.loadAll();
     }
   };
 </script>
 ```
 
-## 通过键盘控制下拉的显示
+## 自定义模板
 
 <div class="demo-box">
   <el-autocomplete
-    :value.sync = "state2"
-    :suggestions = "querySearch(state2)"
-    :show-on-up-down = "true"
-    placeholder = "请输入内容"
+    v-model="state2"
+    :fetch-suggestions="querySearch"
+    custom-item="my-item"
+    placeholder="请输入内容"
   ></el-autocomplete>
 </div>
 
 ```html
-<template>
-  <el-autocomplete
-    :value.sync = "state2"
-    :suggestions = "querySearch(state2)"
-    :show-on-up-down = "true"
-    placeholder = "请输入内容"
-  ></el-autocomplete>
-</template>
+<el-autocomplete
+  v-model="state2"
+  :fetch-suggestions="querySearch"
+  custom-item="my-item"
+  placeholder="请输入内容"
+></el-autocomplete>
+
 <script>
+  var Vue = require('vue');
+  Vue.component('my-item', {
+    functional: true,
+    render: function (h, ctx) {
+      var item = ctx.props.item;
+      return h('li', {
+        attrs: { class: 'my-suggestions-item' }
+      }, [
+        h('span', { attrs: { class: 'label' } }, ['选项' + ctx.props.index]),
+        h('span', { attrs: { class: 'remark' } }, [item.display])
+      ]);
+    },
+    props: {
+      item: {
+        type: Object,
+        required: true
+      },
+      index: {
+        type: Number
+      }
+    }
+  });
   export default {
     data() {
       return {
+        states: [],
         state2: ''
       }
     },
@@ -211,116 +232,19 @@
 
         return result;
       },
-      querySearch(query, simulateQuery) {
+      querySearch(queryString, cb) {
         var states = this.states;
-        var results = query ? states.filter(this.createStateFilter(query)) : states,
-            deferred;
+        var results = queryString ? states.filter(this.createStateFilter(queryString)) : states;
         
-        if (simulateQuery) {
-          if (!query) { return []; }
-
-          deferred = $q.defer();
-
-          setTimeout(() => {
-            deferred.resolve(results);
-          }, Math.random() * 3000, false);
-
-          return deferred.promise;
-        } else {
-          return results;
-        }
+        cb(results);
       },
-      createStateFilter(query) {
+      createStateFilter(queryString) {
         return (state) => {
-          return (state.value.indexOf(query.toLowerCase()) === 0);
+          return (state.value.indexOf(queryString.toLowerCase()) === 0);
         };
       }
     },
-    ready() {
-      this.states = this.loadAll();
-    }
-  };
-</script>
-```
-
-## 自定义模板
-
-<div class="demo-box">
-  <el-autocomplete
-    :value.sync = "state3"
-    :suggestions = "querySearch(state3)"
-    :partial = "myPartial"
-    placeholder = "请输入内容"
-  ></el-autocomplete>
-</div>
-
-```html
-<el-autocomplete
-  :value.sync = "state3"
-  :suggestions = "querySearch(state3)"
-  :partial = "myPartial"
-  placeholder = "请输入内容"
-></el-autocomplete>
-
-<script>
-  export default {
-    data() {
-      return {
-        state3: '',
-        myPartial: {
-          name: 'my-autocomplete-suggestions',
-          template: '<span class="label">选项{{$index}}</span><span class="remark">{{item.display}}</span>'
-        }
-      }
-    },
-    methods: {
-      loadAll() {
-        var allStates = 'Alabama, Alaska, Arizona, Arkansas, California, Colorado, Connecticut, Delaware,\
-                Florida, Georgia, Hawaii, Idaho, Illinois, Indiana, Iowa, Kansas, Kentucky, Louisiana,\
-                Maine, Maryland, Massachusetts, Michigan, Minnesota, Mississippi, Missouri, Montana,\
-                Nebraska, Nevada, New Hampshire, New Jersey, New Mexico, New York, North Carolina,\
-                North Dakota, Ohio, Oklahoma, Oregon, Pennsylvania, Rhode Island, South Carolina,\
-                South Dakota, Tennessee, Texas, Utah, Vermont, Virginia, Washington, West Virginia,\
-                Wisconsin, Wyoming';
-        var result = [];
-
-        allStates.split(/, +/g).forEach((state) => {
-          if (state) {
-            result.push({
-              value: state.toLowerCase(),
-              display: state
-            });
-          }
-        });
-
-        return result;
-      },
-      querySearch(query, simulateQuery) {
-        var states = this.states;
-        var results = query ? states.filter(this.createStateFilter(query)) : states,
-            deferred;
-        
-        if (simulateQuery) {
-          if (!query) { return []; }
-
-          deferred = $q.defer();
-
-          setTimeout(() => {
-            deferred.resolve(results);
-          }, Math.random() * 3000, false);
-
-          return deferred.promise;
-        } else {
-          return results;
-        }
-      },
-      createStateFilter(query) {
-        return (state) => {
-          return (state.value.indexOf(query.toLowerCase()) === 0);
-        };
-      }
-    },
-    ready() {
+    mounted() {
       this.states = this.loadAll();
     }
   };
@@ -331,27 +255,26 @@
 
 <div class="demo-box">
   <el-autocomplete
-    :value.sync = "state4"
-    :suggestions = "querySearch(state4, true)"
-    :search-from-server = "true"
+    v-model="state3"
     placeholder = "请输入内容"
+    :fetch-Suggestions="querySearchAsync"
   ></el-autocomplete>
 </div>
 
 ```html
-<el-autocomplete
-  :value.sync = "state4"
-  :suggestions = "querySearch(state4, true)"
-  :search-from-server = "true"
-  placeholder = "请输入内容"
-></el-autocomplete>
+<template>
+  <el-autocomplete
+    v-model="state3"
+    placeholder = "请输入内容"
+    :fetch-Suggestions="querySearchAsync"
+  ></el-autocomplete>
+</template>
 <script>
-  var $q = require('q');
-
   export default {
     data() {
       return {
-        state4: ''
+        state3: '',
+        states: []
       }
     },
     methods: {
@@ -376,24 +299,15 @@
 
         return result;
       },
-      querySearch(query, simulateQuery) {
+      querySearchAsync(query, callback) {
         var states = this.states;
-        var results = query ? states.filter(this.createStateFilter(query)) : states,
-            deferred;
-        
-        if (simulateQuery) {
-          if (!query) { return []; }
+        var results = query ? states.filter(this.createStateFilter(query)) : states;
 
-          deferred = $q.defer();
+        if (!query) { return []; }
 
-          setTimeout(() => {
-            deferred.resolve(results);
-          }, Math.random() * 3000, false);
-
-          return deferred.promise;
-        } else {
-          return results;
-        }
+        setTimeout(() => {
+          callback(results);
+        }, 3000 * Math.random());        
       },
       createStateFilter(query) {
         return (state) => {
@@ -413,7 +327,6 @@
 |-------------  |---------------- |---------------- |---------------------- |-------- |
 | placeholder   | 输入框占位文本   | string          |                       |         |
 | disabled      | 禁用            | boolean         | true, false           | false   |
-| suggestions   | 建议列表 | array,object  |  |  |
-| value         | 输入绑定值   | string  |                     |         |
+| value         | 必填值输入绑定值   | string  |                     |         |
 | showOnUpDown  | 是否通过键盘上下键控制建议列表 | boolean  |    |         |
-| partial       | 建议列表的自定义模板           | object  |                       |         |
+| fetch-suggestions | 返回输入建议的方法，组件内部通过调用该方法来获得输入建议的数据，在该方法中，仅当你的输入建议数据 resolve 时再通过调用 callback(data:[]) 来返回它  | Function(queryString, callback)  |        |         |
