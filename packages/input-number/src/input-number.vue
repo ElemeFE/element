@@ -6,8 +6,8 @@
     ]"
   >
     <el-input
-      :value="value"
-      @onchange="handleChnage"
+      v-model="currentValue"
+      @onchange="handleChange"
       :disabled="disabled"
       :size="size"
       :number="true"
@@ -18,17 +18,17 @@
     <span
       class="el-input-number__decrease el-icon-minus"
       :class="{'is-disabled': minDisabled}"
-      v-repeat-click="decrease()"
+      v-repeat-click="decrease"
       @mouseenter="activeInput(minDisabled)"
-      @mouseleave="unactiveInput(minDisabled)"
+      @mouseleave="inactiveInput(minDisabled)"
     >
     </span>
     <span
       class="el-input-number__increase el-icon-plus"
       :class="{'is-disabled': maxDisabled}"
-      v-repeat-click="increase()"
+      v-repeat-click="increase"
       @mouseenter="activeInput(maxDisabled)"
-      @mouseleave="unactiveInput(maxDisabled)"
+      @mouseleave="inactiveInput(maxDisabled)"
     >
     </span>
   </div>
@@ -41,8 +41,7 @@
     name: 'ElInputNumber',
     props: {
       value: {
-        type: Number,
-        required: true
+        type: Number
       },
       step: {
         type: Number,
@@ -61,13 +60,12 @@
     },
     directives: {
       repeatClick: {
-        bind() {
-          const el = this.el;
+        bind(el, binding, vnode) {
           let interval = null;
           let startTime;
 
           const handler = () => {
-            this.vm.$get(this.expression);
+            vnode.context[binding.expression]();
           };
 
           const clear = function() {
@@ -93,8 +91,22 @@
     },
     data() {
       return {
+        currentValue: null,
         inputActive: false
       };
+    },
+    watch: {
+      value: {
+        immediate: true,
+        handler(val) {
+          this.currentValue = val;
+        }
+      },
+      currentValue(val) {
+        if (!isNaN(parseInt(val, 10))) {
+          this.$emit('input', parseInt(val, 10));
+        }
+      }
     },
     computed: {
       minDisabled() {
@@ -107,14 +119,14 @@
     methods: {
       increase() {
         if (this.value + this.step > this.max || this.disabled) return;
-        this.value += this.step;
+        this.currentValue += this.step;
         if (this.maxDisabled) {
           this.inputActive = false;
         }
       },
       decrease() {
         if (this.value - this.step < this.min || this.disabled) return;
-        this.value -= this.step;
+        this.currentValue -= this.step;
         if (this.minDisabled) {
           this.inputActive = false;
         }
@@ -124,12 +136,12 @@
           this.inputActive = true;
         }
       },
-      unactiveInput(disabled) {
+      inactiveInput(disabled) {
         if (!this.disabled && !disabled) {
           this.inputActive = false;
         }
       },
-      handleChnage(value) {
+      handleChange(value) {
         this.$emit('onchange', value);
       }
     }

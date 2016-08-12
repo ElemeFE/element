@@ -1,11 +1,11 @@
 <template>
   <div class="el-slider">
     <el-input-number
-      :value.sync="value"
+      v-model="inputValue"
       v-if="showInput"
       class="el-slider__input"
-      @keyup="onInputChange()"
-      v-el:input
+      @keyup.native="onInputChange()"
+      ref="input"
       :step="step"
       :min="min"
       :max="max"
@@ -13,12 +13,14 @@
     </el-input-number>
     <div class="el-slider__runway"
       :class="{ 'show-input': showInput }"
-      @click="onSliderClick($event)" v-el:slider>
+      @click="onSliderClick" ref="slider">
       <div class="el-slider__bar" :style="{ width: currentPosition }"></div>
-      <div class="el-slider__button-wrapper" @mouseenter="hovering = true" @mouseleave="hovering = false" :style="{left: currentPosition}" v-el:button>
+      <div class="el-slider__button-wrapper" @mouseenter="hovering = true" @mouseleave="hovering = false" :style="{left: currentPosition}" ref="button">
         <div class="el-slider__button" :class="{ 'hover': hovering, 'dragging': dragging }"></div>
       </div>
-      <div class="el-slider__pop" v-show="showTip" transition="popper-fade" v-el:pop>{{ value }}</div>
+      <transition name="popper-fade">
+        <div class="el-slider__pop" v-show="showTip" transition="popper-fade" ref="pop">{{ value }}</div>
+      </transition>
       <div class="el-slider__stop" v-for="item in stops" :style="{ 'left': item + '%' }" v-if="showStops"></div>
     </div>
   </div>
@@ -69,6 +71,8 @@
 
     data() {
       return {
+        inputValue: null,
+        timeout: null,
         showTip: false,
         hovering: false,
         dragging: false,
@@ -80,18 +84,22 @@
     },
 
     watch: {
+      inputValue(val) {
+        this.$emit('input', val);
+      },
+
       showTip(val) {
         if (val) {
           this.$nextTick(() => {
             this.updatePopper();
           });
         } else {
-          setTimeout(() => {
+          this.timeout = setTimeout(() => {
             if (this.popper) {
               this.popper.destroy();
               this.popper = null;
             }
-          }, 150);
+          }, 300);
         }
       },
 
@@ -100,30 +108,37 @@
           this.updatePopper();
         });
         if (val < this.min) {
-          this.value = this.min;
+          this.$emit('input', this.min);
           return;
         }
         if (val > this.max) {
-          this.value = this.max;
+          this.$emit('input', this.max);
           return;
         }
+        this.inputValue = val;
         this.setPosition((val - this.min) * 100 / (this.max - this.min));
       }
     },
 
     methods: {
+      handlePopperStyle() {
+        let placementMap = { top: 'bottom', bottom: 'top' };
+        let placement = this.popper._popper.getAttribute('x-placement').split('-')[0];
+        let origin = placementMap[placement];
+        this.popper._popper.classList.add(placement);
+        this.popper._popper.classList.remove(placementMap[placement]);
+        this.popper._popper.style.transformOrigin = `center ${ origin }`;
+      },
+
       updatePopper() {
         if (this.popper) {
+          clearTimeout(this.timeout);
           this.popper.update();
+          this.handlePopperStyle();
         } else {
-          this.popper = new Popper(this.$els.button, this.$els.pop, { gpuAcceleration: false, placement: 'top' });
+          this.popper = new Popper(this.$refs.button, this.$refs.pop, { gpuAcceleration: false, placement: 'top' });
           this.popper.onCreate(() => {
-            let placementMap = { top: 'bottom', bottom: 'top' };
-            let placement = this.popper._popper.getAttribute('x-placement').split('-')[0];
-            let origin = placementMap[placement];
-            this.popper._popper.classList.add(placement);
-            this.popper._popper.classList.remove(placementMap[placement]);
-            this.popper._popper.style.transformOrigin = `center ${ origin }`;
+            this.handlePopperStyle();
           });
           this.updatePopper();
         }
@@ -133,7 +148,7 @@
         if (newPos >= 0 && (newPos <= 100)) {
           var lengthPerStep = 100 / ((this.max - this.min) / this.step);
           var steps = Math.round(newPos / lengthPerStep);
-          this.value = Math.round(steps * lengthPerStep * (this.max - this.min) * 0.01 + this.min);
+          this.$emit('input', Math.round(steps * lengthPerStep * (this.max - this.min) * 0.01 + this.min));
           this.currentPosition = (this.value - this.min) / (this.max - this.min) * 100 + '%';
           if (!this.dragging) {
             if (this.value !== this.oldValue) {
@@ -146,8 +161,7 @@
 
       onSliderClick(event) {
         var currentX = event.clientX;
-        var sliderOffsetLeft;
-        getStyle(this.$el.parentNode, 'position') === 'static' ? sliderOffsetLeft = this.$els.slider.offsetLeft : sliderOffsetLeft = this.$el.parentNode.offsetLeft + this.$els.slider.offsetLeft;
+        var sliderOffsetLeft = getStyle(this.$el.parentNode, 'position') === 'static' ? this.$refs.slider.offsetLeft : this.$el.parentNode.offsetLeft + this.$refs.slider.offsetLeft;
         var newPos = (currentX - sliderOffsetLeft) / this.$sliderWidth * 100;
         this.setPosition(newPos);
       },
@@ -164,7 +178,7 @@
 
     computed: {
       $sliderWidth() {
-        return parseInt(getStyle(this.$els.slider, 'width'), 10);
+        return parseInt(getStyle(this.$refs.slider, 'width'), 10);
       },
 
       showTip() {
@@ -183,7 +197,7 @@
       }
     },
 
-    compiled() {
+    mounted() {
       var startX = 0;
       var currentX = 0;
       var startPos = 0;
@@ -212,7 +226,7 @@
         }
       };
 
-      this.$els.button.addEventListener('mousedown', function(event) {
+      this.$refs.button.addEventListener('mousedown', function(event) {
         onDragStart(event);
         window.addEventListener('mousemove', onDragging);
         window.addEventListener('mouseup', onDragEnd);
@@ -220,9 +234,10 @@
     },
 
     created() {
-      if (this.value < this.min || this.value > this.max) {
-        this.value = this.min;
+      if (typeof this.value !== 'number' || this.value < this.min || this.value > this.max) {
+        this.$emit('input', this.min);
       }
+      this.inputValue = this.inputValue || this.value;
     },
 
     beforeDestroy() {

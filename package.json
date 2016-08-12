@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "dev": "node bin/build-entry.js && cooking watch -c scripts/cooking.demo.js",
-    "dist": "rm -rf lib && cooking build -p && cooking build -c scripts/cooking.component.js -p",
+    "dist": "rm -rf lib && cooking build -c scripts/cooking.conf.js -p && cooking build -c scripts/cooking.component.js -p",
     "deploy": "cooking build -c scripts/cooking.demo.js -p",
     "gh-docs": "cooking build -c scripts/cooking.demo.js -p && gh-pages -d examples/element-ui --remote origin",
     "prepublish": "make dist"
@@ -46,8 +46,9 @@
     "uppercamelcase": "^1.1.0",
     "vue": "^2.0.0-beta.7",
     "vue-loader": "^9.3.2",
+    "vue": "^2.0.0-beta.8",
     "vue-markdown-loader": "^0.4.0",
-    "vue-popup": "^0.1.8",
+    "vue-popup": "^0.2.1",
     "vue-router": "^2.0.0-beta.2"
   }
 }

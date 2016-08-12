@@ -21,45 +21,45 @@
 <p>当我们需要标准的数字值时可以用到这个组件，它为你提供了数值输入提供了范围控制和递增递减的步数控制。</p>
 
 <div class="demo-box demo-input-number">
-  <el-input-number :value.sync="num1"></el-input-number>
+  <el-input-number v-model="num1"></el-input-number>
 </div>
 
 ```html
-<el-input-number :value.sync="num1"></el-input-number>
+<el-input-number v-model="num1"></el-input-number>
 ```
 
 ## 禁用状态
 
 <div class="demo-box demo-input-number">
-  <el-input-number :value.sync="num1" :disabled="true"></el-input-number>
+  <el-input-number v-model="num1" :disabled="true"></el-input-number>
 </div>
 
 ```html
-<el-input-number :value.sync="num1" :disabled="true"></el-input-number>
+<el-input-number v-model="num1" :disabled="true"></el-input-number>
 ```
 
 ## 步数
 
 <div class="demo-box demo-input-number">
-  <el-input-number :value.sync="num2" :step="2"></el-input-number>
+  <el-input-number v-model="num2" :step="2"></el-input-number>
 </div>
 
 ```html
-<el-input-number :value.sync="num2" :step="2"></el-input-number>
+<el-input-number v-model="num2" :step="2"></el-input-number>
 ```
 
 ## 尺寸
 
 <div class="demo-box demo-input-number">
-  <el-input-number :value.sync="num1" size="large"></el-input-number>
-  <el-input-number :value.sync="num1"></el-input-number>
-  <el-input-number :value.sync="num1" size="small"></el-input-number>
+  <el-input-number v-model="num1" size="large"></el-input-number>
+  <el-input-number v-model="num1"></el-input-number>
+  <el-input-number v-model="num1" size="small"></el-input-number>
 </div>
 
 ```html
-<el-input-number :value.sync="num1" size="large"></el-input-number>
-<el-input-number :value.sync="num1"></el-input-number>
-<el-input-number :value.sync="num1" size="small"></el-input-number>
+<el-input-number v-model="num1" size="large"></el-input-number>
+<el-input-number v-model="num1"></el-input-number>
+<el-input-number v-model="num1" size="small"></el-input-number>
 ```
 
 ## API

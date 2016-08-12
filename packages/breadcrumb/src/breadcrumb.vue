@@ -12,16 +12,6 @@
         type: String,
         default: '/'
       }
-    },
-    data() {
-      return {
-
-      };
-    },
-    methods: {
-
-    },
-    ready() {
     }
   };
 </script>

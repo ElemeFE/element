@@ -1,14 +1,14 @@
 import Vue from 'vue';
-var NotificationConstructor = Vue.extend(require('./main.vue'));
+let NotificationConstructor = Vue.extend(require('./main.vue'));
 
-var instance;
-var instances = [];
-var seed = 1;
+let instance;
+let instances = [];
+let seed = 1;
 
 var Notification = function(options) {
   options = options || {};
-  var userOnClose = options.onClose;
-  var id = 'notification_' + seed++;
+  let userOnClose = options.onClose;
+  let id = 'notification_' + seed++;
 
   options.onClose = function() {
     Notification.close(id, userOnClose);
@@ -19,11 +19,12 @@ var Notification = function(options) {
   });
   instance.id = id;
   instance.vm = instance.$mount();
-  instance.vm.$appendTo('body');
+  document.body.appendChild(instance.vm.$el);
+  instance.vm.visible = true;
   instance.dom = instance.vm.$el;
 
-  var topDist = 0;
-  for (var i = 0, len = instances.length; i < len; i++) {
+  let topDist = 0;
+  for (let i = 0, len = instances.length; i < len; i++) {
     topDist += instances[i].$el.offsetHeight + 16;
   }
   topDist += 16;
@@ -32,13 +33,15 @@ var Notification = function(options) {
 };
 
 Notification.close = function(id, userOnClose) {
+  let index;
+  let removedHeight;
   for (var i = 0, len = instances.length; i < len; i++) {
     if (id === instances[i].id) {
       if (typeof userOnClose === 'function') {
         userOnClose(instances[i]);
       }
-      var index = i;
-      var removedHeight = instances[i].dom.offsetHeight;
+      index = i;
+      removedHeight = instances[i].dom.offsetHeight;
       instances.splice(i, 1);
       break;
     }
@@ -46,7 +49,7 @@ Notification.close = function(id, userOnClose) {
 
   if (len > 1) {
     for (i = index; i < len - 1 ; i++) {
-      instances[i].dom.style.top = parseInt(instances[i].dom.style.top, 10) - removedHeight - 10 + 'px';
+      instances[i].dom.style.top = parseInt(instances[i].dom.style.top, 10) - removedHeight - 16 + 'px';
     }
   }
 };

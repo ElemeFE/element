@@ -88,7 +88,7 @@ var showNextMsg = function() {
     initInstance();
   }
 
-  if (!instance.visible || instance.closeTimer) {
+  if (!instance.value || instance.closeTimer) {
     if (msgQueue.length > 0) {
       currentMsg = msgQueue.shift();
 
@@ -98,10 +98,15 @@ var showNextMsg = function() {
           instance[prop] = options[prop];
         }
       }
-      instance.$appendTo(document.body);
+      ['modal', 'showClose', 'closeOnClickModal', 'closeOnPressEscape'].forEach(prop => {
+        if (instance[prop] === undefined) {
+          instance[prop] = true;
+        }
+      });
+      document.body.appendChild(instance.$el);
 
       Vue.nextTick(() => {
-        instance.visible = true;
+        instance.value = true;
       });
     }
   }
@@ -188,7 +193,7 @@ MessageBox.prompt = function(message, title, options) {
 };
 
 MessageBox.close = function() {
-  instance.visible = false;
+  instance.value = false;
   msgQueue = [];
   currentMsg = null;
 };

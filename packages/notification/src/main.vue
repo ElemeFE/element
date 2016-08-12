@@ -1,12 +1,14 @@
 <template>
-  <div class="el-notification" transition="el-notification-fade" :style="{ top: top ? top + 'px' : 'auto' }" @mouseenter="clearTimer()" @mouseleave="startTimer()">
-    <i class="el-notification__icon el-icon-{{typeClass}}" v-if="type"></i>
-    <div class="el-notification__group" :style="{ 'margin-left': type ? '55px' : '0' }">
-      <span>{{ title }}</span>
-      <p>{{ message }}</p>
-      <div class="el-notification__closeBtn el-icon-close" @click="handleClose()"></div>
+  <transition name="el-notification-fade">
+    <div class="el-notification" v-show="visible" :style="{ top: top ? top + 'px' : 'auto' }" @mouseenter="clearTimer()" @mouseleave="startTimer()">
+      <i class="el-notification__icon" :class="[ typeClass ]" v-if="type"></i>
+      <div class="el-notification__group" :style="{ 'margin-left': type ? '55px' : '0' }">
+        <span>{{ title }}</span>
+        <p>{{ message }}</p>
+        <div class="el-notification__closeBtn el-icon-close" @click="handleClose()"></div>
+      </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script type="text/babel">
@@ -18,10 +20,9 @@
   };
 
   export default {
-    name: 'ElNotification',
-
     data() {
       return {
+        visible: false,
         title: '',
         message: '',
         duration: 4500,
@@ -36,14 +37,18 @@
 
     computed: {
       typeClass() {
-        return this.type ? typeMap[this.type] : '';
+        return this.type ? `el-icon-${ typeMap[this.type] }` : '';
       }
     },
 
     watch: {
       closed(newVal) {
         if (newVal) {
-          this.$destroy(true);
+          this.visible = false;
+          this.$el.addEventListener('transitionend', () => {
+            this.$destroy(true);
+            this.$el.parentNode.removeChild(this.$el);
+          });
         }
       }
     },
@@ -71,7 +76,7 @@
       }
     },
 
-    ready() {
+    mounted() {
       if (this.duration > 0) {
         this.timer = setTimeout(() => {
           if (!this.closed) {

@@ -106,8 +106,11 @@
     },
 
     watch: {
-      'value'(val) {
-        this.currentValue = val;
+      'value': {
+        immediate: true,
+        handler(val) {
+          this.currentValue = val;
+        }
       },
 
       'currentValue'(val) {

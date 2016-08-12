@@ -1,13 +1,14 @@
 <template>
-  <div
-    class="el-popover"
-    v-el:popper
-    v-show="visible"
-    :transition="transition"
-    :style="{ width: width + 'px' }">
-    <div class="el-popover__title" v-if="title" v-text="title"></div>
-    <slot>{{ content }}</slot>
-  </div>
+  <transition :name="transition">
+    <div
+      class="el-popover"
+      ref="popper"
+      v-show="showPopper"
+      :style="{ width: width + 'px' }">
+      <div class="el-popover__title" v-if="title" v-text="title"></div>
+      <slot>{{ content }}</slot>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -16,10 +17,8 @@ import Vue from 'vue';
 import { on, off } from 'wind-dom/src/event';
 
 Vue.directive('popover', {
-  update() {
-    this.vm.$nextTick(() => {
-      this.vm.$refs[this.arg].reference = this.el;
-    });
+  bind(el, binding, vnode) {
+    vnode.context.$refs[binding.arg].$refs.reference = el;
   }
 });
 
@@ -36,9 +35,7 @@ export default {
     },
     title: String,
     content: String,
-    reference: {
-      default: 'body'
-    },
+    reference: {},
     width: {},
     visibleArrow: {
       default: true
@@ -56,61 +53,64 @@ export default {
     }
   },
 
-  ready() {
+  mounted() {
     let _timer;
+    const reference = this.reference || this.$refs.reference;
 
     this.$nextTick(() => {
       if (this.trigger === 'click') {
-        on(this.reference, 'click', () => { this.visible = !this.visible; });
+        on(reference, 'click', () => { this.showPopper = !this.showPopper; });
         on(document, 'click', (e) => {
           if (!this.$el ||
-              !this.reference ||
+              !reference ||
               this.$el.contains(e.target) ||
-              this.reference.contains(e.target)) return;
-          this.visible = false;
+              reference.contains(e.target)) return;
+          this.showPopper = false;
         });
       } else if (this.trigger === 'hover') {
-        on(this.reference, 'mouseenter', () => {
-          this.visible = true;
+        on(reference, 'mouseenter', () => {
+          this.showPopper = true;
           clearTimeout(_timer);
         });
-        on(this.reference, 'mouseleave', () => {
+        on(reference, 'mouseleave', () => {
           _timer = setTimeout(() => {
-            this.visible = false;
+            this.showPopper = false;
           }, 200);
         });
       } else {
-        if (this.reference.hasChildNodes()) {
-          const children = this.reference.childNodes;
+        if ([].slice.call(reference.children).length) {
+          const children = reference.childNodes;
 
           for (let i = 0; i < children.length; i++) {
             if (children[i].nodeName === 'INPUT') {
-              on(children[i], 'focus', () => { this.visible = true; });
-              on(children[i], 'blur', () => { this.visible = false; });
+              on(children[i], 'focus', () => { this.showPopper = true; });
+              on(children[i], 'blur', () => { this.showPopper = false; });
               break;
             }
           }
         } else if (
-            this.reference.nodeName === 'INPUT' ||
-            this.reference.nodeName === 'TEXTAREA'
+            reference.nodeName === 'INPUT' ||
+            reference.nodeName === 'TEXTAREA'
           ) {
-          on(this.reference, 'focus', () => { this.visible = true; });
-          on(this.reference, 'blur', () => { this.visible = false; });
+          on(reference, 'focus', () => { this.showPopper = true; });
+          on(reference, 'blur', () => { this.showPopper = false; });
         } else {
-          on(this.reference, 'mousedown', () => { this.visible = true; });
-          on(this.reference, 'mouseup', () => { this.visible = false; });
+          on(reference, 'mousedown', () => { this.showPopper = true; });
+          on(reference, 'mouseup', () => { this.showPopper = false; });
         }
       }
     });
   },
 
   destroyed() {
-    off(this.reference, 'mouseup');
-    off(this.reference, 'mousedown');
-    off(this.reference, 'focus');
-    off(this.reference, 'blur');
-    off(this.reference, 'mouseleave');
-    off(this.reference, 'mouseenter');
+    const reference = this.reference || this.$refs.reference;
+
+    off(reference, 'mouseup');
+    off(reference, 'mousedown');
+    off(reference, 'focus');
+    off(reference, 'blur');
+    off(reference, 'mouseleave');
+    off(reference, 'mouseenter');
   }
 };
 </script>
