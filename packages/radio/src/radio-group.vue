@@ -4,18 +4,17 @@
   export default {
     name: 'ElRadioGroup',
 
+    componentName: 'radio-group',
+
     mixins: [emitter],
 
     props: {
-      value: {
-        default: '',
-        twoWay: true,
-        required: true
-      },
+      value: [String, Number],
       size: String
     },
     watch: {
       value(value) {
+        this.$emit('change', value);
         this.dispatch('form-item', 'el.form.change', [this.value]);
       }
     }

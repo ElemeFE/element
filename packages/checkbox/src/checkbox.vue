@@ -3,7 +3,7 @@
     <span class="el-checkbox__input">
       <span class="el-checkbox__inner"
         :class="{
-          'is-disabled': isLimit || disabled,
+          'is-disabled': disabled,
           'is-checked': checked,
           'is-indeterminate': indeterminate,
           'is-focus': focus
@@ -18,7 +18,7 @@
         type="checkbox"
         @focus="focus = true"
         @blur="focus = false"
-        :disabled="isLimit || disabled"
+        :disabled="disabled"
         ref="checkbox">
       <input
         v-else
@@ -28,7 +28,7 @@
         @focus="focus = true"
         @blur="focus = false"
         type="checkbox"
-        :disabled="isLimit || disabled">
+        :disabled="disabled">
     </span>
     <span class="el-checkbox__label">
       <slot></slot>
@@ -38,20 +38,7 @@
 </template>
 <script>
   import Emitter from 'main/mixins/emitter';
-  /**
-   * checkbox
-   * @module components/basic/checkbox
-   * @desc 多选按钮
-   * @param {string[]} value - 绑定值
-   * @param {string} value - 真实值
-   * @param {string} [label] - 显示值
-   * @param {boolean} [disabled=false] - 是否禁用
-   *
-   * @example
-   * <el-checkbox :value.sync="data" value="Jack"></el-checkbox>
-   * <el-checkbox :value.sync="data" value="John"></el-checkbox>
-   * <el-checkbox :value.sync="data" value="Mike" disabled></el-checkbox>
-   */
+
   export default {
     name: 'ElCheckbox',
 
@@ -64,12 +51,8 @@
       },
       indeterminate: Boolean,
       disabled: Boolean,
-      trueLabel: {
-        default: ''
-      },
-      falseLabel: {
-        default: ''
-      }
+      trueLabel: [String, Number],
+      falseLabel: [String, Number]
     },
 
     computed: {
@@ -92,7 +75,7 @@
           return this._value;
         } else if (type === '[object Array]') {
           return this._value.indexOf(this.label) > -1;
-        } else if (type === '[object String]') {
+        } else if (type === '[object String]' || type === '[object Number]') {
           return this._value === this.trueLabel;
         }
       }
@@ -100,26 +83,14 @@
 
     data() {
       return {
-        isLimit: false,
         focus: false
       };
     },
 
     watch: {
       checked(sure) {
-        this.$emit('on-change', sure);
-        this.dispatch('element.checkbox', sure);
+        this.$emit('change', sure);
       }
-    },
-
-    created() {
-      this.$on('element.checkbox.disabled', () => {
-        if (this.checked) return;
-        this.isLimit = true;
-      });
-      this.$on('element.checkbox.enabled', () => {
-        this.isLimit = false;
-      });
     }
   };
 </script>

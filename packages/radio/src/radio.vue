@@ -19,7 +19,7 @@
     </span>
     <span class="el-radio__label">
       <slot></slot>
-      <template v-if="!_slotContents">{{label}}</template>
+      <template v-if="!$slots.default">{{label}}</template>
     </span>
   </label>
 </template>
@@ -28,9 +28,7 @@
     name: 'ElRadio',
 
     props: {
-      value: {
-        twoWay: true
-      },
+      value: [String, Number],
       label: {
         type: [String, Number],
         required: true
@@ -43,11 +41,6 @@
         focus: false
       };
     },
-    watch: {
-      value(value) {
-        this.$emit('onchange', value);
-      }
-    },
     computed: {
       _value: {
         get() {
@@ -55,9 +48,9 @@
         },
         set(newValue) {
           if (this.value !== undefined) {
-            this.value = newValue;
+            this.$emit('input', newValue);
           } else {
-            this.$parent.value = newValue;
+            this.$parent.$emit('input', newValue);
           }
         }
       }

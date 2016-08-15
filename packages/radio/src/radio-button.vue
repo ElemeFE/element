@@ -17,7 +17,7 @@
           return this.$parent.value;
         },
         set(newValue) {
-          this.$parent.value = newValue;
+          this.$parent.$emit('input', newValue);
         }
       }
     },
@@ -44,7 +44,7 @@
       :disabled="disabled">
     <span class="el-radio-button__inner">
       <slot></slot>
-      <template v-if="!_slotContents">{{label}}</template>
+      <template v-if="!$slots.default">{{label}}</template>
     </span>
   </label>
 </template>

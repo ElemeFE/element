@@ -50,8 +50,8 @@
 
 
 <el-pagination
-  @size-change="handleSizeChange"
-  @current-change="handleCurrentChange"
+  @sizechange="handleSizeChange"
+  @currentchange="handleCurrentChange"
   layout="sizes, prev, pager, next, jumper, total"
   :total="1000">
 </el-pagination>
@@ -85,6 +85,10 @@
 | current-page | 当前页数 | Number | | 0|
 | layout | 组件布局，子组件名用逗号分隔。| String | `prev`, `pager`, `next`, `jumper`, `slot`, `->`, `total` | 'prev, pager, next, jumper, slot, ->, total'  |
 | page-sizes | 切换每页显示个数的子组件值 | Number[] | |  [10, 20, 30, 40, 50, 100] |
-| size-change | pageSize 改变时会触发的事件 | Function | | |
-| current-change | currentPage 改变时会触发的事件 | Function | | |
+
+## 事件
+| 事件名称 | 说明 | 回调函数 |
+|---------|--------|---------|
+| sizechange | pageSize 改变时会触发 | `size` |
+| currentchange | currentPage 改变时会触发 | `currentPage` |
 

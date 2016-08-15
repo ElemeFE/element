@@ -71,7 +71,7 @@
         }
 
         if (newPage !== currentPage) {
-          this.$emit('currentChange', newPage);
+          this.$emit('currentchange', newPage);
         }
       }
     },
