@@ -755,7 +755,11 @@
 | remote | 是否为远程搜索 | boolean | | false |
 | remote-method | 远程搜索方法，当搜索关键字变化时会调用该方法，参数为目前的搜索关键字 | function | | |
 | loading | 是否正在从远程获取数据 | boolean | | false |
-| change | value 发生变化时的回调函数，参数为 value 的值 | function | | |
+
+### el-select 事件
+| 事件名称 | 说明 | 回调参数 |
+|---------|---------|---------|
+| change | value 发生变化| `value` |
 
 ### el-option-group
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
