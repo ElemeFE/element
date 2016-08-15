@@ -148,5 +148,8 @@
   ],
   "spinner": [
     "./packages/spinner/index.js"
+  ],
+  "message": [
+    "./packages/message/index.js"
   ]
 }
