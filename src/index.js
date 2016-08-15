@@ -47,6 +47,7 @@ import Col from '../packages/col/index.js';
 import Upload from '../packages/upload/index.js';
 import Progress from '../packages/progress/index.js';
 import Spinner from '../packages/spinner/index.js';
+import Message from '../packages/message/index.js';
 
 const install = function(Vue) {
   if (install.installed) return;
@@ -97,6 +98,7 @@ const install = function(Vue) {
   Vue.component(Upload.name, Upload);
   Vue.component(Progress.name, Progress);
   Vue.component(Spinner.name, Spinner);
+  Vue.component(Message.name, Message);
 
   Vue.use(Loading);
 
@@ -105,6 +107,7 @@ const install = function(Vue) {
   Vue.prototype.$confirm = MessageBox.confirm;
   Vue.prototype.$prompt = MessageBox.prompt;
   Vue.prototype.$notify = Notification;
+  Vue.prototype.$message = Message;
 };
 
 // auto install
@@ -162,5 +165,6 @@ module.exports = {
   Col,
   Upload,
   Progress,
-  Spinner
+  Spinner,
+  Message
 };

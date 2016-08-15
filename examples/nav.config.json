@@ -82,6 +82,12 @@
         "description": "悬浮出现在页面右上角, 显示全局的通知提醒消息"
       },
       {
+        "path": "/message",
+        "name": "消息提示 (message)",
+        "title": "message 消息提示",
+        "description": "对用户的操作进行反馈提示,包含成功、反馈或错误等消息提示"
+      },
+      {
         "path": "/loading",
         "name": "加载 (loading)",
         "title": "loading 加载",
