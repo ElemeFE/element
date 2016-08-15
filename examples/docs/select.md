@@ -4,36 +4,36 @@
       return {
         options: [{
           value: '选项1',
-          label: '标签1'
+          label: '黄金糕'
         }, {
           value: '选项2',
-          label: '标签2'
+          label: '双皮奶'
         }, {
           value: '选项3',
-          label: '标签3'
+          label: '蚵仔煎'
         }, {
           value: '选项4',
-          label: '标签4'
+          label: '龙须面'
         }, {
           value: '选项5',
-          label: '标签5'
+          label: '北京烤鸭'
         }],
         options2: [{
           value: '选项1',
-          label: '标签1'
+          label: '黄金糕'
         }, {
           value: '选项2',
-          label: '标签2',
+          label: '双皮奶',
           disabled: true
         }, {
           value: '选项3',
-          label: '标签3'
+          label: '蚵仔煎'
         }, {
           value: '选项4',
-          label: '标签4'
+          label: '龙须面'
         }, {
           value: '选项5',
-          label: '标签5'
+          label: '北京烤鸭'
         }],
         options3: [{
           label: '分组1',
@@ -59,39 +59,58 @@
         }],
         options4: [{
           value: '选项1',
-          label: '标签1'
+          label: '黄金糕'
         }, {
           value: '选项2',
-          label: '标签2'
+          label: '双皮奶'
         }, {
           value: '选项3',
-          label: '标签3'
+          label: '蚵仔煎'
         }, {
           value: '选项4',
-          label: '标签4'
+          label: '龙须面'
         }, {
           value: '选项5',
-          label: '标签5'
+          label: '北京烤鸭'
         }, {
           value: '选项6',
-          label: '标签6'
+          label: '炸酱面'
         }, {
           value: '选项7',
-          label: '标签7'
+          label: '羊蝎子'
         }, {
           value: '选项8',
-          label: '标签8'
+          label: '肉夹馍'
         }, {
           value: '选项9',
-          label: '标签9'
+          label: '回锅肉'
         }, {
           value: '选项10',
-          label: '标签10'
+          label: '小笼包'
         }, {
           value: '选项11',
-          label: '标签11'
+          label: '红烧肉'
         }],
         options5: [],
+        cities: [{
+          value: 'Beijing',
+          label: '北京'
+        }, {
+          value: 'Shanghai',
+          label: '上海'
+        }, {
+          value: 'Nanjing',
+          label: '南京'
+        }, {
+          value: 'Chengdu',
+          label: '成都'
+        }, {
+          value: 'Shenzhen',
+          label: '深圳'
+        }, {
+          value: 'Guangzhou',
+          label: '广州'
+        }],
         value: '',
         value2: '',
         value3: '',
@@ -392,10 +411,11 @@
 
 <el-select v-model="value6">
   <el-option
-    v-for="item in options"
+    v-for="item in cities"
     :label="item.label"
     :value="item.value">
-    <span>label: {{ item.label }}, value: {{ item.value }}</span>
+    <span style="float: left">{{ item.label }}</span>
+    <span style="float: right; color: #8492a6; font-size: 13px">{{ item.value }}</span>
   </el-option>
 </el-select>
 
@@ -403,10 +423,11 @@
 <template>
   <el-select v-model="value6">
     <el-option
-      v-for="item in options"
+      v-for="item in cities"
       :label="item.label"
       :value="item.value">
-      <span>label: {{ item.label }}, value: {{ item.value }}</span>
+      <span style="float: left">{{ item.label }}</span>
+      <span style="float: right; color: #8492a6; font-size: 13px">{{ item.value }}</span>
     </el-option>
   </el-select>
 </template>
@@ -415,21 +436,24 @@
   export default {
     data() {
       return {
-        options: [{
-          value: '选项1',
-          label: '标签1'
+        cities: [{
+          value: 'Beijing',
+          label: '北京'
         }, {
-          value: '选项2',
-          label: '标签2'
+          value: 'Shanghai',
+          label: '上海'
         }, {
-          value: '选项3',
-          label: '标签3'
+          value: 'Nanjing',
+          label: '南京'
         }, {
-          value: '选项4',
-          label: '标签4'
+          value: 'Chengdu',
+          label: '成都'
         }, {
-          value: '选项5',
-          label: '标签5'
+          value: 'Shenzhen',
+          label: '深圳'
+        }, {
+          value: 'Guangzhou',
+          label: '广州'
         }],
         value6: ''
       }

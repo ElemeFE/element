@@ -25,9 +25,9 @@ var Message = function(options) {
 
   let topDist = 0;
   for (let i = 0, len = instances.length; i < len; i++) {
-    topDist += instances[i].$el.offsetHeight + 16;
+    topDist += instances[i].$el.offsetHeight + 20;
   }
-  topDist += 16;
+  topDist += 20;
   instance.top = topDist;
   instances.push(instance);
 };
@@ -49,7 +49,7 @@ Message.close = function(id, userOnClose) {
 
   if (len > 1) {
     for (i = index; i < len - 1 ; i++) {
-      instances[i].dom.style.top = parseInt(instances[i].dom.style.top, 10) - removedHeight - 16 + 'px';
+      instances[i].dom.style.top = parseInt(instances[i].dom.style.top, 10) - removedHeight - 20 + 'px';
     }
   }
 };

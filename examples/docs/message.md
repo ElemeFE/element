@@ -2,69 +2,68 @@
   module.exports = {
     methods: {
       open() {
-        this.$notify({
-          title: '标题名称',
-          message: '这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案'
+        this.$message({
+          message: '这是一条消息提示'
         });
       },
       
       open2() {
-        this.$notify({
-          title: '成功',
-          message: '这是一条成功的提示消息',
+        this.$message({
+          message: '恭喜你，这是一条成功消息',
           type: 'success'
         });
       },
       
       open3() {
-        this.$notify({
-          title: '警告',
-          message: '这是一条警告的提示消息',
+        this.$message({
+          message: '警告哦，这是一条警告消息',
           type: 'warning'
         });
       },
             
       open4() {
-        this.$notify({
-          title: '消息',
-          message: '这是一条消息的提示消息',
-          type: 'info'
+        this.$message({
+          message: '错了哦，这是一条错误消息',
+          type: 'error'
         });
       },
                   
       open5() {
-        this.$notify({
-          title: '错误',
-          message: '这是一条错误的提示消息',
-          type: 'error'
+        this.$message({
+          showClose: true,
+          message: '恭喜你，这是一条成功消息'
         });
       },
       
       open6() {
-        this.$notify({
-          title: '提示',
-          message: '这是一条不会自动关闭的消息',
-          duration: 0
+        this.$message({
+          showClose: true,
+          message: '警告哦，这是一条警告消息',
+          type: 'warning'
         });
       },
-      
+            
       open7() {
-        this.$notify({
-          title: '提示',
-          message: '这是一条带有回调函数的消息',
-          onClose: this.onClose
+        this.$message({
+          showClose: true,
+          message: '错了哦，这是一条错误消息',
+          type: 'error'
         });
       },
       
-      onClose() {
-        console.log('Notification 已关闭');
-      }
+      open8() {
+        this.$message({
+          showClose: true,
+          message: '错了哦，这是一条错误消息',
+          type: 'error'
+        });
+      } 
     }
   };
 </script>
 
 <style>
-  .demo-box.demo-notification {
+  .demo-box.demo-message {
     .el-button + .el-button {
       margin-left: 10px;
     }
@@ -73,22 +72,21 @@
 
 ## 基本用法
 
-<div class="demo-box demo-notification">
-  <el-button :plain="true" v-on:click.native="open">点击展示 Notification</el-button>
+<div class="demo-box demo-message">
+  <el-button :plain="true" v-on:click.native="open">打开消息提示</el-button>
 </div>
 
 ```html
 <template>
-  <el-button :plain="true" v-on:click.native="open">点击展示 Notification</el-button>
+  <el-button :plain="true" v-on:click.native="open">打开消息提示</el-button>
 </template>
 
 <script>
   export default {
     methods: {
       open() {
-        this.$notify({
-          title: '标题名称',
-          message: '这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案'
+        this.$message({
+          message: '这是一条消息提示'
         });
       }
     }
@@ -96,54 +94,40 @@
 </script>
 ```
 
-## 带有 icon
-
-<div class="demo-box demo-notification">
+## 不同状态
+<div class="demo-box demo-message">
   <el-button :plain="true" v-on:click.native="open2">成功</el-button>
   <el-button :plain="true" v-on:click.native="open3">警告</el-button>
-  <el-button :plain="true" v-on:click.native="open4">消息</el-button>
-  <el-button :plain="true" v-on:click.native="open5">错误</el-button>
+  <el-button :plain="true" v-on:click.native="open4">错误</el-button>
 </div>
 
 ```html
 <template>
   <el-button :plain="true" v-on:click.native="open2">成功</el-button>
   <el-button :plain="true" v-on:click.native="open3">警告</el-button>
-  <el-button :plain="true" v-on:click.native="open4">消息</el-button>
-  <el-button :plain="true" v-on:click.native="open5">错误</el-button>
+  <el-button :plain="true" v-on:click.native="open4">错误</el-button>
 </template>
 
 <script>
   export default {
     methods: {
       open2() {
-        this.$notify({
-          title: '成功',
-          message: '这是一条成功的提示消息',
+        this.$message({
+          message: '恭喜你，这是一条成功消息',
           type: 'success'
         });
       },
       
       open3() {
-        this.$notify({
-          title: '警告',
-          message: '这是一条警告的提示消息',
+        this.$message({
+          message: '警告哦，这是一条警告消息',
           type: 'warning'
         });
       },
             
       open4() {
-        this.$notify({
-          title: '消息',
-          message: '这是一条消息的提示消息',
-          type: 'info'
-        });
-      },
-                  
-      open5() {
-        this.$notify({
-          title: '错误',
-          message: '这是一条错误的提示消息',
+        this.$message({
+          message: '错了哦，这是一条错误消息',
           type: 'error'
         });
       }
@@ -152,54 +136,54 @@
 </script>
 ```
 
-## 不会自动关闭
-<div class="demo-box demo-notification">
-  <el-button :plain="true" v-on:click.native="open6">不会自动关闭的 Notification</el-button>
+## 可关闭
+<div class="demo-box demo-message">
+  <el-button :plain="true" v-on:click.native="open5">消息</el-button>
+  <el-button :plain="true" v-on:click.native="open6">成功</el-button>
+  <el-button :plain="true" v-on:click.native="open7">警告</el-button>
+  <el-button :plain="true" v-on:click.native="open8">错误</el-button>
 </div>
 
 ```html
 <template>
-  <el-button :plain="true" v-on:click.native="open6">不会自动关闭的 Notification</el-button>
+  <el-button :plain="true" v-on:click.native="open5">消息</el-button>
+  <el-button :plain="true" v-on:click.native="open6">成功</el-button>
+  <el-button :plain="true" v-on:click.native="open7">警告</el-button>
+  <el-button :plain="true" v-on:click.native="open8">错误</el-button>
 </template>
 
 <script>
   export default {
     methods: {
-      open6() {
-        this.$notify({
-          title: '提示',
-          message: '这是一条不会自动关闭的消息',
-          duration: 0
-        });
-      }
-    }
-  }
-</script>
-```
-
-## 回调函数
-<div class="demo-box demo-notification">
-  <el-button :plain="true" v-on:click.native="open7">带有回调函数的 Notification</el-button>
-</div>
-
-```html
-<template>
-  <el-button :plain="true" v-on:click.native="open7">带有回调函数的 Notification</el-button>
-</template>
-
-<script>
-  export default {
-    methods: {
-      open7() {
-        this.$notify({
-          title: '提示',
-          message: '这是一条带有回调函数的消息',
-          onClose: this.onClose
+      open5() {
+        this.$message({
+          showClose: true,
+          message: '恭喜你，这是一条成功消息'
         });
       },
       
-      onClose() {
-        console.log('Notification 已关闭');
+      open6() {
+        this.$message({
+          showClose: true,
+          message: '警告哦，这是一条警告消息',
+          type: 'warning'
+        });
+      },
+            
+      open7() {
+        this.$message({
+          showClose: true,
+          message: '错了哦，这是一条错误消息',
+          type: 'error'
+        });
+      },
+      
+      open8() {
+        this.$message({
+          showClose: true,
+          message: '错了哦，这是一条错误消息',
+          type: 'error'
+        });
       }
     }
   }
@@ -208,23 +192,23 @@
 
 ## 全局方法
 
-element 为 Vue.prototype 添加了全局方法 $notify。因此在 vue instance 中可以采用本页面中的方式调用 `Notification`。
+element 为 Vue.prototype 添加了全局方法 $message。因此在 vue instance 中可以采用本页面中的方式调用 `Message`。
 
 ## 单独引用
 
-单独引入 `Notification`：
+单独引入 `Message`：
 
 ```javascript
-import { Notification } from 'element-ui';
+import { Message } from 'element-ui';
 ```
 
-此时调用方法为 `Notification(options)`。
+此时调用方法为 `Message(options)`。
 
 ## API
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| title | 标题 | string | | |
-| message | 说明文字 | string | | |
-| type | 主题 | string | 'success', 'warning', 'info', 'error' | |
-| duration | 显示时间, 毫秒。设为 0 则不会自动关闭 | number | | 4500 |
-| onClose | 关闭时的回调函数 | function | | |
+| message | 消息文字 | string | | |
+| type | 主题 | string | 'success', 'warning', 'info', 'error' | 'info' |
+| duration | 显示时间, 毫秒。设为 0 则不会自动关闭 | number | | 3000 |
+| showClose | 是否显示关闭按钮 | boolean | | false |
+| onClose | 关闭时的回调函数, 参数为被关闭的 message 实例 | function | | |

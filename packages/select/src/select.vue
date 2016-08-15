@@ -281,6 +281,7 @@
 
       visible(val) {
         if (!val) {
+          this.$refs.reference.$el.querySelector('input').blur();
           this.$el.querySelector('.el-input__icon').classList.remove('is-reverse');
           this.broadcast('select-dropdown', 'destroyPopper');
           if (this.$refs.input) {
@@ -423,6 +424,9 @@
       },
 
       toggleMenu() {
+        if (this.filterable && this.query === '' && this.visible) {
+          return;
+        }
         if (!this.disabled) {
           this.visible = !this.visible;
           if (this.remote && this.visible) {
@@ -472,7 +476,9 @@
       },
 
       selectOption() {
-        this.handleOptionSelect(this.options[this.hoverIndex]);
+        if (this.options[this.hoverIndex]) {
+          this.handleOptionSelect(this.options[this.hoverIndex]);
+        }
       },
 
       deleteSelected(event) {
