@@ -1,4 +1,3 @@
-import Group from '../packages/group/index.js';
 import SelectDropdown from '../packages/select-dropdown/index.js';
 import Pagination from '../packages/pagination/index.js';
 import Dialog from '../packages/dialog/index.js';
@@ -52,7 +51,6 @@ import Spinner from '../packages/spinner/index.js';
 const install = function(Vue) {
   if (install.installed) return;
 
-  Vue.component(Group.name, Group);
   Vue.component(SelectDropdown.name, SelectDropdown);
   Vue.component(Pagination.name, Pagination);
   Vue.component(Dialog.name, Dialog);
@@ -109,14 +107,13 @@ const install = function(Vue) {
   Vue.prototype.$notify = Notification;
 };
 
-auto install
+// auto install
 if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue);
 };
 
 module.exports = {
-  install
-  Group,
+  install,
   SelectDropdown,
   Pagination,
   Dialog,
