@@ -109,13 +109,13 @@ const install = function(Vue) {
   Vue.prototype.$notify = Notification;
 };
 
-auto install
+// auto install
 if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue);
 };
 
 module.exports = {
-  install
+  install,
   Group,
   SelectDropdown,
   Pagination,
