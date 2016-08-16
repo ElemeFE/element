@@ -57,7 +57,7 @@
     methods: {
       close() {
         this.visible = false;
-        this.$emit('onClose');
+        this.$emit('close');
       }
     },
 
