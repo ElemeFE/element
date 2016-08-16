@@ -86,6 +86,4 @@ cooking.add('externals', externals);
 
 // cooking.config.vue.loaders.html = 'html?minimize=true&conservativeCollapse=false';
 
-cooking.add('vue.loaders')
-
 module.exports = cooking.resolve();
