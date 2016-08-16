@@ -2,14 +2,16 @@
   <div class="el-form-item" :class="{
     'is-error': error !== '',
     'is-validating': validating,
-    'is-required': required
+    'is-required': isRequired || required
   }">
     <label class="el-form-item__label" v-bind:style="labelStyle" v-if="label">
       {{label + form.labelSuffix}}
     </label>
     <div class="el-form-item__content" v-bind:style="contentStyle">
       <slot></slot>
-      <div class="el-form-item__error" v-if="error !== ''" transition="md-fade-bottom">{{error}}</div>
+      <transition name="md-fade-bottom">
+        <div class="el-form-item__error" v-if="error !== ''">{{error}}</div>
+      </transition>
     </div>
   </div>
 </template>
@@ -50,24 +52,23 @@
       },
       form() {
         var parent = this.$parent;
-        while (parent.$el.tagName !== 'FORM') {
+        while (parent.$options.componentName !== 'form') {
           parent = parent.$parent;
         }
         return parent;
       },
-      fieldValue() {
-        var model = this.form.model;
-        if (!model) { return; }
+      fieldValue: {
+        cache: false,
+        get() {
+          var model = this.form.model;
+          if (!model || !this.prop) { return; }
 
-        if (!model[this.prop]) {
-          let temp = this.prop.split(':');
-          return model[temp[0]][temp[1]];
-        } else {
-          return model[this.prop];
+          var temp = this.prop.split(':');
+
+          return temp.length > 1
+            ? model[temp[0]][temp[1]]
+            : model[this.prop];
         }
-      },
-      fieldRule() {
-        return this.rules || (this.form.rules ? this.form.rules[this.prop] : null);
       }
     },
     data() {
@@ -76,7 +77,8 @@
         error: '',
         validateDisabled: false,
         validating: false,
-        validator: {}
+        validator: {},
+        isRequired: false
       };
     },
     methods: {
@@ -98,7 +100,7 @@
 
         model[this.prop] = this.fieldValue;
 
-        validator.validate(model, { first: true, firstFields: true }, (errors, fields) => {
+        validator.validate(model, { firstFields: true }, (errors, fields) => {
           this.valid = !errors;
           this.error = errors ? errors[0].message : '';
 
@@ -111,7 +113,7 @@
         this.error = '';
 
         let model = this.form.model;
-        let value = model[this.prop];
+        let value = this.fieldValue;
 
         if (Array.isArray(value) && value.length > 0) {
           this.validateDisabled = true;
@@ -124,60 +126,49 @@
           model[this.prop] = 0;
         }
       },
+      getRules() {
+        if (!this.prop) { return []; }
+        var rules = this.rules || (this.form.rules ? this.form.rules[this.prop] : []);
+        return Array.isArray(rules) ? rules : [rules];
+      },
       getFilteredRule(trigger) {
-        var rules = this.fieldRule;
+        var rules = this.getRules();
 
-        if (!rules) { return null; }
-        if (!trigger) { return rules; }
-
-        if (Array.isArray(rules)) {
-          return rules.filter(rule => {
-            return !rule.trigger || rule.trigger.indexOf(trigger) !== -1;
-          });
-        }
-
-        if (rules.trigger && rules.trigger.indexOf(trigger) === -1) {
-          return null;
-        } else {
-          return rules;
-        }
-      }
-    },
-    ready() {
-      var rules = this.fieldRule;
-
-      if (rules) {
-        if (Array.isArray(rules)) {
-          rules.every(rule => {
-            if (rule.required) {
-              this.required = true;
-              return false;
-            }
-          });
-        } else {
-          this.required = !!this.rules.required;
-        }
-      }
-      if (this.prop) {
-        this.dispatch('form', 'el.form.addField', this);
-      }
-    },
-    events: {
-      'el.form.blur'(value) {
+        return rules.filter(rule => {
+          return !rule.trigger || rule.trigger.indexOf(trigger) !== -1;
+        });
+      },
+      onFieldBlur() {
         this.validate('blur');
       },
-      'el.form.change'(value, useTrigger = true) {
+      onFieldChange() {
         if (this.validateDisabled) {
           this.validateDisabled = false;
           return;
         }
 
-        var trigger = useTrigger ? 'change' : '';
-        this.validate(trigger);
+        this.validate('change');
       }
     },
+    mounted() {
+      var rules = this.getRules();
+
+      rules.every(rule => {
+        if (rule.required) {
+          this.isRequired = true;
+          return false;
+        }
+      });
+
+      if (this.prop) {
+        this.dispatch('form', 'el.form.addField', [this]);
+      }
+
+      this.$on('el.form.blur', this.onFieldBlur);
+      this.$on('el.form.change', this.onFieldChange);
+    },
     beforeDestroy() {
-      this.dispatch('form', 'el.form.removeField', this);
+      this.dispatch('form', 'el.form.removeField', [this]);
     }
   };
 </script>

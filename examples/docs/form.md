@@ -1,6 +1,40 @@
 <script>
   export default {
     data() {
+      var checkAge = (rule, value, callback) => {
+        var age = parseInt(value, 10);
+
+        setTimeout(() => {
+          if (!Number.isInteger(age)) {
+            callback(new Error('请输入数字值'));
+          } else{
+            if (age < 18) {
+              callback(new Error('必须年满18岁'));
+            } else {
+              callback();
+            }
+          } 
+        }, 1000);
+      };
+      var validaePass = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error('请输入密码'));
+        } else {
+          if (this.ruleForm2.checkPass !== '') {
+            this.$refs.ruleForm2.validateField('checkPass');
+          }
+          callback();
+        }
+      };
+      var validaePass2 = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error('请再次输入密码'));
+        } else if (value !== this.ruleForm2.pass) {
+          callback(new Error('两次输入密码不一致!'));
+        } else {
+          callback();
+        }
+      };
       return {
         form: {
           name: '',
@@ -58,7 +92,7 @@
             { required: true, min: 3, message: '用户名至少为 3 个字符', trigger: 'blur' }
           ],
           age: [
-            { type: 'number', required: true, message: '请输入年龄', trigger: 'blur' },
+            { required: true, message: '请输入年龄', trigger: 'blur' },
             { type: 'number', min: 18, message: '输入必须为大于18的整数', trigger: 'blur' }
           ],
           mail: [
@@ -78,26 +112,25 @@
         rules2: {
           pass: [
             { required: true, message: '请输入密码', trigger: 'blur' },
-            { validator: this.validaePass }
+            { validator: validaePass }
           ],
           checkPass: [
             { required: true, message: '请再次输入密码', trigger: 'blur' },
-            { validator: this.validaePass2 }
+            { validator: validaePass2 }
           ],
           age: [
             { required: true, message: '请填写年龄', trigger: 'blur' },
-            { validator: this.checkAge, trigger: 'change' }
+            { validator: checkAge, trigger: 'change' }
           ]
         },
         dynamicForm: {
-          domains: [''],
+          domains: [{
+            key: 1,
+            value: ''
+          }],
           email: ''
         },
         dynamicRule: {
-          domains: {
-            type: '域名不能',
-            required: true
-          },
           email: [
             { required: true, message: '请输入邮箱地址', trigger: 'blur' },
             { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur,change' }
@@ -137,44 +170,10 @@
         });
       },
       handleReset() {
-        this.$refs.ruleForm.resetForm();
+        this.$refs.ruleForm.resetFields();
       },
       handleReset2() {
-        this.$refs.ruleForm2.resetForm();
-      },
-      checkAge(rule, value, callback) {
-        var age = parseInt(value, 10);
-        // debugger;
-        setTimeout(() => {
-          if (!Number.isInteger(age)) {
-            callback(new Error('请输入数字值'));
-          } else{
-            if (age < 18) {
-              callback(new Error('必须年满18岁'));
-            } else {
-              callback();
-            }
-          } 
-        }, 1000);
-      },
-      validaePass(rule, value, callback) {
-        if (value === '') {
-          callback(new Error('请输入密码'));
-        } else {
-          if (this.ruleForm2.checkPass !== '') {
-            this.$refs.ruleForm2.validateField('checkPass');
-          }
-          callback();
-        }
-      },
-      validaePass2(rule, value, callback) {
-        if (value === '') {
-          callback(new Error('请再次输入密码'));
-        } else if (value !== this.ruleForm2.pass) {
-          callback(new Error('两次输入密码不一致!'));
-        } else {
-          callback();
-        }
+        this.$refs.ruleForm2.resetFields();
       },
       handleValidate(prop, errorMsg) {
         console.log(prop, errorMsg);
@@ -184,6 +183,18 @@
       },
       onRuleFormSubmit() {
         console.log('onRuleFormSubmit');
+      },
+      removeDomain(item) {
+        var index = this.dynamicForm.domains.indexOf(item)
+        if (index !== -1) {
+          this.dynamicForm.domains.splice(index, 1)
+        }
+      },
+      addDomain() {
+        this.dynamicForm.domains.push({
+          key: this.dynamicForm.domains.length,
+          value: ''
+        });
       }
     }
   }
@@ -269,30 +280,30 @@
 Form 组件是一个具有校验和提交功能的表单，包含复选框、单选框、输入框、下拉选择框等元素。
 
 <div class="demo-box demo-form demo-form-normal">
-  <el-form v-ref:form @submit.prevent="onSubmit" label-width="80px">
+  <el-form ref="form" @submit.prevent="onSubmit" label-width="80px">
     <el-form-item label="活动名称">
-      <el-input :value.sync="form.name"></el-input>
+      <el-input v-model="form.name"></el-input>
     </el-form-item>
     <el-form-item label="活动区域">
-      <el-select :value.sync="form.region" :width="360" placeholder="请选择活动区域">
+      <el-select v-model="form.region" :width="360" placeholder="请选择活动区域">
         <el-option label="区域一" value="shanghai"></el-option>
         <el-option label="区域二" value="beijing"></el-option>
       </el-select>
     </el-form-item>
     <el-form-item label="配送时间">
       <el-col :span="11">
-        <el-date-picker type="date" placeholder="选择日期" style="width: 100%;"></el-date-picker>
+        <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
       </el-col>
       <el-col class="line" :span="2">-</el-col>
       <el-col :span="11">
-        <el-time-picker type="fixed-time" placeholder="选择时间" style="width: 100%;"></el-time-picker>
+        <el-time-picker type="fixed-time" placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>
       </el-col>
     </el-form-item>
     <el-form-item label="蜂鸟配送">
-      <el-switch on-text="" off-text="" :value="form.delivery"></el-switch>
+      <el-switch on-text="" off-text="" v-model="form.delivery"></el-switch>
     </el-form-item>
     <el-form-item label="活动性质">
-      <el-checkbox-group :value.sync="form.type">
+      <el-checkbox-group v-model="form.type">
         <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
         <el-checkbox label="地推活动" name="type"></el-checkbox>
         <el-checkbox label="线下主题活动" name="type"></el-checkbox>
@@ -300,27 +311,27 @@ Form 组件是一个具有校验和提交功能的表单，包含复选框、单
       </el-checkbox-group>
     </el-form-item>
     <el-form-item label="特殊资源">
-      <el-radio :value.sync="form.resource" label="线上品牌商赞助"></el-radio>
-      <el-radio :value.sync="form.resource" label="线下场地免费"></el-radio>
+      <el-radio v-model="form.resource" label="线上品牌商赞助"></el-radio>
+      <el-radio v-model="form.resource" label="线下场地免费"></el-radio>
     </el-form-item>
     <el-form-item label="活动形式">
-      <el-input type="textarea" :value.sync="form.desc"></el-input>
+      <el-input type="textarea" v-model="form.desc"></el-input>
     </el-form-item>
     <el-form-item>
       <el-button type="primary">立即创建</el-button>
-      <el-button @click.prevent>取消</el-button>
+      <el-button @click.native.prevent>取消</el-button>
     </el-form-item>
   </el-form>
 </div>
 
 ```html
 <template>
-  <el-form v-ref:form @submit.prevent="onSubmit" label-width="80px">
+  <el-form ref="form" @submit.prevent="onSubmit" label-width="80px">
     <el-form-item label="活动名称">
-      <el-input :value.sync="form.name"></el-input>
+      <el-input v-model="form.name"></el-input>
     </el-form-item>
     <el-form-item label="活动区域">
-      <el-select :value.sync="form.region" :width="360" placeholder="请选择活动区域">
+      <el-select v-model="form.region" :width="360" placeholder="请选择活动区域">
         <el-option label="区域一" value="shanghai"></el-option>
         <el-option label="区域二" value="beijing"></el-option>
       </el-select>
@@ -338,7 +349,7 @@ Form 组件是一个具有校验和提交功能的表单，包含复选框、单
       <el-switch on-text="" off-text="" :value="form.delivery"></el-switch>
     </el-form-item>
     <el-form-item label="活动性质">
-      <el-checkbox-group :value.sync="form.type">
+      <el-checkbox-group v-model="form.type">
         <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
         <el-checkbox label="地推活动" name="type"></el-checkbox>
         <el-checkbox label="线下主题活动" name="type"></el-checkbox>
@@ -346,15 +357,15 @@ Form 组件是一个具有校验和提交功能的表单，包含复选框、单
       </el-checkbox-group>
     </el-form-item>
     <el-form-item label="特殊资源">
-      <el-radio :value.sync="form.resource" label="线上品牌商赞助"></el-radio>
-      <el-radio :value.sync="form.resource" label="线下场地免费"></el-radio>
+      <el-radio v-model="form.resource" label="线上品牌商赞助"></el-radio>
+      <el-radio v-model="form.resource" label="线下场地免费"></el-radio>
     </el-form-item>
     <el-form-item label="活动形式">
-      <el-input type="textarea" :value.sync="form.desc"></el-input>
+      <el-input type="textarea" v-model="form.desc"></el-input>
     </el-form-item>
     <el-form-item>
       <el-button type="primary">立即创建</el-button>
-      <el-button @click.prevent>取消</el-button>
+      <el-button @click.native.prevent>取消</el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -388,9 +399,9 @@ Form 组件是一个具有校验和提交功能的表单，包含复选框、单
 <div class="demo-box demo-form demo-form-inline">
   <el-form type="inline" :model="formInline" @submit.prevent="onSubmit">
     <el-form-item>
-      <el-input :value.sync="formInline.user" placeholder="审批人"></el-input>
+      <el-input v-model="formInline.user" placeholder="审批人"></el-input>
     </el-form-item><el-form-item>
-      <el-select :value.sync="formInline.region" :width="150" placeholder="请选择活动区域">
+      <el-select v-model="formInline.region" :width="150" placeholder="请选择活动区域">
         <el-option label="区域一" value="shanghai"></el-option>
         <el-option label="区域二" value="beijing"></el-option>
       </el-select>
@@ -404,9 +415,9 @@ Form 组件是一个具有校验和提交功能的表单，包含复选框、单
 <template>
   <el-form type="inline" :model="formInline" @submit.prevent="onSubmit">
     <el-form-item>
-      <el-input :value.sync="formInline.user" placeholder="审批人"></el-input>
+      <el-input v-model="formInline.user" placeholder="审批人"></el-input>
     </el-form-item><el-form-item>
-      <el-select :value.sync="formInline.region" :width="150" placeholder="请选择活动区域">
+      <el-select v-model="formInline.region" :width="150" placeholder="请选择活动区域">
         <el-option label="区域一" value="shanghai"></el-option>
         <el-option label="区域二" value="beijing"></el-option>
       </el-select>
@@ -439,23 +450,23 @@ Form 组件是一个具有校验和提交功能的表单，包含复选框、单
 <div class="demo-box demo-form demo-form-stacked">
   <el-form type="stacked" :model="formStacked" @submit.prevent="onSubmit">
     <el-form-item label="名称">
-      <el-input :value.sync="formStacked.name"></el-input>
+      <el-input v-model="formStacked.name"></el-input>
     </el-form-item>
     <el-form-item label="活动区域">
-      <el-select :value.sync="formStacked.region" :width="360" placeholder="请选择活动区域">
+      <el-select v-model="formStacked.region" :width="360" placeholder="请选择活动区域">
         <el-option label="区域一" value="shanghai"></el-option>
         <el-option label="区域二" value="beijing"></el-option>
       </el-select>
     </el-form-item>
     <el-form-item label="活动展开形式">
-      <el-input :value.sync="formStacked.type"></el-input>
+      <el-input v-model="formStacked.type"></el-input>
     </el-form-item>
     <el-form-item label="备注">
-      <el-input :value.sync="formStacked.remark"></el-input>
+      <el-input v-model="formStacked.remark"></el-input>
     </el-form-item>
     <el-form-item>
       <el-button type="primary">立即创建</el-button>
-      <el-button @click.prevent>取消</el-button>
+      <el-button @click.native.prevent>取消</el-button>
     </el-form-item>
   </el-form>
 </div>
@@ -464,23 +475,23 @@ Form 组件是一个具有校验和提交功能的表单，包含复选框、单
 <template>
   <el-form type="stacked" :model="formStacked" @submit.prevent="onSubmit">
     <el-form-item label="名称">
-      <el-input :value.sync="formStacked.name"></el-input>
+      <el-input v-model="formStacked.name"></el-input>
     </el-form-item>
     <el-form-item label="活动区域">
-      <el-select :value.sync="formStacked.region" :width="360" placeholder="请选择活动区域">
+      <el-select v-model="formStacked.region" :width="360" placeholder="请选择活动区域">
         <el-option label="区域一" value="shanghai"></el-option>
         <el-option label="区域二" value="beijing"></el-option>
       </el-select>
     </el-form-item>
     <el-form-item label="活动展开形式">
-      <el-input :value.sync="formStacked.type"></el-input>
+      <el-input v-model="formStacked.type"></el-input>
     </el-form-item>
     <el-form-item label="备注">
-      <el-input :value.sync="formStacked.remark"></el-input>
+      <el-input v-model="formStacked.remark"></el-input>
     </el-form-item>
     <el-form-item>
       <el-button type="primary">立即创建</el-button>
-      <el-button @click.prevent>取消</el-button>
+      <el-button @click.native.prevent>取消</el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -510,16 +521,16 @@ Form 组件是一个具有校验和提交功能的表单，包含复选框、单
 <div class="demo-box demo-form">
   <el-form :model="formAlignLeft" label-align="left" @submit.prevent="onSubmit" label-width="80px">
     <el-form-item label="名称">
-      <el-input :value.sync="formAlignLeft.name"></el-input>
+      <el-input v-model="formAlignLeft.name"></el-input>
     </el-form-item>
     <el-form-item label="推广地">
-      <el-select :value.sync="formAlignLeft.region" :width="360" placeholder="请选择活动区域">
+      <el-select v-model="formAlignLeft.region" :width="360" placeholder="请选择活动区域">
         <el-option label="区域一" value="shanghai"></el-option>
         <el-option label="区域二" value="beijing"></el-option>
       </el-select>
     </el-form-item>
     <el-form-item label="活动形式">
-      <el-input :value.sync="formAlignLeft.type"></el-input>
+      <el-input v-model="formAlignLeft.type"></el-input>
     </el-form-item>
     <el-form-item>
       <el-button type="primary">查询</el-button>
@@ -531,16 +542,16 @@ Form 组件是一个具有校验和提交功能的表单，包含复选框、单
 <template>
   <el-form :model="formAlignLeft" label-align="left" @submit.prevent="onSubmit" label-width="80px">
     <el-form-item label="名称">
-      <el-input :value.sync="formAlignLeft.name"></el-input>
+      <el-input v-model="formAlignLeft.name"></el-input>
     </el-form-item>
     <el-form-item label="推广地">
-      <el-select :value.sync="formAlignLeft.region" :width="360" placeholder="请选择活动区域">
+      <el-select v-model="formAlignLeft.region" :width="360" placeholder="请选择活动区域">
         <el-option label="区域一" value="shanghai"></el-option>
         <el-option label="区域二" value="beijing"></el-option>
       </el-select>
     </el-form-item>
     <el-form-item label="活动形式">
-      <el-input :value.sync="formAlignLeft.type"></el-input>
+      <el-input v-model="formAlignLeft.type"></el-input>
     </el-form-item>
     <el-form-item>
       <el-button type="primary">查询</el-button>
@@ -572,14 +583,14 @@ Form 组件是一个具有校验和提交功能的表单，包含复选框、单
 <div class="demo-box demo-form">
   <el-form :model="formNoLabel" @submit.prevent="onSubmit" style="width: 360px;">
     <el-form-item>
-      <el-input :value.sync="formNoLabel.username" placeholder="手机号码/电子邮箱"></el-input>
+      <el-input v-model="formNoLabel.username" placeholder="手机号码/电子邮箱"></el-input>
     </el-form-item>
     <el-form-item>
-      <el-input :value.sync="formNoLabel.pass" placeholder="账户密码" auto-complete="off"></el-input>
+      <el-input v-model="formNoLabel.pass" placeholder="账户密码" auto-complete="off"></el-input>
     </el-form-item>
     <el-form-item>
       <el-button type="primary" class="fr">登录</el-button>
-      <el-checkbox :value.sync="formNoLabel.rememberPss" label="记住密码"></el-checkbox>
+      <el-checkbox v-model="formNoLabel.rememberPss" label="记住密码"></el-checkbox>
     </el-form-item>
   </el-form>
 </div>
@@ -588,14 +599,14 @@ Form 组件是一个具有校验和提交功能的表单，包含复选框、单
 <template>
   <el-form :model="formNoLabel" @submit.prevent="onSubmit" style="width: 360px;">
     <el-form-item>
-      <el-input :value.sync="formNoLabel.username" placeholder="手机号码/电子邮箱"></el-input>
+      <el-input v-model="formNoLabel.username" placeholder="手机号码/电子邮箱"></el-input>
     </el-form-item>
     <el-form-item>
-      <el-input :value.sync="formNoLabel.pass" placeholder="账户密码" auto-complete="off"></el-input>
+      <el-input v-model="formNoLabel.pass" placeholder="账户密码" auto-complete="off"></el-input>
     </el-form-item>
     <el-form-item>
       <el-button type="primary" class="fr">登录</el-button>
-      <el-checkbox :value.sync="formNoLabel.rememberPss" label="记住密码"></el-checkbox>
+      <el-checkbox v-model="formNoLabel.rememberPss" label="记住密码"></el-checkbox>
     </el-form-item>
   </el-form>
 </template>
@@ -622,37 +633,37 @@ Form 组件是一个具有校验和提交功能的表单，包含复选框、单
 ## 表单验证
 
 <div class="demo-box demo-form demo-ruleForm">
-  <el-form :model="ruleForm" :rules="rules" v-ref:rule-form label-width="80px">
+  <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="80px">
     <el-form-item label="用户名" :required="true">
       <el-col :span="11">
         <el-form-item prop="user1">
-          <el-input :value.sync="ruleForm.user1" placeholder="First Name"></el-input>
+          <el-input v-model="ruleForm.user1" placeholder="First Name"></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="2"><div class="line">-</div></el-col>
       <el-col :span="11">
         <el-form-item prop="user2">
-          <el-input :value.sync="ruleForm.user2" placeholder="Last Name"></el-input>
+          <el-input v-model="ruleForm.user2" placeholder="Last Name"></el-input>
         </el-form-item>
       </el-col>
     </el-form-item>
     <el-form-item label="年龄" prop="age">
-      <el-input :value.sync="ruleForm.age" :number="true"></el-input>
+      <el-input v-model="ruleForm.age" :number="true"></el-input>
     </el-form-item>
     <el-form-item label="邮箱" prop="mail">
-      <el-input :value.sync="ruleForm.mail"></el-input>
+      <el-input v-model="ruleForm.mail"></el-input>
     </el-form-item>
     <el-form-item label="性别" prop="sex">
-      <el-radio-group :value.sync="ruleForm.sex">
+      <el-radio-group v-model="ruleForm.sex">
         <el-radio label="男" name="sex"></el-radio>
         <el-radio label="女" name="sex"></el-radio>
       </el-radio-group>
     </el-form-item>
     <el-form-item label="简介" prop="desc">
-      <el-input type="textarea" :value.sync="ruleForm.desc"></el-input>
+      <el-input type="textarea" v-model="ruleForm.desc"></el-input>
     </el-form-item>
     <el-form-item label="地区" prop="region" placeholder="请选择地区">
-      <el-checkbox-group :value.sync="ruleForm.region">
+      <el-checkbox-group v-model="ruleForm.region">
         <el-checkbox label="BeiJing" name="region"></el-checkbox>
         <el-checkbox label="ShangHai" name="region"></el-checkbox>
         <el-checkbox label="ShenZhen" name="region"></el-checkbox>
@@ -660,45 +671,45 @@ Form 组件是一个具有校验和提交功能的表单，包含复选框、单
       </el-checkbox-group>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click.prevent="handleSubmit">提交</el-button>
-      <el-button @click.prevent="handleReset">重置</el-button>
+      <el-button type="primary" @click.native.prevent="handleSubmit">提交</el-button>
+      <el-button @click.native.prevent="handleReset">重置</el-button>
     </el-form-item>
   </el-form>
 </div>
 
 ```html
 <template>
-  <el-form :model="ruleForm" :rules="rules" v-ref:rule-form label-width="80px">
+  <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="80px">
     <el-form-item label="用户名" :required="true">
       <el-col :span="11">
         <el-form-item prop="user1">
-          <el-input :value.sync="ruleForm.user1" placeholder="First Name"></el-input>
+          <el-input v-model="ruleForm.user1" placeholder="First Name"></el-input>
         </el-form-item>
       </el-col>
       <el-col :span="2"><div class="line">-</div></el-col>
       <el-col :span="11">
         <el-form-item prop="user2">
-          <el-input :value.sync="ruleForm.user2" placeholder="Last Name"></el-input>
+          <el-input v-model="ruleForm.user2" placeholder="Last Name"></el-input>
         </el-form-item>
       </el-col>
     </el-form-item>
     <el-form-item label="年龄" prop="age">
-      <el-input :value.sync="ruleForm.age" :number="true"></el-input>
+      <el-input v-model="ruleForm.age" :number="true"></el-input>
     </el-form-item>
     <el-form-item label="邮箱" prop="mail">
-      <el-input :value.sync="ruleForm.mail"></el-input>
+      <el-input v-model="ruleForm.mail"></el-input>
     </el-form-item>
     <el-form-item label="性别" prop="sex">
-      <el-radio-group :value.sync="ruleForm.sex">
+      <el-radio-group v-model="ruleForm.sex">
         <el-radio label="男" name="sex"></el-radio>
         <el-radio label="女" name="sex"></el-radio>
       </el-radio-group>
     </el-form-item>
     <el-form-item label="简介" prop="desc">
-      <el-input type="textarea" :value.sync="ruleForm.desc"></el-input>
+      <el-input type="textarea" v-model="ruleForm.desc"></el-input>
     </el-form-item>
     <el-form-item label="地区" prop="region" placeholder="请选择地区">
-      <el-checkbox-group :value.sync="ruleForm.region">
+      <el-checkbox-group v-model="ruleForm.region">
         <el-checkbox label="BeiJing" name="region"></el-checkbox>
         <el-checkbox label="ShangHai" name="region"></el-checkbox>
         <el-checkbox label="ShenZhen" name="region"></el-checkbox>
@@ -731,6 +742,10 @@ Form 组件是一个具有校验和提交功能的表单，包含复选框、单
           user2: [
             { required: true, min: 3, message: '用户名至少为 3 个字符', trigger: 'blur' }
           ],
+          age: [
+            { required: true, message: '请输入年龄', trigger: 'blur' },
+            { type: 'number', min: 18, message: '输入必须为大于18的整数', trigger: 'blur' }
+          ],
           mail: [
             { required: true, message: '请输入邮箱地址', trigger: 'blur' },
             { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur,change' }
@@ -748,6 +763,9 @@ Form 组件是一个具有校验和提交功能的表单，包含复选框、单
       };
     },
     methods: {
+      handleReset() {
+        this.$refs.ruleForm.resetFields();
+      },
       handleSubmit(ev) {
         this.$refs.ruleForm.validate((valid) => {
           if (valid) {
@@ -766,44 +784,78 @@ Form 组件是一个具有校验和提交功能的表单，包含复选框、单
 ## 自定义校验规则
 
 <div class="demo-box demo-form demo-ruleForm">
-  <el-form :model="ruleForm2" :rules="rules2" v-ref:rule-form2 label-width="80px">
+  <el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-width="80px">
     <el-form-item label="密码" prop="pass">
-      <el-input type="password" :value.sync="ruleForm2.pass" auto-complete="off"></el-input>
+      <el-input type="password" v-model="ruleForm2.pass" auto-complete="off"></el-input>
     </el-form-item>
     <el-form-item label="确认密码" prop="checkPass">
-      <el-input type="password" :value.sync="ruleForm2.checkPass" auto-complete="off"></el-input>
+      <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off"></el-input>
     </el-form-item>
     <el-form-item label="年龄" prop="age">
-      <el-input :value.sync="ruleForm2.age"></el-input>
+      <el-input v-model="ruleForm2.age"></el-input>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click.prevent="handleSubmit2">提交</el-button>
-      <el-button @click.prevent="handleReset2">重置</el-button>
+      <el-button type="primary" @click.native.prevent="handleSubmit2">提交</el-button>
+      <el-button @click.native.prevent="handleReset2">重置</el-button>
     </el-form-item>
   </el-form>
 </div>
 
 ```html
 <template>
-  <el-form :model="ruleForm2" :rules="rules2" v-ref:rule-form2 label-width="80px">
+  <el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-width="80px">
     <el-form-item label="密码" prop="pass">
-      <el-input type="password" :value.sync="ruleForm2.pass" auto-complete="off"></el-input>
+      <el-input type="password" v-model="ruleForm2.pass" auto-complete="off"></el-input>
     </el-form-item>
     <el-form-item label="确认密码" prop="checkPass">
-      <el-input type="password" :value.sync="ruleForm2.checkPass" auto-complete="off"></el-input>
+      <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off"></el-input>
     </el-form-item>
     <el-form-item label="年龄" prop="age">
-      <el-input :value.sync="ruleForm2.age"></el-input>
+      <el-input v-model="ruleForm2.age"></el-input>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click.prevent="handleSubmit2">提交</el-button>
-      <el-button @click.prevent="handleReset2">重置</el-button>
+      <el-button type="primary" @click.native.prevent="handleSubmit2">提交</el-button>
+      <el-button @click.native.prevent="handleReset2">重置</el-button>
     </el-form-item>
   </el-form>
 </template>
 <script>
   export default {
     data() {
+      var checkAge = (rule, value, callback) => {
+        var age = parseInt(value, 10);
+
+        setTimeout(() => {
+          if (!Number.isInteger(age)) {
+            callback(new Error('请输入数字值'));
+          } else{
+            if (age < 18) {
+              callback(new Error('必须年满18岁'));
+            } else {
+              callback();
+            }
+          } 
+        }, 1000);
+      };
+      var validaePass = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error('请输入密码'));
+        } else {
+          if (this.ruleForm2.checkPass !== '') {
+            this.$refs.ruleForm2.validateField('checkPass');
+          }
+          callback();
+        }
+      };
+      var validaePass2 = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error('请再次输入密码'));
+        } else if (value !== this.ruleForm2.pass) {
+          callback(new Error('两次输入密码不一致!'));
+        } else {
+          callback();
+        }
+      };
       return {
         ruleForm2: {
           pass: '',
@@ -813,22 +865,25 @@ Form 组件是一个具有校验和提交功能的表单，包含复选框、单
         rules2: {
           pass: [
             { required: true, message: '请输入密码', trigger: 'blur' },
-            { validator: this.validaePass }
+            { validator: validaePass }
           ],
           checkPass: [
             { required: true, message: '请再次输入密码', trigger: 'blur' },
-            { validator: this.validaePass2 }
+            { validator: validaePass2 }
           ],
           age: [
             { required: true, message: '请填写年龄', trigger: 'blur' },
-            { validator: this.checkAge, trigger: 'change' }
+            { validator: checkAge, trigger: 'change' }
           ]
         }
       };
     },
     methods: {
-      handleSubmit(ev) {
-        this.$refs.ruleForm.validate((valid) => {
+      handleReset2() {
+        this.$refs.ruleForm2.resetFields();
+      },
+      handleSubmit2(ev) {
+        this.$refs.ruleForm2.validate((valid) => {
           if (valid) {
             alert('submit!');
           } else {
@@ -845,42 +900,54 @@ Form 组件是一个具有校验和提交功能的表单，包含复选框、单
 ## 动态增减表单项
 
 <div class="demo-box demo-form demo-dynamic">
-  <el-form :model="dynamicForm" :rules="dynamicRule" v-ref:dynamic-form label-width="80px">
+  <el-form :model="dynamicForm" :rules="dynamicRule" ref="dynamicForm" label-width="80px">
     <el-form-item prop="email" label="邮箱">
-      <el-input :value.sync="dynamicForm.email"></el-input>
+      <el-input v-model="dynamicForm.email"></el-input>
     </el-form-item>
     <el-form-item
-      v-for="domain in dynamicForm.domains"
-      :label="'域名' + $index"
-      track-by="$index"
-      :prop="'domains:' + $index"
-      :rules="{ required: true, message: '域名不能为空', trigger: 'blur' }">
-      <el-input :value.sync="domain"></el-input><el-button @click="dynamicForm.domains.$remove(domain)">删除</el-button>
+      v-for="(domain, index) in dynamicForm.domains"
+      :label="'域名' + index"
+      :key="domain.key"
+      :prop="'domains:' + index"
+      :rules="{
+        type: 'object', required: true,
+        fields: {
+          value: { required: true, message: '域名不能为空', trigger: 'blur' }
+        }
+      }"
+    >
+      <el-input v-model="domain.value"></el-input><el-button @click.native.prevent="removeDomain(domain)">删除</el-button>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click.prevent="handleSubmit3">提交</el-button>
-      <el-button @click.prevent="dynamicForm.domains.push('')">新增域名</el-button>
+      <el-button type="primary" @click.native.prevent="handleSubmit3">提交</el-button>
+      <el-button @click.native.prevent="addDomain">新增域名</el-button>
     </el-form-item>
   </el-form>
 </div>
 
 ```html
 <template>
-  <el-form :model="dynamicForm" :rules="dynamicRule" v-ref:dynamic-form label-width="80px">
+  <el-form :model="dynamicForm" :rules="dynamicRule" ref="dynamicForm" label-width="80px">
     <el-form-item prop="email" label="邮箱">
-      <el-input :value.sync="dynamicForm.email"></el-input>
+      <el-input v-model="dynamicForm.email"></el-input>
     </el-form-item>
     <el-form-item
-      v-for="domain in dynamicForm.domains"
-      :label="'域名' + $index"
-      track-by="$index"
-      :prop="'domains:' + $index"
-      :rules="{ required: true, message: '域名不能为空', trigger: 'blur' }">
-      <el-input :value.sync="domain"></el-input><el-button @click="dynamicForm.domains.$remove(domain)">删除</el-button>
+      v-for="(domain, index) in dynamicForm.domains"
+      :label="'域名' + index"
+      :key="domain.key"
+      :prop="'domains:' + index"
+      :rules="{
+        type: 'object', required: true,
+        fields: {
+          value: { required: true, message: '域名不能为空', trigger: 'blur' }
+        }
+      }"
+    >
+      <el-input v-model="domain.value"></el-input><el-button @click.native.prevent="removeDomain(domain)">删除</el-button>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click.prevent="handleSubmit3">提交</el-button>
-      <el-button @click.prevent="dynamicForm.domains.push('')">新增域名</el-button>
+      <el-button type="primary" @click.native.prevent="handleSubmit3">提交</el-button>
+      <el-button @click.native.prevent="addDomain">新增域名</el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -889,14 +956,13 @@ Form 组件是一个具有校验和提交功能的表单，包含复选框、单
     data() {
       return {
         dynamicForm: {
-          domains: [''],
+          domains: [{
+            key: 1,
+            value: ''
+          }],
           email: ''
         },
         dynamicRule: {
-          domains: {
-            type: '域名不能',
-            required: true
-          },
           email: [
             { required: true, message: '请输入邮箱地址', trigger: 'blur' },
             { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur,change' }
@@ -913,6 +979,18 @@ Form 组件是一个具有校验和提交功能的表单，包含复选框、单
             console.log('error submit!!');
             return false;
           }
+        });
+      },
+      removeDomain(item) {
+        var index = this.dynamicForm.domains.indexOf(item)
+        if (index !== -1) {
+          this.dynamicForm.domains.splice(index, 1)
+        }
+      },
+      addDomain() {
+        this.dynamicForm.domains.push({
+          key: this.dynamicForm.domains.length,
+          value: ''
         });
       }
     }
@@ -938,7 +1016,7 @@ Form 组件是一个具有校验和提交功能的表单，包含复选框、单
 |---------- |-------------- |---------- |-------- |
 | validate(cb) | 对整个表单进行校验的方法, 校验结束后会调用传入的回调方法, cb(valid), valid 参数是校验 bool 值结果 | function |    |
 | validateField(prop, cb) | 对部分表单字段进行校验的方法 |  |   |
-| resetForm | 对整个表单进行重置，将所有字段值重置为空并移除校验结果 |  |   |
+| resetFields | 对整个表单进行重置，将所有字段值重置为空并移除校验结果 |  |   |
 
 ## el-form-item API
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |

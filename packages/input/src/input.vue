@@ -25,7 +25,7 @@
       >
     </template>
     <!-- 写成垂直的方式会导致 placeholder 失效, 蜜汁bug -->
-    <textarea v-else v-model="currentValue" class="el-textarea__inner" :name="name" :placeholder="placeholder" :disabled="disabled" :readonly="readonly" @focus="$emit('onfocus', val)" @blur="handleBlur"></textarea>
+    <textarea v-else v-model="currentValue" class="el-textarea__inner" :name="name" :placeholder="placeholder" :disabled="disabled" :readonly="readonly" @focus="$emit('onfocus', currentValue)" @blur="handleBlur"></textarea>
   </div>
 </template>
 <script>
@@ -37,7 +37,7 @@
     mixins: [emitter],
 
     props: {
-      value: {},
+      value: [String, Number],
       placeholder: {
         type: String,
         default: ''
@@ -116,7 +116,7 @@
       'currentValue'(val) {
         this.$emit('input', val);
         this.$emit('onchange', val);
-        this.dispatch('form-item', 'el.form.change', val);
+        this.dispatch('form-item', 'el.form.change', [val]);
       }
     }
   };
