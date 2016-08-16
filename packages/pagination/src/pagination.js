@@ -49,7 +49,7 @@ export default {
     const TEMPLATE_MAP = {
       prev: <prev></prev>,
       jumper: <jumper></jumper>,
-      pager: <pager currentPage={ this.internalCurrentPage } pageCount={ this.pageCount } on-currentChange={ this.handleCurrentChange }></pager>,
+      pager: <pager currentPage={ this.internalCurrentPage } pageCount={ this.pageCount } on-currentchange={ this.handleCurrentChange }></pager>,
       next: <next></next>,
       sizes: <sizes></sizes>,
       slot: <slot></slot>,
@@ -114,6 +114,12 @@ export default {
     },
 
     Sizes: {
+      created() {
+        if (Array.isArray(this.$parent.pageSizes)) {
+          this.$parent.internalPageSize = this.$parent.pageSizes[0];
+        }
+      },
+
       render(h) {
         return (
           <span class="el-pagination__sizes">
@@ -144,7 +150,7 @@ export default {
         handleChange(val) {
           if (val !== this.$parent.internalPageSize) {
             this.$parent.internalPageSize = val = parseInt(val, 10);
-            this.$parent.$emit('size-change', val);
+            this.$parent.$emit('sizechange', val);
           }
         }
       }
@@ -167,7 +173,7 @@ export default {
           this.$parent.internalCurrentPage = this.$parent.getValidCurrentPage(target.value);
 
           if (target.value !== this.oldValue && Number(target.value) === this.$parent.internalCurrentPage) {
-            this.$parent.$emit('current-change', this.$parent.internalCurrentPage);
+            this.$parent.$emit('currentchange', this.$parent.internalCurrentPage);
           }
 
           this.oldValue = null;
@@ -209,7 +215,7 @@ export default {
   methods: {
     handleCurrentChange(val) {
       this.internalCurrentPage = this.getValidCurrentPage(val);
-      this.$emit('current-change', this.internalCurrentPage);
+      this.$emit('currentchange', this.internalCurrentPage);
     },
 
     prev() {
@@ -218,7 +224,7 @@ export default {
       this.internalCurrentPage = this.getValidCurrentPage(newVal);
 
       if (this.internalCurrentPage !== oldPage) {
-        this.$emit('current-change', this.internalCurrentPage);
+        this.$emit('currentchange', this.internalCurrentPage);
       }
     },
 
@@ -228,7 +234,7 @@ export default {
       this.internalCurrentPage = this.getValidCurrentPage(newVal);
 
       if (this.internalCurrentPage !== oldPage) {
-        this.$emit('current-change', this.internalCurrentPage);
+        this.$emit('currentchange', this.internalCurrentPage);
       }
     },
 
@@ -238,7 +244,7 @@ export default {
       this.internalCurrentPage = this.getValidCurrentPage(newVal);
 
       if (this.internalCurrentPage !== oldPage) {
-        this.$emit('current-change', this.internalCurrentPage);
+        this.$emit('currentchange', this.internalCurrentPage);
       }
     },
 
@@ -248,7 +254,7 @@ export default {
       this.internalCurrentPage = this.getValidCurrentPage(newVal);
 
       if (this.internalCurrentPage !== oldPage) {
-        this.$emit('current-change', this.internalCurrentPage);
+        this.$emit('currentchange', this.internalCurrentPage);
       }
     },
 

@@ -1,7 +1,4 @@
 {
-  "group": [
-    "./packages/group/index.js"
-  ],
   "select-dropdown": [
     "./packages/select-dropdown/index.js"
   ],
@@ -148,5 +145,8 @@
   ],
   "spinner": [
     "./packages/spinner/index.js"
+  ],
+  "message": [
+    "./packages/message/index.js"
   ]
 }

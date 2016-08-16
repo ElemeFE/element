@@ -1,4 +1,3 @@
-import Group from '../packages/group/index.js';
 import SelectDropdown from '../packages/select-dropdown/index.js';
 import Pagination from '../packages/pagination/index.js';
 import Dialog from '../packages/dialog/index.js';
@@ -48,11 +47,11 @@ import Col from '../packages/col/index.js';
 import Upload from '../packages/upload/index.js';
 import Progress from '../packages/progress/index.js';
 import Spinner from '../packages/spinner/index.js';
+import Message from '../packages/message/index.js';
 
 const install = function(Vue) {
   if (install.installed) return;
 
-  Vue.component(Group.name, Group);
   Vue.component(SelectDropdown.name, SelectDropdown);
   Vue.component(Pagination.name, Pagination);
   Vue.component(Dialog.name, Dialog);
@@ -99,6 +98,7 @@ const install = function(Vue) {
   Vue.component(Upload.name, Upload);
   Vue.component(Progress.name, Progress);
   Vue.component(Spinner.name, Spinner);
+  Vue.component(Message.name, Message);
 
   Vue.use(Loading);
 
@@ -107,6 +107,7 @@ const install = function(Vue) {
   Vue.prototype.$confirm = MessageBox.confirm;
   Vue.prototype.$prompt = MessageBox.prompt;
   Vue.prototype.$notify = Notification;
+  Vue.prototype.$message = Message;
 };
 
 // auto install
@@ -116,7 +117,6 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 module.exports = {
   install,
-  Group,
   SelectDropdown,
   Pagination,
   Dialog,
@@ -165,5 +165,6 @@ module.exports = {
   Col,
   Upload,
   Progress,
-  Spinner
+  Spinner,
+  Message
 };
