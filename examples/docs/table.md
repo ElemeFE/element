@@ -85,9 +85,9 @@
         this.singleSelection = val;
       },
 
-      // handleMultipleSelectionChange(val) {
-      //   this.multipleSelection = val;
-      // }
+      handleMultipleSelectionChange(val) {
+        this.multipleSelection = val;
+      }
     },
 
     watch: {
@@ -95,9 +95,9 @@
         console.log('selection: ', val);
       },
 
-      // multipleSelection(val) {
-      //   console.log('selection: ', val);
-      // }
+      multipleSelection(val) {
+        console.log('selection: ', val);
+      }
     }
   };
 </script>
@@ -488,7 +488,7 @@
 
 ## 多选
 
-<el-table :data="tableData3" selection-mode="multiple" style="width: 520px">
+<el-table :data="tableData3" selection-mode="multiple" style="width: 520px" @selectionchange="handleMultipleSelectionChange">
   <el-table-column type="selection" width="50"></el-table-column>
   <el-table-column inline-template property="date" label="日期" width="120">
     <div>{{ row.date }}</div>
