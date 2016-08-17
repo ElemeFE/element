@@ -9,7 +9,6 @@ import Submenu from '../packages/submenu/index.js';
 import MenuItem from '../packages/menu-item/index.js';
 import Input from '../packages/input/index.js';
 import InputNumber from '../packages/input-number/index.js';
-import InputGroup from '../packages/input-group/index.js';
 import Radio from '../packages/radio/index.js';
 import RadioGroup from '../packages/radio-group/index.js';
 import RadioButton from '../packages/radio-button/index.js';
@@ -48,6 +47,8 @@ import Upload from '../packages/upload/index.js';
 import Progress from '../packages/progress/index.js';
 import Spinner from '../packages/spinner/index.js';
 import Message from '../packages/message/index.js';
+import Badge from '../packages/badge/index.js';
+import Card from '../packages/card/index.js';
 
 const install = function(Vue) {
   if (install.installed) return;
@@ -63,7 +64,6 @@ const install = function(Vue) {
   Vue.component(MenuItem.name, MenuItem);
   Vue.component(Input.name, Input);
   Vue.component(InputNumber.name, InputNumber);
-  Vue.component(InputGroup.name, InputGroup);
   Vue.component(Radio.name, Radio);
   Vue.component(RadioGroup.name, RadioGroup);
   Vue.component(RadioButton.name, RadioButton);
@@ -99,6 +99,8 @@ const install = function(Vue) {
   Vue.component(Progress.name, Progress);
   Vue.component(Spinner.name, Spinner);
   Vue.component(Message.name, Message);
+  Vue.component(Badge.name, Badge);
+  Vue.component(Card.name, Card);
 
   Vue.use(Loading);
 
@@ -128,7 +130,6 @@ module.exports = {
   MenuItem,
   Input,
   InputNumber,
-  InputGroup,
   Radio,
   RadioGroup,
   RadioButton,
@@ -166,5 +167,7 @@ module.exports = {
   Upload,
   Progress,
   Spinner,
-  Message
+  Message,
+  Badge,
+  Card
 };

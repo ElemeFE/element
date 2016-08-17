@@ -2,11 +2,16 @@
   <div :class="[
     type === 'textarea' ? 'el-textarea' : 'el-input',
     size ? 'el-input-' + size : '',
-    {'is-disabled': disabled}
+    {
+      'is-disabled': disabled,
+      'el-input-group': $slots.prepend || $slots.append
+    }
   ]">
     <template v-if="type !== 'textarea'">
-      <i class="el-input__icon" :class="[icon ? 'el-icon-' + icon : '']" v-if="icon"></i>
-      <i class="el-input__icon el-icon-loading" v-if="validating"></i>
+      <!-- 前置元素 -->
+      <div class="el-input-group__prepend" v-if="$slots.prepend">
+        <slot name="prepend"></slot>
+      </div>
       <input
         :type="type"
         :name="name"
@@ -23,6 +28,13 @@
         :autocomplete="autoComplete"
         ref="input"
       >
+      <!-- input 图标 -->
+      <i class="el-input__icon" :class="[icon ? 'el-icon-' + icon : '']" v-if="icon"></i>
+      <i class="el-input__icon el-icon-loading" v-if="validating"></i>
+      <!-- 后置元素 -->
+      <div class="el-input-group__append" v-if="$slots.append">
+        <slot name="append"></slot>
+      </div>
     </template>
     <!-- 写成垂直的方式会导致 placeholder 失效, 蜜汁bug -->
     <textarea v-else v-model="currentValue" class="el-textarea__inner" :name="name" :placeholder="placeholder" :disabled="disabled" :readonly="readonly" @focus="$emit('onfocus', val)" @blur="handleBlur"></textarea>

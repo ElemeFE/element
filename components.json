@@ -32,9 +32,6 @@
   "input-number": [
     "./packages/input-number/index.js"
   ],
-  "input-group": [
-    "./packages/input-group/index.js"
-  ],
   "radio": [
     "./packages/radio/index.js"
   ],
