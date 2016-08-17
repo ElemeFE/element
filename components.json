@@ -32,9 +32,6 @@
   "input-number": [
     "./packages/input-number/index.js"
   ],
-  "input-group": [
-    "./packages/input-group/index.js"
-  ],
   "radio": [
     "./packages/radio/index.js"
   ],
@@ -148,6 +145,9 @@
   ],
   "message": [
     "./packages/message/index.js"
+  ],
+  "badge": [
+    "./packages/badge/index.js"
   ],
   "card": [
     "./packages/card/index.js"

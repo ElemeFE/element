@@ -233,6 +233,12 @@
         "path": "/tree",
         "name": "tree (tree)",
         "title": "tree"
+      },
+      {
+        "path": "/badge",
+        "name": "标记 (badge)",
+        "title": " Badge 标记",
+        "description": "出现在按钮、图标旁的数字或状态标记"
       }
     ]
   }

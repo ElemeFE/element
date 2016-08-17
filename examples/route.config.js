@@ -10,8 +10,10 @@ const registerRoute = (config) => {
 
         route.push({
           path: page.path,
-          title: page.title || page.name,
-          description: page.description,
+          meta: {
+            title: page.title || page.name,
+            description: page.description
+          },
           component: component.default || component
         });
       })

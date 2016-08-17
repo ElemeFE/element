@@ -4,6 +4,7 @@
 @component-namespace el {
   @b input {
     position: relative;
+    font-size: var(--font-size-base);
     
     @e inner {
       display: block;
@@ -11,7 +12,6 @@
       box-sizing: border-box;
       width: 100%;
       height: var(--input-height);
-      font-size: var(--font-size-base);
       color: var(--input-color);
       background-color: #fff;
       background-image: none;
@@ -71,75 +71,87 @@
   }
 
   @b input-large {
+    font-size: var(--input-large-font-size);
+
     & .el-input__inner {
-      font-size: var(--input-large-font-size);
       height: var(--input-large-height);
     }
   }
   @b input-small {
+    font-size: var(--input-small-font-size);
+
     & .el-input__inner {
-      font-size: var(--input-small-font-size);
       height: var(--input-small-height);
     }
   }
   @b input-mini {
+    font-size: var(--input-mini-font-size);
+
     & .el-input__inner {
-      font-size: var(--input-mini-font-size);
       height: var(--input-mini-height);
     }
   }
 
   @b input-group {
     display: table;
+    border-collapse: separate;
 
-    & .el-input {
+    & > .el-input__inner {
       vertical-align: middle;
       display: table-cell;
     }
-    @e label {
-      padding: 0 10px;
-      font-size: 13px;
-    }
-    @e prepend {
+    @e append, prepend {
+      background-color: #f9fafc;
+      color: #99a9bf;
       vertical-align: middle;
       display: table-cell;
       position: relative;
       border: var(--border-base);
-      border-right: 0;
       border-radius: 4px;
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
+      padding: 0 10px;
+      width: 1%;
+      white-space: nowrap;
 
-      & .el-dropdown--text {
-        padding: 0 10px;
+      & .el-select,
+      & .el-button {
+        display: block;
+        margin: -10px;
+      }
+
+      & .el-button,
+      & .el-select .el-input__inner,
+      & .el-select:hover .el-input__inner {
+        border-color: transparent;
+        background-color: transparent;
+        color: inherit;
+        border-top: 0;
+        border-bottom: 0;
+      }
+      & .el-button,
+      & .el-input {
+        font-size: inherit;
       }
     }
+    @e prepend {
+      border-right: 0;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
     @e append {
-      vertical-align: middle;
-      display: table-cell;
-      position: relative;
-      border: var(--border-base);
       border-left: 0;
-      border-radius: 4px;
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
     }
-    & .el-input:first-child {
-      .el-input__inner {
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-      }
+    & .el-input__inner:first-child {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
     }
-    & .el-input:last-child {
-      .el-input__inner {
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-      }
+    & .el-input__inner:last-child {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
     }
-    & .el-input:not(:first-child):not(:last-child) {
-      .el-input__inner {
-        border-radius: 0;
-      }
+    & .el-input__inner:not(:first-child):not(:last-child) {
+      border-radius: 0;
     }
   }
 
