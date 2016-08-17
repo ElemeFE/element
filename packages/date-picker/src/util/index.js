@@ -1,4 +1,4 @@
-import dateUtil from './fecha';
+import dateUtil from 'main/utils/date';
 
 const newArray = function(start, end) {
   let result = [];

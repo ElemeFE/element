@@ -353,4 +353,10 @@
     --dropdown-menu-box-shadow: 0 0 6px 0 rgba(0,0,0,.12), 0 2px 4px 0 rgba(0,0,0,.12);
     --dropdown-menuItem-hover-fill: #e5e9f2;
     --dropdown-menuItem-hover-color: #475669;
+
+    /*Card
+    --------------------------*/
+    --card-border-color: var(--disabled-border-base);
+    --card-border-radius: 4px;
+    --card-padding: 20px;
 }
