@@ -23,11 +23,9 @@
     <!-- 下拉菜单 -->
     <transition name="md-fade-bottom">
       <el-dropdown-menu
-        ref:menu
         v-if="visible"
         @mouseenter.native="handleMouseEnter"
-        @mouseleave.native="handleMouseLeave"
-      >
+        @mouseleave.native="handleMouseLeave">
         <slot></slot>
       </el-dropdown-menu>
     </transition>

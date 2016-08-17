@@ -11,6 +11,7 @@
   }
 
   body {
+    font-family: FreeSans, Arimo, "Droid Sans", Helvetica, Arial, sans-serif;
     overflow: auto;
   }
 
@@ -299,10 +300,10 @@
       </div>
       <div class="pure-u-5-6 app__content">
         <header class="app__header">
-          <h1 class="app__headline">{{ $route.title || 'element 后台组件' }}</h1>
+          <h1 class="app__headline">{{ $route.meta.title || 'element 后台组件' }}</h1>
         </header>
         <section class="app__main" ref="main">
-          <p class="app__description">{{ $route.description }}</p>
+          <p class="app__description">{{ $route.meta.description }}</p>
           <router-view></router-view>
         </section>
         <toc main=".app__main"></toc>
