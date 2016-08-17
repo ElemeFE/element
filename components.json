@@ -151,5 +151,8 @@
   ],
   "badge": [
     "./packages/badge/index.js"
+  ],
+  "card": [
+    "./packages/card/index.js"
   ]
 }

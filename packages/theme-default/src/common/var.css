@@ -361,4 +361,10 @@
    --badge-font-size: 12px;
    --badge-padding: 6px;
    --badge-size: 18px;
+
+    /*Card
+    --------------------------*/
+    --card-border-color: var(--disabled-border-base);
+    --card-border-radius: 4px;
+    --card-padding: 20px;
 }

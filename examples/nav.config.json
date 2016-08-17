@@ -92,6 +92,12 @@
         "name": "加载 (loading)",
         "title": "loading 加载",
         "description": "加载数据时显示"
+      },
+      {
+        "path": "/card",
+        "name": "卡片 (card)",
+        "title": "card 卡片",
+        "description": "将信息聚合在卡片容器中展示"
       }
     ]
   },
