@@ -9,7 +9,8 @@
         input4: '',
         input5: '',
         input6: '',
-        textarea: ''
+        textarea: '',
+        select: ''
       };
     }
   };
@@ -27,6 +28,9 @@
     }
     .el-textarea {
       width: 414px;
+    }
+    .el-input-group {
+      min-width: 260px;
     }
     .el-input-group + .el-input-group {
       margin-top: 15px;
@@ -82,22 +86,6 @@
 </el-input>
 ```
 
-<!-- ## readonly 状态
-
-<el-input
-  :readonly="true"
-  placeholder="请输入内容"
-  :value.sync="input1">
-</el-input>
-
-```html
-<el-input
-  :readonly="true"
-  placeholder="请输入内容"
-  :value.sync="input1">
-</el-input>
-``` -->
-
 ## Input 图标
 
 <div class="demo-box demo-input">
@@ -118,76 +106,54 @@
 
 ## Input Group
 
-前置和后置元素可以是任何东西， 通过使用`.el-input-group__label`可以声明附加元素是一个标签从而获得合适的样式。
-
 ### 后置元素
 
 <div class="demo-box demo-input">
-  <el-input-group>
-    <el-input
-      placeholder="请输入内容"
-      :value.sync="input2">
-    </el-input>
-    <span class="el-input-group__label" slot="append">.com</span>
-  </el-input-group>
+  <el-input placeholder="请输入内容" :value.sync="input2">
+    <template slot="append">.com</template>
+  </el-input>
 </div>
 
 ```html
-<el-input-group>
-  <el-input
-    placeholder="请输入内容"
-    :value.sync="input2">
-  </el-input>
-  <span class="el-input-group__label" slot="append">.com</span>
-</el-input-group>
+<el-input placeholder="请输入内容" :value.sync="input2">
+  <template slot="append">.com</template>
+</el-input>
 ```
 
 ### 前置元素
 <div class="demo-box demo-input">
-  <el-input-group>
-    <el-button slot="prepend" type="text">按钮</el-button>
-    <el-input
-      placeholder="请输入内容"
-      :value.sync="input2">
-    </el-input>
-  </el-input-group>
+  <el-input placeholder="请输入内容" :value.sync="input2">
+    <template slot="prepend">Http://</template>
+  </el-input>
 </div>
 
 ```html
-<el-input-group>
-  <el-button slot="prepend" type="text">按钮</el-button>
-  <el-input
-    placeholder="请输入内容"
-    :value.sync="input2">
-  </el-input>
-</el-input-group>
+<el-input placeholder="请输入内容" :value.sync="input2">
+  <template slot="prepend">Http://</template>
+</el-input>
 ```
 
 ### 前置和后置元素
 <div class="demo-box demo-input">
-  <el-input-group>
-    <el-dropdown text="下拉菜单" type="text" :icon-separate="false" slot="prepend">
-      <li>选项一</li>
-      <li>选项二</li>
-      <li>选项三</li>
-      <li class="divider">选项四</li>
-    </el-dropdown>
-    <el-input placeholder="请输入内容" :value.sync="input2"></el-input>
-    <el-button type="text" slot="append">搜索</el-button>
-  </el-input-group>
+  <el-input placeholder="请输入内容" :value.sync="input2" style="width: 300px;">
+    <el-select v-model="select" slot="prepend" :width="100">
+      <el-option label="餐厅名" value="1"></el-option>
+      <el-option label="订单号" value="2"></el-option>
+      <el-option label="用户电话" value="3"></el-option>
+    </el-select>
+    <el-button slot="append" icon="search"></el-button>
+  </el-input>
 </div>
 
 ```html
-<el-input-group>
-  <el-dropdown text="下拉菜单" type="text" :icon-separate="false" slot="prepend">
-    <li>选项一</li>
-    <li>选项二</li>
-    <li>选项三</li>
-    <li class="divider">选项四</li>
-  </el-dropdown>
-  <el-input placeholder="请输入内容" :value.sync="input2"></el-input>
-  <el-button type="text" slot="append">搜索</el-button>
-</el-input-group>
+<el-input placeholder="请输入内容" :value.sync="input2" style="width: 300px;">
+  <el-select v-model="select" slot="prepend" :width="100">
+    <el-option label="餐厅名" value="1"></el-option>
+    <el-option label="订单号" value="2"></el-option>
+    <el-option label="用户电话" value="3"></el-option>
+  </el-select>
+  <el-button slot="append" icon="search"></el-button>
+</el-input>
 ```
 
 ## 尺寸
