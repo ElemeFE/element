@@ -1,36 +1,36 @@
 <template>
   <div class="el-table" :class="{ 'el-table--fit': fit, 'el-table--striped': stripe, 'el-table--border': border }" @mouseleave="handleMouseLeave($event)">
-    <div class="hidden-columns" v-el:hidden-columns><slot></slot></div>
+    <div class="hidden-columns" ref="hiddenColumns"><slot></slot></div>
     <div class="el-table__header-wrapper">
-      <table-header :columns="columns" :all-selected.sync="allSelected" :selection.sync="selection" :style="{ width: bodyWidth ? bodyWidth + 'px' : '' }" :border="border"></table-header>
+      <table-header :columns="columns" :all-selected="allSelected" @allselectedchange="handleAllSelectedChange" :selection="selection" :style="{ width: bodyWidth ? bodyWidth + 'px' : '' }" :border="border"></table-header>
     </div>
     <div class="el-table__body-wrapper">
-      <table-body :columns="columns" :selection.sync="selection" :data="data | orderBy sortingProperty sortingDirection" :style="{ width: bodyWidth ? bodyWidth - (showVScrollBar ? gutterWidth : 0 ) + 'px' : '' }"></table-body>
+      <table-body :columns="columns" :selection="selection" :data="filterData" :style="{ width: bodyWidth ? bodyWidth - (showVScrollBar ? gutterWidth : 0 ) + 'px' : '' }"></table-body>
     </div>
-    <div class="el-table__fixed" :style="{ width: fixedBodyWidth ? fixedBodyWidth + 'px' : '' }" v-el:fixed>
+    <div class="el-table__fixed" :style="{ width: fixedBodyWidth ? fixedBodyWidth + 'px' : '' }" ref="fixed">
       <div class="el-table__fixed-header-wrapper" v-if="fixedColumnCount > 0">
-        <table-header :columns="fixedColumns" :all-selected.sync="allSelected" :selection.sync="selection" :style="{ width: fixedBodyWidth ? fixedBodyWidth + 'px' : '' }" :border="border"></table-header>
+        <table-header :columns="fixedColumns" :all-selected="allSelected" @allselectedchange="handleAllSelectedChange" :selection="selection" :style="{ width: fixedBodyWidth ? fixedBodyWidth + 'px' : '' }" :border="border"></table-header>
       </div>
       <div class="el-table__fixed-body-wrapper" v-if="fixedColumnCount > 0" :style="{ top: headerHeight + 'px' }">
-        <table-body :columns="fixedColumns" fixed :selection.sync="selection" :data="data | orderBy sortingProperty sortingDirection" :style="{ width: fixedBodyWidth ? fixedBodyWidth + 'px' : '' }"></table-body>
+        <table-body :columns="fixedColumns" fixed :selection="selection" :data="filterData" :style="{ width: fixedBodyWidth ? fixedBodyWidth + 'px' : '' }"></table-body>
       </div>
     </div>
-    <div class="el-table__column-resize-proxy" v-el:resize-proxy v-show="resizeProxyVisible"></div>
+    <div class="el-table__column-resize-proxy" ref="resizeProxy" v-show="resizeProxyVisible"></div>
     <slot name="bottom"></slot>
   </div>
 </template>
 
 <script type="text/babel">
-  import Vue from 'vue';
   import throttle from 'throttle-debounce/throttle';
   import debounce from 'throttle-debounce/debounce';
-  import { getScrollBarWidth } from './util';
+  import { getScrollBarWidth, orderBy } from './util';
+  import objectAssign from 'object-assign';
 
   let gridIdSeed = 1;
   let GUTTER_WIDTH;
 
-  import TableBody from './table-body.vue';
-  import TableHeader from './table-header.vue';
+  import TableBody from './table-body';
+  import TableHeader from './table-header';
 
   export default {
     name: 'el-table',
@@ -84,24 +84,16 @@
       }
     },
 
-    events: {
-      onresize() {
-        Vue.nextTick(() => {
-          this.$calcColumns();
-        });
-      }
-    },
-
-    partials: {
-      default: '<div>{{column.label}}</div>'
-    },
-
     components: {
       TableHeader,
       TableBody
     },
 
     methods: {
+      handleAllSelectedChange(val) {
+        this.allSelected = val;
+      },
+
       doOnDataChange(data) {
         data = data || [];
 
@@ -111,7 +103,7 @@
             if (!this.allowNoSelection) {
               this.selected = data[0];
               if (this.selected !== oldSelection) {
-                this.$emit('selection-change', this.selected);
+                this.$emit('selectionchange', this.selected);
               }
             }
           } else if (data.indexOf(oldSelection) === -1) {
@@ -121,7 +113,7 @@
               this.selected = null;
             }
             if (this.selected !== oldSelection) {
-              this.$emit('selection-change', this.selected);
+              this.$emit('selectionchange', this.selected);
             }
           }
         }
@@ -129,7 +121,7 @@
 
       toggleAllSelection() {
         setTimeout(() => {
-          this.data.forEach(item => {
+          this.tableData.forEach(item => {
             item.$selected = this.allSelected;
           });
         }, 0);
@@ -241,7 +233,7 @@
           this.fixedBodyWidth = fixedBodyWidth;
         }
 
-        Vue.nextTick(() => {
+        this.$nextTick(() => {
           this.headerHeight = this.$el.querySelector('.el-table__header-wrapper').offsetHeight;
         });
       },
@@ -258,7 +250,7 @@
           gridWrapper.style.height = bodyHeight + 'px';
 
           this.$el.style.height = height + 'px';
-          this.$els.fixed.style.height = height + 'px';
+          this.$refs.fixed.style.height = height + 'px';
 
           const fixedBodyWrapper = this.$el.querySelector('.el-table__fixed-body-wrapper');
           if (fixedBodyWrapper) {
@@ -276,7 +268,7 @@
       },
 
       updateScrollInfo() {
-        Vue.nextTick(() => {
+        this.$nextTick(() => {
           if (this.$el) {
             let gridBodyWrapper = this.$el.querySelector('.el-table__body-wrapper');
             let gridBody = this.$el.querySelector('.el-table__body-wrapper .el-table__body');
@@ -310,7 +302,7 @@
           window.addEventListener('resize', this.windowResizeListener);
         }
 
-        Vue.nextTick(() => {
+        this.$nextTick(() => {
           if (this.height) {
             this.$calcHeight(this.height);
           }
@@ -319,6 +311,7 @@
     },
 
     created() {
+      this.tableData = this.data;
       this.gridId = 'grid_' + gridIdSeed + '_';
 
       if (GUTTER_WIDTH === undefined) {
@@ -334,10 +327,8 @@
     computed: {
       selection() {
         if (this.selectionMode === 'multiple') {
-          const data = this.data || [];
-          return data.filter(function(item) {
-            return item.$selected === true;
-          });
+          const data = this.tableData || [];
+          return data.filter(item => item.$selected === true);
         } else if (this.selectionMode === 'single') {
           return this.selected;
         } else {
@@ -351,6 +342,10 @@
         return columns.filter(function(item, index) {
           return index < fixedColumnCount;
         });
+      },
+
+      filterData() {
+        return orderBy(this.tableData, this.sortingProperty, this.sortingDirection);
       }
     },
 
@@ -360,9 +355,9 @@
       },
 
       selection(val) {
-        this.$emit('selection-change', val);
+        this.$emit('selectionchange', val);
         if (this.selectionMode === 'multiple') {
-          this.allSelected = val.length === this.data.length;
+          this.allSelected = val.length === this.tableData.length;
         }
       },
 
@@ -374,23 +369,9 @@
         this.$calcHeight(value);
       },
 
-      data(newVal) {
+      tableData(newVal) {
         this.doOnDataChange(newVal);
         this.updateScrollInfo();
-      }
-    },
-
-    beforeCompile() {
-      const styleNode = document.createElement('style');
-      styleNode.type = 'text/css';
-      styleNode.rel = 'stylesheet';
-      styleNode.title = 'Grid Column Style';
-      document.getElementsByTagName('head')[0].appendChild(styleNode);
-
-      this.styleNode = styleNode;
-
-      if (this.data && this.selectionMode === 'multiple') {
-        this.data = this.data.map(item => Object.assign({ '$selected': false }, item));
       }
     },
 
@@ -404,23 +385,36 @@
       }
     },
 
-    ready() {
+    mounted() {
+      const styleNode = document.createElement('style');
+      styleNode.type = 'text/css';
+      styleNode.rel = 'stylesheet';
+      styleNode.title = 'Grid Column Style';
+      document.getElementsByTagName('head')[0].appendChild(styleNode);
+
+      this.styleNode = styleNode;
+
+      if (this.tableData && this.selectionMode === 'multiple') {
+        this.tableData = this.tableData.map(item => objectAssign({ '$selected': false }, item));
+      }
+
       this.doRender();
 
       this.$ready = true;
-      if (this.data) {
-        this.doOnDataChange(this.data);
+      if (this.tableData) {
+        this.doOnDataChange(this.tableData);
       }
       this.updateScrollInfo();
       if (this.fixedColumnCount > 0) {
         this.$nextTick(() => {
-          this.$els.fixed.style.height = this.$el.clientHeight + 'px';
+          this.$refs.fixed.style.height = this.$el.clientHeight + 'px';
         });
       }
     },
 
     data() {
       return {
+        tableData: [],
         showHScrollBar: false,
         showVScrollBar: false,
         hoverRowIndex: null,

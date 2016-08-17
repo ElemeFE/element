@@ -1,6 +1,5 @@
 <script>
   import Vue from 'vue';
-  let popup = Vue.extend(require('examples/components/table-filter.vue'));
   export default {
     data() {
       return {
@@ -79,6 +78,16 @@
         singleSelection: {},
         multipleSelection: []
       };
+    },
+
+    methods: {
+      handleSelectionChange(val) {
+        this.singleSelection = val;
+      },
+
+      handleMultipleSelectionChange(val) {
+        this.multipleSelection = val;
+      }
     },
 
     watch: {
@@ -287,7 +296,7 @@
     <el-table-column property="address" label="地址"></el-table-column>
   </el-table>
 </template>
- 
+
 <script>
   export default {
     data() {
@@ -427,16 +436,16 @@
 
 ## 单选
 
-<el-table :data="tableData" selection-mode="single" :selection.sync="singleSelection" style="width: 520px" allow-no-selection>
+<el-table :data="tableData" selection-mode="single" @selectionchange="handleSelectionChange" style="width: 520px" allow-no-selection>
   <el-table-column property="date" label="日期" width="120"></el-table-column>
   <el-table-column property="name" label="姓名" width="120"></el-table-column>
   <el-table-column property="address" label="地址"></el-table-column>
 </el-table>
-<p>{{ singleSelection | json }}</p>
+<p>{{ singleSelection }}</p>
 
 ```html
 <template>
-  <el-table :data="tableData" selection-mode="single" :selection.sync="singleSelection">
+  <el-table :data="tableData" selection-mode="single" @selectionchange="handleSelectionChange">
     <el-table-column property="date" label="日期" width="120"></el-table-column>
     <el-table-column property="name" label="姓名" width="120"></el-table-column>
     <el-table-column property="address" label="地址"></el-table-column>
@@ -466,6 +475,12 @@
         }],
         singleSelection: {}
       }
+    },
+
+    methods: {
+      handleSelectionChange(val) {
+        this.singleSelection = val;
+      }
     }
   }
 </script>
@@ -473,19 +488,23 @@
 
 ## 多选
 
-<el-table :data="tableData3" selection-mode="multiple" :selection.sync="multipleSelection" style="width: 520px">
+<el-table :data="tableData3" selection-mode="multiple" style="width: 520px" @selectionchange="handleMultipleSelectionChange">
   <el-table-column type="selection" width="50"></el-table-column>
-  <el-table-column property="date" label="日期" width="120"></el-table-column>
+  <el-table-column inline-template property="date" label="日期" width="120">
+    <div>{{ row.date }}</div>
+  </el-table-column>
   <el-table-column property="name" label="姓名" width="120"></el-table-column>
   <el-table-column property="address" label="地址"></el-table-column>
 </el-table>
-<p>{{ multipleSelection | json }}</p>
+<p>{{ multipleSelection }}</p>
 
 ```html
 <template>
-  <el-table :data="tableData3" selection-mode="multiple" :selection.sync="multipleSelection">
+  <el-table :data="tableData3" selection-mode="multiple" @selectionchange="handleSelectionChange">
     <el-table-column type="selection" width="50"></el-table-column>
-    <el-table-column property="date" label="日期" width="120"></el-table-column>
+    <el-table-column inline-template property="date" label="日期" width="120">
+      <div>{{ row.date }}</div>
+    </el-table-column>
     <el-table-column property="name" label="姓名" width="120"></el-table-column>
     <el-table-column property="address" label="地址"></el-table-column>
   </el-table>
@@ -525,6 +544,12 @@
           address: '上海市普陀区金沙江路 1518 弄'
         }],
         multipleSelection: []
+      }
+    },
+
+    methods: {
+      handleSelectionChange(val) {
+        this.multipleSelection = val;
       }
     }
   }
@@ -584,16 +609,15 @@
 | border | 是否带有纵向边框 | boolean | | false |
 | selectionMode | 列表项选择模式 | string | 'single', 'multiple', 'none' | 'none' |
 | allowNoSelection | 单选模式是否允许选项为空 | boolean | | false |
-| selection | 多选模式下返回数组，单选模式下返回选中的元素。 | array/object | | |
 | fixedColumnCount | 固定列的个数 | number | | 0 |
 
 ## el-table 事件
 | 事件名 | 说明 | 参数 |
 | ---- | ---- | ---- |
-| selection-change | 当选择项发生变化时会触发该事件 | selected |
-| cell-mouse-enter | 当单元格 hover 进入时会触发该事件 | row, column, cell, event |
-| cell-mouse-leave | 当单元格 hover 退出时会触发该事件 | row, column, cell, event |
-| cell-click | 当某个单元格被点击时会触发该事件 | row, column, cell, event |
+| selectionchange | 当选择项发生变化时会触发该事件 | selected |
+| cellmouseenter | 当单元格 hover 进入时会触发该事件 | row, column, cell, event |
+| cellmouseleave | 当单元格 hover 退出时会触发该事件 | row, column, cell, event |
+| cellclick | 当某个单元格被点击时会触发该事件 | row, column, cell, event |
 
 ## el-table-column API
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
@@ -604,3 +628,6 @@
 | sortable | 对应列是否可以排序 | boolean | | false |
 | type | 对应列的类型。如果设置了 `selection` 则显示多选按钮，如果设置了 `index` 则显示该行的索引（从 1 开始计算） | string | 'selection', 'index' | 0 |
 | formatter | 用来格式化内容，在 formatter 执行的时候，会传入 row 和 column | function | |  |
+| show-tooltip-when-overflow | 当过长被隐藏时显示 tooltip | Boolean | | false |
+| inline-template | 指定该属性后可以自定义 column 模板，参考多选的时间列，通过 row 获取行信息。此时不需要配置 property 属性  | | |
+

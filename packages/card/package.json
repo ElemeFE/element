@@ -1,0 +1,15 @@
+{
+  "name": "el-card",
+  "version": "0.0.0",
+  "description": "A card component for Vue.js.",
+  "keywords": [
+    "element",
+    "vue",
+    "component"
+  ],
+  "main": "./lib/index.js",
+  "repository": "https://github.com/element-component/element/tree/master/packages/card",
+  "author": "elemefe",
+  "license": "MIT",
+  "dependencies": {}
+}
