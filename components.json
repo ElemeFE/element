@@ -149,6 +149,9 @@
   "message": [
     "./packages/message/index.js"
   ],
+  "badge": [
+    "./packages/badge/index.js"
+  ],
   "card": [
     "./packages/card/index.js"
   ]

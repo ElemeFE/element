@@ -354,6 +354,14 @@
     --dropdown-menuItem-hover-fill: #e5e9f2;
     --dropdown-menuItem-hover-color: #475669;
 
+  /* Badge
+   -------------------------- */
+   --badge-fill: var(--color-danger);
+   --badge-radius: 10px;
+   --badge-font-size: 12px;
+   --badge-padding: 6px;
+   --badge-size: 18px;
+
     /*Card
     --------------------------*/
     --card-border-color: var(--disabled-border-base);
