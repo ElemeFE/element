@@ -20,6 +20,8 @@ export default {
 
   computed: {
     content() {
+      if (this.dot) return;
+
       const value = this.value;
       const max = this.max;
 
