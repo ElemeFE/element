@@ -96,16 +96,16 @@
 
 <el-row>
   <el-col :span="12">
-    <el-badge dot class="item">数据查询</el-badge>
-    <el-badge dot class="item">
+    <el-badge is-dot class="item">数据查询</el-badge>
+    <el-badge is-dot class="item">
       <el-button class="share-button" icon="share" type="primary"></el-button>
     </el-badge>
   </el-col>
 </el-row>
 
 ```html
-<el-badge dot class="item">数据查询</el-badge>
-<el-badge dot class="item">
+<el-badge is-dot class="item">数据查询</el-badge>
+<el-badge is-dot class="item">
   <el-button class="share-button" icon="share" type="primary"></el-button>
 </el-badge>
 ```
@@ -134,6 +134,6 @@
 ## API
 | 参数          | 说明            | 类型            | 可选值                 | 默认值   |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
-| value          | 显示值      | string|number          |                       |         |
+| value          | 显示值      | string, number          |                       |         |
 | max          |  最大值，超过最大值会显示 '{max}+'，要求 value 是 Number 类型    | number  |                       |         |
-| dot       | 小圆点    | boolean  |    |  false |
+| is-dot       | 小圆点    | boolean  |    |  false |

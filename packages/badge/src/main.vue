@@ -4,7 +4,7 @@
     <sup
       v-text="content"
       class="el-badge__content"
-      :class="{ 'is-fixed': $slots.default, 'is-dot': dot }" />
+      :class="{ 'is-fixed': $slots.default, 'is-dot': isDot }" />
   </div>
 </template>
 
@@ -15,12 +15,12 @@ export default {
   props: {
     value: {},
     max: Number,
-    dot: Boolean
+    isDot: Boolean
   },
 
   computed: {
     content() {
-      if (this.dot) return;
+      if (this.isDot) return;
 
       const value = this.value;
       const max = this.max;
