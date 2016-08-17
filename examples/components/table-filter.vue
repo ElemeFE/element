@@ -23,7 +23,7 @@
       }
     },
 
-    ready() {
+    mounted() {
       console.log('popup ready');
     }
   };

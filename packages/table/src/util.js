@@ -77,11 +77,5 @@ export const orderBy = function(array, sortKey, reverse) {
 };
 
 export const getChild = function(event) {
-  let cell = event.target;
-
-  while (cell.children.length) {
-    cell = cell.children[0];
-  }
-
-  return cell;
+  return event.target.querySelector('.cell');
 };
