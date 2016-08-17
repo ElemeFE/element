@@ -1,9 +1,9 @@
 <script>
-  import fecha from 'packages/date-picker/src/util/fecha.js'
+  import dateUtil from 'main/utils/date'
   export default {
     data() {
       return {
-        currentDate: fecha.format(new Date(), 'yyyy-MM-dd HH:mm')
+        currentDate: dateUtil.format(new Date(), 'yyyy-MM-dd HH:mm')
       };
     }
   }
@@ -17,8 +17,11 @@
   .time {
     font-size: 13px;
     color: #999;
-    display: block;
+  }
+
+  .bottom {
     margin-top: 13px;
+    line-height: 12px;
   }
 
   .item {
@@ -27,6 +30,16 @@
 
   .button {
     padding: 0;
+    float: right;
+  }
+
+  .image {
+    width: 100%;
+    display: block;
+  }
+
+  .clearfix {
+    @utils-clearfix;
   }
 </style>
 
@@ -36,9 +49,9 @@
 <el-row>
   <el-col :span="12">
     <el-card>
-      <div slot="header" style="display: flex; align-items: center;">
-        <div style="flex: 1; color: #20a0ff;">卡片名称</div>
-        <el-button type="primary">操作按钮</el-button>
+      <div slot="header" class="clearfix">
+        <span style="line-height: 36px;">卡片名称</span>
+        <el-button style="float: right;" type="primary">操作按钮</el-button>
       </div>
       <div v-for="o in 4" class="text item">
         {{'列表内容 ' + o }}
@@ -49,9 +62,9 @@
 
 ```html
 <el-card>
-  <div slot="header" style="display: flex; align-items: center;">
-    <div style="flex: 1; color: #20a0ff;">卡片名称</div>
-    <el-button type="primary">操作按钮</el-button>
+  <div slot="header" class="clearfix">
+    <span style="line-height: 36px;">卡片名称</span>
+    <el-button style="float: right;" type="primary">操作按钮</el-button>
   </div>
   <div v-for="o in 4" class="text item">
     {{'列表内容 ' + o }}
@@ -87,13 +100,13 @@
 <el-row>
   <el-col :span="8" v-for="(o, index) in 2" :offset="index > 0 ? 2 : 0">
     <el-card :body-style="{ padding: '0px' }">
-      <img src="~examples/assets/images/hamburger.png" width="100%" style="display: block;">
-      <div style="padding: 14px; display: flex; align-items: flex-end;">
-        <div style="flex: 1">
-          <span>好吃的汉堡</span>
+      <img src="~examples/assets/images/hamburger.png" class="image">
+      <div style="padding: 14px;">
+        <span>好吃的汉堡</span>
+        <div class="bottom clearfix">
           <time class="time">{{ currentDate }}</time>
+          <el-button type="text" class="button">操作按钮</el-button>
         </div>
-        <el-button type="text" class="button">操作按钮</el-button>
       </div>
     </el-card>
   </el-col>
@@ -101,13 +114,13 @@
 
 ```html
 <el-card :body-style="{ padding: '0px' }">
-  <img src="~examples/assets/images/hamburger.png" width="100%" style="display: block;">
-  <div style="padding: 14px; display: flex; align-items: flex-end;">
-    <div style="flex: 1">
-      <span>好吃的汉堡</span>
+  <img src="~examples/assets/images/hamburger.png" class="image">
+  <div style="padding: 14px;">
+    <span>好吃的汉堡</span>
+    <div class="bottom clearfix">
       <time class="time">{{ currentDate }}</time>
+      <el-button type="text" class="button">操作按钮</el-button>
     </div>
-    <el-button type="text" class="button">操作按钮</el-button>
   </div>
 </el-card>
 ```
