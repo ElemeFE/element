@@ -48,6 +48,8 @@ import Upload from '../packages/upload/index.js';
 import Progress from '../packages/progress/index.js';
 import Spinner from '../packages/spinner/index.js';
 import Message from '../packages/message/index.js';
+import Card from '../packages/card/index.js';
+import Rate from '../packages/rate/index.js';
 
 const install = function(Vue) {
   if (install.installed) return;
@@ -99,6 +101,8 @@ const install = function(Vue) {
   Vue.component(Progress.name, Progress);
   Vue.component(Spinner.name, Spinner);
   Vue.component(Message.name, Message);
+  Vue.component(Card.name, Card);
+  Vue.component(Rate.name, Rate);
 
   Vue.use(Loading);
 
@@ -166,5 +170,7 @@ module.exports = {
   Upload,
   Progress,
   Spinner,
-  Message
+  Message,
+  Card,
+  Rate
 };

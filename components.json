@@ -151,5 +151,8 @@
   ],
   "card": [
     "./packages/card/index.js"
+  ],
+  "rate": [
+    "./packages/rate/index.js"
   ]
 }
