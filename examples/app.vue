@@ -4,6 +4,7 @@
   @import '../node_modules/purecss/build/menus.css';
   @import '../node_modules/highlight.js/styles/color-brewer.css';
   @import 'assets/styles/common.css';
+  @import 'assets/styles/fonts/style.css';
 
   html, body {
     margin: 0;

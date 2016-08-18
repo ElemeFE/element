@@ -3,55 +3,37 @@
     <span
       v-for="item in max"
       class="el-rate__item"
-      @mouseenter="setCurrentValue(item)"
+      @mousemove="setCurrentValue(item, $event)"
       @mouseleave="resetCurrentValue"
       @click="selectValue(item)"
       :style="{ cursor: disabled ? 'auto' : 'pointer' }">
       <i
-        :class="[classes[item - 1], {'hover': hoverIndex === item}]"
+        :class="[classes[item - 1], { 'hover': hoverIndex === item }]"
         class="el-rate__icon"
         :style="getIconStyle(item)">
-        <span class="path1" v-if="smiley && item <= currentValue"></span>
-        <span class="path2" v-if="smiley && item <= currentValue"></span>
         <i
           v-if="showDecimalIcon(item)"
           :class="decimalIconClass"
           :style="decimalStyle"
           class="el-rate__decimal">
-          <span class="path1" v-if="smiley"></span>
-          <span class="path2" v-if="smiley"></span>
         </i>
       </i>
     </span>
-    <span v-if="showText" class="el-rate__text" :style="textStyle">{{ text }}</span>
+    <span v-if="showText" class="el-rate__text" :style="{ color: textColor }">{{ text }}</span>
   </div>
 </template>
 
 <script type="text/babel">
-  const CLASS_MAP = {
-    noSmiley: 'icon-rate-star',
-    noSmileyVoid: 'icon-rate-star-void',
-    smileyLow: 'icon-rate-face-gray',
-    smileyMedium: 'icon-rate-face-yellow',
-    smileyHigh: 'icon-rate-face-orange',
-    smileyVoid: 'icon-rate-face-void'
-  };
-  const COLOR_MAP = {
-    lowColor: '#99A9BF',
-    mediumColor: '#F7BA2A',
-    highColor: '#FF9900',
-    voidColor: '#C6D1DE',
-    disbaledVoidColor: '#EFF2F7'
-  };
-  import '../style.css';
   export default {
     name: 'el-rate',
 
     data() {
       return {
+        classMap: {},
+        colorMap: {},
         classes: null,
-        currentValue: 0,
-        colors: null,
+        pointerAtLeftHalf: false,
+        currentValue: this.value,
         hoverIndex: -1
       };
     },
@@ -73,21 +55,49 @@
         type: Number,
         default: 5
       },
-      multiColor: {
-        type: Boolean,
-        default: false
+      colors: {
+        type: Array,
+        default() {
+          return ['#F7BA2A', '#F7BA2A', '#F7BA2A'];
+        }
       },
-      smiley: {
-        type: Boolean,
-        default: false
+      voidColor: {
+        type: String,
+        default: '#C6D1DE'
+      },
+      disabledVoidColor: {
+        type: String,
+        default: '#EFF2F7'
+      },
+      iconClasses: {
+        type: Array,
+        default() {
+          return ['el-icon-star-on', 'el-icon-star-on', 'el-icon-star-on'];
+        }
+      },
+      voidIconClass: {
+        type: String,
+        default: 'el-icon-star-off'
+      },
+      disabledVoidIconClass: {
+        type: String,
+        default: 'el-icon-star-on'
       },
       disabled: {
+        type: Boolean,
+        default: false
+      },
+      allowHalf: {
         type: Boolean,
         default: false
       },
       showText: {
         type: Boolean,
         default: false
+      },
+      textColor: {
+        type: String,
+        default: '1f2d3d'
       },
       texts: {
         type: Array,
@@ -105,27 +115,24 @@
       text() {
         let result = '';
         if (this.disabled) {
-          result = this.textTemplate.replace('{value}', this.value);
+          result = this.textTemplate.replace(/\{\s*value\s*\}/, this.value);
         } else {
-          result = this.texts[this.currentValue - 1];
+          result = this.texts[Math.ceil(this.currentValue) - 1];
         }
         return result;
       },
 
-      textStyle() {
-        let color = '';
-        if (this.multiColor || this.smiley) {
-          color = this.getValueFromMap(this.currentValue, COLOR_MAP);
-        } else {
-          color = COLOR_MAP.mediumColor;
-        }
-        return { color };
-      },
-
       decimalStyle() {
+        let width = '';
+        if (this.disabled) {
+          width = `${ this.valueDecimal < 50 ? 0 : 50 }%`;
+        }
+        if (this.allowHalf) {
+          width = '50%';
+        }
         return {
-          color: this.smiley ? '' : this.activeColor,
-          width: this.valueDecimal + '%'
+          color: this.activeColor,
+          width
         };
       },
 
@@ -134,45 +141,34 @@
       },
 
       decimalIconClass() {
-        let className = '';
-        if (!this.smiley) {
-          className = CLASS_MAP.noSmiley;
-        } else {
-          className = this.getValueFromMap(this.value, CLASS_MAP);
-        }
-        return className;
+        return this.getValueFromMap(this.value, this.classMap);
       },
 
       voidClass() {
-        const noSmileyVoidClass = this.disabled ? CLASS_MAP.noSmiley : CLASS_MAP.noSmileyVoid;
-        return this.smiley ? CLASS_MAP.smileyVoid : noSmileyVoidClass;
+        return this.disabled ? this.classMap.disabledVoidClass : this.classMap.voidClass;
       },
 
       activeClass() {
-        let className = '';
-        if (this.smiley) {
-          className = this.getValueFromMap(this.currentValue, CLASS_MAP);
-        } else {
-          className = CLASS_MAP.noSmiley;
-        }
-        return className;
+        return this.getValueFromMap(this.currentValue, this.classMap);
       },
 
       activeColor() {
-        let color = '';
-        if (!this.smiley) {
-          if (this.multiColor) {
-            color = this.getValueFromMap(this.currentValue, COLOR_MAP);
-          } else {
-            color = COLOR_MAP.mediumColor;
-          }
-        }
-        return color;
+        return this.getValueFromMap(this.currentValue, this.colorMap);
       },
 
       classes() {
-        let result = new Array(this.max);
-        result.fill(this.activeClass, 0, this.currentValue).fill(this.voidClass, this.currentValue, this.max);
+        let result = [];
+        let i = 0;
+        let threshold = this.currentValue;
+        if (this.allowHalf && this.currentValue !== Math.floor(this.currentValue)) {
+          threshold--;
+        }
+        for (; i < threshold; i++) {
+          result.push(this.activeClass);
+        }
+        for (; i < this.max; i++) {
+          result.push(this.voidClass);
+        }
         return result;
       }
     },
@@ -188,24 +184,25 @@
       getValueFromMap(value, map) {
         let result = '';
         if (value <= this.lowThreshold) {
-          result = map.lowColor || map.smileyLow;
+          result = map.lowColor || map.lowClass;
         } else if (value >= this.highThreshold) {
-          result = map.highColor || map.smileyHigh;
+          result = map.highColor || map.highClass;
         } else {
-          result = map.mediumColor || map.smileyMedium;
+          result = map.mediumColor || map.mediumClass;
         }
         return result;
       },
 
       showDecimalIcon(item) {
-        return this.disabled && this.valueDecimal > 0 && item - 1 < this.value && item > this.value;
+        let showWhenDisabled = this.disabled && this.valueDecimal > 0 && item - 1 < this.value && item > this.value;
+        let showWhenAllowHalf = this.allowHalf && this.pointerAtLeftHalf && ((item - 0.5).toString() === this.currentValue.toString());
+        return showWhenDisabled || showWhenAllowHalf;
       },
 
       getIconStyle(item) {
-        const voidColor = this.disabled ? COLOR_MAP.disbaledVoidColor : COLOR_MAP.voidColor;
-        const noSmileyColor = item <= this.currentValue ? this.activeColor : voidColor;
+        const voidColor = this.disabled ? this.colorMap.disabledVoidColor : this.colorMap.voidColor;
         return {
-          color: this.smiley ? '' : noSmileyColor
+          color: item <= this.currentValue ? this.activeColor : voidColor
         };
       },
 
@@ -213,15 +210,30 @@
         if (this.disabled) {
           return;
         }
-        this.currentValue = value;
-        this.$emit('input', value);
+        if (this.allowHalf && this.pointerAtLeftHalf) {
+          this.$emit('input', this.currentValue);
+        } else {
+          this.$emit('input', value);
+        }
       },
 
-      setCurrentValue(value) {
+      setCurrentValue(value, event) {
         if (this.disabled) {
           return;
         }
-        this.currentValue = value;
+        if (this.allowHalf) {
+          let target = event.target;
+          if (target.classList.contains('el-rate__item')) {
+            target = target.querySelector('.el-rate__icon');
+          }
+          if (target.classList.contains('el-rate__decimal')) {
+            target = target.parentNode;
+          }
+          this.pointerAtLeftHalf = event.offsetX * 2 <= target.clientWidth;
+          this.currentValue = this.pointerAtLeftHalf ? value - 0.5 : value;
+        } else {
+          this.currentValue = value;
+        }
         this.hoverIndex = value;
       },
 
@@ -229,13 +241,32 @@
         if (this.disabled) {
           return;
         }
+        if (this.allowHalf) {
+          this.pointerAtLeftHalf = this.value !== Math.floor(this.value);
+        }
         this.currentValue = this.value;
         this.hoverIndex = -1;
       }
     },
 
     created() {
-      this.currentValue = this.value;
+      if (!this.value) {
+        this.$emit('input', 0);
+      }
+      this.classMap = {
+        lowClass: this.iconClasses[0],
+        mediumClass: this.iconClasses[1],
+        highClass: this.iconClasses[2],
+        voidClass: this.voidIconClass,
+        disabledVoidClass: this.disabledVoidIconClass
+      };
+      this.colorMap = {
+        lowColor: this.colors[0],
+        mediumColor: this.colors[1],
+        highColor: this.colors[2],
+        voidColor: this.voidColor,
+        disabledVoidColor: this.disabledVoidColor
+      };
     }
   };
 </script>

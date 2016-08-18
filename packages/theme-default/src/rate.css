@@ -18,8 +18,9 @@
       font-size: 18px;
       margin-right: 6px;
       color: #C6D1DE;
+      transition: .3s;
       &.hover {
-        transform: scale(1.1);
+        transform: scale(1.15);
       }
 
       .path2 {
