@@ -1,0 +1,46 @@
+@charset "UTF-8";
+@import "./common/var.css";
+
+@component-namespace el {
+
+  @b rate {
+    height: 20px;
+    @e item {
+      display: inline-block;
+      position: relative;
+      font-size: 0;
+      vertical-align: middle;
+    }
+
+    @e icon {
+      position: relative;
+      display: inline-block;
+      font-size: 18px;
+      margin-right: 6px;
+      color: #C6D1DE;
+      transition: .3s;
+      &.hover {
+        transform: scale(1.15);
+      }
+
+      .path2 {
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+    }
+
+    @e decimal {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: inline-block;
+      overflow: hidden;
+    }
+
+    @e text {
+      font-size: 14px;
+      vertical-align: middle;
+    }
+  }
+}

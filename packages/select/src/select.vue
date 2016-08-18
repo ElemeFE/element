@@ -190,8 +190,6 @@
       },
 
       value(val) {
-        this.$emit('input', val);
-        this.$emit('change', val);
         if (this.valueChangeBySelected) {
           this.valueChangeBySelected = false;
           return;
@@ -486,6 +484,7 @@
         this.selected = {};
         this.selectedLabel = '';
         this.$emit('input', '');
+        this.$emit('change', '');
         this.visible = false;
       },
 

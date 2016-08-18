@@ -178,6 +178,11 @@
         "name": "滑块 (slider)",
         "title": "slider 滑块",
         "description": "通过拖动滑块在一个固定区间内进行选择"
+      },
+      {
+        "path": "/rate",
+        "name": "评分 (rate)",
+        "title": "评分组件"
       }
     ]
   },

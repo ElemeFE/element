@@ -47,8 +47,9 @@ import Upload from '../packages/upload/index.js';
 import Progress from '../packages/progress/index.js';
 import Spinner from '../packages/spinner/index.js';
 import Message from '../packages/message/index.js';
-import Badge from '../packages/badge/index.js';
 import Card from '../packages/card/index.js';
+import Rate from '../packages/rate/index.js';
+import Badge from '../packages/badge/index.js';
 
 const install = function(Vue) {
   if (install.installed) return;
@@ -99,8 +100,9 @@ const install = function(Vue) {
   Vue.component(Progress.name, Progress);
   Vue.component(Spinner.name, Spinner);
   Vue.component(Message.name, Message);
-  Vue.component(Badge.name, Badge);
   Vue.component(Card.name, Card);
+  Vue.component(Rate.name, Rate);
+  Vue.component(Badge.name, Badge);
 
   Vue.use(Loading);
 
@@ -167,7 +169,8 @@ module.exports = {
   Upload,
   Progress,
   Spinner,
+  Card,
+  Rate,
   Message,
-  Badge,
-  Card
+  Badge
 };
