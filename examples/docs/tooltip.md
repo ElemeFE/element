@@ -1,5 +1,29 @@
+<script>
+  export default {
+    data() {
+      return {
+        disabled: false
+      };
+    }
+  };
+</script>
 ## 基础用法
-鼠标 hover 的时候显示,可选择提示出现的位置。
+
+Tooltip 组件常用于展示鼠标 hover 时的提示信息，在这里我们提供9种不同的展示方式。
+
+使用`content`属性来决定`hover`时的提示信息。
+
+由`placement`属性决定展示效果：
+
+`placement`属性值为：`方向-箭头方位`
+
+四个方向：`top`、`left`、`right`、`bottom`
+
+三种箭头方位：`start`, `end`，默认为空
+
+如`top center`即`placement="top"`，`left top`即`placement="left-start"`。
+
+下面是完整的九个示例，可以通过该示例来理解上面的说明，选择你要的效果：
 
 <style>
   .box {
@@ -78,7 +102,9 @@
   </div>
 </div>
 
-## 适用于不同情景
+## 主题
+
+Tooltip 组件提供了两个不同的主题：`dark`和`light`，可以通过设置`effect`属性来改变主题，默认为`dark`。
 
 <div>
   <el-tooltip content="Top center" placement="top">
@@ -93,12 +119,91 @@
   </el-tooltip>
 </div>
 
-## API
+```html
+<el-tooltip content="Top center" placement="top">
+  <el-button>Dark</el-button>
+</el-tooltip>
+<el-tooltip content="Bottom center" placement="bottom" effect="light">
+  <el-button>Light</el-button>
+</el-tooltip>
+```
+
+## 更多Content
+
+如果需要展示多行文本或者是设置文本内容的格式，我们可以考虑用具名 slot 分发`content`，替代`tooltip`中的`content`属性：
+
+<div>
+  <el-tooltip placement="top">
+    <div slot="content">多行信息<br/>第二行信息</div>
+    <el-button>Top center</el-button>
+  </el-tooltip>
+</div>
+
+```html
+<el-tooltip placement="top">
+  <div slot="content">多行信息<br/>第二行信息</div>
+  <el-button>Top center</el-button>
+</el-tooltip>
+```
+
+## 高级扩展
+
+除了这些基本设置外，还有一些属性可以让使用者更好的定制自己的效果：
+
+`transition`属性可以定制显隐的动画效果，默认为`fade-in-linear`。
+
+如果需要关闭`tooltip`功能，`disabled`属性可以满足这个需求，它接受一个`Boolean`，设置为`true`即可。
+
+事实上，这是基于[Vue-popper](https://github.com/element-component/vue-popper)的扩展，你可以自定义任意 Vue-popper 中允许定义的字段。
+
+当然，Tooltip 组件实际上十分强大，文末的API文档会做一一说明。
+
+<style>
+  .slide-fade-enter-active {
+    transition: all .3s ease;
+  }
+  .slide-fade-leave-active {
+    transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  }
+  .slide-fade-enter, .expand-fade-leave-active {
+    margin-left: 20px;
+    opacity: 0;
+  }
+</style>
+
+<div>
+  <el-tooltip :disabled="disabled" content="点击关闭 tooltip 功能" transition="slide-fade" placement="bottom" effect="light">
+    <el-button @click.native="disabled=true">点击关闭 tooltip 功能</el-button>
+  </el-tooltip>
+</div>
+
+```html
+<el-tooltip :disabled="disabled" content="点击关闭 tooltip 功能" transition="slide-fade" placement="bottom" effect="light">
+  <el-button @click.native="disabled=true">点击关闭 tooltip 功能</el-button>
+</el-tooltip>
+
+<style>
+  .slide-fade-enter-active {
+    transition: all .3s ease;
+  }
+  .slide-fade-leave-active {
+    transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  }
+  .slide-fade-enter, .expand-fade-leave-active {
+    margin-left: 20px;
+    opacity: 0;
+  }
+</style>
+```
+
+## Attributes
 | 参数               | 说明                                                     | 类型              | 可选值      | 默认值 |
 |--------------------|----------------------------------------------------------|-------------------|-------------|--------|
-|  effect        |  默认提供的样式  | String            | `dark`, `light`  | dark  |
-|  content        |  显示的内容  | String            |  |  |
-|  placement        |  出现位置  | String           |  `top`, `top-start`, `top-end`, `bottom`, `bottom-start`, `bottom-end`, `left`, `left-start`, `left-end`, `right`, `right-start`, `right-end` |  bottom |
+|  effect        |  默认提供的主题  | String            | `dark`, `light`  | dark  |
+|  content        |  显示的内容，也可以通过 `slot#content` 传入 DOM  | String            |  |  |
+|  placement        |  Tooltip 的出现位置  | String           |  `top`, `top-start`, `top-end`, `bottom`, `bottom-start`, `bottom-end`, `left`, `left-start`, `left-end`, `right`, `right-start`, `right-end` |  bottom |
 |  visible        |  初始状态是否可见  | Boolean           |  |  false |
-|  disabled       |  控制是否不可见  | Boolean           |  |  false |
-|  options        | [popper.js](https://popper.js.org/documentation.html) 的参数 | Object            | 参考 [popper.js](https://popper.js.org/documentation.html) 文档 | { boundariesElement: 'body' } |
+|  disabled       |  Tooltip 是否可用  | Boolean           |  |  false |
+|  transition     |  定义渐变动画      | String             |  | `fade-in-linear` |
+|  visibleArrow   |  是否显示 Tooltip 箭头，更多参数可见[Vue-popper](https://github.com/element-component/vue-popper) | Boolean |  | true |
+|  options        | [popper.js](https://popper.js.org/documentation.html) 的参数 | Object            | 参考 [popper.js](https://popper.js.org/documentation.html) 文档 | `{ boundariesElement: 'body', gpuAcceleration: false }` |

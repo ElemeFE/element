@@ -50,11 +50,11 @@
 </style>
 ## icon-font 图标
 
-我们为你提供了一套常用的图标集合。
+提供了一套常用的图标集合。
 
 ## 使用方法
 
-直接通过`el-icon-iconName`的类名来使用即可。例如：
+直接通过设置类名为`el-icon-iconName`来使用即可。例如：
 
 <div><i class="el-icon-search"></i></div>
 
@@ -62,7 +62,7 @@
 <i class="el-icon-search"></i>
 ```
 
-也可以在按钮组件中使用图标:
+也可以在按钮组件中使用图标，更多地使用方式可以在按钮组件的文档中看到。
 
 <div><el-button type="primary" icon="search">搜索</el-button></div>
 
@@ -71,6 +71,8 @@
 ```
 
 ## 图标集合
+
+下面是目前 Element 所有的图标集合：
 
 <ul class="icon-list">
   <li v-for="name in icons">

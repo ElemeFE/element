@@ -8,10 +8,10 @@
         </div>
         <div class="el-message-box__content" v-if="message !== ''">
           <div class="el-message-box__status" :class="[ typeClass ]"></div>
-          <div class="el-message-box__message" :style="{ 'margin-left': type ? '50px' : '0' }"><p>{{ message }}</p></div>
+          <div class="el-message-box__message" :style="{ 'margin-left': typeClass ? '50px' : '0' }"><p>{{ message }}</p></div>
           <div class="el-message-box__input" v-show="showInput">
             <input type="text" v-model="inputValue" :placeholder="inputPlaceholder" ref="input" />
-            <div class="el-message-box__errormsg" :style="{ visibility: !!editorErrorMessage ? 'visible' : 'hidden' }">{{editorErrorMessage}}</div>
+            <div class="el-message-box__errormsg" :style="{ visibility: !!editorErrorMessage ? 'visible' : 'hidden' }">{{ editorErrorMessage }}</div>
           </div>
         </div>
         <div class="el-message-box__btns">
@@ -56,14 +56,14 @@
 
     computed: {
       typeClass() {
-        return this.type ? `el-icon-${ typeMap[this.type] }` : '';
+        return this.type && typeMap[this.type] ? `el-icon-${ typeMap[this.type] }` : '';
       },
 
       confirmButtonClasses() {
-        return 'el-button el-button-primary ' + this.confirmButtonClass;
+        return `el-button el-button-primary ${ this.confirmButtonClass }`;
       },
       cancelButtonClasses() {
-        return 'el-button el-button-default ' + this.cancelButtonClass;
+        return `el-button el-button-default ${ this.cancelButtonClass }`;
       }
     },
 

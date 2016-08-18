@@ -15,7 +15,7 @@
 
 ## 基本用法
 
-alert组件提供四种主题，由`type`属性指定，默认值为`info`，下面的示例展示了四种不同的主题。
+Alert 组件提供四种主题，由`type`属性指定，默认值为`info`，下面的示例展示了四种不同的主题。
 
 <div class="demo-box demo-alert">
   <el-alert title="成功提示的文案" type="success"></el-alert>
@@ -91,7 +91,7 @@ alert组件提供四种主题，由`type`属性指定，默认值为`info`，下
 
 ## 带有 icon 和辅助性文字介绍
 
-最后，这是一个同时具有icon和辅助性文字的样例。
+最后，这是一个同时具有 icon 和辅助性文字的样例。
 
 <div class="demo-box demo-alert">
   <el-alert title="成功提示的文案" type="success" description="文字说明文字说明文字说明文字说明文字说明文字说明" show-icon></el-alert>
@@ -137,11 +137,11 @@ alert组件提供四种主题，由`type`属性指定，默认值为`info`，下
 | type | 主题 | string | 'success', 'warning', 'info', 'error' | 'info' |
 | description | 辅助性文字 | string | | |
 | closable | 是否可关闭 | boolean | | true |
-| closeText | 关闭按钮自定义文本 | string | | |
+| close-text | 关闭按钮自定义文本 | string | | |
 | showIcon | 是否显示图标 | boolean | | false |
 
 
 ## Events
-| 参数      | 说明          | 类型      | 可选值                           | 默认值  |
-|---------- |-------------- |---------- |--------------------------------  |-------- |
-| close | 关闭时的回调函数 | function | | |
+| 事件名称 | 说明 | 回调参数 |
+|---------- |-------- |---------- |
+| close | 关闭alert时触发的事件 |  |

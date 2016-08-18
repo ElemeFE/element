@@ -31,7 +31,7 @@
 
 ## 基础用法
 
-button组件默认提供7种主题，由`type`属性来定义，默认为`default`：
+Button 组件默认提供7种主题，由`type`属性来定义，默认为`default`：
 
 <div class="demo-box demo-button">
   <el-button>Default</el-button>
@@ -71,7 +71,7 @@ button组件默认提供7种主题，由`type`属性来定义，默认为`defaul
 
 注意，在该情况下，`type`虽然可以为`text`，但是是没有意义的，会显示为`text button`的样式。
 
-你可以Hover在样例上进行预览：
+你可以 Hover 在样例上进行预览：
 
 <div class="demo-box demo-button">
   <el-button :plain="true">Default</el-button>
@@ -91,7 +91,7 @@ button组件默认提供7种主题，由`type`属性来定义，默认为`defaul
 
 ## 尺寸
 
-button组件提供除了默认值以外的三种尺寸：`large`、`small`、`mini`来满足不同的需求，通过设置`size`属性来配置它们。
+Button 组件提供除了默认值以外的三种尺寸：`large`、`small`、`mini`来满足不同的需求，通过设置`size`属性来配置它们。
 
 <div class="demo-box demo-button">
   <el-button type="primary" size="large">large</el-button>
@@ -109,7 +109,7 @@ button组件提供除了默认值以外的三种尺寸：`large`、`small`、`mi
 
 ## Loading
 
-button组件提供的`loading`属性可以方便的让你处理 loading 状态，它接受一个`Boolean`，要设置为 loading 状态，只要设置`loading`属性为`true`即可，下面是一个样例：
+Button 组件提供的`loading`属性可以方便的让你处理 loading 状态，它接受一个`Boolean`，要设置为 loading 状态，只要设置`loading`属性为`true`即可，下面是一个样例：
 
 <div class="demo-box demo-button">
   <el-button type="primary" :loading="true">Button</el-button>
@@ -131,14 +131,14 @@ button组件提供的`loading`属性可以方便的让你处理 loading 状态�
 
 ## 图标按钮
 
-理所当然的，Element也支持图标按钮，设置`icon`属性即可，icon的列表可以参考Element的icon组件，下面是简单的预览：
+理所当然的，Element 也支持图标按钮，设置`icon`属性即可，icon 的列表可以参考 Element 的 icon 组件，下面是简单的预览：
 
 <div class="demo-box demo-button">
   <el-button type="primary" icon="edit"></el-button>
   <el-button type="primary" icon="search">Search</el-button>
 </div>
 
-除此以外，你也可以设置在文字右边的icon，只要使用`i`标签即可，使用图标组件来实现它：
+除此以外，你也可以设置在文字右边的 icon ，只要使用`i`标签即可，使用图标组件来实现它：
 
 <div class="demo-box demo-button">
   <el-button type="primary">Upload<i class="el-icon-upload el-icon-right"></i></el-button>
