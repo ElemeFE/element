@@ -26,7 +26,9 @@
     methods: {
       updatePopper() {
         if (this.popper) {
-          this.popper.update();
+          this.$nextTick(() => {
+            this.popper.update();
+          });
         } else {
           this.$nextTick(() => {
             this.popper = new Popper(this.$parent.$refs.reference.$el, this.$el, {

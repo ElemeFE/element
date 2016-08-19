@@ -1,14 +1,16 @@
 <template>
   <div class="el-select" :class="{ 'is-multiple': multiple, 'is-small': size === 'small' }">
     <div class="el-select__tags" v-if="multiple" @click.stop="toggleMenu" ref="tags" :style="{ 'max-width': inputWidth - 36 + 'px' }">
-      <el-tag
-      v-for="item in selected"
-      closable
-      :hit="item.hitState"
-      type="primary"
-      @click.native="deleteTag($event, item)"
-      close-transition>{{ item.label }}</el-tag>
-
+      <transition-group @after-leave="resetInputHeight">
+        <el-tag
+          v-for="item in selected"
+          :key="item"
+          closable
+          :hit="item.hitState"
+          type="primary"
+          @click.native="deleteTag($event, item)"
+          close-transition>{{ item.label }}</el-tag>
+      </transition-group>
       <input
         type="text"
         class="el-select__input"
@@ -42,7 +44,7 @@
       @keydown.native.tab="visible = false"
       @mouseenter.native="inputHovering = true"
       @mouseleave.native="inputHovering = false"
-      :icon="showCloseIcon ? 'circle-close' : 'caret-top'"
+      :icon="iconClass"
       :style="{ 'width': inputWidth + 'px' }"
       v-element-clickoutside="handleClose">
     </el-input>
@@ -76,6 +78,10 @@
     componentName: 'select',
 
     computed: {
+      iconClass() {
+        return this.showCloseIcon ? 'circle-close' : (this.remote && this.filterable ? '' : 'caret-top');
+      },
+
       debounce() {
         return this.remote ? 300 : 0;
       },
@@ -280,7 +286,9 @@
       visible(val) {
         if (!val) {
           this.$refs.reference.$el.querySelector('input').blur();
-          this.$el.querySelector('.el-input__icon').classList.remove('is-reverse');
+          if (this.$el.querySelector('.el-input__icon')) {
+            this.$el.querySelector('.el-input__icon').classList.remove('is-reverse');
+          }
           this.broadcast('select-dropdown', 'destroyPopper');
           if (this.$refs.input) {
             this.$refs.input.blur();
@@ -301,7 +309,9 @@
           if (this.remote) {
             this.voidRemoteQuery = true;
           }
-          this.$el.querySelector('.el-input__icon').classList.add('is-reverse');
+          if (this.$el.querySelector('.el-input__icon')) {
+            this.$el.querySelector('.el-input__icon').classList.add('is-reverse');
+          }
           this.broadcast('select-dropdown', 'updatePopper');
           if (this.filterable) {
             this.query = this.selectedLabel;
