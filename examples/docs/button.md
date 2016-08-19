@@ -138,7 +138,7 @@ Button 组件提供的`loading`属性可以方便的让你处理 loading 状态�
   <el-button type="primary" icon="search">Search</el-button>
 </div>
 
-除此以外，你也可以设置在文字右边的 icon ，只要使用`i`标签即可，使用图标组件来实现它：
+除此以外，你也可以设置在文字右边的 icon ，只要使用`i`标签即可，使用图标组件来实现它，由此，你可以使用自己的图标了：
 
 <div class="demo-box demo-button">
   <el-button type="primary">Upload<i class="el-icon-upload el-icon-right"></i></el-button>

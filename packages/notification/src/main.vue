@@ -2,7 +2,7 @@
   <transition name="el-notification-fade">
     <div class="el-notification" v-show="visible" :style="{ top: top ? top + 'px' : 'auto' }" @mouseenter="clearTimer()" @mouseleave="startTimer()">
       <i class="el-notification__icon" :class="[ typeClass ]" v-if="type"></i>
-      <div class="el-notification__group" :style="{ 'margin-left': type ? '55px' : '0' }">
+      <div class="el-notification__group" :style="{ 'margin-left': typeClass ? '55px' : '0' }">
         <span>{{ title }}</span>
         <p>{{ message }}</p>
         <div class="el-notification__closeBtn el-icon-close" @click="handleClose()"></div>
@@ -28,7 +28,6 @@
         duration: 4500,
         type: '',
         onClose: null,
-
         closed: false,
         top: null,
         timer: null
@@ -37,7 +36,7 @@
 
     computed: {
       typeClass() {
-        return this.type ? `el-icon-${ typeMap[this.type] }` : '';
+        return this.type && typeMap[this.type] ? `el-icon-${ typeMap[this.type] }` : '';
       }
     },
 
