@@ -146,7 +146,7 @@ Dialog 组件提供四种尺寸：`tiny`, `small`, `large`, `full`。通过`size
 
 ## 设置能否通过点击modal或按下esc关闭Dialog
 
-在默认条件下，你可以通过 ESC 和点击 modal 关闭 Dialog，但是可以通过设置`close-on-click-modal`属性和`close-on-press-escape`属性来关闭这一功能，它们接收`Boolean`，默认均为`true`。
+在默认条件下，你可以通过 ESC 和点击背后的遮罩层关闭 Dialog，但是可以通过设置`close-on-click-modal`属性和`close-on-press-escape`属性来关闭这一功能，它们接收`Boolean`，默认均为`true`。
 
 <el-button @click.native="dialogStubbornVisible = true">打开 Dialog，点击 modal 或按下 esc 关闭无法将其关闭</el-button>
 

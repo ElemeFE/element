@@ -126,7 +126,7 @@ Element 也为 Notification 组件准备了四种通知类型：`success`, `warn
         this.$notify({
           title: '成功',
           message: '这是一条成功的提示消息',
-          type: 'success',
+          type: 'success'
         });
       },
 

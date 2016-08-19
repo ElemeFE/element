@@ -6,7 +6,7 @@
       type ? 'el-progress--' + type : ''
     ]"
   >
-    <div class="el-progress__bar" v-bind:style="barStyle"></div>
+    <div class="el-progress__bar" :style="barStyle"></div>
   </div>
 </template>
 <script>
@@ -15,13 +15,18 @@
     props: {
       type: {
         type: String,
-        default: 'blue'
+        default: 'blue',
+        validator: val => ['blue', 'blue-stripe', 'green', 'green-stripe'].indexOf(val) > -1
       },
-      size: String,
+      size: {
+        type: String,
+        validator: val => !val || ['large', 'small'].indexOf(val) > -1
+      },
       percentage: {
         type: Number,
         default: 0,
-        required: true
+        required: true,
+        validator: val => val >= 0 && val <= 100
       }
     },
     computed: {
