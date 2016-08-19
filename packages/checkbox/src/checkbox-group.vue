@@ -7,16 +7,13 @@
     mixins: [emitter],
 
     props: {
-      value: {
-        default: '',
-        required: true
-      }
+      value: {}
     },
 
     watch: {
       value(value) {
         this.$emit('change', value);
-        this.dispatch('form-item', 'el.form.change', value);
+        this.dispatch('form-item', 'el.form.change', [value]);
       }
     }
   };

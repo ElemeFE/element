@@ -43,7 +43,6 @@
     "oui-dom-events": "^0.2.1",
     "postcss": "^5.0.21",
     "purecss": "^0.6.0",
-    "q": "^1.4.1",
     "uppercamelcase": "^1.1.0",
     "vue-loader": "^9.3.2",
     "vue": "^2.0.0-rc.2",

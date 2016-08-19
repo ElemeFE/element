@@ -7,8 +7,6 @@
   </form>
 </template>
 <script>
-  import AsyncValidator from 'async-validator';
-
   export default {
     name: 'ElForm',
 
@@ -28,27 +26,21 @@
     data() {
       return {
         fields: {},
-        fieldLength: 0,
-        validator: {}
+        fieldLength: 0
       };
     },
-    ready() {
-      if (this.rules) {
-        this.validator = new AsyncValidator(this.rules);
-      }
-    },
-    events: {
-      'el.form.addField'(field) {
+    created() {
+      this.$on('el.form.addField', (field) => {
         this.fields[field.prop] = field;
         this.fieldLength++;
-      },
-      'el.form.removeField'(field) {
+      });
+      this.$on('el.form.removeField', (field) => {
         delete this.fields[field.prop];
         this.fieldLength--;
-      }
+      });
     },
     methods: {
-      resetForm() {
+      resetFields() {
         for (let prop in this.fields) {
           let field = this.fields[prop];
           field.resetField();
