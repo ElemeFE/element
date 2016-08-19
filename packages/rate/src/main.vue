@@ -195,7 +195,7 @@
 
       showDecimalIcon(item) {
         let showWhenDisabled = this.disabled && this.valueDecimal > 0 && item - 1 < this.value && item > this.value;
-        let showWhenAllowHalf = this.allowHalf && this.pointerAtLeftHalf && ((item - 0.5).toString() === this.currentValue.toString());
+        let showWhenAllowHalf = this.allowHalf && this.pointerAtLeftHalf && ((item - 0.5).toFixed(1) === this.currentValue.toFixed(1));
         return showWhenDisabled || showWhenAllowHalf;
       },
 
