@@ -1,5 +1,6 @@
 var cooking = require('cooking');
 var path = require('path');
+var md = require('markdown-it')();
 var Components = require('../components.json');
 
 cooking.set({
@@ -51,6 +52,26 @@ cooking.add('vueMarkdown', {
     [require('markdown-it-toc-and-anchor').default, {
       anchorLinkSymbol: '',
       anchorClassName: 'anchor'
+    }],
+    [require('markdown-it-container'), 'code', {
+      validate: function(params) {
+        return params.trim().match(/^code\s+(.*)$/);
+      },
+
+      render: function (tokens, idx) {
+        var m = tokens[idx].info.trim().match(/^code\s+(.*)$/);
+
+        if (tokens[idx].nesting === 1) {
+          // opening tag
+          return '<div class="details">' +
+                    `<div class="summary">${md.utils.escapeHtml(m[1])}</div>` +
+                  '<div class="code">';
+
+        } else {
+          // closing tag
+          return '</div></div>\n';
+        }
+      }
     }]
   ],
   preprocess: function (MarkdownIt, source) {
