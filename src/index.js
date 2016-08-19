@@ -43,13 +43,15 @@ import Loading from '../packages/loading/index.js';
 import Icon from '../packages/icon/index.js';
 import Row from '../packages/row/index.js';
 import Col from '../packages/col/index.js';
-import Upload from '../packages/upload/index.js';
+// import Upload from '../packages/upload/index.js';
 import Progress from '../packages/progress/index.js';
 import Spinner from '../packages/spinner/index.js';
 import Message from '../packages/message/index.js';
+import Badge from '../packages/badge/index.js';
 import Card from '../packages/card/index.js';
 import Rate from '../packages/rate/index.js';
-import Badge from '../packages/badge/index.js';
+import Steps from '../packages/steps/index.js';
+import Step from '../packages/step/index.js';
 
 const install = function(Vue) {
   if (install.installed) return;
@@ -96,13 +98,15 @@ const install = function(Vue) {
   Vue.component(Icon.name, Icon);
   Vue.component(Row.name, Row);
   Vue.component(Col.name, Col);
-  Vue.component(Upload.name, Upload);
+  // Vue.component(Upload.name, Upload);
   Vue.component(Progress.name, Progress);
   Vue.component(Spinner.name, Spinner);
   Vue.component(Message.name, Message);
+  Vue.component(Badge.name, Badge);
   Vue.component(Card.name, Card);
   Vue.component(Rate.name, Rate);
-  Vue.component(Badge.name, Badge);
+  Vue.component(Steps.name, Steps);
+  Vue.component(Step.name, Step);
 
   Vue.use(Loading);
 
@@ -166,11 +170,13 @@ module.exports = {
   Icon,
   Row,
   Col,
-  Upload,
+  // Upload,
   Progress,
   Spinner,
+  Message,
+  Badge,
   Card,
   Rate,
-  Message,
-  Badge
+  Steps,
+  Step
 };
