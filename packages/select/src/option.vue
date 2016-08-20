@@ -81,7 +81,7 @@
         if (toString.call(this.parent.selected) === '[object Object]') {
           return this === this.parent.selected;
         } else if (toString.call(this.parent.selected) === '[object Array]') {
-          return this.parent.selected.indexOf(this) > -1;
+          return this.parent.value.indexOf(this.value) > -1;
         }
       },
 
@@ -90,6 +90,12 @@
         if (!this.queryPassed) {
           this.parent.filteredOptionsCount--;
         }
+      },
+
+      resetIndex() {
+        this.$nextTick(() => {
+          this.index = this.parent.options.indexOf(this);
+        });
       }
     },
 
@@ -110,6 +116,11 @@
 
       this.$on('queryChange', this.queryChange);
       this.$on('disableOptions', this.disableOptions);
+      this.$on('resetIndex', this.resetIndex);
+    },
+
+    beforeDestroy() {
+      this.dispatch('select', 'onOptionDestroy', this);
     }
   };
 </script>
