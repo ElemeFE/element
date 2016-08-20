@@ -1,4 +1,4 @@
-const Upload = require('./src/upload');
+const Upload = require('./src/index');
 
 Upload.install = function(Vue) {
   Vue.component(Upload.name, Upload);

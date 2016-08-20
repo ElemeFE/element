@@ -1,187 +1,103 @@
 <template>
-  <div class="el-upload">
-    <!-- 选择类型 -->
-    <template v-if="type === 'select'">
-      <ul class="el-upload__files" v-show="showUploadList && uploadedFiles.length > 0" transition="slide-in-bottom">
-        <li class="el-upload__file" v-for="file in uploadedFiles" transition="slide-in-bottom">
-          <i class="el-icon-document"></i>{{file.name}}
-          <i class="el-icon-check" v-show="file.status === 'success'"></i>
-          <span class="el-upload__btn-delete" @click="removeFile(file)" v-show="file.status === 'finished'">删除</span>
-          <el-progress
-            v-if="file.status === 'success' || file.status === 'uploading'"
-            size="small"
-            :percentage="file.percentage"
-            :type="file.status === 'success' ? 'green' : 'blue'">
-          </el-progress>
-        </li>
-      </ul>
-      <component :is="uploadComponent"
-        :action="action",
-        :multiple="multiple",
-        :with-credentials="withCredentials",
-        :name="name",
-        :accept="accept",
-        :on-start="onStart",
-        :on-progress="onProgress",
-        :on-success="onSuccess",
-        :on-error="onError"
-      >
-        <slot></slot>
-      </component>
-      <slot name="tip"></slot>
+  <div class="el-upload__inner"
+    :class="{
+      'el-dragger': type === 'drag',
+      'is-dragOver': dragOver,
+      'is-hover': mouseover,
+      'is-showImage': showThumbnail
+    }"
+    @click="$refs.input.click()"
+    @drop.prevent="onDrop"
+    @dragover.prevent="dragOver = true"
+    @dragleave.prevent="dragOver = false"
+    @mouseenter="mouseover = true"
+    @mouseleave="mouseover = false"
+  >
+    <slot></slot>
+    <template v-if="type === 'drag' && !showThumbnail">
+      <i class="el-icon-upload"></i>
+      <div class="el-dragger__text">将文件拖到此处，或<em>点击上传</em></div>
     </template>
-
-    <!-- 拖拽类型 -->
-    <template v-if="type === 'drag'">
-      <div class="el-dragger"
-        :class="{
-          'is-dragOver': dragOver,
-          'is-draging': draging,
-          'is-hover': mouseover,
-          'is-showImage': showImageBlock
-        }"
-        @drop.prevent="dragOver = false"
-        @dragOver.prevent="dragOver = true"
-        @dragLeave.prevent="dragOver = false"
-        @mouseenter="mouseover = true"
-        @mouseleave="mouseover = false"
-      >
+    <template v-if="thumbnailMode">
+      <transition name="fade-in">
         <el-progress
           class="el-dragger__progress"
-          v-if="mode === 'image' && (image.status === 'success' || image.status === 'uploading')"
+          v-if="lastestFile.showProgress"
           size="large"
-          :percentage="image.percentage"
-          :type="image.status === 'success' ? 'green' : 'blue'">
+          :percentage="lastestFile.percentage"
+          :type="lastestFile.status === 'finished' ? 'green' : 'blue'">
         </el-progress>
-        <div class="el-dragger__uploaded-image"
-          v-if="mode === 'image' && image.status === 'finished'"
-          transition="slide-in-bottom"
-        >
-          <img :src="image.url">
-          <div v-show="mouseover" class="el-dragger__uploaded-image__interact" transition="fade-in">
-            <slot name="interact"></slot>
+      </transition>
+      <div class="el-dragger__uploaded-image" v-if="lastestFile.status === 'finished'" @click.stop>
+        <img :src="lastestFile.url">
+        <transition name="fade-in">
+          <div v-show="mouseover" class="el-dragger__uploaded-image__interact">
+            <div class="el-draggeer__uploaded-image__btns">
+              <span class="btn" @click="$refs.input.click()"><i class="el-icon-upload"></i><span>继续上传</span></span>
+              <span class="btn" @click="onPreview(lastestFile)"><i class="el-icon-search"></i><span>查看图片</span></span>
+              <span class="btn" @click="onRemove(lastestFile)"><i class="el-icon-delete"></i><span>删除</span></span>
+            </div>
           </div>
-          <h4 v-show="mouseover" class="el-dragger__uploaded-image__title" transition="slide-in-bottom">{{image.name}}</h4>
-        </div>
-        <component :is="uploadComponent"
-          :action="action",
-          :multiple="multiple",
-          :with-credentials="withCredentials",
-          :name="name",
-          :accept="accept",
-          :on-start="onStart",
-          :on-progress="onProgress",
-          :on-success="onSuccess",
-          :on-error="onError"
-        >
-          <slot></slot>
-        </component>
+        </transition>
+        <transition name="md-fade-top">
+          <h4 v-show="mouseover" class="el-dragger__uploaded-image__title">{{lastestFile.name}}</h4>
+        </transition>
       </div>
-
-      <slot name="tip" class="el-dragger__tip"></slot>
-
-      <ul class="el-upload__files"
-        v-if="mode !== 'image' && showUploadList"
-        v-show="uploadedFiles.length > 0"
-        transition="slide-in-bottom"
-      >
-        <li class="el-upload__file" v-for="file in uploadedFiles" transition="slide-in-bottom">
-          <i class="el-icon-document"></i>{{file.name}}
-          <i class="el-icon-check" v-show="file.status === 'success'"></i>
-          <span class="el-upload__btn-delete" @click="removeFile(file)" v-show="file.status === 'finished'">删除</span>
-          <el-progress
-            v-if="file.status === 'success' || file.status === 'uploading'"
-            size="small"
-            :percentage="file.percentage"
-            :type="file.status === 'success' ? 'green' : 'blue'">
-          </el-progress>
-        </li>
-      </ul>
     </template>
+    <input class="el-upload__input" type="file" ref="input" @change="handleChange" :multiple="multiple" :accept="accept">
   </div>
 </template>
 
 <script>
-import AjaxUpload from './ajax-upload';
-import IframeUpload from './iframe-upload';
-import ElProgress from 'packages/progress/index.js';
+import ajax from './ajax';
 
 export default {
-  name: 'el-upload',
-
-  // extends: typeof FormData !== 'undefined' ? ajaxUpload : iframeUpload,
-  // extends: iframeUpload,
-
-  components: {
-    ElProgress,
-    AjaxUpload,
-    IframeUpload
-  },
-
   props: {
+    type: String,
     action: {
       type: String,
       required: true
     },
-    headers: {
-      type: Object,
-      default() {
-        return {
-          // 'Access-Control-Request-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
-          // 'Access-Control-Request-Headers': 'Content-Type, Content-Range, Content-Disposition, Content-Description'
-        };
-      }
-    },
-    multiple: false,
     name: {
       type: String,
       default: 'file'
     },
-    withCredentials: {
-      type: Boolean,
-      default: false
-    },
-    showUploadList: {
-      type: Boolean,
-      default: true
-    },
+    withCredentials: Boolean,
+    multiple: Boolean,
     accept: String,
-    type: {
-      type: String,
-      default: 'select'
+    onStart: Function,
+    onProgress: Function,
+    onSuccess: Function,
+    onError: Function,
+    beforeUpload: Function,
+    onPreview: {
+      type: Function,
+      default: function() {}
     },
-    mode: String
+    onRemove: {
+      type: Function,
+      default: function() {}
+    }
   },
 
   data() {
     return {
-      uploading: false,
-      percentage: 0,
-      uploadedFiles: [],
-      filename: '',
-      success: false,
       dragOver: false,
-      draging: false,
-      mouseover: false,
-      tempIndex: 1
+      mouseover: false
     };
   },
 
   computed: {
-    uploadComponent() {
-      return typeof FormData !== 'undefined' ? 'AjaxUpload' : 'IframeUpload';
+    lastestFile() {
+      var uploadedFiles = this.$parent.uploadedFiles;
+      return uploadedFiles.length > 0 ? uploadedFiles[uploadedFiles.length - 1] : {};
     },
-    image() {
-      return this.uploadedFiles.length > 0 ? this.uploadedFiles[this.uploadedFiles.length - 1] : {};
+    showThumbnail() {
+      var file = this.lastestFile;
+      return this.thumbnailMode && file.status && file.status !== 'fail';
     },
-    showImageBlock() {
-      return this.mode === 'image' && this.image.status && this.image.status !== 'fail';
-    }
-  },
-
-  ready() {
-    if (this.mode === 'image') {
-      this.accept = 'image/*';
+    thumbnailMode() {
+      return this.$parent.thumbnailMode;
     }
   },
 
@@ -189,59 +105,76 @@ export default {
     isImage(str) {
       return str.indexOf('image') !== -1;
     },
-    removeFile(file) {
-      this.uploadedFiles.$remove(file);
-      this.$dispatch('fileremove', file, this.uploadedFiles);
+    handleChange(ev) {
+      const files = ev.target.files;
+
+      if (!files) {
+        return;
+      }
+      this.uploadFiles(files);
     },
-    onStart(files) {
-      files.forEach(file => {
+    uploadFiles(files) {
+      let postFiles = Array.prototype.slice.call(files);
+      if (!this.multiple) { postFiles = postFiles.slice(0, 1); }
+
+      if (postFiles.length === 0) { return; }
+
+      postFiles.forEach(file => {
         let isImage = this.isImage(file.type);
-        let uid = Date.now() + this.tempIndex++;
-        let _file = {
-          status: 'uploading',
-          name: file.name,
-          size: file.size,
-          percentage: 0,
-          uid: uid
-        };
-        if (this.mode === 'image') {
-          if (!isImage) {
-            this.tempIndex--;
-            return;
-          } else {
-            _file.url = URL.createObjectURL(file);
-          }
+
+        if (this.thumbnailMode && !isImage) {
+          return;
+        } else {
+          this.upload(file);
         }
-
-        this.uploadedFiles.push(_file);
-
-        file.index = this.uploadedFiles.length - 1;
       });
     },
-    onProgress(ev, file) {
-      this.uploadedFiles[file.index].percentage = ev.percent;
-    },
-    onSuccess(res, file) {
-      var _file = this.uploadedFiles[file.index];
+    upload(file) {
+      if (!this.beforeUpload) {
+        return this.post(file);
+      }
 
-      _file.status = 'success';
-      setTimeout(() => {
-        _file.status = 'finished';
-        this.reset();
-      }, 1000);
+      const before = this.beforeUpload(file);
+      if (before && before.then) {
+        before.then(processedFile => {
+          if (Object.prototype.toString.call(processedFile) === '[object File]') {
+            this.post(processedFile);
+          } else {
+            this.post(file);
+          }
+        }, () => {
+          // this.$emit('cancel', file);
+        });
+      } else if (before !== false) {
+        this.post(file);
+      } else {
+        // this.$emit('cancel', file);
+      }
     },
-    onError(err, file) {
-      var _file = this.uploadedFiles[file.index];
+    post(file) {
+      this.onStart(file);
+      let formData = new FormData();
+      formData.append(this.name, file);
 
-      _file.status = 'finished';
-      this.uploadedFiles.$remove(_file);
-      this.reset();
-      console.log(err);
+      ajax(this.action, {
+        headers: this.headers,
+        withCredentials: this.withCredentials,
+        file: file,
+        filename: this.name,
+        onProgress: e => {
+          this.onProgress(e, file);
+        },
+        onSuccess: res => {
+          this.onSuccess(res, file);
+        },
+        onError: err => {
+          this.onError(err, file);
+        }
+      });
     },
-    reset() {
-      this.uploading = false;
-      this.percent = 0;
-      this.filename = '';
+    onDrop(e) {
+      this.dragOver = false;
+      this.uploadFiles(e.dataTransfer.files);
     }
   }
 };

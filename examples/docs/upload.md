@@ -7,33 +7,6 @@
   .demo-box {
     margin-bottom: 24px;
   }
-  .el-draggeer__uploaded-image__btns {
-    margin-top: 45px;
-    color: #fff;
-    font-size: 14px;
-
-    & .btn {
-      display: inline-block;
-
-      & span {
-        opacity: 0;
-        transition: opacity .15s linear;
-      }
-
-      &:not(:first-child) {
-        margin-left: 35px;
-      }
-
-      &:hover span {
-        opacity: 1;
-      }
-    }
-    & i {
-      display: block;
-      font-size: 26px;
-      margin-bottom: 5px;
-    }
-  }
 </style>
 <script>
   export default {
@@ -43,6 +16,16 @@
       },
       handleRemove(file, fileList) {
         console.log(file, fileList);
+      },
+      beforeUpload(file) {
+        if (file.size > 40000000) {
+          console.warn(file.name + ' is too large!');
+          return false;
+        }
+        return true;
+      },
+      handlePreview(file) {
+        console.log(file);
       }
     }
   }
@@ -51,31 +34,66 @@
 ## 基础使用
 
 <div class="demo-box">
-  <el-upload action="http://127.0.0.1:9000/upload" @filechange="handleChange" @fileremove="handleRemove">
+  <el-upload action="http://element.alpha.elenet.me/upload" :on-preview="handlePreview" :on-remove="handleRemove">
     <el-button size="small" type="primary">点击上传</el-button>
     <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
   </el-upload>
 </div>
 
 ```html
-<el-upload action="http://127.0.0.1:9000/upload" @filechange="handleChange" @fileremove="handleRemove">
+<el-upload action="http://element.alpha.elenet.me/upload" :on-preview="handlePreview" :on-remove="handleRemove">
   <el-button size="small" type="primary">点击上传</el-button>
   <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
 </el-upload>
+
+<script>
+  export default {
+    methods: {
+      handleRemove(file, fileList) {
+        console.log(file, fileList);
+      },
+      handlePreview(file) {
+        console.log(file);
+      }
+    }
+  }
+</script>
 ```
 
 ## 拖拽文件上传
 
 <div class="demo-box">
-  <el-upload action="http://127.0.0.1:9000/upload" type="drag" :multiple="true">
+  <el-upload
+    action="http://element.alpha.elenet.me/upload"
+    type="drag"
+    :multiple="true"
+    :on-preview="handlePreview"
+    :on-remove="handleRemove">
     <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
   </el-upload>
 </div>
 
 ```html
-<el-upload action="http://127.0.0.1:9000/upload" type="drag" :multiple="true">
+<el-upload
+  action="http://element.alpha.elenet.me/upload"
+  type="drag"
+  :multiple="true"
+  :on-preview="handlePreview"
+  :on-remove="handleRemove">
   <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
 </el-upload>
+<script>
+  export default {
+    methods: {
+      handleRemove(file, fileList) {
+        console.log(file, fileList);
+      },
+      handlePreview(file) {
+        console.log(file);
+      }
+    }
+  }
+</script>
 ```
 
 ## 图片缩略图模式
@@ -83,23 +101,39 @@
 上传文件类型限制为只能上传图片，并可展示本地缩略图，该模式暂不支持多选
 
 <div class="demo-box">
-  <el-upload action="http://127.0.0.1:9000/upload" type="drag" mode="image">
-    <div class="el-draggeer__uploaded-image__btns" slot="interact">
-      <span class="btn"><i class="el-icon-share"></i><span>分享图片</span></span>
-      <span class="btn"><i class="el-icon-delete"></i><span>删除</span></span>
-    </div>
+  <el-upload
+    action="http://element.alpha.elenet.me/upload"
+    type="drag"
+    :thumbnail-mode="true"
+    :on-preview="handlePreview"
+    :on-remove="handleRemove"
+  >
     <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
   </el-upload>
 </div>
 
 ```html
-<el-upload action="http://127.0.0.1:9000/upload" type="drag" mode="image">
-  <div class="el-draggeer__uploaded-image__btns" slot="interact">
-    <span class="btn"><i class="el-icon-share"></i><span>分享图片</span></span>
-    <span class="btn"><i class="el-icon-delete"></i><span>删除</span></span>
-  </div>
+<el-upload
+  action="http://element.alpha.elenet.me/upload"
+  type="drag"
+  :thumbnail-mode="true"
+  :on-preview="handlePreview"
+  :on-remove="handleRemove"
+>
   <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
 </el-upload>
+<script>
+  export default {
+    methods: {
+      handleRemove(file, fileList) {
+        console.log(file, fileList);
+      },
+      handlePreview(file) {
+        console.log(file);
+      }
+    }
+  }
+</script>
 ```
 
 ## API
@@ -113,6 +147,8 @@
 | showUploadList | 是否显示已上传文件列表 | boolean | | true |
 | type | 上传控件类型 | string | select,drag | select |
 | accept | 可选参数, 接受上传的[文件类型](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept), 拖拽文件上传时不受此参数影响 | string |  |  |
-| filechange | 可选参数, 上传文件改变时的回调 | function(file, fileList, event) |  |  |
-| fileremove | 可选参数, 文件列表移除文件时的回调 | function(file, fileList) |  |  |
+| onPreview | 可选参数, 点击已上传的文件链接时的钩子 | function(file) |  |  |
+| onRemove | 可选参数, 文件列表移除文件时的钩子 | function(file, fileList) |  |  |
+| beforeUpload | 可选参数, 上传文件之前的钩子，参数为上传的文件，若返回 false 或者 Promise 则停止上传。 | function(file) |  |  |
+| thumbnailMode | 是否设置为图片模式，该模式下会显示图片缩略图 | boolean | | false |
 | type | 上传控件类型 | string | select,drag | select |
