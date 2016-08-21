@@ -1,6 +1,7 @@
 <script>
 import UploadList from './upload-list';
 import Upload from './upload';
+import IframeUpload from './iframe-upload';
 import ElProgress from 'packages/progress/index.js';
 
 function noop() {
@@ -9,13 +10,11 @@ function noop() {
 export default {
   name: 'el-upload',
 
-  // extends: typeof FormData !== 'undefined' ? ajaxUpload : iframeUpload,
-  // extends: iframeUpload,
-
   components: {
     ElProgress,
     UploadList,
-    Upload
+    Upload,
+    IframeUpload
   },
 
   props: {
@@ -108,12 +107,14 @@ export default {
     onSuccess(res, file) {
       var _file = this.getFile(file);
 
-      _file.status = 'finished';
-      _file.response = res;
+      if (_file) {
+        _file.status = 'finished';
+        _file.response = res;
 
-      setTimeout(() => {
-        _file.showProgress = false;
-      }, 1000);
+        setTimeout(() => {
+          _file.showProgress = false;
+        }, 1000);
+      }
     },
     onError(err, file) {
       var _file = this.getFile(file);
@@ -147,6 +148,7 @@ export default {
 
   render(h) {
     var uploadList;
+
     if (this.showUploadList && !this.thumbnailMode) {
       uploadList = (
         <UploadList
@@ -159,6 +161,7 @@ export default {
 
     var props = {
       props: {
+        type: this.type,
         action: this.action,
         multiple: this.multiple,
         'before-upload': this.beforeUpload,
@@ -174,26 +177,24 @@ export default {
       }
     };
 
+    var uploadComponent = typeof FormData === 'undefined'
+      ? <upload {...props}>{this.$slots.default}</upload>
+      : <iframeUpload {...props}>{this.$slots.default}</iframeUpload>;
+
     if (this.type === 'select') {
       return (
         <div class="el-upload">
           {uploadList}
-          <upload {...props}>
-            {this.$slots.default}
-          </upload>
+          {uploadComponent}
           {this.$slots.tip}
         </div>
       );
     }
 
     if (this.type === 'drag') {
-      props.props.type = 'drag';
-
       return (
         <div class="el-upload">
-          <upload {...props}>
-            {this.$slots.default}
-          </upload>
+          {uploadComponent}
           {this.$slots.tip}
           {uploadList}
         </div>

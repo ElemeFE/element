@@ -1,138 +1,209 @@
-<template>
-  <span class="el-upload__inner" :style="{ position: 'relative', zIndex: 0 }">
-    <iframe v-el:iframe @load="onLoad" v-bind:style="iframeStyle"></iframe>
-    <slot></slot>
-  </span>
-</template>
-
 <script>
-import ajax from './ajax';
-import ElProgress from 'packages/progress/index.js';
+import Cover from './cover';
 
 export default {
   components: {
-    ElProgress
+    Cover
+  },
+  props: {
+    type: String,
+    data: {},
+    action: {
+      type: String,
+      required: true
+    },
+    name: {
+      type: String,
+      default: 'file'
+    },
+    withCredentials: Boolean,
+    multiple: Boolean,
+    accept: String,
+    onStart: Function,
+    onProgress: Function,
+    onSuccess: Function,
+    onError: Function,
+    beforeUpload: Function,
+    onPreview: {
+      type: Function,
+      default: function() {}
+    },
+    onRemove: {
+      type: Function,
+      default: function() {}
+    }
   },
 
   data() {
     return {
-      uploading: false,
-      percentage: 0,
-      uploadedFiles: [],
-      filename: '',
-      success: false,
-      iframeStyle: {
-        position: 'absolute',
-        top: 0,
-        opacity: 0,
-        filter: 'alpha(opacity=0)',
-        left: 0,
-        zIndex: 9999
-      }
+      dragOver: false,
+      mouseover: false,
+      domain: '',
+      file: null,
+      disabled: false
     };
   },
 
-  methods: {
-    handleChange(ev) {
-      const files = ev.target.files;
-
-      if (this.uploading || !files) {
-        return;
-      }
-
-      this.uploading = true;
-      this.uploadFiles(files);
+  computed: {
+    lastestFile() {
+      var uploadedFiles = this.$parent.uploadedFiles;
+      return uploadedFiles[uploadedFiles.length - 1];
     },
-    uploadFiles(files) {
-      let postFiles = Array.prototype.slice.call(files);
-      if (!this.multiple) {
-        postFiles = postFiles.slice(0, 1);
-      }
-      const len = postFiles.length;
-      if (len > 0) {
-        for (let i = 0; i < len; i++) {
-          const file = postFiles[i];
-          // file.uid = uid();
-          this.upload(file);
-        }
-        if (this.multiple) {
-          this.onStart(postFiles);
-        } else {
-          this.onStart(postFiles[0]);
-        }
-      }
+    showCover() {
+      var file = this.lastestFile;
+      return this.thumbnailMode && file && file.status !== 'fail';
     },
-    upload(file) {
-      if (!this.beforeUpload) {
-        return this.post(file);
-      }
-
-      const before = this.beforeUpload(file);
-      if (before && before.then) {
-        before.then((processedFile) => {
-          if (Object.prototype.toString.call(processedFile) === '[object File]') {
-            this.post(processedFile);
-          } else {
-            this.post(file);
-          }
-        }, () => {
-          this.reset();
-        });
-      } else if (before !== false) {
-        this.post(file);
-      } else {
-        this.reset();
-      }
-    },
-    post(file) {
-      let formData = new FormData();
-      formData.append(this.name, file);
-
-      ajax(this.action, {
-        headers: this.headers,
-        withCredentials: this.withCredentials,
-        file: file,
-        filename: this.name,
-        onProgress: e => {
-          this.onProgress(e, file);
-        },
-        onSuccess: res => {
-          this.onSuccess(res, file);
-        },
-        onError: err => {
-          this.onError(err, file);
-        }
-      });
-    },
-    onLoad() {
-
-    },
-    onStart(files) {
-      this.filename = files.name;
-    },
-    onProgress(ev, file) {
-      console.log(ev.percent);
-      this.percentage = ev.percent;
-    },
-    onSuccess(res, file) {
-      setTimeout(() => {
-        this.uploadedFiles.push(file);
-        this.reset();
-      }, 1000);
-      console.log(res);
-    },
-    onError(err, file) {
-      this.reset();
-      console.log(err);
-    },
-    reset() {
-      this.uploading = false;
-      this.percent = 0;
-      this.filename = '';
+    thumbnailMode() {
+      return this.$parent.thumbnailMode;
     }
   },
 
-  ready() {
+  methods: {
+    resetIframe() {
+      const iframeNode = this.getIframeNode();
+      let win = iframeNode.contentWindow;
+      let doc = win.document;
+
+      doc.open('text/html', 'replace');
+      doc.write(this.getIframeHTML(this.domain));
+      doc.close();
+    },
+    getIframeHTML(domain) {
+      let domainScript = '';
+      if (domain) {
+        domainScript = `<script>document.domain="${domain}";<` + '/script>';
+      }
+      return `
+      <!DOCTYPE html>
+      <html>
+      <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      ${domainScript}
+      </head>
+      <body>
+      </body>
+      </html>
+      `;
+    },
+    isImage(str) {
+      return str.indexOf('image') !== -1;
+    },
+    handleClick() {
+      if (!this.disabled) {
+        this.$refs.input.click();
+      }
+    },
+    handleChange(ev) {
+      const files = ev.target.files;
+      this.file = files;
+
+      this.onStart(files);
+
+      const formNode = this.getFormNode();
+      const dataSpan = this.getFormDataNode();
+      let data = this.data;
+      if (typeof data === 'function') {
+        data = data(files);
+      }
+      const inputs = [];
+      for (const key in data) {
+        if (data.hasOwnProperty(key)) {
+          inputs.push(`<input name="${key}" value="${data[key]}"/>`);
+        }
+      }
+      dataSpan.innerHTML = inputs.join('');
+      formNode.submit();
+      dataSpan.innerHTML = '';
+      this.disabled = true;
+    },
+    onLoad() {
+      let response;
+      const eventFile = this.file;
+      if (!eventFile) { return; }
+      try {
+        const doc = this.getIframeDocument();
+        const script = doc.getElementsByTagName('script')[0];
+        if (script && script.parentNode === doc.body) {
+          doc.body.removeChild(script);
+        }
+        response = doc.body.innerHTML;
+        this.onSuccess(response, eventFile);
+      } catch (err) {
+        console.log(err);
+        console.warn(false, 'cross domain error for Upload');
+        this.onError(err, eventFile);
+      }
+      this.resetIframe();
+      this.disabled = false;
+    },
+    onDrop(e) {
+      e.preventDefault();
+      this.dragOver = false;
+      this.uploadFiles(e.dataTransfer.files);
+    },
+    handleDragover(e) {
+      e.preventDefault();
+      this.onDrop = true;
+    },
+    handleDragleave(e) {
+      e.preventDefault();
+      this.onDrop = false;
+    },
+    getIframeNode() {
+      return this.$refs.iframe;
+    },
+
+    getIframeDocument() {
+      return this.getIframeNode().contentDocument;
+    },
+
+    getFormNode() {
+      return this.$refs.form;
+    },
+
+    getFormDataNode() {
+      return this.$refs.data;
+    }
+  },
+
+  render(h) {
+    var cover = <cover image={this.lastestFile} onPreview={this.onPreview} onRemove={this.onRemove}></cover>;
+    var frameName = 'frame-' + Date.now();
+    return (
+      <div
+        class={{
+          'el-upload__inner': true,
+          'el-dragger': this.type === 'drag',
+          'is-dragOver': this.dragOver,
+          'is-showCover': this.showCover
+        }}
+        on-click={this.handleClick}
+        nativeOn-drop={this.onDrop}
+        nativeOn-dragover={this.handleDragover}
+        nativeOn-dragleave={this.handleDragleave}
+      >
+        <iframe
+          ref="iframe"
+          on-load={this.onLoad}
+          name={frameName}
+        >
+        </iframe>
+        <form ref="form" action={this.action} target={frameName} enctype="multipart/form-data" method="POST">
+          <input
+            class="el-upload__input"
+            type="file"
+            ref="input"
+            name="file"
+            on-change={this.handleChange}
+            multiple={this.multiple}
+            accept={this.accept}>
+          </input>
+          <input type="hidden" name="documentDomain" value={document.domain} />
+          <span ref="data"></span>
+         </form>
+        {!this.showCover ? this.$slots.default : cover}
+      </div>
+    );
   }
 };
 </script>

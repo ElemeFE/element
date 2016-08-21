@@ -11,6 +11,16 @@
     }
     @e inner {
       display: inline-block;
+      position: relative;
+
+      & iframe {
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        filter: alpha(opacity=0);
+      }
     }
     @e files {
       margin: 0;
@@ -103,7 +113,7 @@
       display: block;
       height: 100%;
     }
-    & .el-icon-upload {
+    & .el-icon-cloud {
       font-size: 67px;
       color: #99a9bf;
       margin: 40px 0 16px;
@@ -119,16 +129,7 @@
       border-top: 1px solid rgba(#c0ccda, .2);
     }
 
-    @e progress {
-      position: absolute 0 60px 0 60px;
-      margin: auto;
-
-      & + .el-upload__inner {
-        opacity: 0;
-      }
-    }
-
-    @e uploaded-image {
+    @e cover {
       position: absolute;
       left: 0;
       top: 0;
@@ -142,6 +143,15 @@
         display: block;
         width: 100%;
         height: auto;
+      }
+
+      @e progress {
+        position: absolute 0 60px 0 60px;
+        margin: auto;
+
+        & + .el-upload__inner {
+          opacity: 0;
+        }
       }
 
       @e interact {
@@ -230,7 +240,7 @@
       }
     }
 
-    &:not(.is-showImage):hover {
+    &:not(.is-showCover):hover {
       border-color: var(--color-primary);
     }
 

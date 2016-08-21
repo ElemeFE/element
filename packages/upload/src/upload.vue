@@ -3,55 +3,27 @@
     :class="{
       'el-dragger': type === 'drag',
       'is-dragOver': dragOver,
-      'is-hover': mouseover,
-      'is-showImage': showThumbnail
+      'is-showCover': showCover
     }"
     @click="$refs.input.click()"
     @drop.prevent="onDrop"
     @dragover.prevent="dragOver = true"
     @dragleave.prevent="dragOver = false"
-    @mouseenter="mouseover = true"
-    @mouseleave="mouseover = false"
   >
-    <slot></slot>
-    <template v-if="type === 'drag' && !showThumbnail">
-      <i class="el-icon-upload"></i>
-      <div class="el-dragger__text">将文件拖到此处，或<em>点击上传</em></div>
-    </template>
-    <template v-if="thumbnailMode">
-      <transition name="fade-in">
-        <el-progress
-          class="el-dragger__progress"
-          v-if="lastestFile.showProgress"
-          size="large"
-          :percentage="lastestFile.percentage"
-          :type="lastestFile.status === 'finished' ? 'green' : 'blue'">
-        </el-progress>
-      </transition>
-      <div class="el-dragger__uploaded-image" v-if="lastestFile.status === 'finished'" @click.stop>
-        <img :src="lastestFile.url">
-        <transition name="fade-in">
-          <div v-show="mouseover" class="el-dragger__uploaded-image__interact">
-            <div class="el-draggeer__uploaded-image__btns">
-              <span class="btn" @click="$refs.input.click()"><i class="el-icon-upload"></i><span>继续上传</span></span>
-              <span class="btn" @click="onPreview(lastestFile)"><i class="el-icon-search"></i><span>查看图片</span></span>
-              <span class="btn" @click="onRemove(lastestFile)"><i class="el-icon-delete"></i><span>删除</span></span>
-            </div>
-          </div>
-        </transition>
-        <transition name="md-fade-top">
-          <h4 v-show="mouseover" class="el-dragger__uploaded-image__title">{{lastestFile.name}}</h4>
-        </transition>
-      </div>
-    </template>
+    <slot v-if="!showCover"></slot>
+    <cover :image="lastestFile" :on-preview="onPreview" :on-remove="onRemove" v-else></cover>
     <input class="el-upload__input" type="file" ref="input" @change="handleChange" :multiple="multiple" :accept="accept">
   </div>
 </template>
 
 <script>
 import ajax from './ajax';
+import Cover from './cover';
 
 export default {
+  components: {
+    Cover
+  },
   props: {
     type: String,
     action: {
@@ -90,11 +62,11 @@ export default {
   computed: {
     lastestFile() {
       var uploadedFiles = this.$parent.uploadedFiles;
-      return uploadedFiles.length > 0 ? uploadedFiles[uploadedFiles.length - 1] : {};
+      return uploadedFiles[uploadedFiles.length - 1];
     },
-    showThumbnail() {
+    showCover() {
       var file = this.lastestFile;
-      return this.thumbnailMode && file.status && file.status !== 'fail';
+      return this.thumbnailMode && file && file.status !== 'fail';
     },
     thumbnailMode() {
       return this.$parent.thumbnailMode;
