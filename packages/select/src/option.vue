@@ -4,7 +4,7 @@
     @click.stop="selectOptionClick"
     class="el-select-dropdown__item"
     v-show="queryPassed"
-    :class="{ 'selected': itemSelected(), 'is-disabled': disabled, 'hover': parent.hoverIndex === index }">
+    :class="{ 'selected': itemSelected, 'is-disabled': disabled, 'hover': parent.hoverIndex === index }">
     <slot>
       <span>{{ label }}</span>
     </slot>
@@ -13,7 +13,6 @@
 
 <script type="text/babel">
   import emitter from 'main/mixins/emitter';
-  const toString = Object.prototype.toString;
 
   export default {
     mixins: [emitter],
@@ -39,7 +38,6 @@
 
     data() {
       return {
-        parent: null,
         index: -1,
         queryPassed: true,
         hitState: false
@@ -47,8 +45,24 @@
     },
 
     computed: {
+      parent() {
+        let result = this.$parent;
+        while (!result.isSelect) {
+          result = result.$parent;
+        }
+        return result;
+      },
+
+      itemSelected() {
+        if (Object.prototype.toString.call(this.parent.selected) === '[object Object]') {
+          return this === this.parent.selected;
+        } else if (Array.isArray(this.parent.selected)) {
+          return this.parent.value.indexOf(this.value) > -1;
+        }
+      },
+
       currentSelected() {
-        return this.selected || (this.$parent.multiple ? this.$parent.value.indexOf(this.value) > -1 : this.$parent.value === this.value);
+        return this.selected || (this.parent.multiple ? this.parent.value.indexOf(this.value) > -1 : this.parent.value === this.value);
       }
     },
 
@@ -77,14 +91,6 @@
         }
       },
 
-      itemSelected() {
-        if (toString.call(this.parent.selected) === '[object Object]') {
-          return this === this.parent.selected;
-        } else if (toString.call(this.parent.selected) === '[object Array]') {
-          return this.parent.value.indexOf(this.value) > -1;
-        }
-      },
-
       queryChange(query) {
         this.queryPassed = new RegExp(query, 'i').test(this.label);
         if (!this.queryPassed) {
@@ -100,10 +106,6 @@
     },
 
     created() {
-      this.parent = this.$parent;
-      while (!this.parent.isSelect) {
-        this.parent = this.parent.$parent;
-      }
       this.label = this.label || ((typeof this.value === 'string' || typeof this.value === 'number') ? this.value : '');
       this.parent.options.push(this);
       this.parent.optionsCount++;
