@@ -4,7 +4,7 @@
   </ul>
 </template>
 <script>
-  import Popper from 'main/utils/popper.js';
+  import Popper from 'main/utils/popper';
 
   export default {
     data() {

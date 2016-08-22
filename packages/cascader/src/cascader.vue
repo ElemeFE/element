@@ -21,7 +21,7 @@
     },
 
     directives: {
-      ElementClickoutside: require('vue-clickoutside')
+      ElementClickoutside: require('main/utils/clickoutside').default
     },
 
     data() {
