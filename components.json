@@ -154,5 +154,11 @@
   ],
   "rate": [
     "./packages/rate/index.js"
+  ],
+  "steps": [
+    "./packages/steps/index.js"
+  ],
+  "step": [
+    "./packages/step/index.js"
   ]
 }

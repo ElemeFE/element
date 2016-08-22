@@ -372,4 +372,10 @@
     --card-border-color: var(--disabled-border-base);
     --card-border-radius: 4px;
     --card-padding: 20px;
+
+    /*Steps
+    --------------------------*/
+    --steps-border-color: var(--disabled-border-base);
+    --steps-border-radius: 4px;
+    --steps-padding: 20px;
 }

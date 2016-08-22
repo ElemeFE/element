@@ -1,0 +1,17 @@
+@charset "UTF-8";
+@import "./common/var.css";
+
+@component-namespace el {
+  @b steps {
+    overflow: hidden;
+    font-size: 0;
+
+    > :last-child .el-step__line {
+      display: none;
+    }
+
+    @when horizontal {
+      white-space: nowrap;
+    }
+  }
+}
