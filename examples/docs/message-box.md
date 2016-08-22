@@ -15,12 +15,12 @@
         this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
           type: 'warning'
         }).then(() => {
-          this.$msgbox({
+          this.$notify({
             message: '删除成功!',
             type: 'success'
           });
         }).catch(() => {
-          this.$msgbox({
+          this.$notify({
             message: '已取消删除',
             type: 'info'
           });          
@@ -31,11 +31,16 @@
         this.$prompt('请输入邮箱', '提示', {
           inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
           inputErrorMessage: '邮箱格式不正确'
-        }).then(({ value, action }) => {
-          console.log('action: ', action);
-          this.$msgbox('', '你的邮箱是: ' + value);
+        }).then(({ value }) => {
+          this.$notify({
+            type: 'success',
+            message: '你的邮箱是: ' + value
+          });
         }).catch(() => {
-          this.$msgbox('', '取消输入');       
+          this.$notify({
+            type: 'info',
+            messgae: '取消输入'
+          });       
         });
       },
 
@@ -46,7 +51,10 @@
           message: '这是一段内容, 这是一段内容, 这是一段内容, 这是一段内容, 这是一段内容, 这是一段内容, 这是一段内容',
           showCancelButton: true
         }).then(action => {
-          this.$msgbox('', 'action: ' + action);
+          this.$notify({
+            type: 'info',
+            message: 'action: ' + action
+          });
         });
       }
 
@@ -124,12 +132,14 @@ MessageBox 组件也拥有极高的定制性，我们可以传入`options`作为
         this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
           type: 'warning'
         }).then(() => {
-          this.$alert('删除成功!',{
-            type: 'success'
+          this.$notify({
+            type: 'success',
+            message: '删除成功!'
           });
         }).catch(() => {
-          this.$alert('已取消删除', {
-            type: 'info'
+          this.$notify({
+            type: 'info',
+            message: '已取消删除'
           });          
         });
       },
@@ -157,9 +167,15 @@ Prompt 框功能强大，可以处理简单的输入，甚至你可以用`inputP
           inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
           inputErrorMessage: '邮箱格式不正确'
         }).then(value => {
-          this.$alert('你的邮箱是: ' + value);
+          this.$notify({
+            type: 'success',
+            message: '你的邮箱是: ' + value
+          });
         }).catch(() => {
-          this.$alert('取消输入');       
+          this.$notify({
+            type: 'info',
+            message: '取消输入'
+          });       
         });
       }
     }
@@ -187,7 +203,10 @@ Msgbox 框是最基本的弹框，与 Alert 的区别在于 Alert 无法通过 E
           message: '这是一段内容, 这是一段内容, 这是一段内容, 这是一段内容, 这是一段内容, 这是一段内容, 这是一段内容',
           showCancelButton: true
         }).then(action => {
-          this.$alert('action: ' + action);
+          this.$notify({
+            type: 'info',
+            message: 'action: ' + action
+          });
         });
       },
     }
