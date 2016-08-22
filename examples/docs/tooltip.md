@@ -178,9 +178,11 @@ Tooltip 组件提供了两个不同的主题：`dark`和`light`，可以通过�
 </div>
 
 ```html
-<el-tooltip :disabled="disabled" content="点击关闭 tooltip 功能" transition="slide-fade" placement="bottom" effect="light">
-  <el-button @click.native="disabled=true">点击关闭 tooltip 功能</el-button>
-</el-tooltip>
+<template>
+  <el-tooltip :disabled="disabled" content="点击关闭 tooltip 功能" transition="slide-fade" placement="bottom" effect="light">
+    <el-button @click.native="disabled=true">点击关闭 tooltip 功能</el-button>
+  </el-tooltip>
+</template>
 
 <style>
   .slide-fade-enter-active {
@@ -204,6 +206,7 @@ Tooltip 组件提供了两个不同的主题：`dark`和`light`，可以通过�
 |  placement        |  Tooltip 的出现位置  | String           |  `top`, `top-start`, `top-end`, `bottom`, `bottom-start`, `bottom-end`, `left`, `left-start`, `left-end`, `right`, `right-start`, `right-end` |  bottom |
 |  visible        |  初始状态是否可见  | Boolean           |  |  false |
 |  disabled       |  Tooltip 是否可用  | Boolean           |  |  false |
+|  offset        |  出现位置的偏移量  | Number           |  |  0 |
 |  transition     |  定义渐变动画      | String             |  | `fade-in-linear` |
-|  visibleArrow   |  是否显示 Tooltip 箭头，更多参数可见[Vue-popper](https://github.com/element-component/vue-popper) | Boolean |  | true |
+|  visible-arrow   |  是否显示 Tooltip 箭头，更多参数可见[Vue-popper](https://github.com/element-component/vue-popper) | Boolean |  | true |
 |  options        | [popper.js](https://popper.js.org/documentation.html) 的参数 | Object            | 参考 [popper.js](https://popper.js.org/documentation.html) 文档 | `{ boundariesElement: 'body', gpuAcceleration: false }` |

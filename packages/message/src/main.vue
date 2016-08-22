@@ -35,7 +35,7 @@
 
     computed: {
       typeClass() {
-        return `el-icon-${ typeMap[this.type] }`;
+        return typeMap[this.type] ? `el-icon-${ typeMap[this.type] }` : 'el-icon-information';
       }
     },
 
