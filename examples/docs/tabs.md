@@ -23,8 +23,8 @@
       handleRemove(tab) {
         console.log(tab);
       },
-      handleClick(tab) {
-        console.log(tab);
+      handleClick(tab, event) {
+        console.log(tab, event);
       }
     }
   }
@@ -38,7 +38,7 @@
 ## 基础使用
 
 <div>
-  <el-tabs :active-name="activeName">
+  <el-tabs>
     <el-tab-pane label="选项卡一">选项卡一内容</el-tab-pane>
     <el-tab-pane label="选项卡二">选项卡二内容</el-tab-pane>
     <el-tab-pane label="选项卡三">选项卡三内容</el-tab-pane>
@@ -121,10 +121,9 @@
 |---------- |-------- |---------- |-------------  |-------- |
 | type     | 风格类型   | string   | card, border-card  |         |
 | closable  | 真实值   | boolean   | true, false |  false  |
-| defaultActiveName  | 如果没有设置 activeName, 则使用该值 | string    |     | 第一个面板  |
 | activeName  | 当前选中面板的 name  | string   |    |    |
-| tab.click  | tab 被点击的回调  | string   |    |    |
-| tab.remove  | tab 被删除的回调  | string   |    |    |
+| on-click  | tab 被点击的钩子  | string   |    |    |
+| on-remove  | tab 被删除的钩子  | string   |    |    |
 
 ## TAB-PANE API
 | 参数       | 说明     | 类型      | 可选值       | 默认值   |
