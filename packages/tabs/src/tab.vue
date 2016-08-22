@@ -24,7 +24,7 @@
     <span
       class="el-icon-close"
       v-if="closable"
-      @click="$emit('onremove', tab, $event)">
+      @click="$emit('remove', tab, $event)">
     </span>
   </div>
 </template>
