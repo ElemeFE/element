@@ -19,6 +19,7 @@
       margin-bottom: 10px;
     }
     @e file {
+      transition: all .5s cubic-bezier(.55,0,.1,1);
       font-size: 14px;
       color: #475669;
       line-height: 32px;
@@ -33,20 +34,15 @@
       text-overflow: ellipsis;
       position: relative;
 
+      a {
+        color: #475669;
+        transition: color .3s;
+      }
       [class^="el-icon"] {
         color: #99a9bf;
         margin-right: 7px;
         height: 100%;
         line-height: inherit;
-      }
-
-      &:hover {
-        background-color: #eff2f7;
-
-        .el-upload__btn-delete {
-          display: block;
-          cursor: pointer;
-        }
       }
       & .el-progress {
         position: absolute;
@@ -60,6 +56,21 @@
         right: 0;
         top: 0;
         height: 100%;
+      }
+      &:hover {
+        background-color: #eff2f7;
+      }
+      @when finished {
+        & a:hover {
+          color: var(--link-hover-color);
+          cursor: pointer;
+        }
+        &:hover {
+          .el-upload__btn-delete {
+            display: block;
+            cursor: pointer;
+          }   
+        }
       }
     }
     @e tip {
@@ -125,6 +136,7 @@
       height: 100%;
       overflow: hidden;
       z-index: 10;
+      cursor: default;
 
       & img {
         display: block;
@@ -140,6 +152,45 @@
         height: 100%;
         background-color: rgba(#000, .72);
         text-align: center;
+
+        & .btn {
+          display: inline-block;
+          color: #fff;
+          font-size: 14px;
+          cursor: pointer;
+          vertical-align: middle;
+          transition: var(--md-fade-transition);
+          margin-top: 60px;
+
+          & i {
+            margin-top: 0;
+          }
+
+          & span {
+            opacity: 0;
+            transition: opacity .15s linear;
+          }
+
+          &:not(:first-child) {
+            margin-left: 35px;
+          }
+
+          &:hover {
+            transform: translateY(-13px);
+
+            & span {
+              opacity: 1;
+            }
+          }
+
+          & i {
+            color: #fff;
+            display: block;
+            font-size: 24px;
+            line-height: inherit;
+            margin: 0 auto 5px;
+          }
+        }
       }
 
       @e title {

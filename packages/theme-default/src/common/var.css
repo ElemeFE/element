@@ -23,6 +23,11 @@
   --color-black: #000;
   --color-grey: #C0CCDA;
 
+  /* Link
+  -------------------------- */
+  --link-color: #475669;
+  --link-hover-color: var(--color-primary);
+
   /* Border
   -------------------------- */
   --border-width-base: 1px;
