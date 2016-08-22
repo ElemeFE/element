@@ -13,7 +13,6 @@
     props: {
       type: String,
       tabPosition: String,
-      defaultActiveName: String,
       activeName: String,
       closable: false,
       onRemove: {
@@ -39,9 +38,8 @@
 
     watch: {
       activeName: {
-        immediate: true,
         handler(val) {
-          this.currentName = val || 0;
+          this.currentName = val || this.$children[0].key;
         }
       },
 
@@ -70,12 +68,12 @@
         }
         this.onRemove(tab.key);
       },
-      handleTabClick(tab) {
+      handleTabClick(tab, event) {
         this.currentName = tab.key;
-        this.onClick(tab.key);
+        this.onClick(tab.key, event);
       },
       calcBarStyle() {
-        if (this.type) return {};
+        if (this.type || !this.$refs.tabs) return {};
         var style = {};
         var offset = 0;
         var tabWidth = 0;
@@ -100,7 +98,7 @@
 
     mounted() {
       if (!this.currentName) {
-        this.currentName = this.defaultActiveName || this.$children[0].key;
+        this.currentName = this.$children[0].key;
       }
       this.$children.forEach(tab => this.tabs.push(tab));
       this.$nextTick(() => this.calcBarStyle());
@@ -117,7 +115,7 @@
         :tab="tab"
         :closable="closable"
         @remove="handleTabRemove"
-        @click.native="handleTabClick(tab)">
+        @click.native="handleTabClick(tab, $event)">
       </el-tab>
       <div
         class="el-tabs__active-bar"
