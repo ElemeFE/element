@@ -1,32 +1,5 @@
 [
   {
-    "group": "使用说明",
-    "list": [
-      {
-        "path": "/quickstart",
-        "name": "快速上手"
-      },
-      {
-        "path": "/development",
-        "name": "开发指南"
-      },
-      {
-        "path": "/changelog",
-        "name": "更新日志"
-      }
-    ]
-  },
-  {
-    "group": "设计指南",
-    "list": [
-      {
-        "path": "/menu",
-        "name": "导航",
-        "description": "导航(Navigation) 可以解决用户在访问页面时：在哪里，去哪里，怎么去的问题。一般导航会有「侧栏导航」和「顶部导航」2种类型。"
-      }
-    ]
-  },
-  {
     "group": "Basic",
     "list": [
       {
@@ -245,6 +218,19 @@
         "name": "标记 (badge)",
         "title": " Badge 标记",
         "description": "出现在按钮、图标旁的数字或状态标记"
+      }
+    ]
+  },
+  {
+    "group": "使用说明",
+    "list": [
+      {
+        "path": "/quickstart",
+        "name": "快速上手"
+      },
+      {
+        "path": "/development",
+        "name": "开发指南"
       }
     ]
   }

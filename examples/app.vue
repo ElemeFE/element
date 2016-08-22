@@ -268,10 +268,6 @@
   <div id="app">
     <div class="pure-g">
       <div class="pure-u-1-6 app__sidebar pure-menu pure-menu-scrollable app__menu">
-        <router-link class="pure-menu-heading app__brand" to="/">
-          <span class="app__eleme">ELEME</span>NT
-        </router-link>
-
         <template v-for="(nav, key) in navs">
           <a
             href="#"
@@ -292,7 +288,9 @@
               v-if="!item.disabled">
               <router-link
                 class="pure-menu-link app__menu__link"
-                :to="{ path: item.path, activeClass: 'active' }"
+                active-class="active"
+                :to="'/component' + item.path"
+                exact
                 v-text="item.name"></router-link>
             </li>
           </ul>
@@ -307,26 +305,18 @@
           <p class="app__description">{{ $route.meta.description }}</p>
           <router-view></router-view>
         </section>
-        <toc main=".app__main"></toc>
       </div>
     </div>
-
-    <button class="hljs__button" ref="button"></button>
   </div>
 </template>
 
 <script>
   import { navs } from './route.config';
-  import toc from './components/toc';
   import E from 'oui-dom-events';
   import { toggleClass, addClass, removeClass } from './dom/class';
 
   export default {
     name: 'app',
-
-    components: {
-      toc
-    },
 
     data() {
       return {
