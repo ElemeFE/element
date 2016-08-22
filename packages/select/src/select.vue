@@ -53,7 +53,7 @@
         ref="popper"
         v-show="visible && nodataText !== false"
         :style="{ 'width': dropdownWidth ? dropdownWidth + 'px' : '100%' }">
-        <ul class="el-select-dropdown__list" v-show="options.length > 0 && filteredOptionsCount > 0">
+        <ul class="el-select-dropdown__list" v-show="options.length > 0 && filteredOptionsCount > 0 && !loading">
           <slot></slot>
         </ul>
         <p class="el-select-dropdown__nodata" v-if="nodataText">{{ nodataText }}</p>
@@ -185,12 +185,6 @@
     },
 
     watch: {
-      loading(val) {
-        if (val) {
-          this.options = [];
-        }
-      },
-
       placeholder(val) {
         this.currentPlaceholder = val;
       },
@@ -272,9 +266,6 @@
             this.selected = {};
           }
           this.remoteMethod(val);
-          if (val === '') {
-            this.options = [];
-          }
         } else if (typeof this.filterMethod === 'function') {
           this.filterMethod(val);
         } else {
@@ -300,9 +291,6 @@
             }
             if (this.selected && this.selected.value) {
               this.selectedLabel = this.selected.label;
-            }
-            if (this.remote) {
-
             }
           }
         } else {
@@ -512,6 +500,16 @@
         if (this.filterable) {
           this.query = this.selectedLabel;
         }
+      },
+
+      onOptionDestroy(option) {
+        this.optionsCount--;
+        this.filteredOptionsCount--;
+        let index = this.options.indexOf(option);
+        if (index > -1) {
+          this.options.splice(index, 1);
+        }
+        this.broadcast('option', 'resetIndex');
       }
     },
 
@@ -528,6 +526,7 @@
 
       this.$on('addOptionToValue', this.addOptionToValue);
       this.$on('handleOptionClick', this.handleOptionSelect);
+      this.$on('onOptionDestroy', this.onOptionDestroy);
     }
   };
 </script>
