@@ -5,7 +5,7 @@
       <table-header :columns="columns" :all-selected="allSelected" @allselectedchange="handleAllSelectedChange" :selection="selection" :style="{ width: bodyWidth ? bodyWidth + 'px' : '' }" :border="border"></table-header>
     </div>
     <div class="el-table__body-wrapper">
-      <table-body :columns="columns" :selection="selection" :data="filterData" :style="{ width: bodyWidth ? bodyWidth - (showVScrollBar ? gutterWidth : 0 ) + 'px' : '' }"></table-body>
+      <table-body :columns="columns" :selection="selection" :data="filterData" :style="{ width: bodyWidth ? bodyWidth - (showVScrollBar ? currentGutterWidth : 0 ) + 'px' : '' }"></table-body>
     </div>
     <div class="el-table__fixed" :style="{ width: fixedBodyWidth ? fixedBodyWidth + 'px' : '' }" ref="fixed">
       <div class="el-table__fixed-header-wrapper" v-if="fixedColumnCount > 0">
@@ -160,8 +160,8 @@
             }
           });
 
-          if (bodyMinWidth < bodyWidth - this.gutterWidth) { // do not have scroll bar.
-            let flexWidthTotal = bodyWidth - this.gutterWidth - columns.length - bodyMinWidth;
+          if (bodyMinWidth < bodyWidth - this.currentGutterWidth) { // do not have scroll bar.
+            let flexWidthTotal = bodyWidth - this.currentGutterWidth - columns.length - bodyMinWidth;
             let flexWidthPerColumn = Math.floor(flexWidthTotal / flexColumns.length);
             let flexWidthFirstColumn = flexWidthTotal - flexWidthPerColumn * flexColumns.length + flexWidthPerColumn;
 
@@ -254,7 +254,7 @@
 
           const fixedBodyWrapper = this.$el.querySelector('.el-table__fixed-body-wrapper');
           if (fixedBodyWrapper) {
-            fixedBodyWrapper.style.height = (this.showHScrollBar ? gridWrapper.offsetHeight - this.gutterWidth : gridWrapper.offsetHeight) + 'px';
+            fixedBodyWrapper.style.height = (this.showHScrollBar ? gridWrapper.offsetHeight - this.currentGutterWidth : gridWrapper.offsetHeight) + 'px';
           }
         }
       },
@@ -317,7 +317,7 @@
       if (GUTTER_WIDTH === undefined) {
         GUTTER_WIDTH = getScrollBarWidth();
       }
-      this.gutterWidth = GUTTER_WIDTH;
+      this.currentGutterWidth = GUTTER_WIDTH;
 
       this.debouncedReRender = debounce(50, () => {
         this.doRender();
@@ -428,7 +428,8 @@
         sortingColumn: null,
         sortingProperty: null,
         sortingDirection: 1,
-        visibleFilter: null
+        visibleFilter: null,
+        currentGutterWidth: this.gutterWidth
       };
     }
   };

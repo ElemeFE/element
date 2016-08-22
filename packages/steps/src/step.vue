@@ -110,7 +110,7 @@ export default {
 
     if (parent.direction === 'horizontal') {
       this.style = { width: space };
-      this.mainOffset = -this.$refs.title.getBoundingClientRect().width / 2 + 16 + 'px';
+      // this.mainOffset = -this.$refs.title.getBoundingClientRect().width / 2 + 16 + 'px';
     } else {
       this.style = { height: space };
     }

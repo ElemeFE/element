@@ -142,6 +142,7 @@
     @e main {
       white-space: normal;
       padding-right: 10px;
+      text-align: left;
     }
 
     @e title {
