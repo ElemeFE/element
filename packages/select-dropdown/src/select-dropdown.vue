@@ -5,7 +5,7 @@
 </template>
 
 <script type="text/babel">
-  import Popper from 'main/utils/popper.js';
+  import Popper from 'main/utils/popper';
 
   export default {
     name: 'el-select-dropdown',

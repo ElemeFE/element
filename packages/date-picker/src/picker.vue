@@ -33,7 +33,7 @@
 import Vue from 'vue';
 import Clickoutside from 'main/utils/clickoutside';
 import { merge, formatDate, parseDate, getWeekNumber } from './util';
-import Popper from 'main/utils/popper.js';
+import Popper from 'main/utils/popper';
 
 const FUNCTION_KEYS = [13, 16, 17, 18, 19, 20, 27, 33, 34, 35, 36, 37, 38, 39, 40];
 const RANGE_SEPARATOR = ' - ';
