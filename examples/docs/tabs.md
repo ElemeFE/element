@@ -18,6 +18,14 @@
         activeName: '3',
         activeName2: ''
       }
+    },
+    methods: {
+      handleRemove(tab) {
+        console.log(tab);
+      },
+      handleClick(tab) {
+        console.log(tab);
+      }
     }
   }
 </script>
@@ -70,7 +78,7 @@
 ## 可关闭的标签
 
 <div>
-  <el-tabs type="card" :closable="true">
+  <el-tabs type="card" :closable="true" :on-remove="handleRemove" :on-click="handleClick">
     <el-tab-pane label="选项卡一">选项卡一内容</el-tab-pane>
     <el-tab-pane label="选项卡二">选项卡二内容</el-tab-pane>
     <el-tab-pane label="选项卡三">选项卡三内容</el-tab-pane>
@@ -80,7 +88,7 @@
 {{activeName2}}
 
 ```html
-<el-tabs type="card" :closable="true">
+<el-tabs type="card" :closable="true" :on-remove="handleRemove" :on-click="handleClick">
   <el-tab-pane label="选项卡一">选项卡一内容</el-tab-pane>
   <el-tab-pane label="选项卡二">选项卡二内容</el-tab-pane>
   <el-tab-pane label="选项卡三">选项卡三内容</el-tab-pane>

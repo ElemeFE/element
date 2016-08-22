@@ -1,6 +1,8 @@
 <script>
   import ElTab from './tab';
 
+  function noop() {}
+
   module.exports = {
     name: 'el-tabs',
 
@@ -14,6 +16,14 @@
       defaultActiveName: String,
       activeName: String,
       closable: false,
+      onRemove: {
+        type: Function,
+        default: noop
+      },
+      onClick: {
+        type: Function,
+        default: noop
+      },
       tabWidth: 0
     },
 
@@ -41,7 +51,7 @@
     },
 
     methods: {
-      removeTab(tab, ev) {
+      handleTabRemove(tab, ev) {
         ev.stopPropagation();
         tab.$destroy(true);
 
@@ -58,11 +68,11 @@
 
           this.currentName = nextChild ? nextChild.key : prevChild ? prevChild.key : '-1';
         }
-        this.$emit('tab.remove', tab);
+        this.onRemove(tab.key);
       },
       handleTabClick(tab) {
         this.currentName = tab.key;
-        this.$emit('tab.click', tab);
+        this.onClick(tab.key);
       },
       calcBarStyle() {
         if (this.type) return {};
@@ -106,7 +116,7 @@
         ref="tabs"
         :tab="tab"
         :closable="closable"
-        @onremove="removeTab"
+        @remove="handleTabRemove"
         @click.native="handleTabClick(tab)">
       </el-tab>
       <div
