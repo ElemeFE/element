@@ -53,24 +53,22 @@ cooking.add('vueMarkdown', {
       anchorLinkSymbol: '',
       anchorClassName: 'anchor'
     }],
-    [require('markdown-it-container'), 'code', {
+    [require('markdown-it-container'), 'demo', {
       validate: function(params) {
-        return params.trim().match(/^code\s+(.*)$/);
+        return params.trim().match(/^demo\s+(.*)$/);
       },
 
       render: function (tokens, idx) {
-        var m = tokens[idx].info.trim().match(/^code\s+(.*)$/);
-
+        var m = tokens[idx].info.trim().match(/^demo\s+(.*)$/);
         if (tokens[idx].nesting === 1) {
-          // opening tag
-          return '<div class="details">' +
-                    `<div class="summary">${md.utils.escapeHtml(m[1])}</div>` +
-                  '<div class="code">';
-
-        } else {
-          // closing tag
-          return '</div></div>\n';
+          var html = tokens[idx + 1].content;
+          return `<section class="demo">
+                    <div class="source">${html}</div>
+                    <div class="meta">
+                      <div class="description">${md.utils.escapeHtml(m[1])}</div>
+                      <div class="highlight">`;
         }
+        return '</section>\n';
       }
     }]
   ],
