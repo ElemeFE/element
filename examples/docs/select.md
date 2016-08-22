@@ -37,62 +37,31 @@
           label: '北京烤鸭'
         }],
         options3: [{
-          label: '分组1',
+          label: '热门城市',
           options: [{
-            value: '选项1',
-            label: '标签1'
+            value: 'Shanghai',
+            label: '上海'
           }, {
-            value: '选项2',
-            label: '标签2'
+            value: 'Beijing',
+            label: '北京'
           }]
         }, {
-          label: '分组2',
+          label: '城市名',
           options: [{
-            value: '选项3',
-            label: '标签3'
+            value: 'Chengdu',
+            label: '成都'
           }, {
-            value: '选项4',
-            label: '标签4'
+            value: 'Shenzhen',
+            label: '深圳'
           }, {
-            value: '选项5',
-            label: '标签5'
+            value: 'Guangzhou',
+            label: '广州'
+          }, {
+            value: 'Dalian',
+            label: '大连'
           }]
         }],
-        options4: [{
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
-        }, {
-          value: '选项6',
-          label: '炸酱面'
-        }, {
-          value: '选项7',
-          label: '羊蝎子'
-        }, {
-          value: '选项8',
-          label: '肉夹馍'
-        }, {
-          value: '选项9',
-          label: '回锅肉'
-        }, {
-          value: '选项10',
-          label: '小笼包'
-        }, {
-          value: '选项11',
-          label: '红烧肉'
-        }],
-        options5: [],
+        options4: [],
         cities: [{
           value: 'Beijing',
           label: '北京'
@@ -119,11 +88,7 @@
         value5: '',
         value6: '',
         value7: [],
-        value8: '',
-        value9: '',
-        value10: '',
-        value11: '',
-        value12: [],
+        value8: [],
         loading: false,
         states: ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
       };
@@ -139,10 +104,10 @@
           this.loading = true;
           setTimeout(() => {
             this.loading = false;
-            this.options5 = this.list.filter(item => item.label.toLowerCase().indexOf(query.toLowerCase()) > -1);
+            this.options4 = this.list.filter(item => item.label.toLowerCase().indexOf(query.toLowerCase()) > -1);
           }, 200);
         } else {
-          this.options5 = [];
+          this.options4 = [];
         }
       }
     }
@@ -172,19 +137,19 @@
       return {
         options: [{
           value: '选项1',
-          label: '标签1'
+          label: '黄金糕'
         }, {
           value: '选项2',
-          label: '标签2'
+          label: '双皮奶'
         }, {
           value: '选项3',
-          label: '标签3'
+          label: '蚵仔煎'
         }, {
           value: '选项4',
-          label: '标签4'
+          label: '龙须面'
         }, {
           value: '选项5',
-          label: '标签5'
+          label: '北京烤鸭'
         }],
         value: ''
       }
@@ -193,59 +158,15 @@
 </script>
 ```
 
-## 禁用状态
-
-<el-select v-model="value2" disabled>
-  <el-option v-for="item in options" :label="item.label" :value="item.value"></el-option>
-</el-select>
-
-```html
-<template>
-  <el-select v-model="value2" disabled>
-    <el-option
-      v-for="item in options"
-      :label="item.label"
-      :value="item.value">
-    </el-option>
-  </el-select>
-</template>
-
-<script>
-  export default {
-    data() {
-      return {
-        options: [{
-          value: '选项1',
-          label: '标签1'
-        }, {
-          value: '选项2',
-          label: '标签2'
-        }, {
-          value: '选项3',
-          label: '标签3'
-        }, {
-          value: '选项4',
-          label: '标签4'
-        }, {
-          value: '选项5',
-          label: '标签5'
-        }],
-        value2: ''
-      }
-    }
-  }
-</script>
-```
-
 ## 有禁用选项
 
-<el-select v-model="value3">
+<el-select v-model="value2">
   <el-option v-for="item in options2" :label="item.label" :value="item.value" :disabled="item.disabled"></el-option>
 </el-select>
 
 ```html
 <template>
-  <el-select v-model="value3">
+  <el-select v-model="value2">
     <el-option
       v-for="item in options2"
       :label="item.label"
@@ -261,22 +182,22 @@
       return {
         options2: [{
           value: '选项1',
-          label: '标签1'
+          label: '黄金糕'
         }, {
           value: '选项2',
-          label: '标签2',
+          label: '双皮奶',
           disabled: true
         }, {
           value: '选项3',
-          label: '标签3'
+          label: '蚵仔煎'
         }, {
           value: '选项4',
-          label: '标签4'
+          label: '龙须面'
         }, {
           value: '选项5',
-          label: '标签5'
+          label: '北京烤鸭'
         }],
-        value3: ''
+        value2: ''
       }
     }
   }
@@ -285,13 +206,13 @@
 
 ## 可清空单选
 
-<el-select v-model="value4" clearable>
+<el-select v-model="value3" clearable>
   <el-option v-for="item in options" :label="item.label" :value="item.value"></el-option>
 </el-select>
 
 ```html
 <template>
-<el-select v-model="value4" clearable>
+<el-select v-model="value3" clearable>
   <el-option
     v-for="item in options"
     :label="item.label"
@@ -306,79 +227,36 @@
       return {
         options: [{
           value: '选项1',
-          label: '标签1'
+          label: '黄金糕'
         }, {
           value: '选项2',
-          label: '标签2'
+          label: '双皮奶'
         }, {
           value: '选项3',
-          label: '标签3'
+          label: '蚵仔煎'
         }, {
           value: '选项4',
-          label: '标签4'
+          label: '龙须面'
         }, {
           value: '选项5',
-          label: '标签5'
+          label: '北京烤鸭'
         }],
-        value4: ''
+        value3: ''
       }
     }
   }
 </script>
 ```
 
-## 指定初始被选项
+## 可搜索
 
-<el-select v-model="value5">
-  <el-option v-for="item in options" :label="item.label" :value="item.value" :selected="item.value === '选项2'"></el-option>
+<el-select v-model="value4" filterable>
+  <el-option v-for="item in options" :label="item.label" :value="item.value"></el-option>
 </el-select>
 
-要指定 `select` 的初始被选项有两种方法。可以通过指定 `el-option` 的 `selected` 属性:
-
 ```html
 <template>
-  <el-select v-model="value5">
-    <el-option
-      v-for="item in options"
-      :label="item.label"
-      :value="item.value"
-      :selected="item.value === '选项2'">
-    </el-option>
-  </el-select>
-</template>
-
-<script>
-  export default {
-    data() {
-      return {
-        options: [{
-          value: '选项1',
-          label: '标签1'
-        }, {
-          value: '选项2',
-          label: '标签2'
-        }, {
-          value: '选项3',
-          label: '标签3'
-        }, {
-          value: '选项4',
-          label: '标签4'
-        }, {
-          value: '选项5',
-          label: '标签5'
-        }],
-        value5: ''
-      }
-    }
-  }
-</script>
-```
-
-或者通过为绑定到 `value` 的变量赋予初始值:
-
-```html
-<template>
-  <el-select v-model="value5">
+  <el-select v-model="value4" filterable>
     <el-option
       v-for="item in options"
       :label="item.label"
@@ -393,21 +271,81 @@
       return {
         options: [{
           value: '选项1',
-          label: '标签1'
+          label: '黄金糕'
         }, {
           value: '选项2',
-          label: '标签2'
+          label: '双皮奶'
         }, {
           value: '选项3',
-          label: '标签3'
+          label: '蚵仔煎'
         }, {
           value: '选项4',
-          label: '标签4'
+          label: '龙须面'
         }, {
           value: '选项5',
-          label: '标签5'
+          label: '北京烤鸭'
         }],
-        value5: '选项2'
+        value4: ''
+      }
+    }
+  }
+</script>
+```
+
+## 分组
+
+<el-select v-model="value5">
+  <el-option-group v-for="group in options3" :label="group.label">
+    <el-option v-for="item in group.options" :label="item.label" :value="item.value">
+      <span style="float: left">{{ item.label }}</span>
+      <span style="float: right; color: #8492a6; font-size: 13px">{{ item.value }}</span>
+    </el-option>
+  </el-option-group>
+</el-select>
+
+```html
+<template>
+  <el-select v-model="value5">
+    <el-option-group v-for="group in options3" :label="group.label">
+      <el-option
+        v-for="item in group.options"
+        :label="item.label"
+        :value="item.value">
+      </el-option>
+    </el-option-group>
+  </el-select>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        options3: [{
+          label: '热门城市',
+          options: [{
+            value: 'Shanghai',
+            label: '上海'
+          }, {
+            value: 'Beijing',
+            label: '北京'
+          }]
+        }, {
+          label: '城市名',
+          options: [{
+            value: 'Chengdu',
+            label: '成都'
+          }, {
+            value: 'Shenzhen',
+            label: '深圳'
+          }, {
+            value: 'Guangzhou',
+            label: '广州'
+          }, {
+            value: 'Dalian',
+            label: '大连'
+          }]
+        }],
+        value9: ''
       }
     }
   }
@@ -469,7 +407,7 @@
 </script>
 ```
 
-## 多选
+## 基础多选
 
 <el-select v-model="value7" multiple>
   <el-option
@@ -496,19 +434,19 @@
       return {
         options: [{
           value: '选项1',
-          label: '标签1'
+          label: '黄金糕'
         }, {
           value: '选项2',
-          label: '标签2'
+          label: '双皮奶'
         }, {
           value: '选项3',
-          label: '标签3'
+          label: '蚵仔煎'
         }, {
           value: '选项4',
-          label: '标签4'
+          label: '龙须面'
         }, {
           value: '选项5',
-          label: '标签5'
+          label: '北京烤鸭'
         }],
         value7: []
       }
@@ -517,220 +455,16 @@
 </script>
 ```
 
-## 自定义宽度
-
-<el-select v-model="value8" :width="300" :dropdown-width="350">
-  <el-option v-for="item in options" :label="item.label" :value="item.value"></el-option>
-</el-select>
-
-```html
-<template>
-  <el-select v-model="value8" :width="300" :dropdown-width="350">
-    <el-option
-      v-for="item in options"
-      :label="item.label"
-      :value="item.value">
-    </el-option>
-  </el-select>
-</template>
-
-<script>
-  export default {
-    data() {
-      return {
-        options: [{
-          value: '选项1',
-          label: '标签1'
-        }, {
-          value: '选项2',
-          label: '标签2'
-        }, {
-          value: '选项3',
-          label: '标签3'
-        }, {
-          value: '选项4',
-          label: '标签4'
-        }, {
-          value: '选项5',
-          label: '标签5'
-        }],
-        value8: ''
-      }
-    }
-  }
-</script>
-```
-
-## 分组
-
-<el-select v-model="value9">
-  <el-option-group v-for="group in options3" :label="group.label">
-    <el-option v-for="item in group.options" :label="item.label" :value="item.value"></el-option>
-  </el-option-group>
-</el-select>
-
-```html
-<template>
-  <el-select v-model="value9">
-    <el-option-group v-for="group in options3" :label="group.label">
-      <el-option
-        v-for="item in group.options"
-        :label="item.label"
-        :value="item.value">
-      </el-option>
-    </el-option-group>
-  </el-select>
-</template>
-
-<script>
-  export default {
-    data() {
-      return {
-        options3: [{
-          label: '分组1',
-          options: [{
-            value: '选项1',
-            label: '标签1'
-          }, {
-            value: '选项2',
-            label: '标签2'
-          }]
-        }, {
-          label: '分组2',
-          options: [{
-            value: '选项3',
-            label: '标签3'
-          }, {
-            value: '选项4',
-            label: '标签4'
-          }, {
-            value: '选项5',
-            label: '标签5'
-          }]
-        }],
-        value9: ''
-      }
-    }
-  }
-</script>
-```
-
-## 选项较多时的交互
-
-<el-select v-model="value10">
-  <el-option v-for="item in options4" :label="item.label" :value="item.value"></el-option>
-</el-select>
-
-```html
-<template>
-  <el-select v-model="value10">
-    <el-option
-      v-for="item in options4"
-      :label="item.label"
-      :value="item.value">
-    </el-option>
-  </el-select>
-</template>
-
-<script>
-  export default {
-    data() {
-      return {
-        options4: [{
-          value: '选项1',
-          label: '标签1'
-        }, {
-          value: '选项2',
-          label: '标签2'
-        }, {
-          value: '选项3',
-          label: '标签3'
-        }, {
-          value: '选项4',
-          label: '标签4'
-        }, {
-          value: '选项5',
-          label: '标签5'
-        }, {
-          value: '选项6',
-          label: '标签6'
-        }, {
-          value: '选项7',
-          label: '标签7'
-        }, {
-          value: '选项8',
-          label: '标签8'
-        }, {
-          value: '选项9',
-          label: '标签9'
-        }, {
-          value: '选项10',
-          label: '标签10'
-        }, {
-          value: '选项11',
-          label: '标签11'
-        }],
-        value10: ''
-      }
-    }
-  }
-</script>
-```
-
-## 可搜索
-
-<el-select v-model="value11" filterable>
-  <el-option v-for="item in options" :label="item.label" :value="item.value"></el-option>
-</el-select>
-
-```html
-<template>
-  <el-select v-model="value11" filterable>
-    <el-option
-      v-for="item in options"
-      :label="item.label"
-      :value="item.value">
-    </el-option>
-  </el-select>
-</template>
-
-<script>
-  export default {
-    data() {
-      return {
-        options: [{
-          value: '选项1',
-          label: '标签1'
-        }, {
-          value: '选项2',
-          label: '标签2'
-        }, {
-          value: '选项3',
-          label: '标签3'
-        }, {
-          value: '选项4',
-          label: '标签4'
-        }, {
-          value: '选项5',
-          label: '标签5'
-        }],
-        value11: ''
-      }
-    }
-  }
-</script>
-```
-
 ## 服务端搜索
 
-<el-select v-model="value12" multiple filterable remote :remote-method="remoteMethod" :loading="loading" placeholder="请输入关键词">
-  <el-option v-for="item in options5" :key="item.value" :label="item.label" :value="item.value"></el-option>
+<el-select v-model="value8" multiple filterable remote :remote-method="remoteMethod" :loading="loading" placeholder="请输入关键词">
+  <el-option v-for="item in options4" :key="item.value" :label="item.label" :value="item.value"></el-option>
 </el-select>
 
 ```html
 <template>
   <el-select
-    v-model="value12"
+    v-model="value8"
     multiple
     filterable
     remote
@@ -738,7 +472,7 @@
     :remote-method="remoteMethod"
     :loading="loading">
     <el-option
-      v-for="item in options5"
+      v-for="item in options4"
       :key="item.value"
       :label="item.label"
       :value="item.value">
@@ -750,11 +484,15 @@
   export default {
     data() {
       return {
-        options5: [],
-        value12: [],
+        options4: [],
+        value8: [],
+        list: [],
         loading: false,
         states: ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
       }
+    },
+    mounted() {
+      this.list = this.states.map(item => { return { value: item, label: item }; });
     },
     methods: {
       remoteMethod(query) {
@@ -762,8 +500,10 @@
           this.loading = true;
           setTimeout(() => {
             this.loading = false;
-            this.options5 = this.states.filter(item => item.toLowerCase().indexOf(query) > -1).map(item => { return { value: item, label: item }; });
+            this.options4 = this.list.filter(item => item.label.toLowerCase().indexOf(query.toLowerCase()) > -1);
           }, 200);
+        } else {
+          this.options4 = [];
         }
       }
     }

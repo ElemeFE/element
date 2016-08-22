@@ -10,11 +10,6 @@
         value6: null,
         value7: null
       };
-    },
-    methods: {
-      onChange(value) {
-        console.log(value);
-      }
     }
   }
 </script>
@@ -66,27 +61,6 @@
 ```html
 <el-slider show-input v-model="value6"></el-slider>
 ```
-
-## 回调函数
-
-<el-slider @change="onChange" v-model="value7"></el-slider>
-
-```html
-<template>
-  <el-slider @change="onChange"></el-slider>
-</template>
-
-<script>
-  export default {
-    methods: {
-      onChange(value) {
-        console.log(value);
-      }
-    }
-  }
-</script>
-```
-
 
 ## API
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
