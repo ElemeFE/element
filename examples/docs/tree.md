@@ -58,6 +58,7 @@
       },
 
       loadNode(node, resolve) {
+        console.log(node);
         if (node.level === -1) {
           return resolve([{ name: 'Root1' }, { name: 'Root2' }]);
         }

@@ -73,7 +73,7 @@ Dropdown 组件只需要`el-dropdown`和它的子元素`el-dropdown-item`即可�
 
 ## 通过点击触发下拉
 
-默认通过 Hover 即可出现下拉菜单，如果有需求，可以改成click，只要在`trigger`属性设置为`click`即可。
+默认通过 Hover 即可出现下拉菜单，如果有需求，可以改成 click ，只要在`trigger`属性设置为`click`即可。
 
 <div class="demo-box">
   <el-dropdown text="主要按钮" type="primary" trigger="click">
@@ -183,7 +183,7 @@ Dropdown 组件只需要`el-dropdown`和它的子元素`el-dropdown-item`即可�
 
 ## 对齐方式
 
-Element 提供两种下拉菜单的对齐方式：`start`与`end`，在下例中演示了它们的区别，你可以通过设置`menu-align`来选择一种对齐方式，默认为`end`：
+下拉菜单的对齐方式有两种：`start`与`end`，在下例中演示了它们的区别，你可以通过设置`menu-align`来选择一种对齐方式，默认为`end`：
 
 <div class="demo-box">
   <el-dropdown text="下拉菜单 end" type="primary" menu-align="end">

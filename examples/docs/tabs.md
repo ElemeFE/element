@@ -39,7 +39,7 @@
 
 Tabs 组件提供了选项卡功能，只需要使用`el-tabs`和子元素`el-tab-pane`即可，在两个元素中，我们分别提供了一系列的属性来方便使用，`el-tab-pane`中`label`决定了选项卡标题，标签内部写入内容即可。
 
-在下例中我们在`el-tabs`中设置了`active-name`属性，接受一个`String`值，表明选中的选项卡，在`el-tab-pane`中可以设置对应的`name`属性，如果没有设置`name`，则默认值为顺序的`1`/`2`/`3`/`4`……。
+在下例中我们在`el-tabs`中设置了`active-name`属性，接受一个`String`值，表明选中的选项卡，在`el-tab-pane`中可以设置对应的`name`属性，如果没有设置`name`，则默认值为顺序的`1`/`2`/`3`/`4`。
 
 下例会选中选项卡2，如果不设置`name`，将`active-name`设为`2`，可以达成相同效果。
 
@@ -119,7 +119,7 @@ Tabs 组件提供了选项卡功能，只需要使用`el-tabs`和子元素`el-ta
 除此以外，我们在`el-tabs`中准备了两个钩子，用于在 Tab 被选中时和被删除时自定义属性：`on-click`和`on-remove`，接受`Function`，它们都提供一个参数`tab`，为操作的目标标签。
 
 <div>
-  <el-tabs type="card" :closable="true" :on-click="handleClick" :on-remove="handleRemove">
+  <el-tabs type="card" :closable="true" @tab-click="handleClick" @tab-remove="handleRemove">
     <el-tab-pane label="选项卡一">选项卡一内容</el-tab-pane>
     <el-tab-pane label="选项卡二">选项卡二内容</el-tab-pane>
     <el-tab-pane label="选项卡三">选项卡三内容</el-tab-pane>
@@ -156,10 +156,14 @@ Tabs 组件提供了选项卡功能，只需要使用`el-tabs`和子元素`el-ta
 | type     | 风格类型   | string   | card, border-card  |         |
 | closable  | 标签是否可关闭   | boolean   | true, false |  false  |
 | active-name  | 选中选项卡的 name  | string   |    |    |
-| on-click  | tab 被选中的钩子(提供一个参数tab)  | function | |    |
-| on-remove  | tab 被删除的钩子(提供一个参数tab)  | function |   |
 
-## TAB-PANE Attributes
+## Tabs Events
+| 事件名称 | 说明 | 回调参数 |
+|---------- |-------- |---------- |
+| tab-click  | tab 被选中的钩子 | 被选中的标签 tab |
+| tab-remove  | tab 被删除的钩子  | 被删除的标签 tab |
+
+## Tab-pane Attributes
 | 参数       | 说明     | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | label     | 选项卡标题   | string   |  |         |
