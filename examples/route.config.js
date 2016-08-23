@@ -24,7 +24,7 @@ const registerRoute = (config) => {
         nav.groups.map(group => {
           group.list.map(page => {
             addRoute(page);
-          })
+          });
         });
       }
       if (nav.children) {

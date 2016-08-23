@@ -32,6 +32,7 @@
     color: #fff;
     width: 100%;
     z-index: 1000;
+    margin-top: -120px;
   
     * {
       word-spacing: 0;

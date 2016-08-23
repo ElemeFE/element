@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="81px" height="77px" viewBox="0 0 81 77" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>Module_icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="6" y="57" width="11" height="11" rx="5.5"></rect>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0.466666667   0 0 0 0 0.807843137  0 0 0 1 0" type="matrix" in="shadowOffsetOuter1"></feColorMatrix>
+        </filter>
+        <rect id="path-3" x="6" y="57" width="11" height="11" rx="5.5"></rect>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-4">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feColorMatrix values="0 0 0 0 0.392156863   0 0 0 0 0.588235294   0 0 0 0 0.862745098  0 0 0 1 0" type="matrix" in="shadowOffsetOuter1"></feColorMatrix>
+        </filter>
+        <rect id="path-5" x="6" y="57" width="11" height="11" rx="5.5"></rect>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-6">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feColorMatrix values="0 0 0 0 1   0 0 0 0 0.674509804   0 0 0 0 0.678431373  0 0 0 1 0" type="matrix" in="shadowOffsetOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Module_icon">
+            <g id="Group-5">
+                <g id="folder-3">
+                    <g id="Group">
+                        <rect id="Rectangle-path" fill="#DEEBF8" x="0" y="54" width="23" height="23"></rect>
+                        <rect id="Rectangle-path" fill="#F2F8FE" x="0" y="0" width="23" height="54"></rect>
+                        <rect id="Rectangle" fill="#DEEBF9" x="7" y="6" width="9" height="30" rx="3"></rect>
+                        <g id="Rectangle-path">
+                            <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                            <use fill="#20A0FF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                        </g>
+                    </g>
+                </g>
+                <g id="folder-3-copy" transform="translate(29.000000, 0.000000)">
+                    <g id="Group">
+                        <rect id="Rectangle-path" fill="#DEEBF8" x="0" y="54" width="23" height="23"></rect>
+                        <rect id="Rectangle-path" fill="#F2F8FE" x="0" y="0" width="23" height="54"></rect>
+                        <rect id="Rectangle" fill="#DEEBF9" x="7" y="6" width="9" height="30" rx="3"></rect>
+                        <g id="Rectangle-path">
+                            <use fill="black" fill-opacity="1" filter="url(#filter-4)" xlink:href="#path-3"></use>
+                            <use fill="#80A8E1" fill-rule="evenodd" xlink:href="#path-3"></use>
+                        </g>
+                    </g>
+                </g>
+                <g id="folder-3-copy" transform="translate(58.000000, 0.000000)">
+                    <g id="Group">
+                        <rect id="Rectangle-path" fill="#DEEBF8" x="0" y="54" width="23" height="23"></rect>
+                        <rect id="Rectangle-path" fill="#F2F8FE" x="0" y="0" width="23" height="54"></rect>
+                        <rect id="Rectangle" fill="#DEEBF9" x="7" y="6" width="9" height="30" rx="3"></rect>
+                        <g id="Rectangle-path">
+                            <use fill="black" fill-opacity="1" filter="url(#filter-6)" xlink:href="#path-5"></use>
+                            <use fill="#FFD6D2" fill-rule="evenodd" xlink:href="#path-5"></use>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

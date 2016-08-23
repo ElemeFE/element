@@ -1,4 +1,7 @@
-<style>
+<style scoped>
+  .headerWrapper {
+    height: 80px;
+  }
   .header {
     height: 80px;
     background-color: #20a0ff;
@@ -8,7 +11,8 @@
     width: 100%;
     z-index: 1000;
     line-height: @height;
-    margin-bottom: 48px;
+    z-index: 100;
+    position: relative;
 
     .container {
       height: 100%;
@@ -19,6 +23,12 @@
       float: left;
       font-size: 32px;
       font-weight: normal;
+
+      a {
+        color: #fff;
+        text-decoration: none;
+        display: block;
+      }
 
       span {
         font-size: 12px;
@@ -33,35 +43,134 @@
         border-radius: 3px;
       }
     }
-    .el-menu {
+    .nav {
       float: right;
       height: 100%;
       line-height: 80px;
       background: transparent;
-    }
-    .el-menu-item {
-      color: #fff;
+      @utils-clearfix;
+      padding: 0;
       margin: 0;
-      padding: 0 20px;
     }
-    .el-menu-item__bar {
+    .nav-item {
+      margin: 0;
+      float: left;
+      list-style: none;
+      position: relative;
+      cursor: pointer;
+
+      a {
+        text-decoration: none;
+        color: #fff;
+        display: block;
+        padding: 0 20px;
+
+        &.active:before {
+          content: '';
+          display: block;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 4px;
+          background:#99d2fc;
+        }
+      }
+    }
+    /*.el-menu-item__bar {
       background-color: #99d2fc;
-    }
+    }*/
+  }
+  .header-fixed {
+    position: fixed;
+    top: -80px;
+    box-shadow: 0px 2px 8px 0px rgba(50,63,87,0.45);
+  }
+  .header-hangUp {
+    top: 0;
   }
 </style>
 <template>
-  <header class="header">
-    <div class="container">
-      <h1>Element<span>Beta</span></h1>
-      <el-menu default-active="1">
-        <el-menu-item index="1">指南</el-menu-item>
-        <el-menu-item index="2">组件</el-menu-item>
-        <el-menu-item index="3">资源</el-menu-item>
-      </el-menu>
-    </div>
-  </header>
+  <div class="headerWrapper">
+    <header class="header"
+    :style="headerStyle"
+    :class="{
+      'header-fixed': isFixed,
+      'header-hangUp': hangUp
+    }">
+      <div class="container">
+        <h1><router-link to="/">Element<span>Beta</span></router-link></h1>
+        <ul class="nav">
+          <li class="nav-item">
+            <router-link
+              active-class="active"
+              to="/guide/design"
+              exact>指南
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link
+              active-class="active"
+              to="/component/button"
+              exact>组件
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link
+              active-class="active" 
+              to="/resource"
+              exact>资源
+            </router-link>
+          </li>
+        </ul>
+      </div>
+    </header>
+  </div>
 </template>
 <script>
   export default {
+    data() {
+      return {
+        active: '',
+        isFixed: false,
+        headerStyle: {},
+        hangUp: false
+      };
+    },
+    watch: {
+    },
+    mounted() {
+      var scrollTop = 0;
+      function scroll(fn) {
+        var beforeScrollTop = document.body.scrollTop;
+
+        window.addEventListener('scroll', () => {
+          const afterScrollTop = document.body.scrollTop;
+          var delta = afterScrollTop - beforeScrollTop;
+
+          if (delta === 0) return false;
+
+          fn(delta > 0 ? 'down' : 'up');
+          beforeScrollTop = afterScrollTop;
+          scrollTop = afterScrollTop;
+        }, false);
+      }
+      scroll((direction) => {
+        const bounding = this.$el.getBoundingClientRect();
+        if (bounding.bottom < 0) {
+          this.isFixed = true;
+          this.$nextTick(() => {
+            this.headerStyle.transition = 'all .5s ease';
+          });
+        }
+        if (bounding.top === 0) {
+          this.isFixed = false;
+          this.$nextTick(() => {
+            this.headerStyle.transition = '';
+          });
+        }
+        this.hangUp = direction === 'up';
+      });
+    }
   };
 </script>

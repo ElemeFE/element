@@ -9,6 +9,7 @@
     }
     ul {
       padding: 0;
+      margin: 0;
     }
 
     .nav-item {
@@ -50,15 +51,22 @@
   <div class="side-nav">
     <ul>
       <li class="nav-item" v-for="item in data">
-        <a>{{item.name}}</a>
+        <a v-if="!item.path">{{item.name}}</a>
+        <router-link
+          v-else
+          active-class="active"
+          :to="base + item.path"
+          exact
+          v-text="item.title || item.name">
+        </router-link>
         <ul class="pure-menu-list sub-nav" v-if="item.children">
           <li class="nav-item" v-for="navItem in item.children">
             <router-link
               class=""
               active-class="active"
-              :to="'/component' + navItem.path"
+              :to="base + navItem.path"
               exact
-              v-text="navItem.title || item.name">
+              v-text="navItem.title || navItem.name">
             </router-link>
           </li>
         </ul>
@@ -68,13 +76,13 @@
             <ul class="pure-menu-list">
               <li
                 class="nav-item"
-                v-for="item in group.list"
-                v-if="!item.disabled">
+                v-for="navItem in group.list"
+                v-if="!navItem.disabled">
                 <router-link
                   active-class="active"
-                  :to="'/component' + item.path"
+                  :to="base + navItem.path"
                   exact
-                  v-text="item.title"></router-link>
+                  v-text="navItem.title"></router-link>
               </li>
             </ul>
           </div>
@@ -86,7 +94,11 @@
 <script>
   export default {
     props: {
-      data: Array
+      data: Array,
+      base: {
+        type: String,
+        default: ''
+      }
     },
     data() {
       return {
