@@ -196,6 +196,7 @@
         if (this.styleNode) {
           let styleSheet = this.styleNode.sheet;
 
+          if (!styleSheet) return;
           for (let i = 0, j = styleSheet.cssRules.length; i < j; i++) {
             styleSheet.deleteRule(0);
           }
