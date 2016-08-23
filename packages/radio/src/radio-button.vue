@@ -8,8 +8,12 @@
         required: true
       },
       disabled: Boolean,
-      name: String,
-      size: String
+      name: String
+    },
+    data() {
+      return {
+        size: this.$parent.size
+      };
     },
     computed: {
       value: {
@@ -20,9 +24,6 @@
           this.$parent.$emit('input', newValue);
         }
       }
-    },
-    ready() {
-      this.size = this.$parent.size;
     }
   };
 </script>
