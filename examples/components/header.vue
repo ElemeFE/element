@@ -3,12 +3,12 @@
     height: 80px;
     background-color: #20a0ff;
     color: #fff;
-    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
     line-height: @height;
+    margin-bottom: 48px;
 
     .container {
       height: 100%;

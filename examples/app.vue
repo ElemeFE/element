@@ -270,115 +270,81 @@
 
 <template>
   <div id="app">
-    <div class="pure-g">
-      <div class="pure-u-1-6 app__sidebar pure-menu pure-menu-scrollable app__menu">
-        <template v-for="(nav, key) in navs">
-          <a
-            href="#"
-            @click.prevent="navState.$set(key, !navState[key] || false)"
-            class="pure-menu-heading app__menu__label"
-            :class="{ 'unfold': !navState[key] }"
-            v-text="nav.group"></a>
-          <ul
-            class="pure-menu-list"
-            transition="slidedown"
-            v-show="!navState[key]"
-            :style="{
-              maxHeight: nav.list.length * 44 + 'px'
-            }">
-            <li
-              class="pure-menu-item app__menu__item"
-              v-for="item in nav.list"
-              v-if="!item.disabled">
-              <router-link
-                class="pure-menu-link app__menu__link"
-                active-class="active"
-                :to="'/component' + item.path"
-                exact
-                v-text="item.name"></router-link>
-            </li>
-          </ul>
-        </template>
-
-      </div>
-      <div class="pure-u-5-6 app__content">
-        <header class="app__header">
-          <h1 class="app__headline">{{ $route.meta.title || 'element 后台组件' }}</h1>
-        </header>
-        <section class="app__main" ref="main">
-          <p class="app__description">{{ $route.meta.description }}</p>
-          <router-view></router-view>
-        </section>
-      </div>
-    </div>
+    <main-header></main-header>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-  import { navs } from './route.config';
-  import E from 'oui-dom-events';
-  import { toggleClass, addClass, removeClass } from './dom/class';
+  // import { navs } from './route.config';
+  // import E from 'oui-dom-events';
+  // import { toggleClass, addClass, removeClass } from './dom/class';
+  import MainHeader from './components/header';
 
   export default {
     name: 'app',
 
-    data() {
-      return {
-        highlights: [],
-        navState: []
-      };
-    },
-
-    methods: {
-      findAllHighlight() {
-        return Array.prototype.slice.call(document.querySelectorAll('.hljs'));
-      }
-    },
-
-    created() {
-      this.navs = navs;
-    },
-
-    mounted() {
-      this.mainContent = document.querySelector('.app__content');
-
-      E.delegate(this.$refs.main, '.hljs__button', 'click.highlight', e => {
-        const parent = e.target.parentNode;
-
-        toggleClass(parent, 'open');
-      });
-    },
-
-    beforeDestroy() {
-      E.undelegate(this.$refs.main, '.hljs', 'click.highlight');
-    },
-
-    watch: {
-      highlights(list) {
-        list.map(item => {
-          if (item.offsetHeight <= 100) {
-            toggleClass(item, 'open');
-          } else {
-            item.appendChild(this.$els.button.cloneNode(true));
-          }
-        });
-      }
-    },
-
-    events: {
-      ['element.example.reload']() {
-        this.$nextTick(() => {
-          if (this.mainContent.querySelector('.no-toc')) {
-            addClass(this.mainContent, 'no-toc');
-          } else {
-            removeClass(this.mainContent, 'no-toc');
-          }
-
-          this.highlights = this.findAllHighlight();
-        });
-        this.mainContent.scrollTop = 0;
-        return true;
-      }
+    components: {
+      MainHeader
     }
+
+    // data() {
+    //   return {
+    //     highlights: [],
+    //     navState: []
+    //   };
+    // },
+
+    // methods: {
+    //   findAllHighlight() {
+    //     return Array.prototype.slice.call(document.querySelectorAll('.hljs'));
+    //   }
+    // },
+
+    // created() {
+    //   this.navs = navs;
+    // },
+
+    // mounted() {
+    //   this.mainContent = document.querySelector('.app__content');
+
+    //   E.delegate(this.$refs.main, '.hljs__button', 'click.highlight', e => {
+    //     const parent = e.target.parentNode;
+
+    //     toggleClass(parent, 'open');
+    //   });
+    // },
+
+    // beforeDestroy() {
+    //   E.undelegate(this.$refs.main, '.hljs', 'click.highlight');
+    // },
+
+    // watch: {
+    //   highlights(list) {
+    //     list.map(item => {
+    //       if (item.offsetHeight <= 100) {
+    //         toggleClass(item, 'open');
+    //       } else {
+    //         item.appendChild(this.$els.button.cloneNode(true));
+    //       }
+    //     });
+    //   }
+    // },
+
+    // events: {
+    //   ['element.example.reload']() {
+    //     this.$nextTick(() => {
+    //       if (this.mainContent.querySelector('.no-toc')) {
+    //         addClass(this.mainContent, 'no-toc');
+    //       } else {
+    //         removeClass(this.mainContent, 'no-toc');
+    //       }
+
+    //       this.highlights = this.findAllHighlight();
+    //     });
+    //     this.mainContent.scrollTop = 0;
+    //     return true;
+    //   }
+    // }
   };
 </script>

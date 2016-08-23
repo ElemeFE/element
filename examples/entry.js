@@ -6,9 +6,13 @@ import Element from 'main/index.js';
 import 'packages/theme-default/src/index.css';
 import demoBlock from './components/demo-block.vue';
 
+import SideNav from './components/side-nav';
+
 Vue.use(Element);
 Vue.use(VueRouter);
 Vue.component('demo-block', demoBlock);
+
+Vue.component('side-nav', SideNav);
 
 const router = new VueRouter({
   base: __dirname,
