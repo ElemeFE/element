@@ -20,7 +20,9 @@
                 v-model="leftVisibleDate"
                 @input="handleDateInput($event, 'min')"
                 @change="handleDateChange($event, 'min')"/>
-              <span class="el-date-range-picker__time-picker-wrap">
+              <span
+                class="el-date-range-picker__time-picker-wrap"
+                v-clickoutside="closeLeftTimePicker">
                 <input
                   placeholder="开始时间"
                   class="el-date-range-picker__editor"
@@ -28,10 +30,10 @@
                   @focus="leftTimePickerVisible = true"
                   @change="handleTimeChange($event, 'min')"/>
                 <time-picker
-                  v-ref:lefttimepicker
+                  ref="lefttimepicker"
                   :date="minDate"
                   @pick="handleLeftTimePick"
-                  v-show="leftTimePickerVisible">
+                  :visible="leftTimePickerVisible">
                 </time-picker>
               </span>
             </span>
@@ -44,7 +46,9 @@
                 :readonly="!minDate"
                 @input="handleDateInput($event, 'max')"
                 @change="handleDateChange($event, 'max')" />
-              <span class="el-date-range-picker__time-picker-wrap">
+              <span
+                class="el-date-range-picker__time-picker-wrap"
+                v-clickoutside="closeRightTimePicker">
                 <input
                   placeholder="结束时间"
                   class="el-date-range-picker__editor"
@@ -53,10 +57,10 @@
                   :readonly="!minDate"
                   @change="handleTimeChange($event, 'max')" />
                 <time-picker
-                  v-ref:righttimepicker
+                  ref="righttimepicker"
                   :date="maxDate"
                   @pick="handleRightTimePick"
-                  v-show="rightTimePickerVisible"></time-picker>
+                  :visible="rightTimePickerVisible"></time-picker>
               </span>
             </span>
           </div>
@@ -107,7 +111,6 @@
       </div>
       <div class="el-picker-panel__footer" v-if="showTime">
         <a
-          href="JavaScript:"
           class="el-picker-panel__link-btn"
           @click="changeToToday">{{ $t('datepicker.today') }}</a>
         <button
@@ -237,6 +240,10 @@
       }
     },
 
+    directives: {
+      Clickoutside: require('main/utils/clickoutside').default
+    },
+
     data() {
       return {
         date: new Date(),
@@ -267,11 +274,11 @@
       },
 
       leftTimePickerVisible(val) {
-        if (val) this.$refs.lefttimepicker.ajustScrollTop();
+        if (val) this.$nextTick(() => this.$refs.lefttimepicker.ajustScrollTop());
       },
 
       rightTimePickerVisible(val) {
-        if (val) this.$refs.righttimepicker.ajustScrollTop();
+        if (val) this.$nextTick(() => this.$refs.righttimepicker.ajustScrollTop());
       },
 
       value(newVal) {
@@ -287,6 +294,14 @@
 
     methods: {
       $t,
+
+      closeLeftTimePicker() {
+        this.leftTimePickerVisible = false;
+      },
+
+      closeRightTimePicker() {
+        this.rightTimePickerVisible = false;
+      },
 
       handleDateInput(event, type) {
         const value = event.target.value;
@@ -388,7 +403,6 @@
         this.minDate.setSeconds(value.getSeconds());
 
         this.minDate = new Date(this.minDate);
-        this.leftTimePickerVisible = false;
       },
 
       handleRightTimePick(value) {
@@ -396,8 +410,6 @@
           const now = new Date();
           if (now >= this.minDate) {
             this.maxDate = new Date();
-          } else {
-
           }
         }
 
@@ -408,8 +420,6 @@
 
           this.maxDate = new Date(this.maxDate);
         }
-
-        this.rightTimePickerVisible = false;
       },
 
       prevMonth() {

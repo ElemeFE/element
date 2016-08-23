@@ -1,7 +1,7 @@
 <template>
   <transition name="md-fade-bottom">
     <div
-      v-show="visible"
+      v-show="currentVisible"
       class="el-time-panel">
       <div class="el-time-panel__content">
         <time-spinner
@@ -40,10 +40,14 @@
         default: new Date()
       },
 
-      visible: false
+      visible: Boolean
     },
 
     watch: {
+      visible(val) {
+        this.currentVisible = val;
+      },
+
       value(newVal) {
         let date;
         if (newVal instanceof Date) {
@@ -70,7 +74,9 @@
         hours: 0,
         minutes: 0,
         seconds: 0,
-        selectableRange: []
+        selectableRange: [],
+        currentDate: this.date,
+        currentVisible: this.visible
       };
     },
 
@@ -87,16 +93,16 @@
 
       handleChange(date) {
         if (date.hours !== undefined) {
-          this.date.setHours(date.hours);
-          this.hours = this.date.getHours();
+          this.currentDate.setHours(date.hours);
+          this.hours = this.currentDate.getHours();
         }
         if (date.minutes !== undefined) {
-          this.date.setMinutes(date.minutes);
-          this.minutes = this.date.getMinutes();
+          this.currentDate.setMinutes(date.minutes);
+          this.minutes = this.currentDate.getMinutes();
         }
         if (date.seconds !== undefined) {
-          this.date.setSeconds(date.seconds);
-          this.seconds = this.date.getSeconds();
+          this.currentDate.setSeconds(date.seconds);
+          this.seconds = this.currentDate.getSeconds();
         }
 
         this.handleConfirm(true);
@@ -107,7 +113,7 @@
       },
 
       handleConfirm(visible = false, first) {
-        const date = new Date(limitRange(this.date, this.selectableRange));
+        const date = new Date(limitRange(this.currentDate, this.selectableRange));
 
         this.$emit('pick', date, visible, first);
       },
@@ -122,12 +128,12 @@
     },
 
     created() {
-      !this.date && Vue.set(this, 'date', new Date());
-      !this.visible && Vue.set(this, 'visible', false);
+      !this.currentDate && Vue.set(this, 'currentDate', new Date());
+      !this.currentVisible && Vue.set(this, 'currentVisible', false);
 
-      this.hours = this.date.getHours();
-      this.minutes = this.date.getMinutes();
-      this.seconds = this.date.getSeconds();
+      this.hours = this.currentDate.getHours();
+      this.minutes = this.currentDate.getMinutes();
+      this.seconds = this.currentDate.getSeconds();
     },
 
     mounted() {
