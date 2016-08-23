@@ -2,6 +2,7 @@ var cooking = require('cooking');
 var path = require('path');
 var md = require('markdown-it')();
 var Components = require('../components.json');
+var striptags = require('strip-tags');
 
 cooking.set({
   entry: {
@@ -60,12 +61,19 @@ cooking.add('vueMarkdown', {
 
       render: function (tokens, idx) {
         var m = tokens[idx].info.trim().match(/^demo\s+(.*)$/);
+
         if (tokens[idx].nesting === 1) {
-          var html = tokens[idx + 1].content;
+          var description = (m && m.length > 1) ? m[1] : '';
+          var html = striptags(tokens[idx + 1].content, 'script');
+
+          var descriptionHTML = description
+            ? '<div class="description">' + md.render(description) + '</div>'
+            : '';
+
           return `<section class="demo">
                     <div class="source">${html}</div>
                     <div class="meta">
-                      <div class="description">${md.utils.escapeHtml(m[1])}</div>
+                      ${descriptionHTML}
                       <div class="highlight">`;
         }
         return '</section>\n';
