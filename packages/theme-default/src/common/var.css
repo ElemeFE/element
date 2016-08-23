@@ -378,4 +378,16 @@
     --steps-border-color: var(--disabled-border-base);
     --steps-border-radius: 4px;
     --steps-padding: 20px;
+
+    /*Steps
+    --------------------------*/
+    --menu-item-color: #475669;
+    --menu-item-fill: #eff2f7;
+    --menu-item-hover-fill: #d3dce6;
+    --submenu-item-fill: #e5e9f2;
+
+    --dark-menu-item-color: #475669;
+    --dark-menu-item-fill: #324057;
+    --dark-menu-item-hover-fill: #475669;
+    --dark-submenu-item-fill: #1f2d3d;
 }

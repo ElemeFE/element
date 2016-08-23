@@ -55,7 +55,7 @@
 
 <template>
   <li class="el-submenu" :class="{'is-opened': opened}">
-    <div class="el-submenu__title" @click="handleClick">
+    <div class="el-menu-item el-submenu__title" @click="handleClick">
       <slot name="title"></slot>
       <i class="el-submenu__icon-arrow el-icon-arrow-up"></i>
     </div>
