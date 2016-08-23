@@ -1,13 +1,20 @@
+<style>
+  .el-col {
+    box-sizing: border-box;
+  }
+</style>
 <template>
   <div class="container">
-    <el-col :span="5">
-      <side-nav :data="navsData"></side-nav>
-    </el-col>
-    <el-col :span="19">
-      <div class="content">
-        <router-view></router-view>
-      </div>
-    </el-col>
+    <el-row :gutter="25">
+      <el-col :span="6">
+        <side-nav :data="navsData"></side-nav>
+      </el-col>
+      <el-col :span="18">
+        <div class="content">
+          <router-view></router-view>
+        </div>
+      </el-col>
+    </el-row>
   </div>
 </template>
 <script>
@@ -15,23 +22,8 @@
   export default {
     data() {
       return {
-        navsData: [{
-          name: '组件',
-          children: []
-        }, {
-          name: '安装指南',
-          children: [{
-            path: '/component/quickstart',
-            name: '快速上手'
-          }, {
-            path: '/component/dev',
-            name: '开发指南'
-          }]
-        }]
+        navsData: navs
       };
-    },
-    created() {
-      this.navsData[0].children = navs;
     }
-  }
+  };
 </script>

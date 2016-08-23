@@ -6,21 +6,33 @@ const registerRoute = (config) => {
     component: require('./pages/component.vue'),
     children: []
   }];
-  config
-    .map(nav =>
-      nav.list.map(page => {
-        const component = require(`./docs${page.path}.md`);
+  function addRoute(page) {
+    const component = require(`./docs${page.path}.md`);
 
-        route[0].children.push({
-          path: page.path.slice(1),
-          meta: {
-            title: page.title || page.name,
-            description: page.description
-          },
-          component: component.default || component
+    route[0].children.push({
+      path: page.path.slice(1),
+      meta: {
+        title: page.title || page.name,
+        description: page.description
+      },
+      component: component.default || component
+    });
+  }
+  config
+    .map(nav => {
+      if (nav.groups) {
+        nav.groups.map(group => {
+          group.list.map(page => {
+            addRoute(page);
+          })
         });
-      })
-    );
+      }
+      if (nav.children) {
+        nav.children.map(page => {
+          addRoute(page);
+        });
+      }
+    });
 
   return { route, navs: config };
 };
@@ -48,12 +60,18 @@ let resourceRoute = {
   component: require('./pages/resource.vue')
 };
 
+let indexRoute = {
+  path: '/',
+  name: '首页',
+  component: require('./pages/index.vue')
+};
+
 let changeLogRoute = {
   path: '/changelog',
   component: require('./pages/changelog.vue')
 };
 
-route.route = route.route.concat([guideRoute, resourceRoute, changeLogRoute]);
+route.route = route.route.concat([indexRoute, guideRoute, resourceRoute, changeLogRoute]);
 
 route.route.push({
   path: '*',
