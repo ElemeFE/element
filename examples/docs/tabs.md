@@ -44,7 +44,7 @@ Tabs 组件提供了选项卡功能，只需要使用`el-tabs`和子元素`el-ta
 下例会选中选项卡2，如果不设置`name`，将`active-name`设为`2`，可以达成相同效果。
 
 <div>
-  <el-tabs>
+  <el-tabs :active-name="activeName">
     <el-tab-pane label="选项卡一">选项卡一内容</el-tab-pane>
     <el-tab-pane name="two" label="选项卡二">选项卡二内容</el-tab-pane>
     <el-tab-pane label="选项卡三">选项卡三内容</el-tab-pane>
@@ -95,7 +95,7 @@ Tabs 组件提供了选项卡功能，只需要使用`el-tabs`和子元素`el-ta
 ```
 
 <div>
-  <el-tabs type="border-card">
+  <el-tabs type="card" :closable="true" @tab-remove="handleRemove" @tab-click="handleClick">
     <el-tab-pane label="选项卡一">选项卡一内容</el-tab-pane>
     <el-tab-pane label="选项卡二">选项卡二内容</el-tab-pane>
     <el-tab-pane label="选项卡三">选项卡三内容</el-tab-pane>
@@ -104,7 +104,7 @@ Tabs 组件提供了选项卡功能，只需要使用`el-tabs`和子元素`el-ta
 </div>
 
 ```html
-<el-tabs type="border-card">
+<el-tabs type="card" :closable="true" @tab-remove="handleRemove" @tab-click="handleClick">
   <el-tab-pane label="选项卡一">选项卡一内容</el-tab-pane>
   <el-tab-pane label="选项卡二">选项卡二内容</el-tab-pane>
   <el-tab-pane label="选项卡三">选项卡三内容</el-tab-pane>
