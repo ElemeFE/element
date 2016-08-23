@@ -38,7 +38,7 @@
 ## 基础使用
 
 <div>
-  <el-tabs>
+  <el-tabs :active-name="activeName">
     <el-tab-pane label="选项卡一">选项卡一内容</el-tab-pane>
     <el-tab-pane label="选项卡二">选项卡二内容</el-tab-pane>
     <el-tab-pane label="选项卡三">选项卡三内容</el-tab-pane>
@@ -78,7 +78,7 @@
 ## 可关闭的标签
 
 <div>
-  <el-tabs type="card" :closable="true" :on-remove="handleRemove" :on-click="handleClick">
+  <el-tabs type="card" :closable="true" @tab-remove="handleRemove" @tab-click="handleClick">
     <el-tab-pane label="选项卡一">选项卡一内容</el-tab-pane>
     <el-tab-pane label="选项卡二">选项卡二内容</el-tab-pane>
     <el-tab-pane label="选项卡三">选项卡三内容</el-tab-pane>
@@ -88,7 +88,7 @@
 {{activeName2}}
 
 ```html
-<el-tabs type="card" :closable="true" :on-remove="handleRemove" :on-click="handleClick">
+<el-tabs type="card" :closable="true" @tab-remove="handleRemove" @tab-click="handleClick">
   <el-tab-pane label="选项卡一">选项卡一内容</el-tab-pane>
   <el-tab-pane label="选项卡二">选项卡二内容</el-tab-pane>
   <el-tab-pane label="选项卡三">选项卡三内容</el-tab-pane>
@@ -122,8 +122,8 @@
 | type     | 风格类型   | string   | card, border-card  |         |
 | closable  | 真实值   | boolean   | true, false |  false  |
 | activeName  | 当前选中面板的 name  | string   |    |    |
-| on-click  | tab 被点击的钩子  | string   |    |    |
-| on-remove  | tab 被删除的钩子  | string   |    |    |
+| tab-click  | tab 被点击的钩子  | string   |    |    |
+| tab-remove  | tab 被删除的钩子  | string   |    |    |
 
 ## TAB-PANE API
 | 参数       | 说明     | 类型      | 可选值       | 默认值   |

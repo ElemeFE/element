@@ -19,7 +19,7 @@
       height: 3px;
       background-color: var(--color-primary);
       z-index: 1;
-      transition: transform .3s cubic-bezier(.645,.045,.355,1);
+      /*transition: transform .3s cubic-bezier(.645,.045,.355,1);*/
       list-style: none;
     }
     @e item {

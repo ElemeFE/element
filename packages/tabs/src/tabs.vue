@@ -1,8 +1,6 @@
 <script>
   import ElTab from './tab';
 
-  function noop() {}
-
   module.exports = {
     name: 'el-tabs',
 
@@ -15,14 +13,6 @@
       tabPosition: String,
       activeName: String,
       closable: false,
-      onRemove: {
-        type: Function,
-        default: noop
-      },
-      onClick: {
-        type: Function,
-        default: noop
-      },
       tabWidth: 0
     },
 
@@ -39,7 +29,8 @@
     watch: {
       activeName: {
         handler(val) {
-          this.currentName = val || this.$children[0].key;
+          var fisrtKey = this.$children[0] && this.$children[0].key || '1';
+          this.currentName = val || fisrtKey;
         }
       },
 
@@ -66,13 +57,13 @@
 
           this.currentName = nextChild ? nextChild.key : prevChild ? prevChild.key : '-1';
         }
-        this.onRemove(tab.key);
+        this.$emit('tab-remove', tab.key);
       },
       handleTabClick(tab, event) {
         this.currentName = tab.key;
-        this.onClick(tab.key, event);
+        this.$emit('tab-click', tab.key, event);
       },
-      calcBarStyle() {
+      calcBarStyle(firstRendering) {
         if (this.type || !this.$refs.tabs) return {};
         var style = {};
         var offset = 0;
@@ -92,16 +83,19 @@
         style.width = tabWidth + 'px';
         style.transform = `translateX(${offset}px)`;
 
+        if (!firstRendering) {
+          style.transition = 'transform .3s cubic-bezier(.645,.045,.355,1), -webkit-transform .3s cubic-bezier(.645,.045,.355,1)';
+        }
         this.barStyle = style;
       }
     },
-
     mounted() {
       if (!this.currentName) {
-        this.currentName = this.$children[0].key;
+        var fisrtKey = this.$children[0] && this.$children[0].key || '1';
+        this.currentName = this.activeName || fisrtKey;
       }
       this.$children.forEach(tab => this.tabs.push(tab));
-      this.$nextTick(() => this.calcBarStyle());
+      this.$nextTick(() => this.calcBarStyle(true));
     }
   };
 </script>

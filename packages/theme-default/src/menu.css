@@ -5,11 +5,14 @@
   @b menu {
     height: 60px;
     line-height: 60px;
-    background-color: #eff2f7;
     list-style: none;
     position: relative;
     margin: 0;
     padding-left: 0;
+    
+    & li {
+      list-style: none;
+    }
 
     @m vertical {
       height: auto;
@@ -22,10 +25,9 @@
         padding-left: 20px;
         cursor: pointer;
         position: relative;
-        color: #475669;
         
         &:hover {
-          background-color: #d3dce6;
+          background-color: var(--menu-item-hover-fill);
         }
         & .el-menu-item__bar {
           display: none;
@@ -36,18 +38,20 @@
       }
     }
     @m dark {
-      background-color: #324057;
-
       & .el-menu-item,
       & .el-submenu__title {
         color: #c0ccda;
+      }
+
+      & .el-menu-item {
+        background-color: var(--dark-menu-item-fill);
       }
 
       &.el-menu--vertical {
         & .el-menu-item,
         & .el-submenu__title {
           &:hover {
-            background-color: #475669;
+            background-color: var(--dark-menu-item-hover-fill);
           }
           &.is-active {
             background-color: #5e6d82;
@@ -55,13 +59,15 @@
           }
         }
       }
-
-      & .el-submenu .el-menu-item {
-        background-color: #1f2d3d;
+      & .el-submenu .el-menu {
+        background-color: var(--dark-submenu-item-fill);
+      }
+      & .el-submenu .el-menu-item:not(.el-submenu__title) {
+        background-color: transparent;
         color: #99a9bf;
 
         &:hover {
-          background-color: #475669;
+          background-color: var(--dark-menu-item-hover-fill);
         }
         &.is-active {
           background-color: #5e6d82;
@@ -71,8 +77,8 @@
     }
   }
   @b menu-item {
-    font-size: 16px;
-    color: #475669;
+    font-size: 14px;
+    color: var(--menu-item-color);
     float: left;
     height: 100%;
     padding: 0 10px;
@@ -81,6 +87,7 @@
     position: relative;
     transition: var(--md-fade-transition);
     transform-origin: center center;
+    background-color: var(--menu-item-fill);
     
     @e bar {
       content: '';
@@ -107,28 +114,19 @@
   @b submenu {
     & .el-menu {
       height: auto;
-      background-color: darken(#eff2f7, 5%);
+      background-color: var(--submenu-item-fill);
     }
-    & .el-menu-item {
+    & .el-menu-item:not(.el-submenu__title) {
       padding-left: 46px;
-    }
-    @e title {
-      float: none;
-      height: 56px;
-      line-height: 56px;
-      margin: 0;
-      padding-left: 20px;
-      cursor: pointer;
-      position: relative;
-      color: #475669;
-      
+      background-color: transparent;
+
       &:hover {
-        background-color: #d3dce6;
+        background-color: var(--menu-item-hover-fill);        
       }
-      & [class^="el-icon-"] {
-        vertical-align: baseline;
-        margin-right: 10px;
-      }
+    }
+    @e title [class^="el-icon-"] {
+      vertical-align: baseline;
+      margin-right: 10px;
     }
     @e icon-arrow {
       position: absolute;
@@ -144,6 +142,19 @@
       & .el-submenu__icon-arrow {
         transform: translateY(-50%);
       }
+    }
+  }
+
+  @b menu-item-group {
+    > ul {
+      padding: 0;
+    }
+    @e title {
+      padding-top: 15px;
+      line-height: normal;
+      font-size: 14px;
+      padding-left: 25px;
+      color: #99a9bf;
     }
   }
 }
