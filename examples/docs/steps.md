@@ -1,7 +1,12 @@
-##  基础用法
-简单的步骤条。
+## 基础步骤条
 
-### 定宽步骤条
+Steps 组件需要设置`active`属性，接受一个`Number`，表明步骤的 index，从 0 开始。
+
+需要定宽的步骤条时，设置`space`属性即可，它接受`Boolean`，单位为`px`，如果不设置，则为自适应。
+
+设置`finish-status`属性可以改变已经完成的步骤的状态，而`process-status`可以改变当前步骤的状态，Steps组件提供了5种状态：`wait`，`process`，`finish`，`error`，`success`。
+
+下两例分别展示了定宽的步骤条和自适应的步骤条：
 
 <el-steps :space="100" :active="active" finish-status="success">
   <el-step title="步骤 1"></el-step>
@@ -53,24 +58,23 @@
 </script>
 ```
 
-### 自适应步骤条
-
-<el-steps :active="1">
+<el-steps :active="1" process-status="error">
   <el-step title="步骤 1"></el-step>
   <el-step title="步骤 2"></el-step>
   <el-step title="步骤 3"></el-step>
 </el-steps>
 
 ```html
-<el-steps :active="1">
+<el-steps :active="1" process-status="error">
   <el-step title="步骤 1"></el-step>
   <el-step title="步骤 2"></el-step>
   <el-step title="步骤 3"></el-step>
 </el-steps>
 ```
 
-## 含状态步骤
-每一步骤显示出该步骤的状态。
+## 状态与描述
+
+Steps 组件中，我们可以给`el-step`元素设置`title`属性来定义每一个步骤的标题（或状态）。使用`title`具名分发，可以用`slot`的方式来取代属性的设置，在本文档最后的列表中有所有的 slot name 可供参考。
 
 <el-steps :space="100" :active="1" finish-status="success">
   <el-step title="已完成"></el-step>
@@ -86,8 +90,7 @@
 </el-steps>
 ```
 
-## 有描述的步骤条
-每个步骤有其对应的步骤状态描述。
+除了`title`外，还可以用`description`属性来补充说明，下面是一个使用了`description`的例子：
 
 <el-steps :space="200" :active="1">
   <el-step title="步骤 1" description="这是一段很长很长很长的描述性文字"></el-step>
@@ -104,7 +107,8 @@
 ```
 
 ## 带图标的步骤条
-步骤条内可以启用各种自定义的图标。
+
+除了`title`和`description`，还可以通过`icon`属性来设置图标，图标的类型可以参考 Icon 组件的文档，除此以外，还能通过 slot name 来使用自定义的图标。
 
 <el-steps :space="100" :active="1">
   <el-step title="步骤 1" icon="edit"></el-step>
@@ -121,7 +125,8 @@
 ```
 
 ## 竖式步骤条
-竖直方向的步骤条。
+
+默认情况下，步骤条为横向显示，如果需要竖向显示的步骤条，只需要在`el-steps`元素中设置`direction`属性为`vertical`即可。
 
 <el-steps :space="100" direction="vertical" :active="1">
   <el-step title="步骤 1"></el-step>
@@ -133,51 +138,32 @@
 <el-steps :space="100" direction="vertical" :active="1">
   <el-step title="步骤 1"></el-step>
   <el-step title="步骤 2"></el-step>
-  <el-step title="步骤 3"></el-step>
-</el-steps>
-```
-
-## 步骤错误提示
-每一步骤显示出该步骤的状态。
-
-<el-steps :space="100" :active="1" finish-status="success" process-status="error">
-  <el-step title="已完成"></el-step>
-  <el-step title="审核失败"></el-step>
-  <el-step title="步骤 3"></el-step>
-</el-steps>
-
-```html
-<el-steps :space="100" :active="1" finish-status="success" process-status="error">
-  <el-step title="已完成"></el-step>
-  <el-step title="审核失败"></el-step>
   <el-step title="步骤 3"></el-step>
 </el-steps>
 ```
 
 ## API
 
-### Steps.props
+### Steps Attributes
 
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | space | 每个 step 的间距，不填写将自适应间距 | Number | | |
-| direction | 显示方向 | String | `vertical` `horizontal` | `horizontal` |
-| active | 设置当前激活步骤  | Number | | 0 |
-| process-status | 设置当前步骤的状态 | String | `wait` `process` `finish` `error` `success` | `process` |
-| finish-status | 设置结束步骤的状态 | String | `wait` `process` `finish` `error` `success` | `finish` |
+| direction | 显示方向 | string | 'vertical', 'horizontal' | 'horizontal' |
+| active | 设置当前激活步骤  | number | | 0 |
+| process-status | 设置当前步骤的状态 | string | 'wait', 'process', 'finish', 'error', 'success' | 'process' |
+| finish-status | 设置结束步骤的状态 | string | 'wait', 'process', 'finish', 'error', 'success' | 'finish' |
 
-### Step.props
+### Step Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
-| title | 标题 | String | | |
-| description | 描述性文字 | String | | |
-| icon | 图标 | Element Icon 提供的图标，如果要使用自定义图标可以通过 slot 方式写入 | String | |
+| title | 标题 | string | | |
+| description | 描述性文字 | string | | |
+| icon | 图标 | Element Icon 提供的图标，如果要使用自定义图标可以通过 slot 方式写入 | string | |
 
-
-### Step.slot
+### Step Slot
 | name | 说明  |
 |----|----|
 | icon | 图标 |
 | title | 标题 |
 | description | 描述性文字 |
-
