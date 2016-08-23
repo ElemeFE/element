@@ -115,9 +115,9 @@
         </div>
       </div>
       <div class="el-picker-panel__footer" v-if="showTime">
-        <a
+        <!-- <a
           class="el-picker-panel__link-btn"
-          @click="changeToToday">{{ $t('datepicker.today') }}</a>
+          @click="changeToToday">{{ $t('datepicker.today') }}</a> -->
         <button
           type="button"
           class="el-picker-panel__btn"
@@ -400,18 +400,15 @@
         this.rightTimePickerVisible = false;
       },
 
-      handleLeftTimePick(value) {
-        if (!this.minDate) {
-          this.minDate = new Date();
-        }
-        this.minDate.setHours(value.getHours());
-        this.minDate.setMinutes(value.getMinutes());
-        this.minDate.setSeconds(value.getSeconds());
+      handleLeftTimePick(value, visible, first) {
+        this.minDate = value || this.minDate || new Date();
 
-        this.minDate = new Date(this.minDate);
+        if (!first) {
+          this.leftTimePickerVisible = visible;
+        }
       },
 
-      handleRightTimePick(value) {
+      handleRightTimePick(value, visible, first) {
         if (!this.maxDate) {
           const now = new Date();
           if (now >= this.minDate) {
@@ -420,11 +417,11 @@
         }
 
         if (this.maxDate) {
-          this.maxDate.setHours(value.getHours());
-          this.maxDate.setMinutes(value.getMinutes());
-          this.maxDate.setSeconds(value.getSeconds());
+          this.maxDate = value;
+        }
 
-          this.maxDate = new Date(this.maxDate);
+        if (!first) {
+          this.rightTimePickerVisible = visible;
         }
       },
 
