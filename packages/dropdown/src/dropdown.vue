@@ -41,7 +41,6 @@
   import ElButton from 'packages/button/index.js';
   import ElButtonGroup from 'packages/button-group/index.js';
   import ElDropdownMenu from './dropdown-menu.vue';
-  import Vue from 'vue';
   import Clickoutside from 'main/utils/clickoutside';
 
   export default {

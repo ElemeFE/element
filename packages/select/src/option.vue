@@ -6,7 +6,7 @@
     v-show="queryPassed"
     :class="{ 'selected': itemSelected, 'is-disabled': disabled, 'hover': parent.hoverIndex === index }">
     <slot>
-      <span>{{ label }}</span>
+      <span>{{ currentLabel }}</span>
     </slot>
   </li>
 </template>
@@ -40,7 +40,8 @@
       return {
         index: -1,
         queryPassed: true,
-        hitState: false
+        hitState: false,
+        currentLabel: this.label
       };
     },
 
@@ -92,7 +93,7 @@
       },
 
       queryChange(query) {
-        this.queryPassed = new RegExp(query, 'i').test(this.label);
+        this.queryPassed = new RegExp(query, 'i').test(this.currentLabel);
         if (!this.queryPassed) {
           this.parent.filteredOptionsCount--;
         }
@@ -106,7 +107,7 @@
     },
 
     created() {
-      this.label = this.label || ((typeof this.value === 'string' || typeof this.value === 'number') ? this.value : '');
+      this.currentLabel = this.currentLabel || ((typeof this.value === 'string' || typeof this.value === 'number') ? this.value : '');
       this.parent.options.push(this);
       this.parent.optionsCount++;
       this.parent.filteredOptionsCount++;

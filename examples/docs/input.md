@@ -70,7 +70,7 @@
 
 ## 禁用状态
 
-<div class="demo-box demo-input">  
+<div class="demo-box demo-input">
   <el-input
     :disabled="true"
     placeholder="请输入内容"

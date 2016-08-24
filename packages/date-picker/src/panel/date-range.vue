@@ -7,6 +7,7 @@
         <slot name="sidebar" class="el-picker-panel__sidebar"></slot>
         <div class="el-picker-panel__sidebar" v-if="shortcuts">
           <button
+            type="button"
             class="el-picker-panel__shortcut"
             v-for="shortcut in shortcuts"
             @click="handleShortcutClick(shortcut)">{{shortcut.text}}</button>
@@ -20,7 +21,9 @@
                 v-model="leftVisibleDate"
                 @input="handleDateInput($event, 'min')"
                 @change="handleDateChange($event, 'min')"/>
-              <span class="el-date-range-picker__time-picker-wrap">
+              <span
+                class="el-date-range-picker__time-picker-wrap"
+                v-clickoutside="closeLeftTimePicker">
                 <input
                   placeholder="开始时间"
                   class="el-date-range-picker__editor"
@@ -28,10 +31,10 @@
                   @focus="leftTimePickerVisible = true"
                   @change="handleTimeChange($event, 'min')"/>
                 <time-picker
-                  v-ref:lefttimepicker
+                  ref="lefttimepicker"
                   :date="minDate"
                   @pick="handleLeftTimePick"
-                  v-show="leftTimePickerVisible">
+                  :visible="leftTimePickerVisible">
                 </time-picker>
               </span>
             </span>
@@ -44,7 +47,9 @@
                 :readonly="!minDate"
                 @input="handleDateInput($event, 'max')"
                 @change="handleDateChange($event, 'max')" />
-              <span class="el-date-range-picker__time-picker-wrap">
+              <span
+                class="el-date-range-picker__time-picker-wrap"
+                v-clickoutside="closeRightTimePicker">
                 <input
                   placeholder="结束时间"
                   class="el-date-range-picker__editor"
@@ -53,19 +58,21 @@
                   :readonly="!minDate"
                   @change="handleTimeChange($event, 'max')" />
                 <time-picker
-                  v-ref:righttimepicker
+                  ref="righttimepicker"
                   :date="maxDate"
                   @pick="handleRightTimePick"
-                  v-show="rightTimePickerVisible"></time-picker>
+                  :visible="rightTimePickerVisible"></time-picker>
               </span>
             </span>
           </div>
           <div class="el-picker-panel__content el-date-range-picker__content is-left">
             <div class="el-date-range-picker__header">
               <button
+                type="button"
                 @click="prevYear"
                 class="el-picker-panel__icon-btn el-icon-d-arrow-left"></button>
               <button
+                type="button"
                 @click="prevMonth"
                 class="el-picker-panel__icon-btn el-icon-arrow-left"></button>
               <div>{{ leftLabel }}</div>
@@ -85,9 +92,11 @@
           <div class="el-picker-panel__content el-date-range-picker__content is-right">
             <div class="el-date-range-picker__header">
               <button
+                type="button"
                 @click="nextYear"
                 class="el-picker-panel__icon-btn el-icon-d-arrow-right"></button>
               <button
+                type="button"
                 @click="nextMonth"
                 class="el-picker-panel__icon-btn el-icon-arrow-right"></button>
               <div>{{ rightLabel }}</div>
@@ -106,11 +115,11 @@
         </div>
       </div>
       <div class="el-picker-panel__footer" v-if="showTime">
-        <a
-          href="JavaScript:"
+        <!-- <a
           class="el-picker-panel__link-btn"
-          @click="changeToToday">{{ $t('datepicker.today') }}</a>
+          @click="changeToToday">{{ $t('datepicker.today') }}</a> -->
         <button
+          type="button"
           class="el-picker-panel__btn"
           @click="handleConfirm"
           :disabled="btnDisabled">确定</button>
@@ -237,6 +246,10 @@
       }
     },
 
+    directives: {
+      Clickoutside: require('main/utils/clickoutside').default
+    },
+
     data() {
       return {
         date: new Date(),
@@ -267,11 +280,11 @@
       },
 
       leftTimePickerVisible(val) {
-        if (val) this.$refs.lefttimepicker.ajustScrollTop();
+        if (val) this.$nextTick(() => this.$refs.lefttimepicker.ajustScrollTop());
       },
 
       rightTimePickerVisible(val) {
-        if (val) this.$refs.righttimepicker.ajustScrollTop();
+        if (val) this.$nextTick(() => this.$refs.righttimepicker.ajustScrollTop());
       },
 
       value(newVal) {
@@ -287,6 +300,14 @@
 
     methods: {
       $t,
+
+      closeLeftTimePicker() {
+        this.leftTimePickerVisible = false;
+      },
+
+      closeRightTimePicker() {
+        this.rightTimePickerVisible = false;
+      },
 
       handleDateInput(event, type) {
         const value = event.target.value;
@@ -379,37 +400,29 @@
         this.rightTimePickerVisible = false;
       },
 
-      handleLeftTimePick(value) {
-        if (!this.minDate) {
-          this.minDate = new Date();
-        }
-        this.minDate.setHours(value.getHours());
-        this.minDate.setMinutes(value.getMinutes());
-        this.minDate.setSeconds(value.getSeconds());
+      handleLeftTimePick(value, visible, first) {
+        this.minDate = value || this.minDate || new Date();
 
-        this.minDate = new Date(this.minDate);
-        this.leftTimePickerVisible = false;
+        if (!first) {
+          this.leftTimePickerVisible = visible;
+        }
       },
 
-      handleRightTimePick(value) {
+      handleRightTimePick(value, visible, first) {
         if (!this.maxDate) {
           const now = new Date();
           if (now >= this.minDate) {
             this.maxDate = new Date();
-          } else {
-
           }
         }
 
         if (this.maxDate) {
-          this.maxDate.setHours(value.getHours());
-          this.maxDate.setMinutes(value.getMinutes());
-          this.maxDate.setSeconds(value.getSeconds());
-
-          this.maxDate = new Date(this.maxDate);
+          this.maxDate = value;
         }
 
-        this.rightTimePickerVisible = false;
+        if (!first) {
+          this.rightTimePickerVisible = visible;
+        }
       },
 
       prevMonth() {
