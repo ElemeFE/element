@@ -9,7 +9,7 @@
           :hit="item.hitState"
           type="primary"
           @click.native="deleteTag($event, item)"
-          close-transition>{{ item.label }}</el-tag>
+          close-transition>{{ item.currentLabel }}</el-tag>
       </transition-group>
       <input
         type="text"
@@ -290,7 +290,7 @@
               this.bottomOverflowBeforeHidden = this.selected.$el.getBoundingClientRect().bottom - this.$refs.popper.$el.getBoundingClientRect().bottom;
             }
             if (this.selected && this.selected.value) {
-              this.selectedLabel = this.selected.label;
+              this.selectedLabel = this.selected.currentLabel;
             }
           }
         } else {
@@ -360,7 +360,7 @@
           }
         } else {
           this.selected = option;
-          this.selectedLabel = option.label;
+          this.selectedLabel = option.currentLabel;
           this.hoverIndex = option.index;
         }
       },
@@ -402,12 +402,12 @@
       handleOptionSelect(option) {
         if (!this.multiple) {
           this.selected = option;
-          this.selectedLabel = option.label;
+          this.selectedLabel = option.currentLabel;
           this.visible = false;
         } else {
           let optionIndex = -1;
           this.selected.forEach((item, index) => {
-            if (item === option || item.label === option.label) {
+            if (item === option || item.currentLabel === option.currentLabel) {
               optionIndex = index;
             }
           });
