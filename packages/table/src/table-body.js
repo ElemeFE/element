@@ -59,7 +59,7 @@ export default {
                       on-mouseleave={ this.handleCellMouseLeave }>
                       {
                         column.template
-                          ? column.template.call(this._renderProxy, h, { row, column, $index })
+                          ? column.template.call(this._renderProxy, h, { row, column, $index, _self: this.$parent.$parent })
                           : <div class="cell">{ this.$getPropertyText(row, column.property, column.id) }</div>
                       }
                     </td>
