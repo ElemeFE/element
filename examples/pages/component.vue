@@ -1,26 +1,13 @@
 <style>
   .page-component {
-    padding: 50px 0 95px;
+    padding-bottom: 95px;
   }
   .el-col {
     box-sizing: border-box;
   }
   .page-component .content > {
-    h2, h3, h4, h5 {
-      font-weight: normal;
-      color: #1f2f3d;
-    }
-    h2 {
-      margin: 0;
-      font-size: 28px;
-    }
     h3 {
       margin: 45px 0 15px;
-      font-size: 22px;
-    }
-    p {
-      font-size: 14px;
-      color: #5e6d82;
     }
     table {
       width: 100%;
@@ -42,7 +29,7 @@
   }
 </style>
 <template>
-  <div class="page-component container">
+  <div class="page-container page-component">
     <el-row :gutter="25">
       <el-col :span="6">
         <side-nav :data="navsData" base="/component"></side-nav>

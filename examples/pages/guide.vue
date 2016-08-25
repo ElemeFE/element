@@ -3,7 +3,7 @@
     box-sizing: border-box;
   }
   .page-guide {
-    padding: 50px 0 95px;
+    padding: 55px 0 95px;
 
     .content {
       padding-left: 25px;
@@ -50,7 +50,7 @@
   }
 </style>
 <template>
-  <div class="page-guide container">
+  <div class="page-container page-guide">
     <el-row>
       <el-col :span="5">
         <side-nav :data="navsData" base="/guide"></side-nav>
