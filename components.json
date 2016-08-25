@@ -26,6 +26,9 @@
   "menu-item": [
     "./packages/menu-item/index.js"
   ],
+  "menu-item-group": [
+    "./packages/menu-item-group/index.js"
+  ],
   "input": [
     "./packages/input/index.js"
   ],

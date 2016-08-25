@@ -73,15 +73,14 @@
 
 ## 基本用法
 
-Notification 组件提供通知功能，Element 注册了`$notify`方法，接收一个`options`字面量参数，最简单的条件下，你可以设置`title`字段和`message`字段，用于设置通知的标题和正文，下面是一个最简单的情况的样例：
-
-<div class="demo-box demo-notification">
-  <el-button :plain="true" @click.native="open">点击展示 Notification</el-button>
-</div>
-
+::: demo Notification 组件提供通知功能，Element 注册了 `$notify` 方法，接收一个 `options` 字面量参数，在最简单的情况下，你可以设置 `title` 字段和 `message` 字段，用于设置通知的标题和正文。
 ```html
 <template>
-  <el-button :plain="true" @click.native="open">点击展示 Notification</el-button>
+  <el-button
+    plain
+    @click.native="open">
+    点击展示 Notification
+  </el-button>
 </template>
 
 <script>
@@ -97,26 +96,33 @@ Notification 组件提供通知功能，Element 注册了`$notify`方法，接�
   }
 </script>
 ```
+:::
 
 ## 带有 icon
 
-Element 也为 Notification 组件准备了四种通知类型：`success`, `warning`, `info`, `error`。
-
-通过`type`字段来设置，除此以外的值将被忽略，下面是四种类型的样例：
-
-<div class="demo-box demo-notification">
-  <el-button :plain="true" @click.native="open2">成功</el-button>
-  <el-button :plain="true" @click.native="open3">警告</el-button>
-  <el-button :plain="true" @click.native="open4">消息</el-button>
-  <el-button :plain="true" @click.native="open5">错误</el-button>
-</div>
-
+::: demo Element 为 Notification 组件准备了四种通知类型：`success`, `warning`, `info`, `error`。通过 `type` 字段来设置，除此以外的值将被忽略。
 ```html
 <template>
-  <el-button :plain="true" @click.native="open2">成功</el-button>
-  <el-button :plain="true" @click.native="open3">警告</el-button>
-  <el-button :plain="true" @click.native="open4">消息</el-button>
-  <el-button :plain="true" @click.native="open5">错误</el-button>
+  <el-button
+    plain
+    @click.native="open2">
+    成功
+  </el-button>
+  <el-button
+    plain
+    @click.native="open3">
+    警告
+  </el-button>
+  <el-button
+    plain
+    @click.native="open4">
+    消息
+  </el-button>
+  <el-button
+    plain
+    @click.native="open5">
+    错误
+  </el-button>
 </template>
 
 <script>
@@ -157,20 +163,18 @@ Element 也为 Notification 组件准备了四种通知类型：`success`, `warn
   }
 </script>
 ```
+:::
 
 ## 不会自动关闭
 
-默认情况下，经过一段时间后 Notification 组件会自动关闭，但是通过设置 `duration`，可以控制关闭的时间间隔，特别的是，如果设置为`0`，则不会自动关闭，下面是一个不会自动关闭的样例：
-
-注意：`duration`接收一个`Number`，单位为毫秒，默认为`4500`。
-
-<div class="demo-box demo-notification">
-  <el-button :plain="true" @click.native="open6">不会自动关闭的 Notification</el-button>
-</div>
-
+::: demo 默认情况下，经过一段时间后 Notification 组件会自动关闭，但是通过设置 `duration`，可以控制关闭的时间间隔，特别的是，如果设置为 `0`，则不会自动关闭。注意：`duration` 接收一个 `Number`，单位为毫秒，默认为 `4500`。
 ```html
 <template>
-  <el-button :plain="true" @click.native="open6">不会自动关闭的 Notification</el-button>
+  <el-button
+    plain
+    @click.native="open6">
+    不会自动关闭的 Notification
+  </el-button>
 </template>
 
 <script>
@@ -187,18 +191,18 @@ Element 也为 Notification 组件准备了四种通知类型：`success`, `warn
   }
 </script>
 ```
+:::
 
 ## 回调函数
 
-Element 为关闭操作设置了回调函数，在关闭时会触发`onClose`，你可以通过设置`onClose`参数来处理后续操作，它是一个`Function`，下面是一个样例，会在控制台输出：Notification 已关闭。
-
-<div class="demo-box demo-notification">
-  <el-button :plain="true" @click.native="open7">带有回调函数的 Notification</el-button>
-</div>
-
+::: demo Element 为关闭操作设置了回调函数，在关闭时会触发 `onClose`，你可以通过设置 `onClose` 参数来处理后续操作，它是一个 `Function`。本例会在控制台输出：Notification 已关闭。
 ```html
 <template>
-  <el-button :plain="true" @click.native="open7">带有回调函数的 Notification</el-button>
+  <el-button
+    plain
+    @click.native="open7">
+    带有回调函数的 Notification
+  </el-button>
 </template>
 
 <script>
@@ -219,6 +223,7 @@ Element 为关闭操作设置了回调函数，在关闭时会触发`onClose`，
   }
 </script>
 ```
+:::
 
 ## 全局方法
 

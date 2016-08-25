@@ -1,17 +1,21 @@
 var cooking = require('cooking');
 var path = require('path');
 var Components = require('../components.json');
+var entries = {};
+
+Object.keys(Components).forEach(function (key) {
+  const compo = Components[key];
+
+  compo[0] = path.join(process.cwd(), compo[0]);
+  entries[key] = compo;
+});
 
 cooking.set({
-  entry: Components.map(function (compo) {
-    compo[0] = path.join(process.cwd(), compo[0]);
-    return compo;
-  }),
+  entry: entries,
   dist: './lib',
-  clean: true,
+  clean: false,
   template: false,
-  format: 'umd',
-  moduleName: ['ELEMENT', '[name]'],
+  format: 'cjs',
   extractCSS: '[name]/style.css',
   extends: ['vue']
 });
@@ -26,18 +30,11 @@ cooking.add('resolve.alias', {
 
 var externals = {};
 Object.keys(Components).forEach(function(key) {
-  externals[`packages/${key}/index.js`] = {
-    root: `ELEMENT.${key}`,
-    commonjs: `element-ui/lib/${key}`,
-    commonjs2: `element-ui/lib/${key}`,
-    amd: `element-ui/lib/${key}`
-  };
-  externals[`packages/${key}/style.css`] = {
-    root: `ELEMENT.${key}/style.css`,
-    commonjs: `element-ui/lib/${key}/style.css`,
-    commonjs2: `element-ui/lib/${key}/style.css`,
-    amd: `element-ui/lib/${key}/style.css`
-  };
+  externals[`packages/${key}/index.js`] = `element-ui/lib/${key}`;
+  externals[`packages/${key}/style.css`] = `element-ui/lib/${key}/style.css`;
+  externals['main/utils/clickoutside'] = 'element-ui/src/utils/clickoutside';
+  externals['main/utils/popper'] = 'element-ui/src/utils/popper';
+  externals['main/utils/vue-popper'] = 'element-ui/src/utils/vue-popper';
 });
 
 cooking.add('externals', Object.assign({

@@ -27,7 +27,8 @@
     "url": "https://github.com/eleme/element-ui/issues"
   },
   "dependencies": {
-    "object-assign": "^4.1.0"
+    "object-assign": "^4.1.0",
+    "typing.js": "^2.1.0"
   },
   "devDependencies": {
     "babel-helper-vue-jsx-merge-props": "^1.0.1",
@@ -44,6 +45,7 @@
     "oui-dom-events": "^0.2.1",
     "postcss": "^5.0.21",
     "purecss": "^0.6.0",
+    "strip-tags": "^0.1.1",
     "uppercamelcase": "^1.1.0",
     "vue": "^2.0.0-rc.2",
     "vue-loader": "^9.3.2",

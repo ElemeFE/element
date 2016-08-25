@@ -45,7 +45,7 @@ export default {
                               class="gutter"
                               style={{
                                 width: (this.$parent.showVScrollBar
-                                          ? this.$parent.gutterWidth
+                                          ? this.$parent.currentGutterWidth
                                           : 0
                                         ) + 'px'
                               }}>&nbsp;</th>)

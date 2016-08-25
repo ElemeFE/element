@@ -67,7 +67,7 @@
         this.$emit('select', key, keyPath);
 
         if (this.router) {
-          this.$route.router.go(key);
+          this.$router.push(key);
         }
       }
     },

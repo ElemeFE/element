@@ -11,7 +11,6 @@
     props: {
       type: String,
       tabPosition: String,
-      defaultActiveName: String,
       activeName: String,
       closable: false,
       tabWidth: 0
@@ -29,9 +28,9 @@
 
     watch: {
       activeName: {
-        immediate: true,
         handler(val) {
-          this.currentName = val || 0;
+          var fisrtKey = this.$children[0] && this.$children[0].key || '1';
+          this.currentName = val || fisrtKey;
         }
       },
 
@@ -41,7 +40,7 @@
     },
 
     methods: {
-      removeTab(tab, ev) {
+      handleTabRemove(tab, ev) {
         ev.stopPropagation();
         tab.$destroy(true);
 
@@ -58,14 +57,14 @@
 
           this.currentName = nextChild ? nextChild.key : prevChild ? prevChild.key : '-1';
         }
-        this.$emit('tab.remove', tab);
+        this.$emit('tab-remove', tab.key);
       },
-      handleTabClick(tab) {
+      handleTabClick(tab, event) {
         this.currentName = tab.key;
-        this.$emit('tab.click', tab);
+        this.$emit('tab-click', tab.key, event);
       },
-      calcBarStyle() {
-        if (this.type) return {};
+      calcBarStyle(firstRendering) {
+        if (this.type || !this.$refs.tabs) return {};
         var style = {};
         var offset = 0;
         var tabWidth = 0;
@@ -84,16 +83,19 @@
         style.width = tabWidth + 'px';
         style.transform = `translateX(${offset}px)`;
 
+        if (!firstRendering) {
+          style.transition = 'transform .3s cubic-bezier(.645,.045,.355,1), -webkit-transform .3s cubic-bezier(.645,.045,.355,1)';
+        }
         this.barStyle = style;
       }
     },
-
     mounted() {
       if (!this.currentName) {
-        this.currentName = this.defaultActiveName || this.$children[0].key;
+        var fisrtKey = this.$children[0] && this.$children[0].key || '1';
+        this.currentName = this.activeName || fisrtKey;
       }
       this.$children.forEach(tab => this.tabs.push(tab));
-      this.$nextTick(() => this.calcBarStyle());
+      this.$nextTick(() => this.calcBarStyle(true));
     }
   };
 </script>
@@ -106,8 +108,8 @@
         ref="tabs"
         :tab="tab"
         :closable="closable"
-        @onremove="removeTab"
-        @click.native="handleTabClick(tab)">
+        @remove="handleTabRemove"
+        @click.native="handleTabClick(tab, $event)">
       </el-tab>
       <div
         class="el-tabs__active-bar"

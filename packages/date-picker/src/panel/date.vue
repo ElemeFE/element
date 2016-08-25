@@ -7,6 +7,7 @@
         <slot name="sidebar" class="el-picker-panel__sidebar"></slot>
         <div class="el-picker-panel__sidebar" v-if="shortcuts">
           <button
+            type="button"
             class="el-picker-panel__shortcut"
             v-for="shortcut in shortcuts"
             @click="handleShortcutClick(shortcut)">{{ shortcut.text }}</button>
@@ -35,10 +36,12 @@
           </div>
           <div class="el-date-picker__header" v-show="currentView !== 'time'">
             <button
+              type="button"
               @click="prevYear"
               class="el-picker-panel__icon-btn el-date-picker__prev-btn el-icon-d-arrow-left">
             </button>
             <button
+              type="button"
               @click="prevMonth"
               v-show="currentView === 'date'"
               class="el-picker-panel__icon-btn el-date-picker__prev-btn el-icon-arrow-left">
@@ -52,10 +55,12 @@
               class="el-date-picker__header-label"
               :class="{ active: currentView === 'month' }">{{ month + 1 }}月</span>
             <button
+              type="button"
               @click="nextYear"
               class="el-picker-panel__icon-btn el-date-picker__next-btn el-icon-d-arrow-right">
             </button>
             <button
+              type="button"
               @click="nextMonth"
               v-show="currentView === 'date'"
               class="el-picker-panel__icon-btn el-date-picker__next-btn el-icon-arrow-right">
@@ -97,6 +102,7 @@
           class="el-picker-panel__link-btn"
           @click="changeToToday">{{ $t('datepicker.today') }}</a>
         <button
+          type="button"
           class="el-picker-panel__btn"
           @click="confirm">{{ $t('datepicker.confirm') }}</button>
       </div>

@@ -35,9 +35,11 @@
       </div>
       <div class="el-time-panel__footer">
         <button
+          type="button"
           class="el-time-panel__btn cancel"
           @click="handleCancel()">取消</button>
         <button
+          type="button"
           class="el-time-panel__btn confirm"
           @click="handleConfirm()"
           :disabled="btnDisabled">确定</button>

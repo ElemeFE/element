@@ -2,6 +2,14 @@ var cooking = require('cooking');
 var path = require('path');
 var md = require('markdown-it')();
 var Components = require('../components.json');
+var striptags = require('strip-tags');
+
+function convert(str){
+  str = str.replace(/(&#x)(\w{4});/gi,function($0){
+    return String.fromCharCode(parseInt(encodeURIComponent($0).replace(/(%26%23x)(\w{4})(%3B)/g,"$2"),16));
+  });
+  return str;
+}
 
 cooking.set({
   entry: {
@@ -53,24 +61,26 @@ cooking.add('vueMarkdown', {
       anchorLinkSymbol: '',
       anchorClassName: 'anchor'
     }],
-    [require('markdown-it-container'), 'code', {
+    [require('markdown-it-container'), 'demo', {
       validate: function(params) {
-        return params.trim().match(/^code\s+(.*)$/);
+        return params.trim().match(/^demo\s*(.*)$/);
       },
 
       render: function (tokens, idx) {
-        var m = tokens[idx].info.trim().match(/^code\s+(.*)$/);
-
+        var m = tokens[idx].info.trim().match(/^demo\s*(.*)$/);
         if (tokens[idx].nesting === 1) {
-          // opening tag
-          return '<div class="details">' +
-                    `<div class="summary">${md.utils.escapeHtml(m[1])}</div>` +
-                  '<div class="code">';
-
-        } else {
-          // closing tag
-          return '</div></div>\n';
+          var description = (m && m.length > 1) ? m[1] : '';
+          var html = convert(striptags(tokens[idx + 1].content, 'script'));
+          var descriptionHTML = description
+            ? '<div class="description">' + md.render(description) + '</div>'
+            : '';
+          return `<demo-block class="demo-box">
+                    <div class="source">${html}</div>
+                    <div class="meta">
+                      ${descriptionHTML}
+                      <div class="highlight">`;
         }
+        return '</div></div></demo-block>\n';
       }
     }]
   ],
