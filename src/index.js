@@ -7,6 +7,7 @@ import DropdownItem from '../packages/dropdown-item/index.js';
 import Menu from '../packages/menu/index.js';
 import Submenu from '../packages/submenu/index.js';
 import MenuItem from '../packages/menu-item/index.js';
+import MenuItemGroup from '../packages/menu-item-group/index.js';
 import Input from '../packages/input/index.js';
 import InputNumber from '../packages/input-number/index.js';
 import Radio from '../packages/radio/index.js';
@@ -43,7 +44,7 @@ import Loading from '../packages/loading/index.js';
 import Icon from '../packages/icon/index.js';
 import Row from '../packages/row/index.js';
 import Col from '../packages/col/index.js';
-// import Upload from '../packages/upload/index.js';
+import Upload from '../packages/upload/index.js';
 import Progress from '../packages/progress/index.js';
 import Spinner from '../packages/spinner/index.js';
 import Message from '../packages/message/index.js';
@@ -65,6 +66,7 @@ const install = function(Vue) {
   Vue.component(Menu.name, Menu);
   Vue.component(Submenu.name, Submenu);
   Vue.component(MenuItem.name, MenuItem);
+  Vue.component(MenuItemGroup.name, MenuItemGroup);
   Vue.component(Input.name, Input);
   Vue.component(InputNumber.name, InputNumber);
   Vue.component(Radio.name, Radio);
@@ -98,7 +100,7 @@ const install = function(Vue) {
   Vue.component(Icon.name, Icon);
   Vue.component(Row.name, Row);
   Vue.component(Col.name, Col);
-  // Vue.component(Upload.name, Upload);
+  Vue.component(Upload.name, Upload);
   Vue.component(Progress.name, Progress);
   Vue.component(Spinner.name, Spinner);
   Vue.component(Message.name, Message);
@@ -134,6 +136,7 @@ module.exports = {
   Menu,
   Submenu,
   MenuItem,
+  MenuItemGroup,
   Input,
   InputNumber,
   Radio,
@@ -170,7 +173,7 @@ module.exports = {
   Icon,
   Row,
   Col,
-  // Upload,
+  Upload,
   Progress,
   Spinner,
   Message,
