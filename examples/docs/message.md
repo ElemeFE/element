@@ -74,11 +74,7 @@
 
 Message 系统了反馈提示，它比 Notification 更为小巧，可以根据需要来使用它们，在配置上，它们非常类似，所以部分 Notification 的 options 我们不会做详尽解释，文末有 options 列表，可以结合 Notification 的文档理解它们。
 
-Element 注册了一个`$message`方法用于调用，Message 同样接收一个`options`字面量，`message`参数能定义正文内容，下面是最简单的样例：
-
-<div class="demo-box demo-message">
-  <el-button :plain="true" @click.native="open">打开消息提示</el-button>
-</div>
+:::demo Element 注册了一个`$message`方法用于调用，Message 同样接收一个`options`字面量，`message`参数能定义正文内容。
 
 ```html
 <template>
@@ -97,19 +93,15 @@ Element 注册了一个`$message`方法用于调用，Message 同样接收一个
   }
 </script>
 ```
+:::
 
 ## 不同状态
 
-Message 同样提供了四种类型：`success`，`info`，`warning`，`error`，由不同图标表示，设置`type`字段来定义它们，默认为`info`，如果设置其他值将被忽略。
+Message 同样提供了四种类型：`success`，`info`，`warning`，`error`，由不同图标表示。
 
 你可以通过下面的按钮来体验它们：
 
-<div class="demo-box demo-message">
-  <el-button :plain="true" @click.native="open2">成功</el-button>
-  <el-button :plain="true" @click.native="open3">警告</el-button>
-  <el-button :plain="true" @click.native="open4">错误</el-button>
-</div>
-
+:::demo 设置`type`字段来定义它们，默认为`info`，如果设置其他值将被忽略。
 ```html
 <template>
   <el-button :plain="true" @click.native="open2">成功</el-button>
@@ -144,20 +136,15 @@ Message 同样提供了四种类型：`success`，`info`，`warning`，`error`�
   }
 </script>
 ```
+:::
 
 ## 可关闭
 
-默认的 Message 是不可以被人工关闭的，如果需要可关闭的 Message，可以使用`showClose`字段，它接受一个`Boolean`，`true`为允许关闭。
+默认的 Message 是不可以被人工关闭的，如果需要可关闭的 Message，可以使用`showClose`字段。
 
 注意：和 Notification 一样，Message 拥有可控的`duration`，设置`0`为不会被自动关闭，默认为 3000 毫秒。
 
-<div class="demo-box demo-message">
-  <el-button :plain="true" @click.native="open5">消息</el-button>
-  <el-button :plain="true" @click.native="open6">成功</el-button>
-  <el-button :plain="true" @click.native="open7">警告</el-button>
-  <el-button :plain="true" @click.native="open8">错误</el-button>
-</div>
-
+:::demo
 ```html
 <template>
   <el-button :plain="true" @click.native="open5">消息</el-button>
@@ -203,6 +190,7 @@ Message 同样提供了四种类型：`success`，`info`，`warning`，`error`�
   }
 </script>
 ```
+:::
 
 ## 全局方法
 

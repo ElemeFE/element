@@ -66,15 +66,13 @@
 
 MessageBox 组件提供了四种不同的样式来替代浏览器提供的`alert`等功能：`$msgbox`，`$alert`，`$confirm`以及`$prompt`。
 
-在本页文档中一一介绍它们，首先看最简单的示例，我们使用`$alert`，它接收了两个参数，`message`和`title`。
+在本页文档中一一介绍它们，首先看最简单的示例，我们使用`$alert`。
 
-值得一提的是，窗口被关闭后，它会返回一个`Promise`对象便于进行后续操作的处理。
-
-<el-button @click.native="open">打开 Alert</el-button>
+:::demo 它接收了两个参数，`message`和`title`。值得一提的是，窗口被关闭后，它会返回一个`Promise`对象便于进行后续操作的处理。
 
 ```html
 <template>
-  <el-button @click.native="open">打开 Message Box</el-button>
+  <el-button @click.native="open">打开 Alert</el-button>
 </template>
 
 <script>
@@ -87,16 +85,13 @@ MessageBox 组件提供了四种不同的样式来替代浏览器提供的`alert
   }
 </script>
 ```
+:::
 
 ## 配置项
 
 MessageBox 组件也拥有极高的定制性，我们可以传入`options`作为第三个参数，它是一个字面量对象。
 
-下例是一个包含图标的 alert 框，需要注意的是，第二个参数`title`必须定义为`String`类型，如果是`Object`，会被理解为`options`。
-
-`type`字段表明消息类型，可以为`success`，`error`，`info`和`warning`，无效的设置将会被忽略。
-
-<el-button @click.native="open2">打开 alert</el-button>
+:::demo 第二个参数`title`必须定义为`String`类型，如果是`Object`，会被理解为`options`。`type`字段表明消息类型，可以为`success`，`error`，`info`和`warning`，无效的设置将会被忽略。
 
 ```html
 <template>
@@ -115,10 +110,11 @@ MessageBox 组件也拥有极高的定制性，我们可以传入`options`作为
   }
 </script>
 ```
+:::
 
-下面是一个 confirm 框，在这里我们用了`Promise`来处理后续响应。
+下面是一个 confirm 框。
 
-<el-button @click.native="open3">打开 confirm</el-button>
+:::demo 在这里我们用了`Promise`来处理后续响应。
 
 ```html
 <template>
@@ -147,12 +143,11 @@ MessageBox 组件也拥有极高的定制性，我们可以传入`options`作为
   }
 </script>
 ```
+:::
 
-Prompt 框功能强大，可以处理简单的输入，甚至你可以用`inputPattern`字段自己规定匹配模式，或者用`inputValidator`规定校验函数，可以返回`Boolean`或`String`，`Boolean`为`false`或字符串时均表示校验为通过，`String`相当于定义了`inputErrorMessage`字段。
+Prompt 框功能强大，可以处理简单的输入。
 
-此外，你可以用`inputPlaceholder`字段来定义输入框的占位符。
-
-<el-button @click.native="open4">打开 prompt</el-button>
+:::demo 可以用`inputPattern`字段自己规定匹配模式，或者用`inputValidator`规定校验函数，可以返回`Boolean`或`String`，`Boolean`为`false`或字符串时均表示校验为通过，`String`相当于定义了`inputErrorMessage`字段。此外，可以用`inputPlaceholder`字段来定义输入框的占位符。
 
 ```html
 <template>
@@ -182,12 +177,11 @@ Prompt 框功能强大，可以处理简单的输入，甚至你可以用`inputP
   }
 </script>
 ```
+:::
 
 Msgbox 框是最基本的弹框，与 Alert 的区别在于 Alert 无法通过 ESC 和 点击框外关闭。
 
-此例中我们使用了`showCancelButton`字段，用于显示取消按钮，同时使用`cancelButtonClass`可以自定义样式，`cancelButtonText`来自定义按钮文本，Confirm 按钮也具有相同的字段，在文末的字段说明中有完整的字段列表。
-
-<el-button @click.native="open5">打开 Message Box</el-button>
+:::demo 使用了`showCancelButton`字段，用于显示取消按钮，同时使用`cancelButtonClass`可以自定义样式，`cancelButtonText`来自定义按钮文本，Confirm 按钮也具有相同的字段，在文末的字段说明中有完整的字段列表。
 
 ```html
 <template>
@@ -213,6 +207,7 @@ Msgbox 框是最基本的弹框，与 Alert 的区别在于 Alert 无法通过 E
   }
 </script>
 ```
+:::
 
 ## 全局方法
 

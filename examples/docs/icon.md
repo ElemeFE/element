@@ -54,21 +54,15 @@
 
 ## 使用方法
 
-直接通过设置类名为`el-icon-iconName`来使用即可。例如：
+直接通过设置类名为`el-icon-iconName`来使用即可。
 
-<div><i class="el-icon-search"></i></div>
-
+:::demo
 ```html
 <i class="el-icon-search"></i>
-```
-
-也可以在按钮组件中使用图标，更多地使用方式可以在按钮组件的文档中看到。
-
-<div><el-button type="primary" icon="search">搜索</el-button></div>
-
-```html
 <el-button type="primary" icon="search">搜索</el-button>
+
 ```
+:::
 
 ## 图标集合
 

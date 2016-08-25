@@ -117,7 +117,7 @@
           </li>
           <li class="nav-item">
             <router-link
-              active-class="active" 
+              active-class="active"
               to="/resource"
               exact>资源
             </router-link>

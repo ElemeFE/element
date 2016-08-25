@@ -12,7 +12,7 @@
         @click="handleMiscClick"
         :style="{ 'width': coreWidth + 'px' }">
         <i :class="[onIconClass]" v-if="onIconClass"></i>
-        <span v-if="onText">{{ onText }}</span>
+        <span v-if="!onIconClass && onText">{{ onText }}</span>
       </div>
     </transition>
     <transition name="label-fade">
@@ -22,7 +22,7 @@
         @click="handleMiscClick"
         :style="{ 'width': coreWidth + 'px' }">
         <i :class="[offIconClass]" v-if="offIconClass"></i>
-        <span v-if="offText">{{ offText }}</span>
+        <span v-if="!offIconClass && offText">{{ offText }}</span>
       </div>
     </transition>
   </div>
