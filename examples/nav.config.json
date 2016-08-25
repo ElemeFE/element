@@ -30,36 +30,36 @@
         {
           "path": "/message-box",
           "name": "弹框 (message-box)",
-          "title": "message-box 弹框"
+          "title": "Message Box 弹框"
         },
         {
           "path": "/alert",
           "name": "警告 (alert)",
-          "title": "alert 警告",
+          "title": "Alert 警告",
           "description": "用于页面中展示重要的提示信息"
         },
         {
           "path": "/notification",
           "name": "通知 (notification)",
-          "title": "notification 通知",
+          "title": "Notification 通知",
           "description": "悬浮出现在页面右上角, 显示全局的通知提醒消息"
         },
         {
           "path": "/message",
           "name": "消息提示 (message)",
-          "title": "message 消息提示",
+          "title": "Message 消息提示",
           "description": "对用户的操作进行反馈提示,包含成功、反馈或错误等消息提示"
         },
         {
           "path": "/loading",
           "name": "加载 (loading)",
-          "title": "loading 加载",
+          "title": "Loading 加载",
           "description": "加载数据时显示"
         },
         {
           "path": "/card",
           "name": "卡片 (card)",
-          "title": "card 卡片",
+          "title": "Card 卡片",
           "description": "将信息聚合在卡片容器中展示"
         }
       ]
@@ -110,19 +110,19 @@
         {
           "path": "/time-picker",
           "name": "时间选择器（time-picker）",
-          "title": "TimePicker 时间选择器",
+          "title": "Time Picker 时间选择器",
           "description": "用于选择或输入时间"
         },
         {
           "path": "/date-picker",
           "name": "日期选择器（date-picker）",
-          "title": "DatePicker",
+          "title": "Date Picker",
           "description": "用于选择或输入时间"
         },
         {
           "path": "/datetime-picker",
           "name": "日期时间选择器",
-          "title": "DatetimePicker",
+          "title": "Datetime Picker",
           "description": "用于选择或输入日期时间"
         },
         {

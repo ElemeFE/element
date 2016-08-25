@@ -1,3 +1,4 @@
+import Spinner from './spinner';
 exports.install = Vue => {
   let insertDom = (parent, directive, binding) => {
     if (!directive.domVisible) {
@@ -32,21 +33,13 @@ exports.install = Vue => {
       el.maskStyle = {
         position: 'absolute',
         zIndex: '10000',
-        backgroundColor: 'rgba(0, 0, 0, .7)',
+        backgroundColor: 'rgba(0, 0, 0, .65)',
         margin: '0'
       };
 
-      el.spinner = document.createElement('i');
-      el.spinner.className = 'el-icon-loading';
+      el.spinner = (new Spinner()).el;
       el.spinnerStyle = {
-        color: '#ddd',
-        fontSize: '32px',
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        marginTop: '-19px',
-        marginLeft: '-16px',
-        zIndex: '10001'
+        position: 'absolute'
       };
     },
 
