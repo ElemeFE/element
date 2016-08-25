@@ -28,7 +28,7 @@ export default {
   mixins: [Popper],
 
   props: {
-    lazy: {
+    openDelay: {
       type: Number,
       default: 0
     },
@@ -59,7 +59,7 @@ export default {
     handleShowPopper() {
       this.timeout = setTimeout(() => {
         this.showPopper = true;
-      }, this.lazy);
+      }, this.openDelay);
     },
 
     handleClosePopper() {
