@@ -312,7 +312,6 @@
     },
 
     created() {
-      this.tableData = this.data;
       this.gridId = 'grid_' + gridIdSeed + '_';
 
       if (GUTTER_WIDTH === undefined) {
@@ -370,6 +369,10 @@
         this.$calcHeight(value);
       },
 
+      data(val) {
+        this.tableData = val;
+      },
+
       tableData(newVal) {
         this.doOnDataChange(newVal);
         this.updateScrollInfo();
@@ -408,14 +411,16 @@
       this.updateScrollInfo();
       if (this.fixedColumnCount > 0) {
         this.$nextTick(() => {
-          this.$refs.fixed.style.height = this.$el.clientHeight + 'px';
+          const style = this.$refs.fixed.style;
+          if (!style) return;
+          style.height = this.$el.clientHeight + 'px';
         });
       }
     },
 
     data() {
       return {
-        tableData: [],
+        tableData: this.data,
         showHScrollBar: false,
         showVScrollBar: false,
         hoverRowIndex: null,
