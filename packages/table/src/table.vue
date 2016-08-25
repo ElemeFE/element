@@ -370,7 +370,11 @@
       },
 
       data(val) {
-        this.tableData = val;
+        if (val && this.selectionMode === 'multiple') {
+          this.tableData = val.map(item => objectAssign({ '$selected': false }, item));
+        } else {
+          this.tableData = val;
+        }
       },
 
       tableData(newVal) {
@@ -397,10 +401,6 @@
       document.getElementsByTagName('head')[0].appendChild(styleNode);
 
       this.styleNode = styleNode;
-
-      if (this.tableData && this.selectionMode === 'multiple') {
-        this.tableData = this.tableData.map(item => objectAssign({ '$selected': false }, item));
-      }
 
       this.doRender();
 
