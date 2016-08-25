@@ -44,7 +44,7 @@ export default {
                 on-click={ ($event) => this.handleClick($event, row) }
                 on-mouseenter={ _ => this.handleMouseEnter($index) }
                 class={{
-                  'current-row': row === this.$parent.$parent.selected,
+                  'current-row': row === this.$parent.selected,
                   'hover': this.$parent.$parent.hoverRowIndex === $index,
                   'positive-row': row.$positive,
                   'info-row': row.$info,
