@@ -1,3 +1,5 @@
+import Spinner from './spinner';
+require('./spinner.css');
 exports.install = Vue => {
   let insertDom = (parent, directive, binding) => {
     if (!directive.domVisible) {
@@ -36,18 +38,9 @@ exports.install = Vue => {
         margin: '0'
       };
 
-      el.spinner = document.createElement('img');
-      el.spinner.src = require('./loading-bubbles.svg');
+      el.spinner = (new Spinner()).el;
       el.spinnerStyle = {
-        color: '#ddd',
-        height: '60px',
-        width: '60px',
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        marginTop: '-30px',
-        marginLeft: '-30px',
-        zIndex: '10001'
+        position: 'absolute'
       };
     },
 
