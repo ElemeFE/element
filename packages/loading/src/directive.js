@@ -1,5 +1,4 @@
 import Spinner from './spinner';
-require('./spinner.css');
 exports.install = Vue => {
   let insertDom = (parent, directive, binding) => {
     if (!directive.domVisible) {
