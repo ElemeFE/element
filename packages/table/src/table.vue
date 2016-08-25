@@ -251,8 +251,9 @@
           gridWrapper.style.height = bodyHeight + 'px';
 
           this.$el.style.height = height + 'px';
-          this.$refs.fixed.style.height = height + 'px';
-
+          if (this.$refs.fixed) {
+            this.$refs.fixed.style.height = height + 'px';
+          }
           const fixedBodyWrapper = this.$el.querySelector('.el-table__fixed-body-wrapper');
           if (fixedBodyWrapper) {
             fixedBodyWrapper.style.height = (this.showHScrollBar ? gridWrapper.offsetHeight - this.currentGutterWidth : gridWrapper.offsetHeight) + 'px';

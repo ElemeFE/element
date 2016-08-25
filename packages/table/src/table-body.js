@@ -131,7 +131,6 @@ export default {
 
       if (grid.selectionMode === 'single') {
         grid.selected = row;
-        grid.$emit('selectionchange', row);
       }
 
       grid.$emit('rowclick', row, event);
