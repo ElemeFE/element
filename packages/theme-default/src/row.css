@@ -6,5 +6,27 @@
     position: relative;
     box-sizing: border-box;
     @utils-clearfix;
+
+    @m flex {
+      display: flex;
+      &:before,
+      &:after {
+        display: none;
+      }
+
+      @when justify-center {
+        justify-content: center;
+      }
+      @when justify-end {
+        justify-content: flex-end;
+      }
+      @when justify-space-between {
+        justify-content: space-between;
+      }
+      @when justify-space-around {
+        justify-content: space-around;
+      }
+    }
+
   }
 }

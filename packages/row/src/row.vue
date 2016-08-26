@@ -1,5 +1,15 @@
 <template>
-  <div class="el-row" :style="style">
+  <div
+    class="el-row"
+    :style="style"
+    :class="[
+      justify !== 'start' ? 'is-justify-' + justify : '',
+      align !== 'top' ? 'is-align-' + align : '',
+      {
+        'el-row--flex': type === 'flex'
+      }
+    ]"
+  >
     <slot></slot>
   </div>
 </template>
@@ -8,7 +18,16 @@
     name: 'ElRow',
 
     props: {
-      gutter: Number
+      gutter: Number,
+      type: String,
+      justify: {
+        type: String,
+        default: 'start'
+      },
+      align: {
+        type: String,
+        default: 'top'
+      }
     },
 
     computed: {
