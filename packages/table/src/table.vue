@@ -81,7 +81,10 @@
 
       gutterWidth: {
         default: 0
-      }
+      },
+
+      customCriteria: Array,
+      customBackgroundColors: Array
     },
 
     components: {

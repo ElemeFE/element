@@ -253,22 +253,6 @@
       }
     }
 
-    & tr.positive-row {
-      background: #E2F0E4;
-    }
-
-    & tr.info-row {
-      background: #C9E5F5;
-    }
-
-    & tr.warning-row {
-      background: #FEEED9;
-    }
-
-    & tr.negative-row {
-      background: #F7D2D3;
-    }
-
     & tr.current-row {
       background: #EFF7FF;
     }
