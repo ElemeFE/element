@@ -676,4 +676,5 @@ Table 组件中，只要在列中设置`sortable`属性即可实现以该列为�
 | type | 对应列的类型。如果设置了 `selection` 则显示多选按钮，如果设置了 `index` 则显示该行的索引（从 1 开始计算） | string | 'selection', 'index' | 0 |
 | formatter | 用来格式化内容，在 formatter 执行的时候，会传入 row 和 column | function | |  |
 | show-tooltip-when-overflow | 当过长被隐藏时显示 tooltip | Boolean | | false |
-| inline-template | 指定该属性后可以自定义 column 模板，参考多选的时间列，通过 row 获取行信息。此时不需要配置 property 属性  | | |
+| inline-template | 指定该属性后可以自定义 column 模板，参考多选的时间列，通过 row 获取行信息，通过 _self 获取当前上下文。此时不需要配置 property 属性  | | |
+

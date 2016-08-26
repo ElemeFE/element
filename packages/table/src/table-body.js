@@ -44,7 +44,7 @@ export default {
                 on-click={ ($event) => this.handleClick($event, row) }
                 on-mouseenter={ _ => this.handleMouseEnter($index) }
                 class={{
-                  'current-row': row === this.$parent.$parent.selected,
+                  'current-row': row === this.$parent.selected,
                   'hover': this.$parent.$parent.hoverRowIndex === $index,
                   'positive-row': row.$positive,
                   'info-row': row.$info,
@@ -59,7 +59,7 @@ export default {
                       on-mouseleave={ this.handleCellMouseLeave }>
                       {
                         column.template
-                          ? column.template.call(this._renderProxy, h, { row, column, $index })
+                          ? column.template.call(this._renderProxy, h, { row, column, $index, _self: this.$parent.$parent })
                           : <div class="cell">{ this.$getPropertyText(row, column.property, column.id) }</div>
                       }
                     </td>
@@ -131,7 +131,6 @@ export default {
 
       if (grid.selectionMode === 'single') {
         grid.selected = row;
-        grid.$emit('selectionchange', row);
       }
 
       grid.$emit('rowclick', row, event);

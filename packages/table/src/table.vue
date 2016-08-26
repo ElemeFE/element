@@ -251,8 +251,9 @@
           gridWrapper.style.height = bodyHeight + 'px';
 
           this.$el.style.height = height + 'px';
-          this.$refs.fixed.style.height = height + 'px';
-
+          if (this.$refs.fixed) {
+            this.$refs.fixed.style.height = height + 'px';
+          }
           const fixedBodyWrapper = this.$el.querySelector('.el-table__fixed-body-wrapper');
           if (fixedBodyWrapper) {
             fixedBodyWrapper.style.height = (this.showHScrollBar ? gridWrapper.offsetHeight - this.currentGutterWidth : gridWrapper.offsetHeight) + 'px';
@@ -312,7 +313,6 @@
     },
 
     created() {
-      this.tableData = this.data;
       this.gridId = 'grid_' + gridIdSeed + '_';
 
       if (GUTTER_WIDTH === undefined) {
@@ -370,6 +370,14 @@
         this.$calcHeight(value);
       },
 
+      data(val) {
+        if (val && this.selectionMode === 'multiple') {
+          this.tableData = val.map(item => objectAssign({ '$selected': false }, item));
+        } else {
+          this.tableData = val;
+        }
+      },
+
       tableData(newVal) {
         this.doOnDataChange(newVal);
         this.updateScrollInfo();
@@ -395,10 +403,6 @@
 
       this.styleNode = styleNode;
 
-      if (this.tableData && this.selectionMode === 'multiple') {
-        this.tableData = this.tableData.map(item => objectAssign({ '$selected': false }, item));
-      }
-
       this.doRender();
 
       this.$ready = true;
@@ -408,14 +412,16 @@
       this.updateScrollInfo();
       if (this.fixedColumnCount > 0) {
         this.$nextTick(() => {
-          this.$refs.fixed.style.height = this.$el.clientHeight + 'px';
+          const style = this.$refs.fixed.style;
+          if (!style) return;
+          style.height = this.$el.clientHeight + 'px';
         });
       }
     },
 
     data() {
       return {
-        tableData: [],
+        tableData: this.data,
         showHScrollBar: false,
         showVScrollBar: false,
         hoverRowIndex: null,
