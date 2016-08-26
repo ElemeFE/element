@@ -161,7 +161,7 @@
 
       onSliderClick(event) {
         var currentX = event.clientX;
-        var sliderOffsetLeft = getStyle(this.$el.parentNode, 'position') === 'static' ? this.$refs.slider.offsetLeft : this.$el.parentNode.offsetLeft + this.$refs.slider.offsetLeft;
+        var sliderOffsetLeft = this.$refs.slider.getBoundingClientRect().left;
         var newPos = (currentX - sliderOffsetLeft) / this.$sliderWidth * 100;
         this.setPosition(newPos);
       },

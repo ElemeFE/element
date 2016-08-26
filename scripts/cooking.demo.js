@@ -2,7 +2,7 @@ var cooking = require('cooking');
 var path = require('path');
 var md = require('markdown-it')();
 var Components = require('../components.json');
-var striptags = require('strip-tags');
+var striptags = require('../src/utils/strip-tags');
 
 function convert(str){
   str = str.replace(/(&#x)(\w{4});/gi,function($0){

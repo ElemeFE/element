@@ -68,23 +68,7 @@
 
 Dialog 弹出一个对话框，适合需要定制性更大的场景，如果只是弹出框，可以尝试 MessageBox 组件。
 
-要使用 Dialog 组件，首先你需要设置`v-model`属性，它接收`Boolean`，当为`true`时显示 Dialog。
-
-Dialog 分为两个部分：`body`和`footer`，`footer`需要具名为`footer`的`slot`。
-
-`title`属性用于定义标题，它是可选的，默认值为空，下面是一个最简单的用例：
-
-<el-button :plain="true" @click.native="dialogVisible = true">点击打开 Dialog</el-button>
-
-<div class="demo-box demo-dialog">
-  <el-dialog title="提示" v-model="dialogVisible">
-    <span>这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息</span>
-    <span slot="footer" class="dialog-footer">
-      <el-button @click.native="dialogVisible = false">取 消</el-button>
-      <el-button type="primary" @click.native="dialogVisible = false">确 定</el-button>
-    </span>
-  </el-dialog>
-</div>
+:::demo 需要设置`v-model`属性，它接收`Boolean`，当为`true`时显示 Dialog。Dialog 分为两个部分：`body`和`footer`，`footer`需要具名为`footer`的`slot`。`title`属性用于定义标题，它是可选的，默认值为空。
 
 ```html
 <el-button :plain="true" @click.native="dialogVisible = true">点击打开 Dialog</el-button>
@@ -97,24 +81,14 @@ Dialog 分为两个部分：`body`和`footer`，`footer`需要具名为`footer`�
   </span>
 </el-dialog>
 ```
+:::
 
 ## 设置尺寸
 
-Dialog 组件提供四种尺寸：`tiny`, `small`, `large`, `full`。通过`size`属性来设置，下面是一个 tiny 的例子。
-
-<el-button :plain="true" @click.native="dialogTinyVisible = true">点击打开小尺寸 Dialog</el-button>
-
-<div class="demo-box demo-dialog">
-  <el-dialog title="提示" v-model="dialogTinyVisible" size="tiny">
-    <span>这是一段内容</span>
-    <span slot="footer" class="dialog-footer">
-      <el-button @click.native="dialogTinyVisible = false">取 消</el-button>
-      <el-button type="primary" @click.native="dialogTinyVisible = false">确 定</el-button>
-    </span>
-  </el-dialog>
-</div>
+:::demo 提供四种尺寸：`tiny`, `small`, `large`, `full`。通过`size`属性来设置。
 
 ```html
+<!-- tiny -->
 <el-button :plain="true" @click.native="dialogTinyVisible = true">点击打开小尺寸 Dialog</el-button>
 
 <el-dialog title="提示" v-model="dialogTinyVisible" size="tiny">
@@ -124,66 +98,24 @@ Dialog 组件提供四种尺寸：`tiny`, `small`, `large`, `full`。通过`size
     <el-button type="primary" @click.native="dialogTinyVisible = false">确 定</el-button>
   </span>
 </el-dialog>
-```
 
-下面是一个全屏幕 Dialog 的样例：
-
-<el-button @click.native="dialogFullVisible = true">点击打开全屏幕 Dialog</el-button>
-
-<div class="demo-box demo-dialog">
-  <el-dialog title="提示" v-model="dialogFullVisible" size="full">
-    <img src="http://placekitten.com/1920/1280" class="full-image">
-  </el-dialog>
-</div>
-
-```html
+<!-- 全屏幕Dialog -->
 <el-button @click.native="dialogFullVisible = true">点击打开全屏幕 Dialog</el-button>
 
 <el-dialog title="提示" v-model="dialogFullVisible" size="full">
   <img src="http://placekitten.com/1920/1280">
 </el-dialog>
 ```
-
-## 设置能否通过点击modal或按下esc关闭Dialog
-
-在默认条件下，你可以通过 ESC 和点击背后的遮罩层关闭 Dialog，但是可以通过设置`close-on-click-modal`属性和`close-on-press-escape`属性来关闭这一功能，它们接收`Boolean`，默认均为`true`。
-
-<el-button @click.native="dialogStubbornVisible = true">打开 Dialog，点击 modal 或按下 esc 关闭无法将其关闭</el-button>
-
-<div class="demo-box demo-dialog">
-  <el-dialog title="提示"
-    v-model="dialogStubbornVisible"
-    :close-on-click-modal="false"
-    :close-on-press-escape="false">
-    <span>这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息</span>
-  </el-dialog>
-</div>
-
-```html
-<el-button @click.native="dialogStubbornVisible = true">打开 Dialog，点击 modal 或按下 esc 关闭无法将其关闭</el-button>
-
-<el-dialog title="提示"
-  v-model="dialogStubbornVisible"
-  :close-on-click-modal="false"
-  :close-on-press-escape="false">
-  <span>这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息</span>
-</el-dialog>
-```
+:::
 
 ## 使用 Dialog 方法打开
 
-使用`v-model`确实是一个不错的做法，为了一些特殊需求，我们暴露了实例`open`和`close`方法，你可以不用显式改变`v-modal`的值了：
-
-<el-button @click.native="openDialog()">使用Dialog方法</el-button>
-
-<div class="demo-box demo-dialog">
-  <el-dialog title="提示" v-model="dialogBindVisible" ref="dialogBind">
-    <span>这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息</span>
-  </el-dialog>
-</div>
+:::demo 使用实例`open`和`close`方法，不用显式改变`v-modal`的值。
 
 ```html
 <template>
+  <el-button @click.native="openDialog()">使用Dialog方法</el-button>
+
   <el-dialog title="提示" v-model="dialogBindVisible" ref="dialogBind">
     <span>这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息</span>
   </el-dialog>
@@ -203,46 +135,15 @@ Dialog 组件提供四种尺寸：`tiny`, `small`, `large`, `full`。通过`size
   };
 </script>
 ```
+:::
 
 ## 自定义内容
 
-Dialog 组件的正文标题可以是任意的，甚至可以是表格或表单，下面是应用了 Element Table 和 Form 组件的两个样例，除此以外，它们并没有什么特殊之处：
+Dialog 组件的正文标题可以是任意的，甚至可以是表格或表单，下面是应用了 Element Table 和 Form 组件的两个样例，除此以外，它们并没有什么特殊之处。
 
-<el-button @click.native="dialogTableVisible = true">打开嵌套表格的 Dialog</el-button>
-
-<div class="demo-box demo-dialog">
-  <el-dialog title="收货地址" v-model="dialogTableVisible">
-    <el-table :data="gridData">
-      <el-table-column property="date" label="日期" width="150"></el-table-column>
-      <el-table-column property="name" label="姓名" width="200"></el-table-column>
-      <el-table-column property="address" label="地址"></el-table-column>
-    </el-table>
-  </el-dialog>
-</div>
-
-<el-button @click.native="dialogFormVisible = true">打开嵌套表单的 Dialog</el-button>
-
-<div class="demo-box demo-dialog">
-  <el-dialog title="收货地址" v-model="dialogFormVisible">
-    <el-form :models="form">
-      <el-form-item label="活动名称" :label-width="formLabelWidth">
-        <el-input :model.sync="form.name" auto-complete="off"></el-input>
-      </el-form-item>
-      <el-form-item label="活动区域" :label-width="formLabelWidth">
-        <el-select :value.sync="form.region" :width="300" placeholder="请选择活动区域">
-          <el-option label="区域一" value="shanghai"></el-option>
-          <el-option label="区域二" value="beijing"></el-option>
-        </el-select>
-      </el-form-item>
-    </el-form>
-    <span slot="footer" class="dialog-footer">
-      <el-button @click.native="dialogFormVisible = false">取 消</el-button>
-      <el-button type="primary" @click.native="dialogFormVisible = false">确 定</el-button>
-    </span>
-  </el-dialog>
-</div>
-
+:::demo
 ```html
+<!-- Table -->
 <el-button @click.native="dialogTableVisible = true">打开嵌套表格的 Dialog</el-button>
 
 <el-dialog title="收货地址" v-model="dialogTableVisible">
@@ -253,6 +154,7 @@ Dialog 组件的正文标题可以是任意的，甚至可以是表格或表单�
   </el-table>
 </el-dialog>
 
+<!-- Form -->
 <el-button @click.native="dialogFormVisible = true">打开嵌套表单的 Dialog</el-button>
 
 <el-dialog title="收货地址" v-model="dialogFormVisible">
@@ -273,6 +175,7 @@ Dialog 组件的正文标题可以是任意的，甚至可以是表格或表单�
   </span>
 </el-dialog>
 ```
+:::
 
 ## Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |

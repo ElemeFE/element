@@ -44,7 +44,8 @@
       font-size: 14px;
       line-height: 1.5;
       color: #5e6d82;
-      
+      word-break: break-word;
+
       p {
         margin: 0;
       }
