@@ -43,13 +43,10 @@ export default {
               <tr
                 on-click={ ($event) => this.handleClick($event, row) }
                 on-mouseenter={ _ => this.handleMouseEnter($index) }
+                style={ this.getCustomStyle(row) }
                 class={{
                   'current-row': row === this.$parent.selected,
-                  'hover': this.$parent.$parent.hoverRowIndex === $index,
-                  'positive-row': row.$positive,
-                  'info-row': row.$info,
-                  'warning-row': row.$warning,
-                  'negative-row': row.$negative
+                  'hover': this.$parent.$parent.hoverRowIndex === $index
                 }}>
                 {
                   this._l(this.columns, (column) =>
@@ -75,6 +72,8 @@ export default {
 
   data() {
     return {
+      criteria: this.$parent.customCriteria,
+      colors: this.$parent.customBackgroundColors,
       tooltipDisabled: true
     };
   },
@@ -84,6 +83,25 @@ export default {
   },
 
   methods: {
+    checkProperty(row) {
+      if (this.criteria && this.criteria.length > 0) {
+        for (let i = 0, len = this.criteria.length; i < len; i++) {
+          if (row[this.criteria[i]] === true) {
+            return i;
+          }
+        }
+      }
+      return -1;
+    },
+
+    getCustomStyle(row) {
+      if (!this.criteria || !this.colors || this.criteria.length !== this.colors.length) {
+        return {};
+      }
+      let criterionIndex = this.checkProperty(row);
+      return criterionIndex > -1 ? { 'background-color': this.colors[criterionIndex] } : {};
+    },
+
     handleCellMouseEnter(event, row) {
       let grid = this.$parent;
       const cell = getCell(event);

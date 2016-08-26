@@ -248,9 +248,9 @@
 
 ## 带状态表格
 
-通过在`data`对象数组中加入字段，可以给行加上状态，Element 提供了四种状态：`$positive`、`$info`、`$warning`以及`$negative`，在对象新增字段中把状态设为`true`表示启用该状态。
+可以为行添加自定义背景色，表明该行处于某种状态。若某一行拥有`custom-criteria`数组中的某个字段且值为`true`，则为该行添加`custom-background-colors`数组中对应的背景色。
 
-<el-table :data="tableData2" style="width: 520px">
+<el-table :data="tableData2" style="width: 520px" :custom-criteria="['$info', '$positive']" :custom-background-colors="['#C9E5F5', '#E2F0E4']">
   <el-table-column property="date" label="日期" width="120"></el-table-column>
   <el-table-column property="name" label="姓名" width="120"></el-table-column>
   <el-table-column property="address" label="地址"></el-table-column>
@@ -258,7 +258,7 @@
 
 ```html
 <template>
-  <el-table :data="tableData2">
+  <el-table :data="tableData2" :custom-criteria="['$info', '$positive']" :custom-background-colors="['#C9E5F5', '#E2F0E4']">
     <el-table-column property="date" label="日期" width="120"></el-table-column>
     <el-table-column property="name" label="姓名" width="120"></el-table-column>
     <el-table-column property="address" label="地址"></el-table-column>
