@@ -210,3 +210,5 @@ Tooltip 组件提供了两个不同的主题：`dark`和`light`，可以通过�
 |  transition     |  定义渐变动画      | String             |  | `fade-in-linear` |
 |  visible-arrow   |  是否显示 Tooltip 箭头，更多参数可见[Vue-popper](https://github.com/element-component/vue-popper) | Boolean |  | true |
 |  options        | [popper.js](https://popper.js.org/documentation.html) 的参数 | Object            | 参考 [popper.js](https://popper.js.org/documentation.html) 文档 | `{ boundariesElement: 'body', gpuAcceleration: false }` |
+| openDelay | 延迟出现，单位毫秒 | Number | | 0 |
+

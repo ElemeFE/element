@@ -1,8 +1,8 @@
 <template>
   <div
     class="el-tooltip"
-    @mouseenter="showPopper = true"
-    @mouseleave="showPopper = false">
+    @mouseenter="handleShowPopper"
+    @mouseleave="handleClosePopper">
     <div class="el-tooltip__rel" ref="reference">
       <slot></slot>
     </div>
@@ -28,6 +28,10 @@ export default {
   mixins: [Popper],
 
   props: {
+    openDelay: {
+      type: Number,
+      default: 0
+    },
     disabled: Boolean,
     effect: {
       type: String,
@@ -48,6 +52,19 @@ export default {
           gpuAcceleration: false
         };
       }
+    }
+  },
+
+  methods: {
+    handleShowPopper() {
+      this.timeout = setTimeout(() => {
+        this.showPopper = true;
+      }, this.openDelay);
+    },
+
+    handleClosePopper() {
+      clearTimeout(this.timeout);
+      this.showPopper = false;
     }
   }
 };

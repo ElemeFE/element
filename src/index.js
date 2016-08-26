@@ -7,6 +7,7 @@ import DropdownItem from '../packages/dropdown-item/index.js';
 import Menu from '../packages/menu/index.js';
 import Submenu from '../packages/submenu/index.js';
 import MenuItem from '../packages/menu-item/index.js';
+import MenuItemGroup from '../packages/menu-item-group/index.js';
 import Input from '../packages/input/index.js';
 import InputNumber from '../packages/input-number/index.js';
 import Radio from '../packages/radio/index.js';
@@ -65,6 +66,7 @@ const install = function(Vue) {
   Vue.component(Menu.name, Menu);
   Vue.component(Submenu.name, Submenu);
   Vue.component(MenuItem.name, MenuItem);
+  Vue.component(MenuItemGroup.name, MenuItemGroup);
   Vue.component(Input.name, Input);
   Vue.component(InputNumber.name, InputNumber);
   Vue.component(Radio.name, Radio);
@@ -134,6 +136,7 @@ module.exports = {
   Menu,
   Submenu,
   MenuItem,
+  MenuItemGroup,
   Input,
   InputNumber,
   Radio,
