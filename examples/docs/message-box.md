@@ -61,8 +61,10 @@
     }
   };
 </script>
+## Message box 信息提示
+模拟系统的消息提示框而实现的一套摸态对话框组件，用于消息提示、成功提示、错误提示、询问信息
 
-## 基本用法
+### 基本用法
 
 MessageBox 组件提供了四种不同的样式来替代浏览器提供的`alert`等功能：`$msgbox`，`$alert`，`$confirm`以及`$prompt`。
 
@@ -87,7 +89,7 @@ MessageBox 组件提供了四种不同的样式来替代浏览器提供的`alert
 ```
 :::
 
-## 配置项
+### 配置项
 
 MessageBox 组件也拥有极高的定制性，我们可以传入`options`作为第三个参数，它是一个字面量对象。
 
@@ -209,11 +211,11 @@ Msgbox 框是最基本的弹框，与 Alert 的区别在于 Alert 无法通过 E
 ```
 :::
 
-## 全局方法
+### 全局方法
 
 Element 为 Vue.prototype 添加了如下全局方法：$msgbox, $alert, $confirm 和 $prompt。因此在 vue instance 中可以采用本页面中的方式调用 `MessageBox`。
 
-## 单独引用
+### 单独引用
 
 单独引入 `MessageBox`：
 
@@ -223,7 +225,7 @@ import { MessageBox } from 'element-ui';
 
 对应于上述四个全局方法的调用方法依次为：MessageBox, MessageBox.alert, MessageBox.confirm 和 MessageBox.prompt。
 
-## Options
+### Options
 
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
