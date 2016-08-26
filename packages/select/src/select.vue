@@ -266,6 +266,7 @@
             this.selected = {};
           }
           this.remoteMethod(val);
+          this.voidRemoteQuery = val === '';
         } else if (typeof this.filterMethod === 'function') {
           this.filterMethod(val);
         } else {
@@ -294,9 +295,6 @@
             }
           }
         } else {
-          if (this.remote) {
-            this.voidRemoteQuery = true;
-          }
           if (this.$el.querySelector('.el-input__icon')) {
             this.$el.querySelector('.el-input__icon').classList.add('is-reverse');
           }
@@ -518,6 +516,9 @@
       if (this.multiple) {
         this.selectedInit = true;
         this.selected = [];
+      }
+      if (this.remote) {
+        this.voidRemoteQuery = true;
       }
 
       this.debouncedOnInputChange = debounce(this.debounce, () => {

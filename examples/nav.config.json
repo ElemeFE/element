@@ -116,13 +116,13 @@
         {
           "path": "/date-picker",
           "name": "日期选择器（date-picker）",
-          "title": "Date Picker",
+          "title": "Date Picker 日期选择器",
           "description": "用于选择或输入时间"
         },
         {
           "path": "/datetime-picker",
           "name": "日期时间选择器",
-          "title": "Datetime Picker",
+          "title": "Datetime Picker 日期时间选择器",
           "description": "用于选择或输入日期时间"
         },
         {
