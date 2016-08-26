@@ -140,7 +140,6 @@
     watch: {
     },
     mounted() {
-      var scrollTop = 0;
       function scroll(fn) {
         var beforeScrollTop = document.body.scrollTop;
 
@@ -152,7 +151,6 @@
 
           fn(delta > 0 ? 'down' : 'up');
           beforeScrollTop = afterScrollTop;
-          scrollTop = afterScrollTop;
         }, false);
       }
       scroll((direction) => {

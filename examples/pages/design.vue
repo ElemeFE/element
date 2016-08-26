@@ -1,6 +1,6 @@
 <style scoped>
   .cards {
-    margin-bottom: 70px;
+    margin: 30px 0 70px;
   }
   .card {
     background: #fbfcfd;

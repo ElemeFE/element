@@ -1,6 +1,6 @@
 <style scoped>
   .page-resource {
-    padding-top: 40px;
+    padding-top: 55px;
   }
   .cards {
     margin: 35px auto 110px;
@@ -19,6 +19,14 @@
       float: left;
       list-style: none;
     }
+  }
+  h2 {
+    font-size: 28px;
+    margin: 0;
+  }
+  p {
+    font-size: 14px;
+    color: #5e6d82;
   }
   .card {
     height: 394px;
@@ -67,7 +75,7 @@
   }
 </style>
 <template>
-  <div class="page-resource container">
+  <div class="page-container page-resource">
     <h2>资源</h2>
     <p>这里提供 Element 相关设计资源和设计工具的下载，更多设计资源正在整理和完善中。</p>
     <div class="cards">
