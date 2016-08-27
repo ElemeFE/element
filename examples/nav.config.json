@@ -138,11 +138,6 @@
           "description": "一个多功能的并带有字段验证的表单组件"
         },
         {
-          "path": "/autocomplete",
-          "name": "自动完成 (autocomplete)",
-          "title": "Autocomplete 自动完成"
-        },
-        {
           "path": "/rate",
           "name": "评分 (rate)",
           "title": "Rate 评分组件"
