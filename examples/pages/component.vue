@@ -14,6 +14,7 @@
       background-color: #fff;
       color: #5e6d82;
       font-size: 14px;
+      margin-bottom: 45px;
       
       strong {
         font-weight: normal;

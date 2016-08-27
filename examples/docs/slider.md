@@ -6,69 +6,147 @@
         value2: 50,
         value3: null,
         value4: null,
-        value5: null,
-        value6: null,
-        value7: null
+        value5: null
       };
     }
   }
 </script>
 
-## 基本用法
+<style>
+  .demo-box.demo-slider .source {
+    padding: 0;
+  }
+  
+  .demo-box.demo-slider .block {
+    padding: 30px 24px;
+    overflow: hidden;
+    border-bottom: solid 1px #EFF2F6;
+    &:last-child {
+      border-bottom: none;      
+    }
+  }
+  
+  .demo-box.demo-slider .demonstration {
+    font-size: 14px;
+    color: #8492a6;
+    line-height: 44px;
+  }
+  
+  .demo-box.demo-slider .demonstration + .el-slider {
+    float: right;
+    width: 70%;
+    margin-right: 20px;
+  }
+</style>
 
-<el-slider v-model="value1"></el-slider>
+## Slider 滑块
 
+通过拖动滑块在一个固定区间内进行选择
+
+### 基础用法
+
+在拖动滑块时，显示当前值
+
+:::demo 通过设置绑定值自定义滑块的初始值
 ```html
-<el-slider v-model="value1"></el-slider>
+<template>
+  <div class="block">
+    <span class="demonstration">默认</span>
+    <el-slider v-model="value1"></el-slider>  
+  </div>
+  <div class="block">
+    <span class="demonstration">自定义初始值</span>
+    <el-slider v-model="value2"></el-slider>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        value1: 0,
+        value2: 50
+      }
+    }
+  }
+</script>
 ```
+:::
 
-## 定义初始值
+### 离散值
 
-<el-slider v-model="value2"></el-slider>
+选项可以是离散的
 
+:::demo 改变`step`的值可以改变步长，通过设置`show-step`属性可以显示间断点
 ```html
-<el-slider v-model="value2"></el-slider>
+<template>
+  <div class="block">
+    <span class="demonstration">不显示间断点</span>
+    <el-slider
+      v-model="value3"
+      :step="10">
+    </el-slider>  
+  </div>
+  <div class="block">
+    <span class="demonstration">显示间断点</span>
+    <el-slider
+      v-model="value4"
+      :step="10"
+      show-stops>
+    </el-slider>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        value3: 0,
+        value4: 0
+      }
+    }
+  }
+</script>
 ```
+:::
 
-## 定义区间
+### 带有输入框
 
-<el-slider :min="20" :max="80" v-model="value3"></el-slider>
+通过输入框设置精确数值
 
+:::demo 设置`show-input`属性会在右侧显示一个输入框
 ```html
-<el-slider :min="20" :max="80" v-model="value3"></el-slider>
+<template>
+  <div class="block">
+    <el-slider
+      v-model="value5"
+      show-input>
+    </el-slider>  
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        value5: 0
+      }
+    }
+  }
+</script>
 ```
-
-## 定义步长
-
-<el-slider :step="10" v-model="value4"></el-slider>
-
-```html
-<el-slider :step="10" v-model="value4"></el-slider>
-```
-
-## 显示间断点
-
-<el-slider :step="10" show-stops v-model="value5"></el-slider>
-
-```html
-<el-slider :step="10" show-stops v-model="value5"></el-slider>
-```
-
-## 带有输入框
-
-<el-slider show-input v-model="value6"></el-slider>
-
-```html
-<el-slider show-input v-model="value6"></el-slider>
-```
+:::
 
 ## API
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| value | 绑定值 | number | | 最小值 min |
-| min | 最小值 | number | | 0 |
-| max | 最大值 | number | | 100 |
-| step | 步长 | number | | 1 |
-| showInput | 是否显示输入框 | boolean | | false |
-| showStops | 是否显示间断点 | boolean | | false |
-| change | 值改变时的回调函数 | function | | |
+| min | 最小值 | number | - | 0 |
+| max | 最大值 | number | - | 100 |
+| step | 步长 | number | - | 1 |
+| showInput | 是否显示输入框 | boolean | - | false |
+| showStops | 是否显示间断点 | boolean | - | false |
+
+## Events
+| 事件名称      | 说明    | 回调参数      |
+|---------- |-------- |---------- |
+| change | 值改变时触发 | 改变后的值 |
