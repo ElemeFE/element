@@ -13,34 +13,30 @@
     ></el-input>
     <transition name="md-fade-bottom">
       <ul
-        v-show="suggestionVisible && !loading && suggestions.length > 0"
+        v-if="suggestionVisible"
         class="el-autocomplete__suggestions"
+        :class="{ 'is-loading': loading }"
         ref="suggestions"
       >
-        <li
-          v-if="!customItem"
-          :class="{'highlighted': highlightedIndex === index}"
-          @click="select(index)"
-          v-for="(item, index) in suggestions">
-          {{item.display}}
-        </li>
-        <component
-          v-else
-          :is="customItem"
-          @click.native="select(index)"
-          v-for="(item, index) in suggestions"
-          :item="item"
-          :index="index">
-        </component>
+        <li v-if="loading"><i class="el-icon-loading"></i></li>
+        <template v-for="(item, index) in suggestions" v-else>
+          <li
+            v-if="!customItem"
+            :class="{'highlighted': highlightedIndex === index}"
+            @click="select(index)"
+          >
+            {{item.value}}
+          </li>
+          <component
+            v-else
+            :class="{'highlighted': highlightedIndex === index}"
+            @click="select(index)"
+            :is="customItem"
+            :item="item"
+            :index="index">
+          </component>
+        </template>
       </ul>
-    </transition>
-    <transition name="md-fade-bottom">
-      <div
-        v-show="suggestionVisible && loading"
-        class="el-autocomplete__suggestions is-loading"
-      >
-        <i class="el-icon-loading"></i>
-      </div>
     </transition>
   </div>
 </template>
@@ -62,7 +58,7 @@
       name: String,
       value: String,
       fetchSuggestions: Function,
-      triggerOnfocus: {
+      triggerOnFocus: {
         type: Boolean,
         default: true
       },
@@ -72,7 +68,6 @@
       return {
         suggestions: [],
         suggestionVisible: false,
-        inputFocusing: false,
         loading: false,
         highlightedIndex: -1
       };
@@ -83,60 +78,59 @@
         this.showSuggestions(value);
       },
       handleFocus() {
-        if (this.triggerOnfocus) {
+        if (this.triggerOnFocus) {
           this.showSuggestions(this.value);
         }
       },
       handleBlur() {
-        this.suggestionVisible = false;
+        this.hideSuggestions();
       },
       select(index) {
         if (this.suggestions && this.suggestions[index]) {
           this.$emit('input', this.suggestions[index].value);
           this.$nextTick(() => {
-            this.suggestionVisible = false;
+            this.hideSuggestions();
           });
         }
+      },
+      hideSuggestions() {
+        this.suggestionVisible = false;
+        this.suggestions = [];
+        this.loading = false;
       },
       showSuggestions(value) {
         this.suggestionVisible = true;
         this.loading = true;
         this.fetchSuggestions(value, (suggestions) => {
           this.loading = false;
-          this.suggestions = suggestions;
+          if (Array.isArray(suggestions) && suggestions.length > 0) {
+            this.suggestions = suggestions;
+          } else {
+            this.hideSuggestions();
+          }
         });
       },
-      getSuggestionElement(index) {
-        if (!this.suggestions || !this.suggestions[index]) {
-          return null;
-        } else {
-          return this.$refs.suggestions.children[index];
-        }
-      },
       highlight(index) {
+        if (!this.suggestionVisible || this.loading) { return; }
         if (index < 0) {
           index = 0;
         } else if (index >= this.suggestions.length) {
           index = this.suggestions.length - 1;
         }
 
-        var elSelect = this.getSuggestionElement(index);
         var elSuggestions = this.$refs.suggestions;
+        var elSelect = elSuggestions.children[index];
         var scrollTop = elSuggestions.scrollTop;
         var offsetTop = elSelect.offsetTop;
 
-        if (offsetTop > (scrollTop + elSuggestions.clientHeight - 12)) {
+        if (offsetTop + elSelect.scrollHeight > (scrollTop + elSuggestions.clientHeight)) {
           elSuggestions.scrollTop += elSelect.scrollHeight;
         }
-        if (offsetTop < scrollTop - 12) {
+        if (offsetTop < scrollTop) {
           elSuggestions.scrollTop -= elSelect.scrollHeight;
         }
 
         this.highlightedIndex = index;
-
-        if (this.showOnUpDown) {
-          this.suggestionVisible = true;
-        }
       }
     }
   };
