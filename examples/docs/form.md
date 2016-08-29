@@ -56,25 +56,25 @@
           type: '',
           remark: ''
         },
+        formAlignRight: {
+          name: '',
+          region: '',
+          type: ''
+        },
         formAlignLeft: {
           name: '',
           region: '',
-          type: '',
-          remark: ''
+          type: ''
         },
         ruleForm: {
-          sex: '',
-          user1: '',
-          user2: '',
-          age: '',
-          region: [],
-          desc: '',
-          mail: ''
-        },
-        formNoLabel: {
-          username: '',
-          pass: '',
-          rememberPss: false
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
         },
         ruleForm2: {
           pass: '',
@@ -85,28 +85,26 @@
         options: [
         ],
         rules: {
-          user1: [
-            { required: true, min: 5, message: '用户名至少为 5 个字符', trigger: 'blur' }
-          ],
-          user2: [
-            { required: true, min: 3, message: '用户名至少为 3 个字符', trigger: 'blur' }
-          ],
-          age: [
-            { required: true, message: '请输入年龄', trigger: 'blur' },
-            { type: 'number', min: 18, message: '输入必须为大于18的整数', trigger: 'blur' }
-          ],
-          mail: [
-            { required: true, message: '请输入邮箱地址', trigger: 'blur' },
-            { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur,change' }
-          ],
-          sex: [
-            { required: true, message: '请选择性别' }
+          name: [
+            { required: true, message: '请输入活动名称', trigger: 'blur' }
           ],
           region: [
-            { type: 'array', required: true, message: '请至少选择一个地区', trigger: 'change' }
+            { required: true, message: '请选择活动区域', trigger: 'change' }
+          ],
+          date1: [
+            { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
+          ],
+          date2: [
+            { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
+          ],
+          type: [
+            { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
+          ],
+          resource: [
+            { required: true, message: '请选择活动资源', trigger: 'change' }
           ],
           desc: [
-            { required: true, message: '请填写个人简介', trigger: 'blur' }
+            { required: true, message: '请填写活动形式', trigger: 'blur' }
           ]
         },
         rules2: {
@@ -202,9 +200,8 @@
 
 <style>
   .demo-form {
-    .el-input,
-    .el-textarea {
-      width: 360px;
+    .el-form {
+      width: 440px;
     }
 
     .line {
@@ -240,135 +237,99 @@
         }
       }
     }
+    .demo-form-normal {
+      width: 440px;
+    }
+    .demo-form-inline {
+      .el-input {
+        width: 150px;
+      }
+      > * {
+        margin-right: 10px;
+      }
+    }
+    .demo-form-stacked {
+      width: 270px;
 
-    .el-date-picker + .el-date-picker {
-      margin-left: 10px;
+      .el-select .el-input {
+        width: 100%;
+      }
     }
-  }
-  .demo-form-normal {
-    width: 440px;
-  }
-  .demo-form-inline {
-    .el-input {
-      width: 150px;
-    }
-    > * {
-      margin-right: 10px;
-    }
-  }
-  .demo-ruleForm {
-    width: 440px;
+    .demo-ruleForm {
+      width: 460px;
 
-    .el-input,
-    .el-textarea {
-      width: auto;
+      .el-input,
+      .el-textarea {
+        width: auto;
+      }
     }
-  }
-  .demo-dynamic {
-    .el-input {
-      display: inline-block;
-      margin-right: 10px;
+    .demo-dynamic {
+      .el-input {
+        display: inline-block;
+        margin-right: 10px;
+        width: 270px;
+      }
     }
-  }
-  .fr {
-    float: right;
+    .fr {
+      float: right;
+    }
   }
 </style>
 
-## 基础使用
+## Form 表单
 
-Form 组件是一个具有校验和提交功能的表单，包含复选框、单选框、输入框、下拉选择框等元素。
+由输入框、选择器、单选框、多选框等控件组成，用以收集、校验、提交数据
 
-<div class="demo-box demo-form demo-form-normal">
-  <el-form ref="form" @submit.prevent="onSubmit" label-width="80px">
-    <el-form-item label="活动名称">
-      <el-input v-model="form.name"></el-input>
-    </el-form-item>
-    <el-form-item label="活动区域">
-      <el-select v-model="form.region" :width="360" placeholder="请选择活动区域">
-        <el-option label="区域一" value="shanghai"></el-option>
-        <el-option label="区域二" value="beijing"></el-option>
-      </el-select>
-    </el-form-item>
-    <el-form-item label="配送时间">
-      <el-col :span="11">
-        <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
-      </el-col>
-      <el-col class="line" :span="2">-</el-col>
-      <el-col :span="11">
-        <el-time-picker type="fixed-time" placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>
-      </el-col>
-    </el-form-item>
-    <el-form-item label="蜂鸟配送">
-      <el-switch on-text="" off-text="" v-model="form.delivery"></el-switch>
-    </el-form-item>
-    <el-form-item label="活动性质">
-      <el-checkbox-group v-model="form.type">
-        <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
-        <el-checkbox label="地推活动" name="type"></el-checkbox>
-        <el-checkbox label="线下主题活动" name="type"></el-checkbox>
-        <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
-      </el-checkbox-group>
-    </el-form-item>
-    <el-form-item label="特殊资源">
-      <el-radio v-model="form.resource" label="线上品牌商赞助"></el-radio>
-      <el-radio v-model="form.resource" label="线下场地免费"></el-radio>
-    </el-form-item>
-    <el-form-item label="活动形式">
-      <el-input type="textarea" v-model="form.desc"></el-input>
-    </el-form-item>
-    <el-form-item>
-      <el-button type="primary">立即创建</el-button>
-      <el-button @click.native.prevent>取消</el-button>
-    </el-form-item>
-  </el-form>
-</div>
+### 典型表单
 
+包括各种表单项，比如输入框、选择器、开关、单选框、多选框等。
+
+::: demo 在 Form 组件中，每一个表单域由一个 Form-Item 组件构成，表单域中可以放置各种类型的表单控件，包括 Input、Select、Checkbox、Radio、Switch、DatePicker、TimePicker
 ```html
-<template>
-  <el-form ref="form" @submit.prevent="onSubmit" label-width="80px">
-    <el-form-item label="活动名称">
-      <el-input v-model="form.name"></el-input>
-    </el-form-item>
-    <el-form-item label="活动区域">
-      <el-select v-model="form.region" :width="360" placeholder="请选择活动区域">
-        <el-option label="区域一" value="shanghai"></el-option>
-        <el-option label="区域二" value="beijing"></el-option>
-      </el-select>
-    </el-form-item>
-    <el-form-item label="配送时间">
-      <el-col :span="11">
-        <el-date-picker type="date" placeholder="选择日期" style="width: 100%;"></el-date-picker>
-      </el-col>
-      <el-col class="line" :span="2">-</el-col>
-      <el-col :span="11">
-        <el-time-picker type="fixed-time" placeholder="选择时间" style="width: 100%;"></el-time-picker>
-      </el-col>
-    </el-form-item>
-    <el-form-item label="蜂鸟配送">
-      <el-switch on-text="" off-text="" :value="form.delivery"></el-switch>
-    </el-form-item>
-    <el-form-item label="活动性质">
-      <el-checkbox-group v-model="form.type">
-        <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
-        <el-checkbox label="地推活动" name="type"></el-checkbox>
-        <el-checkbox label="线下主题活动" name="type"></el-checkbox>
-        <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
-      </el-checkbox-group>
-    </el-form-item>
-    <el-form-item label="特殊资源">
-      <el-radio v-model="form.resource" label="线上品牌商赞助"></el-radio>
-      <el-radio v-model="form.resource" label="线下场地免费"></el-radio>
-    </el-form-item>
-    <el-form-item label="活动形式">
-      <el-input type="textarea" v-model="form.desc"></el-input>
-    </el-form-item>
-    <el-form-item>
-      <el-button type="primary">立即创建</el-button>
-      <el-button @click.native.prevent>取消</el-button>
-    </el-form-item>
-  </el-form>
-</template>
+<el-form ref="form" :model="form" label-width="80px" @submit.prevent="onSubmit">
+  <el-form-item label="活动名称">
+    <el-input v-model="form.name"></el-input>
+  </el-form-item>
+  <el-form-item label="活动区域">
+    <el-select v-model="form.region" :width="360" placeholder="请选择活动区域">
+      <el-option label="区域一" value="shanghai"></el-option>
+      <el-option label="区域二" value="beijing"></el-option>
+    </el-select>
+  </el-form-item>
+  <el-form-item label="活动时间">
+    <el-col :span="11">
+      <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
+    </el-col>
+    <el-col class="line" :span="2">-</el-col>
+    <el-col :span="11">
+      <el-time-picker type="fixed-time" placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>
+    </el-col>
+  </el-form-item>
+  <el-form-item label="即时配送">
+    <el-switch on-text="" off-text="" v-model="form.delivery"></el-switch>
+  </el-form-item>
+  <el-form-item label="活动性质">
+    <el-checkbox-group v-model="form.type">
+      <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
+      <el-checkbox label="地推活动" name="type"></el-checkbox>
+      <el-checkbox label="线下主题活动" name="type"></el-checkbox>
+      <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
+    </el-checkbox-group>
+  </el-form-item>
+  <el-form-item label="特殊资源">
+    <el-radio-group v-model="form.resource">
+      <el-radio label="线上品牌商赞助"></el-radio>
+      <el-radio label="线下场地免费"></el-radio>
+    </el-radio-group>
+  </el-form-item>
+  <el-form-item label="活动形式">
+    <el-input type="textarea" v-model="form.desc"></el-input>
+  </el-form-item>
+  <el-form-item>
+    <el-button type="primary">立即创建</el-button>
+    <el-button @click.native.prevent>取消</el-button>
+  </el-form-item>
+</el-form>
 <script>
   export default {
     data() {
@@ -393,39 +354,26 @@ Form 组件是一个具有校验和提交功能的表单，包含复选框、单
   }
 </script>
 ```
+:::
 
-## Inline Form
+### 行内表单
 
-<div class="demo-box demo-form demo-form-inline">
-  <el-form type="inline" :model="formInline" @submit.prevent="onSubmit">
-    <el-form-item>
-      <el-input v-model="formInline.user" placeholder="审批人"></el-input>
-    </el-form-item><el-form-item>
-      <el-select v-model="formInline.region" :width="150" placeholder="请选择活动区域">
-        <el-option label="区域一" value="shanghai"></el-option>
-        <el-option label="区域二" value="beijing"></el-option>
-      </el-select>
-    </el-form-item><el-form-item>
-      <el-button type="primary">查询</el-button>
-    </el-form-item>
-  </el-form>
-</div>
+当垂直方向空间受限且表单较简单时，可以在一行内放置表单。
 
+::: demo Form 组件的 `type` 属性可以控制表单的类型，当设为 `inline` 时可以让表单域变为行内的表单域
 ```html
-<template>
-  <el-form type="inline" :model="formInline" @submit.prevent="onSubmit">
-    <el-form-item>
-      <el-input v-model="formInline.user" placeholder="审批人"></el-input>
-    </el-form-item><el-form-item>
-      <el-select v-model="formInline.region" :width="150" placeholder="请选择活动区域">
-        <el-option label="区域一" value="shanghai"></el-option>
-        <el-option label="区域二" value="beijing"></el-option>
-      </el-select>
-    </el-form-item><el-form-item>
-      <el-button type="primary">查询</el-button>
-    </el-form-item>
-  </el-form>
-</template>
+<el-form :inline="true" :model="formInline" @submit.prevent="onSubmit" class="demo-form-inline">
+  <el-form-item>
+    <el-input v-model="formInline.user" placeholder="审批人"></el-input>
+  </el-form-item><el-form-item>
+    <el-select v-model="formInline.region" :width="150" placeholder="活动区域">
+      <el-option label="区域一" value="shanghai"></el-option>
+      <el-option label="区域二" value="beijing"></el-option>
+    </el-select>
+  </el-form-item><el-form-item>
+    <el-button type="primary">查询</el-button>
+  </el-form-item>
+</el-form>
 <script>
   export default {
     data() {
@@ -444,57 +392,27 @@ Form 组件是一个具有校验和提交功能的表单，包含复选框、单
   }
 </script>
 ```
+:::
 
-## Stacked Form
+### 对齐方式
 
-<div class="demo-box demo-form demo-form-stacked">
-  <el-form type="stacked" :model="formStacked" @submit.prevent="onSubmit">
-    <el-form-item label="名称">
-      <el-input v-model="formStacked.name"></el-input>
-    </el-form-item>
-    <el-form-item label="活动区域">
-      <el-select v-model="formStacked.region" :width="360" placeholder="请选择活动区域">
-        <el-option label="区域一" value="shanghai"></el-option>
-        <el-option label="区域二" value="beijing"></el-option>
-      </el-select>
-    </el-form-item>
-    <el-form-item label="活动展开形式">
-      <el-input v-model="formStacked.type"></el-input>
-    </el-form-item>
-    <el-form-item label="备注">
-      <el-input v-model="formStacked.remark"></el-input>
-    </el-form-item>
-    <el-form-item>
-      <el-button type="primary">立即创建</el-button>
-      <el-button @click.native.prevent>取消</el-button>
-    </el-form-item>
-  </el-form>
-</div>
+根据具体目标和制约因素，选择最佳的标签对齐方式。
 
+顶部对齐
+
+::: demo 通过设置 `label-position` 属性可以改变表单域标签的位置，可选值为 `top`、`left`，当设为 `top` 时标签会置于表单域的顶部
 ```html
-<template>
-  <el-form type="stacked" :model="formStacked" @submit.prevent="onSubmit">
-    <el-form-item label="名称">
-      <el-input v-model="formStacked.name"></el-input>
-    </el-form-item>
-    <el-form-item label="活动区域">
-      <el-select v-model="formStacked.region" :width="360" placeholder="请选择活动区域">
-        <el-option label="区域一" value="shanghai"></el-option>
-        <el-option label="区域二" value="beijing"></el-option>
-      </el-select>
-    </el-form-item>
-    <el-form-item label="活动展开形式">
-      <el-input v-model="formStacked.type"></el-input>
-    </el-form-item>
-    <el-form-item label="备注">
-      <el-input v-model="formStacked.remark"></el-input>
-    </el-form-item>
-    <el-form-item>
-      <el-button type="primary">立即创建</el-button>
-      <el-button @click.native.prevent>取消</el-button>
-    </el-form-item>
-  </el-form>
-</template>
+<el-form label-position="top" :model="formStacked" class="demo-form-stacked">
+  <el-form-item label="名称">
+    <el-input v-model="formStacked.name"></el-input>
+  </el-form-item>
+  <el-form-item label="活动区域">
+    <el-input v-model="formStacked.region"></el-input>
+  </el-form-item>
+  <el-form-item label="活动展开形式">
+    <el-input v-model="formStacked.type"></el-input>
+  </el-form-item>
+</el-form>
 <script>
   export default {
     data() {
@@ -502,62 +420,61 @@ Form 组件是一个具有校验和提交功能的表单，包含复选框、单
         formStacked: {
           name: '',
           region: '',
-          type: '',
-          remark: ''
+          type: ''
         }
       };
-    },
-    methods: {
-      onSubmit() {
-        console.log('submit!');
-      }
     }
   }
 </script>
 ```
+:::
 
-## 标签左对齐
+右对齐
 
-<div class="demo-box demo-form">
-  <el-form :model="formAlignLeft" label-align="left" @submit.prevent="onSubmit" label-width="80px">
-    <el-form-item label="名称">
-      <el-input v-model="formAlignLeft.name"></el-input>
-    </el-form-item>
-    <el-form-item label="推广地">
-      <el-select v-model="formAlignLeft.region" :width="360" placeholder="请选择活动区域">
-        <el-option label="区域一" value="shanghai"></el-option>
-        <el-option label="区域二" value="beijing"></el-option>
-      </el-select>
-    </el-form-item>
-    <el-form-item label="活动形式">
-      <el-input v-model="formAlignLeft.type"></el-input>
-    </el-form-item>
-    <el-form-item>
-      <el-button type="primary">查询</el-button>
-    </el-form-item>
-  </el-form>
-</div>
-
+::: demo 通过设置 `label-position` 属性可以改变表单域标签的位置，默认不设置的情况下标签是右对齐的
 ```html
-<template>
-  <el-form :model="formAlignLeft" label-align="left" @submit.prevent="onSubmit" label-width="80px">
-    <el-form-item label="名称">
-      <el-input v-model="formAlignLeft.name"></el-input>
-    </el-form-item>
-    <el-form-item label="推广地">
-      <el-select v-model="formAlignLeft.region" :width="360" placeholder="请选择活动区域">
-        <el-option label="区域一" value="shanghai"></el-option>
-        <el-option label="区域二" value="beijing"></el-option>
-      </el-select>
-    </el-form-item>
-    <el-form-item label="活动形式">
-      <el-input v-model="formAlignLeft.type"></el-input>
-    </el-form-item>
-    <el-form-item>
-      <el-button type="primary">查询</el-button>
-    </el-form-item>
-  </el-form>
-</template>
+<el-form :model="formAlignRight" label-width="80px">
+  <el-form-item label="活动名称">
+    <el-input v-model="formAlignRight.name"></el-input>
+  </el-form-item>
+  <el-form-item label="推广地">
+    <el-input v-model="formAlignRight.region"></el-input>
+  </el-form-item>
+  <el-form-item label="活动形式">
+    <el-input v-model="formAlignRight.type"></el-input>
+  </el-form-item>
+</el-form>
+<script>
+  export default {
+    data() {
+      return {
+        formAlignRight: {
+          name: '',
+          region: '',
+          type: ''
+        }
+      };
+    }
+  }
+</script>
+```
+:::
+
+左对齐
+
+::: demo 通过设置 `label-position` 属性可以改变表单域标签的位置，可选值为 `top`、`left`，当设为 `left` 时标签会变为左对齐
+```html
+<el-form :model="formAlignLeft" label-position="left" @submit.prevent="onSubmit" label-width="80px">
+  <el-form-item label="活动名称">
+    <el-input v-model="formAlignLeft.name"></el-input>
+  </el-form-item>
+  <el-form-item label="推广地">
+    <el-input v-model="formAlignLeft.region"></el-input>
+  </el-form-item>
+  <el-form-item label="活动形式">
+    <el-input v-model="formAlignLeft.type"></el-input>
+  </el-form-item>
+</el-form>
 <script>
   export default {
     data() {
@@ -568,196 +485,101 @@ Form 组件是一个具有校验和提交功能的表单，包含复选框、单
           type: ''
         }
       };
-    },
-    methods: {
-      onSubmit() {
-        console.log('submit!');
-      }
     }
   }
 </script>
 ```
+:::
 
-## 无标签
+### 表单验证
 
-<div class="demo-box demo-form">
-  <el-form :model="formNoLabel" @submit.prevent="onSubmit" style="width: 360px;">
-    <el-form-item>
-      <el-input v-model="formNoLabel.username" placeholder="手机号码/电子邮箱"></el-input>
-    </el-form-item>
-    <el-form-item>
-      <el-input v-model="formNoLabel.pass" placeholder="账户密码" auto-complete="off"></el-input>
-    </el-form-item>
-    <el-form-item>
-      <el-button type="primary" class="fr">登录</el-button>
-      <el-checkbox v-model="formNoLabel.rememberPss" label="记住密码"></el-checkbox>
-    </el-form-item>
-  </el-form>
-</div>
+在防止用户犯错的前提下，尽可能让用户更早地发现并纠正错误。
 
+::: demo Form 组件提供了表单验证的功能，只需要通过 `rule` 属性传入约定的验证规则，并 Form-Item 的 `prop` 属相设置为需校验的字段名即可。校验规则参见 [async-validator](https://github.com/yiminghe/async-validator)
 ```html
-<template>
-  <el-form :model="formNoLabel" @submit.prevent="onSubmit" style="width: 360px;">
-    <el-form-item>
-      <el-input v-model="formNoLabel.username" placeholder="手机号码/电子邮箱"></el-input>
-    </el-form-item>
-    <el-form-item>
-      <el-input v-model="formNoLabel.pass" placeholder="账户密码" auto-complete="off"></el-input>
-    </el-form-item>
-    <el-form-item>
-      <el-button type="primary" class="fr">登录</el-button>
-      <el-checkbox v-model="formNoLabel.rememberPss" label="记住密码"></el-checkbox>
-    </el-form-item>
-  </el-form>
-</template>
-<script>
-  export default {
-    data() {
-      return {
-        formNoLabel: {
-          username: '',
-          pass: '',
-          rememberPss: false
-        }
-      };
-    },
-    methods: {
-      onSubmit() {
-        console.log('submit!');
-      }
-    }
-  }
-</script>
-```
-
-## 表单验证
-
-<div class="demo-box demo-form demo-ruleForm">
-  <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="80px">
-    <el-form-item label="用户名" :required="true">
-      <el-col :span="11">
-        <el-form-item prop="user1">
-          <el-input v-model="ruleForm.user1" placeholder="First Name"></el-input>
-        </el-form-item>
-      </el-col>
-      <el-col :span="2"><div class="line">-</div></el-col>
-      <el-col :span="11">
-        <el-form-item prop="user2">
-          <el-input v-model="ruleForm.user2" placeholder="Last Name"></el-input>
-        </el-form-item>
-      </el-col>
-    </el-form-item>
-    <el-form-item label="年龄" prop="age">
-      <el-input v-model="ruleForm.age" :number="true"></el-input>
-    </el-form-item>
-    <el-form-item label="邮箱" prop="mail">
-      <el-input v-model="ruleForm.mail"></el-input>
-    </el-form-item>
-    <el-form-item label="性别" prop="sex">
-      <el-radio-group v-model="ruleForm.sex">
-        <el-radio label="男" name="sex"></el-radio>
-        <el-radio label="女" name="sex"></el-radio>
-      </el-radio-group>
-    </el-form-item>
-    <el-form-item label="简介" prop="desc">
-      <el-input type="textarea" v-model="ruleForm.desc"></el-input>
-    </el-form-item>
-    <el-form-item label="地区" prop="region" placeholder="请选择地区">
-      <el-checkbox-group v-model="ruleForm.region">
-        <el-checkbox label="BeiJing" name="region"></el-checkbox>
-        <el-checkbox label="ShangHai" name="region"></el-checkbox>
-        <el-checkbox label="ShenZhen" name="region"></el-checkbox>
-        <el-checkbox label="GuangZhou" name="region"></el-checkbox>
-      </el-checkbox-group>
-    </el-form-item>
-    <el-form-item>
-      <el-button type="primary" @click.native.prevent="handleSubmit">提交</el-button>
-      <el-button @click.native.prevent="handleReset">重置</el-button>
-    </el-form-item>
-  </el-form>
-</div>
-
-```html
-<template>
-  <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="80px">
-    <el-form-item label="用户名" :required="true">
-      <el-col :span="11">
-        <el-form-item prop="user1">
-          <el-input v-model="ruleForm.user1" placeholder="First Name"></el-input>
-        </el-form-item>
-      </el-col>
-      <el-col :span="2"><div class="line">-</div></el-col>
-      <el-col :span="11">
-        <el-form-item prop="user2">
-          <el-input v-model="ruleForm.user2" placeholder="Last Name"></el-input>
-        </el-form-item>
-      </el-col>
-    </el-form-item>
-    <el-form-item label="年龄" prop="age">
-      <el-input v-model="ruleForm.age" :number="true"></el-input>
-    </el-form-item>
-    <el-form-item label="邮箱" prop="mail">
-      <el-input v-model="ruleForm.mail"></el-input>
-    </el-form-item>
-    <el-form-item label="性别" prop="sex">
-      <el-radio-group v-model="ruleForm.sex">
-        <el-radio label="男" name="sex"></el-radio>
-        <el-radio label="女" name="sex"></el-radio>
-      </el-radio-group>
-    </el-form-item>
-    <el-form-item label="简介" prop="desc">
-      <el-input type="textarea" v-model="ruleForm.desc"></el-input>
-    </el-form-item>
-    <el-form-item label="地区" prop="region" placeholder="请选择地区">
-      <el-checkbox-group v-model="ruleForm.region">
-        <el-checkbox label="BeiJing" name="region"></el-checkbox>
-        <el-checkbox label="ShangHai" name="region"></el-checkbox>
-        <el-checkbox label="ShenZhen" name="region"></el-checkbox>
-        <el-checkbox label="GuangZhou" name="region"></el-checkbox>
-      </el-checkbox-group>
-    </el-form-item>
-    <el-form-item>
-      <el-button type="primary" @click.prevent="handleSubmit">提交</el-button>
-      <el-button @click.prevent="handleReset">重置</el-button>
-    </el-form-item>
-  </el-form>
-</template>
+<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+  <el-form-item label="活动名称" prop="name">
+    <el-input v-model="ruleForm.name"></el-input>
+  </el-form-item>
+  <el-form-item label="活动区域" prop="region">
+    <el-select v-model="ruleForm.region" :width="360" placeholder="请选择活动区域">
+      <el-option label="区域一" value="shanghai"></el-option>
+      <el-option label="区域二" value="beijing"></el-option>
+    </el-select>
+  </el-form-item>
+  <el-form-item label="活动时间">
+    <el-col :span="11">
+      <el-form-item prop="date1">
+        <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
+      </el-form-item>
+    </el-col>
+    <el-col class="line" :span="2">-</el-col>
+    <el-col :span="11">
+      <el-form-item prop="date2">
+        <el-time-picker type="fixed-time" placeholder="选择时间" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
+      </el-form-item>
+    </el-col>
+  </el-form-item>
+  <el-form-item label="即时配送">
+    <el-switch on-text="" off-text="" v-model="ruleForm.delivery"></el-switch>
+  </el-form-item>
+  <el-form-item label="活动性质" prop="type">
+    <el-checkbox-group v-model="ruleForm.type">
+      <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
+      <el-checkbox label="地推活动" name="type"></el-checkbox>
+      <el-checkbox label="线下主题活动" name="type"></el-checkbox>
+      <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
+    </el-checkbox-group>
+  </el-form-item>
+  <el-form-item label="特殊资源" prop="resource">
+    <el-radio-group v-model="ruleForm.resource">
+      <el-radio label="线上品牌商赞助"></el-radio>
+      <el-radio label="线下场地免费"></el-radio>
+    </el-radio-group>
+  </el-form-item>
+  <el-form-item label="活动形式" prop="desc">
+    <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+  </el-form-item>
+  <el-form-item>
+    <el-button type="primary" @click.native.prevent="handleSubmit">立即创建</el-button>
+    <el-button @click.native.prevent="handleReset">重置</el-button>
+  </el-form-item>
+</el-form>
 <script>
   export default {
     data() {
       return {
         ruleForm: {
-          sex: '',
-          user1: '',
-          user2: '',
-          age: '',
-          region: [],
-          desc: '',
-          mail: ''
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
         },
         rules: {
-          user1: [
-            { required: true, min: 5, message: '用户名至少为 5 个字符', trigger: 'blur' }
-          ],
-          user2: [
-            { required: true, min: 3, message: '用户名至少为 3 个字符', trigger: 'blur' }
-          ],
-          age: [
-            { required: true, message: '请输入年龄', trigger: 'blur' },
-            { type: 'number', min: 18, message: '输入必须为大于18的整数', trigger: 'blur' }
-          ],
-          mail: [
-            { required: true, message: '请输入邮箱地址', trigger: 'blur' },
-            { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur,change' }
-          ],
-          sex: [
-            { required: true, message: '请选择性别' }
+          name: [
+            { required: true, message: '请输入活动名称', trigger: 'blur' }
           ],
           region: [
-            { type: 'array', required: true, message: '请至少选择一个地区', trigger: 'change' }
+            { required: true, message: '请选择活动区域', trigger: 'change' }
+          ],
+          date1: [
+            { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
+          ],
+          date2: [
+            { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
+          ],
+          type: [
+            { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
+          ],
+          resource: [
+            { required: true, message: '请选择活动资源', trigger: 'change' }
           ],
           desc: [
-            { required: true, message: '请填写个人简介', trigger: 'blur' }
+            { required: true, message: '请填写活动形式', trigger: 'blur' }
           ]
         }
       };
@@ -780,45 +602,27 @@ Form 组件是一个具有校验和提交功能的表单，包含复选框、单
   }
 </script>
 ```
+:::
 
-## 自定义校验规则
+### 自定义校验规则
 
-<div class="demo-box demo-form demo-ruleForm">
-  <el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-width="80px">
-    <el-form-item label="密码" prop="pass">
-      <el-input type="password" v-model="ruleForm2.pass" auto-complete="off"></el-input>
-    </el-form-item>
-    <el-form-item label="确认密码" prop="checkPass">
-      <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off"></el-input>
-    </el-form-item>
-    <el-form-item label="年龄" prop="age">
-      <el-input v-model="ruleForm2.age"></el-input>
-    </el-form-item>
-    <el-form-item>
-      <el-button type="primary" @click.native.prevent="handleSubmit2">提交</el-button>
-      <el-button @click.native.prevent="handleReset2">重置</el-button>
-    </el-form-item>
-  </el-form>
-</div>
-
+::: demo 这个例子中展示了如何使用自定义验证规则来完成密码的二次验证
 ```html
-<template>
-  <el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-width="80px">
-    <el-form-item label="密码" prop="pass">
-      <el-input type="password" v-model="ruleForm2.pass" auto-complete="off"></el-input>
-    </el-form-item>
-    <el-form-item label="确认密码" prop="checkPass">
-      <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off"></el-input>
-    </el-form-item>
-    <el-form-item label="年龄" prop="age">
-      <el-input v-model="ruleForm2.age"></el-input>
-    </el-form-item>
-    <el-form-item>
-      <el-button type="primary" @click.native.prevent="handleSubmit2">提交</el-button>
-      <el-button @click.native.prevent="handleReset2">重置</el-button>
-    </el-form-item>
-  </el-form>
-</template>
+<el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
+  <el-form-item label="密码" prop="pass">
+    <el-input type="password" v-model="ruleForm2.pass" auto-complete="off"></el-input>
+  </el-form-item>
+  <el-form-item label="确认密码" prop="checkPass">
+    <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off"></el-input>
+  </el-form-item>
+  <el-form-item label="年龄" prop="age">
+    <el-input v-model="ruleForm2.age"></el-input>
+  </el-form-item>
+  <el-form-item>
+    <el-button type="primary" @click.native.prevent="handleSubmit2">提交</el-button>
+    <el-button @click.native.prevent="handleReset2">重置</el-button>
+  </el-form-item>
+</el-form>
 <script>
   export default {
     data() {
@@ -896,61 +700,35 @@ Form 组件是一个具有校验和提交功能的表单，包含复选框、单
   }
 </script>
 ```
+:::
 
-## 动态增减表单项
+### 动态增减表单项
 
-<div class="demo-box demo-form demo-dynamic">
-  <el-form :model="dynamicForm" :rules="dynamicRule" ref="dynamicForm" label-width="80px">
-    <el-form-item prop="email" label="邮箱">
-      <el-input v-model="dynamicForm.email"></el-input>
-    </el-form-item>
-    <el-form-item
-      v-for="(domain, index) in dynamicForm.domains"
-      :label="'域名' + index"
-      :key="domain.key"
-      :prop="'domains:' + index"
-      :rules="{
-        type: 'object', required: true,
-        fields: {
-          value: { required: true, message: '域名不能为空', trigger: 'blur' }
-        }
-      }"
-    >
-      <el-input v-model="domain.value"></el-input><el-button @click.native.prevent="removeDomain(domain)">删除</el-button>
-    </el-form-item>
-    <el-form-item>
-      <el-button type="primary" @click.native.prevent="handleSubmit3">提交</el-button>
-      <el-button @click.native.prevent="addDomain">新增域名</el-button>
-    </el-form-item>
-  </el-form>
-</div>
-
+::: demo 除了在 Form 组件上一次性传递所有的验证规则外还可以在单个的表单域上传递属性的验证规则
 ```html
-<template>
-  <el-form :model="dynamicForm" :rules="dynamicRule" ref="dynamicForm" label-width="80px">
-    <el-form-item prop="email" label="邮箱">
-      <el-input v-model="dynamicForm.email"></el-input>
-    </el-form-item>
-    <el-form-item
-      v-for="(domain, index) in dynamicForm.domains"
-      :label="'域名' + index"
-      :key="domain.key"
-      :prop="'domains:' + index"
-      :rules="{
-        type: 'object', required: true,
-        fields: {
-          value: { required: true, message: '域名不能为空', trigger: 'blur' }
-        }
-      }"
-    >
-      <el-input v-model="domain.value"></el-input><el-button @click.native.prevent="removeDomain(domain)">删除</el-button>
-    </el-form-item>
-    <el-form-item>
-      <el-button type="primary" @click.native.prevent="handleSubmit3">提交</el-button>
-      <el-button @click.native.prevent="addDomain">新增域名</el-button>
-    </el-form-item>
-  </el-form>
-</template>
+<el-form :model="dynamicForm" :rules="dynamicRule" ref="dynamicForm" label-width="100px" class="demo-dynamic">
+  <el-form-item prop="email" label="邮箱">
+    <el-input v-model="dynamicForm.email"></el-input>
+  </el-form-item>
+  <el-form-item
+    v-for="(domain, index) in dynamicForm.domains"
+    :label="'域名' + index"
+    :key="domain.key"
+    :prop="'domains:' + index"
+    :rules="{
+      type: 'object', required: true,
+      fields: {
+        value: { required: true, message: '域名不能为空', trigger: 'blur' }
+      }
+    }"
+  >
+    <el-input v-model="domain.value"></el-input><el-button @click.native.prevent="removeDomain(domain)">删除</el-button>
+  </el-form-item>
+  <el-form-item>
+    <el-button type="primary" @click.native.prevent="handleSubmit3">提交</el-button>
+    <el-button @click.native.prevent="addDomain">新增域名</el-button>
+  </el-form-item>
+</el-form>
 <script>
   export default {
     data() {
@@ -997,31 +775,32 @@ Form 组件是一个具有校验和提交功能的表单，包含复选框、单
   }
 </script>
 ```
+:::
 
-## el-form API
-### 组件属性和事件
+### Form Attributes
 
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| model   | 表单数据对象 | object      |                                  |        |
-| rules    | 表单验证规则 | object |  |  |
+| model   | 表单数据对象 | object      |                  —                |  — |
+| rules    | 表单验证规则 | object | — | — |
 | type | 表单类型 | string |  stacked, inline, horizontal | horizontal |
 | label-align | 表单域标签的水平对齐位置 | string |  right,left            | right |
-| label-width | 表单域标签的宽度，所有的 form-item 都会继承 form 组件的 labelWidth 的值 | string | |  |
-| label-suffix | 表单域标签的后缀 | string | |  |
+| label-width | 表单域标签的宽度，所有的 form-item 都会继承 form 组件的 labelWidth 的值 | string | — | — |
+| label-suffix | 表单域标签的后缀 | string | — | — |
 
-### el-form 实例属性和方法
+### Form Methods
 
-| 方法名      | 说明          | 类型      | 默认值  |
-|---------- |-------------- |---------- |-------- |
-| validate(cb) | 对整个表单进行校验的方法, 校验结束后会调用传入的回调方法, cb(valid), valid 参数是校验 bool 值结果 | function |    |
-| validateField(prop, cb) | 对部分表单字段进行校验的方法 |  |   |
-| resetFields | 对整个表单进行重置，将所有字段值重置为空并移除校验结果 |  |   |
+| 方法名      | 说明          |
+|---------- |-------------- |
+| validate(cb) | 对整个表单进行校验的方法 |
+| validateField(prop, cb) | 对部分表单字段进行校验的方法 |
+| resetFields | 对整个表单进行重置，将所有字段值重置为空并移除校验结果 |
 
-## el-form-item API
+### Form-Item Attributes
+
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| prop    | 表单域model字段 | string    | 传入父级 v-form 的 model 中的所有属性 |  |
-| label | 标签文本 | string |   |  |
-| label-width | 表单域标签的的宽度，例如 '50px' | string |              |  |
-| required | 是否必填，如不设置，则会根据校验规则自动生成 | bolean |  | false |
+| prop    | 表单域 model 字段 | string    | 传入 Form 组件的 `model` 中的字段 | — |
+| label | 标签文本 | string | — | — |
+| label-width | 表单域标签的的宽度，例如 '50px' | string |       —       | — |
+| required | 是否必填，如不设置，则会根据校验规则自动生成 | bolean | — | false |

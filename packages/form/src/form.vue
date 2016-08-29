@@ -1,7 +1,7 @@
 <template>
-  <form :class="[
-    type ? 'el-form-' + type : 'el-form',
-    { 'is-label-left': labelAlign === 'left' }
+  <form class="el-form" :class="[
+    labelPosition ? 'el-form--label-' + labelPosition : '',
+    { 'el-form--inline': inline }
   ]">
     <slot></slot>
   </form>
@@ -16,12 +16,13 @@
       model: Object,
       rules: Object,
       type: String,
-      labelAlign: String,
+      labelPosition: String,
       labelWidth: String,
       labelSuffix: {
         type: String,
         default: ''
-      }
+      },
+      inline: Boolean
     },
     data() {
       return {

@@ -12,6 +12,6 @@
   "author": "haiping.zeng<haiping.zeng@ele.me>",
   "license": "MIT",
   "dependencies": {
-    "async-validator": "^1.6.5"
+    "async-validator": "^1.6.6"
   }
 }
