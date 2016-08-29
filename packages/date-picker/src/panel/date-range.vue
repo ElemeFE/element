@@ -400,8 +400,22 @@
         this.rightTimePickerVisible = false;
       },
 
+      setTime(date, value) {
+        let oldDate = new Date(date.getTime());
+        let hour = value.getHours();
+        let minute = value.getMinutes();
+        let second = value.getSeconds();
+        oldDate.setHours(hour);
+        oldDate.setMinutes(minute);
+        oldDate.setSeconds(second);
+        return new Date(oldDate.getTime());
+      },
+
       handleLeftTimePick(value, visible, first) {
-        this.minDate = value || this.minDate || new Date();
+        this.minDate = this.minDate || new Date();
+        if (value) {
+          this.minDate = this.setTime(this.minDate, value);
+        }
 
         if (!first) {
           this.leftTimePickerVisible = visible;
@@ -416,8 +430,8 @@
           }
         }
 
-        if (this.maxDate) {
-          this.maxDate = value;
+        if (this.maxDate && value) {
+          this.maxDate = this.setTime(this.maxDate, value);
         }
 
         if (!first) {

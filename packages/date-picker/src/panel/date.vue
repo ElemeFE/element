@@ -209,7 +209,16 @@
       },
 
       handleTimePick(picker, visible, first) {
-        this.date = picker || this.date;
+        if (picker) {
+          let oldDate = new Date(this.date.getTime());
+          let hour = picker.getHours();
+          let minute = picker.getMinutes();
+          let second = picker.getSeconds();
+          oldDate.setHours(hour);
+          oldDate.setMinutes(minute);
+          oldDate.setSeconds(second);
+          this.date = new Date(oldDate.getTime());
+        }
 
         if (!first) {
           this.timePickerVisible = visible;

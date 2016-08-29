@@ -47,6 +47,7 @@
     }
 
     & .el-input {
+      width: 180px;
       display: inline-block;
 
       & .el-input__icon {

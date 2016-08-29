@@ -172,7 +172,7 @@
 | description | 辅助性文字 | string | — | — |
 | closable | 是否可关闭 | boolean | — | true |
 | close-text | 关闭按钮自定义文本 | string | — | — |
-| showIcon | 是否显示图标 | boolean | — | false |
+| show-icon | 是否显示图标 | boolean | — | false |
 
 
 ### Events

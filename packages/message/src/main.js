@@ -10,7 +10,7 @@ var Message = function(options) {
   if (typeof options === 'string') {
     options = {
       message: options
-    }
+    };
   }
   let userOnClose = options.onClose;
   let id = 'message_' + seed++;

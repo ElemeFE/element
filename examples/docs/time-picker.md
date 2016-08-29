@@ -103,7 +103,6 @@
 ### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| value | 绑定值，需双向绑定 | string | - | - |
 | readonly | 只读 | boolean | - | false |
 | placeholder | 占位内容 | string | - | - |
 | format | 时间格式化 | string | 小时：`HH`，分：`mm`，秒：`ss` | 'HH:mm:ss' |

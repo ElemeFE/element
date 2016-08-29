@@ -81,12 +81,12 @@
         minTime: minTime,
         maxTime: maxTime,
         btnDisabled: isDisabled(minTime, maxTime),
-        maxHours: minTime.getHours(),
-        maxMinutes: minTime.getMinutes(),
-        maxSeconds: minTime.getSeconds(),
-        minHours: maxTime.getHours(),
-        minMinutes: maxTime.getMinutes(),
-        minSeconds: maxTime.getSeconds(),
+        maxHours: maxTime.getHours(),
+        maxMinutes: maxTime.getMinutes(),
+        maxSeconds: maxTime.getSeconds(),
+        minHours: minTime.getHours(),
+        minMinutes: minTime.getMinutes(),
+        minSeconds: minTime.getSeconds(),
         format: 'HH:mm:ss',
         visible: false
       };
