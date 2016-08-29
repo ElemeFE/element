@@ -105,7 +105,7 @@
 
         if (start && end && step) {
           let current = start;
-          while (compareTime(current, end) === -1) {
+          while (compareTime(current, end) <= 0) {
             result.push({
               value: current,
               disabled: compareTime(current, this.minTime || '00:00') <= 0

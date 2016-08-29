@@ -7,6 +7,11 @@ let seed = 1;
 
 var Message = function(options) {
   options = options || {};
+  if (typeof options === 'string') {
+    options = {
+      message: options
+    }
+  }
   let userOnClose = options.onClose;
   let id = 'message_' + seed++;
 

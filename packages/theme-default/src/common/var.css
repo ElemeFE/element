@@ -373,6 +373,13 @@
     --card-border-radius: 4px;
     --card-padding: 20px;
 
+  /*Slider
+    --------------------------*/
+  --slider-main-background-color: var(--color-primary);
+  --slider-runway-background-color: #e5e9f2;
+  --slider-runway-hover-color: #1d8ce0;
+  --slider-stop-background-color: #c0ccda;
+
     /*Steps
     --------------------------*/
     --steps-border-color: var(--disabled-border-base);

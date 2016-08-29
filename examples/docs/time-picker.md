@@ -6,23 +6,18 @@
   }
 </style>
 
-## 固定时间点
-提供几个固定的时间点供用户选择。
-<div class="demo-box">
-  <el-time-select
-    v-model="value1"
-    :picker-options="{
-      start: '08:30',
-      step: '00:15',
-      end: '18:30'
-    }"
-    placeholder="选择时间">
-  </el-time-select>
-</div>
+## Time Picker 时间选择器
+ 
+ 用于选择或输入日期
 
+### 固定时间点
+
+提供几个固定的时间点供用户选择
+
+:::demo 使用 el-time-select 标签，分别通过`star`、`end`和`step`指定可选的起始时间、结束时间和步长
 ```html
 <el-time-select
-  v-model="value"
+  v-model="value1"
   :picker-options="{
     start: '08:30',
     step: '00:15',
@@ -31,89 +26,29 @@
   placeholder="选择时间">
 </el-time-select>
 ```
+:::
 
-## 任意时间点
-可以选择任意时间。
+### 任意时间点
 
-<div class="demo-box">
-  <el-time-picker
-    v-model="value2"
-    placeholder="任意时间点">
-  </el-time-picker>
-</div>
+可以选择任意时间
 
+:::demo 使用 el-time-picker 标签，通过`selectableRange`限制可选时间范围
 ```html
 <el-time-picker
-  v-model="value"
-  placeholder="任意时间点">
-</el-time-picker>
-```
-
-### 通用 - 手动输入规则
-<div class="demo-box">
-  <el-time-picker
-    v-model="value3"
-    placeholder="任意时间点">
-  </el-time-picker>
-</div>
-
-```html
-<el-time-picker
-  v-model="value"
-  placeholder="任意时间点">
-</el-time-picker>
-```
-
-### 通用 - 限制时间范围
-
-<div class="demo-box">
-  <el-time-picker
-    v-model="value4"
-    :picker-options="{
-      selectableRange: '18:30:00 - 20:30:00'
-    }"
-    placeholder="任意时间点">
-  </el-time-picker>
-</div>
-
-```html
-<el-time-picker
-  v-model="value"
+  v-model="value2"
   :picker-options="{
     selectableRange: '18:30:00 - 20:30:00'
   }"
   placeholder="任意时间点">
 </el-time-picker>
 ```
+:::
 
+### 固定时间范围
 
-## 固定时间范围
+若先选择开始时间，则结束时间内备选项的状态会随之改变
 
-### 先选择开始时间
-先选择开始时间,结束时间内备选项的状态会随之改变。
-
-<div class="demo-box">
-  <el-time-select
-    placeholder="起始时间"
-    v-model="startTime"
-    :picker-options="{
-      start: '08:30',
-      step: '00:15',
-      end: '18:30'
-    }">
-  </el-time-select>
-  <el-time-select
-    placeholder="结束时间"
-    v-model="endTime"
-    :picker-options="{
-      start: '08:30',
-      step: '00:15',
-      end: '18:30',
-      minTime: startTime
-    }">
-  </el-time-select>
-</div>
-
+:::demo
 ```html
 <el-time-select
   placeholder="起始时间"
@@ -135,72 +70,21 @@
   }">
 </el-time-select>
 ```
+:::
 
-### 先选择结束时间
-开始时间的备选项不随结束时间的选择改变。
+### 任意时间范围
 
-<div class="demo-box">
-  <el-time-select
-    placeholder="起始时间"
-    v-model="startTime2"
-    :picker-options="{
-      start: '08:30',
-      step: '00:15',
-      end: '18:30'
-    }">
-  </el-time-select>
-  <el-time-select
-    placeholder="结束时间"
-    v-model="endTime2"
-    :picker-options="{
-      start: '08:30',
-      step: '00:15',
-      end: '18:30',
-      minTime: startTime2
-    }">
-  </el-time-select>
-</div>
+可选择任意的时间范围
 
-```html
-<el-time-select
-  placeholder="起始时间"
-  v-model="startTime2"
-  :picker-options="{
-    start: '08:30',
-    step: '00:15',
-    end: '18:30'
-  }">
-</el-time-select>
-<el-time-select
-  placeholder="结束时间"
-  v-model="endTime2"
-  :picker-options="{
-    start: '08:30',
-    step: '00:15',
-    end: '18:30',
-    minTime: startTime2
-  }">
-</el-time-select>
-```
-
-## 任意时间范围
-可选择任意的时间范围。
-
-<div class="demo-box">
-  <el-time-picker
-    is-range
-    v-model="value5"
-    placeholder="选择时间范围">
-  </el-time-picker>
-</div>
-
+:::demo 添加`is-range`属性即可选择时间范围
 ```html
 <el-time-picker
   is-range
-  v-model="value"
+  v-model="value3"
   placeholder="选择时间范围">
 </el-time-picker>
 ```
+:::
 
 <script>
   export default {
@@ -209,36 +93,32 @@
         value1: '',
         value2: '',
         value3: '',
-        value4: '',
-        value5: '',
         startTime: '',
-        endTime: '',
-        startTime2: '',
-        endTime2: ''
+        endTime: ''
       };
     }
   }
 </script>
 
-## API
+### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| value | 绑定值，需双向绑定 | String |   |  |
-| readonly | 只读 | Boolean |  | false |
-| placeholder | 占位内容 | String |  |  |
-| format | 时间格式化 | String | 小时: `HH`, 分`mm`, 秒`ss` | 'HH:mm:ss' |
-| picker-options | 当前时间日期选择器特有的选项，参考下表 | Object | | {} |
+| value | 绑定值，需双向绑定 | string | - | - |
+| readonly | 只读 | boolean | - | false |
+| placeholder | 占位内容 | string | - | - |
+| format | 时间格式化 | string | 小时：`HH`，分：`mm`，秒：`ss` | 'HH:mm:ss' |
+| picker-options | 当前时间日期选择器特有的选项，参考下表 | object | - | {} |
 
-### time-select Options
+### Time Select Options
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| start | 开始时间 | String |  |09:00 |
-| end | 结束时间 | String |  |18:00 |
-| step | 间隔时间 | String |  | 00:30 |
-| minTime | 最小时间，小于该时间的时间段将被禁用 | String |  | 00:00 |
+| start | 开始时间 | string | - | 09:00 |
+| end | 结束时间 | string | - | 18:00 |
+| step | 间隔时间 | string | - | 00:30 |
+| minTime | 最小时间，小于该时间的时间段将被禁用 | string | - | 00:00 |
 
-### time-picker Options
+### Time Picker Options
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| selectableRange | 可选时间段，例如 `18:30:00 - 20:30:00`，或者传入数组 `['09:30:00 - 12:00:00', '14:30:00 - 18:30:00']` | String, Array |  |  |
+| selectableRange | 可选时间段，例如<br>`'18:30:00 - 20:30:00'`<br>或者传入数组<br>`['09:30:00 - 12:00:00', '14:30:00 - 18:30:00']` | string/array | - | - |
 

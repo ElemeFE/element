@@ -2,9 +2,7 @@
   module.exports = {
     methods: {
       open() {
-        this.$message({
-          message: '这是一条消息提示'
-        });
+        this.$message('这是一条消息提示');
       },
 
       open2() {
@@ -70,11 +68,13 @@
   }
 </style>
 
-## 基本用法
+## Message 消息提示
 
-Message 系统了反馈提示，它比 Notification 更为小巧，可以根据需要来使用它们，在配置上，它们非常类似，所以部分 Notification 的 options 我们不会做详尽解释，文末有 options 列表，可以结合 Notification 的文档理解它们。
+反馈提示，比 Notification 更为小巧
 
-:::demo Element 注册了一个`$message`方法用于调用，Message 同样接收一个`options`字面量，`message`参数能定义正文内容。
+### 基础用法
+
+:::demo Message 在配置上与 Notification 非常类似，所以部分 options 在此不做详尽解释，文末有 options 列表，可以结合 Notification 的文档理解它们。Element 注册了一个`$message`方法用于调用，Message 可以接收一个字符串作为参数，它会被显示为正文内容。
 
 ```html
 <template>
@@ -85,9 +85,7 @@ Message 系统了反馈提示，它比 Notification 更为小巧，可以根据�
   export default {
     methods: {
       open() {
-        this.$message({
-          message: '这是一条消息提示'
-        });
+        this.$message('这是一条消息提示');
       }
     }
   }
@@ -95,13 +93,11 @@ Message 系统了反馈提示，它比 Notification 更为小巧，可以根据�
 ```
 :::
 
-## 不同状态
+### 不同状态
 
-Message 同样提供了四种类型：`success`，`info`，`warning`，`error`，由不同图标表示。
+Message 提供了四种类型：`success`，`info`，`warning`，`error`，由不同图标表示。
 
-你可以通过下面的按钮来体验它们：
-
-:::demo 设置`type`字段来定义它们，默认为`info`，如果设置其他值将被忽略。
+:::demo 当需要自定义更多属性时，Message 也可以接收一个对象为参数。比如，设置`type`字段可以定义不同的状态，默认为`info`。此时正文内容以`message`的值传入。
 ```html
 <template>
   <el-button :plain="true" @click.native="open2">成功</el-button>
@@ -138,13 +134,11 @@ Message 同样提供了四种类型：`success`，`info`，`warning`，`error`�
 ```
 :::
 
-## 可关闭
+### 可关闭
 
-默认的 Message 是不可以被人工关闭的，如果需要可关闭的 Message，可以使用`showClose`字段。
+可以设置为手动关闭的 Message
 
-注意：和 Notification 一样，Message 拥有可控的`duration`，设置`0`为不会被自动关闭，默认为 3000 毫秒。
-
-:::demo
+:::demo 默认的 Message 是不可以被人工关闭的，如果需要可手动关闭的 Message，可以使用`showClose`字段。此外，和 Notification 一样，Message 拥有可控的`duration`，设置`0`为不会被自动关闭，默认为 3000 毫秒。
 ```html
 <template>
   <el-button :plain="true" @click.native="open5">消息</el-button>
@@ -209,8 +203,8 @@ import { Message } from 'element-ui';
 ## Options
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| message | 消息文字 | string | | |
-| type | 主题 | string | 'success', 'warning', 'info', 'error' | 'info' |
-| duration | 显示时间, 毫秒。设为 0 则不会自动关闭 | number | | 3000 |
-| showClose | 是否显示关闭按钮 | boolean | | false |
-| onClose | 关闭时的回调函数, 参数为被关闭的 message 实例 | function | | |
+| message | 消息文字 | string | - | - |
+| type | 主题 | string | success/warning/info/error | info |
+| duration | 显示时间, 毫秒。设为 0 则不会自动关闭 | number | - | 3000 |
+| showClose | 是否显示关闭按钮 | boolean | - | false |
+| onClose | 关闭时的回调函数, 参数为被关闭的 message 实例 | function | - | - |
