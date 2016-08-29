@@ -3,9 +3,26 @@
 
 @component-namespace el {
   @b form {
-    @when label-left {
+    @m label-left {
       & .el-form-item__label {
         text-align: left;
+      }
+    }
+    @m label-top {
+      & .el-form-item__label {
+        float: none;
+        display: inline-block;
+        padding: 0 0 10px 0;
+      }
+    }
+    @m inline {
+      & .el-form-item {
+        display: inline-block;
+        margin-right: 10px;
+
+        > * {
+          vertical-align: top;
+        }
       }
     }
   }
@@ -65,24 +82,6 @@
       & .el-textarea__inner {
         border-color: var(--color-danger);
       }
-    }
-  }
-
-  @b form-inline {
-    & .el-form-item {
-      display: inline-block;
-      margin-right: 10px;
-
-      > * {
-        vertical-align: top;
-      }
-    }
-  }
-  @b form-stacked {
-    & .el-form-item__label {
-      float: none;
-      display: inline-block;
-      padding: 0 0 10px 0;
     }
   }
 }

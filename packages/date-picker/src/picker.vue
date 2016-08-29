@@ -34,6 +34,7 @@ import Vue from 'vue';
 import Clickoutside from 'main/utils/clickoutside';
 import { merge, formatDate, parseDate, getWeekNumber } from './util';
 import Popper from 'main/utils/popper';
+import emitter from 'main/mixins/emitter';
 
 const FUNCTION_KEYS = [13, 16, 17, 18, 19, 20, 27, 33, 34, 35, 36, 37, 38, 39, 40];
 const RANGE_SEPARATOR = ' - ';
@@ -178,6 +179,8 @@ const TYPE_VALUE_RESOLVER_MAP = {
 };
 
 export default {
+  mixins: [emitter],
+
   props: {
     format: String,
     readonly: Boolean,
@@ -200,6 +203,9 @@ export default {
   watch: {
     pickerVisible(val) {
       val === true ? this.showPicker() : this.hidePicker();
+    },
+    value(val) {
+      this.dispatch('form-item', 'el.form.change');
     }
   },
 
@@ -284,6 +290,7 @@ export default {
 
     handleBlur() {
       this.$emit('blur', this);
+      this.dispatch('form-item', 'el.form.blur');
     },
 
     handleKeydown(event) {
