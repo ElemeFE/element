@@ -143,8 +143,8 @@
 | min | 最小值 | number | - | 0 |
 | max | 最大值 | number | - | 100 |
 | step | 步长 | number | - | 1 |
-| showInput | 是否显示输入框 | boolean | - | false |
-| showStops | 是否显示间断点 | boolean | - | false |
+| show-input | 是否显示输入框 | boolean | - | false |
+| show-stops | 是否显示间断点 | boolean | - | false |
 
 ## Events
 | 事件名称      | 说明    | 回调参数      |

@@ -1,5 +1,60 @@
 import Spinner from './spinner';
 exports.install = Vue => {
+  let toggleLoading = (el, binding) => {
+    if (binding.value) {
+      Vue.nextTick(() => {
+        if (binding.modifiers.fullscreen) {
+          el.originalPosition = document.body.style.position;
+          el.originalOverflow = document.body.style.overflow;
+
+          ['top', 'right', 'bottom', 'left'].forEach(property => {
+            el.maskStyle[property] = '0';
+          });
+          el.maskStyle.position = 'fixed';
+          el.spinnerStyle.position = 'fixed';
+
+          insertDom(document.body, el, binding);
+        } else {
+          if (binding.modifiers.body) {
+            el.originalPosition = document.body.style.position;
+
+            ['top', 'left'].forEach(property => {
+              let scroll = property === 'top' ? 'scrollTop' : 'scrollLeft';
+              el.maskStyle[property] = el.getBoundingClientRect()[property] + document.body[scroll] + document.documentElement[scroll] + 'px';
+            });
+            ['height', 'width'].forEach(property => {
+              el.maskStyle[property] = el.getBoundingClientRect()[property] + 'px';
+            });
+
+            insertDom(document.body, el, binding);
+          } else {
+            el.originalPosition = el.style.position;
+
+            ['top', 'right', 'bottom', 'left'].forEach(property => {
+              el.maskStyle[property] = '0';
+            });
+
+            insertDom(el, el, binding);
+          }
+        }
+      });
+    } else {
+      if (el.domVisible) {
+        el.mask.style.display = 'none';
+        el.spinner.style.display = 'none';
+        el.domVisible = false;
+
+        if (binding.modifiers.fullscreen) {
+          document.body.style.overflow = el.originalOverflow;
+        }
+        if (binding.modifiers.fullscreen || binding.modifiers.body) {
+          document.body.style.position = el.originalPosition;
+        } else {
+          el.style.position = el.originalPosition;
+        }
+      }
+    }
+  };
   let insertDom = (parent, directive, binding) => {
     if (!directive.domVisible) {
       Object.keys(directive.maskStyle).forEach(property => {
@@ -27,7 +82,7 @@ exports.install = Vue => {
   };
 
   Vue.directive('loading', {
-    bind: function(el) {
+    bind: function(el, binding) {
       el.mask = document.createElement('div');
       el.mask.className = 'el-loading-mask';
       el.maskStyle = {
@@ -41,62 +96,11 @@ exports.install = Vue => {
       el.spinnerStyle = {
         position: 'absolute'
       };
+      toggleLoading(el, binding);
     },
 
     update: function(el, binding) {
-      if (binding.value) {
-        Vue.nextTick(() => {
-          if (binding.modifiers.fullscreen) {
-            el.originalPosition = document.body.style.position;
-            el.originalOverflow = document.body.style.overflow;
-
-            ['top', 'right', 'bottom', 'left'].forEach(property => {
-              el.maskStyle[property] = '0';
-            });
-            el.maskStyle.position = 'fixed';
-            el.spinnerStyle.position = 'fixed';
-
-            insertDom(document.body, el, binding);
-          } else {
-            if (binding.modifiers.body) {
-              el.originalPosition = document.body.style.position;
-
-              ['top', 'left'].forEach(property => {
-                let scroll = property === 'top' ? 'scrollTop' : 'scrollLeft';
-                el.maskStyle[property] = el.getBoundingClientRect()[property] + document.body[scroll] + document.documentElement[scroll] + 'px';
-              });
-              ['height', 'width'].forEach(property => {
-                el.maskStyle[property] = el.getBoundingClientRect()[property] + 'px';
-              });
-
-              insertDom(document.body, el, binding);
-            } else {
-              el.originalPosition = el.style.position;
-
-              ['top', 'right', 'bottom', 'left'].forEach(property => {
-                el.maskStyle[property] = '0';
-              });
-
-              insertDom(el, el, binding);
-            }
-          }
-        });
-      } else {
-        if (el.domVisible) {
-          el.mask.style.display = 'none';
-          el.spinner.style.display = 'none';
-          el.domVisible = false;
-
-          if (binding.modifiers.fullscreen) {
-            document.body.style.overflow = el.originalOverflow;
-          }
-          if (binding.modifiers.fullscreen || binding.modifiers.body) {
-            document.body.style.position = el.originalPosition;
-          } else {
-            el.style.position = el.originalPosition;
-          }
-        }
-      }
+      toggleLoading(el, binding);
     },
 
     unbind: function(el, binding) {

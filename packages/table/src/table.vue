@@ -361,7 +361,7 @@
       selection(val) {
         this.$emit('selectionchange', val);
         if (this.selectionMode === 'multiple') {
-          this.allSelected = val.length === this.tableData.length;
+          this.allSelected = this.tableData.length > 0 && val.length === this.tableData.length;
         }
       },
 

@@ -63,227 +63,203 @@
   };
 </script>
 
-## 日期点
+<style>
+  .demo-block.demo-date-picker .source {
+    padding: 0;
+    display: flex;
+  }
+  
+  .demo-date-picker .block {
+    padding: 30px 0;
+    text-align: center;
+    border-right: solid 1px #EFF2F6;
+    flex: 1;
+    &:last-child {
+      border-right: none;
+    }
+  }
+  
+  .demo-date-picker .demonstration {
+    display: block;
+    color: #8492a6;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+</style>
 
-###  日
+## Date Picker 日期选择器
 
-以『日』为基本单位
+用于选择或输入日期
 
-<el-date-picker
-  v-model="value1"
-  type="date"
-  placeholder="选择日期">
-</el-date-picker>
+###  选择日
 
+以「日」为基本单位，基础的日期选择控件
+
+:::demo 基本单位由`type`属性指定。快捷选项需配置`picker-options`对象中的`shortcuts`
 ```html
-<el-date-picker
-  v-model="value"
-  type="date"
-  placeholder="选择日期">
-</el-date-picker>
-```
-
-###  周
-
-以『周』为基本单位
-
-<el-date-picker
-  v-model="value2"
-  type="week"
-  format="yyyy 第 WW 周"
-  placeholder="选择周">
-</el-date-picker>
-
-```html
-<el-date-picker
-  v-model="value"
-  type="week"
-  format="yyyy 第 WW 周"
-  placeholder="选择周">
-</el-date-picker>
-```
-
-###  月
-
-以『月』为基本单位
-
-<el-date-picker
-  v-model="value3"
-  type="month"
-  placeholder="选择月">
-</el-date-picker>
-
-```html
-<el-date-picker
-  v-model="value"
-  type="month"
-  placeholder="选择月">
-</el-date-picker>
-```
-
-###  年
-
-以『年』为基本单位
-
-<el-date-picker
-  v-model="value4"
-  type="year"
-  placeholder="选择日期">
-</el-date-picker>
-
-```html
-<el-date-picker
-  v-model="value"
-  type="year"
-  placeholder="选择日期">
-</el-date-picker>
-```
-
-###  含快捷选项
-
-左侧区域可配置快捷选项，例如『今天』、『昨天』等
-
-<el-date-picker
-  v-model="value5"
-  type="date"
-  placeholder="选择日期"
-  :picker-options="pickerOptions1">
-</el-date-picker>
-
-```html
-<el-date-picker
-  v-model="value"
-  type="date"
-  placeholder="选择日期"
-  :picker-options="pickerOptions1">
-</el-date-picker>
+<template>
+  <div class="block">
+    <span class="demonstration">默认</span>
+    <el-date-picker
+      v-model="value1"
+      type="date"
+      placeholder="选择日期">
+    </el-date-picker>
+  </div>
+  <div class="block">
+    <span class="demonstration">带快捷选项</span>
+    <el-date-picker
+      v-model="value2"
+      type="date"
+      placeholder="选择日期"
+      :picker-options="pickerOptions1">
+    </el-date-picker>
+  </div>
+</template>
 
 <script>
-  module.exports = {
+  export default {
     data() {
-      return {
-        pickerOptions1: {
-          shortcuts: [{
-            text: '今天',
-            onClick(picker) {
-              picker.$emit('pick', new Date());
-            }
-          }, {
-            text: '昨天',
-            onClick(picker) {
-              const date = new Date();
-              date.setTime(date.getTime() - 3600 * 1000 * 24);
-              picker.$emit('pick', date);
-            }
-          }, {
-            text: '一周前',
-            onClick(picker) {
-              const date = new Date();
-              date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
-              picker.$emit('pick', date);
-            }
-          }]
-        },
-        value: ''
-      };
+     return {
+       pickerOptions1: {
+         shortcuts: [{
+           text: '今天',
+           onClick(picker) {
+             picker.$emit('pick', new Date());
+           }
+         }, {
+           text: '昨天',
+           onClick(picker) {
+             const date = new Date();
+             picker.$emit('pick', date.getTime() - 3600 * 1000 * 24);
+           }
+         }, {
+           text: '一周前',
+           onClick(picker) {
+             const date = new Date();
+             picker.$emit('pick', date.getTime() - 3600 * 1000 * 24 * 7);
+           }
+         }]
+       },
+       value1: '',
+       value2: '',
+     };
     }
-  };
+    };
 </script>
 ```
+:::
 
-## 日期范围
+###  其他日期单位
 
-###  日期范围
+通过扩展基础的日期选择，可以选择周、月、年
 
-在一个选择器中选择
-
-<el-date-picker
-  v-model="value6"
-  type="daterange"
-  placeholder="选择日期范围"
-  style="width: 220px">
-</el-date-picker>
-
+:::demo 
 ```html
-<el-date-picker
-  v-model="value"
-  type="daterange"
-  placeholder="选择日期范围"
-  style="width: 220px">
-</el-date-picker>
+<div class="block">
+  <span class="demonstration">周</span>
+  <el-date-picker
+    v-model="value3"
+    type="week"
+    format="yyyy 第 WW 周"
+    placeholder="选择周">
+  </el-date-picker>
+</div>
+<div class="block">
+  <span class="demonstration">月</span>
+  <el-date-picker
+    v-model="value4"
+    type="month"
+    placeholder="选择月">
+  </el-date-picker>
+</div>
+<div class="block">
+  <span class="demonstration">年</span>
+  <el-date-picker
+    v-model="value5"
+    type="year"
+    placeholder="选择年">
+  </el-date-picker>
+</div>
 ```
+:::
 
-###  含快捷选项
+###  选择日期范围
 
-左侧区域可配置快捷选项，例如『最近一周』、『最近一个月』等
+可在一个选择器中便捷地选择一个时间范围
 
-<el-date-picker
-  v-model="value7"
-  type="daterange"
-  placeholder="选择日期范围"
-  :picker-options="pickerOptions2"
-  style="width: 220px">
-</el-date-picker>
-
+:::demo 
 ```html
-<el-date-picker
-  v-model="value"
-  type="daterange"
-  placeholder="选择日期范围"
-  :picker-options="pickerOptions2"
-  style="width: 220px">
-</el-date-picker>
+<template>
+  <div class="block">
+    <span class="demonstration">默认</span>
+    <el-date-picker
+      v-model="value6"
+      type="daterange"
+      placeholder="选择日期范围"
+      style="width: 220px">
+    </el-date-picker>
+  </div>
+  <div class="block">
+    <span class="demonstration">带快捷选项</span>
+    <el-date-picker
+      v-model="value7"
+      type="daterange"
+      placeholder="选择日期范围"
+      :picker-options="pickerOptions2"
+      style="width: 220px">
+    </el-date-picker>
+  </div>
+</template>
 
 <script>
-  module.exports = {
+  export default {
     data() {
-      return {
-        pickerOptions2: {
-          shortcuts: [{
-            text: '最近一周',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-              picker.$emit('pick', [start, end]);
-            }
-          }, {
-            text: '最近一个月',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
-              picker.$emit('pick', [start, end]);
-            }
-          }, {
-            text: '最近三个月',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-              picker.$emit('pick', [start, end]);
-            }
-          }]
-        },
-        value: ''
-      };
+     return {
+       pickerOptions2: {
+         shortcuts: [{
+           text: '最近一周',
+           onClick(picker) {
+             const end = new Date();
+             const start = end.getTime() - 3600 * 1000 * 24 * 7;
+             picker.$emit('pick', [start, end]);
+           }
+         }, {
+           text: '最近一个月',
+           onClick(picker) {
+             const end = new Date();
+             const start = end.getTime() - 3600 * 1000 * 24 * 30;
+             picker.$emit('pick', [start, end]);
+           }
+         }, {
+           text: '最近三个月',
+           onClick(picker) {
+             const end = new Date();
+             const start = end.getTime() - 3600 * 1000 * 24 * 90;
+             picker.$emit('pick', [start, end]);
+           }
+         }]
+       },
+       value6: '',
+       value7: ''
+     };
     }
-  };
+    };
 </script>
 ```
+:::
 
-## API
+### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| value | 绑定值，需双向绑定 | String |   |  |
-| readonly | 只读 | Boolean |  | false |
-| placeholder | 占位内容 | String |  |  |
-| type | 显示类型 | String | year, month, date, datetime, week | date |
-| format | 时间日期格式化 | String | 年 `yyyy`, 月 `MM`, 日 `dd`, 小时 `HH`, 分 `mm`, 秒 `ss` | 'yyyy-MM-dd' |
-| shortcuts | 快捷选项列表，配置信息查看下表 | Object[] | | |
+| readonly | 只读 | boolean | - | false |
+| placeholder | 占位内容 | string | - | - |
+| type | 显示类型 | string | year/month/date/datetime/week | date |
+| format | 时间日期格式化 | string | 年 `yyyy`，月 `MM`，日 `dd`，<br>小时 `HH`，分 `mm`，秒 `ss` | yyyy-MM-dd |
+| shortcuts | 快捷选项列表，配置信息<br>查看下表 | object[] | - | - |
 
-### shortcuts
+### Shortcuts
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| text |  标题 | String | | |
-| onClick | 选中后会调用函数，参数是 vm，设置值通过触发 'pick' 事件。例如 vm.$emit('pick', new Date()) | Function | | |
+| text | 标题文本 | string | - | - |
+| onClick | 选中后的回调函数，参数是 vm，可通过触发 'pick' 事件设置<br>选择器的值。例如 vm.$emit('pick', new Date()) | function | | |

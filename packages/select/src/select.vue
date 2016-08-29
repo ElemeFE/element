@@ -1,6 +1,6 @@
 <template>
   <div class="el-select" :class="{ 'is-multiple': multiple, 'is-small': size === 'small' }">
-    <div class="el-select__tags" v-if="multiple" @click.stop="toggleMenu" ref="tags" :style="{ 'max-width': inputWidth - 36 + 'px' }">
+    <div class="el-select__tags" v-if="multiple" @click.stop="toggleMenu" ref="tags" :style="{ 'max-width': inputWidth - 32 + 'px' }">
       <transition-group @after-leave="resetInputHeight">
         <el-tag
           v-for="item in selected"
@@ -45,14 +45,12 @@
       @mouseenter.native="inputHovering = true"
       @mouseleave.native="inputHovering = false"
       :icon="iconClass"
-      :style="{ 'width': inputWidth + 'px' }"
       v-element-clickoutside="handleClose">
     </el-input>
     <transition name="md-fade-bottom">
       <el-select-menu
         ref="popper"
-        v-show="visible && nodataText !== false"
-        :style="{ 'width': dropdownWidth ? dropdownWidth + 'px' : '100%' }">
+        v-show="visible && nodataText !== false">
         <ul class="el-select-dropdown__list" v-show="options.length > 0 && filteredOptionsCount > 0 && !loading">
           <slot></slot>
         </ul>
@@ -119,14 +117,6 @@
           }
         }
         return null;
-      },
-
-      inputWidth() {
-        if (!this.width) {
-          return this.multiple ? 220 : 180;
-        }
-
-        return this.width;
       }
     },
 
@@ -142,8 +132,6 @@
 
     props: {
       name: String,
-      width: Number,
-      dropdownWidth: Number,
       value: {},
       size: String,
       disabled: Boolean,
@@ -166,6 +154,7 @@
         selected: {},
         isSelect: true,
         inputLength: 20,
+        inputWidth: 180,
         valueChangeBySelected: false,
         cachedPlaceHolder: '',
         optionsCount: 0,
@@ -528,6 +517,14 @@
       this.$on('addOptionToValue', this.addOptionToValue);
       this.$on('handleOptionClick', this.handleOptionSelect);
       this.$on('onOptionDestroy', this.onOptionDestroy);
+    },
+
+    mounted() {
+      this.$nextTick(() => {
+        if (this.$refs.reference.$el) {
+          this.inputWidth = this.$refs.reference.$el.getBoundingClientRect().width;
+        }
+      });
     }
   };
 </script>

@@ -64,7 +64,7 @@
 ## Message box 信息提示
 模拟系统的消息提示框而实现的一套摸态对话框组件，用于消息提示、成功提示、错误提示、询问信息
 
-### 基本用法
+### 基础用法
 
 MessageBox 组件提供了四种不同的样式来替代浏览器提供的`alert`等功能：`$msgbox`，`$alert`，`$confirm`以及`$prompt`。
 
@@ -74,7 +74,7 @@ MessageBox 组件提供了四种不同的样式来替代浏览器提供的`alert
 
 ```html
 <template>
-  <el-button @click.native="open">打开 Alert</el-button>
+  <el-button type="text" @click.native="open">打开 Alert</el-button>
 </template>
 
 <script>
@@ -97,7 +97,7 @@ MessageBox 组件也拥有极高的定制性，我们可以传入`options`作为
 
 ```html
 <template>
-  <el-button @click.native="open2">打开 alert</el-button>
+  <el-button type="text" @click.native="open2">打开 alert</el-button>
 </template>
 
 <script>
@@ -120,7 +120,7 @@ MessageBox 组件也拥有极高的定制性，我们可以传入`options`作为
 
 ```html
 <template>
-  <el-button @click.native="open3">打开 confirm</el-button>
+  <el-button type="text" @click.native="open3">打开 confirm</el-button>
 </template>
 
 <script>
@@ -153,7 +153,7 @@ Prompt 框功能强大，可以处理简单的输入。
 
 ```html
 <template>
-  <el-button @click.native="open4">打开 prompt</el-button>
+  <el-button type="text" @click.native="open4">打开 prompt</el-button>
 </template>
 
 <script>
@@ -187,7 +187,7 @@ Msgbox 框是最基本的弹框，与 Alert 的区别在于 Alert 无法通过 E
 
 ```html
 <template>
-  <el-button @click.native="open5">打开 Message Box</el-button>
+  <el-button type="text" @click.native="open5">打开 Message Box</el-button>
 </template>
 
 <script>
@@ -229,17 +229,17 @@ import { MessageBox } from 'element-ui';
 
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| title | MessageBox标题 | string | | |
-| message | MessageBox消息正文内容 | string | | |
-| type | 消息类型，用于显示图标 | string | 'success', 'info', 'warning', 'error' | |
-| showCancelButton | 是否显示取消按钮 | boolean | | false（以 confirm 和 prompt 方式调用时为 true） |
-| showConfirmButton | 是否显示确定按钮 | boolean | | true |
-| cancelButtonText | 取消按钮的文本内容 | string | | '取消' |
-| confirmButtonText | 确定按钮的文本内容 | string | | '确定' |
-| cancelButtonClass | 取消按钮的自定义类名 | string | | |
-| confirmButtonClass | 确定按钮的自定义类名 | string | | |
-| showInput | 是否显示输入框 | boolean | | false（以 prompt 方式调用时为 true）|
-| inputPlaceholder | 输入框的占位符 | string | | |
-| inputPattern | 输入框的校验表达式 | regexp | | |
-| inputValidator | 输入框的校验函数。可以返回布尔值或字符串，若返回一个字符串, 则返回结果会被赋值给 inputErrorMessage | function | | |
-| inputErrorMessage | 校验未通过时的提示文本 | string | | '输入的数据不合法!' |
+| title | MessageBox标题 | string | - | - |
+| message | MessageBox消息正文内容 | string | - | - |
+| type | 消息类型，用于显示图标 | string | success/info/<br>warning/error | - |
+| show-cancel-button | 是否显示取消按钮 | boolean | - | false（以 confirm 和 prompt 方式调用时为 true） |
+| show-confirm-button | 是否显示确定按钮 | boolean | - | true |
+| cancel-button-text | 取消按钮的文本内容 | string | - | 取消 |
+| confirm-button-text | 确定按钮的文本内容 | string | - | 确定 |
+| cancel-button-class | 取消按钮的自定义类名 | string | - | - |
+| confirm-button-class | 确定按钮的自定义类名 | string | - | - |
+| show-input | 是否显示输入框 | boolean | - | false（以 prompt 方式调用时为 true）|
+| input-placeholder | 输入框的占位符 | string | - | - |
+| input-pattern | 输入框的校验表达式 | regexp | - | - |
+| input-validator | 输入框的校验函数。可以返回布尔值或字符串，若返回一个字符串, 则返回结果会被赋值给 inputErrorMessage | function | - | - |
+| input-error-message | 校验未通过时的提示文本 | string | - | 输入的数据不合法! |

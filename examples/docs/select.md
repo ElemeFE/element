@@ -572,10 +572,8 @@
 | multiple | 是否多选 | boolean | - | false |
 | disabled | 是否禁用 | boolean | - | false |
 | clearable | 单选时是否可以清空选项 | boolean | - | false |
-| width | select 的宽度 | number | - | 180（单选）/220（多选） |
-| dropdown-width | 下拉菜单的宽度，不设置则与输入框同宽 | number | - | - |
 | name | select input 的 name 属性 | string | - | - |
-| placeholder | 占位符 | string | - | '请选择' |
+| placeholder | 占位符 | string | - | 请选择 |
 | filterable | 是否可搜索 | boolean | - | false |
 | filter-method | 自定义过滤方法 | function | - | - |
 | remote | 是否为远程搜索 | boolean | - | false |

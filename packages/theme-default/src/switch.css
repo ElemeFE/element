@@ -72,7 +72,7 @@
         border-radius: 15px;
         transition: transform .3s;
         size: 16px;
-        z-index: 100;
+        z-index: 20;
         background-color: var(--color-white);
       }
     }
