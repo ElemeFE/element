@@ -7,24 +7,17 @@
     }
   };
 </script>
-## 基础用法
+## Tooltips 文字提示
+
+### 基础用法
 
 Tooltip 组件常用于展示鼠标 hover 时的提示信息，在这里我们提供9种不同的展示方式。
 
-使用`content`属性来决定`hover`时的提示信息。
+下面是完整的九个示例，可以通过该示例来理解，选择你要的效果：
 
-由`placement`属性决定展示效果：
+:::demo 使用`content`属性来决定`hover`时的提示信息。由`placement`属性决定展示效果：`placement`属性值为：`方向-箭头方位`；四个方向：`top`、`left`、`right`、`bottom`；三种箭头方位：`start`, `end`，默认为空。如`top center`即`placement="top"`，`left top`即`placement="left-end"`。
 
-`placement`属性值为：`方向-箭头方位`
-
-四个方向：`top`、`left`、`right`、`bottom`
-
-三种箭头方位：`start`, `end`，默认为空
-
-如`top center`即`placement="top"`，`left top`即`placement="left-end"`。
-
-下面是完整的九个示例，可以通过该示例来理解上面的说明，选择你要的效果：
-
+```html
 <style>
   .box {
     width: 400px;
@@ -101,24 +94,15 @@ Tooltip 组件常用于展示鼠标 hover 时的提示信息，在这里我们�
     </el-tooltip>
   </div>
 </div>
+```
+:::
 
-## 主题
+### 主题
 
-Tooltip 组件提供了两个不同的主题：`dark`和`light`，可以通过设置`effect`属性来改变主题，默认为`dark`。
-
-<div>
-  <el-tooltip content="Top center" placement="top">
-    <el-button>Top center</el-button>
-  </el-tooltip>
-</div>
+Tooltip 组件提供了两个不同的主题：`dark`和`light`。
 
 
-<div>
-  <el-tooltip content="Bottom center" placement="bottom" effect="light">
-    <el-button>Bottom center</el-button>
-  </el-tooltip>
-</div>
-
+:::demo 通过设置`effect`属性来改变主题，默认为`dark`。
 ```html
 <el-tooltip content="Top center" placement="top">
   <el-button>Dark</el-button>
@@ -127,26 +111,22 @@ Tooltip 组件提供了两个不同的主题：`dark`和`light`，可以通过�
   <el-button>Light</el-button>
 </el-tooltip>
 ```
+:::
 
-## 更多Content
+### 更多Content
 
-如果需要展示多行文本或者是设置文本内容的格式，我们可以考虑用具名 slot 分发`content`，替代`tooltip`中的`content`属性：
+展示多行文本或者是设置文本内容的格式
 
-<div>
-  <el-tooltip placement="top">
-    <div slot="content">多行信息<br/>第二行信息</div>
-    <el-button>Top center</el-button>
-  </el-tooltip>
-</div>
-
+:::demo 用具名 slot 分发`content`，替代`tooltip`中的`content`属性。
 ```html
 <el-tooltip placement="top">
   <div slot="content">多行信息<br/>第二行信息</div>
   <el-button>Top center</el-button>
 </el-tooltip>
 ```
+:::
 
-## 高级扩展
+### 高级扩展
 
 除了这些基本设置外，还有一些属性可以让使用者更好的定制自己的效果：
 
@@ -158,25 +138,7 @@ Tooltip 组件提供了两个不同的主题：`dark`和`light`，可以通过�
 
 当然，Tooltip 组件实际上十分强大，文末的API文档会做一一说明。
 
-<style>
-  .slide-fade-enter-active {
-    transition: all .3s ease;
-  }
-  .slide-fade-leave-active {
-    transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-  }
-  .slide-fade-enter, .expand-fade-leave-active {
-    margin-left: 20px;
-    opacity: 0;
-  }
-</style>
-
-<div>
-  <el-tooltip :disabled="disabled" content="点击关闭 tooltip 功能" transition="slide-fade" placement="bottom" effect="light">
-    <el-button @click.native="disabled=true">点击关闭 tooltip 功能</el-button>
-  </el-tooltip>
-</div>
-
+:::demo
 ```html
 <template>
   <el-tooltip :disabled="disabled" content="点击关闭 tooltip 功能" transition="slide-fade" placement="bottom" effect="light">
@@ -197,8 +159,9 @@ Tooltip 组件提供了两个不同的主题：`dark`和`light`，可以通过�
   }
 </style>
 ```
+:::
 
-## Attributes
+### Attributes
 | 参数               | 说明                                                     | 类型              | 可选值      | 默认值 |
 |--------------------|----------------------------------------------------------|-------------------|-------------|--------|
 |  effect        |  默认提供的主题  | String            | `dark`, `light`  | dark  |
@@ -211,4 +174,3 @@ Tooltip 组件提供了两个不同的主题：`dark`和`light`，可以通过�
 |  visible-arrow   |  是否显示 Tooltip 箭头，更多参数可见[Vue-popper](https://github.com/element-component/vue-popper) | Boolean |  | true |
 |  options        | [popper.js](https://popper.js.org/documentation.html) 的参数 | Object            | 参考 [popper.js](https://popper.js.org/documentation.html) 文档 | `{ boundariesElement: 'body', gpuAcceleration: false }` |
 | openDelay | 延迟出现，单位毫秒 | Number | | 0 |
-

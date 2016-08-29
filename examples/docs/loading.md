@@ -62,8 +62,10 @@
     }
   }
 </script>
+## Loading 加载
+加载数据时显示动效
 
-## 基本用法
+### 基本用法
 
 :::demo 在 Loading 组件中，Element 准备了自定义命令`v-loading`，只需要绑定`Boolean`即可，默认状况下，Loading 遮罩会插入到绑定元素的子节点。
 
@@ -76,7 +78,7 @@
 ```
 :::
 
-## 修饰符
+### 修饰符
 
 通过修饰符，我们可以使用全屏幕 Loading 或将 Loading 设置在 body 上。
 

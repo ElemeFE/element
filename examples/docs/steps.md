@@ -1,37 +1,11 @@
-## 基础步骤条
+## Steps 步骤条
+引导用户按照流程完成任务的分步导航条，可根据实际应用场景设定步骤，步骤不得少于2步
 
-Steps 组件需要设置`active`属性，接受一个`Number`，表明步骤的 index，从 0 开始。
-
-需要定宽的步骤条时，设置`space`属性即可，它接受`Boolean`，单位为`px`，如果不设置，则为自适应。
-
-设置`finish-status`属性可以改变已经完成的步骤的状态，而`process-status`可以改变当前步骤的状态，Steps组件提供了5种状态：`wait`，`process`，`finish`，`error`，`success`。
+### 基础步骤条
 
 下两例分别展示了定宽的步骤条和自适应的步骤条：
 
-<el-steps :space="100" :active="active" finish-status="success">
-  <el-step title="步骤 1"></el-step>
-  <el-step title="步骤 2"></el-step>
-  <el-step title="步骤 3"></el-step>
-</el-steps>
-
-<el-button @click.native="next">下一步</el-button>
-
-<script>
-  export default {
-    data() {
-      return {
-        active: 0
-      };
-    },
-
-    methods: {
-      next() {
-        if (this.active++ > 2) this.active = 0;
-      }
-    }
-  }
-</script>
-
+:::demo 设置`active`属性，接受一个`Number`，表明步骤的 index，从 0 开始。需要定宽的步骤条时，设置`space`属性即可，它接受`Boolean`，单位为`px`，如果不设置，则为自适应。设置`finish-status`属性可以改变已经完成的步骤的状态。
 ```html
 <el-steps :space="100" :active="active" finish-status="success">
   <el-step title="步骤 1"></el-step>
@@ -57,13 +31,9 @@ Steps 组件需要设置`active`属性，接受一个`Number`，表明步骤的 
   }
 </script>
 ```
+:::
 
-<el-steps :active="1" process-status="error">
-  <el-step title="步骤 1"></el-step>
-  <el-step title="步骤 2"></el-step>
-  <el-step title="步骤 3"></el-step>
-</el-steps>
-
+:::demo Steps组件提供了5种状态：`wait`，`process`，`finish`，`error`，`success`。
 ```html
 <el-steps :active="1" process-status="error">
   <el-step title="步骤 1"></el-step>
@@ -71,17 +41,13 @@ Steps 组件需要设置`active`属性，接受一个`Number`，表明步骤的 
   <el-step title="步骤 3"></el-step>
 </el-steps>
 ```
+:::
 
-## 状态与描述
+### 状态与描述
 
-Steps 组件中，我们可以给`el-step`元素设置`title`属性来定义每一个步骤的标题（或状态）。使用`title`具名分发，可以用`slot`的方式来取代属性的设置，在本文档最后的列表中有所有的 slot name 可供参考。
+Steps 组件中，我们可以定义每一个步骤的标题（或状态）。
 
-<el-steps :space="100" :active="1" finish-status="success">
-  <el-step title="已完成"></el-step>
-  <el-step title="进行中"></el-step>
-  <el-step title="步骤 3"></el-step>
-</el-steps>
-
+:::demo 也可以使用`title`具名分发，可以用`slot`的方式来取代属性的设置，在本文档最后的列表中有所有的 slot name 可供参考。
 ```html
 <el-steps :space="100" :active="1" finish-status="success">
   <el-step title="已完成"></el-step>
@@ -89,15 +55,11 @@ Steps 组件中，我们可以给`el-step`元素设置`title`属性来定义每�
   <el-step title="步骤 3"></el-step>
 </el-steps>
 ```
+:::
 
 除了`title`外，还可以用`description`属性来补充说明，下面是一个使用了`description`的例子：
 
-<el-steps :space="200" :active="1">
-  <el-step title="步骤 1" description="这是一段很长很长很长的描述性文字"></el-step>
-  <el-step title="步骤 2" description="这是一段很长很长很长的描述性文字"></el-step>
-  <el-step title="步骤 3" description="这是一段很长很长很长的描述性文字"></el-step>
-</el-steps>
-
+:::demo
 ```html
 <el-steps :space="200" :active="1">
   <el-step title="步骤 1" description="这是一段很长很长很长的描述性文字"></el-step>
@@ -105,17 +67,11 @@ Steps 组件中，我们可以给`el-step`元素设置`title`属性来定义每�
   <el-step title="步骤 3" description="这是一段很长很长很长的描述性文字"></el-step>
 </el-steps>
 ```
+:::
 
-## 带图标的步骤条
+### 带图标的步骤条
 
-除了`title`和`description`，还可以通过`icon`属性来设置图标，图标的类型可以参考 Icon 组件的文档，除此以外，还能通过 slot name 来使用自定义的图标。
-
-<el-steps :space="100" :active="1">
-  <el-step title="步骤 1" icon="edit"></el-step>
-  <el-step title="步骤 2" icon="upload"></el-step>
-  <el-step title="步骤 3" icon="picture"></el-step>
-</el-steps>
-
+:::demo 通过`icon`属性来设置图标，图标的类型可以参考 Icon 组件的文档，除此以外，还能通过 slot name 来使用自定义的图标。
 ```html
 <el-steps :space="100" :active="1">
   <el-step title="步骤 1" icon="edit"></el-step>
@@ -123,17 +79,13 @@ Steps 组件中，我们可以给`el-step`元素设置`title`属性来定义每�
   <el-step title="步骤 3" icon="picture"></el-step>
 </el-steps>
 ```
+:::
 
-## 竖式步骤条
+### 竖式步骤条
 
-默认情况下，步骤条为横向显示，如果需要竖向显示的步骤条，只需要在`el-steps`元素中设置`direction`属性为`vertical`即可。
+默认情况下，步骤条为横向显示，也可以显示竖向显示的步骤条。
 
-<el-steps :space="100" direction="vertical" :active="1">
-  <el-step title="步骤 1"></el-step>
-  <el-step title="步骤 2"></el-step>
-  <el-step title="步骤 3"></el-step>
-</el-steps>
-
+:::demo 只需要在`el-steps`元素中设置`direction`属性为`vertical`即可。
 ```html
 <el-steps :space="100" direction="vertical" :active="1">
   <el-step title="步骤 1"></el-step>
@@ -141,8 +93,7 @@ Steps 组件中，我们可以给`el-step`元素设置`title`属性来定义每�
   <el-step title="步骤 3"></el-step>
 </el-steps>
 ```
-
-## API
+:::
 
 ### Steps Attributes
 

@@ -373,11 +373,14 @@
         this.$calcHeight(value);
       },
 
-      data(val) {
-        if (val && this.selectionMode === 'multiple') {
-          this.tableData = val.map(item => objectAssign({ '$selected': false }, item));
-        } else {
-          this.tableData = val;
+      data: {
+        immediate: true,
+        handler(val) {
+          if (val && this.selectionMode === 'multiple') {
+            this.tableData = val.map(item => objectAssign({ '$selected': false }, item));
+          } else {
+            this.tableData = val;
+          }
         }
       },
 
