@@ -14,7 +14,7 @@
     box-shadow: 0 0 6px rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .12);
     transition: opacity 0.3s, transform .3s, right .3s, top 0.4s;
     overflow: hidden;
-    z-index: 2000;
+    z-index: var(--index-popper);
 
     @e group {
       & span {

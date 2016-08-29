@@ -7,7 +7,7 @@
       width: 100%;
       height: 4px;
       margin: 20px 0;
-      background-color: #E5E9F2;
+      background-color: var(--slider-runway-background-color);
       border-radius: 3px;
       position: relative;
       cursor: pointer;
@@ -30,7 +30,7 @@
 
     @e bar {
       height: 4px;
-      background-color: #20A0FF;
+      background-color: var(--slider-main-background-color);
       border-top-left-radius: 3px;
       border-bottom-left-radius: 3px;
       position: absolute;
@@ -47,7 +47,7 @@
 
     @e button {
       size: 12px;
-      background-color: #20A0FF;
+      background-color: var(--slider-main-background-color);
       border-radius: 50%;
       position: absolute;
       top: 12px;
@@ -70,7 +70,7 @@
       text-align: center;
       size: 26px;
       border-radius: 50%;
-      background-color: #20A0FF;
+      background-color: var(--slider-main-background-color);
       color: #fff;
       cursor: default;
       z-index: var(--index-top);
@@ -78,14 +78,14 @@
       transform-origin: center bottom;
 
       &::before {
-        triangle: 9px top #20A0FF;
+        triangle: 9px top var(--slider-main-background-color);
         position: absolute;
         top: -14px;
         left: 4px;
       }
 
       &::after {
-        triangle: 9px bottom #20A0FF;
+        triangle: 9px bottom var(--slider-main-background-color);
         position: absolute;
         bottom: -14px;
         left: 4px;
@@ -104,7 +104,7 @@
       position: absolute;
       size: 4px;
       border-radius: 50%;
-      background-color: #c0ccda;
+      background-color: var(--slider-stop-background-color);
       transform: translateX(-50%);
     }
 
