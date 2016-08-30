@@ -94,9 +94,14 @@ export default {
   data() {
     return {
       isChildColumn: false,
-      columns: [],
-      row: {}
+      columns: []
     };
+  },
+
+  beforeCreate() {
+    this.row = {};
+    this.column = {};
+    this.$index = 0;
   },
 
   components: {
@@ -137,8 +142,8 @@ export default {
 
     let property = this.property;
     if (property) {
-      template = function(h, { row }) {
-        return <span>{ this.$getPropertyText(row, property, columnId) }</span>;
+      template = function(h, { row }, parent) {
+        return <span>{ parent.$getPropertyText(row, property, columnId) }</span>;
       };
     }
 
@@ -161,12 +166,13 @@ export default {
 
     let renderColumn = column.template;
     let _self = this;
+
     column.template = function(h, data) {
       if (_self.$vnode.data.inlineTemplate) {
         let costomRender = _self.$options.render;
 
-        renderColumn = function(_h) {
-          return costomRender.call(data, _h);
+        renderColumn = function() {
+          return costomRender.call(objectAssign(_self, data));
         };
       };
 
@@ -176,10 +182,10 @@ export default {
             effect={ this.effect }
             placement="top"
             disabled={ this.tooltipDisabled }>
-            <div class="cell">{ renderColumn.call(this._renderProxy, h, data) }</div>
-            <span slot="content">{ renderColumn.call(this._renderProxy, h, data) }</span>
+            <div class="cell">{ renderColumn(h, data, this._renderProxy) }</div>
+            <span slot="content">{ renderColumn(h, data, this._renderProxy) }</span>
           </el-tooltip>
-        : <div class="cell">{ renderColumn.call(this._renderProxy, h, data) }</div>;
+        : <div class="cell">{ renderColumn(h, data, this._renderProxy) }</div>;
     };
 
     this.columnConfig = column;
