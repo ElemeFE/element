@@ -19,6 +19,17 @@
     font-weight: 300;
   }
 
+  a {
+    color: #4078c0;
+    text-decoration: none;
+  }
+
+  .hljs {
+    padding: 20px 25px;
+    background-color: #f9fafc;
+    margin-bottom: 25px;
+  }
+
   .main-cnt {
     margin-top: -80px;
     padding: 80px 0 120px;

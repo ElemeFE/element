@@ -111,7 +111,7 @@
           <li class="nav-item">
             <router-link
               active-class="active"
-              to="/component/button"
+              to="/component/layout"
               exact>组件
             </router-link>
           </li>
