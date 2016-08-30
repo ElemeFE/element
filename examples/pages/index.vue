@@ -87,7 +87,6 @@
       left: 0;
       background-color: #fff;
       border-radius: 0 0 5px 5px;
-      box-shadow:0px 6px 18px 0px rgba(232,237,250,0.50);
       transition: all .3s;
       text-decoration: none;
       display: block;
@@ -100,6 +99,7 @@
     }
     &:hover {
       bottom: 6px;
+      box-shadow: 0px 6px 18px 0px rgba(232,237,250,0.50);
     }
   }
 </style>
@@ -110,7 +110,7 @@
         <div class="banner-desc">
           <h2>Element</h2>
           <div id="source" style="display: none;" ref="type-source">
-            快速搭建页面<br/>只为这样的你:<span data-type="back" ref="type-job">设计师</span>
+            快速搭建页面<br/>只为这样的你: <span data-type="back" ref="type-job">设计师</span>
           </div>
           <div id="output-wrap">
             <span id="output" ref="type-output"></span>
@@ -141,7 +141,7 @@
             <p>使用组件 Demo 快速体验交互细节;使用前端框架封装的代码帮助工程师快速开发。</p>
             <router-link
               active-class="active"
-              to="/component/button"
+              to="/component/layout"
               exact>查看详情
             </router-link>
           </div>
