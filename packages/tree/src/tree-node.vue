@@ -6,13 +6,12 @@
       <span class="el-tree-node__expand-icon"
         :class="{ 'is-leaf': node.isLeaf, expanded: !node.isLeaf && expanded }"
         ></span>
-      <el-checkbox v-if="showCheckbox" :indeterminate="node.indeterminate" v-model="node.checked" :true-label="true" :false-label="false" @change="handleCheckChange"></el-checkbox>
+      <el-checkbox v-if="showCheckbox" :indeterminate="node.indeterminate" v-model="node.checked" @change="handleCheckChange"></el-checkbox>
       <!--<span class="el-tree-node__icon {{ node.icon }} {{ node.loading ? 'el-icon-loading' : '' }}" v-if="node.icon"></span>-->
       <span class="el-tree-node__label">{{ node.label }}</span>
     </div>
     <collapse-transition>
       <div class="el-tree-node__children"
-        v-if="childrenRendered"
         v-show="expanded">
         <el-tree-node v-for="child in node.children" :node="child"></el-tree-node>
       </div>

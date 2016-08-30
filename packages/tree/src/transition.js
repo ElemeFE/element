@@ -64,9 +64,6 @@ export default {
   functional: true,
   render(h, { children }) {
     const data = {
-      props: {
-        appear: true
-      },
       on: new Transition()
     };
 

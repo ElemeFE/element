@@ -134,14 +134,14 @@ Tooltip 组件提供了两个不同的主题：`dark`和`light`。
 
 如果需要关闭`tooltip`功能，`disabled`属性可以满足这个需求，它接受一个`Boolean`，设置为`true`即可。
 
-事实上，这是基于[Vue-popper](https://github.com/element-component/vue-popper)的扩展，你可以自定义任意 Vue-popper 中允许定义的字段。
+事实上，这是基于 [Vue-popper](https://github.com/element-component/vue-popper) 的扩展，你可以自定义任意 Vue-popper 中允许定义的字段。
 
 当然，Tooltip 组件实际上十分强大，文末的API文档会做一一说明。
 
 :::demo
 ```html
 <template>
-  <el-tooltip :disabled="disabled" content="点击关闭 tooltip 功能" transition="slide-fade" placement="bottom" effect="light">
+  <el-tooltip :disabled="disabled" content="点击关闭 tooltip 功能" placement="bottom" effect="light">
     <el-button @click.native="disabled=true">点击关闭 tooltip 功能</el-button>
   </el-tooltip>
 </template>
