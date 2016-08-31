@@ -77,6 +77,7 @@
         if (this.modal) {
           document.body.style.overflow = this.bodyOverflow;
         }
+        this.opened = false;
 
         if (!this.transition) {
           this.doAfterClose();
