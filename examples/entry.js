@@ -16,8 +16,28 @@ Vue.component('main-footer', MainFooter);
 Vue.component('main-header', MainHeader);
 Vue.component('side-nav', SideNav);
 
+const scrollBehavior = (to, from, savedPosition) => {
+  if (savedPosition) {
+    // savedPosition is only available for popstate navigations.
+    return savedPosition;
+  } else {
+    // new navigation.
+    // scroll to anchor
+    if (to.hash) {
+      return { anchor: true };
+    }
+    // explicitly control scroll position
+    // check if any matched route config has meta that requires scrolling to top
+    if (to.matched.some(m => m.meta.scrollToTop)) {
+      return { x: 0, y: 0 };
+    }
+  }
+};
+
 const router = new VueRouter({
+  mode: 'history',
   base: __dirname,
+  scrollBehavior,
   routes: configRouter
 });
 

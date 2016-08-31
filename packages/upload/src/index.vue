@@ -177,7 +177,7 @@ export default {
       }
     };
 
-    var uploadComponent = typeof FormData === 'undefined'
+    var uploadComponent = typeof FormData !== 'undefined'
       ? <upload {...props}>{this.$slots.default}</upload>
       : <iframeUpload {...props}>{this.$slots.default}</iframeUpload>;
 
