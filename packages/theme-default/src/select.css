@@ -130,6 +130,7 @@
       margin: 4px 0 -3px 10px;
       color: #666;
       font-size: 14px;
+      vertical-align: baseline;
       appearance: none;
       height: 28px;
       background-color: transparent;
@@ -152,6 +153,7 @@
 
     @e tags {
       position: absolute;
+      line-height: normal;
       z-index: var(--index-top);
     }
 
