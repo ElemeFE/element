@@ -421,6 +421,21 @@
           const style = this.$refs.fixed.style;
           if (!style) return;
           style.height = this.$el.clientHeight + 'px';
+
+          // 若非固定列中的某行内容被撑高, 需要固定列中对应行高度与其保持一致
+          let bodyHeight = this.$el.querySelector('.el-table__body-wrapper').offsetHeight;
+          let fixedBodyHeight = this.$el.querySelector('.el-table__fixed-body-wrapper').offsetHeight;
+          if (bodyHeight !== fixedBodyHeight) {
+            let bodyTrs = this.$el.querySelector('.el-table__body-wrapper').querySelectorAll('tr');
+            let fixedBodyTrs = this.$el.querySelector('.el-table__fixed-body-wrapper').querySelectorAll('tr');
+            bodyTrs.forEach((tr, index) => {
+              let trHeight = tr.offsetHeight;
+              let fixedTrHeight = fixedBodyTrs[index].offsetHeight;
+              if (trHeight !== fixedTrHeight) {
+                fixedBodyTrs[index].style.height = trHeight + 'px';
+              }
+            });
+          }
         });
       }
     },
