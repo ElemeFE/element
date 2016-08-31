@@ -169,10 +169,10 @@ export default {
 
     column.template = function(h, data) {
       if (_self.$vnode.data.inlineTemplate) {
-        let costomRender = _self.$options.render;
+        let customRender = _self.$options.render;
 
         renderColumn = function() {
-          return costomRender.call(objectAssign(_self, data));
+          return customRender.call(objectAssign(_self, data));
         };
       };
 
