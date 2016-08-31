@@ -197,13 +197,12 @@
           });
         }
         if (!this.multiple) {
-          if (val === '') {
-            this.selected = {};
-            this.selectedLabel = '';
-          }
           let option = this.options.filter(option => option.value === val)[0];
           if (option) {
             this.$emit('addOptionToValue', option);
+          } else {
+            this.selected = {};
+            this.selectedLabel = '';
           }
         }
         this.resetHoverIndex();
