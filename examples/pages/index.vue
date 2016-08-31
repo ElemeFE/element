@@ -1,4 +1,10 @@
 <style scoped>
+  .actor {
+    &.typing:after {
+      content: '|';
+      animation: blink 500ms infinite;
+    }
+  }
   .banner {
     height: 420px;
     background-color: #20a0ff;
@@ -102,6 +108,10 @@
       box-shadow: 0px 6px 18px 0px rgba(232,237,250,0.50);
     }
   }
+  @keyframes blink {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
 </style>
 <template>
   <div>
@@ -109,13 +119,8 @@
       <div class="container">
         <div class="banner-desc">
           <h2>Element</h2>
-          <div id="source" style="display: none;" ref="type-source">
-            快速搭建页面<br/>只为这样的你: <span data-type="back" ref="type-job">设计师</span>
-          </div>
-          <div id="output-wrap">
-            <span id="output" ref="type-output"></span>
-            <span class="typing-cursor typing-cursor-white">|</span>
-          </div>
+          <div id="line1" class="actor"></div>
+          <div id="line2" class="actor"></div>
         </div>
         <img src="~examples/assets/images/banner-bg.svg" alt="Element">
       </div>
@@ -163,18 +168,41 @@
   </div>
 </template>
 <script>
-  import Typing from 'typing.js';
-  require('typing.js/typing.css');
+  import theaterJS from 'theaterjs';
 
   export default {
     mounted() {
-      var typing = new Typing({
-        source: this.$refs['type-source'],
-        output: this.$refs['type-output'],
-        delay: 80,
-        done: function() {}
-      });
-      typing.start();
+      function typing(theater) {
+        theater
+          .addScene('产品设计师', 600, -5, 800)
+          .addScene('交互设计师', 600, -5, 500)
+          .addScene('视觉设计师', 600, -5, 700)
+          .addScene('产品经理', 600, -4, 600)
+          .addScene('前端工程师', 600, -5, 800)
+          .addScene((done) => {
+            typing(theater);
+            done();
+          });
+      }
+      var theater = theaterJS();
+      theater
+        .on('type:start, erase:start', function() {
+          theater.getCurrentActor().$element.classList.add('typing');
+        })
+        .on('type:end, erase:end', function() {
+          theater.getCurrentActor().$element.classList.remove('typing');
+        });
+      theater
+        .addActor('line1', { speed: 0.8, accuracy: 0.6 })
+        .addActor('line2')
+        .addScene(400)
+        .addScene('line1:快速搭建页面', 600)
+        .addScene('line2:只为守护世界和平', 800, -6, '让你少加班', 1000)
+        .addScene('line2:只为这样的你: ', 600)
+        .addScene((done) => {
+          typing(theater);
+          done();
+        });
     }
   };
 </script>

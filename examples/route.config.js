@@ -4,7 +4,8 @@ const registerRoute = (config) => {
   let route = [{
     path: '/component',
     component: require('./pages/component.vue'),
-    children: []
+    children: [],
+    scrollToTop: true
   }];
   function addRoute(page) {
     const component = require(`./docs${page.path}.md`);
@@ -13,7 +14,8 @@ const registerRoute = (config) => {
       path: page.path.slice(1),
       meta: {
         title: page.title || page.name,
-        description: page.description
+        description: page.description,
+        scrollToTop: true
       },
       component: component.default || component
     });
@@ -43,6 +45,7 @@ let guideRoute = {
   path: '/guide',
   name: '指南',
   component: require('./pages/guide.vue'),
+  meta: { scrollToTop: true },
   children: [{
     path: 'design',
     name: '设计原则',
@@ -57,17 +60,20 @@ let guideRoute = {
 let resourceRoute = {
   path: '/resource',
   name: '资源',
+  meta: { scrollToTop: true },
   component: require('./pages/resource.vue')
 };
 
 let indexRoute = {
   path: '/',
   name: '首页',
+  meta: { scrollToTop: true },
   component: require('./pages/index.vue')
 };
 
 let changeLogRoute = {
   path: '/changelog',
+  meta: { scrollToTop: true },
   component: require('./pages/changelog.vue')
 };
 

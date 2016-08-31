@@ -5,33 +5,41 @@
   .el-col {
     box-sizing: border-box;
   }
-  .page-component .content > {
-    h3 {
-      margin: 45px 0 15px;
-    }
-    table {
-      width: 100%;
-      background-color: #fff;
-      color: #5e6d82;
-      font-size: 14px;
-      margin-bottom: 45px;
+  .page-component {
+    .content {
+      padding-left: 25px;
+      border-left: 1px solid #eaeefa;
+      margin-left: -1px;
       
-      strong {
-        font-weight: normal;
-      }
-      th {
-        text-align: left;
-      }
-      td, th {
-        border-bottom: 1px solid #eaeefb;
-        padding: 10px 0;
+      > {
+        h3 {
+          margin: 45px 0 15px;
+        }
+        table {
+          width: 100%;
+          background-color: #fff;
+          color: #5e6d82;
+          font-size: 14px;
+          margin-bottom: 45px;
+          
+          strong {
+            font-weight: normal;
+          }
+          th {
+            text-align: left;
+          }
+          td, th {
+            border-bottom: 1px solid #eaeefb;
+            padding: 10px 0;
+          }
+        }
       }
     }
   }
 </style>
 <template>
   <div class="page-container page-component">
-    <el-row :gutter="25">
+    <el-row>
       <el-col :span="6">
         <side-nav :data="navsData" base="/component"></side-nav>
       </el-col>
@@ -48,6 +56,9 @@
       return {
         navsData: navs
       };
+    },
+    updated() {
+      console.log(this.navsData);
     }
   };
 </script>

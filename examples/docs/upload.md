@@ -39,7 +39,7 @@
 
 ::: demo 通过 slot 你可以传入自定义的上传按钮类型和文字提示。
 ```html
-<el-upload action="http://element.alpha.elenet.me/upload" :on-preview="handlePreview" :on-remove="handleRemove">
+<el-upload action="http://element-test.faas.elenet.me/upload" :on-preview="handlePreview" :on-remove="handleRemove">
   <el-button size="small" type="primary">点击上传</el-button>
   <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
 </el-upload>
@@ -65,7 +65,7 @@
 ::: demo 将 `type` 属性指定为 'drag' 可以将上传控件变为支持拖拽的形式，并且你可以通过 `multiple` 属性来控制是否支持多选，`on-preview` 和 `on-remove` 是一个钩子函数，分别在点击上传后的文件链接和点击移除上传后的文件后被调用。
 ```html
 <el-upload
-  action="http://element.alpha.elenet.me/upload"
+  action="http://element-test.faas.elenet.me/upload"
   type="drag"
   :multiple="true"
   :on-preview="handlePreview"
@@ -97,7 +97,7 @@
 ::: demo `thumbnail-mode` 属性允许你将上传组件强制只允许图片上传，并支持展示上传文件的缩略图。
 ```html
 <el-upload
-  action="http://element.alpha.elenet.me/upload"
+  action="http://element-test.faas.elenet.me/upload"
   type="drag"
   :thumbnail-mode="true"
   :on-preview="handlePreview"
