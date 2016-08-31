@@ -5,11 +5,11 @@
       v-if="pageCount > 0"
       class="number">1</li>
     <li
-      class="el-icon ellipsis btn-quickprev"
+      class="el-icon more btn-quickprev"
       :class="[quickprevIconClass]"
       v-if="showPrevMore"
       @mouseenter="quickprevIconClass = 'el-icon-d-arrow-left'"
-      @mouseleave="quickprevIconClass = 'el-icon-ellipsis'"
+      @mouseleave="quickprevIconClass = 'el-icon-more'"
     >
     </li>
     <li
@@ -17,11 +17,11 @@
       :class="{ active: currentPage === pager }"
       class="number">{{ pager }}</li>
     <li
-      class="el-icon ellipsis btn-quicknext"
+      class="el-icon more btn-quicknext"
       :class="[quicknextIconClass]"
       v-if="showNextMore"
       @mouseenter="quicknextIconClass = 'el-icon-d-arrow-right'"
-      @mouseleave="quicknextIconClass = 'el-icon-ellipsis'"
+      @mouseleave="quicknextIconClass = 'el-icon-more'"
     >
     </li>
     <li
@@ -52,7 +52,7 @@
         const pageCount = this.pageCount;
         const currentPage = this.currentPage;
 
-        if (target.className.indexOf('ellipsis') !== -1) {
+        if (target.className.indexOf('more') !== -1) {
           if (target.className.indexOf('quickprev') !== -1) {
             newPage = currentPage - 5;
           } else if (target.className.indexOf('quicknext') !== -1) {
@@ -130,8 +130,8 @@
         current: null,
         showPrevMore: false,
         showNextMore: false,
-        quicknextIconClass: 'el-icon-ellipsis',
-        quickprevIconClass: 'el-icon-ellipsis'
+        quicknextIconClass: 'el-icon-more',
+        quickprevIconClass: 'el-icon-more'
       };
     }
   };
