@@ -1,5 +1,6 @@
 <template>
   <button :disabled="disabled" class="el-button"
+    :type="nativeType"
     :class="[
       type ? 'el-button-' + type : '',
       size ? 'el-button-' + size : '',
@@ -31,6 +32,10 @@
       icon: {
         type: String,
         default: ''
+      },
+      nativeType: {
+        type: String,
+        default: 'button'
       },
       loading: {
         type: Boolean,

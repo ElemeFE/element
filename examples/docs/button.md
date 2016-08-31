@@ -138,3 +138,4 @@ Button 组件提供除了默认值以外的三种尺寸，可以在不同场景�
 | plain     | 是否朴素按钮   | Boolean    | true,false | false   |
 | disabled  | 禁用    | boolean   | true, false   | false   |
 | icon  | 图标，已有的图标库中的图标名 | string   |    |    |
+| native-type | 原生 type 属性 | string | button,submit,reset | button |
