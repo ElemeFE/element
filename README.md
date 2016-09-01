@@ -2,11 +2,11 @@
 > UI Elements for admin page.
 
 ## Demo/Docs
-https://element-component.github.io/element
+http://element-test.faas.elenet.me/
 
 ## Usages
 ```shell
-npm i element-ui -S
+npm install element-ui
 ```
 
 ## Quick Start
@@ -61,6 +61,11 @@ Vue.component(Button.name, Button)
 }
 ```
 
+## Changelog
+Details changes for each release are documented in the [release notes](https://github.com/eleme/element-ui/releases).
+
 ## LICENSE
 MIT
+
+<!-- [![Build Status](https://api.travis-ci.org/ElemeFE/element-ui.svg)](https://travis-ci.org/ElemeFE/element-ui) [![npm package](https://img.shields.io/npm/v/element-ui.svg)](https://www.npmjs.org/package/element-ui) [![NPM downloads](http://img.shields.io/npm/dm/element-ui.svg)](https://npmjs.org/package/element-ui) -->
 
