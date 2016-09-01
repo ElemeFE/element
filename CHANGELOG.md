@@ -6,6 +6,8 @@
 
 - 修复 upload 上传的问题，并增加上传成功和失败的钩子函数
 - button 组件增加 `nativeType` 属性，用于组件内 `<button>` 标签的 `type` 属性，默认值为 `'button'
+- 修复 Table 自定义模板中渲染静态数据错误
+- 修复 TimePicker 的 `picker-options` 属性
 
 ### 1.0.0-rc.1
 
