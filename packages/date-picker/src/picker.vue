@@ -417,7 +417,6 @@ export default {
 
           ranges = Array.isArray(ranges) ? ranges : [ranges];
           this.picker.selectableRange = ranges.map(range => parser(range, format));
-          delete this.pickerOptions.selectableRange;
         }
 
         if (this.type === 'time-select' && options) {
@@ -427,7 +426,9 @@ export default {
         }
 
         for (const option in options) {
-          if (options.hasOwnProperty(option)) {
+          if (options.hasOwnProperty(option) &&
+              // 忽略 time-picker 的该配置项
+              option !== 'selectableRange') {
             this.picker[option] = options[option];
           }
         }
