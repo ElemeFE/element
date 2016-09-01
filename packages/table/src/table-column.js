@@ -172,7 +172,13 @@ export default {
         let customRender = _self.$options.render;
 
         renderColumn = function() {
-          return customRender.call(objectAssign(_self, data));
+          data._staticTrees = _self._staticTrees;
+          data.$options = {};
+          data.$options.staticRenderFns = _self.$options.staticRenderFns;
+          data._renderProxy = _self._renderProxy;
+          data._m = _self._m;
+
+          return customRender.call(data);
         };
       };
 
