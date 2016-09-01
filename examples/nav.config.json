@@ -200,6 +200,12 @@
       "groupName": "Nav",
       "list": [
         {
+          "path": "/menu",
+          "name": "导航菜单 (menu)",
+          "title": "NavMenu 导航菜单",
+          "description": "富展现的标签页"
+        },
+        {
           "path": "/tabs",
           "name": "标签页 (tabs)",
           "title": "Tabs 标签页",

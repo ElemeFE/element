@@ -1,87 +1,29 @@
 <style>
-  .demo-box .nav {
-    background-color: #eff2f7;
-    line-height: 60px;
-    @utils-clearfix;
-
-    h1 {
-      font-size: 20px;
-      color: #1f2f3d;
-      float: left;
-      margin: 0 25px 0 20px;
+  .demo-box.demo-menu {
+    .el-menu-demo {
+      padding-left: 55px;
     }
-    > .el-menu {
-      float: left;
+    .el-menu-vertical-demo {
+      width: 200px;
+      height: 400px;
     }
-    &-right {
-      float: right;
-      padding-right: 20px;
+    .line {
+      height: 1px;
+      background-color: #e0e6ed;
+      margin: 35px -24px;
     }
-    .nav__button {
-      font-size: 24px;
-      vertical-align: middle;
-      margin-left: 20px;
-      cursor: pointer;
-      display: inline-block;
-      position: relative;
+    h5 {
+      font-size: 14px;
       color: #8492a6;
+      margin-top: 10px;
+    }
+    .tac {
+      text-align: center;
 
-      i {
-        vertical-align: middle;
-        display: block;
-      }
-
-      &.is-unread:after {
-        content: '';
+      .el-menu-vertical-demo {
         display: inline-block;
-        width: 8px;
-        height: 8px;
-        position: absolute;
-        top: -2px;
-        right: -4px;
-        border-radius: 50%;
-        background-color: #ff4949;
+        text-align: left;
       }
-    }
-    .el-input {
-      display: inline-block;
-    }
-    .el-input__inner {
-      background-color: #e5e9f2;
-      border-color: #d3dce6;
-
-      &:focus {
-        border-color: #20a0ff;
-      }
-    }
-
-    &.nav-dark {
-      background-color: #324057;
-
-      h1 {
-        color: #fff;
-      }
-
-      .nav__button {
-        color: #fff;
-      }
-      .el-input__inner {
-        background-color: #1f2d3d;
-        border-color: #1f2d3d;
-        color: #fff;
-
-        &:focus {
-          border-color: #1f2d3d;
-        }
-      }
-    }
-  }
-  .demo-box .nav-vertical {
-    h1 {
-      float: none;
-    }
-    .el-menu--vertical {
-      float: none;
     }
   }
 </style>
@@ -108,240 +50,118 @@
   }
 </script>
 
-## 基础用法
+## NavMenu 导航菜单
 
-<div class="demo-box">
-  <div class="nav">
-    <h1>Element</h1>
-    <el-menu default-active="2">
-      <el-menu-item index="1">处理中心</el-menu-item>
-      <el-menu-item index="2">我的工作台</el-menu-item>
-      <el-menu-item index="3">订单管理</el-menu-item>
-    </el-menu>
-    <div class="nav-right">
-      <el-input placeholder="搜索用户手机号" icon="search" :value="search"></el-input>
-      <span class="nav__button is-unread">
-        <i class="el-icon-message"></i>
-      </span>
-      <span class="nav__button">
-        <i class="el-icon-setting"></i>
-      </span>
-    </div>
-  </div>
-</div>
+为网站提供导航功能的菜单
 
+### 顶栏
+
+适用广泛的基础用法。
+
+::: demo
 ```html
-<div class="nav">
-  <h1>Element</h1>
-  <el-menu default-active="2">
-    <el-menu-item index="1">处理中心</el-menu-item>
-    <el-menu-item index="2">我的工作台</el-menu-item>
-    <el-menu-item index="3">订单管理</el-menu-item>
-  </el-menu>
-  <div class="nav-right">
-    <el-input placeholder="搜索用户手机号" icon="search" :value="search"></el-input>
-    <span class="nav__button is-unread">
-      <i class="el-icon-message"></i>
-    </span>
-    <span class="nav__button">
-      <i class="el-icon-setting"></i>
-    </span>
-  </div>
-</div>
+<el-menu theme="dark" default-active="1" class="el-menu-demo" @select="handleselect">
+  <el-menu-item index="1">处理中心</el-menu-item>
+  <el-menu-item index="2">我的工作台</el-menu-item>
+  <el-menu-item index="3">订单管理</el-menu-item>
+</el-menu>
+<div class="line"></div>
+<el-menu default-active="1" class="el-menu-demo" @select="handleselect">
+  <el-menu-item index="1">处理中心</el-menu-item>
+  <el-menu-item index="2">我的工作台</el-menu-item>
+  <el-menu-item index="3">订单管理</el-menu-item>
+</el-menu>
 ```
+:::
 
-<div class="demo-box">
-  <div class="nav nav-dark">
-    <h1>Element</h1>
-    <el-menu theme="dark" default-active="1">
-      <el-menu-item index="1">处理中心</el-menu-item>
-      <el-menu-item index="2">我的工作台</el-menu-item>
-      <el-menu-item index="3">订单管理</el-menu-item>
-    </el-menu>
-    <div class="nav-right">
-      <el-input placeholder="搜索用户手机号" icon="search" :value="search2"></el-input>
-      <span class="nav__button is-unread">
-        <i class="el-icon-message"></i>
-      </span>
-      <span class="nav__button">
-        <i class="el-icon-setting"></i>
-      </span>
-    </div>
-  </div>
-</div>
+### 侧栏
 
+垂直菜单，可内嵌子菜单。
+
+::: demo
 ```html
-<div class="nav nav-dark">
-  <h1>Element</h1>
-  <el-menu theme="dark" default-active="1">
-    <el-menu-item index="1">处理中心</el-menu-item>
-    <el-menu-item index="2">我的工作台</el-menu-item>
-    <el-menu-item index="3">订单管理</el-menu-item>
-  </el-menu>
-  <div class="nav-right">
-    <el-input placeholder="搜索用户手机号" icon="search" :value="search2"></el-input>
-    <span class="nav__button is-unread">
-      <i class="el-icon-message"></i>
-    </span>
-    <span class="nav__button">
-      <i class="el-icon-setting"></i>
-    </span>
-  </div>
-</div>
-```
-
-## 侧边栏导航
-
-<div class="demo-box" style="width: 200px;">
-  <div class="nav nav-vertical">
-    <h1>Element</h1>
-    <el-menu mode="vertical" default-active="2-1">
+<el-row class="tac">
+  <el-col :span="8">
+    <h5>带 icon</h5>
+    <el-menu mode="vertical" default-active="2" class="el-menu-vertical-demo" @open="handleopen" @close="handleclose">
+      <el-submenu index="1">
+        <template slot="title"><i class="el-icon-message"></i>导航一</template>
+        <el-menu-item index="1-1">选项1</el-menu-item>
+        <el-menu-item index="1-2">选项2</el-menu-item>
+        <el-menu-item index="1-3">选项3</el-menu-item>
+      </el-submenu>
+      <el-menu-item index="2"><i class="el-icon-menu"></i>导航二</el-menu-item>
+      <el-menu-item index="3"><i class="el-icon-setting"></i>导航三</el-menu-item>
+    </el-menu>
+  </el-col>
+  <el-col :span="8">
+    <h5>不带 icon</h5>
+    <el-menu mode="vertical" default-active="2" class="el-menu-vertical-demo" @open="handleopen" @close="handleclose">
+      <el-submenu index="1">
+        <template slot="title">导航一</template>
+        <el-menu-item index="1-1">选项1</el-menu-item>
+        <el-menu-item index="1-2">选项2</el-menu-item>
+        <el-menu-item index="1-3">选项3</el-menu-item>
+      </el-submenu>
+      <el-menu-item index="2">导航二</el-menu-item>
+      <el-menu-item index="3">导航三</el-menu-item>
+    </el-menu>
+  </el-col>
+  <el-col :span="8">
+    <h5>分组</h5>
+    <el-menu mode="vertical" default-active="1" class="el-menu-vertical-demo">
       <el-menu-item-group title="分组一">
         <el-menu-item index="1"><i class="el-icon-message"></i>导航一</el-menu-item>
-        <el-submenu index="sub1">
-          <template slot="title"><i class="el-icon-menu"></i>导航二</template>
-          <el-menu-item index="2-1">选项1</el-menu-item>
-          <el-menu-item index="2-2">选项2</el-menu-item>
-          <el-menu-item index="2-3">选项3</el-menu-item>
-        </el-submenu>
+        <el-menu-item index="2"><i class="el-icon-message"></i>导航二</el-menu-item>
       </el-menu-item-group>
       <el-menu-item-group title="分组二">
-        <el-submenu index="sub2">
-          <template slot="title"><i class="el-icon-setting"></i>导航三</template>
-          <el-menu-item index="3-1">选项1</el-menu-item>
-          <el-menu-item index="3-2">选项2</el-menu-item>
-          <el-menu-item index="3-3">选项3</el-menu-item>
-        </el-submenu>
+        <el-menu-item index="3"><i class="el-icon-message"></i>导航三</el-menu-item>
+        <el-menu-item index="4"><i class="el-icon-message"></i>导航四</el-menu-item>
+        <!-- <el-submenu index="5">
+          <template slot="title">导航五</template>
+          <el-menu-item-group title="分组一">
+            <el-menu-item index="5-1">选项1</el-menu-item>
+            <el-menu-item index="5-2">选项2</el-menu-item>
+          </el-menu-item-group>
+          <el-menu-item-group title="分组二">
+            <el-menu-item index="5-3">选项3</el-menu-item>
+          </el-menu-item-group>
+        </el-submenu> -->
       </el-menu-item-group>
     </el-menu>
-  </div>
-</div>
-
-```html
-<div class="nav nav-vertical">
-  <h1>Element</h1>
-  <el-menu mode="vertical" default-active="2-1">
-    <el-menu-item-group title="分组一">
-      <el-menu-item index="1"><i class="el-icon-message"></i>导航一</el-menu-item>
-      <el-submenu index="sub1">
-        <template slot="title"><i class="el-icon-menu"></i>导航二</template>
-        <el-menu-item index="2-1">选项1</el-menu-item>
-        <el-menu-item index="2-2">选项2</el-menu-item>
-        <el-menu-item index="2-3">选项3</el-menu-item>
-      </el-submenu>
-    </el-menu-item-group>
-    <el-menu-item-group title="分组二">
-      <el-submenu index="sub2">
-        <template slot="title"><i class="el-icon-setting"></i>导航三</template>
-        <el-menu-item index="3-1">选项1</el-menu-item>
-        <el-menu-item index="3-2">选项2</el-menu-item>
-        <el-menu-item index="3-3">选项3</el-menu-item>
-      </el-submenu>
-    </el-menu-item-group>
-  </el-menu>
-</div>
+  </el-col>
+</el-row>
 ```
+:::
 
-<div class="demo-box" style="width: 200px;">
-  <div class="nav nav-vertical nav-dark">
-    <h1>Element</h1>
-    <el-menu mode="vertical" theme="dark" :default-openeds="['sub2']" default-active="3-1" :unique-opend="true" @open="handleopen" @close="handleclose" @select="handleselect">
-      <el-menu-item index="1"><i class="el-icon-message"></i>导航一</el-menu-item>
-      <el-submenu index="sub2">
-        <template slot="title"><i class="el-icon-menu"></i>导航二</template>
-        <el-menu-item-group title="分组1">
-          <el-menu-item index="2-1">选项1</el-menu-item>
-          <el-menu-item index="2-2">选项2</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="分组2">
-          <el-menu-item index="2-3">选项3</el-menu-item>
-          <el-menu-item index="2-4">选项4</el-menu-item>
-        </el-menu-item-group>
-      </el-submenu>
-      <el-submenu index="sub3">
-        <template slot="title"><i class="el-icon-setting"></i>导航三</template>
-        <el-menu-item index="3-1">选项1</el-menu-item>
-        <el-menu-item index="3-2">选项2</el-menu-item>
-        <el-menu-item index="3-3">选项3</el-menu-item>
-      </el-submenu>
-      <el-submenu index="sub4">
-        <template slot="title"><i class="el-icon-setting"></i>导航四</template>
-        <el-menu-item index="4-1">选项1</el-menu-item>
-        <el-menu-item index="4-2">选项2</el-menu-item>
-        <el-menu-item index="4-3">选项3</el-menu-item>
-      </el-submenu>
-      <el-submenu index="sub5">
-        <template slot="title"><i class="el-icon-setting"></i>导航五</template>
-        <el-menu-item index="5-1">选项1</el-menu-item>
-        <el-menu-item index="5-2">选项2</el-menu-item>
-        <el-menu-item index="5-3">选项3</el-menu-item>
-      </el-submenu>
-    </el-menu>
-  </div>
-</div>
-
-```html
-<div class="nav nav-vertical nav-dark">
-  <h1>Element</h1>
-  <el-menu mode="vertical" theme="dark" :default-openeds="['sub2']" default-active="3-1" :unique-opend="true" @open="handleopen" @close="handleclose" @select="handleselect">
-    <el-menu-item index="1"><i class="el-icon-message"></i>导航一</el-menu-item>
-    <el-submenu index="sub2">
-      <template slot="title"><i class="el-icon-menu"></i>导航二</template>
-      <el-menu-item-group title="分组1">
-        <el-menu-item index="2-1">选项1</el-menu-item>
-        <el-menu-item index="2-2">选项2</el-menu-item>
-      </el-menu-item-group>
-      <el-menu-item-group title="分组2">
-        <el-menu-item index="2-3">选项3</el-menu-item>
-        <el-menu-item index="2-4">选项4</el-menu-item>
-      </el-menu-item-group>
-    </el-submenu>
-    <el-submenu index="sub3">
-      <template slot="title"><i class="el-icon-setting"></i>导航三</template>
-      <el-menu-item index="3-1">选项1</el-menu-item>
-      <el-menu-item index="3-2">选项2</el-menu-item>
-      <el-menu-item index="3-3">选项3</el-menu-item>
-    </el-submenu>
-    <el-submenu index="sub4">
-      <template slot="title"><i class="el-icon-setting"></i>导航四</template>
-      <el-menu-item index="4-1">选项1</el-menu-item>
-      <el-menu-item index="4-2">选项2</el-menu-item>
-      <el-menu-item index="4-3">选项3</el-menu-item>
-    </el-submenu>
-    <el-submenu index="sub5">
-      <template slot="title"><i class="el-icon-setting"></i>导航五</template>
-      <el-menu-item index="5-1">选项1</el-menu-item>
-      <el-menu-item index="5-2">选项2</el-menu-item>
-      <el-menu-item index="5-3">选项3</el-menu-item>
-    </el-submenu>
-  </el-menu>
-</div>
-```
-
-## menu API
+### Menu Attribute
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | mode     | 模式   | string  |   horizontal,vertical   | horizontal |
 | theme     | 主题色   | string    | light,dark | light |
-| activeKey | 当前激活菜单的 key | string    |  |    |
-| openedKeys | 当前打开的submenu的 key 数组 | Array    |  |    |
-| uniqueOpend  | 是否只保持一个子菜单的展开 | boolean   | true, false   | false   |
-| router  | 是否使用 vue-router 的模式，启用该模式会在 select 事件触发时执行 this.$route.$router.go(key) 进行路由跳转 | boolean   | true, false   | false   |
-| select  | 菜单激活回调 | function(key, keyPath)   |    |    |
-| open  | SubMenu 展开的回调 | function(key, keyPath)   |    |    |
-| close  | SubMenu 收起的回调 | function(key, keyPath)   |    |    |
+| default-active | 当前激活菜单的 key | string    | — | — |
+| default-openeds | 当前打开的submenu的 key 数组 | Array    | — | — |
+| unique-opend  | 是否只保持一个子菜单的展开 | boolean   | — | false   |
+| router  | 是否使用 vue-router 的模式，启用该模式会在激活导航时以 key 作为 path 进行路由跳转 | boolean   | — | false   |
 
-## submenu API
+### Menu Events
+| 事件名称      | 说明    | 回调参数      |
+|---------- |-------- |---------- |
+| select  | 菜单激活回调 | key: 选中菜单项的 keyPath: 选中菜单项的 key path  |
+| open  | SubMenu 展开的回调 | key: 打开的 subMenu 的 key， keyPath: 打开的 subMenu 的 key path  |
+| close  | SubMenu 收起的回调 | key: 收起的 subMenu 的 key， keyPath: 收起的 subMenu 的 key path  |
+
+### SubMenu Attribute
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
-| key     | 唯一标志   | string  |      |  |
+| key     | 唯一标志   | string  | — | — |
 
-## menu-item API
+### Menu-Item Attribute
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
-| key     | 唯一标志   | string  |      |  |
+| key     | 唯一标志   | string  | — | — |
 
-## menu-group API
+### Menu-Group Attribute
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
-| title     | 分组标题   | string  |      |  |
+| title     | 分组标题   | string  | — | — |
