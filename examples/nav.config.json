@@ -11,6 +11,18 @@
           "description": ""
         },
         {
+          "path": "/color",
+          "name": "色彩 (color)",
+          "title": "Color 色彩",
+          "description": ""
+        },
+        {
+          "path": "/typography",
+          "name": "字体 (typography)",
+          "title": "Typography 字体",
+          "description": ""
+        },
+        {
           "path": "/icon",
           "name": "图标 (icon)",
           "title": "Icon 图标"
@@ -199,6 +211,12 @@
     {
       "groupName": "Nav",
       "list": [
+        {
+          "path": "/menu",
+          "name": "导航菜单 (menu)",
+          "title": "NavMenu 导航菜单",
+          "description": "富展现的标签页"
+        },
         {
           "path": "/tabs",
           "name": "标签页 (tabs)",

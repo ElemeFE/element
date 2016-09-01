@@ -4,11 +4,14 @@
 @component-namespace el {
   @b menu {
     height: 60px;
+    border-radius: 2px;
     line-height: 60px;
     list-style: none;
     position: relative;
     margin: 0;
     padding-left: 0;
+    background-color: #fff;
+    background-color: var(--menu-item-fill);
     
     & li {
       list-style: none;
@@ -38,6 +41,8 @@
       }
     }
     @m dark {
+      background-color: var(--dark-menu-item-fill);
+
       & .el-menu-item,
       & .el-submenu__title {
         color: #c0ccda;
@@ -81,8 +86,7 @@
     color: var(--menu-item-color);
     float: left;
     height: 100%;
-    padding: 0 10px;
-    margin: 0 10px;
+    padding: 0 20px;
     cursor: pointer;
     position: relative;
     transition: var(--md-fade-transition);
@@ -133,14 +137,14 @@
       margin: 0;
       top: 50%;
       right: 20px;
-      transform: rotateZ(180deg) translateY(-50%);
+      margin-top: -8px;
+      transform: rotateZ(180deg);
       font-size: 12px;
-      transition: transform .3s ease-in-out;
-      transform-origin: center 0;
+      transition: transform .3s;
     }
     @when opened {
       & .el-submenu__icon-arrow {
-        transform: translateY(-50%);
+        transform: rotateZ(0);
       }
     }
   }
