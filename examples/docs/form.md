@@ -200,6 +200,9 @@
 
 <style>
   .demo-form {
+    .el-select .el-input {
+      width: 360px;
+    }
     .el-form {
       width: 440px;
     }
@@ -262,6 +265,10 @@
       .el-textarea {
         width: auto;
       }
+      
+      .el-select .el-input {
+        width: 360px;
+      }
     }
     .demo-dynamic {
       .el-input {
@@ -291,7 +298,7 @@
     <el-input v-model="form.name"></el-input>
   </el-form-item>
   <el-form-item label="活动区域">
-    <el-select v-model="form.region" :width="360" placeholder="请选择活动区域">
+    <el-select v-model="form.region" placeholder="请选择活动区域">
       <el-option label="区域一" value="shanghai"></el-option>
       <el-option label="区域二" value="beijing"></el-option>
     </el-select>
@@ -366,7 +373,7 @@
   <el-form-item>
     <el-input v-model="formInline.user" placeholder="审批人"></el-input>
   </el-form-item><el-form-item>
-    <el-select v-model="formInline.region" :width="150" placeholder="活动区域">
+    <el-select v-model="formInline.region" placeholder="活动区域">
       <el-option label="区域一" value="shanghai"></el-option>
       <el-option label="区域二" value="beijing"></el-option>
     </el-select>
@@ -502,7 +509,7 @@
     <el-input v-model="ruleForm.name"></el-input>
   </el-form-item>
   <el-form-item label="活动区域" prop="region">
-    <el-select v-model="ruleForm.region" :width="360" placeholder="请选择活动区域">
+    <el-select v-model="ruleForm.region" placeholder="请选择活动区域">
       <el-option label="区域一" value="shanghai"></el-option>
       <el-option label="区域二" value="beijing"></el-option>
     </el-select>
