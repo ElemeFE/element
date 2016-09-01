@@ -65,6 +65,14 @@ export default {
     onPreview: {
       type: Function,
       default: noop
+    },
+    onSuccess: {
+      type: Function,
+      default: noop
+    },
+    onError: {
+      type: Function,
+      default: noop
     }
   },
 
@@ -78,7 +86,7 @@ export default {
   },
 
   methods: {
-    onStart(file) {
+    handleStart(file) {
       file.uid = Date.now() + this.tempIndex++;
       let _file = {
         status: 'uploading',
@@ -100,30 +108,33 @@ export default {
 
       this.uploadedFiles.push(_file);
     },
-    onProgress(ev, file) {
+    handleProgress(ev, file) {
       var _file = this.getFile(file);
       _file.percentage = ev.percent;
     },
-    onSuccess(res, file) {
+    handleSuccess(res, file) {
       var _file = this.getFile(file);
 
       if (_file) {
         _file.status = 'finished';
         _file.response = res;
 
+        this.onSuccess(_file, this.uploadedFiles);
+
         setTimeout(() => {
           _file.showProgress = false;
         }, 1000);
       }
     },
-    onError(err, file) {
+    handleError(err, file) {
       var _file = this.getFile(file);
       var fileList = this.uploadedFiles;
 
       _file.status = 'fail';
 
       fileList.splice(fileList.indexOf(_file), 1);
-      this.$emit('error', _file, fileList, err);
+
+      this.onError(err, _file, fileList);
     },
     handleRemove(file) {
       var fileList = this.uploadedFiles;
@@ -168,10 +179,10 @@ export default {
         'with-credentials': this.withCredentials,
         name: this.name,
         accept: this.thumbnailMode ? 'image/*' : this.accept,
-        'on-start': this.onStart,
-        'on-progress': this.onProgress,
-        'on-success': this.onSuccess,
-        'on-error': this.onError,
+        'on-start': this.handleStart,
+        'on-progress': this.handleProgress,
+        'on-success': this.handleSuccess,
+        'on-error': this.handleError,
         'on-preview': this.handlePreview,
         'on-remove': this.handleRemove
       }
