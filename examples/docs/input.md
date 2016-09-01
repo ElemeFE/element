@@ -116,6 +116,9 @@
 
 <style>
   .demo-input {
+    .el-select .el-input {
+      width: 100px;
+    }
     .text {
       font-size: 14px;
       color: #8492a6;
@@ -248,7 +251,7 @@
   <template slot="append">.com</template>
 </el-input>
 <el-input placeholder="请输入内容" v-model="input5" style="width: 300px;">
-  <el-select v-model="select" slot="prepend" :width="100">
+  <el-select v-model="select" slot="prepend">
     <el-option label="餐厅名" value="1"></el-option>
     <el-option label="订单号" value="2"></el-option>
     <el-option label="用户电话" value="3"></el-option>

@@ -39,7 +39,7 @@
         }).catch(() => {
           this.$notify({
             type: 'info',
-            messgae: '取消输入'
+            message: '取消输入'
           });       
         });
       },
