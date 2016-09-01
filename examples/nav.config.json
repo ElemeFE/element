@@ -11,6 +11,18 @@
           "description": ""
         },
         {
+          "path": "/color",
+          "name": "色彩 (color)",
+          "title": "Color 色彩",
+          "description": ""
+        },
+        {
+          "path": "/typography",
+          "name": "字体 (typography)",
+          "title": "Typography 字体",
+          "description": ""
+        },
+        {
           "path": "/icon",
           "name": "图标 (icon)",
           "title": "Icon 图标"
