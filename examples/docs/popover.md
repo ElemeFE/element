@@ -185,7 +185,7 @@ Popover 的属性与 Tooltip 很类似，它们都是基于`Vue-popper`开发的
   ref="popover5"
   placement="top"
   width="160"
-  :visible="visible2">
+  v-model="visible2">
   <p>这是一段内容这是一段内容确定删除吗？</p>
   <div style="text-align: right; margin: 0">
     <el-button size="mini" type="text" @click.native="visible2 = false">取消</el-button>
@@ -205,7 +205,7 @@ Popover 的属性与 Tooltip 很类似，它们都是基于`Vue-popper`开发的
 |  content        |  显示的内容，也可以通过 `slot` 传入 DOM   | String            | — | — |
 |  width        |  宽度  | String, Number            | — | 最小宽度 150px |
 |  placement        |  出现位置  | String | top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end |  bottom |
-|  visible        |  初始状态是否可见  | Boolean           | — |  false |
+|  value(v-model)        |  状态是否可见  | Boolean           | — |  false |
 |  offset        |  出现位置的偏移量  | Number           | — |  0 |
 |  transition     |  定义渐变动画      | String             | — | fade-in-linear |
 |  visible-arrow   |  是否显示 Tooltip 箭头，更多参数可见[Vue-popper](https://github.com/element-component/vue-popper) | Boolean | — | true |

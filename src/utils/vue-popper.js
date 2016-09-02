@@ -23,7 +23,7 @@ export default {
     offset: {
       default: 0
     },
-    visible: Boolean,
+    value: Boolean,
     visibleArrow: Boolean,
     transition: String,
     options: {
@@ -41,15 +41,17 @@ export default {
   },
 
   watch: {
-    visible: {
+    value: {
       immediate: true,
       handler(val) {
         this.showPopper = val;
+        this.$emit('input', val);
       }
     },
 
     showPopper(val) {
       val ? this.updatePopper() : this.destroyPopper();
+      this.$emit('input', val);
     }
   },
 

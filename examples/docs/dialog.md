@@ -162,10 +162,10 @@ Dialog 组件的正文标题可以是任意的，甚至可以是表格或表单�
 <el-dialog title="收货地址" v-model="dialogFormVisible">
   <el-form :models="form">
     <el-form-item label="活动名称" :label-width="formLabelWidth">
-      <el-input :model.sync="form.name" auto-complete="off"></el-input>
+      <el-input v-model="form.name" auto-complete="off"></el-input>
     </el-form-item>
     <el-form-item label="活动区域" :label-width="formLabelWidth">
-      <el-select :value.sync="form.region" placeholder="请选择活动区域">
+      <el-select v-model="form.region" placeholder="请选择活动区域">
         <el-option label="区域一" value="shanghai"></el-option>
         <el-option label="区域二" value="beijing"></el-option>
       </el-select>
