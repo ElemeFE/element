@@ -34,6 +34,7 @@ export default {
       type: String,
       default: 'file'
     },
+    headers: Object,
     withCredentials: Boolean,
     multiple: Boolean,
     accept: String,
