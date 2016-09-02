@@ -6,6 +6,11 @@
         num2: 1,
         num3: 5
       }
+    },
+    methods: {
+      handleChange(value) {
+        console.log(value);
+      }
     }
   };
 </script>
@@ -16,20 +21,19 @@
     }
   }
 </style>
+
 ## Input Number 数字输入框
-通过鼠标或键盘输入字符
 
-### 基础使用
+仅允许输入标准的数字值，可定义范围
 
-需要标准的数字值时可以用到 Input Number 组件，你提供了数值输入提供了范围控制和递增递减的步数控制。
+### 基础用法
 
-值得一提的是，你可以不用通过连续点击增减，可以直接输入数字或者长按按钮进行数字的改变。
-
+需要标准的数字值时可以用到 Input Number 组件，它提供了数值输入，范围控制和递增递减的步数控制等功能。
 
 :::demo 要使用它，只需要在`el-input-number`元素中使用`v-model`绑定变量即可，变量的初始值即为默认值。
 ```html
 <template>
-  <el-input-number v-model="num1"></el-input-number>
+  <el-input-number v-model="num1" @change="handleChange"></el-input-number>
 </template>
 <script>
   export default {
@@ -53,9 +57,9 @@
 ```
 :::
 
-### 步长
+### 步数
 
-让组件按照步长来增减。
+允许定义递增递减的步数控制
 
 :::demo 设置`step`属性可以控制步长，接受一个`Number`。
 
@@ -80,8 +84,14 @@
 ### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |----------|-------------- |----------|--------------------------------  |-------- |
-| min      | 设置计数器允许的最小值 | number |   | 0 |
-| max      | 设置计数器允许的最大值 | number |   | Infinity |
-| step     | 计数器步长           | number   |      | 1 |
-| size     | 计数器尺寸           | string   | large, small | |
-| disabled | 是否禁用计数器        | boolean |  | false |
+| value    | 绑定值         | number | — | — |
+| min      | 设置计数器允许的最小值 | number | — | 0 |
+| max      | 设置计数器允许的最大值 | number | — | Infinity |
+| step     | 计数器步长           | number   | — | 1 |
+| size     | 计数器尺寸           | string   | large, small | — |
+| disabled | 是否禁用计数器        | boolean | — | false |
+
+### Events
+| 事件名称 | 说明 | 回调参数 |
+|---------|--------|---------|
+| change | 绑定值被改变时触发 | 最后变更的值 |

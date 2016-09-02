@@ -11,6 +11,7 @@
 - 修复 TimePicker 的 `picker-options` 属性
 - 修复一些组件图标丢失的问题
 - 修复远程搜索的 Select 在 Form 中的显示问题
+- 修复 input-number 输入小数和非数字值时的问题
 
 ### 1.0.0-rc.1
 
