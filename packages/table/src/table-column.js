@@ -90,9 +90,7 @@ export default {
     formatter: Function
   },
 
-  render(h) {
-    return <div />;
-  },
+  render() {},
 
   data() {
     return {
@@ -113,6 +111,9 @@ export default {
   },
 
   created() {
+    this.customRender = this.$options.render;
+    this.$options.render = (h) => h('div');
+
     let columnId = this.columnId = (this.$parent.gridId || (this.$parent.columnId + '_')) + 'column_' + columnIdSeed++;
 
     let parent = this.$parent;
@@ -173,8 +174,6 @@ export default {
 
     column.template = function(h, data) {
       if (_self.$vnode.data.inlineTemplate) {
-        let customRender = _self.$options.render;
-
         renderColumn = function() {
           data._staticTrees = _self._staticTrees;
           data.$options = {};
@@ -182,7 +181,7 @@ export default {
           data._renderProxy = _self._renderProxy;
           data._m = _self._m;
 
-          return customRender.call(data);
+          return _self.customRender.call(data);
         };
       };
 
