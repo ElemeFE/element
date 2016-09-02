@@ -161,6 +161,7 @@ MessageBox.alert = function(message, title, options) {
     title: title,
     message: message,
     $type: 'alert',
+    closeOnPressEscape: false,
     closeOnClickModal: false
   }, options));
 };

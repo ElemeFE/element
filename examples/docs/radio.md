@@ -113,13 +113,13 @@
 ### Radio Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
-| label     | Radio 的 value   | string,number    |               |         |
-| disabled  | 是否禁用    | boolean   |   | false   |
+| label     | Radio 的 value   | string,number    |       —        |      —   |
+| disabled  | 是否禁用    | boolean   | — | false   |
 
 ### Radio-group Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
-| size     | Radio 按钮组尺寸   | string  | large, small  |         |
+| size     | Radio 按钮组尺寸   | string  | large, small  |    —     |
 
 ### Radio-group Events
 | 事件名称 | 说明 | 回调参数 |
@@ -129,5 +129,5 @@
 ### Radio-button Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
-| label     | Radio 的 value  | string,number  |               |         |
-| disabled  | 是否禁用    | boolean   |   | false   |
+| label     | Radio 的 value  | string,number  |        —       |     —    |
+| disabled  | 是否禁用    | boolean   | — | false   |

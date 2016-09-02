@@ -39,24 +39,20 @@
     }
 
     @e input {
-      & > input {
-        border: 1px solid #dedede;
-        border-radius: 5px;
-        padding: 4px 5px;
-        margin-top: 10px;
-        width: 100%;
-        box-sizing: border-box;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        outline: none;
+      padding-top: 15px;
+      & input.invalid {
+        border-color: #ff4949;
+        &:focus {
+          border-color: #ff4949;
+        }
       }
     }
 
     @e errormsg {
       color: red;
       font-size: 12px;
-      min-height: 16px;
+      min-height: 18px;
+      margin-top: 2px;
     }
 
     @e title {

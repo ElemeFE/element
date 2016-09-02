@@ -598,7 +598,7 @@
 
 选择多行数据时使用 Checkbox
 
-:::demo 除了`selection-mode`的设置外，多选与单选并没有太大差别，只是传入`selectionchange`事件中的参数从对象变成了对象数组。此外，需要提供一个列来显示多选框: 手动添加一个`el-table-column`，设`type`属性为`selection`即可。在本例中，为了方便说明其他属性，我们还使用了`inline-template`和`show-tooltip-when-overflow`属性，设置了`inline-template`属性后，可以通过调用`row`对象中的值取代`property`属性的设置。而如果设置了宽度，默认情况无法完整显示的内容会被隐藏，可以使用`show-tooltip-when-overflow`属性，它接受一个`Boolean`，为`true`时当 hover 在指定内容上就会显示完整内容。
+:::demo 除了`selection-mode`的设置外，多选与单选并没有太大差别，只是传入`selectionchange`事件中的参数从对象变成了对象数组。此外，需要提供一个列来显示多选框: 手动添加一个`el-table-column`，设`type`属性为`selection`即可。在本例中，为了方便说明其他属性，我们还使用了`inline-template`和`show-tooltip-when-overflow`：设置了`inline-template`属性后，可以通过调用`row`对象中的值取代`property`属性的设置；默认情况下若内容过多会折行显示，若需要单行显示可以使用`show-tooltip-when-overflow`属性，它接受一个`Boolean`，为`true`时多余的内容会在 hover 时以 tooltip 的形式显示出来。
 ```html
 <template>
   <el-table
@@ -742,13 +742,13 @@
 ### Table Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| data | 显示的数据 | array | - | - |
-| height | table 的高度，默认高度为空，即自动高度 | string | - | - |
-| stripe | 是否为斑马纹 table | boolean | - | false |
-| border | 是否带有纵向边框 | boolean | - | false |
+| data | 显示的数据 | array | — | — |
+| height | table 的高度，默认高度为空，即自动高度 | string | — | — |
+| stripe | 是否为斑马纹 table | boolean | — | false |
+| border | 是否带有纵向边框 | boolean | — | false |
 | selection-mode | 列表项选择模式 | string | single/multiple/none | none |
-| allow-no-selection | 单选模式是否允许选项为空 | boolean | - | false |
-| fixed-column-count | 固定列的个数 | number | - | 0 |
+| allow-no-selection | 单选模式是否允许选项为空 | boolean | — | false |
+| fixed-column-count | 固定列的个数 | number | — | 0 |
 
 ### Table Events
 | 事件名 | 说明 | 参数 |
@@ -761,11 +761,11 @@
 ### Table-column Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| label | 显示的标题 | string | - | - |
-| property | 对应列内容的字段名 | string | - | - |
-| width | 对应列的宽度 | string | - | - |
-| sortable | 对应列是否可以排序 | boolean | - | false |
-| type | 对应列的类型。如果设置了 `selection` 则显示多选框，如果设置了 `index` 则显示该行的索引（从 1 开始计算） | string | selection/index | - |
-| formatter | 用来格式化内容，在 formatter 执行的时候，会传入 row 和 column | function | - | - |
-| show-tooltip-when-overflow | 当过长被隐藏时显示 tooltip | Boolean | - | false |
-| inline-template | 指定该属性后可以自定义 column 模板，参考多选的时间列，通过 row 获取行信息，JSX 里通过 _self 获取当前上下文。此时不需要配置 property 属性  | - | - |
+| label | 显示的标题 | string | — | — |
+| property | 对应列内容的字段名 | string | — | — |
+| width | 对应列的宽度 | string | — | — |
+| sortable | 对应列是否可以排序 | boolean | — | false |
+| type | 对应列的类型。如果设置了 `selection` 则显示多选框，如果设置了 `index` 则显示该行的索引（从 1 开始计算） | string | selection/index | — |
+| formatter | 用来格式化内容，在 formatter 执行的时候，会传入 row 和 column | function | — | — |
+| show-tooltip-when-overflow | 当过长被隐藏时显示 tooltip | Boolean | — | false |
+| inline-template | 指定该属性后可以自定义 column 模板，参考多选的时间列，通过 row 获取行信息，JSX 里通过 _self 获取当前上下文。此时不需要配置 property 属性  | — | — |

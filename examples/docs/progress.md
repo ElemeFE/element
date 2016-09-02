@@ -29,4 +29,4 @@
 |-------------  |---------------- |---------------- |---------------------- |-------- |
 | **percentage** | **百分比（必填）**   | number          |     0-100          |     0    |
 | type          | 进度条样式           | string         | blue,green,blue-stripe,green-stripe | blue |
-| size          | 进度条尺寸           | string          | large, small  |     |
+| size          | 进度条尺寸           | string          | large, small  |  —  |

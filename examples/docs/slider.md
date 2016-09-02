@@ -140,11 +140,11 @@
 ## Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| min | 最小值 | number | - | 0 |
-| max | 最大值 | number | - | 100 |
-| step | 步长 | number | - | 1 |
-| show-input | 是否显示输入框 | boolean | - | false |
-| show-stops | 是否显示间断点 | boolean | - | false |
+| min | 最小值 | number | — | 0 |
+| max | 最大值 | number | — | 100 |
+| step | 步长 | number | — | 1 |
+| show-input | 是否显示输入框 | boolean | — | false |
+| show-stops | 是否显示间断点 | boolean | — | false |
 
 ## Events
 | 事件名称      | 说明    | 回调参数      |

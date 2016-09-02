@@ -10,7 +10,7 @@
           <div class="el-message-box__status" :class="[ typeClass ]"></div>
           <div class="el-message-box__message" :style="{ 'margin-left': typeClass ? '50px' : '0' }"><p>{{ message }}</p></div>
           <div class="el-message-box__input" v-show="showInput">
-            <input type="text" v-model="inputValue" :placeholder="inputPlaceholder" ref="input" />
+            <el-input v-model="inputValue" :placeholder="inputPlaceholder" ref="input"></el-input>
             <div class="el-message-box__errormsg" :style="{ visibility: !!editorErrorMessage ? 'visible' : 'hidden' }">{{ editorErrorMessage }}</div>
           </div>
         </div>
@@ -34,6 +34,7 @@
   };
 
   import Popup from 'vue-popup';
+  import ElInput from 'packages/input/index.js';
 
   export default {
     mixins: [ Popup ],
@@ -52,6 +53,10 @@
       closeOnPressEscape: {
         default: true
       }
+    },
+
+    components: {
+      ElInput
     },
 
     computed: {
@@ -98,6 +103,7 @@
           var inputPattern = this.inputPattern;
           if (inputPattern && !inputPattern.test(this.inputValue || '')) {
             this.editorErrorMessage = this.inputErrorMessage || '输入的数据不合法!';
+            this.$refs.input.$el.querySelector('input').classList.add('invalid');
             return false;
           }
           var inputValidator = this.inputValidator;
@@ -105,6 +111,7 @@
             var validateResult = inputValidator(this.inputValue);
             if (validateResult === false) {
               this.editorErrorMessage = this.inputErrorMessage || '输入的数据不合法!';
+              this.$refs.input.$el.querySelector('input').classList.add('invalid');
               return false;
             }
             if (typeof validateResult === 'string') {
@@ -114,6 +121,7 @@
           }
         }
         this.editorErrorMessage = '';
+        this.$refs.input.$el.querySelector('input').classList.remove('invalid');
         return true;
       }
     },
@@ -128,8 +136,8 @@
       value(val) {
         if (val && this.$type === 'prompt') {
           setTimeout(() => {
-            if (this.$refs.input) {
-              this.$refs.input.focus();
+            if (this.$refs.input && this.$refs.input.$el) {
+              this.$refs.input.$el.querySelector('input').focus();
             }
           }, 500);
         }

@@ -109,10 +109,10 @@
 ### Checkbox Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
-| label     | 选中状态的值（只有在`checkbox-group`下有意义）   | string    |               |         |
-| true-label | 选中时的值   | string, number    |               |         |
-| false-label | 没有选中时的值   | string, number    |               |         |
-| disabled  | 按钮禁用    | boolean   |    | false   |
+| label     | 选中状态的值（只有在`checkbox-group`下有意义）   | string    |       —        |     —    |
+| true-label | 选中时的值   | string, number    |       —        |     —    |
+| false-label | 没有选中时的值   | string, number    |      —         |     —    |
+| disabled  | 按钮禁用    | boolean   |  — | false   |
 
 ### Checkbox-group Events
 | 事件名称      | 说明    | 回调参数      |

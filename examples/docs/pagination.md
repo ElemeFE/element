@@ -74,12 +74,12 @@
 ### Attributes
 | 参数               | 说明                                                     | 类型              | 可选值      | 默认值 |
 |--------------------|----------------------------------------------------------|-------------------|-------------|--------|
-| small              |   是否使用小型分页样式     | Boolean |             | false |
-| page-size              | 每页显示条目个数                                                   | Number |             | 10 |
-| total | 总条目数 | Number | | 0 |
-| current-page | 当前页数 | Number | | 0|
+| small              |   是否使用小型分页样式     | Boolean |      —       | false |
+| page-size              | 每页显示条目个数                                                   | Number |      —       | 10 |
+| total | 总条目数 | Number | — | 0 |
+| current-page | 当前页数 | Number | — | 0|
 | layout | 组件布局，子组件名用逗号分隔。| String | `size`, `prev`, `pager`, `next`, `jumper`, `->`, `total` | 'prev, pager, next, jumper, ->, total'  |
-| page-sizes | 每页显示个数选择器的选项设置 | Number[] | |  [10, 20, 30, 40, 50, 100] |
+| page-sizes | 每页显示个数选择器的选项设置 | Number[] | — |  [10, 20, 30, 40, 50, 100] |
 
 ### Events
 | 事件名称 | 说明 | 回调参数 |
