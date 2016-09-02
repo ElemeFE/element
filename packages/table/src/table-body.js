@@ -51,7 +51,7 @@ export default {
                 {
                   this._l(this.columns, (column) =>
                     <td
-                      style={{ 'white-space': column.showTooltipWhenOverflow ? 'nowrap' : 'normal' }}
+                      style={ this.getColumnWhiteSpaceStyle(column) }
                       class={ column.id }
                       on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
                       on-mouseleave={ this.handleCellMouseLeave }>
@@ -84,6 +84,10 @@ export default {
   },
 
   methods: {
+    getColumnWhiteSpaceStyle(column) {
+      return column.showTooltipWhenOverflow ? { 'white-space': 'nowrap' } : {};
+    },
+
     checkProperty(row) {
       if (this.criteria && this.criteria.length > 0) {
         for (let i = 0, len = this.criteria.length; i < len; i++) {
