@@ -2,9 +2,7 @@
   export default {
     methods: {
       open() {
-        this.$alert('操作失败, 请稍后重试', '提示', {
-          type: 'error'
-        });
+        this.$alert('这是一段内容', '标题名称');
       },
 
       open2() {
@@ -74,7 +72,7 @@
   export default {
     methods: {
       open() {
-        this.$alert('操作失败, 请稍后重试', '提示');
+        this.$alert('这是一段内容', '标题名称');
       }
     }
   }
