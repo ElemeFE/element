@@ -83,7 +83,10 @@ export default {
       type: Boolean,
       default: true
     },
-    showTooltipWhenOverflow: Boolean,
+    showTooltipWhenOverflow: {
+      type: Boolean,
+      default: false
+    },
     formatter: Function
   },
 
@@ -159,6 +162,7 @@ export default {
       realWidth: width || minWidth,
       sortable: this.sortable,
       resizable: this.resizable,
+      showTooltipWhenOverflow: this.showTooltipWhenOverflow,
       formatter: this.formatter
     });
 

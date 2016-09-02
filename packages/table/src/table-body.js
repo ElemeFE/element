@@ -51,6 +51,7 @@ export default {
                 {
                   this._l(this.columns, (column) =>
                     <td
+                      style={{ 'white-space': column.showTooltipWhenOverflow ? 'nowrap' : 'normal' }}
                       class={ column.id }
                       on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
                       on-mouseleave={ this.handleCellMouseLeave }>

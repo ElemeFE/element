@@ -133,9 +133,9 @@ Button 组件提供除了默认值以外的三种尺寸，可以在不同场景�
 ### Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
-| size     | 尺寸   | string  |   large,small,mini            |         |
-| type     | 类型   | string    |   primary,success,warning,danger,info,text |         |
+| size     | 尺寸   | string  |   large,small,mini            |    —     |
+| type     | 类型   | string    |   primary,success,warning,danger,info,text |     —    |
 | plain     | 是否朴素按钮   | Boolean    | true,false | false   |
 | disabled  | 禁用    | boolean   | true, false   | false   |
-| icon  | 图标，已有的图标库中的图标名 | string   |    |    |
+| icon  | 图标，已有的图标库中的图标名 | string   |  —  |  —  |
 | native-type | 原生 type 属性 | string | button,submit,reset | button |

@@ -55,18 +55,18 @@ Switch 组件提供了平滑的开关。
 ## Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
-| value     | switch 的选中状态   | boolean    |               | true |
-| disabled  | 是否禁用    | boolean   |  | false   |
-| width  | switch 的宽度（像素）    | number   | | 58（有文字）/ 46（无文字） |
-| on-icon-class  | switch 打开时所显示图标的类名    | string   | | |
-| off-icon-class  | switch 关闭时所显示图标的类名    | string   | | |
-| on-text  | switch 打开时的文字    | string   | | 'ON' |
-| off-text  | switch 关闭时的文字    | string   | | 'OFF' |
-| on-color  | switch 打开时的背景色    | string   | | |
-| off-color  | switch 关闭时的背景色    | string   | | |
-| name  | switch 对应的 name 属性    | string   | | |
+| value     | switch 的选中状态   | boolean    |        —       | true |
+| disabled  | 是否禁用    | boolean   | — | false   |
+| width  | switch 的宽度（像素）    | number   | — | 58（有文字）/ 46（无文字） |
+| on-icon-class  | switch 打开时所显示图标的类名    | string   | — | — |
+| off-icon-class  | switch 关闭时所显示图标的类名    | string   | — | — |
+| on-text  | switch 打开时的文字    | string   | — | 'ON' |
+| off-text  | switch 关闭时的文字    | string   | — | 'OFF' |
+| on-color  | switch 打开时的背景色    | string   | — | — |
+| off-color  | switch 关闭时的背景色    | string   | — | — |
+| name  | switch 对应的 name 属性    | string   | — | — |
 
 ## Events
 | 事件名称      | 说明    | 回调参数      |
 |---------- |-------- |---------- |
-| change  | switch 状态发生变化时的回调函数    |  |
+| change  | switch 状态发生变化时的回调函数    | — |

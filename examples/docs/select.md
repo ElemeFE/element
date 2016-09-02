@@ -569,16 +569,16 @@
 ### Select Attributes 
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| multiple | 是否多选 | boolean | - | false |
-| disabled | 是否禁用 | boolean | - | false |
-| clearable | 单选时是否可以清空选项 | boolean | - | false |
-| name | select input 的 name 属性 | string | - | - |
-| placeholder | 占位符 | string | - | 请选择 |
-| filterable | 是否可搜索 | boolean | - | false |
-| filter-method | 自定义过滤方法 | function | - | - |
-| remote | 是否为远程搜索 | boolean | - | false |
-| remote-method | 远程搜索方法 | function | | - |
-| loading | 是否正在从远程获取数据 | boolean | - | false |
+| multiple | 是否多选 | boolean | — | false |
+| disabled | 是否禁用 | boolean | — | false |
+| clearable | 单选时是否可以清空选项 | boolean | — | false |
+| name | select input 的 name 属性 | string | — | — |
+| placeholder | 占位符 | string | — | 请选择 |
+| filterable | 是否可搜索 | boolean | — | false |
+| filter-method | 自定义过滤方法 | function | — | — |
+| remote | 是否为远程搜索 | boolean | — | false |
+| remote-method | 远程搜索方法 | function | — | — |
+| loading | 是否正在从远程获取数据 | boolean | — | false |
 
 ### Select Events
 | 事件名称 | 说明 | 回调参数 |
@@ -588,12 +588,12 @@
 ### Option Group Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| label | 分组的组名 | string | - | - |
-| disabled | 是否将该分组下所有选项置为禁用 | boolean | - | false |
+| label | 分组的组名 | string | — | — |
+| disabled | 是否将该分组下所有选项置为禁用 | boolean | — | false |
 
 ### Option Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| value | 选项的值 | string/number/object | - | - |
-| label | 选项的标签，若不设置则默认与 `value` 相同 | string/number | - | - |
-| disabled | 是否禁用该选项 | boolean | - | false |
+| value | 选项的值 | string/number/object | — | — |
+| label | 选项的标签，若不设置则默认与 `value` 相同 | string/number | — | — |
+| disabled | 是否禁用该选项 | boolean | — | false |

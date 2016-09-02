@@ -48,6 +48,10 @@
       }
     }
 
+    & th {
+      white-space: nowrap;
+    }
+
     & th, td {
       height: 20px;
       max-width: 250px;
@@ -55,7 +59,6 @@
       box-sizing: border-box;
       overflow: hidden;
       text-overflow: ellipsis;
-      white-space: nowrap;
       vertical-align: middle;
       position: relative;
       border-bottom: 1px solid var(--table-border-color);

@@ -223,16 +223,16 @@
 ### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| readonly | 只读 | boolean | - | false |
-| placeholder | 占位内容 | string | - | - |
+| readonly | 只读 | boolean | — | false |
+| placeholder | 占位内容 | string | — | — |
 | type | 显示类型 | string | year/month/date/datetime/week | date |
 | format | 时间日期格式化 | string | 年 `yyyy`，月 `MM`，日 `dd`，<br>小时 `HH`，分 `mm`，秒 `ss` | yyyy-MM-dd |
-| shortcuts | 快捷选项列表，配置信息<br>查看下表 | object[] | - | - |
+| shortcuts | 快捷选项列表，配置信息<br>查看下表 | object[] | — | — |
 
 ### Shortcuts
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| text | 标题文本 | string | - | - |
-| onClick | 选中后的回调函数，参数是 vm，可通过触发 'pick' 事件设置<br>选择器的值。例如 vm.$emit('pick', new Date()) | function | | |
+| text | 标题文本 | string | — | — |
+| onClick | 选中后的回调函数，参数是 vm，可通过触发 'pick' 事件设置<br>选择器的值。例如 vm.$emit('pick', new Date()) | function | — | — |
 
 

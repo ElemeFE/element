@@ -182,17 +182,17 @@ Dialog 组件的正文标题可以是任意的，甚至可以是表格或表单�
 ### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| title     | Dialog 的标题 | string    |  -                               |  -      |
+| title     | Dialog 的标题 | string    | —                               | —      |
 | size      | Dialog 的大小 | string    | tiny/small/large/full | small |
-| modal     | 是否需要遮罩层   | boolean   | - | true |
-| custom-class      | Dialog 的自定义类名 | string    | - | - |
-| close-on-click-modal | 是否可以通过点击 modal 关闭 Dialog | boolean    | - | true |
-| close-on-press-escape | 是否可以通过按下 ESC 关闭 Dialog | boolean    | - | true |
+| modal     | 是否需要遮罩层   | boolean   | — | true |
+| custom-class      | Dialog 的自定义类名 | string    | — | — |
+| close-on-click-modal | 是否可以通过点击 modal 关闭 Dialog | boolean    | — | true |
+| close-on-press-escape | 是否可以通过按下 ESC 关闭 Dialog | boolean    | — | true |
 
 ### Slot
 | name | 说明 |
 |------|--------|
-| - | Dialog 的内容 |
+| — | Dialog 的内容 |
 | footer | Dialog 按钮操作区的内容 |
 
 ### 方法
