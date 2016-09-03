@@ -3,7 +3,7 @@
 
 ## Docs
 
-Comming soon
+Coming soon
 
 ## Demo
 
