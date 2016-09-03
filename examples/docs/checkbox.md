@@ -5,6 +5,8 @@
         checkList: ['选中且禁用','复选框 A'],
         // checkList2: ['复选框 A'],
         checked: true,
+        checked1: false,
+        checked2: true,
         name: 'Jonny',
         a: 'Jonny',
         b: 'Lara'
@@ -30,6 +32,8 @@
 
 ### 基础用法
 
+适用广泛的基础用法。
+
 :::demo 在`el-checkbox`元素中定义`v-model`绑定变量，单一的`checkbox`中，默认绑定变量的值会是`Boolean`，选中为`true`。
 
 ```html
@@ -41,6 +45,30 @@
     data() {
       return {
         checked: true
+      };
+    }
+  };
+</script>
+```
+:::
+
+## 禁用状态
+
+多选框不可用状态。
+
+::: demo 设置`disabled`属性即可。
+
+```html
+<template>
+  <el-checkbox class="checkbox" v-model="checked1" disabled>备选项</el-checkbox>
+  <el-checkbox class="checkbox" v-model="checked2" disabled>备选项</el-checkbox>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        checked1: false,
+        checked2: true
       };
     }
   };
