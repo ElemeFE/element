@@ -1,12 +1,17 @@
 # Element
 > UI Elements for admin page.
 
-## Demo/Docs
-http://element-test.faas.elenet.me/
+## Docs
+
+Comming soon
+
+## Demo
+
+<img src="./examples/assets/images/element-demo.jpeg" width = "100%" />
 
 ## Usages
 ```shell
-npm install element-ui
+npm install element-ui@next
 ```
 
 ## Quick Start
@@ -61,8 +66,27 @@ Vue.component(Button.name, Button)
 }
 ```
 
+## development
+
+### Building Tool Installation
+
+Element UI is built with [cooking](http://cookingjs.github.io/). So before running it you'll need to install [cooking](http://cookingjs.github.io/) globally.
+
+```bash
+$ npm install cooking -g
+```
+
+### Commands
+
+```bash
+$ make install                        ---  install dependencies
+$ make dev                            ---  develop mode
+$ make dist                           ---  compile the project
+$ make dist-all                       ---  compile each component individually
+```
+
 ## Changelog
-Details changes for each release are documented in the [release notes](https://github.com/eleme/element-ui/releases).
+Details changes for each release are documented in the [release notes](https://github.com/ElemeFE/element/releases).
 
 ## LICENSE
 MIT

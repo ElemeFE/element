@@ -14,10 +14,6 @@
     "gh-docs": "cooking build -c scripts/cooking.demo.js -p && gh-pages -d examples/element-ui --remote origin",
     "prepublish": "make dist"
   },
-  "faas": {
-    "domain": "element",
-    "public": "examples/element-ui"
-  },
   "repository": {
     "type": "git",
     "url": "git@github.com:eleme/element-ui.git"
