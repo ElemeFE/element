@@ -252,6 +252,10 @@
       & .el-table__body {
         & tr:nth-child(2n) {
           background: #FAFAFA;
+
+          &.current-row {
+            background: #EFF7FF;
+          }
         }
       }
     }
