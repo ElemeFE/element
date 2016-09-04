@@ -11,19 +11,24 @@
 </style>
 
 <script>
-  import Vue from 'vue';
-
   var data = [{
-    label: 'bb',
+    label: '一级 1',
     children: [{
-      label: 'b1'
+      label: '二级 1-1'
     }]
   }, {
-    label: 'cc',
+    label: '一级 2',
     children: [{
-      label: 'cc1'
+      label: '二级 2-1'
     }, {
-      label: 'cc2'
+      label: '二级 2-2'
+    }]
+  }, {
+    label: '一级 3',
+    children: [{
+      label: '二级 3-1'
+    }, {
+      label: '二级 3-2'
     }]
   }];
 
@@ -53,10 +58,6 @@
 
   export default {
     methods: {
-      getCheckedNodes() {
-        console.log(this.$refs.tree.getCheckedNodes(true));
-      },
-
       loadNode(node, resolve) {
         console.log(node);
         if (node.level === -1) {
@@ -93,10 +94,120 @@
   };
 </script>
 
-## Basic
+## Tree 树形控件
 
+用清晰的层级结构展示信息，可展开或折叠
+
+### 基础用法
+
+::: demo
+```html
 <el-tree :data="data" :props="defaultProps"></el-tree>
 
-## Have Checkbox
+<script>
+  export default {
+    data() {
+      return {
+        data: [{
+          label: '一级 1',
+          children: [{
+            label: '二级 1-1'
+          }]
+        }, {
+          label: '一级 2',
+          children: [{
+            label: '二级 2-1'
+          }, {
+            label: '二级 2-2'
+          }]
+        }, {
+          label: '一级 3',
+          children: [{
+            label: '二级 3-1'
+          }, {
+            label: '二级 3-2'
+          }]
+        }],
+        defaultProps: {
+          children: 'children',
+          label: 'label'
+        }
+      };
+    }
+  };
+</script>
+```
+:::
 
+### 可选择
+
+适用于需要选择层级的时候使用。
+
+::: demo
+```html
 <el-tree :data="regions" :props="props" :load="loadNode" lazy show-checkbox></el-tree>
+
+<script>
+  export default {
+    data() {
+      return {
+        regions: [{
+          'name': 'region1'
+        }, {
+          'name': 'region2'
+        }],
+        props: {
+          label: 'name',
+          children: 'zones'
+        },
+        count: 1
+      };
+    },
+    methods: {
+      getCheckedNodes() {
+        console.log(this.$refs.tree.getCheckedNodes(true));
+      },
+
+      loadNode(node, resolve) {
+        console.log(node);
+        if (node.level === -1) {
+          return resolve([{ name: 'Root1' }, { name: 'Root2' }]);
+        }
+        var hasChild = Math.random() > 0.5;
+        if (node.level > 4) return resolve([]);
+
+        setTimeout(function() {
+          var data;
+          if (hasChild) {
+            data = [{
+              name: 'zone' + count++
+            }, {
+              name: 'zone' + count++
+            }];
+          } else {
+            data = [];
+          }
+
+          resolve(data);
+        }, 500);
+      }
+    }
+  };
+</script>
+```
+:::
+
+### Attributes
+
+| 参数      | 说明          | 类型      | 可选值                           | 默认值  |
+|---------- |-------------- |---------- |--------------------------------  |-------- |
+| data     | 展示数据 | array | — | — |
+| props | 配置选项，具体看下表 | object | — | — |
+| load | 加载子树数据的方法 | function(node, resolve) | — | — |
+
+### props
+
+| 参数      | 说明          | 类型      | 可选值                           | 默认值  |
+|---------- |-------------- |---------- |--------------------------------  |-------- |
+| label | 指定节点标签为节点对象的某个属性值 | string | — | — |
+| children | 指定子树为节点对象的某个属性值 | string | — | — |
