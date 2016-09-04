@@ -6,7 +6,7 @@
 Coming soon
 
 ## Demo
-
+Demo will come with the documentation. Here is a preview:
 <img src="./examples/assets/images/element-demo.jpeg" width = "100%" />
 
 ## Usages
