@@ -115,6 +115,4 @@ Object.keys(Components).forEach(function (key) {
 // 开发模式不需要将不存在的 style.css 打包进去
 cooking.add('externals', externals);
 
-// cooking.config.vue.loaders.html = 'html?minimize=true&conservativeCollapse=false';
-
 module.exports = cooking.resolve();

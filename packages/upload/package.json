@@ -11,8 +11,6 @@
   "repository": "https://github.com/element-component/element/tree/master/packages/upload",
   "author": "elemefe",
   "license": "MIT",
-  "dependencies": {
-    "vue-resource": "^0.9.3"
-  },
+  "dependencies": {},
   "devDependencies": {}
 }
