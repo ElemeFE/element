@@ -1,12 +1,13 @@
 # Element
-> UI Elements for admin page.
+> Desktop UI elements for Vue.js 2.0.
 
 ## Docs
 
 Coming soon
 
 ## Demo
-Demo will come with the documentation. Here is a preview:
+Demo will come with the documentation. Here is a preview of what a page based on Element looks like:
+
 <img src="./examples/assets/images/element-demo.jpeg" width = "100%" />
 
 ## Usages
@@ -31,7 +32,7 @@ import {
 } from 'element-ui'
 
 Vue.component(Select.name, ElSelect)
-Vue.component(Button.name, Button)
+Vue.component(Button.name, ElButton)
 ```
 
 (roughly) to
@@ -50,7 +51,7 @@ import Button from 'element-ui/lib/button';
 import Button from 'element-ui/lib/theme-default/button.css';
 
 Vue.component(Select.name, ElSelect)
-Vue.component(Button.name, Button)
+Vue.component(Button.name, ElButton)
 ```
 
 ## babel-plugin-component
