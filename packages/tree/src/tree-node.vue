@@ -7,7 +7,11 @@
         :class="{ 'is-leaf': node.isLeaf, expanded: !node.isLeaf && expanded }"
         ></span>
       <el-checkbox v-if="showCheckbox" :indeterminate="node.indeterminate" v-model="node.checked" @change="handleCheckChange"></el-checkbox>
-      <!--<span class="el-tree-node__icon {{ node.icon }} {{ node.loading ? 'el-icon-loading' : '' }}" v-if="node.icon"></span>-->
+      <span
+        v-if="node.loading"
+        class="el-tree-node__icon el-icon-loading"
+      >  
+      </span>
       <span class="el-tree-node__label">{{ node.label }}</span>
     </div>
     <collapse-transition>
