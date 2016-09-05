@@ -152,7 +152,7 @@
         {
           "path": "/rate",
           "name": "评分 (rate)",
-          "title": "Rate 评分组件"
+          "title": "Rate 评分"
         }
       ]
     },

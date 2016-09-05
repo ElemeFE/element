@@ -1,7 +1,7 @@
 <template>
   <transition name="el-message-fade">
-    <div class="el-message" v-show="visible" :style="{ top: top ? top + 'px' : 'auto' }" @mouseenter="clearTimer" @mouseleave="startTimer">
-      <i class="el-message__icon" :class="[ typeClass ]"></i>
+    <div class="el-message" v-show="visible" @mouseenter="clearTimer" @mouseleave="startTimer">
+      <img class="el-message__icon" :src="typeImg" alt="">
       <div class="el-message__group">
         <p>{{ message }}</p>
         <div v-if="showClose" class="el-message__closeBtn el-icon-close" @click="handleClose"></div>
@@ -11,13 +11,6 @@
 </template>
 
 <script type="text/babel">
-  let typeMap = {
-    success: 'circle-check',
-    info: 'information',
-    warning: 'warning',
-    error: 'circle-cross'
-  };
-
   export default {
     data() {
       return {
@@ -28,14 +21,13 @@
         onClose: null,
         showClose: false,
         closed: false,
-        top: null,
         timer: null
       };
     },
 
     computed: {
-      typeClass() {
-        return typeMap[this.type] ? `el-icon-${ typeMap[this.type] }` : 'el-icon-information';
+      typeImg() {
+        return require(`../assets/${ this.type }.svg`);
       }
     },
 

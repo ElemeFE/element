@@ -150,8 +150,8 @@ Element 主要品牌颜色是鲜艳、友好的蓝色。
   </el-col>
   <el-col :span="6">
     <div class="demo-color-box-group" style="border: 1px solid #e0e6ed;border-radius: 4px;">
-      <div class="demo-color-box color-gray bg-white">Dark White<div class="value">#F9FAFC</div></div>
-      <div class="demo-color-box color-gray bg-white-dark">White<div class="value">#FFFFFF</div></div>
+      <div class="demo-color-box color-gray bg-white-dark">Dark White<div class="value">#F9FAFC</div></div>
+      <div class="demo-color-box color-gray bg-white">White<div class="value">#FFFFFF</div></div>
     </div>
   </el-col>
 </el-row>
