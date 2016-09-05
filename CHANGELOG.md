@@ -8,10 +8,14 @@
 - Button 组件增加 `nativeType` 属性，用于组件内 `<button>` 标签的原生 `type` 属性，默认值为 `button`
 - 修复 Table 自定义模板中渲染静态数据错误
 - 修复 Table 中被固定列的高度不与其他列的高度协调的问题
-- 修复 TimePicker 的 `picker-options` 属性
+- 修复 Time Picker 的 `picker-options` 属性
 - 修复一些组件图标丢失的问题
 - 修复远程搜索的 Select 在 Form 中的显示问题
-- 修复 input-number 输入小数和非数字值时的问题
+- 修复 Input Number 输入小数和非数字值时的问题
+- 修复 Select 选中 value 为 0 的值时绑定值不更新的问题
+
+#### 非兼容性更新
+- Menu 组件 `mode` 属性默认值修改为 `vertical`
 
 ### 1.0.0-rc.1
 

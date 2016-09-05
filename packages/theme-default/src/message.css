@@ -19,7 +19,7 @@
     z-index: var(--index-popper);
 
     @e group {
-      margin-left: 28px;
+      margin-left: 38px;
       position: relative;
 
       & p {
@@ -33,10 +33,10 @@
     }
 
     @e icon {
-      size: 20px;
-      font-size: 20px;
-      float: left;
-      position: relative;
+      size: 40px;
+      position: absolute;
+      left: 0;
+      top: 0;
     }
 
     @e closeBtn {

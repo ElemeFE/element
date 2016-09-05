@@ -234,10 +234,8 @@
             this.inputLength = 20;
           }
         } else {
-          if (val.value) {
-            this.$emit('input', val.value);
-            this.$emit('change', val.value);
-          }
+          this.$emit('input', val.value);
+          this.$emit('change', val.value);
         }
       },
 
