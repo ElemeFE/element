@@ -8,12 +8,33 @@
         value4: null,
         value5: 3.7
       };
+    },
+    mounted() {
+      this.$nextTick(() => {
+        let firstDemo = document.querySelector('.source');
+        firstDemo.style.padding = '0';
+        firstDemo.style.display = 'flex';
+      });
     }
   }
 </script>
 <style>
-  .demo-box.demo-rate {
-    margin: 20px 0;
+  .demo-rate .block {
+    display: inline-block;
+    padding: 30px 0;
+    text-align: center;
+    border-right: solid 1px #EFF2F6;
+    flex: 1;
+    &:last-child {
+      border-right: none;
+    }
+  }
+  
+  .demo-rate .demonstration {
+    display: block;
+    color: #8492a6;
+    font-size: 14px;
+    margin-bottom: 20px;
   }
 </style>
 
@@ -25,22 +46,19 @@
 
 适用广泛的基础用法
 
-:::demo
+:::demo 评分被分为三个等级，可以利用颜色对分数及情感倾向进行分级（默认情况下不区分颜色）。三个等级所对应的颜色用过`colors`属性设置，而它们对应的两个阈值则通过 `low-threshold` 和 `high-threshold` 设定。
 ``` html
-<el-rate v-model="value1"></el-rate>
-```
-:::
-
-### 区分颜色
-
-利用颜色对分数及情感倾向进行分级
-
-:::demo 分数可以被分为三个等级，对应的两个阈值可分别通过 `low-threshold` 和 `high-threshold` 设定。
-``` html
-<el-rate
-  v-model="value2"
-  :colors="['#99A9BF', '#F7BA2A', '#FF9900']">
-</el-rate>
+<div class="block">
+  <span class="demonstration">默认不区分颜色</span>
+  <el-rate v-model="value1"></el-rate>
+</div>
+<div class="block">
+  <span class="demonstration">区分颜色</span>
+  <el-rate
+    v-model="value2"
+    :colors="['#99A9BF', '#F7BA2A', '#FF9900']">
+  </el-rate>
+</div>
 ```
 :::
 
@@ -57,9 +75,11 @@
 ```
 :::
 
-### 其他 icon
+### 其它 icon
 
-:::demo 当有多层评价时，可以用不同类型的 icon 区分评分层级
+当有多层评价时，可以用不同类型的 icon 区分评分层级
+
+:::demo 设置`icon-classes`属性可以自定义对应 3 个不同分段的图标。本例还使用`void-icon-class`指定了未选中时的图标类名。
 ``` html
 <el-rate
   v-model="value4"
@@ -81,7 +101,7 @@
   disabled
   show-text
   text-color="#ff9900"
-  text-template="{value} 分">
+  text-template="{value}">
 </el-rate>
 ```
 :::

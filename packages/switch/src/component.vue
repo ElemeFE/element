@@ -1,5 +1,5 @@
 <template>
-  <div class="el-switch" :class="{ 'is-disabled': disabled, 'el-switch--wide': hasText, 'el-switch--color': onColor || offColor }">
+  <div class="el-switch" :class="{ 'is-disabled': disabled, 'el-switch--wide': hasText }">
     <div class="el-switch__mask" v-show="disabled"></div>
     <input class="el-switch__input" type="checkbox" v-model="value" :name="name" :disabled="disabled" style="display: none;">
     <span class="el-switch__core" ref="core" @click="handleMiscClick" :style="{ 'width': coreWidth + 'px' }">
@@ -102,13 +102,8 @@
         this.$refs.button.style.transform = this.value ? `translate3d(${ this.coreWidth - 20 }px, 2px, 0)` : 'translate3d(2px, 2px, 0)';
       },
       handleCoreColor() {
-        if (this.value) {
-          this.$refs.core.style.borderColor = this.onColor;
-          this.$refs.core.style.backgroundColor = this.onColor;
-        } else {
-          this.$refs.core.style.borderColor = this.offColor;
-          this.$refs.core.style.backgroundColor = this.offColor;
-        }
+        this.$refs.core.style.borderColor = this.value ? this.onColor : this.offColor;
+        this.$refs.core.style.backgroundColor = this.value ? this.onColor : this.offColor;
       }
     },
     mounted() {

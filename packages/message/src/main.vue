@@ -1,6 +1,6 @@
 <template>
   <transition name="el-message-fade">
-    <div class="el-message" v-show="visible" :style="{ top: top ? top + 'px' : 'auto' }" @mouseenter="clearTimer" @mouseleave="startTimer">
+    <div class="el-message" v-show="visible" @mouseenter="clearTimer" @mouseleave="startTimer">
       <i class="el-message__icon" :class="[ typeClass ]"></i>
       <div class="el-message__group">
         <p>{{ message }}</p>
@@ -28,7 +28,6 @@
         onClose: null,
         showClose: false,
         closed: false,
-        top: null,
         timer: null
       };
     },
