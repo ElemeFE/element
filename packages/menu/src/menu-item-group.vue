@@ -12,13 +12,8 @@
     },
     data() {
       return {
-        paddingLeft: 15
+        paddingLeft: 20
       };
-    },
-    computed: {
-      activeIndex() {
-        return this.$parent.activeIndex;
-      }
     },
     methods: {
       initPadding() {

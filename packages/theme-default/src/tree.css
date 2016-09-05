@@ -21,7 +21,7 @@
         vertical-align: middle;
       }
       & > * {
-        margin-right: 8px;
+        margin-right: 3px;
       }
       &:hover {
         background: #e5e9f2;

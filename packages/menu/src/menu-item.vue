@@ -1,12 +1,8 @@
 <script>
-  import emitter from 'main/mixins/emitter';
-
   module.exports = {
     name: 'el-menu-item',
 
     componentName: 'menu-item',
-
-    mixins: [emitter],
 
     props: {
       index: {
@@ -20,21 +16,33 @@
     },
     computed: {
       indexPath() {
-        return this.$parent.indexPath ? this.$parent.indexPath.concat(this.index) : [this.index];
+        var path = [this.index];
+        var parent = this.$parent;
+        while (parent.$options._componentTag !== 'el-menu') {
+          if (parent.index) {
+            path.unshift(parent.index);
+          }
+          parent = parent.$parent;
+        }
+        return path;
       },
-      activeIndex() {
-        return this.$parent.activeIndex;
+      rootMenu() {
+        var parent = this.$parent;
+        while (parent.$options._componentTag !== 'el-menu') {
+          parent = parent.$parent;
+        }
+        return parent;
       },
       active() {
-        return this.index === this.activeIndex;
+        return this.index === this.rootMenu.activeIndex;
       }
     },
     methods: {
       handleClick() {
-        if (!this.active) {
-          this.dispatch('menu', 'select-key', [this.index, this.indexPath]);
-        }
+        this.rootMenu.handleSelect(this.index, this.indexPath);
       }
+    },
+    mounted() {
     }
   };
 </script>
@@ -47,8 +55,5 @@
       'is-disabled': disabled
     }">
     <slot></slot>
-    <transition name="fade" mode="out-in">
-      <span class="el-menu-item__bar" v-if="active"></span>
-    </transition>
   </li>
 </template>

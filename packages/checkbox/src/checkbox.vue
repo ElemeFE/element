@@ -30,9 +30,9 @@
         type="checkbox"
         :disabled="disabled">
     </span>
-    <span class="el-checkbox__label">
+    <span class="el-checkbox__label" v-if="$slots.default || label">
       <slot></slot>
-      <template v-if="!$slots || !$slots.default">{{label}}</template>
+      <template v-if="!$slots.default">{{label}}</template>
     </span>
   </label>
 </template>

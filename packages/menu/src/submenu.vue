@@ -16,25 +16,62 @@
     },
     data() {
       return {
-        opened: false
+        opened: false,
+        timeout: null,
+        active: false
       };
     },
     computed: {
       indexPath() {
-        return this.$parent.indexPath ? this.$parent.indexPath.concat(this.index) : [this.index];
+        var path = [this.index];
+        var parent = this.$parent;
+        while (parent.$options._componentTag !== 'el-menu') {
+          if (parent.index) {
+            path.unshift(parent.index);
+          }
+          parent = parent.$parent;
+        }
+        return path;
       },
-      activeIndex() {
-        return this.$parent.activeIndex;
+      rootMenu() {
+        var parent = this.$parent;
+        while (parent.$options._componentTag !== 'el-menu') {
+          parent = parent.$parent;
+        }
+        return parent;
+      },
+      mode() {
+        return this.rootMenu.mode;
       }
     },
     methods: {
       handleClick() {
-        if (!this.opened) {
-          this.dispatch('menu', 'expand-menu', [this.index, this.indexPath]);
-          this.opened = true;
-        } else {
-          this.dispatch('menu', 'collapse-menu', [this.index, this.indexPath]);
-          this.opened = false;
+        if (this.mode === 'vertical') {
+          if (!this.opened) {
+            this.dispatch('menu', 'expand-menu', [this.index, this.indexPath]);
+            this.opened = true;
+          } else {
+            this.dispatch('menu', 'collapse-menu', [this.index, this.indexPath]);
+            this.opened = false;
+          }
+        }
+      },
+      handleMouseenter() {
+        if (this.mode === 'horizontal') {
+          clearTimeout(this.timeout);
+          this.timeout = setTimeout(() => {
+            this.dispatch('menu', 'expand-menu', [this.index, this.indexPath]);
+            this.opened = true;
+          }, 300);
+        }
+      },
+      handleMouseleave() {
+        if (this.mode === 'horizontal') {
+          clearTimeout(this.timeout);
+          this.timeout = setTimeout(() => {
+            this.dispatch('menu', 'collapse-menu', [this.index, this.indexPath]);
+            this.opened = false;
+          }, 300);
         }
       }
     },
@@ -49,18 +86,47 @@
           this.opened = true;
         }
       });
+      this.$on('select', (index, indexPath) => {
+        if (this.mode === 'horizontal') {
+          this.active = indexPath.indexOf(this.index) !== -1;
+          this.opened = false;
+        }
+      });
+    },
+    render(h) {
+      var submenu;
+
+      if (this.mode === 'horizontal') {
+        submenu = (
+          <transition name="md-fade-bottom">
+            {this.opened ? <ul class="el-menu">{this.$slots.default}</ul> : null }
+          </transition>
+        );
+      } else {
+        submenu = (
+          this.opened ? <ul class="el-menu">{this.$slots.default}</ul> : null
+        );
+      }
+
+      return (
+        <li
+          class={{ 'el-submenu': true, 'is-active': this.active, 'is-opened': this.opened}}
+          on-mouseenter={this.handleMouseenter}
+          on-mouseleave={this.handleMouseleave}
+        >
+          <div class="el-submenu__title" on-click={this.handleClick}>
+
+            {this.$slots.title}
+            <i class={{
+              'el-submenu__icon-arrow': true,
+              'el-icon-arrow-down': this.mode === 'vertical',
+              'el-icon-caret-bottom': this.mode === 'horizontal'
+            }}>
+            </i>
+          </div>
+          {submenu}
+        </li>
+      );
     }
   };
 </script>
-
-<template>
-  <li class="el-submenu" :class="{'is-opened': opened}">
-    <div class="el-menu-item el-submenu__title" @click="handleClick">
-      <slot name="title"></slot>
-      <i class="el-submenu__icon-arrow el-icon-arrow-up"></i>
-    </div>
-    <ul class="el-menu" v-show="opened">
-      <slot></slot>
-    </ul>
-  </li>
-</template>
