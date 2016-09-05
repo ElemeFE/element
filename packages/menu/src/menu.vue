@@ -1,7 +1,7 @@
 <template>
   <ul class="el-menu"
     :class="{
-      'el-menu--vertical': mode === 'vertical',
+      'el-menu--horizontal': mode === 'horizontal',
       'el-menu--dark': theme === 'dark'
     }"
   >
@@ -21,7 +21,7 @@
     props: {
       mode: {
         type: String,
-        default: ''
+        default: 'vertical'
       },
       defaultActive: {
         type: String,
@@ -43,31 +43,30 @@
     data() {
       return {
         activeIndex: this.defaultActive,
-        openedMenus: this.defaultOpeneds
+        openedMenus: this.defaultOpeneds.slice(0)
       };
     },
     methods: {
-      handleMenuExpand(key, keyPath) {
-        this.openedMenus.push(key);
-
+      handleMenuExpand(index, indexPath) {
         if (this.uniqueOpend) {
-          this.broadcast('submenu', 'close-menu', keyPath);
-          this.openedMenus = this.openedMenus.filter((key) => {
-            return keyPath.indexOf(key) !== -1;
+          this.broadcast('submenu', 'close-menu', indexPath);
+          this.openedMenus = this.openedMenus.filter((index) => {
+            return indexPath.indexOf(index) !== -1;
           });
         }
-        this.$emit('open', key, keyPath);
+        this.$emit('open', index, indexPath);
       },
-      handleMenuCollapse(key, keyPath) {
-        this.openedMenus.splice(this.openedMenus.indexOf(key), 1);
-        this.$emit('close', key, keyPath);
+      handleMenuCollapse(index, indexPath) {
+        this.openedMenus.splice(this.openedMenus.indexOf(index), 1);
+        this.$emit('close', index, indexPath);
       },
-      handleSelect(key, keyPath) {
-        this.activeIndex = key;
-        this.$emit('select', key, keyPath);
+      handleSelect(index, indexPath) {
+        this.activeIndex = index;
+        this.$emit('select', index, indexPath);
+        this.broadcast('submenu', 'select', [index, indexPath]);
 
         if (this.router) {
-          this.$router.push(key);
+          this.$router.push(index);
         }
       }
     },
@@ -75,7 +74,6 @@
       this.broadcast('submenu', 'open-menu', this.openedMenus);
       this.$on('expand-menu', this.handleMenuExpand);
       this.$on('collapse-menu', this.handleMenuCollapse);
-      this.$on('select-key', this.handleSelect);
     }
   };
 </script>

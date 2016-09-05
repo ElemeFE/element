@@ -60,15 +60,25 @@
 
 ::: demo
 ```html
-<el-menu theme="dark" default-active="1" class="el-menu-demo" @select="handleselect">
+<el-menu theme="dark" default-active="1" class="el-menu-demo" mode="horizontal" @select="handleselect">
   <el-menu-item index="1">处理中心</el-menu-item>
-  <el-menu-item index="2">我的工作台</el-menu-item>
+  <el-submenu index="2">
+    <template slot="title">我的工作台</template>
+    <el-menu-item index="2-1">选项1</el-menu-item>
+    <el-menu-item index="2-2">选项2</el-menu-item>
+    <el-menu-item index="2-3">选项3</el-menu-item>
+  </el-submenu>
   <el-menu-item index="3">订单管理</el-menu-item>
 </el-menu>
 <div class="line"></div>
-<el-menu default-active="1" class="el-menu-demo" @select="handleselect">
+<el-menu default-active="1" class="el-menu-demo" mode="horizontal" @select="handleselect">
   <el-menu-item index="1">处理中心</el-menu-item>
-  <el-menu-item index="2">我的工作台</el-menu-item>
+  <el-submenu index="2">
+    <template slot="title">我的工作台</template>
+    <el-menu-item index="2-1">选项1</el-menu-item>
+    <el-menu-item index="2-2">选项2</el-menu-item>
+    <el-menu-item index="2-3">选项3</el-menu-item>
+  </el-submenu>
   <el-menu-item index="3">订单管理</el-menu-item>
 </el-menu>
 ```
@@ -83,12 +93,16 @@
 <el-row class="tac">
   <el-col :span="8">
     <h5>带 icon</h5>
-    <el-menu mode="vertical" default-active="2" class="el-menu-vertical-demo" @open="handleopen" @close="handleclose">
+    <el-menu default-active="2" class="el-menu-vertical-demo" @open="handleopen" @close="handleclose">
       <el-submenu index="1">
         <template slot="title"><i class="el-icon-message"></i>导航一</template>
-        <el-menu-item index="1-1">选项1</el-menu-item>
-        <el-menu-item index="1-2">选项2</el-menu-item>
-        <el-menu-item index="1-3">选项3</el-menu-item>
+        <el-menu-item-group title="分组一">
+          <el-menu-item index="1-1">选项1</el-menu-item>
+          <el-menu-item index="1-2">选项2</el-menu-item>
+        </el-menu-item-group>
+        <el-menu-item-group title="分组2">
+          <el-menu-item index="1-3">选项3</el-menu-item>
+        </el-menu-item-group>
       </el-submenu>
       <el-menu-item index="2"><i class="el-icon-menu"></i>导航二</el-menu-item>
       <el-menu-item index="3"><i class="el-icon-setting"></i>导航三</el-menu-item>
@@ -96,12 +110,16 @@
   </el-col>
   <el-col :span="8">
     <h5>不带 icon</h5>
-    <el-menu mode="vertical" default-active="2" class="el-menu-vertical-demo" @open="handleopen" @close="handleclose">
+    <el-menu default-active="2" class="el-menu-vertical-demo" @open="handleopen" @close="handleclose" theme="dark">
       <el-submenu index="1">
         <template slot="title">导航一</template>
-        <el-menu-item index="1-1">选项1</el-menu-item>
-        <el-menu-item index="1-2">选项2</el-menu-item>
-        <el-menu-item index="1-3">选项3</el-menu-item>
+        <el-menu-item-group title="分组一">
+          <el-menu-item index="1-1">选项1</el-menu-item>
+          <el-menu-item index="1-2">选项2</el-menu-item>
+        </el-menu-item-group>
+        <el-menu-item-group title="分组2">
+          <el-menu-item index="1-3">选项3</el-menu-item>
+        </el-menu-item-group>
       </el-submenu>
       <el-menu-item index="2">导航二</el-menu-item>
       <el-menu-item index="3">导航三</el-menu-item>
@@ -137,29 +155,29 @@
 ### Menu Attribute
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
-| mode     | 模式   | string  |   horizontal,vertical   | horizontal |
+| mode     | 模式   | string  |   horizontal,vertical   | vertical |
 | theme     | 主题色   | string    | light,dark | light |
-| default-active | 当前激活菜单的 key | string    | — | — |
+| default-active | 当前激活菜单的 index | string    | — | — |
 | default-openeds | 当前打开的submenu的 key 数组 | Array    | — | — |
 | unique-opend  | 是否只保持一个子菜单的展开 | boolean   | — | false   |
-| router  | 是否使用 vue-router 的模式，启用该模式会在激活导航时以 key 作为 path 进行路由跳转 | boolean   | — | false   |
+| router  | 是否使用 vue-router 的模式，启用该模式会在激活导航时以 index 作为 path 进行路由跳转 | boolean   | — | false   |
 
 ### Menu Events
 | 事件名称      | 说明    | 回调参数      |
 |---------- |-------- |---------- |
-| select  | 菜单激活回调 | key: 选中菜单项的 keyPath: 选中菜单项的 key path  |
-| open  | SubMenu 展开的回调 | key: 打开的 subMenu 的 key， keyPath: 打开的 subMenu 的 key path  |
-| close  | SubMenu 收起的回调 | key: 收起的 subMenu 的 key， keyPath: 收起的 subMenu 的 key path  |
+| select  | 菜单激活回调 | index: 选中菜单项的 indexPath: 选中菜单项的 index path  |
+| open  | SubMenu 展开的回调 | index: 打开的 subMenu 的 index， indexPath: 打开的 subMenu 的 index path  |
+| close  | SubMenu 收起的回调 | index: 收起的 subMenu 的 index， indexPath: 收起的 subMenu 的 index path  |
 
 ### SubMenu Attribute
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
-| key     | 唯一标志   | string  | — | — |
+| index     | 唯一标志   | string  | — | — |
 
 ### Menu-Item Attribute
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
-| key     | 唯一标志   | string  | — | — |
+| index     | 唯一标志   | string  | — | — |
 
 ### Menu-Group Attribute
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
