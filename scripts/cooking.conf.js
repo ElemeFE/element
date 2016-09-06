@@ -5,11 +5,10 @@ cooking.set({
   entry: './src/index.js',
   dist: './lib',
   clean: false,
-  template: false,
   format: 'umd',
   moduleName: 'ELEMENT',
   extractCSS: 'style.css',
-  extends: ['vue']
+  extends: ['vue2']
 });
 
 cooking.add('output.filename', 'index.js');

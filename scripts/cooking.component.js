@@ -14,10 +14,9 @@ cooking.set({
   entry: entries,
   dist: './lib',
   clean: false,
-  template: false,
   format: 'cjs',
   extractCSS: '[name]/style.css',
-  extends: ['vue']
+  extends: ['vue2']
 });
 
 cooking.add('output.filename', '[name]/index.js');

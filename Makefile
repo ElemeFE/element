@@ -5,15 +5,12 @@ default: help
 build-theme: build-theme-default
 
 build-theme-default:
-	packages/theme-default/node_modules/.bin/gulp build --gulpfile packages/theme-default/gulpfile.js
-	cp -rf packages/theme-default/lib lib/theme-default
+	npm run build:theme
 
 install:
 	npm i --registry=http://registry.npm.taobao.org --ignore-scripts --loglevel=error
-	./node_modules/.bin/lerna bootstrap
 
-dev: install
-	node bin/iconInit.js
+dev:
 	npm run dev
 
 new:
@@ -21,11 +18,9 @@ new:
 
 dist:
 	npm run dist
-	make build-theme
 
 dist-all:
-	node bin/build-all.js
-	make build-theme
+	npm run dist:all
 
 deploy: install
 	@npm run deploy
@@ -38,8 +33,8 @@ gh-docs:
 pub:
 	./node_modules/.bin/kp $(filter-out $@,$(MAKECMDGOALS))
 
-pub-all: dist-all
-	./node_modules/.bin/lerna publish
+pub-all:
+	npm run pub:all
 
 help:
 	@echo "   \033[35mmake\033[0m \033[1m命令使用说明\033[0m"

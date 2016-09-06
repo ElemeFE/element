@@ -18,7 +18,6 @@ cooking.set({
   },
   dist: './examples/element-ui/',
   template: './examples/index.template.html',
-
   publicPath: '/element-ui/',
   hash: true,
   devServer: {
@@ -26,27 +25,32 @@ cooking.set({
     log: false,
     publicPath: '/'
   },
+  minimize: true,
   chunk: 'vendor',
   extractCSS: true,
-  extends: {
-    vue: true,
-    lint: true,
-    saladcss: {
-      browser: ['ie > 8', 'last 2 version'],
-      features: {
-        'bem': {
-          'shortcuts': {
-            'component': 'b',
-            'modifier': 'm',
-            'descendent': 'e'
+  extends: ['vue2', 'lint'],
+  postcss: function(webapck) {
+    return [
+      require('postcss-salad')({
+        browser: ['ie > 8', 'last 2 version'],
+        features: {
+          'partialImport': {
+            addDependencyTo: webapck
           },
-          'separators': {
-            'descendent': '__',
-            'modifier': '--'
+          'bem': {
+            'shortcuts': {
+              'component': 'b',
+              'modifier': 'm',
+              'descendent': 'e'
+            },
+            'separators': {
+              'descendent': '__',
+              'modifier': '--'
+            }
           }
         }
-      }
-    }
+      })
+    ]
   }
 });
 
