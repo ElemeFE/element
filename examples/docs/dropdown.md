@@ -42,75 +42,42 @@
 ```
 :::
 
-### 不带独立按钮的下拉菜单
+### 触发对象
+
+可使用按钮触发下拉菜单。
 
 :::demo 设置`icon-separate`属性来呈现不带独立按钮的下拉菜单，设置为`false`即可。在选项三和选项四中插入了一条分割线，只需要在选项四中设置`class`为`divider`。
 
 ```html
-<el-dropdown text="下拉菜单" type="primary" :icon-separate="false">
+<el-dropdown text="更多菜单" type="primary" :icon-separate="false">
   <el-dropdown-item>选项一</el-dropdown-item>
   <el-dropdown-item>选项二</el-dropdown-item>
   <el-dropdown-item>选项三</el-dropdown-item>
   <el-dropdown-item class="divider">选项四</el-dropdown-item>
 </el-dropdown>
+
+<el-dropdown text="主要按钮" type="primary" @mainclick="handleMainClick()">
+  <el-dropdown-item>选项一</el-dropdown-item>
+  <el-dropdown-item>选项二</el-dropdown-item>
+  <el-dropdown-item>选项三</el-dropdown-item>
+  <el-dropdown-item>选项四</el-dropdown-item>
+</el-dropdown>
 ```
 :::
 
-### 通过点击触发下拉
+### 触发方式
+
+可以配置 click 激活或者 hover 激活。
 
 :::demo 在`trigger`属性设置为`click`即可。
 ```html
-<el-dropdown text="主要按钮" type="primary" trigger="click">
+<el-dropdown text="主要按钮" type="primary" trigger="hover">
   <el-dropdown-item>选项一</el-dropdown-item>
   <el-dropdown-item>选项二</el-dropdown-item>
   <el-dropdown-item>选项三</el-dropdown-item>
   <el-dropdown-item>选项四</el-dropdown-item>
 </el-dropdown>
 <el-dropdown text="下拉菜单" type="primary" :icon-separate="false" trigger="click">
-  <el-dropdown-item>选项一</el-dropdown-item>
-  <el-dropdown-item>选项二</el-dropdown-item>
-  <el-dropdown-item>选项三</el-dropdown-item>
-  <el-dropdown-item class="divider">选项四</el-dropdown-item>
-</el-dropdown>
-```
-:::
-
-### 按钮样式
-
-除了上述属性以外，由于本质还是按钮，`el-dropdown`同样拥有 Button 组件的相关属性：`type`和`size`，关于这点，可以参考 Button 组件的对应文档，下两例说明了相应字段的功能：
-
-:::demo
-```html
-<el-dropdown text="下拉菜单" type="text" :icon-separate="false">
-  <el-dropdown-item>选项一</el-dropdown-item>
-  <el-dropdown-item>选项二</el-dropdown-item>
-  <el-dropdown-item>选项三</el-dropdown-item>
-  <li class="divider">选项四</el-dropdown-item>
-</el-dropdown>
-```
-:::
-
-:::demo
-```html
-<el-dropdown text="下拉菜单" type="primary" size="large">
-  <el-dropdown-item>选项一</el-dropdown-item>
-  <el-dropdown-item>选项二</el-dropdown-item>
-  <el-dropdown-item>选项三</el-dropdown-item>
-  <li class="divider">选项四</el-dropdown-item>
-</el-dropdown>
-<el-dropdown text="下拉菜单" type="primary">
-  <el-dropdown-item>选项一</el-dropdown-item>
-  <el-dropdown-item>选项二</el-dropdown-item>
-  <el-dropdown-item>选项三</el-dropdown-item>
-  <el-dropdown-item class="divider">选项四</el-dropdown-item>
-</el-dropdown>
-<el-dropdown text="下拉菜单" type="primary" size="small">
-  <el-dropdown-item>选项一</el-dropdown-item>
-  <el-dropdown-item>选项二</el-dropdown-item>
-  <el-dropdown-item>选项三</el-dropdown-item>
-  <el-dropdown-item class="divider">选项四</el-dropdown-item>
-</el-dropdown>
-<el-dropdown text="下拉菜单" type="primary" size="mini">
   <el-dropdown-item>选项一</el-dropdown-item>
   <el-dropdown-item>选项二</el-dropdown-item>
   <el-dropdown-item>选项三</el-dropdown-item>

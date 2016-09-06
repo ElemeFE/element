@@ -27,21 +27,77 @@
 ```
 :::
 
+### 复杂分页
+
+能够承载复杂交互的分页。
+
+:::demo `total`只要足够大，就会产生复杂分页的样式。
+```html
+<el-pagination
+  layout="prev, pager, next"
+  :total="1000">
+</el-pagination>
+```
+:::
+
 ### 附加功能
 
-:::demo 此例是一个完整的用例，使用了`sizechange`和`currentchange`事件来处理页码大小和当前页变动时候触发的事件。`page-sizes`接受一个整型数组，数组元素为展示的选择每页显示个数的选项，`[100, 200, 300, 400]`表示四个选项，每页显示100个，200个，300个或者400个。
+:::demo 此例是一个完整的用例，使用了`sizechange`和`currentchange`事件来处理页码大小和当前页变动时候触发的事件。`page-sizes`接受一个整型数组，数组元素为展示的选择每页显示个数的选项，`[100, 200, 300, 400]`表示四个选项，每页显示 100 个，200 个，300 个或者 400 个。
 
 ```html
 <template>
-  <el-pagination
-    @sizechange="handleSizeChange"
-    @currentchange="handleCurrentChange"
-    :current-page="5"
-    :page-sizes="[100, 200, 300, 400]"
-    :page-size="100"
-    layout="sizes, prev, pager, next, jumper, total"
-    :total="1000">
-  </el-pagination>
+  <el-row>
+    <el-col :span="24">
+      <el-pagination
+        @sizechange="handleSizeChange"
+        @currentchange="handleCurrentChange"
+        :current-page="5"
+        :page-sizes="[100, 200, 300, 400]"
+        :page-size="100"
+        layout="total, prev, pager, next"
+        :total="1000">
+      </el-pagination>
+    </el-col>
+  </el-row>
+  <el-row>
+    <el-col :span="24">
+      <el-pagination
+        @sizechange="handleSizeChange"
+        @currentchange="handleCurrentChange"
+        :current-page="5"
+        :page-sizes="[100, 200, 300, 400]"
+        :page-size="100"
+        layout="sizes, prev, pager, next"
+        :total="1000">
+      </el-pagination>
+    </el-col>
+  </el-row>
+  <el-row>
+    <el-col :span="24">
+      <el-pagination
+        @sizechange="handleSizeChange"
+        @currentchange="handleCurrentChange"
+        :current-page="5"
+        :page-sizes="[100, 200, 300, 400]"
+        :page-size="100"
+        layout="prev, pager, next, jumper"
+        :total="1000">
+      </el-pagination>
+    </el-col>
+  </el-row>
+  <el-row>
+    <el-col :span="24">
+      <el-pagination
+        @sizechange="handleSizeChange"
+        @currentchange="handleCurrentChange"
+        :current-page="5"
+        :page-sizes="[100, 200, 300, 400]"
+        :page-size="100"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="1000">
+      </el-pagination>
+    </el-col>
+  </el-row>
 </template>
 <script>
   export default {
@@ -58,18 +114,12 @@
 ```
 :::
 
-<script>
-  export default {
-    methods: {
-      handleSizeChange(val) {
-        console.log(`每页 ${val} 条`);
-      },
-      handleCurrentChange(val) {
-        console.log(`当前页: ${val}`);
-      }
-    }
+<style>
+  .el-col {
+    margin-bottom: 10px;
   }
-</script>
+</style>
+
 
 ### Attributes
 | 参数               | 说明                                                     | 类型              | 可选值      | 默认值 |
