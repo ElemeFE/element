@@ -70,8 +70,6 @@ Vue.component(Button.name, ElButton)
 ## development
 
 ### Building Tool Installation
-
-Element UI is built with [cooking](http://cookingjs.github.io/). So before running it you'll need to install [cooking](http://cookingjs.github.io/) globally.
 ```shell
 # development => install packages -> build icon etc. -> run webpack
 $ npm run dev
