@@ -33,8 +33,6 @@
 
 ### 基础使用
 
-Tag 组件提供了六种主题。
-
 :::demo 由`type`属性来定义，该属性可选填。
 
 ```html
@@ -44,16 +42,6 @@ Tag 组件提供了六种主题。
 <el-tag type="success">标签四</el-tag>
 <el-tag type="warning">标签五</el-tag>
 <el-tag type="danger">标签六</el-tag>
-```
-:::
-
-### 描边
-
-借此可以定义 hover 时的效果。
-
-:::demo `hit`属性可以设置描边。
-```html
-<el-tag type="primary" :hit="true">标签</el-tag>
 ```
 :::
 
