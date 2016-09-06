@@ -38,7 +38,7 @@
 .el-icon-circle-close:before { content: "\e60a"; }
 .el-icon-circle-cross:before { content: "\e60b"; }
 .el-icon-close:before { content: "\e60c"; }
-.el-icon-cloud:before { content: "\e60d"; }
+.el-icon-upload:before { content: "\e60d"; }
 .el-icon-d-arrow-left:before { content: "\e60e"; }
 .el-icon-d-arrow-right:before { content: "\e60f"; }
 .el-icon-d-caret:before { content: "\e610"; }
@@ -62,7 +62,7 @@
 .el-icon-time:before { content: "\e622"; }
 .el-icon-warning:before { content: "\e623"; }
 .el-icon-delete2:before { content: "\e624"; }
-.el-icon-upload:before { content: "\e625"; }
+.el-icon-upload2:before { content: "\e627"; }
 .el-icon-view:before { content: "\e626"; }
 
 .el-icon-loading {
