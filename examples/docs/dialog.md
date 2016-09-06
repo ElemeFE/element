@@ -160,7 +160,7 @@ Dialog 组件的正文标题可以是任意的，甚至可以是表格或表单�
 <el-button type="text" @click.native="dialogFormVisible = true" type="text">打开嵌套表单的 Dialog</el-button>
 
 <el-dialog title="收货地址" v-model="dialogFormVisible">
-  <el-form :models="form">
+  <el-form :model="form">
     <el-form-item label="活动名称" :label-width="formLabelWidth">
       <el-input v-model="form.name" auto-complete="off"></el-input>
     </el-form-item>

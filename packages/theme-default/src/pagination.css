@@ -20,6 +20,10 @@
       box-sizing: border-box;
     }
 
+    .el-select .el-input {
+      width: 100px;
+    }
+
     button {
       border: none;
       padding: 0 6px;
