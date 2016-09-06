@@ -11,6 +11,13 @@
         console.log(event);
         alert('button clicked!');
       }
+    },
+    mounted() {
+      this.$nextTick(() => {
+        let demos = document.querySelectorAll('.source');
+        let thirdDemo = demos[2];
+        thirdDemo.classList.add('intro-block');
+      });
     }
   }
 </script>
@@ -29,6 +36,30 @@
         margin-left: 0;
       }
     }
+  }
+
+  .demo-button .intro-block {
+    padding: 0;
+  }
+
+  .demo-button .intro-block .block {
+    padding: 30px 24px;
+    overflow: hidden;
+    border-bottom: solid 1px #EFF2F6;
+    &:last-child {
+      border-bottom: none;      
+    }
+  }
+
+  .demo-button .intro-block .demonstration {
+    font-size: 14px;
+    color: #8492a6;
+    line-height: 44px;
+  }
+
+  .demo-button .intro-block .wrapper {
+    float: right;
+    margin-right: 20px;
   }
 </style>
 
@@ -68,22 +99,24 @@
 :::demo 朴素按钮同样设置了不同的`type`属性对应的样式（可选值同上），默认为`info`。设置`plain`属性，它接受一个`Boolean`。注意，在该情况下，`type`虽然可以为`text`，但是是没有意义的，会显示为`text button`的样式。
 
 ```html
-<el-row>
-  <el-col :span="24">
+<div class="block">
+  <span class="demonstration">默认显示颜色</span>
+  <span class="wrapper">
     <el-button type="success">成功按钮</el-button>
     <el-button type="warning">警告按钮</el-button>
     <el-button type="danger">危险按钮</el-button>
     <el-button type="info">信息按钮</el-button>
-  </el-col>
-</el-row>
-<el-row>
-  <el-col :span="24">
+  </span>
+</div>
+<div class="block">
+  <span class="demonstration">hover 显示颜色</span>
+  <span class="wrapper">
     <el-button :plain="true" type="success">成功按钮</el-button>
     <el-button :plain="true" type="warning">警告按钮</el-button>
     <el-button :plain="true" type="danger">危险按钮</el-button>
     <el-button :plain="true" type="info">信息按钮</el-button>
-  </el-col>
-</el-row>
+  </span>
+</div>
 ```
 :::
 
@@ -141,7 +174,7 @@ Button 组件提供除了默认值以外的三种尺寸，可以在不同场景�
 
 ```html
 <el-button type="primary" size="large">large</el-button>
-<el-button type="primary">Default</el-button>
+<el-button type="primary">default</el-button>
 <el-button type="primary" size="small">small</el-button>
 <el-button type="primary" size="mini">mini</el-button>
 ```

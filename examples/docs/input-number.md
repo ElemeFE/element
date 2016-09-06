@@ -28,8 +28,6 @@
 
 ### 基础用法
 
-需要标准的数字值时可以用到 Input Number 组件，它提供了数值输入，范围控制和递增递减的步数控制等功能。
-
 :::demo 要使用它，只需要在`el-input-number`元素中使用`v-model`绑定变量即可，变量的初始值即为默认值。
 ```html
 <template>
@@ -65,19 +63,6 @@
 
 ```html
 <el-input-number v-model="num2" :step="2"></el-input-number>
-```
-:::
-
-### 尺寸
-
-和其他组件一样，Input Number 同样具有不同的尺寸。
-
-:::demo 三种尺寸：`large`，`small`以及默认，只需要设置`size`属性即可。
-
-```html
-<el-input-number v-model="num1" size="large"></el-input-number>
-<el-input-number v-model="num1"></el-input-number>
-<el-input-number v-model="num1" size="small"></el-input-number>
 ```
 :::
 

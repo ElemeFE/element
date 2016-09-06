@@ -10,6 +10,12 @@
   }
 </script>
 <style>
+  .source>i {
+    margin: 0 10px;
+    font-size: 1.5em;
+    vertical-align: middle;
+  }
+
   .icon-list {
     overflow: hidden;
     list-style: none;
@@ -58,7 +64,9 @@
 
 :::demo
 ```html
-<i class="el-icon-search"></i>
+<i class="el-icon-edit"></i>
+<i class="el-icon-share"></i>
+<i class="el-icon-delete"></i>
 <el-button type="primary" icon="search">搜索</el-button>
 
 ```
