@@ -1,5 +1,5 @@
 {
-  "presets": ["es2015-loose"],
+  "presets": [["es2015", { "loose": true }]],
   "plugins": ["transform-vue-jsx"],
   "comments": false
 }

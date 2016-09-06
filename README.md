@@ -31,8 +31,8 @@ import {
   // ...
 } from 'element-ui'
 
-Vue.component(Select.name, ElSelect)
-Vue.component(Button.name, ElButton)
+Vue.component(Select.name, Select)
+Vue.component(Button.name, Button)
 ```
 
 (roughly) to
@@ -50,8 +50,8 @@ import Select from 'element-ui/lib/theme-default/select.css';
 import Button from 'element-ui/lib/button';
 import Button from 'element-ui/lib/theme-default/button.css';
 
-Vue.component(Select.name, ElSelect)
-Vue.component(Button.name, ElButton)
+Vue.component(Select.name, Select)
+Vue.component(Button.name, Button)
 ```
 
 ## babel-plugin-component
@@ -70,20 +70,16 @@ Vue.component(Button.name, ElButton)
 ## development
 
 ### Building Tool Installation
+```shell
+# development => install packages -> build icon etc. -> run webpack
+$ npm run dev
 
-Element UI is built with [cooking](http://cookingjs.github.io/). So before running it you'll need to install [cooking](http://cookingjs.github.io/) globally.
+# Recommended use `npminstall` to install packages, it is so fast
+$ npm i npminstall -g
+$ npminstall
 
-```bash
-$ npm install cooking -g
-```
-
-### Commands
-
-```bash
-$ make install                        ---  install dependencies
-$ make dev                            ---  develop mode
-$ make dist                           ---  compile the project
-$ make dist-all                       ---  compile each component individually
+# build => build all component
+$ npm run dist
 ```
 
 ## Changelog

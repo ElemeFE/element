@@ -3,15 +3,13 @@ var path = require('path');
 
 cooking.set({
   entry: {
-    index: path.join(__dirname, '_index.js')
+    index: path.join(__dirname, 'index.js')
   },
   dist: path.join(__dirname, 'lib'),
   template: false,
   format: 'umd',
   moduleName: 'ElDatePicker',
-  extractCSS: 'style.css',
-
-  extends: ['vue', 'saladcss']
+  extends: ['vue2']
 });
 
 cooking.add('resolve.alias', {

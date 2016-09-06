@@ -9,9 +9,7 @@ cooking.set({
   template: false,
   format: 'umd',
   moduleName: 'ElMessage',
-  extractCSS: 'style.css',
-
-  extends: ['vue', 'saladcss']
+  extends: ['vue2']
 });
 
 cooking.add('resolve.alias', {
