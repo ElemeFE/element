@@ -11,6 +11,24 @@
       }
     }
   }
+
+  .demo-dropdown .block {
+    display: inline-block;
+    padding: 30px 0;
+    text-align: center;
+    border-right: solid 1px #EFF2F6;
+    flex: 1;
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+ .demo-dropdown .demonstration {
+   display: block;
+   color: #8492a6;
+   font-size: 14px;
+   margin-bottom: 20px;
+ }
 </style>
 
 <script>
@@ -19,6 +37,14 @@
       handleMainClick() {
         alert('click main button');
       }
+    },
+    mounted() {
+      this.$nextTick(() => {
+        let demos = document.querySelectorAll('.source');
+        let lastDemo = demos[demos.length - 1];
+        lastDemo.style.padding = '0';
+        lastDemo.style.display = 'flex';
+      });
     }
   }
 </script>
@@ -33,11 +59,12 @@
 :::demo 通过`text`属性来设置按钮文字。默认条件下，他由一个主要按钮和一个下拉按钮组成，`el-dropdown`中的主要按钮同样可以设置点击事件，只要使用`mainclick`事件即可。默认情况下，下拉按钮只要`hover`即可，无需点击也会显示下拉菜单。
 
 ```html
-<el-dropdown text="主要按钮" type="primary" @mainclick="handleMainClick()">
-  <el-dropdown-item>选项一</el-dropdown-item>
-  <el-dropdown-item>选项二</el-dropdown-item>
-  <el-dropdown-item>选项三</el-dropdown-item>
-  <el-dropdown-item>选项四</el-dropdown-item>
+<el-dropdown text="下拉菜单" type="text" :icon-separate="false" @mainclick="handleMainClick()">
+  <el-dropdown-item>黄金糕</el-dropdown-item>
+  <el-dropdown-item>狮子头</el-dropdown-item>
+  <el-dropdown-item>螺蛳粉</el-dropdown-item>
+  <el-dropdown-item>双皮奶</el-dropdown-item>
+  <el-dropdown-item>蚵仔煎</el-dropdown-item>
 </el-dropdown>
 ```
 :::
@@ -71,18 +98,24 @@
 
 :::demo 在`trigger`属性设置为`click`即可。
 ```html
-<el-dropdown text="主要按钮" type="primary" trigger="hover">
-  <el-dropdown-item>选项一</el-dropdown-item>
-  <el-dropdown-item>选项二</el-dropdown-item>
-  <el-dropdown-item>选项三</el-dropdown-item>
-  <el-dropdown-item>选项四</el-dropdown-item>
-</el-dropdown>
-<el-dropdown text="下拉菜单" type="primary" :icon-separate="false" trigger="click">
-  <el-dropdown-item>选项一</el-dropdown-item>
-  <el-dropdown-item>选项二</el-dropdown-item>
-  <el-dropdown-item>选项三</el-dropdown-item>
-  <el-dropdown-item class="divider">选项四</el-dropdown-item>
-</el-dropdown>
+<div class="block">
+  <span class="demonstration">hover 激活</span>
+  <el-dropdown text="下拉菜单" type="text" :icon-separate="false" trigger="hover">
+    <el-dropdown-item>选项一</el-dropdown-item>
+    <el-dropdown-item>选项二</el-dropdown-item>
+    <el-dropdown-item>选项三</el-dropdown-item>
+    <el-dropdown-item>选项四</el-dropdown-item>
+  </el-dropdown>
+</div>
+<div class="block">
+  <span class="demonstration">click 激活</span>
+  <el-dropdown text="下拉菜单" type="text" :icon-separate="false" trigger="click">
+    <el-dropdown-item>选项一</el-dropdown-item>
+    <el-dropdown-item>选项二</el-dropdown-item>
+    <el-dropdown-item>选项三</el-dropdown-item>
+    <el-dropdown-item class="divider">选项四</el-dropdown-item>
+  </el-dropdown>
+</div>
 ```
 :::
 
