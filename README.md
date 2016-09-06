@@ -31,8 +31,8 @@ import {
   // ...
 } from 'element-ui'
 
-Vue.component(Select.name, ElSelect)
-Vue.component(Button.name, ElButton)
+Vue.component(Select.name, Select)
+Vue.component(Button.name, Button)
 ```
 
 (roughly) to
@@ -50,8 +50,8 @@ import Select from 'element-ui/lib/theme-default/select.css';
 import Button from 'element-ui/lib/button';
 import Button from 'element-ui/lib/theme-default/button.css';
 
-Vue.component(Select.name, ElSelect)
-Vue.component(Button.name, ElButton)
+Vue.component(Select.name, Select)
+Vue.component(Button.name, Button)
 ```
 
 ## babel-plugin-component
