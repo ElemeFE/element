@@ -120,11 +120,7 @@ export default {
       // 判断是否text-overflow, 如果是就显示tooltip
       const cellChild = getChild(event);
 
-      if (cellChild.scrollWidth > cellChild.offsetWidth) {
-        this.tooltipDisabled = false;
-      } else {
-        this.tooltipDisabled = true;
-      }
+      this.tooltipDisabled = cellChild.scrollWidth <= cellChild.offsetWidth;
     },
 
     handleCellMouseLeave(event) {
