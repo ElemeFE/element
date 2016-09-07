@@ -69,6 +69,7 @@
     "vue-popup": "^0.2.3",
     "vue-router": "^2.0.0-beta.2",
     "webpack": "^1.13.2",
-    "webpack-dev-server": "^1.15.1"
+    "webpack-dev-server": "^1.15.1",
+    "wind-dom": "0.0.3"
   }
 }
