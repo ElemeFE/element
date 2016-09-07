@@ -70,7 +70,7 @@
 
 ## Message 消息提示
 
-反馈提示，比 Notification 更为小巧
+反馈提示，比 Notification 更为小巧。
 
 ### 基础用法
 
@@ -136,7 +136,7 @@ Message 提供了四种类型：`success`，`info`，`warning`，`error`，由�
 
 ### 可关闭
 
-可以设置为手动关闭的 Message
+可以设置为手动关闭的 Message。
 
 :::demo 默认的 Message 是不可以被人工关闭的，如果需要可手动关闭的 Message，可以使用`showClose`字段。此外，和 Notification 一样，Message 拥有可控的`duration`，设置`0`为不会被自动关闭，默认为 3000 毫秒。
 ```html
