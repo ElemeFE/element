@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:eleme/element-ui.git"
+    "url": "git@github.com:elemefe/element.git"
   },
   "keywords": [
     "eleme",
@@ -28,7 +28,7 @@
     "components"
   ],
   "bugs": {
-    "url": "https://github.com/eleme/element-ui/issues"
+    "url": "https://github.com/elemefe/element/issues"
   },
   "devDependencies": {
     "babel-core": "^6.14.0",
