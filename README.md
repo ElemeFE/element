@@ -1,4 +1,4 @@
-# Element [![Build Status](https://api.travis-ci.org/ElemeFE/Element.svg)](https://travis-ci.org/ElemeFE/Element) [![npm package](https://img.shields.io/npm/v/element-ui.svg)](https://www.npmjs.org/package/element-ui) [![NPM downloads](http://img.shields.io/npm/dm/element-ui.svg)](https://npmjs.org/package/element-ui)
+# Element [![Build Status](https://travis-ci.org/ElemeFE/element.svg?branch=master)](https://travis-ci.org/ElemeFE/element) [![npm package](https://img.shields.io/npm/v/element-ui.svg)](https://www.npmjs.org/package/element-ui) [![NPM downloads](http://img.shields.io/npm/dm/element-ui.svg)](https://npmjs.org/package/element-ui)
 > Desktop UI elements for Vue.js 2.0.
 
 ## Docs
@@ -67,7 +67,9 @@ Vue.component(Button.name, Button)
 }
 ```
 
-## development
+## Development
+Recommend: node >= 4 npm >= 3
+
 ```shell
 # development => install packages -> build icon etc. -> run webpack
 $ npm run dev
