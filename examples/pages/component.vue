@@ -45,6 +45,7 @@
       </el-col>
       <el-col :span="18">
         <router-view class="content"></router-view>
+        <footer-nav></footer-nav>
       </el-col>
     </el-row>
   </div>
@@ -56,9 +57,6 @@
       return {
         navsData: navs
       };
-    },
-    updated() {
-      console.log(this.navsData);
     }
   };
 </script>

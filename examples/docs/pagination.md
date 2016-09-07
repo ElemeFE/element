@@ -14,7 +14,7 @@
   </el-pagination>
 </div>
 <div class="block">
-  <span class="demonstration">大于7页时的效果</span>
+  <span class="demonstration">大于 7 页时的效果</span>
     <el-pagination
       layout="prev, pager, next"
       :total="1000">
@@ -129,7 +129,7 @@
   }
 </script>
 <style>
-  .demo-pagination .first {
+  .demo-pagination .source.first {
     padding: 0;
     display: flex;
   }
@@ -152,7 +152,7 @@
     margin-bottom: 20px;
   }
 
-  .demo-pagination .last {
+  .demo-pagination .source.last {
     padding: 0;
   }
 
@@ -174,7 +174,7 @@
   .demo-pagination .last .demonstration + .el-pagination {
     float: right;
     width: 70%;
-    margin-right: 20px;
+    margin: 5px 20px 0 0;
   }
 </style>
 
