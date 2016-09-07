@@ -41,6 +41,10 @@
   .clearfix {
     @utils-clearfix;
   }
+
+  .box-card {
+    width: 480px;
+  }
 </style>
 ## Card 卡片
 将信息聚合在卡片容器中展示。
@@ -52,7 +56,7 @@
 
 :::demo Card 组件包括`header`和`body`部分，`header`部分需要有显式具名 slot 分发，同时也是可选的。
 ```html
-<el-card>
+<el-card class="box-card">
   <div slot="header" class="clearfix">
     <span style="line-height: 36px;">卡片名称</span>
     <el-button style="float: right;" type="primary">操作按钮</el-button>
@@ -70,7 +74,7 @@
 
 :::demo
 ```html
-<el-card>
+<el-card class="box-card">
   <div v-for="o in 4" class="text item">
     {{'列表内容 ' + o }}
   </div>
