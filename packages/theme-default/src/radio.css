@@ -106,6 +106,7 @@
 
   @b radio-group {
     display: inline-block;
+    font-size: 0;
 
     & .el-radio {
       font-size: var(--radio-font-size);
