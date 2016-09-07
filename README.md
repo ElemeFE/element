@@ -68,8 +68,6 @@ Vue.component(Button.name, Button)
 ```
 
 ## development
-
-### Building Tool Installation
 ```shell
 # development => install packages -> build icon etc. -> run webpack
 $ npm run dev
@@ -84,6 +82,9 @@ $ npm run dist
 
 ## Changelog
 Details changes for each release are documented in the [release notes](https://github.com/ElemeFE/element/releases).
+
+## Contribution
+Please make sure to read the [Contributing Guide](https://github.com/elemefe/element/blob/master/CONTRIBUTING.md) before making a pull request.
 
 ## LICENSE
 MIT
