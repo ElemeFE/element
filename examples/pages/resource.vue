@@ -42,12 +42,14 @@
 
     img {
       margin: 75px auto 35px;
+      height: 87px;
     }
     h3 {
       margin: 0 0 10px;
       font-size: 18px;
       color: #1f2f3d;
       font-weight: normal;
+      height: 22px;
     }
     p {
       font-size: 14px;

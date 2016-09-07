@@ -99,7 +99,7 @@
       'header-hangUp': hangUp
     }">
       <div class="container">
-        <h1><router-link to="/">Element<span>Beta</span></router-link></h1>
+        <h1><router-link to="/">Element</router-link></h1>
         <ul class="nav">
           <li class="nav-item">
             <router-link
