@@ -60,7 +60,7 @@
 
 ### 使用方法
 
-直接通过设置类名为`el-icon-iconName`来使用即可。
+直接通过设置类名为 `el-icon-iconName` 来使用即可。例如：
 
 :::demo
 ```html
@@ -73,8 +73,6 @@
 :::
 
 ### 图标集合
-
-下面是目前 Element 所有的图标集合：
 
 <ul class="icon-list">
   <li v-for="name in icons">

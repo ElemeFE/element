@@ -64,7 +64,7 @@
   }
 </style>
 ## Dialog 对话框
-在保留当前页面状态的情况下，告知用户并承载相关操作
+在保留当前页面状态的情况下，告知用户并承载相关操作。
 
 ### 基本用法
 
@@ -81,31 +81,6 @@ Dialog 弹出一个对话框，适合需要定制性更大的场景，如果只�
     <el-button @click.native="dialogVisible = false">取 消</el-button>
     <el-button type="primary" @click.native="dialogVisible = false">确 定</el-button>
   </span>
-</el-dialog>
-```
-:::
-
-### 设置尺寸
-
-:::demo 提供四种尺寸：`tiny`, `small`, `large`, `full`。通过`size`属性来设置。
-
-```html
-<!-- tiny -->
-<el-button type="text" @click.native="dialogTinyVisible = true">点击打开小尺寸 Dialog</el-button>
-
-<el-dialog title="提示" v-model="dialogTinyVisible" size="tiny">
-  <span>这是一段内容</span>
-  <span slot="footer" class="dialog-footer">
-    <el-button @click.native="dialogTinyVisible = false">取 消</el-button>
-    <el-button type="primary" @click.native="dialogTinyVisible = false">确 定</el-button>
-  </span>
-</el-dialog>
-
-<!-- 全屏幕Dialog -->
-<el-button type="text" @click.native="dialogFullVisible = true">点击打开全屏幕 Dialog</el-button>
-
-<el-dialog title="提示" v-model="dialogFullVisible" size="full">
-  <img src="http://placekitten.com/1920/1280">
 </el-dialog>
 ```
 :::
@@ -141,7 +116,7 @@ Dialog 弹出一个对话框，适合需要定制性更大的场景，如果只�
 
 ### 自定义内容
 
-Dialog 组件的正文标题可以是任意的，甚至可以是表格或表单，下面是应用了 Element Table 和 Form 组件的两个样例，除此以外，它们并没有什么特殊之处。
+Dialog 组件的正文标题可以是任意的，甚至可以是表格或表单，下面是应用了 Element Table 和 Form 组件的两个样例。
 
 :::demo
 ```html
@@ -196,7 +171,7 @@ Dialog 组件的正文标题可以是任意的，甚至可以是表格或表单�
 | footer | Dialog 按钮操作区的内容 |
 
 ### 方法
-每个`el-dialog`实例都暴露了如下方法，用于在不显式改变`v-model`值的情况下打开 / 关闭实例：
+每个 `el-dialog` 实例都暴露了如下方法，用于在不显式改变 `v-model` 值的情况下打开 / 关闭实例：
 | 方法名 | 说明 |
 |------|--------|
 | open | 打开当前实例 |
