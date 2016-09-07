@@ -52,6 +52,7 @@
     "json-loader": "^0.5.4",
     "json-templater": "^1.0.4",
     "lerna": "2.0.0-beta.18",
+    "markdown-it": "^7.0.1",
     "markdown-it-container": "^2.0.0",
     "markdown-it-toc-and-anchor": "^4.1.1",
     "object-assign": "^4.1.0",
