@@ -5,7 +5,7 @@
       'is-dragOver': dragOver,
       'is-showCover': showCover
     }"
-    @click="$refs.input.click()"
+    @click="handleClick"
     @drop.prevent="onDrop"
     @dragover.prevent="dragOver = true"
     @dragleave.prevent="dragOver = false"
@@ -148,6 +148,9 @@ export default {
     onDrop(e) {
       this.dragOver = false;
       this.uploadFiles(e.dataTransfer.files);
+    },
+    handleClick() {
+      this.$refs.input.click();
     }
   }
 };

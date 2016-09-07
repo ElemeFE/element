@@ -3,18 +3,23 @@
     <transition name="fade-in">
       <el-progress
         class="el-dragger__cover__progress"
-        v-if="image.status === 'loading'"
-        size="large"
+        v-if="image.status === 'uploading'"
         :percentage="image.percentage"
-        :type="image.status === 'finished' ? 'green' : 'blue'">
+        :show-text="false"
+        :status="image.status === 'finished' ? 'success' : ''">
       </el-progress>
     </transition>
-    <div v-if="image.status === 'finished'" @mouseenter="mouseover = true" @mouseleave="mouseover = false">
+    <div
+      class="el-dragger__cover__content"
+      v-if="image.status === 'finished'"
+      @mouseenter="mouseover = true"
+      @mouseleave="mouseover = false"
+    >
       <img :src="image.url">
       <transition name="fade-in">
         <div v-show="mouseover" class="el-dragger__cover__interact">
           <div class="el-draggeer__cover__btns">
-            <span class="btn" @click="$parent.$refs.input.click()"><i class="el-icon-upload"></i><span>继续上传</span></span>
+            <span class="btn" @click="$parent.handleClick()"><i class="el-icon-upload2"></i><span>继续上传</span></span>
             <span class="btn" @click="onPreview(image)"><i class="el-icon-view"></i><span>查看图片</span></span>
             <span class="btn" @click="onRemove(image)"><i class="el-icon-delete2"></i><span>删除</span></span>
           </div>

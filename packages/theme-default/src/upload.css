@@ -34,8 +34,6 @@
       color: #475669;
       line-height: 32px;
       position: relative;
-      padding-right: 40px;
-      padding-left: 4px;
       box-sizing: border-box;
       border-radius: 4px;
       width: 100%;
@@ -47,25 +45,29 @@
       a {
         color: #475669;
         transition: color .3s;
-      }
-      [class^="el-icon"] {
-        color: #99a9bf;
-        margin-right: 7px;
-        height: 100%;
-        line-height: inherit;
+        padding-left: 4px;
+
+        [class^="el-icon"] {
+          color: #99a9bf;
+          margin-right: 7px;
+          height: 100%;
+          line-height: inherit;
+        }
       }
       & .el-progress {
         position: absolute;
-        bottom: 0;
+        bottom: -3px;
         width: 100%;
       }
-      & .el-icon-check {
-        margin-right: 0;
-        color: #13ce66;
+      & .el-progress__text {
         position: absolute;
         right: 0;
-        top: 0;
-        height: 100%;
+        top: -10px;
+        right: 0;
+      }
+      .el-progress-bar {
+        margin-right: 0;
+        padding-right: 0;
       }
       &:hover {
         background-color: #eff2f7;
@@ -113,7 +115,7 @@
       display: block;
       height: 100%;
     }
-    & .el-icon-cloud {
+    & .el-icon-upload {
       font-size: 67px;
       color: #99a9bf;
       margin: 40px 0 16px;
@@ -138,6 +140,7 @@
       overflow: hidden;
       z-index: 10;
       cursor: default;
+      @utils-vertical-center;
 
       & img {
         display: block;
@@ -146,12 +149,22 @@
       }
 
       @e progress {
-        position: absolute 0 60px 0 60px;
-        margin: auto;
+        display: inline-block;
+        vertical-align: middle;
+        position: static;
+        width: 243px;
 
         & + .el-upload__inner {
           opacity: 0;
         }
+      }
+
+      @e content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
       }
 
       @e interact {

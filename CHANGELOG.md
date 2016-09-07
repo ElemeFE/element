@@ -1,8 +1,8 @@
 ## 更新日志
 
-### 1.0.0-rc.2（待发布）
+### 1.0.0-rc.2
 
-*2016-09-02*
+*2016-09-07*
 
 - 修复 Upload 上传的问题，并增加上传成功和失败的钩子函数
 - Button 组件增加 `nativeType` 属性，用于组件内 `<button>` 标签的原生 `type` 属性，默认值为 `button`
@@ -16,10 +16,10 @@
 
 #### 非兼容性更新
 - Menu 组件 `mode` 属性默认值修改为 `vertical`
+- Progress 组件升级，增加环形进度条的类型，以及增加了诸多属性，详细请查阅文档。
 
 ### 1.0.0-rc.1
 
 *2016-08-30*
 
-- 迁移到 Vue 2.0.0 RC runtime only build。
-- 增加了更多的组件，包括 Row、Column、Badge、Card、Rate、Steps 等。
+Element 1.0.0-rc.1 发布。

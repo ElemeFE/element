@@ -3,48 +3,110 @@
 
 @component-namespace el {
   @b progress {
-    height: 4px;
-    border-radius: 2px;
-    background-color: #e5e9f2;
-    overflow: hidden;
     position: relative;
+    line-height: 1;
 
-    @e bar {
+    @e text {
+      font-size:14px;
+      color:#475669;
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 10px;
+      line-height: 1;
+
+      i {
+        vertical-align: middle;
+        display: block;
+      }
+    }
+    @m circle {
+      display: inline-block;
+
+      .el-progress__text {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        margin: 0;
+
+        i {
+          vertical-align: middle;
+          display: inline-block;
+        }
+
+        @utils-vertical-center;
+      }
+    }
+    @m without-text {
+      .el-progress__text {
+        display: none;
+      }
+      .el-progress-bar {
+        padding-right: 0;
+        margin-right: 0;
+        display: block;
+      }
+    }
+    @m text-inside {
+      .el-progress-bar {
+        padding-right: 0;
+        margin-right: 0;
+      }
+    }
+    @when success {
+      .el-progress-bar__inner {
+        background-color: var(--color-success);
+      }
+      .el-progress__text {
+        color: var(--color-success);
+      }
+    }
+    @when exception {
+      .el-progress-bar__inner {
+        background-color: var(--color-danger);
+      }
+      .el-progress__text {
+        color: var(--color-danger);
+      }
+    }
+  }
+  @b progress-bar {
+    padding-right: 50px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+    margin-right: -55px;
+    box-sizing: border-box;
+
+    @e outer {
+      height: 6px;
+      border-radius: 100px;
+      background-color: #e5e9f2;
+      overflow: hidden;
+      position: relative;
+      vertical-align: middle;
+    }
+    @e inner {
       position: absolute;
       left: 0;
       top: 0;
       height: 100%;
       border-radius: 2px 0 0 2px;
+      background-color: var(--color-primary);
+      text-align: right;
+      border-radius: 100px;
+      line-height: 1;
+
+      @utils-vertical-center;
     }
-    @m green {
-      .el-progress__bar {
-        background-color: var(--color-success);
-      }
-    }
-    @m blue {
-      .el-progress__bar {
-        background-color: var(--color-primary);
-      }
-    }
-    @m green-stripe {
-      .el-progress__bar {
-        background: linear-gradient(45deg, var(--color-success) 25%, #5adc94 25%, #5adc94 75%, var(--color-success) 75%);
-        background-size: 16px 100%;
-        animation: progress 1.5s linear infinite;
-      }
-    }
-    @m blue-stripe {
-      .el-progress__bar {
-        background: linear-gradient(45deg, var(--color-primary) 25%, #63bcff 25%, #63bcff 75%, var(--color-primary) 75%);
-        background-size: 16px 100%;
-        animation: progress 1.5s linear infinite;
-      }
-    }
-    @m large {
-      height: 6px;
-    }
-    @m small {
-      height: 2px;
+    @e innerText {
+      display: inline-block;
+      vertical-align: middle;
+      color: #fff;
+      font-size: 12px;
+      margin: 0 5px;
     }
   }
 }
