@@ -30,6 +30,7 @@
     }
      
     & i {
+      transition: .3s;
       color: #d9def1;
       vertical-align: baseline;
     }
@@ -37,6 +38,7 @@
   
   .footer-nav-link {
     cursor: pointer;
+    transition: .3s;
     
     &:hover {
       color: #5e6d82;
@@ -101,5 +103,5 @@
       this.nav = this.nav.concat(navConfig[1].children);
       this.updateNav();
     }
-  }
+  };
 </script>

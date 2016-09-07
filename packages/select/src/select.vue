@@ -183,29 +183,31 @@
           this.valueChangeBySelected = false;
           return;
         }
-        if (this.multiple && Array.isArray(val)) {
-          this.$nextTick(() => {
-            this.resetInputHeight();
-          });
-          this.selectedInit = true;
-          this.selected = [];
-          val.forEach(item => {
-            let option = this.options.filter(option => option.value === item)[0];
+        this.$nextTick(() => {
+          if (this.multiple && Array.isArray(val)) {
+            this.$nextTick(() => {
+              this.resetInputHeight();
+            });
+            this.selectedInit = true;
+            this.selected = [];
+            val.forEach(item => {
+              let option = this.options.filter(option => option.value === item)[0];
+              if (option) {
+                this.$emit('addOptionToValue', option);
+              }
+            });
+          }
+          if (!this.multiple) {
+            let option = this.options.filter(option => option.value === val)[0];
             if (option) {
               this.$emit('addOptionToValue', option);
+            } else {
+              this.selected = {};
+              this.selectedLabel = '';
             }
-          });
-        }
-        if (!this.multiple) {
-          let option = this.options.filter(option => option.value === val)[0];
-          if (option) {
-            this.$emit('addOptionToValue', option);
-          } else {
-            this.selected = {};
-            this.selectedLabel = '';
           }
-        }
-        this.resetHoverIndex();
+          this.resetHoverIndex();
+        });
       },
 
       selected(val) {
