@@ -1,4 +1,4 @@
-# Element
+# Element [![Build Status](https://api.travis-ci.org/ElemeFE/Element.svg)](https://travis-ci.org/ElemeFE/Element) [![npm package](https://img.shields.io/npm/v/element-ui.svg)](https://www.npmjs.org/package/element-ui) [![NPM downloads](http://img.shields.io/npm/dm/element-ui.svg)](https://npmjs.org/package/element-ui)
 > Desktop UI elements for Vue.js 2.0.
 
 ## Docs
@@ -40,15 +40,15 @@ Vue.component(Button.name, Button)
 ``` javascript
 import Vue from 'vue'
 import Element from 'element-ui'
-import 'element-ui/lib/theme-default/index.css';
+import 'element-ui/lib/theme-default/index.css'
 
 Vue.use(Element)
 
 // or
-import Select from 'element-ui/lib/select';
-import Select from 'element-ui/lib/theme-default/select.css';
-import Button from 'element-ui/lib/button';
-import Button from 'element-ui/lib/theme-default/button.css';
+import Select from 'element-ui/lib/select'
+import Select from 'element-ui/lib/theme-default/select.css'
+import Button from 'element-ui/lib/button'
+import Button from 'element-ui/lib/theme-default/button.css'
 
 Vue.component(Select.name, Select)
 Vue.component(Button.name, Button)
@@ -84,10 +84,9 @@ $ npm run dist
 Details changes for each release are documented in the [release notes](https://github.com/ElemeFE/element/releases).
 
 ## Contribution
-Please make sure to read the [Contributing Guide](https://github.com/elemefe/element/blob/master/CONTRIBUTING.md) before making a pull request.
+Please make sure to read the [Contributing Guide](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.md) before making a pull request.
 
 ## LICENSE
 MIT
 
-<!-- [![Build Status](https://api.travis-ci.org/ElemeFE/element-ui.svg)](https://travis-ci.org/ElemeFE/element-ui) [![npm package](https://img.shields.io/npm/v/element-ui.svg)](https://www.npmjs.org/package/element-ui) [![NPM downloads](http://img.shields.io/npm/dm/element-ui.svg)](https://npmjs.org/package/element-ui) -->
 
