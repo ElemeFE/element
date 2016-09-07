@@ -112,7 +112,9 @@ export default {
       this.style = { width: space };
       // this.mainOffset = -this.$refs.title.getBoundingClientRect().width / 2 + 16 + 'px';
     } else {
-      this.style = { height: space };
+      if (parent.steps[parent.steps.length - 1] !== this) {
+        this.style = { height: space };
+      }
     }
 
     const unwatch = this.$watch('index', val => {

@@ -2,20 +2,7 @@
   export default {
     data() {
       return {
-        tabs: [{
-          title: '选项卡一',
-          content: '选项卡一内容'
-        },{
-          title: '选项卡二',
-          content: '选项卡二内容'
-        },{
-          title: '选项卡三',
-          content: '选项卡三内容'
-        },{
-          title: '选项卡四',
-          content: '选项卡四内容'
-        }],
-        activeName: 'two',
+        activeName: 'first',
         activeName2: ''
       }
     },
@@ -35,7 +22,7 @@
   }
 </style>
 ## Tabs 标签页
-分隔内容上有关联但属于不同类别的数据集合
+分隔内容上有关联但属于不同类别的数据集合。
 
 ### 基础用法
 
@@ -46,17 +33,17 @@
 ```html
 <template>
   <el-tabs :active-name="activeName">
-    <el-tab-pane label="选项卡一"></el-tab-pane>
-    <el-tab-pane name="two" label="选项卡二"></el-tab-pane>
-    <el-tab-pane label="选项卡三"></el-tab-pane>
-    <el-tab-pane label="选项卡四"></el-tab-pane>
+    <el-tab-pane name="first" label="用户管理"></el-tab-pane>
+    <el-tab-pane label="配置管理"></el-tab-pane>
+    <el-tab-pane label="角色管理"></el-tab-pane>
+    <el-tab-pane label="定时任务补偿"></el-tab-pane>
   </el-tabs>
 </template>
 <script>
   export default {
     data() {
       return {
-        activeName: 'two'
+        activeName: 'first'
       };
     }
   };
@@ -73,10 +60,10 @@
 ```html
 <template>
   <el-tabs type="card" @tab-click="handleClick" @tab-remove="handleRemove">
-    <el-tab-pane label="选项卡一"></el-tab-pane>
-    <el-tab-pane label="选项卡二"></el-tab-pane>
-    <el-tab-pane label="选项卡三"></el-tab-pane>
-    <el-tab-pane label="选项卡四"></el-tab-pane>
+    <el-tab-pane label="用户管理"></el-tab-pane>
+    <el-tab-pane label="配置管理"></el-tab-pane>
+    <el-tab-pane label="角色管理"></el-tab-pane>
+    <el-tab-pane label="定时任务补偿"></el-tab-pane>
   </el-tabs>
 </template>
 <script>
@@ -96,17 +83,17 @@
 
 ### 可关闭
 
-可以关闭标签页
+可以关闭标签页。
 
 :::demo 在`el-tabs`中设置`closable`属性，接受一个`Boolean`，设置为`true`时为可关闭。
 
 ```html
 <template>
   <el-tabs type="card" :closable="true" @tab-click="handleClick" @tab-remove="handleRemove">
-    <el-tab-pane label="选项卡一"></el-tab-pane>
-    <el-tab-pane label="选项卡二"></el-tab-pane>
-    <el-tab-pane label="选项卡三"></el-tab-pane>
-    <el-tab-pane label="选项卡四"></el-tab-pane>
+    <el-tab-pane label="用户管理"></el-tab-pane>
+    <el-tab-pane label="配置管理"></el-tab-pane>
+    <el-tab-pane label="角色管理"></el-tab-pane>
+    <el-tab-pane label="定时任务补偿"></el-tab-pane>
   </el-tabs>
 </template>
 <script>
@@ -131,10 +118,10 @@
 :::demo 将`type`设置为`border-card`。
 ```html
 <el-tabs type="border-card">
-  <el-tab-pane label="选项卡一"></el-tab-pane>
-  <el-tab-pane label="选项卡二"></el-tab-pane>
-  <el-tab-pane label="选项卡三"></el-tab-pane>
-  <el-tab-pane label="选项卡四"></el-tab-pane>
+  <el-tab-pane label="用户管理"></el-tab-pane>
+  <el-tab-pane label="配置管理"></el-tab-pane>
+  <el-tab-pane label="角色管理"></el-tab-pane>
+  <el-tab-pane label="定时任务补偿"></el-tab-pane>
 </el-tabs>
 ```
 :::
