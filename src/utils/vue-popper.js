@@ -63,7 +63,7 @@ export default {
 
       const options = this.options;
       const popper = this.popper || this.$refs.popper;
-      const reference = this.reference || this.$refs.reference || this.$slots.reference[0].elm;;
+      const reference = this.reference || this.$refs.reference || this.$slots.reference[0].elm;
 
       if (!popper || !reference) return;
       if (this.visibleArrow) {

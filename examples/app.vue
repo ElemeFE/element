@@ -81,6 +81,11 @@
 
 <script>
   export default {
-    name: 'app'
+    name: 'app',
+    created() {
+      window.addEventListener('hashchange', () => {
+        document.body.scrollTop = 0;
+      });
+    }
   };
 </script>
