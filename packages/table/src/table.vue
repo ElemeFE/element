@@ -43,9 +43,9 @@
         }
       },
 
-      width: String,
+      width: [String, Number],
 
-      height: String,
+      height: [String, Number],
 
       fit: {
         type: Boolean,
