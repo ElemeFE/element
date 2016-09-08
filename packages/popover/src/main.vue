@@ -1,14 +1,17 @@
 <template>
-  <transition :name="transition">
-    <div
-      class="el-popover"
-      ref="popper"
-      v-show="showPopper"
-      :style="{ width: width + 'px' }">
-      <div class="el-popover__title" v-if="title" v-text="title"></div>
-      <slot>{{ content }}</slot>
-    </div>
-  </transition>
+  <span>
+    <transition :name="transition">
+      <div
+        class="el-popover"
+        ref="popper"
+        v-show="showPopper"
+        :style="{ width: width + 'px' }">
+        <div class="el-popover__title" v-if="title" v-text="title"></div>
+        <slot>{{ content }}</slot>
+      </div>
+    </transition>
+    <slot name="reference"></slot>
+  </span>
 </template>
 
 <script>
@@ -56,7 +59,8 @@ export default {
   mounted() {
     setTimeout(() => {
       let _timer;
-      const reference = this.reference || this.$refs.reference;
+      const reference = this.reference || this.$refs.reference || this.$slots.reference[0].elm;
+
       this.$nextTick(() => {
         if (this.trigger === 'click') {
           on(reference, 'click', () => { this.showPopper = !this.showPopper; });
@@ -104,7 +108,7 @@ export default {
   },
 
   destroyed() {
-    const reference = this.reference || this.$refs.reference;
+    const reference = this.reference;
 
     off(reference, 'mouseup');
     off(reference, 'mousedown');
