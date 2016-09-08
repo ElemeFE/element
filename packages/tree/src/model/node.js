@@ -9,10 +9,10 @@ const reInitChecked = function(node) {
 
   for (let i = 0, j = siblings.length; i < j; i++) {
     const sibling = siblings[i];
-    if (sibling.checked !== true) {
+    if (sibling.checked !== true || sibling.indeterminate) {
       all = false;
     }
-    if (sibling.checked !== false) {
+    if (sibling.checked !== false || sibling.indeterminate) {
       none = false;
     }
   }
