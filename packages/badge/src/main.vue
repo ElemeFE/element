@@ -4,7 +4,8 @@
     <sup
       v-text="content"
       class="el-badge__content"
-      :class="{ 'is-fixed': $slots.default, 'is-dot': isDot }" />
+      :class="{ 'is-fixed': $slots.default, 'is-dot': isDot }">
+    </sup>
   </div>
 </template>
 
