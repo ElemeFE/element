@@ -16,7 +16,7 @@
       padding: var(--tooltip-padding);
       z-index: var(--index-popper);
       font-size: var(--tooltip-font-size);
-      line-height: 1;
+      line-height: 1.2;
 
       .popper__arrow,
       .popper__arrow::after {

@@ -1,5 +1,5 @@
 import PopperJS from 'main/utils/popper';
-
+import { once } from 'wind-dom/src/event';
 /**
  * @param {HTMLElement} [reference=$refs.reference] - The reference element used to position the popper.
  * @param {HTMLElement} [popper=$refs.popper] - The HTML element used as popper, or a configuration used to generate the popper.
@@ -100,9 +100,7 @@ export default {
 
     doDestroy() {
       if (this.showPopper) return;
-
-      this.popperJS._popper.removeEventListener('transitionend', this.doDestroy);
-      this.popperJS.destroy();
+      this.popperJS && this.popperJS.destroy();
       this.popperJS = null;
     },
 
@@ -110,7 +108,9 @@ export default {
       if (this.popperJS) {
         this.resetTransformOrigin(this.popperJS);
         if (this.transition) {
-          this.popperJS._popper.addEventListener('transitionend', this.doDestroy);
+          once(this.popperJS._popper, 'webkitTransitionEnd', this.doDestroy);
+          once(this.popperJS._popper, 'oTransitionend', this.doDestroy);
+          once(this.popperJS._popper, 'transitionend', this.doDestroy);
         } else {
           this.doDestroy();
         }

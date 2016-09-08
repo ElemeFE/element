@@ -19,6 +19,10 @@
       & .el-step__main {
         padding-left: 10px;
       }
+
+      & .el-step__description {
+        width: 300px;
+      }
     }
 
     @e line {
