@@ -17,26 +17,41 @@
       a {
         font-size:18px;
         color:#5e6d82;
-        line-height: 32px;
-        height: 32px;
-        margin: 10px 0;
-        padding: 0 0 0 10px;
+        line-height: 42px;
+        height: 42px;
+        margin: 0;
+        padding: 0 0 0 12px;
         text-decoration: none;
-        border-left: 2px solid transparent;
         display: block;
+        position: relative;
+        transition: all .3s;
 
         &.active {
           color: #20a0ff;
-          border-left-color: #20a0ff;
+
+          &:after {
+            content: '';
+            width: 2px;
+            background-color: #20a0ff;
+            height: 32px;
+            border-radius: 2px;
+            left: 0;
+            position: absolute;
+            top: 5px;
+          }
         }
       }
       .nav-item {
         a {
+          display: block;
+          height: 42px;
+          line-height: 42px;
           font-size: 14px;
-          padding-left: 20px;
+          padding-left: 22px;
+
 
           &:hover {
-            background-color: #eee;
+            color: #20a0ff;
           }
         }
       }
@@ -44,7 +59,7 @@
     .nav-group__title {
       color: #99a9bf;
       padding-left: 15px;
-      line-height: 32px;
+      line-height: 34px;
     }
   }
 </style>

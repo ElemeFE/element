@@ -60,7 +60,7 @@
     box-sizing: border-box;
     text-align: center;
     position: relative;
-    transition: bottom .3s;
+    transition: all .3s ease-in-out;
     bottom: 0;
 
     img {
@@ -129,7 +129,7 @@
       <ul class="container">
         <li>
           <div class="card">
-            <img src="~examples/assets/images/zujian.svg" alt="">
+            <img src="~examples/assets/images/zhinan.png" alt="">
             <h3>指南</h3>
             <p>了解设计指南，帮助产品设计人员搭建逻辑清晰、结构合理且高效易用的产品。</p>
             <router-link
@@ -141,7 +141,7 @@
         </li>
         <li>
           <div class="card">
-            <img src="~examples/assets/images/zhinan.svg" alt="">
+            <img src="~examples/assets/images/zujian.png" alt="">
             <h3>组件</h3>
             <p>使用组件 Demo 快速体验交互细节;使用前端框架封装的代码帮助工程师快速开发。</p>
             <router-link

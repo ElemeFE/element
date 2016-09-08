@@ -28,6 +28,7 @@
     padding: 20px 25px;
     background-color: #f9fafc;
     margin-bottom: 25px;
+    border-radius: 2px;
   }
 
   .main-cnt {
