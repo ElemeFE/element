@@ -32,42 +32,49 @@ export default {
 
   render(h) {
     return (
-      <table
-        class="el-table__body"
-        cellspacing="0"
-        cellpadding="0"
-        border="0">
-        <tbody>
-          {
-            this._l(this.data, (row, $index) =>
-              <tr
-                on-click={ ($event) => this.handleClick($event, row) }
-                on-mouseenter={ _ => this.handleMouseEnter($index) }
-                style={ this.getCustomStyle(row) }
-                class={{
-                  'current-row': row === this.$parent.selected,
-                  'hover': this.$parent.$parent.hoverRowIndex === $index
-                }}>
-                {
-                  this._l(this.columns, (column) =>
-                    <td
-                      style={ this.getColumnWhiteSpaceStyle(column) }
-                      class={ column.id }
-                      on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
-                      on-mouseleave={ this.handleCellMouseLeave }>
-                      {
-                        column.template
-                          ? column.template.call(this._renderProxy, h, { row, column, $index, _self: this.$parent.$vnode.context })
-                          : <div class="cell">{ this.$getPropertyText(row, column.property, column.id) }</div>
-                      }
-                    </td>
-                  ).concat(this.fixed ? <td class="gutter" /> : '')
-                }
-              </tr>
-            )
-          }
-        </tbody>
-      </table>
+      <div>
+        <table
+          class="el-table__body"
+          cellspacing="0"
+          cellpadding="0"
+          border="0">
+          <tbody>
+            {
+              this._l(this.data, (row, $index) =>
+                <tr
+                  on-click={ ($event) => this.handleClick($event, row) }
+                  on-mouseenter={ _ => this.handleMouseEnter($index) }
+                  style={ this.getCustomStyle(row) }
+                  class={{
+                    'current-row': row === this.$parent.selected,
+                    'hover': this.$parent.$parent.hoverRowIndex === $index
+                  }}>
+                  {
+                    this._l(this.columns, (column) =>
+                      <td
+                        style={ this.getColumnWhiteSpaceStyle(column) }
+                        class={ column.id }
+                        on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
+                        on-mouseleave={ this.handleCellMouseLeave }>
+                        {
+                          column.template
+                            ? column.template.call(this._renderProxy, h, { row, column, $index, _self: this.$parent.$vnode.context })
+                            : <div class="cell">{ this.$getPropertyText(row, column.property, column.id) }</div>
+                        }
+                      </td>
+                    ).concat(this.fixed ? <td class="gutter" /> : '')
+                  }
+                </tr>
+              )
+            }
+          </tbody>
+        </table>
+        {
+          this.data.length === 0
+          ? (<div style={{paddingTop: '20px', textAlign: 'center', paddingBottom: '20px'}}>暂无数据显示!!</div>)
+          : ''
+        }
+      </div>
     );
   },
 

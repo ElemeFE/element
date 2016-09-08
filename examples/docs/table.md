@@ -678,7 +678,7 @@
 
 ### 排序
 
-对表格进行排序，可快速查找或对比数据。
+对表格进行排序，可快速查找或对比数据。(在el-table里面可以插件一个slot="bottom"的组件,作为自己的分页)
 
 :::demo 在列中设置`sortable`属性即可实现以该列为基准的排序，接受一个`Boolean`，默认为`false`。在本例中，我们还使用了`formatter`属性，它用于格式化指定列的值，接受一个`Function`，会传入两个参数：`row`和`column`，可以根据自己的需求进行处理。
 ```html
@@ -703,6 +703,7 @@
       label="地址"
       :formatter="formatter">
     </el-table-column>
+    <div slot="bottom">这里可以存放分页插件</div>
   </el-table>
 </template>
 
