@@ -12,6 +12,7 @@
     box-sizing: border-box;
     display: inline-block;
     margin-right: 17px;
+    border-radius: 4px;
 
     .name {
       position: absolute;
@@ -24,6 +25,7 @@
       line-height: 35px;
       text-align: left;
       text-indent: 10px;
+      font-family: 'Helvetica Neue';
     }
   }
   .demo-typo-size {
