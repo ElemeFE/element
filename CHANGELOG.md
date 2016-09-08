@@ -13,11 +13,13 @@
 - 修复 远程搜索的 Select 在 Form 中的显示问题
 - 修复 Input Number 输入小数和非数字值时的问题
 - 修复 Select 选中 value 为 0 的值时绑定值不更新的问题
+- 修复 Tree 取消选择某节点后，其同级节点均被取消的问题
 - 优化 增加打包成 commonjs 且不压缩的文件，默认引入 commonjs
 
 #### 非兼容性更新
 - Menu 组件 `mode` 属性默认值修改为 `vertical`
 - Progress 组件升级，增加环形进度条的类型，以及增加了诸多属性，详细请查阅文档。
+- Popover 现在可以通过 slot 指定 reference。
 
 ### 1.0.0-rc.1
 
