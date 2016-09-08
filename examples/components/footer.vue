@@ -1,11 +1,11 @@
 <template>
   <footer class="footer">
     <div class="container">
-       <div class="footer-main">
-         <p class="footer-main-title">Element 1.0 Hydrogen</p>
-         <span class="footer-main-link">反馈建议</span>
-         <span class="footer-main-link"><router-link to="/changelog">更新日志</router-link></span>
-       </div>
+      <div class="footer-main">
+        <p class="footer-main-title">Element 1.0 Hydrogen</p>
+        <span class="footer-main-link">反馈建议</span>
+        <span class="footer-main-link"><router-link to="/changelog">更新日志</router-link></span>
+      </div>
       <div class="footer-social">
         <el-popover
           ref="weixin"
@@ -72,10 +72,12 @@
       line-height: 120px;
     
       .footer-popover {
-        padding: 0;
-        min-width: 120px;
-        line-height: normal;
-        box-shadow: 0 0 11px 0 rgba(174, 187, 211, 0.24);
+        .el-popover {
+          padding: 0;
+          min-width: 120px;
+          line-height: normal;
+          box-shadow: 0 0 11px 0 rgba(174, 187, 211, 0.24);
+        }
 
         .footer-popover-title {
           border-bottom: solid 1px #eaeefb;
