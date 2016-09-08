@@ -6,7 +6,7 @@
       <span class="el-tree-node__expand-icon"
         :class="{ 'is-leaf': node.isLeaf, expanded: !node.isLeaf && expanded }"
         ></span>
-      <el-checkbox v-if="showCheckbox" :indeterminate="node.indeterminate" v-model="node.checked" @change="handleCheckChange"></el-checkbox>
+      <el-checkbox v-if="showCheckbox" :indeterminate="node.indeterminate" v-model="node.checked" @change="handleCheckChange" @click.native="handleUserClick"></el-checkbox>
       <span
         v-if="node.loading"
         class="el-tree-node__icon el-icon-loading"
@@ -67,8 +67,16 @@
         }
       },
 
+      handleUserClick() {
+        if (this.node.indeterminate) {
+          this.node.setChecked(this.node.checked, true);
+        }
+      },
+
       handleCheckChange(checked) {
-        this.node.setChecked(checked, true);
+        if (!this.node.indeterminate) {
+          this.node.setChecked(checked, true);
+        }
       }
     },
 
