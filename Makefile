@@ -8,7 +8,10 @@ build-theme-default:
 	npm run build:theme
 
 install:
-	npm i --registry=http://registry.npm.taobao.org --ignore-scripts --loglevel=error
+	npm run bootstrap
+
+install-cn:
+	npm run bootstrap --registry=http://registry.npm.taobao.org
 
 dev:
 	npm run dev
