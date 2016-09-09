@@ -45,7 +45,10 @@
 
 ::: demo 通过 slot 你可以传入自定义的上传按钮类型和文字提示。
 ```html
-<el-upload action="http://127.0.0.1:9000/upload" :on-preview="handlePreview" :on-remove="handleRemove">
+<el-upload
+  action="http://127.0.0.1:9000/upload"
+  :on-preview="handlePreview"
+  :on-remove="handleRemove">
   <el-button size="small" type="primary">点击上传</el-button>
   <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
 </el-upload>
@@ -138,7 +141,7 @@
 | headers | 可选参数, 设置上传的请求头部 | object | — | — |
 | multiple | 可选参数, 是否支持多选文件 | boolean | — | — |
 | file | 可选参数, 上传的文件字段名 | string | — | file |
-| with-credentials | 支持发送 cooking 凭证信息 | boolean | — | false |
+| with-credentials | 支持发送 cookie 凭证信息 | boolean | — | false |
 | show-uploadList | 是否显示已上传文件列表 | boolean | — | true |
 | type | 上传控件类型 | string | select,drag | select |
 | accept | 可选参数, 接受上传的[文件类型](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept), 拖拽文件上传时不受此参数影响 | string | — | — |
@@ -148,4 +151,3 @@
 | on-error | 可选参数, 文件上传失败时的钩子 | function(err, file, fileList) | — | — |
 | before-upload | 可选参数, 上传文件之前的钩子，参数为上传的文件，若返回 false 或者 Promise 则停止上传。 | function(file) | — | — |
 | thumbnail-mode | 是否设置为图片模式，该模式下会显示图片缩略图 | boolean | — | false |
-| type | 上传控件类型 | string | select,drag | select |
