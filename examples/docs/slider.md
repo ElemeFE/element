@@ -4,9 +4,9 @@
       return {
         value1: 0,
         value2: 50,
-        value3: null,
-        value4: null,
-        value5: null
+        value3: 0,
+        value4: 0,
+        value5: 0
       };
     }
   }

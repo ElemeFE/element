@@ -95,6 +95,10 @@
       };
     },
     watch: {
+      value(val) {
+        this.currentValue = val;
+      },
+
       currentValue(newVal, oldVal) {
         if (!isNaN(newVal) && newVal <= this.max && newVal >= this.min) {
           this.$emit('change', newVal);
