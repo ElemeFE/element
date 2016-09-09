@@ -3,7 +3,7 @@ var path = require('path');
 var Components = require('../components.json');
 var entries = {};
 
-Object.keys(Components).forEach(function (key) {
+Object.keys(Components).forEach(function(key) {
   const compo = Components[key];
 
   compo[0] = path.join(process.cwd(), compo[0]);

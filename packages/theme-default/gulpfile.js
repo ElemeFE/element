@@ -21,14 +21,14 @@ const salad = require('postcss-salad')({
   }
 });
 
-gulp.task('compile', function () {
+gulp.task('compile', function() {
   return gulp.src('./src/*.css')
     .pipe(postcss([salad]))
     .pipe(cssmin())
     .pipe(gulp.dest('./lib'));
 });
 
-gulp.task('copyfont', function () {
+gulp.task('copyfont', function() {
   return gulp.src('./src/fonts/**')
     .pipe(cssmin())
     .pipe(gulp.dest('./lib/fonts'));

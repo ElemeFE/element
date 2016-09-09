@@ -92,9 +92,9 @@ export default {
   },
   {
     filename: path.join('../../examples/docs/', `${componentname}.md`),
-    content:`## ${chineseName}`
+    content: `## ${chineseName}`
   }
-]
+];
 
 // 添加到 components.json
 const componentsFile = require('../components.json');
@@ -105,27 +105,27 @@ if (componentsFile[componentname]) {
 componentsFile[componentname] = [`./packages/${componentname}/index.js`];
 fileSave(path.join(__dirname, '../components.json'))
   .write(JSON.stringify(componentsFile, null, '  '), 'utf8')
-  .end('\n')
+  .end('\n');
 
 // 创建 package
 Files.forEach(file => {
   fileSave(path.join(PackagePath, file.filename))
   .write(file.content, 'utf8')
-  .end('\n')
-})
+  .end('\n');
+});
 
 // 添加到 nav.config.json
 const navConfigFile = require('../examples/nav.config.json');
 navConfigFile[navConfigFile.length - 1].list.push({
   path: `/${componentname}`,
   name: `${chineseName} (${componentname})`,
-  title: componentname === chineseName ?
-         componentname :
-         `${componentname} ${chineseName}`
+  title: componentname === chineseName
+          ? componentname
+          : `${componentname} ${chineseName}`
 });
 
 fileSave(path.join(__dirname, '../examples/nav.config.json'))
   .write(JSON.stringify(navConfigFile, null, '  '), 'utf8')
-  .end('\n')
+  .end('\n');
 
 console.log('DONE!');

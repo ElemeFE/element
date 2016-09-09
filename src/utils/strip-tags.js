@@ -9,7 +9,7 @@
 
 var cheerio = require('cheerio');
 
-module.exports = function (str, tags) {
+module.exports = function(str, tags) {
   var $ = cheerio.load(str, {decodeEntities: false});
 
   if (!tags || tags.length === 0) {
