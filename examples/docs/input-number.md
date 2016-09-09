@@ -51,7 +51,6 @@
 
 ```html
 <el-input-number v-model="num1" :disabled="true"></el-input-number>
-<el-input-number v-model="num3" :min="5" :max="10"></el-input-number>
 ```
 :::
 

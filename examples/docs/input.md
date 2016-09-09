@@ -159,6 +159,10 @@
     }
     .tac {
       text-align: center;
+
+      .el-autocomplete {
+        text-align: left;
+      }
     }
     .el-row.border-grid {
       .el-col:not(:last-child) {

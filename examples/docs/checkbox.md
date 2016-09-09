@@ -7,9 +7,7 @@
         checked: true,
         checked1: false,
         checked2: true,
-        name: 'Jonny',
-        a: 'Jonny',
-        b: 'Lara'
+        isValid: '可用'
       };
     }
   };
@@ -32,13 +30,14 @@
 
 ### 基础用法
 
-适用广泛的基础用法。
+单独使用可以表示两种状态之间的切换
 
 :::demo 在`el-checkbox`元素中定义`v-model`绑定变量，单一的`checkbox`中，默认绑定变量的值会是`Boolean`，选中为`true`。
 
 ```html
 <template>
-  <el-checkbox class="checkbox" v-model="checked">{{ checked }}</el-checkbox>
+  <!-- `checked` 为 true 或 false -->
+  <el-checkbox class="checkbox" v-model="checked">备选项</el-checkbox>
 </template>
 <script>
   export default {
@@ -78,6 +77,8 @@
 
 ### 多选框组
 
+适用于多个勾选框绑定到同一个数组的情景，通过是否勾选来表示这一组选项中选中的项。
+
 :::demo `checkbox-group`元素能把多个 checkbox 管理为一组，只需要在 Group 中使用`v-model`绑定`Array`类型的变量即可，`label`属性除了改变 checkbox 按钮后的介绍外，同时也是该 checkbox 对应的值，`label`与数组中的元素值相对应，如果存在指定的值则为选中状态，否则为不选中。
 
 ```html
@@ -89,9 +90,6 @@
     <el-checkbox class="checkbox" label="禁用" disabled></el-checkbox>
     <el-checkbox class="checkbox" label="选中且禁用" disabled></el-checkbox>
   </el-checkbox-group>
-
-  <p>{{ checkList }}</p>
-
 </template>
 
 <script>
@@ -106,7 +104,9 @@
 ```
 :::
 
-### 绑定 value 的多选框
+### 可切换值的多选框
+
+多选框单独时，除了可以表示为是否选中的逻辑值以外，你还可以设定其选中和未选中所表示的值。
 
 :::demo 使用`true-label`和`false-label`可以自定义选中时和未选中时的值，可以为`String`或`Number`类型。
 
@@ -114,19 +114,17 @@
 <template>
   <el-checkbox
     class="checkbox"
-    v-model="name"
-    :true-label="a"
-    :false-label="b">
-    {{name}}
+    v-model="isValid"
+    true-label="可用"
+    false-label="不可用">
+    {{isValid}}
   </el-checkbox>
 </template>
 <script>
   export default {
     data() {
       return {
-        name: 'Jonny',
-        a: 'Jonny',
-        b: 'Lara'
+        isValid: '可用'
       };
     }
   };
