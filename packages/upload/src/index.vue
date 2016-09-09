@@ -177,6 +177,7 @@ export default {
         multiple: this.multiple,
         'before-upload': this.beforeUpload,
         'with-credentials': this.withCredentials,
+        headers: this.headers,
         name: this.name,
         accept: this.thumbnailMode ? 'image/*' : this.accept,
         'on-start': this.handleStart,
