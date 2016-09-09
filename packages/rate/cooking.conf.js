@@ -9,7 +9,7 @@ cooking.set({
   template: false,
   format: 'umd',
   moduleName: 'ElRate',
- extends: ['vue2']
+  extends: ['vue2']
 });
 
 cooking.add('resolve.alias', {

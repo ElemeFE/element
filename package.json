@@ -9,14 +9,15 @@
   ],
   "scripts": {
     "dev": "npm i && (node bin/iconInit.js & node bin/build-entry.js) && cooking watch -c scripts/cooking.demo.js",
-    "dist": "del -f lib && cooking build -c scripts/cooking.conf.js,scripts/cooking.common.js -p && cooking build -c scripts/cooking.component.js -p && npm run build:theme",
+    "dist": "npm run lint && del -f lib && cooking build -c scripts/cooking.conf.js,scripts/cooking.common.js -p && cooking build -c scripts/cooking.component.js -p && npm run build:theme",
     "dist:all": "node bin/build-all.js && npm run build:theme",
     "build:theme": "gulp build --gulpfile packages/theme-default/gulpfile.js && cp-cli packages/theme-default/lib lib/theme-default",
     "deploy": "cooking build -c scripts/cooking.demo.js -p",
     "gh-docs": "cooking build -c scripts/cooking.demo.js -p && gh-pages -d examples/element-ui --remote origin",
     "postinstall": "lerna bootstrap",
     "pub": "npm run dist && kp",
-    "pub:all": "npm run dist:all && lerna publish"
+    "pub:all": "npm run dist:all && lerna publish",
+    "lint": "eslint src/** packages/** scripts/** bin/** --ext .js,.vue --ignore-pattern node_modules"
   },
   "repository": {
     "type": "git",
@@ -67,10 +68,12 @@
     "theaterjs": "^3.0.0",
     "uppercamelcase": "^1.1.0",
     "url-loader": "^0.5.7",
-    "vue": "^2.0.0-rc.3",
+    "vue": "2.0.0-rc.3",
+    "vue-loader": "9.3.2",
     "vue-markdown-loader": "^0.4.0",
     "vue-popup": "^0.2.3",
     "vue-router": "^2.0.0-beta.2",
+    "vue-template-compiler": "2.0.0-rc.3",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.15.1",
     "wind-dom": "0.0.3"

@@ -4,9 +4,9 @@ var md = require('markdown-it')();
 var Components = require('../components.json');
 var striptags = require('../src/utils/strip-tags');
 
-function convert(str){
-  str = str.replace(/(&#x)(\w{4});/gi,function($0){
-    return String.fromCharCode(parseInt(encodeURIComponent($0).replace(/(%26%23x)(\w{4})(%3B)/g,"$2"),16));
+function convert(str) {
+  str = str.replace(/(&#x)(\w{4});/gi, function($0) {
+    return String.fromCharCode(parseInt(encodeURIComponent($0).replace(/(%26%23x)(\w{4})(%3B)/g, '$2'), 16));
   });
   return str;
 }
@@ -50,7 +50,7 @@ cooking.set({
           }
         }
       })
-    ]
+    ];
   }
 });
 
@@ -70,7 +70,7 @@ cooking.add('vueMarkdown', {
         return params.trim().match(/^demo\s*(.*)$/);
       },
 
-      render: function (tokens, idx) {
+      render: function(tokens, idx) {
         var m = tokens[idx].info.trim().match(/^demo\s*(.*)$/);
         if (tokens[idx].nesting === 1) {
           var description = (m && m.length > 1) ? m[1] : '';
@@ -88,8 +88,8 @@ cooking.add('vueMarkdown', {
       }
     }]
   ],
-  preprocess: function (MarkdownIt, source) {
-    MarkdownIt.renderer.rules.table_open = function () {
+  preprocess: function(MarkdownIt, source) {
+    MarkdownIt.renderer.rules.table_open = function() {
       return '<table class="table">';
     };
     MarkdownIt.renderer.rules.fence = wrap(MarkdownIt.renderer.rules.fence);
@@ -97,11 +97,11 @@ cooking.add('vueMarkdown', {
   }
 });
 
-var wrap = function (render) {
-  return function () {
+var wrap = function(render) {
+  return function() {
     return render.apply(this, arguments)
       .replace('<code class="', '<code class="hljs ')
-      .replace('<code>', '<code class="hljs">')
+      .replace('<code>', '<code class="hljs">');
   };
 };
 
@@ -112,7 +112,7 @@ cooking.add('resolve.alias', {
 });
 
 var externals = {};
-Object.keys(Components).forEach(function (key) {
+Object.keys(Components).forEach(function(key) {
   externals[`packages/${key}/style.css`] = 'null';
 });
 

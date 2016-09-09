@@ -14,7 +14,7 @@ Object.keys(components).forEach(key => {
   const filePath = path.join(__dirname, `../packages/${key}/cooking.conf.js`);
 
   if (existsSync(filePath)) {
-    componentPaths.push(`packages/${key}/cooking.conf.js`)
+    componentPaths.push(`packages/${key}/cooking.conf.js`);
   }
 });
 
