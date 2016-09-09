@@ -2,7 +2,6 @@
 Thank you for contributing! Please carefully read the following before opening your issue.
  -->
 
- <!-- BUG REPORT TEMPLATE -->
 ### Element version
 <!-- 1.0.0-rc.2 -->
 

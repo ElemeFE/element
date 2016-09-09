@@ -3,7 +3,7 @@
 Hi! 首先感谢你使用 Element UI。这是一个为开发者、设计师和产品经理准备的一套能让你快速搭建页面的基于 Vue 2.0 的组件库，同时我们还提供了相关设计资源供设计师使用。如果你考虑为 Element 贡献代码的话，请确保阅读下面内容。
 
 ## Issue 规范
-- issue 仅仅用来提交 Bug 或 Feature 以及设计相关的内容。如果只是简单的问题，请到 Slack 或 Gitter 里咨询，并且我们会直接关掉。
+- issue 仅仅用来提交 Bug 或 Feature 以及设计相关的内容。如果只是简单的问题，请到 Slack 或 [Gitter](https://gitter.im/ElemeFE/element) 里咨询，并且我们会直接关掉。
 
 - 提交 issue 前请搜索下是否有同样的问题已经被 fix 或者回复过了。
 
