@@ -85,7 +85,7 @@
 
     watch: {
       inputValue(val) {
-        this.$emit('input', val);
+        this.$emit('input', Number(val));
       },
 
       showTip(val) {
