@@ -161,12 +161,13 @@
     @e inner {
       display: block;
       resize: vertical;
-      padding: 10px 5px;
+      padding: 8px 5px;
+      line-height: normal;
       box-sizing: border-box;
       width: 100%;
       min-height: 88px;
       font-size: var(--font-size-base);
-      color: #666;
+      color: var(--input-color);
       background-color: #fff;
       background-image: none;
       border: var(--input-border);
