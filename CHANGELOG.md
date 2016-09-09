@@ -15,6 +15,7 @@
 - 修复 Select 选中 value 为 0 的值时绑定值不更新的问题
 - 修复 Tree 取消选择某节点后，其同级节点均被取消的问题
 - 修复 Upload 的 headers 属性设置无效
+- 修复 Pagination 包含 sizes 子组件时 page-size 无效的问题
 - 优化 增加打包成 commonjs 且不压缩的文件，默认引入 commonjs
 
 #### 非兼容性更新
