@@ -52,7 +52,6 @@
       @sizechange="handleSizeChange"
       @currentchange="handleCurrentChange"
       :current-page="5"
-      :page-sizes="[100, 200, 300, 400]"
       :page-size="100"
       layout="total, prev, pager, next"
       :total="1000">
@@ -76,7 +75,6 @@
       @sizechange="handleSizeChange"
       @currentchange="handleCurrentChange"
       :current-page="5"
-      :page-sizes="[100, 200, 300, 400]"
       :page-size="100"
       layout="prev, pager, next, jumper"
       :total="1000">
@@ -160,7 +158,6 @@
 
   .demo-pagination .last .block {
     padding: 30px 24px;
-    overflow: hidden;
     border-bottom: solid 1px #EFF2F6;
     &:last-child {
       border-bottom: none;      
@@ -188,7 +185,7 @@
 | page-size              | 每页显示条目个数                                                   | Number |      —       | 10 |
 | total | 总条目数 | Number | — | 0 |
 | current-page | 当前页数 | Number | — | 0|
-| layout | 组件布局，子组件名用逗号分隔。| String | `size`, `prev`, `pager`, `next`, `jumper`, `->`, `total` | 'prev, pager, next, jumper, ->, total'  |
+| layout | 组件布局，子组件名用逗号分隔。| String | `sizes`, `prev`, `pager`, `next`, `jumper`, `->`, `total` | 'prev, pager, next, jumper, ->, total'  |
 | page-sizes | 每页显示个数选择器的选项设置 | Number[] | — |  [10, 20, 30, 40, 50, 100] |
 
 ### Events
