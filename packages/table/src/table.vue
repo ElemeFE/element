@@ -11,7 +11,7 @@
       <div class="el-table__fixed-header-wrapper" v-if="fixedColumnCount > 0">
         <table-header :columns="fixedColumns" :all-selected="allSelected" @allselectedchange="handleAllSelectedChange" :selection="selection" :style="{ width: fixedBodyWidth ? fixedBodyWidth + 'px' : '' }" :border="border"></table-header>
       </div>
-      <div class="el-table__fixed-body-wrapper" v-if="fixedColumnCount > 0" :style="{ top: headerHeight + 'px' }">
+      <div class="el-table__fixed-body-wrapper" v-if="fixedColumnCount > 0 && filterData.length > 0" :style="{ top: headerHeight + 'px' }">
         <table-body :columns="fixedColumns" fixed :selection="selection" :data="filterData" :style="{ width: fixedBodyWidth ? fixedBodyWidth + 'px' : '' }"></table-body>
       </div>
     </div>
