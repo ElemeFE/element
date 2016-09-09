@@ -15,17 +15,16 @@ cooking.set({
   dist: './lib',
   clean: false,
   format: 'cjs',
-  extractCSS: '[name]/style.css',
-  extends: ['vue2']
+  extends: ['vue2'],
+  minimize: false,
+  alias: {
+    main: path.join(__dirname, '../src'),
+    packages: path.join(__dirname, '../packages'),
+    examples: path.join(__dirname, '../examples')
+  }
 });
 
 cooking.add('output.filename', '[name]/index.js');
-
-cooking.add('resolve.alias', {
-  'main': path.join(__dirname, '../src'),
-  'packages': path.join(__dirname, '../packages'),
-  'examples': path.join(__dirname, '../examples')
-});
 
 var externals = {};
 Object.keys(Components).forEach(function(key) {
@@ -46,5 +45,4 @@ cooking.add('externals', Object.assign({
 }, externals));
 
 cooking.add('loader.js.exclude', /node_modules|utils\/popper\.js|util\/fecha.\js/);
-
 module.exports = cooking.resolve();
