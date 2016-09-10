@@ -4,7 +4,8 @@
 
 @component-namespace el {
   @b input-number {
-    display: inline-block;
+    display: block;
+    overflow: hidden;
 
     & .el-input__inner {
       appearance: none;

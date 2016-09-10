@@ -89,7 +89,7 @@
 ### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| type | 主题 | string | 'primary', 'gray', 'success', 'warning', 'error' | — |
+| type | 主题 | string | 'primary', 'gray', 'success', 'warning', 'danger' | — |
 | closable | 是否可关闭 | boolean | — | false |
 | close-transition | 是否禁用关闭时的渐变动画 | boolean | — | false |
 | hit | 是否有边框描边 | boolean | — | false |
