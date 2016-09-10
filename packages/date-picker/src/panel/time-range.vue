@@ -72,10 +72,12 @@
     },
 
     data() {
-      const minTime = new Date();
+      let defaultValue = this.$options.defaultValue;
+      defaultValue = Array.isArray(defaultValue) ? defaultValue : [defaultValue];
+      const minTime = defaultValue[0] || new Date();
       const date = new Date();
       date.setHours(date.getHours() + 1);
-      const maxTime = date;
+      const maxTime = defaultValue[1] || date;
 
       return {
         minTime: minTime,
@@ -164,7 +166,7 @@
       }
     },
 
-    ready() {
+    mounted() {
       this.$nextTick(() => this.handleConfirm(true, true));
     }
   };

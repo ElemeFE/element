@@ -77,7 +77,7 @@
         minutes: 0,
         seconds: 0,
         selectableRange: [],
-        currentDate: this.date,
+        currentDate: this.$options.defaultValue || this.date,
         currentVisible: this.visible
       };
     },
