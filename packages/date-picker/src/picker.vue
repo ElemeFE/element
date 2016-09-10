@@ -399,6 +399,7 @@ export default {
 
     showPicker() {
       if (!this.picker) {
+        this.panel.defaultValue = this.value;
         this.picker = new Vue(merge({
           el: document.createElement('div')
         }, this.panel));

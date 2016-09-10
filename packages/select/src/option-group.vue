@@ -25,7 +25,7 @@
       }
     },
 
-    ready() {
+    mounted() {
       if (this.disabled) {
         this.broadcast('option', 'disableOptions');
       }
