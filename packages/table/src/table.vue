@@ -227,7 +227,6 @@
         if (this.fixedColumnCount > 0) {
           let fixedBodyWidth = 0;
           let fixedColumnCount = this.fixedColumnCount;
-
           columns.forEach(function(column, index) {
             if (index < fixedColumnCount) {
               fixedBodyWidth += column.realWidth;
@@ -252,7 +251,6 @@
           const bodyHeight = (height - headerHeight);
           const gridWrapper = this.$el.querySelector('.el-table__body-wrapper');
           gridWrapper.style.height = bodyHeight + 'px';
-
           this.$el.style.height = height + 'px';
           if (this.$refs.fixed) {
             this.$refs.fixed.style.height = height + 'px';
@@ -420,8 +418,9 @@
         this.$nextTick(() => {
           const style = this.$refs.fixed.style;
           if (!style) return;
-          style.height = this.$el.clientHeight + 'px';
-
+          // style.height = this.$el.clientHeight + 'px';
+          // 存在横向滚动条的时候应该要减去滚动条的高度
+          style.height = (this.showHScrollBar ? this.$el.clientHeight - this.currentGutterWidth : this.$el.clientHeight) + 'px';
           // 若非固定列中的某行内容被撑高, 需要固定列中对应行高度与其保持一致
           let bodyHeight = this.$el.querySelector('.el-table__body-wrapper').offsetHeight;
           let fixedBodyHeight = this.$el.querySelector('.el-table__fixed-body-wrapper').offsetHeight;
