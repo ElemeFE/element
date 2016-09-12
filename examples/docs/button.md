@@ -130,8 +130,8 @@
 <el-button type="primary" icon="edit"></el-button>
 <el-button type="primary" icon="share"></el-button>
 <el-button type="primary" icon="delete"></el-button>
-<el-button type="primary" icon="search">Search</el-button>
-<el-button type="primary">Upload<i class="el-icon-upload el-icon-right"></i></el-button>
+<el-button type="primary" icon="search">搜索</el-button>
+<el-button type="primary">上传<i class="el-icon-upload el-icon-right"></i></el-button>
 ```
 :::
 
@@ -161,7 +161,7 @@
 :::demo 要设置为 loading 状态，只要设置`loading`属性为`true`即可。
 
 ```html
-<el-button type="primary" :loading="true">Button</el-button>
+<el-button type="primary" :loading="true">加载中</el-button>
 ```
 :::
 
@@ -172,10 +172,10 @@ Button 组件提供除了默认值以外的三种尺寸，可以在不同场景�
 :::demo 额外的尺寸：`large`、`small`、`mini`，通过设置`size`属性来配置它们。
 
 ```html
-<el-button type="primary" size="large">large</el-button>
-<el-button type="primary">default</el-button>
-<el-button type="primary" size="small">small</el-button>
-<el-button type="primary" size="mini">mini</el-button>
+<el-button type="primary" size="large">大型按钮</el-button>
+<el-button type="primary">正常按钮</el-button>
+<el-button type="primary" size="small">小型按钮</el-button>
+<el-button type="primary" size="mini">超小按钮</el-button>
 ```
 :::
 

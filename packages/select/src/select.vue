@@ -190,6 +190,7 @@
             });
             this.selectedInit = true;
             this.selected = [];
+            this.currentPlaceholder = this.cachedPlaceHolder;
             val.forEach(item => {
               let option = this.options.filter(option => option.value === item)[0];
               if (option) {

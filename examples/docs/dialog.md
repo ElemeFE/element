@@ -68,9 +68,9 @@
 
 ### 基本用法
 
-Dialog 弹出一个对话框，适合需要定制性更大的场景，如果只是弹出框，可以尝试 MessageBox 组件。
+Dialog 弹出一个对话框，适合需要定制性更大的场景。
 
-:::demo 需要设置`v-model`属性，它接收`Boolean`，当为`true`时显示 Dialog。Dialog 分为两个部分：`body`和`footer`，`footer`需要具名为`footer`的`slot`。`title`属性用于定义标题，它是可选的，默认值为空。
+:::demo 需要设置`v-model`属性，它接收`Boolean`，当为`true`时显示 Dialog。Dialog 分为两个部分：`body`和`footer`，`footer`需要具名为`footer`的`slot`。`title`属性用于定义标题，它是可选的，默认值为空。本例通过显式改变`v-model`的值来打开 Dialog，此外我们还为 Dialog 实例提供了`open`和`close`方法，可以通过调用它们来打开/关闭 Dialog。
 
 ```html
 <el-button type="text" @click.native="dialogVisible = true">点击打开 Dialog</el-button>
@@ -85,38 +85,9 @@ Dialog 弹出一个对话框，适合需要定制性更大的场景，如果只�
 ```
 :::
 
-### 使用 Dialog 方法打开
-
-:::demo 使用实例`open`和`close`方法，不用显式改变`v-modal`的值。
-
-```html
-<template>
-  <el-button type="text" @click.native="openDialog()">使用Dialog方法</el-button>
-
-  <el-dialog title="提示" v-model="dialogBindVisible" ref="dialogBind">
-    <span>这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息，这是一段信息</span>
-  </el-dialog>
-</template>
-<script>
-  export default {
-    data() {
-      return {
-        dialogBindVisible: false
-      }
-    },
-    methods: {
-      openDialog() {
-        this.$refs.dialogBind.open();
-      }
-    }
-  };
-</script>
-```
-:::
-
 ### 自定义内容
 
-Dialog 组件的正文标题可以是任意的，甚至可以是表格或表单，下面是应用了 Element Table 和 Form 组件的两个样例。
+Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下面是应用了 Element Table 和 Form 组件的两个样例。
 
 :::demo
 ```html
