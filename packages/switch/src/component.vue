@@ -84,12 +84,12 @@
       }
     },
     watch: {
-      value() {
+      value(val) {
         if (this.onColor || this.offColor) {
           this.handleCoreColor();
         }
         this.handleButtonTransform();
-        this.$emit('change');
+        this.$emit('change', val);
       }
     },
     methods: {

@@ -46,9 +46,9 @@ Vue.use(Element)
 
 // or
 import Select from 'element-ui/lib/select'
-import Select from 'element-ui/lib/theme-default/select.css'
+import 'element-ui/lib/theme-default/select.css'
 import Button from 'element-ui/lib/button'
-import Button from 'element-ui/lib/theme-default/button.css'
+import 'element-ui/lib/theme-default/button.css'
 
 Vue.component(Select.name, Select)
 Vue.component(Button.name, Button)

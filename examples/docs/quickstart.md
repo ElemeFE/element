@@ -1,6 +1,6 @@
 ## 快速上手
 
-element 是为饿了么定制的一套 Vue.js 后台组件库。帮助你更轻松更快速的开发后台项目。
+element 是一套 Vue.js 后台组件库，它能够帮助你更轻松更快速地开发后台项目。
 
 ### 安装
 
@@ -21,7 +21,7 @@ Vue.use(Element)
 
 或者只引入你需要的组件
 
-**use [babel-plugin-component](https://github.com/QingWei-Li/babel-plugin-component)**
+**使用 [babel-plugin-component](https://github.com/QingWei-Li/babel-plugin-component)**
 
 ```javascript
 import {
@@ -30,25 +30,25 @@ import {
   // ...
 } from 'element-ui'
 
-Vue.component(Select.name, ElSelect)
+Vue.component(Select.name, Select)
 Vue.component(Button.name, Button)
 ```
 
-(roughly) to
+将会被翻译成
 
 ```javascript
 import Select from 'element-ui/lib/select';
-import Select from 'element-ui/lib/theme-default/select.css';
+import 'element-ui/lib/theme-default/select.css';
 import Button from 'element-ui/lib/button';
-import Button from 'element-ui/lib/theme-default/button.css';
+import 'element-ui/lib/theme-default/button.css';
 
-Vue.component(Select.name, ElSelect)
+Vue.component(Select.name, Select)
 Vue.component(Button.name, Button)
 ```
 
 ### babel-plugin-component
 
-.babelrc
+配置 .babelrc
 
 ```json
 {
