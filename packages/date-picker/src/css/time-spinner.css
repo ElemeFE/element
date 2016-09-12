@@ -34,18 +34,13 @@
       line-height: 32px;
       font-size: 12px;
 
-      &:hover:not(.disabled) {
+      &:hover:not(.disabled):not(.active) {
         background: #E5E9F2;
         cursor: pointer;
       }
 
       &.active:not(.disabled) {
-        background-color: #20a0ff;
         color: #fff;
-
-        &:hover {
-          background-color: #1D8CE0;
-        }
       }
 
       &.disabled {
