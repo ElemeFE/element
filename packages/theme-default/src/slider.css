@@ -3,6 +3,7 @@
 
 @component-namespace el {
   @b slider {
+    @utils-clearfix;
     @e runway {
       width: 100%;
       height: 4px;
@@ -21,7 +22,7 @@
 
     @e input {
       float: right;
-      margin-top: -10px;
+      margin-top: 7px;
 
       & .el-input {
         width: 130px;

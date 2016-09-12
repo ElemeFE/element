@@ -153,7 +153,7 @@ Popover 的属性与 Tooltip 很类似，它们都是基于`Vue-popper`开发的
 
 ### 嵌套信息
 
-嵌套表格的例子：
+可以在 Popover 中嵌套多种类型信息，以下为嵌套表格的例子。
 
 :::demo 利用分发取代`content`属性
 ```html

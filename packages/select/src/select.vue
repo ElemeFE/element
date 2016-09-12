@@ -154,7 +154,7 @@
         selected: {},
         isSelect: true,
         inputLength: 20,
-        inputWidth: 180,
+        inputWidth: 0,
         valueChangeBySelected: false,
         cachedPlaceHolder: '',
         optionsCount: 0,

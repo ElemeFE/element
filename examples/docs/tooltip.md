@@ -9,11 +9,11 @@
 </script>
 ## Tooltips 文字提示
 
+常用于展示鼠标 hover 时的提示信息。
+
 ### 基础用法
 
-Tooltip 组件常用于展示鼠标 hover 时的提示信息，在这里我们提供9种不同的展示方式。
-
-下面是完整的九个示例，可以通过该示例来理解，选择你要的效果：
+在这里我们提供 9 种不同方向的展示方式，可以通过以下完整示例来理解，选择你要的效果。
 
 :::demo 使用`content`属性来决定`hover`时的提示信息。由`placement`属性决定展示效果：`placement`属性值为：`方向-箭头方位`；四个方向：`top`、`left`、`right`、`bottom`；三种箭头方位：`start`, `end`，默认为空。如`top center`即`placement="top"`，`left top`即`placement="left-end"`。
 
