@@ -5,6 +5,7 @@
 *2016-XX-XX*
 
 - 修复 Select 多选时选项变为空数组后 placeholder 不出现的问题
+- 修复 TimePicker 时间选择可滚动
 
 ### 1.0.0-rc.3
 

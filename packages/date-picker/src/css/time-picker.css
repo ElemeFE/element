@@ -17,6 +17,7 @@
       font-size: 0;
       display: flex;
       position: relative;
+      overflow: hidden;
 
       &::after, &::before {
         content: ":";
@@ -24,18 +25,25 @@
         color: #fff;
         position: absolute;
         font-size: 14px;
-        margin-top: -8px;
+        margin-top: -15px;
         line-height: 16px;
-        z-index: 1;
+        background-color: #20a0ff;
+        height: 32px;
+        z-index: -1;
+        left: 0;
+        right: 0;
+        box-sizing: border-box;
+        padding-top: 6px;
+        text-align: left;
       }
 
       &::after {
-        left: calc(100%/3);
+        left: calc(100%/3*2);
         margin-left: -2px;
       }
 
       &::before {
-        right: calc(100%/3);
+        padding-left: calc(100%/3);
         margin-right: -2px;
       }
     }

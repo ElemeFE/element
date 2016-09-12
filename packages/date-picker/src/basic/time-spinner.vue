@@ -3,6 +3,7 @@
     {{hours}}
     <div
       @mouseenter="emitSelectRange('hours')"
+      @mousewheel="handleScroll('hour')"
       class="el-time-spinner__wrapper"
       ref="hour">
       <ul class="el-time-spinner__list">
@@ -17,6 +18,7 @@
     </div>
     <div
       @mouseenter="emitSelectRange('minutes')"
+      @mousewheel="handleScroll('minute')"
       class="el-time-spinner__wrapper"
       ref="minute">
       <ul class="el-time-spinner__list">
@@ -30,6 +32,7 @@
     </div>
     <div
       @mouseenter="emitSelectRange('seconds')"
+      @mousewheel="handleScroll('second')"
       class="el-time-spinner__wrapper"
       ref="second">
       <ul class="el-time-spinner__list">
@@ -138,6 +141,13 @@
         } else if (type === 'seconds') {
           this.$emit('select-range', 6, 8);
         }
+      },
+
+      handleScroll(type) {
+        const ajust = {};
+
+        ajust[`${type}s`] = Math.min(Math.floor((this.$refs[type].scrollTop - 80) / 32 + 3), 59);
+        this.$emit('change', ajust);
       },
 
       ajustScrollTop() {
