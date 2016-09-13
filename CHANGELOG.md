@@ -6,6 +6,7 @@
 
 - 修复 Select 多选时选项变为空数组后 placeholder 不出现的问题
 - 修复 TimePicker 时间选择可滚动
+- 修复 Tooltip 会有出现错位的情况
 
 #### 非兼容性更新
 - Select 组件样式的 `display` 属性默认值修改为 `block`

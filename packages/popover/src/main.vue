@@ -1,6 +1,6 @@
 <template>
   <span>
-    <transition :name="transition">
+    <transition :name="transition" @after-leave="doDestroy">
       <div
         class="el-popover"
         ref="popper"
