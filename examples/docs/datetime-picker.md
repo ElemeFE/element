@@ -168,7 +168,7 @@
       v-model="value3"
       type="datetimerange"
       placeholder="选择时间范围"
-      style="width:340px">
+      style="width:260px">
     </el-date-picker>
   </div>
   <div class="block">
@@ -178,7 +178,7 @@
       type="datetimerange"
       :picker-options="pickerOptions2"
       placeholder="选择时间范围"
-      style="width:340px">
+      style="width:260px">
     </el-date-picker>
   </div>
 </template>

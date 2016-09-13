@@ -38,7 +38,7 @@
     }
   }
 
-  .demo-button .intro-block {
+  .demo-box.demo-button .intro-block {
     padding: 0;
   }
 
