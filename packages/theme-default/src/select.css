@@ -9,7 +9,7 @@
 @component-namespace el {
 
   @b select {
-    display: inline-block;
+    display: block;
     position: relative;
 
     @when small {
@@ -47,9 +47,6 @@
     }
 
     & .el-input {
-      width: 180px;
-      display: inline-block;
-
       & .el-input__icon {
         color: #c0ccda;
         font-size: 12px;
@@ -99,10 +96,6 @@
     }
 
     @when multiple {
-      & .el-input {
-        width: 220px;
-      }
-
       & .el-select-dropdown__item.selected {
         color: #20A0FF;
         background-color: #fff;

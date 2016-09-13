@@ -115,6 +115,13 @@
   };
 </script>
 
+<style>
+  .demo-select .el-select {
+    display: inline-block;
+    width: 240px;
+  }
+</style>
+
 ## Select 选择器
 
 当选项过多时，使用下拉菜单展示并选择内容。
