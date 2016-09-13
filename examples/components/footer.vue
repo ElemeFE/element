@@ -29,7 +29,7 @@
   .footer {
     height: 120px;
     background-color: #324057;
-    color: #fff;
+    color: #a4aebd;
     width: 100%;
     z-index: 1000;
     margin-top: -120px;
@@ -58,10 +58,10 @@
         margin: 12px 18px 0 0;
         line-height: 1;
         font-size: 12px;
-        color: #8492a6;
+        color: #768193;
 
         a {
-          color: #8492a6;
+          color: #768193;
           text-decoration: none;
         }
       }
@@ -99,13 +99,12 @@
         display: inline-block;
         line-height: 32px;
         text-align: center;
-        color: #324057;
-        background-color: #fff;
+        color: #8D99AB;
+        background-color: transparent;
         size: 32px;
-        border-radius: 50%;
-        font-size: 22px;
+        font-size: 32px;
+        vertical-align: middle;
         &:hover {
-           color: #fff;
            transform: scale(1.2);
         }
       }
@@ -113,22 +112,14 @@
       .doc-icon-weixin {
         margin-right: 36px;
         &:hover {
-          background-color: #26CB72;
+          color: #fff;
         }
       }
 
       .doc-icon-github {
         margin-right: 0;
-        transform: translateY(8px);
-        position: relative;
-        &::before {
-          position: absolute;
-          left: 4px;
-          bottom: -6px;
-        }
         &:hover {
-           transform: translateY(8px) scale(1.2);
-           background-color: #437AC0;
+           color: #fff;
         }
       }
     }

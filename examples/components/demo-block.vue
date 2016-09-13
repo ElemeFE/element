@@ -19,7 +19,11 @@
     transition: .2s;
   
     &.hover {
-      box-shadow: 0 6px 18px 0 rgba(232, 237, 250, .5);
+      box-shadow: 0 0 8px 0 rgba(232, 237, 250, .6), 0 2px 4px 0 rgba(232, 237, 250, .5);
+    }
+     
+    code {
+      font-family: Menlo, Monaco, Consolas, Courier, monospace;
     }
   
     .source {
@@ -27,7 +31,7 @@
     }
     
     .meta {
-      background-color: #fbfcfd;
+      background-color: #f9fafc;
       border-top: solid 1px #eaeefb;
       clear: both;
       overflow: hidden;
@@ -42,7 +46,7 @@
       border-left: solid 1px #eaeefb;
       float: right;
       font-size: 14px;
-      line-height: 1.5;
+      line-height: 1.8;
       color: #5e6d82;
       word-break: break-word;
 
@@ -51,10 +55,10 @@
       }
       
       code {
-        background-color: #f4faff;
-        border: solid 1px #eaeefb;
+        color: #5e6d82;
+        background-color: #e6effb;
         margin: 0 4px;
-        padding: 0 4px;
+        padding: 4px 8px;
         font-size: 12px;
       }
     }
@@ -68,10 +72,11 @@
       }
       
       code.hljs {
+        font-size: 12px;
         padding: 18px 24px;
         margin: 0;
-        line-height: 1.4;
-        background-color: #fbfcfd;
+        line-height: 1.8;
+        background-color: #f9fafc;
         border: none;
         max-height: none;
         border-radius: 0;
@@ -107,7 +112,7 @@
       
       &:hover {
         color: #20a0ff;
-        background-color: rgba(32, 159, 255, .05);
+        background-color: #f9fafc;
       }
     }
   }

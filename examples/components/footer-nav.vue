@@ -97,10 +97,10 @@
     },
 
     created() {
-      navConfig[0].groups.map(group => group.list).forEach(list => {
+      this.nav = navConfig[0].children;
+      navConfig[1].groups.map(group => group.list).forEach(list => {
         this.nav = this.nav.concat(list);
       });
-      this.nav = this.nav.concat(navConfig[1].children);
       this.updateNav();
     }
   };

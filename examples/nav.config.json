@@ -1,5 +1,15 @@
 [
   {
+    "name": "安装指南",
+    "children": [{
+      "path": "/quickstart",
+      "name": "快速上手"
+    }, {
+      "path": "/development",
+      "name": "开发指南"
+    }]
+  },
+  {
     "name": "基础组件",
     "groups": [{
       "groupName": "Basic",
@@ -241,16 +251,6 @@
           "description": "引导用户按照流程完成任务的分步导航条,可根据实际应用场景设定步骤,步骤不得少于 2 步。"
         }
       ]
-    }]
-  },
-  {
-    "name": "安装指南",
-    "children": [{
-      "path": "/quickstart",
-      "name": "快速上手"
-    }, {
-      "path": "/development",
-      "name": "开发指南"
     }]
   }
 ]
