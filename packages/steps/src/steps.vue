@@ -29,6 +29,12 @@ export default {
     };
   },
 
+  watch: {
+    active(newVal, oldVal) {
+      this.$emit('change', newVal, oldVal);
+    }
+  },
+
   mounted() {
     this.steps.forEach((child, index) => {
       child.index = index;
