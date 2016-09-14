@@ -7,7 +7,7 @@
       <slot></slot>
     </div>
 
-    <transition :name="transition">
+    <transition :name="transition" @after-leave="doDestroy">
       <div
         class="el-tooltip__popper"
         :class="['is-' + effect]"
