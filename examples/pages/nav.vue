@@ -16,6 +16,8 @@
       margin: 0;
     }
     img {
+      padding: 15px;
+      background-color: #F9FAFC;
       width: 100%;
       margin-bottom: 15px;
       cursor: pointer;

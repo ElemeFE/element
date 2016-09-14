@@ -10,6 +10,10 @@
     }]
   },
   {
+    "name": "更新日志",
+    "path": "/changelog"
+  },
+  {
     "name": "基础组件",
     "groups": [{
       "groupName": "Basic",

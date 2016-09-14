@@ -58,6 +58,9 @@
     .el-dialog__wrapper {
       margin: 0;
     }
+    .el-select {
+      width: 300px;
+    }
     .el-input {
       width: 300px;
     }

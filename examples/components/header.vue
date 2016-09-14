@@ -34,7 +34,7 @@
         display: inline-block;
         width: 34px;
         height: 18px;
-        border: 1px solid #fff;
+        border: 1px solid rgba(255, 255, 255, .5);
         text-align: center;
         line-height: 18px;
         vertical-align: middle;
@@ -103,20 +103,18 @@
       'header-hangUp': hangUp
     }">
       <div class="container">
-        <h1><router-link to="/">Element</router-link></h1>
+        <h1><router-link to="/">Element<span>Beta</span></router-link></h1>
         <ul class="nav">
           <li class="nav-item">
             <router-link
               active-class="active"
-              to="/guide/design"
-              exact>指南
+              to="/guide">指南
             </router-link>
           </li>
           <li class="nav-item">
             <router-link
               active-class="active"
-              to="/component/layout"
-              exact>组件
+              to="/component">组件
             </router-link>
           </li>
           <li class="nav-item">
@@ -165,6 +163,8 @@
       }
       scroll((direction) => {
         if (this.isHome) {
+          this.hangUp = false;
+          this.headerStyle.transition = '';
           const threshold = 200;
           let alpha = Math.min(document.body.scrollTop, threshold) / threshold;
           this.$refs.header.style.backgroundColor = `rgba(32, 160, 255, ${ alpha })`;
