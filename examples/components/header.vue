@@ -4,12 +4,11 @@
   }
   .header {
     height: 80px;
-    background-color: #20a0ff;
+    background-color: rgba(32, 160, 255, 1);
     color: #fff;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1000;
     line-height: @height;
     z-index: 100;
     position: relative;
@@ -35,7 +34,7 @@
         display: inline-block;
         width: 34px;
         height: 18px;
-        border: 1px solid #fff;
+        border: 1px solid rgba(255, 255, 255, .5);
         text-align: center;
         line-height: 18px;
         vertical-align: middle;
@@ -58,6 +57,7 @@
       list-style: none;
       position: relative;
       cursor: pointer;
+      margin-left: 20px;
 
       a {
         text-decoration: none;
@@ -77,42 +77,44 @@
         }
       }
     }
-    /*.el-menu-item__bar {
-      background-color: #99d2fc;
-    }*/
   }
   .header-fixed {
     position: fixed;
     top: -80px;
-    box-shadow: 0px 2px 8px 0px rgba(50,63,87,0.45);
+    box-shadow: 0 2px 6px 0 rgba(50, 63, 87, 0.25);
   }
   .header-hangUp {
     top: 0;
+  }
+  .header-home {
+    position: fixed;
+    top: 0;
+    background-color: rgba(32, 160, 255, 0);
   }
 </style>
 <template>
   <div class="headerWrapper">
     <header class="header"
+    ref="header"
     :style="headerStyle"
     :class="{
+      'header-home': isHome,
       'header-fixed': isFixed,
       'header-hangUp': hangUp
     }">
       <div class="container">
-        <h1><router-link to="/">Element</router-link></h1>
+        <h1><router-link to="/">Element<span>Beta</span></router-link></h1>
         <ul class="nav">
           <li class="nav-item">
             <router-link
               active-class="active"
-              to="/guide/design"
-              exact>指南
+              to="/guide">指南
             </router-link>
           </li>
           <li class="nav-item">
             <router-link
               active-class="active"
-              to="/component/layout"
-              exact>组件
+              to="/component">组件
             </router-link>
           </li>
           <li class="nav-item">
@@ -133,13 +135,19 @@
       return {
         active: '',
         isFixed: false,
+        isHome: false,
         headerStyle: {},
         hangUp: false
       };
     },
     watch: {
+      '$route.path'(val) {
+        this.isHome = val === '/';
+        this.headerStyle.backgroundColor = `rgba(32, 160, 255, ${ this.isHome ? '0' : '1' })`;
+      }
     },
     mounted() {
+      this.isHome = this.$route.path === '/';
       function scroll(fn) {
         var beforeScrollTop = document.body.scrollTop;
 
@@ -154,6 +162,15 @@
         }, false);
       }
       scroll((direction) => {
+        if (this.isHome) {
+          this.hangUp = false;
+          this.headerStyle.transition = '';
+          const threshold = 200;
+          let alpha = Math.min(document.body.scrollTop, threshold) / threshold;
+          this.$refs.header.style.backgroundColor = `rgba(32, 160, 255, ${ alpha })`;
+          return;
+        }
+        this.headerStyle.backgroundColor = 'rgba(32, 160, 255, 1)';
         const bounding = this.$el.getBoundingClientRect();
         if (bounding.bottom < 0) {
           this.isFixed = true;

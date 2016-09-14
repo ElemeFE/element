@@ -47,7 +47,7 @@
       color: #C0CCDA;
 
       &:hover {
-        color: var(--dialog-background-color);
+        color: var(--color-primary);
       }
     }
 

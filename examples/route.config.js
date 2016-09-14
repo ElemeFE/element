@@ -3,20 +3,25 @@ import navConfig from './nav.config.json';
 const registerRoute = (config) => {
   let route = [{
     path: '/component',
+    redirect: '/component/quickstart',
     component: require('./pages/component.vue'),
     children: []
   }];
   function addRoute(page) {
-    const component = require(`./docs${page.path}.md`);
-
-    route[0].children.push({
+    const component = page.path === '/changelog' ? require('./pages/changelog.vue') : require(`./docs${page.path}.md`);
+    let child = {
       path: page.path.slice(1),
       meta: {
         title: page.title || page.name,
         description: page.description
       },
       component: component.default || component
-    });
+    };
+    if (page.path === '/changelog') {
+      child.redirect = '/changelog';
+    }
+
+    route[0].children.push(child);
   }
   config
     .map(nav => {
@@ -26,11 +31,12 @@ const registerRoute = (config) => {
             addRoute(page);
           });
         });
-      }
-      if (nav.children) {
+      } else if (nav.children) {
         nav.children.map(page => {
           addRoute(page);
         });
+      } else {
+        addRoute(nav);
       }
     });
 
@@ -42,6 +48,7 @@ const route = registerRoute(navConfig);
 let guideRoute = {
   path: '/guide',
   name: '指南',
+  redirect: '/guide/design',
   component: require('./pages/guide.vue'),
   children: [{
     path: 'design',

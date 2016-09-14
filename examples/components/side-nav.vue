@@ -2,7 +2,6 @@
   .side-nav {
     width: 100%;
     box-sizing: border-box;
-    border-right: 1px solid #eaeefa;
 
     li {
       list-style: none;
@@ -15,12 +14,12 @@
 
     .nav-item {
       a {
-        font-size:18px;
-        color:#5e6d82;
-        line-height: 42px;
-        height: 42px;
+        font-size: 16px;
+        color: #5e6d82;
+        line-height: 40px;
+        height: 40px;
         margin: 0;
-        padding: 0 0 0 12px;
+        padding: 0;
         text-decoration: none;
         display: block;
         position: relative;
@@ -28,26 +27,15 @@
 
         &.active {
           color: #20a0ff;
-
-          &:after {
-            content: '';
-            width: 2px;
-            background-color: #20a0ff;
-            height: 32px;
-            border-radius: 2px;
-            left: 0;
-            position: absolute;
-            top: 5px;
-          }
         }
       }
       .nav-item {
         a {
           display: block;
-          height: 42px;
-          line-height: 42px;
-          font-size: 14px;
-          padding-left: 22px;
+          height: 40px;
+          line-height: 40px;
+          font-size: 13px;
+          padding-left: 24px;
 
 
           &:hover {
@@ -57,9 +45,11 @@
       }
     }
     .nav-group__title {
+      font-size: 12px;
       color: #99a9bf;
-      padding-left: 15px;
-      line-height: 34px;
+      padding-left: 8px;
+      line-height: 26px;
+      margin-top: 10px;
     }
   }
 </style>

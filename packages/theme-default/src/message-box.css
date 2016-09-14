@@ -36,6 +36,10 @@
       cursor: pointer;
       line-height: 20px;
       text-align: center;
+
+      &:hover {
+        color: var(--color-primary);
+      }
     }
 
     @e input {

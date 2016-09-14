@@ -6,8 +6,8 @@
     }
   }
   .banner {
+    position: relative;
     height: 420px;
-    background-color: #20a0ff;
     color: #fff;
     margin-bottom: 130px;
 
@@ -18,8 +18,23 @@
     img {
       position: absolute;
       top: 15px;
-      right: -105px;
+      right: -10px;
     }
+  }
+  .banner-sky {
+    position: absolute;
+    top: -150px;
+    bottom: -15px;
+    width: 100%;
+    margin-top: -140px;
+    transform: skewY(-5deg);
+    transform-origin: center;
+    background-image: linear-gradient(180deg, #0d1a44 13%, #3c4f91 56%, #5fc1e4 100%);
+  }
+  img.banner-stars {
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
   }
   .banner-desc {
     padding-top: 80px;
@@ -34,7 +49,7 @@
   }
   .cards {
     margin: 0 auto 110px;
-    width: 960px;
+    width: 1140px;
 
     .container {
       @utils-clearfix;
@@ -45,7 +60,7 @@
 
     li {
       width: 33.33333%;
-      padding: 0 11px;
+      padding: 0 19px;
       box-sizing: border-box;
       float: left;
       list-style: none;
@@ -116,6 +131,8 @@
 <template>
   <div>
     <div class="banner">
+      <div class="banner-sky"></div>
+      <img class="banner-stars" src="~examples/assets/images/stars.png" alt="Element">
       <div class="container">
         <div class="banner-desc">
           <h2>Element</h2>
