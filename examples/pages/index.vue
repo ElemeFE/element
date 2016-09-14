@@ -127,6 +127,11 @@
     from { opacity: 0; }
     to { opacity: 1; }
   }
+  @media (max-width: 1140px) {
+    .cards {
+      width: 100%;
+    }
+  }
 </style>
 <template>
   <div>
@@ -160,7 +165,7 @@
           <div class="card">
             <img src="~examples/assets/images/zujian.png" alt="">
             <h3>组件</h3>
-            <p>使用组件 Demo 快速体验交互细节;使用前端框架封装的代码帮助工程师快速开发。</p>
+            <p>使用组件 Demo 快速体验交互细节；使用前端框架封装的代码帮助工程师快速开发。</p>
             <router-link
               active-class="active"
               to="/component/layout"
