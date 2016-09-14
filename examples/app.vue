@@ -67,6 +67,12 @@
   .demo {
     margin: 20px 0;
   }
+  @media (max-width: 1140px) {
+    .container,
+    .page-container {
+      width: 100%;
+    }
+  }
 </style>
 
 <template>

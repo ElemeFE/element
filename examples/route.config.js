@@ -17,9 +17,6 @@ const registerRoute = (config) => {
       },
       component: component.default || component
     };
-    if (page.path === '/changelog') {
-      child.redirect = '/changelog';
-    }
 
     route[0].children.push(child);
   }
@@ -73,12 +70,7 @@ let indexRoute = {
   component: require('./pages/index.vue')
 };
 
-let changeLogRoute = {
-  path: '/changelog',
-  component: require('./pages/changelog.vue')
-};
-
-route.route = route.route.concat([indexRoute, guideRoute, resourceRoute, changeLogRoute]);
+route.route = route.route.concat([indexRoute, guideRoute, resourceRoute]);
 
 route.route.push({
   path: '*',

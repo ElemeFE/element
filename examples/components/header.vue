@@ -164,6 +164,7 @@
       scroll((direction) => {
         if (this.isHome) {
           this.hangUp = false;
+          this.isFixed = false;
           this.headerStyle.transition = '';
           const threshold = 200;
           let alpha = Math.min(document.body.scrollTop, threshold) / threshold;

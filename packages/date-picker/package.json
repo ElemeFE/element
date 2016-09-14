@@ -13,8 +13,5 @@
   "license": "MIT",
   "dependencies": {
     "wind-dom": "0.0.3"
-  },
-  "devDependencies": {
-    "vue": "^2.0.0-beta.7"
   }
 }
