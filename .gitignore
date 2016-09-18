@@ -1,0 +1,12 @@
+*.swp
+*.DS_Store
+.sass-cache
+*.log
+bower_components
+node_modules
+.idea
+examples/
+fe.element/
+fe.element_build.yml
+lib/
+packages/
