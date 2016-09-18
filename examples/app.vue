@@ -25,8 +25,12 @@
   }
 
   .hljs {
-    padding: 20px 25px;
+    line-height: 1.8;
+    font-family: Menlo, Monaco, Consolas, Courier, monospace;
+    font-size: 12px;
+    padding: 18px 24px;
     background-color: #f9fafc;
+    border: solid 1px #eaeefb;
     margin-bottom: 25px;
     border-radius: 2px;
   }

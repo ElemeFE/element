@@ -36,6 +36,7 @@
       > li {
         list-style: none;
         position: relative;
+        line-height: 1.8;
 
         &:not(:last-child) {
           margin-bottom: 50px;
@@ -46,10 +47,10 @@
 
           h3:before {
             left: -33px;
-            top: 5px;
-            width: 16px;
+            top: 10px;
+            width: 17px;
             height: @width;
-            background-color: #81c8fa;
+            background-color: #20a0ff;
             border: 0;
           }          
         }
@@ -81,9 +82,9 @@
           display: block;
           position: absolute;
           left: -31px;
-          top: 7px;
+          top: 13px;
           circle: 13px transparent;
-          border: 2px solid #2ca2fc;
+          border: 2px solid #20a0ff;
           box-sizing: border-box;
           background-color: #fff;
         }
@@ -99,7 +100,7 @@
         position: absolute;
         left: -127px;
         font-style: normal;
-        top: 4px;
+        top: 6px;
         font-size: 14px;
         color: #99a9bf;
       }
@@ -107,7 +108,7 @@
   }
 </style>
 <template>
-  <div class="page-container page-changelog">
+  <div class="page-changelog">
     <h2>
       <el-button class="fr">
         <a href="https://github.com/ElemeFE/element/releases" target="_blank">Github Releases</a>

@@ -2,6 +2,7 @@
   .side-nav {
     width: 100%;
     box-sizing: border-box;
+    padding-right: 30px;
 
     li {
       list-style: none;

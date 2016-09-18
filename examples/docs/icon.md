@@ -10,20 +10,28 @@
   }
 </script>
 <style>
-  .source>i {
-    margin: 0 10px;
+  .demo-icon .source > i {
+    font-size: 24px;
+    color: #8492a6;
+    margin: 0 20px;
     font-size: 1.5em;
     vertical-align: middle;
+  }
+  
+  .demo-icon .source > button {
+    margin: 0 20px;
   }
 
   .icon-list {
     overflow: hidden;
     list-style: none;
     padding: 0;
+    border: solid 1px #eaeefb;
+    border-radius: 4px;
   }
   .icon-list li {
     float: left;
-    width: 20%;
+    width: 16.66%;
     text-align: center;
     height: 120px;
     line-height: 120px;
@@ -42,15 +50,17 @@
       display: inline-block;
       line-height: normal;
       vertical-align: middle;
+      font-family: 'Helvetica Neue',Helvetica,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',SimSun,sans-serif;
+      color: #99a9bf;
     }
     & i {
       display: block;
-      font-size: 30px;
+      font-size: 24px;
       margin-bottom: 15px;
+      color: #8492a6;
     }
     &:hover {
       color: rgb(92, 182, 255);
-      cursor: pointer;
     }
   }
 </style>

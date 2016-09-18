@@ -10,6 +10,7 @@
     & .value {
       font-size: 12px;
       opacity: 0.69;
+      line-height: 24px;
     }
   }
   .demo-color-box-group {
@@ -118,7 +119,7 @@ Element 主要品牌颜色是鲜艳、友好的蓝色。
     <div class="demo-color-box bg-warning">Warning<div class="value">#F7BA2A</div></div>
   </el-col>
   <el-col :span="6">
-    <div class="demo-color-box bg-danger">Danger<div class="value">#ff4949</div></div>
+    <div class="demo-color-box bg-danger">Danger<div class="value">#FF4949</div></div>
   </el-col>
 </el-row>
 
@@ -129,23 +130,23 @@ Element 主要品牌颜色是鲜艳、友好的蓝色。
 <el-row :gutter="12">
   <el-col :span="6">
     <div class="demo-color-box-group">
-      <div class="demo-color-box bg-black">Black<div class="value">#1f2d3d</div></div>
+      <div class="demo-color-box bg-black">Black<div class="value">#1F2D3D</div></div>
       <div class="demo-color-box bg-black-light">Light Black<div class="value">#324057</div></div>
       <div class="demo-color-box bg-black-lighter">Extra Light Black<div class="value">#475669</div></div>
     </div>
   </el-col>
   <el-col :span="6">
     <div class="demo-color-box-group">
-      <div class="demo-color-box bg-silver">Silver<div class="value">#8492a6</div></div>
-      <div class="demo-color-box bg-silver-light">Light Silver<div class="value">#99a9bf</div></div>
-      <div class="demo-color-box bg-silver-lighter">Extra Light Silver<div class="value">#c0ccda</div></div>
+      <div class="demo-color-box bg-silver">Silver<div class="value">#8492A6</div></div>
+      <div class="demo-color-box bg-silver-light">Light Silver<div class="value">#99A9BF</div></div>
+      <div class="demo-color-box bg-silver-lighter">Extra Light Silver<div class="value">#C0CCDA</div></div>
     </div>
   </el-col>
   <el-col :span="6">
     <div class="demo-color-box-group">
-      <div class="demo-color-box color-gray bg-gray">Gray<div class="value">#d3dce6</div></div>
-      <div class="demo-color-box color-gray bg-gray-light">Light Gray<div class="value">#e5e9f2</div></div>
-      <div class="demo-color-box color-gray bg-gray-lighter">Extra Light Gray<div class="value">#eff2f7</div></div>
+      <div class="demo-color-box color-gray bg-gray">Gray<div class="value">#D3DCE6</div></div>
+      <div class="demo-color-box color-gray bg-gray-light">Light Gray<div class="value">#E5E9F2</div></div>
+      <div class="demo-color-box color-gray bg-gray-lighter">Extra Light Gray<div class="value">#EFF2F7</div></div>
     </div>
   </el-col>
   <el-col :span="6">
