@@ -149,15 +149,15 @@
 
         if (fit) {
           let flexColumns = [];
-          let definedWidthColumnsWidth = 0;
-          let definedMinWidthSum = 0;
+          // let definedWidthColumnsWidth = 0;
+          // let definedMinWidthSum = 0;
 
           flattenColumns.forEach((column) => {
-            definedMinWidthSum += column.minWidth || 80;
+            // definedMinWidthSum += column.minWidth || 80;
             bodyMinWidth += column.width || column.minWidth || 80;
 
             if (typeof column.width === 'number') {
-              definedWidthColumnsWidth += column.width;
+              // definedWidthColumnsWidth += column.width;
             } else {
               flexColumns.push(column);
             }

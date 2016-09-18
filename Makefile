@@ -25,13 +25,8 @@ dist: install
 dist-all:
 	npm run dist:all
 
-deploy: install
+deploy:
 	@npm run deploy
-	@rm -rf fe.element/element-ui
-	@cp -r examples/element-ui fe.element
-
-gh-docs:
-	@npm run gh-docs
 
 pub:
 	./node_modules/.bin/kp $(filter-out $@,$(MAKECMDGOALS))
