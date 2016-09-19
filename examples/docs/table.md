@@ -4,21 +4,33 @@
     data() {
       return {
         tableData: [{
+          date: '2016-05-03',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
+        }, {
           date: '2016-05-02',
           name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
         }, {
           date: '2016-05-04',
           name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
         }, {
           date: '2016-05-01',
           name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
         }],
         tableData2: [{
           date: '2016-05-02',
@@ -42,31 +54,52 @@
         tableData3: [{
           date: '2016-05-03',
           name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
         }, {
           date: '2016-05-02',
           name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
         }, {
           date: '2016-05-04',
           name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
         }, {
           date: '2016-05-01',
           name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
         }, {
           date: '2016-05-08',
           name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
         }, {
           date: '2016-05-06',
           name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
         }, {
           date: '2016-05-07',
           name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
         }],
         singleSelection: {},
         multipleSelection: []
@@ -112,16 +145,16 @@
   <template>
     <el-table
       :data="tableData"
-      style="width: 520px">
+      style="width: 100%">
       <el-table-column
         property="date"
         label="日期"
-        width="120">
+        width="180">
       </el-table-column>
       <el-table-column
         property="name"
         label="姓名"
-        width="120">
+        width="180">
       </el-table-column>
       <el-table-column
         property="address"
@@ -168,16 +201,16 @@
   <el-table
     :data="tableData"
     stripe
-    style="width: 520px">
+    style="width: 100%">
     <el-table-column
       property="date"
       label="日期"
-      width="120">
+      width="180">
     </el-table-column>
     <el-table-column
       property="name"
       label="姓名"
-      width="120">
+      width="180">
     </el-table-column>
     <el-table-column
       property="address"
@@ -222,16 +255,16 @@
   <el-table
     :data="tableData"
     border
-    style="width: 520px">
+    style="width: 100%">
     <el-table-column
       property="date"
       label="日期"
-      width="120">
+      width="180">
     </el-table-column>
     <el-table-column
       property="name"
       label="姓名"
-      width="120">
+      width="180">
     </el-table-column>
     <el-table-column
       property="address"
@@ -277,18 +310,18 @@
 <template>
   <el-table
     :data="tableData2"
-    style="width: 520px"
+    style="width: 100%"
     :custom-criteria="['$info', '$positive']"
     :custom-background-colors="['#C9E5F5', '#E2F0E4']">
     <el-table-column
       property="date"
       label="日期"
-      width="120">
+      width="180">
     </el-table-column>
     <el-table-column
       property="name"
       label="姓名"
-      width="120">
+      width="180">
     </el-table-column>
     <el-table-column
       property="address"
@@ -338,16 +371,16 @@
     :data="tableData3"
     height="250"
     border
-    style="width: 520px">
+    style="width: 100%">
     <el-table-column
       property="date"
       label="日期"
-      width="120">
+      width="180">
     </el-table-column>
     <el-table-column
       property="name"
       label="姓名"
-      width="120">
+      width="180">
     </el-table-column>
     <el-table-column
       property="address"
@@ -407,7 +440,7 @@
     :data="tableData"
     :fixed-column-count="1"
     border
-    style="width: 500px">
+    style="width: 100%">
     <el-table-column
       property="date"
       label="日期"
@@ -416,12 +449,27 @@
     <el-table-column
       property="name"
       label="姓名"
-      width="300">
+      width="120">
+    </el-table-column>
+    <el-table-column
+      property="province"
+      label="省份"
+      width="120">
+    </el-table-column>
+    <el-table-column
+      property="city"
+      label="市区"
+      width="120">
     </el-table-column>
     <el-table-column
       property="address"
       label="地址"
       width="300">
+    </el-table-column>
+    <el-table-column
+      property="zip"
+      label="邮编"
+      width="120">
     </el-table-column>
   </el-table>
 </template>
@@ -431,21 +479,33 @@
     data() {
       return {
         tableData: [{
+          date: '2016-05-03',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
+        }, {
           date: '2016-05-02',
           name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
         }, {
           date: '2016-05-04',
           name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
         }, {
           date: '2016-05-01',
           name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
         }]
       }
     }
@@ -465,7 +525,7 @@
     :data="tableData3"
     :fixed-column-count="1"
     border
-    style="width: 500px"
+    style="width: 100%"
     height="250">
     <el-table-column
       property="date"
@@ -475,12 +535,27 @@
     <el-table-column
       property="name"
       label="姓名"
-      width="300">
+      width="120">
+    </el-table-column>
+    <el-table-column
+      property="province"
+      label="省份"
+      width="120">
+    </el-table-column>
+    <el-table-column
+      property="city"
+      label="市区"
+      width="120">
     </el-table-column>
     <el-table-column
       property="address"
       label="地址"
       width="300">
+    </el-table-column>
+    <el-table-column
+      property="zip"
+      label="邮编"
+      width="120">
     </el-table-column>
   </el-table>
 </template>
@@ -492,31 +567,52 @@
         tableData3: [{
           date: '2016-05-03',
           name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
         }, {
           date: '2016-05-02',
           name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
         }, {
           date: '2016-05-04',
           name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
         }, {
           date: '2016-05-01',
           name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
         }, {
           date: '2016-05-08',
           name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
         }, {
           date: '2016-05-06',
           name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
         }, {
           date: '2016-05-07',
           name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
         }]
       }
     }
@@ -536,7 +632,7 @@
     :data="tableData"
     selection-mode="single"
     @selectionchange="handleSelectionChange"
-    style="width: 520px"
+    style="width: 100%"
     allow-no-selection>
     <el-table-column
       type="index"
@@ -604,7 +700,7 @@
   <el-table
     :data="tableData3"
     selection-mode="multiple"
-    style="width: 420px"
+    style="width: 100%"
     @selectionchange="handleMultipleSelectionChange">
     <el-table-column
       type="selection"
@@ -686,17 +782,17 @@
   <el-table
     :data="tableData"
     border
-    style="width: 520px">
+    style="width: 100%">
     <el-table-column
       property="date"
       label="日期"
       sortable
-      width="120">
+      width="180">
     </el-table-column>
     <el-table-column
       property="name"
       label="姓名"
-      width="120">
+      width="180">
     </el-table-column>
     <el-table-column
       property="address"
