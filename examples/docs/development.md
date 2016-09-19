@@ -1,22 +1,49 @@
 ## 开发指南
 
-### 构建工具安装
+开发之前需要配置好 Node.js 和 npm 环境，其中 npm 需要 3.0 或以上版本。
 
-element 是基于 [cooking](http://cookingjs.github.io/) 进行构建开发的。所以运行前你需要全局安装 [cooking](http://cookingjs.github.io/)。
-
-```bash
-$ npm install cooking -g
+### 目录结构
+```text
+|- examples/  -------------- 文档及示例页
+    |- docs/  -------------- 文档
+|- component/
+    |- src/  --------------- 组件源码
+|- packages/  -------------- 组件
+|- scripts/  --------------- 打包配置
+|- src/  ------------------- 公用代码
+|- components.json  -------- 组件列表
 ```
 
-### 命令
+### 安装依赖
+安装项目所需要的依赖以及子项目内的依赖。
+```bash
+npm run bootstrap
+```
+
+如果网络不是很理想，可以用国内镜像下载。新建一个 `.npmrc` 文件在当前项目下，同时配置镜像地址，例如：
+```text
+registry=https://registry.npm.taobao.org
+```
+
+然后再运行 `npm run bootstrap` 安装依赖。
+
+### 启动开发环境
+
+启动完成后浏览器访问 [http://localhost:8085](http://localhost:8085)
 
 ```bash
-$ make install                        ---  安装依赖
-$ make new <component-name> [中文名]   ---  创建新组件 package. 例如 '$ make new button 按钮'
-$ make dev                            ---  开发模式
-$ make dist                           ---  编译项目，生成目标文件
-$ make dist-all                       ---  分别编译每个组件项目
-$ make deploy                         ---  部署 demo
-$ make pub                            ---  发布到 npm 上
-$ make pub-all                        ---  发布各组件到 npm 上
+npm run dev
 ```
+
+### npm scripts
+```bash
+npm run dev # 启动开发环境
+npm run dist # 打包组件
+npm run dist:all # 单独打包每个子项目
+npm run lint # 检测 js 代码风格
+node bin/new.js [组件名] # 创建新组件
+```
+
+### 贡献代码
+
+参考 [贡献者文档](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.md)。
