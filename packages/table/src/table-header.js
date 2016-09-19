@@ -41,14 +41,8 @@ export default {
                           ]
                         }
                       </th>
-                    ).concat(<th
-                              class="gutter"
-                              style={{
-                                width: (this.$parent.showVScrollBar
-                                          ? this.$parent.currentGutterWidth
-                                          : 0
-                                        ) + 'px'
-                              }}>&nbsp;</th>)
+                    ).concat(this.$parent.showVScrollBar && this.$parent.currentGutterWidth ? <th class="gutter"
+                              style={{ width: this.$parent.currentGutterWidth + 'px' }}></th> : '')
                   }
                 </tr>
               </thead>
