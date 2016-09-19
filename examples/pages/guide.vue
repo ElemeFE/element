@@ -1,7 +1,4 @@
 <style>
-  .el-col {
-    box-sizing: border-box;
-  }
   .page-guide {
     padding: 55px 0 95px;
 

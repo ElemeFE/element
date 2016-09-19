@@ -2,9 +2,6 @@
   .page-component {
     padding-bottom: 95px;
   }
-  .el-col {
-    box-sizing: border-box;
-  }
   .page-component {
     .content {
       margin-left: -1px;
