@@ -64,8 +64,13 @@
         color: #fff;
         display: block;
         padding: 0 20px;
+        opacity: .8;
+        &.active,
+        &:hover {
+          opacity: 1;
+        }
 
-        &.active:before {
+        &.active::before {
           content: '';
           display: block;
           position: absolute;

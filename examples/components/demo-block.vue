@@ -6,8 +6,12 @@
     @mouseleave="hovering = false">
     <slot></slot>
     <div class="demo-block-control" @click="isExpanded = !isExpanded">
-      <i :class="iconClass"></i>
-      <span v-show="hovering">{{ controlText }}</span>
+      <transition name="arrow-slide">
+        <i :class="[iconClass, { 'hovering': hovering }]"></i>
+      </transition>
+      <transition name="text-slide">
+        <span v-show="hovering">{{ controlText }}</span>
+      </transition>
     </div>
   </div>
 </template>
@@ -58,8 +62,11 @@
         color: #5e6d82;
         background-color: #e6effb;
         margin: 0 4px;
-        padding: 4px 8px;
+        transform: translateY(-2px);
+        display: inline-block;
+        padding: 1px 5px;
         font-size: 12px;
+        border-radius: 3px;
       }
     }
     
@@ -72,11 +79,7 @@
       }
       
       code.hljs {
-        font-size: 12px;
-        padding: 18px 24px;
         margin: 0;
-        line-height: 1.8;
-        background-color: #f9fafc;
         border: none;
         max-height: none;
         border-radius: 0;
@@ -99,20 +102,35 @@
       color: #d3dce6;
       cursor: pointer;
       transition: .2s;
+      position: relative;
 
       i {
         font-size: 12px;
         line-height: 36px;
+        transition: .3s;
+        &.hovering {
+          transform: translateX(-40px);
+        }
       }
 
       span {
+        position: absolute;
+        transform: translateX(-30px);
         font-size: 14px;
         line-height: 36px;
+        transition: .3s;
+        display: inline-block;
       }
       
       &:hover {
         color: #20a0ff;
         background-color: #f9fafc;
+      }
+       
+      & .text-slide-enter,
+      & .text-slide-leave-active {
+        opacity: 0;
+        transform: translateX(10px);
       }
     }
   }

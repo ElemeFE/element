@@ -14,6 +14,7 @@
           margin: 45px 0 15px;
         }
         table {
+          border-collapse: collapse;
           width: 100%;
           background-color: #fff;
           color: #5e6d82;
@@ -29,6 +30,10 @@
           td, th {
             border-bottom: 1px solid #eaeefb;
             padding: 10px 0;
+          }
+          th {
+            border-top: 1px solid #eaeefb;
+            background-color: #EFF2F7;
           }
         }
       }

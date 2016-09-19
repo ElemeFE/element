@@ -19,7 +19,7 @@
         <div class="el-slider__button" :class="{ 'hover': hovering, 'dragging': dragging }"></div>
       </div>
       <transition name="popper-fade">
-        <div class="el-slider__pop" v-show="showTip" transition="popper-fade" ref="pop">{{ value }}</div>
+        <div class="el-slider__pop" v-show="showTip" ref="pop">{{ value }}</div>
       </transition>
       <div class="el-slider__stop" v-for="item in stops" :style="{ 'left': item + '%' }" v-if="showStops"></div>
     </div>
