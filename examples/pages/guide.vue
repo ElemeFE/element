@@ -4,7 +4,6 @@
 
     .content {
       padding-left: 25px;
-      border-left: 1px solid #eaeefa;
       margin-left: -1px;
 
       h3 {
