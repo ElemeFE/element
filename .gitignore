@@ -8,3 +8,4 @@ lib
 .idea
 examples/element-ui
 fe.element/element-ui
+.npmrc
