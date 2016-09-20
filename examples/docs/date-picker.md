@@ -68,7 +68,7 @@
     padding: 0;
     display: flex;
   }
-  
+
   .demo-date-picker .block {
     padding: 30px 0;
     text-align: center;
@@ -78,7 +78,7 @@
       border-right: none;
     }
   }
-  
+
   .demo-date-picker .demonstration {
     display: block;
     color: #8492a6;
@@ -154,7 +154,7 @@
 
 通过扩展基础的日期选择，可以选择周、月、年
 
-:::demo 
+:::demo
 ```html
 <div class="block">
   <span class="demonstration">周</span>
@@ -188,7 +188,7 @@
 
 可在一个选择器中便捷地选择一个时间范围
 
-:::demo 
+:::demo
 ```html
 <template>
   <div class="block">

@@ -7,6 +7,9 @@
 - 修复 Select 多选时选项变为空数组后 placeholder 不出现的问题
 - 修复 Time Picker 时间选择可滚动
 - 修复 Tooltip 有时会错位的问题
+- 修复 丢失的组件 css 文件
+- 修复 Table 在 Safari 下边框没对齐
+- 修复 TimePicker 图标样式被默认图标样式覆盖
 
 #### 非兼容性更新
 - Select 组件样式的 `display` 属性默认值修改为 `block`

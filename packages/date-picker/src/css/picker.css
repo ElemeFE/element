@@ -43,16 +43,18 @@
     }
 
     @e trigger {
-      cursor: pointer;
-      position: absolute;
-      display: inline-block;
-      width: 20px;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      color: var(--datepicker-trigger-color);
-      font-size: 13px;
-      line-height: 38px;
+      &.el-icon {
+        cursor: pointer;
+        position: absolute;
+        display: inline-block;
+        width: 20px;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        color: var(--datepicker-trigger-color);
+        font-size: 13px;
+        line-height: 38px;
+      }
     }
 
     @e clear {
