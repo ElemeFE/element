@@ -43,8 +43,15 @@
     z-index: 10;
 
     h2 {
-      font-size: 80px;
+      font-size: 46px;
       margin: 0;
+    }
+    
+    p {
+      font-size: 14px;
+      opacity: .8;
+      width: 420px;
+      line-height: 1.8;
     }
   }
   .cards {
@@ -91,6 +98,7 @@
       font-size: 14px;
       color: #99a9bf;
       padding: 0 25px;
+      line-height: 1.8;
     }
     a {
       height: 53px;
@@ -140,9 +148,10 @@
       <img class="banner-stars" src="~examples/assets/images/stars.png" alt="Element">
       <div class="container">
         <div class="banner-desc">
-          <h2>Element</h2>
+          <h2>网站快速成型工具</h2>
           <div id="line1" class="actor"></div>
           <div id="line2" class="actor"></div>
+          <p>Element，一套为开发者、设计师和产品经理准备的基于 Vue 2.0 的组件库，提供了配套设计资源，帮助你的网站快速成型。</p>
         </div>
         <img src="~examples/assets/images/banner-bg.svg" alt="Element">
       </div>
