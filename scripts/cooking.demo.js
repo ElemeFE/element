@@ -17,7 +17,7 @@ cooking.set({
     vendor: ['vue', 'vue-router']
   },
   dist: './examples/element-ui/',
-  template: './examples/index.template.html',
+  template: './examples/index.tpl',
   publicPath: '/element-ui/',
   hash: true,
   devServer: {
