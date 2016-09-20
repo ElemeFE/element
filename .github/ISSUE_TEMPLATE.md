@@ -2,7 +2,7 @@
 Thank you for contributing! Please carefully read the following before opening your issue.
  -->
 
-### Element version
+### ElementUI version
 <!-- 1.0.0-rc.2 -->
 
 ### OS/Browers version
