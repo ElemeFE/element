@@ -26,7 +26,7 @@ export default {
                         on-mouseout={ this.handleMouseOut }
                         on-mousedown={ ($event) => this.handleMouseDown($event, column) }
                         on-click={ ($event) => this.handleHeaderClick($event, column) }
-                        class={ [column.id, column.direction] }>
+                        class={ [column.id, column.direction, column.align] }>
                         {
                           [
                             column.headerTemplate

@@ -52,7 +52,7 @@ export default {
                   this._l(this.columns, (column) =>
                     <td
                       style={ this.getColumnWhiteSpaceStyle(column) }
-                      class={ column.id }
+                      class={ [column.id, column.align] }
                       on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
                       on-mouseleave={ this.handleCellMouseLeave }>
                       {

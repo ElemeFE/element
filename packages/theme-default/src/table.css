@@ -62,6 +62,18 @@
       vertical-align: middle;
       position: relative;
       border-bottom: 1px solid var(--table-border-color);
+
+      @when center {
+        text-align: center;
+      }
+
+      @when left {
+        text-align: left;
+      }
+
+      @when right {
+        text-align: right;
+      }
     }
 
     @modifier border {

@@ -83,6 +83,7 @@ export default {
       type: Boolean,
       default: true
     },
+    align: String,
     showTooltipWhenOverflow: {
       type: Boolean,
       default: false
@@ -160,6 +161,7 @@ export default {
       minWidth,
       width,
       isColumnGroup,
+      align: this.align ? 'is-' + this.align : null,
       realWidth: width || minWidth,
       sortable: this.sortable,
       resizable: this.resizable,
