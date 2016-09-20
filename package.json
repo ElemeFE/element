@@ -59,7 +59,6 @@
     "lerna": "2.0.0-beta.18",
     "markdown-it": "^6.1.1",
     "markdown-it-container": "^2.0.0",
-    "markdown-it-toc-and-anchor": "^4.1.1",
     "object-assign": "^4.1.0",
     "postcss": "^5.1.2",
     "postcss-loader": "^0.11.1",

@@ -2,7 +2,7 @@ var cooking = require('cooking');
 var path = require('path');
 var md = require('markdown-it')();
 var Components = require('../components.json');
-var striptags = require('../src/utils/strip-tags');
+var striptags = require('../examples/utils/strip-tags');
 
 function convert(str) {
   str = str.replace(/(&#x)(\w{4});/gi, function($0) {
@@ -61,10 +61,6 @@ cooking.add('loader.md', {
 
 cooking.add('vueMarkdown', {
   use: [
-    [require('markdown-it-toc-and-anchor').default, {
-      anchorLinkSymbol: '',
-      anchorClassName: 'anchor'
-    }],
     [require('markdown-it-container'), 'demo', {
       validate: function(params) {
         return params.trim().match(/^demo\s*(.*)$/);
