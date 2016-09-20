@@ -46,47 +46,6 @@
           "name": "按钮 (button)",
           "title": "Button 按钮",
           "description": "常用的操作按钮"
-        },
-        {
-          "path": "/dialog",
-          "name": "对话框 (dialog)",
-          "title": "Dialog 对话框",
-          "description": "在保留当前页面状态的情况下, 告知用户信息并承载相关操作。"
-        },
-        {
-          "path": "/message-box",
-          "name": "弹框 (message-box)",
-          "title": "Message Box 弹框"
-        },
-        {
-          "path": "/alert",
-          "name": "警告 (alert)",
-          "title": "Alert 警告",
-          "description": "用于页面中展示重要的提示信息"
-        },
-        {
-          "path": "/notification",
-          "name": "通知 (notification)",
-          "title": "Notification 通知",
-          "description": "悬浮出现在页面右上角, 显示全局的通知提醒消息"
-        },
-        {
-          "path": "/message",
-          "name": "消息提示 (message)",
-          "title": "Message 消息提示",
-          "description": "对用户的操作进行反馈提示,包含成功、反馈或错误等消息提示"
-        },
-        {
-          "path": "/loading",
-          "name": "加载 (loading)",
-          "title": "Loading 加载",
-          "description": "加载数据时显示"
-        },
-        {
-          "path": "/card",
-          "name": "卡片 (card)",
-          "title": "Card 卡片",
-          "description": "将信息聚合在卡片容器中展示"
         }
       ]
     },
@@ -186,18 +145,6 @@
           "description": "Tag 标签"
         },
         {
-          "path": "/tooltip",
-          "name": "文字提示 (tooltip)",
-          "title": "Tooltip 文字提示",
-          "description": "优雅地展示文字提示信息"
-        },
-        {
-          "path": "/popover",
-          "name": "弹出框 (popover)",
-          "title": "Popover 弹出框",
-          "description": "收纳具体内容和相关操作, 激活后弹出展现"
-        },
-        {
           "path": "/progress",
           "name": "进度条 (progress)",
           "title": "Progress 进度条",
@@ -219,6 +166,40 @@
           "name": "标记 (badge)",
           "title": " Badge 标记",
           "description": "出现在按钮、图标旁的数字或状态标记"
+        }
+      ]
+    },
+    {
+      "groupName": "Notice",
+      "list": [
+        {
+          "path": "/alert",
+          "name": "警告 (alert)",
+          "title": "Alert 警告",
+          "description": "用于页面中展示重要的提示信息"
+        },
+        {
+          "path": "/loading",
+          "name": "加载 (loading)",
+          "title": "Loading 加载",
+          "description": "加载数据时显示"
+        },
+        {
+          "path": "/message",
+          "name": "消息提示 (message)",
+          "title": "Message 消息提示",
+          "description": "对用户的操作进行反馈提示,包含成功、反馈或错误等消息提示"
+        },
+        {
+          "path": "/message-box",
+          "name": "弹框 (message-box)",
+          "title": "Message Box 弹框"
+        },
+        {
+          "path": "/notification",
+          "name": "通知 (notification)",
+          "title": "Notification 通知",
+          "description": "悬浮出现在页面右上角, 显示全局的通知提醒消息"
         }
       ]
     },
@@ -253,6 +234,35 @@
           "name": "步骤条 (steps)",
           "title": "Steps 步骤",
           "description": "引导用户按照流程完成任务的分步导航条,可根据实际应用场景设定步骤,步骤不得少于 2 步。"
+        }
+      ]
+    },
+    {
+      "groupName": "Others",
+      "list": [
+        {
+          "path": "/dialog",
+          "name": "对话框 (dialog)",
+          "title": "Dialog 对话框",
+          "description": "在保留当前页面状态的情况下, 告知用户信息并承载相关操作。"
+        },
+        {
+          "path": "/tooltip",
+          "name": "文字提示 (tooltip)",
+          "title": "Tooltip 文字提示",
+          "description": "优雅地展示文字提示信息"
+        },
+        {
+          "path": "/popover",
+          "name": "弹出框 (popover)",
+          "title": "Popover 弹出框",
+          "description": "收纳具体内容和相关操作, 激活后弹出展现"
+        },
+        {
+          "path": "/card",
+          "name": "卡片 (card)",
+          "title": "Card 卡片",
+          "description": "将信息聚合在卡片容器中展示"
         }
       ]
     }]
