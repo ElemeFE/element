@@ -30,6 +30,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 };
 
 module.exports = {
+  version: '{{version}}',
   install,
 {{list}}
 };
@@ -64,6 +65,7 @@ ComponentNames.forEach(name => {
 var template = render(MAIN_TEMPLATE, {
   include: includeComponentTemplate.join('\n'),
   install: installTemplate.join('\n'),
+  version: require('../package.json').version,
   list: listTemplate.join(',\n')
 });
 
