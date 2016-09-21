@@ -189,11 +189,11 @@
 ```
 :::
 
-## 全局方法
+### 全局方法
 
 element 为 Vue.prototype 添加了全局方法 $message。因此在 vue instance 中可以采用本页面中的方式调用 `Message`。
 
-## 单独引用
+### 单独引用
 
 单独引入 `Message`：
 
@@ -203,7 +203,7 @@ import { Message } from 'element-ui';
 
 此时调用方法为 `Message(options)`。
 
-## Options
+### Options
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | message | 消息文字 | string | — | — |
