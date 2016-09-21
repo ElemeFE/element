@@ -205,6 +205,7 @@
     <el-date-picker
       v-model="value7"
       type="daterange"
+      align="right"
       placeholder="选择日期范围"
       :picker-options="pickerOptions2"
       style="width: 220px">
@@ -257,6 +258,7 @@
 | type | 显示类型 | string | year/month/date/datetime/week | date |
 | format | 时间日期格式化 | string | 年 `yyyy`，月 `MM`，日 `dd`，<br>小时 `HH`，分 `mm`，秒 `ss` | yyyy-MM-dd |
 | shortcuts | 快捷选项列表，配置信息<br>查看下表 | object[] | — | — |
+| align | 对齐方式 | left, center, right | left |
 
 ### Shortcuts
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |

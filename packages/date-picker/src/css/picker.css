@@ -47,8 +47,8 @@
         cursor: pointer;
         position: absolute;
         display: inline-block;
-        width: 20px;
-        right: 0;
+        width: 13px;
+        right: 10px;
         top: 0;
         bottom: 0;
         color: var(--datepicker-trigger-color);
