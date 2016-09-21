@@ -42,9 +42,7 @@
 </template>
 <script>
   import ElInput from 'packages/input/index.js';
-  import Vue from 'vue';
-  import VueClickoutside from 'main/utils/clickoutside';
-  Vue.use(VueClickoutside);
+  import Clickoutside from 'main/utils/clickoutside';
 
   export default {
     name: 'ElAutocomplete',
@@ -52,6 +50,7 @@
     components: {
       ElInput
     },
+    directives: { Clickoutside },
     props: {
       placeholder: String,
       disabled: Boolean,

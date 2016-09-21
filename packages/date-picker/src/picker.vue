@@ -177,6 +177,11 @@ const TYPE_VALUE_RESOLVER_MAP = {
     }
   }
 };
+const PLACEMENT_MAP = {
+  left: 'bottom-start',
+  center: 'bottom-center',
+  right: 'bottom-end'
+};
 
 export default {
   mixins: [emitter],
@@ -185,6 +190,10 @@ export default {
     format: String,
     readonly: Boolean,
     placeholder: String,
+    align: {
+      type: String,
+      default: 'left'
+    },
     value: {},
     haveTrigger: {},
     pickerOptions: {}
@@ -465,7 +474,7 @@ export default {
 
         this.popper = new Popper(this.$refs.reference, this.picker.$el, {
           gpuAcceleration: false,
-          placement: 'bottom-start',
+          placement: PLACEMENT_MAP[this.align] || PLACEMENT_MAP.left,
           boundariesPadding: 0,
           forceAbsolute: true
         });
