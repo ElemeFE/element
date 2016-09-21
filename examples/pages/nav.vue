@@ -62,7 +62,15 @@
   }
   .zoom-enter,
   .zoom-leave-active {
-    transform: scale(0);
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity .3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+  }
+  .fade-enter,
+  .fade-leave-active {
     opacity: 0;
   }
 </style>
@@ -107,14 +115,16 @@
         </el-col>
       </el-row>
     </div>
-    <div class="mask" v-show="showDialog" @click="showDialog = false"></div>
-    <div class="dialog-img" v-show="showDialog" @click="showDialog = false">
-      <transition name="zoom">
-        <div class="imgWrap" :style="imgStyle" v-show="showDialog">
-          <img src="~examples/assets/images/navbar_2.png" alt="">
+    <transition name="fade">
+      <div class="mask" v-show="showDialog" @click="showDialog = false"></div>
+    </transition>
+    <transition name="zoom">
+      <div class="dialog-img" :style='imgWrapStyle' v-show="showDialog" @click="showDialog = false">
+        <div class="imgWrap" :style="imgStyle">
+          <img :src="imgUrl" alt="">
         </div>
-      </transition>
-    </div>
+      </div>
+    </transition>
   </div>
 </template>
 <script>
@@ -124,7 +134,8 @@
         imgUrl: '',
         imgBound: {},
         showDialog: false,
-        imgStyle: {}
+        imgStyle: {},
+        imgWrapStyle: {}
       };
     },
     watch: {
@@ -145,7 +156,8 @@
         this.imgUrl = imgNode.src;
         this.imgBound = imgNode.getBoundingClientRect();
 
-        this.imgStyle.transformOrigin = `${ev.clientX - offset.left}px ${ev.clientY - offset.top}px`;
+        this.imgWrapStyle.transformOrigin = `${ev.clientX}px ${ev.clientY}px`;
+        // this.imgStyle.transformOrigin = `${ev.clientX}px ${ev.clientY}px`;
         this.imgStyle.width = imgWidth + 'px';
         this.showDialog = true;
       }
