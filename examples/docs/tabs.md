@@ -16,11 +16,6 @@
     }
   }
 </script>
-<style>
-  .el-tabs {
-    margin-bottom: 30px;
-  }
-</style>
 ## Tabs 标签页
 分隔内容上有关联但属于不同类别的数据集合。
 

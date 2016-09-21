@@ -8,7 +8,7 @@
 
 ## Docs
 
-Coming soon
+<a href="http://element.eleme.io/">http://element.eleme.io/</a>
 
 ## Demo
 Demo will come with the documentation. Here is a preview of what a page based on Element looks like:

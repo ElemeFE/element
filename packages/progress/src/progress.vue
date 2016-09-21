@@ -82,9 +82,9 @@
         return (this.strokeWidth / this.width * 100).toFixed(1);
       },
       trackPath() {
-        var radius = 50 - parseFloat(this.relativeStrokeWidth) / 2;
+        var radius = parseInt(50 - parseFloat(this.relativeStrokeWidth) / 2, 10);
 
-        return `M 50,50 m 0,-${radius} a ${radius},${radius} 0 1 1 0,${radius * 2} a ${radius},${radius} 0 1 1 0,-${radius * 2}`;
+        return `M 50 50 m 0 -${radius} a ${radius} ${radius} 0 1 1 0 ${radius * 2} a ${radius} ${radius} 0 1 1 0 -${radius * 2}`;
       },
       perimeter() {
         var radius = 50 - parseFloat(this.relativeStrokeWidth) / 2;
