@@ -12,10 +12,7 @@ function convert(str) {
 }
 
 cooking.set({
-  entry: {
-    app: './examples/entry.js',
-    vendor: ['vue', 'vue-router']
-  },
+  entry: './examples/entry.js',
   dist: './examples/element-ui/',
   template: './examples/index.tpl',
   publicPath: '/element-ui/',
@@ -26,8 +23,9 @@ cooking.set({
     publicPath: '/'
   },
   minimize: true,
-  chunk: 'vendor',
+  chunk: true,
   extractCSS: true,
+  sourceMap: true,
   extends: ['vue2', 'lint'],
   postcss: function(webapck) {
     return [
@@ -114,5 +112,10 @@ Object.keys(Components).forEach(function(key) {
 
 // 开发模式不需要将不存在的 style.css 打包进去
 cooking.add('externals', externals);
+
+if (process.env.NODE_ENV === 'production') {
+  cooking.add('externals.vue', 'Vue');
+  cooking.add('externals.vue-router', 'VueRouter');
+}
 
 module.exports = cooking.resolve();
