@@ -383,6 +383,7 @@
       },
 
       tableData(newVal) {
+        this.$nextTick(_ => this.doRender());
         this.doOnDataChange(newVal);
         this.updateScrollInfo();
       }
