@@ -5,7 +5,7 @@ element 是一套 Vue.js 后台组件库，它能够帮助你更轻松更快速�
 ### 安装
 
 ```bash
-$ npm install element-ui -S
+$ npm install element-ui@next -S
 ```
 
 ### 注册组件

@@ -70,7 +70,7 @@
     "vue": "^2.0.0-rc.6",
     "vue-loader": "^9.4.2",
     "vue-markdown-loader": "^0.4.0",
-    "vue-popup": "^0.2.3",
+    "vue-popup": "^0.2.4",
     "vue-router": "^2.0.0-beta.2",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.15.1",

@@ -237,6 +237,7 @@
             this.inputLength = 20;
           }
         } else {
+          this.valueChangeBySelected = true;
           this.$emit('input', val.value);
           this.$emit('change', val.value);
         }
