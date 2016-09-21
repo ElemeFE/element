@@ -47,12 +47,12 @@
         cursor: pointer;
         position: absolute;
         display: inline-block;
-        width: 13px;
+        width: 16px;
         right: 10px;
         top: 0;
         bottom: 0;
         color: var(--datepicker-trigger-color);
-        font-size: 13px;
+        font-size: 16px;
         line-height: 38px;
       }
     }
