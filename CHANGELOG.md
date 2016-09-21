@@ -10,6 +10,8 @@
 - 修复 丢失的组件 css 文件
 - 修复 Table 在 Safari 下边框没对齐
 - 修复 TimePicker 图标样式被默认图标样式覆盖
+- 修复 在 mounted 钩子函数中改变 Select 绑定值不生效的问题
+- 修复 在多个依次出现的 Dialog 或 Message Box 全部关闭后页面有几率不可滚动的问题
 
 #### 非兼容性更新
 - Select 组件样式的 `display` 属性默认值修改为 `block`
@@ -42,11 +44,11 @@
 
 #### 非兼容性更新
 - Menu 组件 `mode` 属性默认值修改为 `vertical`
-- Progress 组件升级，增加环形进度条的类型，以及增加了诸多属性，详细请查阅文档。
-- Popover 现在可以通过 slot 指定 reference。
+- Progress 组件升级，增加环形进度条的类型，以及增加了诸多属性，详细请查阅文档
+- Popover 现在可以通过 slot 指定 reference
 
 ### 1.0.0-rc.1
 
 *2016-08-30*
 
-Element 1.0.0-rc.1 发布。
+Element 1.0.0-rc.1 发布
