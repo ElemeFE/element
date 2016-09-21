@@ -34,7 +34,8 @@ const forced = {
     resizable: false
   },
   index: {
-    headerTemplate: function(h) { return <div>#</div>; },
+    // headerTemplate: function(h) { return <div>#</div>; },
+    headerTemplate: function(h) { return <div>{ this.$options.propsData.columns[0].label ? this.$options.propsData.columns[0].label : '#' }</div>; },
     template: function(h, { row, $index }) { return <div>{ $index + 1 }</div>; },
     sortable: false
   },
