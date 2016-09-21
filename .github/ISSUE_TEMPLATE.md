@@ -13,8 +13,8 @@ Thank you for contributing! Please carefully read the following before opening y
 
 ### Reproduction Link
 <!-- A minimal JSBin, JSFiddle, Codepen, or a GitHub repository that can reproduce the bug. -->
-<!-- https://unpkg.com/element-ui/lib/index.js -->
-<!-- https://unpkg.com/element-ui/lib/theme-default/index.css -->
+<!-- https://codepen.io/anon/pen/ozYpNA -->
+<!-- https://jsfiddle.net/gmve9d3p/ -->
 
 ### Steps to reproduce
 

@@ -17,7 +17,7 @@ Demo will come with the documentation. Here is a preview of what a page based on
 
 ## Usages
 ```shell
-npm install element-ui@next
+npm install element-ui@next -S
 ```
 
 ## Quick Start
@@ -79,13 +79,16 @@ Recommend: node >= 4 npm >= 3
 # development => install packages -> build icon etc. -> run webpack
 $ npm run dev
 
-# Recommended use `npminstall` to install packages, it is so fast
-$ npm i npminstall -g
-$ npminstall
-
 # build => build all component
 $ npm run dist
 ```
+
+## Other links
+- [Design resources](https://github.com/ElementUI/Resources)
+- Boilerplate for bug reports
+ - [CodePen](https://codepen.io/anon/pen/ozYpNA)
+ - [JSFiddle](https://jsfiddle.net/gmve9d3p/)
+- [Mint UI](https://github.com/ElemeFE/mint-ui) - Mobile UI elements for Vue.js
 
 ## Changelog
 Details changes for each release are documented in the [release notes](https://github.com/ElemeFE/element/releases).
