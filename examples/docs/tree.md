@@ -63,8 +63,15 @@
         if (node.level === -1) {
           return resolve([{ name: 'Root1' }, { name: 'Root2' }]);
         }
-        var hasChild = Math.random() > 0.5;
         if (node.level > 4) return resolve([]);
+        var hasChild;
+        if (node.data.name === 'Root1') {
+          hasChild = true;
+        } else if (node.data.name === 'Root2') {
+          hasChild = false;          
+        } else {
+          hasChild = Math.random() > 0.5;
+        }
 
         setTimeout(function() {
           var data;

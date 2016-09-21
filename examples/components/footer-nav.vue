@@ -51,10 +51,12 @@
   
   .footer-nav-left {
     float: left;
+    margin-left: -4px;
   }
   
   .footer-nav-right {
     float: right;
+    margin-right: -4px;
   }
 </style>
 
