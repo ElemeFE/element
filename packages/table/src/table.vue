@@ -120,6 +120,12 @@
             }
           }
         }
+        // 延迟300ms等待表格数据加载出来了，出现垂直滚动条后重新计算列宽
+        setTimeout(() => {
+          if (this.$el.clientWidth < this.bodyWidth) {
+            this.$calcColumns();
+          }
+        }, 300);
       },
 
       toggleAllSelection() {
