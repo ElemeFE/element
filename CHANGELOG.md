@@ -14,6 +14,7 @@
 - 修复 在多个依次出现的 Dialog 或 Message Box 全部关闭后页面有几率不可滚动的问题
 - 新增 时间、日期选择器增加 align 属性，可设置对齐方式
 - 新增 TableColumn 的 align 属性
+- 修复 Table 初次渲染时宽度重新计算 #78
 
 #### 非兼容性更新
 - Select 组件样式的 `display` 属性默认值修改为 `block`
