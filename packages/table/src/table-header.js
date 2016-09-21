@@ -30,7 +30,7 @@ export default {
                         {
                           [
                             column.headerTemplate
-                              ? column.headerTemplate.call(this._renderProxy, h)
+                              ? column.headerTemplate.call(this._renderProxy, h, column.label)
                               : <div>{ column.label }</div>,
                             column.sortable
                               ? <div class="caret-wrapper">
