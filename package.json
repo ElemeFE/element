@@ -10,7 +10,7 @@
   "scripts": {
     "build:file": "node bin/iconInit.js & node bin/build-entry.js",
     "dev": "npm run bootstrap && npm run build:file && cooking watch -c scripts/cooking.demo.js -p",
-    "dist": "npm run lint && npm run build:file && del -f lib && cooking build -c scripts/cooking.conf.js,scripts/cooking.common.js -p && cooking build -c scripts/cooking.component.js -p && npm run build:theme",
+    "dist": "npm run lint && del -f lib && cooking build -c scripts/cooking.conf.js,scripts/cooking.common.js,scripts/cooking.component.js -p && npm run build:theme",
     "dist:all": "node bin/build-all.js && npm run build:theme",
     "build:theme": "gulp build --gulpfile packages/theme-default/gulpfile.js && cp-cli packages/theme-default/lib lib/theme-default",
     "deploy": "npm run build:file && cooking build -c scripts/cooking.demo.js -p && echo element.eleme.io>>examples/element-ui/CNAME && gh-pages -d examples/element-ui --remote origin && del examples/element-ui",
