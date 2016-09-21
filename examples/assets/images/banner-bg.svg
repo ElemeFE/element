@@ -86,7 +86,7 @@
             <feOffset dx="0.5" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
             <feColorMatrix values="0 0 0 0 0.494117647   0 0 0 0 0.670588235   0 0 0 0 0.929411765  0 0 0 1 0" type="matrix" in="shadowOffsetOuter1"></feColorMatrix>
         </filter>
-        <polygon id="path-47" points="67.155153 22.89922 79.5298116 19.9863847 79.5298116 44.1388753 67.155153 47.0200742"></polygon>
+        <polygon id="path-47" points="68 22.9128354 80.3746586 20 80.3746586 44.1524906 68 47.0336895"></polygon>
         <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-48">
             <feOffset dx="0.5" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
             <feColorMatrix values="0 0 0 0 0.399626285   0 0 0 0 0.609381731   0 0 0 0 0.91236182  0 0 0 1 0" type="matrix" in="shadowOffsetOuter1"></feColorMatrix>
@@ -237,11 +237,6 @@
                 </g>
                 <path d="M217.324845,66.6102349 C210.394808,69.0648935 212.014476,72.5604878 212.005429,77.0179572 L220.421524,77.0179572 C220.432381,75.2992633 219.347234,71.4116926 223.232513,70.4599518 C219.347234,71.4116926 236.356324,66.0319491 236.443181,66.6102349 C236.466705,66.7682757 226.036481,63.9019464 226.036481,63.9019464" id="Combined-Shape" fill-opacity="0.200000018" fill="#BCC4D1"></path>
                 <path d="M256.324845,78.6102349 C250.384193,79.4679693 251.014476,84.5604878 251.005429,89.0179572 L259.421524,89.0179572 C259.432381,87.2992633 259.063665,83.5528001 261.920947,82.1573828 C258.035667,83.1091237 275.356324,78.0319491 275.443181,78.6102349 C275.466705,78.7682757 265.036481,75.9019464 265.036481,75.9019464" id="Combined-Shape" fill-opacity="0.200000018" fill="#BCC4D1"></path>
-                <g id="Group-22" transform="translate(95.000000, 73.000000)">
-                    <polygon id="Rectangle-3" fill="#BDCEEB" opacity="0.300000012" points="3 1 90 26.89678 90 49 3 24"></polygon>
-                    <polygon id="Rectangle-3-Copy" fill="#D6E8FB" opacity="0.639458955" points="3.37286438 24 89.907135 48.9508495 89.907135 50.6262341 0 24.8664486"></polygon>
-                    <polygon id="Rectangle-4" fill="#CCE7FF" points="0 0 3.4625074 1.0179419 3.4625074 24.0179419 0 24.9070677"></polygon>
-                </g>
                 <g id="Group-21" transform="translate(95.000000, 133.000000)">
                     <polygon id="Rectangle-3" fill="#BDCEEB" opacity="0.300000012" points="3 1 71 21 71 44 3 24"></polygon>
                     <polygon id="Rectangle-3-Copy" fill="#C0DBF8" opacity="0.639458955" points="3.37286438 24 71 43.9434662 71 45.7272129 0 24.8664486"></polygon>
@@ -445,11 +440,13 @@
                     <use fill="#C9E2FB" fill-rule="evenodd" xlink:href="#path-65"></use>
                 </g>
             </g>
-            <g id="title" transform="translate(185.000000, 71.000000)">
-                <polygon id="Rectangle-6" fill-opacity="0.200000018" fill="#BCC4D1" points="12 11 107.310913 39.2488499 107.310913 71.595787 12 43.3839226"></polygon>
-                <polygon id="Rectangle-3" fill="#AFCAF1" points="95 31.1094727 107.374659 28 107.374659 60.4360677 95 63.4540845"></polygon>
-                <polygon id="Rectangle-6" fill="#DAEDFE" points="0 3 95.3109131 31.2488499 95.3109131 63.595787 0 35.3839226"></polygon>
-                <polygon id="Rectangle-6" fill="#C9E1FB" points="12.370682 0 107 27.9739961 94.6952441 31 0 3.02147635"></polygon>
+            <g id="title" transform="translate(198.000000, 71.000000)">
+                <g id="Group">
+                    <polygon id="Rectangle-6" fill-opacity="0.200000018" fill="#BCC4D1" points="12 11 107.310913 39.2488499 107.310913 71.595787 12 43.3839226"></polygon>
+                    <polygon id="Rectangle-3" fill="#AFCAF1" points="95 31.1094727 107.374659 28 107.374659 60.4360677 95 63.4540845"></polygon>
+                    <polygon id="Rectangle-6" fill="#DAEDFE" points="0 3 95.3109131 31.2488499 95.3109131 63.595787 0 35.3839226"></polygon>
+                    <polygon id="Rectangle-6" fill="#C9E1FB" points="12.370682 0 107 27.9739961 94.6952441 31 0 3.02147635"></polygon>
+                </g>
             </g>
             <g id="sidebar" transform="translate(93.000000, 2.000000)">
                 <g id="Path-22">
