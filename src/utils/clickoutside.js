@@ -6,21 +6,28 @@
  * <div v-element-clickoutside="handleClose">
  * ```
  */
-let handler;
+const clickoutsideContext = '@@clickoutsideContext';
 
 export default {
   bind(el, binding, vnode) {
-    const expression = binding.expression;
-    handler = function(e) {
+    const documentHandler = function(e) {
       if (vnode.context && !el.contains(e.target)) {
-        vnode.context[expression]();
+        vnode.context[el[clickoutsideContext].methodName]();
       }
     };
-    document.addEventListener('click', handler);
+    el[clickoutsideContext] = {
+      documentHandler,
+      methodName: binding.expression
+    };
+    document.addEventListener('click', documentHandler);
   },
 
-  unbind() {
-    document.removeEventListener('click', handler);
+  update(el, binding) {
+    el[clickoutsideContext].methodName = binding.expression;
+  },
+
+  unbind(el) {
+    document.removeEventListener('click', el[clickoutsideContext].documentHandler);
   },
 
   install(Vue) {
