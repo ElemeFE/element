@@ -1,8 +1,8 @@
 ## 更新日志
 
-### 1.0.0-rc.4（待发布）
+### 1.0.0-rc.4
 
-*2016-XX-XX*
+*2016-09-21*
 
 - 修复 Select 多选时选项变为空数组后 placeholder 不出现的问题
 - 修复 Time Picker 时间选择可滚动
@@ -12,9 +12,10 @@
 - 修复 TimePicker 图标样式被默认图标样式覆盖
 - 修复 在 mounted 钩子函数中改变 Select 绑定值不生效的问题
 - 修复 在多个依次出现的 Dialog 或 Message Box 全部关闭后页面有几率不可滚动的问题
+- 修复 Table 初次渲染时宽度重新计算 #78
 - 新增 时间、日期选择器增加 align 属性，可设置对齐方式
 - 新增 TableColumn 的 align 属性
-- 修复 Table 初次渲染时宽度重新计算 #78
+- 新增 autocomplete 的 select 事件
 
 #### 非兼容性更新
 - Select 组件样式的 `display` 属性默认值修改为 `block`

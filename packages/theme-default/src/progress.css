@@ -24,19 +24,17 @@
 
       .el-progress__text {
         position: absolute;
-        top: 0;
+        top: 50%;
         left: 0;
         width: 100%;
-        height: 100%;
         text-align: center;
         margin: 0;
+        transform: translate(0, -50%);
 
         i {
           vertical-align: middle;
           display: inline-block;
         }
-
-        @utils-vertical-center;
       }
     }
     @m without-text {

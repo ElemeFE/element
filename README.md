@@ -6,16 +6,11 @@
 
 > Desktop UI elements for Vue.js 2.0.
 
-## Docs
+## Links
+- [Home Page](http://element.eleme.io/)
+- [Docs](http://element.eleme.io/#/component)
 
-Coming soon
-
-## Demo
-Demo will come with the documentation. Here is a preview of what a page based on Element looks like:
-
-<img src="./examples/assets/images/element-demo.jpeg" width = "100%" />
-
-## Usages
+## Install
 ```shell
 npm install element-ui@next -S
 ```

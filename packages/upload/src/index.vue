@@ -160,7 +160,7 @@ export default {
   render(h) {
     var uploadList;
 
-    if (this.showUploadList && !this.thumbnailMode) {
+    if (this.showUploadList && !this.thumbnailMode && this.uploadedFiles.length) {
       uploadList = (
         <UploadList
           files={this.uploadedFiles}

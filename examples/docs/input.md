@@ -106,6 +106,9 @@
         return (state) => {
           return (state.value.indexOf(queryString.toLowerCase()) === 0);
         };
+      },
+      handleSelect(item) {
+        console.log(item);
       }
     },
     mounted() {
@@ -306,6 +309,7 @@
       v-model="state1"
       :fetch-suggestions="querySearch"
       placeholder="请输入内容"
+      @select="handleSelect"
     ></el-autocomplete>
   </el-col>
   <el-col :span="12" class="tac">
@@ -315,6 +319,7 @@
       :fetch-suggestions="querySearch"
       placeholder="请输入内容"
       :trigger-on-focus="false"
+      @select="handleSelect"
     ></el-autocomplete>
   </el-col>
 </el-row>
@@ -390,6 +395,9 @@
           { "value": "阳阳麻辣烫", "address": "天山西路389号" },
           { "value": "南拳妈妈龙虾盖浇饭", "address": "普陀区金沙江路1699号鑫乐惠美食广场A13" }
         ];
+      },
+      handleSelect(item) {
+        console.log(item);
       }
     },
     mounted() {
@@ -412,6 +420,7 @@
   :fetch-suggestions="querySearch"
   custom-item="my-item"
   placeholder="请输入内容"
+  @select="handleSelect"
 ></el-autocomplete>
 
 <script>
@@ -499,6 +508,9 @@
           { "value": "阳阳麻辣烫", "address": "天山西路389号" },
           { "value": "南拳妈妈龙虾盖浇饭", "address": "普陀区金沙江路1699号鑫乐惠美食广场A13" }
         ];
+      },
+      handleSelect(item) {
+        console.log(item);
       }
     },
     mounted() {
@@ -519,6 +531,7 @@
   v-model="state4"
   :fetch-suggestions="querySearchAsync"
   placeholder="请输入内容"
+  @select="handleSelect"
 ></el-autocomplete>
 <script>
   export default {
@@ -595,6 +608,9 @@
         return (state) => {
           return (state.value.indexOf(queryString.toLowerCase()) === 0);
         };
+      },
+      handleSelect(item) {
+        console.log(item);
       }
     },
     mounted() {
@@ -629,4 +645,7 @@
 | custom-item  | 通过该参数指定自定义的输入建议列表项的组件名 | string  | — | — |
 | fetch-suggestions | 返回输入建议的方法，仅当你的输入建议数据 resolve 时，通过调用 callback(data:[]) 来返回它  | Function(queryString, callback)  | — | — |
 
-
+### Autocomplete Events
+| 事件名称 | 说明 | 回调参数 |
+|---------|--------|---------|
+| select | 点击选中建议项时触发 | 选中建议项 |
