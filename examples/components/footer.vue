@@ -4,7 +4,7 @@
       <div class="footer-main">
         <p class="footer-main-title">Element 1.0 Hydrogen</p>
         <a href="https://github.com/ElemeFE/element/issues" class="footer-main-link" target="_blank">反馈建议</a>
-        <!--<span class="footer-main-link"><router-link to="/changelog">更新日志</router-link></span>-->
+        <a href="https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.md" class="footer-main-link" target="_blank">贡献指南</a>
       </div>
       <div class="footer-social">
         <el-popover
