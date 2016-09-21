@@ -15,6 +15,7 @@ $ npm install element-ui@next -S
 ```javascript
 import Vue from 'vue'
 import Element from 'element-ui'
+import 'element-ui/lib/theme-default/index.css'
 
 Vue.use(Element)
 ```
@@ -42,8 +43,8 @@ import 'element-ui/lib/theme-default/select.css';
 import Button from 'element-ui/lib/button';
 import 'element-ui/lib/theme-default/button.css';
 
-Vue.component(Select.name, Select)
-Vue.component(Button.name, Button)
+Vue.component(Select.name, Select);
+Vue.component(Button.name, Button);
 ```
 
 ### babel-plugin-component
