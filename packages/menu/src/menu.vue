@@ -37,33 +37,67 @@
         type: String,
         default: 'light'
       },
-      uniqueOpend: Boolean,
+      uniqueOpened: Boolean,
       router: Boolean
     },
     data() {
       return {
         activeIndex: this.defaultActive,
-        openedMenus: this.defaultOpeneds.slice(0)
+        openedMenus: this.defaultOpeneds.slice(0),
+        menuItems: {},
+        submenus: {}
       };
     },
+    watch: {
+      defaultActive(value) {
+        this.activeIndex = value;
+        let indexPath = this.menuItems[value].indexPath;
+
+        this.handleSelect(value, indexPath);
+      },
+      defaultOpeneds(value) {
+        this.openedMenus = value;
+      }
+    },
     methods: {
-      handleMenuExpand(index, indexPath) {
-        if (this.uniqueOpend) {
-          this.broadcast('submenu', 'close-menu', indexPath);
-          this.openedMenus = this.openedMenus.filter((index) => {
+      openMenu(index, indexPath) {
+        let openedMenus = this.openedMenus;
+        if (openedMenus.indexOf(index) !== -1) return;
+        if (this.uniqueOpened) {
+          openedMenus = openedMenus.filter(index => {
             return indexPath.indexOf(index) !== -1;
           });
         }
-        this.$emit('open', index, indexPath);
+        openedMenus.push(index);
       },
-      handleMenuCollapse(index, indexPath) {
+      closeMenu(index, indexPath) {
         this.openedMenus.splice(this.openedMenus.indexOf(index), 1);
-        this.$emit('close', index, indexPath);
+      },
+      handleSubmenuClick(index, indexPath) {
+        let isOpened = this.openedMenus.indexOf(index) !== -1;
+
+        if (isOpened) {
+          this.closeMenu(index, indexPath);
+          this.$emit('close', index, indexPath);
+        } else {
+          this.openMenu(index, indexPath);
+          this.$emit('open', index, indexPath);
+        }
       },
       handleSelect(index, indexPath) {
         this.activeIndex = index;
         this.$emit('select', index, indexPath);
-        this.broadcast('submenu', 'select', [index, indexPath]);
+
+        if (this.mode === 'horizontal') {
+          this.broadcast('submenu', 'item-select', [index, indexPath]);
+          this.openedMenus = [];
+        } else {
+          // 展开该菜单项的路径上所有子菜单
+          indexPath.forEach(index => {
+            let submenu = this.submenus[index];
+            submenu && this.openMenu(index, submenu.indexPath);
+          });
+        }
 
         if (this.router) {
           this.$router.push(index);
@@ -71,9 +105,10 @@
       }
     },
     mounted() {
-      this.broadcast('submenu', 'open-menu', this.openedMenus);
-      this.$on('expand-menu', this.handleMenuExpand);
-      this.$on('collapse-menu', this.handleMenuCollapse);
+      let index = this.activeIndex;
+      let indexPath = this.menuItems[index].indexPath;
+
+      this.handleSelect(index, indexPath);
     }
   };
 </script>

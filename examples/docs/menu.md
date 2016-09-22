@@ -30,12 +30,6 @@
 
 <script>
   export default {
-    data() {
-      return {
-        search: '',
-        search2: ''
-      };
-    },
     methods: {
       handleopen(key, keyPath) {
         console.log(key, keyPath);
@@ -159,7 +153,7 @@
 | theme     | 主题色   | string    | light,dark | light |
 | default-active | 当前激活菜单的 index | string    | — | — |
 | default-openeds | 当前打开的submenu的 key 数组 | Array    | — | — |
-| unique-opend  | 是否只保持一个子菜单的展开 | boolean   | — | false   |
+| unique-opened  | 是否只保持一个子菜单的展开 | boolean   | — | false   |
 | router  | 是否使用 vue-router 的模式，启用该模式会在激活导航时以 index 作为 path 进行路由跳转 | boolean   | — | false   |
 
 ### Menu Events
