@@ -90,6 +90,7 @@
     & th > div {
       display: inline-block;
       padding-left: 18px;
+      padding-right: 18px;
       line-height: 40px;
       box-sizing: border-box;
     }
@@ -250,7 +251,8 @@
       text-overflow: ellipsis;
       line-height: 40px;
       padding-left: 18px;
-      }
+      padding-right: 18px;
+    }
 
     & tr input[type="checkbox"] {
       margin: 0;
