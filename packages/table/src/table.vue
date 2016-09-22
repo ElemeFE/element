@@ -408,7 +408,7 @@
 
       this.styleNode = styleNode;
 
-      this.$nextTick(_ => this.doRender());
+      this.doRender();
 
       this.$ready = true;
       if (this.tableData) {
