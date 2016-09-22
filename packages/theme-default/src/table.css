@@ -93,14 +93,13 @@
       padding-right: 18px;
       line-height: 40px;
       box-sizing: border-box;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
 
     & td > div {
       box-sizing: border-box;
-    }
-
-    & td > div > div {
-      width: inherit;
     }
 
     & td div {
@@ -198,6 +197,7 @@
       width: 10px;
       height: 12px;
       padding: 0;
+      overflow: initial;
     }
 
     & .sort-caret {
