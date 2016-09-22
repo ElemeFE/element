@@ -2,9 +2,7 @@
 default: help
 
 # build all theme
-build-theme: build-theme-default
-
-build-theme-default:
+build-theme:
 	npm run build:theme
 
 install:
