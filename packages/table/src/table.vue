@@ -298,13 +298,6 @@
 
         this.$calcColumns();
 
-        if (!this.$ready && this.fit) {
-          this.windowResizeListener = throttle(100, () => {
-            this.$calcColumns();
-          });
-          window.addEventListener('resize', this.windowResizeListener);
-        }
-
         this.$nextTick(() => {
           if (this.height) {
             this.$calcHeight(this.height);
@@ -324,6 +317,13 @@
       this.debouncedReRender = debounce(50, () => {
         this.doRender();
       });
+
+      if (!this.$ready && this.fit) {
+        this.windowResizeListener = throttle(100, () => {
+          this.$calcColumns();
+        });
+        window.addEventListener('resize', this.windowResizeListener);
+      }
     },
 
     computed: {
