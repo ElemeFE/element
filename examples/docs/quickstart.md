@@ -61,3 +61,19 @@ Vue.component(Button.name, Button);
   ]]]
 }
 ```
+
+
+### 通过标签全局引入
+
+这里用 unpkg cdn 做示范。请先引入 Vue 再引入组件，加载完成后会自动注册，参考 [示例](https://codepen.io/anon/pen/ozYpNA)。
+
+```html
+<!-- 引入样式 -->
+<link rel="stylesheet" href="//unpkg.com/element-ui@1.0.0-rc.4/lib/theme-default/index.css">
+
+<!-- body -->
+
+<!-- 引入组件库 -->
+<script src="//unpkg.com/vue@2.0.0-rc.6/dist/vue.js"></script>
+<script src="//unpkg.com/element-ui@1.0.0-rc.4/lib/index.js"></script>
+```
