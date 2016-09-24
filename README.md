@@ -94,7 +94,7 @@ $ npm run dist
 - [Mint UI](https://github.com/ElemeFE/mint-ui) - Mobile UI elements for Vue.js
 
 ## Changelog
-Details changes for each release are documented in the [release notes](https://github.com/ElemeFE/element/releases).
+Detailed changes for each release are documented in the [release notes](https://github.com/ElemeFE/element/releases).
 
 ## Contribution
 Please make sure to read the [Contributing Guide](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.md) before making a pull request.
