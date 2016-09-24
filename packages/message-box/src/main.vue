@@ -79,9 +79,14 @@
 
         this.onClose && this.onClose();
 
-        if (this.modal && this.bodyOverflow !== 'hidden') {
-          document.body.style.overflow = this.bodyOverflow;
-        }
+        setTimeout(() => {
+          if (this.modal && this.bodyOverflow !== 'hidden') {
+            document.body.style.overflow = this.bodyOverflow;
+            document.body.style.paddingRight = this.bodyPaddingRight;
+          }
+          this.bodyOverflow = null;
+          this.bodyPaddingRight = null;
+        }, 200);
         this.opened = false;
 
         if (!this.transition) {

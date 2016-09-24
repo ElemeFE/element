@@ -9,15 +9,19 @@
         this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
           type: 'warning'
         }).then(() => {
-          this.$message({
-            message: '删除成功!',
-            type: 'success'
-          });
+          setTimeout(() => {
+            this.$message({
+              message: '删除成功!',
+              type: 'success'
+            });
+          }, 200);
         }).catch(() => {
-          this.$message({
-            message: '已取消删除',
-            type: 'info'
-          });          
+          setTimeout(() => {
+            this.$message({
+              message: '已取消删除',
+              type: 'info'
+            });  
+          }, 200);
         });
       },
 
@@ -26,15 +30,19 @@
           inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
           inputErrorMessage: '邮箱格式不正确'
         }).then(({ value }) => {
-          this.$message({
-            type: 'success',
-            message: '你的邮箱是: ' + value
-          });
+          setTimeout(() => {
+            this.$message({
+              type: 'success',
+              message: '你的邮箱是: ' + value
+            });
+          }, 200);
         }).catch(() => {
-          this.$message({
-            type: 'info',
-            message: '取消输入'
-          });       
+          setTimeout(() => {
+            this.$message({
+              type: 'info',
+              message: '取消输入'
+            });
+          }, 200);
         });
       },
 
@@ -45,10 +53,12 @@
           message: '这是一段内容, 这是一段内容, 这是一段内容, 这是一段内容, 这是一段内容, 这是一段内容, 这是一段内容',
           showCancelButton: true
         }).then(action => {
-          this.$message({
-            type: 'info',
-            message: 'action: ' + action
-          });
+          setTimeout(() => {
+            this.$message({
+              type: 'info',
+              message: 'action: ' + action
+            });
+          }, 200);
         });
       }
 

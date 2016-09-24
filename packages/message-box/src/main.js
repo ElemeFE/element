@@ -7,6 +7,7 @@ var defaults = {
   type: '',
   showInput: false,
   showClose: true,
+  modalFade: true,
   closeOnClickModal: true,
   inputValue: null,
   inputPlaceholder: '',

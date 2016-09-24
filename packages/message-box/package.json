@@ -12,6 +12,6 @@
   "author": "elemefe",
   "license": "MIT",
   "dependencies": {
-    "vue-popup": "^0.2.4"
+    "vue-popup": "^0.2.5"
   }
 }
