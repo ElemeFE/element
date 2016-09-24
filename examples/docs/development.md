@@ -46,4 +46,4 @@ node bin/new.js [组件名] # 创建新组件
 
 ### 贡献代码
 
-参考 [贡献者文档](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.md)。
+参考 <a href="https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.md" target="_blank">贡献指南</a>。
