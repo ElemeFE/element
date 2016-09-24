@@ -7,6 +7,7 @@
 - 修复 Table 头部不同步的问题
 - 修复 Menu 组件 default-active 绑定动态值无法更新的问题
 - 新增特性 Menu 组件中若选中子菜单项现在会自动展开所有父级菜单
+- 修复 vue-popper 引入 popper 路径错误
 
 #### 非兼容性更新
 - Menu 组件的 `unique-opend` 属性修正为 `unique-opened`

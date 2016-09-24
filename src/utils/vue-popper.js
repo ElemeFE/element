@@ -1,4 +1,4 @@
-import PopperJS from 'main/utils/popper';
+import PopperJS from './popper';
 
 /**
  * @param {HTMLElement} [reference=$refs.reference] - The reference element used to position the popper.
