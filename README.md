@@ -67,6 +67,9 @@ Vue.component(Button.name, Button)
 }
 ```
 
+## Browser Support
+Modern browsers and Internet Explorer 9+.
+
 ## Development
 Recommend: node >= 4 npm >= 3
 
