@@ -7,8 +7,8 @@
   </head>
   <body>
     <div id="app"></div><% if (process.env.NODE_ENV === 'production') { %>
-    <script src="//unpkg.com/vue@2.0.0-rc.6/dist/vue.min.js"></script>
-    <script src="//unpkg.com/vue-router@2.0.0-rc.5/dist/vue-router.js"></script><% } %>
+    <script src="//cdn.jsdelivr.net/vue/2.0.0-rc.7/vue.min.js"></script>
+    <script src="//cdn.jsdelivr.net/vue.router/2.0.0-rc.5/vue-router.min.js"></script><% } %>
   </body>
   <% if (process.env.NODE_ENV === 'production') { %><script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
