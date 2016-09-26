@@ -861,6 +861,7 @@
 | property | 对应列内容的字段名 | string | — | — |
 | width | 对应列的宽度 | string | — | — |
 | sortable | 对应列是否可以排序 | boolean | — | false |
+| resizable | 对应列是否可以通过拖动改变宽度（如果需要，需在 el-table 上设置 border 属性为真） | boolean | — | false |
 | type | 对应列的类型。如果设置了 `selection` 则显示多选框，如果设置了 `index` 则显示该行的索引（从 1 开始计算） | string | selection/index | — |
 | formatter | 用来格式化内容，在 formatter 执行的时候，会传入 row 和 column | function | — | — |
 | show-tooltip-when-overflow | 当过长被隐藏时显示 tooltip | Boolean | — | false |
