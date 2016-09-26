@@ -97,13 +97,13 @@ export default {
 ];
 
 // 添加到 components.json
-const componentsFile = require('../components.json');
+const componentsFile = require('../../components.json');
 if (componentsFile[componentname]) {
   console.error(`${componentname} 已存在.`);
   process.exit(1);
 }
 componentsFile[componentname] = [`./packages/${componentname}/index.js`];
-fileSave(path.join(__dirname, '../components.json'))
+fileSave(path.join(__dirname, '../../components.json'))
   .write(JSON.stringify(componentsFile, null, '  '), 'utf8')
   .end('\n');
 
@@ -115,7 +115,7 @@ Files.forEach(file => {
 });
 
 // 添加到 nav.config.json
-const navConfigFile = require('../examples/nav.config.json');
+const navConfigFile = require('../../examples/nav.config.json');
 navConfigFile[navConfigFile.length - 1].list.push({
   path: `/${componentname}`,
   name: `${chineseName} (${componentname})`,
@@ -124,7 +124,7 @@ navConfigFile[navConfigFile.length - 1].list.push({
           : `${componentname} ${chineseName}`
 });
 
-fileSave(path.join(__dirname, '../examples/nav.config.json'))
+fileSave(path.join(__dirname, '../../examples/nav.config.json'))
   .write(JSON.stringify(navConfigFile, null, '  '), 'utf8')
   .end('\n');
 
