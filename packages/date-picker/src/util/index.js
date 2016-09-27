@@ -25,7 +25,8 @@ export const merge = function(target) {
 };
 
 export const formatDate = function(date, format) {
-  if (!(date instanceof Date)) return '';
+  date = new Date(date);
+  if (isNaN(date.getTime())) return '';
   return dateUtil.format(date, format || 'yyyy-MM-dd');
 };
 

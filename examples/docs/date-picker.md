@@ -51,7 +51,7 @@
             }
           }]
         },
-        value1: '',
+        value1: '2016-08-10',
         value2: '',
         value3: '',
         value4: '',
