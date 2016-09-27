@@ -1,10 +1,10 @@
-var Components = require('../components.json');
+var Components = require('../../components.json');
 var fs = require('fs');
 var render = require('json-templater/string');
 var uppercamelcase = require('uppercamelcase');
 var path = require('path');
 
-var OUTPUT_PATH = path.join(__dirname, '../src/index.js');
+var OUTPUT_PATH = path.join(__dirname, '../../src/index.js');
 var IMPORT_TEMPLATE = 'import {{name}} from \'../packages/{{package}}/index.js\';';
 var ISNTALL_COMPONENT_TEMPLATE = '  Vue.component({{name}}.name, {{name}});';
 var MAIN_TEMPLATE = `{{include}}
@@ -65,7 +65,7 @@ ComponentNames.forEach(name => {
 var template = render(MAIN_TEMPLATE, {
   include: includeComponentTemplate.join('\n'),
   install: installTemplate.join('\n'),
-  version: require('../package.json').version,
+  version: process.env.VERSION || require('../../package.json').version,
   list: listTemplate.join(',\n')
 });
 

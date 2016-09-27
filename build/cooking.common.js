@@ -1,5 +1,5 @@
 var cooking = require('cooking');
-var path = require('path');
+var config = require('./config');
 
 cooking.set({
   entry: './src/index.js',
@@ -8,14 +8,11 @@ cooking.set({
   format: 'cjs',
   extends: ['vue2'],
   minimize: false,
-  alias: {
-    main: path.join(__dirname, '../src'),
-    packages: path.join(__dirname, '../packages'),
-    examples: path.join(__dirname, '../examples')
-  },
+  alias: config.alias,
   externals: { vue: 'vue' }
 });
 
 cooking.add('output.filename', 'element-ui.common.js');
-cooking.add('loader.js.exclude', /node_modules|utils\/popper\.js|util\/fecha.\js/);
+cooking.add('loader.js.exclude', config.jsexclude);
+
 module.exports = cooking.resolve();

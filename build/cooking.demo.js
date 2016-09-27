@@ -1,8 +1,8 @@
 var cooking = require('cooking');
-var path = require('path');
+var config = require('./config');
 var md = require('markdown-it')();
 var Components = require('../components.json');
-var striptags = require('../examples/utils/strip-tags');
+var striptags = require('./strip-tags');
 
 function convert(str) {
   str = str.replace(/(&#x)(\w{4});/gi, function($0) {
@@ -26,6 +26,7 @@ cooking.set({
   chunk: true,
   extractCSS: true,
   sourceMap: true,
+  alias: config.alias,
   extends: ['vue2', 'lint'],
   postcss: function(webapck) {
     return [
@@ -98,12 +99,6 @@ var wrap = function(render) {
       .replace('<code>', '<code class="hljs">');
   };
 };
-
-cooking.add('resolve.alias', {
-  'main': path.join(__dirname, '../src'),
-  'packages': path.join(__dirname, '../packages'),
-  'examples': path.join(__dirname, '../examples')
-});
 
 var externals = {};
 Object.keys(Components).forEach(function(key) {

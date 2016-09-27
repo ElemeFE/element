@@ -5,19 +5,21 @@
   "main": "lib/element-ui.common.js",
   "files": [
     "lib",
-    "src"
+    "src",
+    "packages"
   ],
   "scripts": {
-    "build:file": "node bin/iconInit.js & node bin/build-entry.js",
-    "dev": "npm run bootstrap && npm run build:file && cooking watch -c scripts/cooking.demo.js -p",
-    "dist": "npm run lint && npm run build:file && del -f lib && cooking build -c scripts/cooking.conf.js,scripts/cooking.common.js,scripts/cooking.component.js -p && npm run build:theme",
-    "dist:all": "node bin/build-all.js && npm run build:theme",
+    "build:file": "node build/bin/iconInit.js & node build/bin/build-entry.js",
+    "dev": "npm run bootstrap && npm run build:file && cooking watch -c build/cooking.demo.js -p",
+    "dist": "npm run lint && npm run build:file && del -f lib && cooking build -c build/cooking.conf.js,build/cooking.common.js,build/cooking.component.js -p && npm run build:utils && npm run build:theme",
+    "dist:all": "node build/bin/build-all.js && npm run build:theme",
     "build:theme": "gulp build --gulpfile packages/theme-default/gulpfile.js && cp-cli packages/theme-default/lib lib/theme-default",
-    "deploy": "npm run build:file && cooking build -c scripts/cooking.demo.js -p && echo element.eleme.io>>examples/element-ui/CNAME && gh-pages -d examples/element-ui --remote eleme && del examples/element-ui",
-    "bootstrap": "npm i && lerna bootstrap --loglevel=error",
-    "pub": "npm run dist && kp",
+    "deploy": "npm run build:file && cooking build -c build/cooking.demo.js -p && echo element.eleme.io>>examples/element-ui/CNAME && gh-pages -d examples/element-ui --remote eleme && del examples/element-ui",
+    "bootstrap": "npm i && lerna bootstrap",
+    "pub": "sh build/release.sh",
     "pub:all": "npm run dist:all && lerna publish",
-    "lint": "eslint src/** packages/** scripts/** bin/** --ext .js,.vue --ignore-pattern node_modules"
+    "build:utils": "babel src/utils --out-dir lib/utils",
+    "lint": "eslint src/** packages/** build/** --ext .js,.vue --quiet"
   },
   "repository": {
     "type": "git",
@@ -33,6 +35,7 @@
     "url": "https://github.com/elemefe/element/issues"
   },
   "devDependencies": {
+    "babel-cli": "^6.14.0",
     "babel-core": "^6.14.0",
     "babel-helper-vue-jsx-merge-props": "^2.0.0",
     "babel-loader": "^6.2.5",
@@ -56,7 +59,6 @@
     "html-webpack-plugin": "^2.22.0",
     "json-loader": "^0.5.4",
     "json-templater": "^1.0.4",
-    "kanpai": "^0.7.0",
     "lerna": "2.0.0-beta.18",
     "markdown-it": "^6.1.1",
     "markdown-it-container": "^2.0.0",
