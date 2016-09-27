@@ -26,6 +26,13 @@
       @when justify-space-around {
         justify-content: space-around;
       }
+
+      @when align-middle {
+        align-items: center;
+      }
+      @when align-bottom {
+        align-items: flex-end;
+      }
     }
 
   }

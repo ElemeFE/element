@@ -7,7 +7,6 @@
       }
     }
     .el-col {
-      height: 36px;
       border-radius: 4px;
     }
     .bg-purple-dark {
@@ -20,8 +19,8 @@
       background: #e5e9f2;
     }
     .grid-content {
-      height: 100%;
       border-radius: 4px;
+      min-height: 36px;
     }
     .row-bg {
       padding: 10px 0;

@@ -10,6 +10,7 @@
 - 修复 vue-popper 引入 popper 路径错误
 - 修复 DatePicker 初始值是合法时间类型但无法设置成功的问题
 - 修复 Pagination 的图标没有正确切换样式, #163
+- 修复 Row 组件 align 属性不生效的问题
 
 #### 非兼容性更新
 - Menu 组件的 `unique-opend` 属性修正为 `unique-opened`
