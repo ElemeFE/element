@@ -25,6 +25,13 @@
     text-decoration: none;
   }
 
+  button, input, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    color: inherit;
+  }
+
   .hljs {
     line-height: 1.8;
     font-family: Menlo, Monaco, Consolas, Courier, monospace;
