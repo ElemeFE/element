@@ -87,6 +87,7 @@ $ npm run dist
 - Starter Kit
  - [element-starter](https://github.com/ElementUI/element-starter)
  - [element-cooking-starter](https://github.com/ElementUI/element-cooking-starter)
+ - [element-in-laravel-starter](https://github.com/ElementUI/element-in-laravel-starter)
 - [Design resources](https://github.com/ElementUI/Resources)
 - Boilerplate for bug reports
  - [CodePen](https://codepen.io/anon/pen/ozYpNA)
@@ -101,5 +102,3 @@ Please make sure to read the [Contributing Guide](https://github.com/ElemeFE/ele
 
 ## LICENSE
 MIT
-
-
