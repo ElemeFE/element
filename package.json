@@ -11,7 +11,7 @@
   "scripts": {
     "build:file": "node build/bin/iconInit.js & node build/bin/build-entry.js",
     "dev": "npm run bootstrap && npm run build:file && cooking watch -c build/cooking.demo.js -p",
-    "dist": "npm run lint && npm run build:file && del -f lib && cooking build -c build/cooking.conf.js,build/cooking.common.js,build/cooking.component.js -p && npm run build:utils && npm run build:theme",
+    "dist": "npm run clean && npm run build:file && npm run lint && cooking build -c build/cooking.conf.js,build/cooking.common.js,build/cooking.component.js -p && npm run build:utils && npm run build:theme",
     "dist:all": "node build/bin/build-all.js && npm run build:theme",
     "build:theme": "gulp build --gulpfile packages/theme-default/gulpfile.js && cp-cli packages/theme-default/lib lib/theme-default",
     "deploy": "npm run build:file && cooking build -c build/cooking.demo.js -p && echo element.eleme.io>>examples/element-ui/CNAME && gh-pages -d examples/element-ui --remote eleme && del examples/element-ui",
@@ -19,6 +19,7 @@
     "pub": "sh build/release.sh",
     "pub:all": "npm run dist:all && lerna publish",
     "build:utils": "babel src/utils --out-dir lib/utils",
+    "clean": "rimraf lib && rimraf packages/*/lib",
     "lint": "eslint src/**/*.js packages/**/*.{js,vue} build/**/*.js --quiet"
   },
   "repository": {
@@ -48,7 +49,6 @@
     "cooking-vue2": "^0.1.4",
     "cp-cli": "^1.0.2",
     "css-loader": "^0.24.0",
-    "del-cli": "^0.2.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
     "file-save": "^0.2.0",
@@ -66,6 +66,7 @@
     "postcss": "^5.1.2",
     "postcss-loader": "^0.11.1",
     "postcss-salad": "^1.0.5",
+    "rimraf": "^2.5.4",
     "style-loader": "^0.13.1",
     "theaterjs": "^3.0.0",
     "uppercamelcase": "^1.1.0",
