@@ -19,7 +19,7 @@
     "pub": "sh build/release.sh",
     "pub:all": "npm run dist:all && lerna publish",
     "build:utils": "babel src/utils --out-dir lib/utils",
-    "lint": "eslint src/** packages/** build/** --ext .js,.vue --quiet"
+    "lint": "eslint src/**/*.js packages/**/*.{js,vue} build/**/*.js --quiet"
   },
   "repository": {
     "type": "git",
