@@ -33,6 +33,10 @@
       }
     },
 
+    destroyed() {
+      this.$el.remove();
+    },
+
     watch: {
       name: {
         immediate: true,
