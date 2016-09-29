@@ -842,6 +842,7 @@
 | height | table 的高度，默认高度为空，即自动高度 | string | — | — |
 | stripe | 是否为斑马纹 table | boolean | — | false |
 | border | 是否带有纵向边框 | boolean | — | false |
+| fit | 列的宽度是否自撑开 | boolean | — | true |
 | selection-mode | 列表项选择模式 | string | single/multiple/none | none |
 | allow-no-selection | 单选模式是否允许选项为空 | boolean | — | false |
 | fixed-column-count | 固定列的个数 | number | — | 0 |
