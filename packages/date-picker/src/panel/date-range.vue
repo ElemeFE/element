@@ -129,7 +129,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import { nextMonth, prevMonth, $t, formatDate, parseDate } from '../util';
+  import { nextMonth, prevMonth, toDate, $t, formatDate, parseDate } from '../util';
 
   export default {
     computed: {
@@ -292,8 +292,8 @@
           this.minDate = null;
           this.maxDate = null;
         } else if (Array.isArray(newVal)) {
-          this.minDate = newVal[0];
-          this.maxDate = newVal[1];
+          this.minDate = toDate(newVal[0]);
+          this.maxDate = toDate(newVal[1]);
         }
       }
     },

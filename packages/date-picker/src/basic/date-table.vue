@@ -30,7 +30,7 @@
   </table>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import { $t, getFirstDayOfMonth, getDayCountOfMonth, getWeekNumber, getStartDateOfMonth, DAY_DURATION } from '../util';
   import { hasClass } from 'wind-dom/src/class';
   import Vue from 'vue';
