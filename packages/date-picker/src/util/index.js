@@ -24,9 +24,15 @@ export const merge = function(target) {
   return target;
 };
 
-export const formatDate = function(date, format) {
+export const toDate = function(date) {
   date = new Date(date);
-  if (isNaN(date.getTime())) return '';
+  if (isNaN(date.getTime())) return null;
+  return date;
+};
+
+export const formatDate = function(date, format) {
+  date = toDate(date);
+  if (!date) return '';
   return dateUtil.format(date, format || 'yyyy-MM-dd');
 };
 

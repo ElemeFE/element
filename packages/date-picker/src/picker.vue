@@ -290,9 +290,7 @@ export default {
       const type = this.type;
 
       if (HAVE_TRIGGER_TYPES.indexOf(type) !== -1) {
-        if (!this.pickerVisible) {
-          this.showPicker();
-        }
+        this.pickerVisible = !this.pickerVisible;
       }
       this.$emit('focus', this);
     },
@@ -451,7 +449,7 @@ export default {
           this.$emit('input', date);
 
           if (!visible) {
-            this.pickerVisible = this.picker.visible = false;
+            this.pickerVisible = this.picker.visible = !this.picker.visible;
           }
           this.picker.resetView && this.picker.resetView();
         });
@@ -467,10 +465,7 @@ export default {
       }
 
       this.$nextTick(() => {
-        if (this.popper) {
-          this.popper.update();
-          return;
-        }
+        if (this.popper) return;
 
         this.popper = new Popper(this.$refs.reference, this.picker.$el, {
           gpuAcceleration: false,
