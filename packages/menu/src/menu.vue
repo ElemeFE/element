@@ -84,7 +84,7 @@
           this.$emit('open', index, indexPath);
         }
       },
-      handleSelect(index, indexPath) {
+      handleSelect(index, indexPath, route) {
         this.activeIndex = index;
         this.$emit('select', index, indexPath);
 
@@ -100,7 +100,7 @@
         }
 
         if (this.router) {
-          this.$router.push(index);
+          this.$router.push(route || index);
         }
       }
     },
