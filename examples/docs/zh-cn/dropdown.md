@@ -125,6 +125,6 @@
 | text          | 菜单按钮文本      | string          |          —             |    —     |
 | type          | 菜单按钮类型，同 Button 组件   | string  |          —             |    —     |
 | trigger       | 触发下拉菜单的方式    | string  |    hover,click  |  hover |
-| icon-separate | 独立的下拉菜单按钮 | boolean         |     —       | false   |
+| icon-separate | 独立的下拉菜单按钮 | boolean         |     —       | true   |
 | size          | 菜单按钮尺寸，同 Button 组件     | string          | large, small, mini  |  —  |
 | menu-align    | 菜单水平对齐方向     | string          | start, end  | end |
