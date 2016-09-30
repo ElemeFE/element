@@ -57,7 +57,7 @@
 </script>
 
 <template>
-  <div class="el-tab-pane" v-if="show && $slots.default">
+  <div class="el-tab-pane" v-show="show && $slots.default">
     <slot></slot>
   </div>
 </template>
