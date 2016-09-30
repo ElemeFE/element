@@ -12,6 +12,10 @@
         type: String,
         required: true
       },
+      route: {
+        type: Object,
+        required: false
+      },
       disabled: {
         type: Boolean,
         required: false
@@ -24,7 +28,7 @@
     },
     methods: {
       handleClick() {
-        this.rootMenu.handleSelect(this.index, this.indexPath);
+        this.rootMenu.handleSelect(this.index, this.indexPath, this.route);
       }
     },
     created() {
