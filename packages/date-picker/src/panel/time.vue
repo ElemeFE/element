@@ -39,7 +39,9 @@
 
     props: {
       date: {
-        default: new Date()
+        default() {
+          return new Date();
+        }
       },
 
       visible: Boolean
