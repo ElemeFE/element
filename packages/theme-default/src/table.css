@@ -50,6 +50,7 @@
 
     & th {
       white-space: nowrap;
+      overflow: hidden;
     }
 
     & th, td {
@@ -57,7 +58,6 @@
       max-width: 250px;
       min-width: 0;
       box-sizing: border-box;
-      overflow: hidden;
       text-overflow: ellipsis;
       vertical-align: middle;
       position: relative;
@@ -100,10 +100,6 @@
 
     & td > div {
       box-sizing: border-box;
-    }
-
-    & td div {
-      display: block;
     }
 
     @e fixed {
@@ -180,7 +176,6 @@
     & th > .cell {
       position: relative;
       word-wrap: normal;
-      overflow: hidden;
       text-overflow: ellipsis;
       display: inline-block;
       line-height: 20px;
