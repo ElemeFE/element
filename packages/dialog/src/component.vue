@@ -36,6 +36,11 @@
         default: true
       },
 
+      lockScroll: {
+        type: Boolean,
+        default: true
+      },
+
       closeOnClickModal: {
         type: Boolean,
         default: true
