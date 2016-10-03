@@ -211,7 +211,7 @@ export default {
 
   watch: {
     pickerVisible(val) {
-      val === true ? this.showPicker() : this.hidePicker();
+      val ? this.showPicker() : this.hidePicker();
     },
     value(val) {
       this.dispatch('form-item', 'el.form.change');
@@ -289,8 +289,8 @@ export default {
     handleFocus() {
       const type = this.type;
 
-      if (HAVE_TRIGGER_TYPES.indexOf(type) !== -1) {
-        this.pickerVisible = !this.pickerVisible;
+      if (HAVE_TRIGGER_TYPES.indexOf(type) !== -1 && !this.pickerVisible) {
+        this.pickerVisible = true;
       }
       this.$emit('focus', this);
     },

@@ -28,7 +28,7 @@
   </transition>
 </template>
 
-<script type="text/ecmascript-6">
+<script type="text/babel">
   import { limitRange } from '../util';
   import Vue from 'vue';
 

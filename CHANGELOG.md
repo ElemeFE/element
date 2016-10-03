@@ -5,6 +5,7 @@
 *2016-XX-XX*
 
 - 修复 Tabs 切换后 Tab-panel 被销毁的问题
+- 修复 TimePicker 错误的隐藏面板
 - 修复 Table Cell 的样式, #204
 
 ### 1.0.0-rc.5
