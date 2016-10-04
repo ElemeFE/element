@@ -43,6 +43,9 @@
       modal: {
         default: true
       },
+      lockScroll: {
+        default: true
+      },
       showClose: {
         type: Boolean,
         default: true
@@ -79,14 +82,16 @@
 
         this.onClose && this.onClose();
 
-        setTimeout(() => {
-          if (this.modal && this.bodyOverflow !== 'hidden') {
-            document.body.style.overflow = this.bodyOverflow;
-            document.body.style.paddingRight = this.bodyPaddingRight;
-          }
-          this.bodyOverflow = null;
-          this.bodyPaddingRight = null;
-        }, 200);
+        if (this.lockScroll) {
+          setTimeout(() => {
+            if (this.modal && this.bodyOverflow !== 'hidden') {
+              document.body.style.overflow = this.bodyOverflow;
+              document.body.style.paddingRight = this.bodyPaddingRight;
+            }
+            this.bodyOverflow = null;
+            this.bodyPaddingRight = null;
+          }, 200);
+        }
         this.opened = false;
 
         if (!this.transition) {
