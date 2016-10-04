@@ -25,6 +25,7 @@
 - 修复 Pagination 的图标没有正确切换样式, #163
 - 修复 Row 组件 align 属性不生效的问题
 - 修复 Tabs 关闭标签页时对应 Tab-panel 没有移除的问题
+- 新增 Menu 组件中 MenuItem 的 route 属性
 
 #### 非兼容性更新
 - Menu 组件的 `unique-opend` 属性修正为 `unique-opened`
