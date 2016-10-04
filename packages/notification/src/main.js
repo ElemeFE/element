@@ -32,6 +32,18 @@ var Notification = function(options) {
   instances.push(instance);
 };
 
+['success', 'warning', 'info', 'error'].forEach(type => {
+  Notification[type] = options => {
+    if (typeof options === 'string') {
+      options = {
+        message: options
+      };
+    }
+    options.type = type;
+    return Notification(options);
+  };
+});
+
 Notification.close = function(id, userOnClose) {
   let index;
   let removedHeight;

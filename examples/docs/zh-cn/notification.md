@@ -33,18 +33,16 @@
       },
 
       open5() {
-        this.$notify({
+        this.$notify.info({
           title: '消息',
-          message: '这是一条消息的提示消息',
-          type: 'info'
+          message: '这是一条消息的提示消息'
         });
       },
 
       open6() {
-        this.$notify({
+        this.$notify.error({
           title: '错误',
-          message: '这是一条错误的提示消息',
-          type: 'error'
+          message: '这是一条错误的提示消息'
         });
       },
 
@@ -113,7 +111,7 @@
 
 带有 icon，常用来显示「成功、警告、消息、错误」类的系统消息
 
-::: demo Element 为 Notification 组件准备了四种通知类型：`success`, `warning`, `info`, `error`。通过`type`字段来设置，除此以外的值将被忽略。
+::: demo Element 为 Notification 组件准备了四种通知类型：`success`, `warning`, `info`, `error`。通过`type`字段来设置，除此以外的值将被忽略。同时，我们也为 Notification 的各种 type 注册了方法，可以在不传入`type`字段的情况下像`open5`和`open6`那样直接调用。
 ```html
 <template>
   <el-button
@@ -158,18 +156,16 @@
       },
 
       open5() {
-        this.$notify({
+        this.$notify.info({
           title: '消息',
-          message: '这是一条消息的提示消息',
-          type: 'info'
+          message: '这是一条消息的提示消息'
         });
       },
 
       open6() {
-        this.$notify({
+        this.$notify.error({
           title: '错误',
-          message: '这是一条错误的提示消息',
-          type: 'error'
+          message: '这是一条错误的提示消息'
         });
       }
     }
@@ -190,7 +186,7 @@ Element 为 `Vue.prototype` 添加了全局方法 `$notify`。因此在 vue inst
 import { Notification } from 'element-ui';
 ```
 
-此时调用方法为 `Notification(options)`。
+此时调用方法为 `Notification(options)`。我们也为每个 type 定义了各自的方法，如 `Notification.success(options)`。
 
 ### Options
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
