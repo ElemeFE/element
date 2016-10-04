@@ -5,7 +5,7 @@
     }
     .el-menu-vertical-demo {
       width: 200px;
-      height: 400px;
+      min-height: 400px;
     }
     .line {
       height: 1px;

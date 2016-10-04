@@ -64,11 +64,11 @@
         let openedMenus = this.openedMenus;
         if (openedMenus.indexOf(index) !== -1) return;
         if (this.uniqueOpened) {
-          openedMenus = openedMenus.filter(index => {
+          this.openedMenus = openedMenus.filter(index => {
             return indexPath.indexOf(index) !== -1;
           });
         }
-        openedMenus.push(index);
+        this.openedMenus.push(index);
       },
       closeMenu(index, indexPath) {
         this.openedMenus.splice(this.openedMenus.indexOf(index), 1);
@@ -106,9 +106,11 @@
     },
     mounted() {
       let index = this.activeIndex;
-      let indexPath = this.menuItems[index].indexPath;
+      if (index) {
+        let indexPath = this.menuItems[index].indexPath;
 
-      this.handleSelect(index, indexPath);
+        this.handleSelect(index, indexPath);
+      }
     }
   };
 </script>
