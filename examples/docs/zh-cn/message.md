@@ -20,10 +20,7 @@
       },
 
       open4() {
-        this.$message({
-          message: '错了哦，这是一条错误消息',
-          type: 'error'
-        });
+        this.$message.error('错了哦，这是一条错误消息');
       },
 
       open5() {
@@ -99,7 +96,7 @@
 
 用来显示「成功、警告、消息、错误」类的操作反馈。
 
-:::demo 当需要自定义更多属性时，Message 也可以接收一个对象为参数。比如，设置`type`字段可以定义不同的状态，默认为`info`。此时正文内容以`message`的值传入。
+:::demo 当需要自定义更多属性时，Message 也可以接收一个对象为参数。比如，设置`type`字段可以定义不同的状态，默认为`info`。此时正文内容以`message`的值传入。同时，我们也为 Message 的各种 type 注册了方法，可以在不传入`type`字段的情况下像`open4`那样直接调用。
 ```html
 <template>
   <el-button :plain="true" @click.native="open2">成功</el-button>
@@ -126,10 +123,7 @@
       },
 
       open4() {
-        this.$message({
-          message: '错了哦，这是一条错误消息',
-          type: 'error'
-        });
+        this.$message.error('错了哦，这是一条错误消息');
       }
     }
   }
@@ -201,7 +195,7 @@ element 为 Vue.prototype 添加了全局方法 $message。因此在 vue instanc
 import { Message } from 'element-ui';
 ```
 
-此时调用方法为 `Message(options)`。
+此时调用方法为 `Message(options)`。我们也为每个 type 定义了各自的方法，如 `Message.success(options)`。
 
 ### Options
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |

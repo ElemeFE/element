@@ -7,6 +7,7 @@
 - 修复 Tabs 切换后 Tab-panel 被销毁的问题
 - 修复 TimePicker 错误的隐藏面板
 - 修复 Table Cell 的样式, #204
+- 为 Notification 和 Message 的不同 type 添加独立的调用方法
 - 为 Message Box 和 Dialog 添加 lockScroll 属性，用于定义是否在弹框出现时将 body 滚动锁定
 - 新增 Input textarea 类型的 rows, autosize 属性
 
