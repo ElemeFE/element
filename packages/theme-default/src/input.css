@@ -161,11 +161,10 @@
     @e inner {
       display: block;
       resize: vertical;
-      padding: 8px 5px;
-      line-height: normal;
+      padding: 5px 7px;
+      line-height: 1.5;
       box-sizing: border-box;
       width: 100%;
-      min-height: 88px;
       font-size: var(--font-size-base);
       color: var(--input-color);
       background-color: #fff;

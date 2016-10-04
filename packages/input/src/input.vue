@@ -13,20 +13,20 @@
         <slot name="prepend"></slot>
       </div>
       <input
+        class="el-input__inner"
+        v-model="currentValue"
         :type="type"
         :name="name"
-        class="el-input__inner"
         :placeholder="placeholder"
-        v-model="currentValue"
         :disabled="disabled"
         :readonly="readonly"
-        @focus="$emit('onfocus', currentValue)"
-        @blur="handleBlur"
         :number="number"
         :maxlength="maxlength"
         :minlength="minlength"
         :autocomplete="autoComplete"
         ref="input"
+        @focus="$emit('onfocus', currentValue)"
+        @blur="handleBlur"
       >
       <!-- input 图标 -->
       <i class="el-input__icon" :class="[icon ? 'el-icon-' + icon : '']" v-if="icon"></i>
@@ -36,12 +36,27 @@
         <slot name="append"></slot>
       </div>
     </template>
-    <!-- 写成垂直的方式会导致 placeholder 失效, 蜜汁bug -->
-    <textarea v-else v-model="currentValue" class="el-textarea__inner" :name="name" :placeholder="placeholder" :disabled="disabled" :readonly="readonly" @focus="$emit('onfocus', currentValue)" @blur="handleBlur"></textarea>
+    <textarea
+      v-else
+      class="el-textarea__inner"
+      v-model="currentValue"
+      ref="textarea"
+      :name="name"
+      :placeholder="placeholder"
+      :disabled="disabled"
+      :style="textareaStyle"
+      :readonly="readonly"
+      :rows="rows"
+      :maxlength="maxlength"
+      :minlength="minlength"
+      @focus="$emit('onfocus', currentValue)"
+      @blur="handleBlur">
+    </textarea>
   </div>
 </template>
 <script>
   import emitter from 'main/mixins/emitter';
+  import calcTextareaHeight from './calcTextareaHeight';
 
   export default {
     name: 'ElInput',
@@ -82,6 +97,14 @@
         type: Boolean,
         default: false
       },
+      autosize: {
+        type: [Boolean, Object],
+        default: false
+      },
+      rows: {
+        type: Number,
+        default: 2
+      },
       autoComplete: {
         type: String,
         default: 'off'
@@ -98,17 +121,31 @@
 
       inputSelect() {
         this.$refs.input.select();
+      },
+      resizeTextarea() {
+        var { autosize, type } = this;
+        if (!autosize || type !== 'textarea') {
+          return;
+        }
+        const minRows = autosize ? autosize.minRows : null;
+        const maxRows = autosize ? autosize.maxRows : null;
+        this.textareaStyle = calcTextareaHeight(this.$refs.textarea, minRows, maxRows);
       }
     },
 
     data() {
       return {
-        currentValue: ''
+        currentValue: this.value,
+        textareaStyle: {}
       };
     },
 
     created() {
       this.$on('inputSelect', this.inputSelect);
+    },
+
+    mounted() {
+      this.resizeTextarea();
     },
 
     computed: {
@@ -118,16 +155,13 @@
     },
 
     watch: {
-      'value': {
-        immediate: true,
-        handler(val) {
-          this.currentValue = val;
-        }
+      'value'(val, oldValue) {
+        this.currentValue = val;
+        this.resizeTextarea();
       },
 
       'currentValue'(val) {
         this.$emit('input', val);
-        this.$emit('onchange', val);
         this.dispatch('form-item', 'el.form.change', [val]);
       }
     }

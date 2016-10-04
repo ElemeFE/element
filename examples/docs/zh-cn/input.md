@@ -240,6 +240,8 @@
 ```html
 <el-input
   type="textarea"
+  placeholder="请输入内容"
+  :autosize="{minRows: 2, maxRows: 5}"
   v-model="textarea">
 </el-input>
 ```
@@ -625,15 +627,17 @@
 
 | 参数          | 说明            | 类型            | 可选值                 | 默认值   |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
-| type         | 同原生的 input 的 type 属性，如果为 textarea 则显示为 textarea   | string  | — | — |
+| type         | 同原生的 input 的 type 属性，另外提供 type="textarea"   | string  | — | — |
 | value         | 绑定值           | string, number  | — | — |
 | maxlength     | 最大输入长度      | number          |  —  | — |
 | minlength     | 最小输入长度      | number          | — | — |
 | placeholder   | 输入框占位文本    | string          | — | — |
 | disabled      | 禁用            | boolean         | — | false   |
-| size          | 输入框尺寸       | string          | large, small, mini  | — |
+| size          | 输入框尺寸，只在 `type!="textarea"` 时有效      | string          | large, small, mini  | — |
 | icon          | 输入框尾部图标    | string          | — | — |
-| number        | 指定model值为number类型  |  boolean | — |  false   |
+| number        | 指定 model 值为 number 类型  |  boolean | — |  false   |
+| rows          | 输入框行数，只对 `type="textarea"` 有效  |  number | — |  2   |
+| autosize      | 自适应内容高度，只对 `type="textarea"` 有效，可传入对象，如，{ minRows: 2, maxRows: 6 }  |  boolean/object | — |  false   |
 
 ### Autocomplete API
 
