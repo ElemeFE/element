@@ -215,6 +215,7 @@ import { MessageBox } from 'element-ui';
 | message | MessageBox 消息正文内容 | string | — | — |
 | type | 消息类型，用于显示图标 | string | success/info/<br>warning/error | — |
 | lockScroll | 是否在 MessageBox 出现时将 body 滚动锁定 | boolean | — | true |
+| zIndex | MessageBox 遮罩层 z-index 的值（MessageBox 自身的 z-index 会在其基础上加 1） | number | — | 1000 |
 | showCancelButton | 是否显示取消按钮 | boolean | — | false（以 confirm 和 prompt 方式调用时为 true） |
 | showConfirmButton | 是否显示确定按钮 | boolean | — | true |
 | cancelButtonText | 取消按钮的文本内容 | string | — | 取消 |
