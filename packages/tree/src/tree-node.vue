@@ -46,11 +46,31 @@
         $tree: null,
         expanded: false,
         childrenRendered: false,
-        showCheckbox: false
+        showCheckbox: false,
+        oldChecked: null,
+        oldIndeterminate: null
       };
     },
 
+    watch: {
+      'node.indeterminate'(val) {
+        this.handleSelectChange(this.node.checked, val);
+      },
+
+      'node.checked'(val) {
+        this.handleSelectChange(val, this.node.indeterminate);
+      }
+    },
+
     methods: {
+      handleSelectChange(checked, indeterminate) {
+        if (this.oldChecked !== checked && this.oldIndeterminate !== indeterminate) {
+          this.$tree.$emit('check-change', this.node.data, checked, indeterminate);
+        }
+        this.oldChecked = checked;
+        this.indeterminate = indeterminate;
+      },
+
       handleExpandIconClick(event) {
         let target = event.target;
         if (target.tagName.toUpperCase() !== 'DIV' &&
@@ -65,6 +85,7 @@
             this.childrenRendered = true;
           });
         }
+        this.$tree.$emit('node-click', this.node.data);
       },
 
       handleUserClick() {
