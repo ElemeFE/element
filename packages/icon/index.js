@@ -1,1 +1,1 @@
-module.exports = require('./src/icon');
+module.exports = require('./src/icon.vue');
