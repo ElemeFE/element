@@ -59,17 +59,23 @@
 :::demo 通过`text`属性来设置按钮文字。默认条件下，他由一个主要按钮和一个下拉按钮组成，`el-dropdown`中的主要按钮同样可以设置点击事件，只要使用`mainclick`事件即可。默认情况下，下拉按钮只要`hover`即可，无需点击也会显示下拉菜单。
 
 ```html
-<el-dropdown text="下拉菜单" type="text" :icon-separate="false" @mainclick="handleMainClick()">
-  <el-dropdown-item>黄金糕</el-dropdown-item>
-  <el-dropdown-item>狮子头</el-dropdown-item>
-  <el-dropdown-item>螺蛳粉</el-dropdown-item>
-  <el-dropdown-item>双皮奶</el-dropdown-item>
-  <el-dropdown-item>蚵仔煎</el-dropdown-item>
+<el-dropdown>
+  <!-- <el-button slot="trigger" type="primary">
+    下拉菜单<i class="el-dropdown__icon el-icon-caret-bottom"></i>
+  </el-button> -->
+  <el-input slot="trigger">sss</el-input>
+  <el-dropdown-menu slot="sss">
+    <el-dropdown-item>黄金糕</el-dropdown-item>
+    <el-dropdown-item>狮子头</el-dropdown-item>
+    <el-dropdown-item>螺蛳粉</el-dropdown-item>
+    <el-dropdown-item>双皮奶</el-dropdown-item>
+    <el-dropdown-item>蚵仔煎</el-dropdown-item>
+  </el-dropdown-menu>
 </el-dropdown>
 ```
 :::
 
-### 触发对象
+<!-- ### 触发对象
 
 可使用按钮触发下拉菜单。
 
@@ -117,7 +123,7 @@
   </el-dropdown>
 </div>
 ```
-:::
+::: -->
 
 ### Attributes
 | 参数          | 说明            | 类型            | 可选值                 | 默认值   |

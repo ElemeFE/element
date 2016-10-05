@@ -3,6 +3,7 @@ import Pagination from '../packages/pagination/index.js';
 import Dialog from '../packages/dialog/index.js';
 import Autocomplete from '../packages/autocomplete/index.js';
 import Dropdown from '../packages/dropdown/index.js';
+import DropdownMenu from '../packages/dropdown-menu/index.js';
 import DropdownItem from '../packages/dropdown-item/index.js';
 import Menu from '../packages/menu/index.js';
 import Submenu from '../packages/submenu/index.js';
@@ -62,6 +63,7 @@ const install = function(Vue) {
   Vue.component(Dialog.name, Dialog);
   Vue.component(Autocomplete.name, Autocomplete);
   Vue.component(Dropdown.name, Dropdown);
+  Vue.component(DropdownMenu.name, DropdownMenu);
   Vue.component(DropdownItem.name, DropdownItem);
   Vue.component(Menu.name, Menu);
   Vue.component(Submenu.name, Submenu);
@@ -133,6 +135,7 @@ module.exports = {
   Dialog,
   Autocomplete,
   Dropdown,
+  DropdownMenu,
   DropdownItem,
   Menu,
   Submenu,
