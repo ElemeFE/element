@@ -36,6 +36,7 @@
     "url": "https://github.com/elemefe/element/issues"
   },
   "devDependencies": {
+    "async-validator": "^1.6.6",
     "babel-cli": "^6.14.0",
     "babel-core": "^6.14.0",
     "babel-helper-vue-jsx-merge-props": "^2.0.0",
@@ -54,6 +55,8 @@
     "file-save": "^0.2.0",
     "gh-pages": "^0.11.0",
     "gulp": "^3.9.1",
+    "gulp-cssmin": "^0.1.7",
+    "gulp-postcss": "^6.2.0",
     "highlight.js": "^9.3.0",
     "html-loader": "^0.4.3",
     "html-webpack-plugin": "^2.22.0",
@@ -69,6 +72,7 @@
     "rimraf": "^2.5.4",
     "style-loader": "^0.13.1",
     "theaterjs": "^3.0.0",
+    "throttle-debounce": "^1.0.1",
     "uppercamelcase": "^1.1.0",
     "url-loader": "^0.5.7",
     "vue": "^2.0.1",
