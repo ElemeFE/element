@@ -14,6 +14,7 @@
       <input
         type="text"
         class="el-select__input"
+        @focus="visible = true"
         @keyup="managePlaceholder"
         @keydown="resetInputState"
         @keydown.down.prevent="navigateOptions('next')"
