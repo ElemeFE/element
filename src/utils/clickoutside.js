@@ -11,19 +11,24 @@ const clickoutsideContext = '@@clickoutsideContext';
 export default {
   bind(el, binding, vnode) {
     const documentHandler = function(e) {
-      if (vnode.context && !el.contains(e.target)) {
+      if (!vnode.context || el.contains(e.target)) return;
+      if (binding.expression) {
         vnode.context[el[clickoutsideContext].methodName]();
+      } else {
+        el[clickoutsideContext].bindingFn();
       }
     };
     el[clickoutsideContext] = {
       documentHandler,
-      methodName: binding.expression
+      methodName: binding.expression,
+      bindingFn: binding.value
     };
     document.addEventListener('click', documentHandler);
   },
 
   update(el, binding) {
     el[clickoutsideContext].methodName = binding.expression;
+    el[clickoutsideContext].bindingFn = binding.value;
   },
 
   unbind(el) {
