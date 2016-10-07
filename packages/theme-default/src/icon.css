@@ -69,6 +69,13 @@
   animation: rotating 1s linear infinite;
 }
 
+.el-icon-right {
+  margin-left: 5px;
+}
+.el-icon-left {
+  margin-right: 5px;
+}
+
 @keyframes rotating {
   0% {
     transform: rotateZ(0deg);

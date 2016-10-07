@@ -35,16 +35,7 @@
       border: 0;
     }
 
-    & .el-icon-right {
-      margin-left: 5px;
-    }
-    & .el-icon-left {
-      margin-right: 5px;
-    }
-
     & [class*="el-icon-"] {
-      /*line-height: 0.9;*/
-      
       & + span {
         margin-left: 5px;
       }

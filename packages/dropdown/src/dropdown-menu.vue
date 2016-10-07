@@ -1,5 +1,5 @@
 <template>
-  <ul class="el-dropdown__menu" transition="md-fade-bottom">
+  <ul class="el-dropdown__menu">
     <slot></slot>
   </ul>
 </template>
@@ -7,6 +7,11 @@
   import Popper from 'main/utils/popper';
 
   export default {
+    name: 'ElDropdownMenu',
+
+    props: {
+      visible: Boolean
+    },
     data() {
       return {
         popper: null
@@ -15,13 +20,6 @@
     computed: {
       menuAlign() {
         return this.$parent.menuAlign;
-      }
-    },
-    methods: {
-      updatePopper() {
-        if (this.popper) {
-          this.popper.update();
-        }
       }
     },
     mounted() {

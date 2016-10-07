@@ -4,6 +4,7 @@
   "dialog": "./packages/dialog/index.js",
   "autocomplete": "./packages/autocomplete/index.js",
   "dropdown": "./packages/dropdown/index.js",
+  "dropdown-menu": "./packages/dropdown-menu/index.js",
   "dropdown-item": "./packages/dropdown-item/index.js",
   "menu": "./packages/menu/index.js",
   "submenu": "./packages/submenu/index.js",
