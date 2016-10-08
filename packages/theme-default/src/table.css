@@ -55,7 +55,6 @@
 
     & th, td {
       height: 20px;
-      max-width: 250px;
       min-width: 0;
       box-sizing: border-box;
       text-overflow: ellipsis;
