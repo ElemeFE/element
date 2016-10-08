@@ -78,32 +78,32 @@
 </style>
 <template>
   <div class="page-container page-resource">
-    <h2>资源</h2>
-    <p>这里提供 Element 相关设计资源和设计工具的下载，更多设计资源正在整理和完善中。</p>
+    <h2><%= 1 ></h2>
+    <p><%= 2 ></p>
     <div class="cards">
       <ul class="container">
         <li>
           <div class="card">
             <img src="~examples/assets/images/Axure-Components.svg" alt="">
-            <h3>Axure Components</h3>
-            <p>通过在 Axure 中导入 Element 组件库，可以在交互设计阶段方便地调用常用的组件</p>
-            <a href="https://github.com/ElementUI/Resources/raw/master/Element_Components_v1.1.0.rplib">下载</a>
+            <h3><%= 3 ></h3>
+            <p><%= 4 ></p>
+            <a href="https://github.com/ElementUI/Resources/raw/master/Element_Components_v1.1.0.rplib"><%= 5 ></a>
           </div>
         </li>
         <li>
           <div class="card">
             <img src="~examples/assets/images/Sketch-Template.svg" alt="">
-            <h3>Sketch Template</h3>
-            <p>从 Element Template 快速调用常用组件，在提升设计效率的同时，保证统一的视觉风格</p>
-            <a href="https://github.com/ElementUI/Resources/raw/master/Element%20UI%20Kit_v1.3.sketch">下载</a>
+            <h3><%= 6 ></h3>
+            <p><%= 7 ></p>
+            <a href="https://github.com/ElementUI/Resources/raw/master/Element%20UI%20Kit_v1.3.sketch"><%= 5 ></a>
           </div>
         </li>
         <li>
           <div class="card">
             <img src="~examples/assets/images/Module.svg" alt="">
-            <h3>组件交互文档</h3>
-            <p>进一步查看 Element 交互文档，从一个较为微观的角度详细地了解各个组件的交互细节</p>
-            <a href="https://github.com/ElementUI/Resources/raw/master/Element%20Components%20Documentation.zip">下载</a>
+            <h3><%= 8 ></h3>
+            <p><%= 9 ></p>
+            <a href="https://github.com/ElementUI/Resources/raw/master/Element%20Components%20Documentation.zip"><%= 5 ></a>
           </div>
         </li>
       </ul>

@@ -26,57 +26,57 @@
 </style>
 <template>
   <div>
-    <h2>设计原则</h2>
+    <h2><%= 1 ></h2>
     <el-row :gutter="14" class="cards">
       <el-col :span="6">  
         <div class="card">
           <img src="~examples/assets/images/consistency.png" alt="Consistency">
-          <h4>一致</h4>
-          <span>Consistency</span>
+          <h4><%= 2 ></h4>
+          <span><%= 3 ></span>
         </div>
       </el-col>
       <el-col :span="6">  
         <div class="card">
           <img src="~examples/assets/images/feedback.png" alt="Feedback">
-          <h4>反馈</h4>
-          <span>Feedback</span>
+          <h4><%= 4 ></h4>
+          <span><%= 5 ></span>
         </div>
       </el-col>
       <el-col :span="6">  
         <div class="card">
           <img src="~examples/assets/images/efficiency.png" alt="Efficiency">
-          <h4>效率</h4>
-          <span>Efficiency</span>
+          <h4><%= 6 ></h4>
+          <span><%= 7 ></span>
         </div>
       </el-col>
       <el-col :span="6">  
         <div class="card">
           <img src="~examples/assets/images/controllability.png" alt="Controllability">
-          <h4>可控</h4>
-          <span>Controllability</span>
+          <h4><%= 8 ></h4>
+          <span><%= 9 ></span>
         </ul>
       </el-col>
     </el-row>
-    <h3>一致性 Consistency</h3>
+    <h3><%= 10 ></h3>
     <ul>
-      <li><strong>与现实生活一致：</strong>与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</li>
-      <li><strong>在界面中一致：</strong>所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</li>
+      <li><strong><%= 11 ></strong><%= 12 ></li>
+      <li><strong><%= 13 ></strong><%= 14 ></li>
     </ul>
-    <h3>反馈 Feedback</h3>
+    <h3><%= 15 ></h3>
     <ul>
-      <li><strong>控制反馈：</strong>通过界面样式和交互动效让用户可以清晰的感知自己的操作；</li>
-      <li><strong>页面反馈：</strong>操作后，通过页面元素的变化清晰地展现当前状态。</li>
+      <li><strong><%= 16 ></strong><%= 17 ></li>
+      <li><strong><%= 18 ></strong><%= 19 ></li>
     </ul>
-    <h3>效率 Efficiency</h3>
+    <h3><%= 20 ></h3>
     <ul>
-      <li><strong>简化流程：</strong>设计简洁直观的操作流程；</li>
-      <li><strong>清晰明确：</strong>语言表达清晰且表意明确，让用户快速理解进而作出决策；</li>
-      <li><strong>帮助用户识别：</strong>界面简单直白，让用户快速识别而非回忆，减少用户记忆负担。</li>
+      <li><strong><%= 21 ></strong><%= 22 ></li>
+      <li><strong><%= 23 ></strong><%= 24 ></li>
+      <li><strong><%= 25 ></strong><%= 26 ></li>
     </ul>
-    <h3>可控 Controllability</h3>
+    <h3><%= 27 ></h3>
     <ul>
-      <li><strong>用户决策：</strong>根据场景可给予用户操作建议或安全提示，但不能代替用户进行决策；</li>
-      <li><strong>结果可控：</strong>用户可以自由的进行操作，包括撤销、回退和终止当前操作等。</li>
+      <li><strong><%= 28 ></strong><%= 29 ></li>
+      <li><strong><%= 30 ></strong><%= 31 ></li>
     </ul>
   </div>
 </template>

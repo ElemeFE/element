@@ -64,11 +64,11 @@
         navsData: [
           {
             path: '/design',
-            name: '设计原则'
+            name: '<%= 1 >'
           },
           {
             path: '/nav',
-            name: '导航'
+            name: '<%= 2 >'
           }
         ]
       };

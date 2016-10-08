@@ -76,42 +76,42 @@
 </style>
 <template>
   <div>
-    <h2>导航</h2>
+    <h2><%= 1 ></h2>
     <div class="block">
-      <p>导航可以解决用户在访问页面时：在哪里，去哪里，怎样去的问题。一般导航会有「侧栏导航」和「顶部导航」2 种类型。</p>
+      <p><%= 2 ></p>
     </div>
     <div class="block">
-      <h3>选择合适的导航</h3>
-      <p>选择合适的导航可以让用户在产品的使用过程中非常流畅,相反若是不合适就会引起用户操作不适（方向不明确），以下是「侧栏导航」和 「顶部导航」的区别。</p>
+      <h3><%= 3 ></h3>
+      <p><%= 4 ></p>
     </div>
     <div class="block">
-      <h3>侧栏导航</h3>
+      <h3><%= 5 ></h3>
       <el-row :gutter="20">
         <el-col :span="9">
-          <p>可将导航栏固定在左侧，提高导航可见性，方便页面之间切换；顶部可放置常用工具，如搜索条、帮助按钮、通知按钮等。适用于中后台的管理型、工具型网站。</p>
+          <p><%= 6 ></p>
         </el-col>
         <el-col :span="15" class="nav-demos">
-          <img src="~examples/assets/images/navbar_1.png" alt="一级类目" @click="enlarge(846, $event)">
-          <h5>一级类目</h5>
-          <p>适用于结构简单的网站：只有一级页面时，不需要使用面包屑。</p>
-          <img src="~examples/assets/images/navbar_2.png" alt="二级类目" @click="enlarge(846, $event)">
-          <h5>二级类目</h5>
-          <p>侧栏中最多可显示两级导航；当使用二级导航时，我们建议搭配使用面包屑，方便用户定位自己的位置和快速返回。</p>
-          <img src="~examples/assets/images/navbar_3.png" alt="三级类目" @click="enlarge(846, $event)">
-          <h5>三级类目</h5>
-          <p>适用于较复杂的工具型后台，左侧栏为一级导航，中间栏可显示其对应的二级导航，也可放置其他的工具型选项。</p>
+          <img src="~examples/assets/images/navbar_1.png" alt="<%= 7 >" @click="enlarge(846, $event)">
+          <h5><%= 7 ></h5>
+          <p><%= 8 ></p>
+          <img src="~examples/assets/images/navbar_2.png" alt="<%= 9 >" @click="enlarge(846, $event)">
+          <h5><%= 9 ></h5>
+          <p><%= 10 ></p>
+          <img src="~examples/assets/images/navbar_3.png" alt="<%= 11 >" @click="enlarge(846, $event)">
+          <h5><%= 11 ></h5>
+          <p><%= 12 ></p>
         </el-col>
       </el-row>
     </div>
     <div class="block">
-      <h3>顶部导航</h3>
+      <h3><%= 13 ></h3>
       <el-row>
         <el-col :span="10">
-          <p>顺应了从上至下的正常浏览顺序，方便浏览信息；顶部宽度限制了导航的数量和文本长度。</p>
+          <p><%= 14 ></p>
         </el-col>
         <el-col :span="14" class="nav-demos">
           <img src="~examples/assets/images/navbar_0.png" alt="" @click="enlarge(846, $event)">
-          <p>￼适用于导航较少，页面篇幅较长的网站；</p>
+          <p><%= 15 ></p>
         </el-col>
       </el-row>
     </div>
