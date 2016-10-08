@@ -75,6 +75,8 @@ export default class Node {
 
   setData(data) {
     this.data = data;
+    this.children = [];
+
     let children;
     if (this.level === -1 && this.data instanceof Array) {
       children = this.data;
@@ -231,6 +233,7 @@ export default class Node {
       const resolve = (children) => {
         this.loaded = true;
         this.loading = false;
+        this.children = [];
 
         this.doCreateChildren(children, defaultProps);
 
