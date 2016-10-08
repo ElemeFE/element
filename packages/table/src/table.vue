@@ -25,6 +25,7 @@
   import debounce from 'throttle-debounce/debounce';
   import { getScrollBarWidth, orderBy } from './util';
   import objectAssign from 'object-assign';
+  import { addResizeListener, removeResizeListener } from './resize-event';
 
   let gridIdSeed = 1;
   let GUTTER_WIDTH;
@@ -299,10 +300,10 @@
         this.$calcColumns();
 
         if (!this.$ready && this.fit) {
-          this.windowResizeListener = throttle(100, () => {
+          this.windowResizeListener = throttle(50, () => {
             this.$calcColumns();
           });
-          window.addEventListener('resize', this.windowResizeListener);
+          addResizeListener(this.$el, this.windowResizeListener);
         }
 
         this.$nextTick(() => {
@@ -395,7 +396,7 @@
       }
 
       if (this.windowResizeListener) {
-        window.removeEventListener('resize', this.windowResizeListener);
+        removeResizeListener(this.$el, this.windowResizeListener);
       }
     },
 
