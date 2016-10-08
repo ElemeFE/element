@@ -6,7 +6,7 @@ var path = require('path');
 
 var OUTPUT_PATH = path.join(__dirname, '../../src/index.js');
 var IMPORT_TEMPLATE = 'import {{name}} from \'../packages/{{package}}/index.js\';';
-var ISNTALL_COMPONENT_TEMPLATE = '  Vue.component({{name}}.name, {{name}});';
+var INSTALL_COMPONENT_TEMPLATE = '  Vue.component({{name}}.name, {{name}});';
 var MAIN_TEMPLATE = `{{include}}
 
 const install = function(Vue) {
@@ -52,8 +52,8 @@ ComponentNames.forEach(name => {
     package: name
   }));
 
-  if (['Loading', 'MessageBox', 'Notification'].indexOf(componentName) === -1) {
-    installTemplate.push(render(ISNTALL_COMPONENT_TEMPLATE, {
+  if (['Loading', 'MessageBox', 'Notification', 'Message'].indexOf(componentName) === -1) {
+    installTemplate.push(render(INSTALL_COMPONENT_TEMPLATE, {
       name: componentName,
       component: name
     }));
