@@ -110,7 +110,7 @@
   </transition>
 </template>
 
-<script type="text/ecmascript-6">
+<script type="text/babel">
   import { $t, formatDate, parseDate } from '../util';
 
   export default {

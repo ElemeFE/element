@@ -2,7 +2,15 @@
   module.exports = {
     data() {
       return {
+        pickerOptions0: {
+          disabledDate(time) {
+            return time < Date.now();
+          }
+        },
         pickerOptions1: {
+          disabledDate(time) {
+            return time < Date.now();
+          },
           shortcuts: [{
             text: '今天',
             onClick(picker) {
@@ -51,7 +59,7 @@
             }
           }]
         },
-        value1: '2016-08-10',
+        value1: '',
         value2: '',
         value3: '',
         value4: '',
@@ -95,7 +103,7 @@
 
 以「日」为基本单位，基础的日期选择控件
 
-:::demo 基本单位由`type`属性指定。快捷选项需配置`picker-options`对象中的`shortcuts`
+:::demo 基本单位由`type`属性指定。快捷选项需配置`picker-options`对象中的`shortcuts`，禁用日期通过 `disabledDate` 设置，传入函数
 ```html
 <template>
   <div class="block">
@@ -103,7 +111,8 @@
     <el-date-picker
       v-model="value1"
       type="date"
-      placeholder="选择日期">
+      placeholder="选择日期"
+      :picker-options="pickerOptions0">
     </el-date-picker>
   </div>
   <div class="block">
@@ -121,6 +130,11 @@
   export default {
     data() {
       return {
+        pickerOptions0: {
+          disabledDate(time) {
+            return time < Date.now();
+          }
+        },
         pickerOptions1: {
           shortcuts: [{
             text: '今天',
@@ -262,8 +276,14 @@
 | placeholder | 占位内容 | string | — | — |
 | type | 显示类型 | string | year/month/date/datetime/week | date |
 | format | 时间日期格式化 | string | 年 `yyyy`，月 `MM`，日 `dd`，<br>小时 `HH`，分 `mm`，秒 `ss` | yyyy-MM-dd |
-| shortcuts | 快捷选项列表，配置信息<br>查看下表 | object[] | — | — |
-| align | 对齐方式 | left, center, right | left |
+| align | 对齐方式 | string | left, center, right | left |
+|picker-options | 当前时间日期选择器特有的选项<br>参考下表 | object |  — | {} |
+
+### Picker Options
+| 参数      | 说明          | 类型      | 可选值                           | 默认值  |
+|---------- |-------------- |---------- |--------------------------------  |-------- |
+| shortcuts | 设置快捷选项，需要传入 { text, onClick } 对象<br>用法参考 demo 或下表 | Object[] | - | - |
+| disabledDate | 设置禁用状态，参数为当前日期，要求返回 Boolean | Function | - | - |
 
 ### Shortcuts
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
