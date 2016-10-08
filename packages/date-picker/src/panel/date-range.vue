@@ -85,6 +85,7 @@
               :min-date="minDate"
               :max-date="maxDate"
               :range-state="rangeState"
+              :disabled-date="disabledDate"
               @changerange="handleChangeRange"
               @pick="handleRangePick">
             </date-table>
@@ -109,6 +110,7 @@
               :min-date="minDate"
               :max-date="maxDate"
               :range-state="rangeState"
+              :disabled-date="disabledDate"
               @changerange="handleChangeRange"
               @pick="handleRangePick"></date-table>
           </div>
@@ -128,7 +130,7 @@
   </transition>
 </template>
 
-<script type="text/ecmascript-6">
+<script type="text/babel">
   import { nextMonth, prevMonth, toDate, $t, formatDate, parseDate } from '../util';
 
   export default {
@@ -265,6 +267,7 @@
         shortcuts: '',
         value: '',
         visible: '',
+        disabledDate: '',
         leftTimePickerVisible: false,
         rightTimePickerVisible: false
       };

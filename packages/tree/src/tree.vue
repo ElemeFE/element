@@ -68,6 +68,12 @@
       }
     },
 
+    watch: {
+      data(newVal) {
+        this.tree.root.setData(newVal);
+      }
+    },
+
     methods: {
       getCheckedNodes(leafOnly) {
         return this.tree.getCheckedNodes(leafOnly);
