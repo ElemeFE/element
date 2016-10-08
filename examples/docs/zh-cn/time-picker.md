@@ -143,7 +143,8 @@
 | readonly | 只读 | boolean | — | false |
 | placeholder | 占位内容 | string | — | — |
 | format | 时间格式化 | string | 小时：`HH`，分：`mm`，秒：`ss` | 'HH:mm:ss' |
-| picker-options | 当前时间日期选择器特有的选项，参考下表 | object | — | {} |
+| align | 对齐方式 | string | left, center, right | left |
+| picker-options | 当前时间日期选择器特有的选项<br>参考下表 | object | — | {} |
 
 ### Time Select Options
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
