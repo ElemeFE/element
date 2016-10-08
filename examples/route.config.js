@@ -67,7 +67,7 @@ let resourceRoute = {
 let indexRoute = {
   path: '/',
   name: '首页',
-  component: require('./pages/index.vue')
+  component: require('./pages/zh-cn/index.vue')
 };
 
 route.route = route.route.concat([indexRoute, guideRoute, resourceRoute]);
