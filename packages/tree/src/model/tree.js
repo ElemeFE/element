@@ -28,12 +28,10 @@ export default class Tree {
   getCheckedNodes(leafOnly) {
     const checkedNodes = [];
     const walk = function(node) {
-      const children = node.children;
+      const children = node.root ? node.root.children : node.children;
 
       children.forEach(function(child) {
-        if ((!leafOnly && child.checked) || (leafOnly && !child.hasChild && child.checked)) {
-          checkedNodes.push(child.data);
-        } else {
+        if ((!leafOnly && child.checked) || (leafOnly && child.isLeaf && child.checked)) {
           checkedNodes.push(child.data);
         }
 

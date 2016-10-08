@@ -58,16 +58,21 @@
 
   export default {
     methods: {
+      handleCheckChange(data, checked, indeterminate) {
+        console.log(data, checked, indeterminate);
+      },
+      handleNodeClick(data) {
+        console.log(data);
+      },
       loadNode(node, resolve) {
-        console.log(node);
         if (node.level === -1) {
-          return resolve([{ name: 'Root1' }, { name: 'Root2' }]);
+          return resolve([{ name: 'region1' }, { name: 'region2' }]);
         }
         if (node.level > 4) return resolve([]);
         var hasChild;
-        if (node.data.name === 'Root1') {
+        if (node.data.name === 'region1') {
           hasChild = true;
-        } else if (node.data.name === 'Root2') {
+        } else if (node.data.name === 'region2') {
           hasChild = false;          
         } else {
           hasChild = Math.random() > 0.5;
@@ -111,7 +116,7 @@
 
 ::: demo
 ```html
-<el-tree :data="data" :props="defaultProps"></el-tree>
+<el-tree :data="data" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
 
 <script>
   export default {
@@ -154,7 +159,14 @@
 
 ::: demo
 ```html
-<el-tree :data="regions" :props="props" :load="loadNode" lazy show-checkbox></el-tree>
+<el-tree
+  :data="regions"
+  :props="props"
+  :load="loadNode"
+  lazy
+  show-checkbox
+  @check-change="handleCheckChange">
+</el-tree>
 
 <script>
   export default {
@@ -173,17 +185,26 @@
       };
     },
     methods: {
-      getCheckedNodes() {
-        console.log(this.$refs.tree.getCheckedNodes(true));
+      handleCheckChange(data, checked, indeterminate) {
+        console.log(data, checked, indeterminate);
       },
-
+      handleNodeClick(data) {
+        console.log(data);
+      },
       loadNode(node, resolve) {
-        console.log(node);
         if (node.level === -1) {
-          return resolve([{ name: 'Root1' }, { name: 'Root2' }]);
+          return resolve([{ name: 'region1' }, { name: 'region2' }]);
         }
-        var hasChild = Math.random() > 0.5;
         if (node.level > 4) return resolve([]);
+
+        var hasChild;
+        if (node.data.name === 'region1') {
+          hasChild = true;
+        } else if (node.data.name === 'region2') {
+          hasChild = false;
+        } else {
+          hasChild = Math.random() > 0.5;
+        }
 
         setTimeout(function() {
           var data;
@@ -213,6 +234,7 @@
 | data     | 展示数据 | array | — | — |
 | props | 配置选项，具体看下表 | object | — | — |
 | load | 加载子树数据的方法 | function(node, resolve) | — | — |
+| show-checkbox | 节点是否可被选择 | boolean | — | false |
 
 ### props
 
@@ -220,3 +242,16 @@
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | label | 指定节点标签为节点对象的某个属性值 | string | — | — |
 | children | 指定子树为节点对象的某个属性值 | string | — | — |
+
+### 方法
+`Tree` 拥有如下方法，返回目前被选中的节点数组：
+
+| 方法名 | 说明 | 参数 |
+|------|--------|------|
+| getCheckedNodes | 若节点可被选择（即 `show-checkbox` 为 `true`），<br>则返回目前被选中的节点所组成的数组 | 接收一个 boolean 类型的参数，若为 `true` 则<br>仅返回被选中的叶子节点，默认值为 `false` |
+
+### Events
+| 事件名称      | 说明    | 回调参数      |
+|---------- |-------- |---------- |
+| node-click  | 节点被点击时的回调 | 传递给 `data` 属性的数组中该节点所对应的对象 |
+| check-change  | 节点选中状态发生变化时的回调 | 共三个参数，依次为：传递给 `data` 属性的数组中该节点所对应的对象、<br>节点本身是否被选中、节点的子树中是否有被选中的节点 |

@@ -12,6 +12,7 @@
 - 为 Notification 和 Message 的不同 type 添加独立的调用方法
 - 为 Message Box 和 Dialog 添加 lockScroll 属性，用于定义是否在弹框出现时将 body 滚动锁定
 - 新增 Input textarea 类型的 rows, autosize 属性
+- 为 Tree 添加 getCheckedNodes 方法和 node-click、check-change 回调
 
 ### 1.0.0-rc.5
 
