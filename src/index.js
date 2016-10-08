@@ -105,7 +105,6 @@ const install = function(Vue) {
   Vue.component(Upload.name, Upload);
   Vue.component(Progress.name, Progress);
   Vue.component(Spinner.name, Spinner);
-  Vue.component(Message.name, Message);
   Vue.component(Badge.name, Badge);
   Vue.component(Card.name, Card);
   Vue.component(Rate.name, Rate);
