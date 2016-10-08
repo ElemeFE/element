@@ -1,78 +1,24 @@
-<template>
-  <div class="el-dropdown"
-    :class="{'el-dropdown--text': type === 'text'}"
-    v-clickoutside="hide"
-  >
-    <!-- 分割的下拉按钮 -->
-    <el-button-group v-if="iconSeparate">
-      <el-button :size="size" :type="type" @click.native="$emit('mainclick')">{{text}}</el-button>
-      <el-button
-        :size="size"
-        :type="type"
-        class="el-dropdown__icon-button"
-        @mouseenter.native="handleMouseEnter"
-        @mouseleave.native="handleMouseLeave"
-        @click.native="handleClick">
-        <i class="el-dropdown__icon el-icon-caret-bottom"></i>
-      </el-button>
-    </el-button-group>
-    <!-- 不分割的下拉按钮 -->
-    <el-button :size="size" :type="type" @mouseenter.native="handleMouseEnter" @mouseleave.native="handleMouseLeave" @click.native="handleClick" v-else>
-      {{text}}<i class="el-dropdown__icon el-icon-caret-bottom"></i>
-    </el-button>
-    <!-- 下拉菜单 -->
-    <transition name="md-fade-bottom">
-      <el-dropdown-menu
-        v-if="visible"
-        @mouseenter.native="handleMouseEnter"
-        @mouseleave.native="handleMouseLeave">
-        <slot></slot>
-      </el-dropdown-menu>
-    </transition>
-  </div>
-</template>
 <script>
-  /**
-   * dropdown
-   * @module packages/dropdown
-   * @desc 下拉菜单组件
-   * @param {string} label - 名称
-   */
-  import ElButton from 'packages/button/index.js';
-  import ElButtonGroup from 'packages/button-group/index.js';
-  import ElDropdownMenu from './dropdown-menu.vue';
   import Clickoutside from 'main/utils/clickoutside';
 
   export default {
     name: 'ElDropdown',
 
-    components: {
-      ElButton,
-      ElButtonGroup,
-      ElDropdownMenu
-    },
-
     directives: { Clickoutside },
 
     props: {
-      text: String,
-      type: String,
-      iconSeparate: {
-        type: Boolean,
-        default: true
-      },
       trigger: {
         type: String,
         default: 'hover'
       },
-      size: {
-        type: String,
-        default: ''
-      },
       menuAlign: {
         type: String,
         default: 'end'
-      }
+      },
+      type: {
+        type: String
+      },
+      splitButton: Boolean
     },
 
     data() {
@@ -80,6 +26,10 @@
         timeout: null,
         visible: false
       };
+    },
+
+    mounted() {
+      this.initEvent();
     },
 
     methods: {
@@ -95,21 +45,61 @@
           this.visible = false;
         }, 150);
       },
-      handleMouseEnter() {
-        if (this.trigger === 'hover') {
-          this.show();
-        }
-      },
-      handleMouseLeave() {
-        if (this.trigger === 'hover') {
-          this.hide();
-        }
-      },
       handleClick() {
-        if (this.trigger === 'click') {
-          this.visible = !this.visible;
+        this.visible = !this.visible;
+      },
+      initEvent() {
+        let { trigger, show, hide, handleClick, splitButton } = this;
+        let triggerElm = splitButton
+          ? this.$refs.trigger.$el
+          : this.$slots.default[0].elm;
+
+        if (trigger === 'hover') {
+          triggerElm.addEventListener('mouseenter', show);
+          triggerElm.addEventListener('mouseleave', hide);
+
+          let dropdown = this.$slots.dropdown[0];
+          let insertHook = dropdown.data.hook.insert;
+          dropdown.data.hook.insert = (vnode) => {
+            insertHook(vnode);
+            this.$nextTick(_ => {
+              vnode.elm.addEventListener('mouseenter', show);
+              vnode.elm.addEventListener('mouseleave', hide);
+            });
+          };
+        } else if (trigger === 'click') {
+          triggerElm.addEventListener('click', handleClick);
         }
       }
+    },
+
+    render(h) {
+      let { hide, splitButton, visible, type } = this;
+      let dropdownElm = visible ? this.$slots.dropdown : null;
+
+      var handleClick = _ => {
+        this.$emit('click');
+      };
+
+      let triggerElm = !splitButton
+        ? this.$slots.default
+        : (<el-button-group>
+            <el-button type={type} nativeOn-click={handleClick}>
+              {this.$slots.default}
+            </el-button>
+            <el-button ref="trigger" type={type} class="el-dropdown__icon-button">
+              <i class="el-dropdown__icon el-icon-caret-bottom"></i>
+            </el-button>
+          </el-button-group>);
+
+      return (
+        <div class="el-dropdown" v-clickoutside={hide}>
+          {triggerElm}
+          <transition name="md-fade-bottom">
+            {dropdownElm}
+          </transition>
+        </div>
+      );
     }
   };
 </script>

@@ -53,8 +53,9 @@
       }
     }
     @e icon {
-      padding-left: 5px;
-      transform: scale(.8, .8);
+      font-size: 12px;
+      vertical-align: middle;
+      margin: 0 3px;
     }
     @m text {
       .el-button-text {
