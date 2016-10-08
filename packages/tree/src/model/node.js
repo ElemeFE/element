@@ -28,7 +28,7 @@ const reInitChecked = function(node) {
 
 const getPropertyFromData = function(node, prop) {
   const props = node.props;
-  const data = node.data;
+  const data = node.data || {};
   const config = props[prop];
 
   if (typeof config === 'function') {
@@ -69,23 +69,28 @@ export default class Node {
     }
 
     if (this.lazy !== true && this.data) {
-      let children;
-      if (this.level === -1 && this.data instanceof Array) {
-        children = this.data;
-      } else {
-        children = getPropertyFromData(this, 'children') || [];
-      }
+      this.setData(this.data);
+    }
+  }
 
-      for (let i = 0, j = children.length; i < j; i++) {
-        const child = children[i];
-        this.insertChild(new Node({
-          data: child,
-          parent: this,
-          lazy: this.lazy,
-          load: this.load,
-          props: this.props
-        }));
-      }
+  setData(data) {
+    this.data = data;
+    let children;
+    if (this.level === -1 && this.data instanceof Array) {
+      children = this.data;
+    } else {
+      children = getPropertyFromData(this, 'children') || [];
+    }
+
+    for (let i = 0, j = children.length; i < j; i++) {
+      const child = children[i];
+      this.insertChild(new Node({
+        data: child,
+        parent: this,
+        lazy: this.lazy,
+        load: this.load,
+        props: this.props
+      }));
     }
   }
 
