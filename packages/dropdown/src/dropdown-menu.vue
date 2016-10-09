@@ -31,6 +31,7 @@
     },
 
     destroyed() {
+      this.$el.remove();
       setTimeout(() => {
         this.popper.destroy();
       }, 300);
