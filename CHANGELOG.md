@@ -15,6 +15,10 @@
 - 为 Tree 添加 getCheckedNodes 方法和 node-click、check-change 回调
 - 新增 DatePicker 禁用日期功能 #253
 
+#### 非兼容性更新
+
+- Dropdown 组件重构，现在可以以更加的灵活方便的形式来自定义触发下拉的元素，以及可以定义下菜单的样式
+
 ### 1.0.0-rc.5
 
 *2016-09-30*
