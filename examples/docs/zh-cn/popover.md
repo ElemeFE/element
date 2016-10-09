@@ -118,7 +118,7 @@
 ### 基础用法
 Popover 的属性与 Tooltip 很类似，它们都是基于`Vue-popper`开发的，因此对于重复属性，请参考 Tooltip 的文档，在此文档中不做详尽解释。
 
-:::demo 设置索引`ref`，在按钮中，我们注册了自定义指令`v-popover`，指向索引ID。`trigger`属性用于设置何时触发 Popover ，提供三种触发方式：`hover`, `click` 和 `focus`。或者通过 `slot` 指定 reference。
+:::demo 设置索引`ref`，在按钮中，我们注册了自定义指令`v-popover`，指向索引ID。`trigger`属性用于设置何时触发 Popover ，提供三种触发方式：`hover`, `click` 和 `focus`。第二种用法通过 `slot` 指定 reference。
 ```html
 <el-popover
   ref="popover1"
@@ -212,4 +212,5 @@ Popover 的属性与 Tooltip 很类似，它们都是基于`Vue-popper`开发的
 ### Slot
 | 参数               | 说明                                                     |
 |--- | ---|
-| — | Popover内嵌HTML文本 |
+| — | Popover 内嵌 HTML 文本 |
+| reference | 触发 Popover 显示的 HTML 元素 |
