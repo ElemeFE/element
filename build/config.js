@@ -5,10 +5,12 @@ var externals = {};
 Object.keys(Components).forEach(function(key) {
   externals[`packages/${key}/index.js`] = `element-ui/lib/${key}`;
   externals[`packages/${key}/style.css`] = `element-ui/lib/${key}/style.css`;
-  externals['main/utils/clickoutside'] = 'element-ui/lib/utils/clickoutside';
-  externals['main/utils/popper'] = 'element-ui/lib/utils/popper';
-  externals['main/utils/vue-popper'] = 'element-ui/lib/utils/vue-popper';
 });
+
+externals['main/utils/clickoutside'] = 'element-ui/lib/utils/clickoutside';
+externals['main/utils/popper'] = 'element-ui/lib/utils/popper';
+externals['main/utils/vue-popper'] = 'element-ui/lib/utils/vue-popper';
+externals['vue-popup'] = 'vue-popup';
 
 exports.externals = Object.assign({
   vue: {
