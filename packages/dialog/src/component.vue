@@ -36,6 +36,10 @@
         default: true
       },
 
+      zIndex: {
+        type: Number
+      },
+
       lockScroll: {
         type: Boolean,
         default: true

@@ -43,6 +43,9 @@
       modal: {
         default: true
       },
+      zIndex: {
+        type: Number
+      },
       lockScroll: {
         default: true
       },

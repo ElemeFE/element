@@ -9,8 +9,9 @@
 - 修复 Table Cell 的样式, #204
 - 修复 Menu default-active 属性不能为空的问题, #200
 - 修复 Menu unique-opened 开启后无法展开子菜单的问题, #200
-- 为 Notification 和 Message 的不同 type 添加独立的调用方法
-- 为 Message Box 和 Dialog 添加 lockScroll 属性，用于定义是否在弹框出现时将 body 滚动锁定
+- 新增 对应于 Notification 和 Message 不同 type 的独立调用方法
+- 新增 Message Box 配置项的 lockScroll 和 zIndex 字段，分别用于定义是否在弹框出现时将 body 滚动锁定和遮罩层的 z-index 值
+- 新增 Dialog 的 lock-scroll 和 z-index 属性，分别用于定义是否在弹框出现时将 body 滚动锁定和遮罩层的 z-index 值
 - 新增 Input textarea 类型的 rows, autosize 属性
 - 为 Tree 添加 getCheckedNodes 方法和 node-click、check-change 回调
 - 新增 DatePicker 禁用日期功能 #253
