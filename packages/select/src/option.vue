@@ -114,7 +114,7 @@
       this.index = this.parent.options.indexOf(this);
 
       if (this.currentSelected === true) {
-        this.dispatch('select', 'addOptionToValue', this);
+        this.dispatch('select', 'addOptionToValue', [this, true]);
       }
 
       this.$on('queryChange', this.queryChange);

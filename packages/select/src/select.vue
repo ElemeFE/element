@@ -214,6 +214,11 @@
 
       selected(val) {
         if (this.multiple) {
+          if (this.selected.length > 0) {
+            this.currentPlaceholder = '';
+          } else {
+            this.currentPlaceholder = this.cachedPlaceHolder;
+          }
           if (this.selectedInit) {
             this.selectedInit = false;
             return;
@@ -223,11 +228,6 @@
 
           this.$emit('input', result);
           this.$emit('change', result);
-          if (this.selected.length > 0) {
-            this.currentPlaceholder = '';
-          } else {
-            this.currentPlaceholder = this.cachedPlaceHolder;
-          }
           this.$nextTick(() => {
             this.resetInputHeight();
           });
@@ -340,10 +340,10 @@
         }
       },
 
-      addOptionToValue(option) {
+      addOptionToValue(option, init) {
         if (this.multiple) {
           if (this.selected.indexOf(option) === -1 && (this.remote ? this.value.indexOf(option.value) === -1 : true)) {
-            this.selectedInit = false;
+            this.selectedInit = !!init;
             this.selected.push(option);
             this.resetHoverIndex();
           }
