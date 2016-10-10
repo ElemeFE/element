@@ -119,12 +119,12 @@
       <div class="el-picker-panel__footer" v-if="showTime">
         <!-- <a
           class="el-picker-panel__link-btn"
-          @click="changeToToday">{{ $t('datepicker.today') }}</a> -->
+          @click="changeToToday">{{ $t('datepicker.now') }}</a> -->
         <button
           type="button"
           class="el-picker-panel__btn"
           @click="handleConfirm"
-          :disabled="btnDisabled">确定</button>
+          :disabled="btnDisabled">{{ $t('datepicker.confirm') }}</button>
       </div>
     </div>
   </transition>
@@ -140,11 +140,11 @@
       },
 
       leftLabel() {
-        return this.date.getFullYear() + '年 ' + (this.date.getMonth() + 1) + '月';
+        return this.date.getFullYear() + ' ' + this.$t('datepicker.month') + ' ' + (this.date.getMonth() + 1) + ' ' + this.$t('datepicker.month');
       },
 
       rightLabel() {
-        return this.rightDate.getFullYear() + '年 ' + (this.rightDate.getMonth() + 1) + '月';
+        return this.rightDate.getFullYear() + ' ' + this.$t('datepicker.month') + ' ' + (this.rightDate.getMonth() + 1) + ' ' + this.$t('datepicker.month');
       },
 
       leftYear() {

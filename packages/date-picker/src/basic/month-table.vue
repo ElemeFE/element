@@ -58,7 +58,9 @@
     },
 
     methods: {
-      $t: $t,
+      $t(...args) {
+        return $t.apply(this, args);
+      },
 
       handleMonthTableClick(event) {
         const target = event.target;
