@@ -57,6 +57,8 @@ export default {
   },
 
   mounted() {
+    document.body.appendChild(this.$refs.popper);
+
     setTimeout(() => {
       let _timer;
       const reference = this.reference || this.$refs.reference || this.$slots.reference[0].elm;

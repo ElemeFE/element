@@ -55,6 +55,10 @@ export default {
     }
   },
 
+  mounted() {
+    document.body.appendChild(this.$refs.popper);
+  },
+
   methods: {
     handleShowPopper() {
       this.timeout = setTimeout(() => {
