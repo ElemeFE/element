@@ -133,6 +133,7 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | title     | Dialog 的标题 | string    | —                               | —      |
 | size      | Dialog 的大小 | string    | tiny/small/large/full | small |
+| top       | Dialog CSS 中的 top 值（仅在 size 不为 full 时有效） | string    | —                       | 15%     |
 | modal     | 是否需要遮罩层   | boolean   | — | true |
 | lockScroll | 是否在 Dialog 出现时将 body 滚动锁定 | boolean | — | true |
 | custom-class      | Dialog 的自定义类名 | string    | — | — |
