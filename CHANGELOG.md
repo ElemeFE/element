@@ -15,6 +15,7 @@
 - 为 Tree 添加 getCheckedNodes 方法和 node-click、check-change 回调
 - 新增 DatePicker 禁用日期功能 #253
 - 修复 多选可搜索的 Select 下拉选项自动展开的问题
+- 修复 Menu 组件垂直模式下开启 router 属性会立刻跳转的问题 #295
 
 #### 非兼容性更新
 
