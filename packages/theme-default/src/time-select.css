@@ -4,6 +4,7 @@
 
 .time-select {
   margin: 5px 0;
+  min-width: 0;
 }
 
 .time-select .el-picker-panel__content {

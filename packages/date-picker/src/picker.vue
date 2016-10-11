@@ -36,10 +36,16 @@ import { merge, formatDate, parseDate, getWeekNumber } from './util';
 import Popper from 'main/utils/vue-popper';
 import emitter from 'main/mixins/emitter';
 
-delete Popper.props.value;
-delete Popper.watch;
-delete Popper.props.options;
-delete Popper.props.placement;
+const newPopper = {
+  props: {
+    appendToBody: Popper.props.appendToBody,
+    offset: Popper.props.offset,
+    boundariesPadding: Popper.props.boundariesPadding
+  },
+  methods: Popper.methods,
+  data: Popper.data,
+  beforeDestroy: Popper.beforeDestroy
+};
 
 const FUNCTION_KEYS = [13, 16, 17, 18, 19, 20, 27, 33, 34, 35, 36, 37, 38, 39, 40];
 const RANGE_SEPARATOR = ' - ';
@@ -189,7 +195,7 @@ const PLACEMENT_MAP = {
 };
 
 export default {
-  mixins: [emitter, Popper],
+  mixins: [emitter, newPopper],
 
   props: {
     format: String,
