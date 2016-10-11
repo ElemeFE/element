@@ -18,11 +18,11 @@
         <button
           type="button"
           class="el-time-panel__btn cancel"
-          @click="handleCancel()">取消</button>
+          @click="handleCancel()">{{ $t('datepicker.cancel') }}</button>
         <button
           type="button"
           class="el-time-panel__btn confirm"
-          @click="handleConfirm()">确定</button>
+          @click="handleConfirm()">{{ $t('datepicker.confirm') }}</button>
       </div>
     </div>
   </transition>

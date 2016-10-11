@@ -1,8 +1,16 @@
 export default {
   datepicker: {
-    today: '此刻',
+    now: '此刻',
+    today: '今天',
+    cancel: '取消',
     clear: '清空',
     confirm: '确定',
+    selectDate: '选择日期',
+    selectTime: '选择时间',
+    startTime: '开始时间',
+    endTime: '结束时间',
+    year: '年',
+    month: '月',
     week: '周次',
     weeks: {
       sun: '日',
