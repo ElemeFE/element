@@ -5,7 +5,7 @@
       class="el-time-range-picker el-picker-panel">
       <div class="el-time-range-picker__content">
         <div class="el-time-range-picker__cell">
-          <div class="el-time-range-picker__header">开始时间</div>
+          <div class="el-time-range-picker__header">{{ $t('datepicker.startTime') }}</div>
           <div class="el-time-range-picker__body el-time-panel__content">
             <time-spinner
               ref="minSpinner"
@@ -19,7 +19,7 @@
           </div>
         </div>
         <div class="el-time-range-picker__cell">
-          <div class="el-time-range-picker__header">结束时间</div>
+          <div class="el-time-range-picker__header">{{ $t('datepicker.endTime') }}</div>
           <div class="el-time-range-picker__body el-time-panel__content">
             <time-spinner
               ref="maxSpinner"
@@ -37,12 +37,12 @@
         <button
           type="button"
           class="el-time-panel__btn cancel"
-          @click="handleCancel()">取消</button>
+          @click="handleCancel()">{{ $t('datepicker.cancel') }}</button>
         <button
           type="button"
           class="el-time-panel__btn confirm"
           @click="handleConfirm()"
-          :disabled="btnDisabled">确定</button>
+          :disabled="btnDisabled">{{ $t('datepicker.confirm') }}</button>
       </div>
     </div>
   </transition>

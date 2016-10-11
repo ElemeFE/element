@@ -24,7 +24,7 @@
       <td
         v-for="cell in row"
         :class="getCellClasses(cell)"
-        v-text="cell.type === 'today' ? '今天' : cell.text"></td>
+        v-text="cell.type === 'today' ? $t('datepicker.today') : cell.text"></td>
     </tr>
     </tbody>
   </table>
@@ -214,7 +214,9 @@
     },
 
     methods: {
-      $t: $t,
+      $t(...args) {
+        return $t.apply(this, args);
+      },
 
       getCellClasses(cell) {
         const selectionMode = this.selectionMode;

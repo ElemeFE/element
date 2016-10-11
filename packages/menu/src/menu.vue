@@ -99,17 +99,21 @@
           });
         }
 
-        if (this.router) {
-          this.$router.push(route || index);
+        if (this.router && route) {
+          this.$router.push(route);
         }
       }
     },
     mounted() {
       let index = this.activeIndex;
-      if (index) {
+      if (index && this.mode === 'vertical') {
         let indexPath = this.menuItems[index].indexPath;
 
-        this.handleSelect(index, indexPath);
+        // 展开该菜单项的路径上所有子菜单
+        indexPath.forEach(index => {
+          let submenu = this.submenus[index];
+          submenu && this.openMenu(index, submenu.indexPath);
+        });
       }
     }
   };

@@ -4,7 +4,7 @@
       <span class="el-checkbox__inner"
         :class="{
           'is-disabled': disabled,
-          'is-checked': checked,
+          'is-checked': isChecked,
           'is-indeterminate': indeterminate,
           'is-focus': focus
         }"
@@ -12,23 +12,25 @@
       <input
         v-if="trueLabel || falseLabel"
         class="el-checkbox__original"
+        type="checkbox"
+        :disabled="disabled"
         :true-value="trueLabel"
         :false-value="falseLabel"
         v-model="_value"
-        type="checkbox"
         @focus="focus = true"
         @blur="focus = false"
-        :disabled="disabled"
+        @change="handleChange"
         ref="checkbox">
       <input
         v-else
         class="el-checkbox__original"
+        type="checkbox"
+        :disabled="disabled"
         :value="label"
         v-model="_value"
         @focus="focus = true"
         @blur="focus = false"
-        type="checkbox"
-        :disabled="disabled">
+        @change="handleChange">
     </span>
     <span class="el-checkbox__label" v-if="$slots.default || label">
       <slot></slot>
@@ -46,11 +48,10 @@
 
     props: {
       value: {},
-      label: {
-        type: String
-      },
+      label: String,
       indeterminate: Boolean,
       disabled: Boolean,
+      checked: Boolean,
       trueLabel: [String, Number],
       falseLabel: [String, Number]
     },
@@ -58,17 +59,17 @@
     computed: {
       _value: {
         get() {
-          return this.value !== undefined ? this.value : this.$parent.value;
+          return !this.wrapInGroup ? this.value : this.$parent.value;
         },
         set(newValue) {
-          if (this.value !== undefined) {
+          if (!this.wrapInGroup) {
             this.$emit('input', newValue);
           } else {
             this.$parent.$emit('input', newValue);
           }
         }
       },
-      checked() {
+      isChecked() {
         var type = Object.prototype.toString.call(this._value);
 
         if (type === '[object Boolean]') {
@@ -83,13 +84,30 @@
 
     data() {
       return {
-        focus: false
+        focus: false,
+        wrapInGroup: this.$parent.$options._componentTag === 'el-checkbox-group'
       };
     },
 
     watch: {
-      checked(sure) {
-        this.$emit('change', sure);
+      checked: {
+        immediate: true,
+        handler(value) {
+          if (value) {
+            let type = Object.prototype.toString.call(this._value);
+            if (type !== '[object Array]') {
+              this._value = this.trueLabel || true;
+            } else {
+              this._value.push(this.label);
+            }
+          }
+        }
+      }
+    },
+
+    methods: {
+      handleChange(ev) {
+        this.$emit('change', ev);
       }
     }
   };
