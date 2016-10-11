@@ -26,7 +26,7 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script type="text/babel">
   import Popper from 'main/utils/popper';
   import ElInputNumber from 'packages/input-number/index.js';
   import { getStyle } from 'wind-dom/src/style';

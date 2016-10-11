@@ -3,9 +3,7 @@
 @import "../../date-picker/src/css/vars.css";
 
 .time-select {
-  min-width: 200px;
   margin: 5px 0;
-  width: 100%;
 }
 
 .time-select .el-picker-panel__content {

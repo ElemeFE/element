@@ -1,7 +1,8 @@
 <template>
-  <transition name="md-fade-bottom">
+  <transition name="md-fade-bottom" @after-leave="$emit('dodestroy')">
     <div
       v-show="currentVisible"
+      :style="{width: width + 'px'}"
       class="el-time-panel">
       <div class="el-time-panel__content">
         <time-spinner
@@ -81,7 +82,8 @@
         seconds: 0,
         selectableRange: [],
         currentDate: this.$options.defaultValue || this.date,
-        currentVisible: this.visible
+        currentVisible: this.visible,
+        width: 0
       };
     },
 

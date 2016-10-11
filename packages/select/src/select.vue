@@ -48,7 +48,7 @@
       :icon="iconClass"
       v-element-clickoutside="handleClose">
     </el-input>
-    <transition name="md-fade-bottom">
+    <transition name="md-fade-bottom" @after-leave="doDestroy">
       <el-select-menu
         ref="popper"
         v-show="visible && nodataText !== false">
@@ -317,6 +317,10 @@
     },
 
     methods: {
+      doDestroy() {
+        this.$refs.popper.doDestroy();
+      },
+
       handleClose() {
         this.visible = false;
       },
