@@ -68,6 +68,7 @@
   import ElTag from 'packages/tag/index.js';
   import debounce from 'throttle-debounce/debounce';
   import Clickoutside from 'main/utils/clickoutside';
+  import { addClass, removeClass } from 'wind-dom/src/class';
 
   export default {
     mixins: [emitter],
@@ -93,10 +94,10 @@
         if (icon) {
           if (criteria) {
             icon.addEventListener('click', this.deleteSelected);
-            icon.classList.add('is-show-close');
+            addClass(icon, 'is-show-close');
           } else {
             icon.removeEventListener('click', this.deleteSelected);
-            icon.classList.remove('is-show-close');
+            removeClass(icon, 'is-show-close');
           }
         }
         return criteria;
@@ -270,7 +271,7 @@
         if (!val) {
           this.$refs.reference.$el.querySelector('input').blur();
           if (this.$el.querySelector('.el-input__icon')) {
-            this.$el.querySelector('.el-input__icon').classList.remove('is-reverse');
+            removeClass(this.$el.querySelector('.el-input__icon'), 'is-reverse');
           }
           this.broadcast('select-dropdown', 'destroyPopper');
           if (this.$refs.input) {
@@ -287,7 +288,7 @@
           }
         } else {
           if (this.$el.querySelector('.el-input__icon')) {
-            this.$el.querySelector('.el-input__icon').classList.add('is-reverse');
+            addClass(this.$el.querySelector('.el-input__icon'), 'is-reverse');
           }
           this.broadcast('select-dropdown', 'updatePopper');
           if (this.filterable) {

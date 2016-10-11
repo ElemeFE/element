@@ -30,6 +30,7 @@
   import Popper from 'main/utils/popper';
   import ElInputNumber from 'packages/input-number/index.js';
   import { getStyle } from 'wind-dom/src/style';
+  import { addClass, removeClass } from 'wind-dom/src/class';
 
   export default {
     name: 'ElSlider',
@@ -125,8 +126,8 @@
         let placementMap = { top: 'bottom', bottom: 'top' };
         let placement = this.popper._popper.getAttribute('x-placement').split('-')[0];
         let origin = placementMap[placement];
-        this.popper._popper.classList.add(placement);
-        this.popper._popper.classList.remove(placementMap[placement]);
+        addClass(this.popper._popper, placement);
+        removeClass(this.popper._popper, placementMap[placement]);
         this.popper._popper.style.transformOrigin = `center ${ origin }`;
       },
 
