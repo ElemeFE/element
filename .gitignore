@@ -9,3 +9,4 @@ lib
 examples/element-ui
 fe.element/element-ui
 .npmrc
+coverage
