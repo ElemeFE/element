@@ -49,7 +49,7 @@
   <div class="page-container page-guide">
     <el-row>
       <el-col :span="5">
-        <side-nav :data="navsData" base="/guide"></side-nav>
+        <side-nav :data="navsData" :base="`/${ lang }/guide`"></side-nav>
       </el-col>
       <el-col :span="19">
         <router-view class="content"></router-view>
@@ -61,6 +61,7 @@
   export default {
     data() {
       return {
+        lang: this.$route.path.split('/')[1],
         navsData: [
           {
             path: '/design',
