@@ -51,7 +51,7 @@
       initEvent() {
         let { trigger, show, hide, handleClick, splitButton } = this;
         let triggerElm = splitButton
-          ? this.$refs.trigger
+          ? this.$refs.trigger.$el
           : this.$slots.default[0].elm;
 
         if (trigger === 'hover') {
