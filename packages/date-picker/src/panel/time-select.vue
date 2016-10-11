@@ -16,7 +16,7 @@
   </transition>
 </template>
 
-<script type="text/ecmascript-6">
+<script type="text/babel">
   const parseTime = function(time) {
     const values = ('' || time).split(':');
     if (values.length >= 2) {

@@ -302,7 +302,9 @@
     },
 
     methods: {
-      $t,
+      $t(...args) {
+        return $t.apply(this, args);
+      },
 
       closeLeftTimePicker() {
         this.leftTimePickerVisible = false;

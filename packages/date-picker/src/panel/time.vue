@@ -31,6 +31,7 @@
 <script type="text/babel">
   import { limitRange } from '../util';
   import Vue from 'vue';
+  import { $t } from '../util';
 
   export default {
     components: {
@@ -91,6 +92,10 @@
     },
 
     methods: {
+      $t(...args) {
+        return $t.apply(this, args);
+      },
+
       handleCancel() {
         this.$emit('pick', null);
       },
