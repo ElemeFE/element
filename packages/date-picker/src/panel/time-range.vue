@@ -48,8 +48,9 @@
   </transition>
 </template>
 
-<script type="text/ecmascript-6">
+<script type="text/babel">
   import { parseDate, limitRange } from '../util';
+  import { $t } from '../util';
 
   const MIN_TIME = parseDate('00:00:00', 'HH:mm:ss');
   const MAX_TIME = parseDate('23:59:59', 'HH:mm:ss');
@@ -95,6 +96,10 @@
     },
 
     methods: {
+      $t(...args) {
+        return $t.apply(this, args);
+      },
+
       handleCancel() {
         this.$emit('pick');
       },

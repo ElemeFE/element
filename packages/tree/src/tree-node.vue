@@ -10,9 +10,9 @@
       <span
         v-if="node.loading"
         class="el-tree-node__icon el-icon-loading"
-      >  
+      >
       </span>
-      <span class="el-tree-node__label">{{ node.label }}</span>
+      <span class="el-tree-node__label" v-html="node.label"></span>
     </div>
     <collapse-transition>
       <div class="el-tree-node__children"

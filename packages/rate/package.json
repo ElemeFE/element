@@ -11,5 +11,7 @@
   "repository": "https://github.com/element-component/element/tree/master/packages/rate",
   "author": "elemefe",
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": {
+    "wind-dom": "0.0.3"
+  }
 }

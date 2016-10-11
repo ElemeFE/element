@@ -27,12 +27,7 @@
         type: String,
         default: ''
       },
-      defaultOpeneds: {
-        type: Array,
-        default() {
-          return [];
-        }
-      },
+      defaultOpeneds: Array,
       theme: {
         type: String,
         default: 'light'
@@ -43,7 +38,7 @@
     data() {
       return {
         activeIndex: this.defaultActive,
-        openedMenus: this.defaultOpeneds.slice(0),
+        openedMenus: this.defaultOpeneds ? this.defaultOpeneds.slice(0) : [],
         menuItems: {},
         submenus: {}
       };
@@ -63,6 +58,7 @@
       openMenu(index, indexPath) {
         let openedMenus = this.openedMenus;
         if (openedMenus.indexOf(index) !== -1) return;
+        // 将不在该菜单路径下的其余菜单收起
         if (this.uniqueOpened) {
           this.openedMenus = openedMenus.filter(index => {
             return indexPath.indexOf(index) !== -1;
@@ -92,29 +88,28 @@
           this.broadcast('submenu', 'item-select', [index, indexPath]);
           this.openedMenus = [];
         } else {
+          this.openActiveItemMenus();
+        }
+
+        if (this.router && route) {
+          this.$router.push(route);
+        }
+      },
+      openActiveItemMenus() {
+        let index = this.activeIndex;
+        if (index && this.mode === 'vertical') {
+          let indexPath = this.menuItems[index].indexPath;
+
           // 展开该菜单项的路径上所有子菜单
           indexPath.forEach(index => {
             let submenu = this.submenus[index];
             submenu && this.openMenu(index, submenu.indexPath);
           });
         }
-
-        if (this.router && route) {
-          this.$router.push(route);
-        }
       }
     },
     mounted() {
-      let index = this.activeIndex;
-      if (index && this.mode === 'vertical') {
-        let indexPath = this.menuItems[index].indexPath;
-
-        // 展开该菜单项的路径上所有子菜单
-        indexPath.forEach(index => {
-          let submenu = this.submenus[index];
-          submenu && this.openMenu(index, submenu.indexPath);
-        });
-      }
+      this.openActiveItemMenus();
     }
   };
 </script>
