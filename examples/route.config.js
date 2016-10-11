@@ -1,14 +1,34 @@
 import navConfig from './nav.config.json';
+import langs from './i18n/route.json';
 
 const registerRoute = (config) => {
-  let route = [{
-    path: '/component',
-    redirect: '/component/installation',
-    component: require('./pages/component.vue'),
-    children: []
-  }];
-  function addRoute(page) {
-    const component = page.path === '/changelog' ? require('./pages/changelog.vue') : require(`./docs/zh-cn${page.path}.md`);
+  let route = [];
+  langs.forEach((lang, index) => {
+    route.push({
+      path: `/${ lang.lang }/component`,
+      redirect: `/${ lang.lang }/component/quickstart`,
+      component: require(`./pages/${ lang.lang }/component.vue`),
+      children: []
+    });
+    config
+      .map(nav => {
+        if (nav.groups) {
+          nav.groups.map(group => {
+            group.list.map(page => {
+              addRoute(page, lang.lang, index);
+            });
+          });
+        } else if (nav.children) {
+          nav.children.map(page => {
+            addRoute(page, lang.lang, index);
+          });
+        } else {
+          addRoute(nav, lang.lang, index);
+        }
+      });
+  });
+  function addRoute(page, lang, index) {
+    const component = page.path === '/changelog' ? require(`./pages/${ lang }/changelog.vue`) : require(`./docs/zh-cn${page.path}.md`);
     let child = {
       path: page.path.slice(1),
       meta: {
@@ -18,51 +38,43 @@ const registerRoute = (config) => {
       component: component.default || component
     };
 
-    route[0].children.push(child);
+    route[index].children.push(child);
   }
-  config
-    .map(nav => {
-      if (nav.groups) {
-        nav.groups.map(group => {
-          group.list.map(page => {
-            addRoute(page);
-          });
-        });
-      } else if (nav.children) {
-        nav.children.map(page => {
-          addRoute(page);
-        });
-      } else {
-        addRoute(nav);
-      }
-    });
 
   return { route, navs: config };
 };
 
 const route = registerRoute(navConfig);
 
-let guideRoute = {
-  path: '/guide',
-  name: '指南',
-  redirect: '/guide/design',
-  component: require('./pages/guide.vue'),
-  children: [{
-    path: 'design',
-    name: '设计原则',
-    component: require('./pages/design.vue')
-  }, {
-    path: 'nav',
-    name: '导航',
-    component: require('./pages/nav.vue')
-  }]
+const generateMiscRoutes = lang => {
+  let guideRoute = {
+    path: `/${ lang }/guide`,
+    name: '指南',
+    redirect: `/${ lang }/guide/design`,
+    component: require(`./pages/${ lang }/guide.vue`),
+    children: [{
+      path: 'design',
+      name: '设计原则',
+      component: require('./pages/design.vue')
+    }, {
+      path: 'nav',
+      name: '导航',
+      component: require('./pages/nav.vue')
+    }]
+  };
+
+  let resourceRoute = {
+    path: `/${ lang }/resource`,
+    name: '资源',
+    component: require(`./pages/${ lang }/resource.vue`)
+  };
+
+  return [guideRoute, resourceRoute];
 };
 
-let resourceRoute = {
-  path: '/resource',
-  name: '资源',
-  component: require('./pages/resource.vue')
-};
+langs.forEach(lang => {
+  route.route = route.route.concat(generateMiscRoutes(lang.lang));
+});
 
 let indexRoute = {
   path: '/',
@@ -70,7 +82,7 @@ let indexRoute = {
   component: require('./pages/zh-cn/index.vue')
 };
 
-route.route = route.route.concat([indexRoute, guideRoute, resourceRoute]);
+route.route = route.route.concat(indexRoute);
 
 route.route.push({
   path: '*',
