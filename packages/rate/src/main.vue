@@ -24,6 +24,8 @@
 </template>
 
 <script type="text/babel">
+  import { hasClass } from 'wind-dom/src/class';
+
   export default {
     name: 'el-rate',
 
@@ -223,10 +225,10 @@
         }
         if (this.allowHalf) {
           let target = event.target;
-          if (target.classList.contains('el-rate__item')) {
+          if (hasClass(target, 'el-rate__item')) {
             target = target.querySelector('.el-rate__icon');
           }
-          if (target.classList.contains('el-rate__decimal')) {
+          if (hasClass(target, 'el-rate__decimal')) {
             target = target.parentNode;
           }
           this.pointerAtLeftHalf = event.offsetX * 2 <= target.clientWidth;
