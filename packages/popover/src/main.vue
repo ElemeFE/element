@@ -62,6 +62,7 @@ export default {
     setTimeout(() => {
       let _timer;
       const reference = this.reference || this.$refs.reference || this.$slots.reference[0].elm;
+      const popper = this.popper || this.$refs.popper || this.$slots.popper[0].elm;
 
       this.$nextTick(() => {
         if (this.trigger === 'click') {
@@ -70,7 +71,9 @@ export default {
             if (!this.$el ||
                 !reference ||
                 this.$el.contains(e.target) ||
-                reference.contains(e.target)) return;
+                reference.contains(e.target) ||
+                !popper ||
+                popper.contains(e.target)) return;
             this.showPopper = false;
           });
         } else if (this.trigger === 'hover') {
