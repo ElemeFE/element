@@ -5,8 +5,8 @@
       :disabled="disabled"
       :placeholder="placeholder"
       :name='name'
-      @onchange="handleChange"
-      @onfocus="handleFocus"
+      @change="handleChange"
+      @focus="handleFocus"
       @keydown.up.native="highlight(highlightedIndex - 1)"
       @keydown.down.native="highlight(highlightedIndex + 1)"
       @keydown.enter.native="select(highlightedIndex)"
