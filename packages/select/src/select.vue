@@ -25,7 +25,7 @@
         v-model="query"
         :debounce="remote ? 300 : 0"
         v-if="filterable"
-        :style="{ width: inputLength + 'px' }"
+        :style="{ width: inputLength + 'px', 'max-width': inputWidth - 42 + 'px' }"
         ref="input">
     </div>
     <el-input
@@ -362,7 +362,7 @@
 
       resetInputState(e) {
         if (e.keyCode !== 8) this.toggleLastOptionHitState(false);
-        this.inputLength = this.$refs.input.value.length * 12 + 20;
+        this.inputLength = this.$refs.input.value.length * 15 + 20;
       },
 
       resetInputHeight() {
@@ -486,7 +486,7 @@
       },
 
       onInputChange() {
-        if (this.filterable) {
+        if (this.filterable && this.selectedLabel !== this.value) {
           this.query = this.selectedLabel;
         }
       },

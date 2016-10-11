@@ -19,6 +19,7 @@
 - 修复 Menu 组件垂直模式下开启 router 属性会立刻跳转的问题 #295
 - Checkbox change 事件现在只能被人为的交互操作所触发
 - 新增 Checkbox checked 属性
+- 修复 Select 远程搜索时使用键盘选择选项无法更新 v-model 的问题
 
 #### 非兼容性更新
 
