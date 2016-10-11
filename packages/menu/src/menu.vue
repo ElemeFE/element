@@ -38,7 +38,7 @@
     data() {
       return {
         activeIndex: this.defaultActive,
-        openedMenus: (this.defaultOpeneds || []).slice(0),
+        openedMenus: this.defaultOpeneds ? this.defaultOpeneds.slice(0) : [],
         menuItems: {},
         submenus: {}
       };
@@ -50,11 +50,8 @@
 
         this.handleSelect(value, indexPath);
       },
-      defaultOpeneds: {
-        deep: true,
-        handler(value) {
-          this.openedMenus = value;
-        }
+      defaultOpeneds(value) {
+        this.openedMenus = value;
       }
     },
     methods: {
