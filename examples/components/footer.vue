@@ -3,8 +3,8 @@
     <div class="container">
       <div class="footer-main">
         <p class="footer-main-title">Element 1.0 Hydrogen</p>
-        <a href="https://github.com/ElemeFE/element/issues" class="footer-main-link" target="_blank">反馈建议</a>
-        <a href="https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.md" class="footer-main-link" target="_blank">贡献指南</a>
+        <a href="https://github.com/ElemeFE/element/issues" class="footer-main-link" target="_blank">{{ feedback }}</a>
+        <a href="https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.md" class="footer-main-link" target="_blank">{{ contribution }}</a>
       </div>
       <div class="footer-social">
         <el-popover
@@ -13,7 +13,7 @@
           width="120"
           popper-class="footer-popover"
           trigger="hover">
-          <div class="footer-popover-title">饿了么 UED</div>
+          <div class="footer-popover-title">{{ eleme }} UED</div>
           <img src="../assets/images/qrcode.png" alt="">
         </el-popover>
         <i class="doc-icon-weixin elementdoc" v-popover:weixin></i>
@@ -123,3 +123,25 @@
     }
   }
 </style>
+
+<script type="text/babel">
+  export default {
+    computed: {
+      lang() {
+        return this.$route.path.split('/')[1];
+      },
+
+      feedback() {
+        return this.lang === 'zh-cn' ? '反馈建议' : 'Feedback';
+      },
+
+      contribution() {
+        return this.lang === 'zh-cn' ? '贡献指南' : 'Contribution';
+      },
+
+      eleme() {
+        return this.lang === 'zh-cn' ? '饿了么' : 'Eleme';
+      }
+    }
+  };
+</script>

@@ -108,27 +108,28 @@
       'header-hangUp': hangUp
     }">
       <div class="container">
-        <h1><router-link to="/">Element<span>Beta</span></router-link></h1>
+        <h1><router-link :to="`/${ lang }`">Element<span>Beta</span></router-link></h1>
         <ul class="nav">
           <li class="nav-item">
             <router-link
               active-class="active"
-              to="/guide">指南
+              :to="`/${ lang }/guide`">{{ guide }}
             </router-link>
           </li>
           <li class="nav-item">
             <router-link
               active-class="active"
-              to="/component">组件
+              :to="`/${ lang }/component`">{{ components }}
             </router-link>
           </li>
           <li class="nav-item">
             <router-link
               active-class="active"
-              to="/resource"
-              exact>资源
+              :to="`/${ lang }/resource`"
+              exact>{{ resource }}
             </router-link>
           </li>
+          <li class="nav-item" @click="switchLang">{{ switchText }}</li>
         </ul>
       </div>
     </header>
@@ -147,12 +148,35 @@
     },
     watch: {
       '$route.path'(val) {
-        this.isHome = val === '/';
+        this.isHome = ['/zh-cn', '/en-us'].indexOf(val) > -1;
         this.headerStyle.backgroundColor = `rgba(32, 160, 255, ${ this.isHome ? '0' : '1' })`;
       }
     },
+    computed: {
+      lang() {
+        return this.$route.path.split('/')[1] || 'zh-cn';
+      },
+      guide() {
+        return this.lang === 'zh-cn' ? '指南' : 'Guide';
+      },
+      components() {
+        return this.lang === 'zh-cn' ? '组件' : 'Components';
+      },
+      resource() {
+        return this.lang === 'zh-cn' ? '资源' : 'Resource';
+      },
+      switchText() {
+        return this.lang === 'zh-cn' ? 'English' : '中文';
+      }
+    },
+    methods: {
+      switchLang() {
+        let langMap = { 'zh-cn': 'en-us', 'en-us': 'zh-cn' };
+        this.$router.push(this.$route.path.replace(this.lang, langMap[this.lang]));
+      }
+    },
     mounted() {
-      this.isHome = this.$route.path === '/';
+      this.isHome = ['/zh-cn', '/en-us'].indexOf(this.$route.path) > -1;
       function scroll(fn) {
         var beforeScrollTop = document.body.scrollTop;
 

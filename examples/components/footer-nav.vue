@@ -74,15 +74,30 @@
       };
     },
 
+    computed: {
+      lang() {
+        return this.$route.meta.lang;
+      }
+    },
+
     watch: {
       '$route.path'() {
+        this.setNav();
         this.updateNav();
       }
     },
 
     methods: {
+      setNav() {
+        let nav = navConfig[this.lang];
+        this.nav = nav[0].children.concat(nav[1]);
+        nav[2].groups.map(group => group.list).forEach(list => {
+          this.nav = this.nav.concat(list);
+        });
+      },
+
       updateNav() {
-        this.currentComponent = '/' + this.$route.path.split('/')[2];
+        this.currentComponent = '/' + this.$route.path.split('/')[3];
         for (let i = 0, len = this.nav.length; i < len; i++) {
           if (this.nav[i].path === this.currentComponent) {
             this.currentIndex = i;
@@ -94,15 +109,12 @@
       },
 
       handleNavClick(direction) {
-        this.$router.push(`/component${ direction === 'prev' ? this.leftNav.path : this.rightNav.path }`);
+        this.$router.push(`/${ this.lang }/component${ direction === 'prev' ? this.leftNav.path : this.rightNav.path }`);
       }
     },
 
     created() {
-      this.nav = navConfig[0].children.concat(navConfig[1]);
-      navConfig[2].groups.map(group => group.list).forEach(list => {
-        this.nav = this.nav.concat(list);
-      });
+      this.setNav();
       this.updateNav();
     }
   };

@@ -137,6 +137,15 @@
 </style>
 
 <script type="text/babel">
+  const HIDE_TEXT = {
+    'zh-cn': '隐藏代码',
+    'en-us': 'Hide code',
+  };
+  const SHOW_TEXT = {
+    'zh-cn': '显示代码',
+    'en-us': 'Show code',
+  };
+
   export default {
     data() {
       return {
@@ -146,6 +155,10 @@
     },
 
     computed: {
+      lang() {
+        return this.$route.path.split('/')[1];
+      },
+
       blockClass() {
         return `demo-${ this.$router.currentRoute.path.split('/').pop() }`;
       },
@@ -155,7 +168,7 @@
       },
 
       controlText() {
-        return this.isExpanded ? '隐藏代码' : '显示代码';
+        return this.isExpanded ? HIDE_TEXT[this.lang] : SHOW_TEXT[this.lang];
       },
 
       codeArea() {

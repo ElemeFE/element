@@ -10,7 +10,7 @@ const registerRoute = (config) => {
       component: require(`./pages/${ lang.lang }/component.vue`),
       children: []
     });
-    config
+    config[lang.lang]
       .map(nav => {
         if (nav.groups) {
           nav.groups.map(group => {
@@ -33,7 +33,8 @@ const registerRoute = (config) => {
       path: page.path.slice(1),
       meta: {
         title: page.title || page.name,
-        description: page.description
+        description: page.description,
+        lang
       },
       component: component.default || component
     };
@@ -55,21 +56,31 @@ const generateMiscRoutes = lang => {
     children: [{
       path: 'design',
       name: '设计原则',
-      component: require('./pages/design.vue')
+      meta: { lang },
+      component: require(`./pages/${ lang }/design.vue`)
     }, {
       path: 'nav',
       name: '导航',
-      component: require('./pages/nav.vue')
+      meta: { lang },
+      component: require(`./pages/${ lang }/nav.vue`)
     }]
   };
 
   let resourceRoute = {
     path: `/${ lang }/resource`,
     name: '资源',
+    meta: { lang },
     component: require(`./pages/${ lang }/resource.vue`)
   };
 
-  return [guideRoute, resourceRoute];
+  let indexRoute = {
+    path: `/${ lang }`,
+    name: '首页',
+    meta: { lang },
+    component: require(`./pages/${ lang }/index.vue`)
+  };
+
+  return [guideRoute, resourceRoute, indexRoute];
 };
 
 langs.forEach(lang => {
@@ -78,6 +89,7 @@ langs.forEach(lang => {
 
 let indexRoute = {
   path: '/',
+  redirect: '/zh-cn',
   name: '首页',
   component: require('./pages/zh-cn/index.vue')
 };

@@ -61,7 +61,7 @@
   export default {
     data() {
       return {
-        lang: this.$route.path.split('/')[1],
+        lang: this.$route.meta.lang,
         navsData: [
           {
             path: '/design',
