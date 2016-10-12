@@ -15,7 +15,7 @@
       <input
         class="el-input__inner"
         v-model="currentValue"
-        :type="type"
+        type="text"
         :name="name"
         :placeholder="placeholder"
         :disabled="disabled"

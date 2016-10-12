@@ -11,7 +11,7 @@
     <input
       class="el-date-editor__editor"
       :readonly="readonly"
-      :type="editorType"
+      type="text"
       :placeholder="placeholder"
       @focus="handleFocus"
       @blur="handleBlur"
@@ -274,10 +274,6 @@ export default {
         }
         this.$emit('input', value);
       }
-    },
-
-    editorType() {
-      return 'text';
     }
   },
 

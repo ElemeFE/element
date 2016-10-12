@@ -71,7 +71,7 @@
     "theaterjs": "^3.0.0",
     "uppercamelcase": "^1.1.0",
     "url-loader": "^0.5.7",
-    "vue": "^2.0.1",
+    "vue": "^2.0.2",
     "vue-loader": "^9.5.1",
     "vue-markdown-loader": "^0.5.1",
     "vue-popup": "^0.2.7",
