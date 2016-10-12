@@ -19,10 +19,6 @@
       & .el-step__main {
         padding-left: 10px;
       }
-
-      & .el-step__description {
-        width: 300px;
-      }
     }
 
     @e line {
@@ -153,7 +149,7 @@
 
     @e title {
       font-size: 14px;
-      margin-top: 5px;
+      line-height: 32px;
       display: inline-block;
 
       @when process {
