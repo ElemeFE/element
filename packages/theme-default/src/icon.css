@@ -17,7 +17,7 @@
     font-variant: normal;
     text-transform: none;
     line-height: 1;
-    vertical-align: bottom;
+    vertical-align: baseline;
     display: inline-block;
 
     /* Better Font Rendering =========== */
