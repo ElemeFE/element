@@ -514,7 +514,7 @@
       <el-option label="区域二" value="beijing"></el-option>
     </el-select>
   </el-form-item>
-  <el-form-item label="活动时间">
+  <el-form-item label="活动时间" required>
     <el-col :span="11">
       <el-form-item prop="date1">
         <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
