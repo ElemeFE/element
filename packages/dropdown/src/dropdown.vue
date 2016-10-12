@@ -18,9 +18,8 @@
         type: String,
         default: 'end'
       },
-      type: {
-        type: String
-      },
+      type: String,
+      size: String,
       splitButton: Boolean
     },
 
@@ -83,7 +82,7 @@
     },
 
     render(h) {
-      let { hide, splitButton, type } = this;
+      let { hide, splitButton, type, size } = this;
 
       var handleClick = _ => {
         this.$emit('click');
@@ -92,10 +91,10 @@
       let triggerElm = !splitButton
         ? this.$slots.default
         : (<el-button-group>
-            <el-button type={type} nativeOn-click={handleClick}>
+            <el-button type={type} size={size} nativeOn-click={handleClick}>
               {this.$slots.default}
             </el-button>
-            <el-button ref="trigger" type={type} class="el-dropdown__icon-button">
+            <el-button ref="trigger" type={type} size={size} class="el-dropdown__icon-button">
               <i class="el-dropdown__icon el-icon-caret-bottom"></i>
             </el-button>
           </el-button-group>);
