@@ -83,7 +83,10 @@ export default {
       options.placement = this.placement;
       options.offset = this.offset;
       this.popperJS = new PopperJS(reference, popper, options);
-      this.popperJS.onCreate(_ => this.$emit('created', this));
+      this.popperJS.onCreate(_ => {
+        this.$emit('created', this);
+        this.resetTransformOrigin();
+      });
       this.popperJS._popper.style.zIndex = PopupManager.nextZIndex();
     },
 
@@ -99,15 +102,15 @@ export default {
 
     destroyPopper() {
       if (this.popperJS) {
-        this.resetTransformOrigin(this.popperJS);
+        this.resetTransformOrigin();
       }
     },
 
-    resetTransformOrigin(popper) {
+    resetTransformOrigin() {
       let placementMap = { top: 'bottom', bottom: 'top', left: 'right', right: 'left' };
-      let placement = popper._popper.getAttribute('x-placement').split('-')[0];
+      let placement = this.popperJS._popper.getAttribute('x-placement').split('-')[0];
       let origin = placementMap[placement];
-      popper._popper.style.transformOrigin = ['top', 'bottom'].indexOf(placement) > -1 ? `center ${ origin }` : `${ origin } center`;
+      this.popperJS._popper.style.transformOrigin = ['top', 'bottom'].indexOf(placement) > -1 ? `center ${ origin }` : `${ origin } center`;
     },
 
     appendArrow(element) {

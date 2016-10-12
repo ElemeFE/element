@@ -275,7 +275,7 @@
         disabledDate: '',
         leftTimePickerVisible: false,
         rightTimePickerVisible: false,
-        width: 0
+        width: ''
       };
     },
 

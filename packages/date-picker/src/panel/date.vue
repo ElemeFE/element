@@ -345,7 +345,7 @@
         month: null,
         week: null,
         timePickerVisible: false,
-        width: 0
+        width: ''
       };
     },
 

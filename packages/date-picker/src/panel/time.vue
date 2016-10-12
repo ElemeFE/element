@@ -83,7 +83,7 @@
         selectableRange: [],
         currentDate: this.$options.defaultValue || this.date,
         currentVisible: this.visible,
-        width: 0
+        width: ''
       };
     },
 
