@@ -22,7 +22,7 @@
     },
 
     mounted() {
-      this.popperElm = this.$el;
+      this.$parent.popperElm = this.popperElm = this.$el;
       this.referenceElm = this.$parent.$el;
     },
 

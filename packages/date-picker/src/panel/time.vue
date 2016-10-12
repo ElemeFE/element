@@ -40,18 +40,22 @@
     },
 
     props: {
+      pickerWidth: {},
       date: {
         default() {
           return new Date();
         }
       },
-
       visible: Boolean
     },
 
     watch: {
       visible(val) {
         this.currentVisible = val;
+      },
+
+      pickerWidth(val) {
+        this.width = val;
       },
 
       value(newVal) {
@@ -83,7 +87,7 @@
         selectableRange: [],
         currentDate: this.$options.defaultValue || this.date,
         currentVisible: this.visible,
-        width: ''
+        width: this.pickerWidth || 0
       };
     },
 

@@ -60,8 +60,8 @@ export default {
   data() {
     return {
       index: -1,
-      style: { width: 0, height: 0 },
-      lineStyle: { width: 0, height: 0 },
+      style: { width: '', height: '' },
+      lineStyle: { width: '', height: '' },
       mainOffset: 0,
       currentStatus: this.status
     };

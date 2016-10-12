@@ -2,7 +2,9 @@
   <transition name="md-fade-bottom" @after-leave="$emit('dodestroy')">
     <div
       v-show="visible"
-      :style="{ width: width + 'px' }"
+      :style="{
+        width: width + 'px'
+      }"
       class="el-picker-panel el-date-picker"
       :class="{
         'has-sidebar': $slots.sidebar || shortcuts,
@@ -26,6 +28,7 @@
               class="el-date-picker__editor">
             <span style="position: relative" v-clickoutside="closeTimePicker">
               <input
+                ref="input"
                 @focus="timePickerVisible = true"
                 v-model="visibleTime"
                 :placehoder="$t('datepicker.selectTime')"
@@ -34,6 +37,7 @@
               <time-picker
                 ref="timepicker"
                 :date="date"
+                :picker-width="pickerWidth"
                 @pick="handleTimePick"
                 :visible="timePickerVisible">
               </time-picker>
@@ -120,6 +124,16 @@
 
   export default {
     watch: {
+      showTime(val) {
+        if (!val) return;
+        this.$nextTick(_ => {
+          const inputElm = this.$refs.input;
+          if (inputElm) {
+            this.pickerWidth = inputElm.getBoundingClientRect().width + 10;
+          }
+        });
+      },
+
       value(newVal) {
         if (this.selectionMode === 'day' && newVal instanceof Date) {
           this.date = newVal;
@@ -333,6 +347,7 @@
 
     data() {
       return {
+        pickerWidth: 0,
         date: new Date(),
         value: '',
         showTime: false,
@@ -345,7 +360,7 @@
         month: null,
         week: null,
         timePickerVisible: false,
-        width: ''
+        width: 0
       };
     },
 

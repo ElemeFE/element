@@ -93,7 +93,7 @@
         minSeconds: minTime.getSeconds(),
         format: 'HH:mm:ss',
         visible: false,
-        width: ''
+        width: 0
       };
     },
 
