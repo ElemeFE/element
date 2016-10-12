@@ -1,5 +1,8 @@
 <template>
-  <div class="el-select" :class="{ 'is-multiple': multiple, 'is-small': size === 'small' }">
+  <div
+    class="el-select"
+    v-clickoutside="handleClose"
+    :class="{ 'is-multiple': multiple, 'is-small': size === 'small' }">
     <div class="el-select__tags" v-if="multiple" @click.stop="toggleMenu" ref="tags" :style="{ 'max-width': inputWidth - 32 + 'px' }">
       <transition-group @after-leave="resetInputHeight">
         <el-tag
@@ -45,10 +48,9 @@
       @keydown.native.tab="visible = false"
       @mouseenter.native="inputHovering = true"
       @mouseleave.native="inputHovering = false"
-      :icon="iconClass"
-      v-element-clickoutside="handleClose">
+      :icon="iconClass">
     </el-input>
-    <transition name="md-fade-bottom">
+    <transition name="md-fade-bottom" @after-leave="doDestroy">
       <el-select-menu
         ref="popper"
         v-show="visible && nodataText !== false">
@@ -128,9 +130,7 @@
       ElTag
     },
 
-    directives: {
-      ElementClickoutside: Clickoutside
-    },
+    directives: { Clickoutside },
 
     props: {
       name: String,
@@ -317,6 +317,10 @@
     },
 
     methods: {
+      doDestroy() {
+        this.$refs.popper.doDestroy();
+      },
+
       handleClose() {
         this.visible = false;
       },

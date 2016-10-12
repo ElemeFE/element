@@ -1,4 +1,5 @@
 import PopperJS from './popper';
+import { PopupManager } from 'vue-popup';
 
 /**
  * @param {HTMLElement} [reference=$refs.reference] - The reference element used to position the popper.
@@ -26,6 +27,10 @@ export default {
     value: Boolean,
     visibleArrow: Boolean,
     transition: String,
+    appendToBody: {
+      type: Boolean,
+      default: true
+    },
     options: {
       type: Object,
       default() {
@@ -62,44 +67,30 @@ export default {
       }
 
       const options = this.options;
-      const popper = this.popper || this.$refs.popper;
-      const reference = this.reference || this.$refs.reference || this.$slots.reference[0].elm;
+      const popper = this.popperElm = this.popperElm || this.popper || this.$refs.popper;
+      const reference = this.referenceElm = this.referenceElm || this.reference || this.$refs.reference || this.$slots.reference[0].elm;
 
       if (!popper || !reference) return;
-      if (this.visibleArrow) {
-        this.appendArrow(popper);
-      }
 
+      if (this.visibleArrow) this.appendArrow(popper);
+      if (this.appendToBody) document.body.appendChild(this.popperElm);
       if (this.popperJS && this.popperJS.hasOwnProperty('destroy')) {
         this.popperJS.destroy();
       }
 
       options.placement = this.placement;
       options.offset = this.offset;
-
-      this.$nextTick(() => {
-        this.popperJS = new PopperJS(
-          reference,
-          popper,
-          options
-        );
-        this.popperJS.onCreate(popper => {
-          this.resetTransformOrigin(popper);
-          this.$emit('created', this);
-        });
-      });
+      this.popperJS = new PopperJS(reference, popper, options);
+      this.popperJS.onCreate(_ => this.$emit('created', this));
+      this.popperJS._popper.style.zIndex = PopupManager.nextZIndex();
     },
 
     updatePopper() {
-      if (this.popperJS) {
-        this.popperJS.update();
-      } else {
-        this.createPopper();
-      }
+      this.popperJS ? this.popperJS.update() : this.createPopper();
     },
 
     doDestroy() {
-      if (this.showPopper) return;
+      if (this.showPopper || !this.popperJS) return;
       this.popperJS.destroy();
       this.popperJS = null;
     },
@@ -144,8 +135,9 @@ export default {
   },
 
   beforeDestroy() {
-    if (this.popperJS) {
-      this.popperJS.destroy();
-    }
+    this.doDestroy();
+    this.popperElm &&
+    document.body.contains(this.popperElm) &&
+    document.body.removeChild(this.popperElm);
   }
 };

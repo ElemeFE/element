@@ -1,71 +1,58 @@
 <template>
-  <div class="el-select-dropdown">
+  <div
+    class="el-select-dropdown"
+    :class="{ 'is-multiple': $parent.multiple }"
+    :style="{ minWidth: minWidth }">
     <slot></slot>
   </div>
 </template>
 
 <script type="text/babel">
-  import Popper from 'main/utils/popper';
+  import Popper from 'main/utils/vue-popper';
 
   export default {
     name: 'el-select-dropdown',
 
     componentName: 'select-dropdown',
 
+    mixins: [Popper],
+
+    props: {
+      placement: {
+        default: 'bottom-start'
+      },
+
+      boundariesPadding: {
+        default: 0
+      },
+
+      options: {
+        default() {
+          return {
+            forceAbsolute: true,
+            gpuAcceleration: false
+          };
+        }
+      }
+    },
+
     data() {
       return {
-        popper: null
+        minWidth: ''
       };
     },
 
-    created() {
-      this.$on('updatePopper', this.updatePopper);
-      this.$on('destroyPopper', this.destroyPopper);
-    },
-
-    methods: {
-      updatePopper() {
-        if (this.popper) {
-          this.$nextTick(() => {
-            this.popper.update();
-          });
-        } else {
-          this.$nextTick(() => {
-            this.popper = new Popper(this.$parent.$refs.reference.$el, this.$el, {
-              gpuAcceleration: false,
-              placement: 'bottom-start',
-              boundariesPadding: 0,
-              forceAbsolute: true
-            });
-            this.popper.onCreate(popper => {
-              this.resetTransformOrigin(popper);
-            });
-          });
-        }
-      },
-
-      destroyPopper() {
-        if (this.popper) {
-          this.resetTransformOrigin(this.popper);
-          setTimeout(() => {
-            this.popper.destroy();
-            this.popper = null;
-          }, 300);
-        }
-      },
-
-      resetTransformOrigin(popper) {
-        let placementMap = { top: 'bottom', bottom: 'top' };
-        let placement = popper._popper.getAttribute('x-placement').split('-')[0];
-        let origin = placementMap[placement];
-        popper._popper.style.transformOrigin = `center ${ origin }`;
+    watch: {
+      '$parent.inputWidth'() {
+        this.minWidth = this.$parent.$el.getBoundingClientRect().width + 'px';
       }
     },
 
-    beforeDestroy() {
-      if (this.popper) {
-        this.popper.destroy();
-      }
+    mounted() {
+      this.referenceElm = this.$parent.$refs.reference.$el;
+      this.$parent.popperElm = this.popperElm = this.$el;
+      this.$on('updatePopper', _ => { this.showPopper = true; });
+      this.$on('destroyPopper', _ => { this.showPopper = false; });
     }
   };
 </script>

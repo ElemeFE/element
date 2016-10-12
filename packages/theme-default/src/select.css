@@ -25,27 +25,6 @@
       }
     }
 
-    & .el-select-dropdown {
-      margin: 5px 0;
-
-      & p.el-select-dropdown__nodata {
-        padding: 10px 0;
-        margin: 0;
-        text-align: center;
-        color: #999;
-      }
-    }
-
-    & .el-select-dropdown__list {
-      list-style: none;
-      padding: 6px 0;
-      margin: 0;
-      width: 100%;
-      max-height: 274px;
-      box-sizing: border-box;
-      overflow-y: auto;
-    }
-
     & .el-input {
       & .el-input__icon {
         color: #c0ccda;
@@ -91,27 +70,6 @@
           &:hover {
             border-color: #D3DCE6;
           }
-        }
-      }
-    }
-
-    @when multiple {
-      & .el-select-dropdown__item.selected {
-        color: #20A0FF;
-        background-color: #fff;
-
-        &.hover {
-          background-color: #E5E9F2;
-        }
-
-        &::after {
-          position: absolute;
-          right: 10px;
-          font-family: 'element-icons';
-          content: "\E608";
-          font-size: 11px;
-          -webkit-font-smoothing: antialiased;
-          -moz-osx-font-smoothing: grayscale;
         }
       }
     }

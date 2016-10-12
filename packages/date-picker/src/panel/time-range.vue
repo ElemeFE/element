@@ -1,7 +1,8 @@
 <template>
-  <transition name="md-fade-bottom">
+  <transition name="md-fade-bottom" @after-leave="$emit('dodestroy')">
     <div
       v-show="visible"
+      :style="{ width: width + 'px' }"
       class="el-time-range-picker el-picker-panel">
       <div class="el-time-range-picker__content">
         <div class="el-time-range-picker__cell">
@@ -91,7 +92,8 @@
         minMinutes: minTime.getMinutes(),
         minSeconds: minTime.getSeconds(),
         format: 'HH:mm:ss',
-        visible: false
+        visible: false,
+        width: 0
       };
     },
 

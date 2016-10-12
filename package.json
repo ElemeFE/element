@@ -74,7 +74,7 @@
     "vue": "^2.0.2",
     "vue-loader": "^9.5.1",
     "vue-markdown-loader": "^0.5.1",
-    "vue-popup": "^0.2.7",
+    "vue-popup": "^0.2.8",
     "vue-router": "^2.0.0",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.15.1",
