@@ -127,9 +127,12 @@
         }
       },
       getRules() {
-        if (!this.prop) { return []; }
-        var rules = this.rules || (this.form.rules ? this.form.rules[this.prop] : []);
-        return Array.isArray(rules) ? rules : [rules];
+        var formRules = this.form.rules;
+        var selfRuels = this.rules;
+
+        formRules = formRules ? formRules[this.prop] : [];
+
+        return [].concat(selfRuels || formRules || []);
       },
       getFilteredRule(trigger) {
         var rules = this.getRules();
@@ -151,21 +154,22 @@
       }
     },
     mounted() {
-      var rules = this.getRules();
-
-      rules.every(rule => {
-        if (rule.required) {
-          this.isRequired = true;
-          return false;
-        }
-      });
-
       if (this.prop) {
         this.dispatch('form', 'el.form.addField', [this]);
-      }
 
-      this.$on('el.form.blur', this.onFieldBlur);
-      this.$on('el.form.change', this.onFieldChange);
+        let rules = this.getRules();
+
+        if (rules.length) {
+          rules.every(rule => {
+            if (rule.required) {
+              this.isRequired = true;
+              return false;
+            }
+          });
+          this.$on('el.form.blur', this.onFieldBlur);
+          this.$on('el.form.change', this.onFieldChange);
+        }
+      }
     },
     beforeDestroy() {
       this.dispatch('form', 'el.form.removeField', [this]);
