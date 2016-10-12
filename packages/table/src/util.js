@@ -1,4 +1,4 @@
-var scrollBarWidth;
+let scrollBarWidth;
 
 export const getScrollBarWidth = () => {
   if (scrollBarWidth !== undefined) return scrollBarWidth;
@@ -74,8 +74,4 @@ export const orderBy = function(array, sortKey, reverse) {
     b = isObject(b) ? getValueByPath(b, sortKey) : b;
     return a === b ? 0 : a > b ? order : -order;
   });
-};
-
-export const getChild = function(event) {
-  return event.target.querySelector('.cell');
 };

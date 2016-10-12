@@ -1,6 +1,8 @@
-const getColumnById = function(grid, columnId) {
+import { getValueByPath, getCell } from './util';
+
+const getColumnById = function(table, columnId) {
   let column = null;
-  grid.columns.forEach(function(item) {
+  table.columns.forEach(function(item) {
     if (item.id === columnId) {
       column = item;
     }
@@ -8,26 +10,24 @@ const getColumnById = function(grid, columnId) {
   return column;
 };
 
-const getColumnByCell = function(grid, cell) {
-  const matches = (cell.className || '').match(/grid_[^\s]+/gm);
+const getColumnByCell = function(table, cell) {
+  const matches = (cell.className || '').match(/table_[^\s]+/gm);
   if (matches) {
-    return getColumnById(grid, matches[0]);
+    return getColumnById(table, matches[0]);
   }
   return null;
 };
 
-import { getValueByPath, getCell, orderBy, getChild } from './util';
-
 export default {
   props: {
-    columns: {},
-    data: {},
-    fixed: {},
-    selection: {
-      default() {
-        return [];
-      }
-    }
+    store: {
+      required: true
+    },
+    layout: {
+      required: true
+    },
+    rowClassName: [String, Function],
+    fixed: String
   },
 
   render(h) {
@@ -37,17 +37,20 @@ export default {
         cellspacing="0"
         cellpadding="0"
         border="0">
+        {
+          this._l(this.columns, column =>
+            <colgroup
+              name={ column.id }
+              width={ column.realWidth || column.width }
+            />)
+        }
         <tbody>
           {
             this._l(this.data, (row, $index) =>
               <tr
                 on-click={ ($event) => this.handleClick($event, row) }
                 on-mouseenter={ _ => this.handleMouseEnter($index) }
-                style={ this.getCustomStyle(row) }
-                class={{
-                  'current-row': row === this.$parent.selected,
-                  'hover': this.$parent.$parent.hoverRowIndex === $index
-                }}>
+                class={ this.getRowClass(row, $index) }>
                 {
                   this._l(this.columns, (column) =>
                     <td
@@ -57,11 +60,14 @@ export default {
                       on-mouseleave={ this.handleCellMouseLeave }>
                       {
                         column.template
-                          ? column.template.call(this._renderProxy, h, { row, column, $index, _self: this.$parent.$vnode.context })
-                          : <div class="cell">{ this.$getPropertyText(row, column.property, column.id) }</div>
+                          ? column.template.call(this._renderProxy, h, { row, column, $index, store: this.store, _self: this.$parent.$vnode.context })
+                          : <div class="cell">{ this.getCellContent(row, column.property, column.id) }</div>
                       }
                     </td>
-                  ).concat(this.fixed ? <td class="gutter" /> : '')
+                  )
+                }
+                {
+                  !this.fixed && this.layout.scrollY && this.layout.gutterWidth ? <td class="gutter" /> : ''
                 }
               </tr>
             )
@@ -71,93 +77,104 @@ export default {
     );
   },
 
+  computed: {
+    data() {
+      return this.store.states.data;
+    },
+    hoverRowIndex() {
+      return this.store.states.hoverRow;
+    },
+    currentRow() {
+      return this.store.states.currentRow;
+    },
+    columns() {
+      if (this.fixed === true || this.fixed === 'left') {
+        return this.store.states.fixedColumns;
+      } else if (this.fixed === 'right') {
+        return this.store.states.rightFixedColumns;
+      }
+      return this.store.states.columns;
+    }
+  },
+
   data() {
     return {
-      criteria: this.$parent.customCriteria,
-      colors: this.$parent.customBackgroundColors,
       tooltipDisabled: true
     };
   },
 
-  filters: {
-    orderBy
-  },
-
   methods: {
+    getRowClass(row, index) {
+      const classes = [];
+      if (row === this.currentRow) {
+        classes.push('current-row');
+      }
+      if (this.hoverRowIndex === index) {
+        classes.push('hover-row');
+      }
+
+      const rowClassName = this.rowClassName;
+      if (typeof rowClassName === 'string') {
+        classes.push(rowClassName);
+      } else if (typeof rowClassName === 'function') {
+        classes.push(rowClassName.apply(null, [row, index]) || '');
+      }
+
+      return classes.join(' ');
+    },
+
     getColumnWhiteSpaceStyle(column) {
       return column.showTooltipWhenOverflow ? { 'white-space': 'nowrap' } : {};
     },
 
-    checkProperty(row) {
-      if (this.criteria && this.criteria.length > 0) {
-        for (let i = 0, len = this.criteria.length; i < len; i++) {
-          if (row[this.criteria[i]] === true) {
-            return i;
-          }
-        }
-      }
-      return -1;
-    },
-
-    getCustomStyle(row) {
-      if (!this.criteria || !this.colors || this.criteria.length !== this.colors.length) {
-        return {};
-      }
-      let criterionIndex = this.checkProperty(row);
-      return criterionIndex > -1 ? { 'background-color': this.colors[criterionIndex] } : {};
-    },
-
     handleCellMouseEnter(event, row) {
-      let grid = this.$parent;
+      const table = this.$parent;
       const cell = getCell(event);
 
       if (cell) {
-        const column = getColumnByCell(grid, cell);
-        const hoverState = grid.hoverState = { cell: cell, column: column, row: row };
-        grid.$emit('cellmouseenter', hoverState.row, hoverState.column, hoverState.cell, event);
+        const column = getColumnByCell(table, cell);
+        const hoverState = table.hoverState = { cell, column, row };
+        table.$emit('cellmouseenter', hoverState.row, hoverState.column, hoverState.cell, event);
       }
 
       // 判断是否text-overflow, 如果是就显示tooltip
-      const cellChild = getChild(event);
+      const cellChild = event.target.querySelector('.cell');
 
       this.tooltipDisabled = cellChild.scrollWidth <= cellChild.offsetWidth;
     },
 
     handleCellMouseLeave(event) {
-      let grid = this.$parent;
       const cell = getCell(event);
 
       if (cell) {
-        const oldHoverState = grid.hoverState;
-        grid.$emit('cellmouseleave', oldHoverState.row, oldHoverState.column, oldHoverState.cell, event);
+        const table = this.$parent;
+        const oldHoverState = table.hoverState;
+        table.$emit('cellmouseleave', oldHoverState.row, oldHoverState.column, oldHoverState.cell, event);
       }
     },
 
     handleMouseEnter(index) {
-      this.$parent.hoverRowIndex = index;
+      this.store.commit('setHoverRow', index);
     },
 
     handleClick(event, row) {
-      let grid = this.$parent;
+      const table = this.$parent;
       const cell = getCell(event);
 
       if (cell) {
-        const column = getColumnByCell(grid, cell);
+        const column = getColumnByCell(table, cell);
         if (column) {
-          grid.$emit('cellclick', row, column, cell, event);
+          table.$emit('cellclick', row, column, cell, event);
         }
       }
 
-      if (grid.selectionMode === 'single') {
-        grid.selected = row;
-      }
+      this.store.commit('setSelectedRow', row);
 
-      grid.$emit('rowclick', row, event);
+      table.$emit('rowclick', row, event);
     },
 
-    $getPropertyText(row, property, columnId) {
-      let grid = this.$parent;
-      const column = getColumnById(grid, columnId);
+    getCellContent(row, property, columnId) {
+      const column = getColumnById(this.$parent, columnId);
       if (column && column.formatter) {
         return column.formatter(row, column);
       }

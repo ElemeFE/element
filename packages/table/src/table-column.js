@@ -28,20 +28,39 @@ const defaults = {
 
 const forced = {
   selection: {
-    headerTemplate: function(h) { return <div><el-checkbox nativeOn-click={ this.toggleAllSelection } domProps-value={ this.allSelected } on-input={ ($event) => this.$emit('allselectedchange', $event) } /></div>; },
-    template: function(h, { row }) { return <el-checkbox domProps-value={ row.$selected } on-input={ ($event) => {row.$selected = $event;} } />; },
+    headerTemplate: function(h) {
+      return <div><el-checkbox
+        nativeOn-click={ this.toggleAllSelection }
+        domProps-value={ this.isAllSelected }
+        on-input={ (value) => { this.$emit('allselectedchange', value); } } />
+      </div>;
+    },
+    template: function(h, { row, column, store, $index }) {
+      return <el-checkbox
+        domProps-value={ row.$selected }
+        disabled={ column.selectable ? !column.selectable.call(null, row, $index) : false }
+        on-input={ (value) => { row.$selected = value; store.commit('rowSelectedChanged', row); } } />;
+    },
     sortable: false,
     resizable: false
   },
   index: {
     // headerTemplate: function(h) { return <div>#</div>; },
-    headerTemplate: function(h, label) { return <div>{ label || '#' }</div>; },
-    template: function(h, { row, $index }) { return <div>{ $index + 1 }</div>; },
+    headerTemplate: function(h, label) {
+      return <div>{ label || '#' }</div>;
+    },
+    template: function(h, { row, $index }) {
+      return <div>{ $index + 1 }</div>;
+    },
     sortable: false
   },
   filter: {
-    headerTemplate: function(h) { return <div>#</div>; },
-    template: function(h, { row, column }) { return <el-tag type="primary" style="height: 16px; line-height: 16px; min-width: 40px; text-align: center">{ row[column.property] }</el-tag>; },
+    headerTemplate: function(h) {
+      return <div>#</div>;
+    },
+    template: function(h, { row, column }) {
+      return <el-tag type="primary" style="height: 16px; line-height: 16px; min-width: 40px; text-align: center">{ row[column.property] }</el-tag>;
+    },
     resizable: false
   }
 };
@@ -60,6 +79,12 @@ const getDefaultColumn = function(type, options) {
     }
   }
 
+  if (!column.minWidth) {
+    column.minWidth = 80;
+  }
+
+  column.realWidth = column.width || column.minWidth;
+
   return column;
 };
 
@@ -73,6 +98,7 @@ export default {
     },
     label: String,
     property: String,
+    prop: String,
     width: {},
     minWidth: {},
     template: String,
@@ -89,7 +115,9 @@ export default {
       type: Boolean,
       default: false
     },
-    formatter: Function
+    fixed: [Boolean, String],
+    formatter: Function,
+    selectable: Function
   },
 
   render() {},
@@ -112,16 +140,25 @@ export default {
     ElTag
   },
 
+  computed: {
+    owner() {
+      let parent = this.$parent;
+      while (parent && !parent.tableId) {
+        parent = parent.$parent;
+      }
+      return parent;
+    }
+  },
+
   created() {
     this.customRender = this.$options.render;
     this.$options.render = (h) => h('div');
 
-    let columnId = this.columnId = (this.$parent.gridId || (this.$parent.columnId + '_')) + 'column_' + columnIdSeed++;
+    let columnId = this.columnId = (this.$parent.tableId || (this.$parent.columnId + '_')) + 'column_' + columnIdSeed++;
 
     let parent = this.$parent;
-    if (!parent.gridId) {
-      this.isChildColumn = true;
-    }
+    let owner = this.owner;
+    this.isChildColumn = owner !== parent;
 
     let type = this.type;
 
@@ -139,17 +176,15 @@ export default {
       if (isNaN(minWidth)) {
         minWidth = 80;
       }
-    } else {
-      minWidth = 80;
     }
 
     let isColumnGroup = false;
     let template;
 
-    let property = this.property;
+    let property = this.prop || this.property;
     if (property) {
       template = function(h, { row }, parent) {
-        return <span>{ parent.$getPropertyText(row, property, columnId) }</span>;
+        return <span>{ parent.getCellContent(row, property, columnId) }</span>;
       };
     }
 
@@ -163,11 +198,12 @@ export default {
       width,
       isColumnGroup,
       align: this.align ? 'is-' + this.align : null,
-      realWidth: width || minWidth,
       sortable: this.sortable,
       resizable: this.resizable,
       showTooltipWhenOverflow: this.showTooltipWhenOverflow,
-      formatter: this.formatter
+      formatter: this.formatter,
+      selectable: this.selectable,
+      fixed: this.fixed
     });
 
     objectAssign(column, forced[type] || {});
@@ -186,7 +222,7 @@ export default {
 
           return _self.customRender.call(data);
         };
-      };
+      }
 
       return _self.showTooltipWhenOverflow
         ? <el-tooltip
@@ -203,37 +239,20 @@ export default {
   },
 
   destroyed() {
-    if (!this.$parent) {
-      return;
-    }
-    let columns = this.$parent.columns;
-    if (columns) {
-      let columnId = this.columnId;
-      for (let i = 0, j = columns.length; i < j; i++) {
-        let column = columns[i];
-
-        if (column.id === columnId) {
-          columns.splice(i, 1);
-          break;
-        }
-      }
-    }
-
-    if (this.isChildColumn) {
-      if (this.$parent.$parent.$ready) {
-        this.$parent.$parent.debouncedReRender();
-      }
-    } else {
-      if (this.$parent.$ready) {
-        this.$parent.debouncedReRender();
-      }
-    }
+    if (!this.$parent) return;
+    this.owner.store.commit('removeColumn', this.columnConfig);
   },
 
   watch: {
     label(newVal) {
       if (this.columnConfig) {
         this.columnConfig.label = newVal;
+      }
+    },
+
+    prop(newVal) {
+      if (this.columnConfig) {
+        this.columnConfig.property = newVal;
       }
     },
 
@@ -245,8 +264,8 @@ export default {
   },
 
   mounted() {
-    let parent = this.$parent;
-    let columnConfig = this.columnConfig;
+    const owner = this.owner;
+    const parent = this.$parent;
     let columnIndex;
 
     if (!this.isChildColumn) {
@@ -255,18 +274,6 @@ export default {
       columnIndex = [].indexOf.call(parent.$el.children, this.$el);
     }
 
-    parent.columns.splice(columnIndex, 0, columnConfig);
-
-    if (this.isChildColumn) {
-      parent.columnConfig.columns = parent.columns;
-
-      if (parent.$parent.$ready) {
-        parent.$parent.debouncedReRender();
-      }
-    } else {
-      if (parent.$ready) {
-        parent.debouncedReRender();
-      }
-    }
+    owner.store.commit('insertColumn', this.columnConfig, columnIndex);
   }
 };

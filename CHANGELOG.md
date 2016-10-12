@@ -15,10 +15,15 @@
 - 修复 Loading 关闭后有几率滚动失效的问题
 - 修复 远程搜索的 Select 不能正确渲染默认初始值的问题
 - 修复 Switch 的 width 属性无效的问题
+- 优化 Table 性能，优化 Table 代码结构
+- Table 增加属性 rowClassName
+- TableColumn 增加 fixed 属性，可选值：true, false, left, right
+- TableColumn[type="selection"] 增加 selectable 属性
 
 #### 非兼容性更新
 
 - 全屏 Loading 现在默认不再锁定屏幕滚动。如果需要的话，可添加 `lock` 修饰符
+- Table 删除属性 fixedColumnCount, customCriteria, customBackgroundColors
 
 ### 1.0.0-rc.7
 
