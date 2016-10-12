@@ -69,6 +69,10 @@
 
     @e icon {
       line-height: 28px;
+
+      > * {
+        line-height: inherit;
+      }
     }
 
     @e head {
