@@ -9,11 +9,6 @@
     border-radius: 2px;
     line-height: 20px;
     margin: 5px 0;
-    min-width: 513px;
-
-    &.has-sidebar {
-      min-width: 620px;
-    }
 
     @e body, body-wrapper {
       &::after {
@@ -68,6 +63,7 @@
       cursor: pointer;
       background-color: transparent;
       outline: none;
+      font-size: 12px;
 
       &[disabled] {
         color: #cccccc;

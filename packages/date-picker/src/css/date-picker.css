@@ -5,8 +5,12 @@
   @b date-picker {
     min-width: 254px;
 
+    &.has-sidebar.has-time {
+      min-width: 434px;
+    }
+
     &.has-sidebar {
-      min-width: 368px;
+      min-width: 370px;
     }
 
     &.has-time {

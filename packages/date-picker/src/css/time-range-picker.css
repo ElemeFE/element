@@ -2,7 +2,7 @@
 
 @component-namespace el {
   @b time-range-picker {
-    width: 354px;
+    min-width: 354px;
     overflow: visible;
 
     @e content {

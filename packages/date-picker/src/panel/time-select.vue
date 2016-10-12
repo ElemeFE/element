@@ -93,7 +93,7 @@
         value: '',
         visible: false,
         minTime: '',
-        width: ''
+        width: 0
       };
     },
 
