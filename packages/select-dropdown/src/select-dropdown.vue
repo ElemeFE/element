@@ -51,8 +51,8 @@
     mounted() {
       this.referenceElm = this.$parent.$refs.reference.$el;
       this.$parent.popperElm = this.popperElm = this.$el;
-      this.$on('updatePopper', _ => { this.showPopper = true; });
-      this.$on('destroyPopper', _ => { this.showPopper = false; });
+      this.$on('updatePopper', this.updatePopper);
+      this.$on('destroyPopper', this.destroyPopper);
     }
   };
 </script>

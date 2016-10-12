@@ -11,6 +11,10 @@
     margin: 5px 0;
     min-width: 513px;
 
+    &.has-sidebar {
+      min-width: 620px;
+    }
+
     @e body, body-wrapper {
       &::after {
         content: "";
