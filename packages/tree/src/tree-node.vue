@@ -94,9 +94,9 @@
         }
       },
 
-      handleCheckChange(checked) {
+      handleCheckChange(ev) {
         if (!this.node.indeterminate) {
-          this.node.setChecked(checked, true);
+          this.node.setChecked(ev.target.checked, true);
         }
       }
     },
