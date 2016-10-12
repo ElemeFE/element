@@ -1,4 +1,5 @@
 import PopperJS from './popper';
+import { PopupManager } from 'vue-popup';
 
 /**
  * @param {HTMLElement} [reference=$refs.reference] - The reference element used to position the popper.
@@ -81,6 +82,7 @@ export default {
       options.offset = this.offset;
       this.popperJS = new PopperJS(reference, popper, options);
       this.popperJS.onCreate(_ => this.$emit('created', this));
+      this.popperJS._popper.style.zIndex = PopupManager.nextZIndex();
     },
 
     updatePopper() {
