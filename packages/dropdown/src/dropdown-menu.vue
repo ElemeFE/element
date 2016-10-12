@@ -1,39 +1,35 @@
 <template>
-  <ul class="el-dropdown__menu">
+  <transition name="md-fade-bottom" @after-leave="doDestroy">
+  <ul class="el-dropdown__menu" v-show="showPopper">
     <slot></slot>
   </ul>
+  </transition>
 </template>
 <script>
-  import Popper from 'main/utils/popper';
+  import Popper from 'main/utils/vue-popper';
 
   export default {
     name: 'ElDropdownMenu',
 
-    props: {
-      visible: Boolean
-    },
-    data() {
-      return {
-        popper: null
-      };
-    },
-    computed: {
-      menuAlign() {
-        return this.$parent.menuAlign;
-      }
-    },
-    mounted() {
-      document.body.appendChild(this.$el);
+    componentName: 'ElDropdownMenu',
 
-      this.$nextTick(() => {
-        this.popper = new Popper(this.$parent.$el, this.$el, { gpuAcceleration: false, placement: `bottom-${this.menuAlign}` });
+    mixins: [Popper],
+
+    created() {
+      this.$on('visible', val => {
+        this.showPopper = val;
       });
     },
 
-    destroyed() {
-      setTimeout(() => {
-        this.popper.destroy();
-      }, 300);
+    mounted() {
+      this.popperElm = this.$el;
+      this.referenceElm = this.$parent.$el;
+    },
+
+    computed: {
+      placement() {
+        return `bottom-${this.$parent.menuAlign}`;
+      }
     }
   };
 </script>

@@ -46,13 +46,6 @@ export default {
     transition: {
       type: String,
       default: 'fade-in-linear'
-    },
-    options: {
-      default() {
-        return {
-          gpuAcceleration: false
-        };
-      }
     }
   },
 

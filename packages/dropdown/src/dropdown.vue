@@ -1,8 +1,11 @@
 <script>
   import Clickoutside from 'main/utils/clickoutside';
+  import emitter from 'main/mixins/emitter';
 
   export default {
     name: 'ElDropdown',
+
+    mixins: [emitter],
 
     directives: { Clickoutside },
 
@@ -30,6 +33,12 @@
 
     mounted() {
       this.initEvent();
+    },
+
+    watch: {
+      visible(val) {
+        this.broadcast('ElDropdownMenu', 'visible', val);
+      }
     },
 
     methods: {
@@ -74,8 +83,7 @@
     },
 
     render(h) {
-      let { hide, splitButton, visible, type } = this;
-      let dropdownElm = visible ? this.$slots.dropdown : null;
+      let { hide, splitButton, type } = this;
 
       var handleClick = _ => {
         this.$emit('click');
@@ -95,9 +103,7 @@
       return (
         <div class="el-dropdown" v-clickoutside={hide}>
           {triggerElm}
-          <transition name="md-fade-bottom">
-            {dropdownElm}
-          </transition>
+          {this.$slots.dropdown}
         </div>
       );
     }

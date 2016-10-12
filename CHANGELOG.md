@@ -5,6 +5,10 @@
 *2016-XX-XX*
 
 - Upload 新增 Data 属性支持额外数据的传输
+- DatePicker 修复 `$t` 报错
+- Popper 重构 vue-popper
+- Pagination 修复输入后再点击切换，输入框的值不更新
+- Step: 修复自定义 icon 的样式
 
 ### 1.0.0-rc.6
 
