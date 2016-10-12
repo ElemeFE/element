@@ -105,7 +105,7 @@
       box-sizing: border-box;
     }
 
-    @e fixed {
+    @e fixed, fixed-right {
       position: absolute;
       top: 0;
       left: 0;
@@ -121,6 +121,14 @@
         background-color: var(--table-border-color);
         z-index: 4;
       }
+    }
+
+    @e fixed-right {
+      top: 0;
+      left: auto;
+      right: 0;
+
+      box-shadow: -1px 0 8px #d3d4d6;
     }
 
     @e fixed-header-wrapper {

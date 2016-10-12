@@ -117,6 +117,15 @@
 
       formatter(row, column) {
         return row.address;
+      },
+
+      tableRowClassName(row, index) {
+        if (index === 1) {
+          return 'info-row';
+        } else if (index === 3) {
+          return 'positive-row';
+        }
+        return '';
       }
     },
 
@@ -132,6 +141,16 @@
   };
 </script>
 
+<style>
+  .el-table .info-row {
+    background: #c9e5f5;
+  }
+
+  .el-table .positive-row {
+    background: #e2f0e4;
+  }
+</style>
+
 ## Table 表格
 
 用于展示多条结构类似的数据，可对数据进行排序、筛选、对比或其他自定义操作。
@@ -140,24 +159,24 @@
 
 基础的表格展示用法。
 
-:::demo 当`el-table`元素中注入`data`对象数组后，在`el-table-column`中用`property`属性来对应对象中的键名即可填入数据，用`label`属性来定义表格的列名。可以使用`width`属性来定义列宽。
+:::demo 当`el-table`元素中注入`data`对象数组后，在`el-table-column`中用`prop`属性来对应对象中的键名即可填入数据，用`label`属性来定义表格的列名。可以使用`width`属性来定义列宽。
 ```html
   <template>
     <el-table
       :data="tableData"
       style="width: 100%">
       <el-table-column
-        property="date"
+        prop="date"
         label="日期"
         width="180">
       </el-table-column>
       <el-table-column
-        property="name"
+        prop="name"
         label="姓名"
         width="180">
       </el-table-column>
       <el-table-column
-        property="address"
+        prop="address"
         label="地址">
       </el-table-column>
     </el-table>
@@ -203,17 +222,17 @@
     stripe
     style="width: 100%">
     <el-table-column
-      property="date"
+      prop="date"
       label="日期"
       width="180">
     </el-table-column>
     <el-table-column
-      property="name"
+      prop="name"
       label="姓名"
       width="180">
     </el-table-column>
     <el-table-column
-      property="address"
+      prop="address"
       label="地址">
     </el-table-column>
   </el-table>
@@ -257,17 +276,17 @@
     border
     style="width: 100%">
     <el-table-column
-      property="date"
+      prop="date"
       label="日期"
       width="180">
     </el-table-column>
     <el-table-column
-      property="name"
+      prop="name"
       label="姓名"
       width="180">
     </el-table-column>
     <el-table-column
-      property="address"
+      prop="address"
       label="地址">
     </el-table-column>
   </el-table>
@@ -305,33 +324,52 @@
 
 可将表格内容 highlight 显示，方便区分「成功、信息、警告、危险」等内容。
 
-:::demo 为行添加自定义背景色，表明该行处于某种状态。若某一行拥有`custom-criteria`数组中的某个字段且值为`true`，则为该行添加`custom-background-colors`数组中对应的背景色。
+:::demo 可以通过指定 Table 组件的 rowClassName 属性来为 Table 中的某一行添加 class，表明该行处于某种状态。
 ```html
 <template>
   <el-table
     :data="tableData2"
     style="width: 100%"
-    :custom-criteria="['$info', '$positive']"
-    :custom-background-colors="['#C9E5F5', '#E2F0E4']">
+    :row-class-name="tableRowClassName">
     <el-table-column
-      property="date"
+      prop="date"
       label="日期"
       width="180">
     </el-table-column>
     <el-table-column
-      property="name"
+      prop="name"
       label="姓名"
       width="180">
     </el-table-column>
     <el-table-column
-      property="address"
+      prop="address"
       label="地址">
     </el-table-column>
   </el-table>
 </template>
 
+<style>
+  .el-table .info-row {
+    background: #c9e5f5;
+  }
+
+  .el-table .positive-row {
+    background: #e2f0e4;
+  }
+</style>
+
 <script>
   export default {
+    methods: {
+      tableRowClassName(row, index) {
+        if (index === 1) {
+          return 'info-row';
+        } else if (index === 3) {
+          return 'positive-row';
+        }
+        return '';
+      }
+    },
     data() {
       return {
         tableData2: [{
@@ -373,17 +411,17 @@
     border
     style="width: 100%">
     <el-table-column
-      property="date"
+      prop="date"
       label="日期"
       width="180">
     </el-table-column>
     <el-table-column
-      property="name"
+      prop="name"
       label="姓名"
       width="180">
     </el-table-column>
     <el-table-column
-      property="address"
+      prop="address"
       label="地址">
     </el-table-column>
   </el-table>
@@ -433,41 +471,41 @@
 
 横向内容过多时，可选择固定首列。
 
-:::demo 固定列需要使用`fixed-column-count`属性，它接受一个`Number`，表示左起要固定的列数。
+:::demo 固定列需要使用`fixed`属性，它接受 Boolean 值或者`left` `right`，表示左边固定还是右边固定。
 ```html
 <template>
   <el-table
     :data="tableData"
-    :fixed-column-count="1"
     border
     style="width: 100%">
     <el-table-column
-      property="date"
+      fixed
+      prop="date"
       label="日期"
       width="150">
     </el-table-column>
     <el-table-column
-      property="name"
+      prop="name"
       label="姓名"
       width="120">
     </el-table-column>
     <el-table-column
-      property="province"
+      prop="province"
       label="省份"
       width="120">
     </el-table-column>
     <el-table-column
-      property="city"
+      prop="city"
       label="市区"
       width="120">
     </el-table-column>
     <el-table-column
-      property="address"
+      prop="address"
       label="地址"
       width="300">
     </el-table-column>
     <el-table-column
-      property="zip"
+      prop="zip"
       label="邮编"
       width="120">
     </el-table-column>
@@ -523,37 +561,37 @@
 <template>
   <el-table
     :data="tableData3"
-    :fixed-column-count="1"
     border
     style="width: 100%"
     height="250">
     <el-table-column
-      property="date"
+      fixed
+      prop="date"
       label="日期"
       width="150">
     </el-table-column>
     <el-table-column
-      property="name"
+      prop="name"
       label="姓名"
       width="120">
     </el-table-column>
     <el-table-column
-      property="province"
+      prop="province"
       label="省份"
       width="120">
     </el-table-column>
     <el-table-column
-      property="city"
+      prop="city"
       label="市区"
       width="120">
     </el-table-column>
     <el-table-column
-      property="address"
+      prop="address"
       label="地址"
       width="300">
     </el-table-column>
     <el-table-column
-      property="zip"
+      prop="zip"
       label="邮编"
       width="120">
     </el-table-column>
@@ -639,17 +677,17 @@
       width="50">
     </el-table-column>
     <el-table-column
-      property="date"
+      prop="date"
       label="日期"
       width="120">
     </el-table-column>
     <el-table-column
-      property="name"
+      prop="name"
       label="姓名"
       width="120">
     </el-table-column>
     <el-table-column
-      property="address"
+      prop="address"
       label="地址">
     </el-table-column>
   </el-table>
@@ -694,7 +732,7 @@
 
 选择多行数据时使用 Checkbox。
 
-:::demo 除了`selection-mode`的设置外，多选与单选并没有太大差别，只是传入`selectionchange`事件中的参数从对象变成了对象数组。此外，需要提供一个列来显示多选框: 手动添加一个`el-table-column`，设`type`属性为`selection`即可。在本例中，为了方便说明其他属性，我们还使用了`inline-template`和`show-tooltip-when-overflow`：设置了`inline-template`属性后，可以通过调用`row`对象中的值取代`property`属性的设置；默认情况下若内容过多会折行显示，若需要单行显示可以使用`show-tooltip-when-overflow`属性，它接受一个`Boolean`，为`true`时多余的内容会在 hover 时以 tooltip 的形式显示出来。
+:::demo 除了`selection-mode`的设置外，多选与单选并没有太大差别，只是传入`selectionchange`事件中的参数从对象变成了对象数组。此外，需要提供一个列来显示多选框: 手动添加一个`el-table-column`，设`type`属性为`selection`即可。在本例中，为了方便说明其他属性，我们还使用了`inline-template`和`show-tooltip-when-overflow`：设置了`inline-template`属性后，可以通过调用`row`对象中的值取代`prop`属性的设置；默认情况下若内容过多会折行显示，若需要单行显示可以使用`show-tooltip-when-overflow`属性，它接受一个`Boolean`，为`true`时多余的内容会在 hover 时以 tooltip 的形式显示出来。
 ```html
 <template>
   <el-table
@@ -713,12 +751,12 @@
       <div>{{ row.date }}</div>
     </el-table-column>
     <el-table-column
-      property="name"
+      prop="name"
       label="姓名"
       width="120">
     </el-table-column>
     <el-table-column
-      property="address"
+      prop="address"
       label="地址"
       show-tooltip-when-overflow>
     </el-table-column>
@@ -784,18 +822,18 @@
     border
     style="width: 100%">
     <el-table-column
-      property="date"
+      prop="date"
       label="日期"
       sortable
       width="180">
     </el-table-column>
     <el-table-column
-      property="name"
+      prop="name"
       label="姓名"
       width="180">
     </el-table-column>
     <el-table-column
-      property="address"
+      prop="address"
       label="地址"
       :formatter="formatter">
     </el-table-column>
@@ -843,9 +881,9 @@
 | stripe | 是否为斑马纹 table | boolean | — | false |
 | border | 是否带有纵向边框 | boolean | — | false |
 | fit | 列的宽度是否自撑开 | boolean | — | true |
+| rowClassName | 行的 className 的回调，会传入 row, index。 | Function | - | - |
 | selection-mode | 列表项选择模式 | string | single/multiple/none | none |
 | allow-no-selection | 单选模式是否允许选项为空 | boolean | — | false |
-| fixed-column-count | 固定列的个数 | number | — | 0 |
 
 ### Table Events
 | 事件名 | 说明 | 参数 |
@@ -859,12 +897,14 @@
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | label | 显示的标题 | string | — | — |
-| property | 对应列内容的字段名 | string | — | — |
+| prop | 对应列内容的字段名，也可以使用 property 属性 | string | — | — |
 | width | 对应列的宽度 | string | — | — |
+| fixed | 列是否固定在左侧或者右侧 | string, boolean | true, left, right | - |
 | sortable | 对应列是否可以排序 | boolean | — | false |
 | resizable | 对应列是否可以通过拖动改变宽度（如果需要，需在 el-table 上设置 border 属性为真） | boolean | — | false |
 | type | 对应列的类型。如果设置了 `selection` 则显示多选框，如果设置了 `index` 则显示该行的索引（从 1 开始计算） | string | selection/index | — |
 | formatter | 用来格式化内容，在 formatter 执行的时候，会传入 row 和 column | function | — | — |
 | show-tooltip-when-overflow | 当过长被隐藏时显示 tooltip | Boolean | — | false |
-| inline-template | 指定该属性后可以自定义 column 模板，参考多选的时间列，通过 row 获取行信息，JSX 里通过 _self 获取当前上下文。此时不需要配置 property 属性  | — | — |
+| inline-template | 指定该属性后可以自定义 column 模板，参考多选的时间列，通过 row 获取行信息，JSX 里通过 _self 获取当前上下文。此时不需要配置 prop 属性  | — | — |
 | align | 对齐方式 | String | left, center, right | left |
+| selectable | 仅对 type=selection 的列有效，类型为 Function，Function 的返回值用来决定这一行的 CheckBox 是否可以勾选 | Function | - |
