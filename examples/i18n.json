@@ -19,7 +19,14 @@
         "14": "前端工程师",
         "15": "只为守护世界和平",
         "16": "让你少加班",
-        "17": "只为这样的你"
+        "17": "只为这样的你",
+        "18": "-5",
+        "19": "-5",
+        "20": "-5",
+        "21": "-4",
+        "22": "-5",
+        "23": "-6",
+        "24": "-5"
       },
       "component": {},
       "changelog": {},
@@ -98,19 +105,26 @@
         "2": "Element，一套为开发者、设计师和产品经理准备的基于 Vue 2.0 的组件库，提供了配套设计资源，帮助你的网站快速成型。",
         "3": "Guide",
         "4": "了解设计指南，帮助产品设计人员搭建逻辑清晰、结构合理且高效易用的产品。",
-        "5": "查看详情",
+        "5": "View Detail",
         "6": "Components",
         "7": "使用组件 Demo 快速体验交互细节；使用前端框架封装的代码帮助工程师快速开发。",
         "8": "Resources",
         "9": "下载相关资源，用其快速搭建页面原型或高保真视觉稿，提升产品设计效率。",
-        "10": "产品设计师",
-        "11": "交互设计师",
-        "12": "视觉设计师",
-        "13": "产品经理",
-        "14": "前端工程师",
+        "10": "product designer",
+        "11": "interaction designer",
+        "12": "visual designer",
+        "13": "product manager",
+        "14": "front-end engineer",
         "15": "只为守护世界和平",
         "16": "让你少加班",
-        "17": "只为这样的你"
+        "17": "For you",
+        "18": "-16",
+        "19": "-20",
+        "20": "-15",
+        "21": "-15",
+        "22": "-18",
+        "23": "-6",
+        "24": "-5"
       },
       "component": {},
       "changelog": {},
@@ -169,15 +183,15 @@
         "15": "适用于导航较少，页面篇幅较长的网站；"
       },
       "resource": {
-        "1": "资源",
-        "2": "这里提供 Element 相关设计资源和设计工具的下载，更多设计资源正在整理和完善中。",
+        "1": "Resource",
+        "2": "Here you can download design resources and tools that shaped Element UI. More design resources are being prepared.",
         "3": "Axure Components",
-        "4": "通过在 Axure 中导入 Element 组件库，可以在交互设计阶段方便地调用常用的组件",
-        "5": "下载",
+        "4": "By importing Element UI in Axure, you can easily apply all the components we provide during interaction design.",
+        "5": "Download",
         "6": "Sketch Template",
-        "7": "从 Element Template 快速调用常用组件，在提升设计效率的同时，保证统一的视觉风格",
-        "8": "组件交互文档",
-        "9": "进一步查看 Element 交互文档，从一个较为微观的角度详细地了解各个组件的交互细节"
+        "7": "Apply components from Element template, so you can improve design efficiency while keeping a unified visual style.",
+        "8": "Interaction Design Documentation",
+        "9": "Take a closer look at the interaction design documentation. Learn more details of each component from a microcosmic perspective."
       }
     }
   }

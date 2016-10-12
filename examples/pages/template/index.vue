@@ -219,11 +219,11 @@
     mounted() {
       function typing(theater) {
         theater
-          .addScene('<%= 10 >', 1800, -5, 800)
-          .addScene('<%= 11 >', 1800, -5, 500)
-          .addScene('<%= 12 >', 1800, -5, 700)
-          .addScene('<%= 13 >', 1800, -4, 600)
-          .addScene('<%= 14 >', 1800, -5, 800)
+          .addScene('<%= 10 >', 1800, <%= 18 >, 800)
+          .addScene('<%= 11 >', 1800, <%= 19 >, 500)
+          .addScene('<%= 12 >', 1800, <%= 20 >, 700)
+          .addScene('<%= 13 >', 1800, <%= 21 >, 600)
+          .addScene('<%= 14 >', 1800, <%= 22 >, 800)
           .addScene((done) => {
             typing(theater);
             done();
@@ -240,9 +240,9 @@
       theater
         .addActor('line2', { speed: 0.5, accuracy: 1 })
         .addScene(2600)
-        .addScene('line2:<%= 15 >', 300, -6, 1000)
-        .addScene('<%= 16 >', 300, -5)
-        .addScene('line2:<%=17     >: ', 400)
+        .addScene('line2:<%= 15 >', 300, <%= 23 >, 1000)
+        .addScene('<%= 16 >', 300, <%= 24 >)
+        .addScene('line2:<%= 17 >: ', 400)
         .addScene((done) => {
           typing(theater);
           done();
