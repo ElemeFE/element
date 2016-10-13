@@ -312,6 +312,7 @@ export default {
     },
 
     handleBlur() {
+      this.pickerVisible = false;
       this.$emit('blur', this);
       this.dispatch('form-item', 'el.form.blur');
     },
