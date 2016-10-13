@@ -66,15 +66,10 @@
           triggerElm.addEventListener('mouseenter', show);
           triggerElm.addEventListener('mouseleave', hide);
 
-          let dropdown = this.$slots.dropdown[0];
-          let insertHook = dropdown.data.hook.insert;
-          dropdown.data.hook.insert = (vnode) => {
-            insertHook(vnode);
-            this.$nextTick(_ => {
-              vnode.elm.addEventListener('mouseenter', show);
-              vnode.elm.addEventListener('mouseleave', hide);
-            });
-          };
+          let dropdownElm = this.$slots.dropdown[0].elm;
+
+          dropdownElm.addEventListener('mouseenter', show);
+          dropdownElm.addEventListener('mouseleave', hide);
         } else if (trigger === 'click') {
           triggerElm.addEventListener('click', handleClick);
         }
