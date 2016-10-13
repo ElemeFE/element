@@ -70,7 +70,7 @@
   import ElTag from 'element-ui/packages/tag/index.js';
   import debounce from 'throttle-debounce/debounce';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
-  import { addClass, removeClass } from 'wind-dom/src/class';
+  import { addClass, removeClass, hasClass } from 'wind-dom/src/class';
 
   export default {
     mixins: [emitter],
@@ -287,7 +287,8 @@
             }
           }
         } else {
-          if (this.$el.querySelector('.el-input__icon')) {
+          let icon = this.$el.querySelector('.el-input__icon');
+          if (icon && !hasClass(icon, 'el-icon-circle-close')) {
             addClass(this.$el.querySelector('.el-input__icon'), 'is-reverse');
           }
           this.broadcast('select-dropdown', 'updatePopper');

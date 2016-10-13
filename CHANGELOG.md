@@ -11,6 +11,7 @@
 - Step: 修复自定义 icon 的样式
 - 修复 Tree 组件 checkbox 点击失效的问题
 - Breadcrumb 增加路由跳转的功能
+- 修复 可清空的 Select 中清空按钮的不恰当动画
 
 ### 1.0.0-rc.6
 
