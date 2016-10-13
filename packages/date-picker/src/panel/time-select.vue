@@ -1,7 +1,8 @@
 <template>
-  <transition name="md-fade-bottom">
+  <transition name="md-fade-bottom" @after-leave="$emit('dodestroy')">
     <div
       v-show="visible"
+      :style="{ width: width + 'px' }"
       class="el-picker-panel time-select">
       <div class="el-picker-panel__content">
         <div class="time-select-item"
@@ -16,7 +17,7 @@
   </transition>
 </template>
 
-<script type="text/ecmascript-6">
+<script type="text/babel">
   const parseTime = function(time) {
     const values = ('' || time).split(':');
     if (values.length >= 2) {
@@ -91,7 +92,8 @@
         step: '00:30',
         value: '',
         visible: false,
-        minTime: ''
+        minTime: '',
+        width: 0
       };
     },
 

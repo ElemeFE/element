@@ -3,7 +3,19 @@
 
 @component-namespace el {
   @b date-picker {
-    min-width: 300px;
+    min-width: 254px;
+
+    &.has-sidebar.has-time {
+      min-width: 434px;
+    }
+
+    &.has-sidebar {
+      min-width: 370px;
+    }
+
+    &.has-time {
+      min-width: 324px;
+    }
 
     .el-picker-panel__content {
       min-width: 224px;

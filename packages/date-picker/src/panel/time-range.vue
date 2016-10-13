@@ -1,7 +1,8 @@
 <template>
-  <transition name="md-fade-bottom">
+  <transition name="md-fade-bottom" @after-leave="$emit('dodestroy')">
     <div
       v-show="visible"
+      :style="{ width: width + 'px' }"
       class="el-time-range-picker el-picker-panel">
       <div class="el-time-range-picker__content">
         <div class="el-time-range-picker__cell">
@@ -48,8 +49,9 @@
   </transition>
 </template>
 
-<script type="text/ecmascript-6">
+<script type="text/babel">
   import { parseDate, limitRange } from '../util';
+  import { $t } from '../util';
 
   const MIN_TIME = parseDate('00:00:00', 'HH:mm:ss');
   const MAX_TIME = parseDate('23:59:59', 'HH:mm:ss');
@@ -90,11 +92,16 @@
         minMinutes: minTime.getMinutes(),
         minSeconds: minTime.getSeconds(),
         format: 'HH:mm:ss',
-        visible: false
+        visible: false,
+        width: 0
       };
     },
 
     methods: {
+      $t(...args) {
+        return $t.apply(this, args);
+      },
+
       handleCancel() {
         this.$emit('pick');
       },

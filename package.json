@@ -1,6 +1,6 @@
 {
   "name": "element-ui",
-  "version": "1.0.0-rc.5",
+  "version": "1.0.0-rc.6",
   "description": "A Component Library for Vue.js.",
   "main": "lib/element-ui.common.js",
   "files": [
@@ -89,10 +89,10 @@
     "theaterjs": "^3.0.0",
     "uppercamelcase": "^1.1.0",
     "url-loader": "^0.5.7",
-    "vue": "^2.0.1",
+    "vue": "^2.0.2",
     "vue-loader": "^9.5.1",
     "vue-markdown-loader": "^0.5.1",
-    "vue-popup": "^0.2.6",
+    "vue-popup": "^0.2.8",
     "vue-router": "^2.0.0",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.15.1",

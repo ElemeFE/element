@@ -1,8 +1,13 @@
 <template>
-  <transition name="md-fade-bottom">
+  <transition name="md-fade-bottom" @after-leave="$emit('dodestroy')">
     <div
       v-show="visible"
-      class="el-picker-panel el-date-range-picker">
+      :style="{ width: width + 'px' }"
+      class="el-picker-panel el-date-range-picker"
+      :class="{
+        'has-sidebar': $slots.sidebar || shortcuts,
+        'has-time': showTime
+      }">
       <div class="el-picker-panel__body-wrapper">
         <slot name="sidebar" class="el-picker-panel__sidebar"></slot>
         <div class="el-picker-panel__sidebar" v-if="shortcuts">
@@ -31,6 +36,7 @@
                   @focus="leftTimePickerVisible = true"
                   @change="handleTimeChange($event, 'min')"/>
                 <time-picker
+                  :picker-width="leftPickerWidth"
                   ref="lefttimepicker"
                   :date="minDate"
                   @pick="handleLeftTimePick"
@@ -41,6 +47,7 @@
             <span class="el-icon-arrow-right"></span>
             <span class="el-date-range-picker__editors-wrap is-right">
               <input
+                ref="leftInput"
                 placeholder="结束日期"
                 class="el-date-range-picker__editor"
                 v-model="rightVisibleDate"
@@ -51,6 +58,7 @@
                 class="el-date-range-picker__time-picker-wrap"
                 v-clickoutside="closeRightTimePicker">
                 <input
+                  ref="rightInput"
                   placeholder="结束时间"
                   class="el-date-range-picker__editor"
                   v-model="rightVisibleTime"
@@ -58,6 +66,7 @@
                   :readonly="!minDate"
                   @change="handleTimeChange($event, 'max')" />
                 <time-picker
+                  :picker-width="rightPickerWidth"
                   ref="righttimepicker"
                   :date="maxDate"
                   @pick="handleRightTimePick"
@@ -254,6 +263,8 @@
 
     data() {
       return {
+        leftPickerWidth: 0,
+        rightPickerWidth: 0,
         date: new Date(),
         minDate: '',
         maxDate: '',
@@ -269,11 +280,26 @@
         visible: '',
         disabledDate: '',
         leftTimePickerVisible: false,
-        rightTimePickerVisible: false
+        rightTimePickerVisible: false,
+        width: 0
       };
     },
 
     watch: {
+      showTime(val) {
+        if (!val) return;
+        this.$nextTick(_ => {
+          const leftInputElm = this.$refs.leftInput;
+          const rightInputElm = this.$refs.rightInput;
+          if (leftInputElm) {
+            this.leftPickerWidth = leftInputElm.getBoundingClientRect().width + 10;
+          }
+          if (rightInputElm) {
+            this.rightPickerWidth = rightInputElm.getBoundingClientRect().width + 10;
+          }
+        });
+      },
+
       minDate() {
         this.$nextTick(() => {
           if (this.maxDate && this.maxDate < this.minDate) {
@@ -302,7 +328,9 @@
     },
 
     methods: {
-      $t,
+      $t(...args) {
+        return $t.apply(this, args);
+      },
 
       closeLeftTimePicker() {
         this.leftTimePickerVisible = false;

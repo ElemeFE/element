@@ -1,5 +1,8 @@
 <template>
-  <div class="el-select" :class="{ 'is-multiple': multiple, 'is-small': size === 'small' }">
+  <div
+    class="el-select"
+    v-clickoutside="handleClose"
+    :class="{ 'is-multiple': multiple, 'is-small': size === 'small' }">
     <div class="el-select__tags" v-if="multiple" @click.stop="toggleMenu" ref="tags" :style="{ 'max-width': inputWidth - 32 + 'px' }">
       <transition-group @after-leave="resetInputHeight">
         <el-tag
@@ -45,10 +48,9 @@
       @keydown.native.tab="visible = false"
       @mouseenter.native="inputHovering = true"
       @mouseleave.native="inputHovering = false"
-      :icon="iconClass"
-      v-element-clickoutside="handleClose">
+      :icon="iconClass">
     </el-input>
-    <transition name="md-fade-bottom">
+    <transition name="md-fade-bottom" @after-leave="doDestroy">
       <el-select-menu
         ref="popper"
         v-show="visible && nodataText !== false">
@@ -68,6 +70,7 @@
   import ElTag from 'packages/tag/index.js';
   import debounce from 'throttle-debounce/debounce';
   import Clickoutside from 'main/utils/clickoutside';
+  import { addClass, removeClass } from 'wind-dom/src/class';
 
   export default {
     mixins: [emitter],
@@ -93,10 +96,10 @@
         if (icon) {
           if (criteria) {
             icon.addEventListener('click', this.deleteSelected);
-            icon.classList.add('is-show-close');
+            addClass(icon, 'is-show-close');
           } else {
             icon.removeEventListener('click', this.deleteSelected);
-            icon.classList.remove('is-show-close');
+            removeClass(icon, 'is-show-close');
           }
         }
         return criteria;
@@ -127,9 +130,7 @@
       ElTag
     },
 
-    directives: {
-      ElementClickoutside: Clickoutside
-    },
+    directives: { Clickoutside },
 
     props: {
       name: String,
@@ -270,7 +271,7 @@
         if (!val) {
           this.$refs.reference.$el.querySelector('input').blur();
           if (this.$el.querySelector('.el-input__icon')) {
-            this.$el.querySelector('.el-input__icon').classList.remove('is-reverse');
+            removeClass(this.$el.querySelector('.el-input__icon'), 'is-reverse');
           }
           this.broadcast('select-dropdown', 'destroyPopper');
           if (this.$refs.input) {
@@ -287,7 +288,7 @@
           }
         } else {
           if (this.$el.querySelector('.el-input__icon')) {
-            this.$el.querySelector('.el-input__icon').classList.add('is-reverse');
+            addClass(this.$el.querySelector('.el-input__icon'), 'is-reverse');
           }
           this.broadcast('select-dropdown', 'updatePopper');
           if (this.filterable) {
@@ -316,6 +317,10 @@
     },
 
     methods: {
+      doDestroy() {
+        this.$refs.popper.doDestroy();
+      },
+
       handleClose() {
         this.visible = false;
       },

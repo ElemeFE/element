@@ -190,7 +190,6 @@ export default {
 
       return _self.showTooltipWhenOverflow
         ? <el-tooltip
-            on-created={ this.handleCreate }
             effect={ this.effect }
             placement="top"
             disabled={ this.tooltipDisabled }>

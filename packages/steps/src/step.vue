@@ -12,17 +12,18 @@
         <i class="el-step__line-inner" :style="lineStyle"></i>
       </div>
 
-      <slot
-        v-if="currentStatus !== 'success' && currentStatus !== 'error'"
-        name="icon">
-        <i v-if="icon" :class="['el-step__icon', 'el-icon-' + icon]"></i>
-        <div v-else>{{ index + 1 }}</div>
-      </slot>
-      <i
-        v-else
-        class="el-step__icon"
-        :class="['el-icon-' + (currentStatus === 'success' ? 'check' : 'close')]">
-      </i>
+      <span class="el-step__icon">
+        <slot
+          v-if="currentStatus !== 'success' && currentStatus !== 'error'"
+          name="icon">
+          <i v-if="icon" :class="['el-icon-' + icon]"></i>
+          <div v-else>{{ index + 1 }}</div>
+        </slot>
+        <i
+          v-else
+          :class="['el-icon-' + (currentStatus === 'success' ? 'check' : 'close')]">
+        </i>
+      </span>
     </div>
     <div
       class="el-step__main"
@@ -59,8 +60,8 @@ export default {
   data() {
     return {
       index: -1,
-      style: { width: 0, height: 0 },
-      lineStyle: { width: 0, height: 0 },
+      style: { width: '', height: '' },
+      lineStyle: { width: '', height: '' },
       mainOffset: 0,
       currentStatus: this.status
     };

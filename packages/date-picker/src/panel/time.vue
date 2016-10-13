@@ -1,7 +1,8 @@
 <template>
-  <transition name="md-fade-bottom">
+  <transition name="md-fade-bottom" @after-leave="$emit('dodestroy')">
     <div
       v-show="currentVisible"
+      :style="{width: width + 'px'}"
       class="el-time-panel">
       <div class="el-time-panel__content">
         <time-spinner
@@ -31,6 +32,7 @@
 <script type="text/babel">
   import { limitRange } from '../util';
   import Vue from 'vue';
+  import { $t } from '../util';
 
   export default {
     components: {
@@ -38,18 +40,22 @@
     },
 
     props: {
+      pickerWidth: {},
       date: {
         default() {
           return new Date();
         }
       },
-
       visible: Boolean
     },
 
     watch: {
       visible(val) {
         this.currentVisible = val;
+      },
+
+      pickerWidth(val) {
+        this.width = val;
       },
 
       value(newVal) {
@@ -80,7 +86,8 @@
         seconds: 0,
         selectableRange: [],
         currentDate: this.$options.defaultValue || this.date,
-        currentVisible: this.visible
+        currentVisible: this.visible,
+        width: this.pickerWidth || 0
       };
     },
 
@@ -91,6 +98,10 @@
     },
 
     methods: {
+      $t(...args) {
+        return $t.apply(this, args);
+      },
+
       handleCancel() {
         this.$emit('pick', null);
       },

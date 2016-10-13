@@ -2,6 +2,20 @@
 
 @component-namespace el {
   @b date-range-picker {
+    min-width: 520px;
+
+    &.has-sidebar.has-time {
+      min-width: 766px;
+    }
+
+    &.has-sidebar {
+      min-width: 620px;
+    }
+
+    &.has-time {
+      min-width: 660px;
+    }
+
     table {
       table-layout: fixed;
       width: 100%;
