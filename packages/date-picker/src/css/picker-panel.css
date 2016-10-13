@@ -63,6 +63,7 @@
       cursor: pointer;
       background-color: transparent;
       outline: none;
+      font-size: 12px;
 
       &[disabled] {
         color: #cccccc;

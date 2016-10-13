@@ -35,6 +35,7 @@
 
   import Popup from 'vue-popup';
   import ElInput from 'packages/input/index.js';
+  import { addClass, removeClass } from 'wind-dom/src/class';
 
   export default {
     mixins: [ Popup ],
@@ -113,7 +114,7 @@
           var inputPattern = this.inputPattern;
           if (inputPattern && !inputPattern.test(this.inputValue || '')) {
             this.editorErrorMessage = this.inputErrorMessage || '输入的数据不合法!';
-            this.$refs.input.$el.querySelector('input').classList.add('invalid');
+            addClass(this.$refs.input.$el.querySelector('input'), 'invalid');
             return false;
           }
           var inputValidator = this.inputValidator;
@@ -121,7 +122,7 @@
             var validateResult = inputValidator(this.inputValue);
             if (validateResult === false) {
               this.editorErrorMessage = this.inputErrorMessage || '输入的数据不合法!';
-              this.$refs.input.$el.querySelector('input').classList.add('invalid');
+              addClass(this.$refs.input.$el.querySelector('input'), 'invalid');
               return false;
             }
             if (typeof validateResult === 'string') {
@@ -131,7 +132,7 @@
           }
         }
         this.editorErrorMessage = '';
-        this.$refs.input.$el.querySelector('input').classList.remove('invalid');
+        removeClass(this.$refs.input.$el.querySelector('input'), 'invalid');
         return true;
       }
     },

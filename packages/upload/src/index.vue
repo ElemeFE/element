@@ -31,18 +31,13 @@ export default {
         };
       }
     },
-    multiple: {
-      type: Boolean,
-      default: false
-    },
+    data: Object,
+    multiple: Boolean,
     name: {
       type: String,
       default: 'file'
     },
-    withCredentials: {
-      type: Boolean,
-      default: false
-    },
+    withCredentials: Boolean,
     thumbnailMode: Boolean,
     showUploadList: {
       type: Boolean,
@@ -179,6 +174,7 @@ export default {
         'with-credentials': this.withCredentials,
         headers: this.headers,
         name: this.name,
+        data: this.data,
         accept: this.thumbnailMode ? 'image/*' : this.accept,
         'on-start': this.handleStart,
         'on-progress': this.handleProgress,

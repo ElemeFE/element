@@ -627,7 +627,7 @@
 
 | 参数          | 说明            | 类型            | 可选值                 | 默认值   |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
-| type         | 同原生的 input 的 type 属性，另外提供 type="textarea"   | string  | — | — |
+| type         | 类型   | string  | text/textarea | text |
 | value         | 绑定值           | string, number  | — | — |
 | maxlength     | 最大输入长度      | number          |  —  | — |
 | minlength     | 最小输入长度      | number          | — | — |

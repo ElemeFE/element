@@ -13,6 +13,7 @@
   "repository": "https://github.com/element-component/element/tree/master/packages/select",
   "devDependencies": {
     "throttle-debounce": "^1.0.1",
-    "vue-clickoutside": "0.0.4"
+    "vue-clickoutside": "0.0.4",
+    "wind-dom": "0.0.3"
   }
 }

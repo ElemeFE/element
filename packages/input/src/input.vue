@@ -15,7 +15,7 @@
       <input
         class="el-input__inner"
         v-model="currentValue"
-        :type="type"
+        type="text"
         :name="name"
         :placeholder="placeholder"
         :disabled="disabled"
@@ -25,7 +25,7 @@
         :minlength="minlength"
         :autocomplete="autoComplete"
         ref="input"
-        @focus="$emit('onfocus', currentValue)"
+        @focus="$emit('focus', currentValue)"
         @blur="handleBlur"
       >
       <!-- input 图标 -->
@@ -49,7 +49,7 @@
       :rows="rows"
       :maxlength="maxlength"
       :minlength="minlength"
-      @focus="$emit('onfocus', currentValue)"
+      @focus="$emit('focus', currentValue)"
       @blur="handleBlur">
     </textarea>
   </div>
@@ -162,6 +162,7 @@
 
       'currentValue'(val) {
         this.$emit('input', val);
+        this.$emit('change', val);
         this.dispatch('form-item', 'el.form.change', [val]);
       }
     }

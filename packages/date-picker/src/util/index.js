@@ -176,7 +176,11 @@ export const limitRange = function(date, ranges) {
 
 import i18n from './i18n';
 
-export const $t = function(path) {
+export const $t = function(path, options) {
+  const vuei18n = Object.getPrototypeOf(this).$t;
+  if (typeof vuei18n === 'function') {
+    return vuei18n.apply(this, [path, options]);
+  }
   const array = path.split('.');
   let current = i18n;
   for (var i = 0, j = array.length; i < j; i++) {

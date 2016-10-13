@@ -168,14 +168,9 @@ export default {
           this.oldValue = event.target.value;
         },
 
-        handleChange(event) {
-          const target = event.target;
+        handleChange({ target }) {
           this.$parent.internalCurrentPage = this.$parent.getValidCurrentPage(target.value);
-
-          if (target.value !== this.oldValue && Number(target.value) === this.$parent.internalCurrentPage) {
-            this.$parent.$emit('currentchange', this.$parent.internalCurrentPage);
-          }
-
+          this.$parent.$emit('currentchange', this.$parent.internalCurrentPage);
           this.oldValue = null;
         }
       },
@@ -189,12 +184,11 @@ export default {
               type="number"
               min={ 1 }
               max={ this.pageCount }
-              value={ this.$parent.internalCurrentPage }
+              domProps-value={ this.$parent.internalCurrentPage }
               on-change={ this.handleChange }
               on-focus={ this.handleFocus }
               style={{ width: '30px' }}
-              number
-              lazy/>
+              number/>
             页
           </span>
         );

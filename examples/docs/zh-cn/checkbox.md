@@ -4,15 +4,19 @@
       return {
         checkList: ['选中且禁用','复选框 A'],
         // checkList2: ['复选框 A'],
-        checked: true,
+        checked: false,
         checked1: false,
         checked2: true,
         isValid: '可用'
       };
+    },
+    methods: {
+      handleChange(ev) {
+        console.log(ev);
+      }
     }
   };
 </script>
-
 
 <style>
   .demo-box.demo-checkbox {
@@ -37,7 +41,7 @@
 ```html
 <template>
   <!-- `checked` 为 true 或 false -->
-  <el-checkbox class="checkbox" v-model="checked">备选项</el-checkbox>
+  <el-checkbox class="checkbox" v-model="checked" checked>备选项</el-checkbox>
 </template>
 <script>
   export default {
@@ -59,7 +63,7 @@
 
 ```html
 <template>
-  <el-checkbox class="checkbox" v-model="checked1" disabled>备选项</el-checkbox>
+  <el-checkbox class="checkbox" v-model="checked1" disabled>备选项1</el-checkbox>
   <el-checkbox class="checkbox" v-model="checked2" disabled>备选项</el-checkbox>
 </template>
 <script>
@@ -139,8 +143,10 @@
 | true-label | 选中时的值   | string, number    |       —        |     —    |
 | false-label | 没有选中时的值   | string, number    |      —         |     —    |
 | disabled  | 按钮禁用    | boolean   |  — | false   |
+| checked  | 当前是否勾选    | boolean   |  — | false   |
+| indeterminate  | 设置 indeterminate 状态，只负责样式控制    | boolean   |  — | false   |
 
 ### Checkbox-group Events
 | 事件名称      | 说明    | 回调参数      |
 |---------- |-------- |---------- |
-| change  | 当绑定值变化时触发的事件 | 选中的 Checkbox Label 值 |
+| change  | 当绑定值变化时触发的事件 | event 事件对象 |

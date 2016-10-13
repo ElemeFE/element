@@ -28,3 +28,27 @@ exports.alias = {
 };
 
 exports.jsexclude = /node_modules|utils\/popper\.js|utils\/date.\js/;
+
+exports.postcss = function(webapck) {
+  return [
+    require('postcss-salad')({
+      browser: ['ie > 8', 'last 2 version'],
+      features: {
+        'partialImport': {
+          addDependencyTo: webapck
+        },
+        'bem': {
+          'shortcuts': {
+            'component': 'b',
+            'modifier': 'm',
+            'descendent': 'e'
+          },
+          'separators': {
+            'descendent': '__',
+            'modifier': '--'
+          }
+        }
+      }
+    })
+  ];
+};

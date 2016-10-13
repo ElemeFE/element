@@ -34,6 +34,7 @@ export default {
       type: String,
       default: 'file'
     },
+    data: Object,
     headers: Object,
     withCredentials: Boolean,
     multiple: Boolean,
@@ -133,6 +134,7 @@ export default {
         headers: this.headers,
         withCredentials: this.withCredentials,
         file: file,
+        data: this.data,
         filename: this.name,
         onProgress: e => {
           this.onProgress(e, file);

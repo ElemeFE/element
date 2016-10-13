@@ -16,22 +16,22 @@
   .demo-box.demo-slider .source {
     padding: 0;
   }
-  
+
   .demo-box.demo-slider .block {
     padding: 30px 24px;
     overflow: hidden;
     border-bottom: solid 1px #EFF2F6;
     &:last-child {
-      border-bottom: none;      
+      border-bottom: none;
     }
   }
-  
+
   .demo-box.demo-slider .demonstration {
     font-size: 14px;
     color: #8492a6;
     line-height: 44px;
   }
-  
+
   .demo-box.demo-slider .demonstration + .el-slider {
     float: right;
     width: 70%;
@@ -52,7 +52,7 @@
 <template>
   <div class="block">
     <span class="demonstration">默认</span>
-    <el-slider v-model="value1"></el-slider>  
+    <el-slider v-model="value1"></el-slider>
   </div>
   <div class="block">
     <span class="demonstration">自定义初始值</span>
@@ -85,7 +85,7 @@
     <el-slider
       v-model="value3"
       :step="10">
-    </el-slider>  
+    </el-slider>
   </div>
   <div class="block">
     <span class="demonstration">显示间断点</span>
@@ -121,7 +121,7 @@
     <el-slider
       v-model="value5"
       show-input>
-    </el-slider>  
+    </el-slider>
   </div>
 </template>
 

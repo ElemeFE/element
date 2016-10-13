@@ -127,7 +127,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 };
 
 module.exports = {
-  version: '1.0.0-rc.5',
+  version: '1.0.0-rc.6',
   install,
   SelectDropdown,
   Pagination,

@@ -1,8 +1,15 @@
 <template>
-  <transition name="md-fade-bottom">
+  <transition name="md-fade-bottom" @after-leave="$emit('dodestroy')">
     <div
       v-show="visible"
-      class="el-picker-panel el-date-picker">
+      :style="{
+        width: width + 'px'
+      }"
+      class="el-picker-panel el-date-picker"
+      :class="{
+        'has-sidebar': $slots.sidebar || shortcuts,
+        'has-time': showTime
+      }">
       <div class="el-picker-panel__body-wrapper">
         <slot name="sidebar" class="el-picker-panel__sidebar"></slot>
         <div class="el-picker-panel__sidebar" v-if="shortcuts">
@@ -15,20 +22,22 @@
         <div class="el-picker-panel__body">
          <div class="el-date-picker__time-header" v-if="showTime">
             <input
-              placehoder="选择日期"
+              :placehoder="$t('datepicker.selectDate')"
               type="text"
               v-model="visibleDate"
               class="el-date-picker__editor">
             <span style="position: relative" v-clickoutside="closeTimePicker">
               <input
+                ref="input"
                 @focus="timePickerVisible = true"
                 v-model="visibleTime"
-                placehoder="选择时间"
+                :placehoder="$t('datepicker.selectTime')"
                 type="text"
                 class="el-date-picker__editor">
               <time-picker
                 ref="timepicker"
                 :date="date"
+                :picker-width="pickerWidth"
                 @pick="handleTimePick"
                 :visible="timePickerVisible">
               </time-picker>
@@ -53,7 +62,7 @@
               @click="showMonthPicker"
               v-show="currentView === 'date'"
               class="el-date-picker__header-label"
-              :class="{ active: currentView === 'month' }">{{ month + 1 }}月</span>
+              :class="{ active: currentView === 'month' }">{{ month + 1 }} {{$t('datepicker.month')}}</span>
             <button
               type="button"
               @click="nextYear"
@@ -100,7 +109,7 @@
         <a
           href="JavaScript:"
           class="el-picker-panel__link-btn"
-          @click="changeToToday">{{ $t('datepicker.today') }}</a>
+          @click="changeToToday">{{ $t('datepicker.now') }}</a>
         <button
           type="button"
           class="el-picker-panel__btn"
@@ -115,6 +124,16 @@
 
   export default {
     watch: {
+      showTime(val) {
+        if (!val) return;
+        this.$nextTick(_ => {
+          const inputElm = this.$refs.input;
+          if (inputElm) {
+            this.pickerWidth = inputElm.getBoundingClientRect().width + 10;
+          }
+        });
+      },
+
       value(newVal) {
         if (this.selectionMode === 'day' && newVal instanceof Date) {
           this.date = newVal;
@@ -148,7 +167,9 @@
     },
 
     methods: {
-      $t: $t,
+      $t(...args) {
+        return $t.apply(this, args);
+      },
 
       resetDate() {
         this.date = new Date(this.date);
@@ -326,6 +347,7 @@
 
     data() {
       return {
+        pickerWidth: 0,
         date: new Date(),
         value: '',
         showTime: false,
@@ -337,7 +359,8 @@
         year: null,
         month: null,
         week: null,
-        timePickerVisible: false
+        timePickerVisible: false,
+        width: 0
       };
     },
 
@@ -383,11 +406,12 @@
       yearLabel() {
         const year = this.year;
         if (!year) return '';
+        const yearTranslation = this.$t('datepicker.year');
         if (this.currentView === 'year') {
           const startYear = Math.floor(year / 10) * 10;
-          return startYear + '年' + '-' + (startYear + 9) + '年';
+          return startYear + ' ' + yearTranslation + '-' + (startYear + 9) + ' ' + yearTranslation;
         }
-        return this.year + '年';
+        return this.year + ' ' + yearTranslation;
       },
 
       hours: {

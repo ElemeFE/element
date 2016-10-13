@@ -1,3 +1,5 @@
+import { on, off } from 'wind-dom/src/event';
+
 /**
  * v-clickoutside
  * @desc 点击元素外面才会触发的事件
@@ -11,7 +13,10 @@ const clickoutsideContext = '@@clickoutsideContext';
 export default {
   bind(el, binding, vnode) {
     const documentHandler = function(e) {
-      if (!vnode.context || el.contains(e.target)) return;
+      if (!vnode.context ||
+        el.contains(e.target) ||
+        !vnode.context.popperElm ||
+        vnode.context.popperElm.contains(e.target)) return;
       if (binding.expression) {
         vnode.context[el[clickoutsideContext].methodName]();
       } else {
@@ -23,7 +28,7 @@ export default {
       methodName: binding.expression,
       bindingFn: binding.value
     };
-    document.addEventListener('click', documentHandler);
+    on(document, 'click', documentHandler);
   },
 
   update(el, binding) {
@@ -32,7 +37,7 @@ export default {
   },
 
   unbind(el) {
-    document.removeEventListener('click', el[clickoutsideContext].documentHandler);
+    off(document, 'click', el[clickoutsideContext].documentHandler);
   },
 
   install(Vue) {

@@ -155,11 +155,6 @@ export default {
       grid.$emit('rowclick', row, event);
     },
 
-    handleCreate(vm) {
-      document.body.appendChild(vm.$refs.popper);
-      vm.updatePopper();
-    },
-
     $getPropertyText(row, property, columnId) {
       let grid = this.$parent;
       const column = getColumnById(grid, columnId);

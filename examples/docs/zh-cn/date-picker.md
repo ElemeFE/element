@@ -119,6 +119,7 @@
     <span class="demonstration">带快捷选项</span>
     <el-date-picker
       v-model="value2"
+      align="right"
       type="date"
       placeholder="选择日期"
       :picker-options="pickerOptions1">
@@ -193,6 +194,7 @@
   <span class="demonstration">年</span>
   <el-date-picker
     v-model="value5"
+    align="right"
     type="year"
     placeholder="选择年">
   </el-date-picker>

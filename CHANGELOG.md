@@ -1,8 +1,19 @@
 ## 更新日志
 
-### 1.0.0（待发布）
+### 1.0.0-rc.7
 
 *2016-XX-XX*
+
+- Upload 新增 Data 属性支持额外数据的传输
+- DatePicker 修复 `$t` 报错
+- Popper 重构 vue-popper
+- Pagination 修复输入后再点击切换，输入框的值不更新
+- Step: 修复自定义 icon 的样式
+- 修复 Tree 组件 checkbox 点击失效的问题
+
+### 1.0.0-rc.6
+
+*2016-10-11*
 
 - 修复 Tabs 切换后 Tab-panel 被销毁的问题
 - 修复 TimePicker 错误的隐藏面板
@@ -17,6 +28,9 @@
 - 修复 多选可搜索的 Select 下拉选项自动展开的问题
 - 为 Dialog 添加 top 属性
 - 修复 Menu 组件垂直模式下开启 router 属性会立刻跳转的问题 #295
+- Checkbox change 事件现在只能被人为的交互操作所触发
+- 新增 Checkbox checked 属性
+- 修复 Select 远程搜索时使用键盘选择选项无法更新 v-model 的问题
 
 #### 非兼容性更新
 
