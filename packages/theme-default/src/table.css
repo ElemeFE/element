@@ -39,6 +39,10 @@
       z-index: 1;
     }
 
+    .el-tooltip__rel {
+      display: block;
+    }
+
     @modifier fit {
       border-right: 0;
       border-bottom: 0;
