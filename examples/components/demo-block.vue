@@ -139,11 +139,11 @@
 <script type="text/babel">
   const HIDE_TEXT = {
     'zh-cn': '隐藏代码',
-    'en-us': 'Hide code',
+    'en-us': 'Hide code'
   };
   const SHOW_TEXT = {
     'zh-cn': '显示代码',
-    'en-us': 'Show code',
+    'en-us': 'Show code'
   };
 
   export default {
