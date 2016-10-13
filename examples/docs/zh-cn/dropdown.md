@@ -12,7 +12,6 @@
       color: #20a0ff;
     }
     .el-icon-caret-bottom {
-      vertical-align: middle;
       font-size: 12px;
     }
   }
