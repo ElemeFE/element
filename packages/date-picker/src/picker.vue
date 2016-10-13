@@ -32,7 +32,7 @@
 <script>
 import Vue from 'vue';
 import Clickoutside from 'element-ui/src/utils/clickoutside';
-import { merge, formatDate, parseDate, getWeekNumber } from './util';
+import { formatDate, parseDate, getWeekNumber } from './util';
 import Popper from 'element-ui/src/utils/vue-popper';
 import emitter from 'element-ui/src/mixins/emitter';
 
@@ -312,7 +312,6 @@ export default {
     },
 
     handleBlur() {
-      this.pickerVisible = false;
       this.$emit('blur', this);
       this.dispatch('form-item', 'el.form.blur');
     },
@@ -323,7 +322,10 @@ export default {
       let selectionEnd = event.target.selectionEnd;
       let length = event.target.value.length;
 
-      if (keyCode === 27) {
+      // tab
+      if (keyCode === 9) {
+        this.pickerVisible = false;
+      } else if (keyCode === 27) {
         this.pickerVisible = this.picker.visible = false;
       // left
       } else if (keyCode === 37) {
@@ -414,9 +416,7 @@ export default {
     showPicker() {
       if (!this.picker) {
         this.panel.defaultValue = this.value;
-        this.picker = new Vue(merge({
-          el: document.createElement('div')
-        }, this.panel));
+        this.picker = new Vue(this.panel).$mount(document.createElement('div'));
         this.popperElm = this.picker.$el;
         this.picker.width = this.$refs.reference.getBoundingClientRect().width;
         this.picker.showTime = this.type === 'datetime' || this.type === 'datetimerange';
