@@ -94,7 +94,7 @@
             <el-button type={type} size={size} nativeOn-click={handleClick}>
               {this.$slots.default}
             </el-button>
-            <el-button ref="trigger" type={type} size={size} class="el-dropdown__icon-button">
+            <el-button ref="trigger" type={type} size={size} class="el-dropdown__caret-button">
               <i class="el-dropdown__icon el-icon-caret-bottom"></i>
             </el-button>
           </el-button-group>);
