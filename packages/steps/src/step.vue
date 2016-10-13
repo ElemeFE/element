@@ -60,8 +60,8 @@ export default {
   data() {
     return {
       index: -1,
-      style: { width: '', height: '' },
-      lineStyle: { width: '', height: '' },
+      style: {},
+      lineStyle: {},
       mainOffset: 0,
       currentStatus: this.status
     };
@@ -88,18 +88,21 @@ export default {
 
     calcProgress(status) {
       let step = 100;
+      const style = {};
 
-      this.lineStyle.transitionDelay = 150 * this.index + 'ms';
+      style.transitionDelay = 150 * this.index + 'ms';
       if (status === this.$parent.processStatus) {
         step = 50;
       } else if (status === 'wait') {
         step = 0;
-        this.lineStyle.transitionDelay = (-150 * this.index) + 'ms';
+        style.transitionDelay = (-150 * this.index) + 'ms';
       }
 
       this.$parent.direction === 'vertical'
-        ? this.lineStyle.height = step + '%'
-        : this.lineStyle.width = step + '%';
+        ? style.height = step + '%'
+        : style.width = step + '%';
+
+      this.lineStyle = style;
     }
   },
 

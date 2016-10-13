@@ -11,7 +11,7 @@
           ref="weixin"
           placement="top"
           width="120"
-          class="footer-popover"
+          popper-class="footer-popover"
           trigger="hover">
           <div class="footer-popover-title">饿了么 UED</div>
           <img src="../assets/images/qrcode.png" alt="">
@@ -33,7 +33,7 @@
     width: 100%;
     z-index: 1000;
     margin-top: -120px;
-  
+
     * {
       word-spacing: 0;
     }
@@ -41,18 +41,18 @@
     .container {
       height: 100%;
     }
-    
+
     .footer-main {
       font-size: 0;
       padding-top: 40px;
       display: inline-block;
-      
+
       .footer-main-title {
         line-height: 1;
         font-size: 22px;
         margin: 0;
       }
-      
+
       .footer-main-link {
         display: inline-block;
         margin: 12px 18px 0 0;
@@ -66,34 +66,11 @@
         }
       }
     }
-  
+
     .footer-social {
       float: right;
       line-height: 120px;
-    
-      .footer-popover {
-        .el-popover {
-          padding: 0;
-          min-width: 120px;
-          line-height: normal;
-          box-shadow: 0 0 11px 0 rgba(174, 187, 211, 0.24);
-        }
 
-        .footer-popover-title {
-          border-bottom: solid 1px #eaeefb;
-          height: 30px;
-          line-height: 30px;
-          text-align: center;
-          color: #99a9bf;
-          background-color: #f8f9fe;
-        }
-        
-        img {
-          size: 100px;
-          margin: 10px;
-        }
-      }
-      
       .elementdoc {
         transition: .3s;
         display: inline-block;
@@ -108,7 +85,7 @@
            transform: scale(1.2);
         }
       }
-  
+
       .doc-icon-weixin {
         margin-right: 36px;
         &:hover {
@@ -122,6 +99,27 @@
            color: #fff;
         }
       }
+    }
+  }
+
+  .footer-popover {
+    padding: 0;
+    min-width: 120px;
+    line-height: normal;
+    box-shadow: 0 0 11px 0 rgba(174, 187, 211, 0.24);
+
+    .footer-popover-title {
+      border-bottom: solid 1px #eaeefb;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      color: #99a9bf;
+      background-color: #f8f9fe;
+    }
+
+    img {
+      size: 100px;
+      margin: 10px;
     }
   }
 </style>

@@ -1,5 +1,8 @@
 @charset "UTF-8";
 @import "./common/var.css";
+@import "./button.css";
+@import "./input.css";
+@import '../../../node_modules/vue-popup/lib/popup.css';
 
 @component-namespace el {
 

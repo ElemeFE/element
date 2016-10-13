@@ -19,10 +19,7 @@
       & .el-form-item {
         display: inline-block;
         margin-right: 10px;
-
-        > * {
-          vertical-align: top;
-        }
+        vertical-align: top;
       }
     }
   }

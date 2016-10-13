@@ -35,6 +35,7 @@
 
   import Popup from 'vue-popup';
   import ElInput from 'element-ui/packages/input/index.js';
+  import ElButton from 'element-ui/packages/button/index.js';
   import { addClass, removeClass } from 'wind-dom/src/class';
 
   export default {
@@ -60,7 +61,8 @@
     },
 
     components: {
-      ElInput
+      ElInput,
+      ElButton
     },
 
     computed: {
