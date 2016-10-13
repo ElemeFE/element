@@ -10,6 +10,7 @@
 - Pagination 修复输入后再点击切换，输入框的值不更新
 - Step: 修复自定义 icon 的样式
 - 修复 Tree 组件 checkbox 点击失效的问题
+- Breadcrumb 增加路由跳转的功能
 
 ### 1.0.0-rc.6
 
