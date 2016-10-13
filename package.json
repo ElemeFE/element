@@ -35,6 +35,13 @@
   "bugs": {
     "url": "https://github.com/elemefe/element/issues"
   },
+  "dependencies": {
+    "async-validator": "^1.6.6",
+    "object-equal": "^1.0.0",
+    "throttle-debounce": "^1.0.1",
+    "vue-popup": "^0.2.8",
+    "wind-dom": "0.0.3"
+  },
   "devDependencies": {
     "babel-cli": "^6.14.0",
     "babel-core": "^6.14.0",
@@ -74,7 +81,6 @@
     "vue": "^2.0.2",
     "vue-loader": "^9.5.1",
     "vue-markdown-loader": "^0.5.1",
-    "vue-popup": "^0.2.8",
     "vue-router": "^2.0.0",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.15.1",

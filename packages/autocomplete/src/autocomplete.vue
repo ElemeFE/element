@@ -41,8 +41,8 @@
   </div>
 </template>
 <script>
-  import ElInput from 'packages/input/index.js';
-  import Clickoutside from 'main/utils/clickoutside';
+  import ElInput from 'element-ui/packages/input/index.js';
+  import Clickoutside from 'element-ui/src/utils/clickoutside';
 
   export default {
     name: 'ElAutocomplete',

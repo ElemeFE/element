@@ -34,7 +34,7 @@
   };
 
   import Popup from 'vue-popup';
-  import ElInput from 'packages/input/index.js';
+  import ElInput from 'element-ui/packages/input/index.js';
   import { addClass, removeClass } from 'wind-dom/src/class';
 
   export default {

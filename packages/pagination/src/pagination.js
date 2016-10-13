@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Pager from './pager.vue';
-import ElSelect from 'packages/select/index.js';
-import ElOption from 'packages/option/index.js';
+import ElSelect from 'element-ui/packages/select/index.js';
+import ElOption from 'element-ui/packages/option/index.js';
 
 export default {
   name: 'ElPagination',

@@ -12,7 +12,6 @@
   "author": "qingwei-li<qingwei.li@ele.me>",
   "license": "MIT",
   "dependencies": {
-    "object-equal": "^1.0.0",
-    "vue-clickoutside": "0.0.4"
+    "object-equal": "^1.0.0"
   }
 }

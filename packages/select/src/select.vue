@@ -64,12 +64,12 @@
 </template>
 
 <script type="text/babel">
-  import emitter from 'main/mixins/emitter';
-  import ElInput from 'packages/input/index.js';
-  import ElSelectMenu from 'packages/select-dropdown/index.js';
-  import ElTag from 'packages/tag/index.js';
+  import emitter from 'element-ui/src/mixins/emitter';
+  import ElInput from 'element-ui/packages/input/index.js';
+  import ElSelectMenu from 'element-ui/packages/select-dropdown/index.js';
+  import ElTag from 'element-ui/packages/tag/index.js';
   import debounce from 'throttle-debounce/debounce';
-  import Clickoutside from 'main/utils/clickoutside';
+  import Clickoutside from 'element-ui/src/utils/clickoutside';
   import { addClass, removeClass } from 'wind-dom/src/class';
 
   export default {

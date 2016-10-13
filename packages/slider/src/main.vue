@@ -27,8 +27,8 @@
 </template>
 
 <script type="text/babel">
-  import Popper from 'main/utils/popper';
-  import ElInputNumber from 'packages/input-number/index.js';
+  import Popper from 'element-ui/src/utils/popper';
+  import ElInputNumber from 'element-ui/packages/input-number/index.js';
   import { getStyle } from 'wind-dom/src/style';
   import { addClass, removeClass } from 'wind-dom/src/class';
 
