@@ -122,7 +122,10 @@
         z-index: 4;
       }
     }
-
+    @e fixed_r {
+      left: auto;
+      right: 15px;
+    }
     @e fixed-header-wrapper {
       position: absolute;
       left: 0;

@@ -7,11 +7,14 @@
     <div class="el-table__body-wrapper">
       <table-body :columns="columns" :selection="selection" :data="filterData" :style="{ width: bodyWidth ? bodyWidth - (showVScrollBar ? currentGutterWidth : 0 ) + 'px' : '' }"></table-body>
     </div>
-    <div class="el-table__fixed" :style="{ width: fixedBodyWidth ? fixedBodyWidth + 'px' : '' }" ref="fixed">
-      <div class="el-table__fixed-header-wrapper" v-if="fixedColumnCount > 0">
+    <div
+      :class="['el-table__fixed', fixedColumnCount < 0 ? 'el-table__fixed_r' : '' ]"
+      :style="{ width: fixedBodyWidth ? fixedBodyWidth + 'px' : '', right: fixRight }" ref="fixed"
+    >
+      <div class="el-table__fixed-header-wrapper" v-if="fixedColumnCount != 0">
         <table-header :columns="fixedColumns" :all-selected="allSelected" @allselectedchange="handleAllSelectedChange" :selection="selection" :style="{ width: fixedBodyWidth ? fixedBodyWidth + 'px' : '' }" :border="border"></table-header>
       </div>
-      <div class="el-table__fixed-body-wrapper" v-if="fixedColumnCount > 0" :style="{ top: headerHeight + 'px' }">
+      <div class="el-table__fixed-body-wrapper" v-if="fixedColumnCount != 0" :style="{ top: headerHeight + 'px' }">
         <table-body :columns="fixedColumns" fixed :selection="selection" :data="filterData" :style="{ width: fixedBodyWidth ? fixedBodyWidth + 'px' : '' }"></table-body>
       </div>
     </div>
@@ -224,18 +227,23 @@
             }
           });
         }
-
-        if (this.fixedColumnCount > 0) {
-          let fixedBodyWidth = 0;
-          let fixedColumnCount = this.fixedColumnCount;
+        // counting total fixedBodyWidth of the right columns and the left columns
+        let fixedBodyWidth = 0;
+        let fixedColumnCount = this.fixedColumnCount;
+        if (fixedColumnCount > 0) {
           columns.forEach(function(column, index) {
             if (index < fixedColumnCount) {
               fixedBodyWidth += column.realWidth;
             }
           });
-
-          this.fixedBodyWidth = fixedBodyWidth;
+        } else if (fixedColumnCount < 0) {
+          columns.forEach(function(column, index) {
+            if (index >= (columns.length + fixedColumnCount)) {
+              fixedBodyWidth += column.realWidth;
+            }
+          });
         }
+        this.fixedBodyWidth = fixedBodyWidth;
 
         this.$nextTick(() => {
           this.headerHeight = this.$el.querySelector('.el-table__header-wrapper').offsetHeight;
@@ -328,6 +336,17 @@
     },
 
     computed: {
+      fixRight() {
+        if (this.fixedColumnCount < 0) {
+          if (this.height) {
+            return '15px';
+          } else {
+            return '0';
+          }
+        } else {
+          return 'auto';
+        }
+      },
       selection() {
         if (this.selectionMode === 'multiple') {
           const data = this.tableData || [];
@@ -342,9 +361,15 @@
       fixedColumns() {
         const columns = this.columns || [];
         const fixedColumnCount = this.fixedColumnCount;
-        return columns.filter(function(item, index) {
-          return index < fixedColumnCount;
-        });
+        if (fixedColumnCount > 0) {
+          return columns.filter(function(item, index) {
+            return index < fixedColumnCount;
+          });
+        } else if (fixedColumnCount < 0) { // fix columns from right of table when value of fixedColumnCount less than 0
+          return columns.filter(function(item, index) {
+            return index >= (columns.length + fixedColumnCount);
+          });
+        }
       },
 
       filterData() {
@@ -416,7 +441,7 @@
         this.doOnDataChange(this.tableData);
       }
       this.updateScrollInfo();
-      if (this.fixedColumnCount > 0) {
+      if (this.fixedColumnCount !== 0) {
         this.$nextTick(() => {
           const style = this.$refs.fixed.style;
           if (!style) return;
