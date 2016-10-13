@@ -1,7 +1,7 @@
 const ElCheckbox = require('./src/checkbox');
 
 ElCheckbox.install = function(Vue) {
-  Vue.component('el-checkbox', ElCheckbox);
+  Vue.component(ElCheckbox.name, ElCheckbox);
 };
 
 module.exports = ElCheckbox;

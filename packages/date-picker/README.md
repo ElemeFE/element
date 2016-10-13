@@ -1,33 +1,39 @@
-# __component_name__
+# el-date-picker
 
-# Screenshots
 
-# Demo
-
-# Installation
->
-
-# Usage
-```javascript
-
-```
-
-# Options
-
-|     name    | description |     type    |   default   |
-|-------------|-------------|-------------|-------------|
-|             |             |             |             |
-
-# Development
+## Installation
 ```shell
-make dev
-
-# test
-make test
-
-# build
-make build
+npm i el-date-picker -S
 ```
 
-# License
-[MIT](https://opensource.org/licenses/MIT)
+## Usage
+
+A:
+```javascript
+import Vue from 'vue'
+import ElDatePicker from 'el-date-picker'
+
+Vue.use(ElDatePicker)
+```
+
+B:
+```javascript
+import Vue from 'vue'
+import { DatePicker, TimePicker, TimeSelect } from 'el-date-picker'
+
+Vue.component(DatePicker.name, DatePicker);
+Vue.component(TimePicker.name, TimePicker);
+Vue.component(TimeSelect.name, TimeSelect);
+```
+
+C:
+```html
+<script src="path/to/vue/dist/vue.js"></script>
+<script src="path/to/el-date-picker/index.js"></script>
+<script>
+  Vue.use(ElDatePicker);
+</script>
+```
+
+## License
+MIT
