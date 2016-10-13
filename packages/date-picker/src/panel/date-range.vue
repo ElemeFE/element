@@ -149,11 +149,11 @@
       },
 
       leftLabel() {
-        return this.date.getFullYear() + ' ' + this.$t('datepicker.month') + ' ' + (this.date.getMonth() + 1) + ' ' + this.$t('datepicker.month');
+        return this.date.getFullYear() + ' ' + this.$t('datepicker.year') + ' ' + (this.date.getMonth() + 1) + ' ' + this.$t('datepicker.month');
       },
 
       rightLabel() {
-        return this.rightDate.getFullYear() + ' ' + this.$t('datepicker.month') + ' ' + (this.rightDate.getMonth() + 1) + ' ' + this.$t('datepicker.month');
+        return this.rightDate.getFullYear() + ' ' + this.$t('datepicker.year') + ' ' + (this.rightDate.getMonth() + 1) + ' ' + this.$t('datepicker.month');
       },
 
       leftYear() {
