@@ -14,12 +14,12 @@ Object.keys(components).forEach(key => {
   const filePath = path.join(__dirname, `../../packages/${key}/cooking.conf.js`);
 
   if (existsSync(filePath)) {
-    componentPaths.push(`../packages/${key}/cooking.conf.js`);
+    componentPaths.push(`packages/${key}/cooking.conf.js`);
   }
 });
 
 const paths = componentPaths.join(',');
-const cli = `cooking build -c ${paths} -p`;
+const cli = `node_modules/.bin/cooking build -c ${paths} -p`;
 
 execSync(cli, {
   stdio: 'inherit'

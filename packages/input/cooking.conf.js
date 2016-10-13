@@ -1,5 +1,6 @@
 var cooking = require('cooking');
 var path = require('path');
+var config = require('../../build/config');
 
 cooking.set({
   entry: {
@@ -9,21 +10,9 @@ cooking.set({
   template: false,
   format: 'umd',
   moduleName: 'ElInput',
-  extends: ['vue2']
-});
-
-cooking.add('resolve.alias', {
-  'main': path.join(__dirname, '../../src'),
-  'packages': path.join(__dirname, '../../packages')
-});
-
-cooking.add('externals', {
-  vue: {
-    root: 'Vue',
-    commonjs: 'vue',
-    commonjs2: 'vue',
-    amd: 'vue'
-  }
+  extends: ['vue2'],
+  alias: config.alias,
+  externals: { vue: config.vue }
 });
 
 module.exports = cooking.resolve();
