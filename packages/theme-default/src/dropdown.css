@@ -45,7 +45,7 @@
         }
       }
     }
-    @e icon-button {
+    & .el-dropdown__caret-button {
       padding: * 5px;
 
       & .el-dropdown__icon {
