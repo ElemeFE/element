@@ -16,7 +16,9 @@
       </div>
     </div>
     <div class="el-table__column-resize-proxy" ref="resizeProxy" v-show="resizeProxyVisible"></div>
-    <slot name="bottom"></slot>
+    <div class="el-table__bottom">
+      <slot name="bottom"></slot>
+    </div>
   </div>
 </template>
 
@@ -251,7 +253,8 @@
           const headerHeight = this.headerHeight = this.$el.querySelector('.el-table__header-wrapper').offsetHeight;
           const bodyHeight = (height - headerHeight);
           const gridWrapper = this.$el.querySelector('.el-table__body-wrapper');
-          gridWrapper.style.height = bodyHeight + 'px';
+          const bottomHeight = this.$el.querySelector('.el-table__bottom').offsetHeight;
+          gridWrapper.style.height = bodyHeight - bottomHeight + 'px';
           this.$el.style.height = height + 'px';
           if (this.$refs.fixed) {
             this.$refs.fixed.style.height = height + 'px';
