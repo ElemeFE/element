@@ -200,6 +200,7 @@
 ```html
 <el-input
   placeholder="请输入内容"
+  :number="true"
   v-model="input">
 </el-input>
 ```
