@@ -54,7 +54,7 @@
         tableData3: [{
           date: '2016-05-03',
           name: '王小虎',
-          province: '上海',
+          province: '上海上海上海上海上海上海上海上海上海上海上海上海上海上海上海上海上海上海上海上海',
           city: '普陀区',
           address: '上海市普陀区金沙江路 1518 弄',
           zip: 200333
@@ -438,7 +438,7 @@
 <template>
   <el-table
     :data="tableData"
-    :fixed-column-count="1"
+    :fixed-column-count="-1"
     border
     style="width: 100%">
     <el-table-column
@@ -523,7 +523,7 @@
 <template>
   <el-table
     :data="tableData3"
-    :fixed-column-count="1"
+    :fixed-column-count="-1"
     border
     style="width: 100%"
     height="250">
@@ -845,7 +845,7 @@
 | fit | 列的宽度是否自撑开 | boolean | — | true |
 | selection-mode | 列表项选择模式 | string | single/multiple/none | none |
 | allow-no-selection | 单选模式是否允许选项为空 | boolean | — | false |
-| fixed-column-count | 固定列的个数 | number | — | 0 |
+| fixed-column-count | 固定列的个数(当值为大于0时,是从左边开始固定,小于0时,从右边开始固定) | number | — | 0 |
 
 ### Table Events
 | 事件名 | 说明 | 参数 |
