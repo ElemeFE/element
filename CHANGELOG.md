@@ -12,6 +12,7 @@
 - 修复 Tree 组件 checkbox 点击失效的问题
 - Breadcrumb 增加路由跳转的功能
 - 修复 可清空的 Select 中清空按钮的不恰当动画
+- DatePicker 修复使用 Tab 键切换时弹出框未隐藏
 
 ### 1.0.0-rc.6
 
