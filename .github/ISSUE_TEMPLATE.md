@@ -1,4 +1,8 @@
 <!--
+提交 issue 前请务必查看 FAQ：https://github.com/ElemeFE/element/blob/master/FAQ.md。如果你的问题可以在 FAQ 中找到解决方案，我们会直接关闭 issue。
+ -->
+
+<!--
 issue 仅用于提交 bug 或 feature 以及设计相关的内容，其它疑问请到 gitter 聊天室找社区里面的小伙伴聊一聊：https://gitter.im/ElemeFE/element
  -->
  
