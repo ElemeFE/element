@@ -31,10 +31,10 @@
 
 <script>
 import Vue from 'vue';
-import Clickoutside from 'main/utils/clickoutside';
+import Clickoutside from 'element-ui/src/utils/clickoutside';
 import { merge, formatDate, parseDate, getWeekNumber } from './util';
-import Popper from 'main/utils/vue-popper';
-import emitter from 'main/mixins/emitter';
+import Popper from 'element-ui/src/utils/vue-popper';
+import emitter from 'element-ui/src/mixins/emitter';
 
 const newPopper = {
   props: {

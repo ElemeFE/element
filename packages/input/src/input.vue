@@ -55,7 +55,7 @@
   </div>
 </template>
 <script>
-  import emitter from 'main/mixins/emitter';
+  import emitter from 'element-ui/src/mixins/emitter';
   import calcTextareaHeight from './calcTextareaHeight';
 
   export default {

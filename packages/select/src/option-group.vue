@@ -10,7 +10,7 @@
 </template>
 
 <script type="text/babel">
-  import emitter from 'main/mixins/emitter';
+  import emitter from 'element-ui/src/mixins/emitter';
 
   export default {
     mixins: [emitter],

@@ -258,7 +258,7 @@
     },
 
     directives: {
-      Clickoutside: require('main/utils/clickoutside').default
+      Clickoutside: require('element-ui/src/utils/clickoutside').default
     },
 
     data() {

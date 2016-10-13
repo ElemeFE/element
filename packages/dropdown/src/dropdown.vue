@@ -1,6 +1,6 @@
 <script>
-  import Clickoutside from 'main/utils/clickoutside';
-  import emitter from 'main/mixins/emitter';
+  import Clickoutside from 'element-ui/src/utils/clickoutside';
+  import emitter from 'element-ui/src/mixins/emitter';
 
   export default {
     name: 'ElDropdown',

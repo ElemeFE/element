@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import Popper from 'main/utils/vue-popper';
+import Popper from 'element-ui/src/utils/vue-popper';
 import Vue from 'vue';
 import { on, off } from 'wind-dom/src/event';
 
