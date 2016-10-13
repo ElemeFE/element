@@ -3,6 +3,7 @@
     <transition :name="transition" @after-leave="doDestroy">
       <div
         class="el-popover"
+        :class="[popperClass]"
         ref="popper"
         v-show="showPopper"
         :style="{ width: width + 'px' }">
@@ -39,6 +40,7 @@ export default {
     title: String,
     content: String,
     reference: {},
+    popperClass: String,
     width: {},
     visibleArrow: {
       default: true
