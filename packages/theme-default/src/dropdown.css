@@ -54,7 +54,6 @@
     }
     @e icon {
       font-size: 12px;
-      vertical-align: middle;
       margin: 0 3px;
     }
     @m text {
