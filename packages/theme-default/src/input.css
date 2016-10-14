@@ -19,7 +19,7 @@
       border-radius: 4px;
       transition: var(--border-transition-base);
       outline: none;
-      font-size: inherit;
+      line-height: normal;
 
       &::placeholder {
         color: var(--input-placeholder-color);

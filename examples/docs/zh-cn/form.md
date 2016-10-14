@@ -276,6 +276,7 @@
         display: inline-block;
         margin-right: 10px;
         width: 270px;
+        vertical-align: top;
       }
     }
     .fr {
