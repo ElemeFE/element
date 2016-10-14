@@ -72,6 +72,10 @@
         if (val === true) {
           this.dispatch('select', 'addOptionToValue', this);
         }
+      },
+      
+      label(val) {
+        this.currentLabel = val;
       }
     },
 
