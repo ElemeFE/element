@@ -68,7 +68,7 @@ exports.install = Vue => {
       if (directive.originalPosition !== 'absolute') {
         parent.style.position = 'relative';
       }
-      if (binding.modifiers.fullscreen) {
+      if (binding.modifiers.fullscreen && binding.modifiers.lock) {
         parent.style.overflow = 'hidden';
       }
       directive.mask.style.display = 'block';
