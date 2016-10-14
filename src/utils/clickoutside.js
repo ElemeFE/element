@@ -1,5 +1,9 @@
-import { on, off } from 'wind-dom/src/event';
+import { on } from 'wind-dom/src/event';
 
+const nodeList = [];
+on(document, 'click', e => {
+  nodeList.forEach(node => node[clickoutsideContext].documentHandler(e));
+});
 /**
  * v-clickoutside
  * @desc 点击元素外面才会触发的事件
@@ -12,6 +16,7 @@ const clickoutsideContext = '@@clickoutsideContext';
 
 export default {
   bind(el, binding, vnode) {
+    const id = nodeList.push(el) - 1;
     const documentHandler = function(e) {
       if (!vnode.context ||
         el.contains(e.target) ||
@@ -24,11 +29,11 @@ export default {
       }
     };
     el[clickoutsideContext] = {
+      id,
       documentHandler,
       methodName: binding.expression,
       bindingFn: binding.value
     };
-    on(document, 'click', documentHandler);
   },
 
   update(el, binding) {
@@ -37,7 +42,7 @@ export default {
   },
 
   unbind(el) {
-    off(document, 'click', el[clickoutsideContext].documentHandler);
+    nodeList.splice(el[clickoutsideContext].id, 1);
   },
 
   install(Vue) {
