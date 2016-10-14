@@ -73,7 +73,7 @@
           this.dispatch('select', 'addOptionToValue', this);
         }
       },
-      
+
       label(val) {
         this.currentLabel = val;
       }
