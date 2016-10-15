@@ -6,10 +6,10 @@ build-theme:
 	npm run build:theme
 
 install:
-	npm run bootstrap
+	npm install
 
 install-cn:
-	npm run bootstrap --registry=http://registry.npm.taobao.org
+	npm install --registry=http://registry.npm.taobao.org
 
 dev:
 	npm run dev
