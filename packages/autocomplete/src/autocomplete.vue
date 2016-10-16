@@ -71,6 +71,9 @@
         highlightedIndex: -1
       };
     },
+    mounted() {
+      this.$parent.popperElm = this.popperElm = this.$el;
+    },
     methods: {
       handleChange(value) {
         this.$emit('input', value);
