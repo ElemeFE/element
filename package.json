@@ -42,7 +42,7 @@
     "object-equal": "^1.0.0",
     "postcss-salad": "^1.0.5",
     "throttle-debounce": "^1.0.1",
-    "vue-popup": "^0.2.8",
+    "vue-popup": "^0.2.9",
     "wind-dom": "0.0.3"
   },
   "devDependencies": {
