@@ -4,6 +4,10 @@
 
 *2016-XX-XX*
 
+- 修复 Form reset method 对日期控件不起效的问题
+- 修复 Dialog 和 Message Box 在 body 无溢出时错误地添加 padding-right 的问题
+- 修复 Message Box 的 prompt 在打开时会携带之前的验证状态的问题
+
 #### 非兼容性更新
 
 - 全屏 Loading 现在默认不再锁定屏幕滚动。如果需要的话，可添加 `lock` 修饰符
