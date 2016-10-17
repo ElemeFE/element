@@ -13,10 +13,9 @@
         <slot name="prepend"></slot>
       </div>
       <input
-        v-if="type === 'text'"
+        v-if="type !== 'textarea'"
         class="el-input__inner"
-        v-model="currentValue"
-        type="text"
+        :type="type"
         :name="name"
         :placeholder="placeholder"
         :disabled="disabled"
@@ -25,24 +24,9 @@
         :maxlength="maxlength"
         :minlength="minlength"
         :autocomplete="autoComplete"
+        :value="value"
         ref="input"
-        @focus="handleFocus"
-        @blur="handleBlur"
-      >
-      <input
-        v-if="type === 'password'"
-        class="el-input__inner"
-        v-model="currentValue"
-        type="password"
-        :name="name"
-        :placeholder="placeholder"
-        :disabled="disabled"
-        :readonly="readonly"
-        :number="number"
-        :maxlength="maxlength"
-        :minlength="minlength"
-        :autocomplete="autoComplete"
-        ref="input"
+        @input="handleInput"
         @focus="handleFocus"
         @blur="handleBlur"
       >
@@ -151,6 +135,9 @@
       },
       handleFocus(ev) {
         this.$emit('focus', ev);
+      },
+      handleInput(ev) {
+        this.currentValue = ev.target.value;
       }
     },
 
