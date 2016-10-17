@@ -16,7 +16,7 @@ const uppercamelcase = require('uppercamelcase');
 const componentname = process.argv[2];
 const chineseName = process.argv[3] || componentname;
 const ComponentName = uppercamelcase(componentname);
-const PackagePath = path.resolve(__dirname, '../packages', componentname);
+const PackagePath = path.resolve(__dirname, '../../packages', componentname);
 const Files = [
   {
     filename: 'index.js',
@@ -91,7 +91,7 @@ export default {
 </script>`
   },
   {
-    filename: path.join('../../examples/docs/', `${componentname}.md`),
+    filename: path.join('../../examples/docs/zh-cn', `${componentname}.md`),
     content: `## ${chineseName}`
   }
 ];
@@ -116,7 +116,8 @@ Files.forEach(file => {
 
 // 添加到 nav.config.json
 const navConfigFile = require('../../examples/nav.config.json');
-navConfigFile[navConfigFile.length - 1].list.push({
+
+navConfigFile[2].groups[navConfigFile[2].groups.length - 1].list.push({
   path: `/${componentname}`,
   name: `${chineseName} (${componentname})`,
   title: componentname === chineseName
