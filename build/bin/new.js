@@ -16,7 +16,7 @@ const uppercamelcase = require('uppercamelcase');
 const componentname = process.argv[2];
 const chineseName = process.argv[3] || componentname;
 const ComponentName = uppercamelcase(componentname);
-const PackagePath = path.resolve(__dirname, '../packages', componentname);
+const PackagePath = path.resolve(__dirname, '../../packages', componentname);
 const Files = [
   {
     filename: 'index.js',

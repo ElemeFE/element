@@ -1,4 +1,3 @@
-import SelectDropdown from '../packages/select-dropdown/index.js';
 import Pagination from '../packages/pagination/index.js';
 import Dialog from '../packages/dialog/index.js';
 import Autocomplete from '../packages/autocomplete/index.js';
@@ -58,7 +57,6 @@ import Step from '../packages/step/index.js';
 const install = function(Vue) {
   if (install.installed) return;
 
-  Vue.component(SelectDropdown.name, SelectDropdown);
   Vue.component(Pagination.name, Pagination);
   Vue.component(Dialog.name, Dialog);
   Vue.component(Autocomplete.name, Autocomplete);
@@ -129,7 +127,6 @@ if (typeof window !== 'undefined' && window.Vue) {
 module.exports = {
   version: '1.0.0-rc.7',
   install,
-  SelectDropdown,
   Pagination,
   Dialog,
   Autocomplete,

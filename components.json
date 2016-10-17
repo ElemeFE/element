@@ -1,5 +1,4 @@
 {
-  "select-dropdown": "./packages/select-dropdown/index.js",
   "pagination": "./packages/pagination/index.js",
   "dialog": "./packages/dialog/index.js",
   "autocomplete": "./packages/autocomplete/index.js",

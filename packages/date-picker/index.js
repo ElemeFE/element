@@ -1,2 +1,2 @@
-import Picker from '../date-picker/src/picker/date-picker';
+import Picker from './src/picker/date-picker';
 module.exports = Picker;
