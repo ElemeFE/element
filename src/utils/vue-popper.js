@@ -86,6 +86,7 @@ export default {
       this.popperJS.onCreate(_ => {
         this.$emit('created', this);
         this.resetTransformOrigin();
+        this.$nextTick(this.updatePopper);
       });
       this.popperJS._popper.style.zIndex = PopupManager.nextZIndex();
     },
