@@ -46,6 +46,7 @@
     watch: {
       defaultActive(value) {
         this.activeIndex = value;
+        if (!this.menuItems[value]) return;
         let indexPath = this.menuItems[value].indexPath;
 
         this.handleSelect(value, indexPath);
@@ -97,6 +98,7 @@
       },
       openActiveItemMenus() {
         let index = this.activeIndex;
+        if (!this.menuItems[index]) return;
         if (index && this.mode === 'vertical') {
           let indexPath = this.menuItems[index].indexPath;
 
