@@ -45,7 +45,7 @@
         }
       }
     }
-    @e icon-button {
+    & .el-dropdown__caret-button {
       padding: * 5px;
 
       & .el-dropdown__icon {
@@ -54,7 +54,6 @@
     }
     @e icon {
       font-size: 12px;
-      vertical-align: middle;
       margin: 0 3px;
     }
     @m text {

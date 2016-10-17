@@ -13,6 +13,7 @@
         <slot name="prepend"></slot>
       </div>
       <input
+        v-if="type === 'text'"
         class="el-input__inner"
         v-model="currentValue"
         type="text"
@@ -25,7 +26,24 @@
         :minlength="minlength"
         :autocomplete="autoComplete"
         ref="input"
-        @focus="$emit('focus', currentValue)"
+        @focus="handleFocus"
+        @blur="handleBlur"
+      >
+      <input
+        v-if="type === 'password'"
+        class="el-input__inner"
+        v-model="currentValue"
+        type="password"
+        :name="name"
+        :placeholder="placeholder"
+        :disabled="disabled"
+        :readonly="readonly"
+        :number="number"
+        :maxlength="maxlength"
+        :minlength="minlength"
+        :autocomplete="autoComplete"
+        ref="input"
+        @focus="handleFocus"
         @blur="handleBlur"
       >
       <!-- input 图标 -->
@@ -49,13 +67,13 @@
       :rows="rows"
       :maxlength="maxlength"
       :minlength="minlength"
-      @focus="$emit('focus', currentValue)"
+      @focus="handleFocus"
       @blur="handleBlur">
     </textarea>
   </div>
 </template>
 <script>
-  import emitter from 'main/mixins/emitter';
+  import emitter from 'element-ui/src/mixins/emitter';
   import calcTextareaHeight from './calcTextareaHeight';
 
   export default {
@@ -130,6 +148,9 @@
         const minRows = autosize ? autosize.minRows : null;
         const maxRows = autosize ? autosize.maxRows : null;
         this.textareaStyle = calcTextareaHeight(this.$refs.textarea, minRows, maxRows);
+      },
+      handleFocus(ev) {
+        this.$emit('focus', ev);
       }
     },
 

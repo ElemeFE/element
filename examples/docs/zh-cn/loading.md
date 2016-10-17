@@ -57,14 +57,14 @@
 
 页面数据加载时显示。
 
-:::demo 当需要全屏遮罩时，可使用`fullscreen`修饰符（此时遮罩会插入至 body 上）
+:::demo 当需要全屏遮罩时，可使用`fullscreen`修饰符（此时遮罩会插入至 body 上）。此时若需要锁定屏幕的滚动，可以使用`lock`修饰符。
 
 ```html
 <template>
   <el-button
     type="primary"
     @click.native="openFullScreen"
-    v-loading.fullscreen="fullscreenLoading">
+    v-loading.fullscreen.lock="fullscreenLoading">
     显示整页加载，3 秒后消失
   </el-button>
 </template>

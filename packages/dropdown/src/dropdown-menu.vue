@@ -1,12 +1,12 @@
 <template>
   <transition name="md-fade-bottom" @after-leave="doDestroy">
-  <ul class="el-dropdown__menu" v-show="showPopper">
-    <slot></slot>
-  </ul>
+    <ul class="el-dropdown__menu" v-show="showPopper">
+      <slot></slot>
+    </ul>
   </transition>
 </template>
 <script>
-  import Popper from 'main/utils/vue-popper';
+  import Popper from 'element-ui/src/utils/vue-popper';
 
   export default {
     name: 'ElDropdownMenu',

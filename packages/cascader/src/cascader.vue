@@ -1,5 +1,5 @@
 <script>
-  import ElInput from 'packages/input/index.js';
+  import ElInput from 'element-ui/packages/input/index.js';
   import ElDropdown from './dropdown.vue';
 
   /**
@@ -21,7 +21,7 @@
     },
 
     directives: {
-      ElementClickoutside: require('main/utils/clickoutside').default
+      ElementClickoutside: require('element-ui/src/utils/clickoutside').default
     },
 
     data() {

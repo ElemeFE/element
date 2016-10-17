@@ -13,6 +13,5 @@
   "license": "MIT",
   "repository": "https://github.com/element-component/element/tree/master/packages/tag",
   "devDependencies": {
-    "vue-clickoutside": "0.0.4"
   }
 }

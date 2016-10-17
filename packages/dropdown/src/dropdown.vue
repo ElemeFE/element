@@ -1,6 +1,6 @@
 <script>
-  import Clickoutside from 'main/utils/clickoutside';
-  import emitter from 'main/mixins/emitter';
+  import Clickoutside from 'element-ui/src/utils/clickoutside';
+  import emitter from 'element-ui/src/mixins/emitter';
 
   export default {
     name: 'ElDropdown',
@@ -66,15 +66,10 @@
           triggerElm.addEventListener('mouseenter', show);
           triggerElm.addEventListener('mouseleave', hide);
 
-          let dropdown = this.$slots.dropdown[0];
-          let insertHook = dropdown.data.hook.insert;
-          dropdown.data.hook.insert = (vnode) => {
-            insertHook(vnode);
-            this.$nextTick(_ => {
-              vnode.elm.addEventListener('mouseenter', show);
-              vnode.elm.addEventListener('mouseleave', hide);
-            });
-          };
+          let dropdownElm = this.$slots.dropdown[0].elm;
+
+          dropdownElm.addEventListener('mouseenter', show);
+          dropdownElm.addEventListener('mouseleave', hide);
         } else if (trigger === 'click') {
           triggerElm.addEventListener('click', handleClick);
         }
@@ -94,7 +89,7 @@
             <el-button type={type} size={size} nativeOn-click={handleClick}>
               {this.$slots.default}
             </el-button>
-            <el-button ref="trigger" type={type} size={size} class="el-dropdown__icon-button">
+            <el-button ref="trigger" type={type} size={size} class="el-dropdown__caret-button">
               <i class="el-dropdown__icon el-icon-caret-bottom"></i>
             </el-button>
           </el-button-group>);

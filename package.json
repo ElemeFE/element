@@ -1,6 +1,6 @@
 {
   "name": "element-ui",
-  "version": "1.0.0-rc.6",
+  "version": "1.0.0-rc.7",
   "description": "A Component Library for Vue.js.",
   "main": "lib/element-ui.common.js",
   "files": [
@@ -10,12 +10,11 @@
   ],
   "scripts": {
     "build:file": "node build/bin/iconInit.js & node build/bin/build-entry.js",
-    "dev": "npm run bootstrap && npm run build:file && cooking watch -c build/cooking.demo.js -p",
+    "dev": "npm install && npm run build:file && cooking watch -c build/cooking.demo.js -p",
     "dist": "npm run clean && npm run build:file && npm run lint && cooking build -c build/cooking.conf.js,build/cooking.common.js,build/cooking.component.js -p && npm run build:utils && npm run build:theme",
     "dist:all": "node build/bin/build-all.js && npm run build:theme",
-    "build:theme": "gulp build --gulpfile packages/theme-default/gulpfile.js && cp-cli packages/theme-default/lib lib/theme-default",
+    "build:theme": "node build/bin/gen-cssfile && gulp build --gulpfile packages/theme-default/gulpfile.js && cp-cli packages/theme-default/lib lib/theme-default",
     "deploy": "npm run build:file && cooking build -c build/cooking.demo.js -p && echo element.eleme.io>>examples/element-ui/CNAME && gh-pages -d examples/element-ui --remote eleme && del examples/element-ui",
-    "bootstrap": "npm i && lerna bootstrap",
     "pub": "sh build/release.sh",
     "pub:all": "npm run dist:all && lerna publish",
     "build:utils": "babel src/utils --out-dir lib/utils",
@@ -37,6 +36,17 @@
   "bugs": {
     "url": "https://github.com/elemefe/element/issues"
   },
+  "dependencies": {
+    "async-validator": "^1.6.6",
+    "gulp": "^3.9.1",
+    "gulp-cssmin": "^0.1.7",
+    "gulp-postcss": "^6.1.1",
+    "object-equal": "^1.0.0",
+    "postcss-salad": "^1.0.5",
+    "throttle-debounce": "^1.0.1",
+    "vue-popup": "^0.2.8",
+    "wind-dom": "0.0.3"
+  },
   "devDependencies": {
     "babel-cli": "^6.14.0",
     "babel-core": "^6.14.0",
@@ -56,7 +66,6 @@
     "file-loader": "^0.9.0",
     "file-save": "^0.2.0",
     "gh-pages": "^0.11.0",
-    "gulp": "^3.9.1",
     "highlight.js": "^9.3.0",
     "html-loader": "^0.4.3",
     "html-webpack-plugin": "^2.22.0",
@@ -81,7 +90,6 @@
     "phantomjs-prebuilt": "^2.1.13",
     "postcss": "^5.1.2",
     "postcss-loader": "^0.11.1",
-    "postcss-salad": "^1.0.5",
     "rimraf": "^2.5.4",
     "sinon": "^1.17.6",
     "sinon-chai": "^2.8.0",
@@ -92,7 +100,6 @@
     "vue": "^2.0.2",
     "vue-loader": "^9.5.1",
     "vue-markdown-loader": "^0.5.1",
-    "vue-popup": "^0.2.8",
     "vue-router": "^2.0.0",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.15.1",

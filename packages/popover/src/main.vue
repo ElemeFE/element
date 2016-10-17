@@ -3,6 +3,7 @@
     <transition :name="transition" @after-leave="doDestroy">
       <div
         class="el-popover"
+        :class="[popperClass]"
         ref="popper"
         v-show="showPopper"
         :style="{ width: width + 'px' }">
@@ -15,7 +16,7 @@
 </template>
 
 <script>
-import Popper from 'main/utils/vue-popper';
+import Popper from 'element-ui/src/utils/vue-popper';
 import Vue from 'vue';
 import { on, off } from 'wind-dom/src/event';
 
@@ -39,6 +40,7 @@ export default {
     title: String,
     content: String,
     reference: {},
+    popperClass: String,
     width: {},
     visibleArrow: {
       default: true

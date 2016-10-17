@@ -64,13 +64,13 @@
 </template>
 
 <script type="text/babel">
-  import emitter from 'main/mixins/emitter';
-  import ElInput from 'packages/input/index.js';
-  import ElSelectMenu from 'packages/select-dropdown/index.js';
-  import ElTag from 'packages/tag/index.js';
+  import emitter from 'element-ui/src/mixins/emitter';
+  import ElInput from 'element-ui/packages/input/index.js';
+  import ElSelectMenu from 'element-ui/packages/select-dropdown/index.js';
+  import ElTag from 'element-ui/packages/tag/index.js';
   import debounce from 'throttle-debounce/debounce';
-  import Clickoutside from 'main/utils/clickoutside';
-  import { addClass, removeClass } from 'wind-dom/src/class';
+  import Clickoutside from 'element-ui/src/utils/clickoutside';
+  import { addClass, removeClass, hasClass } from 'wind-dom/src/class';
 
   export default {
     mixins: [emitter],
@@ -287,7 +287,8 @@
             }
           }
         } else {
-          if (this.$el.querySelector('.el-input__icon')) {
+          let icon = this.$el.querySelector('.el-input__icon');
+          if (icon && !hasClass(icon, 'el-icon-circle-close')) {
             addClass(this.$el.querySelector('.el-input__icon'), 'is-reverse');
           }
           this.broadcast('select-dropdown', 'updatePopper');

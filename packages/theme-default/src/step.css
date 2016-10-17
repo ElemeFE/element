@@ -31,11 +31,6 @@
         @when horizontal {
           right: 4px;
         }
-
-        @when vertical {
-          height: 55%;
-          margin-top: 35px;
-        }
       }
 
       @when horizontal {
@@ -64,6 +59,7 @@
     }
 
     @e icon {
+      display: block;
       line-height: 28px;
 
       > * {

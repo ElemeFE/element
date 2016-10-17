@@ -1,5 +1,5 @@
 <script>
-  import emitter from 'main/mixins/emitter';
+  import emitter from 'element-ui/src/mixins/emitter';
 
   export default {
     name: 'ElCheckboxGroup',

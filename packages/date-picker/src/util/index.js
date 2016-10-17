@@ -1,4 +1,4 @@
-import dateUtil from 'main/utils/date';
+import dateUtil from 'element-ui/src/utils/date';
 
 const newArray = function(start, end) {
   let result = [];
@@ -6,22 +6,6 @@ const newArray = function(start, end) {
     result.push(i);
   }
   return result;
-};
-
-export const merge = function(target) {
-  for (var i = 1, j = arguments.length; i < j; i++) {
-    var source = arguments[i];
-    for (var prop in source) {
-      if (source.hasOwnProperty(prop)) {
-        var value = source[prop];
-        if (value !== undefined) {
-          target[prop] = value;
-        }
-      }
-    }
-  }
-
-  return target;
 };
 
 export const toDate = function(date) {
