@@ -9,9 +9,7 @@
           v-for="item in items"
           :class="{ selected: value === item.value, disabled: item.disabled }"
           :disabled="item.disabled"
-          @click="handleClick(item)">
-          {{ item.value }}
-        </div>
+          @click="handleClick(item)">{{ item.value }}</div>
       </div>
     </div>
   </transition>

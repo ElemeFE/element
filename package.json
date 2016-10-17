@@ -33,6 +33,7 @@
     "vue",
     "components"
   ],
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/elemefe/element/issues"
   },
