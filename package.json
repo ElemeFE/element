@@ -19,7 +19,7 @@
     "pub:all": "npm run dist:all && lerna publish",
     "build:utils": "babel src/utils --out-dir lib/utils",
     "clean": "rimraf lib && rimraf packages/*/lib",
-    "lint": "eslint src/**/*.js test/**/*.js packages/**/*.{js,vue} build/**/*.js --quiet",
+    "lint": "eslint src/**/* test/**/* packages/**/*.{js,vue} build/**/* --quiet",
     "test:watch": "karma start test/unit/karma.conf.js",
     "test": "karma start test/unit/karma.conf.js --single-run"
   },

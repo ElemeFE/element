@@ -3,3 +3,4 @@ fecha.js
 release.sh
 node_modules
 lib
+coverage
