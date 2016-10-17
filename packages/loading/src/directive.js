@@ -100,7 +100,9 @@ exports.install = Vue => {
     },
 
     update: function(el, binding) {
-      toggleLoading(el, binding);
+      if (binding.oldValue !== binding.value) {
+        toggleLoading(el, binding);
+      }
     },
 
     unbind: function(el, binding) {
