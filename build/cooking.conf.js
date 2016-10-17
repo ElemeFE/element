@@ -9,7 +9,7 @@ cooking.set({
   moduleName: 'ELEMENT',
   extends: ['vue2'],
   alias: config.alias,
-  externals: { vue: config.externals.vue }
+  externals: { vue: config.vue }
 });
 
 cooking.add('output.filename', 'index.js');

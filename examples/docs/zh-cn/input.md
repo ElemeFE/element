@@ -200,7 +200,6 @@
 ```html
 <el-input
   placeholder="请输入内容"
-  :number="true"
   v-model="input">
 </el-input>
 ```
@@ -636,7 +635,6 @@
 | disabled      | 禁用            | boolean         | — | false   |
 | size          | 输入框尺寸，只在 `type!="textarea"` 时有效      | string          | large, small, mini  | — |
 | icon          | 输入框尾部图标    | string          | — | — |
-| number        | 指定 model 值为 number 类型  |  boolean | — |  false   |
 | rows          | 输入框行数，只对 `type="textarea"` 有效  |  number | — |  2   |
 | autosize      | 自适应内容高度，只对 `type="textarea"` 有效，可传入对象，如，{ minRows: 2, maxRows: 6 }  |  boolean/object | — |  false   |
 

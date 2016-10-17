@@ -143,7 +143,7 @@
         this.$prompt('请输入邮箱', '提示', {
           inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
           inputErrorMessage: '邮箱格式不正确'
-        }).then(value => {
+        }).then(({ value }) => {
           this.$message({
             type: 'success',
             message: '你的邮箱是: ' + value

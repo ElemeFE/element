@@ -78,7 +78,8 @@
         validateDisabled: false,
         validating: false,
         validator: {},
-        isRequired: false
+        isRequired: false,
+        initialValue: null
       };
     },
     methods: {
@@ -118,12 +119,9 @@
         if (Array.isArray(value) && value.length > 0) {
           this.validateDisabled = true;
           model[this.prop] = [];
-        } else if (typeof value === 'string' && value !== '') {
+        } else if (value) {
           this.validateDisabled = true;
-          model[this.prop] = '';
-        } else if (typeof value === 'number') {
-          this.validateDisabled = true;
-          model[this.prop] = 0;
+          model[this.prop] = this.initialValue;
         }
       },
       getRules() {
@@ -151,11 +149,21 @@
         }
 
         this.validate('change');
+      },
+      getInitialValue() {
+        var value = this.form.model[this.prop];
+        if (value === undefined) {
+          return value;
+        } else {
+          return JSON.parse(JSON.stringify(value));
+        }
       }
     },
     mounted() {
       if (this.prop) {
         this.dispatch('form', 'el.form.addField', [this]);
+
+        this.initialValue = this.getInitialValue();
 
         let rules = this.getRules();
 
