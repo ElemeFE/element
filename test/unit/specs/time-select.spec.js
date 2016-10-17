@@ -12,9 +12,11 @@ describe('TimeSelect', () => {
       },
       placeholder: 'test'
     }, true);
-    vm.$el.querySelector('input').blur();
-    vm.$el.querySelector('input').focus();
-    vm.$el.querySelector('input').blur();
+    const input = vm.$el.querySelector('input');
+
+    input.blur();
+    input.focus();
+    input.blur();
 
     Vue.nextTick(_ => {
       expect(vm.picker.start).to.equal('08:30');
@@ -25,7 +27,7 @@ describe('TimeSelect', () => {
     });
   });
 
-  it('click time', done => {
+  it('select time', done => {
     const vm = createVue({
       template: `
         <div>
@@ -40,15 +42,16 @@ describe('TimeSelect', () => {
         };
       }
     }, true);
+    const input = vm.$el.querySelector('input');
 
-    vm.$el.querySelector('input').blur();
-    vm.$el.querySelector('input').focus();
-    vm.$el.querySelector('input').blur();
+    input.blur();
+    input.focus();
+    input.blur();
 
     Vue.nextTick(_ => {
       const items = vm.$refs.compo.picker.$el.querySelectorAll('.time-select-item');
       const target = items[4];
-      const time = target.textContent.trim();
+      const time = target.textContent;
 
       target.click();
       Vue.nextTick(_ => {
@@ -56,5 +59,23 @@ describe('TimeSelect', () => {
         done();
       });
     });
+  });
+
+  it('set default value', done => {
+    const vm = createTest(TimeSelect, {
+      value: '14:30'
+    }, true);
+    const input = vm.$el.querySelector('input');
+
+    input.blur();
+    input.focus();
+    input.blur();
+
+    setTimeout(_ => {
+      expect(input.value).to.equal('14:30');
+      expect(vm.picker.$el.querySelector('.selected')).to.be.ok;
+      expect(vm.picker.$el.querySelector('.selected').textContent).to.equal('14:30');
+      done();
+    }, 500);
   });
 });
