@@ -528,6 +528,14 @@
     },
 
     mounted() {
+      if (this.remote && this.multiple && Array.isArray(this.value)) {
+        this.selected = this.options.reduce((prev, curr) => {
+          return this.value.indexOf(curr.value) > -1 ? prev.concat(curr) : prev;
+        }, []);
+        this.$nextTick(() => {
+          this.resetInputHeight();
+        });
+      }
       this.$nextTick(() => {
         if (this.$refs.reference.$el) {
           this.inputWidth = this.$refs.reference.$el.getBoundingClientRect().width;
