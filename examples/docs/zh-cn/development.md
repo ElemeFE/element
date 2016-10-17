@@ -25,7 +25,11 @@ npm run bootstrap
 registry=https://registry.npm.taobao.org
 ```
 
-然后再运行 `npm run bootstrap` 安装依赖。
+然后再运行
+
+```shell
+PHANTOMJS_CDNURL=http://npm.taobao.org/mirrors/phantomjs npm run bootstrap
+```
 
 ### 启动开发环境
 

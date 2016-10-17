@@ -1,6 +1,5 @@
 <template>
   <div class="el-time-spinner">
-    {{hours}}
     <div
       @mouseenter="emitSelectRange('hours')"
       @mousewheel="handleScroll('hour')"
