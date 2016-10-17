@@ -23,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:elemefe/element.git"
+    "url": "git@github.com:ElemeFE/element.git"
   },
   "homepage": "http://element.eleme.io",
   "keywords": [
@@ -32,15 +32,12 @@
     "components"
   ],
   "bugs": {
-    "url": "https://github.com/elemefe/element/issues"
+    "url": "https://github.com/ElemeFE/element/issues"
   },
   "dependencies": {
     "async-validator": "^1.6.6",
-    "gulp": "^3.9.1",
-    "gulp-cssmin": "^0.1.7",
-    "gulp-postcss": "^6.1.1",
+    "object-assign": "^4.1.0",
     "object-equal": "^1.0.0",
-    "postcss-salad": "^1.0.5",
     "throttle-debounce": "^1.0.1",
     "vue-popup": "^0.2.9",
     "wind-dom": "0.0.3"
@@ -63,6 +60,9 @@
     "file-loader": "^0.9.0",
     "file-save": "^0.2.0",
     "gh-pages": "^0.11.0",
+    "gulp": "^3.9.1",
+    "gulp-cssmin": "^0.1.7",
+    "gulp-postcss": "^6.1.1",
     "highlight.js": "^9.3.0",
     "html-loader": "^0.4.3",
     "html-webpack-plugin": "^2.22.0",
@@ -71,9 +71,9 @@
     "lerna": "2.0.0-beta.18",
     "markdown-it": "^6.1.1",
     "markdown-it-container": "^2.0.0",
-    "object-assign": "^4.1.0",
     "postcss": "^5.1.2",
     "postcss-loader": "^0.11.1",
+    "postcss-salad": "^1.0.5",
     "rimraf": "^2.5.4",
     "style-loader": "^0.13.1",
     "theaterjs": "^3.0.0",
@@ -84,7 +84,6 @@
     "vue-markdown-loader": "^0.5.1",
     "vue-router": "^2.0.0",
     "webpack": "^1.13.2",
-    "webpack-dev-server": "^1.15.1",
-    "wind-dom": "0.0.3"
+    "webpack-dev-server": "^1.15.1"
   }
 }
