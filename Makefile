@@ -15,7 +15,7 @@ dev:
 	npm run dev
 
 new:
-	node bin/new.js $(filter-out $@,$(MAKECMDGOALS))
+	node build/bin/new.js $(filter-out $@,$(MAKECMDGOALS))
 
 dist: install
 	npm run dist
