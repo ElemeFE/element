@@ -16,12 +16,16 @@ const createElm = function() {
 
 /**
  * 创建一个 Vue 的实例对象
- * @param  {Object}  Compo   组件配置
+ * @param  {Object|String}  Compo   组件配置，可直接传 template
  * @param  {Boolean=false} mounted 是否添加到 DOM 上
  * @return {Object} vm
  */
 exports.createVue = function(Compo, mounted = false) {
   const elm = createElm();
+
+  if (Object.prototype.toString.call(Compo) === '[object String]') {
+    Compo = { template: Compo };
+  }
   return new Vue(Compo).$mount(mounted === false ? null : elm);
 };
 
@@ -34,6 +38,10 @@ exports.createVue = function(Compo, mounted = false) {
  * @return {Object} vm
  */
 exports.createTest = function(Compo, propsData = {}, mounted = false) {
+  if (propsData === true || propsData === false) {
+    mounted = propsData;
+    propsData = {};
+  }
   const elm = createElm();
   const Ctor = Vue.extend(Compo);
   return new Ctor({ propsData }).$mount(mounted === false ? null : elm);

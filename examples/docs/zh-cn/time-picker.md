@@ -142,7 +142,8 @@
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | readonly | 只读 | boolean | — | false |
 | placeholder | 占位内容 | string | — | — |
-| format | 时间格式化 | string | 小时：`HH`，分：`mm`，秒：`ss` | 'HH:mm:ss' |
+| format | 时间格式化(TimePicker) | string | 小时：`HH`，分：`mm`，秒：`ss` | 'HH:mm:ss' |
+| value | 绑定值 | TimePicker: Date<br>TimeSelect: String | - | - |
 | align | 对齐方式 | string | left, center, right | left |
 | picker-options | 当前时间日期选择器特有的选项<br>参考下表 | object | — | {} |
 
