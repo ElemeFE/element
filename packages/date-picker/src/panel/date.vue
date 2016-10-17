@@ -21,12 +21,16 @@
         </div>
         <div class="el-picker-panel__body">
          <div class="el-date-picker__time-header" v-if="showTime">
-            <input
+            <span class="el-date-picker__editor-wrap">
+              <input
               :placehoder="$t('datepicker.selectDate')"
               type="text"
               v-model="visibleDate"
               class="el-date-picker__editor">
-            <span style="position: relative" v-clickoutside="closeTimePicker">
+            </span>
+            <span
+              class="el-date-picker__editor-wrap"
+              v-clickoutside="closeTimePicker">
               <input
                 ref="input"
                 @focus="timePickerVisible = true"

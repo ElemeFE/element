@@ -7,6 +7,10 @@
 - 修复 Form reset method 对日期控件不起效的问题
 - 修复 Dialog 和 Message Box 在 body 无溢出时错误地添加 padding-right 的问题
 - 修复 Message Box 的 prompt 在打开时会携带之前的验证状态的问题
+- 修复 Clickoutside 性能问题 #296
+- 修复 Tooltip/Popover 首次渲染的箭头位置 #412
+- 修复 Autocomplete 的弹出框不会消失 #439
+- 修复 DatePicker 弹出框样式溢出边框 #318
 
 #### 非兼容性更新
 
