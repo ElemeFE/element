@@ -140,19 +140,23 @@
     },
 
     watch: {
-      inputValue() {
-        if (this.$type === 'prompt') {
+      inputValue(val) {
+        if (this.$type === 'prompt' && val !== null) {
           this.validate();
         }
       },
 
       value(val) {
-        if (val && this.$type === 'prompt') {
+        if (this.$type !== 'prompt') return;
+        if (val) {
           setTimeout(() => {
             if (this.$refs.input && this.$refs.input.$el) {
               this.$refs.input.$el.querySelector('input').focus();
             }
           }, 500);
+        } else {
+          this.editorErrorMessage = '';
+          removeClass(this.$refs.input.$el.querySelector('input'), 'invalid');
         }
       }
     },
