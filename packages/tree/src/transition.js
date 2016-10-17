@@ -58,7 +58,7 @@ class Transition {
     el.style.paddingTop = el.dataset.oldPaddingTop;
     el.style.paddingBottom = el.dataset.oldPaddingBottom;
   }
-};
+}
 
 export default {
   functional: true,

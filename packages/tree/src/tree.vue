@@ -1,6 +1,11 @@
 <template>
-  <div class="el-tree">
-    <el-tree-node v-for="child in tree.root.children" :node="child"></el-tree-node>
+  <div class="el-tree" :class="{ 'el-tree--highlight-current': highlightCurrent }">
+    <el-tree-node
+      v-for="child in tree.root.childNodes"
+      :node="child"
+      :props="props"
+      :render-content="renderContent">
+    </el-tree-node>
   </div>
 </template>
 
@@ -14,6 +19,7 @@
       data: {
         type: Array
       },
+      renderContent: Function,
       showCheckbox: {
         type: Boolean,
         default: false
@@ -31,6 +37,7 @@
         type: Boolean,
         default: false
       },
+      highlightCurrent: Boolean,
       load: {
         type: Function
       }
@@ -49,7 +56,8 @@
 
     data() {
       return {
-        tree: {}
+        tree: {},
+        currentNode: null
       };
     },
 
