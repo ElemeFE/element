@@ -232,10 +232,10 @@
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | readonly | 只读 | boolean | — | false |
 | placeholder | 占位内容 | string | — | — |
-| type | 显示类型 | string | year/month/date/datetime/week | date |
+| type | 显示类型 | string | year/month/date/week/<br>datetime/datetimerange/daterange | date |
 | format | 时间日期格式化 | string | 年 `yyyy`，月 `MM`，日 `dd`，<br>小时 `HH`，分 `mm`，秒 `ss` | yyyy-MM-dd |
 | align | 对齐方式 | string | left, center, right | left |
-|picker-options | 当前时间日期选择器特有的选项<br>参考下表 | object |  — | {} |
+| picker-options | 当前时间日期选择器特有的选项<br>参考下表 | object |  — | {} |
 
 ### Picker Options
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
