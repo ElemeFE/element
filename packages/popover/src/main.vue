@@ -22,7 +22,9 @@ import { on, off } from 'wind-dom/src/event';
 
 Vue.directive('popover', {
   bind(el, binding, vnode) {
-    vnode.context.$refs[binding.arg].$refs.reference = el;
+    const parent = vnode.context.$refs[binding.arg]
+    if (parent)
+      parent.$refs.reference = el;
   }
 });
 
