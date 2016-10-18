@@ -10,6 +10,7 @@ var INSTALL_COMPONENT_TEMPLATE = '  Vue.component({{name}}.name, {{name}});';
 var MAIN_TEMPLATE = `{{include}}
 
 const install = function(Vue) {
+  /* istanbul ignore if */
   if (install.installed) return;
 
 {{install}}
@@ -24,7 +25,7 @@ const install = function(Vue) {
   Vue.prototype.$message = Message;
 };
 
-// auto install
+/* istanbul ignore if */
 if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue);
 };
