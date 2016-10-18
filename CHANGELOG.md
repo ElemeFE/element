@@ -11,6 +11,7 @@
 - 修复 Tooltip/Popover 首次渲染的箭头位置 #412
 - 修复 Autocomplete 的弹出框不会消失 #439
 - 修复 DatePicker 弹出框样式溢出边框 #318
+- 新增 Input 图标的点击事件 #444
 
 #### 非兼容性更新
 
