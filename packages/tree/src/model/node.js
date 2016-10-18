@@ -1,8 +1,8 @@
-let idSeed = 0;
+let nodeIdSeed = 0;
 import objectAssign from 'object-assign';
 
 const reInitChecked = function(node) {
-  const siblings = node.children;
+  const siblings = node.childNodes;
 
   let all = true;
   let none = true;
@@ -42,7 +42,7 @@ const getPropertyFromData = function(node, prop) {
 
 export default class Node {
   constructor(options) {
-    this.id = idSeed++;
+    this.id = nodeIdSeed++;
     this.text = null;
     this.checked = false;
     this.indeterminate = false;
@@ -61,7 +61,7 @@ export default class Node {
     // internal
     this.level = -1;
     this.loaded = false;
-    this.children = [];
+    this.childNodes = [];
     this.loading = false;
 
     if (this.parent) {
@@ -74,8 +74,17 @@ export default class Node {
   }
 
   setData(data) {
+    if (!Array.isArray(data) && !data.$treeNodeId) {
+      Object.defineProperty(data, '$treeNodeId', {
+        value: this.id,
+        enumerable: false,
+        configurable: false,
+        writable: false
+      });
+    }
+
     this.data = data;
-    this.children = [];
+    this.childNodes = [];
 
     let children;
     if (this.level === -1 && this.data instanceof Array) {
@@ -85,14 +94,7 @@ export default class Node {
     }
 
     for (let i = 0, j = children.length; i < j; i++) {
-      const child = children[i];
-      this.insertChild(new Node({
-        data: child,
-        parent: this,
-        lazy: this.lazy,
-        load: this.load,
-        props: this.props
-      }));
+      this.insertChild({ data: children[i] });
     }
   }
 
@@ -107,26 +109,47 @@ export default class Node {
   insertChild(child, index) {
     if (!child) throw new Error('insertChild error: child is required.');
 
-    if (!child instanceof Node) {
-      throw new Error('insertChild error: child should an instance of Node.');
+    if (!(child instanceof Node)) {
+      objectAssign(child, {
+        parent: this,
+        lazy: this.lazy,
+        load: this.load,
+        props: this.props
+      });
+      child = new Node(child);
     }
 
-    child.parent = this;
     child.level = this.level + 1;
 
     if (typeof index === 'undefined') {
-      this.children.push(child);
+      this.childNodes.push(child);
     } else {
-      this.children.splice(index, 0, child);
+      this.childNodes.splice(index, 0, child);
     }
   }
 
   removeChild(child) {
-    const index = this.children.indexOf(child);
+    const index = this.childNodes.indexOf(child);
 
     if (index > -1) {
       child.parent = null;
-      this.children.splice(child, index);
+      this.childNodes.splice(index, 1);
+    }
+  }
+
+  removeChildByData(data) {
+    let nodeIndex = -1;
+    let targetNode = null;
+    this.childNodes.forEach((node, index) => {
+      if (node.data === data) {
+        nodeIndex = index;
+        targetNode = node;
+      }
+    });
+
+    if (nodeIndex > -1) {
+      targetNode.parent = null;
+      this.childNodes.splice(nodeIndex, 1);
     }
   }
 
@@ -147,13 +170,7 @@ export default class Node {
 
   doCreateChildren(array, defaultProps = {}) {
     array.forEach((item) => {
-      const node = new Node(objectAssign({
-        data: item,
-        lazy: this.lazy,
-        load: this.load,
-        props: this.props
-      }, defaultProps));
-      this.insertChild(node);
+      this.insertChild(objectAssign({ data: item }, defaultProps));
     });
   }
 
@@ -170,9 +187,9 @@ export default class Node {
   }
 
   hasChild() {
-    const children = this.children;
+    const childNodes = this.childNodes;
     if (!this.lazy || (this.lazy === true && this.loaded === true)) {
-      return children && children.length > 0;
+      return childNodes && childNodes.length > 0;
     }
     return true;
   }
@@ -183,9 +200,9 @@ export default class Node {
 
     const handleDeep = () => {
       if (deep) {
-        const children = this.children;
-        for (let i = 0, j = children.length; i < j; i++) {
-          const child = children[i];
+        const childNodes = this.childNodes;
+        for (let i = 0, j = childNodes.length; i < j; i++) {
+          const child = childNodes[i];
           child.setChecked(value !== false, deep);
         }
       }
@@ -225,15 +242,33 @@ export default class Node {
     return data[children];
   }
 
+  updateChildren() {
+    const newData = this.getChildren() || [];
+    const oldData = this.childNodes.map((node) => node.data);
+
+    const newDataMap = {};
+    const newNodes = [];
+
+    newData.forEach((item, index) => {
+      if (item.$treeNodeId) {
+        newDataMap[item.$treeNodeId] = { index, data: item };
+      } else {
+        newNodes.push({ index, data: item });
+      }
+    });
+
+    oldData.forEach((item) => { if (!newDataMap[item.$treeNodeId]) this.removeChildByData(item); });
+    newNodes.forEach(({ index, data }) => this.insertChild({ data }, index));
+  }
+
   loadData(callback, defaultProps = {}) {
     if (this.lazy === true && this.load && !this.loaded) {
       this.loading = true;
 
-      const loadFn = this.load;
       const resolve = (children) => {
         this.loaded = true;
         this.loading = false;
-        this.children = [];
+        this.childNodes = [];
 
         this.doCreateChildren(children, defaultProps);
 
@@ -242,7 +277,7 @@ export default class Node {
         }
       };
 
-      loadFn(this, resolve);
+      this.load(this, resolve);
     } else {
       if (callback) {
         callback.call(this);

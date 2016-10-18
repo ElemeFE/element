@@ -8,8 +8,6 @@ export default class Tree {
       }
     }
 
-    this._isTree = true;
-
     this.root = new Node({
       data: this.data,
       lazy: this.lazy,
@@ -28,9 +26,9 @@ export default class Tree {
   getCheckedNodes(leafOnly) {
     const checkedNodes = [];
     const walk = function(node) {
-      const children = node.root ? node.root.children : node.children;
+      const childNodes = node.root ? node.root.childNodes : node.childNodes;
 
-      children.forEach(function(child) {
+      childNodes.forEach(function(child) {
         if ((!leafOnly && child.checked) || (leafOnly && child.isLeaf && child.checked)) {
           checkedNodes.push(child.data);
         }
