@@ -36,10 +36,20 @@
 
     @e icon {
       position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translate(0, -50%);
+      width: 35px;
+      height: 100%;
+      right: 0;
+      text-align: center;
       color: var(--input-icon-color);
+
+      &:after {
+        content: '';
+        height: 100%;
+        width: 0;
+        display: inline-block;
+        vertical-align: middle;
+      }
+
 
       & + .el-input__inner {
         padding-right: 35px;
