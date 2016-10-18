@@ -484,9 +484,6 @@ export default {
       }
 
       this.$nextTick(() => {
-        if (this.type.indexOf('time') !== -1) {
-          this.picker.focusEditor && this.picker.focusEditor('hours');
-        }
         this.picker.ajustScrollTop && this.picker.ajustScrollTop();
       });
     }

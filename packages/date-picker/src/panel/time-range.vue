@@ -166,10 +166,6 @@
       ajustScrollTop() {
         this.$refs.minSpinner.ajustScrollTop();
         this.$refs.maxSpinner.ajustScrollTop();
-      },
-
-      focusEditor(val) {
-        return this.$refs.minSpinner.focusEditor(val);
       }
     },
 

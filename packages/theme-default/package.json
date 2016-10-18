@@ -4,7 +4,8 @@
   "description": "Element component default theme.",
   "main": "lib/index.css",
   "files": [
-    "lib"
+    "lib",
+    "src"
   ],
   "scripts": {
     "build": "postcss -c postcss.conf.js"

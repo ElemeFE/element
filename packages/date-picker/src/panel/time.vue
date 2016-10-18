@@ -133,10 +133,6 @@
         this.$emit('pick', date, visible, first);
       },
 
-      focusEditor(val) {
-        return this.$refs.spinner.focusEditor(val);
-      },
-
       ajustScrollTop() {
         return this.$refs.spinner.ajustScrollTop();
       }

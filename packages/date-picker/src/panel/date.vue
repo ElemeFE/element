@@ -353,6 +353,7 @@
         year: null,
         month: null,
         week: null,
+        showWeekNumber: false,
         timePickerVisible: false,
         width: 0
       };

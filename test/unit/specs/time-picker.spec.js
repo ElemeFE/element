@@ -85,7 +85,6 @@ describe('TimePicker', () => {
 
     input.blur();
     input.focus();
-    input.blur();
 
     setTimeout(_ => {
       const list = vm.picker.$el.querySelectorAll('.el-time-spinner__list');
@@ -94,8 +93,9 @@ describe('TimePicker', () => {
         .call(hoursElm.querySelectorAll('.disabled'))
         .map(node => Number(node.textContent));
 
+      hoursElm.querySelectorAll('.disabled')[0].click();
       expect(disabledHours).to.not.include.members([18, 19, 20]);
       done();
-    }, 500);
+    }, 150);
   });
 });

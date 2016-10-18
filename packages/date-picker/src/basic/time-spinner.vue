@@ -46,7 +46,7 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script type="text/babel">
   import { getRangeHours } from '../util';
 
   export default {
@@ -115,13 +115,6 @@
     },
 
     methods: {
-      focusEditor(type) {
-        const editor = this.$refs[type + 'Editor'];
-        if (editor) {
-          editor.focus();
-        }
-      },
-
       handleClick(type, value, disabled) {
         if (value.disabled) {
           return;
