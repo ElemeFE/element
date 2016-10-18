@@ -7,6 +7,16 @@
 <el-button @click.native="handleButtonClick">Click Me</el-button>
 ```
 
+### 如何在 Table 组件的每一行添加操作该行数据的按钮？
+
+使用 inline-template 即可：
+```html
+<el-table-column label="操作" inline-template>
+  <el-button @click.native="showDetail(row)">查看详情</el-button>
+</el-table-column>
+```
+参数 `row` 即为对应行的数据。
+
 ### 你们的文档怎么偷偷更新了？
 
 我们只会在 Element 发布新版本时同步更新文档，以体现最新的变化。详细的更新内容可以查看 [changelog](https://github.com/ElemeFE/element/blob/master/CHANGELOG.md)。
@@ -28,7 +38,7 @@
 
 ### 将 Element 克隆至本地，运行时为何会报错/跑不起来？
 
-首先，确保克隆的是 master 分支的最新代码，并且文件完整。其次，确保本地的 node 版本在 4.0 以上，npm 版本在 3.0 以上。最后，请按照 README 的方法启动开发环境：
+首先，确保克隆的是 master 分支的最新代码，并且文件完整。其次，确保本地的 node 版本在 4.0 以上，npm 版本在 3.0 以上。最后，可以启动开发环境：
 
 ```bash
 npm run dev
