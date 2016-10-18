@@ -21,16 +21,18 @@
         </div>
         <div class="el-picker-panel__body">
          <div class="el-date-picker__time-header" v-if="showTime">
-            <input
-              :placehoder="$t('datepicker.selectDate')"
-              type="text"
-              v-model="visibleDate"
-              class="el-date-picker__editor">
-            <span style="position: relative" v-clickoutside="closeTimePicker">
+            <span class="el-date-picker__editor-wrap">
+              <input
+                :placehoder="$t('datepicker.selectDate')"
+                type="text"
+                v-model.lazy="visibleDate"
+                class="el-date-picker__editor">
+            </span>
+            <span class="el-date-picker__editor-wrap">
               <input
                 ref="input"
-                @focus="timePickerVisible = true"
-                v-model="visibleTime"
+                @focus="timePickerVisible = !timePickerVisible"
+                v-model.lazy="visibleTime"
                 :placehoder="$t('datepicker.selectTime')"
                 type="text"
                 class="el-date-picker__editor">
@@ -160,10 +162,6 @@
           this.month = newVal.getMonth();
         }
       }
-    },
-
-    directives: {
-      Clickoutside: require('element-ui/src/utils/clickoutside').default
     },
 
     methods: {
@@ -320,10 +318,6 @@
           this.year = this.date.getFullYear();
           this.month = this.date.getMonth();
         }
-      },
-
-      closeTimePicker() {
-        this.timePickerVisible = false;
       }
     },
 

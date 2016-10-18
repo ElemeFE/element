@@ -23,17 +23,15 @@
               <input
                 placeholder="开始日期"
                 class="el-date-range-picker__editor"
-                v-model="leftVisibleDate"
+                v-model.lazy="leftVisibleDate"
                 @input="handleDateInput($event, 'min')"
                 @change="handleDateChange($event, 'min')"/>
-              <span
-                class="el-date-range-picker__time-picker-wrap"
-                v-clickoutside="closeLeftTimePicker">
+              <span class="el-date-range-picker__time-picker-wrap">
                 <input
                   placeholder="开始时间"
                   class="el-date-range-picker__editor"
-                  v-model="leftVisibleTime"
-                  @focus="leftTimePickerVisible = true"
+                  v-model.lazy="leftVisibleTime"
+                  @focus="leftTimePickerVisible = !leftTimePickerVisible"
                   @change="handleTimeChange($event, 'min')"/>
                 <time-picker
                   :picker-width="leftPickerWidth"
@@ -50,19 +48,17 @@
                 ref="leftInput"
                 placeholder="结束日期"
                 class="el-date-range-picker__editor"
-                v-model="rightVisibleDate"
+                v-model.lazy="rightVisibleDate"
                 :readonly="!minDate"
                 @input="handleDateInput($event, 'max')"
                 @change="handleDateChange($event, 'max')" />
-              <span
-                class="el-date-range-picker__time-picker-wrap"
-                v-clickoutside="closeRightTimePicker">
+              <span class="el-date-range-picker__time-picker-wrap">
                 <input
                   ref="rightInput"
                   placeholder="结束时间"
                   class="el-date-range-picker__editor"
-                  v-model="rightVisibleTime"
-                  @focus="minDate && (rightTimePickerVisible = true)"
+                  v-model.lazy="rightVisibleTime"
+                  @focus="minDate && (rightTimePickerVisible = !rightTimePickerVisible)"
                   :readonly="!minDate"
                   @change="handleTimeChange($event, 'max')" />
                 <time-picker
@@ -257,10 +253,6 @@
       }
     },
 
-    directives: {
-      Clickoutside: require('element-ui/src/utils/clickoutside').default
-    },
-
     data() {
       return {
         leftPickerWidth: 0,
@@ -330,14 +322,6 @@
     methods: {
       $t(...args) {
         return $t.apply(this, args);
-      },
-
-      closeLeftTimePicker() {
-        this.leftTimePickerVisible = false;
-      },
-
-      closeRightTimePicker() {
-        this.rightTimePickerVisible = false;
       },
 
       handleDateInput(event, type) {

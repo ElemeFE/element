@@ -26,8 +26,12 @@
       width: 100%;
     }
 
-    @e editor {
+    @e editor-wrap {
       flex: 1;
+      position: relative;
+    }
+
+    @e editor {
       margin: 0 5px;
       position: relative;
       border: 1px solid #c0ccda;
