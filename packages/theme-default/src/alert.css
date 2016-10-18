@@ -18,19 +18,19 @@
     transition: opacity .2s;
 
     @modifier success {
-      background-color: #13ce66;
+      background-color: var(--color-success);
     }
 
     @modifier info {
-      background-color: #50bfff;
+      background-color: var(--color-info);
     }
 
     @modifier warning {
-      background-color: #f7ba2a;
+      background-color: var(--color-warning);
     }
 
     @modifier error {
-      background-color: #ff4949;
+      background-color: var(--color-danger);
     }
 
     @e content {
