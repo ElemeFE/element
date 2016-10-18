@@ -1,7 +1,7 @@
 <template>
   <div class="el-switch" :class="{ 'is-disabled': disabled, 'el-switch--wide': hasText }">
     <div class="el-switch__mask" v-show="disabled"></div>
-    <input class="el-switch__input" type="checkbox" v-model="value" :name="name" :disabled="disabled" style="display: none;">
+    <input class="el-switch__input" type="checkbox" :checked="value" :name="name" :disabled="disabled" style="display: none;">
     <span class="el-switch__core" ref="core" @click="handleMiscClick" :style="{ 'width': coreWidth + 'px' }">
       <span class="el-switch__button" ref="button"></span>
     </span>
@@ -75,7 +75,7 @@
     },
     data() {
       return {
-        coreWidth: 0
+        coreWidth: this.width
       };
     },
     computed: {
