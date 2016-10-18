@@ -73,15 +73,9 @@ Vue.component(Button.name, Button)
 Modern browsers and Internet Explorer 9+.
 
 ## Development
-Recommend: node >= 4 npm >= 3
+Skip this part if you just want to use Element.
 
-```shell
-# development => install packages -> build icon etc. -> run webpack
-$ npm run dev
-
-# build => build all component
-$ npm run dist
-```
+For those who are interested in contributing to Element, please refer to our [contributing guide](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.md) to see how to run this project.
 
 ## Other links
 - Starter Kit
@@ -96,6 +90,9 @@ $ npm run dist
 
 ## Changelog
 Detailed changes for each release are documented in the [release notes](https://github.com/ElemeFE/element/releases).
+
+## FAQ
+We have collected some [frequently asked questions](https://github.com/ElemeFE/element/blob/master/FAQ.md). Before reporting an issue, please search if the FAQ has the answer to your problem.
 
 ## Contribution
 Please make sure to read the [Contributing Guide](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.md) before making a pull request.
