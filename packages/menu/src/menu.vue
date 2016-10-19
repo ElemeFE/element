@@ -47,9 +47,10 @@
       defaultActive(value) {
         this.activeIndex = value;
         if (!this.menuItems[value]) return;
-        let indexPath = this.menuItems[value].indexPath;
+        let menuItem = this.menuItems[value];
+        let indexPath = menuItem.indexPath;
 
-        this.handleSelect(value, indexPath);
+        this.handleSelect(value, indexPath, null, menuItem);
       },
       defaultOpeneds(value) {
         this.openedMenus = value;
@@ -81,9 +82,9 @@
           this.$emit('open', index, indexPath);
         }
       },
-      handleSelect(index, indexPath, route) {
+      handleSelect(index, indexPath, route, instance) {
         this.activeIndex = index;
-        this.$emit('select', index, indexPath);
+        this.$emit('select', index, indexPath, instance);
 
         if (this.mode === 'horizontal') {
           this.broadcast('submenu', 'item-select', [index, indexPath]);

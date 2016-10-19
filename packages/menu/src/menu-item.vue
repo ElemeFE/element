@@ -28,7 +28,12 @@
     },
     methods: {
       handleClick() {
-        this.rootMenu.handleSelect(this.index, this.indexPath, this.route || this.index);
+        this.rootMenu.handleSelect(
+          this.index,
+          this.indexPath,
+          this.route || this.index,
+          this
+        );
       }
     },
     created() {
