@@ -15,7 +15,7 @@ cooking.set({
   entry: './examples/entry.js',
   dist: './examples/element-ui/',
   template: './examples/index.tpl',
-  publicPath: '/',
+  publicPath: process.env.CI_ENV || '/',
   hash: true,
   devServer: {
     port: 8085,
