@@ -30,8 +30,6 @@
     }
 
     @e editor {
-      flex: 1;
-      margin: 0 5px;
       position: relative;
       border: 1px solid #c0ccda;
       border-radius: 4px;
@@ -41,6 +39,7 @@
       outline: none;
       appearance: none;
       transition: border 0.3s;
+      width: 100%;
 
       &:hover {
         border-color: #20a0ff;
@@ -88,14 +87,10 @@
     }
 
     @e editors-wrap {
-      padding-right: 10px;
-      display: inline-block;
-      width: 50%;
       box-sizing: border-box;
-      display: flex;
+      display: table-cell;
 
       @when right {
-        padding-left: 10px;
         text-align: right;
       }
     }
@@ -105,20 +100,22 @@
       border-bottom: 1px solid var(--datepicker-inner-border-color);
       font-size: 12px;
       padding: 8px 5px 5px 5px;
-      display: flex;
+      display: table;
+      width: 100%;
+      box-sizing: border-box;
 
       > .el-icon-arrow-right {
-        position: absolute;
-        left: 50%;
-        margin-left: -10px;
-        margin-top: 5px;
         font-size: 20px;
+        vertical-align: middle;
+        display: table-cell;
         color: var(--datepicker-icon-color);
       }
     }
 
     @e time-picker-wrap {
       position: relative;
+      display: table-cell;
+      padding: 0 5px;
 
       .el-picker-panel {
         position: absolute;
