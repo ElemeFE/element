@@ -19,6 +19,7 @@
 - Table 增加属性 rowClassName
 - TableColumn 增加 fixed 属性，可选值：true, false, left, right
 - TableColumn[type="selection"] 增加 selectable 属性
+- 修复 Input textarea 在动态赋值时 autosize 没有触发的问题
 
 #### 非兼容性更新
 
