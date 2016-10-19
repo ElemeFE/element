@@ -31,7 +31,7 @@
 :::demo 要使用它，只需要在`el-input-number`元素中使用`v-model`绑定变量即可，变量的初始值即为默认值。
 ```html
 <template>
-  <el-input-number v-model="num1" @change="handleChange"></el-input-number>
+  <el-input-number v-model="num1" @change="handleChange" :min="1" :max="10"></el-input-number>
 </template>
 <script>
   export default {
@@ -50,7 +50,7 @@
 :::demo `disabled`属性接受一个`Boolean`，设置为`true`即可禁用整个组件，如果你只需要控制数值在某一范围内，可以设置`min`属性和`max`属性，不设置`min`和`max`时，最小值为 0。
 
 ```html
-<el-input-number v-model="num1" :disabled="true"></el-input-number>
+<el-input-number v-model="num2" :disabled="true"></el-input-number>
 ```
 :::
 
@@ -61,7 +61,7 @@
 :::demo 设置`step`属性可以控制步长，接受一个`Number`。
 
 ```html
-<el-input-number v-model="num2" :step="2"></el-input-number>
+<el-input-number v-model="num3" :step="2"></el-input-number>
 ```
 :::
 
