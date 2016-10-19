@@ -6,7 +6,7 @@
     ]"
   >
     <el-input
-      v-model="currentValue"
+      v-model.number="currentValue"
       :disabled="disabled"
       :size="size"
       :number="true"
@@ -39,9 +39,6 @@
   export default {
     name: 'ElInputNumber',
     props: {
-      value: {
-        default: 1
-      },
       step: {
         type: Number,
         default: 1
@@ -52,6 +49,9 @@
       },
       min: {
         type: Number,
+        default: 0
+      },
+      value: {
         default: 0
       },
       disabled: Boolean,
@@ -89,8 +89,18 @@
       ElInput
     },
     data() {
+      // correct the init value
+      let value = this.value;
+      if (value < this.min) {
+        this.$emit('input', this.min);
+        value = this.min;
+      }
+      if (value > this.max) {
+        this.$emit('input', this.max);
+        value = this.max;
+      }
       return {
-        currentValue: this.value,
+        currentValue: value,
         inputActive: false
       };
     },
@@ -100,7 +110,7 @@
       },
 
       currentValue(newVal, oldVal) {
-        if (!isNaN(newVal) && newVal <= this.max && newVal >= this.min) {
+        if (newVal <= this.max && newVal >= this.min) {
           this.$emit('change', newVal);
           this.$emit('input', newVal);
         } else {
