@@ -49,7 +49,7 @@ const forced = {
     headerTemplate: function(h, label) {
       return <div>{ label || '#' }</div>;
     },
-    template: function(h, { row, $index }) {
+    template: function(h, { $index }) {
       return <div>{ $index + 1 }</div>;
     },
     sortable: false
@@ -117,7 +117,8 @@ export default {
     },
     fixed: [Boolean, String],
     formatter: Function,
-    selectable: Function
+    selectable: Function,
+    reserveSelection: Boolean
   },
 
   render() {},
@@ -203,6 +204,7 @@ export default {
       showTooltipWhenOverflow: this.showTooltipWhenOverflow,
       formatter: this.formatter,
       selectable: this.selectable,
+      reserveSelection: this.reserveSelection,
       fixed: this.fixed
     });
 

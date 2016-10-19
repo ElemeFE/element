@@ -2,6 +2,15 @@ import Vue from 'vue';
 import debounce from 'throttle-debounce/debounce';
 import { orderBy } from './util';
 
+const getRowIdentity = (row, rowKey) => {
+  if (!row) throw new Error('row is required when get row identity');
+  if (typeof rowKey === 'string') {
+    return row[rowKey];
+  } else if (typeof rowKey === 'function') {
+    return rowKey.call(null, row);
+  }
+};
+
 const TableStore = function(table, initialState = {}) {
   if (!table) {
     throw new Error('Table is required.');
@@ -9,6 +18,7 @@ const TableStore = function(table, initialState = {}) {
   this.table = table;
 
   this.states = {
+    rowKey: null,
     _columns: [],
     columns: [],
     fixedColumns: [],
@@ -21,8 +31,9 @@ const TableStore = function(table, initialState = {}) {
       direction: null
     },
     isAllSelected: false,
-    selection: null,
-    allowNoSelection: false,
+    selection: [],
+    reserveSelection: false,
+    allowNoCurrentRow: false,
     selectionMode: 'none',
     selectable: null,
     currentRow: null,
@@ -43,7 +54,31 @@ TableStore.prototype.mutations = {
       data.forEach((item) => Vue.set(item, '$selected', false));
     }
     states.data = orderBy((data || []), states.sortCondition.property, states.sortCondition.direction);
-    this.updateSelectedRow();
+    this.updateCurrentRow();
+
+    if (!states.reserveSelection) {
+      states.isAllSelected = false;
+    } else {
+      const rowKey = states.rowKey;
+      if (rowKey) {
+        const selectionMap = {};
+        states.selection.forEach((row) => {
+          selectionMap[getRowIdentity(row, rowKey)] = row;
+        });
+
+        states.data.forEach((row) => {
+          const rowId = getRowIdentity(row, rowKey);
+          if (selectionMap[rowId]) {
+            row.$selected = true;
+            selectionMap[rowId] = row;
+          }
+        });
+
+        this.updateAllSelected();
+      } else {
+        console.warn('WARN: rowKey is required when reserve-selection is enabled.');
+      }
+    }
 
     if (states.fixedColumns.length > 0 || states.rightFixedColumns.length > 0) Vue.nextTick(() => this.table.syncHeight());
     Vue.nextTick(() => this.table.updateScrollY());
@@ -65,6 +100,7 @@ TableStore.prototype.mutations = {
     }
     if (column.type === 'selection') {
       states.selectable = column.selectable;
+      states.reserveSelection = column.reserveSelection;
     }
 
     this.scheduleLayout();
@@ -83,38 +119,61 @@ TableStore.prototype.mutations = {
     states.hoverRow = row;
   },
 
-  rowSelectedChanged(states) {
-    let isAllSelected = true;
-    const data = states.data || [];
-    for (let i = 0, j = data.length; i < j; i++) {
-      const item = data[i];
-      if (states.selectable) {
-        if (states.selectable.call(null, item, i) && !item.$selected) {
-          isAllSelected = false;
-          break;
-        }
-      } else {
-        if (!item.$selected) {
-          isAllSelected = false;
-          break;
-        }
+  rowSelectedChanged(states, row) {
+    const selection = states.selection;
+    if (row.$selected) {
+      if (selection.indexOf(row) === -1) {
+        selection.push(row);
+      }
+    } else {
+      const index = selection.indexOf(row);
+      if (index > -1) {
+        selection.splice(index, 1);
       }
     }
-    states.isAllSelected = isAllSelected;
+    this.table.$emit('selection-change', selection);
+    this.table.$emit('select', selection, row);
+
+    this.updateAllSelected();
   },
 
   toggleAllSelection: debounce(10, function(states) {
     const data = states.data || [];
     const value = !states.isAllSelected;
+    const selection = this.states.selection;
+    let selectionChanged = false;
+
+    const setSelected = (item) => {
+      if (item.$selected !== value) {
+        selectionChanged = true;
+        if (value) {
+          if (selection.indexOf(item) === -1) {
+            selection.push(item);
+          }
+        } else {
+          const itemIndex = selection.indexOf(item);
+          if (itemIndex > -1) {
+            selection.splice(itemIndex, 1);
+          }
+        }
+      }
+      item.$selected = value;
+    };
+
     data.forEach((item, index) => {
       if (states.selectable) {
         if (states.selectable.call(null, item, index)) {
-          item.$selected = value;
+          setSelected(item);
         }
       } else {
-        item.$selected = value;
+        setSelected(item);
       }
     });
+
+    if (selectionChanged) {
+      this.table.$emit('selection-change', selection);
+    }
+    this.table.$emit('select-all', selection);
     states.isAllSelected = value;
   }),
 
@@ -138,25 +197,58 @@ TableStore.prototype.updateColumns = function() {
   states.columns = [].concat(states.fixedColumns).concat(_columns.filter((column) => !column.fixed)).concat(states.rightFixedColumns);
 };
 
-TableStore.prototype.updateSelectedRow = function() {
+TableStore.prototype.clearSelection = function() {
+  const states = this.states;
+  const oldSelection = states.selection;
+  oldSelection.forEach((row) => { row.$selected = false; });
+  if (this.states.reserveSelection) {
+    const data = states.data || [];
+    data.forEach((row) => { row.$selected = false; });
+  }
+  states.isAllSelected = false;
+  states.selection = [];
+};
+
+TableStore.prototype.updateAllSelected = function() {
+  const states = this.states;
+  let isAllSelected = true;
+  const data = states.data || [];
+  for (let i = 0, j = data.length; i < j; i++) {
+    const item = data[i];
+    if (states.selectable) {
+      if (states.selectable.call(null, item, i) && !item.$selected) {
+        isAllSelected = false;
+        break;
+      }
+    } else {
+      if (!item.$selected) {
+        isAllSelected = false;
+        break;
+      }
+    }
+  }
+  states.isAllSelected = isAllSelected;
+};
+
+TableStore.prototype.updateCurrentRow = function() {
   const states = this.states;
   const table = this.table;
   const data = states.data || [];
   if (states.selectionMode === 'single') {
-    const oldSelectedRow = states.currentRow;
-    if (oldSelectedRow === null && !states.allowNoSelection) {
+    const oldCurrentRow = states.currentRow;
+    if (oldCurrentRow === null && !states.allowNoCurrentRow) {
       states.currentRow = data[0];
-      if (states.currentRow !== oldSelectedRow) {
-        table.$emit('selectionchange', states.currentRow);
+      if (states.currentRow !== oldCurrentRow) {
+        table.$emit('selection-change', states.currentRow);
       }
-    } else if (data.indexOf(oldSelectedRow) === -1) {
-      if (!states.allowNoSelection) {
+    } else if (data.indexOf(oldCurrentRow) === -1) {
+      if (!states.allowNoCurrentRow) {
         states.currentRow = data[0];
       } else {
         states.currentRow = null;
       }
-      if (states.currentRow !== oldSelectedRow) {
-        table.$emit('selectionchange', states.currentRow);
+      if (states.currentRow !== oldCurrentRow) {
+        table.$emit('selection-change', states.currentRow);
       }
     }
   }
