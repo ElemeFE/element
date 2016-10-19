@@ -15,7 +15,12 @@
       :class="{ 'show-input': showInput }"
       @click="onSliderClick" ref="slider">
       <div class="el-slider__bar" :style="{ width: currentPosition }"></div>
-      <div class="el-slider__button-wrapper" @mouseenter="hovering = true" @mouseleave="hovering = false" :style="{left: currentPosition}" ref="button">
+      <div
+        class="el-slider__button-wrapper"
+        @mouseenter="hovering = true"
+        @mouseleave="hovering = false"
+        @mousedown="onButtonDown"
+        :style="{left: currentPosition}" ref="button">
         <div class="el-slider__button" :class="{ 'hover': hovering, 'dragging': dragging }"></div>
       </div>
       <transition name="popper-fade">
@@ -77,6 +82,9 @@
         showTip: false,
         hovering: false,
         dragging: false,
+        startX: 0,
+        currentX: 0,
+        startPos: 0,
         popper: null,
         newPos: null,
         oldValue: this.value,
@@ -174,6 +182,36 @@
         if (!isNaN(this.value)) {
           this.setPosition((this.value - this.min) * 100 / (this.max - this.min));
         }
+      },
+
+      onDragStart(event) {
+        this.dragging = true;
+        this.startX = event.clientX;
+        this.startPos = parseInt(this.currentPosition, 10);
+      },
+
+      onDragging(event) {
+        if (this.dragging) {
+          this.currentX = event.clientX;
+          var diff = (this.currentX - this.startX) / this.$sliderWidth * 100;
+          this.newPos = this.startPos + diff;
+          this.setPosition(this.newPos);
+        }
+      },
+
+      onDragEnd() {
+        if (this.dragging) {
+          this.dragging = false;
+          this.setPosition(this.newPos);
+          window.removeEventListener('mousemove', this.onDragging);
+          window.removeEventListener('mouseup', this.onDragEnd);
+        }
+      },
+
+      onButtonDown(event) {
+        this.onDragStart(event);
+        window.addEventListener('mousemove', this.onDragging);
+        window.addEventListener('mouseup', this.onDragEnd);
       }
     },
 
@@ -198,47 +236,15 @@
       }
     },
 
-    mounted() {
-      var startX = 0;
-      var currentX = 0;
-      var startPos = 0;
-
-      var onDragStart = event => {
-        this.dragging = true;
-        startX = event.clientX;
-        startPos = parseInt(this.currentPosition, 10);
-      };
-
-      var onDragging = event => {
-        if (this.dragging) {
-          currentX = event.clientX;
-          var diff = (currentX - startX) / this.$sliderWidth * 100;
-          this.newPos = startPos + diff;
-          this.setPosition(this.newPos);
-        }
-      };
-
-      var onDragEnd = () => {
-        if (this.dragging) {
-          this.dragging = false;
-          this.setPosition(this.newPos);
-          window.removeEventListener('mousemove', onDragging);
-          window.removeEventListener('mouseup', onDragEnd);
-        }
-      };
-
-      this.$refs.button.addEventListener('mousedown', function(event) {
-        onDragStart(event);
-        window.addEventListener('mousemove', onDragging);
-        window.addEventListener('mouseup', onDragEnd);
-      });
-    },
-
     created() {
-      if (typeof this.value !== 'number' || this.value < this.min || this.value > this.max) {
+      if (typeof this.value !== 'number' || this.value < this.min) {
         this.$emit('input', this.min);
+      } else if (this.value > this.max) {
+        this.$emit('input', this.max);
       }
-      this.inputValue = this.inputValue || this.value;
+      this.$nextTick(() => {
+        this.inputValue = this.inputValue || this.value;
+      });
     },
 
     beforeDestroy() {
