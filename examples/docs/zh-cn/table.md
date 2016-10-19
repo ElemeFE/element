@@ -469,7 +469,7 @@
 
 ### 固定列
 
-横向内容过多时，可选择固定首列。
+横向内容过多时，可选择固定列。
 
 :::demo 固定列需要使用`fixed`属性，它接受 Boolean 值或者`left` `right`，表示左边固定还是右边固定。
 ```html
@@ -508,6 +508,13 @@
       prop="zip"
       label="邮编"
       width="120">
+    </el-table-column>
+    <el-table-column
+      inline-template
+      fixed="right"
+      label="操作"
+      width="80">
+      <el-button type="primary" size="small">编辑</el-button>
     </el-table-column>
   </el-table>
 </template>
