@@ -1,2 +1,1 @@
-import Message from './src/main.js';
-module.exports = Message;
+module.exports = require('./src/main.js');

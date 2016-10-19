@@ -3,6 +3,7 @@ const ElMenuItem = require('./src/menu-item');
 const ElMenuItemGroup = require('./src/menu-item-group');
 const ElSubmenu = require('./src/submenu');
 
+/* istanbul ignore next */
 module.exports = function(Vue) {
   Vue.component(ElMenuItem.name, ElMenuItem);
   Vue.component(ElMenuItemGroup.name, ElMenuItemGroup);

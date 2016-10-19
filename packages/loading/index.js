@@ -1,2 +1,1 @@
-import Loading from './src/directive';
-module.exports = Loading;
+module.exports = require('./src/directive');
