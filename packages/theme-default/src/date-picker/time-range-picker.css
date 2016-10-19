@@ -1,4 +1,4 @@
-@import '../css/vars.css';
+@import './vars.css';
 
 @component-namespace el {
   @b time-range-picker {

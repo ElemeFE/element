@@ -20,12 +20,14 @@
         <div class="el-picker-panel__body">
           <div class="el-date-range-picker__time-header" v-if="showTime">
             <span class="el-date-range-picker__editors-wrap">
-              <input
-                placeholder="开始日期"
-                class="el-date-range-picker__editor"
-                v-model.lazy="leftVisibleDate"
-                @input="handleDateInput($event, 'min')"
-                @change="handleDateChange($event, 'min')"/>
+              <span class="el-date-range-picker__time-picker-wrap">
+                <input
+                  placeholder="开始日期"
+                  class="el-date-range-picker__editor"
+                  v-model.lazy="leftVisibleDate"
+                  @input="handleDateInput($event, 'min')"
+                  @change="handleDateChange($event, 'min')"/>
+              </span>
               <span class="el-date-range-picker__time-picker-wrap">
                 <input
                   placeholder="开始时间"
@@ -44,14 +46,16 @@
             </span>
             <span class="el-icon-arrow-right"></span>
             <span class="el-date-range-picker__editors-wrap is-right">
-              <input
-                ref="leftInput"
-                placeholder="结束日期"
-                class="el-date-range-picker__editor"
-                v-model.lazy="rightVisibleDate"
-                :readonly="!minDate"
-                @input="handleDateInput($event, 'max')"
-                @change="handleDateChange($event, 'max')" />
+              <span class="el-date-range-picker__time-picker-wrap">
+                <input
+                  ref="leftInput"
+                  placeholder="结束日期"
+                  class="el-date-range-picker__editor"
+                  v-model.lazy="rightVisibleDate"
+                  :readonly="!minDate"
+                  @input="handleDateInput($event, 'max')"
+                  @change="handleDateChange($event, 'max')" />
+              </span>
               <span class="el-date-range-picker__time-picker-wrap">
                 <input
                   ref="rightInput"

@@ -27,12 +27,12 @@
     }
 
     @e editor-wrap {
-      flex: 1;
       position: relative;
+      display: table-cell;
+      padding: 0 5px;
     }
 
     @e editor {
-      margin: 0 5px;
       position: relative;
       border: 1px solid #c0ccda;
       border-radius: 4px;
@@ -42,6 +42,7 @@
       outline: none;
       appearance: none;
       transition: border 0.3s;
+      width: 100%;
 
       &:hover {
         border-color: #20a0ff;
@@ -53,7 +54,9 @@
       border-bottom: 1px solid var(--datepicker-inner-border-color);
       font-size: 12px;
       padding: 8px 5px 5px 5px;
-      display: flex;
+      display: table;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     @e header {
