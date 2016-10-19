@@ -197,6 +197,7 @@
 
       showDecimalIcon(item) {
         let showWhenDisabled = this.disabled && this.valueDecimal > 0 && item - 1 < this.value && item > this.value;
+        /* istanbul ignore next */
         let showWhenAllowHalf = this.allowHalf && this.pointerAtLeftHalf && ((item - 0.5).toFixed(1) === this.currentValue.toFixed(1));
         return showWhenDisabled || showWhenAllowHalf;
       },
@@ -223,6 +224,7 @@
         if (this.disabled) {
           return;
         }
+        /* istanbul ignore if */
         if (this.allowHalf) {
           let target = event.target;
           if (hasClass(target, 'el-rate__item')) {
