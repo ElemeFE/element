@@ -134,7 +134,7 @@ export default {
       if (cell) {
         const column = getColumnByCell(table, cell);
         const hoverState = table.hoverState = { cell, column, row };
-        table.$emit('cellmouseenter', hoverState.row, hoverState.column, hoverState.cell, event);
+        table.$emit('cell-mouseenter', hoverState.row, hoverState.column, hoverState.cell, event);
       }
 
       // 判断是否text-overflow, 如果是就显示tooltip
@@ -145,12 +145,10 @@ export default {
 
     handleCellMouseLeave(event) {
       const cell = getCell(event);
+      if (!cell) return;
 
-      if (cell) {
-        const table = this.$parent;
-        const oldHoverState = table.hoverState;
-        table.$emit('cellmouseleave', oldHoverState.row, oldHoverState.column, oldHoverState.cell, event);
-      }
+      const oldHoverState = this.$parent.hoverState;
+      this.$parent.$emit('cell-mouseleave', oldHoverState.row, oldHoverState.column, oldHoverState.cell, event);
     },
 
     handleMouseEnter(index) {
@@ -164,13 +162,13 @@ export default {
       if (cell) {
         const column = getColumnByCell(table, cell);
         if (column) {
-          table.$emit('cellclick', row, column, cell, event);
+          table.$emit('cell-click', row, column, cell, event);
         }
       }
 
       this.store.commit('setSelectedRow', row);
 
-      table.$emit('rowclick', row, event);
+      table.$emit('row-click', row, event);
     },
 
     getCellContent(row, property, columnId) {

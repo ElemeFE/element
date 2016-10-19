@@ -670,15 +670,15 @@
 
 选择单行数据时使用色块表示。
 
-:::demo Table 组件提供了选择的支持，只需要配置`selection-mode`属性即可实现单选（`single`）、多选（`multiple`)，如果不需要则设置为`none`。之后由`selectionchange`事件来管理选中时触发的事件，它会传入一个`value`，`value`为生成表格时的对应对象。本例中还使用了`allow-no-selection`属性，它接受一个`Boolean`，若为`true`，则允许为空，默认为`false`，此时将会产生默认值，为填入数组的第一个对象。如果需要显示索引，可以增加一列`el-table-column`，设置`type`属性为`index`即可显示从 1 开始的索引号。
+:::demo Table 组件提供了选择的支持，只需要配置`selection-mode`属性即可实现单选（`single`）、多选（`multiple`)，如果不需要则设置为`none`。之后由`selection-change`事件来管理选中时触发的事件，它会传入一个`value`，`value`为生成表格时的对应对象。本例中还使用了`allow-no-current-row`属性，它接受一个`Boolean`，若为`true`，则允许为空，默认为`false`，此时将会产生默认值，为填入数组的第一个对象。如果需要显示索引，可以增加一列`el-table-column`，设置`type`属性为`index`即可显示从 1 开始的索引号。
 ```html
 <template>
   <el-table
     :data="tableData"
     selection-mode="single"
-    @selectionchange="handleSelectionChange"
+    @selection-change="handleSelectionChange"
     style="width: 100%"
-    allow-no-selection>
+    allow-no-current-row>
     <el-table-column
       type="index"
       width="50">
@@ -739,14 +739,14 @@
 
 选择多行数据时使用 Checkbox。
 
-:::demo 除了`selection-mode`的设置外，多选与单选并没有太大差别，只是传入`selectionchange`事件中的参数从对象变成了对象数组。此外，需要提供一个列来显示多选框: 手动添加一个`el-table-column`，设`type`属性为`selection`即可。在本例中，为了方便说明其他属性，我们还使用了`inline-template`和`show-tooltip-when-overflow`：设置了`inline-template`属性后，可以通过调用`row`对象中的值取代`prop`属性的设置；默认情况下若内容过多会折行显示，若需要单行显示可以使用`show-tooltip-when-overflow`属性，它接受一个`Boolean`，为`true`时多余的内容会在 hover 时以 tooltip 的形式显示出来。
+:::demo 除了`selection-mode`的设置外，多选与单选并没有太大差别，只是传入`selection-change`事件中的参数从对象变成了对象数组。此外，需要提供一个列来显示多选框: 手动添加一个`el-table-column`，设`type`属性为`selection`即可。在本例中，为了方便说明其他属性，我们还使用了`inline-template`和`show-tooltip-when-overflow`：设置了`inline-template`属性后，可以通过调用`row`对象中的值取代`prop`属性的设置；默认情况下若内容过多会折行显示，若需要单行显示可以使用`show-tooltip-when-overflow`属性，它接受一个`Boolean`，为`true`时多余的内容会在 hover 时以 tooltip 的形式显示出来。
 ```html
 <template>
   <el-table
     :data="tableData3"
     selection-mode="multiple"
     style="width: 100%"
-    @selectionchange="handleMultipleSelectionChange">
+    @selection-change="handleMultipleSelectionChange">
     <el-table-column
       type="selection"
       width="50">
@@ -888,17 +888,26 @@
 | stripe | 是否为斑马纹 table | boolean | — | false |
 | border | 是否带有纵向边框 | boolean | — | false |
 | fit | 列的宽度是否自撑开 | boolean | — | true |
-| rowClassName | 行的 className 的回调，会传入 row, index。 | Function | - | - |
+| row-class-name | 行的 className 的回调，会传入 row, index。 | Function | - | - |
+| row-key | 行数据的 Key，用来优化 Table 的渲染；在使用 reserve-selection 功能的情况下，该属性是必填的 | Function, String | - | |
 | selection-mode | 列表项选择模式 | string | single/multiple/none | none |
-| allow-no-selection | 单选模式是否允许选项为空 | boolean | — | false |
+| allow-no-current-row | 单选模式是否允许选项为空 | boolean | — | false |
 
 ### Table Events
 | 事件名 | 说明 | 参数 |
 | ---- | ---- | ---- |
-| selectionchange | 当选择项发生变化时会触发该事件 | selected |
-| cellmouseenter | 当单元格 hover 进入时会触发该事件 | row, column, cell, event |
-| cellmouseleave | 当单元格 hover 退出时会触发该事件 | row, column, cell, event |
-| cellclick | 当某个单元格被点击时会触发该事件 | row, column, cell, event |
+| select | 当用户手动勾选数据行的 Checkbox 时触发的事件 | selection |
+| select-all | 当用户手动勾选全选 Checkbox 时触发的事件 | selection |
+| selection-change | 当选择项发生变化时会触发该事件 | selection |
+| cell-mouseenter | 当单元格 hover 进入时会触发该事件 | row, column, cell, event |
+| cell-mouseleave | 当单元格 hover 退出时会触发该事件 | row, column, cell, event |
+| cell-click | 当某个单元格被点击时会触发该事件 | row, column, cell, event |
+| row-click | 当某一行被点击时会触发该事件 | row, event |
+
+### Table Methods
+| 方法名 | 说明 | 参数 |
+| ---- | ---- | ---- |
+| clearSelection | 清空用户的选择，当使用 reserve-selection 功能的时候，可能会需要使用此方法 | selection |
 
 ### Table-column Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
@@ -914,4 +923,5 @@
 | show-tooltip-when-overflow | 当过长被隐藏时显示 tooltip | Boolean | — | false |
 | inline-template | 指定该属性后可以自定义 column 模板，参考多选的时间列，通过 row 获取行信息，JSX 里通过 _self 获取当前上下文。此时不需要配置 prop 属性  | — | — |
 | align | 对齐方式 | String | left, center, right | left |
-| selectable | 仅对 type=selection 的列有效，类型为 Function，Function 的返回值用来决定这一行的 CheckBox 是否可以勾选 | Function | - |
+| selectable | 仅对 type=selection 的列有效，类型为 Function，Function 的返回值用来决定这一行的 CheckBox 是否可以勾选 | Function | - | - |
+| reserve-selection | 仅对 type=selection 的列有效，类型为 Boolean，为 true 则代表会保留之前数据的选项，需要配合 Table 的 clearSelection 方法使用。 | Boolean | - | false |

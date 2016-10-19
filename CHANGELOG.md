@@ -25,6 +25,8 @@
 
 - 全屏 Loading 现在默认不再锁定屏幕滚动。如果需要的话，可添加 `lock` 修饰符
 - Table 删除属性 fixedColumnCount, customCriteria, customBackgroundColors
+- Table 的 allow-no-selection 属性更名为 allow-no-current-row
+- Table 的 selectionchange、cellmouseenter、cellmouseleave、cellclick 事件更名为 selection-change、cell-mouseenter、cell-mouseleave、cell-click。
 
 ### 1.0.0-rc.7
 

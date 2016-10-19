@@ -123,7 +123,9 @@
         default: 'none'
       },
 
-      allowNoSelection: Boolean,
+      rowKey: [String, Function],
+
+      allowNoCurrentRow: Boolean,
 
       rowClassName: [String, Function]
     },
@@ -134,6 +136,10 @@
     },
 
     methods: {
+      clearSelection() {
+        this.store.clearSelection();
+      },
+
       handleMouseLeave() {
         this.store.commit('setHoverRow', null);
         if (this.hoverState) this.hoverState = null;
@@ -192,8 +198,7 @@
 
       selection() {
         if (this.selectionMode === 'multiple') {
-          const data = this.tableData || [];
-          return data.filter(item => item.$selected === true);
+          return this.store.selection;
         } else if (this.selectionMode === 'single') {
           return this.store.currentRow;
         }
@@ -218,10 +223,6 @@
     },
 
     watch: {
-      selection(val) {
-        this.$emit('selectionchange', val);
-      },
-
       height(value) {
         this.layout.setHeight(value);
       },
@@ -247,8 +248,9 @@
 
     data() {
       const store = new TableStore(this, {
-        allowNoSelection: this.allowNoSelection,
-        selectionMode: this.selectionMode
+        allowNoCurrentRow: this.allowNoCurrentRow,
+        selectionMode: this.selectionMode,
+        rowKey: this.rowKey
       });
       const layout = new TableLayout({
         store,
