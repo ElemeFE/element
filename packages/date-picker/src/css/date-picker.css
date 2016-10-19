@@ -29,10 +29,15 @@
     @e editor-wrap {
       flex: 1;
       position: relative;
+
+      &:not(:first-child) {
+        margin: 0 10px;
+      }
     }
 
     @e editor {
       margin: 0 5px;
+      width: 100%;
       position: relative;
       border: 1px solid #c0ccda;
       border-radius: 4px;
