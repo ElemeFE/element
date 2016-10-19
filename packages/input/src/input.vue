@@ -168,10 +168,12 @@
     watch: {
       'value'(val, oldValue) {
         this.currentValue = val;
-        this.resizeTextarea();
       },
 
       'currentValue'(val) {
+        this.$nextTick(_ => {
+          this.resizeTextarea();
+        });
         this.$emit('input', val);
         this.$emit('change', val);
         this.dispatch('form-item', 'el.form.change', [val]);
