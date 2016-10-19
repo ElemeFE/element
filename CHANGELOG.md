@@ -5,21 +5,18 @@
 *2016-XX-XX*
 
 - 修复 Form reset method 对日期控件不起效的问题
-- 修复 Dialog 和 Message Box 在 body 无溢出时错误地添加 padding-right 的问题
+- 修复 Dialog/Message Box/Tooltip/Popover/... 等若干组件的样式错误
 - 修复 Message Box 的 prompt 在打开时会携带之前的验证状态的问题
-- 修复 Clickoutside 性能问题 #296
-- 修复 Tooltip/Popover 首次渲染的箭头位置 #412
 - 修复 Autocomplete 的弹出框不会消失 #439
-- 修复 DatePicker 弹出框样式溢出边框 #318
 - 新增 Input 图标的点击事件 #444
 - 修复 Loading 关闭后有几率滚动失效的问题
 - 修复 远程搜索的 Select 不能正确渲染默认初始值的问题
 - 修复 Switch 的 width 属性无效的问题
-- 优化 Table 性能，优化 Table 代码结构
 - Table 增加属性 rowClassName
 - TableColumn 增加 fixed 属性，可选值：true, false, left, right
 - TableColumn[type="selection"] 增加 selectable 属性
 - 修复 Input textarea 在动态赋值时 autosize 没有触发的问题
+- 修复 Input Number min max 属性设置后点击加减出现的崩溃的bug
 
 #### 非兼容性更新
 
