@@ -80,6 +80,7 @@
     },
     computed: {
       hasText() {
+        /* istanbul ignore next */
         return this.onText || this.offText;
       }
     },
@@ -107,6 +108,7 @@
       }
     },
     mounted() {
+      /* istanbul ignore if */
       if (this.width === 0) {
         this.coreWidth = this.hasText ? 58 : 46;
       }

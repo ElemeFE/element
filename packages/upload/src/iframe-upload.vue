@@ -71,7 +71,7 @@ export default {
     getIframeHTML(domain) {
       let domainScript = '';
       if (domain) {
-        domainScript = `<script>document.domain="${domain}";<` + '/script>';
+        domainScript = '<script' + `>document.domain="${domain}";<` + '/script>';
       }
       return `
       <!DOCTYPE html>
