@@ -55,7 +55,7 @@ import Steps from '../packages/steps/index.js';
 import Step from '../packages/step/index.js';
 
 const install = function(Vue) {
-  /* istanbul ignore next */
+  /* istanbul ignore if */
   if (install.installed) return;
 
   Vue.component(Pagination.name, Pagination);
@@ -120,7 +120,7 @@ const install = function(Vue) {
   Vue.prototype.$message = Message;
 };
 
-/* istanbul ignore next */
+/* istanbul ignore if */
 if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue);
 };

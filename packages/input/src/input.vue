@@ -120,7 +120,6 @@
         this.$emit('onblur', this.currentValue);
         this.dispatch('form-item', 'el.form.blur', [this.currentValue]);
       },
-
       inputSelect() {
         this.$refs.input.select();
       },
@@ -169,7 +168,6 @@
       'value'(val, oldValue) {
         this.currentValue = val;
       },
-
       'currentValue'(val) {
         this.$nextTick(_ => {
           this.resizeTextarea();
