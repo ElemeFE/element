@@ -34,25 +34,41 @@ describe('Tag', () => {
   it('hit', () => {
     const vm = createVue({
       template: `
-      <el-tag hit="true"></el-tag>
+      <el-tag hit></el-tag>
       `
     }, true);
     expect(vm.$el.classList.contains('is-hit')).to.be.true;
   });
 
-  it('closable', () => {
+  it('closable', done => {
     const vm = createVue({
       template: `
-      <el-tag closable="true"></el-tag>
-      `
+      <el-tag closable @close="handleClose">关闭标签</el-tag>
+      `,
+      data() {
+        return {
+          isClose: false
+        };
+      },
+      methods: {
+        handleClose() {
+          this.isClose = true;
+        }
+      }
     }, true);
-    expect(vm.$el.querySelector('.el-tag .el-tag__close')).to.exist;
+    var closeBtn = vm.$el.querySelector('.el-tag .el-tag__close');
+    expect(closeBtn).to.exist;
+    closeBtn.click();
+    vm.$nextTick(_ => {
+      expect(vm.isClose).to.true;
+      done();
+    });
   });
 
   it('closeTransition', () => {
     const vm = createVue({
       template: `
-      <el-tag closable="true" closeTransition="true"></el-tag>
+      <el-tag closable closeTransition></el-tag>
       `
     }, true);
     expect(vm.$el.classList.contains('md-fade-center')).to.be.false;
