@@ -41,7 +41,7 @@
 ```html
 <template>
   <!-- `checked` 为 true 或 false -->
-  <el-checkbox class="checkbox" v-model="checked" checked>备选项</el-checkbox>
+  <el-checkbox v-model="checked" checked>备选项</el-checkbox>
 </template>
 <script>
   export default {
@@ -63,8 +63,8 @@
 
 ```html
 <template>
-  <el-checkbox class="checkbox" v-model="checked1" disabled>备选项1</el-checkbox>
-  <el-checkbox class="checkbox" v-model="checked2" disabled>备选项</el-checkbox>
+  <el-checkbox v-model="checked1" disabled>备选项1</el-checkbox>
+  <el-checkbox v-model="checked2" disabled>备选项</el-checkbox>
 </template>
 <script>
   export default {
@@ -88,11 +88,11 @@
 ```html
 <template>
   <el-checkbox-group v-model="checkList">
-    <el-checkbox class="checkbox" label="复选框 A"></el-checkbox>
-    <el-checkbox class="checkbox" label="复选框 B"></el-checkbox>
-    <el-checkbox class="checkbox" label="复选框 C"></el-checkbox>
-    <el-checkbox class="checkbox" label="禁用" disabled></el-checkbox>
-    <el-checkbox class="checkbox" label="选中且禁用" disabled></el-checkbox>
+    <el-checkbox label="复选框 A"></el-checkbox>
+    <el-checkbox label="复选框 B"></el-checkbox>
+    <el-checkbox label="复选框 C"></el-checkbox>
+    <el-checkbox label="禁用" disabled></el-checkbox>
+    <el-checkbox label="选中且禁用" disabled></el-checkbox>
   </el-checkbox-group>
 </template>
 
@@ -117,7 +117,6 @@
 ```html
 <template>
   <el-checkbox
-    class="checkbox"
     v-model="isValid"
     true-label="可用"
     false-label="不可用">
