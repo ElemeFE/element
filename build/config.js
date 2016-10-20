@@ -15,6 +15,7 @@ Object.keys(dependencies).forEach(function (key) {
 externals['element-ui/src/utils/clickoutside'] = 'element-ui/lib/utils/clickoutside';
 externals['element-ui/src/utils/popper'] = 'element-ui/lib/utils/popper';
 externals['element-ui/src/utils/vue-popper'] = 'element-ui/lib/utils/vue-popper';
+externals['element-ui/src/utils/resize-event'] = 'element-ui/lib/utils/resize-event';
 
 exports.externals = Object.assign({
   vue: 'vue'

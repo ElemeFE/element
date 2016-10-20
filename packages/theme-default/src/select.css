@@ -105,6 +105,7 @@
     @e tags {
       position: absolute;
       line-height: normal;
+      white-space: normal;
       z-index: var(--index-top);
     }
 
