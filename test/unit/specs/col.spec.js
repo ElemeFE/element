@@ -41,4 +41,17 @@ describe('Col', () => {
     let colElm = vm.$el;
     expect(colElm.classList.contains('el-col-push-3')).to.be.true;
   });
+  it('gutter', () => {
+    const vm = createVue({
+      template: `
+        <el-row :gutter="20">
+          <el-col :span="12" ref="col">
+          </el-col>
+        </el-row>
+      `
+    }, true);
+    let colElm = vm.$refs.col.$el;
+    expect(colElm.style.paddingLeft === '10px').to.be.true;
+    expect(colElm.style.paddingRight === '10px').to.be.true;
+  });
 });
