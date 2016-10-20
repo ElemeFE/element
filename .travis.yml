@@ -7,6 +7,8 @@ cache:
   - travis_phantomjs
 before_install:
 - export TRAVIS_COMMIT_MSG="[deploy] $(git log --format='%h - %B' --no-merges -n 1)"
+- export TRAVIS_COMMIT_USER="$(git log --no-merges -n 1 --format=%an)"
+- export TRAVIS_COMMIT_EMAIL="$(git log --no-merges -n 1 --format=%ae)"
 - export PHANTOMJS_VERSION=2.1.1
 - export PATH=$PWD/travis_phantomjs/phantomjs-$PHANTOMJS_VERSION-linux-x86_64/bin:$PATH
 - if [ $(phantomjs --version) != $PHANTOMJS_VERSION ]; then rm -rf $PWD/travis_phantomjs;
