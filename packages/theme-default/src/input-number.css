@@ -4,15 +4,13 @@
 
 @component-namespace el {
   @b input-number {
-    display: block;
+    display: inline-block;
     overflow: hidden;
+    width: 180px;
+    position: relative;
 
     & .el-input__inner {
       appearance: none;
-    }
-    & .el-input {
-      float: left;
-      margin-right: calc(-(var(--input-height) + 1px) * 2);
     }
     @e increase, decrease {
       height: 100%;
@@ -23,8 +21,7 @@
       text-align: center;
       color: #99A9BF;
       cursor: pointer;
-      float: left;
-      position: relative;
+      position: absolute;
 
       &:hover {
         color: var(--color-primary);
@@ -34,6 +31,13 @@
         color: var(--disabled-border-base);
         cursor: not-allowed;
       }
+    }
+
+    @e increase {
+      right: 0;
+    }
+    @e decrease {
+      right: calc(var(--input-height) + 1px);
     }
 
     @when disabled {
@@ -48,23 +52,27 @@
       }
     }
     @when large {
-      & .el-input {
-        margin-right: calc(-(var(--input-large-height) + 1px) * 2);
-      }
+      width: 200px;
+
       & .el-input-number__increase, .el-input-number__decrease {
         line-height: var(--input-large-height);
         width: var(--input-large-height);
         font-size: var(--input-large-font-size);
       }
+      & .el-input-number__decrease {
+        right: calc(var(--input-large-height) + 1px);
+      }
     }
     @when small {
-      & .el-input {
-        margin-right: calc(-(var(--input-small-height) + 1px) * 2);
-      }
+      width: 130px;
+
       & .el-input-number__increase, .el-input-number__decrease {
         line-height: var(--input-small-height);
         width: var(--input-small-height);
         font-size: var(--input-small-font-size);
+      }
+      & .el-input-number__decrease {
+        right: calc(var(--input-small-height) + 1px);
       }
     }
   }
