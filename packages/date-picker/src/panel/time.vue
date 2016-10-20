@@ -19,7 +19,7 @@
         <button
           type="button"
           class="el-time-panel__btn cancel"
-          @click="handleCancel()">{{ $t('datepicker.cancel') }}</button>
+          @click="handleCancel">{{ $t('datepicker.cancel') }}</button>
         <button
           type="button"
           class="el-time-panel__btn confirm"
@@ -66,10 +66,11 @@
           date = new Date();
         }
 
-        this.hours = date.getHours();
-        this.minutes = date.getMinutes();
-        this.seconds = date.getSeconds();
-        this.handleConfirm(true);
+        this.handleChange({
+          hours: date.getHours(),
+          minutes: date.getMinutes(),
+          seconds: date.getSeconds()
+        });
       },
 
       selectableRange(val) {
@@ -129,7 +130,6 @@
 
       handleConfirm(visible = false, first) {
         const date = new Date(limitRange(this.currentDate, this.selectableRange));
-
         this.$emit('pick', date, visible, first);
       },
 

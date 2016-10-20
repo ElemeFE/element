@@ -17,6 +17,9 @@
 - TableColumn[type="selection"] 增加 selectable 属性
 - 修复 Input textarea 在动态赋值时 autosize 没有触发的问题
 - 修复 Input Number min max 属性设置后点击加减出现的崩溃的bug
+- 优化 TimePicker/DatePicker 输入日期行为
+- 修复 DatePicker 输入禁用状态的日期却生效的问题 #484
+
 
 #### 非兼容性更新
 

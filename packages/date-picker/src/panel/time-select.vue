@@ -72,6 +72,14 @@
         if (this.value && val && compareTime(this.value, val) === -1) {
           this.$emit('pick');
         }
+      },
+
+      value(val, old) {
+        if (val && this.items.some(i => i.value === val && !i.disabled)) {
+          this.$emit('pick', val, true);
+        } else {
+          this.$emit('pick', old, true);
+        }
       }
     },
 

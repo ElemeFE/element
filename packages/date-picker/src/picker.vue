@@ -16,12 +16,11 @@
       @focus="handleFocus"
       @blur="handleBlur"
       @keydown="handleKeydown"
-      @keyup="handleKeyup"
       ref="reference"
       v-model.lazy="visualValue" />
 
     <span
-      @click="togglePicker()"
+      @click="togglePicker"
       class="el-date-editor__trigger el-icon"
       :class="[triggerClass]"
       v-if="haveTrigger">
@@ -47,7 +46,7 @@ const newPopper = {
   beforeDestroy: Popper.beforeDestroy
 };
 
-const FUNCTION_KEYS = [13, 16, 17, 18, 19, 20, 27, 33, 34, 35, 36, 37, 38, 39, 40];
+// const FUNCTION_KEYS = [13, 16, 17, 18, 19, 20, 27, 33, 34, 35, 36, 37, 38, 39, 40];
 const RANGE_SEPARATOR = ' - ';
 const DEFAULT_FORMATS = {
   date: 'yyyy-MM-dd',
@@ -210,9 +209,7 @@ export default {
     pickerOptions: {}
   },
 
-  directives: {
-    Clickoutside
-  },
+  directives: { Clickoutside },
 
   data() {
     return {
@@ -279,11 +276,11 @@ export default {
           const parsedValue = parser(value, this.format || DEFAULT_FORMATS[type]);
 
           if (parsedValue) {
-            this.$emit('input', parsedValue);
+            this.picker.value = parsedValue;
           }
           return;
         }
-        this.$emit('input', value);
+        this.picker.value = value;
       }
     }
   },
@@ -318,87 +315,43 @@ export default {
 
     handleKeydown(event) {
       const keyCode = event.keyCode;
-      let selectionStart = event.target.selectionStart;
-      let selectionEnd = event.target.selectionEnd;
-      let length = event.target.value.length;
+      const target = event.target;
+      let selectionStart = target.selectionStart;
+      let selectionEnd = target.selectionEnd;
+      let length = target.value.length;
 
       // tab
       if (keyCode === 9) {
         this.pickerVisible = false;
-      } else if (keyCode === 27) {
+      // enter
+      } else if (keyCode === 13) {
         this.pickerVisible = this.picker.visible = false;
+        this.visualValue = target.value;
+        target.blur();
       // left
       } else if (keyCode === 37) {
         event.preventDefault();
 
         if (selectionEnd === length && selectionStart === length) {
-          event.target.selectionStart = length - 2;
+          target.selectionStart = length - 2;
         } else if (selectionStart >= 3) {
-          event.target.selectionStart -= 3;
+          target.selectionStart -= 3;
         } else {
-          event.target.selectionStart = 0;
+          target.selectionStart = 0;
         }
-        event.target.selectionEnd = event.target.selectionStart + 2;
+        target.selectionEnd = target.selectionStart + 2;
       // right
       } else if (keyCode === 39) {
         event.preventDefault();
         if (selectionEnd === 0 && selectionStart === 0) {
-          event.target.selectionEnd = 2;
+          target.selectionEnd = 2;
         } else if (selectionEnd <= length - 3) {
-          event.target.selectionEnd += 3;
+          target.selectionEnd += 3;
         } else {
-          event.target.selectionEnd = length;
+          target.selectionEnd = length;
         }
-        event.target.selectionStart = event.target.selectionEnd - 2;
+        target.selectionStart = target.selectionEnd - 2;
       }
-    },
-
-    handleKeyup(event) {
-      const keyCode = event.keyCode;
-      if (FUNCTION_KEYS.indexOf(keyCode) > -1) return;
-      if (!(this.picker && this.pickerVisible)) return;
-      const selectionStart = event.target.selectionStart;
-      const value = event.target.value;
-      const type = this.type;
-      const parser = (
-        TYPE_VALUE_RESOLVER_MAP[type] ||
-        TYPE_VALUE_RESOLVER_MAP['default']
-      ).parser;
-      const parsedValue = parser(value, this.format || DEFAULT_FORMATS[type]);
-
-      if (!parsedValue) return;
-      this.picker.value = parsedValue;
-      this.$emit('input', parsedValue);
-
-      if (this.type.indexOf('date') > -1) return;
-
-      setTimeout(_ => {
-        let start = selectionStart;
-        let end = selectionStart;
-        const offset = 2;
-
-        if (selectionStart === 9) {
-          start += offset;
-        }
-        if (selectionStart >= 12) {
-          if (selectionStart % 3 === 0) {
-            start += 1;
-            end = start;
-          } else if (selectionStart % 3 === 2) {
-            end = start + offset;
-          }
-        } else {
-          if (selectionStart % 3 === 1) {
-            start += 1;
-            end = start;
-          } else if (selectionStart % 3 === 0) {
-            end = start + offset;
-          }
-        }
-
-        event.target.selectionStart = start;
-        event.target.selectionEnd = end;
-      }, 0);
     },
 
     togglePicker() {
