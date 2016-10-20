@@ -21,7 +21,7 @@
     "clean": "rimraf lib && rimraf packages/*/lib",
     "lint": "eslint src/**/* test/**/* packages/**/*.{js,vue} build/**/* --quiet",
     "test:watch": "karma start test/unit/karma.conf.js",
-    "test": "npm run lint && karma start test/unit/karma.conf.js --single-run"
+    "test": "npm run lint && CI_ENV=/dev/ karma start test/unit/karma.conf.js --single-run"
   },
   "repository": {
     "type": "git",
