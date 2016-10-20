@@ -7,8 +7,7 @@ describe('Tooltip', () => {
         <button>click</button>
       </el-tooltip>`);
 
-    expect(vm.$el.querySelector('.el-tooltip__popper')).to.exist;
-    expect(vm.$el.querySelector('.el-tooltip__popper').textContent).to.equal('提示文字');
+    expect(vm.$el.querySelector('.el-tooltip__popper')).to.have.property('textContent', '提示文字');
   });
 
   it('hover', done => {
@@ -24,14 +23,13 @@ describe('Tooltip', () => {
 
     expect(tooltip.popperElm).to.not.exist;
     setTimeout(_ => {
-      expect(tooltip.popperElm).to.exist;
-      expect(tooltip.popperElm.style.display).to.not.equal('none');
+      expect(tooltip).to.have.deep.property('popperElm.style.display').not.equal('none');
 
       // trigger mouseleave
       tooltip.handleClosePopper();
 
       setTimeout(_ => {
-        expect(tooltip.popperElm.style.display).to.equal('none');
+        expect(tooltip).to.have.deep.property('popperElm.style.display', 'none');
         done();
       }, 500);
     }, 150);

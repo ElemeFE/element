@@ -46,3 +46,19 @@ exports.createTest = function(Compo, propsData = {}, mounted = false) {
   const Ctor = Vue.extend(Compo);
   return new Ctor({ propsData }).$mount(mounted === false ? null : elm);
 };
+
+/**
+ * 触发一个事件
+ * mouseenter, mouseleave, mouseover 等
+ * @param  {Element} elm
+ * @param  {EventName} name
+ * @param  {options} opts
+ */
+exports.triggerEvent = function(elm, name, opts) {
+  const evt = document.createEvent('MouseEvents');
+
+  evt.initEvent(name, ...opts);
+  elm.dispatchEvent
+    ? elm.dispatchEvent(evt)
+    : elm.fireEvent('on' + name, evt);
+};
