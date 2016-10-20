@@ -71,6 +71,7 @@
   import debounce from 'throttle-debounce/debounce';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
   import { addClass, removeClass, hasClass } from 'wind-dom/src/class';
+  import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
 
   export default {
     mixins: [emitter],
@@ -505,6 +506,10 @@
           this.options.splice(index, 1);
         }
         this.broadcast('option', 'resetIndex');
+      },
+
+      resetInputWidth() {
+        this.inputWidth = this.$refs.reference.$el.getBoundingClientRect().width;
       }
     },
 
@@ -528,6 +533,7 @@
     },
 
     mounted() {
+      addResizeListener(this.$el, this.resetInputWidth);
       if (this.remote && this.multiple && Array.isArray(this.value)) {
         this.selected = this.options.reduce((prev, curr) => {
           return this.value.indexOf(curr.value) > -1 ? prev.concat(curr) : prev;
@@ -541,6 +547,10 @@
           this.inputWidth = this.$refs.reference.$el.getBoundingClientRect().width;
         }
       });
+    },
+
+    destroyed() {
+      if (this.resetInputWidth) removeResizeListener(this.$el, this.resetInputWidth);
     }
   };
 </script>
