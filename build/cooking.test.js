@@ -1,24 +1,27 @@
-var path = require('path');
 var cooking = require('cooking');
 var config = require('./config');
 var ProgressBarPlugin = require('progress-bar-webpack-plugin');
+var jsLoader = process.env.CI_ENV ? 'isparta-loader' : 'isparta-loader!eslint-loader';
 
 cooking.set({
   entry: './src/index.js',
-  extends: ['vue2', 'lint'],
+  extends: process.env.CI_ENV ? ['vue2'] : ['vue2', 'lint'],
   minimize: false,
   alias: config.alias,
   postcss: config.postcss,
   sourceMap: '#inline-source-map'
 });
 
-cooking.add('vue.loaders.js', 'isparta-loader!eslint-loader');
+cooking.add('vue.loaders.js', jsLoader);
 cooking.add('loader.js.exclude', config.jsexclude);
-cooking.add('preLoader.js', {
+cooking.add('preLoader.0', {
   test: /\.js$/,
-  loader: 'isparta-loader!eslint-loader',
-  exclude: config.jsexclude
+  loader: 'isparta',
+  exclude: config.jsexclude,
+  include: /src|packages/
 });
 
-cooking.add('plugins.process', new ProgressBarPlugin());
+if (!process.env.CI_ENV) {
+  cooking.add('plugins.process', new ProgressBarPlugin());
+}
 module.exports = cooking.resolve();

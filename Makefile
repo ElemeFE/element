@@ -32,6 +32,9 @@ pub:
 pub-all:
 	npm run pub:all
 
+test:
+	npm run test:watch
+
 help:
 	@echo "   \033[35mmake\033[0m \033[1m命令使用说明\033[0m"
 	@echo "   \033[35mmake install\033[0m\t\033[0m\t\033[0m\t\033[0m\t---  安装依赖"
