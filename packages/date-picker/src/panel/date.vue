@@ -137,10 +137,16 @@
       },
 
       value(newVal) {
-        if (this.selectionMode === 'day' && newVal instanceof Date) {
+        if (newVal instanceof Date) {
+
+          if (typeof this.disabledDate === 'function' &&
+            this.disabledDate(new Date(newVal))) {
+            return;
+          }
           this.date = newVal;
           this.year = newVal.getFullYear();
           this.month = newVal.getMonth();
+          this.$emit('pick', newVal, true);
         }
       },
 
@@ -377,6 +383,8 @@
               date.setMonth(this.date.getMonth());
               date.setDate(this.date.getDate());
               this.date = date;
+              this.$refs.timepicker.value = date;
+              this.timePickerVisible = false;
             }
           }
         }
@@ -394,6 +402,7 @@
             date.setMinutes(this.date.getMinutes());
             date.setSeconds(this.date.getSeconds());
             this.date = date;
+            this.resetView();
           }
         }
       },

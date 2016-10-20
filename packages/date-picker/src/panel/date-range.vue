@@ -331,7 +331,12 @@
       handleDateInput(event, type) {
         const value = event.target.value;
         const parsedValue = parseDate(value, 'yyyy-MM-dd');
+
         if (parsedValue) {
+          if (typeof this.disabledDate === 'function' &&
+            this.disabledDate(new Date(parsedValue))) {
+            return;
+          }
           const target = new Date(type === 'min' ? this.minDate : this.maxDate);
           if (target) {
             target.setFullYear(parsedValue.getFullYear());

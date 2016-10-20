@@ -61,6 +61,15 @@
 
     return minValue > maxValue;
   };
+  const clacTime = function(time) {
+    time = Array.isArray(time) ? time : [time];
+    const minTime = time[0] || new Date();
+    const date = new Date();
+    date.setHours(date.getHours() + 1);
+    const maxTime = time[1] || date;
+
+    return { minTime, maxTime };
+  };
 
   export default {
     components: {
@@ -73,24 +82,38 @@
       }
     },
 
+    props: ['value'],
+
+    watch: {
+      value(val) {
+        const time = clacTime(val);
+
+        this.handleMinChange({
+          hours: time.minTime.getHours(),
+          minutes: time.minTime.getMinutes(),
+          seconds: time.minTime.getSeconds()
+        });
+        this.handleMaxChange({
+          hours: time.maxTime.getHours(),
+          minutes: time.maxTime.getMinutes(),
+          seconds: time.maxTime.getSeconds()
+        });
+      }
+    },
+
     data() {
-      let defaultValue = this.$options.defaultValue;
-      defaultValue = Array.isArray(defaultValue) ? defaultValue : [defaultValue];
-      const minTime = defaultValue[0] || new Date();
-      const date = new Date();
-      date.setHours(date.getHours() + 1);
-      const maxTime = defaultValue[1] || date;
+      const time = clacTime(this.$options.defaultValue);
 
       return {
-        minTime: minTime,
-        maxTime: maxTime,
-        btnDisabled: isDisabled(minTime, maxTime),
-        maxHours: maxTime.getHours(),
-        maxMinutes: maxTime.getMinutes(),
-        maxSeconds: maxTime.getSeconds(),
-        minHours: minTime.getHours(),
-        minMinutes: minTime.getMinutes(),
-        minSeconds: minTime.getSeconds(),
+        minTime: time.minTime,
+        maxTime: time.maxTime,
+        btnDisabled: isDisabled(time.minTime, time.maxTime),
+        maxHours: time.maxTime.getHours(),
+        maxMinutes: time.maxTime.getMinutes(),
+        maxSeconds: time.maxTime.getSeconds(),
+        minHours: time.minTime.getHours(),
+        minMinutes: time.minTime.getMinutes(),
+        minSeconds: time.minTime.getSeconds(),
         format: 'HH:mm:ss',
         visible: false,
         width: 0
