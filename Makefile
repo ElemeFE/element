@@ -1,4 +1,4 @@
-.PHONY: dist
+.PHONY: dist test
 default: help
 
 # build all theme

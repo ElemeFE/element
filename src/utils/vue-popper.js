@@ -19,8 +19,8 @@ export default {
       type: Number,
       default: 5
     },
-    reference: Object,
-    popper: Object,
+    reference: {},
+    popper: {},
     offset: {
       default: 0
     },
@@ -73,7 +73,6 @@ export default {
       const reference = this.referenceElm = this.referenceElm || this.reference || this.$refs.reference || this.$slots.reference[0].elm;
 
       if (!popper || !reference) return;
-
       if (this.visibleArrow) this.appendArrow(popper);
       if (this.appendToBody) document.body.appendChild(this.popperElm);
       if (this.popperJS && this.popperJS.hasOwnProperty('destroy')) {
