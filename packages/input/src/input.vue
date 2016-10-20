@@ -128,8 +128,9 @@
         if (!autosize || type !== 'textarea') {
           return;
         }
-        const minRows = autosize ? autosize.minRows : null;
-        const maxRows = autosize ? autosize.maxRows : null;
+        const minRows = autosize.minRows;
+        const maxRows = autosize.maxRows;
+
         this.textareaStyle = calcTextareaHeight(this.$refs.textarea, minRows, maxRows);
       },
       handleFocus(ev) {
