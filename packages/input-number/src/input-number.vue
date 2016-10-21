@@ -7,6 +7,7 @@
   >
     <el-input
       v-model.number="currentValue"
+      :readonly="readonly"
       :disabled="disabled"
       :size="size"
       :class="{
@@ -54,6 +55,7 @@
         default: 0
       },
       disabled: Boolean,
+      readonly: Boolean,
       size: String
     },
     directives: {

@@ -74,6 +74,7 @@
 | step     | 计数器步长           | number   | — | 1 |
 | size     | 计数器尺寸           | string   | large, small | — |
 | disabled | 是否禁用计数器        | boolean | — | false |
+| readonly | 是否只读输入栏        | boolean | — | false |
 
 ### Events
 | 事件名称 | 说明 | 回调参数 |
