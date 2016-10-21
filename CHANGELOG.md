@@ -12,7 +12,7 @@
 - 修复 Loading 关闭后有几率滚动失效的问题
 - 修复 远程搜索的 Select 不能正确渲染默认初始值的问题
 - 修复 Switch 的 width 属性无效的问题
-- Table 增加属性 rowClassName
+- Table 增加 rowClassName 属性
 - TableColumn 增加 fixed 属性，可选值：true, false, left, right
 - TableColumn[type="selection"] 增加 selectable 属性
 - 修复 Input textarea 在动态赋值时 autosize 没有触发的问题
@@ -25,8 +25,7 @@
 
 - 全屏 Loading 现在默认不再锁定屏幕滚动。如果需要的话，可添加 `lock` 修饰符
 - Table 删除属性 fixedColumnCount, customCriteria, customBackgroundColors
-- Table 的 allow-no-selection 属性更名为 allow-no-current-row
-- Table 的 selectionchange、cellmouseenter、cellmouseleave、cellclick 事件更名为 selection-change、cell-mouseenter、cell-mouseleave、cell-click。
+- Table 的 selectionchange、cellmouseenter、cellmouseleave、cellclick 事件更名为 selection-change、cell-mouse-enter、cell-mouse-leave、cell-click。
 
 ### 1.0.0-rc.7
 
