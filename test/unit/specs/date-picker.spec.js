@@ -39,16 +39,16 @@ describe('DatePicker', () => {
       expect(spans[1].textContent).to.include(date.getMonth() + 1);
       $el.querySelector('.el-date-picker__prev-btn.el-icon-d-arrow-left').click();
       // click 5
-      arrowLeftElm.click();
-      arrowLeftElm.click();
-      arrowLeftElm.click();
-      arrowLeftElm.click();
-      arrowLeftElm.click();
+      let count = 5;
+      while (--count) {
+        arrowLeftElm.click();
+      }
 
       // click 3
-      arrowRightElm.click();
-      arrowRightElm.click();
-      arrowRightElm.click();
+      count = 3;
+      while (--count) {
+        arrowRightElm.click();
+      }
       setTimeout(_ => {
         expect(spans[0].textContent).to.include(date.getFullYear() - 1);
         expect(spans[1].textContent).to.include(date.getMonth() - 1);

@@ -49,16 +49,22 @@ exports.createTest = function(Compo, propsData = {}, mounted = false) {
 
 /**
  * 触发一个事件
- * mouseenter, mouseleave, mouseover, keyup 等
+ * mouseenter, mouseleave, mouseover, keyup, change 等
  * @param  {Element} elm
  * @param  {EventName} name
  * @param  {options} opts
  */
 exports.triggerEvent = function(elm, name, opts) {
-  const isMouseEvent = /^mouse/.test(name);
-  const isKeyEvent = /^key/.test(name);
-  if (!isMouseEvent && !isKeyEvent) return;
-  const evt = document.createEvent(isMouseEvent ? 'MouseEvents' : 'KeyboardEvent');
+  let eventName;
+
+  if (/^mouse/.test(name)) {
+    eventName = 'MouseEvents';
+  } else if (/^key/.test(name)) {
+    eventName = 'KeyboardEvent';
+  } else {
+    eventName = 'HTMLEvents';
+  }
+  const evt = document.createEvent(eventName);
 
   evt.initEvent(name, ...opts);
   elm.dispatchEvent
