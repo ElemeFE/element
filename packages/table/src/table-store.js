@@ -34,7 +34,6 @@ const TableStore = function(table, initialState = {}) {
     selection: [],
     reserveSelection: false,
     selectable: null,
-    currentRow: null,
     hoverRow: null
   };
 
@@ -77,14 +76,12 @@ TableStore.prototype.mutations = {
       }
     }
 
-    if (states.fixedColumns.length > 0 || states.rightFixedColumns.length > 0) Vue.nextTick(() => this.table.syncHeight());
     Vue.nextTick(() => this.table.updateScrollY());
   },
 
   changeSortCondition(states) {
     states.data = orderBy((states._data || []), states.sortCondition.property, states.sortCondition.direction);
 
-    if (states.fixedColumns.length > 0 || states.rightFixedColumns.length > 0) Vue.nextTick(() => this.table.syncHeight());
     Vue.nextTick(() => this.table.updateScrollY());
   },
 

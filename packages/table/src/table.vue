@@ -162,10 +162,6 @@
         this.layout.updateScrollY();
       },
 
-      syncHeight() {
-        this.layout.syncHeight();
-      },
-
       bindEvents() {
         const { bodyWrapper, headerWrapper } = this.$refs;
         const refs = this.$refs;
