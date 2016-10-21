@@ -1,6 +1,6 @@
 ## 快速上手
 
-Element UI 是一套 Vue.js 后台组件库，它能够帮助你更轻松更快速地开发后台项目。
+Element 是一套 Vue.js 后台组件库，它能够帮助你更轻松更快速地开发后台项目。
 
 ### 安装
 
@@ -10,7 +10,7 @@ $ npm install element-ui@next -S
 
 ### 注册组件
 
-引入整个 Element UI
+引入整个 Element
 
 ```javascript
 import Vue from 'vue'
