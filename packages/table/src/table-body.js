@@ -166,8 +166,6 @@ export default {
         }
       }
 
-      this.store.commit('setSelectedRow', row);
-
       table.$emit('row-click', row, event);
     },
 
