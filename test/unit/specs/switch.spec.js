@@ -49,7 +49,7 @@ describe('Switch', () => {
     Vue.nextTick(() => {
       expect(vm.value).to.equal(false);
       expect(getComputedStyle(core).backgroundColor).to.equal('rgb(192, 204, 218)');
-      expect(button.style.transform).to.equal('translate3d(2px, 2px, 0)');
+      expect(/2px, 2px/.test(button.style.transform)).to.true;
       core.click();
       expect(vm.value).to.equal(true);
       done();
