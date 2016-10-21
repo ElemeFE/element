@@ -49,7 +49,7 @@ export default {
     const popper = this.popper || this.$refs.popper;
 
     if (!reference && this.$slots.reference && this.$slots.reference[0]) {
-      reference = this.$slots.reference[0].elm;
+      reference = this.referenceElm = this.$slots.reference[0].elm;
     }
     if (this.trigger === 'click') {
       on(reference, 'click', () => { this.showPopper = !this.showPopper; });
