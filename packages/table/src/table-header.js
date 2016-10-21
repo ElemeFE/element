@@ -26,13 +26,13 @@ export default {
         <thead>
           <tr>
             {
-              this._l(this.columns, column =>
+              this._l(this.columns, (column, cellIndex) =>
                 <th
                   on-mousemove={ ($event) => this.handleMouseMove($event, column) }
                   on-mouseout={ this.handleMouseOut }
                   on-mousedown={ ($event) => this.handleMouseDown($event, column) }
                   on-click={ ($event) => this.handleHeaderClick($event, column) }
-                  class={ [column.id, column.direction, column.align] }>
+                  class={ [column.id, column.direction, column.align, this.isCellHidden(cellIndex) ? 'hidden' : ''] }>
                   {
                     [
                       column.headerTemplate
@@ -82,17 +82,34 @@ export default {
       return this.store.states.isAllSelected;
     },
 
+    columnsCount() {
+      return this.store.states.columns.length;
+    },
+
+    leftFixedCount() {
+      return this.store.states.fixedColumns.length;
+    },
+
+    rightFixedCount() {
+      return this.store.states.rightFixedColumns.length;
+    },
+
     columns() {
-      if (this.fixed === true || this.fixed === 'left') {
-        return this.store.states.fixedColumns;
-      } else if (this.fixed === 'right') {
-        return this.store.states.rightFixedColumns;
-      }
       return this.store.states.columns;
     }
   },
 
   methods: {
+    isCellHidden(index) {
+      if (this.fixed === true || this.fixed === 'left') {
+        return index >= this.leftFixedCount;
+      } else if (this.fixed === 'right') {
+        return index < this.columnsCount - this.rightFixedCount;
+      } else {
+        return (index < this.leftFixedCount) || (index >= this.columnsCount - this.rightFixedCount);
+      }
+    },
+
     toggleAllSelection() {
       this.store.commit('toggleAllSelection');
     },

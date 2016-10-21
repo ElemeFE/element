@@ -52,10 +52,10 @@ export default {
                 on-mouseenter={ _ => this.handleMouseEnter($index) }
                 class={ this.getRowClass(row, $index) }>
                 {
-                  this._l(this.columns, (column) =>
+                  this._l(this.columns, (column, cellIndex) =>
                     <td
                       style={ this.getColumnWhiteSpaceStyle(column) }
-                      class={ [column.id, column.align] }
+                      class={ [column.id, column.align, this.isCellHidden(cellIndex) ? 'hidden' : '' ] }
                       on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
                       on-mouseleave={ this.handleCellMouseLeave }>
                       {
@@ -81,18 +81,24 @@ export default {
     data() {
       return this.store.states.data;
     },
+
     hoverRowIndex() {
       return this.store.states.hoverRow;
     },
-    currentRow() {
-      return this.store.states.currentRow;
+
+    columnsCount() {
+      return this.store.states.columns.length;
     },
+
+    leftFixedCount() {
+      return this.store.states.fixedColumns.length;
+    },
+
+    rightFixedCount() {
+      return this.store.states.rightFixedColumns.length;
+    },
+
     columns() {
-      if (this.fixed === true || this.fixed === 'left') {
-        return this.store.states.fixedColumns;
-      } else if (this.fixed === 'right') {
-        return this.store.states.rightFixedColumns;
-      }
       return this.store.states.columns;
     }
   },
@@ -104,11 +110,18 @@ export default {
   },
 
   methods: {
+    isCellHidden(index) {
+      if (this.fixed === true || this.fixed === 'left') {
+        return index >= this.leftFixedCount;
+      } else if (this.fixed === 'right') {
+        return index < this.columnsCount - this.rightFixedCount;
+      } else {
+        return (index < this.leftFixedCount) || (index >= this.columnsCount - this.rightFixedCount);
+      }
+    },
+
     getRowClass(row, index) {
       const classes = [];
-      if (row === this.currentRow) {
-        classes.push('current-row');
-      }
       if (this.hoverRowIndex === index) {
         classes.push('hover-row');
       }

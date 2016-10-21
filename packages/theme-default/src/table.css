@@ -58,7 +58,7 @@
     }
 
     & th, td {
-      height: 20px;
+      height: 40px;
       min-width: 0;
       box-sizing: border-box;
       text-overflow: ellipsis;
@@ -110,6 +110,7 @@
       top: 0;
       left: 0;
       box-shadow: 1px 0 8px #d3d4d6;
+      overflow-x: hidden;
 
       &::before {
         content: '';
@@ -129,6 +130,11 @@
       right: 0;
 
       box-shadow: -1px 0 8px #d3d4d6;
+
+      .el-table__fixed-header-wrapper, .el-table__fixed-body-wrapper {
+        left: auto;
+        right: 0;
+      }
     }
 
     @e fixed-header-wrapper {
@@ -251,11 +257,18 @@
       width: 0;
     }
 
-    & td .cell {
+    & td.hidden, th.hidden {
+      > * {
+        visibility: hidden;
+      }
+    }
+
+    & .cell {
       box-sizing: border-box;
       overflow: hidden;
       text-overflow: ellipsis;
-      line-height: 40px;
+      white-space: normal;
+      line-height: 24px;
       padding-left: 18px;
       padding-right: 18px;
     }
