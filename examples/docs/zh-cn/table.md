@@ -666,85 +666,15 @@
 ```
 :::
 
-### 单选
-
-选择单行数据时使用色块表示。
-
-:::demo Table 组件提供了选择的支持，只需要配置`selection-mode`属性即可实现单选（`single`）、多选（`multiple`)，如果不需要则设置为`none`。之后由`selection-change`事件来管理选中时触发的事件，它会传入一个`value`，`value`为生成表格时的对应对象。本例中还使用了`allow-no-current-row`属性，它接受一个`Boolean`，若为`true`，则允许为空，默认为`false`，此时将会产生默认值，为填入数组的第一个对象。如果需要显示索引，可以增加一列`el-table-column`，设置`type`属性为`index`即可显示从 1 开始的索引号。
-```html
-<template>
-  <el-table
-    :data="tableData"
-    selection-mode="single"
-    @selection-change="handleSelectionChange"
-    style="width: 100%"
-    allow-no-current-row>
-    <el-table-column
-      type="index"
-      width="50">
-    </el-table-column>
-    <el-table-column
-      prop="date"
-      label="日期"
-      width="120">
-    </el-table-column>
-    <el-table-column
-      prop="name"
-      label="姓名"
-      width="120">
-    </el-table-column>
-    <el-table-column
-      prop="address"
-      label="地址">
-    </el-table-column>
-  </el-table>
-</template>
-
-<script>
-  export default {
-    data() {
-      return {
-        tableData: [{
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }],
-        singleSelection: {}
-      }
-    },
-
-    methods: {
-      handleSelectionChange(val) {
-        this.singleSelection = val;
-      }
-    }
-  }
-</script>
-```
-:::
-
 ### 多选
 
 选择多行数据时使用 Checkbox。
 
-:::demo 除了`selection-mode`的设置外，多选与单选并没有太大差别，只是传入`selection-change`事件中的参数从对象变成了对象数组。此外，需要提供一个列来显示多选框: 手动添加一个`el-table-column`，设`type`属性为`selection`即可。在本例中，为了方便说明其他属性，我们还使用了`inline-template`和`show-tooltip-when-overflow`：设置了`inline-template`属性后，可以通过调用`row`对象中的值取代`prop`属性的设置；默认情况下若内容过多会折行显示，若需要单行显示可以使用`show-tooltip-when-overflow`属性，它接受一个`Boolean`，为`true`时多余的内容会在 hover 时以 tooltip 的形式显示出来。
+:::demo 实现多选非常简单: 手动添加一个`el-table-column`，设`type`属性为`selection`即可。在本例中，为了方便说明其他属性，我们还使用了`inline-template`和`show-tooltip-when-overflow`：设置了`inline-template`属性后，可以通过调用`row`对象中的值取代`prop`属性的设置；默认情况下若内容过多会折行显示，若需要单行显示可以使用`show-tooltip-when-overflow`属性，它接受一个`Boolean`，为`true`时多余的内容会在 hover 时以 tooltip 的形式显示出来。
 ```html
 <template>
   <el-table
     :data="tableData3"
-    selection-mode="multiple"
     style="width: 100%"
     @selection-change="handleMultipleSelectionChange">
     <el-table-column
@@ -890,8 +820,6 @@
 | fit | 列的宽度是否自撑开 | boolean | — | true |
 | row-class-name | 行的 className 的回调，会传入 row, index。 | Function | - | - |
 | row-key | 行数据的 Key，用来优化 Table 的渲染；在使用 reserve-selection 功能的情况下，该属性是必填的 | Function, String | - | |
-| selection-mode | 列表项选择模式 | string | single/multiple/none | none |
-| allow-no-current-row | 单选模式是否允许选项为空 | boolean | — | false |
 
 ### Table Events
 | 事件名 | 说明 | 参数 |

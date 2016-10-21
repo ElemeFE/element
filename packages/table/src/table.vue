@@ -118,14 +118,7 @@
 
       border: Boolean,
 
-      selectionMode: {
-        type: String,
-        default: 'none'
-      },
-
       rowKey: [String, Function],
-
-      allowNoCurrentRow: Boolean,
 
       rowClassName: [String, Function]
     },
@@ -197,12 +190,7 @@
       },
 
       selection() {
-        if (this.selectionMode === 'multiple') {
-          return this.store.selection;
-        } else if (this.selectionMode === 'single') {
-          return this.store.currentRow;
-        }
-        return null;
+        return this.store.selection;
       },
 
       columns() {
@@ -248,8 +236,6 @@
 
     data() {
       const store = new TableStore(this, {
-        allowNoCurrentRow: this.allowNoCurrentRow,
-        selectionMode: this.selectionMode,
         rowKey: this.rowKey
       });
       const layout = new TableLayout({

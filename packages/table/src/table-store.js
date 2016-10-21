@@ -33,8 +33,6 @@ const TableStore = function(table, initialState = {}) {
     isAllSelected: false,
     selection: [],
     reserveSelection: false,
-    allowNoCurrentRow: false,
-    selectionMode: 'none',
     selectable: null,
     currentRow: null,
     hoverRow: null
@@ -54,7 +52,6 @@ TableStore.prototype.mutations = {
       data.forEach((item) => Vue.set(item, '$selected', false));
     }
     states.data = orderBy((data || []), states.sortCondition.property, states.sortCondition.direction);
-    this.updateCurrentRow();
 
     if (!states.reserveSelection) {
       states.isAllSelected = false;
@@ -175,13 +172,7 @@ TableStore.prototype.mutations = {
     }
     this.table.$emit('select-all', selection);
     states.isAllSelected = value;
-  }),
-
-  setSelectedRow(states, row) {
-    if (states.selectionMode === 'single') {
-      states.currentRow = row;
-    }
-  }
+  })
 };
 
 TableStore.prototype.updateColumns = function() {
@@ -228,30 +219,6 @@ TableStore.prototype.updateAllSelected = function() {
     }
   }
   states.isAllSelected = isAllSelected;
-};
-
-TableStore.prototype.updateCurrentRow = function() {
-  const states = this.states;
-  const table = this.table;
-  const data = states.data || [];
-  if (states.selectionMode === 'single') {
-    const oldCurrentRow = states.currentRow;
-    if (oldCurrentRow === null && !states.allowNoCurrentRow) {
-      states.currentRow = data[0];
-      if (states.currentRow !== oldCurrentRow) {
-        table.$emit('selection-change', states.currentRow);
-      }
-    } else if (data.indexOf(oldCurrentRow) === -1) {
-      if (!states.allowNoCurrentRow) {
-        states.currentRow = data[0];
-      } else {
-        states.currentRow = null;
-      }
-      if (states.currentRow !== oldCurrentRow) {
-        table.$emit('selection-change', states.currentRow);
-      }
-    }
-  }
 };
 
 TableStore.prototype.scheduleLayout = function() {
