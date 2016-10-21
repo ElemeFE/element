@@ -15,4 +15,5 @@ cooking.set({
 
 cooking.add('output.filename', '[name]/index.js');
 cooking.add('loader.js.exclude', config.jsexclude);
+cooking.add('vue.preserveWhitespace', false);
 module.exports = cooking.resolve();
