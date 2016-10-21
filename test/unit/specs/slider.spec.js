@@ -1,6 +1,5 @@
-import { createTest, createVue } from '../util';
+import { createTest, createVue, triggerEvent } from '../util';
 import Slider from 'packages/slider';
-import Vue from 'vue';
 
 describe('Slider', () => {
   it('create', () => {
@@ -26,10 +25,10 @@ describe('Slider', () => {
     }, true);
     setTimeout(() => {
       vm.value = 40;
-      Vue.nextTick(() => {
+      vm.$nextTick(() => {
         expect(vm.value).to.equal(50);
         vm.value = 120;
-        Vue.nextTick(() => {
+        vm.$nextTick(() => {
           expect(vm.value).to.equal(100);
           done();
         });
@@ -38,12 +37,30 @@ describe('Slider', () => {
   });
 
   it('show tooltip', () => {
-    const vm = createTest(Slider);
+    const vm = createVue({
+      template: `
+        <div>
+          <el-slider v-model="value">
+          </el-slider>
+        </div>
+      `,
+
+      data() {
+        return {
+          value: 0
+        };
+      }
+    }, true);
+    const slider = vm.$children[0];
     const popup = vm.$el.querySelector('.el-slider__pop');
-    vm.onDragStart({ clientX: 0 });
-    expect(getComputedStyle(popup).display).to.not.equal('none');
-    vm.onDragEnd();
-    expect(popup.style.display).to.equal('none');
+    slider.onDragStart({ clientX: 0 });
+    vm.$nextTick(() => {
+      expect(popup.style.display).to.not.equal('none');
+      slider.onDragEnd();
+      setTimeout(() => {
+        expect(popup.style.display).to.equal('none');
+      }, 350);
+    });
   });
 
   it('drag', done => {
@@ -109,6 +126,7 @@ describe('Slider', () => {
       }
     }, true);
     setTimeout(() => {
+      triggerEvent(vm.$el.querySelector('.el-input-number'), 'keyup');
       const inputNumber = vm.$el.querySelector('.el-input-number').__vue__;
       inputNumber.currentValue = 40;
       setTimeout(() => {

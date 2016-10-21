@@ -4,7 +4,7 @@
       v-model="inputValue"
       v-if="showInput"
       class="el-slider__input"
-      @keyup.native="onInputChange()"
+      @keyup.native="onInputChange"
       ref="input"
       :step="step"
       :min="min"
