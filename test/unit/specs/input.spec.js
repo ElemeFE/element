@@ -5,8 +5,8 @@ describe('Input', () => {
     const vm = createVue({
       template: `
         <el-input
-          minlength="3"
-          maxlength="5"
+          :minlength="3"
+          :maxlength="5"
           placeholder="请输入内容"
           @focus="handleFocus"
           value="input">
