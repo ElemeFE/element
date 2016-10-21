@@ -36,14 +36,14 @@
       @when horizontal {
         top: 15px;
         height: 2px;
-        left: 32px;
+        left: 30px;
         right: 0;
       }
 
       @when vertical {
         width: 2px;
         box-sizing: border-box;
-        top: 32px;
+        top: 30px;
         bottom: 0;
       }
     }
