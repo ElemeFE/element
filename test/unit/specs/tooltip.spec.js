@@ -10,29 +10,21 @@ describe('Tooltip', () => {
     expect(vm.$el.querySelector('.el-tooltip__popper')).to.have.property('textContent', '提示文字');
   });
 
-  it('hover', done => {
+  describe('hover', () => {
     const vm = createVue(`
       <el-tooltip ref="tooltip" content="提示文字">
         <button>click</button>
       </el-tooltip>
-    `, true);
+    `);
     const tooltip = vm.$refs.tooltip;
 
-    // trigger mouseenter
     tooltip.handleShowPopper();
-
-    expect(tooltip.popperElm).to.not.exist;
-    setTimeout(_ => {
-      expect(tooltip).to.have.deep.property('popperElm.style.display').not.equal('none');
-
-      // trigger mouseleave
+    it('popperElm is exist', () => expect(tooltip.popperElm).to.exist);
+    it('showPopper is true', () => expect(tooltip.showPopper).to.true);
+    it('close popper', () => {
       tooltip.handleClosePopper();
-
-      setTimeout(_ => {
-        expect(tooltip).to.have.deep.property('popperElm.style.display', 'none');
-        done();
-      }, 500);
-    }, 150);
+      expect(tooltip.showPopper).to.false;
+    });
   });
 
   it('light mode', () => {
