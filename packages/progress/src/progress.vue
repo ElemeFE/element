@@ -42,10 +42,6 @@
         default: 'line',
         validator: val => ['line', 'circle'].indexOf(val) > -1
       },
-      size: {
-        type: String,
-        validator: val => !val || ['large', 'small'].indexOf(val) > -1
-      },
       percentage: {
         type: Number,
         default: 0,
