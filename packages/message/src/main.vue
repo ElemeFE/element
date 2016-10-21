@@ -47,7 +47,7 @@
       handleClose() {
         this.closed = true;
         if (typeof this.onClose === 'function') {
-          this.onClose();
+          this.onClose(this);
         }
       },
 
