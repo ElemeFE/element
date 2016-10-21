@@ -134,7 +134,7 @@ export default {
       if (cell) {
         const column = getColumnByCell(table, cell);
         const hoverState = table.hoverState = { cell, column, row };
-        table.$emit('cell-mouseenter', hoverState.row, hoverState.column, hoverState.cell, event);
+        table.$emit('cell-mouse-enter', hoverState.row, hoverState.column, hoverState.cell, event);
       }
 
       // 判断是否text-overflow, 如果是就显示tooltip
@@ -148,7 +148,7 @@ export default {
       if (!cell) return;
 
       const oldHoverState = this.$parent.hoverState;
-      this.$parent.$emit('cell-mouseleave', oldHoverState.row, oldHoverState.column, oldHoverState.cell, event);
+      this.$parent.$emit('cell-mouse-leave', oldHoverState.row, oldHoverState.column, oldHoverState.cell, event);
     },
 
     handleMouseEnter(index) {

@@ -827,8 +827,8 @@
 | select | 当用户手动勾选数据行的 Checkbox 时触发的事件 | selection |
 | select-all | 当用户手动勾选全选 Checkbox 时触发的事件 | selection |
 | selection-change | 当选择项发生变化时会触发该事件 | selection |
-| cell-mouseenter | 当单元格 hover 进入时会触发该事件 | row, column, cell, event |
-| cell-mouseleave | 当单元格 hover 退出时会触发该事件 | row, column, cell, event |
+| cell-mouse-enter | 当单元格 hover 进入时会触发该事件 | row, column, cell, event |
+| cell-mouse-leave | 当单元格 hover 退出时会触发该事件 | row, column, cell, event |
 | cell-click | 当某个单元格被点击时会触发该事件 | row, column, cell, event |
 | row-click | 当某一行被点击时会触发该事件 | row, event |
 

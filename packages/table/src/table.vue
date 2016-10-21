@@ -84,6 +84,7 @@
 </template>
 
 <script type="text/babel">
+  import Migrating from 'element-ui/src/mixins/migrating';
   import throttle from 'throttle-debounce/throttle';
   import debounce from 'throttle-debounce/debounce';
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
@@ -96,6 +97,8 @@
 
   export default {
     name: 'el-table',
+
+    mixins: [Migrating],
 
     props: {
       data: {
@@ -129,6 +132,23 @@
     },
 
     methods: {
+      getMigratingConfig() {
+        return {
+          props: {
+            'allow-no-selection': 'allow-no-selection is removed.',
+            'selection-mode': 'selection-mode is removed.',
+            'fixed-column-count': 'fixed-column-count is removed. Use fixed prop in TableColumn instead.',
+            'custom-criteria': 'custom-criteria is removed. Use row-class-name instead.',
+            'custom-background-colors': 'custom-background-colors is removed. Use row-class-name instead.'
+          },
+          events: {
+            selectionchange: 'selectionchange is renamed to selection-change.',
+            cellmouseenter: 'cellmouseenter is renamed to cell-mouse-enter.',
+            cellmouseleave: 'cellmouseleave is renamed to cell-mouse-leave.',
+            cellclick: 'cellclick is renamed to cell-click.'
+          }
+        };
+      },
       clearSelection() {
         this.store.clearSelection();
       },
