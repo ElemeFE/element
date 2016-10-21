@@ -29,7 +29,7 @@ describe('Alert', () => {
     expect(vm.$el.querySelector('.el-alert__description')).to.exist;
   });
 
-  it('close', done => {
+  it('close', () => {
     const vm = createVue({
       template: `
         <div>
@@ -40,9 +40,6 @@ describe('Alert', () => {
       `
     }, true);
     vm.$el.querySelector('.el-alert__closebtn').click();
-    setTimeout(() => {
-      expect(vm.$children[0].$el.style.display).to.equal('none');
-      done();
-    }, 300);
+    expect(vm.$children[0].visible).to.false;
   });
 });

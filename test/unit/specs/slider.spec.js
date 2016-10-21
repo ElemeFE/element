@@ -36,7 +36,7 @@ describe('Slider', () => {
     }, 100);
   });
 
-  it('show tooltip', () => {
+  it('show tooltip', done => {
     const vm = createVue({
       template: `
         <div>
@@ -57,9 +57,8 @@ describe('Slider', () => {
     vm.$nextTick(() => {
       expect(popup.style.display).to.not.equal('none');
       slider.onDragEnd();
-      setTimeout(() => {
-        expect(popup.style.display).to.equal('none');
-      }, 350);
+      expect(slider.showTip).to.false;
+      done();
     });
   });
 
