@@ -9,7 +9,6 @@
       v-model.number="currentValue"
       :disabled="disabled"
       :size="size"
-      :number="true"
       :class="{
         'is-active': inputActive
       }">
