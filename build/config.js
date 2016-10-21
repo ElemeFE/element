@@ -8,7 +8,7 @@ Object.keys(Components).forEach(function(key) {
   externals[`element-ui/packages/${key}/style.css`] = `element-ui/lib/${key}/style.css`;
 });
 
-Object.keys(dependencies).forEach(function (key) {
+Object.keys(dependencies).forEach(function(key) {
   externals[key] = key;
 });
 
