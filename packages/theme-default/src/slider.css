@@ -1,5 +1,6 @@
 @charset "UTF-8";
 @import "./input-number.css";
+@import "./tooltip.css";
 @import "./common/var.css";
 
 @component-namespace el {
@@ -18,6 +19,42 @@
       &.show-input {
         margin-right: 160px;
         width: auto;
+      }
+      
+      &.disabled {
+        cursor: default;
+
+        .el-slider__bar, .el-slider__button {
+          background-color: var(--slider-disable-color);
+        }
+
+        .el-slider__button-wrapper {
+          &:hover,
+          &.hover {
+            cursor: not-allowed;
+          }
+
+          &.dragging {
+            cursor: not-allowed;
+          }
+        }
+
+        .el-slider__button {
+          &:hover,
+          &.hover,
+          &.dragging {
+            transform: scale(1);
+          }
+
+          &:hover,
+          &.hover {
+            cursor: not-allowed;
+          }
+
+          &.dragging {
+            cursor: not-allowed;
+          }
+        }
       }
     }
 
@@ -41,60 +78,42 @@
       top: -16px;
       transform: translateX(-50%);
       background-color: transparent;
+      text-align: center;
+
+      .el-tooltip {
+        margin-top: 9px;
+      }
+
+      &:hover,
+      &.hover {
+        cursor: grab;
+      }
+
+      &.dragging {
+        cursor: grabbing;
+      }
     }
 
     @e button {
       size: 12px;
       background-color: var(--slider-main-background-color);
       border-radius: 50%;
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      cursor: pointer;
       transition: .2s;
 
       &:hover,
       &.hover,
       &.dragging {
         transform: scale(1.5);
-        background-color: #1d8ce0;
-      }
-    }
-
-    @e pop {
-      @utils-user-select none;
-      font-size: 12px;
-      line-height: 26px;
-      text-align: center;
-      size: 26px;
-      border-radius: 50%;
-      background-color: var(--slider-main-background-color);
-      color: #fff;
-      cursor: default;
-      z-index: var(--index-top);
-      transition: transform .3s, opacity .3s;
-      transform-origin: center bottom;
-
-      &::before {
-        triangle: 9px top var(--slider-main-background-color);
-        position: absolute;
-        top: -14px;
-        left: 4px;
+        background-color: var(--slider-button-hover-color);
       }
 
-      &::after {
-        triangle: 9px bottom var(--slider-main-background-color);
-        position: absolute;
-        bottom: -14px;
-        left: 4px;
+      &:hover,
+      &.hover {
+        cursor: grab;
       }
 
-      &.top::after {
-        content: '';
-      }
-
-      &.bottom::before {
-        content: '';
+      &.dragging {
+        cursor: grabbing;
       }
     }
 
@@ -104,12 +123,6 @@
       border-radius: 50%;
       background-color: var(--slider-stop-background-color);
       transform: translateX(-50%);
-    }
-
-    .popper-fade-enter,
-    .popper-fade-leave-active {
-      transform: scale(0.1);
-      opacity: 0;
     }
   }
 }
