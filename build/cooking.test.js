@@ -24,4 +24,5 @@ cooking.add('preLoader.0', {
 if (!process.env.CI_ENV) {
   cooking.add('plugins.process', new ProgressBarPlugin());
 }
+cooking.add('vue.preserveWhitespace', false);
 module.exports = cooking.resolve();

@@ -91,4 +91,5 @@ if (process.env.NODE_ENV === 'production') {
   cooking.add('externals.vue-router', 'VueRouter');
 }
 
+cooking.add('vue.preserveWhitespace', false);
 module.exports = cooking.resolve();

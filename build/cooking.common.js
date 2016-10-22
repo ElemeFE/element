@@ -14,5 +14,5 @@ cooking.set({
 
 cooking.add('output.filename', 'element-ui.common.js');
 cooking.add('loader.js.exclude', config.jsexclude);
-
+cooking.add('vue.preserveWhitespace', false);
 module.exports = cooking.resolve();

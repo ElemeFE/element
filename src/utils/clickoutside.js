@@ -45,15 +45,14 @@ export default {
   },
 
   unbind(el) {
-    nodeList.splice(el[ctx].id, 1);
-    delete el[ctx];
-  },
+    let len = nodeList.length;
 
-  install(Vue) {
-    /* istanbul ignore next */
-    Vue.directive('clickoutside', {
-      bind: this.bind,
-      unbind: this.unbind
-    });
+    for (let i = 0; i < len; i++) {
+      if (nodeList[i][ctx].id === el[ctx].id) {
+        nodeList.splice(i, 1);
+        delete el[ctx];
+        break;
+      }
+    }
   }
 };
