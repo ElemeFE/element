@@ -1,17 +1,26 @@
-import { createVue, triggerEvent } from '../util';
+import { triggerEvent } from '../util';
+import Message from 'packages/message';
 
 describe('Message', () => {
+  afterEach(() => {
+    const el = document.querySelector('.el-message');
+    if (!el) return;
+    if (el.parentNode) {
+      el.parentNode.removeChild(el);
+    }
+    if (el.__vue__) {
+      el.__vue__.$destroy();
+    }
+  });
+
   it('automatically close', done => {
-    const vm = createVue({
-      template: `
-      <div></div>
-    `
-    }, true);
-    vm.$message({
+    Message({
       message: '灰风',
       duration: 500
     });
+    const message = document.querySelector('.el-message__group').childNodes[0];
     expect(document.querySelector('.el-message')).to.exist;
+    expect(message.textContent).to.equal('灰风');
     setTimeout(() => {
       expect(document.querySelector('.el-message')).to.not.exist;
       done();
@@ -19,12 +28,7 @@ describe('Message', () => {
   });
 
   it('manually close', done => {
-    const vm = createVue({
-      template: `
-      <div></div>
-    `
-    }, true);
-    vm.$message({
+    Message({
       message: '夏天',
       showClose: true
     });
@@ -38,32 +42,17 @@ describe('Message', () => {
   });
 
   it('create', () => {
-    const vm = createVue({
-      template: `
-      <div></div>
-    `
-    }, true);
-    vm.$message('娜梅莉亚');
+    Message('娜梅莉亚');
     expect(document.querySelector('.el-message')).to.exist;
   });
 
   it('invoke with type', () => {
-    const vm = createVue({
-      template: `
-      <div></div>
-    `
-    }, true);
-    vm.$message.success('毛毛狗');
-    expect(document.querySelector('.el-message')).to.exist;
+    Message.success('毛毛狗');
+    expect(document.querySelector('.el-message').__vue__.type).to.equal('success');
   });
 
   it('reset timer', done => {
-    const vm = createVue({
-      template: `
-      <div></div>
-    `
-    }, true);
-    vm.$message({
+    Message({
       message: '白灵',
       duration: 1000
     });
