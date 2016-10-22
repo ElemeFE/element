@@ -1,6 +1,6 @@
 <template>
   <div class="el-message-box__wrapper">
-    <transition name="msgbox-bounce">
+    <transition name="msgbox-fade">
       <div class="el-message-box" v-show="value">
         <div class="el-message-box__header" v-if="title !== ''">
           <div class="el-message-box__title">{{ title }}</div>
