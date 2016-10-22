@@ -4,8 +4,7 @@ import Slider from 'packages/slider';
 describe('Slider', () => {
   it('create', () => {
     const vm = createTest(Slider);
-    const popup = vm.$el.querySelector('.el-slider__pop');
-    expect(popup.textContent).to.equal('0');
+    expect(vm.value).to.equal(0);
   });
 
   it('should not exceed min and max', done => {
@@ -36,7 +35,7 @@ describe('Slider', () => {
     }, 100);
   });
 
-  it('show tooltip', done => {
+  it('show tooltip', () => {
     const vm = createVue({
       template: `
         <div>
@@ -52,14 +51,10 @@ describe('Slider', () => {
       }
     }, true);
     const slider = vm.$children[0];
-    const popup = vm.$el.querySelector('.el-slider__pop');
-    slider.onDragStart({ clientX: 0 });
-    vm.$nextTick(() => {
-      expect(popup.style.display).to.not.equal('none');
-      slider.onDragEnd();
-      expect(slider.showTip).to.false;
-      done();
-    });
+    slider.handleMouseEnter();
+    expect(slider.$refs.tooltip.showPopper).to.true;
+    slider.handleMouseLeave();
+    expect(slider.$refs.tooltip.showPopper).to.false;
   });
 
   it('drag', done => {
@@ -108,6 +103,31 @@ describe('Slider', () => {
         done();
       }, 150);
     }, 150);
+  });
+
+  it('disabled', done => {
+    const vm = createVue({
+      template: `
+        <div>
+          <el-slider v-model="value" disabled></el-slider>
+        </div>
+      `,
+
+      data() {
+        return {
+          value: 0
+        };
+      }
+    }, true);
+    const slider = vm.$children[0];
+    setTimeout(() => {
+      slider.onButtonDown({ clientX: 0 });
+      slider.onDragging({ clientX: 100 });
+      slider.onDragEnd();
+      slider.onSliderClick({ clientX: 200 });
+      expect(vm.value).to.equal(0);
+      done();
+    }, 100);
   });
 
   it('show input', done => {

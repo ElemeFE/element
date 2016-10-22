@@ -19,7 +19,7 @@
 - 修复 Input Number min max 属性设置后点击加减出现的崩溃的bug
 - 优化 TimePicker/DatePicker 输入日期行为
 - 修复 DatePicker 输入禁用状态的日期却生效的问题 #484
-
+- 新增 Slider 的 disabled 属性
 
 #### 非兼容性更新
 

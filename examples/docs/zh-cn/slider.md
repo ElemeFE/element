@@ -4,9 +4,10 @@
       return {
         value1: 0,
         value2: 50,
-        value3: 0,
+        value3: 42,
         value4: 0,
-        value5: 0
+        value5: 0,
+        value6: 0,
       };
     }
   }
@@ -58,6 +59,10 @@
     <span class="demonstration">自定义初始值</span>
     <el-slider v-model="value2"></el-slider>
   </div>
+  <div class="block">
+    <span class="demonstration">禁用</span>
+    <el-slider v-model="value3" disabled></el-slider>
+  </div>
 </template>
 
 <script>
@@ -83,14 +88,14 @@
   <div class="block">
     <span class="demonstration">不显示间断点</span>
     <el-slider
-      v-model="value3"
+      v-model="value4"
       :step="10">
     </el-slider>
   </div>
   <div class="block">
     <span class="demonstration">显示间断点</span>
     <el-slider
-      v-model="value4"
+      v-model="value5"
       :step="10"
       show-stops>
     </el-slider>
@@ -119,7 +124,7 @@
 <template>
   <div class="block">
     <el-slider
-      v-model="value5"
+      v-model="value6"
       show-input>
     </el-slider>
   </div>
@@ -142,6 +147,7 @@
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | min | 最小值 | number | — | 0 |
 | max | 最大值 | number | — | 100 |
+| disabled | 是否禁用 | boolean | — | false |
 | step | 步长 | number | — | 1 |
 | show-input | 是否显示输入框 | boolean | — | false |
 | show-stops | 是否显示间断点 | boolean | — | false |
