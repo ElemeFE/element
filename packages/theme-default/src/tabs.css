@@ -120,13 +120,22 @@
       .el-tabs__item {
         transition: all .3s cubic-bezier(.645,.045,.355,1);
         border: 1px solid transparent;
+        border-top: 0;
+        margin: * -1px;
 
         &.is-active {
           background-color: #fff;
-          border-right: 1px solid #d3dce6;
-          border-left: 1px solid #d3dce6;
-          margin: * -1px;
+          border-right-color: #d3dce6;
+          border-left-color: #d3dce6;
+
+          &:first-child {
+            border-left-color: #d3dce6;
+          }
+          &:last-child {
+            border-right-color: #d3dce6;
+          }
         }
+
       }
     }
   }
