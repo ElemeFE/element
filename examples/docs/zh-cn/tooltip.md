@@ -44,7 +44,7 @@
     .item {
       margin: 4px;
     }
-    
+
     .left .el-tooltip__popper,
     .right .el-tooltip__popper {
       padding: 8px 10px;
@@ -150,19 +150,6 @@ Tooltip 组件提供了两个不同的主题：`dark`和`light`。
     <el-button @click.native="disabled=true">点击关闭 tooltip 功能</el-button>
   </el-tooltip>
 </template>
-
-<style>
-  .slide-fade-enter-active {
-    transition: all .3s ease;
-  }
-  .slide-fade-leave-active {
-    transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-  }
-  .slide-fade-enter, .expand-fade-leave-active {
-    margin-left: 20px;
-    opacity: 0;
-  }
-</style>
 ```
 :::
 
@@ -179,3 +166,4 @@ Tooltip 组件提供了两个不同的主题：`dark`和`light`。
 |  visible-arrow   |  是否显示 Tooltip 箭头，更多参数可见[Vue-popper](https://github.com/element-component/vue-popper) | Boolean | — | true |
 |  options        | [popper.js](https://popper.js.org/documentation.html) 的参数 | Object            | 参考 [popper.js](https://popper.js.org/documentation.html) 文档 | `{ boundariesElement: 'body', gpuAcceleration: false }` |
 | openDelay | 延迟出现，单位毫秒 | Number | — | 0 |
+| manual | 手动控制模式，设置为 true 后，mouseenter 和 mouseleave 事件将不会生效 | Boolean | true,false| false |
