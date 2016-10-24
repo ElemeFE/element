@@ -15,6 +15,8 @@ const Test = {
 
 describe('Sync', () => {
   it('should not throw when use incorrectly', () => {
+    sinon.stub(window.console, 'warn');
+
     createVue({
       template: `
         <test v-sync>
@@ -28,6 +30,8 @@ describe('Sync', () => {
         };
       }
     });
+
+    expect(window.console.warn.callCount).to.equal(1);
 
     createVue({
       template: `
@@ -43,6 +47,8 @@ describe('Sync', () => {
       }
     });
 
+    expect(window.console.warn.callCount).to.equal(2);
+
     createVue({
       template: `
         <test v-sync.visible>
@@ -57,6 +63,8 @@ describe('Sync', () => {
       }
     });
 
+    expect(window.console.warn.callCount).to.equal(3);
+
     createVue({
       template: `
         <div v-sync:visible="myVisible">
@@ -70,6 +78,10 @@ describe('Sync', () => {
         };
       }
     });
+
+    expect(window.console.warn.callCount).to.equal(4);
+
+    window.console.warn.restore();
   });
 
   it('context variable should change when inner component variable change', (done) => {
