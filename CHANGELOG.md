@@ -23,6 +23,7 @@
 
 #### 非兼容性更新
 
+- Tabs 组件的 click 和 remove 事件回调参数从 name 改为事件对应的 tab 组件实例
 - 全屏 Loading 现在默认不再锁定屏幕滚动。如果需要的话，可添加 `lock` 修饰符
 - Table 删除属性 fixedColumnCount, customCriteria, customBackgroundColors
 - Table 的 selectionchange、cellmouseenter、cellmouseleave、cellclick 事件更名为 selection-change、cell-mouse-enter、cell-mouse-leave、cell-click。

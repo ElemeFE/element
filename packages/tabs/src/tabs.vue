@@ -55,11 +55,11 @@
 
           this.currentName = nextChild ? nextChild.key : prevChild ? prevChild.key : '-1';
         }
-        this.$emit('tab-remove', tab.key);
+        this.$emit('tab-remove', tab);
       },
       handleTabClick(tab, event) {
         this.currentName = tab.key;
-        this.$emit('tab-click', tab.key, event);
+        this.$emit('tab-click', tab, event);
       },
       calcBarStyle(firstRendering) {
         if (this.type || !this.$refs.tabs) return {};
