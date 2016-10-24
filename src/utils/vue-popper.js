@@ -150,7 +150,7 @@ export default {
   beforeDestroy() {
     this.doDestroy();
     this.popperElm &&
-    document.body.contains(this.popperElm) &&
+    this.popperElm.parentNode === document.body &&
     document.body.removeChild(this.popperElm);
   }
 };
