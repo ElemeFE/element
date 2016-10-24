@@ -78,7 +78,6 @@
           this.hoursPrivate = oldVal;
         }
         this.$refs.hour.scrollTop = Math.max(0, (this.hoursPrivate - 2.5) * 32 + 80);
-
         this.$emit('change', { hours: newVal });
       },
 

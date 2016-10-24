@@ -260,8 +260,8 @@
         } else {
           this.date.setMonth(month);
           this.resetDate();
-          this.value = new Date(this.date.getFullYear(), month, 1);
-          this.$emit('pick', this.value);
+          const value = new Date(this.date.getFullYear(), month, 1);
+          this.$emit('pick', value);
         }
       },
 

@@ -1,1 +1,1 @@
-*.js linguist-language=Vue
+test/**/*.js linguist-language=Vue

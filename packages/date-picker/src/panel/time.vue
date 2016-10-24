@@ -129,6 +129,7 @@
       },
 
       handleConfirm(visible = false, first) {
+        if (first) return;
         const date = new Date(limitRange(this.currentDate, this.selectableRange));
         this.$emit('pick', date, visible, first);
       },
