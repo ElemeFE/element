@@ -293,8 +293,14 @@
       }
     }
 
-    & tr.current-row {
-      background: #EFF7FF;
+    @e body {
+      tr {
+        transition: background-color .25s ease-in-out;
+      }
+
+      tr.current-row {
+        background: #eff7ff;
+      }
     }
 
     @e column-resize-proxy {
@@ -319,4 +325,8 @@
       }
     }
   }
+}
+
+.el-table .el-table__body tr.hover-row {
+  background-color: #eff2f7;
 }
