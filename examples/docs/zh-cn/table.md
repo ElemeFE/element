@@ -814,17 +814,17 @@
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | data | 显示的数据 | array | — | — |
-| height | table 的高度，默认高度为空，即自动高度 | string | — | — |
+| height | table 的高度，默认高度为空，即自动高度，单位 px | string, number | — | — |
 | stripe | 是否为斑马纹 table | boolean | — | false |
 | border | 是否带有纵向边框 | boolean | — | false |
 | fit | 列的宽度是否自撑开 | boolean | — | true |
-| row-class-name | 行的 className 的回调，会传入 row, index。 | Function | - | - |
-| row-key | 行数据的 Key，用来优化 Table 的渲染；在使用 reserve-selection 功能的情况下，该属性是必填的 | Function, String | - | |
+| row-class-name | 行的 className 的回调。 | Function(row, index) | - | - |
+| row-key | 行数据的 Key，用来优化 Table 的渲染；在使用 reserve-selection 功能的情况下，该属性是必填的 | Function(row), String | - | - |
 
 ### Table Events
 | 事件名 | 说明 | 参数 |
 | ---- | ---- | ---- |
-| select | 当用户手动勾选数据行的 Checkbox 时触发的事件 | selection |
+| select | 当用户手动勾选数据行的 Checkbox 时触发的事件 | selection, row |
 | select-all | 当用户手动勾选全选 Checkbox 时触发的事件 | selection |
 | selection-change | 当选择项发生变化时会触发该事件 | selection |
 | cell-mouse-enter | 当单元格 hover 进入时会触发该事件 | row, column, cell, event |
@@ -843,13 +843,13 @@
 | label | 显示的标题 | string | — | — |
 | prop | 对应列内容的字段名，也可以使用 property 属性 | string | — | — |
 | width | 对应列的宽度 | string | — | — |
-| fixed | 列是否固定在左侧或者右侧 | string, boolean | true, left, right | - |
+| fixed | 列是否固定在左侧或者右侧，true 表示固定在左侧 | string, boolean | true, left, right | - |
 | sortable | 对应列是否可以排序 | boolean | — | false |
-| resizable | 对应列是否可以通过拖动改变宽度（如果需要，需在 el-table 上设置 border 属性为真） | boolean | — | false |
+| resizable | 对应列是否可以通过拖动改变宽度（如果需要在 el-table 上设置 border 属性为真） | boolean | — | true |
 | type | 对应列的类型。如果设置了 `selection` 则显示多选框，如果设置了 `index` 则显示该行的索引（从 1 开始计算） | string | selection/index | — |
-| formatter | 用来格式化内容，在 formatter 执行的时候，会传入 row 和 column | function | — | — |
+| formatter | 用来格式化内容 | Function(row, column) | — | — |
 | show-tooltip-when-overflow | 当过长被隐藏时显示 tooltip | Boolean | — | false |
 | inline-template | 指定该属性后可以自定义 column 模板，参考多选的时间列，通过 row 获取行信息，JSX 里通过 _self 获取当前上下文。此时不需要配置 prop 属性  | — | — |
 | align | 对齐方式 | String | left, center, right | left |
-| selectable | 仅对 type=selection 的列有效，类型为 Function，Function 的返回值用来决定这一行的 CheckBox 是否可以勾选 | Function | - | - |
+| selectable | 仅对 type=selection 的列有效，类型为 Function，Function 的返回值用来决定这一行的 CheckBox 是否可以勾选 | Function(row, index) | - | - |
 | reserve-selection | 仅对 type=selection 的列有效，类型为 Boolean，为 true 则代表会保留之前数据的选项，需要配合 Table 的 clearSelection 方法使用。 | Boolean | - | false |

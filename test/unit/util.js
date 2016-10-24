@@ -15,6 +15,17 @@ const createElm = function() {
 };
 
 /**
+ * 回收 vm
+ * @param  {Object} vm
+ */
+exports.destroyVM = function(vm) {
+  vm.$el &&
+  vm.$el.parentNode &&
+  vm.$el.parentNode.removeChild(vm.$el);
+  vm.$destroy && vm.$destroy();
+};
+
+/**
  * 创建一个 Vue 的实例对象
  * @param  {Object|String}  Compo   组件配置，可直接传 template
  * @param  {Boolean=false} mounted 是否添加到 DOM 上
@@ -51,10 +62,10 @@ exports.createTest = function(Compo, propsData = {}, mounted = false) {
  * 触发一个事件
  * mouseenter, mouseleave, mouseover, keyup, change, click 等
  * @param  {Element} elm
- * @param  {EventName} name
- * @param  {options} opts
+ * @param  {String} name
+ * @param  {*} opts
  */
-exports.triggerEvent = function(elm, name, opts) {
+exports.triggerEvent = function(elm, name, ...opts) {
   let eventName;
 
   if (/^mouse|click/.test(name)) {
@@ -70,4 +81,6 @@ exports.triggerEvent = function(elm, name, opts) {
   elm.dispatchEvent
     ? elm.dispatchEvent(evt)
     : elm.fireEvent('on' + name, evt);
+
+  return elm;
 };

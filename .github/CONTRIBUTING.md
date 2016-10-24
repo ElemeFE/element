@@ -38,10 +38,11 @@ npm run dev
 # open http://localhost:8085
 ```
 
-如果国内用户觉得安装慢可以使用 [npminstall](https://github.com/cnpm/npminstall)
+如果国内用户觉得安装慢可以使用 [yarn](https://github.com/yarnpkg/yarn) 搭配 taobao registry
 ```shell
-npm i npminstall -g
-npminstall
+npm i yarn -g
+yarn config set registry https://registry.npm.taobao.org
+yarn
 npm run dev
 
 # open http://localhost:8085
