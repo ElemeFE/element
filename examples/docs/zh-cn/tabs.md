@@ -131,8 +131,8 @@
 ### Tabs Events
 | 事件名称 | 说明 | 回调参数 |
 |---------- |-------- |---------- |
-| tab-click  | tab 被选中的钩子 | 被选中的标签 tab |
-| tab-remove  | tab 被删除的钩子  | 被删除的标签 tab |
+| tab-click  | tab 被选中的钩子 | 被选中的标签 tab 实例 |
+| tab-remove  | tab 被删除的钩子  | 被删除的标签 tab 实例 |
 
 ### Tab-pane Attributes
 | 参数       | 说明     | 类型      | 可选值       | 默认值   |
