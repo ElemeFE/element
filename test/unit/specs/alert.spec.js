@@ -7,6 +7,7 @@ describe('Alert', () => {
       title: 'test',
       showIcon: true
     }, true);
+    expect(vm.$el.querySelector('.el-alert__title').textContent).to.equal('test');
     expect(vm.$el.classList.contains('el-alert--info')).to.true;
   });
 
@@ -26,7 +27,8 @@ describe('Alert', () => {
       description: 'Unbowed, Unbent, Unbroken',
       showIcon: true
     }, true);
-    expect(vm.$el.querySelector('.el-alert__description')).to.exist;
+    expect(vm.$el.querySelector('.el-alert__description').textContent)
+      .to.equal('Unbowed, Unbent, Unbroken');
   });
 
   it('close', () => {
