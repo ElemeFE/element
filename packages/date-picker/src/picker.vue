@@ -46,7 +46,6 @@ const newPopper = {
   beforeDestroy: Popper.beforeDestroy
 };
 
-// const FUNCTION_KEYS = [13, 16, 17, 18, 19, 20, 27, 33, 34, 35, 36, 37, 38, 39, 40];
 const RANGE_SEPARATOR = ' - ';
 const DEFAULT_FORMATS = {
   date: 'yyyy-MM-dd',

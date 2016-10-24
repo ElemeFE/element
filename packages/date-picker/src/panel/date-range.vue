@@ -400,6 +400,9 @@
       },
 
       handleRangePick(val, close = true) {
+        if (this.maxDate === val.maxDate && this.minDate === val.minDate) {
+          return;
+        }
         this.maxDate = val.maxDate;
         this.minDate = val.minDate;
 

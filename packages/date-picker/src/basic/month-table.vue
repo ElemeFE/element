@@ -47,7 +47,7 @@
   </table>
 </template>
 
-<script type="text/ecmascript-6">
+<script type="text/babel">
   import { $t } from '../util';
 
   export default {

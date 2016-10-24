@@ -87,6 +87,9 @@
     watch: {
       value(val) {
         const time = clacTime(val);
+        if (time.minTime === this.minTime && time.maxTime === this.maxTime) {
+          return;
+        }
 
         this.handleMinChange({
           hours: time.minTime.getHours(),
@@ -183,6 +186,7 @@
         this.minTime = limitRange(this.minTime, minSelectableRange);
         this.maxTime = limitRange(this.maxTime, maxSelectableRange);
 
+        if (first) return;
         this.$emit('pick', [this.minTime, this.maxTime], visible, first);
       },
 
