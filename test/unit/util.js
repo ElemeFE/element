@@ -49,7 +49,7 @@ exports.createTest = function(Compo, propsData = {}, mounted = false) {
 
 /**
  * 触发一个事件
- * mouseenter, mouseleave, mouseover, keyup, change 等
+ * mouseenter, mouseleave, mouseover, keyup, change, click 等
  * @param  {Element} elm
  * @param  {EventName} name
  * @param  {options} opts
@@ -57,7 +57,7 @@ exports.createTest = function(Compo, propsData = {}, mounted = false) {
 exports.triggerEvent = function(elm, name, opts) {
   let eventName;
 
-  if (/^mouse/.test(name)) {
+  if (/^mouse|click/.test(name)) {
     eventName = 'MouseEvents';
   } else if (/^key/.test(name)) {
     eventName = 'KeyboardEvent';
