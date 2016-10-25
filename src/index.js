@@ -1,4 +1,3 @@
-import Sync from './utils/sync';
 import Pagination from '../packages/pagination/index.js';
 import Dialog from '../packages/dialog/index.js';
 import Autocomplete from '../packages/autocomplete/index.js';
@@ -59,7 +58,6 @@ const install = function(Vue) {
   /* istanbul ignore if */
   if (install.installed) return;
 
-  Vue.directive('sync', Sync);
   Vue.component(Pagination.name, Pagination);
   Vue.component(Dialog.name, Dialog);
   Vue.component(Autocomplete.name, Autocomplete);
@@ -130,7 +128,6 @@ if (typeof window !== 'undefined' && window.Vue) {
 module.exports = {
   version: '1.0.0-rc.7',
   install,
-  Sync,
   Pagination,
   Dialog,
   Autocomplete,

@@ -192,7 +192,7 @@ export default {
     let column = getDefaultColumn(type, {
       id: columnId,
       label: this.label,
-      property: this.property,
+      property,
       type,
       template,
       minWidth,
