@@ -27,6 +27,7 @@
         minutes
       };
     }
+    /* istanbul ignore next */
     return null;
   };
 
