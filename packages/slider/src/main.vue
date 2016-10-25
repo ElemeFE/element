@@ -35,8 +35,8 @@
 </template>
 
 <script type="text/babel">
-  import ElInputNumber from 'element-ui/packages/input-number/index.js';
-  import ElTooltip from 'element-ui/packages/tooltip/index.js';
+  import ElInputNumber from 'element-ui/packages/input-number';
+  import ElTooltip from 'element-ui/packages/tooltip';
   import { getStyle } from 'wind-dom/src/style';
 
   export default {

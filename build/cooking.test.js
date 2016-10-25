@@ -7,7 +7,9 @@ cooking.set({
   entry: './src/index.js',
   extends: process.env.CI_ENV ? ['vue2'] : ['vue2', 'lint'],
   minimize: false,
-  alias: config.alias,
+  alias: Object.assign(config.alias, {
+    'vue$': 'vue/dist/vue.js'
+  }),
   postcss: config.postcss,
   sourceMap: '#inline-source-map'
 });

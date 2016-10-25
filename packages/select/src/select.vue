@@ -65,9 +65,9 @@
 
 <script type="text/babel">
   import emitter from 'element-ui/src/mixins/emitter';
-  import ElInput from 'element-ui/packages/input/index.js';
+  import ElInput from 'element-ui/packages/input';
   import ElSelectMenu from './select-dropdown.vue';
-  import ElTag from 'element-ui/packages/tag/index.js';
+  import ElTag from 'element-ui/packages/tag';
   import debounce from 'throttle-debounce/debounce';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
   import { addClass, removeClass, hasClass } from 'wind-dom/src/class';

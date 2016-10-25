@@ -32,7 +32,7 @@
   </div>
 </template>
 <script>
-  import ElInput from 'element-ui/packages/input/index.js';
+  import ElInput from 'element-ui/packages/input';
   import { once, on } from 'wind-dom/src/event';
 
   export default {
