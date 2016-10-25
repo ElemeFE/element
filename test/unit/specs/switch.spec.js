@@ -1,10 +1,15 @@
-import { createTest, createVue } from '../util';
+import { createTest, createVue, destroyVM } from '../util';
 import Switch from 'packages/switch';
 import Vue from 'vue';
 
 describe('Switch', () => {
+  let vm;
+  afterEach(() => {
+    destroyVM(vm);
+  });
+
   it('create', () => {
-    const vm = createTest(Switch, {
+    vm = createTest(Switch, {
       onText: 'on',
       offText: 'off',
       onColor: '#0f0',
@@ -19,7 +24,7 @@ describe('Switch', () => {
   });
 
   it('switch with icons', () => {
-    const vm = createTest(Switch, {
+    vm = createTest(Switch, {
       onIconClass: 'el-icon-check',
       offIconClass: 'el-icon-close'
     });
@@ -29,7 +34,7 @@ describe('Switch', () => {
   });
 
   it('value correctly update', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <div>
           <el-switch v-model="value"></el-switch>
@@ -57,7 +62,7 @@ describe('Switch', () => {
   });
 
   it('disabled switch should not respond to user click', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <div>
           <el-switch disabled v-model="value"></el-switch>
