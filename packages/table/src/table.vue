@@ -19,6 +19,9 @@
         :row-class-name="rowClassName"
         :style="{ width: layout.bodyWidth ? layout.bodyWidth - (layout.scrollY ? layout.gutterWidth : 0 ) + 'px' : '' }">
       </table-body>
+      <div class="el-table__empty-block" v-if="!data || data.length === 0">
+        <span class="el-table__empty-text">{{ emptyText }}</span>
+      </div>
     </div>
     <div class="el-table__fixed" ref="fixedWrapper"
       :style="{
@@ -123,7 +126,12 @@
 
       rowKey: [String, Function],
 
-      rowClassName: [String, Function]
+      rowClassName: [String, Function],
+
+      emptyText: {
+        type: String,
+        default: '暂无数据'
+      }
     },
 
     components: {
