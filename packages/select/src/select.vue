@@ -1,7 +1,7 @@
 <template>
   <div
     class="el-select"
-    v-clickoutside="handleClose"
+    v-clickoutside="visible"
     :class="{ 'is-multiple': multiple, 'is-small': size === 'small' }">
     <div class="el-select__tags" v-if="multiple" @click.stop="toggleMenu" ref="tags" :style="{ 'max-width': inputWidth - 32 + 'px' }">
       <transition-group @after-leave="resetInputHeight">
@@ -321,10 +321,6 @@
     methods: {
       doDestroy() {
         this.$refs.popper.doDestroy();
-      },
-
-      handleClose() {
-        this.visible = false;
       },
 
       toggleLastOptionHitState(hit) {

@@ -20,7 +20,7 @@ describe('Utils:Clickoutside', () => {
 
   it('cotext not exist', () => {
     const el = document.createElement('div');
-    const vnode = {};
+    const vnode = { context: {} };
     const binding = {
       expression: 'handleClick'
     };
@@ -123,9 +123,9 @@ describe('Utils:Clickoutside', () => {
     };
 
     Clickoutside.bind(el, binding, vnode);
-    expect(el[ctx].methodName).to.equal('abc');
-    Clickoutside.update(el, newBinding);
-    expect(el[ctx].methodName).to.equal('ddd');
+    expect(el[ctx].methodName).to.function;
+    Clickoutside.update(el, newBinding, vnode);
+    expect(el[ctx].methodName).to.function;
   });
 
   it('unbind', () => {
