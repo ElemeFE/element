@@ -228,6 +228,41 @@ describe('Menu', () => {
       }, 1000);
     }, 500);
   });
+  it('menu trigger click', done => {
+    const vm = createVue({
+      template: `
+        <el-menu mode="horizontal" menu-trigger="click">
+          <el-menu-item index="1">处理中心</el-menu-item>
+          <el-submenu index="2" ref="submenu">
+            <template slot="title">我的工作台</template>
+            <el-menu-item index="2-1">选项1</el-menu-item>
+            <el-menu-item index="2-2" ref="submenuItem2">选项2</el-menu-item>
+            <el-menu-item index="2-3">选项3</el-menu-item>
+          </el-submenu>
+          <el-menu-item index="3">订单管理</el-menu-item>
+        </el-menu>
+      `,
+      data() {
+        return {
+        };
+      }
+    }, true);
+    expect(vm.$el.classList.contains('el-menu--horizontal')).to.be.true;
+    var submenu = vm.$refs.submenu;
+    var triggerElm = submenu.$el.querySelector('.el-submenu__title');
+
+    triggerEvent(submenu.$el, 'mouseenter');
+    triggerElm.click();
+
+    setTimeout(_ => {
+      expect(submenu.$el.querySelector('.el-menu').style.display).to.not.ok;
+      triggerElm.click();
+      setTimeout(_ => {
+        expect(submenu.$el.querySelector('.el-menu').style.display).to.be.equal('none');
+        done();
+      }, 1000);
+    }, 500);
+  });
   it('horizontal submenu active', done => {
     const vm = createVue({
       template: `

@@ -33,7 +33,11 @@
         default: 'light'
       },
       uniqueOpened: Boolean,
-      router: Boolean
+      router: Boolean,
+      menuTrigger: {
+        type: String,
+        default: 'hover'
+      }
     },
     data() {
       return {
@@ -94,7 +98,11 @@
         }
 
         if (this.router && route) {
-          this.$router.push(route);
+          try {
+            this.$router.push(route);
+          } catch (e) {
+            console.error(e);
+          }
         }
       },
       openActiveItemMenus() {
