@@ -51,7 +51,7 @@
         }
       }
     }
-    @when large {
+    @m large {
       width: 200px;
 
       & .el-input-number__increase, .el-input-number__decrease {
@@ -63,7 +63,7 @@
         right: calc(var(--input-large-height) + 1px);
       }
     }
-    @when small {
+    @m small {
       width: 130px;
 
       & .el-input-number__increase, .el-input-number__decrease {

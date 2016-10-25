@@ -60,7 +60,7 @@
 ```html
 <el-dropdown>
   <span class="el-dropdown-link">
-    下拉菜单<i class="el-icon-caret-bottom el-icon-right"></i>
+    下拉菜单<i class="el-icon-caret-bottom el-icon--right"></i>
   </span>
   <el-dropdown-menu slot="dropdown">
     <el-dropdown-item>黄金糕</el-dropdown-item>
@@ -82,7 +82,7 @@
 ```html
 <el-dropdown>
   <el-button type="primary">
-    更多菜单<i class="el-icon-caret-bottom el-icon-right"></i>
+    更多菜单<i class="el-icon-caret-bottom el-icon--right"></i>
   </el-button>
   <el-dropdown-menu slot="dropdown">
     <el-dropdown-item>黄金糕</el-dropdown-item>
@@ -117,7 +117,7 @@
     <span class="demonstration">hover 激活</span>
     <el-dropdown>
       <span class="el-dropdown-link">
-        下拉菜单<i class="el-icon-caret-bottom el-icon-right"></i>
+        下拉菜单<i class="el-icon-caret-bottom el-icon--right"></i>
       </span>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item>黄金糕</el-dropdown-item>
@@ -132,7 +132,7 @@
     <span class="demonstration">click 激活</span>
     <el-dropdown trigger="click">
       <span class="el-dropdown-link">
-        下拉菜单<i class="el-icon-caret-bottom el-icon-right"></i>
+        下拉菜单<i class="el-icon-caret-bottom el-icon--right"></i>
       </span>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item>黄金糕</el-dropdown-item>

@@ -1,7 +1,7 @@
 <template>
   <div :class="[
     type === 'textarea' ? 'el-textarea' : 'el-input',
-    size ? 'el-input-' + size : '',
+    size ? 'el-input--' + size : '',
     {
       'is-disabled': disabled,
       'el-input-group': $slots.prepend || $slots.append

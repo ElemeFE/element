@@ -72,7 +72,7 @@ describe('MessageBox', () => {
     });
     setTimeout(() => {
       document.querySelector('.el-message-box__wrapper')
-        .querySelector('.el-button-primary').click();
+        .querySelector('.el-button--primary').click();
       expect(document.querySelector('.el-message-box__wrapper')
         .__vue__.value).to.false;
       done();
@@ -163,7 +163,7 @@ describe('MessageBox', () => {
         });
       setTimeout(() => {
         document.querySelector('.el-message-box__wrapper')
-          .querySelector('.el-button-primary').click();
+          .querySelector('.el-button--primary').click();
       }, 300);
     });
 
@@ -175,7 +175,7 @@ describe('MessageBox', () => {
         });
       setTimeout(() => {
         document.querySelector('.el-message-box__wrapper')
-          .querySelector('.el-button-default').click();
+          .querySelector('.el-button').click();
       }, 300);
     });
   });

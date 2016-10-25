@@ -1,7 +1,7 @@
 <template>
   <div class="el-input-number"
     :class="[
-      size ? 'is-' + size : '',
+      size ? 'el-input-number--' + size : '',
       { 'is-disabled': disabled }
     ]"
   >

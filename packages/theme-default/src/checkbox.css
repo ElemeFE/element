@@ -129,5 +129,9 @@
       font-size: var(--checkbox-font-size);
       padding-left: 5px;
     }
+
+    & + .el-checkbox {
+      margin-left: 15px;
+    }
   }
 }

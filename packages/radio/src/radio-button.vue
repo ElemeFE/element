@@ -32,7 +32,7 @@
   <label
     class="el-radio-button"
     :class="[
-      size ? 'el-radio-button-' + size : '',
+      size ? 'el-radio-button--' + size : '',
       { 'is-active': value === label }
     ]"
   >

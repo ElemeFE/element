@@ -69,10 +69,10 @@
   animation: rotating 1s linear infinite;
 }
 
-.el-icon-right {
+.el-icon--right {
   margin-left: 5px;
 }
-.el-icon-left {
+.el-icon--left {
   margin-right: 5px;
 }
 

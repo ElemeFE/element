@@ -16,11 +16,12 @@
       height: 36px;
       cursor: pointer;
 
-      & > input {
-        vertical-align: middle;
+      & > .el-checkbox,
+      & > .el-tree-node__expand-icon {
+        margin-right: 8px;
       }
-      & > * {
-        margin-right: 3px;
+      & > .el-checkbox {
+        vertical-align: middle;
       }
       &:hover {
         background: #e5e9f2;
