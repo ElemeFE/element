@@ -25,9 +25,15 @@
       }
     },
 
+    watch: {
+      disabled(val) {
+        this.broadcast('option', 'handleGroupDisabled', val);
+      }
+    },
+
     mounted() {
       if (this.disabled) {
-        this.broadcast('option', 'disableOptions');
+        this.broadcast('option', 'handleGroupDisabled', this.disabled);
       }
     }
   };

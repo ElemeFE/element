@@ -4,7 +4,7 @@
     @click.stop="selectOptionClick"
     class="el-select-dropdown__item"
     v-show="queryPassed"
-    :class="{ 'selected': itemSelected, 'is-disabled': disabled, 'hover': parent.hoverIndex === index }">
+    :class="{ 'selected': itemSelected, 'is-disabled': disabled || groupDisabled, 'hover': parent.hoverIndex === index }">
     <slot>
       <span>{{ currentLabel }}</span>
     </slot>
@@ -39,13 +39,17 @@
     data() {
       return {
         index: -1,
+        groupDisabled: false,
         queryPassed: true,
-        hitState: false,
-        currentLabel: this.label
+        hitState: false
       };
     },
 
     computed: {
+      currentLabel() {
+        return this.label || ((typeof this.value === 'string' || typeof this.value === 'number') ? this.value : '');
+      },
+
       parent() {
         let result = this.$parent;
         while (!result.isSelect) {
@@ -76,18 +80,18 @@
     },
 
     methods: {
-      disableOptions() {
-        this.disabled = true;
+      handleGroupDisabled(val) {
+        this.groupDisabled = val;
       },
 
       hoverItem() {
-        if (!this.disabled) {
+        if (!this.disabled && !this.groupDisabled) {
           this.parent.hoverIndex = this.parent.options.indexOf(this);
         }
       },
 
       selectOptionClick() {
-        if (this.disabled !== true) {
+        if (this.disabled !== true && this.groupDisabled !== true) {
           this.dispatch('select', 'handleOptionClick', this);
         }
       },
@@ -107,7 +111,6 @@
     },
 
     created() {
-      this.currentLabel = this.currentLabel || ((typeof this.value === 'string' || typeof this.value === 'number') ? this.value : '');
       this.parent.options.push(this);
       this.parent.optionsCount++;
       this.parent.filteredOptionsCount++;
@@ -118,7 +121,7 @@
       }
 
       this.$on('queryChange', this.queryChange);
-      this.$on('disableOptions', this.disableOptions);
+      this.$on('handleGroupDisabled', this.handleGroupDisabled);
       this.$on('resetIndex', this.resetIndex);
     },
 

@@ -53,11 +53,11 @@
     <transition name="md-fade-bottom" @after-leave="doDestroy">
       <el-select-menu
         ref="popper"
-        v-show="visible && nodataText !== false">
+        v-show="visible && emptyText !== false">
         <ul class="el-select-dropdown__list" v-show="options.length > 0 && filteredOptionsCount > 0 && !loading">
           <slot></slot>
         </ul>
-        <p class="el-select-dropdown__nodata" v-if="nodataText">{{ nodataText }}</p>
+        <p class="el-select-dropdown__nodata" v-if="emptyText">{{ emptyText }}</p>
       </el-select-menu>
     </transition>
   </div>
@@ -106,7 +106,7 @@
         return criteria;
       },
 
-      nodataText() {
+      emptyText() {
         if (this.loading) {
           return '加载中';
         } else {
@@ -439,7 +439,9 @@
               this.hoverIndex = 0;
             }
             this.resetScrollTop();
-            if (this.options[this.hoverIndex].disabled === true || !this.options[this.hoverIndex].queryPassed) {
+            if (this.options[this.hoverIndex].disabled === true ||
+              this.options[this.hoverIndex].groupDisabled === true ||
+              !this.options[this.hoverIndex].queryPassed) {
               this.navigateOptions('next');
             }
           }
@@ -449,7 +451,9 @@
               this.hoverIndex = this.options.length - 1;
             }
             this.resetScrollTop();
-            if (this.options[this.hoverIndex].disabled === true || !this.options[this.hoverIndex].queryPassed) {
+            if (this.options[this.hoverIndex].disabled === true ||
+              this.options[this.hoverIndex].groupDisabled === true ||
+              !this.options[this.hoverIndex].queryPassed) {
               this.navigateOptions('prev');
             }
           }

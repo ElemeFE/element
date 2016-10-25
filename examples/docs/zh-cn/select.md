@@ -262,7 +262,7 @@
 
 包含清空按钮，可将选择器清空为初始状态
 
-:::demo 为`el-select`设置`clearable`属性，则可将选择器清空。需要注意的是，`clearable`属性仅使用于单选。
+:::demo 为`el-select`设置`clearable`属性，则可将选择器清空。需要注意的是，`clearable`属性仅适用于单选。
 ```html
 <template>
   <el-select v-model="value4" clearable>
