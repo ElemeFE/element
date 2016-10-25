@@ -18,7 +18,7 @@
     "pub": "sh build/release.sh",
     "pub:all": "npm run dist:all && lerna publish",
     "build:utils": "babel src/utils --out-dir lib/utils",
-    "clean": "rimraf lib && rimraf packages/*/lib",
+    "clean": "rimraf lib && rimraf packages/*/lib && rimraf test/**/coverage",
     "lint": "eslint src/**/* test/**/* packages/**/*.{js,vue} build/**/* --quiet",
     "test:watch": "karma start test/unit/karma.conf.js",
     "test": "npm run lint && CI_ENV=/dev/ karma start test/unit/karma.conf.js --single-run"

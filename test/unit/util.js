@@ -1,4 +1,4 @@
-import Vue from 'vue/dist/vue';
+import Vue from 'vue';
 import Element from 'main/index.js';
 
 Vue.use(Element);

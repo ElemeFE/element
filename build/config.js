@@ -8,8 +8,7 @@ var mixinsList = fs.readdirSync(path.resolve(__dirname, '../src/mixins'));
 var externals = {};
 
 Object.keys(Components).forEach(function(key) {
-  externals[`element-ui/packages/${key}/index.js`] = `element-ui/lib/${key}`;
-  externals[`element-ui/packages/${key}/style.css`] = `element-ui/lib/${key}/style.css`;
+  externals[`element-ui/packages/${key}`] = `element-ui/lib/${key}`;
 });
 
 Object.keys(dependencies).forEach(function(key) {

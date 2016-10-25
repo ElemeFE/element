@@ -42,7 +42,7 @@
   </div>
 </template>
 <script>
-  import ElInput from 'element-ui/packages/input/index.js';
+  import ElInput from 'element-ui/packages/input';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
 
   export default {

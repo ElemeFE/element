@@ -1,5 +1,5 @@
-import ElCheckbox from 'element-ui/packages/checkbox/index.js';
-import ElTag from 'element-ui/packages/tag/index.js';
+import ElCheckbox from 'element-ui/packages/checkbox';
+import ElTag from 'element-ui/packages/tag';
 import objectAssign from 'object-assign';
 
 let columnIdSeed = 1;
