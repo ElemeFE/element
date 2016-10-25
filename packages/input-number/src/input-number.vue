@@ -7,6 +7,8 @@
   >
     <el-input
       v-model.number="currentValue"
+      @keydown.up.native="increase"
+      @keydown.down.native="decrease"
       :disabled="disabled"
       :size="size"
       :class="{
