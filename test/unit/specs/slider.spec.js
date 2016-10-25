@@ -1,14 +1,19 @@
-import { createTest, createVue, triggerEvent } from '../util';
+import { createTest, createVue, triggerEvent, destroyVM } from '../util';
 import Slider from 'packages/slider';
 
 describe('Slider', () => {
+  let vm;
+  afterEach(() => {
+    destroyVM(vm);
+  });
+
   it('create', () => {
-    const vm = createTest(Slider);
+    vm = createTest(Slider);
     expect(vm.value).to.equal(0);
   });
 
   it('should not exceed min and max', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <div>
           <el-slider v-model="value" :min="50">
@@ -36,7 +41,7 @@ describe('Slider', () => {
   });
 
   it('show tooltip', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <div>
           <el-slider v-model="value">
@@ -58,7 +63,7 @@ describe('Slider', () => {
   });
 
   it('drag', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <div>
           <el-slider v-model="value"></el-slider>
@@ -82,7 +87,7 @@ describe('Slider', () => {
   });
 
   it('click', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <div>
           <el-slider v-model="value"></el-slider>
@@ -106,7 +111,7 @@ describe('Slider', () => {
   });
 
   it('disabled', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <div>
           <el-slider v-model="value" disabled></el-slider>
@@ -131,7 +136,7 @@ describe('Slider', () => {
   });
 
   it('show input', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <div>
           <el-slider v-model="value" show-input></el-slider>
@@ -156,7 +161,7 @@ describe('Slider', () => {
   });
 
   it('show stops', done => {
-    const vm = createTest(Slider, {
+    vm = createTest(Slider, {
       showStops: true,
       step: 10
     }, true);

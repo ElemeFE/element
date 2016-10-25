@@ -1,9 +1,14 @@
-import { createTest, createVue } from '../util';
+import { createTest, createVue, destroyVM } from '../util';
 import Alert from 'packages/alert';
 
 describe('Alert', () => {
+  let vm;
+  afterEach(() => {
+    destroyVM(vm);
+  });
+
   it('create', () => {
-    const vm = createTest(Alert, {
+    vm = createTest(Alert, {
       title: 'test',
       showIcon: true
     }, true);
@@ -12,7 +17,7 @@ describe('Alert', () => {
   });
 
   it('type', () => {
-    const vm = createTest(Alert, {
+    vm = createTest(Alert, {
       title: 'test',
       type: 'success',
       showIcon: true
@@ -22,7 +27,7 @@ describe('Alert', () => {
   });
 
   it('description', () => {
-    const vm = createTest(Alert, {
+    vm = createTest(Alert, {
       title: 'Dorne',
       description: 'Unbowed, Unbent, Unbroken',
       showIcon: true
@@ -32,7 +37,7 @@ describe('Alert', () => {
   });
 
   it('close', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <div>
           <el-alert

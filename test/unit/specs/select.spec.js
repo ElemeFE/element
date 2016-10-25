@@ -1,4 +1,4 @@
-import { createTest, createVue, triggerEvent } from '../util';
+import { createTest, createVue, triggerEvent, destroyVM } from '../util';
 import Select from 'packages/select';
 
 describe('Select', () => {
@@ -68,16 +68,13 @@ describe('Select', () => {
     return vm;
   };
 
+  let vm;
   afterEach(() => {
-    const el = document.querySelector('.el-select');
-    if (!el) return;
-    if (el.parentNode) {
-      el.parentNode.removeChild(el);
-    }
+    destroyVM(vm);
   });
 
   it('create', () => {
-    const vm = createTest(Select, true);
+    vm = createTest(Select, true);
     expect(vm.$el.className).to.equal('el-select');
     expect(vm.$el.querySelector('.el-input__inner').placeholder).to.equal('请选择');
     vm.toggleMenu();
@@ -85,7 +82,7 @@ describe('Select', () => {
   });
 
   it('options rendered correctly', () => {
-    const vm = getSelectVm();
+    vm = getSelectVm();
     const options = vm.$el.querySelectorAll('.el-select-dropdown__item');
     const result = [].every.call(options, (option, index) => {
       let text = option.querySelector('span').textContent;
@@ -95,7 +92,7 @@ describe('Select', () => {
   });
 
   it('default value', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <div>
           <el-select v-model="value">
@@ -129,7 +126,7 @@ describe('Select', () => {
 
   it('single select', done => {
     sinon.stub(window.console, 'log');
-    const vm = createVue({
+    vm = createVue({
       template: `
         <div>
           <el-select v-model="value" @change="handleChange">
@@ -189,7 +186,7 @@ describe('Select', () => {
   });
 
   it('disabled option', done => {
-    const vm = getSelectVm();
+    vm = getSelectVm();
     vm.options[1].disabled = true;
     setTimeout(() => {
       const options = vm.$el.querySelectorAll('.el-select-dropdown__item');
@@ -203,12 +200,12 @@ describe('Select', () => {
   });
 
   it('disabled select', () => {
-    const vm = createTest(Select, { disabled: true }, true);
+    vm = createTest(Select, { disabled: true }, true);
     expect(vm.$el.querySelector('.el-input').classList.contains('is-disabled')).to.true;
   });
 
   it('keyboard operations', done => {
-    const vm = getSelectVm();
+    vm = getSelectVm();
     const select = vm.$children[0];
     let i = 8;
     while (i--) {
@@ -226,7 +223,7 @@ describe('Select', () => {
   });
 
   it('clearable', done => {
-    const vm = getSelectVm({ clearable: true });
+    vm = getSelectVm({ clearable: true });
     const select = vm.$children[0];
     vm.value = '选项1';
     select.inputHovering = true;
@@ -240,7 +237,7 @@ describe('Select', () => {
   });
 
   it('custom el-option template', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <div>
           <el-select v-model="value">
@@ -268,7 +265,7 @@ describe('Select', () => {
   });
 
   it('option group', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <div>
           <el-select v-model="value">
@@ -326,7 +323,7 @@ describe('Select', () => {
   });
 
   it('filterable', done => {
-    const vm = getSelectVm({ filterable: true });
+    vm = getSelectVm({ filterable: true });
     const select = vm.$children[0];
     select.selectedLabel = '面';
     select.onInputChange();
@@ -343,7 +340,7 @@ describe('Select', () => {
         vm.options = vm.options.filter(option => option.label.indexOf(query) === -1);
       };
     };
-    const vm = getSelectVm({ filterable: true, filterMethod });
+    vm = getSelectVm({ filterable: true, filterMethod });
     const select = vm.$children[0];
     select.query = '面';
     setTimeout(() => {
@@ -353,7 +350,7 @@ describe('Select', () => {
   });
 
   it('multiple select', done => {
-    const vm = getSelectVm({ multiple: true });
+    vm = getSelectVm({ multiple: true });
     const options = vm.$el.querySelectorAll('.el-select-dropdown__item');
     vm.value = ['选项1'];
     setTimeout(() => {
@@ -383,7 +380,7 @@ describe('Select', () => {
         }, 200);
       };
     };
-    const vm = getSelectVm({
+    vm = getSelectVm({
       multiple: true,
       remote: true,
       filterable: true,
