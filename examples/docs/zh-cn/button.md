@@ -35,6 +35,10 @@
       .el-button + .el-button {
         margin-left: 0;
       }
+
+      & + .el-button-group {
+        margin-left: 10px;
+      }
     }
   }
 
@@ -131,7 +135,7 @@
 <el-button type="primary" icon="share"></el-button>
 <el-button type="primary" icon="delete"></el-button>
 <el-button type="primary" icon="search">搜索</el-button>
-<el-button type="primary">上传<i class="el-icon-upload el-icon-right"></i></el-button>
+<el-button type="primary">上传<i class="el-icon-upload el-icon--right"></i></el-button>
 ```
 :::
 
@@ -144,7 +148,7 @@
 ```html
 <el-button-group>
   <el-button type="primary" icon="arrow-left">上一页</el-button>
-  <el-button type="primary">下一页<i class="el-icon-arrow-right el-icon-right"></i></el-button>
+  <el-button type="primary">下一页<i class="el-icon-arrow-right el-icon--right"></i></el-button>
 </el-button-group>
 <el-button-group>
   <el-button type="primary" icon="edit"></el-button>

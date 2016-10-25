@@ -16,7 +16,7 @@
         </div>
         <div class="el-message-box__btns">
           <el-button :class="[ cancelButtonClasses ]" v-show="showCancelButton" @click.native="handleAction('cancel')">{{ cancelButtonText }}</el-button>
-          <el-button :class="[ confirmButtonClasses ]" v-show="showConfirmButton" @click.native="handleAction('confirm')" type="primary">{{ confirmButtonText }}</el-button>
+          <el-button :class="[ confirmButtonClasses ]" v-show="showConfirmButton" @click.native="handleAction('confirm')">{{ confirmButtonText }}</el-button>
         </div>
       </div>
     </transition>
@@ -71,10 +71,10 @@
       },
 
       confirmButtonClasses() {
-        return `el-button el-button-primary ${ this.confirmButtonClass }`;
+        return `el-button--primary ${ this.confirmButtonClass }`;
       },
       cancelButtonClasses() {
-        return `el-button el-button-default ${ this.cancelButtonClass }`;
+        return `${ this.cancelButtonClass }`;
       }
     },
 

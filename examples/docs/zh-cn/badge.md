@@ -23,7 +23,7 @@
 
 <el-dropdown trigger="click">
   <span class="el-dropdown-link">
-    点我查看<i class="el-icon-caret-bottom el-icon-right"></i>
+    点我查看<i class="el-icon-caret-bottom el-icon--right"></i>
   </span>
   <el-dropdown-menu slot="dropdown">
     <el-dropdown-item class="clearfix">

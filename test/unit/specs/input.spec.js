@@ -76,7 +76,7 @@ describe('Input', () => {
       `
     }, true);
 
-    expect(vm.$el.classList.contains('el-input-large')).to.true;
+    expect(vm.$el.classList.contains('el-input--large')).to.true;
   });
 
   it('type', () => {

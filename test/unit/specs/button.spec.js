@@ -7,7 +7,7 @@ describe('Button', () => {
       type: 'primary'
     }, true);
     let buttonElm = vm.$el;
-    expect(buttonElm.classList.contains('el-button-primary')).to.be.true;
+    expect(buttonElm.classList.contains('el-button--primary')).to.be.true;
   });
   it('icon', () => {
     const vm = createTest(Button, {
@@ -43,7 +43,7 @@ describe('Button', () => {
       size: 'large'
     }, true);
     let buttonElm = vm.$el;
-    expect(buttonElm.classList.contains('el-button-large')).to.be.true;
+    expect(buttonElm.classList.contains('el-button--large')).to.be.true;
   });
   it('plain', () => {
     const vm = createTest(Button, {

@@ -78,27 +78,26 @@
     .el-icon-loading {
       animation: validating-rotating 1s linear infinite;
     }
-  }
+    @m large {
+      font-size: var(--input-large-font-size);
 
-  @b input-large {
-    font-size: var(--input-large-font-size);
-
-    & .el-input__inner {
-      height: var(--input-large-height);
+      & .el-input__inner {
+        height: var(--input-large-height);
+      }
     }
-  }
-  @b input-small {
-    font-size: var(--input-small-font-size);
+    @m small {
+      font-size: var(--input-small-font-size);
 
-    & .el-input__inner {
-      height: var(--input-small-height);
+      & .el-input__inner {
+        height: var(--input-small-height);
+      }
     }
-  }
-  @b input-mini {
-    font-size: var(--input-mini-font-size);
+    @m mini {
+      font-size: var(--input-mini-font-size);
 
-    & .el-input__inner {
-      height: var(--input-mini-height);
+      & .el-input__inner {
+        height: var(--input-mini-height);
+      }
     }
   }
 

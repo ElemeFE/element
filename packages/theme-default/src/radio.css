@@ -13,7 +13,7 @@
     @utils-user-select none;
 
     & + .el-radio {
-      margin-left: 30px;
+      margin-left: 15px;
     }
     
     @e input {
@@ -143,13 +143,6 @@
         color: var(--color-primary);
       }
 
-      & .el-icon-right {
-        margin-left: 5px;
-      }
-      & .el-icon-left {
-        margin-right: 5px;
-      }
-
       & [class*="el-icon-"] {
         line-height: 0.9;
         
@@ -199,20 +192,20 @@
         border-radius: 0 var(--border-radius-base) var(--border-radius-base) 0;
       }
     }
-  }
-  @b radio-button-large {
-    & .el-radio-button__inner {
-      @mixin button-size var(--button-large-padding-vertical), var(--button-large-padding-horizontal), var(--button-large-font-size), 0;
+    @m large {
+      & .el-radio-button__inner {
+        @mixin button-size var(--button-large-padding-vertical), var(--button-large-padding-horizontal), var(--button-large-font-size), 0;
+      }
     }
-  }
-  @b radio-button-small {
-    & .el-radio-button__inner {
-      @mixin button-size var(--button-small-padding-vertical), var(--button-small-padding-horizontal), var(--button-small-font-size), 0;
+    @m small {
+      & .el-radio-button__inner {
+        @mixin button-size var(--button-small-padding-vertical), var(--button-small-padding-horizontal), var(--button-small-font-size), 0;
+      }
     }
-  }
-  @b radio-button-mini {
-    & .el-radio-button__inner {
-      @mixin button-size var(--button-mini-padding-vertical), var(--button-mini-padding-horizontal), var(--button-mini-font-size), 0;
+    @m mini {
+      & .el-radio-button__inner {
+        @mixin button-size var(--button-mini-padding-vertical), var(--button-mini-padding-horizontal), var(--button-mini-font-size), 0;
+      }
     }
   }
 }

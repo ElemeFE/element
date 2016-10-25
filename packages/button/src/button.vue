@@ -2,8 +2,8 @@
   <button :disabled="disabled" class="el-button"
     :type="nativeType"
     :class="[
-      type ? 'el-button-' + type : '',
-      size ? 'el-button-' + size : '',
+      type ? 'el-button--' + type : '',
+      size ? 'el-button--' + size : '',
       {
         'is-disabled': disabled,
         'is-loading': loading,
@@ -13,13 +13,10 @@
   >
     <i class="el-icon-loading" v-if="loading"></i>
     <i :class="'el-icon-' + icon" v-if="icon && !loading"></i>
-    <slot></slot>
+    <span v-if="$slots.default"><slot></slot></span>
   </button>
 </template>
 <script>
-  /**
-   * button
-   */
   export default {
     name: 'ElButton',
 
