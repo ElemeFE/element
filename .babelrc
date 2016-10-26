@@ -1,4 +1,4 @@
 {
   "presets": [["es2015", { "loose": true }]],
-  "plugins": ["transform-vue-jsx"]
+  "plugins": ["./build/babel-plugin-transform-vue-jsx"]
 }
