@@ -31,7 +31,6 @@
 
 <script type="text/babel">
   import { limitRange } from '../util';
-  import Vue from 'vue';
   import { $t } from '../util';
 
   export default {
@@ -86,8 +85,8 @@
         minutes: 0,
         seconds: 0,
         selectableRange: [],
-        currentDate: this.$options.defaultValue || this.date,
-        currentVisible: this.visible,
+        currentDate: this.$options.defaultValue || this.date || new Date(),
+        currentVisible: this.visible || false,
         width: this.pickerWidth || 0
       };
     },
@@ -140,9 +139,6 @@
     },
 
     created() {
-      !this.currentDate && Vue.set(this, 'currentDate', new Date());
-      !this.currentVisible && Vue.set(this, 'currentVisible', false);
-
       this.hours = this.currentDate.getHours();
       this.minutes = this.currentDate.getMinutes();
       this.seconds = this.currentDate.getSeconds();

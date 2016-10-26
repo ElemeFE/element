@@ -30,6 +30,7 @@
       </ul>
     </div>
     <div
+      v-show="showSeconds"
       @mouseenter="emitSelectRange('seconds')"
       @mousewheel="handleScroll('second')"
       class="el-time-spinner__wrapper"
