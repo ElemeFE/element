@@ -1,7 +1,6 @@
 var cooking = require('cooking');
 var config = require('./config');
 var md = require('markdown-it')();
-var Components = require('../components.json');
 var striptags = require('./strip-tags');
 
 function convert(str) {
