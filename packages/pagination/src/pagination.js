@@ -2,9 +2,12 @@ import Vue from 'vue';
 import Pager from './pager.vue';
 import ElSelect from 'element-ui/packages/select';
 import ElOption from 'element-ui/packages/option';
+import Migrating from 'element-ui/src/mixins/migrating';
 
 export default {
   name: 'ElPagination',
+
+  mixins: [Migrating],
 
   props: {
     pageSize: {
@@ -50,7 +53,7 @@ export default {
     const TEMPLATE_MAP = {
       prev: <prev></prev>,
       jumper: <jumper></jumper>,
-      pager: <pager currentPage={ this.internalCurrentPage } pageCount={ this.pageCount } on-currentchange={ this.handleCurrentChange }></pager>,
+      pager: <pager currentPage={ this.internalCurrentPage } pageCount={ this.pageCount } on-change={ this.handleCurrentChange }></pager>,
       next: <next></next>,
       sizes: <sizes></sizes>,
       slot: <slot></slot>,
@@ -153,7 +156,7 @@ export default {
         handleChange(val) {
           if (val !== this.$parent.internalPageSize) {
             this.$parent.internalPageSize = val = parseInt(val, 10);
-            this.$parent.$emit('sizechange', val);
+            this.$parent.$emit('size-change', val);
           }
         }
       }
@@ -173,7 +176,7 @@ export default {
 
         handleChange({ target }) {
           this.$parent.internalCurrentPage = this.$parent.getValidCurrentPage(target.value);
-          this.$parent.$emit('currentchange', this.$parent.internalCurrentPage);
+          this.$parent.$emit('current-change', this.$parent.internalCurrentPage);
           this.oldValue = null;
         }
       },
@@ -210,9 +213,19 @@ export default {
   },
 
   methods: {
+    getMigratingConfig() {
+      return {
+        props: {},
+        events: {
+          'currentchange': 'Pagination: currentchange has been renamed to current-change',
+          'sizechange': 'Pagination: sizechange has been renamed to size-change'
+        }
+      };
+    },
+
     handleCurrentChange(val) {
       this.internalCurrentPage = this.getValidCurrentPage(val);
-      this.$emit('currentchange', this.internalCurrentPage);
+      this.$emit('current-change', this.internalCurrentPage);
     },
 
     prev() {
@@ -221,7 +234,7 @@ export default {
       this.internalCurrentPage = this.getValidCurrentPage(newVal);
 
       if (this.internalCurrentPage !== oldPage) {
-        this.$emit('currentchange', this.internalCurrentPage);
+        this.$emit('current-change', this.internalCurrentPage);
       }
     },
 
@@ -231,7 +244,7 @@ export default {
       this.internalCurrentPage = this.getValidCurrentPage(newVal);
 
       if (this.internalCurrentPage !== oldPage) {
-        this.$emit('currentchange', this.internalCurrentPage);
+        this.$emit('current-change', this.internalCurrentPage);
       }
     },
 
@@ -242,7 +255,7 @@ export default {
     //   this.internalCurrentPage = this.getValidCurrentPage(newVal);
 
     //   if (this.internalCurrentPage !== oldPage) {
-    //     this.$emit('currentchange', this.internalCurrentPage);
+    //     this.$emit('current-change', this.internalCurrentPage);
     //   }
     // },
 
@@ -252,7 +265,7 @@ export default {
     //   this.internalCurrentPage = this.getValidCurrentPage(newVal);
 
     //   if (this.internalCurrentPage !== oldPage) {
-    //     this.$emit('currentchange', this.internalCurrentPage);
+    //     this.$emit('current-change', this.internalCurrentPage);
     //   }
     // },
 
