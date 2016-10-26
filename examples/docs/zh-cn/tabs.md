@@ -3,7 +3,13 @@
     data() {
       return {
         activeName: 'first',
-        activeName2: ''
+        activeName2: '',
+        tabs: [
+          {label: '用户管理', content: ''},
+          {label: '配置管理', content: ''},
+          {label: '角色管理', content: ''},
+          {label: '定时任务补偿', content: ''}
+        ]
       }
     },
     methods: {
@@ -28,17 +34,19 @@
 ```html
 <template>
   <el-tabs>
-    <el-tab-pane label="用户管理"></el-tab-pane>
-    <el-tab-pane label="配置管理"></el-tab-pane>
-    <el-tab-pane label="角色管理"></el-tab-pane>
-    <el-tab-pane label="定时任务补偿"></el-tab-pane>
+    <el-tab-pane v-for="tab in tabs" :label="tab.label">{{tab.content}}</el-tab-pane>
   </el-tabs>
 </template>
 <script>
   export default {
     data() {
       return {
-        activeName: 'first'
+        tabs: [
+          {label: '用户管理', content: ''},
+          {label: '配置管理', content: ''},
+          {label: '角色管理', content: ''},
+          {label: '定时任务补偿', content: ''}
+        ]
       };
     }
   };

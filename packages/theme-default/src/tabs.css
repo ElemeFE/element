@@ -14,12 +14,13 @@
     }
     @e active-bar {
       position: absolute;
-      bottom: -1px;
+      bottom: 0;
       left: 0;
+      width: 100%;
       height: 3px;
       background-color: var(--color-primary);
       z-index: 1;
-      /*transition: transform .3s cubic-bezier(.645,.045,.355,1);*/
+      transition: transform .3s cubic-bezier(.645,.045,.355,1);
       list-style: none;
     }
     @e item {
@@ -44,7 +45,6 @@
       }
     }
     @e content {
-      white-space: nowrap;
       overflow: hidden;
       position: relative;
     }
