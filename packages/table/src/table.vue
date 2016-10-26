@@ -143,17 +143,17 @@
       getMigratingConfig() {
         return {
           props: {
-            'allow-no-selection': 'allow-no-selection is removed.',
-            'selection-mode': 'selection-mode is removed.',
-            'fixed-column-count': 'fixed-column-count is removed. Use fixed prop in TableColumn instead.',
-            'custom-criteria': 'custom-criteria is removed. Use row-class-name instead.',
-            'custom-background-colors': 'custom-background-colors is removed. Use row-class-name instead.'
+            'allow-no-selection': 'Table: allow-no-selection has been removed.',
+            'selection-mode': 'Table: selection-mode has been removed.',
+            'fixed-column-count': 'Table: fixed-column-count has been removed. Use fixed prop in TableColumn instead.',
+            'custom-criteria': 'Table: custom-criteria has been removed. Use row-class-name instead.',
+            'custom-background-colors': 'custom-background-colors has been removed. Use row-class-name instead.'
           },
           events: {
-            selectionchange: 'selectionchange is renamed to selection-change.',
-            cellmouseenter: 'cellmouseenter is renamed to cell-mouse-enter.',
-            cellmouseleave: 'cellmouseleave is renamed to cell-mouse-leave.',
-            cellclick: 'cellclick is renamed to cell-click.'
+            selectionchange: 'Table: selectionchange has been renamed to selection-change.',
+            cellmouseenter: 'Table: cellmouseenter has been renamed to cell-mouse-enter.',
+            cellmouseleave: 'Table: cellmouseleave has been renamed to cell-mouse-leave.',
+            cellclick: 'Table: cellclick has been renamed to cell-click.'
           }
         };
       },

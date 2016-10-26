@@ -42,15 +42,15 @@
 
 根据场景需要，可以添加其他功能模块。
 
-:::demo 此例是一个完整的用例，使用了`sizechange`和`currentchange`事件来处理页码大小和当前页变动时候触发的事件。`page-sizes`接受一个整型数组，数组元素为展示的选择每页显示个数的选项，`[100, 200, 300, 400]`表示四个选项，每页显示 100 个，200 个，300 个或者 400 个。
+:::demo 此例是一个完整的用例，使用了`size-change`和`current-change`事件来处理页码大小和当前页变动时候触发的事件。`page-sizes`接受一个整型数组，数组元素为展示的选择每页显示个数的选项，`[100, 200, 300, 400]`表示四个选项，每页显示 100 个，200 个，300 个或者 400 个。
 
 ```html
 <template>
   <div class="block">
     <span class="demonstration">显示总数</span>
     <el-pagination
-      @sizechange="handleSizeChange"
-      @currentchange="handleCurrentChange"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
       :current-page="5"
       :page-size="100"
       layout="total, prev, pager, next"
@@ -60,8 +60,8 @@
   <div class="block">
     <span class="demonstration">调整每页显示条数</span>
     <el-pagination
-      @sizechange="handleSizeChange"
-      @currentchange="handleCurrentChange"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
       :current-page="5"
       :page-sizes="[100, 200, 300, 400]"
       :page-size="100"
@@ -72,8 +72,8 @@
   <div class="block">
     <span class="demonstration">直接前往</span>
     <el-pagination
-      @sizechange="handleSizeChange"
-      @currentchange="handleCurrentChange"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
       :current-page="5"
       :page-size="100"
       layout="prev, pager, next, jumper"
@@ -83,8 +83,8 @@
   <div class="block">
     <span class="demonstration">完整功能</span>
     <el-pagination
-      @sizechange="handleSizeChange"
-      @currentchange="handleCurrentChange"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
       :current-page="5"
       :page-sizes="[100, 200, 300, 400]"
       :page-size="100"
@@ -191,5 +191,5 @@
 ### Events
 | 事件名称 | 说明 | 回调参数 |
 |---------|--------|---------|
-| sizechange | pageSize 改变时会触发 | 每页条数`size` |
-| currentchange | currentPage 改变时会触发 | 当前页`currentPage` |
+| size-change | pageSize 改变时会触发 | 每页条数`size` |
+| current-change | currentPage 改变时会触发 | 当前页`currentPage` |

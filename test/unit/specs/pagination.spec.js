@@ -101,7 +101,7 @@ describe('Pagination', () => {
     const vm = createVue({
       template: `
         <el-pagination
-          @currentchange="handleChange"
+          @current-change="handleChange"
           :page-size="10"
           :total="100" />
       `,
@@ -132,12 +132,12 @@ describe('Pagination', () => {
     expect(vm.page).to.equal(1);
   });
 
-  it('event:currentchange', () => {
+  it('event:current-change', () => {
     const vm = createVue({
       template: `
         <el-pagination
           :total="1000"
-          @currentchange="change = true" />
+          @current-change="change = true" />
       `,
 
       data() {
@@ -158,13 +158,13 @@ describe('Pagination', () => {
     expect(vm.change).to.true;
   });
 
-  it('event:sizechange', done => {
+  it('event:size-change', done => {
     const vm = createVue({
       template: `
         <el-pagination
           :total="100"
           layout="sizes, prev, pager, next"
-          @sizechange="trigger = true"
+          @size-change="trigger = true"
           :pageSize="10" />
       `,
 
@@ -185,7 +185,7 @@ describe('Pagination', () => {
     const vm = createVue({
       template: `
         <el-pagination
-          @currentchange="handleChange"
+          @current-change="handleChange"
           :page-size="1000"
           :total="0" />
       `,

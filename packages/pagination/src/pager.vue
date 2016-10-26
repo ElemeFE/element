@@ -80,7 +80,7 @@
         }
 
         if (newPage !== currentPage) {
-          this.$emit('currentchange', newPage);
+          this.$emit('change', newPage);
         }
       }
     },

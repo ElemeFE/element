@@ -22,6 +22,7 @@
 export default {
   mounted() {
     if (process.env.NODE_ENV === 'production') return;
+    if (!this.$vnode) return;
     const { props, events } = this.getMigratingConfig();
     const { data, componentOptions } = this.$vnode;
     const definedProps = data.attrs || {};
