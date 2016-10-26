@@ -68,6 +68,7 @@
     date.setHours(date.getHours() + 1);
     const maxTime = time[1] || date;
 
+    if (minTime > maxTime) return clacTime();
     return { minTime, maxTime };
   };
 
