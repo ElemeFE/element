@@ -24,7 +24,7 @@
                 <input
                   placeholder="开始日期"
                   class="el-date-range-picker__editor"
-                  v-model.lazy="leftVisibleDate"
+                  :value="leftVisibleDate"
                   @input="handleDateInput($event, 'min')"
                   @change="handleDateChange($event, 'min')"/>
               </span>
@@ -32,7 +32,7 @@
                 <input
                   placeholder="开始时间"
                   class="el-date-range-picker__editor"
-                  v-model.lazy="leftVisibleTime"
+                  :value="leftVisibleTime"
                   @focus="leftTimePickerVisible = !leftTimePickerVisible"
                   @change="handleTimeChange($event, 'min')"/>
                 <time-picker
@@ -51,7 +51,7 @@
                   ref="leftInput"
                   placeholder="结束日期"
                   class="el-date-range-picker__editor"
-                  v-model.lazy="rightVisibleDate"
+                  :value="rightVisibleDate"
                   :readonly="!minDate"
                   @input="handleDateInput($event, 'max')"
                   @change="handleDateChange($event, 'max')" />
@@ -61,7 +61,7 @@
                   ref="rightInput"
                   placeholder="结束时间"
                   class="el-date-range-picker__editor"
-                  v-model.lazy="rightVisibleTime"
+                  :value="rightVisibleTime"
                   @focus="minDate && (rightTimePickerVisible = !rightTimePickerVisible)"
                   :readonly="!minDate"
                   @change="handleTimeChange($event, 'max')" />
@@ -177,7 +177,7 @@
       },
 
       rightVisibleDate() {
-        return formatDate(this.maxDate);
+        return formatDate(this.maxDate || this.minDate);
       },
 
       leftVisibleTime() {
@@ -186,60 +186,6 @@
 
       rightVisibleTime() {
         return formatDate(this.maxDate, 'HH:mm:ss');
-      },
-
-      leftHours: {
-        get() {
-          return this.date.getHours();
-        },
-        set(hours) {
-          this.date.setHours(hours);
-        }
-      },
-
-      leftMinutes: {
-        get() {
-          return this.date.getMinutes();
-        },
-        set(minutes) {
-          this.date.setMinutes(minutes);
-        }
-      },
-
-      leftSeconds: {
-        get() {
-          return this.date.getSeconds();
-        },
-        set(seconds) {
-          this.date.setSeconds(seconds);
-        }
-      },
-
-      rightHours: {
-        get() {
-          return this.rightDate.getHours();
-        },
-        set(hours) {
-          this.rightDate.setHours(hours);
-        }
-      },
-
-      rightMinutes: {
-        get() {
-          return this.rightDate.getMinutes();
-        },
-        set(minutes) {
-          this.rightDate.setMinutes(minutes);
-        }
-      },
-
-      rightSeconds: {
-        get() {
-          return this.rightDate.getSeconds();
-        },
-        set(seconds) {
-          this.rightDate.setSeconds(seconds);
-        }
       },
 
       rightDate() {
@@ -396,6 +342,10 @@
               this.maxDate = new Date(target.getTime());
             }
           }
+          const l2r = type === 'min' ? 'left' : 'right';
+
+          this.$refs[l2r + 'timepicker'].value = target;
+          this[l2r + 'TimePickerVisible'] = false;
         }
       },
 
