@@ -111,7 +111,7 @@
         <a
           href="JavaScript:"
           class="el-picker-panel__link-btn"
-          @click="changeToToday">{{ $t('datepicker.now') }}</a>
+          @click="changeToNow">{{ $t('datepicker.now') }}</a>
         <button
           type="button"
           class="el-picker-panel__btn"
@@ -127,6 +127,7 @@
   export default {
     watch: {
       showTime(val) {
+        /* istanbul ignore if */
         if (!val) return;
         this.$nextTick(_ => {
           const inputElm = this.$refs.input;
@@ -156,6 +157,7 @@
 
       selectionMode(newVal) {
         if (newVal === 'month') {
+          /* istanbul ignore next */
           if (this.currentView !== 'year' || this.currentView !== 'month') {
             this.currentView = 'month';
           }
@@ -163,6 +165,7 @@
       },
 
       date(newVal) {
+        /* istanbul ignore next */
         if (!this.year) {
           this.year = newVal.getFullYear();
           this.month = newVal.getMonth();
@@ -187,13 +190,14 @@
         this.currentView = 'year';
       },
 
-      handleLabelClick() {
-        if (this.currentView === 'date') {
-          this.showMonthPicker();
-        } else if (this.currentView === 'month') {
-          this.showYearPicker();
-        }
-      },
+      // XXX: 没用到
+      // handleLabelClick() {
+      //   if (this.currentView === 'date') {
+      //     this.showMonthPicker();
+      //   } else if (this.currentView === 'month') {
+      //     this.showYearPicker();
+      //   }
+      // },
 
       prevMonth() {
         this.month--;
@@ -301,7 +305,7 @@
         this.resetDate();
       },
 
-      changeToToday() {
+      changeToNow() {
         this.date.setTime(+new Date());
         this.$emit('pick', new Date(this.date.getTime()));
         this.resetDate();
@@ -416,50 +420,6 @@
           return startYear + ' ' + yearTranslation + '-' + (startYear + 9) + ' ' + yearTranslation;
         }
         return this.year + ' ' + yearTranslation;
-      },
-
-      hours: {
-        get() {
-          return this.date.getHours();
-        },
-        set(hours) {
-          this.date.setHours(hours);
-        }
-      },
-
-      minutes: {
-        get() {
-          return this.date.getMinutes();
-        },
-        set(minutes) {
-          this.date.setMinutes(minutes);
-        }
-      },
-
-      seconds: {
-        get() {
-          return this.date.getSeconds();
-        },
-        set(seconds) {
-          this.date.setSeconds(seconds);
-        }
-      },
-
-      timeText() {
-        const hours = this.hours;
-        const minutes = this.minutes;
-        return (hours < 10 ? '0' + hours : hours) + ':' + (minutes < 10 ? '0' + minutes : minutes);
-      },
-
-      label() {
-        const year = this.year;
-        const month = this.month + 1;
-
-        if (this.currentView === 'date') {
-          return year + ' / ' + month;
-        }
-
-        return year;
       }
     }
   };

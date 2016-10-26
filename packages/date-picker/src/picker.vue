@@ -20,7 +20,7 @@
       v-model.lazy="visualValue" />
 
     <span
-      @click="togglePicker"
+      @click="pickerVisible = !pickerVisible"
       class="el-date-editor__trigger el-icon"
       :class="[triggerClass]"
       v-if="haveTrigger">
@@ -351,10 +351,6 @@ export default {
         }
         target.selectionStart = target.selectionEnd - 2;
       }
-    },
-
-    togglePicker() {
-      !this.pickerVisible ? this.showPicker() : this.hidePicker();
     },
 
     hidePicker() {
