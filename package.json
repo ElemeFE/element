@@ -17,7 +17,7 @@
     "deploy": "npm run build:file && cooking build -c build/cooking.demo.js -p && echo element.eleme.io>>examples/element-ui/CNAME && gh-pages -d examples/element-ui --remote eleme && del examples/element-ui",
     "pub": "sh build/release.sh",
     "pub:all": "npm run dist:all && lerna publish",
-    "build:utils": "babel src/utils --out-dir lib/utils",
+    "build:utils": "babel src --out-dir lib --ignore index.js",
     "clean": "rimraf lib && rimraf packages/*/lib && rimraf test/**/coverage",
     "lint": "eslint src/**/* test/**/* packages/**/*.{js,vue} build/**/* --quiet",
     "test:watch": "karma start test/unit/karma.conf.js",
