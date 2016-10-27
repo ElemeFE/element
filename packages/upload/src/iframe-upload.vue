@@ -17,7 +17,6 @@ export default {
       default: 'file'
     },
     withCredentials: Boolean,
-    multiple: Boolean,
     accept: String,
     onStart: Function,
     onProgress: Function,
@@ -46,8 +45,8 @@ export default {
 
   computed: {
     lastestFile() {
-      var uploadedFiles = this.$parent.uploadedFiles;
-      return uploadedFiles[uploadedFiles.length - 1];
+      var fileList = this.$parent.fileList;
+      return fileList[fileList.length - 1];
     },
     showCover() {
       var file = this.lastestFile;
@@ -59,32 +58,6 @@ export default {
   },
 
   methods: {
-    resetIframe() {
-      const iframeNode = this.getIframeNode();
-      let win = iframeNode.contentWindow;
-      let doc = win.document;
-
-      doc.open('text/html', 'replace');
-      doc.write(this.getIframeHTML(this.domain));
-      doc.close();
-    },
-    getIframeHTML(domain) {
-      let domainScript = '';
-      if (domain) {
-        domainScript = '<script' + `>document.domain="${domain}";<` + '/script>';
-      }
-      return `
-      <!DOCTYPE html>
-      <html>
-      <head>
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      ${domainScript}
-      </head>
-      <body>
-      </body>
-      </html>
-      `;
-    },
     isImage(str) {
       return str.indexOf('image') !== -1;
     },
@@ -94,16 +67,15 @@ export default {
       }
     },
     handleChange(ev) {
-      const files = ev.target.files;
-      this.file = files;
-
-      this.onStart(files);
+      const file = ev.target.files[0];
+      this.file = file;
+      this.onStart(file);
 
       const formNode = this.getFormNode();
       const dataSpan = this.getFormDataNode();
       let data = this.data;
       if (typeof data === 'function') {
-        data = data(files);
+        data = data(file);
       }
       const inputs = [];
       for (const key in data) {
@@ -116,25 +88,11 @@ export default {
       dataSpan.innerHTML = '';
       this.disabled = true;
     },
-    onLoad() {
-      let response;
-      const eventFile = this.file;
-      if (!eventFile) { return; }
-      try {
-        const doc = this.getIframeDocument();
-        const script = doc.getElementsByTagName('script')[0];
-        if (script && script.parentNode === doc.body) {
-          doc.body.removeChild(script);
-        }
-        response = doc.body.innerHTML;
-        this.onSuccess(response, eventFile);
-      } catch (err) {
-        console.log(err);
-        console.warn(false, 'cross domain error for Upload');
-        this.onError(err, eventFile);
-      }
-      this.resetIframe();
-      this.disabled = false;
+    getFormNode() {
+      return this.$refs.form;
+    },
+    getFormDataNode() {
+      return this.$refs.data;
     },
     onDrop(e) {
       e.preventDefault();
@@ -149,21 +107,24 @@ export default {
       e.preventDefault();
       this.onDrop = false;
     },
-    getIframeNode() {
-      return this.$refs.iframe;
-    },
-
-    getIframeDocument() {
-      return this.getIframeNode().contentDocument;
-    },
-
-    getFormNode() {
-      return this.$refs.form;
-    },
-
-    getFormDataNode() {
-      return this.$refs.data;
+    onload(e) {
+      this.disabled = false;
     }
+  },
+
+  mounted() {
+    window.addEventListener('message', (event) => {
+      var targetOrigin = new URL(this.action).origin;
+      if (event.origin !== targetOrigin) {
+        return false;
+      }
+      var response = event.data;
+      if (response.result === 'success') {
+        this.onSuccess(response, this.file);
+      } else if (response.result === 'failed') {
+        this.onSuccess(response, this.file);
+      }
+    }, false);
   },
 
   render(h) {
@@ -183,8 +144,8 @@ export default {
         nativeOn-dragleave={this.handleDragleave}
       >
         <iframe
+          on-load={this.onload}
           ref="iframe"
-          on-load={this.onLoad}
           name={frameName}
         >
         </iframe>
@@ -195,7 +156,6 @@ export default {
             ref="input"
             name="file"
             on-change={this.handleChange}
-            multiple={this.multiple}
             accept={this.accept}>
           </input>
           <input type="hidden" name="documentDomain" value={document.domain} />

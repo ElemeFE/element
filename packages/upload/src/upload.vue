@@ -63,8 +63,8 @@ export default {
 
   computed: {
     lastestFile() {
-      var uploadedFiles = this.$parent.uploadedFiles;
-      return uploadedFiles[uploadedFiles.length - 1];
+      var fileList = this.$parent.fileList;
+      return fileList[fileList.length - 1];
     },
     showCover() {
       var file = this.lastestFile;
@@ -86,6 +86,7 @@ export default {
         return;
       }
       this.uploadFiles(files);
+      this.$refs.input.value = null;
     },
     uploadFiles(files) {
       let postFiles = Array.prototype.slice.call(files);
