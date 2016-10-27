@@ -35,11 +35,12 @@
     }
   }
 
-  @b select-dropdown__nodata {
+  @b select-dropdown__empty {
     padding: 10px 0;
     margin: 0;
     text-align: center;
     color: #999;
+    font-size: 14px;
   }
 
   @b select-dropdown__list {

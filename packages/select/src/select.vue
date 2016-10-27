@@ -57,7 +57,7 @@
         <ul class="el-select-dropdown__list" v-show="options.length > 0 && filteredOptionsCount > 0 && !loading">
           <slot></slot>
         </ul>
-        <p class="el-select-dropdown__nodata" v-if="emptyText">{{ emptyText }}</p>
+        <p class="el-select-dropdown__empty" v-if="emptyText">{{ emptyText }}</p>
       </el-select-menu>
     </transition>
   </div>
@@ -116,7 +116,7 @@
             this.voidRemoteQuery = false;
             return false;
           }
-          if (this.filteredOptionsCount === 0) {
+          if (this.filterable && this.filteredOptionsCount === 0) {
             return this.$t('el.select.noMatch');
           }
           if (this.options.length === 0) {

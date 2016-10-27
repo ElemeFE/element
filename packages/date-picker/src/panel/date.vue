@@ -64,7 +64,7 @@
               @click="showMonthPicker"
               v-show="currentView === 'date'"
               class="el-date-picker__header-label"
-              :class="{ active: currentView === 'month' }">{{ month + 1 }} {{$t('el.datepicker.month')}}</span>
+              :class="{ active: currentView === 'month' }">{{$t(`el.datepicker.month${ month + 1 }`)}}</span>
             <button
               type="button"
               @click="nextYear"
