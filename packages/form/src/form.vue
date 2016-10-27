@@ -15,7 +15,6 @@
     props: {
       model: Object,
       rules: Object,
-      type: String,
       labelPosition: String,
       labelWidth: String,
       labelSuffix: {
