@@ -1,5 +1,7 @@
-var CONFIRM_TEXT = '确定';
-var CANCEL_TEXT = '取消';
+import { $t } from 'element-ui/src/locale';
+
+var CONFIRM_TEXT = $t('el.messagebox.confirm');
+var CANCEL_TEXT = $t('el.messagebox.cancel');
 
 var defaults = {
   title: '提示',

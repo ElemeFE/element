@@ -152,11 +152,11 @@
       },
 
       leftLabel() {
-        return this.date.getFullYear() + ' ' + this.$t('el.datepicker.year') + ' ' + (this.date.getMonth() + 1) + ' ' + this.$t('el.datepicker.month');
+        return this.date.getFullYear() + ' ' + this.$t('el.datepicker.year') + ' ' + this.$t(`el.datepicker.month${ this.date.getMonth() + 1 }`);
       },
 
       rightLabel() {
-        return this.rightDate.getFullYear() + ' ' + this.$t('el.datepicker.year') + ' ' + (this.rightDate.getMonth() + 1) + ' ' + this.$t('el.datepicker.month');
+        return this.rightDate.getFullYear() + ' ' + this.$t('el.datepicker.year') + ' ' + this.$t(`el.datepicker.month${ this.rightDate.getMonth() + 1 }`);
       },
 
       leftYear() {
