@@ -13,6 +13,7 @@
 @import "./loading.css";
 @import "./dialog.css";
 @import "./table.css";
+@import "./table-column.css";
 @import "./pagination.css";
 @import "./popover.css";
 @import "./tooltip.css";

@@ -91,6 +91,7 @@
   import throttle from 'throttle-debounce/throttle';
   import debounce from 'throttle-debounce/debounce';
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
+  import { $t } from 'element-ui/src/locale';
   import TableStore from './table-store';
   import TableLayout from './table-layout';
   import TableBody from './table-body';
@@ -130,7 +131,7 @@
 
       emptyText: {
         type: String,
-        default: '暂无数据'
+        default: $t('el.table.emptyText')
       }
     },
 

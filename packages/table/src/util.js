@@ -75,3 +75,21 @@ export const orderBy = function(array, sortKey, reverse) {
     return a === b ? 0 : a > b ? order : -order;
   });
 };
+
+export const getColumnById = function(table, columnId) {
+  let column = null;
+  table.columns.forEach(function(item) {
+    if (item.id === columnId) {
+      column = item;
+    }
+  });
+  return column;
+};
+
+export const getColumnByCell = function(table, cell) {
+  const matches = (cell.className || '').match(/el-table_[^\s]+/gm);
+  if (matches) {
+    return getColumnById(table, matches[0]);
+  }
+  return null;
+};

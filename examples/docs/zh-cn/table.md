@@ -9,28 +9,32 @@
           province: '上海',
           city: '普陀区',
           address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
+          zip: 200333,
+          tag: '家'
         }, {
           date: '2016-05-02',
           name: '王小虎',
           province: '上海',
           city: '普陀区',
           address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
+          zip: 200333,
+          tag: '公司'
         }, {
           date: '2016-05-04',
           name: '王小虎',
           province: '上海',
           city: '普陀区',
           address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
+          zip: 200333,
+          tag: '家'
         }, {
           date: '2016-05-01',
           name: '王小虎',
           province: '上海',
           city: '普陀区',
           address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
+          zip: 200333,
+          tag: '公司'
         }],
         tableData2: [{
           date: '2016-05-02',
@@ -117,6 +121,10 @@
 
       formatter(row, column) {
         return row.address;
+      },
+
+      filterTag(value, row) {
+        return row.tag === value;
       },
 
       tableRowClassName(row, index) {
@@ -810,6 +818,85 @@
 ```
 :::
 
+### 筛选
+
+对表格进行筛选，可快速查找到自己想看的数据。
+
+:::demo 在列中设置`filters``filter-method`属性即可开启该列的筛选，filters 是一个数组，`filter-method`是一个方法，它用于决定某些数据是否显示，会传入两个参数：`value`和`row`。
+```html
+<template>
+  <el-table
+    :data="tableData"
+    border
+    style="width: 100%">
+    <el-table-column
+      prop="date"
+      label="日期"
+      sortable
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="name"
+      label="姓名"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="address"
+      label="地址"
+      :formatter="formatter">
+    </el-table-column>
+    <el-table-column
+      prop="tag"
+      label="标签"
+      width="100"
+      :filters="[{ text: '家', value: '家' }, { text: '公司', value: '公司' }]"
+      :filter-method="filterTag"
+      inline-template>
+      <el-tag :type="row.tag === '家' ? 'primary' : 'success'" close-transition>{{row.tag}}</el-tag>
+    </el-table-column>
+  </el-table>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        tableData: [{
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄',
+          tag: '家'
+        }, {
+          date: '2016-05-04',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1517 弄',
+          tag: '公司'
+        }, {
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1519 弄',
+          tag: '家'
+        }, {
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1516 弄',
+          tag: '公司'
+        }]
+      }
+    },
+    methods: {
+      formatter(row, column) {
+        return row.address;
+      },
+      filterTag(value, row) {
+        return row.tag === value;
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Table Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -853,3 +940,7 @@
 | align | 对齐方式 | String | left, center, right | left |
 | selectable | 仅对 type=selection 的列有效，类型为 Function，Function 的返回值用来决定这一行的 CheckBox 是否可以勾选 | Function(row, index) | - | - |
 | reserve-selection | 仅对 type=selection 的列有效，类型为 Boolean，为 true 则代表会保留之前数据的选项，需要配合 Table 的 clearSelection 方法使用。 | Boolean | - | false |
+| filters | 数据过滤的选项，数组格式，数组中的元素需要有 text 和 value 属性。 | Array[{ text, value }] | — | — |
+| filter-multiple | 数据过滤的选项是否多选 | Boolean | — | true |
+| filter-method | 数据过滤使用的方法，如果是多选的筛选项，对每一条数据会执行多次，任意一次返回 true 就会显示。 | Function(value, row) | — | — |
+| filteredValue | 选中的数据过滤项，如果需要自定义表头过滤的渲染方式，可能会需要此属性。 | Array | — | — |

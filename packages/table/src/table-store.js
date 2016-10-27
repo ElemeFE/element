@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import debounce from 'throttle-debounce/debounce';
-import { orderBy } from './util';
+import { orderBy, getColumnById } from './util';
 
 const getRowIdentity = (row, rowKey) => {
   if (!row) throw new Error('row is required when get row identity');
@@ -24,6 +24,7 @@ const TableStore = function(table, initialState = {}) {
     fixedColumns: [],
     rightFixedColumns: [],
     _data: null,
+    filteredData: null,
     data: null,
     sortCondition: {
       column: null,
@@ -34,7 +35,8 @@ const TableStore = function(table, initialState = {}) {
     selection: [],
     reserveSelection: false,
     selectable: null,
-    hoverRow: null
+    hoverRow: null,
+    filters: {}
   };
 
   for (let prop in initialState) {
@@ -80,7 +82,38 @@ TableStore.prototype.mutations = {
   },
 
   changeSortCondition(states) {
-    states.data = orderBy((states._data || []), states.sortCondition.property, states.sortCondition.direction);
+    states.data = orderBy((states.filteredData || states._data || []), states.sortCondition.property, states.sortCondition.direction);
+
+    Vue.nextTick(() => this.table.updateScrollY());
+  },
+
+  filterChange(states, options) {
+    let { column, values } = options;
+    if (values && !Array.isArray(values)) {
+      values = [values];
+    }
+
+    const prop = column.property;
+    if (prop) {
+      states.filters[column.id] = values;
+    }
+
+    let data = states._data;
+    const filters = states.filters;
+
+    Object.keys(filters).forEach((columnId) => {
+      const values = filters[columnId];
+      if (!values || values.length === 0) return;
+      const column = getColumnById(this.states, columnId);
+      if (column && column.filterMethod) {
+        data = data.filter((row) => {
+          return values.some(value => column.filterMethod.call(null, value, row));
+        });
+      }
+    });
+
+    states.filteredData = data;
+    states.data = orderBy(data, states.sortCondition.property, states.sortCondition.direction);
 
     Vue.nextTick(() => this.table.updateScrollY());
   },

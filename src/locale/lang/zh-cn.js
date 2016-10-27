@@ -68,6 +68,12 @@ export default {
       delete: '删除',
       preview: '查看图片',
       continue: '继续上传'
+    },
+    table: {
+      emptyText: '暂无数据',
+      confirmFilter: '筛选',
+      resetFilter: '重置',
+      clearFilter: '全部'
     }
   }
 };

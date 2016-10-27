@@ -19,21 +19,16 @@ const defaults = {
     minWidth: 48,
     realWidth: 48,
     direction: ''
-  },
-  filter: {
-    headerTemplate: function(h) { return <span>filter header</span>; },
-    direction: ''
   }
 };
 
 const forced = {
   selection: {
     headerTemplate: function(h) {
-      return <div><el-checkbox
+      return <el-checkbox
         nativeOn-click={ this.toggleAllSelection }
         domProps-value={ this.isAllSelected }
-        on-input={ (value) => { this.$emit('allselectedchange', value); } } />
-      </div>;
+        on-input={ (value) => { this.$emit('allselectedchange', value); } } />;
     },
     template: function(h, { row, column, store, $index }) {
       return <el-checkbox
@@ -47,7 +42,7 @@ const forced = {
   index: {
     // headerTemplate: function(h) { return <div>#</div>; },
     headerTemplate: function(h, label) {
-      return <div>{ label || '#' }</div>;
+      return label || '#';
     },
     template: function(h, { $index }) {
       return <div>{ $index + 1 }</div>;
@@ -56,7 +51,7 @@ const forced = {
   },
   filter: {
     headerTemplate: function(h) {
-      return <div>#</div>;
+      return '#';
     },
     template: function(h, { row, column }) {
       return <el-tag type="primary" style="height: 16px; line-height: 16px; min-width: 40px; text-align: center">{ row[column.property] }</el-tag>;
@@ -118,7 +113,13 @@ export default {
     fixed: [Boolean, String],
     formatter: Function,
     selectable: Function,
-    reserveSelection: Boolean
+    reserveSelection: Boolean,
+    filterMethod: Function,
+    filters: Array,
+    filterMultiple: {
+      type: Boolean,
+      default: true
+    }
   },
 
   render() {},
@@ -205,7 +206,13 @@ export default {
       formatter: this.formatter,
       selectable: this.selectable,
       reserveSelection: this.reserveSelection,
-      fixed: this.fixed
+      fixed: this.fixed,
+      filterMethod: this.filterMethod,
+      filters: this.filters,
+      filterable: this.filters || this.filterMethod,
+      filterMultiple: this.filterMultiple,
+      filterOpened: false,
+      filteredValue: []
     });
 
     objectAssign(column, forced[type] || {});
