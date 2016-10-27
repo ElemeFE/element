@@ -15,7 +15,6 @@
     props: {
       model: Object,
       rules: Object,
-      type: String,
       labelPosition: String,
       labelWidth: String,
       labelSuffix: {
@@ -35,6 +34,7 @@
         this.fields[field.prop] = field;
         this.fieldLength++;
       });
+      /* istanbul ignore next */
       this.$on('el.form.removeField', (field) => {
         delete this.fields[field.prop];
         this.fieldLength--;
