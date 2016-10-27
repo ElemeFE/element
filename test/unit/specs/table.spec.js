@@ -138,8 +138,103 @@ describe('Table', () => {
         done();
       }, DELAY);
     });
+  });
 
-    // TODO: row-key
+  describe('filter', () => {
+    let vm;
+
+    beforeEach(done => {
+      vm = createVue({
+        template: `
+          <el-table ref="table" :data="testData">
+            <el-table-column prop="name" label="片名" />
+            <el-table-column prop="release" label="发行日期" />
+            <el-table-column
+              prop="director"
+              :filters="[
+                { text: 'John Lasseter', value: 'John Lasseter' },
+                { text: 'Peter Docter', value: 'Peter Docter' },
+                { text: 'Andrew Stanton', value: 'Andrew Stanton' }
+              ]"
+              :filter-method="filterMethod"
+              label="导演" />
+            <el-table-column prop="runtime" label="时长（分）" />
+          </el-table>
+        `,
+
+        created() {
+          this.testData = getTestData();
+        },
+
+        methods: {
+          filterMethod(value, row) {
+            return value === row.director;
+          }
+        }
+      }, true);
+
+      setTimeout(done, DELAY);
+    });
+
+    afterEach(() => destroyVM(vm));
+
+    it('render', () => {
+      expect(vm.$el.querySelector('.el-table__column-filter-trigger')).to.exist;
+    });
+
+    it('click dropdown', done => {
+      const btn = vm.$el.querySelector('.el-table__column-filter-trigger');
+      triggerEvent(btn, 'click', true, false);
+      setTimeout(_ => {
+        const filter = document.body.querySelector('.el-table-filter');
+        expect(filter).to.exist;
+        document.body.removeChild(filter);
+        done();
+      }, 100);
+    });
+
+    it('click filter', done => {
+      const btn = vm.$el.querySelector('.el-table__column-filter-trigger');
+
+      triggerEvent(btn, 'click', true, false);
+      setTimeout(_ => {
+        const filter = document.body.querySelector('.el-table-filter');
+
+        // John Lasseter
+        triggerEvent(filter.querySelector('.el-checkbox'), 'click', true, false);
+        // confrim button
+        setTimeout(_ => {
+          triggerEvent(filter.querySelector('.el-table-filter__bottom button'), 'click', true, false);
+          setTimeout(_ => {
+            expect(vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr')).to.length(3);
+            document.body.removeChild(filter);
+            done();
+          }, DELAY);
+        }, 100);
+      }, 100);
+    });
+
+    it('click reset', done => {
+      const btn = vm.$el.querySelector('.el-table__column-filter-trigger');
+
+      triggerEvent(btn, 'click', true, false);
+      setTimeout(_ => {
+        const filter = document.body.querySelector('.el-table-filter');
+
+        // John Lasseter
+        triggerEvent(filter.querySelector('.el-checkbox'), 'click', true, false);
+        setTimeout(_ => {
+          // reset button
+          triggerEvent(filter.querySelectorAll('.el-table-filter__bottom button')[1], 'click', true, false);
+          setTimeout(_ => {
+            expect(filter.querySelector('.el-table-filter__bottom button').classList.contains('is-disabled')).to.true;
+            document.body.removeChild(filter);
+            destroyVM(vm);
+            done();
+          }, DELAY);
+        }, 100);
+      }, 100);
+    });
   });
 
   describe('events', () => {
@@ -264,8 +359,6 @@ describe('Table', () => {
       }, DELAY);
     });
   });
-
-  describe('methods', () => {});
 
   describe('column attributes', () => {
     const createTable = function(props1, props2, props3, props4, opts, tableProps) {
@@ -452,39 +545,83 @@ describe('Table', () => {
       }, DELAY);
     });
 
-    // TODO
-    // it('reserve-selection', done => {
-    //   const vm = createVue({
-    //     template: `
-    //       <el-table :data="testData" @selection-change="change">
-    //         <el-table-column type="selection" reserve-selection />
-    //         <el-table-column prop="name" label="片名" />
-    //         <el-table-column prop="release" label="release" />
-    //         <el-table-column prop="director" label="director" />
-    //         <el-table-column prop="runtime" label="runtime" />
-    //       </el-table>
-    //     `,
+    it('reserve-selection', done => {
+      const getData = function(page = 0) {
+        let id = 0;
+        const rows = [];
+        const row = () => {
+          return {
+            id: ++id + page * 10,
+            date: new Date().getTime()
+          };
+        };
+        let count = 10;
 
-    //     created() {
-    //       this.testData = getTestData();
-    //     },
+        while (--count) {
+          rows.push(row());
+        }
+        return rows;
+      };
+      const vm = createVue({
+        template: `
+          <el-table ref="table" :row-key="rowKey" :data="testData" @selection-change="change">
+            <el-table-column type="selection" reserve-selection />
+            <el-table-column prop="id" label="id" />
+            <el-table-column prop="date" label="date" />
+          </el-table>
+        `,
 
-    //     data() {
-    //       return { selected: [] };
-    //     },
+        created() {
+          this.testData = getData();
+        },
 
-    //     methods: {
-    //       change(rows) {
-    //         this.selected = rows;
-    //       }
-    //     }
-    //   }, true);
+        data() {
+          return { selected: [], testData: [] };
+        },
 
-    //   setTimeout(_ => {
+        methods: {
+          rowKey(row) {
+            return row.id;
+          },
 
-    //     done();
-    //   }, DELAY);
-    // });
+          change(rows) {
+            this.selected = rows;
+          }
+        }
+      }, true);
+
+      setTimeout(_ => {
+        // click first
+        vm.$el.querySelectorAll('.el-checkbox')[1].click();
+
+        setTimeout(_ => {
+          expect(vm.$el.querySelectorAll('.el-checkbox__inner.is-checked')).to.length(1);
+          // go to second page
+          vm.testData = getData(1);
+          setTimeout(_ => {
+             // expect no checked
+            expect(vm.$el.querySelectorAll('.el-checkbox__inner.is-checked')).to.length(0);
+            // click first checkbox
+            vm.$el.querySelectorAll('.el-checkbox')[1].click();
+            vm.$el.querySelectorAll('.el-checkbox')[2].click();
+            setTimeout(_ => {
+              // back first page
+              vm.testData = getData();
+              setTimeout(_ => {
+                expect(vm.$el.querySelectorAll('.el-checkbox__inner.is-checked')).to.length(1);
+                // clear
+                vm.$refs.table.clearSelection();
+                setTimeout(_ => {
+                  expect(vm.$el.querySelectorAll('.el-checkbox__inner.is-checked')).to.length(0);
+                  destroyVM(vm);
+                  done();
+                }, DELAY);
+              }, DELAY);
+            }, DELAY);
+          }, DELAY);
+        }, DELAY);
+      }, DELAY);
+    });
 
     describe('type', () => {
       const createTable = function(type) {
@@ -580,6 +717,7 @@ describe('Table', () => {
       it('render', done => {
         setTimeout(_ => {
           expect(vm.$el.querySelectorAll('.caret-wrapper')).to.length(1);
+          destroyVM(vm);
           done();
         }, DELAY);
       });
@@ -613,5 +751,35 @@ describe('Table', () => {
         }, DELAY);
       });
     });
+  });
+
+  it('hover', done => {
+    const vm = createVue({
+      template: `
+        <el-table :data="testData">
+          <el-table-column prop="name" label="片名" />
+          <el-table-column prop="release" label="发行日期" />
+          <el-table-column prop="director" label="导演" />
+          <el-table-column prop="runtime" label="时长（分）" />
+        </el-table>
+      `,
+
+      created() {
+        this.testData = getTestData();
+      }
+    }, true);
+    setTimeout(_ => {
+      const tr = vm.$el.querySelector('.el-table__body-wrapper tbody tr');
+      triggerEvent(tr, 'mouseenter', true, false);
+      setTimeout(_ => {
+        expect(tr.classList.contains('hover-row')).to.true;
+        triggerEvent(tr, 'mouseleave', true, false);
+        setTimeout(_ => {
+          expect(tr.classList.contains('hover-row')).to.false;
+          destroyVM(vm);
+          done();
+        }, DELAY);
+      }, DELAY);
+    }, DELAY);
   });
 });

@@ -48,16 +48,16 @@ const forced = {
       return <div>{ $index + 1 }</div>;
     },
     sortable: false
-  },
-  filter: {
-    headerTemplate: function(h) {
-      return '#';
-    },
-    template: function(h, { row, column }) {
-      return <el-tag type="primary" style="height: 16px; line-height: 16px; min-width: 40px; text-align: center">{ row[column.property] }</el-tag>;
-    },
-    resizable: false
   }
+  // filter: {
+  //   headerTemplate: function(h) {
+  //     return '#';
+  //   },
+  //   template: function(h, { row, column }) {
+  //     return <el-tag type="primary" style="height: 16px; line-height: 16px; min-width: 40px; text-align: center">{ row[column.property] }</el-tag>;
+  //   },
+  //   resizable: false
+  // }
 };
 
 const getDefaultColumn = function(type, options) {
