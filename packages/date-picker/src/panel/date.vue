@@ -23,7 +23,7 @@
          <div class="el-date-picker__time-header" v-if="showTime">
             <span class="el-date-picker__editor-wrap">
               <input
-                :placehoder="$t('datepicker.selectDate')"
+                :placehoder="$t('el.datepicker.selectDate')"
                 type="text"
                 v-model.lazy="visibleDate"
                 class="el-date-picker__editor">
@@ -33,7 +33,7 @@
                 ref="input"
                 @focus="timePickerVisible = !timePickerVisible"
                 v-model.lazy="visibleTime"
-                :placehoder="$t('datepicker.selectTime')"
+                :placehoder="$t('el.datepicker.selectTime')"
                 type="text"
                 class="el-date-picker__editor">
               <time-picker
@@ -64,7 +64,7 @@
               @click="showMonthPicker"
               v-show="currentView === 'date'"
               class="el-date-picker__header-label"
-              :class="{ active: currentView === 'month' }">{{ month + 1 }} {{$t('datepicker.month')}}</span>
+              :class="{ active: currentView === 'month' }">{{ month + 1 }} {{$t('el.datepicker.month')}}</span>
             <button
               type="button"
               @click="nextYear"
@@ -111,20 +111,23 @@
         <a
           href="JavaScript:"
           class="el-picker-panel__link-btn"
-          @click="changeToNow">{{ $t('datepicker.now') }}</a>
+          @click="changeToNow">{{ $t('el.datepicker.now') }}</a>
         <button
           type="button"
           class="el-picker-panel__btn"
-          @click="confirm">{{ $t('datepicker.confirm') }}</button>
+          @click="confirm">{{ $t('el.datepicker.confirm') }}</button>
       </div>
     </div>
   </transition>
 </template>
 
 <script type="text/babel">
-  import { $t, formatDate, parseDate } from '../util';
+  import { formatDate, parseDate } from '../util';
+  import Locale from 'element-ui/src/mixins/locale';
 
   export default {
+    mixins: [Locale],
+
     watch: {
       showTime(val) {
         /* istanbul ignore if */
@@ -174,10 +177,6 @@
     },
 
     methods: {
-      $t(...args) {
-        return $t.apply(this, args);
-      },
-
       resetDate() {
         this.date = new Date(this.date);
       },
@@ -414,7 +413,7 @@
       yearLabel() {
         const year = this.year;
         if (!year) return '';
-        const yearTranslation = this.$t('datepicker.year');
+        const yearTranslation = this.$t('el.datepicker.year');
         if (this.currentView === 'year') {
           const startYear = Math.floor(year / 10) * 10;
           return startYear + ' ' + yearTranslation + '-' + (startYear + 9) + ' ' + yearTranslation;

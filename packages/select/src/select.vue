@@ -64,7 +64,8 @@
 </template>
 
 <script type="text/babel">
-  import emitter from 'element-ui/src/mixins/emitter';
+  import Emitter from 'element-ui/src/mixins/emitter';
+  import Locale from 'element-ui/src/mixins/locale';
   import ElInput from 'element-ui/packages/input';
   import ElSelectMenu from './select-dropdown.vue';
   import ElTag from 'element-ui/packages/tag';
@@ -72,9 +73,10 @@
   import Clickoutside from 'element-ui/src/utils/clickoutside';
   import { addClass, removeClass, hasClass } from 'wind-dom/src/class';
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
+  import { $t } from 'element-ui/src/locale';
 
   export default {
-    mixins: [emitter],
+    mixins: [Emitter, Locale],
 
     name: 'ElSelect',
 
@@ -108,17 +110,17 @@
 
       emptyText() {
         if (this.loading) {
-          return '加载中';
+          return this.$t('el.select.loading');
         } else {
           if (this.voidRemoteQuery) {
             this.voidRemoteQuery = false;
             return false;
           }
           if (this.filteredOptionsCount === 0) {
-            return '无匹配数据';
+            return this.$t('el.select.noMatch');
           }
           if (this.options.length === 0) {
-            return '无数据';
+            return this.$t('el.select.noData');
           }
         }
         return null;
@@ -147,7 +149,7 @@
       multiple: Boolean,
       placeholder: {
         type: String,
-        default: '请选择'
+        default: $t('el.select.placeholder')
       }
     },
 

@@ -8,8 +8,7 @@
     @click="handleClick"
     @drop.prevent="onDrop"
     @dragover.prevent="dragOver = true"
-    @dragleave.prevent="dragOver = false"
-  >
+    @dragleave.prevent="dragOver = false">
     <slot v-if="!showCover"></slot>
     <cover :image="lastestFile" :on-preview="onPreview" :on-remove="onRemove" v-else></cover>
     <input class="el-upload__input" type="file" ref="input" @change="handleChange" :multiple="multiple" :accept="accept">

@@ -53,10 +53,12 @@ import Card from '../packages/card/index.js';
 import Rate from '../packages/rate/index.js';
 import Steps from '../packages/steps/index.js';
 import Step from '../packages/step/index.js';
+import locale from 'element-ui/src/locale';
 
-const install = function(Vue) {
+const install = function(Vue, opts = {}) {
   /* istanbul ignore if */
   if (install.installed) return;
+  locale.use(opts.locale);
 
   Vue.component(Pagination.name, Pagination);
   Vue.component(Dialog.name, Dialog);

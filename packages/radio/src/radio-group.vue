@@ -1,12 +1,12 @@
 <script>
-  import emitter from 'element-ui/src/mixins/emitter';
+  import Emitter from 'element-ui/src/mixins/emitter';
 
   export default {
     name: 'ElRadioGroup',
 
     componentName: 'radio-group',
 
-    mixins: [emitter],
+    mixins: [Emitter],
 
     props: {
       value: [String, Number],

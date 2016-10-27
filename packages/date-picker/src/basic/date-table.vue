@@ -8,14 +8,14 @@
     :class="{ 'is-week-mode': selectionMode === 'week' }">
     <tbody>
     <tr>
-      <th v-if="showWeekNumber">{{ $t('datepicker.week') }}</th>
-      <th>{{ $t('datepicker.weeks.sun') }}</th>
-      <th>{{ $t('datepicker.weeks.mon') }}</th>
-      <th>{{ $t('datepicker.weeks.tue') }}</th>
-      <th>{{ $t('datepicker.weeks.wed') }}</th>
-      <th>{{ $t('datepicker.weeks.thu') }}</th>
-      <th>{{ $t('datepicker.weeks.fri') }}</th>
-      <th>{{ $t('datepicker.weeks.sat') }}</th>
+      <th v-if="showWeekNumber">{{ $t('el.datepicker.week') }}</th>
+      <th>{{ $t('el.datepicker.weeks.sun') }}</th>
+      <th>{{ $t('el.datepicker.weeks.mon') }}</th>
+      <th>{{ $t('el.datepicker.weeks.tue') }}</th>
+      <th>{{ $t('el.datepicker.weeks.wed') }}</th>
+      <th>{{ $t('el.datepicker.weeks.thu') }}</th>
+      <th>{{ $t('el.datepicker.weeks.fri') }}</th>
+      <th>{{ $t('el.datepicker.weeks.sat') }}</th>
     </tr>
     <tr
       class="el-date-table__row"
@@ -24,16 +24,16 @@
       <td
         v-for="cell in row"
         :class="getCellClasses(cell)"
-        v-text="cell.type === 'today' ? $t('datepicker.today') : cell.text"></td>
+        v-text="cell.type === 'today' ? $t('el.datepicker.today') : cell.text"></td>
     </tr>
     </tbody>
   </table>
 </template>
 
 <script>
-  import { $t, getFirstDayOfMonth, getDayCountOfMonth, getWeekNumber, getStartDateOfMonth, DAY_DURATION } from '../util';
+  import { getFirstDayOfMonth, getDayCountOfMonth, getWeekNumber, getStartDateOfMonth, DAY_DURATION } from '../util';
   import { hasClass } from 'wind-dom/src/class';
-  import Vue from 'vue';
+  import Locale from 'element-ui/src/mixins/locale';
 
   const clearHours = function(time) {
     const cloneDate = new Date(time);
@@ -42,6 +42,8 @@
   };
 
   export default {
+    mixins: [Locale],
+
     props: {
       date: {},
 
@@ -157,7 +159,7 @@
 
             cell.disabled = typeof disabledDate === 'function' && disabledDate(new Date(time));
 
-            Vue.set(row, this.showWeekNumber ? j + 1 : j, cell);
+            this.$set(row, this.showWeekNumber ? j + 1 : j, cell);
           }
 
           if (this.selectionMode === 'week') {
@@ -214,10 +216,6 @@
     },
 
     methods: {
-      $t(...args) {
-        return $t.apply(this, args);
-      },
-
       getCellClasses(cell) {
         const selectionMode = this.selectionMode;
         const monthDate = this.monthDate;

@@ -12,10 +12,10 @@
 </template>
 
 <script type="text/babel">
-  import emitter from 'element-ui/src/mixins/emitter';
+  import Emitter from 'element-ui/src/mixins/emitter';
 
   export default {
-    mixins: [emitter],
+    mixins: [Emitter],
 
     name: 'el-option',
 

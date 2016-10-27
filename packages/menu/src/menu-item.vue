@@ -1,11 +1,11 @@
 <script>
-  import menuMixin from './menu-mixin';
+  import Menu from './menu-mixin';
   module.exports = {
     name: 'el-menu-item',
 
     componentName: 'menu-item',
 
-    mixins: [menuMixin],
+    mixins: [Menu],
 
     props: {
       index: {

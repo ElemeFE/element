@@ -6,7 +6,7 @@
       class="el-time-range-picker el-picker-panel">
       <div class="el-time-range-picker__content">
         <div class="el-time-range-picker__cell">
-          <div class="el-time-range-picker__header">{{ $t('datepicker.startTime') }}</div>
+          <div class="el-time-range-picker__header">{{ $t('el.datepicker.startTime') }}</div>
           <div class="el-time-range-picker__body el-time-panel__content">
             <time-spinner
               ref="minSpinner"
@@ -20,7 +20,7 @@
           </div>
         </div>
         <div class="el-time-range-picker__cell">
-          <div class="el-time-range-picker__header">{{ $t('datepicker.endTime') }}</div>
+          <div class="el-time-range-picker__header">{{ $t('el.datepicker.endTime') }}</div>
           <div class="el-time-range-picker__body el-time-panel__content">
             <time-spinner
               ref="maxSpinner"
@@ -38,12 +38,12 @@
         <button
           type="button"
           class="el-time-panel__btn cancel"
-          @click="handleCancel()">{{ $t('datepicker.cancel') }}</button>
+          @click="handleCancel()">{{ $t('el.datepicker.cancel') }}</button>
         <button
           type="button"
           class="el-time-panel__btn confirm"
           @click="handleConfirm()"
-          :disabled="btnDisabled">{{ $t('datepicker.confirm') }}</button>
+          :disabled="btnDisabled">{{ $t('el.datepicker.confirm') }}</button>
       </div>
     </div>
   </transition>
@@ -51,7 +51,7 @@
 
 <script type="text/babel">
   import { parseDate, limitRange } from '../util';
-  import { $t } from '../util';
+  import Locale from 'element-ui/src/mixins/locale';
 
   const MIN_TIME = parseDate('00:00:00', 'HH:mm:ss');
   const MAX_TIME = parseDate('23:59:59', 'HH:mm:ss');
@@ -73,6 +73,8 @@
   };
 
   export default {
+    mixins: [Locale],
+
     components: {
       TimeSpinner: require('../basic/time-spinner')
     },
@@ -125,10 +127,6 @@
     },
 
     methods: {
-      $t(...args) {
-        return $t.apply(this, args);
-      },
-
       handleCancel() {
         this.$emit('pick');
       },

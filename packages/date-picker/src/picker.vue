@@ -33,9 +33,9 @@ import Vue from 'vue';
 import Clickoutside from 'element-ui/src/utils/clickoutside';
 import { formatDate, parseDate, getWeekNumber } from './util';
 import Popper from 'element-ui/src/utils/vue-popper';
-import emitter from 'element-ui/src/mixins/emitter';
+import Emitter from 'element-ui/src/mixins/emitter';
 
-const newPopper = {
+const NewPopper = {
   props: {
     appendToBody: Popper.props.appendToBody,
     offset: Popper.props.offset,
@@ -193,7 +193,7 @@ const PLACEMENT_MAP = {
 };
 
 export default {
-  mixins: [emitter, newPopper],
+  mixins: [Emitter, NewPopper],
 
   props: {
     format: String,

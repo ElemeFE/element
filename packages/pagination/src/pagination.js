@@ -1,8 +1,8 @@
-import Vue from 'vue';
 import Pager from './pager.vue';
 import ElSelect from 'element-ui/packages/select';
 import ElOption from 'element-ui/packages/option';
 import Migrating from 'element-ui/src/mixins/migrating';
+import { $t } from 'element-ui/src/locale';
 
 export default {
   name: 'ElPagination',
@@ -138,7 +138,7 @@ export default {
                 this.$parent.pageSizes.map(item =>
                     <el-option
                       value={ item }
-                      label={ item + ' 条/页' }>
+                      label={ item + ' ' + $t('el.pagination.pagesize') }>
                     </el-option>
                   )
               }
@@ -339,7 +339,7 @@ export default {
       }
 
       if (newVal !== undefined) {
-        Vue.nextTick(() => {
+        this.$nextTick(() => {
           this.internalCurrentPage = newVal;
         });
       }
