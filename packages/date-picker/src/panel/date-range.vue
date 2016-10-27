@@ -22,7 +22,7 @@
             <span class="el-date-range-picker__editors-wrap">
               <span class="el-date-range-picker__time-picker-wrap">
                 <input
-                  placeholder="开始日期"
+                  :placeholder="$t('el.datepicker.startDate')"
                   class="el-date-range-picker__editor"
                   :value="leftVisibleDate"
                   @input="handleDateInput($event, 'min')"
@@ -30,7 +30,7 @@
               </span>
               <span class="el-date-range-picker__time-picker-wrap">
                 <input
-                  placeholder="开始时间"
+                  :placeholder="$t('el.datepicker.startTime')"
                   class="el-date-range-picker__editor"
                   :value="leftVisibleTime"
                   @focus="leftTimePickerVisible = !leftTimePickerVisible"
@@ -49,7 +49,7 @@
               <span class="el-date-range-picker__time-picker-wrap">
                 <input
                   ref="leftInput"
-                  placeholder="结束日期"
+                  :placeholder="$t('el.datepicker.endDate')"
                   class="el-date-range-picker__editor"
                   :value="rightVisibleDate"
                   :readonly="!minDate"
@@ -59,7 +59,7 @@
               <span class="el-date-range-picker__time-picker-wrap">
                 <input
                   ref="rightInput"
-                  placeholder="结束时间"
+                  :placeholder="$t('el.datepicker.endTime')"
                   class="el-date-range-picker__editor"
                   :value="rightVisibleTime"
                   @focus="minDate && (rightTimePickerVisible = !rightTimePickerVisible)"
@@ -128,32 +128,35 @@
       <div class="el-picker-panel__footer" v-if="showTime">
         <!-- <a
           class="el-picker-panel__link-btn"
-          @click="changeToToday">{{ $t('datepicker.now') }}</a> -->
+          @click="changeToToday">{{ $t('el.datepicker.now') }}</a> -->
         <button
           type="button"
           class="el-picker-panel__btn"
           @click="handleConfirm"
-          :disabled="btnDisabled">{{ $t('datepicker.confirm') }}</button>
+          :disabled="btnDisabled">{{ $t('el.datepicker.confirm') }}</button>
       </div>
     </div>
   </transition>
 </template>
 
 <script type="text/babel">
-  import { nextMonth, prevMonth, toDate, $t, formatDate, parseDate } from '../util';
+  import { nextMonth, prevMonth, toDate, formatDate, parseDate } from '../util';
+  import Locale from 'element-ui/src/mixins/locale';
 
   export default {
+    mixins: [Locale],
+
     computed: {
       btnDisabled() {
         return !(this.minDate && this.maxDate && !this.selecting);
       },
 
       leftLabel() {
-        return this.date.getFullYear() + ' ' + this.$t('datepicker.year') + ' ' + (this.date.getMonth() + 1) + ' ' + this.$t('datepicker.month');
+        return this.date.getFullYear() + ' ' + this.$t('el.datepicker.year') + ' ' + (this.date.getMonth() + 1) + ' ' + this.$t('el.datepicker.month');
       },
 
       rightLabel() {
-        return this.rightDate.getFullYear() + ' ' + this.$t('datepicker.year') + ' ' + (this.rightDate.getMonth() + 1) + ' ' + this.$t('datepicker.month');
+        return this.rightDate.getFullYear() + ' ' + this.$t('el.datepicker.year') + ' ' + (this.rightDate.getMonth() + 1) + ' ' + this.$t('el.datepicker.month');
       },
 
       leftYear() {
@@ -270,10 +273,6 @@
     },
 
     methods: {
-      $t(...args) {
-        return $t.apply(this, args);
-      },
-
       handleDateInput(event, type) {
         const value = event.target.value;
         const parsedValue = parseDate(value, 'yyyy-MM-dd');

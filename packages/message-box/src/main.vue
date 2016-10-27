@@ -24,8 +24,12 @@
 </template>
 
 <script type="text/babel">
-  let CONFIRM_TEXT = '确定';
-  let CANCEL_TEXT = '取消';
+  import Popup from 'vue-popup';
+  import ElInput from 'element-ui/packages/input';
+  import ElButton from 'element-ui/packages/button';
+  import { addClass, removeClass } from 'wind-dom/src/class';
+  import { $t } from 'element-ui/src/locale';
+
   let typeMap = {
     success: 'circle-check',
     info: 'information',
@@ -33,13 +37,8 @@
     error: 'circle-cross'
   };
 
-  import Popup from 'vue-popup';
-  import ElInput from 'element-ui/packages/input';
-  import ElButton from 'element-ui/packages/button';
-  import { addClass, removeClass } from 'wind-dom/src/class';
-
   export default {
-    mixins: [ Popup ],
+    mixins: [Popup],
 
     props: {
       modal: {
@@ -115,7 +114,7 @@
         if (this.$type === 'prompt') {
           var inputPattern = this.inputPattern;
           if (inputPattern && !inputPattern.test(this.inputValue || '')) {
-            this.editorErrorMessage = this.inputErrorMessage || '输入的数据不合法!';
+            this.editorErrorMessage = this.inputErrorMessage || $t('el.messagebox.error');
             addClass(this.$refs.input.$el.querySelector('input'), 'invalid');
             return false;
           }
@@ -123,7 +122,7 @@
           if (typeof inputValidator === 'function') {
             var validateResult = inputValidator(this.inputValue);
             if (validateResult === false) {
-              this.editorErrorMessage = this.inputErrorMessage || '输入的数据不合法!';
+              this.editorErrorMessage = this.inputErrorMessage || $t('el.messagebox.error');
               addClass(this.$refs.input.$el.querySelector('input'), 'invalid');
               return false;
             }
@@ -174,8 +173,8 @@
         inputErrorMessage: '',
         showConfirmButton: true,
         showCancelButton: false,
-        confirmButtonText: CONFIRM_TEXT,
-        cancelButtonText: CANCEL_TEXT,
+        confirmButtonText: $t('el.messagebox.confirm'),
+        cancelButtonText: $t('el.messagebox.cancel'),
         confirmButtonClass: '',
         confirmButtonDisabled: false,
         cancelButtonClass: '',

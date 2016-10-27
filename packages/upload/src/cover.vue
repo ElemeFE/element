@@ -19,9 +19,9 @@
       <transition name="fade-in">
         <div v-show="mouseover" class="el-dragger__cover__interact">
           <div class="el-draggeer__cover__btns">
-            <span class="btn" @click="$parent.handleClick()"><i class="el-icon-upload2"></i><span>继续上传</span></span>
-            <span class="btn" @click="onPreview(image)"><i class="el-icon-view"></i><span>查看图片</span></span>
-            <span class="btn" @click="onRemove(image)"><i class="el-icon-delete2"></i><span>删除</span></span>
+            <span class="btn" @click="$parent.handleClick()"><i class="el-icon-upload2"></i><span>{{ $t('el.upload.continue') }}</span></span>
+            <span class="btn" @click="onPreview(image)"><i class="el-icon-view"></i><span>{{ $t('el.upload.preview') }}</span></span>
+            <span class="btn" @click="onRemove(image)"><i class="el-icon-delete2"></i><span>{{ $t('el.upload.delete') }}</span></span>
           </div>
         </div>
       </transition>
@@ -32,7 +32,11 @@
   </div>
 </template>
 <script>
+  import Locale from 'element-ui/src/mixins/locale';
+
   export default {
+    mixins: [Locale],
+
     props: {
       image: {},
       onPreview: {

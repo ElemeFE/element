@@ -27,7 +27,7 @@
   export default {
     name: 'el-dialog',
 
-    mixins: [ Popup ],
+    mixins: [Popup],
 
     props: {
       title: {

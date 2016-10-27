@@ -19,11 +19,11 @@
         <button
           type="button"
           class="el-time-panel__btn cancel"
-          @click="handleCancel">{{ $t('datepicker.cancel') }}</button>
+          @click="handleCancel">{{ $t('el.datepicker.cancel') }}</button>
         <button
           type="button"
           class="el-time-panel__btn confirm"
-          @click="handleConfirm()">{{ $t('datepicker.confirm') }}</button>
+          @click="handleConfirm()">{{ $t('el.datepicker.confirm') }}</button>
       </div>
     </div>
   </transition>
@@ -31,9 +31,11 @@
 
 <script type="text/babel">
   import { limitRange } from '../util';
-  import { $t } from '../util';
+  import Locale from 'element-ui/src/mixins/locale';
 
   export default {
+    mixins: [Locale],
+
     components: {
       TimeSpinner: require('../basic/time-spinner')
     },
@@ -98,10 +100,6 @@
     },
 
     methods: {
-      $t(...args) {
-        return $t.apply(this, args);
-      },
-
       handleCancel() {
         this.$emit('pick', null);
       },

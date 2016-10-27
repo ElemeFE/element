@@ -157,22 +157,3 @@ export const limitRange = function(date, ranges) {
 
   return date < minDate ? minDate : maxDate;
 };
-
-import i18n from './i18n';
-
-export const $t = function(path, options) {
-  const vuei18n = Object.getPrototypeOf(this).$t;
-  if (typeof vuei18n === 'function') {
-    return vuei18n.apply(this, [path, options]);
-  }
-  const array = path.split('.');
-  let current = i18n;
-  for (var i = 0, j = array.length; i < j; i++) {
-    var property = array[i];
-    var value = current[property];
-    if (i === j - 1) return value;
-    if (!value) return '';
-    current = value;
-  }
-  return '';
-};
