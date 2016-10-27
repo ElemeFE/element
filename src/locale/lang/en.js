@@ -68,6 +68,12 @@ export default {
       delete: 'Delete',
       preview: 'Preview',
       continue: 'Continue'
+    },
+    table: {
+      emptyText: 'No Data',
+      confirmFilter: 'Confirm',
+      resetFilter: 'Reset',
+      clearFilter: 'All'
     }
   }
 };

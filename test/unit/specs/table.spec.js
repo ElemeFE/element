@@ -54,7 +54,7 @@ describe('Table', () => {
     });
 
     it('row data', () => {
-      const cells = toArray(vm.$el.querySelectorAll('.cell'))
+      const cells = toArray(vm.$el.querySelectorAll('td .cell'))
         .map(node => node.textContent);
 
       expect(cells).to.eql(testDataArr);
@@ -591,7 +591,7 @@ describe('Table', () => {
       it('ascending', done => {
         const elm = vm.$el.querySelector('.caret-wrapper');
 
-        elm.parentNode.click();
+        elm.click();
         setTimeout(_ => {
           const lastCells = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr td:last-child');
           expect(toArray(lastCells).map(node => node.textContent))
@@ -603,7 +603,7 @@ describe('Table', () => {
       it('descending', done => {
         const elm = vm.$el.querySelector('.caret-wrapper');
 
-        elm.parentNode.click();
+        elm.click();
         setTimeout(_ => {
           const lastCells = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr td:last-child');
           expect(toArray(lastCells).map(node => node.textContent))

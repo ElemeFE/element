@@ -14,6 +14,7 @@
 - 修复 Switch 的 width 属性无效的问题
 - Table 增加 rowClassName 属性
 - TableColumn 增加 fixed 属性，可选值：true, false, left, right
+- TableColumn 增加属性：filters、filterMultiple、filterMethod、filteredValue
 - TableColumn[type="selection"] 增加 selectable 属性
 - 修复 Input textarea 在动态赋值时 autosize 没有触发的问题
 - 修复 Input Number min max 属性设置后点击加减出现的崩溃的bug

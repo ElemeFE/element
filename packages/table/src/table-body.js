@@ -1,22 +1,4 @@
-import { getValueByPath, getCell } from './util';
-
-const getColumnById = function(table, columnId) {
-  let column = null;
-  table.columns.forEach(function(item) {
-    if (item.id === columnId) {
-      column = item;
-    }
-  });
-  return column;
-};
-
-const getColumnByCell = function(table, cell) {
-  const matches = (cell.className || '').match(/el-table_[^\s]+/gm);
-  if (matches) {
-    return getColumnById(table, matches[0]);
-  }
-  return null;
-};
+import { getValueByPath, getCell, getColumnById, getColumnByCell } from './util';
 
 export default {
   props: {
