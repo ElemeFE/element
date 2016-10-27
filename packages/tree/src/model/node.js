@@ -138,18 +138,15 @@ export default class Node {
   }
 
   removeChildByData(data) {
-    let nodeIndex = -1;
     let targetNode = null;
-    this.childNodes.forEach((node, index) => {
+    this.childNodes.forEach(node => {
       if (node.data === data) {
-        nodeIndex = index;
         targetNode = node;
       }
     });
 
-    if (nodeIndex > -1) {
-      targetNode.parent = null;
-      this.childNodes.splice(nodeIndex, 1);
+    if (targetNode) {
+      this.removeChild(targetNode);
     }
   }
 
