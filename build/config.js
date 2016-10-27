@@ -10,10 +10,10 @@ var externals = {};
 Object.keys(Components).forEach(function(key) {
   externals[`element-ui/packages/${key}`] = `element-ui/lib/${key}`;
 });
-
 Object.keys(dependencies).forEach(function(key) {
   externals[key] = key;
 });
+externals['element-ui/src/locale'] = 'element-ui/lib/locale';
 
 utilsList.forEach(function(file) {
   file = path.basename(file, '.js');
