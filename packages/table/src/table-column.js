@@ -6,19 +6,19 @@ let columnIdSeed = 1;
 
 const defaults = {
   default: {
-    direction: ''
+    order: ''
   },
   selection: {
     width: 48,
     minWidth: 48,
     realWidth: 48,
-    direction: ''
+    order: ''
   },
   index: {
     width: 48,
     minWidth: 48,
     realWidth: 48,
-    direction: ''
+    order: ''
   }
 };
 
@@ -48,15 +48,6 @@ const forced = {
       return <div>{ $index + 1 }</div>;
     },
     sortable: false
-  },
-  filter: {
-    headerTemplate: function(h) {
-      return '#';
-    },
-    template: function(h, { row, column }) {
-      return <el-tag type="primary" style="height: 16px; line-height: 16px; min-width: 40px; text-align: center">{ row[column.property] }</el-tag>;
-    },
-    resizable: false
   }
 };
 
@@ -98,9 +89,10 @@ export default {
     minWidth: {},
     template: String,
     sortable: {
-      type: Boolean,
+      type: [Boolean, String],
       default: false
     },
+    sortMethod: Function,
     resizable: {
       type: Boolean,
       default: true
@@ -201,6 +193,7 @@ export default {
       isColumnGroup,
       align: this.align ? 'is-' + this.align : null,
       sortable: this.sortable,
+      sortMethod: this.sortMethod,
       resizable: this.resizable,
       showTooltipWhenOverflow: this.showTooltipWhenOverflow,
       formatter: this.formatter,

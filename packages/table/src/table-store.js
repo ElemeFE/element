@@ -11,6 +11,14 @@ const getRowIdentity = (row, rowKey) => {
   }
 };
 
+const sortData = (data, states) => {
+  const sortingColumn = states.sortingColumn;
+  if (!sortingColumn || typeof sortingColumn.sortable === 'string') {
+    return data;
+  }
+  return orderBy(data, states.sortProp, states.sortOrder, sortingColumn.sortMethod);
+};
+
 const TableStore = function(table, initialState = {}) {
   if (!table) {
     throw new Error('Table is required.');
@@ -26,11 +34,9 @@ const TableStore = function(table, initialState = {}) {
     _data: null,
     filteredData: null,
     data: null,
-    sortCondition: {
-      column: null,
-      property: null,
-      direction: null
-    },
+    sortingColumn: null,
+    sortProp: null,
+    sortOrder: null,
     isAllSelected: false,
     selection: [],
     reserveSelection: false,
@@ -52,7 +58,7 @@ TableStore.prototype.mutations = {
     if (data && data[0] && typeof data[0].$selected === 'undefined') {
       data.forEach((item) => Vue.set(item, '$selected', false));
     }
-    states.data = orderBy((data || []), states.sortCondition.property, states.sortCondition.direction);
+    states.data = sortData((data || []), states);
 
     if (!states.reserveSelection) {
       states.isAllSelected = false;
@@ -82,7 +88,13 @@ TableStore.prototype.mutations = {
   },
 
   changeSortCondition(states) {
-    states.data = orderBy((states.filteredData || states._data || []), states.sortCondition.property, states.sortCondition.direction);
+    states.data = sortData((states.filteredData || states._data || []), states);
+
+    this.table.$emit('sort-change', {
+      column: this.states.sortingColumn,
+      prop: this.states.sortProp,
+      order: this.states.sortOrder
+    });
 
     Vue.nextTick(() => this.table.updateScrollY());
   },
@@ -113,7 +125,7 @@ TableStore.prototype.mutations = {
     });
 
     states.filteredData = data;
-    states.data = orderBy(data, states.sortCondition.property, states.sortCondition.direction);
+    states.data = sortData(data, states);
 
     Vue.nextTick(() => this.table.updateScrollY());
   },
