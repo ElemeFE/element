@@ -3,7 +3,7 @@ import navConfig from './nav.config.json';
 const registerRoute = (config) => {
   let route = [{
     path: '/component',
-    redirect: '/component/quickstart',
+    redirect: '/component/installation',
     component: require('./pages/component.vue'),
     children: []
   }];
