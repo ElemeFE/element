@@ -111,14 +111,14 @@ export default {
         _file.status = 'finished';
         _file.response = res;
 
-        this.onSuccess(_file, this.fileList);
+        this.onSuccess(res, _file, this.fileList);
 
         setTimeout(() => {
           _file.showProgress = false;
         }, 1000);
       }
     },
-    handleError(err, file) {
+    handleError(err, response, file) {
       var _file = this.getFile(file);
       var fileList = this.fileList;
 
@@ -126,7 +126,7 @@ export default {
 
       fileList.splice(fileList.indexOf(_file), 1);
 
-      this.onError(err, _file, fileList);
+      this.onError(err, response, file);
     },
     handleRemove(file) {
       var fileList = this.fileList;
@@ -182,7 +182,8 @@ export default {
         'on-error': this.handleError,
         'on-preview': this.handlePreview,
         'on-remove': this.handleRemove
-      }
+      },
+      ref: 'upload-inner'
     };
 
     var uploadComponent = typeof FormData !== 'undefined'
