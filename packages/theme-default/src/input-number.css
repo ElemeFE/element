@@ -13,11 +13,11 @@
       appearance: none;
     }
     @e increase, decrease {
-      height: 100%;
+      height: auto;
       border-left: var(--border-base);
       width: var(--input-height);
-      line-height: var(--input-height);
-      top: 0;
+      line-height: calc(var(--input-height) - 2);
+      top: 1px;
       text-align: center;
       color: #99A9BF;
       cursor: pointer;
