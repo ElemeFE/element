@@ -184,7 +184,7 @@ export default {
       render(h) {
         return (
           <span class="el-pagination__jump">
-            前往
+            { $t('el.pagination.goto') }
             <input
               class="el-pagination__editor"
               type="number"
@@ -195,7 +195,7 @@ export default {
               on-focus={ this.handleFocus }
               style={{ width: '30px' }}
               number/>
-            页
+            { $t('el.pagination.pageClassifier') }
           </span>
         );
       }
@@ -204,7 +204,7 @@ export default {
     Total: {
       render(h) {
         return (
-          <span class="el-pagination__total">共 { this.$parent.total } 条</span>
+          <span class="el-pagination__total">{ $t('el.pagination.total', { total: this.$parent.total }) }</span>
         );
       }
     },

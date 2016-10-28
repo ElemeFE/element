@@ -57,7 +57,10 @@ export default {
       placeholder: 'Select'
     },
     pagination: {
-      pagesize: '/page'
+      goto: 'Go to',
+      pagesize: '/page',
+      total: 'Total {total}',
+      pageClassifier: ''
     },
     messagebox: {
       confirm: 'OK',
