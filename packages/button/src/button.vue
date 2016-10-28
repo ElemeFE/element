@@ -1,5 +1,6 @@
 <template>
   <button :disabled="disabled" class="el-button"
+    @click="handleClick"
     :type="nativeType"
     :class="[
       type ? 'el-button--' + type : '',
@@ -45,6 +46,12 @@
       plain: {
         type: Boolean,
         default: false
+      }
+    },
+
+    methods: {
+      handleClick(evt) {
+        this.$emit('click', evt);
       }
     }
   };

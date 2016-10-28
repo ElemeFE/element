@@ -51,7 +51,7 @@
     overflow: hidden;
     border-bottom: solid 1px #EFF2F6;
     &:last-child {
-      border-bottom: none;      
+      border-bottom: none;
     }
   }
 
