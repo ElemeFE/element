@@ -11,7 +11,7 @@
 
     methods: {
       handleClick(e) {
-        this.dispatch('ElDropdownMenu', 'visible', [false]);
+        this.dispatch('ElDropdown', 'visible', [false]);
       }
     }
   };
