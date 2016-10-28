@@ -1,15 +1,12 @@
 [
   {
-    "name": "安装指南",
+    "name": "开发指南",
     "children": [{
       "path": "/installation",
       "name": "安装"
     },{
       "path": "/quickstart",
       "name": "快速上手"
-    }, {
-      "path": "/development",
-      "name": "开发指南"
     }]
   },
   {
