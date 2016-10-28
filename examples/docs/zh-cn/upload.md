@@ -142,7 +142,7 @@
 | multiple | 可选参数, 是否支持多选文件 | boolean | — | — |
 | file | 可选参数, 上传的文件字段名 | string | — | file |
 | with-credentials | 支持发送 cookie 凭证信息 | boolean | — | false |
-| show-uploadList | 是否显示已上传文件列表 | boolean | — | true |
+| show-upload-list | 是否显示已上传文件列表 | boolean | — | true |
 | type | 上传控件类型 | string | select,drag | select |
 | accept | 可选参数, 接受上传的[文件类型](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept), 拖拽文件上传时不受此参数影响 | string | — | — |
 | on-preview | 可选参数, 点击已上传的文件链接时的钩子 | function(file) | — | — |
