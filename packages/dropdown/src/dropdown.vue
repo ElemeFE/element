@@ -5,6 +5,8 @@
   export default {
     name: 'ElDropdown',
 
+    componentName: 'ElDropdown',
+
     mixins: [Emitter],
 
     directives: { Clickoutside },
@@ -31,6 +33,7 @@
     },
 
     mounted() {
+      this.$on('visible', value => { this.visible = value; });
       this.initEvent();
     },
 
