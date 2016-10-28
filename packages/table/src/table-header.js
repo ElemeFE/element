@@ -163,6 +163,7 @@ export default {
     },
 
     handleMouseDown(event, column) {
+      /* istanbul ignore if */
       if (this.draggingColumn && this.border) {
         this.dragging = true;
 

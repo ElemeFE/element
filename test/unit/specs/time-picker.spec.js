@@ -202,7 +202,7 @@ describe('TimePicker(range)', () => {
   it('minTime < maxTime', done => {
     const vm2 = createTest(TimePicker, {
       isRange: true,
-      value: [new Date(2016, 9, 10, 21, 40), new Date(2016, 9, 10, 20, 40)]
+      value: [new Date(2016, 9, 10, 23, 40), new Date(2016, 9, 10, 10, 40)]
     }, true);
     const input = vm2.$el.querySelector('input');
 
@@ -210,10 +210,10 @@ describe('TimePicker(range)', () => {
     input.focus();
     input.blur();
     setTimeout(() => {
-      expect(vm2.picker.maxTime > vm2.picker.minTime).to.true;
+      expect(vm2.picker.maxTime >= vm2.picker.minTime).to.true;
       destroyVM(vm2);
       done();
-    }, 20);
+    }, 100);
   });
 
   it('click cancel button', done => {
