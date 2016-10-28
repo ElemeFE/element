@@ -1,8 +1,8 @@
 ## 更新日志
 
-### 1.0.0-rc.8（待发布）
+### 1.0.0-rc.8
 
-*2016-XX-XX*
+*2016-10-28*
 
 - 修复 Form reset method 对日期控件不起效的问题
 - 修复 Dialog/Message Box/Tooltip/Popover/... 等若干组件的样式错误
@@ -22,6 +22,7 @@
 - 修复 DatePicker 输入禁用状态的日期却生效的问题 #484
 - 新增 Slider 的 disabled 属性
 - 新增 Menu 的 menu-trigger 属性
+- 新增 i18n 的支持
 
 #### 非兼容性更新
 
