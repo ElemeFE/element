@@ -1,7 +1,7 @@
 ## 安装
 
 ### npm 安装
-推荐使用 npm 的方式安装，它能更好的和 [webpack](https://webpack.js.org/) 打包工具配合使用。
+推荐使用 npm 的方式安装，它能更好地和 [webpack](https://webpack.js.org/) 打包工具配合使用。
 
 ```shell
 npm i element-ui@next -D
@@ -19,7 +19,7 @@ npm i element-ui@next -D
 ```
 
 ### Hello world
-通过 cdn 的方式我们可以很容易的使用 Element 写一个 Hello world 页面。[在线演示](http://codepen.io/QingWei-Li/pen/vXwJrY)
+通过 CDN 的方式我们可以很容易地使用 Element 写出一个 Hello world 页面。[在线演示](http://codepen.io/QingWei-Li/pen/vXwJrY)
 
 ```html
 <!DOCTYPE html>
@@ -51,3 +51,4 @@ npm i element-ui@next -D
   </script>
 </html>
 ```
+如果是通过 npm 安装，并希望配合 webpack 使用，请阅读下一节：快速上手。
