@@ -1,5 +1,8 @@
 import defaultLang from 'element-ui/src/locale/lang/zh-cn';
 import Vue from 'vue';
+import Format from './format';
+
+const format = Format(Vue);
 let lang = defaultLang;
 
 export const $t = function(path, options) {
@@ -13,7 +16,7 @@ export const $t = function(path, options) {
   for (var i = 0, j = array.length; i < j; i++) {
     var property = array[i];
     var value = current[property];
-    if (i === j - 1) return value;
+    if (i === j - 1) return format(value, options);
     if (!value) return '';
     current = value;
   }
