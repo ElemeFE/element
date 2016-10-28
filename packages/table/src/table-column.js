@@ -6,19 +6,19 @@ let columnIdSeed = 1;
 
 const defaults = {
   default: {
-    direction: ''
+    order: ''
   },
   selection: {
     width: 48,
     minWidth: 48,
     realWidth: 48,
-    direction: ''
+    order: ''
   },
   index: {
     width: 48,
     minWidth: 48,
     realWidth: 48,
-    direction: ''
+    order: ''
   }
 };
 
@@ -98,9 +98,10 @@ export default {
     minWidth: {},
     template: String,
     sortable: {
-      type: Boolean,
+      type: [Boolean, String],
       default: false
     },
+    sortMethod: Function,
     resizable: {
       type: Boolean,
       default: true
@@ -201,6 +202,7 @@ export default {
       isColumnGroup,
       align: this.align ? 'is-' + this.align : null,
       sortable: this.sortable,
+      sortMethod: this.sortMethod,
       resizable: this.resizable,
       showTooltipWhenOverflow: this.showTooltipWhenOverflow,
       formatter: this.formatter,

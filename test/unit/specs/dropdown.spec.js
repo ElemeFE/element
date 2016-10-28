@@ -4,7 +4,7 @@ describe('Dropdown', () => {
   it('create', done => {
     const vm = createVue({
       template: `
-        <el-dropdown>
+        <el-dropdown ref="dropdown">
           <span class="el-dropdown-link">
             下拉菜单<i class="el-icon-caret-bottom el-icon-right"></i>
           </span>
@@ -18,19 +18,19 @@ describe('Dropdown', () => {
         </el-dropdown>
       `
     }, true);
-    let dropdownElm = vm.$el;
+    let dropdown = vm.$refs.dropdown;
+    let dropdownElm = dropdown.$el;
     let triggerElm = dropdownElm.children[0];
 
     triggerEvent(triggerElm, 'mouseenter');
     setTimeout(_ => {
-      var dropdownMenu = document.querySelector('.dropdown-test-creat');
-      expect(dropdownMenu.style.display).to.not.ok;
+      expect(dropdown.visible).to.be.true;
 
       triggerEvent(triggerElm, 'mouseleave');
       setTimeout(_ => {
-        expect(dropdownMenu.style.display).to.be.equal('none');
+        expect(dropdown.visible).to.not.true;
         done();
-      }, 600);
+      }, 300);
     }, 400);
   });
   it('menu click', done => {

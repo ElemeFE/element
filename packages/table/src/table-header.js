@@ -33,7 +33,7 @@ export default {
                   on-mousemove={ ($event) => this.handleMouseMove($event, column) }
                   on-mouseout={ this.handleMouseOut }
                   on-mousedown={ ($event) => this.handleMouseDown($event, column) }
-                  class={ [column.id, column.direction, column.align, this.isCellHidden(cellIndex) ? 'hidden' : ''] }>
+                  class={ [column.id, column.order, column.align, this.isCellHidden(cellIndex) ? 'hidden' : ''] }>
                   <div class={ ['cell', column.filteredValue && column.filteredValue.length > 0 ? 'highlight' : ''] }>
                   {
                     column.headerTemplate
@@ -269,26 +269,30 @@ export default {
 
       if (!column.sortable) return;
 
-      const sortCondition = this.store.states.sortCondition;
+      const states = this.store.states;
+      let sortProp = states.sortProp;
+      let sortOrder;
+      const sortingColumn = states.sortingColumn;
 
-      if (sortCondition.column !== column) {
-        if (sortCondition.column) {
-          sortCondition.column.direction = '';
+      if (sortingColumn !== column) {
+        if (sortingColumn) {
+          sortingColumn.order = null;
         }
-        sortCondition.column = column;
-        sortCondition.property = column.property;
+        states.sortingColumn = column;
+        sortProp = column.property;
       }
 
-      if (!column.direction) {
-        column.direction = 'ascending';
-      } else if (column.direction === 'ascending') {
-        column.direction = 'descending';
+      if (!column.order) {
+        sortOrder = column.order = 'ascending';
+      } else if (column.order === 'ascending') {
+        sortOrder = column.order = 'descending';
       } else {
-        column.direction = '';
-        sortCondition.column = null;
-        sortCondition.property = null;
+        sortOrder = column.order = null;
+        states.sortingColumn = null;
+        sortProp = null;
       }
-      sortCondition.direction = column.direction === 'descending' ? -1 : 1;
+      states.sortProp = sortProp;
+      states.sortOrder = sortOrder;
 
       this.store.commit('changeSortCondition');
     }

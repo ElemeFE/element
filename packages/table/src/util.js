@@ -58,14 +58,19 @@ const isObject = function(obj) {
   return obj !== null && typeof obj === 'object';
 };
 
-export const orderBy = function(array, sortKey, reverse) {
+export const orderBy = function(array, sortKey, reverse, sortMethod) {
+  if (typeof reverse === 'string') {
+    reverse = reverse === 'descending' ? -1 : 1;
+  }
   if (!sortKey) {
     return array;
   }
   const order = (reverse && reverse < 0) ? -1 : 1;
 
   // sort on a copy to avoid mutating original array
-  return array.slice().sort(function(a, b) {
+  return array.slice().sort(sortMethod ? function(a, b) {
+    return sortMethod(a, b) ? order : -order;
+  } : function(a, b) {
     if (sortKey !== '$key') {
       if (isObject(a) && '$value' in a) a = a.$value;
       if (isObject(b) && '$value' in b) b = b.$value;

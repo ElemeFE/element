@@ -792,8 +792,8 @@
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | model   | 表单数据对象 | object      |                  —                |  — |
 | rules    | 表单验证规则 | object | — | — |
-| type | 表单类型 | string |  stacked, inline, horizontal | horizontal |
-| label-align | 表单域标签的水平对齐位置 | string |  right,left            | right |
+| inline    | 行内表单模式 | boolean | — | false |
+| label-position | 表单域标签的位置 | string |  right/left/top            | right |
 | label-width | 表单域标签的宽度，所有的 form-item 都会继承 form 组件的 labelWidth 的值 | string | — | — |
 | label-suffix | 表单域标签的后缀 | string | — | — |
 
