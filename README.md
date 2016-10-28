@@ -12,6 +12,7 @@
 ## Links
 - [Home Page](http://element.eleme.io/)
 - [Docs](http://element.eleme.io/#/component)
+- [FAQ 中文](./FAQ.md)
 
 ## Install
 ```shell
@@ -61,7 +62,7 @@ Vue.component(Button.name, Button)
 .babelrc
 ```json
 {
-  "plugins": ["xxx", ["component", [
+  "plugins": [["component", [
     {
       "libraryName": "element-ui",
       "styleLibraryName": "theme-default"

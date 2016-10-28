@@ -13,7 +13,7 @@
 新建项目，项目结构为
 ```text
 |- src/  --------------------- 项目源代码
-    |- App.vue  -------------- 
+    |- App.vue
     |- main.js  -------------- 入口文件
 |- .babelrc  ----------------- babel 配置文件
 |- index.html  --------------- HTML 模板
@@ -79,7 +79,7 @@ module.exports = {
     filename: 'build.js'
   },
   resolveLoader: {
-    root: path.join(__dirname, 'node_modules'),
+    root: path.join(__dirname, 'node_modules')
   },
   module: {
     loaders: [
@@ -206,7 +206,7 @@ new Vue({
 
 Element 组件内部默认使用中文，若希望使用其他语言，则需要进行多语言设置。以英文为例，在 main.js 中：
 
-```bash
+```javascript
 // 完整引入 Element
 import Vue from 'vue'
 import ElementUI from 'element-ui'
@@ -217,7 +217,7 @@ Vue.use(ElementUI, { locale })
 
 或
 
-```bash
+```javascript
 // 按需引入 Element
 import Vue from 'vue'
 import { Button, Select } from 'element-ui'
@@ -230,6 +230,17 @@ locale.use(lang)
 // 引入组件
 Vue.component(Button.name, Button)
 Vue.component(Select.name, Select)
+```
+
+如果使用其它语言，默认情况下中文语言包依旧是被引入的，可以使用 webpack 的 IgnorePlugn 忽略掉它以减少打包后的文件体积。
+
+webpack.config.js
+```javascript
+{
+  plugins: [
+    new webpack.IgnorePlugin(/element-ui\/lib\/locale\/lang\/zh-cn/)
+  ]
+}
 ```
 
 ### 开始使用
