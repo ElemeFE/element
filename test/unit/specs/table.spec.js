@@ -420,7 +420,6 @@ describe('Table', () => {
       }, DELAY);
     });
 
-    // TODO
     it('resizable', done => {
       const vm = createTable(
         'resizable',
@@ -712,13 +711,57 @@ describe('Table', () => {
     });
 
     describe('sortable', () => {
-      const vm = createTable('', '', '', 'sortable');
 
       it('render', done => {
+        const vm = createTable('', '', '', 'sortable');
         setTimeout(_ => {
           expect(vm.$el.querySelectorAll('.caret-wrapper')).to.length(1);
           destroyVM(vm);
           done();
+        }, DELAY);
+      });
+
+      it('sortable method', done => {
+        const vm = createTable(
+          'sortable :sort-method="sortMethod"', '', '', '', {
+            methods: {
+              sortMethod(a, b) {
+                return a.runtime < b.runtime;
+              }
+            }
+          });
+
+        setTimeout(_ => {
+          const elm = vm.$el.querySelector('.caret-wrapper');
+
+          elm.click();
+          setTimeout(_ => {
+            const lastCells = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr td:last-child');
+            expect(toArray(lastCells).map(node => node.textContent)).to.eql(['100', '95', '92', '92', '80']);
+            destroyVM(vm);
+            done();
+          }, DELAY);
+        }, DELAY);
+      });
+
+      it('sort-change', done => {
+        let result;
+        const vm = createTable('sortable="custom"', '', '', '', {
+          methods: {
+            sortChange(...args) {
+              result = args;
+            }
+          }
+        }, '@sort-change="sortChange"');
+        setTimeout(_ => {
+          const elm = vm.$el.querySelector('.caret-wrapper');
+
+          elm.click();
+          setTimeout(_ => {
+            expect(result).to.exist;
+            destroyVM(vm);
+            done();
+          }, DELAY);
         }, DELAY);
       });
     });
