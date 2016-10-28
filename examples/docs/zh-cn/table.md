@@ -522,7 +522,7 @@
       fixed="right"
       label="操作"
       width="80">
-      <el-button type="primary" size="small">编辑</el-button>
+      <el-button type="text" size="small">编辑</el-button>
     </el-table-column>
   </el-table>
 </template>
