@@ -29,7 +29,9 @@
         "24": "-5"
       },
       "component": {},
-      "changelog": {},
+      "changelog": {
+        "1": "更新日志"
+      },
       "design": {
         "1": "设计原则",
         "2": "一致",
@@ -127,7 +129,9 @@
         "24": "-5"
       },
       "component": {},
-      "changelog": {},
+      "changelog": {
+        "1": "Changelog"
+      },
       "design": {
         "1": "Design Disciplines",
         "2": "Consistency",

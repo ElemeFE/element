@@ -12,3 +12,4 @@ examples/pages/zh-cn
 fe.element/element-ui
 .npmrc
 coverage
+yarn.lock

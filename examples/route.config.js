@@ -6,7 +6,7 @@ const registerRoute = (config) => {
   langs.forEach((lang, index) => {
     route.push({
       path: `/${ lang.lang }/component`,
-      redirect: `/${ lang.lang }/component/quickstart`,
+      redirect: `/${ lang.lang }/component/installation`,
       component: require(`./pages/${ lang.lang }/component.vue`),
       children: []
     });
@@ -49,33 +49,28 @@ const route = registerRoute(navConfig);
 
 const generateMiscRoutes = lang => {
   let guideRoute = {
-    path: `/${ lang }/guide`,
-    name: '指南',
+    path: `/${ lang }/guide`, // 指南
     redirect: `/${ lang }/guide/design`,
     component: require(`./pages/${ lang }/guide.vue`),
     children: [{
-      path: 'design',
-      name: '设计原则',
+      path: 'design', // 设计原则
       meta: { lang },
       component: require(`./pages/${ lang }/design.vue`)
     }, {
-      path: 'nav',
-      name: '导航',
+      path: 'nav', // 导航
       meta: { lang },
       component: require(`./pages/${ lang }/nav.vue`)
     }]
   };
 
   let resourceRoute = {
-    path: `/${ lang }/resource`,
-    name: '资源',
+    path: `/${ lang }/resource`, // 资源
     meta: { lang },
     component: require(`./pages/${ lang }/resource.vue`)
   };
 
   let indexRoute = {
-    path: `/${ lang }`,
-    name: '首页',
+    path: `/${ lang }`, // 首页
     meta: { lang },
     component: require(`./pages/${ lang }/index.vue`)
   };
@@ -87,19 +82,13 @@ langs.forEach(lang => {
   route.route = route.route.concat(generateMiscRoutes(lang.lang));
 });
 
-let indexRoute = {
+route.route = route.route.concat([{
   path: '/',
-  redirect: '/zh-cn',
-  name: '首页',
-  component: require('./pages/zh-cn/index.vue')
-};
-
-route.route = route.route.concat(indexRoute);
-
-route.route.push({
+  redirect: '/zh-cn'
+}, {
   path: '*',
-  component: require('./docs/zh-cn/home.md')
-});
+  redirect: '/zh-cn'
+}]);
 
 export const navs = route.navs;
 export default route.route;
