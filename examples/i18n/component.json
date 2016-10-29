@@ -1,0 +1,36 @@
+[
+  {
+    "lang": "zh-cn",
+    "demo-block": {
+      "hide-text": "隐藏代码",
+      "show-text": "显示代码"
+    },
+    "footer": {
+      "feedback": "反馈建议",
+      "contribution": "贡献指南",
+      "eleme": "饿了么"
+    },
+    "header": {
+      "guide": "指南",
+      "components": "组件",
+      "resource": "资源"
+    }
+  },
+  {
+    "lang": "en-us",
+    "demo-block": {
+      "hide-text": "Hide",
+      "show-text": "Expand"
+    },
+    "footer": {
+      "feedback": "Feedback",
+      "contribution": "Contribution",
+      "eleme": "Eleme"
+    },
+    "header": {
+      "guide": "Guide",
+      "components": "Components",
+      "resource": "Resource"
+    }
+  }
+]

@@ -113,20 +113,20 @@
           <li class="nav-item">
             <router-link
               active-class="active"
-              :to="`/${ lang }/guide`">{{ guide }}
+              :to="`/${ lang }/guide`">{{ langConfig.guide }}
             </router-link>
           </li>
           <li class="nav-item">
             <router-link
               active-class="active"
-              :to="`/${ lang }/component`">{{ components }}
+              :to="`/${ lang }/component`">{{ langConfig.components }}
             </router-link>
           </li>
           <li class="nav-item">
             <router-link
               active-class="active"
               :to="`/${ lang }/resource`"
-              exact>{{ resource }}
+              exact>{{ langConfig.resource }}
             </router-link>
           </li>
           <li class="nav-item" @click="switchLang">{{ switchText }}</li>
@@ -136,6 +136,9 @@
   </div>
 </template>
 <script>
+  import compoLang from '../i18n/component.json';
+  const LANGS_INDEX = compoLang.map(lang => `/${ lang.lang }`);
+
   export default {
     data() {
       return {
@@ -148,7 +151,7 @@
     },
     watch: {
       '$route.path'(val) {
-        this.isHome = ['/zh-cn', '/en-us'].indexOf(val) > -1;
+        this.isHome = LANGS_INDEX.indexOf(val) > -1;
         this.headerStyle.backgroundColor = `rgba(32, 160, 255, ${ this.isHome ? '0' : '1' })`;
       }
     },
@@ -156,20 +159,17 @@
       lang() {
         return this.$route.path.split('/')[1] || 'zh-cn';
       },
-      guide() {
-        return this.lang === 'zh-cn' ? '指南' : 'Guide';
+      langConfig() {
+        return compoLang.filter(config => config.lang === this.lang)[0]['header'];
       },
-      components() {
-        return this.lang === 'zh-cn' ? '组件' : 'Components';
-      },
-      resource() {
-        return this.lang === 'zh-cn' ? '资源' : 'Resource';
-      },
+
+      // TODO: use dropdown to display more than two languages
       switchText() {
         return this.lang === 'zh-cn' ? 'English' : '中文';
       }
     },
     methods: {
+      // TODO: use dropdown to display more than two languages
       switchLang() {
         let langMap = { 'zh-cn': 'en-us', 'en-us': 'zh-cn' };
         this.$router.push(this.$route.path.replace(this.lang, langMap[this.lang]));

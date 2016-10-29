@@ -137,14 +137,7 @@
 </style>
 
 <script type="text/babel">
-  const HIDE_TEXT = {
-    'zh-cn': '隐藏代码',
-    'en-us': 'Hide'
-  };
-  const SHOW_TEXT = {
-    'zh-cn': '显示代码',
-    'en-us': 'Expand'
-  };
+  import compoLang from '../i18n/component.json';
 
   export default {
     data() {
@@ -159,6 +152,10 @@
         return this.$route.path.split('/')[1];
       },
 
+      langConfig() {
+        return compoLang.filter(config => config.lang === this.lang)[0]['demo-block'];
+      },
+
       blockClass() {
         return `demo-${ this.$router.currentRoute.path.split('/').pop() }`;
       },
@@ -168,7 +165,7 @@
       },
 
       controlText() {
-        return this.isExpanded ? HIDE_TEXT[this.lang] : SHOW_TEXT[this.lang];
+        return this.isExpanded ? this.langConfig['hide-text'] : this.langConfig['show-text'];
       },
 
       codeArea() {
