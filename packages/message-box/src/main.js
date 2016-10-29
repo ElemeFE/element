@@ -1,9 +1,9 @@
 import { $t } from 'element-ui/src/locale';
 
-var CONFIRM_TEXT = $t('el.messagebox.confirm');
-var CANCEL_TEXT = $t('el.messagebox.cancel');
+const CONFIRM_TEXT = $t('el.messagebox.confirm');
+const CANCEL_TEXT = $t('el.messagebox.cancel');
 
-var defaults = {
+const defaults = {
   title: '提示',
   message: '',
   type: '',
@@ -31,12 +31,12 @@ var defaults = {
 import Vue from 'vue';
 import msgboxVue from './main.vue';
 
-var merge = function(target) {
-  for (var i = 1, j = arguments.length; i < j; i++) {
-    var source = arguments[i];
-    for (var prop in source) {
+const merge = function(target) {
+  for (let i = 1, j = arguments.length; i < j; i++) {
+    let source = arguments[i];
+    for (let prop in source) {
       if (source.hasOwnProperty(prop)) {
-        var value = source[prop];
+        let value = source[prop];
         if (value !== undefined) {
           target[prop] = value;
         }
@@ -47,47 +47,49 @@ var merge = function(target) {
   return target;
 };
 
-var MessageBoxConstructor = Vue.extend(msgboxVue);
+const MessageBoxConstructor = Vue.extend(msgboxVue);
 
-var currentMsg, instance;
-var msgQueue = [];
+let currentMsg, instance;
+let msgQueue = [];
 
-var initInstance = function() {
+const defaultCallback = action => {
+  if (currentMsg) {
+    let callback = currentMsg.callback;
+    if (typeof callback === 'function') {
+      if (instance.showInput) {
+        callback(instance.inputValue, action);
+      } else {
+        callback(action);
+      }
+    }
+    if (currentMsg.resolve) {
+      let $type = currentMsg.options.$type;
+      if ($type === 'confirm' || $type === 'prompt') {
+        if (action === 'confirm') {
+          if (instance.showInput) {
+            currentMsg.resolve({ value: instance.inputValue, action });
+          } else {
+            currentMsg.resolve(action);
+          }
+        } else if (action === 'cancel' && currentMsg.reject) {
+          currentMsg.reject(action);
+        }
+      } else {
+        currentMsg.resolve(action);
+      }
+    }
+  }
+};
+
+const initInstance = () => {
   instance = new MessageBoxConstructor({
     el: document.createElement('div')
   });
 
-  instance.callback = function(action) {
-    if (currentMsg) {
-      var callback = currentMsg.callback;
-      if (typeof callback === 'function') {
-        if (instance.showInput) {
-          callback(instance.inputValue, action);
-        } else {
-          callback(action);
-        }
-      }
-      if (currentMsg.resolve) {
-        var $type = currentMsg.options.$type;
-        if ($type === 'confirm' || $type === 'prompt') {
-          if (action === 'confirm') {
-            if (instance.showInput) {
-              currentMsg.resolve({ value: instance.inputValue, action });
-            } else {
-              currentMsg.resolve(action);
-            }
-          } else if (action === 'cancel' && currentMsg.reject) {
-            currentMsg.reject(action);
-          }
-        } else {
-          currentMsg.resolve(action);
-        }
-      }
-    }
-  };
+  instance.callback = defaultCallback;
 };
 
-var showNextMsg = function() {
+const showNextMsg = () => {
   if (!instance) {
     initInstance();
   }
@@ -96,11 +98,14 @@ var showNextMsg = function() {
     if (msgQueue.length > 0) {
       currentMsg = msgQueue.shift();
 
-      var options = currentMsg.options;
-      for (var prop in options) {
+      let options = currentMsg.options;
+      for (let prop in options) {
         if (options.hasOwnProperty(prop)) {
           instance[prop] = options[prop];
         }
+      }
+      if (options.callback === undefined) {
+        instance.callback = defaultCallback;
       }
       ['modal', 'showClose', 'closeOnClickModal', 'closeOnPressEscape'].forEach(prop => {
         if (instance[prop] === undefined) {
@@ -116,7 +121,7 @@ var showNextMsg = function() {
   }
 };
 
-var MessageBox = function(options, callback) {
+const MessageBox = function(options, callback) {
   if (typeof options === 'string') {
     options = {
       title: options
@@ -132,7 +137,7 @@ var MessageBox = function(options, callback) {
   }
 
   if (typeof Promise !== 'undefined') {
-    return new Promise(function(resolve, reject) { // eslint-disable-line
+    return new Promise((resolve, reject) => { // eslint-disable-line
       msgQueue.push({
         options: merge({}, defaults, MessageBox.defaults || {}, options),
         callback: callback,
@@ -152,11 +157,11 @@ var MessageBox = function(options, callback) {
   }
 };
 
-MessageBox.setDefaults = function(defaults) {
+MessageBox.setDefaults = defaults => {
   MessageBox.defaults = defaults;
 };
 
-MessageBox.alert = function(message, title, options) {
+MessageBox.alert = (message, title, options) => {
   if (typeof title === 'object') {
     options = title;
     title = '';
@@ -170,7 +175,7 @@ MessageBox.alert = function(message, title, options) {
   }, options));
 };
 
-MessageBox.confirm = function(message, title, options) {
+MessageBox.confirm = (message, title, options) => {
   if (typeof title === 'object') {
     options = title;
     title = '';
@@ -183,7 +188,7 @@ MessageBox.confirm = function(message, title, options) {
   }, options));
 };
 
-MessageBox.prompt = function(message, title, options) {
+MessageBox.prompt = (message, title, options) => {
   if (typeof title === 'object') {
     options = title;
     title = '';
@@ -197,7 +202,7 @@ MessageBox.prompt = function(message, title, options) {
   }, options));
 };
 
-MessageBox.close = function() {
+MessageBox.close = () => {
   instance.value = false;
   msgQueue = [];
   currentMsg = null;
