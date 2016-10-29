@@ -683,6 +683,7 @@
 <template>
   <el-table
     :data="tableData3"
+    border
     style="width: 100%"
     @selection-change="handleMultipleSelectionChange">
     <el-table-column

@@ -7,7 +7,8 @@
     }
   };
 </script>
-## Tooltips 文字提示
+
+## Tooltip 文字提示
 
 常用于展示鼠标 hover 时的提示信息。
 
@@ -118,7 +119,7 @@ Tooltip 组件提供了两个不同的主题：`dark`和`light`。
 ```
 :::
 
-### 更多Content
+### 更多 Content
 
 展示多行文本或者是设置文本内容的格式
 

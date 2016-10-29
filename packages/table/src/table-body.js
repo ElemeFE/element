@@ -36,7 +36,6 @@ export default {
                 {
                   this._l(this.columns, (column, cellIndex) =>
                     <td
-                      style={ this.getColumnWhiteSpaceStyle(column) }
                       class={ [column.id, column.align, this.isCellHidden(cellIndex) ? 'hidden' : '' ] }
                       on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
                       on-mouseleave={ this.handleCellMouseLeave }>
@@ -116,10 +115,6 @@ export default {
       }
 
       return classes.join(' ');
-    },
-
-    getColumnWhiteSpaceStyle(column) {
-      return column.showTooltipWhenOverflow ? { 'white-space': 'nowrap' } : {};
     },
 
     handleCellMouseEnter(event, row) {
