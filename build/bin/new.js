@@ -82,6 +82,10 @@ export default {
   {
     filename: path.join('../../examples/docs/zh-cn', `${componentname}.md`),
     content: `## ${chineseName}`
+  },
+  {
+    filename: path.join('../../examples/docs/en-us', `${componentname}.md`),
+    content: `## ${componentname}`
   }
 ];
 
@@ -106,12 +110,14 @@ Files.forEach(file => {
 // 添加到 nav.config.json
 const navConfigFile = require('../../examples/nav.config.json');
 
-navConfigFile[2].groups[navConfigFile[2].groups.length - 1].list.push({
-  path: `/${componentname}`,
-  name: `${chineseName} (${componentname})`,
-  title: componentname === chineseName
-          ? componentname
-          : `${componentname} ${chineseName}`
+Object.keys(navConfigFile).forEach(lang => {
+  let groups = navConfigFile[lang][2].groups;
+  groups[groups.length - 1].list.push({
+    path: `/${componentname}`,
+    title: lang === 'zh-cn' && componentname !== chineseName
+        ? `${ComponentName} ${chineseName}`
+        : ComponentName
+  });
 });
 
 fileSave(path.join(__dirname, '../../examples/nav.config.json'))

@@ -2,13 +2,16 @@
   "zh-cn": [
     {
       "name": "开发指南",
-      "children": [{
-        "path": "/installation",
-        "name": "安装"
-      }, {
-        "path": "/quickstart",
-        "name": "快速上手"
-      }]
+      "children": [
+        {
+          "path": "/installation",
+          "name": "安装"
+        },
+        {
+          "path": "/quickstart",
+          "name": "快速上手"
+        }
+      ]
     },
     {
       "name": "更新日志",
@@ -16,31 +19,32 @@
     },
     {
       "name": "基础组件",
-      "groups": [{
-        "groupName": "Basic",
-        "list": [
-          {
-            "path": "/layout",
-            "title": "Layout 布局"
-          },
-          {
-            "path": "/color",
-            "title": "Color 色彩"
-          },
-          {
-            "path": "/typography",
-            "title": "Typography 字体"
-          },
-          {
-            "path": "/icon",
-            "title": "Icon 图标"
-          },
-          {
-            "path": "/button",
-            "title": "Button 按钮"
-          }
-        ]
-      },
+      "groups": [
+        {
+          "groupName": "Basic",
+          "list": [
+            {
+              "path": "/layout",
+              "title": "Layout 布局"
+            },
+            {
+              "path": "/color",
+              "title": "Color 色彩"
+            },
+            {
+              "path": "/typography",
+              "title": "Typography 字体"
+            },
+            {
+              "path": "/icon",
+              "title": "Icon 图标"
+            },
+            {
+              "path": "/button",
+              "title": "Button 按钮"
+            }
+          ]
+        },
         {
           "groupName": "Form",
           "list": [
@@ -201,17 +205,19 @@
       ]
     }
   ],
-
   "en-us": [
     {
       "name": "Development",
-      "children": [{
-        "path": "/installation",
-        "name": "Installation"
-      }, {
-        "path": "/quickstart",
-        "name": "Quick Start"
-      }]
+      "children": [
+        {
+          "path": "/installation",
+          "name": "Installation"
+        },
+        {
+          "path": "/quickstart",
+          "name": "Quick Start"
+        }
+      ]
     },
     {
       "name": "Changelog",
@@ -219,31 +225,32 @@
     },
     {
       "name": "Components",
-      "groups": [{
-        "groupName": "Basic",
-        "list": [
-          {
-            "path": "/layout",
-            "title": "Layout"
-          },
-          {
-            "path": "/color",
-            "title": "Color"
-          },
-          {
-            "path": "/typography",
-            "title": "Typography"
-          },
-          {
-            "path": "/icon",
-            "title": "Icon"
-          },
-          {
-            "path": "/button",
-            "title": "Button"
-          }
-        ]
-      },
+      "groups": [
+        {
+          "groupName": "Basic",
+          "list": [
+            {
+              "path": "/layout",
+              "title": "Layout"
+            },
+            {
+              "path": "/color",
+              "title": "Color"
+            },
+            {
+              "path": "/typography",
+              "title": "Typography"
+            },
+            {
+              "path": "/icon",
+              "title": "Icon"
+            },
+            {
+              "path": "/button",
+              "title": "Button"
+            }
+          ]
+        },
         {
           "groupName": "Form",
           "list": [
