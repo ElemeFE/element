@@ -112,10 +112,6 @@
 
     methods: {
       handleSelectionChange(val) {
-        this.singleSelection = val;
-      },
-
-      handleMultipleSelectionChange(val) {
         this.multipleSelection = val;
       },
 
@@ -138,10 +134,6 @@
     },
 
     watch: {
-      singleSelection(val) {
-        console.log('selection: ', val);
-      },
-
       multipleSelection(val) {
         console.log('selection: ', val);
       }
@@ -684,7 +676,7 @@
   <el-table
     :data="tableData3"
     style="width: 100%"
-    @selection-change="handleMultipleSelectionChange">
+    @selection-change="handleSelectionChange">
     <el-table-column
       type="selection"
       width="50">
