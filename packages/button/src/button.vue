@@ -1,6 +1,7 @@
 <template>
   <button :disabled="disabled" class="el-button"
     @click="handleClick"
+    :autofocus="autofocus"
     :type="nativeType"
     :class="[
       type ? 'el-button--' + type : '',
@@ -35,18 +36,10 @@
         type: String,
         default: 'button'
       },
-      loading: {
-        type: Boolean,
-        default: false
-      },
-      disabled: {
-        type: Boolean,
-        default: false
-      },
-      plain: {
-        type: Boolean,
-        default: false
-      }
+      loading: Boolean,
+      disabled: Boolean,
+      plain: Boolean,
+      autofocus: Boolean
     },
 
     methods: {
