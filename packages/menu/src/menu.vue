@@ -14,7 +14,7 @@
   export default {
     name: 'ElMenu',
 
-    componentName: 'menu',
+    componentName: 'ElMenu',
 
     mixins: [emitter],
 
@@ -91,7 +91,7 @@
         this.$emit('select', index, indexPath, instance);
 
         if (this.mode === 'horizontal') {
-          this.broadcast('submenu', 'item-select', [index, indexPath]);
+          this.broadcast('ElSubmenu', 'item-select', [index, indexPath]);
           this.openedMenus = [];
         } else {
           this.openActiveItemMenus();
