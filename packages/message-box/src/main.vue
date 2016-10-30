@@ -16,7 +16,7 @@
         </div>
         <div class="el-message-box__btns">
           <el-button :class="[ cancelButtonClasses ]" v-show="showCancelButton" @click.native="handleAction('cancel')">{{ cancelButtonText }}</el-button>
-          <el-button autofocus :class="[ confirmButtonClasses ]" v-show="showConfirmButton" @click.native="handleAction('confirm')">{{ confirmButtonText }}</el-button>
+          <el-button ref="confirm" :class="[ confirmButtonClasses ]" v-show="showConfirmButton" @click.native="handleAction('confirm')">{{ confirmButtonText }}</el-button>
         </div>
       </div>
     </transition>
@@ -146,6 +146,11 @@
       },
 
       value(val) {
+        if (this.$type === 'alert' || this.$type === 'confirm') {
+          this.$nextTick(() => {
+            this.$refs.confirm.$el.focus();
+          });
+        }
         if (this.$type !== 'prompt') return;
         if (val) {
           setTimeout(() => {
