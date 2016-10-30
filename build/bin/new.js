@@ -22,8 +22,8 @@ const Files = [
     filename: 'index.js',
     content: `const ${ComponentName} = require('./src/main');
 
+/* istanbul ignore next */
 ${ComponentName}.install = function(Vue) {
-  /* istanbul ignore next */
   Vue.component(${ComponentName}.name, ${ComponentName});
 };
 

@@ -143,6 +143,5 @@ describe('Utils:Clickoutside', () => {
     Clickoutside.unbind(el);
     document.body.click();
     expect(count).to.equal(1);
-    expect(el[ctx]).to.not.exist;
   });
 });
