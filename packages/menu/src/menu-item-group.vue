@@ -1,8 +1,8 @@
 <script>
   module.exports = {
-    name: 'el-menu-item-group',
+    name: 'ElMenuItemGroup',
 
-    componentName: 'menu-item-group',
+    componentName: 'ElMenuItemGroup',
 
     props: {
       title: {
@@ -19,14 +19,14 @@
       initPadding() {
         var parent = this.$parent;
         var level = 0;
-        var componentTag = parent.$options._componentTag;
+        var component = parent.$options.componentName;
 
-        while (componentTag !== 'el-menu') {
-          if (componentTag === 'el-submenu') {
+        while (component !== 'ElMenu') {
+          if (component === 'ElSubmenu') {
             level++;
           }
           parent = parent.$parent;
-          componentTag = parent.$options._componentTag;
+          component = parent.$options.componentName;
         }
         this.paddingLeft += level * 10;
       }

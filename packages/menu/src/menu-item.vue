@@ -1,9 +1,9 @@
 <script>
   import Menu from './menu-mixin';
   module.exports = {
-    name: 'el-menu-item',
+    name: 'ElMenuItem',
 
-    componentName: 'menu-item',
+    componentName: 'ElMenuItem',
 
     mixins: [Menu],
 

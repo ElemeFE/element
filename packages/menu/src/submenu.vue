@@ -25,9 +25,9 @@
   import menuMixin from './menu-mixin';
 
   module.exports = {
-    name: 'el-submenu',
+    name: 'ElSubmenu',
 
-    componentName: 'submenu',
+    componentName: 'ElSubmenu',
 
     mixins: [menuMixin],
 

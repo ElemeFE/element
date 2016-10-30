@@ -4,6 +4,8 @@
   export default {
     name: 'ElCheckboxGroup',
 
+    componentName: 'ElCheckboxGroup',
+
     mixins: [Emitter],
 
     props: {
