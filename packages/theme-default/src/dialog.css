@@ -9,20 +9,20 @@
     left: 50%;
     transform: translateX(-50%);
     background: #fff;
-    border-radius: 2px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    border-radius: var(--border-radius-small);
+    box-shadow: var(--dialog-box-shadow);
     box-sizing: border-box;
 
     @modifier tiny {
-      width: 30%;
+      width: var(--dialog-tiny-width);
     }
 
     @modifier small {
-      width: 50%;
+      width: var(--dialog-small-width);
     }
 
     @modifier large {
-      width: 90%;
+      width: var(--dialog-large-width);
     }
 
     @modifier full {
@@ -44,16 +44,16 @@
 
     @e close {
       cursor: pointer;
-      color: #C0CCDA;
+      color: var(--dialog-close-color);
 
       &:hover {
-        color: var(--color-primary);
+        color: var(--dialog-close-hover-color);
       }
     }
 
     @e title {
       line-height: 1;
-      font-size: 16px;
+      font-size: var(--dialog-title-font-size);
       font-weight: bold;
       color: #1f2d3d;
     }
@@ -61,7 +61,7 @@
     @e body {
       padding: 30px 20px;
       color: #475669;
-      font-size: 14px;
+      font-size: var(--dialog-font-size);
     }
 
     @e headerbtn {
