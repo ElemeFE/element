@@ -8,6 +8,7 @@
       flex: 1;
       vertical-align: top;
       position: relative;
+      -ms-overflow-style: none;
 
       &:hover {
         overflow-y: auto;
