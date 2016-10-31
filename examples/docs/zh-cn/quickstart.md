@@ -232,7 +232,7 @@ Vue.component(Button.name, Button)
 Vue.component(Select.name, Select)
 ```
 
-如果使用其它语言，默认情况下中文语言包依旧是被引入的，可以使用 webpack 的 IgnorePlugn 忽略掉它以减少打包后的文件体积。
+如果使用其它语言，默认情况下中文语言包依旧是被引入的，可以使用 webpack 的 IgnorePlugin 忽略掉它以减少打包后的文件体积。
 
 webpack.config.js
 ```javascript
