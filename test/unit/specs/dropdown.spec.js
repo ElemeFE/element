@@ -1,4 +1,4 @@
-import { createVue, triggerEvent } from '../util';
+import { createVue, triggerEvent, destroyVM } from '../util';
 
 describe('Dropdown', () => {
   it('create', done => {
@@ -29,6 +29,7 @@ describe('Dropdown', () => {
       triggerEvent(triggerElm, 'mouseleave');
       setTimeout(_ => {
         expect(dropdown.visible).to.not.true;
+        destroyVM(vm);
         done();
       }, 300);
     }, 400);
@@ -36,43 +37,37 @@ describe('Dropdown', () => {
   it('menu click', done => {
     const vm = createVue({
       template: `
-        <el-dropdown>
+        <el-dropdown ref="dropdown">
           <span class="el-dropdown-link">
             下拉菜单<i class="el-icon-caret-bottom el-icon-right"></i>
           </span>
           <el-dropdown-menu slot="dropdown" class="dropdown-test-menu-click">
-            <el-dropdown-item>黄金糕</el-dropdown-item>
-            <el-dropdown-item @click.native="handleClick">狮子头</el-dropdown-item>
-            <el-dropdown-item>螺蛳粉</el-dropdown-item>
-            <el-dropdown-item>双皮奶</el-dropdown-item>
-            <el-dropdown-item>蚵仔煎</el-dropdown-item>
+            <el-dropdown-item command="a">黄金糕</el-dropdown-item>
+            <el-dropdown-item command="b">狮子头</el-dropdown-item>
+            <el-dropdown-item ref="commandC" command="c">螺蛳粉</el-dropdown-item>
+            <el-dropdown-item command="d">双皮奶</el-dropdown-item>
+            <el-dropdown-item command="e">蚵仔煎</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-      `,
-      data() {
-        return {
-          clickedItem: ''
-        };
-      },
-      methods: {
-        handleClick(ev) {
-          this.clickedItem = ev.target.innerText;
-        }
-      }
+      `
     }, true);
-    let dropdownElm = vm.$el;
+    let dropdown = vm.$refs.dropdown;
+    let dropdownElm = dropdown.$el;
     let triggerElm = dropdownElm.children[0];
+    let callback = sinon.spy();
+
+    dropdown.$on('command', callback);
 
     triggerEvent(triggerElm, 'mouseenter');
     setTimeout(_ => {
-      let dropdownMenu = document.querySelector('.dropdown-test-menu-click');
-      dropdownMenu.children[1].click();
+      vm.$refs.commandC.$el.click();
       setTimeout(_ => {
-        expect(dropdownMenu.style.display).to.be.equal('none');
-        expect(vm.clickedItem).to.be.equal('狮子头');
+        expect(dropdown.visible).to.not.true;
+        expect(callback.calledWith('c')).to.be.true;
+        destroyVM(vm);
         done();
-      }, 600);
-    }, 400);
+      }, 300);
+    }, 300);
   });
   it('trigger', done => {
     const vm = createVue({
@@ -89,17 +84,7 @@ describe('Dropdown', () => {
             <el-dropdown-item>蚵仔煎</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-      `,
-      data() {
-        return {
-          clickedItem: ''
-        };
-      },
-      methods: {
-        handleClick(ev) {
-          this.clickedItem = ev.target.innerText;
-        }
-      }
+      `
     }, true);
     let dropdownElm = vm.$el;
     let dropdown = vm.$refs.dropdown;
@@ -109,9 +94,10 @@ describe('Dropdown', () => {
     dropdown.$nextTick(_ => {
       expect(dropdown.visible).to.not.true;
 
-      dropdownElm.children[0].click();
+      triggerElm.click();
       dropdown.$nextTick(_ => {
         expect(dropdown.visible).to.be.true;
+        destroyVM(vm);
         done();
       });
     });
@@ -119,7 +105,7 @@ describe('Dropdown', () => {
   it('split button', done => {
     const vm = createVue({
       template: `
-        <el-dropdown split-button type="primary" @click="handleClick" ref="dropdown">
+        <el-dropdown split-button type="primary" ref="dropdown">
           更多菜单
           <el-dropdown-menu slot="dropdown" class="dropdown-test-split-button">
             <el-dropdown-item>黄金糕</el-dropdown-item>
@@ -129,22 +115,20 @@ describe('Dropdown', () => {
             <el-dropdown-item>蚵仔煎</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-      `,
-      data() {
-        return {
-          btnClicked: false
-        };
-      },
-      methods: {
-        handleClick(ev) {
-          this.btnClicked = true;
-        }
-      }
+      `
     }, true);
 
     let dropdown = vm.$refs.dropdown;
     let dropdownElm = dropdown.$el;
     let triggerElm = dropdownElm.querySelector('.el-dropdown__caret-button');
+    var callback = sinon.spy();
+
+    dropdown.$on('click', callback);
+    dropdownElm.querySelector('.el-button').click();
+
+    setTimeout(_ => {
+      expect(callback.called).to.be.true;
+    }, 300);
 
     triggerEvent(triggerElm, 'mouseenter');
     setTimeout(_ => {
@@ -153,8 +137,9 @@ describe('Dropdown', () => {
       triggerEvent(triggerElm, 'mouseleave');
       setTimeout(_ => {
         expect(dropdown.visible).to.not.true;
+        destroyVM(vm);
         done();
-      }, 400);
-    }, 400);
+      }, 300);
+    }, 300);
   });
 });

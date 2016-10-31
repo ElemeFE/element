@@ -33,7 +33,7 @@
     },
 
     mounted() {
-      this.$on('visible', value => { this.visible = value; });
+      this.$on('menu-item-click', this.handleMenuItemClick);
       this.initEvent();
     },
 
@@ -76,6 +76,10 @@
         } else if (trigger === 'click') {
           triggerElm.addEventListener('click', handleClick);
         }
+      },
+      handleMenuItemClick(command, instance) {
+        this.visible = false;
+        this.$emit('command', command, instance);
       }
     },
 
