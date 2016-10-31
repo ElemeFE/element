@@ -13,6 +13,16 @@
 - [Home Page](http://element.eleme.io/)
 - [Docs](http://element.eleme.io/#/component)
 - [FAQ 中文](./FAQ.md)
+- [i18n](./i18n.md)
+- Starter Kit
+ - [element-starter](https://github.com/ElementUI/element-starter)
+ - [element-cooking-starter](https://github.com/ElementUI/element-cooking-starter)
+ - [element-in-laravel-starter](https://github.com/ElementUI/element-in-laravel-starter)
+- [Design resources](https://github.com/ElementUI/Resources)
+- Boilerplate for bug reports
+ - [CodePen](https://codepen.io/anon/pen/ozYpNA)
+ - [JSFiddle](https://jsfiddle.net/gmve9d3p/)
+- [Mint UI](https://github.com/ElemeFE/mint-ui) - Mobile UI elements for Vue.js
 
 ## Install
 ```shell
@@ -78,17 +88,6 @@ Modern browsers and Internet Explorer 9+.
 Skip this part if you just want to use Element.
 
 For those who are interested in contributing to Element, please refer to our [contributing guide](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.md) to see how to run this project.
-
-## Other links
-- Starter Kit
- - [element-starter](https://github.com/ElementUI/element-starter)
- - [element-cooking-starter](https://github.com/ElementUI/element-cooking-starter)
- - [element-in-laravel-starter](https://github.com/ElementUI/element-in-laravel-starter)
-- [Design resources](https://github.com/ElementUI/Resources)
-- Boilerplate for bug reports
- - [CodePen](https://codepen.io/anon/pen/ozYpNA)
- - [JSFiddle](https://jsfiddle.net/gmve9d3p/)
-- [Mint UI](https://github.com/ElemeFE/mint-ui) - Mobile UI elements for Vue.js
 
 ## Changelog
 Detailed changes for each release are documented in the [release notes](https://github.com/ElemeFE/element/releases).
