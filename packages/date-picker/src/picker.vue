@@ -1,7 +1,7 @@
 <template>
   <span
     class="el-date-editor"
-    v-clickoutside="handleClose"
+    v-clickoutside="pickerVisible"
     :class="{
       'is-have-trigger': haveTrigger,
       'is-active': pickerVisible,
@@ -294,10 +294,6 @@ export default {
   },
 
   methods: {
-    handleClose() {
-      this.pickerVisible = false;
-    },
-
     handleFocus() {
       const type = this.type;
 
