@@ -60,7 +60,7 @@
 
     & .el-alert__description {
       color: #fff;
-      font-size: var(--alert-description-font-size-font-size);
+      font-size: var(--alert-description-font-size);
       margin: 5px 0 0 0;
     }
 

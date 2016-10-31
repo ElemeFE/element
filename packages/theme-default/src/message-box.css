@@ -112,7 +112,7 @@
       }
 
       &.el-icon-circle-cross {
-        color: var(--msgbox-error-color);
+        color: var(--msgbox-danger-color);
       }
     }
   }

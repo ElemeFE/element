@@ -492,7 +492,7 @@
   --slider-stop-background-color: var(--color-grey);
   --slider-disable-color: var(--color-grey);
 
-  --slider-margin: 20px 0;
+  --slider-margin: 16px 0;
   --slider-border-radius: 3px;
   --slider-height: 4px;
   --slider-button-size: 12px;
