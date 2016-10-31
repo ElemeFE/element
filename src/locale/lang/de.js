@@ -4,7 +4,7 @@ export default {
       now: 'jetzt',
       today: 'heute',
       cancel: 'abbrechen',
-      // clear: 'leeren',
+      clear: 'leeren',
       confirm: 'OK',
       selectDate: 'Datum wählen',
       selectTime: 'Zeit wählen',
