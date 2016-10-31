@@ -5,12 +5,12 @@
 
   @b alert {
     width: 100%;
-    padding: 8px 16px;
+    padding: var(--alert-padding);
     margin: 0;
     box-sizing: border-box;
-    border-radius: 4px;
+    border-radius: var(--alert-border-radius);
     position: relative;
-    background-color: #fff;
+    background-color: var(--color-white);
     overflow: hidden;
     color: #fff;
     opacity: 1;
@@ -18,19 +18,19 @@
     transition: opacity .2s;
 
     @modifier success {
-      background-color: var(--color-success);
+      background-color: var(--alert-success-color);
     }
 
     @modifier info {
-      background-color: var(--color-info);
+      background-color: var(--alert-info-color);
     }
 
     @modifier warning {
-      background-color: var(--color-warning);
+      background-color: var(--alert-warning-color);
     }
 
     @modifier error {
-      background-color: var(--color-danger);
+      background-color: var(--alert-danger-color);
     }
 
     @e content {
@@ -39,19 +39,19 @@
     }
 
     @e icon {
-      font-size: 16px;
-      width: 16px;
+      font-size: var(--alert-icon-size);
+      width: var(--alert-icon-size);
       display: table-cell;
-      color: #fff;
+      color: var(--color-white);
       vertical-align: middle;
       @when big {
-        font-size: 28px;
-        width: 28px;
+        font-size: var(--alert-icon-large-size);
+        width: var(--alert-icon-large-size);
       }
     }
 
     @e title {
-      font-size: 13px;
+      font-size: var(--alert-title-font-size);
       line-height: 18px;
       @when bold {
         font-weight: bold;
@@ -60,12 +60,12 @@
 
     & .el-alert__description {
       color: #fff;
-      font-size: 12px;
+      font-size: var(--alert-description-font-size-font-size);
       margin: 5px 0 0 0;
     }
 
     @e closebtn {
-      font-size: 12px;
+      font-size: var(--alert-close-font-size);
       color: #fff;
       opacity: 1;
       position: absolute 12px 15px * *;
@@ -73,7 +73,7 @@
 
       @when customed {
         font-style: normal;
-        font-size: 13px;
+        font-size: var(--alert-close-customed-font-size);
         top: 9px;
       }
     }

@@ -12,9 +12,9 @@
     left: 50%;
     transform: translate3d(-50%, -50%, 0);
     background-color: #fff;
-    width: 420px;
-    border-radius: 3px;
-    font-size: 16px;
+    width: var(--msgbox-width);
+    border-radius: var(--msgbox-border-radius);
+    font-size: var(--msgbox-font-size);
     -webkit-user-select: none;
     overflow: hidden;
     backface-visibility: hidden;
@@ -25,8 +25,8 @@
 
     @e content {
       padding: 30px 20px;
-      color: #475669;
-      font-size: 14px;
+      color: var(--msgbox-content-color);
+      font-size: var(--msgbox-content-font-size);
       position: relative;
     }
 
@@ -48,16 +48,16 @@
     @e input {
       padding-top: 15px;
       & input.invalid {
-        border-color: #ff4949;
+        border-color: var(--color-danger);
         &:focus {
-          border-color: #ff4949;
+          border-color: var(--color-danger);
         }
       }
     }
 
     @e errormsg {
-      color: red;
-      font-size: 12px;
+      color: var(--color-danger);
+      font-size: var(--msgbox-error-font-size);
       min-height: 18px;
       margin-top: 2px;
     }
@@ -65,7 +65,7 @@
     @e title {
       padding-left: 0;
       margin-bottom: 0;
-      font-size: 16px;
+      font-size: var(--msgbox-font-size);
       font-weight: bold;
       height: 18px;
       color: #333;
@@ -100,19 +100,19 @@
       font-size: 36px !important;
 
       &.el-icon-circle-check {
-        color: #13ce66;
+        color: var(--msgbox-success-color);
       }
 
       &.el-icon-information {
-        color: #50bfff;
+        color: var(--msgbox-info-color);
       }
 
       &.el-icon-warning {
-        color: #f7ba2a;
+        color: var(--msgbox-warning-color);
       }
 
       &.el-icon-circle-cross {
-        color: #ff4949;
+        color: var(--msgbox-error-color);
       }
     }
   }

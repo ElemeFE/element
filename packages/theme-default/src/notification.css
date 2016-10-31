@@ -4,36 +4,36 @@
 @component-namespace el {
 
   @b notification {
-    width: 330px;
-    padding: 20px;
+    width: var(--notification-width);
+    padding: var(--notification-padding);
     box-sizing: border-box;
-    border-radius: 2px;
+    border-radius: var(--border-radius-small);
     position: fixed;
     right: 16px;
     background-color: #fff;
-    box-shadow: 0 0 6px rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .12);
+    box-shadow: var(--notification-shadow);
     transition: opacity 0.3s, transform .3s, right .3s, top 0.4s;
     overflow: hidden;
     z-index: var(--index-popper);
 
     @e group {
       & span {
-        font-size: 16px;
-        color: #1f2d3d;
+        font-size: var(--notification-title-font-size);
+        color: var(--notification-title-color);
       }
 
       & p {
-        font-size: 14px;
+        font-size: var(--notification-font-size);
         line-height: 21px;
         margin: 10px 0 0 0;
-        color: #8492a6;
+        color: var(--notification-color);
         text-align: justify;
       }
     }
 
     @e icon {
-      size: 40px;
-      font-size: 40px;
+      size: var(--notification-icon-size);
+      font-size: var(--notification-icon-size);
       float: left;
       position: relative;
       top: 3px;
@@ -42,28 +42,28 @@
     @e closeBtn {
       position: absolute 20px 20px * *;
       cursor: pointer;
-      color: #C0CCDA;
-      font-size: 14px;
+      color: var(--notification-close-color);
+      font-size: var(--notification-font-size);
 
       &:hover {
-        color: #99A9BF;
+        color: var(--notification-close-hover-color);
       }
     }
 
     & .el-icon-circle-check {
-      color: #13ce66;
+      color: var(--notification-success-color);
     }
 
     & .el-icon-circle-cross {
-      color: #ff4949;
+      color: var(--notification-danger-color);
     }
 
     & .el-icon-information {
-      color: #50bfff;
+      color: var(--notification-info-color);
     }
 
     & .el-icon-warning {
-      color: #f7ba2a;
+      color: var(--notification-warning-color);
     }
   }
 

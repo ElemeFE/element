@@ -6,20 +6,20 @@
   @b select-dropdown {
     position: absolute;
     z-index: 1001;
-    border: solid 1px #d3dce6;
-    border-radius: 2px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+    border: var(--select-dropdown-border);
+    border-radius: var(--border-radius-small);
+    background-color: var(--select-dropdown-background);
+    box-shadow: var(--select-dropdown-shadow);
     box-sizing: border-box;
     margin: 5px 0;
 
     @when multiple {
       & .el-select-dropdown__item.selected {
-        color: #20A0FF;
-        background-color: #fff;
+        color: var(--select-option-selected);
+        background-color: var(--select-dropdown-background);
 
         &.hover {
-          background-color: #E5E9F2;
+          background-color: var(--select-option-hover-background);
         }
 
         &::after {
@@ -36,19 +36,19 @@
   }
 
   @b select-dropdown__empty {
-    padding: 10px 0;
+    padding: var(--select-dropdown-empty-padding);
     margin: 0;
     text-align: center;
-    color: #999;
-    font-size: 14px;
+    color: var(--select-dropdown-empty-color);
+    font-size: var(--select-font-size);
   }
 
   @b select-dropdown__list {
     list-style: none;
-    padding: 6px 0;
+    padding: var(--select-dropdown-padding);
     margin: 0;
     width: 100%;
-    max-height: 274px;
+    max-height: var(--select-dropdown-max-height);
     box-sizing: border-box;
     overflow-y: auto;
   }
