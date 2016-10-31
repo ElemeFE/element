@@ -1,10 +1,13 @@
 ## 更新日志
 
 ### 1.0.0-rc.9
-*2016-11-xx*
+
+*2016-11-XX*
+
 - 新增 MessageBox 确定按钮自动获取焦点, #721
 - 修复 Popover focus 失效, #734
 - 修复 Clickoutside 报错, #729
+- 新增 Dropdown 新增 command api #432
 
 ### 1.0.0-rc.8
 
