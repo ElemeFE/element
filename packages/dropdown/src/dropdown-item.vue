@@ -9,9 +9,13 @@
 
     mixins: [Emitter],
 
+    props: {
+      command: String
+    },
+
     methods: {
       handleClick(e) {
-        this.dispatch('ElDropdown', 'visible', [false]);
+        this.dispatch('ElDropdown', 'menu-item-click', [this.command, this]);
       }
     }
   };

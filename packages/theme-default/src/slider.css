@@ -8,10 +8,10 @@
     @utils-clearfix;
     @e runway {
       width: 100%;
-      height: 4px;
-      margin: 20px 0;
+      height: var(--slider-height);
+      margin: var(--slider-margin);
       background-color: var(--slider-runway-background-color);
-      border-radius: 3px;
+      border-radius: var(--slider-border-radius);
       position: relative;
       cursor: pointer;
       vertical-align: middle;
@@ -64,18 +64,18 @@
     }
 
     @e bar {
-      height: 4px;
+      height: var(--slider-height);
       background-color: var(--slider-main-background-color);
-      border-top-left-radius: 3px;
-      border-bottom-left-radius: 3px;
+      border-top-left-radius: var(--slider-border-radius);
+      border-bottom-left-radius: var(--slider-border-radius);
       position: absolute;
     }
 
     @e button-wrapper {
-      size: 36px;
+      size: var(--slider-button-wrapper-size);
       position: absolute;
       z-index: 1001;
-      top: -16px;
+      top: var(--slider-button-wrapper-offset);
       transform: translateX(-50%);
       background-color: transparent;
       text-align: center;
@@ -95,7 +95,7 @@
     }
 
     @e button {
-      size: 12px;
+      size: var(--slider-button-size);
       background-color: var(--slider-main-background-color);
       border-radius: 50%;
       transition: .2s;
@@ -119,8 +119,8 @@
 
     @e stop {
       position: absolute;
-      size: 4px;
-      border-radius: 50%;
+      size: var(--slider-height);
+      border-radius: var(--border-radius-circle);
       background-color: var(--slider-stop-background-color);
       transform: translateX(-50%);
     }

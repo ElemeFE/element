@@ -144,7 +144,7 @@
 | with-credentials | 支持发送 cookie 凭证信息 | boolean | — | false |
 | show-upload-list | 是否显示已上传文件列表 | boolean | — | true |
 | type | 上传控件类型 | string | select,drag | select |
-| accept | 可选参数, 接受上传的[文件类型](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept), 拖拽文件上传时不受此参数影响 | string | — | — |
+| accept | 可选参数, 接受上传的[文件类型](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept)（thumbnail-mode 模式下此参数无效）| string | — | — |
 | on-preview | 可选参数, 点击已上传的文件链接时的钩子 | function(file) | — | — |
 | on-remove | 可选参数, 文件列表移除文件时的钩子 | function(file, fileList) | — | — |
 | on-success | 可选参数, 文件上传成功时的钩子 | function(file, fileList) | — | — |

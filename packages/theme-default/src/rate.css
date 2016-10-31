@@ -4,7 +4,7 @@
 @component-namespace el {
 
   @b rate {
-    height: 20px;
+    height: var(--rate-height);
     @e item {
       display: inline-block;
       position: relative;
@@ -15,9 +15,9 @@
     @e icon {
       position: relative;
       display: inline-block;
-      font-size: 18px;
-      margin-right: 6px;
-      color: #C6D1DE;
+      font-size: var(--rate-icon-size);
+      margin-right: var(--rate-icon-margin);
+      color: var(--rate-icon-color);
       transition: .3s;
       &.hover {
         transform: scale(1.15);
@@ -39,7 +39,7 @@
     }
 
     @e text {
-      font-size: 14px;
+      font-size: var(--rate-font-size);
       vertical-align: middle;
     }
   }

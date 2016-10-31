@@ -4,7 +4,7 @@ export default {
       now: '此刻',
       today: '今天',
       cancel: '取消',
-      // clear: '清空',
+      clear: '清空',
       confirm: '确定',
       selectDate: '选择日期',
       selectTime: '选择时间',

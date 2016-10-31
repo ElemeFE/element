@@ -309,8 +309,10 @@ export default {
       /* istanbul ignore if */
       if (newVal > 0 && this.internalCurrentPage === 0) {
         this.internalCurrentPage = 1;
+        this.$emit('current-change', 1);
       } else if (this.internalCurrentPage > newVal) {
         this.internalCurrentPage = newVal;
+        this.$emit('current-change', newVal);
       }
     },
 

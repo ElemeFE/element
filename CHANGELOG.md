@@ -1,12 +1,15 @@
 ## 更新日志
 
 ### 1.0.0-rc.9
-*2016-11-xx*
+
+*2016-11-XX*
+
 - 新增 MessageBox 确定按钮自动获取焦点, #721
 - 修复 Popover focus 失效, #734
 - 修复 Clickoutside 报错, #729
 - 修复 DatePicker 选择日期范围时当选中同一天再调整时间会出错
 - 更新 TimePicker 滚动条在 IE10+ 下隐藏
+- 新增 Dropdown 新增 command api #432
 
 ### 1.0.0-rc.8
 
