@@ -68,21 +68,24 @@ export default {
       on(reference, 'mouseleave', this.handleMouseLeave);
       on(popper, 'mouseleave', this.handleMouseLeave);
     } else {
+      let found = false;
+
       if ([].slice.call(reference.children).length) {
         const children = reference.childNodes;
-
-        for (let i = 0; i < children.length; i++) {
+        const len = children.length;
+        for (let i = 0; i < len; i++) {
           if (children[i].nodeName === 'INPUT' ||
               children[i].nodeName === 'TEXTAREA') {
             on(children[i], 'focus', () => { this.showPopper = true; });
             on(children[i], 'blur', () => { this.showPopper = false; });
+            found = true;
             break;
           }
         }
-      } else if (
-          reference.nodeName === 'INPUT' ||
-          reference.nodeName === 'TEXTAREA'
-      ) {
+      }
+      if (found) return;
+      if (reference.nodeName === 'INPUT' ||
+        reference.nodeName === 'TEXTAREA') {
         on(reference, 'focus', () => { this.showPopper = true; });
         on(reference, 'blur', () => { this.showPopper = false; });
       } else {
