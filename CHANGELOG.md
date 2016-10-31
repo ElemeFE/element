@@ -9,7 +9,8 @@
 - 修复 Clickoutside 报错, #729
 - 修复 DatePicker 选择日期范围时当选中同一天再调整时间会出错
 - 更新 TimePicker 滚动条在 IE10+ 下隐藏
-- 新增 Dropdown 新增 command api #432
+- 新增 Dropdown 的 command api #432
+- 修复 Slider 在 Form 中的显示问题
 
 ### 1.0.0-rc.8
 

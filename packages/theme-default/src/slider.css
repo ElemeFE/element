@@ -81,7 +81,21 @@
       text-align: center;
 
       .el-tooltip {
-        margin-top: 9px;
+        line-height: 1;
+        height: 100%;
+        display: block;
+      }
+
+      .el-tooltip::after {
+        content: '';
+        width: 0;
+        height: 100%;
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      .el-tooltip__rel {
+        vertical-align: middle;
       }
 
       &:hover,
