@@ -13,7 +13,7 @@ cooking.set({
   alias: config.alias
 });
 
-cooking.add('output.filename', '[name]/index.js');
+cooking.add('output.filename', '[name].js');
 cooking.add('loader.js.exclude', config.jsexclude);
 cooking.add('vue.preserveWhitespace', false);
 module.exports = cooking.resolve();
