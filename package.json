@@ -9,19 +9,21 @@
     "packages"
   ],
   "scripts": {
+    "bootstrap": "npm i && npm run submodule:fetch",
     "build:file": "node build/bin/iconInit.js & node build/bin/build-entry.js",
-    "dev": "npm install && npm run build:file && cooking watch -c build/cooking.demo.js -p",
-    "dist": "npm run clean && npm run build:file && npm run lint && cooking build -c build/cooking.conf.js,build/cooking.common.js,build/cooking.component.js -p && npm run build:utils && npm run build:theme",
-    "dist:all": "node build/bin/build-all.js && npm run build:theme",
-    "build:theme": "git submodule update --remote && node build/bin/gen-cssfile && gulp build --gulpfile packages/theme-default/gulpfile.js && cp-cli packages/theme-default/lib lib/theme-default",
-    "deploy": "npm run build:file && cooking build -c build/cooking.demo.js -p && echo element.eleme.io>>examples/element-ui/CNAME && gh-pages -d examples/element-ui --remote eleme && del examples/element-ui",
-    "pub": "sh build/release.sh",
-    "pub:all": "npm run dist:all && lerna publish",
+    "build:theme": "npm run submodule:fetch && node build/bin/gen-cssfile && gulp build --gulpfile packages/theme-default/gulpfile.js && cp-cli packages/theme-default/lib lib/theme-default",
     "build:utils": "cross-env BABEL_ENV=utils babel src --out-dir lib --ignore src/index.js",
     "clean": "rimraf lib && rimraf packages/*/lib && rimraf test/**/coverage",
+    "deploy": "npm run build:file && cooking build -c build/cooking.demo.js -p && echo element.eleme.io>>examples/element-ui/CNAME && gh-pages -d examples/element-ui --remote eleme && del examples/element-ui",
+    "dev": "npm run bootstrap && npm run build:file && cooking watch -c build/cooking.demo.js -p",
+    "dist": "npm run clean && npm run build:file && npm run lint && cooking build -c build/cooking.conf.js,build/cooking.common.js,build/cooking.component.js -p && npm run build:utils && npm run build:theme",
+    "dist:all": "node build/bin/build-all.js && npm run build:theme",
     "lint": "eslint src/**/* test/**/* packages/**/*.{js,vue} build/**/* --quiet",
-    "test:watch": "karma start test/unit/karma.conf.js",
-    "test": "npm run lint && CI_ENV=/dev/ karma start test/unit/karma.conf.js --single-run"
+    "pub": "sh build/release.sh",
+    "pub:all": "npm run dist:all && lerna publish",
+    "submodule:fetch": "git submodule foreach 'git checkout master && git pull' && git submodule update",
+    "test": "npm run lint && CI_ENV=/dev/ karma start test/unit/karma.conf.js --single-run",
+    "test:watch": "karma start test/unit/karma.conf.js"
   },
   "repository": {
     "type": "git",
