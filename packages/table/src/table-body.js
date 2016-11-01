@@ -21,7 +21,7 @@ export default {
         border="0">
         {
           this._l(this.columns, column =>
-            <colgroup
+            <col
               name={ column.id }
               width={ column.realWidth || column.width }
             />)

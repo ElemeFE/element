@@ -393,7 +393,7 @@ describe('Table', () => {
     it('width', done => {
       const vm = createTable('width="123px"', ':width="102"', 'width="39"');
       setTimeout(_ => {
-        const ths = toArray(vm.$el.querySelectorAll('.el-table__header-wrapper colgroup'))
+        const ths = toArray(vm.$el.querySelectorAll('.el-table__header-wrapper col'))
           .map(node => node.width).filter(o => o);
 
         expect(ths).to.include('123').include('102').include('39');
