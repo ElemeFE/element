@@ -1,4 +1,4 @@
-import { createVue, triggerEvent } from '../util';
+import { createVue, triggerEvent, destroyVM } from '../util';
 
 describe('InputNumber', () => {
   it('create', () => {
@@ -17,11 +17,12 @@ describe('InputNumber', () => {
 
     expect(vm.value).to.be.equal(1);
     expect(input.value).to.be.equal('1');
+    destroyVM(vm);
   });
   it('decrease', done => {
     const vm = createVue({
       template: `
-        <el-input-number v-model="value">
+        <el-input-number v-model="value" ref="input">
         </el-input-number>
       `,
       data() {
@@ -33,23 +34,24 @@ describe('InputNumber', () => {
 
     let input = vm.$el.querySelector('input');
     let btnDecrease = vm.$el.querySelector('.el-input-number__decrease');
-    for (let i = 0; i < 3; i++) {
-      triggerEvent(btnDecrease, 'mousedown');
-      triggerEvent(document, 'mouseup');
-    }
+
     triggerEvent(btnDecrease, 'mouseenter');
+    triggerEvent(btnDecrease, 'mousedown');
+    triggerEvent(document, 'mouseup');
+
     setTimeout(_ => {
       expect(vm.$el.querySelector('.el-input.is-active')).to.exist;
-      expect(vm.value).to.be.equal(2);
-      expect(input.value).to.be.equal('2');
+      expect(vm.value).to.be.equal(4);
+      expect(input.value).to.be.equal('4');
 
       triggerEvent(btnDecrease, 'mouseleave');
 
       vm.$nextTick(_ => {
         expect(vm.$el.querySelector('.el-input.is-active')).to.not.exist;
+        destroyVM(vm);
         done();
       });
-    }, 100);
+    }, 300);
   });
   it('increase', done => {
     const vm = createVue({
@@ -66,13 +68,14 @@ describe('InputNumber', () => {
 
     let input = vm.$el.querySelector('input');
     let btnIncrease = vm.$el.querySelector('.el-input-number__increase');
-    for (let i = 0; i < 3; i++) {
-      triggerEvent(btnIncrease, 'mousedown');
-      triggerEvent(document, 'mouseup');
-    }
+
+    triggerEvent(btnIncrease, 'mousedown');
+    triggerEvent(document, 'mouseup');
+
     setTimeout(_ => {
-      expect(vm.value).to.be.equal(4.5);
-      expect(input.value).to.be.equal('4.5');
+      expect(vm.value).to.be.equal(2.5);
+      expect(input.value).to.be.equal('2.5');
+      destroyVM(vm);
       done();
     }, 100);
   });
@@ -96,15 +99,19 @@ describe('InputNumber', () => {
     triggerEvent(btnDecrease, 'mousedown');
     triggerEvent(document, 'mouseup');
 
-    for (let i = 0; i < 3; i++) {
-      triggerEvent(btnIncrease, 'mousedown');
-      triggerEvent(document, 'mouseup');
-    }
+    triggerEvent(btnIncrease, 'mousedown');
+    triggerEvent(document, 'mouseup');
 
     setTimeout(_ => {
       expect(vm.value).to.be.equal(2);
       expect(input.value).to.be.equal('2');
-      done();
+
+      setTimeout(_ => {
+        expect(vm.value).to.be.equal(2);
+        expect(input.value).to.be.equal('2');
+        destroyVM(vm);
+        done();
+      }, 100);
     }, 100);
   });
   it('step', done => {
@@ -124,20 +131,20 @@ describe('InputNumber', () => {
     let btnIncrease = vm.$el.querySelector('.el-input-number__increase');
     let btnDecrease = vm.$el.querySelector('.el-input-number__decrease');
 
-    for (let i = 0; i < 2; i++) {
-      triggerEvent(btnIncrease, 'mousedown');
-      triggerEvent(document, 'mouseup');
-    }
+    triggerEvent(btnIncrease, 'mousedown');
+    triggerEvent(document, 'mouseup');
+
     setTimeout(_ => {
-      expect(vm.value).to.be.equal(11.4);
-      expect(input.value).to.be.equal('11.4');
+      expect(vm.value).to.be.equal(8.2);
+      expect(input.value).to.be.equal('8.2');
 
       triggerEvent(btnDecrease, 'mousedown');
       triggerEvent(document, 'mouseup');
 
       setTimeout(_ => {
-        expect(vm.value).to.be.equal(8.2);
-        expect(input.value).to.be.equal('8.2');
+        expect(vm.value).to.be.equal(5);
+        expect(input.value).to.be.equal('5');
+        destroyVM(vm);
         done();
       }, 100);
     }, 100);
@@ -150,7 +157,7 @@ describe('InputNumber', () => {
       `,
       data() {
         return {
-          value: 9
+          value: 6
         };
       }
     }, true);
@@ -171,13 +178,14 @@ describe('InputNumber', () => {
 
     let input = vm.$el.querySelector('input');
     let btnDecrease = vm.$el.querySelector('.el-input-number__decrease');
-    for (let i = 0; i < 5; i++) {
-      triggerEvent(btnDecrease, 'mousedown');
-      triggerEvent(document, 'mouseup');
-    }
+
+    triggerEvent(btnDecrease, 'mousedown');
+    triggerEvent(document, 'mouseup');
+
     setTimeout(_ => {
       expect(vm.value).to.be.equal(6);
       expect(input.value).to.be.equal('6');
+      destroyVM(vm);
       done();
     }, 100);
   });
@@ -189,7 +197,7 @@ describe('InputNumber', () => {
       `,
       data() {
         return {
-          value: 5
+          value: 8
         };
       }
     }, true);
@@ -210,13 +218,14 @@ describe('InputNumber', () => {
 
     let input = vm.$el.querySelector('input');
     let btnIncrease = vm.$el.querySelector('.el-input-number__increase');
-    for (let i = 0; i < 5; i++) {
-      triggerEvent(btnIncrease, 'mousedown');
-      triggerEvent(document, 'mouseup');
-    }
+
+    triggerEvent(btnIncrease, 'mousedown');
+    triggerEvent(document, 'mouseup');
+
     setTimeout(_ => {
       expect(vm.value).to.be.equal(8);
       expect(input.value).to.be.equal('8');
+      destroyVM(vm);
       done();
     }, 100);
   });
