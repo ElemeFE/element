@@ -46,6 +46,9 @@
     "vue-popup": "^0.2.9",
     "wind-dom": "0.0.3"
   },
+  "peerDependencies": {
+    "vue": "^2.0.3"
+  },
   "devDependencies": {
     "babel-cli": "^6.14.0",
     "babel-core": "^6.14.0",
