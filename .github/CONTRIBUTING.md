@@ -33,6 +33,7 @@ Element UI 的成长离不开大家的支持，如果你愿意为 Element UI 贡
 ## 开发环境搭建
 首先你需要 Node.js 4+ 和 NPM 3+
 ```shell
+git clone git@github.com:ElemeFE/element.git --recursive
 npm run dev
 
 # open http://localhost:8085

@@ -1,0 +1,3 @@
+[submodule "packages/theme-default"]
+	path = packages/theme-default
+	url = https://github.com/ElementUI/theme-default
