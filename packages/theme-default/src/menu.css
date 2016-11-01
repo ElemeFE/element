@@ -74,7 +74,7 @@
           border:1px solid #d3dce6;
           padding: 5px 0;
           background-color: #fff;
-          z-index: 1;
+          z-index: 100;
           min-width: 100%;
           box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.12), 0px 0px 6px 0px rgba(0,0,0,0.04);
         }
