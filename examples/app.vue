@@ -1,5 +1,5 @@
 <style lang="css">
-  @import '../node_modules/highlight.js/styles/color-brewer.css';
+  @import 'highlight.js/styles/color-brewer.css';
   @import 'assets/styles/common.css';
   @import 'assets/styles/fonts/style.css';
 
