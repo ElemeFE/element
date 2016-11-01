@@ -1,16 +1,16 @@
 # Breadcrumb
 
-Display the location of current page, and go back to any previous page immediately.
+Displays the location of the current page, making it easier to browser back.
 
 ---
-## How to use
+## Basic usage
 
 
-:::demo In `el-breadcrumb`, tag `el-breadcrumb-item` stands for every level that starts from homepage. This component has an attribute `separator`. it can be set to change the separator, it's value type can only be `String`, and default value is '/'.
+:::demo In `el-breadcrumb`, each `el-breadcrumb-item` is a tag that stands for every level starting from homepage. This component has a `String` attribute `separator`, and it determines the separator. Its default value is '/'.
 
 ```html
 <el-breadcrumb separator="/">
-  <el-breadcrumb-item>homepage</el-breadcrumb-item>
+  <el-breadcrumb-item :to="{ path: '/' }">homepage</el-breadcrumb-item>
   <el-breadcrumb-item>promotion management</el-breadcrumb-item>
   <el-breadcrumb-item>promotion list</el-breadcrumb-item>
   <el-breadcrumb-item>promotion detail</el-breadcrumb-item>
@@ -18,10 +18,16 @@ Display the location of current page, and go back to any previous page immediate
 ```
 :::
 
-### Attributes
-| Attribute      | Description          | Type      | Options                           | Default|
+### Breadcrumb Attributes
+| Attribute      | Description          | Type      | Accepted Values            | Default|
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| separator | - | string | — | '/' |
+| separator | separator character | string | — | / |
+
+### Breadcrumb Item Attributes
+| Attribute      | Description          | Type      | Accepted Values            | Default|
+|---------- |-------------- |---------- |--------------------------------  |-------- |
+| to | target route of the link, same as `to` of `vue-router` | string/object | — | — |
+| replace | if `true`, the navigation will not leave a history record | boolean | — | false |
 
 
 

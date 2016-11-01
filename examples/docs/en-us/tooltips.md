@@ -109,7 +109,7 @@ Tooltip has two themes：`dark` and `light`。
 
 
 :::demo 
-Set `effect` to modify theme，default value is `dark`.
+Set `effect` to modify theme, default value is `dark`.
 
 ```html
 <el-tooltip content="Top center" placement="top">
@@ -141,7 +141,7 @@ Distribute task of the attribute `content` to the ‘Signature’ `slot`  as an 
 
 In addition to  basic usages, there are some attributes that allow you to customize your own ：
 
-`transition` attribute allows you to customerize the animation in which the tooltip shows or hides ，default value is `fade-in-linear`.
+`transition` attribute allows you to customerize the animation in which the tooltip shows or hides , default value is `fade-in-linear`.
 
 `disabled` attribute allows you disable the `tooltip` 's prompt function. You just only set it to `boolean` type with value `true`.
 
@@ -178,13 +178,13 @@ Of cause, component Tooltip is powerful. You can see API below.
 | Attribute               | Description                                                     | Type              | Options      | Default |
 |--------------------|----------------------------------------------------------|-------------------|-------------|--------|
 |  effect        |  themes authrozied  | String            | `dark`, `light`  | dark  |
-|  content        | display content， `slot#content` insert it into DOM by `slot#content` | String            | — | — |
+|  content        | display content,  `slot#content` insert it into DOM by `slot#content` | String            | — | — |
 |  placement        | position of Tooltip   | String           |  `top`, `top-start`, `top-end`, `bottom`, `bottom-start`, `bottom-end`, `left`, `left-start`, `left-end`, `right`, `right-start`, `right-end` |  bottom |
 |  value(v-model)        |  status show or not | Boolean           | — |  false |
 |  disabled       |  Tooltip work or not  | Boolean           | — |  false |
 |  offset        |  offset of the position   | Number           | — |  0 |
 |  transition     |  define gradient animation    | String             | — | `fade-in-linear` |
-|  visible-arrow   |  display Tooltip arrow or not，more info  go to [Vue-popper](https://github.com/element-component/vue-popper) page | Boolean | — | true |
+|  visible-arrow   |  display Tooltip arrow or not, more info  go to [Vue-popper](https://github.com/element-component/vue-popper) page | Boolean | — | true |
 |  options        | [popper.js](https://popper.js.org/documentation.html) paramters | Object            | refer to [popper.js](https://popper.js.org/documentation.html) doc | `{ boundariesElement: 'body', gpuAcceleration: false }` |
 | openDelay | show in delay, unit is millisecond | Number | — | 0 |
 

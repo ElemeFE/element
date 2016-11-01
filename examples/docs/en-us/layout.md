@@ -173,7 +173,7 @@ Flexible alignment of columns.
 ### Col Attributes
 | Attribute      | Description          | Type      | Options                           | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| **span** | the column number of grid，**required** | number | — | — |
+| **span** | the column number of grid, **required** | number | — | — |
 | offset | The number of spaces on the left side of the grid | number | — | 0 |
 | push |  The number of spaces that grid moves to the right | number | — | 0 |
 | pull |  The number of spaces that grid moves to the left | number | — | 0 |

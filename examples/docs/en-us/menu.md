@@ -114,8 +114,8 @@ Vertical menu which has submenus
 | Event      | Description    | Callback Paramters      |
 |---------- |-------- |---------- |
 | select  | callback function when activate menu | index: index of selected menu ,indexPath:  index path of selected menu  |
-| open  | callback function when SubMenu expand | index:   index of expanded subMenu， indexPath:  index path of expanded subMenu |
-| close  | callback function when SubMenu collapse | index:  index of menu collapsed， indexPath:  index path of subMenu collapsed  |
+| open  | callback function when SubMenu expand | index:   index of expanded subMenu,  indexPath:  index path of expanded subMenu |
+| close  | callback function when SubMenu collapse | index:  index of menu collapsed,  indexPath:  index path of subMenu collapsed  |
 
 ### SubMenu Attribute
 | Attribute      | Description    | Type      | Options       | Default   |
