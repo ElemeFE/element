@@ -223,6 +223,9 @@
           } else {
             this.currentPlaceholder = this.cachedPlaceHolder;
           }
+          this.$nextTick(() => {
+            this.resetInputHeight();
+          });
           if (this.selectedInit) {
             this.selectedInit = false;
             return;
@@ -232,9 +235,6 @@
 
           this.$emit('input', result);
           this.$emit('change', result);
-          this.$nextTick(() => {
-            this.resetInputHeight();
-          });
           if (this.filterable) {
             this.query = '';
             this.hoverIndex = -1;
