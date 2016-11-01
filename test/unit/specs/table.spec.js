@@ -408,11 +408,11 @@ describe('Table', () => {
         'fixed="right" label="test2"',
         'fixed="left" label="test3"');
       setTimeout(_ => {
-        expect(toArray(vm.$el.querySelectorAll('.el-table__fixed th:not(.hidden)'))
+        expect(toArray(vm.$el.querySelectorAll('.el-table__fixed th:not(.is-hidden)'))
           .map(node => node.textContent))
           .to.eql(['test1', 'test3']);
 
-        expect(toArray(vm.$el.querySelectorAll('.el-table__fixed-right th:not(.hidden)'))
+        expect(toArray(vm.$el.querySelectorAll('.el-table__fixed-right th:not(.is-hidden)'))
           .map(node => node.textContent))
           .to.eql(['test2']);
         destroyVM(vm);
