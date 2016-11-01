@@ -55,7 +55,7 @@ Resizable for entering multiple lines of text information.
 ```
 ### Mixed input
 
-Pretend or append an element，generally the element is a label or a button.
+Pretend or append an element, generally the element is a label or a button.
 
 ::: demo You can add `slot` attribute in `<template>` element and choose which  to place at input box.
 

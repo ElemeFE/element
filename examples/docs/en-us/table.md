@@ -199,7 +199,7 @@ You can also use the attribute `width` to define the width of columns.
 
 ### Strped Table
 
-Striped table adds zebra-stripes to a table，so you can easily distinguish between different rows of data.
+Striped table adds zebra-stripes to a table, so you can easily distinguish between different rows of data.
 
 :::demo
 Attribute `stripe` could get it. It accepts a `Boolean` parameter, whose default value is false. Set it to true to turn it on.
@@ -257,7 +257,7 @@ Attribute `stripe` could get it. It accepts a `Boolean` parameter, whose default
 ### Table with border
 
 :::demo 
-By default，table component has no border in vertical. If you need it, you can set attribute `border` to `Boolean` value true. It accepts boolean type value. Turn on it by setting to `true`.
+By default, table component has no border in vertical. If you need it, you can set attribute `border` to `Boolean` value true. It accepts boolean type value. Turn on it by setting to `true`.
 
 ```html
 <template>
@@ -875,7 +875,7 @@ based on the column . It accepts the `Boolean` type with an default value `false
 | Attribute      | Description          | Type      | Options                           | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | data | data to display | array | — | — |
-| height | table 's height，default is null，meaning height is set automatically | string | — | — |
+| height | table 's height, default is null, meaning height is set automatically | string | — | — |
 | stripe | whether stripe table or not| boolean | — | false |
 | border | whether has border in vertical orientation or not | boolean | — | false |
 | fit | whether width of column automatically distract or not | boolean | — | true |

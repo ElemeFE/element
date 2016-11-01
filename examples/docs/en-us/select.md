@@ -505,7 +505,7 @@ You can use the search function to find options quickly.
 
 Search the data from the server, and enter the keyword to find.
 
-:::demo Set the value of `filterable` and `remote` with `true` to enable remote search, and you should pass the `remote-method`. `remote-method` is a `Function`，that will be called when the input value changed, and its parameter is the current input value. What you should notice is that if `el-option` is rendered by the `v-for` directive, and you should add `key` attribute for `el-option`. Its value needs to be unique, such as `item.value` in the following example.
+:::demo Set the value of `filterable` and `remote` with `true` to enable remote search, and you should pass the `remote-method`. `remote-method` is a `Function`, that will be called when the input value changed, and its parameter is the current input value. What you should notice is that if `el-option` is rendered by the `v-for` directive, and you should add `key` attribute for `el-option`. Its value needs to be unique, such as `item.value` in the following example.
 
 ```html
 <template>

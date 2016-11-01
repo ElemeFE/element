@@ -1,14 +1,31 @@
+<script>
+  export default {
+    methods: {
+      hello() {
+        alert('Hello World!');
+      }
+    }
+  }
+</script>
+<style>
+  .demo-box.demo-alert .el-alert {
+    margin: 20px 0 0;
+  }
+
+  .demo-box.demo-alert .el-alert:first-child {
+    margin: 0;
+  }
+</style>
 
 ## Alert
 
-Provide important alert messages for users in the webpages.
+Displays important alert messages.
 
-### How to use
+### Basic usage
 
-Alert components are non-overlay elements in the page which will not disappear automatically.
+Alert components are non-overlay elements in the page that does not disappear automatically.
 
-
-::: demo Alert components provide 4 types of themes，defined by `type`，default value is `info`.
+::: demo Alert provides 4 types of themes defined by `type`, whose default value is `info`.
 
 ```html
 <template>
@@ -32,11 +49,11 @@ Alert components are non-overlay elements in the page which will not disappear a
 ```
 :::
 
-### Customizable Closable Button
+### Customizable close button
 
-Customizable Closable Buttons with texts or other symbols.
+Customize the close button as texts or other symbols.
 
-::: demo In the Alert components, you can set if the alert components can be closed or not，closing text and closing callbacks. `closable` attribute decides if the component can be closed or not. It accepts `boolean`, and default is `true`. You can set `close-text` attribute to change the right hand side closing symbol. Be careful that `close-text` must be String. Set `close` event to fire a callback.
+::: demo Alert allows you to configure if it's closable. The close button text and closing callbacks are also customizable. `closable` attribute decides if the component can be closed or not. It accepts `boolean`, and the default is `true`. You can set `close-text` attribute to replace the default cross symbol as the close button. Be careful that `close-text` must be a string. `close` event fires when the component is closed.
 
 ```html
 <template>
@@ -51,7 +68,7 @@ Customizable Closable Buttons with texts or other symbols.
     close-text="Gotcha">
   </el-alert>
   <el-alert
-    title="callback alert"
+    title="alert with callback"
     type="warning"
     @close="hello">
   </el-alert>
@@ -69,11 +86,11 @@ Customizable Closable Buttons with texts or other symbols.
 ```
 :::
 
-### with icon
+### With icon
 
-To improve readability when trying to show some kind of states.
+Displaying an icon improves readability.
 
-::: demo By setting `show-icon` attribute to display Alert icon, and this will show your intent to users more effectively.
+::: demo Setting the `show-icon` attribute displays an icon that corresponds with the current Alert type.
 
 ```html
 <template>
@@ -103,7 +120,7 @@ To improve readability when trying to show some kind of states.
 
 ### With description
 
-Description includes a title and content to show a more detail warning.
+Description includes a message with more detailed information.
 
 ::: demo Besides the required `title` attribute, you can add a `description` attribute to help you describe the alert with more details. Description can only store text string, and it will word wrap automatically.
 
@@ -120,7 +137,7 @@ Description includes a title and content to show a more detail warning.
 
 ### With icon and description
 
-::: demo At last, this is an example has both icon and description.
+::: demo At last, this is an example with both icon and description.
 
 ```html
 <template>
@@ -153,17 +170,17 @@ Description includes a title and content to show a more detail warning.
 :::
 
 ### Attributes
-| Attribute      | Description          | Type      | Optional Value                           | Default  |
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | **title** | title **REQUIRED** | string | — | — |
 | type | component type | string | success/warning/info/error | info |
 | description | supportive text | string | — | — |
 | closable | if closable or not | boolean | — | true |
-| close-text | add customized text | string | — | — |
-| show-icon | if show closing icon | boolean | — | false |
+| close-text | customized close button text | string | — | — |
+| show-icon | if a type icon is displayed | boolean | — | false |
 
 
 ### Events
-| Event Name | Description | Argument |
+| Event Name | Description | Parameters |
 |---------- |-------- |---------- |
-| close | callback function when closing alert | — |
+| close | fires when alert is closed | — |

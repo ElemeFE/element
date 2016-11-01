@@ -70,7 +70,7 @@ You just need to use `.fullscreen` modifier and then create a global mask layer 
     type="primary"
     @click.native="openFullScreen"
     v-loading.fullscreen="fullscreenLoading">
-    show animation in whole page，and will disappear after 3s
+    show animation in whole page, and will disappear after 3s
   </el-button>
 </template>
 

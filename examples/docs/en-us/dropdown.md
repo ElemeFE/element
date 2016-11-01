@@ -77,10 +77,10 @@ Click main button or hover on it. Default is hover.
 | Attribute          | Description            | Type            | Options                 | Default   |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
 | text          | main button text      | string          |          —             |    —     |
-| type          | main button type，refer to  `Button` Component    | string  |          —             |    —     |
+| type          | main button type, refer to  `Button` Component    | string  |          —             |    —     |
 | trigger       | how to trigger     | string  |    hover,click  |  hover |
 | icon-separate | display independent main button or not | boolean         |     —       | false   |
-| size          | component size，refer to `Button` component     | string          | large, small, mini  |  —  |
+| size          | component size, refer to `Button` component     | string          | large, small, mini  |  —  |
 | menu-align    | horizontal alignment     | string          | start, end  | end |
 
 

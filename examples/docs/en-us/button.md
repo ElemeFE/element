@@ -188,5 +188,5 @@ Except for default size, button component provide three additional sizes, you ca
 | type     | button type   | string    |   primary,success,warning,danger,info,text |     —    |
 | plain     | determine whether it's a plain button   | Boolean    | true,false | false   |
 | disabled  | disable the button    | boolean   | true, false   | false   |
-| icon  | button icon，accepts an icon name in the icon library | string   |  —  |  —  |
+| icon  | button icon, accepts an icon name in the icon library | string   |  —  |  —  |
 | native-type | native button type | string | button,submit,reset | button |

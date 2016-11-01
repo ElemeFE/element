@@ -188,7 +188,7 @@ References notification separately：
 import { Notification } from 'element-ui';
 ```
 
-In this case the method is `Notification(options)`. We also define the methods for each type，such as `Notification.success(options)`.
+In this case the method is `Notification(options)`. We also define the methods for each type, such as `Notification.success(options)`.
 
 ### Options
 | Attribute      | Description          | Type      | Options                          | Default  |

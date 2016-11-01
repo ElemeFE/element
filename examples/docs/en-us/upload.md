@@ -116,7 +116,7 @@ file | optional, The field name of the uploaded file | string | --- | ---
 with-credentials | send cookies or not | boolean | --- | ---
 show-uploadList | show the uploaded file list or not | boolean | --- |---
 type | the type of upload control | string | select, drag | select
-accept | optional，limits the type of upload file, but if the upload type is `drag`, you can upload all the file types | string | --- | ---
+accept | optional, limits the type of upload file, but if the upload type is `drag`, you can upload all the file types | string | --- | ---
 on-preview | optional, hook function when click the uploaded files | function(file) | --- | ---
 on-remove | optional, hook function when remove the files | function(file, fileList) | --- | ---
 on-success | optional, hook function when upload files successfully | function(file, fileList) | --- | ---
