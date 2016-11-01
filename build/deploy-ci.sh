@@ -8,7 +8,7 @@ if [ "$TRAVIS_BRANCH" = "master" ] && [ "$GH_TOKEN" ]; then
   git clone https://$GH_TOKEN@github.com/ElementUI/dev.git && cd dev
   git config user.name "element_bot"
   git config user.email "element_bot"
-  rm -rf *
+  rm -rf `find * ! -name README.md`
   cp -rf ../../examples/element-ui/** .
   git add -A .
   git commit -m "$TRAVIS_COMMIT_MSG"
@@ -23,7 +23,7 @@ if [ "$TRAVIS_TAG" ] && [ "$GH_TOKEN" ]; then
   git clone https://$GH_TOKEN@github.com/ElementUI/lib.git && cd lib
   git config user.name "element_bot"
   git config user.email "element_bot"
-  rm -rf *
+  rm -rf `find * ! -name README.md`
   cp -rf ../../lib/** .
   git add -A .
   git commit -m "[build] $TRAVIS_TAG"
@@ -40,7 +40,7 @@ if [ "$TRAVIS_TAG" ] && [ "$GH_TOKEN" ]; then
   git config user.name "element_bot"
   git config user.email "element_bot"
   git checkout gh-pages
-  rm -rf *
+  rm -rf `find * ! -name README.md`
   cp -rf ../../examples/element-ui/** .
   git add -A .
   git commit -m "$TRAVIS_COMMIT_MSG"
