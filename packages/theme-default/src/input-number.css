@@ -11,6 +11,7 @@
 
     & .el-input__inner {
       appearance: none;
+      padding-right: calc(var(--input-height) * 2 + 10);
     }
     @e increase, decrease {
       height: auto;
@@ -62,6 +63,9 @@
       & .el-input-number__decrease {
         right: calc(var(--input-large-height) + 1px);
       }
+      & .el-input__inner {
+        padding-right: calc(var(--input-large-height) * 2 + 10);
+      }
     }
     @m small {
       width: 130px;
@@ -73,6 +77,9 @@
       }
       & .el-input-number__decrease {
         right: calc(var(--input-small-height) + 1px);
+      }
+      & .el-input__inner {
+        padding-right: calc(var(--input-small-height) * 2 + 10);
       }
     }
   }
