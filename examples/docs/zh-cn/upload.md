@@ -145,9 +145,9 @@
 | show-upload-list | 是否显示已上传文件列表 | boolean | — | true |
 | type | 上传控件类型 | string | select,drag | select |
 | accept | 可选参数, 接受上传的[文件类型](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept)（thumbnail-mode 模式下此参数无效）| string | — | — |
-| on-preview | 可选参数, 点击已上传的文件链接时的钩子 | function(file) | — | — |
+| on-preview | 可选参数, 点击已上传的文件链接时的钩子, 可以通过 file.response 拿到服务端返回数据 | function(file) | — | — |
 | on-remove | 可选参数, 文件列表移除文件时的钩子 | function(file, fileList) | — | — |
-| on-success | 可选参数, 文件上传成功时的钩子 | function(file, fileList) | — | — |
-| on-error | 可选参数, 文件上传失败时的钩子 | function(err, file, fileList) | — | — |
+| on-success | 可选参数, 文件上传成功时的钩子 | function(response, file, fileList) | — | — |
+| on-error | 可选参数, 文件上传失败时的钩子 | function(err, response, file) | — | — |
 | before-upload | 可选参数, 上传文件之前的钩子，参数为上传的文件，若返回 false 或者 Promise 则停止上传。 | function(file) | — | — |
 | thumbnail-mode | 是否设置为图片模式，该模式下会显示图片缩略图 | boolean | — | false |

@@ -11,6 +11,11 @@
 - 更新 TimePicker 滚动条在 IE10+ 下隐藏
 - 新增 Dropdown 的 command api #432
 - 修复 Slider 在 Form 中的显示问题
+- 修复 Upload 在 onSuccess、onError 钩子无法拿到服务端返回信息的问题
+
+#### 非兼容性更新
+
+- Upload on-error 钩子函数参数变更为 function(err, response, file), on-success 钩子函数参数变更为 function(response, file, fileList)
 
 ### 1.0.0-rc.8
 

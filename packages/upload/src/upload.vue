@@ -130,20 +130,21 @@ export default {
       let formData = new FormData();
       formData.append(this.name, file);
 
-      ajax(this.action, {
+      ajax({
         headers: this.headers,
         withCredentials: this.withCredentials,
         file: file,
         data: this.data,
         filename: this.name,
+        action: this.action,
         onProgress: e => {
           this.onProgress(e, file);
         },
         onSuccess: res => {
           this.onSuccess(res, file);
         },
-        onError: err => {
-          this.onError(err, file);
+        onError: (err, response) => {
+          this.onError(err, response, file);
         }
       });
     },

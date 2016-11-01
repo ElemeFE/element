@@ -1,5 +1,5 @@
 function getError(action, option, xhr) {
-  const msg = `cannot post ${action} ${xhr.status}'`;
+  const msg = `fail to post ${action} ${xhr.status}'`;
   const err = new Error(msg);
   err.status = xhr.status;
   err.method = 'post';
@@ -20,12 +20,14 @@ function getBody(xhr) {
   }
 }
 
-export default function upload(action, option) {
+export default function upload(option) {
   if (typeof XMLHttpRequest === 'undefined') {
     return;
   }
 
   const xhr = new XMLHttpRequest();
+  const action = option.action;
+
   if (xhr.upload) {
     xhr.upload.onprogress = function progress(e) {
       if (e.total > 0) {
@@ -64,6 +66,10 @@ export default function upload(action, option) {
   }
 
   const headers = option.headers || {};
+
+  if (headers['X-Requested-With'] !== null) {
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+  }
 
   for (let item in headers) {
     if (headers.hasOwnProperty(item) && headers[item] !== null) {
