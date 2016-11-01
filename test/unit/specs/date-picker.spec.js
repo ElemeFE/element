@@ -411,7 +411,10 @@ describe('DatePicker', () => {
 
         setTimeout(_ => {
           const { minDate, maxDate } = vm.picker;
-          expect(maxDate - minDate).to.equal(2678400000); // one month
+          const minMonth = minDate.getMonth();
+          const maxMonth = maxDate.getMonth();
+
+          expect(maxMonth - minMonth).to.equal(1); // one month
           done();
         }, DELAY);
       }, DELAY);
