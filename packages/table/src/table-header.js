@@ -15,14 +15,14 @@ export default {
         border="0">
         {
           this._l(this.columns, column =>
-            <colgroup
+            <col
               name={ column.id }
               width={ column.realWidth || column.width }
             />)
         }
         {
           !this.fixed && this.layout.gutterWidth
-            ? <colgroup name="gutter" width={ this.layout.scrollY ? this.layout.gutterWidth : '' }></colgroup>
+            ? <col name="gutter" width={ this.layout.scrollY ? this.layout.gutterWidth : '' }></col>
             : ''
         }
         <thead>
