@@ -45,6 +45,9 @@
     "vue-popup": "^0.2.9",
     "wind-dom": "0.0.3"
   },
+  "peerDependencies": {
+    "vue": "^2.0.3"
+  },
   "devDependencies": {
     "babel-cli": "^6.14.0",
     "babel-core": "^6.14.0",
@@ -101,8 +104,7 @@
     "style-loader": "^0.13.1",
     "theaterjs": "^3.0.0",
     "uppercamelcase": "^1.1.0",
-    "url-loader": "^0.5.7",
-    "vue": "^2.0.3",
+    "url-loader": "^0.5.7",    
     "vue-loader": "^9.7.0",
     "vue-markdown-loader": "^0.5.1",
     "vue-router": "^2.0.0",
