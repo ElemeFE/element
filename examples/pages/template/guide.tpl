@@ -5,6 +5,9 @@
     .content {
       padding-left: 25px;
       margin-left: -1px;
+      h2 {
+        margin-bottom: 10px;
+      }
 
       h3 {
         font-size: 22px;
@@ -13,6 +16,7 @@
         color: #1f2d3d;
       }
       p {
+        line-height: 1.6;
         font-size: 14px;
         color: #5e6d82;
       }

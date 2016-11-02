@@ -104,14 +104,14 @@
     "pages": {
       "index": {
         "1": "网站快速成型工具",
-        "2": "Element，一套为开发者、设计师和产品经理准备的基于 Vue 2.0 的组件库，提供了配套设计资源，帮助你的网站快速成型。",
+        "2": "Element, a Vue 2.0 based component library for developers, designers and product managers, with a set of design resources, helping you build websites efficiently.",
         "3": "Guide",
-        "4": "了解设计指南，帮助产品设计人员搭建逻辑清晰、结构合理且高效易用的产品。",
+        "4": "Understand the design guidelines, helping designers build product that's logically sound, reasonably structured and easy to use.",
         "5": "View Detail",
         "6": "Components",
-        "7": "使用组件 Demo 快速体验交互细节；使用前端框架封装的代码帮助工程师快速开发。",
+        "7": "Experience interaction details by strolling through component demos. Use encapsulated code to improve developing efficiency.",
         "8": "Resources",
-        "9": "下载相关资源，用其快速搭建页面原型或高保真视觉稿，提升产品设计效率。",
+        "9": "Download relevant design resources for shaping page prototype or visual draft, increasing design efficiency.",
         "10": "product designer",
         "11": "interaction designer",
         "12": "visual designer",
