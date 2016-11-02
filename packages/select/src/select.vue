@@ -235,6 +235,7 @@
 
           this.$emit('input', result);
           this.$emit('change', result);
+          this.dispatch('form-item', 'el.form.change', val);
           if (this.filterable) {
             this.query = '';
             this.hoverIndex = -1;
