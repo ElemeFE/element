@@ -14,6 +14,7 @@
 - [Home Page](http://element.eleme.io/)
 - [Docs](http://element.eleme.io/#/component)
 - [FAQ 中文](./FAQ.md)
+- [自定义主题](./custom-theme.md)
 - [i18n](./i18n.md)
 - Starter Kit
  - [element-starter](https://github.com/ElementUI/element-starter)
