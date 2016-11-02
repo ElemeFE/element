@@ -46,11 +46,17 @@ cooking.add('vueMarkdown', {
         var m = tokens[idx].info.trim().match(/^demo\s*(.*)$/);
         if (tokens[idx].nesting === 1) {
           var description = (m && m.length > 1) ? m[1] : '';
-          var html = convert(striptags(tokens[idx + 1].content, 'script'));
+          var content = tokens[idx + 1].content;
+          var html = convert(striptags.strip(content, 'script'));
+          var script = striptags.fetch(content, 'script');
+          var jsfiddle = { html: html, script: script };
           var descriptionHTML = description
             ? '<div class="description">' + md.render(description) + '</div>'
             : '';
-          return `<demo-block class="demo-box">
+
+          jsfiddle = md.utils.escapeHtml(JSON.stringify(jsfiddle));
+
+          return `<demo-block class="demo-box" :jsfiddle="${jsfiddle}">
                     <div class="source">${html}</div>
                     <div class="meta">
                       ${descriptionHTML}
