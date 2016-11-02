@@ -1,0 +1,123 @@
+@import "../common/var.css";
+@import "../common/transition.css";
+
+@component-namespace el {
+  @b date-editor {
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    height: 36px;
+    width: 182px;
+
+    @e editor {
+      border: 1px solid #c0ccda;
+      border-radius: 4px;
+      line-height: 18px;
+      height: 36px;
+      padding: 3px 10px;
+      width: 100%;
+      box-sizing: border-box;
+      transition: border 0.3s;
+      color: #666;
+      font-size: 14px;
+
+      &::-webkit-input-placeholder {
+        color: var(--input-placeholder-color);
+        font-size: 14px;
+      }
+
+      &::-moz-placeholder {
+        color: #bbb;
+        font-size: 14px;
+      }
+
+      &:-ms-input-placeholder {
+        color: #bbb;
+        font-size: 14px;
+      }
+
+      &::placeholder {
+        color: #bbb;
+        font-size: 14px;
+      }
+    }
+
+    @e trigger {
+      &.el-icon {
+        cursor: pointer;
+        position: absolute;
+        display: inline-block;
+        width: 16px;
+        right: 10px;
+        top: 0;
+        bottom: 0;
+        color: var(--datepicker-trigger-color);
+        font-size: 16px;
+        line-height: 38px;
+      }
+    }
+
+    @e clear {
+      cursor: pointer;
+      position: absolute;
+      width: 20px;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      line-height: 36px;
+      color: var(--datepicker-icon-color);
+
+      &:hover {
+        color: var(--datepicker-text-hover-color);
+      }
+    }
+
+    @when have-trigger {
+      .el-date-editor__editor {
+        padding-right: 20px;
+      }
+
+      .el-date-editor__clear {
+        right: 22px;
+      }
+    }
+
+    &.lg {
+      .el-date-editor__editor {
+        padding: 6px 4px;
+      }
+    }
+
+    &.sm {
+      .el-date-editor__editor {
+        padding: 1px 1px;
+      }
+    }
+
+    .el-picker-panel {
+      position: absolute;
+      min-width: 180px;
+      box-sizing: border-box;
+      box-shadow: 0 2px 6px #ccc;
+      background: #fff;
+      z-index: 10;
+      top: 41px;
+    }
+  }
+
+  .el-date-editor__editor:focus,
+  .el-date-editor:hover > .el-date-editor__editor,
+  .el-date-editor.is-active > .el-date-editor__editor {
+    outline: none;
+    border-color: var(--datepicker-active-color);
+  }
+
+  .el-date-editor .el-date-editor__clear {
+    display: none;
+  }
+
+  .el-date-editor.is-filled:hover .el-date-editor__clear,
+  .el-date-editor.is-filled.is-active > .el-date-editor__clear {
+    display: inline-block;
+  }
+}

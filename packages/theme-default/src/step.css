@@ -1,0 +1,204 @@
+@charset "UTF-8";
+@import "./common/var.css";
+
+@component-namespace el {
+  @b step {
+    position: relative;
+    vertical-align: top;
+
+    @when horizontal {
+      display: inline-block;
+    }
+
+    @when vertical {
+      & .el-step__head,
+      & .el-step__main {
+        display: inline-block;
+      }
+
+      & .el-step__main {
+        padding-left: 10px;
+      }
+    }
+
+    @e line {
+      display: inline-block;
+      position: absolute;
+      border-color: inherit;
+      background-color: #c0ccda;
+
+      @when icon {
+        @when horizontal {
+          right: 4px;
+        }
+      }
+
+      @when horizontal {
+        top: 15px;
+        height: 2px;
+        left: 30px;
+        right: 0;
+      }
+
+      @when vertical {
+        width: 2px;
+        box-sizing: border-box;
+        top: 30px;
+        bottom: 0;
+      }
+    }
+
+    @e line-inner {
+      display: inherit;
+      border-width: 1px;
+      border-style: solid;
+      border-color: inherit;
+      transition: all 150ms;
+      width: 0;
+      height: 0;
+    }
+
+    @e icon {
+      display: block;
+      line-height: 28px;
+
+      > * {
+        line-height: inherit;
+        vertical-align: middle;
+      }
+    }
+
+    @e head {
+      circle: 28px transparent;
+      text-align: center;
+      line-height: 28px;
+      font-size: 28px;
+      vertical-align: top;
+      transition: all 150ms;
+
+      @when text {
+        font-size: 14px;
+        border-width: 2px;
+        border-style: solid;
+
+        @when process {
+          color: #fff;
+          background-color: #c0ccda;
+          border-color: #c0ccda;
+        }
+
+        @when wait {
+          color: #c0ccda;
+          background-color: #fff;
+          border-color: #c0ccda;
+        }
+
+        @when success {
+          color: #fff;
+          background-color: #13ce66;
+          border-color: #13ce66;
+        }
+
+        @when error {
+          color: #fff;
+          background-color: #ff4949;
+          border-color: #ff4949;
+        }
+
+        @when finish {
+          color: #fff;
+          background-color: #20a0ff;
+          border-color: #20a0ff;
+        }
+      }
+
+      @when process {
+        color: #c0ccda;
+        border-color: #c0ccda;
+      }
+
+      @when wait {
+        color: #c0ccda;
+        border-color: #c0ccda;
+      }
+
+      @when success {
+        color: #13ce66;
+        border-color: #13ce66;
+      }
+
+      @when error {
+        color: #ff4949;
+        border-color: #ff4949;
+      }
+
+      @when finish {
+        color: #20a0ff;
+        border-color: #20a0ff;
+      }
+    }
+
+    @e main {
+      white-space: normal;
+      padding-right: 10px;
+      text-align: left;
+    }
+
+    @e title {
+      font-size: 14px;
+      line-height: 32px;
+      display: inline-block;
+
+      @when process {
+        font-weight: 700;
+        color: #475669;
+      }
+
+      @when wait {
+        font-weight: normal;
+        color: #99a9bf;
+      }
+
+      @when success {
+        font-weight: 700;
+        color: #13ce66;
+      }
+
+      @when error {
+        font-weight: 700;
+        color: #ff4949;
+      }
+
+      @when finish {
+        font-weight: 700;
+        color: #20a0ff;
+      }
+    }
+
+    @e description {
+      font-size: 12px;
+      font-weight: normal;
+      line-height: 14px;
+
+      @when process {
+        color: #8492a6;
+      }
+
+      @when wait {
+        color: #c0ccda;
+      }
+
+      @when success {
+        color: #13ce66;
+      }
+
+      @when error {
+        color: #ff4949;
+      }
+
+      @when finish {
+        color: #20a0ff;
+      }
+    }
+  }
+}

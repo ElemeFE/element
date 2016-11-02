@@ -1,0 +1,23 @@
+@charset "UTF-8";
+@import "./common/var.css";
+
+@component-namespace el {
+  @b card {
+    border: 1px solid var(--card-border-color);
+    border-radius: var(--card-border-radius);
+    background-color: #fff;
+    overflow: hidden;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, .12),
+                0px 0px 6px 0px rgba(0, 0, 0, .04);
+
+    @e header {
+      padding: calc(var(--card-padding) - 2) var(--card-padding);
+      border-bottom: 1px solid var(--card-border-color);
+      box-sizing: border-box;
+    }
+
+    @e body {
+      padding: var(--card-padding);
+    }
+  }
+}

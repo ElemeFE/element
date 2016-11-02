@@ -1,0 +1,45 @@
+@charset "UTF-8";
+@import "../common/var.css";
+@import "./option.css";
+
+@component-namespace element {
+
+  @b dropdown {
+    background-color: var(--dropdown-fill);
+    border: var(--dropdown-border);
+    border-radius: var(--dropdown-radius);
+    box-shadow: var(--dropdown-shadow);
+    left: 0;
+    list-style-type: none;
+    margin: -var(--dropdown-border-width);
+    margin-top: 5px;
+    min-width: calc(var(--input-width) + 4);
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+    z-index: var(--index-normal);
+
+    @e empty {
+      color: var(--dropdown-option-empty-color);
+      font-size: var(--input-font-size);
+      padding: 7px;
+      text-align: center;
+    }
+
+    @e list {
+      margin: 0;
+      max-height: var(--cascader-height);
+      overflow: auto;
+      padding: 0;
+    }
+
+    @e option {
+      max-height: 250px;
+      overflow: auto;
+    }
+
+    &:empty {
+      display: none;
+    }
+  }
+}

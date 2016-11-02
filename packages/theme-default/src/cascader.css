@@ -1,0 +1,45 @@
+@charset "UTF-8";
+@import "./input.css";
+@import "./common/var.css";
+/*@import "./core/dropdown.css";*/
+
+@component-namespace element {
+
+  @b cascader {
+    display: inline-block;
+    position: relative;
+
+    @e dropdown {
+      background-color: var(--cascader-menu-fill);
+      border: var(--cascader-menu-border);
+      border-radius: var(--cascader-menu-radius);
+      box-shadow: var(--cascader-menu-submenu-shadow);
+      margin-top: 5px;
+      max-height: var(--cascader-height);
+      position: absolute;
+      white-space: nowrap;
+      z-index: 10;
+    }
+
+    @e wrap {
+      overflow: hidden;
+    }
+
+    @e menu {
+      border: 0;
+      box-shadow: none;
+      display: inline-block;
+      margin: 0;
+      position: relative;
+      vertical-align: top;
+
+      &::before {
+        border-left: var(--cascader-menu-border);
+        content: " ";
+        height: var(--cascader-height);
+        left: 0;
+        position: absolute;
+      }
+    }
+  }
+}

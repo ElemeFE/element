@@ -1,0 +1,220 @@
+@charset "UTF-8";
+@import "./common/var.css";
+
+@component-namespace el {
+  @b input {
+    position: relative;
+    font-size: var(--font-size-base);
+    
+    @e inner {
+      display: block;
+      padding: 3px 10px;
+      box-sizing: border-box;
+      width: 100%;
+      height: var(--input-height);
+      color: var(--input-color);
+      background-color: #fff;
+      background-image: none;
+      border: var(--input-border);
+      border-radius: 4px;
+      transition: var(--border-transition-base);
+      outline: none;
+      line-height: normal;
+
+      &::placeholder {
+        color: var(--input-placeholder-color);
+      }
+
+      &:hover {
+        border-color: var(--input-hover-border);
+      }
+      &:focus {
+        outline: none;
+        border-color: var(--input-focus-border);
+      }
+    }
+
+    @e icon {
+      position: absolute;
+      width: 35px;
+      height: 100%;
+      right: 0;
+      text-align: center;
+      color: var(--input-icon-color);
+
+      &:after {
+        content: '';
+        height: 100%;
+        width: 0;
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      & + .el-input__inner {
+        padding-right: 35px;
+      }
+    }
+
+    @when active {
+      .el-input__inner {
+        outline: none;
+        border-color: var(--input-focus-border);
+      }
+    }
+
+    @when disabled {
+      .el-input__inner {
+        background-color: var(--disabled-fill-base);
+        border-color: var(--disabled-border-base);
+        color: var(--disabled-color-base);
+        cursor: not-allowed;
+
+        &::placeholder {
+          color: var(--input-disabled-placeholder-color);
+        }
+      }
+    }
+
+    .el-icon-loading {
+      animation: validating-rotating 1s linear infinite;
+    }
+    @m large {
+      font-size: var(--input-large-font-size);
+
+      & .el-input__inner {
+        height: var(--input-large-height);
+      }
+    }
+    @m small {
+      font-size: var(--input-small-font-size);
+
+      & .el-input__inner {
+        height: var(--input-small-height);
+      }
+    }
+    @m mini {
+      font-size: var(--input-mini-font-size);
+
+      & .el-input__inner {
+        height: var(--input-mini-height);
+      }
+    }
+  }
+
+  @b input-group {
+    display: table;
+    border-collapse: separate;
+
+    & > .el-input__inner {
+      vertical-align: middle;
+      display: table-cell;
+    }
+    @e append, prepend {
+      background-color: #f9fafc;
+      color: #99a9bf;
+      vertical-align: middle;
+      display: table-cell;
+      position: relative;
+      border: var(--border-base);
+      border-radius: 4px;
+      padding: 0 10px;
+      width: 1%;
+      white-space: nowrap;
+
+      & .el-select,
+      & .el-button {
+        display: block;
+        margin: -10px;
+      }
+
+      & .el-button,
+      & .el-select .el-input__inner,
+      & .el-select:hover .el-input__inner {
+        border-color: transparent;
+        background-color: transparent;
+        color: inherit;
+        border-top: 0;
+        border-bottom: 0;
+      }
+      & .el-button,
+      & .el-input {
+        font-size: inherit;
+      }
+    }
+    @e prepend {
+      border-right: 0;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    @e append {
+      border-left: 0;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    & .el-input__inner:first-child {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    & .el-input__inner:last-child {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    & .el-input__inner:not(:first-child):not(:last-child) {
+      border-radius: 0;
+    }
+  }
+
+  @b textarea {
+
+    @e inner {
+      display: block;
+      resize: vertical;
+      padding: 5px 7px;
+      line-height: 1.5;
+      box-sizing: border-box;
+      width: 100%;
+      font-size: var(--font-size-base);
+      color: var(--input-color);
+      background-color: #fff;
+      background-image: none;
+      border: var(--input-border);
+      border-radius: 4px;
+      transition: var(--border-transition-base);
+
+      &::placeholder {
+        color: var(--input-placeholder-color);
+      }
+
+      &:hover {
+        border-color: var(--input-hover-border);
+      }
+
+      &:focus {
+        outline: none;
+        border-color: var(--input-focus-border);
+      }
+    }
+
+    @when disabled {
+      .el-textarea__inner {
+        background-color: var(--disabled-fill-base);
+        border-color: var(--disabled-border-base);
+        color: var(--disabled-color-base);
+        cursor: not-allowed;
+
+        &::placeholder {
+          color: var(--input-disabled-placeholder-color);
+        }
+      }
+    }
+  }
+}
+
+@keyframes validating-rotating {
+  0% {
+    transform: translate(0, -50%) rotateZ(0deg);
+  }
+  100% {
+    transform: translate(0, -50%) rotateZ(360deg);
+  }
+}

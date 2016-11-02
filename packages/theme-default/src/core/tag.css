@@ -1,0 +1,29 @@
+@charset "UTF-8";
+@import "../common/var.css";
+
+@component-namespace element-core {
+
+  @b tag {
+    background-color: var(--tag-fill);
+    border: 0;
+    border-radius: var(--tag-border-radius);
+    color: var(--tag-color);
+    height: 22px;
+    margin: 1px;
+    outline: 0;
+    padding: 3px 16px 3px 3px;
+    position: relative;
+
+    @e button {
+      color: var(--tag-close-color);
+      cursor: pointer;
+      line-height: 1;
+
+      /* 增大可点击面积 */
+      padding: 5px;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
+}

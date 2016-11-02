@@ -1,0 +1,34 @@
+@import "../common/var.css";
+
+@component-namespace el {
+  @b time-range-picker {
+    min-width: 354px;
+    overflow: visible;
+
+    @e content {
+      position: relative;
+      text-align: center;
+      padding: 10px;
+      display: flex;
+    }
+
+    @e cell {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 4px 7px 7px;
+      flex: 1;
+    }
+
+    @e header {
+      margin-bottom: 5px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    @e body {
+      display: flex;
+      border-radius:2px;
+      border: 1px solid var(--datepicker-border-color);
+    }
+  }
+}
