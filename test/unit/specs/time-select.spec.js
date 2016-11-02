@@ -3,8 +3,13 @@ import TimeSelect from 'packages/time-select';
 import Vue from 'vue';
 
 describe('TimeSelect', () => {
+  let vm;
+  afterEach(() => {
+    destroyVM(vm);
+  });
+
   it('should render correct contents', done => {
-    const vm = createTest(TimeSelect, {
+    vm = createTest(TimeSelect, {
       pickerOptions: {
         start: '08:30',
         step: '00:15',
@@ -28,7 +33,7 @@ describe('TimeSelect', () => {
   });
 
   it('select time', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <div>
           <el-time-select ref="compo" v-model="value">
@@ -62,7 +67,7 @@ describe('TimeSelect', () => {
   });
 
   it('set default value', done => {
-    const vm = createTest(TimeSelect, {
+    vm = createTest(TimeSelect, {
       value: '14:30'
     }, true);
     const input = vm.$el.querySelector('input');
@@ -80,7 +85,7 @@ describe('TimeSelect', () => {
   });
 
   it('set minTime', done => {
-    const vm = createVue(`
+    vm = createVue(`
       <el-time-select
         ref="picker"
         :picker-options="{
@@ -105,7 +110,7 @@ describe('TimeSelect', () => {
   });
 
   it('minTime < value', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-time-select
           ref="picker"

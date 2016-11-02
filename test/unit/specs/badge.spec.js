@@ -1,13 +1,19 @@
-import { createTest, createVue } from '../util';
+import { createTest, createVue, destroyVM } from '../util';
 import Badge from 'packages/badge';
 
 describe('Badge', () => {
+  let vm;
+  afterEach(() => {
+    destroyVM(vm);
+  });
+
   it('value', () => {
-    expect(createTest(Badge, { value: 80 }).content).to.equal(80);
+    vm = createTest(Badge, { value: 80 });
+    expect(vm.content).to.equal(80);
   });
 
   it('is fixed', () => {
-    const vm = createVue(`
+    vm = createVue(`
       <el-badge>
         <button>click</button>
       </el-badge>
@@ -17,7 +23,7 @@ describe('Badge', () => {
   });
 
   it('is dot', () => {
-    const vm = createVue(`
+    vm = createVue(`
       <el-badge is-dot>
         <button>click</button>
       </el-badge>
@@ -27,7 +33,9 @@ describe('Badge', () => {
   });
 
   it('max', () => {
-    expect(createTest(Badge, { max: 100, value: 200 }).content).to.equal('100+');
-    expect(createTest(Badge, { max: 100, value: 80 }).content).to.equal(80);
+    vm = createTest(Badge, { max: 100, value: 200 });
+    expect(vm.content).to.equal('100+');
+    vm = createTest(Badge, { max: 100, value: 80 });
+    expect(vm.content).to.equal(80);
   });
 });

@@ -1,8 +1,13 @@
-import { createVue } from '../util';
+import { createVue, destroyVM } from '../util';
 
 describe('Input', () => {
+  let vm;
+  afterEach(() => {
+    destroyVM(vm);
+  });
+
   it('create', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-input
           :minlength="3"
@@ -33,7 +38,7 @@ describe('Input', () => {
   });
 
   it('disabled', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-input disabled>
         </el-input>
@@ -43,7 +48,7 @@ describe('Input', () => {
   });
 
   it('icon', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-input
           icon="time"
@@ -69,7 +74,7 @@ describe('Input', () => {
   });
 
   it('size', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-input size="large">
         </el-input>
@@ -80,7 +85,7 @@ describe('Input', () => {
   });
 
   it('type', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-input type="textarea">
         </el-input>
@@ -91,7 +96,7 @@ describe('Input', () => {
   });
 
   it('rows', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-input type="textarea" :rows="3">
         </el-input>
@@ -100,7 +105,7 @@ describe('Input', () => {
     expect(vm.$el.querySelector('.el-textarea__inner').getAttribute('rows')).to.be.equal('3');
   });
   it('autosize', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <div>
           <el-input

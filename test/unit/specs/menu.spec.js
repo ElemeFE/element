@@ -1,8 +1,13 @@
-import { createVue, triggerEvent } from '../util';
+import { createVue, triggerEvent, destroyVM } from '../util';
 
 describe('Menu', () => {
+  let vm;
+  afterEach(() => {
+    destroyVM(vm);
+  });
+
   it('create', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-menu>
           <el-menu-item index="1" ref="item1">处理中心</el-menu-item>
@@ -23,7 +28,7 @@ describe('Menu', () => {
     });
   });
   it('default active', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-menu default-active="2">
           <el-menu-item index="1" ref="item1">处理中心</el-menu-item>
@@ -39,7 +44,7 @@ describe('Menu', () => {
     });
   });
   it('active watch', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-menu :default-active="active">
           <el-menu-item index="1" ref="item1">active watch处理中心</el-menu-item>
@@ -61,7 +66,7 @@ describe('Menu', () => {
     }, 100);
   });
   it('default active in submenu', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-menu default-active="2-2">
           <el-menu-item index="1" ref="item1">处理中心</el-menu-item>
@@ -83,7 +88,7 @@ describe('Menu', () => {
     });
   });
   it('submenu', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-menu>
           <el-menu-item index="1" ref="item1">处理中心</el-menu-item>
@@ -118,7 +123,7 @@ describe('Menu', () => {
     });
   });
   it('submenu default opened', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-menu theme="dark" :default-openeds="defaultOpeneds">
           <el-menu-item index="1">default opened处理中心</el-menu-item>
@@ -152,7 +157,7 @@ describe('Menu', () => {
     });
   });
   it('theme', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-menu theme="dark">
           <el-menu-item index="1" ref="item1">处理中心</el-menu-item>
@@ -167,7 +172,7 @@ describe('Menu', () => {
     expect(vm.$el.classList.contains('el-menu--dark')).to.be.true;
   });
   it('unique-opened', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-menu theme="dark" unique-opened default-active="2-2">
           <el-menu-item index="1">处理中心</el-menu-item>
@@ -198,7 +203,7 @@ describe('Menu', () => {
     });
   });
   it('horizontal mode', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-menu mode="horizontal">
           <el-menu-item index="1">处理中心</el-menu-item>
@@ -229,7 +234,7 @@ describe('Menu', () => {
     }, 500);
   });
   it('menu trigger click', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-menu mode="horizontal" menu-trigger="click">
           <el-menu-item index="1">处理中心</el-menu-item>
@@ -264,7 +269,7 @@ describe('Menu', () => {
     }, 500);
   });
   it('horizontal submenu active', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-menu mode="horizontal">
           <el-menu-item index="1">处理中心</el-menu-item>
@@ -286,7 +291,7 @@ describe('Menu', () => {
     });
   });
   it('menu group', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-menu mode="vertical" default-active="1">
           <el-menu-item-group title="分组一" ref="group1">

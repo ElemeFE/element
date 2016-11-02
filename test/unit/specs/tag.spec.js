@@ -1,8 +1,13 @@
-import { createVue } from '../util';
+import { createVue, destroyVM } from '../util';
 
 describe('Tag', () => {
+  let vm;
+  afterEach(() => {
+    destroyVM(vm);
+  });
+
   it('create', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
       <el-tag></el-tag>
       `
@@ -14,7 +19,7 @@ describe('Tag', () => {
   });
 
   it('text', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
       <el-tag>标签</el-tag>
       `
@@ -23,7 +28,7 @@ describe('Tag', () => {
   });
 
   it('type', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
       <el-tag type="primary"></el-tag>
       `
@@ -32,7 +37,7 @@ describe('Tag', () => {
   });
 
   it('hit', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
       <el-tag hit></el-tag>
       `
@@ -41,7 +46,7 @@ describe('Tag', () => {
   });
 
   it('closable', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
       <el-tag closable @close="handleClose">关闭标签</el-tag>
       `,
@@ -66,7 +71,7 @@ describe('Tag', () => {
   });
 
   it('closeTransition', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
       <el-tag closable closeTransition></el-tag>
       `

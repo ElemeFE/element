@@ -1,8 +1,13 @@
-import { createVue } from '../util';
+import { createVue, destroyVM } from '../util';
 
 describe('Tabs', () => {
+  let vm;
+  afterEach(() => {
+    destroyVM(vm);
+  });
+
   it('create', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-tabs>
           <el-tab-pane label="用户管理">A</el-tab-pane>
@@ -27,7 +32,7 @@ describe('Tabs', () => {
     }, 100);
   });
   it('active-name', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-tabs :active-name="activeName" @click="handleClick">
           <el-tab-pane name="tab-A" label="用户管理">A</el-tab-pane>
@@ -63,7 +68,7 @@ describe('Tabs', () => {
     }, 100);
   });
   it('card', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-tabs type="card">
           <el-tab-pane label="用户管理">A</el-tab-pane>
@@ -77,7 +82,7 @@ describe('Tabs', () => {
     expect(vm.$el.classList.contains('el-tabs--card')).to.be.true;
   });
   it('border card', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-tabs type="border-card">
           <el-tab-pane label="用户管理">A</el-tab-pane>
@@ -91,7 +96,7 @@ describe('Tabs', () => {
     expect(vm.$el.classList.contains('el-tabs--border-card')).to.be.true;
   });
   it('closable', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-tabs type="card" closable @tab-remove="handleRemove">
           <el-tab-pane label="用户管理">A</el-tab-pane>
@@ -127,7 +132,7 @@ describe('Tabs', () => {
     }, 100);
   });
   it('closable edge', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-tabs type="card" closable>
           <el-tab-pane label="用户管理">A</el-tab-pane>

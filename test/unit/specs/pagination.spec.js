@@ -1,9 +1,13 @@
-import { createTest, createVue, triggerEvent } from '../util';
+import { createTest, createVue, triggerEvent, destroyVM } from '../util';
 import Pagination from 'packages/pagination';
 
 describe('Pagination', () => {
+  let vm;
+  afterEach(() => {
+    destroyVM(vm);
+  });
   it('create', () => {
-    const vm = createTest(Pagination);
+    vm = createTest(Pagination);
     const elm = vm.$el;
     // prev
     expect(elm.querySelector('button.btn-prev')).to.exist;
@@ -20,7 +24,7 @@ describe('Pagination', () => {
   });
 
   it('set layout', () => {
-    const vm = createTest(Pagination, {
+    vm = createTest(Pagination, {
       layout: 'prev, pager, next'
     });
     const elm = vm.$el;
@@ -39,14 +43,14 @@ describe('Pagination', () => {
   });
 
   it('small', () => {
-    const vm = createTest(Pagination, {
+    vm = createTest(Pagination, {
       small: true
     });
     expect(vm.$el.classList.contains('el-pagination--small')).to.true;
   });
 
   it('pageSize', () => {
-    const vm = createTest(Pagination, {
+    vm = createTest(Pagination, {
       pageSize: 25,
       total: 100
     });
@@ -55,7 +59,7 @@ describe('Pagination', () => {
   });
 
   it('currentPage', () => {
-    const vm = createTest(Pagination, {
+    vm = createTest(Pagination, {
       pageSize: 20,
       total: 200,
       currentPage: 3
@@ -65,7 +69,7 @@ describe('Pagination', () => {
   });
 
   it('pageSizes', () => {
-    const vm = createTest(Pagination, {
+    vm = createTest(Pagination, {
       pageSizes: [10, 15, 35, 50],
       pageSize: 35,
       total: 1000,
@@ -79,7 +83,7 @@ describe('Pagination', () => {
   });
 
   it('pageSizes:not found pageSize', () => {
-    const vm = createTest(Pagination, {
+    vm = createTest(Pagination, {
       pageSizes: [10, 15, 35, 50],
       pageSize: 24,
       total: 1000,
@@ -90,7 +94,7 @@ describe('Pagination', () => {
   });
 
   it('layout is empty', () => {
-    const vm = createTest(Pagination, {
+    vm = createTest(Pagination, {
       layout: ''
     });
 
@@ -98,7 +102,7 @@ describe('Pagination', () => {
   });
 
   it('jumper: change value', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-pagination
           @current-change="handleChange"
@@ -133,7 +137,7 @@ describe('Pagination', () => {
   });
 
   it('event:current-change', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-pagination
           :total="1000"
@@ -159,7 +163,7 @@ describe('Pagination', () => {
   });
 
   it('event:size-change', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-pagination
           :total="100"
@@ -182,7 +186,7 @@ describe('Pagination', () => {
   });
 
   it('pageSize > total', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-pagination
           @current-change="handleChange"
@@ -213,7 +217,7 @@ describe('Pagination', () => {
 
   describe('click pager', () => {
     it('click ul', () => {
-      const vm = createTest(Pagination, {
+      vm = createTest(Pagination, {
         total: 1000
       }, true);
 
@@ -222,7 +226,7 @@ describe('Pagination', () => {
     });
 
     it('click li', () => {
-      const vm = createTest(Pagination, {
+      vm = createTest(Pagination, {
         total: 1000
       }, true);
 
@@ -231,7 +235,7 @@ describe('Pagination', () => {
     });
 
     it('click next icon-more', () => {
-      const vm = createTest(Pagination, {
+      vm = createTest(Pagination, {
         total: 1000
       }, true);
 
@@ -240,7 +244,7 @@ describe('Pagination', () => {
     });
 
     it('click prev icon-more', done => {
-      const vm = createTest(Pagination, {
+      vm = createTest(Pagination, {
         total: 1000
       }, true);
 
@@ -254,7 +258,7 @@ describe('Pagination', () => {
     });
 
     it('click last page', done => {
-      const vm = createTest(Pagination, {
+      vm = createTest(Pagination, {
         total: 1000
       }, true);
       const nodes = vm.$el.querySelectorAll('li.number');

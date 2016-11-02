@@ -1,8 +1,13 @@
 import { createVue, triggerEvent, destroyVM } from '../util';
 
 describe('Dropdown', () => {
+  let vm;
+  afterEach(() => {
+    destroyVM(vm);
+  });
+
   it('create', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-dropdown ref="dropdown">
           <span class="el-dropdown-link">
@@ -35,7 +40,7 @@ describe('Dropdown', () => {
     }, 400);
   });
   it('menu click', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-dropdown ref="dropdown">
           <span class="el-dropdown-link">
@@ -70,7 +75,7 @@ describe('Dropdown', () => {
     }, 300);
   });
   it('trigger', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-dropdown trigger="click" ref="dropdown">
           <span class="el-dropdown-link">
@@ -103,7 +108,7 @@ describe('Dropdown', () => {
     });
   });
   it('split button', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-dropdown split-button type="primary" ref="dropdown">
           更多菜单

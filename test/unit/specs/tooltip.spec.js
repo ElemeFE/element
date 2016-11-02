@@ -1,8 +1,13 @@
-import { createVue, triggerEvent } from '../util';
+import { createVue, triggerEvent, destroyVM } from '../util';
 
 describe('Tooltip', () => {
+  let vm;
+  afterEach(() => {
+    destroyVM(vm);
+  });
+
   it('create', () => {
-    const vm = createVue(`
+    vm = createVue(`
       <el-tooltip content="提示文字">
         <button>click</button>
       </el-tooltip>`);
@@ -66,7 +71,7 @@ describe('Tooltip', () => {
   });
 
   it('light mode', () => {
-    const vm = createVue(`
+    vm = createVue(`
       <el-tooltip content="abc" effect="light">
         <button>abc</button>
       </el-tooltip>

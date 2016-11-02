@@ -4,8 +4,13 @@ import DatePicker from 'packages/date-picker';
 const DELAY = 10;
 
 describe('DatePicker', () => {
+  let vm;
+  afterEach(() => {
+    destroyVM(vm);
+  });
+
   it('create', () => {
-    const vm = createTest(DatePicker, {
+    vm = createTest(DatePicker, {
       readonly: true,
       placeholder: '23333',
       format: 'HH-mm-ss'
@@ -17,7 +22,7 @@ describe('DatePicker', () => {
   });
 
   it('select date', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-date-picker ref="compo" v-model="value"></el-date-picker>
       `,
@@ -62,7 +67,7 @@ describe('DatePicker', () => {
   });
 
   describe('keydown', () => {
-    let vm, input;
+    let input;
     let keyDown = function(el, keyCode) {
       const evt = document.createEvent('Events');
 
@@ -113,7 +118,7 @@ describe('DatePicker', () => {
   });
 
   it('type:month', done => {
-    const vm = createTest(DatePicker, {
+    vm = createTest(DatePicker, {
       type: 'month'
     }, true);
     const input = vm.$el.querySelector('input');
@@ -131,7 +136,7 @@ describe('DatePicker', () => {
   });
 
   it('type:year', done => {
-    const vm = createTest(DatePicker, {
+    vm = createTest(DatePicker, {
       type: 'year'
     }, true);
     const input = vm.$el.querySelector('input');
@@ -301,7 +306,7 @@ describe('DatePicker', () => {
   });
 
   it('type:daterange', done => {
-    const vm = createTest(DatePicker, {
+    vm = createTest(DatePicker, {
       type: 'daterange'
     }, true);
     const input = vm.$el.querySelector('input');
@@ -557,7 +562,7 @@ describe('DatePicker', () => {
 
   it('picker-options:shortcuts', done => {
     let test;
-    const vm = createTest(DatePicker, {
+    vm = createTest(DatePicker, {
       pickerOptions: {
         shortcuts: [
           {

@@ -1,8 +1,12 @@
 import { createVue, triggerEvent, destroyVM } from '../util';
 
 describe('InputNumber', () => {
+  let vm;
+  afterEach(() => {
+    destroyVM(vm);
+  });
   it('create', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-input-number v-model="value">
         </el-input-number>
@@ -17,10 +21,9 @@ describe('InputNumber', () => {
 
     expect(vm.value).to.be.equal(1);
     expect(input.value).to.be.equal('1');
-    destroyVM(vm);
   });
   it('decrease', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-input-number v-model="value" ref="input">
         </el-input-number>
@@ -48,13 +51,12 @@ describe('InputNumber', () => {
 
       vm.$nextTick(_ => {
         expect(vm.$el.querySelector('.el-input.is-active')).to.not.exist;
-        destroyVM(vm);
         done();
       });
     }, 300);
   });
   it('increase', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-input-number v-model="value">
         </el-input-number>
@@ -75,12 +77,11 @@ describe('InputNumber', () => {
     setTimeout(_ => {
       expect(vm.value).to.be.equal(2.5);
       expect(input.value).to.be.equal('2.5');
-      destroyVM(vm);
       done();
     }, 100);
   });
   it('disabled', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-input-number v-model="value" disabled>
         </el-input-number>
@@ -109,13 +110,12 @@ describe('InputNumber', () => {
       setTimeout(_ => {
         expect(vm.value).to.be.equal(2);
         expect(input.value).to.be.equal('2');
-        destroyVM(vm);
         done();
       }, 100);
     }, 100);
   });
   it('step', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-input-number v-model="value" :step="3.2">
         </el-input-number>
@@ -144,13 +144,12 @@ describe('InputNumber', () => {
       setTimeout(_ => {
         expect(vm.value).to.be.equal(5);
         expect(input.value).to.be.equal('5');
-        destroyVM(vm);
         done();
       }, 100);
     }, 100);
   });
   it('min', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-input-number v-model="value" :min="6">
         </el-input-number>
@@ -185,12 +184,11 @@ describe('InputNumber', () => {
     setTimeout(_ => {
       expect(vm.value).to.be.equal(6);
       expect(input.value).to.be.equal('6');
-      destroyVM(vm);
       done();
     }, 100);
   });
   it('max', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-input-number v-model="value" :max="8">
         </el-input-number>
@@ -225,7 +223,6 @@ describe('InputNumber', () => {
     setTimeout(_ => {
       expect(vm.value).to.be.equal(8);
       expect(input.value).to.be.equal('8');
-      destroyVM(vm);
       done();
     }, 100);
   });

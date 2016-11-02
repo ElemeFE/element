@@ -3,8 +3,13 @@ import TimePicker from 'packages/time-picker';
 import Vue from 'vue';
 
 describe('TimePicker', () => {
+  let vm;
+  afterEach(() => {
+    destroyVM(vm);
+  });
+
   it('create', () => {
-    const vm = createTest(TimePicker, {
+    vm = createTest(TimePicker, {
       placeholder: 'test',
       readonly: true
     });
@@ -14,7 +19,7 @@ describe('TimePicker', () => {
   });
 
   it('format', () => {
-    const vm = createTest(TimePicker, {
+    vm = createTest(TimePicker, {
       format: 'HH-mm-ss',
       value: new Date(2016, 9, 10, 18, 40)
     });
@@ -23,7 +28,7 @@ describe('TimePicker', () => {
   });
 
   it('default value', done => {
-    const vm = createTest(TimePicker, {
+    vm = createTest(TimePicker, {
       value: new Date(2016, 9, 10, 18, 40)
     }, true);
 
@@ -45,7 +50,7 @@ describe('TimePicker', () => {
   });
 
   it('select time', done => {
-    const vm = createTest(TimePicker, true);
+    vm = createTest(TimePicker, true);
     const input = vm.$el.querySelector('input');
 
     input.blur();
@@ -80,7 +85,7 @@ describe('TimePicker', () => {
   });
 
   it('click cancel button', done => {
-    const vm = createTest(TimePicker, true);
+    vm = createTest(TimePicker, true);
     const input = vm.$el.querySelector('input');
 
     input.blur();
@@ -97,7 +102,7 @@ describe('TimePicker', () => {
   });
 
   it('click confirm button', done => {
-    const vm = createTest(TimePicker, true);
+    vm = createTest(TimePicker, true);
     const input = vm.$el.querySelector('input');
 
     input.blur();
@@ -114,7 +119,7 @@ describe('TimePicker', () => {
   });
 
   it('set format', done => {
-    const vm = createTest(TimePicker, {
+    vm = createTest(TimePicker, {
       pickerOptions: {
         format: 'HH:mm'
       }
@@ -131,7 +136,7 @@ describe('TimePicker', () => {
   });
 
   it('set format to empty', done => {
-    const vm = createTest(TimePicker, {
+    vm = createTest(TimePicker, {
       pickerOptions: {
         format: ''
       }
@@ -148,7 +153,7 @@ describe('TimePicker', () => {
   });
 
   it('selectableRange', done => {
-    const vm = createTest(TimePicker, {
+    vm = createTest(TimePicker, {
       pickerOptions: {
         selectableRange: '18:30:00 - 20:30:00'
       }

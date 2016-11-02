@@ -1,8 +1,13 @@
-import { createVue } from '../util';
+import { createVue, destroyVM } from '../util';
 
 describe('Progress', () => {
+  let vm;
+  afterEach(() => {
+    destroyVM(vm);
+  });
+
   it('create', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <div>
           <el-progress ref="percent0" :percentage="0"></el-progress>
@@ -21,7 +26,7 @@ describe('Progress', () => {
     expect(vm.$refs.percent100.$el.querySelector('.el-progress-bar__inner').style.width).to.be.equal('100%');
   });
   it('status', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <div>
           <el-progress ref="lineSuccess" :percentage="100" status="success"></el-progress>
@@ -42,7 +47,7 @@ describe('Progress', () => {
     expect(vm.$refs.circleException.$el.querySelector('.el-progress__text .el-icon-close')).to.be.exist;
   });
   it('text inside', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-progress :percentage="50" text-inside></el-progress>
       `
@@ -50,7 +55,7 @@ describe('Progress', () => {
     expect(vm.$el.classList.contains('el-progress--text-inside')).to.be.true;
   });
   it('stroke width', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-progress :percentage="50" :stroke-width="8"></el-progress>
       `
@@ -58,7 +63,7 @@ describe('Progress', () => {
     expect(vm.$el.querySelector('.el-progress-bar__outer').style.height).to.be.equal('8px');
   });
   it('show text', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-progress :percentage="50" :show-text="false"></el-progress>
       `
@@ -66,7 +71,7 @@ describe('Progress', () => {
     expect(vm.$el.querySelector('.el-progress__text')).to.not.exist;
   });
   it('circle', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-progress type="circle" :percentage="50"></el-progress>
       `
@@ -74,7 +79,7 @@ describe('Progress', () => {
     expect(vm.$el.classList.contains('el-progress--circle')).to.be.true;
   });
   it('width', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-progress type="circle" :percentage="50" :width="120"></el-progress>
       `
