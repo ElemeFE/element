@@ -1,0 +1,44 @@
+.el-loading-spinner {
+  height: 12px;
+  width: 60px;
+  top: 50%;
+  left: 50%;
+  font-size: 0;
+  text-align: center;
+  margin-top: -6px;
+  margin-left: -30px;
+  z-index: 10001;
+}
+
+.el-loading-bubble {
+  height: 12px;
+  width: 12px;
+  background-color: #fff;
+  margin: 0 3px;
+  border-radius: 50%;
+  display: inline-block;
+  animation: 1s cubic-bezier(.2,.68,.18,1.08) infinite both bubble-pulse;
+}
+
+.el-loading-bubble.bubble1 {
+  animation-delay: .16s;
+}
+
+.el-loading-bubble.bubble2 {
+  animation-delay: .32s;
+}
+
+.el-loading-bubble.bubble3 {
+  animation-delay: .48s;
+}
+
+@keyframes bubble-pulse {
+  0%, 80% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  45% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}

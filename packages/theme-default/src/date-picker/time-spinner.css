@@ -1,0 +1,53 @@
+@import "../common/var.css";
+
+@component-namespace el {
+  @b time-spinner {
+    @e wrapper {
+      height: 190px;
+      overflow: hidden;
+      flex: 1;
+      vertical-align: top;
+      position: relative;
+      -ms-overflow-style: none;
+
+      &:hover {
+        overflow-y: auto;
+      }
+    }
+
+    @e list {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      text-align: center;
+
+      &::after,
+      &::before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 80px;
+      }
+    }
+
+    @e item {
+      height: 32px;
+      line-height: 32px;
+      font-size: 12px;
+
+      &:hover:not(.disabled):not(.active) {
+        background: #E5E9F2;
+        cursor: pointer;
+      }
+
+      &.active:not(.disabled) {
+        color: #fff;
+      }
+
+      &.disabled {
+        color: var(--datepicker-border-color);
+        cursor: not-allowed;
+      }
+    }
+  }
+}

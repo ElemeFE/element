@@ -14,9 +14,7 @@ then
   # publish theme
   echo "Releasing theme-default $VERSION ..."
   cd packages/theme-default
-  git checkout master
   npm version $VERSION --message "[release] $VERSION"
-  git push origin master --tags
   npm publish --tag next
   cd ../..
 

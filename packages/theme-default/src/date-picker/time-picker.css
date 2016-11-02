@@ -1,0 +1,78 @@
+@import "../common/var.css";
+
+@component-namespace el {
+  @b time-panel {
+    margin: 5px 0;
+    border: solid 1px #d3dce6;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px 0 rgba(0, 0, 0, .04);
+    border-radius: 2px;
+    position: absolute;
+    width: 180px;
+    left: 0;
+    z-index: 1000;
+    user-select: none;
+
+    @e content {
+      font-size: 0;
+      display: flex;
+      position: relative;
+      overflow: hidden;
+
+      &::after, &::before {
+        content: ":";
+        top: 50%;
+        color: #fff;
+        position: absolute;
+        font-size: 14px;
+        margin-top: -15px;
+        line-height: 16px;
+        background-color: #20a0ff;
+        height: 32px;
+        z-index: -1;
+        left: 0;
+        right: 0;
+        box-sizing: border-box;
+        padding-top: 6px;
+        text-align: left;
+      }
+
+      &::after {
+        left: calc(100%/3*2);
+        margin-left: -2px;
+      }
+
+      &::before {
+        padding-left: calc(100%/3);
+        margin-right: -2px;
+      }
+    }
+
+    @e footer {
+      border-top: 1px solid var(--datepicker-inner-border-color);
+      padding: 4px;
+      height: 36px;
+      line-height: 25px;
+      text-align: right;
+      box-sizing: border-box;
+    }
+
+    @e btn {
+      border: none;
+      line-height: 28px;
+      padding: 0 5px;
+      margin: 0 5px;
+      cursor: pointer;
+      background-color: transparent;
+      outline: none;
+      font-size: 12px;
+      color: #8492a6;
+
+      &.confirm {
+        font-weight: 800;
+        color: #20a0ff;
+      }
+    }
+
+  }
+}

@@ -1,0 +1,24 @@
+@charset "UTF-8";
+@import "./common/var.css";
+
+.el-col-1, .el-col-2, .el-col-3, .el-col-4, .el-col-5, .el-col-6, .el-col-7, .el-col-8, .el-col-9, .el-col-10, .el-col-11, .el-col-12, .el-col-13, .el-col-14, .el-col-15, .el-col-16, .el-col-17, .el-col-18, .el-col-19, .el-col-20, .el-col-21, .el-col-22, .el-col-23, .el-col-24 {
+  float: left;
+  box-sizing: border-box;
+}
+
+@for $i from 1 to 24 {
+  .el-col-$i {
+    width: calc(1 / 24 * $(i) * 100)%;
+  }
+  .el-col-offset-$i {
+    margin-left: calc(1 / 24 * $(i) * 100)%;
+  }
+  .el-col-pull-$i {
+    position: relative;
+    right: calc(1 / 24 * $(i) * 100)%;
+  }
+  .el-col-push-$i {
+    position: relative;
+    left: calc(1 / 24 * $(i) * 100)%;
+  }
+}

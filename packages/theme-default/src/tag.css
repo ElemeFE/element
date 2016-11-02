@@ -1,0 +1,92 @@
+@charset "UTF-8";
+@import "./common/var.css";
+
+@component-namespace el {
+
+  @b tag {
+    background-color: var(--tag-fill);
+    display: inline-block;
+    padding: var(--tag-padding);
+    height: 22px;
+    line-height: @height;
+    font-size: var(--tag-font-size);
+    color: var(--tag-color);
+    border-radius: var(--tag-border-radius);
+    border: 1px solid var(--tag-border);
+
+    @when hit {
+      border-color: var(--tag-primary-color);
+    }
+
+    & .el-icon-close {
+      border-radius: 50%;
+      text-align: center;
+      position: relative;
+      cursor: pointer;
+      font-size: 12px;
+      transform: scale(.75, .75);
+      height: 18px;
+      width: 18px;
+      line-height: 18px;
+      vertical-align: middle;
+      top: -1px;
+      right: -2px;
+
+      &:hover {
+        background-color: #fff;
+        color: var(--tag-fill);
+      }
+    }
+
+    @m gray {
+      background-color: var(--tag-gray-fill);
+      border-color: var(--tag-gray-border);
+      color: var(--tag-gray-color);
+
+      & .el-tag__close:hover {
+        background-color: var(--tag-gray-color);
+        color: #fff;
+      }
+    }
+    @m primary {
+      background-color: var(--tag-primary-fill);
+      border-color: var(--tag-primary-border);
+      color: var(--tag-primary-color);
+
+      & .el-tag__close:hover {
+        background-color: var(--tag-primary-color);
+        color: #fff;
+      }
+    }
+    @m success {
+      background-color: var(--tag-success-fill);
+      border-color: var(--tag-success-border);
+      color: var(--tag-success-color);
+
+      & .el-tag__close:hover {
+        background-color: var(--tag-success-color);
+        color: #fff;
+      }
+    }
+    @m warning {
+      background-color: var(--tag-warning-fill);
+      border-color: var(--tag-warning-border);
+      color: var(--tag-warning-color);
+
+      & .el-tag__close:hover {
+        background-color: var(--tag-warning-color);
+        color: #fff;
+      }
+    }
+    @m danger {
+      background-color: var(--tag-danger-fill);
+      border-color: var(--tag-danger-border);
+      color: var(--tag-danger-color);
+
+      & .el-tag__close:hover {
+        background-color: var(--tag-danger-color);
+        color: #fff;
+      }
+    }
+  }
+}

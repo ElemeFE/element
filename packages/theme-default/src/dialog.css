@@ -1,0 +1,107 @@
+@charset "UTF-8";
+@import "./common/var.css";
+@import "vue-popup/lib/popup.css";
+
+@component-namespace el {
+
+  @b dialog {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    border-radius: var(--border-radius-small);
+    box-shadow: var(--dialog-box-shadow);
+    box-sizing: border-box;
+
+    @modifier tiny {
+      width: var(--dialog-tiny-width);
+    }
+
+    @modifier small {
+      width: var(--dialog-small-width);
+    }
+
+    @modifier large {
+      width: var(--dialog-large-width);
+    }
+
+    @modifier full {
+      width: 100%;
+      top: 0;
+      height: 100%;
+      overflow: auto;
+    }
+
+    @e wrapper {
+      position: fixed 0 0 0 0;
+      overflow: auto;
+      margin: 0;
+    }
+
+    @e header {
+      padding: 20px 20px 0;
+    }
+
+    @e close {
+      cursor: pointer;
+      color: var(--dialog-close-color);
+
+      &:hover {
+        color: var(--dialog-close-hover-color);
+      }
+    }
+
+    @e title {
+      line-height: 1;
+      font-size: var(--dialog-title-font-size);
+      font-weight: bold;
+      color: #1f2d3d;
+    }
+
+    @e body {
+      padding: 30px 20px;
+      color: #475669;
+      font-size: var(--dialog-font-size);
+    }
+
+    @e headerbtn {
+      float: right;
+    }
+
+    @e footer {
+      padding: 10px 20px 15px;
+      text-align: right;
+      box-sizing: border-box;
+    }
+  }
+
+  .dialog-fade-enter-active {
+    animation: dialog-fade-in .3s;
+  }
+
+  .dialog-fade-leave-active {
+    animation: dialog-fade-out .3s;
+  }
+
+  @keyframes dialog-fade-in {
+    0% {
+      transform: translate3d(0, -20px, 0);
+      opacity: 0;
+    }
+    100% {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes dialog-fade-out {
+    0% {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+    100% {
+      transform: translate3d(0, -20px, 0);
+      opacity: 0;
+    }
+  }
+}

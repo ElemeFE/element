@@ -1,0 +1,86 @@
+@charset "UTF-8";
+@import "./common/var.css";
+
+@component-namespace el {
+
+  @b alert {
+    width: 100%;
+    padding: var(--alert-padding);
+    margin: 0;
+    box-sizing: border-box;
+    border-radius: var(--alert-border-radius);
+    position: relative;
+    background-color: var(--color-white);
+    overflow: hidden;
+    color: #fff;
+    opacity: 1;
+    display: table;
+    transition: opacity .2s;
+
+    @modifier success {
+      background-color: var(--alert-success-color);
+    }
+
+    @modifier info {
+      background-color: var(--alert-info-color);
+    }
+
+    @modifier warning {
+      background-color: var(--alert-warning-color);
+    }
+
+    @modifier error {
+      background-color: var(--alert-danger-color);
+    }
+
+    @e content {
+      display: table-cell;
+      padding-left: 8px;
+    }
+
+    @e icon {
+      font-size: var(--alert-icon-size);
+      width: var(--alert-icon-size);
+      display: table-cell;
+      color: var(--color-white);
+      vertical-align: middle;
+      @when big {
+        font-size: var(--alert-icon-large-size);
+        width: var(--alert-icon-large-size);
+      }
+    }
+
+    @e title {
+      font-size: var(--alert-title-font-size);
+      line-height: 18px;
+      @when bold {
+        font-weight: bold;
+      }
+    }
+
+    & .el-alert__description {
+      color: #fff;
+      font-size: var(--alert-description-font-size);
+      margin: 5px 0 0 0;
+    }
+
+    @e closebtn {
+      font-size: var(--alert-close-font-size);
+      color: #fff;
+      opacity: 1;
+      position: absolute 12px 15px * *;
+      cursor: pointer;
+
+      @when customed {
+        font-style: normal;
+        font-size: var(--alert-close-customed-font-size);
+        top: 9px;
+      }
+    }
+  }
+
+  .el-alert-fade-enter,
+  .el-alert-fade-leave-active {
+    opacity: 0;
+  }
+}

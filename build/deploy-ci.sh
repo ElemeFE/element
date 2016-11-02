@@ -16,6 +16,23 @@ if [ "$TRAVIS_BRANCH" = "master" ] && [ "$GH_TOKEN" ]; then
   cd ../..
 fi
 
+# push theme-default
+if [ "$TRAVIS_BRANCH" = "master" ] && [ "$GH_TOKEN" ]; then
+  cd temp_web
+  git clone https://$GH_TOKEN@github.com/ElementUI/theme-default.git && cd theme-default
+  git config user.name "element_bot"
+  git config user.email "element_bot"
+  rm -rf *
+  cp -rf ../../packages/theme-default/** .
+  git add -A .
+  git commit -m "$TRAVIS_COMMIT_MSG"
+  if [ "$TRAVIS_TAG" ]; then
+    git tag $TRAVIS_TAG
+  fi
+  git push origin master --tags
+  cd ../..
+fi
+
 # build lib
 if [ "$TRAVIS_TAG" ] && [ "$GH_TOKEN" ]; then
   npm run dist
