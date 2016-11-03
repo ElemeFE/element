@@ -1,8 +1,13 @@
-import { createVue } from '../util';
+import { createVue, destroyVM } from '../util';
 
 describe('Form', () => {
+  let vm;
+  afterEach(() => {
+    destroyVM(vm);
+  });
+
   it('label width', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-form ref="form" :model="form" label-width="80px">
           <el-form-item label="活动名称">
@@ -23,7 +28,7 @@ describe('Form', () => {
     done();
   });
   it('inline form', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-form ref="form" :model="form" inline>
           <el-form-item>
@@ -47,7 +52,7 @@ describe('Form', () => {
     done();
   });
   it('label position', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <div>
           <el-form :model="form" label-position="top" ref="labelTop">
@@ -82,7 +87,7 @@ describe('Form', () => {
     done();
   });
   it('reset field', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-form ref="form" :model="form" :rules="rules">
           <el-form-item label="活动名称" prop="name">
@@ -139,7 +144,7 @@ describe('Form', () => {
     });
   });
   it('form item nest', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-form ref="form" :model="form" :rules="rules">
           <el-form-item label="活动时间" required>
@@ -184,7 +189,7 @@ describe('Form', () => {
   });
   describe('validate', () => {
     it('input', done => {
-      const vm = createVue({
+      vm = createVue({
         template: `
           <el-form :model="form" :rules="rules" ref="form">
             <el-form-item label="活动名称" prop="name">
@@ -230,7 +235,7 @@ describe('Form', () => {
       });
     });
     it('textarea', done => {
-      const vm = createVue({
+      vm = createVue({
         template: `
           <el-form :model="form" :rules="rules" ref="form">
             <el-form-item label="活动名称" prop="name">
@@ -276,7 +281,7 @@ describe('Form', () => {
       });
     });
     it('selector', done => {
-      const vm = createVue({
+      vm = createVue({
         template: `
           <el-form :model="form" :rules="rules" ref="form">
             <el-form-item label="记住密码" prop="region">
@@ -321,7 +326,7 @@ describe('Form', () => {
       });
     });
     it('datepicker', done => {
-      const vm = createVue({
+      vm = createVue({
         template: `
           <el-form :model="form" :rules="rules" ref="form">
             <el-form-item label="记住密码" prop="date">
@@ -363,7 +368,7 @@ describe('Form', () => {
       });
     });
     it('timepicker', done => {
-      const vm = createVue({
+      vm = createVue({
         template: `
           <el-form :model="form" :rules="rules" ref="form">
             <el-form-item label="记住密码" prop="date">
@@ -404,7 +409,7 @@ describe('Form', () => {
       });
     });
     it('checkbox group', done => {
-      const vm = createVue({
+      vm = createVue({
         template: `
           <el-form :model="form" :rules="rules" ref="form">
             <el-form-item label="活动名称" prop="type">
@@ -450,7 +455,7 @@ describe('Form', () => {
       });
     });
     it('radio group', done => {
-      const vm = createVue({
+      vm = createVue({
         template: `
           <el-form :model="form" :rules="rules" ref="form">
             <el-form-item label="活动名称" prop="type">
@@ -494,7 +499,7 @@ describe('Form', () => {
       });
     });
     it('validate field', done => {
-      const vm = createVue({
+      vm = createVue({
         template: `
           <el-form :model="form" :rules="rules" ref="form">
             <el-form-item label="活动名称" prop="name">
@@ -533,7 +538,7 @@ describe('Form', () => {
           callback();
         }
       };
-      const vm = createVue({
+      vm = createVue({
         template: `
           <el-form :model="form" :rules="rules" ref="form">
             <el-form-item label="活动名称" prop="name">

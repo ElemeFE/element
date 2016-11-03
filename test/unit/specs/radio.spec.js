@@ -1,8 +1,13 @@
-import { createVue } from '../util';
+import { createVue, destroyVM } from '../util';
 
 describe('Radio', () => {
+  let vm;
+  afterEach(() => {
+    destroyVM(vm);
+  });
+
   it('create', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-radio v-model="radio" label="a">
         </el-radio>
@@ -22,7 +27,7 @@ describe('Radio', () => {
     });
   });
   it('disabled', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-radio
           v-model="radio"
@@ -46,7 +51,7 @@ describe('Radio', () => {
     });
   });
   it('radio group', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-radio-group v-model="radio">
           <el-radio :label="3" ref="radio1">备选项</el-radio>
@@ -70,7 +75,7 @@ describe('Radio', () => {
     });
   });
   it('radio button', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-radio-group v-model="radio">
           <el-radio-button :label="3" ref="radio1">备选项</el-radio-button>

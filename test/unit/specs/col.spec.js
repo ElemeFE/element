@@ -1,8 +1,13 @@
-import { createVue } from '../util';
+import { createVue, destroyVM } from '../util';
 
 describe('Col', () => {
+  let vm;
+  afterEach(() => {
+    destroyVM(vm);
+  });
+
   it('create', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-col :span="12">
         </el-col>
@@ -12,7 +17,7 @@ describe('Col', () => {
     expect(colElm.classList.contains('el-col')).to.be.true;
   });
   it('span', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-col :span="12">
         </el-col>
@@ -22,7 +27,7 @@ describe('Col', () => {
     expect(colElm.classList.contains('el-col-12')).to.be.true;
   });
   it('pull', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-col :span="12" :pull="3">
         </el-col>
@@ -32,7 +37,7 @@ describe('Col', () => {
     expect(colElm.classList.contains('el-col-pull-3')).to.be.true;
   });
   it('push', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-col :span="12" :push="3">
         </el-col>
@@ -42,7 +47,7 @@ describe('Col', () => {
     expect(colElm.classList.contains('el-col-push-3')).to.be.true;
   });
   it('gutter', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-row :gutter="20">
           <el-col :span="12" ref="col">

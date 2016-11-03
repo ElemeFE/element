@@ -1,7 +1,12 @@
-import { createVue, triggerEvent, createTest } from '../util';
+import { createVue, triggerEvent, createTest, destroyVM } from '../util';
 import Popover, { directive } from 'packages/popover';
 
 describe('Popover', () => {
+  let vm;
+  afterEach(() => {
+    destroyVM(vm);
+  });
+
   describe('trigger', () => {
     const createVM = (trigger) => {
       return createVue(`
@@ -17,7 +22,7 @@ describe('Popover', () => {
     };
 
     it('click', () => {
-      const vm = createVM('click');
+      vm = createVM('click');
       const compo = vm.$refs.popover;
 
       vm.$el.querySelector('button').click();
@@ -27,7 +32,7 @@ describe('Popover', () => {
     });
 
     it('hover', done => {
-      const vm = createVM('hover');
+      vm = createVM('hover');
       const compo = vm.$refs.popover;
       const button = vm.$el.querySelector('button');
 
@@ -41,7 +46,7 @@ describe('Popover', () => {
     });
 
     it('focus input in children node', () => {
-      const vm = createVue(`
+      vm = createVue(`
         <div>
           <el-popover
             ref="popover"
@@ -63,7 +68,7 @@ describe('Popover', () => {
     });
 
     it('focus textarea in children node', () => {
-      const vm = createVue(`
+      vm = createVue(`
         <div>
           <el-popover
             ref="popover"
@@ -85,7 +90,7 @@ describe('Popover', () => {
     });
 
     it('focus input', () => {
-      const vm = createVue(`
+      vm = createVue(`
         <div>
           <el-popover
             ref="popover"
@@ -105,7 +110,7 @@ describe('Popover', () => {
     });
 
     it('focus button', () => {
-      const vm = createVM('focus');
+      vm = createVM('focus');
       const compo = vm.$refs.popover;
       const button = vm.$el.querySelector('button');
 
@@ -187,7 +192,7 @@ describe('Popover', () => {
   });
 
   it('destroy event', () => {
-    const vm = createTest(Popover, {
+    vm = createTest(Popover, {
       reference: document.createElement('div'),
       popper: document.createElement('div')
     });

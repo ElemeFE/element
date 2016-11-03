@@ -1,8 +1,12 @@
-import { createVue } from '../util';
+import { createVue, destroyVM } from '../util';
 
 describe('Autocomplete', () => {
+  let vm;
+  afterEach(() => {
+    destroyVM(vm);
+  });
   it('create', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-autocomplete
           v-model="state"
@@ -58,7 +62,7 @@ describe('Autocomplete', () => {
     }, 500);
   });
   it('select', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-autocomplete
           v-model="state"
@@ -118,7 +122,7 @@ describe('Autocomplete', () => {
     }, 500);
   });
   it('highlight', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-autocomplete
           ref="autocomplete"
@@ -198,7 +202,7 @@ describe('Autocomplete', () => {
     }, 500);
   });
   it('highlight out of bounds', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-autocomplete
           ref="autocomplete"

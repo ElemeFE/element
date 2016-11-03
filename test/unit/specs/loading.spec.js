@@ -1,9 +1,14 @@
-import { createVue } from '../util';
+import { createVue, destroyVM } from '../util';
 import Vue from 'vue';
 
 describe('Loading', () => {
+  let vm;
+  afterEach(() => {
+    destroyVM(vm);
+  });
+
   it('create', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <div v-loading="loading"></div>
       `,
@@ -65,7 +70,7 @@ describe('Loading', () => {
   });
 
   it('body', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <div v-loading.body="loading"></div>
       `,
@@ -87,7 +92,7 @@ describe('Loading', () => {
   });
 
   it('fullscreen', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <div v-loading.fullscreen="loading"></div>
       `,
@@ -112,7 +117,7 @@ describe('Loading', () => {
   });
 
   it('lock', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <div v-loading.fullscreen.lock="loading"></div>
       `,

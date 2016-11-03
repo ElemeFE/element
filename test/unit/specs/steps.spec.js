@@ -1,9 +1,14 @@
-import { createVue } from '../util';
+import { createVue, destroyVM } from '../util';
 import Vue from 'vue';
 
 describe('Steps', () => {
+  let vm;
+  afterEach(() => {
+    destroyVM(vm);
+  });
+
   it('create', () => {
-    const vm = createVue(`
+    vm = createVue(`
       <el-steps>
         <el-step title="step1"></el-step>
         <el-step title="step2"></el-step>
@@ -15,7 +20,7 @@ describe('Steps', () => {
   });
 
   it('space', done => {
-    const vm = createVue(`
+    vm = createVue(`
       <el-steps>
         <el-step title="step1"></el-step>
         <el-step title="step2"></el-step>
@@ -41,7 +46,7 @@ describe('Steps', () => {
   });
 
   it('processStatus', done => {
-    const vm = createVue(`
+    vm = createVue(`
       <el-steps :active="1" process-status="error">
         <el-step title="step1"></el-step>
         <el-step title="step2"></el-step>
@@ -56,7 +61,7 @@ describe('Steps', () => {
   });
 
   it('finishStatus', done => {
-    const vm = createVue(`
+    vm = createVue(`
       <el-steps :active="1" finish-status="error">
         <el-step title="abc"></el-step>
         <el-step title="abc2"></el-step>
@@ -70,7 +75,7 @@ describe('Steps', () => {
   });
 
   it('active', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-steps :active="active" finish-status="error">
           <el-step title="abc"></el-step>
@@ -94,7 +99,7 @@ describe('Steps', () => {
   });
 
   it('create vertical', () => {
-    const vm = createVue(`
+    vm = createVue(`
       <el-steps direction="vertical">
         <el-step title="aaa"></el-step>
         <el-step title="bbb"></el-step>
@@ -105,7 +110,7 @@ describe('Steps', () => {
   });
 
   it('vertical:height', done => {
-    const vm = createVue(`
+    vm = createVue(`
       <el-steps direction="vertical" :space="200">
         <el-step title="aaa"></el-step>
         <el-step title="bbb"></el-step>

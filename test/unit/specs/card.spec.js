@@ -1,9 +1,14 @@
-import { createVue, createTest } from '../util';
+import { createVue, createTest, destroyVM } from '../util';
 import Card from 'packages/card';
 
 describe('Card', () => {
+  let vm;
+  afterEach(() => {
+    destroyVM(vm);
+  });
+
   it('slot:header', () => {
-    const vm = createVue(`
+    vm = createVue(`
       <el-card>
         <header slot="header">二师兄叫我埋梗 啦啦啦</header>
       </el-card>
@@ -13,7 +18,7 @@ describe('Card', () => {
   });
 
   it('header', () => {
-    const vm = createTest(Card, {
+    vm = createTest(Card, {
       header: '好烦'
     });
 
@@ -21,7 +26,7 @@ describe('Card', () => {
   });
 
   it('bodyStyle', () => {
-    const vm = createTest(Card, {
+    vm = createTest(Card, {
       bodyStyle: { padding: '10px' }
     });
 

@@ -1,8 +1,13 @@
-import { createVue } from '../util';
+import { createVue, destroyVM } from '../util';
 
 describe('Checkbox', () => {
+  let vm;
+  afterEach(() => {
+    destroyVM(vm);
+  });
+
   it('create', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-checkbox v-model="checked">
         </el-checkbox>
@@ -22,7 +27,7 @@ describe('Checkbox', () => {
     });
   });
   it('disabled', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-checkbox
           v-model="checked"
@@ -40,7 +45,7 @@ describe('Checkbox', () => {
     expect(checkboxElm.querySelector('.is-disabled')).to.be.ok;
   });
   it('checkbox group', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-checkbox-group v-model="checkList">
           <el-checkbox label="a" ref="a"></el-checkbox>
@@ -63,7 +68,7 @@ describe('Checkbox', () => {
     });
   });
   it('true false label', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-checkbox true-label="a" :false-label="3" v-model="checked"></el-checkbox>
       `,
@@ -80,7 +85,7 @@ describe('Checkbox', () => {
     });
   });
   it('checked', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <div>
           <el-checkbox v-model="checked" checked></el-checkbox>
