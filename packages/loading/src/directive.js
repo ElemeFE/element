@@ -111,8 +111,12 @@ exports.install = Vue => {
           document.body.removeChild(el.mask);
           el.mask.removeChild(el.spinner);
         } else {
-          el.removeChild(el.mask);
-          el.mask.removeChild(el.spinner);
+          el.mask &&
+          el.mask.parentNode &&
+          el.mask.parentNode.removeChild(el.mask);
+          el.spinner &&
+          el.spinner.parentNode &&
+          el.spinner.parentNode.removeChild(el.spinner);
         }
       }
     }
