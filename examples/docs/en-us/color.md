@@ -86,11 +86,11 @@
 
 ## Color
 
-To avoid visual differences, Element uses a specific set of palettes to specify colors to provide a consistent look and feel for the products you‘ve build.
+To avoid visual differences, Element uses a specific set of palettes to specify colors to provide a consistent look and feel for the products you build.
 
 ### Tint Color
 
-The main brand colors of Element are bright and friendly blue.
+The main color of Element is bright and friendly blue.
 
 <el-row :gutter="12">
   <el-col :span="8">
@@ -106,7 +106,7 @@ The main brand colors of Element are bright and friendly blue.
 
 ### Secondary Color
 
-The scene color in addition to the tint color, you need to use them in different scenarios (for example, dangerous color indicates dangerous operation)
+Besides the main color, you need to use different scene colors in different scenarios (for example, dangerous color indicates dangerous operation)
 
 <el-row :gutter="12">
   <el-col :span="6">
@@ -125,7 +125,7 @@ The scene color in addition to the tint color, you need to use them in different
 
 ### Neutral Color
 
-Neutral colors are used for text, background and border colors. You can use different neutral colors to represent the hierarchical structure.
+Neutral colors are for text, background and border colors. You can use different neutral colors to represent the hierarchical structure.
 
 <el-row :gutter="12">
   <el-col :span="6">
