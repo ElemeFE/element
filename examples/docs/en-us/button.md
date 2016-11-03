@@ -65,13 +65,11 @@
 
 ## Button
 
-Frequently-used button.
+Commonly used button.
 
-### How to use
+### Basic usage
 
-Basic usage.
-
-::: demo Button component provide 7 types of buttons, is defined by `type` attribute, and default value is `default`.
+::: demo Button provides 7 themes defined by the `type` attribute.
 
 ```html
 <el-button>Default Button</el-button>
@@ -82,22 +80,22 @@ Basic usage.
 
 ### Disabled Button
 
-Disable the button.
+The `disableds` attribute determines if the button is disabled.
 
-:::demo Use `disabled` attribute to determine whether a button is available. It accepts a `Boolean` value.
+:::demo Use `disabled` attribute to determine whether a button is disabled. It accepts a `Boolean` value.
 
 ```html
-<el-button :plain="true" :disabled="true">Primary Button</el-button>
-<el-button type="primary" :disabled="true">Primary Button</el-button>
-<el-button type="text" :disabled="true">Text Button</el-button>
+<el-button :plain="true" :disabled="true">Default Button</el-button>
+<el-button type="primary" disabled>Primary Button</el-button>
+<el-button type="text" disabled>Text Button</el-button>
 ```
 :::
 
 ### Color Indication
 
-Different color can represent different meaning.
+Different colors represent different meanings.
 
-:::demo Use `plain` attribute to create a plain button, it accepts a `Boolean` value. you can assign different `type` to a plain button as mentioned above.
+:::demo Use `plain` attribute to create a plain button, and it accepts a `Boolean` value. You can assign different `type` to a plain button as mentioned above.
 **Note**: When using the plain button, you still can set `type` to `text`, but it makes no difference. A plain button will be styled like a `text button` by default.
 
 ```html
@@ -124,9 +122,9 @@ Different color can represent different meaning.
 
 ### Icon Button 
 
-Use icon to add more meaning to button, you can use icon alone to save some space, or with text together.
+Use icons to add more meaning to Button. You can use icon alone to save some space, or with text together.
 
-:::demo use `icon` attribute to add icon, you can find the icon list in element icon component. You can add icon to the right side of the text with `<i>` tag. Custom icon can be used as well.
+:::demo Use the `icon` attribute to add icon. You can find the icon list in Element icon component. Adding icons to the right side of the text is achievable with an `<i>` tag. Custom icons can be used as well.
 
 ```html
 <el-button type="primary" icon="edit"></el-button>
@@ -139,7 +137,7 @@ Use icon to add more meaning to button, you can use icon alone to save some spac
 
 ### Button Group
 
-Display as a button group, can be used to group a series of similar operations.
+Displayed as a button group, can be used to group a series of similar operations.
 
 :::demo Use tag `<el-button-group>` to group your buttons.
 
@@ -158,7 +156,7 @@ Display as a button group, can be used to group a series of similar operations.
 
 ### Loading Button
 
-Click the button to load data, then the button is in loading state.
+Click the button to load data, then the button displays a loading state.
 
 :::demo Set `loading` attribute to `true` to display loading state.
 
@@ -169,24 +167,25 @@ Click the button to load data, then the button is in loading state.
 
 ### Sizes
 
-Except for default size, button component provide three additional sizes, you can choose a suitable one for your case.
+Besides default size, Button component provides three additional sizes for you to choose among different scenarios.
 
-:::demo Use attribute `size` to set additional sizes with `large`, `small` or `mine`.
+:::demo Use attribute `size` to set additional sizes with `large`, `small` or `mini`.
 
 ```html
 <el-button type="primary" size="large">Large Button</el-button>
 <el-button type="primary">Default Button</el-button>
 <el-button type="primary" size="small">Small Button</el-button>
-<el-button type="primary" size="mini">Extra Small Button</el-button>
+<el-button type="primary" size="mini">Mini Button</el-button>
 ```
 :::
 
 ### Attributes
-| Attribute      | Description    | Type      | Options       | Default   |
+| Attribute      | Description    | Type      | Accepted values       | Default   |
 |---------- |-------- |---------- |-------------  |-------- |
-| size     | button size   | string  |   large,small,mini            |    —     |
-| type     | button type   | string    |   primary,success,warning,danger,info,text |     —    |
+| size     | button size   | string  |   large/small/mini            |    —     |
+| type     | button type   | string    |   primary/success/warning/danger/info/text |     —    |
 | plain     | determine whether it's a plain button   | Boolean    | true,false | false   |
 | disabled  | disable the button    | boolean   | true, false   | false   |
-| icon  | button icon, accepts an icon name in the icon library | string   |  —  |  —  |
-| native-type | native button type | string | button,submit,reset | button |
+| icon  | button icon, accepts an icon name of Element icon component | string   |  —  |  —  |
+| autofocus  | same as native button's `autofocus` | boolean   |  —  |  false  |
+| native-type | same as native button's `type` | string | button/submit/reset | button |
