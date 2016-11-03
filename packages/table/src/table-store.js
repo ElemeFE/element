@@ -19,6 +19,39 @@ const sortData = (data, states) => {
   return orderBy(data, states.sortProp, states.sortOrder, sortingColumn.sortMethod);
 };
 
+const getSelectedMap = function(states, rowKey) {
+  const selectionMap = {};
+  states.selection.forEach((row, index) => {
+    selectionMap[getRowIdentity(row, rowKey)] = { row, index };
+  });
+  return selectionMap;
+};
+
+const toggleRowSelection = function(states, row, selected) {
+  let changed = false;
+  const selection = states.selection;
+  const index = selection.indexOf(row);
+  if (typeof selected === 'undefined') {
+    if (index === -1) {
+      selection.push(row);
+      changed = true;
+    } else {
+      selection.splice(index, 1);
+      changed = true;
+    }
+  } else {
+    if (selected && index === -1) {
+      selection.push(row);
+      changed = true;
+    } else if (!selected && index > -1) {
+      selection.splice(index, 1);
+      changed = true;
+    }
+  }
+
+  return changed;
+};
+
 const TableStore = function(table, initialState = {}) {
   if (!table) {
     throw new Error('Table is required.');
@@ -55,26 +88,21 @@ const TableStore = function(table, initialState = {}) {
 TableStore.prototype.mutations = {
   setData(states, data) {
     states._data = data;
-    if (data && data[0] && typeof data[0].$selected === 'undefined') {
-      data.forEach((item) => Vue.set(item, '$selected', false));
-    }
     states.data = sortData((data || []), states);
+    const selection = states.selection;
 
     if (!states.reserveSelection) {
       states.isAllSelected = false;
     } else {
       const rowKey = states.rowKey;
       if (rowKey) {
-        const selectionMap = {};
-        states.selection.forEach((row) => {
-          selectionMap[getRowIdentity(row, rowKey)] = row;
-        });
+        const selectedMap = getSelectedMap(states, rowKey);
 
         states.data.forEach((row) => {
           const rowId = getRowIdentity(row, rowKey);
-          if (selectionMap[rowId]) {
-            row.$selected = true;
-            selectionMap[rowId] = row;
+          const rowInfo = selectedMap[rowId];
+          if (rowInfo) {
+            selection[rowInfo.index] = row;
           }
         });
 
@@ -159,19 +187,13 @@ TableStore.prototype.mutations = {
   },
 
   rowSelectedChanged(states, row) {
+    const changed = toggleRowSelection(states, row);
     const selection = states.selection;
-    if (row.$selected) {
-      if (selection.indexOf(row) === -1) {
-        selection.push(row);
-      }
-    } else {
-      const index = selection.indexOf(row);
-      if (index > -1) {
-        selection.splice(index, 1);
-      }
+
+    if (changed) {
+      this.table.$emit('selection-change', selection);
+      this.table.$emit('select', selection, row);
     }
-    this.table.$emit('selection-change', selection);
-    this.table.$emit('select', selection, row);
 
     this.updateAllSelected();
   },
@@ -182,30 +204,15 @@ TableStore.prototype.mutations = {
     const selection = this.states.selection;
     let selectionChanged = false;
 
-    const setSelected = (item) => {
-      if (item.$selected !== value) {
-        selectionChanged = true;
-        if (value) {
-          if (selection.indexOf(item) === -1) {
-            selection.push(item);
-          }
-        } else {
-          const itemIndex = selection.indexOf(item);
-          if (itemIndex > -1) {
-            selection.splice(itemIndex, 1);
-          }
-        }
-      }
-      item.$selected = value;
-    };
-
     data.forEach((item, index) => {
       if (states.selectable) {
-        if (states.selectable.call(null, item, index)) {
-          setSelected(item);
+        if (states.selectable.call(null, item, index) && toggleRowSelection(states, item, value)) {
+          selectionChanged = true;
         }
       } else {
-        setSelected(item);
+        if (toggleRowSelection(states, item, value)) {
+          selectionChanged = true;
+        }
       }
     });
 
@@ -230,36 +237,57 @@ TableStore.prototype.updateColumns = function() {
   states.columns = [].concat(states.fixedColumns).concat(_columns.filter((column) => !column.fixed)).concat(states.rightFixedColumns);
 };
 
+TableStore.prototype.isSelected = function(row) {
+  return (this.states.selection || []).indexOf(row) > -1;
+};
+
 TableStore.prototype.clearSelection = function() {
   const states = this.states;
-  const oldSelection = states.selection;
-  oldSelection.forEach((row) => { row.$selected = false; });
-  if (this.states.reserveSelection) {
-    const data = states.data || [];
-    data.forEach((row) => { row.$selected = false; });
-  }
   states.isAllSelected = false;
   states.selection = [];
 };
 
+TableStore.prototype.toggleRowSelection = function(row, selected) {
+  toggleRowSelection(this.states, row, selected);
+};
+
 TableStore.prototype.updateAllSelected = function() {
   const states = this.states;
+  const { selection, rowKey, selectable, data } = states;
+  if (!data || data.length === 0) {
+    states.isAllSelected = false;
+    return;
+  }
+
+  let selectedMap;
+  if (rowKey) {
+    selectedMap = getSelectedMap(states, rowKey);
+  }
+
+  const isSelected = function(row) {
+    if (selectedMap) {
+      return !!selectedMap[getRowIdentity(row, rowKey)];
+    } else {
+      return selection.indexOf(row) !== -1;
+    }
+  };
+
   let isAllSelected = true;
-  const data = states.data || [];
   for (let i = 0, j = data.length; i < j; i++) {
     const item = data[i];
-    if (states.selectable) {
-      if (states.selectable.call(null, item, i) && !item.$selected) {
+    if (selectable) {
+      if (selectable.call(null, item, i) && !isSelected(item)) {
         isAllSelected = false;
         break;
       }
     } else {
-      if (!item.$selected) {
+      if (!isSelected(item)) {
         isAllSelected = false;
         break;
       }
     }
   }
+
   states.isAllSelected = isAllSelected;
 };
 
