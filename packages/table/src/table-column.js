@@ -27,14 +27,13 @@ const forced = {
     headerTemplate: function(h) {
       return <el-checkbox
         nativeOn-click={ this.toggleAllSelection }
-        domProps-value={ this.isAllSelected }
-        on-input={ (value) => { this.$emit('allselectedchange', value); } } />;
+        domProps-value={ this.isAllSelected } />;
     },
     template: function(h, { row, column, store, $index }) {
       return <el-checkbox
-        domProps-value={ row.$selected }
+        domProps-value={ store.isSelected(row) }
         disabled={ column.selectable ? !column.selectable.call(null, row, $index) : false }
-        on-input={ (value) => { row.$selected = value; store.commit('rowSelectedChanged', row); } } />;
+        on-input={ (value) => { store.commit('rowSelectedChanged', row); } } />;
     },
     sortable: false,
     resizable: false

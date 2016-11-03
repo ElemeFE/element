@@ -158,6 +158,11 @@
           }
         };
       },
+
+      toggleRowSelection(row, selected) {
+        this.store.toggleRowSelection(row, selected);
+      },
+
       clearSelection() {
         this.store.clearSelection();
       },
