@@ -47,12 +47,12 @@
   .banner-desc {
     padding-top: 110px;
     padding-left: 30px;
-    font-size: 46px;
+    font-size: <%= theatreSize >px;
     position: relative;
     z-index: 10;
 
     h2 {
-      font-size: 46px;
+      font-size: <%= titleSize >px;
       margin: 0;
     }
     
@@ -60,7 +60,7 @@
       font-size: 14px;
       opacity: .8;
       width: 420px;
-      line-height: 1.8;
+      line-height: <%= paraHeight >;
       padding-left: 3px;
     }
   }
@@ -113,7 +113,7 @@
       font-size: 14px;
       color: #99a9bf;
       padding: 0 25px;
-      line-height: 1.8;
+      line-height: <%= paraHeight >;
     }
     a {
       height: 53px;
@@ -219,17 +219,13 @@
     mounted() {
       function typing(theater) {
         theater
-          .addScene('<%= 10 >', 1800, <%= 18 >, 800)
-          .addScene('<%= 11 >', 1800, <%= 19 >, 500)
-          .addScene('<%= 12 >', 1800, <%= 20 >, 700)
-          .addScene('<%= 13 >', 1800, <%= 21 >, 600)
-          .addScene('<%= 14 >', 1800, <%= 22 >, 800)
+          <%= typingFunc >
           .addScene((done) => {
             typing(theater);
             done();
           });
       }
-      var theater = theaterJS();
+      var theater = theaterJS(<%= theatreParam >);
       theater
         .on('type:start, erase:start', function() {
           theater.getCurrentActor().$element.classList.add('typing');
@@ -238,11 +234,7 @@
           theater.getCurrentActor().$element.classList.remove('typing');
         });
       theater
-        .addActor('line2', { speed: 0.5, accuracy: 1 })
-        .addScene(2600)
-        .addScene('line2:<%= 15 >', 300, <%= 23 >, 1000)
-        .addScene('<%= 16 >', 300, <%= 24 >)
-        .addScene('line2:<%= 17 >: ', 400)
+        <%= typingInvoke >
         .addScene((done) => {
           typing(theater);
           done();
