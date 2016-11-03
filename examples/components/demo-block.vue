@@ -137,6 +137,8 @@
 </style>
 
 <script type="text/babel">
+  import compoLang from '../i18n/component.json';
+
   export default {
     data() {
       return {
@@ -146,6 +148,14 @@
     },
 
     computed: {
+      lang() {
+        return this.$route.path.split('/')[1];
+      },
+
+      langConfig() {
+        return compoLang.filter(config => config.lang === this.lang)[0]['demo-block'];
+      },
+
       blockClass() {
         return `demo-${ this.$router.currentRoute.path.split('/').pop() }`;
       },
@@ -155,7 +165,7 @@
       },
 
       controlText() {
-        return this.isExpanded ? '隐藏代码' : '显示代码';
+        return this.isExpanded ? this.langConfig['hide-text'] : this.langConfig['show-text'];
       },
 
       codeArea() {

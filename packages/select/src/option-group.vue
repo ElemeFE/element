@@ -10,10 +10,10 @@
 </template>
 
 <script type="text/babel">
-  import emitter from 'element-ui/src/mixins/emitter';
+  import Emitter from 'element-ui/src/mixins/emitter';
 
   export default {
-    mixins: [emitter],
+    mixins: [Emitter],
 
     name: 'el-option-group',
 
@@ -25,9 +25,15 @@
       }
     },
 
+    watch: {
+      disabled(val) {
+        this.broadcast('option', 'handleGroupDisabled', val);
+      }
+    },
+
     mounted() {
       if (this.disabled) {
-        this.broadcast('option', 'disableOptions');
+        this.broadcast('option', 'handleGroupDisabled', this.disabled);
       }
     }
   };

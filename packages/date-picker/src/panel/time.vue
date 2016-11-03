@@ -19,11 +19,11 @@
         <button
           type="button"
           class="el-time-panel__btn cancel"
-          @click="handleCancel()">{{ $t('datepicker.cancel') }}</button>
+          @click="handleCancel">{{ $t('el.datepicker.cancel') }}</button>
         <button
           type="button"
           class="el-time-panel__btn confirm"
-          @click="handleConfirm()">{{ $t('datepicker.confirm') }}</button>
+          @click="handleConfirm()">{{ $t('el.datepicker.confirm') }}</button>
       </div>
     </div>
   </transition>
@@ -31,10 +31,11 @@
 
 <script type="text/babel">
   import { limitRange } from '../util';
-  import Vue from 'vue';
-  import { $t } from '../util';
+  import Locale from 'element-ui/src/mixins/locale';
 
   export default {
+    mixins: [Locale],
+
     components: {
       TimeSpinner: require('../basic/time-spinner')
     },
@@ -66,10 +67,11 @@
           date = new Date();
         }
 
-        this.hours = date.getHours();
-        this.minutes = date.getMinutes();
-        this.seconds = date.getSeconds();
-        this.handleConfirm(true);
+        this.handleChange({
+          hours: date.getHours(),
+          minutes: date.getMinutes(),
+          seconds: date.getSeconds()
+        });
       },
 
       selectableRange(val) {
@@ -85,8 +87,8 @@
         minutes: 0,
         seconds: 0,
         selectableRange: [],
-        currentDate: this.$options.defaultValue || this.date,
-        currentVisible: this.visible,
+        currentDate: this.$options.defaultValue || this.date || new Date(),
+        currentVisible: this.visible || false,
         width: this.pickerWidth || 0
       };
     },
@@ -98,10 +100,6 @@
     },
 
     methods: {
-      $t(...args) {
-        return $t.apply(this, args);
-      },
-
       handleCancel() {
         this.$emit('pick', null);
       },
@@ -128,8 +126,8 @@
       },
 
       handleConfirm(visible = false, first) {
+        if (first) return;
         const date = new Date(limitRange(this.currentDate, this.selectableRange));
-
         this.$emit('pick', date, visible, first);
       },
 
@@ -139,9 +137,6 @@
     },
 
     created() {
-      !this.currentDate && Vue.set(this, 'currentDate', new Date());
-      !this.currentVisible && Vue.set(this, 'currentVisible', false);
-
       this.hours = this.currentDate.getHours();
       this.minutes = this.currentDate.getMinutes();
       this.seconds = this.currentDate.getSeconds();

@@ -1,20 +1,28 @@
 var Components = require('../components.json');
 var path = require('path');
 var dependencies = require('../package.json').dependencies;
+var fs = require('fs');
+
+var utilsList = fs.readdirSync(path.resolve(__dirname, '../src/utils'));
+var mixinsList = fs.readdirSync(path.resolve(__dirname, '../src/mixins'));
 var externals = {};
 
 Object.keys(Components).forEach(function(key) {
-  externals[`element-ui/packages/${key}/index.js`] = `element-ui/lib/${key}`;
-  externals[`element-ui/packages/${key}/style.css`] = `element-ui/lib/${key}/style.css`;
+  externals[`element-ui/packages/${key}`] = `element-ui/lib/${key}`;
 });
-
-Object.keys(dependencies).forEach(function (key) {
+Object.keys(dependencies).forEach(function(key) {
   externals[key] = key;
 });
+externals['element-ui/src/locale'] = 'element-ui/lib/locale';
 
-externals['element-ui/src/utils/clickoutside'] = 'element-ui/lib/utils/clickoutside';
-externals['element-ui/src/utils/popper'] = 'element-ui/lib/utils/popper';
-externals['element-ui/src/utils/vue-popper'] = 'element-ui/lib/utils/vue-popper';
+utilsList.forEach(function(file) {
+  file = path.basename(file, '.js');
+  externals[`element-ui/src/utils/${file}`] = `element-ui/lib/utils/${file}`;
+});
+mixinsList.forEach(function(file) {
+  file = path.basename(file, '.js');
+  externals[`element-ui/src/mixins/${file}`] = `element-ui/lib/mixins/${file}`;
+});
 
 exports.externals = Object.assign({
   vue: 'vue'

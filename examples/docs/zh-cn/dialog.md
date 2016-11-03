@@ -95,7 +95,7 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
 :::demo
 ```html
 <!-- Table -->
-<el-button type="text" @click.native="dialogTableVisible = true" type="text">打开嵌套表格的 Dialog</el-button>
+<el-button type="text" @click.native="dialogTableVisible = true">打开嵌套表格的 Dialog</el-button>
 
 <el-dialog title="收货地址" v-model="dialogTableVisible">
   <el-table :data="gridData">
@@ -106,7 +106,7 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
 </el-dialog>
 
 <!-- Form -->
-<el-button type="text" @click.native="dialogFormVisible = true" type="text">打开嵌套表单的 Dialog</el-button>
+<el-button type="text" @click.native="dialogFormVisible = true">打开嵌套表单的 Dialog</el-button>
 
 <el-dialog title="收货地址" v-model="dialogFormVisible">
   <el-form :model="form">
@@ -120,10 +120,10 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
       </el-select>
     </el-form-item>
   </el-form>
-  <span slot="footer" class="dialog-footer">
+  <div slot="footer" class="dialog-footer">
     <el-button @click.native="dialogFormVisible = false">取 消</el-button>
     <el-button type="primary" @click.native="dialogFormVisible = false">确 定</el-button>
-  </span>
+  </div>
 </el-dialog>
 ```
 :::

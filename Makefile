@@ -1,4 +1,4 @@
-.PHONY: dist
+.PHONY: dist test
 default: help
 
 # build all theme
@@ -17,6 +17,9 @@ dev:
 new:
 	node build/bin/new.js $(filter-out $@,$(MAKECMDGOALS))
 
+new-lang:
+	node build/bin/new-lang.js $(filter-out $@,$(MAKECMDGOALS))
+
 dist: install
 	npm run dist
 
@@ -32,6 +35,9 @@ pub:
 pub-all:
 	npm run pub:all
 
+test:
+	npm run test:watch
+
 help:
 	@echo "   \033[35mmake\033[0m \033[1m命令使用说明\033[0m"
 	@echo "   \033[35mmake install\033[0m\t\033[0m\t\033[0m\t\033[0m\t---  安装依赖"
@@ -42,3 +48,4 @@ help:
 	@echo "   \033[35mmake deploy\033[0m\t\033[0m\t\033[0m\t\033[0m\t---  部署 demo"
 	@echo "   \033[35mmake pub\033[0m\t\033[0m\t\033[0m\t\033[0m\t---  发布到 npm 上"
 	@echo "   \033[35mmake pub-all\033[0m\t\033[0m\t\033[0m\t\033[0m\t---  发布各组件到 npm 上"
+	@echo "   \033[35mmake new-lang <lang>\033[0m\t\033[0m\t\033[0m\t---  为网站添加新语言. 例如 'make new-lang fr'"

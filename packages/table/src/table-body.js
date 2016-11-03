@@ -1,22 +1,4 @@
-import { getValueByPath, getCell } from './util';
-
-const getColumnById = function(table, columnId) {
-  let column = null;
-  table.columns.forEach(function(item) {
-    if (item.id === columnId) {
-      column = item;
-    }
-  });
-  return column;
-};
-
-const getColumnByCell = function(table, cell) {
-  const matches = (cell.className || '').match(/table_[^\s]+/gm);
-  if (matches) {
-    return getColumnById(table, matches[0]);
-  }
-  return null;
-};
+import { getValueByPath, getCell, getColumnById, getColumnByCell } from './util';
 
 export default {
   props: {
@@ -39,7 +21,7 @@ export default {
         border="0">
         {
           this._l(this.columns, column =>
-            <colgroup
+            <col
               name={ column.id }
               width={ column.realWidth || column.width }
             />)
@@ -52,10 +34,9 @@ export default {
                 on-mouseenter={ _ => this.handleMouseEnter($index) }
                 class={ this.getRowClass(row, $index) }>
                 {
-                  this._l(this.columns, (column) =>
+                  this._l(this.columns, (column, cellIndex) =>
                     <td
-                      style={ this.getColumnWhiteSpaceStyle(column) }
-                      class={ [column.id, column.align] }
+                      class={ [column.id, column.align, this.isCellHidden(cellIndex) ? 'is-hidden' : '' ] }
                       on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
                       on-mouseleave={ this.handleCellMouseLeave }>
                       {
@@ -81,18 +62,24 @@ export default {
     data() {
       return this.store.states.data;
     },
+
     hoverRowIndex() {
       return this.store.states.hoverRow;
     },
-    currentRow() {
-      return this.store.states.currentRow;
+
+    columnsCount() {
+      return this.store.states.columns.length;
     },
+
+    leftFixedCount() {
+      return this.store.states.fixedColumns.length;
+    },
+
+    rightFixedCount() {
+      return this.store.states.rightFixedColumns.length;
+    },
+
     columns() {
-      if (this.fixed === true || this.fixed === 'left') {
-        return this.store.states.fixedColumns;
-      } else if (this.fixed === 'right') {
-        return this.store.states.rightFixedColumns;
-      }
       return this.store.states.columns;
     }
   },
@@ -104,11 +91,18 @@ export default {
   },
 
   methods: {
+    isCellHidden(index) {
+      if (this.fixed === true || this.fixed === 'left') {
+        return index >= this.leftFixedCount;
+      } else if (this.fixed === 'right') {
+        return index < this.columnsCount - this.rightFixedCount;
+      } else {
+        return (index < this.leftFixedCount) || (index >= this.columnsCount - this.rightFixedCount);
+      }
+    },
+
     getRowClass(row, index) {
       const classes = [];
-      if (row === this.currentRow) {
-        classes.push('current-row');
-      }
       if (this.hoverRowIndex === index) {
         classes.push('hover-row');
       }
@@ -123,10 +117,6 @@ export default {
       return classes.join(' ');
     },
 
-    getColumnWhiteSpaceStyle(column) {
-      return column.showTooltipWhenOverflow ? { 'white-space': 'nowrap' } : {};
-    },
-
     handleCellMouseEnter(event, row) {
       const table = this.$parent;
       const cell = getCell(event);
@@ -134,7 +124,7 @@ export default {
       if (cell) {
         const column = getColumnByCell(table, cell);
         const hoverState = table.hoverState = { cell, column, row };
-        table.$emit('cell-mouseenter', hoverState.row, hoverState.column, hoverState.cell, event);
+        table.$emit('cell-mouse-enter', hoverState.row, hoverState.column, hoverState.cell, event);
       }
 
       // 判断是否text-overflow, 如果是就显示tooltip
@@ -148,7 +138,7 @@ export default {
       if (!cell) return;
 
       const oldHoverState = this.$parent.hoverState;
-      this.$parent.$emit('cell-mouseleave', oldHoverState.row, oldHoverState.column, oldHoverState.cell, event);
+      this.$parent.$emit('cell-mouse-leave', oldHoverState.row, oldHoverState.column, oldHoverState.cell, event);
     },
 
     handleMouseEnter(index) {
@@ -165,8 +155,6 @@ export default {
           table.$emit('cell-click', row, column, cell, event);
         }
       }
-
-      this.store.commit('setSelectedRow', row);
 
       table.$emit('row-click', row, event);
     },

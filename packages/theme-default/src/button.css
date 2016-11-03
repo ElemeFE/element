@@ -97,44 +97,42 @@
         background-color: rgba(255,255,255,.35);
       }
     }
-  }
-
-  @b button-primary {
-    @mixin button-variant var(--button-primary-color), var(--button-primary-fill), var(--button-primary-border);
-  }
-  @b button-success {
-    @mixin button-variant var(--button-success-color), var(--button-success-fill), var(--button-success-border);
-  }
-  @b button-warning {
-    @mixin button-variant var(--button-warning-color), var(--button-warning-fill), var(--button-warning-border);
-  }
-  @b button-danger {
-    @mixin button-variant var(--button-danger-color), var(--button-danger-fill), var(--button-danger-border);
-  }
-  @b button-info {
-    @mixin button-variant var(--button-info-color), var(--button-info-fill), var(--button-info-border);
-  }
-  @b button-text {
-    border: none;
-    color: var(--color-primary);
-    background: transparent;
-
-    &:hover {
-      color: tint(var(--color-primary), var(--button-hover-tint-percent));
+    @m primary {
+      @mixin button-variant var(--button-primary-color), var(--button-primary-fill), var(--button-primary-border);
     }
-    &:active {
-      color: shade(var(--color-primary), var(--button-active-shade-percent));
+    @m success {
+      @mixin button-variant var(--button-success-color), var(--button-success-fill), var(--button-success-border);
     }
-  }
+    @m warning {
+      @mixin button-variant var(--button-warning-color), var(--button-warning-fill), var(--button-warning-border);
+    }
+    @m danger {
+      @mixin button-variant var(--button-danger-color), var(--button-danger-fill), var(--button-danger-border);
+    }
+    @m info {
+      @mixin button-variant var(--button-info-color), var(--button-info-fill), var(--button-info-border);
+    }
+    @m text {
+      border: none;
+      color: var(--color-primary);
+      background: transparent;
 
-  @b button-large {
-    @mixin button-size var(--button-large-padding-vertical), var(--button-large-padding-horizontal), var(--button-large-font-size), var(--button-border-radius);
-  }
-  @b button-small {
-    @mixin button-size var(--button-small-padding-vertical), var(--button-small-padding-horizontal), var(--button-small-font-size), var(--button-border-radius);
-  }
-  @b button-mini {
-    @mixin button-size var(--button-mini-padding-vertical), var(--button-mini-padding-horizontal), var(--button-mini-font-size), var(--button-border-radius);
+      &:hover {
+        color: tint(var(--color-primary), var(--button-hover-tint-percent));
+      }
+      &:active {
+        color: shade(var(--color-primary), var(--button-active-shade-percent));
+      }
+    }
+    @m large {
+      @mixin button-size var(--button-large-padding-vertical), var(--button-large-padding-horizontal), var(--button-large-font-size), var(--button-border-radius);
+    }
+    @m small {
+      @mixin button-size var(--button-small-padding-vertical), var(--button-small-padding-horizontal), var(--button-small-font-size), var(--button-border-radius);
+    }
+    @m mini {
+      @mixin button-size var(--button-mini-padding-vertical), var(--button-mini-padding-horizontal), var(--button-mini-font-size), var(--button-border-radius);
+    }
   }
 
   @b button-group {
@@ -171,7 +169,7 @@
     }
 
     @each $type in (primary, success, warning, danger, info) {
-      .el-button-$type {
+      .el-button--$type {
         &:first-child {
           border-right-color: rgba(#fff, 0.5);
         }

@@ -2,16 +2,20 @@
   <li class="el-dropdown-item" @click="handleClick"><slot></slot></li>
 </template>
 <script>
-  import emitter from 'element-ui/src/mixins/emitter';
+  import Emitter from 'element-ui/src/mixins/emitter';
 
   export default {
     name: 'ElDropdownItem',
 
-    mixins: [emitter],
+    mixins: [Emitter],
+
+    props: {
+      command: String
+    },
 
     methods: {
       handleClick(e) {
-        this.dispatch('ElDropdownMenu', 'visible', [false]);
+        this.dispatch('ElDropdown', 'menu-item-click', [this.command, this]);
       }
     }
   };

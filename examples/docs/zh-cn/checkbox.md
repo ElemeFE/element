@@ -41,7 +41,7 @@
 ```html
 <template>
   <!-- `checked` 为 true 或 false -->
-  <el-checkbox class="checkbox" v-model="checked" checked>备选项</el-checkbox>
+  <el-checkbox v-model="checked" checked>备选项</el-checkbox>
 </template>
 <script>
   export default {
@@ -63,8 +63,8 @@
 
 ```html
 <template>
-  <el-checkbox class="checkbox" v-model="checked1" disabled>备选项1</el-checkbox>
-  <el-checkbox class="checkbox" v-model="checked2" disabled>备选项</el-checkbox>
+  <el-checkbox v-model="checked1" disabled>备选项1</el-checkbox>
+  <el-checkbox v-model="checked2" disabled>备选项</el-checkbox>
 </template>
 <script>
   export default {
@@ -88,11 +88,11 @@
 ```html
 <template>
   <el-checkbox-group v-model="checkList">
-    <el-checkbox class="checkbox" label="复选框 A"></el-checkbox>
-    <el-checkbox class="checkbox" label="复选框 B"></el-checkbox>
-    <el-checkbox class="checkbox" label="复选框 C"></el-checkbox>
-    <el-checkbox class="checkbox" label="禁用" disabled></el-checkbox>
-    <el-checkbox class="checkbox" label="选中且禁用" disabled></el-checkbox>
+    <el-checkbox label="复选框 A"></el-checkbox>
+    <el-checkbox label="复选框 B"></el-checkbox>
+    <el-checkbox label="复选框 C"></el-checkbox>
+    <el-checkbox label="禁用" disabled></el-checkbox>
+    <el-checkbox label="选中且禁用" disabled></el-checkbox>
   </el-checkbox-group>
 </template>
 
@@ -108,39 +108,11 @@
 ```
 :::
 
-### 可切换值的多选框
-
-多选框单独时，除了可以表示为是否选中的逻辑值以外，你还可以设定其选中和未选中所表示的值。
-
-:::demo 使用`true-label`和`false-label`可以自定义选中时和未选中时的值，可以为`String`或`Number`类型。
-
-```html
-<template>
-  <el-checkbox
-    class="checkbox"
-    v-model="isValid"
-    true-label="可用"
-    false-label="不可用">
-    {{isValid}}
-  </el-checkbox>
-</template>
-<script>
-  export default {
-    data() {
-      return {
-        isValid: '可用'
-      };
-    }
-  };
-</script>
-```
-:::
-
 ### Checkbox Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
-| label     | 选中状态的值（只有在`checkbox-group`下有意义）   | string    |       —        |     —    |
-| true-label | 选中时的值   | string, number    |       —        |     —    |
+| label     | 选中状态的值（只有在`checkbox-group`或者绑定对象类型为`array`时有效）| string    |       —        |     —    |
+| true-label | 选中时的值   | string, number | — |     —    |
 | false-label | 没有选中时的值   | string, number    |      —         |     —    |
 | disabled  | 按钮禁用    | boolean   |  — | false   |
 | checked  | 当前是否勾选    | boolean   |  — | false   |

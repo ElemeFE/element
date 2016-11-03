@@ -3,7 +3,7 @@ module.exports = {
     indexPath() {
       var path = [this.index];
       var parent = this.$parent;
-      while (parent.$options._componentTag !== 'el-menu') {
+      while (parent.$options.componentName !== 'ElMenu') {
         if (parent.index) {
           path.unshift(parent.index);
         }
@@ -13,7 +13,7 @@ module.exports = {
     },
     rootMenu() {
       var parent = this.$parent;
-      while (parent.$options._componentTag !== 'el-menu') {
+      while (parent.$options.componentName !== 'ElMenu') {
         parent = parent.$parent;
       }
       return parent;

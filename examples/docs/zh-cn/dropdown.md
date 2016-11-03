@@ -60,7 +60,7 @@
 ```html
 <el-dropdown>
   <span class="el-dropdown-link">
-    下拉菜单<i class="el-icon-caret-bottom el-icon-right"></i>
+    下拉菜单<i class="el-icon-caret-bottom el-icon--right"></i>
   </span>
   <el-dropdown-menu slot="dropdown">
     <el-dropdown-item>黄金糕</el-dropdown-item>
@@ -82,7 +82,7 @@
 ```html
 <el-dropdown>
   <el-button type="primary">
-    更多菜单<i class="el-icon-caret-bottom el-icon-right"></i>
+    更多菜单<i class="el-icon-caret-bottom el-icon--right"></i>
   </el-button>
   <el-dropdown-menu slot="dropdown">
     <el-dropdown-item>黄金糕</el-dropdown-item>
@@ -117,7 +117,7 @@
     <span class="demonstration">hover 激活</span>
     <el-dropdown>
       <span class="el-dropdown-link">
-        下拉菜单<i class="el-icon-caret-bottom el-icon-right"></i>
+        下拉菜单<i class="el-icon-caret-bottom el-icon--right"></i>
       </span>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item>黄金糕</el-dropdown-item>
@@ -132,7 +132,7 @@
     <span class="demonstration">click 激活</span>
     <el-dropdown trigger="click">
       <span class="el-dropdown-link">
-        下拉菜单<i class="el-icon-caret-bottom el-icon-right"></i>
+        下拉菜单<i class="el-icon-caret-bottom el-icon--right"></i>
       </span>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item>黄金糕</el-dropdown-item>
@@ -148,7 +148,7 @@
 :::
 
 
-### Attributes
+### Dropdown Attributes
 | 参数          | 说明            | 类型            | 可选值                 | 默认值   |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
 | type          | 菜单按钮类型，同 Button 组件(只在`split-button`为 true 的情况下有效)   | string  |          —             |    —     |
@@ -157,7 +157,13 @@
 | menu-align    | 菜单水平对齐方向     | string          | start, end  | end |
 | trigger       | 触发下拉的行为     | string          | hover, click  | hover |
 
-### Events
+### Dropdown Events
 | 事件名称      | 说明    | 回调参数      |
 |---------- |-------- |---------- |
 | click  | `split-button` 为 true 时，点击左侧按钮的回调 | — |
+| command  | 点击菜单项触发的事件回调 | dropdown-item 的指令 |
+
+### Dropdown Attributes
+| 参数          | 说明            | 类型            | 可选值                 | 默认值   |
+|-------------  |---------------- |---------------- |---------------------- |-------- |
+| command       | 指令     | string          | — | — |

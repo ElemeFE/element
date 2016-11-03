@@ -262,7 +262,7 @@
 
 包含清空按钮，可将选择器清空为初始状态
 
-:::demo 为`el-select`设置`clearable`属性，则可将选择器清空。需要注意的是，`clearable`属性仅使用于单选。
+:::demo 为`el-select`设置`clearable`属性，则可将选择器清空。需要注意的是，`clearable`属性仅适用于单选。
 ```html
 <template>
   <el-select v-model="value4" clearable>
@@ -306,7 +306,7 @@
 
 适用性较广的基础多选，用 Tag 展示已选项
 
-:::demo 为`el-select`设置`nultiple`属性即可启用多选，此时`v-model`的值为当前选中值所组成的数组
+:::demo 为`el-select`设置`multiple`属性即可启用多选，此时`v-model`的值为当前选中值所组成的数组
 ```html
 <template>
   <el-select v-model="value5" multiple>

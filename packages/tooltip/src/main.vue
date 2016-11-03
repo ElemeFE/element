@@ -33,6 +33,7 @@ export default {
       default: 0
     },
     disabled: Boolean,
+    manual: Boolean,
     effect: {
       type: String,
       default: 'dark'
@@ -57,12 +58,14 @@ export default {
 
   methods: {
     handleShowPopper() {
+      if (this.manual) return;
       this.timeout = setTimeout(() => {
         this.showPopper = true;
       }, this.openDelay);
     },
 
     handleClosePopper() {
+      if (this.manual) return;
       clearTimeout(this.timeout);
       this.showPopper = false;
     }

@@ -57,7 +57,7 @@
       margin: 0 3px;
     }
     @m text {
-      .el-button-text {
+      .el-button--text {
         padding: 0;
       }
     }

@@ -11,7 +11,15 @@ then
   # build
   VERSION=$VERSION npm run dist
 
+  # publish theme
+  echo "Releasing theme-default $VERSION ..."
+  cd packages/theme-default
+  npm version $VERSION --message "[release] $VERSION"
+  npm publish --tag next
+  cd ../..
+
   # commit
+  git submodule update
   git add -A
   git commit -m "[build] $VERSION"
   npm version $VERSION --message "[release] $VERSION"

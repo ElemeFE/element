@@ -1,4 +1,4 @@
-import Vue from 'vue/dist/vue';
+import Vue from 'vue';
 import Element from 'main/index.js';
 
 Vue.use(Element);
@@ -12,6 +12,16 @@ const createElm = function() {
   document.body.appendChild(elm);
 
   return elm;
+};
+
+/**
+ * 回收 vm
+ * @param  {Object} vm
+ */
+exports.destroyVM = function(vm) {
+  vm.$el &&
+  vm.$el.parentNode &&
+  vm.$el.parentNode.removeChild(vm.$el);
 };
 
 /**
@@ -45,4 +55,31 @@ exports.createTest = function(Compo, propsData = {}, mounted = false) {
   const elm = createElm();
   const Ctor = Vue.extend(Compo);
   return new Ctor({ propsData }).$mount(mounted === false ? null : elm);
+};
+
+/**
+ * 触发一个事件
+ * mouseenter, mouseleave, mouseover, keyup, change, click 等
+ * @param  {Element} elm
+ * @param  {String} name
+ * @param  {*} opts
+ */
+exports.triggerEvent = function(elm, name, ...opts) {
+  let eventName;
+
+  if (/^mouse|click/.test(name)) {
+    eventName = 'MouseEvents';
+  } else if (/^key/.test(name)) {
+    eventName = 'KeyboardEvent';
+  } else {
+    eventName = 'HTMLEvents';
+  }
+  const evt = document.createEvent(eventName);
+
+  evt.initEvent(name, ...opts);
+  elm.dispatchEvent
+    ? elm.dispatchEvent(evt)
+    : elm.fireEvent('on' + name, evt);
+
+  return elm;
 };

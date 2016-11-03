@@ -1,5 +1,4 @@
 import { getScrollBarWidth } from './util';
-import Vue from 'vue';
 
 let GUTTER_WIDTH;
 
@@ -38,30 +37,6 @@ class TableLayout {
     if (!this.store) {
       throw new Error('store is required for Table Layout');
     }
-  }
-
-  syncHeight() {
-    Vue.nextTick(() => {
-      const { bodyWrapper, fixedBodyWrapper } = this.table.$refs;
-
-      // 若非固定列中的某行内容被撑高, 需要固定列中对应行高度与其保持一致
-      const bodyHeight = bodyWrapper.offsetHeight;
-      const fixedBodyHeight = fixedBodyWrapper.offsetHeight;
-
-      if (bodyHeight !== fixedBodyHeight) {
-        const rows = bodyWrapper.querySelectorAll('tr');
-        const fixedRows = fixedBodyWrapper.querySelectorAll('tr');
-
-        [].forEach.call(rows, (row, i) => {
-          const fixedRow = fixedRows[i];
-          const rowHeight = row.offsetHeight;
-          const fixedRowHeight = fixedRow.offsetHeight;
-          if (rowHeight !== fixedRowHeight) {
-            fixedRow.style.height = rowHeight + 'px';
-          }
-        });
-      }
-    });
   }
 
   updateScrollY() {

@@ -44,15 +44,18 @@
       closed(newVal) {
         if (newVal) {
           this.visible = false;
-          this.$el.addEventListener('transitionend', () => {
-            this.$destroy(true);
-            this.$el.parentNode.removeChild(this.$el);
-          });
+          this.$el.addEventListener('transitionend', this.destroyElement);
         }
       }
     },
 
     methods: {
+      destroyElement() {
+        this.$el.removeEventListener('transitionend', this.destroyElement);
+        this.$destroy(true);
+        this.$el.parentNode.removeChild(this.$el);
+      },
+
       handleClose() {
         this.closed = true;
         if (typeof this.onClose === 'function') {

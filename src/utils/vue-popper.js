@@ -1,5 +1,6 @@
 import PopperJS from './popper';
 import { PopupManager } from 'vue-popup';
+PopupManager.zIndex = 2000;
 
 /**
  * @param {HTMLElement} [reference=$refs.reference] - The reference element used to position the popper.
@@ -19,8 +20,8 @@ export default {
       type: Number,
       default: 5
     },
-    reference: Object,
-    popper: Object,
+    reference: {},
+    popper: {},
     offset: {
       default: 0
     },
@@ -70,13 +71,17 @@ export default {
 
       const options = this.options;
       const popper = this.popperElm = this.popperElm || this.popper || this.$refs.popper;
-      const reference = this.referenceElm = this.referenceElm || this.reference || this.$refs.reference || this.$slots.reference[0].elm;
+      let reference = this.referenceElm = this.referenceElm || this.reference || this.$refs.reference;
 
+      if (!reference &&
+          this.$slots.reference &&
+          this.$slots.reference[0]) {
+        reference = this.referenceElm = this.$slots.reference[0].elm;
+      }
       if (!popper || !reference) return;
-
       if (this.visibleArrow) this.appendArrow(popper);
       if (this.appendToBody) document.body.appendChild(this.popperElm);
-      if (this.popperJS && this.popperJS.hasOwnProperty('destroy')) {
+      if (this.popperJS && this.popperJS.destroy) {
         this.popperJS.destroy();
       }
 
@@ -96,6 +101,7 @@ export default {
     },
 
     doDestroy() {
+      /* istanbul ignore if */
       if (this.showPopper || !this.popperJS) return;
       this.popperJS.destroy();
       this.popperJS = null;
@@ -111,7 +117,9 @@ export default {
       let placementMap = { top: 'bottom', bottom: 'top', left: 'right', right: 'left' };
       let placement = this.popperJS._popper.getAttribute('x-placement').split('-')[0];
       let origin = placementMap[placement];
-      this.popperJS._popper.style.transformOrigin = ['top', 'bottom'].indexOf(placement) > -1 ? `center ${ origin }` : `${ origin } center`;
+      this.popperJS._popper.style.transformOrigin = ['top', 'bottom'].indexOf(placement) > -1
+        ? `center ${ origin }`
+        : `${ origin } center`;
     },
 
     appendArrow(element) {
@@ -143,7 +151,7 @@ export default {
   beforeDestroy() {
     this.doDestroy();
     this.popperElm &&
-    document.body.contains(this.popperElm) &&
+    this.popperElm.parentNode === document.body &&
     document.body.removeChild(this.popperElm);
   }
 };

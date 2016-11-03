@@ -85,7 +85,7 @@
     data() {
       return {
         focus: false,
-        wrapInGroup: this.$parent.$options._componentTag === 'el-checkbox-group'
+        wrapInGroup: this.$parent.$options.componentName === 'ElCheckboxGroup'
       };
     },
 

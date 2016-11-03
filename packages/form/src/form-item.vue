@@ -85,7 +85,6 @@
     methods: {
       validate(trigger, cb) {
         var rules = this.getFilteredRule(trigger);
-
         if (!rules || rules.length === 0) {
           cb && cb();
           return true;

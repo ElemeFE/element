@@ -1,7 +1,6 @@
 var cooking = require('cooking');
 var config = require('./config');
 var md = require('markdown-it')();
-var Components = require('../components.json');
 var striptags = require('./strip-tags');
 
 function convert(str) {
@@ -78,17 +77,10 @@ var wrap = function(render) {
   };
 };
 
-var externals = {};
-Object.keys(Components).forEach(function(key) {
-  externals[`element-ui/packages/${key}/style.css`] = 'null';
-});
-
-// 开发模式不需要将不存在的 style.css 打包进去
-cooking.add('externals', externals);
-
 if (process.env.NODE_ENV === 'production') {
   cooking.add('externals.vue', 'Vue');
   cooking.add('externals.vue-router', 'VueRouter');
 }
 
+cooking.add('vue.preserveWhitespace', false);
 module.exports = cooking.resolve();

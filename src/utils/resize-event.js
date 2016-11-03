@@ -4,6 +4,7 @@
 * version: 0.5.3
 **/
 
+/* istanbul ignore next */
 const requestFrame = (function() {
   const raf = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame ||
     function(fn) {
@@ -14,6 +15,7 @@ const requestFrame = (function() {
   };
 })();
 
+/* istanbul ignore next */
 const cancelFrame = (function() {
   const cancel = window.cancelAnimationFrame || window.mozCancelAnimationFrame || window.webkitCancelAnimationFrame || window.clearTimeout;
   return function(id) {
@@ -21,6 +23,7 @@ const cancelFrame = (function() {
   };
 })();
 
+/* istanbul ignore next */
 const resetTrigger = function(element) {
   const trigger = element.__resizeTrigger__;
   const expand = trigger.firstElementChild;
@@ -35,10 +38,12 @@ const resetTrigger = function(element) {
   expand.scrollTop = expand.scrollHeight;
 };
 
+/* istanbul ignore next */
 const checkTriggers = function(element) {
   return element.offsetWidth !== element.__resizeLast__.width || element.offsetHeight !== element.__resizeLast__.height;
 };
 
+/* istanbul ignore next */
 const scrollListener = function(event) {
   resetTrigger(this);
   if (this.__resizeRAF__) cancelFrame(this.__resizeRAF__);
@@ -62,6 +67,7 @@ let animation = false;
 let keyFramePrefix = '';
 let animationStartEvent = 'animationstart';
 
+/* istanbul ignore next */
 if (!attachEvent) {
   const testElement = document.createElement('fakeelement');
   if (testElement.style.animationName !== undefined) {
@@ -83,6 +89,7 @@ if (!attachEvent) {
 }
 
 let stylesCreated = false;
+/* istanbul ignore next */
 const createStyles = function() {
   if (!stylesCreated) {
     const animationKeyframes = `@${keyFramePrefix}keyframes ${RESIZE_ANIMATION_NAME} { from { opacity: 0; } to { opacity: 0; } } `;
@@ -110,6 +117,7 @@ const createStyles = function() {
   }
 };
 
+/* istanbul ignore next */
 export const addResizeListener = function(element, fn) {
   if (attachEvent) {
     element.attachEvent('onresize', fn);
@@ -143,6 +151,7 @@ export const addResizeListener = function(element, fn) {
   }
 };
 
+/* istanbul ignore next */
 export const removeResizeListener = function(element, fn) {
   if (attachEvent) {
     element.detachEvent('onresize', fn);

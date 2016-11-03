@@ -4,7 +4,8 @@
       :value="value"
       :disabled="disabled"
       :placeholder="placeholder"
-      :name='name'
+      :name="name"
+      :size="size"
       @change="handleChange"
       @focus="handleFocus"
       @keydown.up.native="highlight(highlightedIndex - 1)"
@@ -41,7 +42,7 @@
   </div>
 </template>
 <script>
-  import ElInput from 'element-ui/packages/input/index.js';
+  import ElInput from 'element-ui/packages/input';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
 
   export default {
@@ -55,6 +56,7 @@
       placeholder: String,
       disabled: Boolean,
       name: String,
+      size: String,
       value: String,
       fetchSuggestions: Function,
       triggerOnFocus: {

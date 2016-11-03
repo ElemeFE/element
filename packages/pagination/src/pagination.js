@@ -1,10 +1,13 @@
-import Vue from 'vue';
 import Pager from './pager.vue';
-import ElSelect from 'element-ui/packages/select/index.js';
-import ElOption from 'element-ui/packages/option/index.js';
+import ElSelect from 'element-ui/packages/select';
+import ElOption from 'element-ui/packages/option';
+import Migrating from 'element-ui/src/mixins/migrating';
+import { $t } from 'element-ui/src/locale';
 
 export default {
   name: 'ElPagination',
+
+  mixins: [Migrating],
 
   props: {
     pageSize: {
@@ -45,11 +48,12 @@ export default {
 
   render(h) {
     let template = <div class='el-pagination'></div>;
-    const layout = this.$options.layout || this.layout || '';
+    const layout = this.layout || '';
+    if (!layout) return;
     const TEMPLATE_MAP = {
       prev: <prev></prev>,
       jumper: <jumper></jumper>,
-      pager: <pager currentPage={ this.internalCurrentPage } pageCount={ this.pageCount } on-currentchange={ this.handleCurrentChange }></pager>,
+      pager: <pager currentPage={ this.internalCurrentPage } pageCount={ this.pageCount } on-change={ this.handleCurrentChange }></pager>,
       next: <next></next>,
       sizes: <sizes></sizes>,
       slot: <slot></slot>,
@@ -116,7 +120,9 @@ export default {
     Sizes: {
       created() {
         if (Array.isArray(this.$parent.pageSizes)) {
-          this.$parent.internalPageSize = this.$parent.pageSizes.indexOf(this.$parent.pageSize) > -1 ? this.$parent.pageSize : this.$parent.pageSizes[0];
+          this.$parent.internalPageSize = this.$parent.pageSizes.indexOf(this.$parent.pageSize) > -1
+            ? this.$parent.pageSize
+            : this.$parent.pageSizes[0];
         }
       },
 
@@ -132,7 +138,7 @@ export default {
                 this.$parent.pageSizes.map(item =>
                     <el-option
                       value={ item }
-                      label={ item + ' 条/页' }>
+                      label={ item + ' ' + $t('el.pagination.pagesize') }>
                     </el-option>
                   )
               }
@@ -150,7 +156,7 @@ export default {
         handleChange(val) {
           if (val !== this.$parent.internalPageSize) {
             this.$parent.internalPageSize = val = parseInt(val, 10);
-            this.$parent.$emit('sizechange', val);
+            this.$parent.$emit('size-change', val);
           }
         }
       }
@@ -170,7 +176,7 @@ export default {
 
         handleChange({ target }) {
           this.$parent.internalCurrentPage = this.$parent.getValidCurrentPage(target.value);
-          this.$parent.$emit('currentchange', this.$parent.internalCurrentPage);
+          this.$parent.$emit('current-change', this.$parent.internalCurrentPage);
           this.oldValue = null;
         }
       },
@@ -178,7 +184,7 @@ export default {
       render(h) {
         return (
           <span class="el-pagination__jump">
-            前往
+            { $t('el.pagination.goto') }
             <input
               class="el-pagination__editor"
               type="number"
@@ -189,7 +195,7 @@ export default {
               on-focus={ this.handleFocus }
               style={{ width: '30px' }}
               number/>
-            页
+            { $t('el.pagination.pageClassifier') }
           </span>
         );
       }
@@ -198,7 +204,7 @@ export default {
     Total: {
       render(h) {
         return (
-          <span class="el-pagination__total">共 { this.$parent.total } 条</span>
+          <span class="el-pagination__total">{ $t('el.pagination.total', { total: this.$parent.total }) }</span>
         );
       }
     },
@@ -207,9 +213,19 @@ export default {
   },
 
   methods: {
+    getMigratingConfig() {
+      return {
+        props: {},
+        events: {
+          'currentchange': 'Pagination: currentchange has been renamed to current-change',
+          'sizechange': 'Pagination: sizechange has been renamed to size-change'
+        }
+      };
+    },
+
     handleCurrentChange(val) {
       this.internalCurrentPage = this.getValidCurrentPage(val);
-      this.$emit('currentchange', this.internalCurrentPage);
+      this.$emit('current-change', this.internalCurrentPage);
     },
 
     prev() {
@@ -218,7 +234,7 @@ export default {
       this.internalCurrentPage = this.getValidCurrentPage(newVal);
 
       if (this.internalCurrentPage !== oldPage) {
-        this.$emit('currentchange', this.internalCurrentPage);
+        this.$emit('current-change', this.internalCurrentPage);
       }
     },
 
@@ -228,29 +244,30 @@ export default {
       this.internalCurrentPage = this.getValidCurrentPage(newVal);
 
       if (this.internalCurrentPage !== oldPage) {
-        this.$emit('currentchange', this.internalCurrentPage);
+        this.$emit('current-change', this.internalCurrentPage);
       }
     },
 
-    first() {
-      const oldPage = this.internalCurrentPage;
-      const newVal = 1;
-      this.internalCurrentPage = this.getValidCurrentPage(newVal);
+    // XXX: 暂时没有到第一页和最后一页的交互
+    // first() {
+    //   const oldPage = this.internalCurrentPage;
+    //   const newVal = 1;
+    //   this.internalCurrentPage = this.getValidCurrentPage(newVal);
 
-      if (this.internalCurrentPage !== oldPage) {
-        this.$emit('currentchange', this.internalCurrentPage);
-      }
-    },
+    //   if (this.internalCurrentPage !== oldPage) {
+    //     this.$emit('current-change', this.internalCurrentPage);
+    //   }
+    // },
 
-    last() {
-      const oldPage = this.internalCurrentPage;
-      const newVal = this.pageCount;
-      this.internalCurrentPage = this.getValidCurrentPage(newVal);
+    // last() {
+    //   const oldPage = this.internalCurrentPage;
+    //   const newVal = this.pageCount;
+    //   this.internalCurrentPage = this.getValidCurrentPage(newVal);
 
-      if (this.internalCurrentPage !== oldPage) {
-        this.$emit('currentchange', this.internalCurrentPage);
-      }
-    },
+    //   if (this.internalCurrentPage !== oldPage) {
+    //     this.$emit('current-change', this.internalCurrentPage);
+    //   }
+    // },
 
     getValidCurrentPage(value) {
       value = parseInt(value, 10);
@@ -273,25 +290,29 @@ export default {
   computed: {
     pageCount() {
       return Math.ceil(this.total / this.internalPageSize);
-    },
-
-    startRecordIndex() {
-      const result = (this.internalCurrentPage - 1) * this.internalPageSize + 1;
-      return result > 0 ? result : 0;
-    },
-
-    endRecordIndex() {
-      const result = this.internalCurrentPage * this.internalPageSize;
-      return result > this.total ? this.total : result;
     }
+
+    // XXX: 暂时没用到
+    // startRecordIndex() {
+    //   const result = (this.internalCurrentPage - 1) * this.internalPageSize + 1;
+    //   return result > 0 ? result : 0;
+    // },
+
+    // endRecordIndex() {
+    //   const result = this.internalCurrentPage * this.internalPageSize;
+    //   return result > this.total ? this.total : result;
+    // }
   },
 
   watch: {
     pageCount(newVal) {
+      /* istanbul ignore if */
       if (newVal > 0 && this.internalCurrentPage === 0) {
         this.internalCurrentPage = 1;
+        this.$emit('current-change', 1);
       } else if (this.internalCurrentPage > newVal) {
         this.internalCurrentPage = newVal;
+        this.$emit('current-change', newVal);
       }
     },
 
@@ -312,6 +333,7 @@ export default {
     internalCurrentPage(newVal, oldVal) {
       newVal = parseInt(newVal, 10);
 
+      /* istanbul ignore if */
       if (isNaN(newVal)) {
         newVal = oldVal || 1;
       } else {
@@ -319,7 +341,7 @@ export default {
       }
 
       if (newVal !== undefined) {
-        Vue.nextTick(() => {
+        this.$nextTick(() => {
           this.internalCurrentPage = newVal;
         });
       }

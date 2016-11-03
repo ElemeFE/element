@@ -84,7 +84,7 @@
     }
 
     img {
-      width: 120px;
+      width: 160px;
       height: 120px;
     }
   }

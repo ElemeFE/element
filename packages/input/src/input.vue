@@ -1,7 +1,7 @@
 <template>
   <div :class="[
     type === 'textarea' ? 'el-textarea' : 'el-input',
-    size ? 'el-input-' + size : '',
+    size ? 'el-input--' + size : '',
     {
       'is-disabled': disabled,
       'el-input-group': $slots.prepend || $slots.append
@@ -22,10 +22,11 @@
         :placeholder="placeholder"
         :disabled="disabled"
         :readonly="readonly"
-        :number="number"
         :maxlength="maxlength"
         :minlength="minlength"
         :autocomplete="autoComplete"
+        :autofocus="autofocus"
+        :form="form"
         :value="value"
         ref="input"
         @input="handleInput"
@@ -49,6 +50,8 @@
       :style="textareaStyle"
       :readonly="readonly"
       :rows="rows"
+      :form="form"
+      :autofocus="autofocus"
       :maxlength="maxlength"
       :minlength="minlength"
       @focus="handleFocus"
@@ -67,38 +70,17 @@
 
     props: {
       value: [String, Number],
-      placeholder: {
-        type: String,
-        default: ''
-      },
-      size: {
-        type: String,
-        default: ''
-      },
-      readonly: {
-        type: Boolean,
-        default: false
-      },
-      icon: {
-        type: String,
-        default: ''
-      },
-      disabled: {
-        type: Boolean,
-        default: false
-      },
+      placeholder: String,
+      size: String,
+      readonly: Boolean,
+      autofocus: Boolean,
+      icon: String,
+      disabled: Boolean,
       type: {
         type: String,
         default: 'text'
       },
-      name: {
-        type: String,
-        default: ''
-      },
-      number: {
-        type: Boolean,
-        default: false
-      },
+      name: String,
       autosize: {
         type: [Boolean, Object],
         default: false
@@ -111,13 +93,14 @@
         type: String,
         default: 'off'
       },
+      form: String,
       maxlength: Number,
       minlength: Number
     },
 
     methods: {
       handleBlur(event) {
-        this.$emit('onblur', this.currentValue);
+        this.$emit('blur', this.currentValue);
         this.dispatch('form-item', 'el.form.blur', [this.currentValue]);
       },
       inputSelect() {
@@ -128,8 +111,9 @@
         if (!autosize || type !== 'textarea') {
           return;
         }
-        const minRows = autosize ? autosize.minRows : null;
-        const maxRows = autosize ? autosize.maxRows : null;
+        const minRows = autosize.minRows;
+        const maxRows = autosize.maxRows;
+
         this.textareaStyle = calcTextareaHeight(this.$refs.textarea, minRows, maxRows);
       },
       handleFocus(ev) {

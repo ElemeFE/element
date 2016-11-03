@@ -1,5 +1,7 @@
-import ElCheckbox from 'element-ui/packages/checkbox/index.js';
-import ElTag from 'element-ui/packages/tag/index.js';
+import ElCheckbox from 'element-ui/packages/checkbox';
+import ElTag from 'element-ui/packages/tag';
+import Vue from 'vue';
+import FilterPanel from './filter-panel.vue';
 
 export default {
   name: 'el-table-header',
@@ -13,39 +15,45 @@ export default {
         border="0">
         {
           this._l(this.columns, column =>
-            <colgroup
+            <col
               name={ column.id }
               width={ column.realWidth || column.width }
             />)
         }
         {
           !this.fixed && this.layout.gutterWidth
-            ? <colgroup name="gutter" width={ this.layout.scrollY ? this.layout.gutterWidth : '' }></colgroup>
+            ? <col name="gutter" width={ this.layout.scrollY ? this.layout.gutterWidth : '' }></col>
             : ''
         }
         <thead>
           <tr>
             {
-              this._l(this.columns, column =>
+              this._l(this.columns, (column, cellIndex) =>
                 <th
                   on-mousemove={ ($event) => this.handleMouseMove($event, column) }
                   on-mouseout={ this.handleMouseOut }
                   on-mousedown={ ($event) => this.handleMouseDown($event, column) }
-                  on-click={ ($event) => this.handleHeaderClick($event, column) }
-                  class={ [column.id, column.direction, column.align] }>
+                  class={ [column.id, column.order, column.align, this.isCellHidden(cellIndex) ? 'is-hidden' : ''] }>
+                  <div class={ ['cell', column.filteredValue && column.filteredValue.length > 0 ? 'highlight' : ''] }>
                   {
-                    [
-                      column.headerTemplate
-                        ? column.headerTemplate.call(this._renderProxy, h, column.label)
-                        : <div>{ column.label }</div>,
-                      column.sortable
-                        ? <div class="caret-wrapper">
-                            <i class="sort-caret ascending"></i>
-                            <i class="sort-caret descending"></i>
-                          </div>
-                        : ''
-                    ]
+                    column.headerTemplate
+                      ? column.headerTemplate.call(this._renderProxy, h, column.label)
+                      : column.label
                   }
+                  {
+                    column.sortable
+                      ? <span class="caret-wrapper" on-click={ ($event) => this.handleHeaderClick($event, column) }>
+                          <i class="sort-caret ascending"></i>
+                          <i class="sort-caret descending"></i>
+                        </span>
+                      : ''
+                  }
+                  {
+                    column.filterable
+                      ? <span class="el-table__column-filter-trigger" on-click={ ($event) => this.handleFilterClick($event, column) }><i class={ ['el-icon-arrow-down', column.filterOpened ? 'el-icon-arrow-up' : ''] }></i></span>
+                      : ''
+                  }
+                  </div>
                 </th>
               )
             }
@@ -61,7 +69,6 @@ export default {
   },
 
   props: {
-    columns: {},
     fixed: String,
     store: {
       required: true
@@ -82,22 +89,81 @@ export default {
       return this.store.states.isAllSelected;
     },
 
+    columnsCount() {
+      return this.store.states.columns.length;
+    },
+
+    leftFixedCount() {
+      return this.store.states.fixedColumns.length;
+    },
+
+    rightFixedCount() {
+      return this.store.states.rightFixedColumns.length;
+    },
+
     columns() {
-      if (this.fixed === true || this.fixed === 'left') {
-        return this.store.states.fixedColumns;
-      } else if (this.fixed === 'right') {
-        return this.store.states.rightFixedColumns;
-      }
       return this.store.states.columns;
     }
   },
 
+  created() {
+    this.filterPanels = {};
+  },
+
+  beforeDestroy() {
+    const panels = this.filterPanels;
+    for (let prop in panels) {
+      if (panels.hasOwnProperty(prop) && panels[prop]) {
+        panels[prop].$destroy(true);
+      }
+    }
+  },
+
   methods: {
+    isCellHidden(index) {
+      if (this.fixed === true || this.fixed === 'left') {
+        return index >= this.leftFixedCount;
+      } else if (this.fixed === 'right') {
+        return index < this.columnsCount - this.rightFixedCount;
+      } else {
+        return (index < this.leftFixedCount) || (index >= this.columnsCount - this.rightFixedCount);
+      }
+    },
+
     toggleAllSelection() {
       this.store.commit('toggleAllSelection');
     },
 
+    handleFilterClick(event, column) {
+      event.stopPropagation();
+      const target = event.target;
+      const cell = target.parentNode;
+      const table = this.$parent;
+
+      let filterPanel = this.filterPanels[column.id];
+
+      if (filterPanel && column.filterOpened) {
+        filterPanel.showPopper = false;
+        return;
+      }
+
+      if (!filterPanel) {
+        filterPanel = new Vue(FilterPanel);
+        this.filterPanels[column.id] = filterPanel;
+
+        filterPanel.table = table;
+        filterPanel.cell = cell;
+        filterPanel.column = column;
+        filterPanel.$mount(document.createElement('div'));
+      }
+
+      setTimeout(() => {
+        filterPanel.showPopper = true;
+      }, 16);
+    },
+
     handleMouseDown(event, column) {
+      /* istanbul ignore if */
       if (this.draggingColumn && this.border) {
         this.dragging = true;
 
@@ -163,7 +229,10 @@ export default {
     },
 
     handleMouseMove(event, column) {
-      const target = event.target;
+      let target = event.target;
+      while (target && target.tagName !== 'TH') {
+        target = target.parentNode;
+      }
 
       if (!column || !column.resizable) return;
 
@@ -177,7 +246,6 @@ export default {
         } else if (!this.dragging) {
           bodyStyle.cursor = '';
           this.draggingColumn = null;
-          if (column.sortable) bodyStyle.cursor = 'pointer';
         }
       }
     },
@@ -201,26 +269,30 @@ export default {
 
       if (!column.sortable) return;
 
-      const sortCondition = this.store.states.sortCondition;
+      const states = this.store.states;
+      let sortProp = states.sortProp;
+      let sortOrder;
+      const sortingColumn = states.sortingColumn;
 
-      if (sortCondition.column !== column) {
-        if (sortCondition.column) {
-          sortCondition.column.direction = '';
+      if (sortingColumn !== column) {
+        if (sortingColumn) {
+          sortingColumn.order = null;
         }
-        sortCondition.column = column;
-        sortCondition.property = column.property;
+        states.sortingColumn = column;
+        sortProp = column.property;
       }
 
-      if (!column.direction) {
-        column.direction = 'ascending';
-      } else if (column.direction === 'ascending') {
-        column.direction = 'descending';
+      if (!column.order) {
+        sortOrder = column.order = 'ascending';
+      } else if (column.order === 'ascending') {
+        sortOrder = column.order = 'descending';
       } else {
-        column.direction = '';
-        sortCondition.column = null;
-        sortCondition.property = null;
+        sortOrder = column.order = null;
+        states.sortingColumn = null;
+        sortProp = null;
       }
-      sortCondition.direction = column.direction === 'descending' ? -1 : 1;
+      states.sortProp = sortProp;
+      states.sortOrder = sortOrder;
 
       this.store.commit('changeSortCondition');
     }

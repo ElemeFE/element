@@ -1,10 +1,15 @@
-import { createTest, createVue } from '../util';
+import { createTest, createVue, destroyVM } from '../util';
 import TimeSelect from 'packages/time-select';
 import Vue from 'vue';
 
 describe('TimeSelect', () => {
+  let vm;
+  afterEach(() => {
+    destroyVM(vm);
+  });
+
   it('should render correct contents', done => {
-    const vm = createTest(TimeSelect, {
+    vm = createTest(TimeSelect, {
       pickerOptions: {
         start: '08:30',
         step: '00:15',
@@ -14,7 +19,6 @@ describe('TimeSelect', () => {
     }, true);
     const input = vm.$el.querySelector('input');
 
-    input.blur();
     input.focus();
     input.blur();
 
@@ -23,12 +27,13 @@ describe('TimeSelect', () => {
       expect(vm.picker.end).to.equal('18:30');
       expect(vm.picker.step).to.equal('00:15');
       expect(vm.$el.querySelector('input').getAttribute('placeholder')).to.equal('test');
+      destroyVM(vm);
       done();
     });
   });
 
   it('select time', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <div>
           <el-time-select ref="compo" v-model="value">
@@ -44,7 +49,6 @@ describe('TimeSelect', () => {
     }, true);
     const input = vm.$el.querySelector('input');
 
-    input.blur();
     input.focus();
     input.blur();
 
@@ -56,18 +60,18 @@ describe('TimeSelect', () => {
       target.click();
       Vue.nextTick(_ => {
         expect(vm.value).to.equal(time);
+        destroyVM(vm);
         done();
       });
     });
   });
 
   it('set default value', done => {
-    const vm = createTest(TimeSelect, {
+    vm = createTest(TimeSelect, {
       value: '14:30'
     }, true);
     const input = vm.$el.querySelector('input');
 
-    input.blur();
     input.focus();
     input.blur();
 
@@ -75,7 +79,65 @@ describe('TimeSelect', () => {
       expect(input.value).to.equal('14:30');
       expect(vm.picker.$el.querySelector('.selected')).to.be.ok;
       expect(vm.picker.$el.querySelector('.selected').textContent).to.equal('14:30');
+      destroyVM(vm);
       done();
-    }, 500);
+    }, 50);
+  });
+
+  it('set minTime', done => {
+    vm = createVue(`
+      <el-time-select
+        ref="picker"
+        :picker-options="{
+          minTime: '14:30'
+        }">
+      </el-time-select>
+    `, true);
+    const input = vm.$el.querySelector('input');
+    const picker = vm.$refs.picker;
+
+    input.focus();
+    input.blur();
+
+    setTimeout(_ => {
+      const elms = picker.picker.$el.querySelectorAll('.disabled');
+      const elm = elms[elms.length - 1];
+
+      expect(elm.textContent).to.equal('14:30');
+      destroyVM(vm);
+      done();
+    }, 50);
+  });
+
+  it('minTime < value', done => {
+    vm = createVue({
+      template: `
+        <el-time-select
+          ref="picker"
+          v-model="value"
+          :picker-options="{
+            minTime: '14:30'
+          }">
+        </el-time-select>
+      `,
+      data() {
+        return { value: '09:30' };
+      }
+    }, true);
+    const input = vm.$el.querySelector('input');
+    const picker = vm.$refs.picker;
+
+    input.focus();
+    input.blur();
+
+    setTimeout(_ => {
+      vm.value = '10:30';
+
+      setTimeout(_ => {
+        expect(picker.picker.value).to.equal('09:30');
+        destroyVM(vm);
+        done();
+      }, 50);
+    }, 50);
   });
 });

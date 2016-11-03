@@ -35,6 +35,10 @@
       .el-button + .el-button {
         margin-left: 0;
       }
+
+      & + .el-button-group {
+        margin-left: 10px;
+      }
     }
   }
 
@@ -47,7 +51,7 @@
     overflow: hidden;
     border-bottom: solid 1px #EFF2F6;
     &:last-child {
-      border-bottom: none;      
+      border-bottom: none;
     }
   }
 
@@ -131,7 +135,7 @@
 <el-button type="primary" icon="share"></el-button>
 <el-button type="primary" icon="delete"></el-button>
 <el-button type="primary" icon="search">搜索</el-button>
-<el-button type="primary">上传<i class="el-icon-upload el-icon-right"></i></el-button>
+<el-button type="primary">上传<i class="el-icon-upload el-icon--right"></i></el-button>
 ```
 :::
 
@@ -144,7 +148,7 @@
 ```html
 <el-button-group>
   <el-button type="primary" icon="arrow-left">上一页</el-button>
-  <el-button type="primary">下一页<i class="el-icon-arrow-right el-icon-right"></i></el-button>
+  <el-button type="primary">下一页<i class="el-icon-arrow-right el-icon--right"></i></el-button>
 </el-button-group>
 <el-button-group>
   <el-button type="primary" icon="edit"></el-button>
@@ -187,4 +191,5 @@ Button 组件提供除了默认值以外的三种尺寸，可以在不同场景�
 | plain     | 是否朴素按钮   | Boolean    | true,false | false   |
 | disabled  | 禁用    | boolean   | true, false   | false   |
 | icon  | 图标，已有的图标库中的图标名 | string   |  —  |  —  |
+| autofocus  | 是否默认聚焦 | boolean   |  —  |  false  |
 | native-type | 原生 type 属性 | string | button,submit,reset | button |

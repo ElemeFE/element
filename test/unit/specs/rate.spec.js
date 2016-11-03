@@ -1,16 +1,21 @@
-import { createTest, createVue } from '../util';
+import { createTest, createVue, destroyVM } from '../util';
 import Rate from 'packages/rate';
 import Vue from 'vue';
 
 describe('Rate', () => {
+  let vm;
+  afterEach(() => {
+    destroyVM(vm);
+  });
+
   it('create', () => {
-    const vm = createTest(Rate, { max: 10 }, true);
+    vm = createTest(Rate, { max: 10 }, true);
     const stars = vm.$el.querySelectorAll('.el-rate__item');
     expect(stars.length).to.equal(10);
   });
 
   it('with texts', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <div>
           <el-rate
@@ -31,7 +36,7 @@ describe('Rate', () => {
   });
 
   it('value change', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <div>
           <el-rate v-model="value"></el-rate>
@@ -54,7 +59,7 @@ describe('Rate', () => {
   });
 
   it('click', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <div>
           <el-rate v-model="value"></el-rate>
@@ -73,7 +78,7 @@ describe('Rate', () => {
   });
 
   it('colors', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <div>
           <el-rate v-model="value" :colors="['#99A9BF', '#F7BA2A', '#FF9900']"></el-rate>
@@ -91,7 +96,7 @@ describe('Rate', () => {
   });
 
   it('threshold', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <div>
           <el-rate v-model="value" :low-threshold="3"></el-rate>
@@ -146,7 +151,7 @@ describe('Rate', () => {
   });
 
   it('allow half', () => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <div>
           <el-rate v-model="value" allow-half></el-rate>

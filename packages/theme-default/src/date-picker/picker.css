@@ -1,5 +1,5 @@
-@import "./vars.css";
-@import "../../../theme-default/src/common/transition.css";
+@import "../common/var.css";
+@import "../common/transition.css";
 
 @component-namespace el {
   @b date-editor {

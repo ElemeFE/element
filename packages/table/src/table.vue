@@ -19,6 +19,9 @@
         :row-class-name="rowClassName"
         :style="{ width: layout.bodyWidth ? layout.bodyWidth - (layout.scrollY ? layout.gutterWidth : 0 ) + 'px' : '' }">
       </table-body>
+      <div class="el-table__empty-block" v-if="!data || data.length === 0">
+        <span class="el-table__empty-text">{{ emptyText }}</span>
+      </div>
     </div>
     <div class="el-table__fixed" ref="fixedWrapper"
       :style="{
@@ -84,9 +87,11 @@
 </template>
 
 <script type="text/babel">
+  import Migrating from 'element-ui/src/mixins/migrating';
   import throttle from 'throttle-debounce/throttle';
   import debounce from 'throttle-debounce/debounce';
-  import { addResizeListener, removeResizeListener } from './resize-event';
+  import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
+  import { $t } from 'element-ui/src/locale';
   import TableStore from './table-store';
   import TableLayout from './table-layout';
   import TableBody from './table-body';
@@ -96,6 +101,8 @@
 
   export default {
     name: 'el-table',
+
+    mixins: [Migrating],
 
     props: {
       data: {
@@ -118,16 +125,14 @@
 
       border: Boolean,
 
-      selectionMode: {
-        type: String,
-        default: 'none'
-      },
-
       rowKey: [String, Function],
 
-      allowNoCurrentRow: Boolean,
+      rowClassName: [String, Function],
 
-      rowClassName: [String, Function]
+      emptyText: {
+        type: String,
+        default: $t('el.table.emptyText')
+      }
     },
 
     components: {
@@ -136,6 +141,28 @@
     },
 
     methods: {
+      getMigratingConfig() {
+        return {
+          props: {
+            'allow-no-selection': 'Table: allow-no-selection has been removed.',
+            'selection-mode': 'Table: selection-mode has been removed.',
+            'fixed-column-count': 'Table: fixed-column-count has been removed. Use fixed prop in TableColumn instead.',
+            'custom-criteria': 'Table: custom-criteria has been removed. Use row-class-name instead.',
+            'custom-background-colors': 'custom-background-colors has been removed. Use row-class-name instead.'
+          },
+          events: {
+            selectionchange: 'Table: selectionchange has been renamed to selection-change.',
+            cellmouseenter: 'Table: cellmouseenter has been renamed to cell-mouse-enter.',
+            cellmouseleave: 'Table: cellmouseleave has been renamed to cell-mouse-leave.',
+            cellclick: 'Table: cellclick has been renamed to cell-click.'
+          }
+        };
+      },
+
+      toggleRowSelection(row, selected) {
+        this.store.toggleRowSelection(row, selected);
+      },
+
       clearSelection() {
         this.store.clearSelection();
       },
@@ -147,10 +174,6 @@
 
       updateScrollY() {
         this.layout.updateScrollY();
-      },
-
-      syncHeight() {
-        this.layout.syncHeight();
       },
 
       bindEvents() {
@@ -197,12 +220,7 @@
       },
 
       selection() {
-        if (this.selectionMode === 'multiple') {
-          return this.store.selection;
-        } else if (this.selectionMode === 'single') {
-          return this.store.currentRow;
-        }
-        return null;
+        return this.store.selection;
       },
 
       columns() {
@@ -248,8 +266,6 @@
 
     data() {
       const store = new TableStore(this, {
-        allowNoCurrentRow: this.allowNoCurrentRow,
-        selectionMode: this.selectionMode,
         rowKey: this.rowKey
       });
       const layout = new TableLayout({

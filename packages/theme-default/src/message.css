@@ -4,11 +4,11 @@
 @component-namespace el {
 
   @b message {
-    box-shadow:0 2px 4px 0 rgba(0, 0, 0, .12), 0 0 6px 0 rgba(0, 0, 0, .04);
-    min-width: 300px;
-    padding: 10px 12px;
+    box-shadow: var(--message-shadow);
+    min-width: var(--message-min-width);
+    padding: var(--message-padding);
     box-sizing: border-box;
-    border-radius: 2px;
+    border-radius: var(--border-radius-small);
     position: fixed;
     left: 50%;
     top: 20px;
@@ -23,11 +23,11 @@
       position: relative;
 
       & p {
-        font-size: 14px;
+        font-size: var(--font-size-base);
         line-height: 20px;
         margin: 0 34px 0 0;
         white-space: nowrap;
-        color: #8492a6;
+        color: var(--message-content-color);
         text-align: justify;
       }
     }
@@ -42,28 +42,28 @@
     @e closeBtn {
       position: absolute 3px 0 * *;
       cursor: pointer;
-      color: #C0CCDA;
-      font-size: 14px;
+      color: var(--message-close-color);
+      font-size: var(--font-size-base);
 
       &:hover {
-        color: #99A9BF;
+        color: var(--message-close-hover-color);
       }
     }
 
     & .el-icon-circle-check {
-      color: #13ce66;
+      color: var(--message-success-color);
     }
 
     & .el-icon-circle-cross {
-      color: #ff4949;
+      color: var(--message-danger-color);
     }
 
     & .el-icon-information {
-      color: #50bfff;
+      color: var(--message-info-color);
     }
 
     & .el-icon-warning {
-      color: #f7ba2a;
+      color: var(--message-warning-color);
     }
   }
 

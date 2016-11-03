@@ -30,6 +30,7 @@
       </ul>
     </div>
     <div
+      v-show="showSeconds"
       @mouseenter="emitSelectRange('seconds')"
       @mousewheel="handleScroll('second')"
       class="el-time-spinner__wrapper"
@@ -78,7 +79,6 @@
           this.hoursPrivate = oldVal;
         }
         this.$refs.hour.scrollTop = Math.max(0, (this.hoursPrivate - 2.5) * 32 + 80);
-
         this.$emit('change', { hours: newVal });
       },
 

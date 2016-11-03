@@ -1,45 +1,39 @@
-import ElCheckbox from 'element-ui/packages/checkbox/index.js';
-import ElTag from 'element-ui/packages/tag/index.js';
+import ElCheckbox from 'element-ui/packages/checkbox';
+import ElTag from 'element-ui/packages/tag';
 import objectAssign from 'object-assign';
 
 let columnIdSeed = 1;
 
 const defaults = {
   default: {
-    direction: ''
+    order: ''
   },
   selection: {
     width: 48,
     minWidth: 48,
     realWidth: 48,
-    direction: ''
+    order: ''
   },
   index: {
     width: 48,
     minWidth: 48,
     realWidth: 48,
-    direction: ''
-  },
-  filter: {
-    headerTemplate: function(h) { return <span>filter header</span>; },
-    direction: ''
+    order: ''
   }
 };
 
 const forced = {
   selection: {
     headerTemplate: function(h) {
-      return <div><el-checkbox
+      return <el-checkbox
         nativeOn-click={ this.toggleAllSelection }
-        domProps-value={ this.isAllSelected }
-        on-input={ (value) => { this.$emit('allselectedchange', value); } } />
-      </div>;
+        domProps-value={ this.isAllSelected } />;
     },
     template: function(h, { row, column, store, $index }) {
       return <el-checkbox
-        domProps-value={ row.$selected }
+        domProps-value={ store.isSelected(row) }
         disabled={ column.selectable ? !column.selectable.call(null, row, $index) : false }
-        on-input={ (value) => { row.$selected = value; store.commit('rowSelectedChanged', row); } } />;
+        on-input={ (value) => { store.commit('rowSelectedChanged', row); } } />;
     },
     sortable: false,
     resizable: false
@@ -47,21 +41,12 @@ const forced = {
   index: {
     // headerTemplate: function(h) { return <div>#</div>; },
     headerTemplate: function(h, label) {
-      return <div>{ label || '#' }</div>;
+      return label || '#';
     },
     template: function(h, { $index }) {
       return <div>{ $index + 1 }</div>;
     },
     sortable: false
-  },
-  filter: {
-    headerTemplate: function(h) {
-      return <div>#</div>;
-    },
-    template: function(h, { row, column }) {
-      return <el-tag type="primary" style="height: 16px; line-height: 16px; min-width: 40px; text-align: center">{ row[column.property] }</el-tag>;
-    },
-    resizable: false
   }
 };
 
@@ -103,9 +88,10 @@ export default {
     minWidth: {},
     template: String,
     sortable: {
-      type: Boolean,
+      type: [Boolean, String],
       default: false
     },
+    sortMethod: Function,
     resizable: {
       type: Boolean,
       default: true
@@ -118,7 +104,13 @@ export default {
     fixed: [Boolean, String],
     formatter: Function,
     selectable: Function,
-    reserveSelection: Boolean
+    reserveSelection: Boolean,
+    filterMethod: Function,
+    filters: Array,
+    filterMultiple: {
+      type: Boolean,
+      default: true
+    }
   },
 
   render() {},
@@ -192,7 +184,7 @@ export default {
     let column = getDefaultColumn(type, {
       id: columnId,
       label: this.label,
-      property: this.property,
+      property,
       type,
       template,
       minWidth,
@@ -200,12 +192,19 @@ export default {
       isColumnGroup,
       align: this.align ? 'is-' + this.align : null,
       sortable: this.sortable,
+      sortMethod: this.sortMethod,
       resizable: this.resizable,
       showTooltipWhenOverflow: this.showTooltipWhenOverflow,
       formatter: this.formatter,
       selectable: this.selectable,
       reserveSelection: this.reserveSelection,
-      fixed: this.fixed
+      fixed: this.fixed,
+      filterMethod: this.filterMethod,
+      filters: this.filters,
+      filterable: this.filters || this.filterMethod,
+      filterMultiple: this.filterMultiple,
+      filterOpened: false,
+      filteredValue: []
     });
 
     objectAssign(column, forced[type] || {});

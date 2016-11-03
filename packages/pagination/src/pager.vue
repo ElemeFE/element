@@ -68,6 +68,7 @@
           }
         }
 
+        /* istanbul ignore if */
         if (!isNaN(newPage)) {
           if (newPage < 1) {
             newPage = 1;
@@ -79,7 +80,7 @@
         }
 
         if (newPage !== currentPage) {
-          this.$emit('currentchange', newPage);
+          this.$emit('change', newPage);
         }
       }
     },

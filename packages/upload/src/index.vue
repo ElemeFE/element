@@ -2,7 +2,7 @@
 import UploadList from './upload-list';
 import Upload from './upload';
 import IframeUpload from './iframe-upload';
-import ElProgress from 'element-ui/packages/progress/index.js';
+import ElProgress from 'element-ui/packages/progress';
 
 function noop() {
 }
@@ -25,10 +25,7 @@ export default {
     headers: {
       type: Object,
       default() {
-        return {
-          // 'Access-Control-Request-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
-          // 'Access-Control-Request-Headers': 'Content-Type, Content-Range, Content-Disposition, Content-Description'
-        };
+        return {};
       }
     },
     data: Object,
@@ -73,7 +70,7 @@ export default {
 
   data() {
     return {
-      uploadedFiles: [],
+      fileList: [],
       dragOver: false,
       draging: false,
       tempIndex: 1
@@ -101,11 +98,11 @@ export default {
         }
       }
 
-      this.uploadedFiles.push(_file);
+      this.fileList.push(_file);
     },
     handleProgress(ev, file) {
       var _file = this.getFile(file);
-      _file.percentage = ev.percent;
+      _file.percentage = ev.percent || 0;
     },
     handleSuccess(res, file) {
       var _file = this.getFile(file);
@@ -114,30 +111,30 @@ export default {
         _file.status = 'finished';
         _file.response = res;
 
-        this.onSuccess(_file, this.uploadedFiles);
+        this.onSuccess(res, _file, this.fileList);
 
         setTimeout(() => {
           _file.showProgress = false;
         }, 1000);
       }
     },
-    handleError(err, file) {
+    handleError(err, response, file) {
       var _file = this.getFile(file);
-      var fileList = this.uploadedFiles;
+      var fileList = this.fileList;
 
       _file.status = 'fail';
 
       fileList.splice(fileList.indexOf(_file), 1);
 
-      this.onError(err, _file, fileList);
+      this.onError(err, response, file);
     },
     handleRemove(file) {
-      var fileList = this.uploadedFiles;
+      var fileList = this.fileList;
       fileList.splice(fileList.indexOf(file), 1);
       this.onRemove(file, fileList);
     },
     getFile(file) {
-      var fileList = this.uploadedFiles;
+      var fileList = this.fileList;
       var target;
       fileList.every(item => {
         target = file.uid === item.uid ? item : null;
@@ -149,16 +146,19 @@ export default {
       if (file.status === 'finished') {
         this.onPreview(file);
       }
+    },
+    clearFiles() {
+      this.fileList = [];
     }
   },
 
   render(h) {
     var uploadList;
 
-    if (this.showUploadList && !this.thumbnailMode && this.uploadedFiles.length) {
+    if (this.showUploadList && !this.thumbnailMode && this.fileList.length) {
       uploadList = (
         <UploadList
-          files={this.uploadedFiles}
+          files={this.fileList}
           on-remove={this.handleRemove}
           on-preview={this.handlePreview}>
         </UploadList>
@@ -182,7 +182,8 @@ export default {
         'on-error': this.handleError,
         'on-preview': this.handlePreview,
         'on-remove': this.handleRemove
-      }
+      },
+      ref: 'upload-inner'
     };
 
     var uploadComponent = typeof FormData !== 'undefined'

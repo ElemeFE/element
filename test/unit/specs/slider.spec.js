@@ -1,16 +1,19 @@
-import { createTest, createVue } from '../util';
+import { createTest, createVue, triggerEvent, destroyVM } from '../util';
 import Slider from 'packages/slider';
-import Vue from 'vue';
 
 describe('Slider', () => {
+  let vm;
+  afterEach(() => {
+    destroyVM(vm);
+  });
+
   it('create', () => {
-    const vm = createTest(Slider);
-    const popup = vm.$el.querySelector('.el-slider__pop');
-    expect(popup.textContent).to.equal('0');
+    vm = createTest(Slider);
+    expect(vm.value).to.equal(0);
   });
 
   it('should not exceed min and max', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <div>
           <el-slider v-model="value" :min="50">
@@ -26,10 +29,10 @@ describe('Slider', () => {
     }, true);
     setTimeout(() => {
       vm.value = 40;
-      Vue.nextTick(() => {
+      vm.$nextTick(() => {
         expect(vm.value).to.equal(50);
         vm.value = 120;
-        Vue.nextTick(() => {
+        vm.$nextTick(() => {
           expect(vm.value).to.equal(100);
           done();
         });
@@ -38,16 +41,29 @@ describe('Slider', () => {
   });
 
   it('show tooltip', () => {
-    const vm = createTest(Slider);
-    const popup = vm.$el.querySelector('.el-slider__pop');
-    vm.onDragStart({ clientX: 0 });
-    expect(getComputedStyle(popup).display).to.not.equal('none');
-    vm.onDragEnd();
-    expect(popup.style.display).to.equal('none');
+    vm = createVue({
+      template: `
+        <div>
+          <el-slider v-model="value">
+          </el-slider>
+        </div>
+      `,
+
+      data() {
+        return {
+          value: 0
+        };
+      }
+    }, true);
+    const slider = vm.$children[0];
+    slider.handleMouseEnter();
+    expect(slider.$refs.tooltip.showPopper).to.true;
+    slider.handleMouseLeave();
+    expect(slider.$refs.tooltip.showPopper).to.false;
   });
 
   it('drag', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <div>
           <el-slider v-model="value"></el-slider>
@@ -71,7 +87,7 @@ describe('Slider', () => {
   });
 
   it('click', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <div>
           <el-slider v-model="value"></el-slider>
@@ -94,8 +110,33 @@ describe('Slider', () => {
     }, 150);
   });
 
+  it('disabled', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-slider v-model="value" disabled></el-slider>
+        </div>
+      `,
+
+      data() {
+        return {
+          value: 0
+        };
+      }
+    }, true);
+    const slider = vm.$children[0];
+    setTimeout(() => {
+      slider.onButtonDown({ clientX: 0 });
+      slider.onDragging({ clientX: 100 });
+      slider.onDragEnd();
+      slider.onSliderClick({ clientX: 200 });
+      expect(vm.value).to.equal(0);
+      done();
+    }, 100);
+  });
+
   it('show input', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <div>
           <el-slider v-model="value" show-input></el-slider>
@@ -109,6 +150,7 @@ describe('Slider', () => {
       }
     }, true);
     setTimeout(() => {
+      triggerEvent(vm.$el.querySelector('.el-input-number'), 'keyup');
       const inputNumber = vm.$el.querySelector('.el-input-number').__vue__;
       inputNumber.currentValue = 40;
       setTimeout(() => {
@@ -119,7 +161,7 @@ describe('Slider', () => {
   });
 
   it('show stops', done => {
-    const vm = createTest(Slider, {
+    vm = createTest(Slider, {
       showStops: true,
       step: 10
     }, true);

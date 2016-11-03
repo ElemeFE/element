@@ -1,11 +1,13 @@
 <script>
   import Clickoutside from 'element-ui/src/utils/clickoutside';
-  import emitter from 'element-ui/src/mixins/emitter';
+  import Emitter from 'element-ui/src/mixins/emitter';
 
   export default {
     name: 'ElDropdown',
 
-    mixins: [emitter],
+    componentName: 'ElDropdown',
+
+    mixins: [Emitter],
 
     directives: { Clickoutside },
 
@@ -31,6 +33,7 @@
     },
 
     mounted() {
+      this.$on('menu-item-click', this.handleMenuItemClick);
       this.initEvent();
     },
 
@@ -73,6 +76,10 @@
         } else if (trigger === 'click') {
           triggerElm.addEventListener('click', handleClick);
         }
+      },
+      handleMenuItemClick(command, instance) {
+        this.visible = false;
+        this.$emit('command', command, instance);
       }
     },
 

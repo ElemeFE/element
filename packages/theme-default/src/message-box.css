@@ -2,7 +2,7 @@
 @import "./common/var.css";
 @import "./button.css";
 @import "./input.css";
-@import '../../../node_modules/vue-popup/lib/popup.css';
+@import "vue-popup/lib/popup.css";
 
 @component-namespace el {
 
@@ -12,9 +12,9 @@
     left: 50%;
     transform: translate3d(-50%, -50%, 0);
     background-color: #fff;
-    width: 420px;
-    border-radius: 3px;
-    font-size: 16px;
+    width: var(--msgbox-width);
+    border-radius: var(--msgbox-border-radius);
+    font-size: var(--msgbox-font-size);
     -webkit-user-select: none;
     overflow: hidden;
     backface-visibility: hidden;
@@ -25,8 +25,8 @@
 
     @e content {
       padding: 30px 20px;
-      color: #475669;
-      font-size: 14px;
+      color: var(--msgbox-content-color);
+      font-size: var(--msgbox-content-font-size);
       position: relative;
     }
 
@@ -48,16 +48,16 @@
     @e input {
       padding-top: 15px;
       & input.invalid {
-        border-color: #ff4949;
+        border-color: var(--color-danger);
         &:focus {
-          border-color: #ff4949;
+          border-color: var(--color-danger);
         }
       }
     }
 
     @e errormsg {
-      color: red;
-      font-size: 12px;
+      color: var(--color-danger);
+      font-size: var(--msgbox-error-font-size);
       min-height: 18px;
       margin-top: 2px;
     }
@@ -65,7 +65,7 @@
     @e title {
       padding-left: 0;
       margin-bottom: 0;
-      font-size: 16px;
+      font-size: var(--msgbox-font-size);
       font-weight: bold;
       height: 18px;
       color: #333;
@@ -100,66 +100,50 @@
       font-size: 36px !important;
 
       &.el-icon-circle-check {
-        color: #13ce66;
+        color: var(--msgbox-success-color);
       }
 
       &.el-icon-information {
-        color: #50bfff;
+        color: var(--msgbox-info-color);
       }
 
       &.el-icon-warning {
-        color: #f7ba2a;
+        color: var(--msgbox-warning-color);
       }
 
       &.el-icon-circle-cross {
-        color: #ff4949;
+        color: var(--msgbox-danger-color);
       }
     }
   }
 }
 
-.msgbox-bounce-enter-active {
-  -webkit-animation: msgbox-bounce-in .3s cubic-bezier(0.3, 0, 0, 1.5);
-  animation: msgbox-bounce-in .3s cubic-bezier(0.3, 0, 0, 1.5);
+.msgbox-fade-enter-active {
+  animation: msgbox-fade-in .3s;
 }
 
-.msgbox-bounce-leave-active {
-  -webkit-animation: msgbox-bounce-out .2s cubic-bezier(0.895, 0.03, 0.685, 0.22);
-  animation: msgbox-bounce-out .2s cubic-bezier(0.895, 0.03, 0.685, 0.22);
+.msgbox-fade-leave-active {
+  animation: msgbox-fade-out .3s;
 }
 
-@keyframes msgbox-bounce-in {
+@keyframes msgbox-fade-in {
   0% {
-    transform: translate3d(-50%, -50%, 0) scale(0.8);
+    transform: translate3d(-50%, calc(-50% - 20px), 0);
+    opacity: 0;
   }
   100% {
-    transform: translate3d(-50%, -50%, 0) scale(1);
+    transform: translate3d(-50%, -50%, 0);
+    opacity: 1;
   }
 }
 
-@keyframes msgbox-bounce-out {
+@keyframes msgbox-fade-out {
   0% {
-    transform: translate3d(-50%, -50%, 0) scale(1);
+    transform: translate3d(-50%, -50%, 0);
+    opacity: 1;
   }
   100% {
-    transform: translate3d(-50%, -50%, 0) scale(0.7);
-  }
-}
-
-@-webkit-keyframes msgbox-bounce-in {
-  0% {
-    -webkit-transform: translate3d(-50%, -50%, 0) scale(0.8);
-  }
-  100% {
-    -webkit-transform: translate3d(-50%, -50%, 0) scale(1);
-  }
-}
-
-@-webkit-keyframes msgbox-bounce-out {
-  0% {
-    -webkit-transform: translate3d(-50%, -50%, 0) scale(1);
-  }
-  100% {
-    -webkit-transform: translate3d(-50%, -50%, 0) scale(0.7);
+    transform: translate3d(-50%, calc(-50% - 20px), 0);
+    opacity: 0;
   }
 }

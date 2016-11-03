@@ -21,7 +21,10 @@
     }
 
     .el-select .el-input {
-      width: 100px;
+      width: 110px;
+      input {
+        padding-right: 25px;
+      }
     }
 
     button {

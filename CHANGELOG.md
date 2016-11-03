@@ -1,8 +1,25 @@
 ## 更新日志
 
-### 1.0.0-rc.8（待发布）
+### 1.0.0-rc.9
 
-*2016-XX-XX*
+*2016-11-XX*
+
+- 新增 MessageBox 确定按钮自动获取焦点, #721
+- 修复 Popover focus 失效, #734
+- 修复 Clickoutside 报错, #729
+- 修复 DatePicker 选择日期范围时当选中同一天再调整时间会出错
+- 更新 TimePicker 滚动条在 IE10+ 下隐藏
+- 新增 Dropdown 的 command api #432
+- 修复 Slider 在 Form 中的显示问题
+- 修复 Upload 在 onSuccess、onError 钩子无法拿到服务端返回信息的问题
+
+#### 非兼容性更新
+
+- Upload on-error 钩子函数参数变更为 function(err, response, file), on-success 钩子函数参数变更为 function(response, file, fileList)
+
+### 1.0.0-rc.8
+
+*2016-10-28*
 
 - 修复 Form reset method 对日期控件不起效的问题
 - 修复 Dialog/Message Box/Tooltip/Popover/... 等若干组件的样式错误
@@ -12,18 +29,25 @@
 - 修复 Loading 关闭后有几率滚动失效的问题
 - 修复 远程搜索的 Select 不能正确渲染默认初始值的问题
 - 修复 Switch 的 width 属性无效的问题
-- Table 增加属性 rowClassName
+- Table 增加 rowClassName 属性
 - TableColumn 增加 fixed 属性，可选值：true, false, left, right
+- TableColumn 增加属性：filters、filterMultiple、filterMethod、filteredValue
 - TableColumn[type="selection"] 增加 selectable 属性
 - 修复 Input textarea 在动态赋值时 autosize 没有触发的问题
 - 修复 Input Number min max 属性设置后点击加减出现的崩溃的bug
+- 优化 TimePicker/DatePicker 输入日期行为
+- 修复 DatePicker 输入禁用状态的日期却生效的问题 #484
+- 新增 Slider 的 disabled 属性
+- 新增 Menu 的 menu-trigger 属性
+- 新增 i18n 的支持
 
 #### 非兼容性更新
 
+- Tabs 组件的 click 和 remove 事件回调参数从 name 改为事件对应的 tab 组件实例
 - 全屏 Loading 现在默认不再锁定屏幕滚动。如果需要的话，可添加 `lock` 修饰符
-- Table 删除属性 fixedColumnCount, customCriteria, customBackgroundColors
-- Table 的 allow-no-selection 属性更名为 allow-no-current-row
-- Table 的 selectionchange、cellmouseenter、cellmouseleave、cellclick 事件更名为 selection-change、cell-mouseenter、cell-mouseleave、cell-click。
+- Table 删除属性 fixedColumnCount、customCriteria、customBackgroundColors、selectionMode
+- Table 的 selectionchange、cellmouseenter、cellmouseleave、cellclick 事件更名为 selection-change、cell-mouse-enter、cell-mouse-leave、cell-click。
+- Pagination 的 currentchange、sizechange 事件更名为 current-change、size-change
 
 ### 1.0.0-rc.7
 

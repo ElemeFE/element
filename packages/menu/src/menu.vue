@@ -14,7 +14,7 @@
   export default {
     name: 'ElMenu',
 
-    componentName: 'menu',
+    componentName: 'ElMenu',
 
     mixins: [emitter],
 
@@ -33,7 +33,11 @@
         default: 'light'
       },
       uniqueOpened: Boolean,
-      router: Boolean
+      router: Boolean,
+      menuTrigger: {
+        type: String,
+        default: 'hover'
+      }
     },
     data() {
       return {
@@ -87,14 +91,18 @@
         this.$emit('select', index, indexPath, instance);
 
         if (this.mode === 'horizontal') {
-          this.broadcast('submenu', 'item-select', [index, indexPath]);
+          this.broadcast('ElSubmenu', 'item-select', [index, indexPath]);
           this.openedMenus = [];
         } else {
           this.openActiveItemMenus();
         }
 
         if (this.router && route) {
-          this.$router.push(route);
+          try {
+            this.$router.push(route);
+          } catch (e) {
+            console.error(e);
+          }
         }
       },
       openActiveItemMenus() {

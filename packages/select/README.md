@@ -15,7 +15,7 @@ npm i el-select -D
 
   // import component
   import Component from 'el-select'
-  import ''el-select/lib/style.css'
+  import 'el-select/lib/style.css'
 
   Vue.use(Component)
 ```

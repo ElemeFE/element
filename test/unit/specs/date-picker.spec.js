@@ -1,9 +1,16 @@
-import { createTest, createVue } from '../util';
+import { createTest, createVue, destroyVM, triggerEvent } from '../util';
 import DatePicker from 'packages/date-picker';
 
+const DELAY = 10;
+
 describe('DatePicker', () => {
+  let vm;
+  afterEach(() => {
+    destroyVM(vm);
+  });
+
   it('create', () => {
-    const vm = createTest(DatePicker, {
+    vm = createTest(DatePicker, {
       readonly: true,
       placeholder: '23333',
       format: 'HH-mm-ss'
@@ -15,7 +22,7 @@ describe('DatePicker', () => {
   });
 
   it('select date', done => {
-    const vm = createVue({
+    vm = createVue({
       template: `
         <el-date-picker ref="compo" v-model="value"></el-date-picker>
       `,
@@ -38,17 +45,15 @@ describe('DatePicker', () => {
       expect(spans[0].textContent).to.include(date.getFullYear());
       expect(spans[1].textContent).to.include(date.getMonth() + 1);
       $el.querySelector('.el-date-picker__prev-btn.el-icon-d-arrow-left').click();
-      // click 5
-      arrowLeftElm.click();
-      arrowLeftElm.click();
-      arrowLeftElm.click();
-      arrowLeftElm.click();
-      arrowLeftElm.click();
+      let count = 20;
+      while (--count) {
+        arrowLeftElm.click();
+      }
 
-      // click 3
-      arrowRightElm.click();
-      arrowRightElm.click();
-      arrowRightElm.click();
+      count = 18;
+      while (--count) {
+        arrowRightElm.click();
+      }
       setTimeout(_ => {
         expect(spans[0].textContent).to.include(date.getFullYear() - 1);
         expect(spans[1].textContent).to.include(date.getMonth() - 1);
@@ -57,12 +62,63 @@ describe('DatePicker', () => {
           expect(vm.value).to.exist;
         });
         done();
-      }, 150);
-    }, 150);
+      }, DELAY);
+    }, DELAY);
+  });
+
+  describe('keydown', () => {
+    let input;
+    let keyDown = function(el, keyCode) {
+      const evt = document.createEvent('Events');
+
+      evt.initEvent('keydown', true, true);
+      evt.keyCode = keyCode;
+      el.dispatchEvent(evt);
+    };
+
+    beforeEach(done => {
+      vm = createTest(DatePicker, true);
+      input = vm.$el.querySelector('input');
+      input.blur();
+      input.focus();
+      setTimeout(done, DELAY);
+    });
+
+    afterEach(() => destroyVM(vm));
+
+    it('tab', () => {
+      keyDown(input, 9);
+      expect(vm.pickerVisible).to.false;
+    });
+
+    it('enter', () => {
+      input.value = '2000-10-1';
+      keyDown(input, 13);
+      expect(vm.pickerVisible).to.false;
+      expect(vm.picker.value.getFullYear()).to.equal(2000);
+      expect(vm.picker.value.getMonth()).to.equal(9);
+      expect(vm.picker.value.getDate()).to.equal(1);
+    });
+
+    it('left', () => {
+      input.value = '2000-10-1';
+      keyDown(input, 13);
+      input.focus();
+      keyDown(input, 37);
+      expect(input.selectionStart > 0).to.true;
+    });
+
+    it('right', () => {
+      input.value = '2000-10-1';
+      keyDown(input, 13);
+      input.focus();
+      keyDown(input, 39);
+      expect(input.selectionStart > 0).to.true;
+    });
   });
 
   it('type:month', done => {
-    const vm = createTest(DatePicker, {
+    vm = createTest(DatePicker, {
       type: 'month'
     }, true);
     const input = vm.$el.querySelector('input');
@@ -74,15 +130,13 @@ describe('DatePicker', () => {
       expect(vm.picker.$el.querySelector('.el-month-table').style.display).to.be.empty;
       expect(vm.picker.$el.querySelector('.el-year-table').style.display).to.be.equal('none');
       vm.picker.$el.querySelector('.el-month-table a.cell').click();
-      setTimeout(_ => {
-        expect(vm.picker.$el.style.display).to.be.equal('none');
-        done();
-      }, 500);
-    }, 150);
+      expect(vm.pickerVisible).to.false;
+      done();
+    }, DELAY);
   });
 
   it('type:year', done => {
-    const vm = createTest(DatePicker, {
+    vm = createTest(DatePicker, {
       type: 'year'
     }, true);
     const input = vm.$el.querySelector('input');
@@ -93,49 +147,166 @@ describe('DatePicker', () => {
     setTimeout(_ => {
       expect(vm.picker.$el.querySelector('.el-year-table').style.display).to.empty;
       expect(vm.picker.$el.querySelector('.el-month-table').style.display).to.be.equal('none');
-      vm.picker.$el.querySelector('.el-icon-d-arrow-left').click();
-      vm.picker.$el.querySelector('.el-icon-d-arrow-right').click();
+
+      const leftBtn = vm.picker.$el.querySelector('.el-icon-d-arrow-left');
+      const rightBtn = vm.picker.$el.querySelector('.el-icon-d-arrow-right');
+      let count = 20;
+
+      while (--count) {
+        leftBtn.click();
+      }
+      count = 18;
+      while (--count) {
+        rightBtn.click();
+      }
+
       vm.picker.$el.querySelector('.el-year-table a.cell').click();
-      setTimeout(_ => {
-        expect(vm.picker.$el.style.display).to.be.equal('none');
-        expect(vm.picker.date).to.exist;
-        done();
-      }, 500);
-    }, 150);
+      expect(vm.pickerVisible).to.false;
+      done();
+    }, DELAY);
   });
 
-  it('type:datetime', done => {
-    const vm = createTest(DatePicker, {
-      type: 'datetime'
-    }, true);
-    const input = vm.$el.querySelector('input');
+  describe('type:datetime', () => {
+    let vm;
+    beforeEach(done => {
+      vm = createTest(DatePicker, {
+        type: 'datetime'
+      }, true);
+      const input = vm.$el.querySelector('input');
 
-    input.blur();
-    input.focus();
+      input.blur();
+      input.focus();
 
-    setTimeout(_ => {
+      setTimeout(done, DELAY);
+    });
+
+    afterEach(() => destroyVM(vm));
+
+    it('create', () => {
       expect(vm.picker.$el.querySelector('.el-time-panel')).to.ok;
-      done();
-    }, 150);
+    });
+
+    it('click now button', done => {
+      const date = new Date(1999, 10, 10, 10, 10);
+
+      vm.picker.date = new Date(date);
+      vm.picker.$el.querySelector('.el-picker-panel__link-btn').click();
+      setTimeout(_ => {
+        expect(vm.picker.date > date).to.true;
+        done();
+      }, DELAY);
+    });
+
+    it('click timepicker', done => {
+      const input = vm.picker.$el.querySelectorAll('.el-date-picker__editor-wrap input')[1];
+      input.blur();
+      input.focus();
+      input.blur();
+
+      setTimeout(_ => {
+        expect(vm.picker.$el.querySelector('.el-time-panel')).to.have.deep.property('style.display').to.equal('');
+        done();
+      }, 400);
+    });
+
+    it('input timepicker', done => {
+      const input = vm.picker.$el.querySelectorAll('.el-date-picker__editor-wrap input')[1];
+
+      input.value = '20:30:33';
+      triggerEvent(input, 'change');
+      setTimeout(_ => {
+        expect(vm.picker.date.getHours()).to.equal(20);
+        expect(vm.picker.date.getMinutes()).to.equal(30);
+        expect(vm.picker.date.getSeconds()).to.equal(33);
+        done();
+      }, DELAY);
+    });
+
+    it('input date', done => {
+      const input = vm.picker.$el.querySelector('.el-date-picker__editor-wrap input');
+
+      input.value = '2017-2-2';
+      triggerEvent(input, 'change');
+      setTimeout(_ => {
+        expect(vm.picker.date.getFullYear()).to.equal(2017);
+        expect(vm.picker.date.getMonth()).to.equal(1);
+        expect(vm.picker.date.getDate()).to.equal(2);
+        done();
+      }, DELAY);
+    });
+
+    it('select time', done => {
+      const input = vm.picker.$el.querySelectorAll('.el-date-picker__editor-wrap input')[1];
+      input.blur();
+      input.focus();
+      input.blur();
+
+      setTimeout(_ => {
+        const button = vm.picker.$el.querySelector('.el-time-panel .confirm');
+        button.click();
+
+        setTimeout(_ => {
+          expect(input.value).to.exist;
+          done();
+        }, DELAY);
+      }, DELAY);
+    });
   });
 
-  it('type:week', done => {
-    const vm = createTest(DatePicker, {
-      type: 'week'
-    }, true);
-    const input = vm.$el.querySelector('input');
+  describe('type:week', () => {
+    let vm;
 
-    input.blur();
-    input.focus();
+    beforeEach(done => {
+      vm = createTest(DatePicker, {
+        type: 'week'
+      }, true);
+      const input = vm.$el.querySelector('input');
 
-    setTimeout(_ => {
+      input.blur();
+      input.focus();
+      setTimeout(done, DELAY);
+    });
+
+    afterEach(() => destroyVM(vm));
+
+    it('create', () => {
       expect(vm.picker.$el.querySelector('.is-week-mode')).to.be.ok;
-      done();
-    }, 150);
+    });
+
+    it('click cell', done => {
+      vm.picker.$el.querySelector('.el-date-table__row .available').click();
+      setTimeout(_ => {
+        expect(vm.picker.week).to.exist;
+        done();
+      }, DELAY);
+    });
+
+    it('click year label', () => {
+      vm.picker.$el.querySelector('.el-date-picker__header-label').click();
+      expect(vm.picker.currentView).to.equal('year');
+    });
+
+    it('click month label', () => {
+      vm.picker.$el.querySelectorAll('.el-date-picker__header-label')[1].click();
+      expect(vm.picker.currentView).to.equal('month');
+    });
+
+    it('select month', done => {
+      vm.picker.$el.querySelectorAll('.el-date-picker__header-label')[1].click();
+
+      setTimeout(_ => {
+        vm.picker.$el.querySelector('.el-month-table .cell').click();
+
+        setTimeout(_ => {
+          expect(vm.picker.$el.querySelector('.el-date-table.is-week-mode').style.display).to.equal('');
+          done();
+        }, DELAY);
+      }, DELAY);
+    });
   });
 
   it('type:daterange', done => {
-    const vm = createTest(DatePicker, {
+    vm = createTest(DatePicker, {
       type: 'daterange'
     }, true);
     const input = vm.$el.querySelector('input');
@@ -157,32 +328,247 @@ describe('DatePicker', () => {
         expect(maxDate).to.exist;
         expect(maxDate > minDate).to.true;
         done();
-      }, 150);
-    }, 150);
+      }, DELAY);
+    }, DELAY);
   });
 
-  it('type:datetimerange', done => {
-    const vm = createTest(DatePicker, {
-      type: 'datetimerange'
-    }, true);
-    const input = vm.$el.querySelector('input');
+  describe('type:datetimerange', () => {
+    let vm;
+    beforeEach(done => {
+      vm = createTest(DatePicker, {
+        type: 'datetimerange',
+        value: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)]
+      }, true);
+      const input = vm.$el.querySelector('input');
 
-    input.blur();
-    input.focus();
+      input.blur();
+      input.focus();
 
-    setTimeout(_ => {
+      setTimeout(done, DELAY);
+    });
+
+    afterEach(() => destroyVM(vm));
+
+    it('create', () => {
       expect(Array.prototype.slice.call(vm.picker.$el.querySelectorAll('.el-time-panel'))).to.length(2);
-      done();
-    }, 150);
+    });
+
+    it('click timepicker', done => {
+      const input = vm.picker.$el.querySelectorAll('.el-date-range-picker__editors-wrap input')[1];
+      input.blur();
+      input.focus();
+      input.blur();
+
+      setTimeout(_ => {
+        expect(vm.picker.$el.querySelector('.el-date-range-picker__time-picker-wrap .el-time-panel')).to.have.deep.property('style.display').to.equal('');
+        done();
+      }, 400);
+    });
+
+    it('click timepicker in right', done => {
+      const input = vm.picker.$el.querySelectorAll('.el-date-range-picker__editors-wrap input')[3];
+      input.blur();
+      input.focus();
+      input.blur();
+
+      setTimeout(_ => {
+        expect(vm.picker.$el.querySelectorAll('.el-date-range-picker__time-picker-wrap .el-time-panel')[1]).to.have.deep.property('style.display').to.equal('');
+        done();
+      }, 400);
+    });
+
+    it('input timepicker', done => {
+      const input = vm.picker.$el.querySelectorAll('.el-date-range-picker__editors-wrap input')[1];
+
+      input.value = '10:22:14';
+      triggerEvent(input, 'change');
+      setTimeout(_ => {
+        expect(vm.picker.minDate.getHours()).to.equal(10);
+        expect(vm.picker.minDate.getMinutes()).to.equal(22);
+        expect(vm.picker.minDate.getSeconds()).to.equal(14);
+        done();
+      }, DELAY);
+    });
+
+    it('input timepicker in right', done => {
+      const input = vm.picker.$el.querySelectorAll('.el-date-range-picker__editors-wrap input')[3];
+
+      input.value = '10:22:14';
+      triggerEvent(input, 'change');
+      setTimeout(_ => {
+        expect(vm.picker.maxDate.getHours()).to.equal(10);
+        expect(vm.picker.maxDate.getMinutes()).to.equal(22);
+        expect(vm.picker.maxDate.getSeconds()).to.equal(14);
+        done();
+      }, DELAY);
+    });
+
+    it('select daterange', done => {
+      const pickers = vm.picker.$el.querySelectorAll('.el-date-range-picker__content');
+      const leftCell = pickers[0].querySelector('td.available');
+      const rightCell = pickers[1].querySelector('td.available');
+
+      triggerEvent(leftCell, 'mousemove', true);
+      triggerEvent(leftCell, 'click', true);
+      setTimeout(_ => {
+        triggerEvent(rightCell, 'mousemove', true);
+        triggerEvent(rightCell, 'click', true);
+
+        setTimeout(_ => {
+          const { minDate, maxDate } = vm.picker;
+          const minMonth = minDate.getMonth();
+          const maxMonth = maxDate.getMonth();
+
+          expect(maxMonth - minMonth).to.equal(1); // one month
+          done();
+        }, DELAY);
+      }, DELAY);
+    });
+
+    it('prev/next month button', done => {
+      const leftBtn = vm.picker.$el.querySelector('.is-left .el-icon-arrow-left');
+      const rightBtn = vm.picker.$el.querySelector('.is-right .el-icon-arrow-right');
+      const left = vm.picker.$el.querySelector('.is-left .el-date-range-picker__header');
+      const right = vm.picker.$el.querySelector('.is-right .el-date-range-picker__header');
+      const leftText = left.textContent.match(/\d+/g);
+      const rightText = right.textContent.match(/\d+/g);
+
+      let count = 20;
+      while (--count) {
+        leftBtn.click();
+      }
+      count = 18;
+      while (--count) {
+        rightBtn.click();
+      }
+
+      setTimeout(_ => {
+        const newLeft = left.textContent.match(/\d+/g);
+        const newRight = right.textContent.match(/\d+/g);
+
+        expect(leftText[1] - newLeft[1]).to.equal(2);
+        expect(leftText[0] - newLeft[0]).to.equal(0);
+        expect(rightText[1] - newRight[1]).to.equal(2);
+        expect(rightText[0] - newRight[0]).to.equal(0);
+        done();
+      }, DELAY);
+    });
+
+    it('prev/next year button', done => {
+      const leftBtn = vm.picker.$el.querySelector('.is-left .el-icon-d-arrow-left');
+      const rightBtn = vm.picker.$el.querySelector('.is-right .el-icon-d-arrow-right');
+      const left = vm.picker.$el.querySelector('.is-left .el-date-range-picker__header');
+      const right = vm.picker.$el.querySelector('.is-right .el-date-range-picker__header');
+      const leftText = left.textContent.match(/\d+/g);
+      const rightText = right.textContent.match(/\d+/g);
+
+      let count = 20;
+      while (--count) {
+        leftBtn.click();
+      }
+      count = 18;
+      while (--count) {
+        rightBtn.click();
+      }
+
+      setTimeout(_ => {
+        const newLeft = left.textContent.match(/\d+/g);
+        const newRight = right.textContent.match(/\d+/g);
+
+        expect(leftText[1] - newLeft[1]).to.equal(0);
+        expect(leftText[0] - newLeft[0]).to.equal(2);
+        expect(rightText[1] - newRight[1]).to.equal(0);
+        expect(rightText[0] - newRight[0]).to.equal(2);
+        done();
+      }, DELAY);
+    });
+
+    it('input date', done => {
+      const input = vm.picker.$el.querySelector('.el-date-range-picker__editors-wrap input');
+      const pickers = vm.picker.$el.querySelectorAll('.el-date-range-picker__content');
+      const leftCell = pickers[0].querySelector('td.available');
+      const rightCell = pickers[1].querySelector('td.available');
+
+      triggerEvent(leftCell, 'mousemove', true);
+      triggerEvent(leftCell, 'click', true);
+      setTimeout(_ => {
+        triggerEvent(rightCell, 'mousemove', true);
+        triggerEvent(rightCell, 'click', true);
+
+        setTimeout(_ => {
+          triggerEvent(input, 'input');
+          input.value = '1989-6-4';
+          triggerEvent(input, 'change');
+
+          setTimeout(_ => {
+            const minDate = vm.picker.minDate;
+            expect(minDate.getFullYear()).to.equal(1989);
+            expect(minDate.getMonth()).to.equal(5);
+            expect(minDate.getDate()).to.equal(4);
+            done();
+          }, DELAY);
+        }, DELAY);
+      }, DELAY);
+    });
+
+    it('input date when minDate > maxDate', done => {
+      const input = vm.picker.$el.querySelector('.el-date-range-picker__editors-wrap input');
+      const input2 = vm.picker.$el.querySelectorAll('.el-date-range-picker__editors-wrap input')[2];
+      const pickers = vm.picker.$el.querySelectorAll('.el-date-range-picker__content');
+      const leftCell = pickers[0].querySelector('td.available');
+      const rightCell = pickers[1].querySelector('td.available');
+
+      triggerEvent(leftCell, 'mousemove', true);
+      triggerEvent(leftCell, 'click', true);
+      setTimeout(_ => {
+        triggerEvent(rightCell, 'mousemove', true);
+        triggerEvent(rightCell, 'click', true);
+
+        setTimeout(_ => {
+          triggerEvent(input2, 'input');
+          input2.value = '1988-6-4';
+          triggerEvent(input2, 'change');
+
+          setTimeout(_ => {
+            triggerEvent(input, 'input');
+            input.value = '1989-6-4';
+            triggerEvent(input, 'change');
+            setTimeout(_ => {
+              expect(vm.picker.maxDate > vm.picker.minDate).to.true;
+              done();
+            }, DELAY);
+          }, DELAY);
+        }, DELAY);
+      }, DELAY);
+    });
+
+    it('select time', done => {
+      const input = vm.picker.$el.querySelectorAll('.el-date-range-picker__editors-wrap input')[1];
+      input.blur();
+      input.focus();
+      input.blur();
+
+      setTimeout(_ => {
+        const button = vm.picker.$el.querySelector('.el-date-range-picker__time-picker-wrap .el-time-panel .confirm');
+        button.click();
+
+        setTimeout(_ => {
+          expect(input.value).to.exist;
+          done();
+        }, DELAY);
+      }, DELAY);
+    });
   });
 
   it('picker-options:shortcuts', done => {
-    const vm = createTest(DatePicker, {
+    let test;
+    vm = createTest(DatePicker, {
       pickerOptions: {
         shortcuts: [
           {
             text: '今天',
             onClick(picker) {
+              test = true;
               picker.$emit('pick', new Date());
             }
           }
@@ -195,28 +581,61 @@ describe('DatePicker', () => {
     input.focus();
 
     setTimeout(_ => {
-      expect(vm.picker.$el.querySelector('.el-picker-panel__shortcut').textContent).to.be.equal('今天');
+      const shortcut = vm.picker.$el.querySelector('.el-picker-panel__shortcut');
+
+      expect(shortcut.textContent).to.be.equal('今天');
       expect(vm.picker.$el.querySelector('.el-picker-panel__sidebar')).to.be.ok;
-      done();
-    }, 150);
+
+      shortcut.click();
+      setTimeout(_ => {
+        expect(test).to.true;
+        done();
+      }, DELAY);
+    }, DELAY);
   });
 
-  it('picker-options:disabledDate', done => {
-    const vm = createTest(DatePicker, {
-      pickerOptions: {
-        disabledDate(time) {
-          return time.getTime() < Date.now() - 8.64e7;
+  describe('picker-options:disabledDate', () => {
+    let vm;
+    beforeEach(done => {
+      vm = createTest(DatePicker, {
+        value: new Date(),
+        pickerOptions: {
+          disabledDate(time) {
+            return time.getTime() < Date.now() - 8.64e7;
+          }
         }
-      }
-    }, true);
-    const input = vm.$el.querySelector('input');
+      }, true);
+      const input = vm.$el.querySelector('input');
 
-    input.blur();
-    input.focus();
+      input.blur();
+      input.focus();
 
-    setTimeout(_ => {
+      setTimeout(done, DELAY);
+    });
+    afterEach(() => destroyVM(vm));
+
+    it('create', () => {
       expect(vm.picker.$el.querySelector('.disabled')).to.be.ok;
-      done();
-    }, 150);
+    });
+
+    it('set disabled value', done => {
+      const date = new Date(1999, 10, 10, 10, 10, 10);
+      vm.picker.value = date;
+
+      setTimeout(_ => {
+        expect(vm.picker.date > date).to.true;
+        done();
+      }, DELAY);
+    });
+
+    it('set value', done => {
+      const date = new Date(3000, 10, 10, 10, 10, 10);
+      vm.picker.value = date;
+
+      setTimeout(_ => {
+        expect(vm.picker.date === date).to.true;
+        done();
+      }, DELAY);
+    });
   });
 });

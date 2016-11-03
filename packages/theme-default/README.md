@@ -1,6 +1,12 @@
 # element-theme-default
 > element component defualt theme.
 
+
+## Installation
+```shell
+npm i element-theme-default -S
+```
+
 ## Usage
 
 Use Sass Or postcss-import

@@ -1,4 +1,4 @@
-@import "./vars.css";
+@import "../common/var.css";
 
 @component-namespace el {
   @b time-spinner {
@@ -8,6 +8,7 @@
       flex: 1;
       vertical-align: top;
       position: relative;
+      -ms-overflow-style: none;
 
       &:hover {
         overflow-y: auto;

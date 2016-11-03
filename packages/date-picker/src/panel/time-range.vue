@@ -6,7 +6,7 @@
       class="el-time-range-picker el-picker-panel">
       <div class="el-time-range-picker__content">
         <div class="el-time-range-picker__cell">
-          <div class="el-time-range-picker__header">{{ $t('datepicker.startTime') }}</div>
+          <div class="el-time-range-picker__header">{{ $t('el.datepicker.startTime') }}</div>
           <div class="el-time-range-picker__body el-time-panel__content">
             <time-spinner
               ref="minSpinner"
@@ -20,7 +20,7 @@
           </div>
         </div>
         <div class="el-time-range-picker__cell">
-          <div class="el-time-range-picker__header">{{ $t('datepicker.endTime') }}</div>
+          <div class="el-time-range-picker__header">{{ $t('el.datepicker.endTime') }}</div>
           <div class="el-time-range-picker__body el-time-panel__content">
             <time-spinner
               ref="maxSpinner"
@@ -38,12 +38,12 @@
         <button
           type="button"
           class="el-time-panel__btn cancel"
-          @click="handleCancel()">{{ $t('datepicker.cancel') }}</button>
+          @click="handleCancel()">{{ $t('el.datepicker.cancel') }}</button>
         <button
           type="button"
           class="el-time-panel__btn confirm"
           @click="handleConfirm()"
-          :disabled="btnDisabled">{{ $t('datepicker.confirm') }}</button>
+          :disabled="btnDisabled">{{ $t('el.datepicker.confirm') }}</button>
       </div>
     </div>
   </transition>
@@ -51,7 +51,7 @@
 
 <script type="text/babel">
   import { parseDate, limitRange } from '../util';
-  import { $t } from '../util';
+  import Locale from 'element-ui/src/mixins/locale';
 
   const MIN_TIME = parseDate('00:00:00', 'HH:mm:ss');
   const MAX_TIME = parseDate('23:59:59', 'HH:mm:ss');
@@ -61,8 +61,20 @@
 
     return minValue > maxValue;
   };
+  const clacTime = function(time) {
+    time = Array.isArray(time) ? time : [time];
+    const minTime = time[0] || new Date();
+    const date = new Date();
+    date.setHours(date.getHours() + 1);
+    const maxTime = time[1] || date;
+
+    if (minTime > maxTime) return clacTime();
+    return { minTime, maxTime };
+  };
 
   export default {
+    mixins: [Locale],
+
     components: {
       TimeSpinner: require('../basic/time-spinner')
     },
@@ -73,24 +85,41 @@
       }
     },
 
+    props: ['value'],
+
+    watch: {
+      value(val) {
+        const time = clacTime(val);
+        if (time.minTime === this.minTime && time.maxTime === this.maxTime) {
+          return;
+        }
+
+        this.handleMinChange({
+          hours: time.minTime.getHours(),
+          minutes: time.minTime.getMinutes(),
+          seconds: time.minTime.getSeconds()
+        });
+        this.handleMaxChange({
+          hours: time.maxTime.getHours(),
+          minutes: time.maxTime.getMinutes(),
+          seconds: time.maxTime.getSeconds()
+        });
+      }
+    },
+
     data() {
-      let defaultValue = this.$options.defaultValue;
-      defaultValue = Array.isArray(defaultValue) ? defaultValue : [defaultValue];
-      const minTime = defaultValue[0] || new Date();
-      const date = new Date();
-      date.setHours(date.getHours() + 1);
-      const maxTime = defaultValue[1] || date;
+      const time = clacTime(this.$options.defaultValue);
 
       return {
-        minTime: minTime,
-        maxTime: maxTime,
-        btnDisabled: isDisabled(minTime, maxTime),
-        maxHours: maxTime.getHours(),
-        maxMinutes: maxTime.getMinutes(),
-        maxSeconds: maxTime.getSeconds(),
-        minHours: minTime.getHours(),
-        minMinutes: minTime.getMinutes(),
-        minSeconds: minTime.getSeconds(),
+        minTime: time.minTime,
+        maxTime: time.maxTime,
+        btnDisabled: isDisabled(time.minTime, time.maxTime),
+        maxHours: time.maxTime.getHours(),
+        maxMinutes: time.maxTime.getMinutes(),
+        maxSeconds: time.maxTime.getSeconds(),
+        minHours: time.minTime.getHours(),
+        minMinutes: time.minTime.getMinutes(),
+        minSeconds: time.minTime.getSeconds(),
         format: 'HH:mm:ss',
         visible: false,
         width: 0
@@ -98,10 +127,6 @@
     },
 
     methods: {
-      $t(...args) {
-        return $t.apply(this, args);
-      },
-
       handleCancel() {
         this.$emit('pick');
       },
@@ -160,6 +185,7 @@
         this.minTime = limitRange(this.minTime, minSelectableRange);
         this.maxTime = limitRange(this.maxTime, maxSelectableRange);
 
+        if (first) return;
         this.$emit('pick', [this.minTime, this.maxTime], visible, first);
       },
 

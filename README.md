@@ -1,5 +1,7 @@
 # Element
 [![Build Status](https://travis-ci.org/ElemeFE/element.svg?branch=master)](https://travis-ci.org/ElemeFE/element)
+[![Coverage Status](https://coveralls.io/repos/github/ElemeFE/element/badge.svg?branch=master)](https://coveralls.io/github/ElemeFE/element?branch=master)
+[![CDNJS](https://img.shields.io/cdnjs/v/element-ui.svg)](https://cdnjs.com/libraries/element-ui)
 [![npm package](https://img.shields.io/npm/v/element-ui.svg)](https://www.npmjs.org/package/element-ui)
 [![NPM downloads](http://img.shields.io/npm/dm/element-ui.svg)](https://npmjs.org/package/element-ui)
 ![JS gzip size](http://img.badgesize.io/https://unpkg.com/element-ui@next/lib/index.js?compression=gzip&label=gzip%20size:%20JS)
@@ -11,6 +13,18 @@
 ## Links
 - [Home Page](http://element.eleme.io/)
 - [Docs](http://element.eleme.io/#/component)
+- [FAQ 中文](./FAQ.md)
+- [自定义主题](./custom-theme.md)
+- [i18n](./i18n.md)
+- Starter Kit
+ - [element-starter](https://github.com/ElementUI/element-starter)
+ - [element-cooking-starter](https://github.com/ElementUI/element-cooking-starter)
+ - [element-in-laravel-starter](https://github.com/ElementUI/element-in-laravel-starter)
+- [Design resources](https://github.com/ElementUI/Resources)
+- Boilerplate for bug reports
+ - [CodePen](https://codepen.io/anon/pen/ozYpNA)
+ - [JSFiddle](https://jsfiddle.net/gmve9d3p/)
+- [Mint UI](https://github.com/ElemeFE/mint-ui) - Mobile UI elements for Vue.js
 
 ## Install
 ```shell
@@ -60,7 +74,7 @@ Vue.component(Button.name, Button)
 .babelrc
 ```json
 {
-  "plugins": ["xxx", ["component", [
+  "plugins": [["component", [
     {
       "libraryName": "element-ui",
       "styleLibraryName": "theme-default"
@@ -76,17 +90,6 @@ Modern browsers and Internet Explorer 9+.
 Skip this part if you just want to use Element.
 
 For those who are interested in contributing to Element, please refer to our [contributing guide](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.md) to see how to run this project.
-
-## Other links
-- Starter Kit
- - [element-starter](https://github.com/ElementUI/element-starter)
- - [element-cooking-starter](https://github.com/ElementUI/element-cooking-starter)
- - [element-in-laravel-starter](https://github.com/ElementUI/element-in-laravel-starter)
-- [Design resources](https://github.com/ElementUI/Resources)
-- Boilerplate for bug reports
- - [CodePen](https://codepen.io/anon/pen/ozYpNA)
- - [JSFiddle](https://jsfiddle.net/gmve9d3p/)
-- [Mint UI](https://github.com/ElemeFE/mint-ui) - Mobile UI elements for Vue.js
 
 ## Changelog
 Detailed changes for each release are documented in the [release notes](https://github.com/ElemeFE/element/releases).

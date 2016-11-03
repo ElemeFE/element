@@ -1,4 +1,4 @@
-@import "./vars.css";
+@import "../common/var.css";
 
 @component-namespace el {
   @b date-table {
