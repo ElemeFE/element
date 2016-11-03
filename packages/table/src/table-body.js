@@ -32,6 +32,7 @@ export default {
               <tr
                 on-click={ ($event) => this.handleClick($event, row) }
                 on-mouseenter={ _ => this.handleMouseEnter($index) }
+                on-mouseleave={ _ => this.handleMouseLeave() }
                 class={ this.getRowClass(row, $index) }>
                 {
                   this._l(this.columns, (column, cellIndex) =>
@@ -143,6 +144,10 @@ export default {
 
     handleMouseEnter(index) {
       this.store.commit('setHoverRow', index);
+    },
+
+    handleMouseLeave() {
+      this.store.commit('setHoverRow', null);
     },
 
     handleClick(event, row) {
