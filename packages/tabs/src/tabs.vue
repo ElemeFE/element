@@ -1,12 +1,6 @@
 <script>
-  import ElTab from './tab';
-
   module.exports = {
     name: 'el-tabs',
-
-    components: {
-      ElTab
-    },
 
     props: {
       type: String,
@@ -18,11 +12,9 @@
 
     data() {
       return {
-        tabs: [],
         children: null,
         activeTab: null,
-        currentName: 0,
-        barStyle: ''
+        currentName: 0
       };
     },
 
@@ -31,45 +23,40 @@
         handler(val) {
           this.currentName = val;
         }
-      },
-
-      'currentName'() {
-        this.calcBarStyle();
       }
     },
 
     methods: {
-      handleTabRemove(tab, ev) {
-        ev.stopPropagation();
+      handleTabRemove(tab, event) {
+        event.stopPropagation();
+        let tabs = this.$children;
+
+        var index = tabs.indexOf(tab);
         tab.$destroy(true);
 
-        var index = this.tabs.indexOf(tab);
+        if (tab.index === this.currentName) {
+          let nextChild = tabs[index];
+          let prevChild = tabs[index - 1];
 
-        if (index !== -1) {
-          this.tabs.splice(index, 1);
-        }
-
-        if (tab.key === this.currentName) {
-          let nextChild = this.tabs[index];
-          let prevChild = this.tabs[index - 1];
-
-          this.currentName = nextChild ? nextChild.key : prevChild ? prevChild.key : '-1';
+          this.currentName = nextChild ? nextChild.index : prevChild ? prevChild.index : '-1';
         }
         this.$emit('tab-remove', tab);
+        this.$forceUpdate();
       },
       handleTabClick(tab, event) {
-        this.currentName = tab.key;
+        this.currentName = tab.index;
         this.$emit('tab-click', tab, event);
       },
-      calcBarStyle(firstRendering) {
+      calcBarStyle() {
         if (this.type || !this.$refs.tabs) return {};
         var style = {};
         var offset = 0;
         var tabWidth = 0;
 
-        this.tabs.every((tab, index) => {
-          let $el = this.$refs.tabs[index].$el;
-          if (tab.key !== this.currentName) {
+        this.$children.every((panel, index) => {
+          let $el = this.$refs.tabs[index];
+          if (!$el) { return false; }
+          if (panel.index !== this.currentName) {
             offset += $el.clientWidth;
             return true;
           } else {
@@ -81,41 +68,66 @@
         style.width = tabWidth + 'px';
         style.transform = `translateX(${offset}px)`;
 
-        if (!firstRendering) {
-          style.transition = 'transform .3s cubic-bezier(.645,.045,.355,1), -webkit-transform .3s cubic-bezier(.645,.045,.355,1)';
-        }
-        this.barStyle = style;
+        return style;
       }
     },
     mounted() {
-      var fisrtKey = this.$children[0].key || '1';
-      this.currentName = this.activeName || fisrtKey;
-      this.$children.forEach(tab => this.tabs.push(tab));
-      this.$nextTick(() => this.calcBarStyle(true));
+      this.$nextTick(() => {
+        this.currentName = this.activeName || this.$children[0].index || '1';
+      });
+    },
+    render(h) {
+      let {
+        type,
+        closable,
+        handleTabRemove,
+        handleTabClick,
+        currentName
+      } = this;
+
+      const barStyle = this.calcBarStyle();
+      const activeBar = !type
+        ? <div class="el-tabs__active-bar" style={barStyle}></div>
+        : null;
+
+      const tabs = this.$children.map((tab, index) => {
+        let btnClose = h('span', {
+          class: {
+            'el-icon-close': true
+          },
+          on: { click: (ev) => { handleTabRemove(tab, ev); } }
+        });
+        const _tab = h('div', {
+          class: {
+            'el-tabs__item': true,
+            'is-active': currentName === tab.index,
+            'is-disabled': tab.disabled,
+            'is-closable': closable
+          },
+          ref: 'tabs',
+          refInFor: true,
+          on: { click: (ev) => { handleTabClick(tab, ev); } }
+        }, [
+          tab.label,
+          closable ? btnClose : null,
+          index === 0 ? activeBar : null
+        ]);
+        return _tab;
+      });
+      return (
+        <div class={{
+          'el-tabs': true,
+          'el-tabs--card': type === 'card',
+          'el-tabs--border-card': type === 'border-card'
+        }}>
+          <div class="el-tabs__header">
+            {tabs}
+          </div>
+          <div class="el-tabs__content">
+            {this.$slots.default}
+          </div>
+        </div>
+      );
     }
   };
 </script>
-
-<template>
-  <div class="el-tabs" :class="[type ? 'el-tabs--' + type : '']">
-    <div class="el-tabs__header">
-      <el-tab
-        v-for="tab in tabs"
-        ref="tabs"
-        :tab="tab"
-        :closable="closable"
-        @remove="handleTabRemove"
-        @click.native="handleTabClick(tab, $event)">
-      </el-tab>
-      <div
-        class="el-tabs__active-bar"
-        :style="barStyle"
-        v-if="!this.type && tabs.length > 0">
-      </div>
-    </div>
-
-    <div class="el-tabs__content">
-      <slot></slot>
-    </div>
-  </div>
-</template>
