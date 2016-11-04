@@ -71,6 +71,21 @@
     h2, h3, h4, h5 {
       font-weight: normal;
       color: #1f2f3d;
+
+      &:hover a {
+        opacity: .4;
+      }
+
+      a {
+        float: left;
+        margin-left: -20px;
+        opacity: 0;
+        cursor: pointer;
+
+        &:hover {
+          opacity: .4;
+        }
+      }
     }
     p {
       font-size: 14px;
@@ -101,10 +116,44 @@
 <script>
   export default {
     name: 'app',
+    methods: {
+      renderAnchorHref() {
+        const anchors = document.querySelectorAll('h2 a,h3 a');
+        const basePath = location.href.split('#').splice(0, 2).join('#');
+
+        [].slice.call(anchors).forEach(a => {
+          const href = a.getAttribute('href');
+          a.href = basePath + href;
+        });
+      },
+
+      goAnchor() {
+        if (location.href.match(/#/g).length > 1) {
+          const auchor = location.href.match(/#[^#]+$/g);
+          if (!auchor || auchor.length !== 1) return;
+          const elm = document.querySelector(auchor[0]);
+          if (!elm) return;
+
+          setTimeout(_ => {
+            document.documentElement.scrollTop = document.body.scrollTop = elm.offsetTop;
+          }, 50);
+        }
+      }
+    },
+
+    mounted() {
+      this.renderAnchorHref();
+      this.goAnchor();
+    },
+
     created() {
       window.addEventListener('hashchange', () => {
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
+        if (location.href.match(/#/g).length < 2) {
+          document.documentElement.scrollTop = document.body.scrollTop = 0;
+          this.renderAnchorHref();
+        } else {
+          this.goAnchor();
+        }
       });
     }
   };
