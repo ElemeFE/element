@@ -34,7 +34,9 @@
     },
 
     destroyed() {
-      this.$el.remove();
+      if (this.$el) {
+        this.$el.remove();
+      }
     },
 
     watch: {
