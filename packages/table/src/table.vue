@@ -96,6 +96,7 @@
   import TableLayout from './table-layout';
   import TableBody from './table-body';
   import TableHeader from './table-header';
+  import { mousewheel } from './util';
 
   let tableIdSeed = 1;
 
@@ -184,6 +185,20 @@
           if (refs.fixedBodyWrapper) refs.fixedBodyWrapper.scrollTop = this.scrollTop;
           if (refs.rightFixedBodyWrapper) refs.rightFixedBodyWrapper.scrollTop = this.scrollTop;
         });
+
+        mousewheel(headerWrapper, function(event) {
+          event.preventDefault();
+        });
+
+        mousewheel(headerWrapper, throttle(16, function(event) {
+          const deltaX = event.deltaX;
+
+          if (deltaX > 0) {
+            bodyWrapper.scrollLeft = bodyWrapper.scrollLeft + 10;
+          } else {
+            bodyWrapper.scrollLeft = bodyWrapper.scrollLeft - 10;
+          }
+        }));
 
         if (this.fit) {
           this.windowResizeListener = throttle(50, () => {
