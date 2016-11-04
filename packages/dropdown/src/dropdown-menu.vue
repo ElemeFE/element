@@ -1,6 +1,6 @@
 <template>
   <transition name="md-fade-bottom" @after-leave="doDestroy">
-    <ul class="el-dropdown__menu" v-show="showPopper">
+    <ul class="el-dropdown-menu" v-show="showPopper">
       <slot></slot>
     </ul>
   </transition>
