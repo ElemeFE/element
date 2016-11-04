@@ -330,7 +330,7 @@
         background-color: #eff2f7;
       }
 
-      tr.current-row {
+      tr.current-row td {
         background: #eff7ff;
       }
     }
