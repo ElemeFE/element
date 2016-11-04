@@ -19,8 +19,6 @@ describe('Pagination', () => {
     expect(elm.querySelector('.el-pagination__jump')).to.exist;
     // ->
     expect(elm.querySelector('.el-pagination__rightwrapper')).to.exist;
-    // total
-    expect(elm.querySelector('.el-pagination__total')).to.exist;
   });
 
   it('set layout', () => {
@@ -56,6 +54,33 @@ describe('Pagination', () => {
     });
 
     expect(vm.$el.querySelectorAll('li.number')).to.length(4);
+  });
+
+  it('pageCount', () => {
+    const vm = createTest(Pagination, {
+      pageSize: 25,
+      pageCount: 4
+    });
+
+    expect(vm.$el.querySelectorAll('li.number')).to.length(4);
+  });
+
+  it('will work without total & page-count', (done) => {
+    const vm = createTest(Pagination, {
+      pageSize: 25,
+      currentPage: 2
+    });
+
+    vm.$el.querySelector('.btn-prev').click();
+
+    setTimeout(() => {
+      vm.internalCurrentPage.should.be.equal(1);
+
+      vm.$el.querySelector('.btn-prev').click();
+      vm.internalCurrentPage.should.be.equal(1);
+
+      done();
+    }, 20);
   });
 
   it('currentPage', () => {
@@ -206,13 +231,13 @@ describe('Pagination', () => {
     });
     const input = vm.$el.querySelector('.el-pagination__jump input');
 
-    input.value = 1;
+    input.value = 2;
     triggerEvent(input, 'change');
-    expect(vm.page).to.equal(0);
+    expect(vm.page).to.equal(1);
 
     input.value = '我好帅';
     triggerEvent(input, 'change');
-    expect(vm.page).to.equal(0);
+    expect(vm.page).to.equal(1);
   });
 
   describe('click pager', () => {
