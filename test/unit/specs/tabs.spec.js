@@ -9,22 +9,27 @@ describe('Tabs', () => {
   it('create', done => {
     vm = createVue({
       template: `
-        <el-tabs>
+        <el-tabs ref="tabs">
           <el-tab-pane label="用户管理">A</el-tab-pane>
           <el-tab-pane label="配置管理">B</el-tab-pane>
-          <el-tab-pane label="角色管理">C</el-tab-pane>
+          <el-tab-pane label="角色管理" ref="pane-click">C</el-tab-pane>
           <el-tab-pane label="定时任务补偿">D</el-tab-pane>
         </el-tabs>
       `
     }, true);
     let tabList = vm.$el.querySelector('.el-tabs__header').children;
     let paneList = vm.$el.querySelector('.el-tabs__content').children;
+    let spy = sinon.spy();
+
+    vm.$refs.tabs.$on('tab-click', spy);
+
     setTimeout(_ => {
       expect(tabList[0].classList.contains('is-active')).to.be.true;
       expect(paneList[0].style.display).to.not.ok;
 
       tabList[2].click();
       vm.$nextTick(_ => {
+        expect(spy.withArgs(vm.$refs['pane-click']).calledOnce).to.true;
         expect(tabList[2].classList.contains('is-active')).to.be.true;
         expect(paneList[2].style.display).to.not.ok;
         done();
@@ -98,33 +103,27 @@ describe('Tabs', () => {
   it('closable', done => {
     vm = createVue({
       template: `
-        <el-tabs type="card" closable @tab-remove="handleRemove">
+        <el-tabs type="card" :closable="true" ref="tabs">
           <el-tab-pane label="用户管理">A</el-tab-pane>
           <el-tab-pane label="配置管理">B</el-tab-pane>
           <el-tab-pane label="角色管理">C</el-tab-pane>
           <el-tab-pane label="定时任务补偿">D</el-tab-pane>
         </el-tabs>
-      `,
-      data() {
-        return {
-          removeTabName: ''
-        };
-      },
-      methods: {
-        handleRemove(tab) {
-          this.removeTabName = tab.label;
-        }
-      }
+      `
     }, true);
 
     let tabList = vm.$el.querySelector('.el-tabs__header').children;
     let paneList = vm.$el.querySelector('.el-tabs__content').children;
+    let spy = sinon.spy();
+
+    vm.$refs.tabs.$on('tab-remove', spy);
+
     setTimeout(_ => {
       tabList[1].querySelector('.el-icon-close').click();
       vm.$nextTick(_ => {
         expect(tabList.length).to.be.equal(3);
         expect(paneList.length).to.be.equal(3);
-        expect(vm.removeTabName).to.be.equal('配置管理');
+        expect(spy.calledOnce).to.true;
         expect(tabList[1].innerText.trim()).to.be.equal('角色管理');
         expect(paneList[0].innerText.trim()).to.be.equal('A');
         done();
@@ -134,7 +133,7 @@ describe('Tabs', () => {
   it('closable edge', done => {
     vm = createVue({
       template: `
-        <el-tabs type="card" closable>
+        <el-tabs type="card" :closable="true">
           <el-tab-pane label="用户管理">A</el-tab-pane>
           <el-tab-pane label="配置管理">B</el-tab-pane>
           <el-tab-pane label="角色管理">C</el-tab-pane>

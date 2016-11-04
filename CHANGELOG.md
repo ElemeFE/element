@@ -12,6 +12,7 @@
 - 新增 Dropdown 的 command api #432
 - 修复 Slider 在 Form 中的显示问题
 - 修复 Upload 在 onSuccess、onError 钩子无法拿到服务端返回信息的问题
+- 改善 tabs 现在支持动态更新
 
 #### 非兼容性更新
 
