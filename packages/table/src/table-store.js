@@ -74,6 +74,7 @@ const TableStore = function(table, initialState = {}) {
     selection: [],
     reserveSelection: false,
     selectable: null,
+    currentRow: null,
     hoverRow: null,
     filters: {}
   };
@@ -89,6 +90,9 @@ TableStore.prototype.mutations = {
   setData(states, data) {
     states._data = data;
     states.data = sortData((data || []), states);
+
+    this.updateCurrentRow();
+
     const selection = states.selection;
 
     if (!states.reserveSelection) {
@@ -186,13 +190,23 @@ TableStore.prototype.mutations = {
     states.hoverRow = row;
   },
 
+  setCurrentRow(states, row) {
+    const oldCurrentRow = states.currentRow;
+    states.currentRow = row;
+
+    if (oldCurrentRow !== row) {
+      this.table.$emit('current-change', row, oldCurrentRow);
+    }
+  },
+
   rowSelectedChanged(states, row) {
     const changed = toggleRowSelection(states, row);
     const selection = states.selection;
 
     if (changed) {
-      this.table.$emit('selection-change', selection);
-      this.table.$emit('select', selection, row);
+      const table = this.table;
+      table.$emit('selection-change', selection);
+      table.$emit('select', selection, row);
     }
 
     this.updateAllSelected();
@@ -216,10 +230,11 @@ TableStore.prototype.mutations = {
       }
     });
 
+    const table = this.table;
     if (selectionChanged) {
-      this.table.$emit('selection-change', selection);
+      table.$emit('selection-change', selection);
     }
-    this.table.$emit('select-all', selection);
+    table.$emit('select-all', selection);
     states.isAllSelected = value;
   })
 };
@@ -293,6 +308,21 @@ TableStore.prototype.updateAllSelected = function() {
 
 TableStore.prototype.scheduleLayout = function() {
   this.table.debouncedLayout();
+};
+
+TableStore.prototype.updateCurrentRow = function() {
+  const states = this.states;
+  const table = this.table;
+  const data = states.data || [];
+  const oldCurrentRow = states.currentRow;
+
+  if (data.indexOf(oldCurrentRow) === -1) {
+    states.currentRow = null;
+
+    if (states.currentRow !== oldCurrentRow) {
+      table.$emit('current-change', null, oldCurrentRow);
+    }
+  }
 };
 
 TableStore.prototype.commit = function(name, ...args) {
