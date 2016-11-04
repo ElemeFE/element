@@ -30,22 +30,7 @@ const defaults = {
 
 import Vue from 'vue';
 import msgboxVue from './main.vue';
-
-const merge = function(target) {
-  for (let i = 1, j = arguments.length; i < j; i++) {
-    let source = arguments[i];
-    for (let prop in source) {
-      if (source.hasOwnProperty(prop)) {
-        let value = source[prop];
-        if (value !== undefined) {
-          target[prop] = value;
-        }
-      }
-    }
-  }
-
-  return target;
-};
+import merge from 'element-ui/src/utils/merge';
 
 const MessageBoxConstructor = Vue.extend(msgboxVue);
 
@@ -139,7 +124,7 @@ const MessageBox = function(options, callback) {
   if (typeof Promise !== 'undefined') {
     return new Promise((resolve, reject) => { // eslint-disable-line
       msgQueue.push({
-        options: merge({}, defaults, MessageBox.defaults || {}, options),
+        options: merge({}, defaults, MessageBox.defaults, options),
         callback: callback,
         resolve: resolve,
         reject: reject
@@ -149,7 +134,7 @@ const MessageBox = function(options, callback) {
     });
   } else {
     msgQueue.push({
-      options: merge({}, defaults, MessageBox.defaults || {}, options),
+      options: merge({}, defaults, MessageBox.defaults, options),
       callback: callback
     });
 
