@@ -526,6 +526,37 @@ describe('Table', () => {
       }, DELAY);
     });
 
+    it('render-header', done => {
+      const vm = createVue({
+        template: `
+          <el-table :data="testData">
+            <el-table-column prop="name" :render-header="renderHeader" label="name">
+            </el-table-column>
+            <el-table-column prop="release"/>
+            <el-table-column prop="director"/>
+            <el-table-column prop="runtime"/>
+          </el-table>
+        `,
+
+        methods: {
+          renderHeader(h, { column, $index }) {
+            return '' + $index + ':' + column.label;
+          }
+        },
+
+        created() {
+          this.testData = getTestData();
+        }
+      });
+
+      setTimeout(_ => {
+        const headerCell = vm.$el.querySelector('.el-table__header-wrapper thead tr th:first-child .cell');
+        expect(headerCell.textContent).to.equal('0:name');
+        destroyVM(vm);
+        done();
+      }, DELAY);
+    });
+
     it('align', done => {
       const vm = createTable('align="left"', 'align="right"', 'align="center"');
       setTimeout(_ => {

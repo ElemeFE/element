@@ -235,7 +235,7 @@
 | props | 配置选项，具体看下表 | object | — | — |
 | load | 加载子树数据的方法 | function(node, resolve) | — | — |
 | show-checkbox | 节点是否可被选择 | boolean | — | false |
-| render-content | 树节点的内容区的渲染 Function，会传入两个参数，h 与 { node: node }。 | Function | - | - |
+| render-content | 树节点的内容区的渲染 Function | Function(h, { node } | - | - |
 | highlight-current | 是否高亮当前选中节点，默认值是 false。| boolean | - | false |
 
 ### props

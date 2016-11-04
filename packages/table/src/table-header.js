@@ -36,8 +36,8 @@ export default {
                   class={ [column.id, column.order, column.align, this.isCellHidden(cellIndex) ? 'is-hidden' : ''] }>
                   <div class={ ['cell', column.filteredValue && column.filteredValue.length > 0 ? 'highlight' : ''] }>
                   {
-                    column.headerTemplate
-                      ? column.headerTemplate.call(this._renderProxy, h, column.label)
+                    column.renderHeader
+                      ? column.renderHeader.call(this._renderProxy, h, { column, $index: cellIndex, store: this.store, _self: this.$parent.$vnode.context })
                       : column.label
                   }
                   {
