@@ -441,6 +441,7 @@ describe('Table', () => {
         expect(toArray(vm.$el.querySelectorAll('.el-table__fixed-right th:not(.is-hidden)'))
           .map(node => node.textContent))
           .to.eql(['test2']);
+        expect(vm.$el.querySelector('.el-table__body-wrapper').style.height).to.equal('');
         destroyVM(vm);
         done();
       }, DELAY);
