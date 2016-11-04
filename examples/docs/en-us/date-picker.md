@@ -16,7 +16,7 @@
               picker.$emit('pick', date);
             }
           }, {
-            text: 'One week ago',
+            text: 'A week ago',
             onClick(picker) {
               const date = new Date();
               date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
@@ -26,7 +26,7 @@
         },
         pickerOptions2: {
           shortcuts: [{
-            text: 'The latest week',
+            text: 'Last week',
             onClick(picker) {
               const end = new Date();
               const start = new Date();
@@ -34,7 +34,7 @@
               picker.$emit('pick', [start, end]);
             }
           }, {
-            text: 'The latest month',
+            text: 'Last month',
             onClick(picker) {
               const end = new Date();
               const start = new Date();
@@ -42,7 +42,7 @@
               picker.$emit('pick', [start, end]);
             }
           }, {
-            text: 'The latest three months',
+            text: 'Last 3 months',
             onClick(picker) {
               const end = new Date();
               const start = new Date();
@@ -93,9 +93,9 @@ Use Date Picker for date input.
 
 ###  Enter Date
 
-It's a standard date picker component measured by 'day'.
+Basic date picker measured by 'day'.
 
-:::demo the unit is determined by `type` attributes. You can enable quick options by creating an `picker-options` object with `shortcuts` property, The disabled date is set by `disabledDate`, Incoming function.
+:::demo The measurement is determined by the `type` attribute. You can enable quick options by creating a `picker-options` object with `shortcuts` property. The disabled date is set by `disabledDate`, which is a function.
 
 ```html
 <template>
@@ -104,7 +104,7 @@ It's a standard date picker component measured by 'day'.
     <el-date-picker
       v-model="value1"
       type="date"
-      placeholder="Enter date">
+      placeholder="Pick a day">
     </el-date-picker>
   </div>
   <div class="block">
@@ -112,7 +112,7 @@ It's a standard date picker component measured by 'day'.
     <el-date-picker
       v-model="value2"
       type="date"
-      placeholder="Enter date"
+      placeholder="Pick a day"
       :picker-options="pickerOptions1">
     </el-date-picker>
   </div>
@@ -136,7 +136,7 @@ It's a standard date picker component measured by 'day'.
               picker.$emit('pick', date);
             }
           }, {
-            text: 'One week agao',
+            text: 'A week ago',
             onClick(picker) {
               const date = new Date();
               date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
@@ -154,7 +154,7 @@ It's a standard date picker component measured by 'day'.
 
 :::
 
-### Additional Date Units
+### Other measurements
 
 You can choose week, month or year by extending the standard date picker component.
 
@@ -166,8 +166,8 @@ You can choose week, month or year by extending the standard date picker compone
   <el-date-picker
     v-model="value3"
     type="week"
-    format="yyyy the WW-th week"
-    placeholder="Enter week">
+    format="Week WW"
+    placeholder="Pick a week">
   </el-date-picker>
 </div>
 <div class="block">
@@ -175,7 +175,7 @@ You can choose week, month or year by extending the standard date picker compone
   <el-date-picker
     v-model="value4"
     type="month"
-    placeholder="Enter month">
+    placeholder="Pick a month">
   </el-date-picker>
 </div>
 <div class="block">
@@ -183,16 +183,16 @@ You can choose week, month or year by extending the standard date picker compone
   <el-date-picker
     v-model="value5"
     type="year"
-    placeholder="Enter year">
+    placeholder="Pick a year">
   </el-date-picker>
 </div>
 ```
 
 :::
 
-###  Enter Date Range
+###  Date Range
 
-You can choose a date range in the picker.
+Picking a date range is supported.
 
 :::demo
 
@@ -203,7 +203,7 @@ You can choose a date range in the picker.
     <el-date-picker
       v-model="value6"
       type="daterange"
-      placeholder="Enter date range"
+      placeholder="Pick a range"
       style="width: 220px">
     </el-date-picker>
   </div>
@@ -213,7 +213,7 @@ You can choose a date range in the picker.
       v-model="value7"
       type="daterange"
       align="right"
-      placeholder="Enter date range"
+      placeholder="Pick a range"
       :picker-options="pickerOptions2"
       style="width: 220px">
     </el-date-picker>
@@ -226,7 +226,7 @@ You can choose a date range in the picker.
       return {
         pickerOptions2: {
           shortcuts: [{
-            text: 'The latest week',
+            text: 'Last week',
             onClick(picker) {
               const end = new Date();
               const start = new Date();
@@ -234,7 +234,7 @@ You can choose a date range in the picker.
               picker.$emit('pick', [start, end]);
             }
           }, {
-            text: 'The latest month',
+            text: 'Last month',
             onClick(picker) {
               const end = new Date();
               const start = new Date();
@@ -242,7 +242,7 @@ You can choose a date range in the picker.
               picker.$emit('pick', [start, end]);
             }
           }, {
-            text: 'The latest three months',
+            text: 'Last 3 months',
             onClick(picker) {
               const end = new Date();
               const start = new Date();
@@ -262,18 +262,23 @@ You can choose a date range in the picker.
 :::
 
 ### Attributes
-| Attribute      | Description          | Type      | Options                          | Default  |
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| readonly | Read only | boolean | — | false |
-| placeholder | Placeholder | string | — | — |
-| type | Date picker type | string | year/month/date/datetime/week | date |
-| format | Date format | string | year `yyyy` month `MM` day `dd`，<br>hour `HH`, minute `mm`, second `ss` | yyyy-MM-dd |
-| :picker-options | Quick options, it accepts a `picker-options` object with a `shortcuts` property<br>Check the table below for more information about shortcuts | object[] | — | — |
-| align | Align | left, center, right | left |
+| readonly | if the picker is read only | boolean | — | false |
+| placeholder | placeholder | string | — | — |
+| type | type of the picker | string | year/month/date/datetime/week/datetimerange/daterange | date |
+| format | format of the picker | string | year `yyyy` month `MM` day `dd`，<br>hour `HH`, minute `mm`, second `ss` | yyyy-MM-dd |
+| align | alignment | left/center/right | left |
+| picker-options | additional options, check the table below | object | — | {} |
+
+### Picker Options
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
+|---------- |-------------- |---------- |--------------------------------  |-------- |
+| shortcuts | a { text, onClick } object array to set shortcut options, check the table below | object[] | — | — |
+| disabledDate | a function determining if a date is disabled with that date as its parameter. Should return a Boolean | function | — | — |
 
 ### shortcuts
-**Note:** shortcuts is a property of picker-options object. It's an array and contains objects with following properties.
-| Property      | Description          | Type      | Options                           | Default  |
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| text | Title | string | — | — |
-| onClick | Callback function when click the option, input parameter is `vm`. <br> You can change the picker value by emit the `pick` event.<br> Example: `vm.$emit('pick', new Date())`| function | — | — |
+| text | title of the shortcut | string | — | — |
+| onClick | callback function, triggers when the shortcut is clicked, with the `vm` as its parameter. <br>You can change the picker value by emitting the `pick` event.<br> Example: `vm.$emit('pick', new Date())`| function | — | — |
