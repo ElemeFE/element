@@ -243,6 +243,10 @@
             this.inputLength = 20;
           }
         } else {
+          if (this.selectedInit) {
+            this.selectedInit = false;
+            return;
+          }
           this.valueChangeBySelected = true;
           this.$emit('input', val.value);
           this.$emit('change', val.value);
@@ -258,11 +262,9 @@
         }
         if (this.remote && typeof this.remoteMethod === 'function') {
           this.hoverIndex = -1;
-          if (!this.multiple) {
-            this.selected = {};
-          }
           this.remoteMethod(val);
           this.voidRemoteQuery = val === '';
+          this.broadcast('option', 'resetIndex');
         } else if (typeof this.filterMethod === 'function') {
           this.filterMethod(val);
         } else {
@@ -358,6 +360,7 @@
             this.resetHoverIndex();
           }
         } else {
+          this.selectedInit = !!init;
           this.selected = option;
           this.selectedLabel = option.currentLabel;
           this.hoverIndex = option.index;
@@ -424,9 +427,6 @@
         }
         if (!this.disabled) {
           this.visible = !this.visible;
-          if (this.remote && this.visible) {
-            this.selectedLabel = '';
-          }
         }
       },
 
