@@ -482,7 +482,16 @@ describe('Table', () => {
       }, DELAY);
     });
 
-    it('show-tooltip-when-overflow', done => {
+    it('show-overflow-tooltip', done => {
+      const vm = createTable('show-overflow-tooltip');
+      setTimeout(_ => {
+        expect(vm.$el.querySelectorAll('.el-tooltip')).to.length(5);
+        destroyVM(vm);
+        done();
+      }, DELAY);
+    });
+
+    it('show-tooltip-when-overflow', done => { // old version prop name
       const vm = createTable('show-tooltip-when-overflow');
       setTimeout(_ => {
         expect(vm.$el.querySelectorAll('.el-tooltip')).to.length(5);

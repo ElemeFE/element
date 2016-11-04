@@ -14,6 +14,7 @@
 - 修复 Upload 在 onSuccess、onError 钩子无法拿到服务端返回信息的问题
 - 改善 tabs 现在支持动态更新
 - Table 新增 highlightCurrentRow 属性、新增 current-change 事件
+- TableColumn 的 showTooltipWhenOverflow 更名为 showOverflowTooltip（两个属性均可用）
 - Pagination 新增 pageCount 属性
 
 #### 非兼容性更新

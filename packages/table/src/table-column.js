@@ -97,10 +97,8 @@ export default {
       default: true
     },
     align: String,
-    showTooltipWhenOverflow: {
-      type: Boolean,
-      default: false
-    },
+    showTooltipWhenOverflow: Boolean,
+    showOverflowTooltip: Boolean,
     fixed: [Boolean, String],
     formatter: Function,
     selectable: Function,
@@ -194,7 +192,7 @@ export default {
       sortable: this.sortable,
       sortMethod: this.sortMethod,
       resizable: this.resizable,
-      showTooltipWhenOverflow: this.showTooltipWhenOverflow,
+      showOverflowTooltip: this.showOverflowTooltip || this.showTooltipWhenOverflow,
       formatter: this.formatter,
       selectable: this.selectable,
       reserveSelection: this.reserveSelection,
@@ -225,7 +223,7 @@ export default {
         };
       }
 
-      return _self.showTooltipWhenOverflow
+      return _self.showOverflowTooltip || _self.showTooltipWhenOverflow
         ? <el-tooltip
             effect={ this.effect }
             placement="top"
@@ -260,6 +258,45 @@ export default {
     property(newVal) {
       if (this.columnConfig) {
         this.columnConfig.property = newVal;
+      }
+    },
+
+    filters(newVal) {
+      if (this.columnConfig) {
+        this.columnConfig.filters = newVal;
+      }
+    },
+
+    filterMultiple(newVal) {
+      if (this.columnConfig) {
+        this.columnConfig.filterMultiple = newVal;
+      }
+    },
+
+    align(newVal) {
+      if (this.columnConfig) {
+        this.columnConfig.align = newVal;
+      }
+    },
+
+    width(newVal) {
+      if (this.columnConfig) {
+        this.columnConfig.width = newVal;
+        this.owner.scheduleLayout();
+      }
+    },
+
+    minWidth(newVal) {
+      if (this.columnConfig) {
+        this.columnConfig.minWidth = newVal;
+        this.owner.scheduleLayout();
+      }
+    },
+
+    fixed(newVal) {
+      if (this.columnConfig) {
+        this.columnConfig.fixed = newVal;
+        this.owner.scheduleLayout();
       }
     }
   },
