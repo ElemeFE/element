@@ -92,7 +92,7 @@ TableStore.prototype.mutations = {
     const selection = states.selection;
 
     if (!states.reserveSelection) {
-      states.isAllSelected = false;
+      this.clearSelection();
     } else {
       const rowKey = states.rowKey;
       if (rowKey) {
