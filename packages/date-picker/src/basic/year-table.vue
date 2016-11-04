@@ -2,38 +2,38 @@
   <table @click="handleYearTableClick" class="el-year-table">
     <tbody>
     <tr>
-      <td class="available" :class="{ current: year === startYear }">
+      <td class="available" :class="getCellStyle(startYear + 0)">
         <a class="cell">{{ startYear }}</a>
       </td>
-      <td class="available" :class="{ current: year === startYear + 1 }">
+      <td class="available" :class="getCellStyle(startYear + 1)">
         <a class="cell">{{ startYear + 1 }}</a>
       </td>
-      <td class="available" :class="{ current: year === startYear + 2 }">
+      <td class="available" :class="getCellStyle(startYear + 2)">
         <a class="cell">{{ startYear + 2 }}</a>
       </td>
-      <td class="available" :class="{ current: year === startYear + 3 }">
+      <td class="available" :class="getCellStyle(startYear + 3)">
         <a class="cell">{{ startYear + 3 }}</a>
       </td>
     </tr>
     <tr>
-      <td class="available" :class="{ current: year === startYear + 4 }">
+      <td class="available" :class="getCellStyle(startYear + 4)">
         <a class="cell">{{ startYear + 4 }}</a>
       </td>
-      <td class="available" :class="{ current: year === startYear + 5 }">
+      <td class="available" :class="getCellStyle(startYear + 5)">
         <a class="cell">{{ startYear + 5 }}</a>
       </td>
-      <td class="available" :class="{ current: year === startYear + 6 }">
+      <td class="available" :class="getCellStyle(startYear + 6)">
         <a class="cell">{{ startYear + 6 }}</a>
       </td>
-      <td class="available" :class="{ current: year === startYear + 7 }">
+      <td class="available" :class="getCellStyle(startYear + 7)">
         <a class="cell">{{ startYear + 7 }}</a>
       </td>
     </tr>
     <tr>
-      <td class="available" :class="{ current: year === startYear + 8 }">
+      <td class="available" :class="getCellStyle(startYear + 8)">
         <a class="cell">{{ startYear + 8 }}</a>
       </td>
-      <td class="available" :class="{ current: year === startYear + 9 }">
+      <td class="available" :class="getCellStyle(startYear + 9)">
         <a class="cell">{{ startYear + 9 }}</a>
       </td>
       <td></td>
@@ -43,9 +43,13 @@
   </table>
 </template>
 
-<script type="text/ecmascript-6">
+<script type="text/babel">
+  import { hasClass } from 'wind-dom/src/class';
+
   export default {
     props: {
+      disabledDate: {},
+      date: {},
       year: {
         type: Number
       }
@@ -58,6 +62,18 @@
     },
 
     methods: {
+      getCellStyle(year) {
+        const style = {};
+        const date = new Date(this.date);
+
+        date.setFullYear(year);
+        style.disabled = typeof this.disabledDate === 'function' &&
+          this.disabledDate(date);
+        style.current = this.year === year;
+
+        return style;
+      },
+
       nextTenYear() {
         this.$emit('pick', this.year + 10, false);
       },
@@ -69,6 +85,7 @@
       handleYearTableClick(event) {
         const target = event.target;
         if (target.tagName === 'A') {
+          if (hasClass(target.parentNode, 'disabled')) return;
           const year = parseInt(target.textContent || target.innerText, 10);
           this.$emit('pick', year);
         }

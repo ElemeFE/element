@@ -93,13 +93,17 @@
             <year-table
               ref="yearTable"
               :year="year"
+              :date="date"
               v-show="currentView === 'year'"
-              @pick="handleYearPick">
+              @pick="handleYearPick"
+              :disabled-date="disabledDate">
             </year-table>
             <month-table
               :month="month"
+              :date="date"
               v-show="currentView === 'month'"
-              @pick="handleMonthPick">
+              @pick="handleMonthPick"
+              :disabled-date="disabledDate">
             </month-table>
           </div>
         </div>
