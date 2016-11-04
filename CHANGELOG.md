@@ -15,7 +15,8 @@
 - 改善 tabs 现在支持动态更新
 - Table 新增 highlightCurrentRow 属性、新增 current-change 事件
 - TableColumn 的 showTooltipWhenOverflow 更名为 showOverflowTooltip（两个属性均可用）
-- Pagination 新增 pageCount 属性
+- TableColumn 新增属性 render-header
+- Pagination 新增属性 pageCount
 
 #### 非兼容性更新
 

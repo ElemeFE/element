@@ -24,26 +24,25 @@ const defaults = {
 
 const forced = {
   selection: {
-    headerTemplate: function(h) {
+    renderHeader: function(h) {
       return <el-checkbox
         nativeOn-click={ this.toggleAllSelection }
         domProps-value={ this.isAllSelected } />;
     },
-    template: function(h, { row, column, store, $index }) {
+    renderCell: function(h, { row, column, store, $index }) {
       return <el-checkbox
         domProps-value={ store.isSelected(row) }
         disabled={ column.selectable ? !column.selectable.call(null, row, $index) : false }
-        on-input={ (value) => { store.commit('rowSelectedChanged', row); } } />;
+        on-input={ () => { store.commit('rowSelectedChanged', row); } } />;
     },
     sortable: false,
     resizable: false
   },
   index: {
-    // headerTemplate: function(h) { return <div>#</div>; },
-    headerTemplate: function(h, label) {
-      return label || '#';
+    renderHeader: function(h, { column }) {
+      return column.label || '#';
     },
-    template: function(h, { $index }) {
+    renderCell: function(h, { $index }) {
       return <div>{ $index + 1 }</div>;
     },
     sortable: false
@@ -73,6 +72,10 @@ const getDefaultColumn = function(type, options) {
   return column;
 };
 
+const DEFAULT_RENDER_CELL = function(h, { row, column }, parent) {
+  return <span>{ parent.getCellContent(row, column.property, column.id) }</span>;
+};
+
 export default {
   name: 'el-table-column',
 
@@ -86,7 +89,7 @@ export default {
     prop: String,
     width: {},
     minWidth: {},
-    template: String,
+    renderHeader: Function,
     sortable: {
       type: [Boolean, String],
       default: false
@@ -170,21 +173,14 @@ export default {
     }
 
     let isColumnGroup = false;
-    let template;
-
-    let property = this.prop || this.property;
-    if (property) {
-      template = function(h, { row }, parent) {
-        return <span>{ parent.getCellContent(row, property, columnId) }</span>;
-      };
-    }
 
     let column = getDefaultColumn(type, {
       id: columnId,
       label: this.label,
-      property,
+      property: this.prop || this.property,
       type,
-      template,
+      renderCell: DEFAULT_RENDER_CELL,
+      renderHeader: this.renderHeader,
       minWidth,
       width,
       isColumnGroup,
@@ -207,12 +203,12 @@ export default {
 
     objectAssign(column, forced[type] || {});
 
-    let renderColumn = column.template;
+    let renderCell = column.renderCell;
     let _self = this;
 
-    column.template = function(h, data) {
+    column.renderCell = function(h, data) {
       if (_self.$vnode.data.inlineTemplate) {
-        renderColumn = function() {
+        renderCell = function() {
           data._staticTrees = _self._staticTrees;
           data.$options = {};
           data.$options.staticRenderFns = _self.$options.staticRenderFns;
@@ -228,10 +224,10 @@ export default {
             effect={ this.effect }
             placement="top"
             disabled={ this.tooltipDisabled }>
-            <div class="cell">{ renderColumn(h, data, this._renderProxy) }</div>
-            <span slot="content">{ renderColumn(h, data, this._renderProxy) }</span>
+            <div class="cell">{ renderCell(h, data, this._renderProxy) }</div>
+            <span slot="content">{ renderCell(h, data, this._renderProxy) }</span>
           </el-tooltip>
-        : <div class="cell">{ renderColumn(h, data, this._renderProxy) }</div>;
+        : <div class="cell">{ renderCell(h, data, this._renderProxy) }</div>;
     };
 
     this.columnConfig = column;
