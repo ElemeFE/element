@@ -9,7 +9,8 @@ export default {
       required: true
     },
     rowClassName: [String, Function],
-    fixed: String
+    fixed: String,
+    highlight: Boolean
   },
 
   render(h) {
@@ -115,6 +116,11 @@ export default {
         classes.push(rowClassName.apply(null, [row, index]) || '');
       }
 
+      const currentRow = this.store.states.currentRow;
+      if (this.highlight && currentRow === row) {
+        classes.push('current-row');
+      }
+
       return classes.join(' ');
     },
 
@@ -160,6 +166,8 @@ export default {
           table.$emit('cell-click', row, column, cell, event);
         }
       }
+
+      this.store.commit('setCurrentRow', row);
 
       table.$emit('row-click', row, event);
     },

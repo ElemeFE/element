@@ -17,6 +17,7 @@
         :store="store"
         :layout="layout"
         :row-class-name="rowClassName"
+        :highlight="highlightCurrentRow"
         :style="{ width: layout.bodyWidth ? layout.bodyWidth - (layout.scrollY ? layout.gutterWidth : 0 ) + 'px' : '' }">
       </table-body>
       <div class="el-table__empty-block" v-if="!data || data.length === 0">
@@ -47,6 +48,7 @@
           fixed="left"
           :store="store"
           :layout="layout"
+          :highlight="highlightCurrentRow"
           :row-class-name="rowClassName"
           :style="{ width: layout.fixedWidth ? layout.fixedWidth + 'px' : '' }">
         </table-body>
@@ -78,6 +80,7 @@
           :store="store"
           :layout="layout"
           :row-class-name="rowClassName"
+          :highlight="highlightCurrentRow"
           :style="{ width: layout.rightFixedWidth ? layout.rightFixedWidth + 'px' : '' }">
         </table-body>
       </div>
@@ -129,6 +132,8 @@
       rowKey: [String, Function],
 
       rowClassName: [String, Function],
+
+      highlightCurrentRow: Boolean,
 
       emptyText: {
         type: String,
