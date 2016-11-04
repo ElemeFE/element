@@ -11,7 +11,7 @@
           closable
           :hit="item.hitState"
           type="primary"
-          @click.native="deleteTag($event, item)"
+          @close="deleteTag($event, item)"
           close-transition>{{ item.currentLabel }}</el-tag>
       </transition-group>
       <input
@@ -490,13 +490,11 @@
       },
 
       deleteTag(event, tag) {
-        if (event.target.tagName === 'I') {
-          let index = this.selected.indexOf(tag);
-          if (index > -1) {
-            this.selected.splice(index, 1);
-          }
-          event.stopPropagation();
+        let index = this.selected.indexOf(tag);
+        if (index > -1) {
+          this.selected.splice(index, 1);
         }
+        event.stopPropagation();
       },
 
       onInputChange() {
