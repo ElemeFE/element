@@ -1,5 +1,5 @@
 let nodeIdSeed = 0;
-import objectAssign from 'object-assign';
+import objectAssign from 'element-ui/src/utils/merge';
 
 const reInitChecked = function(node) {
   const siblings = node.childNodes;
