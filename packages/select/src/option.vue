@@ -3,7 +3,7 @@
     @mouseenter="hoverItem"
     @click.stop="selectOptionClick"
     class="el-select-dropdown__item"
-    v-show="queryPassed"
+    v-show="visible"
     :class="{ 'selected': itemSelected, 'is-disabled': disabled || groupDisabled, 'hover': parent.hoverIndex === index }">
     <slot>
       <span>{{ currentLabel }}</span>
@@ -40,7 +40,7 @@
       return {
         index: -1,
         groupDisabled: false,
-        queryPassed: true,
+        visible: true,
         hitState: false
       };
     },
@@ -97,8 +97,10 @@
       },
 
       queryChange(query) {
-        this.queryPassed = new RegExp(query, 'i').test(this.currentLabel);
-        if (!this.queryPassed) {
+        // query 里如果有正则中的特殊字符，需要先将这些字符转义
+        let parsedQuery = query.replace(/(\^|\(|\)|\[|\]|\$|\*|\+|\.|\?|\\|\{|\}|\|)/g, '\\$1');
+        this.visible = new RegExp(parsedQuery, 'i').test(this.currentLabel);
+        if (!this.visible) {
           this.parent.filteredOptionsCount--;
         }
       },
