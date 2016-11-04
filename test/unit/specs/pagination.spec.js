@@ -178,10 +178,12 @@ describe('Pagination', () => {
     });
 
     expect(vm.trigger).to.false;
-    vm.$el.querySelectorAll('li.el-select-dropdown__item')[1].click();
     setTimeout(_ => {
-      expect(vm.trigger).to.true;
-      done();
+      vm.$el.querySelectorAll('li.el-select-dropdown__item')[1].click();
+      setTimeout(_ => {
+        expect(vm.trigger).to.true;
+        done();
+      }, 50);
     }, 50);
   });
 
