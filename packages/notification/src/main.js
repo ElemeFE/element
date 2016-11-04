@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import { PopupManager } from 'vue-popup';
 let NotificationConstructor = Vue.extend(require('./main.vue'));
 
 let instance;
@@ -22,6 +23,7 @@ var Notification = function(options) {
   document.body.appendChild(instance.vm.$el);
   instance.vm.visible = true;
   instance.dom = instance.vm.$el;
+  instance.dom.style.zIndex = PopupManager.nextZIndex();
 
   let topDist = 0;
   for (let i = 0, len = instances.length; i < len; i++) {
