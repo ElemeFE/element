@@ -9,6 +9,7 @@ class TableLayout {
     this.columns = null;
     this.fit = true;
 
+    this.height = null;
     this.scrollX = false;
     this.scrollY = false;
     this.bodyWidth = null;
@@ -53,6 +54,8 @@ class TableLayout {
       height = Number(height);
     }
 
+    this.height = height;
+
     const el = this.table.$el;
     if (!isNaN(height) && el) {
       el.style.height = height + 'px';
@@ -66,7 +69,8 @@ class TableLayout {
     const { headerWrapper } = this.table.$refs;
     if (!headerWrapper) return;
     const headerHeight = this.headerHeight = headerWrapper.offsetHeight;
-    const bodyHeight = this.bodyHeight = height - headerHeight;
+    const bodyHeight = height - headerHeight;
+    if (this.height !== null && !isNaN(this.height)) this.bodyHeight = bodyHeight;
     this.fixedBodyHeight = this.scrollX ? bodyHeight - this.gutterWidth : bodyHeight;
     this.viewportHeight = this.scrollX ? height - this.gutterWidth : height;
   }
