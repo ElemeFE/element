@@ -140,7 +140,8 @@
 | action | 必选参数, 上传的地址 | string | — | — |
 | headers | 可选参数, 设置上传的请求头部 | object | — | — |
 | multiple | 可选参数, 是否支持多选文件 | boolean | — | — |
-| file | 可选参数, 上传的文件字段名 | string | — | file |
+| data | 可选参数, 上传时附带的额外参数 | object | — | — |
+| name | 可选参数, 上传的文件字段名 | string | — | file |
 | with-credentials | 支持发送 cookie 凭证信息 | boolean | — | false |
 | show-upload-list | 是否显示已上传文件列表 | boolean | — | true |
 | type | 上传控件类型 | string | select,drag | select |
