@@ -1,12 +1,20 @@
+<style>
+  .demo-box {
+    .el-date-editor + .el-date-editor {
+      margin-left: 10px;
+    }
+  }
+</style>
+
 ## Time Picker
 
-Used to pick a time.
+Use Time Picker for time input.
 
 ### Fixed time picker
 
 Provide a list of fixed time for users to choose.
 
-:::demo Use `el-time-select` label, assign start time, end time and time step with `start`, `end` and `step`.
+:::demo Use `el-time-select` label, then assign start time, end time and time step with `start`, `end` and `step`.
 ```html
 <el-time-select
   v-model="value1"
@@ -24,7 +32,7 @@ Provide a list of fixed time for users to choose.
 
 Can pick an arbitrary time.
 
-:::demo Use `el-time-picker` label, can limit the time range by using `selectableRange`.
+:::demo Use `el-time-picker` label, and you can limit the time range by using `selectableRange`.
 
 ```html
 <template>
@@ -51,7 +59,7 @@ Can pick an arbitrary time.
 
 ### Fixed time range
 
-If start time has been picked at first, then the end time will change accordingly.
+If start time is picked at first, then the end time will change accordingly.
 
 :::demo
 ```html
@@ -131,22 +139,24 @@ Can pick an arbitrary time range.
 </script>
 
 ### Attributes
-| Attribute      | Description          | Type      | Options                           | Default  |
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| readonly | Read only | boolean | — | false |
-| placeholder | Placeholder | string | — | — |
-| format | Time format | string | hour: `HH`, minute: `mm`, second: `ss` | 'HH:mm:ss' |
-| picker-options | Current time picker options, refer to the following table | object | — | {} |
+| readonly | if the picker is read only | boolean | — | false |
+| placeholder | placeholder | string | — | — |
+| format | format of the picker | string | hour `HH`, minute `mm`, second `ss` | HH:mm:ss |
+| value | value of the picker | date for Time Picker, and string for Time Select | hour `HH`, minute `mm`, second `ss` | HH:mm:ss |
+| align | alignment | left/center/right | left |
+| picker-options | additional options, check the table below | object | — | {} |
 
 ### Time Select Options
-| Attribute      | Description          | Type      | Options                           | Default  |
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| start | Start time | string | — | 09:00 |
-| end | End time | string | — | 18:00 |
-| step | Time step | string | — | 00:30 |
-| minTime | Minimum time, any time before this time will be unavailable | string | — | 00:00 |
+| start | start time | string | — | 09:00 |
+| end | end time | string | — | 18:00 |
+| step | time step | string | — | 00:30 |
+| minTime | minimum time, any time before this time will be disabled | string | — | 00:00 |
 
 ### Time Picker Options
-| Attribute      | Description          | Type      | Options                           | Default |
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| selectableRange | Available time range，e.g.<br>`'18:30:00 - 20:30:00'`<br>or pass an array<br>`['09:30:00 - 12:00:00', '14:30:00 - 18:30:00']` | string/array | — | — |
+| selectableRange | available time range，e.g.<br>`'18:30:00 - 20:30:00'`<br>or<br>`['09:30:00 - 12:00:00', '14:30:00 - 18:30:00']` | string/array | — | — |

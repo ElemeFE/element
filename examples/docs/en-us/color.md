@@ -85,8 +85,7 @@
 </style>
 
 ## Color
-
-To avoid visual differences, Element uses a specific set of palettes to specify colors to provide a consistent look and feel for the products you build.
+Element uses a specific set of palettes to specify colors to provide a consistent look and feel for the products you build.
 
 ### Tint Color
 
