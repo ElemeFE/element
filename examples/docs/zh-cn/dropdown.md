@@ -66,8 +66,8 @@
     <el-dropdown-item>黄金糕</el-dropdown-item>
     <el-dropdown-item>狮子头</el-dropdown-item>
     <el-dropdown-item>螺蛳粉</el-dropdown-item>
-    <el-dropdown-item>双皮奶</el-dropdown-item>
-    <el-dropdown-item>蚵仔煎</el-dropdown-item>
+    <el-dropdown-item disabled>双皮奶</el-dropdown-item>
+    <el-dropdown-item divided>蚵仔煎</el-dropdown-item>
   </el-dropdown-menu>
 </el-dropdown>
 ```
@@ -163,7 +163,9 @@
 | click  | `split-button` 为 true 时，点击左侧按钮的回调 | — |
 | command  | 点击菜单项触发的事件回调 | dropdown-item 的指令 |
 
-### Dropdown Attributes
+### Dropdown Menu Item Attributes
 | 参数          | 说明            | 类型            | 可选值                 | 默认值   |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
 | command       | 指令     | string          | — | — |
+| disabled      | 禁用     | boolean          | — | false |
+| divided       | 显示分割线     | boolean          | — | false |
