@@ -17,19 +17,19 @@
         paneStyle: {
           position: 'relative'
         },
-        key: ''
+        index: ''
       };
     },
 
     created() {
-      if (!this.key) {
-        this.key = this.$parent.$children.indexOf(this) + 1 + '';
+      if (!this.index) {
+        this.index = this.$parent.$children.indexOf(this) + 1 + '';
       }
     },
 
     computed: {
       show() {
-        return this.$parent.currentName === this.key;
+        return this.$parent.currentName === this.index;
       }
     },
 
@@ -41,21 +41,20 @@
       name: {
         immediate: true,
         handler(val) {
-          this.key = val;
+          this.index = val;
         }
       },
       '$parent.currentName'(newValue, oldValue) {
-        if (this.key === newValue) {
+        if (this.index === newValue) {
           this.transition = newValue > oldValue ? 'slideInRight' : 'slideInLeft';
         }
-        if (this.key === oldValue) {
+        if (this.index === oldValue) {
           this.transition = oldValue > newValue ? 'slideInRight' : 'slideInLeft';
         }
       }
     }
   };
 </script>
-
 <template>
   <div class="el-tab-pane" v-show="show && $slots.default">
     <slot></slot>
