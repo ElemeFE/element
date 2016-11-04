@@ -261,7 +261,7 @@ describe('Table', () => {
         },
 
         data() {
-          return { result: '' };
+          return { result: '', testData: this.testData };
         }
       }, true);
     };
@@ -356,6 +356,32 @@ describe('Table', () => {
         expect(vm.result[0]).to.have.property('name').to.equal(getTestData()[0].name);
         destroyVM(vm);
         done();
+      }, DELAY);
+    });
+
+    it('current-change', done => {
+      const vm = createTable('current-change');
+
+      setTimeout(_ => {
+        const cell = vm.$el.querySelectorAll('.el-table__body .cell')[2]; // first row
+
+        triggerEvent(cell.parentNode.parentNode, 'click');
+        expect(vm.result).to.length(2); // currentRow, oldCurrentRow
+        expect(vm.result[0]).to.have.property('name').to.equal(getTestData()[0].name);
+        expect(vm.result[1]).to.equal(null);
+
+        // clear data => current-change should fire again.
+        const oldRow = vm.result[0];
+        vm.testData = [];
+
+        setTimeout(() => {
+          expect(vm.result).to.length(2); // currentRow, oldCurrentRow
+          expect(vm.result[0]).to.equal(null);
+          expect(vm.result[1]).to.equal(oldRow);
+
+          destroyVM(vm);
+          done();
+        }, DELAY);
       }, DELAY);
     });
   });
@@ -819,6 +845,39 @@ describe('Table', () => {
         triggerEvent(tr, 'mouseleave', true, false);
         setTimeout(_ => {
           expect(tr.classList.contains('hover-row')).to.false;
+          destroyVM(vm);
+          done();
+        }, DELAY);
+      }, DELAY);
+    }, DELAY);
+  });
+
+  it('highlight-current-row', done => {
+    const vm = createVue({
+      template: `
+        <el-table :data="testData" highlight-current-row>
+          <el-table-column prop="name" label="片名" />
+          <el-table-column prop="release" label="发行日期" />
+          <el-table-column prop="director" label="导演" />
+          <el-table-column prop="runtime" label="时长（分）" />
+        </el-table>
+      `,
+
+      created() {
+        this.testData = getTestData();
+      }
+    }, true);
+    setTimeout(_ => {
+      const tr = vm.$el.querySelector('.el-table__body-wrapper tbody tr');
+      triggerEvent(tr, 'click', true, false);
+      setTimeout(_ => {
+        expect(tr.classList.contains('current-row')).to.be.true;
+        const rows = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr');
+
+        triggerEvent(rows[2], 'click', true, false);
+        setTimeout(_ => {
+          expect(tr.classList.contains('current-row')).to.be.false;
+          expect(rows[2].classList.contains('current-row')).to.be.true;
           destroyVM(vm);
           done();
         }, DELAY);

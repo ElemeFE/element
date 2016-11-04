@@ -898,6 +898,7 @@
 | stripe | 是否为斑马纹 table | boolean | — | false |
 | border | 是否带有纵向边框 | boolean | — | false |
 | fit | 列的宽度是否自撑开 | boolean | — | true |
+| highlight-current-row | 是否要高亮当前行 | boolean | - | false |
 | row-class-name | 行的 className 的回调。 | Function(row, index) | - | - |
 | row-key | 行数据的 Key，用来优化 Table 的渲染；在使用 reserve-selection 功能的情况下，该属性是必填的 | Function(row), String | - | - |
 
@@ -912,6 +913,7 @@
 | cell-click | 当某个单元格被点击时会触发该事件 | row, column, cell, event |
 | row-click | 当某一行被点击时会触发该事件 | row, event |
 | sort-change | 当表格的排序条件发生变化的时候会触发该事件 | { column, prop, order } |
+| current-change | 当表格的当前行发生变化的时候会触发该事件，如果要高亮当前行，请打开表格的 highlight-current-row 属性 | { column, prop, order } |
 
 ### Table Methods
 | 方法名 | 说明 | 参数 |
