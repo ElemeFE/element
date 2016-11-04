@@ -16,7 +16,6 @@
     background-color: #fff;
     transition: opacity 0.3s, transform .4s;
     overflow: hidden;
-    z-index: var(--index-popper);
 
     @e group {
       margin-left: 38px;
