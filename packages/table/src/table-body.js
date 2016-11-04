@@ -42,8 +42,8 @@ export default {
                       on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
                       on-mouseleave={ this.handleCellMouseLeave }>
                       {
-                        column.template
-                          ? column.template.call(this._renderProxy, h, { row, column, $index, store: this.store, _self: this.$parent.$vnode.context })
+                        column.renderCell
+                          ? column.renderCell.call(this._renderProxy, h, { row, column, $index, store: this.store, _self: this.$parent.$vnode.context })
                           : <div class="cell">{ this.getCellContent(row, column.property, column.id) }</div>
                       }
                     </td>
