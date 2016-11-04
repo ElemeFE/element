@@ -444,7 +444,7 @@
             this.resetScrollTop();
             if (this.options[this.hoverIndex].disabled === true ||
               this.options[this.hoverIndex].groupDisabled === true ||
-              !this.options[this.hoverIndex].queryPassed) {
+              !this.options[this.hoverIndex].visible) {
               this.navigateOptions('next');
             }
           }
@@ -456,7 +456,7 @@
             this.resetScrollTop();
             if (this.options[this.hoverIndex].disabled === true ||
               this.options[this.hoverIndex].groupDisabled === true ||
-              !this.options[this.hoverIndex].queryPassed) {
+              !this.options[this.hoverIndex].visible) {
               this.navigateOptions('prev');
             }
           }
