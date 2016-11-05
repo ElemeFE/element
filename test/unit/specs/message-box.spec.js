@@ -32,12 +32,12 @@ describe('MessageBox', () => {
     });
     setTimeout(() => {
       const msgbox = document.querySelector('.el-message-box__wrapper');
-      expect(msgbox.__vue__.value).to.true;
+      expect(msgbox.__vue__.$parent.value).to.true;
       expect(msgbox.querySelector('.el-message-box__title').textContent).to.equal('消息');
       expect(msgbox.querySelector('.el-message-box__message')
         .querySelector('p').textContent).to.equal('这是一段内容');
       MessageBox.close();
-      expect(msgbox.__vue__.value).to.false;
+      expect(msgbox.__vue__.$parent.value).to.false;
       done();
     }, 300);
   });
@@ -58,9 +58,9 @@ describe('MessageBox', () => {
     setTimeout(() => {
       document.querySelector('.v-modal').click();
       expect(document.querySelector('.el-message-box__wrapper')
-        .__vue__.value).to.true;
+        .__vue__.$parent.value).to.true;
       expect(document.querySelector('.el-message-box__wrapper')
-        .__vue__.type).to.equal('warning');
+        .__vue__.$parent.type).to.equal('warning');
       done();
     }, 300);
   });
@@ -74,7 +74,7 @@ describe('MessageBox', () => {
       document.querySelector('.el-message-box__wrapper')
         .querySelector('.el-button--primary').click();
       expect(document.querySelector('.el-message-box__wrapper')
-        .__vue__.value).to.false;
+        .__vue__.$parent.value).to.false;
       done();
     }, 200);
   });
@@ -87,7 +87,7 @@ describe('MessageBox', () => {
     });
     setTimeout(() => {
       expect(document.querySelector('.el-message-box__input')).to.exist;
-      const messageBox = document.querySelector('.el-message-box__wrapper').__vue__;
+      const messageBox = document.querySelector('.el-message-box__wrapper').__vue__.$parent;
       messageBox.inputValue = 'no';
       setTimeout(() => {
         expect(document.querySelector('.el-message-box__errormsg')
@@ -108,7 +108,7 @@ describe('MessageBox', () => {
         inputValidator: validator
       });
       setTimeout(() => {
-        const messageBox = document.querySelector('.el-message-box__wrapper').__vue__;
+        const messageBox = document.querySelector('.el-message-box__wrapper').__vue__.$parent;
         messageBox.inputValue = 'no';
         setTimeout(() => {
           expect(document.querySelector('.el-message-box__errormsg')
@@ -130,7 +130,7 @@ describe('MessageBox', () => {
         inputValidator: validator
       });
       setTimeout(() => {
-        const messageBox = document.querySelector('.el-message-box__wrapper').__vue__;
+        const messageBox = document.querySelector('.el-message-box__wrapper').__vue__.$parent;
         messageBox.inputValue = 'no';
         setTimeout(() => {
           expect(document.querySelector('.el-message-box__errormsg')
