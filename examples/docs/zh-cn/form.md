@@ -16,7 +16,7 @@
           }
         }, 1000);
       };
-      var validaePass = (rule, value, callback) => {
+      var validatePass = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请输入密码'));
         } else {
@@ -26,7 +26,7 @@
           callback();
         }
       };
-      var validaePass2 = (rule, value, callback) => {
+      var validatePass2 = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请再次输入密码'));
         } else if (value !== this.ruleForm2.pass) {
@@ -111,11 +111,11 @@
         rules2: {
           pass: [
             { required: true, message: '请输入密码', trigger: 'blur' },
-            { validator: validaePass }
+            { validator: validatePass }
           ],
           checkPass: [
             { required: true, message: '请再次输入密码', trigger: 'blur' },
-            { validator: validaePass2 }
+            { validator: validatePass2 }
           ],
           age: [
             { required: true, message: '请填写年龄', trigger: 'blur' },
@@ -369,7 +369,7 @@
 
 当垂直方向空间受限且表单较简单时，可以在一行内放置表单。
 
-::: demo Form 组件的 `type` 属性可以控制表单的类型，当设为 `inline` 时可以让表单域变为行内的表单域
+::: demo 设置 `inline` 属性可以让表单域变为行内的表单域
 ```html
 <el-form :inline="true" :model="formInline" @submit.native.prevent="onSubmit" class="demo-form-inline">
   <el-form-item>
@@ -570,7 +570,8 @@
         },
         rules: {
           name: [
-            { required: true, message: '请输入活动名称', trigger: 'blur' }
+            { required: true, message: '请输入活动名称', trigger: 'blur' },
+            { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
           ],
           region: [
             { required: true, message: '请选择活动区域', trigger: 'change' }
@@ -650,7 +651,7 @@
           }
         }, 1000);
       };
-      var validaePass = (rule, value, callback) => {
+      var validatePass = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请输入密码'));
         } else {
@@ -660,7 +661,7 @@
           callback();
         }
       };
-      var validaePass2 = (rule, value, callback) => {
+      var validatePass2 = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请再次输入密码'));
         } else if (value !== this.ruleForm2.pass) {
@@ -678,11 +679,11 @@
         rules2: {
           pass: [
             { required: true, message: '请输入密码', trigger: 'blur' },
-            { validator: validaePass }
+            { validator: validatePass }
           ],
           checkPass: [
             { required: true, message: '请再次输入密码', trigger: 'blur' },
-            { validator: validaePass2 }
+            { validator: validatePass2 }
           ],
           age: [
             { required: true, message: '请填写年龄', trigger: 'blur' },
