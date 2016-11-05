@@ -1,7 +1,7 @@
 <template>
-  <div class="el-message-box__wrapper">
-    <transition name="msgbox-fade">
-      <div class="el-message-box" v-show="value">
+  <transition name="msgbox-fade">
+    <div class="el-message-box__wrapper" v-show="value" @click.self="handleWrapperClick">
+      <div class="el-message-box">
         <div class="el-message-box__header" v-if="title !== ''">
           <div class="el-message-box__title">{{ title }}</div>
           <i class="el-message-box__close el-icon-close" @click="handleAction('cancel')" v-if="showClose"></i>
@@ -19,8 +19,8 @@
           <el-button ref="confirm" :class="[ confirmButtonClasses ]" v-show="showConfirmButton" @click.native="handleAction('confirm')">{{ confirmButtonText }}</el-button>
         </div>
       </div>
-    </transition>
-  </div>
+    </div>
+  </transition>
 </template>
 
 <script type="text/babel">
@@ -98,6 +98,12 @@
 
         if (!this.transition) {
           this.doAfterClose();
+        }
+      },
+
+      handleWrapperClick() {
+        if (this.closeOnClickModal) {
+          this.close();
         }
       },
 
