@@ -3,6 +3,7 @@ var config = require('./config');
 var md = require('markdown-it')();
 var striptags = require('./strip-tags');
 var slugify = require('transliteration').slugify;
+var isProd = process.env.NODE_ENV === 'production';
 
 function convert(str) {
   str = str.replace(/(&#x)(\w{4});/gi, function($0) {
@@ -12,7 +13,10 @@ function convert(str) {
 }
 
 cooking.set({
-  entry: './examples/entry.js',
+  entry: isProd ? {
+    docs: './examples/entry.js',
+    'element-ui': './src/index.js'
+  } : './examples/entry.js',
   dist: './examples/element-ui/',
   template: './examples/index.tpl',
   publicPath: process.env.CI_ENV || '/',
@@ -23,9 +27,10 @@ cooking.set({
     publicPath: '/'
   },
   minimize: true,
-  chunk: true,
+  chunk: isProd ? {
+    'common': { name: ['element-ui', 'manifest'] }
+  } : false,
   extractCSS: true,
-  sourceMap: true,
   alias: config.alias,
   extends: ['vue2', 'lint'],
   postcss: config.postcss
@@ -84,12 +89,10 @@ var wrap = function(render) {
   };
 };
 
-if (process.env.NODE_ENV === 'production') {
+if (isProd) {
   cooking.add('externals.vue', 'Vue');
   cooking.add('externals.vue-router', 'VueRouter');
 }
 
 cooking.add('vue.preserveWhitespace', false);
-cooking.add('output.chunkFilename', 'element.[id].[chunkhash:7].js');
-cooking.add('output.filename', 'element.[name].[hash:7].js');
 module.exports = cooking.resolve();
