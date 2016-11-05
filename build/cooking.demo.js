@@ -91,5 +91,5 @@ if (process.env.NODE_ENV === 'production') {
 
 cooking.add('vue.preserveWhitespace', false);
 cooking.add('output.chunkFilename', 'element.[id].[chunkhash:7].js');
-cooking.add('output.filename', 'element.[name].[chunkhash:7].js');
+cooking.add('output.filename', 'element.[name].[hash:7].js');
 module.exports = cooking.resolve();
