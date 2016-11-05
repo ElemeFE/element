@@ -1,87 +1,175 @@
-# Dropdown 
-Toggleable, contextual menu for displaying lists of links and binding your action on it.
+<style>
+  .demo-box {
+    .el-dropdown {
+      vertical-align: top;
 
+      & + .el-dropdown {
+        margin-left: 15px;
+      }
+    }
+    .el-dropdown-link {
+      cursor: pointer;
+      color: #20a0ff;
+    }
+    .el-icon-caret-bottom {
+      font-size: 12px;
+    }
+  }
+
+  .block-col-2 {
+    margin: -24px;
+
+    .el-col {
+      padding: 30px 0;
+      text-align: center;
+      border-right: 1px solid #eff2f6;
+
+      &:last-child {
+        border-right: 0;
+      }
+    }
+  }
+
+ .demo-dropdown .demonstration {
+   display: block;
+   color: #8492a6;
+   font-size: 14px;
+   margin-bottom: 20px;
+ }
+</style>
+
+<script>
+  export default {
+    methods: {
+      handleClick() {
+        alert('button click');
+      }
+    }
+  }
+</script>
+# Dropdown 
+Toggleable menu for displaying lists of links and actions.
 
 ---
 
-## How to use
-Hover on the dropdown menu to unfold it and do more actions 
+## Basic usage
+Hover on the dropdown menu to unfold it for more actions. 
 
-:::demo It has an attribute `text`, change it to set the button content. And it consists of a main button and a group containing several dropdown button. You could bind event on the primary button `el-dropdown` by event name `mainClick`.  Dropdown list will show when hover on main button by default, you don't need to click it .
+:::demo The triggering element is rendered by the default `slot`, and the dropdown part is rendered by the `slot` named `dropdown`. By default, dropdown list shows when you hover on the triggering element without having to click it.
 
 ```html
-<el-dropdown text="dropdown list" type="text" :icon-separate="false" @mainclick="handleMainClick()">
-  <el-dropdown-item>link</el-dropdown-item>
-  <el-dropdown-item>other link</el-dropdown-item>
-  <el-dropdown-item>action</el-dropdown-item>
-  <el-dropdown-item>other action</el-dropdown-item>
-  <el-dropdown-item>more</el-dropdown-item>
+<el-dropdown>
+  <span class="el-dropdown-link">
+    Dropdown List<i class="el-icon-caret-bottom el-icon--right"></i>
+  </span>
+  <el-dropdown-menu slot="dropdown">
+    <el-dropdown-item>Action 1</el-dropdown-item>
+    <el-dropdown-item>Action 2</el-dropdown-item>
+    <el-dropdown-item>Action 3</el-dropdown-item>
+    <el-dropdown-item disabled>Action 4</el-dropdown-item>
+    <el-dropdown-item divided>Action 5</el-dropdown-item>
+  </el-dropdown-menu>
 </el-dropdown>
 ```
 
 :::
 
-## Trigger component 
+## Triggering element
 
-Use the button to trigger the component to display the dropdown list.
+Use the button to trigger the dropdown list.
 
-
-:::demo Set attribute `icon-separate` to get a dropdown list without the main button.
-If you wanna insert a seperator line between item three and item four, just add a class `divider` to item four.
+:::demo Use `split-button` to split the triggering element into a button group with the left button being a normal button and right one the actual triggering target.
+If you wanna insert a separator line between item three and item four, just add a class `divider` to item four.
 
 ```html
-<el-dropdown text="more menus" type="primary" :icon-separate="false">
-  <el-dropdown-item>item one</el-dropdown-item>
-  <el-dropdown-item>item two</el-dropdown-item>
-  <el-dropdown-item>item three</el-dropdown-item>
-  <el-dropdown-item class="divider">item four</el-dropdown-item>
+<el-dropdown>
+  <el-button type="primary">
+    Dropdown List<i class="el-icon-caret-bottom el-icon--right"></i>
+  </el-button>
+  <el-dropdown-menu slot="dropdown">
+    <el-dropdown-item>Action 1</el-dropdown-item>
+    <el-dropdown-item>Action 2</el-dropdown-item>
+    <el-dropdown-item>Action 3</el-dropdown-item>
+    <el-dropdown-item>Action 4</el-dropdown-item>
+    <el-dropdown-item>Action 5</el-dropdown-item>
+  </el-dropdown-menu>
 </el-dropdown>
-
-<el-dropdown text="main button" type="primary" @mainclick="handleMainClick()">
-  <el-dropdown-item>item one</el-dropdown-item>
-  <el-dropdown-item>item two</el-dropdown-item>
-  <el-dropdown-item>item three</el-dropdown-item>
-  <el-dropdown-item>item four</el-dropdown-item>
+<el-dropdown split-button type="primary" @click="handleClick">
+  Dropdown List
+  <el-dropdown-menu slot="dropdown">
+    <el-dropdown-item>Action 1</el-dropdown-item>
+    <el-dropdown-item>Action 2</el-dropdown-item>
+    <el-dropdown-item>Action 3</el-dropdown-item>
+    <el-dropdown-item>Action 4</el-dropdown-item>
+    <el-dropdown-item>Action 5</el-dropdown-item>
+  </el-dropdown-menu>
 </el-dropdown>
 
 ```
 
 ### How to trigger
-Click main button or hover on it. Default is hover.
 
-:::demo Set attribute `trigger` as 'click'.
+Click the triggering element or hover on it.
+
+:::demo Use the attribute `trigger`. By default, it is `hover`.
 
 ```html
-<div class="block">
-  <span class="demonstration">hover to trigger</span>
-  <el-dropdown text="dropdown list" type="text" :icon-separate="false" trigger="hover">
-    <el-dropdown-item>item one</el-dropdown-item>
-    <el-dropdown-item>item two</el-dropdown-item>
-    <el-dropdown-item>item three</el-dropdown-item>
-    <el-dropdown-item>item four</el-dropdown-item>
-  </el-dropdown>
-</div>
-<div class="block">
-  <span class="demonstration">click to trigger</span>
-  <el-dropdown text="dropdown list" type="text" :icon-separate="false" trigger="click">
-    <el-dropdown-item>item one</el-dropdown-item>
-    <el-dropdown-item>item two</el-dropdown-item>
-    <el-dropdown-item>item three</el-dropdown-item>
-    <el-dropdown-item class="divider">item four</el-dropdown-item>
-  </el-dropdown>
-</div>
-
+<el-row class="block-col-2">
+  <el-col :span="12">
+    <span class="demonstration">hover to trigger</span>
+    <el-dropdown>
+      <span class="el-dropdown-link">
+        Dropdown List<i class="el-icon-caret-bottom el-icon--right"></i>
+      </span>
+      <el-dropdown-menu slot="dropdown">
+        <el-dropdown-item>Action 1</el-dropdown-item>
+        <el-dropdown-item>Action 2</el-dropdown-item>
+        <el-dropdown-item>Action 3</el-dropdown-item>
+        <el-dropdown-item>Action 4</el-dropdown-item>
+        <el-dropdown-item>Action 5</el-dropdown-item>
+      </el-dropdown-menu>
+    </el-dropdown>
+  </el-col>
+  <el-col :span="12">
+    <span class="demonstration">click to trigger</span>
+    <el-dropdown trigger="click">
+      <span class="el-dropdown-link">
+        Dropdown List<i class="el-icon-caret-bottom el-icon--right"></i>
+      </span>
+      <el-dropdown-menu slot="dropdown">
+        <el-dropdown-item>Action 1</el-dropdown-item>
+        <el-dropdown-item>Action 2</el-dropdown-item>
+        <el-dropdown-item>Action 3</el-dropdown-item>
+        <el-dropdown-item>Action 4</el-dropdown-item>
+        <el-dropdown-item>Action 5</el-dropdown-item>
+      </el-dropdown-menu>
+    </el-dropdown>
+  </el-col>
+</el-row>
 ```
 :::
-### Attributes
-| Attribute          | Description            | Type            | Options                 | Default   |
+### Dropdown Attributes
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
-| text          | main button text      | string          |          —             |    —     |
-| type          | main button type, refer to  `Button` Component    | string  |          —             |    —     |
-| trigger       | how to trigger     | string  |    hover,click  |  hover |
-| icon-separate | display independent main button or not | boolean         |     —       | false   |
+| type          | menu button type, refer to `Button` Component, only works when `split-button` is true  | string  |          —             |    —     |
+| size          | menu button size, refer to `Button` Component, only works when `split-button` is true  | string  |          —             |    —     |
+| split-button | whether a button group is displayed | boolean         |     —       | false   |
 | size          | component size, refer to `Button` component     | string          | large, small, mini  |  —  |
-| menu-align    | horizontal alignment     | string          | start, end  | end |
+| menu-align    | horizontal alignment     | string          | start/end  | end |
+| trigger       | how to trigger     | string  |    hover/click  |  hover |
+
+### Dropdown Events
+| Event Name | Description | Parameters |
+|---------- |-------- |---------- |
+| click | if `split-button` is `true`, triggers when left button is clicked | — |
+| command | triggers when a dropdown item is clicked | the command dispatched from the dropdown item |
+
+### Dropdown Menu Item Attributes
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
+|-------------  |---------------- |---------------- |---------------------- |-------- |
+| command       | a command to be dispatched to Dropdown's `command` callback | string  |          —             |    —     |
+| disabled      | whether the item is disabled  | boolean  |          —             |    false     |
+| divided       | whether a divider is displayed  | boolean  |          —             |    false     |
 
 
 
