@@ -10,7 +10,29 @@ cooking.set({
   alias: Object.assign(config.alias, {
     'vue$': 'vue/dist/vue.js'
   }),
-  postcss: config.postcss,
+  postcss: function(webapck) {
+    return [
+      require('postcss-salad')({
+        browsers: ['ie > 8', 'last 2 versions', 'Chrome > 24'],
+        features: {
+          'partialImport': {
+            addDependencyTo: webapck
+          },
+          'bem': {
+            'shortcuts': {
+              'component': 'b',
+              'modifier': 'm',
+              'descendent': 'e'
+            },
+            'separators': {
+              'descendent': '__',
+              'modifier': '--'
+            }
+          }
+        }
+      })
+    ];
+  },
   sourceMap: '#inline-source-map'
 });
 
