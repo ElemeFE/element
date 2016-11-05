@@ -47,7 +47,7 @@ exports.jsexclude = /node_modules|utils\/popper\.js|utils\/date.\js/;
 exports.postcss = function(webapck) {
   return [
     require('postcss-salad')({
-      browser: ['ie > 8', 'last 2 version'],
+      browsers: ['ie > 8', 'last 2 versions'],
       features: {
         'partialImport': {
           addDependencyTo: webapck
