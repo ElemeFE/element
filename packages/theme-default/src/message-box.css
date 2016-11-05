@@ -7,10 +7,9 @@
 @component-namespace el {
 
   @b message-box {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate3d(-50%, -50%, 0);
+    text-align: left;
+    display: inline-block;
+    vertical-align: middle;
     background-color: #fff;
     width: var(--msgbox-width);
     border-radius: var(--msgbox-border-radius);
@@ -18,8 +17,24 @@
     -webkit-user-select: none;
     overflow: hidden;
     backface-visibility: hidden;
+    @e wrapper {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      text-align: center;
+      &::after {
+        content: "";
+        display: inline-block;
+        height: 100%;
+        width: 0;
+        vertical-align: middle;
+      }
+    }
 
     @e header {
+      position: relative;
       padding: 20px 20px 0;
     }
 
@@ -128,22 +143,22 @@
 
 @keyframes msgbox-fade-in {
   0% {
-    transform: translate3d(-50%, calc(-50% - 20px), 0);
+    transform: translate3d(0, -20px, 0);
     opacity: 0;
   }
   100% {
-    transform: translate3d(-50%, -50%, 0);
+    transform: translate3d(0, 0, 0);
     opacity: 1;
   }
 }
 
 @keyframes msgbox-fade-out {
   0% {
-    transform: translate3d(-50%, -50%, 0);
+    transform: translate3d(0, 0, 0);
     opacity: 1;
   }
   100% {
-    transform: translate3d(-50%, calc(-50% - 20px), 0);
+    transform: translate3d(0, -20px, 0);
     opacity: 0;
   }
 }
