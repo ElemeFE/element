@@ -4,20 +4,20 @@
       return {
         gridData: [{
           date: '2016-05-02',
-          name: 'Tiger Wang',
-          address: 'Putuo District of Shanghai Jinsha River Road 1518 Lane'
+          name: 'John Smith',
+          address: 'No.1518,  Jinshajiang Road, Putuo District'
         }, {
           date: '2016-05-04',
-          name: 'Tiger Wang',
-          address: 'Putuo District of Shanghai Jinsha River Road 1518 Lane'
+          name: 'John Smith',
+          address: 'No.1518,  Jinshajiang Road, Putuo District'
         }, {
           date: '2016-05-01',
-          name: 'Tiger Wang',
-          address: 'Putuo District of Shanghai Jinsha River Road 1518 Lane'
+          name: 'John Smith',
+          address: 'No.1518,  Jinshajiang Road, Putuo District'
         }, {
           date: '2016-05-03',
-          name: 'Tiger Wang',
-          address: 'Putuo District of Shanghai Jinsha River Road 1518 Lane'
+          name: 'John Smith',
+          address: 'No.1518,  Jinshajiang Road, Putuo District'
         }],
         dialogVisible: false,
         dialogTinyVisible: false,
@@ -68,13 +68,13 @@
 </style>
 ## Dialog
 
-Informs users and carries associated action while preserving the current page state.
+Informs users while preserving the current page state.
 
-### How to use
+### Basic usage
 
-Dialog Pop-up a dialog box, and it's suitable for the scene which needs to be more customizable.
+Dialog pops up a dialog box, and it's quite customizable.
 
-:::demo You should set the `v-model` attribute which can accept `Boolean` type, and shows Dialog when set as `true`. The Dialog has two parts: `body` and `footer`. If you want to use  `footer`, you should set `slot` with value `footer`. You can also use `title` attribute to define titles. The `title` attribute is optional, and its default value is nil. This example has explicitly changed the value of `v-model` to show Dialog. In addition, we also provide `open` and `close` method for Dialog, you can call them to open/close the  Dialog.
+:::demo Set the `v-model` attribute with a `Boolean`, and Dialog shows when it is `true`. The Dialog has two parts: `body` and `footer`, and the latter requires a `slot` named `footer`. The optional `title` attribute (empty by default) is for defining a title. This example explicitly changes the value of `v-model` to toggle Dialog. In addition, we also provide `open` and `close` method, which you can call to open/close the Dialog.
 
 ```html
 <el-button type="text" @click.native="dialogVisible = true">click to open the Dialog</el-button>
@@ -82,8 +82,8 @@ Dialog Pop-up a dialog box, and it's suitable for the scene which needs to be mo
 <el-dialog title="tips" v-model="dialogVisible" size="tiny">
   <span>This is a message</span>
   <span slot="footer" class="dialog-footer">
-    <el-button @click.native="dialogVisible = false">cancel</el-button>
-    <el-button type="primary" @click.native="dialogVisible = false">confirm</el-button>
+    <el-button @click.native="dialogVisible = false">Cancel</el-button>
+    <el-button type="primary" @click.native="dialogVisible = false">Confirm</el-button>
   </span>
 </el-dialog>
 ```
@@ -91,24 +91,24 @@ Dialog Pop-up a dialog box, and it's suitable for the scene which needs to be mo
 
 ### Customizations
 
-The content of Dialog component can be anything, even a table or a form. This example shows how to use Element Table and Form Components with Dialog。
+The content of Dialog can be anything, even a table or a form. This example shows how to use Element Table and Form with Dialog。
 
 :::demo
 
 ```html
 <!-- Table -->
-<el-button type="text" @click.native="dialogTableVisible = true" type="text">open the Dialog that nested with table</el-button>
+<el-button type="text" @click.native="dialogTableVisible = true" type="text">open a Table nested Dialog</el-button>
 
 <el-dialog title="Shipping address" v-model="dialogTableVisible">
   <el-table :data="gridData">
-    <el-table-column property="date" label="date" width="150"></el-table-column>
-    <el-table-column property="name" label="name" width="200"></el-table-column>
-    <el-table-column property="address" label="address"></el-table-column>
+    <el-table-column property="date" label="Date" width="150"></el-table-column>
+    <el-table-column property="name" label="Name" width="200"></el-table-column>
+    <el-table-column property="address" label="Address"></el-table-column>
   </el-table>
 </el-dialog>
 
 <!-- Form -->
-<el-button type="text" @click.native="dialogFormVisible = true" type="text">open a Dialog with nested form</el-button>
+<el-button type="text" @click.native="dialogFormVisible = true" type="text">open a Form nested Dialog</el-button>
 
 <el-dialog title="Shipping address" v-model="dialogFormVisible">
   <el-form :model="form">
@@ -123,8 +123,8 @@ The content of Dialog component can be anything, even a table or a form. This ex
     </el-form-item>
   </el-form>
   <span slot="footer" class="dialog-footer">
-    <el-button @click.native="dialogFormVisible = false">cancel</el-button>
-    <el-button type="primary" @click.native="dialogFormVisible = false">confirm</el-button>
+    <el-button @click.native="dialogFormVisible = false">Cancel</el-button>
+    <el-button type="primary" @click.native="dialogFormVisible = false">Confirm</el-button>
   </span>
 </el-dialog>
 ```
@@ -132,27 +132,35 @@ The content of Dialog component can be anything, even a table or a form. This ex
 
 ### Attributes
 
-| Attribute      | Description          | Type      | Options                           | Default  |
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | title     | title of Dialog | string    | —                               | —      |
 | size      | size of Dialog | string    | tiny/small/large/full | small |
-| modal     | Whether a mask layer is required | boolean   | — | true |
-| custom-class      | Custom class name of Dialog | string    | — | — |
-| close-on-click-modal | Whether modal can be clicked to close the Dialog | boolean    | — | true |
-| close-on-press-escape | Whether ESC can be pressed to close the Dialog | boolean    | — | true |
+| top      | value for `top` of Dialog CSS, works when `size` is not `full` | string    | — | 15% |
+| modal     | whether a mask is displayed | boolean   | — | true |
+| lock-scroll     | whether scroll of body is disabled while Dialog is displayed | boolean   | — | true |
+| custom-class      | custom class names for Dialog | string    | — | — |
+| close-on-click-modal | whether the Dialog can be closed by clicking the mask | boolean    | — | true |
+| close-on-press-escape | whether the Dialog can be closed by pressing ESC | boolean    | — | true |
 
 ### Slot
 
 | Name | Description |
 |------|--------|
 | — | content of Dialog |
-| footer | content of the button operating area of Dialog |
+| footer | content of the Dialog footer |
 
-### Method
-Each `el-dialog` instance has following methods that can be used to open/close the instance without explicitly changing the value of `v-model`: 
+### Methods
+Each `el-dialog` instance has the following methods that can be used to open/close the instance without explicitly changing the value of `v-model`: 
 
 | Method | Description |
 |------|--------|
 | open | open the current instance |
 | close | close the current instance |
+
+### Events
+| Event Name | Description | Parameters |
+|---------- |-------- |---------- |
+| open | triggers when the Dialog opens | — |
+| close | triggers when the Dialog closes | — |
 
