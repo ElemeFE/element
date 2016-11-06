@@ -108,6 +108,7 @@
 ```
 :::
 <script>
+  import { addClass } from 'wind-dom/src/class';
   export default {
     methods: {
       handleSizeChange(val) {
@@ -122,8 +123,8 @@
         let demos = document.querySelectorAll('.source');
         let firstDemo = demos[0];
         let lastDemo = demos[demos.length - 1];
-        firstDemo.classList.add('first');
-        lastDemo.classList.add('last');
+        addClass(firstDemo, 'first');
+        addClass(lastDemo, 'last');
       });
     }
   }
@@ -131,15 +132,16 @@
 <style>
   .demo-pagination .source.first {
     padding: 0;
-    display: flex;
   }
 
   .demo-pagination .first .block {
-    display: inline-block;
     padding: 30px 0;
     text-align: center;
     border-right: solid 1px #EFF2F6;
-    flex: 1;
+    float: left;
+    width: 50%;
+    box-sizing: border-box;
+
     &:last-child {
       border-right: none;
     }
