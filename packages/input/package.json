@@ -11,7 +11,7 @@
   ],
   "author": "haiping.zeng <haiping.zeng@ele.me>",
   "license": "MIT",
-  "repository": "https://github.com/element-component/element/tree/master/packages/input",
+  "repository": "https://github.com/ElemeFE/element/tree/master/packages/input",
   "devDependencies": {
   }
 }
