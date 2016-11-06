@@ -7,6 +7,47 @@
     }
   };
 </script>
+<style>
+  .demo-tooltip {
+    .el-tooltip + .el-tooltip {
+      margin-left: 15px;
+    }
+    .box {
+      width: 400px;
+
+      .top {
+        text-align: center;
+      }
+
+      .left {
+        float: left;
+        width: 60px;
+      }
+
+      .right {
+        float: right;
+        width: 60px;
+      }
+
+      .bottom {
+        clear: both;
+        text-align: center;
+      }
+
+      .item {
+        margin: 4px;
+      }
+
+      .left .el-tooltip__popper,
+      .right .el-tooltip__popper {
+        padding: 8px 10px;
+      }
+      .el-tooltip {
+        margin-left: 0;
+      }
+    }
+  }
+</style>
 
 ## Tooltip 文字提示
 
@@ -19,40 +60,6 @@
 :::demo 使用`content`属性来决定`hover`时的提示信息。由`placement`属性决定展示效果：`placement`属性值为：`方向-对齐位置`；四个方向：`top`、`left`、`right`、`bottom`；三种对齐位置：`start`, `end`，默认为空。如`placement="left-end"`，则提示信息出现在目标元素的左侧，且提示信息的底部与目标元素的底部对齐。
 
 ```html
-<style>
-  .box {
-    width: 400px;
-
-    .top {
-      text-align: center;
-    }
-
-    .left {
-      float: left;
-      width: 60px;
-    }
-
-    .right {
-      float: right;
-      width: 60px;
-    }
-
-    .bottom {
-      clear: both;
-      text-align: center;
-    }
-
-    .item {
-      margin: 4px;
-    }
-
-    .left .el-tooltip__popper,
-    .right .el-tooltip__popper {
-      padding: 8px 10px;
-    }
-  }
-</style>
-
 <div class="box">
   <div class="top">
     <el-tooltip class="item" effect="dark" content="Top Left 提示文字" placement="top-start">
