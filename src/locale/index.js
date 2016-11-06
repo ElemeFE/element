@@ -1,13 +1,19 @@
 import defaultLang from 'element-ui/src/locale/lang/zh-cn';
 import Vue from 'vue';
+import deepmerge from 'deepmerge';
 import Format from './format';
 
 const format = Format(Vue);
 let lang = defaultLang;
+let merged = false;
 
 export const $t = function(path, options) {
   const vuei18n = Object.getPrototypeOf(this || Vue).$t;
   if (typeof vuei18n === 'function') {
+    if (!merged) {
+      merged = true;
+      Vue.locale(Vue.config.lang, deepmerge(lang, Vue.locale(Vue.config.lang), { clone: true }));
+    }
     return vuei18n.apply(this, [path, options]);
   }
   const array = path.split('.');
