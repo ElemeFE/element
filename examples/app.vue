@@ -118,6 +118,7 @@
     name: 'app',
     methods: {
       renderAnchorHref() {
+        if (/changelog/g.test(location.href)) return;
         const anchors = document.querySelectorAll('h2 a,h3 a');
         const basePath = location.href.split('#').splice(0, 2).join('#');
 

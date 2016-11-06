@@ -14,7 +14,7 @@
         color: #20a0ff;
       }
     }
-    h2 {
+    .heading {
       margin-bottom: 40px;
     }
     .timeline {
@@ -52,7 +52,7 @@
             height: @width;
             background-color: #20a0ff;
             border: 0;
-          }          
+          }
         }
       }
 
@@ -88,6 +88,13 @@
           box-sizing: border-box;
           background-color: #fff;
         }
+
+        a {
+          opacity: 1;
+          float: none;
+          margin-left: 0;
+          color: inherit;
+        }
       }
       h4 {
         margin: 50px 0 10px;
@@ -109,12 +116,12 @@
 </style>
 <template>
   <div class="page-changelog">
-    <h2>
+    <div class="heading">
       <el-button class="fr">
         <a href="https://github.com/ElemeFE/element/releases" target="_blank">Github Releases</a>
       </el-button>
       更新日志
-    </h2>
+    </div>
     <ul class="timeline" ref="timeline">
     </ul>
     <change-log ref="changeLog"></change-log>
@@ -132,16 +139,25 @@
       };
     },
     mounted() {
-      var changeLog = this.$refs.changeLog;
-      var changeLogNodes = changeLog.$el.children;
-      var fragments = '<li>' + changeLogNodes[1].outerHTML;
+      const changeLog = this.$refs.changeLog;
+      const changeLogNodes = changeLog.$el.children;
+      let a = changeLogNodes[1].querySelector('a');
+      a && a.remove();
+      let release = changeLogNodes[1].textContent.trim();
+      let fragments = `<li><h3><a href="https://github.com/ElemeFE/element/releases/tag/v${release}" target="_blank">${release}</a></h3>`;
 
       for (let len = changeLogNodes.length, i = 2; i < len; i++) {
         let node = changeLogNodes[i];
-        fragments += node.tagName !== 'H3'
-          ? changeLogNodes[i].outerHTML
-          : `</li><li>${changeLogNodes[i].outerHTML}`;
+        a = changeLogNodes[i].querySelector('a');
+        a && a.remove();
+        if (node.tagName !== 'H3') {
+          fragments += changeLogNodes[i].outerHTML;
+        } else {
+          release = changeLogNodes[i].textContent.trim();
+          fragments += `</li><li><h3><a href="https://github.com/ElemeFE/element/releases/tag/v${release}" target="_blank">${release}</a></h3>`;
+        }
       }
+      fragments = fragments.replace(/#(\d+)/g, '<a href="https://github.com/ElemeFE/element/issues/$1" target="_blank">#$1</a>');
       this.$refs.timeline.innerHTML = `${fragments}</li>`;
 
       changeLog.$el.remove();
