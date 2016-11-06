@@ -39,6 +39,11 @@
       return {
         num1: 1
       };
+    },
+    methods: {
+      handleChange(value) {
+        console.log(value);
+      }
     }
   };
 </script>
@@ -50,7 +55,18 @@
 :::demo `disabled`属性接受一个`Boolean`，设置为`true`即可禁用整个组件，如果你只需要控制数值在某一范围内，可以设置`min`属性和`max`属性，不设置`min`和`max`时，最小值为 0。
 
 ```html
-<el-input-number v-model="num2" :disabled="true"></el-input-number>
+<template>
+  <el-input-number v-model="num2" :disabled="true"></el-input-number>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        num2: 1
+      }
+    }
+  };
+</script>
 ```
 :::
 
@@ -61,7 +77,18 @@
 :::demo 设置`step`属性可以控制步长，接受一个`Number`。
 
 ```html
-<el-input-number v-model="num3" :step="2"></el-input-number>
+<template>
+  <el-input-number v-model="num3" :step="2"></el-input-number>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        num3: 5
+      }
+    }
+  };
+</script>
 ```
 :::
 
