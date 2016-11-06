@@ -13,18 +13,18 @@
       this.$nextTick(() => {
         let firstDemo = document.querySelector('.source');
         firstDemo.style.padding = '0';
-        firstDemo.style.display = 'flex';
       });
     }
   }
 </script>
 <style>
   .demo-rate .block {
-    display: inline-block;
     padding: 30px 0;
     text-align: center;
     border-right: solid 1px #EFF2F6;
-    flex: 1;
+    float: left;
+    width: 50%;
+    box-sizing: border-box;
     &:last-child {
       border-right: none;
     }

@@ -1,4 +1,5 @@
 <script>
+  import { addClass } from 'wind-dom/src/class';
   export default {
     data() {
       return {
@@ -16,7 +17,7 @@
       this.$nextTick(() => {
         let demos = document.querySelectorAll('.source');
         let thirdDemo = demos[2];
-        thirdDemo.classList.add('intro-block');
+        addClass(thirdDemo, 'intro-block');
       });
     }
   }
