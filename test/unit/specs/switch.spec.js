@@ -49,12 +49,9 @@ describe('Switch', () => {
     }, true);
 
     const core = vm.$el.querySelector('.el-switch__core');
-    const button = vm.$el.querySelector('.el-switch__button');
     core.click();
     Vue.nextTick(() => {
       expect(vm.value).to.equal(false);
-      expect(getComputedStyle(core).backgroundColor).to.equal('rgb(192, 204, 218)');
-      expect(/2px, 2px/.test(button.style.transform)).to.true;
       core.click();
       expect(vm.value).to.equal(true);
       done();

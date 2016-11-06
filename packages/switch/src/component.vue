@@ -3,7 +3,7 @@
     <div class="el-switch__mask" v-show="disabled"></div>
     <input class="el-switch__input" type="checkbox" :checked="value" :name="name" :disabled="disabled" style="display: none;">
     <span class="el-switch__core" ref="core" @click="handleMiscClick" :style="{ 'width': coreWidth + 'px' }">
-      <span class="el-switch__button" ref="button"></span>
+      <span class="el-switch__button" :style="buttonStyle"></span>
     </span>
     <transition name="label-fade">
       <div
@@ -75,7 +75,8 @@
     },
     data() {
       return {
-        coreWidth: this.width
+        coreWidth: this.width,
+        buttonStyle: {}
       };
     },
     computed: {
@@ -100,7 +101,7 @@
         }
       },
       handleButtonTransform() {
-        this.$refs.button.style.transform = this.value ? `translate3d(${ this.coreWidth - 20 }px, 2px, 0)` : 'translate3d(2px, 2px, 0)';
+        this.buttonStyle.transform = this.value ? `translate(${ this.coreWidth - 20 }px, 2px)` : 'translate(2px, 2px)';
       },
       handleCoreColor() {
         this.$refs.core.style.borderColor = this.value ? this.onColor : this.offColor;
