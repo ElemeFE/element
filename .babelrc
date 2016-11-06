@@ -1,6 +1,6 @@
 {
   "presets": [["es2015", { "loose": true }]],
-  "plugins": ["transform-vue-jsx"],
+  "plugins": ["transform-vue-jsx", "transform-remove-strict-mode"],
   "env": {
     "utils": {
       "plugins": [
