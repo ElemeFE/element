@@ -10,6 +10,14 @@
         {
           "path": "/quickstart",
           "name": "快速上手"
+        },
+        {
+          "path": "/i18n",
+          "name": "国际化"
+        },
+        {
+          "path": "/custom-theme",
+          "name": "自定义主题"
         }
       ]
     },
@@ -216,6 +224,14 @@
         {
           "path": "/quickstart",
           "name": "Quick Start"
+        },
+        {
+          "path": "/i18n",
+          "name": "Internationalization"
+        },
+        {
+          "path": "/custom-theme",
+          "name": "Custom Theme"
         }
       ]
     },
