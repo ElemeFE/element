@@ -36,6 +36,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 module.exports = {
   version: '{{version}}',
+  locale,
   install,
 {{list}}
 };
