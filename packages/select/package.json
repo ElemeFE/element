@@ -10,7 +10,7 @@
   ],
   "author": "qingwei.li<qingwei.li@ele.me>",
   "license": "MIT",
-  "repository": "https://github.com/element-component/element/tree/master/packages/select",
+  "repository": "https://github.com/ElemeFE/element/tree/master/packages/select",
   "devDependencies": {
     "throttle-debounce": "^1.0.1",
     "wind-dom": "0.0.3"
