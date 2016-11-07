@@ -80,7 +80,7 @@ export default {
 </script>`
   },
   {
-    filename: path.join('../../examples/docs/zh-cn', `${componentname}.md`),
+    filename: path.join('../../examples/docs/zh-CN', `${componentname}.md`),
     content: `## ${chineseName}`
   }
 ];

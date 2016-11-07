@@ -8,7 +8,7 @@ const registerRoute = (config) => {
     children: []
   }];
   function addRoute(page) {
-    const component = page.path === '/changelog' ? require('./pages/changelog.vue') : require(`./docs/zh-cn${page.path}.md`);
+    const component = page.path === '/changelog' ? require('./pages/changelog.vue') : require(`./docs/zh-CN${page.path}.md`);
     let child = {
       path: page.path.slice(1),
       meta: {
@@ -74,7 +74,7 @@ route.route = route.route.concat([indexRoute, guideRoute, resourceRoute]);
 
 route.route.push({
   path: '*',
-  component: require('./docs/zh-cn/home.md')
+  component: require('./docs/zh-CN/home.md')
 });
 
 export const navs = route.navs;
