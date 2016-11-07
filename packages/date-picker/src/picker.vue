@@ -221,6 +221,9 @@ export default {
       val ? this.showPicker() : this.hidePicker();
     },
     value(val) {
+      if (!val && this.picker && typeof this.picker.handleClear === 'function') {
+        this.picker.handleClear();
+      }
       this.dispatch('form-item', 'el.form.change');
     }
   },
