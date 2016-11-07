@@ -1,16 +1,37 @@
+<script>
+  export default {
+    data() {
+      return {
+        num1: 1,
+        num2: 1,
+        num3: 5
+      }
+    },
+    methods: {
+      handleChange(value) {
+        console.log(value);
+      }
+    }
+  };
+</script>
+<style>
+  .demo-box.demo-input-number {
+    .el-input-number + .el-input-number {
+      margin-left: 10px;
+    }
+  }
+</style>
 ## Input Number
 
-Only allows input standard numerical value, you can define scope.
+Input numerical values with a customizable range.
 
-### How to use
+### Basic usage
 
-To use it, you just need to bind a variable to `v-model` in `<el-input-number>` element, and the initial value is default value.
-
-:::demo
+:::demo Bind a variable to `v-model` in `<el-input-number>` element and you are set.
 
 ```html
 <template>
-  <el-input-number v-model="num1" @change="handleChange"></el-input-number>
+  <el-input-number v-model="num1" @change="handleChange" :min="1" :max="10"></el-input-number>
 </template>
 <script>
   export default {
@@ -29,44 +50,61 @@ To use it, you just need to bind a variable to `v-model` in `<el-input-number>` 
 ```
 :::
 
-### Disabled state
+### Disabled
 
-The `disabled` attribute accepts a **boolean** value, and if the value is `true`, the component is totally disabled,but if you just need to control the value within a range, you could add `min` attribute to set minimum value and add `max` to set maximum value. If there no `min` and `max` attribute,the minimum is `0`.
-
-:::demo
+:::demo The `disabled` attribute accepts a `boolean`, and if the value is `true`, the component is disabled. If you just need to control the value within a range, you can add `min` attribute to set the minimum value and `max` to set the maximum value. By default, the minimum value is `0`.
 
 ```html
-<el-input-number v-model="num1" :disabled="true" :max="100"></el-input-number>
+<template>
+  <el-input-number v-model="num2" :disabled="true"></el-input-number>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        num2: 1
+      }
+    }
+  };
+</script>
 ```
-
 :::
 
 ### Steps
 
-Allows you to define diminishing incremental steps of control.
+Allows you to define incremental steps.
 
-Add `step` attribute to set the step.
-
-:::demo
+:::demo Add `step` attribute to set the step.
 
 ```html
-<el-input-number v-model="num2" :step="2"></el-input-number>
+<template>
+  <el-input-number v-model="num3" :step="2"></el-input-number>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        num3: 5
+      }
+    }
+  };
+</script>
 ```
 :::
 
 ### Attributes
 
-Attribute | Description | Type | Options | Default
-----| ----| ---| ----| -----
-value | bound value| number | --- | ---
-min | the minimum value that is allowed | number | ---| 0
-max | the maximum value that is allowed | number | --- | infinity
-step | step | number | --- | 1
-size | the size of component | string | large/small| ---
-disabled| disable the component or not | boolean | ---| false
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
+|----| ----| ---| ----| -----|
+|value | binding value| number | — | — |
+|min | the minimum allowed value | number | — | 0 |
+|max | the maximum allowed value | number | — | `Infinity` |
+|step | incremental step | number | — | 1 |
+|size | size of the component | string | large/small| — |
+|disabled| whether the component is disabled | boolean | — | false |
 
 ### Events
 
-event type | explain | callback param
-----| ---- | -----
-change | trigger when the value is updated | the latest value
+| Event Name | Description | Parameters |
+|----| ---- | -----|
+|change | triggers when the value changes | value after change |

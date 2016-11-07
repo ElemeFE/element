@@ -1,14 +1,169 @@
+<script>
+  var Vue = require('vue');
+  Vue.component('my-item', {
+    functional: true,
+    render: function (h, ctx) {
+      var item = ctx.props.item;
+      return h('li', ctx.data, [
+        h('div', { attrs: { class: 'repo' } }, [item.repo]),
+        h('span', { attrs: { class: 'link' } }, [item.link])
+      ]);
+    },
+    props: {
+      item: { type: Object, required: true }
+    }
+  });
+  export default {
+    data() {
+      return {
+        links: [],
+        input: '',
+        input1: '',
+        input2: '',
+        input3: '',
+        input4: '',
+        input5: '',
+        input6: '',
+        input7: '',
+        input8: '',
+        input9: '',
+        textarea: '',
+        select: '',
+        state1: '',
+        state2: '',
+        state3: '',
+        state4: ''
+      };
+    },
+    methods: {
+      loadAll() {
+        return [
+          { "repo": "vue", "link": "https://github.com/vuejs/vue" },
+          { "repo": "element", "link": "https://github.com/ElemeFE/element" },
+          { "repo": "cooking", "link": "https://github.com/ElemeFE/cooking" },
+          { "repo": "mint-ui", "link": "https://github.com/ElemeFE/mint-ui" },
+          { "repo": "vuex", "link": "https://github.com/vuejs/vuex" },
+          { "repo": "vue-router", "link": "https://github.com/vuejs/vue-router" },
+          { "repo": "babel", "link": "https://github.com/babel/babel" }
+        ];
+      },
+      querySearch(queryString, cb) {
+        var links = this.links;
+        var results = queryString ? links.filter(this.createStateFilter(queryString)) : links;
+
+        cb(results);
+      },
+      querySearchAsync(queryString, cb) {
+        var links = this.links;
+        var results = queryString ? links.filter(this.createStateFilter(queryString)) : links;
+
+        clearTimeout(this.timeout);
+        this.timeout = setTimeout(() => {
+          cb(results);
+        }, 3000 * Math.random());
+      },
+      createStateFilter(queryString) {
+        return (state) => {
+          return (state.value.indexOf(queryString.toLowerCase()) === 0);
+        };
+      },
+      handleSelect(item) {
+        console.log(item);
+      },
+      handleIconClick(ev) {
+        console.log(ev);
+      }
+    },
+    mounted() {
+      this.links = this.loadAll();
+    }
+  };
+</script>
+
+<style>
+  .demo-input {
+    .el-select .el-input {
+      width: 100px;
+    }
+    .text {
+      font-size: 14px;
+      color: #8492a6;
+    }
+    .el-input {
+      width: 180px;
+
+      & + .el-input,
+      & + .el-textarea {
+        margin-top: 15px;
+      }
+    }
+    .el-textarea {
+      width: 414px;
+    }
+    .el-input-group {
+      min-width: 260px;
+    }
+    .el-input-group + .el-input-group {
+      margin-top: 15px;
+    }
+    .el-autocomplete {
+      display: inline-block;
+    }
+    .inline-input {
+      .el-input {
+        display: inline-block;
+        vertical-align: top;
+        margin: 10px 5px;
+      }
+      .el-autocomplete {
+        margin: 10px 0 0;
+
+        .el-input {
+          margin: 0;
+        }
+      }
+    }
+    .tac {
+      text-align: center;
+
+      .el-autocomplete {
+        text-align: left;
+      }
+    }
+    .el-row.border-grid {
+      .el-col:not(:last-child) {
+        border-right: 1px solid rgba(224,230,237,0.50);
+      }
+    }
+    .my-autocomplete {
+      li {
+        line-height: normal;
+        padding: 7px *;
+
+        .repo {
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+        .link {
+          font-size: 12px;
+          color: #b4b4b4;
+        }
+      }
+    }
+  }
+</style>
+
 ## Input
 
-Use mouse or keyboard to input something
+Use mouse or keyboard to input data
 
-### How to use
+### Basic usage
 
 ::: demo
 
 ```html
 <el-input
-  placeholder="input something"
+  placeholder="Please input"
   v-model="input">
 </el-input>
 ```
@@ -16,28 +171,29 @@ Use mouse or keyboard to input something
 
 ### Disabled
 
-Set the `disabled` attribute to decide whether it should be disabled.
-
-::: demo
+::: demo Disable the Input with the `disabled` attribute.
 
 ```html
 <el-input
-  placeholder="input something"
+  placeholder="Please input"
   v-model="input1"
-  :disabled="true"> <!-- v-bind:disabled='true' >
+  :disabled="true">
 </el-input>
 ```
 :::
 
 ### Input with icon
 
-::: demo You can add a markable icon in the tail of input component by setting the `icon` attribute.
+Add an icon to indicate input type.
+
+::: demo You can add an icon at the end of Input by setting the `icon` attribute.
 
 ```html
 <el-input
-  placeholder="choose date"
+  placeholder="Pick a date"
   icon="time"
-  v-model="input2">
+  v-model="input2"
+  @click="handleIconClick">
 </el-input>
 ```
 
@@ -45,28 +201,30 @@ Set the `disabled` attribute to decide whether it should be disabled.
 
 Resizable for entering multiple lines of text information.
 
-::: demo Add attribute `type="textarea"` to change `input` to `textarea`, just like `<textarea>` in HTML.
+::: demo Add attribute `type="textarea"` to change `input` into native `textarea`.
 
 ```html
 <el-input
   type="textarea"
+  :autosize="{ minRows: 2, maxRows: 4}"
+  placeholder="Please input"
   v-model="textarea">
 </el-input>
 ```
 ### Mixed input
 
-Pretend or append an element, generally the element is a label or a button.
+Prepend or append an element, generally a label or a button.
 
-::: demo You can add `slot` attribute in `<template>` element and choose which  to place at input box.
+::: demo Use `slot` to distribute elements that prepend or append to Input.
 
 ```html
-<el-input placeholder="input something" v-model="input3">
+<el-input placeholder="Please input" v-model="input3">
   <template slot="prepend">Http://</template>
 </el-input>
-<el-input placeholder="input something" v-model="input4">
+<el-input placeholder="Please input" v-model="input4">
   <template slot="append">.com</template>
 </el-input>
-<el-input placeholder="input something" v-model="input5" style="width: 300px;">
+<el-input placeholder="Please input" v-model="input5" style="width: 300px;">
   <el-select v-model="select" slot="prepend">
     <el-option label="restaurant" value="1"></el-option>
     <el-option label="order number" value="2"></el-option>
@@ -77,60 +235,57 @@ Pretend or append an element, generally the element is a label or a button.
 ```
 :::
 
-### Size
+### Sizes
 
-Add `size` attribute to change the size of your Input component. In addtion to the `default` size, there are other three options: `large`, `small` and `mini`.
-
+::: demo Add `size` attribute to change the size of Input. In addition to the default size, there are three other options: `large`, `small` and `mini`.
 ```html
 <div class="inline-input">
   <el-input
     size="large"
-    placeholder="input something"
+    placeholder="Please input"
     v-model="input6">
   </el-input>
   <el-input
-    placeholder="input something"
+    placeholder="Please input"
     v-model="input7">
   </el-input>
   <el-input
     size="small"
-    placeholder="input something"
+    placeholder="Please input"
     v-model="input8">
   </el-input>
   <el-input
     size="mini"
-    placeholder="input something"
+    placeholder="Please input"
     v-model="input9">
   </el-input>
 </div>
 ```
 :::
 
-### Autocomplete(provide some tips while inputing)
+### Auto complete
 
-You can get some recommended tips based on the text you have inputted.
+You can get some recommended tips based on the current input.
 
-Autocomplete component provides you some advice based on the text you have inputted. The `fetch-suggestions` attribute is a method that can return recommended items. For example, `querySearch(queryString, cb)`, in this method, if the recommended items are ready(or loaded), the data will be injected in this component via `cb(data)`.
-
-::: demo
+::: demo Autocomplete component provides input suggestions. The `fetch-suggestions` attribute is a method that returns suggested input. In this example, `querySearch(queryString, cb)` returns suggestions to Autocomplete via `cb(data)` when suggestions are ready.
 
 ```html
 <el-row class="inline-input border-grid">
   <el-col :span="12" class="tac">
-    <div class="text">activate and list all recommended items</div>
+    <div class="text">list suggestions when activated</div>
     <el-autocomplete
       v-model="state1"
       :fetch-suggestions="querySearch"
-      placeholder="input something"
+      placeholder="Please input"
       @select="handleSelect"
     ></el-autocomplete>
   </el-col>
   <el-col :span="12" class="tac">
-    <div class="text">input and match recommended items</div>
+    <div class="text">list suggestions on input</div>
     <el-autocomplete
       v-model="state2"
       :fetch-suggestions="querySearch"
-      placeholder="input something"
+      placeholder="Please input"
       :trigger-on-focus="false"
       @select="handleSelect"
     ></el-autocomplete>
@@ -147,14 +302,14 @@ Autocomplete component provides you some advice based on the text you have input
     },
     methods: {
       querySearch(queryString, cb) {
-        var links = this.links
+        var links = this.links;
         var results = queryString ? links.filter(this.createFilter(queryString)) : links;
-        // call callback function to return recommended data
+        // call callback function to return suggestions
         cb(results);
       },
       createFilter(queryString) {
         return (link) => {
-          return (link.value.indexOf(queryString.toLowerCase()) === 0);
+          return (link.repo.indexOf(queryString.toLowerCase()) === 0);
         };
       },
       loadAll() {
@@ -182,7 +337,7 @@ Autocomplete component provides you some advice based on the text you have input
 
 ### Custom template
 
-Customize your recommended items.
+Customize how suggestions are displayed.
 
 :::demo
 
@@ -192,7 +347,7 @@ Customize your recommended items.
   v-model="state3"
   :fetch-suggestions="querySearch"
   custom-item="my-item"
-  placeholder="input something"
+  placeholder="Please input"
   @select="handleSelect"
 ></el-autocomplete>
 
@@ -220,14 +375,14 @@ Customize your recommended items.
     },
     methods: {
       querySearch(queryString, cb) {
-        var links = this.restaurants;
+        var links = this.links;
         var results = queryString ? link.filter(this.createFilter(queryString)) : links;
         // call callback function to return recommended data
         cb(results);
       },
       createFilter(queryString) {
         return (link) => {
-          return (link.value.indexOf(queryString.toLowerCase()) === 0);
+          return (link.repo.indexOf(queryString.toLowerCase()) === 0);
         };
       },
       loadAll() {
@@ -257,11 +412,12 @@ Customize your recommended items.
 
 Search data from server-side.
 
+::: demo
 ```html
 <el-autocomplete
   v-model="state4"
   :fetch-suggestions="querySearchAsync"
-  placeholder="input something"
+  placeholder="Please input"
   @select="handleSelect"
 ></el-autocomplete>
 <script>
@@ -287,16 +443,16 @@ Search data from server-side.
       },
       querySearchAsync(queryString, cb) {
         var links = this.links;
-        var results = queryString ? links.filter(this.createStateFilter(queryString)) : links;
+        var results = queryString ? links.filter(this.createFilter(queryString)) : links;
 
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
           cb(results);
         }, 3000 * Math.random());
       },
-      createStateFilter(queryString) {
-        return (state) => {
-          return (state.value.indexOf(queryString.toLowerCase()) === 0);
+      createFilter(queryString) {
+        return (link) => {
+          return (link.repo.indexOf(queryString.toLowerCase()) === 0);
         };
       },
       handleSelect(item) {
@@ -304,38 +460,49 @@ Search data from server-side.
       }
     },
     mounted() {
-      this.restaurants = this.loadAll();
+      this.links = this.loadAll();
     }
   };
 </script>
 ```
+:::
 
 ### Input API
 
-Attribute | Description | Type | Options | Default
-----| ----| ----| ---- | -----
-type| it‘s same as type attribute in html, if type="textarea", the element will change into `textarea`.| string| ---|---
-value| binding value | string/number|---|---
-maxlength| the maxium input text length| number| ---|---
-minlenght| the minium input text length| number | ---| ---
-placeholder| the placeholder of input| string | --- | ---
-disabled | disable your input box | boolean | --- | false
-size | set the size of input box | string | large/small/mini | ---
-icon | add a icon at the tail of input box | string | --- | ---
-number | set the binding value of model as number type | boolean | --- | false
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
+| ----| ----| ----| ---- | ----- |
+|type| Same as the `type` attribute of native input, except that it can be `textarea` | string | — | text |
+|value| binding value | string/number| — | — |
+|maxlength| maximum Input text length| number| — | — |
+|minlength| minimum Input text length| number | — | — |
+|placeholder| placeholder of Input| string | — | — |
+|disabled | whether Input is disabled | boolean | — | false |
+|size | size of Input, works when `type` is not 'textarea' | string | large/small/mini | — |
+|icon | icon name | string | — | — |
+|rows | number of rows of textarea, only works when `type` is 'textarea' | number | — | 2 |
+|autosize | whether textarea has an adaptive height, only works when `type` is 'textarea'. Can accept an object, e.g. { minRows: 2, maxRows: 6 }  | boolean/object | — | false |
+
+### Input Events
+
+| Event Name | Description | Parameters |
+|----| ----| ----|
+|click | triggers when the icon inside Input is clicked | event object |
 
 ### Autocomplete API
 
 Attribute | Description | Type | Options | Default
-----| ----| ----| ---- | -----
-placeholder| the placeholder of input| string | --- | ---
-disabled | disable your input box | boolean | --- | false
+|----| ----| ----| ---- | -----|
+|placeholder| the placeholder of Autocomplete| string | — | — |
+|disabled | whether Autocomplete is disabled  | boolean | — | false|
+|value | binding value | string | — | — |
+|custom-item | component name of your customized suggestion list item | string | — | — |
+|fetch-suggestions | a method to fetch input suggestions. When suggestions are ready, invoke `callback(data:[])` to return them to Autocomplete | Function(queryString, callback) | — | — |
 
 ### Autocomplete Events
 
-Event |  Description | Callback
-----| ----| ----|
-select | it will be triggered when you select the recommended item | the recommended item that you select
+| Event Name | Description | Parameters |
+|----| ----| ----|
+|select | triggers when a suggestion is clicked | suggestion being clicked |
 
 
 

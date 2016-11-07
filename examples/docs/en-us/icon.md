@@ -67,11 +67,11 @@
 
 ## Icon 
 
-Provide a common icon list.
+Element provides a set of common icons.
 
-### How to use
+### Basic usage
 
-You can use it by setting class name to `el-icon-iconName`. e.g.:
+Just assign the class name to `el-icon-iconName`.
 
 :::demo
 
@@ -84,7 +84,7 @@ You can use it by setting class name to `el-icon-iconName`. e.g.:
 ```
 :::
 
-### icon list
+### Icons
 
 <ul class="icon-list">
   <li v-for="name in icons">
