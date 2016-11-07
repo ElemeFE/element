@@ -34,8 +34,10 @@
         overflow: hidden;
         text-overflow: ellipsis;
 
-        &.highlighted,
         &:hover {
+          background-color: var(--select-option-hover-background);
+        }
+        &.highlighted {
           background-color: var(--color-primary);
           color: #fff;
         }
