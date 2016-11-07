@@ -74,10 +74,6 @@
         }
       }
     }
-
-    .el-icon-loading {
-      animation: validating-rotating 1s linear infinite;
-    }
     @m large {
       font-size: var(--input-large-font-size);
 
@@ -207,14 +203,5 @@
         }
       }
     }
-  }
-}
-
-@keyframes validating-rotating {
-  0% {
-    transform: translate(0, -50%) rotateZ(0deg);
-  }
-  100% {
-    transform: translate(0, -50%) rotateZ(360deg);
   }
 }
