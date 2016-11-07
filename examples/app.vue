@@ -40,7 +40,7 @@
     background-color: #f9fafc;
     border: solid 1px #eaeefb;
     margin-bottom: 25px;
-    border-radius: 2px;
+    border-radius: 4px;
     -webkit-font-smoothing: auto;
   }
 

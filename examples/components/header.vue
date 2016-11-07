@@ -83,14 +83,6 @@
       }
     }
   }
-  .header-fixed {
-    position: fixed;
-    top: -80px;
-    box-shadow: 0 2px 6px 0 rgba(50, 63, 87, 0.25);
-  }
-  .header-hangUp {
-    top: 0;
-  }
   .header-home {
     position: fixed;
     top: 0;
@@ -103,9 +95,7 @@
     ref="header"
     :style="headerStyle"
     :class="{
-      'header-home': isHome,
-      'header-fixed': isFixed,
-      'header-hangUp': hangUp
+      'header-home': isHome
     }">
       <div class="container">
         <h1><router-link to="/">Element<span>Beta</span></router-link></h1>
@@ -139,10 +129,8 @@
     data() {
       return {
         active: '',
-        isFixed: false,
         isHome: false,
-        headerStyle: {},
-        hangUp: false
+        headerStyle: {}
       };
     },
     watch: {
@@ -154,43 +142,16 @@
     mounted() {
       this.isHome = this.$route.path === '/';
       function scroll(fn) {
-        var beforeScrollTop = document.body.scrollTop;
-
         window.addEventListener('scroll', () => {
-          const afterScrollTop = document.body.scrollTop;
-          var delta = afterScrollTop - beforeScrollTop;
-
-          if (delta === 0) return false;
-
-          fn(delta > 0 ? 'down' : 'up');
-          beforeScrollTop = afterScrollTop;
+          fn();
         }, false);
       }
-      scroll((direction) => {
+      scroll(() => {
         if (this.isHome) {
-          this.hangUp = false;
-          this.isFixed = false;
-          this.headerStyle.transition = '';
           const threshold = 200;
           let alpha = Math.min(document.body.scrollTop, threshold) / threshold;
           this.$refs.header.style.backgroundColor = `rgba(32, 160, 255, ${ alpha })`;
-          return;
         }
-        this.headerStyle.backgroundColor = 'rgba(32, 160, 255, 1)';
-        const bounding = this.$el.getBoundingClientRect();
-        if (bounding.bottom < 0) {
-          this.isFixed = true;
-          this.$nextTick(() => {
-            this.headerStyle.transition = 'all .5s ease';
-          });
-        }
-        if (bounding.top === 0) {
-          this.isFixed = false;
-          this.$nextTick(() => {
-            this.headerStyle.transition = '';
-          });
-        }
-        this.hangUp = direction === 'up';
       });
     }
   };
