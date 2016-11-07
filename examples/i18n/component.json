@@ -1,6 +1,6 @@
 [
   {
-    "lang": "zh-cn",
+    "lang": "zh-CN",
     "demo-block": {
       "hide-text": "隐藏代码",
       "show-text": "显示代码"
@@ -17,7 +17,7 @@
     }
   },
   {
-    "lang": "en-us",
+    "lang": "en-US",
     "demo-block": {
       "hide-text": "Hide",
       "show-text": "Expand"

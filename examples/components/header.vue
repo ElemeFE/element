@@ -157,7 +157,7 @@
     },
     computed: {
       lang() {
-        return this.$route.path.split('/')[1] || 'zh-cn';
+        return this.$route.path.split('/')[1] || 'zh-CN';
       },
       langConfig() {
         return compoLang.filter(config => config.lang === this.lang)[0]['header'];
@@ -165,18 +165,18 @@
 
       // TODO: use dropdown to display more than two languages
       switchText() {
-        return this.lang === 'zh-cn' ? 'English' : '中文';
+        return this.lang === 'zh-CN' ? 'English' : '中文';
       }
     },
     methods: {
       // TODO: use dropdown to display more than two languages
       switchLang() {
-        let langMap = { 'zh-cn': 'en-us', 'en-us': 'zh-cn' };
+        let langMap = { 'zh-CN': 'en-US', 'en-US': 'zh-CN' };
         this.$router.push(this.$route.path.replace(this.lang, langMap[this.lang]));
       }
     },
     mounted() {
-      this.isHome = ['/zh-cn', '/en-us'].indexOf(this.$route.path) > -1;
+      this.isHome = ['/zh-CN', '/en-US'].indexOf(this.$route.path) > -1;
       function scroll(fn) {
         var beforeScrollTop = document.body.scrollTop;
 

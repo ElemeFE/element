@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import entry from './app';
 import VueRouter from 'vue-router';
-import configRouter from './route.config';
+import routes from './route.config';
 import Element from 'main/index.js';
 import 'packages/theme-default/src/index.css';
 import demoBlock from './components/demo-block.vue';
@@ -21,7 +21,7 @@ Vue.component('footer-nav', FooterNav);
 const router = new VueRouter({
   mode: 'hash',
   base: __dirname,
-  routes: configRouter
+  routes
 });
 
 new Vue({ // eslint-disable-line

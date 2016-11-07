@@ -80,7 +80,7 @@ export default {
 </script>`
   },
   {
-    filename: path.join('../../examples/docs/zh-cn', `${componentname}.md`),
+    filename: path.join('../../examples/docs/zh-CN', `${componentname}.md`),
     content: `## ${chineseName}`
   },
   {
@@ -114,7 +114,7 @@ Object.keys(navConfigFile).forEach(lang => {
   let groups = navConfigFile[lang][2].groups;
   groups[groups.length - 1].list.push({
     path: `/${componentname}`,
-    title: lang === 'zh-cn' && componentname !== chineseName
+    title: lang === 'zh-CN' && componentname !== chineseName
         ? `${ComponentName} ${chineseName}`
         : ComponentName
   });

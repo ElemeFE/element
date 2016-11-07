@@ -1,34 +1,36 @@
 import navConfig from './nav.config.json';
 import langs from './i18n/route.json';
 
-const registerRoute = (config) => {
+const registerRoute = (navConfig) => {
   let route = [];
-  langs.forEach((lang, index) => {
+  Object.keys(navConfig).forEach((lang, index) => {
+    let navs = navConfig[lang];
     route.push({
-      path: `/${ lang.lang }/component`,
-      redirect: `/${ lang.lang }/component/installation`,
-      component: require(`./pages/${ lang.lang }/component.vue`),
+      path: `/${ lang }/component`,
+      redirect: `/${ lang }/component/installation`,
+      component: require(`./pages/${ lang }/component.vue`),
       children: []
     });
-    config[lang.lang]
-      .map(nav => {
-        if (nav.groups) {
-          nav.groups.map(group => {
-            group.list.map(page => {
-              addRoute(page, lang.lang, index);
-            });
+    navs.forEach(nav => {
+      if (nav.groups) {
+        nav.groups.forEach(group => {
+          group.list.forEach(nav => {
+            addRoute(nav, lang, index);
           });
-        } else if (nav.children) {
-          nav.children.map(page => {
-            addRoute(page, lang.lang, index);
-          });
-        } else {
-          addRoute(nav, lang.lang, index);
-        }
-      });
+        });
+      } else if (nav.children) {
+        nav.children.forEach(nav => {
+          addRoute(nav, lang, index);
+        });
+      } else {
+        addRoute(nav, lang, index);
+      }
+    });
   });
   function addRoute(page, lang, index) {
-    const component = page.path === '/changelog' ? require(`./pages/${ lang }/changelog.vue`) : require(`./docs/zh-cn${page.path}.md`);
+    const component = page.path === '/changelog'
+      ? require(`./pages/${ lang }/changelog.vue`)
+      : require(`./docs/zh-CN${page.path}.md`);
     let child = {
       path: page.path.slice(1),
       meta: {
@@ -42,12 +44,12 @@ const registerRoute = (config) => {
     route[index].children.push(child);
   }
 
-  return { route, navs: config };
+  return route;
 };
 
-const route = registerRoute(navConfig);
+let route = registerRoute(navConfig);
 
-const generateMiscRoutes = lang => {
+function generateMiscRoutes(lang) {
   let guideRoute = {
     path: `/${ lang }/guide`, // 指南
     redirect: `/${ lang }/guide/design`,
@@ -79,16 +81,15 @@ const generateMiscRoutes = lang => {
 };
 
 langs.forEach(lang => {
-  route.route = route.route.concat(generateMiscRoutes(lang.lang));
+  route = route.concat(generateMiscRoutes(lang.lang));
 });
 
-route.route = route.route.concat([{
+route = route.concat([{
   path: '/',
-  redirect: '/zh-cn'
+  redirect: '/zh-CN'
 }, {
   path: '*',
-  redirect: '/zh-cn'
+  redirect: '/zh-CN'
 }]);
 
-export const navs = route.navs;
-export default route.route;
+export default route;
