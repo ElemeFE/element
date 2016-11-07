@@ -73,7 +73,7 @@
   import Clickoutside from 'element-ui/src/utils/clickoutside';
   import { addClass, removeClass, hasClass } from 'wind-dom/src/class';
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
-  import { $t } from 'element-ui/src/locale';
+  import { t } from 'element-ui/src/locale';
 
   export default {
     mixins: [Emitter, Locale],
@@ -110,17 +110,17 @@
 
       emptyText() {
         if (this.loading) {
-          return this.$t('el.select.loading');
+          return this.t('el.select.loading');
         } else {
           if (this.voidRemoteQuery) {
             this.voidRemoteQuery = false;
             return false;
           }
           if (this.filterable && this.filteredOptionsCount === 0) {
-            return this.$t('el.select.noMatch');
+            return this.t('el.select.noMatch');
           }
           if (this.options.length === 0) {
-            return this.$t('el.select.noData');
+            return this.t('el.select.noData');
           }
         }
         return null;
@@ -149,7 +149,7 @@
       multiple: Boolean,
       placeholder: {
         type: String,
-        default: $t('el.select.placeholder')
+        default: t('el.select.placeholder')
       }
     },
 

@@ -22,7 +22,7 @@
             <span class="el-date-range-picker__editors-wrap">
               <span class="el-date-range-picker__time-picker-wrap">
                 <input
-                  :placeholder="$t('el.datepicker.startDate')"
+                  :placeholder="t('el.datepicker.startDate')"
                   class="el-date-range-picker__editor"
                   :value="minVisibleDate"
                   @input="handleDateInput($event, 'min')"
@@ -30,7 +30,7 @@
               </span>
               <span class="el-date-range-picker__time-picker-wrap">
                 <input
-                  :placeholder="$t('el.datepicker.startTime')"
+                  :placeholder="t('el.datepicker.startTime')"
                   class="el-date-range-picker__editor"
                   :value="minVisibleTime"
                   @focus="minTimePickerVisible = !minTimePickerVisible"
@@ -49,7 +49,7 @@
               <span class="el-date-range-picker__time-picker-wrap">
                 <input
                   ref="minInput"
-                  :placeholder="$t('el.datepicker.endDate')"
+                  :placeholder="t('el.datepicker.endDate')"
                   class="el-date-range-picker__editor"
                   :value="maxVisibleDate"
                   :readonly="!minDate"
@@ -59,7 +59,7 @@
               <span class="el-date-range-picker__time-picker-wrap">
                 <input
                   ref="maxInput"
-                  :placeholder="$t('el.datepicker.endTime')"
+                  :placeholder="t('el.datepicker.endTime')"
                   class="el-date-range-picker__editor"
                   :value="maxVisibleTime"
                   @focus="minDate && (maxTimePickerVisible = !maxTimePickerVisible)"
@@ -128,12 +128,12 @@
       <div class="el-picker-panel__footer" v-if="showTime">
         <a
           class="el-picker-panel__link-btn"
-          @click="handleClear">{{ $t('el.datepicker.clear') }}</a>
+          @click="handleClear">{{ t('el.datepicker.clear') }}</a>
         <button
           type="button"
           class="el-picker-panel__btn"
           @click="handleConfirm"
-          :disabled="btnDisabled">{{ $t('el.datepicker.confirm') }}</button>
+          :disabled="btnDisabled">{{ t('el.datepicker.confirm') }}</button>
       </div>
     </div>
   </transition>
@@ -152,11 +152,11 @@
       },
 
       leftLabel() {
-        return this.date.getFullYear() + ' ' + this.$t('el.datepicker.year') + ' ' + this.$t(`el.datepicker.month${ this.date.getMonth() + 1 }`);
+        return this.date.getFullYear() + ' ' + this.t('el.datepicker.year') + ' ' + this.t(`el.datepicker.month${ this.date.getMonth() + 1 }`);
       },
 
       rightLabel() {
-        return this.rightDate.getFullYear() + ' ' + this.$t('el.datepicker.year') + ' ' + this.$t(`el.datepicker.month${ this.rightDate.getMonth() + 1 }`);
+        return this.rightDate.getFullYear() + ' ' + this.t('el.datepicker.year') + ' ' + this.t(`el.datepicker.month${ this.rightDate.getMonth() + 1 }`);
       },
 
       leftYear() {
