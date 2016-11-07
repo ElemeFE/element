@@ -513,8 +513,11 @@
       inline-template
       fixed="right"
       label="操作"
-      width="80">
-      <el-button type="text" size="small">编辑</el-button>
+      width="100">
+      <span>
+        <el-button type="text" size="small">查看</el-button>
+        <el-button type="text" size="small">编辑</el-button>
+      </span>
     </el-table-column>
   </el-table>
 </template>
