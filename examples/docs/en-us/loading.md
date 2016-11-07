@@ -29,15 +29,13 @@
 
 ## Loading
 
-Show animation while loading the data.
+Show animation while loading data.
 
-### Local loading
+### Loading inside a container
 
-Show animation while some containers such a `table` is loading the data.
+Displays animation in a container (such as a table) while loading data.
 
-In loading component, we use customizable attribute `v-loading`. You just need to bind a `boolean` value to this component. By default, loading mask layer will insert into the childnode. Loading mask layer can be inserted into body element of DOM by adding `body` modifier.
-
-:::demo
+:::demo We provide a custom directive `v-loading`. You just need to bind a `boolean` value to it. By default, the loading mask will append to the element where the directive is used. Adding the `body` modifier makes the mask append to the body element.
 
 ```html
 <template>
@@ -56,21 +54,19 @@ In loading component, we use customizable attribute `v-loading`. You just need t
 ```
 :::
 
-### Global loading
+### Full screen loading
 
-Show animation while the page is loading the data, and in this case mask layer will insert into the `body` of document.  
+Show a full screen animation while loading data.  
 
-You just need to use `.fullscreen` modifier and then create a global mask layer and it will insert at `body` automatically.
-
-:::demo
+:::demo Add the `fullscreen` modifier to create a full screen mask, and it will append to body. In this case, if you disable scrolling on body, you add another modifier `lock`.
 
 ```html
 <template>
   <el-button
     type="primary"
     @click.native="openFullScreen"
-    v-loading.fullscreen="fullscreenLoading">
-    show animation in whole page, and will disappear after 3s
+    v-loading.fullscreen.lock="fullscreenLoading">
+    Full screen loading for 3 seconds
   </el-button>
 </template>
 
