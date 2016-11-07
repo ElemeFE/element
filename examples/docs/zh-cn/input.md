@@ -188,6 +188,10 @@
           font-size: 12px;
           color: #b4b4b4;
         }
+
+        .highlighted .addr {
+          color: #ddd;
+        }
       }
     }
   }
