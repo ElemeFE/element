@@ -238,7 +238,7 @@ webpack.config.js
 ```javascript
 {
   plugins: [
-    new webpack.IgnorePlugin(/element-ui\/lib\/locale\/lang\/zh-cn/)
+    new webpack.IgnorePlugin(/element-ui\/lib\/locale\/lang\/zh-CN/)
   ]
 }
 ```

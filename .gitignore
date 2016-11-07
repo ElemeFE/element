@@ -8,7 +8,7 @@ lib
 .idea
 examples/element-ui
 examples/pages/en-us
-examples/pages/zh-cn
+examples/pages/zh-CN
 fe.element/element-ui
 .npmrc
 coverage

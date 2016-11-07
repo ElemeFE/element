@@ -1,4 +1,4 @@
-import defaultLang from 'element-ui/src/locale/lang/zh-cn';
+import defaultLang from 'element-ui/src/locale/lang/zh-CN';
 import Vue from 'vue';
 import Format from './format';
 

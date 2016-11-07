@@ -82,4 +82,4 @@ Vue.use(ElementUI)
 }
 ```
 
-如果不清楚 `babel-plugin-component` 是什么，请阅读 [快速上手](./examples/docs/zh-cn/quickstart.md) 一节。更多 `element-theme` 用法请参考[项目仓库](https://github.com/ElementUI/element-theme)。
+如果不清楚 `babel-plugin-component` 是什么，请阅读 [快速上手](./examples/docs/zh-CN/quickstart.md) 一节。更多 `element-theme` 用法请参考[项目仓库](https://github.com/ElementUI/element-theme)。
