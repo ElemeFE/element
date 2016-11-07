@@ -223,9 +223,7 @@
       } else if (this.value > this.max) {
         this.$emit('input', this.max);
       }
-      this.$nextTick(() => {
-        this.inputValue = this.inputValue || this.value;
-      });
+      this.inputValue = this.inputValue || this.value;
     }
   };
 </script>
