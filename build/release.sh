@@ -19,7 +19,6 @@ then
   cd ../..
 
   # commit
-  git submodule update
   git add -A
   git commit -m "[build] $VERSION"
   npm version $VERSION --message "[release] $VERSION"
