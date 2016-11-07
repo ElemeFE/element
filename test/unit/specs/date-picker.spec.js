@@ -66,6 +66,35 @@ describe('DatePicker', () => {
     }, DELAY);
   });
 
+  it('reset', done => {
+    vm = createVue({
+      template: `
+        <el-date-picker ref="compo" v-model="value"></el-date-picker>
+      `,
+      data() {
+        return { value: '' };
+      }
+    }, true);
+    const input = vm.$el.querySelector('input');
+
+    input.blur();
+    input.focus();
+    setTimeout(_ => {
+      const $el = vm.$refs.compo.picker.$el;
+      $el.querySelector('.el-date-picker__next-btn.el-icon-arrow-right').click();
+      setTimeout(_ => {
+        $el.querySelector('td.available').click();
+        vm.$nextTick(_ => {
+          vm.value = '';
+          setTimeout(_ => {
+            expect(vm.$refs.compo.picker.date.getDate()).to.equal(new Date().getDate());
+            done();
+          }, DELAY);
+        });
+      }, DELAY);
+    }, DELAY);
+  });
+
   describe('keydown', () => {
     let input;
     let keyDown = function(el, keyCode) {
