@@ -11,15 +11,15 @@
       <div class="el-table-filter__bottom">
         <button @click="handleConfirm"
           :class="{ 'is-disabled': filteredValue.length === 0 }"
-          :disabled="filteredValue.length === 0">{{ $t('el.table.confirmFilter') }}</button>
-        <button @click="handleReset">{{ $t('el.table.resetFilter') }}</button>
+          :disabled="filteredValue.length === 0">{{ t('el.table.confirmFilter') }}</button>
+        <button @click="handleReset">{{ t('el.table.resetFilter') }}</button>
       </div>
     </div>
     <div class="el-table-filter" v-else v-show="showPopper">
       <ul class="el-table-filter__list">
         <li class="el-table-filter__list-item"
             :class="{ 'is-active': !filterValue }"
-            @click="handleSelect(null)">{{ $t('el.table.clearFilter') }}</li>
+            @click="handleSelect(null)">{{ t('el.table.clearFilter') }}</li>
         <li class="el-table-filter__list-item"
             v-for="filter in filters"
             :label="filter.value"
@@ -64,8 +64,8 @@
         <div class="el-table-filter__content">
         </div>
         <div class="el-table-filter__bottom">
-          <button on-click={ this.handleConfirm }>{ this.$t('el.table.confirmFilter') }</button>
-          <button on-click={ this.handleReset }>{ this.$t('el.table.resetFilter') }</button>
+          <button on-click={ this.handleConfirm }>{ this.t('el.table.confirmFilter') }</button>
+          <button on-click={ this.handleReset }>{ this.t('el.table.resetFilter') }</button>
         </div>
       </div>);
     },
