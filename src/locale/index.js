@@ -7,7 +7,7 @@ const format = Format(Vue);
 let lang = defaultLang;
 let merged = false;
 
-export const $t = function(path, options) {
+export const t = function(path, options) {
   const vuei18n = Object.getPrototypeOf(this || Vue).$t;
   if (typeof vuei18n === 'function') {
     if (!merged) {
@@ -32,4 +32,4 @@ export const $t = function(path, options) {
 export const use = function(l) {
   lang = l || lang;
 };
-export default { use, $t };
+export default { use, t };

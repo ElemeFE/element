@@ -8,14 +8,14 @@
     :class="{ 'is-week-mode': selectionMode === 'week' }">
     <tbody>
     <tr>
-      <th v-if="showWeekNumber">{{ $t('el.datepicker.week') }}</th>
-      <th>{{ $t('el.datepicker.weeks.sun') }}</th>
-      <th>{{ $t('el.datepicker.weeks.mon') }}</th>
-      <th>{{ $t('el.datepicker.weeks.tue') }}</th>
-      <th>{{ $t('el.datepicker.weeks.wed') }}</th>
-      <th>{{ $t('el.datepicker.weeks.thu') }}</th>
-      <th>{{ $t('el.datepicker.weeks.fri') }}</th>
-      <th>{{ $t('el.datepicker.weeks.sat') }}</th>
+      <th v-if="showWeekNumber">{{ t('el.datepicker.week') }}</th>
+      <th>{{ t('el.datepicker.weeks.sun') }}</th>
+      <th>{{ t('el.datepicker.weeks.mon') }}</th>
+      <th>{{ t('el.datepicker.weeks.tue') }}</th>
+      <th>{{ t('el.datepicker.weeks.wed') }}</th>
+      <th>{{ t('el.datepicker.weeks.thu') }}</th>
+      <th>{{ t('el.datepicker.weeks.fri') }}</th>
+      <th>{{ t('el.datepicker.weeks.sat') }}</th>
     </tr>
     <tr
       class="el-date-table__row"
@@ -24,7 +24,7 @@
       <td
         v-for="cell in row"
         :class="getCellClasses(cell)"
-        v-text="cell.type === 'today' ? $t('el.datepicker.today') : cell.text"></td>
+        v-text="cell.type === 'today' ? t('el.datepicker.today') : cell.text"></td>
     </tr>
     </tbody>
   </table>
