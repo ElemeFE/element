@@ -7,7 +7,7 @@
         ["module-resolver", {
           "root": ["element-ui"],
           "alias": {
-            "element-ui/src/locale": "element-ui/lib/locale"
+            "element-ui/src": "element-ui/lib"
           }
         }]
       ]
