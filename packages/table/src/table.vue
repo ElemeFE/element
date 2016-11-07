@@ -191,10 +191,6 @@
           if (refs.rightFixedBodyWrapper) refs.rightFixedBodyWrapper.scrollTop = this.scrollTop;
         });
 
-        mousewheel(headerWrapper, function(event) {
-          event.preventDefault();
-        });
-
         mousewheel(headerWrapper, throttle(16, function(event) {
           const deltaX = event.deltaX;
 
