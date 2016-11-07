@@ -181,6 +181,10 @@
     },
 
     methods: {
+      handleClear() {
+        this.date = new Date();
+      },
+
       resetDate() {
         this.date = new Date(this.date);
       },
