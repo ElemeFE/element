@@ -169,7 +169,6 @@
 
       &:disabled {
         & + .el-radio-button__inner {
-          z-index: -1;
           color: var(--button-disabled-color);
           cursor: not-allowed;
           background-image: none;
