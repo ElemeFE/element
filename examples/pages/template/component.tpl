@@ -52,12 +52,12 @@
   </div>
 </template>
 <script>
-  import { navs } from '../../route.config';
+  import navsData from '../../nav.config.json';
   export default {
     data() {
       return {
         lang: this.$route.meta.lang,
-        navsData: navs
+        navsData
       };
     }
   };

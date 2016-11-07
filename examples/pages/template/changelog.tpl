@@ -121,7 +121,7 @@
   </div>
 </template>
 <script>
-  import ChangeLog from '../../../CHANGELOG.md';
+  import ChangeLog from '../../../CHANGELOG.<%= 2 >.md';
   export default {
     components: {
       ChangeLog
