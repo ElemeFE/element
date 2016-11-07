@@ -17,6 +17,7 @@
 - TableColumn 的 showTooltipWhenOverflow 更名为 showOverflowTooltip（两个属性均可用）
 - TableColumn 新增属性 render-header
 - Pagination 新增属性 pageCount
+- DatePicker 修复重置 value 后默认选中日期没有重置, #878
 
 #### 非兼容性更新
 
