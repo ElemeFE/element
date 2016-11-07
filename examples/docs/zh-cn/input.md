@@ -244,7 +244,7 @@
 ```html
 <el-input
   type="textarea"
-  autosize
+  :autosize="{ minRows: 2, maxRows: 4}"
   placeholder="请输入内容"
   v-model="textarea">
 </el-input>
