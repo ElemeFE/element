@@ -64,6 +64,9 @@
     .el-input {
       width: 300px;
     }
+    .el-button--text {
+      margin-right: 15px;
+    }
   }
 </style>
 ## Dialog 对话框
