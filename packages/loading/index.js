@@ -1,1 +1,2 @@
-module.exports = require('./src/directive');
+import Directive from './src/directive';
+export default Directive;

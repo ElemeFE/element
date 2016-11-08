@@ -1,8 +1,8 @@
-const ElAutocomplete = require('./src/autocomplete');
+import ElAutocomplete from './src/autocomplete';
 
 /* istanbul ignore next */
 ElAutocomplete.install = function(Vue) {
   Vue.component(ElAutocomplete.name, ElAutocomplete);
 };
 
-module.exports = ElAutocomplete;
+export default ElAutocomplete;

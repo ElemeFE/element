@@ -1,1 +1,2 @@
-module.exports = require('./src/main.js');
+import MessageBox from './src/main.js';
+export default MessageBox;

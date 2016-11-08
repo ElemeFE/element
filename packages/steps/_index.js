@@ -1,11 +1,10 @@
-const Steps = require('./src/steps');
-const Step = require('./src/step');
+import Steps from './src/steps';
+import Step from './src/step';
 
 /* istanbul ignore next */
-module.exports = function(Vue) {
+export default function(Vue) {
   Vue.component(Steps.name, Steps);
   Vue.component(Step.name, Step);
 };
 
-exports.Steps = Steps;
-exports.Step = Step;
+export { Step, Steps };

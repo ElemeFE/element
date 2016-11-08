@@ -1,8 +1,8 @@
-const Tooltip = require('./src/main');
+import Tooltip from './src/main';
 
 /* istanbul ignore next */
 Tooltip.install = function(Vue) {
   Vue.component(Tooltip.name, Tooltip);
 };
 
-module.exports = Tooltip;
+export default Tooltip;

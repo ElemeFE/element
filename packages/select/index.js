@@ -1,8 +1,8 @@
-var ElSelect = require('./src/select');
+import Select from './src/select';
 
 /* istanbul ignore next */
-ElSelect.install = function(Vue) {
-  Vue.component(ElSelect.name, ElSelect);
+Select.install = function(Vue) {
+  Vue.component(Select.name, Select);
 };
 
-module.exports = ElSelect;
+export default Select;

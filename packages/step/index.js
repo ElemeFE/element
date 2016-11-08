@@ -1,8 +1,8 @@
-const Step = require('../steps/src/step');
+import Step from '../steps/src/step';
 
 /* istanbul ignore next */
 Step.install = function(Vue) {
   Vue.component(Step.name, Step);
 };
 
-module.exports = Step;
+export default Step;
