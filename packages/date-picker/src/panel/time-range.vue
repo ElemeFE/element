@@ -132,6 +132,7 @@
       },
 
       handleChange() {
+        if (this.minTime > this.maxTime) return;
         this.$refs.minSpinner.selectableRange = [[MIN_TIME, this.maxTime]];
         this.$refs.maxSpinner.selectableRange = [[this.minTime, MAX_TIME]];
         this.handleConfirm(true);
