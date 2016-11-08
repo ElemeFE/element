@@ -1,8 +1,8 @@
-const ElForm = require('./src/form');
+import ElForm from './src/form';
 
 /* istanbul ignore next */
 ElForm.install = function(Vue) {
   Vue.component(ElForm.name, ElForm);
 };
 
-module.exports = ElForm;
+export default ElForm;

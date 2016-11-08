@@ -1,1 +1,2 @@
-module.exports = require('./src/main.js');
+import Message from './src/main.js';
+export default Message;

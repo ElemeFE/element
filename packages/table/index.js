@@ -1,8 +1,8 @@
-const ElTable = require('./src/table');
+import ElTable from './src/table';
 
 /* istanbul ignore next */
 ElTable.install = function(Vue) {
   Vue.component(ElTable.name, ElTable);
 };
 
-module.exports = ElTable;
+export default ElTable;

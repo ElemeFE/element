@@ -1,17 +1,19 @@
-const ElMenu = require('./src/menu');
-const ElMenuItem = require('./src/menu-item');
-const ElMenuItemGroup = require('./src/menu-item-group');
-const ElSubmenu = require('./src/submenu');
+import ElMenu from './src/menu';
+import ElMenuItem from './src/menu-item';
+import ElMenuItemGroup from './src/menu-item-group';
+import ElSubmenu from './src/submenu';
 
 /* istanbul ignore next */
-module.exports = function(Vue) {
+export default function(Vue) {
   Vue.component(ElMenuItem.name, ElMenuItem);
   Vue.component(ElMenuItemGroup.name, ElMenuItemGroup);
   Vue.component(ElMenu.name, ElMenu);
   Vue.component(ElSubmenu.name, ElSubmenu);
 };
 
-exports.ElMenuItemGroup = ElMenuItemGroup;
-exports.ElMenuItem = ElMenuItem;
-exports.ElMenu = ElMenu;
-exports.ElSubmenu = ElSubmenu;
+export {
+  ElMenuItemGroup,
+  ElMenuItem,
+  ElMenu,
+  ElSubmenu
+};

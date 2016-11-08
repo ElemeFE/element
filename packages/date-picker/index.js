@@ -5,4 +5,4 @@ DatePicker.install = function install(Vue) {
   Vue.component(DatePicker.name, DatePicker);
 };
 
-module.exports = DatePicker;
+export default DatePicker;

@@ -1,8 +1,8 @@
-const Slider = require('./src/main');
+import Slider from './src/main';
 
 /* istanbul ignore next */
 Slider.install = function(Vue) {
   Vue.component(Slider.name, Slider);
 };
 
-module.exports = Slider;
+export default Slider;
