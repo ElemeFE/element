@@ -108,6 +108,9 @@
 <script>
   export default {
     methods: {
+      open() {
+        this.$message('这是一条消息提示');
+      },
       open2() {
         this.$message({
           message: '恭喜你，这是一条成功消息',

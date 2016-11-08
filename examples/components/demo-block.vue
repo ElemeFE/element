@@ -4,8 +4,16 @@
     :class="[blockClass, { 'hover': hovering }]"
     @mouseenter="hovering = true"
     @mouseleave="hovering = false">
-    <el-button class="demo-button" type="text" @click="goJsfiddle">jsfiddle</el-button>
-    <slot></slot>
+    <slot name="source"></slot>
+    <div class="meta">
+      <div class="description">
+        <slot></slot>
+        <el-tooltip effect="dark" content="前往 jsfiddle.net 运行此实例" placement="right">
+          <el-button size="small" type="primary" @click="goJsfiddle">在线运行</el-button>
+        </el-tooltip>
+      </div>
+      <slot name="highlight"></slot>
+    </div>
     <div class="demo-block-control" @click="isExpanded = !isExpanded">
       <transition name="arrow-slide">
         <i :class="[iconClass, { 'hovering': hovering }]"></i>
@@ -60,7 +68,7 @@
       word-break: break-word;
 
       p {
-        margin: 0;
+        margin: 0 0 12px;
       }
 
       code {
