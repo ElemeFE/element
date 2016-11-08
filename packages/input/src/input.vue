@@ -26,6 +26,8 @@
         :minlength="minlength"
         :autocomplete="autoComplete"
         :autofocus="autofocus"
+        :min="min"
+        :max="max"
         :form="form"
         :value="value"
         ref="input"
@@ -95,7 +97,9 @@
       },
       form: String,
       maxlength: Number,
-      minlength: Number
+      minlength: Number,
+      max: {},
+      min: {}
     },
 
     methods: {
