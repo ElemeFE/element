@@ -35,9 +35,9 @@ Quickly and easily create layouts with the basic 24-column.
 
 ### Basic layout
 
-Use a single column to create the grid layout。
+Create basic grid layout using columns.
 
-::: demo We are free to combine the layout with row and col components, using the `span` attribute of col component.
+::: demo With `row` and `col`, we can easily manipulate the layout using the `span` attribute.
 ```html
 <el-row>
   <el-col :span="24"><div class="grid-content bg-purple-dark"></div></el-col>
@@ -70,9 +70,9 @@ Use a single column to create the grid layout。
 
 ### Column spacing
 
-There is an interval between columns.
+Column spacing is supported.
 
-::: demo Row Components provides `gutter` attribute to specify intervals between columns, and it's default value is 0.
+::: demo Row provides `gutter` attribute to specify spacings between columns, and its default value is 0.
 ```html
 <el-row :gutter="20">
   <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
@@ -85,7 +85,7 @@ There is an interval between columns.
 
 ### Hybrid layout
 
-Forming a more complex hybrid layout by free expansion and combination with the foundation of 1/24 column.
+Form a more complex hybrid layout by combining the basic 1/24 columns.
 
 ::: demo
 ```html
@@ -109,9 +109,9 @@ Forming a more complex hybrid layout by free expansion and combination with the 
 
 ### Column offset
 
-You can specify the number of column offset.
+You can specify column offsets.
 
-::: demo You can specify the number of column offset by setting the value of `offset` attribute of the col component.
+::: demo You can specify the number of column offset by setting the value of `offset` attribute of Col.
 
 ```html
 <el-row :gutter="20">
@@ -132,7 +132,7 @@ You can specify the number of column offset.
 
 Flexible alignment of columns.
 
-::: demo You can enable flex layout by setting `type` attribute with value 'flex', and define the layout of child elements by setting `justify` attribute with value start, center, end, space-between or  space-around.
+::: demo You can enable flex layout by setting `type` attribute to 'flex', and define the layout of child elements by setting `justify` attribute with start, center, end, space-between or space-around.
 ```html
 <el-row type="flex" class="row-bg">
   <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
@@ -163,18 +163,18 @@ Flexible alignment of columns.
 :::
 
 ### Row Attributes
-| Attribute      | Description          | Type      | Options                           | Default  |
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| gutter | Grid spacing | number | — | 0 |
-| type | Layout mode, you can use flex, available under modern browsers | string | — | — |
-| justify | Horizontal arrangement under flex layout | string | start/end/center/space-around/space-between | start |
-| align | Vertical arrangement under flex layout | string | top/middle/bottom | top |
+| gutter | grid spacing | number | — | 0 |
+| type | layout mode, you can use flex, works in modern browsers | string | — | — |
+| justify | horizontal alignment of flex layout | string | start/end/center/space-around/space-between | start |
+| align | vertical alignment of flex layout | string | top/middle/bottom | top |
 
 ### Col Attributes
-| Attribute      | Description          | Type      | Options                           | Default  |
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| **span** | the column number of grid, **required** | number | — | — |
-| offset | The number of spaces on the left side of the grid | number | — | 0 |
-| push |  The number of spaces that grid moves to the right | number | — | 0 |
-| pull |  The number of spaces that grid moves to the left | number | — | 0 |
+| **span** | number of column the grid spans, **required** | number | — | — |
+| offset | number of spacing on the left side of the grid | number | — | 0 |
+| push |  number of columns that grid moves to the right | number | — | 0 |
+| pull |  number of columns that grid moves to the left | number | — | 0 |
 
