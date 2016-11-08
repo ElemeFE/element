@@ -28,7 +28,7 @@
   import ElInput from 'element-ui/packages/input';
   import ElButton from 'element-ui/packages/button';
   import { addClass, removeClass } from 'wind-dom/src/class';
-  import { $t } from 'element-ui/src/locale';
+  import { t } from 'element-ui/src/locale';
 
   let typeMap = {
     success: 'circle-check',
@@ -120,7 +120,7 @@
         if (this.$type === 'prompt') {
           var inputPattern = this.inputPattern;
           if (inputPattern && !inputPattern.test(this.inputValue || '')) {
-            this.editorErrorMessage = this.inputErrorMessage || $t('el.messagebox.error');
+            this.editorErrorMessage = this.inputErrorMessage || t('el.messagebox.error');
             addClass(this.$refs.input.$el.querySelector('input'), 'invalid');
             return false;
           }
@@ -128,7 +128,7 @@
           if (typeof inputValidator === 'function') {
             var validateResult = inputValidator(this.inputValue);
             if (validateResult === false) {
-              this.editorErrorMessage = this.inputErrorMessage || $t('el.messagebox.error');
+              this.editorErrorMessage = this.inputErrorMessage || t('el.messagebox.error');
               addClass(this.$refs.input.$el.querySelector('input'), 'invalid');
               return false;
             }
@@ -184,8 +184,8 @@
         inputErrorMessage: '',
         showConfirmButton: true,
         showCancelButton: false,
-        confirmButtonText: $t('el.messagebox.confirm'),
-        cancelButtonText: $t('el.messagebox.cancel'),
+        confirmButtonText: t('el.messagebox.confirm'),
+        cancelButtonText: t('el.messagebox.cancel'),
         confirmButtonClass: '',
         confirmButtonDisabled: false,
         cancelButtonClass: '',

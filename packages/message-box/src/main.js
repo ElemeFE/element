@@ -1,7 +1,7 @@
-import { $t } from 'element-ui/src/locale';
+import { t } from 'element-ui/src/locale';
 
-const CONFIRM_TEXT = $t('el.messagebox.confirm');
-const CANCEL_TEXT = $t('el.messagebox.cancel');
+const CONFIRM_TEXT = t('el.messagebox.confirm');
+const CANCEL_TEXT = t('el.messagebox.cancel');
 
 const defaults = {
   title: '提示',

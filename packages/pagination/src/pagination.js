@@ -2,7 +2,7 @@ import Pager from './pager.vue';
 import ElSelect from 'element-ui/packages/select';
 import ElOption from 'element-ui/packages/option';
 import Migrating from 'element-ui/src/mixins/migrating';
-import { $t } from 'element-ui/src/locale';
+import { t } from 'element-ui/src/locale';
 
 export default {
   name: 'ElPagination',
@@ -137,7 +137,7 @@ export default {
                 this.$parent.pageSizes.map(item =>
                     <el-option
                       value={ item }
-                      label={ item + ' ' + $t('el.pagination.pagesize') }>
+                      label={ item + ' ' + t('el.pagination.pagesize') }>
                     </el-option>
                   )
               }
@@ -183,7 +183,7 @@ export default {
       render(h) {
         return (
           <span class="el-pagination__jump">
-            { $t('el.pagination.goto') }
+            { t('el.pagination.goto') }
             <input
               class="el-pagination__editor"
               type="number"
@@ -194,7 +194,7 @@ export default {
               on-focus={ this.handleFocus }
               style={{ width: '30px' }}
               number/>
-            { $t('el.pagination.pageClassifier') }
+            { t('el.pagination.pageClassifier') }
           </span>
         );
       }
@@ -204,7 +204,7 @@ export default {
       render(h) {
         return (
           typeof this.$parent.total === 'number'
-            ? <span class="el-pagination__total">{ $t('el.pagination.total', { total: this.$parent.total }) }</span>
+            ? <span class="el-pagination__total">{ t('el.pagination.total', { total: this.$parent.total }) }</span>
             : ''
         );
       }
