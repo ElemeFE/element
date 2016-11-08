@@ -152,3 +152,9 @@
 | on-error | 可选参数, 文件上传失败时的钩子 | function(err, response, file) | — | — |
 | before-upload | 可选参数, 上传文件之前的钩子，参数为上传的文件，若返回 false 或者 Promise 则停止上传。 | function(file) | — | — |
 | thumbnail-mode | 是否设置为图片模式，该模式下会显示图片缩略图 | boolean | — | false |
+
+### Upload Methods
+
+| 方法名      | 说明          | 参数 |
+|---------- |-------------- | - |
+| clearFiles | 清空已上传的文件列表 | — |
