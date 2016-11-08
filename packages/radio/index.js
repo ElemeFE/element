@@ -1,9 +1,8 @@
-const ElRadio = require('./src/radio');
+import Radio from './src/radio';
 
 /* istanbul ignore next */
-ElRadio.install = function(Vue) {
-  Vue.component('el-radio', ElRadio);
+Radio.install = function(Vue) {
+  Vue.component('el-radio', Radio);
 };
 
-module.exports = ElRadio;
-
+export default Radio;

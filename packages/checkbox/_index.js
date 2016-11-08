@@ -1,11 +1,13 @@
-const ElCheckbox = require('./src/checkbox');
-const ElCheckboxGroup = require('./src/checkbox-group.vue');
+import ElCheckbox from './src/checkbox';
+import ElCheckboxGroup from './src/checkbox-group.vue';
 
 /* istanbul ignore next */
-module.exports = function install(Vue) {
+export default function install(Vue) {
   Vue.component(ElCheckboxGroup.name, ElCheckboxGroup);
   Vue.component(ElCheckbox.name, ElCheckbox);
 };
 
-exports.ElCheckbox = ElCheckbox;
-exports.ElCheckboxGroup = ElCheckboxGroup;
+export {
+  ElCheckbox,
+  ElCheckboxGroup
+};

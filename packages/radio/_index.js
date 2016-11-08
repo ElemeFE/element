@@ -1,14 +1,12 @@
-const ElRadio = require('./src/radio');
-const RadioButton = require('./src/radio-button.vue');
-const RadioGroup = require('./src/radio-group.vue');
+import Radio from './src/radio';
+import RadioButton from './src/radio-button.vue';
+import RadioGroup from './src/radio-group.vue';
 
 /* istanbul ignore next */
-module.exports = function(Vue) {
-  Vue.component(ElRadio.name, ElRadio);
+export default function(Vue) {
+  Vue.component(Radio.name, Radio);
   Vue.component(RadioButton.name, RadioButton);
   Vue.component(RadioGroup.name, RadioGroup);
 };
 
-exports.ElRadio = ElRadio;
-exports.RadioButton = ElRadio;
-exports.RadioGroup = RadioGroup;
+export { Radio, RadioButton, RadioGroup };

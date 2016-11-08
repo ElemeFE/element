@@ -1,6 +1,6 @@
-const Popover = require('./src/main');
-const directive = require('./src/directive').default;
-const Vue = require('vue');
+import Popover from './src/main';
+import directive from './src/directive';
+import Vue from 'vue';
 
 Vue.directive('popover', directive);
 
@@ -11,4 +11,4 @@ Popover.install = function(Vue) {
 };
 Popover.directive = directive;
 
-module.exports = Popover;
+export default Popover;
