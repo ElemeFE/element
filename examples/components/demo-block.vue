@@ -8,8 +8,8 @@
     <div class="meta">
       <div class="description">
         <slot></slot>
-        <el-tooltip effect="dark" content="前往 jsfiddle.net 运行此实例" placement="right">
-          <el-button size="small" type="primary" @click="goJsfiddle">在线运行</el-button>
+        <el-tooltip effect="dark" :content="langConfig['tooltip-text']" placement="right">
+          <el-button size="small" type="primary" @click="goJsfiddle">{{ langConfig['button-text'] }}</el-button>
         </el-tooltip>
       </div>
       <slot name="highlight"></slot>

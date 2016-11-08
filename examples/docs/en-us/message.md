@@ -41,6 +41,9 @@ Used to show the feedback of Success, Warning, Message and Error activities.
 <script>
   export default {
     methods: {
+      open() {
+        this.$message('这是一条消息提示');
+      },
       open2() {
         this.$message({
           message: 'Congrats, this is a success message.',
