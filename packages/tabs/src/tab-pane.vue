@@ -35,7 +35,7 @@
 
     destroyed() {
       if (this.$el) {
-        this.$el.remove();
+        this.$el.parentNode.removeChild(this.$el);
       }
     },
 
