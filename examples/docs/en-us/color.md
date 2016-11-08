@@ -87,7 +87,7 @@
 ## Color
 Element uses a specific set of palettes to specify colors to provide a consistent look and feel for the products you build.
 
-### Tint Color
+### Main Color
 
 The main color of Element is bright and friendly blue.
 

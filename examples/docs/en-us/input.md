@@ -5,7 +5,7 @@
     render: function (h, ctx) {
       var item = ctx.props.item;
       return h('li', ctx.data, [
-        h('div', { attrs: { class: 'repo' } }, [item.repo]),
+        h('div', { attrs: { class: 'value' } }, [item.value]),
         h('span', { attrs: { class: 'link' } }, [item.link])
       ]);
     },
@@ -38,13 +38,13 @@
     methods: {
       loadAll() {
         return [
-          { "repo": "vue", "link": "https://github.com/vuejs/vue" },
-          { "repo": "element", "link": "https://github.com/ElemeFE/element" },
-          { "repo": "cooking", "link": "https://github.com/ElemeFE/cooking" },
-          { "repo": "mint-ui", "link": "https://github.com/ElemeFE/mint-ui" },
-          { "repo": "vuex", "link": "https://github.com/vuejs/vuex" },
-          { "repo": "vue-router", "link": "https://github.com/vuejs/vue-router" },
-          { "repo": "babel", "link": "https://github.com/babel/babel" }
+          { "value": "vue", "link": "https://github.com/vuejs/vue" },
+          { "value": "element", "link": "https://github.com/ElemeFE/element" },
+          { "value": "cooking", "link": "https://github.com/ElemeFE/cooking" },
+          { "value": "mint-ui", "link": "https://github.com/ElemeFE/mint-ui" },
+          { "value": "vuex", "link": "https://github.com/vuejs/vuex" },
+          { "value": "vue-router", "link": "https://github.com/vuejs/vue-router" },
+          { "value": "babel", "link": "https://github.com/babel/babel" }
         ];
       },
       querySearch(queryString, cb) {
@@ -56,6 +56,7 @@
       querySearchAsync(queryString, cb) {
         var links = this.links;
         var results = queryString ? links.filter(this.createStateFilter(queryString)) : links;
+        console.log(results);
 
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
@@ -140,7 +141,7 @@
         line-height: normal;
         padding: 7px *;
 
-        .repo {
+        .value {
           text-overflow: ellipsis;
           overflow: hidden;
         }
@@ -155,7 +156,7 @@
 
 ## Input
 
-Use mouse or keyboard to input data
+Input data using mouse or keyboard.
 
 ### Basic usage
 
@@ -196,6 +197,7 @@ Add an icon to indicate input type.
   @click="handleIconClick">
 </el-input>
 ```
+:::
 
 ### Textarea
 
@@ -268,7 +270,6 @@ Prepend or append an element, generally a label or a button.
 You can get some recommended tips based on the current input.
 
 ::: demo Autocomplete component provides input suggestions. The `fetch-suggestions` attribute is a method that returns suggested input. In this example, `querySearch(queryString, cb)` returns suggestions to Autocomplete via `cb(data)` when suggestions are ready.
-
 ```html
 <el-row class="inline-input border-grid">
   <el-col :span="12" class="tac">
@@ -309,18 +310,18 @@ You can get some recommended tips based on the current input.
       },
       createFilter(queryString) {
         return (link) => {
-          return (link.repo.indexOf(queryString.toLowerCase()) === 0);
+          return (link.value.indexOf(queryString.toLowerCase()) === 0);
         };
       },
       loadAll() {
         return [
-          { "repo": "vue", "link": "https://github.com/vuejs/vue" },
-          { "repo": "element", "link": "https://github.com/ElemeFE/element" },
-          { "repo": "cooking", "link": "https://github.com/ElemeFE/cooking" },
-          { "repo": "mint-ui", "link": "https://github.com/ElemeFE/mint-ui" },
-          { "repo": "vuex", "link": "https://github.com/vuejs/vuex" },
-          { "repo": "vue-router", "link": "https://github.com/vuejs/vue-router" },
-          { "repo": "babel", "link": "https://github.com/babel/babel" }
+          { "value": "vue", "link": "https://github.com/vuejs/vue" },
+          { "value": "element", "link": "https://github.com/ElemeFE/element" },
+          { "value": "cooking", "link": "https://github.com/ElemeFE/cooking" },
+          { "value": "mint-ui", "link": "https://github.com/ElemeFE/mint-ui" },
+          { "value": "vuex", "link": "https://github.com/vuejs/vuex" },
+          { "value": "vue-router", "link": "https://github.com/vuejs/vue-router" },
+          { "value": "babel", "link": "https://github.com/babel/babel" }
          ];
       },
       handleSelect(item) {
@@ -340,7 +341,6 @@ You can get some recommended tips based on the current input.
 Customize how suggestions are displayed.
 
 :::demo
-
 ```html
 <el-autocomplete
   class="my-autocomplete"
@@ -358,7 +358,7 @@ Customize how suggestions are displayed.
     render: function (h, ctx) {
       var item = ctx.props.item;
       return h('li', ctx.data, [
-        h('div', { attrs: { class: 'repo' } }, [item.repo]),
+        h('div', { attrs: { class: 'value' } }, [item.value]),
         h('span', { attrs: { class: 'link' } }, [item.link])
       ]);
     },
@@ -382,18 +382,18 @@ Customize how suggestions are displayed.
       },
       createFilter(queryString) {
         return (link) => {
-          return (link.repo.indexOf(queryString.toLowerCase()) === 0);
+          return (link.value.indexOf(queryString.toLowerCase()) === 0);
         };
       },
       loadAll() {
         return [
-          { "repo": "vue", "link": "https://github.com/vuejs/vue" },
-          { "repo": "element", "link": "https://github.com/ElemeFE/element" },
-          { "repo": "cooking", "link": "https://github.com/ElemeFE/cooking" },
-          { "repo": "mint-ui", "link": "https://github.com/ElemeFE/mint-ui" },
-          { "repo": "vuex", "link": "https://github.com/vuejs/vuex" },
-          { "repo": "vue-router", "link": "https://github.com/vuejs/vue-router" },
-          { "repo": "babel", "link": "https://github.com/babel/babel" }
+          { "value": "vue", "link": "https://github.com/vuejs/vue" },
+          { "value": "element", "link": "https://github.com/ElemeFE/element" },
+          { "value": "cooking", "link": "https://github.com/ElemeFE/cooking" },
+          { "value": "mint-ui", "link": "https://github.com/ElemeFE/mint-ui" },
+          { "value": "vuex", "link": "https://github.com/vuejs/vuex" },
+          { "value": "vue-router", "link": "https://github.com/vuejs/vue-router" },
+          { "value": "babel", "link": "https://github.com/babel/babel" }
          ];
       },
       handleSelect(item) {
@@ -432,13 +432,13 @@ Search data from server-side.
     methods: {
       loadAll() {
         return [
-          { "repo": "vue", "link": "https://github.com/vuejs/vue" },
-          { "repo": "element", "link": "https://github.com/ElemeFE/element" },
-          { "repo": "cooking", "link": "https://github.com/ElemeFE/cooking" },
-          { "repo": "mint-ui", "link": "https://github.com/ElemeFE/mint-ui" },
-          { "repo": "vuex", "link": "https://github.com/vuejs/vuex" },
-          { "repo": "vue-router", "link": "https://github.com/vuejs/vue-router" },
-          { "repo": "babel", "link": "https://github.com/babel/babel" }
+          { "value": "vue", "link": "https://github.com/vuejs/vue" },
+          { "value": "element", "link": "https://github.com/ElemeFE/element" },
+          { "value": "cooking", "link": "https://github.com/ElemeFE/cooking" },
+          { "value": "mint-ui", "link": "https://github.com/ElemeFE/mint-ui" },
+          { "value": "vuex", "link": "https://github.com/vuejs/vuex" },
+          { "value": "vue-router", "link": "https://github.com/vuejs/vue-router" },
+          { "value": "babel", "link": "https://github.com/babel/babel" }
          ];
       },
       querySearchAsync(queryString, cb) {
@@ -452,7 +452,7 @@ Search data from server-side.
       },
       createFilter(queryString) {
         return (link) => {
-          return (link.repo.indexOf(queryString.toLowerCase()) === 0);
+          return (link.value.indexOf(queryString.toLowerCase()) === 0);
         };
       },
       handleSelect(item) {

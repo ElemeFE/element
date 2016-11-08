@@ -22,15 +22,20 @@ Displays the amount of new messages.
   <el-button size="small">replies</el-button>
 </el-badge>
 
-<el-dropdown text="click me" type="text" :icon-separate="false" trigger="click">
-  <el-dropdown-item class="clearfix">
-    comments
-    <el-badge class="mark" :value="12" />
-  </el-dropdown-item>
-  <el-dropdown-item class="clearfix">
-    replies
-    <el-badge class="mark" :value="3" />
-  </el-dropdown-item>
+<el-dropdown trigger="click">
+  <span class="el-dropdown-link">
+    Click Me<i class="el-icon-caret-bottom el-icon--right"></i>
+  </span>
+  <el-dropdown-menu slot="dropdown">
+    <el-dropdown-item class="clearfix">
+      comments
+      <el-badge class="mark" :value="12" />
+    </el-dropdown-item>
+    <el-dropdown-item class="clearfix">
+      replies
+      <el-badge class="mark" :value="3" />
+    </el-dropdown-item>
+  </el-dropdown-menu>
 </el-dropdown>
 ```
 :::

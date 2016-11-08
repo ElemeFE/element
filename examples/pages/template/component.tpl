@@ -28,7 +28,7 @@
           }
           td, th {
             border-bottom: 1px solid #eaeefb;
-            padding: 10px 0;
+            padding: 10px;
           }
           th:first-child, td:first-child {
             padding-left: 10px;
