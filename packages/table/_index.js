@@ -1,11 +1,10 @@
-const ElTableColumn = require('./src/table-column');
-const ElTable = require('./src/table');
+import ElTableColumn from './src/table-column';
+import ElTable from './src/table';
 
 /* istanbul ignore next */
-module.exports = function(Vue) {
+export default function(Vue) {
   Vue.component(ElTable.name, ElTable);
   Vue.component(ElTableColumn.name, ElTableColumn);
 };
 
-exports.ElTable = ElTable;
-exports.ElTableColumn = ElTableColumn;
+export { ElTable, ElTableColumn };

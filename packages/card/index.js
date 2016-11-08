@@ -1,8 +1,8 @@
-const Card = require('./src/main');
+import Card from './src/main';
 
 /* istanbul ignore next */
 Card.install = function(Vue) {
   Vue.component(Card.name, Card);
 };
 
-module.exports = Card;
+export default Card;

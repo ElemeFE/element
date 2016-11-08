@@ -1,11 +1,10 @@
-const ElFormItem = require('./src/form-item');
-const ElForm = require('./src/form');
+import ElFormItem from './src/form-item';
+import ElForm from './src/form';
 
 /* istanbul ignore next */
-module.exports = function(Vue) {
+export default function(Vue) {
   Vue.component(ElForm.name, ElForm);
   Vue.component(ElFormItem.name, ElFormItem);
 };
 
-exports = ElFormItem;
-exports = ElForm;
+export { ElForm, ElFormItem };
