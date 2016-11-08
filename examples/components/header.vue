@@ -58,6 +58,24 @@
       position: relative;
       cursor: pointer;
       margin-left: 20px;
+    
+      &:last-child {
+       cursor: default;
+      }
+    
+      .nav-lang {
+        cursor: pointer;
+        display: inline-block;
+        height: 100%;
+        opacity: .8;
+        &:hover {
+          opacity: 1;
+        }
+        &.active {
+          font-weight: 700;
+          opacity: 1;
+        }
+      }
 
       a {
         text-decoration: none;
@@ -119,7 +137,21 @@
               exact>{{ langConfig.resource }}
             </router-link>
           </li>
-          <li class="nav-item" @click="switchLang">{{ switchText }}</li>
+          <li class="nav-item">
+            <span
+              class="nav-lang"
+              :class="{ 'active': lang === 'zh-CN' }"
+              @click="switchLang('zh-CN')">
+              中文
+            </span>
+            <span> / </span>
+            <span
+              class="nav-lang"
+              :class="{ 'active': lang === 'en-US' }"
+              @click="switchLang('en-US')">
+              En
+            </span>
+          </li>
         </ul>
       </div>
     </header>
@@ -149,18 +181,12 @@
       },
       langConfig() {
         return compoLang.filter(config => config.lang === this.lang)[0]['header'];
-      },
-
-      // TODO: use dropdown to display more than two languages
-      switchText() {
-        return this.lang === 'zh-CN' ? 'English' : '中文';
       }
     },
     methods: {
-      // TODO: use dropdown to display more than two languages
-      switchLang() {
-        let langMap = { 'zh-CN': 'en-US', 'en-US': 'zh-CN' };
-        this.$router.push(this.$route.path.replace(this.lang, langMap[this.lang]));
+      switchLang(targetLang) {
+        if (this.lang === targetLang) return;
+        this.$router.push(this.$route.path.replace(this.lang, targetLang));
       }
     },
     mounted() {

@@ -79,6 +79,7 @@
         "15": "适用于导航较少，页面篇幅较长的网站。"
       },
       "resource": {
+        "paraHeight": "1.2",
         "1": "资源",
         "2": "这里提供 Element 相关设计资源和设计工具的下载，更多设计资源正在整理和完善中。",
         "3": "Axure Components",
@@ -99,9 +100,9 @@
         "theatreSize": "42",
         "paraHeight": "1.6",
         "theatreParam": "{ maxSpeed: 100 }",
-        "typingFunc": ".addScene('product designer', 1800, -16, 800)\n          .addScene('UX designer', 1800, -11, 800)\n          .addScene('UI designer', 1800, -11, 800)\n          .addScene('product manager', 1800, -15, 800)\n          .addScene('FE developer', 1800, -12, 800)",
+        "typingFunc": ".addScene('product designer', 1800, -16, 800)\n          .addScene('UI designer', 1800, -11, 800)\n          .addScene('UX designer', 1800, -11, 800)\n          .addScene('product manager', 1800, -15, 800)\n          .addScene('FE developer', 1800, -12, 800)",
         "typingInvoke": ".addActor('line2', { speed: 1, accuracy: 1 })\n        .addScene(2600)\n        .addScene('line2:Just for ', 500)",
-        "1": "Desktop UI Library",
+        "1": "A Desktop UI Library",
         "2": "Element, a Vue 2.0 based component library for developers, designers and product managers, with a set of design resources.",
         "3": "Guide",
         "4": "Understand the design guidelines, helping designers build product that's logically sound, reasonably structured and easy to use.",
@@ -171,6 +172,7 @@
         "15": "Suitable for sites with few navigations and large chunks."
       },
       "resource": {
+        "paraHeight": "1.6",
         "1": "Resource",
         "2": "Here you can download design resources and tools that shaped Element UI. More design resources are being prepared.",
         "3": "Axure Components",

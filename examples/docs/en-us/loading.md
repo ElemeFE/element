@@ -76,7 +76,7 @@ Show a full screen animation while loading data.
       return {
         fullscreenLoading: false
       }
-    }
+    },
     methods: {
       openFullScreen() {
         this.fullscreenLoading = true;

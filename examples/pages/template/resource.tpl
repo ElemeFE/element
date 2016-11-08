@@ -56,6 +56,7 @@
       color: #99a9bf;
       padding: 0 30px;
       margin: 0;
+      line-height: <%= paraHeight >;
     }
     a {
       height: 42px;

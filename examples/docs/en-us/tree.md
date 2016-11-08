@@ -185,13 +185,13 @@ Used for level selection. In the following example, the layer data is unpredicta
         var hasChild = Math.random() > 0.5;
         if (node.level > 4) return resolve([]);
 
-        setTimeout(function() {
+        setTimeout(() => {
           var data;
           if (hasChild) {
             data = [{
-              name: 'zone' + count++
+              name: 'zone' + this.count++
             }, {
-              name: 'zone' + count++
+              name: 'zone' + this.count++
             }];
           } else {
             data = [];

@@ -3,7 +3,9 @@
     "lang": "zh-CN",
     "demo-block": {
       "hide-text": "隐藏代码",
-      "show-text": "显示代码"
+      "show-text": "显示代码",
+      "button-text": "在线运行",
+      "tooltip-text": "前往 jsfiddle.net 运行此实例"
     },
     "footer": {
       "feedback": "反馈建议",
@@ -20,7 +22,9 @@
     "lang": "en-US",
     "demo-block": {
       "hide-text": "Hide",
-      "show-text": "Expand"
+      "show-text": "Expand",
+      "button-text": "Try it!",
+      "tooltip-text": "Run this demo on jsfiddle.net"
     },
     "footer": {
       "feedback": "Feedback",
