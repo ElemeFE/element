@@ -539,4 +539,9 @@
   --datepicker-inrange-hover-color: #AFDCFF;
   --datepicker-active-color: var(--color-primary);
   --datepicker-text-hover-color: #20a0ff;
+
+  /* Loading
+  --------------------------*/
+  --loading-spinner-size: 42px;
+  --loading-fullscreen-spinner-size: 64px;
 }
