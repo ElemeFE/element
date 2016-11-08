@@ -75,7 +75,7 @@
       return {
         fullscreenLoading: false
       }
-    }
+    },
     methods: {
       openFullScreen() {
         this.fullscreenLoading = true;
