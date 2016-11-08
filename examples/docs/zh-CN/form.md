@@ -295,7 +295,7 @@
 
 ::: demo 在 Form 组件中，每一个表单域由一个 Form-Item 组件构成，表单域中可以放置各种类型的表单控件，包括 Input、Select、Checkbox、Radio、Switch、DatePicker、TimePicker
 ```html
-<el-form ref="form" :model="form" label-width="80px" @submit.native.prevent="onSubmit">
+<el-form ref="form" :model="form" label-width="80px">
   <el-form-item label="活动名称">
     <el-input v-model="form.name"></el-input>
   </el-form-item>
@@ -335,8 +335,8 @@
     <el-input type="textarea" v-model="form.desc"></el-input>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" native-type="submit">立即创建</el-button>
-    <el-button @click.native.prevent>取消</el-button>
+    <el-button type="primary" @click="onSubmit">立即创建</el-button>
+    <el-button>取消</el-button>
   </el-form-item>
 </el-form>
 <script>
@@ -371,7 +371,7 @@
 
 ::: demo 设置 `inline` 属性可以让表单域变为行内的表单域
 ```html
-<el-form :inline="true" :model="formInline" @submit.native.prevent="onSubmit" class="demo-form-inline">
+<el-form :inline="true" :model="formInline" class="demo-form-inline">
   <el-form-item>
     <el-input v-model="formInline.user" placeholder="审批人"></el-input>
   </el-form-item><el-form-item>
@@ -380,7 +380,7 @@
       <el-option label="区域二" value="beijing"></el-option>
     </el-select>
   </el-form-item><el-form-item>
-    <el-button native-type="submit" type="primary">查询</el-button>
+    <el-button type="primary" @click="onSubmit">查询</el-button>
   </el-form-item>
 </el-form>
 <script>
@@ -473,7 +473,7 @@
 
 ::: demo 通过设置 `label-position` 属性可以改变表单域标签的位置，可选值为 `top`、`left`，当设为 `left` 时标签会变为左对齐
 ```html
-<el-form :model="formAlignLeft" label-position="left" @submit.native.prevent="onSubmit" label-width="80px">
+<el-form :model="formAlignLeft" label-position="left" label-width="80px">
   <el-form-item label="活动名称">
     <el-input v-model="formAlignLeft.name"></el-input>
   </el-form-item>
@@ -550,8 +550,8 @@
     <el-input type="textarea" v-model="ruleForm.desc"></el-input>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click.native.prevent="handleSubmit">立即创建</el-button>
-    <el-button @click.native.prevent="handleReset">重置</el-button>
+    <el-button type="primary" @click="handleSubmit">立即创建</el-button>
+    <el-button @click="handleReset">重置</el-button>
   </el-form-item>
 </el-form>
 <script>
@@ -629,8 +629,8 @@
     <el-input v-model="ruleForm2.age"></el-input>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click.native.prevent="handleSubmit2">提交</el-button>
-    <el-button @click.native.prevent="handleReset2">重置</el-button>
+    <el-button type="primary" @click="handleSubmit2">提交</el-button>
+    <el-button @click="handleReset2">重置</el-button>
   </el-form-item>
 </el-form>
 <script>
@@ -735,8 +735,8 @@
     <el-input v-model="domain.value"></el-input><el-button @click.native.prevent="removeDomain(domain)">删除</el-button>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click.native.prevent="handleSubmit3">提交</el-button>
-    <el-button @click.native.prevent="addDomain">新增域名</el-button>
+    <el-button type="primary" @click="handleSubmit3">提交</el-button>
+    <el-button @click="addDomain">新增域名</el-button>
   </el-form-item>
 </el-form>
 <script>
