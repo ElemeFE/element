@@ -33,8 +33,8 @@
 
 ```html
 <template>
-  <el-tabs>
-    <el-tab-pane v-for="tab in tabs" :label="tab.label">{{tab.content}}</el-tab-pane>
+  <el-tabs :active-name="activeName">
+    <el-tab-pane v-for="tab in tabs" :label="tab.label" :name="tab.name">{{tab.content}}</el-tab-pane>
   </el-tabs>
 </template>
 <script>
@@ -42,10 +42,10 @@
     data() {
       return {
         tabs: [
-          {label: '用户管理', content: ''},
-          {label: '配置管理', content: ''},
-          {label: '角色管理', content: ''},
-          {label: '定时任务补偿', content: ''}
+          {label: '用户管理', content: '', name: 'first'},
+          {label: '配置管理', content: '', name: 'second'},
+          {label: '角色管理', content: '', name: 'third'},
+          {label: '定时任务补偿', content: '', name: 'last'}
         ]
       };
     }
