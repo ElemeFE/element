@@ -70,7 +70,8 @@
     data() {
       return {
         value1: 0,
-        value2: 50
+        value2: 50,
+        value3: 42
       }
     }
   }
@@ -106,8 +107,8 @@
   export default {
     data() {
       return {
-        value3: 0,
-        value4: 0
+        value4: 0,
+        value5: 0
       }
     }
   }
@@ -134,7 +135,7 @@
   export default {
     data() {
       return {
-        value5: 0
+        value6: 0
       }
     }
   }
