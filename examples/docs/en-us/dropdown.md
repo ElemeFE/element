@@ -47,12 +47,10 @@
     }
   }
 </script>
-# Dropdown 
+## Dropdown 
 Toggleable menu for displaying lists of links and actions.
 
----
-
-## Basic usage
+### Basic usage
 Hover on the dropdown menu to unfold it for more actions. 
 
 :::demo The triggering element is rendered by the default `slot`, and the dropdown part is rendered by the `slot` named `dropdown`. By default, dropdown list shows when you hover on the triggering element without having to click it.
@@ -74,13 +72,11 @@ Hover on the dropdown menu to unfold it for more actions.
 
 :::
 
-## Triggering element
+### Triggering element
 
 Use the button to trigger the dropdown list.
 
-:::demo Use `split-button` to split the triggering element into a button group with the left button being a normal button and right one the actual triggering target.
-If you wanna insert a separator line between item three and item four, just add a class `divider` to item four.
-
+:::demo Use `split-button` to split the triggering element into a button group with the left button being a normal button and right one the actual triggering target. If you wanna insert a separator line between item three and item four, just add a class `divider` to item four.
 ```html
 <el-dropdown>
   <el-button type="primary">
@@ -104,8 +100,8 @@ If you wanna insert a separator line between item three and item four, just add 
     <el-dropdown-item>Action 5</el-dropdown-item>
   </el-dropdown-menu>
 </el-dropdown>
-
 ```
+:::
 
 ### How to trigger
 

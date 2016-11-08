@@ -205,7 +205,7 @@
       width: 360px;
     }
     .el-form {
-      width: 440px;
+      width: 480px;
     }
 
     .line {
@@ -242,7 +242,7 @@
       }
     }
     .demo-form-normal {
-      width: 440px;
+      width: 480px;
     }
     .demo-form-inline {
       .el-input {
@@ -260,7 +260,7 @@
       }
     }
     .demo-ruleForm {
-      width: 460px;
+      width: 480px;
 
       .el-input,
       .el-textarea {
@@ -293,12 +293,10 @@ Form consists of `input`, `radio`, `select`, `checkbox` and so on. With form, yo
 
 It includes all kinds of input items, such as `input`, `select`, `radio` and `checkbox`.
 
-In each `form` component, you need a `form-item` field to be the container of your input item.
-
-:::demo
+:::demo In each `form` component, you need a `form-item` field to be the container of your input item.
 
 ```html
-<el-form ref="form" :model="form" label-width="120px" @submit.native.prevent="onSubmit">
+<el-form ref="form" :model="form" label-width="120px">
   <el-form-item label="Activity name">
     <el-input v-model="form.name"></el-input>
   </el-form-item>
@@ -310,11 +308,11 @@ In each `form` component, you need a `form-item` field to be the container of yo
   </el-form-item>
   <el-form-item label="Activity time">
     <el-col :span="11">
-      <el-date-picker type="date" placeholder="Please pick a date" v-model="form.date1" style="width: 100%;"></el-date-picker>
+      <el-date-picker type="date" placeholder="Pick a date" v-model="form.date1" style="width: 100%;"></el-date-picker>
     </el-col>
     <el-col class="line" :span="2">-</el-col>
     <el-col :span="11">
-      <el-time-picker type="fixed-time" placeholder="Please pick a time" v-model="form.date2" style="width: 100%;"></el-time-picker>
+      <el-time-picker type="fixed-time" placeholder="Pick a time" v-model="form.date2" style="width: 100%;"></el-time-picker>
     </el-col>
   </el-form-item>
   <el-form-item label="Instant delivery">
@@ -322,24 +320,24 @@ In each `form` component, you need a `form-item` field to be the container of yo
   </el-form-item>
   <el-form-item label="Activity type">
     <el-checkbox-group v-model="form.type">
-      <el-checkbox label="Gourmet/restaurant online activities" name="type"></el-checkbox>
+      <el-checkbox label="Online activities" name="type"></el-checkbox>
       <el-checkbox label="Promotion activities" name="type"></el-checkbox>
-      <el-checkbox label="Offline theme activities" name="type"></el-checkbox>
+      <el-checkbox label="Offline activities" name="type"></el-checkbox>
       <el-checkbox label="Simple brand exposure" name="type"></el-checkbox>
     </el-checkbox-group>
   </el-form-item>
-  <el-form-item label="Special resources">
+  <el-form-item label="Resources">
     <el-radio-group v-model="form.resource">
-      <el-radio label="Online brand sponsorship"></el-radio>
-      <el-radio label="Offline venue for free"></el-radio>
+      <el-radio label="Sponsor"></el-radio>
+      <el-radio label="Venue"></el-radio>
     </el-radio-group>
   </el-form-item>
   <el-form-item label="Activity form">
     <el-input type="textarea" v-model="form.desc"></el-input>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary">Create</el-button>
-    <el-button @click.native.prevent>Cancel</el-button>
+    <el-button type="primary" @click="onSubmit">Create</el-button>
+    <el-button>Cancel</el-button>
   </el-form-item>
 </el-form>
 <script>
@@ -375,7 +373,7 @@ When the vertical space is limited and the form is relatively simple, you can pu
 :::demo Set the `inline` attribute to `true` and the form will be inline.
 
 ```html
-<el-form :inline="true" :model="formInline" @submit.native.prevent="onSubmit" class="demo-form-inline">
+<el-form :inline="true" :model="formInline" class="demo-form-inline">
   <el-form-item>
     <el-input v-model="formInline.user" placeholder="Approved by"></el-input>
   </el-form-item><el-form-item>
@@ -384,7 +382,7 @@ When the vertical space is limited and the form is relatively simple, you can pu
       <el-option label="Zone two" value="beijing"></el-option>
     </el-select>
   </el-form-item><el-form-item>
-    <el-button native-type="submit" type="primary">Query</el-button>
+    <el-button type="primary" @click="onSubmit">Query</el-button>
   </el-form-item>
 </el-form>
 <script>
@@ -480,7 +478,7 @@ Depending on your design, there are several different ways to align your label e
 :::demo When `label-position` is set to `top`, labels will align to the left.
 
 ```html
-<el-form :model="formAlignLeft" label-position="left" @submit.native.prevent="onSubmit" label-width="120px">
+<el-form :model="formAlignLeft" label-position="left" label-width="120px">
   <el-form-item label="Activity name">
     <el-input v-model="formAlignLeft.name"></el-input>
   </el-form-item>
@@ -520,7 +518,7 @@ Form component allows you to verify your data, helping you find and correct erro
     <el-input v-model="ruleForm.name"></el-input>
   </el-form-item>
   <el-form-item label="Activity zone" prop="region">
-    <el-select v-model="ruleForm.region" placeholder="请选择Activity zone">
+    <el-select v-model="ruleForm.region" placeholder="Activity zone">
       <el-option label="Zone one" value="shanghai"></el-option>
       <el-option label="Zone two" value="beijing"></el-option>
     </el-select>
@@ -528,13 +526,13 @@ Form component allows you to verify your data, helping you find and correct erro
   <el-form-item label="Activity time" required>
     <el-col :span="11">
       <el-form-item prop="date1">
-        <el-date-picker type="date" placeholder="Please pick a date" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
+        <el-date-picker type="date" placeholder="Pick a date" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
       </el-form-item>
     </el-col>
     <el-col class="line" :span="2">-</el-col>
     <el-col :span="11">
       <el-form-item prop="date2">
-        <el-time-picker type="fixed-time" placeholder="Please pick a time" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
+        <el-time-picker type="fixed-time" placeholder="Pick a time" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
       </el-form-item>
     </el-col>
   </el-form-item>
@@ -543,24 +541,24 @@ Form component allows you to verify your data, helping you find and correct erro
   </el-form-item>
   <el-form-item label="Activity type" prop="type">
     <el-checkbox-group v-model="ruleForm.type">
-      <el-checkbox label="Gourmet/restaurant online activities" name="type"></el-checkbox>
+      <el-checkbox label="Online activities" name="type"></el-checkbox>
       <el-checkbox label="Promotion activities" name="type"></el-checkbox>
-      <el-checkbox label="Offline theme activities" name="type"></el-checkbox>
+      <el-checkbox label="Offline activities" name="type"></el-checkbox>
       <el-checkbox label="Simple brand exposure" name="type"></el-checkbox>
     </el-checkbox-group>
   </el-form-item>
-  <el-form-item label="Special resources" prop="resource">
+  <el-form-item label="Resources" prop="resource">
     <el-radio-group v-model="ruleForm.resource">
-      <el-radio label="Online brand sponsorship"></el-radio>
-      <el-radio label="Offline venue for free"></el-radio>
+      <el-radio label="Sponsorship"></el-radio>
+      <el-radio label="Venue"></el-radio>
     </el-radio-group>
   </el-form-item>
   <el-form-item label="Activity form" prop="desc">
     <el-input type="textarea" v-model="ruleForm.desc"></el-input>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click.native.prevent="handleSubmit">Create</el-button>
-    <el-button @click.native.prevent="handleReset">Reset</el-button>
+    <el-button type="primary" @click="handleSubmit">Create</el-button>
+    <el-button @click="handleReset">Reset</el-button>
   </el-form-item>
 </el-form>
 <script>
@@ -632,15 +630,15 @@ Form component allows you to verify your data, helping you find and correct erro
   <el-form-item label="Password" prop="pass">
     <el-input type="password" v-model="ruleForm2.pass" auto-complete="off"></el-input>
   </el-form-item>
-  <el-form-item label="Confirm password" prop="checkPass">
+  <el-form-item label="Confirm" prop="checkPass">
     <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off"></el-input>
   </el-form-item>
   <el-form-item label="Age" prop="age">
     <el-input v-model="ruleForm2.age"></el-input>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click.native.prevent="handleSubmit2">Submit</el-button>
-    <el-button @click.native.prevent="handleReset2">Reset</el-button>
+    <el-button type="primary" @click="handleSubmit2">Submit</el-button>
+    <el-button @click="handleReset2">Reset</el-button>
   </el-form-item>
 </el-form>
 <script>
@@ -745,8 +743,8 @@ Form component allows you to verify your data, helping you find and correct erro
     <el-input v-model="domain.value"></el-input><el-button @click.native.prevent="removeDomain(domain)">Delete</el-button>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click.native.prevent="handleSubmit3">Submit</el-button>
-    <el-button @click.native.prevent="addDomain">New domain</el-button>
+    <el-button type="primary" @click="handleSubmit3">Submit</el-button>
+    <el-button @click="addDomain">New domain</el-button>
   </el-form-item>
 </el-form>
 <script>

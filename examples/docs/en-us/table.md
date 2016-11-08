@@ -9,28 +9,28 @@
           state: 'California',
           city: 'Los Angeles',
           address: 'The Grove, 189 The Grove Dr, Los Angeles',
-          zip: CA 90036
+          zip: 'CA 90036'
         }, {
           date: '2016-05-02',
           name: 'Tom',
           state: 'California',
           city: 'Los Angeles',
           address: 'The Grove, 189 The Grove Dr, Los Angeles',
-          zip: CA 90036
+          zip: 'CA 90036'
         }, {
           date: '2016-05-04',
           name: 'Tom',
           state: 'California',
           city: 'Los Angeles',
           address: 'The Grove, 189 The Grove Dr, Los Angeles',
-          zip: CA 90036
+          zip: 'CA 90036'
         }, {
           date: '2016-05-01',
           name: 'Tom',
           state: 'California',
           city: 'Los Angeles',
           address: 'The Grove, 189 The Grove Dr, Los Angeles',
-          zip: CA 90036
+          zip: 'CA 90036'
         }],
         tableData2: [{
           date: '2016-05-02',
@@ -57,49 +57,49 @@
           state: 'California',
           city: 'Los Angeles',
           address: 'The Grove, 189 The Grove Dr, Los Angeles',
-          zip: CA 90036
+          zip: 'CA 90036'
         }, {
           date: '2016-05-02',
           name: 'Tom',
           state: 'California',
           city: 'Los Angeles',
           address: 'The Grove, 189 The Grove Dr, Los Angeles',
-          zip: CA 90036
+          zip: 'CA 90036'
         }, {
           date: '2016-05-04',
           name: 'Tom',
           state: 'California',
           city: 'Los Angeles',
           address: 'The Grove, 189 The Grove Dr, Los Angeles',
-          zip: CA 90036
+          zip: 'CA 90036'
         }, {
           date: '2016-05-01',
           name: 'Tom',
           state: 'California',
           city: 'Los Angeles',
           address: 'The Grove, 189 The Grove Dr, Los Angeles',
-          zip: CA 90036
+          zip: 'CA 90036'
         }, {
           date: '2016-05-08',
           name: 'Tom',
           state: 'California',
           city: 'Los Angeles',
           address: 'The Grove, 189 The Grove Dr, Los Angeles',
-          zip: CA 90036
+          zip: 'CA 90036'
         }, {
           date: '2016-05-06',
           name: 'Tom',
           state: 'California',
           city: 'Los Angeles',
           address: 'The Grove, 189 The Grove Dr, Los Angeles',
-          zip: CA 90036
+          zip: 'CA 90036'
         }, {
           date: '2016-05-07',
           name: 'Tom',
           state: 'California',
           city: 'Los Angeles',
           address: 'The Grove, 189 The Grove Dr, Los Angeles',
-          zip: CA 90036
+          zip: 'CA 90036'
         }],
         singleSelection: {},
         multipleSelection: []
@@ -509,28 +509,28 @@ Set the attribute `fixed-column-count`, it accepts a `Number` which indicates th
           state: 'Shanghai',
           city: 'Putuo district',
           address: 'Putuo District of Shanghai Jinsha River Road 1518 Lane',
-          zip: CA 90036
+          zip: 'CA 90036'
         }, {
           date: '2016-05-03',
           name: 'Jack',
           state: 'Shanghai',
           city: 'Putuo district',
           address: 'Putuo District of Shanghai Jinsha River Road 1518 Lane',
-          zip: CA 90036
+          zip: 'CA 90036'
         }, {
           date: '2016-05-03',
           name: 'Jack',
           state: 'Shanghai',
           city: 'Putuo district',
           address: 'Putuo District of Shanghai Jinsha River Road 1518 Lane',
-          zip: CA 90036
+          zip: 'CA 90036'
         }, {
           date: '2016-05-03',
           name: 'Jack',
           state: 'Shanghai',
           city: 'Putuo district',
           address: 'Putuo District of Shanghai Jinsha River Road 1518 Lane',
-          zip: CA 90036
+          zip: 'CA 90036'
         }]
       }
     }
@@ -595,28 +595,28 @@ When so much data in vertical and horizontal orientation, you could set certain 
           state: 'Shanghai',
           city: 'Putuo district',
           address: 'Putuo District of Shanghai Jinsha River Road 1518 Lane',
-          zip: CA 90036
+          zip: 'CA 90036'
         }, {
           date: '2016-05-03',
           name: 'Jack',
           state: 'Shanghai',
           city: 'Putuo district',
           address: 'Putuo District of Shanghai Jinsha River Road 1518 Lane',
-          zip: CA 90036
+          zip: 'CA 90036'
         }, {
           date: '2016-05-03',
           name: 'Jack',
           state: 'Shanghai',
           city: 'Putuo district',
           address: 'Putuo District of Shanghai Jinsha River Road 1518 Lane',
-          zip: CA 90036
+          zip: 'CA 90036'
         }, {
           date: '2016-05-03',
           name: 'Jack',
           state: 'Shanghai',
           city: 'Putuo district',
           address: 'Putuo District of Shanghai Jinsha River Road 1518 Lane',
-          zip: CA 90036
+          zip: 'CA 90036'
         }]
       }
     }
@@ -771,22 +771,22 @@ By default, if the content is too much, the extra content will display in the ne
           date: '2016-05-03',
           name: 'Jack',
           address: 'Putuo District of Shanghai Jinsha River Road 1518 Lane',
-          zip: CA 90036
+          zip: 'CA 90036'
         }, {
           date: '2016-05-03',
           name: 'Jack',
           address: 'Putuo District of Shanghai Jinsha River Road 1518 Lane',
-          zip: CA 90036
+          zip: 'CA 90036'
         }, {
           date: '2016-05-03',
           name: 'Jack',
           address: 'Putuo District of Shanghai Jinsha River Road 1518 Lane',
-          zip: CA 90036
+          zip: 'CA 90036'
         }, {
           date: '2016-05-03',
           name: 'Jack',
           address: 'Putuo District of Shanghai Jinsha River Road 1518 Lane',
-          zip: CA 90036
+          zip: 'CA 90036'
         }],
         multipleSelection: []
       }
@@ -842,22 +842,22 @@ based on the column . It accepts the `Boolean` type with an default value `false
           date: '2016-05-03',
           name: 'Jack',
           address: 'Putuo District of Shanghai Jinsha River Road 1518 Lane',
-          zip: CA 90036
+          zip: 'CA 90036'
         }, {
           date: '2016-05-03',
           name: 'Jack',
           address: 'Putuo District of Shanghai Jinsha River Road 1518 Lane',
-          zip: CA 90036
+          zip: 'CA 90036'
         }, {
           date: '2016-05-03',
           name: 'Jack',
           address: 'Putuo District of Shanghai Jinsha River Road 1518 Lane',
-          zip: CA 90036
+          zip: 'CA 90036'
         }, {
           date: '2016-05-03',
           name: 'Jack',
           address: 'Putuo District of Shanghai Jinsha River Road 1518 Lane',
-          zip: CA 90036
+          zip: 'CA 90036'
         }]
       }
     },

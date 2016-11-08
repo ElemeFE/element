@@ -7,7 +7,7 @@ lerna-debug.log.*
 lib
 .idea
 examples/element-ui
-examples/pages/en-us
+examples/pages/en-US
 examples/pages/zh-CN
 fe.element/element-ui
 .npmrc

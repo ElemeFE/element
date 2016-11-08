@@ -48,8 +48,6 @@
 
 Menu that provides navigation for your website.
 
----
-
 ### Top bar
 
 Top bar NavMenu can be used in a variety of scenarios.

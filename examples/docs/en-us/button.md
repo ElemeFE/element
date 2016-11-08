@@ -96,9 +96,7 @@ The `disableds` attribute determines if the button is disabled.
 
 Different colors represent different meanings.
 
-:::demo Use `plain` attribute to create a plain button, and it accepts a `Boolean` value. You can assign different `type` to a plain button as mentioned above.
-**Note**: When using the plain button, you still can set `type` to `text`, but it makes no difference. A plain button will be styled like a `text button` by default.
-
+:::demo Use `plain` attribute to create a plain button, and it accepts a `Boolean` value. You can assign different `type` to a plain button as mentioned above. **Note**: When using the plain button, you still can set `type` to `text`, but it makes no difference. A plain button will be styled like a `text button` by default.
 ```html
 <div class="block">
   <span class="demonstration">Default</span>

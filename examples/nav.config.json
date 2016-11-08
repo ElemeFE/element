@@ -70,7 +70,7 @@
             },
             {
               "path": "/input-number",
-              "title": "Input Number 计数器"
+              "title": "InputNumber 计数器"
             },
             {
               "path": "/select",
@@ -86,27 +86,27 @@
             },
             {
               "path": "/time-picker",
-              "title": "Time Picker 时间选择器"
+              "title": "TimePicker 时间选择器"
             },
             {
               "path": "/date-picker",
-              "title": "Date Picker 日期选择器"
+              "title": "DatePicker 日期选择器"
             },
             {
               "path": "/datetime-picker",
-              "title": "Datetime Picker 日期时间选择器"
+              "title": "DateTimePicker 日期时间选择器"
             },
             {
               "path": "/upload",
               "title": "Upload 上传"
             },
             {
-              "path": "/form",
-              "title": "Form 表单"
-            },
-            {
               "path": "/rate",
               "title": "Rate 评分"
+            },
+            {
+              "path": "/form",
+              "title": "Form 表单"
             }
           ]
         },
@@ -135,7 +135,7 @@
             },
             {
               "path": "/badge",
-              "title": " Badge 标记"
+              "title": "Badge 标记"
             }
           ]
         },
@@ -156,7 +156,7 @@
             },
             {
               "path": "/message-box",
-              "title": "Message Box 弹框"
+              "title": "MessageBox 弹框"
             },
             {
               "path": "/notification",
@@ -165,7 +165,7 @@
           ]
         },
         {
-          "groupName": "Nav",
+          "groupName": "Navigation",
           "list": [
             {
               "path": "/menu",
@@ -284,7 +284,7 @@
             },
             {
               "path": "/input-number",
-              "title": "Input Number"
+              "title": "InputNumber"
             },
             {
               "path": "/select",
@@ -300,27 +300,27 @@
             },
             {
               "path": "/time-picker",
-              "title": "Time Picker"
+              "title": "TimePicker"
             },
             {
               "path": "/date-picker",
-              "title": "Date Picker"
+              "title": "DatePicker"
             },
             {
               "path": "/datetime-picker",
-              "title": "Datetime Picker"
+              "title": "DateTimePicker"
             },
             {
               "path": "/upload",
               "title": "Upload"
             },
             {
-              "path": "/form",
-              "title": "Form"
-            },
-            {
               "path": "/rate",
               "title": "Rate"
+            },
+            {
+              "path": "/form",
+              "title": "Form"
             }
           ]
         },
@@ -349,7 +349,7 @@
             },
             {
               "path": "/badge",
-              "title": " Badge"
+              "title": "Badge"
             }
           ]
         },
@@ -370,7 +370,7 @@
             },
             {
               "path": "/message-box",
-              "title": "Message Box"
+              "title": "MessageBox"
             },
             {
               "path": "/notification",
@@ -379,7 +379,7 @@
           ]
         },
         {
-          "groupName": "Nav",
+          "groupName": "Navigation",
           "list": [
             {
               "path": "/menu",
