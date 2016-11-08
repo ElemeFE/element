@@ -206,13 +206,13 @@
           hasChild = Math.random() > 0.5;
         }
 
-        setTimeout(function() {
+        setTimeout(() => {
           var data;
           if (hasChild) {
             data = [{
-              name: 'zone' + count++
+              name: 'zone' + this.count++
             }, {
-              name: 'zone' + count++
+              name: 'zone' + this.count++
             }];
           } else {
             data = [];

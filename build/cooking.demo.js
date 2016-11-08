@@ -63,18 +63,17 @@ cooking.add('vueMarkdown', {
           var script = striptags.fetch(content, 'script');
           var jsfiddle = { html: html, script: script };
           var descriptionHTML = description
-            ? '<div class="description">' + md.render(description) + '</div>'
+            ? md.render(description)
             : '';
 
           jsfiddle = md.utils.escapeHtml(JSON.stringify(jsfiddle));
 
           return `<demo-block class="demo-box" :jsfiddle="${jsfiddle}">
-                    <div class="source">${html}</div>
-                    <div class="meta">
-                      ${descriptionHTML}
-                      <div class="highlight">`;
+                    <div class="source" slot="source">${html}</div>
+                    ${descriptionHTML}
+                    <div class="highlight" slot="highlight">`;
         }
-        return '</div></div></demo-block>\n';
+        return '</div></demo-block>\n';
       }
     }]
   ],
