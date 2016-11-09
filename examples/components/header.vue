@@ -60,20 +60,23 @@
       margin-left: 20px;
     
       &:last-child {
-       cursor: default;
-      }
-    
-      .nav-lang {
-        cursor: pointer;
-        display: inline-block;
-        height: 100%;
-        opacity: .8;
-        &:hover {
-          opacity: 1;
+        cursor: default;
+        margin-left: 34px;
+        span {
+          opacity: .8;
         }
-        &.active {
-          font-weight: 700;
-          opacity: 1;
+
+        .nav-lang {
+          cursor: pointer;
+          display: inline-block;
+          height: 100%;
+          &:hover {
+            opacity: 1;
+          }
+          &.active {
+            font-weight: 700;
+            opacity: 1;
+          }
         }
       }
 
@@ -86,6 +89,10 @@
         &.active,
         &:hover {
           opacity: 1;
+        }
+         
+        &.active {
+          font-weight: 700;
         }
 
         &.active::before {
