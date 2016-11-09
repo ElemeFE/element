@@ -104,7 +104,7 @@
 
     methods: {
       handleBlur(event) {
-        this.$emit('blur', this.currentValue);
+        this.$emit('blur', event);
         this.dispatch('form-item', 'el.form.blur', [this.currentValue]);
       },
       inputSelect() {
@@ -120,14 +120,14 @@
 
         this.textareaStyle = calcTextareaHeight(this.$refs.textarea, minRows, maxRows);
       },
-      handleFocus(ev) {
-        this.$emit('focus', ev);
+      handleFocus(event) {
+        this.$emit('focus', event);
       },
-      handleInput(ev) {
-        this.currentValue = ev.target.value;
+      handleInput(event) {
+        this.currentValue = event.target.value;
       },
-      handleIconClick(ev) {
-        this.$emit('click', ev);
+      handleIconClick(event) {
+        this.$emit('click', event);
       }
     },
 
