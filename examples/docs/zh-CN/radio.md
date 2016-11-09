@@ -31,7 +31,7 @@
   export default {
     data () {
       return {
-        radio: ''
+        radio: '1'
       };
     }
   }
@@ -69,11 +69,23 @@
 :::demo 结合`el-radio-group`元素和子元素`el-radio`可以实现单选组，在`el-radio-group`中绑定`v-model`，在`el-radio`中设置好`label`即可，无需再给每一个`el-radio`绑定变量，另外，还提供了`change`事件来响应变化，它会传入一个参数`value`。
 
 ```html
-<el-radio-group v-model="radio2">
-  <el-radio :label="3">备选项</el-radio>
-  <el-radio :label="6">备选项</el-radio>
-  <el-radio :label="9">备选项</el-radio>
-</el-radio-group>
+<template>
+  <el-radio-group v-model="radio2">
+    <el-radio :label="3">备选项</el-radio>
+    <el-radio :label="6">备选项</el-radio>
+    <el-radio :label="9">备选项</el-radio>
+  </el-radio-group>
+</template>
+
+<script>
+  export default {
+    data () {
+      return {
+        radio2: 3
+      };
+    }
+  }
+</script>
 ```
 :::
 
@@ -83,12 +95,24 @@
 
 :::demo 只需要把`el-radio`元素换成`el-radio-button`元素即可，此外，Element 还提供了`size`属性给按钮组，支持`large`和`small`两种（如果不设定为默认）。
 ```html
-<el-radio-group v-model="radio3">
-  <el-radio-button label="上海"></el-radio-button>
-  <el-radio-button label="北京"></el-radio-button>
-  <el-radio-button label="广州" :disabled="true"></el-radio-button>
-  <el-radio-button label="深圳"></el-radio-button>
-</el-radio-group>
+<template>
+  <el-radio-group v-model="radio3">
+    <el-radio-button label="上海"></el-radio-button>
+    <el-radio-button label="北京"></el-radio-button>
+    <el-radio-button label="广州" :disabled="true"></el-radio-button>
+    <el-radio-button label="深圳"></el-radio-button>
+  </el-radio-group>
+</template>
+
+<script>
+  export default {
+    data () {
+      return {
+        radio3: ''
+      };
+    }
+  }
+</script>
 ```
 :::
 

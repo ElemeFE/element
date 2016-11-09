@@ -209,6 +209,16 @@
   placeholder="请输入内容"
   v-model="input">
 </el-input>
+
+<script>
+export default {
+  data() {
+    return {
+      input: ''
+    }
+  }
+}
+</script>
 ```
 :::
 
@@ -222,6 +232,16 @@
   v-model="input1"
   :disabled="true">
 </el-input>
+
+<script>
+export default {
+  data() {
+    return {
+      input1: ''
+    }
+  }
+}
+</script>
 ```
 :::
 
@@ -237,6 +257,21 @@
   v-model="input2"
   @click="handleIconClick">
 </el-input>
+
+<script>
+export default {
+  data() {
+    return {
+      input2: ''
+    }
+  },
+  methods: {
+    handleIconClick(ev) {
+      console.log(ev);
+    }
+  }
+}
+</script>
 ```
 :::
 
@@ -252,6 +287,16 @@
   placeholder="请输入内容"
   v-model="textarea">
 </el-input>
+
+<script>
+export default {
+  data() {
+    return {
+      textarea: ''
+    }
+  }
+}
+</script>
 ```
 :::
 
@@ -261,20 +306,41 @@
 
 ::: demo 可通过 slot 来指定在 input 中前置或者后置内容。
 ```html
-<el-input placeholder="请输入内容" v-model="input3">
-  <template slot="prepend">Http://</template>
-</el-input>
-<el-input placeholder="请输入内容" v-model="input4">
-  <template slot="append">.com</template>
-</el-input>
-<el-input placeholder="请输入内容" v-model="input5" style="width: 300px;">
-  <el-select v-model="select" slot="prepend">
-    <el-option label="餐厅名" value="1"></el-option>
-    <el-option label="订单号" value="2"></el-option>
-    <el-option label="用户电话" value="3"></el-option>
-  </el-select>
-  <el-button slot="append" icon="search"></el-button>
-</el-input>
+<template>
+  <el-input placeholder="请输入内容" v-model="input3">
+    <template slot="prepend">Http://</template>
+  </el-input>
+  <el-input placeholder="请输入内容" v-model="input4">
+    <template slot="append">.com</template>
+  </el-input>
+  <el-input placeholder="请输入内容" v-model="input5" style="width: 300px;">
+    <el-select v-model="select" slot="prepend">
+      <el-option label="餐厅名" value="1"></el-option>
+      <el-option label="订单号" value="2"></el-option>
+      <el-option label="用户电话" value="3"></el-option>
+    </el-select>
+    <el-button slot="append" icon="search"></el-button>
+  </el-input>
+</template>
+
+<style>
+.el-select .el-input {
+  width: 100px;
+}
+</style>
+
+<script>
+export default {
+  data() {
+    return {
+      input3: '',
+      input4: '',
+      input5: '',
+      select: ''
+    }
+  }
+}
+</script>
 ```
 :::
 
@@ -303,6 +369,19 @@
     v-model="input9">
   </el-input>
 </div>
+
+<script>
+export default {
+  data() {
+    return {
+      input6: '',
+      input7: '',
+      input8: '',
+      input9: ''
+    }
+  }
+}
+</script>
 ```
 :::
 
@@ -433,8 +512,29 @@
   @select="handleSelect"
 ></el-autocomplete>
 
+<style>
+.my-autocomplete {
+  li {
+    line-height: normal;
+    padding: 7px;
+
+    .name {
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+    .addr {
+      font-size: 12px;
+      color: #b4b4b4;
+    }
+
+    .highlighted .addr {
+      color: #ddd;
+    }
+  }
+}
+</style>
+
 <script>
-  var Vue = require('vue');
   Vue.component('my-item', {
     functional: true,
     render: function (h, ctx) {
