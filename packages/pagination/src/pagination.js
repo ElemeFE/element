@@ -293,8 +293,8 @@ export default {
         this.internalCurrentPage = 1;
         this.$emit('current-change', 1);
       } else if (this.internalCurrentPage > newVal) {
-        this.internalCurrentPage = newVal;
-        this.$emit('current-change', newVal);
+        this.internalCurrentPage = newVal === 0 ? 1 : newVal;
+        this.$emit('current-change', this.internalCurrentPage);
       }
     },
 
