@@ -18,7 +18,13 @@ cooking.set({
     'element-ui': './src/index.js'
   } : './examples/entry.js',
   dist: './examples/element-ui/',
-  template: './examples/index.tpl',
+  template: [
+    {
+      template: './examples/index.tpl',
+      filename: './index.html',
+      favicon: './examples/favicon.ico'
+    }
+  ],
   publicPath: process.env.CI_ENV || '/',
   hash: true,
   devServer: {

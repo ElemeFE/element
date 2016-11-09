@@ -543,5 +543,5 @@
   /* Loading
   --------------------------*/
   --loading-spinner-size: 42px;
-  --loading-fullscreen-spinner-size: 64px;
+  --loading-fullscreen-spinner-size: 50px;
 }
