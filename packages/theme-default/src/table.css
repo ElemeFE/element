@@ -312,9 +312,11 @@
     @modifier striped {
       & .el-table__body {
         & tr:nth-child(2n) {
-          background: #FAFAFA;
+          td {
+            background: #FAFAFA;
+          }
 
-          &.current-row {
+          &.current-row td {
             background: #EFF7FF;
           }
         }
