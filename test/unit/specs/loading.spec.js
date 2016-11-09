@@ -136,4 +136,25 @@ describe('Loading', () => {
       done();
     });
   });
+
+  it('text', done => {
+    vm = createVue({
+      template: `
+        <div v-loading="loading" element-loading-text="拼命加载中"></div>
+      `,
+
+      data() {
+        return {
+          loading: true
+        };
+      }
+    }, true);
+    Vue.nextTick(() => {
+      const mask = document.querySelector('.el-loading-mask');
+      const text = mask.querySelector('.el-loading-text');
+      expect(text).to.exist;
+      expect(text.textContent).to.equal('拼命加载中');
+      done();
+    });
+  });
 });
