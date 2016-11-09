@@ -650,6 +650,8 @@
 | 事件名称 | 说明 | 回调参数 |
 |---------|--------|---------|
 | click | 点击 Input 内的图标时触发 | event |
+| blur | 在 Input 失去焦点时触发 | event |
+| focus | 在 Input 或得焦点时触发 | event |
 
 ### Autocomplete API
 
