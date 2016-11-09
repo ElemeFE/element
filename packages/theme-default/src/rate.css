@@ -5,6 +5,8 @@
 
   @b rate {
     height: var(--rate-height);
+    line-height: 1;
+
     @e item {
       display: inline-block;
       position: relative;
