@@ -19,12 +19,12 @@ const sortData = (data, states) => {
   return orderBy(data, states.sortProp, states.sortOrder, sortingColumn.sortMethod);
 };
 
-const getSelectedMap = function(states, rowKey) {
-  const selectionMap = {};
-  states.selection.forEach((row, index) => {
-    selectionMap[getRowIdentity(row, rowKey)] = { row, index };
+const getKeysMap = function(array, rowKey) {
+  const arrayMap = {};
+  (array || []).forEach((row, index) => {
+    arrayMap[getRowIdentity(row, rowKey)] = { row, index };
   });
-  return selectionMap;
+  return arrayMap;
 };
 
 const toggleRowSelection = function(states, row, selected) {
@@ -88,19 +88,24 @@ const TableStore = function(table, initialState = {}) {
 
 TableStore.prototype.mutations = {
   setData(states, data) {
+    const dataInstanceChanged = states._data !== data;
     states._data = data;
     states.data = sortData((data || []), states);
 
     this.updateCurrentRow();
 
-    const selection = states.selection;
-
     if (!states.reserveSelection) {
-      this.clearSelection();
+      if (dataInstanceChanged) {
+        this.clearSelection();
+      } else {
+        this.cleanSelection();
+      }
+      this.updateAllSelected();
     } else {
       const rowKey = states.rowKey;
       if (rowKey) {
-        const selectedMap = getSelectedMap(states, rowKey);
+        const selection = states.selection;
+        const selectedMap = getKeysMap(selection, rowKey);
 
         states.data.forEach((row) => {
           const rowId = getRowIdentity(row, rowKey);
@@ -266,6 +271,35 @@ TableStore.prototype.toggleRowSelection = function(row, selected) {
   toggleRowSelection(this.states, row, selected);
 };
 
+TableStore.prototype.cleanSelection = function() {
+  const selection = this.states.selection || [];
+  const data = this.states.data;
+  const rowKey = this.states.rowKey;
+  let deleted;
+  if (rowKey) {
+    deleted = [];
+    const selectedMap = getKeysMap(selection, rowKey);
+    const dataMap = getKeysMap(data, rowKey);
+    for (let key in selectedMap) {
+      if (selectedMap.hasOwnProperty(key) && !dataMap[key]) {
+        deleted.push(selectedMap[key].row);
+      }
+    }
+  } else {
+    deleted = selection.filter((item) => {
+      return data.indexOf(item) === -1;
+    });
+  }
+
+  deleted.forEach((deletedItem) => {
+    selection.splice(selection.indexOf(deletedItem), 1);
+  });
+
+  if (deleted.length) {
+    this.table.$emit('selection-change', selection);
+  }
+};
+
 TableStore.prototype.updateAllSelected = function() {
   const states = this.states;
   const { selection, rowKey, selectable, data } = states;
@@ -276,7 +310,7 @@ TableStore.prototype.updateAllSelected = function() {
 
   let selectedMap;
   if (rowKey) {
-    selectedMap = getSelectedMap(states, rowKey);
+    selectedMap = getKeysMap(states.selection, rowKey);
   }
 
   const isSelected = function(row) {
