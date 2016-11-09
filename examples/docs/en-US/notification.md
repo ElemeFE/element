@@ -3,14 +3,14 @@
     methods: {
       open() {
         this.$notify({
-          title: 'Title name',
+          title: 'Title',
           message: 'This is a reminder'
         });
       },
 
       open2() {
         this.$notify({
-          title: 'prompt',
+          title: 'Prompt',
           message: 'This is a message that does not automatically close',
           duration: 0
         });
@@ -18,15 +18,15 @@
 
       open3() {
         this.$notify({
-          title: 'success',
-          message: 'This is a successful prompt message',
+          title: 'Success',
+          message: 'This is a success message',
           type: 'success'
         });
       },
 
       open4() {
         this.$notify({
-          title: 'warning',
+          title: 'Warning',
           message: 'This is a warning message',
           type: 'warning'
         });
@@ -34,20 +34,20 @@
 
       open5() {
         this.$notify.info({
-          title: 'message',
-          message: 'This is a message prompt message'
+          title: 'Info',
+          message: 'This is an info message'
         });
       },
 
       open6() {
         this.$notify.error({
-          title: 'error',
+          title: 'Error',
           message: 'This is an error message'
         });
       },
 
       onClose() {
-        console.log('Notification Has been closed');
+        console.log('Notification is closed');
       }
     }
   };
@@ -63,25 +63,23 @@
 
 ## Notification 
 
-Displays the global notification alert message that is suspended in the upper right corner of the page.
+Displays a global notification message at the upper right corner of the page.
 
-### How to use
+### Basic usage
 
-Notification that can be used widely.
-
-::: demo The component provides notification functionality. Element registers the `$notify` method and receives a` options` literal attribute. In the simplest case, you can set the `title` field and the` message` field to set the title and body of the notification. By default, the notification component will automatically shut down after a period of time, but by setting `duration`, you can control the time interval for shutting down. Specifically, if set to` 0`, it will not automatically shut down. Note: `duration` receives a` Number` in milliseconds and defaults to `4500`.
+::: demo Element has registered the `$notify` method and it receives an object as its parameter. In the simplest case, you can set the `title` field and the` message` field for the title and body of the notification. By default, the notification automatically closes after 4500ms, but by setting `duration` you can control its duration. Specifically, if set to `0`, it will not close automatically. Note that `duration` receives a `Number` in milliseconds.
    
 ```html
 <template>
   <el-button
     plain
     @click.native="open">
-    Can be automatically shut down
+    Closes automatically
   </el-button>
   <el-button
     plain
     @click.native="open2">
-    Can not be automatically shut down
+    Won't close automatically
     </el-button>
 </template>
 
@@ -90,7 +88,7 @@ Notification that can be used widely.
     methods: {
       open() {
         this.$notify({
-          title: 'Title name',
+          title: 'Title',
           message: 'This is a reminder'
         });
       },
@@ -98,7 +96,7 @@ Notification that can be used widely.
       open2() {
         this.$notify({
           title: 'Prompt',
-          message: 'This is a message that will not automatically close.',
+          message: 'This is a message that does not automatically close',
           duration: 0
         });
       }
@@ -108,33 +106,32 @@ Notification that can be used widely.
 ```
 :::
 
-### With tendencies
+### With types
 
-Usually it is used to display the system messages, such as "success, warning, message and error".
+We provide four types: success, warning, info and error.
 
-::: demo The Element provides four notification types for the Notification component: `success`, `warning`, `info` and `error`. They are set by the `type` field, and other values will be ignored. We also register methods for the various types of notifications that can be invoked directly like `open5` and` open6` without passing a `type` field.
-
+::: demo Element provides four notification types: `success`, `warning`, `info` and `error`. They are set by the `type` field, and other values will be ignored. We also registered methods for these types that can be invoked directly like `open5` and `open6` without passing a `type` field.
 ```html
 <template>
   <el-button
     plain
     @click.native="open3">
-    success
+    Success
   </el-button>
   <el-button
     plain
     @click.native="open4">
-    warning
+    Warning
   </el-button>
   <el-button
     plain
     @click.native="open5">
-    message
+    Info
   </el-button>
   <el-button
     plain
     @click.native="open6">
-    error
+    Error
   </el-button>
 </template>
 
@@ -143,15 +140,15 @@ Usually it is used to display the system messages, such as "success, warning, me
     methods: {
       open3() {
         this.$notify({
-          title: 'success',
-          message: 'This is a successful prompt message',
+          title: 'Success',
+          message: 'This is a success message',
           type: 'success'
         });
       },
 
       open4() {
         this.$notify({
-          title: 'warning',
+          title: 'Warning',
           message: 'This is a warning message',
           type: 'warning'
         });
@@ -159,14 +156,14 @@ Usually it is used to display the system messages, such as "success, warning, me
 
       open5() {
         this.$notify.info({
-          title: 'message',
-          message: 'This is a message prompt message'
+          title: 'Info',
+          message: 'This is an info message'
         });
       },
 
       open6() {
         this.$notify.error({
-          title: 'error',
+          title: 'Error',
           message: 'This is an error message'
         });
       }
@@ -176,26 +173,26 @@ Usually it is used to display the system messages, such as "success, warning, me
 ```
 :::
 
-### The global method
+### Global method
 
-Element provides a global method `$notify` for ` Vue.prototype`. Therefore, we can use Notification as we did in this page in the vue instance.
+Element has added a global method `$notify` for Vue.prototype. So in a vue instance you can call `Notification` like what we did in this page.
 
-### References separately
+### Local import
 
-References notification separately：
+Import `Notification`:
 
 ```javascript
 import { Notification } from 'element-ui';
 ```
 
-In this case the method is `Notification(options)`. We also define the methods for each type, such as `Notification.success(options)`.
+In this case you should call `Notification(options)`. We have also registered methods for different types, e.g. `Notification.success(options)`.
 
 ### Options
-| Attribute      | Description          | Type      | Options                          | Default  |
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | title | title | string | — | — |
-| message | Description text | string | — | — |
-| type | The theme style, if not within the optional value, will be ignored | string | success/warning/info/error | — |
-| duration | Displays the time in milliseconds. It will not automatically shut down if set 0 | number | — | 4500 |
-| onClose | The callback function when closed | function | — | — |
+| message | description text | string | — | — |
+| type | notification type | string | success/warning/info/error | — |
+| duration | duration before close. It will not automatically close if set 0 | number | — | 4500 |
+| onClose | callback function when closed | function | — | — |
 

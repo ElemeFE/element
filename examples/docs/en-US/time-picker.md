@@ -6,7 +6,7 @@
   }
 </style>
 
-## Time Picker
+## TimePicker
 
 Use Time Picker for time input.
 

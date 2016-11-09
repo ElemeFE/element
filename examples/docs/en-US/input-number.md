@@ -21,7 +21,7 @@
     }
   }
 </style>
-## Input Number
+## InputNumber
 
 Input numerical values with a customizable range.
 

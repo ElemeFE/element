@@ -2,23 +2,30 @@
   export default {
     methods: {
       open() {
-        this.$alert('This is a piece of content', 'Title name');
+        this.$alert('This is a message', 'Title', {
+          callback: action => {
+            this.$message({
+              type: 'info',
+              message: `action: ${ action }`
+            });
+          }
+        });
       },
 
       open2() {
-        this.$confirm('This action will permanently delete the file. continue?', 'Tips', {
+        this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
           type: 'warning'
         }).then(() => {
           setTimeout(() => {
             this.$message({
-              message: 'Operation done',
+              message: 'Delete completed',
               type: 'success'
             });
           }, 200);
         }).catch(() => {
           setTimeout(() => {
             this.$message({
-              message: 'Operation canceled',
+              message: 'Delete canceled',
               type: 'info'
             });  
           }, 200);
@@ -28,7 +35,7 @@
       open3() {
         this.$prompt('Please input your email', 'Tips', {
           inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
-          inputErrorMessage: 'Email format is incorrect'
+          inputErrorMessage: 'Invalid Email'
         }).then(({ value }) => {
           setTimeout(() => {
             this.$message({
@@ -40,7 +47,7 @@
           setTimeout(() => {
             this.$message({
               type: 'info',
-              message: 'Cancel input'
+              message: 'Input canceled'
             });
           }, 200);
         });
@@ -49,7 +56,7 @@
       open4() {
         this.$msgbox({
           title: 'Message',
-          message: 'This is a piece of content',
+          message: 'This is a message',
           showCancelButton: true
         }).then(action => {
           setTimeout(() => {
@@ -65,15 +72,15 @@
   };
 </script>
 
-## Message box
+## MessageBox
 
-A set of modal dialog box components by simulating the system message box, mainly for the message prompt, success tips, error messages and query information.
+A set of modal boxes simulating system message box, mainly for message prompt, success tips, error messages and query information.
 
-### Message prompt
+### Alert
 
-It is triggered when there is user operation, The dialog box interrupts the user operation until the user confirms.
+Alert interrupts user operation until the user confirms.
 
-:::demo Open a message prompt by calling the `$alert` method, It simulates the system's `alert`, and can not be closed by pressing ESC or clicking outside the box. In this example, two attributes `message` and `title` were received. It is worth mentioning that when the window is closed, it returns a `Promise` object for subsequent processing.
+:::demo Open an alert by calling the `$alert` method. It simulates the system's `alert`, and cannot be closed by pressing ESC or clicking outside the box. In this example, two parameters `message` and `title` are received. It is worth mentioning that when the box is closed, it returns a `Promise` object for further processing. If you are not sure if your target browsers support `Promise`, you should import a third party polyfill or use callbacks instead like this example.
 
 ```html
 <template>
@@ -84,20 +91,26 @@ It is triggered when there is user operation, The dialog box interrupts the user
   export default {
     methods: {
       open() {
-        this.$alert('This is a piece of content', 'Title name');
+        this.$alert('This is a message', 'Title', {
+          callback: action => {
+            this.$message({
+              type: 'info',
+              message: `action: ${ action }`
+            });
+          }
+        });
       }
     }
   }
 </script>
 ```
-
 :::
 
-### Confirm the message
+### Confirm
 
-The dailog will be used when Prompts the user to confirm the action that he/she have triggered, and asks if he/she want to do it.
+Confirm is used to ask users' confirmation.
 
-:::demo Call `$confirm` method to open the confirm message prompt, it simulates the System's `confirm`. We can also highly customized the Message Box component by importing the third attribute `options` (ps: it is a literal object). The attribute `type` indicates the message type, it's value can be `success`, `error`, `info` and `warning`, and invalid settings will be ignored. You should notice that the second attribute `title` must be defined as `String` type, if defined as `Object`, it will be hanlded as the attribute `options`. Here we use Promise to handle the subsequent response. 
+:::demo Call `$confirm` method to open a confirm, and it simulates the system's `confirm`. We can also highly customize Message Box by passing a third attribute `options` which is a literal object. The attribute `type` indicates the message type, and it's value can be `success`, `error`, `info` and `warning`. Note that the second attribute `title` must be a `string`, and if it is an `object`, it will be handled as the attribute `options`. Here we use `Promise` to handle further processing. 
 
 ```html
 <template>
@@ -108,17 +121,17 @@ The dailog will be used when Prompts the user to confirm the action that he/she 
   export default {
     methods: {
       open2() {
-        this.$confirm('This action will permanently delete the file. Do you want to continue?', 'Tips', {
+        this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
           type: 'warning'
         }).then(() => {
           this.$message({
             type: 'success',
-            message: 'Operation done!'
+            message: 'Delete completed'
           });
         }).catch(() => {
           this.$message({
             type: 'info',
-            message: 'Operation canceled'
+            message: 'Delete canceled'
           });          
         });
       }
@@ -129,13 +142,11 @@ The dailog will be used when Prompts the user to confirm the action that he/she 
 
 :::
 
-### Submit content
+### Prompt
 
-The dailog that triggered when user operates, it will interrupts the user operation and prompts the user to carry on the input.
+Prompt is used when user input is required.
 
-:::demo Call `$prompt` method to open message prompt, it simulates the System's `prompt`. You can use `inputPattern` attribute to specifies your own match pattern, or use `inputValidator` to specifies the check function, the return value type of the function can be `Boolean` or `String`, `false` as `Boolean` or value as `String` indicates that the check has not passed, and value as `String`
- is the same to the definition of `inputErrorMessage` attribute. 
-In addition, You can define the placeholder of the input box with `inputPlaceholder` attribute.
+:::demo Call `$prompt` method to open a prompt, and it simulates the system's `prompt`. You can use `inputPattern` parameter to specify your own RegExp pattern. Use `inputValidator` to specify validation method, and it should return `Boolean` or `String`. Returning `false` or `String` means the validation has failed, and the string returned will be used as the `inputErrorMessage`. In addition, you can customize the placeholder of the input box with `inputPlaceholder` parameter.
 
 ```html
 <template>
@@ -146,18 +157,18 @@ In addition, You can define the placeholder of the input box with `inputPlacehol
   export default {
     methods: {
       open3() {
-        this.$prompt('Please input your e-mail', 'tips', {
+        this.$prompt('Please input your e-mail', 'Tip', {
           inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
-          inputErrorMessage: 'E-mail format is incorrect'
+          inputErrorMessage: 'Invalid Email'
         }).then(value => {
           this.$message({
             type: 'success',
-            message: 'Your e-mail: ' + value
+            message: 'Your email is:' + value
           });
         }).catch(() => {
           this.$message({
             type: 'info',
-            message: 'Cancel input'
+            message: 'Input canceled'
           });       
         });
       }
@@ -165,14 +176,13 @@ In addition, You can define the placeholder of the input box with `inputPlacehol
   }
 </script>
 ```
-
 :::
 
 ### Customization
 
 Can be customized to show various content.
 
-:::demo The methods mentioned above are repackagings of the `$msgbox` method. and this example calls `$msgbox` method directly, it uses the `showCancelButton` attribute, which is used to display cancel button. besides we can use `cancelButtonClass` to add a custom style and `cancelButtonText` to customize the button text for it, The Confirm button also has the same fields, and a complete list of fields is provided in the field descriptions at the end of the text.
+:::demo The three methods mentioned above are repackagings of the `$msgbox` method. This example calls `$msgbox` method directly using the `showCancelButton` attribute, which is used to indicate if a cancel button is displayed. Besides we can use `cancelButtonClass` to add a custom style and `cancelButtonText` to customize the button text. The confirm button also has these fields. A complete list of fields can be found at the end of this documentation.
 
 ```html
 <template>
@@ -184,8 +194,8 @@ Can be customized to show various content.
     methods: {
       open4() {
         this.$msgbox({
-          title: 'message',
-          message: 'this is a piece of content',
+          title: 'Message',
+          message: 'This is a message',
           showCancelButton: true
         }).then(action => {
           this.$message({
@@ -200,35 +210,36 @@ Can be customized to show various content.
 ```
 :::
 
-### Gloable methods
+### Global method
 
-Element has added following gloable methods for Vue.prototype：$msgbox, $alert, $confirm and $prompt. Therefore, We can use Notification as we did in this page in the vue instance.
+Element has added the following global methods for Vue.prototype: `$msgbox`, `$alert`, `$confirm` and `$prompt`. So in a vue instance you can call `MessageBox` like what we did in this page.
 
-### References separately
+### Local import
 
-References `MessageBox` separately:
+Import `MessageBox`:
 
 ```javascript
 import { MessageBox } from 'element-ui';
 ```
 
-The calling methods corresponding to the above four global methods are: MessageBox, MessageBox.alert, MessageBox.confirm and  MessageBox.prompt。
+The corresponding methods are: `MessageBox`, `MessageBox.alert`, `MessageBox.confirm` and `MessageBox.prompt`.
 
 ### Options
 
-| Attribute      | Description          | Type      | Options                         | Default  |
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| title | The title of the MessageBox | string | — | — |
-| message | The content of the MessageBox | string | — | — |
-| type | Message type, Used to display icons | string | success/info/<br>warning/error | — |
-| showCancelButton | Whether to show cancel button | boolean | — | false（true when called as confirm and  prompt type） |
-| showConfirmButton | Whether to show confirm button | boolean | — | true |
-| cancelButtonText | Text content of cancel button | string | — | cancel |
-| confirmButtonText | Text content of confirm button | string | — | confirm |
-| cancelButtonClass | Customized class name for the cancel button | string | — | — |
-| confirmButtonClass | Customized class name for the confirm button | string | — | — |
-| showInput | Whether to show input box | boolean | — | false（true when called as prompt type）|
-| inputPlaceholder | placeholder of input box | string | — | — |
-| inputPattern | regex of the input box | regexp | — | — |
-| inputValidator | Validate function for the input box. it can returns a boolean value or String value, The result will be assigned to  inputErrorMessage if it returns a String value| function | — | — |
-| inputErrorMessage | Prompt text when validation fails | string | — | Invalid input! |
+| title | title of the MessageBox | string | — | — |
+| message | content of the MessageBox | string | — | — |
+| type | message type, used for icon display | string | success/info/<br>warning/error | — |
+| lockScroll | whether to lock body scroll when MessageBox prompts | boolean | — | true |
+| showCancelButton | whether to show a cancel button | boolean | — | false (true when called with confirm and prompt) |
+| showConfirmButton | whether to show a confirm button | boolean | — | true |
+| cancelButtonText | text content of cancel button | string | — | Cancel |
+| confirmButtonText | text content of confirm button | string | — | OK |
+| cancelButtonClass | custom class name of cancel button | string | — | — |
+| confirmButtonClass | custom class name of confirm button | string | — | — |
+| showInput | whether to show an input | boolean | — | false (true when called with prompt) |
+| inputPlaceholder | placeholder of input | string | — | — |
+| inputPattern | regexp for the input | regexp | — | — |
+| inputValidator | validation function for the input. Should returns a boolean or string. If a string is returned, it will be assigned to inputErrorMessage | function | — | — |
+| inputErrorMessage | error message when validation fails | string | — | Illegal input |

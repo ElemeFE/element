@@ -87,7 +87,7 @@
   }
 </style>
 
-## Date Picker
+## DatePicker
 
 Use Date Picker for date input.
 
