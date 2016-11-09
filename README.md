@@ -4,8 +4,8 @@
 [![CDNJS](https://img.shields.io/cdnjs/v/element-ui.svg)](https://cdnjs.com/libraries/element-ui)
 [![npm package](https://img.shields.io/npm/v/element-ui.svg)](https://www.npmjs.org/package/element-ui)
 [![NPM downloads](http://img.shields.io/npm/dm/element-ui.svg)](https://npmjs.org/package/element-ui)
-![JS gzip size](http://img.badgesize.io/https://unpkg.com/element-ui@next/lib/index.js?compression=gzip&label=gzip%20size:%20JS)
-![CSS gzip size](http://img.badgesize.io/https://unpkg.com/element-ui@next/lib/theme-default/index.css?compression=gzip&label=gzip%20size:%20CSS)
+![JS gzip size](http://img.badgesize.io/https://unpkg.com/element-ui/lib/index.js?compression=gzip&label=gzip%20size:%20JS)
+![CSS gzip size](http://img.badgesize.io/https://unpkg.com/element-ui/lib/theme-default/index.css?compression=gzip&label=gzip%20size:%20CSS)
 [![Join the chat at https://gitter.im/ElemeFE/element](https://badges.gitter.im/ElemeFE/element.svg)](https://gitter.im/ElemeFE/element?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 > Desktop UI elements for Vue.js 2.0.
@@ -28,7 +28,7 @@
 
 ## Install
 ```shell
-npm install element-ui@next -S
+npm install element-ui -S
 ```
 
 ## Quick Start
