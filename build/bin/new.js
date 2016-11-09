@@ -20,14 +20,14 @@ const PackagePath = path.resolve(__dirname, '../../packages', componentname);
 const Files = [
   {
     filename: 'index.js',
-    content: `const ${ComponentName} = require('./src/main');
+    content: `import ${ComponentName} from './src/main';
 
 /* istanbul ignore next */
 ${ComponentName}.install = function(Vue) {
   Vue.component(${ComponentName}.name, ${ComponentName});
 };
 
-module.exports = ${ComponentName};`
+export default ${ComponentName};`
   },
   {
     filename: 'cooking.conf.js',
@@ -82,6 +82,24 @@ export default {
   {
     filename: path.join('../../examples/docs/zh-CN', `${componentname}.md`),
     content: `## ${chineseName}`
+  },
+  {
+    filename: path.join('../../test/unit/specs', `${componentname}.spec.js`),
+    content: `import { createTest, destroyVM } from '../util';
+import Alert from 'packages/{{componentname}}';
+
+describe('{{ComponentName}}', () => {
+  let vm;
+  afterEach(() => {
+    destroyVM(vm);
+  });
+
+  it('create', () => {
+    vm = createTest({{ComponentName}}, true);
+    expect(vm.$el).to.exist;
+  });
+});
+`
   }
 ];
 
