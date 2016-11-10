@@ -18,7 +18,13 @@ cooking.set({
     'element-ui': './src/index.js'
   } : './examples/entry.js',
   dist: './examples/element-ui/',
-  template: './examples/index.tpl',
+  template: [
+    {
+      template: './examples/index.tpl',
+      filename: './index.html',
+      favicon: './examples/favicon.ico'
+    }
+  ],
   publicPath: process.env.CI_ENV || '/',
   hash: true,
   devServer: {
@@ -59,9 +65,10 @@ cooking.add('vueMarkdown', {
         if (tokens[idx].nesting === 1) {
           var description = (m && m.length > 1) ? m[1] : '';
           var content = tokens[idx + 1].content;
-          var html = convert(striptags.strip(content, 'script'));
+          var html = convert(striptags.strip(content, ['script', 'style']));
           var script = striptags.fetch(content, 'script');
-          var jsfiddle = { html: html, script: script };
+          var style = striptags.fetch(content, 'style');
+          var jsfiddle = { html: html, script: script, style: style };
           var descriptionHTML = description
             ? md.render(description)
             : '';

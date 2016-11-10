@@ -10,7 +10,7 @@
   .el-loading-text {
     color: var(--color-primary);
     margin: 3px 0;
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .circular {
@@ -23,7 +23,7 @@
     stroke-dashoffset: 0;
     stroke-width: 2;
     stroke: var(--color-primary);
-    animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+    animation: dash 1.5s ease-in-out infinite;
     stroke-linecap: round;
   }
 
@@ -32,10 +32,6 @@
 
     .circular {
       width: var(--loading-fullscreen-spinner-size);
-    }
-
-    .path {
-      stroke-width: 3;
     }
   }
 }

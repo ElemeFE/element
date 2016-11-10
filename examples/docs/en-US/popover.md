@@ -115,11 +115,11 @@
 
 ## Popover
 
-### How to use
+### Basic usage
 
-Similiar to Tooltip, popover is built upon `Vue-popper`. So for some duplicated attributes, please refer to the document of Tooltip.
+Similar to Tooltip, Popover is also built with `Vue-popper`. So for some duplicated attributes, please refer to the documentation of Tooltip.
 
-:::demo Add `ref` in your popover, then in your button, use `v-popover` directive to link the button and the popover. The attribute `trigger` is used to trigger the popover with three options: `hover`, `click`, `focus`. Alternateively, you can specify reference by `slot`.
+:::demo Add `ref` in your popover, then in your button, use `v-popover` directive to link the button and the popover. The attribute `trigger` is used to define how popover is triggered: `hover`, `click` or `focus`. Alternatively, you can specify reference using a named `slot`.
 
 ```html
 <el-popover
@@ -128,7 +128,7 @@ Similiar to Tooltip, popover is built upon `Vue-popper`. So for some duplicated 
   title="Title"
   width="200"
   trigger="hover"
-  content="this is content">
+  content="this is content, this is content, this is content">
 </el-popover>
 
 <el-popover
@@ -137,27 +137,27 @@ Similiar to Tooltip, popover is built upon `Vue-popper`. So for some duplicated 
   title="Title"
   width="200"
   trigger="click"
-  content="this is content">
+  content="this is content, this is content, this is content">
 </el-popover>
 
-<el-button v-popover:popover1>hover to activate</el-button>
-<el-button v-popover:popover2>click to activate</el-button>
+<el-button v-popover:popover1>Hover to activate</el-button>
+<el-button v-popover:popover2>Click to activate</el-button>
 <el-popover
   placement="right"
   title="Title"
   width="200"
   trigger="focus"
-  content="this is content">
-  <el-button slot="reference">focus to activate</el-button>
+  content="this is content, this is content, this is content">
+  <el-button slot="reference">Focus to activate</el-button>
 </el-popover>
 ```
 :::
 
-### Nested Information
+### Nested information
 
-Other components can be nested in popover. Following is a sample for nested table. 
+Other components can be nested in popover. Following is an example of nested table. 
 
-:::demo replace `content` attribute with nested info.
+:::demo replace the `content` attribute with a default `slot`.
 
 ```html
 <el-popover
@@ -172,11 +172,11 @@ Other components can be nested in popover. Following is a sample for nested tabl
   </el-table>
 </el-popover>
 
-<el-button v-popover:popover4>click to activate</el-button>
+<el-button v-popover:popover4>Click to activate</el-button>
 ```
 :::
 
-### Nested Operation
+### Nested operation
 
 Of course, you can nest other operations. It's more light-weight than using a dialog.
 
@@ -187,33 +187,35 @@ Of course, you can nest other operations. It's more light-weight than using a di
   placement="top"
   width="160"
   v-model="visible2">
-  <p>are you sure to delete this content？</p>
+  <p>Are you sure to delete this?</p>
   <div style="text-align: right; margin: 0">
     <el-button size="mini" type="text" @click.native="visible2 = false">cancel</el-button>
     <el-button type="primary" size="mini" @click.native="visible2 = false">confirm</el-button>
   </div>
 </el-popover>
 
-<el-button v-popover:popover5>delete</el-button>
+<el-button v-popover:popover5>Delete</el-button>
 ```
 :::
 
 ### Attributes
-| Attribute               | Description                                                     | Type              | Options      | Default |
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
 |--------------------|----------------------------------------------------------|-------------------|-------------|--------|
-| trigger | The way to trigger a popover | String  | click/focus/hover |    click    |
-|  title              | Title | String | — | — |
-|  content        |  Popover content. Can also insert inner html via `slot`    | String            | — | — |
-|  width        |  Width  | String, Number            | — | Min width 150px |
-|  placement        |  Popover placement  | String | top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end |  bottom |
-|  value(v-model)        |  Determine whether the state is visible  | Boolean           | — |  false |
-|  offset        |  Popover offset  | Number           | — |  0 |
-|  transition     |  Popover transition animation      | String             | — | fade-in-linear |
-|  visible-arrow   |  Display the tooltip arrow or not. For more info, please refer to [Vue-popper](https://github.com/element-component/vue-popper) | Boolean | — | true |
-|  options        | Parameters for [popper.js](https://popper.js.org/documentation.html) | Object            |Please refer to [popper.js](https://popper.js.org/documentation.html) | `{ boundariesElement: 'body', gpuAcceleration: false }` |
+| trigger | how the popover is triggered | string  | click/focus/hover |    click    |
+|  title              | popover title | string | — | — |
+|  content        |  popover content, can be replaced with a default `slot`    | string            | — | — |
+|  width        |  popover width  | string, number            | — | Min width 150px |
+|  placement        |  popover placement  | string | top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end |  bottom |
+|  value(v-model)        |  whether popover is visible  | Boolean           | — |  false |
+|  offset        |  popover offset  | number           | — |  0 |
+|  transition     |  popover transition animation      | string             | — | fade-in-linear |
+|  visible-arrow   |  whether a tooltip arrow is displayed or not. For more info, please refer to [Vue-popper](https://github.com/element-component/vue-popper) | boolean | — | true |
+|  options        | parameters for [popper.js](https://popper.js.org/documentation.html) | object            | please refer to [popper.js](https://popper.js.org/documentation.html) | `{ boundariesElement: 'body', gpuAcceleration: false }` |
+|  popper-class        |  custom class name for popover | string | — | — |
 
 ### Slot
-| Attribute               | Description                                                     |
-|--- | ---|
-| — | Popove inner html |
+| Name | Description |
+| --- | --- |
+| — | text content of popover |
+| reference | HTML element that triggers popover |
 

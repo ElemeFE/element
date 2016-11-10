@@ -611,6 +611,51 @@ describe('Table', () => {
       }, DELAY);
     });
 
+    it('emit selection-change after row has been removed', done => {
+      const vm = createVue({
+        template: `
+          <el-table :data="testData" @selection-change="change">
+            <el-table-column type="selection" />
+            <el-table-column prop="name" label="name" />
+            <el-table-column prop="release" label="release" />
+            <el-table-column prop="director" label="director" />
+            <el-table-column prop="runtime" label="runtime" />
+          </el-table>
+        `,
+
+        created() {
+          this.testData = getTestData();
+        },
+
+        data() {
+          return { selected: [], testData: null };
+        },
+
+        methods: {
+          change(rows) {
+            this.selected = rows;
+          },
+
+          filterSelect(row, index) {
+            return index > 2;
+          }
+        }
+      }, true);
+
+      setTimeout(_ => {
+        vm.$el.querySelector('.el-checkbox').click();
+        setTimeout(_ => {
+          expect(vm.selected).to.length(5);
+          vm.testData.splice(0, 1);
+          setTimeout(_ => {
+            expect(vm.selected).to.length(4);
+            destroyVM(vm);
+            done();
+          });
+        }, DELAY);
+      }, DELAY);
+    });
+
     it('reserve-selection', done => {
       const getData = function(page = 0) {
         let id = 0;

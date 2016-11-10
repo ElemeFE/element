@@ -4,18 +4,17 @@
 推荐使用 npm 的方式安装，它能更好地和 [webpack](https://webpack.js.org/) 打包工具配合使用。
 
 ```shell
-npm i element-ui@next -D
+npm i element-ui -D
 ```
-**由于当前还处于 rc 阶段，所以仍然需要通过 @next 的方式获取最新版本。**
 
 ### CDN
-目前可以通过 [unpkg.com/element-ui](https://unpkg.com/element-ui@next/) 获取到最新版本的资源，在页面上引入 js 和 css 文件即可开始使用。
+目前可以通过 [unpkg.com/element-ui](https://unpkg.com/element-ui/) 获取到最新版本的资源，在页面上引入 js 和 css 文件即可开始使用。
 
 ```html
 <!-- 引入样式 -->
-<link rel="stylesheet" href="https://unpkg.com/element-ui@1.0.0-rc.8/lib/theme-default/index.css">
+<link rel="stylesheet" href="https://unpkg.com/element-ui@1.0.0/lib/theme-default/index.css">
 <!-- 引入组件库 -->
-<script src="https://unpkg.com/element-ui@1.0.0-rc.8/lib/index.js"></script>
+<script src="https://unpkg.com/element-ui@1.0.0/lib/index.js"></script>
 ```
 
 ### Hello world
@@ -27,7 +26,7 @@ npm i element-ui@next -D
 <head>
   <meta charset="UTF-8">
   <!-- 引入样式 -->
-  <link rel="stylesheet" href="https://unpkg.com/element-ui@1.0.0-rc.8/lib/theme-default/index.css">
+  <link rel="stylesheet" href="https://unpkg.com/element-ui@1.0.0/lib/theme-default/index.css">
 </head>
 <body>
   <div id="app">
@@ -38,9 +37,9 @@ npm i element-ui@next -D
   </div>
 </body>
   <!-- 先引入 Vue -->
-  <script src="https://unpkg.com/vue@2.0.3/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue@2.0.5/dist/vue.js"></script>
   <!-- 引入组件库 -->
-  <script src="https://unpkg.com/element-ui@1.0.0-rc.8/lib/index.js"></script>
+  <script src="https://unpkg.com/element-ui@1.0.0/lib/index.js"></script>
   <script>
     new Vue({
       el: '#app',

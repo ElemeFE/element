@@ -9,7 +9,7 @@ npm i element-theme -D
 
 安装默认主题，可以从 npm 安装或者从 GitHub 拉取最新代码。
 ```shell
-npm i element-theme-default@next -D
+npm i element-theme-default -D
 
 # 从 GitHub
 npm i https://github.com/ElementUI/theme-default -D
