@@ -186,7 +186,7 @@
 | small | 是否使用小型分页样式 | Boolean | — | false |
 | page-size | 每页显示条目个数 | Number | — | 10 |
 | total | 总条目数 | Number | — | - |
-| page-count | 总页数，total 和 page-count 设置任意一个就可以达到显示页码的功能如果要支持 page-sizes 的更改，则需要使用 total 属性；如果要支持 page-sizes 的更改，则需要使用 total 属性 | Number | — | - |
+| page-count | 总页数，total 和 page-count 设置任意一个就可以达到显示页码的功能；如果要支持 page-sizes 的更改，则需要使用 total 属性 | Number | — | - |
 | current-page | 当前页数 | Number | — | 1 |
 | layout | 组件布局，子组件名用逗号分隔| String | `sizes`, `prev`, `pager`, `next`, `jumper`, `->`, `total` | 'prev, pager, next, jumper, ->, total'  |
 | page-sizes | 每页显示个数选择器的选项设置 | Number[] | — |  [10, 20, 30, 40, 50, 100] |

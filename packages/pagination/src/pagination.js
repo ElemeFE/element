@@ -174,8 +174,11 @@ export default {
         },
 
         handleChange({ target }) {
+          const oldPage = this.$parent.internalCurrentPage;
           this.$parent.internalCurrentPage = this.$parent.getValidCurrentPage(target.value);
-          this.$parent.$emit('current-change', this.$parent.internalCurrentPage);
+          if (oldPage !== this.$parent.internalCurrentPage) {
+            this.$parent.$emit('current-change', this.$parent.internalCurrentPage);
+          }
           this.oldValue = null;
         }
       },
@@ -225,8 +228,11 @@ export default {
     },
 
     handleCurrentChange(val) {
+      const oldPage = this.internalCurrentPage;
       this.internalCurrentPage = this.getValidCurrentPage(val);
-      this.$emit('current-change', this.internalCurrentPage);
+      if (oldPage !== this.internalCurrentPage) {
+        this.$emit('current-change', this.internalCurrentPage);
+      }
     },
 
     prev() {
@@ -289,11 +295,13 @@ export default {
   watch: {
     internalPageCount(newVal) {
       /* istanbul ignore if */
-      if (newVal > 0 && this.internalCurrentPage === 0) {
+      const oldPage = this.internalCurrentPage;
+      if (newVal > 0 && oldPage === 0) {
         this.internalCurrentPage = 1;
-        this.$emit('current-change', 1);
-      } else if (this.internalCurrentPage > newVal) {
+      } else if (oldPage > newVal) {
         this.internalCurrentPage = newVal === 0 ? 1 : newVal;
+      }
+      if (oldPage !== this.internalCurrentPage) {
         this.$emit('current-change', this.internalCurrentPage);
       }
     },

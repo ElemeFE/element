@@ -142,7 +142,7 @@ describe('Pagination', () => {
       },
 
       data() {
-        return { page: 0 };
+        return { page: 1 };
       }
     }, true);
     const input = vm.$el.querySelector('.el-pagination__jump input');
@@ -228,7 +228,7 @@ describe('Pagination', () => {
       },
 
       data() {
-        return { page: 0 };
+        return { page: 1 };
       }
     });
     const input = vm.$el.querySelector('.el-pagination__jump input');
