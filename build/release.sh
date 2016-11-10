@@ -15,7 +15,7 @@ then
   echo "Releasing theme-default $VERSION ..."
   cd packages/theme-default
   npm version $VERSION --message "[release] $VERSION"
-  npm publish --tag next
+  npm publish
   cd ../..
 
   # commit
@@ -26,5 +26,5 @@ then
   # publish
   git push eleme refs/tags/v$VERSION
   git push eleme master
-  npm publish --tag next
+  npm publish
 fi

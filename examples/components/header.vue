@@ -51,6 +51,9 @@
       padding: 0;
       margin: 0;
     }
+    .nav-logo {
+      vertical-align: sub;
+    }
     .nav-item {
       margin: 0;
       float: left;
@@ -123,7 +126,12 @@
       'header-home': isHome
     }">
       <div class="container">
-        <h1><router-link :to="`/${ lang }`">Element<span>Beta</span></router-link></h1>
+        <h1><router-link :to="`/${ lang }`">
+          <img
+            src="../assets/images/element-logo.svg"
+            alt="element-logo"
+            class="nav-logo">
+        </router-link></h1>
         <ul class="nav">
           <li class="nav-item">
             <router-link

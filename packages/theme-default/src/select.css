@@ -25,6 +25,14 @@
       }
     }
 
+    & .el-input__inner {
+      cursor: pointer;
+
+      &:focus {
+        border-color: var(--select-input-focus-background);
+      }
+    }
+
     & .el-input {
       & .el-input__icon {
         color: var(--select-input-color);
@@ -52,14 +60,6 @@
           &:hover {
             color: var(--select-close-hover-color);
           }
-        }
-      }
-
-      & .el-input__inner {
-        cursor: pointer;
-
-        &:focus {
-          border-color: var(--select-input-focus-background);
         }
       }
 

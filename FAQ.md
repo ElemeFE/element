@@ -29,6 +29,12 @@
 </details>
 
 <details>
+<summary>Tree 组件的 `render-content` 和 Table 组件的 `render-header` 怎么用？</summary>
+
+请阅读 Vue 文档 [Render Function](http://vuejs.org/v2/guide/render-function.html) 的相关内容。注意，使用 JSX 来写 Render Function 的话，需要安装 `babel-plugin-transform-vue-jsx`，并参照其[文档](https://github.com/vuejs/babel-plugin-transform-vue-jsx)进行配置。
+</details>
+
+<details>
 <summary>你们的文档怎么偷偷更新了？</summary>
 
 我们只会在 Element 发布新版本时同步更新文档，以体现最新的变化。详细的更新内容可以查看 [changelog](https://github.com/ElemeFE/element/blob/master/CHANGELOG.md)。
