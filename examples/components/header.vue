@@ -174,7 +174,6 @@
 </template>
 <script>
   import compoLang from '../i18n/component.json';
-  const LANGS_INDEX = compoLang.map(lang => `/${ lang.lang }`);
 
   export default {
     data() {
@@ -185,8 +184,8 @@
       };
     },
     watch: {
-      '$route.path'(val) {
-        this.isHome = LANGS_INDEX.indexOf(val) > -1;
+      '$route.path'() {
+        this.isHome = this.$route.name === 'home';
         this.headerStyle.backgroundColor = `rgba(32, 160, 255, ${ this.isHome ? '0' : '1' })`;
       }
     },
@@ -205,7 +204,7 @@
       }
     },
     mounted() {
-      this.isHome = ['/zh-CN', '/en-US'].indexOf(this.$route.path) > -1;
+      this.isHome = this.$route.name === 'home';
       function scroll(fn) {
         window.addEventListener('scroll', () => {
           fn();
