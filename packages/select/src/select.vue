@@ -216,7 +216,7 @@
         });
       },
 
-      selected(val) {
+      selected(val, oldVal) {
         if (this.multiple) {
           if (this.selected.length > 0) {
             this.currentPlaceholder = '';
@@ -247,7 +247,7 @@
             this.selectedInit = false;
             return;
           }
-          this.valueChangeBySelected = true;
+          if (val.value === oldVal.value) return;
           this.$emit('input', val.value);
           this.$emit('change', val.value);
         }
