@@ -1,20 +1,20 @@
 ## Pagination 
 
-When the amount of data is too large, use pagination to page data.
+If you have too much data to display in one page, use pagination.
 
-### How to use
+### Basic usage
 
-:::demo Setting `layout` to indicate the content to be displayed. With commas seperator, layout elements will be displayed in order. `prev` represents the previous page. `next` represents the next page. `pager` represents a list of page numbers. In addition, it provides `jumper`, `total`, `size` and `->`(a special layout symbol). Elements following `->` will be displayed on the right. `jumper` represents jumping the page element. `total` represents the total number of pages displayed. `size` is used to set the number of pages displayed per page.
+:::demo Set `layout` with different pagination elements you wish to display separated with a comma. Pagination elements are: `prev` (a button navigating to the previous page), `next` (a button navigating to the next page), `pager` (page list), `jumper` (a jump-to input), `total` (total item count), `size` (a select to determine page size) and `->`(every element after this symbol will be pulled to the right).
 ```html
 <div class="block">
-  <span class="demonstration">Fewer Pages.</span>
+  <span class="demonstration">When you have few pages</span>
   <el-pagination
     layout="prev, pager, next"
     :total="50">
   </el-pagination>
 </div>
 <div class="block">
-  <span class="demonstration">Effect that more than 7 Pages.</span>
+  <span class="demonstration">When you have more than 7 pages</span>
     <el-pagination
       layout="prev, pager, next"
       :total="1000">
@@ -26,9 +26,9 @@ When the amount of data is too large, use pagination to page data.
 
 ### Small Pagination
 
-Use simple small pagination in the case of limited space.
+Use small pagination in the case of limited space.
 
-:::demo Just one `small` attribute is needed. The attribute is a `Boolean` type whose default value is `false`. It works when set `true`.
+:::demo Just set the `small` attribute to `true` and the Pagination becomes smaller.
 ```html
 <el-pagination
   small
@@ -38,19 +38,19 @@ Use simple small pagination in the case of limited space.
 ```
 :::
 
-### Additional
+### More elements
 
-According to the needs of the scene, you can add other functional modules.
+Add more modules based on your scenario.
 
-:::demo This example is a complete use case. It uses `sizechange` and `currentchange` event to handle the page number and the events that fire when the current page changes. `page-sizes` accepts an array of integers whose elements are options to show the number of choices displayed per page. `[100, 200, 300, 400]` indicates four options, showing 100, 200, 300 or 400 per page.
+:::demo This example is a complete use case. It uses `size-change` and `current-change` event to handle page size changes and current page changes. `page-sizes` accepts an array of integers, each of which represents a different page size in the `sizes` select options, e.g. `[100, 200, 300, 400]` indicates that the select will have four options: 100, 200, 300 or 400 items per page.
 
 ```html
 <template>
   <div class="block">
-    <span class="demonstration">The total number to be displayed</span>
+    <span class="demonstration">Total item count</span>
     <el-pagination
-      @sizechange="handleSizeChange"
-      @currentchange="handleCurrentChange"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
       :current-page="5"
       :page-size="100"
       layout="total, prev, pager, next"
@@ -58,10 +58,10 @@ According to the needs of the scene, you can add other functional modules.
     </el-pagination>
   </div>
   <div class="block">
-    <span class="demonstration">Adjust the number of pages per page</span>
+    <span class="demonstration">Change page size</span>
     <el-pagination
-      @sizechange="handleSizeChange"
-      @currentchange="handleCurrentChange"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
       :current-page="5"
       :page-sizes="[100, 200, 300, 400]"
       :page-size="100"
@@ -70,10 +70,10 @@ According to the needs of the scene, you can add other functional modules.
     </el-pagination>
   </div>
   <div class="block">
-    <span class="demonstration">Jump directly</span>
+    <span class="demonstration">Jump to</span>
     <el-pagination
-      @sizechange="handleSizeChange"
-      @currentchange="handleCurrentChange"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
       :current-page="5"
       :page-size="100"
       layout="prev, pager, next, jumper"
@@ -81,10 +81,10 @@ According to the needs of the scene, you can add other functional modules.
     </el-pagination>
   </div>
   <div class="block">
-    <span class="demonstration">Full functionality</span>
+    <span class="demonstration">All combined</span>
     <el-pagination
-      @sizechange="handleSizeChange"
-      @currentchange="handleCurrentChange"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
       :current-page="5"
       :page-sizes="[100, 200, 300, 400]"
       :page-size="100"
@@ -131,15 +131,16 @@ According to the needs of the scene, you can add other functional modules.
 <style>
   .demo-pagination .source.first {
     padding: 0;
-    display: flex;
   }
 
   .demo-pagination .first .block {
-    display: inline-block;
     padding: 30px 0;
     text-align: center;
     border-right: solid 1px #EFF2F6;
-    flex: 1;
+    float: left;
+    width: 50%;
+    box-sizing: border-box;
+
     &:last-child {
       border-right: none;
     }
@@ -160,7 +161,7 @@ According to the needs of the scene, you can add other functional modules.
     padding: 30px 24px;
     border-bottom: solid 1px #EFF2F6;
     &:last-child {
-      border-bottom: none;      
+      border-bottom: none;
     }
   }
 
@@ -179,19 +180,18 @@ According to the needs of the scene, you can add other functional modules.
 
 
 ### Attributes
-| Attribute               | Description                                                     | Type              | Options      | Default |
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
 |--------------------|----------------------------------------------------------|-------------------|-------------|--------|
-| small              |   Whether to use small pagination    | Boolean |      —       | false |
-| page-size              | The number of entries per page                                                   | Number |      —       | 10 |
-| total | The total number of entries | Number | — | 0 |
-| current-page | The current page count | Number | — | 0|
-| layout | Component layout, subcomponents separated by commas. | String | `sizes`, `prev`, `pager`, `next`, `jumper`, `->`, `total` | 'prev, pager, next, jumper, ->, total'  |
-| page-sizes | Options showing the number of selector per page | Number[] | — |  [10, 20, 30, 40, 50, 100] |
+| small              |   whether to use small pagination    | boolean |      —       | false |
+| page-size              | item count of each page  | number |      —       | 10 |
+| total | total item count | number | — | — |
+| page-count | total page count. Set either `total` or `page-count` and pages will be displayed; if you need `page-sizes`, `total` is required | number | — | — |
+| current-page | current page number | number | — | 1 |
+| layout | layout of Pagination, elements separated with a comma | string | `sizes`, `prev`, `pager`, `next`, `jumper`, `->`, `total` | 'prev, pager, next, jumper, ->, total'  |
+| page-sizes | options of item count per page | number[] | — |  [10, 20, 30, 40, 50, 100] |
 
 ### Events
-| Event | Description | Callback |
+| Event Name | Description | Parameters |
 |---------|--------|---------|
-| sizechange | triggered when pageSize changed | The number of entries per page `size` |
-| currentchange | triggered when currentPage changed | `currentPage` |
-
-
+| size-change | triggers when `page-size` changes | the new `page-size` |
+| current-change | triggers when `current-page` changes | the new `current-page` |

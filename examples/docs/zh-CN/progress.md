@@ -30,7 +30,7 @@
 
 百分比不占用额外控件，适用于文件上传等场景。
 
-:::demo Progress 组件可通过 `stroke-width` 属性更改进度条的高度，并可通过 `desc-inside` 属性来将进度条描述置于进度条内部。
+:::demo Progress 组件可通过 `stroke-width` 属性更改进度条的高度，并可通过 `text-inside` 属性来将进度条描述置于进度条内部。
 
 ```html
 <el-progress :text-inside="true" :stroke-width="18" :percentage="0"></el-progress>

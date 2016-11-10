@@ -117,6 +117,7 @@
   import { use } from 'main/locale';
   import zhLocale from 'main/locale/lang/zh-CN';
   import enLocale from 'main/locale/lang/en';
+  use(location.href.indexOf('zh-CN') > -1 ? zhLocale : enLocale);
 
   export default {
     name: 'app',
