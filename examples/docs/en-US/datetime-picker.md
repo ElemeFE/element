@@ -96,7 +96,7 @@
   }
 </style>
 
-## Date-time Picker
+## DateTimePicker
 
 Select date and time in one picker.
 

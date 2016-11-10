@@ -1,12 +1,79 @@
+<script>
+  module.exports = {
+    methods: {
+      open() {
+        this.$message('This is a message');
+      },
+
+      open2() {
+        this.$message({
+          message: 'Congrats, this is a success message.',
+          type: 'success'
+        });
+      },
+
+      open3() {
+        this.$message({
+          message: 'Warning, this is a warning message.',
+          type: 'warning'
+        });
+      },
+
+      open4() {
+        this.$message.error('Oops, this is a error message.');
+      },
+
+      open5() {
+        this.$message({
+          showClose: true,
+          message: 'This is a message'
+        });
+      },
+
+      open6() {
+        this.$message({
+          showClose: true,
+          message: 'Congrats, this is a success message.',
+          type: 'success'
+        });
+      },
+
+      open7() {
+        this.$message({
+          showClose: true,
+          message: 'Warning, this is a warning message.',
+          type: 'warning'
+        });
+      },
+
+      open8() {
+        this.$message({
+          showClose: true,
+          message: 'Oops, this is a error message.',
+          type: 'error'
+        });
+      }
+    }
+  };
+</script>
+
+<style>
+  .demo-box.demo-message {
+    .el-button + .el-button {
+      margin-left: 10px;
+    }
+  }
+</style>
+
 ## Message
 
-Used to show feedback after an activity. The difference with Notification is that later one is often used to show a system level passive notification.
+Used to show feedback after an activity. The difference with Notification is that the latter is often used to show a system level passive notification.
 
-### How to use
+### Basic usage
 
-Display at the top, and disappear after 3 seconds.
+Displays at the top, and disappears after 3 seconds.
 
-:::demo The setup of Message is very similar to notification, so parts of options won't be explained in detail here. You can check the options table combined with notification doc to understand it. Element has registered a `$message` method to call. Message can take a string as an parameter, and it will be showed as the context.
+:::demo The setup of Message is very similar to notification, so parts of the options won't be explained in detail here. You can check the options table below combined with notification doc to understand it. Element has registered a `$message` method for invoking. Message can take a string as parameter, and it will be shown as the main body.
 
 ```html
 <template>
@@ -29,7 +96,7 @@ Display at the top, and disappear after 3 seconds.
 
 Used to show the feedback of Success, Warning, Message and Error activities.
 
-:::demo When you need more custom types, Message component can also take an instance as a parameter. For example, setting value of `type` can define different types, default is `info`. This time the context is passed in as the value of `message`. Also, we have registered methods for different types, so you can directly call it without passing a type like `open4`.
+:::demo When you need more customizations, Message component can also take an object as parameter. For example, setting value of `type` can define different types, and its default is `info`. In such cases the main body is passed in as the value of `message`. Also, we have registered methods for different types, so you can directly call it without passing a type like `open4`.
 ```html
 <template>
   <el-button :plain="true" @click.native="open2">success</el-button>
@@ -42,7 +109,7 @@ Used to show the feedback of Success, Warning, Message and Error activities.
   export default {
     methods: {
       open() {
-        this.$message('这是一条消息提示');
+        this.$message('This is a message');
       },
       open2() {
         this.$message({
@@ -59,10 +126,7 @@ Used to show the feedback of Success, Warning, Message and Error activities.
       },
 
       open4() {
-        this.$message({
-          message: 'Oops, this is a error message.',
-          type: 'error'
-        });
+        this.$message.error('Oops, this is a error message.');
       }
     }
   }
@@ -72,7 +136,7 @@ Used to show the feedback of Success, Warning, Message and Error activities.
 
 ### Closable
 
-Message can add a close button.
+A close button can be added.
 
 :::demo A default Message cannot be closed manually. If you need a closable message, you can set `showClose` field. Besides, same as notification, message has a controllable `duration`. Default duration is 3000 ms, and it won't disappear when set to `0`.
 ```html
@@ -124,7 +188,7 @@ Message can add a close button.
 
 ### Global method
 
-Element has added a global method `$message` for Vue.prototype. So in a vue instance you can call `Message` follows the way in this page.
+Element has added a global method `$message` for Vue.prototype. So in a vue instance you can call `Message` like what we did in this page.
 
 ### Local import
 
@@ -134,13 +198,13 @@ Import `Message`:
 import { Message } from 'element-ui';
 ```
 
-This time you should call `Message(options)`.
+In this case you should call `Message(options)`. We have also registered methods for different types, e.g. `Message.success(options)`.
 
 ### Options
-| Attribute      | Description          | Type      | Options                           | Default  |
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| message | Message text | string | — | — |
-| type | Message type | string | success/warning/info/error | info |
-| duration | Display duration, millisecond; If set to 0, it will not turn off automatically | number | — | 3000 |
-| showClose | Whether to show close button or not | boolean | — | false |
-| onClose | Callback function when closed, the argument is a message instance | function | — | — |
+| message | message text | string | — | — |
+| type | message type | string | success/warning/info/error | info |
+| duration | display duration, millisecond. If set to 0, it will not turn off automatically | number | — | 3000 |
+| showClose | whether to show a close button | boolean | — | false |
+| onClose | callback function when closed with the message instance as the parameter | function | — | — |
