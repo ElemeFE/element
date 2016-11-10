@@ -235,6 +235,8 @@ import { MessageBox } from 'element-ui';
 | confirmButtonText | 确定按钮的文本内容 | string | — | 确定 |
 | cancelButtonClass | 取消按钮的自定义类名 | string | — | — |
 | confirmButtonClass | 确定按钮的自定义类名 | string | — | — |
+| closeOnClickModal | 是否可通过点击遮罩关闭 MessageBox | boolean | — | true（以 alert 方式调用时为 false） |
+| closeOnPressEscape | 是否可通过按下 ESC 键关闭 MessageBox | boolean | — | false |
 | showInput | 是否显示输入框 | boolean | — | false（以 prompt 方式调用时为 true）|
 | inputPlaceholder | 输入框的占位符 | string | — | — |
 | inputPattern | 输入框的校验表达式 | regexp | — | — |
