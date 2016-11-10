@@ -74,6 +74,7 @@ function generateMiscRoutes(lang) {
   let indexRoute = {
     path: `/${ lang }`, // 首页
     meta: { lang },
+    name: 'home',
     component: require(`./pages/${ lang }/index.vue`)
   };
 
