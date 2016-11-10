@@ -78,7 +78,7 @@
     },
     methods: {
       handleClose(tag) {
-        this.tags.$remove(tag);
+        this.tags.splice(this.tags.indexOf(tag), 1);
       }
     }
   }

@@ -1,270 +1,430 @@
-[
-  {
-    "name": "开发指南",
-    "children": [{
-      "path": "/installation",
-      "name": "安装"
-    },{
-      "path": "/quickstart",
-      "name": "快速上手"
-    }]
-  },
-  {
-    "name": "更新日志",
-    "path": "/changelog"
-  },
-  {
-    "name": "基础组件",
-    "groups": [{
-      "groupName": "Basic",
-      "list": [
+{
+  "zh-CN": [
+    {
+      "name": "开发指南",
+      "children": [
         {
-          "path": "/layout",
-          "name": "布局 (layout)",
-          "title": "Layout 布局",
-          "description": ""
+          "path": "/installation",
+          "name": "安装"
         },
         {
-          "path": "/color",
-          "name": "色彩 (color)",
-          "title": "Color 色彩",
-          "description": ""
+          "path": "/quickstart",
+          "name": "快速上手"
         },
         {
-          "path": "/typography",
-          "name": "字体 (typography)",
-          "title": "Typography 字体",
-          "description": ""
+          "path": "/i18n",
+          "name": "国际化"
         },
         {
-          "path": "/icon",
-          "name": "图标 (icon)",
-          "title": "Icon 图标"
-        },
-        {
-          "path": "/button",
-          "name": "按钮 (button)",
-          "title": "Button 按钮",
-          "description": "常用的操作按钮"
+          "path": "/custom-theme",
+          "name": "自定义主题"
         }
       ]
     },
     {
-      "groupName": "Form",
-      "list": [
+      "name": "更新日志",
+      "path": "/changelog"
+    },
+    {
+      "name": "基础组件",
+      "groups": [
         {
-          "path": "/radio",
-          "name": "单选框 (radio)",
-          "title": "Radio 单选框",
-          "description": "用于在多个备选项选中单个选项。"
+          "groupName": "Basic",
+          "list": [
+            {
+              "path": "/layout",
+              "title": "Layout 布局"
+            },
+            {
+              "path": "/color",
+              "title": "Color 色彩"
+            },
+            {
+              "path": "/typography",
+              "title": "Typography 字体"
+            },
+            {
+              "path": "/icon",
+              "title": "Icon 图标"
+            },
+            {
+              "path": "/button",
+              "title": "Button 按钮"
+            }
+          ]
         },
         {
-          "path": "/checkbox",
-          "name": "多选框 (checkbox)",
-          "title": "Checkbox 多选框",
-          "description": "用于在多个可选项中进行多项选择。"
+          "groupName": "Form",
+          "list": [
+            {
+              "path": "/radio",
+              "title": "Radio 单选框"
+            },
+            {
+              "path": "/checkbox",
+              "title": "Checkbox 多选框"
+            },
+            {
+              "path": "/input",
+              "title": "Input 输入框"
+            },
+            {
+              "path": "/input-number",
+              "title": "InputNumber 计数器"
+            },
+            {
+              "path": "/select",
+              "title": "Select 选择器"
+            },
+            {
+              "path": "/switch",
+              "title": "Switch 开关"
+            },
+            {
+              "path": "/slider",
+              "title": "Slider 滑块"
+            },
+            {
+              "path": "/time-picker",
+              "title": "TimePicker 时间选择器"
+            },
+            {
+              "path": "/date-picker",
+              "title": "DatePicker 日期选择器"
+            },
+            {
+              "path": "/datetime-picker",
+              "title": "DateTimePicker 日期时间选择器"
+            },
+            {
+              "path": "/upload",
+              "title": "Upload 上传"
+            },
+            {
+              "path": "/rate",
+              "title": "Rate 评分"
+            },
+            {
+              "path": "/form",
+              "title": "Form 表单"
+            }
+          ]
         },
         {
-          "path": "/input",
-          "name": "输入框 (input)",
-          "title": "Input 输入框"
+          "groupName": "Data",
+          "list": [
+            {
+              "path": "/table",
+              "title": "Table 表格"
+            },
+            {
+              "path": "/tag",
+              "title": "Tag 标签"
+            },
+            {
+              "path": "/progress",
+              "title": "Progress 进度条"
+            },
+            {
+              "path": "/tree",
+              "title": "Tree 树形控件"
+            },
+            {
+              "path": "/pagination",
+              "title": "Pagination 分页"
+            },
+            {
+              "path": "/badge",
+              "title": "Badge 标记"
+            }
+          ]
         },
         {
-          "path": "/input-number",
-          "name": "计数器 (input-number)",
-          "title": "InputNumber 计数器"
+          "groupName": "Notice",
+          "list": [
+            {
+              "path": "/alert",
+              "title": "Alert 警告"
+            },
+            {
+              "path": "/loading",
+              "title": "Loading 加载"
+            },
+            {
+              "path": "/message",
+              "title": "Message 消息提示"
+            },
+            {
+              "path": "/message-box",
+              "title": "MessageBox 弹框"
+            },
+            {
+              "path": "/notification",
+              "title": "Notification 通知"
+            }
+          ]
         },
         {
-          "path": "/select",
-          "name": "选择器 (select)",
-          "title": "Select 选择器",
-          "description": "当选项过多时, 使用下拉菜单展示并选择内容"
+          "groupName": "Navigation",
+          "list": [
+            {
+              "path": "/menu",
+              "title": "NavMenu 导航菜单"
+            },
+            {
+              "path": "/tabs",
+              "title": "Tabs 标签页"
+            },
+            {
+              "path": "/breadcrumb",
+              "title": "Breadcrumb 面包屑"
+            },
+            {
+              "path": "/dropdown",
+              "title": "Dropdown 下拉菜单"
+            },
+            {
+              "path": "/steps",
+              "title": "Steps 步骤"
+            }
+          ]
         },
         {
-          "path": "/switch",
-          "name": "开关 (switch)",
-          "title": "Switch 开关",
-          "description": "用于两种对立状态的切换。"
+          "groupName": "Others",
+          "list": [
+            {
+              "path": "/dialog",
+              "title": "Dialog 对话框"
+            },
+            {
+              "path": "/tooltip",
+              "title": "Tooltip 文字提示"
+            },
+            {
+              "path": "/popover",
+              "title": "Popover 弹出框"
+            },
+            {
+              "path": "/card",
+              "title": "Card 卡片"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "en-US": [
+    {
+      "name": "Development",
+      "children": [
+        {
+          "path": "/installation",
+          "name": "Installation"
         },
         {
-          "path": "/slider",
-          "name": "滑块 (slider)",
-          "title": "Slider 滑块",
-          "description": "通过拖动滑块在一个固定区间内进行选择"
+          "path": "/quickstart",
+          "name": "Quick Start"
         },
         {
-          "path": "/time-picker",
-          "name": "时间选择器（time-picker）",
-          "title": "TimePicker 时间选择器",
-          "description": "用于选择或输入时间"
+          "path": "/i18n",
+          "name": "Internationalization"
         },
         {
-          "path": "/date-picker",
-          "name": "日期选择器（date-picker）",
-          "title": "DatePicker 日期选择器",
-          "description": "用于选择或输入时间"
-        },
-        {
-          "path": "/datetime-picker",
-          "name": "日期时间选择器",
-          "title": "DateTimePicker 日期时间选择器",
-          "description": "用于选择或输入日期时间"
-        },
-        {
-          "path": "/upload",
-          "name": "上传 (upload)",
-          "title": "Upload 上传",
-          "description": "文件上传组件"
-        },
-        {
-          "path": "/rate",
-          "name": "评分 (rate)",
-          "title": "Rate 评分"
-        },
-        {
-          "path": "/form",
-          "name": "表单 (form)",
-          "title": "Form 表单",
-          "description": "一个多功能的并带有字段验证的表单组件"
+          "path": "/custom-theme",
+          "name": "Custom Theme"
         }
       ]
     },
     {
-      "groupName": "Data",
-      "list": [
-        {
-          "path": "/table",
-          "name": "表格 (table)",
-          "title": "Table 表格",
-          "description": "用于展示多条结构类似的数据, 可对数据进行排序、筛选、对比或其他自定义操作。"
-        },
-        {
-          "path": "/tag",
-          "name": "标签 (tag)",
-          "title": "Tag 标签",
-          "description": "Tag 标签"
-        },
-        {
-          "path": "/progress",
-          "name": "进度条 (progress)",
-          "title": "Progress 进度条",
-          "description": ""
-        },
-        {
-          "path": "/tree",
-          "name": "tree (tree)",
-          "title": "Tree 树形控件"
-        },
-        {
-          "path": "/pagination",
-          "name": "分页 (pagination)",
-          "title": "Pagination 分页",
-          "description": "当数据量过多时, 使用分页分解数据"
-        },
-        {
-          "path": "/badge",
-          "name": "标记 (badge)",
-          "title": "Badge 标记",
-          "description": "出现在按钮、图标旁的数字或状态标记"
-        }
-      ]
+      "name": "Changelog",
+      "path": "/changelog"
     },
     {
-      "groupName": "Notice",
-      "list": [
+      "name": "Components",
+      "groups": [
         {
-          "path": "/alert",
-          "name": "警告 (alert)",
-          "title": "Alert 警告",
-          "description": "用于页面中展示重要的提示信息"
+          "groupName": "Basic",
+          "list": [
+            {
+              "path": "/layout",
+              "title": "Layout"
+            },
+            {
+              "path": "/color",
+              "title": "Color"
+            },
+            {
+              "path": "/typography",
+              "title": "Typography"
+            },
+            {
+              "path": "/icon",
+              "title": "Icon"
+            },
+            {
+              "path": "/button",
+              "title": "Button"
+            }
+          ]
         },
         {
-          "path": "/loading",
-          "name": "加载 (loading)",
-          "title": "Loading 加载",
-          "description": "加载数据时显示"
+          "groupName": "Form",
+          "list": [
+            {
+              "path": "/radio",
+              "title": "Radio"
+            },
+            {
+              "path": "/checkbox",
+              "title": "Checkbox"
+            },
+            {
+              "path": "/input",
+              "title": "Input"
+            },
+            {
+              "path": "/input-number",
+              "title": "InputNumber"
+            },
+            {
+              "path": "/select",
+              "title": "Select"
+            },
+            {
+              "path": "/switch",
+              "title": "Switch"
+            },
+            {
+              "path": "/slider",
+              "title": "Slider"
+            },
+            {
+              "path": "/time-picker",
+              "title": "TimePicker"
+            },
+            {
+              "path": "/date-picker",
+              "title": "DatePicker"
+            },
+            {
+              "path": "/datetime-picker",
+              "title": "DateTimePicker"
+            },
+            {
+              "path": "/upload",
+              "title": "Upload"
+            },
+            {
+              "path": "/rate",
+              "title": "Rate"
+            },
+            {
+              "path": "/form",
+              "title": "Form"
+            }
+          ]
         },
         {
-          "path": "/message",
-          "name": "消息提示 (message)",
-          "title": "Message 消息提示",
-          "description": "对用户的操作进行反馈提示,包含成功、反馈或错误等消息提示"
+          "groupName": "Data",
+          "list": [
+            {
+              "path": "/table",
+              "title": "Table"
+            },
+            {
+              "path": "/tag",
+              "title": "Tag"
+            },
+            {
+              "path": "/progress",
+              "title": "Progress"
+            },
+            {
+              "path": "/tree",
+              "title": "Tree"
+            },
+            {
+              "path": "/pagination",
+              "title": "Pagination"
+            },
+            {
+              "path": "/badge",
+              "title": "Badge"
+            }
+          ]
         },
         {
-          "path": "/message-box",
-          "name": "弹框 (message-box)",
-          "title": "MessageBox 弹框"
+          "groupName": "Notice",
+          "list": [
+            {
+              "path": "/alert",
+              "title": "Alert"
+            },
+            {
+              "path": "/loading",
+              "title": "Loading"
+            },
+            {
+              "path": "/message",
+              "title": "Message"
+            },
+            {
+              "path": "/message-box",
+              "title": "MessageBox"
+            },
+            {
+              "path": "/notification",
+              "title": "Notification"
+            }
+          ]
         },
         {
-          "path": "/notification",
-          "name": "通知 (notification)",
-          "title": "Notification 通知",
-          "description": "悬浮出现在页面右上角, 显示全局的通知提醒消息"
+          "groupName": "Navigation",
+          "list": [
+            {
+              "path": "/menu",
+              "title": "NavMenu"
+            },
+            {
+              "path": "/tabs",
+              "title": "Tabs"
+            },
+            {
+              "path": "/breadcrumb",
+              "title": "Breadcrumb"
+            },
+            {
+              "path": "/dropdown",
+              "title": "Dropdown"
+            },
+            {
+              "path": "/steps",
+              "title": "Steps"
+            }
+          ]
+        },
+        {
+          "groupName": "Others",
+          "list": [
+            {
+              "path": "/dialog",
+              "title": "Dialog"
+            },
+            {
+              "path": "/tooltip",
+              "title": "Tooltip"
+            },
+            {
+              "path": "/popover",
+              "title": "Popover"
+            },
+            {
+              "path": "/card",
+              "title": "Card"
+            }
+          ]
         }
       ]
-    },
-    {
-      "groupName": "Navigation",
-      "list": [
-        {
-          "path": "/menu",
-          "name": "导航菜单 (menu)",
-          "title": "NavMenu 导航菜单",
-          "description": "富展现的标签页"
-        },
-        {
-          "path": "/tabs",
-          "name": "标签页 (tabs)",
-          "title": "Tabs 标签页",
-          "description": "富展现的标签页"
-        },
-        {
-          "path": "/breadcrumb",
-          "name": "面包屑 (breadcrumb)",
-          "title": "Breadcrumb 面包屑",
-          "description": ""
-        },
-        {
-          "path": "/dropdown",
-          "name": "下拉菜单 (dropdown)",
-          "title": "Dropdown 下拉菜单"
-        },
-        {
-          "path": "/steps",
-          "name": "步骤条 (steps)",
-          "title": "Steps 步骤",
-          "description": "引导用户按照流程完成任务的分步导航条,可根据实际应用场景设定步骤,步骤不得少于 2 步。"
-        }
-      ]
-    },
-    {
-      "groupName": "Others",
-      "list": [
-        {
-          "path": "/dialog",
-          "name": "对话框 (dialog)",
-          "title": "Dialog 对话框",
-          "description": "在保留当前页面状态的情况下, 告知用户信息并承载相关操作。"
-        },
-        {
-          "path": "/tooltip",
-          "name": "文字提示 (tooltip)",
-          "title": "Tooltip 文字提示",
-          "description": "优雅地展示文字提示信息"
-        },
-        {
-          "path": "/popover",
-          "name": "弹出框 (popover)",
-          "title": "Popover 弹出框",
-          "description": "收纳具体内容和相关操作, 激活后弹出展现"
-        },
-        {
-          "path": "/card",
-          "name": "卡片 (card)",
-          "title": "Card 卡片",
-          "description": "将信息聚合在卡片容器中展示"
-        }
-      ]
-    }]
-  }
-]
+    }
+  ]
+}

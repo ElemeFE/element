@@ -8,8 +8,8 @@
     <div class="meta">
       <div class="description">
         <slot></slot>
-        <el-tooltip effect="dark" content="前往 jsfiddle.net 运行此实例" placement="right">
-          <el-button size="small" type="primary" @click="goJsfiddle">在线运行</el-button>
+        <el-tooltip effect="dark" :content="langConfig['tooltip-text']" placement="right">
+          <el-button size="small" type="primary" @click="goJsfiddle">{{ langConfig['button-text'] }}</el-button>
         </el-tooltip>
       </div>
       <slot name="highlight"></slot>
@@ -150,6 +150,8 @@
 </style>
 
 <script type="text/babel">
+  import compoLang from '../i18n/component.json';
+
   export default {
     data() {
       return {
@@ -201,6 +203,14 @@
     },
 
     computed: {
+      lang() {
+        return this.$route.path.split('/')[1];
+      },
+
+      langConfig() {
+        return compoLang.filter(config => config.lang === this.lang)[0]['demo-block'];
+      },
+
       blockClass() {
         return `demo-${ this.$router.currentRoute.path.split('/').pop() }`;
       },
@@ -210,7 +220,7 @@
       },
 
       controlText() {
-        return this.isExpanded ? '隐藏代码' : '显示代码';
+        return this.isExpanded ? this.langConfig['hide-text'] : this.langConfig['show-text'];
       },
 
       codeArea() {

@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "bootstrap": "npm i",
-    "build:file": "node build/bin/iconInit.js & node build/bin/build-entry.js",
+    "build:file": "node build/bin/iconInit.js & node build/bin/build-entry.js & node build/bin/i18n.js",
     "build:theme": "node build/bin/gen-cssfile && gulp build --gulpfile packages/theme-default/gulpfile.js && cp-cli packages/theme-default/lib lib/theme-default",
     "build:utils": "cross-env BABEL_ENV=utils babel src --out-dir lib --ignore src/index.js",
     "clean": "rimraf lib && rimraf packages/*/lib && rimraf test/**/coverage && lerna clean --yes",
@@ -23,7 +23,8 @@
     "pub": "git checkout master && git pull eleme master --rebase && sh build/release.sh",
     "pub:all": "npm run dist:all && lerna publish",
     "test": "npm run lint && CI_ENV=/dev/ karma start test/unit/karma.conf.js --single-run",
-    "test:watch": "karma start test/unit/karma.conf.js"
+    "test:watch": "karma start test/unit/karma.conf.js",
+    "i18n": "node build/bin/i18n.js"
   },
   "repository": {
     "type": "git",
