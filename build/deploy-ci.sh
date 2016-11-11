@@ -3,7 +3,7 @@ mkdir temp_web
 
 # build dev site
 if [ "$TRAVIS_BRANCH" = "master" ] && [ "$GH_TOKEN" ]; then
-  CI_ENV=/dev/ ./node_modules/.bin/cooking build -c build/cooking.demo.js
+  npm run deploy:dev
   cd temp_web
   git clone https://$GH_TOKEN@github.com/ElementUI/dev.git && cd dev
   git config user.name "element_bot"
