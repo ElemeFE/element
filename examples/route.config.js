@@ -85,12 +85,18 @@ langs.forEach(lang => {
   route = route.concat(generateMiscRoutes(lang.lang));
 });
 
+let userLanguage = localStorage.getItem('ELEMENT_LANGUAGE') || window.navigator.language;
+let defaultPath = '/en-US';
+if (userLanguage.indexOf('zh-') !== -1) {
+  defaultPath = '/zh-CN';
+}
+
 route = route.concat([{
   path: '/',
-  redirect: '/zh-CN'
+  redirect: defaultPath
 }, {
   path: '*',
-  redirect: '/zh-CN'
+  redirect: defaultPath
 }]);
 
 export default route;
