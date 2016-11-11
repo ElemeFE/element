@@ -14,6 +14,7 @@
     "build:theme": "node build/bin/gen-cssfile && gulp build --gulpfile packages/theme-default/gulpfile.js && cp-cli packages/theme-default/lib lib/theme-default",
     "build:utils": "cross-env BABEL_ENV=utils babel src --out-dir lib --ignore src/index.js",
     "clean": "rimraf lib && rimraf packages/*/lib && rimraf test/**/coverage && lerna clean --yes",
+    "deploy:dev": "npm run build:file && CI_ENV=/dev/ cooking build -c build/cooking.demo.js",
     "deploy:build": "npm run build:file && cooking build -c build/cooking.demo.js -p && echo element.eleme.io>>examples/element-ui/CNAME",
     "deploy": "npm run deploy:build && gh-pages -d examples/element-ui --remote eleme && del examples/element-ui",
     "dev": "npm run bootstrap && npm run build:file && cooking watch -c build/cooking.demo.js -p",
