@@ -200,6 +200,7 @@
     methods: {
       switchLang(targetLang) {
         if (this.lang === targetLang) return;
+        localStorage.setItem('ELEMENT_LANGUAGE', targetLang);
         this.$router.push(this.$route.path.replace(this.lang, targetLang));
       }
     },
