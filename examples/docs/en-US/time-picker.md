@@ -159,4 +159,4 @@ Can pick an arbitrary time range.
 ### Time Picker Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| selectableRange | available time range，e.g.<br>`'18:30:00 - 20:30:00'`<br>or<br>`['09:30:00 - 12:00:00', '14:30:00 - 18:30:00']` | string/array | — | — |
+| selectableRange | available time range, e.g.<br>`'18:30:00 - 20:30:00'`<br>or<br>`['09:30:00 - 12:00:00', '14:30:00 - 18:30:00']` | string/array | — | — |

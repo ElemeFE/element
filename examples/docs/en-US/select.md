@@ -115,27 +115,17 @@
   };
 </script>
 
-<style>
-  .demo-select .el-select {
-    display: inline-block;
-    width: 240px;
-  }
-</style>
-
 ## Select
 
+When there are plenty of options, use a drop-down menu to display and select desired ones.
 
-When there are too many options, use the drop-down menu to display and select the content.
+### Basic usage
 
-### How to use
-
-Basic radio that can be used in many scenarios.
-
-:::demo The value of `v-model` is the value attribute of `el-option` that is currently selected.
+:::demo `v-model` is the value of `el-option` that is currently selected.
 
 ```html
 <template>
-  <el-select v-model="value">
+  <el-select v-model="value" placeholder="Select">
     <el-option
       v-for="item in options"
       :label="item.label"
@@ -172,13 +162,13 @@ Basic radio that can be used in many scenarios.
 ```
 :::
 
-### With disabled options
+### Disabled option
 
-:::demo Setting the value of `disabled` in `el-option` to true to disable this option.
+:::demo Set the value of `disabled` in `el-option` to `true` to disable this option.
 
 ```html
 <template>
-  <el-select v-model="value2">
+  <el-select v-model="value2" placeholder="Select">
     <el-option
       v-for="item in options2"
       :label="item.label"
@@ -217,14 +207,14 @@ Basic radio that can be used in many scenarios.
 ```
 :::
 
-### Disabled state
+### Disabled select
 
-The disabled state of select component.
+Disable the whole component.
 
-:::demo Set `disabled` attribute for `el-select` to set it disabled.
+:::demo Set `disabled` of `el-select` to make it disabled.
 ```html
 <template>
-  <el-select v-model="value3" disabled>
+  <el-select v-model="value3" disabled placeholder="Select">
     <el-option
       v-for="item in options"
       :label="item.label"
@@ -261,14 +251,14 @@ The disabled state of select component.
 ```
 :::
 
-### With radio that can reset the select
+### Clearable single select
 
-With reset radio, you can reset the select component to default state.
+You can clear Select using a clear icon.
 
-:::demo Setting `clearable` attribute for `el-select` can reset the select component. What you should notice is that `clearable` attribute is only for radio select component.
+:::demo Set `clearable` attribute for `el-select` and a clear icon will appear. Note that `clearable` is only for single select.
 ```html
 <template>
-  <el-select v-model="value4" clearable>
+  <el-select v-model="value4" clearable placeholder="Select">
     <el-option
       v-for="item in options"
       :label="item.label"
@@ -305,14 +295,14 @@ With reset radio, you can reset the select component to default state.
 ```
 :::
 
-### Basic checkbox
+### Basic multiple select
 
-Basic checkbox can be used in many scenarios, which uses Tag to show the selected option.
+Multiple select uses tags to display selected options.
 
-:::demo Set `multiple` attribute for `el-select` to enable checkbox mode, and then the value of `v-model` is the array of selected options.
+:::demo Set `multiple` attribute for `el-select` to enable multiple mode. In this case, the value of `v-model` will be an array of selected options.
 ```html
 <template>
-  <el-select v-model="value5" multiple>
+  <el-select v-model="value5" multiple placeholder="Select">
     <el-option
       v-for="item in options"
       :label="item.label"
@@ -349,15 +339,15 @@ Basic checkbox can be used in many scenarios, which uses Tag to show the selecte
 ```
 :::
 
-### Custom templates
+### Custom template
 
-You can customize the alternative options.
+You can customize HTML templates for options.
 
-:::demo Insert the customized HTML templates into the slot of `el-option`.
+:::demo Insert customized HTML templates into the slot of `el-option`.
 
 ```html
 <template>
-  <el-select v-model="value6">
+  <el-select v-model="value6" placeholder="Select">
     <el-option
       v-for="item in cities"
       :label="item.label"
@@ -401,13 +391,13 @@ You can customize the alternative options.
 
 ### Grouping
 
-Display the alternatives in a grouping manner.
+Display options in groups.
 
-:::demo Use `el-option-group` to group the alternatives, its `label` attribute stands for the name of the group.
+:::demo Use `el-option-group` to group the options, and its `label` attribute stands for the name of the group.
 
 ```html
 <template>
-  <el-select v-model="value7">
+  <el-select v-model="value7" placeholder="Select">
     <el-option-group
       v-for="group in options3"
       :label="group.label">
@@ -457,14 +447,14 @@ Display the alternatives in a grouping manner.
 ```
 :::
 
-### Searchable
+### Option filtering
 
-You can use the search function to find options quickly.
+You can filter options for your desired ones.
 
-:::demo Add `filterable` attribute for `el-select` to enable search function. By default, select will find all the options whose `label` attribute contains the input value. If you want to use other search logic, you can pass the `filter-method`. `filter-method` is a `Function` that will be called when the input value changed, and its parameter is the current input value.
+:::demo Adding `filterable` to `el-select` enables filtering. By default, Select will find all the options whose `label` attribute contains the input value. If you prefer other filtering strategies, you can pass the `filter-method`. `filter-method` is a `Function` that gets called when the input value changed, and its parameter is the current input value.
 ```html
 <template>
-  <el-select v-model="value8" filterable>
+  <el-select v-model="value8" filterable placeholder="Select">
     <el-option
       v-for="item in options"
       :label="item.label"
@@ -503,9 +493,9 @@ You can use the search function to find options quickly.
 
 ### Remote Search
 
-Search the data from the server, and enter the keyword to find.
+Enter keywords and search data from server.
 
-:::demo Set the value of `filterable` and `remote` with `true` to enable remote search, and you should pass the `remote-method`. `remote-method` is a `Function`, that will be called when the input value changed, and its parameter is the current input value. What you should notice is that if `el-option` is rendered by the `v-for` directive, and you should add `key` attribute for `el-option`. Its value needs to be unique, such as `item.value` in the following example.
+:::demo Set the value of `filterable` and `remote` with `true` to enable remote search, and you should pass the `remote-method`. `remote-method` is a `Function` that gets called when the input value changes, and its parameter is the current input value. Note that if `el-option` is rendered with the `v-for` directive, you should add the `key` attribute for `el-option`. Its value needs to be unique, such as `item.value` in the following example.
 
 ```html
 <template>
@@ -579,35 +569,35 @@ Search the data from the server, and enter the keyword to find.
 ```
 :::
 
-### Select Attributes 
-| Attribute      | Description          | Type      | Options                          | Default  |
+### Select Attributes
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| multiple | Whether in checkbox mode | boolean | — | false |
-| disabled | Whether disabled or not | boolean | — | false |
-| clearable | Whether the Options can be cleared when single selected | boolean | — | false |
+| multiple | whether multiple-select is activated | boolean | — | false |
+| disabled | whether Select is disabled | boolean | — | false |
+| clearable | whether single select can be cleared | boolean | — | false |
 | name | the name attribute of select input | string | — | — |
-| placeholder | placeholder | string | — | Please make a choice |
-| filterable | Whether  searchable | boolean | — | false |
-| filter-method | customized filter method | function | — | — |
-| remote | Whether remote search | boolean | — | false |
-| remote-method | the method for remote search | function | — | — |
-| loading | Whether loading from the remote server | boolean | — | false |
+| placeholder | placeholder | string | — | Select |
+| filterable | whether Select is filterable | boolean | — | false |
+| filter-method | custom filter method | function | — | — |
+| remote | whether options are loaded from server | boolean | — | false |
+| remote-method | custom remote search method | function | — | — |
+| loading | whether Select is loading data from server | boolean | — | false |
 
 ### Select Events
-| Event name | Description | Call back Params |
+| Event Name | Description | Parameters |
 |---------|---------|---------|
-| change | Trigged when the selected value changes | current selected value |
+| change | triggers when the selected value changes | current selected value |
 
 ### Option Group Attributes
-| Attribute      | Description          | Type     | Options                           | Default  |
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| label | The name of the group | string | — | — |
-| disabled | Whether to disable all the Options in this group | boolean | — | false |
+| label | name of the group | string | — | — |
+| disabled | whether to disable all options in this group | boolean | — | false |
 
 ### Option Attributes
-| Attribute      | Description          | Type      | Options                           | Default  |
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| value | the value of Option | string/number/object | — | — |
-| label | the label of Option, by default is the same as `value` | string/number | — | — |
-| disabled | Whether to disable the Option or not | boolean | — | false |
+| value | value of option | string/number/object | — | — |
+| label | label of option, same as `value` if omitted | string/number | — | — |
+| disabled | whether option is disabled | boolean | — | false |
 
