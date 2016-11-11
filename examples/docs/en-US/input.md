@@ -1,6 +1,6 @@
 <script>
   var Vue = require('vue');
-  Vue.component('my-item', {
+  Vue.component('my-item-en', {
     functional: true,
     render: function (h, ctx) {
       var item = ctx.props.item;
@@ -56,7 +56,6 @@
       querySearchAsync(queryString, cb) {
         var links = this.links;
         var results = queryString ? links.filter(this.createStateFilter(queryString)) : links;
-        console.log(results);
 
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
@@ -82,7 +81,7 @@
 </script>
 
 <style>
-  .demo-input {
+  .demo-input.demo-en-US {
     .el-select .el-input {
       width: 100px;
     }
@@ -346,14 +345,14 @@ Customize how suggestions are displayed.
   class="my-autocomplete"
   v-model="state3"
   :fetch-suggestions="querySearch"
-  custom-item="my-item"
+  custom-item="my-item-en"
   placeholder="Please input"
   @select="handleSelect"
 ></el-autocomplete>
 
 <script>
   var Vue = require('vue');
-  Vue.component('my-item', {
+  Vue.component('my-item-en', {
     functional: true,
     render: function (h, ctx) {
       var item = ctx.props.item;

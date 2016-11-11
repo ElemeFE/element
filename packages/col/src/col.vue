@@ -19,7 +19,7 @@
     props: {
       span: {
         type: Number,
-        required: true
+        default: 24
       },
       offset: Number,
       pull: Number,

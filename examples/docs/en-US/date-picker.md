@@ -267,7 +267,7 @@ Picking a date range is supported.
 | readonly | if the picker is read only | boolean | — | false |
 | placeholder | placeholder | string | — | — |
 | type | type of the picker | string | year/month/date/datetime/week/datetimerange/daterange | date |
-| format | format of the picker | string | year `yyyy` month `MM` day `dd`，<br>hour `HH`, minute `mm`, second `ss` | yyyy-MM-dd |
+| format | format of the picker | string | year `yyyy` month `MM` day `dd`, <br>hour `HH`, minute `mm`, second `ss` | yyyy-MM-dd |
 | align | alignment | left/center/right | left |
 | picker-options | additional options, check the table below | object | — | {} |
 

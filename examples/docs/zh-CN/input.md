@@ -1,6 +1,6 @@
 <script>
   var Vue = require('vue');
-  Vue.component('my-item', {
+  Vue.component('my-item-zh', {
     functional: true,
     render: function (h, ctx) {
       var item = ctx.props.item;
@@ -16,6 +16,7 @@
   export default {
     data() {
       return {
+        restaurants: [],
         input: '',
         input1: '',
         input2: '',
@@ -121,7 +122,7 @@
 </script>
 
 <style>
-  .demo-input {
+  .demo-input.demo-zh-CN {
     .el-select .el-input {
       width: 100px;
     }
@@ -507,7 +508,7 @@ export default {
   class="my-autocomplete"
   v-model="state3"
   :fetch-suggestions="querySearch"
-  custom-item="my-item"
+  custom-item="my-item-zh"
   placeholder="请输入内容"
   @select="handleSelect"
 ></el-autocomplete>
@@ -535,7 +536,7 @@ export default {
 </style>
 
 <script>
-  Vue.component('my-item', {
+  Vue.component('my-item-zh', {
     functional: true,
     render: function (h, ctx) {
       var item = ctx.props.item;

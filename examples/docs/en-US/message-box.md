@@ -3,6 +3,7 @@
     methods: {
       open() {
         this.$alert('This is a message', 'Title', {
+          confirmButtonText: 'OK',
           callback: action => {
             this.$message({
               type: 'info',
@@ -14,6 +15,8 @@
 
       open2() {
         this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
+          confirmButtonText: 'OK',
+          cancelButtonText: 'Cancel',
           type: 'warning'
         }).then(() => {
           setTimeout(() => {
@@ -34,6 +37,8 @@
 
       open3() {
         this.$prompt('Please input your email', 'Tips', {
+          confirmButtonText: 'OK',
+          cancelButtonText: 'Cancel',
           inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
           inputErrorMessage: 'Invalid Email'
         }).then(({ value }) => {
@@ -57,7 +62,9 @@
         this.$msgbox({
           title: 'Message',
           message: 'This is a message',
-          showCancelButton: true
+          showCancelButton: true,
+          confirmButtonText: 'OK',
+          cancelButtonText: 'Cancel'
         }).then(action => {
           setTimeout(() => {
             this.$message({
@@ -92,6 +99,7 @@ Alert interrupts user operation until the user confirms.
     methods: {
       open() {
         this.$alert('This is a message', 'Title', {
+          confirmButtonText: 'OK',
           callback: action => {
             this.$message({
               type: 'info',
@@ -122,6 +130,8 @@ Confirm is used to ask users' confirmation.
     methods: {
       open2() {
         this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
+          confirmButtonText: 'OK',
+          cancelButtonText: 'Cancel',
           type: 'warning'
         }).then(() => {
           this.$message({
@@ -158,6 +168,8 @@ Prompt is used when user input is required.
     methods: {
       open3() {
         this.$prompt('Please input your e-mail', 'Tip', {
+          confirmButtonText: 'OK',
+          cancelButtonText: 'Cancel',
           inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
           inputErrorMessage: 'Invalid Email'
         }).then(value => {
@@ -196,7 +208,9 @@ Can be customized to show various content.
         this.$msgbox({
           title: 'Message',
           message: 'This is a message',
-          showCancelButton: true
+          showCancelButton: true,
+          confirmButtonText: 'OK',
+          cancelButtonText: 'Cancel'
         }).then(action => {
           this.$message({
             type: 'info',
