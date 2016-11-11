@@ -1,5 +1,13 @@
 ## 更新日志
 
+### 1.0.1
+
+*2016-11-x*
+- DatePicker 新增 `disabled` 和 `editable`
+
+#### 非兼容性更新
+- DatePicker 的 `readonly` 为完全只读，新增的 `editable` 属性设置为 false 可禁止输入但是可通过弹框选择，#976
+
 ### 1.0.0
 
 *2016-11-9*

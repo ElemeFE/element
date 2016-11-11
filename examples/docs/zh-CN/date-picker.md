@@ -274,7 +274,9 @@
 ### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| readonly | 只读 | boolean | — | false |
+| readonly | 完全只读 | boolean | — | false |
+| disabled | 禁用 | boolean | - | false |
+| editable | 文本框可输入 | boolean | - | true |
 | placeholder | 占位内容 | string | — | — |
 | type | 显示类型 | string | year/month/date/week/<br>datetime/datetimerange/daterange | date |
 | format | 时间日期格式化 | string | 年 `yyyy`，月 `MM`，日 `dd`，<br>小时 `HH`，分 `mm`，秒 `ss` | yyyy-MM-dd |

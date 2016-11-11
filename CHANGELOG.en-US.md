@@ -1,5 +1,12 @@
 ## 更新日志
 
+### 1.0.1
+*2016-11-x*
+- DatePicker: add `disabled` and `editable` attribute.
+
+#### Breaking change
+- DatePicker: can't change value when `readonly` is true, setting `editable` to false if you want to disabled input. #976
+
 ### 1.0.0
 
 *2016-11-9*
@@ -8,6 +15,7 @@
 - 修复结合 `vue-i18n` 使用时会提示不能覆盖 `$t` 方法的问题
 - 新增 Loading 自定义加载文案的功能，并优化了视觉表现
 - 修复 Input blur 事件的参数不是 event 对象的问题
+- `window.ELEMENT.locale.use` 改成 `window.ELEMENT.locale`
 
 ### 1.0.0-rc.9
 
