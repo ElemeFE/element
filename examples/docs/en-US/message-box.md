@@ -238,6 +238,8 @@ The corresponding methods are: `MessageBox`, `MessageBox.alert`, `MessageBox.con
 | confirmButtonText | text content of confirm button | string | — | OK |
 | cancelButtonClass | custom class name of cancel button | string | — | — |
 | confirmButtonClass | custom class name of confirm button | string | — | — |
+| closeOnClickModal | whether MessageBox can be closed by clicking the mask | boolean | — | true (false when called with alert) |
+| closeOnPressEscape | whether MessageBox can be closed by pressing the ESC | boolean | — | false |
 | showInput | whether to show an input | boolean | — | false (true when called with prompt) |
 | inputPlaceholder | placeholder of input | string | — | — |
 | inputPattern | regexp for the input | regexp | — | — |
