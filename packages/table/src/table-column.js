@@ -126,11 +126,13 @@ export default {
     }
   },
 
-  render() {},
+  render() {
+    return (<div>{ this._t('default') }</div>);
+  },
 
   data() {
     return {
-      isChildColumn: false,
+      isSubColumn: false,
       columns: []
     };
   },
@@ -158,13 +160,15 @@ export default {
 
   created() {
     this.customRender = this.$options.render;
-    this.$options.render = (h) => h('div');
+    this.$options.render = (h) => {
+      return (<div>{ this._t('default') }</div>);
+    };
 
     let columnId = this.columnId = (this.$parent.tableId || (this.$parent.columnId + '_')) + 'column_' + columnIdSeed++;
 
     let parent = this.$parent;
     let owner = this.owner;
-    this.isChildColumn = owner !== parent;
+    this.isSubColumn = owner !== parent;
 
     let type = this.type;
 
@@ -326,12 +330,12 @@ export default {
     const parent = this.$parent;
     let columnIndex;
 
-    if (!this.isChildColumn) {
+    if (!this.isSubColumn) {
       columnIndex = [].indexOf.call(parent.$refs.hiddenColumns.children, this.$el);
     } else {
       columnIndex = [].indexOf.call(parent.$el.children, this.$el);
     }
 
-    owner.store.commit('insertColumn', this.columnConfig, columnIndex);
+    owner.store.commit('insertColumn', this.columnConfig, columnIndex, this.isSubColumn ? parent.columnConfig : null);
   }
 };

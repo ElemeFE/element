@@ -86,7 +86,6 @@
       text-overflow: ellipsis;
       vertical-align: middle;
       position: relative;
-      border-bottom: 1px solid var(--table-border-color);
 
       @when center {
         text-align: center;
@@ -101,9 +100,17 @@
       }
     }
 
+    & th.is-leaf, td {
+      border-bottom: 1px solid var(--table-border-color);
+    }
+
     @modifier border {
       & th, td {
         border-right: 1px solid var(--table-border-color);
+      }
+
+      & th {
+        border-bottom: 1px solid var(--table-border-color);
       }
     }
 

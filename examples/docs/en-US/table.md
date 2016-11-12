@@ -683,6 +683,115 @@ When you have huge chunks of data to put in a table, you can fix the header and 
 ```
 :::
 
+### Grouping table head
+
+When the data structure is complex, you can use group header to show the data hierarchy.
+
+:::demo Only need to place el-table-column inside a el-table-column, you can achieve group header.
+```html
+<template>
+  <el-table
+    :data="tableData3"
+    border
+    style="width: 100%">
+    <el-table-column
+      prop="date"
+      label="Date"
+      width="150">
+    </el-table-column>
+    <el-table-column label="Delivery Info">
+      <el-table-column
+        prop="name"
+        label="Name"
+        width="120">
+      </el-table-column>
+      <el-table-column label="Address Info">
+        <el-table-column
+          prop="state"
+          label="State"
+          width="120">
+        </el-table-column>
+        <el-table-column
+          prop="city"
+          label="City"
+          width="120">
+        </el-table-column>
+        <el-table-column
+          prop="address"
+          label="Address"
+          width="300">
+        </el-table-column>
+        <el-table-column
+          prop="zip"
+          label="Zip"
+          width="120">
+        </el-table-column>
+      </el-table-column>
+    </el-table-column>
+  </el-table>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        tableData3: [{
+          date: '2016-05-03',
+          name: 'Tom',
+          state: 'California',
+          city: 'Los Angeles',
+          address: 'No. 189, Grove St, Los Angeles',
+          zip: 'CA 90036'
+        }, {
+          date: '2016-05-02',
+          name: 'Tom',
+          state: 'California',
+          city: 'Los Angeles',
+          address: 'No. 189, Grove St, Los Angeles',
+          zip: 'CA 90036'
+        }, {
+          date: '2016-05-04',
+          name: 'Tom',
+          state: 'California',
+          city: 'Los Angeles',
+          address: 'No. 189, Grove St, Los Angeles',
+          zip: 'CA 90036'
+        }, {
+          date: '2016-05-01',
+          name: 'Tom',
+          state: 'California',
+          city: 'Los Angeles',
+          address: 'No. 189, Grove St, Los Angeles',
+          zip: 'CA 90036'
+        }, {
+          date: '2016-05-08',
+          name: 'Tom',
+          state: 'California',
+          city: 'Los Angeles',
+          address: 'No. 189, Grove St, Los Angeles',
+          zip: 'CA 90036'
+        }, {
+          date: '2016-05-06',
+          name: 'Tom',
+          state: 'California',
+          city: 'Los Angeles',
+          address: 'No. 189, Grove St, Los Angeles',
+          zip: 'CA 90036'
+        }, {
+          date: '2016-05-07',
+          name: 'Tom',
+          state: 'California',
+          city: 'Los Angeles',
+          address: 'No. 189, Grove St, Los Angeles',
+          zip: 'CA 90036'
+        }]
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Single select
 
 Single row selection is supported.
