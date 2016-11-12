@@ -158,7 +158,11 @@
 
       highlightCurrentRow: Boolean,
 
-      emptyText: String
+      emptyText: String,
+
+      expandRowKeys: Array,
+
+      defaultExpandAll: Boolean
     },
 
     components: {
@@ -346,6 +350,10 @@
         handler(val) {
           this.store.commit('setData', val);
         }
+      },
+
+      expandRowKeys(newVal) {
+        this.store.setExpandRowKeys(newVal);
       }
     },
 
@@ -362,7 +370,8 @@
 
     data() {
       const store = new TableStore(this, {
-        rowKey: this.rowKey
+        rowKey: this.rowKey,
+        defaultExpandAll: this.defaultExpandAll
       });
       const layout = new TableLayout({
         store,
@@ -373,6 +382,7 @@
       return {
         store,
         layout,
+        renderExpanded: null,
         resizeProxyVisible: false
       };
     }

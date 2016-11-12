@@ -8,11 +8,11 @@ const toArray = function(obj) {
 
 const getTestData = function() {
   return [
-    { name: 'Toy Story', release: '1995-11-22', director: 'John Lasseter', runtime: 80 },
-    { name: 'A Bug\'s Life', release: '1998-11-25', director: 'John Lasseter', runtime: 95 },
-    { name: 'Toy Story 2', release: '1999-11-24', director: 'John Lasseter', runtime: 92 },
-    { name: 'Monsters, Inc.', release: '2001-11-2', director: 'Peter Docter', runtime: 92 },
-    { name: 'Finding Nemo', release: '2003-5-30', director: 'Andrew Stanton', runtime: 100 }
+    { id: 1, name: 'Toy Story', release: '1995-11-22', director: 'John Lasseter', runtime: 80 },
+    { id: 2, name: 'A Bug\'s Life', release: '1998-11-25', director: 'John Lasseter', runtime: 95 },
+    { id: 3, name: 'Toy Story 2', release: '1999-11-24', director: 'John Lasseter', runtime: 92 },
+    { id: 4, name: 'Monsters, Inc.', release: '2001-11-2', director: 'Peter Docter', runtime: 92 },
+    { id: 5, name: 'Finding Nemo', release: '2003-5-30', director: 'Andrew Stanton', runtime: 100 }
   ];
 };
 
@@ -27,6 +27,7 @@ describe('Table', () => {
     const vm = createVue({
       template: `
         <el-table :data="testData">
+          <el-table-column prop="id" />
           <el-table-column prop="name" label="片名" />
           <el-table-column prop="release" label="发行日期" />
           <el-table-column prop="director" label="导演" />
@@ -952,6 +953,90 @@ describe('Table', () => {
           setTimeout(_ => {
             expect(toArray(vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr td:first-child'))
               .map(node => node.textContent)).to.eql(['1', '2', '3', '4', '5']);
+            destroyVM(vm);
+            done();
+          }, DELAY);
+        });
+      });
+
+      describe('= expand', () => {
+        const createInstance = function(extra) {
+          extra = extra || '';
+          return createVue({
+            template: `
+            <el-table row-key="id" :data="testData" @expand="handleExpand" ${extra}>
+              <el-table-column type="expand" inline-template>
+                <div>{{row.name}}</div>
+              </el-table-column>
+              <el-table-column prop="release" label="release" />
+              <el-table-column prop="director" label="director" />
+              <el-table-column prop="runtime" label="runtime" />
+            </el-table>
+          `,
+
+            created() {
+              this.testData = getTestData();
+            },
+
+            data() {
+              return { expandCount: 0, expandRowKeys: [] };
+            },
+
+            methods: {
+              handleExpand() {
+                this.expandCount++;
+              }
+            }
+          }, true);
+        };
+
+        it('works', done => {
+          const vm = createInstance();
+          setTimeout(_ => {
+            expect(vm.$el.querySelectorAll('td.el-table__expand-column').length).to.equal(5);
+            destroyVM(vm);
+            done();
+          }, DELAY);
+        });
+
+        it('should expand when click icon', done => {
+          const vm = createInstance();
+          setTimeout(_ => {
+            vm.$el.querySelector('td.el-table__expand-column .el-table__expand-icon').click();
+            setTimeout(_ => {
+              expect(vm.$el.querySelectorAll('.el-table__expanded-cell').length).to.equal(1);
+              expect(vm.expandCount).to.equal(1);
+              vm.$el.querySelector('td.el-table__expand-column .el-table__expand-icon').click();
+              setTimeout(_ => {
+                expect(vm.$el.querySelectorAll('.el-table__expanded-cell').length).to.equal(0);
+                expect(vm.expandCount).to.equal(2);
+                destroyVM(vm);
+                done();
+              }, DELAY);
+            }, DELAY);
+          }, DELAY);
+        });
+
+        it('should set expanded rows using expandRowKeys', done => {
+          const vm = createInstance(':expand-row-keys="expandRowKeys"');
+          setTimeout(_ => {
+            vm.expandRowKeys = [1, 3];
+            setTimeout(_ => {
+              expect(vm.$el.querySelectorAll('.el-table__expanded-cell').length).to.equal(2);
+              vm.expandRowKeys = [2];
+              setTimeout(_ => {
+                expect(vm.$el.querySelectorAll('.el-table__expanded-cell').length).to.equal(1);
+                destroyVM(vm);
+                done();
+              }, DELAY);
+            }, DELAY);
+          }, DELAY);
+        });
+
+        it('should default-expand-all when default-expand-all is true', done => {
+          const vm = createInstance('default-expand-all');
+          setTimeout(_ => {
+            expect(vm.$el.querySelectorAll('.el-table__expanded-cell').length).to.equal(5);
             destroyVM(vm);
             done();
           }, DELAY);
