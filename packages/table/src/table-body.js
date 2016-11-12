@@ -38,7 +38,7 @@ export default {
         <tbody>
           {
             this._l(this.data, (row, $index) =>
-              <tr
+              [<tr
                 style={ this.rowStyle ? this.getRowStyle(row, $index) : null }
                 key={ this.$parent.rowKey ? this.getKeyOfRow(row, $index) : $index }
                 on-dblclick={ ($event) => this.handleDoubleClick($event, row) }
@@ -46,7 +46,7 @@ export default {
                 on-contextmenu={ ($event) => this.handleContextMenu($event, row) }
                 on-mouseenter={ _ => this.handleMouseEnter($index) }
                 on-mouseleave={ _ => this.handleMouseLeave() }
-                class={ this.getRowClass(row, $index) }>
+                class={ [this.getRowClass(row, $index)] }>
                 {
                   this._l(this.columns, (column, cellIndex) =>
                     <td
@@ -62,7 +62,15 @@ export default {
                 {
                   !this.fixed && this.layout.scrollY && this.layout.gutterWidth ? <td class="gutter" /> : ''
                 }
-              </tr>
+              </tr>,
+                this.store.states.expandRows.indexOf(row) > -1
+                ? (<tr>
+                    <td colspan={ this.columns.length } class="el-table__expanded-cell">
+                      { this.$parent.renderExpanded ? this.$parent.renderExpanded.call(this._renderProxy, h, { row, $index, store: this.store, _self: this.$parent.$vnode.context }) : ''}
+                    </td>
+                  </tr>)
+                : ''
+              ]
             )
           }
         </tbody>
@@ -178,7 +186,7 @@ export default {
 
       if (cell) {
         const column = getColumnByCell(table, cell);
-        const hoverState = table.hoverState = { cell, column, row };
+        const hoverState = table.hoverState = {cell, column, row};
         table.$emit('cell-mouse-enter', hoverState.row, hoverState.column, hoverState.cell, event);
       }
 
@@ -228,6 +236,10 @@ export default {
       this.store.commit('setCurrentRow', row);
 
       table.$emit('row-click', row, event, column);
+    },
+
+    handleExpandClick(row) {
+      this.store.commit('toggleRowExpanded', row);
     }
   }
 };
