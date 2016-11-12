@@ -85,6 +85,7 @@ export default {
       default: 'default'
     },
     label: String,
+    className: String,
     property: String,
     prop: String,
     width: {},
@@ -177,6 +178,7 @@ export default {
     let column = getDefaultColumn(type, {
       id: columnId,
       label: this.label,
+      className: this.className,
       property: this.prop || this.property,
       type,
       renderCell: DEFAULT_RENDER_CELL,
