@@ -49,7 +49,7 @@ const registerRoute = (navConfig) => {
 
 let route = registerRoute(navConfig);
 
-function generateMiscRoutes(lang) {
+const generateMiscRoutes = function(lang) {
   let guideRoute = {
     path: `/${ lang }/guide`, // 指南
     redirect: `/${ lang }/guide/design`,
@@ -83,6 +83,12 @@ function generateMiscRoutes(lang) {
 
 langs.forEach(lang => {
   route = route.concat(generateMiscRoutes(lang.lang));
+});
+
+route.push({
+  path: '/play',
+  name: 'play',
+  component: require('./play/index.vue')
 });
 
 let userLanguage = localStorage.getItem('ELEMENT_LANGUAGE') || window.navigator.language;

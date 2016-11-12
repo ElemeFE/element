@@ -105,11 +105,11 @@
 
 <template>
   <div id="app">
-    <main-header></main-header>
+    <main-header v-if="lang !== 'play'"></main-header>
     <div class="main-cnt">
       <router-view></router-view>
     </div>
-    <main-footer></main-footer>
+    <main-footer v-if="lang !== 'play'"></main-footer>
   </div>
 </template>
 
