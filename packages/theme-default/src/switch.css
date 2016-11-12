@@ -7,6 +7,7 @@
     display: inline-block;
     position: relative;
     font-size: var(--switch-font-size);
+    line-height: var(--switch-height);
     @when disabled {
       & .el-switch__core,
       & .el-switch__label {
@@ -18,7 +19,7 @@
       transition: .2s;
       position: absolute;
       z-index: 10;
-      size: var(--switch-size);
+      size: var(--switch-width) var(--switch-height);
       left: 0;
       top: 0;
       display: inline-block;
@@ -57,7 +58,7 @@
       display: inline-block;
       vertical-align: middle;
       position: relative;
-      size: var(--switch-size);
+      size: var(--switch-width) var(--switch-height);
       border: 1px solid var(--switch-off-color);
       outline: none;
       border-radius: var(--switch-core-border-radius);
