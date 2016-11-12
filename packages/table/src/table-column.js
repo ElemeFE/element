@@ -73,7 +73,7 @@ const getDefaultColumn = function(type, options) {
 };
 
 const DEFAULT_RENDER_CELL = function(h, { row, column }, parent) {
-  return <span>{ parent.getCellContent(row, column.property, column.id) }</span>;
+  return parent.getCellContent(row, column.property, column);
 };
 
 export default {
