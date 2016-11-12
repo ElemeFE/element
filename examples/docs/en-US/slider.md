@@ -4,46 +4,20 @@
       return {
         value1: 0,
         value2: 50,
-        value3: 0,
+        value3: 42,
         value4: 0,
-        value5: 0
+        value5: 0,
+        value6: 0
       };
     }
   }
 </script>
 
-<style>
-  .demo-box.demo-slider .source {
-    padding: 0;
-  }
-  
-  .demo-box.demo-slider .block {
-    padding: 30px 24px;
-    overflow: hidden;
-    border-bottom: solid 1px #EFF2F6;
-    &:last-child {
-      border-bottom: none;      
-    }
-  }
-  
-  .demo-box.demo-slider .demonstration {
-    font-size: 14px;
-    color: #8492a6;
-    line-height: 44px;
-  }
-  
-  .demo-box.demo-slider .demonstration + .el-slider {
-    float: right;
-    width: 70%;
-    margin-right: 20px;
-  }
-</style>
-
 ## Slider 
 
-Select within a fixed interval by dragging the slider.
+Drag the slider within a fixed range.
 
-### How to use
+### Basic usage
 
 The current value is displayed when the slider is being dragged.
 
@@ -59,6 +33,10 @@ The current value is displayed when the slider is being dragged.
     <span class="demonstration">Customized initial value</span>
     <el-slider v-model="value2"></el-slider>
   </div>
+  <div class="block">
+    <span class="demonstration">Disabled</span>
+    <el-slider v-model="value3" disabled></el-slider>
+  </div>
 </template>
 
 <script>
@@ -66,7 +44,8 @@ The current value is displayed when the slider is being dragged.
     data() {
       return {
         value1: 0,
-        value2: 50
+        value2: 50,
+        value3: 42
       }
     }
   }
@@ -74,25 +53,25 @@ The current value is displayed when the slider is being dragged.
 ```
 :::
 
-### Discrete value
+### Discrete values
 
 The options can be discrete.
 
-:::demo Change the value of `step` to change the step size. You can display breakpoints by setting the `show-step` attribute.
+:::demo Set step size with the `step` attribute. You can display breakpoints by setting the `show-stops` attribute.
 
 ```html
 <template>
   <div class="block">
-    <span class="demonstration">Breakpoints are not displayed</span>
+    <span class="demonstration">Breakpoints not displayed</span>
     <el-slider
-      v-model="value3"
+      v-model="value4"
       :step="10">
     </el-slider>  
   </div>
   <div class="block">
-    <span class="demonstration">Displays the breakpoints</span>
+    <span class="demonstration">Breakpoints displayed</span>
     <el-slider
-      v-model="value4"
+      v-model="value5"
       :step="10"
       show-stops>
     </el-slider>
@@ -103,8 +82,8 @@ The options can be discrete.
   export default {
     data() {
       return {
-        value3: 0,
-        value4: 0
+        value4: 0,
+        value5: 0
       }
     }
   }
@@ -112,17 +91,17 @@ The options can be discrete.
 ```
 :::
 
-### Slide with input box
+### Slider with input box
 
-Set the exact value via the input box.
+Set value via a input box.
 
-:::demo Set the `show-input` attribute to display an inputbox on the right.
+:::demo Set the `show-input` attribute to display an input box on the right.
 
 ```html
 <template>
   <div class="block">
     <el-slider
-      v-model="value5"
+      v-model="value6"
       show-input>
     </el-slider>  
   </div>
@@ -132,7 +111,7 @@ Set the exact value via the input box.
   export default {
     data() {
       return {
-        value5: 0
+        value6: 0
       }
     }
   }
@@ -141,16 +120,17 @@ Set the exact value via the input box.
 :::
 
 ## Attributes
-| Attribute      | Description          | Type      | Options                           | Default  |
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| min | The minimum value | number | — | 0 |
-| max | The maximum value | number | — | 100 |
-| step | Step size | number | — | 1 |
-| show-input | Whether to display the input box | boolean | — | false |
-| show-stops | Whether to display breakpoints | boolean | — | false |
+| min | minimum value | number | — | 0 |
+| max | maximum value | number | — | 100 |
+| disabled | whether Slider is disabled | boolean | — | false |
+| step | step size | number | — | 1 |
+| show-input | whether to display an input box | boolean | — | false |
+| show-stops | whether to display breakpoints | boolean | — | false |
 
 ## Events
-| Event      | Description    | Callback      |
+| Event Name | Description | Parameters |
 |---------- |-------- |---------- |
-| change | Triggered when the value changes | the Value after the change |
+| change | triggers when the value changes | value after changing |
 

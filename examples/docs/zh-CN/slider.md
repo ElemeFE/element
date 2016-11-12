@@ -7,7 +7,7 @@
         value3: 42,
         value4: 0,
         value5: 0,
-        value6: 0,
+        value6: 0
       };
     }
   }
