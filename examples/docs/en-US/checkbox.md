@@ -13,18 +13,6 @@
   };
 </script>
 
-
-<style>
-  .demo-box.demo-checkbox {
-    .checkbox {
-      margin-right: 5px;
-
-      & + .checkbox {
-        margin-left: 10px;
-      }
-    }
-  }
-</style>
 ## Checkbox
 
 A group of options for multiple choices.

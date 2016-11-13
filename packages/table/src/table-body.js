@@ -1,4 +1,4 @@
-import { getValueByPath, getCell, getColumnByCell } from './util';
+import { getValueByPath, getCell, getColumnByCell, getRowIdentity } from './util';
 
 export default {
   props: {
@@ -31,6 +31,7 @@ export default {
           {
             this._l(this.data, (row, $index) =>
               <tr
+                key={ this.$parent.rowKey ? this.getKeyOfRow(row, $index) : $index }
                 on-click={ ($event) => this.handleClick($event, row) }
                 on-mouseenter={ _ => this.handleMouseEnter($index) }
                 on-mouseleave={ _ => this.handleMouseLeave() }
@@ -118,6 +119,14 @@ export default {
   },
 
   methods: {
+    getKeyOfRow(row, index) {
+      const rowKey = this.$parent.rowKey;
+      if (rowKey) {
+        return getRowIdentity(row, rowKey);
+      }
+      return index;
+    },
+
     isCellHidden(index) {
       if (this.fixed === true || this.fixed === 'left') {
         return index >= this.leftFixedCount;

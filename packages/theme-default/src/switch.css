@@ -47,6 +47,7 @@
     }
 
     @e input {
+      display: none;
       &:checked + .el-switch__core {
         border-color: var(--switch-on-color);
         background-color: var(--switch-on-color);

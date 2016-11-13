@@ -1,15 +1,6 @@
 import Vue from 'vue';
 import debounce from 'throttle-debounce/debounce';
-import { orderBy, getColumnById } from './util';
-
-const getRowIdentity = (row, rowKey) => {
-  if (!row) throw new Error('row is required when get row identity');
-  if (typeof rowKey === 'string') {
-    return row[rowKey];
-  } else if (typeof rowKey === 'function') {
-    return rowKey.call(null, row);
-  }
-};
+import { orderBy, getColumnById, getRowIdentity } from './util';
 
 const sortData = (data, states) => {
   const sortingColumn = states.sortingColumn;

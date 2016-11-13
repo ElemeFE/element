@@ -140,7 +140,9 @@
 ### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| readonly | 只读 | boolean | — | false |
+| readonly | 完全只读 | boolean | — | false |
+| disabled | 禁用 | boolean | - | false |
+| editable | 文本框可输入 | boolean | - | true |
 | placeholder | 占位内容 | string | — | — |
 | format | 时间格式化(TimePicker) | string | 小时：`HH`，分：`mm`，秒：`ss` | 'HH:mm:ss' |
 | value | 绑定值 | TimePicker: Date<br>TimeSelect: String | - | - |

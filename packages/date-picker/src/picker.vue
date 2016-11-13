@@ -10,7 +10,9 @@
 
     <input
       class="el-date-editor__editor"
-      :readonly="readonly"
+      :class="{ 'is-disabled': disabled }"
+      :readonly="!editable || readonly"
+      :disabled="disabled"
       type="text"
       :placeholder="placeholder"
       @focus="handleFocus"
@@ -199,6 +201,11 @@ export default {
     format: String,
     readonly: Boolean,
     placeholder: String,
+    disabled: Boolean,
+    editable: {
+      type: Boolean,
+      default: true
+    },
     align: {
       type: String,
       default: 'left'
@@ -218,6 +225,7 @@ export default {
 
   watch: {
     pickerVisible(val) {
+      if (this.readonly || this.disabled) return;
       val ? this.showPicker() : this.hidePicker();
     },
     value(val) {
@@ -231,10 +239,6 @@ export default {
   computed: {
     triggerClass() {
       return this.type.indexOf('time') !== -1 ? 'el-icon-time' : 'el-icon-date';
-    },
-
-    editable() {
-      return this.type.indexOf('range') === -1;
     },
 
     selectionMode() {

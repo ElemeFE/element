@@ -9,7 +9,8 @@ npm i element-theme -D
 
 安装默认主题，可以从 npm 安装或者从 GitHub 拉取最新代码。
 ```shell
-npm i element-theme-default@next -D
+# 从 npm
+npm i element-theme-default -D
 
 # 从 GitHub
 npm i https://github.com/ElementUI/theme-default -D
@@ -24,7 +25,7 @@ node_modules/.bin/et -i [可以自定义变量文件目录]
 > ✔ Generator variables file
 ```
 
-如果使用默认配置，执行后当前目录会有一个 `element-variables.css` 文件。内部包含了主题所用到了所有变量，它们使用 CSS4 的风格定义。大致结构如下：
+如果使用默认配置，执行后当前目录会有一个 `element-variables.css` 文件。内部包含了主题所用到的所有变量，它们使用 CSS4 的风格定义。大致结构如下：
 ```css
 :root {
 
@@ -82,4 +83,4 @@ Vue.use(ElementUI)
 }
 ```
 
-如果不清楚 `babel-plugin-component` 是什么，请阅读 [快速上手](./examples/docs/zh-CN/quickstart.md) 一节。更多 `element-theme` 用法请参考[项目仓库](https://github.com/ElementUI/element-theme)。
+如果不清楚 `babel-plugin-component` 是什么，请阅读 <a href="./#/zh-CN/component/quickstart">快读上手</a> 一节。更多 `element-theme` 用法请参考[项目仓库](https://github.com/ElementUI/element-theme)。

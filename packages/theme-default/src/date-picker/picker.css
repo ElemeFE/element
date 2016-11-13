@@ -21,19 +21,15 @@
       color: #666;
       font-size: 14px;
 
-      &::-webkit-input-placeholder {
-        color: var(--input-placeholder-color);
-        font-size: 14px;
-      }
+      @when disabled {
+        background-color: var(--disabled-fill-base);
+        border-color: var(--disabled-border-base);
+        color: var(--disabled-color-base);
+        cursor: not-allowed;
 
-      &::-moz-placeholder {
-        color: #bbb;
-        font-size: 14px;
-      }
-
-      &:-ms-input-placeholder {
-        color: #bbb;
-        font-size: 14px;
+        &::placeholder {
+          color: var(--input-disabled-placeholder-color);
+        }
       }
 
       &::placeholder {

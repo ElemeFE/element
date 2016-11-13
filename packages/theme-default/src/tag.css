@@ -14,10 +14,6 @@
     border-radius: var(--tag-border-radius);
     border: 1px solid var(--tag-border);
 
-    @when hit {
-      border-color: var(--tag-primary-color);
-    }
-
     & .el-icon-close {
       border-radius: 50%;
       text-align: center;
@@ -42,6 +38,9 @@
       background-color: var(--tag-gray-fill);
       border-color: var(--tag-gray-border);
       color: var(--tag-gray-color);
+      @when hit {
+        border-color: var(--tag-gray-color);
+      }
 
       & .el-tag__close:hover {
         background-color: var(--tag-gray-color);
@@ -52,6 +51,9 @@
       background-color: var(--tag-primary-fill);
       border-color: var(--tag-primary-border);
       color: var(--tag-primary-color);
+      @when hit {
+        border-color: var(--tag-primary-color);
+      }
 
       & .el-tag__close:hover {
         background-color: var(--tag-primary-color);
@@ -62,6 +64,9 @@
       background-color: var(--tag-success-fill);
       border-color: var(--tag-success-border);
       color: var(--tag-success-color);
+      @when hit {
+        border-color: var(--tag-success-color);
+      }
 
       & .el-tag__close:hover {
         background-color: var(--tag-success-color);
@@ -72,6 +77,9 @@
       background-color: var(--tag-warning-fill);
       border-color: var(--tag-warning-border);
       color: var(--tag-warning-color);
+      @when hit {
+        border-color: var(--tag-warning-color);
+      }
 
       & .el-tag__close:hover {
         background-color: var(--tag-warning-color);
@@ -82,6 +90,9 @@
       background-color: var(--tag-danger-fill);
       border-color: var(--tag-danger-border);
       color: var(--tag-danger-color);
+      @when hit {
+        border-color: var(--tag-danger-color);
+      }
 
       & .el-tag__close:hover {
         background-color: var(--tag-danger-color);

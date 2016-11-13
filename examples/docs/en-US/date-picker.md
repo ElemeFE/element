@@ -63,30 +63,6 @@
   };
 </script>
 
-<style>
-  .demo-block.demo-date-picker .source {
-    padding: 0;
-    display: flex;
-  }
-
-  .demo-date-picker .block {
-    padding: 30px 0;
-    text-align: center;
-    border-right: solid 1px #EFF2F6;
-    flex: 1;
-    &:last-child {
-      border-right: none;
-    }
-  }
-
-  .demo-date-picker .demonstration {
-    display: block;
-    color: #8492a6;
-    font-size: 14px;
-    margin-bottom: 20px;
-  }
-</style>
-
 ## DatePicker
 
 Use Date Picker for date input.
@@ -264,7 +240,9 @@ Picking a date range is supported.
 ### Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| readonly | if the picker is read only | boolean | — | false |
+| readonly | read only | boolean | — | false |
+| disabled | disabled | boolean | - | false |
+| editable | editable | boolean | - | true |
 | placeholder | placeholder | string | — | — |
 | type | type of the picker | string | year/month/date/datetime/week/datetimerange/daterange | date |
 | format | format of the picker | string | year `yyyy` month `MM` day `dd`, <br>hour `HH`, minute `mm`, second `ss` | yyyy-MM-dd |
