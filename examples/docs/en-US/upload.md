@@ -1,21 +1,45 @@
+<script>
+  export default {
+    methods: {
+      handleChange(file, fileList, event) {
+        console.log(file, fileList, event);
+      },
+      handleRemove(file, fileList) {
+        console.log(file, fileList);
+      },
+      beforeUpload(file) {
+        if (file.size > 40000000) {
+          console.warn(file.name + ' is too large!');
+          return false;
+        }
+        return true;
+      },
+      handlePreview(file) {
+        console.log(file);
+      },
+      handleSuccess(file, fileList) {
+        console.log(file, fileList);
+      },
+      handleError(err, file, fileList) {
+        console.log(err);
+      }
+    }
+  }
+</script>
 ## Upload
 
-
-Upload your files by `click` or `drag` event
+Upload files by clicking or drag-and-drop
 
 ### Click to upload files
 
-Add `slot` attribute to customize the type of upload button and text hints.
-
-:::demo
-
+:::demo Customize upload button type and text using `slot`.
 ```html
 <el-upload
-  action="http://jsonplaceholder.typicode.com/"
+  action="//jsonplaceholder.typicode.com/posts/"
   :on-preview="handlePreview"
   :on-remove="handleRemove">
-  <el-button size="small" type="primary">click to upload</el-button>
-  <div class="el-upload__tip" slot="tip">only jpg/png allowed,and the size must be less than 500kb</div>
+  <el-button size="small" type="primary">Click to upload</el-button>
+  <div class="el-upload__tip" slot="tip">jpg/png files with a size less than 500kb</div>
 </el-upload>
 <script>
   export default {
@@ -30,20 +54,16 @@ Add `slot` attribute to customize the type of upload button and text hints.
   }
 </script>
 ```
-
 :::
 
 ### Drag to upload
 
-You can drag your file to certain field to upload it.
+You can drag your file to a certain area to upload it.
 
-Specifying the `type` attribute as `drag` will change the upload control to a drag-and-drop style. Additionally, you can use the `multiple` attribute to control whether multiple-selections are supported or not. And `on-preview` and `on-remove` are hook functions that will be called after clicked on the uploaded file link and after clicked to remove the uploaded file, respectively.
-
-:::demo
-
+:::demo Specifying the `type` attribute as `drag` will change the upload control to a drag-and-drop style. Additionally, you can use the `multiple` attribute to control whether uploading multiple files is permitted. `on-preview` and `on-remove` are hook functions that will be called after clicking on the uploaded file link and after clicking to remove the uploaded file, respectively.
 ```html
 <el-upload
-  action="http://jsonplaceholder.typicode.com/"
+  action="//jsonplaceholder.typicode.com/posts/"
   type="drag"
   :multiple="true"
   :on-preview="handlePreview"
@@ -52,8 +72,8 @@ Specifying the `type` attribute as `drag` will change the upload control to a dr
   :on-error="handleError"
 >
   <i class="el-icon-upload"></i>
-  <div class="el-dragger__text">drag file to here or <em>click to upload</em></div>
-  <div class="el-upload__tip" slot="tip">only jpg/png allowed,and the size must be less than 500kb</div>
+  <div class="el-dragger__text">Drop file here or <em>click to upload</em></div>
+  <div class="el-upload__tip" slot="tip">jpg/png files with a size less than 500kb</div>
 </el-upload>
 <script>
   export default {
@@ -68,26 +88,24 @@ Specifying the `type` attribute as `drag` will change the upload control to a dr
   }
 </script>
 ```
+:::
 
 ### Upload single image
 
-This mode is specifically for uploading image, and the thumbnail will display in origin place.
+This mode is specifically for image uploading, and the thumbnail will display in the origin place.
 
-`thumbnail-mode` attribute allows you to force the upload content to image only, and can display the thumbnail of the uploaded image.
-
-:::demo
-
+:::demo `thumbnail-mode` attribute allows you to force the upload content to image only, and can display the thumbnail of the uploaded image.
 ```html
 <el-upload
-  action="http://jsonplaceholder.typicode.com/"
+  action="//jsonplaceholder.typicode.com/posts/"
   type="drag"
   :thumbnail-mode="true"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
 >
   <i class="el-icon-upload"></i>
-  <div class="el-dragger__text">drag file to here or <em>click to upload</em></div>
-  <div class="el-upload__tip" slot="tip">only jpg/png allowed,and the size must be less than 500kb</div>
+  <div class="el-dragger__text">Drop file here or <em>click to upload</em></div>
+  <div class="el-upload__tip" slot="tip">jpg/png files with a size less than 500kb</div>
 </el-upload>
 <script>
   export default {
@@ -102,26 +120,28 @@ This mode is specifically for uploading image, and the thumbnail will display in
   }
 </script>
 ```
-
 :::
 
 ### Attributes
-
-Attribute| Description | Type | options | Default
+Attribute      | Description          | Type      | Accepted Values       | Default
 ----| ----| ----| ----| ----
-action | required, the location you upload to | string | --- |---
-headers | optional, set request headers | object | --- | ---
-multiple | optional, whether multiple-selections are supported or not| boolean | --- | ---
-file | optional, The field name of the uploaded file | string | --- | ---
-with-credentials | send cookies or not | boolean | --- | ---
-show-uploadList | show the uploaded file list or not | boolean | --- |---
-type | the type of upload control | string | select, drag | select
-accept | optional, limits the type of upload file, but if the upload type is `drag`, you can upload all the file types | string | --- | ---
-on-preview | optional, hook function when click the uploaded files | function(file) | --- | ---
-on-remove | optional, hook function when remove the files | function(file, fileList) | --- | ---
-on-success | optional, hook function when upload files successfully | function(file, fileList) | --- | ---
-on-error | optional, hook function when some errors occured | function(err, file, fileList) | --- | ---
-before-upload | optional, hook function before upload the file, the parameter is the file that uploaded, if the hook function return `false` or `Promise` value, it will end upload progress | function(file) | --- | ---
-thumbnail-mode | whether image mode is set or not, the image mode will display the picture thumbnails | boolean | --- | false
+action | required, request URL | string | — | —
+headers | request headers | object | — | —
+multiple | whether uploading multiple files is permitted | boolean | — | —
+data | additions options of request | object | — | —
+name | key name for uploaded file | string | — | file
+with-credentials | whether cookies are sent | boolean | — |false
+show-upload-list | whether to show the uploaded file list | boolean | — | true
+type | type of Upload | string | select/drag | select
+accept | accepted [file types](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept), will not work when `thumbnail-mode` is `true` | string | — | —
+on-preview | hook function when clicking the uploaded files | function(file) | — | —
+on-remove | hook function when files are removed | function(file, fileList) | — | —
+on-success | hook function when uploaded successfully | function(response, file, fileList) | — | —
+on-error | hook function when some errors occurs | function(err, response, file) | — | —
+before-upload | hook function before uploading with the file to be uploaded as its parameter. If `false` or a `Promise` is returned, uploading will be aborted | function(file) | — | —
+thumbnail-mode | whether thumbnail is displayed | boolean | — | false
 
-
+### Events
+| Event Name | Description | Parameters |
+|---------- |-------- |---------- |
+| clearFiles | clear the uploaded file list | — |

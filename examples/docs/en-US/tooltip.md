@@ -1,22 +1,43 @@
-# Tooltips 
+<script>
+  export default {
+    data() {
+      return {
+        disabled: false
+      };
+    }
+  };
+</script>
 
+<style>
+  .demo-tooltip.demo-en-US {
+    &:first-of-type .source {
+      .el-button {
+        width: 110px;
+      }
+    }
+    .box {
+      .left {
+        float: left;
+        width: 110px;
+      }
+
+      .right {
+        float: right;
+        width: 110px;
+      }
+    }
+  }
+</style>
+
+## Tooltip
 
 Display prompt information for mouse hover.
 
+### Basic usage
 
----
+Tooltip has 9 placements.
 
-##How to use
-
-There are 9 ways to display your prompt information multi-formly. You could get it by the demo below.
-
-
-
-:::demo 
-Use attribute `content` to set the display content when hover. The attribute `placement` determines the position of the tooltip. Its value is `[oritation]-[Alignment]` with four oritations `top`,`left`, `right`,`bottom` and three alignments `start`,`end`, null, default alignment is null. 
-Look at the code `placement="left-end"`,  with this code in tooltip component you will see the prompt information will display on the left to the element which you are hovering and bottom of the tooltip aligns with the bottom of the element which you are hovering.
-
-
+:::demo Use attribute `content` to set the display content when hover. The attribute `placement` determines the position of the tooltip. Its value is `[orientation]-[alignment]` with four orientations `top`, `left`, `right`, `bottom` and three alignments `start`, `end`, `null`, and the default alignment is null. Take `placement="left-end"` for example, Tooltip will display on the left of the element which you are hovering and the bottom of the tooltip aligns with the bottom of the element.
 ```html
 <style>
   .box {
@@ -28,12 +49,12 @@ Look at the code `placement="left-end"`,  with this code in tooltip component yo
 
     .left {
       float: left;
-      width: 60px;
+      width: 110px;
     }
 
     .right {
       float: right;
-      width: 60px;
+      width: 110px;
     }
 
     .bottom {
@@ -48,6 +69,10 @@ Look at the code `placement="left-end"`,  with this code in tooltip component yo
     .left .el-tooltip__popper,
     .right .el-tooltip__popper {
       padding: 8px 10px;
+    }
+    
+    .el-button {
+      width: 110px;
     }
   }
 </style>
@@ -105,12 +130,9 @@ Look at the code `placement="left-end"`,  with this code in tooltip component yo
 
 ### Theme
 
-Tooltip has two themes：`dark` and `light`。
+Tooltip has two themes: `dark` and `light`。
 
-
-:::demo 
-Set `effect` to modify theme, default value is `dark`.
-
+:::demo Set `effect` to modify theme, and the default value is `dark`.
 ```html
 <el-tooltip content="Top center" placement="top">
   <el-button>Dark</el-button>
@@ -121,14 +143,11 @@ Set `effect` to modify theme, default value is `dark`.
 ```
 :::
 
-
-
 ### More Content
 
-Display multiple lines of text or set format of the text . 
+Display multiple lines of text and set their format. 
 
-:::demo 
-Distribute task of the attribute `content` to the ‘Signature’ `slot`  as an alternative.
+:::demo Override attribute `content` of `el-tooltip` by adding a slot named `content`.
 ```html
 <el-tooltip placement="top">
   <div slot="content">multiple lines<br/>second line</div>
@@ -137,17 +156,15 @@ Distribute task of the attribute `content` to the ‘Signature’ `slot`  as an 
 ```
 :::
 
-### Advanced Extensions
+### Advanced usage
 
-In addition to  basic usages, there are some attributes that allow you to customize your own ：
+In addition to basic usages, there are some attributes that allow you to customize your own:
 
-`transition` attribute allows you to customerize the animation in which the tooltip shows or hides , default value is `fade-in-linear`.
+`transition` attribute allows you to customize the animation in which the tooltip shows or hides, and the default value is `fade-in-linear`.
 
-`disabled` attribute allows you disable the `tooltip` 's prompt function. You just only set it to `boolean` type with value `true`.
+`disabled` attribute allows you to disable `tooltip`. You just need set it to `true`.
 
-Actually it is an extension based on [Vue-popper](https://github.com/element-component/vue-popper), you can use any attribute that are allowed in  Vue-popper.
-
-Of cause, component Tooltip is powerful. You can see API below.
+In fact, Tooltip is an extension based on [Vue-popper](https://github.com/element-component/vue-popper), you can use any attribute that are allowed in Vue-popper.
 
 :::demo
 ```html
@@ -175,16 +192,16 @@ Of cause, component Tooltip is powerful. You can see API below.
 
 
 ### Attributes
-| Attribute               | Description                                                     | Type              | Options      | Default |
-|--------------------|----------------------------------------------------------|-------------------|-------------|--------|
-|  effect        |  themes authrozied  | String            | `dark`, `light`  | dark  |
-|  content        | display content,  `slot#content` insert it into DOM by `slot#content` | String            | — | — |
-|  placement        | position of Tooltip   | String           |  `top`, `top-start`, `top-end`, `bottom`, `bottom-start`, `bottom-end`, `left`, `left-start`, `left-end`, `right`, `right-start`, `right-end` |  bottom |
-|  value(v-model)        |  status show or not | Boolean           | — |  false |
-|  disabled       |  Tooltip work or not  | Boolean           | — |  false |
-|  offset        |  offset of the position   | Number           | — |  0 |
-|  transition     |  define gradient animation    | String             | — | `fade-in-linear` |
-|  visible-arrow   |  display Tooltip arrow or not, more info  go to [Vue-popper](https://github.com/element-component/vue-popper) page | Boolean | — | true |
-|  options        | [popper.js](https://popper.js.org/documentation.html) paramters | Object            | refer to [popper.js](https://popper.js.org/documentation.html) doc | `{ boundariesElement: 'body', gpuAcceleration: false }` |
-| openDelay | show in delay, unit is millisecond | Number | — | 0 |
-
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
+|----------------|---------|-----------|-------------|--------|
+|  effect   |  Tooltip theme  | string   | dark/light  | dark  |
+|  content  | display content, can be overridden by `slot#content` | String   | — | — |
+|  placement | position of Tooltip   | string    |  top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end |  bottom |
+|  value(v-model) | visibility of Tooltip | boolean           | — |  false |
+|  disabled       |  whether Tooltip is disabled  | boolean    | — |  false |
+|  offset        |  offset of the Tooltip   | number    | — |  0 |
+|  transition     |  animation name | string             | — | `fade-in-linear` |
+|  visible-arrow   |  whether an arrow is displayed. For more information, check [Vue-popper](https://github.com/element-component/vue-popper) page | boolean | — | true |
+|  options        | [popper.js](https://popper.js.org/documentation.html) parameters | Object            | refer to [popper.js](https://popper.js.org/documentation.html) doc | `{ boundariesElement: 'body', gpuAcceleration: false }` |
+| openDelay | delay of appearance, in millisecond | number | — | 0 |
+| manual | whether to control Tooltip manually. `mouseenter` and `mouseleave` won't have effects if set to `true`事件将不会生效 | boolean | — | false |
