@@ -1,60 +1,179 @@
-## Quickstart
+## Quick start
 
-Element UI is a background components library that help you develop your background projects faster and easier.
+This part walks you through the process of using Element in a webpack project.
 
-### Install
+### Use Starter Kit
 
-```bash
-$ npm install element-ui@next --save
+We provide a general [project template](https://github.com/ElementUI/element-starter) for you. For those who are familiar with [cooking](https://github.com/ElementUI/element-cooking-starter) or [Laravel](https://github.com/ElementUI/element-in-laravel-starter), we also provide corresponding templates, and you can download and use them as well.
+
+If you prefer not to use them, please read the following.
+
+### Config files
+
+Create a new project, and its structure should be
+```text
+|- src/  --------------------- source code
+    |- App.vue
+    |- main.js  -------------- entry
+|- .babelrc  ----------------- babel config
+|- index.html  --------------- HTML template
+|- package.json  ------------- npm config
+|- README.md  ---------------- readme
+|- webpack.config.json  ------ webpack config
 ```
 
-### Register components
+Typical configurations for these config files are:
 
-Import all element-ui components
-
-```javascript
-import Vue from 'vue'
-import Element from 'element-ui'
-import 'element-ui/lib/theme-default/index.css'
-
-// use Vue.use to register a plugin
-Vue.use(element)
-```
-
-Or just import some components you need
-  
-use [babel-plugin-component](https://github.com/QingWei-Li/babel-plugin-component)
-
-
-```javascript
-import {
-  Select,
-  Button
-  // ...
-} from 'element-ui'
-
-Vue.component(Select.name, Select)
-Vue.component(Button.name, Button)
-```
-And it will be converted to 
-
-```javascript
-import Select from 'element-ui/lib/select';
-import 'element-ui/lib/theme-default/select.css';
-import Button from 'element-ui/lib/button';
-import 'element-ui/lib/theme-default/button.css';
-
-Vue.component(Select.name, Select);
-Vue.component(Button.name, Button);
-```
-
-### Use babel-plugin-component
-
-Configure `.bablerc`
-
+**.babelrc**
 ```json
 {
-  "plugins": ["xxx", ["component", [
+  "presets": [
+    ["es2015", { "modules": false }]
+  ]
+}
+```
+
+<br>
+
+**package.json**
+```json
+{
+  "name": "my-project",
+  "description": "A Vue.js and Element project",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --port 8086",
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+  },
+  "dependencies": {
+    "element-ui": "^1.0.0",
+    "vue": "^2.0.5"
+  },
+  "devDependencies": {
+    "babel-core": "^6.0.0",
+    "babel-loader": "^6.0.0",
+    "babel-preset-es2015": "^6.13.2",
+    "cross-env": "^1.0.6",
+    "css-loader": "^0.23.1",
+    "file-loader": "^0.8.5",
+    "style-loader": "^0.13.1",
+    "vue-loader": "^9.5.1",
+    "webpack": "2.1.0-beta.22",
+    "webpack-dev-server": "^2.1.0-beta.0"
+  }
+}
+```
+
+<br>
+
+**webpack.config.js**
+```javascript
+var path = require('path')
+var webpack = require('webpack')
+
+module.exports = {
+  entry: './src/main.js',
+  output: {
+    path: path.resolve(__dirname, './dist'),
+    publicPath: '/dist/',
+    filename: 'build.js'
+  },
+  resolveLoader: {
+    root: path.join(__dirname, 'node_modules')
+  },
+  module: {
+    loaders: [
+      {
+        test: /\.vue$/,
+        loader: 'vue'
+      },
+      {
+        test: /\.js$/,
+        loader: 'babel',
+        exclude: /node_modules/
+      },
+      {
+        test: /\.css$/,
+        loader: 'style!css'
+      },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        loader: 'file'
+      },
+      {
+        test: /\.(png|jpg|gif|svg)$/,
+        loader: 'file',
+        query: {
+          name: '[name].[ext]?[hash]'
+        }
+      }
+    ]
+  },
+  devServer: {
+    historyApiFallback: true,
+    noInfo: true
+  },
+  devtool: '#eval-source-map'
+}
+
+if (process.env.NODE_ENV === 'production') {
+  module.exports.devtool = '#source-map'
+  // http://vue-loader.vuejs.org/en/workflow/production.html
+  module.exports.plugins = (module.exports.plugins || []).concat([
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: '"production"'
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    })
+  ])
+}
+
+```
+
+### Import Element
+
+You can import Element entirely, or just import what you need. Let's start with fully import.
+
+#### Fully import
+
+In main.js:
+```javascript
+import Vue from 'vue'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-default/index.css'
+import App from './App.vue'
+
+Vue.use(MintUI)
+
+new Vue({
+  el: '#app',
+  render: h => h(App)
+})
+```
+The above imports Element entirely. Note that CSS file needs to be imported separately.
+
+#### On demand
+
+With the help of [babel-plugin-component](https://github.com/QingWei-Li/babel-plugin-component), we can import components we actually need, making the project smaller than otherwise.
+
+First, install babel-plugin-component:
+
+```bash
+npm install babel-plugin-component -D
+```
+
+Then edit .babelrc:
+```json
+{
+  "presets": [
+    ["es2015", { "modules": false }]
+  ],
+  "plugins": [["component", [
     {
       "libraryName": "element-ui",
       "styleLibraryName": "theme-default"
@@ -63,24 +182,38 @@ Configure `.bablerc`
 }
 ```
 
-### Import components by \<style\> and \<script\> tags
+Next, if you need Button and Select, edit main.js:
 
-Be careful, **import vue.js before element**, just like if you want to use a jquery-plugin, first of all, you must import jquery.
+```javascript
+import Vue from 'vue'
+import { Button, Select } from 'element-ui'
+import App from './App.vue'
 
-This is a [demo](https://codepen.io/QingWei-Li/pen/ozYpNA) about how to use it by cdn, and we use unpkg cdn in this case. 
+Vue.component(Button.name, Button)
+Vue.component(Select.name, Select)
+/* or
+ * Vue.use(Button)
+ * Vue.use(Select)
+ */
 
-```html
-<!-- import style -->
-<link rel="stylesheet" href="//unpkg.com/element-ui@1.0.0-rc.4/lib/theme-default/index.css">
-
-<!-- body -->
-
-<!--import script -->
-<!-- you need import Vue.js before import element -->
-<script src="//unpkg.com/vue@2.0.0-rc.6/dist/vue.js"></script>
-<script src="//unpkg.com/element-ui@1.0.0-rc.4/lib/index.js"></script>
+new Vue({
+  el: '#app',
+  render: h => h(App)
+})
 ```
 
+### Start coding
 
+Now you have implemented Vue and Element to your project, and it's time to write your code. Start development mode:
 
+```bash
+# visit localhost:8086
+npm run dev
+```
 
+Build:
+
+```bash
+npm run build
+```
+Please refer to each component's documentation to learn how to use them.

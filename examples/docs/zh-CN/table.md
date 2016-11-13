@@ -1,5 +1,4 @@
 <script>
-  import Vue from 'vue';
   export default {
     data() {
       return {
@@ -328,7 +327,7 @@
 
 可将表格内容 highlight 显示，方便区分「成功、信息、警告、危险」等内容。
 
-:::demo 可以通过指定 Table 组件的 rowClassName 属性来为 Table 中的某一行添加 class，表明该行处于某种状态。
+:::demo 可以通过指定 Table 组件的 `row-class-name` 属性来为 Table 中的某一行添加 class，表明该行处于某种状态。
 ```html
 <template>
   <el-table
@@ -383,8 +382,7 @@
         }, {
           date: '2016-05-04',
           name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄',
-          $info: true
+          address: '上海市普陀区金沙江路 1518 弄'
         }, {
           date: '2016-05-01',
           name: '王小虎',
@@ -392,8 +390,7 @@
         }, {
           date: '2016-05-03',
           name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄',
-          $positive: true
+          address: '上海市普陀区金沙江路 1518 弄'
         }]
       }
     }
@@ -969,13 +966,13 @@
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | data | 显示的数据 | array | — | — |
-| height | table 的高度，默认高度为空，即自动高度，单位 px | string, number | — | — |
+| height | table 的高度，默认高度为空，即自动高度，单位 px | string/number | — | — |
 | stripe | 是否为斑马纹 table | boolean | — | false |
 | border | 是否带有纵向边框 | boolean | — | false |
 | fit | 列的宽度是否自撑开 | boolean | — | true |
-| highlight-current-row | 是否要高亮当前行 | boolean | - | false |
-| row-class-name | 行的 className 的回调。 | Function(row, index) | - | - |
-| row-key | 行数据的 Key，用来优化 Table 的渲染；在使用 reserve-selection 功能的情况下，该属性是必填的 | Function(row), String | - | - |
+| highlight-current-row | 是否要高亮当前行 | boolean | — | false |
+| row-class-name | 行的 className 的回调。 | Function(row, index) | — | — |
+| row-key | 行数据的 Key，用来优化 Table 的渲染；在使用 reserve-selection 功能的情况下，该属性是必填的 | Function(row)/String | — | — |
 
 ### Table Events
 | 事件名 | 说明 | 参数 |
@@ -988,7 +985,7 @@
 | cell-click | 当某个单元格被点击时会触发该事件 | row, column, cell, event |
 | row-click | 当某一行被点击时会触发该事件 | row, event |
 | sort-change | 当表格的排序条件发生变化的时候会触发该事件 | { column, prop, order } |
-| current-change | 当表格的当前行发生变化的时候会触发该事件，如果要高亮当前行，请打开表格的 highlight-current-row 属性 | { column, prop, order } |
+| current-change | 当表格的当前行发生变化的时候会触发该事件，如果要高亮当前行，请打开表格的 highlight-current-row 属性 | currentRow, oldCurrentRow |
 
 ### Table Methods
 | 方法名 | 说明 | 参数 |
@@ -1004,17 +1001,17 @@
 | prop | 对应列内容的字段名，也可以使用 property 属性 | string | — | — |
 | width | 对应列的宽度 | string | — | — |
 | min-width | 对应列的最小宽度，与 width 的区别是 width 是固定的，min-width 会把剩余宽度按比例分配给设置了 min-width 的列 | string | — | — |
-| fixed | 列是否固定在左侧或者右侧，true 表示固定在左侧 | string, boolean | true, left, right | - |
-| render-header | 列标题 Label 区域渲染使用的 Function | Function(h, { column, $index }) | - | - |
+| fixed | 列是否固定在左侧或者右侧，true 表示固定在左侧 | string, boolean | true, left, right | — |
+| render-header | 列标题 Label 区域渲染使用的 Function | Function(h, { column, $index }) | — | — |
 | sortable | 对应列是否可以排序，如果设置为 'custom'，则代表用户希望远程排序，需要监听 Table 的 sort-change 事件 | boolean, string | true, false, 'custom' | false |
-| sort-method | 对数据进行排序的时候使用的方法，仅当 sortable 设置为 true 的时候有效 | Function(a, b) | - | - |
-| resizable | 对应列是否可以通过拖动改变宽度（如果需要在 el-table 上设置 border 属性为真） | boolean | — | true |
+| sort-method | 对数据进行排序的时候使用的方法，仅当 sortable 设置为 true 的时候有效 | Function(a, b) | — | — |
+| resizable | 对应列是否可以通过拖动改变宽度（需要在 el-table 上设置 border 属性为真） | boolean | — | true |
 | formatter | 用来格式化内容 | Function(row, column) | — | — |
-| show-overflow-tooltip | 当过长被隐藏时显示 tooltip | Boolean | — | false |
+| show-overflow-tooltip | 当内容过长被隐藏时显示 tooltip | Boolean | — | false |
 | inline-template | 指定该属性后可以自定义 column 模板，参考多选的时间列，通过 row 获取行信息，JSX 里通过 _self 获取当前上下文。此时不需要配置 prop 属性。总共可以获取到 `{ row(当前行), column(当前列), $index(行数), _self(当前上下文), store(table store) }` 的信息。 | — | — |
 | align | 对齐方式 | String | left, center, right | left |
-| selectable | 仅对 type=selection 的列有效，类型为 Function，Function 的返回值用来决定这一行的 CheckBox 是否可以勾选 | Function(row, index) | - | - |
-| reserve-selection | 仅对 type=selection 的列有效，类型为 Boolean，为 true 则代表会保留之前数据的选项，需要配合 Table 的 clearSelection 方法使用。 | Boolean | - | false |
+| selectable | 仅对 type=selection 的列有效，类型为 Function，Function 的返回值用来决定这一行的 CheckBox 是否可以勾选 | Function(row, index) | — | — |
+| reserve-selection | 仅对 type=selection 的列有效，类型为 Boolean，为 true 则代表会保留之前数据的选项，需要配合 Table 的 clearSelection 方法使用。 | Boolean | — | false |
 | filters | 数据过滤的选项，数组格式，数组中的元素需要有 text 和 value 属性。 | Array[{ text, value }] | — | — |
 | filter-multiple | 数据过滤的选项是否多选 | Boolean | — | true |
 | filter-method | 数据过滤使用的方法，如果是多选的筛选项，对每一条数据会执行多次，任意一次返回 true 就会显示。 | Function(value, row) | — | — |

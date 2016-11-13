@@ -1,27 +1,54 @@
+<script>
+  export default {
+    data() {
+      return {
+        activeName: 'first',
+        tabs: [
+          {label: 'User', content: '', name: 'first'},
+          {label: 'Config', content: '', name: 'second'},
+          {label: 'Role', content: '', name: 'third'},
+          {label: 'Task', content: '', name: 'last'}
+        ]
+      }
+    },
+    methods: {
+      handleRemove(tab) {
+        console.log(tab);
+      },
+      handleClick(tab, event) {
+        console.log(tab, event);
+      }
+    }
+  }
+</script>
+
 ## Tabs
 
-Divide data collections which have related contents however belong to different types.
+Divide data collections which are related yet belong to different types.
 
-### How to use
+### Basic usage
 
 Basic and concise tabs.
 
-:::demo Tabs provide a selective card functionality and it can be achieved only by using `el-tabs` and child element `el-tab-pane`. In these two elements, we provide a list of attributes. The `label` in `el-tab-pane` determines the label of selective cards, you can write content in the label; In the next example, we add a `active-name` attribute in `el-tabs`, which can take a `String` value. It means an active card. In the `el-tab-pane` you can set corresponding `name` attribute,if there is no `name`, then the default sequence is `1`/`2`/`3`/`4`. In the example, the selected card is card 2. Since there's no `name`, then set `active-name` to `2` can reach the same goal.
+:::demo Tabs provide a selective card functionality and it can be achieved by just using `el-tabs` and child element `el-tab-pane`. In these two elements, we provide a list of attributes. The `label` in `el-tab-pane` determines the label of selective cards, and you can write content in the label. In this example, we add a `active-name` attribute indicating the active card in `el-tabs`, which can take a `String` value. In the `el-tab-pane` you can set corresponding `name` attribute, and if there is no `name`, the default sequence is `1`/`2`/`3`/`4`. In this example, the selected card is card 2. If `name` is omitted, setting `active-name` to `2` can reach the same goal.
 
 ```html
 <template>
-  <el-tabs>
-    <el-tab-pane label="User Admin"></el-tab-pane>
-    <el-tab-pane label="Config Admin"></el-tab-pane>
-    <el-tab-pane label="Role Admin"></el-tab-pane>
-    <el-tab-pane label="Task Compensation"></el-tab-pane>
-  </el-tabs>
+  <el-tabs :active-name="activeName">
+      <el-tab-pane v-for="tab in tabs" :label="tab.label" :name="tab.name">{{tab.content}}</el-tab-pane>
+    </el-tabs>
 </template>
 <script>
   export default {
     data() {
       return {
-        activeName: 'first'
+        activeName: 'first',
+        tabs: [
+          {label: 'User', content: '', name: 'first'},
+          {label: 'Config', content: '', name: 'second'},
+          {label: 'Role', content: '', name: 'third'},
+          {label: 'Task', content: '', name: 'last'}
+        ]
       };
     }
   };
@@ -31,17 +58,17 @@ Basic and concise tabs.
 
 ### Card Style
 
-Selective card style tabs.
+Tabs styled as cards.
 
-:::demo Set `type` to `card` can get a selective card style tab.
+:::demo Set `type` to `card` can get a card-styled tab.
 
 ```html
 <template>
   <el-tabs type="card" @tab-click="handleClick" @tab-remove="handleRemove">
-    <el-tab-pane label="User Admin"></el-tab-pane>
-    <el-tab-pane label="Config Admin"></el-tab-pane>
-    <el-tab-pane label="Role Admin"></el-tab-pane>
-    <el-tab-pane label="Task Compensation"></el-tab-pane>
+    <el-tab-pane label="User"></el-tab-pane>
+    <el-tab-pane label="Config"></el-tab-pane>
+    <el-tab-pane label="Role"></el-tab-pane>
+    <el-tab-pane label="Task"></el-tab-pane>
   </el-tabs>
 </template>
 <script>
@@ -50,8 +77,8 @@ Selective card style tabs.
       handleRemove(tab) {
         console.log(tab);
       },
-      handleClick(tab) {
-        console.log(tab);
+      handleClick(tab, event) {
+        console.log(tab, event);
       }
     }
   };
@@ -63,15 +90,15 @@ Selective card style tabs.
 
 Closable tabs.
 
-:::demo You can set `closable` attribute in `el-tabs`.It accept `Boolean` and it will be closable when the boolean is `true`.
+:::demo You can set `closable` attribute in `el-tabs`. It accept `Boolean` and Tab will be closable when the boolean is `true`.
 
 ```html
 <template>
   <el-tabs type="card" :closable="true" @tab-click="handleClick" @tab-remove="handleRemove">
-    <el-tab-pane label="User Admin"></el-tab-pane>
-    <el-tab-pane label="Config Admin"></el-tab-pane>
-    <el-tab-pane label="Role Admin"></el-tab-pane>
-    <el-tab-pane label="Task Compensation"></el-tab-pane>
+    <el-tab-pane label="User"></el-tab-pane>
+    <el-tab-pane label="Config"></el-tab-pane>
+    <el-tab-pane label="Role"></el-tab-pane>
+    <el-tab-pane label="Task"></el-tab-pane>
   </el-tabs>
 </template>
 <script>
@@ -80,8 +107,8 @@ Closable tabs.
       handleRemove(tab) {
         console.log(tab);
       },
-      handleClick(tab) {
-        console.log(tab);
+      handleClick(tab, event) {
+        console.log(tab, event);
       }
     }
   };
@@ -98,32 +125,30 @@ Border card tabs.
 
 ```html
 <el-tabs type="border-card">
-  <el-tab-pane label="User Admin"></el-tab-pane>
-  <el-tab-pane label="Config Admin"></el-tab-pane>
-  <el-tab-pane label="Role Admin"></el-tab-pane>
-  <el-tab-pane label="Task Compensation"></el-tab-pane>
+  <el-tab-pane label="User"></el-tab-pane>
+  <el-tab-pane label="Config"></el-tab-pane>
+  <el-tab-pane label="Role"></el-tab-pane>
+  <el-tab-pane label="Task"></el-tab-pane>
 </el-tabs>
 ```
 
 :::
 
 ### Tabs Attributes
-| Attribute       | Description     | Type      | Options       | Default   |
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------- |---------- |-------------  |-------- |
-| type     | Tabs type   | string   | card, border-card  |     —    |
-| closable  | If can close the tab   | boolean   | true, false |  false  |
-| active-name  | Name of the selected card  | string   |  —  |  Name of first selective card |
+| type     | type of Tab | string   | card/border-card  |     —    |
+| closable  | whether Tab is closable | boolean   | — |  false  |
+| active-name  | name of the selected tab  | string   |  —  |  name of first tab |
 
 ### Tabs Events
-
-| Event name | Description | Callback parameter |
+| Event Name | Description | Parameters |
 |---------- |-------- |---------- |
-| tab-click  | Hook function when tab is clicked | Clicked tab |
-| tab-remove  | Hook function when tab is removed  | Removed tab |
+| tab-click  | triggers when a tab is clicked | clicked tab |
+| tab-remove  | triggers when a tab is removed  | removed tab |
 
 ### Tab-pane Attributes
-
-| Attribute       | Description     | Type      | Options       | Default   |
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------- |---------- |-------------  |-------- |
-| label     | Card label   | string   | — |    —     |
-| name      | The identifier corresponding to the activeName of the selective card, representing the alias of the selective card | string | — | The ordinal number of the selective card in the sequence, i.e. the first one is '1' |
+| label     | title of the tab   | string   | — |    —     |
+| name      | identifier corresponding to the activeName of Tabs, representing the alias of the tab-pane | string | — | ordinal number of the tab-pane in the sequence, i.e. the first tab-pane is '1' |
