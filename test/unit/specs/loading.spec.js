@@ -106,9 +106,7 @@ describe('Loading', () => {
     Vue.nextTick(() => {
       const mask = document.querySelector('.el-loading-mask');
       expect(mask.parentNode === document.body).to.true;
-      expect(mask.style.left).to.equal('0px');
-      expect(mask.style.right).to.equal('0px');
-      expect(mask.style.position).to.equal('fixed');
+      expect(mask.classList.contains('is-fullscreen')).to.true;
       vm.loading = false;
       document.body.removeChild(mask);
       document.body.removeChild(vm.$el);
