@@ -5,7 +5,7 @@
       <div class="el-notification__group" :style="{ 'margin-left': typeClass ? '55px' : '0' }">
         <span>{{ title }}</span>
         <p>{{ message }}</p>
-        <div class="el-notification__closeBtn el-icon-close" @click="handleClose()"></div>
+        <div class="el-notification__closeBtn el-icon-close" @click="close"></div>
       </div>
     </div>
   </transition>
@@ -56,7 +56,7 @@
         this.$el.parentNode.removeChild(this.$el);
       },
 
-      handleClose() {
+      close() {
         this.closed = true;
         if (typeof this.onClose === 'function') {
           this.onClose();
@@ -71,7 +71,7 @@
         if (this.duration > 0) {
           this.timer = setTimeout(() => {
             if (!this.closed) {
-              this.handleClose();
+              this.close();
             }
           }, this.duration);
         }
@@ -82,7 +82,7 @@
       if (this.duration > 0) {
         this.timer = setTimeout(() => {
           if (!this.closed) {
-            this.handleClose();
+            this.close();
           }
         }, this.duration);
       }
