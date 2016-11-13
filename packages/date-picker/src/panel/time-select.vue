@@ -81,6 +81,10 @@
         if (!item.disabled) {
           this.$emit('pick', item.value);
         }
+      },
+
+      handleClear() {
+        this.$emit('pick');
       }
     },
 
