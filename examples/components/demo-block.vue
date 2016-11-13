@@ -212,7 +212,7 @@
       },
 
       blockClass() {
-        return `demo-${ this.$router.currentRoute.path.split('/').pop() }`;
+        return `demo-${ this.lang } demo-${ this.$router.currentRoute.path.split('/').pop() }`;
       },
 
       iconClass() {

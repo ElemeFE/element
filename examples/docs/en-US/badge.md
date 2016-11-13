@@ -1,9 +1,3 @@
-<style>
-  .demo-badge.demo-box .el-dropdown {
-    vertical-align: middle;
-  }
-</style>
-
 ## Badge
 
 A number or status mark on buttons and icons.

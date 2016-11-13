@@ -53,14 +53,6 @@
   };
 </script>
 
-<style>
-  .demo-box.demo-notification {
-    .el-button + .el-button {
-      margin-left: 10px;
-    }
-  }
-</style>
-
 ## Notification 
 
 Displays a global notification message at the upper right corner of the page.

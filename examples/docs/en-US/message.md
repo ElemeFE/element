@@ -57,14 +57,6 @@
   };
 </script>
 
-<style>
-  .demo-box.demo-message {
-    .el-button + .el-button {
-      margin-left: 10px;
-    }
-  }
-</style>
-
 ## Message
 
 Used to show feedback after an activity. The difference with Notification is that the latter is often used to show a system level passive notification.

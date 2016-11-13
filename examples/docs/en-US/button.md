@@ -22,47 +22,6 @@
     }
   }
 </script>
-<style>
-  .demo-box.demo-button {
-    .el-row {
-      margin-bottom: 10px;
-    }
-    .el-button + .el-button {
-      margin-left: 10px;
-    }
-    .el-button-group {
-      margin-bottom: 20px;
-
-      .el-button + .el-button {
-        margin-left: 0;
-      }
-    }
-  }
-
-  .demo-box.demo-button .intro-block {
-    padding: 0;
-  }
-
-  .demo-button .intro-block .block {
-    padding: 30px 24px;
-    overflow: hidden;
-    border-bottom: solid 1px #EFF2F6;
-    &:last-child {
-      border-bottom: none;      
-    }
-  }
-
-  .demo-button .intro-block .demonstration {
-    font-size: 14px;
-    color: #8492a6;
-    line-height: 44px;
-  }
-
-  .demo-button .intro-block .wrapper {
-    float: right;
-    margin-right: 20px;
-  }
-</style>
 
 ## Button
 

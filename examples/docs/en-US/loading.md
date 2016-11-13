@@ -1,9 +1,3 @@
-<style>
-  .demo-loading .el-table {
-    border: none;
-  }
-</style>
-
 <script>
   export default {
     data() {
