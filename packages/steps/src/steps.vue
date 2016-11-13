@@ -13,6 +13,7 @@ export default {
       type: String,
       default: 'horizontal'
     },
+    alignCenter: Boolean,
     finishStatus: {
       type: String,
       default: 'finish'
