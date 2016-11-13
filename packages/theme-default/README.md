@@ -21,13 +21,13 @@ import 'element-theme-default';
 
 Or
 ```html
-<link rel="stylesheet" href="path/to/node_modules/element-theme-default/dist/index.css">
+<link rel="stylesheet" href="path/to/node_modules/element-theme-default/lib/index.css">
 ```
 
 ##  Import your need
 ```javascript
-import 'element-theme-default/dist/input.css';
-import 'element-theme-default/dist/select.css';
+import 'element-theme-default/lib/input.css';
+import 'element-theme-default/lib/select.css';
 
 // ...
 ```

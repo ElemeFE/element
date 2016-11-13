@@ -47,19 +47,6 @@
 </details>
 
 <details>
-<summary>在项目中引入 Element，报 `Uncaught Error: Module build failed: SyntaxError: 'with' in strict mode` 是什么原因？</summary>
-
-请避免你使用的编译器处理 Element。比如，若是使用 webpack，请在 loaders 中配置：
-```javascript
-{
-  test: /\.js$/,
-  loader: 'babel',
-  exclude: /node_modules/
-}
-```
-</details>
-
-<details>
 <summary>将 Element 克隆至本地，运行时为何会报错/跑不起来？</summary>
 
 首先，确保克隆的是 master 分支的最新代码，并且文件完整。其次，确保本地的 node 版本在 4.0 以上，npm 版本在 3.0 以上。最后，可以启动开发环境：
