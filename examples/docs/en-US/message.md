@@ -200,3 +200,9 @@ In this case you should call `Message(options)`. We have also registered methods
 | duration | display duration, millisecond. If set to 0, it will not turn off automatically | number | — | 3000 |
 | showClose | whether to show a close button | boolean | — | false |
 | onClose | callback function when closed with the message instance as the parameter | function | — | — |
+
+### Methods
+`Message` and `this.$message` returns the current Message instance. To manually close the instance, you can call `close` on it.
+| Method | Description |
+| ---- | ---- |
+| close | close the Message |

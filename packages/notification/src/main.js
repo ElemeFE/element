@@ -32,6 +32,7 @@ var Notification = function(options) {
   topDist += 16;
   instance.top = topDist;
   instances.push(instance);
+  return instance.vm;
 };
 
 ['success', 'warning', 'info', 'error'].forEach(type => {

@@ -188,3 +188,8 @@ In this case you should call `Notification(options)`. We have also registered me
 | duration | duration before close. It will not automatically close if set 0 | number | — | 4500 |
 | onClose | callback function when closed | function | — | — |
 
+### Methods
+`Notification` and `this.$notify` returns the current Message instance. To manually close the instance, you can call `close` on it.
+| Method | Description |
+| ---- | ---- |
+| close | close the Notification |

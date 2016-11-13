@@ -4,7 +4,7 @@
       <img class="el-message__icon" :src="typeImg" alt="">
       <div class="el-message__group">
         <p>{{ message }}</p>
-        <div v-if="showClose" class="el-message__closeBtn el-icon-close" @click="handleClose"></div>
+        <div v-if="showClose" class="el-message__closeBtn el-icon-close" @click="close"></div>
       </div>
     </div>
   </transition>
@@ -47,7 +47,7 @@
         this.$el.parentNode.removeChild(this.$el);
       },
 
-      handleClose() {
+      close() {
         this.closed = true;
         if (typeof this.onClose === 'function') {
           this.onClose(this);
@@ -62,7 +62,7 @@
         if (this.duration > 0) {
           this.timer = setTimeout(() => {
             if (!this.closed) {
-              this.handleClose();
+              this.close();
             }
           }, this.duration);
         }
