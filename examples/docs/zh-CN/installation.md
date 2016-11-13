@@ -12,9 +12,9 @@ npm i element-ui -D
 
 ```html
 <!-- 引入样式 -->
-<link rel="stylesheet" href="https://unpkg.com/element-ui@1.0.0/lib/theme-default/index.css">
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
 <!-- 引入组件库 -->
-<script src="https://unpkg.com/element-ui@1.0.0/lib/index.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
 ```
 
 ### Hello world
@@ -26,7 +26,7 @@ npm i element-ui -D
 <head>
   <meta charset="UTF-8">
   <!-- 引入样式 -->
-  <link rel="stylesheet" href="https://unpkg.com/element-ui@1.0.0/lib/theme-default/index.css">
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
 </head>
 <body>
   <div id="app">
@@ -37,9 +37,9 @@ npm i element-ui -D
   </div>
 </body>
   <!-- 先引入 Vue -->
-  <script src="https://unpkg.com/vue@2.0.5/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
   <!-- 引入组件库 -->
-  <script src="https://unpkg.com/element-ui@1.0.0/lib/index.js"></script>
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
   <script>
     new Vue({
       el: '#app',

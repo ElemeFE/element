@@ -3,7 +3,6 @@
     data() {
       return {
         activeName: 'first',
-        activeName2: '',
         tabs: [
           {label: '用户管理', content: '', name: 'first'},
           {label: '配置管理', content: '', name: 'second'},
@@ -41,6 +40,7 @@
   export default {
     data() {
       return {
+        activeName: 'first',
         tabs: [
           {label: '用户管理', content: '', name: 'first'},
           {label: '配置管理', content: '', name: 'second'},
@@ -75,8 +75,8 @@
       handleRemove(tab) {
         console.log(tab);
       },
-      handleClick(tab) {
-        console.log(tab);
+      handleClick(tab, event) {
+        console.log(tab, event);
       }
     }
   };
@@ -105,8 +105,8 @@
       handleRemove(tab) {
         console.log(tab);
       },
-      handleClick(tab) {
-        console.log(tab);
+      handleClick(tab, event) {
+        console.log(tab, event);
       }
     }
   };
@@ -132,8 +132,8 @@
 ### Tabs Attributes
 | 参数       | 说明     | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
-| type     | 风格类型   | string   | card, border-card  |     —    |
-| closable  | 标签是否可关闭   | boolean   | true, false |  false  |
+| type     | 风格类型   | string   | card/border-card  |     —    |
+| closable  | 标签是否可关闭   | boolean   | — |  false  |
 | active-name  | 选中选项卡的 name  | string   |  —  |  第一个选项卡的 name |
 
 ### Tabs Events

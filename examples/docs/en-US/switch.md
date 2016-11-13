@@ -1,12 +1,22 @@
-## switch
+<script>
+  export default {
+    data() {
+      return {
+        value1: true,
+        value2: true,
+        value3: true
+      }
+    }
+  };
+</script>
 
-Switch component is used for switching the component between two opposing state. 
+## Switch
 
-### How to use
+Switch is used for switching between two opposing states. 
 
-Use `v-model` directly to bind a **boolean** value to this component and control the opposing states. Additionally you can add `on-text` or `off-text` attribute to show the message when the component is `on` or `off`, respectively. The `on-color` and `off-color` attribute decides the backgroundcolor of this component in different states.
+### Basic usage
 
-:::demo
+:::demo Bind `v-model` to a `Boolean` typed variable. You can add `on-text` or `off-text` attribute to show texts when the component is `on` or `off`, respectively. The `on-color` and `off-color` attribute decides the background color in two states.
 
 ```html
 <el-switch
@@ -23,11 +33,9 @@ Use `v-model` directly to bind a **boolean** value to this component and control
 
 :::
 
-### disabled
+### Disabled
 
-`disabled` attribute means whether the component need to be disabled or not. 
-
-:::demo
+:::demo Adding the `disabled` attribute disables Switch. 
 
 ```html
 <el-switch
@@ -46,21 +54,20 @@ Use `v-model` directly to bind a **boolean** value to this component and control
 
 ### Attributes
 
-Attribute | Description | Type | Options | Default
+ Attribute      | Description          | Type      | Accepted Values       | Default
 ----| ----| ----| ----|----
-disbaled | Disable the component or not | boolean | --- | false
-width| The width of component | number | --- | 58 (with text) / 46 (no text)
-on-close-icon| If component is in 'on' state, set the classes of icon | string | ---| ---
-off-close-icon|If component is in 'off' state, set the classes of icon| string | ---| ---
-on-text | If component is in 'on' state, set the text of component | string | --- | ON
-off-text | If component is in 'off' state, set the text of component | string | --- | OFF
-on-color | If component is in 'on' state, set the background color of component | string | --- | <span style="background-color: #20A0FF">#20A0FF</span>
-off-color | If component is in 'off' state, set the background color of component | string | --- | <span style="background-color: #C0CCDA">#C0CCDA</span>
-name| The name of component | string | --- | ---
+disabled | whether Switch is disabled | boolean | — | false
+width | width of Switch | number | — | 58 (with text) / 46 (no text)
+on-close-icon | class name of the icon displayed when in `on` state, overrides `on-text` | string | — | —
+off-close-icon |class name of the icon displayed when in `off` state, overrides `off-text`| string | — | —
+on-text | text displayed when in `on` state | string | — | ON
+off-text | text displayed when in `off` state | string | — | OFF
+on-color | background color when in `on` state | string | — | #20A0FF
+off-color | background color when in `off` state | string | — | #C0CCDA
+name| input name of Switch | string | — | —
 
 ### Events
 
-Event | Description | Callback Parameter
+ Event Name | Description | Parameters
 ---- | ----| ----
-change | Change the state and then trigger the callback function | --- 
-
+change | triggers when value changes | value after changing
