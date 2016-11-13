@@ -1,13 +1,16 @@
 ## 更新日志
 
 ### 1.0.1
-
 *2016-XX-XX*
 
 - 修复 Pagination 错误地多次触发 `current-change` 事件的问题
 - 修复 Switch 在 Form 中的样式错误，#967
 - 修复 Loading 在某些情况下错误地锁定 `body` 滚动的问题，#968
 - Col 组件的 `span` 属性不再是必填属性，在省略的情况下其默认值为 `24`
+- DatePicker 新增 `disabled` 和 `editable`
+
+#### 非兼容性更新
+- DatePicker 的 `readonly` 为完全只读，新增的 `editable` 属性设置为 false 可禁止输入但是可通过弹框选择，#976
 
 ### 1.0.0
 
