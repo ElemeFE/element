@@ -1007,6 +1007,7 @@ Filter the table to find desired data.
 | show-overflow-tooltip | whether to hide extra content and show them in a tooltip when hovering on the cell | boolean | — | false |
 | inline-template | by using this attribute, you can customize column template. Row data can be accessed by `row` object, and current context can be accessed by `_self` in JSX. In this case you don't need to set `prop`. In your template, you have access to the following: `{ row (current row), column (current column), $index (row index), _self( context), store (table store) }` | — | — |
 | align | alignment | string | left/center/right | left |
+| class-name | class name of cells in the column | string | — | — |
 | selectable | function that determines if a certain row can be selected, works when `type` is 'selection' | Function(row, index) | — | — |
 | reserve-selection | whether to reserve selection after data refreshing, works when `type` is 'selection' | boolean | — | false |
 | filters | an array of data filtering options. For each element in this array, `text` and `value` are required | Array[{ text, value }] | — | — |

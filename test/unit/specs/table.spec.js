@@ -570,6 +570,18 @@ describe('Table', () => {
       }, DELAY);
     });
 
+    it('class-name', done => {
+      const vm = createTable('class-name="column-1"', 'class-name="column-2 column-class-a"', 'class-name="column-class-a"');
+      setTimeout(_ => {
+        var len = getTestData().length + 1;
+        expect(vm.$el.querySelectorAll('.column-1')).to.length(len);
+        expect(vm.$el.querySelectorAll('.column-2')).to.length(len);
+        expect(vm.$el.querySelectorAll('.column-class-a')).to.length(len * 2);
+        destroyVM(vm);
+        done();
+      }, DELAY);
+    });
+
     it('selectable', done => {
       const vm = createVue({
         template: `

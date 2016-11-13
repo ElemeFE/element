@@ -1010,6 +1010,7 @@
 | show-overflow-tooltip | 当内容过长被隐藏时显示 tooltip | Boolean | — | false |
 | inline-template | 指定该属性后可以自定义 column 模板，参考多选的时间列，通过 row 获取行信息，JSX 里通过 _self 获取当前上下文。此时不需要配置 prop 属性。总共可以获取到 `{ row(当前行), column(当前列), $index(行数), _self(当前上下文), store(table store) }` 的信息。 | — | — |
 | align | 对齐方式 | String | left, center, right | left |
+| class-name | 列的 className | string | — | — |
 | selectable | 仅对 type=selection 的列有效，类型为 Function，Function 的返回值用来决定这一行的 CheckBox 是否可以勾选 | Function(row, index) | — | — |
 | reserve-selection | 仅对 type=selection 的列有效，类型为 Boolean，为 true 则代表会保留之前数据的选项，需要配合 Table 的 clearSelection 方法使用。 | Boolean | — | false |
 | filters | 数据过滤的选项，数组格式，数组中的元素需要有 text 和 value 属性。 | Array[{ text, value }] | — | — |
