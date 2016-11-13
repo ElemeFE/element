@@ -904,6 +904,7 @@ based on the column . It accepts the `Boolean` type with an default value `false
 | show-tooltip-when-overflow | if cell content is too long , the extra content will hide. Hovering on it the extra content will show in tooltip | Boolean | — | false |
 | inline-template | when using the attribute, you could customize the content which the column. Refer to the date column in Multiple Select, getting row data by `row` object, getting current context by _self in JSX. In this case you don't need set the attribute `property`. | — | — |
 | align | Alignment | String | left, center, right | left |
+| class-name | class name of cells in the column | String | — | — |
 
 
 
