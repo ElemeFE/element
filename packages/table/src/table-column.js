@@ -209,12 +209,13 @@ export default {
     column.renderCell = function(h, data) {
       if (_self.$vnode.data.inlineTemplate) {
         renderCell = function() {
-          data._staticTrees = _self._staticTrees;
-          data.$options = {};
-          data.$options.staticRenderFns = _self.$options.staticRenderFns;
-          data._renderProxy = _self._renderProxy;
-          data._m = _self._m;
-
+          if (Object.prototype.toString.call(data._self) === '[object Object]') {
+            for (let prop in data._self) {
+              if (!data.hasOwnProperty(prop)) {
+                data[prop] = data._self[prop];
+              }
+            }
+          }
           return _self.customRender.call(data);
         };
       }

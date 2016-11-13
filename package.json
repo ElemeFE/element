@@ -112,7 +112,7 @@
     "uppercamelcase": "^1.1.0",
     "url-loader": "^0.5.7",
     "vue": "^2.0.5",
-    "vue-loader": "^9.8.0",
+    "vue-loader": "^9.9.0",
     "vue-markdown-loader": "^0.5.1",
     "vue-router": "^2.0.0",
     "webpack": "^1.13.2",
