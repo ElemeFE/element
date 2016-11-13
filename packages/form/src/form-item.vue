@@ -78,8 +78,7 @@
         validateDisabled: false,
         validating: false,
         validator: {},
-        isRequired: false,
-        initialValue: null
+        isRequired: false
       };
     },
     methods: {
@@ -148,21 +147,15 @@
         }
 
         this.validate('change');
-      },
-      getInitialValue() {
-        var value = this.form.model[this.prop];
-        if (value === undefined) {
-          return value;
-        } else {
-          return JSON.parse(JSON.stringify(value));
-        }
       }
     },
     mounted() {
       if (this.prop) {
         this.dispatch('form', 'el.form.addField', [this]);
 
-        this.initialValue = this.getInitialValue();
+        Object.defineProperty(this, 'initialValue', {
+          value: this.form.model[this.prop]
+        });
 
         let rules = this.getRules();
 
