@@ -1,4 +1,4 @@
-import { getValueByPath, getCell, getColumnById, getColumnByCell } from './util';
+import { getValueByPath, getCell, getColumnByCell } from './util';
 
 export default {
   props: {
@@ -42,9 +42,7 @@ export default {
                       on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
                       on-mouseleave={ this.handleCellMouseLeave }>
                       {
-                        column.renderCell
-                          ? column.renderCell.call(this._renderProxy, h, { row, column, $index, store: this.store, _self: this.$parent.$vnode.context })
-                          : <div class="cell">{ this.getCellContent(row, column.property, column.id) }</div>
+                        column.renderCell.call(this._renderProxy, h, { row, column, $index, store: this.store, _self: this.$parent.$vnode.context })
                       }
                     </td>
                   )
@@ -60,13 +58,40 @@ export default {
     );
   },
 
+  watch: {
+    'store.states.hoverRow'(newVal, oldVal) {
+      const el = this.$el;
+      if (!el) return;
+      const rows = el.querySelectorAll('tr');
+      const oldRow = rows[oldVal];
+      const newRow = rows[newVal];
+      if (oldRow) {
+        oldRow.classList.remove('hover-row');
+      }
+      if (newRow) {
+        newRow.classList.add('hover-row');
+      }
+    },
+    'store.states.currentRow'(newVal, oldVal) {
+      if (!this.highlight) return;
+      const el = this.$el;
+      if (!el) return;
+      const data = this.store.states.data;
+      const rows = el.querySelectorAll('tr');
+      const oldRow = rows[data.indexOf(oldVal)];
+      const newRow = rows[data.indexOf(newVal)];
+      if (oldRow) {
+        oldRow.classList.remove('current-row');
+      }
+      if (newRow) {
+        newRow.classList.add('current-row');
+      }
+    }
+  },
+
   computed: {
     data() {
       return this.store.states.data;
-    },
-
-    hoverRowIndex() {
-      return this.store.states.hoverRow;
     },
 
     columnsCount() {
@@ -105,20 +130,12 @@ export default {
 
     getRowClass(row, index) {
       const classes = [];
-      if (this.hoverRowIndex === index) {
-        classes.push('hover-row');
-      }
 
       const rowClassName = this.rowClassName;
       if (typeof rowClassName === 'string') {
         classes.push(rowClassName);
       } else if (typeof rowClassName === 'function') {
         classes.push(rowClassName.apply(null, [row, index]) || '');
-      }
-
-      const currentRow = this.store.states.currentRow;
-      if (this.highlight && currentRow === row) {
-        classes.push('current-row');
       }
 
       return classes.join(' ');
@@ -172,10 +189,13 @@ export default {
       table.$emit('row-click', row, event);
     },
 
-    getCellContent(row, property, columnId) {
-      const column = getColumnById(this.$parent, columnId);
+    getCellContent(row, property, column) {
       if (column && column.formatter) {
         return column.formatter(row, column);
+      }
+
+      if (property && property.indexOf('.') === -1) {
+        return row[property];
       }
 
       return getValueByPath(row, property);
