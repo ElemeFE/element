@@ -27,7 +27,7 @@ describe('Table', () => {
     const vm = createVue({
       template: `
         <el-table :data="testData">
-          <el-table-column prop="name" label="片名" className="name-column" />
+          <el-table-column prop="name" label="片名" />
           <el-table-column prop="release" label="发行日期" />
           <el-table-column prop="director" label="导演" />
           <el-table-column prop="runtime" label="时长（分）" />
@@ -59,10 +59,6 @@ describe('Table', () => {
 
       expect(cells).to.eql(testDataArr);
       destroyVM(vm);
-    });
-
-    it('className', () => {
-      expect(vm.$el.querySelectorAll('.name-column')).to.length(getTestData().length);
     });
   });
 
@@ -569,6 +565,18 @@ describe('Table', () => {
         expect(vm.$el.querySelectorAll('.is-left')).to.length(len);
         expect(vm.$el.querySelectorAll('.is-right')).to.length(len);
         expect(vm.$el.querySelectorAll('.is-center')).to.length(len);
+        destroyVM(vm);
+        done();
+      }, DELAY);
+    });
+
+    it('class-name', done => {
+      const vm = createTable('class-name="column-1"', 'class-name="column-2 column-class-a"', 'class-name="column-class-a"');
+      setTimeout(_ => {
+        var len = getTestData().length + 1;
+        expect(vm.$el.querySelectorAll('.column-1')).to.length(len);
+        expect(vm.$el.querySelectorAll('.column-2')).to.length(len);
+        expect(vm.$el.querySelectorAll('.column-class-a')).to.length(len * 2);
         destroyVM(vm);
         done();
       }, DELAY);
