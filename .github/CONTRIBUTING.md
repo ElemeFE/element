@@ -55,5 +55,10 @@ To build:
 npm run dist
 ```
 
+## 组件开发规范
+- 通过 `npm run new` 创建组件目录结构，包含测试代码、入口文件、cooking 配置、package.json、文档
+- 如果包含父子组件，需要更改目录结构，参考 `Button`
+- 组件内如果依赖了其他组件，需要在当前组件内引入，参考 `Select`
+
 ## 代码规范
 遵循饿了么前端的 [ESLint](https://github.com/ElemeFE/eslint-config-elemefe) 即可
