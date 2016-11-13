@@ -80,7 +80,7 @@
 ### 带图标的步骤条
 步骤条内可以启用各种自定义的图标。
 
-:::demo 通过`icon`属性来设置图标，图标的类型可以参考 Icon 组件的文档，除此以外，还能通过 slot name 来使用自定义的图标。
+:::demo 通过`icon`属性来设置图标，图标的类型可以参考 Icon 组件的文档，除此以外，还能通过具名`slot`来使用自定义的图标。
 ```html
 <el-steps :space="100" :active="1">
   <el-step title="步骤 1" icon="edit"></el-step>
@@ -113,6 +113,7 @@
 | active | 设置当前激活步骤  | number | — | 0 |
 | process-status | 设置当前步骤的状态 | string | wait/process/finish/error/success | process |
 | finish-status | 设置结束步骤的状态 | string | wait/process/finish/error/success | finish |
+| align-center | 标题描述居中对齐 | boolean | false, true | false |
 
 ### Step Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |

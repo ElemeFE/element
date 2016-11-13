@@ -46,7 +46,7 @@ exports.install = Vue => {
         el.spinner.style.display = 'none';
         el.domVisible = false;
 
-        if (binding.modifiers.fullscreen) {
+        if (binding.modifiers.fullscreen && el.originalOverflow !== 'hidden') {
           document.body.style.overflow = el.originalOverflow;
         }
         if (binding.modifiers.fullscreen || binding.modifiers.body) {

@@ -106,3 +106,12 @@ export const mousewheel = function(element, callback) {
     element.addEventListener(isFirefox ? 'DOMMouseScroll' : 'mousewheel', callback);
   }
 };
+
+export const getRowIdentity = (row, rowKey) => {
+  if (!row) throw new Error('row is required when get row identity');
+  if (typeof rowKey === 'string') {
+    return row[rowKey];
+  } else if (typeof rowKey === 'function') {
+    return rowKey.call(null, row);
+  }
+};

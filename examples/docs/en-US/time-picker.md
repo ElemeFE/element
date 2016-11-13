@@ -1,11 +1,3 @@
-<style>
-  .demo-box {
-    .el-date-editor + .el-date-editor {
-      margin-left: 10px;
-    }
-  }
-</style>
-
 ## TimePicker
 
 Use Time Picker for time input.
@@ -141,7 +133,9 @@ Can pick an arbitrary time range.
 ### Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| readonly | if the picker is read only | boolean | — | false |
+| readonly | read only | boolean | — | false |
+| disabled | disabled | boolean | - | false |
+| editable | editable | boolean | - | true |
 | placeholder | placeholder | string | — | — |
 | format | format of the picker | string | hour `HH`, minute `mm`, second `ss` | HH:mm:ss |
 | value | value of the picker | date for Time Picker, and string for Time Select | hour `HH`, minute `mm`, second `ss` | HH:mm:ss |

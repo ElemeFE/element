@@ -53,14 +53,6 @@
   };
 </script>
 
-<style>
-  .demo-box.demo-notification {
-    .el-button + .el-button {
-      margin-left: 10px;
-    }
-  }
-</style>
-
 ## Notification 通知
 
 悬浮出现在页面右上角，显示全局的通知提醒消息。

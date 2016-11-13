@@ -14,13 +14,7 @@
     }
   };
 </script>
-<style>
-  .demo-box.demo-input-number {
-    .el-input-number + .el-input-number {
-      margin-left: 10px;
-    }
-  }
-</style>
+
 ## InputNumber
 
 Input numerical values with a customizable range.

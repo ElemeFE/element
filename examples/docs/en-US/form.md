@@ -200,7 +200,7 @@
 </script>
 
 <style>
-  .demo-form {
+  .demo-form.demo-en-US {
     .el-select .el-input {
       width: 360px;
     }
