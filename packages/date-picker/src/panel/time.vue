@@ -100,8 +100,12 @@
     },
 
     methods: {
+      handleClear() {
+        this.handleCancel();
+      },
+
       handleCancel() {
-        this.$emit('pick', null);
+        this.$emit('pick');
       },
 
       handleChange(date) {

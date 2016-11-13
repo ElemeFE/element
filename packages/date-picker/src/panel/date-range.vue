@@ -273,16 +273,16 @@
           this.minDate = null;
           this.maxDate = null;
         } else if (Array.isArray(newVal)) {
-          this.minDate = toDate(newVal[0]);
-          this.maxDate = toDate(newVal[1]);
+          this.minDate = newVal[0] ? toDate(newVal[0]) : null;
+          this.maxDate = newVal[1] ? toDate(newVal[1]) : null;
         }
       }
     },
 
     methods: {
       handleClear() {
-        this.minDate = '';
-        this.maxDate = '';
+        this.minDate = null;
+        this.maxDate = null;
         this.handleConfirm();
       },
 

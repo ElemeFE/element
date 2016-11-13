@@ -5,7 +5,7 @@
     :class="{
       'is-have-trigger': haveTrigger,
       'is-active': pickerVisible,
-      'is-filled': !!this.value
+      'is-filled': !!this.internalValue
     }">
 
     <input
@@ -22,9 +22,11 @@
       v-model.lazy="visualValue" />
 
     <span
-      @click="pickerVisible = !pickerVisible"
+      @click.stop="handleClickIcon"
       class="el-date-editor__trigger el-icon"
-      :class="[triggerClass]"
+      :class="[showClose ? 'el-icon-close' : triggerClass]"
+      @mouseenter="handleMouseEnterIcon"
+      @mouseleave="showClose = false"
       v-if="haveTrigger">
     </span>
   </span>
@@ -219,7 +221,9 @@ export default {
 
   data() {
     return {
-      pickerVisible: false
+      pickerVisible: false,
+      showClose: false,
+      internalValue: ''
     };
   },
 
@@ -228,15 +232,37 @@ export default {
       if (this.readonly || this.disabled) return;
       val ? this.showPicker() : this.hidePicker();
     },
-    value(val) {
+    internalValue(val) {
       if (!val && this.picker && typeof this.picker.handleClear === 'function') {
         this.picker.handleClear();
       }
       this.dispatch('form-item', 'el.form.change');
+    },
+    value: {
+      immediate: true,
+      handler(val) {
+        this.internalValue = val;
+      }
     }
   },
 
   computed: {
+    valueIsEmpty() {
+      const val = this.internalValue;
+      if (Array.isArray(val)) {
+        for (let i = 0, j = val.length; i < j; i++) {
+          if (val[i]) {
+            return false;
+          }
+        }
+      } else {
+        if (val) {
+          return false;
+        }
+      }
+      return true;
+    },
+
     triggerClass() {
       return this.type.indexOf('time') !== -1 ? 'el-icon-time' : 'el-icon-date';
     },
@@ -262,7 +288,7 @@ export default {
 
     visualValue: {
       get() {
-        const value = this.value;
+        const value = this.internalValue;
         const formatter = (
           TYPE_VALUE_RESOLVER_MAP[this.type] ||
           TYPE_VALUE_RESOLVER_MAP['default']
@@ -301,6 +327,20 @@ export default {
   },
 
   methods: {
+    handleMouseEnterIcon() {
+      if (!this.valueIsEmpty) {
+        this.showClose = true;
+      }
+    },
+
+    handleClickIcon() {
+      if (this.valueIsEmpty) {
+        this.pickerVisible = !this.pickerVisible;
+      } else {
+        this.internalValue = '';
+      }
+    },
+
     handleClose() {
       this.pickerVisible = false;
     },
@@ -370,7 +410,7 @@ export default {
 
     showPicker() {
       if (!this.picker) {
-        this.panel.defaultValue = this.value;
+        this.panel.defaultValue = this.internalValue;
         this.picker = new Vue(this.panel).$mount(document.createElement('div'));
         this.popperElm = this.picker.$el;
         this.picker.width = this.$refs.reference.getBoundingClientRect().width;
@@ -412,10 +452,7 @@ export default {
         this.picker.$on('dodestroy', this.doDestroy);
         this.picker.$on('pick', (date, visible = false) => {
           this.$emit('input', date);
-
-          if (!visible) {
-            this.pickerVisible = this.picker.visible = !this.picker.visible;
-          }
+          this.pickerVisible = this.picker.visible = visible;
           this.picker.resetView && this.picker.resetView();
         });
 
@@ -431,11 +468,11 @@ export default {
 
       this.updatePopper();
 
-      if (this.value instanceof Date) {
-        this.picker.date = new Date(this.value.getTime());
+      if (this.internalValue instanceof Date) {
+        this.picker.date = new Date(this.internalValue.getTime());
         this.picker.resetView && this.picker.resetView();
       } else {
-        this.picker.value = this.value;
+        this.picker.value = this.internalValue;
       }
 
       this.$nextTick(() => {
