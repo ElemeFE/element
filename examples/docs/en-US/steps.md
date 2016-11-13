@@ -14,7 +14,7 @@
   }
 </script>
 
-## Steps 
+## Steps
 
 Step-by-step guide to guide the user to complete the task in accordance with the process. Its steps can be set according to the actual application scenario and the number of the steps can't be less than 2.
 
@@ -120,6 +120,7 @@ Vertical step bars.
 | active | Sets the current activation step  | number | — | 0 |
 | process-status | Sets the status of current step | string | wait/process/finish/error/success | process |
 | finish-status | Sets the status of end step | string | wait/process/finish/error/success | finish |
+| align-center | align center | boolean | false, true | false |
 
 ### Step Attributes
 | Attribute      | Description    | Type      | Options       | Default   |
