@@ -9,6 +9,7 @@ import MainFooter from './components/footer.vue';
 import MainHeader from './components/header.vue';
 import SideNav from './components/side-nav';
 import FooterNav from './components/footer-nav';
+import title from './i18n/title';
 
 Vue.use(Element);
 Vue.use(VueRouter);
@@ -22,6 +23,10 @@ const router = new VueRouter({
   mode: 'hash',
   base: __dirname,
   routes
+});
+
+router.afterEach(route => {
+  document.title = title[route.meta.lang][route.name] || 'Element';
 });
 
 new Vue({ // eslint-disable-line
