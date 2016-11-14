@@ -99,6 +99,7 @@ It is used for multiple checkboxes which are bound in one group, and indicates w
 | label     | value of the checkbox when used inside a `checkbox-group`   | string    |       —        |     —    |
 | true-label | value of the checkbox if it's checked   | string, number    |       —        |     —    |
 | false-label | value of the checkbox if it's not checked   | string, number    |      —         |     —    |
+| name | native 'name' attribute | string    |      —         |     —    |
 | disabled  | if the checkbox is disabled   | boolean   |  — | false   |
 | checked  | if the checkbox is checked   | boolean   |  — | false   |
 | indeterminate  | same as `indeterminate` in native checkbox | boolean   |  — | false   |
