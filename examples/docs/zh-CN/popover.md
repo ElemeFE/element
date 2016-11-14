@@ -170,6 +170,32 @@ Popover 的属性与 Tooltip 很类似，它们都是基于`Vue-popper`开发的
 </el-popover>
 
 <el-button v-popover:popover4>click 激活</el-button>
+
+<script>
+  export default {
+    data() {
+      return {
+        gridData: [{
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-04',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }]
+      };
+    }
+  };
+</script>
 ```
 :::
 
@@ -192,6 +218,16 @@ Popover 的属性与 Tooltip 很类似，它们都是基于`Vue-popper`开发的
 </el-popover>
 
 <el-button v-popover:popover5>删除</el-button>
+
+<script>
+  export default {
+    data() {
+      return {
+        visible2: false,
+      };
+    }
+  }
+</script>
 ```
 :::
 

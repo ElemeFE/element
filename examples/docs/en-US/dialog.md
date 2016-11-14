@@ -20,11 +20,7 @@
           address: 'No.1518,  Jinshajiang Road, Putuo District'
         }],
         dialogVisible: false,
-        dialogTinyVisible: false,
-        dialogFullVisible: false,
-        dialogStubbornVisible: false,
         dialogTableVisible: false,
-        dialogBindVisible: false,
         dialogFormVisible: false,
         form: {
           name: '',
@@ -60,13 +56,23 @@ Dialog pops up a dialog box, and it's quite customizable.
 ```html
 <el-button type="text" @click.native="dialogVisible = true">click to open the Dialog</el-button>
 
-<el-dialog title="tips" v-model="dialogVisible" size="tiny">
+<el-dialog title="Tips" v-model="dialogVisible" size="tiny">
   <span>This is a message</span>
   <span slot="footer" class="dialog-footer">
     <el-button @click.native="dialogVisible = false">Cancel</el-button>
     <el-button type="primary" @click.native="dialogVisible = false">Confirm</el-button>
   </span>
 </el-dialog>
+
+<script>
+  export default {
+    data() {
+      return {
+        dialogVisible: false
+      };
+    }
+  };
+</script>
 ```
 :::
 
@@ -108,6 +114,45 @@ The content of Dialog can be anything, even a table or a form. This example show
     <el-button type="primary" @click.native="dialogFormVisible = false">Confirm</el-button>
   </span>
 </el-dialog>
+
+<script>
+  export default {
+    data() {
+      return {
+        gridData: [{
+          date: '2016-05-02',
+          name: 'John Smith',
+          address: 'No.1518,  Jinshajiang Road, Putuo District'
+        }, {
+          date: '2016-05-04',
+          name: 'John Smith',
+          address: 'No.1518,  Jinshajiang Road, Putuo District'
+        }, {
+          date: '2016-05-01',
+          name: 'John Smith',
+          address: 'No.1518,  Jinshajiang Road, Putuo District'
+        }, {
+          date: '2016-05-03',
+          name: 'John Smith',
+          address: 'No.1518,  Jinshajiang Road, Putuo District'
+        }],
+        dialogTableVisible: false,
+        dialogFormVisible: false,
+        form: {
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
+        },
+        formLabelWidth: '120px'
+      };
+    }
+  };
+</script>
 ```
 :::
 

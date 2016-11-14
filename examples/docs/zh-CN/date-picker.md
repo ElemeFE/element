@@ -199,6 +199,18 @@
     placeholder="选择年">
   </el-date-picker>
 </div>
+
+<script>
+  export default {
+    data() {
+      return {
+        value3: '',
+        value4: '',
+        value5: ''
+      };
+    }
+  };
+</script>
 ```
 :::
 

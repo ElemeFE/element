@@ -20,11 +20,7 @@
           address: '上海市普陀区金沙江路 1518 弄'
         }],
         dialogVisible: false,
-        dialogTinyVisible: false,
-        dialogFullVisible: false,
-        dialogStubbornVisible: false,
         dialogTableVisible: false,
-        dialogBindVisible: false,
         dialogFormVisible: false,
         form: {
           name: '',
@@ -88,6 +84,16 @@ Dialog 弹出一个对话框，适合需要定制性更大的场景。
     <el-button type="primary" @click.native="dialogVisible = false">确 定</el-button>
   </span>
 </el-dialog>
+
+<script>
+  export default {
+    data() {
+      return {
+        dialogVisible: false
+      };
+    }
+  };
+</script>
 ```
 :::
 
@@ -128,6 +134,45 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
     <el-button type="primary" @click.native="dialogFormVisible = false">确 定</el-button>
   </div>
 </el-dialog>
+
+<script>
+  export default {
+    data() {
+      return {
+        gridData: [{
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-04',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }],
+        dialogTableVisible: false,
+        dialogFormVisible: false,
+        form: {
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
+        },
+        formLabelWidth: '120px'
+      };
+    }
+  };
+</script>
 ```
 :::
 

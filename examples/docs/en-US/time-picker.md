@@ -17,6 +17,16 @@ Provide a list of fixed time for users to choose.
   }"
   placeholder="Select time">
 </el-time-select>
+
+<script>
+  export default {
+    data() {
+      return {
+        value1: ''
+      };
+    }
+  }
+</script>
 ```
 :::
 

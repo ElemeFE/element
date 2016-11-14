@@ -35,9 +35,9 @@ Input numerical values with a customizable range.
       };
     },
     methods: {
-    	handleChange() {
-    		console.log(this.num1)
-    	}
+      handleChange(value) {
+        console.log(value)
+      }
     }
   };
 </script>

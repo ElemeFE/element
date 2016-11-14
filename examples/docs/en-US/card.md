@@ -64,6 +64,29 @@ Card includes title, content and operations.
     {{'List item ' + o }}
   </div>
 </el-card>
+
+<style>
+  .text {
+    font-size: 14px;
+  }
+
+  .item {
+    padding: 18px 0;
+  }
+
+  .clearfix:before,
+  .clearfix:after {
+      display: table;
+      content: "";
+  }
+  .clearfix:after {
+      clear: both
+  }
+
+  .box-card {
+    width: 480px;
+  }
+</style>
 ```
 :::
 
@@ -78,6 +101,20 @@ The header part can be omitted.
     {{'List item ' + o }}
   </div>
 </el-card>
+
+<style>
+  .text {
+    font-size: 14px;
+  }
+
+  .item {
+    padding: 18px 0;
+  }
+
+  .box-card {
+    width: 480px;
+  }
+</style>
 ```
 :::
 
@@ -101,6 +138,48 @@ Display richer content by adding some configs.
     </el-card>
   </el-col>
 </el-row>
+
+<style>
+  .time {
+    font-size: 13px;
+    color: #999;
+  }
+  
+  .bottom {
+    margin-top: 13px;
+    line-height: 12px;
+  }
+
+  .button {
+    padding: 0;
+    float: right;
+  }
+
+  .image {
+    width: 100%;
+    display: block;
+  }
+
+  .clearfix:before,
+  .clearfix:after {
+      display: table;
+      content: "";
+  }
+  
+  .clearfix:after {
+      clear: both
+  }
+</style>
+
+<script>
+export default {
+  data() {
+    return {
+      currentDate: new Date()
+    };
+  }
+}
+</script>
 ```
 :::
 

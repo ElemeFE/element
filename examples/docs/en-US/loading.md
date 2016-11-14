@@ -65,6 +65,12 @@ Displays animation in a container (such as a table) while loading data.
   </el-table>
 </template>
 
+<style>
+  body {
+    margin: 0;
+  }
+</style>
+
 <script>
   export default {
     data() {

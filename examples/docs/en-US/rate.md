@@ -38,6 +38,7 @@ Used for rating
     :colors="['#99A9BF', '#F7BA2A', '#FF9900']">
   </el-rate>
 </div>
+
 <script>
   export default {
     data() {
@@ -63,6 +64,7 @@ Using text to indicate rating score
   :texts="['oops', 'disappointed', 'normal', 'good', 'great']"
   show-text>
 </el-rate>
+
 <script>
   export default {
     data() {
@@ -88,6 +90,7 @@ You can use different icons to distinguish different rate components.
   void-icon-class="icon-rate-face-off"
   :colors="['#99A9BF', '#F7BA2A', '#FF9900']">
 </el-rate>
+
 <script>
   export default {
     data() {
@@ -114,6 +117,7 @@ Read-only Rate is for displaying rating score. Half star is supported.
   text-color="#ff9900"
   text-template="{value} points">
 </el-rate>
+
 <script>
   export default {
     data() {

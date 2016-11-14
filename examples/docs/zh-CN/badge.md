@@ -36,6 +36,13 @@
     </el-dropdown-item>
   </el-dropdown-menu>
 </el-dropdown>
+
+<style>
+.item {
+  margin-top: 10px;
+  margin-right: 40px;
+}
+</style>
 ```
 :::
 
@@ -51,6 +58,13 @@
 <el-badge :value="100" :max="10" class="item">
   <el-button size="small">回复</el-button>
 </el-badge>
+
+<style>
+.item {
+  margin-top: 10px;
+  margin-right: 40px;
+}
+</style>
 ```
 :::
 
@@ -66,6 +80,13 @@
 <el-badge value="hot" class="item">
   <el-button size="small">回复</el-button>
 </el-badge>
+
+<style>
+.item {
+  margin-top: 10px;
+  margin-right: 40px;
+}
+</style>
 ```
 :::
 
@@ -79,6 +100,13 @@
 <el-badge is-dot class="item">
   <el-button class="share-button" icon="share" type="primary"></el-button>
 </el-badge>
+
+<style>
+.item {
+  margin-top: 10px;
+  margin-right: 40px;
+}
+</style>
 ```
 :::
 
