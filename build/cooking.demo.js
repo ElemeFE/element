@@ -4,6 +4,7 @@ var md = require('markdown-it')();
 var striptags = require('./strip-tags');
 var slugify = require('transliteration').slugify;
 var isProd = process.env.NODE_ENV === 'production';
+var isPlay = !!process.env.PLAY_ENV;
 
 function convert(str) {
   str = str.replace(/(&#x)(\w{4});/gi, function($0) {
@@ -16,7 +17,7 @@ cooking.set({
   entry: isProd ? {
     docs: './examples/entry.js',
     'element-ui': './src/index.js'
-  } : './examples/entry.js',
+  } : (isPlay ? './examples/play.js' : './examples/entry.js'),
   dist: './examples/element-ui/',
   template: [
     {
