@@ -7,11 +7,14 @@
 - 修复 Switch 在 Form 中的样式错误，#967
 - 修复 Loading 在某些情况下错误地锁定 `body` 滚动的问题，#968
 - Col 组件的 `span` 属性不再是必填属性，在省略的情况下其默认值为 `24`
-- DatePicker 新增 `disabled` 和 `editable`
+- 新增 DatePicker `disabled` 和 `editable` 属性, #976
+- 修复 DatePicker 的 `readonly` 与原生行为一致，现在通过设置 editable=false 禁止输入但是可通过弹框选日期, #976
 - 新增 Message 和 Notification 的 `close` 方法，用于手动关闭实例
-
-#### 非兼容性更新
-- DatePicker 的 `readonly` 为完全只读，新增的 `editable` 属性设置为 false 可禁止输入但是可通过弹框选择，#976
+- 新增 DatePicker 清除功能, #759
+- 修复 Form 重置日期报错, #937
+- 修复 Table 的 inline-template 在 vue-loader 9.9.0 渲染报错
+- 新增 Step 支持内容居中对齐, #994
+- 修复 Upload 单独引入时提示 progress 组件不存在, #1013
 
 ### 1.0.0
 
