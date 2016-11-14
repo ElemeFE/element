@@ -9,7 +9,7 @@
         <div class="el-dialog__header">
           <span class="el-dialog__title">{{title}}</span>
           <div class="el-dialog__headerbtn">
-            <i class="el-dialog__close el-icon el-icon-close" @click='close()'></i>
+            <i v-if="showClose" class="el-dialog__close el-icon el-icon-close" @click='close()'></i>
           </div>
         </div>
         <div class="el-dialog__body" v-if="rendered"><slot></slot></div>
@@ -51,6 +51,11 @@
       },
 
       closeOnPressEscape: {
+        type: Boolean,
+        default: true
+      },
+
+      showClose: {
         type: Boolean,
         default: true
       },
