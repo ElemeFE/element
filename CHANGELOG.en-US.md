@@ -16,6 +16,7 @@
 - Fixed Table render error using vue-loader 9.9.0
 - Added `align-center` prop for Step, #994
 - Fixed Upload missing progress component, #1013
+- Layout: support the responsive layout
 
 ### 1.0.0
 

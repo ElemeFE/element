@@ -15,6 +15,7 @@
 - 修复 Table 的 inline-template 在 vue-loader 9.9.0 渲染报错
 - 新增 Step 支持内容居中对齐, #994
 - 修复 Upload 单独引入时提示 progress 组件不存在, #1013
+- Layout 支持响应式布局
 
 ### 1.0.0
 
