@@ -168,6 +168,7 @@ The content of Dialog can be anything, even a table or a form. This example show
 | custom-class      | custom class names for Dialog | string    | — | — |
 | close-on-click-modal | whether the Dialog can be closed by clicking the mask | boolean    | — | true |
 | close-on-press-escape | whether the Dialog can be closed by pressing ESC | boolean    | — | true |
+| show-close | whether to show a close button | boolean    | — | true |
 
 ### Slot
 

@@ -187,6 +187,7 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
 | custom-class      | Dialog 的自定义类名 | string    | — | — |
 | close-on-click-modal | 是否可以通过点击 modal 关闭 Dialog | boolean    | — | true |
 | close-on-press-escape | 是否可以通过按下 ESC 关闭 Dialog | boolean    | — | true |
+| show-close | 是否显示关闭按钮 | boolean    | — | true |
 
 ### Slot
 | name | 说明 |
