@@ -109,10 +109,10 @@ const showNextMsg = () => {
 const MessageBox = function(options, callback) {
   if (typeof options === 'string') {
     options = {
-      title: options
+      message: options
     };
     if (arguments[1]) {
-      options.message = arguments[1];
+      options.title = arguments[1];
     }
     if (arguments[2]) {
       options.type = arguments[2];
