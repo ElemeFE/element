@@ -19,7 +19,7 @@ Create a new project, and its structure should be
 |- index.html  --------------- HTML template
 |- package.json  ------------- npm config
 |- README.md  ---------------- readme
-|- webpack.config.json  ------ webpack config
+|- webpack.config.js  ------ webpack config
 ```
 
 Typical configurations for these config files are:

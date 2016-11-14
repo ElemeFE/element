@@ -1,15 +1,3 @@
-<style>
-  .leaf {
-    width: 20px;
-    background: #ddd;
-  }
-
-  .folder {
-    width: 20px;
-    background: #888;
-  }
-</style>
-
 <script>
   var data = [{
     label: 'Level one 1',
@@ -58,16 +46,21 @@
 
   export default {
     methods: {
+      handleCheckChange(data, checked, indeterminate) {
+        console.log(data, checked, indeterminate);
+      },
+      handleNodeClick(data) {
+        console.log(data);
+      },
       loadNode(node, resolve) {
-        console.log(node);
         if (node.level === -1) {
-          return resolve([{ name: 'Root1' }, { name: 'Root2' }]);
+          return resolve([{ name: 'region1' }, { name: 'region2' }]);
         }
         if (node.level > 4) return resolve([]);
         var hasChild;
-        if (node.data.name === 'Root1') {
+        if (node.data.name === 'region1') {
           hasChild = true;
-        } else if (node.data.name === 'Root2') {
+        } else if (node.data.name === 'region2') {
           hasChild = false;          
         } else {
           hasChild = Math.random() > 0.5;
@@ -103,15 +96,15 @@
 
 ## Tree 
 
-Display information can be unfolded or folded in a clear hierarchy.
+Display a set of data with hierarchies.
 
-### How to use
+### Basic usage
 
-Display the basic tree structure.
+Basic tree structure.
 
 ::: demo
 ```html
-<el-tree :data="data" :props="defaultProps"></el-tree>
+<el-tree :data="data" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
 
 <script>
   export default {
@@ -142,19 +135,31 @@ Display the basic tree structure.
           label: 'label'
         }
       };
+    },
+    methods: {
+      handleNodeClick(data) {
+        console.log(data);
+      }
     }
   };
 </script>
 ```
 :::
 
-### Options
+### Selectable
 
-Used for level selection. In the following example, the layer data is unpredictable when the data is clicked(ps: the data is acquired when clicked the current layer). If there is no lower layer data, the pull-down button is disappeared.
+Used for node selection. In the following example, data for each layer is acquired after being clicked. If there is no child data, the expanding icon will disappear.
 
 ::: demo
 ```html
-<el-tree :data="regions" :props="props" :load="loadNode" lazy show-checkbox></el-tree>
+<el-tree
+  :data="regions"
+  :props="props"
+  :load="loadNode"
+  lazy
+  show-checkbox
+  @check-change="handleCheckChange">
+</el-tree>
 
 <script>
   export default {
@@ -173,17 +178,26 @@ Used for level selection. In the following example, the layer data is unpredicta
       };
     },
     methods: {
-      getCheckedNodes() {
-        console.log(this.$refs.tree.getCheckedNodes(true));
+      handleCheckChange(data, checked, indeterminate) {
+        console.log(data, checked, indeterminate);
       },
-
+      handleNodeClick(data) {
+        console.log(data);
+      },
       loadNode(node, resolve) {
-        console.log(node);
         if (node.level === -1) {
-          return resolve([{ name: 'Root1' }, { name: 'Root2' }]);
+          return resolve([{ name: 'region1' }, { name: 'region2' }]);
         }
-        var hasChild = Math.random() > 0.5;
         if (node.level > 4) return resolve([]);
+
+        var hasChild;
+        if (node.data.name === 'region1') {
+          hasChild = true;
+        } else if (node.data.name === 'region2') {
+          hasChild = false;
+        } else {
+          hasChild = Math.random() > 0.5;
+        }
 
         setTimeout(() => {
           var data;
@@ -207,33 +221,31 @@ Used for level selection. In the following example, the layer data is unpredicta
 :::
 
 ### Attributes
-
-| Attribute      | Description          | Type      | Options                           | Default |
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| data     | Show the data | array | — | — |
-| props | Configuration options, to see the following table | object | — | — |
-| load | Method for loading subtree data | function(node, resolve) | — | — |
+| data     | tree data | array | — | — |
+| props | configuration options, see the following table | object | — | — |
+| load | method for loading subtree data | function(node, resolve) | — | — |
+| show-checkbox | whether node is selectable | boolean | — | false |
+| render-content | render function for tree node | Function(h, { node } | - | - |
+| highlight-current | whether current node is highlighted | boolean | - | false |
 
 ### props
-
-| Attribute      | Description          | Type      | Options                           | Default  |
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| label | Specifies that a node label is a property value of a node object | string | — | — |
-| children | The specified subtree is a property value of the node object | string | — | — |
+| label | specify which key of node object is used as the node's label | string | — | — |
+| children | specify which key of node object is used as the node's subtree | string | — | — |
 
 ### Method
-
 `Tree` has the following method, which returns the currently selected array of nodes.
-
-| Method      | Description    | Parameter      |
+| Method      | Description    | Parameters     |
 |---------- |-------- |---------- |
-| getCheckedNodes | If the node can be selected(`show-checkbox` is `true`), it returns the currently selected array of nodes | Accept a boolean type parameter whose default value is `false`. <br>If the parameter is `true`, it only returns the currently selected array of sub-nodes.|
+| getCheckedNodes | If the node can be selected (`show-checkbox` is `true`), it returns the currently selected array of nodes | Accept a boolean type parameter whose default value is `false`. <br>If the parameter is `true`, it only returns the currently selected array of sub-nodes.|
 
 ### Events
-
-| Event      | Description    | Callback      |
+| Event Name | Description | Parameters |
 |---------- |-------- |---------- |
-| node-click | Callback when the node is clicked | The instance that corresponds to the node in the array passed to the `data` property |
-| check-change | Callback when the selected state of the node changes | Three parameters: <br>The instance that corresponds to the node in the array passed to the `data` property, <br>whether the node itself is selected, <br>whether there are selected nodes in the subtree of the node|
+| node-click | triggers when a node is clicked | three parameters: <br>node object corresponding to the node clicked, <br>`node` property of TreeNode, <br>TreeNode itself |
+| check-change | triggers when the selected state of the node changes | three parameters: <br>node object corresponding to the node whose selected state is changed, <br>whether the node is selected, <br>whether node's subtree has selected nodes |
 
 
