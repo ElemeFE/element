@@ -39,44 +39,6 @@ Tooltip has 9 placements.
 
 :::demo Use attribute `content` to set the display content when hover. The attribute `placement` determines the position of the tooltip. Its value is `[orientation]-[alignment]` with four orientations `top`, `left`, `right`, `bottom` and three alignments `start`, `end`, `null`, and the default alignment is null. Take `placement="left-end"` for example, Tooltip will display on the left of the element which you are hovering and the bottom of the tooltip aligns with the bottom of the element.
 ```html
-<style>
-  .box {
-    width: 400px;
-
-    .top {
-      text-align: center;
-    }
-
-    .left {
-      float: left;
-      width: 110px;
-    }
-
-    .right {
-      float: right;
-      width: 110px;
-    }
-
-    .bottom {
-      clear: both;
-      text-align: center;
-    }
-
-    .item {
-      margin: 4px;
-    }
-    
-    .left .el-tooltip__popper,
-    .right .el-tooltip__popper {
-      padding: 8px 10px;
-    }
-    
-    .el-button {
-      width: 110px;
-    }
-  }
-</style>
-
 <div class="box">
   <div class="top">
     <el-tooltip class="item" effect="dark" content="Top Left prompts info" placement="top-start">
@@ -124,6 +86,44 @@ Tooltip has 9 placements.
     </el-tooltip>
   </div>
 </div>
+
+<style>
+  .box {
+    width: 400px;
+
+    .top {
+      text-align: center;
+    }
+
+    .left {
+      float: left;
+      width: 110px;
+    }
+
+    .right {
+      float: right;
+      width: 110px;
+    }
+
+    .bottom {
+      clear: both;
+      text-align: center;
+    }
+
+    .item {
+      margin: 4px;
+    }
+    
+    .left .el-tooltip__popper,
+    .right .el-tooltip__popper {
+      padding: 8px 10px;
+    }
+    
+    .el-button {
+      width: 110px;
+    }
+  }
+</style>
 ```
 :::
 

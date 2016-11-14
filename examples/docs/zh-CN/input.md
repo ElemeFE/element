@@ -124,7 +124,7 @@
 <style>
   .demo-input.demo-zh-CN {
     .el-select .el-input {
-      width: 100px;
+      width: 110px;
     }
     .text {
       font-size: 14px;
@@ -315,7 +315,7 @@ export default {
     <template slot="append">.com</template>
   </el-input>
   <el-input placeholder="请输入内容" v-model="input5" style="width: 300px;">
-    <el-select v-model="select" slot="prepend">
+    <el-select v-model="select" slot="prepend" placeholder="请选择">
       <el-option label="餐厅名" value="1"></el-option>
       <el-option label="订单号" value="2"></el-option>
       <el-option label="用户电话" value="3"></el-option>
@@ -732,7 +732,7 @@ export default {
 ```
 :::
 
-### Input API
+### Input Attributes
 
 | 参数          | 说明            | 类型            | 可选值                 | 默认值   |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
@@ -760,7 +760,7 @@ export default {
 | blur | 在 Input 失去焦点时触发 | event |
 | focus | 在 Input 或得焦点时触发 | event |
 
-### Autocomplete API
+### Autocomplete Attributes
 
 | 参数          | 说明            | 类型            | 可选值                 | 默认值   |
 |-------------  |---------------- |---------------- |---------------------- |-------- |

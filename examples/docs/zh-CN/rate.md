@@ -57,6 +57,17 @@
     :colors="['#99A9BF', '#F7BA2A', '#FF9900']">
   </el-rate>
 </div>
+
+<script>
+  export default {
+    data() {
+      return {
+        value1: null,
+        value2: null
+      }
+    }
+  }
+</script>
 ```
 :::
 
@@ -70,6 +81,16 @@
   v-model="value3"
   show-text>
 </el-rate>
+
+<script>
+  export default {
+    data() {
+      return {
+        value3: null
+      }
+    }
+  }
+</script>
 ```
 :::
 
@@ -85,6 +106,16 @@
   void-icon-class="icon-rate-face-off"
   :colors="['#99A9BF', '#F7BA2A', '#FF9900']">
 </el-rate>
+
+<script>
+  export default {
+    data() {
+      return {
+        value4: null
+      }
+    }
+  }
+</script>
 ```
 :::
 
@@ -101,6 +132,16 @@
   text-color="#ff9900"
   text-template="{value}">
 </el-rate>
+
+<script>
+  export default {
+    data() {
+      return {
+        value5: 3.7
+      }
+    }
+  }
+</script>
 ```
 :::
 

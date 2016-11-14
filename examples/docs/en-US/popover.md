@@ -79,22 +79,6 @@
         multipleSelection: [],
         model: ''
       };
-    },
-
-    watch: {
-      singleSelection(val) {
-        console.log('selection: ', val);
-      },
-
-      multipleSelection(val) {
-        console.log('selection: ', val);
-      }
-    },
-
-    events: {
-      handleClick(row) {
-        console.log('you clicked ', row);
-      }
     }
   };
 </script>
@@ -159,6 +143,32 @@ Other components can be nested in popover. Following is an example of nested tab
 </el-popover>
 
 <el-button v-popover:popover4>Click to activate</el-button>
+
+<script>
+  export default {
+    data() {
+      return {
+        gridData: [{
+          date: '2016-05-02',
+          name: 'Jack',
+          address: 'New York City'
+        }, {
+          date: '2016-05-04',
+          name: 'Jack',
+          address: 'New York City'
+        }, {
+          date: '2016-05-01',
+          name: 'Jack',
+          address: 'New York City'
+        }, {
+          date: '2016-05-03',
+          name: 'Jack',
+          address: 'New York City'
+        }]
+      };
+    }
+  };
+</script>
 ```
 :::
 
@@ -181,6 +191,16 @@ Of course, you can nest other operations. It's more light-weight than using a di
 </el-popover>
 
 <el-button v-popover:popover5>Delete</el-button>
+
+<script>
+  export default {
+    data() {
+      return {
+        visible2: false,
+      };
+    }
+  }
+</script>
 ```
 :::
 

@@ -25,6 +25,16 @@
   }"
   placeholder="选择时间">
 </el-time-select>
+
+<script>
+  export default {
+    data() {
+      return {
+        value1: ''
+      };
+    }
+  }
+</script>
 ```
 :::
 

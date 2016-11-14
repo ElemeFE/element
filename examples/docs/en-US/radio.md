@@ -30,7 +30,7 @@ Radio should not have too many options. Otherwise, use the Select component inst
   export default {
     data () {
       return {
-        radio: ''
+        radio: '1'
       };
     }
   }
@@ -73,6 +73,16 @@ Suitable for choosing from some mutually exclusive options.
   <el-radio :label="6">optionB</el-radio>
   <el-radio :label="9">optionC</el-radio>
 </el-radio-group>
+
+<script>
+  export default {
+    data () {
+      return {
+        radio2: 3
+      };
+    }
+  }
+</script>
 ```
 :::
 

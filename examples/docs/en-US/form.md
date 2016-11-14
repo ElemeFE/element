@@ -718,6 +718,7 @@ Form component allows you to verify your data, helping you find and correct erro
   }
 </script>
 ```
+:::
 
 ### Delete or add form items dynamically
 

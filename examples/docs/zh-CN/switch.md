@@ -37,6 +37,17 @@
   on-color="#13ce66"
   off-color="#ff4949">
 </el-switch>
+
+<script>
+  export default {
+    data() {
+      return {
+        value1: true,
+        value2: true
+      }
+    }
+  };
+</script>
 ```
 :::
 
@@ -55,6 +66,16 @@
   v-model="value3"
   disabled>
 </el-switch>
+
+<script>
+  export default {
+    data() {
+      return {
+        value3: true
+      }
+    }
+  };
+</script>
 ```
 :::
 

@@ -31,6 +31,13 @@ Displays the amount of new messages.
     </el-dropdown-item>
   </el-dropdown-menu>
 </el-dropdown>
+
+<style>
+.item {
+  margin-top: 10px;
+  margin-right: 40px;
+}
+</style>
 ```
 :::
 
@@ -47,6 +54,13 @@ You can customize the max value.
 <el-badge :value="100" :max="10" class="item">
   <el-button size="small">replies</el-button>
 </el-badge>
+
+<style>
+.item {
+  margin-top: 10px;
+  margin-right: 40px;
+}
+</style>
 ```
 :::
 
@@ -63,6 +77,13 @@ Displays text content other than numbers.
 <el-badge value="hot" class="item">
   <el-button size="small">replies</el-button>
 </el-badge>
+
+<style>
+.item {
+  margin-top: 10px;
+  margin-right: 40px;
+}
+</style>
 ```
 :::
 
@@ -77,6 +98,13 @@ Use a red dot to mark content that needs to be noticed.
 <el-badge is-dot class="item">
   <el-button class="share-button" icon="share" type="primary"></el-button>
 </el-badge>
+
+<style>
+.item {
+  margin-top: 10px;
+  margin-right: 40px;
+}
+</style>
 ```
 :::
 

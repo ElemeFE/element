@@ -69,6 +69,12 @@
   </el-table>
 </template>
 
+<style>
+  body {
+    margin: 0;
+  }
+</style>
+
 <script>
   export default {
     data() {

@@ -162,6 +162,18 @@ You can choose week, month or year by extending the standard date picker compone
     placeholder="Pick a year">
   </el-date-picker>
 </div>
+
+<script>
+  export default {
+    data() {
+      return {
+        value3: '',
+        value4: '',
+        value5: ''
+      };
+    }
+  };
+</script>
 ```
 
 :::

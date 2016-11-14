@@ -29,8 +29,18 @@ Switch is used for switching between two opposing states.
   on-color="#13ce66"
   off-color="#ff4949">
 </el-switch>
-```
 
+<script>
+  export default {
+    data() {
+      return {
+        value1: true,
+        value2: true
+      }
+    }
+  };
+</script>
+```
 :::
 
 ### Disabled
@@ -48,8 +58,17 @@ Switch is used for switching between two opposing states.
   v-model="value3"
   disabled>
 </el-switch>
-```
 
+<script>
+  export default {
+    data() {
+      return {
+        value3: true
+      }
+    }
+  };
+</script>
+```
 :::
 
 ### Attributes
