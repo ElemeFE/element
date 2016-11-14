@@ -13,6 +13,7 @@
         v-if="trueLabel || falseLabel"
         class="el-checkbox__original"
         type="checkbox"
+        :name="name"
         :disabled="disabled"
         :true-value="trueLabel"
         :false-value="falseLabel"
@@ -27,6 +28,7 @@
         type="checkbox"
         :disabled="disabled"
         :value="label"
+        :name="name"
         v-model="_value"
         @focus="focus = true"
         @blur="focus = false"
@@ -52,6 +54,7 @@
       indeterminate: Boolean,
       disabled: Boolean,
       checked: Boolean,
+      name: String,
       trueLabel: [String, Number],
       falseLabel: [String, Number]
     },
