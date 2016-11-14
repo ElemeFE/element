@@ -114,6 +114,7 @@
 | label     | 选中状态的值（只有在`checkbox-group`或者绑定对象类型为`array`时有效）| string    |       —        |     —    |
 | true-label | 选中时的值   | string, number | — |     —    |
 | false-label | 没有选中时的值   | string, number    |      —         |     —    |
+| name | 原生 name 属性 | string    |      —         |     —    |
 | disabled  | 按钮禁用    | boolean   |  — | false   |
 | checked  | 当前是否勾选    | boolean   |  — | false   |
 | indeterminate  | 设置 indeterminate 状态，只负责样式控制    | boolean   |  — | false   |

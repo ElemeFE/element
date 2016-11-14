@@ -107,6 +107,7 @@ Radio with button styles.
 ---- | ---- | ---- | ---- | ----
 label | the value of radio | string/number | — | —
 disabled | whether radio is disabled | boolean | — | false
+name | native 'name' attribute | string    |      —         |     —   
 
 ### Radio-group Attributes
 
