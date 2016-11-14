@@ -1,6 +1,3 @@
-<style scoped>
-</style>
-
 <template>
   <div style="margin: 20px;">
     <!-- Write your component in component.vue -->

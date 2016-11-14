@@ -14,6 +14,9 @@ install-cn:
 dev:
 	npm run dev
 
+play:
+	npm run dev:play
+
 new:
 	node build/bin/new.js $(filter-out $@,$(MAKECMDGOALS))
 
