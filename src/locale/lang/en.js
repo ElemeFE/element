@@ -12,7 +12,7 @@ export default {
       startTime: 'Start Time',
       endDate: 'End Date',
       endTime: 'End Time',
-      year: '',
+      year: ' ',
       month1: 'January',
       month2: 'February',
       month3: 'March',
