@@ -6,7 +6,7 @@ describe('Dialog', () => {
     destroyVM(vm);
   });
 
-  it('create', () => {
+  it('create', done => {
     vm = createVue({
       template: `
         <div>
@@ -22,9 +22,12 @@ describe('Dialog', () => {
       }
     }, true);
     const dialog = vm.$children[0];
-    expect(document.querySelector('.v-modal')).to.exist;
-    expect(vm.$el.querySelector('.el-dialog__title').textContent).to.equal('dialog test');
-    expect(dialog.$el.style.display).to.not.equal('none');
+    setTimeout(() => {
+      expect(document.querySelector('.v-modal')).to.exist;
+      expect(vm.$el.querySelector('.el-dialog__title').textContent).to.equal('dialog test');
+      expect(dialog.$el.style.display).to.not.equal('none');
+      done();
+    }, 10);
   });
 
   it('render correct content', done => {

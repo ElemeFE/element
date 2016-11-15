@@ -1,6 +1,6 @@
 <template>
   <transition name="dialog-fade">
-    <div class="el-dialog__wrapper" v-show="value" @click.self="handleWrapperClick">
+    <div class="el-dialog__wrapper" v-show="visible" @click.self="handleWrapperClick">
       <div
         class="el-dialog"
         :class="[sizeClass, customClass]"
@@ -70,9 +70,18 @@
         default: '15%'
       }
     },
+    data() {
+      return {
+        visible: false
+      };
+    },
 
     watch: {
       value(val) {
+        this.visible = val;
+      },
+      visible(val) {
+        this.$emit('input', val);
         if (val) {
           this.$emit('open');
           this.$nextTick(() => {
@@ -96,7 +105,7 @@
     methods: {
       handleWrapperClick() {
         if (this.closeOnClickModal) {
-          this.$emit('input', false);
+          this.close();
         }
       }
     },
