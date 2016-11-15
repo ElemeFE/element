@@ -114,8 +114,9 @@ const install = function(Vue, opts = {}) {
   Vue.component(Steps.name, Steps);
   Vue.component(Step.name, Step);
 
-  Vue.use(Loading);
+  Vue.use(Loading.directive);
 
+  Vue.prototype.$loading = Loading.service;
   Vue.prototype.$msgbox = MessageBox;
   Vue.prototype.$alert = MessageBox.alert;
   Vue.prototype.$confirm = MessageBox.confirm;
@@ -133,6 +134,8 @@ module.exports = {
   version: '1.0.0',
   locale: locale.use,
   install,
+  Loading: Loading.directive,
+  LoadingService: Loading.service,
   Pagination,
   Dialog,
   Autocomplete,
@@ -175,7 +178,6 @@ module.exports = {
   Alert,
   Notification,
   Slider,
-  Loading,
   Icon,
   Row,
   Col,
