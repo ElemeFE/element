@@ -81,7 +81,9 @@
       return {
         currentValue: this.value,
         coreWidth: this.width,
-        buttonStyle: {}
+        buttonStyle: {
+          transform: ''
+        }
       };
     },
     computed: {
