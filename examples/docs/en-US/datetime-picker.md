@@ -207,9 +207,9 @@ Select date and time in one picker.
 ### Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| readonly | read only | boolean | — | false |
-| disabled | disabled | boolean | - | false |
-| editable | editable | boolean | - | true |
+| readonly | whether DatePicker is read only | boolean | — | false |
+| disabled | whether DatePicker is disabled | boolean | - | false |
+| editable | whether the input is editable | boolean | - | true |
 | placeholder | placeholder | string | — | — |
 | type | type of the picker | string | year/month/date/datetime/week/datetimerange/daterange | date |
 | format | format of the picker | string | year `yyyy` month `MM` day `dd`, <br>hour `HH`, minute `mm`, second `ss` | yyyy-MM-dd |
