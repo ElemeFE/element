@@ -4,6 +4,7 @@
   @b year-table {
     font-size: 12px;
     margin: -1px;
+    border-collapse: collapse;
 
     .el-icon {
       color: var(--datepicker-icon-color);
