@@ -3,6 +3,7 @@
     "lang": "zh-CN",
     "pages": {
       "index": {
+        "lang": "zh-CN",
         "titleSize": "46",
         "theatreSize": "46",
         "paraHeight": "1.8",
@@ -96,6 +97,7 @@
     "lang": "en-US",
     "pages": {
       "index": {
+        "lang": "en-US",
         "titleSize": "50",
         "theatreSize": "42",
         "paraHeight": "1.6",
