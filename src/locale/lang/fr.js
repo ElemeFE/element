@@ -73,7 +73,7 @@ export default {
       continue: 'Continuer'
     },
     table: {
-      emptyText: 'Aucune donné',
+      emptyText: 'Aucune donnée',
       confirmFilter: 'Confirmer',
       resetFilter: 'Réinitialiser',
       clearFilter: 'Tous'
