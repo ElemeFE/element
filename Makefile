@@ -33,7 +33,7 @@ deploy:
 	@npm run deploy
 
 pub:
-	./node_modules/.bin/kp $(filter-out $@,$(MAKECMDGOALS))
+	npm run pub
 
 pub-all:
 	npm run pub:all

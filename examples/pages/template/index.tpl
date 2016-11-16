@@ -179,7 +179,7 @@
             <p><%= 4 ></p>
             <router-link
               active-class="active"
-              to="/guide/design"
+              to="/<%= lang >/guide/design"
               exact><%= 5 >
             </router-link>
           </div>
@@ -191,7 +191,7 @@
             <p><%= 7 ></p>
             <router-link
               active-class="active"
-              to="/component/layout"
+              to="/<%= lang >/component/layout"
               exact><%= 5 >
             </router-link>
           </div>
@@ -203,7 +203,7 @@
             <p><%= 9 ></p>
             <router-link
               active-class="active" 
-              to="/resource"
+              to="/<%= lang >/resource"
               exact><%= 5 >
             </router-link>
           </div>
