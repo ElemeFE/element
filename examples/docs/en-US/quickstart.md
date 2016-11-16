@@ -38,9 +38,7 @@ Typical configurations for these config files are:
 **package.json**
 ```json
 {
-  "name": "my-project",
-  "description": "A Vue.js and Element project",
-  "private": true,
+  "name": "element-starter",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --port 8086",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
@@ -57,9 +55,9 @@ Typical configurations for these config files are:
     "css-loader": "^0.23.1",
     "file-loader": "^0.8.5",
     "style-loader": "^0.13.1",
-    "vue-loader": "^9.5.1",
-    "webpack": "2.1.0-beta.22",
-    "webpack-dev-server": "^2.1.0-beta.0"
+    "vue-loader": "^9.8.0",
+    "webpack": "beta",
+    "webpack-dev-server": "beta"
   }
 }
 ```
@@ -78,31 +76,28 @@ module.exports = {
     publicPath: '/dist/',
     filename: 'build.js'
   },
-  resolveLoader: {
-    root: path.join(__dirname, 'node_modules')
-  },
   module: {
     loaders: [
       {
         test: /\.vue$/,
-        loader: 'vue'
+        loader: 'vue-loader'
       },
       {
         test: /\.js$/,
-        loader: 'babel',
+        loader: 'babel-loader',
         exclude: /node_modules/
       },
       {
         test: /\.css$/,
-        loader: 'style!css'
+        loader: 'style-loader!css-loader'
       },
       {
-        test: /\.(eot|svg|ttf|woff|woff2)$/,
-        loader: 'file'
+        test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
+        loader: 'file-loader'
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file',
+        test: /\.(png|jpe?g|gif|svg)(\?\S*)?$/,
+        loader: 'file-loader',
         query: {
           name: '[name].[ext]?[hash]'
         }
@@ -132,7 +127,6 @@ if (process.env.NODE_ENV === 'production') {
     })
   ])
 }
-
 ```
 
 ### Import Element
