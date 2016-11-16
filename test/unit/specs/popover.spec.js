@@ -45,6 +45,20 @@ describe('Popover', () => {
       }, 250); // 代码里是 200ms
     });
 
+    it('manual', done => {
+      vm = createVM('manual');
+      const compo = vm.$refs.popover;
+      const button = vm.$el.querySelector('button');
+
+      triggerEvent(button, 'mouseenter');
+      expect(compo.showPopper).to.false;
+      triggerEvent(button, 'mouseleave');
+      setTimeout(_ => {
+        expect(compo.showPopper).to.false;
+        done();
+      }, 250); // 代码里是 200ms
+    });
+
     it('focus input in children node', () => {
       vm = createVue(`
         <div>

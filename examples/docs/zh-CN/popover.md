@@ -234,7 +234,7 @@ Popover 的属性与 Tooltip 很类似，它们都是基于`Vue-popper`开发的
 ### Attributes
 | 参数               | 说明                                                     | 类型              | 可选值      | 默认值 |
 |--------------------|----------------------------------------------------------|-------------------|-------------|--------|
-| trigger | 触发方式 | String  | click/focus/hover |    click    |
+| trigger | 触发方式 | String  | click/focus/hover/manual |    click    |
 |  title              | 标题 | String | — | — |
 |  content        |  显示的内容，也可以通过 `slot` 传入 DOM   | String            | — | — |
 |  width        |  宽度  | String, Number            | — | 最小宽度 150px |

@@ -28,7 +28,7 @@ export default {
     trigger: {
       type: String,
       default: 'click',
-      validator: value => ['click', 'focus', 'hover'].indexOf(value) > -1
+      validator: value => ['click', 'focus', 'hover', 'manual'].indexOf(value) > -1
     },
     title: String,
     content: String,
@@ -67,7 +67,7 @@ export default {
       on(popper, 'mouseenter', this.handleMouseEnter);
       on(reference, 'mouseleave', this.handleMouseLeave);
       on(popper, 'mouseleave', this.handleMouseLeave);
-    } else {
+    } else if (this.trigger === 'focus') {
       let found = false;
 
       if ([].slice.call(reference.children).length) {

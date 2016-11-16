@@ -125,7 +125,7 @@ Similar to Tooltip, Popover is also built with `Vue-popper`. So for some duplica
 
 ### Nested information
 
-Other components can be nested in popover. Following is an example of nested table. 
+Other components can be nested in popover. Following is an example of nested table.
 
 :::demo replace the `content` attribute with a default `slot`.
 
@@ -207,7 +207,7 @@ Of course, you can nest other operations. It's more light-weight than using a di
 ### Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |--------------------|----------------------------------------------------------|-------------------|-------------|--------|
-| trigger | how the popover is triggered | string  | click/focus/hover |    click    |
+| trigger | how the popover is triggered | string  | click/focus/hover/manual |    click    |
 |  title              | popover title | string | — | — |
 |  content        |  popover content, can be replaced with a default `slot`    | string            | — | — |
 |  width        |  popover width  | string, number            | — | Min width 150px |
