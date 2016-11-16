@@ -46,7 +46,7 @@
     .el-tooltip__rel {
       display: block;
 
-      .cell > * {
+      .cell {
          white-space: nowrap;
       }
     }
