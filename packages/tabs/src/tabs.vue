@@ -14,7 +14,8 @@
       return {
         children: null,
         activeTab: null,
-        currentName: 0
+        currentName: 0,
+        inited: false
       };
     },
 
@@ -72,8 +73,9 @@
       }
     },
     mounted() {
+      this.currentName = this.activeName || this.$children[0].index || '1';
       this.$nextTick(() => {
-        this.currentName = this.activeName || this.$children[0].index || '1';
+        this.inited = true;
       });
     },
     render(h) {
@@ -110,7 +112,7 @@
         }, [
           tab.label,
           closable ? btnClose : null,
-          index === 0 ? activeBar : null
+          this.inited && index === 0 ? activeBar : null
         ]);
         return _tab;
       });
