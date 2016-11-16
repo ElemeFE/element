@@ -271,6 +271,7 @@
           this.resetDate();
         } else {
           this.date.setMonth(month);
+          this.year && this.date.setFullYear(this.year);
           this.resetDate();
           const value = new Date(this.date.getFullYear(), month, 1);
           this.$emit('pick', value);
