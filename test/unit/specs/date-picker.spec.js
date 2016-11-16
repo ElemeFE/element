@@ -684,7 +684,7 @@ describe('DatePicker', () => {
       vm.picker.value = date;
 
       setTimeout(_ => {
-        expect(vm.picker.date === date).to.true;
+        expect(vm.picker.date.getTime() === date.getTime()).to.true;
         done();
       }, DELAY);
     });
