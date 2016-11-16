@@ -145,8 +145,8 @@
       },
 
       value(newVal) {
-        if (newVal instanceof Date) {
-
+        newVal = new Date(newVal);
+        if (!isNaN(newVal)) {
           if (typeof this.disabledDate === 'function' &&
             this.disabledDate(new Date(newVal))) {
             return;
