@@ -2,16 +2,16 @@ export default {
   el: {
     datepicker: {
       now: 'Maintenant',
-      today: "Aujourd'hui",
+      today: "Auj.",
       cancel: 'Annuler',
       clear: 'Effacer',
       confirm: 'OK',
-      selectDate: 'Sélectionner date',
-      selectTime: 'Sélectionner horaire',
-      startDate: 'Date de début',
-      startTime: 'Horaire de début',
-      endDate: 'Date de fin',
-      endTime: 'Horaire de fin',
+      selectDate: 'Choisir date',
+      selectTime: 'Choisir horaire',
+      startDate: 'Date début',
+      startTime: 'Horaire début',
+      endDate: 'Date fin',
+      endTime: 'Horaire fin',
       year: 'Année',
       month1: 'Janvier',
       month2: 'Février',
@@ -25,7 +25,7 @@ export default {
       month10: 'Octobre',
       month11: 'Novembre',
       month12: 'Décembre',
-      // week: 'week',
+      // week: 'Semaine',
       weeks: {
         sun: 'Dim',
         mon: 'Lun',
@@ -53,8 +53,8 @@ export default {
     select: {
       loading: 'Chargement',
       noMatch: 'Aucune correspondance',
-      noData: 'Aucune donnée',
-      placeholder: 'Sélectionner'
+      noData: 'Aucun résultat',
+      placeholder: 'Choisir'
     },
     pagination: {
       goto: 'Aller à',
