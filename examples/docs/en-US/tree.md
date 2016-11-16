@@ -1,5 +1,5 @@
 <script>
-  var data = [{
+  const data = [{
     label: 'Level one 1',
     children: [{
       label: 'Level two 1-1'
@@ -20,23 +20,17 @@
     }]
   }];
 
-  var regions = [{
+  const regions = [{
     'name': 'region1'
   }, {
     'name': 'region2'
   }];
 
-  var count = 1;
+  let count = 1;
 
-  var props = {
+  const props = {
     label: 'name',
-    children: 'zones',
-    icon(data, node) {
-      if (node.isLeaf) {
-        return 'el-icon-close';
-      }
-      return 'el-icon-search';
-    }
+    children: 'zones'
   };
 
   var defaultProps = {
@@ -53,10 +47,10 @@
         console.log(data);
       },
       loadNode(node, resolve) {
-        if (node.level === -1) {
-          return resolve([{ name: 'region1' }, { name: 'region2' }]);
+        if (node.level === 0) {
+          return resolve([{ name: 'Root1' }, { name: 'Root2' }]);
         }
-        if (node.level > 4) return resolve([]);
+        if (node.level > 3) return resolve([]);
         var hasChild;
         if (node.data.name === 'region1') {
           hasChild = true;
@@ -67,7 +61,7 @@
         }
 
         setTimeout(function() {
-          var data;
+          let data;
           if (hasChild) {
             data = [{
               name: 'zone' + count++
@@ -185,10 +179,10 @@ Used for node selection. In the following example, data for each layer is acquir
         console.log(data);
       },
       loadNode(node, resolve) {
-        if (node.level === -1) {
-          return resolve([{ name: 'region1' }, { name: 'region2' }]);
+        if (node.level === 0) {
+          return resolve([{ name: 'Root1' }, { name: 'Root2' }]);
         }
-        if (node.level > 4) return resolve([]);
+        if (node.level > 3) return resolve([]);
 
         var hasChild;
         if (node.data.name === 'region1') {

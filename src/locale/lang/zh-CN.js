@@ -77,6 +77,9 @@ export default {
       confirmFilter: '筛选',
       resetFilter: '重置',
       clearFilter: '全部'
+    },
+    tree: {
+      emptyText: '暂无数据'
     }
   }
 };

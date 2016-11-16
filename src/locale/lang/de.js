@@ -77,6 +77,9 @@ export default {
       confirmFilter: 'filtern',
       resetFilter: 'rücksetzen',
       clearFilter: 'alles'
+    },
+    tree: {
+      emptyText: 'keine Daten'
     }
   }
 };

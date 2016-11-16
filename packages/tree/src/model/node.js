@@ -1,4 +1,3 @@
-let nodeIdSeed = 0;
 import objectAssign from 'element-ui/src/utils/merge';
 
 const reInitChecked = function(node) {
@@ -27,7 +26,7 @@ const reInitChecked = function(node) {
 };
 
 const getPropertyFromData = function(node, prop) {
-  const props = node.props;
+  const props = node._tree.props;
   const data = node.data || {};
   const config = props[prop];
 
@@ -40,6 +39,8 @@ const getPropertyFromData = function(node, prop) {
   }
 };
 
+let nodeIdSeed = 0;
+
 export default class Node {
   constructor(options) {
     this.id = nodeIdSeed++;
@@ -48,9 +49,7 @@ export default class Node {
     this.indeterminate = false;
     this.data = null;
     this.expanded = false;
-    this.props = null;
     this.parent = null;
-    this.lazy = false;
 
     for (let name in options) {
       if (options.hasOwnProperty(name)) {
@@ -59,7 +58,7 @@ export default class Node {
     }
 
     // internal
-    this.level = -1;
+    this.level = 0;
     this.loaded = false;
     this.childNodes = [];
     this.loading = false;
@@ -68,8 +67,39 @@ export default class Node {
       this.level = this.parent.level + 1;
     }
 
-    if (this.lazy !== true && this.data) {
+    const tree = this._tree;
+    if (!tree) {
+      throw new Error('[Node]_tree is required!');
+    }
+    tree.registerNode(this);
+
+    if (tree.lazy !== true && this.data) {
       this.setData(this.data);
+
+      if (tree.defaultExpandAll) {
+        this.expanded = true;
+      }
+    } else if (this.level > 0 && tree.lazy && tree.defaultExpandAll) {
+      this.expand();
+    }
+
+    if (!this.data) return;
+    const defaultExpandedKeys = tree.defaultExpandedKeys;
+    const key = tree.key;
+    if (key && defaultExpandedKeys && defaultExpandedKeys.indexOf(this.key) !== -1) {
+      if (tree.autoExpandParent) {
+        let parent = this.parent;
+        while (parent.level > 0) {
+          parent.expanded = true;
+          parent = parent.parent;
+        }
+      }
+
+      this.expand();
+    }
+
+    if (tree.lazy) {
+      tree._initDefaultCheckedNode(this);
     }
   }
 
@@ -87,7 +117,7 @@ export default class Node {
     this.childNodes = [];
 
     let children;
-    if (this.level === -1 && this.data instanceof Array) {
+    if (this.level === 0 && this.data instanceof Array) {
       children = this.data;
     } else {
       children = getPropertyFromData(this, 'children') || [];
@@ -106,15 +136,19 @@ export default class Node {
     return getPropertyFromData(this, 'icon');
   }
 
+  get key() {
+    const nodeKey = this._tree.key;
+    if (this.data) return this.data[nodeKey];
+    return null;
+  }
+
   insertChild(child, index) {
     if (!child) throw new Error('insertChild error: child is required.');
 
     if (!(child instanceof Node)) {
       objectAssign(child, {
         parent: this,
-        lazy: this.lazy,
-        load: this.load,
-        props: this.props
+        _tree: this._tree
       });
       child = new Node(child);
     }
@@ -132,6 +166,7 @@ export default class Node {
     const index = this.childNodes.indexOf(child);
 
     if (index > -1) {
+      this._tree && this._tree.deregisterNode(child);
       child.parent = null;
       this.childNodes.splice(index, 1);
     }
@@ -154,14 +189,13 @@ export default class Node {
     if (this.shouldLoadData()) {
       this.loadData((data) => {
         if (data instanceof Array) {
-          callback();
+          this.expanded = true;
+          if (callback) callback();
         }
       });
     } else {
       this.expanded = true;
-      if (callback) {
-        callback();
-      }
+      if (callback) callback();
     }
   }
 
@@ -176,7 +210,7 @@ export default class Node {
   }
 
   shouldLoadData() {
-    return this.lazy === true && this.load && !this.loaded;
+    return this._tree.lazy === true && this._tree.load && !this.loaded;
   }
 
   get isLeaf() {
@@ -185,7 +219,7 @@ export default class Node {
 
   hasChild() {
     const childNodes = this.childNodes;
-    if (!this.lazy || (this.lazy === true && this.loaded === true)) {
+    if (!this._tree.lazy || (this._tree.lazy === true && this.loaded === true)) {
       return childNodes && childNodes.length > 0;
     }
     return true;
@@ -195,7 +229,7 @@ export default class Node {
     this.indeterminate = value === 'half';
     this.checked = value === true;
 
-    const handleDeep = () => {
+    const handleDescendants = () => {
       if (deep) {
         const childNodes = this.childNodes;
         for (let i = 0, j = childNodes.length; i < j; i++) {
@@ -205,28 +239,30 @@ export default class Node {
       }
     };
 
-    if (this.shouldLoadData()) {
+    if (!this._tree.checkStrictly && this.shouldLoadData()) {
       // Only work on lazy load data.
       this.loadData(() => {
-        handleDeep();
+        handleDescendants();
       }, {
         checked: value !== false
       });
     } else {
-      handleDeep();
+      handleDescendants();
     }
 
     const parent = this.parent;
-    if (parent.level === -1) return;
+    if (!parent || parent.level === 0) return;
 
-    reInitChecked(parent);
+    if (!this._tree.checkStrictly) {
+      reInitChecked(parent);
+    }
   }
 
   getChildren() { // this is data
     const data = this.data;
     if (!data) return null;
 
-    const props = this.props;
+    const props = this._tree.props;
     let children = 'children';
     if (props) {
       children = props.children || 'children';
@@ -259,7 +295,7 @@ export default class Node {
   }
 
   loadData(callback, defaultProps = {}) {
-    if (this.lazy === true && this.load && !this.loaded) {
+    if (this._tree.lazy === true && this._tree.load && !this.loaded && !this.loading) {
       this.loading = true;
 
       const resolve = (children) => {
@@ -274,7 +310,7 @@ export default class Node {
         }
       };
 
-      this.load(this, resolve);
+      this._tree.load(this, resolve);
     } else {
       if (callback) {
         callback.call(this);

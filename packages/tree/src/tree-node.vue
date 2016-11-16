@@ -1,9 +1,9 @@
 <template>
   <div class="el-tree-node"
     @click.stop="handleClick"
-    :class="{ expanded: childNodeRendered && expanded, 'is-current': $tree.currentNode === _self }">
+    :class="{ 'is-expanded': childNodeRendered && expanded, 'is-current': $tree.currentNode === _self }">
     <div class="el-tree-node__content"
-      :style="{ 'padding-left': node.level * 16 + 'px' }"
+      :style="{ 'padding-left': (node.level - 1) * 16 + 'px' }"
       @click="handleExpandIconClick">
       <span
         class="el-tree-node__expand-icon"
@@ -18,7 +18,7 @@
       </el-checkbox>
       <span
         v-if="node.loading"
-        class="el-tree-node__icon el-icon-loading">
+        class="el-tree-node__loading-icon el-icon-loading">
       </span>
       <node-content :node="node"></node-content>
     </div>
@@ -29,6 +29,7 @@
         <el-tree-node
           :render-content="renderContent"
           v-for="child in node.childNodes"
+          :key="getNodeKey(child)"
           :node="child">
         </el-tree-node>
       </div>
@@ -89,10 +90,25 @@
 
       'node.checked'(val) {
         this.handleSelectChange(val, this.node.indeterminate);
+      },
+
+      'node.expanded'(val) {
+        this.expanded = val;
+        if (val) {
+          this.childNodeRendered = true;
+        }
       }
     },
 
     methods: {
+      getNodeKey(node, index) {
+        const nodeKey = this.$tree.nodeKey;
+        if (nodeKey && node) {
+          return node.data[nodeKey];
+        }
+        return index;
+      },
+
       handleSelectChange(checked, indeterminate) {
         if (this.oldChecked !== checked && this.oldIndeterminate !== indeterminate) {
           this.$tree.$emit('check-change', this.node.data, checked, indeterminate);
@@ -112,31 +128,27 @@
           target.nodeName.toUpperCase() === 'LABEL') return;
         if (this.expanded) {
           this.node.collapse();
-          this.expanded = false;
         } else {
-          this.node.expand(() => {
-            this.expanded = true;
-            this.childNodeRendered = true;
-          });
+          this.node.expand();
         }
         this.$tree.$emit('node-click', this.node.data, this.node, this);
       },
 
       handleUserClick() {
         if (this.node.indeterminate) {
-          this.node.setChecked(this.node.checked, true);
+          this.node.setChecked(this.node.checked, !this.$tree.checkStrictly);
         }
       },
 
       handleCheckChange(ev) {
         if (!this.node.indeterminate) {
-          this.node.setChecked(ev.target.checked, true);
+          this.node.setChecked(ev.target.checked, !this.$tree.checkStrictly);
         }
       }
     },
 
     created() {
-      var parent = this.$parent;
+      const parent = this.$parent;
 
       if (parent.$isTree) {
         this.$tree = parent;
@@ -157,6 +169,11 @@
       }
 
       this.showCheckbox = tree.showCheckbox;
+
+      if (this.node.expanded) {
+        this.expanded = true;
+        this.childNodeRendered = true;
+      }
     }
   };
 </script>
