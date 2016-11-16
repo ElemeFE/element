@@ -36,7 +36,7 @@ If you are using CDN, a hello-world page is easy with Element. [Online Demo](htt
     </el-dialog>
   </div>
 </body>
-  <!-- import Vue before Mint UI -->
+  <!-- import Vue before Element -->
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
   <!-- import JavaScript -->
   <script src="https://unpkg.com/element-ui/lib/index.js"></script>
