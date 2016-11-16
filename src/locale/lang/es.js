@@ -75,7 +75,7 @@ export default {
     table: {
       emptyText: 'Sin Datos',
       confirmFilter: 'Confirmar',
-      resetFilter: 'Reset',
+      resetFilter: 'Limpiar',
       clearFilter: 'Todo'
     },
     tree: {
