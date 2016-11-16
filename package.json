@@ -44,6 +44,7 @@
   },
   "dependencies": {
     "async-validator": "^1.6.6",
+    "babel-helper-vue-jsx-merge-props": "^2.0.0",
     "deepmerge": "^1.2.0",
     "throttle-debounce": "^1.0.1",
     "vue-popup": "^0.2.10",
@@ -55,7 +56,6 @@
   "devDependencies": {
     "babel-cli": "^6.14.0",
     "babel-core": "^6.14.0",
-    "babel-helper-vue-jsx-merge-props": "^2.0.0",
     "babel-loader": "^6.2.5",
     "babel-plugin-module-resolver": "^2.2.0",
     "babel-plugin-syntax-jsx": "^6.8.0",
