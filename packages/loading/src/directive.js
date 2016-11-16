@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { addClass, removeClass } from 'wind-dom/src/class';
-let Spinner = Vue.extend(require('./spinner.vue'));
+let Mask = Vue.extend(require('./loading.vue'));
 
 exports.install = Vue => {
   let toggleLoading = (el, binding) => {
@@ -11,12 +11,9 @@ exports.install = Vue => {
           el.originalOverflow = document.body.style.overflow;
 
           addClass(el.mask, 'is-fullscreen');
-          addClass(el.spinner, 'is-fullscreen');
-
           insertDom(document.body, el, binding);
         } else {
           removeClass(el.mask, 'is-fullscreen');
-          removeClass(el.spinner, 'is-fullscreen');
 
           if (binding.modifiers.body) {
             el.originalPosition = document.body.style.position;
@@ -39,7 +36,6 @@ exports.install = Vue => {
     } else {
       if (el.domVisible) {
         el.mask.style.display = 'none';
-        el.spinner.style.display = 'none';
         el.domVisible = false;
 
         if (binding.modifiers.fullscreen && el.originalOverflow !== 'hidden') {
@@ -66,29 +62,25 @@ exports.install = Vue => {
         parent.style.overflow = 'hidden';
       }
       directive.mask.style.display = 'block';
-      directive.spinner.style.display = 'inline-block';
       directive.domVisible = true;
 
       parent.appendChild(directive.mask);
-      directive.mask.appendChild(directive.spinner);
       directive.domInserted = true;
     }
   };
 
   Vue.directive('loading', {
     bind: function(el, binding) {
-      el.mask = document.createElement('div');
-      el.mask.className = 'el-loading-mask';
-      el.maskStyle = {};
-
-      let spinner = new Spinner({
+      let mask = new Mask({
+        el: document.createElement('div'),
         data: {
           text: el.getAttribute('element-loading-text'),
-          fullScreen: !!binding.modifiers.fullscreen
+          fullscreen: !!binding.modifiers.fullscreen
         }
       });
-      spinner.$mount(el.mask);
-      el.spinner = spinner.$el;
+      el.mask = mask.$el;
+      el.maskStyle = {};
+
       toggleLoading(el, binding);
     },
 
@@ -102,14 +94,10 @@ exports.install = Vue => {
       if (el.domInserted) {
         if (binding.modifiers.fullscreen || binding.modifiers.body) {
           document.body.removeChild(el.mask);
-          el.mask.removeChild(el.spinner);
         } else {
           el.mask &&
           el.mask.parentNode &&
           el.mask.parentNode.removeChild(el.mask);
-          el.spinner &&
-          el.spinner.parentNode &&
-          el.spinner.parentNode.removeChild(el.spinner);
         }
       }
     }

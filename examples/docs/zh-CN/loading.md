@@ -45,7 +45,7 @@
 
 在表格等容器中加载数据时显示。
 
-:::demo 在 Loading 组件中，Element 准备了自定义命令`v-loading`，只需要绑定`Boolean`即可。默认状况下，Loading 遮罩会插入到绑定元素的子节点，通过添加`body`修饰符，可以使遮罩插入至 DOM 中的 body 上。
+:::demo Element 提供了两种调用 Loading 的方法：指令和服务。对于自定义指令`v-loading`，只需要绑定`Boolean`即可。默认状况下，Loading 遮罩会插入到绑定元素的子节点，通过添加`body`修饰符，可以使遮罩插入至 DOM 中的 body 上。
 ```html
 <template>
   <el-table
@@ -189,3 +189,29 @@
 </script>
 ```
 :::
+
+### 服务
+Loading 还可以以服务的方式调用。引入 Loading 服务：
+```javascript
+import { LoadingService } from 'element-ui';
+```
+在需要调用时：
+```javascript
+LoadingService(options);
+```
+其中 `options` 参数为 Loading 的配置项，具体见下表。`LoadingService` 会返回一个 Loading 实例，可通过调用该实例的 `close` 方法来关闭它：
+```javascript
+let loadingInstance = LoadingService(options);
+loadingInstance.close();
+```
+如果完整引入了 Element，那么 Vue.prototype 上会有一个全局方法 `$loading`，它的调用方式为：`this.$loading(options)`，同样会返回一个 Loading 实例。
+
+### Options
+| 参数      | 说明          | 类型      | 可选值                           | 默认值  |
+|---------- |-------------- |---------- |--------------------------------  |-------- |
+| target | Loading 需要覆盖的 DOM 节点。可传入一个 DOM 对象或字符串；<br>若传入字符串，则会将其作为参数传入 `document.querySelector`<br>以获取到对应 DOM 节点 | object/string | — | document.body |
+| body | 同 `v-loading` 指令中的 `body` 修饰符 | boolean | — | false |
+| fullscreen | 同 `v-loading` 指令中的 `fullscreen` 修饰符 | boolean | — | true |
+| lock | 同 `v-loading` 指令中的 `lock` 修饰符 | boolean | — | false |
+| text | 显示在加载图标下方的加载文案 | string | — | — |
+| customClass | Loading 的自定义类名 | string | — | — |

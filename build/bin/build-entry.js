@@ -19,8 +19,9 @@ const install = function(Vue, opts = {}) {
 
 {{install}}
 
-  Vue.use(Loading);
+  Vue.use(Loading.directive);
 
+  Vue.prototype.$loading = Loading.service;
   Vue.prototype.$msgbox = MessageBox;
   Vue.prototype.$alert = MessageBox.alert;
   Vue.prototype.$confirm = MessageBox.confirm;
@@ -38,6 +39,8 @@ module.exports = {
   version: '{{version}}',
   locale: locale.use,
   install,
+  Loading: Loading.directive,
+  LoadingService: Loading.service,
 {{list}}
 };
 `;
@@ -65,7 +68,7 @@ ComponentNames.forEach(name => {
     }));
   }
 
-  listTemplate.push(`  ${componentName}`);
+  if (componentName !== 'Loading') listTemplate.push(`  ${componentName}`);
 });
 
 var template = render(MAIN_TEMPLATE, {

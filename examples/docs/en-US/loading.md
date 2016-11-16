@@ -40,7 +40,7 @@ Show animation while loading data.
 
 Displays animation in a container (such as a table) while loading data.
 
-:::demo We provide a custom directive `v-loading`. You just need to bind a `boolean` value to it. By default, the loading mask will append to the element where the directive is used. Adding the `body` modifier makes the mask append to the body element.
+:::demo Element provides two ways to invoke Loading: directive and service. For the custom directive `v-loading`, you just need to bind a `boolean` value to it. By default, the loading mask will append to the element where the directive is used. Adding the `body` modifier makes the mask append to the body element.
 
 ```html
 <template>
@@ -100,7 +100,7 @@ Displays animation in a container (such as a table) while loading data.
 
 You can customize a text message.
 
-:::demo
+:::demo Add attribute `element-loading-text` to the element on which `v-loading` is bound, and its value will be displayed under the spinner.
 ```html
 <template>
   <el-table
@@ -186,3 +186,28 @@ Show a full screen animation while loading data.
 ```
 :::
 
+### Service
+You can also invoke Loading with a service. Import Loading service:
+```javascript
+import { LoadingService } from 'element-ui';
+```
+Invoke it:
+```javascript
+LoadingService(options);
+```
+The parameter `options` is the configuration of Loading, and its details can be found in the following table. `LoadingService` returns a Loading instance, and you can close it by invoking its `close` method:
+```javascript
+let loadingInstance = LoadingService(options);
+loadingInstance.close();
+```
+If Element is imported entirely, a globally method `$loading` will be registered to Vue.prototype. You can invoke it like this: `this.$loading(options)`, and it also returns a Loading instance.
+
+### Options
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
+|---------- |-------------- |---------- |--------------------------------  |-------- |
+| target | the DOM node Loading needs to cover. Accepts a DOM object or a string. If it's a string, it will be passed to `document.querySelector` to get the corresponding DOM node | object/string | — | document.body |
+| body | same as the `body` modifier of `v-loading` | boolean | — | false |
+| fullscreen | same as the `fullscreen` modifier of `v-loading` | boolean | — | true |
+| lock | same as the `lock` modifier of `v-loading` | boolean | — | false |
+| text | loading text that displays under the spinner | string | — | — |
+| customClass | custom class name for Loading | string | — | — |
