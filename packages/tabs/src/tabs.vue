@@ -72,8 +72,9 @@
       }
     },
     mounted() {
+      this.currentName = this.activeName || this.$children[0].index || '1';
       this.$nextTick(() => {
-        this.currentName = this.activeName || this.$children[0].index || '1';
+        this.$forceUpdate();
       });
     },
     render(h) {
