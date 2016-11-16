@@ -2,7 +2,7 @@ export default {
   el: {
     datepicker: {
       now: 'Maintenant',
-      today: "Auj.",
+      today: 'Auj.',
       cancel: 'Annuler',
       clear: 'Effacer',
       confirm: 'OK',
