@@ -2,13 +2,7 @@
   export default {
     data() {
       return {
-        activeName: 'first',
-        tabs: [
-          {label: 'User', content: '', name: 'first'},
-          {label: 'Config', content: '', name: 'second'},
-          {label: 'Role', content: '', name: 'third'},
-          {label: 'Task', content: '', name: 'last'}
-        ]
+        activeName: 'first'
       }
     },
     methods: {
@@ -35,20 +29,17 @@ Basic and concise tabs.
 ```html
 <template>
   <el-tabs :active-name="activeName">
-      <el-tab-pane v-for="tab in tabs" :label="tab.label" :name="tab.name">{{tab.content}}</el-tab-pane>
-    </el-tabs>
+    <el-tab-pane label="User" name="first">User</el-tab-pane>
+    <el-tab-pane label="Config" name="second">Config</el-tab-pane>
+    <el-tab-pane label="Role" name="third">Role</el-tab-pane>
+    <el-tab-pane label="Task" name="fourth">Task</el-tab-pane>
+  </el-tabs>
 </template>
 <script>
   export default {
     data() {
       return {
-        activeName: 'first',
-        tabs: [
-          {label: 'User', content: '', name: 'first'},
-          {label: 'Config', content: '', name: 'second'},
-          {label: 'Role', content: '', name: 'third'},
-          {label: 'Task', content: '', name: 'last'}
-        ]
+        activeName: 'first'
       };
     }
   };
@@ -65,10 +56,10 @@ Tabs styled as cards.
 ```html
 <template>
   <el-tabs type="card" @tab-click="handleClick" @tab-remove="handleRemove">
-    <el-tab-pane label="User"></el-tab-pane>
-    <el-tab-pane label="Config"></el-tab-pane>
-    <el-tab-pane label="Role"></el-tab-pane>
-    <el-tab-pane label="Task"></el-tab-pane>
+    <el-tab-pane label="User">User</el-tab-pane>
+    <el-tab-pane label="Config">Config</el-tab-pane>
+    <el-tab-pane label="Role">Role</el-tab-pane>
+    <el-tab-pane label="Task">Task</el-tab-pane>
   </el-tabs>
 </template>
 <script>
@@ -95,10 +86,10 @@ Closable tabs.
 ```html
 <template>
   <el-tabs type="card" :closable="true" @tab-click="handleClick" @tab-remove="handleRemove">
-    <el-tab-pane label="User"></el-tab-pane>
-    <el-tab-pane label="Config"></el-tab-pane>
-    <el-tab-pane label="Role"></el-tab-pane>
-    <el-tab-pane label="Task"></el-tab-pane>
+    <el-tab-pane label="User">User</el-tab-pane>
+    <el-tab-pane label="Config">Config</el-tab-pane>
+    <el-tab-pane label="Role">Role</el-tab-pane>
+    <el-tab-pane label="Task">Task</el-tab-pane>
   </el-tabs>
 </template>
 <script>
@@ -125,10 +116,10 @@ Border card tabs.
 
 ```html
 <el-tabs type="border-card">
-  <el-tab-pane label="User"></el-tab-pane>
-  <el-tab-pane label="Config"></el-tab-pane>
-  <el-tab-pane label="Role"></el-tab-pane>
-  <el-tab-pane label="Task"></el-tab-pane>
+  <el-tab-pane label="User">User</el-tab-pane>
+  <el-tab-pane label="Config">Config</el-tab-pane>
+  <el-tab-pane label="Role">Role</el-tab-pane>
+  <el-tab-pane label="Task">Task</el-tab-pane>
 </el-tabs>
 ```
 

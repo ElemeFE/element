@@ -2,13 +2,7 @@
   export default {
     data() {
       return {
-        activeName: 'first',
-        tabs: [
-          {label: '用户管理', content: '', name: 'first'},
-          {label: '配置管理', content: '', name: 'second'},
-          {label: '角色管理', content: '', name: 'third'},
-          {label: '定时任务补偿', content: '', name: 'last'}
-        ]
+        activeName: 'first'
       }
     },
     methods: {
@@ -33,20 +27,17 @@
 ```html
 <template>
   <el-tabs :active-name="activeName">
-    <el-tab-pane v-for="tab in tabs" :label="tab.label" :name="tab.name">{{tab.content}}</el-tab-pane>
+    <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
+    <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
+    <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
+    <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
   </el-tabs>
 </template>
 <script>
   export default {
     data() {
       return {
-        activeName: 'first',
-        tabs: [
-          {label: '用户管理', content: '', name: 'first'},
-          {label: '配置管理', content: '', name: 'second'},
-          {label: '角色管理', content: '', name: 'third'},
-          {label: '定时任务补偿', content: '', name: 'last'}
-        ]
+        activeName: 'first'
       };
     }
   };
@@ -63,10 +54,10 @@
 ```html
 <template>
   <el-tabs type="card" @tab-click="handleClick" @tab-remove="handleRemove">
-    <el-tab-pane label="用户管理"></el-tab-pane>
-    <el-tab-pane label="配置管理"></el-tab-pane>
-    <el-tab-pane label="角色管理"></el-tab-pane>
-    <el-tab-pane label="定时任务补偿"></el-tab-pane>
+    <el-tab-pane label="用户管理">用户管理</el-tab-pane>
+    <el-tab-pane label="配置管理">配置管理</el-tab-pane>
+    <el-tab-pane label="角色管理">角色管理</el-tab-pane>
+    <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
   </el-tabs>
 </template>
 <script>
@@ -93,10 +84,10 @@
 ```html
 <template>
   <el-tabs type="card" :closable="true" @tab-click="handleClick" @tab-remove="handleRemove">
-    <el-tab-pane label="用户管理"></el-tab-pane>
-    <el-tab-pane label="配置管理"></el-tab-pane>
-    <el-tab-pane label="角色管理"></el-tab-pane>
-    <el-tab-pane label="定时任务补偿"></el-tab-pane>
+    <el-tab-pane label="用户管理">用户管理</el-tab-pane>
+    <el-tab-pane label="配置管理">配置管理</el-tab-pane>
+    <el-tab-pane label="角色管理">角色管理</el-tab-pane>
+    <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
   </el-tabs>
 </template>
 <script>
@@ -121,10 +112,10 @@
 :::demo 将`type`设置为`border-card`。
 ```html
 <el-tabs type="border-card">
-  <el-tab-pane label="用户管理"></el-tab-pane>
-  <el-tab-pane label="配置管理"></el-tab-pane>
-  <el-tab-pane label="角色管理"></el-tab-pane>
-  <el-tab-pane label="定时任务补偿"></el-tab-pane>
+  <el-tab-pane label="用户管理">用户管理</el-tab-pane>
+  <el-tab-pane label="配置管理">配置管理</el-tab-pane>
+  <el-tab-pane label="角色管理">角色管理</el-tab-pane>
+  <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
 </el-tabs>
 ```
 :::
