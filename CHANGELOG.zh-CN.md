@@ -1,21 +1,30 @@
 ## 更新日志
 
 ### 1.0.1
-*2016-XX-XX*
+*2016-11-16*
 
 - 修复 Pagination 错误地多次触发 `current-change` 事件的问题
 - 修复 Switch 在 Form 中的样式错误，#967
 - 修复 Loading 在某些情况下错误地锁定 `body` 滚动的问题，#968
 - Col 组件的 `span` 属性不再是必填属性，在省略的情况下其默认值为 `24`
-- 新增 DatePicker `disabled` 和 `editable` 属性, #976
-- 修复 DatePicker 的 `readonly` 与原生行为一致，现在通过设置 editable=false 禁止输入但是可通过弹框选日期, #976
+- 新增 DatePicker `disabled` 和 `editable` 属性，#976
+- 修复 DatePicker 的 `readonly` 与原生行为一致，现在通过设置 editable=false 禁止输入但是可通过弹框选日期，#976
 - 新增 Message 和 Notification 的 `close` 方法，用于手动关闭实例
-- 新增 DatePicker 清除功能, #759
-- 修复 Form 重置日期报错, #937
+- 新增 DatePicker 清除功能，#759
+- 修复 Form 重置日期报错，#937
+- 修复 Tab 设置active-name不是首个tab时的样式问题，#1034
 - 修复 Table 的 inline-template 在 vue-loader 9.9.0 渲染报错
-- 新增 Step 支持内容居中对齐, #994
-- 修复 Upload 单独引入时提示 progress 组件不存在, #1013
+- 新增 Step 支持内容居中对齐，#994
+- 修复 Upload 单独引入时提示 Progress 组件不存在，#1013
 - Layout 支持响应式布局
+- 新增 Dialog `show-close` 属性
+- 修复 和 `vue-i18n` 一起使用时，未初始化 i18n 会报错，#973
+- 修复 DatePicker 设置初始值后界面未更新 #1050
+- 修复 DatePicker 月份选择器直接切换年份并未更新年份数据 #1070
+- 新增 $loading 服务，用以调用 Loading
+- 新增 Popover 可手动控制显示隐藏，将 trigger 设置为 `manual`
+- 新增 Tree 的 `nodeKey` `emptyText` `checkStrictly` `defaultExpandAll` `autoExpandParent` `defaultCheckedKeys` `defaultExpandedKeys` 属性，`setCheckedNodes` 方法。
+
 
 ### 1.0.0
 
