@@ -1,9 +1,9 @@
-## FAQ
+## 常见问题
 
 <details>
 <summary>给组件绑定的事件为什么无法触发？</summary>
 
-在 Vue 2.0 中，为自定义组件绑定原生事件必须使用 `.native` 修饰符：
+在 Vue 2.0 中，为**自定义**组件绑定**原生**事件必须使用 `.native` 修饰符：
 ```html
 <my-component @click.native="handleClick">Click Me</my-component>
 ```
@@ -37,7 +37,7 @@
 <details>
 <summary>你们的文档怎么偷偷更新了？</summary>
 
-我们只会在 Element 发布新版本时同步更新文档，以体现最新的变化。详细的更新内容可以查看 [changelog](https://github.com/ElemeFE/element/blob/master/CHANGELOG.md)。
+我们只会在 Element 发布新版本时同步更新文档，以体现最新的变化。详细的更新内容可以查看 [changelog](https://github.com/ElemeFE/element/blob/master/CHANGELOG.zh-CN.md)。
 </details>
 
 <details>
@@ -56,6 +56,70 @@ npm run dev
 ```
 
 或是直接打包：
+
+```bash
+npm run dist
+```
+</details>
+
+## FAQ
+
+<details>
+<summary>Why are my event listeners not working?</summary>
+
+In Vue 2.0, adding **native** event handlers in **custom** components requires a `.native` modifier:
+```html
+<my-component @click.native="handleClick">Click Me</my-component>
+```
+
+For the sake of usability, we processed `Button` so it can listen to `click` events:
+```html
+<el-button @click="handleButtonClick">Click Me</el-button>
+```
+
+For other components, the `.native` modifier is still mandatory.
+</details>
+
+<details>
+<summary>How do I add buttons in each row of Table to operate data of that row?</summary>
+
+Just use `inline-template`:
+```html
+<el-table-column label="Operations" inline-template>
+  <el-button @click.native="showDetail(row)">Details</el-button>
+</el-table-column>
+```
+The parameter `row` is the data object of corresponding row.
+</details>
+
+<details>
+<summary>How do `render-content` of Tree and `render-header` of Table work?</summary>
+
+Please refer to [Render Function](http://vuejs.org/v2/guide/render-function.html) in Vue's documentation. In addition, if you are writing render functions with JSX, `babel-plugin-transform-vue-jsx` is required. See [here](https://github.com/vuejs/babel-plugin-transform-vue-jsx) for its configurations.
+</details>
+
+<details>
+<summary>When do you update documentations of Element?</summary>
+
+We update documentations only when a new version of Element is published so that it reflects all the changes introduced in that version. Updated changed can be found in the [changelog](https://github.com/ElemeFE/element/blob/master/CHANGELOG.en-US.md)。
+</details>
+
+<details>
+<summary>I imported Element in my project, but why does it report CSS error/font file error/components have no style?</summary>
+
+Please refer to our [starter kit](https://github.com/ElementUI/element-starter) and correctly configure file-loader, css-loader and style-loader in webpack config file. Besides, we also provide templated based on [cooking](https://github.com/ElementUI/element-cooking-starter) and [laravel](https://github.com/ElementUI/element-in-laravel-starter).
+</details>
+
+<details>
+<summary>I cloned Element's repo, but failed to run it. How do I solve it?</summary>
+
+First, please make sure to clone the latest code in master branch and cloned files are intact. Then, note that the version of Nodejs should be 4.0+ and npm 3.0+. Finally, activate development:
+
+```bash
+npm run dev
+```
+
+or build it:
 
 ```bash
 npm run dist

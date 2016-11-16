@@ -9,7 +9,7 @@ import MainFooter from './components/footer.vue';
 import MainHeader from './components/header.vue';
 import SideNav from './components/side-nav';
 import FooterNav from './components/footer-nav';
-import title from './i18n/title';
+import title from './i18n/title.json';
 
 Vue.use(Element);
 Vue.use(VueRouter);

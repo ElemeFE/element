@@ -19,7 +19,7 @@
 |- index.html  --------------- HTML 模板
 |- package.json  ------------- npm 配置文件
 |- README.md  ---------------- 项目帮助文档
-|- webpack.config.js  ------ webpack 配置文件
+|- webpack.config.js  -------- webpack 配置文件
 ```
 
 几个配置文件的典型配置如下：
