@@ -218,11 +218,18 @@ Used for node selection. In the following example, data for each layer is acquir
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | data     | tree data | array | — | — |
+| empty-text | text displayed when data is void | string | — | — |
+| node-key | unique identity key name for nodes, its value should be unique across the whole tree | string | — | — |
 | props | configuration options, see the following table | object | — | — |
 | load | method for loading subtree data | function(node, resolve) | — | — |
-| show-checkbox | whether node is selectable | boolean | — | false |
 | render-content | render function for tree node | Function(h, { node } | - | - |
 | highlight-current | whether current node is highlighted | boolean | - | false |
+| default-expand-all | whether to expand all nodes by default | boolean | - | false |
+| auto-expand-parent | whether to expand father node when a child node is expanded | boolean | — | true |
+| default-expand-keys | array of keys of initially expanded nodes | array | — | — |
+| show-checkbox | whether node is selectable | boolean | — | false |
+| check-strictly | whether checked state of a node not affects its father and child nodes when `show-checkbox` is `true` | boolean | — | false |
+| default-checked-keys | array of keys of initially checked nodes | array | — | — |
 
 ### props
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
@@ -235,6 +242,7 @@ Used for node selection. In the following example, data for each layer is acquir
 | Method      | Description    | Parameters     |
 |---------- |-------- |---------- |
 | getCheckedNodes | If the node can be selected (`show-checkbox` is `true`), it returns the currently selected array of nodes | Accept a boolean type parameter whose default value is `false`. <br>If the parameter is `true`, it only returns the currently selected array of sub-nodes.|
+| setCheckedNodes | set certain nodes to be checked, only works when `node-key` is assigned | an array of nodes to be checked |
 
 ### Events
 | Event Name | Description | Parameters |
