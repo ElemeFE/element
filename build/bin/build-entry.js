@@ -39,8 +39,7 @@ module.exports = {
   version: '{{version}}',
   locale: locale.use,
   install,
-  Loading: Loading.directive,
-  LoadingService: Loading.service,
+  Loading,
 {{list}}
 };
 `;
