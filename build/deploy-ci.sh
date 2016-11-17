@@ -1,15 +1,16 @@
 #! /bin/sh
 mkdir temp_web
+git config --global user.name "element_bot"
+git config --global user.email "element_bot"
 
 # build dev site
-if [ "$TRAVIS_BRANCH" = "master" ] && [ "$GH_TOKEN" ]; then
-  npm run deploy:dev
+if [ "$GH_TOKEN" ]; then
+  npm run build:file && CI_ENV=/dev/$TRAVIS_BRANCH/ node_modules/.bin/cooking build -c build/cooking.demo.js
   cd temp_web
   git clone https://$GH_TOKEN@github.com/ElementUI/dev.git && cd dev
-  git config user.name "element_bot"
-  git config user.email "element_bot"
-  rm -rf `find * ! -name README.md`
-  cp -rf ../../examples/element-ui/** .
+  mkdir $TRAVIS_BRANCH
+  rm -rf $TRAVIS_BRANCH/**
+  cp -rf ../../examples/element-ui/** $TRAVIS_BRANCH/
   git add -A .
   git commit -m "$TRAVIS_COMMIT_MSG"
   git push origin master
@@ -17,26 +18,25 @@ if [ "$TRAVIS_BRANCH" = "master" ] && [ "$GH_TOKEN" ]; then
 fi
 
 # push theme-default
-if [ "$TRAVIS_BRANCH" = "master" ] && [ "$GH_TOKEN" ]; then
+if [ "$GH_TOKEN" ]; then
   cd temp_web
-  git clone https://$GH_TOKEN@github.com/ElementUI/theme-default.git && cd theme-default
-  git config user.name "element_bot"
-  git config user.email "element_bot"
+  git clone -b $TRAVIS_BRANCH https://$GH_TOKEN@github.com/ElementUI/theme-default.git && cd theme-default
   rm -rf *
   cp -rf ../../packages/theme-default/** .
   git add -A .
   git commit -m "$TRAVIS_COMMIT_MSG"
-  git push origin master --tags
+  git push origin $TRAVIS_BRANCH
   cd ../..
 fi
 
 if [ "$TRAVIS_TAG" ] && [ "$GH_TOKEN" ]; then
+  # site sub folder
+  SUB_FOLDER=$(echo $TRAVIS_TAG | grep -o -E '^\d+\.\d+')
+
   # build lib
   npm run dist
   cd temp_web
   git clone https://$GH_TOKEN@github.com/ElementUI/lib.git && cd lib
-  git config user.name "element_bot"
-  git config user.email "element_bot"
   rm -rf `find * ! -name README.md`
   cp -rf ../../lib/** .
   git add -A .
@@ -48,8 +48,6 @@ if [ "$TRAVIS_TAG" ] && [ "$GH_TOKEN" ]; then
   # build theme-default
   cd temp_web
   git clone https://$GH_TOKEN@github.com/ElementUI/theme-default.git && cd theme-default
-  git config user.name "element_bot"
-  git config user.email "element_bot"
   rm -rf *
   cp -rf ../../packages/theme-default/** .
   git add -A .
@@ -61,12 +59,14 @@ if [ "$TRAVIS_TAG" ] && [ "$GH_TOKEN" ]; then
   # build site
   npm run deploy:build
   cd temp_web
-  git clone https://$GH_TOKEN@github.com/ElemeFE/element.git && cd element
-  git config user.name "element_bot"
-  git config user.email "element_bot"
-  git checkout gh-pages
-  rm -rf `find * ! -name README.md`
+  git clone -b gh-pages https://$GH_TOKEN@github.com/ElemeFE/element.git && cd element
+
+  # only remove files
+  mkdir $SUB_FOLDER
+  rm -f *
+  rm -rf $SUB_FOLDER/**
   cp -rf ../../examples/element-ui/** .
+  cp -rf ../../examples/element-ui/** $SUB_FOLDER/
   git add -A .
   git commit -m "$TRAVIS_COMMIT_MSG"
   git push origin gh-pages
