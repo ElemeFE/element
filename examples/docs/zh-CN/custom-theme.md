@@ -63,7 +63,7 @@ node_modules/.bin/et
 默认情况下编译的主题目录是放在 `./theme` 下，你可以通过 `-o` 参数指定打包目录。像引入默认主题一样，在代码里直接引用 `theme/index.css` 文件即可。
 
 ```javascript
-import './theme/index.css'
+import '../theme/index.css'
 import ElementUI from 'element-ui'
 import Vue from 'vue'
 
