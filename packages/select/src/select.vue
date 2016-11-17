@@ -149,7 +149,9 @@
       multiple: Boolean,
       placeholder: {
         type: String,
-        default: t('el.select.placeholder')
+        default() {
+          return t('el.select.placeholder');
+        }
       }
     },
 

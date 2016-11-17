@@ -63,6 +63,7 @@ export default {
       pageClassifier: ''
     },
     messagebox: {
+      title: 'Message',
       confirm: 'OK',
       cancel: 'Cancel',
       error: 'Illegal input'

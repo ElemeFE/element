@@ -25,7 +25,9 @@
       },
       emptyText: {
         type: String,
-        default: t('el.tree.emptyText')
+        default() {
+          return t('el.tree.emptyText');
+        }
       },
       nodeKey: String,
       checkStrictly: Boolean,
