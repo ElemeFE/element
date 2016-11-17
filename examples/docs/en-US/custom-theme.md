@@ -63,7 +63,7 @@ node_modules/.bin/et
 By default the build theme file is placed inside `./theme`. You can specify its output directory with parameter `-o`. Importing your own theme is just like importing the default theme, only this time you import the file you just built:
 
 ```javascript
-import './theme/index.css'
+import '../theme/index.css'
 import ElementUI from 'element-ui'
 import Vue from 'vue'
 
