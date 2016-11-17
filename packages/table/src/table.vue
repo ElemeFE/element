@@ -137,7 +137,9 @@
 
       emptyText: {
         type: String,
-        default: t('el.table.emptyText')
+        default() {
+          return t('el.table.emptyText');
+        }
       }
     },
 
