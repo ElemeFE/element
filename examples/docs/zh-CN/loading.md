@@ -193,15 +193,15 @@
 ### 服务
 Loading 还可以以服务的方式调用。引入 Loading 服务：
 ```javascript
-import { LoadingService } from 'element-ui';
+import { Loading } from 'element-ui';
 ```
 在需要调用时：
 ```javascript
-LoadingService(options);
+Loading.service(options);
 ```
 其中 `options` 参数为 Loading 的配置项，具体见下表。`LoadingService` 会返回一个 Loading 实例，可通过调用该实例的 `close` 方法来关闭它：
 ```javascript
-let loadingInstance = LoadingService(options);
+let loadingInstance = Loading.service(options);
 loadingInstance.close();
 ```
 如果完整引入了 Element，那么 Vue.prototype 上会有一个全局方法 `$loading`，它的调用方式为：`this.$loading(options)`，同样会返回一个 Loading 实例。

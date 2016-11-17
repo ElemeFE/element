@@ -152,7 +152,7 @@ You can customize a text message.
 
 ### Full screen loading
 
-Show a full screen animation while loading data.  
+Show a full screen animation while loading data.
 
 :::demo Add the `fullscreen` modifier to create a full screen mask, and it will append to body. In this case, if you disable scrolling on body, you add another modifier `lock`.
 
@@ -189,15 +189,15 @@ Show a full screen animation while loading data.
 ### Service
 You can also invoke Loading with a service. Import Loading service:
 ```javascript
-import { LoadingService } from 'element-ui';
+import { Loading } from 'element-ui';
 ```
 Invoke it:
 ```javascript
-LoadingService(options);
+Loading.service(options);
 ```
 The parameter `options` is the configuration of Loading, and its details can be found in the following table. `LoadingService` returns a Loading instance, and you can close it by invoking its `close` method:
 ```javascript
-let loadingInstance = LoadingService(options);
+let loadingInstance = Loading.service(options);
 loadingInstance.close();
 ```
 If Element is imported entirely, a globally method `$loading` will be registered to Vue.prototype. You can invoke it like this: `this.$loading(options)`, and it also returns a Loading instance.
