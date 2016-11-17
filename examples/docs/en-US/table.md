@@ -144,7 +144,7 @@
   };
 </script>
 
-## Table 
+## Table
 
 Display multiple data with similar format. You can sort, filter, compare your data in a table.
 
@@ -460,7 +460,7 @@ When there are too many rows, you can use a fixed header.
 ```
 :::
 
-### Table with fixed column 
+### Table with fixed column
 
 When there are too many columns, you can fix some of them.
 
@@ -559,7 +559,7 @@ When there are too many columns, you can fix some of them.
 ```
 :::
 
-### Table with fixed columns and header 
+### Table with fixed columns and header
 
 When you have huge chunks of data to put in a table, you can fix the header and columns at the same time.
 
@@ -1005,7 +1005,7 @@ Filter the table to find desired data.
 | resizable | whether column width can be resized, works when `border` of `el-table` is `true` | boolean | — | false |
 | formatter | function that formats content | Function(row, column) | — | — |
 | show-overflow-tooltip | whether to hide extra content and show them in a tooltip when hovering on the cell | boolean | — | false |
-| inline-template | by using this attribute, you can customize column template. Row data can be accessed by `row` object, and current context can be accessed by `_self` in JSX. In this case you don't need to set `prop`. In your template, you have access to the following: `{ row (current row), column (current column), $index (row index), _self( context), store (table store) }` | — | — |
+| inline-template | by using this attribute, you can customize column template. Row data can be accessed by `row` object. In your template, you have access to the following: `{ row (current row), column (current column), $index (row index), store (table store) }` and the context where Table lies | — | — |
 | align | alignment | string | left/center/right | left |
 | class-name | class name of cells in the column | string | — | — |
 | selectable | function that determines if a certain row can be selected, works when `type` is 'selection' | Function(row, index) | — | — |
