@@ -1,13 +1,13 @@
 #! /bin/sh
 mkdir temp_web
-git config --global user.name "element_bot"
-git config --global user.email "element_bot"
+git config --global user.name "element-bot"
+git config --global user.email "wallement@gmail.com"
 
 # build dev site
-if [ "$GH_TOKEN" ]; then
+if [ "$ROT_TOKEN" ]; then
   npm run build:file && CI_ENV=/dev/$TRAVIS_BRANCH/ node_modules/.bin/cooking build -c build/cooking.demo.js
   cd temp_web
-  git clone https://$GH_TOKEN@github.com/ElementUI/dev.git && cd dev
+  git clone https://$ROT_TOKEN@github.com/ElementUI/dev.git && cd dev
   mkdir $TRAVIS_BRANCH
   rm -rf $TRAVIS_BRANCH/**
   cp -rf ../../examples/element-ui/** $TRAVIS_BRANCH/
@@ -18,9 +18,9 @@ if [ "$GH_TOKEN" ]; then
 fi
 
 # push theme-default
-if [ "$GH_TOKEN" ]; then
+if [ "$ROT_TOKEN" ]; then
   cd temp_web
-  git clone -b $TRAVIS_BRANCH https://$GH_TOKEN@github.com/ElementUI/theme-default.git && cd theme-default
+  git clone -b $TRAVIS_BRANCH https://$ROT_TOKEN@github.com/ElementUI/theme-default.git && cd theme-default
   rm -rf *
   cp -rf ../../packages/theme-default/** .
   git add -A .
@@ -29,14 +29,14 @@ if [ "$GH_TOKEN" ]; then
   cd ../..
 fi
 
-if [ "$TRAVIS_TAG" ] && [ "$GH_TOKEN" ]; then
+if [ "$TRAVIS_TAG" ] && [ "$ROT_TOKEN" ]; then
   # site sub folder
   SUB_FOLDER=$(echo $TRAVIS_TAG | grep -o -E '^\d+\.\d+')
 
   # build lib
   npm run dist
   cd temp_web
-  git clone https://$GH_TOKEN@github.com/ElementUI/lib.git && cd lib
+  git clone https://$ROT_TOKEN@github.com/ElementUI/lib.git && cd lib
   rm -rf `find * ! -name README.md`
   cp -rf ../../lib/** .
   git add -A .
@@ -47,7 +47,7 @@ if [ "$TRAVIS_TAG" ] && [ "$GH_TOKEN" ]; then
 
   # build theme-default
   cd temp_web
-  git clone https://$GH_TOKEN@github.com/ElementUI/theme-default.git && cd theme-default
+  git clone https://$ROT_TOKEN@github.com/ElementUI/theme-default.git && cd theme-default
   rm -rf *
   cp -rf ../../packages/theme-default/** .
   git add -A .
@@ -59,7 +59,7 @@ if [ "$TRAVIS_TAG" ] && [ "$GH_TOKEN" ]; then
   # build site
   npm run deploy:build
   cd temp_web
-  git clone -b gh-pages https://$GH_TOKEN@github.com/ElemeFE/element.git && cd element
+  git clone -b gh-pages https://$ROT_TOKEN@github.com/ElemeFE/element.git && cd element
 
   # only remove files
   mkdir $SUB_FOLDER
