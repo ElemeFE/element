@@ -170,6 +170,7 @@
 | **title** | 标题，**必选参数** | string | — | — |
 | type | 主题 | string | success/warning/info/error | info |
 | description | 辅助性文字 | string | — | — |
+| render-content | 内容区域的渲染函数，会覆盖 `description` | function(h) | — | — |
 | closable | 是否可关闭 | boolean | — | true |
 | close-text | 关闭按钮自定义文本 | string | — | — |
 | show-icon | 是否显示图标 | boolean | — | false |

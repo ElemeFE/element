@@ -166,6 +166,7 @@ Description includes a message with more detailed information.
 | **title** | title **REQUIRED** | string | — | — |
 | type | component type | string | success/warning/info/error | info |
 | description | supportive text | string | — | — |
+| render-content | render function for content area, overrides `description` | function(h) | — | — |
 | closable | if closable or not | boolean | — | true |
 | close-text | customized close button text | string | — | — |
 | show-icon | if a type icon is displayed | boolean | — | false |

@@ -36,6 +36,35 @@ describe('Alert', () => {
       .to.equal('Unbowed, Unbent, Unbroken');
   });
 
+  it('render-content', () => {
+    vm = createVue({
+      data() {
+        return {
+          text: 'test'
+        };
+      },
+      template: `
+        <div>
+          <el-alert
+            title="test"
+            :render-content="customContent"></el-alert>
+        </div>
+      `,
+      methods: {
+        customContent(h) {
+          return (
+            <p>
+              <el-button class="custom-button">{ this.text }</el-button>
+            </p>
+          );
+        }
+      }
+    }, true);
+    let button = vm.$el.querySelector('.custom-button');
+    expect(button).to.exist;
+    expect(button.textContent).to.equal('test');
+  });
+
   it('close', () => {
     vm = createVue({
       template: `
