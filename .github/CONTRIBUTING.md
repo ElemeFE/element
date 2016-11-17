@@ -26,6 +26,8 @@ Element UI 的成长离不开大家的支持，如果你愿意为 Element UI 贡
 
 - 提交 PR 前请 rebase，确保 commit 记录的整洁。
 
+- 确保 PR 是提交到 `dev` 分支，而不是 `master` 分支。
+
 - 如果是修复 bug，请在 PR 中给出描述信息。
 
 - 合并代码需要两名维护人员参与：一人进行 review 后 approve，另一人再次 review，通过后即可合并。
