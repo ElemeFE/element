@@ -26,7 +26,7 @@ cooking.set({
       favicon: './examples/favicon.ico'
     }
   ],
-  publicPath: process.env.CI_ENV || '/',
+  publicPath: process.env.CI_ENV || '',
   hash: true,
   devServer: {
     port: 8085,

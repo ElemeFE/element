@@ -1,3 +1,8 @@
+git checkout dev
+git pull eleme dev --rebase
+git checkout master
+git merge dev
+
 set -e
 echo "Enter release version: "
 read VERSION
