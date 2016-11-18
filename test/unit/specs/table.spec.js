@@ -623,6 +623,48 @@ describe('Table', () => {
       }, DELAY);
     });
 
+    it('selectable === false & check selectAll status', done => {
+      const vm = createVue({
+        template: `
+          <el-table :data="testData" @selection-change="change">
+            <el-table-column type="selection" :selectable="filterSelect" />
+            <el-table-column prop="name" label="name" />
+            <el-table-column prop="release" label="release" />
+            <el-table-column prop="director" label="director" />
+            <el-table-column prop="runtime" label="runtime" />
+          </el-table>
+        `,
+
+        created() {
+        },
+
+        data() {
+          return { selected: [], testData: null };
+        },
+
+        methods: {
+          change(rows) {
+            this.selected = rows;
+          },
+
+          filterSelect(row, index) {
+            return false;
+          }
+        }
+      }, true);
+
+      vm.testData = getTestData();
+
+      setTimeout(_ => {
+        expect(vm.$el.querySelector('.el-checkbox').__vue__.checked).to.be.false;
+        setTimeout(_ => {
+          expect(vm.selected).to.length(0);
+          destroyVM(vm);
+          done();
+        }, DELAY);
+      }, DELAY);
+    });
+
     it('emit selection-change after row has been removed', done => {
       const vm = createVue({
         template: `
