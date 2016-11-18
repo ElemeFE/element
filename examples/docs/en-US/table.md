@@ -1068,7 +1068,7 @@ Customize table column so it can be integrated with other components.
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | data | table data | array | — | — |
-| height | table's height. By default  | string/number | — | — |
+| height | Table's height. By default it has an auto height. If its value is a number, the height is measured in pixels; if its value is a string, the height is affected by external styles | string/number | — | — |
 | stripe | whether table is striped | boolean | — | false |
 | border | whether table has vertical border | boolean | — | false |
 | fit | whether width of column automatically fits its container | boolean | — | true |
