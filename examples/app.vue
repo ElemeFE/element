@@ -54,6 +54,7 @@
   .container,
   .page-container {
     width: 1140px;
+    padding: 0 30px;
     margin: 0 auto;
   }
 
@@ -99,6 +100,13 @@
     .container,
     .page-container {
       width: 100%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .container,
+    .page-container {
+      padding: 0 20px;
     }
   }
 </style>

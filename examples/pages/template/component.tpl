@@ -1,6 +1,7 @@
 <style>
   .page-component {
     padding-bottom: 95px;
+    box-sizing: border-box;
   }
   .page-component {
     .content {
@@ -41,10 +42,10 @@
 <template>
   <div class="page-container page-component">
     <el-row>
-      <el-col :span="6">
+      <el-col :xs="24" :sm="6">
         <side-nav :data="navsData[lang]" :base="`/${ lang }/component`"></side-nav>
       </el-col>
-      <el-col :span="18">
+      <el-col :xs="24" :sm="18">
         <router-view class="content"></router-view>
         <footer-nav></footer-nav>
       </el-col>

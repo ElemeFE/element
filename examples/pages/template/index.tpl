@@ -136,7 +136,6 @@
       display: block;
 
       &:hover {
-        background-color: #20a0ff;
         color: #fff;
         background: #20a0ff;
       }
@@ -153,6 +152,49 @@
   @media (max-width: 1140px) {
     .cards {
       width: 100%;
+      .container {
+        width: 100%;
+      }
+    }
+    .banner .container {
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .banner img {
+      right: 0;
+    }
+  }
+
+  @media (max-width: 1000px) {
+    .banner .container {
+      img {
+        display: none;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .cards {
+      li {
+        width: 80%;
+        margin: 0 auto 20px;
+        float: none;
+      }
+      .card {
+        height: auto;
+        padding-bottom: 54px;
+      }
+    }
+    .banner-desc {
+      #line2 {
+        display: none;
+      }
+      h2 {
+        font-size: 32px;
+      }
+      p {
+        width: auto;
+      }
     }
   }
 </style>

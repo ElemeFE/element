@@ -23,7 +23,7 @@
 - Fixed DiatePicker not refresh year when switched in month picker, #1070
 - Added $loading service
 - Added `manual` trigger in Popover
-- Added props: `nodeKey` `emptyText` `checkStrictly` `defaultExpandAll` `autoExpandParent` `defaultCheckedKeys` `defaultExpandedKeys` and method: `setCheckedNodes` for Tree
+- Added props: `nodeKey`, `emptyText`, `checkStrictly`, `defaultExpandAll`, `autoExpandParent`, `defaultCheckedKeys`, `defaultExpandedKeys` and method: `setCheckedNodes` for Tree
 
 ### 1.0.0
 

@@ -1,6 +1,7 @@
 <style scoped>
   .page-resource {
     padding-top: 55px;
+    box-sizing: border-box;
   }
   .cards {
     margin: 35px auto 110px;
@@ -74,6 +75,23 @@
       transition: all .3s;
       text-decoration: none;
       margin-top: 20px;
+    }
+  }
+  @media (max-width: 850px) {
+    .cards {
+      li {
+        max-width: 500px;
+        float: none;
+        margin: 10px auto 30px;
+        width: 80%;
+        .card {
+          height: auto;
+          padding-bottom: 20px;
+        }
+      }
+      h3 {
+        height: auto;
+      }
     }
   }
 </style>
