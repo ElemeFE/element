@@ -43,6 +43,11 @@ cooking.set({
   postcss: config.postcss
 });
 
+// fix publicPath
+if (!process.env.CI_ENV) {
+  cooking.add('output.publicPath', '');
+}
+
 cooking.add('loader.md', {
   test: /\.md$/,
   loader: 'vue-markdown-loader'

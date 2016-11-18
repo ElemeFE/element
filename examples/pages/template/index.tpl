@@ -55,7 +55,7 @@
       font-size: <%= titleSize >px;
       margin: 0;
     }
-    
+
     p {
       font-size: 14px;
       opacity: .8;
@@ -185,6 +185,9 @@
         padding-bottom: 54px;
       }
     }
+    .banner-stars {
+      display: none;
+    }
     .banner-desc {
       #line2 {
         display: none;
@@ -244,7 +247,7 @@
             <h3><%= 8 ></h3>
             <p><%= 9 ></p>
             <router-link
-              active-class="active" 
+              active-class="active"
               to="/<%= lang >/resource"
               exact><%= 5 >
             </router-link>
