@@ -111,7 +111,7 @@
       return {
         highlights: [],
         navState: [],
-        isSmallScreen: false,
+        isSmallScreen: false
       };
     },
     watch: {
