@@ -3,7 +3,7 @@
     :class="{ 'el-table--fit': fit, 'el-table--striped': stripe, 'el-table--border': border }"
     @mouseleave="handleMouseLeave($event)">
     <div class="hidden-columns" ref="hiddenColumns"><slot></slot></div>
-    <div class="el-table__header-wrapper" ref="headerWrapper">
+    <div class="el-table__header-wrapper" ref="headerWrapper" v-if="showHeader">
       <table-header
         :store="store"
         :layout="layout"
@@ -31,7 +31,7 @@
         width: layout.fixedWidth ? layout.fixedWidth + 'px' : '',
         height: layout.viewportHeight ? layout.viewportHeight + 'px' : ''
       }">
-      <div class="el-table__fixed-header-wrapper" ref="fixedHeaderWrapper">
+      <div class="el-table__fixed-header-wrapper" ref="fixedHeaderWrapper" v-if="showHeader">
         <table-header
           fixed="left"
           :border="border"
@@ -61,7 +61,7 @@
         height: layout.viewportHeight ? layout.viewportHeight + 'px' : '',
         right: layout.scrollY ? layout.gutterWidth + 'px' : ''
       }">
-      <div class="el-table__fixed-header-wrapper" ref="rightFixedHeaderWrapper">
+      <div class="el-table__fixed-header-wrapper" ref="rightFixedHeaderWrapper" v-if="showHeader">
         <table-header
           fixed="right"
           :border="border"
@@ -131,6 +131,11 @@
       rowKey: [String, Function],
 
       context: {},
+
+      showHeader: {
+        type: Boolean,
+        default: true
+      },
 
       rowClassName: [String, Function],
 
@@ -290,7 +295,8 @@
       const layout = new TableLayout({
         store,
         table: this,
-        fit: this.fit
+        fit: this.fit,
+        showHeader: this.showHeader
       });
       return {
         store,

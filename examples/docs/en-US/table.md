@@ -1072,6 +1072,7 @@ Customize table column so it can be integrated with other components.
 | stripe | whether table is striped | boolean | — | false |
 | border | whether table has vertical border | boolean | — | false |
 | fit | whether width of column automatically fits its container | boolean | — | true |
+| show-header | whether table header is visible | boolean | - | true |
 | highlight-current-row | whether current row is highlighted | boolean | — | false |
 | row-class-name | function that returns custom class names for a row | Function(row, index) | — | — |
 | row-key | key of row data, used for optimizing rendering. Required if `reserve-selection` is on | Function(row)/String | — | — |
@@ -1087,6 +1088,7 @@ Customize table column so it can be integrated with other components.
 | cell-mouse-leave | triggers when hovering out of a cell | row, column, cell, event |
 | cell-click | triggers when clicking a cell | row, column, cell, event |
 | row-click | triggers when clicking a row | row, event |
+| header-click | triggers when clicking a column header | column, event |
 | sort-change | triggers when Table's sorting changes | { column, prop, order } |
 | current-change | triggers when current row changes | currentRow, oldCurrentRow |
 
