@@ -25,12 +25,12 @@
       </div>
     </div>
     <div class="el-table__fixed" ref="fixedWrapper"
+      v-if="fixedColumns.length > 0"
       :style="{
         width: layout.fixedWidth ? layout.fixedWidth + 'px' : '',
         height: layout.viewportHeight ? layout.viewportHeight + 'px' : ''
       }">
-      <div class="el-table__fixed-header-wrapper" ref="fixedHeaderWrapper"
-        v-if="fixedColumns.length > 0">
+      <div class="el-table__fixed-header-wrapper" ref="fixedHeaderWrapper">
         <table-header
           fixed="left"
           :border="border"
@@ -39,7 +39,6 @@
           :style="{ width: layout.fixedWidth ? layout.fixedWidth + 'px' : '' }"></table-header>
       </div>
       <div class="el-table__fixed-body-wrapper" ref="fixedBodyWrapper"
-        v-if="fixedColumns.length > 0"
         :style="{
           top: layout.headerHeight + 'px',
           height: layout.fixedBodyHeight ? layout.fixedBodyHeight + 'px' : ''
@@ -55,13 +54,13 @@
       </div>
     </div>
     <div class="el-table__fixed-right" ref="rightFixedWrapper"
+      v-if="rightFixedColumns.length > 0"
       :style="{
         width: layout.rightFixedWidth ? layout.rightFixedWidth + 'px' : '',
         height: layout.viewportHeight ? layout.viewportHeight + 'px' : '',
         right: layout.scrollY ? layout.gutterWidth + 'px' : ''
       }">
-      <div class="el-table__fixed-header-wrapper" ref="rightFixedHeaderWrapper"
-        v-if="rightFixedColumns.length > 0">
+      <div class="el-table__fixed-header-wrapper" ref="rightFixedHeaderWrapper">
         <table-header
           fixed="right"
           :border="border"
@@ -70,7 +69,6 @@
           :style="{ width: layout.rightFixedWidth ? layout.rightFixedWidth + 'px' : '' }"></table-header>
       </div>
       <div class="el-table__fixed-body-wrapper" ref="rightFixedBodyWrapper"
-        v-if="rightFixedColumns.length > 0"
         :style="{
           top: layout.headerHeight + 'px',
           height: layout.fixedBodyHeight ? layout.fixedBodyHeight + 'px' : ''
