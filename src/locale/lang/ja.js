@@ -1,13 +1,13 @@
 export default {
   el: {
     datepicker: {
-      now: '今',
+      now: '現在',
       today: '今日',
-      cancel: 'キャンセルする',
-      clear: 'クリヤー',
+      cancel: 'キャンセル',
+      clear: 'クリア',
       confirm: 'はい',
-      selectDate: '日付を入力',
-      selectTime: '時間を入力',
+      selectDate: '日付を選択',
+      selectTime: '時間を選択',
       startDate: '開始日',
       startTime: '開始時間',
       endDate: '終了日',
@@ -25,7 +25,7 @@ export default {
       month10: '十月',
       month11: '十一月',
       month12: '十二月',
-      // week: 'week',
+      // week: '週次',
       weeks: {
         sun: '日',
         mon: '月',
@@ -54,29 +54,29 @@ export default {
       loading: 'ロード中',
       noMatch: 'データなし',
       noData: 'データなし',
-      placeholder: 'セレクター'
+      placeholder: '選択してください'
     },
     pagination: {
       goto: '',
-      pagesize: '件/頁',
+      pagesize: '件/ページ',
       total: '総計 {total} 件',
-      pageClassifier: 'に跳ぶ'
+      pageClassifier: 'ページ目へ'
     },
     messagebox: {
       title: 'メッセージ',
       confirm: 'はい',
-      cancel: 'キャンセルする',
-      error: 'エラー'
+      cancel: 'キャンセル',
+      error: '正しくない入力'
     },
     upload: {
       delete: '削除する',
       preview: 'プレビュー',
-      continue: '次の件をアップロードする'
+      continue: '続行する'
     },
     table: {
       emptyText: 'データなし',
-      confirmFilter: 'フィルターする',
-      resetFilter: 'リセットする',
+      confirmFilter: '確認',
+      resetFilter: '初期化',
       clearFilter: 'すべて'
     },
     tree: {
