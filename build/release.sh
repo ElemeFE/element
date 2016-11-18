@@ -31,7 +31,7 @@ then
   git push eleme master
   git push eleme refs/tags/v$VERSION
   git checkout dev
-  git merge master
+  git rebase master
   git push eleme dev
 
   npm publish
