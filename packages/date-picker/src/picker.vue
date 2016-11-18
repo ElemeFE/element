@@ -338,7 +338,7 @@ export default {
     },
 
     handleClickIcon() {
-      if (this.closeable) {
+      if (!this.closeable) {
         this.pickerVisible = !this.pickerVisible;
         return;
       }
