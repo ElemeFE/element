@@ -122,7 +122,7 @@
         },
         dynamicForm: {
           domains: [{
-            key: 1,
+            key: Date.now(),
             value: ''
           }],
           email: ''
@@ -189,7 +189,7 @@
       },
       addDomain() {
         this.dynamicForm.domains.push({
-          key: this.dynamicForm.domains.length,
+          key: Date.now(),
           value: ''
         });
       }
@@ -819,6 +819,7 @@ Form component allows you to verify your data, helping you find and correct erro
 | label | label | string | — | — |
 | label-width | width of label, e.g. '50px' | string | — | — |
 | required | whether the field is required or not, will be determined by validation rules if omitted | string |  — | false |
+| rules | validation rules of form | object | — | — |
 
 
 
