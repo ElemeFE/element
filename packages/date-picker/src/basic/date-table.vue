@@ -83,14 +83,14 @@
       ranges: {
         type: Array,
         default() {
-            return [];
+          return [];
         }
       },
 
       rangeEdges: {
         type: Array,
         default() {
-            return [];
+          return [];
         }
       },
 
@@ -176,15 +176,15 @@
             cell.disabled = typeof disabledDate === 'function' && disabledDate(new Date(time));
 
             if (this.ranges && (parseDate(this.ranges[0]) > newDate || parseDate(this.ranges[1]) < newDate)) {
-              cell.disabled = true
+              cell.disabled = true;
             }
 
             if (this.rangeState.selecting) {
-                if (this.rangeEdges && this.rangeState.limit
-                    && ((this.rangeState.limit[0] && this.rangeState.limit[0] > newDate)
-                    || (this.rangeState.limit[1] && this.rangeState.limit[1] < newDate))) {
-                  cell.disabled = true
-                }
+              if (this.rangeEdges && this.rangeState.limit &&
+                ((this.rangeState.limit[0] && this.rangeState.limit[0] > newDate) ||
+                (this.rangeState.limit[1] && this.rangeState.limit[1] < newDate))) {
+                cell.disabled = true;
+              }
             }
 
             this.$set(row, this.showWeekNumber ? j + 1 : j, cell);
@@ -338,7 +338,6 @@
             const cell = row[j];
             const index = i * 7 + j + (this.showWeekNumber ? -1 : 0);
             const time = startDate.getTime() + DAY_DURATION * index;
-            const date = this.getDateOfCell(cell.row, cell.column);
 
             if (maxDate < minDate) {
               cell.inRange = minDate && time >= clearHours(maxDate) && time <= clearHours(minDate);
