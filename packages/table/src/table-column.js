@@ -100,6 +100,7 @@ export default {
       type: Boolean,
       default: true
     },
+    context: {},
     align: String,
     showTooltipWhenOverflow: Boolean,
     showOverflowTooltip: Boolean,
@@ -186,6 +187,7 @@ export default {
       minWidth,
       width,
       isColumnGroup,
+      context: this.context,
       align: this.align ? 'is-' + this.align : null,
       sortable: this.sortable,
       sortMethod: this.sortMethod,
@@ -211,6 +213,7 @@ export default {
     column.renderCell = function(h, data) {
       if (_self.$vnode.data.inlineTemplate) {
         renderCell = function() {
+          data._self = _self.context || data._self;
           if (Object.prototype.toString.call(data._self) === '[object Object]') {
             for (let prop in data._self) {
               if (!data.hasOwnProperty(prop)) {
@@ -218,6 +221,9 @@ export default {
               }
             }
           }
+          // 静态内容会缓存到 _staticTrees 内，不改的话获取的静态数据就不是内部 context
+          data._staticTrees = _self._staticTrees;
+          data.$options.staticRenderFns = _self.$options.staticRenderFns;
           return _self.customRender.call(data);
         };
       }

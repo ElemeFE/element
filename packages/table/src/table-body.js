@@ -5,6 +5,7 @@ export default {
     store: {
       required: true
     },
+    context: {},
     layout: {
       required: true
     },
@@ -43,7 +44,7 @@ export default {
                       on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
                       on-mouseleave={ this.handleCellMouseLeave }>
                       {
-                        column.renderCell.call(this._renderProxy, h, { row, column, $index, store: this.store, _self: this.$parent.$vnode.context })
+                        column.renderCell.call(this._renderProxy, h, { row, column, $index, store: this.store, _self: this.context || this.$parent.$vnode.context })
                       }
                     </td>
                   )

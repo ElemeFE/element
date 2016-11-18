@@ -110,6 +110,18 @@
     },
 
     methods: {
+      handleClick() {
+        console.log('click');
+      },
+
+      handleEdit(index, row) {
+        console.log(index, row);
+      },
+
+      handleDelete(index, row) {
+        console.log(index, row);
+      },
+
       handleSelectionChange(val) {
         this.multipleSelection = val;
       },
@@ -512,11 +524,12 @@
     </el-table-column>
     <el-table-column
       inline-template
+      :context="_self"
       fixed="right"
       label="操作"
       width="100">
       <span>
-        <el-button type="text" size="small">查看</el-button>
+        <el-button @click="handleClick" type="text" size="small">查看</el-button>
         <el-button type="text" size="small">编辑</el-button>
       </span>
     </el-table-column>
@@ -525,6 +538,12 @@
 
 <script>
   export default {
+    methods: {
+      handleClick() {
+        console.log(1);
+      }
+    },
+
     data() {
       return {
         tableData: [{
@@ -962,6 +981,94 @@
 ```
 :::
 
+### 自定义列模板
+
+自定义列的显示内容，可组合其他组件使用。
+:::demo 通过设置 `inline-template` 属性可以开启自定义模板功能，此时 `el-table-column` 的上下文指的是 `el-table` 所处的上下文，当然你可以通过 `context` 属性指定上下文环境，例如设置成 `:context="_self"` 就是指的当前上下文。有些时候我们会把 table 封装在其他组件里，通过 slot 设置 `table-column`，这样的话就要注意设置 `context`。在 column 组件内部，可以获取到 row, column, $index 和 store（table 内部的状态管理）的数据。
+```html
+<template>
+  <el-table
+    :data="tableData"
+    border
+    style="width: 100%">
+    <el-table-column
+      inline-template
+      label="日期"
+      width="180">
+      <div>
+        <el-icon name="time"></el-icon>
+        <span style="margin-left: 10px">{{ row.date }}</span>
+      </div>
+    </el-table-column>
+    <el-table-column
+      inline-template
+      label="姓名"
+      width="180">
+      <el-popover trigger="hover" placement="top">
+        <p>姓名: {{ row.name }}</p>
+        <p>住址: {{ row.address }}</p>
+        <div slot="reference">
+          <el-tag>{{ row.name }}</el-tag>
+        </div>
+      </el-popover>
+    </el-table-column>
+    <el-table-column
+      :context="_self"
+      inline-template
+      label="操作">
+      <div>
+        <el-button
+          size="small"
+          @click="handleEdit($index, row)">
+          编辑
+        </el-button>
+        <el-button
+          size="small"
+          type="danger"
+          @click="handleDelete($index, row)">
+          删除
+        </el-button>
+      </div>
+    </el-table-column>
+  </el-table>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        tableData: [{
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-04',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1517 弄'
+        }, {
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1519 弄'
+        }, {
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1516 弄'
+        }]
+      }
+    },
+    methods: {
+      handleEdit(index, row) {
+        console.log(index, row);
+      },
+      handleDelete(index, row) {
+        console.log(index, row);
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Table Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -973,6 +1080,7 @@
 | highlight-current-row | 是否要高亮当前行 | boolean | — | false |
 | row-class-name | 行的 className 的回调。 | Function(row, index) | — | — |
 | row-key | 行数据的 Key，用来优化 Table 的渲染；在使用 reserve-selection 功能的情况下，该属性是必填的 | Function(row)/String | — | — |
+| context | 设置上下文环境，例如设置当前上下文就是 `_self`，父级就是 `$parent`，根组件 `$root`。优先读取 column 的 context 属性。 | Object | - | Table 所处上下文 |
 
 ### Table Events
 | 事件名 | 说明 | 参数 |
@@ -1008,7 +1116,8 @@
 | resizable | 对应列是否可以通过拖动改变宽度（需要在 el-table 上设置 border 属性为真） | boolean | — | true |
 | formatter | 用来格式化内容 | Function(row, column) | — | — |
 | show-overflow-tooltip | 当内容过长被隐藏时显示 tooltip | Boolean | — | false |
-| inline-template | 指定该属性后可以自定义 column 模板，参考多选的时间列，通过 row 获取行信息，JSX 里通过 _self 获取当前上下文。此时不需要配置 prop 属性。总共可以获取到 `{ row(当前行), column(当前列), $index(行数), _self(当前上下文), store(table store) }` 的信息。 | — | — |
+| context | 设置上下文环境，例如设置当前上下文就是 `_self`，父级就是 `$parent`，根组件 `$root` | Object | - | Table 所处上下文 |
+| inline-template | 指定该属性后可以自定义 column 模板，参考多选的时间列，通过 row 获取行信息。总共可以获取到 `{ row(当前行), column(当前列), $index(行数), store(table store) }` 以及 Table 所处的上下文环境。 | — | — |
 | align | 对齐方式 | String | left, center, right | left |
 | class-name | 列的 className | string | — | — |
 | selectable | 仅对 type=selection 的列有效，类型为 Function，Function 的返回值用来决定这一行的 CheckBox 是否可以勾选 | Function(row, index) | — | — |

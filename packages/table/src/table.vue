@@ -14,6 +14,7 @@
     <div class="el-table__body-wrapper" ref="bodyWrapper"
       :style="{ height: layout.bodyHeight ? layout.bodyHeight + 'px' : '' }">
       <table-body
+        :context="context"
         :store="store"
         :layout="layout"
         :row-class-name="rowClassName"
@@ -128,6 +129,8 @@
       border: Boolean,
 
       rowKey: [String, Function],
+
+      context: {},
 
       rowClassName: [String, Function],
 
