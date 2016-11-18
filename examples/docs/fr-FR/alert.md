@@ -17,7 +17,6 @@ Affiche des messages d'alerte.
 Les composants de type `Alert` sont des éléments non superposés de la page qui ne disparaissent pas automatiquement.
 
 ::: demo Le composant `Alert` propose 4 types de thèmes définis par `type`, dont la valeur par défaut est` info`.
-
 ```html
 <template>
   <el-alert
@@ -45,7 +44,6 @@ Les composants de type `Alert` sont des éléments non superposés de la page qu
 Personnalisez le bouton de fermeture avec du texte ou des symboles.
 
 ::: demo Le composant `Alert` vous permet de configurer s'il est fermable ou non. Le texte du bouton de fermeture et les fonctions de callback de fermeture sont également personnalisables. L'attribut `closable` décide si le composant peut être fermé ou non. Il accepte un `boolean` et la valeur par défaut est `true`. Vous pouvez définir l'attribut `close-text` pour remplacer le symbole de croix par défaut comme bouton de fermeture. Veillez à ce que `close-text` soit une chaîne. L'événement `close` se déclenche lorsque le composant est fermé.
-
 ```html
 <template>
   <el-alert
@@ -82,7 +80,6 @@ Personnalisez le bouton de fermeture avec du texte ou des symboles.
 L'affichage d'une icône améliore la lisibilité.
 
 ::: demo L'attribut `show-icon` affiche une icône correspondant au type du composant actuel.
-
 ```html
 <template>
   <el-alert
@@ -114,7 +111,6 @@ L'affichage d'une icône améliore la lisibilité.
 La description permet un message avec des informations plus détaillées.
 
 ::: demo Outre l'attribut `title` requis, vous pouvez ajouter un attribut` description` pour vous aider à décrire l'alerte avec plus de détails. La description doit être une chaine.
-
 ```html
 <template>
   <el-alert
@@ -129,7 +125,6 @@ La description permet un message avec des informations plus détaillées.
 ### Avec une icône et une description
 
 ::: demo Pour finir, voici un exemple avec l'icône et la description.
-
 ```html
 <template>
   <el-alert
@@ -168,10 +163,9 @@ La description permet un message avec des informations plus détaillées.
 | description | texte de description | string | — | — |
 | closable | fermable ou non | boolean | — | true |
 | close-text | texte personnalisé du bouton de fermeture | string | — | — |
-| show-icon | Si une icône de type est affichée | boolean | — | false |
-
+| show-icon | si une icône de type est affichée | boolean | — | false |
 
 ### Événements
 | Nom de l'événement | Description | Paramètres |
 |---------- |-------- |---------- |
-| close | Déclenché lorsque le composant est fermé | — |
+| close | déclenché lorsque le composant est fermé | — |

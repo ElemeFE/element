@@ -6,8 +6,7 @@ Un numéro ou un statut affiché sur un bouton ou une icône
 
 Affiche la quantité de nouveaux messages.
 
-:::demo Le montant est défini avec `valeur` qui accepte un `Number` ou une `String`.
-
+::: demo Le montant est défini avec `valeur` qui accepte un `Number` ou une `String`.
 ```html
 <el-badge :value="12" class="item">
   <el-button size="small">commentaires</el-button>
@@ -46,7 +45,6 @@ Affiche la quantité de nouveaux messages.
 Vous pouvez personnaliser la valeur max.
 
 ::: demo La valeur max est définie par la propriété `max` qui est un `Number`. Notez que cela ne fonctionne que lorsque `value` est aussi un `Number`.
-
 ```html
 <el-badge :value="200" :max="99" class="item">
   <el-button size="small">commentaires</el-button>
@@ -68,8 +66,7 @@ Vous pouvez personnaliser la valeur max.
 
 Affiche du texte autre que des numéros.
 
-:::demo Lorsque `value` est une` String`, il peut afficher du texte personnalisé.
-
+::: demo Lorsque `value` est une` String`, il peut afficher du texte personnalisé.
 ```html
 <el-badge value="new" class="item">
   <el-button size="small">commentaires</el-button>
@@ -91,8 +88,7 @@ Affiche du texte autre que des numéros.
 
 Utilisez un point rouge pour marquer le contenu qui doit être remarqué.
 
-:::demo Utilisez l'attribut `is-dot`. C'est un `Boolean`.
-
+::: demo Utilisez l'attribut `is-dot`. C'est un `Boolean`.
 ```html
 <el-badge is-dot class="item">query</el-badge>
 <el-badge is-dot class="item">
