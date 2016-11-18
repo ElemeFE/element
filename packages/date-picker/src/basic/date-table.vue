@@ -31,7 +31,7 @@
 </template>
 
 <script>
-  import { getFirstDayOfMonth, getDayCountOfMonth, getWeekNumber, getStartDateOfMonth, DAY_DURATION } from '../util';
+  import { getFirstDayOfMonth, getDayCountOfMonth, getWeekNumber, getStartDateOfMonth, DAY_DURATION, parseDate } from '../util';
   import { hasClass } from 'wind-dom/src/class';
   import Locale from 'element-ui/src/mixins/locale';
 
@@ -80,9 +80,19 @@
         }
       },
 
-      ranges: {},
+      ranges: {
+        type: Array,
+        default() {
+            return [];
+        }
+      },
 
-      rangeEdges: {},
+      rangeEdges: {
+        type: Array,
+        default() {
+            return [];
+        }
+      },
 
       value: {}
     },
@@ -169,10 +179,12 @@
               cell.disabled = true
             }
 
-            if (this.rangeEdges && this.rangeState.limit
-              && ((this.rangeState.limit[0] && this.rangeState.limit[0] > newDate)
-              || (this.rangeState.limit[1] && this.rangeState.limit[1] < newDate))) {
-              cell.disabled = true
+            if (this.rangeState.selecting) {
+                if (this.rangeEdges && this.rangeState.limit
+                    && ((this.rangeState.limit[0] && this.rangeState.limit[0] > newDate)
+                    || (this.rangeState.limit[1] && this.rangeState.limit[1] < newDate))) {
+                  cell.disabled = true
+                }
             }
 
             this.$set(row, this.showWeekNumber ? j + 1 : j, cell);
@@ -461,7 +473,7 @@
               });
             } else {
               const minDate = new Date(newDate.getTime());
-              this.rangeState.selecting = true;
+              this.rangeState.selecting = false;
 
               this.$emit('pick', { minDate, maxDate: this.minDate });
             }

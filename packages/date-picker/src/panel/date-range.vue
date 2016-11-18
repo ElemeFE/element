@@ -93,6 +93,8 @@
               :month="leftMonth"
               :min-date="minDate"
               :max-date="maxDate"
+              :ranges="ranges"
+              :rangeEdges="rangeEdges"
               :range-state="rangeState"
               :disabled-date="disabledDate"
               @changerange="handleChangeRange"
@@ -118,6 +120,8 @@
               :month="rightMonth"
               :min-date="minDate"
               :max-date="maxDate"
+              :ranges="ranges"
+              :rangeEdges="rangeEdges"
               :range-state="rangeState"
               :disabled-date="disabledDate"
               @changerange="handleChangeRange"
@@ -219,6 +223,8 @@
           row: null,
           column: null
         },
+        ranges: null,// ['2016-01-01', '2016-12-31']可选择范围，空为无限制，数组0：开始点，数组1：结束点
+        rangeEdges: null,// [3,10] 可供选择的日期区间，单位：天,以第一次选择的日期为中心
         showTime: false,
         shortcuts: '',
         value: '',
