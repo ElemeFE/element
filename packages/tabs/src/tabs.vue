@@ -91,7 +91,7 @@
       const activeBar = !type
         ? <div class="el-tabs__active-bar" style={barStyle}></div>
         : null;
-
+  
       const tabs = this.$children.map((tab, index) => {
         let btnClose = h('span', {
           class: {
@@ -110,7 +110,7 @@
           refInFor: true,
           on: { click: (ev) => { handleTabClick(tab, ev); } }
         }, [
-          tab.label,
+          tab.labelContent ? tab.labelContent.call(this._renderProxy, h) : tab.label,
           tab.isClosable ? btnClose : null,
           index === 0 ? activeBar : null
         ]);
