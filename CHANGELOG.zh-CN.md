@@ -1,5 +1,20 @@
 ## 更新日志
 
+### 1.0.2
+*2016-11-18*
+
+- 新增 Table `context` 属性，可以指定自定义 column 内部可获取的上下文，#1161
+- 新增 多种语言支持
+- 修复 没有正确动态渲染语言的问题，#1160
+- 新增 Alert 的 `render-content` 属性，#568
+- 新增 Button 的 focus 样式，#982
+- 修复 Switch 的 `change` 事件触发时机错误的问题，#1162
+- 修复 TimeSelect 开始时间设置 `00:00` 后会被禁用的问题，#676
+- 新增 Table `show-header` 属性，`header-click` 事件。#1195
+- 完善 Table 的 `height` 属性，当 `height` 属性为字符串的时候，表示 Table 的高度受外部样式控制，#1195
+- 修复 Table 的 `selection-change` 在某些情况下不触发的问题，#1198
+- 修复 Table 动态修改 `fixed` 属性可能会造成锁定列不消失的问题，#1182
+
 ### 1.0.1
 *2016-11-16*
 

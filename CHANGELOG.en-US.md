@@ -1,5 +1,21 @@
 ## Changelog
 
+### 1.0.2
+
+*2016-11-18*
+
+- Added `context` for Table to specify which context to access inside of table columns, #1161
+- Added multiple languages
+- Fixed language's dynamic switching issue, #1160
+- Added `render-content` for Alert, #568
+- Added styles for focused Button, #982
+- Fixed `change` triggering timing in Switch, #1162
+- Fixed TimeSelect being disabled when start time is set to `00:00`, #676
+- Added `show-header` attribute and `header-click` method for Table, #1195
+- Improved `height` attribute for Table when set to a string, #1195
+- Fixed `selection-change` of Table not triggering in some cases, #1198
+- Fixed Table's fixed columns not disappear when `fixed` attribute is dynamically changed, #1182
+
 ### 1.0.1
 
 *2016-11-16*
