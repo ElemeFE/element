@@ -1,3 +1,6 @@
+git checkout master
+git merge dev
+
 #!/usr/bin/env sh
 set -e
 echo "Enter release version: "
@@ -25,11 +28,11 @@ then
   npm version $VERSION --message "[release] $VERSION"
 
   # publish
-  git push eleme dev
-  git checkout master
-  git merge dev
   git push eleme master
   git push eleme refs/tags/v$VERSION
+  git checkout dev
+  git merge master
+  git push eleme dev
 
   npm publish
 fi

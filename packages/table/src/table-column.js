@@ -217,6 +217,7 @@ export default {
           if (Object.prototype.toString.call(data._self) === '[object Object]') {
             for (let prop in data._self) {
               if (!data.hasOwnProperty(prop)) {
+                // _self.$set(data, prop, data._self[prop]);
                 data[prop] = data._self[prop];
               }
             }
