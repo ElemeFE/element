@@ -135,7 +135,7 @@
       margin: 0;
       position: relative;
       cursor: pointer;
-      transition: var(--border-transition-base), var(--color-transition-base);
+      transition: var(--all-transition);
       @utils-user-select none;
 
       @mixin button-size var(--button-padding-vertical), var(--button-padding-horizontal), var(--button-font-size), 0;
@@ -163,8 +163,9 @@
       &:checked {
         & + .el-radio-button__inner {
           z-index: 1;
-          color: var(--color-primary);
-          border-color: @color;
+          background-color: var(--color-primary);
+          border-color: @background-color;
+          color: #fff;
         }
       }
 
