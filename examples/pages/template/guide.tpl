@@ -1,6 +1,7 @@
 <style>
   .page-guide {
-    padding: 55px 0 95px;
+    padding: 55px 30px 95px;
+    box-sizing: border-box;
 
     .content {
       padding-left: 25px;
@@ -48,14 +49,22 @@
       }
     }
   }
+
+  @media (max-width: 768px) {
+    .page-guide {
+      .content {
+        padding-left: 0;
+      }
+    }
+  }
 </style>
 <template>
   <div class="page-container page-guide">
     <el-row>
-      <el-col :span="5">
+      <el-col :xs="24" :sm="5">
         <side-nav :data="navsData" :base="`/${ lang }/guide`"></side-nav>
       </el-col>
-      <el-col :span="19">
+      <el-col :xs="24" :sm="19">
         <router-view class="content"></router-view>
       </el-col>
     </el-row>

@@ -15,6 +15,7 @@
 
     .container {
       height: 100%;
+      box-sizing: border-box;
     }
 
     h1 {
@@ -51,8 +52,12 @@
       padding: 0;
       margin: 0;
     }
-    .nav-logo {
+    .nav-logo,
+    .nav-logo-small {
       vertical-align: sub;
+    }
+    .nav-logo-small {
+      display: none;
     }
     .nav-item {
       margin: 0;
@@ -116,6 +121,40 @@
     top: 0;
     background-color: rgba(32, 160, 255, 0);
   }
+
+  @media (max-width: 850px) {
+    .header {
+      .nav-logo {
+        display: none;
+      }
+      .nav-logo-small {
+        display: inline-block;
+      }
+      .nav-item {
+        margin-left: 6px;
+
+        &:last-child {
+          margin-left: 10px;
+        }
+         
+        a {
+          padding: 0 5px;
+        }
+      }
+    }
+  }
+  @media (max-width: 700px) {
+    .header {
+      .container {
+        padding: 0 12px;
+      }
+      .nav-item a,
+      .nav-lang {
+        font-size: 12px;
+        vertical-align: top;
+      }
+    }
+  }
 </style>
 <template>
   <div class="headerWrapper">
@@ -131,6 +170,10 @@
             src="../assets/images/element-logo.svg"
             alt="element-logo"
             class="nav-logo">
+          <img
+            src="../assets/images/element-logo-small.svg"
+            alt="element-logo"
+            class="nav-logo-small">
         </router-link></h1>
         <ul class="nav">
           <li class="nav-item">

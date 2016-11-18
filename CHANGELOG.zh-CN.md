@@ -23,7 +23,7 @@
 - 修复 DatePicker 月份选择器直接切换年份并未更新年份数据 #1070
 - 新增 $loading 服务，用以调用 Loading
 - 新增 Popover 可手动控制显示隐藏，将 trigger 设置为 `manual`
-- 新增 Tree 的 `nodeKey` `emptyText` `checkStrictly` `defaultExpandAll` `autoExpandParent` `defaultCheckedKeys` `defaultExpandedKeys` 属性，`setCheckedNodes` 方法。
+- 新增 Tree 的 `nodeKey`、`emptyText`、`checkStrictly`、`defaultExpandAll`、`autoExpandParent`、`defaultCheckedKeys`、`defaultExpandedKeys` 属性，`setCheckedNodes` 方法。
 
 
 ### 1.0.0

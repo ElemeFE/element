@@ -40,6 +40,7 @@
 
     .container {
       height: 100%;
+      box-sizing: border-box;
     }
 
     .footer-main {
@@ -120,6 +121,13 @@
     img {
       size: 100px;
       margin: 10px;
+    }
+  }
+  @media (max-width: 768px) {
+    .footer {
+      .footer-social {
+        display: none;
+      }
     }
   }
 </style>
