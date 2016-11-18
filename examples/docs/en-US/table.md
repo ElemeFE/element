@@ -110,6 +110,17 @@
     },
 
     methods: {
+      handleClick() {
+        console.log('click');
+      },
+
+      handleEdit(index, row) {
+        console.log(index, row);
+      },
+
+      handleDelete(index, row) {
+        console.log(index, row);
+      },
       handleSelectionChange(val) {
         this.multipleSelection = val;
       },
@@ -504,11 +515,12 @@ When there are too many columns, you can fix some of them.
     </el-table-column>
     <el-table-column
       inline-template
+      :context="_self"
       fixed="right"
       label="Operations"
       width="120">
       <span>
-        <el-button type="text" size="small">Detail</el-button>
+        <el-button @click="handleClick" type="text" size="small">Detail</el-button>
         <el-button type="text" size="small">Edit</el-button>
       </span>
     </el-table-column>
@@ -517,6 +529,11 @@ When there are too many columns, you can fix some of them.
 
 <script>
   export default {
+    methods: {
+      handleClick() {
+        console.log('click');
+      }
+    },
     data() {
       return {
         tableData: [{
@@ -959,6 +976,94 @@ Filter the table to find desired data.
 ```
 :::
 
+### Custom column template
+ 
+Customize table column so it can be integrated with other components.
+:::demo Activate custom column template by adding the `inline-template` attribute. By default, the context of `el-table-column` is the one where `el-table` lies, and you can customize it with the `context` attribute, e.g. `:context="_self"` refers to the current context. This is useful when sometimes Table is encapsulated into another component, and `table-column` is distributed by slots. In `el-column`, you have access to the following data: row, column, $index and store (state management of Table).
+```html
+<template>
+  <el-table
+    :data="tableData"
+    border
+    style="width: 100%">
+    <el-table-column
+      inline-template
+      label="Date"
+      width="180">
+      <div>
+        <el-icon name="time"></el-icon>
+        <span style="margin-left: 10px">{{ row.date }}</span>
+      </div>
+    </el-table-column>
+    <el-table-column
+      inline-template
+      label="Name"
+      width="180">
+      <el-popover trigger="hover" placement="top">
+        <p>Name: {{ row.name }}</p>
+        <p>Addr: {{ row.address }}</p>
+        <div slot="reference">
+          <el-tag>{{ row.name }}</el-tag>
+        </div>
+      </el-popover>
+    </el-table-column>
+    <el-table-column
+      :context="_self"
+      inline-template
+      label="Operations">
+      <div>
+        <el-button
+          size="small"
+          @click="handleEdit($index, row)">
+          Edit
+        </el-button>
+        <el-button
+          size="small"
+          type="danger"
+          @click="handleDelete($index, row)">
+          Delete
+        </el-button>
+      </div>
+    </el-table-column>
+  </el-table>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        tableData: [{
+          date: '2016-05-03',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles'
+        }, {
+          date: '2016-05-02',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles'
+        }, {
+          date: '2016-05-04',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles'
+        }, {
+          date: '2016-05-01',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles'
+        }]
+      }
+    },
+    methods: {
+      handleEdit(index, row) {
+        console.log(index, row);
+      },
+      handleDelete(index, row) {
+        console.log(index, row);
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Table Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -969,7 +1074,8 @@ Filter the table to find desired data.
 | fit | whether width of column automatically fits its container | boolean | — | true |
 | highlight-current-row | whether current row is highlighted | boolean | — | false |
 | row-class-name | function that returns custom class names for a row | Function(row, index) | — | — |
-| row-key | Key of row data, used for optimizing rendering. Required if `reserve-selection` is on | Function(row)/String | — | — |
+| row-key | key of row data, used for optimizing rendering. Required if `reserve-selection` is on | Function(row)/String | — | — |
+| context | context of Table, e.g. `_self` refers to the current context, `$parent` parent context, `$root` root context, can be overridden by `context` in `el-table-column` | Object | - | current context where Table lies |
 
 ### Table Events
 | Event Name | Description | Parameters |
@@ -1005,7 +1111,8 @@ Filter the table to find desired data.
 | resizable | whether column width can be resized, works when `border` of `el-table` is `true` | boolean | — | false |
 | formatter | function that formats content | Function(row, column) | — | — |
 | show-overflow-tooltip | whether to hide extra content and show them in a tooltip when hovering on the cell | boolean | — | false |
-| inline-template | by using this attribute, you can customize column template. Row data can be accessed by `row` object, and current context can be accessed by `_self` in JSX. In this case you don't need to set `prop`. In your template, you have access to the following: `{ row (current row), column (current column), $index (row index), _self( context), store (table store) }` | — | — |
+| context | context of Table-column, e.g. `_self` refers to the current context, `$parent` parent context, `$root` root context | Object | - | current context where Table lies |
+| inline-template | by using this attribute, you can customize column template. Row data can be accessed by `row` object. In your template, you have access to the following: `{ row (current row), column (current column), $index (row index), store (table store) }` | — | — |
 | align | alignment | string | left/center/right | left |
 | class-name | class name of cells in the column | string | — | — |
 | selectable | function that determines if a certain row can be selected, works when `type` is 'selection' | Function(row, index) | — | — |
