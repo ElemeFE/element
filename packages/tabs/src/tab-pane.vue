@@ -3,10 +3,8 @@
     name: 'el-tab-pane',
 
     props: {
-      label: {
-        type: String,
-        required: true
-      },
+      label: String,
+      labelContent: Function,
       name: String,
       closable: Boolean
     },
