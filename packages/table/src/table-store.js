@@ -313,20 +313,30 @@ TableStore.prototype.updateAllSelected = function() {
   };
 
   let isAllSelected = true;
+  let selectedCount = 0;
   for (let i = 0, j = data.length; i < j; i++) {
     const item = data[i];
     if (selectable) {
-      if (selectable.call(null, item, i) && !isSelected(item)) {
-        isAllSelected = false;
-        break;
+      const isRowSelectable = selectable.call(null, item, i);
+      if (isRowSelectable) {
+        if (!isSelected(item)) {
+          isAllSelected = false;
+          break;
+        } else {
+          selectedCount++;
+        }
       }
     } else {
       if (!isSelected(item)) {
         isAllSelected = false;
         break;
+      } else {
+        selectedCount++;
       }
     }
   }
+
+  if (selectedCount === 0) isAllSelected = false;
 
   states.isAllSelected = isAllSelected;
 };
