@@ -74,10 +74,15 @@
             endDate: null,
             selecting: false,
             row: null,
-            column: null
+            column: null,
+            limit: []
           };
         }
       },
+
+      ranges: {},
+
+      rangeEdges: {},
 
       value: {}
     },
@@ -157,7 +162,18 @@
               }
             }
 
+            const newDate = new Date(time);
             cell.disabled = typeof disabledDate === 'function' && disabledDate(new Date(time));
+
+            if (this.ranges && (parseDate(this.ranges[0]) > newDate || parseDate(this.ranges[1]) < newDate)) {
+              cell.disabled = true
+            }
+
+            if (this.rangeEdges && this.rangeState.limit
+              && ((this.rangeState.limit[0] && this.rangeState.limit[0] > newDate)
+              || (this.rangeState.limit[1] && this.rangeState.limit[1] < newDate))) {
+              cell.disabled = true
+            }
 
             this.$set(row, this.showWeekNumber ? j + 1 : j, cell);
           }
@@ -310,10 +326,45 @@
             const cell = row[j];
             const index = i * 7 + j + (this.showWeekNumber ? -1 : 0);
             const time = startDate.getTime() + DAY_DURATION * index;
+            const date = this.getDateOfCell(cell.row, cell.column);
 
-            cell.inRange = minDate && time >= clearHours(minDate) && time <= clearHours(maxDate);
-            cell.start = minDate && time === clearHours(minDate.getTime());
-            cell.end = maxDate && time === clearHours(maxDate.getTime());
+            if (maxDate < minDate) {
+              cell.inRange = minDate && time >= clearHours(maxDate) && time <= clearHours(minDate);
+              cell.start = maxDate && time === clearHours(maxDate.getTime());
+              cell.end = minDate && time === clearHours(minDate.getTime());
+            } else {
+              cell.inRange = minDate && time >= clearHours(minDate) && time <= clearHours(maxDate);
+              cell.start = minDate && time === clearHours(minDate.getTime());
+              cell.end = maxDate && time === clearHours(maxDate.getTime());
+            }
+          }
+        }
+      },
+
+      // 设置可选天的区间
+      setEdges(date) {
+        if (this.rangeEdges) {
+          const range0 = parseInt(this.rangeEdges[0], 10);
+          if (range0) {
+            let startLimit = new Date(date);
+            startLimit.setDate(startLimit.getDate() - range0);
+            if (this.ranges) {
+              const startDate = parseDate(this.ranges[0]);
+              this.rangeState.limit[0] = startDate > startLimit ? startDate : startLimit;
+            } else {
+              this.rangeState.limit[0] = startLimit;
+            }
+          }
+          const range1 = parseInt(this.rangeEdges[1], 10);
+          if (range1) {
+            let endLimit = new Date(date);
+            endLimit.setDate(endLimit.getDate() + range1);
+            if (this.ranges) {
+              const endDate = this.ranges ? parseDate(this.ranges[1]) : new Date();
+              this.rangeState.limit[1] = endDate < endLimit ? endDate : endLimit;
+            } else {
+              this.rangeState.limit[1] = endLimit;
+            }
           }
         }
       },
@@ -397,6 +448,7 @@
 
             this.$emit('pick', { minDate, maxDate }, false);
             this.rangeState.selecting = true;
+            this.setEdges(minDate);
             this.markRange(this.minDate);
           } else if (this.minDate && !this.maxDate) {
             if (newDate >= this.minDate) {
@@ -409,14 +461,16 @@
               });
             } else {
               const minDate = new Date(newDate.getTime());
+              this.rangeState.selecting = true;
 
-              this.$emit('pick', { minDate, maxDate: this.maxDate }, false);
+              this.$emit('pick', { minDate, maxDate: this.minDate });
             }
           } else if (!this.minDate) {
             const minDate = new Date(newDate.getTime());
 
             this.$emit('pick', { minDate, maxDate: this.maxDate }, false);
             this.rangeState.selecting = true;
+            this.setEdges(minDate);
             this.markRange(this.minDate);
           }
         }
