@@ -1,6 +1,6 @@
 {
   "name": "element-theme-default",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Element component default theme.",
   "main": "lib/index.css",
   "style": "lib/index.css",
