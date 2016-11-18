@@ -296,6 +296,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: normal;
+      word-break: break-all;
       line-height: 24px;
       padding-left: 18px;
       padding-right: 18px;

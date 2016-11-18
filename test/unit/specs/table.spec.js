@@ -985,6 +985,71 @@ describe('Table', () => {
     });
   });
 
+  describe('methods', () => {
+    const createTable = function(prop = '', opts) {
+      return createVue({
+        template: `
+          <el-table ref="table" :data="testData" @${prop}="handleEvent">
+            <el-table-column type="selection" />
+            <el-table-column prop="name" />
+            <el-table-column prop="release" />
+            <el-table-column prop="director" />
+            <el-table-column prop="runtime"/>
+          </el-table>
+        `,
+
+        methods: {
+          handleEvent(selection) {
+            this.fireCount++;
+            this.selection = selection;
+          }
+        },
+
+        created() {
+          this.testData = getTestData();
+        },
+
+        data() {
+          return { selection: null, testData: this.testData, fireCount: 0 };
+        }
+      }, true);
+    };
+
+    it('toggleRowSelection', () => {
+      const vm = createTable('selection-change');
+      vm.$refs.table.toggleRowSelection(vm.testData[0]);
+      expect(vm.selection).to.length(1);
+      expect(vm.fireCount).to.equal(1);
+
+      // test use second parameter
+      vm.$refs.table.toggleRowSelection(vm.testData[0], true);
+      expect(vm.fireCount).to.equal(1);
+
+      vm.$refs.table.toggleRowSelection(vm.testData[0], false);
+      expect(vm.fireCount).to.equal(2);
+      expect(vm.selection).to.length(0);
+
+      destroyVM(vm);
+    });
+
+    it('clearSelection', () => {
+      const vm = createTable('selection-change');
+      vm.$refs.table.toggleRowSelection(vm.testData[0]);
+      expect(vm.selection).to.length(1);
+      expect(vm.fireCount).to.equal(1);
+
+      // clear selection
+      vm.$refs.table.clearSelection();
+      expect(vm.fireCount).to.equal(2);
+      expect(vm.selection).to.length(0);
+
+      vm.$refs.table.clearSelection();
+      expect(vm.fireCount).to.equal(2);
+
+      destroyVM(vm);
+    });
+  });
+
   it('hover', done => {
     const vm = createVue({
       template: `
