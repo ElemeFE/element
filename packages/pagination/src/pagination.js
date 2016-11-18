@@ -50,10 +50,12 @@ export default {
     const layout = this.layout || '';
     if (!layout) return;
     const TEMPLATE_MAP = {
+      first: <first></first>,
       prev: <prev></prev>,
       jumper: <jumper></jumper>,
       pager: <pager currentPage={ this.internalCurrentPage } pageCount={ this.internalPageCount } on-change={ this.handleCurrentChange }></pager>,
       next: <next></next>,
+      last: <last></last>,
       sizes: <sizes></sizes>,
       slot: <slot></slot>,
       total: <total></total>
@@ -87,6 +89,18 @@ export default {
   },
 
   components: {
+    First: {
+      render(h) {
+        return (
+          <button
+            class={['btn-first', { disabled: this.$parent.internalCurrentPage <= 1 }]}
+            on-click={ this.$parent.first }>
+            <i class="el-icon el-icon-d-arrow-left"></i>
+          </button>
+        );
+      }
+    },
+
     Prev: {
       render(h) {
         return (
@@ -111,6 +125,23 @@ export default {
             }
             on-click={ this.$parent.next }>
             <i class="el-icon el-icon-arrow-right"></i>
+          </button>
+        );
+      }
+    },
+
+    Last: {
+      render(h) {
+        return (
+          <button
+            class={
+              [
+                'btn-last',
+                { disabled: this.$parent.internalCurrentPage === this.$parent.internalPageCount || this.$parent.internalPageCount === 0 }
+              ]
+            }
+            on-click={ this.$parent.last }>
+            <i class="el-icon el-icon-d-arrow-right"></i>
           </button>
         );
       }
@@ -234,7 +265,15 @@ export default {
         this.$emit('current-change', this.internalCurrentPage);
       }
     },
+    first() {
+      const oldPage = this.internalCurrentPage;
+      const newVal = 1;
+      this.internalCurrentPage = this.getValidCurrentPage(newVal);
 
+      if (this.internalCurrentPage !== oldPage) {
+        this.$emit('current-change', this.internalCurrentPage);
+      }
+    },
     prev() {
       const oldPage = this.internalCurrentPage;
       const newVal = this.internalCurrentPage - 1;
@@ -248,6 +287,16 @@ export default {
     next() {
       const oldPage = this.internalCurrentPage;
       const newVal = this.internalCurrentPage + 1;
+      this.internalCurrentPage = this.getValidCurrentPage(newVal);
+
+      if (this.internalCurrentPage !== oldPage) {
+        this.$emit('current-change', this.internalCurrentPage);
+      }
+    },
+
+    last() {
+      const oldPage = this.internalCurrentPage;
+      const newVal = this.internalPageCount;
       this.internalCurrentPage = this.getValidCurrentPage(newVal);
 
       if (this.internalCurrentPage !== oldPage) {
