@@ -4,7 +4,7 @@
       return {
         pickerOptions1: {
           shortcuts: [{
-            text: 'Aujourd\'hui,
+            text: 'Aujourd\'hui',
             onClick(picker) {
               picker.$emit('pick', new Date());
             }
@@ -106,7 +106,7 @@ Sélectionnez la date et l'heure dans un sélecteur.
       return {
         pickerOptions1: {
           shortcuts: [{
-            text: 'Aujourd\'hui,
+            text: 'Aujourd\'hui',
             onClick(picker) {
               picker.$emit('pick', new Date());
             }
