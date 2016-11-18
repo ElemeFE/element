@@ -175,12 +175,12 @@
             const newDate = new Date(time);
             cell.disabled = typeof disabledDate === 'function' && disabledDate(new Date(time));
 
-            if (this.ranges && (parseDate(this.ranges[0]) > newDate || parseDate(this.ranges[1]) < newDate)) {
+            if (this.ranges.length && (parseDate(this.ranges[0]) > newDate || parseDate(this.ranges[1]) < newDate)) {
               cell.disabled = true;
             }
 
             if (this.rangeState.selecting) {
-              if (this.rangeEdges && this.rangeState.limit &&
+              if (this.rangeEdges.length && this.rangeState.limit &&
                 ((this.rangeState.limit[0] && this.rangeState.limit[0] > newDate) ||
                 (this.rangeState.limit[1] && this.rangeState.limit[1] < newDate))) {
                 cell.disabled = true;
