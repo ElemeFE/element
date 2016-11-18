@@ -255,11 +255,18 @@ TableStore.prototype.isSelected = function(row) {
 TableStore.prototype.clearSelection = function() {
   const states = this.states;
   states.isAllSelected = false;
+  const oldSelection = states.selection;
   states.selection = [];
+  if (oldSelection.length > 0) {
+    this.table.$emit('selection-change', states.selection);
+  }
 };
 
 TableStore.prototype.toggleRowSelection = function(row, selected) {
-  toggleRowSelection(this.states, row, selected);
+  const changed = toggleRowSelection(this.states, row, selected);
+  if (changed) {
+    this.table.$emit('selection-change', this.states.selection);
+  }
 };
 
 TableStore.prototype.cleanSelection = function() {
