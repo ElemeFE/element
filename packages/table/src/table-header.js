@@ -33,6 +33,7 @@ export default {
                   on-mousemove={ ($event) => this.handleMouseMove($event, column) }
                   on-mouseout={ this.handleMouseOut }
                   on-mousedown={ ($event) => this.handleMouseDown($event, column) }
+                  on-click={ ($event) => this.handleClick($event, column) }
                   class={ [column.id, column.order, column.align, column.className || '', this.isCellHidden(cellIndex) ? 'is-hidden' : ''] }>
                   <div class={ ['cell', column.filteredValue && column.filteredValue.length > 0 ? 'highlight' : ''] }>
                   {
@@ -162,6 +163,10 @@ export default {
       }, 16);
     },
 
+    handleClick(event, column) {
+      this.$parent.$emit('header-click', column, event);
+    },
+
     handleMouseDown(event, column) {
       /* istanbul ignore if */
       if (this.draggingColumn && this.border) {
@@ -239,7 +244,7 @@ export default {
       if (!this.dragging && this.border) {
         let rect = target.getBoundingClientRect();
 
-        var bodyStyle = document.body.style;
+        const bodyStyle = document.body.style;
         if (rect.width > 12 && rect.right - event.pageX < 8) {
           bodyStyle.cursor = 'col-resize';
           this.draggingColumn = column;

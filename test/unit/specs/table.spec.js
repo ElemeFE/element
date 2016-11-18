@@ -116,6 +116,15 @@ describe('Table', () => {
       }, DELAY);
     });
 
+    it('show-header', done => {
+      const vm = createTable(':show-header="false"');
+      setTimeout(_ => {
+        expect(vm.$el.querySelectorAll('.el-table__header-wrapper').length).to.equal(0);
+        destroyVM(vm);
+        done();
+      }, DELAY);
+    });
+
     it('tableRowClassName', done => {
       const vm = createTable(':row-class-name="tableRowClassName"', {
         methods: {
@@ -382,6 +391,20 @@ describe('Table', () => {
           destroyVM(vm);
           done();
         }, DELAY);
+      }, DELAY);
+    });
+
+    it('header-click', done => {
+      const vm = createTable('header-click');
+
+      setTimeout(_ => {
+        const cell = vm.$el.querySelectorAll('.el-table__header th')[1]; // header[prop='name']
+
+        triggerEvent(cell, 'click');
+        expect(vm.result).to.length(2); // column, event
+        expect(vm.result[0]).to.have.property('property').to.equal('name');
+        destroyVM(vm);
+        done();
       }, DELAY);
     });
   });
