@@ -2,8 +2,9 @@
   export default {
     data() {
       var checkAge = (rule, value, callback) => {
-        var age = parseInt(value, 10);
-
+        if (!value) {
+          return callback(new Error('Please input the age'));
+        }
         setTimeout(() => {
           if (!Number.isInteger(age)) {
             callback(new Error('Please input digits'));
@@ -110,16 +111,13 @@
         },
         rules2: {
           pass: [
-            { required: true, message: 'Please input the password', trigger: 'blur' },
-            { validator: validaePass }
+            { validator: validaePass, trigger: 'blur' }
           ],
           checkPass: [
-            { required: true, message: 'Please input the password again', trigger: 'blur' },
-            { validator: validaePass2 }
+            { validator: validaePass2, trigger: 'blur' }
           ],
           age: [
-            { required: true, message: 'Please input the age', trigger: 'blur' },
-            { validator: checkAge, trigger: 'change' }
+            { validator: checkAge, trigger: 'change', trigger: 'blur' }
           ]
         },
         dynamicForm: {
@@ -645,8 +643,9 @@ Form component allows you to verify your data, helping you find and correct erro
   export default {
     data() {
       var checkAge = (rule, value, callback) => {
-        var age = parseInt(value, 10);
-
+        if (!value) {
+          return callback(new Error('Please input the age'));
+        }
         setTimeout(() => {
           if (!Number.isInteger(age)) {
             callback(new Error('Please input digits'));
@@ -656,10 +655,10 @@ Form component allows you to verify your data, helping you find and correct erro
             } else {
               callback();
             }
-          } 
+          }
         }, 1000);
       };
-      var validatePass = (rule, value, callback) => {
+      var validaePass = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('Please input the password'));
         } else {
@@ -669,7 +668,7 @@ Form component allows you to verify your data, helping you find and correct erro
           callback();
         }
       };
-      var validatePass2 = (rule, value, callback) => {
+      var validaePass2 = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('Please input the password again'));
         } else if (value !== this.ruleForm2.pass) {
@@ -686,16 +685,13 @@ Form component allows you to verify your data, helping you find and correct erro
         },
         rules2: {
           pass: [
-            { required: true, message: 'Please input the password', trigger: 'blur' },
-            { validator: validatePass }
+            { validator: validaePass, trigger: 'blur' }
           ],
           checkPass: [
-            { required: true, message: 'Please input the password again', trigger: 'blur' },
-            { validator: validatePass2 }
+            { validator: validaePass2, trigger: 'blur' }
           ],
           age: [
-            { required: true, message: 'Please input the age', trigger: 'blur' },
-            { validator: checkAge, trigger: 'change' }
+            { validator: checkAge, trigger: 'change', trigger: 'blur' }
           ]
         }
       };

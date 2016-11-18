@@ -2,13 +2,14 @@
   export default {
     data() {
       var checkAge = (rule, value, callback) => {
-        var age = parseInt(value, 10);
-
+        if (!value) {
+          return callback(new Error('年龄不能为空'));
+        }
         setTimeout(() => {
-          if (!Number.isInteger(age)) {
+          if (!Number.isInteger(value)) {
             callback(new Error('请输入数字值'));
-          } else{
-            if (age < 18) {
+          } else {
+            if (value < 18) {
               callback(new Error('必须年满18岁'));
             } else {
               callback();
@@ -110,16 +111,13 @@
         },
         rules2: {
           pass: [
-            { required: true, message: '请输入密码', trigger: 'blur' },
-            { validator: validatePass }
+            { validator: validatePass, trigger: 'blur' }
           ],
           checkPass: [
-            { required: true, message: '请再次输入密码', trigger: 'blur' },
-            { validator: validatePass2 }
+            { validator: validatePass2, trigger: 'blur' }
           ],
           age: [
-            { required: true, message: '请填写年龄', trigger: 'blur' },
-            { validator: checkAge, trigger: 'change' }
+            { validator: checkAge, trigger: 'blur' }
           ]
         },
         dynamicForm: {
@@ -626,7 +624,7 @@
     <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off"></el-input>
   </el-form-item>
   <el-form-item label="年龄" prop="age">
-    <el-input v-model="ruleForm2.age"></el-input>
+    <el-input v-model.number="ruleForm2.age"></el-input>
   </el-form-item>
   <el-form-item>
     <el-button type="primary" @click="handleSubmit2">提交</el-button>
@@ -637,13 +635,14 @@
   export default {
     data() {
       var checkAge = (rule, value, callback) => {
-        var age = parseInt(value, 10);
-
+        if (!value) {
+          return callback(new Error('年龄不能为空'));
+        }
         setTimeout(() => {
-          if (!Number.isInteger(age)) {
+          if (!Number.isInteger(value)) {
             callback(new Error('请输入数字值'));
-          } else{
-            if (age < 18) {
+          } else {
+            if (value < 18) {
               callback(new Error('必须年满18岁'));
             } else {
               callback();
@@ -678,16 +677,13 @@
         },
         rules2: {
           pass: [
-            { required: true, message: '请输入密码', trigger: 'blur' },
-            { validator: validatePass }
+            { validator: validatePass, trigger: 'blur' }
           ],
           checkPass: [
-            { required: true, message: '请再次输入密码', trigger: 'blur' },
-            { validator: validatePass2 }
+            { validator: validatePass2, trigger: 'blur' }
           ],
           age: [
-            { required: true, message: '请填写年龄', trigger: 'blur' },
-            { validator: checkAge, trigger: 'change' }
+            { validator: checkAge, trigger: 'blur' }
           ]
         }
       };
