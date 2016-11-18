@@ -28,28 +28,28 @@
   <div>
     <h2><%= 1 ></h2>
     <el-row :gutter="14" class="cards">
-      <el-col :span="6">  
+      <el-col :xs="12" :sm="6">
         <div class="card">
           <img src="~examples/assets/images/consistency.png" alt="Consistency">
           <h4><%= 2 ></h4>
           <span><%= 3 ></span>
         </div>
       </el-col>
-      <el-col :span="6">  
+      <el-col :xs="12" :sm="6">
         <div class="card">
           <img src="~examples/assets/images/feedback.png" alt="Feedback">
           <h4><%= 4 ></h4>
           <span><%= 5 ></span>
         </div>
       </el-col>
-      <el-col :span="6">  
+      <el-col :xs="12" :sm="6">
         <div class="card">
           <img src="~examples/assets/images/efficiency.png" alt="Efficiency">
           <h4><%= 6 ></h4>
           <span><%= 7 ></span>
         </div>
       </el-col>
-      <el-col :span="6">  
+      <el-col :xs="12" :sm="6">
         <div class="card">
           <img src="~examples/assets/images/controllability.png" alt="Controllability">
           <h4><%= 8 ></h4>
