@@ -221,7 +221,8 @@
           endDate: null,
           selecting: false,
           row: null,
-          column: null
+          column: null,
+          limit: []
         },
         // ['2016-01-01', '2016-12-31']可选择范围，空为无限制，数组0：开始点，数组1：结束点
         ranges: null,
