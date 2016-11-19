@@ -31,7 +31,6 @@
 </template>
 
 <script>
-  // import
   import { getFirstDayOfMonth, getDayCountOfMonth, getWeekNumber, getStartDateOfMonth, DAY_DURATION } from '../util';
   import { hasClass } from 'wind-dom/src/class';
   import Locale from 'element-ui/src/mixins/locale';
