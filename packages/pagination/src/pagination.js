@@ -57,7 +57,7 @@ export default {
       next: <next></next>,
       last: <last></last>,
       sizes: <sizes></sizes>,
-      slot: <slot></slot>,
+      slot: null,
       total: <total></total>
     };
     const components = layout.split(',').map((item) => item.trim());
@@ -73,11 +73,15 @@ export default {
         haveRightWrapper = true;
         return;
       }
+      let vnode = TEMPLATE_MAP[compo];
+      if (compo === 'slot') {
+        vnode = this.$slots.default[0];
+      }
 
       if (!haveRightWrapper) {
-        template.children.push(TEMPLATE_MAP[compo]);
+        template.children.push(vnode);
       } else {
-        rightWrapper.children.push(TEMPLATE_MAP[compo]);
+        rightWrapper.children.push(vnode);
       }
     });
 
