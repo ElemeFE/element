@@ -820,7 +820,4 @@ Form component allows you to verify your data, helping you find and correct erro
 | label-width | width of label, e.g. '50px' | string | — | — |
 | required | whether the field is required or not, will be determined by validation rules if omitted | string |  — | false |
 | rules | validation rules of form | object | — | — |
-
-
-
-
+| error | field error message, set its value and the field will validate error and show this message immediately | string | — | — |

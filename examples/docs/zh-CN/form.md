@@ -811,3 +811,4 @@
 | label-width | 表单域标签的的宽度，例如 '50px' | string |       —       | — |
 | required | 是否必填，如不设置，则会根据校验规则自动生成 | bolean | — | false |
 | rules    | 表单验证规则 | object | — | — |
+| error    | 表单域验证错误信息, 设置该值会使表单验证状态变为`error`，并显示该错误信息 | string | — | — |

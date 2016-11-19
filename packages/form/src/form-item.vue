@@ -1,7 +1,7 @@
 <template>
   <div class="el-form-item" :class="{
-    'is-error': error !== '',
-    'is-validating': validating,
+    'is-error': validateState === 'error',
+    'is-validating': validateState === 'validating',
     'is-required': isRequired || required
   }">
     <label class="el-form-item__label" v-bind:style="labelStyle" v-if="label">
@@ -10,7 +10,7 @@
     <div class="el-form-item__content" v-bind:style="contentStyle">
       <slot></slot>
       <transition name="md-fade-bottom">
-        <div class="el-form-item__error" v-if="error !== ''">{{error}}</div>
+        <div class="el-form-item__error" v-if="validateState === 'error'">{{validateMessage}}</div>
       </transition>
     </div>
   </div>
@@ -18,6 +18,8 @@
 <script>
   import AsyncValidator from 'async-validator';
   import emitter from 'element-ui/src/mixins/emitter';
+
+  function noop() {}
 
   export default {
     name: 'ElFormItem',
@@ -31,7 +33,18 @@
       labelWidth: String,
       prop: String,
       required: Boolean,
-      rules: [Object, Array]
+      rules: [Object, Array],
+      error: String,
+      validateStatus: String
+    },
+    watch: {
+      error(value) {
+        this.validateMessage = value;
+        this.validateState = 'error';
+      },
+      validateStatus(value) {
+        this.validateState = value;
+      }
     },
     computed: {
       labelStyle() {
@@ -73,23 +86,22 @@
     },
     data() {
       return {
-        valid: true,
-        error: '',
+        validateState: '',
+        validateMessage: '',
         validateDisabled: false,
-        validating: false,
         validator: {},
         isRequired: false
       };
     },
     methods: {
-      validate(trigger, cb) {
+      validate(trigger, callback = noop) {
         var rules = this.getFilteredRule(trigger);
         if (!rules || rules.length === 0) {
-          cb && cb();
+          callback();
           return true;
         }
 
-        this.validating = true;
+        this.validateState = 'validating';
 
         var descriptor = {};
         descriptor[this.prop] = rules;
@@ -100,16 +112,15 @@
         model[this.prop] = this.fieldValue;
 
         validator.validate(model, { firstFields: true }, (errors, fields) => {
-          this.valid = !errors;
-          this.error = errors ? errors[0].message : '';
+          this.validateState = !errors ? 'success' : 'error';
+          this.validateMessage = errors ? errors[0].message : '';
 
-          cb && cb(errors);
-          this.validating = false;
+          callback(errors);
         });
       },
       resetField() {
-        this.valid = true;
-        this.error = '';
+        this.validateState = '';
+        this.validateMessage = '';
 
         let model = this.form.model;
         let value = this.fieldValue;
