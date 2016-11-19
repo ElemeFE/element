@@ -219,15 +219,15 @@ describe('Form', () => {
         let fields = vm.$refs.form.fields;
         expect(valid).to.not.true;
         vm.$refs.form.$nextTick(_ => {
-          expect(fields.name.error).to.equal('请输入活动名称');
+          expect(fields.name.validateMessage).to.equal('请输入活动名称');
           vm.setValue('aaaaa');
 
           vm.$refs.form.$nextTick(_ => {
-            expect(fields.name.error).to.equal('');
+            expect(fields.name.validateMessage).to.equal('');
             vm.setValue('aa');
 
             vm.$refs.form.$nextTick(_ => {
-              expect(fields.name.error).to.equal('请输入活动名称');
+              expect(fields.name.validateMessage).to.equal('请输入活动名称');
               done();
             });
           });
@@ -265,15 +265,15 @@ describe('Form', () => {
         let fields = vm.$refs.form.fields;
         expect(valid).to.not.true;
         vm.$refs.form.$nextTick(_ => {
-          expect(fields.name.error).to.equal('请输入活动名称');
+          expect(fields.name.validateMessage).to.equal('请输入活动名称');
           vm.setValue('aaaaa');
 
           vm.$refs.form.$nextTick(_ => {
-            expect(fields.name.error).to.equal('');
+            expect(fields.name.validateMessage).to.equal('');
             vm.setValue('aa');
 
             vm.$refs.form.$nextTick(_ => {
-              expect(fields.name.error).to.equal('请输入活动名称');
+              expect(fields.name.validateMessage).to.equal('请输入活动名称');
               done();
             });
           });
@@ -315,11 +315,11 @@ describe('Form', () => {
         expect(valid).to.true;
         vm.setValue('');
         setTimeout(_ => {
-          expect(fields.region.error).to.equal('请选择活动区域');
+          expect(fields.region.validateMessage).to.equal('请选择活动区域');
           vm.setValue('shanghai');
 
           setTimeout(_ => {
-            expect(fields.region.error).to.equal('');
+            expect(fields.region.validateMessage).to.equal('');
             done();
           }, 100);
         }, 100);
@@ -356,12 +356,12 @@ describe('Form', () => {
         let fields = vm.$refs.form.fields;
         expect(valid).to.not.true;
         vm.$refs.form.$nextTick(_ => {
-          expect(fields.date.error).to.equal('请选择日期');
+          expect(fields.date.validateMessage).to.equal('请选择日期');
 
           vm.setValue(new Date());
 
           vm.$refs.form.$nextTick(_ => {
-            expect(fields.date.error).to.equal('');
+            expect(fields.date.validateMessage).to.equal('');
             done();
           });
         });
@@ -398,11 +398,11 @@ describe('Form', () => {
         let fields = vm.$refs.form.fields;
         expect(valid).to.not.true;
         vm.$refs.form.$nextTick(_ => {
-          expect(fields.date.error).to.equal('请选择时间');
+          expect(fields.date.validateMessage).to.equal('请选择时间');
           vm.setValue(new Date());
 
           vm.$refs.form.$nextTick(_ => {
-            expect(fields.date.error).to.equal('');
+            expect(fields.date.validateMessage).to.equal('');
             done();
           });
         });
@@ -444,11 +444,11 @@ describe('Form', () => {
         let fields = vm.$refs.form.fields;
         expect(valid).to.not.true;
         vm.$refs.form.$nextTick(_ => {
-          expect(fields.type.error).to.equal('请选择活动类型');
+          expect(fields.type.validateMessage).to.equal('请选择活动类型');
           vm.setValue(['地推活动']);
 
           vm.$refs.form.$nextTick(_ => {
-            expect(fields.type.error).to.equal('');
+            expect(fields.type.validateMessage).to.equal('');
             done();
           });
         });
@@ -488,11 +488,11 @@ describe('Form', () => {
         let fields = vm.$refs.form.fields;
         expect(valid).to.not.true;
         vm.$refs.form.$nextTick(_ => {
-          expect(fields.type.error).to.equal('请选择活动类型');
+          expect(fields.type.validateMessage).to.equal('请选择活动类型');
           vm.setValue('线下场地免费');
 
           vm.$refs.form.$nextTick(_ => {
-            expect(fields.type.error).to.equal('');
+            expect(fields.type.validateMessage).to.equal('');
             done();
           });
         });
@@ -568,13 +568,53 @@ describe('Form', () => {
         let fields = vm.$refs.form.fields;
         expect(valid).to.not.true;
         vm.$refs.form.$nextTick(_ => {
-          expect(fields.name.error).to.equal('长度至少为5');
+          expect(fields.name.validateMessage).to.equal('长度至少为5');
           vm.setValue('aaaaaa');
 
           vm.$refs.form.$nextTick(_ => {
-            expect(fields.name.error).to.equal('');
+            expect(fields.name.validateMessage).to.equal('');
             done();
           });
+        });
+      });
+    });
+    it('error', done => {
+      vm = createVue({
+        template: `
+          <el-form :model="form" :rules="rules" ref="form">
+            <el-form-item label="活动名称" prop="name" :error="error" ref="formitem">
+              <el-input v-model="form.name"></el-input>
+            </el-form-item>
+          </el-form>
+        `,
+        data() {
+          return {
+            error: 'dsad',
+            form: {
+              name: 'sada'
+            },
+            rules: {
+              name: [
+                { required: true, message: '请输入活动名称', trigger: 'change', min: 3, max: 6 }
+              ]
+            }
+          };
+        },
+        methods: {
+          setValue(value) {
+            this.form.name = value;
+          }
+        }
+      }, true);
+      vm.$refs.form.validate(valid => {
+        let fields = vm.$refs.form.fields;
+        expect(valid).to.true;
+        vm.error = '输入不合法';
+
+        vm.$refs.formitem.$nextTick(_ => {
+          expect(fields.name.validateState).to.equal('error');
+          expect(fields.name.validateMessage).to.equal('输入不合法');
+          done();
         });
       });
     });
