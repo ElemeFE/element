@@ -39,6 +39,7 @@
       :name="name"
       :disabled="disabled"
       :readonly="!filterable || multiple"
+      @click="toggleMenu"
       @focus="toggleMenu"
       @keyup.native="debouncedOnInputChange"
       @keydown.native.down.prevent="navigateOptions('next')"
