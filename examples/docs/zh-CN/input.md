@@ -759,6 +759,7 @@ export default {
 | click | 点击 Input 内的图标时触发 | event |
 | blur | 在 Input 失去焦点时触发 | event |
 | focus | 在 Input 或得焦点时触发 | event |
+| change | 当 Input 失去焦点 或 按下 Enter 时触发 只在 `type!="textarea"` 时有效  | event | 
 
 ### Autocomplete Attributes
 
