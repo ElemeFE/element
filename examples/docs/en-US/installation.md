@@ -30,7 +30,7 @@ If you are using CDN, a hello-world page is easy with Element. [Online Demo](htt
 </head>
 <body>
   <div id="app">
-    <el-button @click.native="visible = true">Button</el-button>
+    <el-button @click="visible = true">Button</el-button>
     <el-dialog v-model="visible" title="Hello world">
       <p>Try Element</p>
     </el-dialog>

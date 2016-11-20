@@ -91,7 +91,7 @@ Alert interrupts user operation until the user confirms.
 
 ```html
 <template>
-  <el-button type="text" @click.native="open">Click to open the Message Box</el-button>
+  <el-button type="text" @click="open">Click to open the Message Box</el-button>
 </template>
 
 <script>
@@ -122,7 +122,7 @@ Confirm is used to ask users' confirmation.
 
 ```html
 <template>
-  <el-button type="text" @click.native="open2">Click to open the Message Box</el-button>
+  <el-button type="text" @click="open2">Click to open the Message Box</el-button>
 </template>
 
 <script>
@@ -160,7 +160,7 @@ Prompt is used when user input is required.
 
 ```html
 <template>
-  <el-button type="text" @click.native="open3">Click to open Message Box</el-button>
+  <el-button type="text" @click="open3">Click to open Message Box</el-button>
 </template>
 
 <script>
@@ -198,7 +198,7 @@ Can be customized to show various content.
 
 ```html
 <template>
-  <el-button type="text" @click.native="open4">Click to open Message Box</el-button>
+  <el-button type="text" @click="open4">Click to open Message Box</el-button>
 </template>
 
 <script>
