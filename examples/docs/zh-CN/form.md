@@ -728,7 +728,7 @@
       }
     }"
   >
-    <el-input v-model="domain.value"></el-input><el-button @click.native.prevent="removeDomain(domain)">删除</el-button>
+    <el-input v-model="domain.value"></el-input><el-button @click.prevent="removeDomain(domain)">删除</el-button>
   </el-form-item>
   <el-form-item>
     <el-button type="primary" @click="handleSubmit3">提交</el-button>

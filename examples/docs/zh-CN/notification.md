@@ -66,12 +66,12 @@
 <template>
   <el-button
     plain
-    @click.native="open">
+    @click="open">
     可自动关闭
   </el-button>
   <el-button
     plain
-    @click.native="open2">
+    @click="open2">
     不会自动关闭
     </el-button>
 </template>
@@ -108,22 +108,22 @@
 <template>
   <el-button
     plain
-    @click.native="open3">
+    @click="open3">
     成功
   </el-button>
   <el-button
     plain
-    @click.native="open4">
+    @click="open4">
     警告
   </el-button>
   <el-button
     plain
-    @click.native="open5">
+    @click="open5">
     消息
   </el-button>
   <el-button
     plain
-    @click.native="open6">
+    @click="open6">
     错误
   </el-button>
 </template>

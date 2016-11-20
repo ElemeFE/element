@@ -170,7 +170,7 @@ In fact, Tooltip is an extension based on [Vue-popper](https://github.com/elemen
 ```html
 <template>
   <el-tooltip :disabled="disabled" content="click to close tooltip function" placement="bottom" effect="light">
-    <el-button @click.native="disabled=true">click to close tooltip function</el-button>
+    <el-button @click="disabled=true">click to close tooltip function</el-button>
   </el-tooltip>
 </template>
 
