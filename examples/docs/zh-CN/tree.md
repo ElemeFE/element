@@ -238,7 +238,7 @@
 | highlight-current | 是否高亮当前选中节点，默认值是 false。| boolean | - | false |
 | default-expand-all | 是否默认展开所有节点 | boolean | - | false |
 | auto-expand-parent | 展开子节点的时候是否自动展开父节点 | boolean | — | true |
-| default-expand-keys | 默认展开的节点的 key 的数组 | array | — | — |
+| default-expanded-keys | 默认展开的节点的 key 的数组 | array | — | — |
 | show-checkbox | 节点是否可被选择 | boolean | — | false |
 | check-strictly | 在显示复选框的情况下，是否严格的遵循父子不互相关联的做法，默认为 false | boolean | — | false |
 | default-checked-keys | 默认勾选的节点的 key 的数组 | array | — | — |
