@@ -84,6 +84,7 @@
 
     data() {
       return {
+        precision: null,
         inputValue: null,
         timeout: null,
         hovering: false,
@@ -136,9 +137,13 @@
 
       setPosition(newPos) {
         if (newPos >= 0 && (newPos <= 100)) {
-          var lengthPerStep = 100 / ((this.max - this.min) / this.step);
-          var steps = Math.round(newPos / lengthPerStep);
-          this.$emit('input', Math.round(steps * lengthPerStep * (this.max - this.min) * 0.01 + this.min));
+          const lengthPerStep = 100 / ((this.max - this.min) / this.step);
+          const steps = Math.round(newPos / lengthPerStep);
+          let value = steps * lengthPerStep * (this.max - this.min) * 0.01 + this.min;
+          if (this.precision) {
+            value = parseFloat(value.toFixed(this.precision));
+          }
+          this.$emit('input', value);
           this.currentPosition = (this.value - this.min) / (this.max - this.min) * 100 + '%';
           if (!this.dragging) {
             if (this.value !== this.oldValue) {
@@ -151,10 +156,8 @@
 
       onSliderClick(event) {
         if (this.disabled) return;
-        var currentX = event.clientX;
-        var sliderOffsetLeft = this.$refs.slider.getBoundingClientRect().left;
-        var newPos = (currentX - sliderOffsetLeft) / this.$sliderWidth * 100;
-        this.setPosition(newPos);
+        const sliderOffsetLeft = this.$refs.slider.getBoundingClientRect().left;
+        this.setPosition((event.clientX - sliderOffsetLeft) / this.$sliderWidth * 100);
       },
 
       onInputChange() {
@@ -176,7 +179,7 @@
         if (this.dragging) {
           this.$refs.tooltip.showPopper = true;
           this.currentX = event.clientX;
-          var diff = (this.currentX - this.startX) / this.$sliderWidth * 100;
+          const diff = (this.currentX - this.startX) / this.$sliderWidth * 100;
           this.newPos = this.startPos + diff;
           this.setPosition(this.newPos);
         }
@@ -206,10 +209,10 @@
       },
 
       stops() {
-        let stopCount = (this.max - this.value) / this.step;
-        let result = [];
-        let currentLeft = parseFloat(this.currentPosition);
-        let stepWidth = 100 * this.step / (this.max - this.min);
+        const stopCount = (this.max - this.value) / this.step;
+        const currentLeft = parseFloat(this.currentPosition);
+        const stepWidth = 100 * this.step / (this.max - this.min);
+        const result = [];
         for (let i = 1; i < stopCount; i++) {
           result.push(currentLeft + i * stepWidth);
         }
@@ -222,6 +225,9 @@
         this.$emit('input', this.min);
       } else if (this.value > this.max) {
         this.$emit('input', this.max);
+      }
+      if (this.step && this.step < 1) {
+        this.precision = this.step.toPrecision(1).split('.')[1].length;
       }
       this.inputValue = this.inputValue || this.value;
     }
