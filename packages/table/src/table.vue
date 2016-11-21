@@ -194,20 +194,22 @@
         const { bodyWrapper, headerWrapper } = this.$refs;
         const refs = this.$refs;
         bodyWrapper.addEventListener('scroll', function() {
-          headerWrapper.scrollLeft = this.scrollLeft;
+          if (headerWrapper) headerWrapper.scrollLeft = this.scrollLeft;
           if (refs.fixedBodyWrapper) refs.fixedBodyWrapper.scrollTop = this.scrollTop;
           if (refs.rightFixedBodyWrapper) refs.rightFixedBodyWrapper.scrollTop = this.scrollTop;
         });
 
-        mousewheel(headerWrapper, throttle(16, function(event) {
-          const deltaX = event.deltaX;
+        if (headerWrapper) {
+          mousewheel(headerWrapper, throttle(16, function(event) {
+            const deltaX = event.deltaX;
 
-          if (deltaX > 0) {
-            bodyWrapper.scrollLeft = bodyWrapper.scrollLeft + 10;
-          } else {
-            bodyWrapper.scrollLeft = bodyWrapper.scrollLeft - 10;
-          }
-        }));
+            if (deltaX > 0) {
+              bodyWrapper.scrollLeft = bodyWrapper.scrollLeft + 10;
+            } else {
+              bodyWrapper.scrollLeft = bodyWrapper.scrollLeft - 10;
+            }
+          }));
+        }
 
         if (this.fit) {
           this.windowResizeListener = throttle(50, () => {
