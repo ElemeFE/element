@@ -50,6 +50,7 @@ export default class Node {
     this.data = null;
     this.expanded = false;
     this.parent = null;
+    this.visible = true;
 
     for (let name in options) {
       if (options.hasOwnProperty(name)) {

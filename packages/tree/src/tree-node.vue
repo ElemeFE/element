@@ -1,7 +1,8 @@
 <template>
   <div class="el-tree-node"
     @click.stop="handleClick"
-    :class="{ 'is-expanded': childNodeRendered && expanded, 'is-current': $tree.currentNode === _self }">
+    v-show="node.visible"
+    :class="{ 'is-expanded': childNodeRendered && expanded, 'is-current': $tree.currentNode === _self, 'is-hidden': !node.visible }">
     <div class="el-tree-node__content"
       :style="{ 'padding-left': (node.level - 1) * 16 + 'px' }"
       @click="handleExpandIconClick">
