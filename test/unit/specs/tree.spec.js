@@ -127,6 +127,25 @@ describe('Tree', () => {
     expect(vm.$el.querySelectorAll('.el-tree-node.is-expanded').length).to.equal(2);
   });
 
+  it('filter-node-method', (done) => {
+    vm = getTreeVm(':props="defaultProps" :filter-node-method="filterNode"', {
+      methods: {
+        filterNode(value, data) {
+          if (!value) return true;
+          return data.label.indexOf(value) !== -1;
+        }
+      }
+    });
+
+    const tree = vm.$refs.tree;
+    tree.filter('2-1');
+
+    setTimeout(() => {
+      expect(tree.$el.querySelectorAll('.el-tree-node.is-hidden').length).to.equal(7);
+      done();
+    }, 100);
+  });
+
   it('autoExpandParent = true', () => {
     vm = getTreeVm(':props="defaultProps" :default-expanded-keys="defaultExpandedKeys" node-key="id"', {
       created() {

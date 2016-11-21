@@ -242,6 +242,7 @@
 | show-checkbox | 节点是否可被选择 | boolean | — | false |
 | check-strictly | 在显示复选框的情况下，是否严格的遵循父子不互相关联的做法，默认为 false | boolean | — | false |
 | default-checked-keys | 默认勾选的节点的 key 的数组 | array | — | — |
+| filter-node-method | 对树节点进行筛选时执行的方法，返回 true 表示这个节点可以显示，返回 false 则表示这个节点会被隐藏 | Function(value, data, node) | - | - |
 
 ### props
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
@@ -253,6 +254,7 @@
 `Tree` 拥有如下方法，返回目前被选中的节点数组：
 | 方法名 | 说明 | 参数 |
 |------|--------|------|
+| filter | 对树节点进行筛选操作 | 接收一个任意类型的参数，该参数会在 filter-node-method 中作为第一个参数 |
 | getCheckedNodes | 若节点可被选择（即 `show-checkbox` 为 `true`），<br>则返回目前被选中的节点所组成的数组 | (leafOnly) 接收一个 boolean 类型的参数，若为 `true` 则<br>仅返回被选中的叶子节点，默认值为 `false` |
 | setCheckedNodes | 设置目前勾选的节点，使用此方法必须设置 node-key 属性 | (nodes) 接收勾选节点数据的数组 |
 | getCheckedKeys | 若节点可被选择（即 `show-checkbox` 为 `true`），<br>则返回目前被选中的节点所组成的数组 | (leafOnly) 接收一个 boolean 类型的参数，若为 `true` 则仅返回被选中的叶子节点的 keys，默认值为 `true` |

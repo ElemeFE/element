@@ -26,6 +26,37 @@ export default class Tree {
     }
   }
 
+  filter(value) {
+    const filterNodeMethod = this.filterNodeMethod;
+    const traverse = function(node) {
+      const childNodes = node.root ? node.root.childNodes : node.childNodes;
+
+      childNodes.forEach((child) => {
+        child.visible = filterNodeMethod.call(child, value, child.data, child);
+
+        traverse(child);
+      });
+
+      if (!node.visible && childNodes.length) {
+        let allHidden = true;
+
+        childNodes.forEach((child) => {
+          if (child.visible) allHidden = false;
+        });
+
+        if (node.root) {
+          node.root.visible = allHidden === false;
+        } else {
+          node.visible = allHidden === false;
+        }
+      }
+
+      if (node.visible && !node.isLeaf) node.expand();
+    };
+
+    traverse(this);
+  }
+
   setData(newVal) {
     const instanceChanged = newVal !== this.root.data;
     this.root.setData(newVal);
