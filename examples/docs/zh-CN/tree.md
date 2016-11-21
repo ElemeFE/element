@@ -253,8 +253,10 @@
 `Tree` 拥有如下方法，返回目前被选中的节点数组：
 | 方法名 | 说明 | 参数 |
 |------|--------|------|
-| getCheckedNodes | 若节点可被选择（即 `show-checkbox` 为 `true`），<br>则返回目前被选中的节点所组成的数组 | 接收一个 boolean 类型的参数，若为 `true` 则<br>仅返回被选中的叶子节点，默认值为 `false` |
-| setCheckedNodes | 设置目前勾选的节点，使用此方法必须设置 node-keys 属性 | 接收勾选节点数据的数组 |
+| getCheckedNodes | 若节点可被选择（即 `show-checkbox` 为 `true`），<br>则返回目前被选中的节点所组成的数组 | (leafOnly) 接收一个 boolean 类型的参数，若为 `true` 则<br>仅返回被选中的叶子节点，默认值为 `false` |
+| setCheckedNodes | 设置目前勾选的节点，使用此方法必须设置 node-key 属性 | (nodes) 接收勾选节点数据的数组 |
+| getCheckedKeys | 若节点可被选择（即 `show-checkbox` 为 `true`），<br>则返回目前被选中的节点所组成的数组 | (leafOnly) 接收一个 boolean 类型的参数，若为 `true` 则仅返回被选中的叶子节点的 keys，默认值为 `true` |
+| setCheckedKeys | 通过 keys 设置目前勾选的节点，使用此方法必须设置 node-key 属性 | (keys, leafOnly) 接收两个参数，1. 勾选节点的 key 的数组 2. boolean 类型的参数，<br>若为 `true` 则仅设置叶子节点的选中状态，默认值为 `true` |
 
 ### Events
 | 事件名称      | 说明    | 回调参数      |

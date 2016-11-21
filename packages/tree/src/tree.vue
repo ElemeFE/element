@@ -112,9 +112,16 @@
       getCheckedNodes(leafOnly) {
         return this.tree.getCheckedNodes(leafOnly);
       },
-      setCheckedNodes(nodes) {
+      getCheckedKeys(leafOnly) {
+        return this.tree.getCheckedKeys(leafOnly);
+      },
+      setCheckedNodes(nodes, leafOnly) {
         if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in setCheckedNodes');
-        this.tree.setCheckedNodes(nodes);
+        this.tree.setCheckedNodes(nodes, leafOnly);
+      },
+      setCheckedKeys(keys, leafOnly) {
+        if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in setCheckedNodes');
+        this.tree.setCheckedKeys(keys, leafOnly);
       }
     }
   };
