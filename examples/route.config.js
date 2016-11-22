@@ -38,7 +38,7 @@ const registerRoute = (navConfig) => {
         description: page.description,
         lang
       },
-      name: 'component',
+      name: 'component-' + (page.title || page.name),
       component: component.default || component
     };
 
@@ -57,12 +57,12 @@ const generateMiscRoutes = function(lang) {
     component: require(`./pages/${ lang }/guide.vue`),
     children: [{
       path: 'design', // 设计原则
-      name: 'guide',
+      name: 'guide-design' + lang,
       meta: { lang },
       component: require(`./pages/${ lang }/design.vue`)
     }, {
       path: 'nav', // 导航
-      name: 'guide',
+      name: 'guide-nav' + lang,
       meta: { lang },
       component: require(`./pages/${ lang }/nav.vue`)
     }]
@@ -71,14 +71,14 @@ const generateMiscRoutes = function(lang) {
   let resourceRoute = {
     path: `/${ lang }/resource`, // 资源
     meta: { lang },
-    name: 'resource',
+    name: 'resource' + lang,
     component: require(`./pages/${ lang }/resource.vue`)
   };
 
   let indexRoute = {
     path: `/${ lang }`, // 首页
     meta: { lang },
-    name: 'home',
+    name: 'home' + lang,
     component: require(`./pages/${ lang }/index.vue`)
   };
 
