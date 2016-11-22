@@ -148,7 +148,7 @@
 
     computed: {
       validating() {
-        return this.$parent.validating;
+        return this.$parent.validateState === 'validating';
       }
     },
 

@@ -84,7 +84,7 @@
       },
 
       handleClear() {
-        this.$emit('pick');
+        this.$emit('pick', '');
       }
     },
 

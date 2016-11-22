@@ -6,10 +6,10 @@
           return callback(new Error('Please input the age'));
         }
         setTimeout(() => {
-          if (!Number.isInteger(age)) {
+          if (!Number.isInteger(value)) {
             callback(new Error('Please input digits'));
-          } else{
-            if (age < 18) {
+          } else {
+            if (value < 18) {
               callback(new Error('Age must be greater than 18'));
             } else {
               callback();
@@ -117,7 +117,7 @@
             { validator: validaePass2, trigger: 'blur' }
           ],
           age: [
-            { validator: checkAge, trigger: 'change', trigger: 'blur' }
+            { validator: checkAge, trigger: 'blur' }
           ]
         },
         dynamicForm: {
@@ -171,6 +171,9 @@
       },
       handleReset2() {
         this.$refs.ruleForm2.resetFields();
+      },
+      handleReset3() {
+        this.$refs.dynamicForm.resetFields();
       },
       handleValidate(prop, errorMsg) {
         console.log(prop, errorMsg);
@@ -632,7 +635,7 @@ Form component allows you to verify your data, helping you find and correct erro
     <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off"></el-input>
   </el-form-item>
   <el-form-item label="Age" prop="age">
-    <el-input v-model="ruleForm2.age"></el-input>
+    <el-input v-model.number="ruleForm2.age"></el-input>
   </el-form-item>
   <el-form-item>
     <el-button type="primary" @click="handleSubmit2">Submit</el-button>
@@ -647,10 +650,10 @@ Form component allows you to verify your data, helping you find and correct erro
           return callback(new Error('Please input the age'));
         }
         setTimeout(() => {
-          if (!Number.isInteger(age)) {
+          if (!Number.isInteger(value)) {
             callback(new Error('Please input digits'));
-          } else{
-            if (age < 18) {
+          } else {
+            if (value < 18) {
               callback(new Error('Age must be greater than 18'));
             } else {
               callback();
@@ -691,7 +694,7 @@ Form component allows you to verify your data, helping you find and correct erro
             { validator: validaePass2, trigger: 'blur' }
           ],
           age: [
-            { validator: checkAge, trigger: 'change', trigger: 'blur' }
+            { validator: checkAge, trigger: 'blur' }
           ]
         }
       };
@@ -729,12 +732,9 @@ Form component allows you to verify your data, helping you find and correct erro
     v-for="(domain, index) in dynamicForm.domains"
     :label="'Domain' + index"
     :key="domain.key"
-    :prop="'domains:' + index"
+    :prop="'domains.' + index + '.value'"
     :rules="{
-      type: 'object', required: true,
-      fields: {
-        value: { required: true, message: 'domain can not be null', trigger: 'blur' }
-      }
+      required: true, message: 'domain can not be null', trigger: 'blur'
     }"
   >
     <el-input v-model="domain.value"></el-input><el-button @click.prevent="removeDomain(domain)">Delete</el-button>
@@ -742,6 +742,7 @@ Form component allows you to verify your data, helping you find and correct erro
   <el-form-item>
     <el-button type="primary" @click="handleSubmit3">Submit</el-button>
     <el-button @click="addDomain">New domain</el-button>
+    <el-button @click="handleReset3">Reset</el-button>
   </el-form-item>
 </el-form>
 <script>
@@ -774,15 +775,18 @@ Form component allows you to verify your data, helping you find and correct erro
           }
         });
       },
+      handleReset3() {
+        this.$refs.dynamicForm.resetFields();
+      },
       removeDomain(item) {
-        var index = this.dynamicForm.domains.indexOf(item)
+        var index = this.dynamicForm.domains.indexOf(item);
         if (index !== -1) {
-          this.dynamicForm.domains.splice(index, 1)
+          this.dynamicForm.domains.splice(index, 1);
         }
       },
       addDomain() {
         this.dynamicForm.domains.push({
-          key: this.dynamicForm.domains.length,
+          key: Date.now(),
           value: ''
         });
       }
