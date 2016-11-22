@@ -226,7 +226,7 @@ Used for node selection. In the following example, data for each layer is acquir
 | highlight-current | whether current node is highlighted | boolean | - | false |
 | default-expand-all | whether to expand all nodes by default | boolean | - | false |
 | auto-expand-parent | whether to expand father node when a child node is expanded | boolean | — | true |
-| default-expand-keys | array of keys of initially expanded nodes | array | — | — |
+| default-expanded-keys | array of keys of initially expanded nodes | array | — | — |
 | show-checkbox | whether node is selectable | boolean | — | false |
 | check-strictly | whether checked state of a node not affects its father and child nodes when `show-checkbox` is `true` | boolean | — | false |
 | default-checked-keys | array of keys of initially checked nodes | array | — | — |
