@@ -40,6 +40,8 @@
       :disabled="disabled"
       :readonly="!filterable || multiple"
       @focus="toggleMenu"
+      @click="toggleMenu"
+      @mousedown.native="handleMouseDown"
       @keyup.native="debouncedOnInputChange"
       @keydown.native.down.prevent="navigateOptions('next')"
       @keydown.native.up.prevent="navigateOptions('prev')"
@@ -326,6 +328,14 @@
     },
 
     methods: {
+      handleMouseDown(event) {
+        if (event.target.tagName !== 'INPUT') return;
+        if (this.visible) {
+          this.handleClose();
+          event.preventDefault();
+        }
+      },
+
       doDestroy() {
         this.$refs.popper.doDestroy();
       },
