@@ -70,6 +70,7 @@
     "cross-env": "^3.1.3",
     "css-loader": "^0.24.0",
     "es6-promise": "^4.0.5",
+    "eslint": "^3.10.2",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
     "file-save": "^0.2.0",

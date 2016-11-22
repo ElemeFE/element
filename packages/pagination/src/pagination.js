@@ -2,7 +2,7 @@ import Pager from './pager.vue';
 import ElSelect from 'element-ui/packages/select';
 import ElOption from 'element-ui/packages/option';
 import Migrating from 'element-ui/src/mixins/migrating';
-import { t } from 'element-ui/src/locale';
+import Locale from 'element-ui/src/mixins/locale';
 
 export default {
   name: 'ElPagination',
@@ -117,6 +117,8 @@ export default {
     },
 
     Sizes: {
+      mixins: [Locale],
+
       created() {
         if (Array.isArray(this.$parent.pageSizes)) {
           this.$parent.internalPageSize = this.$parent.pageSizes.indexOf(this.$parent.pageSize) > -1
@@ -137,7 +139,7 @@ export default {
                 this.$parent.pageSizes.map(item =>
                     <el-option
                       value={ item }
-                      label={ item + ' ' + t('el.pagination.pagesize') }>
+                      label={ item + ' ' + this.t('el.pagination.pagesize') }>
                     </el-option>
                   )
               }
@@ -162,6 +164,8 @@ export default {
     },
 
     Jumper: {
+      mixins: [Locale],
+
       data() {
         return {
           oldValue: null
@@ -186,7 +190,7 @@ export default {
       render(h) {
         return (
           <span class="el-pagination__jump">
-            { t('el.pagination.goto') }
+            { this.t('el.pagination.goto') }
             <input
               class="el-pagination__editor"
               type="number"
@@ -197,17 +201,19 @@ export default {
               on-focus={ this.handleFocus }
               style={{ width: '30px' }}
               number/>
-            { t('el.pagination.pageClassifier') }
+            { this.t('el.pagination.pageClassifier') }
           </span>
         );
       }
     },
 
     Total: {
+      mixins: [Locale],
+
       render(h) {
         return (
           typeof this.$parent.total === 'number'
-            ? <span class="el-pagination__total">{ t('el.pagination.total', { total: this.$parent.total }) }</span>
+            ? <span class="el-pagination__total">{ this.t('el.pagination.total', { total: this.$parent.total }) }</span>
             : ''
         );
       }
