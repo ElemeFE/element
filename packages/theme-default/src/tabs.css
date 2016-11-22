@@ -35,6 +35,22 @@
       margin-bottom: -1px;
       position: relative;
 
+      & .el-icon-close {
+        border-radius: 50%;
+        text-align: center;
+        transition: all .3s cubic-bezier(.645,.045,.355,1);
+        margin-left: 5px;
+        &:before {
+          transform: scale(.7, .7);
+          display: inline-block;
+        }
+
+        &:hover {
+          background-color: #99a9bf;
+          color: #fff;
+        }
+      }
+
       @when active {
         color: var(--color-primary);
       }
@@ -53,29 +69,16 @@
         display: none;
       }
       & .el-tabs__item .el-icon-close {
+        position: relative;
         font-size: 12px;
+        width: 0;
+        height: 14px;
         vertical-align: middle;
         line-height: 15px;
         overflow: hidden;
-        width: 0;
-        height: 14px;
-        border-radius: 50%;
-        text-align: center;
-        transform-origin: 100% 50%;
-        transition: all .3s cubic-bezier(.645,.045,.355,1);
-        position: relative;
         top: -1px;
         right: -2px;
-
-        &:before {
-          transform: scale(.7, .7);
-          display: inline-block;
-        }
-
-        &:hover {
-          background-color: #99a9bf;
-          color: #fff;
-        }
+        transform-origin: 100% 50%;
       }
       .el-tabs__item {
         border: 1px solid transparent;
