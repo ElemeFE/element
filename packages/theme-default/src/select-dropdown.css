@@ -35,6 +35,10 @@
     }
   }
 
+  @b select-dropdown__search{
+      margin:5px;
+    }
+
   @b select-dropdown__empty {
     padding: var(--select-dropdown-empty-padding);
     margin: 0;
