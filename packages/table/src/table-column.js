@@ -306,21 +306,21 @@ export default {
     width(newVal) {
       if (this.columnConfig) {
         this.columnConfig.width = newVal;
-        this.owner.scheduleLayout();
+        this.owner.store.scheduleLayout();
       }
     },
 
     minWidth(newVal) {
       if (this.columnConfig) {
         this.columnConfig.minWidth = newVal;
-        this.owner.scheduleLayout();
+        this.owner.store.scheduleLayout();
       }
     },
 
     fixed(newVal) {
       if (this.columnConfig) {
         this.columnConfig.fixed = newVal;
-        this.owner.scheduleLayout();
+        this.owner.store.scheduleLayout();
       }
     }
   },

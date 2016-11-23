@@ -149,6 +149,8 @@ class TableLayout {
       flattenColumns.forEach((column) => {
         if (!column.width && !column.minWidth) {
           column.realWidth = 80;
+        } else {
+          column.realWidth = column.width || column.minWidth;
         }
 
         bodyMinWidth += column.realWidth;
