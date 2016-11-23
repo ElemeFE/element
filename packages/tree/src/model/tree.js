@@ -54,6 +54,23 @@ export default class Tree {
       node.setChecked(true, !this.checkStrictly);
     }
   }
+  _initDefaultExpandedNode() {
+    const defaultExpandedKeys = this.defaultExpandedKeys || [];
+    const nodesMap = this.nodesMap;
+
+    defaultExpandedKeys.forEach((expandedKey) => {
+      const node = nodesMap[expandedKey];
+      if (node) {
+        node.expand();
+      }
+    });
+  }
+  setDefaultExpandedKey(newVal) {
+    if (newVal !== this.defaultExpandedKeys) {
+      this.defaultExpandedKeys = newVal;
+      this._initDefaultExpandedNode();
+    }
+  }
 
   setDefaultCheckedKey(newVal) {
     if (newVal !== this.defaultCheckedKeys) {
