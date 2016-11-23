@@ -107,7 +107,7 @@
         this.$nextTick(() => {
           this.updatePopper();
         });
-        if (val < this.min) {
+        if (typeof val !== 'number' || isNaN(val) || val < this.min) {
           this.$emit('input', this.min);
           return;
         }
@@ -221,7 +221,9 @@
     },
 
     created() {
-      if (typeof this.value !== 'number' || this.value < this.min) {
+      if (typeof this.value !== 'number' ||
+        isNaN(this.value) ||
+        this.value < this.min) {
         this.$emit('input', this.min);
       } else if (this.value > this.max) {
         this.$emit('input', this.max);
