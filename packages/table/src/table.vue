@@ -1,6 +1,12 @@
 <template>
   <div class="el-table"
-    :class="{ 'el-table--fit': fit, 'el-table--striped': stripe, 'el-table--border': border }"
+    :class="{
+      'el-table--fit': fit,
+      'el-table--striped': stripe,
+      'el-table--border': border,
+      'el-table--enable-row-hover': !store.states.isComplex,
+      'el-table--enable-row-transition': true || (store.states.data || []).length !== 0 && (store.states.data || []).length < 100
+    }"
     @mouseleave="handleMouseLeave($event)">
     <div class="hidden-columns" ref="hiddenColumns"><slot></slot></div>
     <div class="el-table__header-wrapper" ref="headerWrapper" v-if="showHeader">

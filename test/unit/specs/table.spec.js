@@ -1054,7 +1054,7 @@ describe('Table', () => {
     const vm = createVue({
       template: `
         <el-table :data="testData">
-          <el-table-column prop="name" label="片名" />
+          <el-table-column prop="name" label="片名" fixed />
           <el-table-column prop="release" label="发行日期" />
           <el-table-column prop="director" label="导演" />
           <el-table-column prop="runtime" label="时长（分）" />

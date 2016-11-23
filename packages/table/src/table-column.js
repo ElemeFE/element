@@ -1,6 +1,7 @@
 import ElCheckbox from 'element-ui/packages/checkbox';
 import ElTag from 'element-ui/packages/tag';
 import objectAssign from 'element-ui/src/utils/merge';
+import { getValueByPath } from './util';
 
 let columnIdSeed = 1;
 
@@ -72,8 +73,17 @@ const getDefaultColumn = function(type, options) {
   return column;
 };
 
-const DEFAULT_RENDER_CELL = function(h, { row, column }, parent) {
-  return parent.getCellContent(row, column.property, column);
+const DEFAULT_RENDER_CELL = function(h, { row, column }) {
+  const property = column.property;
+  if (column && column.formatter) {
+    return column.formatter(row, column);
+  }
+
+  if (property && property.indexOf('.') === -1) {
+    return row[property];
+  }
+
+  return getValueByPath(row, property);
 };
 
 export default {
@@ -182,7 +192,7 @@ export default {
       className: this.className,
       property: this.prop || this.property,
       type,
-      renderCell: DEFAULT_RENDER_CELL,
+      renderCell: null,
       renderHeader: this.renderHeader,
       minWidth,
       width,
@@ -229,15 +239,19 @@ export default {
         };
       }
 
+      if (!renderCell) {
+        renderCell = DEFAULT_RENDER_CELL;
+      }
+
       return _self.showOverflowTooltip || _self.showTooltipWhenOverflow
         ? <el-tooltip
             effect={ this.effect }
             placement="top"
             disabled={ this.tooltipDisabled }>
-            <div class="cell">{ renderCell(h, data, this._renderProxy) }</div>
-            <span slot="content">{ renderCell(h, data, this._renderProxy) }</span>
+            <div class="cell">{ renderCell(h, data) }</div>
+            <span slot="content">{ renderCell(h, data) }</span>
           </el-tooltip>
-        : <div class="cell">{ renderCell(h, data, this._renderProxy) }</div>;
+        : <div class="cell">{ renderCell(h, data) }</div>;
     };
 
     this.columnConfig = column;
