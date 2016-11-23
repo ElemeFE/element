@@ -107,6 +107,9 @@
       },
       defaultCheckedKeys(newVal) {
         this.tree.setDefaultCheckedKey(newVal);
+      },
+      defaultExpandedKeys(newVal) {
+        this.tree.setDefaultExpandedKey(newVal);
       }
     },
 
