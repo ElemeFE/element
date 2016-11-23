@@ -985,6 +985,112 @@ describe('Table', () => {
     });
   });
 
+  describe('multi level column', () => {
+    it('should works', done => {
+      const vm = createVue({
+        template: `
+          <el-table :data="testData">
+            <el-table-column prop="name" />
+            <el-table-column label="group">
+              <el-table-column prop="release"/>
+              <el-table-column prop="director"/>
+            </el-table-column>
+            <el-table-column prop="runtime"/>
+          </el-table>
+        `,
+
+        created() {
+          this.testData = null;
+        }
+      }, true);
+
+      setTimeout(_ => {
+        const trs = vm.$el.querySelectorAll('.el-table__header tr');
+        expect(trs.length).equal(2);
+        const firstRowHeader = trs[0].querySelectorAll('th .cell').length;
+        const secondRowHeader = trs[1].querySelectorAll('th .cell').length;
+        expect(firstRowHeader).to.equal(3);
+        expect(secondRowHeader).to.equal(2);
+
+        expect(trs[0].querySelector('th:first-child').getAttribute('rowspan')).to.equal('2');
+        expect(trs[0].querySelector('th:nth-child(2)').getAttribute('colspan')).to.equal('2');
+        destroyVM(vm);
+        done();
+      }, DELAY);
+    });
+
+    it('should works', done => {
+      const vm = createVue({
+        template: `
+          <el-table :data="testData">
+            <el-table-column prop="name" />
+            <el-table-column label="group">
+              <el-table-column label="group's group">
+                <el-table-column prop="release" />
+                <el-table-column prop="runtime"/>
+              </el-table-column>
+              <el-table-column prop="director" />
+            </el-table-column>
+            <el-table-column prop="runtime"/>
+          </el-table>
+        `,
+
+        created() {
+          this.testData = null;
+        }
+      }, true);
+
+      setTimeout(_ => {
+        const trs = vm.$el.querySelectorAll('.el-table__header tr');
+        expect(trs.length).equal(3);
+        const firstRowHeader = trs[0].querySelectorAll('th .cell').length;
+        const secondRowHeader = trs[1].querySelectorAll('th .cell').length;
+        const thirdRowHeader = trs[2].querySelectorAll('th .cell').length;
+        expect(firstRowHeader).to.equal(3);
+        expect(secondRowHeader).to.equal(2);
+        expect(thirdRowHeader).to.equal(2);
+
+        expect(trs[0].querySelector('th:first-child').getAttribute('rowspan')).to.equal('3');
+        expect(trs[0].querySelector('th:nth-child(2)').getAttribute('colspan')).to.equal('3');
+        expect(trs[1].querySelector('th:first-child').getAttribute('colspan')).to.equal('2');
+        expect(trs[1].querySelector('th:nth-child(2)').getAttribute('rowspan')).to.equal('2');
+
+        destroyVM(vm);
+        done();
+      }, DELAY);
+    });
+
+    it('should work in one column', done => {
+      const vm = createVue({
+        template: `
+          <el-table :data="testData">
+            <el-table-column label="group">
+              <el-table-column prop="release"/>
+            </el-table-column>
+          </el-table>
+        `,
+
+        created() {
+          this.testData = null;
+        }
+      }, true);
+
+      setTimeout(_ => {
+        const trs = vm.$el.querySelectorAll('.el-table__header tr');
+        expect(trs.length).equal(2);
+        const firstRowLength = trs[0].querySelectorAll('th .cell').length;
+        const secondRowLength = trs[1].querySelectorAll('th .cell').length;
+        expect(firstRowLength).to.equal(1);
+        expect(secondRowLength).to.equal(1);
+
+        expect(trs[0].querySelector('th:first-child').getAttribute('rowspan')).to.equal('1');
+        expect(trs[0].querySelector('th:first-child').getAttribute('colspan')).to.equal('1');
+        destroyVM(vm);
+        done();
+      }, DELAY);
+    });
+  });
+
   describe('methods', () => {
     const createTable = function(prop = '', opts) {
       return createVue({
