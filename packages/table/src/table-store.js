@@ -52,6 +52,7 @@ const TableStore = function(table, initialState = {}) {
   this.states = {
     rowKey: null,
     _columns: [],
+    originColumns: [],
     columns: [],
     fixedColumns: [],
     rightFixedColumns: [],
@@ -158,13 +159,19 @@ TableStore.prototype.mutations = {
     Vue.nextTick(() => this.table.updateScrollY());
   },
 
-  insertColumn(states, column, index) {
-    let _columns = states._columns;
-    if (typeof index !== 'undefined') {
-      _columns.splice(index, 0, column);
-    } else {
-      _columns.push(column);
+  insertColumn(states, column, index, parent) {
+    let array = states._columns;
+    if (parent) {
+      array = parent.children;
+      if (!array) array = parent.children = [];
     }
+
+    if (typeof index !== 'undefined') {
+      array.splice(index, 0, column);
+    } else {
+      array.push(column);
+    }
+
     if (column.type === 'selection') {
       states.selectable = column.selectable;
       states.reserveSelection = column.reserveSelection;
@@ -235,6 +242,18 @@ TableStore.prototype.mutations = {
   })
 };
 
+const doFlattenColumns = (columns) => {
+  const result = [];
+  columns.forEach((column) => {
+    if (column.children) {
+      result.push.apply(result, doFlattenColumns(column.children));
+    } else {
+      result.push(column);
+    }
+  });
+  return result;
+};
+
 TableStore.prototype.updateColumns = function() {
   const states = this.states;
   const _columns = states._columns || [];
@@ -245,7 +264,8 @@ TableStore.prototype.updateColumns = function() {
     _columns[0].fixed = true;
     states.fixedColumns.unshift(_columns[0]);
   }
-  states.columns = [].concat(states.fixedColumns).concat(_columns.filter((column) => !column.fixed)).concat(states.rightFixedColumns);
+  states.originColumns = [].concat(states.fixedColumns).concat(_columns.filter((column) => !column.fixed)).concat(states.rightFixedColumns);
+  states.columns = doFlattenColumns(states.originColumns);
 };
 
 TableStore.prototype.isSelected = function(row) {

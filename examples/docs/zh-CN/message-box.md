@@ -89,7 +89,7 @@
 :::demo 调用`$alert`方法即可打开消息提示，它模拟了系统的 `alert`，无法通过按下 ESC 或点击框外关闭。此例中接收了两个参数，`message`和`title`。值得一提的是，窗口被关闭后，它默认会返回一个`Promise`对象便于进行后续操作的处理。若不确定浏览器是否支持`Promise`，可自行引入第三方 polyfill 或像本例一样使用回调进行后续处理。
 ```html
 <template>
-  <el-button type="text" @click.native="open">点击打开 Message Box</el-button>
+  <el-button type="text" @click="open">点击打开 Message Box</el-button>
 </template>
 
 <script>
@@ -120,7 +120,7 @@
 
 ```html
 <template>
-  <el-button type="text" @click.native="open2">点击打开 Message Box</el-button>
+  <el-button type="text" @click="open2">点击打开 Message Box</el-button>
 </template>
 
 <script>
@@ -157,7 +157,7 @@
 
 ```html
 <template>
-  <el-button type="text" @click.native="open3">点击打开 Message Box</el-button>
+  <el-button type="text" @click="open3">点击打开 Message Box</el-button>
 </template>
 
 <script>
@@ -195,7 +195,7 @@
 
 ```html
 <template>
-  <el-button type="text" @click.native="open4">点击打开 Message Box</el-button>
+  <el-button type="text" @click="open4">点击打开 Message Box</el-button>
 </template>
 
 <script>

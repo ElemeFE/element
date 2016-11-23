@@ -164,7 +164,7 @@
 <template>
   <el-button
     type="primary"
-    @click.native="openFullScreen"
+    @click="openFullScreen"
     v-loading.fullscreen.lock="fullscreenLoading">
     显示整页加载，3 秒后消失
   </el-button>

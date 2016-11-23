@@ -122,7 +122,7 @@
         },
         dynamicForm: {
           domains: [{
-            key: 1,
+            key: Date.now(),
             value: ''
           }],
           email: ''
@@ -189,7 +189,7 @@
       },
       addDomain() {
         this.dynamicForm.domains.push({
-          key: this.dynamicForm.domains.length,
+          key: Date.now(),
           value: ''
         });
       }
@@ -728,7 +728,7 @@
       }
     }"
   >
-    <el-input v-model="domain.value"></el-input><el-button @click.native.prevent="removeDomain(domain)">删除</el-button>
+    <el-input v-model="domain.value"></el-input><el-button @click.prevent="removeDomain(domain)">删除</el-button>
   </el-form-item>
   <el-form-item>
     <el-button type="primary" @click="handleSubmit3">提交</el-button>
@@ -810,3 +810,5 @@
 | label | 标签文本 | string | — | — |
 | label-width | 表单域标签的的宽度，例如 '50px' | string |       —       | — |
 | required | 是否必填，如不设置，则会根据校验规则自动生成 | bolean | — | false |
+| rules    | 表单验证规则 | object | — | — |
+| error    | 表单域验证错误信息, 设置该值会使表单验证状态变为`error`，并显示该错误信息 | string | — | — |

@@ -226,10 +226,11 @@ Used for node selection. In the following example, data for each layer is acquir
 | highlight-current | whether current node is highlighted | boolean | - | false |
 | default-expand-all | whether to expand all nodes by default | boolean | - | false |
 | auto-expand-parent | whether to expand father node when a child node is expanded | boolean | — | true |
-| default-expand-keys | array of keys of initially expanded nodes | array | — | — |
+| default-expanded-keys | array of keys of initially expanded nodes | array | — | — |
 | show-checkbox | whether node is selectable | boolean | — | false |
 | check-strictly | whether checked state of a node not affects its father and child nodes when `show-checkbox` is `true` | boolean | — | false |
 | default-checked-keys | array of keys of initially checked nodes | array | — | — |
+| filter-node-method | this function will be executed on each node when use filter method. if return `false`, tree node will be hidden. | Function(value, data, node) | - | - |
 
 ### props
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
@@ -241,8 +242,11 @@ Used for node selection. In the following example, data for each layer is acquir
 `Tree` has the following method, which returns the currently selected array of nodes.
 | Method      | Description    | Parameters     |
 |---------- |-------- |---------- |
+| filter | filter all tree nodes, filtered nodes will be hidden | Accept a parameter which will be used as first parameter for filter-node-method |
 | getCheckedNodes | If the node can be selected (`show-checkbox` is `true`), it returns the currently selected array of nodes | Accept a boolean type parameter whose default value is `false`. <br>If the parameter is `true`, it only returns the currently selected array of sub-nodes.|
 | setCheckedNodes | set certain nodes to be checked, only works when `node-key` is assigned | an array of nodes to be checked |
+| getCheckedKeys | If the node can be selected (`show-checkbox` is `true`), it returns the currently selected array of node's keys | (leafOnly) Accept a boolean type parameter whose default value is `true`. <br>If the parameter is `true`, it only returns the currently selected array of sub-nodes.|
+| setCheckedKeys | set certain nodes to be checked, only works when `node-key` is assigned | (keys, leafOnly) Accept two parameters: 1. an array of node's keys to be checked 2. a boolean type parameter whose default value is `true`. <br>If the parameter is `true`, it only returns the currently selected array of sub-nodes. |
 
 ### Events
 | Event Name | Description | Parameters |

@@ -86,6 +86,30 @@ describe('Slider', () => {
     }, 150);
   });
 
+  it('step', done => {
+    vm = createVue({
+      template: `
+        <div style="width: 200px;">
+          <el-slider v-model="value" :min="0" :max="1" :step="0.1"></el-slider>
+        </div>
+      `,
+
+      data() {
+        return {
+          value: 0
+        };
+      }
+    }, true);
+    const slider = vm.$children[0];
+    setTimeout(() => {
+      slider.onButtonDown({ clientX: 0 });
+      slider.onDragging({ clientX: 100 });
+      slider.onDragEnd();
+      expect(vm.value > 0.4 && vm.value < 0.6).to.true;
+      done();
+    }, 150);
+  });
+
   it('click', done => {
     vm = createVue({
       template: `

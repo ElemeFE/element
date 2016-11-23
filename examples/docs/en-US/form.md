@@ -122,7 +122,7 @@
         },
         dynamicForm: {
           domains: [{
-            key: 1,
+            key: Date.now(),
             value: ''
           }],
           email: ''
@@ -189,7 +189,7 @@
       },
       addDomain() {
         this.dynamicForm.domains.push({
-          key: this.dynamicForm.domains.length,
+          key: Date.now(),
           value: ''
         });
       }
@@ -737,7 +737,7 @@ Form component allows you to verify your data, helping you find and correct erro
       }
     }"
   >
-    <el-input v-model="domain.value"></el-input><el-button @click.native.prevent="removeDomain(domain)">Delete</el-button>
+    <el-input v-model="domain.value"></el-input><el-button @click.prevent="removeDomain(domain)">Delete</el-button>
   </el-form-item>
   <el-form-item>
     <el-button type="primary" @click="handleSubmit3">Submit</el-button>
@@ -819,7 +819,5 @@ Form component allows you to verify your data, helping you find and correct erro
 | label | label | string | — | — |
 | label-width | width of label, e.g. '50px' | string | — | — |
 | required | whether the field is required or not, will be determined by validation rules if omitted | string |  — | false |
-
-
-
-
+| rules | validation rules of form | object | — | — |
+| error | field error message, set its value and the field will validate error and show this message immediately | string | — | — |

@@ -14,7 +14,8 @@
       return {
         children: null,
         activeTab: null,
-        currentName: 0
+        currentName: 0,
+        panes: []
       };
     },
 
@@ -80,7 +81,7 @@
     render(h) {
       let {
         type,
-        closable,
+        panes, // eslint-disable-line
         handleTabRemove,
         handleTabClick,
         currentName
@@ -103,14 +104,14 @@
             'el-tabs__item': true,
             'is-active': currentName === tab.index,
             'is-disabled': tab.disabled,
-            'is-closable': closable
+            'is-closable': tab.isClosable
           },
           ref: 'tabs',
           refInFor: true,
           on: { click: (ev) => { handleTabClick(tab, ev); } }
         }, [
           tab.label,
-          closable ? btnClose : null,
+          tab.isClosable ? btnClose : null,
           index === 0 ? activeBar : null
         ]);
         return _tab;

@@ -160,7 +160,7 @@ Show a full screen animation while loading data.
 <template>
   <el-button
     type="primary"
-    @click.native="openFullScreen"
+    @click="openFullScreen"
     v-loading.fullscreen.lock="fullscreenLoading">
     Full screen loading for 3 seconds
   </el-button>

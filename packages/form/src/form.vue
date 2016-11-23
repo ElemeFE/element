@@ -36,8 +36,10 @@
       });
       /* istanbul ignore next */
       this.$on('el.form.removeField', (field) => {
-        delete this.fields[field.prop];
-        this.fieldLength--;
+        if (this.fields[field.prop]) {
+          delete this.fields[field.prop];
+          this.fieldLength--;
+        }
       });
     },
     methods: {
