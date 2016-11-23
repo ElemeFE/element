@@ -1,20 +1,21 @@
 <template>
   <div class="el-tree" :class="{ 'el-tree--highlight-current': highlightCurrent }">
     <el-tree-node
-      v-for="child in tree.root.childNodes"
+      v-for="child in root.childNodes"
       :node="child"
       :props="props"
+      :key="getNodeKey(child)"
       :render-content="renderContent">
     </el-tree-node>
-    <div class="el-tree__empty-block" v-if="!tree.root.childNodes || tree.root.childNodes.length === 0">
+    <div class="el-tree__empty-block" v-if="!root.childNodes || root.childNodes.length === 0">
       <span class="el-tree__empty-text">{{ emptyText }}</span>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import Tree from './model/tree';
-  import { t } from 'element-ui/src/locale';
+  import TreeStore from './model/tree-store';
+  import {t} from 'element-ui/src/locale';
 
   export default {
     name: 'el-tree',
@@ -62,9 +63,9 @@
     },
 
     created() {
-      this.$isTree = true;
+      this.isTree = true;
 
-      this.tree = new Tree({
+      this.store = new TreeStore({
         key: this.nodeKey,
         data: this.data,
         lazy: this.lazy,
@@ -77,11 +78,14 @@
         defaultExpandAll: this.defaultExpandAll,
         filterNodeMethod: this.filterNodeMethod
       });
+
+      this.root = this.store.root;
     },
 
     data() {
       return {
-        tree: {},
+        store: null,
+        root: null,
         currentNode: null
       };
     },
@@ -103,31 +107,38 @@
 
     watch: {
       data(newVal) {
-        this.tree.setData(newVal);
+        this.store.setData(newVal);
       },
       defaultCheckedKeys(newVal) {
-        this.tree.setDefaultCheckedKey(newVal);
+        this.store.setDefaultCheckedKey(newVal);
       }
     },
 
     methods: {
       filter(value) {
         if (!this.filterNodeMethod) throw new Error('[Tree] filterNodeMethod is required when filter');
-        this.tree.filter(value);
+        this.store.filter(value);
+      },
+      getNodeKey(node, index) {
+        const nodeKey = this.nodeKey;
+        if (nodeKey && node) {
+          return node.data[nodeKey];
+        }
+        return index;
       },
       getCheckedNodes(leafOnly) {
-        return this.tree.getCheckedNodes(leafOnly);
+        return this.store.getCheckedNodes(leafOnly);
       },
       getCheckedKeys(leafOnly) {
-        return this.tree.getCheckedKeys(leafOnly);
+        return this.store.getCheckedKeys(leafOnly);
       },
       setCheckedNodes(nodes, leafOnly) {
         if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in setCheckedNodes');
-        this.tree.setCheckedNodes(nodes, leafOnly);
+        this.store.setCheckedNodes(nodes, leafOnly);
       },
       setCheckedKeys(keys, leafOnly) {
         if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in setCheckedNodes');
-        this.tree.setCheckedKeys(keys, leafOnly);
+        this.store.setCheckedKeys(keys, leafOnly);
       }
     }
   };

@@ -1,6 +1,7 @@
 import Node from './node';
+import { getNodeKey } from './util';
 
-export default class Tree {
+export default class TreeStore {
   constructor(options) {
     for (let option in options) {
       if (options.hasOwnProperty(option)) {
@@ -12,7 +13,7 @@ export default class Tree {
 
     this.root = new Node({
       data: this.data,
-      _tree: this
+      store: this
     });
 
     if (this.lazy && this.load) {
@@ -62,6 +63,36 @@ export default class Tree {
     this.root.setData(newVal);
     if (instanceChanged) {
       this._initDefaultCheckedNodes();
+    }
+  }
+
+  getNodeByData(data) {
+    const key = typeof data === 'string' ? data : getNodeKey(this.key, data);
+    return this.nodesMap[key];
+  }
+
+  insertBefore(data, refData) {
+    const refNode = this.getNodeByData(refData);
+    refNode.parent.insertBefore({ data }, refNode);
+  }
+
+  insertAfter(data, refData) {
+    const refNode = this.getNodeByData(refData);
+    refNode.parent.insertAfter({ data }, refNode);
+  }
+
+  remove(data) {
+    const node = this.getNodeByData(data);
+    if (node) {
+      node.parent.removeChild(node);
+    }
+  }
+
+  append(data, parentData) {
+    const parentNode = parentData ? this.getNodeByData(parentData) : this.root;
+
+    if (parentNode) {
+      parentNode.insertChild({ data });
     }
   }
 
