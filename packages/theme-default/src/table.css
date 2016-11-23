@@ -325,15 +325,11 @@
     }
 
     @e body {
-      td {
-        transition: background-color .25s ease;
-      }
-
-      tr.hover-row td {
+      tr.hover-row > td {
         background-color: #eff2f7;
       }
 
-      tr.current-row td {
+      tr.current-row > td {
         background: #eff7ff;
       }
     }
@@ -362,6 +358,18 @@
 
       & i {
         color: #99a9bf;
+      }
+    }
+
+    @modifier enable-row-transition {
+      .el-table__body td {
+        transition: background-color .25s ease;
+      }
+    }
+
+    @modifier enable-row-hover {
+      tr:hover > td {
+        background-color: #eff2f7;
       }
     }
   }

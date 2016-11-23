@@ -1,4 +1,4 @@
-import { getValueByPath, getCell, getColumnByCell, getRowIdentity } from './util';
+import { getCell, getColumnByCell, getRowIdentity } from './util';
 
 export default {
   props: {
@@ -15,6 +15,7 @@ export default {
   },
 
   render(h) {
+    const columnsHidden = this.columns.map((column, index) => this.isColumnHidden(index));
     return (
       <table
         class="el-table__body"
@@ -40,7 +41,7 @@ export default {
                 {
                   this._l(this.columns, (column, cellIndex) =>
                     <td
-                      class={ [column.id, column.align, column.className || '', this.isCellHidden(cellIndex) ? 'is-hidden' : '' ] }
+                      class={ [column.id, column.align, column.className || '', columnsHidden[cellIndex] ? 'is-hidden' : '' ] }
                       on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
                       on-mouseleave={ this.handleCellMouseLeave }>
                       {
@@ -62,9 +63,10 @@ export default {
 
   watch: {
     'store.states.hoverRow'(newVal, oldVal) {
+      if (!this.store.states.isComplex) return;
       const el = this.$el;
       if (!el) return;
-      const rows = el.querySelectorAll('tr');
+      const rows = el.querySelectorAll('tbody > tr');
       const oldRow = rows[oldVal];
       const newRow = rows[newVal];
       if (oldRow) {
@@ -79,7 +81,7 @@ export default {
       const el = this.$el;
       if (!el) return;
       const data = this.store.states.data;
-      const rows = el.querySelectorAll('tr');
+      const rows = el.querySelectorAll('tbody > tr');
       const oldRow = rows[data.indexOf(oldVal)];
       const newRow = rows[data.indexOf(newVal)];
       if (oldRow) {
@@ -128,7 +130,7 @@ export default {
       return index;
     },
 
-    isCellHidden(index) {
+    isColumnHidden(index) {
       if (this.fixed === true || this.fixed === 'left') {
         return index >= this.leftFixedCount;
       } else if (this.fixed === 'right') {
@@ -197,18 +199,6 @@ export default {
       this.store.commit('setCurrentRow', row);
 
       table.$emit('row-click', row, event);
-    },
-
-    getCellContent(row, property, column) {
-      if (column && column.formatter) {
-        return column.formatter(row, column);
-      }
-
-      if (property && property.indexOf('.') === -1) {
-        return row[property];
-      }
-
-      return getValueByPath(row, property);
     }
   }
 };

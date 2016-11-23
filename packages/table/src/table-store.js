@@ -55,6 +55,7 @@ const TableStore = function(table, initialState = {}) {
     columns: [],
     fixedColumns: [],
     rightFixedColumns: [],
+    isComplex: false,
     _data: null,
     filteredData: null,
     data: null,
@@ -246,6 +247,7 @@ TableStore.prototype.updateColumns = function() {
     states.fixedColumns.unshift(_columns[0]);
   }
   states.columns = [].concat(states.fixedColumns).concat(_columns.filter((column) => !column.fixed)).concat(states.rightFixedColumns);
+  states.isComplex = states.fixedColumns.length > 0 || states.rightFixedColumns.length > 0;
 };
 
 TableStore.prototype.isSelected = function(row) {
