@@ -126,7 +126,7 @@ Popover 的属性与 Tooltip 很类似，它们都是基于`Vue-popper`开发的
   title="标题"
   width="200"
   trigger="hover"
-  content="这是一段容,这是一段容,这是一段容,这是一段容。">
+  content="这是一段内容,这是一段内容,这是一段内容,这是一段内容。">
 </el-popover>
 
 <el-popover
@@ -135,7 +135,7 @@ Popover 的属性与 Tooltip 很类似，它们都是基于`Vue-popper`开发的
   title="标题"
   width="200"
   trigger="click"
-  content="这是一段容,这是一段容,这是一段容,这是一段容。">
+  content="这是一段内容,这是一段内容,这是一段内容,这是一段内容。">
 </el-popover>
 
 <el-button v-popover:popover1>hover 激活</el-button>
@@ -145,7 +145,7 @@ Popover 的属性与 Tooltip 很类似，它们都是基于`Vue-popper`开发的
   title="标题"
   width="200"
   trigger="focus"
-  content="这是一段容,这是一段容,这是一段容,这是一段容。">
+  content="这是一段内容,这是一段内容,这是一段内容,这是一段内容。">
   <el-button slot="reference">focus 激活</el-button>
 </el-popover>
 ```
