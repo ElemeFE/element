@@ -127,6 +127,25 @@ describe('Tree', () => {
     expect(vm.$el.querySelectorAll('.el-tree-node.is-expanded').length).to.equal(2);
   });
 
+  it('filter-node-method', (done) => {
+    vm = getTreeVm(':props="defaultProps" :filter-node-method="filterNode"', {
+      methods: {
+        filterNode(value, data) {
+          if (!value) return true;
+          return data.label.indexOf(value) !== -1;
+        }
+      }
+    });
+
+    const tree = vm.$refs.tree;
+    tree.filter('2-1');
+
+    setTimeout(() => {
+      expect(tree.$el.querySelectorAll('.el-tree-node.is-hidden').length).to.equal(7);
+      done();
+    }, 100);
+  });
+
   it('autoExpandParent = true', () => {
     vm = getTreeVm(':props="defaultProps" :default-expanded-keys="defaultExpandedKeys" node-key="id"', {
       created() {
@@ -186,7 +205,6 @@ describe('Tree', () => {
     const tree = vm.$children[0];
     const secondNode = document.querySelectorAll('.el-tree-node__content')[3];
     const nodeCheckbox = secondNode.querySelector('.el-checkbox');
-    expect(nodeCheckbox).to.be.exist;
     nodeCheckbox.click();
     expect(tree.getCheckedNodes().length).to.equal(3);
     expect(tree.getCheckedNodes(true).length).to.equal(2);
@@ -195,6 +213,22 @@ describe('Tree', () => {
       expect(tree.getCheckedNodes().length).to.equal(0);
       done();
     });
+  });
+
+  it('setCheckedKeys', () => {
+    vm = getTreeVm(':props="defaultProps" show-checkbox node-key="id"');
+    const tree = vm.$children[0];
+    tree.setCheckedKeys([111]);
+    expect(tree.getCheckedNodes().length).to.equal(3);
+    expect(tree.getCheckedKeys().length).to.equal(3);
+  });
+
+  it('setCheckedKeys with leafOnly=false', () => {
+    vm = getTreeVm(':props="defaultProps" show-checkbox node-key="id"');
+    const tree = vm.$children[0];
+    tree.setCheckedKeys([1, 11, 111, 2], false);
+    expect(tree.getCheckedNodes().length).to.equal(6);
+    expect(tree.getCheckedKeys().length).to.equal(6);
   });
 
   it('check strictly', (done) => {

@@ -36,6 +36,7 @@
       }
 
       &::after {
+        box-sizing: content-box;
         content: "";
         border: 2px solid var(--checkbox-checked-icon-color);
         border-left: 0;

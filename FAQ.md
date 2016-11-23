@@ -35,6 +35,27 @@
 </details>
 
 <details>
+<summary>如何使用第三方图标库？</summary>
+
+只要修改第三方图标库的前缀（具体方法参阅第三方库的文档），并编写相应的 CSS，即可在 Element 中像使用内置图标一样使用第三方图标。例如，将第三方库的前缀改为 `el-icon-my`，然后在其 CSS 文件中添加：
+```css
+[class^="el-icon-my"], [class*=" el-icon-my"] {
+  font-family:"your-font-family" !important;
+  
+  /* 以下内容参照第三方图标库本身的规则 */
+  font-size: inherit;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+```
+具体使用时，和 Element 内置的图标用法一样。比如在 `el-input` 中：
+```html
+<el-input icon="my-xxx" />
+```
+</details>
+
+<details>
 <summary>你们的文档怎么偷偷更新了？</summary>
 
 我们只会在 Element 发布新版本时同步更新文档，以体现最新的变化。详细的更新内容可以查看 [changelog](https://github.com/ElemeFE/element/blob/master/CHANGELOG.zh-CN.md)。
@@ -96,6 +117,27 @@ The parameter `row` is the data object of corresponding row.
 <summary>How do `render-content` of Tree and `render-header` of Table work?</summary>
 
 Please refer to [Render Function](http://vuejs.org/v2/guide/render-function.html) in Vue's documentation. In addition, if you are writing render functions with JSX, `babel-plugin-transform-vue-jsx` is required. See [here](https://github.com/vuejs/babel-plugin-transform-vue-jsx) for its configurations.
+</details>
+
+<details>
+<summary>How do I use third-party icon font library with Element?</summary>
+
+You just need to modify the class name prefix of the third-party library (see their docs for how to do it), and write some CSS, then you can use them just like you use Element built-in icons. For example, change the prefix to `el-icon-my`, and then add the following to its CSS:
+```css
+[class^="el-icon-my"], [class*=" el-icon-my"] {
+  font-family:"your-font-family" !important;
+  
+  /* The following is based on original CSS rules of third-party library */
+  font-size: inherit;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+```
+Now you can use them as you do with built-in icons. For example, in `el-input`:
+```html
+<el-input icon="my-xxx" />
+```
 </details>
 
 <details>

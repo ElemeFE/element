@@ -57,7 +57,8 @@
         default: false
       },
       highlightCurrent: Boolean,
-      load: Function
+      load: Function,
+      filterNodeMethod: Function
     },
 
     created() {
@@ -73,7 +74,8 @@
         defaultCheckedKeys: this.defaultCheckedKeys,
         defaultExpandedKeys: this.defaultExpandedKeys,
         autoExpandParent: this.autoExpandParent,
-        defaultExpandAll: this.defaultExpandAll
+        defaultExpandAll: this.defaultExpandAll,
+        filterNodeMethod: this.filterNodeMethod
       });
     },
 
@@ -112,12 +114,23 @@
     },
 
     methods: {
+      filter(value) {
+        if (!this.filterNodeMethod) throw new Error('[Tree] filterNodeMethod is required when filter');
+        this.tree.filter(value);
+      },
       getCheckedNodes(leafOnly) {
         return this.tree.getCheckedNodes(leafOnly);
       },
-      setCheckedNodes(nodes) {
+      getCheckedKeys(leafOnly) {
+        return this.tree.getCheckedKeys(leafOnly);
+      },
+      setCheckedNodes(nodes, leafOnly) {
         if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in setCheckedNodes');
-        this.tree.setCheckedNodes(nodes);
+        this.tree.setCheckedNodes(nodes, leafOnly);
+      },
+      setCheckedKeys(keys, leafOnly) {
+        if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in setCheckedNodes');
+        this.tree.setCheckedKeys(keys, leafOnly);
       }
     }
   };
