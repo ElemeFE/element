@@ -299,7 +299,7 @@ export default {
 
     align(newVal) {
       if (this.columnConfig) {
-        this.columnConfig.align = newVal;
+        this.columnConfig.align = newVal ? 'is-' + newVal : null;
       }
     },
 
