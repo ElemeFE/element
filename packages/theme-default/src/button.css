@@ -152,6 +152,7 @@
   @b button-group {
     @utils-clearfix;
     display: inline-block;
+    vertical-align: middle;
 
     & .el-button {
       float: left;
