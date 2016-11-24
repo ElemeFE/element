@@ -204,6 +204,10 @@ export default {
     readonly: Boolean,
     placeholder: String,
     disabled: Boolean,
+    closeable: {
+      type: Boolean,
+      default: true
+    },
     editable: {
       type: Boolean,
       default: true
@@ -328,12 +332,16 @@ export default {
 
   methods: {
     handleMouseEnterIcon() {
-      if (!this.valueIsEmpty) {
+      if (!this.valueIsEmpty && this.closeable) {
         this.showClose = true;
       }
     },
 
     handleClickIcon() {
+      if (!this.closeable) {
+        this.pickerVisible = !this.pickerVisible;
+        return;
+      }
       if (this.valueIsEmpty) {
         this.pickerVisible = !this.pickerVisible;
       } else {

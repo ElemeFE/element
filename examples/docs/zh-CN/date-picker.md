@@ -59,6 +59,10 @@
             }
           }]
         },
+        pickerOptions3: {
+          ranges: ['2016-10-01', '2016-12-30'],//其实也可以用disabledDate
+          rangeEdges: [7, 7] //只能向前选7天,向后选7天
+        },
         value1: '',
         value2: '',
         value3: '',
@@ -227,6 +231,7 @@
       v-model="value6"
       type="daterange"
       placeholder="选择日期范围"
+      :picker-options="pickerOptions3"
       style="width: 220px">
     </el-date-picker>
   </div>
@@ -247,6 +252,10 @@
   export default {
     data() {
       return {
+        pickerOptions3: {
+          ranges: ['2016-10-01', '2016-12-30'],//其实也可以用disabledDate
+          rangeEdges: [7, 7] //只能向前选7天,向后选7天
+        },
         pickerOptions2: {
           shortcuts: [{
             text: '最近一周',
@@ -289,6 +298,7 @@
 | readonly | 完全只读 | boolean | — | false |
 | disabled | 禁用 | boolean | - | false |
 | editable | 文本框可输入 | boolean | - | true |
+| closeable | 文本框内容允许清除 | boolean | - | true |
 | placeholder | 占位内容 | string | — | — |
 | type | 显示类型 | string | year/month/date/week/<br>datetime/datetimerange/daterange | date |
 | format | 时间日期格式化 | string | 年 `yyyy`，月 `MM`，日 `dd`，<br>小时 `HH`，分 `mm`，秒 `ss` | yyyy-MM-dd |
@@ -300,6 +310,8 @@
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | shortcuts | 设置快捷选项，需要传入 { text, onClick } 对象<br>用法参考 demo 或下表 | Object[] | - | - |
 | disabledDate | 设置禁用状态，参数为当前日期，要求返回 Boolean | Function | - | - |
+| ranges | 可选择范围，空为无限制，数组0：开始点，数组1：结束点 | Array | - | - |
+| rangeEdges | 可供选择的日期区间，单位：天,以第一次选择的日期为中心 | Array | [7, 7] | [] |
 
 ### Shortcuts
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |

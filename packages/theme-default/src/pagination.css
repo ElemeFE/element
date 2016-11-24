@@ -48,7 +48,9 @@
     }
 
     .btn-prev,
-    .btn-next {
+    .btn-next,
+    .btn-first,
+    .btn-last {
       background: center center no-repeat;
       background-size: 16px;
       border: 1px solid var(--pagination-border-color);
@@ -72,9 +74,21 @@
       border-left: 0;
     }
 
+    btn-first {
+      border-radius: var(--pagination-border-radius) 0 0 var(--pagination-border-radius);
+      border-right: 0;
+    }
+
+    .btn-last {
+      border-radius: 0 var(--pagination-border-radius) var(--pagination-border-radius) 0;
+      border-left: 0;
+    }
+
     @m small {
       .btn-prev,
       .btn-next,
+      .btn-first,
+      .btn-last,
       .el-pager li,
       .el-pager li:last-child {
         border-color: transparent;
