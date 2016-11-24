@@ -328,12 +328,14 @@ export default {
 
   methods: {
     handleMouseEnterIcon() {
+      if (this.readonly || this.disabled) return;
       if (!this.valueIsEmpty) {
         this.showClose = true;
       }
     },
 
     handleClickIcon() {
+      if (this.readonly || this.disabled) return;
       if (this.valueIsEmpty) {
         this.pickerVisible = !this.pickerVisible;
       } else {
