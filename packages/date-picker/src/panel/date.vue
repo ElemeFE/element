@@ -228,6 +228,8 @@
           this.$refs.yearTable.nextTenYear();
         } else {
           this.year++;
+          this.date.setFullYear(this.year);
+          this.resetDate();
         }
       },
 
@@ -236,6 +238,8 @@
           this.$refs.yearTable.prevTenYear();
         } else {
           this.year--;
+          this.date.setFullYear(this.year);
+          this.resetDate();
         }
       },
 
