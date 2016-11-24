@@ -51,7 +51,7 @@
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="5"
+      :current-page="currentPage"
       :page-size="100"
       layout="total, prev, pager, next"
       :total="1000">
@@ -62,7 +62,7 @@
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="5"
+      :current-page="currentPage"
       :page-sizes="[100, 200, 300, 400]"
       :page-size="100"
       layout="sizes, prev, pager, next"
@@ -74,7 +74,7 @@
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="5"
+      :current-page="currentPage"
       :page-size="100"
       layout="prev, pager, next, jumper"
       :total="1000">
@@ -85,7 +85,7 @@
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="5"
+      :current-page="currentPage"
       :page-sizes="[100, 200, 300, 400]"
       :page-size="100"
       layout="total, sizes, prev, pager, next, jumper"
@@ -100,8 +100,14 @@
         console.log(`每页 ${val} 条`);
       },
       handleCurrentChange(val) {
+        this.currentPage = val;
         console.log(`当前页: ${val}`);
       }
+    },
+    data() {
+      return {
+        currentPage: 5
+      };
     }
   }
 </script>
@@ -112,11 +118,17 @@
   export default {
     methods: {
       handleSizeChange(val) {
+        this.currentPage = val;
         console.log(`每页 ${val} 条`);
       },
       handleCurrentChange(val) {
         console.log(`当前页: ${val}`);
       }
+    },
+    data() {
+      return {
+        currentPage: 5
+      };
     },
     mounted() {
       this.$nextTick(() => {

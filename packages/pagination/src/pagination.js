@@ -178,11 +178,7 @@ export default {
         },
 
         handleChange({ target }) {
-          const oldPage = this.$parent.internalCurrentPage;
           this.$parent.internalCurrentPage = this.$parent.getValidCurrentPage(target.value);
-          if (oldPage !== this.$parent.internalCurrentPage) {
-            this.$parent.$emit('current-change', this.$parent.internalCurrentPage);
-          }
           this.oldValue = null;
         }
       },
@@ -234,31 +230,17 @@ export default {
     },
 
     handleCurrentChange(val) {
-      const oldPage = this.internalCurrentPage;
       this.internalCurrentPage = this.getValidCurrentPage(val);
-      if (oldPage !== this.internalCurrentPage) {
-        this.$emit('current-change', this.internalCurrentPage);
-      }
     },
 
     prev() {
-      const oldPage = this.internalCurrentPage;
       const newVal = this.internalCurrentPage - 1;
       this.internalCurrentPage = this.getValidCurrentPage(newVal);
-
-      if (this.internalCurrentPage !== oldPage) {
-        this.$emit('current-change', this.internalCurrentPage);
-      }
     },
 
     next() {
-      const oldPage = this.internalCurrentPage;
       const newVal = this.internalCurrentPage + 1;
       this.internalCurrentPage = this.getValidCurrentPage(newVal);
-
-      if (this.internalCurrentPage !== oldPage) {
-        this.$emit('current-change', this.internalCurrentPage);
-      }
     },
 
     getValidCurrentPage(value) {
@@ -299,19 +281,6 @@ export default {
   },
 
   watch: {
-    internalPageCount(newVal) {
-      /* istanbul ignore if */
-      const oldPage = this.internalCurrentPage;
-      if (newVal > 0 && oldPage === 0) {
-        this.internalCurrentPage = 1;
-      } else if (oldPage > newVal) {
-        this.internalCurrentPage = newVal === 0 ? 1 : newVal;
-      }
-      if (oldPage !== this.internalCurrentPage) {
-        this.$emit('current-change', this.internalCurrentPage);
-      }
-    },
-
     currentPage: {
       immediate: true,
       handler(val) {
@@ -339,7 +308,22 @@ export default {
       if (newVal !== undefined) {
         this.$nextTick(() => {
           this.internalCurrentPage = newVal;
+          if (oldVal !== newVal) {
+            this.$emit('current-change', this.internalCurrentPage);
+          }
         });
+      } else {
+        this.$emit('current-change', this.internalCurrentPage);
+      }
+    },
+
+    internalPageCount(newVal) {
+      /* istanbul ignore if */
+      const oldPage = this.internalCurrentPage;
+      if (newVal > 0 && oldPage === 0) {
+        this.internalCurrentPage = 1;
+      } else if (oldPage > newVal) {
+        this.internalCurrentPage = newVal === 0 ? 1 : newVal;
       }
     }
   }

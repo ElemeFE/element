@@ -51,7 +51,7 @@ Add more modules based on your scenario.
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="5"
+      :current-page="currentPage"
       :page-size="100"
       layout="total, prev, pager, next"
       :total="1000">
@@ -62,7 +62,7 @@ Add more modules based on your scenario.
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="5"
+      :current-page="currentPage"
       :page-sizes="[100, 200, 300, 400]"
       :page-size="100"
       layout="sizes, prev, pager, next"
@@ -74,7 +74,7 @@ Add more modules based on your scenario.
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="5"
+      :current-page="currentPage"
       :page-size="100"
       layout="prev, pager, next, jumper"
       :total="1000">
@@ -85,7 +85,7 @@ Add more modules based on your scenario.
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="5"
+      :current-page="currentPage"
       :page-sizes="[100, 200, 300, 400]"
       :page-size="100"
       layout="total, sizes, prev, pager, next, jumper"
@@ -100,8 +100,14 @@ Add more modules based on your scenario.
         console.log(`${val} items per page`);
       },
       handleCurrentChange(val) {
+        this.currentPage = val;
         console.log(`current page: ${val}`);
       }
+    },
+    data() {
+      return {
+        currentPage: 5
+      };
     }
   }
 </script>
@@ -109,11 +115,17 @@ Add more modules based on your scenario.
 :::
 <script>
   export default {
+    data() {
+      return {
+        currentPage: 5
+      };
+    },
     methods: {
       handleSizeChange(val) {
         console.log(`${val} items per page`);
       },
       handleCurrentChange(val) {
+        this.currentPage = val;
         console.log(`current page: ${val}`);
       }
     },
