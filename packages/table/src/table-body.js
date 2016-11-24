@@ -10,6 +10,7 @@ export default {
       required: true
     },
     rowClassName: [String, Function],
+    rowStyle: [Object, Function],
     fixed: String,
     highlight: Boolean
   },
@@ -33,6 +34,7 @@ export default {
           {
             this._l(this.data, (row, $index) =>
               <tr
+                style={ this.rowStyle ? this.getRowStyle(row, $index) : null }
                 key={ this.$parent.rowKey ? this.getKeyOfRow(row, $index) : $index }
                 on-click={ ($event) => this.handleClick($event, row) }
                 on-mouseenter={ _ => this.handleMouseEnter($index) }
@@ -140,6 +142,14 @@ export default {
       }
     },
 
+    getRowStyle(row, index) {
+      const rowStyle = this.rowStyle;
+      if (typeof rowStyle === 'function') {
+        return rowStyle.call(null, row, index);
+      }
+      return rowStyle;
+    },
+
     getRowClass(row, index) {
       const classes = [];
 
@@ -147,7 +157,7 @@ export default {
       if (typeof rowClassName === 'string') {
         classes.push(rowClassName);
       } else if (typeof rowClassName === 'function') {
-        classes.push(rowClassName.apply(null, [row, index]) || '');
+        classes.push(rowClassName.call(null, row, index) || '');
       }
 
       return classes.join(' ');

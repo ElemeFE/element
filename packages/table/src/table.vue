@@ -24,6 +24,7 @@
         :store="store"
         :layout="layout"
         :row-class-name="rowClassName"
+        :row-style="rowStyle"
         :highlight="highlightCurrentRow"
         :style="{ width: layout.bodyWidth ? layout.bodyWidth - (layout.scrollY ? layout.gutterWidth : 0 ) + 'px' : '' }">
       </table-body>
@@ -56,6 +57,7 @@
           :layout="layout"
           :highlight="highlightCurrentRow"
           :row-class-name="rowClassName"
+          :row-style="rowStyle"
           :style="{ width: layout.fixedWidth ? layout.fixedWidth + 'px' : '' }">
         </table-body>
       </div>
@@ -85,6 +87,7 @@
           :store="store"
           :layout="layout"
           :row-class-name="rowClassName"
+          :row-style="rowStyle"
           :highlight="highlightCurrentRow"
           :style="{ width: layout.rightFixedWidth ? layout.rightFixedWidth + 'px' : '' }">
         </table-body>
@@ -144,6 +147,8 @@
       },
 
       rowClassName: [String, Function],
+
+      rowStyle: [Object, Function],
 
       highlightCurrentRow: Boolean,
 

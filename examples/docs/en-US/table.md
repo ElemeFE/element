@@ -1183,7 +1183,8 @@ Customize table column so it can be integrated with other components.
 | fit | whether width of column automatically fits its container | boolean | — | true |
 | show-header | whether table header is visible | boolean | - | true |
 | highlight-current-row | whether current row is highlighted | boolean | — | false |
-| row-class-name | function that returns custom class names for a row | Function(row, index) | — | — |
+| row-class-name | function that returns custom class names for a row, or a string assigning class names for every row | Function(row, index)/String | — | — |
+| row-style | function that returns custom style for a row,  or a string assigning custom style for every row | Function(row, index)/Object | — | — |
 | row-key | key of row data, used for optimizing rendering. Required if `reserve-selection` is on | Function(row)/String | — | — |
 | context | context of Table, e.g. `_self` refers to the current context, `$parent` parent context, `$root` root context, can be overridden by `context` in `el-table-column` | Object | - | current context where Table lies |
 
