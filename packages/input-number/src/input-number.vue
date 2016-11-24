@@ -175,15 +175,17 @@
         return (arg1 + arg2) / m;
       },
       increase() {
-        if (this.value + this.step > this.max || this.disabled) return;
-        this.currentValue = this.accAdd(this.step, this.value);
+        const value = this.value || 0;
+        if (value + this.step > this.max || this.disabled) return;
+        this.currentValue = this.accAdd(this.step, value);
         if (this.maxDisabled) {
           this.inputActive = false;
         }
       },
       decrease() {
-        if (this.value - this.step < this.min || this.disabled) return;
-        this.currentValue = this.accSub(this.value, this.step);
+        const value = this.value || 0;
+        if (value - this.step < this.min || this.disabled) return;
+        this.currentValue = this.accSub(value, this.step);
         if (this.minDisabled) {
           this.inputActive = false;
         }
