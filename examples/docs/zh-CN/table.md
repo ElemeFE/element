@@ -1188,7 +1188,8 @@
 | fit | 列的宽度是否自撑开 | boolean | — | true |
 | show-header | 是否显示表头 | boolean | - | true |
 | highlight-current-row | 是否要高亮当前行 | boolean | — | false |
-| row-class-name | 行的 className 的回调。 | Function(row, index) | — | — |
+| row-class-name | 行的 className 的回调方法，也可以使用字符串为所有行设置一个固定的 className。 | Function(row, index)/String | — | — |
+| row-style | 行的 style 的回调方法，也可以使用一个固定的 Object 为所有行设置一样的 Style。 | Function(row, index)/Object | — | — |
 | row-key | 行数据的 Key，用来优化 Table 的渲染；在使用 reserve-selection 功能的情况下，该属性是必填的 | Function(row)/String | — | — |
 | context | 设置上下文环境，例如设置当前上下文就是 `_self`，父级就是 `$parent`，根组件 `$root`。优先读取 column 的 context 属性。 | Object | - | Table 所处上下文 |
 
