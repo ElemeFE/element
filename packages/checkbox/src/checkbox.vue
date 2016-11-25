@@ -18,6 +18,7 @@
         :true-value="trueLabel"
         :false-value="falseLabel"
         v-model="model"
+        @change="$emit('change', $event)"
         @focus="focus = true"
         @blur="focus = false">
       <input
@@ -28,6 +29,7 @@
         :value="label"
         :name="name"
         v-model="model"
+        @change="$emit('change', $event)"
         @focus="focus = true"
         @blur="focus = false">
     </span>
