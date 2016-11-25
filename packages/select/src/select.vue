@@ -97,16 +97,19 @@
         let criteria = this.clearable && this.inputHovering && !this.multiple && this.options.indexOf(this.selected) > -1;
         if (!this.$el) return false;
 
-        let icon = this.$el.querySelector('.el-input__icon');
-        if (icon) {
-          if (criteria) {
-            icon.addEventListener('click', this.deleteSelected);
-            addClass(icon, 'is-show-close');
-          } else {
-            icon.removeEventListener('click', this.deleteSelected);
-            removeClass(icon, 'is-show-close');
+        this.$nextTick(() => {
+          let icon = this.$el.querySelector('.el-input__icon');
+          if (icon) {
+            if (criteria) {
+              icon.addEventListener('click', this.deleteSelected);
+              addClass(icon, 'is-show-close');
+            } else {
+              icon.removeEventListener('click', this.deleteSelected);
+              removeClass(icon, 'is-show-close');
+            }
           }
-        }
+        });
+
         return criteria;
       },
 
