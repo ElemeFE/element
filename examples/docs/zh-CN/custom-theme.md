@@ -2,9 +2,9 @@
 Element 默认提供一套主题，CSS 命名采用 BEM 的风格方便使用者覆盖样式。如果你想完全替换主题色或者部分样式，可以使用下面方法。
 
 ### 安装工具
-首先安装「主题生成工具」，可以全局安装或者安装在当前项目下，推荐安装在项目里，方便别人 clone 项目时能直接安装依赖并启动。
+首先安装「主题生成工具」，可以全局安装或者安装在当前项目下，推荐安装在项目里，方便别人 clone 项目时能直接安装依赖并启动，这里以全局安装做演示。
 ```shell
-npm i element-theme -D
+npm i element-theme -g
 ```
 
 安装默认主题，可以从 npm 安装或者从 GitHub 拉取最新代码。
@@ -20,7 +20,7 @@ npm i https://github.com/ElementUI/theme-default -D
 主题生成工具安装成功后，如果全局安装可以在命令行里通过 `et` 调用工具，如果安装在当前目录下，需要通过 `node_modules/.bin/et` 访问到命令。执行 `-i` 初始化变量文件。默认输出到 `element-variables.css`，当然你可以传参数指定文件输出目录。
 
 ```shell
-node_modules/.bin/et -i [可以自定义变量文件目录]
+et -i [可以自定义变量文件目录]
 
 > ✔ Generator variables file
 ```
@@ -53,7 +53,7 @@ node_modules/.bin/et -i [可以自定义变量文件目录]
 ### 编译主题
 保存文件后，到命令行里执行 `et` 编译主题，如果你想启用 `watch` 模式，实时编译主题，增加 `-w` 参数。
 ```shell
-node_modules/.bin/et
+et
 
 > ✔ build theme font
 > ✔ build element theme
