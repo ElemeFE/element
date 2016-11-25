@@ -50,6 +50,10 @@
         return this.label || ((typeof this.value === 'string' || typeof this.value === 'number') ? this.value : '');
       },
 
+      currentValue() {
+        return this.value || this.label || '';
+      },
+
       parent() {
         let result = this.$parent;
         while (!result.isSelect) {
