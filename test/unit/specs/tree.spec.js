@@ -127,6 +127,21 @@ describe('Tree', () => {
     expect(vm.$el.querySelectorAll('.el-tree-node.is-expanded').length).to.equal(2);
   });
 
+  it('defaultExpandedKeys set', (done) => {
+    vm = getTreeVm(':props="defaultProps" :default-expanded-keys="defaultExpandedKeys" node-key="id"', {
+      created() {
+        this.defaultExpandedKeys = [1, 3];
+      }
+    });
+    expect(vm.$el.querySelectorAll('.el-tree-node.is-expanded').length).to.equal(2);
+    vm.defaultExpandedKeys = [2];
+    vm.data = JSON.parse(JSON.stringify(vm.data));
+    setTimeout(() => {
+      expect(vm.$el.querySelectorAll('.el-tree-node.is-expanded').length).to.equal(1);
+      done();
+    }, 50);
+  });
+
   it('filter-node-method', (done) => {
     vm = getTreeVm(':props="defaultProps" :filter-node-method="filterNode"', {
       methods: {

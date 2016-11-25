@@ -106,11 +106,16 @@
     },
 
     watch: {
+      defaultCheckedKeys(newVal) {
+        this.store.defaultCheckedKeys = newVal;
+        this.store.setDefaultCheckedKey(newVal);
+      },
+      defaultExpandedKeys(newVal) {
+        this.store.defaultExpandedKeys = newVal;
+        this.store.setDefaultExpandedKeys(newVal);
+      },
       data(newVal) {
         this.store.setData(newVal);
-      },
-      defaultCheckedKeys(newVal) {
-        this.store.setDefaultCheckedKey(newVal);
       }
     },
 
