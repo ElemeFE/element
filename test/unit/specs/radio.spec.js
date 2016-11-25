@@ -65,14 +65,16 @@ describe('Radio', () => {
         };
       }
     }, true);
-    expect(vm.$refs.radio1.$el.querySelector('.is-checked')).to.be.ok;
-    let radioElm = vm.$refs.radio2.$el;
-    radioElm.click();
-    vm.$nextTick(_ => {
-      expect(radioElm.querySelector('.is-checked')).to.be.ok;
-      expect(vm.radio === 6).to.be.true;
-      done();
-    });
+    setTimeout(_ => {
+      expect(vm.$refs.radio1.$el.querySelector('.is-checked')).to.be.ok;
+      let radioElm = vm.$refs.radio2.$el;
+      radioElm.click();
+      vm.$nextTick(_ => {
+        expect(radioElm.querySelector('.is-checked')).to.be.ok;
+        expect(vm.radio === 6).to.be.true;
+        done();
+      });
+    }, 50);
   });
   it('radio button', done => {
     vm = createVue({

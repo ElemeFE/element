@@ -4,7 +4,7 @@
   export default {
     name: 'ElRadioGroup',
 
-    componentName: 'radio-group',
+    componentName: 'ElRadioGroup',
 
     mixins: [Emitter],
 
@@ -15,8 +15,12 @@
     watch: {
       value(value) {
         this.$emit('change', value);
+        this.broadcast('ElRadio', 'initData', value);
         this.dispatch('form-item', 'el.form.change', [this.value]);
       }
+    },
+    mounted() {
+      this.broadcast('ElRadio', 'initData', this.value);
     }
   };
 </script>
