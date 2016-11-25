@@ -66,30 +66,30 @@ export default class TreeStore {
     }
   }
 
-  getNodeByData(data) {
-    const key = typeof data === 'string' ? data : getNodeKey(this.key, data);
+  getNode(data) {
+    const key = typeof data !== 'object' ? data : getNodeKey(this.key, data);
     return this.nodesMap[key];
   }
 
   insertBefore(data, refData) {
-    const refNode = this.getNodeByData(refData);
+    const refNode = this.getNode(refData);
     refNode.parent.insertBefore({ data }, refNode);
   }
 
   insertAfter(data, refData) {
-    const refNode = this.getNodeByData(refData);
+    const refNode = this.getNode(refData);
     refNode.parent.insertAfter({ data }, refNode);
   }
 
   remove(data) {
-    const node = this.getNodeByData(data);
+    const node = this.getNode(data);
     if (node) {
       node.parent.removeChild(node);
     }
   }
 
   append(data, parentData) {
-    const parentNode = parentData ? this.getNodeByData(parentData) : this.root;
+    const parentNode = parentData ? this.getNode(parentData) : this.root;
 
     if (parentNode) {
       parentNode.insertChild({ data });
@@ -206,6 +206,7 @@ export default class TreeStore {
   }
 
   setCheckedKeys(keys, leafOnly = true) {
+    this.defaultCheckedKeys = keys;
     const key = this.key;
     const checkedKeys = {};
     keys.forEach((key) => {
@@ -213,5 +214,15 @@ export default class TreeStore {
     });
 
     this._setCheckedKeys(key, leafOnly, checkedKeys);
+  }
+
+  setDefaultExpandedKeys(keys) {
+    keys = keys || [];
+    this.defaultExpandedKeys = keys;
+
+    keys.forEach((key) => {
+      const node = this.getNode(key);
+      if (node) node.expand(null, this.autoExpandParent);
+    });
   }
 };
