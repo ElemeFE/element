@@ -421,7 +421,7 @@
         } else {
           let optionIndex = -1;
           this.selected.forEach((item, index) => {
-            if (item === option || item.currentLabel === option.currentLabel) {
+            if (item === option || item.currentValue === option.currentValue) {
               optionIndex = index;
             }
           });
