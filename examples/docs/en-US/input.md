@@ -110,17 +110,14 @@
       display: inline-block;
     }
     .inline-input {
-      .el-input {
+      &.el-input {
         display: inline-block;
         vertical-align: top;
         margin: 10px 5px;
       }
-      .el-autocomplete {
+      &.el-autocomplete {
+        display: inline-block;
         margin: 10px 0 0;
-
-        .el-input {
-          margin: 0;
-        }
       }
     }
     .tac {
@@ -306,22 +303,26 @@ export default {
 
 ::: demo Add `size` attribute to change the size of Input. In addition to the default size, there are three other options: `large`, `small` and `mini`.
 ```html
-<div class="inline-input">
+<div>
   <el-input
+    class="inline-input"
     size="large"
     placeholder="Please input"
     v-model="input6">
   </el-input>
   <el-input
+    class="inline-input"
     placeholder="Please input"
     v-model="input7">
   </el-input>
   <el-input
+    class="inline-input"
     size="small"
     placeholder="Please input"
     v-model="input8">
   </el-input>
   <el-input
+    class="inline-input"
     size="mini"
     placeholder="Please input"
     v-model="input9">
@@ -349,10 +350,11 @@ You can get some recommended tips based on the current input.
 
 ::: demo Autocomplete component provides input suggestions. The `fetch-suggestions` attribute is a method that returns suggested input. In this example, `querySearch(queryString, cb)` returns suggestions to Autocomplete via `cb(data)` when suggestions are ready.
 ```html
-<el-row class="inline-input border-grid">
+<el-row class="border-grid">
   <el-col :span="12" class="tac">
     <div class="text">list suggestions when activated</div>
     <el-autocomplete
+      class="inline-input"
       v-model="state1"
       :fetch-suggestions="querySearch"
       placeholder="Please input"
@@ -362,6 +364,7 @@ You can get some recommended tips based on the current input.
   <el-col :span="12" class="tac">
     <div class="text">list suggestions on input</div>
     <el-autocomplete
+      class="inline-input"
       v-model="state2"
       :fetch-suggestions="querySearch"
       placeholder="Please input"
