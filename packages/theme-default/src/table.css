@@ -52,7 +52,7 @@
     }
 
     @e empty-block {
-      display: table;
+      position: relative;
       min-height: 60px;
       text-align: center;
       width: 100%;
@@ -60,8 +60,10 @@
     }
 
     @e empty-text {
-      display: table-cell;
-      vertical-align: middle;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
       color: #5e6d82;
     }
 
