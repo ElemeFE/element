@@ -55,6 +55,10 @@
         color: var(--color-primary);
       }
 
+      @when disabled {
+        color: var(--font-color-disabled-base);
+      }
+
       &:hover {
         color: #1f2d3d;
         cursor: pointer;

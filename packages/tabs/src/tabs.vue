@@ -45,8 +45,10 @@
         this.$forceUpdate();
       },
       handleTabClick(tab, event) {
-        this.currentName = tab.index;
-        this.$emit('tab-click', tab, event);
+        if (!tab.disabled) {
+          this.currentName = tab.index;
+          this.$emit('tab-click', tab, event);
+        }
       },
       calcBarStyle() {
         if (this.type || !this.$refs.tabs) return {};
@@ -111,7 +113,7 @@
           on: { click: (ev) => { handleTabClick(tab, ev); } }
         }, [
           tab.label,
-          tab.isClosable ? btnClose : null,
+          tab.isClosable && !tab.disabled ? btnClose : null,
           index === 0 ? activeBar : null
         ]);
         return _tab;
