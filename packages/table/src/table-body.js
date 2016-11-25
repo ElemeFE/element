@@ -1,4 +1,6 @@
 import { getCell, getColumnByCell, getRowIdentity } from './util';
+import ElInput from 'element-ui/packages/input';
+import debounce from 'throttle-debounce/debounce';
 
 export default {
   props: {
@@ -11,7 +13,8 @@ export default {
     },
     rowClassName: [String, Function],
     fixed: String,
-    highlight: Boolean
+    highlight: Boolean,
+    coloumInputFilter: Boolean
   },
 
   render(h) {
@@ -30,6 +33,28 @@ export default {
             />)
         }
         <tbody>
+          {
+            (this.coloumInputFilter)
+            ? <tr>
+                {
+                  this._l(this.columns, (column, cellIndex) =>
+                    <td class="el-table-td__filter">
+                      {
+                        column.type === 'selection'
+                        ? null
+                        : <el-input
+                            value={this.columnfilters[column.id] && this.columnfilters[column.id].value}
+                            on-change={
+                              debounce(300, (value, oldValue) =>
+                                this.handleFilter(value, oldValue, column, cellIndex)
+                            )} />
+                      }
+                    </td>
+                  )
+                }
+              </tr>
+            : null
+          }
           {
             this._l(this.data, (row, $index) =>
               <tr
@@ -93,6 +118,10 @@ export default {
     }
   },
 
+  components: {
+    ElInput
+  },
+
   computed: {
     data() {
       return this.store.states.data;
@@ -117,7 +146,8 @@ export default {
 
   data() {
     return {
-      tooltipDisabled: true
+      tooltipDisabled: true,
+      columnfilters: {}
     };
   },
 
@@ -199,6 +229,22 @@ export default {
       this.store.commit('setCurrentRow', row);
 
       table.$emit('row-click', row, event);
+    },
+
+    handleFilter(value, oldValue, column, cellIndex) {
+      if (this.columnfilters[column.id] && value === this.columnfilters[column.id].value) {
+        return;
+      }
+      const table = this.$parent;
+      this.columnfilters[column.id] = {
+        value,
+        property: column.property
+      };
+      this.store.commit('columnFilterChange', {
+        filters: this.columnfilters
+      });
+
+      table.$emit('column-filter-change', this.columnfilters);
     }
   }
 };
