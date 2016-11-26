@@ -236,7 +236,7 @@ export default {
       if (!val && this.picker && typeof this.picker.handleClear === 'function') {
         this.picker.handleClear();
       }
-      this.dispatch('form-item', 'el.form.change');
+      this.dispatch('ElFormItem', 'el.form.change');
     },
     value: {
       immediate: true,
@@ -358,7 +358,7 @@ export default {
 
     handleBlur() {
       this.$emit('blur', this);
-      this.dispatch('form-item', 'el.form.blur');
+      this.dispatch('ElFormItem', 'el.form.blur');
     },
 
     handleKeydown(event) {

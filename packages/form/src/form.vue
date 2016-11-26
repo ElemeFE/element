@@ -10,7 +10,7 @@
   export default {
     name: 'ElForm',
 
-    componentName: 'form',
+    componentName: 'ElForm',
 
     props: {
       model: Object,
