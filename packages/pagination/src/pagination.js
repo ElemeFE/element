@@ -54,7 +54,7 @@ export default {
       jumper: <jumper></jumper>,
       pager: <pager currentPage={ this.internalCurrentPage } pageCount={ this.internalPageCount } on-change={ this.handleCurrentChange }></pager>,
       next: <next></next>,
-      sizes: <sizes></sizes>,
+      sizes: <sizes pageSizes={ this.pageSizes }></sizes>,
       slot: <slot></slot>,
       total: <total></total>
     };
@@ -119,11 +119,20 @@ export default {
     Sizes: {
       mixins: [Locale],
 
-      created() {
-        if (Array.isArray(this.$parent.pageSizes)) {
-          this.$parent.internalPageSize = this.$parent.pageSizes.indexOf(this.$parent.pageSize) > -1
-            ? this.$parent.pageSize
-            : this.$parent.pageSizes[0];
+      props: {
+        pageSizes: Array
+      },
+
+      watch: {
+        pageSizes: {
+          immediate: true,
+          handler(value) {
+            if (Array.isArray(value)) {
+              this.$parent.internalPageSize = value.indexOf(this.$parent.pageSize) > -1
+                ? this.$parent.pageSize
+                : this.pageSizes[0];
+            }
+          }
         }
       },
 
@@ -136,7 +145,7 @@ export default {
               on-change={ this.handleChange }
               width={ 110 }>
               {
-                this.$parent.pageSizes.map(item =>
+                this.pageSizes.map(item =>
                     <el-option
                       value={ item }
                       label={ item + ' ' + this.t('el.pagination.pagesize') }>
