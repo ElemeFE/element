@@ -23,6 +23,11 @@
       },
       inline: Boolean
     },
+    watch: {
+      rules() {
+        this.validate();
+      }
+    },
     data() {
       return {
         fields: []
@@ -54,7 +59,7 @@
             if (errors) {
               valid = false;
             }
-            if (index === this.fields.length - 1) {
+            if (typeof callback === 'function' && index === this.fields.length - 1) {
               callback(valid);
             }
           });
