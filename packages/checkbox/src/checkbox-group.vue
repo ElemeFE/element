@@ -16,7 +16,12 @@
       value(value) {
         this.$emit('change', value);
         this.dispatch('form-item', 'el.form.change', [value]);
+        this.broadcast('ElCheckbox', 'initData', [value]);
       }
+    },
+
+    mounted() {
+      this.broadcast('ElCheckbox', 'initData', [this.value]);
     }
   };
 </script>
