@@ -34,6 +34,7 @@
         @input="handleInput"
         @focus="handleFocus"
         @blur="handleBlur"
+        @keyup.enter="handleEnter"
       >
       <i class="el-input__icon el-icon-loading" v-if="validating"></i>
       <!-- 后置元素 -->
@@ -106,6 +107,8 @@
       handleBlur(event) {
         this.$emit('blur', event);
         this.dispatch('form-item', 'el.form.blur', [this.currentValue]);
+        this.$emit('change', this.currentValue);
+        this.dispatch('form-item', 'el.form.change', [this.currentValue]);
       },
       inputSelect() {
         this.$refs.input.select();
@@ -128,6 +131,10 @@
       },
       handleIconClick(event) {
         this.$emit('click', event);
+      },
+      handleEnter() {
+        this.$emit('change', this.currentValue);
+        this.dispatch('form-item', 'el.form.change', [this.currentValue]);
       }
     },
 
@@ -161,8 +168,6 @@
           this.resizeTextarea();
         });
         this.$emit('input', val);
-        this.$emit('change', val);
-        this.dispatch('form-item', 'el.form.change', [val]);
       }
     }
   };
