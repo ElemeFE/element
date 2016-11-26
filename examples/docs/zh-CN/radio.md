@@ -138,3 +138,5 @@
 |---------- |-------- |---------- |-------------  |-------- |
 | label     | Radio 的 value  | string,number  |        —       |     —    |
 | disabled  | 是否禁用    | boolean   | — | false   |
+| fill  | 按钮激活时的填充色和边框色    | string   | — | #20a0ff   |
+| text-color  | 按钮激活时的文本颜色    | string   | — | #ffffff   |

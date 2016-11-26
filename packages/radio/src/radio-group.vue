@@ -10,7 +10,15 @@
 
     props: {
       value: [String, Number],
-      size: String
+      size: String,
+      fill: {
+        type: String,
+        default: '#20a0ff'
+      },
+      textColor: {
+        type: String,
+        default: '#fff'
+      }
     },
     watch: {
       value(value) {
