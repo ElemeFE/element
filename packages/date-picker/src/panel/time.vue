@@ -101,7 +101,7 @@
 
     methods: {
       handleClear() {
-        this.handleCancel();
+        this.$emit('pick', '');
       },
 
       handleCancel() {

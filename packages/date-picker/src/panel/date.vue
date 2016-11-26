@@ -183,7 +183,7 @@
     methods: {
       handleClear() {
         this.date = new Date();
-        this.$emit('pick');
+        this.$emit('pick', '');
       },
 
       resetDate() {
