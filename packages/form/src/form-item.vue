@@ -47,7 +47,7 @@
   export default {
     name: 'ElFormItem',
 
-    componentName: 'form-item',
+    componentName: 'ElFormItem',
 
     mixins: [emitter],
 
@@ -88,7 +88,7 @@
       },
       form() {
         var parent = this.$parent;
-        while (parent.$options.componentName !== 'form') {
+        while (parent.$options.componentName !== 'ElForm') {
           parent = parent.$parent;
         }
         return parent;
@@ -192,7 +192,7 @@
     },
     mounted() {
       if (this.prop) {
-        this.dispatch('form', 'el.form.addField', [this]);
+        this.dispatch('ElForm', 'el.form.addField', [this]);
 
         Object.defineProperty(this, 'initialValue', {
           value: this.fieldValue
@@ -213,7 +213,7 @@
       }
     },
     beforeDestroy() {
-      this.dispatch('form', 'el.form.removeField', [this]);
+      this.dispatch('ElForm', 'el.form.removeField', [this]);
     }
   };
 </script>

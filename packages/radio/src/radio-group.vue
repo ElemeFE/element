@@ -16,7 +16,7 @@
       value(value) {
         this.$emit('change', value);
         this.broadcast('ElRadio', 'initData', value);
-        this.dispatch('form-item', 'el.form.change', [this.value]);
+        this.dispatch('ElFormItem', 'el.form.change', [this.value]);
       }
     },
     mounted() {
