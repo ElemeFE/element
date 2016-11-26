@@ -58,7 +58,8 @@ const DEFAULT_FORMATS = {
   time: 'HH:mm:ss',
   timerange: 'HH:mm:ss',
   daterange: 'yyyy-MM-dd',
-  datetimerange: 'yyyy-MM-dd HH:mm:ss'
+  datetimerange: 'yyyy-MM-dd HH:mm:ss',
+  year: 'yyyy'
 };
 const HAVE_TRIGGER_TYPES = [
   'date',
@@ -163,16 +164,8 @@ const TYPE_VALUE_RESOLVER_MAP = {
     parser: DATE_PARSER
   },
   year: {
-    formatter(value) {
-      if (!value) return '';
-      return '' + value;
-    },
-    parser(text) {
-      const year = Number(text);
-      if (!isNaN(year)) return year;
-
-      return null;
-    }
+    formatter: DATE_FORMATTER,
+    parser: DATE_PARSER
   },
   number: {
     formatter(value) {
