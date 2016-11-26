@@ -52,7 +52,7 @@
 
 适用广泛的基础用法。
 
-::: demo
+::: demo 导航菜单默认为垂直模式，通过 `mode` 属性可以使导航菜单变更为水平模式。另外，在菜单中通过 `submenu` 组件可以生成二级菜单。
 ```html
 <el-menu theme="dark" default-active="1" class="el-menu-demo" mode="horizontal" @select="handleSelect">
   <el-menu-item index="1">处理中心</el-menu-item>
@@ -92,7 +92,7 @@
 
 垂直菜单，可内嵌子菜单。
 
-::: demo
+::: demo 通过 `el-menu-item-group` 组件可以实现菜单进行分组，分组名可以通过 `title` 属性直接设定也可以通过具名 slot 来设定。
 ```html
 <el-row class="tac">
   <el-col :span="8">
@@ -100,7 +100,8 @@
     <el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
       <el-submenu index="1">
         <template slot="title"><i class="el-icon-message"></i>导航一</template>
-        <el-menu-item-group title="分组一">
+        <el-menu-item-group>
+          <template slot="title">分组一</template>
           <el-menu-item index="1-1">选项1</el-menu-item>
           <el-menu-item index="1-2">选项2</el-menu-item>
         </el-menu-item-group>
