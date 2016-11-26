@@ -14,22 +14,6 @@
           @close="deleteTag($event, item)"
           close-transition>{{ item.currentLabel }}</el-tag>
       </transition-group>
-      <input
-        type="text"
-        class="el-select__input"
-        @focus="visible = true"
-        @keyup="managePlaceholder"
-        @keydown="resetInputState"
-        @keydown.down.prevent="navigateOptions('next')"
-        @keydown.up.prevent="navigateOptions('prev')"
-        @keydown.enter.prevent="selectOption"
-        @keydown.esc.prevent="visible = false"
-        @keydown.delete="deletePrevTag"
-        v-model="query"
-        :debounce="remote ? 300 : 0"
-        v-if="filterable"
-        :style="{ width: inputLength + 'px', 'max-width': inputWidth - 42 + 'px' }"
-        ref="input">
     </div>
     <el-input
       ref="reference"
@@ -38,16 +22,10 @@
       :placeholder="currentPlaceholder"
       :name="name"
       :disabled="disabled"
-      :readonly="!filterable || multiple"
+      readonly="readonly"
       @focus="toggleMenu"
       @click="toggleMenu"
       @mousedown.native="handleMouseDown"
-      @keyup.native="debouncedOnInputChange"
-      @keydown.native.down.prevent="navigateOptions('next')"
-      @keydown.native.up.prevent="navigateOptions('prev')"
-      @keydown.native.enter.prevent="selectOption"
-      @keydown.native.esc.prevent="visible = false"
-      @keydown.native.tab="visible = false"
       @mouseenter.native="inputHovering = true"
       @mouseleave.native="inputHovering = false"
       :icon="iconClass">
@@ -55,7 +33,22 @@
     <transition name="md-fade-bottom" @after-leave="doDestroy">
       <el-select-menu
         ref="popper"
-        v-show="visible && emptyText !== false">
+        v-show="visible">
+        <el-input
+            v-if='filterable||(multiple&&filterable)'
+            class="el-select-dropdown__search"
+            placeholder="请输入关键词"
+            v-model="query"
+            size="small"
+            :debounce="remote ? 300 : 0"
+            @click="toggleMenu"
+            @keyup.native="debouncedOnInputChange"
+            @keydown.native.down.prevent="navigateOptions('next')"
+            @keydown.native.up.prevent="navigateOptions('prev')"
+            @keydown.native.enter.prevent="selectOption"
+            @keydown.native.esc.prevent="visible = false"
+            @keydown.native.tab="visible = false">
+        </el-input>
         <ul class="el-select-dropdown__list" v-show="options.length > 0 && filteredOptionsCount > 0 && !loading">
           <slot></slot>
         </ul>
@@ -174,9 +167,9 @@
         dropdownUl: null,
         visible: false,
         selectedLabel: '',
+        query: '',
         selectInit: false,
         hoverIndex: -1,
-        query: '',
         voidRemoteQuery: false,
         bottomOverflowBeforeHidden: 0,
         optionsAllDisabled: false,
@@ -244,9 +237,8 @@
           this.$emit('change', result);
           this.dispatch('form-item', 'el.form.change', val);
           if (this.filterable) {
-            this.query = '';
+
             this.hoverIndex = -1;
-            this.$refs.input.focus();
             this.inputLength = 20;
           }
         } else {
@@ -259,7 +251,6 @@
           this.$emit('change', val.value);
         }
       },
-
       query(val) {
         this.$nextTick(() => {
           this.broadcast('select-dropdown', 'updatePopper');
@@ -279,7 +270,6 @@
           this.broadcast('option', 'queryChange', val);
         }
       },
-
       visible(val) {
         if (!val) {
           this.$refs.reference.$el.querySelector('input').blur();
@@ -306,18 +296,13 @@
           }
           this.broadcast('select-dropdown', 'updatePopper');
           if (this.filterable) {
-            this.query = this.selectedLabel;
-            if (this.multiple) {
-              this.$refs.input.focus();
-            } else {
-              this.broadcast('input', 'inputSelect');
-            }
+            this.broadcast('input', 'inputSelect');
           }
           if (!this.dropdownUl) {
             let dropdownChildNodes = this.$refs.popper.$el.childNodes;
             this.dropdownUl = [].filter.call(dropdownChildNodes, item => item.tagName === 'UL')[0];
           }
-          if (!this.multiple && this.dropdownUl) {
+          if (this.dropdownUl) {
             if (this.bottomOverflowBeforeHidden > 0) {
               this.dropdownUl.scrollTop += this.bottomOverflowBeforeHidden;
             }
@@ -382,17 +367,6 @@
         }
       },
 
-      managePlaceholder() {
-        if (this.currentPlaceholder !== '') {
-          this.currentPlaceholder = this.$refs.input.value ? '' : this.cachedPlaceHolder;
-        }
-      },
-
-      resetInputState(e) {
-        if (e.keyCode !== 8) this.toggleLastOptionHitState(false);
-        this.inputLength = this.$refs.input.value.length * 15 + 20;
-      },
-
       resetInputHeight() {
         this.$nextTick(() => {
           let inputChildNodes = this.$refs.reference.$el.childNodes;
@@ -442,6 +416,7 @@
         }
         if (!this.disabled) {
           this.visible = !this.visible;
+          this.query = '';
         }
       },
 
@@ -514,7 +489,6 @@
 
       onInputChange() {
         if (this.filterable && this.selectedLabel !== this.value) {
-          this.query = this.selectedLabel;
         }
       },
 

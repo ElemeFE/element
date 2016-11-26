@@ -508,7 +508,7 @@
     multiple
     filterable
     remote
-    placeholder="请输入关键词"
+    placeholder="请点击并输入关键词"
     :remote-method="remoteMethod"
     :loading="loading">
     <el-option
