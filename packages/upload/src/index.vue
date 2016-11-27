@@ -65,6 +65,12 @@ export default {
     onError: {
       type: Function,
       default: noop
+    },
+    defaultFileList: {
+      type: Array,
+      default() {
+        return [];
+      }
     }
   },
 
@@ -150,6 +156,15 @@ export default {
     clearFiles() {
       this.fileList = [];
     }
+  },
+
+  created() {
+    this.fileList = this.defaultFileList.map(item => {
+      item.status = 'finished';
+      item.percentage = 100;
+      item.uid = Date.now() + this.tempIndex++;
+      return item;
+    });
   },
 
   render(h) {
