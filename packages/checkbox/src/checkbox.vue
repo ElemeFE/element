@@ -77,7 +77,7 @@
 
     props: {
       value: {},
-      label: String,
+      label: {},
       indeterminate: Boolean,
       disabled: Boolean,
       checked: Boolean,
