@@ -2,7 +2,6 @@
   export default {
     data() {
       return {
-        visible2: false,
         gridData: [{
           date: '2016-05-02',
           name: 'Jack',
@@ -181,26 +180,15 @@ Of course, you can nest other operations. It's more light-weight than using a di
 <el-popover
   ref="popover5"
   placement="top"
-  width="160"
-  v-model="visible2">
+  width="160">
   <p>Are you sure to delete this?</p>
   <div style="text-align: right; margin: 0">
-    <el-button size="mini" type="text" @click="visible2 = false">cancel</el-button>
-    <el-button type="primary" size="mini" @click="visible2 = false">confirm</el-button>
+    <el-button size="mini" type="text" v-popover-close:popover5>cancel</el-button>
+    <el-button type="primary" size="mini" v-popover-close:popover5>confirm</el-button>
   </div>
 </el-popover>
 
 <el-button v-popover:popover5>Delete</el-button>
-
-<script>
-  export default {
-    data() {
-      return {
-        visible2: false,
-      };
-    }
-  }
-</script>
 ```
 :::
 

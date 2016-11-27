@@ -141,10 +141,15 @@ describe('Popover', () => {
         <div>
           <el-popover
             ref="popover1"
-            trigger="click"
-            content="content">
+            placement="top"
+            width="160"
+          >
+            <p>这是一段内容这是一段内容确定删除吗？</p>
+            <div style="text-align: right; margin: 0">
+              <el-button ref="closeBtn" size="mini" type="text" v-popover-close:popover1>取消</el-button>
+            </div>
           </el-popover>
-          <button v-popover:popover1>create by directive</button>
+          <button ref="toggleBtn" v-popover:popover1>create by directive</button>
         </div>
       `,
 
@@ -154,22 +159,32 @@ describe('Popover', () => {
     }, true);
     const compo = vm.$refs.popover1;
 
-    it('render', () => {
-      expect(vm.$el.querySelector('.el-popover')).to.have.deep.property('textContent').include('content');
-    });
-
-    it('triggering click', done => {
-      vm.$el.querySelector('button').click();
+    it('triggering toggle', done => {
+      vm.$refs.toggleBtn.click();
       expect(compo.popperElm).to.not.exist;
       vm.$nextTick(_ => {
-        expect(compo).to.have.deep.property('popperElm.style.display').not.equal('none');
+        expect(compo.showPopper).to.true;
         done();
       });
     });
 
-    it('click outside', () => {
-      document.body.click();
-      expect(compo.showPopper).to.false;
+    it('triggering close', done => {
+      vm.$refs.closeBtn.$el.click();
+      vm.$nextTick(_ => {
+        expect(compo.showPopper).to.false;
+        done();
+      });
+    });
+
+    it('click outside', done => {
+      vm.$refs.toggleBtn.click();
+      vm.$nextTick(_ => {
+        document.body.click();
+        vm.$nextTick(_ => {
+          expect(compo.showPopper).to.false;
+          done();
+        });
+      });
     });
   });
 
