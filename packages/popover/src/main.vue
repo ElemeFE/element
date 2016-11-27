@@ -44,6 +44,12 @@ export default {
     }
   },
 
+  watch: {
+    showPopper(newVal, oldVal) {
+      newVal ? this.$emit('show') : this.$emit('hide');
+    }
+  },
+
   mounted() {
     let reference = this.reference || this.$refs.reference;
     const popper = this.popper || this.$refs.popper;
