@@ -158,13 +158,18 @@ export default {
     }
   },
 
-  created() {
-    this.fileList = this.defaultFileList.map(item => {
-      item.status = 'finished';
-      item.percentage = 100;
-      item.uid = Date.now() + this.tempIndex++;
-      return item;
-    });
+  watch: {
+    defaultFileList: {
+      immediate: true,
+      handler(fileList) {
+        this.fileList = fileList.map(item => {
+          item.status = 'finished';
+          item.percentage = 100;
+          item.uid = Date.now() + this.tempIndex++;
+          return item;
+        });
+      }
+    }
   },
 
   render(h) {
