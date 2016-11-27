@@ -387,21 +387,23 @@ describe('Select', () => {
       remoteMethod
     });
     const select = vm.$children[0];
-    select.query = '面';
-    setTimeout(() => {
-      expect(select.filteredOptionsCount).to.equal(1);
-      select.query = '';
-      select.options[0].$el.click();
-      vm.$nextTick(() => {
-        expect(vm.value[0]).to.equal('选项4');
-        select.deletePrevTag({ target: select.$refs.input });
-        select.deletePrevTag({ target: select.$refs.input });
-        select.resetInputState({ keyCode: 1 });
+    vm.$nextTick(() => {
+      select.query = '面';
+      setTimeout(() => {
+        expect(select.filteredOptionsCount).to.equal(1);
+        select.query = '';
+        select.options[0].$el.click();
         vm.$nextTick(() => {
-          expect(vm.value.length).to.equal(0);
-          done();
+          expect(vm.value[0]).to.equal('选项4');
+          select.deletePrevTag({ target: select.$refs.input });
+          select.deletePrevTag({ target: select.$refs.input });
+          select.resetInputState({ keyCode: 1 });
+          vm.$nextTick(() => {
+            expect(vm.value.length).to.equal(0);
+            done();
+          });
         });
-      });
-    }, 250);
+      }, 250);
+    });
   });
 });

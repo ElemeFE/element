@@ -4,7 +4,11 @@
     @click.stop="selectOptionClick"
     class="el-select-dropdown__item"
     v-show="visible"
-    :class="{ 'selected': itemSelected, 'is-disabled': disabled || groupDisabled, 'hover': parent.hoverIndex === index }">
+    :class="{
+      'selected': itemSelected,
+      'is-disabled': disabled || groupDisabled,
+      'hover': parent.hoverIndex === index
+    }">
     <slot>
       <span>{{ currentLabel }}</span>
     </slot>
@@ -63,22 +67,10 @@
       },
 
       itemSelected() {
-        if (Object.prototype.toString.call(this.parent.selected) === '[object Object]') {
-          return this === this.parent.selected;
-        } else if (Array.isArray(this.parent.selected)) {
+        if (!this.parent.multiple) {
+          return this.value === this.parent.value;
+        } else {
           return this.parent.value.indexOf(this.value) > -1;
-        }
-      },
-
-      currentSelected() {
-        return this.selected || (this.parent.multiple ? this.parent.value.indexOf(this.value) > -1 : this.parent.value === this.value);
-      }
-    },
-
-    watch: {
-      currentSelected(val) {
-        if (val === true) {
-          this.dispatch('ElSelect', 'addOptionToValue', this);
         }
       }
     },
@@ -121,10 +113,6 @@
       this.parent.optionsCount++;
       this.parent.filteredOptionsCount++;
       this.index = this.parent.options.indexOf(this);
-
-      if (this.currentSelected === true) {
-        this.dispatch('ElSelect', 'addOptionToValue', [this, true]);
-      }
 
       this.$on('queryChange', this.queryChange);
       this.$on('handleGroupDisabled', this.handleGroupDisabled);

@@ -12,13 +12,6 @@
     display: block;
     position: relative;
 
-    @when small {
-      & input {
-        border-radius: var(--border-radius-small);
-        height: 28px;
-      }
-    }
-
     &:hover {
       .el-input__inner {
         border-color: var(--select-border-color-hover);
