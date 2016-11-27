@@ -14,6 +14,7 @@
 - [Home Page](http://element.eleme.io/)
 - [Docs](http://element.eleme.io/#/component)
 - [FAQ](./FAQ.md)
+- [Customize Theme](http://element.eleme.io/#/en-US/component/custom-theme)
 - Starter Kit
  - [element-starter](https://github.com/ElementUI/element-starter)
  - [element-cooking-starter](https://github.com/ElementUI/element-cooking-starter)
