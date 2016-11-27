@@ -102,6 +102,7 @@ This mode is specifically for image uploading, and the thumbnail will display in
   :thumbnail-mode="true"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
+  :default-file-list="[{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]"
 >
   <i class="el-icon-upload"></i>
   <div class="el-dragger__text">Drop file here or <em>click to upload</em></div>
