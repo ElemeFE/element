@@ -109,7 +109,7 @@ Add more modules based on your scenario.
         currentPage1: 5,
         currentPage2: 5,
         currentPage3: 5,
-        currentPage4: 5
+        currentPage4: 4
       };
     }
   }
@@ -117,13 +117,14 @@ Add more modules based on your scenario.
 ```
 :::
 <script>
+  import { addClass } from 'wind-dom/src/class';
   export default {
     data() {
       return {
         currentPage1: 5,
         currentPage2: 5,
         currentPage3: 5,
-        currentPage4: 5
+        currentPage4: 4
       };
     },
     methods: {
@@ -140,8 +141,8 @@ Add more modules based on your scenario.
         let demos = document.querySelectorAll('.source');
         let firstDemo = demos[0];
         let lastDemo = demos[demos.length - 1];
-        firstDemo.classList.add('first');
-        lastDemo.classList.add('last');
+        addClass(firstDemo, 'first');
+        addClass(lastDemo, 'last');
       });
     }
   }

@@ -1,5 +1,28 @@
 ## 更新日志
 
+### 1.0.3
+*2016-11-28*
+
+- 修复 Pagination 的 `currentPage` 在某些情况下设置无效的情况，#1336
+- 修复 DatePicker 为 `month` 且设置了 `disabledDate` 的情况下切换年份时界面未更新的问题，#1158
+- 修复 DatePicker readonly 时未禁用清除按钮的问题，#1238
+- 修复 Slider 绑定值为 `NaN` 以及 `step` 小于 1 时无法正常工作的问题，#1239 #1282
+- 增加 Table 的多表头功能，#1312
+- 增加 Table 的 `rowStyle` 属性，#1348
+- 修复 TableColumn 的某些属性无法动态设置的问题，#1314
+- 增加 Tree 的 `filter-node-method` 属性和 `filter` 方法，#1257
+- 增加 Tree 的 `getCheckedKeys` 和 `setCheckedKeys` 方法，#1254
+- 重构 Checkbox/Radio 支持嵌套 Group 绑定值，#1152
+- 修复 Popper 在 keep-alive 下无法触发销毁的问题，#1359
+- 增加 Form 中深对象验证的支持，#1363
+- 增加 Autocomplete 里的 `append` 和 `prepend` API，#1369
+- 增加 Pagination `pageSizes` 属性的动态支持，#1372
+- 增加 Radio Button 自定义选中按钮样式的 API，#1380
+- 增加 Menu Group 支持通过 slot 来设置 title，#1382
+- 修复 DatePicker 选择年的 bug，#1385
+- 新增 Upload 默认已上传的文件列表 API，#1393
+- 增加 Checkbox `label` 属性绑定的多类型支持，#1400
+
 ### 1.0.2
 *2016-11-18*
 
