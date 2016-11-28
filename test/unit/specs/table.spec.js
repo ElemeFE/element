@@ -147,6 +147,37 @@ describe('Table', () => {
         done();
       }, DELAY);
     });
+
+    it('tableRowStyle[Object]', done => {
+      const vm = createTable(':row-style="{ height: \'60px\' }"', {});
+
+      setTimeout(_ => {
+        expect(vm.$el.querySelector('.el-table__body tr').style.height).to.equal('60px');
+        destroyVM(vm);
+        done();
+      }, DELAY);
+    });
+
+    it('tableRowStyle[Function]', done => {
+      const vm = createTable(':row-style="tableRowStyle"', {
+        methods: {
+          tableRowStyle(row, index) {
+            if (index === 1) {
+              return { height: '60px' };
+            }
+
+            return null;
+          }
+        }
+      });
+
+      setTimeout(_ => {
+        expect(vm.$el.querySelector('.el-table__body tr:nth-child(1)').style.height).to.equal('');
+        expect(vm.$el.querySelector('.el-table__body tr:nth-child(2)').style.height).to.equal('60px');
+        destroyVM(vm);
+        done();
+      }, DELAY);
+    });
   });
 
   describe('filter', () => {

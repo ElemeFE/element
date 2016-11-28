@@ -13,7 +13,7 @@
   export default {
     name: 'el-select-dropdown',
 
-    componentName: 'select-dropdown',
+    componentName: 'ElSelectDropdown',
 
     mixins: [Popper],
 

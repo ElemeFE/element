@@ -151,17 +151,14 @@
       display: inline-block;
     }
     .inline-input {
-      .el-input {
+      &.el-input {
         display: inline-block;
         vertical-align: top;
         margin: 10px 5px;
       }
-      .el-autocomplete {
+      &.el-autocomplete {
+        display: inline-block;
         margin: 10px 0 0;
-
-        .el-input {
-          margin: 0;
-        }
       }
     }
     .tac {
@@ -349,22 +346,26 @@ export default {
 
 ::: demo 可通过 `size` 属性指定输入框的尺寸，除了默认的大小外，还提供了 large、small 和 mini 三种尺寸。
 ```html
-<div class="inline-input">
+<div>
   <el-input
+    class="inline-input"
     size="large"
     placeholder="请输入内容"
     v-model="input6">
   </el-input>
   <el-input
+    class="inline-input"
     placeholder="请输入内容"
     v-model="input7">
   </el-input>
   <el-input
+    class="inline-input"
     size="small"
     placeholder="请输入内容"
     v-model="input8">
   </el-input>
   <el-input
+    class="inline-input"
     size="mini"
     placeholder="请输入内容"
     v-model="input9">
@@ -392,10 +393,11 @@ export default {
 
 ::: demo autocomplete 是一个可带输入建议的输入框组件，`fetch-suggestions` 是一个返回输入建议的方法属性，如 querySearch(queryString, cb)，在该方法中你可以在你的输入建议数据准备好时通过 cb(data) 返回到 autocomplete 组件中。
 ```html
-<el-row class="inline-input border-grid">
+<el-row class="border-grid">
   <el-col :span="12" class="tac">
     <div class="text">激活即列出输入建议</div>
     <el-autocomplete
+      class="inline-input"
       v-model="state1"
       :fetch-suggestions="querySearch"
       placeholder="请输入内容"
@@ -405,6 +407,7 @@ export default {
   <el-col :span="12" class="tac">
     <div class="text">输入后匹配输入建议</div>
     <el-autocomplete
+      class="inline-input"
       v-model="state2"
       :fetch-suggestions="querySearch"
       placeholder="请输入内容"

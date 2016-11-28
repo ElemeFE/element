@@ -40,6 +40,7 @@
 
 <script type="text/jsx">
   import CollapseTransition from './transition';
+  import ElCheckbox from 'element-ui/packages/checkbox'
 
   export default {
     name: 'el-tree-node',
@@ -55,6 +56,7 @@
     },
 
     components: {
+      ElCheckbox,
       CollapseTransition,
       NodeContent: {
         props: {

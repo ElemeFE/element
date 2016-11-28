@@ -160,15 +160,6 @@
       z-index: -1;
       left: -999px;
 
-      &:checked {
-        & + .el-radio-button__inner {
-          z-index: 1;
-          background-color: var(--color-primary);
-          border-color: @background-color;
-          color: #fff;
-        }
-      }
-
       &:disabled {
         & + .el-radio-button__inner {
           color: var(--button-disabled-color);

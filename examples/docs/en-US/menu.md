@@ -22,7 +22,7 @@ Menu that provides navigation for your website.
 
 Top bar NavMenu can be used in a variety of scenarios.
 
-::: demo
+::: demo By default Menu is vertical, but you can change it to horizontal by setting the mode prop to 'horizontal'. In addition, you can use the submenu component to create a second level menu.
 ```html
 <el-menu theme="dark" default-active="1" class="el-menu-demo" mode="horizontal" @select="handleSelect">
   <el-menu-item index="1">Processing Center</el-menu-item>
@@ -62,7 +62,7 @@ Top bar NavMenu can be used in a variety of scenarios.
 
 Vertical NavMenu with sub-menus.
 
-::: demo
+::: demo You can use the el-menu-item-group component to create a menu group, and the name of the group is determined by the title prop or a named slot.
 ```html
 <el-row class="tac">
   <el-col :span="8">

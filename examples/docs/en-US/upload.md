@@ -1,5 +1,10 @@
 <script>
   export default {
+    data() {
+      return {
+        fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
+      };
+    },
     methods: {
       handleChange(file, fileList, event) {
         console.log(file, fileList, event);
@@ -37,12 +42,18 @@ Upload files by clicking or drag-and-drop
 <el-upload
   action="//jsonplaceholder.typicode.com/posts/"
   :on-preview="handlePreview"
-  :on-remove="handleRemove">
+  :on-remove="handleRemove"
+  :default-file-list="fileList">
   <el-button size="small" type="primary">Click to upload</el-button>
   <div class="el-upload__tip" slot="tip">jpg/png files with a size less than 500kb</div>
 </el-upload>
 <script>
   export default {
+    data() {
+      return {
+        fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
+      };
+    },
     methods: {
       handleRemove(file, fileList) {
         console.log(file, fileList);
@@ -70,6 +81,7 @@ You can drag your file to a certain area to upload it.
   :on-remove="handleRemove"
   :on-success="handleSuccess"
   :on-error="handleError"
+  :default-file-list="fileList"
 >
   <i class="el-icon-upload"></i>
   <div class="el-dragger__text">Drop file here or <em>click to upload</em></div>
@@ -77,6 +89,11 @@ You can drag your file to a certain area to upload it.
 </el-upload>
 <script>
   export default {
+    data() {
+      return {
+        fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
+      };
+    },
     methods: {
       handleRemove(file, fileList) {
         console.log(file, fileList);
@@ -102,6 +119,7 @@ This mode is specifically for image uploading, and the thumbnail will display in
   :thumbnail-mode="true"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
+  :default-file-list="fileList"
 >
   <i class="el-icon-upload"></i>
   <div class="el-dragger__text">Drop file here or <em>click to upload</em></div>
@@ -109,6 +127,11 @@ This mode is specifically for image uploading, and the thumbnail will display in
 </el-upload>
 <script>
   export default {
+    data() {
+      return {
+        fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
+      };
+    },
     methods: {
       handleRemove(file, fileList) {
         console.log(file, fileList);
@@ -140,6 +163,7 @@ on-success | hook function when uploaded successfully | function(response, file,
 on-error | hook function when some errors occurs | function(err, response, file) | — | —
 before-upload | hook function before uploading with the file to be uploaded as its parameter. If `false` or a `Promise` is returned, uploading will be aborted | function(file) | — | —
 thumbnail-mode | whether thumbnail is displayed | boolean | — | false
+default-file-list | default uploaded files, i.e: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}] | array | — | []
 
 ### Events
 | Event Name | Description | Parameters |

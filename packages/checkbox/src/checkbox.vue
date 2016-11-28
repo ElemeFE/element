@@ -17,11 +17,10 @@
         :disabled="disabled"
         :true-value="trueLabel"
         :false-value="falseLabel"
-        v-model="_value"
+        v-model="model"
+        @change="$emit('change', $event)"
         @focus="focus = true"
-        @blur="focus = false"
-        @change="handleChange"
-        ref="checkbox">
+        @blur="focus = false">
       <input
         v-else
         class="el-checkbox__original"
@@ -29,10 +28,10 @@
         :disabled="disabled"
         :value="label"
         :name="name"
-        v-model="_value"
+        v-model="model"
+        @change="$emit('change', $event)"
         @focus="focus = true"
-        @blur="focus = false"
-        @change="handleChange">
+        @blur="focus = false">
     </span>
     <span class="el-checkbox__label" v-if="$slots.default || label">
       <slot></slot>
@@ -48,9 +47,37 @@
 
     mixins: [Emitter],
 
+    componentName: 'ElCheckbox',
+
+    computed: {
+      model: {
+        get() {
+          return this.isGroup ? this.store : this.value;
+        },
+
+        set(val) {
+          if (this.isGroup) {
+            this.dispatch('ElCheckboxGroup', 'input', [val]);
+          } else {
+            this.$emit('input', val);
+          }
+        }
+      },
+
+      isChecked() {
+        if ({}.toString.call(this.model) === '[object Boolean]') {
+          return this.model;
+        } else if (Array.isArray(this.model)) {
+          return this.model.indexOf(this.label) > -1;
+        } else if (this.model !== null && this.model !== undefined) {
+          return this.model === this.trueLabel;
+        }
+      }
+    },
+
     props: {
       value: {},
-      label: String,
+      label: {},
       indeterminate: Boolean,
       disabled: Boolean,
       checked: Boolean,
@@ -59,59 +86,30 @@
       falseLabel: [String, Number]
     },
 
-    computed: {
-      _value: {
-        get() {
-          return !this.wrapInGroup ? this.value : this.$parent.value;
-        },
-        set(newValue) {
-          if (!this.wrapInGroup) {
-            this.$emit('input', newValue);
-          } else {
-            this.$parent.$emit('input', newValue);
-          }
-        }
-      },
-      isChecked() {
-        var type = Object.prototype.toString.call(this._value);
-
-        if (type === '[object Boolean]') {
-          return this._value;
-        } else if (type === '[object Array]') {
-          return this._value.indexOf(this.label) > -1;
-        } else if (type === '[object String]' || type === '[object Number]') {
-          return this._value === this.trueLabel;
-        }
-      }
-    },
-
     data() {
       return {
-        focus: false,
-        wrapInGroup: this.$parent.$options.componentName === 'ElCheckboxGroup'
+        store: [],
+        isGroup: false
       };
     },
 
-    watch: {
-      checked: {
-        immediate: true,
-        handler(value) {
-          if (value) {
-            let type = Object.prototype.toString.call(this._value);
-            if (type !== '[object Array]') {
-              this._value = this.trueLabel || true;
-            } else {
-              this._value.push(this.label);
-            }
-          }
+    methods: {
+      addToStore() {
+        if (Array.isArray(this.model)) {
+          this.model.indexOf(this.label) === -1 && this.model.push(this.label);
+        } else {
+          this.model = this.trueLabel || true;
         }
       }
     },
 
-    methods: {
-      handleChange(ev) {
-        this.$emit('change', ev);
-      }
+    created() {
+      this.checked && this.addToStore();
+      this.$on('initData', data => {
+        this.store = data;
+        this.isGroup = true;
+        this.checked && this.addToStore();
+      });
     }
   };
 </script>

@@ -97,15 +97,7 @@ export default class Node {
     const defaultExpandedKeys = store.defaultExpandedKeys;
     const key = store.key;
     if (key && defaultExpandedKeys && defaultExpandedKeys.indexOf(this.key) !== -1) {
-      if (store.autoExpandParent) {
-        let parent = this.parent;
-        while (parent.level > 0) {
-          parent.expanded = true;
-          parent = parent.parent;
-        }
-      }
-
-      this.expand();
+      this.expand(null, store.autoExpandParent);
     }
 
     if (store.lazy) {
@@ -213,17 +205,27 @@ export default class Node {
     }
   }
 
-  expand(callback) {
+  expand(callback, expandParent) {
+    const done = () => {
+      if (expandParent) {
+        let parent = this.parent;
+        while (parent.level > 0) {
+          parent.expanded = true;
+          parent = parent.parent;
+        }
+      }
+      this.expanded = true;
+      if (callback) callback();
+    };
+
     if (this.shouldLoadData()) {
       this.loadData((data) => {
         if (data instanceof Array) {
-          this.expanded = true;
-          if (callback) callback();
+          done();
         }
       });
     } else {
-      this.expanded = true;
-      if (callback) callback();
+      done();
     }
   }
 

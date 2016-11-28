@@ -27,13 +27,13 @@
 
     watch: {
       disabled(val) {
-        this.broadcast('option', 'handleGroupDisabled', val);
+        this.broadcast('ElOption', 'handleGroupDisabled', val);
       }
     },
 
     mounted() {
       if (this.disabled) {
-        this.broadcast('option', 'handleGroupDisabled', this.disabled);
+        this.broadcast('ElOption', 'handleGroupDisabled', this.disabled);
       }
     }
   };

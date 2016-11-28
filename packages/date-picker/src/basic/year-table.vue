@@ -50,9 +50,7 @@
     props: {
       disabledDate: {},
       date: {},
-      year: {
-        type: Number
-      }
+      year: {}
     },
 
     computed: {
@@ -86,7 +84,7 @@
         const target = event.target;
         if (target.tagName === 'A') {
           if (hasClass(target.parentNode, 'disabled')) return;
-          const year = parseInt(target.textContent || target.innerText, 10);
+          const year = target.textContent || target.innerText;
           this.$emit('pick', year);
         }
       }

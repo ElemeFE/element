@@ -60,11 +60,6 @@
       top: 100%;
       left: 0;
     }
-    & .el-button + .el-button,
-    & .el-checkbox + .el-checkbox,
-    & .el-radio + .el-radio {
-      margin-left: 10px;
-    }
 
     @when required {
       .el-form-item__label:before {
