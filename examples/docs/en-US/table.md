@@ -1111,7 +1111,7 @@ Customize table column so it can be integrated with other components.
       <el-popover trigger="hover" placement="top">
         <p>Name: {{ row.name }}</p>
         <p>Addr: {{ row.address }}</p>
-        <div slot="reference">
+        <div slot="reference" class="name-wrapper">
           <el-tag>{{ row.name }}</el-tag>
         </div>
       </el-popover>
