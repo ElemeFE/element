@@ -72,6 +72,43 @@ describe('Tabs', () => {
       });
     }, 100);
   });
+  it('disabled', done => {
+    vm = createVue({
+      template: `
+        <el-tabs :active-name="activeName" @click="handleClick">
+          <el-tab-pane name="tab-A" label="用户管理">A</el-tab-pane>
+          <el-tab-pane name="tab-B" label="配置管理">B</el-tab-pane>
+          <el-tab-pane name="tab-C" label="角色管理">C</el-tab-pane>
+          <el-tab-pane name="tab-D" label="定时任务补偿" :disabled="true">D</el-tab-pane>
+        </el-tabs>
+      `,
+      data() {
+        return {
+          activeName: 'tab-B'
+        };
+      },
+      methods: {
+        handleClick(tab) {
+          this.activeName = tab.name;
+        }
+      }
+    }, true);
+    let tabList = vm.$el.querySelector('.el-tabs__header').children;
+    let paneList = vm.$el.querySelector('.el-tabs__content').children;
+    setTimeout(_ => {
+      expect(tabList[3].classList.contains('is-disabled')).to.be.true;
+      expect(tabList[1].classList.contains('is-active')).to.be.true;
+      expect(paneList[1].style.display).to.not.ok;
+
+      tabList[3].click();
+      vm.$nextTick(_ => {
+        expect(tabList[1].classList.contains('is-active')).to.be.true;
+        expect(paneList[1].style.display).to.not.ok;
+        expect(vm.activeName === 'tab-A');
+        done();
+      });
+    }, 100);
+  });
   it('card', () => {
     vm = createVue({
       template: `
