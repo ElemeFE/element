@@ -174,7 +174,7 @@ TableStore.prototype.mutations = {
           });
         } else if (column.property) {
           data = data.filter((row) => {
-            return (row[column.property].indexOf(value) > -1);
+            return (String(row[column.property]).indexOf(value) > -1);
           });
         }
       }

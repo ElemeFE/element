@@ -163,7 +163,7 @@
       },
 
       coloumInputFilter: {
-        type: Boolean,
+        type: [Boolean, String],
         default: false
       }
     },

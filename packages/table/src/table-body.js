@@ -15,7 +15,7 @@ export default {
     rowStyle: [Object, Function],
     fixed: String,
     highlight: Boolean,
-    coloumInputFilter: Boolean
+    coloumInputFilter: [Boolean, String]
   },
 
   render(h) {
@@ -245,16 +245,19 @@ export default {
       if (this.columnfilters[column.id] && value === this.columnfilters[column.id].value) {
         return;
       }
-      const table = this.$parent;
+
       this.columnfilters[column.id] = {
         value,
         property: column.property
       };
-      this.store.commit('columnFilterChange', {
-        filters: this.columnfilters
-      });
 
-      table.$emit('column-filter-change', this.columnfilters);
+      if (this.coloumInputFilter !== 'custom') {
+        this.store.commit('columnFilterChange', {
+          filters: this.columnfilters
+        });
+      }
+
+      this.$parent.$emit('column-filter-change', Object.values(this.columnfilters));
     }
   }
 };
