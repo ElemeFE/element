@@ -1,5 +1,29 @@
 ## Changelog
 
+### 1.0.3
+
+*2016-11-28*
+
+- Fixed `currentPage` of Pagination not working in some cases, #1336
+- Fixed `month` and `disabledDate` DatePicker's view not refreshing issue when switching year, #1158
+- Fixed `readonly` DatePicker clear button not disabled issue, #1238
+- Fixed Slider not working when binding value is `NaN` or `step` is smaller than 1, #1239 #1282
+- Added multi-header for Table, #1312
+- Added `rowStyle` for Table, #1348
+- Fixed some attributes of TableColumn can not dynamically assigned issue, #1314
+- Added `filter-node-method` attribute and `filter` method for Tree, #1257
+- Added `getCheckedKeys` and `setCheckedKeys` methods for Tree, #1254
+- Added deep nesting support for Checkbox/Radio inside Checkbox/Radio Group, #1152
+- Fixed Popper not triggering destroy issue when keep-alive, #1359
+- Added object deep validation for Form, #1363
+- Added `append` and `prepend` for Autocomplete, #1369
+- Added dynamic `pageSizes` support for Pagination, #1372
+- Added custom style API for checked buttons in Radio Button, #1380
+- Added assigning title via slot for Menu Group, #1382
+- Fixed DatePicker year switching bug, #1385
+- Added uploaded file list API for Upload, #1393
+- Added multi-type support for `label` attribute of Checkbox, #1400
+
 ### 1.0.2
 
 *2016-11-18*
