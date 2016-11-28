@@ -144,6 +144,9 @@
       setCheckedKeys(keys, leafOnly) {
         if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in setCheckedNodes');
         this.store.setCheckedKeys(keys, leafOnly);
+      },
+      setChecked(data, checked, deep) {
+        this.store.setChecked(data, checked, deep);
       }
     }
   };

@@ -225,4 +225,12 @@ export default class TreeStore {
       if (node) node.expand(null, this.autoExpandParent);
     });
   }
+
+  setChecked(data, checked, deep) {
+    const node = this.getNode(data);
+
+    if (node) {
+      node.setChecked(!!checked, deep);
+    }
+  }
 };

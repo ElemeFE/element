@@ -247,6 +247,7 @@ Used for node selection. In the following example, data for each layer is acquir
 | setCheckedNodes | set certain nodes to be checked, only works when `node-key` is assigned | an array of nodes to be checked |
 | getCheckedKeys | If the node can be selected (`show-checkbox` is `true`), it returns the currently selected array of node's keys | (leafOnly) Accept a boolean type parameter whose default value is `true`. <br>If the parameter is `true`, it only returns the currently selected array of sub-nodes.|
 | setCheckedKeys | set certain nodes to be checked, only works when `node-key` is assigned | (keys, leafOnly) Accept two parameters: 1. an array of node's keys to be checked 2. a boolean type parameter whose default value is `true`. <br>If the parameter is `true`, it only returns the currently selected array of sub-nodes. |
+| setChecked | set node to be checked or not, only works when `node-key` is assigned | (key/data, checked, deep) Accept three parameters: 1. node's key or data to be checked 2. a boolean typed parameter indicating checked or not. 3. a boolean typed parameter indicating deep or not. |
 
 ### Events
 | Event Name | Description | Parameters |

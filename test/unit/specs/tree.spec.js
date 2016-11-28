@@ -238,6 +238,18 @@ describe('Tree', () => {
     expect(tree.getCheckedKeys().length).to.equal(3);
   });
 
+  it('method setChecked', () => {
+    vm = getTreeVm(':props="defaultProps" show-checkbox node-key="id"');
+    const tree = vm.$children[0];
+    tree.setChecked(111, true, true);
+    expect(tree.getCheckedNodes().length).to.equal(3);
+    expect(tree.getCheckedKeys().length).to.equal(3);
+
+    tree.setChecked(vm.data[0], false, true);
+    expect(tree.getCheckedNodes().length).to.equal(0);
+    expect(tree.getCheckedKeys().length).to.equal(0);
+  });
+
   it('setCheckedKeys with leafOnly=false', () => {
     vm = getTreeVm(':props="defaultProps" show-checkbox node-key="id"');
     const tree = vm.$children[0];
