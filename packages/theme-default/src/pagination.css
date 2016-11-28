@@ -6,7 +6,6 @@
   @b pagination {
     white-space: nowrap;
     padding: 2px 5px;
-    background: var(--pagination-fill);
     color: var(--pagination-color);
 
     span,
@@ -51,6 +50,7 @@
     .btn-next {
       background: center center no-repeat;
       background-size: 16px;
+      background-color: var(--pagination-fill);
       border: 1px solid var(--pagination-border-color);
       cursor: pointer;
       margin: 0;
