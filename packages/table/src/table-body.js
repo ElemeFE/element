@@ -15,7 +15,7 @@ export default {
     rowStyle: [Object, Function],
     fixed: String,
     highlight: Boolean,
-    coloumInputFilter: [Boolean, String]
+    columnInputFilter: [Boolean, String]
   },
 
   render(h) {
@@ -35,7 +35,7 @@ export default {
         }
         <tbody>
           {
-            (this.coloumInputFilter)
+            (this.columnInputFilter)
             ? <tr>
                 {
                   this._l(this.columns, (column, cellIndex) =>
@@ -251,7 +251,7 @@ export default {
         property: column.property
       };
 
-      if (this.coloumInputFilter !== 'custom') {
+      if (this.columnInputFilter !== 'custom') {
         this.store.commit('columnFilterChange', {
           filters: this.columnfilters
         });
