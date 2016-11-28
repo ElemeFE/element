@@ -6,7 +6,7 @@
     v-show="visible"
     :class="{
       'selected': itemSelected,
-      'is-disabled': disabled || groupDisabled,
+      'is-disabled': disabled || groupDisabled || limitReached,
       'hover': parent.hoverIndex === index
     }">
     <slot>
@@ -71,6 +71,16 @@
           return this.value === this.parent.value;
         } else {
           return this.parent.value.indexOf(this.value) > -1;
+        }
+      },
+
+      limitReached() {
+        if (this.parent.multiple) {
+          return !this.itemSelected &&
+            this.parent.value.length >= this.parent.multipleLimit &&
+            this.parent.multipleLimit > 0;
+        } else {
+          return false;
         }
       }
     },

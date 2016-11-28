@@ -154,6 +154,10 @@
       remoteMethod: Function,
       filterMethod: Function,
       multiple: Boolean,
+      multipleLimit: {
+        type: Number,
+        default: 0
+      },
       placeholder: {
         type: String,
         default() {
@@ -398,7 +402,7 @@
           });
           if (optionIndex > -1) {
             this.value.splice(optionIndex, 1);
-          } else {
+          } else if (this.multipleLimit <= 0 || this.value.length < this.multipleLimit) {
             this.value.push(option.value);
           }
         }

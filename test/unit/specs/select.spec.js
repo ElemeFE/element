@@ -6,6 +6,7 @@ describe('Select', () => {
     ['multiple', 'clearable', 'filterable', 'remote'].forEach(config => {
       configs[config] = configs[config] || false;
     });
+    configs.multipleLimit = configs.multipleLimit || 0;
     if (!options) {
       options = [{
         value: '选项1',
@@ -35,6 +36,7 @@ describe('Select', () => {
           <el-select
             v-model="value"
             :multiple="multiple"
+            :multiple-limit="multipleLimit"
             :clearable="clearable"
             :filterable="filterable"
             :filterMethod="filterMethod"
@@ -55,6 +57,7 @@ describe('Select', () => {
         return {
           options,
           multiple: configs.multiple,
+          multipleLimit: configs.multipleLimit,
           clearable: configs.clearable,
           filterable: configs.filterable,
           loading: false,
@@ -366,6 +369,20 @@ describe('Select', () => {
         }, 100);
       }, 100);
     }, 100);
+  });
+
+  it('multiple limit', done => {
+    vm = getSelectVm({ multiple: true, multipleLimit: 1 });
+    const options = vm.$el.querySelectorAll('.el-select-dropdown__item');
+    options[1].click();
+    setTimeout(() => {
+      expect(vm.value.indexOf('选项2') > -1).to.true;
+      options[3].click();
+      setTimeout(() => {
+        expect(vm.value.indexOf('选项4')).to.equal(-1);
+        done();
+      }, 50);
+    }, 50);
   });
 
   it('multiple remote search', done => {
