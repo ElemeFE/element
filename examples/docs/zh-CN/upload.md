@@ -56,7 +56,7 @@
   :on-remove="handleRemove"
   :default-file-list="fileList">
   <el-button size="small" type="primary">点击上传</el-button>
-  <div class="el-upload__tip" slot="tip" @click="changeFiles">只能上传jpg/png文件，且不超过500kb</div>
+  <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
 </el-upload>
 <script>
   export default {
