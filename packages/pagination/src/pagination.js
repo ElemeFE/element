@@ -141,14 +141,14 @@ export default {
           <span class="el-pagination__sizes">
             <el-select
               value={ this.$parent.internalPageSize }
-              on-change={ this.handleChange }>
+              on-input={ this.handleChange }>
               {
                 this.pageSizes.map(item =>
-                    <el-option
-                      value={ item }
-                      label={ item + ' ' + this.t('el.pagination.pagesize') }>
-                    </el-option>
-                  )
+                  <el-option
+                    value={ item }
+                    label={ item + ' ' + this.t('el.pagination.pagesize') }>
+                  </el-option>
+                )
               }
             </el-select>
           </span>
