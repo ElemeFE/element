@@ -164,6 +164,10 @@
   .el-table .positive-row {
     background: #e2f0e4;
   }
+  
+  .demo-table .name-wrapper {
+    display: inline-block;
+  }
 </style>
 
 ## Table 表格
@@ -1116,7 +1120,7 @@
       <el-popover trigger="hover" placement="top">
         <p>姓名: {{ row.name }}</p>
         <p>住址: {{ row.address }}</p>
-        <div slot="reference">
+        <div slot="reference" class="name-wrapper">
           <el-tag>{{ row.name }}</el-tag>
         </div>
       </el-popover>
