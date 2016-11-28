@@ -1,5 +1,6 @@
 class Transition {
   beforeEnter(el) {
+    if (!el.dataset) el.dataset = {};
     el.dataset.oldPaddingTop = el.style.paddingTop;
     el.dataset.oldPaddingBottom = el.style.paddingBottom;
     el.style.height = '0';
@@ -31,6 +32,7 @@ class Transition {
   }
 
   beforeLeave(el) {
+    if (!el.dataset) el.dataset = {};
     el.dataset.oldPaddingTop = el.style.paddingTop;
     el.dataset.oldPaddingBottom = el.style.paddingBottom;
     el.dataset.oldOverflow = el.style.overflow;
