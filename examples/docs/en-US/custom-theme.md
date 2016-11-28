@@ -1,10 +1,10 @@
 ## Custom theme
-Element uses BEM-styled CSS so that you can override styles easily. But if you need to replace styles at a large scale, e.g. change the theme color from blue to orange or green, maybe overriding them one by one is not a good idea, and this is where our theme customization tool kicks in. 
+Element uses BEM-styled CSS so that you can override styles easily. But if you need to replace styles at a large scale, e.g. change the theme color from blue to orange or green, maybe overriding them one by one is not a good idea, and this is where our theme customization tool kicks in.
 
 ### Install related tool
 First install the theme generator globally or locally. Local install is recommended because in this way, when others clone your project, npm will automatically install it for them.
 ```shell
-npm i element-theme -D
+npm i element-theme -g
 ```
 
 Then install the default theme from npm or GitHub.
@@ -20,7 +20,7 @@ npm i https://github.com/ElementUI/theme-default -D
 After successfully installing the above packages, a command named `et` is available in CLI (if the packages are installed locally, use `node_modules/.bin/et` instead). Run `-i` to initialize the variable file which outputs to `element-variables.css` by default. And you can specify its output directory as you will.
 
 ```shell
-node_modules/.bin/et -i [custom output directory]
+et -i [custom output directory]
 
 > ✔ Generator variables file
 ```
@@ -53,7 +53,7 @@ Just edit `element-variables.css`, e.g. changing the theme color to red:
 ### Build theme
 After saving the variable file, use `et` to build your theme. You can activate `watch` mode by adding a parameter `-w`:
 ```shell
-node_modules/.bin/et
+et
 
 > ✔ build theme font
 > ✔ build element theme

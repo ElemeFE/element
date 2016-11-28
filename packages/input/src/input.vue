@@ -68,6 +68,8 @@
   export default {
     name: 'ElInput',
 
+    componentName: 'ElInput',
+
     mixins: [emitter],
 
     props: {
@@ -105,7 +107,7 @@
     methods: {
       handleBlur(event) {
         this.$emit('blur', event);
-        this.dispatch('form-item', 'el.form.blur', [this.currentValue]);
+        this.dispatch('ElFormItem', 'el.form.blur', [this.currentValue]);
       },
       inputSelect() {
         this.$refs.input.select();
@@ -148,7 +150,7 @@
 
     computed: {
       validating() {
-        return this.$parent.validating;
+        return this.$parent.validateState === 'validating';
       }
     },
 
@@ -163,7 +165,7 @@
         });
         this.$emit('input', val);
         this.$emit('change', val);
-        this.dispatch('form-item', 'el.form.change', [val]);
+        this.dispatch('ElFormItem', 'el.form.change', [val]);
       }
     }
   };

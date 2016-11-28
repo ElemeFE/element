@@ -1,7 +1,7 @@
 ## Installation
 
 ### npm
-Installing with npm is recommended, for it works seamlessly with [webpack](https://webpack.js.org/).
+Installing with npm is recommended and it works seamlessly with [webpack](https://webpack.js.org/).
 
 ```shell
 npm i element-ui -D

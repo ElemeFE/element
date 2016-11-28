@@ -4,14 +4,14 @@
       <span class="el-radio__inner"
         :class="{
         'is-disabled': disabled,
-        'is-checked': _value === label,
+        'is-checked': store === label,
         'is-focus': focus
       }"></span>
       <input
         class="el-radio__original"
         :value="label"
         type="radio"
-        v-model="_value"
+        v-model="store"
         @focus="focus = true"
         @blur="focus = false"
         :name="name"
@@ -24,8 +24,14 @@
   </label>
 </template>
 <script>
+  import Emitter from 'element-ui/src/mixins/emitter';
+
   export default {
     name: 'ElRadio',
+
+    mixins: [Emitter],
+
+    componentName: 'ElRadio',
 
     props: {
       value: [String, Number],
@@ -36,24 +42,34 @@
       disabled: Boolean,
       name: String
     },
+
     data() {
       return {
-        focus: false
+        focus: false,
+        isGroup: false,
+        store: this.value
       };
     },
-    computed: {
-      _value: {
-        get() {
-          return this.value !== undefined ? this.value : this.$parent.value;
-        },
-        set(newValue) {
-          if (this.value !== undefined) {
-            this.$emit('input', newValue);
-          } else {
-            this.$parent.$emit('input', newValue);
-          }
+
+    watch: {
+      store(store) {
+        if (this.isGroup) {
+          this.dispatch('ElRadioGroup', 'input', store);
+        } else {
+          this.$emit('input', store);
         }
+      },
+
+      value(val) {
+        this.store = val;
       }
+    },
+
+    created() {
+      this.$on('initData', data => {
+        this.store = data;
+        this.isGroup = true;
+      });
     }
   };
 </script>

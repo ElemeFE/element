@@ -122,8 +122,8 @@
         },
         dynamicForm: {
           domains: [{
-            key: Date.now(),
-            value: ''
+            value: '',
+            key: Date.now()
           }],
           email: ''
         },
@@ -172,6 +172,9 @@
       handleReset2() {
         this.$refs.ruleForm2.resetFields();
       },
+      handleReset3() {
+        this.$refs.dynamicForm.resetFields();
+      },
       handleValidate(prop, errorMsg) {
         console.log(prop, errorMsg);
       },
@@ -189,8 +192,8 @@
       },
       addDomain() {
         this.dynamicForm.domains.push({
-          key: Date.now(),
-          value: ''
+          value: '',
+          key: Date.now()
         });
       }
     }
@@ -720,12 +723,9 @@
     v-for="(domain, index) in dynamicForm.domains"
     :label="'域名' + index"
     :key="domain.key"
-    :prop="'domains:' + index"
+    :prop="'domains.' + index + '.value'"
     :rules="{
-      type: 'object', required: true,
-      fields: {
-        value: { required: true, message: '域名不能为空', trigger: 'blur' }
-      }
+      required: true, message: '域名不能为空', trigger: 'blur'
     }"
   >
     <el-input v-model="domain.value"></el-input><el-button @click.prevent="removeDomain(domain)">删除</el-button>
@@ -733,6 +733,7 @@
   <el-form-item>
     <el-button type="primary" @click="handleSubmit3">提交</el-button>
     <el-button @click="addDomain">新增域名</el-button>
+    <el-button @click="handleReset3">重置</el-button>
   </el-form-item>
 </el-form>
 <script>
@@ -741,7 +742,6 @@
       return {
         dynamicForm: {
           domains: [{
-            key: 1,
             value: ''
           }],
           email: ''
@@ -765,6 +765,9 @@
           }
         });
       },
+      handleReset3() {
+        this.$refs.dynamicForm.resetFields();
+      },
       removeDomain(item) {
         var index = this.dynamicForm.domains.indexOf(item)
         if (index !== -1) {
@@ -773,8 +776,8 @@
       },
       addDomain() {
         this.dynamicForm.domains.push({
-          key: this.dynamicForm.domains.length,
-          value: ''
+          value: '',
+          key: Date.now()
         });
       }
     }

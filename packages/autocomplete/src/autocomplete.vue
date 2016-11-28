@@ -11,7 +11,14 @@
       @keydown.up.native="highlight(highlightedIndex - 1)"
       @keydown.down.native="highlight(highlightedIndex + 1)"
       @keydown.enter.native="select(highlightedIndex)"
-    ></el-input>
+    >
+      <template slot="prepend" v-if="$slots.prepend">
+        <slot name="prepend"></slot>
+      </template>
+      <template slot="append" v-if="$slots.append">
+        <slot name="append"></slot>
+      </template> 
+    </el-input>
     <transition name="md-fade-bottom">
       <ul
         v-if="suggestionVisible"

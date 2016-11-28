@@ -10,7 +10,7 @@
   export default {
     name: 'ElForm',
 
-    componentName: 'form',
+    componentName: 'ElForm',
 
     props: {
       model: Object,
@@ -23,51 +23,50 @@
       },
       inline: Boolean
     },
+    watch: {
+      rules() {
+        this.validate();
+      }
+    },
     data() {
       return {
-        fields: {},
-        fieldLength: 0
+        fields: []
       };
     },
     created() {
       this.$on('el.form.addField', (field) => {
-        this.fields[field.prop] = field;
-        this.fieldLength++;
+        if (field) {
+          this.fields.push(field);
+        }
       });
       /* istanbul ignore next */
       this.$on('el.form.removeField', (field) => {
-        if (this.fields[field.prop]) {
-          delete this.fields[field.prop];
-          this.fieldLength--;
+        if (field.prop) {
+          this.fields.splice(this.fields.indexOf(field), 1);
         }
       });
     },
     methods: {
       resetFields() {
-        for (let prop in this.fields) {
-          let field = this.fields[prop];
+        this.fields.forEach(field => {
           field.resetField();
-        }
+        });
       },
       validate(callback) {
-        var count = 0;
-        var valid = true;
-
-        for (let prop in this.fields) {
-          let field = this.fields[prop];
+        let valid = true;
+        this.fields.forEach((field, index) => {
           field.validate('', errors => {
             if (errors) {
               valid = false;
             }
-
-            if (++count === this.fieldLength) {
+            if (typeof callback === 'function' && index === this.fields.length - 1) {
               callback(valid);
             }
           });
-        }
+        });
       },
       validateField(prop, cb) {
-        var field = this.fields[prop];
+        var field = this.fields.filter(field => field.prop === prop)[0];
         if (!field) { throw new Error('must call validateField with valid prop string!'); }
 
         field.validate('', cb);

@@ -24,9 +24,10 @@
         :store="store"
         :layout="layout"
         :row-class-name="rowClassName"
+        :row-style="rowStyle"
         :highlight="highlightCurrentRow"
-        :style="{ width: layout.bodyWidth ? layout.bodyWidth - (layout.scrollY ? layout.gutterWidth : 0 ) + 'px' : '' }"
-        :coloum-input-filter="coloumInputFilter">
+        :coloum-input-filter="coloumInputFilter"
+        :style="{ width: layout.bodyWidth ? layout.bodyWidth - (layout.scrollY ? layout.gutterWidth : 0 ) + 'px' : '' }">
       </table-body>
       <div class="el-table__empty-block" v-if="!data || data.length === 0">
         <span class="el-table__empty-text">{{ emptyText }}</span>
@@ -57,8 +58,9 @@
           :layout="layout"
           :highlight="highlightCurrentRow"
           :row-class-name="rowClassName"
-          :style="{ width: layout.fixedWidth ? layout.fixedWidth + 'px' : '' }"
-          :coloum-input-filter="coloumInputFilter">
+          :row-style="rowStyle"
+          :coloum-input-filter="coloumInputFilter"
+          :style="{ width: layout.fixedWidth ? layout.fixedWidth + 'px' : '' }">
         </table-body>
       </div>
     </div>
@@ -87,9 +89,10 @@
           :store="store"
           :layout="layout"
           :row-class-name="rowClassName"
+          :row-style="rowStyle"
           :highlight="highlightCurrentRow"
-          :style="{ width: layout.rightFixedWidth ? layout.rightFixedWidth + 'px' : '' }"
-          :coloum-input-filter="coloumInputFilter">
+          :coloum-input-filter="coloumInputFilter"
+          :style="{ width: layout.rightFixedWidth ? layout.rightFixedWidth + 'px' : '' }">
         </table-body>
       </div>
     </div>
@@ -147,6 +150,8 @@
       },
 
       rowClassName: [String, Function],
+
+      rowStyle: [Object, Function],
 
       highlightCurrentRow: Boolean,
 

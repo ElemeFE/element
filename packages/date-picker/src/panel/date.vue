@@ -20,7 +20,7 @@
             @click="handleShortcutClick(shortcut)">{{ shortcut.text }}</button>
         </div>
         <div class="el-picker-panel__body">
-         <div class="el-date-picker__time-header" v-if="showTime">
+          <div class="el-date-picker__time-header" v-if="showTime">
             <span class="el-date-picker__editor-wrap">
               <input
                 :placehoder="t('el.datepicker.selectDate')"
@@ -183,7 +183,7 @@
     methods: {
       handleClear() {
         this.date = new Date();
-        this.$emit('pick');
+        this.$emit('pick', '');
       },
 
       resetDate() {
@@ -310,7 +310,7 @@
 
         this.date.setFullYear(year);
         if (this.selectionMode === 'year') {
-          this.$emit('pick', year);
+          this.$emit('pick', new Date(year));
         } else {
           this.currentView = 'month';
         }

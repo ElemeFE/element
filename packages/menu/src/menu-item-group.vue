@@ -6,8 +6,7 @@
 
     props: {
       title: {
-        type: String,
-        required: true
+        type: String
       }
     },
     data() {
@@ -39,7 +38,10 @@
 
 <template>
   <li class="el-menu-item-group">
-    <div class="el-menu-item-group__title" :style="{'padding-left': paddingLeft + 'px'}">{{title}}</div>
+    <div class="el-menu-item-group__title" :style="{'padding-left': paddingLeft + 'px'}">
+      <template v-if="!$slots.title">{{title}}</template>
+      <slot v-else name="title"></slot>
+    </div>
     <ul>
       <slot></slot>
     </ul>

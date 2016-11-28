@@ -19,7 +19,7 @@
 
     name: 'el-option',
 
-    componentName: 'option',
+    componentName: 'ElOption',
 
     props: {
       value: {
@@ -50,6 +50,10 @@
         return this.label || ((typeof this.value === 'string' || typeof this.value === 'number') ? this.value : '');
       },
 
+      currentValue() {
+        return this.value || this.label || '';
+      },
+
       parent() {
         let result = this.$parent;
         while (!result.isSelect) {
@@ -74,7 +78,7 @@
     watch: {
       currentSelected(val) {
         if (val === true) {
-          this.dispatch('select', 'addOptionToValue', this);
+          this.dispatch('ElSelect', 'addOptionToValue', this);
         }
       }
     },
@@ -92,7 +96,7 @@
 
       selectOptionClick() {
         if (this.disabled !== true && this.groupDisabled !== true) {
-          this.dispatch('select', 'handleOptionClick', this);
+          this.dispatch('ElSelect', 'handleOptionClick', this);
         }
       },
 
@@ -119,7 +123,7 @@
       this.index = this.parent.options.indexOf(this);
 
       if (this.currentSelected === true) {
-        this.dispatch('select', 'addOptionToValue', [this, true]);
+        this.dispatch('ElSelect', 'addOptionToValue', [this, true]);
       }
 
       this.$on('queryChange', this.queryChange);
@@ -128,7 +132,7 @@
     },
 
     beforeDestroy() {
-      this.dispatch('select', 'onOptionDestroy', this);
+      this.dispatch('ElSelect', 'onOptionDestroy', this);
     }
   };
 </script>

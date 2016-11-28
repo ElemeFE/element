@@ -192,7 +192,7 @@ describe('Form', () => {
       vm = createVue({
         template: `
           <el-form :model="form" :rules="rules" ref="form">
-            <el-form-item label="活动名称" prop="name">
+            <el-form-item label="活动名称" prop="name" ref="field">
               <el-input v-model="form.name"></el-input>
             </el-form-item>
           </el-form>
@@ -216,18 +216,18 @@ describe('Form', () => {
         }
       }, true);
       vm.$refs.form.validate(valid => {
-        let fields = vm.$refs.form.fields;
+        let field = vm.$refs.field;
         expect(valid).to.not.true;
         vm.$refs.form.$nextTick(_ => {
-          expect(fields.name.validateMessage).to.equal('请输入活动名称');
+          expect(field.validateMessage).to.equal('请输入活动名称');
           vm.setValue('aaaaa');
 
           vm.$refs.form.$nextTick(_ => {
-            expect(fields.name.validateMessage).to.equal('');
+            expect(field.validateMessage).to.equal('');
             vm.setValue('aa');
 
             vm.$refs.form.$nextTick(_ => {
-              expect(fields.name.validateMessage).to.equal('请输入活动名称');
+              expect(field.validateMessage).to.equal('请输入活动名称');
               done();
             });
           });
@@ -238,7 +238,7 @@ describe('Form', () => {
       vm = createVue({
         template: `
           <el-form :model="form" :rules="rules" ref="form">
-            <el-form-item label="活动名称" prop="name">
+            <el-form-item label="活动名称" prop="name" ref="field">
               <el-input type="textarea" v-model="form.name"></el-input>
             </el-form-item>
           </el-form>
@@ -262,18 +262,18 @@ describe('Form', () => {
         }
       }, true);
       vm.$refs.form.validate(valid => {
-        let fields = vm.$refs.form.fields;
+        let field = vm.$refs.field;
         expect(valid).to.not.true;
         vm.$refs.form.$nextTick(_ => {
-          expect(fields.name.validateMessage).to.equal('请输入活动名称');
+          expect(field.validateMessage).to.equal('请输入活动名称');
           vm.setValue('aaaaa');
 
           vm.$refs.form.$nextTick(_ => {
-            expect(fields.name.validateMessage).to.equal('');
+            expect(field.validateMessage).to.equal('');
             vm.setValue('aa');
 
             vm.$refs.form.$nextTick(_ => {
-              expect(fields.name.validateMessage).to.equal('请输入活动名称');
+              expect(field.validateMessage).to.equal('请输入活动名称');
               done();
             });
           });
@@ -284,7 +284,7 @@ describe('Form', () => {
       vm = createVue({
         template: `
           <el-form :model="form" :rules="rules" ref="form">
-            <el-form-item label="记住密码" prop="region">
+            <el-form-item label="记住密码" prop="region" ref="field">
               <el-select v-model="form.region" placeholder="请选择活动区域">
                 <el-option label="区域一" value="shanghai"></el-option>
                 <el-option label="区域二" value="beijing"></el-option>
@@ -311,15 +311,15 @@ describe('Form', () => {
         }
       }, true);
       vm.$refs.form.validate(valid => {
-        let fields = vm.$refs.form.fields;
+        let field = vm.$refs.field;
         expect(valid).to.true;
         vm.setValue('');
         setTimeout(_ => {
-          expect(fields.region.validateMessage).to.equal('请选择活动区域');
+          expect(field.validateMessage).to.equal('请选择活动区域');
           vm.setValue('shanghai');
 
           setTimeout(_ => {
-            expect(fields.region.validateMessage).to.equal('');
+            expect(field.validateMessage).to.equal('');
             done();
           }, 100);
         }, 100);
@@ -329,7 +329,7 @@ describe('Form', () => {
       vm = createVue({
         template: `
           <el-form :model="form" :rules="rules" ref="form">
-            <el-form-item label="记住密码" prop="date">
+            <el-form-item label="记住密码" prop="date" ref="field">
               <el-date-picker type="date" placeholder="选择日期" v-model="form.date" style="width: 100%;"></el-date-picker>
             </el-form-item>
           </el-form>
@@ -353,15 +353,15 @@ describe('Form', () => {
         }
       }, true);
       vm.$refs.form.validate(valid => {
-        let fields = vm.$refs.form.fields;
+        let field = vm.$refs.field;
         expect(valid).to.not.true;
         vm.$refs.form.$nextTick(_ => {
-          expect(fields.date.validateMessage).to.equal('请选择日期');
+          expect(field.validateMessage).to.equal('请选择日期');
 
           vm.setValue(new Date());
 
           vm.$refs.form.$nextTick(_ => {
-            expect(fields.date.validateMessage).to.equal('');
+            expect(field.validateMessage).to.equal('');
             done();
           });
         });
@@ -371,7 +371,7 @@ describe('Form', () => {
       vm = createVue({
         template: `
           <el-form :model="form" :rules="rules" ref="form">
-            <el-form-item label="记住密码" prop="date">
+            <el-form-item label="记住密码" prop="date" ref="field">
               <el-time-picker type="fixed-time" placeholder="选择时间" v-model="form.date" style="width: 100%;"></el-time-picker>
             </el-form-item>
           </el-form>
@@ -395,14 +395,14 @@ describe('Form', () => {
         }
       }, true);
       vm.$refs.form.validate(valid => {
-        let fields = vm.$refs.form.fields;
+        let field = vm.$refs.field;
         expect(valid).to.not.true;
         vm.$refs.form.$nextTick(_ => {
-          expect(fields.date.validateMessage).to.equal('请选择时间');
+          expect(field.validateMessage).to.equal('请选择时间');
           vm.setValue(new Date());
 
           vm.$refs.form.$nextTick(_ => {
-            expect(fields.date.validateMessage).to.equal('');
+            expect(field.validateMessage).to.equal('');
             done();
           });
         });
@@ -412,7 +412,7 @@ describe('Form', () => {
       vm = createVue({
         template: `
           <el-form :model="form" :rules="rules" ref="form">
-            <el-form-item label="活动名称" prop="type">
+            <el-form-item label="活动名称" prop="type" ref="field">
               <el-checkbox-group v-model="form.type">
                 <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
                 <el-checkbox label="地推活动" name="type"></el-checkbox>
@@ -441,14 +441,14 @@ describe('Form', () => {
         }
       }, true);
       vm.$refs.form.validate(valid => {
-        let fields = vm.$refs.form.fields;
+        let field = vm.$refs.field;
         expect(valid).to.not.true;
         vm.$refs.form.$nextTick(_ => {
-          expect(fields.type.validateMessage).to.equal('请选择活动类型');
+          expect(field.validateMessage).to.equal('请选择活动类型');
           vm.setValue(['地推活动']);
 
           vm.$refs.form.$nextTick(_ => {
-            expect(fields.type.validateMessage).to.equal('');
+            expect(field.validateMessage).to.equal('');
             done();
           });
         });
@@ -458,7 +458,7 @@ describe('Form', () => {
       vm = createVue({
         template: `
           <el-form :model="form" :rules="rules" ref="form">
-            <el-form-item label="活动名称" prop="type">
+            <el-form-item label="活动名称" prop="type" ref="field">
               <el-radio-group v-model="form.type">
                 <el-radio label="线上品牌商赞助"></el-radio>
                 <el-radio label="线下场地免费"></el-radio>
@@ -485,14 +485,14 @@ describe('Form', () => {
         }
       }, true);
       vm.$refs.form.validate(valid => {
-        let fields = vm.$refs.form.fields;
+        let field = vm.$refs.field;
         expect(valid).to.not.true;
         vm.$refs.form.$nextTick(_ => {
-          expect(fields.type.validateMessage).to.equal('请选择活动类型');
+          expect(field.validateMessage).to.equal('请选择活动类型');
           vm.setValue('线下场地免费');
 
           vm.$refs.form.$nextTick(_ => {
-            expect(fields.type.validateMessage).to.equal('');
+            expect(field.validateMessage).to.equal('');
             done();
           });
         });
@@ -502,7 +502,7 @@ describe('Form', () => {
       vm = createVue({
         template: `
           <el-form :model="form" :rules="rules" ref="form">
-            <el-form-item label="活动名称" prop="name">
+            <el-form-item label="活动名称" prop="name" ref="field">
               <el-input v-model="form.name"></el-input>
             </el-form-item>
           </el-form>
@@ -541,7 +541,7 @@ describe('Form', () => {
       vm = createVue({
         template: `
           <el-form :model="form" :rules="rules" ref="form">
-            <el-form-item label="活动名称" prop="name">
+            <el-form-item label="活动名称" prop="name" ref="field">
               <el-input v-model="form.name"></el-input>
             </el-form-item>
           </el-form>
@@ -565,14 +565,14 @@ describe('Form', () => {
         }
       }, true);
       vm.$refs.form.validate(valid => {
-        let fields = vm.$refs.form.fields;
+        let field = vm.$refs.field;
         expect(valid).to.not.true;
         vm.$refs.form.$nextTick(_ => {
-          expect(fields.name.validateMessage).to.equal('长度至少为5');
+          expect(field.validateMessage).to.equal('长度至少为5');
           vm.setValue('aaaaaa');
 
           vm.$refs.form.$nextTick(_ => {
-            expect(fields.name.validateMessage).to.equal('');
+            expect(field.validateMessage).to.equal('');
             done();
           });
         });
@@ -582,7 +582,7 @@ describe('Form', () => {
       vm = createVue({
         template: `
           <el-form :model="form" :rules="rules" ref="form">
-            <el-form-item label="活动名称" prop="name" :error="error" ref="formitem">
+            <el-form-item label="活动名称" prop="name" :error="error" ref="field">
               <el-input v-model="form.name"></el-input>
             </el-form-item>
           </el-form>
@@ -607,13 +607,13 @@ describe('Form', () => {
         }
       }, true);
       vm.$refs.form.validate(valid => {
-        let fields = vm.$refs.form.fields;
+        let field = vm.$refs.field;
         expect(valid).to.true;
         vm.error = '输入不合法';
 
-        vm.$refs.formitem.$nextTick(_ => {
-          expect(fields.name.validateState).to.equal('error');
-          expect(fields.name.validateMessage).to.equal('输入不合法');
+        vm.$refs.field.$nextTick(_ => {
+          expect(field.validateState).to.equal('error');
+          expect(field.validateMessage).to.equal('输入不合法');
           done();
         });
       });

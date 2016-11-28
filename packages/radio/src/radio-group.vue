@@ -4,19 +4,31 @@
   export default {
     name: 'ElRadioGroup',
 
-    componentName: 'radio-group',
+    componentName: 'ElRadioGroup',
 
     mixins: [Emitter],
 
     props: {
       value: [String, Number],
-      size: String
+      size: String,
+      fill: {
+        type: String,
+        default: '#20a0ff'
+      },
+      textColor: {
+        type: String,
+        default: '#fff'
+      }
     },
     watch: {
       value(value) {
         this.$emit('change', value);
-        this.dispatch('form-item', 'el.form.change', [this.value]);
+        this.broadcast('ElRadio', 'initData', value);
+        this.dispatch('ElFormItem', 'el.form.change', [this.value]);
       }
+    },
+    mounted() {
+      this.broadcast('ElRadio', 'initData', this.value);
     }
   };
 </script>

@@ -21,10 +21,33 @@
 
   function noop() {}
 
+  function getPropByPath(obj, path) {
+    let tempObj = obj;
+    path = path.replace(/\[(\w+)\]/g, '.$1');
+    path = path.replace(/^\./, '');
+
+    let keyArr = path.split('.');
+    let i = 0;
+
+    for (let len = keyArr.length; i < len - 1; ++i) {
+      let key = keyArr[i];
+      if (key in tempObj) {
+        tempObj = tempObj[key];
+      } else {
+        throw new Error('please transfer a valid prop path to form item!');
+      }
+    }
+    return {
+      o: tempObj,
+      k: keyArr[i],
+      v: tempObj[keyArr[i]]
+    };
+  }
+
   export default {
     name: 'ElFormItem',
 
-    componentName: 'form-item',
+    componentName: 'ElFormItem',
 
     mixins: [emitter],
 
@@ -65,7 +88,7 @@
       },
       form() {
         var parent = this.$parent;
-        while (parent.$options.componentName !== 'form') {
+        while (parent.$options.componentName !== 'ElForm') {
           parent = parent.$parent;
         }
         return parent;
@@ -76,11 +99,12 @@
           var model = this.form.model;
           if (!model || !this.prop) { return; }
 
-          var temp = this.prop.split(':');
+          var path = this.prop;
+          if (path.indexOf(':') !== -1) {
+            path = path.replace(/:/, '.');
+          }
 
-          return temp.length > 1
-            ? model[temp[0]][temp[1]]
-            : model[this.prop];
+          return getPropByPath(model, path).v;
         }
       }
     },
@@ -124,13 +148,19 @@
 
         let model = this.form.model;
         let value = this.fieldValue;
+        let path = this.prop;
+        if (path.indexOf(':') !== -1) {
+          path = path.replace(/:/, '.');
+        }
+
+        let prop = getPropByPath(model, path);
 
         if (Array.isArray(value) && value.length > 0) {
           this.validateDisabled = true;
-          model[this.prop] = [];
+          prop.o[prop.k] = [];
         } else if (value) {
           this.validateDisabled = true;
-          model[this.prop] = this.initialValue;
+          prop.o[prop.k] = this.initialValue;
         }
       },
       getRules() {
@@ -162,10 +192,10 @@
     },
     mounted() {
       if (this.prop) {
-        this.dispatch('form', 'el.form.addField', [this]);
+        this.dispatch('ElForm', 'el.form.addField', [this]);
 
         Object.defineProperty(this, 'initialValue', {
-          value: this.form.model[this.prop]
+          value: this.fieldValue
         });
 
         let rules = this.getRules();
@@ -183,7 +213,7 @@
       }
     },
     beforeDestroy() {
-      this.dispatch('form', 'el.form.removeField', [this]);
+      this.dispatch('ElForm', 'el.form.removeField', [this]);
     }
   };
 </script>
