@@ -227,9 +227,12 @@
       };
     },
     watch: {
-      '$route.path'() {
-        this.isHome = /^home/.test(this.$route.name);
-        this.headerStyle.backgroundColor = `rgba(32, 160, 255, ${ this.isHome ? '0' : '1' })`;
+      '$route.path': {
+        immediate: true,
+        handler() {
+          this.isHome = /^home/.test(this.$route.name);
+          this.headerStyle.backgroundColor = `rgba(32, 160, 255, ${ this.isHome ? '0' : '1' })`;
+        }
       }
     },
     computed: {
@@ -248,7 +251,6 @@
       }
     },
     mounted() {
-      this.isHome = this.$route.name === 'home';
       function scroll(fn) {
         window.addEventListener('scroll', () => {
           fn();
