@@ -22,6 +22,7 @@
 - 修复 DatePicker 选择年的 bug，#1385
 - 新增 Upload 默认已上传的文件列表 API，#1393
 - 增加 Checkbox `label` 属性绑定的多类型支持，#1400
+- 增加 Tree 的 `setChecked` 方法，#1422
 
 ### 1.0.2
 *2016-11-18*

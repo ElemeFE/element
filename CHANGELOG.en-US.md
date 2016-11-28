@@ -23,6 +23,7 @@
 - Fixed DatePicker year switching bug, #1385
 - Added uploaded file list API for Upload, #1393
 - Added multi-type support for `label` attribute of Checkbox, #1400
+- Added `setChecked` method for Tree, #1422
 
 ### 1.0.2
 
