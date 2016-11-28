@@ -3,13 +3,13 @@ mkdir temp_web
 git config --global user.name "element-bot"
 git config --global user.email "wallement@gmail.com"
 
-if [[ "$ROT_TOKEN" = "" ]]; then
+if [ "$ROT_TOKEN" = "" ]; then
   echo "Bye~"
   exit 0
 fi
 
 # release
-if [[ "$TRAVIS_TAG" ]]; then
+if [ "$TRAVIS_TAG" ]; then
   # build sub folder
   SUB_FOLDER=$(echo $TRAVIS_TAG | grep -o -E '\d+\.\d+')
 
