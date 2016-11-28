@@ -228,7 +228,7 @@
     },
     watch: {
       '$route.path'() {
-        this.isHome = this.$route.name === 'home';
+        this.isHome = /^home/.test(this.$route.name);
         this.headerStyle.backgroundColor = `rgba(32, 160, 255, ${ this.isHome ? '0' : '1' })`;
       }
     },
