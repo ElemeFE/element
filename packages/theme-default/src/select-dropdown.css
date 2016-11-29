@@ -51,5 +51,9 @@
     max-height: var(--select-dropdown-max-height);
     box-sizing: border-box;
     overflow-y: auto;
+
+    @when empty {
+      padding: 0;
+    }
   }
 }

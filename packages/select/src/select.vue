@@ -63,10 +63,18 @@
       <el-select-menu
         ref="popper"
         v-show="visible && emptyText !== false">
-        <ul class="el-select-dropdown__list" v-show="options.length > 0 && filteredOptionsCount > 0 && !loading">
+        <ul
+          class="el-select-dropdown__list"
+          :class="{ 'is-empty': !allowCreate && filteredOptionsCount === 0 }"
+          v-show="options.length > 0 && !loading">
+          <el-option
+            :value="query"
+            created
+            v-if="showNewOption">
+          </el-option>
           <slot></slot>
         </ul>
-        <p class="el-select-dropdown__empty" v-if="emptyText">{{ emptyText }}</p>
+        <p class="el-select-dropdown__empty" v-if="emptyText && !allowCreate">{{ emptyText }}</p>
       </el-select-menu>
     </transition>
   </div>
@@ -132,6 +140,11 @@
           }
         }
         return null;
+      },
+
+      showNewOption() {
+        let hasExistingOption = this.options.filter(option => !option.created).some(option => option.currentLabel === this.query);
+        return this.filterable && this.allowCreate && this.query !== '' && !hasExistingOption;
       }
     },
 
@@ -149,6 +162,7 @@
       disabled: Boolean,
       clearable: Boolean,
       filterable: Boolean,
+      allowCreate: Boolean,
       loading: Boolean,
       remote: Boolean,
       remoteMethod: Function,
@@ -183,6 +197,7 @@
         query: '',
         voidRemoteQuery: false,
         bottomOverflowBeforeHidden: 0,
+        topOverflowBeforeHidden: 0,
         optionsAllDisabled: false,
         inputHovering: false,
         currentPlaceholder: ''
@@ -204,7 +219,7 @@
           }
         }
         this.selected = this.getSelected();
-        if (this.filterable) {
+        if (this.filterable && !this.multiple) {
           this.inputLength = 20;
         }
         this.$emit('change', val);
@@ -213,6 +228,7 @@
 
       query(val) {
         this.broadcast('ElSelectDropdown', 'updatePopper');
+        this.hoverIndex = -1;
         if (this.multiple && this.filterable) {
           this.resetInputHeight();
         }
@@ -244,7 +260,10 @@
           this.resetHoverIndex();
           if (!this.multiple) {
             if (this.dropdownUl && this.selected && this.selected.$el) {
-              this.bottomOverflowBeforeHidden = this.selected.$el.getBoundingClientRect().bottom - this.$refs.popper.$el.getBoundingClientRect().bottom;
+              let selectedRect = this.selected.$el.getBoundingClientRect();
+              let popperRect = this.$refs.popper.$el.getBoundingClientRect();
+              this.bottomOverflowBeforeHidden = selectedRect.bottom - popperRect.bottom;
+              this.topOverflowBeforeHidden = selectedRect.top - popperRect.top;
             }
             if (this.selected && this.selected.value) {
               this.selectedLabel = this.selected.currentLabel;
@@ -270,7 +289,13 @@
           }
           if (!this.multiple && this.dropdownUl) {
             if (this.bottomOverflowBeforeHidden > 0) {
-              this.dropdownUl.scrollTop += this.bottomOverflowBeforeHidden;
+              this.$nextTick(() => {
+                this.dropdownUl.scrollTop += this.bottomOverflowBeforeHidden;
+              });
+            } else if (this.topOverflowBeforeHidden < 0) {
+              this.$nextTick(() => {
+                this.dropdownUl.scrollTop += this.topOverflowBeforeHidden;
+              });
             }
           }
         }
@@ -290,18 +315,20 @@
       getSelected() {
         if (this.multiple) {
           let result = [];
-          this.value.forEach(value => {
-            let option = this.options.filter(option => option.value === value)[0];
-            if (option) {
-              result.push(option);
-            } else {
-              result.push({
-                value: this.value,
-                currentLabel: value,
-                hitState: false
-              });
-            }
-          });
+          if (Array.isArray(this.value)) {
+            this.value.forEach(value => {
+              let option = this.options.filter(option => option.value === value)[0];
+              if (option) {
+                result.push(option);
+              } else {
+                result.push({
+                  value: this.value,
+                  currentLabel: value,
+                  hitState: false
+                });
+              }
+            });
+          }
           return result;
         } else {
           let option = this.options.filter(option => option.value === this.value)[0] ||
@@ -405,6 +432,11 @@
           } else if (this.multipleLimit <= 0 || this.value.length < this.multipleLimit) {
             this.value.push(option.value);
           }
+          if (option.created) {
+            this.query = '';
+            this.inputLength = 20;
+            this.$refs.input.focus();
+          }
         }
       },
 
@@ -422,6 +454,7 @@
           this.visible = true;
           return;
         }
+        if (this.options.length === 0 || this.filteredOptionsCount === 0) return;
         if (!this.optionsAllDisabled) {
           if (direction === 'next') {
             this.hoverIndex++;
@@ -483,7 +516,7 @@
       },
 
       onInputChange() {
-        if (this.filterable && this.selectedLabel !== this.value) {
+        if (this.filterable) {
           this.query = this.selectedLabel;
         }
       },

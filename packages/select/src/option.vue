@@ -34,6 +34,7 @@
         type: Boolean,
         default: false
       },
+      created: Boolean,
       disabled: {
         type: Boolean,
         default: false
@@ -105,7 +106,7 @@
       queryChange(query) {
         // query 里如果有正则中的特殊字符，需要先将这些字符转义
         let parsedQuery = query.replace(/(\^|\(|\)|\[|\]|\$|\*|\+|\.|\?|\\|\{|\}|\|)/g, '\\$1');
-        this.visible = new RegExp(parsedQuery, 'i').test(this.currentLabel);
+        this.visible = new RegExp(parsedQuery, 'i').test(this.currentLabel) || this.created;
         if (!this.visible) {
           this.parent.filteredOptionsCount--;
         }
