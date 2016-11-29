@@ -25,8 +25,8 @@ var Notification = function(options) {
   instance.dom = instance.vm.$el;
   instance.dom.style.zIndex = PopupManager.nextZIndex();
 
-  const origin = options.origin || 0;
-  let topDist = origin;
+  const offset = options.offset || 0;
+  let topDist = offset;
   for (let i = 0, len = instances.length; i < len; i++) {
     topDist += instances[i].$el.offsetHeight + 16;
   }
