@@ -333,6 +333,7 @@ export default {
         this.pickerVisible = !this.pickerVisible;
       } else {
         this.internalValue = '';
+        this.$emit('input', '');
       }
     },
 
