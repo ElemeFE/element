@@ -2,7 +2,8 @@
   <div class="el-input-number"
     :class="[
       size ? 'el-input-number--' + size : '',
-      { 'is-disabled': disabled }
+      { 'is-disabled': disabled },
+      { 'is-without-controls': !controls}
     ]"
   >
     <el-input
@@ -18,6 +19,7 @@
       }">
     </el-input>
     <span
+      v-if="controls"
       class="el-input-number__decrease el-icon-minus"
       :class="{'is-disabled': minDisabled}"
       v-repeat-click="decrease"
@@ -26,6 +28,7 @@
     >
     </span>
     <span
+      v-if="controls"
       class="el-input-number__increase el-icon-plus"
       :class="{'is-disabled': maxDisabled}"
       v-repeat-click="increase"
@@ -58,7 +61,11 @@
         default: 0
       },
       disabled: Boolean,
-      size: String
+      size: String,
+      controls: {
+        type: Boolean,
+        default: true
+      }
     },
     directives: {
       repeatClick: {

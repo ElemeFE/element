@@ -96,6 +96,7 @@ Allows you to define incremental steps.
 |step | incremental step | number | — | 1 |
 |size | size of the component | string | large/small| — |
 |disabled| whether the component is disabled | boolean | — | false |
+|controls| whether to enable the control buttons | boolean | — | true |
 
 ### Events
 
