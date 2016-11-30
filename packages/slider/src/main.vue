@@ -136,20 +136,24 @@
       },
 
       setPosition(newPos) {
-        if (newPos >= 0 && (newPos <= 100)) {
-          const lengthPerStep = 100 / ((this.max - this.min) / this.step);
-          const steps = Math.round(newPos / lengthPerStep);
-          let value = steps * lengthPerStep * (this.max - this.min) * 0.01 + this.min;
-          if (this.precision) {
-            value = parseFloat(value.toFixed(this.precision));
-          }
-          this.$emit('input', value);
-          this.currentPosition = (this.value - this.min) / (this.max - this.min) * 100 + '%';
-          if (!this.dragging) {
-            if (this.value !== this.oldValue) {
-              this.$emit('change', this.value);
-              this.oldValue = this.value;
-            }
+        if (newPos < 0) {
+          newPos = 0;
+        } else if (newPos > 100) {
+          newPos = 100;
+        }
+
+        const lengthPerStep = 100 / ((this.max - this.min) / this.step);
+        const steps = Math.round(newPos / lengthPerStep);
+        let value = steps * lengthPerStep * (this.max - this.min) * 0.01 + this.min;
+        if (this.precision) {
+          value = parseFloat(value.toFixed(this.precision));
+        }
+        this.$emit('input', value);
+        this.currentPosition = (this.value - this.min) / (this.max - this.min) * 100 + '%';
+        if (!this.dragging) {
+          if (this.value !== this.oldValue) {
+            this.$emit('change', this.value);
+            this.oldValue = this.value;
           }
         }
       },
