@@ -10,9 +10,6 @@ fi
 
 # release
 if [ "$TRAVIS_TAG" ]; then
-  # build sub folder
-  SUB_FOLDER=$(echo $TRAVIS_TAG | grep -o -E '\d+\.\d+')
-
   # build lib
   npm run dist
   cd temp_web
@@ -40,6 +37,9 @@ if [ "$TRAVIS_TAG" ]; then
   npm run deploy:build
   cd temp_web
   git clone -b gh-pages https://$ROT_TOKEN@github.com/ElemeFE/element.git && cd element
+  # build sub folder
+  export SUB_FOLDER=$(echo $TRAVIS_TAG | grep -o -E '\d+\.\d+')
+
   mkdir $SUB_FOLDER
   rm -rf *.js *.css *.map static
   rm -rf $SUB_FOLDER/**
