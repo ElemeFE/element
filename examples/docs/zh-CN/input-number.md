@@ -31,7 +31,7 @@
 :::demo 要使用它，只需要在`el-input-number`元素中使用`v-model`绑定变量即可，变量的初始值即为默认值。
 ```html
 <template>
-  <el-input-number v-model="num1" @change="handleChange" :min="1" :max="10"></el-input-number>
+  <el-input-number :controls="false" v-model="num1" @change="handleChange" :min="1" :max="10"></el-input-number>
 </template>
 <script>
   export default {

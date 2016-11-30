@@ -82,5 +82,10 @@
         padding-right: calc(var(--input-small-height) * 2 + 10);
       }
     }
+    @when without-controls {
+      & .el-input__inner {
+        padding-right: 10px;
+      }
+    }
   }
 }
