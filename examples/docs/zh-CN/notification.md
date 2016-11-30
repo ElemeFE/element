@@ -47,10 +47,11 @@
       },
       
       open7() {
-        this.$notify({
-         message: '吴尔丹',
-         origin: 100
-       });
+        this.$notify.success({
+          title: '成功',
+          message: '这是一条成功的提示消息',
+          offset: 100
+        });
       },
 
       onClose() {
@@ -177,7 +178,7 @@
 
 让 Notification 偏移一些位置
 
-::: demo Element Notification 组件提供设置偏移量的功能, 通过设置 `origin` 字段，可以使弹出的消息距屏幕上方偏移一段距离, 在同一时刻，所有的 Notification 实例应当只有同一个偏移量。
+::: demo Notification 提供设置偏移量的功能，通过设置 `offset` 字段，可以使弹出的消息距屏幕顶部偏移一段距离。注意在同一时刻，所有的 Notification 实例应当具有一个相同的偏移量。
 ```html
 <template>
   <el-button
@@ -191,10 +192,11 @@
   export default {
     methods: {
       open7() {
-        this.$notify({
-         message: '吴尔丹',
-         origin: 100
-       });
+        this.$notify.success({
+          title: '成功',
+          message: '这是一条成功的提示消息',
+          offset: 100
+        });
       }
     }
   }
@@ -224,7 +226,7 @@ import { Notification } from 'element-ui';
 | type | 主题样式，如果不在可选值内将被忽略 | string | success/warning/info/error | — |
 | duration | 显示时间, 毫秒。设为 0 则不会自动关闭 | number | — | 4500 |
 | onClose | 关闭时的回调函数 | function | — | — |
-| origin | 偏移的距离,在同一时刻，所有的 Notification 实例应当只有同一个偏移量 | number | — | 0 |
+| offset | 偏移的距离，在同一时刻，所有的 Notification 实例应当具有一个相同的偏移量 | number | — | 0 |
 
 ### 方法
 调用 `Notification` 或 `this.$notify` 会返回当前 Notification 的实例。如果需要手动关闭实例，可以调用它的 `close` 方法。
