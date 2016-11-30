@@ -226,4 +226,20 @@ describe('InputNumber', () => {
       done();
     }, 100);
   });
+  it('controls', () => {
+    vm = createVue({
+      template: `
+        <el-input-number :controls="false" v-model="value" :max="8">
+        </el-input-number>
+      `,
+      data() {
+        return {
+          value: 8
+        };
+      }
+    }, true);
+
+    expect(vm.$el.querySelector('.el-input-number__decrease')).to.not.exist;
+    expect(vm.$el.querySelector('.el-input-number__increase')).to.not.exist;
+  });
 });
