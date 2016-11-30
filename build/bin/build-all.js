@@ -19,7 +19,7 @@ Object.keys(components).forEach(key => {
 });
 
 const paths = componentPaths.join(',');
-const cli = `node_modules/.bin/cooking build -c ${paths} -p`;
+const cli = path.join('node_modules', '.bin', 'cooking') + ` build -c ${paths} -p`;
 
 execSync(cli, {
   stdio: 'inherit'
