@@ -3,7 +3,7 @@ import Select from 'packages/select';
 
 describe('Select', () => {
   const getSelectVm = (configs = {}, options) => {
-    ['multiple', 'clearable', 'filterable', 'remote'].forEach(config => {
+    ['multiple', 'clearable', 'filterable', 'allowCreate', 'remote'].forEach(config => {
       configs[config] = configs[config] || false;
     });
     configs.multipleLimit = configs.multipleLimit || 0;
@@ -39,6 +39,7 @@ describe('Select', () => {
             :multiple-limit="multipleLimit"
             :clearable="clearable"
             :filterable="filterable"
+            :allow-create="allowCreate"
             :filterMethod="filterMethod"
             :remote="remote"
             :loading="loading"
@@ -60,6 +61,7 @@ describe('Select', () => {
           multipleLimit: configs.multipleLimit,
           clearable: configs.clearable,
           filterable: configs.filterable,
+          allowCreate: configs.allowCreate,
           loading: false,
           filterMethod: configs.filterMethod && configs.filterMethod(this),
           remote: configs.remote,
@@ -350,6 +352,23 @@ describe('Select', () => {
       expect(select.filteredOptionsCount).to.equal(4);
       done();
     }, 100);
+  });
+
+  it('allow create', done => {
+    vm = getSelectVm({ filterable: true, allowCreate: true });
+    const select = vm.$children[0];
+    select.selectedLabel = 'new';
+    select.onInputChange();
+    select.visible = true;
+    setTimeout(() => {
+      const options = document.querySelectorAll('.el-select-dropdown__item span');
+      const target = [].filter.call(options, option => option.innerText === 'new');
+      target[0].click();
+      setTimeout(() => {
+        expect(select.value.indexOf('new') > -1).to.true;
+        done();
+      }, 50);
+    }, 50);
   });
 
   it('multiple select', done => {

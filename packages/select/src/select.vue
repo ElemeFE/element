@@ -85,6 +85,7 @@
   import Locale from 'element-ui/src/mixins/locale';
   import ElInput from 'element-ui/packages/input';
   import ElSelectMenu from './select-dropdown.vue';
+  import ElOption from './option.vue';
   import ElTag from 'element-ui/packages/tag';
   import debounce from 'throttle-debounce/debounce';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
@@ -143,7 +144,8 @@
       },
 
       showNewOption() {
-        let hasExistingOption = this.options.filter(option => !option.created).some(option => option.currentLabel === this.query);
+        let hasExistingOption = this.options.filter(option => !option.created)
+          .some(option => option.currentLabel === this.query);
         return this.filterable && this.allowCreate && this.query !== '' && !hasExistingOption;
       }
     },
@@ -151,6 +153,7 @@
     components: {
       ElInput,
       ElSelectMenu,
+      ElOption,
       ElTag
     },
 
@@ -248,10 +251,7 @@
       visible(val) {
         if (!val) {
           this.$refs.reference.$el.querySelector('input').blur();
-          let icon = this.$el.querySelector('.el-input__icon');
-          if (icon) {
-            removeClass(icon, 'is-reverse');
-          }
+          this.handleIconHide();
           this.broadcast('ElSelectDropdown', 'destroyPopper');
           if (this.$refs.input) {
             this.$refs.input.blur();
@@ -259,21 +259,13 @@
           this.query = '';
           this.resetHoverIndex();
           if (!this.multiple) {
-            if (this.dropdownUl && this.selected && this.selected.$el) {
-              let selectedRect = this.selected.$el.getBoundingClientRect();
-              let popperRect = this.$refs.popper.$el.getBoundingClientRect();
-              this.bottomOverflowBeforeHidden = selectedRect.bottom - popperRect.bottom;
-              this.topOverflowBeforeHidden = selectedRect.top - popperRect.top;
-            }
+            this.getOverflows();
             if (this.selected && this.selected.value) {
               this.selectedLabel = this.selected.currentLabel;
             }
           }
         } else {
-          let icon = this.$el.querySelector('.el-input__icon');
-          if (icon && !hasClass(icon, 'el-icon-circle-close')) {
-            addClass(icon, 'is-reverse');
-          }
+          this.handleIconShow();
           this.broadcast('ElSelectDropdown', 'updatePopper');
           if (this.filterable) {
             this.query = this.selectedLabel;
@@ -288,15 +280,7 @@
             this.dropdownUl = [].filter.call(dropdownChildNodes, item => item.tagName === 'UL')[0];
           }
           if (!this.multiple && this.dropdownUl) {
-            if (this.bottomOverflowBeforeHidden > 0) {
-              this.$nextTick(() => {
-                this.dropdownUl.scrollTop += this.bottomOverflowBeforeHidden;
-              });
-            } else if (this.topOverflowBeforeHidden < 0) {
-              this.$nextTick(() => {
-                this.dropdownUl.scrollTop += this.topOverflowBeforeHidden;
-              });
-            }
+            this.setOverflow();
           }
         }
       },
@@ -312,30 +296,64 @@
     },
 
     methods: {
+      handleIconHide() {
+        let icon = this.$el.querySelector('.el-input__icon');
+        if (icon) {
+          removeClass(icon, 'is-reverse');
+        }
+      },
+
+      handleIconShow() {
+        let icon = this.$el.querySelector('.el-input__icon');
+        if (icon && !hasClass(icon, 'el-icon-circle-close')) {
+          addClass(icon, 'is-reverse');
+        }
+      },
+
+      getOverflows() {
+        if (this.dropdownUl && this.selected && this.selected.$el) {
+          let selectedRect = this.selected.$el.getBoundingClientRect();
+          let popperRect = this.$refs.popper.$el.getBoundingClientRect();
+          this.bottomOverflowBeforeHidden = selectedRect.bottom - popperRect.bottom;
+          this.topOverflowBeforeHidden = selectedRect.top - popperRect.top;
+        }
+      },
+
+      setOverflow() {
+        if (this.bottomOverflowBeforeHidden > 0) {
+          this.$nextTick(() => {
+            this.dropdownUl.scrollTop += this.bottomOverflowBeforeHidden;
+          });
+        } else if (this.topOverflowBeforeHidden < 0) {
+          this.$nextTick(() => {
+            this.dropdownUl.scrollTop += this.topOverflowBeforeHidden;
+          });
+        }
+      },
+
       getSelected() {
-        if (this.multiple) {
-          let result = [];
-          if (Array.isArray(this.value)) {
-            this.value.forEach(value => {
-              let option = this.options.filter(option => option.value === value)[0];
-              if (option) {
-                result.push(option);
-              } else {
-                result.push({
-                  value: this.value,
-                  currentLabel: value,
-                  hitState: false
-                });
-              }
-            });
-          }
-          return result;
-        } else {
+        if (!this.multiple) {
           let option = this.options.filter(option => option.value === this.value)[0] ||
-            { value: this.value, currentLabel: this.value };
+              { value: this.value, currentLabel: this.value };
           this.selectedLabel = option.currentLabel;
           return option;
         }
+        let result = [];
+        if (Array.isArray(this.value)) {
+          this.value.forEach(value => {
+            let option = this.options.filter(option => option.value === value)[0];
+            if (option) {
+              result.push(option);
+            } else {
+              result.push({
+                value: this.value,
+                currentLabel: value,
+                hitState: false
+              });
+            }
+          });
+        }
+        return result;
       },
 
       handleIconClick(event) {
@@ -484,8 +502,10 @@
       },
 
       resetScrollTop() {
-        let bottomOverflowDistance = this.options[this.hoverIndex].$el.getBoundingClientRect().bottom - this.$refs.popper.$el.getBoundingClientRect().bottom;
-        let topOverflowDistance = this.options[this.hoverIndex].$el.getBoundingClientRect().top - this.$refs.popper.$el.getBoundingClientRect().top;
+        let bottomOverflowDistance = this.options[this.hoverIndex].$el.getBoundingClientRect().bottom -
+          this.$refs.popper.$el.getBoundingClientRect().bottom;
+        let topOverflowDistance = this.options[this.hoverIndex].$el.getBoundingClientRect().top -
+          this.$refs.popper.$el.getBoundingClientRect().top;
         if (bottomOverflowDistance > 0) {
           this.dropdownUl.scrollTop += bottomOverflowDistance;
         }
@@ -541,7 +561,7 @@
       if (this.multiple && !Array.isArray(this.value)) {
         this.$emit('input', []);
       }
-      if (!this.multiple && !this.value) {
+      if (!this.multiple && (!this.value || Array.isArray(this.value))) {
         this.$emit('input', '');
       }
       if (this.remote) {

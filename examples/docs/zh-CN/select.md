@@ -62,6 +62,16 @@
           }]
         }],
         options4: [],
+        options5: [{
+          value: 'HTML',
+          label: 'HTML'
+        }, {
+          value: 'CSS',
+          label: 'CSS'
+        }, {
+          value: 'JavaScript',
+          label: 'JavaScript'
+        }],
         cities: [{
           value: 'Beijing',
           label: '北京'
@@ -90,6 +100,7 @@
         value7: '',
         value8: '',
         value9: '',
+        value10: [],
         loading: false,
         states: ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
       };
@@ -585,6 +596,47 @@
 ```
 :::
 
+### 创建条目
+可以创建并选中选项中不存在的条目
+:::demo 使用`allow-create`属性即可通过在输入框中输入文字来创建新的条目。注意此时`filterable`必须为真。
+```html
+<template>
+  <el-select
+    v-model="value10"
+    multiple
+    filterable
+    allow-create
+    placeholder="请选择文章标签">
+    <el-option
+      v-for="item in options5"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        options5: [{
+          value: 'HTML',
+          label: 'HTML'
+        }, {
+          value: 'CSS',
+          label: 'CSS'
+        }, {
+          value: 'JavaScript',
+          label: 'JavaScript'
+        }],
+        value10: []
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Select Attributes 
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -595,6 +647,7 @@
 | name | select input 的 name 属性 | string | — | — |
 | placeholder | 占位符 | string | — | 请选择 |
 | filterable | 是否可搜索 | boolean | — | false |
+| allow-create | 是否允许用户创建新条目，需配合 `filterable` 使用 | boolean | — | false |
 | filter-method | 自定义过滤方法 | function | — | — |
 | remote | 是否为远程搜索 | boolean | — | false |
 | remote-method | 远程搜索方法 | function | — | — |
