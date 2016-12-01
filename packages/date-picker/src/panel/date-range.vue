@@ -176,19 +176,19 @@
       },
 
       minVisibleDate() {
-        return formatDate(this.minDate);
+        return this.minDate ? formatDate(this.minDate) : '';
       },
 
       maxVisibleDate() {
-        return formatDate(this.maxDate || this.minDate);
+        return (this.maxDate || this.minDate) ? formatDate(this.maxDate || this.minDate) : '';
       },
 
       minVisibleTime() {
-        return formatDate(this.minDate, 'HH:mm:ss');
+        return this.minDate ? formatDate(this.minDate, 'HH:mm:ss') : '';
       },
 
       maxVisibleTime() {
-        return formatDate(this.maxDate, 'HH:mm:ss');
+        return (this.maxDate || this.minDate) ? formatDate(this.maxDate || this.minDate, 'HH:mm:ss') : '';
       },
 
       rightDate() {
