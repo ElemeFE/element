@@ -120,6 +120,34 @@
 ```
 :::
 
+
+### 自定义`label`
+
+自定义`label`
+
+:::demo 将`el-tab-pane`的属性`custom-template`设置为`true`, 可以通过添加`slot`来自定义内容。`label`表示头部tab的`label`，`content`表示该tab的内容
+```html
+<el-tabs type="border-card">
+  <el-tab-pane :custom-template="true">
+        <el-badge :value="12" slot="label">
+        	<span>
+                  用户管理
+            </span>
+        </el-badge>
+        <div slot="content">
+            <span>
+                  用户管理
+            </span>
+        </div>
+  </el-tab-pane>
+  <el-tab-pane label="配置管理">配置管理</el-tab-pane>
+  <el-tab-pane label="角色管理">角色管理</el-tab-pane>
+  <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
+</el-tabs>
+```
+:::
+
+
 ### Tabs Attributes
 | 参数       | 说明     | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
@@ -138,3 +166,4 @@
 |---------- |-------- |---------- |-------------  |-------- |
 | label     | 选项卡标题   | string   | — |    —     |
 | name      | 与选项卡 activeName 对应的标识符，表示选项卡别名 | string | — | 该选项卡在选项卡列表中的顺序值，如第一个选项卡则为'1' |
+| custom-template | 是否使用custom template | boolean | - | false | 

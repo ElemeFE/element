@@ -1,4 +1,4 @@
-<script>
+<script type="text/jsx">
   module.exports = {
     name: 'el-tabs',
 
@@ -79,57 +79,64 @@
       });
     },
     render(h) {
-      let {
-        type,
-        panes, // eslint-disable-line
-        handleTabRemove,
-        handleTabClick,
-        currentName
-      } = this;
+        let {
+          type,
+          panes, // eslint-disable-line
+          handleTabRemove,
+          handleTabClick,
+          currentName,
+        } = this;
 
-      const barStyle = this.calcBarStyle();
-      const activeBar = !type
-        ? <div class="el-tabs__active-bar" style={barStyle}></div>
-        : null;
+        const barStyle = this.calcBarStyle();
+        const activeBar = !type
+          ? <div class="el-tabs__active-bar" style={barStyle}></div>
+          : null;
 
-      const tabs = this.$children.map((tab, index) => {
-        let btnClose = h('span', {
-          class: {
-            'el-icon-close': true
-          },
-          on: { click: (ev) => { handleTabRemove(tab, ev); } }
+        const tabs = this.$children.map((tab, index) => {
+            let btnClose = (
+					<span class="el-icon-close" onClick={(ev) => {
+                        handleTabRemove(tab, ev);
+                    }}/>
+            );
+            let header = tab.label;
+            if (tab.customTemplate) {
+                header = tab.$slots.label;
+            }
+
+            const _tab = (
+					<div class={{
+                        'el-tabs__item': true,
+                        'is-active': currentName === tab.index,
+                        'is-disabled': tab.disabled,
+                        'is-closable': tab.isClosable
+                    }}
+						 ref={tabs}
+						 refInFor={true}
+						 onClick={(ev) => {
+                             handleTabClick(tab, ev);
+                         }}
+					>
+                        {header}
+                        {tab.isClosable ? btnClose : null}
+                        {index === 0 ? activeBar : null}
+					</div>
+            );
+            return _tab;
         });
-        const _tab = h('div', {
-          class: {
-            'el-tabs__item': true,
-            'is-active': currentName === tab.index,
-            'is-disabled': tab.disabled,
-            'is-closable': tab.isClosable
-          },
-          ref: 'tabs',
-          refInFor: true,
-          on: { click: (ev) => { handleTabClick(tab, ev); } }
-        }, [
-          tab.label,
-          tab.isClosable ? btnClose : null,
-          index === 0 ? activeBar : null
-        ]);
-        return _tab;
-      });
-      return (
-        <div class={{
-          'el-tabs': true,
-          'el-tabs--card': type === 'card',
-          'el-tabs--border-card': type === 'border-card'
-        }}>
-          <div class="el-tabs__header">
-            {tabs}
-          </div>
-          <div class="el-tabs__content">
-            {this.$slots.default}
-          </div>
-        </div>
-      );
+        return (
+				<div class={{
+                    'el-tabs': true,
+                    'el-tabs--card': type === 'card',
+                    'el-tabs--border-card': type === 'border-card'
+                }}>
+					<div class="el-tabs__header">
+                        {tabs}
+					</div>
+					<div class="el-tabs__content">
+                        {this.$slots.default}
+					</div>
+				</div>
+        );
     }
   };
 </script>

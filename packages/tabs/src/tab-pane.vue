@@ -1,14 +1,12 @@
-<script>
+<script type="text/jsx">
   module.exports = {
     name: 'el-tab-pane',
 
     props: {
-      label: {
-        type: String,
-        required: true
-      },
+      label: String,
       name: String,
-      closable: Boolean
+      closable: Boolean,
+      customTemplate: Boolean
     },
 
     data() {
@@ -72,11 +70,16 @@
           this.transition = oldValue > newValue ? 'slideInRight' : 'slideInLeft';
         }
       }
-    }
+    },
+	render(h) {
+        if (this.show) {
+            return (
+              <div class="el-tab-pane">
+				{this.customTemplate ? this.$slots.content : this.$slots.default}
+			  </div>
+        	);
+        }
+        return null
+	}
   };
 </script>
-<template>
-  <div class="el-tab-pane" v-show="show && $slots.default">
-    <slot></slot>
-  </div>
-</template>
