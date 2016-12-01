@@ -4,7 +4,9 @@
     size ? 'el-input--' + size : '',
     {
       'is-disabled': disabled,
-      'el-input-group': $slots.prepend || $slots.append
+      'el-input-group': $slots.prepend || $slots.append,
+      'el-input-group--append': $slots.append,
+      'el-input-group--prepend': $slots.prepend
     }
   ]">
     <template v-if="type !== 'textarea'">
@@ -13,7 +15,7 @@
         <slot name="prepend"></slot>
       </div>
       <!-- input 图标 -->
-      <i class="el-input__icon" :class="[icon ? 'el-icon-' + icon : '']" v-if="icon" @click="handleIconClick"></i>
+      <i class="el-input__icon" :class="'el-icon-' + icon" v-if="icon" @click="handleIconClick"></i>
       <input
         v-if="type !== 'textarea'"
         class="el-input__inner"

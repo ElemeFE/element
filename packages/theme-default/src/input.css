@@ -150,16 +150,18 @@
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
     }
-    & .el-input__inner:first-child {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
+
+    @m prepend {
+      .el-input__inner {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
     }
-    & .el-input__inner:last-child {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-    }
-    & .el-input__inner:not(:first-child):not(:last-child) {
-      border-radius: 0;
+    @m append {
+      .el-input__inner {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
     }
   }
 
