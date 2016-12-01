@@ -7,6 +7,10 @@
         type: String,
         required: true
       },
+      disabled: {
+        type: Boolean,
+        default: false
+      },
       name: String,
       closable: Boolean
     },
