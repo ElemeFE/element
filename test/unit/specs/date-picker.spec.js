@@ -470,7 +470,7 @@ describe('DatePicker', () => {
           const minMonth = minDate.getMonth();
           const maxMonth = maxDate.getMonth();
 
-          expect(maxMonth - minMonth).to.equal(1); // one month
+          expect([1, -11]).to.include(maxMonth - minMonth); // one month
           done();
         }, DELAY);
       }, DELAY);
@@ -483,7 +483,6 @@ describe('DatePicker', () => {
       const right = vm.picker.$el.querySelector('.is-right .el-date-range-picker__header');
       const leftText = left.textContent.match(/\d+/g);
       const rightText = right.textContent.match(/\d+/g);
-
       let count = 20;
       while (--count) {
         leftBtn.click();
@@ -496,11 +495,10 @@ describe('DatePicker', () => {
       setTimeout(_ => {
         const newLeft = left.textContent.match(/\d+/g);
         const newRight = right.textContent.match(/\d+/g);
-
         expect(leftText[1] - newLeft[1]).to.equal(2);
         expect(leftText[0] - newLeft[0]).to.equal(0);
-        expect(rightText[1] - newRight[1]).to.equal(2);
-        expect(rightText[0] - newRight[0]).to.equal(0);
+        expect([-10, 2]).to.include(rightText[1] - newRight[1]);
+        expect([0, 1]).to.include(rightText[0] - newRight[0]);
         done();
       }, DELAY);
     });
