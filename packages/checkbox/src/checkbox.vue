@@ -89,7 +89,7 @@
     data() {
       return {
         store: [],
-        isGroup: false
+        isGroup: this.$parent.$options.componentName === 'ElCheckboxGroup'
       };
     },
 
