@@ -257,6 +257,7 @@
             this.$refs.input.blur();
           }
           this.query = '';
+          this.selectedLabel = '';
           this.resetHoverIndex();
           if (!this.multiple) {
             this.getOverflows();
@@ -287,8 +288,6 @@
 
       options(val) {
         this.optionsAllDisabled = val.length === val.filter(item => item.disabled === true).length;
-        // 下面这行先去掉，因为 remote !multiple 时会有问题
-//        this.selected = this.getSelected();
         if (this.multiple) {
           this.resetInputHeight();
         }
@@ -577,6 +576,9 @@
     },
 
     mounted() {
+      if (this.multiple && Array.isArray(this.value) && this.value.length > 0) {
+        this.currentPlaceholder = '';
+      }
       addResizeListener(this.$el, this.resetInputWidth);
       this.selected = this.getSelected();
       if (this.remote && this.multiple) {

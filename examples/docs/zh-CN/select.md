@@ -91,7 +91,7 @@
           value: 'Guangzhou',
           label: '广州'
         }],
-        value: '选项2',
+        value: '',
         value2: '',
         value3: '',
         value4: '',
@@ -108,20 +108,9 @@
     
     mounted() {
       this.list = this.states.map(item => { return { value: item, label: item }; });
-//      this.options4 = this.states.map(item => { return { value: item, label: item }; });
-//      this.value9 = ['Vermont'];
     },
 
     methods: {
-      empty() {
-        this.value9 = ['New York'];
-      },
-      aa(val) {
-        console.log('change', val)
-      },
-      bb() {
-        this.options.splice(0, 1, { label: 'haha', value: 'haha' });
-      },
       remoteMethod(query) {
         if (query !== '') {
           this.loading = true;
@@ -151,11 +140,10 @@
 ### 基础用法
 
 适用广泛的基础单选
-<el-button @click="bb">bb</el-button>
 :::demo `v-model`的值为当前被选中的`el-option`的 value 属性值
 ```html
 <template>
-  <el-select v-model="value" placeholder="请选择" @change="aa">
+  <el-select v-model="value" placeholder="请选择">
     <el-option
       v-for="item in options"
       :label="item.label"
@@ -521,7 +509,6 @@
 ### 远程搜索
 
 从服务器搜索数据，输入关键字进行查找
-<el-button @click="empty">aa</el-button>
 :::demo 为了启用远程搜索，需要将`filterable`和`remote`设置为`true`，同时传入一个`remote-method`。`remote-method`为一个`Function`，它会在输入值发生变化时调用，参数为当前输入值。需要注意的是，如果`el-option`是通过`v-for`指令渲染出来的，此时需要为`el-option`添加`key`属性，且其值需具有唯一性，比如此例中的`item.value`。
 ```html
 <template>
@@ -529,7 +516,6 @@
     v-model="value9"
     multiple
     filterable
-    allow-create
     remote
     placeholder="请输入关键词"
     :remote-method="remoteMethod"
