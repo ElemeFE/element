@@ -92,7 +92,7 @@ export default {
         }
         <thead>
           {
-            this._l(columnRows, (columns) =>
+            this._l(columnRows, (columns, rowIndex) =>
               <tr>
                 {
                   this._l(columns, (column, cellIndex) =>
@@ -103,7 +103,7 @@ export default {
                       on-mouseout={ this.handleMouseOut }
                       on-mousedown={ ($event) => this.handleMouseDown($event, column) }
                       on-click={ ($event) => this.handleClick($event, column) }
-                      class={ [column.id, column.order, column.align, column.className || '', this.isCellHidden(cellIndex) ? 'is-hidden' : '', !column.children ? 'is-leaf' : ''] }>
+                      class={ [column.id, column.order, column.align, column.className || '', rowIndex === 0 && this.isCellHidden(cellIndex) ? 'is-hidden' : '', !column.children ? 'is-leaf' : ''] }>
                       <div class={ ['cell', column.filteredValue && column.filteredValue.length > 0 ? 'highlight' : ''] }>
                       {
                         column.renderHeader
