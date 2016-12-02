@@ -43,11 +43,10 @@ class TableLayout {
 
   updateScrollY() {
     const height = this.height;
-    if (typeof height !== 'string' || typeof height !== 'number') return;
+    if (typeof height !== 'string' && typeof height !== 'number') return;
     const bodyWrapper = this.table.$refs.bodyWrapper;
     if (this.table.$el && bodyWrapper) {
       const body = bodyWrapper.querySelector('.el-table__body');
-
       this.scrollY = body.offsetHeight > bodyWrapper.offsetHeight;
     }
   }
