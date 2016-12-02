@@ -84,7 +84,7 @@
 
     data() {
       return {
-        precision: null,
+        precision: 0,
         inputValue: null,
         timeout: null,
         hovering: false,
@@ -145,9 +145,7 @@
         const lengthPerStep = 100 / ((this.max - this.min) / this.step);
         const steps = Math.round(newPos / lengthPerStep);
         let value = steps * lengthPerStep * (this.max - this.min) * 0.01 + this.min;
-        if (this.precision) {
-          value = parseFloat(value.toFixed(this.precision));
-        }
+        value = parseFloat(value.toFixed(this.precision));
         this.$emit('input', value);
         this.currentPosition = (this.value - this.min) / (this.max - this.min) * 100 + '%';
         if (!this.dragging) {
@@ -232,9 +230,11 @@
       } else if (this.value > this.max) {
         this.$emit('input', this.max);
       }
-      if (this.step && this.step < 1) {
-        this.precision = this.step.toPrecision(1).split('.')[1].length;
-      }
+      let precisions = [this.min, this.max, this.step].map(item => {
+        let decimal = ('' + item).split('.')[1];
+        return decimal ? decimal.length : 0;
+      });
+      this.precision = Math.max.apply(null, precisions);
       this.inputValue = this.inputValue || this.value;
     }
   };
