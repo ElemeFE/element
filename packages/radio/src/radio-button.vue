@@ -3,33 +3,39 @@
     name: 'ElRadioButton',
 
     props: {
-      label: {
-        type: [String, Number],
-        required: true
-      },
+      label: {},
       disabled: Boolean,
       name: String
-    },
-    data() {
-      return {
-        size: this.$parent.size
-      };
     },
     computed: {
       value: {
         get() {
-          return this.$parent.value;
+          return this._radioGroup.value;
         },
-        set(newValue) {
-          this.$parent.$emit('input', newValue);
+        set(value) {
+          this._radioGroup.$emit('input', value);
         }
+      },
+      _radioGroup() {
+        let parent = this.$parent;
+        while (parent) {
+          if (parent.$options.componentName !== 'ElRadioGroup') {
+            parent = parent.$parent;
+          } else {
+            return parent;
+          }
+        }
+        return false;
       },
       activeStyle() {
         return {
-          backgroundColor: this.$parent.fill,
-          borderColor: this.$parent.fill,
-          color: this.$parent.textColor
+          backgroundColor: this._radioGroup.fill,
+          borderColor: this._radioGroup.fill,
+          color: this._radioGroup.textColor
         };
+      },
+      size() {
+        return this._radioGroup.size;
       }
     }
   };

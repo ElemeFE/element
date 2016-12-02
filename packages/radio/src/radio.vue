@@ -4,14 +4,14 @@
       <span class="el-radio__inner"
         :class="{
         'is-disabled': disabled,
-        'is-checked': store === label,
+        'is-checked': model === label,
         'is-focus': focus
       }"></span>
       <input
         class="el-radio__original"
         :value="label"
         type="radio"
-        v-model="store"
+        v-model="model"
         @focus="focus = true"
         @blur="focus = false"
         :name="name"
@@ -34,42 +34,45 @@
     componentName: 'ElRadio',
 
     props: {
-      value: [String, Number],
-      label: {
-        type: [String, Number],
-        required: true
-      },
+      value: {},
+      label: {},
       disabled: Boolean,
       name: String
     },
 
     data() {
       return {
-        focus: false,
-        isGroup: false,
-        store: this.value
+        focus: false
       };
     },
 
-    watch: {
-      store(store) {
-        if (this.isGroup) {
-          this.dispatch('ElRadioGroup', 'input', store);
-        } else {
-          this.$emit('input', store);
+    computed: {
+      isGroup() {
+        let parent = this.$parent;
+        while (parent) {
+          if (parent.$options.componentName !== 'ElRadioGroup') {
+            parent = parent.$parent;
+          } else {
+            this._radioGroup = parent;
+            return true;
+          }
         }
+        return false;
       },
 
-      value(val) {
-        this.store = val;
-      }
-    },
+      model: {
+        get() {
+          return this.isGroup ? this._radioGroup.value : this.value;
+        },
 
-    created() {
-      this.$on('initData', data => {
-        this.store = data;
-        this.isGroup = true;
-      });
+        set(val) {
+          if (this.isGroup) {
+            this.dispatch('ElRadioGroup', 'input', [val]);
+          } else {
+            this.$emit('input', val);
+          }
+        }
+      }
     }
   };
 </script>
