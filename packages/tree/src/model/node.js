@@ -343,6 +343,7 @@ export default class Node {
 
         this.doCreateChildren(children, defaultProps);
 
+        this.updateLeafState();
         if (callback) {
           callback.call(this, children);
         }
