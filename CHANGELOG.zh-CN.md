@@ -1,5 +1,21 @@
 ## 更新日志
 
+### 1.0.4
+*2016-12-02*
+
+- 新增 Input Number 的 `controls` 属性，#1473
+- 修复 Checkbox Group、Radio Group 在异步赋值时出现的问题，#1511 #1514
+- 增加 Notification 的 `offset` 属性，#1419
+- 修复 Slider 在快速拖动时取值不准确的问题，#1458
+- 修复 Slider 在某些情况下绑定值为多位小数的问题，#1450
+- 修复 Select 在某些情况下绑定值和显示值不同步的问题
+- 新增 Select 的 `multiple-limit` 和 `allow-create` 属性
+- 修复 Tree 的叶子节点在点击展开后三角图标不消失的问题，#1438
+- 修复 Tree 有时在获取子级数据后视图不更新的问题，#1439
+- 修复 Table 在 windows 系统下的若干样式问题，#1464 #1507
+- 修复 Table 多级表头与固定列同时使用时，多级表头第一列 label 不显示的问题，#1451
+- 新增 Table 的 `row-dblclick` 事件，#1362
+
 ### 1.0.3
 *2016-11-28*
 
