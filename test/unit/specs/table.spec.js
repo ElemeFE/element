@@ -399,6 +399,20 @@ describe('Table', () => {
       }, DELAY);
     });
 
+    it('row-dblclick', done => {
+      const vm = createTable('row-dblclick');
+
+      setTimeout(_ => {
+        const cell = vm.$el.querySelectorAll('.el-table__body .cell')[2]; // first row
+
+        triggerEvent(cell.parentNode.parentNode, 'dblclick');
+        expect(vm.result).to.length(2); // row, event
+        expect(vm.result[0]).to.have.property('name').to.equal(getTestData()[0].name);
+        destroyVM(vm);
+        done();
+      }, DELAY);
+    });
+
     it('current-change', done => {
       const vm = createTable('current-change');
 
