@@ -103,12 +103,6 @@
       falseLabel: [String, Number]
     },
 
-    data() {
-      return {
-        isGroup: false
-      };
-    },
-
     methods: {
       addToStore() {
         if (Array.isArray(this.model)) {

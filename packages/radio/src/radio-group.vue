@@ -23,12 +23,8 @@
     watch: {
       value(value) {
         this.$emit('change', value);
-        this.broadcast('ElRadio', 'initData', value);
         this.dispatch('ElFormItem', 'el.form.change', [this.value]);
       }
-    },
-    mounted() {
-      this.broadcast('ElRadio', 'initData', this.value);
     }
   };
 </script>
