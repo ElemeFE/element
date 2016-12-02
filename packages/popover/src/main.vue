@@ -22,6 +22,8 @@ import { on, off } from 'wind-dom/src/event';
 export default {
   name: 'el-popover',
 
+  componentName: 'ElPopover',
+
   mixins: [Popper],
 
   props: {

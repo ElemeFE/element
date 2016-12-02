@@ -1,14 +1,16 @@
 import Popover from './src/main';
-import directive from './src/directive';
+import directivePopover from './src/directive';
+import directiveClose from './src/close';
 import Vue from 'vue';
 
-Vue.directive('popover', directive);
+Vue.directive('popover', directivePopover);
+Vue.directive('popoverClose', directiveClose);
 
 /* istanbul ignore next */
 Popover.install = function(Vue) {
-  Vue.directive('popover', directive);
+  Vue.directive('popover', directivePopover);
+  Vue.directive('popoverClose', directiveClose);
   Vue.component(Popover.name, Popover);
 };
-Popover.directive = directive;
 
 export default Popover;
