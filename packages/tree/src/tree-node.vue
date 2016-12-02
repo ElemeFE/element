@@ -163,16 +163,16 @@
       }
 
       const tree = this.tree;
-      const props = this.props || {};
+      if (!tree) {
+        console.warn('Can not find node\'s tree.');
+      }
+
+      const props = tree.props || {};
       const childrenKey = props['children'] || 'children';
 
       this.$watch(`node.data.${childrenKey}`, () => {
         this.node.updateChildren();
       });
-
-      if (!tree) {
-        console.warn('Can not find node\'s tree.');
-      }
 
       this.showCheckbox = tree.showCheckbox;
 
