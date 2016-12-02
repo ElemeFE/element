@@ -91,7 +91,7 @@
       const activeBar = !type
         ? <div class="el-tabs__active-bar" style={barStyle}></div>
         : null;
-  
+
       const tabs = this.$children.map((tab, index) => {
         let btnClose = h('span', {
           class: {
