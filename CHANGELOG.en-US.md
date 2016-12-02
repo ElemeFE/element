@@ -1,5 +1,22 @@
 ## Changelog
 
+### 1.0.4
+
+*2016-12-02*
+
+- Added `controls` attribute for Input Number, #1473
+- Fixed Checkbox Group and Radio Group async issue, #1511 #1514
+- Added `offset` attribute for Notification, #1419
+- Fixed Slider's value not accurate issue when dragging rapidly, #1458
+- Fixed Slider incorrectly showing multiple decimal digits issue, #1450
+- Fixed Select's binding value and displayed value not in sync in some conditions
+- Added `multiple-limit` and `allow-create` attributes for Select
+- Fixed Tree leaf nodes' triangle icon not disappear when expanded, #1438
+- Fixed Tree's view not updating issue after fetching child nodes' data, #1439
+- Fixed some Table's style issues in windows system, #1464 #1507
+- Fixed Table's first column's label not showing issue when grouping table head is used with fixed columns, #1451
+- Added `row-dblclick` event for Table, #1362
+
 ### 1.0.3
 
 *2016-11-28*
