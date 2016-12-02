@@ -1198,6 +1198,7 @@ Customize table column so it can be integrated with other components.
 | cell-mouse-leave | triggers when hovering out of a cell | row, column, cell, event |
 | cell-click | triggers when clicking a cell | row, column, cell, event |
 | row-click | triggers when clicking a row | row, event |
+| row-dblclick | triggers when double clicking a row | row, event |
 | header-click | triggers when clicking a column header | column, event |
 | sort-change | triggers when Table's sorting changes | { column, prop, order } |
 | current-change | triggers when current row changes | currentRow, oldCurrentRow |
