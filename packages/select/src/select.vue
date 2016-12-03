@@ -129,10 +129,7 @@
         if (this.loading) {
           return this.t('el.select.loading');
         } else {
-          if (this.voidRemoteQuery) {
-            this.voidRemoteQuery = false;
-            return false;
-          }
+          if (this.remote && this.query === '') return false;
           if (this.filterable && this.filteredOptionsCount === 0) {
             return this.t('el.select.noMatch');
           }
@@ -198,7 +195,6 @@
         selectedLabel: '',
         hoverIndex: -1,
         query: '',
-        voidRemoteQuery: false,
         bottomOverflowBeforeHidden: 0,
         topOverflowBeforeHidden: 0,
         optionsAllDisabled: false,
@@ -238,7 +234,6 @@
         if (this.remote && typeof this.remoteMethod === 'function') {
           this.hoverIndex = -1;
           this.remoteMethod(val);
-          this.voidRemoteQuery = val === '';
           this.broadcast('ElOption', 'resetIndex');
         } else if (typeof this.filterMethod === 'function') {
           this.filterMethod(val);
@@ -562,9 +557,6 @@
       }
       if (!this.multiple && (!this.value || Array.isArray(this.value))) {
         this.$emit('input', '');
-      }
-      if (this.remote) {
-        this.voidRemoteQuery = true;
       }
 
       this.debouncedOnInputChange = debounce(this.debounce, () => {
