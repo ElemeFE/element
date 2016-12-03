@@ -9,7 +9,7 @@
     </label>
     <div class="el-form-item__content" v-bind:style="contentStyle">
       <slot></slot>
-      <transition name="md-fade-bottom">
+      <transition name="el-zoom-in-top">
         <div class="el-form-item__error" v-if="validateState === 'error'">{{validateMessage}}</div>
       </transition>
     </div>

@@ -16,7 +16,7 @@
         }">
       </i>
     </div>
-    <transition :name="rootMenu.mode === 'horizontal' ? 'md-fade-bottom' : ''">
+    <transition :name="rootMenu.mode === 'horizontal' ? 'el-zoom-in-top' : ''">
       <ul class="el-menu" v-show="opened"><slot></slot></ul>
     </transition>
   </li>

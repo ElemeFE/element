@@ -1,5 +1,5 @@
 <template>
-  <transition name="md-fade-bottom">
+  <transition name="el-zoom-in-top">
     <div class="el-table-filter" v-if="multiple" v-show="showPopper">
       <div class="el-table-filter__content">
         <el-checkbox-group class="el-table-filter__checkbox-group" v-model="filteredValue">

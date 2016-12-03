@@ -59,7 +59,7 @@
       @mouseleave.native="inputHovering = false"
       :icon="iconClass">
     </el-input>
-    <transition name="md-fade-bottom" @after-leave="doDestroy">
+    <transition name="el-zoom-in-top" @after-leave="doDestroy">
       <el-select-menu
         ref="popper"
         v-show="visible && emptyText !== false">
