@@ -19,7 +19,7 @@
         <slot name="append"></slot>
       </template> 
     </el-input>
-    <transition name="md-fade-bottom">
+    <transition name="el-zoom-in-top">
       <ul
         v-if="suggestionVisible"
         class="el-autocomplete__suggestions"
