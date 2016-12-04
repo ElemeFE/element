@@ -83,6 +83,20 @@ export default {
     };
   },
 
+  watch: {
+    defaultFileList: {
+      immediate: true,
+      handler(fileList) {
+        this.fileList = fileList.map(item => {
+          item.status = 'finished';
+          item.percentage = 100;
+          item.uid = Date.now() + this.tempIndex++;
+          return item;
+        });
+      }
+    }
+  },
+
   methods: {
     handleStart(file) {
       file.uid = Date.now() + this.tempIndex++;
@@ -95,13 +109,11 @@ export default {
         showProgress: true
       };
 
-      if (this.thumbnailMode) {
-        try {
-          _file.url = URL.createObjectURL(file);
-        } catch (err) {
-          console.log(err);
-          return;
-        }
+      try {
+        _file.url = URL.createObjectURL(file);
+      } catch (err) {
+        console.error(err);
+        return;
       }
 
       this.fileList.push(_file);
@@ -155,20 +167,6 @@ export default {
     },
     clearFiles() {
       this.fileList = [];
-    }
-  },
-
-  watch: {
-    defaultFileList: {
-      immediate: true,
-      handler(fileList) {
-        this.fileList = fileList.map(item => {
-          item.status = 'finished';
-          item.percentage = 100;
-          item.uid = Date.now() + this.tempIndex++;
-          return item;
-        });
-      }
     }
   },
 
