@@ -36,20 +36,21 @@
       @when horizontal {
         top: 15px;
         height: 2px;
-        left: 30px;
+        left: 32px;
         right: 0;
       }
 
       @when vertical {
         width: 2px;
         box-sizing: border-box;
-        top: 30px;
+        top: 32px;
         bottom: 0;
+        left: 15px;
       }
     }
 
     @e line-inner {
-      display: inherit;
+      display: block;
       border-width: 1px;
       border-style: solid;
       border-color: inherit;
