@@ -89,6 +89,7 @@
         timeout: null,
         hovering: false,
         dragging: false,
+        dragged: false,
         startX: 0,
         currentX: 0,
         startPos: 0,
@@ -155,7 +156,7 @@
       },
 
       onSliderClick(event) {
-        if (this.disabled) return;
+        if (this.disabled || this.dragged) return;
         const sliderOffsetLeft = this.$refs.slider.getBoundingClientRect().left;
         this.setPosition((event.clientX - sliderOffsetLeft) / this.$sliderWidth * 100);
       },
@@ -171,6 +172,7 @@
 
       onDragStart(event) {
         this.dragging = true;
+        this.dragged = true;
         this.startX = event.clientX;
         this.startPos = parseInt(this.currentPosition, 10);
       },
@@ -192,6 +194,10 @@
           this.setPosition(this.newPos);
           window.removeEventListener('mousemove', this.onDragging);
           window.removeEventListener('mouseup', this.onDragEnd);
+
+          window.setTimeout(() => {
+            this.dragged = false;
+          }, 0);
         }
       },
 
