@@ -256,7 +256,7 @@
           this.resetHoverIndex();
           if (!this.multiple) {
             this.getOverflows();
-            if (this.selected && this.selected.value) {
+            if (this.selected) {
               this.selectedLabel = this.selected.currentLabel;
             }
           }
@@ -285,6 +285,10 @@
         this.optionsAllDisabled = val.length === val.filter(item => item.disabled === true).length;
         if (this.multiple) {
           this.resetInputHeight();
+        }
+        let inputs = this.$el.querySelectorAll('input');
+        if ([].indexOf.call(inputs, document.activeElement) === -1) {
+          this.selected = this.getSelected();
         }
       }
     },
@@ -325,26 +329,31 @@
         }
       },
 
+      getOption(value) {
+        const option = this.options.filter(option => option.value === value)[0];
+        if (option) return option;
+        const label = typeof value === 'string' || typeof value === 'number'
+          ? value : '';
+        let newOption = {
+          value: value,
+          currentLabel: label
+        };
+        if (this.multiple) {
+          newOption.hitState = false;
+        }
+        return newOption;
+      },
+
       getSelected() {
         if (!this.multiple) {
-          let option = this.options.filter(option => option.value === this.value)[0] ||
-              { value: this.value, currentLabel: this.value };
+          let option = this.getOption(this.value);
           this.selectedLabel = option.currentLabel;
           return option;
         }
         let result = [];
         if (Array.isArray(this.value)) {
           this.value.forEach(value => {
-            let option = this.options.filter(option => option.value === value)[0];
-            if (option) {
-              result.push(option);
-            } else {
-              result.push({
-                value: this.value,
-                currentLabel: value,
-                hitState: false
-              });
-            }
+            result.push(this.getOption(value));
           });
         }
         return result;
@@ -555,7 +564,7 @@
       if (this.multiple && !Array.isArray(this.value)) {
         this.$emit('input', []);
       }
-      if (!this.multiple && (!this.value || Array.isArray(this.value))) {
+      if (!this.multiple && Array.isArray(this.value)) {
         this.$emit('input', '');
       }
 
