@@ -129,8 +129,8 @@
         if (this.loading) {
           return this.t('el.select.loading');
         } else {
-          if (this.remote && this.query === '') return false;
-          if (this.filterable && this.filteredOptionsCount === 0) {
+          if (this.remote && this.query === '' && this.options.length === 0) return false;
+          if (this.filterable && this.options.length > 0 && this.filteredOptionsCount === 0) {
             return this.t('el.select.noMatch');
           }
           if (this.options.length === 0) {
@@ -211,7 +211,7 @@
       value(val) {
         if (this.multiple) {
           this.resetInputHeight();
-          if (val.length > 0) {
+          if (val.length > 0 || (this.$refs.input && this.query !== '')) {
             this.currentPlaceholder = '';
           } else {
             this.currentPlaceholder = this.cachedPlaceHolder;
@@ -254,6 +254,13 @@
           this.query = '';
           this.selectedLabel = '';
           this.resetHoverIndex();
+          this.$nextTick(() => {
+            if (this.$refs.input &&
+              this.$refs.input.value === '' &&
+              this.selected.length === 0) {
+              this.currentPlaceholder = this.cachedPlaceHolder;
+            }
+          });
           if (!this.multiple) {
             this.getOverflows();
             if (this.selected) {
