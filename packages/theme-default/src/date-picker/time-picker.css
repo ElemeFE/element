@@ -15,7 +15,6 @@
 
     @e content {
       font-size: 0;
-      display: flex;
       position: relative;
       overflow: hidden;
 

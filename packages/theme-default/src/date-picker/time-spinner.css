@@ -5,7 +5,8 @@
     @e wrapper {
       height: 190px;
       overflow: hidden;
-      flex: 1;
+      display: inline-block;
+      width: calc(100% / 3);
       vertical-align: top;
       position: relative;
       -ms-overflow-style: none;
