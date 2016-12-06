@@ -66,5 +66,18 @@ We have collected some [frequently asked questions](https://github.com/ElemeFE/e
 ## Contribution
 Please make sure to read the [Contributing Guide](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.md) before making a pull request.
 
+## Special Thanks
+English documentation is brought to you by SwiftGG Translation Team. Our special thanks go to these fellows:
+- [raychenfj](https://github.com/raychenfj)
+- [kevin](http://thekevin.cn/)
+- [曾小涛](https://github.com/zengxiaotao)
+- [湾仔王二](https://github.com/wanzaiwanger)
+- [BlooDLine](http://www.ibloodline.com/)
+- [陈铭嘉](https://chenmingjia.github.io/)
+- [千叶知风](http://mpc6.com/)
+- [梁杰](http://numbbbbb.com)
+- [Changing](https://github.com/sunzhuo11)
+- [mmoaay](https://github.com/mmoaay)
+
 ## LICENSE
 MIT
