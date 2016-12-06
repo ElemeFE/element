@@ -26,6 +26,7 @@
         :row-class-name="rowClassName"
         :row-style="rowStyle"
         :highlight="highlightCurrentRow"
+        :column-input-filter="columnInputFilter"
         :style="{ width: layout.bodyWidth ? layout.bodyWidth - (layout.scrollY ? layout.gutterWidth : 0 ) + 'px' : '' }">
       </table-body>
       <div class="el-table__empty-block" v-if="!data || data.length === 0">
@@ -58,6 +59,7 @@
           :highlight="highlightCurrentRow"
           :row-class-name="rowClassName"
           :row-style="rowStyle"
+          :column-input-filter="columnInputFilter"
           :style="{ width: layout.fixedWidth ? layout.fixedWidth + 'px' : '' }">
         </table-body>
       </div>
@@ -89,6 +91,7 @@
           :row-class-name="rowClassName"
           :row-style="rowStyle"
           :highlight="highlightCurrentRow"
+          :column-input-filter="columnInputFilter"
           :style="{ width: layout.rightFixedWidth ? layout.rightFixedWidth + 'px' : '' }">
         </table-body>
       </div>
@@ -157,6 +160,11 @@
         default() {
           return t('el.table.emptyText');
         }
+      },
+
+      columnInputFilter: {
+        type: [Boolean, String],
+        default: false
       }
     },
 

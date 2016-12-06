@@ -160,6 +160,32 @@ TableStore.prototype.mutations = {
     Vue.nextTick(() => this.table.updateScrollY());
   },
 
+  columnFilterChange(states, options) {
+    let { filters } = options;
+    let data = states._data;
+
+    Object.keys(filters).forEach((columnId) => {
+      const column = getColumnById(this.states, columnId);
+      const value = filters[columnId].value;
+      if (column) {
+        if (column.filterMethod) {
+          data = data.filter((row) => {
+            return column.filterMethod(value, row);
+          });
+        } else if (column.property) {
+          data = data.filter((row) => {
+            return (String(row[column.property]).indexOf(value) > -1);
+          });
+        }
+      }
+    });
+
+    states.filteredData = data;
+    states.data = sortData(data, states);
+
+    Vue.nextTick(() => this.table.updateScrollY());
+  },
+
   insertColumn(states, column, index, parent) {
     let array = states._columns;
     if (parent) {

@@ -381,4 +381,8 @@
       }
     }
   }
+
+  .el-table-td__filter {
+    padding: 0 18px;
+  }
 }

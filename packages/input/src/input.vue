@@ -159,6 +159,7 @@
     watch: {
       'value'(val, oldValue) {
         this.currentValue = val;
+        this.$emit('change', val, oldValue);
       },
       'currentValue'(val) {
         this.$nextTick(_ => {
