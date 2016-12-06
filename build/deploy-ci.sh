@@ -38,8 +38,11 @@ if [ "$TRAVIS_TAG" ]; then
   cd temp_web
   git clone -b gh-pages https://$ROT_TOKEN@github.com/ElemeFE/element.git && cd element
   # build sub folder
-  export SUB_FOLDER=$(echo $TRAVIS_TAG | grep -o -E '\d+\.\d+')
+  echo $TRAVIS_TAG
+  export SUB_FOLDER=$(echo "$TRAVIS_TAG" | grep -o -E "\d+\.\d+")
+  echo $SUB_FOLDER
 
+  SUB_FOLDER='1.0'
   mkdir $SUB_FOLDER
   rm -rf *.js *.css *.map static
   rm -rf $SUB_FOLDER/**
