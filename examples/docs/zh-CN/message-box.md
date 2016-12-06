@@ -242,6 +242,7 @@ import { MessageBox } from 'element-ui';
 | title | MessageBox 标题 | string | — | — |
 | message | MessageBox 消息正文内容 | string | — | — |
 | type | 消息类型，用于显示图标 | string | success/info/<br>warning/error | — |
+| callback | 若不使用 Promise，可以使用此参数指定 MessageBox 关闭后的回调 | function(action)，action 的值为'confirm'或'cancel' | — | — |
 | lockScroll | 是否在 MessageBox 出现时将 body 滚动锁定 | boolean | — | true |
 | showCancelButton | 是否显示取消按钮 | boolean | — | false（以 confirm 和 prompt 方式调用时为 true） |
 | showConfirmButton | 是否显示确定按钮 | boolean | — | true |
