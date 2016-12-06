@@ -1,5 +1,17 @@
 ## Changelog
 
+### 1.0.5
+
+*2016-12-06*
+
+- Fixed Select with async options and binding value displaying value instead of label, #1537
+- Fixed Select reports an error when initial binding value is an empty object, #1533
+- Fixed remote filtering Select not showing dropdown in some conditions, #1531
+- Fixed Slider sometimes drifting a small distance after releasing dragging, #1546
+- Fixed Steps style in IE9, #1543
+- Added Upload generating URL for all file types, #1530
+- Fixed TimeSelect style, removed flexbox, #1335
+
 ### 1.0.4
 
 *2016-12-02*

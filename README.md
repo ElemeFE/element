@@ -73,7 +73,7 @@ English documentation is brought to you by SwiftGG Translation Team. Our special
 - [曾小涛](https://github.com/zengxiaotao)
 - [湾仔王二](https://github.com/wanzaiwanger)
 - [BlooDLine](http://www.ibloodline.com/)
-- [陈铭嘉](https://chenmingjia.github.io/)
+- [陈铭嘉](https://chenmingjia.github.io/)
 - [千叶知风](http://mpc6.com/)
 - [梁杰](http://numbbbbb.com)
 - [Changing](https://github.com/sunzhuo11)
