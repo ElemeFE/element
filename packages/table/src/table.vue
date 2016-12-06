@@ -29,7 +29,7 @@
         :style="{ width: layout.bodyWidth ? layout.bodyWidth - (layout.scrollY ? layout.gutterWidth : 0 ) + 'px' : '' }">
       </table-body>
       <div class="el-table__empty-block" v-if="!data || data.length === 0">
-        <span class="el-table__empty-text">{{ emptyText }}</span>
+        <span class="el-table__empty-text">{{ emptyText || t('el.table.emptyText') }}</span>
       </div>
     </div>
     <div class="el-table__fixed" ref="fixedWrapper"
@@ -102,7 +102,7 @@
   import throttle from 'throttle-debounce/throttle';
   import debounce from 'throttle-debounce/debounce';
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
-  import { t } from 'element-ui/src/locale';
+  import Locale from 'element-ui/src/mixins/locale';
   import TableStore from './table-store';
   import TableLayout from './table-layout';
   import TableBody from './table-body';
@@ -114,7 +114,7 @@
   export default {
     name: 'el-table',
 
-    mixins: [Migrating],
+    mixins: [Migrating, Locale],
 
     props: {
       data: {
@@ -152,12 +152,7 @@
 
       highlightCurrentRow: Boolean,
 
-      emptyText: {
-        type: String,
-        default() {
-          return t('el.table.emptyText');
-        }
-      }
+      emptyText: String
     },
 
     components: {
