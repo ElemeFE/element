@@ -157,7 +157,7 @@
       },
 
       onSliderClick(event) {
-        if (this.disabled) return;
+        if (this.disabled || this.dragging) return;
         const sliderOffsetLeft = this.$refs.slider.getBoundingClientRect().left;
         this.setPosition((event.clientX - sliderOffsetLeft) / this.$sliderWidth * 100);
       },
@@ -189,7 +189,13 @@
 
       onDragEnd() {
         if (this.dragging) {
-          this.dragging = false;
+          /*
+           * 防止在 mouseup 后立即触发 click，导致滑块有几率产生一小段位移
+           * 不使用 preventDefault 是因为 mouseup 和 click 没有注册在同一个 DOM 上
+           */
+          setTimeout(() => {
+            this.dragging = false;
+          }, 0);
           this.$refs.tooltip.showPopper = false;
           this.setPosition(this.newPos);
           window.removeEventListener('mousemove', this.onDragging);
