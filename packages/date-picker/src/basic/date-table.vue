@@ -366,8 +366,6 @@
 
         const newDate = new Date(this.year, this.month, 1);
 
-        const clickNormalCell = className.indexOf('prev') === -1 && className.indexOf('next') === -1;
-
         if (className.indexOf('prev') !== -1) {
           if (month === 0) {
             year = year - 1;
@@ -390,7 +388,7 @@
 
         newDate.setDate(parseInt(text, 10));
 
-        if (clickNormalCell && this.selectionMode === 'range') {
+        if (this.selectionMode === 'range') {
           if (this.minDate && this.maxDate) {
             const minDate = new Date(newDate.getTime());
             const maxDate = null;
@@ -419,9 +417,7 @@
             this.rangeState.selecting = true;
             this.markRange(this.minDate);
           }
-        }
-
-        if (selectionMode === 'day') {
+        } else if (selectionMode === 'day') {
           this.$emit('pick', newDate);
         } else if (selectionMode === 'week') {
           var weekNumber = getWeekNumber(newDate);
