@@ -469,6 +469,9 @@ export default {
         this.picker.resetView && this.picker.resetView();
       } else {
         this.picker.value = this.internalValue;
+        if (this.intervalValue && this.internalValue.length && this.internalValue[0]) {
+          this.picker.date = this.internalValue[0];
+        }
       }
 
       this.$nextTick(() => {
