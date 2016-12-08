@@ -3,6 +3,7 @@
     class="el-date-editor"
     :readonly="!editable || readonly"
     :disabled="disabled"
+    :size="size"
     v-clickoutside="handleClose"
     :placeholder="placeholder"
     @focus="handleFocus"
@@ -184,6 +185,7 @@ export default {
   mixins: [Emitter, NewPopper],
 
   props: {
+    size: String,
     format: String,
     readonly: Boolean,
     placeholder: String,
