@@ -183,6 +183,7 @@
     data() {
       return {
         options: [],
+        cachedOptions: [],
         selected: this.multiple ? [] : {},
         isSelect: true,
         inputLength: 20,
@@ -337,7 +338,8 @@
       },
 
       getOption(value) {
-        const option = this.options.filter(option => option.value === value)[0];
+        const option = (this.remote ? this.cachedOptions : this.options)
+          .filter(option => option.value === value)[0];
         if (option) return option;
         const label = typeof value === 'string' || typeof value === 'number'
           ? value : '';
