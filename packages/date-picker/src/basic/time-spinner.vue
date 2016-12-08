@@ -136,12 +136,10 @@
       },
 
       handleScroll(type) {
-        window.setTimeout(() => {
-          const ajust = {};
+        const ajust = {};
 
-          ajust[`${type}s`] = Math.min(Math.floor((this.$refs[type].scrollTop - 80) / 32 + 3), 59);
-          this.$emit('change', ajust);
-        }, 0);
+        ajust[`${type}s`] = Math.min(Math.floor((this.$refs[type].scrollTop - 80) / 32 + 3), 59);
+        this.$emit('change', ajust);
       },
 
       ajustScrollTop() {

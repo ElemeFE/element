@@ -451,11 +451,10 @@ export default {
           this.picker.resetView && this.picker.resetView();
         });
 
+        const refInput = this.reference.querySelector('input');
         this.picker.$on('select-range', (start, end) => {
-          setTimeout(() => {
-            this.reference.setSelectionRange(start, end);
-            this.reference.focus();
-          }, 0);
+          refInput.setSelectionRange(start, end);
+          refInput.focus();
         });
       } else {
         this.pickerVisible = this.picker.visible = true;
