@@ -45,7 +45,7 @@
       cursor: pointer;
 
       &:hover {
-        background-color: #e5e9f2;
+        background-color: var(--datepicker-cell-hover-color);
       }
 
       &.active {

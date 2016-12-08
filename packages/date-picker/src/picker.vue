@@ -1,35 +1,25 @@
 <template>
-  <span
+  <el-input
     class="el-date-editor"
+    :readonly="!editable || readonly"
+    :disabled="disabled"
     v-clickoutside="handleClose"
-    :class="{
-      'is-have-trigger': haveTrigger,
-      'is-active': pickerVisible,
-      'is-filled': !!this.internalValue
-    }">
-
-    <input
-      class="el-date-editor__editor"
-      :class="{ 'is-disabled': disabled }"
-      :readonly="!editable || readonly"
-      :disabled="disabled"
-      type="text"
-      :placeholder="placeholder"
-      @focus="handleFocus"
-      @blur="handleBlur"
-      @keydown="handleKeydown"
-      ref="reference"
-      v-model.lazy="visualValue" />
-
-    <span
+    :placeholder="placeholder"
+    @focus="handleFocus"
+    @blur="handleBlur"
+    @keydown.native="handleKeydown"
+    :value="visualValue"
+    @change.native="visualValue = $event.target.value"
+    ref="reference">
+    <i slot="icon"
+      class="el-input__icon"
       @click.stop="handleClickIcon"
-      class="el-date-editor__trigger el-icon"
       :class="[showClose ? 'el-icon-close' : triggerClass]"
       @mouseenter="handleMouseEnterIcon"
       @mouseleave="showClose = false"
       v-if="haveTrigger">
-    </span>
-  </span>
+    </i>
+  </el-input>
 </template>
 
 <script>
@@ -38,6 +28,7 @@ import Clickoutside from 'element-ui/src/utils/clickoutside';
 import { formatDate, parseDate, getWeekNumber } from './util';
 import Popper from 'element-ui/src/utils/vue-popper';
 import Emitter from 'element-ui/src/mixins/emitter';
+import ElInput from 'element-ui/packages/input';
 
 const NewPopper = {
   props: {
@@ -210,6 +201,8 @@ export default {
     pickerOptions: {}
   },
 
+  components: { ElInput },
+
   directives: { Clickoutside },
 
   data() {
@@ -240,6 +233,10 @@ export default {
   },
 
   computed: {
+    reference() {
+      return this.$refs.reference.$el;
+    },
+
     valueIsEmpty() {
       const val = this.internalValue;
       if (Array.isArray(val)) {
@@ -409,7 +406,7 @@ export default {
         this.panel.defaultValue = this.internalValue;
         this.picker = new Vue(this.panel).$mount(document.createElement('div'));
         this.popperElm = this.picker.$el;
-        this.picker.width = this.$refs.reference.getBoundingClientRect().width;
+        this.picker.width = this.reference.getBoundingClientRect().width;
         this.picker.showTime = this.type === 'datetime' || this.type === 'datetimerange';
         this.picker.selectionMode = this.selectionMode;
         if (this.format) {
@@ -454,8 +451,8 @@ export default {
 
         this.picker.$on('select-range', (start, end) => {
           setTimeout(() => {
-            this.$refs.reference.setSelectionRange(start, end);
-            this.$refs.reference.focus();
+            this.reference.setSelectionRange(start, end);
+            this.reference.focus();
           }, 0);
         });
       } else {
