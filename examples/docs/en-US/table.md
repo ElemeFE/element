@@ -875,7 +875,7 @@ You can also select multiple rows.
     @selection-change="handleSelectionChange">
     <el-table-column
       type="selection"
-      width="50">
+      width="55">
     </el-table-column>
     <el-table-column
       inline-template
