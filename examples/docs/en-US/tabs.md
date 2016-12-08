@@ -143,4 +143,5 @@ Border card tabs.
 |---------- |-------- |---------- |-------------  |-------- |
 | label     | title of the tab   | string   | — |    —     |
 | label-content | render function for tab title | Function(h) | - | - |
+| disabled | whether Tab is disabled | boolean | - | false |
 | name      | identifier corresponding to the activeName of Tabs, representing the alias of the tab-pane | string | — | ordinal number of the tab-pane in the sequence, i.e. the first tab-pane is '1' |

@@ -39,12 +39,21 @@
           let nextChild = tabs[index];
           let prevChild = tabs[index - 1];
 
-          this.currentName = nextChild ? nextChild.index : prevChild ? prevChild.index : '-1';
+          while (prevChild && prevChild.disabled) {
+            prevChild = tabs[tabs.indexOf(prevChild) - 1];
+          }
+
+          this.currentName = nextChild
+            ? nextChild.index
+            : prevChild
+            ? prevChild.index
+            : '-1';
         }
         this.$emit('tab-remove', tab);
         this.$forceUpdate();
       },
       handleTabClick(tab, event) {
+        if (tab.disabled) return;
         this.currentName = tab.index;
         this.$emit('tab-click', tab, event);
       },
