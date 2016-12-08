@@ -465,10 +465,10 @@ export default {
 
       if (this.internalValue instanceof Date) {
         this.picker.date = new Date(this.internalValue.getTime());
-        this.picker.resetView && this.picker.resetView();
       } else {
         this.picker.value = this.internalValue;
       }
+      this.picker.resetView && this.picker.resetView();
 
       this.$nextTick(() => {
         this.picker.ajustScrollTop && this.picker.ajustScrollTop();

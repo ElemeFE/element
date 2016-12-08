@@ -282,6 +282,7 @@
         } else if (Array.isArray(newVal)) {
           this.minDate = newVal[0] ? toDate(newVal[0]) : null;
           this.maxDate = newVal[1] ? toDate(newVal[1]) : null;
+          this.date = new Date(this.minDate);
         }
       }
     },
