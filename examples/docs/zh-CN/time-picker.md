@@ -153,6 +153,7 @@
 | readonly | 完全只读 | boolean | — | false |
 | disabled | 禁用 | boolean | - | false |
 | editable | 文本框可输入 | boolean | - | true |
+| size          | 输入框尺寸     | string          | large, small, mini  | — |
 | placeholder | 占位内容 | string | — | — |
 | format | 时间格式化(TimePicker) | string | 小时：`HH`，分：`mm`，秒：`ss` | 'HH:mm:ss' |
 | value | 绑定值 | TimePicker: Date<br>TimeSelect: String | - | - |

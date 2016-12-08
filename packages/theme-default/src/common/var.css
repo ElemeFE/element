@@ -15,13 +15,13 @@
   --color-success: #13ce66;
   --color-warning: #f7ba2a;
   --color-danger: #ff4949;
-  --color-info: #50BFFF;
+  --color-info: #50bfff;
   --color-blue: #2e90fe;
   --color-blue-light: #5da9ff;
   --color-blue-lighter: rgba(var(--color-blue), 0.12);
   --color-white: #fff;
   --color-black: #000;
-  --color-grey: #C0CCDA;
+  --color-grey: #c0ccda;
 
   /* Link
   -------------------------- */
@@ -140,7 +140,7 @@
 
   --select-input-color: var(--color-grey);
   --select-multiple-input-color: #666;
-  --select-input-focus-background: #2ea0ff;
+  --select-input-focus-background: var(--color-primary);
   --select-input-font-size: 12px;
 
   --select-tag-height: 24px;
@@ -164,7 +164,7 @@
   --select-dropdown-max-height: 274px;
   --select-dropdown-padding: 6px 0;
   --select-dropdown-empty-padding: 10px 0;
-  --select-dropdown-border: solid 1px #d3dce6;
+  --select-dropdown-border: solid 1px var(--disabled-border-base);
 
   /* Alert
   -------------------------- */
@@ -256,7 +256,7 @@
   --input-disabled-fill: var(--disabled-fill-base);
   --input-disabled-border: var(--disabled-border-base);
   --input-disabled-color: var(--disabled-color-base);
-  --input-disabled-placeholder-color: #C0CCDA;
+  --input-disabled-placeholder-color: var(--color-grey);
 
   --input-large-font-size: 16px;
   --input-large-height: 42px;
@@ -339,9 +339,9 @@
   --button-ghost-fill: transparent;
   --button-ghost-border: none;
 
-  --button-disabled-color: #C0CCDA;
+  --button-disabled-color: var(--color-grey);
   --button-disabled-fill: #EFF2F7;
-  --button-disabled-border: #D3DCE6;
+  --button-disabled-border: var(--disabled-border-base);
 
   --button-primary-border: var(--color-primary);
   --button-primary-color: var(--color-white);
@@ -374,7 +374,7 @@
   /* Switch
  -------------------------- */
   --switch-on-color: var(--color-primary);
-  --switch-off-color: #C0CCDA;
+  --switch-off-color: var(--color-grey);
   --switch-disabled-color: #E5E9F3;
   --switch-disabled-text-color: #F9FAFC;
 
@@ -413,7 +413,7 @@
   --pagination-button-size: 28px;
   --pagination-button-disabled-color: #e4e4e4;
   --pagination-button-disabled-fill: var(--color-white);
-  --pagination-border-color: #D3DCE6;
+  --pagination-border-color: var(--disabled-border-base);
   --pagination-hover-fill: var(--color-primary);
   --pagination-hover-color: var(--color-white);
 
@@ -421,7 +421,7 @@
  -------------------------- */
   --popover-fill: var(--color-white);
   --popover-font-size: 12px;
-  --popover-border-color: #d3dce6;
+  --popover-border-color: var(--disabled-border-base);
   --popover-arrow-size: 6px;
   --popover-padding: 10px;
   --popover-title-font-size: 13px;
@@ -511,7 +511,7 @@
   --------------------------*/
   --menu-item-color: var(--link-color);
   --menu-item-fill: #eff2f7;
-  --menu-item-hover-fill: #d3dce6;
+  --menu-item-hover-fill: var(--disabled-border-base);
   --submenu-item-fill: #e5e9f2;
 
   --dark-menu-item-color: var(--link-color);
@@ -533,14 +533,13 @@
   --datepicker-off-color: #ddd;
   --datepicker-header-color: var(--border-color-hover);
   --datepicker-icon-color: #99a9bf;
-  --datepicker-trigger-color: #c0ccda;
-  --datepicker-border-color: #d3dce6;
+  --datepicker-border-color: var(--disabled-border-base);
   --datepicker-inner-border-color: #e4e4e4;
   --datepicker-cell-hover-color: #e5e9f2;
   --datepicker-inrange-color: #D3ECFF;
   --datepicker-inrange-hover-color: #AFDCFF;
   --datepicker-active-color: var(--color-primary);
-  --datepicker-text-hover-color: #20a0ff;
+  --datepicker-text-hover-color: var(--color-primary);
 
   /* Loading
   --------------------------*/

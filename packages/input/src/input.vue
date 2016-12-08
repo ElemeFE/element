@@ -15,7 +15,9 @@
         <slot name="prepend"></slot>
       </div>
       <!-- input 图标 -->
-      <i class="el-input__icon" :class="'el-icon-' + icon" v-if="icon" @click="handleIconClick"></i>
+      <slot name="icon">
+        <i class="el-input__icon" :class="'el-icon-' + icon" v-if="icon" @click="handleIconClick"></i>
+      </slot>
       <input
         v-if="type !== 'textarea'"
         class="el-input__inner"

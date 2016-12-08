@@ -1,5 +1,8 @@
 <template>
-  <transition name="el-zoom-in-top" @after-leave="$emit('dodestroy')">
+  <transition
+    name="el-zoom-in-top"
+    @before-enter="panelCreated"
+    @after-leave="$emit('dodestroy')">
     <div
       v-show="visible"
       :style="{ width: width + 'px' }"
@@ -52,6 +55,7 @@
 <script type="text/babel">
   import { parseDate, limitRange } from '../util';
   import Locale from 'element-ui/src/mixins/locale';
+  import TimeSpinner from '../basic/time-spinner';
 
   const MIN_TIME = parseDate('00:00:00', 'HH:mm:ss');
   const MAX_TIME = parseDate('23:59:59', 'HH:mm:ss');
@@ -75,9 +79,7 @@
   export default {
     mixins: [Locale],
 
-    components: {
-      TimeSpinner: require('../basic/time-spinner')
-    },
+    components: { TimeSpinner },
 
     computed: {
       showSeconds() {
@@ -86,26 +88,6 @@
     },
 
     props: ['value'],
-
-    watch: {
-      value(val) {
-        const time = clacTime(val);
-        if (time.minTime === this.minTime && time.maxTime === this.maxTime) {
-          return;
-        }
-
-        this.handleMinChange({
-          hours: time.minTime.getHours(),
-          minutes: time.minTime.getMinutes(),
-          seconds: time.minTime.getSeconds()
-        });
-        this.handleMaxChange({
-          hours: time.maxTime.getHours(),
-          minutes: time.maxTime.getMinutes(),
-          seconds: time.maxTime.getSeconds()
-        });
-      }
-    },
 
     data() {
       const time = clacTime(this.$options.defaultValue);
@@ -127,6 +109,24 @@
     },
 
     methods: {
+      panelCreated() {
+        const time = clacTime(this.value);
+        if (time.minTime === this.minTime && time.maxTime === this.maxTime) {
+          return;
+        }
+
+        this.handleMinChange({
+          hours: time.minTime.getHours(),
+          minutes: time.minTime.getMinutes(),
+          seconds: time.minTime.getSeconds()
+        });
+        this.handleMaxChange({
+          hours: time.maxTime.getHours(),
+          minutes: time.maxTime.getMinutes(),
+          seconds: time.maxTime.getSeconds()
+        });
+      },
+
       handleClear() {
         this.handleCancel();
       },

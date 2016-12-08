@@ -29,23 +29,6 @@
       margin: 0;
     }
 
-    @e editor {
-      position: relative;
-      border: 1px solid #c0ccda;
-      border-radius: 4px;
-      padding: 5px 10px;
-      box-sizing: border-box;
-      height: 28px;
-      outline: none;
-      appearance: none;
-      transition: border 0.3s;
-      width: 100%;
-
-      &:hover {
-        border-color: #20a0ff;
-      }
-    }
-
     @e header {
       position: relative;
       text-align: center;
@@ -122,7 +105,7 @@
         top: 13px;
         right: 0;
         z-index: 1;
-        background: #fff;
+        background: var(--color-white);
       }
     }
   }

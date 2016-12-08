@@ -233,6 +233,7 @@
 | readonly | 完全只读 | boolean | — | false |
 | disabled | 禁用 | boolean | - | false |
 | editable | 文本框可输入 | boolean | - | true |
+| size          | 输入框尺寸     | string          | large, small, mini  | — |
 | placeholder | 占位内容 | string | — | — |
 | type | 显示类型 | string | year/month/date/week/<br>datetime/datetimerange/daterange | date |
 | format | 时间日期格式化 | string | 年 `yyyy`，月 `MM`，日 `dd`，<br>小时 `HH`，分 `mm`，秒 `ss` | yyyy-MM-dd |

@@ -32,23 +32,6 @@
       padding: 0 5px;
     }
 
-    @e editor {
-      position: relative;
-      border: 1px solid #c0ccda;
-      border-radius: 4px;
-      padding: 5px 10px;
-      box-sizing: border-box;
-      height: 28px;
-      outline: none;
-      appearance: none;
-      transition: border 0.3s;
-      width: 100%;
-
-      &:hover {
-        border-color: #20a0ff;
-      }
-    }
-
     @e time-header {
       position: relative;
       border-bottom: 1px solid var(--datepicker-inner-border-color);

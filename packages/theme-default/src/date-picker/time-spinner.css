@@ -37,12 +37,12 @@
       font-size: 12px;
 
       &:hover:not(.disabled):not(.active) {
-        background: #E5E9F2;
+        background: var(--datepicker-cell-hover-color);
         cursor: pointer;
       }
 
       &.active:not(.disabled) {
-        color: #fff;
+        color: var(--color-white);
       }
 
       &.disabled {

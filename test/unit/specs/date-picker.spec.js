@@ -82,7 +82,7 @@ describe('DatePicker', () => {
       const $el = vm.$refs.compo.picker.$el;
       $el.querySelector('td.available').click();
       vm.$nextTick(_ => {
-        vm.$el.querySelector('.el-date-editor__trigger').click();
+        vm.$el.querySelector('.el-input__icon').click();
         setTimeout(_ => {
           expect(vm.value).to.empty;
           done();
@@ -264,7 +264,7 @@ describe('DatePicker', () => {
       const input = vm.picker.$el.querySelectorAll('.el-date-picker__editor-wrap input')[1];
 
       input.value = '20:30:33';
-      triggerEvent(input, 'change');
+      triggerEvent(input, 'change', true);
       setTimeout(_ => {
         expect(vm.picker.date.getHours()).to.equal(20);
         expect(vm.picker.date.getMinutes()).to.equal(30);
@@ -277,7 +277,7 @@ describe('DatePicker', () => {
       const input = vm.picker.$el.querySelector('.el-date-picker__editor-wrap input');
 
       input.value = '2017-2-2';
-      triggerEvent(input, 'change');
+      triggerEvent(input, 'change', true);
       setTimeout(_ => {
         expect(vm.picker.date.getFullYear()).to.equal(2017);
         expect(vm.picker.date.getMonth()).to.equal(1);
@@ -432,7 +432,7 @@ describe('DatePicker', () => {
       const input = vm.picker.$el.querySelectorAll('.el-date-range-picker__editors-wrap input')[1];
 
       input.value = '10:22:14';
-      triggerEvent(input, 'change');
+      triggerEvent(input, 'change', true);
       setTimeout(_ => {
         expect(vm.picker.minDate.getHours()).to.equal(10);
         expect(vm.picker.minDate.getMinutes()).to.equal(22);
@@ -445,7 +445,7 @@ describe('DatePicker', () => {
       const input = vm.picker.$el.querySelectorAll('.el-date-range-picker__editors-wrap input')[3];
 
       input.value = '10:22:14';
-      triggerEvent(input, 'change');
+      triggerEvent(input, 'change', true);
       setTimeout(_ => {
         expect(vm.picker.maxDate.getHours()).to.equal(10);
         expect(vm.picker.maxDate.getMinutes()).to.equal(22);
@@ -547,7 +547,7 @@ describe('DatePicker', () => {
         setTimeout(_ => {
           triggerEvent(input, 'input');
           input.value = '1989-6-4';
-          triggerEvent(input, 'change');
+          triggerEvent(input, 'change', true);
 
           setTimeout(_ => {
             const minDate = vm.picker.minDate;
@@ -581,7 +581,7 @@ describe('DatePicker', () => {
           setTimeout(_ => {
             triggerEvent(input, 'input');
             input.value = '1989-6-4';
-            triggerEvent(input, 'change');
+            triggerEvent(input, 'change', true);
             setTimeout(_ => {
               expect(vm.picker.maxDate > vm.picker.minDate).to.true;
               done();

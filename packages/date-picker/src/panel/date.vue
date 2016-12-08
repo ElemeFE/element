@@ -22,20 +22,20 @@
         <div class="el-picker-panel__body">
           <div class="el-date-picker__time-header" v-if="showTime">
             <span class="el-date-picker__editor-wrap">
-              <input
-                :placehoder="t('el.datepicker.selectDate')"
-                type="text"
-                v-model.lazy="visibleDate"
-                class="el-date-picker__editor">
+              <el-input
+                :placeholder="t('el.datepicker.selectDate')"
+                :value="visibleDate"
+                size="small"
+                @change.native="visibleDate = $event.target.value" />
             </span>
             <span class="el-date-picker__editor-wrap">
-              <input
+              <el-input
                 ref="input"
                 @focus="timePickerVisible = !timePickerVisible"
-                v-model.lazy="visibleTime"
-                :placehoder="t('el.datepicker.selectTime')"
-                type="text"
-                class="el-date-picker__editor">
+                :placeholder="t('el.datepicker.selectTime')"
+                :value="visibleTime"
+                size="small"
+                @change.native="visibleTime = $event.target.value" />
               <time-picker
                 ref="timepicker"
                 :date="date"
@@ -128,6 +128,11 @@
 <script type="text/babel">
   import { formatDate, parseDate } from '../util';
   import Locale from 'element-ui/src/mixins/locale';
+  import ElInput from 'element-ui/packages/input';
+  import TimePicker from './time';
+  import YearTable from '../basic/year-table';
+  import MonthTable from '../basic/month-table';
+  import DateTable from '../basic/date-table';
 
   export default {
     mixins: [Locale],
@@ -137,7 +142,7 @@
         /* istanbul ignore if */
         if (!val) return;
         this.$nextTick(_ => {
-          const inputElm = this.$refs.input;
+          const inputElm = this.$refs.input.$el;
           if (inputElm) {
             this.pickerWidth = inputElm.getBoundingClientRect().width + 10;
           }
@@ -345,10 +350,7 @@
     },
 
     components: {
-      TimePicker: require('./time'),
-      YearTable: require('../basic/year-table'),
-      MonthTable: require('../basic/month-table'),
-      DateTable: require('../basic/date-table')
+      TimePicker, YearTable, MonthTable, DateTable, ElInput
     },
 
     mounted() {
