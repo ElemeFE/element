@@ -102,27 +102,17 @@
 
     computed: {
       iconClass() {
-        return this.showCloseIcon ? 'circle-close' : (this.remote && this.filterable ? '' : 'caret-top');
-      },
-
-      debounce() {
-        return this.remote ? 300 : 0;
-      },
-
-      showCloseIcon() {
         let criteria = this.clearable &&
+          !this.disabled &&
           this.inputHovering &&
           !this.multiple &&
           this.value !== undefined &&
           this.value !== '';
-        if (!this.$el) return false;
-        this.$nextTick(() => {
-          let icon = this.$el.querySelector('.el-input__icon');
-          if (icon) {
-            criteria ? addClass(icon, 'is-show-close') : removeClass(icon, 'is-show-close');
-          }
-        });
-        return criteria;
+        return criteria ? 'circle-close is-show-close' : (this.remote && this.filterable ? '' : 'caret-top');
+      },
+
+      debounce() {
+        return this.remote ? 300 : 0;
       },
 
       emptyText() {
@@ -217,13 +207,13 @@
           } else {
             this.currentPlaceholder = this.cachedPlaceHolder;
           }
+          this.dispatch('ElFormItem', 'el.form.change', val);
         }
-        this.selected = this.getSelected();
+        this.setSelected();
         if (this.filterable && !this.multiple) {
           this.inputLength = 20;
         }
         this.$emit('change', val);
-        this.dispatch('ElFormItem', 'el.form.change', val);
       },
 
       query(val) {
@@ -296,7 +286,7 @@
         }
         let inputs = this.$el.querySelectorAll('input');
         if ([].indexOf.call(inputs, document.activeElement) === -1) {
-          this.selected = this.getSelected();
+          this.setSelected();
         }
       }
     },
@@ -338,8 +328,7 @@
       },
 
       getOption(value) {
-        const option = (this.remote ? this.cachedOptions : this.options)
-          .filter(option => option.value === value)[0];
+        const option = this.cachedOptions.filter(option => option.value === value)[0];
         if (option) return option;
         const label = typeof value === 'string' || typeof value === 'number'
           ? value : '';
@@ -353,11 +342,12 @@
         return newOption;
       },
 
-      getSelected() {
+      setSelected() {
         if (!this.multiple) {
           let option = this.getOption(this.value);
           this.selectedLabel = option.currentLabel;
-          return option;
+          this.selected = option;
+          return;
         }
         let result = [];
         if (Array.isArray(this.value)) {
@@ -365,11 +355,11 @@
             result.push(this.getOption(value));
           });
         }
-        return result;
+        this.selected = result;
       },
 
       handleIconClick(event) {
-        if (this.iconClass === 'circle-close') {
+        if (this.iconClass.indexOf('circle-close') > -1) {
           this.deleteSelected(event);
         } else {
           this.toggleMenu();
@@ -535,7 +525,6 @@
       deleteSelected(event) {
         event.stopPropagation();
         this.$emit('input', '');
-        this.$emit('change', '');
         this.visible = false;
       },
 
@@ -576,6 +565,7 @@
       if (!this.multiple && Array.isArray(this.value)) {
         this.$emit('input', '');
       }
+      this.setSelected();
 
       this.debouncedOnInputChange = debounce(this.debounce, () => {
         this.onInputChange();
@@ -590,7 +580,6 @@
         this.currentPlaceholder = '';
       }
       addResizeListener(this.$el, this.resetInputWidth);
-      this.selected = this.getSelected();
       if (this.remote && this.multiple) {
         this.resetInputHeight();
       }
