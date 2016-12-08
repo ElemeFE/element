@@ -14,7 +14,7 @@
     ref="reference">
     <i slot="icon"
       class="el-input__icon"
-      @click.stop="handleClickIcon"
+      @click="handleClickIcon"
       :class="[showClose ? 'el-icon-close' : triggerClass]"
       @mouseenter="handleMouseEnterIcon"
       @mouseleave="showClose = false"
