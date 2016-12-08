@@ -766,7 +766,7 @@ Form component allows you to verify your data, helping you find and correct erro
     },
     methods: {
       handleSubmit3(ev) {
-        this.$refs.ruleForm.validate((valid) => {
+        this.$refs.dynamicForm.validate((valid) => {
           if (valid) {
             alert('submit!');
           } else {

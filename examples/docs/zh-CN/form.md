@@ -756,7 +756,7 @@
     },
     methods: {
       handleSubmit3(ev) {
-        this.$refs.ruleForm.validate((valid) => {
+        this.$refs.dynamicForm.validate((valid) => {
           if (valid) {
             alert('submit!');
           } else {
