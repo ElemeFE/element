@@ -6,7 +6,8 @@
       label: String,
       labelContent: Function,
       name: String,
-      closable: Boolean
+      closable: Boolean,
+      disabled: Boolean
     },
 
     data() {

@@ -59,6 +59,11 @@
         color: #1f2d3d;
         cursor: pointer;
       }
+
+      @when disabled {
+        color: var(--disabled-color-base);
+        cursor: default;
+      }
     }
     @e content {
       overflow: hidden;
