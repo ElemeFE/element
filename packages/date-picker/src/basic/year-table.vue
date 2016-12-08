@@ -67,17 +67,17 @@
         date.setFullYear(year);
         style.disabled = typeof this.disabledDate === 'function' &&
           this.disabledDate(date);
-        style.current = this.year === year;
+        style.current = Number(this.year) === year;
 
         return style;
       },
 
       nextTenYear() {
-        this.$emit('pick', this.year + 10, false);
+        this.$emit('pick', Number(this.year) + 10, false);
       },
 
       prevTenYear() {
-        this.$emit('pick', this.year - 10, false);
+        this.$emit('pick', Number(this.year) - 10, false);
       },
 
       handleYearTableClick(event) {
