@@ -12,7 +12,7 @@
 
 ## Switch
 
-Switch is used for switching between two opposing states. 
+Switch is used for switching between two opposing states.
 
 ### Basic usage
 
@@ -45,7 +45,7 @@ Switch is used for switching between two opposing states.
 
 ### Disabled
 
-:::demo Adding the `disabled` attribute disables Switch. 
+:::demo Adding the `disabled` attribute disables Switch.
 
 ```html
 <el-switch
