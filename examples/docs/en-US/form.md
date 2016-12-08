@@ -537,7 +537,7 @@ Form component allows you to verify your data, helping you find and correct erro
       </el-form-item>
     </el-col>
   </el-form-item>
-  <el-form-item label="Instant delivery">
+  <el-form-item label="Instant delivery" prop="delivery">
     <el-switch on-text="" off-text="" v-model="ruleForm.delivery"></el-switch>
   </el-form-item>
   <el-form-item label="Activity type" prop="type">

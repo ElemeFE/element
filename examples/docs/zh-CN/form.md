@@ -530,7 +530,7 @@
       </el-form-item>
     </el-col>
   </el-form-item>
-  <el-form-item label="即时配送">
+  <el-form-item label="即时配送" prop="delivery">
     <el-switch on-text="" off-text="" v-model="ruleForm.delivery"></el-switch>
   </el-form-item>
   <el-form-item label="活动性质" prop="type">
