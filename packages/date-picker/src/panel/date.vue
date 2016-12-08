@@ -23,7 +23,7 @@
           <div class="el-date-picker__time-header" v-if="showTime">
             <span class="el-date-picker__editor-wrap">
               <el-input
-                :placehoder="t('el.datepicker.selectDate')"
+                :placeholder="t('el.datepicker.selectDate')"
                 :value="visibleDate"
                 size="small"
                 @change.native="visibleDate = $event.target.value" />
@@ -32,7 +32,7 @@
               <el-input
                 ref="input"
                 @focus="timePickerVisible = !timePickerVisible"
-                :placehoder="t('el.datepicker.selectTime')"
+                :placeholder="t('el.datepicker.selectTime')"
                 :value="visibleTime"
                 size="small"
                 @change.native="visibleTime = $event.target.value" />

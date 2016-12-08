@@ -69,10 +69,6 @@ const DATE_FORMATTER = function(value, format) {
   return formatDate(value, format);
 };
 const DATE_PARSER = function(text, format) {
-  text = text.split(':');
-  if (text.length > 1) text = text.map(item => item.slice(-2));
-  text = text.join(':');
-
   return parseDate(text, format);
 };
 const RANGE_FORMATTER = function(value, format) {
@@ -224,7 +220,6 @@ export default {
       if (!val && this.picker && typeof this.picker.handleClear === 'function') {
         this.picker.handleClear();
       }
-      this.dispatch('ElFormItem', 'el.form.change');
     },
     value: {
       immediate: true,
@@ -239,10 +234,15 @@ export default {
       return this.$refs.reference.$el;
     },
 
+    refInput() {
+      if (this.reference) return this.reference.querySelector('input');
+      return {};
+    },
+
     valueIsEmpty() {
       const val = this.internalValue;
       if (Array.isArray(val)) {
-        for (let i = 0, j = val.length; i < j; i++) {
+        for (let i = 0, len = val.length; i < len; i++) {
           if (val[i]) {
             return false;
           }
@@ -281,6 +281,7 @@ export default {
     visualValue: {
       get() {
         const value = this.internalValue;
+        if (!value) return;
         const formatter = (
           TYPE_VALUE_RESOLVER_MAP[this.type] ||
           TYPE_VALUE_RESOLVER_MAP['default']
@@ -322,6 +323,7 @@ export default {
     handleMouseEnterIcon() {
       if (this.readonly || this.disabled) return;
       if (!this.valueIsEmpty) {
+        this.visualValue = this.refInput.value;
         this.showClose = true;
       }
     },
@@ -357,9 +359,6 @@ export default {
     handleKeydown(event) {
       const keyCode = event.keyCode;
       const target = event.target;
-      let selectionStart = target.selectionStart;
-      let selectionEnd = target.selectionEnd;
-      let length = target.value.length;
 
       // tab
       if (keyCode === 9) {
@@ -368,30 +367,6 @@ export default {
       } else if (keyCode === 13) {
         this.pickerVisible = this.picker.visible = false;
         this.visualValue = target.value;
-        target.blur();
-      // left
-      } else if (keyCode === 37) {
-        event.preventDefault();
-
-        if (selectionEnd === length && selectionStart === length) {
-          target.selectionStart = length - 2;
-        } else if (selectionStart >= 3) {
-          target.selectionStart -= 3;
-        } else {
-          target.selectionStart = 0;
-        }
-        target.selectionEnd = target.selectionStart + 2;
-      // right
-      } else if (keyCode === 39) {
-        event.preventDefault();
-        if (selectionEnd === 0 && selectionStart === 0) {
-          target.selectionEnd = 2;
-        } else if (selectionEnd <= length - 3) {
-          target.selectionEnd += 3;
-        } else {
-          target.selectionEnd = length;
-        }
-        target.selectionStart = target.selectionEnd - 2;
       }
     },
 
@@ -451,10 +426,9 @@ export default {
           this.picker.resetView && this.picker.resetView();
         });
 
-        const refInput = this.reference.querySelector('input');
         this.picker.$on('select-range', (start, end) => {
-          refInput.setSelectionRange(start, end);
-          refInput.focus();
+          this.refInput.setSelectionRange(start, end);
+          this.refInput.focus();
         });
       } else {
         this.pickerVisible = this.picker.visible = true;

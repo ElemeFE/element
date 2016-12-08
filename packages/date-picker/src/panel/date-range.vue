@@ -36,7 +36,7 @@
                   :placeholder="t('el.datepicker.startTime')"
                   class="el-date-range-picker__editor"
                   :value="minVisibleTime"
-                  @focus.native="minTimePickerVisible = !minTimePickerVisible"
+                  @focus="minTimePickerVisible = !minTimePickerVisible"
                   @change.native="handleTimeChange($event, 'min')" />
                 <time-picker
                   :picker-width="minPickerWidth"
