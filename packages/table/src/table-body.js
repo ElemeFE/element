@@ -1,6 +1,11 @@
 import { getCell, getColumnByCell, getRowIdentity } from './util';
+import ElCheckbox from 'element-ui/packages/checkbox';
 
 export default {
+  components: {
+    ElCheckbox
+  },
+
   props: {
     store: {
       required: true
