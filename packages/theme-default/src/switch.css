@@ -80,15 +80,15 @@
 
     @when disabled {
       .el-switch__core {
-        border-color: var(--switch-disabled-color);
-        background: var(--switch-disabled-color);
+        border-color: var(--switch-disabled-color) !important;
+        background: var(--switch-disabled-color) !important;
 
         & span {
-          background-color: var(--switch-disabled-text-color);
+          background-color: var(--switch-disabled-text-color) !important;
         }
 
         & ~ .el-switch__label * {
-          color: var(--switch-disabled-text-color);
+          color: var(--switch-disabled-text-color) !important;
         }
       }
 
