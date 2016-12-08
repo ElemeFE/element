@@ -254,6 +254,7 @@ Picking a date range is supported.
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | readonly | whether DatePicker is read only | boolean | — | false |
 | disabled | whether DatePicker is disabled | boolean | - | false |
+|size | size of Input | string | large/small/mini | — |
 | editable | whether the input is editable | boolean | - | true |
 | placeholder | placeholder | string | — | — |
 | type | type of the picker | string | year/month/date/datetime/week/datetimerange/daterange | date |

@@ -146,6 +146,7 @@ Can pick an arbitrary time range.
 | readonly | whether DatePicker is read only | boolean | — | false |
 | disabled | whether DatePicker is disabled | boolean | - | false |
 | editable | whether the input is editable | boolean | - | true |
+|size | size of Input | string | large/small/mini | — |
 | placeholder | placeholder | string | — | — |
 | format | format of the picker | string | hour `HH`, minute `mm`, second `ss` | HH:mm:ss |
 | value | value of the picker | date for Time Picker, and string for Time Select | hour `HH`, minute `mm`, second `ss` | HH:mm:ss |
