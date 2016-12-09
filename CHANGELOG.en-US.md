@@ -1,5 +1,20 @@
 ## Changelog
 
+### 1.0.6
+
+*2016-12-09*
+
+- Added `disabled` attribute for Tabs, #1620
+- Added `size` attribute for DatePicker input, #1440
+- Fixed `datetimerange` DatePicker's panel not showing correct date if initial value is present, #1129
+- Fixed DatePicker display error when switching year, #1607
+- Fixed DatePicker not triggering clickoutside when its icon is clicked, #1604
+- Fixed TimePicker not refreshing value after clicking the clear button, #1583
+- Fixed remote filterable Select display error when its value is an object, #1593
+- Fixed Select's clear button still working bug when it's `disabled`, #1619
+- Fixed Switch's background color error when its `disabled` attribute is dynamically changed, #1627
+- Fixed some style bugs of Table
+
 ### 1.0.5
 
 *2016-12-06*

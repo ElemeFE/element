@@ -1,5 +1,19 @@
 ## 更新日志
 
+### 1.0.6
+*2016-12-09*
+
+- 新增 Tabs 组件的 `disabled` 属性，#1620
+- 新增 DatePicker 的 input 支持 `size`，#1440
+- 修复 DatePicker 为 `datetimerange` 类型并设置初始值时，面板未显示正确日期的问题，#1129
+- 修复 DatePicker 切换年份时显示异常的问题，#1607
+- 修复 DatePicker 点击 icon 未触发 clickoutside 的问题，#1604
+- 修复 TimePicker 点击清空按钮后再次点击不会更新初始值的问题，#1583
+- 修复 Select 远程搜索且 value 为对象类型时的显示问题，#1593
+- 修复 Select 为 `disabled` 时，`clearable` 仍然可以工作的问题，#1619
+- 修复 自定义背景颜色的 Switch 在动态切换 `disabled` 时，背景颜色错误的问题，#1627
+- 修复 Table 的一些样式问题
+
 ### 1.0.5
 *2016-12-06*
 
