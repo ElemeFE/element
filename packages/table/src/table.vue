@@ -101,6 +101,7 @@
 </template>
 
 <script type="text/babel">
+  import ElCheckbox from 'element-ui/packages/checkbox';
   import Migrating from 'element-ui/src/mixins/migrating';
   import throttle from 'throttle-debounce/throttle';
   import debounce from 'throttle-debounce/debounce';
@@ -160,7 +161,8 @@
 
     components: {
       TableHeader,
-      TableBody
+      TableBody,
+      ElCheckbox
     },
 
     methods: {
