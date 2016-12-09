@@ -13,7 +13,8 @@ const defaults = {
     width: 48,
     minWidth: 48,
     realWidth: 48,
-    order: ''
+    order: '',
+    className: 'el-table-column--selection'
   },
   index: {
     width: 48,

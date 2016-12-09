@@ -4,6 +4,13 @@
 @import "./common/var.css";
 
 @component-namespace el {
+  @b table-column {
+    @m selection .cell {
+      padding-left: 14px;
+      padding-right: 14px;
+    }
+  }
+
   @b table-filter {
     border: solid 1px #d3dce6;
     border-radius: 2px;
