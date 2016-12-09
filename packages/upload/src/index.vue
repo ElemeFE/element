@@ -193,7 +193,7 @@ export default {
         headers: this.headers,
         name: this.name,
         data: this.data,
-        accept: this.thumbnailMode ? 'image/*' : this.accept,
+        accept: this.thumbnailMode ? 'image/gif, image/png, image/jpeg, image/bmp, image/webp' : this.accept,
         'on-start': this.handleStart,
         'on-progress': this.handleProgress,
         'on-success': this.handleSuccess,
