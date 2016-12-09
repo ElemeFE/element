@@ -67,9 +67,9 @@ export default function upload(option) {
 
   const headers = option.headers || {};
 
-  if (headers['X-Requested-With'] !== null) {
-    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-  }
+  // if (headers['X-Requested-With'] !== null) {
+  //   xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+  // }
 
   for (let item in headers) {
     if (headers.hasOwnProperty(item) && headers[item] !== null) {
