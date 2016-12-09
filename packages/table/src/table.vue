@@ -67,7 +67,7 @@
       :style="{
         width: layout.rightFixedWidth ? layout.rightFixedWidth + 'px' : '',
         height: layout.viewportHeight ? layout.viewportHeight + 'px' : '',
-        right: layout.scrollY ? layout.gutterWidth + 'px' : ''
+        right: layout.scrollY ? (border ? layout.gutterWidth : (layout.gutterWidth || 1)) + 'px' : '' 
       }">
       <div class="el-table__fixed-header-wrapper" ref="rightFixedHeaderWrapper" v-if="showHeader">
         <table-header
@@ -93,6 +93,9 @@
         </table-body>
       </div>
     </div>
+    <div class="el-table__fixed-right-patch" 
+      v-if="rightFixedColumns.length > 0"
+      :style="{ width: layout.scrollY ? layout.gutterWidth + 'px' : '0', height: layout.headerHeight + 'px' }"></div>
     <div class="el-table__column-resize-proxy" ref="resizeProxy" v-show="resizeProxyVisible"></div>
   </div>
 </template>

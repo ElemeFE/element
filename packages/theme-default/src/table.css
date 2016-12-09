@@ -154,6 +154,14 @@
       }
     }
 
+    @e fixed-right-patch {
+      position: absolute;
+      top: -1px;
+      right: 0;
+      background-color: var(--table-header-background);
+      border-bottom: 1px solid var(--table-border-color);
+    }
+
     @e fixed-right {
       top: 0;
       left: auto;
