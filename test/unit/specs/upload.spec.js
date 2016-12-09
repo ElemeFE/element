@@ -34,7 +34,7 @@ describe('ajax', () => {
   it('request width header', done => {
     ajax(option);
     expect(requests[0].requestHeaders).to.eql({
-      'X-Requested-With': 'XMLHttpRequest',
+      // 'X-Requested-With': 'XMLHttpRequest',
       region: 'shanghai'
     });
     done();
