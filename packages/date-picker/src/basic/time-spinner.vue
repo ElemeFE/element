@@ -1,5 +1,5 @@
 <template>
-  <div class="el-time-spinner">
+  <div class="el-time-spinner" :class="{ 'has-seconds': showSeconds }">
     <div
       @mouseenter="emitSelectRange('hours')"
       @mousewheel="handleScroll('hour')"
