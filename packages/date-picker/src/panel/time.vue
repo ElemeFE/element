@@ -3,9 +3,8 @@
     <div
       v-show="currentVisible"
       :style="{width: width + 'px'}"
-      :class="{ 'has-seconds': showSeconds }"
       class="el-time-panel">
-      <div class="el-time-panel__content">
+      <div class="el-time-panel__content" :class="{ 'has-seconds': showSeconds }">
         <time-spinner
           ref="spinner"
           @change="handleChange"

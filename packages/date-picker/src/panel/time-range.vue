@@ -10,7 +10,9 @@
       <div class="el-time-range-picker__content">
         <div class="el-time-range-picker__cell">
           <div class="el-time-range-picker__header">{{ t('el.datepicker.startTime') }}</div>
-          <div class="el-time-range-picker__body el-time-panel__content">
+          <div
+            :class="{ 'has-seconds': showSeconds }"
+            class="el-time-range-picker__body el-time-panel__content">
             <time-spinner
               ref="minSpinner"
               :show-seconds="showSeconds"
@@ -24,7 +26,9 @@
         </div>
         <div class="el-time-range-picker__cell">
           <div class="el-time-range-picker__header">{{ t('el.datepicker.endTime') }}</div>
-          <div class="el-time-range-picker__body el-time-panel__content">
+          <div
+            :class="{ 'has-seconds': showSeconds }"
+            class="el-time-range-picker__body el-time-panel__content">
             <time-spinner
               ref="maxSpinner"
               :show-seconds="showSeconds"

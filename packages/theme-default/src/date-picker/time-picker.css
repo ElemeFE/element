@@ -13,16 +13,6 @@
     z-index: var(--index-top);
     user-select: none;
 
-    &.has-seconds {
-      .el-time-panel__content::after {
-        left: calc(100% / 3 * 2);
-      }
-
-      .el-time-panel__content::before {
-        padding-left: calc(100% / 3);
-      }
-    }
-
     @e content {
       font-size: 0;
       position: relative;
@@ -54,6 +44,16 @@
       &::before {
         padding-left: 50%;
         margin-right: -2px;
+      }
+
+      &.has-seconds {
+        &::after {
+          left: calc(100% / 3 * 2);
+        }
+
+        &::before {
+          padding-left: calc(100% / 3);
+        }
       }
     }
 
