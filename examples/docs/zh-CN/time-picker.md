@@ -137,7 +137,7 @@
   export default {
     data() {
       return {
-        value1: '14:30',
+        value1: '',
         value2: new Date(2016, 9, 10, 18, 40),
         value3: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
         startTime: '',
