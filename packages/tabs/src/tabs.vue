@@ -82,7 +82,7 @@
       }
     },
     mounted() {
-      this.currentName = this.activeName || this.$children[0].index || '1';
+      this.currentName = this.activeName || this.$children[0] && this.$children[0].index || '1';
       this.$nextTick(() => {
         this.$forceUpdate();
       });
