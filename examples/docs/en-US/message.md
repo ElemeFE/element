@@ -197,6 +197,8 @@ In this case you should call `Message(options)`. We have also registered methods
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | message | message text | string | — | — |
 | type | message type | string | success/warning/info/error | info |
+| iconClass | custom icon's class, overrides `type` | string | — | — |
+| customClass | custom class name for Message | string | — | — |
 | duration | display duration, millisecond. If set to 0, it will not turn off automatically | number | — | 3000 |
 | showClose | whether to show a close button | boolean | — | false |
 | onClose | callback function when closed with the message instance as the parameter | function | — | — |

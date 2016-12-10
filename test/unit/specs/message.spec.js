@@ -18,7 +18,7 @@ describe('Message', () => {
       message: '灰风',
       duration: 500
     });
-    const message = document.querySelector('.el-message__group').childNodes[0];
+    const message = document.querySelector('.el-message__group p');
     expect(document.querySelector('.el-message')).to.exist;
     expect(message.textContent).to.equal('灰风');
     setTimeout(() => {

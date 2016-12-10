@@ -1,8 +1,18 @@
 <template>
   <transition name="el-notification-fade">
-    <div class="el-notification" v-show="visible" :style="{ top: top ? top + 'px' : 'auto' }" @mouseenter="clearTimer()" @mouseleave="startTimer()">
-      <i class="el-notification__icon" :class="[ typeClass ]" v-if="type"></i>
-      <div class="el-notification__group" :style="{ 'margin-left': typeClass ? '55px' : '0' }">
+    <div
+      class="el-notification"
+      :class="customClass"
+      v-show="visible"
+      :style="{ top: top ? top + 'px' : 'auto' }"
+      @mouseenter="clearTimer()"
+      @mouseleave="startTimer()">
+      <i
+        class="el-notification__icon"
+        :class="[ typeClass, iconClass ]"
+        v-if="type || iconClass">
+      </i>
+      <div class="el-notification__group" :class="{ 'is-with-icon': typeClass || iconClass }">
         <span>{{ title }}</span>
         <p>{{ message }}</p>
         <div class="el-notification__closeBtn el-icon-close" @click="close"></div>
@@ -27,6 +37,8 @@
         message: '',
         duration: 4500,
         type: '',
+        customClass: '',
+        iconClass: '',
         onClose: null,
         closed: false,
         top: null,

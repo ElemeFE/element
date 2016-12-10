@@ -224,6 +224,8 @@ import { Notification } from 'element-ui';
 | title | 标题 | string | — | — |
 | message | 说明文字 | string | — | — |
 | type | 主题样式，如果不在可选值内将被忽略 | string | success/warning/info/error | — |
+| iconClass | 自定义图标的类名。若设置了 `type`，则 `iconClass` 会被覆盖 | string | — | — |
+| customClass | 自定义类名 | string | — | — |
 | duration | 显示时间, 毫秒。设为 0 则不会自动关闭 | number | — | 4500 |
 | onClose | 关闭时的回调函数 | function | — | — |
 | offset | 偏移的距离，在同一时刻，所有的 Notification 实例应当具有一个相同的偏移量 | number | — | 0 |
