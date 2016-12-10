@@ -4,6 +4,7 @@
       'el-table--fit': fit,
       'el-table--striped': stripe,
       'el-table--border': border,
+      'el-table--fluid-height': maxHeight,
       'el-table--enable-row-hover': !store.states.isComplex,
       'el-table--enable-row-transition': true || (store.states.data || []).length !== 0 && (store.states.data || []).length < 100
     }"
@@ -17,8 +18,7 @@
         :style="{ width: layout.bodyWidth ? layout.bodyWidth + 'px' : '' }">
       </table-header>
     </div>
-    <div class="el-table__body-wrapper" ref="bodyWrapper"
-      :style="{ height: layout.bodyHeight ? layout.bodyHeight + 'px' : '' }">
+    <div class="el-table__body-wrapper" ref="bodyWrapper" :style="[bodyHeight]">
       <table-body
         :context="context"
         :store="store"
@@ -34,10 +34,10 @@
     </div>
     <div class="el-table__fixed" ref="fixedWrapper"
       v-if="fixedColumns.length > 0"
-      :style="{
-        width: layout.fixedWidth ? layout.fixedWidth + 'px' : '',
-        height: layout.viewportHeight ? layout.viewportHeight + 'px' : ''
-      }">
+      :style="[
+        { width: layout.fixedWidth ? layout.fixedWidth + 'px' : '' },
+        fixedHeight
+      ]">
       <div class="el-table__fixed-header-wrapper" ref="fixedHeaderWrapper" v-if="showHeader">
         <table-header
           fixed="left"
@@ -47,10 +47,10 @@
           :style="{ width: layout.fixedWidth ? layout.fixedWidth + 'px' : '' }"></table-header>
       </div>
       <div class="el-table__fixed-body-wrapper" ref="fixedBodyWrapper"
-        :style="{
-          top: layout.headerHeight + 'px',
-          height: layout.fixedBodyHeight ? layout.fixedBodyHeight + 'px' : ''
-        }">
+        :style="[
+          { top: layout.headerHeight + 'px' },
+          fixedBodyHeight
+        ]">
         <table-body
           fixed="left"
           :store="store"
@@ -64,11 +64,11 @@
     </div>
     <div class="el-table__fixed-right" ref="rightFixedWrapper"
       v-if="rightFixedColumns.length > 0"
-      :style="{
-        width: layout.rightFixedWidth ? layout.rightFixedWidth + 'px' : '',
-        height: layout.viewportHeight ? layout.viewportHeight + 'px' : '',
-        right: layout.scrollY ? (border ? layout.gutterWidth : (layout.gutterWidth || 1)) + 'px' : '' 
-      }">
+      :style="[
+        { width: layout.rightFixedWidth ? layout.rightFixedWidth + 'px' : '' },
+        { right: layout.scrollY ? (border ? layout.gutterWidth : (layout.gutterWidth || 1)) + 'px' : '' },
+        fixedHeight
+      ]">
       <div class="el-table__fixed-header-wrapper" ref="rightFixedHeaderWrapper" v-if="showHeader">
         <table-header
           fixed="right"
@@ -78,10 +78,10 @@
           :style="{ width: layout.rightFixedWidth ? layout.rightFixedWidth + 'px' : '' }"></table-header>
       </div>
       <div class="el-table__fixed-body-wrapper" ref="rightFixedBodyWrapper"
-        :style="{
-          top: layout.headerHeight + 'px',
-          height: layout.fixedBodyHeight ? layout.fixedBodyHeight + 'px' : ''
-        }">
+        :style="[
+          { top: layout.headerHeight + 'px' },
+          fixedBodyHeight
+        ]">
         <table-body
           fixed="right"
           :store="store"
@@ -131,6 +131,8 @@
       width: [String, Number],
 
       height: [String, Number],
+
+      maxHeight: [String, Number],
 
       fit: {
         type: Boolean,
@@ -238,6 +240,8 @@
         this.$nextTick(() => {
           if (this.height) {
             this.layout.setHeight(this.height);
+          } else if (this.maxHeight) {
+            this.layout.setMaxHeight(this.maxHeight);
           } else if (this.shouldUpdateHeight) {
             this.layout.updateHeight();
           }
@@ -275,6 +279,60 @@
 
       rightFixedColumns() {
         return this.store.states.rightFixedColumns;
+      },
+
+      bodyHeight() {
+        let style = {};
+
+        if (this.height) {
+          style = {
+            height: this.layout.bodyHeight ? this.layout.bodyHeight + 'px' : ''
+          };
+        } else if (this.maxHeight) {
+          style = {
+            'max-height': (this.showHeader ? this.maxHeight - this.layout.headerHeight : this.maxHeight) + 'px'
+          };
+        }
+
+        return style;
+      },
+
+      fixedBodyHeight() {
+        let style = {};
+
+        if (this.height) {
+          style = {
+            height: this.layout.fixedBodyHeight ? this.layout.fixedBodyHeight + 'px' : ''
+          };
+        } else if (this.maxHeight) {
+          let maxHeight = this.layout.scrollX ? this.maxHeight - this.layout.gutterWidth : this.maxHeight;
+
+          if (this.showHeader) {
+            maxHeight -= this.layout.headerHeight;
+          }
+
+          style = {
+            'max-height': maxHeight + 'px'
+          };
+        }
+
+        return style;
+      },
+
+      fixedHeight() {
+        let style = {};
+
+        if (this.maxHeight) {
+          style = {
+            bottom: (this.layout.scrollX && this.data.length) ? this.layout.gutterWidth + 'px' : ''
+          };
+        } else {
+          style = {
+            height: this.layout.viewportHeight ? this.layout.viewportHeight + 'px' : ''
+          };
+        }
+
+        return style;
       }
     },
 
