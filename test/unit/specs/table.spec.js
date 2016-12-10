@@ -89,6 +89,15 @@ describe('Table', () => {
       }, DELAY);
     });
 
+    it('maxHeight', done => {
+      const vm = createTable('max-height="134"');
+      setTimeout(_ => {
+        expect(vm.$el.style.maxHeight).to.equal('134px');
+        destroyVM(vm);
+        done();
+      }, DELAY);
+    });
+
     it('stripe', done => {
       const vm = createTable('stripe');
       setTimeout(_ => {
