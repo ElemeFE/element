@@ -155,7 +155,7 @@
   };
 </script>
 
-## Table 
+## Table
 
 Display multiple data with similar format. You can sort, filter, compare your data in a table.
 
@@ -471,7 +471,7 @@ When there are too many rows, you can use a fixed header.
 ```
 :::
 
-### Table with fixed column 
+### Table with fixed column
 
 When there are too many columns, you can fix some of them.
 
@@ -576,7 +576,7 @@ When there are too many columns, you can fix some of them.
 ```
 :::
 
-### Table with fixed columns and header 
+### Table with fixed columns and header
 
 When you have huge chunks of data to put in a table, you can fix the header and columns at the same time.
 
@@ -1086,7 +1086,7 @@ Filter the table to find desired data.
 :::
 
 ### Custom column template
- 
+
 Customize table column so it can be integrated with other components.
 :::demo Activate custom column template by adding the `inline-template` attribute. By default, the context of `el-table-column` is the one where `el-table` lies, and you can customize it with the `context` attribute, e.g. `:context="_self"` refers to the current context. This is useful when sometimes Table is encapsulated into another component, and `table-column` is distributed by slots. In `el-column`, you have access to the following data: row, column, $index and store (state management of Table).
 ```html
@@ -1198,6 +1198,7 @@ Customize table column so it can be integrated with other components.
 | cell-mouse-leave | triggers when hovering out of a cell | row, column, cell, event |
 | cell-click | triggers when clicking a cell | row, column, cell, event |
 | row-click | triggers when clicking a row | row, event |
+| row-contextmenu | triggers when user right clicks on a row | row, event |
 | row-dblclick | triggers when double clicking a row | row, event |
 | header-click | triggers when clicking a column header | column, event |
 | sort-change | triggers when Table's sorting changes | { column, prop, order } |

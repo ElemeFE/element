@@ -43,6 +43,7 @@ export default {
                 key={ this.$parent.rowKey ? this.getKeyOfRow(row, $index) : $index }
                 on-dblclick={ ($event) => this.handleDoubleClick($event, row) }
                 on-click={ ($event) => this.handleClick($event, row) }
+                on-contextmenu={ ($event) => this.handleContextMenu($event, row) }
                 on-mouseenter={ _ => this.handleMouseEnter($index) }
                 on-mouseleave={ _ => this.handleMouseLeave() }
                 class={ this.getRowClass(row, $index) }>
@@ -199,6 +200,11 @@ export default {
 
     handleMouseLeave() {
       this.store.commit('setHoverRow', null);
+    },
+
+    handleContextMenu(event, row) {
+      const table = this.$parent;
+      table.$emit('row-contextmenu', row, event);
     },
 
     handleDoubleClick(event, row) {
