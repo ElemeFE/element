@@ -104,6 +104,49 @@
           address: 'No. 189, Grove St, Los Angeles',
           zip: 'CA 90036'
         }],
+        tableData4: [{
+          date: '2016-05-03',
+          name: 'Tom',
+          state: 'California',
+          city: 'Los Angeles',
+          address: 'No. 189, Grove St, Los Angeles',
+          zip: 'CA 90036'
+        }, {
+          date: '2016-05-02',
+          name: 'Tom',
+          state: 'California',
+          city: 'Los Angeles',
+          address: 'No. 189, Grove St, Los Angeles',
+          zip: 'CA 90036'
+        }, {
+          date: '2016-05-04',
+          name: 'Tom',
+          state: 'California',
+          city: 'Los Angeles',
+          address: 'No. 189, Grove St, Los Angeles',
+          zip: 'CA 90036'
+        }, {
+          date: '2016-05-01',
+          name: 'Tom',
+          state: 'California',
+          city: 'Los Angeles',
+          address: 'No. 189, Grove St, Los Angeles',
+          zip: 'CA 90036'
+        }, {
+          date: '2016-05-08',
+          name: 'Tom',
+          state: 'California',
+          city: 'Los Angeles',
+          address: 'No. 189, Grove St, Los Angeles',
+          zip: 'CA 90036'
+        }, {
+          date: '2016-05-06',
+          name: 'Tom',
+          state: 'California',
+          city: 'Los Angeles',
+          address: 'No. 189, Grove St, Los Angeles',
+          zip: 'CA 90036'
+        }],
         currentRow: null,
         multipleSelection: []
       };
@@ -144,6 +187,10 @@
           return 'positive-row';
         }
         return '';
+      },
+      
+      deleteRow(index, rows) {
+        rows.splice(index, 1);
       }
     },
 
@@ -627,6 +674,133 @@ When you have huge chunks of data to put in a table, you can fix the header and 
     data() {
       return {
         tableData3: [{
+          date: '2016-05-03',
+          name: 'Tom',
+          state: 'California',
+          city: 'Los Angeles',
+          address: 'No. 189, Grove St, Los Angeles',
+          zip: 'CA 90036'
+        }, {
+          date: '2016-05-02',
+          name: 'Tom',
+          state: 'California',
+          city: 'Los Angeles',
+          address: 'No. 189, Grove St, Los Angeles',
+          zip: 'CA 90036'
+        }, {
+          date: '2016-05-04',
+          name: 'Tom',
+          state: 'California',
+          city: 'Los Angeles',
+          address: 'No. 189, Grove St, Los Angeles',
+          zip: 'CA 90036'
+        }, {
+          date: '2016-05-01',
+          name: 'Tom',
+          state: 'California',
+          city: 'Los Angeles',
+          address: 'No. 189, Grove St, Los Angeles',
+          zip: 'CA 90036'
+        }, {
+          date: '2016-05-08',
+          name: 'Tom',
+          state: 'California',
+          city: 'Los Angeles',
+          address: 'No. 189, Grove St, Los Angeles',
+          zip: 'CA 90036'
+        }, {
+          date: '2016-05-06',
+          name: 'Tom',
+          state: 'California',
+          city: 'Los Angeles',
+          address: 'No. 189, Grove St, Los Angeles',
+          zip: 'CA 90036'
+        }, {
+          date: '2016-05-07',
+          name: 'Tom',
+          state: 'California',
+          city: 'Los Angeles',
+          address: 'No. 189, Grove St, Los Angeles',
+          zip: 'CA 90036'
+        }]
+      }
+    }
+  }
+</script>
+```
+:::
+
+### Fluid-height Table with fixed header (and columns)
+
+When the the data is dynamically changed, you might want the table to have a maximum height rather than a fixed height and to show the scroll bar if needed.
+
+:::demo  By setting the attribute `maxHeight` of `el-table`, you can fix the table header. The table body scrolls only if the height of the rows exceeds the maxHeight value.
+```html
+<template>
+  <el-table
+    :data="tableData4"
+    border
+    style="width: 100%"
+    max-height="250">
+    <el-table-column
+      fixed
+      prop="date"
+      label="Date"
+      width="150">
+    </el-table-column>
+    <el-table-column
+      prop="name"
+      label="Name"
+      width="120">
+    </el-table-column>
+    <el-table-column
+      prop="state"
+      label="State"
+      width="120">
+    </el-table-column>
+    <el-table-column
+      prop="city"
+      label="City"
+      width="120">
+    </el-table-column>
+    <el-table-column
+      prop="address"
+      label="Address"
+      width="300">
+    </el-table-column>
+    <el-table-column
+      prop="zip"
+      label="Zip"
+      width="120">
+    </el-table-column>
+    <el-table-column
+      inline-template
+      :context="_self"
+      fixed="right"
+      label="Operations"
+      width="120">
+      <span>
+        <el-button
+          @click.native.prevent="deleteRow($index, tableData4)"
+          type="text"
+          size="small">
+          Remove
+        </el-button>
+      </span>
+    </el-table-column>
+  </el-table>
+</template>
+
+<script>
+  export default {
+    methods: {
+      deleteRow(index, rows) {
+        rows.splice(index, 1);
+      }
+    },
+    data() {
+      return {
+        tableData4: [{
           date: '2016-05-03',
           name: 'Tom',
           state: 'California',
@@ -1177,7 +1351,8 @@ Customize table column so it can be integrated with other components.
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | data | table data | array | — | — |
-| height | Table's height. By default it has an auto height. If its value is a number, the height is measured in pixels; if its value is a string, the height is affected by external styles | string/number | — | — |
+| height | Table's height. By default it has an `auto` height. If its value is a number, the height is measured in pixels; if its value is a string, the height is affected by external styles | string/number | — | — |
+| maxHeight | Table's max-height. The height of the table starts from `auto` until it reaches the maxHeight limit. The `maxHeight` is measured in pixels, same as `height` | string/number | — | — |
 | stripe | whether table is striped | boolean | — | false |
 | border | whether table has vertical border | boolean | — | false |
 | fit | whether width of column automatically fits its container | boolean | — | true |
