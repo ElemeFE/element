@@ -323,7 +323,9 @@ export default {
     handleMouseEnterIcon() {
       if (this.readonly || this.disabled) return;
       if (!this.valueIsEmpty) {
-        this.visualValue = this.refInput.value;
+        if (this.visualValue !== this.refInput.value) {
+          this.visualValue = this.refInput.value;
+        }
         this.showClose = true;
       }
     },
