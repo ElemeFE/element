@@ -26,10 +26,12 @@
             text-align: left;
             border-top: 1px solid #eaeefb;
             background-color: #EFF2F7;
+            white-space: nowrap;
           }
           td, th {
             border-bottom: 1px solid #eaeefb;
             padding: 10px;
+            max-width: 250px;
           }
           th:first-child, td:first-child {
             padding-left: 10px;
