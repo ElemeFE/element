@@ -282,7 +282,8 @@
         } else if (Array.isArray(newVal)) {
           this.minDate = newVal[0] ? toDate(newVal[0]) : null;
           this.maxDate = newVal[1] ? toDate(newVal[1]) : null;
-          this.date = new Date(this.minDate);
+          if (this.minDate) this.date = new Date(this.minDate);
+          this.handleConfirm(true);
         }
       }
     },
@@ -454,8 +455,8 @@
         this.resetDate();
       },
 
-      handleConfirm() {
-        this.$emit('pick', [this.minDate, this.maxDate]);
+      handleConfirm(visible) {
+        this.$emit('pick', [this.minDate, this.maxDate], visible);
       },
 
       resetDate() {
