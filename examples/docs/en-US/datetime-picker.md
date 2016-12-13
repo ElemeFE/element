@@ -212,8 +212,8 @@ Select date and time in one picker.
 | editable | whether the input is editable | boolean | - | true |
 |size | size of Input | string | large/small/mini | — |
 | placeholder | placeholder | string | — | — |
-| type | type of the picker | string | year/month/date/datetime/week/datetimerange/daterange | date |
-| format | format of the picker | string | year `yyyy` month `MM` day `dd`, <br>hour `HH`, minute `mm`, second `ss` | yyyy-MM-dd |
+| type | type of the picker | string | year/month/date/datetime/ week/datetimerange/daterange | date |
+| format | format of the picker | string | year `yyyy` month `MM` day `dd`, hour `HH`, minute `mm`, second `ss` | yyyy-MM-dd |
 | align | alignment | left/center/right | left |
 | picker-options | additional options, check the table below | object | — | {} |
 
@@ -227,4 +227,4 @@ Select date and time in one picker.
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | text | title of the shortcut | string | — | — |
-| onClick | callback function, triggers when the shortcut is clicked, with the `vm` as its parameter. <br>You can change the picker value by emitting the `pick` event.<br> Example: `vm.$emit('pick', new Date())`| function | — | — |
+| onClick | callback function, triggers when the shortcut is clicked, with the `vm` as its parameter. You can change the picker value by emitting the `pick` event. Example: `vm.$emit('pick', new Date())`| function | — | — |

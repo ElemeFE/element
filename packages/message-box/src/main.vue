@@ -1,7 +1,7 @@
 <template>
   <transition name="msgbox-fade">
     <div class="el-message-box__wrapper" v-show="value" @click.self="handleWrapperClick">
-      <div class="el-message-box">
+      <div class="el-message-box" :class="customClass">
         <div class="el-message-box__header" v-if="title !== undefined">
           <div class="el-message-box__title">{{ title || t('el.messagebox.title') }}</div>
           <i class="el-message-box__close el-icon-close" @click="handleAction('cancel')" v-if="showClose"></i>
@@ -177,6 +177,7 @@
         title: undefined,
         message: '',
         type: '',
+        customClass: '',
         showInput: false,
         inputValue: null,
         inputPlaceholder: '',
