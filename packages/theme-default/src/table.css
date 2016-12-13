@@ -388,5 +388,13 @@
         background-color: #eff2f7;
       }
     }
+
+    @modifier fluid-height {
+      .el-table__fixed,
+      .el-table__fixed-right {
+        bottom: 0;
+        overflow: hidden;
+      }
+    }
   }
 }

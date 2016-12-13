@@ -51,24 +51,26 @@ class TableLayout {
     }
   }
 
-  setHeight(height) {
+  setHeight(value, prop = 'height') {
     const el = this.table.$el;
-    if (typeof height === 'string') {
-      if (/^\d+$/.test(height)) {
-        height = Number(height);
-      }
+    if (typeof value === 'string' && /^\d+$/.test(value)) {
+      value = Number(value);
     }
 
-    this.height = height;
+    this.height = value;
 
     if (!el) return;
-    if (!isNaN(height)) {
-      el.style.height = height + 'px';
+    if (typeof value === 'number') {
+      el.style[prop] = value + 'px';
 
       this.updateHeight();
-    } else if (typeof height === 'string') {
+    } else if (typeof value === 'string') {
       this.updateHeight();
     }
+  }
+
+  setMaxHeight(value) {
+    return this.setHeight(value, 'max-height');
   }
 
   updateHeight() {
@@ -81,7 +83,6 @@ class TableLayout {
         this.bodyHeight = height;
       }
       this.fixedBodyHeight = this.scrollX ? height - this.gutterWidth : height;
-      this.viewportHeight = this.scrollX ? height - this.gutterWidth : height;
     } else {
       const headerHeight = this.headerHeight = headerWrapper.offsetHeight;
       const bodyHeight = height - headerHeight;
@@ -89,8 +90,8 @@ class TableLayout {
         this.bodyHeight = bodyHeight;
       }
       this.fixedBodyHeight = this.scrollX ? bodyHeight - this.gutterWidth : bodyHeight;
-      this.viewportHeight = this.scrollX ? height - this.gutterWidth : height;
     }
+    this.viewportHeight = this.scrollX ? height - this.gutterWidth : height;
   }
 
   update() {
