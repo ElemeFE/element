@@ -80,5 +80,9 @@ English documentation is brought to you by SwiftGG Translation Team. Our special
 - [Changing](https://github.com/sunzhuo11)
 - [mmoaay](https://github.com/mmoaay)
 
+## Donation
+If you find Element useful, you can buy us a cup of coffee
+<img width="500" src="http://fuss10.elemecdn.com/0/34/1b5786aee94bdb2fb0bbaf5b20c27jpeg.jpeg" alt="">
+
 ## LICENSE
 MIT
