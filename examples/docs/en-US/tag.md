@@ -34,7 +34,7 @@ Used for marking and selection.
 
 ### Basic usage
 
-::: demo Use the `type` attribute to define Tag's type.
+::: demo Use the `type` attribute to define Tag's type. In addition, the `color` attribute can be used to set the background color of the Tag.
 
 ```html
 <el-tag>Tag One</el-tag>
@@ -93,6 +93,7 @@ Used for marking and selection.
 | closable | whether Tab can be removed | boolean | — | false |
 | close-transition | whether the removal animation is disabled | boolean | — | false |
 | hit | whether Tag has a highlighted border | boolean | — | false |
+| color | background color of the tag | string | — | — |
 
 
 ### Events

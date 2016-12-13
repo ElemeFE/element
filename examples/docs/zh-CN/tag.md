@@ -34,7 +34,7 @@
 
 ### 基础用法
 
-:::demo 由`type`属性来定义，该属性可选填。
+:::demo 由`type`属性来选择tag的类型，也可以通过`color`属性来自定义背景色。
 
 ```html
 <el-tag>标签一</el-tag>
@@ -93,6 +93,7 @@
 | closable | 是否可关闭 | boolean | — | false |
 | close-transition | 是否禁用关闭时的渐变动画 | boolean | — | false |
 | hit | 是否有边框描边 | boolean | — | false |
+| color | 背景色 | string | — | — |
 
 
 ### Events
