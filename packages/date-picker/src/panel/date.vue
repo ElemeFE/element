@@ -150,6 +150,7 @@
       },
 
       value(newVal) {
+        if (!newVal) return;
         newVal = new Date(newVal);
         if (!isNaN(newVal)) {
           if (typeof this.disabledDate === 'function' &&
