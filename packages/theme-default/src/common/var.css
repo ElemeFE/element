@@ -556,4 +556,12 @@
   --carousel-indicator-padding-horizontal: 4px;
   --carousel-indicator-padding-vertical: 12px;
   --carousel-indicator-out-color: var(--border-color-hover);
+
+  /* Collapse
+  --------------------------*/
+  --collapse-border-color: var(--border-color-base);
+  --collapse-border-radius: 4px;
+  --collapse-padding: 20px;
+  --collapse-header-fill: #eff2f7;
+  --collapse-header-color: #8492a6;
 }
