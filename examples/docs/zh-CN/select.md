@@ -628,6 +628,7 @@
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | multiple | 是否多选 | boolean | — | false |
 | disabled | 是否禁用 | boolean | — | false |
+| size | 输入框尺寸 | string | large/small/mini | — |
 | clearable | 单选时是否可以清空选项 | boolean | — | false |
 | multiple-limit | 多选时用户最多可以选择的项目数，为 0 则不限制 | number | — | 0 |
 | name | select input 的 name 属性 | string | — | — |

@@ -626,6 +626,7 @@ Create and select new items that are not included in select options
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | multiple | whether multiple-select is activated | boolean | — | false |
 | disabled | whether Select is disabled | boolean | — | false |
+| size | size of Input | string | large/small/mini | — |
 | clearable | whether single select can be cleared | boolean | — | false |
 | multiple-limit | maximum number of options user can select when `multiple` is `true`. No limit when set to 0 | number | — | 0 |
 | name | the name attribute of select input | string | — | — |

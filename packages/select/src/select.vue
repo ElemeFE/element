@@ -24,6 +24,7 @@
       <input
         type="text"
         class="el-select__input"
+        :class="`is-${ size }`"
         @focus="visible = true"
         @keyup="managePlaceholder"
         @keydown="resetInputState"
@@ -44,6 +45,7 @@
       type="text"
       :placeholder="currentPlaceholder"
       :name="name"
+      :size="size"
       :disabled="disabled"
       :readonly="!filterable || multiple"
       @focus="toggleMenu"
@@ -92,6 +94,11 @@
   import { addClass, removeClass, hasClass } from 'wind-dom/src/class';
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
   import { t } from 'element-ui/src/locale';
+  const sizeMap = {
+    'large': 42,
+    'small': 30,
+    'mini': 22
+  };
 
   export default {
     mixins: [Emitter, Locale],
@@ -149,6 +156,7 @@
     props: {
       name: String,
       value: {},
+      size: String,
       disabled: Boolean,
       clearable: Boolean,
       filterable: Boolean,
@@ -186,6 +194,7 @@
         selectedLabel: '',
         hoverIndex: -1,
         query: '',
+        isForcedVisible: false,
         bottomOverflowBeforeHidden: 0,
         topOverflowBeforeHidden: 0,
         optionsAllDisabled: false,
@@ -221,6 +230,10 @@
         this.hoverIndex = -1;
         if (this.multiple && this.filterable) {
           this.resetInputHeight();
+        }
+        if (this.isForcedVisible) {
+          this.isForcedVisible = false;
+          return;
         }
         if (this.remote && typeof this.remoteMethod === 'function') {
           this.hoverIndex = -1;
@@ -268,6 +281,10 @@
             if (this.multiple) {
               this.$refs.input.focus();
             } else {
+              if (!this.remote) {
+                this.isForcedVisible = true;
+                this.broadcast('ElOption', 'queryChange', '');
+              }
               this.broadcast('ElInput', 'inputSelect');
             }
           }
@@ -413,13 +430,14 @@
       resetInputState(e) {
         if (e.keyCode !== 8) this.toggleLastOptionHitState(false);
         this.inputLength = this.$refs.input.value.length * 15 + 20;
+        this.resetInputHeight();
       },
 
       resetInputHeight() {
         this.$nextTick(() => {
           let inputChildNodes = this.$refs.reference.$el.childNodes;
           let input = [].filter.call(inputChildNodes, item => item.tagName === 'INPUT')[0];
-          input.style.height = Math.max(this.$refs.tags.clientHeight + 6, this.size === 'small' ? 28 : 36) + 'px';
+          input.style.height = Math.max(this.$refs.tags.clientHeight + 6, sizeMap[this.size] || 36) + 'px';
           this.broadcast('ElSelectDropdown', 'updatePopper');
         });
       },
