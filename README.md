@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="425" src="http://fuss10.elemecdn.com/1/63/c8d8aad29976168c57bce4d7cf94djpeg.jpeg">
+  <img src="https://cdn.rawgit.com/ElemeFE/element/dev/element_logo.svg">
 </p>
 # Element
 [![Build Status](https://travis-ci.org/ElemeFE/element.svg?branch=master)](https://travis-ci.org/ElemeFE/element)
