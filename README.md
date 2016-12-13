@@ -1,3 +1,6 @@
+<p align="center">
+  <img width="425" src="http://fuss10.elemecdn.com/1/63/c8d8aad29976168c57bce4d7cf94djpeg.jpeg">
+</p>
 # Element
 [![Build Status](https://travis-ci.org/ElemeFE/element.svg?branch=master)](https://travis-ci.org/ElemeFE/element)
 [![Coverage Status](https://coveralls.io/repos/github/ElemeFE/element/badge.svg?branch=master)](https://coveralls.io/github/ElemeFE/element?branch=master)
