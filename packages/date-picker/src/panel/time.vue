@@ -72,6 +72,7 @@
           minutes: date.getMinutes(),
           seconds: date.getSeconds()
         });
+        this.$nextTick(_ => this.ajustScrollTop());
       },
 
       selectableRange(val) {

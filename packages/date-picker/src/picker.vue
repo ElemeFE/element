@@ -85,8 +85,9 @@ const RANGE_FORMATTER = function(value, format) {
 const RANGE_PARSER = function(text, format) {
   const array = text.split(RANGE_SEPARATOR);
   if (array.length === 2) {
-    const range1 = array[0].split(':').map(item => item.slice(-2)).join(':');
-    const range2 = array[1].split(':').map(item => item.slice(-2)).join(':');
+    const range1 = array[0];
+    const range2 = array[1];
+
     return [parseDate(range1, format), parseDate(range2, format)];
   }
   return [];
@@ -323,7 +324,6 @@ export default {
     handleMouseEnterIcon() {
       if (this.readonly || this.disabled) return;
       if (!this.valueIsEmpty) {
-        this.visualValue = this.refInput.value;
         this.showClose = true;
       }
     },
@@ -358,15 +358,10 @@ export default {
 
     handleKeydown(event) {
       const keyCode = event.keyCode;
-      const target = event.target;
 
       // tab
       if (keyCode === 9) {
         this.pickerVisible = false;
-      // enter
-      } else if (keyCode === 13) {
-        this.pickerVisible = this.picker.visible = false;
-        this.visualValue = target.value;
       }
     },
 

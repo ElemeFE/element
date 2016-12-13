@@ -112,6 +112,13 @@
       };
     },
 
+    watch: {
+      value(newVal) {
+        this.panelCreated();
+        this.$nextTick(_ => this.ajustScrollTop());
+      }
+    },
+
     methods: {
       panelCreated() {
         const time = clacTime(this.value);
