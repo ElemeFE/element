@@ -122,7 +122,7 @@
       currentValue(newVal, oldVal) {
         let value = Number(newVal);
         if (value <= this.max && value >= this.min) {
-          this.$emit('change', value);
+          this.$emit('change', value, oldVal);
           this.$emit('input', value);
         }
       }
