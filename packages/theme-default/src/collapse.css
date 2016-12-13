@@ -1,0 +1,53 @@
+@charset "UTF-8";
+@import "./common/var.css";
+
+@component-namespace el {
+  @b collapse {
+    border: 1px solid var(--collapse-border-color);
+    border-radius: var(--collapse-border-radius);
+    font-size: 14px;
+  }
+  @b collapse-panel {
+    @e header {
+      margin: 0;
+      height: 40px;
+      line-height: @height;
+      padding-left: 15px;
+      background-color: var(--collapse-header-fill);
+      color: var(--collapse-header-color);
+      cursor: pointer;
+
+      .el-icon-caret-right {
+        margin-right: 8px;
+        transition: transform .3s;
+      }
+    }
+
+    @e content {
+      padding: 10px 15px;
+      background-color: #fff;
+      transition: height .3s;
+      overflow: hidden;
+
+      @when opened {
+      }
+    }
+
+    @when opened {
+      .el-icon-caret-right {
+        transform: rotate(90deg);
+      }
+    }
+
+    &:first-child {
+      .el-collapse-panel__header {
+        border-radius: var(--collapse-border-radius) var(--collapse-border-radius) 0 0;
+      }
+    }
+    &:last-child {
+      .el-collapse-panel__header {
+        border-radius: 0 0 var(--collapse-border-radius) var(--collapse-border-radius);
+      }
+    }
+  }
+}
