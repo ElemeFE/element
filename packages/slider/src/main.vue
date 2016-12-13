@@ -200,6 +200,7 @@
           this.setPosition(this.newPos);
           window.removeEventListener('mousemove', this.onDragging);
           window.removeEventListener('mouseup', this.onDragEnd);
+          window.removeEventListener('contextmenu', this.onDragEnd);
         }
       },
 
@@ -208,6 +209,7 @@
         this.onDragStart(event);
         window.addEventListener('mousemove', this.onDragging);
         window.addEventListener('mouseup', this.onDragEnd);
+        window.addEventListener('contextmenu', this.onDragEnd);
       }
     },
 

@@ -20,7 +20,7 @@
         margin-right: 160px;
         width: auto;
       }
-      
+
       &.disabled {
         cursor: default;
 
@@ -79,6 +79,7 @@
       transform: translateX(-50%);
       background-color: transparent;
       text-align: center;
+      user-select: none;
 
       .el-tooltip {
         line-height: 1;
@@ -113,6 +114,7 @@
       background-color: var(--slider-main-background-color);
       border-radius: 50%;
       transition: .2s;
+      user-select: none;
 
       &:hover,
       &.hover,
