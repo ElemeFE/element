@@ -146,6 +146,13 @@
           city: 'Los Angeles',
           address: 'No. 189, Grove St, Los Angeles',
           zip: 'CA 90036'
+        }, {
+          date: '2016-05-07',
+          name: 'Tom',
+          state: 'California',
+          city: 'Los Angeles',
+          address: 'No. 189, Grove St, Los Angeles',
+          zip: 'CA 90036'
         }],
         currentRow: null,
         multipleSelection: []
@@ -734,7 +741,7 @@ When you have huge chunks of data to put in a table, you can fix the header and 
 
 When the the data is dynamically changed, you might want the table to have a maximum height rather than a fixed height and to show the scroll bar if needed.
 
-:::demo  By setting the attribute `maxHeight` of `el-table`, you can fix the table header. The table body scrolls only if the height of the rows exceeds the maxHeight value.
+:::demo  By setting the attribute `max-height` of `el-table`, you can fix the table header. The table body scrolls only if the height of the rows exceeds the max height value.
 ```html
 <template>
   <el-table
