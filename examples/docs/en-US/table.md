@@ -188,7 +188,7 @@
         }
         return '';
       },
-      
+
       deleteRow(index, rows) {
         rows.splice(index, 1);
       }
@@ -1362,6 +1362,7 @@ Customize table column so it can be integrated with other components.
 | row-style | function that returns custom style for a row,  or a string assigning custom style for every row | Function(row, index)/Object | — | — |
 | row-key | key of row data, used for optimizing rendering. Required if `reserve-selection` is on | Function(row)/String | — | — |
 | context | context of Table, e.g. `_self` refers to the current context, `$parent` parent context, `$root` root context, can be overridden by `context` in `el-table-column` | Object | - | current context where Table lies |
+| empty-text | Displayed text when data is empty. You can customize this area with `slot="empty"` | String | | - | No Data |
 
 ### Table Events
 | Event Name | Description | Parameters |
