@@ -70,6 +70,9 @@
         if (this.index === oldValue) {
           this.transition = oldValue > newValue ? 'slideInRight' : 'slideInLeft';
         }
+      },
+      label() {
+        this.$parent.$forceUpdate();
       }
     }
   };
