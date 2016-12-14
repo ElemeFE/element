@@ -29,7 +29,7 @@
         :style="{ width: layout.bodyWidth ? layout.bodyWidth - (layout.scrollY ? layout.gutterWidth : 0 ) + 'px' : '' }">
       </table-body>
       <div class="el-table__empty-block" v-if="!data || data.length === 0">
-        <span class="el-table__empty-text">{{ emptyText || t('el.table.emptyText') }}</span>
+      <span class="el-table__empty-text"><slot name="empty">{{ emptyText || t('el.table.emptyText') }}</slot></span>
       </div>
     </div>
     <div class="el-table__fixed" ref="fixedWrapper"
@@ -93,7 +93,7 @@
         </table-body>
       </div>
     </div>
-    <div class="el-table__fixed-right-patch" 
+    <div class="el-table__fixed-right-patch"
       v-if="rightFixedColumns.length > 0"
       :style="{ width: layout.scrollY ? layout.gutterWidth + 'px' : '0', height: layout.headerHeight + 'px' }"></div>
     <div class="el-table__column-resize-proxy" ref="resizeProxy" v-show="resizeProxyVisible"></div>
