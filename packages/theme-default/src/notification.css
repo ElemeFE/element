@@ -16,6 +16,10 @@
     overflow: hidden;
 
     @e group {
+      margin-left: 0;
+      @when with-icon {
+        margin-left: 55px;
+      }
       & span {
         font-size: var(--notification-title-font-size);
         color: var(--notification-title-color);

@@ -20,6 +20,11 @@
     @e group {
       margin-left: 38px;
       position: relative;
+      height: 20px;
+
+      @when with-icon {
+        margin-left: 0;
+      }
 
       & p {
         font-size: var(--font-size-base);
@@ -28,14 +33,21 @@
         white-space: nowrap;
         color: var(--message-content-color);
         text-align: justify;
+        display: inline-block;
+        vertical-align: middle;
       }
     }
 
-    @e icon {
+    @e img {
       size: 40px;
       position: absolute;
       left: 0;
       top: 0;
+    }
+
+    @e icon {
+      vertical-align: middle;
+      margin-right: 8px;
     }
 
     @e closeBtn {

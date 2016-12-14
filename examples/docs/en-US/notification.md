@@ -222,6 +222,8 @@ In this case you should call `Notification(options)`. We have also registered me
 | title | title | string | — | — |
 | message | description text | string | — | — |
 | type | notification type | string | success/warning/info/error | — |
+| iconClass | custom icon's class. It will be overridden by `type` | string | — | — |
+| customClass | custom class name for Notification | string | — | — |
 | duration | duration before close. It will not automatically close if set 0 | number | — | 4500 |
 | onClose | callback function when closed | function | — | — |
 | offset | offset from the top edge of the screen. Every Notification instance of the same moment should have the same offset | number | — | 0 |
