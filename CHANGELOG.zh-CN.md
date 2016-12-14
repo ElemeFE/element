@@ -1,5 +1,16 @@
 ## 更新日志
 
+### 1.0.7
+*2016-12-14*
+
+- 修复 DatePicker 在有值的情况下 hover 清空按钮时会错误地显示弹框
+- 修复 DatePicker 设置默认值为 null 会错误地显示时间值
+- 新增 Table 的 `row-contextmenu` 事件和 `max-height` 属性，#1663 #1674
+- 新增 MessageBox 的 `customClass` 属性，#1707
+- 新增 Message 和 Notification 的 `iconClass` 和 `customClass` 属性，#1671
+- 新增 Table 支持 empty slot，#1737
+- 改进 InputNumber change 事件增加 old value 的参数
+
 ### 1.0.6
 *2016-12-09*
 

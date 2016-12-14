@@ -1,5 +1,17 @@
 ## Changelog
 
+### 1.0.7
+
+*2016-12-14*
+
+- Fixed DatePicker dropdown appears when hovering on the clear button
+- Fixed DatePicker displays a wrong date when its initial value is null
+- Added `row-contextmenu` event and `max-height` attribute for Table, #1663 #1674
+- Added `customClass` attribute for MessageBox, #1707
+- Added `iconClass` and `customClass` attributes for Message and Notification, #1671
+- Added empty slot for Table, #1737
+- Added old value as a second parameter in change event for InputNumber
+
 ### 1.0.6
 
 *2016-12-09*
