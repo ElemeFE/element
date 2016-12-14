@@ -1,6 +1,8 @@
 import PopperJS from './popper';
 import { PopupManager } from 'vue-popup';
 
+const stop = e => e.stopPropagation();
+
 /**
  * @param {HTMLElement} [reference=$refs.reference] - The reference element used to position the popper.
  * @param {HTMLElement} [popper=$refs.popper] - The HTML element used as popper, or a configuration used to generate the popper.
@@ -93,6 +95,7 @@ export default {
         this.$nextTick(this.updatePopper);
       });
       this.popperJS._popper.style.zIndex = PopupManager.nextZIndex();
+      this.popperElm.addEventListener('click', stop);
     },
 
     updatePopper() {
@@ -149,9 +152,10 @@ export default {
 
   beforeDestroy() {
     this.doDestroy();
-    this.popperElm &&
-    this.popperElm.parentNode === document.body &&
-    document.body.removeChild(this.popperElm);
+    if (this.popperElm && this.popperElm.parentNode === document.body) {
+      this.popperElm.removeEventListener('click', stop);
+      document.body.removeChild(this.popperElm);
+    }
   },
 
   // call destroy in keep-alive mode
