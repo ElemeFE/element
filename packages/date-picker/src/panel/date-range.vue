@@ -136,7 +136,7 @@
         <button
           type="button"
           class="el-picker-panel__btn"
-          @click="handleConfirm"
+          @click="handleConfirm()"
           :disabled="btnDisabled">{{ t('el.datepicker.confirm') }}</button>
       </div>
     </div>
