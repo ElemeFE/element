@@ -1,5 +1,5 @@
 {
-  "name": "el-input-number",
+  "name": "element-input-number",
   "version": "1.0.1",
   "description": "A input component for Vue.",
   "main": "lib/index.js",

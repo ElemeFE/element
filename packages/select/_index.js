@@ -1,12 +1,12 @@
-import Select from './src/select';
-import Option from './src/option';
-import OptionGroup from './src/option-group';
+import ElSelect from './src/select';
+import ElOption from './src/option';
+import ElOptionGroup from './src/option-group';
 
 /* istanbul ignore next */
 export default function(Vue) {
-  Vue.component(Select.name, Select);
-  Vue.component(Option.name, Option);
-  Vue.component(OptionGroup.name, OptionGroup);
+  Vue.component(ElSelect.name, ElSelect);
+  Vue.component(ElOption.name, ElOption);
+  Vue.component(ElOptionGroup.name, ElOptionGroup);
 };
 
-export { Select, Option, OptionGroup };
+export { ElSelect, ElOption, ElOptionGroup };
