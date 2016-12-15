@@ -14,6 +14,7 @@
     border-radius: var(--tag-border-radius);
     box-sizing: border-box;
     border: 1px solid transparent;
+    white-space: nowrap;
 
     & .el-icon-close {
       border-radius: 50%;
