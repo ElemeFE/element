@@ -156,7 +156,7 @@
 ```
 :::
 
-### Upload Attribute
+### Attribute
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | action | 必选参数, 上传的地址 | string | — | — |
@@ -177,7 +177,7 @@
 | thumbnail-mode | 是否设置为图片模式，该模式下会显示图片缩略图 | boolean | — | false |
 | default-file-list | 默认已上传的文件列表, 例如: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}] | array | — | [] |
 
-### Upload Methods
+### Methods
 | 方法名      | 说明          | 参数 |
 |---------- |-------------- | - |
 | clearFiles | 清空已上传的文件列表 | — |

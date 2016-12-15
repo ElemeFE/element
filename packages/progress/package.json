@@ -1,5 +1,5 @@
 {
-  "name": "el-progress",
+  "name": "element-progress",
   "version": "1.0.1",
   "description": "A progress component for Vue.",
   "main": "lib/index.js",

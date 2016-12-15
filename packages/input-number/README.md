@@ -1,53 +1,58 @@
-# el-input
-> A el-input component for Vue.js.
+## element-input-number
+> A element-input-number component for Vue.js.
 
-# Demo
-http://element-component.github.io/el-input
+## Demo
+http://element-component.github.io/element-input-number
 
-# Installation
+## Installation
 ```shell
-npm i el-input -D
+npm i element-input-number -D
 ```
 
-# Usage
+## Usage
 ```javascript
 import Vue from 'vue'
-import ElInput from 'el-input'
-import 'element-theme-default/dist/input.css'
+import ElInputNumber from 'element-input-number'
+import 'element-theme-default/dist/input-number.css'
 
-Vue.use(ElInput)
+Vue.use(ElInputNumber)
 ```
 
 or
 
 ```javascript
 import Vue from 'vue'
-import { ElInput } from 'el-input'
+import ElInputNumber from 'element-input-number'
 
-Vue.component('el-input', ElInput)
+Vue.component('el-input-number', ElInputNumber)
 ```
 
-# Options
+### Attributes
+| 参数      | 说明          | 类型      | 可选值                           | 默认值  |
+|----------|-------------- |----------|--------------------------------  |-------- |
+| value    | 绑定值         | number | — | — |
+| min      | 设置计数器允许的最小值 | number | — | 0 |
+| max      | 设置计数器允许的最大值 | number | — | Infinity |
+| step     | 计数器步长           | number   | — | 1 |
+| size     | 计数器尺寸           | string   | large, small | — |
+| disabled | 是否禁用计数器        | boolean | — | false |
+| controls | 是否使用控制按钮        | boolean | — | true |
 
-|     name    | description |     type    |   default   |
-|-------------|-------------|-------------|-------------|
-| model | 绑定值，需双向绑定 | string|number ||
-| placeholder | 输入框占位文本 | string ||
-| suggestion | 输入建议 | string[] ||
-| disabled | 是否禁用 | boolean | false |
-| cache | 是否需要缓存 | boolean | false |
-| effect | 输入框效果，允许 text, number, special | string | text |
+### Events
+| 事件名称 | 说明 | 回调参数 |
+|---------|--------|---------|
+| change | 绑定值被改变时触发 | 最后变更的值 |
 
-# Development
+## Development
 ```shell
 make dev
 
-# test
+## test
 make test
 
-# build
+## build
 make build
 ```
 
-# License
+## License
 [MIT](https://opensource.org/licenses/MIT)

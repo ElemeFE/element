@@ -1,10 +1,10 @@
-import Steps from './src/steps';
-import Step from './src/step';
+import ElSteps from './src/steps';
+import ElStep from './src/step';
 
 /* istanbul ignore next */
 export default function(Vue) {
-  Vue.component(Steps.name, Steps);
-  Vue.component(Step.name, Step);
+  Vue.component(ElSteps.name, ElSteps);
+  Vue.component(ElStep.name, ElStep);
 };
 
-export { Step, Steps };
+export { ElStep, ElSteps };

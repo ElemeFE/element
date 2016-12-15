@@ -6,4 +6,3 @@ ElCheckbox.install = function(Vue) {
 };
 
 export default ElCheckbox;
-

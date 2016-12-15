@@ -4,7 +4,7 @@ var config = require('../../build/config');
 
 cooking.set({
   entry: {
-    index: path.join(__dirname, 'index.js')
+    index: path.join(__dirname, '_index.js')
   },
   dist: path.join(__dirname, 'lib'),
   template: false,
