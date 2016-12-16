@@ -1380,7 +1380,7 @@ Customize table column so it can be integrated with other components.
 | cell-mouse-enter | triggers when hovering into a cell| row, column, cell, event |
 | cell-mouse-leave | triggers when hovering out of a cell | row, column, cell, event |
 | cell-click | triggers when clicking a cell | row, column, cell, event |
-| row-click | triggers when clicking a row | row, event |
+| row-click | triggers when clicking a row | row, event, column |
 | row-contextmenu | triggers when user right clicks on a row | row, event |
 | row-dblclick | triggers when double clicking a row | row, event |
 | header-click | triggers when clicking a column header | column, event |

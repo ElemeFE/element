@@ -215,9 +215,9 @@ export default {
     handleClick(event, row) {
       const table = this.$parent;
       const cell = getCell(event);
-
+      let column;
       if (cell) {
-        const column = getColumnByCell(table, cell);
+        column = getColumnByCell(table, cell);
         if (column) {
           table.$emit('cell-click', row, column, cell, event);
         }
@@ -225,7 +225,7 @@ export default {
 
       this.store.commit('setCurrentRow', row);
 
-      table.$emit('row-click', row, event);
+      table.$emit('row-click', row, event, column);
     }
   }
 };

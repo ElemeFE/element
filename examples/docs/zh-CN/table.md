@@ -1388,7 +1388,7 @@
 | cell-mouse-enter | 当单元格 hover 进入时会触发该事件 | row, column, cell, event |
 | cell-mouse-leave | 当单元格 hover 退出时会触发该事件 | row, column, cell, event |
 | cell-click | 当某个单元格被点击时会触发该事件 | row, column, cell, event |
-| row-click | 当某一行被点击时会触发该事件 | row, event |
+| row-click | 当某一行被点击时会触发该事件 | row, event, column |
 | row-contextmenu | 当某一行被鼠标右键点击时会触发该事件 | row, event |
 | row-dblclick | 当某一行被双击时会触发该事件 | row, event |
 | header-click | 当某一列的表头被点击时会触发该事件 | column, event |
