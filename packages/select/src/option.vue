@@ -83,6 +83,10 @@
         } else {
           return false;
         }
+      },
+
+      label(val) {
+        this.currentLabel = val;
       }
     },
 
