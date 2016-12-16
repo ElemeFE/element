@@ -3,6 +3,9 @@ import { getNodeKey } from './util';
 
 export default class TreeStore {
   constructor(options) {
+    this.currentNode = null;
+    this.currentNodeKey = null;
+
     for (let option in options) {
       if (options.hasOwnProperty(option)) {
         this[option] = options[option];
@@ -231,6 +234,21 @@ export default class TreeStore {
 
     if (node) {
       node.setChecked(!!checked, deep);
+    }
+  }
+
+  getCurrentNode() {
+    return this.currentNode;
+  }
+
+  setCurrentNode(node) {
+    this.currentNode = node;
+  }
+
+  setCurrentNodeKey(key) {
+    const node = this.getNode(key);
+    if (node) {
+      this.currentNode = node;
     }
   }
 };
