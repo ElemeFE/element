@@ -194,7 +194,6 @@
         selectedLabel: '',
         hoverIndex: -1,
         query: '',
-        isForcedVisible: false,
         bottomOverflowBeforeHidden: 0,
         topOverflowBeforeHidden: 0,
         optionsAllDisabled: false,
@@ -230,10 +229,6 @@
         this.hoverIndex = -1;
         if (this.multiple && this.filterable) {
           this.resetInputHeight();
-        }
-        if (this.isForcedVisible) {
-          this.isForcedVisible = false;
-          return;
         }
         if (this.remote && typeof this.remoteMethod === 'function') {
           this.hoverIndex = -1;
@@ -271,6 +266,7 @@
             this.getOverflows();
             if (this.selected) {
               this.selectedLabel = this.selected.currentLabel;
+              if (this.filterable) this.query = this.selectedLabel;
             }
           }
         } else {
@@ -282,7 +278,6 @@
               this.$refs.input.focus();
             } else {
               if (!this.remote) {
-                this.isForcedVisible = true;
                 this.broadcast('ElOption', 'queryChange', '');
               }
               this.broadcast('ElInput', 'inputSelect');
@@ -593,6 +588,7 @@
 
       this.$on('handleOptionClick', this.handleOptionSelect);
       this.$on('onOptionDestroy', this.onOptionDestroy);
+      this.$on('setSelected', this.setSelected);
     },
 
     mounted() {

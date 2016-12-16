@@ -86,6 +86,20 @@
       }
     },
 
+    watch: {
+      currentLabel() {
+        this.dispatch('ElSelect', 'setSelected');
+      },
+      value() {
+        this.dispatch('ElSelect', 'setSelected');
+      },
+      visible() {
+        this.$nextTick(() => {
+          this.dispatch('ElSelectDropdown', 'updatePopper');
+        });
+      }
+    },
+
     methods: {
       handleGroupDisabled(val) {
         this.groupDisabled = val;
