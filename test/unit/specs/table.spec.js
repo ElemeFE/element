@@ -401,7 +401,7 @@ describe('Table', () => {
         const cell = vm.$el.querySelectorAll('.el-table__body .cell')[2]; // first row
 
         triggerEvent(cell.parentNode.parentNode, 'click');
-        expect(vm.result).to.length(2); // row, event
+        expect(vm.result).to.length(3); // row, event, column
         expect(vm.result[0]).to.have.property('name').to.equal(getTestData()[0].name);
         destroyVM(vm);
         done();
