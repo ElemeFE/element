@@ -195,9 +195,9 @@
            */
           setTimeout(() => {
             this.dragging = false;
+            this.$refs.tooltip.showPopper = false;
+            this.setPosition(this.newPos);
           }, 0);
-          this.$refs.tooltip.showPopper = false;
-          this.setPosition(this.newPos);
           window.removeEventListener('mousemove', this.onDragging);
           window.removeEventListener('mouseup', this.onDragEnd);
           window.removeEventListener('contextmenu', this.onDragEnd);
