@@ -94,6 +94,20 @@ describe('Tree', () => {
     }, DELAY);
   });
 
+  it('current change', done => {
+    vm = getTreeVm(':props="defaultProps" @current-change="handleCurrentChange"', {
+      methods: {
+        handleCurrentChange(data) {
+          this.currentNode = data;
+        }
+      }
+    });
+    const firstNode = vm.$el.querySelector('.el-tree-node__content');
+    firstNode.click();
+    expect(vm.currentNode.label).to.equal('一级 1');
+    done();
+  });
+
   it('emptyText', (done) => {
     vm = getTreeVm(':props="defaultProps"');
     vm.data = [];
@@ -109,6 +123,16 @@ describe('Tree', () => {
     firstNode.click();
     vm.$nextTick(() => {
       expect(getComputedStyle(firstNode)['background-color']).to.equal('rgb(239, 247, 255)');
+      done();
+    });
+  });
+
+  it('current-node-key', done => {
+    vm = getTreeVm(':props="defaultProps" :current-node-key="1"');
+    const firstNode = document.querySelector('.el-tree-node');
+    firstNode.click();
+    vm.$nextTick(() => {
+      expect(firstNode.classList.contains('is-current')).to.true;
       done();
     });
   });

@@ -2,7 +2,11 @@
   <div class="el-tree-node"
     @click.stop="handleClick"
     v-show="node.visible"
-    :class="{ 'is-expanded': childNodeRendered && expanded, 'is-current': tree.currentNode === _self, 'is-hidden': !node.visible }">
+    :class="{
+      'is-expanded': childNodeRendered && expanded,
+      'is-current': tree.store.currentNode === node,
+      'is-hidden': !node.visible
+    }">
     <div class="el-tree-node__content"
       :style="{ 'padding-left': (node.level - 1) * 16 + 'px' }"
       @click="handleExpandIconClick">
@@ -124,7 +128,9 @@
       },
 
       handleClick() {
-        this.tree.currentNode = this;
+        const store = this.tree.store;
+        store.setCurrentNode(this.node);
+        this.tree.$emit('current-change', store.currentNode ? store.currentNode.data : null, store.currentNode);
       },
 
       handleExpandIconClick(event) {

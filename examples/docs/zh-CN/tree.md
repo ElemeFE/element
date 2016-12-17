@@ -236,6 +236,7 @@
 | load | 加载子树数据的方法 | function(node, resolve) | — | — |
 | render-content | 树节点的内容区的渲染 Function | Function(h, { node } | - | - |
 | highlight-current | 是否高亮当前选中节点，默认值是 false。| boolean | - | false |
+| current-node-key | 当前选中节点的 key，是一个只写属性 | string, number | - | - |
 | default-expand-all | 是否默认展开所有节点 | boolean | - | false |
 | auto-expand-parent | 展开子节点的时候是否自动展开父节点 | boolean | — | true |
 | default-expanded-keys | 默认展开的节点的 key 的数组 | array | — | — |
@@ -266,3 +267,4 @@
 |---------- |-------- |---------- |
 | node-click  | 节点被点击时的回调 | 共三个参数，依次为：传递给 `data` 属性的数组中该节点所对应的对象、节点对应的 Node、节点组件本身。 |
 | check-change  | 节点选中状态发生变化时的回调 | 共三个参数，依次为：传递给 `data` 属性的数组中该节点所对应的对象、节点本身是否被选中、节点的子树中是否有被选中的节点 |
+| current-change | 当前选中节点变化时触发的事件 | 共两个参数，依次为：当前节点的数据，当前节点的 Node 对象 |

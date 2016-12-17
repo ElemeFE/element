@@ -224,6 +224,7 @@ Used for node selection. In the following example, data for each layer is acquir
 | load | method for loading subtree data | function(node, resolve) | — | — |
 | render-content | render function for tree node | Function(h, { node } | - | - |
 | highlight-current | whether current node is highlighted | boolean | - | false |
+| current-node-key | key of current node, a set only prop | string, number | - | - |
 | default-expand-all | whether to expand all nodes by default | boolean | - | false |
 | auto-expand-parent | whether to expand father node when a child node is expanded | boolean | — | true |
 | default-expanded-keys | array of keys of initially expanded nodes | array | — | — |
@@ -254,5 +255,5 @@ Used for node selection. In the following example, data for each layer is acquir
 |---------- |-------- |---------- |
 | node-click | triggers when a node is clicked | three parameters: node object corresponding to the node clicked, `node` property of TreeNode, TreeNode itself |
 | check-change | triggers when the selected state of the node changes | three parameters: node object corresponding to the node whose selected state is changed, whether the node is selected, whether node's subtree has selected nodes |
-
+| current-change | triggers when current node changes | two parameters: node object corresponding to the current node, `node` property of TreeNode |
 

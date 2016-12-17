@@ -58,6 +58,7 @@
         default: false
       },
       highlightCurrent: Boolean,
+      currentNodeKey: [String, Number],
       load: Function,
       filterNodeMethod: Function
     },
@@ -71,6 +72,7 @@
         lazy: this.lazy,
         props: this.props,
         load: this.load,
+        currentNodeKey: this.currentNodeKey,
         checkStrictly: this.checkStrictly,
         defaultCheckedKeys: this.defaultCheckedKeys,
         defaultExpandedKeys: this.defaultExpandedKeys,
@@ -113,6 +115,9 @@
       defaultExpandedKeys(newVal) {
         this.store.defaultExpandedKeys = newVal;
         this.store.setDefaultExpandedKeys(newVal);
+      },
+      currentNodeKey(newVal) {
+        this.store.setCurrentNodeKey(newVal);
       },
       data(newVal) {
         this.store.setData(newVal);
