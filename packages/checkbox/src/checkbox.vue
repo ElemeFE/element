@@ -49,17 +49,27 @@
 
     componentName: 'ElCheckbox',
 
+    data() {
+      return {
+        selfModel: false
+      };
+    },
+
     computed: {
       model: {
         get() {
-          return this.isGroup ? this.store : this.value;
+          return this.isGroup
+            ? this.store : this.value !== undefined
+            ? this.value : this.selfModel;
         },
 
         set(val) {
           if (this.isGroup) {
             this.dispatch('ElCheckboxGroup', 'input', [val]);
-          } else {
+          } else if (this.value !== undefined) {
             this.$emit('input', val);
+          } else {
+            this.selfModel = val;
           }
         }
       },
@@ -105,8 +115,11 @@
 
     methods: {
       addToStore() {
-        if (Array.isArray(this.model)) {
-          this.model.indexOf(this.label) === -1 && this.model.push(this.label);
+        if (
+          Array.isArray(this.model) &&
+          this.model.indexOf(this.label) === -1
+        ) {
+          this.model.push(this.label);
         } else {
           this.model = this.trueLabel || true;
         }
