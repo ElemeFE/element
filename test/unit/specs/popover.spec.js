@@ -1,5 +1,5 @@
 import { createVue, triggerEvent, createTest, destroyVM } from '../util';
-import Popover, { directive } from 'packages/popover';
+import Popover from 'packages/popover';
 
 describe('Popover', () => {
   let vm;
@@ -149,7 +149,7 @@ describe('Popover', () => {
       `,
 
       directives: {
-        Popover: directive
+        Popover: Popover.directive
       }
     }, true);
     const compo = vm.$refs.popover1;
