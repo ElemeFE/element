@@ -1041,7 +1041,7 @@ Single row selection is supported.
 
 You can also select multiple rows.
 
-:::demo Activating multiple selection is easy: simply add an `el-table-column` with its `type` set to `selection`. Apart from multiple selection, this example also uses `scoped slots` and `show-overflow-tooltip`: by default, if the content is too long, it will break into multiple lines. If you want to keep it in one line, use attribute `show-overflow-tooltip`, which accepts a `Boolean` value. When set `true`, the extra content will show in tooltip when hover on the cell.
+:::demo Activating multiple selection is easy: simply add an `el-table-column` with its `type` set to `selection`. Apart from multiple selection, this example also uses `show-overflow-tooltip`: by default, if the content is too long, it will break into multiple lines. If you want to keep it in one line, use attribute `show-overflow-tooltip`, which accepts a `Boolean` value. When set `true`, the extra content will show in tooltip when hover on the cell.
 ```html
 <template>
   <el-table
@@ -1266,7 +1266,7 @@ Filter the table to find desired data.
 ### Custom column template
 
 Customize table column so it can be integrated with other components.
-:::demo You have access to the following data: row, column, $index and store (state management of Table) by [Scoped slot](https://vuejs.org/v2/guide/components.html#Scoped-Slots). (Scoped slots is supported in `1.1`, `inline-template` can also work, but not recommended).
+:::demo You have access to the following data: row, column, $index and store (state management of Table) by [Scoped slot](https://vuejs.org/v2/guide/components.html#Scoped-Slots). (Scoped slots is supported from `1.1`, `inline-template` still works, but it's not recommended).
 ```html
 <template>
   <el-table
