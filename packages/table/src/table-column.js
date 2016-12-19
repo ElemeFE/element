@@ -226,7 +226,6 @@ export default {
           if (Object.prototype.toString.call(data._self) === '[object Object]') {
             for (let prop in data._self) {
               if (!data.hasOwnProperty(prop)) {
-                // _self.$set(data, prop, data._self[prop]);
                 data[prop] = data._self[prop];
               }
             }
@@ -236,7 +235,7 @@ export default {
           data.$options.staticRenderFns = _self.$options.staticRenderFns;
           return _self.customRender.call(data);
         };
-      } else if (_self.$scopedSlots) {
+      } else if (_self.$scopedSlots.default) {
         renderCell = () => _self.$scopedSlots.default(data);
       }
 
