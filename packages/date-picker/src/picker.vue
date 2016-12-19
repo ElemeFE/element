@@ -301,7 +301,7 @@ export default {
           ).parser;
           const parsedValue = parser(value, this.format || DEFAULT_FORMATS[type]);
 
-          if (parsedValue) {
+          if (parsedValue && this.picker) {
             this.picker.value = parsedValue;
           }
           return;
