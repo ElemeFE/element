@@ -639,11 +639,15 @@
 | remote | 是否为远程搜索 | boolean | — | false |
 | remote-method | 远程搜索方法 | function | — | — |
 | loading | 是否正在从远程获取数据 | boolean | — | false |
+| loading-text | 远程加载时显示的文字 | string | — | 加载中 |
+| no-match-text | 搜索条件无匹配时显示的文字 | string | — | 无匹配数据 |
+| no-data-text | 选项为空时显示的文字 | string | — | 无数据 |
 
 ### Select Events
 | 事件名称 | 说明 | 回调参数 |
 |---------|---------|---------|
 | change | 选中值发生变化时触发 | 目前的选中值 |
+| visible-change | 下拉框出现/隐藏时触发 | 出现则为 true，隐藏则为 false |
 
 ### Option Group Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |

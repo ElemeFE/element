@@ -637,11 +637,15 @@ Create and select new items that are not included in select options
 | remote | whether options are loaded from server | boolean | — | false |
 | remote-method | custom remote search method | function | — | — |
 | loading | whether Select is loading data from server | boolean | — | false |
+| loading-text | displayed text while loading data from server | string | — | Loading |
+| no-match-text | displayed text when no data matches the filtering query | string | — | No matching data |
+| no-data-text | displayed text when there is no options | string | — | No data |
 
 ### Select Events
 | Event Name | Description | Parameters |
 |---------|---------|---------|
 | change | triggers when the selected value changes | current selected value |
+| visible-change | triggers when the dropdown appears/disappears | true when it appears, and false otherwise |
 
 ### Option Group Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
