@@ -127,10 +127,6 @@ export default {
     }
   },
 
-  render() {
-    return (<div>{ this._t('default') }</div>);
-  },
-
   data() {
     return {
       isSubColumn: false,
@@ -161,9 +157,7 @@ export default {
 
   created() {
     this.customRender = this.$options.render;
-    this.$options.render = (h) => {
-      return (<div>{ this._t('default') }</div>);
-    };
+    this.$options.render = h => h('div', this.$slots.default);
 
     let columnId = this.columnId = (this.$parent.tableId || (this.$parent.columnId + '_')) + 'column_' + columnIdSeed++;
 
@@ -242,6 +236,8 @@ export default {
           data.$options.staticRenderFns = _self.$options.staticRenderFns;
           return _self.customRender.call(data);
         };
+      } else if (_self.$scopedSlots) {
+        renderCell = () => _self.$scopedSlots.default(data);
       }
 
       if (!renderCell) {
