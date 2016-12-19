@@ -17,7 +17,7 @@
       display: block;
       font-size: inherit;
       height: var(--input-height);
-      line-height: normal;
+      line-height: 1;
       outline: none;
       padding: 3px 10px;
       transition: var(--border-transition-base);
