@@ -1,5 +1,24 @@
 ## Changelog
 
+### 1.0.8
+
+*2016-12-20*
+
+- Fixed nested Popup from event bubbling, #1677
+- Fixed the issue that datetimerange-typed DatePicker can not select time, #1758
+- Fixed `change` event not firing correctly of Slider, #1809
+- Fixed Loading's spinner splitting while animating in some conditions, #1786
+- Added `loading-text`, `no-data-text`, `no-match-text` properties and `visible-change` event for Select, #1849
+- Added `popper-class` property for DatePicker, Select and Tooltip, #1806
+- Added `expand-on-click-node`, `current-node-key` properties and `current-change` event for Tree, #1805 #1807
+- Added the third parameter `column` for Table's `row-click` event, #1808
+- Fixed an error when pages with Checkbox switching routes due to `computed` property being cached, #1860
+- Added the tab instance as a parameter for TabPanel's `label-content` render function, #1857
+- Added infinite submenus support for NavMenu in vertical mode, #1851
+- Updated Checkbox so that it works without a binding value, #1818
+- Added `onProgress` hook for Progress, #1782
+- Fixed Tab not updating active bar with dynamic label, #1761
+
 ### 1.0.7
 
 *2016-12-14*
