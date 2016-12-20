@@ -156,7 +156,7 @@ Add more modules based on your scenario.
 | total | total item count | number | — | — |
 | page-count | total page count. Set either `total` or `page-count` and pages will be displayed; if you need `page-sizes`, `total` is required | number | — | — |
 | current-page | current page number | number | — | 1 |
-| layout | layout of Pagination, elements separated with a comma | string | `sizes`, `prev`, `pager`, `next`, `jumper`, `->`, `total` | 'prev, pager, next, jumper, ->, total'  |
+| layout | layout of Pagination, elements separated with a comma | string | `sizes`, `prev`, `pager`, `next`, `jumper`, `->`, `total`, `slot` | 'prev, pager, next, jumper, ->, total'  |
 | page-sizes | options of item count per page | number[] | — |  [10, 20, 30, 40, 50, 100] |
 
 ### Events
@@ -164,3 +164,8 @@ Add more modules based on your scenario.
 |---------|--------|---------|
 | size-change | triggers when `page-size` changes | the new `page-size` |
 | current-change | triggers when `current-page` changes | the new `current-page` |
+
+### Slot
+| Name | Description |
+| --- | --- |
+| — | custom content. To use this, you need to declare `slot` in `layout` |
