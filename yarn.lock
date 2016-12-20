@@ -1717,13 +1717,13 @@ domain-browser@^1.1.1:
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/domain-browser/-/domain-browser-1.1.7.tgz#867aa4b093faa05f1de08c06f4d7b21fdf8698bc"
 
-domelementtype@1, domelementtype@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/domelementtype/-/domelementtype-1.3.0.tgz#b17aed82e8ab59e52dd9c19b1756e0fc187204c2"
-
-domelementtype@~1.1.1:
+domelementtype@1, domelementtype@~1.1.1:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/domelementtype/-/domelementtype-1.1.3.tgz#bd28773e2642881aec51544924299c5cd822185b"
+
+domelementtype@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/domelementtype/-/domelementtype-1.3.0.tgz#b17aed82e8ab59e52dd9c19b1756e0fc187204c2"
 
 domhandler@2.1:
   version "2.1.0"
@@ -6865,9 +6865,9 @@ vue-markdown-loader@^0.5.1:
     markdown-it "^6.0.5"
     rimraf "^2.5.2"
 
-vue-popup@^0.2.12:
-  version "0.2.12"
-  resolved "https://registry.yarnpkg.com/vue-popup/-/vue-popup-0.2.12.tgz#61a504883cf4ad69ce83e8a16f0a53f0d58bf738"
+vue-popup@^0.2.14:
+  version "0.2.14"
+  resolved "https://registry.yarnpkg.com/vue-popup/-/vue-popup-0.2.14.tgz#aa3d461c6f2ab01ef4546665d730395ec6028302"
   dependencies:
     wind-dom "0.0.3"
 
