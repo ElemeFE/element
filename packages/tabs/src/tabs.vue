@@ -119,7 +119,7 @@
           refInFor: true,
           on: { click: (ev) => { handleTabClick(tab, ev); } }
         }, [
-          tab.labelContent ? tab.labelContent.call(this._renderProxy, h) : tab.label,
+          tab.labelContent ? tab.labelContent.call(this._renderProxy, h, tab) : tab.label,
           tab.isClosable ? btnClose : null,
           index === 0 ? activeBar : null
         ]);

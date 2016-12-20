@@ -1,6 +1,6 @@
 {
   "name": "element-ui",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A Component Library for Vue.js.",
   "main": "lib/element-ui.common.js",
   "files": [
@@ -46,7 +46,7 @@
     "babel-helper-vue-jsx-merge-props": "^2.0.0",
     "deepmerge": "^1.2.0",
     "throttle-debounce": "^1.0.1",
-    "vue-popup": "^0.2.12",
+    "vue-popup": "^0.2.14",
     "wind-dom": "0.0.3"
   },
   "peerDependencies": {

@@ -99,7 +99,7 @@
       },
 
       store() {
-        return this._checkboxGroup.value;
+        return this._checkboxGroup ? this._checkboxGroup.value : this.value;
       }
     },
 

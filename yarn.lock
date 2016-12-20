@@ -6863,9 +6863,9 @@ vue-markdown-loader@^0.5.1:
     markdown-it "^6.0.5"
     rimraf "^2.5.2"
 
-vue-popup@^0.2.12:
-  version "0.2.12"
-  resolved "https://registry.yarnpkg.com/vue-popup/-/vue-popup-0.2.12.tgz#61a504883cf4ad69ce83e8a16f0a53f0d58bf738"
+vue-popup@^0.2.14:
+  version "0.2.14"
+  resolved "https://registry.yarnpkg.com/vue-popup/-/vue-popup-0.2.14.tgz#aa3d461c6f2ab01ef4546665d730395ec6028302"
   dependencies:
     wind-dom "0.0.3"
 

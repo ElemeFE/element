@@ -112,6 +112,7 @@ export default {
       default: true
     },
     context: {},
+    columnKey: String,
     align: String,
     showTooltipWhenOverflow: Boolean,
     showOverflowTooltip: Boolean,
@@ -159,7 +160,7 @@ export default {
     this.customRender = this.$options.render;
     this.$options.render = h => h('div', this.$slots.default);
 
-    let columnId = this.columnId = (this.$parent.tableId || (this.$parent.columnId + '_')) + 'column_' + columnIdSeed++;
+    let columnId = this.columnId = this.columnKey || ((this.$parent.tableId || (this.$parent.columnId + '_')) + 'column_' + columnIdSeed++);
 
     let parent = this.$parent;
     let owner = this.owner;
