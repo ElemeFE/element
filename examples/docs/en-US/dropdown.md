@@ -113,6 +113,7 @@ Click the triggering element or hover on it.
 | size          | component size, refer to `Button` component     | string          | large, small, mini  |  —  |
 | menu-align    | horizontal alignment     | string          | start/end  | end |
 | trigger       | how to trigger     | string  |    hover/click  |  hover |
+| hide-on-click | whether to hide menu after clicking menu-item     | boolean          | -  | true |
 
 ### Dropdown Events
 | Event Name | Description | Parameters |
