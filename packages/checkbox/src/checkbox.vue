@@ -52,7 +52,7 @@
     data() {
       return {
         selfModel: false,
-        focus: this.focus
+        focus: false
       };
     },
 
@@ -109,10 +109,6 @@
       indeterminate: Boolean,
       disabled: Boolean,
       checked: Boolean,
-      focus: {
-        type: Boolean,
-        default: false
-      },
       name: String,
       trueLabel: [String, Number],
       falseLabel: [String, Number]
