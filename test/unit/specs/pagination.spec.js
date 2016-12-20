@@ -40,6 +40,20 @@ describe('Pagination', () => {
     expect(elm.querySelector('.el-pagination__total')).to.not.exist;
   });
 
+  it('custom slot', () => {
+    vm = createVue({
+      template: `
+        <el-pagination
+          layout="slot, prev, pager, next"
+          :page-size="25"
+          :total="100">
+          <span class="slot-test">slot test</span>
+        </el-pagination>
+      `
+    });
+    expect(vm.$el.querySelector('.slot-test')).to.exist;
+  });
+
   it('small', () => {
     vm = createTest(Pagination, {
       small: true

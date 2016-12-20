@@ -226,6 +226,7 @@ Used for node selection. In the following example, data for each layer is acquir
 | highlight-current | whether current node is highlighted | boolean | - | false |
 | current-node-key | key of current node, a set only prop | string, number | - | - |
 | default-expand-all | whether to expand all nodes by default | boolean | - | false |
+| expand-on-click-node | whether to expand or collapse node when clicking on the node, if false, then expand or collapse node only when clicking on the arrow icon.  | - | true |
 | auto-expand-parent | whether to expand father node when a child node is expanded | boolean | — | true |
 | default-expanded-keys | array of keys of initially expanded nodes | array | — | — |
 | show-checkbox | whether node is selectable | boolean | — | false |

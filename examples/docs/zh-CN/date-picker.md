@@ -294,6 +294,7 @@
 | type | 显示类型 | string | year/month/date/week/ datetime/datetimerange/daterange | date |
 | format | 时间日期格式化 | string | 年 `yyyy`，月 `MM`，日 `dd`，小时 `HH`，分 `mm`，秒 `ss` | yyyy-MM-dd |
 | align | 对齐方式 | string | left, center, right | left |
+| popper-class | DatePicker 下拉框的类名 | string | — | — |
 |picker-options | 当前时间日期选择器特有的选项参考下表 | object |  — | {} |
 
 ### Picker Options

@@ -3,7 +3,8 @@
     <div
       v-show="visible"
       :style="{ width: width + 'px' }"
-      class="el-picker-panel time-select">
+      class="el-picker-panel time-select"
+      :class="popperClass">
       <div class="el-picker-panel__content">
         <div class="time-select-item"
           v-for="item in items"
@@ -90,6 +91,7 @@
 
     data() {
       return {
+        popperClass: '',
         start: '09:00',
         end: '18:00',
         step: '00:30',

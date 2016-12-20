@@ -189,7 +189,7 @@
       }
     }
     @when opened {
-      .el-submenu__icon-arrow {
+      > .el-submenu__title .el-submenu__icon-arrow {
         transform: rotateZ(180deg);
       }
     }

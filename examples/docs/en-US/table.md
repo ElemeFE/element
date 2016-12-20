@@ -1377,6 +1377,7 @@ Customize table column so it can be integrated with other components.
 | row-dblclick | triggers when double clicking a row | row, event |
 | header-click | triggers when clicking a column header | column, event |
 | sort-change | triggers when Table's sorting changes | { column, prop, order } |
+| filter-change | column's key. If you need to use the filter-change event, this attribute is mandatory to identify which column is being filtered | filters |
 | current-change | triggers when current row changes | currentRow, oldCurrentRow |
 
 ### Table Methods
@@ -1390,6 +1391,7 @@ Customize table column so it can be integrated with other components.
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | type | type of the column. If set to `selection`, the column will display checkbox. If set to `index`, the column will display index of the row (staring from 1)  | string | selection/index | — |
 | label | column label | string | — | — |
+| column-key | column's key. If you need to use the filter-change event, you need this attribute to identify which column is being filtered | string | string | - | - |
 | prop |  field name. You can also use its alias: `property` | string | — | — |
 | width | column width | string | — | — |
 | min-width | column minimum width. Columns with `width` has a fixed width, while columns with `min-width` has a width that is distributed in proportion | string | — | — |
