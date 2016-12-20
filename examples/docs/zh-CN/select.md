@@ -642,6 +642,7 @@
 | loading-text | 远程加载时显示的文字 | string | — | 加载中 |
 | no-match-text | 搜索条件无匹配时显示的文字 | string | — | 无匹配数据 |
 | no-data-text | 选项为空时显示的文字 | string | — | 无数据 |
+| popper-class | Select 下拉框的类名 | string | — | — |
 
 ### Select Events
 | 事件名称 | 说明 | 回调参数 |

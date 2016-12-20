@@ -640,6 +640,7 @@ Create and select new items that are not included in select options
 | loading-text | displayed text while loading data from server | string | — | Loading |
 | no-match-text | displayed text when no data matches the filtering query | string | — | No matching data |
 | no-data-text | displayed text when there is no options | string | — | No data |
+| popper-class | custom class name for Select's dropdown | string | — | — |
 
 ### Select Events
 | Event Name | Description | Parameters |

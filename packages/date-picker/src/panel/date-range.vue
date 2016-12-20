@@ -4,10 +4,10 @@
       v-show="visible"
       :style="{ width: width + 'px' }"
       class="el-picker-panel el-date-range-picker"
-      :class="{
+      :class="[{
         'has-sidebar': $slots.sidebar || shortcuts,
         'has-time': showTime
-      }">
+      }, popperClass]">
       <div class="el-picker-panel__body-wrapper">
         <slot name="sidebar" class="el-picker-panel__sidebar"></slot>
         <div class="el-picker-panel__sidebar" v-if="shortcuts">
@@ -215,6 +215,7 @@
 
     data() {
       return {
+        popperClass: '',
         minPickerWidth: 0,
         maxPickerWidth: 0,
         date: new Date(),
