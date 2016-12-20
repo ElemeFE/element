@@ -45,7 +45,7 @@ Typical configurations for these config files are:
   },
   "dependencies": {
     "element-ui": "^1.0.0",
-    "vue": "^2.0.5"
+    "vue": "^2.1.6"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",
