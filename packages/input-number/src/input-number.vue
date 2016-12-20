@@ -46,6 +46,7 @@
 </template>
 <script>
   import ElInput from 'element-ui/packages/input';
+  import Vue from 'vue';
   import { once, on } from 'wind-dom/src/event';
 
   export default {
@@ -89,7 +90,7 @@
             interval = null;
           };
 
-          !this.$isServer && on(el, 'mousedown', () => {
+          !Vue.prototype.$isServer && on(el, 'mousedown', () => {
             startTime = new Date();
             once(document, 'mouseup', clear);
             interval = setInterval(handler, 100);
