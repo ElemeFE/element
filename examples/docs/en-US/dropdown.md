@@ -104,6 +104,29 @@ Click the triggering element or hover on it.
 </el-row>
 ```
 :::
+
+### Menu hiding behavior
+
+Use `hide-on-click` to define if menu closes on clicking.
+
+:::demo By default menu will close when you click on menu items, and it can be turned off by setting hide-on-click to false.
+```html
+<el-dropdown :hide-on-click="false">
+  <span class="el-dropdown-link">
+    Dropdown List<i class="el-icon-caret-bottom el-icon--right"></i>
+  </span>
+  <el-dropdown-menu slot="dropdown">
+    <el-dropdown-item>Action 1</el-dropdown-item>
+    <el-dropdown-item>Action 2</el-dropdown-item>
+    <el-dropdown-item>Action 3</el-dropdown-item>
+    <el-dropdown-item disabled>Action 4</el-dropdown-item>
+    <el-dropdown-item divided>Action 5</el-dropdown-item>
+  </el-dropdown-menu>
+</el-dropdown>
+```
+:::
+
+
 ### Dropdown Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
