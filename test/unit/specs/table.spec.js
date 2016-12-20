@@ -195,11 +195,12 @@ describe('Table', () => {
     beforeEach(done => {
       vm = createVue({
         template: `
-          <el-table ref="table" :data="testData">
+          <el-table ref="table" :data="testData" @filter-change="handleFilterChange">
             <el-table-column prop="name" label="片名" />
             <el-table-column prop="release" label="发行日期" />
             <el-table-column
               prop="director"
+              column-key="director"
               :filters="[
                 { text: 'John Lasseter', value: 'John Lasseter' },
                 { text: 'Peter Docter', value: 'Peter Docter' },
@@ -218,6 +219,9 @@ describe('Table', () => {
         methods: {
           filterMethod(value, row) {
             return value === row.director;
+          },
+          handleFilterChange(filters) {
+            this.filters = filters;
           }
         }
       }, true);
@@ -255,6 +259,7 @@ describe('Table', () => {
         setTimeout(_ => {
           triggerEvent(filter.querySelector('.el-table-filter__bottom button'), 'click', true, false);
           setTimeout(_ => {
+            expect(vm.filters['director']).to.be.eql(['John Lasseter']);
             expect(vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr')).to.length(3);
             document.body.removeChild(filter);
             done();
@@ -276,6 +281,7 @@ describe('Table', () => {
           // reset button
           triggerEvent(filter.querySelectorAll('.el-table-filter__bottom button')[1], 'click', true, false);
           setTimeout(_ => {
+            expect(vm.filters['director']).to.be.eql([]);
             expect(filter.querySelector('.el-table-filter__bottom button').classList.contains('is-disabled')).to.true;
             document.body.removeChild(filter);
             destroyVM(vm);

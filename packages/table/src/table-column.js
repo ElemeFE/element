@@ -112,6 +112,7 @@ export default {
       default: true
     },
     context: {},
+    columnKey: String,
     align: String,
     showTooltipWhenOverflow: Boolean,
     showOverflowTooltip: Boolean,
@@ -165,7 +166,7 @@ export default {
       return (<div>{ this._t('default') }</div>);
     };
 
-    let columnId = this.columnId = (this.$parent.tableId || (this.$parent.columnId + '_')) + 'column_' + columnIdSeed++;
+    let columnId = this.columnId = this.columnKey || ((this.$parent.tableId || (this.$parent.columnId + '_')) + 'column_' + columnIdSeed++);
 
     let parent = this.$parent;
     let owner = this.owner;
