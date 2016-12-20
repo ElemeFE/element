@@ -209,6 +209,41 @@ describe('Select', () => {
     expect(vm.$el.querySelector('.el-input').classList.contains('is-disabled')).to.true;
   });
 
+  it('visible event', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-select v-model="value" @visible-change="handleVisibleChange">
+            <el-option
+              v-for="item in options"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </div>
+      `,
+
+      data() {
+        return {
+          options: [],
+          value: '',
+          visible: ''
+        };
+      },
+
+      methods: {
+        handleVisibleChange(val) {
+          this.visible = val;
+        }
+      }
+    }, true);
+    vm.$children[0].visible = true;
+    setTimeout(() => {
+      expect(vm.visible).to.true;
+      done();
+    }, 50);
+  });
+
   it('keyboard operations', done => {
     vm = getSelectVm();
     const select = vm.$children[0];
