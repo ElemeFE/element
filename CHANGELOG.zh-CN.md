@@ -17,6 +17,8 @@
 - 新增 Checkbox 现在支持不绑定 value 也可以正常使用，#1818
 - 新增 Progress 的 `onProgress` 钩子函数，#1782
 - 修复 Tab 组件 active bar 在动态 label 下没有更新的问题，#1761
+- 新增 Table 的 `filter-change` 事件和 TableColumn 的 `column-key` 属性，#1876
+- 新增 Dropdown `hide-on-click` 属性，#1879
 
 ### 1.0.7
 *2016-12-14*

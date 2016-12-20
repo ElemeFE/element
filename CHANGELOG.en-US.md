@@ -18,6 +18,8 @@
 - Updated Checkbox so that it works without a binding value, #1818
 - Added `onProgress` hook for Progress, #1782
 - Fixed Tab not updating active bar with dynamic label, #1761
+- Added `filter-change` event for Table, and `column-key` property for TableColumn, #1876
+- Added `hide-on-click` property for Dropdown, #1879
 
 ### 1.0.7
 
