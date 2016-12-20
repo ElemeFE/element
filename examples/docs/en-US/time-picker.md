@@ -151,6 +151,7 @@ Can pick an arbitrary time range.
 | format | format of the picker | string | hour `HH`, minute `mm`, second `ss` | HH:mm:ss |
 | value | value of the picker | date for Time Picker, and string for Time Select | hour `HH`, minute `mm`, second `ss` | HH:mm:ss |
 | align | alignment | left/center/right | left |
+| popper-class | custom class name for TimePicker's dropdown | string | — | — |
 | picker-options | additional options, check the table below | object | — | {} |
 
 ### Time Select Options

@@ -3,7 +3,8 @@
     <div
       v-show="currentVisible"
       :style="{width: width + 'px'}"
-      class="el-time-panel">
+      class="el-time-panel"
+      :class="popperClass">
       <div class="el-time-panel__content" :class="{ 'has-seconds': showSeconds }">
         <time-spinner
           ref="spinner"
@@ -82,6 +83,7 @@
 
     data() {
       return {
+        popperClass: '',
         format: 'HH:mm:ss',
         value: '',
         hours: 0,

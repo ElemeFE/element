@@ -187,6 +187,7 @@ export default {
     readonly: Boolean,
     placeholder: String,
     disabled: Boolean,
+    popperClass: String,
     editable: {
       type: Boolean,
       default: true
@@ -377,6 +378,7 @@ export default {
       if (!this.picker) {
         this.panel.defaultValue = this.internalValue;
         this.picker = new Vue(this.panel).$mount(document.createElement('div'));
+        this.picker.popperClass = this.popperClass;
         this.popperElm = this.picker.$el;
         this.picker.width = this.reference.getBoundingClientRect().width;
         this.picker.showTime = this.type === 'datetime' || this.type === 'datetimerange';

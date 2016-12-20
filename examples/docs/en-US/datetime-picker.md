@@ -215,6 +215,7 @@ Select date and time in one picker.
 | type | type of the picker | string | year/month/date/datetime/ week/datetimerange/daterange | date |
 | format | format of the picker | string | year `yyyy` month `MM` day `dd`, hour `HH`, minute `mm`, second `ss` | yyyy-MM-dd |
 | align | alignment | left/center/right | left |
+| popper-class | custom class name for DateTimePicker's dropdown | string | — | — |
 | picker-options | additional options, check the table below | object | — | {} |
 
 ### Picker Options

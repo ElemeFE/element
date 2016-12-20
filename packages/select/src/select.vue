@@ -162,6 +162,7 @@
       filterable: Boolean,
       allowCreate: Boolean,
       loading: Boolean,
+      popperClass: String,
       remote: Boolean,
       loadingText: String,
       noMatchText: String,

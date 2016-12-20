@@ -158,6 +158,7 @@
 | format | 时间格式化(TimePicker) | string | 小时：`HH`，分：`mm`，秒：`ss` | 'HH:mm:ss' |
 | value | 绑定值 | TimePicker: DateTimeSelect: String | - | - |
 | align | 对齐方式 | string | left, center, right | left |
+| popper-class | TimePicker 下拉框的类名 | string | — | — |
 | picker-options | 当前时间日期选择器特有的选项参考下表 | object | — | {} |
 
 ### Time Select Options

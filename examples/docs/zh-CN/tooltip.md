@@ -209,3 +209,4 @@ Tooltip 组件提供了两个不同的主题：`dark`和`light`。
 |  options        | [popper.js](https://popper.js.org/documentation.html) 的参数 | Object            | 参考 [popper.js](https://popper.js.org/documentation.html) 文档 | `{ boundariesElement: 'body', gpuAcceleration: false }` |
 | openDelay | 延迟出现，单位毫秒 | Number | — | 0 |
 | manual | 手动控制模式，设置为 true 后，mouseenter 和 mouseleave 事件将不会生效 | Boolean | — | false |
+| popper-class | 为 Tooltip 的 popper 添加类名 | String | - | -|
