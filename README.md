@@ -10,6 +10,8 @@
 ![JS gzip size](http://img.badgesize.io/https://unpkg.com/element-ui/lib/index.js?compression=gzip&label=gzip%20size:%20JS)
 ![CSS gzip size](http://img.badgesize.io/https://unpkg.com/element-ui/lib/theme-default/index.css?compression=gzip&label=gzip%20size:%20CSS)
 [![Join the chat at https://gitter.im/ElemeFE/element](https://badges.gitter.im/ElemeFE/element.svg)](https://gitter.im/ElemeFE/element?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![OpenCollective](https://opencollective.com/element/backers/badge.svg)](#backers) 
+[![OpenCollective](https://opencollective.com/element/sponsors/badge.svg)](#sponsors)
 
 > A Vue.js 2.0 UI Toolkit for Web.
 
@@ -86,6 +88,10 @@ English documentation is brought to you by SwiftGG Translation Team. Our special
 ## Donation
 If you find Element useful, you can buy us a cup of coffee
 <img width="650" src="http://fuss10.elemecdn.com/2/d0/ab1b8e5a1d96bcdcd6092ce0c66ecjpeg.jpeg" alt="">
+
+[[Become a backer](https://opencollective.com/element#backer)] on OpenCollective
+
+[[Become a sponsor](https://opencollective.com/element#sponsor)] on OpenCollective
 
 ## LICENSE
 MIT
