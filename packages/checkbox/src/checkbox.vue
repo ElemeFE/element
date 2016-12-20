@@ -51,7 +51,8 @@
 
     data() {
       return {
-        selfModel: false
+        selfModel: false,
+        focus: false
       };
     },
 
