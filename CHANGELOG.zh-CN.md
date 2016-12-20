@@ -1,5 +1,23 @@
 ## 更新日志
 
+### 1.0.8
+*2016-12-20*
+
+- 修复 Popup 在叠加使用时阻止事件冒泡，#1677
+- 修复 DatePicker 类型为 datetimerange 时无法选择时间的问题，#1758
+- 修复 Slider 的 `change` 事件不能正确触发的问题，#1809
+- 修复 Loading 的 spinner 在某些情况下转动时出现碎片的问题，#1786
+- 新增 Select 的 `loading-text`、`no-data-text`、`no-match-text` 属性和 `visible-change` 事件，#1849
+- 新增 DatePicker、Select 和 Tooltip 的 `popper-class` 属性，#1806
+- 新增 Tree 的 `expand-on-click-node`、`current-node-key` 属性和 `current-change` 事件，#1805 #1807
+- 新增 Table `row-click` 事件的第三个参数 `column`，#1808
+- 修复 Checkbox 的在路由切换时因为 computed 属性被缓存导致的bug，#1860
+- 新增 TabPanel `label-content` 渲染钩子方法中增加 tab 实例的参数，#1857
+- 新增 NavMenu 组件增加无限级子菜单（vertical模式）的支持，#1851
+- 新增 Checkbox 现在支持不绑定 value 也可以正常使用，#1818
+- 新增 Progress 的 `onProgress` 钩子函数，#1782
+- 修复 Tab 组件 active bar 在动态 label 下没有更新的问题，#1761
+
 ### 1.0.7
 *2016-12-14*
 
