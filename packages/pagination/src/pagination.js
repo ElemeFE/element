@@ -112,12 +112,10 @@ export default {
       render(h) {
         return (
           <button
-            class={
-              [
-                'btn-next',
-                { disabled: this.$parent.internalCurrentPage === this.$parent.internalPageCount || this.$parent.internalPageCount === 0 }
-              ]
-            }
+            class={[
+              'btn-next',
+              { disabled: this.$parent.internalCurrentPage === this.$parent.internalPageCount || this.$parent.internalPageCount === 0 }
+            ]}
             on-click={ this.$parent.next }>
             <i class="el-icon el-icon-arrow-right"></i>
           </button>
