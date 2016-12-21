@@ -3,8 +3,8 @@
 
 @component-namespace el {
   @b time-spinner {
-    display: flex;
     width: 100%;
+    white-space: nowrap;
   }
 
   @b spinner {

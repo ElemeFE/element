@@ -23,6 +23,8 @@
       width: 110px;
       input {
         padding-right: 25px;
+        border-radius: var(--border-radius-small);
+        height: 28px;
       }
     }
 

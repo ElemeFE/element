@@ -55,7 +55,7 @@ export default {
       pager: <pager currentPage={ this.internalCurrentPage } pageCount={ this.internalPageCount } on-change={ this.handleCurrentChange }></pager>,
       next: <next></next>,
       sizes: <sizes pageSizes={ this.pageSizes }></sizes>,
-      slot: <slot></slot>,
+      slot: <my-slot></my-slot>,
       total: <total></total>
     };
     const components = layout.split(',').map((item) => item.trim());
@@ -87,6 +87,15 @@ export default {
   },
 
   components: {
+    MySlot: {
+      render(h) {
+        return (
+          this.$parent.$slots.default
+          ? this.$parent.$slots.default[0]
+          : ''
+        );
+      }
+    },
     Prev: {
       render(h) {
         return (
@@ -140,17 +149,15 @@ export default {
         return (
           <span class="el-pagination__sizes">
             <el-select
-              size="small"
               value={ this.$parent.internalPageSize }
-              on-change={ this.handleChange }
-              width={ 110 }>
+              on-input={ this.handleChange }>
               {
                 this.pageSizes.map(item =>
-                    <el-option
-                      value={ item }
-                      label={ item + ' ' + this.t('el.pagination.pagesize') }>
-                    </el-option>
-                  )
+                  <el-option
+                    value={ item }
+                    label={ item + ' ' + this.t('el.pagination.pagesize') }>
+                  </el-option>
+                )
               }
             </el-select>
           </span>

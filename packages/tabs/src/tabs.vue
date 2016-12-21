@@ -39,12 +39,21 @@
           let nextChild = tabs[index];
           let prevChild = tabs[index - 1];
 
-          this.currentName = nextChild ? nextChild.index : prevChild ? prevChild.index : '-1';
+          while (prevChild && prevChild.disabled) {
+            prevChild = tabs[tabs.indexOf(prevChild) - 1];
+          }
+
+          this.currentName = nextChild
+            ? nextChild.index
+            : prevChild
+            ? prevChild.index
+            : '-1';
         }
         this.$emit('tab-remove', tab);
         this.$forceUpdate();
       },
       handleTabClick(tab, event) {
+        if (tab.disabled) return;
         this.currentName = tab.index;
         this.$emit('tab-click', tab, event);
       },
@@ -73,7 +82,7 @@
       }
     },
     mounted() {
-      this.currentName = this.activeName || this.$children[0].index || '1';
+      this.currentName = this.activeName || this.$children[0] && this.$children[0].index || '1';
       this.$nextTick(() => {
         this.$forceUpdate();
       });
@@ -110,7 +119,7 @@
           refInFor: true,
           on: { click: (ev) => { handleTabClick(tab, ev); } }
         }, [
-          tab.label,
+          tab.labelContent ? tab.labelContent.call(this._renderProxy, h, tab) : tab.label,
           tab.isClosable ? btnClose : null,
           index === 0 ? activeBar : null
         ]);

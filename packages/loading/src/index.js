@@ -12,16 +12,22 @@ const defaults = {
   customClass: ''
 };
 
-let originalPosition, originalOverflow;
+let fullscreenLoading;
+
+LoadingConstructor.prototype.originalPosition = '';
+LoadingConstructor.prototype.originalOverflow = '';
 
 LoadingConstructor.prototype.close = function() {
-  if (this.fullscreen && originalOverflow !== 'hidden') {
-    document.body.style.overflow = originalOverflow;
+  if (this.fullscreen && this.originalOverflow !== 'hidden') {
+    document.body.style.overflow = this.originalOverflow;
   }
   if (this.fullscreen || this.body) {
-    document.body.style.position = originalPosition;
+    document.body.style.position = this.originalPosition;
   } else {
-    this.target.style.position = originalPosition;
+    this.target.style.position = this.originalPosition;
+  }
+  if (this.fullscreen) {
+    fullscreenLoading = undefined;
   }
   this.$el &&
   this.$el.parentNode &&
@@ -29,13 +35,13 @@ LoadingConstructor.prototype.close = function() {
   this.$destroy();
 };
 
-const addStyle = (options, parent, element) => {
+const addStyle = (options, parent, instance) => {
   let maskStyle = {};
   if (options.fullscreen) {
-    originalPosition = document.body.style.position;
-    originalOverflow = document.body.style.overflow;
+    instance.originalPosition = document.body.style.position;
+    instance.originalOverflow = document.body.style.overflow;
   } else if (options.body) {
-    originalPosition = document.body.style.position;
+    instance.originalPosition = document.body.style.position;
     ['top', 'left'].forEach(property => {
       let scroll = property === 'top' ? 'scrollTop' : 'scrollLeft';
       maskStyle[property] = options.target.getBoundingClientRect()[property] +
@@ -47,10 +53,10 @@ const addStyle = (options, parent, element) => {
       maskStyle[property] = options.target.getBoundingClientRect()[property] + 'px';
     });
   } else {
-    originalPosition = parent.style.position;
+    instance.originalPosition = parent.style.position;
   }
   Object.keys(maskStyle).forEach(property => {
-    element.style[property] = maskStyle[property];
+    instance.$el.style[property] = maskStyle[property];
   });
 };
 
@@ -65,6 +71,9 @@ const Loading = (options = {}) => {
   } else {
     options.body = true;
   }
+  if (options.fullscreen && fullscreenLoading) {
+    return fullscreenLoading;
+  }
 
   let parent = options.body ? document.body : options.target;
   let instance = new LoadingConstructor({
@@ -72,14 +81,17 @@ const Loading = (options = {}) => {
     data: options
   });
 
-  addStyle(options, parent, instance.$el);
-  if (originalPosition !== 'absolute') {
+  addStyle(options, parent, instance);
+  if (instance.originalPosition !== 'absolute') {
     parent.style.position = 'relative';
   }
   if (options.fullscreen && options.lock) {
     parent.style.overflow = 'hidden';
   }
   parent.appendChild(instance.$el);
+  if (options.fullscreen) {
+    fullscreenLoading = instance;
+  }
   return instance;
 };
 

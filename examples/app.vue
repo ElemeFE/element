@@ -160,13 +160,13 @@
 
       goAnchor() {
         if (location.href.match(/#/g).length > 1) {
-          const auchor = location.href.match(/#[^#]+$/g);
-          if (!auchor || auchor.length !== 1) return;
-          const elm = document.querySelector(auchor[0]);
+          const anchor = location.href.match(/#[^#]+$/g);
+          if (!anchor) return;
+          const elm = document.querySelector(anchor[0]);
           if (!elm) return;
 
           setTimeout(_ => {
-            document.documentElement.scrollTop = document.body.scrollTop = elm.offsetTop;
+            document.documentElement.scrollTop = document.body.scrollTop = elm.offsetTop + 120;
           }, 50);
         }
       }

@@ -62,6 +62,16 @@
           }]
         }],
         options4: [],
+        options5: [{
+          value: 'HTML',
+          label: 'HTML'
+        }, {
+          value: 'CSS',
+          label: 'CSS'
+        }, {
+          value: 'JavaScript',
+          label: 'JavaScript'
+        }],
         cities: [{
           value: 'Beijing',
           label: 'Beijing'
@@ -87,9 +97,10 @@
         value4: '',
         value5: [],
         value6: '',
-        value7: [],
+        value7: '',
         value8: '',
         value9: [],
+        value10: [],
         loading: false,
         states: ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
       };
@@ -569,24 +580,73 @@ Enter keywords and search data from server.
 ```
 :::
 
+### Create new items
+Create and select new items that are not included in select options
+:::demo By using the `allow-create` attribute, users can create new items by typing in the input box. Note that for `allow-create` to work, `filterable` must be `true`.
+```html
+<template>
+  <el-select
+    v-model="value10"
+    multiple
+    filterable
+    allow-create
+    placeholder="Choose tags for your article">
+    <el-option
+      v-for="item in options5"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        options5: [{
+          value: 'HTML',
+          label: 'HTML'
+        }, {
+          value: 'CSS',
+          label: 'CSS'
+        }, {
+          value: 'JavaScript',
+          label: 'JavaScript'
+        }],
+        value10: []
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Select Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | multiple | whether multiple-select is activated | boolean | — | false |
 | disabled | whether Select is disabled | boolean | — | false |
+| size | size of Input | string | large/small/mini | — |
 | clearable | whether single select can be cleared | boolean | — | false |
+| multiple-limit | maximum number of options user can select when `multiple` is `true`. No limit when set to 0 | number | — | 0 |
 | name | the name attribute of select input | string | — | — |
 | placeholder | placeholder | string | — | Select |
 | filterable | whether Select is filterable | boolean | — | false |
+| allow-create | whether creating new items is allowed. To use this, `filterable` must be true | boolean | — | false |
 | filter-method | custom filter method | function | — | — |
 | remote | whether options are loaded from server | boolean | — | false |
 | remote-method | custom remote search method | function | — | — |
 | loading | whether Select is loading data from server | boolean | — | false |
+| loading-text | displayed text while loading data from server | string | — | Loading |
+| no-match-text | displayed text when no data matches the filtering query | string | — | No matching data |
+| no-data-text | displayed text when there is no options | string | — | No data |
+| popper-class | custom class name for Select's dropdown | string | — | — |
 
 ### Select Events
 | Event Name | Description | Parameters |
 |---------|---------|---------|
 | change | triggers when the selected value changes | current selected value |
+| visible-change | triggers when the dropdown appears/disappears | true when it appears, and false otherwise |
 
 ### Option Group Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |

@@ -220,4 +220,47 @@ describe('Tabs', () => {
       });
     }, 100);
   });
+  it('tab title render function', done => {
+    vm = createVue({
+      template: `
+        <el-tabs ref="tabs" >
+          <el-tab-pane :label-content="renderTitle">A</el-tab-pane>
+          <el-tab-pane label="配置管理">B</el-tab-pane>
+          <el-tab-pane label="角色管理" ref="pane-click">C</el-tab-pane>
+          <el-tab-pane label="定时任务补偿">D</el-tab-pane>
+        </el-tabs>
+      `,
+      methods: {
+        renderTitle(h) {
+          return <span>用户管理</span>;
+        }
+      }
+    }, true);
+    vm.$nextTick(_ => {
+      expect(vm.$el.querySelector('.el-tabs__item span').innerText).to.equal('用户管理');
+      done();
+    });
+  });
+  it('disabled', done => {
+    vm = createVue({
+      template: `
+        <el-tabs type="card">
+          <el-tab-pane label="用户管理">A</el-tab-pane>
+          <el-tab-pane disabled label="配置管理" ref="disabled">B</el-tab-pane>
+          <el-tab-pane label="角色管理">C</el-tab-pane>
+          <el-tab-pane label="定时任务补偿">D</el-tab-pane>
+        </el-tabs>
+      `
+    }, true);
+
+    vm.$nextTick(_ => {
+      let tabList = vm.$el.querySelector('.el-tabs__header').children;
+
+      tabList[1].click();
+      vm.$nextTick(_ => {
+        expect(tabList[1].classList.contains('is-active')).to.not.true;
+        done();
+      });
+    });
+  });
 });

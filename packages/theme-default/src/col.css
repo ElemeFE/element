@@ -32,14 +32,14 @@
     .el-col-sm-$i {
       width: calc(1 / 24 * $(i) * 100)%;
     }
-    .el-col-xs-offset-$i {
+    .el-col-sm-offset-$i {
       margin-left: calc(1 / 24 * $(i) * 100)%;
     }
-    .el-col-xs-pull-$i {
+    .el-col-sm-pull-$i {
       position: relative;
       right: calc(1 / 24 * $(i) * 100)%;
     }
-    .el-col-xs-push-$i {
+    .el-col-sm-push-$i {
       position: relative;
       left: calc(1 / 24 * $(i) * 100)%;
     }
@@ -68,14 +68,14 @@
     .el-col-lg-$i {
       width: calc(1 / 24 * $(i) * 100)%;
     }
-    .el-col-xs-offset-$i {
+    .el-col-lg-offset-$i {
       margin-left: calc(1 / 24 * $(i) * 100)%;
     }
-    .el-col-xs-pull-$i {
+    .el-col-lg-pull-$i {
       position: relative;
       right: calc(1 / 24 * $(i) * 100)%;
     }
-    .el-col-xs-push-$i {
+    .el-col-lg-push-$i {
       position: relative;
       left: calc(1 / 24 * $(i) * 100)%;
     }

@@ -1,6 +1,6 @@
 {
   "name": "element-ui",
-  "version": "1.0.2",
+  "version": "1.0.8",
   "description": "A Component Library for Vue.js.",
   "main": "lib/element-ui.common.js",
   "files": [
@@ -9,7 +9,7 @@
     "packages"
   ],
   "scripts": {
-    "bootstrap": "npm i",
+    "bootstrap": "yarn || npm i",
     "build:file": "node build/bin/iconInit.js & node build/bin/build-entry.js & node build/bin/i18n.js",
     "build:theme": "node build/bin/gen-cssfile && gulp build --gulpfile packages/theme-default/gulpfile.js && cp-cli packages/theme-default/lib lib/theme-default",
     "build:utils": "cross-env BABEL_ENV=utils babel src --out-dir lib --ignore src/index.js",
@@ -22,7 +22,7 @@
     "dist:all": "node build/bin/build-all.js && npm run build:theme",
     "i18n": "node build/bin/i18n.js",
     "lint": "eslint src/**/* test/**/* packages/**/*.{js,vue} build/**/* --quiet",
-    "pub": "sh build/git-release.sh && sh build/release.sh",
+    "pub": "npm run bootstrap && sh build/git-release.sh && sh build/release.sh",
     "pub:all": "npm run dist:all && lerna publish",
     "test": "npm run lint && CI_ENV=/dev/ karma start test/unit/karma.conf.js --single-run",
     "test:watch": "karma start test/unit/karma.conf.js"
@@ -46,7 +46,7 @@
     "babel-helper-vue-jsx-merge-props": "^2.0.0",
     "deepmerge": "^1.2.0",
     "throttle-debounce": "^1.0.1",
-    "vue-popup": "^0.2.12",
+    "vue-popup": "^0.2.14",
     "wind-dom": "0.0.3"
   },
   "peerDependencies": {
@@ -111,10 +111,11 @@
     "transliteration": "^1.1.11",
     "uppercamelcase": "^1.1.0",
     "url-loader": "^0.5.7",
-    "vue": "^2.0.5",
+    "vue": "2.0.5",
     "vue-loader": "^9.9.0",
     "vue-markdown-loader": "^0.5.1",
     "vue-router": "^2.0.0",
+    "vue-template-compiler": "2.0.5",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.15.1",
     "webpack-node-externals": "^1.5.4"

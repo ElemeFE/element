@@ -20,7 +20,7 @@ npm i https://github.com/ElementUI/theme-default -D
 主题生成工具安装成功后，如果全局安装可以在命令行里通过 `et` 调用工具，如果安装在当前目录下，需要通过 `node_modules/.bin/et` 访问到命令。执行 `-i` 初始化变量文件。默认输出到 `element-variables.css`，当然你可以传参数指定文件输出目录。
 
 ```shell
-et -i [可以自定义变量文件目录]
+et -i [可以自定义变量文件]
 
 > ✔ Generator variables file
 ```

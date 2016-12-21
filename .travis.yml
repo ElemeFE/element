@@ -1,23 +1,18 @@
+sudo: false
 language: node_js
-node_js: 5
+node_js: stable
 cache:
-  bundler: true
   directories:
-  - node_modules
-  - travis_phantomjs
+  - $HOME/.npm
+  - $HOME/.yarn-cache
 before_install:
+- curl -o- -L https://yarnpkg.com/install.sh | bash
+- export PATH=$HOME/.yarn/bin:$PATH
 - export TRAVIS_COMMIT_MSG="[deploy] $(git log --format='%h - %B' --no-merges -n 1)"
 - export TRAVIS_COMMIT_USER="$(git log --no-merges -n 1 --format=%an)"
 - export TRAVIS_COMMIT_EMAIL="$(git log --no-merges -n 1 --format=%ae)"
-- export PHANTOMJS_VERSION=2.1.1
-- export PATH=$PWD/travis_phantomjs/phantomjs-$PHANTOMJS_VERSION-linux-x86_64/bin:$PATH
-- if [ $(phantomjs --version) != $PHANTOMJS_VERSION ]; then rm -rf $PWD/travis_phantomjs;
-  mkdir -p $PWD/travis_phantomjs; fi
-- if [ $(phantomjs --version) != $PHANTOMJS_VERSION ]; then wget https://github.com/Medium/phantomjs/releases/download/v$PHANTOMJS_VERSION/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2
-  -O $PWD/travis_phantomjs/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2; fi
-- if [ $(phantomjs --version) != $PHANTOMJS_VERSION ]; then tar -xvf $PWD/travis_phantomjs/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2
-  -C $PWD/travis_phantomjs; fi
-- phantomjs --version
+install: yarn install
+script: yarn run test
 after_success:
 - sh build/deploy-ci.sh
 - cat ./test/unit/coverage/lcov.info | ./node_modules/.bin/coveralls

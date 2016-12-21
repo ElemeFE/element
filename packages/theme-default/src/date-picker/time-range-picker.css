@@ -9,14 +9,14 @@
       position: relative;
       text-align: center;
       padding: 10px;
-      display: flex;
     }
 
     @e cell {
       box-sizing: border-box;
       margin: 0;
       padding: 4px 7px 7px;
-      flex: 1;
+      width: 50%;
+      display: inline-block;
     }
 
     @e header {
@@ -26,7 +26,6 @@
     }
 
     @e body {
-      display: flex;
       border-radius:2px;
       border: 1px solid var(--datepicker-border-color);
     }

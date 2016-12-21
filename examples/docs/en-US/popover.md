@@ -225,3 +225,8 @@ Of course, you can nest other operations. It's more light-weight than using a di
 | — | text content of popover |
 | reference | HTML element that triggers popover |
 
+### Events
+| Event Name | Description | 回调参数 |
+|---------|--------|---------|
+| show | triggers when popover shows | - |
+| hide | triggers when popover hides | - |

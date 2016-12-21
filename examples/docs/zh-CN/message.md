@@ -197,6 +197,8 @@ import { Message } from 'element-ui';
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | message | 消息文字 | string | — | — |
 | type | 主题 | string | success/warning/info/error | info |
+| iconClass | 自定义图标的类名，会覆盖 `type` | string | — | — |
+| customClass | 自定义类名 | string | — | — |
 | duration | 显示时间, 毫秒。设为 0 则不会自动关闭 | number | — | 3000 |
 | showClose | 是否显示关闭按钮 | boolean | — | false |
 | onClose | 关闭时的回调函数, 参数为被关闭的 message 实例 | function | — | — |

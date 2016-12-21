@@ -94,6 +94,20 @@ describe('Tree', () => {
     }, DELAY);
   });
 
+  it('current change', done => {
+    vm = getTreeVm(':props="defaultProps" @current-change="handleCurrentChange"', {
+      methods: {
+        handleCurrentChange(data) {
+          this.currentNode = data;
+        }
+      }
+    });
+    const firstNode = vm.$el.querySelector('.el-tree-node__content');
+    firstNode.click();
+    expect(vm.currentNode.label).to.equal('一级 1');
+    done();
+  });
+
   it('emptyText', (done) => {
     vm = getTreeVm(':props="defaultProps"');
     vm.data = [];
@@ -105,10 +119,30 @@ describe('Tree', () => {
 
   it('highlight current', done => {
     vm = getTreeVm(':props="defaultProps" highlight-current');
-    const firstNode = document.querySelector('.el-tree-node__content');
+    const firstNode = document.querySelector('.el-tree-node');
     firstNode.click();
     vm.$nextTick(() => {
-      expect(getComputedStyle(firstNode)['background-color']).to.equal('rgb(239, 247, 255)');
+      expect(firstNode.className.indexOf('is-current') !== -1);
+      done();
+    });
+  });
+
+  it('expandOnNodeClick', done => {
+    vm = getTreeVm(':props="defaultProps" :expand-on-node-click="false"');
+    const firstNode = document.querySelector('.el-tree-node');
+    firstNode.click();
+    vm.$nextTick(() => {
+      expect(firstNode.className.indexOf('is-expanded') === -1);
+      done();
+    });
+  });
+
+  it('current-node-key', done => {
+    vm = getTreeVm(':props="defaultProps" :current-node-key="1"');
+    const firstNode = document.querySelector('.el-tree-node');
+    firstNode.click();
+    vm.$nextTick(() => {
+      expect(firstNode.classList.contains('is-current')).to.true;
       done();
     });
   });
@@ -236,6 +270,18 @@ describe('Tree', () => {
     tree.setCheckedKeys([111]);
     expect(tree.getCheckedNodes().length).to.equal(3);
     expect(tree.getCheckedKeys().length).to.equal(3);
+  });
+
+  it('method setChecked', () => {
+    vm = getTreeVm(':props="defaultProps" show-checkbox node-key="id"');
+    const tree = vm.$children[0];
+    tree.setChecked(111, true, true);
+    expect(tree.getCheckedNodes().length).to.equal(3);
+    expect(tree.getCheckedKeys().length).to.equal(3);
+
+    tree.setChecked(vm.data[0], false, true);
+    expect(tree.getCheckedNodes().length).to.equal(0);
+    expect(tree.getCheckedKeys().length).to.equal(0);
   });
 
   it('setCheckedKeys with leafOnly=false', () => {

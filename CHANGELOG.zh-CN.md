@@ -1,5 +1,101 @@
 ## 更新日志
 
+### 1.0.8
+*2016-12-20*
+
+- 修复 Popup 在叠加使用时阻止事件冒泡，#1677
+- 修复 DatePicker 类型为 datetimerange 时无法选择时间的问题，#1758
+- 修复 Slider 的 `change` 事件不能正确触发的问题，#1809
+- 修复 Loading 的 spinner 在某些情况下转动时出现碎片的问题，#1786
+- 新增 Select 的 `loading-text`、`no-data-text`、`no-match-text` 属性和 `visible-change` 事件，#1849
+- 新增 DatePicker、Select 和 Tooltip 的 `popper-class` 属性，#1806
+- 新增 Tree 的 `expand-on-click-node`、`current-node-key` 属性和 `current-change` 事件，#1805 #1807
+- 新增 Table `row-click` 事件的第三个参数 `column`，#1808
+- 修复 Checkbox 的在路由切换时因为 computed 属性被缓存导致的bug，#1860
+- 新增 TabPanel `label-content` 渲染钩子方法中增加 tab 实例的参数，#1857
+- 新增 NavMenu 组件增加无限级子菜单（vertical模式）的支持，#1851
+- 新增 Checkbox 现在支持不绑定 value 也可以正常使用，#1818
+- 新增 Progress 的 `onProgress` 钩子函数，#1782
+- 修复 Tab 组件 active bar 在动态 label 下没有更新的问题，#1761
+- 新增 Table 的 `filter-change` 事件和 TableColumn 的 `column-key` 属性，#1876
+- 新增 Dropdown `hide-on-click` 属性，#1879
+
+### 1.0.7
+*2016-12-14*
+
+- 修复 DatePicker 在有值的情况下 hover 清空按钮时会错误地显示弹框
+- 修复 DatePicker 设置默认值为 null 会错误地显示时间值
+- 新增 Table 的 `row-contextmenu` 事件和 `max-height` 属性，#1663 #1674
+- 新增 MessageBox 的 `customClass` 属性，#1707
+- 新增 Message 和 Notification 的 `iconClass` 和 `customClass` 属性，#1671
+- 新增 Table 支持 empty slot，#1737
+- 改进 InputNumber change 事件增加 old value 的参数
+
+### 1.0.6
+*2016-12-09*
+
+- 新增 Tabs 组件的 `disabled` 属性，#1620
+- 新增 DatePicker 的 input 支持 `size`，#1440
+- 修复 DatePicker 为 `datetimerange` 类型并设置初始值时，面板未显示正确日期的问题，#1129
+- 修复 DatePicker 切换年份时显示异常的问题，#1607
+- 修复 DatePicker 点击 icon 未触发 clickoutside 的问题，#1604
+- 修复 TimePicker 点击清空按钮后再次点击不会更新初始值的问题，#1583
+- 修复 Select 远程搜索且 value 为对象类型时的显示问题，#1593
+- 修复 Select 为 `disabled` 时，`clearable` 仍然可以工作的问题，#1619
+- 修复 自定义背景颜色的 Switch 在动态切换 `disabled` 时，背景颜色错误的问题，#1627
+- 修复 Table 的一些样式问题
+
+### 1.0.5
+*2016-12-06*
+
+- 修复 Select 异步获取选项和绑定值时，输入框中显示 value 而不是 label 的问题，#1537
+- 修复 Select 的初始值为一个空对象时会报错的问题，#1533
+- 修复 Select 远程搜索有时不显示下拉框的问题，#1531
+- 修复 Slider 拖动释放后，滑块有几率产生一小段位移的问题，#1546
+- 修复 IE9 下 Steps 的样式问题，#1543
+- 新增 Upload 对所有文件类型生成 URL 的功能，#1530
+- 修复 TimeSelect 的样式，移除 flexbox, #1335
+
+### 1.0.4
+*2016-12-02*
+
+- 新增 Input Number 的 `controls` 属性，#1473
+- 修复 Checkbox Group、Radio Group 在异步赋值时出现的问题，#1511 #1514
+- 增加 Notification 的 `offset` 属性，#1419
+- 修复 Slider 在快速拖动时取值不准确的问题，#1458
+- 修复 Slider 在某些情况下绑定值为多位小数的问题，#1450
+- 修复 Select 在某些情况下绑定值和显示值不同步的问题
+- 新增 Select 的 `multiple-limit` 和 `allow-create` 属性
+- 修复 Tree 的叶子节点在点击展开后三角图标不消失的问题，#1438
+- 修复 Tree 有时在获取子级数据后视图不更新的问题，#1439
+- 修复 Table 在 windows 系统下的若干样式问题，#1464 #1507
+- 修复 Table 多级表头与固定列同时使用时，多级表头第一列 label 不显示的问题，#1451
+- 新增 Table 的 `row-dblclick` 事件，#1362
+
+### 1.0.3
+*2016-11-28*
+
+- 修复 Pagination 的 `currentPage` 在某些情况下设置无效的情况，#1336
+- 修复 DatePicker 为 `month` 且设置了 `disabledDate` 的情况下切换年份时界面未更新的问题，#1158
+- 修复 DatePicker readonly 时未禁用清除按钮的问题，#1238
+- 修复 Slider 绑定值为 `NaN` 以及 `step` 小于 1 时无法正常工作的问题，#1239 #1282
+- 增加 Table 的多表头功能，#1312
+- 增加 Table 的 `rowStyle` 属性，#1348
+- 修复 TableColumn 的某些属性无法动态设置的问题，#1314
+- 增加 Tree 的 `filter-node-method` 属性和 `filter` 方法，#1257
+- 增加 Tree 的 `getCheckedKeys` 和 `setCheckedKeys` 方法，#1254
+- 重构 Checkbox/Radio 支持嵌套 Group 绑定值，#1152
+- 修复 Popper 在 keep-alive 下无法触发销毁的问题，#1359
+- 增加 Form 中深对象验证的支持，#1363
+- 增加 Autocomplete 里的 `append` 和 `prepend` API，#1369
+- 增加 Pagination `pageSizes` 属性的动态支持，#1372
+- 增加 Radio Button 自定义选中按钮样式的 API，#1380
+- 增加 Menu Group 支持通过 slot 来设置 title，#1382
+- 修复 DatePicker 选择年的 bug，#1385
+- 新增 Upload 默认已上传的文件列表 API，#1393
+- 增加 Checkbox `label` 属性绑定的多类型支持，#1400
+- 增加 Tree 的 `setChecked` 方法，#1422
+
 ### 1.0.2
 *2016-11-18*
 

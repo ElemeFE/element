@@ -84,7 +84,7 @@
 
     data() {
       return {
-        precision: null,
+        precision: 0,
         inputValue: null,
         timeout: null,
         hovering: false,
@@ -136,26 +136,28 @@
       },
 
       setPosition(newPos) {
-        if (newPos >= 0 && (newPos <= 100)) {
-          const lengthPerStep = 100 / ((this.max - this.min) / this.step);
-          const steps = Math.round(newPos / lengthPerStep);
-          let value = steps * lengthPerStep * (this.max - this.min) * 0.01 + this.min;
-          if (this.precision) {
-            value = parseFloat(value.toFixed(this.precision));
-          }
-          this.$emit('input', value);
-          this.currentPosition = (this.value - this.min) / (this.max - this.min) * 100 + '%';
-          if (!this.dragging) {
-            if (this.value !== this.oldValue) {
-              this.$emit('change', this.value);
-              this.oldValue = this.value;
-            }
+        if (newPos < 0) {
+          newPos = 0;
+        } else if (newPos > 100) {
+          newPos = 100;
+        }
+
+        const lengthPerStep = 100 / ((this.max - this.min) / this.step);
+        const steps = Math.round(newPos / lengthPerStep);
+        let value = steps * lengthPerStep * (this.max - this.min) * 0.01 + this.min;
+        value = parseFloat(value.toFixed(this.precision));
+        this.$emit('input', value);
+        this.currentPosition = (this.value - this.min) / (this.max - this.min) * 100 + '%';
+        if (!this.dragging) {
+          if (this.value !== this.oldValue) {
+            this.$emit('change', this.value);
+            this.oldValue = this.value;
           }
         }
       },
 
       onSliderClick(event) {
-        if (this.disabled) return;
+        if (this.disabled || this.dragging) return;
         const sliderOffsetLeft = this.$refs.slider.getBoundingClientRect().left;
         this.setPosition((event.clientX - sliderOffsetLeft) / this.$sliderWidth * 100);
       },
@@ -187,11 +189,18 @@
 
       onDragEnd() {
         if (this.dragging) {
-          this.dragging = false;
-          this.$refs.tooltip.showPopper = false;
-          this.setPosition(this.newPos);
+          /*
+           * 防止在 mouseup 后立即触发 click，导致滑块有几率产生一小段位移
+           * 不使用 preventDefault 是因为 mouseup 和 click 没有注册在同一个 DOM 上
+           */
+          setTimeout(() => {
+            this.dragging = false;
+            this.$refs.tooltip.showPopper = false;
+            this.setPosition(this.newPos);
+          }, 0);
           window.removeEventListener('mousemove', this.onDragging);
           window.removeEventListener('mouseup', this.onDragEnd);
+          window.removeEventListener('contextmenu', this.onDragEnd);
         }
       },
 
@@ -200,6 +209,7 @@
         this.onDragStart(event);
         window.addEventListener('mousemove', this.onDragging);
         window.addEventListener('mouseup', this.onDragEnd);
+        window.addEventListener('contextmenu', this.onDragEnd);
       }
     },
 
@@ -228,9 +238,11 @@
       } else if (this.value > this.max) {
         this.$emit('input', this.max);
       }
-      if (this.step && this.step < 1) {
-        this.precision = this.step.toPrecision(1).split('.')[1].length;
-      }
+      let precisions = [this.min, this.max, this.step].map(item => {
+        let decimal = ('' + item).split('.')[1];
+        return decimal ? decimal.length : 0;
+      });
+      this.precision = Math.max.apply(null, precisions);
       this.inputValue = this.inputValue || this.value;
     }
   };

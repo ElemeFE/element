@@ -100,6 +100,10 @@ export default class Node {
       this.expand(null, store.autoExpandParent);
     }
 
+    if (key && store.currentNodeKey && this.key === store.currentNodeKey) {
+      store.currentNode = this;
+    }
+
     if (store.lazy) {
       store._initDefaultCheckedNode(this);
     }
@@ -343,6 +347,7 @@ export default class Node {
 
         this.doCreateChildren(children, defaultProps);
 
+        this.updateLeafState();
         if (callback) {
           callback.call(this, children);
         }

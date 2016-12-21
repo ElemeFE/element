@@ -5,22 +5,23 @@
   @b input {
     position: relative;
     font-size: var(--font-size-base);
-    
+
     @e inner {
-      display: block;
-      padding: 3px 10px;
-      box-sizing: border-box;
-      width: 100%;
-      height: var(--input-height);
-      color: var(--input-color);
-      background-color: #fff;
+      appearance: none;
+      background-color: var(--color-white);
       background-image: none;
-      border: var(--input-border);
       border-radius: 4px;
-      transition: var(--border-transition-base);
-      outline: none;
+      border: var(--input-border);
+      box-sizing: border-box;
+      color: var(--input-color);
+      display: block;
       font-size: inherit;
-      line-height: normal;
+      height: var(--input-height);
+      line-height: 1;
+      outline: none;
+      padding: 3px 10px;
+      transition: var(--border-transition-base);
+      width: 100%;
 
       &::placeholder {
         color: var(--input-placeholder-color);
@@ -29,6 +30,7 @@
       &:hover {
         border-color: var(--input-hover-border);
       }
+
       &:focus {
         outline: none;
         border-color: var(--input-focus-border);
@@ -150,16 +152,18 @@
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
     }
-    & .el-input__inner:first-child {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
+
+    @m prepend {
+      .el-input__inner {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
     }
-    & .el-input__inner:last-child {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-    }
-    & .el-input__inner:not(:first-child):not(:last-child) {
-      border-radius: 0;
+    @m append {
+      .el-input__inner {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
     }
   }
 

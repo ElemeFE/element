@@ -151,12 +151,12 @@
 | max | 最大分值 | number | — | 5 |
 | disabled | 是否为只读 | boolean | — | false |
 | allow-half | 是否允许半选 | boolean | — | false |
-| low-threshold | 低分和中等分数的界限值，值本身<br>被划分在低分中 | number | — | 2 |
-| high-threshold | 高分和中等分数的界限值，值本身<br>被划分在高分中 | number | — | 4 |
-| colors | icon 的颜色数组，共有 3 个元素，<br>为 3 个分段所对应的颜色 | array | — | ['#F7BA2A', '#F7BA2A', '#F7BA2A'] |
+| low-threshold | 低分和中等分数的界限值，值本身被划分在低分中 | number | — | 2 |
+| high-threshold | 高分和中等分数的界限值，值本身被划分在高分中 | number | — | 4 |
+| colors | icon 的颜色数组，共有 3 个元素，为 3 个分段所对应的颜色 | array | — | ['#F7BA2A', '#F7BA2A', '#F7BA2A'] |
 | void-color | 未选中 icon 的颜色 | string | — | #C6D1DE |
 | disabled-void-color | 只读时未选中 icon 的颜色 | string | — | #EFF2F7 |
-| icon-classes | icon 的类名数组，共有 3 个元素，<br>为 3 个分段所对应的类名 | array | — | ['el-icon-star-on', 'el-icon-star-on',<br>'el-icon-star-on'] |
+| icon-classes | icon 的类名数组，共有 3 个元素，为 3 个分段所对应的类名 | array | — | ['el-icon-star-on', 'el-icon-star-on','el-icon-star-on'] |
 | void-icon-class | 未选中 icon 的类名 | string | — | el-icon-star-off |
 | disabled-void-icon-class | 只读时未选中 icon 的类名 | string | — | el-icon-star-on |
 | show-text | 是否显示辅助文字 | boolean | — | false |

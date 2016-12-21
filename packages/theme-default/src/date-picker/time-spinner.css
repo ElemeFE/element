@@ -2,10 +2,17 @@
 
 @component-namespace el {
   @b time-spinner {
+    &.has-seconds {
+      .el-time-spinner__wrapper {
+        width: calc(100% / 3);
+      }
+    }
+
     @e wrapper {
       height: 190px;
       overflow: hidden;
-      flex: 1;
+      display: inline-block;
+      width: 50%;
       vertical-align: top;
       position: relative;
       -ms-overflow-style: none;
@@ -36,12 +43,12 @@
       font-size: 12px;
 
       &:hover:not(.disabled):not(.active) {
-        background: #E5E9F2;
+        background: var(--datepicker-cell-hover-color);
         cursor: pointer;
       }
 
       &.active:not(.disabled) {
-        color: #fff;
+        color: var(--color-white);
       }
 
       &.disabled {

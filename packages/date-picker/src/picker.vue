@@ -1,35 +1,26 @@
 <template>
-  <span
+  <el-input
     class="el-date-editor"
+    :readonly="!editable || readonly"
+    :disabled="disabled"
+    :size="size"
     v-clickoutside="handleClose"
-    :class="{
-      'is-have-trigger': haveTrigger,
-      'is-active': pickerVisible,
-      'is-filled': !!this.internalValue
-    }">
-
-    <input
-      class="el-date-editor__editor"
-      :class="{ 'is-disabled': disabled }"
-      :readonly="!editable || readonly"
-      :disabled="disabled"
-      type="text"
-      :placeholder="placeholder"
-      @focus="handleFocus"
-      @blur="handleBlur"
-      @keydown="handleKeydown"
-      ref="reference"
-      v-model.lazy="visualValue" />
-
-    <span
-      @click.stop="handleClickIcon"
-      class="el-date-editor__trigger el-icon"
+    :placeholder="placeholder"
+    @focus="handleFocus"
+    @blur="handleBlur"
+    @keydown.native="handleKeydown"
+    :value="visualValue"
+    @change.native="visualValue = $event.target.value"
+    ref="reference">
+    <i slot="icon"
+      class="el-input__icon"
+      @click="handleClickIcon"
       :class="[showClose ? 'el-icon-close' : triggerClass]"
       @mouseenter="handleMouseEnterIcon"
       @mouseleave="showClose = false"
       v-if="haveTrigger">
-    </span>
-  </span>
+    </i>
+  </el-input>
 </template>
 
 <script>
@@ -38,6 +29,7 @@ import Clickoutside from 'element-ui/src/utils/clickoutside';
 import { formatDate, parseDate, getWeekNumber } from './util';
 import Popper from 'element-ui/src/utils/vue-popper';
 import Emitter from 'element-ui/src/mixins/emitter';
+import ElInput from 'element-ui/packages/input';
 
 const NewPopper = {
   props: {
@@ -77,10 +69,6 @@ const DATE_FORMATTER = function(value, format) {
   return formatDate(value, format);
 };
 const DATE_PARSER = function(text, format) {
-  text = text.split(':');
-  if (text.length > 1) text = text.map(item => item.slice(-2));
-  text = text.join(':');
-
   return parseDate(text, format);
 };
 const RANGE_FORMATTER = function(value, format) {
@@ -97,8 +85,9 @@ const RANGE_FORMATTER = function(value, format) {
 const RANGE_PARSER = function(text, format) {
   const array = text.split(RANGE_SEPARATOR);
   if (array.length === 2) {
-    const range1 = array[0].split(':').map(item => item.slice(-2)).join(':');
-    const range2 = array[1].split(':').map(item => item.slice(-2)).join(':');
+    const range1 = array[0];
+    const range2 = array[1];
+
     return [parseDate(range1, format), parseDate(range2, format)];
   }
   return [];
@@ -193,10 +182,12 @@ export default {
   mixins: [Emitter, NewPopper],
 
   props: {
+    size: String,
     format: String,
     readonly: Boolean,
     placeholder: String,
     disabled: Boolean,
+    popperClass: String,
     editable: {
       type: Boolean,
       default: true
@@ -209,6 +200,8 @@ export default {
     haveTrigger: {},
     pickerOptions: {}
   },
+
+  components: { ElInput },
 
   directives: { Clickoutside },
 
@@ -229,7 +222,6 @@ export default {
       if (!val && this.picker && typeof this.picker.handleClear === 'function') {
         this.picker.handleClear();
       }
-      this.dispatch('ElFormItem', 'el.form.change');
     },
     value: {
       immediate: true,
@@ -240,10 +232,19 @@ export default {
   },
 
   computed: {
+    reference() {
+      return this.$refs.reference.$el;
+    },
+
+    refInput() {
+      if (this.reference) return this.reference.querySelector('input');
+      return {};
+    },
+
     valueIsEmpty() {
       const val = this.internalValue;
       if (Array.isArray(val)) {
-        for (let i = 0, j = val.length; i < j; i++) {
+        for (let i = 0, len = val.length; i < len; i++) {
           if (val[i]) {
             return false;
           }
@@ -282,6 +283,7 @@ export default {
     visualValue: {
       get() {
         const value = this.internalValue;
+        if (!value) return;
         const formatter = (
           TYPE_VALUE_RESOLVER_MAP[this.type] ||
           TYPE_VALUE_RESOLVER_MAP['default']
@@ -300,7 +302,7 @@ export default {
           ).parser;
           const parsedValue = parser(value, this.format || DEFAULT_FORMATS[type]);
 
-          if (parsedValue) {
+          if (parsedValue && this.picker) {
             this.picker.value = parsedValue;
           }
           return;
@@ -333,6 +335,7 @@ export default {
         this.pickerVisible = !this.pickerVisible;
       } else {
         this.internalValue = '';
+        this.$emit('input', '');
       }
     },
 
@@ -356,42 +359,10 @@ export default {
 
     handleKeydown(event) {
       const keyCode = event.keyCode;
-      const target = event.target;
-      let selectionStart = target.selectionStart;
-      let selectionEnd = target.selectionEnd;
-      let length = target.value.length;
 
       // tab
       if (keyCode === 9) {
         this.pickerVisible = false;
-      // enter
-      } else if (keyCode === 13) {
-        this.pickerVisible = this.picker.visible = false;
-        this.visualValue = target.value;
-        target.blur();
-      // left
-      } else if (keyCode === 37) {
-        event.preventDefault();
-
-        if (selectionEnd === length && selectionStart === length) {
-          target.selectionStart = length - 2;
-        } else if (selectionStart >= 3) {
-          target.selectionStart -= 3;
-        } else {
-          target.selectionStart = 0;
-        }
-        target.selectionEnd = target.selectionStart + 2;
-      // right
-      } else if (keyCode === 39) {
-        event.preventDefault();
-        if (selectionEnd === 0 && selectionStart === 0) {
-          target.selectionEnd = 2;
-        } else if (selectionEnd <= length - 3) {
-          target.selectionEnd += 3;
-        } else {
-          target.selectionEnd = length;
-        }
-        target.selectionStart = target.selectionEnd - 2;
       }
     },
 
@@ -407,8 +378,9 @@ export default {
       if (!this.picker) {
         this.panel.defaultValue = this.internalValue;
         this.picker = new Vue(this.panel).$mount(document.createElement('div'));
+        this.picker.popperClass = this.popperClass;
         this.popperElm = this.picker.$el;
-        this.picker.width = this.$refs.reference.getBoundingClientRect().width;
+        this.picker.width = this.reference.getBoundingClientRect().width;
         this.picker.showTime = this.type === 'datetime' || this.type === 'datetimerange';
         this.picker.selectionMode = this.selectionMode;
         if (this.format) {
@@ -452,10 +424,8 @@ export default {
         });
 
         this.picker.$on('select-range', (start, end) => {
-          setTimeout(() => {
-            this.$refs.reference.setSelectionRange(start, end);
-            this.$refs.reference.focus();
-          }, 0);
+          this.refInput.setSelectionRange(start, end);
+          this.refInput.focus();
         });
       } else {
         this.pickerVisible = this.picker.visible = true;
@@ -465,10 +435,10 @@ export default {
 
       if (this.internalValue instanceof Date) {
         this.picker.date = new Date(this.internalValue.getTime());
-        this.picker.resetView && this.picker.resetView();
       } else {
         this.picker.value = this.internalValue;
       }
+      this.picker.resetView && this.picker.resetView();
 
       this.$nextTick(() => {
         this.picker.ajustScrollTop && this.picker.ajustScrollTop();

@@ -12,7 +12,6 @@
     width: 100%;
     max-width: 100%;
     background-color: #fff;
-    border-collapse: collapse;
     border: 1px solid var(--table-border-color);
     font-size: 14px;
     color: var(--table-text-color);
@@ -153,6 +152,14 @@
         background-color: var(--table-border-color);
         z-index: 4;
       }
+    }
+
+    @e fixed-right-patch {
+      position: absolute;
+      top: -1px;
+      right: 0;
+      background-color: var(--table-header-background);
+      border-bottom: 1px solid var(--table-border-color);
     }
 
     @e fixed-right {
@@ -379,6 +386,14 @@
     @modifier enable-row-hover {
       tr:hover > td {
         background-color: #eff2f7;
+      }
+    }
+
+    @modifier fluid-height {
+      .el-table__fixed,
+      .el-table__fixed-right {
+        bottom: 0;
+        overflow: hidden;
       }
     }
   }

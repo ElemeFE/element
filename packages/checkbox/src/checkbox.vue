@@ -49,17 +49,28 @@
 
     componentName: 'ElCheckbox',
 
+    data() {
+      return {
+        selfModel: false,
+        focus: false
+      };
+    },
+
     computed: {
       model: {
         get() {
-          return this.isGroup ? this.store : this.value;
+          return this.isGroup
+            ? this.store : this.value !== undefined
+            ? this.value : this.selfModel;
         },
 
         set(val) {
           if (this.isGroup) {
             this.dispatch('ElCheckboxGroup', 'input', [val]);
-          } else {
+          } else if (this.value !== undefined) {
             this.$emit('input', val);
+          } else {
+            this.selfModel = val;
           }
         }
       },
@@ -72,6 +83,23 @@
         } else if (this.model !== null && this.model !== undefined) {
           return this.model === this.trueLabel;
         }
+      },
+
+      isGroup() {
+        let parent = this.$parent;
+        while (parent) {
+          if (parent.$options.componentName !== 'ElCheckboxGroup') {
+            parent = parent.$parent;
+          } else {
+            this._checkboxGroup = parent;
+            return true;
+          }
+        }
+        return false;
+      },
+
+      store() {
+        return this._checkboxGroup ? this._checkboxGroup.value : this.value;
       }
     },
 
@@ -86,17 +114,13 @@
       falseLabel: [String, Number]
     },
 
-    data() {
-      return {
-        store: [],
-        isGroup: false
-      };
-    },
-
     methods: {
       addToStore() {
-        if (Array.isArray(this.model)) {
-          this.model.indexOf(this.label) === -1 && this.model.push(this.label);
+        if (
+          Array.isArray(this.model) &&
+          this.model.indexOf(this.label) === -1
+        ) {
+          this.model.push(this.label);
         } else {
           this.model = this.trueLabel || true;
         }
@@ -105,11 +129,6 @@
 
     created() {
       this.checked && this.addToStore();
-      this.$on('initData', data => {
-        this.store = data;
-        this.isGroup = true;
-        this.checked && this.addToStore();
-      });
     }
   };
 </script>

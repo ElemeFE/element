@@ -1,5 +1,5 @@
 <template>
-  <transition name="md-fade-bottom" @after-leave="doDestroy">
+  <transition name="el-zoom-in-top" @after-leave="doDestroy">
     <ul class="el-dropdown-menu" v-show="showPopper">
       <slot></slot>
     </ul>

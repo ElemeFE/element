@@ -4,7 +4,11 @@
     @click.stop="selectOptionClick"
     class="el-select-dropdown__item"
     v-show="visible"
-    :class="{ 'selected': itemSelected, 'is-disabled': disabled || groupDisabled, 'hover': parent.hoverIndex === index }">
+    :class="{
+      'selected': itemSelected,
+      'is-disabled': disabled || groupDisabled || limitReached,
+      'hover': parent.hoverIndex === index
+    }">
     <slot>
       <span>{{ currentLabel }}</span>
     </slot>
@@ -30,6 +34,7 @@
         type: Boolean,
         default: false
       },
+      created: Boolean,
       disabled: {
         type: Boolean,
         default: false
@@ -63,23 +68,35 @@
       },
 
       itemSelected() {
-        if (Object.prototype.toString.call(this.parent.selected) === '[object Object]') {
-          return this === this.parent.selected;
-        } else if (Array.isArray(this.parent.selected)) {
+        if (!this.parent.multiple) {
+          return this.value === this.parent.value;
+        } else {
           return this.parent.value.indexOf(this.value) > -1;
         }
       },
 
-      currentSelected() {
-        return this.selected || (this.parent.multiple ? this.parent.value.indexOf(this.value) > -1 : this.parent.value === this.value);
+      limitReached() {
+        if (this.parent.multiple) {
+          return !this.itemSelected &&
+            this.parent.value.length >= this.parent.multipleLimit &&
+            this.parent.multipleLimit > 0;
+        } else {
+          return false;
+        }
       }
     },
 
     watch: {
-      currentSelected(val) {
-        if (val === true) {
-          this.dispatch('ElSelect', 'addOptionToValue', this);
-        }
+      currentLabel() {
+        this.dispatch('ElSelect', 'setSelected');
+      },
+      value() {
+        this.dispatch('ElSelect', 'setSelected');
+      },
+      visible() {
+        this.$nextTick(() => {
+          this.dispatch('ElSelectDropdown', 'updatePopper');
+        });
       }
     },
 
@@ -103,7 +120,7 @@
       queryChange(query) {
         // query 里如果有正则中的特殊字符，需要先将这些字符转义
         let parsedQuery = query.replace(/(\^|\(|\)|\[|\]|\$|\*|\+|\.|\?|\\|\{|\}|\|)/g, '\\$1');
-        this.visible = new RegExp(parsedQuery, 'i').test(this.currentLabel);
+        this.visible = new RegExp(parsedQuery, 'i').test(this.currentLabel) || this.created;
         if (!this.visible) {
           this.parent.filteredOptionsCount--;
         }
@@ -118,13 +135,10 @@
 
     created() {
       this.parent.options.push(this);
+      this.parent.cachedOptions.push(this);
       this.parent.optionsCount++;
       this.parent.filteredOptionsCount++;
       this.index = this.parent.options.indexOf(this);
-
-      if (this.currentSelected === true) {
-        this.dispatch('ElSelect', 'addOptionToValue', [this, true]);
-      }
 
       this.$on('queryChange', this.queryChange);
       this.$on('handleGroupDisabled', this.handleGroupDisabled);

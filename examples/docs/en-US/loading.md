@@ -200,6 +200,14 @@ The parameter `options` is the configuration of Loading, and its details can be 
 let loadingInstance = Loading.service(options);
 loadingInstance.close();
 ```
+Note that in this case the full screen Loading is singleton. If a new full screen Loading is invoked before an existing one is closed, the existing full screen Loading instance will be returned instead of actually creating another Loading instance:
+```javascript
+let loadingInstance1 = Loading.service({ fullscreen: true });
+let loadingInstance2 = Loading.service({ fullscreen: true });
+console.log(loadingInstance1 === loadingInstance2); // true
+```
+Calling the `close` method on any one of them can close this full screen Loading.
+
 If Element is imported entirely, a globally method `$loading` will be registered to Vue.prototype. You can invoke it like this: `this.$loading(options)`, and it also returns a Loading instance.
 
 ### Options

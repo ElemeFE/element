@@ -142,8 +142,9 @@ Besides default size, Button component provides three additional sizes for you t
 |---------- |-------- |---------- |-------------  |-------- |
 | size     | button size   | string  |   large/small/mini            |    —     |
 | type     | button type   | string    |   primary/success/warning/danger/info/text |     —    |
-| plain     | determine whether it's a plain button   | Boolean    | true,false | false   |
-| disabled  | disable the button    | boolean   | true, false   | false   |
+| plain     | determine whether it's a plain button   | Boolean    | — | false   |
+| loading   | determine whether it's loading   | Boolean    | — | false   |
+| disabled  | disable the button    | boolean   | —   | false   |
 | icon  | button icon, accepts an icon name of Element icon component | string   |  —  |  —  |
 | autofocus  | same as native button's `autofocus` | boolean   |  —  |  false  |
 | native-type | same as native button's `type` | string | button/submit/reset | button |

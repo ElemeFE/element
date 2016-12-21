@@ -12,13 +12,6 @@
     display: block;
     position: relative;
 
-    @when small {
-      & input {
-        border-radius: var(--border-radius-small);
-        height: 28px;
-      }
-    }
-
     &:hover {
       .el-input__inner {
         border-color: var(--select-border-color-hover);
@@ -78,13 +71,16 @@
       border: none;
       outline: none;
       padding: 0;
-      margin: 4px 0 -3px 10px;
+      margin-left: 10px;
       color: var(--select-multiple-input-color);
       font-size: var(--select-font-size);
       vertical-align: baseline;
       appearance: none;
       height: 28px;
       background-color: transparent;
+      @when mini {
+        height: 14px;
+      }
     }
 
     @e close {
@@ -107,6 +103,8 @@
       line-height: normal;
       white-space: normal;
       z-index: var(--index-top);
+      top: 50%;
+      transform: translateY(-50%);
     }
 
     & .el-tag__close {
@@ -117,7 +115,7 @@
       height: var(--select-tag-height);
       line-height: var(--select-tag-height);
       box-sizing: border-box;
-      margin: 6px 0 0 6px;
+      margin: 3px 0 3px 6px;
     }
 
     @e tag {

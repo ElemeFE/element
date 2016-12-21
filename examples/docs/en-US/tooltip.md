@@ -205,3 +205,4 @@ In fact, Tooltip is an extension based on [Vue-popper](https://github.com/elemen
 |  options        | [popper.js](https://popper.js.org/documentation.html) parameters | Object            | refer to [popper.js](https://popper.js.org/documentation.html) doc | `{ boundariesElement: 'body', gpuAcceleration: false }` |
 | openDelay | delay of appearance, in millisecond | number | — | 0 |
 | manual | whether to control Tooltip manually. `mouseenter` and `mouseleave` won't have effects if set to `true`事件将不会生效 | boolean | — | false |
+|  popper-class  |  custom class name for Tooltip's popper | string | — | — |

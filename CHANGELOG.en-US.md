@@ -1,5 +1,107 @@
 ## Changelog
 
+### 1.0.8
+
+*2016-12-20*
+
+- Fixed nested Popup from event bubbling, #1677
+- Fixed the issue that datetimerange-typed DatePicker can not select time, #1758
+- Fixed `change` event not firing correctly of Slider, #1809
+- Fixed Loading's spinner splitting while animating in some conditions, #1786
+- Added `loading-text`, `no-data-text`, `no-match-text` properties and `visible-change` event for Select, #1849
+- Added `popper-class` property for DatePicker, Select and Tooltip, #1806
+- Added `expand-on-click-node`, `current-node-key` properties and `current-change` event for Tree, #1805 #1807
+- Added the third parameter `column` for Table's `row-click` event, #1808
+- Fixed an error when pages with Checkbox switching routes due to `computed` property being cached, #1860
+- Added the tab instance as a parameter for TabPanel's `label-content` render function, #1857
+- Added infinite submenus support for NavMenu in vertical mode, #1851
+- Updated Checkbox so that it works without a binding value, #1818
+- Added `onProgress` hook for Progress, #1782
+- Fixed Tab not updating active bar with dynamic label, #1761
+- Added `filter-change` event for Table, and `column-key` property for TableColumn, #1876
+- Added `hide-on-click` property for Dropdown, #1879
+
+### 1.0.7
+
+*2016-12-14*
+
+- Fixed DatePicker dropdown appears when hovering on the clear button
+- Fixed DatePicker displays a wrong date when its initial value is null
+- Added `row-contextmenu` event and `max-height` attribute for Table, #1663 #1674
+- Added `customClass` attribute for MessageBox, #1707
+- Added `iconClass` and `customClass` attributes for Message and Notification, #1671
+- Added empty slot for Table, #1737
+- Added old value as a second parameter in change event for InputNumber
+
+### 1.0.6
+
+*2016-12-09*
+
+- Added `disabled` attribute for Tabs, #1620
+- Added `size` attribute for DatePicker input, #1440
+- Fixed `datetimerange` DatePicker's panel not showing correct date if initial value is present, #1129
+- Fixed DatePicker display error when switching year, #1607
+- Fixed DatePicker not triggering clickoutside when its icon is clicked, #1604
+- Fixed TimePicker not refreshing value after clicking the clear button, #1583
+- Fixed remote filterable Select display error when its value is an object, #1593
+- Fixed Select's clear button still working bug when it's `disabled`, #1619
+- Fixed Switch's background color error when its `disabled` attribute is dynamically changed, #1627
+- Fixed some style bugs of Table
+
+### 1.0.5
+
+*2016-12-06*
+
+- Fixed Select with async options and binding value displaying value instead of label, #1537
+- Fixed Select reports an error when initial binding value is an empty object, #1533
+- Fixed remote filtering Select not showing dropdown in some conditions, #1531
+- Fixed Slider sometimes drifting a small distance after releasing dragging, #1546
+- Fixed Steps style in IE9, #1543
+- Added Upload generating URL for all file types, #1530
+- Fixed TimeSelect style, removed flexbox, #1335
+
+### 1.0.4
+
+*2016-12-02*
+
+- Added `controls` attribute for Input Number, #1473
+- Fixed Checkbox Group and Radio Group async issue, #1511 #1514
+- Added `offset` attribute for Notification, #1419
+- Fixed Slider's value not accurate issue when dragging rapidly, #1458
+- Fixed Slider incorrectly showing multiple decimal digits issue, #1450
+- Fixed Select's binding value and displayed value not in sync in some conditions
+- Added `multiple-limit` and `allow-create` attributes for Select
+- Fixed Tree leaf nodes' triangle icon not disappear when expanded, #1438
+- Fixed Tree's view not updating issue after fetching child nodes' data, #1439
+- Fixed some Table's style issues in windows system, #1464 #1507
+- Fixed Table's first column's label not showing issue when grouping table head is used with fixed columns, #1451
+- Added `row-dblclick` event for Table, #1362
+
+### 1.0.3
+
+*2016-11-28*
+
+- Fixed `currentPage` of Pagination not working in some cases, #1336
+- Fixed `month` and `disabledDate` DatePicker's view not refreshing issue when switching year, #1158
+- Fixed `readonly` DatePicker clear button not disabled issue, #1238
+- Fixed Slider not working when binding value is `NaN` or `step` is smaller than 1, #1239 #1282
+- Added multi-header for Table, #1312
+- Added `rowStyle` for Table, #1348
+- Fixed some attributes of TableColumn can not dynamically assigned issue, #1314
+- Added `filter-node-method` attribute and `filter` method for Tree, #1257
+- Added `getCheckedKeys` and `setCheckedKeys` methods for Tree, #1254
+- Added deep nesting support for Checkbox/Radio inside Checkbox/Radio Group, #1152
+- Fixed Popper not triggering destroy issue when keep-alive, #1359
+- Added object deep validation for Form, #1363
+- Added `append` and `prepend` for Autocomplete, #1369
+- Added dynamic `pageSizes` support for Pagination, #1372
+- Added custom style API for checked buttons in Radio Button, #1380
+- Added assigning title via slot for Menu Group, #1382
+- Fixed DatePicker year switching bug, #1385
+- Added uploaded file list API for Upload, #1393
+- Added multi-type support for `label` attribute of Checkbox, #1400
+- Added `setChecked` method for Tree, #1422
+
 ### 1.0.2
 
 *2016-11-18*

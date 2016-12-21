@@ -35,7 +35,7 @@
 
     @e content {
       display: table-cell;
-      padding-left: 8px;
+      padding: 0 8px;
     }
 
     @e icon {

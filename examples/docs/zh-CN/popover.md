@@ -251,3 +251,9 @@ Popover 的属性与 Tooltip 很类似，它们都是基于`Vue-popper`开发的
 |--- | ---|
 | — | Popover 内嵌 HTML 文本 |
 | reference | 触发 Popover 显示的 HTML 元素 |
+
+### Events
+| 事件名称 | 说明 | 回调参数 |
+|---------|--------|---------|
+| show | 显示时触发 | — |
+| hide | 隐藏时触发 | — |
