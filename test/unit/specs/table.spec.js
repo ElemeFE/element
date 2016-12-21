@@ -1215,6 +1215,43 @@ describe('Table', () => {
       }, DELAY);
     });
 
+    it('header-align', (done) => {
+      const vm = createVue({
+        template: `
+           <el-table :data="testData">
+            <el-table-column prop="name" :align="align" :header-align="headerAlign"/>
+          </el-table>
+        `,
+
+        data() {
+          return {
+            align: 'left',
+            headerAlign: null
+          };
+        },
+
+        created() {
+          this.testData = getTestData();
+        }
+      }, true);
+
+      setTimeout(() => {
+        expect(vm.$el.querySelectorAll('.el-table__header th.is-left').length > 0).to.be.true;
+        expect(vm.$el.querySelectorAll('.el-table__header td.is-center').length === 0).to.be.true;
+        vm.align = 'right';
+        vm.$nextTick(() => {
+          expect(vm.$el.querySelectorAll('.el-table__header th.is-right').length > 0).to.be.true;
+          expect(vm.$el.querySelectorAll('.el-table__header td.is-center').length === 0).to.be.true;
+          vm.headerAlign = 'center';
+          vm.$nextTick(() => {
+            expect(vm.$el.querySelectorAll('.el-table__header th.is-right').length === 0).to.be.true;
+            expect(vm.$el.querySelectorAll('.el-table__header td.is-center').length > 0).to.be.true;
+          });
+        });
+        done();
+      }, DELAY);
+    });
+
     it('width', (done) => {
       const vm = createVue({
         template: `
