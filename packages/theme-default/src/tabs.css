@@ -147,10 +147,6 @@
       }
     }
   }
-  @b tab-pane {
-    width: 100%;
-    display: inline-block;
-  }
 }
 
 .slideInRight-transition,
