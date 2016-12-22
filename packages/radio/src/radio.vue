@@ -1,12 +1,13 @@
 <template>
   <label class="el-radio">
-    <span class="el-radio__input">
-      <span class="el-radio__inner"
-        :class="{
+    <span class="el-radio__input"
+      :class="{
         'is-disabled': disabled,
         'is-checked': model === label,
         'is-focus': focus
-      }"></span>
+      }"
+    >
+      <span class="el-radio__inner"></span>
       <input
         class="el-radio__original"
         :value="label"

@@ -843,12 +843,12 @@ describe('Table', () => {
         vm.$el.querySelectorAll('.el-checkbox')[1].click();
 
         setTimeout(_ => {
-          expect(vm.$el.querySelectorAll('.el-checkbox__inner.is-checked')).to.length(1);
+          expect(vm.$el.querySelectorAll('.el-checkbox__input.is-checked')).to.length(1);
           // go to second page
           vm.testData = getData(1);
           setTimeout(_ => {
              // expect no checked
-            expect(vm.$el.querySelectorAll('.el-checkbox__inner.is-checked')).to.length(0);
+            expect(vm.$el.querySelectorAll('.el-checkbox__input.is-checked')).to.length(0);
             // click first checkbox
             vm.$el.querySelectorAll('.el-checkbox')[1].click();
             vm.$el.querySelectorAll('.el-checkbox')[2].click();
@@ -856,11 +856,11 @@ describe('Table', () => {
               // back first page
               vm.testData = getData();
               setTimeout(_ => {
-                expect(vm.$el.querySelectorAll('.el-checkbox__inner.is-checked')).to.length(1);
+                expect(vm.$el.querySelectorAll('.el-checkbox__input.is-checked')).to.length(1);
                 // clear
                 vm.$refs.table.clearSelection();
                 setTimeout(_ => {
-                  expect(vm.$el.querySelectorAll('.el-checkbox__inner.is-checked')).to.length(0);
+                  expect(vm.$el.querySelectorAll('.el-checkbox__input.is-checked')).to.length(0);
                   destroyVM(vm);
                   done();
                 }, DELAY);
