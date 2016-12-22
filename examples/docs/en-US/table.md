@@ -1413,6 +1413,7 @@ Customize table column so it can be integrated with other components.
 | context | context of Table-column, e.g. `_self` refers to the current context, `$parent` parent context, `$root` root context | Object | - | current context where Table lies |
 | inline-template | by using this attribute, you can customize column template. Row data can be accessed by `row` object. In your template, you have access to the following: `{ row (current row), column (current column), $index (row index), store (table store) }` | — | — |
 | align | alignment | string | left/center/right | left |
+| header-align | alignment of the table header. If omitted, the value of the above `align` attribute will be applied | String | left/center/right | — |
 | class-name | class name of cells in the column | string | — | — |
 | selectable | function that determines if a certain row can be selected, works when `type` is 'selection' | Function(row, index) | — | — |
 | reserve-selection | whether to reserve selection after data refreshing, works when `type` is 'selection' | boolean | — | false |
