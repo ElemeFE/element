@@ -803,7 +803,7 @@
 |---------- |-------------- |
 | validate(cb) | 对整个表单进行校验的方法 |
 | validateField(prop, cb) | 对部分表单字段进行校验的方法 |
-| resetFields | 对整个表单进行重置，将所有字段值重置为空并移除校验结果 |
+| resetFields | 对整个表单进行重置，将所有字段值重置为初始值并移除校验结果 |
 
 ### Form-Item Attributes
 
