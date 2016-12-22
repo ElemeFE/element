@@ -813,7 +813,7 @@ Form component allows you to verify your data, helping you find and correct erro
 | ---- | ---- |
 | validate(cb) | the method to validate the whole form |
 | validateField(prop, cb) | the method to validate a certain form item |
-| resetFields | reset all the fields and remove validation result |
+| resetFields | reset all the fields to initial value and remove validation result |
 
 ### Form-Item Attributes
 
