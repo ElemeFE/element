@@ -808,12 +808,11 @@ Form component allows you to verify your data, helping you find and correct erro
 | label-suffix | suffix of the label | string | — | — |
 
 ### Form Methods
-
-| Method | Description |
-| ---- | ---- |
-| validate(cb) | the method to validate the whole form |
-| validateField(prop, cb) | the method to validate a certain form item |
-| resetFields | reset all the fields to initial value and remove validation result |
+| Method | Description | Parameters
+| ---- | ---- | ----
+| validate | the method to validate the whole form | Function(callback: Function(boolean))
+| validateField | the method to validate a certain form item | Function(prop: string, callback: Function(errorMessage: string))
+| resetFields | reset all the fields and remove validation result |
 
 ### Form-Item Attributes
 
