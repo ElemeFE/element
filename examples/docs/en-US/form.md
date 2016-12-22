@@ -809,10 +809,10 @@ Form component allows you to verify your data, helping you find and correct erro
 
 ### Form Methods
 
-| Method | Description |
-| ---- | ---- |
-| validate(cb) | the method to validate the whole form |
-| validateField(prop, cb) | the method to validate a certain form item |
+| Method | Description | params
+| ---- | ---- | ----
+| validate | the method to validate the whole form | Function(callback: Function(boolean))
+| validateField | the method to validate a certain form item | Function(prop: string, callback: Function(errorMessage: string))
 | resetFields | reset all the fields and remove validation result |
 
 ### Form-Item Attributes
