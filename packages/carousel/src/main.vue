@@ -15,7 +15,7 @@
             height: `${ arrowSize }px`,
             width: `${ arrowSize }px`
           }"
-          @click="throttledArrowClick(activeIndex - 1)"
+          @click.stop="throttledArrowClick(activeIndex - 1)"
           class="el-carousel__arrow is-left">
           <i class="el-icon-arrow-left"></i>
         </button>
@@ -28,7 +28,7 @@
             height: `${ arrowSize }px`,
             width: `${ arrowSize }px`
           }"
-          @click="throttledArrowClick(activeIndex + 1)"
+          @click.stop="throttledArrowClick(activeIndex + 1)"
           class="el-carousel__arrow is-right">
           <i class="el-icon-arrow-right"></i>
         </button>
