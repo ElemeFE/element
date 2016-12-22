@@ -229,7 +229,9 @@
       },
 
       query(val) {
-        this.broadcast('ElSelectDropdown', 'updatePopper');
+        this.$nextTick(() => {
+          this.broadcast('ElSelectDropdown', 'updatePopper');
+        });
         this.hoverIndex = -1;
         if (this.multiple && this.filterable) {
           this.resetInputHeight();
