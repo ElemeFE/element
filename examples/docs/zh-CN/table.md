@@ -581,13 +581,15 @@
       width="120">
     </el-table-column>
     <el-table-column
+      inline-template
+      :context="_self"
       fixed="right"
       label="操作"
       width="100">
-      <template scope="scope">
+      <span>
         <el-button @click="handleClick" type="text" size="small">查看</el-button>
         <el-button type="text" size="small">编辑</el-button>
-      </template>
+      </span>
     </el-table-column>
   </el-table>
 </template>
@@ -789,17 +791,19 @@
       width="120">
     </el-table-column>
     <el-table-column
+      inline-template
+      :context="_self"
       fixed="right"
       label="操作"
       width="120">
-      <template scope="scope">
+      <span>
         <el-button
-          @click.native.prevent="deleteRow(scope.$index, tableData4)"
+          @click.native.prevent="deleteRow($index, tableData4)"
           type="text"
           size="small">
           移除
         </el-button>
-      </template>
+      </span>
     </el-table-column>
   </el-table>
 </template>
@@ -1051,7 +1055,7 @@
 
 选择多行数据时使用 Checkbox。
 
-:::demo 实现多选非常简单: 手动添加一个`el-table-column`，设`type`属性为`selection`即可；默认情况下若内容过多会折行显示，若需要单行显示可以使用`show-overflow-tooltip`属性，它接受一个`Boolean`，为`true`时多余的内容会在 hover 时以 tooltip 的形式显示出来。
+:::demo 实现多选非常简单: 手动添加一个`el-table-column`，设`type`属性为`selection`即可。在本例中，为了方便说明其他属性，我们还使用了`inline-template`和`show-overflow-tooltip`：设置了`inline-template`属性后，可以通过调用`row`对象中的值取代`prop`属性的设置；默认情况下若内容过多会折行显示，若需要单行显示可以使用`show-overflow-tooltip`属性，它接受一个`Boolean`，为`true`时多余的内容会在 hover 时以 tooltip 的形式显示出来。
 ```html
 <template>
   <el-table
@@ -1064,9 +1068,10 @@
       width="55">
     </el-table-column>
     <el-table-column
+      inline-template
       label="日期"
       width="120">
-      <template scope="scope">{{ scope.row.date }}</template>
+      <div>{{ row.date }}</div>
     </el-table-column>
     <el-table-column
       prop="name"
@@ -1223,12 +1228,9 @@
       label="标签"
       width="100"
       :filters="[{ text: '家', value: '家' }, { text: '公司', value: '公司' }]"
-      :filter-method="filterTag">
-      <template scope="scope">
-        <el-tag
-          :type="scope.row.tag === '家' ? 'primary' : 'success'"
-          close-transition>{{scope.row.tag}}</el-tag>
-      </template>
+      :filter-method="filterTag"
+      inline-template>
+      <el-tag :type="row.tag === '家' ? 'primary' : 'success'" close-transition>{{row.tag}}</el-tag>
     </el-table-column>
   </el-table>
 </template>
@@ -1276,7 +1278,7 @@
 ### 自定义列模板
 
 自定义列的显示内容，可组合其他组件使用。
-:::demo 通过 `Scoped slot` 可以获取到 row, column, $index 和 store（table 内部的状态管理）的数据，用法参考 demo。(`1.1` 后支持通过 [Scoped slot](https://vuejs.org/v2/guide/components.html#Scoped-Slots) 自定义模板。之前的 `inline-template` 同样适用，但不推荐。)
+:::demo 通过设置 `inline-template` 属性可以开启自定义模板功能，此时 `el-table-column` 的上下文指的是 `el-table` 所处的上下文，当然你可以通过 `context` 属性指定上下文环境，例如设置成 `:context="_self"` 就是指的当前上下文。有些时候我们会把 table 封装在其他组件里，通过 slot 设置 `table-column`，这样的话就要注意设置 `context`。在 column 组件内部，可以获取到 row, column, $index 和 store（table 内部的状态管理）的数据。
 ```html
 <template>
   <el-table
@@ -1284,36 +1286,43 @@
     border
     style="width: 100%">
     <el-table-column
+      inline-template
       label="日期"
       width="180">
-      <template scope="scope">
+      <div>
         <el-icon name="time"></el-icon>
-        <span style="margin-left: 10px">{{ scope.row.date }}</span>
-      </template>
+        <span style="margin-left: 10px">{{ row.date }}</span>
+      </div>
     </el-table-column>
     <el-table-column
+      inline-template
       label="姓名"
       width="180">
-      <template scope="scope">
-        <el-popover trigger="hover" placement="top">
-          <p>姓名: {{ scope.row.name }}</p>
-          <p>住址: {{ scope.row.address }}</p>
-          <div slot="reference" class="name-wrapper">
-            <el-tag>{{ scope.row.name }}</el-tag>
-          </div>
-        </el-popover>
-      </template>
+      <el-popover trigger="hover" placement="top">
+        <p>姓名: {{ row.name }}</p>
+        <p>住址: {{ row.address }}</p>
+        <div slot="reference" class="name-wrapper">
+          <el-tag>{{ row.name }}</el-tag>
+        </div>
+      </el-popover>
     </el-table-column>
-    <el-table-column label="操作">
-      <template scope="scope">
+    <el-table-column
+      :context="_self"
+      inline-template
+      label="操作">
+      <div>
         <el-button
           size="small"
-          @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+          @click="handleEdit($index, row)">
+          编辑
+        </el-button>
         <el-button
           size="small"
           type="danger"
-          @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-      </template>
+          @click="handleDelete($index, row)">
+          删除
+        </el-button>
+      </div>
     </el-table-column>
   </el-table>
 </template>
