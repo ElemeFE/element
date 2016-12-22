@@ -11,6 +11,9 @@
       },
       handleClick(tab, event) {
         console.log(tab, event);
+      },
+      renderTab(h, tab) {
+        return <span><i class="el-icon-date"></i> {tab.label}</span>;
       }
     }
   }
@@ -117,6 +120,30 @@
   <el-tab-pane label="角色管理">角色管理</el-tab-pane>
   <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
 </el-tabs>
+```
+:::
+
+### 自定义标签页
+
+可以通过 `label-content` 属性来实现自定义标签页的内容
+
+:::demo `label-content` 是一个 render function，在这个方法里返回的 vnode 会被渲染到标签页中。
+```html
+<el-tabs type="border-card">
+  <el-tab-pane label="我的行程" :label-content="renderTab">我的行程</el-tab-pane>
+  <el-tab-pane label="消息中心">消息中心</el-tab-pane>
+  <el-tab-pane label="角色管理">角色管理</el-tab-pane>
+  <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
+</el-tabs>
+<script>
+  export default {
+    methods: {
+      renderTab(h, tab) {
+        return <span><i class="el-icon-date"></i> {tab.label}</span>;
+      }
+    }
+  }
+</script>
 ```
 :::
 

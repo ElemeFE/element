@@ -11,6 +11,9 @@
       },
       handleClick(tab, event) {
         console.log(tab, event);
+      },
+      renderTab(h, tab) {
+        return <span><i class="el-icon-date"></i> {tab.label}</span>;
       }
     }
   }
@@ -123,6 +126,30 @@ Border card tabs.
 </el-tabs>
 ```
 
+:::
+
+### Custom Tab
+
+You can use `label-content` property to customize the tab
+
+:::demo `label-content` is a render function,which return the vnode of the tab.
+```html
+<el-tabs type="border-card">
+  <el-tab-pane label="Route" :label-content="renderTab">Route</el-tab-pane>
+  <el-tab-pane label="Config">Config</el-tab-pane>
+  <el-tab-pane label="Role">Role</el-tab-pane>
+  <el-tab-pane label="Task">Task</el-tab-pane>
+</el-tabs>
+<script>
+  export default {
+    methods: {
+      renderTab(h, tab) {
+        return <span><i class="el-icon-date"></i> {tab.label}</span>;
+      }
+    }
+  }
+</script>
+```
 :::
 
 ### Tabs Attributes
