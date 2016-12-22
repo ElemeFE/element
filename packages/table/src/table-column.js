@@ -114,6 +114,7 @@ export default {
     context: {},
     columnKey: String,
     align: String,
+    headerAlign: String,
     showTooltipWhenOverflow: Boolean,
     showOverflowTooltip: Boolean,
     fixed: [Boolean, String],
@@ -205,6 +206,7 @@ export default {
       isColumnGroup,
       context: this.context,
       align: this.align ? 'is-' + this.align : null,
+      headerAlign: this.headerAlign ? 'is-' + this.headerAlign : (this.align ? 'is-' + this.align : null),
       sortable: this.sortable,
       sortMethod: this.sortMethod,
       resizable: this.resizable,
@@ -302,6 +304,12 @@ export default {
     align(newVal) {
       if (this.columnConfig) {
         this.columnConfig.align = newVal ? 'is-' + newVal : null;
+      }
+    },
+
+    headerAlign(newVal) {
+      if (this.columnConfig) {
+        this.columnConfig.headerAlign = newVal ? 'is-' + newVal : this.align;
       }
     },
 
