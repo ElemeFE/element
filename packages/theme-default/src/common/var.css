@@ -544,4 +544,15 @@
   --------------------------*/
   --loading-spinner-size: 42px;
   --loading-fullscreen-spinner-size: 50px;
+
+  /* Carousel
+  --------------------------*/
+  --carousel-arrow-font-size: 12px;
+  --carousel-arrow-background: rgba(31, 45, 61, 0.11);
+  --carousel-arrow-hover-background: rgba(31, 45, 61, 0.23);
+  --carousel-indicator-width: 30px;
+  --carousel-indicator-height: 2px;
+  --carousel-indicator-padding-horizontal: 4px;
+  --carousel-indicator-padding-vertical: 12px;
+  --carousel-indicator-out-color: var(--border-color-hover);
 }
