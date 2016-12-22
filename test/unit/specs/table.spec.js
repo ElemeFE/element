@@ -981,7 +981,7 @@ describe('Table', () => {
           });
 
         setTimeout(_ => {
-          const elm = vm.$el.querySelector('.caret-wrapper');
+          const elm = vm.$el.querySelector('.caret-wrapper > .ascending');
 
           elm.click();
           setTimeout(_ => {
@@ -1003,7 +1003,7 @@ describe('Table', () => {
           }
         }, '@sort-change="sortChange"');
         setTimeout(_ => {
-          const elm = vm.$el.querySelector('.caret-wrapper');
+          const elm = vm.$el.querySelector('.caret-wrapper > .ascending');
 
           elm.click();
           setTimeout(_ => {
@@ -1019,7 +1019,7 @@ describe('Table', () => {
       const vm = createTable('', '', '', 'sortable');
 
       it('ascending', done => {
-        const elm = vm.$el.querySelector('.caret-wrapper');
+        const elm = vm.$el.querySelector('.caret-wrapper > .ascending');
 
         elm.click();
         setTimeout(_ => {
@@ -1031,7 +1031,7 @@ describe('Table', () => {
       });
 
       it('descending', done => {
-        const elm = vm.$el.querySelector('.caret-wrapper');
+        const elm = vm.$el.querySelector('.caret-wrapper > .descending');
 
         elm.click();
         setTimeout(_ => {
