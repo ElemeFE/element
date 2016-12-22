@@ -3,6 +3,9 @@
     methods: {
       handleClick() {
         alert('button click');
+      },
+      handleCommand(command) {
+        this.$message('click on item ' + command);
       }
     }
   }
@@ -123,6 +126,36 @@ Use `hide-on-click` to define if menu closes on clicking.
     <el-dropdown-item divided>Action 5</el-dropdown-item>
   </el-dropdown-menu>
 </el-dropdown>
+```
+:::
+
+### Command event
+
+Clicking each dropdown item fires an event whose parameter is assigned by each item.
+
+:::demo
+```html
+<el-dropdown @command="handleCommand">
+  <span class="el-dropdown-link">
+    Dropdown List<i class="el-icon-caret-bottom el-icon--right"></i>
+  </span>
+  <el-dropdown-menu slot="dropdown">
+    <el-dropdown-item command="a">Action 1</el-dropdown-item>
+    <el-dropdown-item command="b">Action 2</el-dropdown-item>
+    <el-dropdown-item command="c">Action 3</el-dropdown-item>
+    <el-dropdown-item command="d" disabled>Action 4</el-dropdown-item>
+    <el-dropdown-item command="e" divided>Action 5</el-dropdown-item>
+  </el-dropdown-menu>
+</el-dropdown>
+<script>
+  export default {
+    methods: {
+      handleCommand(command) {
+        this.$message('click on item ' + command);
+      }
+    }
+  }
+</script>
 ```
 :::
 
