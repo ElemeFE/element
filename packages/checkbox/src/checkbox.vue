@@ -1,14 +1,14 @@
 <template>
   <label class="el-checkbox">
-    <span class="el-checkbox__input">
-      <span class="el-checkbox__inner"
-        :class="{
-          'is-disabled': disabled,
-          'is-checked': isChecked,
-          'is-indeterminate': indeterminate,
-          'is-focus': focus
-        }"
-      ></span>
+    <span class="el-checkbox__input"
+      :class="{
+        'is-disabled': disabled,
+        'is-checked': isChecked,
+        'is-indeterminate': indeterminate,
+        'is-focus': focus
+      }"
+    >
+      <span class="el-checkbox__inner"></span>
       <input
         v-if="trueLabel || falseLabel"
         class="el-checkbox__original"
