@@ -142,6 +142,6 @@ Border card tabs.
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------- |---------- |-------------  |-------- |
 | label     | title of the tab   | string   | — |    —     |
-| label-content | render function for tab title | Function(h) | - | - |
+| label-content | render function for tab title | Function(h, tab:vueInstance) | - | - |
 | disabled | whether Tab is disabled | boolean | - | false |
 | name      | identifier corresponding to the activeName of Tabs, representing the alias of the tab-pane | string | — | ordinal number of the tab-pane in the sequence, i.e. the first tab-pane is '1' |

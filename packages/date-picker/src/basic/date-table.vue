@@ -231,7 +231,7 @@
         }
 
         if (selectionMode === 'day' && (cell.type === 'normal' || cell.type === 'today') &&
-          this.year === this.date.getFullYear() && this.month === this.date.getMonth() && monthDate === Number(cell.text)) {
+          Number(this.year) === this.date.getFullYear() && this.month === this.date.getMonth() && monthDate === Number(cell.text)) {
           classes.push('current');
         }
 

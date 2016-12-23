@@ -124,14 +124,14 @@
 
       emptyText() {
         if (this.loading) {
-          return this.t('el.select.loading');
+          return this.loadingText || this.t('el.select.loading');
         } else {
           if (this.remote && this.query === '' && this.options.length === 0) return false;
           if (this.filterable && this.options.length > 0 && this.filteredOptionsCount === 0) {
-            return this.t('el.select.noMatch');
+            return this.noMatchText || this.t('el.select.noMatch');
           }
           if (this.options.length === 0) {
-            return this.t('el.select.noData');
+            return this.noDataText || this.t('el.select.noData');
           }
         }
         return null;
@@ -162,7 +162,11 @@
       filterable: Boolean,
       allowCreate: Boolean,
       loading: Boolean,
+      popperClass: String,
       remote: Boolean,
+      loadingText: String,
+      noMatchText: String,
+      noDataText: String,
       remoteMethod: Function,
       filterMethod: Function,
       multiple: Boolean,
@@ -291,6 +295,7 @@
             this.setOverflow();
           }
         }
+        this.$emit('visible-change', val);
       },
 
       options(val) {
@@ -434,7 +439,9 @@
           let inputChildNodes = this.$refs.reference.$el.childNodes;
           let input = [].filter.call(inputChildNodes, item => item.tagName === 'INPUT')[0];
           input.style.height = Math.max(this.$refs.tags.clientHeight + 6, sizeMap[this.size] || 36) + 'px';
-          this.broadcast('ElSelectDropdown', 'updatePopper');
+          if (this.visible && this.emptyText !== false) {
+            this.broadcast('ElSelectDropdown', 'updatePopper');
+          }
         });
       },
 
