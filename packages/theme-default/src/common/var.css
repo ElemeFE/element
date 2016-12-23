@@ -548,6 +548,7 @@
   /* Carousel
   --------------------------*/
   --carousel-arrow-font-size: 12px;
+  --carousel-arrow-size: 36px;
   --carousel-arrow-background: rgba(31, 45, 61, 0.11);
   --carousel-arrow-hover-background: rgba(31, 45, 61, 0.23);
   --carousel-indicator-width: 30px;

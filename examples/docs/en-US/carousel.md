@@ -61,10 +61,10 @@ Loop a series of images or texts in a limited space
 
 Indicators can be displayed outside the carousel
 
-::: demo The `indicator-position` attribute determines where the indicators are located. By default they are inside the carousel, and setting `indicator-position` to `out` moves them outside.
+::: demo The `indicator-position` attribute determines where the indicators are located. By default they are inside the carousel, and setting `indicator-position` to `outside` moves them outside.
 ```html
 <template>
-  <el-carousel indicator-position="out">
+  <el-carousel indicator-position="outside">
     <el-carousel-item v-for="item in 4">
       <h3>{{ item }}</h3>
     </el-carousel-item>
@@ -95,10 +95,10 @@ Indicators can be displayed outside the carousel
 
 You can define when arrows are displayed
 
-::: demo The `show-arrow` attribute determines when arrows are displayed. By default they appear when mouse hovers over the carousel. Setting `show-arrow` to `always` or `never` shows/hides the arrows permanently.
+::: demo The `arrow` attribute determines when arrows are displayed. By default they appear when mouse hovers over the carousel. Setting `arrow` to `always` or `never` shows/hides the arrows permanently.
 ```html
 <template>
-  <el-carousel :interval="5000" show-arrow="always">
+  <el-carousel :interval="5000" arrow="always">
     <el-carousel-item v-for="item in 4">
       <h3>{{ item }}</h3>
     </el-carousel-item>
@@ -165,11 +165,11 @@ When a page is wide enough but has limited height, you can activate card mode fo
 | height | height of the carousel | number | — | 300 |
 | initial-index | index of the initially active slide (starting from 0) | number | — | 0 |
 | trigger | how indicators are triggered | string | click | — |
-| arrow-size | size of the arrows | number | — | 36 |
-| interval | interval of the auto loop, in milliseconds. If less than or equal to 0, the carousel will not loop | number | — | 3000 |
+| auto-play | whether automatically loop the slides | boolean | — | true |
+| interval | interval of the auto loop, in milliseconds | number | — | 3000 |
 | indicator-position | position of the indicators | string | out | — |
-| show-indicator | whether indicators are shown | boolean | — | true |
-| show-arrow | when arrows are shown | string | always/never | — |
+| indicator | whether indicators are shown | boolean | — | true |
+| arrow | when arrows are shown | string | always/never | — |
 | card | whether card mode is activated | boolean | — | false |
 
 ### Events
@@ -181,3 +181,5 @@ When a page is wide enough but has limited height, you can activate card mode fo
 | Method | Description | Parameters |
 |---------- |-------------- | - |
 | setActiveIndex | manually switch slide | index of the slide to be switched to, starting from 0 |
+| slideToPrev | switch to the previous slide | — |
+| slideToNext | switch to the next slide | — |
