@@ -26,7 +26,7 @@
 <script>
 import Vue from 'vue';
 import Clickoutside from 'element-ui/src/utils/clickoutside';
-import { formatDate, parseDate, getWeekNumber } from './util';
+import { formatDate, parseDate, getWeekNumber, equalDate } from './util';
 import Popper from 'element-ui/src/utils/vue-popper';
 import Emitter from 'element-ui/src/mixins/emitter';
 import ElInput from 'element-ui/packages/input';
@@ -304,10 +304,13 @@ export default {
 
           if (parsedValue && this.picker) {
             this.picker.value = parsedValue;
+          } else {
+            this.$forceUpdate();
           }
-          return;
+        } else {
+          this.picker.value = value;
+          this.$forceUpdate();
         }
-        this.picker.value = value;
       }
     }
   },
@@ -335,8 +338,23 @@ export default {
         this.pickerVisible = !this.pickerVisible;
       } else {
         this.internalValue = '';
-        this.$emit('input', '');
       }
+    },
+
+    dateIsUpdated(date) {
+      let updated = true;
+
+      if (Array.isArray(date)) {
+        if (equalDate(this.cacheDateMin, date[0]) &&
+          equalDate(this.cacheDateMax, date[1])) updated = false;
+        this.cacheDateMin = date[0];
+        this.cacheDateMax = date[1];
+      } else {
+        if (equalDate(this.cacheDate, date)) updated = false;
+        this.cacheDate = date;
+      }
+
+      return updated;
     },
 
     handleClose() {
@@ -418,7 +436,7 @@ export default {
 
         this.picker.$on('dodestroy', this.doDestroy);
         this.picker.$on('pick', (date, visible = false) => {
-          this.$emit('input', date);
+          if (this.dateIsUpdated(date)) this.$emit('input', date);
           this.pickerVisible = this.picker.visible = visible;
           this.picker.resetView && this.picker.resetView();
         });

@@ -8,6 +8,10 @@ const newArray = function(start, end) {
   return result;
 };
 
+export const equalDate = function(dateA, dateB) {
+  return new Date(dateA).getTime() === new Date(dateB).getTime();
+};
+
 export const toDate = function(date) {
   date = new Date(date);
   if (isNaN(date.getTime())) return null;
