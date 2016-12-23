@@ -1,7 +1,7 @@
 <template>
   <div
     class="el-carousel"
-    :class="{ 'el-carousel--card': card }"
+    :class="{ 'el-carousel--card': type === 'card' }"
     @mouseenter.stop="handleMouseEnter"
     @mouseleave.stop="handleMouseLeave">
     <div
@@ -29,8 +29,8 @@
     </div>
     <ul
       class="el-carousel__indicators"
-      v-if="indicator"
-      :class="{ 'el-carousel__indicators--out': indicatorPosition === 'outside' || card }">
+      v-if="indicatorPosition !== 'none'"
+      :class="{ 'el-carousel__indicators--outside': indicatorPosition === 'outside' || type === 'card' }">
       <li
         v-for="(item, index) in items"
         class="el-carousel__indicator"
@@ -45,6 +45,8 @@
 
 <script>
 import throttle from 'throttle-debounce/throttle';
+import debounce from 'throttle-debounce/debounce';
+import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
 
 export default {
   name: 'ElCarousel',
@@ -72,8 +74,11 @@ export default {
       type: Boolean,
       default: true
     },
-    arrow: String,
-    card: Boolean
+    arrow: {
+      type: String,
+      default: 'hover'
+    },
+    type: String
   },
 
   data() {
@@ -81,7 +86,6 @@ export default {
       items: [],
       activeIndex: -1,
       containerWidth: 0,
-      reInitTimer: null,
       timer: null,
       hover: false
     };
@@ -90,7 +94,7 @@ export default {
   watch: {
     activeIndex(val, oldVal) {
       this.resetItemPosition();
-      this.$emit('index-change', val, oldVal);
+      this.$emit('change', val, oldVal);
     }
   },
 
@@ -106,13 +110,12 @@ export default {
     },
 
     handleItemChange() {
-      clearTimeout(this.reInitTimer);
-      this.reInitTimer = setTimeout(() => {
-        this.setItems();
-      }, 100);
+      debounce(100, () => {
+        this.updateItems();
+      });
     },
 
-    setItems() {
+    updateItems() {
       this.items = this.$children.filter(child => child.$options.name === 'ElCarouselItem');
     },
 
@@ -139,10 +142,17 @@ export default {
       this.timer = setInterval(this.playSlides, this.interval);
     },
 
-    setActiveIndex(index) {
+    setActiveItem(index) {
+      if (typeof index === 'string') {
+        const filteredItems = this.items.filter(item => item.name === index);
+        if (filteredItems.length > 0) {
+          index = this.items.indexOf(filteredItems[0]);
+        }
+      }
       index = Number(index);
       if (isNaN(index) || index !== Math.floor(index)) {
-        console.warn('index must be an integer.');
+        process.env.NODE_ENV !== 'production' &&
+        console.warn('[Element Warn][Carousel]index must be an integer.');
         return;
       }
       let length = this.items.length;
@@ -155,12 +165,12 @@ export default {
       }
     },
 
-    slideToPrev() {
-      this.setActiveIndex(this.activeIndex - 1);
+    prev() {
+      this.setActiveItem(this.activeIndex - 1);
     },
 
-    slideToNext() {
-      this.setActiveIndex(this.activeIndex + 1);
+    next() {
+      this.setActiveItem(this.activeIndex + 1);
     },
 
     handleIndicatorClick(index) {
@@ -176,17 +186,17 @@ export default {
 
   created() {
     this.throttledArrowClick = throttle(300, true, index => {
-      this.setActiveIndex(index);
+      this.setActiveItem(index);
     });
     this.throttledIndicatorHover = throttle(300, index => {
       this.handleIndicatorHover(index);
     });
-    window.addEventListener('resize', this.resetItemPosition);
   },
 
   mounted() {
-    this.setItems();
+    this.updateItems();
     this.$nextTick(() => {
+      addResizeListener(this.$el, this.resetItemPosition);
       if (this.initialIndex < this.items.length && this.initialIndex >= 0) {
         this.activeIndex = this.initialIndex;
       }
@@ -195,7 +205,7 @@ export default {
   },
 
   beforeDestroy() {
-    window.removeEventListener('resize', this.resetItemPosition);
+    if (this.$el) removeResizeListener(this.$el, this.resetItemPosition);
   }
 };
 </script>

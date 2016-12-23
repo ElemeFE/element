@@ -61,7 +61,7 @@ Loop a series of images or texts in a limited space
 
 Indicators can be displayed outside the carousel
 
-::: demo The `indicator-position` attribute determines where the indicators are located. By default they are inside the carousel, and setting `indicator-position` to `outside` moves them outside.
+::: demo The `indicator-position` attribute determines where the indicators are located. By default they are inside the carousel, and setting `indicator-position` to `outside` moves them outside; setting `indicator-position` to `none` hides the indicators.
 ```html
 <template>
   <el-carousel indicator-position="outside">
@@ -129,10 +129,10 @@ You can define when arrows are displayed
 
 When a page is wide enough but has limited height, you can activate card mode for carousels
 
-::: demo Setting `card` to `true` activates the card mode. Apart from the appearance, the biggest difference between card mode and common mode is that clicking the slides at both sides directly switches the carousel in card mode.
+::: demo Setting `type` to `card` activates the card mode. Apart from the appearance, the biggest difference between card mode and common mode is that clicking the slides at both sides directly switches the carousel in card mode.
 ```html
 <template>
-  <el-carousel :interval="4000" card height="200px">
+  <el-carousel :interval="4000" type="card" height="200px">
     <el-carousel-item v-for="item in 6">
       <h3>{{ item }}</h3>
     </el-carousel-item>
@@ -159,27 +159,31 @@ When a page is wide enough but has limited height, you can activate card mode fo
 ```
 :::
 
-### Attributes
+### Carousel Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | height | height of the carousel | number | — | 300 |
 | initial-index | index of the initially active slide (starting from 0) | number | — | 0 |
 | trigger | how indicators are triggered | string | click | — |
-| auto-play | whether automatically loop the slides | boolean | — | true |
+| autoplay | whether automatically loop the slides | boolean | — | true |
 | interval | interval of the auto loop, in milliseconds | number | — | 3000 |
-| indicator-position | position of the indicators | string | out | — |
-| indicator | whether indicators are shown | boolean | — | true |
-| arrow | when arrows are shown | string | always/never | — |
-| card | whether card mode is activated | boolean | — | false |
+| indicator-position | position of the indicators | string | outside/none | — |
+| arrow | when arrows are shown | string | always/hover/never | hover |
+| type | type of the Carousel | string | card | — |
 
 ### Events
 | Event Name | Description | Parameters |
 |---------|---------|---------|
-| index-change | triggers when the active slide switches | index of the new active slide, index of the old active slide |
+| change | triggers when the active slide switches | index of the new active slide, index of the old active slide |
 
 ### Methods
 | Method | Description | Parameters |
 |---------- |-------------- | - |
-| setActiveIndex | manually switch slide | index of the slide to be switched to, starting from 0 |
-| slideToPrev | switch to the previous slide | — |
-| slideToNext | switch to the next slide | — |
+| setActiveItem | manually switch slide | index of the slide to be switched to, starting from 0; or the `name` of corresponding `el-carousel-item` |
+| prev | switch to the previous slide | — |
+| next | switch to the next slide | — |
+
+### Carousel-Item Attributes
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
+|---------- |-------------- |---------- |--------------------------------  |-------- |
+| name | name of the item, can be used in `setActiveItem` | string | — | — |

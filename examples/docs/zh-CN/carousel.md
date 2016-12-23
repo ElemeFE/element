@@ -113,7 +113,7 @@
 
 可以将指示器的显示位置设置在容器外部
 
-::: demo `indicator-position`属性定义了指示器的位置。默认情况下，它会显示在走马灯内部，设置为`outside`则会显示在外部。
+::: demo `indicator-position`属性定义了指示器的位置。默认情况下，它会显示在走马灯内部，设置为`outside`则会显示在外部；设置为`none`则不会显示指示器。
 ```html
 <template>
   <el-carousel indicator-position="outside">
@@ -179,10 +179,10 @@
 ### 卡片化
 当页面宽度方向空间空余，但高度方向空间匮乏时，可使用卡片风格
 
-::: demo 设置`card`属性即可启用卡片模式。从交互上来说，卡片模式和一般模式的最大区别在于，可以通过直接点击两侧的幻灯片进行切换。
+::: demo 将`type`属性设置为`card`即可启用卡片模式。从交互上来说，卡片模式和一般模式的最大区别在于，可以通过直接点击两侧的幻灯片进行切换。
 ```html
 <template>
-  <el-carousel :interval="4000" card height="200px">
+  <el-carousel :interval="4000" type="card" height="200px">
     <el-carousel-item v-for="item in 6">
       <h3>{{ item }}</h3>
     </el-carousel-item>
@@ -209,27 +209,31 @@
 ```
 :::
 
-### Attributes
+### Carousel Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | height | 走马灯的高度 | number | — | 300 |
 | initial-index | 初始状态激活的幻灯片的索引，从 0 开始 | number | — | 0 |
 | trigger | 指示器的触发方式 | string | click | — |
-| auto-play | 是否自动切换 | boolean | — | true |
+| autoplay | 是否自动切换 | boolean | — | true |
 | interval | 自动切换的时间间隔，单位为毫秒 | number | — | 3000 |
-| indicator-position | 指示器的位置 | string | out | — |
-| indicator | 是否显示指示器 | boolean | — | true |
-| arrow | 切换箭头的显示时机 | string | always/never | — |
-| card | 是否启用卡片模式 | boolean | — | false |
+| indicator-position | 指示器的位置 | string | outside/none | — |
+| arrow | 切换箭头的显示时机 | string | always/hover/never | hover |
+| type | 走马灯的类型 | string | card | — |
 
-### Events
+### Carousel Events
 | 事件名称 | 说明 | 回调参数 |
 |---------|---------|---------|
-| index-change | 幻灯片切换时触发 | 目前激活的幻灯片的索引，原幻灯片的索引 |
+| change | 幻灯片切换时触发 | 目前激活的幻灯片的索引，原幻灯片的索引 |
 
-### Methods
+### Carousel Methods
 | 方法名      | 说明          | 参数 |
 |---------- |-------------- | - |
-| setActiveIndex | 手动切换幻灯片 | 需要切换的幻灯片的索引，从 0 开始 |
-| slideToPrev | 切换至上一张幻灯片 | — |
-| slideToNext | 切换至下一张幻灯片 | — |
+| setActiveItem | 手动切换幻灯片 | 需要切换的幻灯片的索引，从 0 开始；或相应 `el-carousel-item` 的 `name` 属性值 |
+| prev | 切换至上一张幻灯片 | — |
+| next | 切换至下一张幻灯片 | — |
+
+### Carousel-Item Attributes
+| 参数      | 说明          | 类型      | 可选值                           | 默认值  |
+|---------- |-------------- |---------- |--------------------------------  |-------- |
+| name | 幻灯片的名字，可用作 `setActiveItem` 的参数 | string | — | — |
