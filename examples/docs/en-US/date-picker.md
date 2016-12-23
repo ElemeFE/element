@@ -274,3 +274,9 @@ Picking a date range is supported.
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | text | title of the shortcut | string | — | — |
 | onClick | callback function, triggers when the shortcut is clicked, with the `vm` as its parameter. You can change the picker value by emitting the `pick` event. Example: `vm.$emit('pick', new Date())`| function | — | — |
+
+
+### Events
+| Event Name | Description | Parameters |
+|---------|--------|---------|
+| change | triggers when input value changes, return format value | |

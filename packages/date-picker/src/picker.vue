@@ -304,13 +304,11 @@ export default {
 
           if (parsedValue && this.picker) {
             this.picker.value = parsedValue;
-          } else {
-            this.$forceUpdate();
           }
         } else {
           this.picker.value = value;
-          this.$forceUpdate();
         }
+        this.$forceUpdate();
       }
     }
   },
@@ -437,6 +435,8 @@ export default {
         this.picker.$on('dodestroy', this.doDestroy);
         this.picker.$on('pick', (date, visible = false) => {
           if (this.dateIsUpdated(date)) this.$emit('input', date);
+
+          this.$nextTick(() => this.$emit('change', this.visualValue));
           this.pickerVisible = this.picker.visible = visible;
           this.picker.resetView && this.picker.resetView();
         });
