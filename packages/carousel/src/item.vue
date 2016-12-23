@@ -4,13 +4,17 @@
     class="el-carousel__item"
     :class="{
       'is-active': active,
-      'el-carousel__item--card': $parent.card,
+      'el-carousel__item--card': $parent.type === 'card',
       'is-in-stage': inStage
     }"
     @click="handleItemClick"
-    :style="{ transform: `translateX(${ translate }px) scale(${ scale })` }">
+    :style="{
+      msTransform: `translateX(${ translate }px) scale(${ scale })`,
+      webkitTransform: `translateX(${ translate }px) scale(${ scale })`,
+      transform: `translateX(${ translate }px) scale(${ scale })`
+    }">
     <div
-      v-if="$parent.card"
+      v-if="$parent.type === 'card'"
       v-show="!active"
       class="el-carousel__mask">
     </div>
@@ -22,6 +26,10 @@
   const CARD_SCALE = 0.83;
   export default {
     name: 'ElCarouselItem',
+
+    props: {
+      name: String
+    },
 
     data() {
       return {
@@ -61,7 +69,7 @@
         const parentWidth = this.$parent.$el.offsetWidth;
         const length = this.$parent.items.length;
 
-        if (this.$parent.card) {
+        if (this.$parent.type === 'card') {
           if (index !== activeIndex && length > 2) {
             index = this.processIndex(index, activeIndex, length);
           }
@@ -78,9 +86,9 @@
 
       handleItemClick() {
         const parent = this.$parent;
-        if (parent && parent.card) {
+        if (parent && parent.type === 'card') {
           const index = parent.items.indexOf(this);
-          parent.setActiveIndex(index);
+          parent.setActiveItem(index);
         }
       }
     },
