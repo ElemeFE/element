@@ -4,7 +4,7 @@
     class="el-carousel__item"
     :class="{
       'is-active': active,
-      'is-card': $parent.card,
+      'el-carousel__item--card': $parent.card,
       'is-in-stage': inStage
     }"
     @click="handleItemClick"
