@@ -87,7 +87,7 @@
         if (!(newVal >= 0 && newVal <= 23)) {
           this.hoursPrivate = oldVal;
         }
-        this.hourElm.scrollTop = Math.max(0, (this.hoursPrivate - 2.5) * 32 + 80);
+        this.hourEl.scrollTop = Math.max(0, (this.hoursPrivate - 2.5) * 32 + 80);
         this.$emit('change', { hours: newVal });
       },
 
@@ -95,7 +95,7 @@
         if (!(newVal >= 0 && newVal <= 59)) {
           this.minutesPrivate = oldVal;
         }
-        this.minuteElm.scrollTop = Math.max(0, (this.minutesPrivate - 2.5) * 32 + 80);
+        this.minuteEl.scrollTop = Math.max(0, (this.minutesPrivate - 2.5) * 32 + 80);
         this.$emit('change', { minutes: newVal });
       },
 
@@ -103,7 +103,7 @@
         if (!(newVal >= 0 && newVal <= 59)) {
           this.secondsPrivate = oldVal;
         }
-        this.secondElm.scrollTop = Math.max(0, (this.secondsPrivate - 2.5) * 32 + 80);
+        this.secondEl.scrollTop = Math.max(0, (this.secondsPrivate - 2.5) * 32 + 80);
         this.$emit('change', { seconds: newVal });
       }
     },
@@ -113,15 +113,15 @@
         return getRangeHours(this.selectableRange);
       },
 
-      hourElm() {
+      hourEl() {
         return this.$refs.hour.wrap;
       },
 
-      minuteElm() {
+      minuteEl() {
         return this.$refs.minute.wrap;
       },
 
-      secondElm() {
+      secondEl() {
         return this.$refs.second.wrap;
       }
     },
@@ -164,9 +164,9 @@
       },
 
       ajustScrollTop() {
-        this.hourElm.scrollTop = Math.max(0, (this.hours - 2.5) * 32 + 80);
-        this.minuteElm.scrollTop = Math.max(0, (this.minutes - 2.5) * 32 + 80);
-        this.secondElm.scrollTop = Math.max(0, (this.seconds - 2.5) * 32 + 80);
+        this.hourEl.scrollTop = Math.max(0, (this.hours - 2.5) * 32 + 80);
+        this.minuteEl.scrollTop = Math.max(0, (this.minutes - 2.5) * 32 + 80);
+        this.secondEl.scrollTop = Math.max(0, (this.seconds - 2.5) * 32 + 80);
       }
     }
   };
