@@ -44,7 +44,7 @@ describe('Carousel', () => {
     vm = createVue({
       template: `
         <div>
-          <el-carousel :auto-play="false" :initial-index="1">
+          <el-carousel :autoplay="false" :initial-index="1">
             <el-carousel-item v-for="item in 3"></el-carousel-item>
           </el-carousel>
         </div>
@@ -83,11 +83,11 @@ describe('Carousel', () => {
     }, 10);
   });
 
-  it('index change', done => {
+  it('change', done => {
     vm = createVue({
       template: `
         <div>
-          <el-carousel :interval="50" @index-change="handleIndexChange">
+          <el-carousel :interval="50" @change="handleChange">
             <el-carousel-item v-for="item in 3"></el-carousel-item>
           </el-carousel>
         </div>
@@ -99,7 +99,7 @@ describe('Carousel', () => {
         };
       },
       methods: {
-        handleIndexChange(val, oldVal) {
+        handleChange(val, oldVal) {
           this.val = val;
           this.oldVal = oldVal;
         }
@@ -118,7 +118,7 @@ describe('Carousel', () => {
       vm = createVue({
         template: `
         <div>
-          <el-carousel :auto-play="false">
+          <el-carousel :autoplay="false">
             <el-carousel-item v-for="item in 3"></el-carousel-item>
           </el-carousel>
         </div>
@@ -138,7 +138,7 @@ describe('Carousel', () => {
       vm = createVue({
         template: `
         <div>
-          <el-carousel :auto-play="false" trigger="click">
+          <el-carousel :autoplay="false" trigger="click">
             <el-carousel-item v-for="item in 3"></el-carousel-item>
           </el-carousel>
         </div>
@@ -161,11 +161,11 @@ describe('Carousel', () => {
   });
 
   describe('methods', () => {
-    it('setActiveIndex', done => {
+    it('setActiveItem', done => {
       vm = createVue({
         template: `
         <div>
-          <el-carousel :auto-play="false">
+          <el-carousel :autoplay="false">
             <el-carousel-item v-for="item in 3"></el-carousel-item>
           </el-carousel>
         </div>
@@ -173,7 +173,7 @@ describe('Carousel', () => {
       });
 
       setTimeout(() => {
-        vm.$children[0].setActiveIndex(1);
+        vm.$children[0].setActiveItem(1);
         setTimeout(() => {
           expect(vm.$el.querySelectorAll('.el-carousel__item')[1].classList.contains('is-active')).to.true;
           done();
@@ -185,7 +185,7 @@ describe('Carousel', () => {
       vm = createVue({
         template: `
         <div>
-          <el-carousel :auto-play="false">
+          <el-carousel :autoplay="false">
             <el-carousel-item v-for="item in 3"></el-carousel-item>
           </el-carousel>
         </div>
@@ -193,11 +193,11 @@ describe('Carousel', () => {
       });
 
       setTimeout(() => {
-        vm.$children[0].slideToPrev(1);
+        vm.$children[0].prev(1);
         const items = vm.$el.querySelectorAll('.el-carousel__item');
         setTimeout(() => {
           expect(items[2].classList.contains('is-active')).to.true;
-          vm.$children[0].slideToNext(1);
+          vm.$children[0].next(1);
           setTimeout(() => {
             expect(items[0].classList.contains('is-active')).to.true;
             done();
@@ -211,7 +211,7 @@ describe('Carousel', () => {
     vm = createVue({
       template: `
         <div>
-          <el-carousel :auto-play="false" card>
+          <el-carousel :autoplay="false" type="card">
             <el-carousel-item v-for="item in 7"></el-carousel-item>
           </el-carousel>
         </div>

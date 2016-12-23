@@ -56,7 +56,7 @@
       margin: 0;
       padding: 0;
 
-      @modifier out {
+      @modifier outside {
         bottom: calc(var(--carousel-indicator-height) + var(--carousel-indicator-padding-vertical) * 2);
         text-align: center;
         position: static;
