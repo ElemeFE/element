@@ -40,7 +40,7 @@ Checkbox can be used alone to switch between two states.
 ```
 :::
 
-## Disabled State
+### Disabled State
 
 Disabled state for checkbox.
 
