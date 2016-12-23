@@ -556,4 +556,8 @@
   --carousel-indicator-padding-horizontal: 4px;
   --carousel-indicator-padding-vertical: 12px;
   --carousel-indicator-out-color: var(--border-color-hover);
+  /* Scrollbar
+  --------------------------*/
+  --scrollbar-background-color: rgba(#99a9bf, .3);
+  --scrollbar-hover-background-color: rgba(#99a9bf, .5);
 }

@@ -163,7 +163,7 @@
     mounted() {
       this.popperElm = this.$el;
       this.referenceElm = this.cell;
-      this.table.$refs.bodyWrapper.addEventListener('scroll', () => {
+      this.table.bodyWrapper.addEventListener('scroll', () => {
         this.updatePopper();
       });
 
