@@ -14,7 +14,7 @@
       transition: .4s ease-in-out;
       overflow: hidden;
 
-      @when card {
+      @modifier card {
         width: 50%;
         z-index: calc(var(--index-normal) - 1);
         &.is-in-stage {

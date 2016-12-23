@@ -17,6 +17,7 @@
       outline: none;
       padding: 0;
       margin: 0;
+      size: var(--carousel-arrow-size);
       cursor: pointer;
       transition: .3s;
       border-radius: 50%;
@@ -29,11 +30,11 @@
       text-align: center;
       font-size: var(--carousel-arrow-font-size);
 
-      @when left {
+      @modifier left {
         left: 16px;
       }
 
-      @when right {
+      @modifier right {
         right: 16px;
       }
 
@@ -55,7 +56,7 @@
       margin: 0;
       padding: 0;
 
-      @when out {
+      @modifier out {
         bottom: calc(var(--carousel-indicator-height) + var(--carousel-indicator-padding-vertical) * 2);
         text-align: center;
         position: static;

@@ -1,7 +1,7 @@
 <template>
   <div
     class="el-carousel"
-    :class="{ 'is-card': card }"
+    :class="{ 'el-carousel--card': card }"
     @mouseenter.stop="handleMouseEnter"
     @mouseleave.stop="handleMouseLeave">
     <div
@@ -9,27 +9,19 @@
       :style="{ height: height }">
       <transition name="carousel-arrow-left">
         <button
-          v-if="showArrow !== 'never'"
-          v-show="showArrow === 'always' || hover"
-          :style="{
-            height: `${ arrowSize }px`,
-            width: `${ arrowSize }px`
-          }"
+          v-if="arrow !== 'never'"
+          v-show="arrow === 'always' || hover"
           @click.stop="throttledArrowClick(activeIndex - 1)"
-          class="el-carousel__arrow is-left">
+          class="el-carousel__arrow el-carousel__arrow--left">
           <i class="el-icon-arrow-left"></i>
         </button>
       </transition>
       <transition name="carousel-arrow-right">
         <button
-          v-if="showArrow !== 'never'"
-          v-show="showArrow === 'always' || hover"
-          :style="{
-            height: `${ arrowSize }px`,
-            width: `${ arrowSize }px`
-          }"
+          v-if="arrow !== 'never'"
+          v-show="arrow === 'always' || hover"
           @click.stop="throttledArrowClick(activeIndex + 1)"
-          class="el-carousel__arrow is-right">
+          class="el-carousel__arrow el-carousel__arrow--right">
           <i class="el-icon-arrow-right"></i>
         </button>
       </transition>
@@ -37,8 +29,8 @@
     </div>
     <ul
       class="el-carousel__indicators"
-      v-if="showIndicator"
-      :class="{ 'is-out': indicatorPosition === 'out' || card }">
+      v-if="indicator"
+      :class="{ 'el-carousel__indicators--out': indicatorPosition === 'outside' || card }">
       <li
         v-for="(item, index) in items"
         class="el-carousel__indicator"
@@ -67,20 +59,20 @@ export default {
       type: String,
       default: 'hover'
     },
-    arrowSize: {
-      type: Number,
-      default: 36
+    autoPlay: {
+      type: Boolean,
+      default: true
     },
     interval: {
       type: Number,
       default: 3000
     },
     indicatorPosition: String,
-    showIndicator: {
+    indicator: {
       type: Boolean,
       default: true
     },
-    showArrow: String,
+    arrow: String,
     card: Boolean
   },
 
@@ -130,7 +122,7 @@ export default {
       });
     },
 
-    autoPlay() {
+    playSlides() {
       if (this.activeIndex < this.items.length - 1) {
         this.activeIndex++;
       } else {
@@ -143,13 +135,16 @@ export default {
     },
 
     startTimer() {
-      if (this.interval <= 0) return;
-      this.timer = setInterval(this.autoPlay, this.interval);
+      if (this.interval <= 0 || !this.autoPlay) return;
+      this.timer = setInterval(this.playSlides, this.interval);
     },
 
     setActiveIndex(index) {
       index = Number(index);
-      if (isNaN(index)) return;
+      if (isNaN(index) || index !== Math.floor(index)) {
+        console.warn('index must be an integer.');
+        return;
+      }
       let length = this.items.length;
       if (index < 0) {
         this.activeIndex = length - 1;
@@ -158,6 +153,14 @@ export default {
       } else {
         this.activeIndex = index;
       }
+    },
+
+    slideToPrev() {
+      this.setActiveIndex(this.activeIndex - 1);
+    },
+
+    slideToNext() {
+      this.setActiveIndex(this.activeIndex + 1);
     },
 
     handleIndicatorClick(index) {

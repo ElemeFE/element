@@ -44,7 +44,7 @@ describe('Carousel', () => {
     vm = createVue({
       template: `
         <div>
-          <el-carousel :interval="0" :initial-index="1">
+          <el-carousel :auto-play="false" :initial-index="1">
             <el-carousel-item v-for="item in 3"></el-carousel-item>
           </el-carousel>
         </div>
@@ -118,7 +118,7 @@ describe('Carousel', () => {
       vm = createVue({
         template: `
         <div>
-          <el-carousel :interval="0">
+          <el-carousel :auto-play="false">
             <el-carousel-item v-for="item in 3"></el-carousel-item>
           </el-carousel>
         </div>
@@ -126,7 +126,7 @@ describe('Carousel', () => {
       });
 
       setTimeout(() => {
-        vm.$children[0].handleIndicatorHover(1);
+        vm.$children[0].throttledIndicatorHover(1);
         setTimeout(() => {
           expect(vm.$el.querySelectorAll('.el-carousel__item')[1].classList.contains('is-active')).to.true;
           done();
@@ -138,7 +138,7 @@ describe('Carousel', () => {
       vm = createVue({
         template: `
         <div>
-          <el-carousel :interval="0" trigger="click">
+          <el-carousel :auto-play="false" trigger="click">
             <el-carousel-item v-for="item in 3"></el-carousel-item>
           </el-carousel>
         </div>
@@ -150,7 +150,54 @@ describe('Carousel', () => {
         vm.$el.querySelectorAll('.el-carousel__indicator')[2].click();
         setTimeout(() => {
           expect(items[2].classList.contains('is-active')).to.true;
-          vm.$el.querySelector('.el-carousel__arrow.is-right').click();
+          vm.$el.querySelector('.el-carousel__arrow--right').click();
+          setTimeout(() => {
+            expect(items[0].classList.contains('is-active')).to.true;
+            done();
+          }, 10);
+        }, 10);
+      }, 10);
+    });
+  });
+
+  describe('methods', () => {
+    it('setActiveIndex', done => {
+      vm = createVue({
+        template: `
+        <div>
+          <el-carousel :auto-play="false">
+            <el-carousel-item v-for="item in 3"></el-carousel-item>
+          </el-carousel>
+        </div>
+      `
+      });
+
+      setTimeout(() => {
+        vm.$children[0].setActiveIndex(1);
+        setTimeout(() => {
+          expect(vm.$el.querySelectorAll('.el-carousel__item')[1].classList.contains('is-active')).to.true;
+          done();
+        }, 10);
+      }, 10);
+    });
+
+    it('slide', done => {
+      vm = createVue({
+        template: `
+        <div>
+          <el-carousel :auto-play="false">
+            <el-carousel-item v-for="item in 3"></el-carousel-item>
+          </el-carousel>
+        </div>
+      `
+      });
+
+      setTimeout(() => {
+        vm.$children[0].slideToPrev(1);
+        const items = vm.$el.querySelectorAll('.el-carousel__item');
+        setTimeout(() => {
+          expect(items[2].classList.contains('is-active')).to.true;
+          vm.$children[0].slideToNext(1);
           setTimeout(() => {
             expect(items[0].classList.contains('is-active')).to.true;
             done();
@@ -164,7 +211,7 @@ describe('Carousel', () => {
     vm = createVue({
       template: `
         <div>
-          <el-carousel :interval="0" card>
+          <el-carousel :auto-play="false" card>
             <el-carousel-item v-for="item in 7"></el-carousel-item>
           </el-carousel>
         </div>
@@ -179,7 +226,7 @@ describe('Carousel', () => {
       items[1].click();
       setTimeout(() => {
         expect(items[1].classList.contains('is-active')).to.true;
-        vm.$el.querySelector('.el-carousel__arrow.is-left').click();
+        vm.$el.querySelector('.el-carousel__arrow--left').click();
         setTimeout(() => {
           expect(items[0].classList.contains('is-active')).to.true;
           items[6].click();
