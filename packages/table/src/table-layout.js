@@ -1,3 +1,5 @@
+import scrollbarWidth from 'element-ui/src/utils/scrollbar-width';
+
 class TableLayout {
   constructor(options) {
     this.table = null;
@@ -17,7 +19,7 @@ class TableLayout {
     this.viewportHeight = null; // Table Height - Scroll Bar Height
     this.bodyHeight = null; // Table Height - Table Header Height
     this.fixedBodyHeight = null; // Table Height - Table Header Height - Scroll Bar Height
-    this.gutterWidth = 0;
+    this.gutterWidth = scrollbarWidth();
 
     for (let name in options) {
       if (options.hasOwnProperty(name)) {

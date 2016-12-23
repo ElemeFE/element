@@ -1369,6 +1369,7 @@
 | row-key | 行数据的 Key，用来优化 Table 的渲染；在使用 reserve-selection 功能的情况下，该属性是必填的 | Function(row)/String | — | — |
 | context | 设置上下文环境，例如设置当前上下文就是 `_self`，父级就是 `$parent`，根组件 `$root`。优先读取 column 的 context 属性。 | Object | - | Table 所处上下文 |
 | empty-text | 空数据时显示的文本内容，也可以通过 `slot="empty"` 设置 | String | | - | 暂无数据 |
+| virtual-scrollbar | 启用虚拟滚动条 | Boolean | - | false |
 
 ### Table Events
 | 事件名 | 说明 | 参数 |

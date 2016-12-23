@@ -15,9 +15,11 @@
     @e wrap {
       overflow: scroll;
 
-      &::-webkit-scrollbar {
-        width: 0;
-        height: 0;
+      @m hidden-default {
+        &::-webkit-scrollbar {
+          width: 0;
+          height: 0;
+        }
       }
     }
 
