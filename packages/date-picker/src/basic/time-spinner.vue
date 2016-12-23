@@ -1,56 +1,65 @@
 <template>
   <div class="el-time-spinner" :class="{ 'has-seconds': showSeconds }">
-    <div
-      @mouseenter="emitSelectRange('hours')"
-      @mousewheel="handleScroll('hour')"
+    <el-scrollbar
+      @mouseenter.native="emitSelectRange('hours')"
+      @mousewheel.native="handleScroll('hour')"
       class="el-time-spinner__wrapper"
+      wrap-style="max-height: inherit;"
+      view-class="el-time-spinner__list"
+      noresize
+      tag="ul"
       ref="hour">
-      <ul class="el-time-spinner__list">
-        <li
-          @click="handleClick('hours', { value: hour, disabled: disabled }, true)"
-          v-for="(disabled, hour) in hoursList"
-          track-by="hour"
-          class="el-time-spinner__item"
-          :class="{ 'active': hour === hours, 'disabled': disabled }"
-          v-text="hour"></li>
-      </ul>
-    </div>
-    <div
-      @mouseenter="emitSelectRange('minutes')"
-      @mousewheel="handleScroll('minute')"
+      <li
+        @click="handleClick('hours', { value: hour, disabled: disabled }, true)"
+        v-for="(disabled, hour) in hoursList"
+        track-by="hour"
+        class="el-time-spinner__item"
+        :class="{ 'active': hour === hours, 'disabled': disabled }"
+        v-text="hour"></li>
+    </el-scrollbar>
+    <el-scrollbar
+      @mouseenter.native="emitSelectRange('minutes')"
+      @mousewheel.native="handleScroll('minute')"
       class="el-time-spinner__wrapper"
+      wrap-style="max-height: inherit;"
+      view-class="el-time-spinner__list"
+      noresize
+      tag="ul"
       ref="minute">
-      <ul class="el-time-spinner__list">
-        <li
-          @click="handleClick('minutes', key, true)"
-          v-for="(minute, key) in 60"
-          class="el-time-spinner__item"
-          :class="{ 'active': key === minutes }"
-          v-text="key"></li>
-      </ul>
-    </div>
-    <div
+      <li
+        @click="handleClick('minutes', key, true)"
+        v-for="(minute, key) in 60"
+        class="el-time-spinner__item"
+        :class="{ 'active': key === minutes }"
+        v-text="key"></li>
+    </el-scrollbar>
+    <el-scrollbar
       v-show="showSeconds"
-      @mouseenter="emitSelectRange('seconds')"
-      @mousewheel="handleScroll('second')"
+      @mouseenter.native="emitSelectRange('seconds')"
+      @mousewheel.native="handleScroll('second')"
       class="el-time-spinner__wrapper"
+      wrap-style="max-height: inherit;"
+      view-class="el-time-spinner__list"
+      noresize
+      tag="ul"
       ref="second">
-      <ul class="el-time-spinner__list">
-        <li
-          @click="handleClick('seconds', key, true)"
-          v-for="(second, key) in 60"
-          class="el-time-spinner__item"
-          :class="{ 'active': key === seconds }"
-          v-text="key"></li>
-      </ul>
-    </div>
+      <li
+        @click="handleClick('seconds', key, true)"
+        v-for="(second, key) in 60"
+        class="el-time-spinner__item"
+        :class="{ 'active': key === seconds }"
+        v-text="key"></li>
+    </el-scrollbar>
   </div>
 </template>
 
 <script type="text/babel">
   import { getRangeHours } from '../util';
+  import ElScrollbar from 'element-ui/packages/scrollbar';
 
   export default {
+    components: { ElScrollbar },
+
     props: {
       hours: {
         type: Number,
@@ -78,7 +87,7 @@
         if (!(newVal >= 0 && newVal <= 23)) {
           this.hoursPrivate = oldVal;
         }
-        this.$refs.hour.scrollTop = Math.max(0, (this.hoursPrivate - 2.5) * 32 + 80);
+        this.hourElm.scrollTop = Math.max(0, (this.hoursPrivate - 2.5) * 32 + 80);
         this.$emit('change', { hours: newVal });
       },
 
@@ -86,7 +95,7 @@
         if (!(newVal >= 0 && newVal <= 59)) {
           this.minutesPrivate = oldVal;
         }
-        this.$refs.minute.scrollTop = Math.max(0, (this.minutesPrivate - 2.5) * 32 + 80);
+        this.minuteElm.scrollTop = Math.max(0, (this.minutesPrivate - 2.5) * 32 + 80);
         this.$emit('change', { minutes: newVal });
       },
 
@@ -94,7 +103,7 @@
         if (!(newVal >= 0 && newVal <= 59)) {
           this.secondsPrivate = oldVal;
         }
-        this.$refs.second.scrollTop = Math.max(0, (this.secondsPrivate - 2.5) * 32 + 80);
+        this.secondElm.scrollTop = Math.max(0, (this.secondsPrivate - 2.5) * 32 + 80);
         this.$emit('change', { seconds: newVal });
       }
     },
@@ -102,6 +111,18 @@
     computed: {
       hoursList() {
         return getRangeHours(this.selectableRange);
+      },
+
+      hourElm() {
+        return this.$refs.hour.wrap;
+      },
+
+      minuteElm() {
+        return this.$refs.minute.wrap;
+      },
+
+      secondElm() {
+        return this.$refs.second.wrap;
       }
     },
 
@@ -138,14 +159,14 @@
       handleScroll(type) {
         const ajust = {};
 
-        ajust[`${type}s`] = Math.min(Math.floor((this.$refs[type].scrollTop - 80) / 32 + 3), 59);
+        ajust[`${type}s`] = Math.min(Math.floor((this[`${type}Elm`].scrollTop - 80) / 32 + 3), 59);
         this.$emit('change', ajust);
       },
 
       ajustScrollTop() {
-        this.$refs.hour.scrollTop = Math.max(0, (this.hours - 2.5) * 32 + 80);
-        this.$refs.minute.scrollTop = Math.max(0, (this.minutes - 2.5) * 32 + 80);
-        this.$refs.second.scrollTop = Math.max(0, (this.seconds - 2.5) * 32 + 80);
+        this.hourElm.scrollTop = Math.max(0, (this.hours - 2.5) * 32 + 80);
+        this.minuteElm.scrollTop = Math.max(0, (this.minutes - 2.5) * 32 + 80);
+        this.secondElm.scrollTop = Math.max(0, (this.seconds - 2.5) * 32 + 80);
       }
     }
   };

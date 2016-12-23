@@ -18,7 +18,10 @@
         :style="{ width: layout.bodyWidth ? layout.bodyWidth + 'px' : '' }">
       </table-header>
     </div>
-    <div class="el-table__body-wrapper" ref="bodyWrapper" :style="[bodyHeight]">
+    <el-scrollbar
+      class="el-table__body-wrapper"
+      ref="bodyWrapper"
+      :wrap-style="[bodyHeight]">
       <table-body
         :context="context"
         :store="store"
@@ -29,9 +32,9 @@
         :style="{ width: layout.bodyWidth ? layout.bodyWidth - (layout.scrollY ? layout.gutterWidth : 0 ) + 'px' : '' }">
       </table-body>
       <div class="el-table__empty-block" v-if="!data || data.length === 0">
-      <span class="el-table__empty-text"><slot name="empty">{{ emptyText || t('el.table.emptyText') }}</slot></span>
+        <span class="el-table__empty-text"><slot name="empty">{{ emptyText || t('el.table.emptyText') }}</slot></span>
       </div>
-    </div>
+    </el-scrollbar>
     <div class="el-table__fixed" ref="fixedWrapper"
       v-if="fixedColumns.length > 0"
       :style="[
@@ -205,22 +208,22 @@
       },
 
       bindEvents() {
-        const { bodyWrapper, headerWrapper } = this.$refs;
+        const { headerWrapper } = this.$refs;
         const refs = this.$refs;
-        bodyWrapper.addEventListener('scroll', function() {
+        this.bodyWrapper.addEventListener('scroll', function() {
           if (headerWrapper) headerWrapper.scrollLeft = this.scrollLeft;
           if (refs.fixedBodyWrapper) refs.fixedBodyWrapper.scrollTop = this.scrollTop;
           if (refs.rightFixedBodyWrapper) refs.rightFixedBodyWrapper.scrollTop = this.scrollTop;
         });
 
         if (headerWrapper) {
-          mousewheel(headerWrapper, throttle(16, function(event) {
+          mousewheel(headerWrapper, throttle(16, event => {
             const deltaX = event.deltaX;
 
             if (deltaX > 0) {
-              bodyWrapper.scrollLeft = bodyWrapper.scrollLeft + 10;
+              this.bodyWrapper.scrollLeft += 10;
             } else {
-              bodyWrapper.scrollLeft = bodyWrapper.scrollLeft - 10;
+              this.bodyWrapper.scrollLeft -= 10;
             }
           }));
         }
@@ -255,6 +258,10 @@
     },
 
     computed: {
+      bodyWrapper() {
+        return this.$refs.bodyWrapper.wrap;
+      },
+
       shouldUpdateHeight() {
         return typeof this.height === 'number' ||
           this.fixedColumns.length > 0 ||

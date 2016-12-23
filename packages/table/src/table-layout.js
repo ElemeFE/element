@@ -1,7 +1,3 @@
-import { getScrollBarWidth } from './util';
-
-let GUTTER_WIDTH;
-
 class TableLayout {
   constructor(options) {
     this.table = null;
@@ -21,11 +17,7 @@ class TableLayout {
     this.viewportHeight = null; // Table Height - Scroll Bar Height
     this.bodyHeight = null; // Table Height - Table Header Height
     this.fixedBodyHeight = null; // Table Height - Table Header Height - Scroll Bar Height
-
-    if (GUTTER_WIDTH === undefined) {
-      GUTTER_WIDTH = getScrollBarWidth();
-    }
-    this.gutterWidth = GUTTER_WIDTH;
+    this.gutterWidth = 0;
 
     for (let name in options) {
       if (options.hasOwnProperty(name)) {
@@ -44,7 +36,7 @@ class TableLayout {
   updateScrollY() {
     const height = this.height;
     if (typeof height !== 'string' && typeof height !== 'number') return;
-    const bodyWrapper = this.table.$refs.bodyWrapper;
+    const bodyWrapper = this.table.bodyWrapper;
     if (this.table.$el && bodyWrapper) {
       const body = bodyWrapper.querySelector('.el-table__body');
       this.scrollY = body.offsetHeight > bodyWrapper.offsetHeight;

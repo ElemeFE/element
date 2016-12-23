@@ -544,4 +544,9 @@
   --------------------------*/
   --loading-spinner-size: 42px;
   --loading-fullscreen-spinner-size: 50px;
+
+  /* Scrollbar
+  --------------------------*/
+  --scrollbar-background-color: rgba(#99a9bf, .3);
+  --scrollbar-hover-background-color: rgba(#99a9bf, .5);
 }
