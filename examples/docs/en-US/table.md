@@ -1362,6 +1362,7 @@ Customize table column so it can be integrated with other components.
 | row-key | key of row data, used for optimizing rendering. Required if `reserve-selection` is on | Function(row)/String | — | — |
 | context | context of Table, e.g. `_self` refers to the current context, `$parent` parent context, `$root` root context, can be overridden by `context` in `el-table-column` | Object | - | current context where Table lies |
 | empty-text | Displayed text when data is empty. You can customize this area with `slot="empty"` | String | | - | No Data |
+| virtual-scrollbar | Enable virtual scrollbar | Boolean | - | false |
 
 ### Table Events
 | Event Name | Description | Parameters |

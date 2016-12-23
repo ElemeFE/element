@@ -21,6 +21,7 @@
     <el-scrollbar
       class="el-table__body-wrapper"
       ref="bodyWrapper"
+      :native="!virtualScrollbar"
       :wrap-style="[bodyHeight]">
       <table-body
         :context="context"
@@ -132,6 +133,8 @@
       },
 
       width: [String, Number],
+
+      virtualScrollbar: Boolean,
 
       height: [String, Number],
 

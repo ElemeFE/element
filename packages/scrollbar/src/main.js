@@ -1,6 +1,7 @@
 // reference https://github.com/noeldelgado/gemini-scrollbar/blob/master/index.js
 
 import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
+import scrollbarWidth from 'element-ui/src/utils/scrollbar-width';
 import * as util from './util';
 import Bar from './bar';
 
@@ -10,6 +11,7 @@ export default {
   components: { Bar },
 
   props: {
+    native: Boolean,
     wrapStyle: {},
     wrapClass: {},
     viewClass: {},
@@ -37,7 +39,7 @@ export default {
   },
 
   render(h) {
-    let gutter = util.getScrollBarWidth();
+    let gutter = scrollbarWidth();
     let style = this.wrapStyle;
 
     if (gutter) {
@@ -50,31 +52,43 @@ export default {
         style += `margin-bottom: ${gutterWith}; margin-right: ${gutterWith};`;
       }
     }
+    const view = h(this.tag, {
+      class: ['el-scrollbar__view', this.viewClass],
+      style: this.viewStyle,
+      ref: 'resize'
+    }, this.$slots.default);
     const wrap = (
       <div
         ref="wrap"
         style={ style }
         onScroll={ this.handleScroll }
-        class={ [this.wrapClass, 'el-scrollbar__wrap'] }>
-        {
-          h(this.tag, {
-            class: ['el-scrollbar__view', this.viewClass],
-            style: this.viewStyle,
-            ref: 'resize'
-          }, this.$slots.default)
-        }
+        class={ [this.wrapClass, 'el-scrollbar__wrap el-scrollbar__wrap--hidden-default'] }>
+        { [view] }
       </div>
     );
-    const nodes = ([
-      wrap,
-      <Bar
-        move={ this.moveX }
-        size={ this.sizeWidth }></Bar>,
-      <Bar
-        vertical
-        move={ this.moveY }
-        size={ this.sizeHeight }></Bar>
-    ]);
+    let nodes;
+
+    if (!this.native) {
+      nodes = ([
+        wrap,
+        <Bar
+          move={ this.moveX }
+          size={ this.sizeWidth }></Bar>,
+        <Bar
+          vertical
+          move={ this.moveY }
+          size={ this.sizeHeight }></Bar>
+      ]);
+    } else {
+      nodes = ([
+        <div
+          ref="wrap"
+          class={ [this.wrapClass, 'el-scrollbar__wrap'] }
+          style={ style }>
+          { [view] }
+        </div>
+      ]);
+    }
     return h('div', { class: 'el-scrollbar' }, nodes);
   },
 
@@ -99,11 +113,13 @@ export default {
   },
 
   mounted() {
+    if (this.native) return;
     this.$nextTick(this.update);
     !this.noresize && addResizeListener(this.$refs.resize, this.update);
   },
 
   destroyed() {
+    if (this.native) return;
     !this.noresize && removeResizeListener(this.$refs.resize, this.update);
   }
 };
