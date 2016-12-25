@@ -32,13 +32,15 @@
     },
 
     methods: {
-      setActiveItems(activeNames) {
-        this.activeNames = activeNames;
-        this.$emit('input', this.accordion ? activeNames[0] : activeNames);
+      setActiveNames(activeNames) {
+        let value = this.accordion ? activeNames[0] : activeNames;
+        this.activeNames = [].concat(value);
+        this.$emit('input', value);
+        this.$emit('change', value);
       },
       handleItemClick(item) {
         if (this.accordion) {
-          this.setActiveItems([].concat(this.activeNames[0] === item.name ? '' : item.name));
+          this.setActiveNames(this.activeNames[0] === item.name ? '' : item.name);
         } else {
           let activeNames = this.activeNames.slice(0);
           let index = activeNames.indexOf(item.name);
@@ -48,7 +50,7 @@
           } else {
             activeNames.push(item.name);
           }
-          this.setActiveItems(activeNames);
+          this.setActiveNames(activeNames);
         }
       }
     },

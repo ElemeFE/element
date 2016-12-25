@@ -6,7 +6,7 @@
     border: 1px solid var(--collapse-border-color);
     border-radius: var(--collapse-border-radius);
   }
-  @b collapse-panel {
+  @b collapse-item {
     @e header {
       height: var(--collapse-header-height);
       line-height: @height;
@@ -40,7 +40,7 @@
     }
 
     @when active {
-      .el-collapse-panel__header__arrow {
+      .el-collapse-item__header__arrow {
         transform: rotate(90deg);
       }
     }
