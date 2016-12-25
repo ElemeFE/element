@@ -1,61 +1,106 @@
 <template>
-  <div class="el-collapse-panel" :class="{'is-opened': opened}">
-    <div class="el-collapse-panel__header" @click="opened = !opened">
-      <i class="el-icon-caret-right"></i>{{title}}
+  <div class="el-collapse-panel" :class="{'is-active': isActive}">
+    <div class="el-collapse-panel__header" @click="handleHeaderClick">
+      <i class="el-collapse-panel__header__arrow el-icon-arrow-right"></i>
+      <slot name="title" :title="title">{{title}}</slot>
     </div>
-    <div class="el-collapse-panel__content" ref="content">
-      <slot></slot>
+    <div class="el-collapse-panel__wrap" ref="content" :style="contentStyle">
+      <div class="el-collapse-panel__content">
+        <slot></slot>
+      </div>
     </div>
   </div>
 </template>
 <script>
   import { once } from 'wind-dom';
+  import Emitter from 'element-ui/src/mixins/emitter';
+
+  function guid() {
+    function S4() {
+      return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+    }
+    return `${S4()}${S4()}-${S4()}-${S4()}-${S4()}-${S4()}${S4()}${S4()}`;
+  }
+
   export default {
     name: 'ElCollapsePanel',
 
     componentName: 'ElCollapsePanel',
 
+    mixins: [Emitter],
+
     data() {
       return {
-        opened: false,
-        contentHeight: 23
+        contentStyle: {},
+        contentHeight: 0
       };
     },
 
     props: {
-      title: String
+      title: String,
+      name: {
+        default() {
+          return guid();
+        }
+      }
+    },
+
+    computed: {
+      isActive() {
+        return this.$parent.activeNames.indexOf(this.name) > -1;
+      }
     },
 
     watch: {
-      'opened'(newValue, oldValue) {
-        if (newValue) {
-          this.open();
-        } else {
-          this.hide();
-        }
+      'isActive'(value) {
+        value ? this.open() : this.close();
       }
     },
 
     methods: {
       open() {
         const contentElm = this.$refs.content;
-        contentElm.style.height = this.contentHeight + 'px';
-        once(contentElm, 'transitionend', () => {
-          contentElm.style.height = 'auto';
+        const contentStyle = this.contentStyle;
+
+        contentStyle.display = 'block';
+        this.$nextTick(_ => {
+          contentStyle.height = this.contentHeight + 'px';
+          once(contentElm, 'transitionend', () => {
+            contentStyle.height = 'auto';
+          });
         });
       },
       close() {
         const contentElm = this.$refs.content;
-        this.contentHeight = contentElm.clientHeight;
-        contentElm.style.height = 0;
-        once(contentElm, 'transitionend', () => {
+        const contentHeight = contentElm.clientHeight;
+        const contentStyle = this.contentStyle;
+
+        this.contentHeight = contentHeight;
+        this.$set(this.contentStyle, 'height', contentHeight + 'px');
+
+        this.$nextTick(_ => {
+          contentStyle.height = '0';
+          once(contentElm, 'transitionend', () => {
+            this.$set(this.contentStyle, 'display', 'none');
+          });
         });
+      },
+      init() {
+        this.contentHeight = this.$refs.content.clientHeight;
+
+        if (!this.isActive) {
+          this.$set(this.contentStyle, 'height', '0');
+          this.$set(this.contentStyle, 'display', 'none');
+        }
+      },
+      handleHeaderClick() {
+        this.dispatch('ElCollapse', 'item-click', this);
       }
     },
 
     mounted() {
-      this.contentHeight = this.$refs.content.clientHeight;
-      this.$refs.content.style.display = 'none';
+      console.log(this.$slots);
+      this.init();
     }
   };
 </script>
