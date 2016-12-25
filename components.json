@@ -57,5 +57,5 @@
   "carousel": "./packages/carousel/index.js",
   "carousel-item": "./packages/carousel-item/index.js",
   "collapse": "./packages/collapse/index.js",
-  "collapse-panel": "./packages/collapse-panel/index.js"
+  "collapse-item": "./packages/collapse-item/index.js"
 }

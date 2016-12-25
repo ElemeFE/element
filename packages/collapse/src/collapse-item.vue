@@ -1,11 +1,11 @@
 <template>
-  <div class="el-collapse-panel" :class="{'is-active': isActive}">
-    <div class="el-collapse-panel__header" @click="handleHeaderClick">
-      <i class="el-collapse-panel__header__arrow el-icon-arrow-right"></i>
+  <div class="el-collapse-item" :class="{'is-active': isActive}">
+    <div class="el-collapse-item__header" @click="handleHeaderClick">
+      <i class="el-collapse-item__header__arrow el-icon-arrow-right"></i>
       <slot name="title" :title="title">{{title}}</slot>
     </div>
-    <div class="el-collapse-panel__wrap" ref="content" :style="contentStyle">
-      <div class="el-collapse-panel__content">
+    <div class="el-collapse-item__wrap" ref="content" :style="contentStyle">
+      <div class="el-collapse-item__content">
         <slot></slot>
       </div>
     </div>
@@ -15,7 +15,7 @@
   import { once } from 'wind-dom';
   import Emitter from 'element-ui/src/mixins/emitter';
 
-  function guid() {
+  function uid() {
     function S4() {
       return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
     }
@@ -23,9 +23,9 @@
   }
 
   export default {
-    name: 'ElCollapsePanel',
+    name: 'ElCollapseItem',
 
-    componentName: 'ElCollapsePanel',
+    componentName: 'ElCollapseItem',
 
     mixins: [Emitter],
 
@@ -39,8 +39,9 @@
     props: {
       title: String,
       name: {
+        type: [String, Number],
         default() {
-          return guid();
+          return uid();
         }
       }
     },
@@ -99,7 +100,6 @@
     },
 
     mounted() {
-      console.log(this.$slots);
       this.init();
     }
   };

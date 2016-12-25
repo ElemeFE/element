@@ -58,7 +58,7 @@ import Step from '../packages/step';
 import Carousel from '../packages/carousel';
 import CarouselItem from '../packages/carousel-item';
 import Collapse from '../packages/collapse';
-import CollapsePanel from '../packages/collapse-panel';
+import CollapseItem from '../packages/collapse-item';
 import locale from 'element-ui/src/locale';
 
 const install = function(Vue, opts = {}) {
@@ -120,7 +120,7 @@ const install = function(Vue, opts = {}) {
   Vue.component(Carousel.name, Carousel);
   Vue.component(CarouselItem.name, CarouselItem);
   Vue.component(Collapse.name, Collapse);
-  Vue.component(CollapsePanel.name, CollapsePanel);
+  Vue.component(CollapseItem.name, CollapseItem);
 
   Vue.use(Loading.directive);
 
@@ -198,7 +198,7 @@ module.exports = {
   Steps,
   Step,
   Carousel,
-  CarouselItem
+  CarouselItem,
   Collapse,
-  CollapsePanel
+  CollapseItem
 };
