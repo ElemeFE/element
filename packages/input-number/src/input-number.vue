@@ -7,6 +7,7 @@
     ]"
   >
     <el-input
+      type="number"
       :value="currentValue"
       @keydown.up.native="increase"
       @keydown.down.native="decrease"
