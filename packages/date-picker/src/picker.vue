@@ -375,6 +375,7 @@ export default {
     },
 
     showPicker() {
+      if (this.$isServer) return;
       if (!this.picker) {
         this.panel.defaultValue = this.internalValue;
         this.picker = new Vue(this.panel).$mount(document.createElement('div'));

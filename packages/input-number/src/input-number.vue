@@ -22,7 +22,7 @@
         </template>
         <template slot="append" v-if="$slots.append">
           <slot name="append"></slot>
-        </template> 
+        </template>
     </el-input>
     <span
       v-if="controls"
@@ -79,11 +79,8 @@
           let interval = null;
           let startTime;
 
-          const handler = () => {
-            vnode.context[binding.expression]();
-          };
-
-          const clear = function() {
+          const handler = () => vnode.context[binding.expression]();
+          const clear = () => {
             if (new Date() - startTime < 100) {
               handler();
             }
@@ -91,12 +88,10 @@
             interval = null;
           };
 
-          on(el, 'mousedown', function() {
+          on(el, 'mousedown', () => {
             startTime = new Date();
             once(document, 'mouseup', clear);
-            interval = setInterval(function() {
-              handler();
-            }, 100);
+            interval = setInterval(handler, 100);
           });
         }
       }

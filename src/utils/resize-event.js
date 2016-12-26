@@ -3,9 +3,11 @@
 *
 * version: 0.5.3
 **/
+const isServer = typeof window === 'undefined';
 
 /* istanbul ignore next */
 const requestFrame = (function() {
+  if (isServer) return;
   const raf = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame ||
     function(fn) {
       return window.setTimeout(fn, 20);
@@ -17,6 +19,7 @@ const requestFrame = (function() {
 
 /* istanbul ignore next */
 const cancelFrame = (function() {
+  if (isServer) return;
   const cancel = window.cancelAnimationFrame || window.mozCancelAnimationFrame || window.webkitCancelAnimationFrame || window.clearTimeout;
   return function(id) {
     return cancel(id);
@@ -59,7 +62,7 @@ const scrollListener = function(event) {
 };
 
 /* Detect CSS Animations support to detect element display/re-attach */
-const attachEvent = document.attachEvent;
+const attachEvent = isServer ? {} : document.attachEvent;
 const DOM_PREFIXES = 'Webkit Moz O ms'.split(' ');
 const START_EVENTS = 'webkitAnimationStart animationstart oAnimationStart MSAnimationStart'.split(' ');
 const RESIZE_ANIMATION_NAME = 'resizeanim';
@@ -68,7 +71,7 @@ let keyFramePrefix = '';
 let animationStartEvent = 'animationstart';
 
 /* istanbul ignore next */
-if (!attachEvent) {
+if (!attachEvent && !isServer) {
   const testElement = document.createElement('fakeelement');
   if (testElement.style.animationName !== undefined) {
     animation = true;
@@ -91,7 +94,7 @@ if (!attachEvent) {
 let stylesCreated = false;
 /* istanbul ignore next */
 const createStyles = function() {
-  if (!stylesCreated) {
+  if (!stylesCreated && !isServer) {
     const animationKeyframes = `@${keyFramePrefix}keyframes ${RESIZE_ANIMATION_NAME} { from { opacity: 0; } to { opacity: 0; } } `;
     const animationStyle = `${keyFramePrefix}animation: 1ms ${RESIZE_ANIMATION_NAME};`;
 
@@ -119,6 +122,7 @@ const createStyles = function() {
 
 /* istanbul ignore next */
 export const addResizeListener = function(element, fn) {
+  if (isServer) return;
   if (attachEvent) {
     element.attachEvent('onresize', fn);
   } else {
