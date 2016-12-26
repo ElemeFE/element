@@ -591,7 +591,10 @@ Search data from server-side.
 
 | Event Name | Description | Parameters |
 |----| ----| ----|
-|click | triggers when the icon inside Input is clicked | event object |
+|click | triggers when the icon inside Input is clicked | (event: Event) |
+| blur | triggers when the icon inside Input is blur | (event: Event) |
+| focus | triggers when the icon inside Input is focus | (event: Event) |
+| change | triggers when the icon inside Input value change | (value: string \| number) |
 
 ### Autocomplete Attributes
 

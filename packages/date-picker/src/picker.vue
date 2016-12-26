@@ -187,6 +187,10 @@ export default {
     readonly: Boolean,
     placeholder: String,
     disabled: Boolean,
+    clearable: {
+      type: Boolean,
+      default: true
+    },
     popperClass: String,
     editable: {
       type: Boolean,
@@ -325,17 +329,17 @@ export default {
   methods: {
     handleMouseEnterIcon() {
       if (this.readonly || this.disabled) return;
-      if (!this.valueIsEmpty) {
+      if (!this.valueIsEmpty && this.clearable) {
         this.showClose = true;
       }
     },
 
     handleClickIcon() {
       if (this.readonly || this.disabled) return;
-      if (this.valueIsEmpty) {
-        this.pickerVisible = !this.pickerVisible;
-      } else {
+      if (this.showClose) {
         this.internalValue = '';
+      } else {
+        this.pickerVisible = !this.pickerVisible;
       }
     },
 

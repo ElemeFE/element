@@ -104,6 +104,7 @@ describe('Input', () => {
     }, true);
     expect(vm.$el.querySelector('.el-textarea__inner').getAttribute('rows')).to.be.equal('3');
   });
+
   it('autosize', done => {
     vm = createVue({
       template: `
@@ -142,5 +143,58 @@ describe('Input', () => {
       expect(limitlessSizeInput.textareaStyle.height).to.be.equal('33px');
       done();
     }, 200);
+  });
+
+  describe('Input Events', () => {
+    it('event:focus & blur', done => {
+      vm = createVue({
+        template: `
+          <el-input
+            ref="input"
+            placeholder="请输入内容"
+            value="input">
+          </el-input>
+        `
+      }, true);
+
+      const spyFocus = sinon.spy();
+      const spyBlur = sinon.spy();
+
+      vm.$refs.input.$on('focus', spyFocus);
+      vm.$refs.input.$on('blur', spyBlur);
+      vm.$el.querySelector('input').focus();
+      vm.$el.querySelector('input').blur();
+
+      vm.$nextTick(_ => {
+        expect(spyFocus.calledOnce).to.be.true;
+        expect(spyBlur.calledOnce).to.be.true;
+        done();
+      });
+    });
+    it('event:change', done => {
+      vm = createVue({
+        template: `
+          <el-input
+            ref="input"
+            placeholder="请输入内容"
+            :value="input">
+          </el-input>
+        `,
+        data() {
+          return {
+            input: 'a'
+          };
+        }
+      }, true);
+
+      const spy = sinon.spy();
+      vm.$refs.input.$on('change', spy);
+      vm.input = 'b';
+
+      vm.$nextTick(_ => {
+        expect(spy.withArgs('b').calledOnce).to.be.true;
+        done();
+      });
+    });
   });
 });
