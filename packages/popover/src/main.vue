@@ -51,6 +51,8 @@ export default {
   },
 
   mounted() {
+    if (this.$isServer) return;
+
     let reference = this.reference || this.$refs.reference;
     const popper = this.popper || this.$refs.popper;
 

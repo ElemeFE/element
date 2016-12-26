@@ -226,7 +226,7 @@ export default {
         filterPanel.table = table;
         filterPanel.cell = cell;
         filterPanel.column = column;
-        filterPanel.$mount(document.createElement('div'));
+        !this.$isServer && filterPanel.$mount(document.createElement('div'));
       }
 
       setTimeout(() => {
@@ -239,6 +239,7 @@ export default {
     },
 
     handleMouseDown(event, column) {
+      if (this.$isServer) return;
       if (column.children && column.children.length > 0) return;
       /* istanbul ignore if */
       if (this.draggingColumn && this.border) {
@@ -329,7 +330,7 @@ export default {
     },
 
     handleMouseOut() {
-      document.body.style.cursor = '';
+      if (!this.$isServer) document.body.style.cursor = '';
     },
 
     handleHeaderClick(event, column) {

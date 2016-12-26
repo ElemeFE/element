@@ -1,4 +1,5 @@
 import { getScrollBarWidth } from './util';
+import Vue from 'vue';
 
 let GUTTER_WIDTH;
 
@@ -22,7 +23,7 @@ class TableLayout {
     this.bodyHeight = null; // Table Height - Table Header Height
     this.fixedBodyHeight = null; // Table Height - Table Header Height - Scroll Bar Height
 
-    if (GUTTER_WIDTH === undefined) {
+    if (GUTTER_WIDTH === undefined && !Vue.prototype.$isServer) {
       GUTTER_WIDTH = getScrollBarWidth();
     }
     this.gutterWidth = GUTTER_WIDTH;

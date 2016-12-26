@@ -22,7 +22,7 @@
         </template>
         <template slot="append" v-if="$slots.append">
           <slot name="append"></slot>
-        </template> 
+        </template>
     </el-input>
     <span
       v-if="controls"
@@ -46,6 +46,7 @@
 </template>
 <script>
   import ElInput from 'element-ui/packages/input';
+  import Vue from 'vue';
   import { once, on } from 'wind-dom/src/event';
 
   export default {
@@ -79,11 +80,9 @@
           let interval = null;
           let startTime;
 
-          const handler = () => {
-            vnode.context[binding.expression]();
-          };
+          const handler = () => vnode.context[binding.expression]();
 
-          const clear = function() {
+          const clear = () => {
             if (new Date() - startTime < 100) {
               handler();
             }
@@ -91,12 +90,10 @@
             interval = null;
           };
 
-          on(el, 'mousedown', function() {
+          !Vue.prototype.$isServer && on(el, 'mousedown', () => {
             startTime = new Date();
             once(document, 'mouseup', clear);
-            interval = setInterval(function() {
-              handler();
-            }, 100);
+            interval = setInterval(handler, 100);
           });
         }
       }
