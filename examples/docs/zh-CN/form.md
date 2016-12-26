@@ -86,7 +86,7 @@
         options: [
         ],
         rules: {
-          name: [
+          testName: [
             { required: true, message: '请输入活动名称', trigger: 'blur' },
             { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
           ],
@@ -508,7 +508,7 @@
 ::: demo Form 组件提供了表单验证的功能，只需要通过 `rule` 属性传入约定的验证规则，并 Form-Item 的 `prop` 属相设置为需校验的字段名即可。校验规则参见 [async-validator](https://github.com/yiminghe/async-validator)
 ```html
 <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-  <el-form-item label="活动名称" prop="name">
+  <el-form-item label="活动名称" prop="nameRule" model="name">
     <el-input v-model="ruleForm.name"></el-input>
   </el-form-item>
   <el-form-item label="活动区域" prop="region">
@@ -560,7 +560,7 @@
     data() {
       return {
         ruleForm: {
-          name: '',
+          name: 'aaaa',
           region: '',
           date1: '',
           date2: '',
@@ -570,7 +570,7 @@
           desc: ''
         },
         rules: {
-          name: [
+          nameRule: [
             { required: true, message: '请输入活动名称', trigger: 'blur' },
             { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
           ],
@@ -809,7 +809,8 @@
 
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| prop    | 表单域 model 字段 | string    | 传入 Form 组件的 `model` 中的字段 | — |
+| prop    | 验证规则的键值 | string    | 传入 Form 组件的 `rules` 中的字段 | — |
+| model   | 表单域 model 字段 | string    | 传入 Form 组件的 `model` 中的字段 | — |
 | label | 标签文本 | string | — | — |
 | label-width | 表单域标签的的宽度，例如 '50px' | string |       —       | — |
 | required | 是否必填，如不设置，则会根据校验规则自动生成 | bolean | — | false |

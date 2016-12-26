@@ -55,6 +55,7 @@
       label: String,
       labelWidth: String,
       prop: String,
+      model: String,
       required: Boolean,
       rules: [Object, Array],
       error: String,
@@ -99,7 +100,7 @@
           var model = this.form.model;
           if (!model || !this.prop) { return; }
 
-          var path = this.prop;
+          var path = this.model || this.prop;
           if (path.indexOf(':') !== -1) {
             path = path.replace(/:/, '.');
           }
