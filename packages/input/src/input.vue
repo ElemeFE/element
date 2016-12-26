@@ -113,7 +113,11 @@
       maxlength: Number,
       minlength: Number,
       max: {},
-      min: {}
+      min: {},
+      validateEvent: {
+        type: Boolean,
+        default: true
+      }
     },
 
     computed: {
@@ -131,7 +135,9 @@
     methods: {
       handleBlur(event) {
         this.$emit('blur', event);
-        this.dispatch('ElFormItem', 'el.form.blur', [this.currentValue]);
+        if (this.validateEvent) {
+          this.dispatch('ElFormItem', 'el.form.blur', [this.currentValue]);
+        }
       },
       inputSelect() {
         this.$refs.input.select();
@@ -162,7 +168,9 @@
         this.currentValue = value;
         this.$emit('input', value);
         this.$emit('change', value);
-        this.dispatch('ElFormItem', 'el.form.change', [value]);
+        if (this.validateEvent) {
+          this.dispatch('ElFormItem', 'el.form.change', [value]);
+        }
       }
     },
 
