@@ -257,6 +257,6 @@
 ### Events
 | Event Name | Description | Parameters |
 |---------|--------|---------|
-| change | 当 input 的值改变时触发，返回值和文本框一致 | format value |
+| change | 当 input 的值改变时触发，返回值和文本框一致 | formatted value |
 
 

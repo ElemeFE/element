@@ -234,5 +234,5 @@ Select date and time in one picker.
 ### Events
 | Event Name | Description | Parameters |
 |---------|--------|---------|
-| change | triggers when input value changes, return format value | |
+| change | triggers when input value changes | formatted value |
 
