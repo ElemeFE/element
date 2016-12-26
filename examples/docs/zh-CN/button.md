@@ -1,5 +1,5 @@
 <script>
-  import { addClass } from 'wind-dom/src/class';
+  import { addClass } from 'element-ui/src/utils/dom';
   export default {
     data() {
       return {

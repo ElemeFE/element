@@ -117,7 +117,7 @@
 ```
 :::
 <script>
-  import { addClass } from 'wind-dom/src/class';
+  import { addClass } from 'element-ui/src/utils/dom';
   export default {
     methods: {
       handleSizeChange(val) {

@@ -37,7 +37,7 @@
 <script type="text/babel">
   import ElInputNumber from 'element-ui/packages/input-number';
   import ElTooltip from 'element-ui/packages/tooltip';
-  import { getStyle } from 'wind-dom/src/style';
+  import { getStyle } from 'element-ui/src/utils/dom';
 
   export default {
     name: 'ElSlider',

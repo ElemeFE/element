@@ -1,6 +1,7 @@
-import PopperJS from './popper';
-import { PopupManager } from 'vue-popup';
+import Vue from 'vue';
+import { PopupManager } from 'element-ui/src/utils/popup';
 
+const PopperJS = Vue.prototype.$isServer ? function() {} : require('./popper');
 const stop = e => e.stopPropagation();
 
 /**
@@ -66,6 +67,7 @@ export default {
 
   methods: {
     createPopper() {
+      if (this.$isServer) return;
       if (!/^(top|bottom|left|right)(-start|-end)?$/g.test(this.placement)) {
         return;
       }

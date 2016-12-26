@@ -47,9 +47,7 @@
     "async-validator": "^1.6.6",
     "babel-helper-vue-jsx-merge-props": "^2.0.0",
     "deepmerge": "^1.2.0",
-    "throttle-debounce": "^1.0.1",
-    "vue-popup": "^0.2.14",
-    "wind-dom": "0.0.3"
+    "throttle-debounce": "^1.0.1"
   },
   "peerDependencies": {
     "vue": "^2.1.6"
