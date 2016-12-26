@@ -74,7 +74,7 @@ export const getColumnByCell = function(table, cell) {
   return null;
 };
 
-const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+const isFirefox = typeof navigator !== 'undefined' && navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
 
 export const mousewheel = function(element, callback) {
   if (element && element.addEventListener) {

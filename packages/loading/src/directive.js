@@ -3,6 +3,7 @@ import { addClass, removeClass } from 'wind-dom/src/class';
 let Mask = Vue.extend(require('./loading.vue'));
 
 exports.install = Vue => {
+  if (Vue.prototype.$isServer) return;
   let toggleLoading = (el, binding) => {
     if (binding.value) {
       Vue.nextTick(() => {

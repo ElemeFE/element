@@ -66,6 +66,7 @@ export default {
 
   methods: {
     createPopper() {
+      if (this.$isServer) return;
       if (!/^(top|bottom|left|right)(-start|-end)?$/g.test(this.placement)) {
         return;
       }

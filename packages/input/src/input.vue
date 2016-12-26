@@ -137,10 +137,9 @@
         this.$refs.input.select();
       },
       resizeTextarea() {
+        if (this.$isServer) return;
         var { autosize, type } = this;
-        if (!autosize || type !== 'textarea') {
-          return;
-        }
+        if (!autosize || type !== 'textarea') return;
         const minRows = autosize.minRows;
         const maxRows = autosize.maxRows;
 

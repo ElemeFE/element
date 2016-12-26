@@ -209,7 +209,7 @@ export default {
       ref: 'upload-inner'
     };
 
-    var uploadComponent = typeof FormData !== 'undefined'
+    var uploadComponent = this.$isServer ? '' : typeof FormData !== 'undefined'
       ? <upload {...props}>{this.$slots.default}</upload>
       : <iframeUpload {...props}>{this.$slots.default}</iframeUpload>;
 
