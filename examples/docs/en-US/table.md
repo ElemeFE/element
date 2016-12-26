@@ -1382,7 +1382,7 @@ Customize table column so it can be integrated with other components.
 | current-change | triggers when current row changes | currentRow, oldCurrentRow |
 
 ### Table Methods
-| Method | Description | Parameter |
+| Method | Description | Parameters |
 |------|--------|-------|
 | clearSelection | clear selection, might be useful when `reserve-selection` is on | selection |
 | toggleRowSelection | toggle if a certain row is selected. With the second parameter, you can directly set if this row is selected | row, selected |

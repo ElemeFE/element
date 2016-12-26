@@ -41,6 +41,8 @@
   "bugs": {
     "url": "https://github.com/ElemeFE/element/issues"
   },
+  "unpkg": "lib/index.js",
+  "style": "lib/theme-default/index.css",
   "dependencies": {
     "async-validator": "^1.6.6",
     "babel-helper-vue-jsx-merge-props": "^2.0.0",

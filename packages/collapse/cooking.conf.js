@@ -9,7 +9,7 @@ cooking.set({
   dist: path.join(__dirname, 'lib'),
   template: false,
   format: 'umd',
-  moduleName: 'ElCarousel',
+  moduleName: 'ElCollapse',
   extends: ['vue2'],
   alias: config.alias,
   externals: { vue: config.vue }

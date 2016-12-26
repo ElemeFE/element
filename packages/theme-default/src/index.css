@@ -41,3 +41,6 @@
 @import "./steps.css";
 @import "./step.css";
 @import "./scrollbar.css";
+@import "./carousel.css";
+@import "./carousel-item.css";
+@import "./collapse.css";

@@ -74,8 +74,11 @@
     components: { ElScrollbar },
 
     watch: {
-      minTime(val) {
-        if (this.value && val && compareTime(this.value, val) === -1) {
+      value(val) {
+        if (!val) return;
+        if (this.minTime && compareTime(val, this.minTime) < 0) {
+          this.$emit('pick');
+        } else if (this.maxTime && compareTime(val, this.maxTime) > 0) {
           this.$emit('pick');
         }
       }
@@ -102,6 +105,7 @@
         value: '',
         visible: false,
         minTime: '',
+        maxTime: '',
         width: 0
       };
     },
@@ -119,7 +123,8 @@
           while (compareTime(current, end) <= 0) {
             result.push({
               value: current,
-              disabled: compareTime(current, this.minTime || '-1:-1') <= 0
+              disabled: compareTime(current, this.minTime || '-1:-1') <= 0 ||
+                compareTime(current, this.maxTime || '100:100') > 0
             });
             current = nextTime(current, step);
           }
