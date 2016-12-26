@@ -1,4 +1,7 @@
-import scrollbarWidth from 'element-ui/src/utils/scrollbar-width';
+import { getScrollBarWidth } from './util';
+import Vue from 'vue';
+
+let GUTTER_WIDTH;
 
 class TableLayout {
   constructor(options) {
@@ -19,7 +22,11 @@ class TableLayout {
     this.viewportHeight = null; // Table Height - Scroll Bar Height
     this.bodyHeight = null; // Table Height - Table Header Height
     this.fixedBodyHeight = null; // Table Height - Table Header Height - Scroll Bar Height
-    this.gutterWidth = scrollbarWidth();
+
+    if (GUTTER_WIDTH === undefined && !Vue.prototype.$isServer) {
+      GUTTER_WIDTH = getScrollBarWidth();
+    }
+    this.gutterWidth = GUTTER_WIDTH;
 
     for (let name in options) {
       if (options.hasOwnProperty(name)) {
@@ -38,7 +45,7 @@ class TableLayout {
   updateScrollY() {
     const height = this.height;
     if (typeof height !== 'string' && typeof height !== 'number') return;
-    const bodyWrapper = this.table.bodyWrapper;
+    const bodyWrapper = this.table.$refs.bodyWrapper;
     if (this.table.$el && bodyWrapper) {
       const body = bodyWrapper.querySelector('.el-table__body');
       this.scrollY = body.offsetHeight > bodyWrapper.offsetHeight;

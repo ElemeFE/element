@@ -1,5 +1,5 @@
 <script>
-  import { addClass } from 'wind-dom/src/class';
+  import { addClass } from 'element-ui/src/utils/dom';
   export default {
     data() {
       return {
@@ -78,7 +78,7 @@ Different colors represent different meanings.
 ```
 :::
 
-### Icon Button 
+### Icon Button
 
 Use icons to add more meaning to Button. You can use icon alone to save some space, or with text together.
 

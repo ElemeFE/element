@@ -31,7 +31,5 @@
     "gulp-postcss": "^6.1.1",
     "postcss-salad": "^1.0.5"
   },
-  "dependencies": {
-    "vue-popup": "^0.2.9"
-  }
+  "dependencies": {}
 }

@@ -6863,12 +6863,6 @@ vue-markdown-loader@^0.5.1:
     markdown-it "^6.0.5"
     rimraf "^2.5.2"
 
-vue-popup@^0.2.14:
-  version "0.2.14"
-  resolved "https://registry.yarnpkg.com/vue-popup/-/vue-popup-0.2.14.tgz#aa3d461c6f2ab01ef4546665d730395ec6028302"
-  dependencies:
-    wind-dom "0.0.3"
-
 vue-router@^2.0.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-2.1.1.tgz#10c31bbdcb6da92bd3e0223fa12345e73018625a"
@@ -7019,10 +7013,6 @@ wide-align@^1.1.0:
   resolved "https://registry.yarnpkg.com/wide-align/-/wide-align-1.1.0.tgz#40edde802a71fea1f070da3e62dcda2e7add96ad"
   dependencies:
     string-width "^1.0.1"
-
-wind-dom@0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/wind-dom/-/wind-dom-0.0.3.tgz#3456e3d959dbebdcbf76ca68c6a4e8142f26360f"
 
 window-size@^0.2.0:
   version "0.2.0"

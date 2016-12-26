@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { addClass, removeClass } from 'wind-dom/src/class';
+import { addClass, removeClass } from 'element-ui/src/utils/dom';
 let Mask = Vue.extend(require('./loading.vue'));
 
 exports.install = Vue => {
