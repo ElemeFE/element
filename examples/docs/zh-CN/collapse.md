@@ -136,12 +136,12 @@
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | accordion | 是否手风琴模式 | boolean | — | false |
-| value | 当前激活的面板 | string/array | — | — |
+| value | 当前激活的面板(如果是手风琴模式，绑定值类型需要为`string`，否则为`array`) | string/array | — | — |
 
 ### Collapse Events
 | 事件名称 | 说明 | 回调参数 |
 |---------|---------|---------|
-| change | 当前激活面板改变时触发 | (activeNames: array) |
+| change | 当前激活面板改变时触发(如果是手风琴模式，参数 `activeNames` 类型为`string`，否则为`array`) | (activeNames: array\|array) |
 
 ### Collapse Item Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
