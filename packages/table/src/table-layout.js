@@ -1,6 +1,5 @@
 import scrollbarWidth from 'element-ui/src/utils/scrollbar-width';
 
-
 class TableLayout {
   constructor(options) {
     this.table = null;
