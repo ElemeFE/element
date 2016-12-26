@@ -48,7 +48,8 @@
     <textarea
       v-else
       class="el-textarea__inner"
-      v-model="currentValue"
+      :value="currentValue"
+      @input="handleInput"
       ref="textarea"
       :name="name"
       :placeholder="placeholder"
