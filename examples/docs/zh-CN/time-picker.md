@@ -168,6 +168,7 @@
 | end | 结束时间 | string | — | 18:00 |
 | step | 间隔时间 | string | — | 00:30 |
 | minTime | 最小时间，小于该时间的时间段将被禁用 | string | — | 00:00 |
+| maxTime | 最大时间，大于该时间的时间段将被禁用 | string | — | - |
 
 ### Time Picker Options
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |

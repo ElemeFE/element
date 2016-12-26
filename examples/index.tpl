@@ -19,5 +19,10 @@
 
     ga('create', 'UA-84335471-1', 'auto');
     ga('send', 'pageview');
+
+    window.addEventListener('hashchange', function () {
+      ga('set', 'page', window.location.href);
+      ga('send', 'pageview');
+    });
   </script><% } %>
 </html>

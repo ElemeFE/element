@@ -545,6 +545,11 @@
   --loading-spinner-size: 42px;
   --loading-fullscreen-spinner-size: 50px;
 
+  /* Scrollbar
+  --------------------------*/
+  --scrollbar-background-color: rgba(#99a9bf, .3);
+  --scrollbar-hover-background-color: rgba(#99a9bf, .5);
+
   /* Carousel
   --------------------------*/
   --carousel-arrow-font-size: 12px;
@@ -556,4 +561,17 @@
   --carousel-indicator-padding-horizontal: 4px;
   --carousel-indicator-padding-vertical: 12px;
   --carousel-indicator-out-color: var(--border-color-hover);
+
+  /* Collapse
+  --------------------------*/
+  --collapse-border-color: #e0e6ed;
+  --collapse-header-height: 43px;
+  --collapse-border-radius: 0;
+  --collapse-header-padding: 20px;
+  --collapse-header-fill: #fff;
+  --collapse-header-color: #475669;
+  --collapse-header-size: 13px;
+  --collapse-content-fill: #f9fafc;
+  --collapse-content-size: 13px;
+  --collapse-content-color: #1f2d3d;
 }

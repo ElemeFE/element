@@ -4,22 +4,21 @@
   @b time-spinner {
     &.has-seconds {
       .el-time-spinner__wrapper {
-        width: calc(100% / 3);
+        width: 33%;
+      }
+
+      .el-time-spinner__wrapper:nth-child(2) {
+        padding-left: 1%;
       }
     }
 
     @e wrapper {
-      height: 190px;
-      overflow: hidden;
+      max-height: 190px;
+      overflow: auto;
       display: inline-block;
       width: 50%;
       vertical-align: top;
       position: relative;
-      -ms-overflow-style: none;
-
-      &:hover {
-        overflow-y: auto;
-      }
     }
 
     @e list {
