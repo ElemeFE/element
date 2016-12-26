@@ -32,7 +32,7 @@
 
 <script>
   import { getFirstDayOfMonth, getDayCountOfMonth, getWeekNumber, getStartDateOfMonth, DAY_DURATION } from '../util';
-  import { hasClass } from 'wind-dom/src/class';
+  import { hasClass } from 'element-ui/src/utils/dom';
   import Locale from 'element-ui/src/mixins/locale';
 
   const clearHours = function(time) {

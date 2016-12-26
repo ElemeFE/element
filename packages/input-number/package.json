@@ -13,6 +13,5 @@
   "license": "MIT",
   "repository": "https://github.com/ElemeFE/element/tree/master/packages/input-number",
   "dependencies": {
-    "wind-dom": "0.0.3"
   }
 }

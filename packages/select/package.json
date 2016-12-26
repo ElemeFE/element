@@ -12,7 +12,6 @@
   "license": "MIT",
   "repository": "https://github.com/ElemeFE/element/tree/master/packages/select",
   "devDependencies": {
-    "throttle-debounce": "^1.0.1",
-    "wind-dom": "0.0.3"
+    "throttle-debounce": "^1.0.1"
   }
 }

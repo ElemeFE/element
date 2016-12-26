@@ -46,7 +46,7 @@
 </template>
 <script>
   import ElInput from 'element-ui/packages/input';
-  import { once, on } from 'wind-dom/src/event';
+  import { once, on } from 'element-ui/src/utils/dom';
 
   export default {
     name: 'ElInputNumber',

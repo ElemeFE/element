@@ -1,4 +1,4 @@
-## Pagination 
+## Pagination
 
 If you have too much data to display in one page, use pagination.
 
@@ -117,7 +117,7 @@ Add more modules based on your scenario.
 ```
 :::
 <script>
-  import { addClass } from 'wind-dom/src/class';
+  import { addClass } from 'element-ui/src/utils/dom';
   export default {
     data() {
       return {
