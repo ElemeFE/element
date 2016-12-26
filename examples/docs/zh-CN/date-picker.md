@@ -289,6 +289,7 @@
 | readonly | 完全只读 | boolean | — | false |
 | disabled | 禁用 | boolean | - | false |
 | editable | 文本框可输入 | boolean | - | true |
+| clearable | 是否显示清除按钮 | boolean | - | true |
 | size          | 输入框尺寸     | string          | large, small, mini  | — |
 | placeholder | 占位内容 | string | — | — |
 | type | 显示类型 | string | year/month/date/week/ datetime/datetimerange/daterange | date |

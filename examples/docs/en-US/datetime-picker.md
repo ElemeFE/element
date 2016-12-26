@@ -210,6 +210,7 @@ Select date and time in one picker.
 | readonly | whether DatePicker is read only | boolean | — | false |
 | disabled | whether DatePicker is disabled | boolean | - | false |
 | editable | whether the input is editable | boolean | - | true |
+| clearable | Whether to show clear button | boolean | - | true |
 |size | size of Input | string | large/small/mini | — |
 | placeholder | placeholder | string | — | — |
 | type | type of the picker | string | year/month/date/datetime/ week/datetimerange/daterange | date |
