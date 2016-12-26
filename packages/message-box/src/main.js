@@ -102,6 +102,8 @@ const showNextMsg = () => {
 };
 
 const MessageBox = function(options, callback) {
+  if (Vue.prototype.$isServer) return;
+
   if (typeof options === 'string') {
     options = {
       message: options

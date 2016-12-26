@@ -113,7 +113,7 @@ export default {
   },
 
   mounted() {
-    window.addEventListener('message', (event) => {
+    !this.$isServer && window.addEventListener('message', (event) => {
       var targetOrigin = new URL(this.action).origin;
       if (event.origin !== targetOrigin) {
         return false;
@@ -158,7 +158,7 @@ export default {
             on-change={this.handleChange}
             accept={this.accept}>
           </input>
-          <input type="hidden" name="documentDomain" value={document.domain} />
+          <input type="hidden" name="documentDomain" value={ this.$isServer ? '' : document.domain } />
           <span ref="data"></span>
          </form>
         {!this.showCover ? this.$slots.default : cover}

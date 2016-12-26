@@ -299,6 +299,7 @@
       },
 
       options(val) {
+        if (this.$isServer) return;
         this.optionsAllDisabled = val.length === val.filter(item => item.disabled === true).length;
         if (this.multiple) {
           this.resetInputHeight();
