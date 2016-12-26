@@ -91,6 +91,31 @@ describe('DatePicker', () => {
     }, DELAY);
   });
 
+  it('disabled clear value', done => {
+    vm = createVue({
+      template: `
+        <el-date-picker v-model="value" ref="compo" :clearable="false"></el-date-picker>
+      `,
+      data() {
+        return { value: '' };
+      }
+    }, true);
+    const input = vm.$el.querySelector('input');
+
+    input.focus();
+    setTimeout(_ => {
+      const $el = vm.$refs.compo.picker.$el;
+      $el.querySelector('td.available').click();
+      vm.$nextTick(_ => {
+        vm.$el.querySelector('.el-input__icon').click();
+        setTimeout(_ => {
+          expect(vm.value).to.be.exist;
+          done();
+        }, DELAY);
+      });
+    }, DELAY);
+  });
+
   it('reset', done => {
     vm = createVue({
       template: `
