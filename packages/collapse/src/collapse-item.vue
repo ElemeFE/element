@@ -15,12 +15,21 @@
   import { once } from 'wind-dom';
   import Emitter from 'element-ui/src/mixins/emitter';
 
-  function uid() {
-    function S4() {
-      return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+  function getTransitionendEvent(el) {
+    let t;
+    let transitions = {
+      'transition': 'transitionend',
+      'OTransition': 'oTransitionEnd',
+      'MozTransition': 'transitionend',
+      'WebkitTransition': 'webkitTransitionEnd'
+    };
+
+    for (t in transitions) {
+      if (el.style[t] !== undefined) {
+        return transitions[t];
+      }
     }
-    return `${S4()}${S4()}-${S4()}-${S4()}-${S4()}-${S4()}${S4()}${S4()}`;
-  }
+  };
 
   export default {
     name: 'ElCollapseItem',
@@ -41,7 +50,7 @@
       name: {
         type: [String, Number],
         default() {
-          return uid();
+          return this._uid;
         }
       }
     },
@@ -66,7 +75,7 @@
         contentStyle.display = 'block';
         this.$nextTick(_ => {
           contentStyle.height = this.contentHeight + 'px';
-          once(contentElm, 'transitionend', () => {
+          once(contentElm, getTransitionendEvent(contentElm), () => {
             contentStyle.height = 'auto';
           });
         });
@@ -81,7 +90,7 @@
 
         this.$nextTick(_ => {
           contentStyle.height = '0';
-          once(contentElm, 'transitionend', () => {
+          once(contentElm, getTransitionendEvent(contentElm), () => {
             this.$set(this.contentStyle, 'display', 'none');
           });
         });
