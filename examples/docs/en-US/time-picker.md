@@ -161,6 +161,7 @@ Can pick an arbitrary time range.
 | end | end time | string | — | 18:00 |
 | step | time step | string | — | 00:30 |
 | minTime | minimum time, any time before this time will be disabled | string | — | 00:00 |
+| maxTime | maximum time, any time after this time will be disabled | string | — | - |
 
 ### Time Picker Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
