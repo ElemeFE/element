@@ -7,7 +7,11 @@
       tabPosition: String,
       activeName: String,
       closable: false,
-      tabWidth: 0
+      tabWidth: 0,
+      tabWidthMax:{
+        type:Boolean,
+        default:false
+      }
     },
 
     data() {
@@ -93,10 +97,12 @@
         panes, // eslint-disable-line
         handleTabRemove,
         handleTabClick,
-        currentName
+        currentName,
+        tabWidthMax
       } = this;
 
       const barStyle = this.calcBarStyle();
+      const wrapperWidth = tabWidthMax?{width:"100%"},{}
       const activeBar = !type
         ? <div class="el-tabs__active-bar" style={barStyle}></div>
         : null;
@@ -130,7 +136,7 @@
           'el-tabs': true,
           'el-tabs--card': type === 'card',
           'el-tabs--border-card': type === 'border-card'
-        }}>
+        }} style={wrapperWidth}>
           <div class="el-tabs__header">
             {tabs}
           </div>
