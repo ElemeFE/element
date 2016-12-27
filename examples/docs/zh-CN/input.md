@@ -203,9 +203,7 @@
 
 ::: demo
 ```html
-<el-input
-  placeholder="请输入内容"
-  v-model="input">
+<el-input v-model="input" placeholder="请输入内容">
 </el-input>
 
 <script>
