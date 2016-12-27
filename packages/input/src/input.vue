@@ -132,7 +132,6 @@
       handleBlur(event) {
         this.$emit('blur', event);
         this.dispatch('ElFormItem', 'el.form.blur', [this.currentValue]);
-        this.currentValue = this.value;
       },
       inputSelect() {
         this.$refs.input.select();

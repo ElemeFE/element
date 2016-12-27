@@ -27,6 +27,7 @@
       @blur="handleBlur"
       :disabled="disabled"
       :size="size"
+      ref="input"
     >
         <template slot="prepend" v-if="$slots.prepend">
           <slot name="prepend"></slot>
@@ -191,7 +192,7 @@
         this.currentValue = this.accSub(value, this.step);
       },
       handleBlur() {
-        this.currentValue = this.value;
+        this.$refs.input.setCurrentValue(this.currentValue);
       }
     }
   };
