@@ -145,6 +145,46 @@ describe('DatePicker', () => {
     }, DELAY);
   });
 
+  it('change event', done => {
+    let inputValue;
+
+    vm = createVue({
+      template: `
+        <el-date-picker
+          ref="compo"
+          v-model="value"
+          format="yyyy-MM"
+          @change="handleChange" />`,
+
+      methods: {
+        handleChange(val) {
+          inputValue = val;
+        }
+      },
+
+      data() {
+        return { value: '' };
+      }
+    }, true);
+
+    const input = vm.$el.querySelector('input');
+
+    input.blur();
+    input.focus();
+
+    setTimeout(_ => {
+      const picker = vm.$refs.compo.picker;
+
+      picker.$el.querySelector('td.available').click();
+      vm.$nextTick(_ => {
+        const date = picker.date;
+
+        expect(inputValue).to.equal(`${date.getFullYear()}-${date.getMonth() + 1 }`);
+        done();
+      });
+    }, DELAY);
+  });
+
   describe('keydown', () => {
     let input;
     let keyDown = function(el, keyCode) {
