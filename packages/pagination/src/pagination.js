@@ -100,6 +100,7 @@ export default {
       render(h) {
         return (
           <button
+            type="button"
             class={['btn-prev', { disabled: this.$parent.internalCurrentPage <= 1 }]}
             on-click={ this.$parent.prev }>
             <i class="el-icon el-icon-arrow-left"></i>
@@ -112,6 +113,7 @@ export default {
       render(h) {
         return (
           <button
+            type="button"
             class={[
               'btn-next',
               { disabled: this.$parent.internalCurrentPage === this.$parent.internalPageCount || this.$parent.internalPageCount === 0 }
