@@ -1,4 +1,4 @@
-import { on, off } from 'wind-dom/src/event';
+import { on, off } from 'element-ui/src/utils/dom';
 import { renderThumbStyle, BAR_MAP } from './util';
 
 export default {

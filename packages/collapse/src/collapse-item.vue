@@ -12,7 +12,7 @@
   </div>
 </template>
 <script>
-  import { once } from 'wind-dom';
+  import { once } from 'element-ui/src/utils/dom';
   import Emitter from 'element-ui/src/mixins/emitter';
 
   function getTransitionendEvent(el) {
