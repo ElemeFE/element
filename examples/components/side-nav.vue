@@ -163,6 +163,7 @@
 </template>
 <script>
   import compoLang from '../i18n/component.json';
+  import { version } from 'main/index.js';
 
   export default {
     props: {
@@ -178,7 +179,7 @@
         navState: [],
         isSmallScreen: false,
         versions: [],
-        version: '',
+        version,
         dropdownVisible: false
       };
     },
@@ -248,13 +249,6 @@
       xhr.onreadystatechange = _ => {
         if (xhr.readyState === 4 && xhr.status === 200) {
           this.versions = JSON.parse(xhr.responseText);
-          const pathname = location.pathname.replace(/\//, '');
-          if (pathname.length > 0) {
-            this.version = pathname;
-          } else {
-            const versionArr = Object.keys(this.versions);
-            this.version = versionArr[versionArr.length - 1];
-          }
         }
       };
       xhr.open('GET', '/versions.json');
