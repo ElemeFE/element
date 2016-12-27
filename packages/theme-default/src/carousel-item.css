@@ -20,7 +20,8 @@
         &.is-in-stage {
           cursor: pointer;
           z-index: var(--index-normal);
-          &:hover .el-carousel__mask {
+          &:hover .el-carousel__mask,
+          &.is-hover .el-carousel__mask {
             opacity: 0.12;
           }
         }

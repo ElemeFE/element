@@ -11,6 +11,8 @@
         <button
           v-if="arrow !== 'never'"
           v-show="arrow === 'always' || hover"
+          @mouseenter="handleButtonEnter('left')"
+          @mouseleave="handleButtonLeave"
           @click.stop="throttledArrowClick(activeIndex - 1)"
           class="el-carousel__arrow el-carousel__arrow--left">
           <i class="el-icon-arrow-left"></i>
@@ -20,6 +22,8 @@
         <button
           v-if="arrow !== 'never'"
           v-show="arrow === 'always' || hover"
+          @mouseenter="handleButtonEnter('right')"
+          @mouseleave="handleButtonLeave"
           @click.stop="throttledArrowClick(activeIndex + 1)"
           class="el-carousel__arrow el-carousel__arrow--right">
           <i class="el-icon-arrow-right"></i>
@@ -107,6 +111,32 @@ export default {
     handleMouseLeave() {
       this.hover = false;
       this.startTimer();
+    },
+
+    itemInStage(item, index) {
+      const length = this.items.length;
+      if (index === length - 1 && item.inStage && this.items[0].active ||
+        (item.inStage && this.items[index + 1] && this.items[index + 1].active)) {
+        return 'left';
+      } else if (index === 0 && item.inStage && this.items[length - 1].active ||
+        (item.inStage && this.items[index - 1] && this.items[index - 1].active)) {
+        return 'right';
+      }
+      return false;
+    },
+
+    handleButtonEnter(arrow) {
+      this.items.forEach((item, index) => {
+        if (arrow === this.itemInStage(item, index)) {
+          item.hover = true;
+        }
+      });
+    },
+
+    handleButtonLeave() {
+      this.items.forEach(item => {
+        item.hover = false;
+      });
     },
 
     handleItemChange() {
