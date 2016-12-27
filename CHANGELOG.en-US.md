@@ -1,5 +1,22 @@
 ## Changelog
 
+### 1.0.9
+
+*2016-12-27*
+
+- Fixed DatePicker incorrectly triggering input event, #1834
+- Fixed Tree reporting `event is undefined` error in Firefox, #1945
+- Added `change` event for DatePicker, whose parameter is the formatted value, #1841
+- Added `header-align` attribute for Table, #1424
+- Fixed single select Table's highlight style not removing when data is removed, #1890
+- Fixed filterable Select lagging issue with more options, #1933
+- Fixed multiple disabled Select not disabling removing selected options issue, #2001
+- Fixed Col style not working in `xs`, #2011
+- Added `value` attribute for Tab, #2008
+- Fixed InputNumber `change` event incorrectly firing multiple times in some conditions, #1999
+- Added `clearable` attribute for DatePicker, #1994
+- Fixed Form always passing validation in async mode, #1936
+
 ### 1.0.8
 
 *2016-12-20*
