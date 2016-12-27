@@ -126,10 +126,10 @@
     },
     computed: {
       minDisabled() {
-        return this.value - this.step < this.min;
+        return this.accSub(this.value, this.step) < this.min;
       },
       maxDisabled() {
-        return this.value + this.step > this.max;
+        return this.accAdd(this.value, this.step) > this.max;
       }
     },
     methods: {
@@ -181,13 +181,13 @@
       increase() {
         if (this.maxDisabled) return;
         const value = this.value || 0;
-        if (value + this.step > this.max || this.disabled) return;
+        if (this.accAdd(value, this.step) > this.max || this.disabled) return;
         this.currentValue = this.accAdd(this.step, value);
       },
       decrease() {
         if (this.minDisabled) return;
         const value = this.value || 0;
-        if (value - this.step < this.min || this.disabled) return;
+        if (this.accSub(value, this.step) < this.min || this.disabled) return;
         this.currentValue = this.accSub(value, this.step);
       },
       handleBlur() {
