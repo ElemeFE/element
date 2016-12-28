@@ -24,8 +24,8 @@
     "lint": "eslint src/**/* test/**/* packages/**/*.{js,vue} build/**/* --quiet",
     "pub": "npm run bootstrap && sh build/git-release.sh && sh build/release.sh",
     "pub:all": "npm run dist:all && lerna publish",
-    "test": "npm run lint && CI_ENV=/dev/ karma start test/unit/karma.conf.js --single-run",
-    "test:watch": "karma start test/unit/karma.conf.js"
+    "test": "npm run lint && node node_modules/phantomjs-prebuilt/install.js && CI_ENV=/dev/ karma start test/unit/karma.conf.js --single-run",
+    "test:watch": "node node_modules/phantomjs-prebuilt/install.js && karma start test/unit/karma.conf.js"
   },
   "repository": {
     "type": "git",
