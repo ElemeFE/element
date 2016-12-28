@@ -147,8 +147,7 @@ Select date and time in one picker.
     <el-date-picker
       v-model="value3"
       type="datetimerange"
-      placeholder="Select time range"
-      style="width:350px">
+      placeholder="Select time range">
     </el-date-picker>
   </div>
   <div class="block">
@@ -158,8 +157,7 @@ Select date and time in one picker.
       type="datetimerange"
       :picker-options="pickerOptions2"
       placeholder="Select time range"
-      align="right"
-      style="width:350px">
+      align="right">
     </el-date-picker>
   </div>
 </template>

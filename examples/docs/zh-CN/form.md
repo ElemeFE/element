@@ -219,7 +219,7 @@
       padding: 0;
       list-style: none;
 
-      &:after,&:before {
+      &:after, &:before {
         content: ' ';
         display: table;
       }
@@ -263,18 +263,12 @@
     .demo-ruleForm {
       width: 460px;
 
-      .el-input,
-      .el-textarea {
-        width: auto;
-      }
-
       .el-select .el-input {
         width: 360px;
       }
     }
     .demo-dynamic {
       .el-input {
-        display: inline-block;
         margin-right: 10px;
         width: 270px;
         vertical-align: top;

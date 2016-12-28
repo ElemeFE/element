@@ -191,8 +191,7 @@ Picking a date range is supported.
     <el-date-picker
       v-model="value6"
       type="daterange"
-      placeholder="Pick a range"
-      style="width: 220px">
+      placeholder="Pick a range">
     </el-date-picker>
   </div>
   <div class="block">
@@ -202,8 +201,7 @@ Picking a date range is supported.
       type="daterange"
       align="right"
       placeholder="Pick a range"
-      :picker-options="pickerOptions2"
-      style="width: 220px">
+      :picker-options="pickerOptions2">
     </el-date-picker>
   </div>
 </template>

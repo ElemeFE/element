@@ -226,8 +226,7 @@
     <el-date-picker
       v-model="value6"
       type="daterange"
-      placeholder="选择日期范围"
-      style="width: 220px">
+      placeholder="选择日期范围">
     </el-date-picker>
   </div>
   <div class="block">
@@ -237,8 +236,7 @@
       type="daterange"
       align="right"
       placeholder="选择日期范围"
-      :picker-options="pickerOptions2"
-      style="width: 220px">
+      :picker-options="pickerOptions2">
     </el-date-picker>
   </div>
 </template>
