@@ -66,7 +66,7 @@ export default {
                 this.store.states.expandRows.indexOf(row) > -1
                 ? (<tr>
                     <td colspan={ this.columns.length } class="el-table__expanded-cell">
-                      { this.$parent.renderExpanded ? this.$parent.renderExpanded.call(this._renderProxy, h, { row, $index, store: this.store, _self: this.$parent.$vnode.context }) : ''}
+                      { this.table.renderExpanded ? this.table.renderExpanded(h, { row, $index, store: this.store }) : ''}
                     </td>
                   </tr>)
                 : ''

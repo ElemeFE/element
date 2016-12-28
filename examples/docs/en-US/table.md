@@ -1349,19 +1349,19 @@ Customize table column so it can be integrated with other components.
 ### Expandable row
 
 When the row content is too long and you do not want to display the horizontal scroll bar, you can use the expandable row feature.
-:::demo Activate expandable row by adding type="expand" and `inline-template` attribute，The template for `el-table-column` will be rendered as the contents of the expanded row, you can access the same attributes as the` inline-template`。
+:::demo Activate expandable row by adding type="expand" and `Scoped slot`, The template for `el-table-column` will be rendered as the contents of the expanded row, you can access the same attributes as the` Scoped slot`.
 ```html
 <template>
   <el-table
     :data="tableData3"
     style="width: 100%">
-    <el-table-column type="expand" inline-template>
-      <div>
-      <p>State: {{ row.state }}</p>
-      <p>City: {{ row.city }}</p>
-      <p>Address: {{ row.address }}</p>
-      <p>Zip: {{ row.zip }}</p>
-      </div>
+    <el-table-column type="expand">
+      <template scope="props">
+        <p>State: {{ props.row.state }}</p>
+        <p>City: {{ props.row.city }}</p>
+        <p>Address: {{ props.row.address }}</p>
+        <p>Zip: {{ props.row.zip }}</p>
+      </template>
     </el-table-column>
     <el-table-column
       label="Date"

@@ -24,7 +24,7 @@
     "lint": "eslint src/**/* test/**/* packages/**/*.{js,vue} build/**/* --quiet",
     "pub": "npm run bootstrap && sh build/git-release.sh && sh build/release.sh",
     "pub:all": "npm run dist:all && lerna publish",
-    "test": "npm run lint && CI_ENV=/dev/ karma start test/unit/karma.conf.js --single-run",
+    "test": "npm run lint && cross-env CI_ENV=/dev/ karma start test/unit/karma.conf.js --single-run",
     "test:watch": "karma start test/unit/karma.conf.js"
   },
   "repository": {
