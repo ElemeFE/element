@@ -428,6 +428,18 @@ TableStore.prototype.scheduleLayout = function() {
   this.table.debouncedLayout();
 };
 
+TableStore.prototype.setCurrentRowKey = function(key) {
+  const states = this.states;
+  const rowKey = states.rowKey;
+  if (!rowKey) throw new Error('[Table] row-key should not be empty.');
+  const data = states.data || [];
+  const keysMap = getKeysMap(data, rowKey);
+  const info = keysMap[key];
+  if (info) {
+    states.currentRow = info.row;
+  }
+};
+
 TableStore.prototype.updateCurrentRow = function() {
   const states = this.states;
   const table = this.table;
