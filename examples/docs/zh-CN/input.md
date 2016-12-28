@@ -152,7 +152,6 @@
     }
     .inline-input {
       &.el-input {
-        display: inline-block;
         vertical-align: top;
         margin: 10px 5px;
       }
