@@ -47,7 +47,7 @@ export default {
   data() {
     return {
       showPopper: false,
-      currentPlacement: this.placement
+      currentPlacement: ''
     };
   },
 
@@ -60,10 +60,6 @@ export default {
       }
     },
 
-    placement(val) {
-      this.currentPlacement = val;
-    },
-
     showPopper(val) {
       val ? this.updatePopper() : this.destroyPopper();
       this.$emit('input', val);
@@ -73,7 +69,7 @@ export default {
   methods: {
     createPopper() {
       if (this.$isServer) return;
-      if (!/^(top|bottom|left|right)(-start|-end)?$/g.test(this.currentPlacement)) {
+      if (!/^(top|bottom|left|right)(-start|-end)?$/g.test(this.currentPlacement || this.placement)) {
         return;
       }
 
