@@ -188,6 +188,43 @@ describe('Table', () => {
         done();
       }, DELAY);
     });
+
+    it('current-row-key', done => {
+      const vm = createVue({
+        template: `
+        <el-table :data="testData" row-key="id" highlight-current-row :current-row-key="currentRowKey">
+          <el-table-column prop="name" label="片名" />
+          <el-table-column prop="release" label="发行日期" />
+          <el-table-column prop="director" label="导演" />
+          <el-table-column prop="runtime" label="时长（分）" />
+        </el-table>
+      `,
+
+        created() {
+          this.testData = getTestData();
+        },
+
+        data() {
+          return { currentRowKey: null };
+        }
+      }, true);
+      setTimeout(_ => {
+        vm.currentRowKey = 1;
+        const tr = vm.$el.querySelector('.el-table__body-wrapper tbody tr');
+        setTimeout(_ => {
+          expect(tr.classList.contains('current-row')).to.be.true;
+          vm.currentRowKey = 2;
+
+          const rows = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr');
+          setTimeout(_ => {
+            expect(tr.classList.contains('current-row')).to.be.false;
+            expect(rows[1].classList.contains('current-row')).to.be.true;
+            destroyVM(vm);
+            done();
+          }, DELAY);
+        }, DELAY);
+      }, DELAY);
+    });
   });
 
   describe('filter', () => {

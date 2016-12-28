@@ -164,6 +164,8 @@
 
       highlightCurrentRow: Boolean,
 
+      currentRowKey: [String, Number],
+
       emptyText: String,
 
       expandRowKeys: Array,
@@ -353,6 +355,10 @@
     watch: {
       height(value) {
         this.layout.setHeight(value);
+      },
+
+      currentRowKey(newVal) {
+        this.store.setCurrentRowKey(newVal);
       },
 
       data: {

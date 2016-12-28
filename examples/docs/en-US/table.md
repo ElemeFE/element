@@ -1445,6 +1445,7 @@ When the row content is too long and you do not want to display the horizontal s
 | fit | whether width of column automatically fits its container | boolean | — | true |
 | show-header | whether table header is visible | boolean | - | true |
 | highlight-current-row | whether current row is highlighted | boolean | — | false |
+| current-row-key | key of current row, a set only prop | string,number | - | - |
 | row-class-name | function that returns custom class names for a row, or a string assigning class names for every row | Function(row, index)/String | — | — |
 | row-style | function that returns custom style for a row,  or a string assigning custom style for every row | Function(row, index)/Object | — | — |
 | row-key | key of row data, used for optimizing rendering. Required if `reserve-selection` is on | Function(row)/String | — | — |
