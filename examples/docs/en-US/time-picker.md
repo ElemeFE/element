@@ -1,3 +1,10 @@
+<style>
+  .demo-time-picker .el-input {
+    width: 180px;
+    display: inline-block;
+  }
+</style>
+
 ## TimePicker
 
 Use Time Picker for time input.

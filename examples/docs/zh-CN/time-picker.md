@@ -1,4 +1,8 @@
 <style>
+  .demo-time-picker .el-input {
+    width: 180px;
+    display: inline-block;
+  }
   .demo-box {
     .el-date-editor + .el-date-editor {
       margin-left: 10px;
