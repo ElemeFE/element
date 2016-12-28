@@ -132,32 +132,17 @@
     }
     .el-input {
       width: 180px;
-
-      & + .el-input,
-      & + .el-textarea {
-        margin-top: 15px;
-      }
     }
     .el-textarea {
       width: 414px;
     }
     .el-input-group {
-      min-width: 260px;
+      width: 260px;
     }
-    .el-input-group + .el-input-group {
-      margin-top: 15px;
-    }
-    .el-autocomplete {
-      display: inline-block;
-    }
-    .inline-input {
-      &.el-input {
+    .demo-input-size {
+      .el-input {
         vertical-align: top;
-        margin: 10px 5px;
-      }
-      &.el-autocomplete {
-        display: inline-block;
-        margin: 10px 0 0;
+        margin: 0 10px 10px 0;
       }
     }
     .tac {
@@ -301,13 +286,17 @@ export default {
 
 ::: demo 可通过 slot 来指定在 input 中前置或者后置内容。
 ```html
-<template>
+<div>
   <el-input placeholder="请输入内容" v-model="input3">
     <template slot="prepend">Http://</template>
   </el-input>
+</div>
+<div style="margin-top: 15px;">
   <el-input placeholder="请输入内容" v-model="input4">
     <template slot="append">.com</template>
   </el-input>
+</div>
+<div style="margin-top: 15px;">
   <el-input placeholder="请输入内容" v-model="input5" style="width: 300px;">
     <el-select v-model="select" slot="prepend" placeholder="请选择">
       <el-option label="餐厅名" value="1"></el-option>
@@ -316,14 +305,7 @@ export default {
     </el-select>
     <el-button slot="append" icon="search"></el-button>
   </el-input>
-</template>
-
-<style>
-.el-select .el-input {
-  width: 100px;
-}
-</style>
-
+</div>
 <script>
 export default {
   data() {
@@ -343,26 +325,22 @@ export default {
 
 ::: demo 可通过 `size` 属性指定输入框的尺寸，除了默认的大小外，还提供了 large、small 和 mini 三种尺寸。
 ```html
-<div>
+<div class="demo-input-size">
   <el-input
-    class="inline-input"
     size="large"
     placeholder="请输入内容"
     v-model="input6">
   </el-input>
   <el-input
-    class="inline-input"
     placeholder="请输入内容"
     v-model="input7">
   </el-input>
   <el-input
-    class="inline-input"
     size="small"
     placeholder="请输入内容"
     v-model="input8">
   </el-input>
   <el-input
-    class="inline-input"
     size="mini"
     placeholder="请输入内容"
     v-model="input9">
