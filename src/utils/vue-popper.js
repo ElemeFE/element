@@ -46,7 +46,8 @@ export default {
 
   data() {
     return {
-      showPopper: false
+      showPopper: false,
+      currentPlacement: this.placement
     };
   },
 
@@ -59,6 +60,10 @@ export default {
       }
     },
 
+    placement(val) {
+      this.currentPlacement = val;
+    },
+
     showPopper(val) {
       val ? this.updatePopper() : this.destroyPopper();
       this.$emit('input', val);
@@ -68,7 +73,7 @@ export default {
   methods: {
     createPopper() {
       if (this.$isServer) return;
-      if (!/^(top|bottom|left|right)(-start|-end)?$/g.test(this.placement)) {
+      if (!/^(top|bottom|left|right)(-start|-end)?$/g.test(this.currentPlacement)) {
         return;
       }
 
@@ -88,7 +93,7 @@ export default {
         this.popperJS.destroy();
       }
 
-      options.placement = this.placement;
+      options.placement = this.currentPlacement;
       options.offset = this.offset;
       this.popperJS = new PopperJS(reference, popper, options);
       this.popperJS.onCreate(_ => {
