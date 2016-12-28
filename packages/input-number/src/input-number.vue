@@ -183,7 +183,7 @@
         if (this.maxDisabled) return;
         const value = this.value || 0;
         if (this.accAdd(value, this.step) > this.max || this.disabled) return;
-        this.currentValue = this.accAdd(this.step, value);
+        this.currentValue = this.accAdd(value, this.step);
       },
       decrease() {
         if (this.minDisabled) return;
