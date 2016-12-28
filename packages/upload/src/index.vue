@@ -209,9 +209,9 @@ export default {
       ref: 'upload-inner'
     };
 
-    var uploadComponent = this.$isServer ? '' : typeof FormData !== 'undefined'
-      ? <upload {...props}>{this.$slots.default}</upload>
-      : <iframeUpload {...props}>{this.$slots.default}</iframeUpload>;
+    var uploadComponent = (typeof FormData !== 'undefined' || this.$isServer)
+        ? <upload {...props}>{this.$slots.default}</upload>
+        : <iframeUpload {...props}>{this.$slots.default}</iframeUpload>;
 
     if (this.type === 'select') {
       return (
