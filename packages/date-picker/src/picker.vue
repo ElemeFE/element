@@ -408,30 +408,34 @@ export default {
           this.picker.format = this.format;
         }
 
-        const options = this.pickerOptions;
+        const updateOptions = () => {
+          const options = this.pickerOptions;
 
-        if (options && options.selectableRange) {
-          let ranges = options.selectableRange;
-          const parser = TYPE_VALUE_RESOLVER_MAP.datetimerange.parser;
-          const format = DEFAULT_FORMATS.timerange;
+          if (options && options.selectableRange) {
+            let ranges = options.selectableRange;
+            const parser = TYPE_VALUE_RESOLVER_MAP.datetimerange.parser;
+            const format = DEFAULT_FORMATS.timerange;
 
-          ranges = Array.isArray(ranges) ? ranges : [ranges];
-          this.picker.selectableRange = ranges.map(range => parser(range, format));
-        }
-
-        if (this.type === 'time-select' && options) {
-          this.$watch('pickerOptions.minTime', val => {
-            this.picker.minTime = val;
-          });
-        }
-
-        for (const option in options) {
-          if (options.hasOwnProperty(option) &&
-              // 忽略 time-picker 的该配置项
-              option !== 'selectableRange') {
-            this.picker[option] = options[option];
+            ranges = Array.isArray(ranges) ? ranges : [ranges];
+            this.picker.selectableRange = ranges.map(range => parser(range, format));
           }
-        }
+
+          if (this.type === 'time-select' && options) {
+            this.$watch('pickerOptions.minTime', val => {
+              this.picker.minTime = val;
+            });
+          }
+
+          for (const option in options) {
+            if (options.hasOwnProperty(option) &&
+                // 忽略 time-picker 的该配置项
+                option !== 'selectableRange') {
+              this.picker[option] = options[option];
+            }
+          }
+        };
+        updateOptions();
+        this.$watch('pickerOptions', () => updateOptions(), { deep: true });
 
         this.$el.appendChild(this.picker.$el);
         this.pickerVisible = this.picker.visible = true;
