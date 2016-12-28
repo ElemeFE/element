@@ -23,6 +23,7 @@
         color: #5e6d82;
         line-height: 40px;
         transition: .2s;
+        padding-bottom: 6px;
         border-bottom: 1px solid #eaeefb;
         &:hover {
           cursor: pointer;
