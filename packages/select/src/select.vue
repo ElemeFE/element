@@ -65,8 +65,10 @@
       <el-select-menu
         ref="popper"
         v-show="visible && emptyText !== false">
-        <ul
-          class="el-select-dropdown__list"
+        <el-scrollbar
+          tag="ul"
+          wrap-class="el-select-dropdown__wrap"
+          view-class="el-select-dropdown__list"
           :class="{ 'is-empty': !allowCreate && filteredOptionsCount === 0 }"
           v-show="options.length > 0 && !loading">
           <el-option
@@ -75,7 +77,7 @@
             v-if="showNewOption">
           </el-option>
           <slot></slot>
-        </ul>
+        </el-scrollbar>
         <p class="el-select-dropdown__empty" v-if="emptyText && !allowCreate">{{ emptyText }}</p>
       </el-select-menu>
     </transition>
@@ -89,9 +91,10 @@
   import ElSelectMenu from './select-dropdown.vue';
   import ElOption from './option.vue';
   import ElTag from 'element-ui/packages/tag';
+  import ElScrollbar from 'element-ui/packages/scrollbar';
   import debounce from 'throttle-debounce/debounce';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
-  import { addClass, removeClass, hasClass } from 'wind-dom/src/class';
+  import { addClass, removeClass, hasClass } from 'element-ui/src/utils/dom';
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
   import { t } from 'element-ui/src/locale';
   const sizeMap = {
@@ -148,7 +151,8 @@
       ElInput,
       ElSelectMenu,
       ElOption,
-      ElTag
+      ElTag,
+      ElScrollbar
     },
 
     directives: { Clickoutside },
@@ -301,6 +305,7 @@
       },
 
       options(val) {
+        if (this.$isServer) return;
         this.optionsAllDisabled = val.length === val.filter(item => item.disabled === true).length;
         if (this.multiple) {
           this.resetInputHeight();

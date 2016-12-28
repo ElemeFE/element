@@ -677,6 +677,37 @@ describe('DatePicker', () => {
     });
   });
 
+  const currentMonth = new Date(new Date().getTime());
+  currentMonth.setDate(1);
+  const FirstDayOfCurrentMonth = currentMonth.getDay();
+  const chineseWeek = ['一', '二', '三', '四', '五', '六', '日'];
+
+  const testWeek = (i) => it('picker-options:firstDayOfWeek ' + i, done => {
+    vm = createTest(DatePicker, {
+      pickerOptions: {
+        firstDayOfWeek: i
+      }
+    }, true);
+
+    const input = vm.$el.querySelector('input');
+
+    input.blur();
+    input.focus();
+
+    setTimeout(_ => {
+      const prevMonthLen = vm.picker.$el.querySelectorAll('.prev-month').length;
+      const firstWeek = vm.picker.$el.querySelector('tr th');
+      const offset = i > 3 ? 7 - i : -i;
+
+      expect(firstWeek.innerText).to.equal(chineseWeek[i - 1]);
+      expect(prevMonthLen - FirstDayOfCurrentMonth).to.equal(offset);
+      done();
+    });
+  });
+  for (var i = 1; i <= 7; i++) {
+    testWeek(i);
+  }
+
   it('picker-options:shortcuts', done => {
     let test;
     vm = createTest(DatePicker, {

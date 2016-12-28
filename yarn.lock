@@ -1334,11 +1334,12 @@ cooking-lint@^0.1.3:
     eslint-plugin-react "*"
     eslint-plugin-vue "*"
 
-cooking-vue2@^0.1.4:
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/cooking-vue2/-/cooking-vue2-0.1.4.tgz#4344650f1252daace5955e60cd48a07adf876750"
+cooking-vue2@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/cooking-vue2/-/cooking-vue2-0.3.0.tgz#a38062164d80df49a788b1669dcb45eddab91238"
   dependencies:
-    vue-loader "^9.4.2"
+    vue-loader ">=9.4.2"
+    vue-template-compiler "*"
 
 cooking@^1.2.0:
   version "1.2.7"
@@ -6860,9 +6861,9 @@ vue-hot-reload-api@^2.0.1:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.0.6.tgz#817d4bfb30f55428aa1012d029499e07f3147d21"
 
-vue-loader@^9.4.2, vue-loader@^9.9.0:
-  version "9.9.5"
-  resolved "https://registry.yarnpkg.com/vue-loader/-/vue-loader-9.9.5.tgz#0893e3093e90c8fbe852053b2b0f4854a3bf4651"
+vue-loader@^10.0.2, vue-loader@>=9.4.2:
+  version "10.0.2"
+  resolved "https://registry.yarnpkg.com/vue-loader/-/vue-loader-10.0.2.tgz#6fe7bcefb32c5439bd0338464aa22673ad62299c"
   dependencies:
     consolidate "^0.14.0"
     hash-sum "^1.0.2"
@@ -6875,7 +6876,6 @@ vue-loader@^9.4.2, vue-loader@^9.9.0:
     source-map "^0.5.6"
     vue-hot-reload-api "^2.0.1"
     vue-style-loader "^1.0.0"
-    vue-template-compiler "^2.0.5"
     vue-template-es2015-compiler "^1.2.2"
 
 vue-markdown-loader@^0.5.1:
@@ -6888,12 +6888,6 @@ vue-markdown-loader@^0.5.1:
     markdown-it "^6.0.5"
     rimraf "^2.5.2"
 
-vue-popup@^0.2.14:
-  version "0.2.14"
-  resolved "https://registry.yarnpkg.com/vue-popup/-/vue-popup-0.2.14.tgz#aa3d461c6f2ab01ef4546665d730395ec6028302"
-  dependencies:
-    wind-dom "0.0.3"
-
 vue-router@^2.0.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-2.1.1.tgz#10c31bbdcb6da92bd3e0223fa12345e73018625a"
@@ -6904,9 +6898,9 @@ vue-style-loader@^1.0.0:
   dependencies:
     loader-utils "^0.2.7"
 
-vue-template-compiler@2.0.5, vue-template-compiler@^2.0.5:
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.0.5.tgz#6a8c454e7d4ed03cc295ae9733a432e31df25ea3"
+vue-template-compiler@*, vue-template-compiler@2.1.6:
+  version "2.1.6"
+  resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.1.6.tgz#f96f968652fc1e861bb0052f61993ba1fdc18ad3"
   dependencies:
     de-indent "^1.0.2"
     he "^1.1.0"
@@ -6915,9 +6909,9 @@ vue-template-es2015-compiler@^1.2.2:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.4.0.tgz#7b88853ca4bf8d84ae54ab9e56771de271e60198"
 
-vue@2.0.5:
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/vue/-/vue-2.0.5.tgz#b99dc7180a802d1148a508db3d84b52c09b5ca8e"
+vue@2.1.6:
+  version "2.1.6"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-2.1.6.tgz#2fc0024c07479ac6bc7d34a2cd5ef9ca5e90b143"
 
 watchpack@^0.2.1:
   version "0.2.9"
@@ -7044,14 +7038,6 @@ wide-align@^1.1.0:
   resolved "https://registry.yarnpkg.com/wide-align/-/wide-align-1.1.0.tgz#40edde802a71fea1f070da3e62dcda2e7add96ad"
   dependencies:
     string-width "^1.0.1"
-
-wind-dom@0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/wind-dom/-/wind-dom-0.0.3.tgz#3456e3d959dbebdcbf76ca68c6a4e8142f26360f"
-
-window-size@0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/window-size/-/window-size-0.1.0.tgz#5438cd2ea93b202efa3a19fe8887aee7c94f9c9d"
 
 window-size@^0.2.0:
   version "0.2.0"

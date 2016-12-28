@@ -41,16 +41,16 @@
   "bugs": {
     "url": "https://github.com/ElemeFE/element/issues"
   },
+  "unpkg": "lib/index.js",
+  "style": "lib/theme-default/index.css",
   "dependencies": {
     "async-validator": "^1.6.6",
     "babel-helper-vue-jsx-merge-props": "^2.0.0",
     "deepmerge": "^1.2.0",
-    "throttle-debounce": "^1.0.1",
-    "vue-popup": "^0.2.14",
-    "wind-dom": "0.0.3"
+    "throttle-debounce": "^1.0.1"
   },
   "peerDependencies": {
-    "vue": "^2.0.0"
+    "vue": "^2.1.6"
   },
   "devDependencies": {
     "babel-cli": "^6.14.0",
@@ -64,7 +64,7 @@
     "cheerio": "^0.18.0",
     "cooking": "^1.2.0",
     "cooking-lint": "^0.1.3",
-    "cooking-vue2": "^0.1.4",
+    "cooking-vue2": "^0.3.0",
     "copy-webpack-plugin": "^4.0.1",
     "coveralls": "^2.11.14",
     "cp-cli": "^1.0.2",
@@ -112,11 +112,11 @@
     "transliteration": "^1.1.11",
     "uppercamelcase": "^1.1.0",
     "url-loader": "^0.5.7",
-    "vue": "2.0.5",
-    "vue-loader": "^9.9.0",
+    "vue": "2.1.6",
+    "vue-loader": "^10.0.2",
     "vue-markdown-loader": "^0.5.1",
     "vue-router": "^2.0.0",
-    "vue-template-compiler": "2.0.5",
+    "vue-template-compiler": "2.1.6",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.15.1",
     "webpack-node-externals": "^1.5.4"

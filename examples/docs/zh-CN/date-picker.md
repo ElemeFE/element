@@ -303,6 +303,7 @@
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | shortcuts | 设置快捷选项，需要传入 { text, onClick } 对象用法参考 demo 或下表 | Object[] | - | - |
 | disabledDate | 设置禁用状态，参数为当前日期，要求返回 Boolean | Function | - | - |
+| firstDayOfWeek | 周起始日 | Number | 1 到 7 | 7 |
 
 ### Shortcuts
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |

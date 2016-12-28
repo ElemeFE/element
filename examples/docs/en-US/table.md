@@ -568,15 +568,13 @@ When there are too many columns, you can fix some of them.
       width="120">
     </el-table-column>
     <el-table-column
-      inline-template
-      :context="_self"
       fixed="right"
       label="Operations"
       width="120">
-      <span>
+      <template scope="scope">
         <el-button @click="handleClick" type="text" size="small">Detail</el-button>
         <el-button type="text" size="small">Edit</el-button>
-      </span>
+      </template>
     </el-table-column>
   </el-table>
 </template>
@@ -781,19 +779,17 @@ When the the data is dynamically changed, you might want the table to have a max
       width="120">
     </el-table-column>
     <el-table-column
-      inline-template
-      :context="_self"
       fixed="right"
       label="Operations"
       width="120">
-      <span>
+      <template scope="scope">
         <el-button
-          @click.native.prevent="deleteRow($index, tableData4)"
+          @click.native.prevent="deleteRow(scope.$index, tableData4)"
           type="text"
           size="small">
           Remove
         </el-button>
-      </span>
+      </template>
     </el-table-column>
   </el-table>
 </template>
@@ -1045,13 +1041,12 @@ Single row selection is supported.
 
 You can also select multiple rows.
 
-:::demo Activating multiple selection is easy: simply add an `el-table-column` with its `type` set to `selection`. Apart from multiple selection, this example also uses `inline-template` and `show-overflow-tooltip`: when the attribute `inline-template` is set, you can use custom template inside `el-table-column`, and access current row data via `row`; by default, if the content is too long, it will break into multiple lines. If you want to keep it in one line, use attribute `show-overflow-tooltip`, which accepts a `Boolean` value. When set `true`, the extra content will show in tooltip when hover on the cell.
+:::demo Activating multiple selection is easy: simply add an `el-table-column` with its `type` set to `selection`. Apart from multiple selection, this example also uses `show-overflow-tooltip`: by default, if the content is too long, it will break into multiple lines. If you want to keep it in one line, use attribute `show-overflow-tooltip`, which accepts a `Boolean` value. When set `true`, the extra content will show in tooltip when hover on the cell.
 ```html
 <template>
   <el-table
     :data="tableData3"
     border
-    selection-mode="multiple"
     style="width: 100%"
     @selection-change="handleSelectionChange">
     <el-table-column
@@ -1059,10 +1054,9 @@ You can also select multiple rows.
       width="55">
     </el-table-column>
     <el-table-column
-      inline-template
       label="Date"
       width="120">
-      <div>{{ row.date }}</div>
+      <template scope="scope">{{ scope.row.date }}</template>
     </el-table-column>
     <el-table-column
       property="name"
@@ -1219,9 +1213,12 @@ Filter the table to find desired data.
       label="Tag"
       width="100"
       :filters="[{ text: 'Home', value: 'Home' }, { text: 'Office', value: 'Office' }]"
-      :filter-method="filterTag"
-      inline-template>
-      <el-tag :type="row.tag === 'Home' ? 'primary' : 'success'" close-transition>{{row.tag}}</el-tag>
+      :filter-method="filterTag">
+      <template scope="scope">
+        <el-tag
+          :type="scope.row.tag === 'Home' ? 'primary' : 'success'"
+          close-transition>{{scope.row.tag}}</el-tag>
+      </template>
     </el-table-column>
   </el-table>
 </template>
@@ -1269,7 +1266,7 @@ Filter the table to find desired data.
 ### Custom column template
 
 Customize table column so it can be integrated with other components.
-:::demo Activate custom column template by adding the `inline-template` attribute. By default, the context of `el-table-column` is the one where `el-table` lies, and you can customize it with the `context` attribute, e.g. `:context="_self"` refers to the current context. This is useful when sometimes Table is encapsulated into another component, and `table-column` is distributed by slots. In `el-column`, you have access to the following data: row, column, $index and store (state management of Table).
+:::demo You have access to the following data: row, column, $index and store (state management of Table) by [Scoped slot](https://vuejs.org/v2/guide/components.html#Scoped-Slots). (Scoped slots is supported from `1.1`, `inline-template` still works, but it's not recommended).
 ```html
 <template>
   <el-table
@@ -1277,43 +1274,38 @@ Customize table column so it can be integrated with other components.
     border
     style="width: 100%">
     <el-table-column
-      inline-template
       label="Date"
       width="180">
-      <div>
+      <template scope="scope">
         <el-icon name="time"></el-icon>
-        <span style="margin-left: 10px">{{ row.date }}</span>
-      </div>
+        <span style="margin-left: 10px">{{ scope.row.date }}</span>
+      </template>
     </el-table-column>
     <el-table-column
-      inline-template
       label="Name"
       width="180">
-      <el-popover trigger="hover" placement="top">
-        <p>Name: {{ row.name }}</p>
-        <p>Addr: {{ row.address }}</p>
-        <div slot="reference" class="name-wrapper">
-          <el-tag>{{ row.name }}</el-tag>
-        </div>
-      </el-popover>
+      <template scope="scope">
+        <el-popover trigger="hover" placement="top">
+          <p>Name: {{ scope.row.name }}</p>
+          <p>Addr: {{ scope.row.address }}</p>
+          <div slot="reference" class="name-wrapper">
+            <el-tag>{{ scope.row.name }}</el-tag>
+          </div>
+        </el-popover>
+      </template>
     </el-table-column>
     <el-table-column
       :context="_self"
-      inline-template
       label="Operations">
-      <div>
+      <template scope="scope">
         <el-button
           size="small"
-          @click="handleEdit($index, row)">
-          Edit
-        </el-button>
+          @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
         <el-button
           size="small"
           type="danger"
-          @click="handleDelete($index, row)">
-          Delete
-        </el-button>
-      </div>
+          @click="handleDelete(scope.$index, scope.row)">Delete</el-button>
+      </template>
     </el-table-column>
   </el-table>
 </template>
@@ -1460,6 +1452,7 @@ When the row content is too long and you do not want to display the horizontal s
 | empty-text | Displayed text when data is empty. You can customize this area with `slot="empty"` | String | - | No Data |
 | default-expand-all | whether expand all rows by default, only works when the table has a column type="expand" | Boolean | - | false |
 | expand-row-keys | set expanded rows by this prop, prop's value is the keys of expand rows, you should set row-key before using this prop | Array | - | |
+| virtual-scrollbar | Enable virtual scrollbar | Boolean | - | false |
 
 ### Table Events
 | Event Name | Description | Parameters |
@@ -1480,7 +1473,7 @@ When the row content is too long and you do not want to display the horizontal s
 | expand | triggers when user expands or collapses a row | row, expanded |
 
 ### Table Methods
-| Method | Description | Parameter |
+| Method | Description | Parameters |
 |------|--------|-------|
 | clearSelection | clear selection, might be useful when `reserve-selection` is on | selection |
 | toggleRowSelection | toggle if a certain row is selected. With the second parameter, you can directly set if this row is selected | row, selected |
@@ -1501,8 +1494,6 @@ When the row content is too long and you do not want to display the horizontal s
 | resizable | whether column width can be resized, works when `border` of `el-table` is `true` | boolean | — | false |
 | formatter | function that formats content | Function(row, column) | — | — |
 | show-overflow-tooltip | whether to hide extra content and show them in a tooltip when hovering on the cell | boolean | — | false |
-| context | context of Table-column, e.g. `_self` refers to the current context, `$parent` parent context, `$root` root context | Object | - | current context where Table lies |
-| inline-template | by using this attribute, you can customize column template. Row data can be accessed by `row` object. In your template, you have access to the following: `{ row (current row), column (current column), $index (row index), store (table store) }` | — | — |
 | align | alignment | string | left/center/right | left |
 | header-align | alignment of the table header. If omitted, the value of the above `align` attribute will be applied | String | left/center/right | — |
 | class-name | class name of cells in the column | string | — | — |

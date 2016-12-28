@@ -58,23 +58,23 @@ describe('TimePicker', () => {
 
     Vue.nextTick(_ => {
       const list = vm.picker.$el.querySelectorAll('.el-time-spinner__list');
-      const hoursElm = list[0];
-      const minutesElm = list[1];
-      const secondsElm = list[2];
-      const hourElm = hoursElm.querySelectorAll('.el-time-spinner__item')[4];
-      const minuteElm = minutesElm.querySelectorAll('.el-time-spinner__item')[36];
-      const secondElm = secondsElm.querySelectorAll('.el-time-spinner__item')[20];
+      const hoursEl = list[0];
+      const minutesEl = list[1];
+      const secondsEl = list[2];
+      const hourEl = hoursEl.querySelectorAll('.el-time-spinner__item')[4];
+      const minuteEl = minutesEl.querySelectorAll('.el-time-spinner__item')[36];
+      const secondEl = secondsEl.querySelectorAll('.el-time-spinner__item')[20];
 
-      hourElm.click();
-      minuteElm.click();
-      secondElm.click();
+      hourEl.click();
+      minuteEl.click();
+      secondEl.click();
 
       Vue.nextTick(_ => {
         const date = vm.picker.currentDate;
 
-        expect(hourElm.classList.contains('active')).to.true;
-        expect(minuteElm.classList.contains('active')).to.true;
-        expect(secondElm.classList.contains('active')).to.true;
+        expect(hourEl.classList.contains('active')).to.true;
+        expect(minuteEl.classList.contains('active')).to.true;
+        expect(secondEl.classList.contains('active')).to.true;
         expect(date.getHours()).to.equal(4);
         expect(date.getMinutes()).to.equal(36);
         expect(date.getSeconds()).to.equal(20);
@@ -165,12 +165,12 @@ describe('TimePicker', () => {
 
     setTimeout(_ => {
       const list = vm.picker.$el.querySelectorAll('.el-time-spinner__list');
-      const hoursElm = list[0];
+      const hoursEl = list[0];
       const disabledHours = [].slice
-        .call(hoursElm.querySelectorAll('.disabled'))
+        .call(hoursEl.querySelectorAll('.disabled'))
         .map(node => Number(node.textContent));
 
-      hoursElm.querySelectorAll('.disabled')[0].click();
+      hoursEl.querySelectorAll('.disabled')[0].click();
       expect(disabledHours).to.not.include.members([18, 19, 20]);
       destroyVM(vm);
       done();

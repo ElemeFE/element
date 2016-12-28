@@ -40,7 +40,7 @@ export default {
             this._l(this.data, (row, $index) =>
               [<tr
                 style={ this.rowStyle ? this.getRowStyle(row, $index) : null }
-                key={ this.$parent.rowKey ? this.getKeyOfRow(row, $index) : $index }
+                key={ this.table.rowKey ? this.getKeyOfRow(row, $index) : $index }
                 on-dblclick={ ($event) => this.handleDoubleClick($event, row) }
                 on-click={ ($event) => this.handleClick($event, row) }
                 on-contextmenu={ ($event) => this.handleContextMenu($event, row) }
@@ -54,7 +54,7 @@ export default {
                       on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
                       on-mouseleave={ this.handleCellMouseLeave }>
                       {
-                        column.renderCell.call(this._renderProxy, h, { row, column, $index, store: this.store, _self: this.context || this.$parent.$vnode.context })
+                        column.renderCell.call(this._renderProxy, h, { row, column, $index, store: this.store, _self: this.context || this.table.$vnode.context })
                       }
                     </td>
                   )
@@ -113,6 +113,10 @@ export default {
   },
 
   computed: {
+    table() {
+      return this.$parent.$parent.columns ? this.$parent.$parent : this.$parent;
+    },
+
     data() {
       return this.store.states.data;
     },
@@ -142,7 +146,7 @@ export default {
 
   methods: {
     getKeyOfRow(row, index) {
-      const rowKey = this.$parent.rowKey;
+      const rowKey = this.table.rowKey;
       if (rowKey) {
         return getRowIdentity(row, rowKey);
       }
@@ -181,7 +185,7 @@ export default {
     },
 
     handleCellMouseEnter(event, row) {
-      const table = this.$parent;
+      const table = this.table;
       const cell = getCell(event);
 
       if (cell) {
@@ -200,8 +204,8 @@ export default {
       const cell = getCell(event);
       if (!cell) return;
 
-      const oldHoverState = this.$parent.hoverState;
-      this.$parent.$emit('cell-mouse-leave', oldHoverState.row, oldHoverState.column, oldHoverState.cell, event);
+      const oldHoverState = this.table.hoverState;
+      this.table.$emit('cell-mouse-leave', oldHoverState.row, oldHoverState.column, oldHoverState.cell, event);
     },
 
     handleMouseEnter(index) {
@@ -213,17 +217,17 @@ export default {
     },
 
     handleContextMenu(event, row) {
-      const table = this.$parent;
+      const table = this.table;
       table.$emit('row-contextmenu', row, event);
     },
 
     handleDoubleClick(event, row) {
-      const table = this.$parent;
+      const table = this.table;
       table.$emit('row-dblclick', row, event);
     },
 
     handleClick(event, row) {
-      const table = this.$parent;
+      const table = this.table;
       const cell = getCell(event);
       let column;
       if (cell) {

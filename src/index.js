@@ -55,6 +55,11 @@ import Card from '../packages/card';
 import Rate from '../packages/rate';
 import Steps from '../packages/steps';
 import Step from '../packages/step';
+import Carousel from '../packages/carousel';
+import Scrollbar from '../packages/scrollbar';
+import CarouselItem from '../packages/carousel-item';
+import Collapse from '../packages/collapse';
+import CollapseItem from '../packages/collapse-item';
 import locale from 'element-ui/src/locale';
 
 const install = function(Vue, opts = {}) {
@@ -113,6 +118,11 @@ const install = function(Vue, opts = {}) {
   Vue.component(Rate.name, Rate);
   Vue.component(Steps.name, Steps);
   Vue.component(Step.name, Step);
+  Vue.component(Carousel.name, Carousel);
+  Vue.component(Scrollbar.name, Scrollbar);
+  Vue.component(CarouselItem.name, CarouselItem);
+  Vue.component(Collapse.name, Collapse);
+  Vue.component(CollapseItem.name, CollapseItem);
 
   Vue.use(Loading.directive);
 
@@ -188,5 +198,10 @@ module.exports = {
   Card,
   Rate,
   Steps,
-  Step
+  Step,
+  Carousel,
+  Scrollbar,
+  CarouselItem,
+  Collapse,
+  CollapseItem
 };

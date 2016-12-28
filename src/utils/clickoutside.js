@@ -1,9 +1,10 @@
-import { on } from 'wind-dom/src/event';
+import Vue from 'vue';
+import { on } from 'element-ui/src/utils/dom';
 
 const nodeList = [];
 const ctx = '@@clickoutsideContext';
 
-on(document, 'click', e => {
+!Vue.prototype.$isServer && on(document, 'click', e => {
   nodeList.forEach(node => node[ctx].documentHandler(e));
 });
 /**

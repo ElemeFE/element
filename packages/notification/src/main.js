@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { PopupManager } from 'vue-popup';
+import { PopupManager } from 'element-ui/src/utils/popup';
 let NotificationConstructor = Vue.extend(require('./main.vue'));
 
 let instance;
@@ -7,6 +7,7 @@ let instances = [];
 let seed = 1;
 
 var Notification = function(options) {
+  if (Vue.prototype.$isServer) return;
   options = options || {};
   let userOnClose = options.onClose;
   let id = 'notification_' + seed++;
