@@ -1349,7 +1349,7 @@ Customize table column so it can be integrated with other components.
 ### Expandable row
 
 When the row content is too long and you do not want to display the horizontal scroll bar, you can use the expandable row feature.
-:::demo Activate expandable row by adding type="expand" and scoped slot. The template for el-table-column will be rendered as the contents of the expanded row, and you can access the same attributes as when you are usingscoped slot in custom column templates.
+:::demo Activate expandable row by adding type="expand" and scoped slot. The template for el-table-column will be rendered as the contents of the expanded row, and you can access the same attributes as when you are using `Scoped slot` in custom column templates.
 ```html
 <template>
   <el-table
