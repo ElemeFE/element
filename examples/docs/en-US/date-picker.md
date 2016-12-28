@@ -1,10 +1,3 @@
-<style>
-  .demo-date-picker .el-input {
-    width: 180px;
-    margin: auto;
-  }
-</style>
-
 <script>
   module.exports = {
     data() {
