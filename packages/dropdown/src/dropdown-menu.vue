@@ -28,7 +28,7 @@
 
     watch: {
       '$parent.menuAlign'(val) {
-        this.placement = val;
+        this.currentPlacement = `bottom-${val}`;
       }
     }
   };
