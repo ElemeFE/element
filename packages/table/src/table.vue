@@ -106,7 +106,6 @@
 
 <script type="text/babel">
   import ElCheckbox from 'element-ui/packages/checkbox';
-  import Migrating from 'element-ui/src/mixins/migrating';
   import throttle from 'throttle-debounce/throttle';
   import debounce from 'throttle-debounce/debounce';
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
@@ -122,7 +121,7 @@
   export default {
     name: 'el-table',
 
-    mixins: [Migrating, Locale],
+    mixins: [Locale],
 
     props: {
       data: {
@@ -180,24 +179,6 @@
     },
 
     methods: {
-      getMigratingConfig() {
-        return {
-          props: {
-            'allow-no-selection': 'Table: allow-no-selection has been removed.',
-            'selection-mode': 'Table: selection-mode has been removed.',
-            'fixed-column-count': 'Table: fixed-column-count has been removed. Use fixed prop in TableColumn instead.',
-            'custom-criteria': 'Table: custom-criteria has been removed. Use row-class-name instead.',
-            'custom-background-colors': 'custom-background-colors has been removed. Use row-class-name instead.'
-          },
-          events: {
-            selectionchange: 'Table: selectionchange has been renamed to selection-change.',
-            cellmouseenter: 'Table: cellmouseenter has been renamed to cell-mouse-enter.',
-            cellmouseleave: 'Table: cellmouseleave has been renamed to cell-mouse-leave.',
-            cellclick: 'Table: cellclick has been renamed to cell-click.'
-          }
-        };
-      },
-
       toggleRowSelection(row, selected) {
         this.store.toggleRowSelection(row, selected);
         this.store.updateAllSelected();
