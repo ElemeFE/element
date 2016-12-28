@@ -3,6 +3,9 @@
 
 @component-namespace el {
   @b date-editor {
+    position: relative;
+    display: inline-block;
+
     .el-picker-panel {
       position: absolute;
       min-width: 180px;
