@@ -4,10 +4,13 @@
     'is-validating': validateState === 'validating',
     'is-required': isRequired || required
   }">
-    <label class="el-form-item__label" v-bind:style="labelStyle" v-if="label">
+    <label class="el-form-item__label" :style="labelStyle" v-if="label">
       {{label + form.labelSuffix}}
     </label>
-    <div class="el-form-item__content" v-bind:style="contentStyle">
+    <!--  clear label's float  -->
+    <div style="clear: both;" v-if="label"></div>
+
+    <div class="el-form-item__content" :style="contentStyle">
       <slot></slot>
       <transition name="el-zoom-in-top">
         <div class="el-form-item__error" v-if="validateState === 'error'">{{validateMessage}}</div>
