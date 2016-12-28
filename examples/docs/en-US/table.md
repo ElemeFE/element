@@ -1346,6 +1346,94 @@ Customize table column so it can be integrated with other components.
 ```
 :::
 
+### Expandable row
+
+When the row content is too long and you do not want to display the horizontal scroll bar, you can use the expandable row feature.
+:::demo Activate expandable row by adding type="expand" and `inline-template` attribute，The template for `el-table-column` will be rendered as the contents of the expanded row, you can access the same attributes as the` inline-template`。
+```html
+<template>
+  <el-table
+    :data="tableData3"
+    style="width: 100%">
+    <el-table-column type="expand" inline-template>
+      <div>
+      <p>State: {{ row.state }}</p>
+      <p>City: {{ row.city }}</p>
+      <p>Address: {{ row.address }}</p>
+      <p>Zip: {{ row.zip }}</p>
+      </div>
+    </el-table-column>
+    <el-table-column
+      label="Date"
+      prop="date">
+    </el-table-column>
+    <el-table-column
+      label="Name"
+      prop="name">
+    </el-table-column>
+  </el-table>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        tableData3: [{
+          date: '2016-05-03',
+          name: 'Tom',
+          state: 'California',
+          city: 'Los Angeles',
+          address: 'No. 189, Grove St, Los Angeles',
+          zip: 'CA 90036'
+        }, {
+          date: '2016-05-02',
+          name: 'Tom',
+          state: 'California',
+          city: 'Los Angeles',
+          address: 'No. 189, Grove St, Los Angeles',
+          zip: 'CA 90036'
+        }, {
+          date: '2016-05-04',
+          name: 'Tom',
+          state: 'California',
+          city: 'Los Angeles',
+          address: 'No. 189, Grove St, Los Angeles',
+          zip: 'CA 90036'
+        }, {
+          date: '2016-05-01',
+          name: 'Tom',
+          state: 'California',
+          city: 'Los Angeles',
+          address: 'No. 189, Grove St, Los Angeles',
+          zip: 'CA 90036'
+        }, {
+          date: '2016-05-08',
+          name: 'Tom',
+          state: 'California',
+          city: 'Los Angeles',
+          address: 'No. 189, Grove St, Los Angeles',
+          zip: 'CA 90036'
+        }, {
+          date: '2016-05-06',
+          name: 'Tom',
+          state: 'California',
+          city: 'Los Angeles',
+          address: 'No. 189, Grove St, Los Angeles',
+          zip: 'CA 90036'
+        }, {
+          date: '2016-05-07',
+          name: 'Tom',
+          state: 'California',
+          city: 'Los Angeles',
+          address: 'No. 189, Grove St, Los Angeles',
+          zip: 'CA 90036'
+        }]
+    }
+  }
+</script>
+```
+:::
+
 ### Table Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -1361,7 +1449,9 @@ Customize table column so it can be integrated with other components.
 | row-style | function that returns custom style for a row,  or a string assigning custom style for every row | Function(row, index)/Object | — | — |
 | row-key | key of row data, used for optimizing rendering. Required if `reserve-selection` is on | Function(row)/String | — | — |
 | context | context of Table, e.g. `_self` refers to the current context, `$parent` parent context, `$root` root context, can be overridden by `context` in `el-table-column` | Object | - | current context where Table lies |
-| empty-text | Displayed text when data is empty. You can customize this area with `slot="empty"` | String | | - | No Data |
+| empty-text | Displayed text when data is empty. You can customize this area with `slot="empty"` | String | - | No Data |
+| default-expand-all | whether expand all rows by default, only works when the table has a column type="expand" | Boolean | - | false |
+| expand-row-keys | set expanded rows by this prop, prop's value is the keys of expand rows, you should set row-key before using this prop | Array | - | |
 | virtual-scrollbar | Enable virtual scrollbar | Boolean | - | false |
 
 ### Table Events
@@ -1380,6 +1470,7 @@ Customize table column so it can be integrated with other components.
 | sort-change | triggers when Table's sorting changes | { column, prop, order } |
 | filter-change | column's key. If you need to use the filter-change event, this attribute is mandatory to identify which column is being filtered | filters |
 | current-change | triggers when current row changes | currentRow, oldCurrentRow |
+| expand | triggers when user expands or collapses a row | row, expanded |
 
 ### Table Methods
 | Method | Description | Parameters |
@@ -1390,7 +1481,7 @@ Customize table column so it can be integrated with other components.
 ### Table-column Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| type | type of the column. If set to `selection`, the column will display checkbox. If set to `index`, the column will display index of the row (staring from 1)  | string | selection/index | — |
+| type | type of the column. If set to `selection`, the column will display checkbox. If set to `index`, the column will display index of the row (staring from 1). If set to `expand`, the column will display expand icon.  | string | selection/index/expand | — |
 | label | column label | string | — | — |
 | column-key | column's key. If you need to use the filter-change event, you need this attribute to identify which column is being filtered | string | string | - | - |
 | prop |  field name. You can also use its alias: `property` | string | — | — |
@@ -1404,6 +1495,7 @@ Customize table column so it can be integrated with other components.
 | formatter | function that formats content | Function(row, column) | — | — |
 | show-overflow-tooltip | whether to hide extra content and show them in a tooltip when hovering on the cell | boolean | — | false |
 | align | alignment | string | left/center/right | left |
+| header-align | alignment of the table header. If omitted, the value of the above `align` attribute will be applied | String | left/center/right | — |
 | class-name | class name of cells in the column | string | — | — |
 | selectable | function that determines if a certain row can be selected, works when `type` is 'selection' | Function(row, index) | — | — |
 | reserve-selection | whether to reserve selection after data refreshing, works when `type` is 'selection' | boolean | — | false |

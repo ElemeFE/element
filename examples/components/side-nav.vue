@@ -12,6 +12,41 @@
       margin: 0;
       overflow: hidden;
     }
+    
+    .nav-dropdown {
+      margin-bottom: 6px;
+      width: 100%;
+      span {
+        display: block;
+        width: 100%;
+        font-size: 16px;
+        color: #5e6d82;
+        line-height: 40px;
+        transition: .2s;
+        border-bottom: 1px solid #eaeefb;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+      i {
+        transition: .2s;
+        font-size: 12px;
+        color: #d3dce6;
+      }
+      @when active {
+        span, i {
+          color: #20a0ff;
+        }
+        i {
+          transform: rotateZ(180deg) translateY(2px);
+        }
+      }
+      &:hover {
+        span, i {
+          color: #20a0ff;
+        }
+      }
+    }
 
     .nav-item {
       a {
@@ -53,9 +88,37 @@
       margin-top: 10px;
     }
   }
+  .nav-dropdown-list {
+    width: 120px;
+    margin-top: -8px;
+    li {
+      font-size: 14px;
+    }
+  }
 </style>
 <template>
   <div class="side-nav" :style="navStyle">
+    <el-dropdown
+      v-show="isComponentPage"
+      trigger="click"
+      class="nav-dropdown"
+      :class="{ 'is-active': dropdownVisible }">
+      <span>
+        {{ langConfig.dropdown }}{{ version }}
+        <i class="el-icon-caret-bottom el-icon--right"></i>
+      </span>
+      <el-dropdown-menu
+        slot="dropdown"
+        :offset="-80"
+        class="nav-dropdown-list"
+        @input="handleDropdownToggle">
+        <el-dropdown-item
+          v-for="item in Object.keys(versions)"
+          @click.native="switchVersion(item)">
+          {{ item }}
+        </el-dropdown-item>
+      </el-dropdown-menu>
+    </el-dropdown>
     <ul>
       <li class="nav-item" v-for="item in data">
         <a v-if="!item.path" @click="expandMenu">{{item.name}}</a>
@@ -99,6 +162,9 @@
   </div>
 </template>
 <script>
+  import compoLang from '../i18n/component.json';
+  import { version } from 'main/index.js';
+
   export default {
     props: {
       data: Array,
@@ -111,7 +177,10 @@
       return {
         highlights: [],
         navState: [],
-        isSmallScreen: false
+        isSmallScreen: false,
+        versions: [],
+        version,
+        dropdownVisible: false
       };
     },
     watch: {
@@ -122,9 +191,19 @@
     computed: {
       navStyle() {
         return this.isSmallScreen ? { 'padding-bottom': '60px' } : {};
+      },
+      isComponentPage() {
+        return /^component-/.test(this.$route.name);
+      },
+      langConfig() {
+        return compoLang.filter(config => config.lang === this.$route.meta.lang)[0]['nav'];
       }
     },
     methods: {
+      switchVersion(version) {
+        if (version === this.version) return;
+        location.href = `${ location.origin }/${ this.versions[version] }/${ location.hash } `;
+      },
       handleResize() {
         this.isSmallScreen = document.documentElement.clientWidth < 768;
         this.handlePathChange();
@@ -160,7 +239,20 @@
         if (!target.nextElementSibling || target.nextElementSibling.tagName !== 'UL') return;
         this.hideAllMenu();
         event.currentTarget.nextElementSibling.style.height = 'auto';
+      },
+      handleDropdownToggle(visible) {
+        this.dropdownVisible = visible;
       }
+    },
+    created() {
+      const xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = _ => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          this.versions = JSON.parse(xhr.responseText);
+        }
+      };
+      xhr.open('GET', '/versions.json');
+      xhr.send();
     },
     mounted() {
       this.handleResize();

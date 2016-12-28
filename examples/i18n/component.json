@@ -16,6 +16,9 @@
       "guide": "指南",
       "components": "组件",
       "resource": "资源"
+    },
+    "nav": {
+      "dropdown": "版本："
     }
   },
   {
@@ -35,6 +38,9 @@
       "guide": "Guide",
       "components": "Component",
       "resource": "Resource"
+    },
+    "nav": {
+      "dropdown": "Version: "
     }
   }
 ]

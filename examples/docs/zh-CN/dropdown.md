@@ -43,6 +43,9 @@
     methods: {
       handleClick() {
         alert('button click');
+      },
+      handleCommand(command) {
+        this.$message('click on item ' + command);
       }
     }
   }
@@ -168,6 +171,35 @@
 ```
 :::
 
+### 指令事件
+
+点击菜单项后会触发事件，用户可以通过相应的菜单项 key 进行不同的操作
+
+:::demo
+```html
+<el-dropdown @command="handleCommand">
+  <span class="el-dropdown-link">
+    下拉菜单<i class="el-icon-caret-bottom el-icon--right"></i>
+  </span>
+  <el-dropdown-menu slot="dropdown">
+    <el-dropdown-item command="a">黄金糕</el-dropdown-item>
+    <el-dropdown-item command="b">狮子头</el-dropdown-item>
+    <el-dropdown-item command="c">螺蛳粉</el-dropdown-item>
+    <el-dropdown-item command="d" disabled>双皮奶</el-dropdown-item>
+    <el-dropdown-item command="e" divided>蚵仔煎</el-dropdown-item>
+  </el-dropdown-menu>
+</el-dropdown>
+<script>
+  export default {
+    methods: {
+      handleCommand(command) {
+        this.$message('click on item ' + command);
+      }
+    }
+  }
+</script>
+```
+:::
 
 ### Dropdown Attributes
 | 参数          | 说明            | 类型            | 可选值                 | 默认值   |

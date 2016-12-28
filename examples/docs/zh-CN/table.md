@@ -60,6 +60,7 @@
           province: '上海',
           city: '普陀区',
           address: '上海市普陀区金沙江路 1518 弄',
+          detailAddress: '金沙江路 1518 弄',
           zip: 200333
         }, {
           date: '2016-05-02',
@@ -67,6 +68,7 @@
           province: '上海',
           city: '普陀区',
           address: '上海市普陀区金沙江路 1518 弄',
+          detailAddress: '金沙江路 1518 弄',
           zip: 200333
         }, {
           date: '2016-05-04',
@@ -81,6 +83,7 @@
           province: '上海',
           city: '普陀区',
           address: '上海市普陀区金沙江路 1518 弄',
+          detailAddress: '金沙江路 1518 弄',
           zip: 200333
         }, {
           date: '2016-05-08',
@@ -88,6 +91,7 @@
           province: '上海',
           city: '普陀区',
           address: '上海市普陀区金沙江路 1518 弄',
+          detailAddress: '金沙江路 1518 弄',
           zip: 200333
         }, {
           date: '2016-05-06',
@@ -95,6 +99,7 @@
           province: '上海',
           city: '普陀区',
           address: '上海市普陀区金沙江路 1518 弄',
+          detailAddress: '金沙江路 1518 弄',
           zip: 200333
         }, {
           date: '2016-05-07',
@@ -102,6 +107,7 @@
           province: '上海',
           city: '普陀区',
           address: '上海市普陀区金沙江路 1518 弄',
+          detailAddress: '金沙江路 1518 弄',
           zip: 200333
         }],
         tableData4: [{
@@ -1354,6 +1360,74 @@
 ```
 :::
 
+### 展开行
+
+当行内容过多并且不想显示横向滚动条时，可以使用 Table 展开行功能。
+:::demo 通过设置 type="expand" 和 `inline-template` 属性可以开启展开行功能，`el-table-column` 的模板会被渲染成为展开行的内容，展开行可访问的属性与使用 `inline-template` 的时候相同。
+```html
+<template>
+  <el-table
+    :data="tableData3"
+    style="width: 100%">
+    <el-table-column type="expand" inline-template>
+      <div>
+      <p>省: {{ row.province }}</p>
+      <p>市: {{ row.city }}</p>
+      <p>住址: {{ row.detailAddress }}</p>
+      <p>邮编: {{ row.zip }}</p>
+      </div>
+    </el-table-column>
+    <el-table-column
+      label="日期"
+      prop="date">
+    </el-table-column>
+    <el-table-column
+      label="姓名"
+      prop="name">
+    </el-table-column>
+  </el-table>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        tableData3: [{
+          date: '2016-05-02',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          detailAddress: '金沙江路 1518 弄',
+          zip: 200333
+        }, {
+          date: '2016-05-04',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          detailAddress: '金沙江路 1518 弄',
+          zip: 200333
+        }, {
+          date: '2016-05-01',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          detailAddress: '金沙江路 1518 弄',
+          zip: 200333
+        }, {
+          date: '2016-05-03',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          detailAddress: '金沙江路 1518 弄',
+          zip: 200333
+        }]
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Table Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -1368,8 +1442,11 @@
 | row-style | 行的 style 的回调方法，也可以使用一个固定的 Object 为所有行设置一样的 Style。 | Function(row, index)/Object | — | — |
 | row-key | 行数据的 Key，用来优化 Table 的渲染；在使用 reserve-selection 功能的情况下，该属性是必填的 | Function(row)/String | — | — |
 | context | 设置上下文环境，例如设置当前上下文就是 `_self`，父级就是 `$parent`，根组件 `$root`。优先读取 column 的 context 属性。 | Object | - | Table 所处上下文 |
-| empty-text | 空数据时显示的文本内容，也可以通过 `slot="empty"` 设置 | String | | - | 暂无数据 |
+| empty-text | 空数据时显示的文本内容，也可以通过 `slot="empty"` 设置 | String | - | 暂无数据 |
+| default-expand-all | 是否默认展开所有行，当 Table 中存在 type="expand" 的 Column 的时候有效 | Boolean | - | false |
+| expand-row-keys | 可以通过该属性设置 Table 目前的展开行，需要设置 row-key 属性才能使用，该属性为展开行的 keys 数组。| Array | - | |
 | virtual-scrollbar | 启用虚拟滚动条 | Boolean | - | false |
+
 
 ### Table Events
 | 事件名 | 说明 | 参数 |
@@ -1387,6 +1464,7 @@
 | sort-change | 当表格的排序条件发生变化的时候会触发该事件 | { column, prop, order } |
 | filter-change | 当表格的筛选条件发生变化的时候会触发该事件，参数的值是一个对象，对象的 key 是 column 的 columnKey，对应的 value 为用户选择的筛选条件的数组。 | filters |
 | current-change | 当表格的当前行发生变化的时候会触发该事件，如果要高亮当前行，请打开表格的 highlight-current-row 属性 | currentRow, oldCurrentRow |
+| expand | 当用户对某一行展开或者关闭的上会触发该事件 | row, expanded |
 
 ### Table Methods
 | 方法名 | 说明 | 参数 |
@@ -1397,7 +1475,7 @@
 ### Table-column Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| type | 对应列的类型。如果设置了 `selection` 则显示多选框，如果设置了 `index` 则显示该行的索引（从 1 开始计算） | string | selection/index | — |
+| type | 对应列的类型。如果设置了 `selection` 则显示多选框；如果设置了 `index` 则显示该行的索引（从 1 开始计算）；如果设置了 expand 则显示为一个可展开的按钮 | string | selection/index/expand | — |
 | column-key | column 的 key，如果需要使用 filter-change 事件，则需要此属性标识是哪个 column 的筛选条件 | string | - | - |
 | label | 显示的标题 | string | — | — |
 | prop | 对应列内容的字段名，也可以使用 property 属性 | string | — | — |
@@ -1410,7 +1488,8 @@
 | resizable | 对应列是否可以通过拖动改变宽度（需要在 el-table 上设置 border 属性为真） | boolean | — | true |
 | formatter | 用来格式化内容 | Function(row, column) | — | — |
 | show-overflow-tooltip | 当内容过长被隐藏时显示 tooltip | Boolean | — | false |
-| align | 对齐方式 | String | left, center, right | left |
+| align | 对齐方式 | String | left/center/right | left |
+| header-align | 表头对齐方式，若不设置该项，则使用表格的对齐方式 | String | left/center/right | — |
 | class-name | 列的 className | string | — | — |
 | selectable | 仅对 type=selection 的列有效，类型为 Function，Function 的返回值用来决定这一行的 CheckBox 是否可以勾选 | Function(row, index) | — | — |
 | reserve-selection | 仅对 type=selection 的列有效，类型为 Boolean，为 true 则代表会保留之前数据的选项，需要配合 Table 的 clearSelection 方法使用。 | Boolean | — | false |

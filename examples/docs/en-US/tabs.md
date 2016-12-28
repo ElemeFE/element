@@ -2,7 +2,18 @@
   export default {
     data() {
       return {
-        activeName: 'first'
+        activeName: 'first',
+        activeName2: 'first',
+        tabs: [{
+          title: 'Tab 1',
+          name: '1',
+          content: 'Tab 1 content'
+        }, {
+          title: 'Tab 2',
+          name: '2',
+          content: 'Tab 2 content'
+        }],
+        tabIndex: 2
       }
     },
     methods: {
@@ -11,6 +22,9 @@
       },
       handleClick(tab, event) {
         console.log(tab, event);
+      },
+      renderTab(h, tab) {
+        return <span><i class="el-icon-date"></i> {tab.label}</span>;
       }
     }
   }
@@ -24,11 +38,11 @@ Divide data collections which are related yet belong to different types.
 
 Basic and concise tabs.
 
-:::demo Tabs provide a selective card functionality and it can be achieved by just using `el-tabs` and child element `el-tab-pane`. In these two elements, we provide a list of attributes. The `label` in `el-tab-pane` determines the label of selective cards, and you can write content in the label. In this example, we add a `active-name` attribute indicating the active card in `el-tabs`, which can take a `String` value. In the `el-tab-pane` you can set corresponding `name` attribute, and if there is no `name`, the default sequence is `1`/`2`/`3`/`4`. In this example, the selected card is card 2. If `name` is omitted, setting `active-name` to `2` can reach the same goal.
+:::demo Tabs provide a selective card functionality. By default the first tab is selected as active, and you can activate any tab by setting the `value` attribute.
 
 ```html
 <template>
-  <el-tabs :active-name="activeName">
+  <el-tabs v-model="activeName" @tab-click="handleClick">
     <el-tab-pane label="User" name="first">User</el-tab-pane>
     <el-tab-pane label="Config" name="second">Config</el-tab-pane>
     <el-tab-pane label="Role" name="third">Role</el-tab-pane>
@@ -41,6 +55,11 @@ Basic and concise tabs.
       return {
         activeName: 'first'
       };
+    },
+    methods: {
+      handleClick(tab, event) {
+        console.log(tab, event);
+      }
     }
   };
 </script>
@@ -55,7 +74,7 @@ Tabs styled as cards.
 
 ```html
 <template>
-  <el-tabs type="card" @tab-click="handleClick" @tab-remove="handleRemove">
+  <el-tabs type="card" @tab-click="handleClick">
     <el-tab-pane label="User">User</el-tab-pane>
     <el-tab-pane label="Config">Config</el-tab-pane>
     <el-tab-pane label="Role">Role</el-tab-pane>
@@ -64,10 +83,12 @@ Tabs styled as cards.
 </template>
 <script>
   export default {
+    data() {
+      return {
+        activeName: 'first'
+      };
+    },
     methods: {
-      handleRemove(tab) {
-        console.log(tab);
-      },
       handleClick(tab, event) {
         console.log(tab, event);
       }
@@ -81,7 +102,7 @@ Tabs styled as cards.
 
 Closable tabs.
 
-:::demo You can set `closable` attribute in `el-tabs`. It accept `Boolean` and Tab will be closable when the boolean is `true`.
+:::demo You can set the closable attribute in el-tabs to make all tabs closable. Also, closable can be set in a tab panel to make that specific tab closable.
 
 ```html
 <template>
@@ -125,12 +146,37 @@ Border card tabs.
 
 :::
 
+### Custom Tab
+
+You can use `label-content` property to customize the tab
+
+:::demo `label-content` is a render function,which return the vnode of the tab.
+```html
+<el-tabs type="border-card">
+  <el-tab-pane label="Route" :label-content="renderTab">Route</el-tab-pane>
+  <el-tab-pane label="Config">Config</el-tab-pane>
+  <el-tab-pane label="Role">Role</el-tab-pane>
+  <el-tab-pane label="Task">Task</el-tab-pane>
+</el-tabs>
+<script>
+  export default {
+    methods: {
+      renderTab(h, tab) {
+        return <span><i class="el-icon-date"></i> {tab.label}</span>;
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Tabs Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------- |---------- |-------------  |-------- |
 | type     | type of Tab | string   | card/border-card  |     —    |
 | closable  | whether Tab is closable | boolean   | — |  false  |
-| active-name  | name of the selected tab  | string   |  —  |  name of first tab |
+| active-name(deprecated)  | name of the selected tab  | string   |  —  |  name of first tab |
+| value  | name of the selected tab  | string   |  —  |  name of first tab |
 
 ### Tabs Events
 | Event Name | Description | Parameters |
@@ -145,3 +191,4 @@ Border card tabs.
 | label-content | render function for tab title | Function(h, tab:vueInstance) | - | - |
 | disabled | whether Tab is disabled | boolean | - | false |
 | name      | identifier corresponding to the activeName of Tabs, representing the alias of the tab-pane | string | — | ordinal number of the tab-pane in the sequence, i.e. the first tab-pane is '1' |
+| closable  | whether Tab is closable | boolean   | — |  false  |

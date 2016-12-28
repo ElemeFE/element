@@ -289,6 +289,7 @@
 | readonly | 完全只读 | boolean | — | false |
 | disabled | 禁用 | boolean | - | false |
 | editable | 文本框可输入 | boolean | - | true |
+| clearable | 是否显示清除按钮 | boolean | - | true |
 | size          | 输入框尺寸     | string          | large, small, mini  | — |
 | placeholder | 占位内容 | string | — | — |
 | type | 显示类型 | string | year/month/date/week/ datetime/datetimerange/daterange | date |
@@ -309,3 +310,9 @@
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | text | 标题文本 | string | — | — |
 | onClick | 选中后的回调函数，参数是 vm，可通过触发 'pick' 事件设置选择器的值。例如 vm.$emit('pick', new Date()) | function | — | — |
+
+### Events
+| Event Name | Description | Parameters |
+|---------|--------|---------|
+| change | 当 input 的值改变时触发，返回值和文本框一致 | formatted value |
+

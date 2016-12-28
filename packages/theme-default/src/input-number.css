@@ -23,9 +23,14 @@
       color: #99A9BF;
       cursor: pointer;
       position: absolute;
+      z-index: 1;
 
       &:hover {
         color: var(--color-primary);
+
+        &:not(.is-disabled) ~ .el-input .el-input__inner:not(.is-disabled) {
+          border-color: var(--input-focus-border);
+        }
       }
 
       @when disabled {

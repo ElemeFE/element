@@ -33,7 +33,7 @@
         :min="min"
         :max="max"
         :form="form"
-        :value="value"
+        :value="currentValue"
         ref="input"
         @input="handleInput"
         @focus="handleFocus"
@@ -48,7 +48,8 @@
     <textarea
       v-else
       class="el-textarea__inner"
-      v-model="currentValue"
+      :value="currentValue"
+      @input="handleInput"
       ref="textarea"
       :name="name"
       :placeholder="placeholder"
@@ -75,6 +76,13 @@
     componentName: 'ElInput',
 
     mixins: [emitter],
+
+    data() {
+      return {
+        currentValue: this.value,
+        textareaStyle: {}
+      };
+    },
 
     props: {
       value: [String, Number],
@@ -108,6 +116,18 @@
       min: {}
     },
 
+    computed: {
+      validating() {
+        return this.$parent.validateState === 'validating';
+      }
+    },
+
+    watch: {
+      'value'(val, oldValue) {
+        this.setCurrentValue(val);
+      }
+    },
+
     methods: {
       handleBlur(event) {
         this.$emit('blur', event);
@@ -129,18 +149,21 @@
         this.$emit('focus', event);
       },
       handleInput(event) {
-        this.currentValue = event.target.value;
+        this.setCurrentValue(event.target.value);
       },
       handleIconClick(event) {
         this.$emit('click', event);
+      },
+      setCurrentValue(value) {
+        if (value === this.currentValue) return;
+        this.$nextTick(_ => {
+          this.resizeTextarea();
+        });
+        this.currentValue = value;
+        this.$emit('input', value);
+        this.$emit('change', value);
+        this.dispatch('ElFormItem', 'el.form.change', [value]);
       }
-    },
-
-    data() {
-      return {
-        currentValue: this.value,
-        textareaStyle: {}
-      };
     },
 
     created() {
@@ -149,26 +172,6 @@
 
     mounted() {
       this.resizeTextarea();
-    },
-
-    computed: {
-      validating() {
-        return this.$parent.validateState === 'validating';
-      }
-    },
-
-    watch: {
-      'value'(val, oldValue) {
-        this.currentValue = val;
-      },
-      'currentValue'(val) {
-        this.$nextTick(_ => {
-          this.resizeTextarea();
-        });
-        this.$emit('input', val);
-        this.$emit('change', val);
-        this.dispatch('ElFormItem', 'el.form.change', [val]);
-      }
     }
   };
 </script>

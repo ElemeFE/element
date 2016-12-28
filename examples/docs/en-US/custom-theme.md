@@ -51,7 +51,7 @@ Just edit `element-variables.css`, e.g. changing the theme color to red:
 ```
 
 ### Build theme
-After saving the variable file, use `et` to build your theme. You can activate `watch` mode by adding a parameter `-w`:
+After saving the variable file, use `et` to build your theme. You can activate `watch` mode by adding a parameter `-w`. And if you customized the variable file's output, you need to add a parameter `-c` and variable file's name:
 ```shell
 et
 

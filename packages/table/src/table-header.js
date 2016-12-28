@@ -103,7 +103,7 @@ export default {
                       on-mouseout={ this.handleMouseOut }
                       on-mousedown={ ($event) => this.handleMouseDown($event, column) }
                       on-click={ ($event) => this.handleClick($event, column) }
-                      class={ [column.id, column.order, column.align, column.className || '', rowIndex === 0 && this.isCellHidden(cellIndex) ? 'is-hidden' : '', !column.children ? 'is-leaf' : ''] }>
+                      class={ [column.id, column.order, column.headerAlign, column.className || '', rowIndex === 0 && this.isCellHidden(cellIndex) ? 'is-hidden' : '', !column.children ? 'is-leaf' : ''] }>
                       <div class={ ['cell', column.filteredValue && column.filteredValue.length > 0 ? 'highlight' : ''] }>
                       {
                         column.renderHeader
@@ -112,9 +112,9 @@ export default {
                       }
                       {
                         column.sortable
-                          ? <span class="caret-wrapper" on-click={ ($event) => this.handleHeaderClick($event, column) }>
-                              <i class="sort-caret ascending"></i>
-                              <i class="sort-caret descending"></i>
+                          ? <span class="caret-wrapper">
+                              <i class="sort-caret ascending" on-click={ ($event) => this.handleHeaderClick($event, column, 'ascending')}></i>
+                              <i class="sort-caret descending" on-click={ ($event) => this.handleHeaderClick($event, column, 'descending')}></i>
                             </span>
                           : ''
                        }
@@ -334,7 +334,7 @@ export default {
       document.body.style.cursor = '';
     },
 
-    handleHeaderClick(event, column) {
+    handleHeaderClick(event, column, order) {
       let target = event.target;
       while (target && target.tagName !== 'TH') {
         target = target.parentNode;
@@ -362,15 +362,14 @@ export default {
         sortProp = column.property;
       }
 
-      if (!column.order) {
-        sortOrder = column.order = 'ascending';
-      } else if (column.order === 'ascending') {
-        sortOrder = column.order = 'descending';
-      } else {
+      if (column.order === order) {
         sortOrder = column.order = null;
         states.sortingColumn = null;
         sortProp = null;
+      } else {
+        sortOrder = column.order = order;
       }
+
       states.sortProp = sortProp;
       states.sortOrder = sortOrder;
 

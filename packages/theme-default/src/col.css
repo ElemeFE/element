@@ -7,23 +7,38 @@
 }
 
 @for $i from 1 to 24 {
-  .el-col-$i,
-  .el-col-xs-$i {
+  .el-col-$i {
     width: calc(1 / 24 * $(i) * 100)%;
   }
-  .el-col-offset-$i,
-  .el-col-xs-offset-$i {
+  .el-col-offset-$i {
     margin-left: calc(1 / 24 * $(i) * 100)%;
   }
-  .el-col-pull-$i,
-  .el-col-xs-pull-$i {
+  .el-col-pull-$i {
     position: relative;
     right: calc(1 / 24 * $(i) * 100)%;
   }
-  .el-col-push-$i,
-  .el-col-xs-push-$i {
+  .el-col-push-$i {
     position: relative;
     left: calc(1 / 24 * $(i) * 100)%;
+  }
+}
+
+@media (max-width: 768px) {
+  @for $i from 1 to 24 {
+    .el-col-xs-$i {
+      width: calc(1 / 24 * $(i) * 100)%;
+    }
+    .el-col-xs-offset-$i {
+      margin-left: calc(1 / 24 * $(i) * 100)%;
+    }
+    .el-col-xs-pull-$i {
+      position: relative;
+      right: calc(1 / 24 * $(i) * 100)%;
+    }
+    .el-col-xs-push-$i {
+      position: relative;
+      left: calc(1 / 24 * $(i) * 100)%;
+    }
   }
 }
 

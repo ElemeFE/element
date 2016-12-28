@@ -1,6 +1,6 @@
 {
   "name": "element-ui",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "A Component Library for Vue.js.",
   "main": "lib/element-ui.common.js",
   "files": [
@@ -58,13 +58,14 @@
     "babel-loader": "^6.2.5",
     "babel-plugin-module-resolver": "^2.2.0",
     "babel-plugin-syntax-jsx": "^6.8.0",
-    "babel-plugin-transform-vue-jsx": "^3.1.0",
+    "babel-plugin-transform-vue-jsx": "^3.3.0",
     "babel-preset-es2015": "^6.14.0",
     "chai": "^3.5.0",
     "cheerio": "^0.18.0",
     "cooking": "^1.2.0",
     "cooking-lint": "^0.1.3",
     "cooking-vue2": "^0.3.0",
+    "copy-webpack-plugin": "^4.0.1",
     "coveralls": "^2.11.14",
     "cp-cli": "^1.0.2",
     "cross-env": "^3.1.3",
