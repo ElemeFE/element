@@ -1002,8 +1002,10 @@ describe('Table', () => {
           return createVue({
             template: `
             <el-table row-key="id" :data="testData" @expand="handleExpand" ${extra}>
-              <el-table-column type="expand" inline-template>
-                <div>{{row.name}}</div>
+              <el-table-column type="expand">
+                <template scope="props">
+                  <div>{{props.row.name}}</div>
+                </template>
               </el-table-column>
               <el-table-column prop="release" label="release" />
               <el-table-column prop="director" label="director" />

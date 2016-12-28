@@ -1363,19 +1363,19 @@
 ### 展开行
 
 当行内容过多并且不想显示横向滚动条时，可以使用 Table 展开行功能。
-:::demo 通过设置 type="expand" 和 `inline-template` 属性可以开启展开行功能，`el-table-column` 的模板会被渲染成为展开行的内容，展开行可访问的属性与使用 `inline-template` 的时候相同。
+:::demo 通过设置 type="expand" 和 `Scoped slot` 可以开启展开行功能，`el-table-column` 的模板会被渲染成为展开行的内容，展开行可访问的属性与使用自定义列模板时的 `Scoped slot` 相同。
 ```html
 <template>
   <el-table
     :data="tableData3"
     style="width: 100%">
-    <el-table-column type="expand" inline-template>
-      <div>
-      <p>省: {{ row.province }}</p>
-      <p>市: {{ row.city }}</p>
-      <p>住址: {{ row.detailAddress }}</p>
-      <p>邮编: {{ row.zip }}</p>
-      </div>
+    <el-table-column type="expand">
+      <template scope="props">
+        <p>省: {{ props.row.province }}</p>
+        <p>市: {{ props.row.city }}</p>
+        <p>住址: {{ props.row.detailAddress }}</p>
+        <p>邮编: {{ props.row.zip }}</p>
+      </template>
     </el-table-column>
     <el-table-column
       label="日期"

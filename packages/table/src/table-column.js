@@ -247,19 +247,9 @@ export default {
 
     if (type === 'expand') {
       owner.renderExpanded = function(h, data) {
-        if (_self.$vnode.data.inlineTemplate) {
-          data._self = _self.context || data._self;
-          if (Object.prototype.toString.call(data._self) === '[object Object]') {
-            for (let prop in data._self) {
-              if (!data.hasOwnProperty(prop)) {
-                data[prop] = data._self[prop];
-              }
-            }
-          }
-          data._staticTrees = _self._staticTrees;
-          data.$options.staticRenderFns = _self.$options.staticRenderFns;
-          return _self.customRender.call(data);
-        }
+        return _self.$scopedSlots.default
+          ? _self.$scopedSlots.default(data)
+          : _self.$slots.default;
       };
 
       column.renderCell = function(h, data) {
@@ -270,6 +260,7 @@ export default {
     }
 
     column.renderCell = function(h, data) {
+      // 未来版本移除
       if (_self.$vnode.data.inlineTemplate) {
         renderCell = function() {
           data._self = _self.context || data._self;
