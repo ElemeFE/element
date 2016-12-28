@@ -5,7 +5,8 @@
     :class="{
       'is-active': active,
       'el-carousel__item--card': $parent.type === 'card',
-      'is-in-stage': inStage
+      'is-in-stage': inStage,
+      'is-hover': hover
     }"
     @click="handleItemClick"
     :style="{
@@ -33,6 +34,7 @@
 
     data() {
       return {
+        hover: false,
         translate: 0,
         scale: 1,
         active: false,
