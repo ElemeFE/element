@@ -69,7 +69,8 @@ export default {
   methods: {
     createPopper() {
       if (this.$isServer) return;
-      if (!/^(top|bottom|left|right)(-start|-end)?$/g.test(this.currentPlacement || this.placement)) {
+      this.currentPlacement = this.currentPlacement || this.placement;
+      if (!/^(top|bottom|left|right)(-start|-end)?$/g.test(this.currentPlacement)) {
         return;
       }
 
