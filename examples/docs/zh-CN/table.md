@@ -1363,7 +1363,7 @@
 ### 展开行
 
 当行内容过多并且不想显示横向滚动条时，可以使用 Table 展开行功能。
-:::demo 通过设置 type="expand" 和 `Scoped slot` 可以开启展开行功能，`el-table-column` 的模板会被渲染成为展开行的内容，展开行可访问的属性与使用 `Scoped slot` 的时候相同。
+:::demo 通过设置 type="expand" 和 `Scoped slot` 可以开启展开行功能，`el-table-column` 的模板会被渲染成为展开行的内容，展开行可访问的属性与使用自定义列模板时的 `Scoped slot` 相同。
 ```html
 <template>
   <el-table
