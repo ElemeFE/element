@@ -126,10 +126,6 @@
     .el-select .el-input {
       width: 110px;
     }
-    .text {
-      font-size: 14px;
-      color: #8492a6;
-    }
     .el-input {
       width: 180px;
     }
@@ -145,16 +141,21 @@
         margin: 0 10px 10px 0;
       }
     }
-    .tac {
+    .demo-autocomplete {
       text-align: center;
+
+      .sub-title {
+        margin-bottom: 10px;
+        font-size: 14px;
+        color: #8492a6;
+      }
+
+      .el-col:not(:last-child) {
+        border-right: 1px solid rgba(224,230,237,0.50);
+      }
 
       .el-autocomplete {
         text-align: left;
-      }
-    }
-    .el-row.border-grid {
-      .el-col:not(:last-child) {
-        border-right: 1px solid rgba(224,230,237,0.50);
       }
     }
     .my-autocomplete {
@@ -368,9 +369,9 @@ export default {
 
 ::: demo autocomplete 是一个可带输入建议的输入框组件，`fetch-suggestions` 是一个返回输入建议的方法属性，如 querySearch(queryString, cb)，在该方法中你可以在你的输入建议数据准备好时通过 cb(data) 返回到 autocomplete 组件中。
 ```html
-<el-row class="border-grid">
-  <el-col :span="12" class="tac">
-    <div class="text">激活即列出输入建议</div>
+<el-row class="demo-autocomplete">
+  <el-col :span="12">
+    <div class="sub-title">激活即列出输入建议</div>
     <el-autocomplete
       class="inline-input"
       v-model="state1"
@@ -379,8 +380,8 @@ export default {
       @select="handleSelect"
     ></el-autocomplete>
   </el-col>
-  <el-col :span="12" class="tac">
-    <div class="text">输入后匹配输入建议</div>
+  <el-col :span="12">
+    <div class="sub-title">输入后匹配输入建议</div>
     <el-autocomplete
       class="inline-input"
       v-model="state2"

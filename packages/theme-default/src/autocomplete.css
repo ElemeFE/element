@@ -5,6 +5,7 @@
 @component-namespace el {
   @b autocomplete {
     position: relative;
+    display: inline-block;
 
     @e suggestions {
       position: absolute;
