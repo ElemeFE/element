@@ -159,7 +159,7 @@
       handleScroll(type) {
         const ajust = {};
 
-        ajust[`${type}s`] = Math.min(Math.floor((this[`${type}Elm`].scrollTop - 80) / 32 + 3), 59);
+        ajust[`${type}s`] = Math.min(Math.floor((this[`${type}El`].scrollTop - 80) / 32 + 3), 59);
         this.$emit('change', ajust);
       },
 
