@@ -202,7 +202,6 @@ export default {
       default: 'left'
     },
     value: {},
-    haveTrigger: {},
     pickerOptions: {}
   },
 

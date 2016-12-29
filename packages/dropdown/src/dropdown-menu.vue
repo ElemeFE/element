@@ -26,9 +26,9 @@
       this.referenceElm = this.$parent.$el;
     },
 
-    computed: {
-      placement() {
-        return `bottom-${this.$parent.menuAlign}`;
+    watch: {
+      '$parent.menuAlign'(val) {
+        this.currentPlacement = `bottom-${val}`;
       }
     }
   };
