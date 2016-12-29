@@ -117,23 +117,23 @@
         text-align: left;
       }
     }
-    .my-autocomplete {
-      li {
-        line-height: normal;
-        padding: 7px *;
+  }
+  .el-autocomplete__suggestions.my-autocomplete {
+    li {
+      line-height: normal;
+      padding: 7px *;
 
-        .name {
-          text-overflow: ellipsis;
-          overflow: hidden;
-        }
-        .addr {
-          font-size: 12px;
-          color: #b4b4b4;
-        }
+      .name {
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      .addr {
+        font-size: 12px;
+        color: #b4b4b4;
+      }
 
-        .highlighted .addr {
-          color: #ddd;
-        }
+      .highlighted .addr {
+        color: #ddd;
       }
     }
   }
@@ -326,7 +326,7 @@ export default {
 ```
 :::
 
-### Auto complete
+### Autocomplete
 
 You can get some recommended tips based on the current input.
 
@@ -406,7 +406,7 @@ Customize how suggestions are displayed.
 :::demo
 ```html
 <el-autocomplete
-  class="my-autocomplete"
+  popper-class="my-autocomplete"
   v-model="state3"
   :fetch-suggestions="querySearch"
   custom-item="my-item-en"
@@ -587,6 +587,7 @@ Attribute | Description | Type | Options | Default
 |value | binding value | string | — | — |
 |custom-item | component name of your customized suggestion list item | string | — | — |
 |fetch-suggestions | a method to fetch input suggestions. When suggestions are ready, invoke `callback(data:[])` to return them to Autocomplete | Function(queryString, callback) | — | — |
+| popper-class | custom class name for autocomplete's dropdown | string | — | — |
 
 ### Autocomplete Events
 

@@ -19,47 +19,34 @@
         <slot name="append"></slot>
       </template> 
     </el-input>
-    <transition name="el-zoom-in-top">
-      <ul
-        v-if="suggestionVisible"
-        class="el-autocomplete__suggestions"
-        :class="{ 'is-loading': loading }"
-        ref="suggestions"
-      >
-        <li v-if="loading"><i class="el-icon-loading"></i></li>
-        <template v-for="(item, index) in suggestions" v-else>
-          <li
-            v-if="!customItem"
-            :class="{'highlighted': highlightedIndex === index}"
-            @click="select(index)"
-          >
-            {{item.value}}
-          </li>
-          <component
-            v-else
-            :class="{'highlighted': highlightedIndex === index}"
-            @click="select(index)"
-            :is="customItem"
-            :item="item"
-            :index="index">
-          </component>
-        </template>
-      </ul>
-    </transition>
+    <el-autocomplete-suggestions
+      :class="[popperClass ? popperClass : '']"
+      ref="suggestions"
+      :suggestions="suggestions"
+    >
+    </el-autocomplete-suggestions>
   </div>
 </template>
 <script>
   import ElInput from 'element-ui/packages/input';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
+  import ElAutocompleteSuggestions from './autocomplete-suggestions.vue';
+  import Emitter from 'element-ui/src/mixins/emitter';
 
   export default {
     name: 'ElAutocomplete',
 
+    mixins: [Emitter],
+
     components: {
-      ElInput
+      ElInput,
+      ElAutocompleteSuggestions
     },
+
     directives: { Clickoutside },
+
     props: {
+      popperClass: String,
       placeholder: String,
       disabled: Boolean,
       name: String,
@@ -80,8 +67,10 @@
         highlightedIndex: -1
       };
     },
-    mounted() {
-      this.$parent.popperElm = this.popperElm = this.$el;
+    watch: {
+      suggestionVisible(val) {
+        this.broadcast('ElAutocompleteSuggestions', 'visible', [val, this.$el.offsetWidth]);
+      }
     },
     methods: {
       handleChange(value) {
@@ -107,7 +96,6 @@
       },
       hideSuggestions() {
         this.suggestionVisible = false;
-        this.suggestions = [];
         this.loading = false;
       },
       showSuggestions(value) {
@@ -129,8 +117,8 @@
         } else if (index >= this.suggestions.length) {
           index = this.suggestions.length - 1;
         }
+        var elSuggestions = this.$refs.suggestions.$el;
 
-        var elSuggestions = this.$refs.suggestions;
         var elSelect = elSuggestions.children[index];
         var scrollTop = elSuggestions.scrollTop;
         var offsetTop = elSelect.offsetTop;
@@ -144,6 +132,9 @@
 
         this.highlightedIndex = index;
       }
+    },
+    beforeDestroy() {
+      this.$refs.suggestions.$destroy();
     }
   };
 </script>

@@ -158,23 +158,23 @@
         text-align: left;
       }
     }
-    .my-autocomplete {
-      li {
-        line-height: normal;
-        padding: 7px *;
+  }
+  .el-autocomplete__suggestions.my-autocomplete {
+    li {
+      line-height: normal;
+      padding: 7px *;
 
-        .name {
-          text-overflow: ellipsis;
-          overflow: hidden;
-        }
-        .addr {
-          font-size: 12px;
-          color: #b4b4b4;
-        }
+      .name {
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      .addr {
+        font-size: 12px;
+        color: #b4b4b4;
+      }
 
-        .highlighted .addr {
-          color: #ddd;
-        }
+      .highlighted .addr {
+        color: #ddd;
       }
     }
   }
@@ -483,7 +483,7 @@ export default {
 ::: demo
 ```html
 <el-autocomplete
-  class="my-autocomplete"
+  popper-class="my-autocomplete"
   v-model="state3"
   :fetch-suggestions="querySearch"
   custom-item="my-item-zh"
@@ -748,6 +748,7 @@ export default {
 | value         | 必填值输入绑定值   | string  | — | — |
 | custom-item  | 通过该参数指定自定义的输入建议列表项的组件名 | string  | — | — |
 | fetch-suggestions | 返回输入建议的方法，仅当你的输入建议数据 resolve 时，通过调用 callback(data:[]) 来返回它  | Function(queryString, callback)  | — | — |
+| popper-class | Autocomplete 下拉列表的类名 | string | — | — |
 
 ### Autocomplete Events
 | 事件名称 | 说明 | 回调参数 |

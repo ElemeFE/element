@@ -9,6 +9,7 @@ describe('Autocomplete', () => {
     vm = createVue({
       template: `
         <el-autocomplete
+          ref="autocomplete"
           v-model="state"
           :fetch-suggestions="querySearch"
           placeholder="请输入内容autocomplete1"
@@ -51,12 +52,12 @@ describe('Autocomplete', () => {
     expect(inputElm.getAttribute('placeholder')).to.be.equal('请输入内容autocomplete1');
 
     setTimeout(_ => {
-      let suggestionsList = elm.querySelector('.el-autocomplete__suggestions');
-      expect(suggestionsList).to.exist;
+      let suggestionsList = vm.$refs.autocomplete.$refs.suggestions.$el;
+      expect(suggestionsList.style.display).to.not.equal('none');
       expect(suggestionsList.children.length).to.be.equal(4);
       document.body.click();
       setTimeout(_ => {
-        expect(elm.querySelector('.el-autocomplete__suggestions')).to.not.exist;
+        expect(document.querySelector('.el-autocomplete__suggestions').style.display).to.be.equal('none');
         done();
       }, 500);
     }, 500);
@@ -66,6 +67,7 @@ describe('Autocomplete', () => {
       template: `
         <el-autocomplete
           v-model="state"
+          ref="autocomplete"
           :fetch-suggestions="querySearch"
           placeholder="请输入内容autocomplete2"
           @select="handleSelect"
@@ -110,7 +112,7 @@ describe('Autocomplete', () => {
     inputElm.focus();
 
     setTimeout(_ => {
-      let suggestionsList = elm.querySelector('.el-autocomplete__suggestions');
+      let suggestionsList = vm.$refs.autocomplete.$refs.suggestions.$el;
       suggestionsList.children[1].click();
       setTimeout(_ => {
         expect(inputElm.value).to.be.equal('Hot honey 首尔炸鸡（仙霞路）');
@@ -191,7 +193,7 @@ describe('Autocomplete', () => {
     setTimeout(_ => {
       vm.$refs.autocomplete.highlight(8);
       vm.$nextTick(_ => {
-        let suggestionsList = elm.querySelector('.el-autocomplete__suggestions');
+        let suggestionsList = vm.$refs.autocomplete.$refs.suggestions.$el;
         let highlightedItem = suggestionsList.children[8];
         expect(highlightedItem.className).to.be.equal('highlighted');
         expect(suggestionsList.scrollTop === highlightedItem.scrollHeight).to.be.true;
@@ -261,7 +263,7 @@ describe('Autocomplete', () => {
     setTimeout(_ => {
       vm.$refs.autocomplete.highlight(15);
       vm.$nextTick(_ => {
-        let suggestionsList = elm.querySelector('.el-autocomplete__suggestions');
+        let suggestionsList = vm.$refs.autocomplete.$refs.suggestions.$el;
         let highlightedItem = suggestionsList.children[11];
         expect(highlightedItem.className).to.be.equal('highlighted');
 
