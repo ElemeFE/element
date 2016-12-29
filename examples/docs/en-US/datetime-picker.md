@@ -193,7 +193,7 @@ Select date and time in one picker.
             }
           }]
         },
-        value3: '',
+        value3: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
         value4: ''
       };
     }
