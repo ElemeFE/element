@@ -27,8 +27,11 @@
     },
 
     watch: {
-      '$parent.menuAlign'(val) {
-        this.currentPlacement = `bottom-${val}`;
+      '$parent.menuAlign': {
+        immediate: true,
+        handler(val) {
+          this.currentPlacement = `bottom-${val}`;
+        }
       }
     }
   };
