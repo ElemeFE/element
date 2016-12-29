@@ -139,7 +139,7 @@
           this.validateState = !errors ? 'success' : 'error';
           this.validateMessage = errors ? errors[0].message : '';
 
-          callback(errors);
+          callback(this.validateMessage);
         });
       },
       resetField() {
