@@ -1,5 +1,31 @@
 ## 更新日志
 
+### 1.1.0 Helium
+*2016-12-29*
+
+新特性：
+- 新增 Carousel、Collapse 组件
+- 支持 SSR
+- 组件内的滚动条样式优化
+- Table 支持通过 [Scoped Slots](http://vuejs.org/v2/guide/components.html#Scoped-Slots) 传入模板；原来的 `inline-template` 仍然兼容，但是不再推荐使用，未来可能会被移除
+- Table 支持展开行功能(Expandable rows)
+- DatePicker 支持指定周起始日(first day of week)
+- TimeSelect 支持设置 `maxTime`
+- Autocomplete 新增 `popper-class`属性
+- Tab-Pane 新增 name 为 label 的具名 `slot`，用于实现自定义标签内容
+
+修复：
+- DatePicker 的 `change` 事件错误地触发多次的问题，#2070
+- Tabs 组件内 tab-pane 初始化时宽度抖动的问题，#1883
+
+非兼容性更新：
+- 最低兼容 Vue 2.1.6
+- Form validateField() 方法回调的参数更新
+- Alert 取消了 render-content 属性，现在自定义模板需要通过默认 slot 传入
+- Input 和 Select 盒模型从 `block` 修改为 `inline-block`
+- Tabs 盒模型从 `inline-block` 修改为 `block`，Tab-Pane 移除 `label-content` 属性
+- Autocomplete 下拉列表现在直接插入到 `<body>` 标签下，而不是 `<el-autocomplete>` 下
+
 ### 1.0.9
 *2016-12-27*
 

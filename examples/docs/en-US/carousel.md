@@ -171,14 +171,14 @@ When a page is wide enough but has limited height, you can activate card mode fo
 | arrow | when arrows are shown | string | always/hover/never | hover |
 | type | type of the Carousel | string | card | — |
 
-### Events
+### Carousel Events
 | Event Name | Description | Parameters |
 |---------|---------|---------|
 | change | triggers when the active slide switches | index of the new active slide, index of the old active slide |
 
-### Methods
+### Carousel Methods
 | Method | Description | Parameters |
-|---------- |-------------- | — |
+|---------- |-------------- | -- |
 | setActiveItem | manually switch slide | index of the slide to be switched to, starting from 0; or the `name` of corresponding `el-carousel-item` |
 | prev | switch to the previous slide | — |
 | next | switch to the next slide | — |
