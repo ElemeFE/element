@@ -318,6 +318,9 @@ export default {
   },
 
   created() {
+    this.cachePicker = {};
+    this.cacheChange = {};
+
     // vue-popper
     this.options = {
       boundariesPadding: 0,
@@ -343,17 +346,17 @@ export default {
       }
     },
 
-    dateIsUpdated(date) {
+    dateIsUpdated(date, cache) {
       let updated = true;
 
       if (Array.isArray(date)) {
-        if (equalDate(this.cacheDateMin, date[0]) &&
-          equalDate(this.cacheDateMax, date[1])) updated = false;
-        this.cacheDateMin = date[0];
-        this.cacheDateMax = date[1];
+        if (equalDate(cache.cacheDateMin, date[0]) &&
+          equalDate(cache.cacheDateMax, date[1])) updated = false;
+        cache.cacheDateMin = date[0];
+        cache.cacheDateMax = date[1];
       } else {
-        if (equalDate(this.cacheDate, date)) updated = false;
-        this.cacheDate = date;
+        if (equalDate(cache.cacheDate, date)) updated = false;
+        cache.cacheDate = date;
       }
 
       return updated;
@@ -443,9 +446,9 @@ export default {
 
         this.picker.$on('dodestroy', this.doDestroy);
         this.picker.$on('pick', (date, visible = false) => {
-          if (this.dateIsUpdated(date)) this.$emit('input', date);
+          if (this.dateIsUpdated(date, this.cachePicker)) this.$emit('input', date);
 
-          this.$nextTick(() => this.$emit('change', this.visualValue));
+          this.$nextTick(() => this.dateIsUpdated(date, this.cacheChange) && this.$emit('change', this.visualValue));
           this.pickerVisible = this.picker.visible = visible;
           this.picker.resetView && this.picker.resetView();
         });
