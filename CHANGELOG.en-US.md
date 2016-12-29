@@ -1,5 +1,32 @@
 ## Changelog
 
+### 1.1.0 Helium
+
+*2016-12-29*
+
+New features:
+- Two brand new components: Carousel and Collapse
+- SSR supported
+- Scrollbars' style inside components is upgraded
+- Table now supports custom templates via [scoped slots](http://vuejs.org/v2/guide/components.html#Scoped-Slots); the good old `inline-template` is still compatible, but it's no longer recommended and is likely to be removed in the future
+- Table now supports expandable rows
+- DatePicker now supports specifying the first day of week
+- TimeSelect now supports `maxTime`
+- Autocomplete now supports `popper-class`
+- To customize template of Tab-Pane, now you can use the `slot` named `label`
+
+Fixes:
+- `change` event of DatePicker incorrectly triggering multiple times, #2070
+- Width shaking of tab-pane while initializing, #1883
+
+Breaking changes:
+- Only compatible with Vue 2.1.6 and beyond
+- Parameters of Form validateField() methods are updated
+- Alert's render-content attribute is removed, and now you can pass your custom template via default slot
+- The box models of Input and Select are updated from `block` to `inline-block`
+- The box model of Tabs is updated from `inline-block` to `block`, and Tab-Pane's `label-content` attribute is removed
+- The dropdown of Autocomplete now inserts directly to `<body>`, not `<el-autocomplete>` any more
+
 ### 1.0.9
 
 *2016-12-27*
