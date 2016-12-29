@@ -209,7 +209,7 @@
 | split-button  | 下拉触发元素呈现为按钮组    | boolean  |    —  |  false |
 | menu-align    | 菜单水平对齐方向     | string          | start, end  | end |
 | trigger       | 触发下拉的行为     | string          | hover, click  | hover |
-| hide-on-click | 是否在点击菜单项后隐藏菜单     | boolean          | -  | true |
+| hide-on-click | 是否在点击菜单项后隐藏菜单     | boolean          | — | true |
 
 ### Dropdown Events
 | 事件名称      | 说明    | 回调参数      |

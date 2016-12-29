@@ -251,10 +251,10 @@ Picking a date range is supported.
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | readonly | whether DatePicker is read only | boolean | — | false |
-| disabled | whether DatePicker is disabled | boolean | - | false |
+| disabled | whether DatePicker is disabled | boolean | — | false |
 |size | size of Input | string | large/small/mini | — |
-| editable | whether the input is editable | boolean | - | true |
-| clearable | Whether to show clear button | boolean | - | true |
+| editable | whether the input is editable | boolean | — | true |
+| clearable | Whether to show clear button | boolean | — | true |
 | placeholder | placeholder | string | — | — |
 | type | type of the picker | string | year/month/date/datetime/ week/datetimerange/daterange | date |
 | format | format of the picker | string | year `yyyy` month `MM` day `dd`, hour `HH`, minute `mm`, second `ss` | yyyy-MM-dd |

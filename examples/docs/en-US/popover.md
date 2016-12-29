@@ -228,5 +228,5 @@ Of course, you can nest other operations. It's more light-weight than using a di
 ### Events
 | Event Name | Description | 回调参数 |
 |---------|--------|---------|
-| show | triggers when popover shows | - |
-| hide | triggers when popover hides | - |
+| show | triggers when popover shows | — |
+| hide | triggers when popover hides | — |

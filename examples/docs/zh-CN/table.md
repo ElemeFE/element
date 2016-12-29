@@ -1465,17 +1465,17 @@
 | stripe | 是否为斑马纹 table | boolean | — | false |
 | border | 是否带有纵向边框 | boolean | — | false |
 | fit | 列的宽度是否自撑开 | boolean | — | true |
-| show-header | 是否显示表头 | boolean | - | true |
+| show-header | 是否显示表头 | boolean | — | true |
 | highlight-current-row | 是否要高亮当前行 | boolean | — | false |
-| current-row-key | 当前行的 key，只写属性 | String,Number | - | - |
+| current-row-key | 当前行的 key，只写属性 | String,Number | — | — |
 | row-class-name | 行的 className 的回调方法，也可以使用字符串为所有行设置一个固定的 className。 | Function(row, index)/String | — | — |
 | row-style | 行的 style 的回调方法，也可以使用一个固定的 Object 为所有行设置一样的 Style。 | Function(row, index)/Object | — | — |
 | row-key | 行数据的 Key，用来优化 Table 的渲染；在使用 reserve-selection 功能的情况下，该属性是必填的 | Function(row)/String | — | — |
-| context | 设置上下文环境，例如设置当前上下文就是 `_self`，父级就是 `$parent`，根组件 `$root`。优先读取 column 的 context 属性。 | Object | - | Table 所处上下文 |
-| empty-text | 空数据时显示的文本内容，也可以通过 `slot="empty"` 设置 | String | - | 暂无数据 |
-| default-expand-all | 是否默认展开所有行，当 Table 中存在 type="expand" 的 Column 的时候有效 | Boolean | - | false |
-| expand-row-keys | 可以通过该属性设置 Table 目前的展开行，需要设置 row-key 属性才能使用，该属性为展开行的 keys 数组。| Array | - | |
-| virtual-scrollbar | 启用虚拟滚动条 | Boolean | - | false |
+| context | 设置上下文环境，例如设置当前上下文就是 `_self`，父级就是 `$parent`，根组件 `$root`。优先读取 column 的 context 属性。 | Object | — | Table 所处上下文 |
+| empty-text | 空数据时显示的文本内容，也可以通过 `slot="empty"` 设置 | String | — | 暂无数据 |
+| default-expand-all | 是否默认展开所有行，当 Table 中存在 type="expand" 的 Column 的时候有效 | Boolean | — | false |
+| expand-row-keys | 可以通过该属性设置 Table 目前的展开行，需要设置 row-key 属性才能使用，该属性为展开行的 keys 数组。| Array | — | |
+| virtual-scrollbar | 启用虚拟滚动条 | Boolean | — | false |
 
 
 ### Table Events
@@ -1506,7 +1506,7 @@
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | type | 对应列的类型。如果设置了 `selection` 则显示多选框；如果设置了 `index` 则显示该行的索引（从 1 开始计算）；如果设置了 expand 则显示为一个可展开的按钮 | string | selection/index/expand | — |
-| column-key | column 的 key，如果需要使用 filter-change 事件，则需要此属性标识是哪个 column 的筛选条件 | string | - | - |
+| column-key | column 的 key，如果需要使用 filter-change 事件，则需要此属性标识是哪个 column 的筛选条件 | string | — | — |
 | label | 显示的标题 | string | — | — |
 | prop | 对应列内容的字段名，也可以使用 property 属性 | string | — | — |
 | width | 对应列的宽度 | string | — | — |

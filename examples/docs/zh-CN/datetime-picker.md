@@ -229,9 +229,9 @@
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | readonly | 完全只读 | boolean | — | false |
-| disabled | 禁用 | boolean | - | false |
-| editable | 文本框可输入 | boolean | - | true |
-| clearable | 是否显示清除按钮 | boolean | - | true |
+| disabled | 禁用 | boolean | — | false |
+| editable | 文本框可输入 | boolean | — | true |
+| clearable | 是否显示清除按钮 | boolean | — | true |
 | size          | 输入框尺寸     | string          | large, small, mini  | — |
 | placeholder | 占位内容 | string | — | — |
 | type | 显示类型 | string | year/month/date/week/ datetime/datetimerange/daterange | date |
@@ -243,8 +243,8 @@
 ### Picker Options
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| shortcuts | 设置快捷选项，需要传入 { text, onClick } 对象用法参考 demo 或下表 | Object[] | - | - |
-| disabledDate | 设置禁用状态，参数为当前日期，要求返回 Boolean | Function | - | - |
+| shortcuts | 设置快捷选项，需要传入 { text, onClick } 对象用法参考 demo 或下表 | Object[] | — | — |
+| disabledDate | 设置禁用状态，参数为当前日期，要求返回 Boolean | Function | — | — |
 
 ### Shortcuts
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
