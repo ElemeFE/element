@@ -9,7 +9,7 @@ const newArray = function(start, end) {
 };
 
 export const equalDate = function(dateA, dateB) {
-  return new Date(dateA).getTime() === new Date(dateB).getTime();
+  return dateA === dateB || new Date(dateA).getTime() === new Date(dateB).getTime();
 };
 
 export const toDate = function(date) {
