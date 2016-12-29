@@ -178,7 +178,7 @@ When a page is wide enough but has limited height, you can activate card mode fo
 
 ### Methods
 | Method | Description | Parameters |
-|---------- |-------------- | - |
+|---------- |-------------- | — |
 | setActiveItem | manually switch slide | index of the slide to be switched to, starting from 0; or the `name` of corresponding `el-carousel-item` |
 | prev | switch to the previous slide | — |
 | next | switch to the next slide | — |

@@ -135,4 +135,4 @@ Use a red dot to mark content that needs to be noticed.
 | value          | display value      | string, number          |          —             |    —     |
 | max          |  maximum value, shows '{max}+' when exceeded. Only works if `value` is a `Number`   | number  |         —              |     —    |
 | is-dot       | if a little dot is displayed   | boolean  |  —  |  false |
-| hidden | hidden badge | boolean | - | false |
+| hidden | hidden badge | boolean | — | false |

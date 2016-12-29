@@ -1443,17 +1443,17 @@ When the row content is too long and you do not want to display the horizontal s
 | stripe | whether table is striped | boolean | — | false |
 | border | whether table has vertical border | boolean | — | false |
 | fit | whether width of column automatically fits its container | boolean | — | true |
-| show-header | whether table header is visible | boolean | - | true |
+| show-header | whether table header is visible | boolean | — | true |
 | highlight-current-row | whether current row is highlighted | boolean | — | false |
-| current-row-key | key of current row, a set only prop | string,number | - | - |
+| current-row-key | key of current row, a set only prop | string,number | — | — |
 | row-class-name | function that returns custom class names for a row, or a string assigning class names for every row | Function(row, index)/String | — | — |
 | row-style | function that returns custom style for a row,  or a string assigning custom style for every row | Function(row, index)/Object | — | — |
 | row-key | key of row data, used for optimizing rendering. Required if `reserve-selection` is on | Function(row)/String | — | — |
-| context | context of Table, e.g. `_self` refers to the current context, `$parent` parent context, `$root` root context, can be overridden by `context` in `el-table-column` | Object | - | current context where Table lies |
-| empty-text | Displayed text when data is empty. You can customize this area with `slot="empty"` | String | - | No Data |
-| default-expand-all | whether expand all rows by default, only works when the table has a column type="expand" | Boolean | - | false |
-| expand-row-keys | set expanded rows by this prop, prop's value is the keys of expand rows, you should set row-key before using this prop | Array | - | |
-| virtual-scrollbar | Enable virtual scrollbar | Boolean | - | false |
+| context | context of Table, e.g. `_self` refers to the current context, `$parent` parent context, `$root` root context, can be overridden by `context` in `el-table-column` | Object | — | current context where Table lies |
+| empty-text | Displayed text when data is empty. You can customize this area with `slot="empty"` | String | — | No Data |
+| default-expand-all | whether expand all rows by default, only works when the table has a column type="expand" | Boolean | — | false |
+| expand-row-keys | set expanded rows by this prop, prop's value is the keys of expand rows, you should set row-key before using this prop | Array | — | |
+| virtual-scrollbar | Enable virtual scrollbar | Boolean | — | false |
 
 ### Table Events
 | Event Name | Description | Parameters |
@@ -1484,7 +1484,7 @@ When the row content is too long and you do not want to display the horizontal s
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | type | type of the column. If set to `selection`, the column will display checkbox. If set to `index`, the column will display index of the row (staring from 1). If set to `expand`, the column will display expand icon.  | string | selection/index/expand | — |
 | label | column label | string | — | — |
-| column-key | column's key. If you need to use the filter-change event, you need this attribute to identify which column is being filtered | string | string | - | - |
+| column-key | column's key. If you need to use the filter-change event, you need this attribute to identify which column is being filtered | string | string | — | — |
 | prop |  field name. You can also use its alias: `property` | string | — | — |
 | width | column width | string | — | — |
 | min-width | column minimum width. Columns with `width` has a fixed width, while columns with `min-width` has a width that is distributed in proportion | string | — | — |

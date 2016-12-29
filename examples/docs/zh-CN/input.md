@@ -725,11 +725,11 @@ export default {
 | rows          | 输入框行数，只对 `type="textarea"` 有效  |  number | — |  2   |
 | autosize      | 自适应内容高度，只对 `type="textarea"` 有效，可传入对象，如，{ minRows: 2, maxRows: 6 }  |  boolean/object | — |  false   |
 | auto-complete | 原生属性，自动补全 | string | on, off | off |
-| name | 原生属性 | string | - | -|
-| max | 原生属性，设置最大值 | * | - | - |
-| min | 原生属性，设置最小值 | * | - | - |
+| name | 原生属性 | string | — | — |
+| max | 原生属性，设置最大值 | * | — | — |
+| min | 原生属性，设置最小值 | * | — | — |
 | autofocus | 原生属性，自动获取焦点 | boolean | true, false | false |
-| form | 原生属性 | string | - | - |
+| form | 原生属性 | string | — | — |
 
 ### Input Events
 | 事件名称 | 说明 | 回调参数 |

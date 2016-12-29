@@ -179,6 +179,6 @@ You can use named slot to customize the tab label content.
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------- |---------- |-------------  |-------- |
 | label     | title of the tab   | string   | — |    —     |
-| disabled | whether Tab is disabled | boolean | - | false |
+| disabled | whether Tab is disabled | boolean | — | false |
 | name      | identifier corresponding to the activeName of Tabs, representing the alias of the tab-pane | string | — | ordinal number of the tab-pane in the sequence, i.e. the first tab-pane is '1' |
 | closable  | whether Tab is closable | boolean   | — |  false  |

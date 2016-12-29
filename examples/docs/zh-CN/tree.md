@@ -234,17 +234,17 @@
 | node-key | 每个树节点用来作为唯一标识的属性，整颗树应该是唯一的 | String | — | — |
 | props | 配置选项，具体看下表 | object | — | — |
 | load | 加载子树数据的方法 | function(node, resolve) | — | — |
-| render-content | 树节点的内容区的渲染 Function | Function(h, { node } | - | - |
-| highlight-current | 是否高亮当前选中节点，默认值是 false。| boolean | - | false |
-| current-node-key | 当前选中节点的 key，只写属性 | string, number | - | - |
-| default-expand-all | 是否默认展开所有节点 | boolean | - | false |
-| expand-on-click-node | 是否在点击节点的时候展开或者收缩节点，如果为 false，则只有点箭头图标的时候才会展开或者收缩节点。 | boolean | - | false |
+| render-content | 树节点的内容区的渲染 Function | Function(h, { node } | — | — |
+| highlight-current | 是否高亮当前选中节点，默认值是 false。| boolean | — | false |
+| current-node-key | 当前选中节点的 key，只写属性 | string, number | — | — |
+| default-expand-all | 是否默认展开所有节点 | boolean | — | false |
+| expand-on-click-node | 是否在点击节点的时候展开或者收缩节点，如果为 false，则只有点箭头图标的时候才会展开或者收缩节点。 | boolean | — | false |
 | auto-expand-parent | 展开子节点的时候是否自动展开父节点 | boolean | — | true |
 | default-expanded-keys | 默认展开的节点的 key 的数组 | array | — | — |
 | show-checkbox | 节点是否可被选择 | boolean | — | false |
 | check-strictly | 在显示复选框的情况下，是否严格的遵循父子不互相关联的做法，默认为 false | boolean | — | false |
 | default-checked-keys | 默认勾选的节点的 key 的数组 | array | — | — |
-| filter-node-method | 对树节点进行筛选时执行的方法，返回 true 表示这个节点可以显示，返回 false 则表示这个节点会被隐藏 | Function(value, data, node) | - | - |
+| filter-node-method | 对树节点进行筛选时执行的方法，返回 true 表示这个节点可以显示，返回 false 则表示这个节点会被隐藏 | Function(value, data, node) | — | — |
 
 ### props
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
