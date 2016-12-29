@@ -1,5 +1,11 @@
 ## Changelog
 
+### 1.1.1
+
+*2016-12-29*
+
+- Fixed compatibility issue with latest Vue due to compilation
+
 ### 1.1.0 Helium
 
 *2016-12-29*
