@@ -22,9 +22,6 @@
       },
       handleClick(tab, event) {
         console.log(tab, event);
-      },
-      renderTab(h, tab) {
-        return <span><i class="el-icon-date"></i> {tab.label}</span>;
       }
     }
   }
@@ -148,25 +145,19 @@ Border card tabs.
 
 ### Custom Tab
 
-You can use `label-content` property to customize the tab
+You can use named slot to customize the tab label content.
 
-:::demo `label-content` is a render function,which return the vnode of the tab.
+:::demo
 ```html
 <el-tabs type="border-card">
-  <el-tab-pane label="Route" :label-content="renderTab">Route</el-tab-pane>
+  <el-tab-pane>
+    <span slot="label"><i class="el-icon-date"></i> Route</span>
+    Route
+  </el-tab-pane>
   <el-tab-pane label="Config">Config</el-tab-pane>
   <el-tab-pane label="Role">Role</el-tab-pane>
   <el-tab-pane label="Task">Task</el-tab-pane>
 </el-tabs>
-<script>
-  export default {
-    methods: {
-      renderTab(h, tab) {
-        return <span><i class="el-icon-date"></i> {tab.label}</span>;
-      }
-    }
-  }
-</script>
 ```
 :::
 
@@ -188,7 +179,6 @@ You can use `label-content` property to customize the tab
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------- |---------- |-------------  |-------- |
 | label     | title of the tab   | string   | — |    —     |
-| label-content | render function for tab title | Function(h, tab:vueInstance) | - | - |
 | disabled | whether Tab is disabled | boolean | - | false |
 | name      | identifier corresponding to the activeName of Tabs, representing the alias of the tab-pane | string | — | ordinal number of the tab-pane in the sequence, i.e. the first tab-pane is '1' |
 | closable  | whether Tab is closable | boolean   | — |  false  |

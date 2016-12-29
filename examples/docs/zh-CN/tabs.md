@@ -22,9 +22,6 @@
       },
       handleClick(tab, event) {
         console.log(tab, event);
-      },
-      renderTab(h, tab) {
-        return <span><i class="el-icon-date"></i> {tab.label}</span>;
       }
     }
   }
@@ -145,25 +142,19 @@
 
 ### 自定义标签页
 
-可以通过 `label-content` 属性来实现自定义标签页的内容
+可以通过具名 `slot` 来实现自定义标签页的内容
 
-:::demo `label-content` 是一个 render function，在这个方法里返回的 vnode 会被渲染到标签页中。
+:::demo
 ```html
 <el-tabs type="border-card">
-  <el-tab-pane label="我的行程" :label-content="renderTab">我的行程</el-tab-pane>
+  <el-tab-pane>
+    <span slot="label"><i class="el-icon-date"></i> 我的行程</span>
+    我的行程
+  </el-tab-pane>
   <el-tab-pane label="消息中心">消息中心</el-tab-pane>
   <el-tab-pane label="角色管理">角色管理</el-tab-pane>
   <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
 </el-tabs>
-<script>
-  export default {
-    methods: {
-      renderTab(h, tab) {
-        return <span><i class="el-icon-date"></i> {tab.label}</span>;
-      }
-    }
-  }
-</script>
 ```
 :::
 
@@ -200,7 +191,6 @@
 | 参数       | 说明     | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | label     | 选项卡标题   | string   | — |    —     |
-| label-content | 选项卡的标题的渲染 Function | Function(h, tab:vueInstance) | - | - |
 | disabled | 是否禁用 | boolean | - | false |
 | name      | 与选项卡 activeName 对应的标识符，表示选项卡别名 | string | — | 该选项卡在选项卡列表中的顺序值，如第一个选项卡则为'1' |
 | closable  | 标签是否可关闭   | boolean   | — |  false  |

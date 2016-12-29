@@ -3,8 +3,6 @@
 
 @component-namespace el {
   @b tabs {
-    display: inline-block;
-
     @e header {
       border-bottom: 1px solid #d3dce6;
       padding: 0;
