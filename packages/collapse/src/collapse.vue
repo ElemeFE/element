@@ -33,14 +33,19 @@
 
     methods: {
       setActiveNames(activeNames) {
+        activeNames = [].concat(activeNames);
         let value = this.accordion ? activeNames[0] : activeNames;
-        this.activeNames = [].concat(value);
+        this.activeNames = activeNames;
         this.$emit('input', value);
         this.$emit('change', value);
       },
       handleItemClick(item) {
         if (this.accordion) {
-          this.setActiveNames(this.activeNames[0] === item.name ? '' : item.name);
+          this.setActiveNames(
+            this.activeNames[0] &&
+            this.activeNames[0] === item.name
+            ? '' : item.name
+          );
         } else {
           let activeNames = this.activeNames.slice(0);
           let index = activeNames.indexOf(item.name);

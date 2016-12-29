@@ -4,8 +4,8 @@
       <i class="el-collapse-item__header__arrow el-icon-arrow-right"></i>
       <slot name="title" :title="title">{{title}}</slot>
     </div>
-    <div class="el-collapse-item__wrap" ref="content" :style="contentStyle">
-      <div class="el-collapse-item__content">
+    <div class="el-collapse-item__wrap" ref="contentWrap">
+      <div class="el-collapse-item__content" ref="content">
         <slot></slot>
       </div>
     </div>
@@ -40,7 +40,10 @@
 
     data() {
       return {
-        contentStyle: {},
+        contentWrapStyle: {
+          height: 'auto',
+          display: 'block'
+        },
         contentHeight: 0
       };
     },
@@ -69,38 +72,42 @@
 
     methods: {
       open() {
-        const contentElm = this.$refs.content;
-        const contentStyle = this.contentStyle;
+        const contentWrapElm = this.$refs.contentWrap;
+        const contentHeight = this.contentHeight;
 
-        contentStyle.display = 'block';
-        this.$nextTick(_ => {
-          contentStyle.height = this.contentHeight + 'px';
-          once(contentElm, getTransitionendEvent(contentElm), () => {
-            contentStyle.height = 'auto';
+        contentWrapElm.style.display = 'block';
+        contentWrapElm.style.height = '0';
+
+        setTimeout(_ => {
+          contentWrapElm.style.height = contentHeight + 'px';
+          once(contentWrapElm, getTransitionendEvent(contentWrapElm), () => {
+            if (!this.isActive) return;
+            contentWrapElm.style.height = 'auto';
           });
-        });
+        }, 10);
       },
       close() {
+        const contentWrapElm = this.$refs.contentWrap;
         const contentElm = this.$refs.content;
-        const contentHeight = contentElm.clientHeight;
-        const contentStyle = this.contentStyle;
+        const contentHeight = contentElm.offsetHeight;
 
         this.contentHeight = contentHeight;
-        this.$set(this.contentStyle, 'height', contentHeight + 'px');
+        contentWrapElm.style.height = contentHeight + 'px';
 
-        this.$nextTick(_ => {
-          contentStyle.height = '0';
-          once(contentElm, getTransitionendEvent(contentElm), () => {
-            this.$set(this.contentStyle, 'display', 'none');
+        setTimeout(_ => {
+          contentWrapElm.style.height = '0';
+          once(contentWrapElm, getTransitionendEvent(contentWrapElm), () => {
+            if (this.isActive) return;
+            contentWrapElm.style.display = 'none';
           });
-        });
+        }, 10);
       },
       init() {
-        this.contentHeight = this.$refs.content.clientHeight;
-
         if (!this.isActive) {
-          this.$set(this.contentStyle, 'height', '0');
-          this.$set(this.contentStyle, 'display', 'none');
+          let contentWrapElm = this.$refs.contentWrap;
+          this.contentHeight = this.$refs.content.offsetHeight;
+          contentWrapElm.style.height = '0';
+          contentWrapElm.style.display = 'none';
         }
       },
       handleHeaderClick() {
