@@ -112,9 +112,7 @@
           ? <span class="el-icon-close" on-click={(ev) => { handleTabRemove(tab, ev); }}></span>
           : null;
 
-        const tabLabelContent = tab.labelContent
-          ? tab.labelContent.call(this._renderProxy, h, tab)
-          : tab.label;
+        const tabLabelContent = tab.$slots.label || tab.label;
 
         return (
           <div
