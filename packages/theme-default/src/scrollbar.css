@@ -1,3 +1,6 @@
+@charset "UTF-8";
+@import "./common/var.css";
+
 @component-namespace el {
   @b scrollbar {
     overflow: hidden;
