@@ -5,7 +5,11 @@
 <!--
 issue 仅用于提交 bug 或 feature 以及设计相关的内容，其它疑问请到 gitter 聊天室找社区里面的小伙伴聊一聊：https://gitter.im/ElemeFE/element
  -->
- 
+
+<!--
+有问题请提供 Demo 或者 GitHub 仓库地址，节省大家时间
+-->
+
 <!--
 Issues are exclusively for bug reports and feature requests. For other questions, please visit gitter: https://gitter.im/ElemeFE/element
 -->
