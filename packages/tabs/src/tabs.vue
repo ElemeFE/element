@@ -20,14 +20,24 @@
     },
 
     watch: {
-      activeName(val) {
-        this.currentName = val;
+      activeName(value) {
+        this.setCurrentName(value);
       },
-      value(val) {
-        this.currentName = val;
-      },
-      currentName(val) {
-        this.$emit('input', val);
+      value(value) {
+        this.setCurrentName(value);
+      }
+    },
+
+    computed: {
+      currentTab() {
+        if (!this.$children) return;
+        let result;
+        this.$children.forEach(tab => {
+          if (this.currentName === (tab.name || tab.index)) {
+            result = tab;
+          }
+        });
+        return result;
       }
     },
 
@@ -35,6 +45,7 @@
       handleTabRemove(tab, event) {
         event.stopPropagation();
         const tabs = this.$children;
+        const currentTab = this.currentTab;
 
         let index = tabs.indexOf(tab);
         tab.$destroy();
@@ -49,15 +60,22 @@
             let nextActiveTab = nextChild || prevChild || null;
 
             if (nextActiveTab) {
-              this.currentName = nextActiveTab.name || nextActiveTab.index;
+              this.setCurrentName(nextActiveTab.name || nextActiveTab.index);
             }
+            return;
+          } else {
+            this.setCurrentName(currentTab.name || currentTab.index);
           }
         });
       },
       handleTabClick(tab, tabName, event) {
         if (tab.disabled) return;
-        this.currentName = tabName;
+        this.setCurrentName(tabName);
         this.$emit('tab-click', tab, event);
+      },
+      setCurrentName(value) {
+        this.currentName = value;
+        this.$emit('input', value);
       }
     },
     mounted() {
@@ -99,7 +117,7 @@
       const tabs = this.$children.map((tab, index) => {
         let tabName = tab.name || tab.index || index;
         if (currentName === undefined && index === 0) {
-          this.currentName = tabName;
+          this.setCurrentName(tabName);
         }
 
         tab.index = index;
