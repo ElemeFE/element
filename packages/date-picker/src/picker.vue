@@ -352,11 +352,11 @@ export default {
       if (Array.isArray(date)) {
         if (equalDate(cache.cacheDateMin, date[0]) &&
           equalDate(cache.cacheDateMax, date[1])) updated = false;
-        cache.cacheDateMin = date[0];
-        cache.cacheDateMax = date[1];
+        cache.cacheDateMin = new Date(date[0]);
+        cache.cacheDateMax = new Date(date[1]);
       } else {
         if (equalDate(cache.cacheDate, date)) updated = false;
-        cache.cacheDate = date;
+        cache.cacheDate = new Date(date);
       }
 
       return updated;
