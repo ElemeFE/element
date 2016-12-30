@@ -48,6 +48,7 @@
       :size="size"
       :disabled="disabled"
       :readonly="!filterable || multiple"
+      :validate-event="false"
       @focus="toggleMenu"
       @click="handleIconClick"
       @mousedown.native="handleMouseDown"
@@ -223,13 +224,13 @@
           } else {
             this.currentPlaceholder = this.cachedPlaceHolder;
           }
-          this.dispatch('ElFormItem', 'el.form.change', val);
         }
         this.setSelected();
         if (this.filterable && !this.multiple) {
           this.inputLength = 20;
         }
         this.$emit('change', val);
+        this.dispatch('ElFormItem', 'el.form.change', val);
       },
 
       query(val) {
@@ -294,8 +295,7 @@
             }
           }
           if (!this.dropdownUl) {
-            let dropdownChildNodes = this.$refs.popper.$el.childNodes;
-            this.dropdownUl = [].filter.call(dropdownChildNodes, item => item.tagName === 'UL')[0];
+            this.dropdownUl = this.$refs.popper.$el.querySelector('.el-select-dropdown__wrap');
           }
           if (!this.multiple && this.dropdownUl) {
             this.setOverflow();
