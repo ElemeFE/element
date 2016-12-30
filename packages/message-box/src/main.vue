@@ -16,7 +16,7 @@
         </div>
         <div class="el-message-box__btns">
           <el-button :class="[ cancelButtonClasses ]" v-show="showCancelButton" @click.native="handleAction('cancel')">{{ cancelButtonText || t('el.messagebox.cancel') }}</el-button>
-          <el-button ref="confirm" :class="[ confirmButtonClasses ]" v-show="showConfirmButton" @click.native="handleAction('confirm')">{{ confirmButtonText || t('el.messagebox.confirm') }}</el-button>
+          <el-button ref="confirm" :class="[ confirmButtonClasses ]" v-show="showConfirmButton" :loading="loading" @click.native="handleAction('confirm')">{{ confirmButtonText || t('el.messagebox.confirm') }}</el-button>
         </div>
       </div>
     </div>
@@ -113,8 +113,10 @@
           return;
         }
         var callback = this.callback;
-        this.value = false;
-        callback(action);
+        if (this.autoHide) {
+          this.value = false;
+        }
+        callback(action, this);
       },
 
       validate() {
@@ -142,6 +144,18 @@
         this.editorErrorMessage = '';
         removeClass(this.$refs.input.$el.querySelector('input'), 'invalid');
         return true;
+      },
+
+      hide() {
+        this.value = false;
+      },
+
+      showLoading() {
+        this.loading = true;
+      },
+
+      hideLoading() {
+        this.loading = false;
       }
     },
 
@@ -192,7 +206,9 @@
         confirmButtonDisabled: false,
         cancelButtonClass: '',
         editorErrorMessage: null,
-        callback: null
+        callback: null,
+        loading: false,
+        autoHide: true
       };
     }
   };
