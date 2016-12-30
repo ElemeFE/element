@@ -103,14 +103,14 @@
 
 ### 自定义面板标题
 
-除了可以通过 `title` 属性以外，还可以通过作用域插槽来实现自定义面板的标题内容，以实现增加图标等效果。
+除了可以通过 `title` 属性以外，还可以通过具名 `slot` 来实现自定义面板的标题内容，以实现增加图标等效果。
 
 :::demo
 ```html
 <el-collapse accordion>
-  <el-collapse-item title="一致性 Consistency">
-    <template slot="title" scope="props">
-      {{props.title}}<i class="header-icon el-icon-information"></i>
+  <el-collapse-item>
+    <template slot="title">
+      一致性 Consistency<i class="header-icon el-icon-information"></i>
     </template>
     <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
     <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
