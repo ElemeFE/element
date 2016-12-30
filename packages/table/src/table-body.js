@@ -38,15 +38,15 @@ export default {
         <tbody>
           {
             this._l(this.data, (row, $index) =>
-              <tr
+              [<tr
                 style={ this.rowStyle ? this.getRowStyle(row, $index) : null }
-                key={ this.$parent.rowKey ? this.getKeyOfRow(row, $index) : $index }
+                key={ this.table.rowKey ? this.getKeyOfRow(row, $index) : $index }
                 on-dblclick={ ($event) => this.handleDoubleClick($event, row) }
                 on-click={ ($event) => this.handleClick($event, row) }
                 on-contextmenu={ ($event) => this.handleContextMenu($event, row) }
                 on-mouseenter={ _ => this.handleMouseEnter($index) }
                 on-mouseleave={ _ => this.handleMouseLeave() }
-                class={ this.getRowClass(row, $index) }>
+                class={ [this.getRowClass(row, $index)] }>
                 {
                   this._l(this.columns, (column, cellIndex) =>
                     <td
@@ -54,7 +54,7 @@ export default {
                       on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
                       on-mouseleave={ this.handleCellMouseLeave }>
                       {
-                        column.renderCell.call(this._renderProxy, h, { row, column, $index, store: this.store, _self: this.context || this.$parent.$vnode.context })
+                        column.renderCell.call(this._renderProxy, h, { row, column, $index, store: this.store, _self: this.context || this.table.$vnode.context })
                       }
                     </td>
                   )
@@ -62,7 +62,15 @@ export default {
                 {
                   !this.fixed && this.layout.scrollY && this.layout.gutterWidth ? <td class="gutter" /> : ''
                 }
-              </tr>
+              </tr>,
+                this.store.states.expandRows.indexOf(row) > -1
+                ? (<tr>
+                    <td colspan={ this.columns.length } class="el-table__expanded-cell">
+                      { this.table.renderExpanded ? this.table.renderExpanded(h, { row, $index, store: this.store }) : ''}
+                    </td>
+                  </tr>)
+                : ''
+              ]
             )
           }
         </tbody>
@@ -95,6 +103,8 @@ export default {
       const newRow = rows[data.indexOf(newVal)];
       if (oldRow) {
         oldRow.classList.remove('current-row');
+      } else if (rows) {
+        [].forEach.call(rows, row => row.classList.remove('current-row'));
       }
       if (newRow) {
         newRow.classList.add('current-row');
@@ -103,6 +113,10 @@ export default {
   },
 
   computed: {
+    table() {
+      return this.$parent.$parent.columns ? this.$parent.$parent : this.$parent;
+    },
+
     data() {
       return this.store.states.data;
     },
@@ -132,7 +146,7 @@ export default {
 
   methods: {
     getKeyOfRow(row, index) {
-      const rowKey = this.$parent.rowKey;
+      const rowKey = this.table.rowKey;
       if (rowKey) {
         return getRowIdentity(row, rowKey);
       }
@@ -171,12 +185,12 @@ export default {
     },
 
     handleCellMouseEnter(event, row) {
-      const table = this.$parent;
+      const table = this.table;
       const cell = getCell(event);
 
       if (cell) {
         const column = getColumnByCell(table, cell);
-        const hoverState = table.hoverState = { cell, column, row };
+        const hoverState = table.hoverState = {cell, column, row};
         table.$emit('cell-mouse-enter', hoverState.row, hoverState.column, hoverState.cell, event);
       }
 
@@ -190,8 +204,8 @@ export default {
       const cell = getCell(event);
       if (!cell) return;
 
-      const oldHoverState = this.$parent.hoverState;
-      this.$parent.$emit('cell-mouse-leave', oldHoverState.row, oldHoverState.column, oldHoverState.cell, event);
+      const oldHoverState = this.table.hoverState;
+      this.table.$emit('cell-mouse-leave', oldHoverState.row, oldHoverState.column, oldHoverState.cell, event);
     },
 
     handleMouseEnter(index) {
@@ -203,17 +217,17 @@ export default {
     },
 
     handleContextMenu(event, row) {
-      const table = this.$parent;
+      const table = this.table;
       table.$emit('row-contextmenu', row, event);
     },
 
     handleDoubleClick(event, row) {
-      const table = this.$parent;
+      const table = this.table;
       table.$emit('row-dblclick', row, event);
     },
 
     handleClick(event, row) {
-      const table = this.$parent;
+      const table = this.table;
       const cell = getCell(event);
       let column;
       if (cell) {
@@ -226,6 +240,10 @@ export default {
       this.store.commit('setCurrentRow', row);
 
       table.$emit('row-click', row, event, column);
+    },
+
+    handleExpandClick(row) {
+      this.store.commit('toggleRowExpanded', row);
     }
   }
 };

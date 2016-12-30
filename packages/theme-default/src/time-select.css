@@ -9,12 +9,7 @@
 
 .time-select .el-picker-panel__content {
   max-height: 200px;
-  overflow: hidden;
   margin: 0;
-
-  &:hover {
-    overflow-y: auto;
-  }
 }
 
 .time-select-item {

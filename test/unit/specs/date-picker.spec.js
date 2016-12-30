@@ -91,6 +91,31 @@ describe('DatePicker', () => {
     }, DELAY);
   });
 
+  it('disabled clear value', done => {
+    vm = createVue({
+      template: `
+        <el-date-picker v-model="value" ref="compo" :clearable="false"></el-date-picker>
+      `,
+      data() {
+        return { value: '' };
+      }
+    }, true);
+    const input = vm.$el.querySelector('input');
+
+    input.focus();
+    setTimeout(_ => {
+      const $el = vm.$refs.compo.picker.$el;
+      $el.querySelector('td.available').click();
+      vm.$nextTick(_ => {
+        vm.$el.querySelector('.el-input__icon').click();
+        setTimeout(_ => {
+          expect(vm.value).to.be.exist;
+          done();
+        }, DELAY);
+      });
+    }, DELAY);
+  });
+
   it('reset', done => {
     vm = createVue({
       template: `
@@ -117,6 +142,46 @@ describe('DatePicker', () => {
           }, DELAY);
         });
       }, DELAY);
+    }, DELAY);
+  });
+
+  it('change event', done => {
+    let inputValue;
+
+    vm = createVue({
+      template: `
+        <el-date-picker
+          ref="compo"
+          v-model="value"
+          format="yyyy-MM"
+          @change="handleChange" />`,
+
+      methods: {
+        handleChange(val) {
+          inputValue = val;
+        }
+      },
+
+      data() {
+        return { value: '' };
+      }
+    }, true);
+
+    const input = vm.$el.querySelector('input');
+
+    input.blur();
+    input.focus();
+
+    setTimeout(_ => {
+      const picker = vm.$refs.compo.picker;
+
+      picker.$el.querySelector('td.available').click();
+      vm.$nextTick(_ => {
+        const date = picker.date;
+
+        expect(inputValue).to.equal(`${date.getFullYear()}-${date.getMonth() + 1 }`);
+        done();
+      });
     }, DELAY);
   });
 
@@ -611,6 +676,37 @@ describe('DatePicker', () => {
       }, DELAY);
     });
   });
+
+  const currentMonth = new Date(new Date().getTime());
+  currentMonth.setDate(1);
+  const FirstDayOfCurrentMonth = currentMonth.getDay();
+  const chineseWeek = ['一', '二', '三', '四', '五', '六', '日'];
+
+  const testWeek = (i) => it('picker-options:firstDayOfWeek ' + i, done => {
+    vm = createTest(DatePicker, {
+      pickerOptions: {
+        firstDayOfWeek: i
+      }
+    }, true);
+
+    const input = vm.$el.querySelector('input');
+
+    input.blur();
+    input.focus();
+
+    setTimeout(_ => {
+      const prevMonthLen = vm.picker.$el.querySelectorAll('.prev-month').length;
+      const firstWeek = vm.picker.$el.querySelector('tr th');
+      const offset = i > 3 ? 7 - i : -i;
+
+      expect(firstWeek.innerText).to.equal(chineseWeek[i - 1]);
+      expect(prevMonthLen - FirstDayOfCurrentMonth).to.equal(offset);
+      done();
+    });
+  });
+  for (var i = 1; i <= 7; i++) {
+    testWeek(i);
+  }
 
   it('picker-options:shortcuts', done => {
     let test;

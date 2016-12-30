@@ -60,6 +60,7 @@
           province: '上海',
           city: '普陀区',
           address: '上海市普陀区金沙江路 1518 弄',
+          detailAddress: '金沙江路 1518 弄',
           zip: 200333
         }, {
           date: '2016-05-02',
@@ -67,6 +68,7 @@
           province: '上海',
           city: '普陀区',
           address: '上海市普陀区金沙江路 1518 弄',
+          detailAddress: '金沙江路 1518 弄',
           zip: 200333
         }, {
           date: '2016-05-04',
@@ -74,6 +76,7 @@
           province: '上海',
           city: '普陀区',
           address: '上海市普陀区金沙江路 1518 弄',
+          detailAddress: '金沙江路 1518 弄',
           zip: 200333
         }, {
           date: '2016-05-01',
@@ -81,6 +84,7 @@
           province: '上海',
           city: '普陀区',
           address: '上海市普陀区金沙江路 1518 弄',
+          detailAddress: '金沙江路 1518 弄',
           zip: 200333
         }, {
           date: '2016-05-08',
@@ -88,6 +92,7 @@
           province: '上海',
           city: '普陀区',
           address: '上海市普陀区金沙江路 1518 弄',
+          detailAddress: '金沙江路 1518 弄',
           zip: 200333
         }, {
           date: '2016-05-06',
@@ -95,6 +100,7 @@
           province: '上海',
           city: '普陀区',
           address: '上海市普陀区金沙江路 1518 弄',
+          detailAddress: '金沙江路 1518 弄',
           zip: 200333
         }, {
           date: '2016-05-07',
@@ -102,6 +108,7 @@
           province: '上海',
           city: '普陀区',
           address: '上海市普陀区金沙江路 1518 弄',
+          detailAddress: '金沙江路 1518 弄',
           zip: 200333
         }],
         tableData4: [{
@@ -581,15 +588,13 @@
       width="120">
     </el-table-column>
     <el-table-column
-      inline-template
-      :context="_self"
       fixed="right"
       label="操作"
       width="100">
-      <span>
+      <template scope="scope">
         <el-button @click="handleClick" type="text" size="small">查看</el-button>
         <el-button type="text" size="small">编辑</el-button>
-      </span>
+      </template>
     </el-table-column>
   </el-table>
 </template>
@@ -791,19 +796,17 @@
       width="120">
     </el-table-column>
     <el-table-column
-      inline-template
-      :context="_self"
       fixed="right"
       label="操作"
       width="120">
-      <span>
+      <template scope="scope">
         <el-button
-          @click.native.prevent="deleteRow($index, tableData4)"
+          @click.native.prevent="deleteRow(scope.$index, tableData4)"
           type="text"
           size="small">
           移除
         </el-button>
-      </span>
+      </template>
     </el-table-column>
   </el-table>
 </template>
@@ -1055,7 +1058,7 @@
 
 选择多行数据时使用 Checkbox。
 
-:::demo 实现多选非常简单: 手动添加一个`el-table-column`，设`type`属性为`selection`即可。在本例中，为了方便说明其他属性，我们还使用了`inline-template`和`show-overflow-tooltip`：设置了`inline-template`属性后，可以通过调用`row`对象中的值取代`prop`属性的设置；默认情况下若内容过多会折行显示，若需要单行显示可以使用`show-overflow-tooltip`属性，它接受一个`Boolean`，为`true`时多余的内容会在 hover 时以 tooltip 的形式显示出来。
+:::demo 实现多选非常简单: 手动添加一个`el-table-column`，设`type`属性为`selection`即可；默认情况下若内容过多会折行显示，若需要单行显示可以使用`show-overflow-tooltip`属性，它接受一个`Boolean`，为`true`时多余的内容会在 hover 时以 tooltip 的形式显示出来。
 ```html
 <template>
   <el-table
@@ -1068,10 +1071,9 @@
       width="55">
     </el-table-column>
     <el-table-column
-      inline-template
       label="日期"
       width="120">
-      <div>{{ row.date }}</div>
+      <template scope="scope">{{ scope.row.date }}</template>
     </el-table-column>
     <el-table-column
       prop="name"
@@ -1228,9 +1230,12 @@
       label="标签"
       width="100"
       :filters="[{ text: '家', value: '家' }, { text: '公司', value: '公司' }]"
-      :filter-method="filterTag"
-      inline-template>
-      <el-tag :type="row.tag === '家' ? 'primary' : 'success'" close-transition>{{row.tag}}</el-tag>
+      :filter-method="filterTag">
+      <template scope="scope">
+        <el-tag
+          :type="scope.row.tag === '家' ? 'primary' : 'success'"
+          close-transition>{{scope.row.tag}}</el-tag>
+      </template>
     </el-table-column>
   </el-table>
 </template>
@@ -1278,7 +1283,7 @@
 ### 自定义列模板
 
 自定义列的显示内容，可组合其他组件使用。
-:::demo 通过设置 `inline-template` 属性可以开启自定义模板功能，此时 `el-table-column` 的上下文指的是 `el-table` 所处的上下文，当然你可以通过 `context` 属性指定上下文环境，例如设置成 `:context="_self"` 就是指的当前上下文。有些时候我们会把 table 封装在其他组件里，通过 slot 设置 `table-column`，这样的话就要注意设置 `context`。在 column 组件内部，可以获取到 row, column, $index 和 store（table 内部的状态管理）的数据。
+:::demo 通过 `Scoped slot` 可以获取到 row, column, $index 和 store（table 内部的状态管理）的数据，用法参考 demo。(`1.1` 后支持通过 [Scoped slot](https://vuejs.org/v2/guide/components.html#Scoped-Slots) 自定义模板。之前的 `inline-template` 同样适用，但不推荐。)
 ```html
 <template>
   <el-table
@@ -1286,43 +1291,36 @@
     border
     style="width: 100%">
     <el-table-column
-      inline-template
       label="日期"
       width="180">
-      <div>
+      <template scope="scope">
         <el-icon name="time"></el-icon>
-        <span style="margin-left: 10px">{{ row.date }}</span>
-      </div>
+        <span style="margin-left: 10px">{{ scope.row.date }}</span>
+      </template>
     </el-table-column>
     <el-table-column
-      inline-template
       label="姓名"
       width="180">
-      <el-popover trigger="hover" placement="top">
-        <p>姓名: {{ row.name }}</p>
-        <p>住址: {{ row.address }}</p>
-        <div slot="reference" class="name-wrapper">
-          <el-tag>{{ row.name }}</el-tag>
-        </div>
-      </el-popover>
+      <template scope="scope">
+        <el-popover trigger="hover" placement="top">
+          <p>姓名: {{ scope.row.name }}</p>
+          <p>住址: {{ scope.row.address }}</p>
+          <div slot="reference" class="name-wrapper">
+            <el-tag>{{ scope.row.name }}</el-tag>
+          </div>
+        </el-popover>
+      </template>
     </el-table-column>
-    <el-table-column
-      :context="_self"
-      inline-template
-      label="操作">
-      <div>
+    <el-table-column label="操作">
+      <template scope="scope">
         <el-button
           size="small"
-          @click="handleEdit($index, row)">
-          编辑
-        </el-button>
+          @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
         <el-button
           size="small"
           type="danger"
-          @click="handleDelete($index, row)">
-          删除
-        </el-button>
-      </div>
+          @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+      </template>
     </el-table-column>
   </el-table>
 </template>
@@ -1363,6 +1361,102 @@
 ```
 :::
 
+### 展开行
+
+当行内容过多并且不想显示横向滚动条时，可以使用 Table 展开行功能。
+:::demo 通过设置 type="expand" 和 `Scoped slot` 可以开启展开行功能，`el-table-column` 的模板会被渲染成为展开行的内容，展开行可访问的属性与使用自定义列模板时的 `Scoped slot` 相同。
+```html
+<template>
+  <el-table
+    :data="tableData3"
+    style="width: 100%">
+    <el-table-column type="expand">
+      <template scope="props">
+        <p>省: {{ props.row.province }}</p>
+        <p>市: {{ props.row.city }}</p>
+        <p>住址: {{ props.row.detailAddress }}</p>
+        <p>邮编: {{ props.row.zip }}</p>
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="日期"
+      prop="date">
+    </el-table-column>
+    <el-table-column
+      label="姓名"
+      prop="name">
+    </el-table-column>
+  </el-table>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        tableData3: [{
+          date: '2016-05-03',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          detailAddress: '金沙江路 1518 弄',
+          zip: 200333
+        }, {
+          date: '2016-05-02',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          detailAddress: '金沙江路 1518 弄',
+          zip: 200333
+        }, {
+          date: '2016-05-04',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          detailAddress: '金沙江路 1518 弄',
+          zip: 200333
+        }, {
+          date: '2016-05-01',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          detailAddress: '金沙江路 1518 弄',
+          zip: 200333
+        }, {
+          date: '2016-05-08',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          detailAddress: '金沙江路 1518 弄',
+          zip: 200333
+        }, {
+          date: '2016-05-06',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          detailAddress: '金沙江路 1518 弄',
+          zip: 200333
+        }, {
+          date: '2016-05-07',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          detailAddress: '金沙江路 1518 弄',
+          zip: 200333
+        }]
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Table Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -1371,13 +1465,17 @@
 | stripe | 是否为斑马纹 table | boolean | — | false |
 | border | 是否带有纵向边框 | boolean | — | false |
 | fit | 列的宽度是否自撑开 | boolean | — | true |
-| show-header | 是否显示表头 | boolean | - | true |
+| show-header | 是否显示表头 | boolean | — | true |
 | highlight-current-row | 是否要高亮当前行 | boolean | — | false |
+| current-row-key | 当前行的 key，只写属性 | String,Number | — | — |
 | row-class-name | 行的 className 的回调方法，也可以使用字符串为所有行设置一个固定的 className。 | Function(row, index)/String | — | — |
 | row-style | 行的 style 的回调方法，也可以使用一个固定的 Object 为所有行设置一样的 Style。 | Function(row, index)/Object | — | — |
 | row-key | 行数据的 Key，用来优化 Table 的渲染；在使用 reserve-selection 功能的情况下，该属性是必填的 | Function(row)/String | — | — |
-| context | 设置上下文环境，例如设置当前上下文就是 `_self`，父级就是 `$parent`，根组件 `$root`。优先读取 column 的 context 属性。 | Object | - | Table 所处上下文 |
-| empty-text | 空数据时显示的文本内容，也可以通过 `slot="empty"` 设置 | String | | - | 暂无数据 |
+| context | 设置上下文环境，例如设置当前上下文就是 `_self`，父级就是 `$parent`，根组件 `$root`。优先读取 column 的 context 属性。 | Object | — | Table 所处上下文 |
+| empty-text | 空数据时显示的文本内容，也可以通过 `slot="empty"` 设置 | String | — | 暂无数据 |
+| default-expand-all | 是否默认展开所有行，当 Table 中存在 type="expand" 的 Column 的时候有效 | Boolean | — | false |
+| expand-row-keys | 可以通过该属性设置 Table 目前的展开行，需要设置 row-key 属性才能使用，该属性为展开行的 keys 数组。| Array | — | |
+
 
 ### Table Events
 | 事件名 | 说明 | 参数 |
@@ -1395,6 +1493,7 @@
 | sort-change | 当表格的排序条件发生变化的时候会触发该事件 | { column, prop, order } |
 | filter-change | 当表格的筛选条件发生变化的时候会触发该事件，参数的值是一个对象，对象的 key 是 column 的 columnKey，对应的 value 为用户选择的筛选条件的数组。 | filters |
 | current-change | 当表格的当前行发生变化的时候会触发该事件，如果要高亮当前行，请打开表格的 highlight-current-row 属性 | currentRow, oldCurrentRow |
+| expand | 当用户对某一行展开或者关闭的上会触发该事件 | row, expanded |
 
 ### Table Methods
 | 方法名 | 说明 | 参数 |
@@ -1405,8 +1504,8 @@
 ### Table-column Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| type | 对应列的类型。如果设置了 `selection` 则显示多选框，如果设置了 `index` 则显示该行的索引（从 1 开始计算） | string | selection/index | — |
-| column-key | column 的 key，如果需要使用 filter-change 事件，则需要此属性标识是哪个 column 的筛选条件 | string | - | - |
+| type | 对应列的类型。如果设置了 `selection` 则显示多选框；如果设置了 `index` 则显示该行的索引（从 1 开始计算）；如果设置了 expand 则显示为一个可展开的按钮 | string | selection/index/expand | — |
+| column-key | column 的 key，如果需要使用 filter-change 事件，则需要此属性标识是哪个 column 的筛选条件 | string | — | — |
 | label | 显示的标题 | string | — | — |
 | prop | 对应列内容的字段名，也可以使用 property 属性 | string | — | — |
 | width | 对应列的宽度 | string | — | — |
@@ -1418,9 +1517,8 @@
 | resizable | 对应列是否可以通过拖动改变宽度（需要在 el-table 上设置 border 属性为真） | boolean | — | true |
 | formatter | 用来格式化内容 | Function(row, column) | — | — |
 | show-overflow-tooltip | 当内容过长被隐藏时显示 tooltip | Boolean | — | false |
-| context | 设置上下文环境，例如设置当前上下文就是 `_self`，父级就是 `$parent`，根组件 `$root` | Object | - | Table 所处上下文 |
-| inline-template | 指定该属性后可以自定义 column 模板，参考多选的时间列，通过 row 获取行信息。总共可以获取到 `{ row(当前行), column(当前列), $index(行数), store(table store) }` 以及 Table 所处的上下文环境。 | — | — |
-| align | 对齐方式 | String | left, center, right | left |
+| align | 对齐方式 | String | left/center/right | left |
+| header-align | 表头对齐方式，若不设置该项，则使用表格的对齐方式 | String | left/center/right | — |
 | class-name | 列的 className | string | — | — |
 | selectable | 仅对 type=selection 的列有效，类型为 Function，Function 的返回值用来决定这一行的 CheckBox 是否可以勾选 | Function(row, index) | — | — |
 | reserve-selection | 仅对 type=selection 的列有效，类型为 Boolean，为 true 则代表会保留之前数据的选项，需要配合 Table 的 clearSelection 方法使用。 | Boolean | — | false |

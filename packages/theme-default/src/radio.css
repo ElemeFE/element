@@ -24,6 +24,54 @@
       line-height: 1;
       position: relative;
       vertical-align: middle;
+
+      @when disabled {
+        .el-radio__inner {
+          background-color: var(--radio-disabled-input-fill);
+          border-color: var(--radio-disabled-input-border-color);
+          cursor: not-allowed;
+
+          &::after {
+            cursor: not-allowed;
+            background-color: var(--radio-disabled-icon-color);
+          }
+
+          & + .el-radio__label {
+            cursor: not-allowed;
+          }
+        }
+        &.is-checked {
+          .el-radio__inner {
+            background-color: var(--radio-disabled-checked-input-fill);
+            border-color: var(--radio-disabled-checked-input-border-color);
+
+            &::after {
+              background-color: var(--radio-disabled-checked-icon-color);
+            }
+          }
+        }
+        & + .el-radio__label {
+          color: var(--disabled-color-base);
+          cursor: not-allowed;
+        }
+      }
+
+      @when checked {
+        .el-radio__inner {
+          border-color: var(--radio-checked-input-border-color);
+          background: var(--radio-checked-icon-color);
+
+          &::after {
+            transform: translate(-50%, -50%) scale(1);
+          }
+        }
+      }
+
+      @when focus {
+        .el-radio__inner {
+          border-color: var(--radio-input-border-color-hover);
+        }
+      }
     }
     @e inner {
       border: var(--radio-input-border);
@@ -34,7 +82,7 @@
       display: inline-block;
       box-sizing: border-box;
 
-      &:not(.is-disabled):hover {
+      &:hover {
         border-color: var(--radio-input-border-color-hover);
       }
 
@@ -46,43 +94,6 @@
         top: 50%;
         transform: translate(-50%, -50%) scale(0);
         transition: transform .15s cubic-bezier(.71,-.46,.88,.6);
-      }
-
-      @when disabled {
-        background-color: var(--radio-disabled-input-fill);
-        border-color: var(--radio-disabled-input-border-color);
-        cursor: not-allowed;
-
-        &::after {
-          cursor: not-allowed;
-          background-color: var(--radio-disabled-icon-color);
-        }
-
-        & + .el-radio__label {
-          cursor: not-allowed;
-        }
-      }
-
-      @when checked {
-        border-color: var(--radio-checked-input-border-color);
-        background: var(--radio-checked-icon-color);
-
-        &::after {
-          transform: translate(-50%, -50%) scale(1);
-        }
-      }
-
-      @when focus {
-        border-color: var(--radio-input-border-color-hover);
-      }
-      
-      &.is-disabled.is-checked {
-        background-color: var(--radio-disabled-checked-input-fill);
-        border-color: var(--radio-disabled-checked-input-border-color);
-
-        &::after {
-          background-color: var(--radio-disabled-checked-icon-color);
-        }
       }
     }
 

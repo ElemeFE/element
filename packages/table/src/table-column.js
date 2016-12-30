@@ -16,6 +16,12 @@ const defaults = {
     order: '',
     className: 'el-table-column--selection'
   },
+  expand: {
+    width: 48,
+    minWidth: 48,
+    realWidth: 48,
+    order: ''
+  },
   index: {
     width: 48,
     minWidth: 48,
@@ -48,6 +54,21 @@ const forced = {
       return <div>{ $index + 1 }</div>;
     },
     sortable: false
+  },
+  expand: {
+    renderHeader: function(h, {}) {
+      return '';
+    },
+    renderCell: function(h, { row, store }, proxy) {
+      const expanded = store.states.expandRows.indexOf(row) > -1;
+      return <div class={ 'el-table__expand-icon ' + (expanded ? 'el-table__expand-icon--expanded' : '') }
+                  on-click={ () => proxy.handleExpandClick(row) }>
+        <i class='el-icon el-icon-arrow-right'></i>
+      </div>;
+    },
+    sortable: false,
+    resizable: false,
+    className: 'el-table__expand-column'
   }
 };
 
@@ -103,7 +124,7 @@ export default {
     minWidth: {},
     renderHeader: Function,
     sortable: {
-      type: [Boolean, String],
+      type: [String, Boolean],
       default: false
     },
     sortMethod: Function,
@@ -114,6 +135,7 @@ export default {
     context: {},
     columnKey: String,
     align: String,
+    headerAlign: String,
     showTooltipWhenOverflow: Boolean,
     showOverflowTooltip: Boolean,
     fixed: [Boolean, String],
@@ -126,10 +148,6 @@ export default {
       type: Boolean,
       default: true
     }
-  },
-
-  render() {
-    return (<div>{ this._t('default') }</div>);
   },
 
   data() {
@@ -162,9 +180,7 @@ export default {
 
   created() {
     this.customRender = this.$options.render;
-    this.$options.render = (h) => {
-      return (<div>{ this._t('default') }</div>);
-    };
+    this.$options.render = h => h('div', this.$slots.default);
 
     let columnId = this.columnId = this.columnKey || ((this.$parent.tableId || (this.$parent.columnId + '_')) + 'column_' + columnIdSeed++);
 
@@ -205,14 +221,15 @@ export default {
       isColumnGroup,
       context: this.context,
       align: this.align ? 'is-' + this.align : null,
-      sortable: this.sortable,
+      headerAlign: this.headerAlign ? 'is-' + this.headerAlign : (this.align ? 'is-' + this.align : null),
+      sortable: this.sortable === '' ? true : this.sortable,
       sortMethod: this.sortMethod,
       resizable: this.resizable,
       showOverflowTooltip: this.showOverflowTooltip || this.showTooltipWhenOverflow,
       formatter: this.formatter,
       selectable: this.selectable,
       reserveSelection: this.reserveSelection,
-      fixed: this.fixed,
+      fixed: this.fixed === '' ? true : this.fixed,
       filterMethod: this.filterMethod,
       filters: this.filters,
       filterable: this.filters || this.filterMethod,
@@ -223,17 +240,33 @@ export default {
 
     objectAssign(column, forced[type] || {});
 
+    this.columnConfig = column;
+
     let renderCell = column.renderCell;
     let _self = this;
 
+    if (type === 'expand') {
+      owner.renderExpanded = function(h, data) {
+        return _self.$scopedSlots.default
+          ? _self.$scopedSlots.default(data)
+          : _self.$slots.default;
+      };
+
+      column.renderCell = function(h, data) {
+        return <div class="cell">{ renderCell(h, data, this._renderProxy) }</div>;
+      };
+
+      return;
+    }
+
     column.renderCell = function(h, data) {
+      // 未来版本移除
       if (_self.$vnode.data.inlineTemplate) {
         renderCell = function() {
           data._self = _self.context || data._self;
           if (Object.prototype.toString.call(data._self) === '[object Object]') {
             for (let prop in data._self) {
               if (!data.hasOwnProperty(prop)) {
-                // _self.$set(data, prop, data._self[prop]);
                 data[prop] = data._self[prop];
               }
             }
@@ -243,6 +276,8 @@ export default {
           data.$options.staticRenderFns = _self.$options.staticRenderFns;
           return _self.customRender.call(data);
         };
+      } else if (_self.$scopedSlots.default) {
+        renderCell = () => _self.$scopedSlots.default(data);
       }
 
       if (!renderCell) {
@@ -259,8 +294,6 @@ export default {
           </el-tooltip>
         : <div class="cell">{ renderCell(h, data) }</div>;
     };
-
-    this.columnConfig = column;
   },
 
   destroyed() {
@@ -302,6 +335,12 @@ export default {
     align(newVal) {
       if (this.columnConfig) {
         this.columnConfig.align = newVal ? 'is-' + newVal : null;
+      }
+    },
+
+    headerAlign(newVal) {
+      if (this.columnConfig) {
+        this.columnConfig.headerAlign = newVal ? 'is-' + newVal : this.align;
       }
     },
 

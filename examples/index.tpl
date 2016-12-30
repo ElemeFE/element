@@ -8,7 +8,7 @@
   </head>
   <body>
     <div id="app"></div><% if (process.env.NODE_ENV === 'production') { %>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/vue/2.0.7/vue.runtime.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/vue/2.1.6/vue.runtime.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/vue-router/2.0.1/vue-router.min.js"></script><% } %>
   </body>
   <% if (process.env.NODE_ENV === 'production') { %><script>
@@ -19,5 +19,10 @@
 
     ga('create', 'UA-84335471-1', 'auto');
     ga('send', 'pageview');
+
+    window.addEventListener('hashchange', function () {
+      ga('set', 'page', window.location.href);
+      ga('send', 'pageview');
+    });
   </script><% } %>
 </html>

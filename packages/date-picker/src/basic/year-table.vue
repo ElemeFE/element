@@ -44,7 +44,7 @@
 </template>
 
 <script type="text/babel">
-  import { hasClass } from 'wind-dom/src/class';
+  import { hasClass } from 'element-ui/src/utils/dom';
 
   export default {
     props: {

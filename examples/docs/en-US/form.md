@@ -219,7 +219,7 @@
       padding: 0;
       list-style: none;
 
-      &:after,&:before {
+      &:after, &:before {
         content: ' ';
         display: table;
       }
@@ -263,18 +263,12 @@
     .demo-ruleForm {
       width: 480px;
 
-      .el-input,
-      .el-textarea {
-        width: auto;
-      }
-
       .el-select .el-input {
         width: 360px;
       }
     }
     .demo-dynamic {
       .el-input {
-        display: inline-block;
         margin-right: 10px;
         width: 270px;
         vertical-align: top;
@@ -809,11 +803,11 @@ Form component allows you to verify your data, helping you find and correct erro
 
 ### Form Methods
 
-| Method | Description |
-| ---- | ---- |
-| validate(cb) | the method to validate the whole form |
-| validateField(prop, cb) | the method to validate a certain form item |
-| resetFields | reset all the fields and remove validation result |
+| Method | Description | Parameters |
+| ---- | ---- | ---- |
+| validate | the method to validate the whole form | Function(callback: Function(boolean)) |
+| validateField | the method to validate a certain form item | Function(prop: string, callback: Function(errorMessage: string)) |
+| resetFields | reset all the fields and remove validation result | — |
 
 ### Form-Item Attributes
 

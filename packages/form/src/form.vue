@@ -54,12 +54,13 @@
       },
       validate(callback) {
         let valid = true;
+        let count = 0;
         this.fields.forEach((field, index) => {
           field.validate('', errors => {
             if (errors) {
               valid = false;
             }
-            if (typeof callback === 'function' && index === this.fields.length - 1) {
+            if (typeof callback === 'function' && ++count === this.fields.length) {
               callback(valid);
             }
           });

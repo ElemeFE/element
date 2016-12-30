@@ -128,7 +128,6 @@
 
 <style>
   .demo-select .el-select {
-    display: inline-block;
     width: 240px;
   }
 </style>

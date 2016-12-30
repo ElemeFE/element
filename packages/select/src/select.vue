@@ -48,6 +48,7 @@
       :size="size"
       :disabled="disabled"
       :readonly="!filterable || multiple"
+      :validate-event="false"
       @focus="toggleMenu"
       @click="handleIconClick"
       @mousedown.native="handleMouseDown"
@@ -65,8 +66,10 @@
       <el-select-menu
         ref="popper"
         v-show="visible && emptyText !== false">
-        <ul
-          class="el-select-dropdown__list"
+        <el-scrollbar
+          tag="ul"
+          wrap-class="el-select-dropdown__wrap"
+          view-class="el-select-dropdown__list"
           :class="{ 'is-empty': !allowCreate && filteredOptionsCount === 0 }"
           v-show="options.length > 0 && !loading">
           <el-option
@@ -75,7 +78,7 @@
             v-if="showNewOption">
           </el-option>
           <slot></slot>
-        </ul>
+        </el-scrollbar>
         <p class="el-select-dropdown__empty" v-if="emptyText && !allowCreate">{{ emptyText }}</p>
       </el-select-menu>
     </transition>
@@ -89,9 +92,10 @@
   import ElSelectMenu from './select-dropdown.vue';
   import ElOption from './option.vue';
   import ElTag from 'element-ui/packages/tag';
+  import ElScrollbar from 'element-ui/packages/scrollbar';
   import debounce from 'throttle-debounce/debounce';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
-  import { addClass, removeClass, hasClass } from 'wind-dom/src/class';
+  import { addClass, removeClass, hasClass } from 'element-ui/src/utils/dom';
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
   import { t } from 'element-ui/src/locale';
   const sizeMap = {
@@ -148,7 +152,8 @@
       ElInput,
       ElSelectMenu,
       ElOption,
-      ElTag
+      ElTag,
+      ElScrollbar
     },
 
     directives: { Clickoutside },
@@ -219,17 +224,19 @@
           } else {
             this.currentPlaceholder = this.cachedPlaceHolder;
           }
-          this.dispatch('ElFormItem', 'el.form.change', val);
         }
         this.setSelected();
         if (this.filterable && !this.multiple) {
           this.inputLength = 20;
         }
         this.$emit('change', val);
+        this.dispatch('ElFormItem', 'el.form.change', val);
       },
 
       query(val) {
-        this.broadcast('ElSelectDropdown', 'updatePopper');
+        this.$nextTick(() => {
+          this.broadcast('ElSelectDropdown', 'updatePopper');
+        });
         this.hoverIndex = -1;
         if (this.multiple && this.filterable) {
           this.resetInputHeight();
@@ -288,8 +295,7 @@
             }
           }
           if (!this.dropdownUl) {
-            let dropdownChildNodes = this.$refs.popper.$el.childNodes;
-            this.dropdownUl = [].filter.call(dropdownChildNodes, item => item.tagName === 'UL')[0];
+            this.dropdownUl = this.$refs.popper.$el.querySelector('.el-select-dropdown__wrap');
           }
           if (!this.multiple && this.dropdownUl) {
             this.setOverflow();
@@ -299,6 +305,7 @@
       },
 
       options(val) {
+        if (this.$isServer) return;
         this.optionsAllDisabled = val.length === val.filter(item => item.disabled === true).length;
         if (this.multiple) {
           this.resetInputHeight();
@@ -552,7 +559,7 @@
 
       deleteTag(event, tag) {
         let index = this.selected.indexOf(tag);
-        if (index > -1) {
+        if (index > -1 && !this.disabled) {
           this.value.splice(index, 1);
         }
         event.stopPropagation();

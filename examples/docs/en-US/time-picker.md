@@ -144,9 +144,10 @@ Can pick an arbitrary time range.
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | readonly | whether DatePicker is read only | boolean | — | false |
-| disabled | whether DatePicker is disabled | boolean | - | false |
-| editable | whether the input is editable | boolean | - | true |
-|size | size of Input | string | large/small/mini | — |
+| disabled | whether DatePicker is disabled | boolean | — | false |
+| editable | whether the input is editable | boolean | — | true |
+| clearable | Whether to show clear button | boolean | — | true |
+| size | size of Input | string | large/small/mini | — |
 | placeholder | placeholder | string | — | — |
 | format | format of the picker | string | hour `HH`, minute `mm`, second `ss` | HH:mm:ss |
 | value | value of the picker | date for Time Picker, and string for Time Select | hour `HH`, minute `mm`, second `ss` | HH:mm:ss |
@@ -161,8 +162,16 @@ Can pick an arbitrary time range.
 | end | end time | string | — | 18:00 |
 | step | time step | string | — | 00:30 |
 | minTime | minimum time, any time before this time will be disabled | string | — | 00:00 |
+| maxTime | maximum time, any time after this time will be disabled | string | — | — |
 
 ### Time Picker Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | selectableRange | available time range, e.g.`'18:30:00 - 20:30:00'`or`['09:30:00 - 12:00:00', '14:30:00 - 18:30:00']` | string/array | — | — |
+
+
+### Events
+| Event Name | Description | Parameters |
+|---------|--------|---------|
+| change | triggers when input value changes | formatted value |
+

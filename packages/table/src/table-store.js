@@ -69,7 +69,9 @@ const TableStore = function(table, initialState = {}) {
     selectable: null,
     currentRow: null,
     hoverRow: null,
-    filters: {}
+    filters: {},
+    expandRows: [],
+    defaultExpandAll: false
   };
 
   for (let prop in initialState) {
@@ -84,6 +86,15 @@ TableStore.prototype.mutations = {
     const dataInstanceChanged = states._data !== data;
     states._data = data;
     states.data = sortData((data || []), states);
+
+    states.data.forEach((item) => {
+      if (!item.$extra) {
+        Object.defineProperty(item, '$extra', {
+          value: {},
+          enumerable: false
+        });
+      }
+    });
 
     this.updateCurrentRow();
 
@@ -112,6 +123,11 @@ TableStore.prototype.mutations = {
       } else {
         console.warn('WARN: rowKey is required when reserve-selection is enabled.');
       }
+    }
+
+    const defaultExpandAll = states.defaultExpandAll;
+    if (defaultExpandAll) {
+      this.states.expandRows = (states.data || []).slice(0);
     }
 
     Vue.nextTick(() => this.table.updateScrollY());
@@ -218,6 +234,26 @@ TableStore.prototype.mutations = {
     this.updateAllSelected();
   },
 
+  toggleRowExpanded: function(states, row, expanded) {
+    const expandRows = states.expandRows;
+    if (typeof expanded !== 'undefined') {
+      const index = expandRows.indexOf(row);
+      if (expanded) {
+        if (index === -1) expandRows.push(row);
+      } else {
+        if (index !== -1) expandRows.splice(index, 1);
+      }
+    } else {
+      const index = expandRows.indexOf(row);
+      if (index === -1) {
+        expandRows.push(row);
+      } else {
+        expandRows.splice(index, 1);
+      }
+    }
+    this.table.$emit('expand', row, expandRows.indexOf(row) !== -1);
+  },
+
   toggleAllSelection: debounce(10, function(states) {
     const data = states.data || [];
     const value = !states.isAllSelected;
@@ -284,6 +320,22 @@ TableStore.prototype.clearSelection = function() {
   if (oldSelection.length > 0) {
     this.table.$emit('selection-change', states.selection);
   }
+};
+
+TableStore.prototype.setExpandRowKeys = function(rowKeys) {
+  const expandRows = [];
+  const data = this.states.data;
+  const rowKey = this.states.rowKey;
+  if (!rowKey) throw new Error('[Table] prop row-key should not be empty.');
+  const keysMap = getKeysMap(data, rowKey);
+  rowKeys.forEach((key) => {
+    const info = keysMap[key];
+    if (info) {
+      expandRows.push(info.row);
+    }
+  });
+
+  this.states.expandRows = expandRows;
 };
 
 TableStore.prototype.toggleRowSelection = function(row, selected) {
@@ -376,6 +428,18 @@ TableStore.prototype.scheduleLayout = function() {
   this.table.debouncedLayout();
 };
 
+TableStore.prototype.setCurrentRowKey = function(key) {
+  const states = this.states;
+  const rowKey = states.rowKey;
+  if (!rowKey) throw new Error('[Table] row-key should not be empty.');
+  const data = states.data || [];
+  const keysMap = getKeysMap(data, rowKey);
+  const info = keysMap[key];
+  if (info) {
+    states.currentRow = info.row;
+  }
+};
+
 TableStore.prototype.updateCurrentRow = function() {
   const states = this.states;
   const table = this.table;
@@ -395,6 +459,8 @@ TableStore.prototype.commit = function(name, ...args) {
   const mutations = this.mutations;
   if (mutations[name]) {
     mutations[name].apply(this, [this.states].concat(args));
+  } else {
+    throw new Error(`Action not found: ${name}`);
   }
 };
 

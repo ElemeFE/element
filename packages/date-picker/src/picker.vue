@@ -1,6 +1,7 @@
 <template>
   <el-input
     class="el-date-editor"
+    :class="'el-date-editor--' + type"
     :readonly="!editable || readonly"
     :disabled="disabled"
     :size="size"
@@ -26,7 +27,7 @@
 <script>
 import Vue from 'vue';
 import Clickoutside from 'element-ui/src/utils/clickoutside';
-import { formatDate, parseDate, getWeekNumber } from './util';
+import { formatDate, parseDate, getWeekNumber, equalDate } from './util';
 import Popper from 'element-ui/src/utils/vue-popper';
 import Emitter from 'element-ui/src/mixins/emitter';
 import ElInput from 'element-ui/packages/input';
@@ -187,6 +188,10 @@ export default {
     readonly: Boolean,
     placeholder: String,
     disabled: Boolean,
+    clearable: {
+      type: Boolean,
+      default: true
+    },
     popperClass: String,
     editable: {
       type: Boolean,
@@ -197,7 +202,6 @@ export default {
       default: 'left'
     },
     value: {},
-    haveTrigger: {},
     pickerOptions: {}
   },
 
@@ -305,14 +309,18 @@ export default {
           if (parsedValue && this.picker) {
             this.picker.value = parsedValue;
           }
-          return;
+        } else {
+          this.picker.value = value;
         }
-        this.picker.value = value;
+        this.$forceUpdate();
       }
     }
   },
 
   created() {
+    this.cachePicker = {};
+    this.cacheChange = {};
+
     // vue-popper
     this.options = {
       boundariesPadding: 0,
@@ -324,19 +332,34 @@ export default {
   methods: {
     handleMouseEnterIcon() {
       if (this.readonly || this.disabled) return;
-      if (!this.valueIsEmpty) {
+      if (!this.valueIsEmpty && this.clearable) {
         this.showClose = true;
       }
     },
 
     handleClickIcon() {
       if (this.readonly || this.disabled) return;
-      if (this.valueIsEmpty) {
-        this.pickerVisible = !this.pickerVisible;
-      } else {
+      if (this.showClose) {
         this.internalValue = '';
-        this.$emit('input', '');
+      } else {
+        this.pickerVisible = !this.pickerVisible;
       }
+    },
+
+    dateIsUpdated(date, cache) {
+      let updated = true;
+
+      if (Array.isArray(date)) {
+        if (equalDate(cache.cacheDateMin, date[0]) &&
+          equalDate(cache.cacheDateMax, date[1])) updated = false;
+        cache.cacheDateMin = date[0];
+        cache.cacheDateMax = date[1];
+      } else {
+        if (equalDate(cache.cacheDate, date)) updated = false;
+        cache.cacheDate = date;
+      }
+
+      return updated;
     },
 
     handleClose() {
@@ -375,6 +398,7 @@ export default {
     },
 
     showPicker() {
+      if (this.$isServer) return;
       if (!this.picker) {
         this.panel.defaultValue = this.internalValue;
         this.picker = new Vue(this.panel).$mount(document.createElement('div'));
@@ -387,30 +411,34 @@ export default {
           this.picker.format = this.format;
         }
 
-        const options = this.pickerOptions;
+        const updateOptions = () => {
+          const options = this.pickerOptions;
 
-        if (options && options.selectableRange) {
-          let ranges = options.selectableRange;
-          const parser = TYPE_VALUE_RESOLVER_MAP.datetimerange.parser;
-          const format = DEFAULT_FORMATS.timerange;
+          if (options && options.selectableRange) {
+            let ranges = options.selectableRange;
+            const parser = TYPE_VALUE_RESOLVER_MAP.datetimerange.parser;
+            const format = DEFAULT_FORMATS.timerange;
 
-          ranges = Array.isArray(ranges) ? ranges : [ranges];
-          this.picker.selectableRange = ranges.map(range => parser(range, format));
-        }
-
-        if (this.type === 'time-select' && options) {
-          this.$watch('pickerOptions.minTime', val => {
-            this.picker.minTime = val;
-          });
-        }
-
-        for (const option in options) {
-          if (options.hasOwnProperty(option) &&
-              // 忽略 time-picker 的该配置项
-              option !== 'selectableRange') {
-            this.picker[option] = options[option];
+            ranges = Array.isArray(ranges) ? ranges : [ranges];
+            this.picker.selectableRange = ranges.map(range => parser(range, format));
           }
-        }
+
+          if (this.type === 'time-select' && options) {
+            this.$watch('pickerOptions.minTime', val => {
+              this.picker.minTime = val;
+            });
+          }
+
+          for (const option in options) {
+            if (options.hasOwnProperty(option) &&
+                // 忽略 time-picker 的该配置项
+                option !== 'selectableRange') {
+              this.picker[option] = options[option];
+            }
+          }
+        };
+        updateOptions();
+        this.$watch('pickerOptions', () => updateOptions(), { deep: true });
 
         this.$el.appendChild(this.picker.$el);
         this.pickerVisible = this.picker.visible = true;
@@ -418,7 +446,9 @@ export default {
 
         this.picker.$on('dodestroy', this.doDestroy);
         this.picker.$on('pick', (date, visible = false) => {
-          this.$emit('input', date);
+          if (this.dateIsUpdated(date, this.cachePicker)) this.$emit('input', date);
+
+          this.$nextTick(() => this.dateIsUpdated(date, this.cacheChange) && this.$emit('change', this.visualValue));
           this.pickerVisible = this.picker.visible = visible;
           this.picker.resetView && this.picker.resetView();
         });

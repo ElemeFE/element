@@ -22,7 +22,7 @@
 </template>
 
 <script>
-  import Popup from 'vue-popup';
+  import Popup from 'element-ui/src/utils/popup';
 
   export default {
     name: 'el-dialog',

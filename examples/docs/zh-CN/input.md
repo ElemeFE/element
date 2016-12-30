@@ -126,70 +126,55 @@
     .el-select .el-input {
       width: 110px;
     }
-    .text {
-      font-size: 14px;
-      color: #8492a6;
-    }
     .el-input {
       width: 180px;
-
-      & + .el-input,
-      & + .el-textarea {
-        margin-top: 15px;
-      }
     }
     .el-textarea {
       width: 414px;
     }
     .el-input-group {
-      min-width: 260px;
+      width: 100%;
     }
-    .el-input-group + .el-input-group {
-      margin-top: 15px;
-    }
-    .el-autocomplete {
-      display: inline-block;
-    }
-    .inline-input {
-      &.el-input {
-        display: inline-block;
+    .demo-input-size {
+      .el-input {
         vertical-align: top;
-        margin: 10px 5px;
-      }
-      &.el-autocomplete {
-        display: inline-block;
-        margin: 10px 0 0;
+        margin: 0 10px 10px 0;
       }
     }
-    .tac {
+    .demo-autocomplete {
       text-align: center;
+
+      .sub-title {
+        margin-bottom: 10px;
+        font-size: 14px;
+        color: #8492a6;
+      }
+
+      .el-col:not(:last-child) {
+        border-right: 1px solid rgba(224,230,237,0.50);
+      }
 
       .el-autocomplete {
         text-align: left;
       }
     }
-    .el-row.border-grid {
-      .el-col:not(:last-child) {
-        border-right: 1px solid rgba(224,230,237,0.50);
+  }
+  .el-autocomplete__suggestions.my-autocomplete {
+    li {
+      line-height: normal;
+      padding: 7px *;
+
+      .name {
+        text-overflow: ellipsis;
+        overflow: hidden;
       }
-    }
-    .my-autocomplete {
-      li {
-        line-height: normal;
-        padding: 7px *;
+      .addr {
+        font-size: 12px;
+        color: #b4b4b4;
+      }
 
-        .name {
-          text-overflow: ellipsis;
-          overflow: hidden;
-        }
-        .addr {
-          font-size: 12px;
-          color: #b4b4b4;
-        }
-
-        .highlighted .addr {
-          color: #ddd;
-        }
+      .highlighted .addr {
+        color: #ddd;
       }
     }
   }
@@ -203,10 +188,7 @@
 
 ::: demo
 ```html
-<el-input
-  placeholder="请输入内容"
-  v-model="input">
-</el-input>
+<el-input v-model="input" placeholder="请输入内容"></el-input>
 
 <script>
 export default {
@@ -304,14 +286,18 @@ export default {
 
 ::: demo 可通过 slot 来指定在 input 中前置或者后置内容。
 ```html
-<template>
+<div>
   <el-input placeholder="请输入内容" v-model="input3">
     <template slot="prepend">Http://</template>
   </el-input>
+</div>
+<div style="margin-top: 15px;">
   <el-input placeholder="请输入内容" v-model="input4">
     <template slot="append">.com</template>
   </el-input>
-  <el-input placeholder="请输入内容" v-model="input5" style="width: 300px;">
+</div>
+<div style="margin-top: 15px;">
+  <el-input placeholder="请输入内容" v-model="input5">
     <el-select v-model="select" slot="prepend" placeholder="请选择">
       <el-option label="餐厅名" value="1"></el-option>
       <el-option label="订单号" value="2"></el-option>
@@ -319,14 +305,7 @@ export default {
     </el-select>
     <el-button slot="append" icon="search"></el-button>
   </el-input>
-</template>
-
-<style>
-.el-select .el-input {
-  width: 100px;
-}
-</style>
-
+</div>
 <script>
 export default {
   data() {
@@ -346,26 +325,22 @@ export default {
 
 ::: demo 可通过 `size` 属性指定输入框的尺寸，除了默认的大小外，还提供了 large、small 和 mini 三种尺寸。
 ```html
-<div>
+<div class="demo-input-size">
   <el-input
-    class="inline-input"
     size="large"
     placeholder="请输入内容"
     v-model="input6">
   </el-input>
   <el-input
-    class="inline-input"
     placeholder="请输入内容"
     v-model="input7">
   </el-input>
   <el-input
-    class="inline-input"
     size="small"
     placeholder="请输入内容"
     v-model="input8">
   </el-input>
   <el-input
-    class="inline-input"
     size="mini"
     placeholder="请输入内容"
     v-model="input9">
@@ -393,9 +368,9 @@ export default {
 
 ::: demo autocomplete 是一个可带输入建议的输入框组件，`fetch-suggestions` 是一个返回输入建议的方法属性，如 querySearch(queryString, cb)，在该方法中你可以在你的输入建议数据准备好时通过 cb(data) 返回到 autocomplete 组件中。
 ```html
-<el-row class="border-grid">
-  <el-col :span="12" class="tac">
-    <div class="text">激活即列出输入建议</div>
+<el-row class="demo-autocomplete">
+  <el-col :span="12">
+    <div class="sub-title">激活即列出输入建议</div>
     <el-autocomplete
       class="inline-input"
       v-model="state1"
@@ -404,8 +379,8 @@ export default {
       @select="handleSelect"
     ></el-autocomplete>
   </el-col>
-  <el-col :span="12" class="tac">
-    <div class="text">输入后匹配输入建议</div>
+  <el-col :span="12">
+    <div class="sub-title">输入后匹配输入建议</div>
     <el-autocomplete
       class="inline-input"
       v-model="state2"
@@ -508,7 +483,7 @@ export default {
 ::: demo
 ```html
 <el-autocomplete
-  class="my-autocomplete"
+  popper-class="my-autocomplete"
   v-model="state3"
   :fetch-suggestions="querySearch"
   custom-item="my-item-zh"
@@ -750,18 +725,19 @@ export default {
 | rows          | 输入框行数，只对 `type="textarea"` 有效  |  number | — |  2   |
 | autosize      | 自适应内容高度，只对 `type="textarea"` 有效，可传入对象，如，{ minRows: 2, maxRows: 6 }  |  boolean/object | — |  false   |
 | auto-complete | 原生属性，自动补全 | string | on, off | off |
-| name | 原生属性 | string | - | -|
-| max | 原生属性，设置最大值 | * | - | - |
-| min | 原生属性，设置最小值 | * | - | - |
+| name | 原生属性 | string | — | — |
+| max | 原生属性，设置最大值 | * | — | — |
+| min | 原生属性，设置最小值 | * | — | — |
 | autofocus | 原生属性，自动获取焦点 | boolean | true, false | false |
-| form | 原生属性 | string | - | - |
+| form | 原生属性 | string | — | — |
 
 ### Input Events
 | 事件名称 | 说明 | 回调参数 |
 |---------|--------|---------|
-| click | 点击 Input 内的图标时触发 | event |
-| blur | 在 Input 失去焦点时触发 | event |
-| focus | 在 Input 或得焦点时触发 | event |
+| click | 点击 Input 内的图标时触发 | (event: Event) |
+| blur | 在 Input 失去焦点时触发 | (event: Event) |
+| focus | 在 Input 或得焦点时触发 | (event: Event) |
+| change | 在 Input 值改变时触发 | (value: string \| number) |
 
 ### Autocomplete Attributes
 
@@ -772,6 +748,7 @@ export default {
 | value         | 必填值输入绑定值   | string  | — | — |
 | custom-item  | 通过该参数指定自定义的输入建议列表项的组件名 | string  | — | — |
 | fetch-suggestions | 返回输入建议的方法，仅当你的输入建议数据 resolve 时，通过调用 callback(data:[]) 来返回它  | Function(queryString, callback)  | — | — |
+| popper-class | Autocomplete 下拉列表的类名 | string | — | — |
 
 ### Autocomplete Events
 | 事件名称 | 说明 | 回调参数 |

@@ -6,31 +6,11 @@
       { 'is-without-controls': !controls}
     ]"
   >
-    <el-input
-      :value="currentValue"
-      @keydown.up.native="increase"
-      @keydown.down.native="decrease"
-      @blur="handleBlur"
-      @input="handleInput"
-      :disabled="disabled"
-      :size="size"
-      :class="{
-        'is-active': inputActive
-      }">
-        <template slot="prepend" v-if="$slots.prepend">
-          <slot name="prepend"></slot>
-        </template>
-        <template slot="append" v-if="$slots.append">
-          <slot name="append"></slot>
-        </template> 
-    </el-input>
     <span
       v-if="controls"
       class="el-input-number__decrease el-icon-minus"
       :class="{'is-disabled': minDisabled}"
       v-repeat-click="decrease"
-      @mouseenter="activeInput(minDisabled)"
-      @mouseleave="inactiveInput(minDisabled)"
     >
     </span>
     <span
@@ -38,18 +18,58 @@
       class="el-input-number__increase el-icon-plus"
       :class="{'is-disabled': maxDisabled}"
       v-repeat-click="increase"
-      @mouseenter="activeInput(maxDisabled)"
-      @mouseleave="inactiveInput(maxDisabled)"
     >
     </span>
+    <el-input
+      v-model.number="currentValue"
+      @keydown.up.native="increase"
+      @keydown.down.native="decrease"
+      @blur="handleBlur"
+      :disabled="disabled"
+      :size="size"
+      ref="input"
+    >
+        <template slot="prepend" v-if="$slots.prepend">
+          <slot name="prepend"></slot>
+        </template>
+        <template slot="append" v-if="$slots.append">
+          <slot name="append"></slot>
+        </template> 
+    </el-input>
   </div>
 </template>
 <script>
   import ElInput from 'element-ui/packages/input';
-  import { once, on } from 'wind-dom/src/event';
+  import { once, on } from 'element-ui/src/utils/dom';
 
   export default {
     name: 'ElInputNumber',
+    directives: {
+      repeatClick: {
+        bind(el, binding, vnode) {
+          let interval = null;
+          let startTime;
+
+          const handler = () => vnode.context[binding.expression]();
+          const clear = () => {
+            if (new Date() - startTime < 100) {
+              handler();
+            }
+            clearInterval(interval);
+            interval = null;
+          };
+
+          on(el, 'mousedown', () => {
+            startTime = new Date();
+            once(document, 'mouseup', clear);
+            interval = setInterval(handler, 100);
+          });
+        }
+      }
+    },
+    components: {
+      ElInput
+    },
     props: {
       step: {
         type: Number,
@@ -73,37 +93,6 @@
         default: true
       }
     },
-    directives: {
-      repeatClick: {
-        bind(el, binding, vnode) {
-          let interval = null;
-          let startTime;
-
-          const handler = () => {
-            vnode.context[binding.expression]();
-          };
-
-          const clear = function() {
-            if (new Date() - startTime < 100) {
-              handler();
-            }
-            clearInterval(interval);
-            interval = null;
-          };
-
-          on(el, 'mousedown', function() {
-            startTime = new Date();
-            once(document, 'mouseup', clear);
-            interval = setInterval(function() {
-              handler();
-            }, 100);
-          });
-        }
-      }
-    },
-    components: {
-      ElInput
-    },
     data() {
       // correct the init value
       let value = this.value;
@@ -116,8 +105,7 @@
         value = this.max;
       }
       return {
-        currentValue: value,
-        inputActive: false
+        currentValue: value
       };
     },
     watch: {
@@ -126,19 +114,20 @@
       },
 
       currentValue(newVal, oldVal) {
-        let value = Number(newVal);
-        if (value <= this.max && value >= this.min) {
-          this.$emit('change', value, oldVal);
-          this.$emit('input', value);
+        if (newVal <= this.max && newVal >= this.min) {
+          this.$emit('change', newVal, oldVal);
+          this.$emit('input', newVal);
+        } else {
+          this.currentValue = oldVal;
         }
       }
     },
     computed: {
       minDisabled() {
-        return this.value - this.step < this.min;
+        return this.accSub(this.value, this.step) < this.min;
       },
       maxDisabled() {
-        return this.value + this.step > this.max;
+        return this.accAdd(this.value, this.step) > this.max;
       }
     },
     methods: {
@@ -188,41 +177,19 @@
         return (arg1 + arg2) / m;
       },
       increase() {
+        if (this.maxDisabled) return;
         const value = this.value || 0;
-        if (value + this.step > this.max || this.disabled) return;
-        this.currentValue = this.accAdd(this.step, value);
-        if (this.maxDisabled) {
-          this.inputActive = false;
-        }
+        if (this.accAdd(value, this.step) > this.max || this.disabled) return;
+        this.currentValue = this.accAdd(value, this.step);
       },
       decrease() {
+        if (this.minDisabled) return;
         const value = this.value || 0;
-        if (value - this.step < this.min || this.disabled) return;
+        if (this.accSub(value, this.step) < this.min || this.disabled) return;
         this.currentValue = this.accSub(value, this.step);
-        if (this.minDisabled) {
-          this.inputActive = false;
-        }
       },
-      activeInput(disabled) {
-        if (!this.disabled && !disabled) {
-          this.inputActive = true;
-        }
-      },
-      inactiveInput(disabled) {
-        if (!this.disabled && !disabled) {
-          this.inputActive = false;
-        }
-      },
-      handleBlur(event) {
-        let value = Number(this.currentValue);
-        if (isNaN(value) || value > this.max || value < this.min) {
-          this.currentValue = this.value;
-        } else {
-          this.currentValue = value;
-        }
-      },
-      handleInput(value) {
-        this.currentValue = value;
+      handleBlur() {
+        this.$refs.input.setCurrentValue(this.currentValue);
       }
     }
   };

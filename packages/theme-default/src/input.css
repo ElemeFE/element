@@ -5,6 +5,8 @@
   @b input {
     position: relative;
     font-size: var(--font-size-base);
+    display: inline-block;
+    width: 100%;
 
     @e inner {
       appearance: none;
@@ -103,7 +105,8 @@
 
   @b input-group {
     line-height: normal;
-    display: table;
+    display: inline-table;
+    width: 100%;
     border-collapse: separate;
 
     & > .el-input__inner {
@@ -168,6 +171,8 @@
   }
 
   @b textarea {
+    display: inline-block;
+    width: 100%;
 
     @e inner {
       display: block;

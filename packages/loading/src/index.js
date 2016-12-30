@@ -61,6 +61,7 @@ const addStyle = (options, parent, instance) => {
 };
 
 const Loading = (options = {}) => {
+  if (Vue.prototype.$isServer) return;
   options = merge({}, defaults, options);
   if (typeof options.target === 'string') {
     options.target = document.querySelector(options.target);

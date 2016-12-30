@@ -18,7 +18,10 @@
         :style="{ width: layout.bodyWidth ? layout.bodyWidth + 'px' : '' }">
       </table-header>
     </div>
-    <div class="el-table__body-wrapper" ref="bodyWrapper" :style="[bodyHeight]">
+    <div
+      class="el-table__body-wrapper"
+      ref="bodyWrapper"
+      :style="[bodyHeight]">
       <table-body
         :context="context"
         :store="store"
@@ -29,7 +32,7 @@
         :style="{ width: layout.bodyWidth ? layout.bodyWidth - (layout.scrollY ? layout.gutterWidth : 0 ) + 'px' : '' }">
       </table-body>
       <div class="el-table__empty-block" v-if="!data || data.length === 0">
-      <span class="el-table__empty-text"><slot name="empty">{{ emptyText || t('el.table.emptyText') }}</slot></span>
+        <span class="el-table__empty-text"><slot name="empty">{{ emptyText || t('el.table.emptyText') }}</slot></span>
       </div>
     </div>
     <div class="el-table__fixed" ref="fixedWrapper"
@@ -102,7 +105,6 @@
 
 <script type="text/babel">
   import ElCheckbox from 'element-ui/packages/checkbox';
-  import Migrating from 'element-ui/src/mixins/migrating';
   import throttle from 'throttle-debounce/throttle';
   import debounce from 'throttle-debounce/debounce';
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
@@ -118,7 +120,7 @@
   export default {
     name: 'el-table',
 
-    mixins: [Migrating, Locale],
+    mixins: [Locale],
 
     props: {
       data: {
@@ -158,7 +160,13 @@
 
       highlightCurrentRow: Boolean,
 
-      emptyText: String
+      currentRowKey: [String, Number],
+
+      emptyText: String,
+
+      expandRowKeys: Array,
+
+      defaultExpandAll: Boolean
     },
 
     components: {
@@ -168,24 +176,6 @@
     },
 
     methods: {
-      getMigratingConfig() {
-        return {
-          props: {
-            'allow-no-selection': 'Table: allow-no-selection has been removed.',
-            'selection-mode': 'Table: selection-mode has been removed.',
-            'fixed-column-count': 'Table: fixed-column-count has been removed. Use fixed prop in TableColumn instead.',
-            'custom-criteria': 'Table: custom-criteria has been removed. Use row-class-name instead.',
-            'custom-background-colors': 'custom-background-colors has been removed. Use row-class-name instead.'
-          },
-          events: {
-            selectionchange: 'Table: selectionchange has been renamed to selection-change.',
-            cellmouseenter: 'Table: cellmouseenter has been renamed to cell-mouse-enter.',
-            cellmouseleave: 'Table: cellmouseleave has been renamed to cell-mouse-leave.',
-            cellclick: 'Table: cellclick has been renamed to cell-click.'
-          }
-        };
-      },
-
       toggleRowSelection(row, selected) {
         this.store.toggleRowSelection(row, selected);
         this.store.updateAllSelected();
@@ -205,22 +195,22 @@
       },
 
       bindEvents() {
-        const { bodyWrapper, headerWrapper } = this.$refs;
+        const { headerWrapper } = this.$refs;
         const refs = this.$refs;
-        bodyWrapper.addEventListener('scroll', function() {
+        this.bodyWrapper.addEventListener('scroll', function() {
           if (headerWrapper) headerWrapper.scrollLeft = this.scrollLeft;
           if (refs.fixedBodyWrapper) refs.fixedBodyWrapper.scrollTop = this.scrollTop;
           if (refs.rightFixedBodyWrapper) refs.rightFixedBodyWrapper.scrollTop = this.scrollTop;
         });
 
         if (headerWrapper) {
-          mousewheel(headerWrapper, throttle(16, function(event) {
+          mousewheel(headerWrapper, throttle(16, event => {
             const deltaX = event.deltaX;
 
             if (deltaX > 0) {
-              bodyWrapper.scrollLeft = bodyWrapper.scrollLeft + 10;
+              this.bodyWrapper.scrollLeft += 10;
             } else {
-              bodyWrapper.scrollLeft = bodyWrapper.scrollLeft - 10;
+              this.bodyWrapper.scrollLeft -= 10;
             }
           }));
         }
@@ -255,6 +245,10 @@
     },
 
     computed: {
+      bodyWrapper() {
+        return this.$refs.bodyWrapper;
+      },
+
       shouldUpdateHeight() {
         return typeof this.height === 'number' ||
           this.fixedColumns.length > 0 ||
@@ -341,11 +335,19 @@
         this.layout.setHeight(value);
       },
 
+      currentRowKey(newVal) {
+        this.store.setCurrentRowKey(newVal);
+      },
+
       data: {
         immediate: true,
         handler(val) {
           this.store.commit('setData', val);
         }
+      },
+
+      expandRowKeys(newVal) {
+        this.store.setExpandRowKeys(newVal);
       }
     },
 
@@ -362,7 +364,8 @@
 
     data() {
       const store = new TableStore(this, {
-        rowKey: this.rowKey
+        rowKey: this.rowKey,
+        defaultExpandAll: this.defaultExpandAll
       });
       const layout = new TableLayout({
         store,
@@ -373,6 +376,7 @@
       return {
         store,
         layout,
+        renderExpanded: null,
         resizeProxyVisible: false
       };
     }

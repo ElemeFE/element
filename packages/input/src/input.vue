@@ -33,7 +33,7 @@
         :min="min"
         :max="max"
         :form="form"
-        :value="value"
+        :value="currentValue"
         ref="input"
         @input="handleInput"
         @focus="handleFocus"
@@ -48,7 +48,8 @@
     <textarea
       v-else
       class="el-textarea__inner"
-      v-model="currentValue"
+      :value="currentValue"
+      @input="handleInput"
       ref="textarea"
       :name="name"
       :placeholder="placeholder"
@@ -75,6 +76,13 @@
     componentName: 'ElInput',
 
     mixins: [emitter],
+
+    data() {
+      return {
+        currentValue: this.value,
+        textareaStyle: {}
+      };
+    },
 
     props: {
       value: [String, Number],
@@ -105,51 +113,11 @@
       maxlength: Number,
       minlength: Number,
       max: {},
-      min: {}
-    },
-
-    methods: {
-      handleBlur(event) {
-        this.$emit('blur', event);
-        this.dispatch('ElFormItem', 'el.form.blur', [this.currentValue]);
-      },
-      inputSelect() {
-        this.$refs.input.select();
-      },
-      resizeTextarea() {
-        var { autosize, type } = this;
-        if (!autosize || type !== 'textarea') {
-          return;
-        }
-        const minRows = autosize.minRows;
-        const maxRows = autosize.maxRows;
-
-        this.textareaStyle = calcTextareaHeight(this.$refs.textarea, minRows, maxRows);
-      },
-      handleFocus(event) {
-        this.$emit('focus', event);
-      },
-      handleInput(event) {
-        this.currentValue = event.target.value;
-      },
-      handleIconClick(event) {
-        this.$emit('click', event);
+      min: {},
+      validateEvent: {
+        type: Boolean,
+        default: true
       }
-    },
-
-    data() {
-      return {
-        currentValue: this.value,
-        textareaStyle: {}
-      };
-    },
-
-    created() {
-      this.$on('inputSelect', this.inputSelect);
-    },
-
-    mounted() {
-      this.resizeTextarea();
     },
 
     computed: {
@@ -160,16 +128,58 @@
 
     watch: {
       'value'(val, oldValue) {
-        this.currentValue = val;
+        this.setCurrentValue(val);
+      }
+    },
+
+    methods: {
+      handleBlur(event) {
+        this.$emit('blur', event);
+        if (this.validateEvent) {
+          this.dispatch('ElFormItem', 'el.form.blur', [this.currentValue]);
+        }
       },
-      'currentValue'(val) {
+      inputSelect() {
+        this.$refs.input.select();
+      },
+      resizeTextarea() {
+        if (this.$isServer) return;
+        var { autosize, type } = this;
+        if (!autosize || type !== 'textarea') return;
+        const minRows = autosize.minRows;
+        const maxRows = autosize.maxRows;
+
+        this.textareaStyle = calcTextareaHeight(this.$refs.textarea, minRows, maxRows);
+      },
+      handleFocus(event) {
+        this.$emit('focus', event);
+      },
+      handleInput(event) {
+        this.setCurrentValue(event.target.value);
+      },
+      handleIconClick(event) {
+        this.$emit('click', event);
+      },
+      setCurrentValue(value) {
+        if (value === this.currentValue) return;
         this.$nextTick(_ => {
           this.resizeTextarea();
         });
-        this.$emit('input', val);
-        this.$emit('change', val);
-        this.dispatch('ElFormItem', 'el.form.change', [val]);
+        this.currentValue = value;
+        this.$emit('input', value);
+        this.$emit('change', value);
+        if (this.validateEvent) {
+          this.dispatch('ElFormItem', 'el.form.change', [value]);
+        }
       }
+    },
+
+    created() {
+      this.$on('inputSelect', this.inputSelect);
+    },
+
+    mounted() {
+      this.resizeTextarea();
     }
   };
 </script>

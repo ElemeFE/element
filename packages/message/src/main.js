@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { PopupManager } from 'vue-popup';
+import { PopupManager } from 'element-ui/src/utils/popup';
 let MessageConstructor = Vue.extend(require('./main.vue'));
 
 let instance;
@@ -7,6 +7,7 @@ let instances = [];
 let seed = 1;
 
 var Message = function(options) {
+  if (Vue.prototype.$isServer) return;
   options = options || {};
   if (typeof options === 'string') {
     options = {

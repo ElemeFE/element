@@ -92,11 +92,6 @@
       },
       value() {
         this.dispatch('ElSelect', 'setSelected');
-      },
-      visible() {
-        this.$nextTick(() => {
-          this.dispatch('ElSelectDropdown', 'updatePopper');
-        });
       }
     },
 

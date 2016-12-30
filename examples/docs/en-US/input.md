@@ -83,68 +83,57 @@
 <style>
   .demo-input.demo-en-US {
     .el-select .el-input {
-      width: 120px;
-    }
-    .text {
-      font-size: 14px;
-      color: #8492a6;
+      width: 110px;
     }
     .el-input {
       width: 180px;
-
-      & + .el-input,
-      & + .el-textarea {
-        margin-top: 15px;
-      }
     }
     .el-textarea {
       width: 414px;
     }
     .el-input-group {
-      min-width: 260px;
+      width: 100%;
     }
-    .el-input-group + .el-input-group {
-      margin-top: 15px;
-    }
-    .el-autocomplete {
-      display: inline-block;
-    }
-    .inline-input {
-      &.el-input {
-        display: inline-block;
+    .demo-input-size {
+      .el-input {
         vertical-align: top;
-        margin: 10px 5px;
-      }
-      &.el-autocomplete {
-        display: inline-block;
-        margin: 10px 0 0;
+        margin: 0 10px 10px 0;
       }
     }
-    .tac {
+    .demo-autocomplete {
       text-align: center;
+
+      .sub-title {
+        margin-bottom: 10px;
+        font-size: 14px;
+        color: #8492a6;
+      }
+
+      .el-col:not(:last-child) {
+        border-right: 1px solid rgba(224,230,237,0.50);
+      }
 
       .el-autocomplete {
         text-align: left;
       }
     }
-    .el-row.border-grid {
-      .el-col:not(:last-child) {
-        border-right: 1px solid rgba(224,230,237,0.50);
-      }
-    }
-    .my-autocomplete {
-      li {
-        line-height: normal;
-        padding: 7px *;
+  }
+  .el-autocomplete__suggestions.my-autocomplete {
+    li {
+      line-height: normal;
+      padding: 7px *;
 
-        .value {
-          text-overflow: ellipsis;
-          overflow: hidden;
-        }
-        .link {
-          font-size: 12px;
-          color: #b4b4b4;
-        }
+      .name {
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      .addr {
+        font-size: 12px;
+        color: #b4b4b4;
+      }
+
+      .highlighted .addr {
+        color: #ddd;
       }
     }
   }
@@ -159,10 +148,7 @@ Input data using mouse or keyboard.
 ::: demo
 
 ```html
-<el-input
-  placeholder="Please input"
-  v-model="input">
-</el-input>
+<el-input placeholder="Please input" v-model="input"></el-input>
 
 <script>
 export default {
@@ -263,26 +249,26 @@ Prepend or append an element, generally a label or a button.
 ::: demo Use `slot` to distribute elements that prepend or append to Input.
 
 ```html
-<el-input placeholder="Please input" v-model="input3">
-  <template slot="prepend">Http://</template>
-</el-input>
-<el-input placeholder="Please input" v-model="input4">
-  <template slot="append">.com</template>
-</el-input>
-<el-input placeholder="Please input" v-model="input5" style="width: 300px;">
-  <el-select v-model="select" slot="prepend" placeholder="Select">
-    <el-option label="Restaurant" value="1"></el-option>
-    <el-option label="Order No." value="2"></el-option>
-    <el-option label="Tel" value="3"></el-option>
-  </el-select>
-  <el-button slot="append" icon="search"></el-button>
-</el-input>
-
-<style>
-.el-select .el-input {
-  width: 120px;
-}
-</style>
+<div>
+  <el-input placeholder="请输入内容" v-model="input3">
+    <template slot="prepend">Http://</template>
+  </el-input>
+</div>
+<div style="margin-top: 15px;">
+  <el-input placeholder="请输入内容" v-model="input4">
+    <template slot="append">.com</template>
+  </el-input>
+</div>
+<div style="margin-top: 15px;">
+  <el-input placeholder="请输入内容" v-model="input5">
+    <el-select v-model="select" slot="prepend" placeholder="请选择">
+      <el-option label="餐厅名" value="1"></el-option>
+      <el-option label="订单号" value="2"></el-option>
+      <el-option label="用户电话" value="3"></el-option>
+    </el-select>
+    <el-button slot="append" icon="search"></el-button>
+  </el-input>
+</div>
 
 <script>
 export default {
@@ -303,28 +289,24 @@ export default {
 
 ::: demo Add `size` attribute to change the size of Input. In addition to the default size, there are three other options: `large`, `small` and `mini`.
 ```html
-<div>
+<div class="demo-input-size">
   <el-input
-    class="inline-input"
     size="large"
-    placeholder="Please input"
+    placeholder="请输入内容"
     v-model="input6">
   </el-input>
   <el-input
-    class="inline-input"
-    placeholder="Please input"
+    placeholder="请输入内容"
     v-model="input7">
   </el-input>
   <el-input
-    class="inline-input"
     size="small"
-    placeholder="Please input"
+    placeholder="请输入内容"
     v-model="input8">
   </el-input>
   <el-input
-    class="inline-input"
     size="mini"
-    placeholder="Please input"
+    placeholder="请输入内容"
     v-model="input9">
   </el-input>
 </div>
@@ -344,30 +326,30 @@ export default {
 ```
 :::
 
-### Auto complete
+### Autocomplete
 
 You can get some recommended tips based on the current input.
 
 ::: demo Autocomplete component provides input suggestions. The `fetch-suggestions` attribute is a method that returns suggested input. In this example, `querySearch(queryString, cb)` returns suggestions to Autocomplete via `cb(data)` when suggestions are ready.
 ```html
-<el-row class="border-grid">
-  <el-col :span="12" class="tac">
-    <div class="text">list suggestions when activated</div>
+<el-row class="demo-autocomplete">
+  <el-col :span="12">
+    <div class="sub-title">激活即列出输入建议</div>
     <el-autocomplete
       class="inline-input"
       v-model="state1"
       :fetch-suggestions="querySearch"
-      placeholder="Please input"
+      placeholder="请输入内容"
       @select="handleSelect"
     ></el-autocomplete>
   </el-col>
-  <el-col :span="12" class="tac">
-    <div class="text">list suggestions on input</div>
+  <el-col :span="12">
+    <div class="sub-title">输入后匹配输入建议</div>
     <el-autocomplete
       class="inline-input"
       v-model="state2"
       :fetch-suggestions="querySearch"
-      placeholder="Please input"
+      placeholder="请输入内容"
       :trigger-on-focus="false"
       @select="handleSelect"
     ></el-autocomplete>
@@ -424,7 +406,7 @@ Customize how suggestions are displayed.
 :::demo
 ```html
 <el-autocomplete
-  class="my-autocomplete"
+  popper-class="my-autocomplete"
   v-model="state3"
   :fetch-suggestions="querySearch"
   custom-item="my-item-en"
@@ -591,7 +573,10 @@ Search data from server-side.
 
 | Event Name | Description | Parameters |
 |----| ----| ----|
-|click | triggers when the icon inside Input is clicked | event object |
+|click | triggers when the icon inside Input is clicked | (event: Event) |
+| blur | triggers when the icon inside Input is blur | (event: Event) |
+| focus | triggers when the icon inside Input is focus | (event: Event) |
+| change | triggers when the icon inside Input value change | (value: string \| number) |
 
 ### Autocomplete Attributes
 
@@ -602,6 +587,7 @@ Attribute | Description | Type | Options | Default
 |value | binding value | string | — | — |
 |custom-item | component name of your customized suggestion list item | string | — | — |
 |fetch-suggestions | a method to fetch input suggestions. When suggestions are ready, invoke `callback(data:[])` to return them to Autocomplete | Function(queryString, callback) | — | — |
+| popper-class | custom class name for autocomplete's dropdown | string | — | — |
 
 ### Autocomplete Events
 
