@@ -5,6 +5,7 @@ import scrollbarWidth from 'element-ui/src/utils/scrollbar-width';
 import * as util from './util';
 import Bar from './bar';
 
+/* istanbul ignore next */
 export default {
   name: 'ElScrollbar',
 
