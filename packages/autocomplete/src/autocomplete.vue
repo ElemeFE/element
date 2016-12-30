@@ -1,6 +1,7 @@
 <template>
   <div class="el-autocomplete" v-clickoutside="handleBlur">
     <el-input
+      ref="input"
       :value="value"
       :disabled="disabled"
       :placeholder="placeholder"
@@ -69,7 +70,7 @@
     },
     watch: {
       suggestionVisible(val) {
-        this.broadcast('ElAutocompleteSuggestions', 'visible', [val, this.$el.offsetWidth]);
+        this.broadcast('ElAutocompleteSuggestions', 'visible', [val, this.$refs.input.$refs.input.offsetWidth]);
       }
     },
     methods: {
