@@ -1,5 +1,17 @@
 ## Changelog
 
+### 1.1.2
+
+*2016-12-30*
+
+- Fixed `sortable` and `fixed` attribute of Table not working in Vue 2.1.7+
+- Fixed Input Number not resetting on blur when input with illegal values, #2098
+- Removed `title` scoped slot of Collapse, and added `title` named slot, #2100
+- Fixed range selection in TimePicker not working issue
+- Fixed Tabs' active tab switching when a non-active tab is removed, #2106
+- Fixed console error reporting when navigating Select with arrow keys, #2120
+- Fixed incorrect validation timing of filterable Select in Form, #2120
+
 ### 1.1.1
 
 *2016-12-29*
