@@ -1453,7 +1453,6 @@ When the row content is too long and you do not want to display the horizontal s
 | empty-text | Displayed text when data is empty. You can customize this area with `slot="empty"` | String | — | No Data |
 | default-expand-all | whether expand all rows by default, only works when the table has a column type="expand" | Boolean | — | false |
 | expand-row-keys | set expanded rows by this prop, prop's value is the keys of expand rows, you should set row-key before using this prop | Array | — | |
-| virtual-scrollbar | Enable virtual scrollbar | Boolean | — | false |
 
 ### Table Events
 | Event Name | Description | Parameters |

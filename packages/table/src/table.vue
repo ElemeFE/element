@@ -18,11 +18,10 @@
         :style="{ width: layout.bodyWidth ? layout.bodyWidth + 'px' : '' }">
       </table-header>
     </div>
-    <el-scrollbar
+    <div
       class="el-table__body-wrapper"
       ref="bodyWrapper"
-      :native="!virtualScrollbar"
-      :wrap-style="[bodyHeight]">
+      :style="[bodyHeight]">
       <table-body
         :context="context"
         :store="store"
@@ -35,7 +34,7 @@
       <div class="el-table__empty-block" v-if="!data || data.length === 0">
         <span class="el-table__empty-text"><slot name="empty">{{ emptyText || t('el.table.emptyText') }}</slot></span>
       </div>
-    </el-scrollbar>
+    </div>
     <div class="el-table__fixed" ref="fixedWrapper"
       v-if="fixedColumns.length > 0"
       :style="[
@@ -132,8 +131,6 @@
       },
 
       width: [String, Number],
-
-      virtualScrollbar: Boolean,
 
       height: [String, Number],
 
@@ -249,7 +246,7 @@
 
     computed: {
       bodyWrapper() {
-        return this.$refs.bodyWrapper.wrap;
+        return this.$refs.bodyWrapper;
       },
 
       shouldUpdateHeight() {
