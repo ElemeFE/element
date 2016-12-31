@@ -20,7 +20,7 @@
     'error': 'el-icon-circle-cross'
   };
   export default {
-    name: 'el-alert',
+    name: 'ElAlert',
 
     props: {
       title: {

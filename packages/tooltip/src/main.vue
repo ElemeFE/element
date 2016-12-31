@@ -23,7 +23,7 @@
 import Popper from 'element-ui/src/utils/vue-popper';
 
 export default {
-  name: 'el-tooltip',
+  name: 'ElTooltip',
 
   mixins: [Popper],
 

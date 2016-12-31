@@ -109,7 +109,7 @@ const DEFAULT_RENDER_CELL = function(h, { row, column }) {
 };
 
 export default {
-  name: 'el-table-column',
+  name: 'ElTableColumn',
 
   props: {
     type: {

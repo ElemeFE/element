@@ -27,7 +27,7 @@
   import { hasClass } from 'element-ui/src/utils/dom';
 
   export default {
-    name: 'el-rate',
+    name: 'ElRate',
 
     data() {
       return {

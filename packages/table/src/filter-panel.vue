@@ -39,7 +39,7 @@
   import ElCheckboxGroup from 'element-ui/packages/checkbox-group';
 
   export default {
-    name: 'el-table-filter-panel',
+    name: 'ElTableFilterPanel',
 
     mixins: [Popper, Locale],
 

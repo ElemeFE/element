@@ -66,7 +66,7 @@ const convertToRows = (originColumns) => {
 };
 
 export default {
-  name: 'el-table-header',
+  name: 'ElTableHeader',
 
   render(h) {
     const originColumns = this.store.states.originColumns;

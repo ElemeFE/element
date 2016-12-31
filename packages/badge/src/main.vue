@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: 'el-badge',
+  name: 'ElBadge',
 
   props: {
     value: {},
