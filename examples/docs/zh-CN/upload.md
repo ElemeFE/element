@@ -54,7 +54,7 @@
   action="//jsonplaceholder.typicode.com/posts/"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
-  :default-file-list="fileList">
+  :file-list="fileList">
   <el-button size="small" type="primary">点击上传</el-button>
   <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
 </el-upload>
@@ -92,7 +92,7 @@
   :on-remove="handleRemove"
   :on-success="handleSuccess"
   :on-error="handleError"
-  :default-file-list="fileList"
+  :file-list="fileList"
 >
   <i class="el-icon-upload"></i>
   <div class="el-dragger__text">将文件拖到此处，或<em>点击上传</em></div>
@@ -130,7 +130,7 @@
   :thumbnail-mode="true"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
-  :default-file-list="fileList"
+  :file-list="fileList"
 >
   <i class="el-icon-upload"></i>
   <div class="el-dragger__text">将文件拖到此处，或<em>点击上传</em></div>
@@ -175,7 +175,7 @@
 | on-progress | 可选参数, 文件上传时的钩子 | function(event, file, fileList) | — | — |
 | before-upload | 可选参数, 上传文件之前的钩子，参数为上传的文件，若返回 false 或者 Promise 则停止上传。 | function(file) | — | — |
 | thumbnail-mode | 是否设置为图片模式，该模式下会显示图片缩略图 | boolean | — | false |
-| default-file-list | 默认已上传的文件列表, 例如: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}] | array | — | [] |
+| fileList | 默认已上传的文件列表, 例如: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}] | array | — | [] |
 
 ### Methods
 | 方法名      | 说明          | 参数 |

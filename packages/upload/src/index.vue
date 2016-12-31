@@ -70,7 +70,7 @@ export default {
       type: Function,
       default: noop
     },
-    defaultFileList: {
+    fileList: {
       type: Array,
       default() {
         return [];
@@ -80,7 +80,7 @@ export default {
 
   data() {
     return {
-      fileList: [],
+      _fileList: [],
       dragOver: false,
       draging: false,
       tempIndex: 1
@@ -88,10 +88,10 @@ export default {
   },
 
   watch: {
-    defaultFileList: {
+    fileList: {
       immediate: true,
       handler(fileList) {
-        this.fileList = fileList.map(item => {
+        this._fileList = fileList.map(item => {
           item.status = 'finished';
           item.percentage = 100;
           item.uid = Date.now() + this.tempIndex++;
@@ -120,11 +120,11 @@ export default {
         return;
       }
 
-      this.fileList.push(_file);
+      this._fileList.push(_file);
     },
     handleProgress(ev, file) {
       var _file = this.getFile(file);
-      this.onProgress(ev, _file, this.fileList);
+      this.onProgress(ev, _file, this._fileList);
       _file.percentage = ev.percent || 0;
     },
     handleSuccess(res, file) {
@@ -134,7 +134,7 @@ export default {
         _file.status = 'finished';
         _file.response = res;
 
-        this.onSuccess(res, _file, this.fileList);
+        this.onSuccess(res, _file, this._fileList);
 
         setTimeout(() => {
           _file.showProgress = false;
@@ -143,7 +143,7 @@ export default {
     },
     handleError(err, response, file) {
       var _file = this.getFile(file);
-      var fileList = this.fileList;
+      var fileList = this._fileList;
 
       _file.status = 'fail';
 
@@ -152,12 +152,12 @@ export default {
       this.onError(err, response, file);
     },
     handleRemove(file) {
-      var fileList = this.fileList;
+      var fileList = this._fileList;
       fileList.splice(fileList.indexOf(file), 1);
       this.onRemove(file, fileList);
     },
     getFile(file) {
-      var fileList = this.fileList;
+      var fileList = this._fileList;
       var target;
       fileList.every(item => {
         target = file.uid === item.uid ? item : null;
@@ -171,7 +171,7 @@ export default {
       }
     },
     clearFiles() {
-      this.fileList = [];
+      this._fileList = [];
     }
   },
 
