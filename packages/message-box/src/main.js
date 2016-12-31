@@ -38,18 +38,19 @@ const defaultCallback = action => {
   if (currentMsg) {
     if (currentMsg.resolve) {
       let $type = currentMsg.options.$type;
+      let handlers = instance.handlers();
       if ($type === 'confirm' || $type === 'prompt') {
         if (action === 'confirm') {
           if (instance.showInput) {
-            currentMsg.resolve({ value: instance.inputValue, action, alert: instance });
+            currentMsg.resolve({ value: instance.inputValue, action, handlers });
           } else {
-            currentMsg.resolve({ action, alert: instance });
+            currentMsg.resolve({ action, handlers });
           }
         } else if (action === 'cancel' && currentMsg.reject) {
-          currentMsg.reject({ action, alert: instance });
+          currentMsg.reject({ action, handlers });
         }
       } else {
-        currentMsg.resolve({ action, alert: instance });
+        currentMsg.resolve({ action, handlers });
       }
     }
   }

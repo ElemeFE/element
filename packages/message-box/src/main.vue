@@ -95,10 +95,11 @@
           this.value = false;
         }
 
+        var handlers = this.handlers();
         if (this.showInput) {
-          callback(action, this.inputValue, this);
+          callback(action, this.inputValue, handlers);
         } else {
-          callback(action, this);
+          callback(action, handlers);
         }
       },
 
@@ -133,12 +134,31 @@
         this.value = false;
       },
 
+      safeHide() {
+        let timeStamp = new Date().getTime();
+        return _ => {
+          if (this._openTimeStamp > timeStamp) {
+            return;
+          } else {
+            this.hide();
+          }
+        };
+      },
+
       showLoading() {
         this.loading = true;
       },
 
       hideLoading() {
         this.loading = false;
+      },
+
+      handlers() {
+        return {
+          showLoading: this.showLoading,
+          hideLoading: this.hideLoading,
+          hide: this.safeHide()
+        };
       }
     },
 
@@ -162,6 +182,7 @@
               this.$refs.input.$el.querySelector('input').focus();
             }
           }, 500);
+          this._openTimeStamp = new Date().getTime();
         } else {
           this.editorErrorMessage = '';
           removeClass(this.$refs.input.$el.querySelector('input'), 'invalid');
@@ -191,7 +212,8 @@
         editorErrorMessage: null,
         callback: null,
         loading: false,
-        autoHide: true
+        autoHide: true,
+        _openTimeStamp: ''
       };
     }
   };
