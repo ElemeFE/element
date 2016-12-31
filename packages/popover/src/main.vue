@@ -20,7 +20,7 @@ import Popper from 'element-ui/src/utils/vue-popper';
 import { on, off } from 'element-ui/src/utils/dom';
 
 export default {
-  name: 'el-popover',
+  name: 'ElPopover',
 
   mixins: [Popper],
 

@@ -1,6 +1,6 @@
 <script>
   module.exports = {
-    name: 'el-tabs',
+    name: 'ElTabs',
 
     props: {
       type: String,

@@ -21,7 +21,7 @@
   export default {
     mixins: [Emitter],
 
-    name: 'el-option',
+    name: 'ElOption',
 
     componentName: 'ElOption',
 

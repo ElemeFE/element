@@ -118,7 +118,7 @@
   let tableIdSeed = 1;
 
   export default {
-    name: 'el-table',
+    name: 'ElTable',
 
     mixins: [Locale],
 
