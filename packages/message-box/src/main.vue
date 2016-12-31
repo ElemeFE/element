@@ -79,29 +79,6 @@
     },
 
     methods: {
-      doClose() {
-        this.value = false;
-        this._closing = true;
-
-        this.onClose && this.onClose();
-
-        if (this.lockScroll) {
-          setTimeout(() => {
-            if (this.modal && this.bodyOverflow !== 'hidden') {
-              document.body.style.overflow = this.bodyOverflow;
-              document.body.style.paddingRight = this.bodyPaddingRight;
-            }
-            this.bodyOverflow = null;
-            this.bodyPaddingRight = null;
-          }, 200);
-        }
-        this.opened = false;
-
-        if (!this.transition) {
-          this.doAfterClose();
-        }
-      },
-
       handleWrapperClick() {
         if (this.closeOnClickModal) {
           this.close();
@@ -112,11 +89,17 @@
         if (this.$type === 'prompt' && action === 'confirm' && !this.validate()) {
           return;
         }
+
         var callback = this.callback;
         if (this.autoHide) {
           this.value = false;
         }
-        callback(action, this);
+
+        if (this.showInput) {
+          callback(action, this.inputValue, this);
+        } else {
+          callback(action, this);
+        }
       },
 
       validate() {

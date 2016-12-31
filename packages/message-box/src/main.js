@@ -36,28 +36,20 @@ let msgQueue = [];
 
 const defaultCallback = action => {
   if (currentMsg) {
-    let callback = currentMsg.callback;
-    if (typeof callback === 'function') {
-      if (instance.showInput) {
-        callback(instance.inputValue, action);
-      } else {
-        callback(action);
-      }
-    }
     if (currentMsg.resolve) {
       let $type = currentMsg.options.$type;
       if ($type === 'confirm' || $type === 'prompt') {
         if (action === 'confirm') {
           if (instance.showInput) {
-            currentMsg.resolve({ value: instance.inputValue, action });
+            currentMsg.resolve({ value: instance.inputValue, action, alert: instance });
           } else {
-            currentMsg.resolve(action);
+            currentMsg.resolve({ action, alert: instance });
           }
         } else if (action === 'cancel' && currentMsg.reject) {
-          currentMsg.reject(action);
+          currentMsg.reject({ action, alert: instance });
         }
       } else {
-        currentMsg.resolve(action);
+        currentMsg.resolve({ action, alert: instance });
       }
     }
   }
