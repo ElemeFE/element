@@ -85,7 +85,6 @@
         default: -Infinity
       },
       value: {
-        type: Number,
         default: 0
       },
       disabled: Boolean,
