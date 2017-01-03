@@ -7,7 +7,7 @@
 </template>
 <script>
   module.exports = {
-    name: 'el-tab-pane',
+    name: 'ElTabPane',
 
     props: {
       label: String,

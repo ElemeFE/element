@@ -18,7 +18,7 @@
   import {t} from 'element-ui/src/locale';
 
   export default {
-    name: 'el-tree',
+    name: 'ElTree',
 
     props: {
       data: {

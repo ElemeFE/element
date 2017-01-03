@@ -1,4 +1,9 @@
-import { createTest, createVue, destroyVM, triggerEvent } from '../util';
+import {
+  createTest,
+  createVue,
+  destroyVM,
+  triggerEvent
+} from '../util';
 import DatePicker from 'packages/date-picker';
 
 const DELAY = 10;
@@ -27,7 +32,9 @@ describe('DatePicker', () => {
         <el-date-picker ref="compo" v-model="value"></el-date-picker>
       `,
       data() {
-        return { value: '' };
+        return {
+          value: ''
+        };
       }
     }, true);
     const input = vm.$el.querySelector('input');
@@ -50,13 +57,13 @@ describe('DatePicker', () => {
         arrowLeftElm.click();
       }
 
-      count = 18;
+      count = 20;
       while (--count) {
         arrowRightElm.click();
       }
       setTimeout(_ => {
         expect(spans[0].textContent).to.include(date.getFullYear() - 1);
-        expect(spans[1].textContent).to.include(date.getMonth() - 1);
+        expect(spans[1].textContent).to.include(date.getMonth() + 1);
         $el.querySelector('td.available').click();
         vm.$nextTick(_ => {
           expect(vm.value).to.exist;
@@ -72,7 +79,9 @@ describe('DatePicker', () => {
         <el-date-picker v-model="value" ref="compo"></el-date-picker>
       `,
       data() {
-        return { value: '' };
+        return {
+          value: ''
+        };
       }
     }, true);
     const input = vm.$el.querySelector('input');
@@ -97,7 +106,9 @@ describe('DatePicker', () => {
         <el-date-picker v-model="value" ref="compo" :clearable="false"></el-date-picker>
       `,
       data() {
-        return { value: '' };
+        return {
+          value: ''
+        };
       }
     }, true);
     const input = vm.$el.querySelector('input');
@@ -122,7 +133,9 @@ describe('DatePicker', () => {
         <el-date-picker ref="compo" v-model="value"></el-date-picker>
       `,
       data() {
-        return { value: '' };
+        return {
+          value: ''
+        };
       }
     }, true);
     const input = vm.$el.querySelector('input');
@@ -163,7 +176,9 @@ describe('DatePicker', () => {
       },
 
       data() {
-        return { value: '' };
+        return {
+          value: ''
+        };
       }
     }, true);
 
@@ -178,8 +193,10 @@ describe('DatePicker', () => {
       picker.$el.querySelector('td.available').click();
       vm.$nextTick(_ => {
         const date = picker.date;
+        let month = date.getMonth() + 1;
+        if (month < 10) month = '0' + month;
 
-        expect(inputValue).to.equal(`${date.getFullYear()}-${date.getMonth() + 1 }`);
+        expect(inputValue).to.equal(`${date.getFullYear()}-${ month }`);
         done();
       });
     }, DELAY);
@@ -442,7 +459,10 @@ describe('DatePicker', () => {
       setTimeout(_ => {
         panels[1].querySelector('td.available').click();
 
-        const { minDate, maxDate } = vm.picker;
+        const {
+          minDate,
+          maxDate
+        } = vm.picker;
         expect(minDate).to.exist;
         expect(maxDate).to.exist;
         expect(maxDate > minDate).to.true;
@@ -534,7 +554,10 @@ describe('DatePicker', () => {
         triggerEvent(rightCell, 'click', true);
 
         setTimeout(_ => {
-          const { minDate, maxDate } = vm.picker;
+          const {
+            minDate,
+            maxDate
+          } = vm.picker;
           const minMonth = minDate.getMonth();
           const maxMonth = maxDate.getMonth();
 
@@ -698,9 +721,10 @@ describe('DatePicker', () => {
       const prevMonthLen = vm.picker.$el.querySelectorAll('.prev-month').length;
       const firstWeek = vm.picker.$el.querySelector('tr th');
       const offset = i > 3 ? 7 - i : -i;
+      const day = FirstDayOfCurrentMonth === 0 ? 7 : FirstDayOfCurrentMonth;
 
       expect(firstWeek.innerText).to.equal(chineseWeek[i - 1]);
-      expect(prevMonthLen - FirstDayOfCurrentMonth).to.equal(offset);
+      expect(prevMonthLen - day).to.equal(offset);
       done();
     });
   });
@@ -712,15 +736,13 @@ describe('DatePicker', () => {
     let test;
     vm = createTest(DatePicker, {
       pickerOptions: {
-        shortcuts: [
-          {
-            text: '今天',
-            onClick(picker) {
-              test = true;
-              picker.$emit('pick', new Date());
-            }
+        shortcuts: [{
+          text: '今天',
+          onClick(picker) {
+            test = true;
+            picker.$emit('pick', new Date());
           }
-        ]
+        }]
       }
     }, true);
     const input = vm.$el.querySelector('input');

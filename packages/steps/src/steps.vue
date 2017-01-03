@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: 'el-steps',
+  name: 'ElSteps',
 
   props: {
     space: Number,

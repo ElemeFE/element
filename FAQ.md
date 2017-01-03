@@ -19,10 +19,12 @@
 <details>
 <summary>如何在 Table 组件的每一行添加操作该行数据的按钮？</summary>
 
-使用 inline-template 即可：
+使用 [Scoped slot](https://vuejs.org/v2/guide/components.html#Scoped-Slots) 即可：
 ```html
-<el-table-column label="操作" inline-template>
-  <el-button @click.native="showDetail(row)">查看详情</el-button>
+<el-table-column label="操作">
+  <template scoped="props">
+    <el-button @click.native="showDetail(props.row)">查看详情</el-button>
+  </template>
 </el-table-column>
 ```
 参数 `row` 即为对应行的数据。
@@ -41,7 +43,7 @@
 ```css
 [class^="el-icon-my"], [class*=" el-icon-my"] {
   font-family:"your-font-family" !important;
-  
+
   /* 以下内容参照第三方图标库本身的规则 */
   font-size: inherit;
   font-style:normal;
@@ -104,10 +106,12 @@ For other components, the `.native` modifier is still mandatory.
 <details>
 <summary>How do I add buttons in each row of Table to operate data of that row?</summary>
 
-Just use `inline-template`:
+Just use [Scoped slot](https://vuejs.org/v2/guide/components.html#Scoped-Slots):
 ```html
-<el-table-column label="Operations" inline-template>
-  <el-button @click.native="showDetail(row)">Details</el-button>
+<el-table-column label="Operations">
+  <template scoped="props">
+    <el-button @click.native="showDetail(props.row)">Details</el-button>
+  </template>
 </el-table-column>
 ```
 The parameter `row` is the data object of corresponding row.
@@ -126,7 +130,7 @@ You just need to modify the class name prefix of the third-party library (see th
 ```css
 [class^="el-icon-my"], [class*=" el-icon-my"] {
   font-family:"your-font-family" !important;
-  
+
   /* The following is based on original CSS rules of third-party library */
   font-size: inherit;
   font-style:normal;
