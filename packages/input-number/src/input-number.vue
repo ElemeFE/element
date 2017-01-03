@@ -27,6 +27,8 @@
       @blur="handleBlur"
       :disabled="disabled"
       :size="size"
+      :max="max"
+      :min="min"
       ref="input"
     >
         <template slot="prepend" v-if="$slots.prepend">
@@ -49,8 +51,7 @@
         bind(el, binding, vnode) {
           let interval = null;
           let startTime;
-
-          const handler = () => vnode.context[binding.expression]();
+          const handler = () => vnode.context[binding.expression].apply();
           const clear = () => {
             if (new Date() - startTime < 100) {
               handler();
@@ -81,7 +82,7 @@
       },
       min: {
         type: Number,
-        default: 0
+        default: -Infinity
       },
       value: {
         default: 0
@@ -104,6 +105,7 @@
         this.$emit('input', this.max);
         value = this.max;
       }
+
       return {
         currentValue: value
       };
@@ -124,69 +126,57 @@
     },
     computed: {
       minDisabled() {
-        return this.accSub(this.value, this.step) < this.min;
+        return this._decrease(this.value, this.step) < this.min;
       },
       maxDisabled() {
-        return this.accAdd(this.value, this.step) > this.max;
+        return this._increase(this.value, this.step) > this.max;
+      },
+      precision() {
+        const { value, step, getPrecision } = this;
+        return Math.max(getPrecision(value), getPrecision(step));
       }
     },
     methods: {
-      accSub(arg1, arg2) {
-        var r1, r2, m, n;
-        try {
-          r1 = arg1.toString().split('.')[1].length;
-        } catch (e) {
-          r1 = 0;
-        }
-        try {
-          r2 = arg2.toString().split('.')[1].length;
-        } catch (e) {
-          r2 = 0;
-        }
-        m = Math.pow(10, Math.max(r1, r2));
-        n = (r1 >= r2) ? r1 : r2;
-        return parseFloat(((arg1 * m - arg2 * m) / m).toFixed(n));
+      toPrecision(num, precision) {
+        if (precision === undefined) precision = this.precision;
+        return parseFloat(parseFloat(Number(num).toFixed(precision)));
       },
-      accAdd(arg1, arg2) {
-        var r1, r2, m, c;
-        try {
-          r1 = arg1.toString().split('.')[1].length;
-        } catch (e) {
-          r1 = 0;
+      getPrecision(value) {
+        const valueString = value.toString();
+        const dotPosition = valueString.indexOf('.');
+        let precision = 0;
+        if (dotPosition !== -1) {
+          precision = valueString.length - dotPosition - 1;
         }
-        try {
-          r2 = arg2.toString().split('.')[1].length;
-        } catch (e) {
-          r2 = 0;
-        }
-        c = Math.abs(r1 - r2);
-        m = Math.pow(10, Math.max(r1, r2));
-        if (c > 0) {
-          var cm = Math.pow(10, c);
-          if (r1 > r2) {
-            arg1 = Number(arg1.toString().replace('.', ''));
-            arg2 = Number(arg2.toString().replace('.', '')) * cm;
-          } else {
-            arg1 = Number(arg1.toString().replace('.', '')) * cm;
-            arg2 = Number(arg2.toString().replace('.', ''));
-          }
-        } else {
-          arg1 = Number(arg1.toString().replace('.', ''));
-          arg2 = Number(arg2.toString().replace('.', ''));
-        }
-        return (arg1 + arg2) / m;
+        return precision;
+      },
+      _increase(val, step) {
+        if (typeof val !== 'number') return this.currentValue;
+
+        const precisionFactor = Math.pow(10, this.precision);
+
+        return this.toPrecision((precisionFactor * val + precisionFactor * step) / precisionFactor);
+      },
+      _decrease(val, step) {
+        if (typeof val !== 'number') return this.currentValue;
+
+        const precisionFactor = Math.pow(10, this.precision);
+
+        return this.toPrecision((precisionFactor * val - precisionFactor * step) / precisionFactor);
       },
       increase() {
-        if (this.maxDisabled) return;
+        if (this.disabled || this.maxDisabled) return;
         const value = this.value || 0;
-        if (this.accAdd(value, this.step) > this.max || this.disabled) return;
-        this.currentValue = this.accAdd(value, this.step);
+        const newVal = this._increase(value, this.step);
+        if (newVal > this.max) return;
+        this.currentValue = newVal;
       },
       decrease() {
-        if (this.minDisabled) return;
+        if (this.disabled || this.minDisabled) return;
         const value = this.value || 0;
-        if (this.accSub(value, this.step) < this.min || this.disabled) return;
-        this.currentValue = this.accSub(value, this.step);
+        const newVal = this._decrease(value, this.step);
+        if (newVal < this.min) return;
+        this.currentValue = newVal;
       },
       handleBlur() {
         this.$refs.input.setCurrentValue(this.currentValue);
