@@ -117,6 +117,8 @@
         if (newVal <= this.max && newVal >= this.min) {
           this.$emit('change', newVal, oldVal);
           this.$emit('input', newVal);
+        } else {
+          this.currentValue = oldVal;
         }
       }
     },

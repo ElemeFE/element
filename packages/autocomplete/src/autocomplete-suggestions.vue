@@ -55,7 +55,7 @@
 
     mounted() {
       this.popperElm = this.$el;
-      this.referenceElm = this.$parent.$el;
+      this.referenceElm = this.$parent.$refs.input.$refs.input;
     },
 
     created() {

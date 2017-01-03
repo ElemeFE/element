@@ -33,6 +33,10 @@
         }
       }
     }
+
+    .el-scrollbar.is-empty .el-select-dropdown__list{
+      padding: 0;
+    }
   }
 
   @b select-dropdown__empty {
@@ -53,9 +57,5 @@
     padding: var(--select-dropdown-padding);
     margin: 0;
     box-sizing: border-box;
-
-    @when empty {
-      padding: 0;
-    }
   }
 }

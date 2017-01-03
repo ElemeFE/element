@@ -94,14 +94,14 @@ In accordion mode, only one panel can be expanded at once
 
 ### Custom title
 
-Besides using the `title` attribute, you can customize panel title with scoped slots, which makes adding custom content, e.g. icons, possible.
+Besides using the `title` attribute, you can customize panel title with named slots, which makes adding custom content, e.g. icons, possible.
 
 :::demo
 ```html
 <el-collapse accordion>
-  <el-collapse-item title="Consistency" name="1">
-    <template slot="title" scope="props">
-      {{props.title}}<i class="header-icon el-icon-information"></i>
+  <el-collapse-item name="1">
+    <template slot="title">
+      Consistency<i class="header-icon el-icon-information"></i>
     </template>
     <div>Consistent with real life: in line with the process and logic of real life, and comply with languages and habits that the users are used to;</div>
     <div>Consistent within interface: all elements should be consistent, such as: design style, icons and texts, position of elements, etc.</div>
