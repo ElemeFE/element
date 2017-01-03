@@ -46,6 +46,7 @@
   "row": "./packages/row/index.js",
   "col": "./packages/col/index.js",
   "upload": "./packages/upload/index.js",
+  "upload-dragger": "./packages/upload/index.js",
   "progress": "./packages/progress/index.js",
   "spinner": "./packages/spinner/index.js",
   "message": "./packages/message/index.js",

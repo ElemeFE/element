@@ -12,7 +12,15 @@
   export default {
     data() {
       return {
-        fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
+        fileList: [{
+          name: 'food.jpeg',
+          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
+          status: 'finished'
+        }, {
+          name: 'food2.jpeg',
+          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
+          status: 'finished'
+        }]
       };
     },
     methods: {
@@ -78,7 +86,20 @@
 ```
 :::
 
-### 拖拽上传
+::: demo 通过 slot 你可以传入自定义的上传按钮类型和文字提示。
+```html
+<el-upload-dragger
+  action="//jsonplaceholder.typicode.com/posts/"
+  :on-preview="handlePreview"
+  :on-remove="handleRemove"
+  :file-list="fileList">
+  <el-button size="small" type="primary">点击上传</el-button>
+  <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+</el-upload-dragger>
+```
+:::
+
+<!-- ### 拖拽上传
 
 可将文件拖入指定区域进行上传。
 
@@ -154,7 +175,7 @@
   }
 </script>
 ```
-:::
+::: -->
 
 ### Attribute
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |

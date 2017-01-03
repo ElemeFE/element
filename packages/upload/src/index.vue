@@ -34,6 +34,7 @@ export default {
       type: String,
       default: 'file'
     },
+    draggable: Boolean,
     withCredentials: Boolean,
     thumbnailMode: Boolean,
     showUploadList: {
@@ -80,7 +81,7 @@ export default {
 
   data() {
     return {
-      _fileList: [],
+      uploadFiles: [],
       dragOver: false,
       draging: false,
       tempIndex: 1
@@ -91,13 +92,16 @@ export default {
     fileList: {
       immediate: true,
       handler(fileList) {
-        this._fileList = fileList.map(item => {
-          item.status = 'finished';
-          item.percentage = 100;
-          item.uid = Date.now() + this.tempIndex++;
+        this.uploadFiles = fileList.map(item => {
+          if (!item.uid) {
+            item.uid = Date.now() + this.tempIndex++;
+          }
           return item;
         });
       }
+    },
+    uploadFiles(value, oldValue) {
+      // console.log(value, oldValue);
     }
   },
 
@@ -120,11 +124,11 @@ export default {
         return;
       }
 
-      this._fileList.push(_file);
+      this.uploadFiles.push(_file);
     },
     handleProgress(ev, file) {
       var _file = this.getFile(file);
-      this.onProgress(ev, _file, this._fileList);
+      this.onProgress(ev, _file, this.uploadFiles);
       _file.percentage = ev.percent || 0;
     },
     handleSuccess(res, file) {
@@ -134,7 +138,7 @@ export default {
         _file.status = 'finished';
         _file.response = res;
 
-        this.onSuccess(res, _file, this._fileList);
+        this.onSuccess(res, _file, this.uploadFiles);
 
         setTimeout(() => {
           _file.showProgress = false;
@@ -143,7 +147,7 @@ export default {
     },
     handleError(err, response, file) {
       var _file = this.getFile(file);
-      var fileList = this._fileList;
+      var fileList = this.uploadFiles;
 
       _file.status = 'fail';
 
@@ -152,12 +156,12 @@ export default {
       this.onError(err, response, file);
     },
     handleRemove(file) {
-      var fileList = this._fileList;
+      var fileList = this.uploadFiles;
       fileList.splice(fileList.indexOf(file), 1);
       this.onRemove(file, fileList);
     },
     getFile(file) {
-      var fileList = this._fileList;
+      var fileList = this.uploadFiles;
       var target;
       fileList.every(item => {
         target = file.uid === item.uid ? item : null;
@@ -171,17 +175,39 @@ export default {
       }
     },
     clearFiles() {
-      this._fileList = [];
+      this.uploadFiles = [];
+    },
+    initDraggable() {
+      const target = this.$el;
+      const _this = this;
+      target.addEventListener('dragover', event => {
+        event.preventDefault();
+        _this.draggable = true;
+      });
+      target.addEventListener('drop', event => {
+        event.preventDefault();
+        _this.draggable = false;
+      });
+      target.addEventListener('dragleave', event => {
+        event.preventDefault();
+        _this.draggable = false;
+      });
+    }
+  },
+
+  mounted() {
+    if (this.draggable) {
+      this.initDraggable();
     }
   },
 
   render(h) {
     var uploadList;
 
-    if (this.showUploadList && !this.thumbnailMode && this.fileList.length) {
+    if (this.showUploadList && !this.thumbnailMode && this.uploadFiles.length) {
       uploadList = (
         <UploadList
-          files={this.fileList}
+          files={this.uploadFiles}
           on-remove={this.handleRemove}
           on-preview={this.handlePreview}>
         </UploadList>
@@ -191,6 +217,7 @@ export default {
     var props = {
       props: {
         type: this.type,
+        draggable: this.draggable,
         action: this.action,
         multiple: this.multiple,
         'before-upload': this.beforeUpload,
@@ -213,25 +240,23 @@ export default {
         ? <upload {...props}>{this.$slots.default}</upload>
         : <iframeUpload {...props}>{this.$slots.default}</iframeUpload>;
 
-    if (this.type === 'select') {
-      return (
-        <div class="el-upload">
-          {uploadList}
-          {uploadComponent}
-          {this.$slots.tip}
-        </div>
-      );
-    }
+    return (
+      <div class="el-upload">
+        {uploadList}
+        {uploadComponent}
+        {this.$slots.tip}
+      </div>
+    );
 
-    if (this.type === 'drag') {
-      return (
-        <div class="el-upload">
-          {uploadComponent}
-          {this.$slots.tip}
-          {uploadList}
-        </div>
-      );
-    }
+    // if (this.type === 'drag') {
+    //   return (
+    //     <div class="el-upload">
+    //       {uploadComponent}
+    //       {this.$slots.tip}
+    //       {uploadList}
+    //     </div>
+    //   );
+    // }
   }
 };
 </script>
