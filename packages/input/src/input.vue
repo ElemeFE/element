@@ -16,7 +16,12 @@
       </div>
       <!-- input 图标 -->
       <slot name="icon">
-        <i class="el-input__icon" :class="'el-icon-' + icon" v-if="icon" @click="handleIconClick"></i>
+        <i
+          class="el-input__icon"
+          :class="'el-icon-' + icon"
+          v-if="icon"
+          @click="propagateEvent('click', $event)">
+        </i>
       </slot>
       <input
         v-if="type !== 'textarea'"
@@ -35,8 +40,11 @@
         :form="form"
         :value="currentValue"
         ref="input"
+        @focus="propagateEvent('focus', $event)"
+        @keydown="propagateEvent('keydown', $event)"
+        @keyup="propagateEvent('keyup', $event)"
+        @keypress="propagateEvent('keypress', $event)"
         @input="handleInput"
-        @focus="handleFocus"
         @blur="handleBlur"
       >
       <i class="el-input__icon el-icon-loading" v-if="validating"></i>
@@ -49,7 +57,6 @@
       v-else
       class="el-textarea__inner"
       :value="currentValue"
-      @input="handleInput"
       ref="textarea"
       :name="name"
       :placeholder="placeholder"
@@ -61,7 +68,11 @@
       :autofocus="autofocus"
       :maxlength="maxlength"
       :minlength="minlength"
-      @focus="handleFocus"
+      @focus="propagateEvent('focus', $event)"
+      @keydown="propagateEvent('keydown', $event)"
+      @keyup="propagateEvent('keyup', $event)"
+      @keypress="propagateEvent('keypress', $event)"
+      @input="handleInput"
       @blur="handleBlur">
     </textarea>
   </div>
@@ -133,11 +144,17 @@
     },
 
     methods: {
+      propagateEvent(name, event) {
+        this.$emit(name, event);
+      },
       handleBlur(event) {
-        this.$emit('blur', event);
+        this.propagateEvent('blur', event);
         if (this.validateEvent) {
           this.dispatch('ElFormItem', 'el.form.blur', [this.currentValue]);
         }
+      },
+      handleInput(event) {
+        this.setCurrentValue(event.target.value);
       },
       inputSelect() {
         this.$refs.input.select();
@@ -150,15 +167,6 @@
         const maxRows = autosize.maxRows;
 
         this.textareaStyle = calcTextareaHeight(this.$refs.textarea, minRows, maxRows);
-      },
-      handleFocus(event) {
-        this.$emit('focus', event);
-      },
-      handleInput(event) {
-        this.setCurrentValue(event.target.value);
-      },
-      handleIconClick(event) {
-        this.$emit('click', event);
       },
       setCurrentValue(value) {
         if (value === this.currentValue) return;
