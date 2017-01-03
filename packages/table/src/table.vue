@@ -15,6 +15,8 @@
         :store="store"
         :layout="layout"
         :border="border"
+        :default-sort-prop="defaultSortProp"
+        :default-sort-order="defaultSortOrder"
         :style="{ width: layout.bodyWidth ? layout.bodyWidth + 'px' : '' }">
       </table-header>
     </div>
@@ -166,7 +168,11 @@
 
       expandRowKeys: Array,
 
-      defaultExpandAll: Boolean
+      defaultExpandAll: Boolean,
+
+      defaultSortProp: String,
+
+      defaultSortOrder: String
     },
 
     components: {

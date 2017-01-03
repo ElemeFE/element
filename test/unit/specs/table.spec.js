@@ -1105,9 +1105,9 @@ describe('Table', () => {
           });
 
         setTimeout(_ => {
-          const elm = vm.$el.querySelector('.caret-wrapper > .ascending');
-
+          const elm = vm.$el.querySelector('.caret-wrapper');
           elm.click();
+
           setTimeout(_ => {
             const lastCells = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr td:last-child');
             expect(toArray(lastCells).map(node => node.textContent)).to.eql(['100', '95', '92', '92', '80']);
@@ -1143,7 +1143,7 @@ describe('Table', () => {
       const vm = createTable('', '', '', 'sortable');
 
       it('ascending', done => {
-        const elm = vm.$el.querySelector('.caret-wrapper > .ascending');
+        const elm = vm.$el.querySelector('.caret-wrapper');
 
         elm.click();
         setTimeout(_ => {
@@ -1155,7 +1155,7 @@ describe('Table', () => {
       });
 
       it('descending', done => {
-        const elm = vm.$el.querySelector('.caret-wrapper > .descending');
+        const elm = vm.$el.querySelector('.caret-wrapper');
 
         elm.click();
         setTimeout(_ => {
