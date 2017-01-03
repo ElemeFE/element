@@ -467,6 +467,9 @@ export default {
         this.picker.date = new Date(this.internalValue.getTime());
       } else {
         this.picker.value = this.internalValue;
+        if (this.intervalValue && this.internalValue.length && this.internalValue[0]) {
+          this.picker.date = this.internalValue[0];
+        }
       }
       this.picker.resetView && this.picker.resetView();
 
