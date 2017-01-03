@@ -45,7 +45,7 @@
 
 <script>
 export default {
-  name: 'el-step',
+  name: 'ElStep',
 
   props: {
     title: String,

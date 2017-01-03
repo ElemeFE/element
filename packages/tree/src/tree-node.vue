@@ -47,7 +47,7 @@
   import ElCheckbox from 'element-ui/packages/checkbox';
 
   export default {
-    name: 'el-tree-node',
+    name: 'ElTreeNode',
 
     props: {
       node: {

@@ -1,5 +1,16 @@
 ## 更新日志
 
+### 1.1.2
+*2016-12-30*
+
+- 修复 Vue 2.1.7 升级导致的 Table `sortable` 和 `fixed` 无法使用的问题
+- 修正 Input Number 在手动输入越界值时，blur 触发时没有重置为原来的值的问题，#2098
+- 移除 Collapse 的 `title` scoped slot, 并新增 `title` named slot，#2100
+- 修复 TimePicker 范围选择无法使用的问题
+- 修复 Tabs 删除非当前激活的 tab 后，当前激活的 tab 变化的问题，#2106
+- 修复 Select 在使用方向键导航时控制台报错的问题，#2120
+- 修复 Form 中可搜索的 Select 验证时机错误的问题，#2120
+
 ### 1.1.1
 *2016-12-29*
 

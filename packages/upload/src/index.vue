@@ -8,7 +8,7 @@ function noop() {
 }
 
 export default {
-  name: 'el-upload',
+  name: 'ElUpload',
 
   components: {
     ElProgress,

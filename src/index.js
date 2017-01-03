@@ -141,7 +141,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 };
 
 module.exports = {
-  version: '1.1.1',
+  version: '1.1.2',
   locale: locale.use,
   install,
   Loading,

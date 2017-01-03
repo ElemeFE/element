@@ -132,5 +132,5 @@ Set value via a input box.
 ## Events
 | Event Name | Description | Parameters |
 |---------- |-------- |---------- |
-| change | triggers when the value changes | value after changing |
+| change | triggers when the value changes (if the mouse is being dragged, this event only fires when the mouse is released) | value after changing |
 
