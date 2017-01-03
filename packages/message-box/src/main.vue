@@ -161,7 +161,7 @@
       },
       safeHide() {
         let currentId = this.msgId;
-        return _ => {
+        return () => {
           this.$nextTick(() => {
             if (currentId !== this.msgId) {
               return;
