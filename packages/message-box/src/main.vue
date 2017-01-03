@@ -16,7 +16,7 @@
         </div>
         <div class="el-message-box__btns">
           <el-button :class="[ cancelButtonClasses ]" v-show="showCancelButton" @click.native="handleAction('cancel')">{{ cancelButtonText || t('el.messagebox.cancel') }}</el-button>
-          <el-button ref="confirm" :class="[ confirmButtonClasses ]" v-show="showConfirmButton" @click.native="handleAction('confirm')">{{ confirmButtonText || t('el.messagebox.confirm') }}</el-button>
+          <el-button ref="confirm" :class="[ confirmButtonClasses ]" v-show="showConfirmButton" :loading="loading" @click.native="handleAction('confirm')">{{ confirmButtonText || t('el.messagebox.confirm') }}</el-button>
         </div>
       </div>
     </div>
@@ -113,8 +113,21 @@
           return;
         }
         var callback = this.callback;
-        this.value = false;
-        callback(action);
+        if (this.autoHide) {
+          this.value = false;
+          if (this.showInput) {
+            callback(action, this.inputValue);
+          } else {
+            callback(action);
+          }
+        } else {
+          var handlers = this.handlers();
+          if (this.showInput) {
+            callback(action, this.inputValue, handlers);
+          } else {
+            callback(action, handlers);
+          }
+        }
       },
 
       validate() {
@@ -142,9 +155,36 @@
         this.editorErrorMessage = '';
         removeClass(this.$refs.input.$el.querySelector('input'), 'invalid');
         return true;
+      },
+      hide() {
+        this.value = false;
+      },
+      safeHide() {
+        let currentId = this.msgId;
+        return _ => {
+          this.$nextTick(() => {
+            if (currentId !== this.msgId) {
+              return;
+            } else {
+              this.hide();
+            }
+          });
+        };
+      },
+      showLoading() {
+        this.loading = true;
+      },
+      hideLoading() {
+        this.loading = false;
+      },
+      handlers() {
+        return {
+          showLoading: this.showLoading,
+          hideLoading: this.hideLoading,
+          hide: this.safeHide()
+        };
       }
     },
-
     watch: {
       inputValue(val) {
         if (this.$type === 'prompt' && val !== null) {
@@ -153,6 +193,9 @@
       },
 
       value(val) {
+        if (val) {
+          this.msgId++;
+        }
         if (this.$type === 'alert' || this.$type === 'confirm') {
           this.$nextTick(() => {
             this.$refs.confirm.$el.focus();
@@ -192,7 +235,10 @@
         confirmButtonDisabled: false,
         cancelButtonClass: '',
         editorErrorMessage: null,
-        callback: null
+        callback: null,
+        loading: false,
+        autoHide: true,
+        msgId: 0
       };
     }
   };
