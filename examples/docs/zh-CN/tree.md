@@ -238,7 +238,7 @@
 | highlight-current | 是否高亮当前选中节点，默认值是 false。| boolean | — | false |
 | current-node-key | 当前选中节点的 key，只写属性 | string, number | — | — |
 | default-expand-all | 是否默认展开所有节点 | boolean | — | false |
-| expand-on-click-node | 是否在点击节点的时候展开或者收缩节点，如果为 false，则只有点箭头图标的时候才会展开或者收缩节点。 | boolean | — | false |
+| expand-on-click-node | 是否在点击节点的时候展开或者收缩节点， 默认值为 true，如果为 false，则只有点箭头图标的时候才会展开或者收缩节点。 | boolean | — | true |
 | auto-expand-parent | 展开子节点的时候是否自动展开父节点 | boolean | — | true |
 | default-expanded-keys | 默认展开的节点的 key 的数组 | array | — | — |
 | show-checkbox | 节点是否可被选择 | boolean | — | false |
