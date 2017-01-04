@@ -1,6 +1,11 @@
 <script>
+  import TabBar from './tab-bar';
   module.exports = {
     name: 'ElTabs',
+
+    components: {
+      TabBar
+    },
 
     props: {
       type: String,
@@ -29,10 +34,16 @@
     },
 
     computed: {
+      tabPanes: {
+        cache: false,
+        get() {
+          if (!this.$children) return [];
+          return this.$children.filter(item => item.$options.componentName === 'ElTabPane');
+        }
+      },
       currentTab() {
-        if (!this.$children) return;
         let result;
-        this.$children.forEach(tab => {
+        this.tabPanes.forEach(tab => {
           if (this.currentName === (tab.name || tab.index)) {
             result = tab;
           }
@@ -44,7 +55,7 @@
     methods: {
       handleTabRemove(tab, event) {
         event.stopPropagation();
-        const tabs = this.$children;
+        const tabs = this.tabPanes;
         const currentTab = this.currentTab;
 
         let index = tabs.indexOf(tab);
@@ -55,6 +66,7 @@
 
         this.$nextTick(_ => {
           if (tab.active) {
+            const tabs = this.tabPanes;
             let nextChild = tabs[index];
             let prevChild = tabs[index - 1];
             let nextActiveTab = nextChild || prevChild || null;
@@ -86,35 +98,11 @@
         type,
         handleTabRemove,
         handleTabClick,
-        currentName
+        currentName,
+        tabPanes
       } = this;
 
-      const getBarStyle = () => {
-        if (this.type || !this.$refs.tabs) return {};
-        let style = {};
-        let offset = 0;
-        let tabWidth = 0;
-
-        this.$children.every((tab, index) => {
-          let $el = this.$refs.tabs[index];
-          if (!$el) { return false; }
-
-          if (!tab.active) {
-            offset += $el.clientWidth;
-            return true;
-          } else {
-            tabWidth = $el.clientWidth;
-            return false;
-          }
-        });
-
-        style.width = tabWidth + 'px';
-        style.transform = `translateX(${offset}px)`;
-
-        return style;
-      };
-
-      const tabs = this.$children.map((tab, index) => {
+      const tabs = this._l(tabPanes, (tab, index) => {
         let tabName = tab.name || tab.index || index;
         if (currentName === undefined && index === 0) {
           this.setCurrentName(tabName);
@@ -122,16 +110,11 @@
 
         tab.index = index;
 
-        const activeBar = !type && index === 0
-          ? <div class="el-tabs__active-bar" style={getBarStyle()}></div>
-          : null;
-
         const btnClose = tab.isClosable
           ? <span class="el-icon-close" on-click={(ev) => { handleTabRemove(tab, ev); }}></span>
           : null;
 
         const tabLabelContent = tab.$slots.label || tab.label;
-
         return (
           <div
             class={{
@@ -146,10 +129,10 @@
           >
             {tabLabelContent}
             {btnClose}
-            {activeBar}
           </div>
         );
       });
+
       return (
         <div class={{
           'el-tabs': true,
@@ -157,6 +140,7 @@
           'el-tabs--border-card': type === 'border-card'
         }}>
           <div class="el-tabs__header">
+            {!type ? <tab-bar tabs={tabPanes}></tab-bar> : null}
             {tabs}
           </div>
           <div class="el-tabs__content">
