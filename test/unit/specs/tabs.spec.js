@@ -63,7 +63,6 @@ describe('Tabs', () => {
       const tabList = vm.$refs.tabs.$refs.tabs;
 
       expect(tabList[1].classList.contains('is-active')).to.be.true;
-      // expect(vm.$el.querySelector('.el-tabs__active-bar'))
       expect(paneList[1].style.display).to.not.ok;
 
       tabList[3].click();
