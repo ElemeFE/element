@@ -9,6 +9,8 @@
   module.exports = {
     name: 'ElTabPane',
 
+    componentName: 'ElTabPane',
+
     props: {
       label: String,
       labelContent: Function,

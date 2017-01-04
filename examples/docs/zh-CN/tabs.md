@@ -2,7 +2,7 @@
   export default {
     data() {
       return {
-        activeName: 'first',
+        activeName: 'second',
         activeName2: 'first',
         tabs: [{
           title: 'Tab 1',
@@ -50,7 +50,7 @@
   export default {
     data() {
       return {
-        activeName: 'first'
+        activeName: 'second'
       };
     },
     methods: {
