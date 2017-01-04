@@ -142,16 +142,36 @@ describe('MessageBox', () => {
   });
 
   it('callback', done => {
+    let msgAction = '';
     MessageBox({
       title: '消息',
       message: '这是一段内容'
     }, action => {
-      expect(action).to.equal('cancel');
-      done();
+      msgAction = action;
     });
     setTimeout(() => {
       document.querySelector('.el-message-box__close').click();
-    }, 300);
+      expect(msgAction).to.equal('cancel');
+      done();
+    }, 50);
+  });
+
+  it('beforeClose', done => {
+    let msgAction = '';
+    MessageBox({
+      title: '消息',
+      message: '这是一段内容',
+      beforeClose: (action, instance) => {
+        instance.close();
+      }
+    }, action => {
+      msgAction = action;
+    });
+    setTimeout(() => {
+      document.querySelector('.el-message-box__wrapper .el-button--primary').click();
+      expect(msgAction).to.equal('confirm');
+      done();
+    }, 50);
   });
 
   describe('promise', () => {
@@ -162,9 +182,8 @@ describe('MessageBox', () => {
           done();
         });
       setTimeout(() => {
-        document.querySelector('.el-message-box__wrapper')
-          .querySelector('.el-button--primary').click();
-      }, 300);
+        document.querySelector('.el-message-box__wrapper .el-button--primary').click();
+      }, 50);
     });
 
     it('reject', done => {
@@ -174,9 +193,8 @@ describe('MessageBox', () => {
           done();
         });
       setTimeout(() => {
-        document.querySelector('.el-message-box__wrapper')
-          .querySelector('.el-button').click();
-      }, 300);
+        document.querySelector('.el-message-box__wrapper .el-button').click();
+      }, 50);
     });
   });
 });

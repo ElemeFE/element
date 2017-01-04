@@ -15,8 +15,21 @@
           </div>
         </div>
         <div class="el-message-box__btns">
-          <el-button :class="[ cancelButtonClasses ]" v-show="showCancelButton" @click.native="handleAction('cancel')">{{ cancelButtonText || t('el.messagebox.cancel') }}</el-button>
-          <el-button ref="confirm" :class="[ confirmButtonClasses ]" v-show="showConfirmButton" @click.native="handleAction('confirm')">{{ confirmButtonText || t('el.messagebox.confirm') }}</el-button>
+          <el-button
+            :loading="cancelButtonLoading"
+            :class="[ cancelButtonClasses ]"
+            v-show="showCancelButton"
+            @click.native="handleAction('cancel')">
+            {{ cancelButtonText || t('el.messagebox.cancel') }}
+          </el-button>
+          <el-button
+            :loading="confirmButtonLoading"
+            ref="confirm"
+            :class="[ confirmButtonClasses ]"
+            v-show="showConfirmButton"
+            @click.native="handleAction('confirm')">
+            {{ confirmButtonText || t('el.messagebox.confirm') }}
+          </el-button>
         </div>
       </div>
     </div>
@@ -80,6 +93,7 @@
 
     methods: {
       doClose() {
+        if (!this.value) return;
         this.value = false;
         this._closing = true;
 
@@ -100,10 +114,12 @@
         if (!this.transition) {
           this.doAfterClose();
         }
+        if (this.action) this.callback(this.action, this);
       },
 
       handleWrapperClick() {
         if (this.closeOnClickModal) {
+          this.action = '';
           this.close();
         }
       },
@@ -112,9 +128,12 @@
         if (this.$type === 'prompt' && action === 'confirm' && !this.validate()) {
           return;
         }
-        var callback = this.callback;
-        this.value = false;
-        callback(action);
+        this.action = action;
+        if (typeof this.beforeClose === 'function') {
+          this.beforeClose(action, this);
+        } else {
+          this.close();
+        }
       },
 
       validate() {
@@ -186,8 +205,11 @@
         inputErrorMessage: '',
         showConfirmButton: true,
         showCancelButton: false,
+        action: '',
         confirmButtonText: '',
         cancelButtonText: '',
+        confirmButtonLoading: false,
+        cancelButtonLoading: false,
         confirmButtonClass: '',
         confirmButtonDisabled: false,
         cancelButtonClass: '',
