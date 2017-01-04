@@ -160,7 +160,7 @@ describe('TimeSelect', () => {
     setTimeout(_ => {
       const elm = picker.picker.$el.querySelector('.disabled');
 
-      expect(elm.textContent).to.equal('15:00');
+      expect(elm.textContent).to.equal('14:30');
       destroyVM(vm);
       done();
     }, 50);
