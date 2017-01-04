@@ -8,7 +8,7 @@
         </div>
         <div class="el-message-box__content" v-if="message !== ''">
           <div class="el-message-box__status" :class="[ typeClass ]"></div>
-          <div class="el-message-box__message" :style="{ 'margin-left': typeClass ? '50px' : '0' }"><p>{{ message }}</p></div>
+          <div class="el-message-box__message" :style="{ 'margin-left': typeClass ? '50px' : '0' }">{{ message }}</div>
           <div class="el-message-box__input" v-show="showInput">
             <el-input v-model="inputValue" :placeholder="inputPlaceholder" ref="input"></el-input>
             <div class="el-message-box__errormsg" :style="{ visibility: !!editorErrorMessage ? 'visible' : 'hidden' }">{{ editorErrorMessage }}</div>

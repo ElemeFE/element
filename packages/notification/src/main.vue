@@ -13,8 +13,8 @@
         v-if="type || iconClass">
       </i>
       <div class="el-notification__group" :class="{ 'is-with-icon': typeClass || iconClass }">
-        <span>{{ title }}</span>
-        <p>{{ message }}</p>
+        <h2 class="el-notification__title" v-text="title"></h2>
+        <div class="el-notification__content"><slot>{{ message }}</slot></div>
         <div class="el-notification__closeBtn el-icon-close" @click="close"></div>
       </div>
     </div>
