@@ -28,6 +28,8 @@
         input8: '',
         input9: '',
         textarea: '',
+        textarea2: '',
+        textarea3: '',
         select: '',
         state1: '',
         state2: '',
@@ -257,13 +259,13 @@ export default {
 
 ### 文本域
 
-可调整大小，用于输入多行文本信息
+用于输入多行文本信息，通过将 `type` 属性的值指定为 textarea。
 
-::: demo 通过将 `type` 属性的值指定为 textarea。
+::: demo 文本域高度可通过 `rows` 属性控制
 ```html
 <el-input
   type="textarea"
-  :autosize="{ minRows: 2, maxRows: 4}"
+  :rows="2"
   placeholder="请输入内容"
   v-model="textarea">
 </el-input>
@@ -273,6 +275,39 @@ export default {
   data() {
     return {
       textarea: ''
+    }
+  }
+}
+</script>
+```
+:::
+
+### 可自适应文本高度的文本域
+
+通过设置 `autosize` 属性可以使得文本域的高度能够根据文本内容自动进行调整，并且 `autosize` 还可以设定为一个对象，指定最小行数和最大行数。
+
+::: demo
+```html
+<el-input
+  type="textarea"
+  autosize
+  placeholder="请输入内容"
+  v-model="textarea2">
+</el-input>
+<div style="margin: 20px 0;"></div>
+<el-input
+  type="textarea"
+  :autosize="{ minRows: 2, maxRows: 4}"
+  placeholder="请输入内容"
+  v-model="textarea3">
+</el-input>
+
+<script>
+export default {
+  data() {
+    return {
+      textarea2: '',
+      textarea3: ''
     }
   }
 }
