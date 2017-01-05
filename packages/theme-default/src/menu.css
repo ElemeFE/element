@@ -59,6 +59,11 @@
         box-sizing: border-box;
         border-bottom: 5px solid transparent;
 
+        a,
+        a:hover {
+          color: inherit;
+        }
+
         &:hover {
           background-color: var(--menu-item-hover-fill);
         }
