@@ -173,6 +173,7 @@
   @b textarea {
     display: inline-block;
     width: 100%;
+    vertical-align: bottom;
 
     @e inner {
       display: block;
