@@ -150,7 +150,10 @@ export default {
     },
     border: Boolean,
     defaultSortProp: String,
-    defaultSortOrder: String
+    defaultSortOrder: {
+      type: String,
+      default: 'ascending'
+    }
   },
 
   components: {

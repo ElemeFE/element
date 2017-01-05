@@ -1139,13 +1139,16 @@
 
 对表格进行排序，可快速查找或对比数据。
 
-:::demo 在列中设置`sortable`属性即可实现以该列为基准的排序，接受一个`Boolean`，默认为`false`。在本例中，我们还使用了`formatter`属性，它用于格式化指定列的值，接受一个`Function`，会传入两个参数：`row`和`column`，可以根据自己的需求进行处理。
+:::demo 可以通过表的`default-sort-prop`和`default-sort-order`属性设置默认的排序列和排序顺序。在列中设置`sortable`属性即可实现以该列为基准的排序，接受一个`Boolean`，默认为`false`。在本例中，我们还使用了`formatter`属性，它用于格式化指定列的值，接受一个`Function`，会传入两个参数：`row`和`column`，可以根据自己的需求进行处理。
 ```html
 <template>
   <el-table
     :data="tableData"
     border
-    style="width: 100%">
+    style="width: 100%"
+    default-sort-prop="date"
+    default-sort-order="descending"
+    >
     <el-table-column
       prop="date"
       label="日期"
@@ -1475,6 +1478,8 @@
 | empty-text | 空数据时显示的文本内容，也可以通过 `slot="empty"` 设置 | String | — | 暂无数据 |
 | default-expand-all | 是否默认展开所有行，当 Table 中存在 type="expand" 的 Column 的时候有效 | Boolean | — | false |
 | expand-row-keys | 可以通过该属性设置 Table 目前的展开行，需要设置 row-key 属性才能使用，该属性为展开行的 keys 数组。| Array | — | |
+| default-sort-prop | 默认的排序列的prop。| String | - | - |
+| default-sort-order | 设置默认的排序顺序。需要设置`default-sort-prop`才能使用。 | String | ascending, descending | ascending |
 
 
 ### Table Events
