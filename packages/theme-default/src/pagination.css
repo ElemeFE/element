@@ -152,6 +152,7 @@
     vertical-align: top;
     font-size: 0;
     padding: 0;
+    margin: 0;
 
     li {
       padding: 0 4px;
@@ -167,6 +168,7 @@
       cursor: pointer;
       box-sizing: border-box;
       text-align: center;
+      margin: 0;
 
       &:last-child {
         border-right: 1px solid var(--pagination-border-color);
