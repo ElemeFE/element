@@ -78,18 +78,20 @@ export default {
         cellspacing="0"
         cellpadding="0"
         border="0">
-        {
-          this._l(this.columns, column =>
-            <col
-              name={ column.id }
-              width={ column.realWidth || column.width }
-            />)
-        }
-        {
-          !this.fixed && this.layout.gutterWidth
-            ? <col name="gutter" width={ this.layout.scrollY ? this.layout.gutterWidth : '' }></col>
-            : ''
-        }
+        <colgroup>
+          {
+            this._l(this.columns, column =>
+              <col
+                name={ column.id }
+                width={ column.realWidth || column.width }
+              />)
+          }
+          {
+            !this.fixed && this.layout.gutterWidth
+              ? <col name="gutter" width={ this.layout.scrollY ? this.layout.gutterWidth : '' }></col>
+              : ''
+          }
+        </colgroup>
         <thead>
           {
             this._l(columnRows, (columns, rowIndex) =>
