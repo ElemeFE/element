@@ -7,11 +7,11 @@ export default {
       clear: 'Изчисти',
       confirm: 'ОК',
       selectDate: 'Избери дата',
-      selectTime: 'Избери време',
+      selectTime: 'Избери час',
       startDate: 'Начална дата',
-      startTime: 'Начално време',
+      startTime: 'Начален час',
       endDate: 'Крайна дата',
-      endTime: 'Крайно време',
+      endTime: 'Краен час',
       year: 'Година',
       month1: 'Януари',
       month2: 'Февруари',
@@ -65,7 +65,7 @@ export default {
     messagebox: {
       title: 'Съобщение',
       confirm: 'ОК',
-      cancel: 'Отказ',
+      cancel: 'Откажи',
       error: 'Невалидни данни'
     },
     upload: {
