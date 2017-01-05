@@ -53,6 +53,7 @@
 适用广泛的基础用法。
 
 ::: demo 导航菜单默认为垂直模式，通过 `mode` 属性可以使导航菜单变更为水平模式。另外，在菜单中通过 `submenu` 组件可以生成二级菜单。
+
 ```html
 <el-menu theme="dark" default-active="1" class="el-menu-demo" mode="horizontal" @select="handleSelect">
   <el-menu-item index="1">处理中心</el-menu-item>
@@ -62,7 +63,7 @@
     <el-menu-item index="2-2">选项2</el-menu-item>
     <el-menu-item index="2-3">选项3</el-menu-item>
   </el-submenu>
-  <el-menu-item index="3">订单管理</el-menu-item>
+  <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
 </el-menu>
 <div class="line"></div>
 <el-menu default-active="1" class="el-menu-demo" mode="horizontal" @select="handleSelect">
@@ -73,7 +74,7 @@
     <el-menu-item index="2-2">选项2</el-menu-item>
     <el-menu-item index="2-3">选项3</el-menu-item>
   </el-submenu>
-  <el-menu-item index="3">订单管理</el-menu-item>
+  <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
 </el-menu>
 
 <script>
