@@ -66,6 +66,7 @@ const install = function(Vue, opts = {}) {
   /* istanbul ignore if */
   if (install.installed) return;
   locale.use(opts.locale);
+  locale.i18n(opts.i18n);
 
   Vue.component(Pagination.name, Pagination);
   Vue.component(Dialog.name, Dialog);
@@ -143,6 +144,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 module.exports = {
   version: '1.1.2',
   locale: locale.use,
+  i18n: locale.i18n,
   install,
   Loading,
   Pagination,
