@@ -10,8 +10,8 @@
     @focus="handleFocus"
     @blur="handleBlur"
     @keydown.native="handleKeydown"
-    :value="visualValue"
-    @change.native="visualValue = $event.target.value"
+    :value="displayValue"
+    @change.native="displayValue = $event.target.value"
     ref="reference">
     <i slot="icon"
       class="el-input__icon"
@@ -27,7 +27,7 @@
 <script>
 import Vue from 'vue';
 import Clickoutside from 'element-ui/src/utils/clickoutside';
-import { formatDate, parseDate, getWeekNumber, equalDate } from './util';
+import { formatDate, parseDate, getWeekNumber, equalDate, isDate } from './util';
 import Popper from 'element-ui/src/utils/vue-popper';
 import Emitter from 'element-ui/src/mixins/emitter';
 import ElInput from 'element-ui/packages/input';
@@ -213,7 +213,7 @@ export default {
     return {
       pickerVisible: false,
       showClose: false,
-      internalValue: ''
+      currentValue: ''
     };
   },
 
@@ -222,16 +222,22 @@ export default {
       if (this.readonly || this.disabled) return;
       val ? this.showPicker() : this.hidePicker();
     },
-    internalValue(val) {
-      if (!val && this.picker && typeof this.picker.handleClear === 'function') {
+    currentValue(val) {
+      if (val) return;
+      if (this.picker && typeof this.picker.handleClear === 'function') {
         this.picker.handleClear();
+      } else {
+        this.$emit('input');
       }
     },
     value: {
       immediate: true,
       handler(val) {
-        this.internalValue = val;
+        this.currentValue = isDate(val) ? new Date(val) : val;
       }
+    },
+    displayValue(val) {
+      this.$emit('change', val);
     }
   },
 
@@ -246,7 +252,7 @@ export default {
     },
 
     valueIsEmpty() {
-      const val = this.internalValue;
+      const val = this.currentValue;
       if (Array.isArray(val)) {
         for (let i = 0, len = val.length; i < len; i++) {
           if (val[i]) {
@@ -284,9 +290,9 @@ export default {
       return HAVE_TRIGGER_TYPES.indexOf(this.type) !== -1;
     },
 
-    visualValue: {
+    displayValue: {
       get() {
-        const value = this.internalValue;
+        const value = this.currentValue;
         if (!value) return;
         const formatter = (
           TYPE_VALUE_RESOLVER_MAP[this.type] ||
@@ -318,9 +324,6 @@ export default {
   },
 
   created() {
-    this.cachePicker = {};
-    this.cacheChange = {};
-
     // vue-popper
     this.options = {
       boundariesPadding: 0,
@@ -340,26 +343,25 @@ export default {
     handleClickIcon() {
       if (this.readonly || this.disabled) return;
       if (this.showClose) {
-        this.internalValue = '';
+        this.currentValue = '';
+        this.showClose = false;
       } else {
         this.pickerVisible = !this.pickerVisible;
       }
     },
 
-    dateIsUpdated(date, cache) {
-      let updated = true;
-
-      if (Array.isArray(date)) {
-        if (equalDate(cache.cacheDateMin, date[0]) &&
-          equalDate(cache.cacheDateMax, date[1])) updated = false;
-        cache.cacheDateMin = new Date(date[0]);
-        cache.cacheDateMax = new Date(date[1]);
+    dateChanged(dateA, dateB) {
+      if (Array.isArray(dateA)) {
+        let len = dateA.length;
+        if (!dateB) return true;
+        while (len--) {
+          if (!equalDate(dateA[len], dateB[len])) return true;
+        }
       } else {
-        if (equalDate(cache.cacheDate, date)) updated = false;
-        cache.cacheDate = new Date(date);
+        if (!equalDate(dateA, dateB)) return true;
       }
 
-      return updated;
+      return false;
     },
 
     handleClose() {
@@ -400,7 +402,7 @@ export default {
     showPicker() {
       if (this.$isServer) return;
       if (!this.picker) {
-        this.panel.defaultValue = this.internalValue;
+        this.panel.defaultValue = this.currentValue;
         this.picker = new Vue(this.panel).$mount(document.createElement('div'));
         this.picker.popperClass = this.popperClass;
         this.popperElm = this.picker.$el;
@@ -423,12 +425,6 @@ export default {
             this.picker.selectableRange = ranges.map(range => parser(range, format));
           }
 
-          if (this.type === 'time-select' && options) {
-            this.$watch('pickerOptions.minTime', val => {
-              this.picker.minTime = val;
-            });
-          }
-
           for (const option in options) {
             if (options.hasOwnProperty(option) &&
                 // 忽略 time-picker 的该配置项
@@ -446,9 +442,7 @@ export default {
 
         this.picker.$on('dodestroy', this.doDestroy);
         this.picker.$on('pick', (date, visible = false) => {
-          if (this.dateIsUpdated(date, this.cachePicker)) this.$emit('input', date);
-
-          this.$nextTick(() => this.dateIsUpdated(date, this.cacheChange) && this.$emit('change', this.visualValue));
+          if (this.dateChanged(date, this.value)) this.$emit('input', date);
           this.pickerVisible = this.picker.visible = visible;
           this.picker.resetView && this.picker.resetView();
         });
@@ -463,10 +457,10 @@ export default {
 
       this.updatePopper();
 
-      if (this.internalValue instanceof Date) {
-        this.picker.date = new Date(this.internalValue.getTime());
+      if (this.currentValue instanceof Date) {
+        this.picker.date = new Date(this.currentValue.getTime());
       } else {
-        this.picker.value = this.internalValue;
+        this.picker.value = this.currentValue;
       }
       this.picker.resetView && this.picker.resetView();
 

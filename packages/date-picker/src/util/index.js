@@ -13,9 +13,13 @@ export const equalDate = function(dateA, dateB) {
 };
 
 export const toDate = function(date) {
+  return isDate(date) ? date : null;
+};
+
+export const isDate = function(date) {
   date = new Date(date);
-  if (isNaN(date.getTime())) return null;
-  return date;
+  if (isNaN(date.getTime())) return false;
+  return true;
 };
 
 export const formatDate = function(date, format) {
