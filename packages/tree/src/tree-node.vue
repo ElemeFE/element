@@ -19,7 +19,7 @@
         v-model="node.checked"
         :indeterminate="node.indeterminate"
         @change="handleCheckChange"
-        @click.native="handleUserClick">
+        @click.native.stop="handleUserClick">
       </el-checkbox>
       <span
         v-if="node.loading"
