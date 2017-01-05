@@ -387,6 +387,7 @@
           }
           this.selectedLabel = option.currentLabel;
           this.selected = option;
+          if (this.filterable) this.query = this.selectedLabel;
           return;
         }
         let result = [];

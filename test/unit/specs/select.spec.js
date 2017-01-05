@@ -48,6 +48,7 @@ describe('Select', () => {
             <el-option
               v-for="item in options"
               :label="item.label"
+              :key="item.value"
               :disabled="item.disabled"
               :value="item.value">
             </el-option>
@@ -373,13 +374,15 @@ describe('Select', () => {
   it('filterable', done => {
     vm = getSelectVm({ filterable: true });
     const select = vm.$children[0];
-    select.selectedLabel = '面';
-    select.onInputChange();
-    select.visible = true;
     setTimeout(() => {
-      expect(select.filteredOptionsCount).to.equal(1);
-      done();
-    }, 100);
+      select.selectedLabel = '面';
+      select.onInputChange();
+      select.visible = true;
+      setTimeout(() => {
+        expect(select.filteredOptionsCount).to.equal(1);
+        done();
+      }, 10);
+    }, 10);
   });
 
   it('filterable with custom filter-method', done => {
@@ -390,28 +393,34 @@ describe('Select', () => {
     };
     vm = getSelectVm({ filterable: true, filterMethod });
     const select = vm.$children[0];
-    select.query = '面';
+    select.$el.querySelector('input').focus();
     setTimeout(() => {
-      expect(select.filteredOptionsCount).to.equal(4);
-      done();
-    }, 100);
+      select.selectedLabel = '面';
+      select.onInputChange();
+      setTimeout(() => {
+        expect(select.filteredOptionsCount).to.equal(4);
+        done();
+      }, 10);
+    }, 10);
   });
 
   it('allow create', done => {
     vm = getSelectVm({ filterable: true, allowCreate: true });
     const select = vm.$children[0];
-    select.selectedLabel = 'new';
-    select.onInputChange();
-    select.visible = true;
+    select.$el.querySelector('input').focus();
     setTimeout(() => {
-      const options = document.querySelectorAll('.el-select-dropdown__item span');
-      const target = [].filter.call(options, option => option.innerText === 'new');
-      target[0].click();
+      select.selectedLabel = 'new';
+      select.onInputChange();
       setTimeout(() => {
-        expect(select.value.indexOf('new') > -1).to.true;
-        done();
-      }, 50);
-    }, 50);
+        const options = document.querySelectorAll('.el-select-dropdown__item span');
+        const target = [].filter.call(options, option => option.innerText === 'new');
+        target[0].click();
+        setTimeout(() => {
+          expect(select.value.indexOf('new') > -1).to.true;
+          done();
+        }, 10);
+      }, 10);
+    }, 10);
   });
 
   it('multiple select', done => {
