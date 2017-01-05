@@ -129,6 +129,14 @@
     },
     mounted() {
       this.openActiveItemMenus();
+
+      const index = this.activeIndex;
+      const menuItem = this.menuItems[index];
+
+      if (this.mode === 'horizontal' && menuItem) {
+        const indexPath = menuItem.indexPath;
+        this.broadcast('ElSubmenu', 'item-select', [index, indexPath]);
+      }
     }
   };
 </script>
