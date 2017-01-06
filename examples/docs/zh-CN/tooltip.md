@@ -134,7 +134,7 @@
     .item {
       margin: 4px;
     }
-    
+
     .left .el-tooltip__popper,
     .right .el-tooltip__popper {
       padding: 8px 10px;
@@ -189,7 +189,7 @@ Tooltip 组件提供了两个不同的主题：`dark`和`light`。
 ```html
 <template>
   <el-tooltip :disabled="disabled" content="点击关闭 tooltip 功能" placement="bottom" effect="light">
-    <el-button @click="disabled = true">点击关闭 tooltip 功能</el-button>
+    <el-button @click="disabled = !disabled">点击{{disabled ? '开启' : '关闭'}} tooltip 功能</el-button>
   </el-tooltip>
 </template>
 ```
