@@ -565,6 +565,7 @@ Search data from server-side.
 |name | same as `name` in native input | string | — | — |
 |max | same as `max` in native input | * | — | — |
 |min | same as `min` in native input | * | — | — |
+|resize| control the resizability | string | none, both, horizontal, vertical | — |
 |autofocus | same as `autofocus` in native input | boolean | — | false |
 |form | same as `form` in native input | string | — | — |
 
