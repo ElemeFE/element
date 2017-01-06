@@ -1,5 +1,5 @@
 <template>
-  <div class="el-autocomplete" v-clickoutside="handleBlur">
+  <div class="el-autocomplete" v-clickoutside="handleClickoutside">
     <el-input
       ref="input"
       :value="value"
@@ -9,9 +9,10 @@
       :size="size"
       @change="handleChange"
       @focus="handleFocus"
+      @blur="handleBlur"
       @keydown.up.native="highlight(highlightedIndex - 1)"
       @keydown.down.native="highlight(highlightedIndex + 1)"
-      @keydown.enter.stop.native="select(highlightedIndex)"
+      @keydown.enter.stop.native="handleKeyEnter"
     >
       <template slot="prepend" v-if="$slots.prepend">
         <slot name="prepend"></slot>
@@ -39,6 +40,8 @@
 
     mixins: [Emitter],
 
+    componentName: 'ElAutocomplete',
+
     components: {
       ElInput,
       ElAutocompleteSuggestions
@@ -53,6 +56,7 @@
       name: String,
       size: String,
       value: String,
+      autofocus: Boolean,
       fetchSuggestions: Function,
       triggerOnFocus: {
         type: Boolean,
@@ -62,11 +66,18 @@
     },
     data() {
       return {
+        isFocus: false,
         suggestions: [],
-        suggestionVisible: false,
         loading: false,
         highlightedIndex: -1
       };
+    },
+    computed: {
+      suggestionVisible() {
+        const suggestions = this.suggestions;
+        let isValidData = Array.isArray(suggestions) && suggestions.length > 0;
+        return (isValidData || this.loading) && this.isFocus;
+      }
     },
     watch: {
       suggestionVisible(val) {
@@ -74,41 +85,46 @@
       }
     },
     methods: {
+      getData(queryString) {
+        this.loading = true;
+        this.fetchSuggestions(queryString, (suggestions) => {
+          this.loading = false;
+          if (Array.isArray(suggestions)) {
+            this.suggestions = suggestions;
+          } else {
+            console.error('autocomplete suggestions must be an array');
+          }
+        });
+      },
       handleChange(value) {
         this.$emit('input', value);
-        this.showSuggestions(value);
+        this.getData(value);
       },
       handleFocus() {
+        this.isFocus = true;
         if (this.triggerOnFocus) {
-          this.showSuggestions(this.value);
+          this.getData(this.value);
         }
       },
       handleBlur() {
-        this.hideSuggestions();
+        // 因为 blur 事件处理优先于 select 事件执行
+        setTimeout(_ => {
+          this.isFocus = false;
+        }, 100);
       },
-      select(index) {
-        if (this.suggestions && this.suggestions[index]) {
-          this.$emit('input', this.suggestions[index].value);
-          this.$emit('select', this.suggestions[index]);
-          this.$nextTick(() => {
-            this.hideSuggestions();
-          });
+      handleKeyEnter() {
+        if (this.suggestionVisible) {
+          this.select(this.suggestions[this.highlightedIndex]);
         }
       },
-      hideSuggestions() {
-        this.suggestionVisible = false;
-        this.loading = false;
+      handleClickoutside() {
+        this.isFocus = false;
       },
-      showSuggestions(value) {
-        this.suggestionVisible = true;
-        this.loading = true;
-        this.fetchSuggestions(value, (suggestions) => {
-          this.loading = false;
-          if (Array.isArray(suggestions) && suggestions.length > 0) {
-            this.suggestions = suggestions;
-          } else {
-            this.hideSuggestions();
-          }
+      select(item) {
+        this.$emit('input', item.value);
+        this.$emit('select', item);
+        this.$nextTick(_ => {
+          this.suggestions = [];
         });
       },
       highlight(index) {
@@ -133,6 +149,11 @@
 
         this.highlightedIndex = index;
       }
+    },
+    mounted() {
+      this.$on('item-click', item => {
+        this.select(item);
+      });
     },
     beforeDestroy() {
       this.$refs.suggestions.$destroy();
