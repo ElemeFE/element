@@ -169,9 +169,11 @@ describe('MessageBox', () => {
     });
     setTimeout(() => {
       document.querySelector('.el-message-box__wrapper .el-button--primary').click();
-      expect(msgAction).to.equal('confirm');
-      done();
-    }, 50);
+      setTimeout(() => {
+        expect(msgAction).to.equal('confirm');
+        done();
+      }, 10);
+    }, 10);
   });
 
   describe('promise', () => {

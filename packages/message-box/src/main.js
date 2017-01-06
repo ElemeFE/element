@@ -20,7 +20,8 @@ const defaults = {
   confirmButtonText: '',
   cancelButtonText: '',
   confirmButtonClass: '',
-  cancelButtonClass: ''
+  cancelButtonClass: '',
+  beforeClose: null
 };
 
 import Vue from 'vue';

@@ -92,6 +92,14 @@
     },
 
     methods: {
+      safeClose() {
+        const currentId = this.uid;
+        return () => {
+          this.$nextTick(() => {
+            if (currentId === this.uid) this.doClose();
+          });
+        };
+      },
       doClose() {
         if (!this.value) return;
         this.value = false;
@@ -120,7 +128,7 @@
       handleWrapperClick() {
         if (this.closeOnClickModal) {
           this.action = '';
-          this.close();
+          this.doClose();
         }
       },
 
@@ -130,9 +138,10 @@
         }
         this.action = action;
         if (typeof this.beforeClose === 'function') {
+          this.close = this.safeClose();
           this.beforeClose(action, this);
         } else {
-          this.close();
+          this.doClose();
         }
       },
 
@@ -172,6 +181,7 @@
       },
 
       value(val) {
+        if (val) this.uid++;
         if (this.$type === 'alert' || this.$type === 'confirm') {
           this.$nextTick(() => {
             this.$refs.confirm.$el.focus();
@@ -193,6 +203,7 @@
 
     data() {
       return {
+        uid: 1,
         title: undefined,
         message: '',
         type: '',
