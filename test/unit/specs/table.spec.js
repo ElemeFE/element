@@ -1305,8 +1305,9 @@ describe('Table', () => {
         vm.label = 'NAME';
         vm.$nextTick(() => {
           expect(vm.$el.querySelector('.el-table__header th .cell').textContent).to.equal('NAME');
+          destroyVM(vm);
+          done();
         });
-        done();
       }, DELAY);
     });
 
@@ -1334,8 +1335,9 @@ describe('Table', () => {
         vm.align = 'right';
         vm.$nextTick(() => {
           expect(vm.$el.querySelectorAll('.el-table__body td.is-right').length > 0).to.be.true;
+          destroyVM(vm);
+          done();
         });
-        done();
       }, DELAY);
     });
 
@@ -1378,6 +1380,7 @@ describe('Table', () => {
               expect(vm.$el.querySelectorAll('.el-table__header th.is-left').length).to.equal(0);
               expect(vm.$el.querySelectorAll('.el-table__header th.is-center').length).to.equal(0);
               expect(vm.$el.querySelectorAll('.el-table__header th.is-right').length).to.above(0);
+              destroyVM(vm);
               done();
             });
           });
@@ -1407,10 +1410,11 @@ describe('Table', () => {
       setTimeout(() => {
         expect(vm.$el.querySelector('.el-table__body col').getAttribute('width')).to.equal('100');
         vm.width = 200;
-        vm.$nextTick(() => {
+        setTimeout(() => {
           expect(vm.$el.querySelector('.el-table__body col').getAttribute('width')).to.equal('200');
-        });
-        done();
+          destroyVM(vm);
+          done();
+        }, 100);
       }, DELAY);
     });
 
@@ -1436,10 +1440,11 @@ describe('Table', () => {
       setTimeout(() => {
         expect(vm.$el.querySelector('.el-table__body col').getAttribute('width')).to.equal('100');
         vm.width = 200;
-        vm.$nextTick(() => {
+        setTimeout(() => {
           expect(vm.$el.querySelector('.el-table__body col').getAttribute('width')).to.equal('200');
-        });
-        done();
+          destroyVM(vm);
+          done();
+        }, 100);
       }, DELAY);
     });
 
@@ -1468,10 +1473,11 @@ describe('Table', () => {
       setTimeout(() => {
         expect(!vm.$el.querySelector('.el-table__fixed')).to.be.true;
         vm.fixed = true;
-        vm.$nextTick(() => {
+        setTimeout(() => {
           expect(!!vm.$el.querySelector('.el-table__fixed')).to.be.true;
-        });
-        done();
+          destroyVM(vm);
+          done();
+        }, 100);
       }, DELAY);
     });
 
@@ -1479,7 +1485,7 @@ describe('Table', () => {
       const vm = createVue({
         template: `
           <el-table :data="testData">
-            <el-table-column :prop="name" />
+            <el-table-column :prop="prop" />
             <el-table-column prop="release" />
             <el-table-column prop="director" />
             <el-table-column prop="runtime" />
@@ -1502,13 +1508,13 @@ describe('Table', () => {
         let secondColumnContent = vm.$el.querySelector('.el-table__body td:nth-child(2) .cell').textContent;
         expect(firstColumnContent !== secondColumnContent).to.be.true;
         vm.prop = 'release';
-        vm.property = 'release';
-        vm.$nextTick(() => {
+        setTimeout(() => {
           firstColumnContent = vm.$el.querySelector('.el-table__body td .cell').textContent;
           secondColumnContent = vm.$el.querySelector('.el-table__body td:nth-child(2) .cell').textContent;
           expect(firstColumnContent === secondColumnContent).to.be.true;
-        });
-        done();
+          destroyVM(vm);
+          done();
+        }, 100);
       }, DELAY);
     });
   });
