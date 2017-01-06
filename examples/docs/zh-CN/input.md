@@ -728,6 +728,7 @@ export default {
 | name | 原生属性 | string | — | — |
 | max | 原生属性，设置最大值 | * | — | — |
 | min | 原生属性，设置最小值 | * | — | — |
+| resize | 控制是否能被用户缩放 | string | none, both, horizontal, vertical | — |
 | autofocus | 原生属性，自动获取焦点 | boolean | true, false | false |
 | form | 原生属性 | string | — | — |
 

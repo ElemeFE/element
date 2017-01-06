@@ -88,6 +88,7 @@
       value: [String, Number],
       placeholder: String,
       size: String,
+      resize: String,
       readonly: Boolean,
       autofocus: Boolean,
       icon: String,
@@ -149,7 +150,10 @@
         const minRows = autosize.minRows;
         const maxRows = autosize.maxRows;
 
-        this.textareaStyle = calcTextareaHeight(this.$refs.textarea, minRows, maxRows);
+        const options = {
+          resize: this.resize
+        };
+        this.textareaStyle = calcTextareaHeight(this.$refs.textarea, minRows, maxRows, options);
       },
       handleFocus(event) {
         this.$emit('focus', event);
