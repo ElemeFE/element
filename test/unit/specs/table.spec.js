@@ -1334,8 +1334,8 @@ describe('Table', () => {
         vm.align = 'right';
         vm.$nextTick(() => {
           expect(vm.$el.querySelectorAll('.el-table__body td.is-right').length > 0).to.be.true;
+          done();
         });
-        done();
       }, DELAY);
     });
 
@@ -1370,9 +1370,9 @@ describe('Table', () => {
           vm.$nextTick(() => {
             expect(vm.$el.querySelectorAll('.el-table__header th.is-right').length === 0).to.be.true;
             expect(vm.$el.querySelectorAll('.el-table__header td.is-center').length > 0).to.be.true;
+            done();
           });
         });
-        done();
       }, DELAY);
     });
 
@@ -1400,8 +1400,8 @@ describe('Table', () => {
         vm.width = 200;
         vm.$nextTick(() => {
           expect(vm.$el.querySelector('.el-table__body col').getAttribute('width')).to.equal('200');
+          done();
         });
-        done();
       }, DELAY);
     });
 
@@ -1429,8 +1429,8 @@ describe('Table', () => {
         vm.width = 200;
         vm.$nextTick(() => {
           expect(vm.$el.querySelector('.el-table__body col').getAttribute('width')).to.equal('200');
+          done();
         });
-        done();
       }, DELAY);
     });
 
@@ -1461,8 +1461,8 @@ describe('Table', () => {
         vm.fixed = true;
         vm.$nextTick(() => {
           expect(!!vm.$el.querySelector('.el-table__fixed')).to.be.true;
+          done();
         });
-        done();
       }, DELAY);
     });
 
@@ -1498,8 +1498,8 @@ describe('Table', () => {
           firstColumnContent = vm.$el.querySelector('.el-table__body td .cell').textContent;
           secondColumnContent = vm.$el.querySelector('.el-table__body td:nth-child(2) .cell').textContent;
           expect(firstColumnContent === secondColumnContent).to.be.true;
+          done();
         });
-        done();
       }, DELAY);
     });
   });
