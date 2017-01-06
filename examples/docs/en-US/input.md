@@ -588,6 +588,7 @@ Attribute | Description | Type | Options | Default
 |custom-item | component name of your customized suggestion list item | string | — | — |
 |fetch-suggestions | a method to fetch input suggestions. When suggestions are ready, invoke `callback(data:[])` to return them to Autocomplete | Function(queryString, callback) | — | — |
 | popper-class | custom class name for autocomplete's dropdown | string | — | — |
+| trigger-on-focus | whether show suggestions when input focus | boolean | — | true |
 
 ### Autocomplete Events
 
