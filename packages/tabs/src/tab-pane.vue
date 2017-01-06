@@ -1,8 +1,6 @@
 <template>
-  <div class="el-tab-pane">
-    <div class="el-tab-pane__content" v-show="active">
-      <slot></slot>
-    </div>
+  <div class="el-tab-pane" v-show="active">
+    <slot></slot>
   </div>
 </template>
 <script>
