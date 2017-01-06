@@ -1359,21 +1359,30 @@ describe('Table', () => {
         }
       }, true);
 
-      setTimeout(() => {
-        expect(vm.$el.querySelectorAll('.el-table__header th.is-left').length > 0).to.be.true;
-        expect(vm.$el.querySelectorAll('.el-table__header td.is-center').length === 0).to.be.true;
+      vm.$nextTick(() => {
+        expect(vm.$el.querySelectorAll('.el-table__header th.is-left').length).to.above(0);
+        expect(vm.$el.querySelectorAll('.el-table__header th.is-center').length).to.equal(0);
+        expect(vm.$el.querySelectorAll('.el-table__header th.is-right').length).to.equal(0);
         vm.align = 'right';
         vm.$nextTick(() => {
-          expect(vm.$el.querySelectorAll('.el-table__header th.is-right').length > 0).to.be.true;
-          expect(vm.$el.querySelectorAll('.el-table__header td.is-center').length === 0).to.be.true;
+          expect(vm.$el.querySelectorAll('.el-table__header th.is-left').length).to.equal(0);
+          expect(vm.$el.querySelectorAll('.el-table__header th.is-center').length).to.equal(0);
+          expect(vm.$el.querySelectorAll('.el-table__header th.is-right').length).to.above(0);
           vm.headerAlign = 'center';
           vm.$nextTick(() => {
-            expect(vm.$el.querySelectorAll('.el-table__header th.is-right').length === 0).to.be.true;
-            expect(vm.$el.querySelectorAll('.el-table__header td.is-center').length > 0).to.be.true;
+            expect(vm.$el.querySelectorAll('.el-table__header th.is-left').length).to.equal(0);
+            expect(vm.$el.querySelectorAll('.el-table__header th.is-center').length).to.above(0);
+            expect(vm.$el.querySelectorAll('.el-table__header th.is-right').length).to.equal(0);
+            vm.headerAlign = null;
+            vm.$nextTick(() => {
+              expect(vm.$el.querySelectorAll('.el-table__header th.is-left').length).to.equal(0);
+              expect(vm.$el.querySelectorAll('.el-table__header th.is-center').length).to.equal(0);
+              expect(vm.$el.querySelectorAll('.el-table__header th.is-right').length).to.above(0);
+              done();
+            });
           });
         });
-        done();
-      }, DELAY);
+      });
     });
 
     it('width', (done) => {
