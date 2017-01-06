@@ -143,7 +143,7 @@
           'el-tabs--card': type === 'card',
           'el-tabs--border-card': type === 'border-card'
         }}>
-          <div class="el-tabs__header">
+          <div class="el-tabs__header" ref="container">
             {!type ? <tab-bar tabs={panes}></tab-bar> : null}
             {tabs}
           </div>
