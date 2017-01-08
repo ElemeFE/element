@@ -305,7 +305,11 @@ Prepend or append an element, generally a label or a button.
     <el-button slot="append" icon="search"></el-button>
   </el-input>
 </div>
-
+<style>
+  .el-select .el-input {
+    width: 110px;
+  }
+</style>
 <script>
 export default {
   data() {
