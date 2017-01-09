@@ -1,25 +1,15 @@
 <template>
-  <div class="el-upload__inner"
-    :class="{
-      'el-dragger': type === 'drag',
-      'is-dragOver': dragOver,
-      'is-showCover': showCover
-    }"
-    @click="handleClick"
-  >
-    <slot v-if="!showCover"></slot>
-    <cover :image="lastestFile" :on-preview="onPreview" :on-remove="onRemove" v-else></cover>
+  <div class="el-upload" @click="handleClick">
+    <slot></slot>
     <input class="el-upload__input" type="file" ref="input" @change="handleChange" :multiple="multiple" :accept="accept">
   </div>
 </template>
 
 <script>
 import ajax from './ajax';
-import Cover from './cover';
 
 export default {
   components: {
-    Cover
   },
   props: {
     type: String,
@@ -53,23 +43,8 @@ export default {
 
   data() {
     return {
-      dragOver: false,
       mouseover: false
     };
-  },
-
-  computed: {
-    lastestFile() {
-      var fileList = this.$parent.fileList;
-      return fileList[fileList.length - 1];
-    },
-    showCover() {
-      var file = this.lastestFile;
-      return this.thumbnailMode && file && file.status !== 'fail';
-    },
-    thumbnailMode() {
-      return this.$parent.thumbnailMode;
-    }
   },
 
   methods: {
@@ -145,10 +120,6 @@ export default {
           this.onError(err, response, file);
         }
       });
-    },
-    onDrop(e) {
-      this.dragOver = false;
-      this.uploadFiles(e.dataTransfer.files);
     },
     handleClick() {
       this.$refs.input.click();

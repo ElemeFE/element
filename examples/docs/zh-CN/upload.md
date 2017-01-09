@@ -6,6 +6,10 @@
   }
   .demo-box {
     margin-bottom: 24px;
+
+    .upload-demo {
+      width: 360px;
+    }
   }
 </style>
 <script>
@@ -59,6 +63,7 @@
 ::: demo 通过 slot 你可以传入自定义的上传按钮类型和文字提示。
 ```html
 <el-upload
+  class="upload-demo"
   action="//jsonplaceholder.typicode.com/posts/"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
@@ -88,14 +93,17 @@
 
 ::: demo 通过 slot 你可以传入自定义的上传按钮类型和文字提示。
 ```html
-<el-upload-dragger
+<el-upload
+  class="upload-demo"
+  dragger
   action="//jsonplaceholder.typicode.com/posts/"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
   :file-list="fileList">
-  <el-button size="small" type="primary">点击上传</el-button>
+  <i class="el-icon-upload"></i>
+  <div class="el-upload-dragger__text">将文件拖到此处，或<em>点击上传</em></div>
   <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
-</el-upload-dragger>
+</el-upload>
 ```
 :::
 

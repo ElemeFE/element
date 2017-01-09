@@ -1,16 +1,38 @@
+<template>
+  <div
+    class="el-upload-dragger"
+    :class="{
+      'is-dragOver': dragOver,
+      'is-showCover': showCover
+    }"
+    @click="handleClick"
+    @drop.prevent="onDrop"
+    @dragover.prevent="dragOver = true"
+    @dragleave.prevent="dragOver = false"
+  >
+    <slot v-if="!showCover"></slot>
+    <cover :image="lastestFile" :on-preview="onPreview" :on-remove="onRemove" v-else></cover>
+    <input class="el-upload__input" type="file" ref="input" @change="handleChange" :multiple="multiple" :accept="accept">
+  </div>
+</template>
 <script>
-  import index from '.';
   import Upload from './upload';
   import IframeUpload from './iframe-upload';
-  import UploadList from './upload-list';
+  import Cover from './cover';
 
   export default {
     name: 'ElUploadDragger',
-    extends: index,
+
+    extends: Upload,
+
     components: {
-      UploadList,
-      Upload,
-      IframeUpload
+      IframeUpload,
+      Cover
+    },
+    data() {
+      return {
+        dragOver: false
+      };
     },
     props: {
       draggable: {
@@ -18,57 +40,48 @@
         default: true
       }
     },
-    render(h) {
-      var uploadList;
-
-      if (this.showUploadList && !this.thumbnailMode && this.uploadFiles.length) {
-        uploadList = (
-          <UploadList
-            files={this.uploadFiles}
-            on-remove={this.handleRemove}
-            on-preview={this.handlePreview}>
-          </UploadList>
-        );
+    computed: {
+      lastestFile() {
+        var fileList = this.$parent.fileList;
+        return fileList[fileList.length - 1];
+      },
+      showCover() {
+        var file = this.lastestFile;
+        return this.thumbnailMode && file && file.status !== 'fail';
+      },
+      thumbnailMode() {
+        return this.$parent.thumbnailMode;
       }
-
-      var props = {
-        props: {
-          type: this.type,
-          draggable: this.draggable,
-          action: this.action,
-          multiple: this.multiple,
-          'before-upload': this.beforeUpload,
-          'with-credentials': this.withCredentials,
-          headers: this.headers,
-          name: this.name,
-          data: this.data,
-          accept: this.thumbnailMode ? 'image/gif, image/png, image/jpeg, image/bmp, image/webp' : this.accept,
-          'on-start': this.handleStart,
-          'on-progress': this.handleProgress,
-          'on-success': this.handleSuccess,
-          'on-error': this.handleError,
-          'on-preview': this.handlePreview,
-          'on-remove': this.handleRemove
-        },
-        ref: 'upload-inner'
-      };
-
-      var uploadComponent = (typeof FormData !== 'undefined' || this.$isServer)
-          ? <upload {...props}>{this.$slots.default}</upload>
-          : <iframeUpload {...props}>{this.$slots.default}</iframeUpload>;
-
-      return (
-        <div
-          class={{
-            'el-upload-dragger': true,
-            'is-dragOver': this.dragOver
-          }}
-        >
-          {uploadComponent}
-          {this.$slots.tip}
-          {uploadList}
-        </div>
-      );
+    },
+    methods: {
+      onDrop(e) {
+        this.dragOver = false;
+        this.uploadFiles(e.dataTransfer.files);
+      }
     }
+    // render(h) {
+    //   let {
+    //     dragover
+    //   } = this;
+
+    //   let content = this.showCover
+    //     ? <cover image={this.lastestFile} on-preview={this.onPreview} on-remove={this.onRemove}></cover>
+    //     : this.$slots.default
+    //   return (
+    //     <div
+    //       class={{
+    //         'el-upload-dragger': true,
+    //         'is-dragOver': this.dragOver,
+    //         'is-showCover': this.showCover
+    //       }}
+    //       @drop.prevent="onDrop"
+    //       @dragover.prevent="dragOver = true"
+    //       @dragleave.prevent="dragOver = false"
+    //     >
+    //       {content}
+    //       <input class="el-upload__input" type="file" ref="input" on-change={this.handleChange} multiple={this.multiple} accept={this.accept} />
+    //     </div>
+    //   );
+    // }
   };
 </script>
