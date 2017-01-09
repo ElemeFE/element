@@ -1,5 +1,19 @@
 ## Changelog
 
+### 1.1.3
+
+*2017-01-09*
+
+- Fixed DatePicker not firing change event when cleared for the first time upon page load, #2167
+- Fixed DatePicker year calculating error when choosing the next year, #2152
+- Added `default-sort-prop` and `default-sort-order` attributes for Table, #2182 (by @njleonzhang)
+- Fixed filterable Select filtering other options with initial value, #2196
+- Added custom i18n processing, making Element compatible with i18n plugins other than `vue-i18n`, #2129
+- Added `resize` attribute for Input, #2263 (by @Kingwl)
+- Fixed Autocomplete not hiding dropdown when blurred, #2247
+- Fixed style issues with nested Tabs, #2212 (by @Kingwl)
+- Fixed Tabs' tab bar locating error when non-first item is initially activated, #2192
+
 ### 1.1.2
 
 *2016-12-30*
