@@ -1127,7 +1127,7 @@ describe('Table', () => {
           }
         }, '@sort-change="sortChange"');
         setTimeout(_ => {
-          const elm = vm.$el.querySelector('.caret-wrapper > .ascending');
+          const elm = vm.$el.querySelector('.caret-wrapper');
 
           elm.click();
           setTimeout(_ => {
