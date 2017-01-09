@@ -1,6 +1,7 @@
 <script>
 import UploadList from './upload-list';
 import Upload from './upload';
+import UploadDragger from './upload-dragger';
 import IframeUpload from './iframe-upload';
 import ElProgress from 'element-ui/packages/progress';
 
@@ -14,6 +15,7 @@ export default {
     ElProgress,
     UploadList,
     Upload,
+    UploadDragger,
     IframeUpload
   },
 
@@ -35,6 +37,7 @@ export default {
       default: 'file'
     },
     draggable: Boolean,
+    dragger: Boolean,
     withCredentials: Boolean,
     thumbnailMode: Boolean,
     showUploadList: {
@@ -236,27 +239,27 @@ export default {
       ref: 'upload-inner'
     };
 
-    var uploadComponent = (typeof FormData !== 'undefined' || this.$isServer)
-        ? <upload {...props}>{this.$slots.default}</upload>
-        : <iframeUpload {...props}>{this.$slots.default}</iframeUpload>;
+    // var uploadComponent = (typeof FormData !== 'undefined' || this.$isServer)
+    //     ? <upload {...props}>{this.$slots.default}</upload>
+    //     : <iframeUpload {...props}>{this.$slots.default}</iframeUpload>;
+
+    if (this.dragger) {
+      return (
+        <div>
+          <upload-dragger {...props}>{this.$slots.default}</upload-dragger>
+          {this.$slots.tip}
+          {uploadList}
+        </div>
+      );
+    }
 
     return (
-      <div class="el-upload">
+      <div>
         {uploadList}
-        {uploadComponent}
+        <upload {...props}>{this.$slots.default}</upload>
         {this.$slots.tip}
       </div>
     );
-
-    // if (this.type === 'drag') {
-    //   return (
-    //     <div class="el-upload">
-    //       {uploadComponent}
-    //       {this.$slots.tip}
-    //       {uploadList}
-    //     </div>
-    //   );
-    // }
   }
 };
 </script>

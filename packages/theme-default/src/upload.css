@@ -101,7 +101,7 @@
       display: none;
     }
   }
-  @b dragger {
+  @b upload-dragger {
     background-color: var(--color-dark-white);
     border: 1px solid var(--color-extra-light-silver);
     box-sizing: border-box;
