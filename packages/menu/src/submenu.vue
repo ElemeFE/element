@@ -15,14 +15,18 @@
       }">
       </i>
     </div>
-    <transition :name="rootMenu.mode === 'horizontal' ? 'el-zoom-in-top' : ''">
+    <transition v-if="rootMenu.mode === 'horizontal'" name="el-zoom-in-top">
       <ul class="el-menu" v-show="opened"><slot></slot></ul>
     </transition>
+    <collapse-transition v-else>
+      <ul class="el-menu" v-show="opened"><slot></slot></ul>
+    </collapse-transition>
   </li>
 </template>
 <script>
   import menuMixin from './menu-mixin';
   import Emitter from 'element-ui/src/mixins/emitter';
+  import CollapseTransition from '../../tree/src/transition';
 
   module.exports = {
     name: 'ElSubmenu',
@@ -36,6 +40,9 @@
         type: String,
         required: true
       }
+    },
+    components: {
+      CollapseTransition
     },
     data() {
       return {
