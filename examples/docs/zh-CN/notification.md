@@ -2,9 +2,11 @@
   module.exports = {
     methods: {
       open() {
+        const h = this.$createElement;
+
         this.$notify({
           title: '标题名称',
-          message: '这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案'
+          message: h('p', { style: 'color: red'}, '这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案')
         });
       },
 
@@ -45,7 +47,7 @@
           message: '这是一条错误的提示消息'
         });
       },
-      
+
       open7() {
         this.$notify.success({
           title: '成功',
@@ -88,9 +90,11 @@
   export default {
     methods: {
       open() {
+        const h = this.$createElement;
+
         this.$notify({
           title: '标题名称',
-          message: '这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案'
+          message: h('p', { style: 'color: red'}, '这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案')
         });
       },
 
@@ -222,7 +226,7 @@ import { Notification } from 'element-ui';
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | title | 标题 | string | — | — |
-| message | 说明文字 | string | — | — |
+| message | 说明文字 | string/Vue.VNode | — | — |
 | type | 主题样式，如果不在可选值内将被忽略 | string | success/warning/info/error | — |
 | iconClass | 自定义图标的类名。若设置了 `type`，则 `iconClass` 会被覆盖 | string | — | — |
 | customClass | 自定义类名 | string | — | — |

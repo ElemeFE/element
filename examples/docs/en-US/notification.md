@@ -2,9 +2,11 @@
   module.exports = {
     methods: {
       open() {
+        const h = this.$createElement;
+
         this.$notify({
           title: 'Title',
-          message: 'This is a reminder'
+          message: h('p', { style: 'color: red' }, 'This is a reminder')
         });
       },
 
@@ -61,14 +63,14 @@
   };
 </script>
 
-## Notification 
+## Notification
 
 Displays a global notification message at the upper right corner of the page.
 
 ### Basic usage
 
 ::: demo Element has registered the `$notify` method and it receives an object as its parameter. In the simplest case, you can set the `title` field and the` message` field for the title and body of the notification. By default, the notification automatically closes after 4500ms, but by setting `duration` you can control its duration. Specifically, if set to `0`, it will not close automatically. Note that `duration` receives a `Number` in milliseconds.
-   
+
 ```html
 <template>
   <el-button
@@ -87,9 +89,11 @@ Displays a global notification message at the upper right corner of the page.
   export default {
     methods: {
       open() {
+        const h = this.$createElement;
+
         this.$notify({
           title: 'Title',
-          message: 'This is a reminder'
+          message: h('p', { style: 'color: red' }, 'This is a reminder')
         });
       },
 
@@ -220,7 +224,7 @@ In this case you should call `Notification(options)`. We have also registered me
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | title | title | string | — | — |
-| message | description text | string | — | — |
+| message | description text | string/Vue.VNode | — | — |
 | type | notification type | string | success/warning/info/error | — |
 | iconClass | custom icon's class. It will be overridden by `type` | string | — | — |
 | customClass | custom class name for Notification | string | — | — |
