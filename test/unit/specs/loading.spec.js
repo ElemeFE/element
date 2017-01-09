@@ -4,10 +4,11 @@ import LoadingRaw from 'packages/loading';
 const Loading = LoadingRaw.service;
 
 describe('Loading', () => {
-  let vm, loadingInstance;
+  let vm, loadingInstance, loadingInstance2;
   afterEach(() => {
     destroyVM(vm);
     loadingInstance && loadingInstance.close();
+    loadingInstance2 && loadingInstance2.close();
   });
 
   describe('as a directive', () => {
@@ -205,6 +206,21 @@ describe('Loading', () => {
       const mask = document.querySelector('.el-loading-mask');
       expect(mask.parentNode).to.equal(document.body);
       expect(mask.classList.contains('is-fullscreen')).to.true;
+    });
+
+    it('fullscreen singleton', done => {
+      loadingInstance = Loading({ fullScreen: true });
+      setTimeout(() => {
+        loadingInstance2 = Loading({ fullScreen: true });
+        setTimeout(() => {
+          let masks = document.querySelectorAll('.el-loading-mask');
+          expect(masks.length).to.equal(1);
+          loadingInstance2.close();
+          masks = document.querySelectorAll('.el-loading-mask');
+          expect(masks.length).to.equal(0);
+          done();
+        }, 100);
+      }, 100);
     });
 
     it('lock', () => {

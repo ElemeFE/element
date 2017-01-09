@@ -52,9 +52,11 @@ const TableStore = function(table, initialState = {}) {
   this.states = {
     rowKey: null,
     _columns: [],
+    originColumns: [],
     columns: [],
     fixedColumns: [],
     rightFixedColumns: [],
+    isComplex: false,
     _data: null,
     filteredData: null,
     data: null,
@@ -67,7 +69,9 @@ const TableStore = function(table, initialState = {}) {
     selectable: null,
     currentRow: null,
     hoverRow: null,
-    filters: {}
+    filters: {},
+    expandRows: [],
+    defaultExpandAll: false
   };
 
   for (let prop in initialState) {
@@ -82,6 +86,15 @@ TableStore.prototype.mutations = {
     const dataInstanceChanged = states._data !== data;
     states._data = data;
     states.data = sortData((data || []), states);
+
+    states.data.forEach((item) => {
+      if (!item.$extra) {
+        Object.defineProperty(item, '$extra', {
+          value: {},
+          enumerable: false
+        });
+      }
+    });
 
     this.updateCurrentRow();
 
@@ -110,6 +123,11 @@ TableStore.prototype.mutations = {
       } else {
         console.warn('WARN: rowKey is required when reserve-selection is enabled.');
       }
+    }
+
+    const defaultExpandAll = states.defaultExpandAll;
+    if (defaultExpandAll) {
+      this.states.expandRows = (states.data || []).slice(0);
     }
 
     Vue.nextTick(() => this.table.updateScrollY());
@@ -155,16 +173,24 @@ TableStore.prototype.mutations = {
     states.filteredData = data;
     states.data = sortData(data, states);
 
+    this.table.$emit('filter-change', filters);
+
     Vue.nextTick(() => this.table.updateScrollY());
   },
 
-  insertColumn(states, column, index) {
-    let _columns = states._columns;
-    if (typeof index !== 'undefined') {
-      _columns.splice(index, 0, column);
-    } else {
-      _columns.push(column);
+  insertColumn(states, column, index, parent) {
+    let array = states._columns;
+    if (parent) {
+      array = parent.children;
+      if (!array) array = parent.children = [];
     }
+
+    if (typeof index !== 'undefined') {
+      array.splice(index, 0, column);
+    } else {
+      array.push(column);
+    }
+
     if (column.type === 'selection') {
       states.selectable = column.selectable;
       states.reserveSelection = column.reserveSelection;
@@ -208,6 +234,26 @@ TableStore.prototype.mutations = {
     this.updateAllSelected();
   },
 
+  toggleRowExpanded: function(states, row, expanded) {
+    const expandRows = states.expandRows;
+    if (typeof expanded !== 'undefined') {
+      const index = expandRows.indexOf(row);
+      if (expanded) {
+        if (index === -1) expandRows.push(row);
+      } else {
+        if (index !== -1) expandRows.splice(index, 1);
+      }
+    } else {
+      const index = expandRows.indexOf(row);
+      if (index === -1) {
+        expandRows.push(row);
+      } else {
+        expandRows.splice(index, 1);
+      }
+    }
+    this.table.$emit('expand', row, expandRows.indexOf(row) !== -1);
+  },
+
   toggleAllSelection: debounce(10, function(states) {
     const data = states.data || [];
     const value = !states.isAllSelected;
@@ -235,6 +281,18 @@ TableStore.prototype.mutations = {
   })
 };
 
+const doFlattenColumns = (columns) => {
+  const result = [];
+  columns.forEach((column) => {
+    if (column.children) {
+      result.push.apply(result, doFlattenColumns(column.children));
+    } else {
+      result.push(column);
+    }
+  });
+  return result;
+};
+
 TableStore.prototype.updateColumns = function() {
   const states = this.states;
   const _columns = states._columns || [];
@@ -245,7 +303,9 @@ TableStore.prototype.updateColumns = function() {
     _columns[0].fixed = true;
     states.fixedColumns.unshift(_columns[0]);
   }
-  states.columns = [].concat(states.fixedColumns).concat(_columns.filter((column) => !column.fixed)).concat(states.rightFixedColumns);
+  states.originColumns = [].concat(states.fixedColumns).concat(_columns.filter((column) => !column.fixed)).concat(states.rightFixedColumns);
+  states.columns = doFlattenColumns(states.originColumns);
+  states.isComplex = states.fixedColumns.length > 0 || states.rightFixedColumns.length > 0;
 };
 
 TableStore.prototype.isSelected = function(row) {
@@ -255,11 +315,34 @@ TableStore.prototype.isSelected = function(row) {
 TableStore.prototype.clearSelection = function() {
   const states = this.states;
   states.isAllSelected = false;
+  const oldSelection = states.selection;
   states.selection = [];
+  if (oldSelection.length > 0) {
+    this.table.$emit('selection-change', states.selection);
+  }
+};
+
+TableStore.prototype.setExpandRowKeys = function(rowKeys) {
+  const expandRows = [];
+  const data = this.states.data;
+  const rowKey = this.states.rowKey;
+  if (!rowKey) throw new Error('[Table] prop row-key should not be empty.');
+  const keysMap = getKeysMap(data, rowKey);
+  rowKeys.forEach((key) => {
+    const info = keysMap[key];
+    if (info) {
+      expandRows.push(info.row);
+    }
+  });
+
+  this.states.expandRows = expandRows;
 };
 
 TableStore.prototype.toggleRowSelection = function(row, selected) {
-  toggleRowSelection(this.states, row, selected);
+  const changed = toggleRowSelection(this.states, row, selected);
+  if (changed) {
+    this.table.$emit('selection-change', this.states.selection);
+  }
 };
 
 TableStore.prototype.cleanSelection = function() {
@@ -313,26 +396,48 @@ TableStore.prototype.updateAllSelected = function() {
   };
 
   let isAllSelected = true;
+  let selectedCount = 0;
   for (let i = 0, j = data.length; i < j; i++) {
     const item = data[i];
     if (selectable) {
-      if (selectable.call(null, item, i) && !isSelected(item)) {
-        isAllSelected = false;
-        break;
+      const isRowSelectable = selectable.call(null, item, i);
+      if (isRowSelectable) {
+        if (!isSelected(item)) {
+          isAllSelected = false;
+          break;
+        } else {
+          selectedCount++;
+        }
       }
     } else {
       if (!isSelected(item)) {
         isAllSelected = false;
         break;
+      } else {
+        selectedCount++;
       }
     }
   }
+
+  if (selectedCount === 0) isAllSelected = false;
 
   states.isAllSelected = isAllSelected;
 };
 
 TableStore.prototype.scheduleLayout = function() {
   this.table.debouncedLayout();
+};
+
+TableStore.prototype.setCurrentRowKey = function(key) {
+  const states = this.states;
+  const rowKey = states.rowKey;
+  if (!rowKey) throw new Error('[Table] row-key should not be empty.');
+  const data = states.data || [];
+  const keysMap = getKeysMap(data, rowKey);
+  const info = keysMap[key];
+  if (info) {
+    states.currentRow = info.row;
+  }
 };
 
 TableStore.prototype.updateCurrentRow = function() {
@@ -354,6 +459,8 @@ TableStore.prototype.commit = function(name, ...args) {
   const mutations = this.mutations;
   if (mutations[name]) {
     mutations[name].apply(this, [this.states].concat(args));
+  } else {
+    throw new Error(`Action not found: ${name}`);
   }
 };
 

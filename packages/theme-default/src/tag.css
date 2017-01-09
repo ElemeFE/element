@@ -7,12 +7,14 @@
     background-color: var(--tag-fill);
     display: inline-block;
     padding: var(--tag-padding);
-    height: 22px;
-    line-height: @height;
+    height: 24px;
+    line-height: calc(@height - 2);
     font-size: var(--tag-font-size);
     color: var(--tag-color);
     border-radius: var(--tag-border-radius);
-    border: 1px solid var(--tag-border);
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    white-space: nowrap;
 
     & .el-icon-close {
       border-radius: 50%;

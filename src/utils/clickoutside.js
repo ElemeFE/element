@@ -1,9 +1,10 @@
-import { on } from 'wind-dom/src/event';
+import Vue from 'vue';
+import { on } from 'element-ui/src/utils/dom';
 
 const nodeList = [];
 const ctx = '@@clickoutsideContext';
 
-on(document, 'click', e => {
+!Vue.prototype.$isServer && on(document, 'click', e => {
   nodeList.forEach(node => node[ctx].documentHandler(e));
 });
 /**
@@ -23,10 +24,10 @@ export default {
         (vnode.context.popperElm &&
         vnode.context.popperElm.contains(e.target))) return;
 
-      if (binding.expression) {
+      if (binding.expression &&
         el[ctx].methodName &&
-          vnode.context[el[ctx].methodName] &&
-          vnode.context[el[ctx].methodName]();
+        vnode.context[el[ctx].methodName]) {
+        vnode.context[el[ctx].methodName]();
       } else {
         el[ctx].bindingFn && el[ctx].bindingFn();
       }

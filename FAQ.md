@@ -19,10 +19,12 @@
 <details>
 <summary>如何在 Table 组件的每一行添加操作该行数据的按钮？</summary>
 
-使用 inline-template 即可：
+使用 [Scoped slot](https://vuejs.org/v2/guide/components.html#Scoped-Slots) 即可：
 ```html
-<el-table-column label="操作" inline-template>
-  <el-button @click.native="showDetail(row)">查看详情</el-button>
+<el-table-column label="操作">
+  <template scoped="props">
+    <el-button @click.native="showDetail(props.row)">查看详情</el-button>
+  </template>
 </el-table-column>
 ```
 参数 `row` 即为对应行的数据。
@@ -32,6 +34,27 @@
 <summary>Tree 组件的 `render-content` 和 Table 组件的 `render-header` 怎么用？</summary>
 
 请阅读 Vue 文档 [Render Function](http://vuejs.org/v2/guide/render-function.html) 的相关内容。注意，使用 JSX 来写 Render Function 的话，需要安装 `babel-plugin-transform-vue-jsx`，并参照其[文档](https://github.com/vuejs/babel-plugin-transform-vue-jsx)进行配置。
+</details>
+
+<details>
+<summary>如何使用第三方图标库？</summary>
+
+只要修改第三方图标库的前缀（具体方法参阅第三方库的文档），并编写相应的 CSS，即可在 Element 中像使用内置图标一样使用第三方图标。例如，将第三方库的前缀改为 `el-icon-my`，然后在其 CSS 文件中添加：
+```css
+[class^="el-icon-my"], [class*=" el-icon-my"] {
+  font-family:"your-font-family" !important;
+
+  /* 以下内容参照第三方图标库本身的规则 */
+  font-size: inherit;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+```
+具体使用时，和 Element 内置的图标用法一样。比如在 `el-input` 中：
+```html
+<el-input icon="my-xxx" />
+```
 </details>
 
 <details>
@@ -83,10 +106,12 @@ For other components, the `.native` modifier is still mandatory.
 <details>
 <summary>How do I add buttons in each row of Table to operate data of that row?</summary>
 
-Just use `inline-template`:
+Just use [Scoped slot](https://vuejs.org/v2/guide/components.html#Scoped-Slots):
 ```html
-<el-table-column label="Operations" inline-template>
-  <el-button @click.native="showDetail(row)">Details</el-button>
+<el-table-column label="Operations">
+  <template scoped="props">
+    <el-button @click.native="showDetail(props.row)">Details</el-button>
+  </template>
 </el-table-column>
 ```
 The parameter `row` is the data object of corresponding row.
@@ -96,6 +121,27 @@ The parameter `row` is the data object of corresponding row.
 <summary>How do `render-content` of Tree and `render-header` of Table work?</summary>
 
 Please refer to [Render Function](http://vuejs.org/v2/guide/render-function.html) in Vue's documentation. In addition, if you are writing render functions with JSX, `babel-plugin-transform-vue-jsx` is required. See [here](https://github.com/vuejs/babel-plugin-transform-vue-jsx) for its configurations.
+</details>
+
+<details>
+<summary>How do I use third-party icon font library with Element?</summary>
+
+You just need to modify the class name prefix of the third-party library (see their docs for how to do it), and write some CSS, then you can use them just like you use Element built-in icons. For example, change the prefix to `el-icon-my`, and then add the following to its CSS:
+```css
+[class^="el-icon-my"], [class*=" el-icon-my"] {
+  font-family:"your-font-family" !important;
+
+  /* The following is based on original CSS rules of third-party library */
+  font-size: inherit;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+```
+Now you can use them as you do with built-in icons. For example, in `el-input`:
+```html
+<el-input icon="my-xxx" />
+```
 </details>
 
 <details>

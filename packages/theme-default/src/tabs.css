@@ -3,8 +3,6 @@
 
 @component-namespace el {
   @b tabs {
-    display: inline-block;
-
     @e header {
       border-bottom: 1px solid #d3dce6;
       padding: 0;
@@ -16,7 +14,6 @@
       position: absolute;
       bottom: 0;
       left: 0;
-      width: 100%;
       height: 3px;
       background-color: var(--color-primary);
       z-index: 1;
@@ -35,38 +32,11 @@
       margin-bottom: -1px;
       position: relative;
 
-      @when active {
-        color: var(--color-primary);
-      }
-
-      &:hover {
-        color: #1f2d3d;
-        cursor: pointer;
-      }
-    }
-    @e content {
-      overflow: hidden;
-      position: relative;
-    }
-    @m card {
-      .el-tabs__active-bar {
-        display: none;
-      }
-      & .el-tabs__item .el-icon-close {
-        font-size: 12px;
-        vertical-align: middle;
-        line-height: 15px;
-        overflow: hidden;
-        width: 0;
-        height: 14px;
+      & .el-icon-close {
         border-radius: 50%;
         text-align: center;
-        transform-origin: 100% 50%;
         transition: all .3s cubic-bezier(.645,.045,.355,1);
-        position: relative;
-        top: -1px;
-        right: -2px;
-
+        margin-left: 5px;
         &:before {
           transform: scale(.7, .7);
           display: inline-block;
@@ -77,7 +47,42 @@
           color: #fff;
         }
       }
-      .el-tabs__item {
+
+      @when active {
+        color: var(--color-primary);
+      }
+
+      &:hover {
+        color: #1f2d3d;
+        cursor: pointer;
+      }
+
+      @when disabled {
+        color: var(--disabled-color-base);
+        cursor: default;
+      }
+    }
+    @e content {
+      overflow: hidden;
+      position: relative;
+    }
+    @m card {
+      &>.el-tabs__header>.el-tabs__active-bar {
+        display: none;
+      }
+      &>.el-tabs__header>.el-tabs__item .el-icon-close {
+        position: relative;
+        font-size: 12px;
+        width: 0;
+        height: 14px;
+        vertical-align: middle;
+        line-height: 15px;
+        overflow: hidden;
+        top: -1px;
+        right: -2px;
+        transform-origin: 100% 50%;
+      }
+      &>.el-tabs__header>.el-tabs__item {
         border: 1px solid transparent;
         transition: all .3s cubic-bezier(.645,.045,.355,1);
               
@@ -110,14 +115,14 @@
       border: 1px solid #d3dce6;
       box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.12), 0px 0px 6px 0px rgba(0,0,0,0.04);
 
-      .el-tabs__content {
+      &>.el-tabs__content {
         padding: 15px;
       }
-      .el-tabs__header {
+      &>.el-tabs__header {
         background-color: #eff2f7;
         margin: 0;
       }
-      .el-tabs__item {
+      &>.el-tabs__header>.el-tabs__item {
         transition: all .3s cubic-bezier(.645,.045,.355,1);
         border: 1px solid transparent;
         border-top: 0;
@@ -135,13 +140,8 @@
             border-right-color: #d3dce6;
           }
         }
-
       }
     }
-  }
-  @b tab-pane {
-    width: 100%;
-    display: inline-block;
   }
 }
 

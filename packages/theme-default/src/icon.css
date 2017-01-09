@@ -1,7 +1,7 @@
 @font-face {
     font-family: 'element-icons';
-    src:url('fonts/element-icons.eot?t=1472440741'), /* IE9*/
-      url('fonts/element-icons.woff?t=1472440741') format('woff'), /* chrome, firefox */
+    src: url('fonts/element-icons.eot?t=1472440741'); /* IE9*/
+    src: url('fonts/element-icons.woff?t=1472440741') format('woff'), /* chrome, firefox */
       url('fonts/element-icons.ttf?t=1472440741') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
       url('fonts/element-icons.svg?t=1472440741#el-icon') format('svg'); /* iOS 4.1- */
     font-weight: normal;

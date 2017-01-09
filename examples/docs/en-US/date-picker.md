@@ -191,8 +191,7 @@ Picking a date range is supported.
     <el-date-picker
       v-model="value6"
       type="daterange"
-      placeholder="Pick a range"
-      style="width: 220px">
+      placeholder="Pick a range">
     </el-date-picker>
   </div>
   <div class="block">
@@ -202,8 +201,7 @@ Picking a date range is supported.
       type="daterange"
       align="right"
       placeholder="Pick a range"
-      :picker-options="pickerOptions2"
-      style="width: 220px">
+      :picker-options="pickerOptions2">
     </el-date-picker>
   </div>
 </template>
@@ -253,12 +251,15 @@ Picking a date range is supported.
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | readonly | whether DatePicker is read only | boolean | — | false |
-| disabled | whether DatePicker is disabled | boolean | - | false |
-| editable | whether the input is editable | boolean | - | true |
+| disabled | whether DatePicker is disabled | boolean | — | false |
+|size | size of Input | string | large/small/mini | — |
+| editable | whether the input is editable | boolean | — | true |
+| clearable | Whether to show clear button | boolean | — | true |
 | placeholder | placeholder | string | — | — |
-| type | type of the picker | string | year/month/date/datetime/week/datetimerange/daterange | date |
-| format | format of the picker | string | year `yyyy` month `MM` day `dd`, <br>hour `HH`, minute `mm`, second `ss` | yyyy-MM-dd |
+| type | type of the picker | string | year/month/date/datetime/ week/datetimerange/daterange | date |
+| format | format of the picker | string | year `yyyy` month `MM` day `dd`, hour `HH`, minute `mm`, second `ss` | yyyy-MM-dd |
 | align | alignment | left/center/right | left |
+| popper-class | custom class name for DatePicker's dropdown | string | — | — |
 | picker-options | additional options, check the table below | object | — | {} |
 
 ### Picker Options
@@ -266,9 +267,16 @@ Picking a date range is supported.
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | shortcuts | a { text, onClick } object array to set shortcut options, check the table below | object[] | — | — |
 | disabledDate | a function determining if a date is disabled with that date as its parameter. Should return a Boolean | function | — | — |
+| firstDayOfWeek | first day of week | Number | 1 to 7 | 7 |
 
 ### shortcuts
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | text | title of the shortcut | string | — | — |
-| onClick | callback function, triggers when the shortcut is clicked, with the `vm` as its parameter. <br>You can change the picker value by emitting the `pick` event.<br> Example: `vm.$emit('pick', new Date())`| function | — | — |
+| onClick | callback function, triggers when the shortcut is clicked, with the `vm` as its parameter. You can change the picker value by emitting the `pick` event. Example: `vm.$emit('pick', new Date())`| function | — | — |
+
+
+### Events
+| Event Name | Description | Parameters |
+|---------|--------|---------|
+| change | triggers when input value changes | formatted value |

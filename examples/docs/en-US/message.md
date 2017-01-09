@@ -69,7 +69,7 @@ Displays at the top, and disappears after 3 seconds.
 
 ```html
 <template>
-  <el-button :plain="true" @click.native="open">Show message</el-button>
+  <el-button :plain="true" @click="open">Show message</el-button>
 </template>
 
 <script>
@@ -91,10 +91,10 @@ Used to show the feedback of Success, Warning, Message and Error activities.
 :::demo When you need more customizations, Message component can also take an object as parameter. For example, setting value of `type` can define different types, and its default is `info`. In such cases the main body is passed in as the value of `message`. Also, we have registered methods for different types, so you can directly call it without passing a type like `open4`.
 ```html
 <template>
-  <el-button :plain="true" @click.native="open2">success</el-button>
-  <el-button :plain="true" @click.native="open3">warning</el-button>
-  <el-button :plain="true" @click.native="open">message</el-button>
-  <el-button :plain="true" @click.native="open4">error</el-button>
+  <el-button :plain="true" @click="open2">success</el-button>
+  <el-button :plain="true" @click="open3">warning</el-button>
+  <el-button :plain="true" @click="open">message</el-button>
+  <el-button :plain="true" @click="open4">error</el-button>
 </template>
 
 <script>
@@ -133,10 +133,10 @@ A close button can be added.
 :::demo A default Message cannot be closed manually. If you need a closable message, you can set `showClose` field. Besides, same as notification, message has a controllable `duration`. Default duration is 3000 ms, and it won't disappear when set to `0`.
 ```html
 <template>
-  <el-button :plain="true" @click.native="open5">message</el-button>
-  <el-button :plain="true" @click.native="open6">success</el-button>
-  <el-button :plain="true" @click.native="open7">warning</el-button>
-  <el-button :plain="true" @click.native="open8">error</el-button>
+  <el-button :plain="true" @click="open5">message</el-button>
+  <el-button :plain="true" @click="open6">success</el-button>
+  <el-button :plain="true" @click="open7">warning</el-button>
+  <el-button :plain="true" @click="open8">error</el-button>
 </template>
 
 <script>
@@ -197,6 +197,8 @@ In this case you should call `Message(options)`. We have also registered methods
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | message | message text | string | — | — |
 | type | message type | string | success/warning/info/error | info |
+| iconClass | custom icon's class, overrides `type` | string | — | — |
+| customClass | custom class name for Message | string | — | — |
 | duration | display duration, millisecond. If set to 0, it will not turn off automatically | number | — | 3000 |
 | showClose | whether to show a close button | boolean | — | false |
 | onClose | callback function when closed with the message instance as the parameter | function | — | — |

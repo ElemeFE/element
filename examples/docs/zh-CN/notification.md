@@ -2,9 +2,11 @@
   module.exports = {
     methods: {
       open() {
+        const h = this.$createElement;
+
         this.$notify({
           title: '标题名称',
-          message: '这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案'
+          message: h('p', { style: 'color: red'}, '这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案')
         });
       },
 
@@ -46,6 +48,14 @@
         });
       },
 
+      open7() {
+        this.$notify.success({
+          title: '成功',
+          message: '这是一条成功的提示消息',
+          offset: 100
+        });
+      },
+
       onClose() {
         console.log('Notification 已关闭');
       }
@@ -66,12 +76,12 @@
 <template>
   <el-button
     plain
-    @click.native="open">
+    @click="open">
     可自动关闭
   </el-button>
   <el-button
     plain
-    @click.native="open2">
+    @click="open2">
     不会自动关闭
     </el-button>
 </template>
@@ -80,9 +90,11 @@
   export default {
     methods: {
       open() {
+        const h = this.$createElement;
+
         this.$notify({
           title: '标题名称',
-          message: '这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案'
+          message: h('p', { style: 'color: red'}, '这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案')
         });
       },
 
@@ -108,22 +120,22 @@
 <template>
   <el-button
     plain
-    @click.native="open3">
+    @click="open3">
     成功
   </el-button>
   <el-button
     plain
-    @click.native="open4">
+    @click="open4">
     警告
   </el-button>
   <el-button
     plain
-    @click.native="open5">
+    @click="open5">
     消息
   </el-button>
   <el-button
     plain
-    @click.native="open6">
+    @click="open6">
     错误
   </el-button>
 </template>
@@ -166,6 +178,36 @@
 ```
 :::
 
+### 带有偏移
+
+让 Notification 偏移一些位置
+
+::: demo Notification 提供设置偏移量的功能，通过设置 `offset` 字段，可以使弹出的消息距屏幕顶部偏移一段距离。注意在同一时刻，所有的 Notification 实例应当具有一个相同的偏移量。
+```html
+<template>
+  <el-button
+    plain
+    @click="open7">
+    偏移的消息
+  </el-button>
+</template>
+
+<script>
+  export default {
+    methods: {
+      open7() {
+        this.$notify.success({
+          title: '成功',
+          message: '这是一条成功的提示消息',
+          offset: 100
+        });
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### 全局方法
 
 Element 为 `Vue.prototype` 添加了全局方法 `$notify`。因此在 vue instance 中可以采用本页面中的方式调用 Notification。
@@ -184,10 +226,13 @@ import { Notification } from 'element-ui';
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | title | 标题 | string | — | — |
-| message | 说明文字 | string | — | — |
+| message | 说明文字 | string/Vue.VNode | — | — |
 | type | 主题样式，如果不在可选值内将被忽略 | string | success/warning/info/error | — |
+| iconClass | 自定义图标的类名。若设置了 `type`，则 `iconClass` 会被覆盖 | string | — | — |
+| customClass | 自定义类名 | string | — | — |
 | duration | 显示时间, 毫秒。设为 0 则不会自动关闭 | number | — | 4500 |
 | onClose | 关闭时的回调函数 | function | — | — |
+| offset | 偏移的距离，在同一时刻，所有的 Notification 实例应当具有一个相同的偏移量 | number | — | 0 |
 
 ### 方法
 调用 `Notification` 或 `this.$notify` 会返回当前 Notification 的实例。如果需要手动关闭实例，可以调用它的 `close` 方法。

@@ -5,12 +5,13 @@
 @component-namespace el {
   @b autocomplete {
     position: relative;
+    display: inline-block;
 
     @e suggestions {
       position: absolute;
       left: 0;
       top: 110%;
-      margin: 0;
+      margin: 5px 0 0;
       background-color: #fff;
       border: 1px solid #D3DCE6;
       width: 100%;

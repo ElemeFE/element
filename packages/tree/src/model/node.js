@@ -1,4 +1,5 @@
 import objectAssign from 'element-ui/src/utils/merge';
+import { markNodeData, NODE_KEY } from './util';
 
 const reInitChecked = function(node) {
   const siblings = node.childNodes;
@@ -26,7 +27,7 @@ const reInitChecked = function(node) {
 };
 
 const getPropertyFromData = function(node, prop) {
-  const props = node._tree.props;
+  const props = node.store.props;
   const data = node.data || {};
   const config = props[prop];
 
@@ -50,6 +51,7 @@ export default class Node {
     this.data = null;
     this.expanded = false;
     this.parent = null;
+    this.visible = true;
 
     for (let name in options) {
       if (options.hasOwnProperty(name)) {
@@ -67,50 +69,51 @@ export default class Node {
       this.level = this.parent.level + 1;
     }
 
-    const tree = this._tree;
-    if (!tree) {
-      throw new Error('[Node]_tree is required!');
+    const store = this.store;
+    if (!store) {
+      throw new Error('[Node]store is required!');
     }
-    tree.registerNode(this);
+    store.registerNode(this);
 
-    if (tree.lazy !== true && this.data) {
+    const props = store.props;
+    if (props && typeof props.isLeaf !== 'undefined') {
+      const isLeaf = getPropertyFromData(this, 'isLeaf');
+      if (typeof isLeaf === 'boolean') {
+        this.isLeafByUser = isLeaf;
+      }
+    }
+
+    if (store.lazy !== true && this.data) {
       this.setData(this.data);
 
-      if (tree.defaultExpandAll) {
+      if (store.defaultExpandAll) {
         this.expanded = true;
       }
-    } else if (this.level > 0 && tree.lazy && tree.defaultExpandAll) {
+    } else if (this.level > 0 && store.lazy && store.defaultExpandAll) {
       this.expand();
     }
 
     if (!this.data) return;
-    const defaultExpandedKeys = tree.defaultExpandedKeys;
-    const key = tree.key;
+    const defaultExpandedKeys = store.defaultExpandedKeys;
+    const key = store.key;
     if (key && defaultExpandedKeys && defaultExpandedKeys.indexOf(this.key) !== -1) {
-      if (tree.autoExpandParent) {
-        let parent = this.parent;
-        while (parent.level > 0) {
-          parent.expanded = true;
-          parent = parent.parent;
-        }
-      }
-
-      this.expand();
+      this.expand(null, store.autoExpandParent);
     }
 
-    if (tree.lazy) {
-      tree._initDefaultCheckedNode(this);
+    if (key && store.currentNodeKey && this.key === store.currentNodeKey) {
+      store.currentNode = this;
     }
+
+    if (store.lazy) {
+      store._initDefaultCheckedNode(this);
+    }
+
+    this.updateLeafState();
   }
 
   setData(data) {
-    if (!Array.isArray(data) && !data.$treeNodeId) {
-      Object.defineProperty(data, '$treeNodeId', {
-        value: this.id,
-        enumerable: false,
-        configurable: false,
-        writable: false
-      });
+    if (!Array.isArray(data)) {
+      markNodeData(this, data);
     }
 
     this.data = data;
@@ -137,7 +140,7 @@ export default class Node {
   }
 
   get key() {
-    const nodeKey = this._tree.key;
+    const nodeKey = this.store.key;
     if (this.data) return this.data[nodeKey];
     return null;
   }
@@ -148,28 +151,49 @@ export default class Node {
     if (!(child instanceof Node)) {
       objectAssign(child, {
         parent: this,
-        _tree: this._tree
+        store: this.store
       });
       child = new Node(child);
     }
 
     child.level = this.level + 1;
 
-    if (typeof index === 'undefined') {
+    if (typeof index === 'undefined' || index < 0) {
       this.childNodes.push(child);
     } else {
       this.childNodes.splice(index, 0, child);
     }
+
+    this.updateLeafState();
+  }
+
+  insertBefore(child, ref) {
+    let index;
+    if (ref) {
+      index = this.childNodes.indexOf(ref);
+    }
+    this.insertChild(child, index);
+  }
+
+  insertAfter(child, ref) {
+    let index;
+    if (ref) {
+      index = this.childNodes.indexOf(ref);
+      if (index !== -1) index += 1;
+    }
+    this.insertChild(child, index);
   }
 
   removeChild(child) {
     const index = this.childNodes.indexOf(child);
 
     if (index > -1) {
-      this._tree && this._tree.deregisterNode(child);
+      this.store && this.store.deregisterNode(child);
       child.parent = null;
       this.childNodes.splice(index, 1);
     }
+
+    this.updateLeafState();
   }
 
   removeChildByData(data) {
@@ -185,17 +209,27 @@ export default class Node {
     }
   }
 
-  expand(callback) {
+  expand(callback, expandParent) {
+    const done = () => {
+      if (expandParent) {
+        let parent = this.parent;
+        while (parent.level > 0) {
+          parent.expanded = true;
+          parent = parent.parent;
+        }
+      }
+      this.expanded = true;
+      if (callback) callback();
+    };
+
     if (this.shouldLoadData()) {
       this.loadData((data) => {
         if (data instanceof Array) {
-          this.expanded = true;
-          if (callback) callback();
+          done();
         }
       });
     } else {
-      this.expanded = true;
-      if (callback) callback();
+      done();
     }
   }
 
@@ -210,19 +244,20 @@ export default class Node {
   }
 
   shouldLoadData() {
-    return this._tree.lazy === true && this._tree.load && !this.loaded;
+    return this.store.lazy === true && this.store.load && !this.loaded;
   }
 
-  get isLeaf() {
-    return !this.hasChild();
-  }
-
-  hasChild() {
-    const childNodes = this.childNodes;
-    if (!this._tree.lazy || (this._tree.lazy === true && this.loaded === true)) {
-      return childNodes && childNodes.length > 0;
+  updateLeafState() {
+    if (this.store.lazy === true && this.loaded !== true && typeof this.isLeafByUser !== 'undefined') {
+      this.isLeaf = this.isLeafByUser;
+      return;
     }
-    return true;
+    const childNodes = this.childNodes;
+    if (!this.store.lazy || (this.store.lazy === true && this.loaded === true)) {
+      this.isLeaf = !childNodes || childNodes.length === 0;
+      return;
+    }
+    this.isLeaf = false;
   }
 
   setChecked(value, deep) {
@@ -239,7 +274,7 @@ export default class Node {
       }
     };
 
-    if (!this._tree.checkStrictly && this.shouldLoadData()) {
+    if (!this.store.checkStrictly && this.shouldLoadData()) {
       // Only work on lazy load data.
       this.loadData(() => {
         handleDescendants();
@@ -253,7 +288,7 @@ export default class Node {
     const parent = this.parent;
     if (!parent || parent.level === 0) return;
 
-    if (!this._tree.checkStrictly) {
+    if (!this.store.checkStrictly) {
       reInitChecked(parent);
     }
   }
@@ -262,7 +297,7 @@ export default class Node {
     const data = this.data;
     if (!data) return null;
 
-    const props = this._tree.props;
+    const props = this.store.props;
     let children = 'children';
     if (props) {
       children = props.children || 'children';
@@ -283,19 +318,26 @@ export default class Node {
     const newNodes = [];
 
     newData.forEach((item, index) => {
-      if (item.$treeNodeId) {
-        newDataMap[item.$treeNodeId] = { index, data: item };
+      if (item[NODE_KEY]) {
+        newDataMap[item[NODE_KEY]] = { index, data: item };
       } else {
         newNodes.push({ index, data: item });
       }
     });
 
-    oldData.forEach((item) => { if (!newDataMap[item.$treeNodeId]) this.removeChildByData(item); });
-    newNodes.forEach(({ index, data }) => this.insertChild({ data }, index));
+    oldData.forEach((item) => {
+      if (!newDataMap[item[NODE_KEY]]) this.removeChildByData(item);
+    });
+
+    newNodes.forEach(({ index, data }) => {
+      this.insertChild({ data }, index);
+    });
+
+    this.updateLeafState();
   }
 
   loadData(callback, defaultProps = {}) {
-    if (this._tree.lazy === true && this._tree.load && !this.loaded && !this.loading) {
+    if (this.store.lazy === true && this.store.load && !this.loaded && !this.loading) {
       this.loading = true;
 
       const resolve = (children) => {
@@ -305,12 +347,13 @@ export default class Node {
 
         this.doCreateChildren(children, defaultProps);
 
+        this.updateLeafState();
         if (callback) {
           callback.call(this, children);
         }
       };
 
-      this._tree.load(this, resolve);
+      this.store.load(this, resolve);
     } else {
       if (callback) {
         callback.call(this);

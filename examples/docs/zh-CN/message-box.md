@@ -89,7 +89,7 @@
 :::demo 调用`$alert`方法即可打开消息提示，它模拟了系统的 `alert`，无法通过按下 ESC 或点击框外关闭。此例中接收了两个参数，`message`和`title`。值得一提的是，窗口被关闭后，它默认会返回一个`Promise`对象便于进行后续操作的处理。若不确定浏览器是否支持`Promise`，可自行引入第三方 polyfill 或像本例一样使用回调进行后续处理。
 ```html
 <template>
-  <el-button type="text" @click.native="open">点击打开 Message Box</el-button>
+  <el-button type="text" @click="open">点击打开 Message Box</el-button>
 </template>
 
 <script>
@@ -120,7 +120,7 @@
 
 ```html
 <template>
-  <el-button type="text" @click.native="open2">点击打开 Message Box</el-button>
+  <el-button type="text" @click="open2">点击打开 Message Box</el-button>
 </template>
 
 <script>
@@ -157,7 +157,7 @@
 
 ```html
 <template>
-  <el-button type="text" @click.native="open3">点击打开 Message Box</el-button>
+  <el-button type="text" @click="open3">点击打开 Message Box</el-button>
 </template>
 
 <script>
@@ -195,7 +195,7 @@
 
 ```html
 <template>
-  <el-button type="text" @click.native="open4">点击打开 Message Box</el-button>
+  <el-button type="text" @click="open4">点击打开 Message Box</el-button>
 </template>
 
 <script>
@@ -241,7 +241,9 @@ import { MessageBox } from 'element-ui';
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | title | MessageBox 标题 | string | — | — |
 | message | MessageBox 消息正文内容 | string | — | — |
-| type | 消息类型，用于显示图标 | string | success/info/<br>warning/error | — |
+| type | 消息类型，用于显示图标 | string | success/info/warning/error | — |
+| customClass | MessageBox 的自定义类名 | string | — | — |
+| callback | 若不使用 Promise，可以使用此参数指定 MessageBox 关闭后的回调 | function(action)，action 的值为'confirm'或'cancel' | — | — |
 | lockScroll | 是否在 MessageBox 出现时将 body 滚动锁定 | boolean | — | true |
 | showCancelButton | 是否显示取消按钮 | boolean | — | false（以 confirm 和 prompt 方式调用时为 true） |
 | showConfirmButton | 是否显示确定按钮 | boolean | — | true |

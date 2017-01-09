@@ -4,7 +4,7 @@
 推荐使用 npm 的方式安装，它能更好地和 [webpack](https://webpack.js.org/) 打包工具配合使用。
 
 ```shell
-npm i element-ui -D
+npm i element-ui -S
 ```
 
 ### CDN
@@ -30,7 +30,7 @@ npm i element-ui -D
 </head>
 <body>
   <div id="app">
-    <el-button @click.native="visible = true">按钮</el-button>
+    <el-button @click="visible = true">按钮</el-button>
     <el-dialog v-model="visible" title="Hello world">
       <p>欢迎使用 Element</p>
     </el-dialog>

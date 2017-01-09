@@ -1,9 +1,9 @@
 <template>
   <transition name="msgbox-fade">
     <div class="el-message-box__wrapper" v-show="value" @click.self="handleWrapperClick">
-      <div class="el-message-box">
-        <div class="el-message-box__header" v-if="title !== ''">
-          <div class="el-message-box__title">{{ title }}</div>
+      <div class="el-message-box" :class="customClass">
+        <div class="el-message-box__header" v-if="title !== undefined">
+          <div class="el-message-box__title">{{ title || t('el.messagebox.title') }}</div>
           <i class="el-message-box__close el-icon-close" @click="handleAction('cancel')" v-if="showClose"></i>
         </div>
         <div class="el-message-box__content" v-if="message !== ''">
@@ -15,8 +15,8 @@
           </div>
         </div>
         <div class="el-message-box__btns">
-          <el-button :class="[ cancelButtonClasses ]" v-show="showCancelButton" @click.native="handleAction('cancel')">{{ cancelButtonText }}</el-button>
-          <el-button ref="confirm" :class="[ confirmButtonClasses ]" v-show="showConfirmButton" @click.native="handleAction('confirm')">{{ confirmButtonText }}</el-button>
+          <el-button :class="[ cancelButtonClasses ]" v-show="showCancelButton" @click.native="handleAction('cancel')">{{ cancelButtonText || t('el.messagebox.cancel') }}</el-button>
+          <el-button ref="confirm" :class="[ confirmButtonClasses ]" v-show="showConfirmButton" @click.native="handleAction('confirm')">{{ confirmButtonText || t('el.messagebox.confirm') }}</el-button>
         </div>
       </div>
     </div>
@@ -24,10 +24,11 @@
 </template>
 
 <script type="text/babel">
-  import Popup from 'vue-popup';
+  import Popup from 'element-ui/src/utils/popup';
+  import Locale from 'element-ui/src/mixins/locale';
   import ElInput from 'element-ui/packages/input';
   import ElButton from 'element-ui/packages/button';
-  import { addClass, removeClass } from 'wind-dom/src/class';
+  import { addClass, removeClass } from 'element-ui/src/utils/dom';
   import { t } from 'element-ui/src/locale';
 
   let typeMap = {
@@ -38,7 +39,7 @@
   };
 
   export default {
-    mixins: [Popup],
+    mixins: [Popup, Locale],
 
     props: {
       modal: {
@@ -173,9 +174,10 @@
 
     data() {
       return {
-        title: '',
+        title: undefined,
         message: '',
         type: '',
+        customClass: '',
         showInput: false,
         inputValue: null,
         inputPlaceholder: '',
@@ -184,12 +186,11 @@
         inputErrorMessage: '',
         showConfirmButton: true,
         showCancelButton: false,
-        confirmButtonText: t('el.messagebox.confirm'),
-        cancelButtonText: t('el.messagebox.cancel'),
+        confirmButtonText: '',
+        cancelButtonText: '',
         confirmButtonClass: '',
         confirmButtonDisabled: false,
         cancelButtonClass: '',
-
         editorErrorMessage: null,
         callback: null
       };

@@ -16,18 +16,24 @@
     overflow: hidden;
 
     @e group {
-      & span {
-        font-size: var(--notification-title-font-size);
-        color: var(--notification-title-color);
+      margin-left: 0;
+      @when with-icon {
+        margin-left: 55px;
       }
+    }
 
-      & p {
-        font-size: var(--notification-font-size);
-        line-height: 21px;
-        margin: 10px 0 0 0;
-        color: var(--notification-color);
-        text-align: justify;
-      }
+    @e title {
+      font-weight: normal;
+      font-size: var(--notification-title-font-size);
+      color: var(--notification-title-color);
+    }
+
+    @e content {
+      font-size: var(--notification-font-size);
+      line-height: 21px;
+      margin: 10px 0 0 0;
+      color: var(--notification-color);
+      text-align: justify;
     }
 
     @e icon {

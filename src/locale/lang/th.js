@@ -1,0 +1,86 @@
+export default {
+  el: {
+    datepicker: {
+      now: 'ตอนนี้',
+      today: 'วันนี้',
+      cancel: 'ยกเลิก',
+      clear: 'ล้างข้อมูล',
+      confirm: 'ตกลง',
+      selectDate: 'เลือกวันที่',
+      selectTime: 'เลือกเวลา',
+      startDate: 'วันที่เริ่มต้น',
+      startTime: 'เวลาเริ่มต้น',
+      endDate: 'วันที่สิ้นสุด',
+      endTime: 'เวลาสิ้นสุด',
+      year: 'ปี',
+      month1: 'มกราคม',
+      month2: 'กุมภาพันธ์',
+      month3: 'มีนาคม',
+      month4: 'เมษายน',
+      month5: 'พฤษภาคม',
+      month6: 'มิถุนายน',
+      month7: 'กรกฎาคม',
+      month8: 'สิงหาคม',
+      month9: 'กันยายน',
+      month10: 'ตุลาคม',
+      month11: 'พฤศจิกายน',
+      month12: 'ธันวาคม',
+      // week: 'week',
+      weeks: {
+        sun: 'อาทิตย์',
+        mon: 'จันทร์',
+        tue: 'อังคาร',
+        wed: 'พุธ',
+        thu: 'พฤหัสบดี',
+        fri: 'ศุกร์',
+        sat: 'เสาร์'
+      },
+      months: {
+        jan: 'มกรา',
+        feb: 'กุมภา',
+        mar: 'มีนา',
+        apr: 'เมษา',
+        may: 'พฤษภา',
+        jun: 'มิถุนา',
+        jul: 'กรกฎา',
+        aug: 'สิงหา',
+        sep: 'กันยา',
+        oct: 'ตุลา',
+        nov: 'พฤศจิกา',
+        dec: 'ธันวา'
+      }
+    },
+    select: {
+      loading: 'กำลังโหลด',
+      noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
+      noData: 'ไม่พบข้อมูล',
+      placeholder: 'เลือก'
+    },
+    pagination: {
+      goto: 'ไปที่',
+      pagesize: '/หน้า',
+      total: 'ทั้งหมด {total}',
+      pageClassifier: ''
+    },
+    messagebox: {
+      title: 'ข้อความ',
+      confirm: 'ตกลง',
+      cancel: 'ยกเลิก',
+      error: 'คุณป้อนข้อมูลไม่ถูกต้อง'
+    },
+    upload: {
+      delete: 'ลบ',
+      preview: 'ตัวอย่าง',
+      continue: 'ทำต่อ'
+    },
+    table: {
+      emptyText: 'ไม่พบข้อมูล',
+      confirmFilter: 'ยืนยัน',
+      resetFilter: 'รีเซ็ต',
+      clearFilter: 'ทั้งหมด'
+    },
+    tree: {
+      emptyText: 'ไม่พบข้อมูล'
+    }
+  }
+};

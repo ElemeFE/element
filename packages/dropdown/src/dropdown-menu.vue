@@ -1,5 +1,5 @@
 <template>
-  <transition name="md-fade-bottom" @after-leave="doDestroy">
+  <transition name="el-zoom-in-top" @after-leave="doDestroy">
     <ul class="el-dropdown-menu" v-show="showPopper">
       <slot></slot>
     </ul>
@@ -26,9 +26,12 @@
       this.referenceElm = this.$parent.$el;
     },
 
-    computed: {
-      placement() {
-        return `bottom-${this.$parent.menuAlign}`;
+    watch: {
+      '$parent.menuAlign': {
+        immediate: true,
+        handler(val) {
+          this.currentPlacement = `bottom-${val}`;
+        }
       }
     }
   };

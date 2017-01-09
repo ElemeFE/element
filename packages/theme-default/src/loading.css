@@ -19,7 +19,7 @@
         margin-top: calc(- var(--loading-fullscreen-spinner-size) / 2);
 
         .circular {
-          width: var(--loading-fullscreen-spinner-size);
+          size: var(--loading-fullscreen-spinner-size);
         }
       }
     }
@@ -39,13 +39,13 @@
     }
 
     .circular {
-      width: var(--loading-spinner-size);
-      animation: rotate 2s linear infinite;
+      size: var(--loading-spinner-size);
+      animation: loading-rotate 2s linear infinite;
     }
 
     .path {
-      animation: dash 1.5s ease-in-out infinite;
-      stroke-dasharray: 1, 100;
+      animation: loading-dash 1.5s ease-in-out infinite;
+      stroke-dasharray: 90, 150;
       stroke-dashoffset: 0;
       stroke-width: 2;
       stroke: var(--color-primary);
@@ -54,23 +54,23 @@
   }
 }
 
-@keyframes rotate {
+@keyframes loading-rotate {
   100% {
     transform: rotate(360deg);
   }
 }
 
-@keyframes dash {
+@keyframes loading-dash {
   0% {
-    stroke-dasharray: 1, 100;
+    stroke-dasharray: 1, 200;
     stroke-dashoffset: 0;
   }
   50% {
-    stroke-dasharray: 45, 100;
-    stroke-dashoffset: -35px;
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -40px;
   }
   100% {
-    stroke-dasharray: 45, 100;
-    stroke-dashoffset: -124px;
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -120px;
   }
 }

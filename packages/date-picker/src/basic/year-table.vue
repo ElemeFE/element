@@ -44,15 +44,13 @@
 </template>
 
 <script type="text/babel">
-  import { hasClass } from 'wind-dom/src/class';
+  import { hasClass } from 'element-ui/src/utils/dom';
 
   export default {
     props: {
       disabledDate: {},
       date: {},
-      year: {
-        type: Number
-      }
+      year: {}
     },
 
     computed: {
@@ -69,24 +67,24 @@
         date.setFullYear(year);
         style.disabled = typeof this.disabledDate === 'function' &&
           this.disabledDate(date);
-        style.current = this.year === year;
+        style.current = Number(this.year) === year;
 
         return style;
       },
 
       nextTenYear() {
-        this.$emit('pick', this.year + 10, false);
+        this.$emit('pick', Number(this.year) + 10, false);
       },
 
       prevTenYear() {
-        this.$emit('pick', this.year - 10, false);
+        this.$emit('pick', Number(this.year) - 10, false);
       },
 
       handleYearTableClick(event) {
         const target = event.target;
         if (target.tagName === 'A') {
           if (hasClass(target.parentNode, 'disabled')) return;
-          const year = parseInt(target.textContent || target.innerText, 10);
+          const year = target.textContent || target.innerText;
           this.$emit('pick', year);
         }
       }

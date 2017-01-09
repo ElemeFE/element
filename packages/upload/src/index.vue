@@ -8,7 +8,7 @@ function noop() {
 }
 
 export default {
-  name: 'el-upload',
+  name: 'ElUpload',
 
   components: {
     ElProgress,
@@ -62,9 +62,19 @@ export default {
       type: Function,
       default: noop
     },
+    onProgress: {
+      type: Function,
+      default: noop
+    },
     onError: {
       type: Function,
       default: noop
+    },
+    defaultFileList: {
+      type: Array,
+      default() {
+        return [];
+      }
     }
   },
 
@@ -75,6 +85,20 @@ export default {
       draging: false,
       tempIndex: 1
     };
+  },
+
+  watch: {
+    defaultFileList: {
+      immediate: true,
+      handler(fileList) {
+        this.fileList = fileList.map(item => {
+          item.status = 'finished';
+          item.percentage = 100;
+          item.uid = Date.now() + this.tempIndex++;
+          return item;
+        });
+      }
+    }
   },
 
   methods: {
@@ -89,19 +113,18 @@ export default {
         showProgress: true
       };
 
-      if (this.thumbnailMode) {
-        try {
-          _file.url = URL.createObjectURL(file);
-        } catch (err) {
-          console.log(err);
-          return;
-        }
+      try {
+        _file.url = URL.createObjectURL(file);
+      } catch (err) {
+        console.error(err);
+        return;
       }
 
       this.fileList.push(_file);
     },
     handleProgress(ev, file) {
       var _file = this.getFile(file);
+      this.onProgress(ev, _file, this.fileList);
       _file.percentage = ev.percent || 0;
     },
     handleSuccess(res, file) {
@@ -175,7 +198,7 @@ export default {
         headers: this.headers,
         name: this.name,
         data: this.data,
-        accept: this.thumbnailMode ? 'image/*' : this.accept,
+        accept: this.thumbnailMode ? 'image/gif, image/png, image/jpeg, image/bmp, image/webp' : this.accept,
         'on-start': this.handleStart,
         'on-progress': this.handleProgress,
         'on-success': this.handleSuccess,
@@ -186,9 +209,9 @@ export default {
       ref: 'upload-inner'
     };
 
-    var uploadComponent = typeof FormData !== 'undefined'
-      ? <upload {...props}>{this.$slots.default}</upload>
-      : <iframeUpload {...props}>{this.$slots.default}</iframeUpload>;
+    var uploadComponent = (typeof FormData !== 'undefined' || this.$isServer)
+        ? <upload {...props}>{this.$slots.default}</upload>
+        : <iframeUpload {...props}>{this.$slots.default}</iframeUpload>;
 
     if (this.type === 'select') {
       return (

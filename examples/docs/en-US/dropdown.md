@@ -3,6 +3,9 @@
     methods: {
       handleClick() {
         alert('button click');
+      },
+      handleCommand(command) {
+        this.$message('click on item ' + command);
       }
     }
   }
@@ -104,6 +107,59 @@ Click the triggering element or hover on it.
 </el-row>
 ```
 :::
+
+### Menu hiding behavior
+
+Use `hide-on-click` to define if menu closes on clicking.
+
+:::demo By default menu will close when you click on menu items, and it can be turned off by setting hide-on-click to false.
+```html
+<el-dropdown :hide-on-click="false">
+  <span class="el-dropdown-link">
+    Dropdown List<i class="el-icon-caret-bottom el-icon--right"></i>
+  </span>
+  <el-dropdown-menu slot="dropdown">
+    <el-dropdown-item>Action 1</el-dropdown-item>
+    <el-dropdown-item>Action 2</el-dropdown-item>
+    <el-dropdown-item>Action 3</el-dropdown-item>
+    <el-dropdown-item disabled>Action 4</el-dropdown-item>
+    <el-dropdown-item divided>Action 5</el-dropdown-item>
+  </el-dropdown-menu>
+</el-dropdown>
+```
+:::
+
+### Command event
+
+Clicking each dropdown item fires an event whose parameter is assigned by each item.
+
+:::demo
+```html
+<el-dropdown @command="handleCommand">
+  <span class="el-dropdown-link">
+    Dropdown List<i class="el-icon-caret-bottom el-icon--right"></i>
+  </span>
+  <el-dropdown-menu slot="dropdown">
+    <el-dropdown-item command="a">Action 1</el-dropdown-item>
+    <el-dropdown-item command="b">Action 2</el-dropdown-item>
+    <el-dropdown-item command="c">Action 3</el-dropdown-item>
+    <el-dropdown-item command="d" disabled>Action 4</el-dropdown-item>
+    <el-dropdown-item command="e" divided>Action 5</el-dropdown-item>
+  </el-dropdown-menu>
+</el-dropdown>
+<script>
+  export default {
+    methods: {
+      handleCommand(command) {
+        this.$message('click on item ' + command);
+      }
+    }
+  }
+</script>
+```
+:::
+
+
 ### Dropdown Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
@@ -113,6 +169,7 @@ Click the triggering element or hover on it.
 | size          | component size, refer to `Button` component     | string          | large, small, mini  |  —  |
 | menu-align    | horizontal alignment     | string          | start/end  | end |
 | trigger       | how to trigger     | string  |    hover/click  |  hover |
+| hide-on-click | whether to hide menu after clicking menu-item     | boolean          | — | true |
 
 ### Dropdown Events
 | Event Name | Description | Parameters |

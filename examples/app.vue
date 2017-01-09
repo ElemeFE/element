@@ -1,7 +1,6 @@
 <style lang="css">
   @import 'highlight.js/styles/color-brewer.css';
   @import 'assets/styles/common.css';
-  @import 'assets/styles/fonts/style.css';
 
   html, body {
     margin: 0;
@@ -54,6 +53,7 @@
   .container,
   .page-container {
     width: 1140px;
+    padding: 0 30px;
     margin: 0 auto;
   }
 
@@ -99,6 +99,13 @@
     .container,
     .page-container {
       width: 100%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .container,
+    .page-container {
+      padding: 0 20px;
     }
   }
 </style>
@@ -152,13 +159,13 @@
 
       goAnchor() {
         if (location.href.match(/#/g).length > 1) {
-          const auchor = location.href.match(/#[^#]+$/g);
-          if (!auchor || auchor.length !== 1) return;
-          const elm = document.querySelector(auchor[0]);
+          const anchor = location.href.match(/#[^#]+$/g);
+          if (!anchor) return;
+          const elm = document.querySelector(anchor[0]);
           if (!elm) return;
 
           setTimeout(_ => {
-            document.documentElement.scrollTop = document.body.scrollTop = elm.offsetTop;
+            document.documentElement.scrollTop = document.body.scrollTop = elm.offsetTop + 120;
           }, 50);
         }
       }

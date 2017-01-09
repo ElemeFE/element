@@ -2,7 +2,7 @@
   <footer class="footer">
     <div class="container">
       <div class="footer-main">
-        <p class="footer-main-title">Element 1.0 Hydrogen</p>
+        <p class="footer-main-title">Element {{ version }} Helium</p>
         <a href="https://github.com/ElemeFE/element/issues" class="footer-main-link" target="_blank">{{ langConfig.feedback }}</a>
         <a href="https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.md" class="footer-main-link" target="_blank">{{ langConfig.contribution }}</a>
       </div>
@@ -40,6 +40,7 @@
 
     .container {
       height: 100%;
+      box-sizing: border-box;
     }
 
     .footer-main {
@@ -122,12 +123,26 @@
       margin: 10px;
     }
   }
+  @media (max-width: 768px) {
+    .footer {
+      .footer-social {
+        display: none;
+      }
+    }
+  }
 </style>
 
 <script type="text/babel">
   import compoLang from '../i18n/component.json';
+  import { version } from 'main/index.js';
 
   export default {
+    data() {
+      return {
+        version
+      };
+    },
+
     computed: {
       lang() {
         return this.$route.path.split('/')[1];

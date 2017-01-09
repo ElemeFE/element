@@ -8,7 +8,7 @@ cooking.set({
   extends: process.env.CI_ENV ? ['vue2'] : ['vue2', 'lint'],
   minimize: false,
   alias: Object.assign(config.alias, {
-    'vue$': 'vue/dist/vue.js'
+    'vue$': 'vue/dist/vue.common.js'
   }),
   postcss: function(webapck) {
     return [

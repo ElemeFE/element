@@ -54,13 +54,13 @@ Dialog pops up a dialog box, and it's quite customizable.
 :::demo Set the `v-model` attribute with a `Boolean`, and Dialog shows when it is `true`. The Dialog has two parts: `body` and `footer`, and the latter requires a `slot` named `footer`. The optional `title` attribute (empty by default) is for defining a title. This example explicitly changes the value of `v-model` to toggle Dialog. In addition, we also provide `open` and `close` method, which you can call to open/close the Dialog.
 
 ```html
-<el-button type="text" @click.native="dialogVisible = true">click to open the Dialog</el-button>
+<el-button type="text" @click="dialogVisible = true">click to open the Dialog</el-button>
 
 <el-dialog title="Tips" v-model="dialogVisible" size="tiny">
   <span>This is a message</span>
   <span slot="footer" class="dialog-footer">
-    <el-button @click.native="dialogVisible = false">Cancel</el-button>
-    <el-button type="primary" @click.native="dialogVisible = false">Confirm</el-button>
+    <el-button @click="dialogVisible = false">Cancel</el-button>
+    <el-button type="primary" @click="dialogVisible = false">Confirm</el-button>
   </span>
 </el-dialog>
 
@@ -84,7 +84,7 @@ The content of Dialog can be anything, even a table or a form. This example show
 
 ```html
 <!-- Table -->
-<el-button type="text" @click.native="dialogTableVisible = true" type="text">open a Table nested Dialog</el-button>
+<el-button type="text" @click="dialogTableVisible = true" type="text">open a Table nested Dialog</el-button>
 
 <el-dialog title="Shipping address" v-model="dialogTableVisible">
   <el-table :data="gridData">
@@ -95,7 +95,7 @@ The content of Dialog can be anything, even a table or a form. This example show
 </el-dialog>
 
 <!-- Form -->
-<el-button type="text" @click.native="dialogFormVisible = true" type="text">open a Form nested Dialog</el-button>
+<el-button type="text" @click="dialogFormVisible = true" type="text">open a Form nested Dialog</el-button>
 
 <el-dialog title="Shipping address" v-model="dialogFormVisible">
   <el-form :model="form">
@@ -110,8 +110,8 @@ The content of Dialog can be anything, even a table or a form. This example show
     </el-form-item>
   </el-form>
   <span slot="footer" class="dialog-footer">
-    <el-button @click.native="dialogFormVisible = false">Cancel</el-button>
-    <el-button type="primary" @click.native="dialogFormVisible = false">Confirm</el-button>
+    <el-button @click="dialogFormVisible = false">Cancel</el-button>
+    <el-button type="primary" @click="dialogFormVisible = false">Confirm</el-button>
   </span>
 </el-dialog>
 

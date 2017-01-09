@@ -64,6 +64,7 @@
         font-size: 14px;
         list-style: none;
         padding-left: 0;
+        word-break: break-all;
 
         &:before {
           content: '';

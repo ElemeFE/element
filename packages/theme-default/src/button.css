@@ -23,7 +23,8 @@
     
     @mixin button-size var(--button-padding-vertical), var(--button-padding-horizontal), var(--button-font-size), var(--button-border-radius);
 
-    &:hover {
+    &:hover,
+    &:focus {
       color: var(--color-primary);
       border-color: @color;
     }
@@ -45,7 +46,8 @@
     }
 
     @when plain {
-      &:hover {
+      &:hover,
+      &:focus {
         background: #fff;
         border-color: var(--color-primary);
         color: var(--color-primary);
@@ -66,7 +68,8 @@
 
     @when disabled {
       &,
-      &:hover {
+      &:hover,
+      &:focus {
         color: var(--button-disabled-color);
         cursor: not-allowed;
         background-image: none;
@@ -80,7 +83,8 @@
 
       &.is-plain {
         &,
-        &:hover {
+        &:hover,
+        &:focus {
           background-color: #fff;
           border-color: #d3dce6;
           color: #C0CCDA;
@@ -135,7 +139,8 @@
       padding-left: 0;
       padding-right: 0;
 
-      &:hover {
+      &:hover,
+      &:focus {
         color: tint(var(--color-primary), var(--button-hover-tint-percent));
       }
       &:active {
@@ -147,6 +152,7 @@
   @b button-group {
     @utils-clearfix;
     display: inline-block;
+    vertical-align: middle;
 
     & .el-button {
       float: left;
@@ -171,6 +177,7 @@
       }
 
       &:hover,
+      &:focus,
       &:active {
         z-index: 1;
       }

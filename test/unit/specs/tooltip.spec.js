@@ -15,6 +15,15 @@ describe('Tooltip', () => {
     expect(vm.$el.querySelector('.el-tooltip__popper')).to.have.property('textContent', '提示文字');
   });
 
+  it('custom popper class', () => {
+    vm = createVue(`
+      <el-tooltip content="提示文字" popper-class="custom-popper">
+        <button>click</button>
+      </el-tooltip>`);
+
+    expect(vm.$el.querySelector('.el-tooltip__popper').classList.contains('custom-popper')).to.true;
+  });
+
   describe('manual', () => {
     const vm = createVue({
       template: `

@@ -69,7 +69,7 @@
 
 ```html
 <template>
-  <el-button :plain="true" @click.native="open">打开消息提示</el-button>
+  <el-button :plain="true" @click="open">打开消息提示</el-button>
 </template>
 
 <script>
@@ -91,10 +91,10 @@
 :::demo 当需要自定义更多属性时，Message 也可以接收一个对象为参数。比如，设置`type`字段可以定义不同的状态，默认为`info`。此时正文内容以`message`的值传入。同时，我们也为 Message 的各种 type 注册了方法，可以在不传入`type`字段的情况下像`open4`那样直接调用。
 ```html
 <template>
-  <el-button :plain="true" @click.native="open2">成功</el-button>
-  <el-button :plain="true" @click.native="open3">警告</el-button>
-  <el-button :plain="true" @click.native="open">消息</el-button>
-  <el-button :plain="true" @click.native="open4">错误</el-button>
+  <el-button :plain="true" @click="open2">成功</el-button>
+  <el-button :plain="true" @click="open3">警告</el-button>
+  <el-button :plain="true" @click="open">消息</el-button>
+  <el-button :plain="true" @click="open4">错误</el-button>
 </template>
 
 <script>
@@ -133,10 +133,10 @@
 :::demo 默认的 Message 是不可以被人工关闭的，如果需要可手动关闭的 Message，可以使用`showClose`字段。此外，和 Notification 一样，Message 拥有可控的`duration`，设置`0`为不会被自动关闭，默认为 3000 毫秒。
 ```html
 <template>
-  <el-button :plain="true" @click.native="open5">消息</el-button>
-  <el-button :plain="true" @click.native="open6">成功</el-button>
-  <el-button :plain="true" @click.native="open7">警告</el-button>
-  <el-button :plain="true" @click.native="open8">错误</el-button>
+  <el-button :plain="true" @click="open5">消息</el-button>
+  <el-button :plain="true" @click="open6">成功</el-button>
+  <el-button :plain="true" @click="open7">警告</el-button>
+  <el-button :plain="true" @click="open8">错误</el-button>
 </template>
 
 <script>
@@ -197,6 +197,8 @@ import { Message } from 'element-ui';
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | message | 消息文字 | string | — | — |
 | type | 主题 | string | success/warning/info/error | info |
+| iconClass | 自定义图标的类名，会覆盖 `type` | string | — | — |
+| customClass | 自定义类名 | string | — | — |
 | duration | 显示时间, 毫秒。设为 0 则不会自动关闭 | number | — | 3000 |
 | showClose | 是否显示关闭按钮 | boolean | — | false |
 | onClose | 关闭时的回调函数, 参数为被关闭的 message 实例 | function | — | — |

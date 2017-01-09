@@ -152,7 +152,7 @@ You can customize a text message.
 
 ### Full screen loading
 
-Show a full screen animation while loading data.  
+Show a full screen animation while loading data.
 
 :::demo Add the `fullscreen` modifier to create a full screen mask, and it will append to body. In this case, if you disable scrolling on body, you add another modifier `lock`.
 
@@ -160,7 +160,7 @@ Show a full screen animation while loading data.
 <template>
   <el-button
     type="primary"
-    @click.native="openFullScreen"
+    @click="openFullScreen"
     v-loading.fullscreen.lock="fullscreenLoading">
     Full screen loading for 3 seconds
   </el-button>
@@ -189,17 +189,25 @@ Show a full screen animation while loading data.
 ### Service
 You can also invoke Loading with a service. Import Loading service:
 ```javascript
-import { LoadingService } from 'element-ui';
+import { Loading } from 'element-ui';
 ```
 Invoke it:
 ```javascript
-LoadingService(options);
+Loading.service(options);
 ```
 The parameter `options` is the configuration of Loading, and its details can be found in the following table. `LoadingService` returns a Loading instance, and you can close it by invoking its `close` method:
 ```javascript
-let loadingInstance = LoadingService(options);
+let loadingInstance = Loading.service(options);
 loadingInstance.close();
 ```
+Note that in this case the full screen Loading is singleton. If a new full screen Loading is invoked before an existing one is closed, the existing full screen Loading instance will be returned instead of actually creating another Loading instance:
+```javascript
+let loadingInstance1 = Loading.service({ fullscreen: true });
+let loadingInstance2 = Loading.service({ fullscreen: true });
+console.log(loadingInstance1 === loadingInstance2); // true
+```
+Calling the `close` method on any one of them can close this full screen Loading.
+
 If Element is imported entirely, a globally method `$loading` will be registered to Vue.prototype. You can invoke it like this: `this.$loading(options)`, and it also returns a Loading instance.
 
 ### Options

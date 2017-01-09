@@ -1,7 +1,9 @@
 class Transition {
   beforeEnter(el) {
+    if (!el.dataset) el.dataset = {};
     el.dataset.oldPaddingTop = el.style.paddingTop;
     el.dataset.oldPaddingBottom = el.style.paddingBottom;
+    el.dataset.oldDisplay = el.style.display;
     el.style.height = '0';
     el.style.paddingTop = 0;
     el.style.paddingBottom = 0;
@@ -31,6 +33,7 @@ class Transition {
   }
 
   beforeLeave(el) {
+    if (!el.dataset) el.dataset = {};
     el.dataset.oldPaddingTop = el.style.paddingTop;
     el.dataset.oldPaddingBottom = el.style.paddingBottom;
     el.dataset.oldOverflow = el.style.overflow;
@@ -53,7 +56,8 @@ class Transition {
   }
 
   afterLeave(el) {
-    el.style.display = el.style.height = '';
+    el.style.display = el.dataset.oldDisplay;
+    el.style.height = '';
     el.style.overflow = el.dataset.oldOverflow;
     el.style.paddingTop = el.dataset.oldPaddingTop;
     el.style.paddingBottom = el.dataset.oldPaddingBottom;

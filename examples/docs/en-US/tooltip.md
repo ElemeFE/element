@@ -113,12 +113,12 @@ Tooltip has 9 placements.
     .item {
       margin: 4px;
     }
-    
+
     .left .el-tooltip__popper,
     .right .el-tooltip__popper {
       padding: 8px 10px;
     }
-    
+
     .el-button {
       width: 110px;
     }
@@ -145,7 +145,7 @@ Tooltip has two themes: `dark` and `light`。
 
 ### More Content
 
-Display multiple lines of text and set their format. 
+Display multiple lines of text and set their format.
 
 :::demo Override attribute `content` of `el-tooltip` by adding a slot named `content`.
 ```html
@@ -170,7 +170,7 @@ In fact, Tooltip is an extension based on [Vue-popper](https://github.com/elemen
 ```html
 <template>
   <el-tooltip :disabled="disabled" content="click to close tooltip function" placement="bottom" effect="light">
-    <el-button @click.native="disabled=true">click to close tooltip function</el-button>
+    <el-button @click="disabled = !disabled">click to {{disabled ? 'active' : 'close'}} tooltip function</el-button>
   </el-tooltip>
 </template>
 
@@ -205,3 +205,4 @@ In fact, Tooltip is an extension based on [Vue-popper](https://github.com/elemen
 |  options        | [popper.js](https://popper.js.org/documentation.html) parameters | Object            | refer to [popper.js](https://popper.js.org/documentation.html) doc | `{ boundariesElement: 'body', gpuAcceleration: false }` |
 | openDelay | delay of appearance, in millisecond | number | — | 0 |
 | manual | whether to control Tooltip manually. `mouseenter` and `mouseleave` won't have effects if set to `true`事件将不会生效 | boolean | — | false |
+|  popper-class  |  custom class name for Tooltip's popper | string | — | — |

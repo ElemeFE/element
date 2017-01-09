@@ -137,7 +137,7 @@
   export default {
     data() {
       return {
-        value1: '14:30',
+        value1: '',
         value2: new Date(2016, 9, 10, 18, 40),
         value3: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
         startTime: '',
@@ -151,13 +151,16 @@
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | readonly | 完全只读 | boolean | — | false |
-| disabled | 禁用 | boolean | - | false |
-| editable | 文本框可输入 | boolean | - | true |
+| disabled | 禁用 | boolean | — | false |
+| editable | 文本框可输入 | boolean | — | true |
+| clearable | 是否显示清除按钮 | boolean | — | true |
+| size          | 输入框尺寸     | string          | large, small, mini  | — |
 | placeholder | 占位内容 | string | — | — |
 | format | 时间格式化(TimePicker) | string | 小时：`HH`，分：`mm`，秒：`ss` | 'HH:mm:ss' |
-| value | 绑定值 | TimePicker: Date<br>TimeSelect: String | - | - |
+| value | 绑定值 | TimePicker: DateTimeSelect: String | — | — |
 | align | 对齐方式 | string | left, center, right | left |
-| picker-options | 当前时间日期选择器特有的选项<br>参考下表 | object | — | {} |
+| popper-class | TimePicker 下拉框的类名 | string | — | — |
+| picker-options | 当前时间日期选择器特有的选项参考下表 | object | — | {} |
 
 ### Time Select Options
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
@@ -166,9 +169,18 @@
 | end | 结束时间 | string | — | 18:00 |
 | step | 间隔时间 | string | — | 00:30 |
 | minTime | 最小时间，小于该时间的时间段将被禁用 | string | — | 00:00 |
+| maxTime | 最大时间，大于该时间的时间段将被禁用 | string | — | — |
 
 ### Time Picker Options
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| selectableRange | 可选时间段，例如<br>`'18:30:00 - 20:30:00'`<br>或者传入数组<br>`['09:30:00 - 12:00:00', '14:30:00 - 18:30:00']` | string/array | — | — |
+| selectableRange | 可选时间段，例如`'18:30:00 - 20:30:00'`或者传入数组`['09:30:00 - 12:00:00', '14:30:00 - 18:30:00']` | string/array | — | — |
+
+
+### Events
+| Event Name | Description | Parameters |
+|---------|--------|---------|
+| change | 当 input 的值改变时触发，返回值和文本框一致 | formatted value |
+
+
 

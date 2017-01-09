@@ -147,8 +147,7 @@ Select date and time in one picker.
     <el-date-picker
       v-model="value3"
       type="datetimerange"
-      placeholder="Select time range"
-      style="width:350px">
+      placeholder="Select time range">
     </el-date-picker>
   </div>
   <div class="block">
@@ -158,8 +157,7 @@ Select date and time in one picker.
       type="datetimerange"
       :picker-options="pickerOptions2"
       placeholder="Select time range"
-      align="right"
-      style="width:350px">
+      align="right">
     </el-date-picker>
   </div>
 </template>
@@ -195,7 +193,7 @@ Select date and time in one picker.
             }
           }]
         },
-        value3: '',
+        value3: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
         value4: ''
       };
     }
@@ -208,12 +206,15 @@ Select date and time in one picker.
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | readonly | whether DatePicker is read only | boolean | — | false |
-| disabled | whether DatePicker is disabled | boolean | - | false |
-| editable | whether the input is editable | boolean | - | true |
+| disabled | whether DatePicker is disabled | boolean | — | false |
+| editable | whether the input is editable | boolean | — | true |
+| clearable | Whether to show clear button | boolean | — | true |
+|size | size of Input | string | large/small/mini | — |
 | placeholder | placeholder | string | — | — |
-| type | type of the picker | string | year/month/date/datetime/week/datetimerange/daterange | date |
-| format | format of the picker | string | year `yyyy` month `MM` day `dd`, <br>hour `HH`, minute `mm`, second `ss` | yyyy-MM-dd |
+| type | type of the picker | string | year/month/date/datetime/ week/datetimerange/daterange | date |
+| format | format of the picker | string | year `yyyy` month `MM` day `dd`, hour `HH`, minute `mm`, second `ss` | yyyy-MM-dd |
 | align | alignment | left/center/right | left |
+| popper-class | custom class name for DateTimePicker's dropdown | string | — | — |
 | picker-options | additional options, check the table below | object | — | {} |
 
 ### Picker Options
@@ -226,4 +227,11 @@ Select date and time in one picker.
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | text | title of the shortcut | string | — | — |
-| onClick | callback function, triggers when the shortcut is clicked, with the `vm` as its parameter. <br>You can change the picker value by emitting the `pick` event.<br> Example: `vm.$emit('pick', new Date())`| function | — | — |
+| onClick | callback function, triggers when the shortcut is clicked, with the `vm` as its parameter. You can change the picker value by emitting the `pick` event. Example: `vm.$emit('pick', new Date())`| function | — | — |
+
+
+### Events
+| Event Name | Description | Parameters |
+|---------|--------|---------|
+| change | triggers when input value changes | formatted value |
+

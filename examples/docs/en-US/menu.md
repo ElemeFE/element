@@ -22,7 +22,7 @@ Menu that provides navigation for your website.
 
 Top bar NavMenu can be used in a variety of scenarios.
 
-::: demo
+::: demo By default Menu is vertical, but you can change it to horizontal by setting the mode prop to 'horizontal'. In addition, you can use the submenu component to create a second level menu.
 ```html
 <el-menu theme="dark" default-active="1" class="el-menu-demo" mode="horizontal" @select="handleSelect">
   <el-menu-item index="1">Processing Center</el-menu-item>
@@ -32,7 +32,7 @@ Top bar NavMenu can be used in a variety of scenarios.
     <el-menu-item index="2-2">item two</el-menu-item>
     <el-menu-item index="2-3">item three</el-menu-item>
   </el-submenu>
-  <el-menu-item index="3">Orders</el-menu-item>
+  <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">Orders</a></el-menu-item>
 </el-menu>
 <div class="line"></div>
 <el-menu default-active="1" class="el-menu-demo" mode="horizontal" @select="handleSelect">
@@ -43,7 +43,7 @@ Top bar NavMenu can be used in a variety of scenarios.
     <el-menu-item index="2-2">item two</el-menu-item>
     <el-menu-item index="2-3">item three</el-menu-item>
   </el-submenu>
-  <el-menu-item index="3">Orders </el-menu-item>
+  <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">Orders</a></el-menu-item>
 </el-menu>
 
 <script>
@@ -62,7 +62,7 @@ Top bar NavMenu can be used in a variety of scenarios.
 
 Vertical NavMenu with sub-menus.
 
-::: demo
+::: demo You can use the el-menu-item-group component to create a menu group, and the name of the group is determined by the title prop or a named slot.
 ```html
 <el-row class="tac">
   <el-col :span="8">
@@ -77,6 +77,10 @@ Vertical NavMenu with sub-menus.
         <el-menu-item-group title="Group Two">
           <el-menu-item index="1-3">item three</el-menu-item>
         </el-menu-item-group>
+        <el-submenu index="1-4">
+          <template slot="title">item four</template>
+          <el-menu-item index="1-4-1">item one</el-menu-item>
+        </el-submenu>
       </el-submenu>
       <el-menu-item index="2"><i class="el-icon-menu"></i>Navigator Two</el-menu-item>
       <el-menu-item index="3"><i class="el-icon-setting"></i>Navigator Three</el-menu-item>
@@ -94,6 +98,10 @@ Vertical NavMenu with sub-menus.
         <el-menu-item-group title="Group Two">
           <el-menu-item index="1-3">item three</el-menu-item>
         </el-menu-item-group>
+        <el-submenu index="1-4">
+          <template slot="title">item four</template>
+          <el-menu-item index="1-4-1">item one</el-menu-item>
+        </el-submenu>
       </el-submenu>
       <el-menu-item index="2">Navigator Two</el-menu-item>
       <el-menu-item index="3">Navigator Three</el-menu-item>
@@ -109,16 +117,6 @@ Vertical NavMenu with sub-menus.
       <el-menu-item-group title="Group Two">
         <el-menu-item index="3"><i class="el-icon-message"></i>Navigator Three</el-menu-item>
         <el-menu-item index="4"><i class="el-icon-message"></i>Navigator Four</el-menu-item>
-          <!-- <el-submenu index="5">
-            <template slot="title">Navigator Five</template>
-            <el-menu-item-group title="Group One">
-              <el-menu-item index="5-1">item one</el-menu-item>
-              <el-menu-item index="5-2">item two</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group title="Group Two">
-              <el-menu-item index="5-3">item three</el-menu-item>
-            </el-menu-item-group>
-          </el-submenu> -->
       </el-menu-item-group>
     </el-menu>
   </el-col>

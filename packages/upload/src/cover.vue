@@ -1,6 +1,6 @@
 <template>
   <div class="el-dragger__cover" @click.stop v-if="image">
-    <transition name="fade-in">
+    <transition name="el-fade-in">
       <el-progress
         class="el-dragger__cover__progress"
         v-if="image.status === 'uploading'"
@@ -16,7 +16,7 @@
       @mouseleave="mouseover = false"
     >
       <img :src="image.url">
-      <transition name="fade-in">
+      <transition name="el-fade-in">
         <div v-show="mouseover" class="el-dragger__cover__interact">
           <div class="el-draggeer__cover__btns">
             <span class="btn" @click="$parent.handleClick()"><i class="el-icon-upload2"></i><span>{{ t('el.upload.continue') }}</span></span>
@@ -25,7 +25,7 @@
           </div>
         </div>
       </transition>
-      <transition name="md-fade-top">
+      <transition name="el-zoom-in-bottom">
         <h4 v-show="mouseover" class="el-dragger__cover__title">{{image.name}}</h4>
       </transition>
     </div>

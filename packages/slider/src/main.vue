@@ -37,7 +37,7 @@
 <script type="text/babel">
   import ElInputNumber from 'element-ui/packages/input-number';
   import ElTooltip from 'element-ui/packages/tooltip';
-  import { getStyle } from 'wind-dom/src/style';
+  import { getStyle } from 'element-ui/src/utils/dom';
 
   export default {
     name: 'ElSlider',
@@ -84,6 +84,7 @@
 
     data() {
       return {
+        precision: 0,
         inputValue: null,
         timeout: null,
         hovering: false,
@@ -106,7 +107,7 @@
         this.$nextTick(() => {
           this.updatePopper();
         });
-        if (val < this.min) {
+        if (typeof val !== 'number' || isNaN(val) || val < this.min) {
           this.$emit('input', this.min);
           return;
         }
@@ -135,26 +136,30 @@
       },
 
       setPosition(newPos) {
-        if (newPos >= 0 && (newPos <= 100)) {
-          var lengthPerStep = 100 / ((this.max - this.min) / this.step);
-          var steps = Math.round(newPos / lengthPerStep);
-          this.$emit('input', Math.round(steps * lengthPerStep * (this.max - this.min) * 0.01 + this.min));
-          this.currentPosition = (this.value - this.min) / (this.max - this.min) * 100 + '%';
-          if (!this.dragging) {
-            if (this.value !== this.oldValue) {
-              this.$emit('change', this.value);
-              this.oldValue = this.value;
-            }
+        if (newPos < 0) {
+          newPos = 0;
+        } else if (newPos > 100) {
+          newPos = 100;
+        }
+
+        const lengthPerStep = 100 / ((this.max - this.min) / this.step);
+        const steps = Math.round(newPos / lengthPerStep);
+        let value = steps * lengthPerStep * (this.max - this.min) * 0.01 + this.min;
+        value = parseFloat(value.toFixed(this.precision));
+        this.$emit('input', value);
+        this.currentPosition = (this.value - this.min) / (this.max - this.min) * 100 + '%';
+        if (!this.dragging) {
+          if (this.value !== this.oldValue) {
+            this.$emit('change', this.value);
+            this.oldValue = this.value;
           }
         }
       },
 
       onSliderClick(event) {
-        if (this.disabled) return;
-        var currentX = event.clientX;
-        var sliderOffsetLeft = this.$refs.slider.getBoundingClientRect().left;
-        var newPos = (currentX - sliderOffsetLeft) / this.$sliderWidth * 100;
-        this.setPosition(newPos);
+        if (this.disabled || this.dragging) return;
+        const sliderOffsetLeft = this.$refs.slider.getBoundingClientRect().left;
+        this.setPosition((event.clientX - sliderOffsetLeft) / this.$sliderWidth * 100);
       },
 
       onInputChange() {
@@ -176,7 +181,7 @@
         if (this.dragging) {
           this.$refs.tooltip.showPopper = true;
           this.currentX = event.clientX;
-          var diff = (this.currentX - this.startX) / this.$sliderWidth * 100;
+          const diff = (this.currentX - this.startX) / this.$sliderWidth * 100;
           this.newPos = this.startPos + diff;
           this.setPosition(this.newPos);
         }
@@ -184,11 +189,18 @@
 
       onDragEnd() {
         if (this.dragging) {
-          this.dragging = false;
-          this.$refs.tooltip.showPopper = false;
-          this.setPosition(this.newPos);
+          /*
+           * 防止在 mouseup 后立即触发 click，导致滑块有几率产生一小段位移
+           * 不使用 preventDefault 是因为 mouseup 和 click 没有注册在同一个 DOM 上
+           */
+          setTimeout(() => {
+            this.dragging = false;
+            this.$refs.tooltip.showPopper = false;
+            this.setPosition(this.newPos);
+          }, 0);
           window.removeEventListener('mousemove', this.onDragging);
           window.removeEventListener('mouseup', this.onDragEnd);
+          window.removeEventListener('contextmenu', this.onDragEnd);
         }
       },
 
@@ -197,6 +209,7 @@
         this.onDragStart(event);
         window.addEventListener('mousemove', this.onDragging);
         window.addEventListener('mouseup', this.onDragEnd);
+        window.addEventListener('contextmenu', this.onDragEnd);
       }
     },
 
@@ -206,10 +219,10 @@
       },
 
       stops() {
-        let stopCount = (this.max - this.value) / this.step;
-        let result = [];
-        let currentLeft = parseFloat(this.currentPosition);
-        let stepWidth = 100 * this.step / (this.max - this.min);
+        const stopCount = (this.max - this.value) / this.step;
+        const currentLeft = parseFloat(this.currentPosition);
+        const stepWidth = 100 * this.step / (this.max - this.min);
+        const result = [];
         for (let i = 1; i < stopCount; i++) {
           result.push(currentLeft + i * stepWidth);
         }
@@ -218,11 +231,18 @@
     },
 
     created() {
-      if (typeof this.value !== 'number' || this.value < this.min) {
+      if (typeof this.value !== 'number' ||
+        isNaN(this.value) ||
+        this.value < this.min) {
         this.$emit('input', this.min);
       } else if (this.value > this.max) {
         this.$emit('input', this.max);
       }
+      let precisions = [this.min, this.max, this.step].map(item => {
+        let decimal = ('' + item).split('.')[1];
+        return decimal ? decimal.length : 0;
+      });
+      this.precision = Math.max.apply(null, precisions);
       this.inputValue = this.inputValue || this.value;
     }
   };

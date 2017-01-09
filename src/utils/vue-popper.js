@@ -1,5 +1,8 @@
-import PopperJS from './popper';
-import { PopupManager } from 'vue-popup';
+import Vue from 'vue';
+import { PopupManager } from 'element-ui/src/utils/popup';
+
+const PopperJS = Vue.prototype.$isServer ? function() {} : require('./popper');
+const stop = e => e.stopPropagation();
 
 /**
  * @param {HTMLElement} [reference=$refs.reference] - The reference element used to position the popper.
@@ -43,7 +46,8 @@ export default {
 
   data() {
     return {
-      showPopper: false
+      showPopper: false,
+      currentPlacement: ''
     };
   },
 
@@ -64,7 +68,9 @@ export default {
 
   methods: {
     createPopper() {
-      if (!/^(top|bottom|left|right)(-start|-end)?$/g.test(this.placement)) {
+      if (this.$isServer) return;
+      this.currentPlacement = this.currentPlacement || this.placement;
+      if (!/^(top|bottom|left|right)(-start|-end)?$/g.test(this.currentPlacement)) {
         return;
       }
 
@@ -84,7 +90,7 @@ export default {
         this.popperJS.destroy();
       }
 
-      options.placement = this.placement;
+      options.placement = this.currentPlacement;
       options.offset = this.offset;
       this.popperJS = new PopperJS(reference, popper, options);
       this.popperJS.onCreate(_ => {
@@ -93,6 +99,7 @@ export default {
         this.$nextTick(this.updatePopper);
       });
       this.popperJS._popper.style.zIndex = PopupManager.nextZIndex();
+      this.popperElm.addEventListener('click', stop);
     },
 
     updatePopper() {
@@ -149,8 +156,14 @@ export default {
 
   beforeDestroy() {
     this.doDestroy();
-    this.popperElm &&
-    this.popperElm.parentNode === document.body &&
-    document.body.removeChild(this.popperElm);
+    if (this.popperElm && this.popperElm.parentNode === document.body) {
+      this.popperElm.removeEventListener('click', stop);
+      document.body.removeChild(this.popperElm);
+    }
+  },
+
+  // call destroy in keep-alive mode
+  deactivated() {
+    this.$options.beforeDestroy[0].call(this);
   }
 };

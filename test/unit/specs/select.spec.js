@@ -3,9 +3,10 @@ import Select from 'packages/select';
 
 describe('Select', () => {
   const getSelectVm = (configs = {}, options) => {
-    ['multiple', 'clearable', 'filterable', 'remote'].forEach(config => {
+    ['multiple', 'clearable', 'filterable', 'allowCreate', 'remote'].forEach(config => {
       configs[config] = configs[config] || false;
     });
+    configs.multipleLimit = configs.multipleLimit || 0;
     if (!options) {
       options = [{
         value: '选项1',
@@ -35,8 +36,11 @@ describe('Select', () => {
           <el-select
             v-model="value"
             :multiple="multiple"
+            :multiple-limit="multipleLimit"
+            :popper-class="popperClass"
             :clearable="clearable"
             :filterable="filterable"
+            :allow-create="allowCreate"
             :filterMethod="filterMethod"
             :remote="remote"
             :loading="loading"
@@ -44,6 +48,7 @@ describe('Select', () => {
             <el-option
               v-for="item in options"
               :label="item.label"
+              :key="item.value"
               :disabled="item.disabled"
               :value="item.value">
             </el-option>
@@ -55,8 +60,11 @@ describe('Select', () => {
         return {
           options,
           multiple: configs.multiple,
+          multipleLimit: configs.multipleLimit,
           clearable: configs.clearable,
           filterable: configs.filterable,
+          allowCreate: configs.allowCreate,
+          popperClass: configs.popperClass,
           loading: false,
           filterMethod: configs.filterMethod && configs.filterMethod(this),
           remote: configs.remote,
@@ -89,6 +97,12 @@ describe('Select', () => {
       return text === vm.options[index].label;
     });
     expect(result).to.true;
+  });
+
+  it('custom dropdown class', () => {
+    vm = getSelectVm({ popperClass: 'custom-dropdown' });
+    const dropdown = vm.$el.querySelector('.el-select-dropdown');
+    expect(dropdown.classList.contains('custom-dropdown')).to.true;
   });
 
   it('default value', done => {
@@ -202,6 +216,41 @@ describe('Select', () => {
   it('disabled select', () => {
     vm = createTest(Select, { disabled: true }, true);
     expect(vm.$el.querySelector('.el-input').classList.contains('is-disabled')).to.true;
+  });
+
+  it('visible event', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-select v-model="value" @visible-change="handleVisibleChange">
+            <el-option
+              v-for="item in options"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </div>
+      `,
+
+      data() {
+        return {
+          options: [],
+          value: '',
+          visible: ''
+        };
+      },
+
+      methods: {
+        handleVisibleChange(val) {
+          this.visible = val;
+        }
+      }
+    }, true);
+    vm.$children[0].visible = true;
+    setTimeout(() => {
+      expect(vm.visible).to.true;
+      done();
+    }, 50);
   });
 
   it('keyboard operations', done => {
@@ -325,13 +374,15 @@ describe('Select', () => {
   it('filterable', done => {
     vm = getSelectVm({ filterable: true });
     const select = vm.$children[0];
-    select.selectedLabel = '面';
-    select.onInputChange();
-    select.visible = true;
     setTimeout(() => {
-      expect(select.filteredOptionsCount).to.equal(1);
-      done();
-    }, 100);
+      select.selectedLabel = '面';
+      select.onInputChange();
+      select.visible = true;
+      setTimeout(() => {
+        expect(select.filteredOptionsCount).to.equal(1);
+        done();
+      }, 10);
+    }, 10);
   });
 
   it('filterable with custom filter-method', done => {
@@ -342,11 +393,34 @@ describe('Select', () => {
     };
     vm = getSelectVm({ filterable: true, filterMethod });
     const select = vm.$children[0];
-    select.query = '面';
+    select.$el.querySelector('input').focus();
     setTimeout(() => {
-      expect(select.filteredOptionsCount).to.equal(4);
-      done();
-    }, 100);
+      select.selectedLabel = '面';
+      select.onInputChange();
+      setTimeout(() => {
+        expect(select.filteredOptionsCount).to.equal(4);
+        done();
+      }, 10);
+    }, 10);
+  });
+
+  it('allow create', done => {
+    vm = getSelectVm({ filterable: true, allowCreate: true });
+    const select = vm.$children[0];
+    select.$el.querySelector('input').focus();
+    setTimeout(() => {
+      select.selectedLabel = 'new';
+      select.onInputChange();
+      setTimeout(() => {
+        const options = document.querySelectorAll('.el-select-dropdown__item span');
+        const target = [].filter.call(options, option => option.innerText === 'new');
+        target[0].click();
+        setTimeout(() => {
+          expect(select.value.indexOf('new') > -1).to.true;
+          done();
+        }, 10);
+      }, 10);
+    }, 10);
   });
 
   it('multiple select', done => {
@@ -368,6 +442,20 @@ describe('Select', () => {
     }, 100);
   });
 
+  it('multiple limit', done => {
+    vm = getSelectVm({ multiple: true, multipleLimit: 1 });
+    const options = vm.$el.querySelectorAll('.el-select-dropdown__item');
+    options[1].click();
+    setTimeout(() => {
+      expect(vm.value.indexOf('选项2') > -1).to.true;
+      options[3].click();
+      setTimeout(() => {
+        expect(vm.value.indexOf('选项4')).to.equal(-1);
+        done();
+      }, 50);
+    }, 50);
+  });
+
   it('multiple remote search', done => {
     const remoteMethod = vm => {
       return query => {
@@ -387,21 +475,23 @@ describe('Select', () => {
       remoteMethod
     });
     const select = vm.$children[0];
-    select.query = '面';
-    setTimeout(() => {
-      expect(select.filteredOptionsCount).to.equal(1);
-      select.query = '';
-      select.options[0].$el.click();
-      vm.$nextTick(() => {
-        expect(vm.value[0]).to.equal('选项4');
-        select.deletePrevTag({ target: select.$refs.input });
-        select.deletePrevTag({ target: select.$refs.input });
-        select.resetInputState({ keyCode: 1 });
+    vm.$nextTick(() => {
+      select.query = '面';
+      setTimeout(() => {
+        expect(select.filteredOptionsCount).to.equal(1);
+        select.query = '';
+        select.options[0].$el.click();
         vm.$nextTick(() => {
-          expect(vm.value.length).to.equal(0);
-          done();
+          expect(vm.value[0]).to.equal('选项4');
+          select.deletePrevTag({ target: select.$refs.input });
+          select.deletePrevTag({ target: select.$refs.input });
+          select.resetInputState({ keyCode: 1 });
+          vm.$nextTick(() => {
+            expect(vm.value.length).to.equal(0);
+            done();
+          });
         });
-      });
-    }, 250);
+      }, 250);
+    });
   });
 });

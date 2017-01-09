@@ -1,6 +1,7 @@
 <style>
   .page-component {
     padding-bottom: 95px;
+    box-sizing: border-box;
   }
   .page-component {
     .content {
@@ -25,10 +26,12 @@
             text-align: left;
             border-top: 1px solid #eaeefb;
             background-color: #EFF2F7;
+            white-space: nowrap;
           }
           td, th {
             border-bottom: 1px solid #eaeefb;
             padding: 10px;
+            max-width: 250px;
           }
           th:first-child, td:first-child {
             padding-left: 10px;
@@ -41,10 +44,10 @@
 <template>
   <div class="page-container page-component">
     <el-row>
-      <el-col :span="6">
+      <el-col :xs="24" :sm="6">
         <side-nav :data="navsData[lang]" :base="`/${ lang }/component`"></side-nav>
       </el-col>
-      <el-col :span="18">
+      <el-col :xs="24" :sm="18">
         <router-view class="content"></router-view>
         <footer-nav></footer-nav>
       </el-col>

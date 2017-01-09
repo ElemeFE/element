@@ -1,0 +1,15 @@
+{
+  "name": "element-collapse",
+  "version": "1.0.0",
+  "description": "A row component for Vue.",
+  "keywords": [
+    "element",
+    "vue",
+    "component"
+  ],
+  "main": "./lib/index.js",
+  "repository": "https://github.com/ElemeFE/element/tree/master/packages/collapse",
+  "author": "haiping.zeng@ele.me",
+  "license": "MIT",
+  "dependencies": {}
+}

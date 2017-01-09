@@ -43,6 +43,9 @@
     methods: {
       handleClick() {
         alert('button click');
+      },
+      handleCommand(command) {
+        this.$message('click on item ' + command);
       }
     }
   }
@@ -147,6 +150,56 @@
 ```
 :::
 
+### 菜单隐藏方式
+
+可以`hide-on-click`属性来配置。
+
+:::demo 下拉菜单默认在点击菜单项后会被隐藏，将`hide-on-click`属性默认为`false`可以关闭此功能。
+```html
+<el-dropdown :hide-on-click="false">
+  <span class="el-dropdown-link">
+    下拉菜单<i class="el-icon-caret-bottom el-icon--right"></i>
+  </span>
+  <el-dropdown-menu slot="dropdown">
+    <el-dropdown-item>黄金糕</el-dropdown-item>
+    <el-dropdown-item>狮子头</el-dropdown-item>
+    <el-dropdown-item>螺蛳粉</el-dropdown-item>
+    <el-dropdown-item disabled>双皮奶</el-dropdown-item>
+    <el-dropdown-item divided>蚵仔煎</el-dropdown-item>
+  </el-dropdown-menu>
+</el-dropdown>
+```
+:::
+
+### 指令事件
+
+点击菜单项后会触发事件，用户可以通过相应的菜单项 key 进行不同的操作
+
+:::demo
+```html
+<el-dropdown @command="handleCommand">
+  <span class="el-dropdown-link">
+    下拉菜单<i class="el-icon-caret-bottom el-icon--right"></i>
+  </span>
+  <el-dropdown-menu slot="dropdown">
+    <el-dropdown-item command="a">黄金糕</el-dropdown-item>
+    <el-dropdown-item command="b">狮子头</el-dropdown-item>
+    <el-dropdown-item command="c">螺蛳粉</el-dropdown-item>
+    <el-dropdown-item command="d" disabled>双皮奶</el-dropdown-item>
+    <el-dropdown-item command="e" divided>蚵仔煎</el-dropdown-item>
+  </el-dropdown-menu>
+</el-dropdown>
+<script>
+  export default {
+    methods: {
+      handleCommand(command) {
+        this.$message('click on item ' + command);
+      }
+    }
+  }
+</script>
+```
+:::
 
 ### Dropdown Attributes
 | 参数          | 说明            | 类型            | 可选值                 | 默认值   |
@@ -156,6 +209,7 @@
 | split-button  | 下拉触发元素呈现为按钮组    | boolean  |    —  |  false |
 | menu-align    | 菜单水平对齐方向     | string          | start, end  | end |
 | trigger       | 触发下拉的行为     | string          | hover, click  | hover |
+| hide-on-click | 是否在点击菜单项后隐藏菜单     | boolean          | — | true |
 
 ### Dropdown Events
 | 事件名称      | 说明    | 回调参数      |

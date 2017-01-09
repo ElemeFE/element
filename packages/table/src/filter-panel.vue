@@ -1,5 +1,5 @@
 <template>
-  <transition name="md-fade-bottom">
+  <transition name="el-zoom-in-top">
     <div class="el-table-filter" v-if="multiple" v-show="showPopper">
       <div class="el-table-filter__content">
         <el-checkbox-group class="el-table-filter__checkbox-group" v-model="filteredValue">
@@ -39,7 +39,7 @@
   import ElCheckboxGroup from 'element-ui/packages/checkbox-group';
 
   export default {
-    name: 'el-table-filter-panel',
+    name: 'ElTableFilterPanel',
 
     mixins: [Popper, Locale],
 
@@ -163,7 +163,7 @@
     mounted() {
       this.popperElm = this.$el;
       this.referenceElm = this.cell;
-      this.table.$refs.bodyWrapper.addEventListener('scroll', () => {
+      this.table.bodyWrapper.addEventListener('scroll', () => {
         this.updatePopper();
       });
 

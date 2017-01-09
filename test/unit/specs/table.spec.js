@@ -8,11 +8,11 @@ const toArray = function(obj) {
 
 const getTestData = function() {
   return [
-    { name: 'Toy Story', release: '1995-11-22', director: 'John Lasseter', runtime: 80 },
-    { name: 'A Bug\'s Life', release: '1998-11-25', director: 'John Lasseter', runtime: 95 },
-    { name: 'Toy Story 2', release: '1999-11-24', director: 'John Lasseter', runtime: 92 },
-    { name: 'Monsters, Inc.', release: '2001-11-2', director: 'Peter Docter', runtime: 92 },
-    { name: 'Finding Nemo', release: '2003-5-30', director: 'Andrew Stanton', runtime: 100 }
+    { id: 1, name: 'Toy Story', release: '1995-11-22', director: 'John Lasseter', runtime: 80 },
+    { id: 2, name: 'A Bug\'s Life', release: '1998-11-25', director: 'John Lasseter', runtime: 95 },
+    { id: 3, name: 'Toy Story 2', release: '1999-11-24', director: 'John Lasseter', runtime: 92 },
+    { id: 4, name: 'Monsters, Inc.', release: '2001-11-2', director: 'Peter Docter', runtime: 92 },
+    { id: 5, name: 'Finding Nemo', release: '2003-5-30', director: 'Andrew Stanton', runtime: 100 }
   ];
 };
 
@@ -27,6 +27,7 @@ describe('Table', () => {
     const vm = createVue({
       template: `
         <el-table :data="testData">
+          <el-table-column prop="id" />
           <el-table-column prop="name" label="片名" />
           <el-table-column prop="release" label="发行日期" />
           <el-table-column prop="director" label="导演" />
@@ -89,6 +90,15 @@ describe('Table', () => {
       }, DELAY);
     });
 
+    it('maxHeight', done => {
+      const vm = createTable('max-height="134"');
+      setTimeout(_ => {
+        expect(vm.$el.style.maxHeight).to.equal('134px');
+        destroyVM(vm);
+        done();
+      }, DELAY);
+    });
+
     it('stripe', done => {
       const vm = createTable('stripe');
       setTimeout(_ => {
@@ -116,6 +126,15 @@ describe('Table', () => {
       }, DELAY);
     });
 
+    it('show-header', done => {
+      const vm = createTable(':show-header="false"');
+      setTimeout(_ => {
+        expect(vm.$el.querySelectorAll('.el-table__header-wrapper').length).to.equal(0);
+        destroyVM(vm);
+        done();
+      }, DELAY);
+    });
+
     it('tableRowClassName', done => {
       const vm = createTable(':row-class-name="tableRowClassName"', {
         methods: {
@@ -138,6 +157,74 @@ describe('Table', () => {
         done();
       }, DELAY);
     });
+
+    it('tableRowStyle[Object]', done => {
+      const vm = createTable(':row-style="{ height: \'60px\' }"', {});
+
+      setTimeout(_ => {
+        expect(vm.$el.querySelector('.el-table__body tr').style.height).to.equal('60px');
+        destroyVM(vm);
+        done();
+      }, DELAY);
+    });
+
+    it('tableRowStyle[Function]', done => {
+      const vm = createTable(':row-style="tableRowStyle"', {
+        methods: {
+          tableRowStyle(row, index) {
+            if (index === 1) {
+              return { height: '60px' };
+            }
+
+            return null;
+          }
+        }
+      });
+
+      setTimeout(_ => {
+        expect(vm.$el.querySelector('.el-table__body tr:nth-child(1)').style.height).to.equal('');
+        expect(vm.$el.querySelector('.el-table__body tr:nth-child(2)').style.height).to.equal('60px');
+        destroyVM(vm);
+        done();
+      }, DELAY);
+    });
+
+    it('current-row-key', done => {
+      const vm = createVue({
+        template: `
+        <el-table :data="testData" row-key="id" highlight-current-row :current-row-key="currentRowKey">
+          <el-table-column prop="name" label="片名" />
+          <el-table-column prop="release" label="发行日期" />
+          <el-table-column prop="director" label="导演" />
+          <el-table-column prop="runtime" label="时长（分）" />
+        </el-table>
+      `,
+
+        created() {
+          this.testData = getTestData();
+        },
+
+        data() {
+          return { currentRowKey: null };
+        }
+      }, true);
+      setTimeout(_ => {
+        vm.currentRowKey = 1;
+        const tr = vm.$el.querySelector('.el-table__body-wrapper tbody tr');
+        setTimeout(_ => {
+          expect(tr.classList.contains('current-row')).to.be.true;
+          vm.currentRowKey = 2;
+
+          const rows = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr');
+          setTimeout(_ => {
+            expect(tr.classList.contains('current-row')).to.be.false;
+            expect(rows[1].classList.contains('current-row')).to.be.true;
+            destroyVM(vm);
+            done();
+          }, DELAY);
+        }, DELAY);
+      }, DELAY);
+    });
   });
 
   describe('filter', () => {
@@ -146,11 +233,12 @@ describe('Table', () => {
     beforeEach(done => {
       vm = createVue({
         template: `
-          <el-table ref="table" :data="testData">
+          <el-table ref="table" :data="testData" @filter-change="handleFilterChange">
             <el-table-column prop="name" label="片名" />
             <el-table-column prop="release" label="发行日期" />
             <el-table-column
               prop="director"
+              column-key="director"
               :filters="[
                 { text: 'John Lasseter', value: 'John Lasseter' },
                 { text: 'Peter Docter', value: 'Peter Docter' },
@@ -169,6 +257,9 @@ describe('Table', () => {
         methods: {
           filterMethod(value, row) {
             return value === row.director;
+          },
+          handleFilterChange(filters) {
+            this.filters = filters;
           }
         }
       }, true);
@@ -206,6 +297,7 @@ describe('Table', () => {
         setTimeout(_ => {
           triggerEvent(filter.querySelector('.el-table-filter__bottom button'), 'click', true, false);
           setTimeout(_ => {
+            expect(vm.filters['director']).to.be.eql(['John Lasseter']);
             expect(vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr')).to.length(3);
             document.body.removeChild(filter);
             done();
@@ -227,6 +319,7 @@ describe('Table', () => {
           // reset button
           triggerEvent(filter.querySelectorAll('.el-table-filter__bottom button')[1], 'click', true, false);
           setTimeout(_ => {
+            expect(vm.filters['director']).to.be.eql([]);
             expect(filter.querySelector('.el-table-filter__bottom button').classList.contains('is-disabled')).to.true;
             document.body.removeChild(filter);
             destroyVM(vm);
@@ -352,6 +445,20 @@ describe('Table', () => {
         const cell = vm.$el.querySelectorAll('.el-table__body .cell')[2]; // first row
 
         triggerEvent(cell.parentNode.parentNode, 'click');
+        expect(vm.result).to.length(3); // row, event, column
+        expect(vm.result[0]).to.have.property('name').to.equal(getTestData()[0].name);
+        destroyVM(vm);
+        done();
+      }, DELAY);
+    });
+
+    it('row-dblclick', done => {
+      const vm = createTable('row-dblclick');
+
+      setTimeout(_ => {
+        const cell = vm.$el.querySelectorAll('.el-table__body .cell')[2]; // first row
+
+        triggerEvent(cell.parentNode.parentNode, 'dblclick');
         expect(vm.result).to.length(2); // row, event
         expect(vm.result[0]).to.have.property('name').to.equal(getTestData()[0].name);
         destroyVM(vm);
@@ -382,6 +489,20 @@ describe('Table', () => {
           destroyVM(vm);
           done();
         }, DELAY);
+      }, DELAY);
+    });
+
+    it('header-click', done => {
+      const vm = createTable('header-click');
+
+      setTimeout(_ => {
+        const cell = vm.$el.querySelectorAll('.el-table__header th')[1]; // header[prop='name']
+
+        triggerEvent(cell, 'click');
+        expect(vm.result).to.length(2); // column, event
+        expect(vm.result[0]).to.have.property('property').to.equal('name');
+        destroyVM(vm);
+        done();
       }, DELAY);
     });
   });
@@ -623,6 +744,48 @@ describe('Table', () => {
       }, DELAY);
     });
 
+    it('selectable === false & check selectAll status', done => {
+      const vm = createVue({
+        template: `
+          <el-table :data="testData" @selection-change="change">
+            <el-table-column type="selection" :selectable="filterSelect" />
+            <el-table-column prop="name" label="name" />
+            <el-table-column prop="release" label="release" />
+            <el-table-column prop="director" label="director" />
+            <el-table-column prop="runtime" label="runtime" />
+          </el-table>
+        `,
+
+        created() {
+        },
+
+        data() {
+          return { selected: [], testData: null };
+        },
+
+        methods: {
+          change(rows) {
+            this.selected = rows;
+          },
+
+          filterSelect(row, index) {
+            return false;
+          }
+        }
+      }, true);
+
+      vm.testData = getTestData();
+
+      setTimeout(_ => {
+        expect(vm.$el.querySelector('.el-checkbox').__vue__.checked).to.be.false;
+        setTimeout(_ => {
+          expect(vm.selected).to.length(0);
+          destroyVM(vm);
+          done();
+        }, DELAY);
+      }, DELAY);
+    });
+
     it('emit selection-change after row has been removed', done => {
       const vm = createVue({
         template: `
@@ -718,12 +881,12 @@ describe('Table', () => {
         vm.$el.querySelectorAll('.el-checkbox')[1].click();
 
         setTimeout(_ => {
-          expect(vm.$el.querySelectorAll('.el-checkbox__inner.is-checked')).to.length(1);
+          expect(vm.$el.querySelectorAll('.el-checkbox__input.is-checked')).to.length(1);
           // go to second page
           vm.testData = getData(1);
           setTimeout(_ => {
              // expect no checked
-            expect(vm.$el.querySelectorAll('.el-checkbox__inner.is-checked')).to.length(0);
+            expect(vm.$el.querySelectorAll('.el-checkbox__input.is-checked')).to.length(0);
             // click first checkbox
             vm.$el.querySelectorAll('.el-checkbox')[1].click();
             vm.$el.querySelectorAll('.el-checkbox')[2].click();
@@ -731,11 +894,11 @@ describe('Table', () => {
               // back first page
               vm.testData = getData();
               setTimeout(_ => {
-                expect(vm.$el.querySelectorAll('.el-checkbox__inner.is-checked')).to.length(1);
+                expect(vm.$el.querySelectorAll('.el-checkbox__input.is-checked')).to.length(1);
                 // clear
                 vm.$refs.table.clearSelection();
                 setTimeout(_ => {
-                  expect(vm.$el.querySelectorAll('.el-checkbox__inner.is-checked')).to.length(0);
+                  expect(vm.$el.querySelectorAll('.el-checkbox__input.is-checked')).to.length(0);
                   destroyVM(vm);
                   done();
                 }, DELAY);
@@ -832,6 +995,92 @@ describe('Table', () => {
           }, DELAY);
         });
       });
+
+      describe('= expand', () => {
+        const createInstance = function(extra) {
+          extra = extra || '';
+          return createVue({
+            template: `
+            <el-table row-key="id" :data="testData" @expand="handleExpand" ${extra}>
+              <el-table-column type="expand">
+                <template scope="props">
+                  <div>{{props.row.name}}</div>
+                </template>
+              </el-table-column>
+              <el-table-column prop="release" label="release" />
+              <el-table-column prop="director" label="director" />
+              <el-table-column prop="runtime" label="runtime" />
+            </el-table>
+          `,
+
+            created() {
+              this.testData = getTestData();
+            },
+
+            data() {
+              return { expandCount: 0, expandRowKeys: [] };
+            },
+
+            methods: {
+              handleExpand() {
+                this.expandCount++;
+              }
+            }
+          }, true);
+        };
+
+        it('works', done => {
+          const vm = createInstance();
+          setTimeout(_ => {
+            expect(vm.$el.querySelectorAll('td.el-table__expand-column').length).to.equal(5);
+            destroyVM(vm);
+            done();
+          }, DELAY);
+        });
+
+        it('should expand when click icon', done => {
+          const vm = createInstance();
+          setTimeout(_ => {
+            vm.$el.querySelector('td.el-table__expand-column .el-table__expand-icon').click();
+            setTimeout(_ => {
+              expect(vm.$el.querySelectorAll('.el-table__expanded-cell').length).to.equal(1);
+              expect(vm.expandCount).to.equal(1);
+              vm.$el.querySelector('td.el-table__expand-column .el-table__expand-icon').click();
+              setTimeout(_ => {
+                expect(vm.$el.querySelectorAll('.el-table__expanded-cell').length).to.equal(0);
+                expect(vm.expandCount).to.equal(2);
+                destroyVM(vm);
+                done();
+              }, DELAY);
+            }, DELAY);
+          }, DELAY);
+        });
+
+        it('should set expanded rows using expandRowKeys', done => {
+          const vm = createInstance(':expand-row-keys="expandRowKeys"');
+          setTimeout(_ => {
+            vm.expandRowKeys = [1, 3];
+            setTimeout(_ => {
+              expect(vm.$el.querySelectorAll('.el-table__expanded-cell').length).to.equal(2);
+              vm.expandRowKeys = [2];
+              setTimeout(_ => {
+                expect(vm.$el.querySelectorAll('.el-table__expanded-cell').length).to.equal(1);
+                destroyVM(vm);
+                done();
+              }, DELAY);
+            }, DELAY);
+          }, DELAY);
+        });
+
+        it('should default-expand-all when default-expand-all is true', done => {
+          const vm = createInstance('default-expand-all');
+          setTimeout(_ => {
+            expect(vm.$el.querySelectorAll('.el-table__expanded-cell').length).to.equal(5);
+            destroyVM(vm);
+            done();
+          }, DELAY);
+        });
+      });
     });
 
     describe('sortable', () => {
@@ -857,8 +1106,8 @@ describe('Table', () => {
 
         setTimeout(_ => {
           const elm = vm.$el.querySelector('.caret-wrapper');
-
           elm.click();
+
           setTimeout(_ => {
             const lastCells = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr td:last-child');
             expect(toArray(lastCells).map(node => node.textContent)).to.eql(['100', '95', '92', '92', '80']);
@@ -878,7 +1127,7 @@ describe('Table', () => {
           }
         }, '@sort-change="sortChange"');
         setTimeout(_ => {
-          const elm = vm.$el.querySelector('.caret-wrapper');
+          const elm = vm.$el.querySelector('.caret-wrapper > .ascending');
 
           elm.click();
           setTimeout(_ => {
@@ -920,11 +1169,426 @@ describe('Table', () => {
     });
   });
 
+  describe('multi level column', () => {
+    it('should works', done => {
+      const vm = createVue({
+        template: `
+          <el-table :data="testData">
+            <el-table-column prop="name" />
+            <el-table-column label="group">
+              <el-table-column prop="release"/>
+              <el-table-column prop="director"/>
+            </el-table-column>
+            <el-table-column prop="runtime"/>
+          </el-table>
+        `,
+
+        created() {
+          this.testData = null;
+        }
+      }, true);
+
+      setTimeout(_ => {
+        const trs = vm.$el.querySelectorAll('.el-table__header tr');
+        expect(trs.length).equal(2);
+        const firstRowHeader = trs[0].querySelectorAll('th .cell').length;
+        const secondRowHeader = trs[1].querySelectorAll('th .cell').length;
+        expect(firstRowHeader).to.equal(3);
+        expect(secondRowHeader).to.equal(2);
+
+        expect(trs[0].querySelector('th:first-child').getAttribute('rowspan')).to.equal('2');
+        expect(trs[0].querySelector('th:nth-child(2)').getAttribute('colspan')).to.equal('2');
+        destroyVM(vm);
+        done();
+      }, DELAY);
+    });
+
+    it('should works', done => {
+      const vm = createVue({
+        template: `
+          <el-table :data="testData">
+            <el-table-column prop="name" />
+            <el-table-column label="group">
+              <el-table-column label="group's group">
+                <el-table-column prop="release" />
+                <el-table-column prop="runtime"/>
+              </el-table-column>
+              <el-table-column prop="director" />
+            </el-table-column>
+            <el-table-column prop="runtime"/>
+          </el-table>
+        `,
+
+        created() {
+          this.testData = null;
+        }
+      }, true);
+
+      setTimeout(_ => {
+        const trs = vm.$el.querySelectorAll('.el-table__header tr');
+        expect(trs.length).equal(3);
+        const firstRowHeader = trs[0].querySelectorAll('th .cell').length;
+        const secondRowHeader = trs[1].querySelectorAll('th .cell').length;
+        const thirdRowHeader = trs[2].querySelectorAll('th .cell').length;
+        expect(firstRowHeader).to.equal(3);
+        expect(secondRowHeader).to.equal(2);
+        expect(thirdRowHeader).to.equal(2);
+
+        expect(trs[0].querySelector('th:first-child').getAttribute('rowspan')).to.equal('3');
+        expect(trs[0].querySelector('th:nth-child(2)').getAttribute('colspan')).to.equal('3');
+        expect(trs[1].querySelector('th:first-child').getAttribute('colspan')).to.equal('2');
+        expect(trs[1].querySelector('th:nth-child(2)').getAttribute('rowspan')).to.equal('2');
+
+        destroyVM(vm);
+        done();
+      }, DELAY);
+    });
+
+    it('should work in one column', done => {
+      const vm = createVue({
+        template: `
+          <el-table :data="testData">
+            <el-table-column label="group">
+              <el-table-column prop="release"/>
+            </el-table-column>
+          </el-table>
+        `,
+
+        created() {
+          this.testData = null;
+        }
+      }, true);
+
+      setTimeout(_ => {
+        const trs = vm.$el.querySelectorAll('.el-table__header tr');
+        expect(trs.length).equal(2);
+        const firstRowLength = trs[0].querySelectorAll('th .cell').length;
+        const secondRowLength = trs[1].querySelectorAll('th .cell').length;
+        expect(firstRowLength).to.equal(1);
+        expect(secondRowLength).to.equal(1);
+
+        expect(trs[0].querySelector('th:first-child').getAttribute('rowspan')).to.equal('1');
+        expect(trs[0].querySelector('th:first-child').getAttribute('colspan')).to.equal('1');
+        destroyVM(vm);
+        done();
+      }, DELAY);
+    });
+  });
+
+  describe('dynamic column attribtes', () => {
+    const DELAY = 50;
+
+    it('label', (done) => {
+      const vm = createVue({
+        template: `
+          <el-table :data="testData">
+            <el-table-column prop="name" :label="label"/>
+            <el-table-column prop="release" />
+            <el-table-column prop="director" />
+            <el-table-column prop="runtime" />
+          </el-table>
+        `,
+
+        data() {
+          return {
+            label: 'name'
+          };
+        },
+
+        created() {
+          this.testData = getTestData();
+        }
+      }, true);
+
+      setTimeout(() => {
+        expect(vm.$el.querySelector('.el-table__header th .cell').textContent).to.equal('name');
+        vm.label = 'NAME';
+        vm.$nextTick(() => {
+          expect(vm.$el.querySelector('.el-table__header th .cell').textContent).to.equal('NAME');
+          destroyVM(vm);
+          done();
+        });
+      }, DELAY);
+    });
+
+    it('align', (done) => {
+      const vm = createVue({
+        template: `
+          <el-table :data="testData">
+            <el-table-column prop="name" :align="align"/>
+          </el-table>
+        `,
+
+        data() {
+          return {
+            align: 'left'
+          };
+        },
+
+        created() {
+          this.testData = getTestData();
+        }
+      }, true);
+
+      setTimeout(() => {
+        expect(vm.$el.querySelectorAll('.el-table__body td.is-right').length === 0).to.be.true;
+        vm.align = 'right';
+        vm.$nextTick(() => {
+          expect(vm.$el.querySelectorAll('.el-table__body td.is-right').length > 0).to.be.true;
+          destroyVM(vm);
+          done();
+        });
+      }, DELAY);
+    });
+
+    it('header-align', (done) => {
+      const vm = createVue({
+        template: `
+           <el-table :data="testData">
+            <el-table-column prop="name" :align="align" :header-align="headerAlign"/>
+          </el-table>
+        `,
+
+        data() {
+          return {
+            align: 'left',
+            headerAlign: null
+          };
+        },
+
+        created() {
+          this.testData = getTestData();
+        }
+      }, true);
+
+      vm.$nextTick(() => {
+        expect(vm.$el.querySelectorAll('.el-table__header th.is-left').length).to.above(0);
+        expect(vm.$el.querySelectorAll('.el-table__header th.is-center').length).to.equal(0);
+        expect(vm.$el.querySelectorAll('.el-table__header th.is-right').length).to.equal(0);
+        vm.align = 'right';
+        vm.$nextTick(() => {
+          expect(vm.$el.querySelectorAll('.el-table__header th.is-left').length).to.equal(0);
+          expect(vm.$el.querySelectorAll('.el-table__header th.is-center').length).to.equal(0);
+          expect(vm.$el.querySelectorAll('.el-table__header th.is-right').length).to.above(0);
+          vm.headerAlign = 'center';
+          vm.$nextTick(() => {
+            expect(vm.$el.querySelectorAll('.el-table__header th.is-left').length).to.equal(0);
+            expect(vm.$el.querySelectorAll('.el-table__header th.is-center').length).to.above(0);
+            expect(vm.$el.querySelectorAll('.el-table__header th.is-right').length).to.equal(0);
+            vm.headerAlign = null;
+            vm.$nextTick(() => {
+              expect(vm.$el.querySelectorAll('.el-table__header th.is-left').length).to.equal(0);
+              expect(vm.$el.querySelectorAll('.el-table__header th.is-center').length).to.equal(0);
+              expect(vm.$el.querySelectorAll('.el-table__header th.is-right').length).to.above(0);
+              destroyVM(vm);
+              done();
+            });
+          });
+        });
+      });
+    });
+
+    it('width', (done) => {
+      const vm = createVue({
+        template: `
+          <el-table :data="testData" :fit="false">
+            <el-table-column prop="name" :width="width"/>
+          </el-table>
+        `,
+
+        data() {
+          return {
+            width: 100
+          };
+        },
+
+        created() {
+          this.testData = getTestData();
+        }
+      }, true);
+
+      setTimeout(() => {
+        expect(vm.$el.querySelector('.el-table__body col').getAttribute('width')).to.equal('100');
+        vm.width = 200;
+        setTimeout(() => {
+          expect(vm.$el.querySelector('.el-table__body col').getAttribute('width')).to.equal('200');
+          destroyVM(vm);
+          done();
+        }, 100);
+      }, DELAY);
+    });
+
+    it('min-width', (done) => {
+      const vm = createVue({
+        template: `
+          <el-table :data="testData" :fit="false">
+            <el-table-column prop="name" :min-width="width"/>
+          </el-table>
+        `,
+
+        data() {
+          return {
+            width: 100
+          };
+        },
+
+        created() {
+          this.testData = getTestData();
+        }
+      }, true);
+
+      setTimeout(() => {
+        expect(vm.$el.querySelector('.el-table__body col').getAttribute('width')).to.equal('100');
+        vm.width = 200;
+        setTimeout(() => {
+          expect(vm.$el.querySelector('.el-table__body col').getAttribute('width')).to.equal('200');
+          destroyVM(vm);
+          done();
+        }, 100);
+      }, DELAY);
+    });
+
+    it('fixed', (done) => {
+      const vm = createVue({
+        template: `
+          <el-table :data="testData">
+            <el-table-column :fixed="fixed" />
+            <el-table-column prop="release" />
+            <el-table-column prop="director" />
+            <el-table-column prop="runtime" />
+          </el-table>
+        `,
+
+        data() {
+          return {
+            fixed: false
+          };
+        },
+
+        created() {
+          this.testData = getTestData();
+        }
+      }, true);
+
+      setTimeout(() => {
+        expect(!vm.$el.querySelector('.el-table__fixed')).to.be.true;
+        vm.fixed = true;
+        setTimeout(() => {
+          expect(!!vm.$el.querySelector('.el-table__fixed')).to.be.true;
+          destroyVM(vm);
+          done();
+        }, 100);
+      }, DELAY);
+    });
+
+    it('prop', (done) => {
+      const vm = createVue({
+        template: `
+          <el-table :data="testData">
+            <el-table-column :prop="prop" />
+            <el-table-column prop="release" />
+            <el-table-column prop="director" />
+            <el-table-column prop="runtime" />
+          </el-table>
+        `,
+
+        data() {
+          return {
+            prop: 'name'
+          };
+        },
+
+        created() {
+          this.testData = getTestData();
+        }
+      }, true);
+
+      setTimeout(() => {
+        let firstColumnContent = vm.$el.querySelector('.el-table__body td .cell').textContent;
+        let secondColumnContent = vm.$el.querySelector('.el-table__body td:nth-child(2) .cell').textContent;
+        expect(firstColumnContent !== secondColumnContent).to.be.true;
+        vm.prop = 'release';
+        setTimeout(() => {
+          firstColumnContent = vm.$el.querySelector('.el-table__body td .cell').textContent;
+          secondColumnContent = vm.$el.querySelector('.el-table__body td:nth-child(2) .cell').textContent;
+          expect(firstColumnContent === secondColumnContent).to.be.true;
+          destroyVM(vm);
+          done();
+        }, 100);
+      }, DELAY);
+    });
+  });
+
+  describe('methods', () => {
+    const createTable = function(prop = '', opts) {
+      return createVue({
+        template: `
+          <el-table ref="table" :data="testData" @${prop}="handleEvent">
+            <el-table-column type="selection" />
+            <el-table-column prop="name" />
+            <el-table-column prop="release" />
+            <el-table-column prop="director" />
+            <el-table-column prop="runtime"/>
+          </el-table>
+        `,
+
+        methods: {
+          handleEvent(selection) {
+            this.fireCount++;
+            this.selection = selection;
+          }
+        },
+
+        created() {
+          this.testData = getTestData();
+        },
+
+        data() {
+          return { selection: null, testData: this.testData, fireCount: 0 };
+        }
+      }, true);
+    };
+
+    it('toggleRowSelection', () => {
+      const vm = createTable('selection-change');
+      vm.$refs.table.toggleRowSelection(vm.testData[0]);
+      expect(vm.selection).to.length(1);
+      expect(vm.fireCount).to.equal(1);
+
+      // test use second parameter
+      vm.$refs.table.toggleRowSelection(vm.testData[0], true);
+      expect(vm.fireCount).to.equal(1);
+
+      vm.$refs.table.toggleRowSelection(vm.testData[0], false);
+      expect(vm.fireCount).to.equal(2);
+      expect(vm.selection).to.length(0);
+
+      destroyVM(vm);
+    });
+
+    it('clearSelection', () => {
+      const vm = createTable('selection-change');
+      vm.$refs.table.toggleRowSelection(vm.testData[0]);
+      expect(vm.selection).to.length(1);
+      expect(vm.fireCount).to.equal(1);
+
+      // clear selection
+      vm.$refs.table.clearSelection();
+      expect(vm.fireCount).to.equal(2);
+      expect(vm.selection).to.length(0);
+
+      vm.$refs.table.clearSelection();
+      expect(vm.fireCount).to.equal(2);
+
+      destroyVM(vm);
+    });
+  });
+
   it('hover', done => {
     const vm = createVue({
       template: `
         <el-table :data="testData">
-          <el-table-column prop="name" label="片名" />
+          <el-table-column prop="name" label="片名" fixed />
           <el-table-column prop="release" label="发行日期" />
           <el-table-column prop="director" label="导演" />
           <el-table-column prop="runtime" label="时长（分）" />

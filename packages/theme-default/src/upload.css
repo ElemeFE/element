@@ -37,15 +37,17 @@
       box-sizing: border-box;
       border-radius: 4px;
       width: 100%;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
       position: relative;
 
       a {
         color: #475669;
-        transition: color .3s;
+        display: block;
+        margin-right: 40px;
+        overflow: hidden;
         padding-left: 4px;
+        text-overflow: ellipsis;
+        transition: color .3s;
+        white-space: nowrap;
 
         [class^="el-icon"] {
           color: #99a9bf;
@@ -81,7 +83,7 @@
           .el-upload__btn-delete {
             display: block;
             cursor: pointer;
-          }   
+          }
         }
       }
     }
@@ -145,7 +147,7 @@
       & img {
         display: block;
         width: 100%;
-        height: auto;
+        height: 100%;
       }
 
       @e progress {

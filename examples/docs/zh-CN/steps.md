@@ -29,7 +29,7 @@
   <el-step title="步骤 3"></el-step>
 </el-steps>
 
-<el-button style="margin-top: 12px;" @click.native="next">下一步</el-button>
+<el-button style="margin-top: 12px;" @click="next">下一步</el-button>
 
 <script>
   export default {
@@ -120,7 +120,7 @@
 |---------- |-------- |---------- |-------------  |-------- |
 | title | 标题 | string | — | — |
 | description | 描述性文字 | string | — | — |
-| icon | 图标 | Element Icon 提供的图标，如果要使用<br>自定义图标可以通过 slot 方式写入 | string | — |
+| icon | 图标 | Element Icon 提供的图标，如果要使用自定义图标可以通过 slot 方式写入 | string | — |
 
 ### Step Slot
 | name | 说明  |

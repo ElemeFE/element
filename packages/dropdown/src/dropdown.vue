@@ -1,6 +1,8 @@
 <script>
   import Clickoutside from 'element-ui/src/utils/clickoutside';
   import Emitter from 'element-ui/src/mixins/emitter';
+  import ElButton from 'element-ui/packages/button';
+  import ElButtonGroup from 'element-ui/packages/button-group';
 
   export default {
     name: 'ElDropdown',
@@ -10,6 +12,11 @@
     mixins: [Emitter],
 
     directives: { Clickoutside },
+
+    components: {
+      ElButton,
+      ElButtonGroup
+    },
 
     props: {
       trigger: {
@@ -22,7 +29,11 @@
       },
       type: String,
       size: String,
-      splitButton: Boolean
+      splitButton: Boolean,
+      hideOnClick: {
+        type: Boolean,
+        default: true
+      }
     },
 
     data() {
@@ -78,7 +89,9 @@
         }
       },
       handleMenuItemClick(command, instance) {
-        this.visible = false;
+        if (this.hideOnClick) {
+          this.visible = false;
+        }
         this.$emit('command', command, instance);
       }
     },

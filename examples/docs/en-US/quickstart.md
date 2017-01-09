@@ -45,7 +45,7 @@ Typical configurations for these config files are:
   },
   "dependencies": {
     "element-ui": "^1.0.0",
-    "vue": "^2.0.5"
+    "vue": "^2.1.6"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",
@@ -142,7 +142,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 import App from './App.vue'
 
-Vue.use(MintUI)
+Vue.use(ElementUI)
 
 new Vue({
   el: '#app',

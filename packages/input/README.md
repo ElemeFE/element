@@ -1,18 +1,18 @@
-# el-input
-> A el-input component for Vue.js.
+# element-input
+> A element-input component for Vue.js.
 
 # Demo
-http://element-component.github.io/el-input
+http://element-component.github.io/element-input
 
 # Installation
 ```shell
-npm i el-input -D
+npm i element-input -D
 ```
 
 # Usage
 ```javascript
 import Vue from 'vue'
-import ElInput from 'el-input'
+import ElInput from 'element-input'
 import 'element-theme-default/dist/input.css'
 
 Vue.use(ElInput)
@@ -22,21 +22,38 @@ or
 
 ```javascript
 import Vue from 'vue'
-import { ElInput } from 'el-input'
+import ElInput from 'element-input'
 
 Vue.component('el-input', ElInput)
 ```
 
-# Options
+### Attributes
 
-|     name    | description |     type    |   default   |
-|-------------|-------------|-------------|-------------|
-| model | 绑定值，需双向绑定 | string|number ||
-| placeholder | 输入框占位文本 | string ||
-| suggestion | 输入建议 | string[] ||
-| disabled | 是否禁用 | boolean | false |
-| cache | 是否需要缓存 | boolean | false |
-| effect | 输入框效果，允许 text, number, special | string | text |
+| 参数          | 说明            | 类型            | 可选值                 | 默认值   |
+|-------------  |---------------- |---------------- |---------------------- |-------- |
+| type         | 类型   | string  | text/textarea | text |
+| value         | 绑定值           | string, number  | — | — |
+| maxlength     | 最大输入长度      | number          |  —  | — |
+| minlength     | 最小输入长度      | number          | — | — |
+| placeholder   | 输入框占位文本    | string          | — | — |
+| disabled      | 禁用            | boolean         | — | false   |
+| size          | 输入框尺寸，只在 `type!="textarea"` 时有效      | string          | large, small, mini  | — |
+| icon          | 输入框尾部图标    | string          | — | — |
+| rows          | 输入框行数，只对 `type="textarea"` 有效  |  number | — |  2   |
+| autosize      | 自适应内容高度，只对 `type="textarea"` 有效，可传入对象，如，{ minRows: 2, maxRows: 6 }  |  boolean/object | — |  false   |
+| auto-complete | 原生属性，自动补全 | string | on, off | off |
+| name | 原生属性 | string | - | -|
+| max | 原生属性，设置最大值 | * | - | - |
+| min | 原生属性，设置最小值 | * | - | - |
+| autofocus | 原生属性，自动获取焦点 | boolean | true, false | false |
+| form | 原生属性 | string | - | - |
+
+### Events
+| 事件名称 | 说明 | 回调参数 |
+|---------|--------|---------|
+| click | 点击 Input 内的图标时触发 | event |
+| blur | 在 Input 失去焦点时触发 | event |
+| focus | 在 Input 或得焦点时触发 | event |
 
 # Development
 ```shell

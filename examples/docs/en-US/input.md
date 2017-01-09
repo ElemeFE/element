@@ -28,6 +28,8 @@
         input8: '',
         input9: '',
         textarea: '',
+        textarea2: '',
+        textarea3: '',
         select: '',
         state1: '',
         state2: '',
@@ -83,71 +85,57 @@
 <style>
   .demo-input.demo-en-US {
     .el-select .el-input {
-      width: 120px;
-    }
-    .text {
-      font-size: 14px;
-      color: #8492a6;
+      width: 110px;
     }
     .el-input {
       width: 180px;
-
-      & + .el-input,
-      & + .el-textarea {
-        margin-top: 15px;
-      }
     }
     .el-textarea {
       width: 414px;
     }
     .el-input-group {
-      min-width: 260px;
+      width: 100%;
     }
-    .el-input-group + .el-input-group {
-      margin-top: 15px;
-    }
-    .el-autocomplete {
-      display: inline-block;
-    }
-    .inline-input {
+    .demo-input-size {
       .el-input {
-        display: inline-block;
         vertical-align: top;
-        margin: 10px 5px;
-      }
-      .el-autocomplete {
-        margin: 10px 0 0;
-
-        .el-input {
-          margin: 0;
-        }
+        margin: 0 10px 10px 0;
       }
     }
-    .tac {
+    .demo-autocomplete {
       text-align: center;
+
+      .sub-title {
+        margin-bottom: 10px;
+        font-size: 14px;
+        color: #8492a6;
+      }
+
+      .el-col:not(:last-child) {
+        border-right: 1px solid rgba(224,230,237,0.50);
+      }
 
       .el-autocomplete {
         text-align: left;
       }
     }
-    .el-row.border-grid {
-      .el-col:not(:last-child) {
-        border-right: 1px solid rgba(224,230,237,0.50);
-      }
-    }
-    .my-autocomplete {
-      li {
-        line-height: normal;
-        padding: 7px *;
+  }
+  .el-autocomplete__suggestions.my-autocomplete {
+    li {
+      line-height: normal;
+      padding: 7px *;
 
-        .value {
-          text-overflow: ellipsis;
-          overflow: hidden;
-        }
-        .link {
-          font-size: 12px;
-          color: #b4b4b4;
-        }
+      .name {
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      .addr {
+        font-size: 12px;
+        color: #b4b4b4;
+      }
+
+      .highlighted .addr {
+        color: #ddd;
       }
     }
   }
@@ -162,10 +150,7 @@ Input data using mouse or keyboard.
 ::: demo
 
 ```html
-<el-input
-  placeholder="Please input"
-  v-model="input">
-</el-input>
+<el-input placeholder="Please input" v-model="input"></el-input>
 
 <script>
 export default {
@@ -235,14 +220,14 @@ export default {
 
 ### Textarea
 
-Resizable for entering multiple lines of text information.
+Resizable for entering multiple lines of text information. Add attribute `type="textarea"` to change `input` into native `textarea`.
 
-::: demo Add attribute `type="textarea"` to change `input` into native `textarea`.
+::: demo Control the height by setting the `rows` prop.
 
 ```html
 <el-input
   type="textarea"
-  :autosize="{ minRows: 2, maxRows: 4}"
+  :rows="2"
   placeholder="Please input"
   v-model="textarea">
 </el-input>
@@ -259,6 +244,40 @@ export default {
 ```
 :::
 
+### Autosize Textarea
+
+Setting the `autosize` prop for a textarea type of Input makes the height to automatically adjust based on the content. An options object can be provided to `autosize` to specify the minimum and maximum number of lines the textarea can automatically adjust.
+
+::: demo
+
+```html
+<el-input
+  type="textarea"
+  autosize
+  placeholder="Please input"
+  v-model="textarea2">
+</el-input>
+<div style="margin: 20px 0;"></div>
+<el-input
+  type="textarea"
+  :autosize="{ minRows: 2, maxRows: 4}"
+  placeholder="Please input"
+  v-model="textarea3">
+</el-input>
+
+<script>
+export default {
+  data() {
+    return {
+      textarea2: '',
+      textarea3: ''
+    }
+  }
+}
+</script>
+```
+:::
+
 ### Mixed input
 
 Prepend or append an element, generally a label or a button.
@@ -266,27 +285,31 @@ Prepend or append an element, generally a label or a button.
 ::: demo Use `slot` to distribute elements that prepend or append to Input.
 
 ```html
-<el-input placeholder="Please input" v-model="input3">
-  <template slot="prepend">Http://</template>
-</el-input>
-<el-input placeholder="Please input" v-model="input4">
-  <template slot="append">.com</template>
-</el-input>
-<el-input placeholder="Please input" v-model="input5" style="width: 300px;">
-  <el-select v-model="select" slot="prepend" placeholder="Select">
-    <el-option label="Restaurant" value="1"></el-option>
-    <el-option label="Order No." value="2"></el-option>
-    <el-option label="Tel" value="3"></el-option>
-  </el-select>
-  <el-button slot="append" icon="search"></el-button>
-</el-input>
-
+<div>
+  <el-input placeholder="请输入内容" v-model="input3">
+    <template slot="prepend">Http://</template>
+  </el-input>
+</div>
+<div style="margin-top: 15px;">
+  <el-input placeholder="请输入内容" v-model="input4">
+    <template slot="append">.com</template>
+  </el-input>
+</div>
+<div style="margin-top: 15px;">
+  <el-input placeholder="请输入内容" v-model="input5">
+    <el-select v-model="select" slot="prepend" placeholder="请选择">
+      <el-option label="餐厅名" value="1"></el-option>
+      <el-option label="订单号" value="2"></el-option>
+      <el-option label="用户电话" value="3"></el-option>
+    </el-select>
+    <el-button slot="append" icon="search"></el-button>
+  </el-input>
+</div>
 <style>
-.el-select .el-input {
-  width: 120px;
-}
+  .el-select .el-input {
+    width: 110px;
+  }
 </style>
-
 <script>
 export default {
   data() {
@@ -306,24 +329,24 @@ export default {
 
 ::: demo Add `size` attribute to change the size of Input. In addition to the default size, there are three other options: `large`, `small` and `mini`.
 ```html
-<div class="inline-input">
+<div class="demo-input-size">
   <el-input
     size="large"
-    placeholder="Please input"
+    placeholder="请输入内容"
     v-model="input6">
   </el-input>
   <el-input
-    placeholder="Please input"
+    placeholder="请输入内容"
     v-model="input7">
   </el-input>
   <el-input
     size="small"
-    placeholder="Please input"
+    placeholder="请输入内容"
     v-model="input8">
   </el-input>
   <el-input
     size="mini"
-    placeholder="Please input"
+    placeholder="请输入内容"
     v-model="input9">
   </el-input>
 </div>
@@ -343,28 +366,30 @@ export default {
 ```
 :::
 
-### Auto complete
+### Autocomplete
 
 You can get some recommended tips based on the current input.
 
 ::: demo Autocomplete component provides input suggestions. The `fetch-suggestions` attribute is a method that returns suggested input. In this example, `querySearch(queryString, cb)` returns suggestions to Autocomplete via `cb(data)` when suggestions are ready.
 ```html
-<el-row class="inline-input border-grid">
-  <el-col :span="12" class="tac">
-    <div class="text">list suggestions when activated</div>
+<el-row class="demo-autocomplete">
+  <el-col :span="12">
+    <div class="sub-title">激活即列出输入建议</div>
     <el-autocomplete
+      class="inline-input"
       v-model="state1"
       :fetch-suggestions="querySearch"
-      placeholder="Please input"
+      placeholder="请输入内容"
       @select="handleSelect"
     ></el-autocomplete>
   </el-col>
-  <el-col :span="12" class="tac">
-    <div class="text">list suggestions on input</div>
+  <el-col :span="12">
+    <div class="sub-title">输入后匹配输入建议</div>
     <el-autocomplete
+      class="inline-input"
       v-model="state2"
       :fetch-suggestions="querySearch"
-      placeholder="Please input"
+      placeholder="请输入内容"
       :trigger-on-focus="false"
       @select="handleSelect"
     ></el-autocomplete>
@@ -421,7 +446,7 @@ Customize how suggestions are displayed.
 :::demo
 ```html
 <el-autocomplete
-  class="my-autocomplete"
+  popper-class="my-autocomplete"
   v-model="state3"
   :fetch-suggestions="querySearch"
   custom-item="my-item-en"
@@ -580,6 +605,7 @@ Search data from server-side.
 |name | same as `name` in native input | string | — | — |
 |max | same as `max` in native input | * | — | — |
 |min | same as `min` in native input | * | — | — |
+|resize| control the resizability | string | none, both, horizontal, vertical | — |
 |autofocus | same as `autofocus` in native input | boolean | — | false |
 |form | same as `form` in native input | string | — | — |
 
@@ -588,7 +614,10 @@ Search data from server-side.
 
 | Event Name | Description | Parameters |
 |----| ----| ----|
-|click | triggers when the icon inside Input is clicked | event object |
+|click | triggers when the icon inside Input is clicked | (event: Event) |
+| blur | triggers when the icon inside Input is blur | (event: Event) |
+| focus | triggers when the icon inside Input is focus | (event: Event) |
+| change | triggers when the icon inside Input value change | (value: string \| number) |
 
 ### Autocomplete Attributes
 
@@ -599,6 +628,8 @@ Attribute | Description | Type | Options | Default
 |value | binding value | string | — | — |
 |custom-item | component name of your customized suggestion list item | string | — | — |
 |fetch-suggestions | a method to fetch input suggestions. When suggestions are ready, invoke `callback(data:[])` to return them to Autocomplete | Function(queryString, callback) | — | — |
+| popper-class | custom class name for autocomplete's dropdown | string | — | — |
+| trigger-on-focus | whether show suggestions when input focus | boolean | — | true |
 
 ### Autocomplete Events
 

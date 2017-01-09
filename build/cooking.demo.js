@@ -1,6 +1,7 @@
 var cooking = require('cooking');
 var config = require('./config');
 var md = require('markdown-it')();
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 var striptags = require('./strip-tags');
 var slugify = require('transliteration').slugify;
 var isProd = process.env.NODE_ENV === 'production';
@@ -26,9 +27,10 @@ cooking.set({
       favicon: './examples/favicon.ico'
     }
   ],
-  publicPath: process.env.CI_ENV || '/',
+  publicPath: process.env.CI_ENV || '',
   hash: true,
   devServer: {
+    hostname: '0.0.0.0',
     port: 8085,
     log: false,
     publicPath: '/'
@@ -42,6 +44,11 @@ cooking.set({
   extends: ['vue2', 'lint'],
   postcss: config.postcss
 });
+
+// fix publicPath
+if (!process.env.CI_ENV) {
+  cooking.add('output.publicPath', '');
+}
 
 cooking.add('loader.md', {
   test: /\.md$/,
@@ -107,5 +114,8 @@ if (isProd) {
   cooking.add('externals.vue-router', 'VueRouter');
 }
 
+cooking.add('plugin.CopyWebpackPlugin', new CopyWebpackPlugin([
+  { from: 'examples/versions.json' }
+]));
 cooking.add('vue.preserveWhitespace', false);
 module.exports = cooking.resolve();

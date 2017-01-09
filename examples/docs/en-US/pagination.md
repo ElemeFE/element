@@ -1,4 +1,4 @@
-## Pagination 
+## Pagination
 
 If you have too much data to display in one page, use pagination.
 
@@ -51,7 +51,7 @@ Add more modules based on your scenario.
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="5"
+      :current-page="currentPage1"
       :page-size="100"
       layout="total, prev, pager, next"
       :total="1000">
@@ -62,7 +62,7 @@ Add more modules based on your scenario.
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="5"
+      :current-page="currentPage2"
       :page-sizes="[100, 200, 300, 400]"
       :page-size="100"
       layout="sizes, prev, pager, next"
@@ -74,7 +74,7 @@ Add more modules based on your scenario.
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="5"
+      :current-page="currentPage3"
       :page-size="100"
       layout="prev, pager, next, jumper"
       :total="1000">
@@ -85,7 +85,7 @@ Add more modules based on your scenario.
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="5"
+      :current-page="currentPage4"
       :page-sizes="[100, 200, 300, 400]"
       :page-size="100"
       layout="total, sizes, prev, pager, next, jumper"
@@ -100,20 +100,39 @@ Add more modules based on your scenario.
         console.log(`${val} items per page`);
       },
       handleCurrentChange(val) {
+        this.currentPage = val;
         console.log(`current page: ${val}`);
       }
+    },
+    data() {
+      return {
+        currentPage1: 5,
+        currentPage2: 5,
+        currentPage3: 5,
+        currentPage4: 4
+      };
     }
   }
 </script>
 ```
 :::
 <script>
+  import { addClass } from 'element-ui/src/utils/dom';
   export default {
+    data() {
+      return {
+        currentPage1: 5,
+        currentPage2: 5,
+        currentPage3: 5,
+        currentPage4: 4
+      };
+    },
     methods: {
       handleSizeChange(val) {
         console.log(`${val} items per page`);
       },
       handleCurrentChange(val) {
+        this.currentPage = val;
         console.log(`current page: ${val}`);
       }
     },
@@ -122,8 +141,8 @@ Add more modules based on your scenario.
         let demos = document.querySelectorAll('.source');
         let firstDemo = demos[0];
         let lastDemo = demos[demos.length - 1];
-        firstDemo.classList.add('first');
-        lastDemo.classList.add('last');
+        addClass(firstDemo, 'first');
+        addClass(lastDemo, 'last');
       });
     }
   }
@@ -137,7 +156,7 @@ Add more modules based on your scenario.
 | total | total item count | number | — | — |
 | page-count | total page count. Set either `total` or `page-count` and pages will be displayed; if you need `page-sizes`, `total` is required | number | — | — |
 | current-page | current page number | number | — | 1 |
-| layout | layout of Pagination, elements separated with a comma | string | `sizes`, `prev`, `pager`, `next`, `jumper`, `->`, `total` | 'prev, pager, next, jumper, ->, total'  |
+| layout | layout of Pagination, elements separated with a comma | string | `sizes`, `prev`, `pager`, `next`, `jumper`, `->`, `total`, `slot` | 'prev, pager, next, jumper, ->, total'  |
 | page-sizes | options of item count per page | number[] | — |  [10, 20, 30, 40, 50, 100] |
 
 ### Events
@@ -145,3 +164,8 @@ Add more modules based on your scenario.
 |---------|--------|---------|
 | size-change | triggers when `page-size` changes | the new `page-size` |
 | current-change | triggers when `current-page` changes | the new `current-page` |
+
+### Slot
+| Name | Description |
+| --- | --- |
+| — | custom content. To use this, you need to declare `slot` in `layout` |

@@ -9,13 +9,7 @@
     <tbody>
     <tr>
       <th v-if="showWeekNumber">{{ t('el.datepicker.week') }}</th>
-      <th>{{ t('el.datepicker.weeks.sun') }}</th>
-      <th>{{ t('el.datepicker.weeks.mon') }}</th>
-      <th>{{ t('el.datepicker.weeks.tue') }}</th>
-      <th>{{ t('el.datepicker.weeks.wed') }}</th>
-      <th>{{ t('el.datepicker.weeks.thu') }}</th>
-      <th>{{ t('el.datepicker.weeks.fri') }}</th>
-      <th>{{ t('el.datepicker.weeks.sat') }}</th>
+      <th v-for="week in WEEKS">{{ t('el.datepicker.weeks.' + week) }}</th>
     </tr>
     <tr
       class="el-date-table__row"
@@ -32,9 +26,10 @@
 
 <script>
   import { getFirstDayOfMonth, getDayCountOfMonth, getWeekNumber, getStartDateOfMonth, DAY_DURATION } from '../util';
-  import { hasClass } from 'wind-dom/src/class';
+  import { hasClass } from 'element-ui/src/utils/dom';
   import Locale from 'element-ui/src/mixins/locale';
 
+  const WEEKS = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
   const clearHours = function(time) {
     const cloneDate = new Date(time);
     cloneDate.setHours(0, 0, 0, 0);
@@ -45,6 +40,12 @@
     mixins: [Locale],
 
     props: {
+      firstDayOfWeek: {
+        default: 7,
+        type: Number,
+        validator: val => val >= 1 && val <= 7
+      },
+
       date: {},
 
       year: {},
@@ -83,6 +84,17 @@
     },
 
     computed: {
+      offsetDay() {
+        const week = this.firstDayOfWeek;
+        // 周日为界限，左右偏移的天数，3217654 例如周一就是 -1，目的是调整前两行日期的位置
+        return week > 3 ? 7 - week : -week;
+      },
+
+      WEEKS() {
+        const week = this.firstDayOfWeek;
+        return WEEKS.concat(WEEKS).slice(week, week + 7);
+      },
+
       monthDate() {
         return this.date.getDate();
       },
@@ -99,6 +111,7 @@
 
         day = (day === 0 ? 7 : day);
 
+        const offset = this.offsetDay;
         const rows = this.tableRows;
         let count = 1;
         let firstDayPosition;
@@ -125,7 +138,7 @@
             cell.type = 'normal';
 
             const index = i * 7 + j;
-            const time = startDate.getTime() + DAY_DURATION * index;
+            const time = startDate.getTime() + DAY_DURATION * (index - offset);
             cell.inRange = time >= clearHours(this.minDate) && time <= clearHours(this.maxDate);
             cell.start = this.minDate && time === clearHours(this.minDate);
             cell.end = this.maxDate && time === clearHours(this.maxDate);
@@ -135,14 +148,14 @@
               cell.type = 'today';
             }
 
-            if (i === 0) {
-              if (j >= day) {
+            if (i >= 0 && i <= 1) {
+              if (j + i * 7 >= (day + offset)) {
                 cell.text = count++;
                 if (count === 2) {
                   firstDayPosition = i * 7 + j;
                 }
               } else {
-                cell.text = dateCountOfLastMonth - (day - j % 7) + 1;
+                cell.text = dateCountOfLastMonth - (day + offset - j % 7) + 1 + i * 7;
                 cell.type = 'prev-month';
               }
             } else {
@@ -231,7 +244,7 @@
         }
 
         if (selectionMode === 'day' && (cell.type === 'normal' || cell.type === 'today') &&
-          this.year === this.date.getFullYear() && this.month === this.date.getMonth() && monthDate === Number(cell.text)) {
+          Number(this.year) === this.date.getFullYear() && this.month === this.date.getMonth() && monthDate === Number(cell.text)) {
           classes.push('current');
         }
 
@@ -354,8 +367,8 @@
           target = target.parentNode.cells[1];
         }
 
-        let year = this.year;
-        let month = this.month;
+        let year = Number(this.year);
+        let month = Number(this.month);
 
         const cellIndex = target.cellIndex;
         const rowIndex = target.parentNode.rowIndex;
@@ -364,9 +377,7 @@
         const text = cell.text;
         const className = target.className;
 
-        const newDate = new Date(this.year, this.month, 1);
-
-        const clickNormalCell = className.indexOf('prev') === -1 && className.indexOf('next') === -1;
+        const newDate = new Date(year, month, 1);
 
         if (className.indexOf('prev') !== -1) {
           if (month === 0) {
@@ -390,7 +401,7 @@
 
         newDate.setDate(parseInt(text, 10));
 
-        if (clickNormalCell && this.selectionMode === 'range') {
+        if (this.selectionMode === 'range') {
           if (this.minDate && this.maxDate) {
             const minDate = new Date(newDate.getTime());
             const maxDate = null;
@@ -419,9 +430,7 @@
             this.rangeState.selecting = true;
             this.markRange(this.minDate);
           }
-        }
-
-        if (selectionMode === 'day') {
+        } else if (selectionMode === 'day') {
           this.$emit('pick', newDate);
         } else if (selectionMode === 'week') {
           var weekNumber = getWeekNumber(newDate);

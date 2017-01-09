@@ -1,10 +1,10 @@
 ## Installation
 
 ### npm
-Installing with npm is recommended, for it works seamlessly with [webpack](https://webpack.js.org/).
+Installing with npm is recommended and it works seamlessly with [webpack](https://webpack.js.org/).
 
 ```shell
-npm i element-ui -D
+npm i element-ui -S
 ```
 
 ### CDN
@@ -30,13 +30,13 @@ If you are using CDN, a hello-world page is easy with Element. [Online Demo](htt
 </head>
 <body>
   <div id="app">
-    <el-button @click.native="visible = true">Button</el-button>
+    <el-button @click="visible = true">Button</el-button>
     <el-dialog v-model="visible" title="Hello world">
       <p>Try Element</p>
     </el-dialog>
   </div>
 </body>
-  <!-- import Vue before Mint UI -->
+  <!-- import Vue before Element -->
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
   <!-- import JavaScript -->
   <script src="https://unpkg.com/element-ui/lib/index.js"></script>

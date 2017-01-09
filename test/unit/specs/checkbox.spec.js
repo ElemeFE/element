@@ -67,6 +67,33 @@ describe('Checkbox', () => {
       done();
     });
   });
+
+  it('nested group', done => {
+    vm = createVue({
+      template: `
+        <el-checkbox-group v-model="checkList">
+          <el-row>
+            <el-checkbox label="a" ref="a"></el-checkbox>
+            <el-checkbox label="b" ref="b"></el-checkbox>
+            <el-checkbox label="c" ref="c"></el-checkbox>
+            <el-checkbox label="d" ref="d"></el-checkbox>
+          </el-row>
+        </el-checkbox-group>
+      `,
+      data() {
+        return {
+          checkList: []
+        };
+      }
+    }, true);
+    expect(vm.checkList.length === 0).to.be.true;
+    vm.$refs.a.$el.click();
+    vm.$nextTick(_ => {
+      expect(vm.checkList.indexOf('a') !== -1).to.be.true;
+      done();
+    });
+  });
+
   it('true false label', done => {
     vm = createVue({
       template: `

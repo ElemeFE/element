@@ -5,7 +5,7 @@
         class="el-popover"
         :class="[popperClass]"
         ref="popper"
-        v-show="showPopper"
+        v-show="!disabled && showPopper"
         :style="{ width: width + 'px' }">
         <div class="el-popover__title" v-if="title" v-text="title"></div>
         <slot>{{ content }}</slot>
@@ -17,10 +17,10 @@
 
 <script>
 import Popper from 'element-ui/src/utils/vue-popper';
-import { on, off } from 'wind-dom/src/event';
+import { on, off } from 'element-ui/src/utils/dom';
 
 export default {
-  name: 'el-popover',
+  name: 'ElPopover',
 
   mixins: [Popper],
 
@@ -31,6 +31,7 @@ export default {
       validator: value => ['click', 'focus', 'hover', 'manual'].indexOf(value) > -1
     },
     title: String,
+    disabled: Boolean,
     content: String,
     reference: {},
     popperClass: String,
@@ -41,6 +42,12 @@ export default {
     transition: {
       type: String,
       default: 'fade-in-linear'
+    }
+  },
+
+  watch: {
+    showPopper(newVal, oldVal) {
+      newVal ? this.$emit('show') : this.$emit('hide');
     }
   },
 

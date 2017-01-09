@@ -3,66 +3,140 @@ import ElTag from 'element-ui/packages/tag';
 import Vue from 'vue';
 import FilterPanel from './filter-panel.vue';
 
+const getAllColumns = (columns) => {
+  const result = [];
+  columns.forEach((column) => {
+    if (column.children) {
+      result.push(column);
+      result.push.apply(result, getAllColumns(column.children));
+    } else {
+      result.push(column);
+    }
+  });
+  return result;
+};
+
+const convertToRows = (originColumns) => {
+  let maxLevel = 1;
+  const traverse = (column, parent) => {
+    if (parent) {
+      column.level = parent.level + 1;
+      if (maxLevel < column.level) {
+        maxLevel = column.level;
+      }
+    }
+    if (column.children) {
+      let childrenMax = 1;
+      let colSpan = 0;
+      column.children.forEach((subColumn) => {
+        const temp = traverse(subColumn, column);
+        if (temp > childrenMax) {
+          childrenMax = temp;
+        }
+        colSpan += subColumn.colSpan;
+      });
+      column.colSpan = colSpan;
+    } else {
+      column.colSpan = 1;
+    }
+  };
+
+  originColumns.forEach((column) => {
+    column.level = 1;
+    traverse(column);
+  });
+
+  const rows = [];
+  for (let i = 0; i < maxLevel; i++) {
+    rows.push([]);
+  }
+
+  const allColumns = getAllColumns(originColumns);
+
+  allColumns.forEach((column) => {
+    if (!column.children) {
+      column.rowSpan = maxLevel - column.level + 1;
+    } else {
+      column.rowSpan = 1;
+    }
+    rows[column.level - 1].push(column);
+  });
+
+  return rows;
+};
+
 export default {
-  name: 'el-table-header',
+  name: 'ElTableHeader',
 
   render(h) {
+    const originColumns = this.store.states.originColumns;
+    const columnRows = convertToRows(originColumns, this.columns);
+
     return (
       <table
         class="el-table__header"
         cellspacing="0"
         cellpadding="0"
         border="0">
-        {
-          this._l(this.columns, column =>
-            <col
-              name={ column.id }
-              width={ column.realWidth || column.width }
-            />)
-        }
-        {
-          !this.fixed && this.layout.gutterWidth
-            ? <col name="gutter" width={ this.layout.scrollY ? this.layout.gutterWidth : '' }></col>
-            : ''
-        }
+        <colgroup>
+          {
+            this._l(this.columns, column =>
+              <col
+                name={ column.id }
+                width={ column.realWidth || column.width }
+              />)
+          }
+          {
+            !this.fixed && this.layout.gutterWidth
+              ? <col name="gutter" width={ this.layout.scrollY ? this.layout.gutterWidth : '' }></col>
+              : ''
+          }
+        </colgroup>
         <thead>
-          <tr>
-            {
-              this._l(this.columns, (column, cellIndex) =>
-                <th
-                  on-mousemove={ ($event) => this.handleMouseMove($event, column) }
-                  on-mouseout={ this.handleMouseOut }
-                  on-mousedown={ ($event) => this.handleMouseDown($event, column) }
-                  class={ [column.id, column.order, column.align, column.className || '', this.isCellHidden(cellIndex) ? 'is-hidden' : ''] }>
-                  <div class={ ['cell', column.filteredValue && column.filteredValue.length > 0 ? 'highlight' : ''] }>
-                  {
-                    column.renderHeader
-                      ? column.renderHeader.call(this._renderProxy, h, { column, $index: cellIndex, store: this.store, _self: this.$parent.$vnode.context })
-                      : column.label
-                  }
-                  {
-                    column.sortable
-                      ? <span class="caret-wrapper" on-click={ ($event) => this.handleHeaderClick($event, column) }>
-                          <i class="sort-caret ascending"></i>
-                          <i class="sort-caret descending"></i>
-                        </span>
-                      : ''
-                  }
-                  {
-                    column.filterable
-                      ? <span class="el-table__column-filter-trigger" on-click={ ($event) => this.handleFilterClick($event, column) }><i class={ ['el-icon-arrow-down', column.filterOpened ? 'el-icon-arrow-up' : ''] }></i></span>
-                      : ''
-                  }
-                  </div>
-                </th>
-              )
-            }
-            {
-              !this.fixed && this.layout.gutterWidth
-                ? <th class="gutter" style={{ width: this.layout.scrollY ? this.layout.gutterWidth + 'px' : '0' }}></th>
-                : ''
-            }
-          </tr>
+          {
+            this._l(columnRows, (columns, rowIndex) =>
+              <tr>
+              {
+                this._l(columns, (column, cellIndex) =>
+                  <th
+                    colspan={ column.colSpan }
+                    rowspan={ column.rowSpan }
+                    on-mousemove={ ($event) => this.handleMouseMove($event, column) }
+                    on-mouseout={ this.handleMouseOut }
+                    on-mousedown={ ($event) => this.handleMouseDown($event, column) }
+                    on-click={ ($event) => this.handleClick($event, column) }
+                    class={ [column.id, column.order, column.headerAlign, column.className || '', rowIndex === 0 && this.isCellHidden(cellIndex) ? 'is-hidden' : '', !column.children ? 'is-leaf' : ''] }>
+                    <div class={ ['cell', column.filteredValue && column.filteredValue.length > 0 ? 'highlight' : ''] }>
+                    {
+                      column.renderHeader
+                        ? column.renderHeader.call(this._renderProxy, h, { column, $index: cellIndex, store: this.store, _self: this.$parent.$vnode.context })
+                        : column.label
+                    }
+                    {
+                      column.sortable
+                        ? <span class="caret-wrapper" on-click={ ($event) => this.handleHeaderClick($event, column) }>
+                            <i class="sort-caret ascending"></i>
+                            <i class="sort-caret descending"></i>
+                          </span>
+                        : ''
+                    }
+                    {
+                      column.filterable
+                         ? <span class="el-table__column-filter-trigger" on-click={ ($event) => this.handleFilterClick($event, column) }><i class={ ['el-icon-arrow-down', column.filterOpened ? 'el-icon-arrow-up' : ''] }></i></span>
+                        : ''
+                    }
+                    </div>
+                  </th>
+                )
+              }
+              {
+                !this.fixed && this.layout.gutterWidth
+                  ? <th class="gutter" style={{ width: this.layout.scrollY ? this.layout.gutterWidth + 'px' : '0' }}></th>
+                  : ''
+              }
+              </tr>
+            )
+          }
         </thead>
       </table>
     );
@@ -76,7 +150,12 @@ export default {
     layout: {
       required: true
     },
-    border: Boolean
+    border: Boolean,
+    defaultSortProp: String,
+    defaultSortOrder: {
+      type: String,
+      default: 'ascending'
+    }
   },
 
   components: {
@@ -108,6 +187,23 @@ export default {
 
   created() {
     this.filterPanels = {};
+  },
+
+  mounted() {
+    const states = this.store.states;
+    states.sortProp = this.defaultSortProp;
+    states.sortOrder = this.defaultSortOrder;
+
+    this.$nextTick(_ => {
+      for (let i = 0, length = this.columns.length; i < length; i++) {
+        if (this.columns[i].property === this.defaultSortProp) {
+          this.columns[i].order = this.defaultSortOrder;
+          break;
+        }
+      }
+
+      this.store.commit('changeSortCondition');
+    });
   },
 
   beforeDestroy() {
@@ -154,7 +250,7 @@ export default {
         filterPanel.table = table;
         filterPanel.cell = cell;
         filterPanel.column = column;
-        filterPanel.$mount(document.createElement('div'));
+        !this.$isServer && filterPanel.$mount(document.createElement('div'));
       }
 
       setTimeout(() => {
@@ -162,7 +258,13 @@ export default {
       }, 16);
     },
 
+    handleClick(event, column) {
+      this.$parent.$emit('header-click', column, event);
+    },
+
     handleMouseDown(event, column) {
+      if (this.$isServer) return;
+      if (column.children && column.children.length > 0) return;
       /* istanbul ignore if */
       if (this.draggingColumn && this.border) {
         this.dragging = true;
@@ -229,6 +331,7 @@ export default {
     },
 
     handleMouseMove(event, column) {
+      if (column.children && column.children.length > 0) return;
       let target = event.target;
       while (target && target.tagName !== 'TH') {
         target = target.parentNode;
@@ -239,7 +342,7 @@ export default {
       if (!this.dragging && this.border) {
         let rect = target.getBoundingClientRect();
 
-        var bodyStyle = document.body.style;
+        const bodyStyle = document.body.style;
         if (rect.width > 12 && rect.right - event.pageX < 8) {
           bodyStyle.cursor = 'col-resize';
           this.draggingColumn = column;
@@ -251,10 +354,20 @@ export default {
     },
 
     handleMouseOut() {
+      if (this.$isServer) return;
       document.body.style.cursor = '';
     },
 
+    toggleOrder(column) {
+      if (column.order === 'ascending') {
+        return 'descending';
+      }
+      return 'ascending';
+    },
+
     handleHeaderClick(event, column) {
+      let order = this.toggleOrder(column);
+
       let target = event.target;
       while (target && target.tagName !== 'TH') {
         target = target.parentNode;
@@ -282,15 +395,14 @@ export default {
         sortProp = column.property;
       }
 
-      if (!column.order) {
-        sortOrder = column.order = 'ascending';
-      } else if (column.order === 'ascending') {
-        sortOrder = column.order = 'descending';
-      } else {
+      if (column.order === order) {
         sortOrder = column.order = null;
         states.sortingColumn = null;
         sortProp = null;
+      } else {
+        sortOrder = column.order = order;
       }
+
       states.sortProp = sortProp;
       states.sortOrder = sortOrder;
 

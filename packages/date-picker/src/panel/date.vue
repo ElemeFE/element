@@ -1,15 +1,15 @@
 <template>
-  <transition name="md-fade-bottom" @after-leave="$emit('dodestroy')">
+  <transition name="el-zoom-in-top" @after-leave="$emit('dodestroy')">
     <div
       v-show="visible"
       :style="{
         width: width + 'px'
       }"
       class="el-picker-panel el-date-picker"
-      :class="{
+      :class="[{
         'has-sidebar': $slots.sidebar || shortcuts,
         'has-time': showTime
-      }">
+      }, popperClass]">
       <div class="el-picker-panel__body-wrapper">
         <slot name="sidebar" class="el-picker-panel__sidebar"></slot>
         <div class="el-picker-panel__sidebar" v-if="shortcuts">
@@ -20,22 +20,22 @@
             @click="handleShortcutClick(shortcut)">{{ shortcut.text }}</button>
         </div>
         <div class="el-picker-panel__body">
-         <div class="el-date-picker__time-header" v-if="showTime">
+          <div class="el-date-picker__time-header" v-if="showTime">
             <span class="el-date-picker__editor-wrap">
-              <input
-                :placehoder="t('el.datepicker.selectDate')"
-                type="text"
-                v-model.lazy="visibleDate"
-                class="el-date-picker__editor">
+              <el-input
+                :placeholder="t('el.datepicker.selectDate')"
+                :value="visibleDate"
+                size="small"
+                @change.native="visibleDate = $event.target.value" />
             </span>
             <span class="el-date-picker__editor-wrap">
-              <input
+              <el-input
                 ref="input"
                 @focus="timePickerVisible = !timePickerVisible"
-                v-model.lazy="visibleTime"
-                :placehoder="t('el.datepicker.selectTime')"
-                type="text"
-                class="el-date-picker__editor">
+                :placeholder="t('el.datepicker.selectTime')"
+                :value="visibleTime"
+                size="small"
+                @change.native="visibleTime = $event.target.value" />
               <time-picker
                 ref="timepicker"
                 :date="date"
@@ -88,6 +88,7 @@
               :value="value"
               :week="week"
               :selection-mode="selectionMode"
+              :first-day-of-week="firstDayOfWeek"
               :disabled-date="disabledDate">
             </date-table>
             <year-table
@@ -128,6 +129,11 @@
 <script type="text/babel">
   import { formatDate, parseDate } from '../util';
   import Locale from 'element-ui/src/mixins/locale';
+  import ElInput from 'element-ui/packages/input';
+  import TimePicker from './time';
+  import YearTable from '../basic/year-table';
+  import MonthTable from '../basic/month-table';
+  import DateTable from '../basic/date-table';
 
   export default {
     mixins: [Locale],
@@ -137,7 +143,7 @@
         /* istanbul ignore if */
         if (!val) return;
         this.$nextTick(_ => {
-          const inputElm = this.$refs.input;
+          const inputElm = this.$refs.input.$el;
           if (inputElm) {
             this.pickerWidth = inputElm.getBoundingClientRect().width + 10;
           }
@@ -145,6 +151,7 @@
       },
 
       value(newVal) {
+        if (!newVal) return;
         newVal = new Date(newVal);
         if (!isNaN(newVal)) {
           if (typeof this.disabledDate === 'function' &&
@@ -228,6 +235,8 @@
           this.$refs.yearTable.nextTenYear();
         } else {
           this.year++;
+          this.date.setFullYear(this.year);
+          this.resetDate();
         }
       },
 
@@ -236,6 +245,8 @@
           this.$refs.yearTable.prevTenYear();
         } else {
           this.year--;
+          this.date.setFullYear(this.year);
+          this.resetDate();
         }
       },
 
@@ -306,7 +317,7 @@
 
         this.date.setFullYear(year);
         if (this.selectionMode === 'year') {
-          this.$emit('pick', year);
+          this.$emit('pick', new Date(year));
         } else {
           this.currentView = 'month';
         }
@@ -341,10 +352,7 @@
     },
 
     components: {
-      TimePicker: require('./time'),
-      YearTable: require('../basic/year-table'),
-      MonthTable: require('../basic/month-table'),
-      DateTable: require('../basic/date-table')
+      TimePicker, YearTable, MonthTable, DateTable, ElInput
     },
 
     mounted() {
@@ -360,6 +368,7 @@
 
     data() {
       return {
+        popperClass: '',
         pickerWidth: 0,
         date: new Date(),
         value: '',
@@ -369,6 +378,7 @@
         visible: false,
         currentView: 'date',
         disabledDate: '',
+        firstDayOfWeek: 7,
         year: null,
         month: null,
         week: null,
@@ -426,7 +436,10 @@
         const yearTranslation = this.t('el.datepicker.year');
         if (this.currentView === 'year') {
           const startYear = Math.floor(year / 10) * 10;
-          return startYear + ' ' + yearTranslation + '-' + (startYear + 9) + ' ' + yearTranslation;
+          if (yearTranslation) {
+            return startYear + ' ' + yearTranslation + ' - ' + (startYear + 9) + ' ' + yearTranslation;
+          }
+          return startYear + ' - ' + (startYear + 9);
         }
         return this.year + ' ' + yearTranslation;
       }

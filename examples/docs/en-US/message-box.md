@@ -91,7 +91,7 @@ Alert interrupts user operation until the user confirms.
 
 ```html
 <template>
-  <el-button type="text" @click.native="open">Click to open the Message Box</el-button>
+  <el-button type="text" @click="open">Click to open the Message Box</el-button>
 </template>
 
 <script>
@@ -122,7 +122,7 @@ Confirm is used to ask users' confirmation.
 
 ```html
 <template>
-  <el-button type="text" @click.native="open2">Click to open the Message Box</el-button>
+  <el-button type="text" @click="open2">Click to open the Message Box</el-button>
 </template>
 
 <script>
@@ -160,7 +160,7 @@ Prompt is used when user input is required.
 
 ```html
 <template>
-  <el-button type="text" @click.native="open3">Click to open Message Box</el-button>
+  <el-button type="text" @click="open3">Click to open Message Box</el-button>
 </template>
 
 <script>
@@ -198,7 +198,7 @@ Can be customized to show various content.
 
 ```html
 <template>
-  <el-button type="text" @click.native="open4">Click to open Message Box</el-button>
+  <el-button type="text" @click="open4">Click to open Message Box</el-button>
 </template>
 
 <script>
@@ -244,7 +244,9 @@ The corresponding methods are: `MessageBox`, `MessageBox.alert`, `MessageBox.con
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | title | title of the MessageBox | string | — | — |
 | message | content of the MessageBox | string | — | — |
-| type | message type, used for icon display | string | success/info/<br>warning/error | — |
+| type | message type, used for icon display | string | success/info/warning/error | — |
+| customClass | custom class name for MessageBox | string | — | — |
+| callback | MessageBox closing callback if you don't prefer Promise | function(action), where action can be 'confirm' or 'cancel' | — | — |
 | lockScroll | whether to lock body scroll when MessageBox prompts | boolean | — | true |
 | showCancelButton | whether to show a cancel button | boolean | — | false (true when called with confirm and prompt) |
 | showConfirmButton | whether to show a confirm button | boolean | — | true |

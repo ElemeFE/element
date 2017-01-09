@@ -226,8 +226,7 @@
     <el-date-picker
       v-model="value6"
       type="daterange"
-      placeholder="选择日期范围"
-      style="width: 220px">
+      placeholder="选择日期范围">
     </el-date-picker>
   </div>
   <div class="block">
@@ -237,8 +236,7 @@
       type="daterange"
       align="right"
       placeholder="选择日期范围"
-      :picker-options="pickerOptions2"
-      style="width: 220px">
+      :picker-options="pickerOptions2">
     </el-date-picker>
   </div>
 </template>
@@ -287,22 +285,32 @@
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | readonly | 完全只读 | boolean | — | false |
-| disabled | 禁用 | boolean | - | false |
-| editable | 文本框可输入 | boolean | - | true |
+| disabled | 禁用 | boolean | — | false |
+| editable | 文本框可输入 | boolean | — | true |
+| clearable | 是否显示清除按钮 | boolean | — | true |
+| size          | 输入框尺寸     | string          | large, small, mini  | — |
 | placeholder | 占位内容 | string | — | — |
-| type | 显示类型 | string | year/month/date/week/<br>datetime/datetimerange/daterange | date |
-| format | 时间日期格式化 | string | 年 `yyyy`，月 `MM`，日 `dd`，<br>小时 `HH`，分 `mm`，秒 `ss` | yyyy-MM-dd |
+| type | 显示类型 | string | year/month/date/week/ datetime/datetimerange/daterange | date |
+| format | 时间日期格式化 | string | 年 `yyyy`，月 `MM`，日 `dd`，小时 `HH`，分 `mm`，秒 `ss` | yyyy-MM-dd |
 | align | 对齐方式 | string | left, center, right | left |
-|picker-options | 当前时间日期选择器特有的选项<br>参考下表 | object |  — | {} |
+| popper-class | DatePicker 下拉框的类名 | string | — | — |
+|picker-options | 当前时间日期选择器特有的选项参考下表 | object |  — | {} |
 
 ### Picker Options
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| shortcuts | 设置快捷选项，需要传入 { text, onClick } 对象<br>用法参考 demo 或下表 | Object[] | - | - |
-| disabledDate | 设置禁用状态，参数为当前日期，要求返回 Boolean | Function | - | - |
+| shortcuts | 设置快捷选项，需要传入 { text, onClick } 对象用法参考 demo 或下表 | Object[] | — | — |
+| disabledDate | 设置禁用状态，参数为当前日期，要求返回 Boolean | Function | — | — |
+| firstDayOfWeek | 周起始日 | Number | 1 到 7 | 7 |
 
 ### Shortcuts
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | text | 标题文本 | string | — | — |
-| onClick | 选中后的回调函数，参数是 vm，可通过触发 'pick' 事件设置<br>选择器的值。例如 vm.$emit('pick', new Date()) | function | — | — |
+| onClick | 选中后的回调函数，参数是 vm，可通过触发 'pick' 事件设置选择器的值。例如 vm.$emit('pick', new Date()) | function | — | — |
+
+### Events
+| 事件名称      | 说明    | 回调参数      |
+|---------|--------|---------|
+| change | 当 input 的值改变时触发，返回值和文本框一致 | 格式化后的值 |
+

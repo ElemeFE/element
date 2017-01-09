@@ -1,22 +1,30 @@
 <template>
   <div
     class="el-select"
-    v-clickoutside="handleClose"
-    :class="{ 'is-multiple': multiple, 'is-small': size === 'small' }">
-    <div class="el-select__tags" v-if="multiple" @click.stop="toggleMenu" ref="tags" :style="{ 'max-width': inputWidth - 32 + 'px' }">
+    v-clickoutside="handleClose">
+    <div
+      class="el-select__tags"
+      v-if="multiple"
+      @click.stop="toggleMenu"
+      ref="tags"
+      :style="{ 'max-width': inputWidth - 32 + 'px' }">
       <transition-group @after-leave="resetInputHeight">
         <el-tag
           v-for="item in selected"
-          :key="item"
+          :key="item.value"
           closable
           :hit="item.hitState"
           type="primary"
           @close="deleteTag($event, item)"
-          close-transition>{{ item.currentLabel }}</el-tag>
+          close-transition>
+          {{ item.currentLabel }}
+        </el-tag>
       </transition-group>
+
       <input
         type="text"
         class="el-select__input"
+        :class="`is-${ size }`"
         @focus="visible = true"
         @keyup="managePlaceholder"
         @keydown="resetInputState"
@@ -37,9 +45,13 @@
       type="text"
       :placeholder="currentPlaceholder"
       :name="name"
+      :size="size"
       :disabled="disabled"
       :readonly="!filterable || multiple"
-      @click.native="toggleMenu"
+      :validate-event="false"
+      @focus="toggleMenu"
+      @click="handleIconClick"
+      @mousedown.native="handleMouseDown"
       @keyup.native="debouncedOnInputChange"
       @keydown.native.down.prevent="navigateOptions('next')"
       @keydown.native.up.prevent="navigateOptions('prev')"
@@ -50,14 +62,24 @@
       @mouseleave.native="inputHovering = false"
       :icon="iconClass">
     </el-input>
-    <transition name="md-fade-bottom" @after-leave="doDestroy">
+    <transition name="el-zoom-in-top" @after-leave="doDestroy">
       <el-select-menu
         ref="popper"
         v-show="visible && emptyText !== false">
-        <ul class="el-select-dropdown__list" v-show="options.length > 0 && filteredOptionsCount > 0 && !loading">
+        <el-scrollbar
+          tag="ul"
+          wrap-class="el-select-dropdown__wrap"
+          view-class="el-select-dropdown__list"
+          :class="{ 'is-empty': !allowCreate && filteredOptionsCount === 0 }"
+          v-show="options.length > 0 && !loading">
+          <el-option
+            :value="query"
+            created
+            v-if="showNewOption">
+          </el-option>
           <slot></slot>
-        </ul>
-        <p class="el-select-dropdown__empty" v-if="emptyText">{{ emptyText }}</p>
+        </el-scrollbar>
+        <p class="el-select-dropdown__empty" v-if="emptyText && !allowCreate">{{ emptyText }}</p>
       </el-select-menu>
     </transition>
   </div>
@@ -68,69 +90,71 @@
   import Locale from 'element-ui/src/mixins/locale';
   import ElInput from 'element-ui/packages/input';
   import ElSelectMenu from './select-dropdown.vue';
+  import ElOption from './option.vue';
   import ElTag from 'element-ui/packages/tag';
+  import ElScrollbar from 'element-ui/packages/scrollbar';
   import debounce from 'throttle-debounce/debounce';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
-  import { addClass, removeClass, hasClass } from 'wind-dom/src/class';
+  import { addClass, removeClass, hasClass } from 'element-ui/src/utils/dom';
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
   import { t } from 'element-ui/src/locale';
+  import merge from 'element-ui/src/utils/merge';
+  const sizeMap = {
+    'large': 42,
+    'small': 30,
+    'mini': 22
+  };
 
   export default {
     mixins: [Emitter, Locale],
 
     name: 'ElSelect',
 
-    componentName: 'select',
+    componentName: 'ElSelect',
 
     computed: {
       iconClass() {
-        return this.showCloseIcon ? 'circle-close' : (this.remote && this.filterable ? '' : 'caret-top');
+        let criteria = this.clearable &&
+          !this.disabled &&
+          this.inputHovering &&
+          !this.multiple &&
+          this.value !== undefined &&
+          this.value !== '';
+        return criteria ? 'circle-close is-show-close' : (this.remote && this.filterable ? '' : 'caret-top');
       },
 
       debounce() {
         return this.remote ? 300 : 0;
       },
 
-      showCloseIcon() {
-        let criteria = this.clearable && this.inputHovering && !this.multiple && this.options.indexOf(this.selected) > -1;
-        if (!this.$el) return false;
-
-        let icon = this.$el.querySelector('.el-input__icon');
-        if (icon) {
-          if (criteria) {
-            icon.addEventListener('click', this.deleteSelected);
-            addClass(icon, 'is-show-close');
-          } else {
-            icon.removeEventListener('click', this.deleteSelected);
-            removeClass(icon, 'is-show-close');
-          }
-        }
-        return criteria;
-      },
-
       emptyText() {
         if (this.loading) {
-          return this.t('el.select.loading');
+          return this.loadingText || this.t('el.select.loading');
         } else {
-          if (this.voidRemoteQuery) {
-            this.voidRemoteQuery = false;
-            return false;
-          }
-          if (this.filterable && this.filteredOptionsCount === 0) {
-            return this.t('el.select.noMatch');
+          if (this.remote && this.query === '' && this.options.length === 0) return false;
+          if (this.filterable && this.options.length > 0 && this.filteredOptionsCount === 0) {
+            return this.noMatchText || this.t('el.select.noMatch');
           }
           if (this.options.length === 0) {
-            return this.t('el.select.noData');
+            return this.noDataText || this.t('el.select.noData');
           }
         }
         return null;
+      },
+
+      showNewOption() {
+        let hasExistingOption = this.options.filter(option => !option.created)
+          .some(option => option.currentLabel === this.query);
+        return this.filterable && this.allowCreate && this.query !== '' && !hasExistingOption;
       }
     },
 
     components: {
       ElInput,
       ElSelectMenu,
-      ElTag
+      ElOption,
+      ElTag,
+      ElScrollbar
     },
 
     directives: { Clickoutside },
@@ -142,36 +166,48 @@
       disabled: Boolean,
       clearable: Boolean,
       filterable: Boolean,
+      allowCreate: Boolean,
       loading: Boolean,
+      popperClass: String,
       remote: Boolean,
+      loadingText: String,
+      noMatchText: String,
+      noDataText: String,
       remoteMethod: Function,
       filterMethod: Function,
       multiple: Boolean,
+      multipleLimit: {
+        type: Number,
+        default: 0
+      },
       placeholder: {
         type: String,
-        default: t('el.select.placeholder')
+        default() {
+          return t('el.select.placeholder');
+        }
       }
     },
 
     data() {
       return {
         options: [],
-        selected: {},
+        cachedOptions: [],
+        createdOption: null,
+        createdSelected: false,
+        selected: this.multiple ? [] : {},
         isSelect: true,
         inputLength: 20,
         inputWidth: 0,
-        valueChangeBySelected: false,
         cachedPlaceHolder: '',
         optionsCount: 0,
         filteredOptionsCount: 0,
         dropdownUl: null,
         visible: false,
         selectedLabel: '',
-        selectInit: false,
         hoverIndex: -1,
         query: '',
-        voidRemoteQuery: false,
         bottomOverflowBeforeHidden: 0,
+        topOverflowBeforeHidden: 0,
         optionsAllDisabled: false,
         inputHovering: false,
         currentPlaceholder: ''
@@ -184,146 +220,204 @@
       },
 
       value(val) {
-        if (this.valueChangeBySelected) {
-          this.valueChangeBySelected = false;
-          return;
-        }
-        this.$nextTick(() => {
-          if (this.multiple && Array.isArray(val)) {
-            this.$nextTick(() => {
-              this.resetInputHeight();
-            });
-            this.selectedInit = true;
-            this.selected = [];
-            this.currentPlaceholder = this.cachedPlaceHolder;
-            val.forEach(item => {
-              let option = this.options.filter(option => option.value === item)[0];
-              if (option) {
-                this.$emit('addOptionToValue', option);
-              }
-            });
-          }
-          if (!this.multiple) {
-            let option = this.options.filter(option => option.value === val)[0];
-            if (option) {
-              this.$emit('addOptionToValue', option);
-            } else {
-              this.selected = {};
-              this.selectedLabel = '';
-            }
-          }
-          this.resetHoverIndex();
-        });
-      },
-
-      selected(val, oldVal) {
         if (this.multiple) {
-          if (this.selected.length > 0) {
+          this.resetInputHeight();
+          if (val.length > 0 || (this.$refs.input && this.query !== '')) {
             this.currentPlaceholder = '';
           } else {
             this.currentPlaceholder = this.cachedPlaceHolder;
           }
-          this.$nextTick(() => {
-            this.resetInputHeight();
-          });
-          if (this.selectedInit) {
-            this.selectedInit = false;
-            return;
-          }
-          this.valueChangeBySelected = true;
-          const result = val.map(item => item.value);
-
-          this.$emit('input', result);
-          this.$emit('change', result);
-          this.dispatch('form-item', 'el.form.change', val);
-          if (this.filterable) {
-            this.query = '';
-            this.hoverIndex = -1;
-            this.$refs.input.focus();
-            this.inputLength = 20;
-          }
-        } else {
-          if (this.selectedInit) {
-            this.selectedInit = false;
-            return;
-          }
-          if (val.value === oldVal.value) return;
-          this.$emit('input', val.value);
-          this.$emit('change', val.value);
         }
+        this.setSelected();
+        if (this.filterable && !this.multiple) {
+          this.inputLength = 20;
+        }
+        this.$emit('change', val);
+        this.dispatch('ElFormItem', 'el.form.change', val);
       },
 
       query(val) {
         this.$nextTick(() => {
-          this.broadcast('select-dropdown', 'updatePopper');
+          this.broadcast('ElSelectDropdown', 'updatePopper');
         });
+        this.hoverIndex = -1;
         if (this.multiple && this.filterable) {
           this.resetInputHeight();
         }
         if (this.remote && typeof this.remoteMethod === 'function') {
           this.hoverIndex = -1;
           this.remoteMethod(val);
-          this.voidRemoteQuery = val === '';
-          this.broadcast('option', 'resetIndex');
+          this.broadcast('ElOption', 'resetIndex');
         } else if (typeof this.filterMethod === 'function') {
           this.filterMethod(val);
+          this.broadcast('ElOptionGroup', 'queryChange');
         } else {
           this.filteredOptionsCount = this.optionsCount;
-          this.broadcast('option', 'queryChange', val);
+          this.broadcast('ElOption', 'queryChange', val);
+          this.broadcast('ElOptionGroup', 'queryChange');
         }
       },
 
       visible(val) {
         if (!val) {
           this.$refs.reference.$el.querySelector('input').blur();
-          if (this.$el.querySelector('.el-input__icon')) {
-            removeClass(this.$el.querySelector('.el-input__icon'), 'is-reverse');
-          }
-          this.broadcast('select-dropdown', 'destroyPopper');
+          this.handleIconHide();
+          this.broadcast('ElSelectDropdown', 'destroyPopper');
           if (this.$refs.input) {
             this.$refs.input.blur();
           }
+          this.query = '';
+          this.selectedLabel = '';
           this.resetHoverIndex();
-          if (!this.multiple) {
-            if (this.dropdownUl && this.selected.$el) {
-              this.bottomOverflowBeforeHidden = this.selected.$el.getBoundingClientRect().bottom - this.$refs.popper.$el.getBoundingClientRect().bottom;
+          this.$nextTick(() => {
+            if (this.$refs.input &&
+              this.$refs.input.value === '' &&
+              this.selected.length === 0) {
+              this.currentPlaceholder = this.cachedPlaceHolder;
             }
-            if (this.selected && this.selected.value) {
-              this.selectedLabel = this.selected.currentLabel;
+          });
+          if (!this.multiple) {
+            this.getOverflows();
+            if (this.selected) {
+              if (this.filterable && this.allowCreate &&
+                this.createdSelected && this.createdOption) {
+                this.selectedLabel = this.createdOption.currentLabel;
+              } else {
+                this.selectedLabel = this.selected.currentLabel;
+              }
+              if (this.filterable) this.query = this.selectedLabel;
             }
           }
         } else {
-          let icon = this.$el.querySelector('.el-input__icon');
-          if (icon && !hasClass(icon, 'el-icon-circle-close')) {
-            addClass(this.$el.querySelector('.el-input__icon'), 'is-reverse');
-          }
-          this.broadcast('select-dropdown', 'updatePopper');
+          this.handleIconShow();
+          this.broadcast('ElSelectDropdown', 'updatePopper');
           if (this.filterable) {
             this.query = this.selectedLabel;
             if (this.multiple) {
               this.$refs.input.focus();
             } else {
-              this.broadcast('input', 'inputSelect');
+              if (!this.remote) {
+                this.broadcast('ElOption', 'queryChange', '');
+              }
+              this.broadcast('ElInput', 'inputSelect');
             }
           }
           if (!this.dropdownUl) {
-            let dropdownChildNodes = this.$refs.popper.$el.childNodes;
-            this.dropdownUl = [].filter.call(dropdownChildNodes, item => item.tagName === 'UL')[0];
+            this.dropdownUl = this.$refs.popper.$el.querySelector('.el-select-dropdown__wrap');
           }
           if (!this.multiple && this.dropdownUl) {
-            if (this.bottomOverflowBeforeHidden > 0) {
-              this.dropdownUl.scrollTop += this.bottomOverflowBeforeHidden;
-            }
+            this.setOverflow();
           }
         }
+        this.$emit('visible-change', val);
       },
 
       options(val) {
+        if (this.$isServer) return;
         this.optionsAllDisabled = val.length === val.filter(item => item.disabled === true).length;
+        if (this.multiple) {
+          this.resetInputHeight();
+        }
+        let inputs = this.$el.querySelectorAll('input');
+        if ([].indexOf.call(inputs, document.activeElement) === -1) {
+          this.setSelected();
+        }
       }
     },
 
     methods: {
+      handleIconHide() {
+        let icon = this.$el.querySelector('.el-input__icon');
+        if (icon) {
+          removeClass(icon, 'is-reverse');
+        }
+      },
+
+      handleIconShow() {
+        let icon = this.$el.querySelector('.el-input__icon');
+        if (icon && !hasClass(icon, 'el-icon-circle-close')) {
+          addClass(icon, 'is-reverse');
+        }
+      },
+
+      getOverflows() {
+        if (this.dropdownUl && this.selected && this.selected.$el) {
+          let selectedRect = this.selected.$el.getBoundingClientRect();
+          let popperRect = this.$refs.popper.$el.getBoundingClientRect();
+          this.bottomOverflowBeforeHidden = selectedRect.bottom - popperRect.bottom;
+          this.topOverflowBeforeHidden = selectedRect.top - popperRect.top;
+        }
+      },
+
+      setOverflow() {
+        if (this.bottomOverflowBeforeHidden > 0) {
+          this.$nextTick(() => {
+            this.dropdownUl.scrollTop += this.bottomOverflowBeforeHidden;
+          });
+        } else if (this.topOverflowBeforeHidden < 0) {
+          this.$nextTick(() => {
+            this.dropdownUl.scrollTop += this.topOverflowBeforeHidden;
+          });
+        }
+      },
+
+      getOption(value) {
+        const option = this.cachedOptions.filter(option => option.value === value)[0];
+        if (option) return option;
+        const label = typeof value === 'string' || typeof value === 'number'
+          ? value : '';
+        let newOption = {
+          value: value,
+          currentLabel: label
+        };
+        if (this.multiple) {
+          newOption.hitState = false;
+        }
+        return newOption;
+      },
+
+      setSelected() {
+        if (!this.multiple) {
+          let option = this.getOption(this.value);
+          if (option.created) {
+            this.createdOption = merge({}, option);
+            this.createdSelected = true;
+          } else {
+            this.createdSelected = false;
+          }
+          this.selectedLabel = option.currentLabel;
+          this.selected = option;
+          if (this.filterable) this.query = this.selectedLabel;
+          return;
+        }
+        let result = [];
+        if (Array.isArray(this.value)) {
+          this.value.forEach(value => {
+            result.push(this.getOption(value));
+          });
+        }
+        this.selected = result;
+        this.$nextTick(() => {
+          this.resetInputHeight();
+        });
+      },
+
+      handleIconClick(event) {
+        if (this.iconClass.indexOf('circle-close') > -1) {
+          this.deleteSelected(event);
+        } else {
+          this.toggleMenu();
+        }
+      },
+
+      handleMouseDown(event) {
+        if (event.target.tagName !== 'INPUT') return;
+        if (this.visible) {
+          this.handleClose();
+          event.preventDefault();
+        }
+      },
+
       doDestroy() {
         this.$refs.popper.doDestroy();
       },
@@ -348,22 +442,7 @@
 
       deletePrevTag(e) {
         if (e.target.value.length <= 0 && !this.toggleLastOptionHitState()) {
-          this.selected.pop();
-        }
-      },
-
-      addOptionToValue(option, init) {
-        if (this.multiple) {
-          if (this.selected.indexOf(option) === -1 && (this.remote ? this.value.indexOf(option.value) === -1 : true)) {
-            this.selectedInit = !!init;
-            this.selected.push(option);
-            this.resetHoverIndex();
-          }
-        } else {
-          this.selectedInit = !!init;
-          this.selected = option;
-          this.selectedLabel = option.currentLabel;
-          this.hoverIndex = option.index;
+          this.value.pop();
         }
       },
 
@@ -376,14 +455,17 @@
       resetInputState(e) {
         if (e.keyCode !== 8) this.toggleLastOptionHitState(false);
         this.inputLength = this.$refs.input.value.length * 15 + 20;
+        this.resetInputHeight();
       },
 
       resetInputHeight() {
         this.$nextTick(() => {
           let inputChildNodes = this.$refs.reference.$el.childNodes;
           let input = [].filter.call(inputChildNodes, item => item.tagName === 'INPUT')[0];
-          input.style.height = Math.max(this.$refs.tags.clientHeight + 6, this.size === 'small' ? 28 : 36) + 'px';
-          this.broadcast('select-dropdown', 'updatePopper');
+          input.style.height = Math.max(this.$refs.tags.clientHeight + 6, sizeMap[this.size] || 36) + 'px';
+          if (this.visible && this.emptyText !== false) {
+            this.broadcast('ElSelectDropdown', 'updatePopper');
+          }
         });
       },
 
@@ -403,20 +485,24 @@
 
       handleOptionSelect(option) {
         if (!this.multiple) {
-          this.selected = option;
-          this.selectedLabel = option.currentLabel;
+          this.$emit('input', option.value);
           this.visible = false;
         } else {
           let optionIndex = -1;
-          this.selected.forEach((item, index) => {
-            if (item === option || item.currentLabel === option.currentLabel) {
+          this.value.forEach((item, index) => {
+            if (item === option.value) {
               optionIndex = index;
             }
           });
           if (optionIndex > -1) {
-            this.selected.splice(optionIndex, 1);
-          } else {
-            this.selected.push(option);
+            this.value.splice(optionIndex, 1);
+          } else if (this.multipleLimit <= 0 || this.value.length < this.multipleLimit) {
+            this.value.push(option.value);
+          }
+          if (option.created) {
+            this.query = '';
+            this.inputLength = 20;
+            this.$refs.input.focus();
           }
         }
       },
@@ -435,6 +521,7 @@
           this.visible = true;
           return;
         }
+        if (this.options.length === 0 || this.filteredOptionsCount === 0) return;
         if (!this.optionsAllDisabled) {
           if (direction === 'next') {
             this.hoverIndex++;
@@ -464,8 +551,10 @@
       },
 
       resetScrollTop() {
-        let bottomOverflowDistance = this.options[this.hoverIndex].$el.getBoundingClientRect().bottom - this.$refs.popper.$el.getBoundingClientRect().bottom;
-        let topOverflowDistance = this.options[this.hoverIndex].$el.getBoundingClientRect().top - this.$refs.popper.$el.getBoundingClientRect().top;
+        let bottomOverflowDistance = this.options[this.hoverIndex].$el.getBoundingClientRect().bottom -
+          this.$refs.popper.$el.getBoundingClientRect().bottom;
+        let topOverflowDistance = this.options[this.hoverIndex].$el.getBoundingClientRect().top -
+          this.$refs.popper.$el.getBoundingClientRect().top;
         if (bottomOverflowDistance > 0) {
           this.dropdownUl.scrollTop += bottomOverflowDistance;
         }
@@ -482,23 +571,20 @@
 
       deleteSelected(event) {
         event.stopPropagation();
-        this.selected = {};
-        this.selectedLabel = '';
         this.$emit('input', '');
-        this.$emit('change', '');
         this.visible = false;
       },
 
       deleteTag(event, tag) {
         let index = this.selected.indexOf(tag);
-        if (index > -1) {
-          this.selected.splice(index, 1);
+        if (index > -1 && !this.disabled) {
+          this.value.splice(index, 1);
         }
         event.stopPropagation();
       },
 
       onInputChange() {
-        if (this.filterable && this.selectedLabel !== this.value) {
+        if (this.filterable) {
           this.query = this.selectedLabel;
         }
       },
@@ -510,7 +596,7 @@
         if (index > -1) {
           this.options.splice(index, 1);
         }
-        this.broadcast('option', 'resetIndex');
+        this.broadcast('ElOption', 'resetIndex');
       },
 
       resetInputWidth() {
@@ -520,32 +606,30 @@
 
     created() {
       this.cachedPlaceHolder = this.currentPlaceholder = this.placeholder;
-      if (this.multiple) {
-        this.selectedInit = true;
-        this.selected = [];
+      if (this.multiple && !Array.isArray(this.value)) {
+        this.$emit('input', []);
       }
-      if (this.remote) {
-        this.voidRemoteQuery = true;
+      if (!this.multiple && Array.isArray(this.value)) {
+        this.$emit('input', '');
       }
+      this.setSelected();
 
       this.debouncedOnInputChange = debounce(this.debounce, () => {
         this.onInputChange();
       });
 
-      this.$on('addOptionToValue', this.addOptionToValue);
       this.$on('handleOptionClick', this.handleOptionSelect);
       this.$on('onOptionDestroy', this.onOptionDestroy);
+      this.$on('setSelected', this.setSelected);
     },
 
     mounted() {
+      if (this.multiple && Array.isArray(this.value) && this.value.length > 0) {
+        this.currentPlaceholder = '';
+      }
       addResizeListener(this.$el, this.resetInputWidth);
-      if (this.remote && this.multiple && Array.isArray(this.value)) {
-        this.selected = this.options.reduce((prev, curr) => {
-          return this.value.indexOf(curr.value) > -1 ? prev.concat(curr) : prev;
-        }, []);
-        this.$nextTick(() => {
-          this.resetInputHeight();
-        });
+      if (this.remote && this.multiple) {
+        this.resetInputHeight();
       }
       this.$nextTick(() => {
         if (this.$refs.reference.$el) {
