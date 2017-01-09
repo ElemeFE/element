@@ -22,7 +22,7 @@ let i18nHandler = function() {
 
 export const t = function(path, options) {
   let value = i18nHandler.apply(this, arguments);
-  if (value) return value;
+  if (value !== null || value !== undefined) return value;
 
   const array = path.split('.');
   let current = lang;
