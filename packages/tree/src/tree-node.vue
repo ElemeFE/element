@@ -43,7 +43,7 @@
 </template>
 
 <script type="text/jsx">
-  import CollapseTransition from './transition';
+  import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
   import ElCheckbox from 'element-ui/packages/checkbox';
 
   export default {
