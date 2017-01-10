@@ -127,6 +127,7 @@ Set value via a input box.
 | disabled | whether Slider is disabled | boolean | — | false |
 | step | step size | number | — | 1 |
 | show-input | whether to display an input box | boolean | — | false |
+| show-input-controls | whether to display control buttons when `show-input` is true | boolean | — | true |
 | show-stops | whether to display breakpoints | boolean | — | false |
 
 ## Events

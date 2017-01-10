@@ -151,6 +151,7 @@
 | disabled | 是否禁用 | boolean | — | false |
 | step | 步长 | number | — | 1 |
 | show-input | 是否显示输入框 | boolean | — | false |
+| show-input-controls | 在显示输入框的情况下，是否显示输入框的控制按钮 | boolean | — | true|
 | show-stops | 是否显示间断点 | boolean | — | false |
 
 ### Events
