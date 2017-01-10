@@ -176,7 +176,7 @@ describe('Slider', () => {
     setTimeout(() => {
       triggerEvent(vm.$el.querySelector('.el-input-number'), 'keyup');
       const inputNumber = vm.$el.querySelector('.el-input-number').__vue__;
-      inputNumber.currentValue = 40;
+      inputNumber.setCurrentValue(40);
       setTimeout(() => {
         expect(vm.value).to.equal(40);
         done();
