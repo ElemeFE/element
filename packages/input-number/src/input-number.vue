@@ -21,10 +21,11 @@
     >
     </span>
     <el-input
-      v-model.number="currentValue"
+      :value="currentValue"
       @keydown.up.native="increase"
       @keydown.down.native="decrease"
       @blur="handleBlur"
+      @input="handleInput"
       :disabled="disabled"
       :size="size"
       :max="max"
@@ -111,16 +112,10 @@
       };
     },
     watch: {
-      value(val) {
-        this.currentValue = val;
-      },
-
-      currentValue(newVal, oldVal) {
-        if (newVal <= this.max && newVal >= this.min) {
-          this.$emit('change', newVal, oldVal);
-          this.$emit('input', newVal);
-        } else {
-          this.currentValue = oldVal;
+      value(value) {
+        const newVal = Number(value);
+        if (!isNaN(newVal) && newVal <= this.max && newVal >= this.min) {
+          this.currentValue = newVal;
         }
       }
     },
@@ -169,17 +164,31 @@
         const value = this.value || 0;
         const newVal = this._increase(value, this.step);
         if (newVal > this.max) return;
-        this.currentValue = newVal;
+        this.setCurrentValue(newVal);
       },
       decrease() {
         if (this.disabled || this.minDisabled) return;
         const value = this.value || 0;
         const newVal = this._decrease(value, this.step);
         if (newVal < this.min) return;
-        this.currentValue = newVal;
+        this.setCurrentValue(newVal);
       },
       handleBlur() {
         this.$refs.input.setCurrentValue(this.currentValue);
+      },
+      setCurrentValue(newVal) {
+        const oldVal = this.currentValue;
+        if (newVal <= this.max && newVal >= this.min && oldVal !== newVal) {
+          this.$emit('change', newVal, oldVal);
+          this.$emit('input', newVal);
+          this.currentValue = newVal;
+        }
+      },
+      handleInput(value) {
+        const newVal = Number(value);
+        if (!isNaN(newVal)) {
+          this.setCurrentValue(newVal);
+        }
       }
     }
   };
