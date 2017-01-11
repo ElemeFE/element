@@ -249,7 +249,7 @@ describe('InputNumber', () => {
     const inputNumber = vm.$refs.inputNumber;
     vm.value = 100;
     vm.$nextTick(_ => {
-      expect(inputNumber.currentValue).to.be.equal(5);
+      expect(inputNumber.currentValue).to.be.equal(10);
       vm.value = 4;
 
       vm.$nextTick(_ => {
