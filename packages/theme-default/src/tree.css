@@ -90,8 +90,6 @@
     & > .el-tree-node__children {
       overflow: hidden;
       background-color: transparent;
-      /** padding-left: 16px; */
-      display: none;
     }
 
     &.is-expanded > .el-tree-node__children {

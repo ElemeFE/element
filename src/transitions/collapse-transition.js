@@ -1,9 +1,10 @@
 class Transition {
   beforeEnter(el) {
     if (!el.dataset) el.dataset = {};
+
     el.dataset.oldPaddingTop = el.style.paddingTop;
     el.dataset.oldPaddingBottom = el.style.paddingBottom;
-    el.dataset.oldDisplay = el.style.display;
+
     el.style.height = '0';
     el.style.paddingTop = 0;
     el.style.paddingBottom = 0;
@@ -11,8 +12,6 @@ class Transition {
 
   enter(el) {
     el.dataset.oldOverflow = el.style.overflow;
-
-    el.style.display = 'block';
     if (el.scrollHeight !== 0) {
       el.style.height = el.scrollHeight + 'px';
       el.style.paddingTop = el.dataset.oldPaddingTop;
@@ -27,7 +26,6 @@ class Transition {
   }
 
   afterEnter(el) {
-    el.style.display = '';
     el.style.height = '';
     el.style.overflow = el.dataset.oldOverflow;
   }
@@ -38,25 +36,19 @@ class Transition {
     el.dataset.oldPaddingBottom = el.style.paddingBottom;
     el.dataset.oldOverflow = el.style.overflow;
 
-    el.style.display = 'block';
-    if (el.scrollHeight !== 0) {
-      el.style.height = el.scrollHeight + 'px';
-    }
+    el.style.height = el.scrollHeight + 'px';
     el.style.overflow = 'hidden';
   }
 
   leave(el) {
     if (el.scrollHeight !== 0) {
-      setTimeout(() => {
-        el.style.height = 0;
-        el.style.paddingTop = 0;
-        el.style.paddingBottom = 0;
-      });
+      el.style.height = 0;
+      el.style.paddingTop = 0;
+      el.style.paddingBottom = 0;
     }
   }
 
   afterLeave(el) {
-    el.style.display = el.dataset.oldDisplay;
     el.style.height = '';
     el.style.overflow = el.dataset.oldOverflow;
     el.style.paddingTop = el.dataset.oldPaddingTop;
