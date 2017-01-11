@@ -28,8 +28,11 @@
             }
           });
 
+          const transform = `translateX(${offset}px)`;
           style.width = tabWidth + 'px';
-          style.transform = `translateX(${offset}px)`;
+          style.transform = transform;
+          style.msTransform = transform;
+          style.webkitTransform = transform;
 
           return style;
         }
