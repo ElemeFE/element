@@ -176,3 +176,35 @@ export function setStyle(element, styleName, value) {
     }
   }
 };
+
+export function getOffset(elem) {
+  if (!elem) {
+    return;
+  }
+
+  if (!elem.getClientRects().length) {
+    return { top: 0, left: 0 };
+  }
+
+  const rect = elem.getBoundingClientRect();
+  const doc = elem.ownerDocument;
+  const docElem = doc.documentElement;
+  const win = doc.defaultView;
+
+  return {
+    top: rect.top + win.pageYOffset - docElem.clientTop,
+    left: rect.left + win.pageXOffset - docElem.clientLeft
+  };
+}
+
+export function getPosition(elem, parent) {
+  const offsetElem = getOffset(elem);
+  const offsetParent = getOffset(parent);
+
+  if (offsetElem && offsetParent) {
+    return {
+      top: offsetElem.top - offsetParent.top,
+      left: offsetElem.left - offsetParent.left
+    };
+  }
+}
