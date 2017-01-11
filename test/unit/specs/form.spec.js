@@ -86,6 +86,39 @@ describe('Form', () => {
     expect(vm.$refs.labelLeft.$el.classList.contains('el-form--label-left')).to.be.true;
     done();
   });
+  it('show message', done => {
+    vm = createVue({
+      template: `
+        <el-form :model="form" ref="form">
+          <el-form-item label="活动名称" prop="name" :show-message="false"
+            :rules="{
+              required: true,
+              message: '请输入活动名称',
+              trigger: 'change',
+              min: 3,
+              max: 6
+            }"
+          >
+            <el-input v-model="form.name"></el-input>
+          </el-form-item>
+        </el-form>
+      `,
+      data() {
+        return {
+          form: {
+            name: ''
+          }
+        };
+      }
+    }, true);
+    vm.$refs.form.validate(valid => {
+      expect(valid).to.not.true;
+      vm.$refs.form.$nextTick(_ => {
+        expect(vm.$el.querySelector('.el-form-item__error')).to.not.exist;
+        done();
+      });
+    });
+  });
   it('reset field', done => {
     vm = createVue({
       template: `

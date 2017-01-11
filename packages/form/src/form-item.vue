@@ -10,7 +10,7 @@
     <div class="el-form-item__content" v-bind:style="contentStyle">
       <slot></slot>
       <transition name="el-zoom-in-top">
-        <div class="el-form-item__error" v-if="validateState === 'error'">{{validateMessage}}</div>
+        <div class="el-form-item__error" v-if="validateState === 'error' && showMessage && form.showMessage">{{validateMessage}}</div>
       </transition>
     </div>
   </div>
@@ -58,7 +58,11 @@
       required: Boolean,
       rules: [Object, Array],
       error: String,
-      validateStatus: String
+      validateStatus: String,
+      showMessage: {
+        type: Boolean,
+        default: true
+      }
     },
     watch: {
       error(value) {

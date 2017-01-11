@@ -21,7 +21,11 @@
         type: String,
         default: ''
       },
-      inline: Boolean
+      inline: Boolean,
+      showMessage: {
+        type: Boolean,
+        default: true
+      }
     },
     watch: {
       rules() {
