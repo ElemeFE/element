@@ -268,6 +268,7 @@
           }
           this.query = '';
           this.selectedLabel = '';
+          this.inputLength = 20;
           this.resetHoverIndex();
           this.$nextTick(() => {
             if (this.$refs.input &&
