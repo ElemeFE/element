@@ -87,6 +87,12 @@ const showNextMsg = () => {
       if (options.callback === undefined) {
         instance.callback = defaultCallback;
       }
+
+      let oldCb = instance.callback;
+      instance.callback = action => {
+        oldCb(action);
+        showNextMsg();
+      };
       ['modal', 'showClose', 'closeOnClickModal', 'closeOnPressEscape'].forEach(prop => {
         if (instance[prop] === undefined) {
           instance[prop] = true;
