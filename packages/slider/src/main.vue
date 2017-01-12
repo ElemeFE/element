@@ -8,6 +8,7 @@
       ref="input"
       :step="step"
       :disabled="disabled"
+      :controls="showInputControls"
       :min="min"
       :max="max"
       size="small">
@@ -66,6 +67,10 @@
       showInput: {
         type: Boolean,
         default: false
+      },
+      showInputControls: {
+        type: Boolean,
+        default: true
       },
       showStops: {
         type: Boolean,
