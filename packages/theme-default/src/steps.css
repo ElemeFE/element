@@ -11,6 +11,10 @@
 
     @when horizontal {
       white-space: nowrap;
+
+      @when center {
+        text-align: center;
+      }
     }
   }
 }

@@ -1,5 +1,9 @@
 <template>
-  <div class="el-steps" :class="['is-' + direction]"><slot></slot></div>
+  <div
+    class="el-steps"
+    :class="['is-' + direction, center ? 'is-center' : '']">
+    <slot></slot>
+  </div>
 </template>
 
 <script>
@@ -14,6 +18,7 @@ export default {
       default: 'horizontal'
     },
     alignCenter: Boolean,
+    center: Boolean,
     finishStatus: {
       type: String,
       default: 'finish'
@@ -26,7 +31,8 @@ export default {
 
   data() {
     return {
-      steps: []
+      steps: [],
+      stepOffset: 0
     };
   },
 

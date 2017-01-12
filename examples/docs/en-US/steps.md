@@ -120,6 +120,7 @@ Vertical step bars.
 | process-status | status of current step | string | wait/process/finish/error/success | process |
 | finish-status | status of end step | string | wait/process/finish/error/success | finish |
 | align-center | whether step description is centered | boolean | — | false |
+| center | center whole `Steps` component | boolean | - | false |
 
 ### Step Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
