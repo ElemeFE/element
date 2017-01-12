@@ -95,7 +95,7 @@
   --checkbox-disabled-checked-input-border-color: var(--disabled-border-base);
   --checkbox-disabled-checked-icon-color: var(--color-white);
 
-  --checkbox-checked-input-border-color: var(--color-blue);
+  --checkbox-checked-input-border-color: var(--color-primary);
   --checkbox-checked-input-fill: var(--color-primary);
   --checkbox-checked-icon-color: var(--fill-base);
 
