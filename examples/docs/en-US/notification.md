@@ -205,6 +205,7 @@ Customize Notification's offset from the top edge of the screen
   }
 </script>
 ```
+:::
 
 ### Global method
 
