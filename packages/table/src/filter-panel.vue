@@ -93,7 +93,7 @@
       handleSelect(filterValue) {
         this.filterValue = filterValue;
 
-        if (typeof filterValue === "number" && filterValue >= 0) {
+        if (typeof filterValue === 'number' && filterValue >= 0) {
           this.confirmFilter(this.filteredValue);
         } else {
           this.confirmFilter([]);
@@ -129,7 +129,7 @@
         },
         set(value) {
           if (this.filteredValue) {
-            if (typeof value === "number" && value >= 0) {
+            if (typeof value === 'number' && value >= 0) {
               this.filteredValue.splice(0, 1, value);
             } else {
               this.filteredValue.splice(0, 1);
