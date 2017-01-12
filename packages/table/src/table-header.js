@@ -190,20 +190,26 @@ export default {
   },
 
   mounted() {
-    const states = this.store.states;
-    states.sortProp = this.defaultSortProp;
-    states.sortOrder = this.defaultSortOrder;
+    if (this.defaultSortProp) {
+      const states = this.store.states;
+      states.sortProp = this.defaultSortProp;
+      states.sortOrder = this.defaultSortOrder;
 
-    this.$nextTick(_ => {
-      for (let i = 0, length = this.columns.length; i < length; i++) {
-        if (this.columns[i].property === this.defaultSortProp) {
-          this.columns[i].order = this.defaultSortOrder;
-          break;
+      this.$nextTick(_ => {
+        for (let i = 0, length = this.columns.length; i < length; i++) {
+          let column = this.columns[i];
+          if (column.property === this.defaultSortProp) {
+            column.order = this.defaultSortOrder;
+            states.sortingColumn = column;
+            break;
+          }
         }
-      }
 
-      this.store.commit('changeSortCondition');
-    });
+        if (states.sortingColumn) {
+          this.store.commit('changeSortCondition');
+        }
+      });
+    }
   },
 
   beforeDestroy() {
