@@ -10,11 +10,10 @@
     props: {
       type: String,
       activeName: String,
-      closable: {
-        type: Boolean,
-        default: false
-      },
-      value: {}
+      closable: Boolean,
+      addable: Boolean,
+      value: {},
+      editable: Boolean
     },
 
     data() {
@@ -34,53 +33,20 @@
       }
     },
 
-    computed: {
-      currentTab() {
-        let result;
-        this.panes.forEach(tab => {
-          if (this.currentName === (tab.name || tab.index)) {
-            result = tab;
-          }
-        });
-        return result;
-      }
-    },
-
     methods: {
-      handleTabRemove(pane, event) {
-        event.stopPropagation();
-        const panes = this.panes;
-        const currentTab = this.currentTab;
-
-        let index = panes.indexOf(pane);
-
-        if (index === -1) return;
-
-        panes.splice(index, 1);
-        pane.$destroy();
-
-        this.$emit('tab-remove', pane);
-
-        this.$nextTick(_ => {
-          if (pane.active) {
-            const panes = this.panes;
-            let nextChild = panes[index];
-            let prevChild = panes[index - 1];
-            let nextActiveTab = nextChild || prevChild || null;
-
-            if (nextActiveTab) {
-              this.setCurrentName(nextActiveTab.name || nextActiveTab.index);
-            }
-            return;
-          } else {
-            this.setCurrentName(currentTab.name || currentTab.index);
-          }
-        });
-      },
       handleTabClick(tab, tabName, event) {
         if (tab.disabled) return;
         this.setCurrentName(tabName);
         this.$emit('tab-click', tab, event);
+      },
+      handleTabRemove(pane, ev) {
+        ev.stopPropagation();
+        this.$emit('edit', pane.name, 'remove');
+        this.$emit('tab-remove', pane.name);
+      },
+      handleTabAdd() {
+        this.$emit('edit', null, 'add');
+        this.$emit('tab-add');
       },
       setCurrentName(value) {
         this.currentName = value;
@@ -100,21 +66,37 @@
     render(h) {
       let {
         type,
-        handleTabRemove,
         handleTabClick,
+        handleTabRemove,
+        handleTabAdd,
         currentName,
-        panes
+        panes,
+        editable,
+        addable
       } = this;
+
+      const newButton = editable || addable
+        ? (
+            <span
+              class="el-tabs__new-button"
+              on-click={ handleTabAdd }
+            >
+                <i class="el-icon-plus"></i>
+            </span>
+          )
+        : null;
 
       const tabs = this._l(panes, (pane, index) => {
         let tabName = pane.name || pane.index || index;
+        const closable = pane.isClosable || editable;
+
         if (currentName === undefined && index === 0) {
           this.setCurrentName(tabName);
         }
 
         pane.index = index;
 
-        const btnClose = pane.isClosable
+        const btnClose = closable
           ? <span class="el-icon-close" on-click={(ev) => { handleTabRemove(pane, ev); }}></span>
           : null;
 
@@ -125,7 +107,7 @@
               'el-tabs__item': true,
               'is-active': pane.active,
               'is-disabled': pane.disabled,
-              'is-closable': pane.isClosable
+              'is-closable': closable
             }}
             ref="tabs"
             refInFor
@@ -146,6 +128,7 @@
           <div class="el-tabs__header">
             {!type ? <tab-bar tabs={panes}></tab-bar> : null}
             {tabs}
+            {newButton}
           </div>
           <div class="el-tabs__content">
             {this.$slots.default}

@@ -20,6 +20,28 @@
       transition: transform .3s cubic-bezier(.645,.045,.355,1);
       list-style: none;
     }
+    @e new-button {
+      float: left;
+      border: 1px solid #d3dce6;
+      height: 18px;
+      width: @height;
+      line-height: @height;
+      margin: 12px 0 9px 10px;
+      border-radius: 3px;
+      text-align: center;
+      font-size: 12px;
+      color: #d3dce6;
+      cursor: pointer;
+      transition: all .15s;
+
+      .el-icon-plus {
+        transform: scale(0.8, 0.8);
+      }
+
+      &:hover {
+        color: var(--color-primary);
+      }
+    }
     @e item {
       padding: 0 16px;
       height: 42px;
