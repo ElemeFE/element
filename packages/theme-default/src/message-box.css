@@ -10,7 +10,7 @@
     text-align: left;
     display: inline-block;
     vertical-align: middle;
-    background-color: #fff;
+    background-color: var(--color-white);
     width: var(--msgbox-width);
     border-radius: var(--msgbox-border-radius);
     font-size: var(--msgbox-font-size);

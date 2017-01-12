@@ -10,7 +10,7 @@
     border-radius: var(--border-radius-small);
     position: fixed;
     right: 16px;
-    background-color: #fff;
+    background-color: var(--color-white);
     box-shadow: var(--notification-shadow);
     transition: opacity 0.3s, transform .3s, right .3s, top 0.4s;
     overflow: hidden;

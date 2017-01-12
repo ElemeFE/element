@@ -4,7 +4,7 @@
 @component-namespace el {
   @b tabs {
     @e header {
-      border-bottom: 1px solid #d3dce6;
+      border-bottom: 1px solid var(--color-base-gray);
       padding: 0;
       position: relative;
       margin: 0 0 15px;
@@ -28,7 +28,7 @@
       float: left;
       list-style: none;
       font-size: 14px;
-      color: #8492a6;
+      color: var(--color-base-silver);
       margin-bottom: -1px;
       position: relative;
 
@@ -43,8 +43,8 @@
         }
 
         &:hover {
-          background-color: #99a9bf;
-          color: #fff;
+          background-color: var(--color-light-silver);
+          color: var(--color-white);
         }
       }
 
@@ -53,7 +53,7 @@
       }
 
       &:hover {
-        color: #1f2d3d;
+        color: var(--color-base-black);
         cursor: pointer;
       }
 
@@ -96,8 +96,8 @@
           }
         }
         &.is-active {
-          border: 1px solid #d3dce6;
-          border-bottom-color: #fff;
+          border: 1px solid var(--color-base-gray);
+          border-bottom-color: var(--color-white);
           border-radius: 4px 4px 0 0;
 
           &.is-closable {
@@ -111,15 +111,15 @@
       }
     }
     @m border-card {
-      background: #fff;
-      border: 1px solid #d3dce6;
+      background: var(--color-white);
+      border: 1px solid var(--color-base-gray);
       box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.12), 0px 0px 6px 0px rgba(0,0,0,0.04);
 
       &>.el-tabs__content {
         padding: 15px;
       }
       &>.el-tabs__header {
-        background-color: #eff2f7;
+        background-color: var(--color-extra-light-gray);
         margin: 0;
       }
       &>.el-tabs__header>.el-tabs__item {
@@ -129,15 +129,15 @@
         margin: * -1px;
 
         &.is-active {
-          background-color: #fff;
-          border-right-color: #d3dce6;
-          border-left-color: #d3dce6;
+          background-color: var(--color-white);
+          border-right-color: var(--color-base-gray);
+          border-left-color: var(--color-base-gray);
 
           &:first-child {
-            border-left-color: #d3dce6;
+            border-left-color: var(--color-base-gray);
           }
           &:last-child {
-            border-right-color: #d3dce6;
+            border-right-color: var(--color-base-gray);
           }
         }
       }

@@ -12,7 +12,7 @@
     position: relative;
     background-color: var(--color-white);
     overflow: hidden;
-    color: #fff;
+    color: var(--color-white);
     opacity: 1;
     display: table;
     transition: opacity .2s;
@@ -59,14 +59,14 @@
     }
 
     & .el-alert__description {
-      color: #fff;
+      color: var(--color-white);
       font-size: var(--alert-description-font-size);
       margin: 5px 0 0 0;
     }
 
     @e closebtn {
       font-size: var(--alert-close-font-size);
-      color: #fff;
+      color: var(--color-white);
       opacity: 1;
       position: absolute 12px 15px * *;
       cursor: pointer;
