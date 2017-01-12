@@ -93,7 +93,7 @@
       handleSelect(filterValue) {
         this.filterValue = filterValue;
 
-        if (filterValue) {
+        if (filterValue || filterValue === 0) {
           this.confirmFilter(this.filteredValue);
         } else {
           this.confirmFilter([]);
@@ -129,7 +129,7 @@
         },
         set(value) {
           if (this.filteredValue) {
-            if (value) {
+            if (value || value === 0) {
               this.filteredValue.splice(0, 1, value);
             } else {
               this.filteredValue.splice(0, 1);
