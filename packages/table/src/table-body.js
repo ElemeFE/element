@@ -116,7 +116,7 @@ export default {
 
   computed: {
     table() {
-      return this.$parent.$parent.columns ? this.$parent.$parent : this.$parent;
+      return this.$parent;
     },
 
     data() {
