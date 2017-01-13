@@ -49,7 +49,7 @@
       :disabled="disabled"
       :readonly="!filterable || multiple"
       :validate-event="false"
-      @focus="toggleMenu"
+      @focus="handleFocus"
       @click="handleIconClick"
       @mousedown.native="handleMouseDown"
       @keyup.native="debouncedOnInputChange"
@@ -401,6 +401,10 @@
         this.$nextTick(() => {
           this.resetInputHeight();
         });
+      },
+
+      handleFocus() {
+        this.visible = true;
       },
 
       handleIconClick(event) {
