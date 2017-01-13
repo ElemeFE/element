@@ -129,7 +129,7 @@
         },
         set(value) {
           if (this.filteredValue) {
-			if ((typeof value !== 'undefined') && (value !== null)) {
+            if ((typeof value !== 'undefined') && (value !== null)) {
               this.filteredValue.splice(0, 1, value);
             } else {
               this.filteredValue.splice(0, 1);
