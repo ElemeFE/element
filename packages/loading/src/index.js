@@ -17,6 +17,14 @@ let fullscreenLoading;
 LoadingConstructor.prototype.originalPosition = '';
 LoadingConstructor.prototype.originalOverflow = '';
 
+const destroyElement = function() {
+  this.$el.removeEventListener('transitionend', destroyElement);
+  this.$el &&
+  this.$el.parentNode &&
+  this.$el.parentNode.removeChild(this.$el);
+  this.$destroy();
+};
+
 LoadingConstructor.prototype.close = function() {
   if (this.fullscreen && this.originalOverflow !== 'hidden') {
     document.body.style.overflow = this.originalOverflow;
@@ -29,10 +37,8 @@ LoadingConstructor.prototype.close = function() {
   if (this.fullscreen) {
     fullscreenLoading = undefined;
   }
-  this.$el &&
-  this.$el.parentNode &&
-  this.$el.parentNode.removeChild(this.$el);
-  this.$destroy();
+  this.$el.addEventListener('transitionend', destroyElement.bind(this));
+  this.visible = false;
 };
 
 const addStyle = (options, parent, instance) => {
@@ -90,6 +96,9 @@ const Loading = (options = {}) => {
     parent.style.overflow = 'hidden';
   }
   parent.appendChild(instance.$el);
+  Vue.nextTick(() => {
+    instance.visible = true;
+  });
   if (options.fullscreen) {
     fullscreenLoading = instance;
   }

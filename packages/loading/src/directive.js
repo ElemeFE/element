@@ -36,37 +36,42 @@ exports.install = Vue => {
       });
     } else {
       if (el.domVisible) {
-        el.mask.style.display = 'none';
-        el.domVisible = false;
-
-        if (binding.modifiers.fullscreen && el.originalOverflow !== 'hidden') {
-          document.body.style.overflow = el.originalOverflow;
-        }
-        if (binding.modifiers.fullscreen || binding.modifiers.body) {
-          document.body.style.position = el.originalPosition;
-        } else {
-          el.style.position = el.originalPosition;
-        }
+        const destroyElement = function() {
+          el.mask.removeEventListener('transitionend', destroyElement);
+          el.domVisible = false;
+          if (binding.modifiers.fullscreen && el.originalOverflow !== 'hidden') {
+            document.body.style.overflow = el.originalOverflow;
+          }
+          if (binding.modifiers.fullscreen || binding.modifiers.body) {
+            document.body.style.position = el.originalPosition;
+          } else {
+            el.style.position = el.originalPosition;
+          }
+        };
+        el.mask.addEventListener('transitionend', destroyElement);
+        el.instance.visible = false;
       }
     }
   };
-  let insertDom = (parent, directive, binding) => {
-    if (!directive.domVisible) {
-      Object.keys(directive.maskStyle).forEach(property => {
-        directive.mask.style[property] = directive.maskStyle[property];
+  let insertDom = (parent, el, binding) => {
+    if (!el.domVisible) {
+      Object.keys(el.maskStyle).forEach(property => {
+        el.mask.style[property] = el.maskStyle[property];
       });
 
-      if (directive.originalPosition !== 'absolute') {
+      if (el.originalPosition !== 'absolute') {
         parent.style.position = 'relative';
       }
       if (binding.modifiers.fullscreen && binding.modifiers.lock) {
         parent.style.overflow = 'hidden';
       }
-      directive.mask.style.display = 'block';
-      directive.domVisible = true;
+      el.domVisible = true;
 
-      parent.appendChild(directive.mask);
-      directive.domInserted = true;
+      parent.appendChild(el.mask);
+      Vue.nextTick(() => {
+        el.instance.visible = true;
+      });
+      el.domInserted = true;
     }
   };
 
@@ -79,6 +84,7 @@ exports.install = Vue => {
           fullscreen: !!binding.modifiers.fullscreen
         }
       });
+      el.instance = mask;
       el.mask = mask.$el;
       el.maskStyle = {};
 
