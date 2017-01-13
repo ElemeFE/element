@@ -15,6 +15,14 @@
 
 > A Vue.js 2.0 UI Toolkit for Web.
 
+<p align="center">
+  <b>Special thanks to the generous sponsorship by:</b>
+  <br><br>
+  <a href="https://laravist.com">
+    <img width="300px" src="https://fuss10.elemecdn.com/4/87/c072c1651b0efd1c5cde39bc8b422png.png">
+  </a>
+</p>
+
 ## Links
 - [Home Page](http://element.eleme.io/)
 - [Docs](http://element.eleme.io/#/component)
