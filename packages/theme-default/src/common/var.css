@@ -12,33 +12,44 @@
   /* Colors
   -------------------------- */
   --color-primary: #20a0ff;
+
   --color-success: #13ce66;
   --color-warning: #f7ba2a;
   --color-danger: #ff4949;
   --color-info: #50bfff;
-  --color-blue: #2e90fe;
-  --color-blue-light: #5da9ff;
-  --color-blue-lighter: rgba(var(--color-blue), 0.12);
+
+  --color-secondary: color(var(--color-primary) s(99%) l(*0.9));
   --color-white: #fff;
+  --color-dark-white: color(var(--color-white) blend(var(--color-primary) 2%));
   --color-black: #000;
-  --color-grey: #c0ccda;
+
+  --color-base-black: color(var(--color-primary) h(+6) s(33%) l(18%));
+  --color-light-black: color(var(--color-base-black) h(+5) s(27%) l(27%));
+  --color-extra-light-black: color(var(--color-base-black) h(+2) s(19%) l(35%));
+
+  --color-base-silver: color(var(--color-base-black) h(+3) s(16%) l(58%));
+  --color-light-silver: color(var(--color-base-black) h(+3) s(23%) l(67%));
+  --color-extra-light-silver: color(var(--color-base-black) s(26%) l(80%));
+
+  --color-base-gray: color(var(--color-base-black) s(28%) l(86%));
+  --color-light-gray: color(var(--color-base-black) h(+10) s(33%) l(92%));
+  --color-extra-light-gray: color(var(--color-base-black) h(+6) s(33%) l(95%));
 
   /* Link
   -------------------------- */
-  --link-color: #475669;
+  --link-color: var(--color-extra-light-black);
   --link-hover-color: var(--color-primary);
 
   /* Border
   -------------------------- */
   --border-width-base: 1px;
   --border-style-base: solid;
-  --border-color-base: var(--color-grey);
-  --border-color-hover: #8492a6;
+  --border-color-base: var(--color-extra-light-silver);
+  --border-color-hover: var(--color-base-silver);
   --border-base: var(--border-width-base) var(--border-style-base) var(--border-color-base);
   --border-radius-base: 4px;
   --border-radius-small: 2px;
   --border-radius-circle: 100%;
-  --shadow-base: 0 0 2px rgba(var(--color-black), 0.18), 0 0 1px var(--color-blue-light);
 
   /* Box-shadow
   -------------------------- */
@@ -52,7 +63,7 @@
   /* Font
   -------------------------- */
   --font-size-base: 14px;
-  --font-color-base: #1f2d3d;
+  --font-color-base: var(--color-base-black);
   --font-color-disabled-base: #bbb;
 
   /* Size
@@ -67,9 +78,9 @@
 
   /* Disable base
   -------------------------- */
-  --disabled-fill-base: #EFF2F7;
+  --disabled-fill-base: var(--color-extra-light-gray);
   --disabled-color-base: #bbb;
-  --disabled-border-base: #D3DCE6;
+  --disabled-border-base: var(--color-base-gray);
 
   /* Icon
   -------------------------- */
@@ -78,7 +89,7 @@
   /* Checkbox
   -------------------------- */
   --checkbox-font-size: 14px;
-  --checkbox-color: #1f2d3d;
+  --checkbox-color: var(--color-base-black);
   --checkbox-input-height: 18px;
   --checkbox-input-width: 18px;
   --checkbox-input-border-radius: var(--border-radius-base);
@@ -95,17 +106,16 @@
   --checkbox-disabled-checked-input-border-color: var(--disabled-border-base);
   --checkbox-disabled-checked-icon-color: var(--color-white);
 
-  --checkbox-checked-input-border-color: var(--color-blue);
+  --checkbox-checked-input-border-color: var(--color-secondary);
   --checkbox-checked-input-fill: var(--color-primary);
   --checkbox-checked-icon-color: var(--fill-base);
 
-  --checkbox-input-shadow-hover: var(--shadow-base);
   --checkbox-input-border-color-hover: var(--color-primary);
 
   /* Radio
   -------------------------- */
   --radio-font-size: 14px;
-  --radio-color: #1f2d3d;
+  --radio-color: var(--color-base-black);
   --radio-input-height: 18px;
   --radio-input-width: 18px;
   --radio-input-border-radius: var(--border-radius-circle);
@@ -126,7 +136,6 @@
   --radio-checked-input-fill: var(--color-white);
   --radio-checked-icon-color: var(--color-primary);
 
-  --radio-input-shadow-hover: var(--shadow-base);
   --radio-input-border-color-hover: var(--color-primary);
 
   --radio-button-font-size: var(--font-size-base);
@@ -136,9 +145,9 @@
   --select-border-color-hover: var(--border-color-hover);
   --select-disabled-border: var(--disabled-border-base);
   --select-font-size: var(--font-size-base);
-  --select-close-hover-color: #99a9bf;
+  --select-close-hover-color: var(--color-light-silver);
 
-  --select-input-color: var(--color-grey);
+  --select-input-color: var(--color-extra-light-silver);
   --select-multiple-input-color: #666;
   --select-input-focus-background: var(--color-primary);
   --select-input-font-size: 12px;
@@ -148,11 +157,11 @@
   --select-tag-background: var(--color-primary);
 
   --select-option-color: var(--link-color);
-  --select-option-disabled-color: var(--color-grey);
+  --select-option-disabled-color: var(--color-extra-light-silver);
   --select-option-height: 36px;
-  --select-option-hover-background: #e5e9f2;
+  --select-option-hover-background: var(--color-light-gray);
   --select-option-selected: var(--color-primary);
-  --select-option-selected-hover: #1D8CE0;
+  --select-option-selected-hover: shade(var(--color-primary), 0.12);
 
   --select-group-color: #999;
   --select-group-height: 30px;
@@ -203,8 +212,8 @@
   --message-min-width: 300px;
   --message-padding: 10px 12px;
   --message-content-color: var(--border-color-hover);
-  --message-close-color: var(--color-grey);
-  --message-close-hover-color: #99A9BF;
+  --message-close-color: var(--color-extra-light-silver);
+  --message-close-hover-color: var(--color-light-silver);
 
   --message-success-color: var(--color-success);
   --message-info-color: var(--color-info);
@@ -220,10 +229,10 @@
   --notification-font-size: var(--font-size-base);
   --notification-color: var(--border-color-hover);
   --notification-title-font-size: 16px;
-  --notification-title-color: #1f2d3d;
+  --notification-title-color: var(--color-base-black);
 
-  --notification-close-color: var(--color-grey);
-  --notification-close-hover-color: #99A9BF;
+  --notification-close-color: var(--color-extra-light-silver);
+  --notification-close-hover-color: var(--color-light-silver);
 
   --notification-success-color: var(--color-success);
   --notification-info-color: var(--color-info);
@@ -236,7 +245,6 @@
   --input-color: var(--font-color-base);
   --input-width: 140px;
   --input-height: 36px;
-  --input-shadow-hover: var(--shadow-base);
   --input-border: var(--border-base);
   --input-border-color: var(--border-color-base);
   --input-border-radius: var(--border-radius-base);
@@ -244,8 +252,8 @@
   --input-fill: var(--color-white);
   --input-fill-disabled: var(--disabled-fill-base);
   --input-color-disabled: var(--font-color-disabled-base);
-  --input-icon-color: var(--color-grey);
-  --input-placeholder-color: #99a9bf;
+  --input-icon-color: var(--color-extra-light-silver);
+  --input-placeholder-color: var(--color-light-silver);
   --input-max-width: 314px;
 
   --input-hover-border: var(--border-color-hover);
@@ -256,7 +264,7 @@
   --input-disabled-fill: var(--disabled-fill-base);
   --input-disabled-border: var(--disabled-border-base);
   --input-disabled-color: var(--disabled-color-base);
-  --input-disabled-placeholder-color: var(--color-grey);
+  --input-disabled-placeholder-color: var(--color-extra-light-silver);
 
   --input-large-font-size: 16px;
   --input-large-height: 42px;
@@ -276,8 +284,8 @@
   --cascader-menu-border-color: var(--border-color-base);
   --cascader-menu-border-width: var(--border-width-base);
   --cascader-menu-color: var(--font-color-base);
-  --cascader-menu-option-color-active: var(--color-blue);
-  --cascader-menu-option-fill-active: rgba(var(--color-blue), 0.12);
+  --cascader-menu-option-color-active: var(--color-secondary);
+  --cascader-menu-option-fill-active: rgba(var(--color-secondary), 0.12);
   --cascader-menu-option-color-hover: var(--font-color-base);
   --cascader-menu-option-fill-hover: rgba(var(--color-black), 0.06);
   --cascader-menu-option-color-disabled: #999;
@@ -301,15 +309,14 @@
   -------------------------- */
   --tab-font-size: var(--font-size-base);
   --tab-border-line: 1px solid #e4e4e4;
-  --tab-header-color-active: var(--color-blue);
+  --tab-header-color-active: var(--color-secondary);
   --tab-header-color-hover: var(--font-color-base);
   --tab-header-color: var(--font-color-base);
   --tab-header-fill-active: rgba(var(--color-black), 0.06);
   --tab-header-fill-hover: rgba(var(--color-black), 0.06);
   --tab-vertical-header-width: 90px;
   --tab-vertical-header-count-color: var(--color-white);
-  --tab-vertical-header-count-fill: var(--color-blue);
-  --tab-horizontal-border: 2px solid #438de0;
+  --tab-vertical-header-count-fill: var(--color-secondary);
 
   /* Button
   -------------------------- */
@@ -331,7 +338,7 @@
   --button-mini-padding-vertical: 4px;
   --button-mini-padding-horizontal: 4px;
 
-  --button-default-color: #1F2D3D;
+  --button-default-color: var(--color-base-black);
   --button-default-fill: var(--color-white);
   --button-default-border: #c4c4c4;
 
@@ -339,8 +346,8 @@
   --button-ghost-fill: transparent;
   --button-ghost-border: none;
 
-  --button-disabled-color: var(--color-grey);
-  --button-disabled-fill: #EFF2F7;
+  --button-disabled-color: var(--color-extra-light-silver);
+  --button-disabled-fill: var(--color-extra-light-gray);
   --button-disabled-border: var(--disabled-border-base);
 
   --button-primary-border: var(--color-primary);
@@ -374,9 +381,9 @@
   /* Switch
  -------------------------- */
   --switch-on-color: var(--color-primary);
-  --switch-off-color: var(--color-grey);
-  --switch-disabled-color: #E5E9F3;
-  --switch-disabled-text-color: #F9FAFC;
+  --switch-off-color: var(--color-extra-light-silver);
+  --switch-disabled-color: var(--color-light-gray);
+  --switch-disabled-text-color: var(--color-dark-white);
 
   --switch-font-size: var(--font-size-base);
   --switch-core-border-radius: 12px;
@@ -386,22 +393,21 @@
 
   /* Dialog
  -------------------------- */
-  --dialog-background-color: var(--color-blue);
-  --dialog-footer-background: var(--color-blue-lighter);
+  --dialog-background-color: var(--color-secondary);
   --dialog-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   --dialog-tiny-width: 30%;
   --dialog-small-width: 50%;
   --dialog-large-width: 90%;
-  --dialog-close-color: var(--color-grey);
+  --dialog-close-color: var(--color-extra-light-silver);
   --dialog-close-hover-color: var(--color-primary);
   --dialog-title-font-size: 16px;
   --dialog-font-size: 14px;
 
   /* Table
  -------------------------- */
-  --table-border-color: #e0e6ed;
-  --table-text-color: #1f2d3d;
-  --table-header-background: #EFF2F7;
+  --table-border-color: color(var(--border-color-base) h(-3) s(27%) l(90%));
+  --table-text-color: var(--color-base-black);
+  --table-header-background: var(--color-extra-light-gray);
 
   /* Pagination
  -------------------------- */
@@ -409,7 +415,7 @@
   --pagination-fill: var(--color-white);
   --pagination-color: var(--link-color);
   --pagination-border-radius: 2px;
-  --pagination-button-color: #99a9bf;
+  --pagination-button-color: var(--color-light-silver);
   --pagination-button-size: 28px;
   --pagination-button-disabled-color: #e4e4e4;
   --pagination-button-disabled-fill: var(--color-white);
@@ -425,14 +431,14 @@
   --popover-arrow-size: 6px;
   --popover-padding: 10px;
   --popover-title-font-size: 13px;
-  --popover-title-color: #1f2d3d;
+  --popover-title-color: var(--color-base-black);
 
   /* Tooltip
   -------------------------- */
-  --tooltip-fill: #1f2d3d;
+  --tooltip-fill: var(--color-base-black);
   --tooltip-color: var(--color-white);
   --tooltip-font-size: 12px;
-  --tooltip-border-color: #1f2d3d;
+  --tooltip-border-color: var(--color-base-black);
   --tooltip-arrow-size: 6px;
   --tooltip-padding: 10px;
 
@@ -445,8 +451,8 @@
   --tag-font-size: 12px;
   --tag-border-radius: 4px;
 
-  --tag-gray-fill: #e5e9f2;
-  --tag-gray-border: #e5e9f2;
+  --tag-gray-fill: var(--color-light-gray);
+  --tag-gray-border: var(--color-light-gray);
   --tag-gray-color: var(--link-color);
 
   --tag-primary-fill: rgba(32,159,255,0.10);
@@ -468,7 +474,7 @@
   /* Dropdown
   -------------------------- */
   --dropdown-menu-box-shadow: var(--box-shadow-dark);
-  --dropdown-menuItem-hover-fill: #e5e9f2;
+  --dropdown-menuItem-hover-fill: var(--color-light-gray);
   --dropdown-menuItem-hover-color: var(--link-color);
 
   /* Badge
@@ -488,10 +494,10 @@
   /* Slider
   --------------------------*/
   --slider-main-background-color: var(--color-primary);
-  --slider-runway-background-color: #e5e9f2;
-  --slider-button-hover-color: #1d8ce0;
-  --slider-stop-background-color: var(--color-grey);
-  --slider-disable-color: var(--color-grey);
+  --slider-runway-background-color: var(--color-light-gray);
+  --slider-button-hover-color: shade(var(--color-primary), 0.12);
+  --slider-stop-background-color: var(--color-extra-light-silver);
+  --slider-disable-color: var(--color-extra-light-silver);
 
   --slider-margin: 16px 0;
   --slider-border-radius: 3px;
@@ -509,14 +515,14 @@
   /* Steps
   --------------------------*/
   --menu-item-color: var(--link-color);
-  --menu-item-fill: #eff2f7;
+  --menu-item-fill: var(--color-extra-light-gray);
   --menu-item-hover-fill: var(--disabled-border-base);
-  --submenu-item-fill: #e5e9f2;
+  --submenu-item-fill: var(--color-light-gray);
 
   --dark-menu-item-color: var(--link-color);
-  --dark-menu-item-fill: #324057;
+  --dark-menu-item-fill: var(--color-light-black);
   --dark-menu-item-hover-fill: var(--link-color);
-  --dark-submenu-item-fill: #1f2d3d;
+  --dark-submenu-item-fill: var(--color-base-black);
 
   /* Rate
   --------------------------*/
@@ -524,19 +530,19 @@
   --rate-font-size: var(--font-size-base);
   --rate-icon-size: 18px;
   --rate-icon-margin: 6px;
-  --rate-icon-color: #C6D1DE;
+  --rate-icon-color: var(--color-extra-light-silver);
 
   /* DatePicker
   --------------------------*/
   --datepicker-color: var(--link-color);
   --datepicker-off-color: #ddd;
   --datepicker-header-color: var(--border-color-hover);
-  --datepicker-icon-color: #99a9bf;
+  --datepicker-icon-color: var(--color-light-silver);
   --datepicker-border-color: var(--disabled-border-base);
   --datepicker-inner-border-color: #e4e4e4;
-  --datepicker-cell-hover-color: #e5e9f2;
-  --datepicker-inrange-color: #D3ECFF;
-  --datepicker-inrange-hover-color: #AFDCFF;
+  --datepicker-cell-hover-color: var(--color-light-gray);
+  --datepicker-inrange-color: tint(var(--color-primary), 0.8);
+  --datepicker-inrange-hover-color: tint(var(--color-primary), 0.64);
   --datepicker-active-color: var(--color-primary);
   --datepicker-text-hover-color: var(--color-primary);
 
@@ -547,8 +553,8 @@
 
   /* Scrollbar
   --------------------------*/
-  --scrollbar-background-color: rgba(#99a9bf, .3);
-  --scrollbar-hover-background-color: rgba(#99a9bf, .5);
+  --scrollbar-background-color: rgba(var(--color-light-silver), .3);
+  --scrollbar-hover-background-color: rgba(var(--color-light-silver), .5);
 
   /* Carousel
   --------------------------*/
@@ -564,14 +570,14 @@
 
   /* Collapse
   --------------------------*/
-  --collapse-border-color: #e0e6ed;
+  --collapse-border-color: color(var(--border-color-base) h(-3) s(27%) l(90%));
   --collapse-header-height: 43px;
   --collapse-border-radius: 0;
   --collapse-header-padding: 20px;
-  --collapse-header-fill: #fff;
-  --collapse-header-color: #475669;
+  --collapse-header-fill: var(--color-white);
+  --collapse-header-color: var(--color-extra-light-black);
   --collapse-header-size: 13px;
-  --collapse-content-fill: #f9fafc;
+  --collapse-content-fill: var(--color-dark-white);
   --collapse-content-size: 13px;
-  --collapse-content-color: #1f2d3d;
+  --collapse-content-color: var(--color-base-black);
 }

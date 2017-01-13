@@ -5,7 +5,7 @@
     color: var(--datepicker-color);
     border: 1px solid var(--datepicker-border-color);
     box-shadow: 0 2px 6px #ccc;
-    background: #fff;
+    background: var(--color-white);
     border-radius: 2px;
     line-height: 20px;
     margin: 5px 0;
@@ -27,7 +27,7 @@
       border-top: 1px solid var(--datepicker-inner-border-color);
       padding: 4px;
       text-align: right;
-      background-color: #fff;
+      background-color: var(--color-white);
       position: relative;
     }
 
@@ -103,7 +103,7 @@
     border-right: 1px solid var(--datepicker-inner-border-color);
     box-sizing: border-box;
     padding-top: 6px;
-    background-color: #f9fafc;
+    background-color: var(--color-dark-white);
   }
 
   .el-picker-panel *[slot=sidebar] + .el-picker-panel__body,
