@@ -11,7 +11,8 @@
     display: inline-block;
     vertical-align: middle;
     background-color: #fff;
-    width: var(--msgbox-width);
+    width: 98%;
+    max-width: var(--msgbox-width);
     border-radius: var(--msgbox-border-radius);
     font-size: var(--msgbox-font-size);
     -webkit-user-select: none;
