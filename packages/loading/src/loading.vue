@@ -1,5 +1,5 @@
 <template>
-  <transition name="el-loading-fade">
+  <transition name="el-loading-fade" @after-leave="handleAfterLeave">
     <div
       v-show="visible"
       class="el-loading-mask"
@@ -23,6 +23,12 @@
         visible: false,
         customClass: ''
       };
+    },
+
+    methods: {
+      handleAfterLeave() {
+        this.$emit('after-leave');
+      }
     }
   };
 </script>

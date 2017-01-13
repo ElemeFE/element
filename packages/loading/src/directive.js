@@ -36,8 +36,7 @@ exports.install = Vue => {
       });
     } else {
       if (el.domVisible) {
-        const destroyElement = function() {
-          el.mask.removeEventListener('transitionend', destroyElement);
+        el.instance.$on('after-leave', _ => {
           el.domVisible = false;
           if (binding.modifiers.fullscreen && el.originalOverflow !== 'hidden') {
             document.body.style.overflow = el.originalOverflow;
@@ -47,8 +46,7 @@ exports.install = Vue => {
           } else {
             el.style.position = el.originalPosition;
           }
-        };
-        el.mask.addEventListener('transitionend', destroyElement);
+        });
         el.instance.visible = false;
       }
     }
