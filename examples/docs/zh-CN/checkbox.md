@@ -8,26 +8,25 @@
         checked: false,
         checked1: false,
         checked2: true,
-        checkAll: false,
         isValid: '可用',
+        checkAll: false,
         cities: cityOptions,
         checkedCities: ['上海', '北京'],
         isIndeterminate: false
       };
     },
-    watch: {
-      checkAll(value) {
-        this.checkedCities = value ? cityOptions : [];
-      },
-      checkedCities(value) {
-        let checkedCount = value.length;
-        this.checkAll = checkedCount === this.cities.length;
-        this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
-      }
-    },
     methods: {
       handleChange(ev) {
         console.log(ev);
+      },
+      handleCheckAllChange(event) {
+        this.checkedCities = event.target.checked ? cityOptions : [];
+        this.isIndeterminate = false;
+      },
+      handleCheckedCitiesChange(value) {
+        let checkedCount = value.length;
+        this.checkAll = checkedCount === this.cities.length;
+        this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
       }
     }
   };
@@ -131,32 +130,33 @@
 
 ```html
 <template>
-  <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll">备选项</el-checkbox>
+  <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
   <div style="margin: 15px 0;"></div>
-  <el-checkbox-group v-model="checkedCities">
+  <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
     <el-checkbox v-for="city in cities" :label="city">{{city}}</el-checkbox>
   </el-checkbox-group>
 </template>
 <script>
+  const cityOptions = ['上海', '北京', '广州', '深圳'];
   export default {
     data() {
       return {
         checkAll: true,
         checkedCities: [],
-        cities: [{
-          value: 'ShangHai',
-          display: '上海'
-        }, {
-          value: 'BeiJing',
-          display: '北京'
-        }, {
-          value: 'GuangZhou',
-          display: '广州'
-        }, {
-          value: 'ShenZhen',
-          display: '深圳'
-        }]
+        cities: cityOptions,
+        isIndeterminate: false
       };
+    },
+    methods: {
+      handleCheckAllChange(event) {
+        this.checkedCities = event.target.checked ? cityOptions : [];
+        this.isIndeterminate = false;
+      },
+      handleCheckedCitiesChange(value) {
+        let checkedCount = value.length;
+        this.checkAll = checkedCount === this.cities.length;
+        this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
+      }
     }
   };
 </script>
