@@ -16,7 +16,7 @@
         </div>
         <div class="el-message-box__btns">
           <el-button :class="[ cancelButtonClasses ]" v-show="showCancelButton" @click.native="handleAction('cancel')">{{ cancelButtonText || t('el.messagebox.cancel') }}</el-button>
-          <el-button ref="confirm" :class="[ confirmButtonClasses ]" v-show="showConfirmButton" @click.native="handleAction('confirm')">{{ confirmButtonText || t('el.messagebox.confirm') }}</el-button>
+          <el-button ref="confirm" :class="[ confirmButtonClasses ]" v-show="showConfirmButton" :loading="loading" @click.native="handleAction('confirm')">{{ confirmButtonText || t('el.messagebox.confirm') }}</el-button>
         </div>
       </div>
     </div>
@@ -79,29 +79,6 @@
     },
 
     methods: {
-      doClose() {
-        this.value = false;
-        this._closing = true;
-
-        this.onClose && this.onClose();
-
-        if (this.lockScroll) {
-          setTimeout(() => {
-            if (this.modal && this.bodyOverflow !== 'hidden') {
-              document.body.style.overflow = this.bodyOverflow;
-              document.body.style.paddingRight = this.bodyPaddingRight;
-            }
-            this.bodyOverflow = null;
-            this.bodyPaddingRight = null;
-          }, 200);
-        }
-        this.opened = false;
-
-        if (!this.transition) {
-          this.doAfterClose();
-        }
-      },
-
       handleWrapperClick() {
         if (this.closeOnClickModal) {
           this.close();
@@ -112,9 +89,18 @@
         if (this.$type === 'prompt' && action === 'confirm' && !this.validate()) {
           return;
         }
+
         var callback = this.callback;
-        this.value = false;
-        callback(action);
+        if (this.autoHide) {
+          this.value = false;
+        }
+
+        var handlers = this.handlers();
+        if (this.showInput) {
+          callback(action, this.inputValue, handlers);
+        } else {
+          callback(action, handlers);
+        }
       },
 
       validate() {
@@ -142,6 +128,37 @@
         this.editorErrorMessage = '';
         removeClass(this.$refs.input.$el.querySelector('input'), 'invalid');
         return true;
+      },
+
+      hide() {
+        this.value = false;
+      },
+
+      safeHide() {
+        let timeStamp = new Date().getTime();
+        return _ => {
+          if (this._openTimeStamp > timeStamp) {
+            return;
+          } else {
+            this.hide();
+          }
+        };
+      },
+
+      showLoading() {
+        this.loading = true;
+      },
+
+      hideLoading() {
+        this.loading = false;
+      },
+
+      handlers() {
+        return {
+          showLoading: this.showLoading,
+          hideLoading: this.hideLoading,
+          hide: this.safeHide()
+        };
       }
     },
 
@@ -165,6 +182,7 @@
               this.$refs.input.$el.querySelector('input').focus();
             }
           }, 500);
+          this._openTimeStamp = new Date().getTime();
         } else {
           this.editorErrorMessage = '';
           removeClass(this.$refs.input.$el.querySelector('input'), 'invalid');
@@ -192,7 +210,10 @@
         confirmButtonDisabled: false,
         cancelButtonClass: '',
         editorErrorMessage: null,
-        callback: null
+        callback: null,
+        loading: false,
+        autoHide: true,
+        _openTimeStamp: ''
       };
     }
   };

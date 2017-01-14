@@ -20,7 +20,9 @@ const defaults = {
   confirmButtonText: '',
   cancelButtonText: '',
   confirmButtonClass: '',
-  cancelButtonClass: ''
+  cancelButtonClass: '',
+  loading: false,
+  autoHide: true
 };
 
 import Vue from 'vue';
@@ -34,28 +36,21 @@ let msgQueue = [];
 
 const defaultCallback = action => {
   if (currentMsg) {
-    let callback = currentMsg.callback;
-    if (typeof callback === 'function') {
-      if (instance.showInput) {
-        callback(instance.inputValue, action);
-      } else {
-        callback(action);
-      }
-    }
     if (currentMsg.resolve) {
       let $type = currentMsg.options.$type;
+      let handlers = instance.handlers();
       if ($type === 'confirm' || $type === 'prompt') {
         if (action === 'confirm') {
           if (instance.showInput) {
-            currentMsg.resolve({ value: instance.inputValue, action });
+            currentMsg.resolve({ value: instance.inputValue, action, handlers });
           } else {
-            currentMsg.resolve(action);
+            currentMsg.resolve({ action, handlers });
           }
         } else if (action === 'cancel' && currentMsg.reject) {
-          currentMsg.reject(action);
+          currentMsg.reject({ action, handlers });
         }
       } else {
-        currentMsg.resolve(action);
+        currentMsg.resolve({ action, handlers });
       }
     }
   }

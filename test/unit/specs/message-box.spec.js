@@ -144,10 +144,11 @@ describe('MessageBox', () => {
   it('callback', done => {
     MessageBox({
       title: '消息',
-      message: '这是一段内容'
-    }, action => {
-      expect(action).to.equal('cancel');
-      done();
+      message: '这是一段内容',
+      callback: action => {
+        expect(action).to.equal('cancel');
+        done();
+      }
     });
     setTimeout(() => {
       document.querySelector('.el-message-box__close').click();
@@ -157,8 +158,8 @@ describe('MessageBox', () => {
   describe('promise', () => {
     it('resolve', done => {
       MessageBox.confirm('此操作将永久删除该文件, 是否继续?', '提示')
-        .then(action => {
-          expect(action).to.equal('confirm');
+        .then(options => {
+          expect(options.action).to.equal('confirm');
           done();
         });
       setTimeout(() => {
@@ -169,8 +170,8 @@ describe('MessageBox', () => {
 
     it('reject', done => {
       MessageBox.confirm('此操作将永久删除该文件, 是否继续?', '提示')
-        .catch(action => {
-          expect(action).to.equal('cancel');
+        .catch(options => {
+          expect(options.action).to.equal('cancel');
           done();
         });
       setTimeout(() => {
