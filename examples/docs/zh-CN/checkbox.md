@@ -1,4 +1,5 @@
 <script>
+  const cityOptions = ['上海', '北京', '广州', '深圳'];
   module.exports = {
     data() {
       return {
@@ -7,8 +8,22 @@
         checked: false,
         checked1: false,
         checked2: true,
-        isValid: '可用'
+        checkAll: false,
+        isValid: '可用',
+        cities: cityOptions,
+        checkedCities: ['上海', '北京'],
+        isIndeterminate: false
       };
+    },
+    watch: {
+      checkAll(value) {
+        this.checkedCities = value ? cityOptions : [];
+      },
+      checkedCities(value) {
+        let checkedCount = value.length;
+        this.checkAll = checkedCount === this.cities.length;
+        this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
+      }
     },
     methods: {
       handleChange(ev) {
@@ -101,6 +116,46 @@
     data () {
       return {
         checkList: ['选中且禁用','复选框 A']
+      };
+    }
+  };
+</script>
+```
+:::
+
+### indeterminate 状态
+
+`indeterminate` 属性用以表示 checkbox 的不确定状态，一般用于实现全选的效果
+
+:::demo
+
+```html
+<template>
+  <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll">备选项</el-checkbox>
+  <div style="margin: 15px 0;"></div>
+  <el-checkbox-group v-model="checkedCities">
+    <el-checkbox v-for="city in cities" :label="city">{{city}}</el-checkbox>
+  </el-checkbox-group>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        checkAll: true,
+        checkedCities: [],
+        cities: [{
+          value: 'ShangHai',
+          display: '上海'
+        }, {
+          value: 'BeiJing',
+          display: '北京'
+        }, {
+          value: 'GuangZhou',
+          display: '广州'
+        }, {
+          value: 'ShenZhen',
+          display: '深圳'
+        }]
       };
     }
   };
