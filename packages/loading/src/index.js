@@ -29,10 +29,13 @@ LoadingConstructor.prototype.close = function() {
   if (this.fullscreen) {
     fullscreenLoading = undefined;
   }
-  this.$el &&
-  this.$el.parentNode &&
-  this.$el.parentNode.removeChild(this.$el);
-  this.$destroy();
+  this.$on('after-leave', _ => {
+    this.$el &&
+    this.$el.parentNode &&
+    this.$el.parentNode.removeChild(this.$el);
+    this.$destroy();
+  });
+  this.visible = false;
 };
 
 const addStyle = (options, parent, instance) => {
@@ -90,6 +93,9 @@ const Loading = (options = {}) => {
     parent.style.overflow = 'hidden';
   }
   parent.appendChild(instance.$el);
+  Vue.nextTick(() => {
+    instance.visible = true;
+  });
   if (options.fullscreen) {
     fullscreenLoading = instance;
   }
