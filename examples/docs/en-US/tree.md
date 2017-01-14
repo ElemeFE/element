@@ -2,21 +2,36 @@
   const data = [{
     label: 'Level one 1',
     children: [{
-      label: 'Level two 1-1'
+      label: 'Level two 1-1',
+      children: [{
+        label: 'Level three 1-1-1'
+      }]
     }]
   }, {
     label: 'Level one 2',
     children: [{
-      label: 'Level two 2-1'
+      label: 'Level two 2-1',
+      children: [{
+        label: 'Level three 2-1-1'
+      }]
     }, {
-      label: 'Level two 2-2'
+      label: 'Level two 2-2',
+      children: [{
+        label: 'Level three 2-2-1'
+      }]
     }]
   }, {
     label: 'Level one 3',
     children: [{
-      label: 'Level two 3-1'
+      label: 'Level two 3-1',
+      children: [{
+        label: 'Level three 3-1-1'
+      }]
     }, {
-      label: 'Level two 3-2'
+      label: 'Level two 3-2',
+      children: [{
+        label: 'Level three 3-2-1'
+      }]
     }]
   }];
 
@@ -107,21 +122,36 @@ Basic tree structure.
         data: [{
           label: 'Level one 1',
           children: [{
-            label: 'Level two 1-1'
+            label: 'Level two 1-1',
+            children: [{
+              label: 'Level three 1-1-1'
+            }]
           }]
         }, {
           label: 'Level one 2',
           children: [{
-            label: 'Level two 2-1'
+            label: 'Level two 2-1',
+            children: [{
+              label: 'Level three 2-1-1'
+            }]
           }, {
-            label: 'Level two 2-2'
+            label: 'Level two 2-2',
+            children: [{
+              label: 'Level three 2-2-1'
+            }]
           }]
         }, {
           label: 'Level one 3',
           children: [{
-            label: 'Level two 3-1'
+            label: 'Level two 3-1',
+            children: [{
+              label: 'Level three 3-1-1'
+            }]
           }, {
-            label: 'Level two 3-2'
+            label: 'Level two 3-2',
+            children: [{
+              label: 'Level three 3-2-1'
+            }]
           }]
         }],
         defaultProps: {
@@ -214,6 +244,69 @@ Used for node selection. In the following example, data for each layer is acquir
 ```
 :::
 
+### Accordion
+
+Only one node among the same level can be expanded at one time.
+
+::: demo
+```html
+<el-tree :data="data" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
+
+<script>
+  export default {
+    data() {
+      return {
+        data: [{
+          label: 'Level one 1',
+          children: [{
+            label: 'Level two 1-1',
+            children: [{
+              label: 'Level three 1-1-1'
+            }]
+          }]
+        }, {
+          label: 'Level one 2',
+          children: [{
+            label: 'Level two 2-1',
+            children: [{
+              label: 'Level three 2-1-1'
+            }]
+          }, {
+            label: 'Level two 2-2',
+            children: [{
+              label: 'Level three 2-2-1'
+            }]
+          }]
+        }, {
+          label: 'Level one 3',
+          children: [{
+            label: 'Level two 3-1',
+            children: [{
+              label: 'Level three 3-1-1'
+            }]
+          }, {
+            label: 'Level two 3-2',
+            children: [{
+              label: 'Level three 3-2-1'
+            }]
+          }]
+        }],
+        defaultProps: {
+          children: 'children',
+          label: 'label'
+        }
+      };
+    },
+    methods: {
+      handleNodeClick(data) {
+        console.log(data);
+      }
+    }
+  };
+</script>
+```
+:::
+
 ### Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -233,6 +326,7 @@ Used for node selection. In the following example, data for each layer is acquir
 | check-strictly | whether checked state of a node not affects its father and child nodes when `show-checkbox` is `true` | boolean | — | false |
 | default-checked-keys | array of keys of initially checked nodes | array | — | — |
 | filter-node-method | this function will be executed on each node when use filter method. if return `false`, tree node will be hidden. | Function(value, data, node) | — | — |
+| accordion | whether only one node among the same level can be expanded at one time | boolean | — | false |
 
 ### props
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
