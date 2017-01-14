@@ -65,18 +65,18 @@
           showCancelButton: true,
           confirmButtonText: 'OK',
           cancelButtonText: 'Cancel',
-          beforeClose: (action, instance) => {
+          beforeClose: (action, instance, done) => {
             if (action === 'confirm') {
               instance.confirmButtonLoading = true;
               instance.confirmButtonText = 'Loading...';
               setTimeout(() => {
-                instance.close();
+                done();
                 setTimeout(() => {
                   instance.confirmButtonLoading = false;
                 }, 300);
               }, 3000);
             } else {
-              instance.close();
+              done();
             }
           }
         }).then(action => {
@@ -208,7 +208,7 @@ Prompt is used when user input is required.
 
 Can be customized to show various content.
 
-:::demo The three methods mentioned above are repackagings of the `$msgbox` method. This example calls `$msgbox` method directly using the `showCancelButton` attribute, which is used to indicate if a cancel button is displayed. Besides we can use `cancelButtonClass` to add a custom style and `cancelButtonText` to customize the button text (the confirm button also has these fields, and a complete list of fields can be found at the end of this documentation). This example also uses the `beforeClose` attribute. It is a method and will be triggered when the MessageBox instance will be closed, and its execution will stop the instance from closing. It has two parameters: `action` and `instance`. Using it enables you to manipulate the instance before it closes, e.g. activating `loading` for confirm button; you can invoke the `close` method registered on the instance to close the MessageBox instance.
+:::demo The three methods mentioned above are repackagings of the `$msgbox` method. This example calls `$msgbox` method directly using the `showCancelButton` attribute, which is used to indicate if a cancel button is displayed. Besides we can use `cancelButtonClass` to add a custom style and `cancelButtonText` to customize the button text (the confirm button also has these fields, and a complete list of fields can be found at the end of this documentation). This example also uses the `beforeClose` attribute. It is a method and will be triggered when the MessageBox instance will be closed, and its execution will stop the instance from closing. It has three parameters: `action`, `instance` and `done`. Using it enables you to manipulate the instance before it closes, e.g. activating `loading` for confirm button; you can invoke the `done` method to close the MessageBox instance (if `done` is not called inside `beforeClose`, the instance will not be closed).
 
 ```html
 <template>
@@ -225,18 +225,18 @@ Can be customized to show various content.
           showCancelButton: true,
           confirmButtonText: 'OK',
           cancelButtonText: 'Cancel',
-          beforeClose: (action, instance) => {
+          beforeClose: (action, instance, done) => {
             if (action === 'confirm') {
               instance.confirmButtonLoading = true;
               instance.confirmButtonText = 'Loading...';
               setTimeout(() => {
-                instance.close();
+                done();
                 setTimeout(() => {
                   instance.confirmButtonLoading = false;
                 }, 300);
               }, 3000);
             } else {
-              instance.close();
+              done();
             }
           }
         }).then(action => {
@@ -275,7 +275,7 @@ The corresponding methods are: `MessageBox`, `MessageBox.alert`, `MessageBox.con
 | type | message type, used for icon display | string | success/info/warning/error | — |
 | customClass | custom class name for MessageBox | string | — | — |
 | callback | MessageBox closing callback if you don't prefer Promise | function(action), where action can be 'confirm' or 'cancel', and `instance` is the MessageBox instance. You can access to that instance's attributes and methods | — | — |
-| beforeClose | callback before MessageBox closes, and it will prevent MessageBox from closing | function(action, instance), where `action` can be 'confirm' or 'cancel', and `instance` is the MessageBox instance. You can access to that instance's attributes and methods | — | — |
+| beforeClose | callback before MessageBox closes, and it will prevent MessageBox from closing | function(action, instance, done), where `action` can be 'confirm' or 'cancel'; `instance` is the MessageBox instance, and you can access to that instance's attributes and methods; `done` is for closing the instance | — | — |
 | lockScroll | whether to lock body scroll when MessageBox prompts | boolean | — | true |
 | showCancelButton | whether to show a cancel button | boolean | — | false (true when called with confirm and prompt) |
 | showConfirmButton | whether to show a confirm button | boolean | — | true |

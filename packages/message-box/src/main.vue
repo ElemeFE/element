@@ -92,7 +92,7 @@
     },
 
     methods: {
-      safeClose() {
+      getSafeClose() {
         const currentId = this.uid;
         return () => {
           this.$nextTick(() => {
@@ -138,8 +138,8 @@
         }
         this.action = action;
         if (typeof this.beforeClose === 'function') {
-          this.close = this.safeClose();
-          this.beforeClose(action, this);
+          this.close = this.getSafeClose();
+          this.beforeClose(action, this, this.close);
         } else {
           this.doClose();
         }
