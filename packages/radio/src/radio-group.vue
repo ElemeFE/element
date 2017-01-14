@@ -16,14 +16,8 @@
     props: {
       value: [String, Number],
       size: String,
-      fill: {
-        type: String,
-        default: '#20a0ff'
-      },
-      textColor: {
-        type: String,
-        default: '#fff'
-      },
+      fill: String,
+      textColor: String,
       disabled: Boolean
     },
     watch: {

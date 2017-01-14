@@ -76,7 +76,9 @@
       },
 
       isDisabled() {
-        return this.isGroup ? this._radioGroup.disabled : this.disabled;
+        return this.isGroup
+          ? this._radioGroup.disabled || this.disabled
+          : this.disabled;
       }
     }
   };

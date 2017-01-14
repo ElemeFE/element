@@ -139,6 +139,9 @@
   --radio-input-border-color-hover: var(--color-primary);
 
   --radio-button-font-size: var(--font-size-base);
+  --radio-button-checked-fill: var(--color-primary);
+  --radio-button-checked-color: var(--color-white);
+  --radio-button-checked-border-color: var(--color-primary);
 
   /* Select
   -------------------------- */

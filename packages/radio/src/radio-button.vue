@@ -3,7 +3,8 @@
     class="el-radio-button"
     :class="[
       size ? 'el-radio-button--' + size : '',
-      { 'is-active': value === label }
+      { 'is-active': value === label },
+      { 'is-disabled': isDisabled }
     ]"
   >
     <input
@@ -50,9 +51,9 @@
       },
       activeStyle() {
         return {
-          backgroundColor: this._radioGroup.fill,
-          borderColor: this._radioGroup.fill,
-          color: this._radioGroup.textColor
+          backgroundColor: this._radioGroup.fill || '',
+          borderColor: this._radioGroup.fill || '',
+          color: this._radioGroup.textColor || ''
         };
       },
       size() {
