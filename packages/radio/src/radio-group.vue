@@ -1,3 +1,8 @@
+<template>
+  <div class="el-radio-group">
+    <slot></slot>
+  </div>
+</template>
 <script>
   import Emitter from 'element-ui/src/mixins/emitter';
 
@@ -18,7 +23,8 @@
       textColor: {
         type: String,
         default: '#fff'
-      }
+      },
+      disabled: Boolean
     },
     watch: {
       value(value) {
@@ -29,8 +35,3 @@
   };
 </script>
 
-<template>
-  <div class="el-radio-group">
-    <slot></slot>
-  </div>
-</template>
