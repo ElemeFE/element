@@ -151,10 +151,14 @@ export default {
       required: true
     },
     border: Boolean,
-    defaultSortProp: String,
-    defaultSortOrder: {
-      type: String,
-      default: 'ascending'
+    defaultSort: {
+      type: Object,
+      default() {
+        return {
+          prop: '',
+          order: ''
+        };
+      }
     }
   },
 
@@ -190,16 +194,15 @@ export default {
   },
 
   mounted() {
-    if (this.defaultSortProp) {
+    if (this.defaultSort.prop) {
       const states = this.store.states;
-      states.sortProp = this.defaultSortProp;
-      states.sortOrder = this.defaultSortOrder;
-
+      states.sortProp = this.defaultSort.prop;
+      states.sortOrder = this.defaultSort.order || 'ascending';
       this.$nextTick(_ => {
         for (let i = 0, length = this.columns.length; i < length; i++) {
           let column = this.columns[i];
-          if (column.property === this.defaultSortProp) {
-            column.order = this.defaultSortOrder;
+          if (column.property === states.sortProp) {
+            column.order = states.sortOrder;
             states.sortingColumn = column;
             break;
           }
