@@ -47,6 +47,7 @@
       top: 0;
       text-align: center;
       color: var(--input-icon-color);
+      transition: all .3s;
 
       &:after {
         content: '';
@@ -58,6 +59,17 @@
 
       & + .el-input__inner {
         padding-right: 35px;
+      }
+
+      @when clickable {
+        &:hover {
+          cursor: pointer;
+          color: var(--input-hover-border);
+
+          & + .el-input__inner {
+            border-color: var(--input-hover-border);
+          }
+        }
       }
     }
 
