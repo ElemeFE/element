@@ -286,25 +286,26 @@ Prepend or append an element, generally a label or a button.
 
 ```html
 <div>
-  <el-input placeholder="请输入内容" v-model="input3">
+  <el-input placeholder="Please input" v-model="input3">
     <template slot="prepend">Http://</template>
   </el-input>
 </div>
 <div style="margin-top: 15px;">
-  <el-input placeholder="请输入内容" v-model="input4">
+  <el-input placeholder="Please input" v-model="input4">
     <template slot="append">.com</template>
   </el-input>
 </div>
 <div style="margin-top: 15px;">
-  <el-input placeholder="请输入内容" v-model="input5">
-    <el-select v-model="select" slot="prepend" placeholder="请选择">
-      <el-option label="餐厅名" value="1"></el-option>
-      <el-option label="订单号" value="2"></el-option>
-      <el-option label="用户电话" value="3"></el-option>
+  <el-input placeholder="Please input" v-model="input5">
+    <el-select v-model="select" slot="prepend" placeholder="Select">
+      <el-option label="Restaurant" value="1"></el-option>
+      <el-option label="Order No." value="2"></el-option>
+      <el-option label="Tel" value="3"></el-option>
     </el-select>
     <el-button slot="append" icon="search"></el-button>
   </el-input>
 </div>
+
 <style>
   .el-select .el-input {
     width: 110px;
@@ -332,21 +333,21 @@ export default {
 <div class="demo-input-size">
   <el-input
     size="large"
-    placeholder="请输入内容"
+    placeholder="Please Input"
     v-model="input6">
   </el-input>
   <el-input
-    placeholder="请输入内容"
+    placeholder="Please Input"
     v-model="input7">
   </el-input>
   <el-input
     size="small"
-    placeholder="请输入内容"
+    placeholder="Please Input"
     v-model="input8">
   </el-input>
   <el-input
     size="mini"
-    placeholder="请输入内容"
+    placeholder="Please Input"
     v-model="input9">
   </el-input>
 </div>
@@ -374,22 +375,22 @@ You can get some recommended tips based on the current input.
 ```html
 <el-row class="demo-autocomplete">
   <el-col :span="12">
-    <div class="sub-title">激活即列出输入建议</div>
+    <div class="sub-title">list suggestions when activated</div>
     <el-autocomplete
       class="inline-input"
       v-model="state1"
       :fetch-suggestions="querySearch"
-      placeholder="请输入内容"
+      placeholder="Please Input"
       @select="handleSelect"
     ></el-autocomplete>
   </el-col>
   <el-col :span="12">
-    <div class="sub-title">输入后匹配输入建议</div>
+    <div class="sub-title">list suggestions on input</div>
     <el-autocomplete
       class="inline-input"
       v-model="state2"
       :fetch-suggestions="querySearch"
-      placeholder="请输入内容"
+      placeholder="Please Input"
       :trigger-on-focus="false"
       @select="handleSelect"
     ></el-autocomplete>
