@@ -4,7 +4,10 @@
       return {
         num1: 1,
         num2: 1,
-        num3: 5
+        num3: 5,
+        num4: 1,
+        num5: 1,
+        num6: 1
       }
     },
     methods: {
@@ -85,6 +88,32 @@
     data() {
       return {
         num3: 5
+      }
+    }
+  };
+</script>
+```
+:::
+
+### 尺寸
+
+额外提供了 `large`、`small` 两种尺寸的数字输入框
+
+:::demo
+
+```html
+<template>
+  <el-input-number size="large" v-model="num4"></el-input-number>
+  <el-input-number v-model="num5"></el-input-number>
+  <el-input-number size="small" v-model="num6"></el-input-number>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        num4: 1,
+        num5: 1,
+        num6: 1
       }
     }
   };
