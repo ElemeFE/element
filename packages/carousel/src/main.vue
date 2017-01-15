@@ -65,7 +65,7 @@ export default {
       type: String,
       default: 'hover'
     },
-    autoPlay: {
+    autoplay: {
       type: Boolean,
       default: true
     },
@@ -168,7 +168,7 @@ export default {
     },
 
     startTimer() {
-      if (this.interval <= 0 || !this.autoPlay) return;
+      if (this.interval <= 0 || !this.autoplay) return;
       this.timer = setInterval(this.playSlides, this.interval);
     },
 

@@ -818,6 +818,7 @@ Form component allows you to verify your data, helping you find and correct erro
 | label-position | position of label | string | left/right/top | right |
 | label-width | width of label, and all form items will inherit from `Form` | string | — | — |
 | label-suffix | suffix of the label | string | — | — |
+| show-message  | whether to show the error message | boolean | — | true |
 
 ### Form Methods
 
@@ -837,3 +838,4 @@ Form component allows you to verify your data, helping you find and correct erro
 | required | whether the field is required or not, will be determined by validation rules if omitted | string |  — | false |
 | rules | validation rules of form | object | — | — |
 | error | field error message, set its value and the field will validate error and show this message immediately | string | — | — |
+| show-message  | whether to show the error message | boolean | — | true |

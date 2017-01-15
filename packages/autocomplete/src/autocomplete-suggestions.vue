@@ -11,14 +11,14 @@
         <li
           v-if="!parent.customItem"
           :class="{'highlighted': parent.highlightedIndex === index}"
-          @click="parent.select(index)"
+          @click="select(item)"
         >
           {{item.value}}
         </li>
         <component
           v-else
           :class="{'highlighted': parent.highlightedIndex === index}"
-          @click="parent.select(index)"
+          @click="select(item)"
           :is="parent.customItem"
           :item="item"
           :index="index">
@@ -29,8 +29,9 @@
 </template>
 <script>
   import Popper from 'element-ui/src/utils/vue-popper';
+  import Emitter from 'element-ui/src/mixins/emitter';
   export default {
-    mixins: [Popper],
+    mixins: [Popper, Emitter],
 
     componentName: 'ElAutocompleteSuggestions',
 
@@ -50,6 +51,12 @@
             gpuAcceleration: false
           };
         }
+      }
+    },
+
+    methods: {
+      select(item) {
+        this.dispatch('ElAutocomplete', 'item-click', item);
       }
     },
 

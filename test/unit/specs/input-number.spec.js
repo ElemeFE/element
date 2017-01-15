@@ -237,7 +237,7 @@ describe('InputNumber', () => {
   it('invalid value reset', done => {
     vm = createVue({
       template: `
-        <el-input-number v-model="value" :min="5" :max="10">
+        <el-input-number v-model="value" :min="5" :max="10" ref="inputNumber">
         </el-input-number>
       `,
       data() {
@@ -246,18 +246,18 @@ describe('InputNumber', () => {
         };
       }
     }, true);
-
+    const inputNumber = vm.$refs.inputNumber;
     vm.value = 100;
     vm.$nextTick(_ => {
-      expect(vm.value).to.be.equal(5);
+      expect(inputNumber.currentValue).to.be.equal(10);
       vm.value = 4;
 
       vm.$nextTick(_ => {
-        expect(vm.value).to.be.equal(5);
+        expect(inputNumber.currentValue).to.be.equal(5);
         vm.value = 'dsajkhd';
 
         vm.$nextTick(_ => {
-          expect(vm.value).to.be.equal(5);
+          expect(inputNumber.currentValue).to.be.equal(5);
           done();
         });
       });

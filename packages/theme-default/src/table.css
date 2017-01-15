@@ -11,7 +11,7 @@
     box-sizing: border-box;
     width: 100%;
     max-width: 100%;
-    background-color: #fff;
+    background-color: var(--color-white);
     border: 1px solid var(--table-border-color);
     font-size: 14px;
     color: var(--table-text-color);
@@ -63,7 +63,7 @@
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
-      color: #5e6d82;
+      color: color(var(--color-primary) s(16%) l(44%));
     }
 
     @e expand-column {
@@ -96,11 +96,11 @@
 
     @e expanded-cell {
       padding: 20px 50px;
-      background-color: #f9fafc;
+      background-color: var(--color-dark-white);
       box-shadow: inset 0 2px 0 #f4f4f4;
 
       &:hover {
-        background-color: #f9fafc !important;
+        background-color: var(--color-dark-white) !important;
       }
     }
 
@@ -277,7 +277,7 @@
       box-sizing: border-box;
 
       &.highlight {
-        color: #20a0ff;
+        color: var(--color-primary);
       }
     }
 
@@ -307,13 +307,13 @@
         top: 11px;
         border-top: none;
         border-right: 5px solid transparent;
-        border-bottom: 5px solid #99a9bf;
+        border-bottom: 5px solid var(--color-light-silver);
         border-left: 5px solid transparent;
       }
 
       &.descending {
         bottom: 11px;
-        border-top: 5px solid #99a9bf;
+        border-top: 5px solid var(--color-light-silver);
         border-right: 5px solid transparent;
         border-bottom: none;
         border-left: 5px solid transparent;
@@ -321,11 +321,11 @@
     }
 
     & .ascending .sort-caret.ascending {
-      border-bottom-color: #475669;
+      border-bottom-color: var(--color-extra-light-black);
     }
 
     & .descending .sort-caret.descending {
-      border-top-color: #475669;
+      border-top-color: var(--color-extra-light-black);
     }
 
     & th.gutter, td.gutter {
@@ -361,7 +361,7 @@
     }
 
     & tr {
-      background-color: #fff;
+      background-color: var(--color-white);
     }
 
     @modifier striped {
@@ -372,7 +372,7 @@
           }
 
           &.current-row td {
-            background: #EFF7FF;
+            background: color(var(--color-primary) tint(92%));
           }
         }
       }
@@ -380,11 +380,11 @@
 
     @e body {
       tr.hover-row > td {
-        background-color: #eff2f7;
+        background-color: var(--color-extra-light-gray);
       }
 
       tr.current-row > td {
-        background: #eff7ff;
+        background: color(var(--color-primary) tint(92%));
       }
     }
 
@@ -411,7 +411,7 @@
       cursor: pointer;
 
       & i {
-        color: #99a9bf;
+        color: var(--color-light-silver);
       }
     }
 
@@ -423,7 +423,7 @@
 
     @modifier enable-row-hover {
       tr:hover > td {
-        background-color: #eff2f7;
+        background-color: var(--color-extra-light-gray);
       }
     }
 

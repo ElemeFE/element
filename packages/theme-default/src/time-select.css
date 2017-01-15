@@ -19,7 +19,7 @@
 
 .time-select-item.selected:not(.disabled) {
   background-color: var(--datepicker-active-color);
-  color: #fff;
+  color: var(--color-white);
 
   &:hover {
     background-color: var(--color-primary);

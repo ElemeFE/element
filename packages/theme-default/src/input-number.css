@@ -20,7 +20,7 @@
       line-height: calc(var(--input-height) - 2);
       top: 1px;
       text-align: center;
-      color: #99A9BF;
+      color: var(--color-light-silver);
       cursor: pointer;
       position: absolute;
       z-index: 1;

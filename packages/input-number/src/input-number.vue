@@ -21,10 +21,11 @@
     >
     </span>
     <el-input
-      v-model.number="currentValue"
+      :value="currentValue"
       @keydown.up.native="increase"
       @keydown.down.native="decrease"
       @blur="handleBlur"
+      @input="handleInput"
       :disabled="disabled"
       :size="size"
       :max="max"
@@ -95,32 +96,20 @@
       }
     },
     data() {
-      // correct the init value
-      let value = this.value;
-      if (value < this.min) {
-        this.$emit('input', this.min);
-        value = this.min;
-      }
-      if (value > this.max) {
-        this.$emit('input', this.max);
-        value = this.max;
-      }
-
       return {
-        currentValue: value
+        currentValue: 0
       };
     },
     watch: {
-      value(val) {
-        this.currentValue = val;
-      },
-
-      currentValue(newVal, oldVal) {
-        if (newVal <= this.max && newVal >= this.min) {
-          this.$emit('change', newVal, oldVal);
+      value: {
+        immediate: true,
+        handler(value) {
+          let newVal = Number(value);
+          if (isNaN(newVal)) return;
+          if (newVal >= this.max) newVal = this.max;
+          if (newVal <= this.min) newVal = this.min;
+          this.currentValue = newVal;
           this.$emit('input', newVal);
-        } else {
-          this.currentValue = oldVal;
         }
       }
     },
@@ -169,17 +158,32 @@
         const value = this.value || 0;
         const newVal = this._increase(value, this.step);
         if (newVal > this.max) return;
-        this.currentValue = newVal;
+        this.setCurrentValue(newVal);
       },
       decrease() {
         if (this.disabled || this.minDisabled) return;
         const value = this.value || 0;
         const newVal = this._decrease(value, this.step);
         if (newVal < this.min) return;
-        this.currentValue = newVal;
+        this.setCurrentValue(newVal);
       },
       handleBlur() {
         this.$refs.input.setCurrentValue(this.currentValue);
+      },
+      setCurrentValue(newVal) {
+        const oldVal = this.currentValue;
+        if (newVal >= this.max) newVal = this.max;
+        if (newVal <= this.min) newVal = this.min;
+        if (oldVal === newVal) return;
+        this.$emit('change', newVal, oldVal);
+        this.$emit('input', newVal);
+        this.currentValue = newVal;
+      },
+      handleInput(value) {
+        const newVal = Number(value);
+        if (!isNaN(newVal)) {
+          this.setCurrentValue(newVal);
+        }
       }
     }
   };

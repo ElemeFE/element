@@ -41,26 +41,46 @@
     },
     data() {
       return {
-        activeIndex: this.defaultActive,
+        activedIndex: this.defaultActive,
         openedMenus: this.defaultOpeneds ? this.defaultOpeneds.slice(0) : [],
-        menuItems: {},
+        items: {},
         submenus: {}
       };
     },
     watch: {
       defaultActive(value) {
-        this.activeIndex = value;
-        if (!this.menuItems[value]) return;
-        let menuItem = this.menuItems[value];
-        let indexPath = menuItem.indexPath;
+        const item = this.items[value];
+        if (!item) return;
 
-        this.handleSelect(value, indexPath, null, menuItem);
+        this.activedIndex = item.index;
+        this.initOpenedMenu();
       },
       defaultOpeneds(value) {
         this.openedMenus = value;
+      },
+      '$route': {
+        immediate: true,
+        handler(value) {
+          if (this.router) {
+            this.activedIndex = value.path;
+            this.initOpenedMenu();
+          }
+        }
       }
     },
     methods: {
+      addItem(item) {
+        this.$set(this.items, item.index, item);
+      },
+      removeItem(item) {
+        delete this.items[item.index];
+      },
+      addSubmenu(item) {
+        this.$set(this.submenus, item.index, item);
+      },
+      removeSubmenu(item) {
+        delete this.submenus[item.index];
+      },
       openMenu(index, indexPath) {
         let openedMenus = this.openedMenus;
         if (openedMenus.indexOf(index) !== -1) return;
@@ -75,7 +95,8 @@
       closeMenu(index, indexPath) {
         this.openedMenus.splice(this.openedMenus.indexOf(index), 1);
       },
-      handleSubmenuClick(index, indexPath) {
+      handleSubmenuClick(submenu) {
+        const { index, indexPath } = submenu;
         let isOpened = this.openedMenus.indexOf(index) !== -1;
 
         if (isOpened) {
@@ -86,49 +107,48 @@
           this.$emit('open', index, indexPath);
         }
       },
-      handleSelect(index, indexPath, route, instance) {
-        this.activeIndex = index;
-        this.$emit('select', index, indexPath, instance);
+      handleItemClick(item) {
+        let { index, indexPath } = item;
+
+        this.$emit('select', index, indexPath, item);
 
         if (this.mode === 'horizontal') {
-          this.broadcast('ElSubmenu', 'item-select', [index, indexPath]);
           this.openedMenus = [];
-        } else {
-          this.openActiveItemMenus();
         }
 
-        if (this.router && route) {
-          try {
-            this.$router.push(route);
-          } catch (e) {
-            console.error(e);
-          }
+        if (this.router) {
+          this.routeToItem(item);
+        } else {
+          this.activedIndex = item.index;
         }
       },
-      openActiveItemMenus() {
-        let index = this.activeIndex;
-        // 选中用户指定的路由对应的menu
-        if (this.router) {
-          const userSpecifiedIndexs = Object
-                                       .keys(this.menuItems)
-                                       .filter(k => this.menuItems[k].route)
-                                       .filter(k => this.menuItems[k].route.path === this.$route.path);
-          userSpecifiedIndexs.length && (index = this.activeIndex = userSpecifiedIndexs[0]);
-        }
-        if (!this.menuItems[index]) return;
-        if (index && this.mode === 'vertical') {
-          let indexPath = this.menuItems[index].indexPath;
+      // 初始化展开菜单
+      initOpenedMenu() {
+        const index = this.activedIndex;
+        const activeItem = this.items[index];
+        if (!activeItem || this.mode === 'horizontal') return;
 
-          // 展开该菜单项的路径上所有子菜单
-          indexPath.forEach(index => {
-            let submenu = this.submenus[index];
-            submenu && this.openMenu(index, submenu.indexPath);
-          });
+        let indexPath = activeItem.indexPath;
+
+        // 展开该菜单项的路径上所有子菜单
+        indexPath.forEach(index => {
+          let submenu = this.submenus[index];
+          submenu && this.openMenu(index, submenu.indexPath);
+        });
+      },
+      routeToItem(item) {
+        let route = item.route || item.index;
+        try {
+          this.$router.push(route);
+        } catch (e) {
+          console.error(e);
         }
       }
     },
     mounted() {
-      this.openActiveItemMenus();
+      this.initOpenedMenu();
+      this.$on('item-click', this.handleItemClick);
+      this.$on('submenu-click', this.handleSubmenuClick);
     }
   };
 </script>

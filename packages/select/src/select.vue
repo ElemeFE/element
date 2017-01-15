@@ -49,7 +49,7 @@
       :disabled="disabled"
       :readonly="!filterable || multiple"
       :validate-event="false"
-      @focus="toggleMenu"
+      @focus="handleFocus"
       @click="handleIconClick"
       @mousedown.native="handleMouseDown"
       @keyup.native="debouncedOnInputChange"
@@ -98,6 +98,7 @@
   import { addClass, removeClass, hasClass } from 'element-ui/src/utils/dom';
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
   import { t } from 'element-ui/src/locale';
+  import merge from 'element-ui/src/utils/merge';
   const sizeMap = {
     'large': 42,
     'small': 30,
@@ -191,6 +192,8 @@
       return {
         options: [],
         cachedOptions: [],
+        createdOption: null,
+        createdSelected: false,
         selected: this.multiple ? [] : {},
         isSelect: true,
         inputLength: 20,
@@ -265,6 +268,7 @@
           }
           this.query = '';
           this.selectedLabel = '';
+          this.inputLength = 20;
           this.resetHoverIndex();
           this.$nextTick(() => {
             if (this.$refs.input &&
@@ -276,7 +280,12 @@
           if (!this.multiple) {
             this.getOverflows();
             if (this.selected) {
-              this.selectedLabel = this.selected.currentLabel;
+              if (this.filterable && this.allowCreate &&
+                this.createdSelected && this.createdOption) {
+                this.selectedLabel = this.createdOption.currentLabel;
+              } else {
+                this.selectedLabel = this.selected.currentLabel;
+              }
               if (this.filterable) this.query = this.selectedLabel;
             }
           }
@@ -371,8 +380,15 @@
       setSelected() {
         if (!this.multiple) {
           let option = this.getOption(this.value);
+          if (option.created) {
+            this.createdOption = merge({}, option);
+            this.createdSelected = true;
+          } else {
+            this.createdSelected = false;
+          }
           this.selectedLabel = option.currentLabel;
           this.selected = option;
+          if (this.filterable) this.query = this.selectedLabel;
           return;
         }
         let result = [];
@@ -382,6 +398,13 @@
           });
         }
         this.selected = result;
+        this.$nextTick(() => {
+          this.resetInputHeight();
+        });
+      },
+
+      handleFocus() {
+        this.visible = true;
       },
 
       handleIconClick(event) {

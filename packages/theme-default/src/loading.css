@@ -11,6 +11,7 @@
     right: 0;
     bottom: 0;
     left: 0;
+    transition: opacity 0.3s;
 
     @when fullscreen {
       position: fixed;
@@ -52,6 +53,11 @@
       stroke-linecap: round;
     }
   }
+}
+
+.el-loading-fade-enter,
+.el-loading-fade-leave-active {
+  opacity: 0;
 }
 
 @keyframes loading-rotate {

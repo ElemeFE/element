@@ -78,18 +78,20 @@ export default {
         cellspacing="0"
         cellpadding="0"
         border="0">
-        {
-          this._l(this.columns, column =>
-            <col
-              name={ column.id }
-              width={ column.realWidth || column.width }
-            />)
-        }
-        {
-          !this.fixed && this.layout.gutterWidth
-            ? <col name="gutter" width={ this.layout.scrollY ? this.layout.gutterWidth : '' }></col>
-            : ''
-        }
+        <colgroup>
+          {
+            this._l(this.columns, column =>
+              <col
+                name={ column.id }
+                width={ column.realWidth || column.width }
+              />)
+          }
+          {
+            !this.fixed && this.layout.gutterWidth
+              ? <col name="gutter" width={ this.layout.scrollY ? this.layout.gutterWidth : '' }></col>
+              : ''
+          }
+        </colgroup>
         <thead>
           {
             this._l(columnRows, (columns, rowIndex) =>
@@ -112,9 +114,9 @@ export default {
                     }
                     {
                       column.sortable
-                        ? <span class="caret-wrapper">
-                            <i class="sort-caret ascending" on-click={ ($event) => this.handleHeaderClick($event, column, 'ascending')}></i>
-                            <i class="sort-caret descending" on-click={ ($event) => this.handleHeaderClick($event, column, 'descending')}></i>
+                        ? <span class="caret-wrapper" on-click={ ($event) => this.handleHeaderClick($event, column) }>
+                            <i class="sort-caret ascending"></i>
+                            <i class="sort-caret descending"></i>
                           </span>
                         : ''
                     }
@@ -148,7 +150,12 @@ export default {
     layout: {
       required: true
     },
-    border: Boolean
+    border: Boolean,
+    defaultSortProp: String,
+    defaultSortOrder: {
+      type: String,
+      default: 'ascending'
+    }
   },
 
   components: {
@@ -180,6 +187,29 @@ export default {
 
   created() {
     this.filterPanels = {};
+  },
+
+  mounted() {
+    if (this.defaultSortProp) {
+      const states = this.store.states;
+      states.sortProp = this.defaultSortProp;
+      states.sortOrder = this.defaultSortOrder;
+
+      this.$nextTick(_ => {
+        for (let i = 0, length = this.columns.length; i < length; i++) {
+          let column = this.columns[i];
+          if (column.property === this.defaultSortProp) {
+            column.order = this.defaultSortOrder;
+            states.sortingColumn = column;
+            break;
+          }
+        }
+
+        if (states.sortingColumn) {
+          this.store.commit('changeSortCondition');
+        }
+      });
+    }
   },
 
   beforeDestroy() {
@@ -334,7 +364,16 @@ export default {
       document.body.style.cursor = '';
     },
 
-    handleHeaderClick(event, column, order) {
+    toggleOrder(column) {
+      if (column.order === 'ascending') {
+        return 'descending';
+      }
+      return 'ascending';
+    },
+
+    handleHeaderClick(event, column) {
+      let order = this.toggleOrder(column);
+
       let target = event.target;
       while (target && target.tagName !== 'TH') {
         target = target.parentNode;

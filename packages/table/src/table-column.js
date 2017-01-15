@@ -143,6 +143,7 @@ export default {
     selectable: Function,
     reserveSelection: Boolean,
     filterMethod: Function,
+    filteredValue: Array,
     filters: Array,
     filterMultiple: {
       type: Boolean,
@@ -235,7 +236,7 @@ export default {
       filterable: this.filters || this.filterMethod,
       filterMultiple: this.filterMultiple,
       filterOpened: false,
-      filteredValue: []
+      filteredValue: this.filteredValue || []
     });
 
     objectAssign(column, forced[type] || {});
@@ -335,12 +336,16 @@ export default {
     align(newVal) {
       if (this.columnConfig) {
         this.columnConfig.align = newVal ? 'is-' + newVal : null;
+
+        if (!this.headerAlign) {
+          this.columnConfig.headerAlign = newVal ? 'is-' + newVal : null;
+        }
       }
     },
 
     headerAlign(newVal) {
       if (this.columnConfig) {
-        this.columnConfig.headerAlign = newVal ? 'is-' + newVal : this.align;
+        this.columnConfig.headerAlign = 'is-' + (newVal ? newVal : this.align);
       }
     },
 

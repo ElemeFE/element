@@ -28,13 +28,15 @@ export default {
         cellspacing="0"
         cellpadding="0"
         border="0">
-        {
-          this._l(this.columns, column =>
-            <col
-              name={ column.id }
-              width={ column.realWidth || column.width }
-            />)
-        }
+        <colgroup>
+          {
+            this._l(this.columns, column =>
+              <col
+                name={ column.id }
+                width={ column.realWidth || column.width }
+              />)
+          }
+        </colgroup>
         <tbody>
           {
             this._l(this.data, (row, $index) =>
@@ -114,7 +116,7 @@ export default {
 
   computed: {
     table() {
-      return this.$parent.$parent.columns ? this.$parent.$parent : this.$parent;
+      return this.$parent;
     },
 
     data() {

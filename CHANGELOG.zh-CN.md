@@ -1,5 +1,18 @@
 ## 更新日志
 
+### 1.1.3
+*2017-01-09*
+
+- 修复 DatePicker 页面加载后首次清空不会触发 `change` 事件，#2167
+- 修复 DatePicker 选择下一年时，年份计算错误，#2152
+- 新增 Table 的 `default-sort-prop` 和 `default-sort-order` 属性，#2182（by @njleonzhang）
+- 修复有默认值的可搜索 Select 其他数据被过滤的问题，#2196
+- 新增自定义 i18n 处理方法，方便和除了 `vue-i18n` 之外的插件使用，#2129
+- 新增 Input `resize` 属性，#2263（by @Kingwl）
+- 修复 Autocomplete 在 blur 事件触发时没有隐藏下拉列表的问题，#2247
+- 修复 Tabs 嵌套使用时的样式问题，#2212（by @Kingwl）
+- 修复 Tabs 默认激活非第一项时 tabBar 的显示位置不正确的问题，#2192
+
 ### 1.1.2
 *2016-12-30*
 

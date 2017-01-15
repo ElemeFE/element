@@ -1,14 +1,15 @@
 <template>
   <div
     class="el-step"
-    :style="style"
+    :style="[style,  isLast ? '' : { marginRight: - $parent.stepOffset + 'px' }]"
     :class="['is-' + $parent.direction]">
     <div
       class="el-step__head"
       :class="['is-' + currentStatus, { 'is-text': !icon }]">
       <div
         class="el-step__line"
-        :class="['is-' + $parent.direction,{ 'is-icon': icon }]">
+        :style="isLast ? '' : { marginRight: $parent.stepOffset + 'px' }"
+        :class="['is-' + $parent.direction, { 'is-icon': icon }]">
         <i class="el-step__line-inner" :style="lineStyle"></i>
       </div>
 
@@ -63,6 +64,7 @@ export default {
       style: {},
       lineStyle: {},
       mainOffset: 0,
+      isLast: false,
       currentStatus: this.status
     };
   },
@@ -103,22 +105,31 @@ export default {
         : style.width = step + '%';
 
       this.lineStyle = style;
+    },
+
+    adjustPosition() {
+      this.style = {};
+      this.$parent.stepOffset = this.$el.getBoundingClientRect().width / (this.$parent.steps.length - 1);
     }
   },
 
   mounted() {
     const parent = this.$parent;
+    const isCenter = parent.center;
+    const len = parent.steps.length;
+    const isLast = this.isLast = parent.steps[parent.steps.length - 1] === this;
     const space = parent.space
       ? parent.space + 'px'
-      : 100 / parent.steps.length + '%';
+      : 100 / (isCenter ? len - 1 : len) + '%';
 
     if (parent.direction === 'horizontal') {
       this.style = { width: space };
       if (parent.alignCenter) {
         this.mainOffset = -this.$refs.title.getBoundingClientRect().width / 2 + 16 + 'px';
       }
+      isCenter && isLast && this.adjustPosition();
     } else {
-      if (parent.steps[parent.steps.length - 1] !== this) {
+      if (!isLast) {
         this.style = { height: space };
       }
     }

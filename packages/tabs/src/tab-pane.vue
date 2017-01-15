@@ -1,13 +1,13 @@
 <template>
-  <div class="el-tab-pane">
-    <div class="el-tab-pane__content" v-show="active">
-      <slot></slot>
-    </div>
+  <div class="el-tab-pane" v-show="active">
+    <slot></slot>
   </div>
 </template>
 <script>
   module.exports = {
     name: 'ElTabPane',
+
+    componentName: 'ElTabPane',
 
     props: {
       label: String,
@@ -32,14 +32,15 @@
       }
     },
 
-    created() {
-      this.$parent.$forceUpdate();
+    mounted() {
+      this.$parent.addPanes(this);
     },
 
     destroyed() {
       if (this.$el && this.$el.parentNode) {
         this.$el.parentNode.removeChild(this.$el);
       }
+      this.$parent.removePanes(this);
     },
 
     watch: {

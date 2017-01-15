@@ -28,6 +28,8 @@
         input8: '',
         input9: '',
         textarea: '',
+        textarea2: '',
+        textarea3: '',
         select: '',
         state1: '',
         state2: '',
@@ -257,13 +259,13 @@ export default {
 
 ### 文本域
 
-可调整大小，用于输入多行文本信息
+用于输入多行文本信息，通过将 `type` 属性的值指定为 textarea。
 
-::: demo 通过将 `type` 属性的值指定为 textarea。
+::: demo 文本域高度可通过 `rows` 属性控制
 ```html
 <el-input
   type="textarea"
-  :autosize="{ minRows: 2, maxRows: 4}"
+  :rows="2"
   placeholder="请输入内容"
   v-model="textarea">
 </el-input>
@@ -273,6 +275,39 @@ export default {
   data() {
     return {
       textarea: ''
+    }
+  }
+}
+</script>
+```
+:::
+
+### 可自适应文本高度的文本域
+
+通过设置 `autosize` 属性可以使得文本域的高度能够根据文本内容自动进行调整，并且 `autosize` 还可以设定为一个对象，指定最小行数和最大行数。
+
+::: demo
+```html
+<el-input
+  type="textarea"
+  autosize
+  placeholder="请输入内容"
+  v-model="textarea2">
+</el-input>
+<div style="margin: 20px 0;"></div>
+<el-input
+  type="textarea"
+  :autosize="{ minRows: 2, maxRows: 4}"
+  placeholder="请输入内容"
+  v-model="textarea3">
+</el-input>
+
+<script>
+export default {
+  data() {
+    return {
+      textarea2: '',
+      textarea3: ''
     }
   }
 }
@@ -306,6 +341,11 @@ export default {
     <el-button slot="append" icon="search"></el-button>
   </el-input>
 </div>
+<style>
+  .el-select .el-input {
+    width: 110px;
+  }
+</style>
 <script>
 export default {
   data() {
@@ -728,6 +768,7 @@ export default {
 | name | 原生属性 | string | — | — |
 | max | 原生属性，设置最大值 | * | — | — |
 | min | 原生属性，设置最小值 | * | — | — |
+| resize | 控制是否能被用户缩放 | string | none, both, horizontal, vertical | — |
 | autofocus | 原生属性，自动获取焦点 | boolean | true, false | false |
 | form | 原生属性 | string | — | — |
 
@@ -749,6 +790,7 @@ export default {
 | custom-item  | 通过该参数指定自定义的输入建议列表项的组件名 | string  | — | — |
 | fetch-suggestions | 返回输入建议的方法，仅当你的输入建议数据 resolve 时，通过调用 callback(data:[]) 来返回它  | Function(queryString, callback)  | — | — |
 | popper-class | Autocomplete 下拉列表的类名 | string | — | — |
+| trigger-on-focus | 是否在输入框 focus 时显示建议列表 | boolean | — | true |
 
 ### Autocomplete Events
 | 事件名称 | 说明 | 回调参数 |

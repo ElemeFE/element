@@ -367,8 +367,8 @@
           target = target.parentNode.cells[1];
         }
 
-        let year = this.year;
-        let month = this.month;
+        let year = Number(this.year);
+        let month = Number(this.month);
 
         const cellIndex = target.cellIndex;
         const rowIndex = target.parentNode.rowIndex;
@@ -377,7 +377,7 @@
         const text = cell.text;
         const className = target.className;
 
-        const newDate = new Date(this.year, this.month, 1);
+        const newDate = new Date(year, month, 1);
 
         if (className.indexOf('prev') !== -1) {
           if (month === 0) {

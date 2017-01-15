@@ -8,12 +8,15 @@ describe('Autocomplete', () => {
   it('create', done => {
     vm = createVue({
       template: `
-        <el-autocomplete
-          ref="autocomplete"
-          v-model="state"
-          :fetch-suggestions="querySearch"
-          placeholder="请输入内容autocomplete1"
-        ></el-autocomplete>
+        <div>
+          <button class="btn">a</button>
+          <el-autocomplete
+            ref="autocomplete"
+            v-model="state"
+            :fetch-suggestions="querySearch"
+            placeholder="请输入内容autocomplete1"
+          ></el-autocomplete>
+        </div>
       `,
       data() {
         return {
@@ -52,12 +55,13 @@ describe('Autocomplete', () => {
     expect(inputElm.getAttribute('placeholder')).to.be.equal('请输入内容autocomplete1');
 
     setTimeout(_ => {
-      let suggestionsList = vm.$refs.autocomplete.$refs.suggestions.$el;
-      expect(suggestionsList.style.display).to.not.equal('none');
-      expect(suggestionsList.children.length).to.be.equal(4);
+      const suggestions = vm.$refs.autocomplete.$refs.suggestions.$el;
+      expect(suggestions.style.display).to.not.equal('none');
+      expect(suggestions.children.length).to.be.equal(4);
+
       document.body.click();
       setTimeout(_ => {
-        expect(document.querySelector('.el-autocomplete__suggestions').style.display).to.be.equal('none');
+        expect(suggestions.style.display).to.be.equal('none');
         done();
       }, 500);
     }, 500);
@@ -274,6 +278,57 @@ describe('Autocomplete', () => {
         });
         done();
       });
+    }, 500);
+  });
+  it('triggerOnFocus', done => {
+    vm = createVue({
+      template: `
+        <el-autocomplete
+          ref="autocomplete"
+          v-model="state"
+          :fetch-suggestions="querySearch"
+          :trigger-on-focus="false"
+          placeholder="请输入内容autocomplete1"
+        ></el-autocomplete>
+      `,
+      data() {
+        return {
+          restaurants: [],
+          state: ''
+        };
+      },
+      methods: {
+        querySearch(queryString, cb) {
+          var restaurants = this.restaurants;
+          var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
+          cb(results);
+        },
+        createFilter(queryString) {
+          return (restaurant) => {
+            return (restaurant.value.indexOf(queryString.toLowerCase()) === 0);
+          };
+        },
+        loadAll() {
+          return [
+            { 'value': '三全鲜食（北新泾店）', 'address': '长宁区新渔路144号' },
+            { 'value': 'Hot honey 首尔炸鸡（仙霞路）', 'address': '上海市长宁区淞虹路661号' },
+            { 'value': '新旺角茶餐厅', 'address': '上海市普陀区真北路988号创邑金沙谷6号楼113' },
+            { 'value': '泷千家(天山西路店)', 'address': '天山西路438号' }
+          ];
+        }
+      },
+      mounted() {
+        this.restaurants = this.loadAll();
+      }
+    }, true);
+    let elm = vm.$el;
+    let inputElm = elm.querySelector('input');
+    inputElm.focus();
+
+    setTimeout(_ => {
+      let suggestionsList = vm.$refs.autocomplete.$refs.suggestions.$el;
+      expect(suggestionsList.style.display).to.be.equal('none');
+      done();
     }, 500);
   });
 });

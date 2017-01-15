@@ -88,10 +88,10 @@
 
     watch: {
       currentLabel() {
-        this.dispatch('ElSelect', 'setSelected');
+        if (!this.created) this.dispatch('ElSelect', 'setSelected');
       },
       value() {
-        this.dispatch('ElSelect', 'setSelected');
+        if (!this.created) this.dispatch('ElSelect', 'setSelected');
       }
     },
 
@@ -114,7 +114,7 @@
 
       queryChange(query) {
         // query 里如果有正则中的特殊字符，需要先将这些字符转义
-        let parsedQuery = query.replace(/(\^|\(|\)|\[|\]|\$|\*|\+|\.|\?|\\|\{|\}|\|)/g, '\\$1');
+        let parsedQuery = String(query).replace(/(\^|\(|\)|\[|\]|\$|\*|\+|\.|\?|\\|\{|\}|\|)/g, '\\$1');
         this.visible = new RegExp(parsedQuery, 'i').test(this.currentLabel) || this.created;
         if (!this.visible) {
           this.parent.filteredOptionsCount--;

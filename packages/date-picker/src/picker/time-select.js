@@ -6,7 +6,7 @@ export default {
 
   name: 'ElTimeSelect',
 
-  created() {
+  beforeCreate() {
     this.type = 'time-select';
     this.panel = Panel;
   }

@@ -17,13 +17,14 @@ describe('Tabs', () => {
         </el-tabs>
       `
     }, true);
-    let tabList = vm.$el.querySelector('.el-tabs__header').children;
+
     let paneList = vm.$el.querySelector('.el-tabs__content').children;
     let spy = sinon.spy();
 
     vm.$refs.tabs.$on('tab-click', spy);
 
     setTimeout(_ => {
+      const tabList = vm.$refs.tabs.$refs.tabs;
       expect(tabList[0].classList.contains('is-active')).to.be.true;
       expect(paneList[0].style.display).to.not.ok;
 
@@ -39,7 +40,7 @@ describe('Tabs', () => {
   it('active-name', done => {
     vm = createVue({
       template: `
-        <el-tabs :active-name="activeName" @click="handleClick">
+        <el-tabs ref="tabs" :active-name="activeName" @click="handleClick">
           <el-tab-pane name="tab-A" label="用户管理">A</el-tab-pane>
           <el-tab-pane name="tab-B" label="配置管理">B</el-tab-pane>
           <el-tab-pane name="tab-C" label="角色管理">C</el-tab-pane>
@@ -57,9 +58,10 @@ describe('Tabs', () => {
         }
       }
     }, true);
-    let tabList = vm.$el.querySelector('.el-tabs__header').children;
-    let paneList = vm.$el.querySelector('.el-tabs__content').children;
     setTimeout(_ => {
+      const paneList = vm.$el.querySelector('.el-tabs__content').children;
+      const tabList = vm.$refs.tabs.$refs.tabs;
+
       expect(tabList[1].classList.contains('is-active')).to.be.true;
       expect(paneList[1].style.display).to.not.ok;
 
@@ -150,13 +152,13 @@ describe('Tabs', () => {
       `
     }, true);
 
-    let tabList = vm.$el.querySelector('.el-tabs__header').children;
-    let paneList = vm.$el.querySelector('.el-tabs__content').children;
     let spy = sinon.spy();
-
     vm.$refs.tabs.$on('tab-remove', spy);
 
     setTimeout(_ => {
+      const tabList = vm.$refs.tabs.$refs.tabs;
+      const paneList = vm.$el.querySelector('.el-tabs__content').children;
+
       tabList[1].querySelector('.el-icon-close').click();
       vm.$nextTick(_ => {
         expect(tabList.length).to.be.equal(3);
@@ -197,9 +199,10 @@ describe('Tabs', () => {
       `
     }, true);
 
-    let tabList = vm.$el.querySelector('.el-tabs__header').children;
-    let paneList = vm.$el.querySelector('.el-tabs__content').children;
     vm.$nextTick(_ => {
+      const paneList = vm.$el.querySelector('.el-tabs__content').children;
+      const tabList = vm.$refs.tabs.$refs.tabs;
+
       tabList[0].querySelector('.el-icon-close').click();
       vm.$nextTick(_ => {
         expect(tabList.length).to.be.equal(3);
@@ -223,7 +226,7 @@ describe('Tabs', () => {
   it('disabled', done => {
     vm = createVue({
       template: `
-        <el-tabs type="card">
+        <el-tabs type="card" ref="tabs">
           <el-tab-pane label="用户管理">A</el-tab-pane>
           <el-tab-pane disabled label="配置管理" ref="disabled">B</el-tab-pane>
           <el-tab-pane label="角色管理">C</el-tab-pane>
@@ -233,7 +236,7 @@ describe('Tabs', () => {
     }, true);
 
     vm.$nextTick(_ => {
-      let tabList = vm.$el.querySelector('.el-tabs__header').children;
+      const tabList = vm.$refs.tabs.$refs.tabs;
 
       tabList[1].click();
       vm.$nextTick(_ => {

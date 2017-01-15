@@ -28,6 +28,8 @@
         input8: '',
         input9: '',
         textarea: '',
+        textarea2: '',
+        textarea3: '',
         select: '',
         state1: '',
         state2: '',
@@ -218,14 +220,14 @@ export default {
 
 ### Textarea
 
-Resizable for entering multiple lines of text information.
+Resizable for entering multiple lines of text information. Add attribute `type="textarea"` to change `input` into native `textarea`.
 
-::: demo Add attribute `type="textarea"` to change `input` into native `textarea`.
+::: demo Control the height by setting the `rows` prop.
 
 ```html
 <el-input
   type="textarea"
-  :autosize="{ minRows: 2, maxRows: 4}"
+  :rows="2"
   placeholder="Please input"
   v-model="textarea">
 </el-input>
@@ -235,6 +237,40 @@ export default {
   data() {
     return {
       textarea: ''
+    }
+  }
+}
+</script>
+```
+:::
+
+### Autosize Textarea
+
+Setting the `autosize` prop for a textarea type of Input makes the height to automatically adjust based on the content. An options object can be provided to `autosize` to specify the minimum and maximum number of lines the textarea can automatically adjust.
+
+::: demo
+
+```html
+<el-input
+  type="textarea"
+  autosize
+  placeholder="Please input"
+  v-model="textarea2">
+</el-input>
+<div style="margin: 20px 0;"></div>
+<el-input
+  type="textarea"
+  :autosize="{ minRows: 2, maxRows: 4}"
+  placeholder="Please input"
+  v-model="textarea3">
+</el-input>
+
+<script>
+export default {
+  data() {
+    return {
+      textarea2: '',
+      textarea3: ''
     }
   }
 }
@@ -269,7 +305,11 @@ Prepend or append an element, generally a label or a button.
     <el-button slot="append" icon="search"></el-button>
   </el-input>
 </div>
-
+<style>
+  .el-select .el-input {
+    width: 110px;
+  }
+</style>
 <script>
 export default {
   data() {
@@ -565,6 +605,7 @@ Search data from server-side.
 |name | same as `name` in native input | string | — | — |
 |max | same as `max` in native input | * | — | — |
 |min | same as `min` in native input | * | — | — |
+|resize| control the resizability | string | none, both, horizontal, vertical | — |
 |autofocus | same as `autofocus` in native input | boolean | — | false |
 |form | same as `form` in native input | string | — | — |
 
@@ -588,6 +629,7 @@ Attribute | Description | Type | Options | Default
 |custom-item | component name of your customized suggestion list item | string | — | — |
 |fetch-suggestions | a method to fetch input suggestions. When suggestions are ready, invoke `callback(data:[])` to return them to Autocomplete | Function(queryString, callback) | — | — |
 | popper-class | custom class name for autocomplete's dropdown | string | — | — |
+| trigger-on-focus | whether show suggestions when input focus | boolean | — | true |
 
 ### Autocomplete Events
 

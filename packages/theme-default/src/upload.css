@@ -31,7 +31,7 @@
     @e file {
       transition: all .5s cubic-bezier(.55,0,.1,1);
       font-size: 14px;
-      color: #475669;
+      color: var(--color-extra-light-black);
       line-height: 32px;
       position: relative;
       box-sizing: border-box;
@@ -40,7 +40,7 @@
       position: relative;
 
       a {
-        color: #475669;
+        color: var(--color-extra-light-black);
         display: block;
         margin-right: 40px;
         overflow: hidden;
@@ -50,7 +50,7 @@
         white-space: nowrap;
 
         [class^="el-icon"] {
-          color: #99a9bf;
+          color: var(--color-light-silver);
           margin-right: 7px;
           height: 100%;
           line-height: inherit;
@@ -72,7 +72,7 @@
         padding-right: 0;
       }
       &:hover {
-        background-color: #eff2f7;
+        background-color: var(--color-extra-light-gray);
       }
       @when finished {
         & a:hover {
@@ -89,7 +89,7 @@
     }
     @e tip {
       font-size: 12px;
-      color: #8492a6;
+      color: var(--color-base-silver);
       margin-top: 7px;
     }
     @e btn-delete {
@@ -102,8 +102,8 @@
     }
   }
   @b dragger {
-    background-color: #f9fafc;
-    border: 1px solid #c0ccda;
+    background-color: var(--color-dark-white);
+    border: 1px solid var(--color-extra-light-silver);
     box-sizing: border-box;
     width: 360px;
     height: 180px;
@@ -119,7 +119,7 @@
     }
     & .el-icon-upload {
       font-size: 67px;
-      color: #99a9bf;
+      color: var(--color-light-silver);
       margin: 40px 0 16px;
       line-height: 50px;
     }
@@ -130,7 +130,7 @@
     & ~ .el-upload__files {
       margin-top: 7px;
       padding-top: 5px;
-      border-top: 1px solid rgba(#c0ccda, .2);
+      border-top: 1px solid rgba(var(--color-extra-light-silver), .2);
     }
 
     @e cover {
@@ -180,7 +180,7 @@
 
         & .btn {
           display: inline-block;
-          color: #fff;
+          color: var(--color-white);
           font-size: 14px;
           cursor: pointer;
           vertical-align: middle;
@@ -209,7 +209,7 @@
           }
 
           & i {
-            color: #fff;
+            color: var(--color-white);
             display: block;
             font-size: 24px;
             line-height: inherit;
@@ -222,7 +222,7 @@
         position: absolute;
         bottom: 0;
         left: 0;
-        background-color: #fff;
+        background-color: var(--color-white);
         height: 36px;
         width: 100%;
         overflow: hidden;
@@ -234,7 +234,7 @@
         margin: 0;
         line-height: 36px;
         font-size: 14px;
-        color: #475669;
+        color: var(--color-extra-light-black);
       }
 
       & + .el-upload__inner {
@@ -245,7 +245,7 @@
     }
 
     @e text {
-      color: #99a9bf;
+      color: var(--color-light-silver);
       font-size: 14px;
       text-align: center;
 

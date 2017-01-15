@@ -124,7 +124,7 @@
             result.push({
               value: current,
               disabled: compareTime(current, this.minTime || '-1:-1') <= 0 ||
-                compareTime(current, this.maxTime || '100:100') > 0
+                compareTime(current, this.maxTime || '100:100') >= 0
             });
             current = nextTime(current, step);
           }

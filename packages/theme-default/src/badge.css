@@ -10,7 +10,7 @@
     @e content {
       background-color: var(--badge-fill);
       border-radius: var(--badge-radius);
-      color: #fff;
+      color: var(--color-white);
       display: inline-block;
       font-size: var(--badge-font-size);
       height: var(--badge-size);
@@ -18,7 +18,7 @@
       padding: 0 var(--badge-padding);
       text-align: center;
       white-space: nowrap;
-      border: 1px solid #fff;
+      border: 1px solid var(--color-white);
 
       @when fixed {
         position: absolute 0 calc(var(--badge-size) / 2 + 1) * *;
