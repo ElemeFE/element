@@ -83,6 +83,7 @@ export default {
           this.$slots.reference[0]) {
         reference = this.referenceElm = this.$slots.reference[0].elm;
       }
+
       if (!popper || !reference) return;
       if (this.visibleArrow) this.appendArrow(popper);
       if (this.appendToBody) document.body.appendChild(this.popperElm);

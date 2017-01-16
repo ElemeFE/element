@@ -215,6 +215,10 @@
             {
               "path": "/collapse",
               "title": "Collapse 折叠面板"
+            },
+            {
+              "path": "/cascader",
+              "title": "Cascader 级联选择"
             }
           ]
         }
@@ -437,6 +441,10 @@
             {
               "path": "/collapse",
               "title": "Collapse"
+            },
+            {
+              "path": "/cascader",
+              "title": "Cascader"
             }
           ]
         }
