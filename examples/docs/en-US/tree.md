@@ -250,7 +250,7 @@ Only one node among the same level can be expanded at one time.
 
 ::: demo
 ```html
-<el-tree :data="data" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
+<el-tree :data="data" :props="defaultProps" accordion @node-click="handleNodeClick"></el-tree>
 
 <script>
   export default {
