@@ -1,4 +1,5 @@
 <script>
+  const cityOptions = ['ShangHai', 'BeiJing', 'GuangZhou', 'ShenZhen'];
   module.exports = {
     data() {
       return {
@@ -7,8 +8,26 @@
         checked: true,
         checked1: false,
         checked2: true,
-        isValid: 'valid'
+        isValid: 'valid',
+        checkAll: false,
+        cities: cityOptions,
+        checkedCities: ['上海', '北京'],
+        isIndeterminate: false
       };
+    },
+    methods: {
+      handleChange(ev) {
+        console.log(ev);
+      },
+      handleCheckAllChange(event) {
+        this.checkedCities = event.target.checked ? cityOptions : [];
+        this.isIndeterminate = false;
+      },
+      handleCheckedCitiesChange(value) {
+        let checkedCount = value.length;
+        this.checkAll = checkedCount === this.cities.length;
+        this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
+      }
     }
   };
 </script>
@@ -87,6 +106,47 @@ It is used for multiple checkboxes which are bound in one group, and indicates w
       return {
         checkList: ['selected and disabled','Option A']
       };
+    }
+  };
+</script>
+```
+:::
+
+### Indeterminate
+
+The `indeterminate` property can help you to achieve a 'check all' effect.
+
+:::demo
+
+```html
+<template>
+  <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">Check all</el-checkbox>
+  <div style="margin: 15px 0;"></div>
+  <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
+    <el-checkbox v-for="city in cities" :label="city">{{city}}</el-checkbox>
+  </el-checkbox-group>
+</template>
+<script>
+  const cityOptions = ['ShangHai', 'BeiJing', 'GuangZhou', 'ShenZhen'];
+  export default {
+    data() {
+      return {
+        checkAll: true,
+        checkedCities: [],
+        cities: cityOptions,
+        isIndeterminate: false
+      };
+    },
+    methods: {
+      handleCheckAllChange(event) {
+        this.checkedCities = event.target.checked ? cityOptions : [];
+        this.isIndeterminate = false;
+      },
+      handleCheckedCitiesChange(value) {
+        let checkedCount = value.length;
+        this.checkAll = checkedCount === this.cities.length;
+        this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
+      }
     }
   };
 </script>
