@@ -15,8 +15,7 @@
         :store="store"
         :layout="layout"
         :border="border"
-        :default-sort-prop="defaultSortProp"
-        :default-sort-order="defaultSortOrder"
+        :default-sort="defaultSort"
         :style="{ width: layout.bodyWidth ? layout.bodyWidth + 'px' : '' }">
       </table-header>
     </div>
@@ -170,9 +169,7 @@
 
       defaultExpandAll: Boolean,
 
-      defaultSortProp: String,
-
-      defaultSortOrder: String
+      defaultSort: Object
     },
 
     components: {
