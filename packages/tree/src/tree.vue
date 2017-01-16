@@ -6,7 +6,7 @@
       :props="props"
       :key="getNodeKey(child)"
       :render-content="renderContent"
-      @click.native="handleChildNodeClick(child)">
+      @node-expand="handleNodeExpand">
     </el-tree-node>
     <div class="el-tree__empty-block" v-if="!root.childNodes || root.childNodes.length === 0">
       <span class="el-tree__empty-text">{{ emptyText }}</span>
@@ -141,8 +141,8 @@
       setChecked(data, checked, deep) {
         this.store.setChecked(data, checked, deep);
       },
-      handleChildNodeClick(node) {
-        this.broadcast('ElTreeNode', 'tree-node-click', node);
+      handleNodeExpand(nodeData, node, instance) {
+        this.broadcast('ElTreeNode', 'tree-node-expand', node);
       }
     },
 
