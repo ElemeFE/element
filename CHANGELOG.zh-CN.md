@@ -1,5 +1,25 @@
 ## 更新日志
 
+### 1.1.4
+*2017-01-16*
+
+- 修复 Input Number 在主动改变绑定值时也会触发 change 事件的问题，#2329
+- 修复 Menu 在启用 router 模式后没有对 `$route` 变化进行响应的问题，#2391
+- 修复 Menu、Tree 在快速点击时出现展开状态错误的问题，#2354
+- 修复 Input Number 和 Checkbox Group 的 change 事件触发时机，现在主动改变绑定值时不触发该事件。
+- 新增 Input 增加点击图标后的钩子函数属性，#2414
+- 新增 Radio Group 的 `disabled` 属性，#2411
+- 新增 Tree 增加 `accordion` 属性，#2408
+- 新增 Form 增加 `show-message` 属性，#2356
+- 修复 Table 排序点击区域，调整默认排序的 API，#2309 #2405（by @njleonzhang）
+- 修复 DatePicker firstDayOfWeek 在范围类型中无法使用，#2353
+- 修复 DatePicker 初始值为 null 显示 1970，#2388
+- 修复 Table 缺少 filteredValue 属性，#2348
+- 修复 Table 空数据时且存在滚动条时的样式，#2396
+
+非兼容性更新
+- 1.1.3 新增的 `default-sort-prop` 和 `default-sort-order` 属性现在合并为一个对象类型属性
+
 ### 1.1.3
 *2017-01-09*
 
