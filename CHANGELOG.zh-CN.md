@@ -16,6 +16,8 @@
 - 修复 DatePicker 初始值为 null 显示 1970，#2388
 - 修复 Table 缺少 filteredValue 属性，#2348
 - 修复 Table 空数据时且存在滚动条时的样式，#2396
+- 新增 MessageBox 的 `beforeClose` 属性，#2204
+- 修复可过滤的 Select 点击三角图标不显示下拉框的问题，#2389
 
 非兼容性更新
 - 1.1.3 新增的 `default-sort-prop` 和 `default-sort-order` 属性现在合并为一个对象类型属性

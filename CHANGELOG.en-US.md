@@ -17,6 +17,8 @@
 - Fixed DatePicker displaying 1970 when initial value is null, #2388
 - Fixed `filteredValue` attribute for Table, #2348
 - Fixed scrollable Table's style with empty data, #2396
+- Added `beforeClose` attribute for MessageBox, #2204
+- Fixed filterable Select not showing dropdown when triangle icon is clicked, #2389
 
 Breaking change
 - The `default-sort-prop` and `default-sort-order` attributes added in 1.1.3 are now merged into an object-typed attribute
