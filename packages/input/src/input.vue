@@ -16,7 +16,14 @@
       </div>
       <!-- input 图标 -->
       <slot name="icon">
-        <i class="el-input__icon" :class="'el-icon-' + icon" v-if="icon" @click="handleIconClick"></i>
+        <i class="el-input__icon"
+          :class="[
+            'el-icon-' + icon,
+            onIconClick ? 'is-clickable' : ''
+          ]"
+          v-if="icon"
+          @click="handleIconClick">
+        </i>
       </slot>
       <input
         v-if="type !== 'textarea'"
@@ -118,7 +125,8 @@
       validateEvent: {
         type: Boolean,
         default: true
-      }
+      },
+      onIconClick: Function
     },
 
     computed: {
@@ -162,6 +170,9 @@
         this.setCurrentValue(event.target.value);
       },
       handleIconClick(event) {
+        if (this.onIconClick) {
+          this.onIconClick(event);
+        }
         this.$emit('click', event);
       },
       setCurrentValue(value) {

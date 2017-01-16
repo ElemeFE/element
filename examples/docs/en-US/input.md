@@ -191,14 +191,14 @@ export default {
 
 Add an icon to indicate input type.
 
-::: demo You can add an icon at the end of Input by setting the `icon` attribute.
+::: demo You can add an icon at the end of Input by setting the `icon` attribute and use `on-icon-click` hook to complete some work after clicking the icon.
 
 ```html
 <el-input
   placeholder="Pick a date"
-  icon="time"
+  icon="search"
   v-model="input2"
-  @click="handleIconClick">
+  :on-icon-click="handleIconClick">
 </el-input>
 
 <script>
@@ -608,7 +608,7 @@ Search data from server-side.
 |resize| control the resizability | string | none, both, horizontal, vertical | — |
 |autofocus | same as `autofocus` in native input | boolean | — | false |
 |form | same as `form` in native input | string | — | — |
-
+| on-icon-click | hook function when clicking on the input icon | function | — | — |
 
 ### Input Events
 
