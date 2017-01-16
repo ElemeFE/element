@@ -575,9 +575,10 @@
      * Helper used to know if the given modifier depends from another one.
      * @method
      * @memberof Popper
+     * @param {String} requesting - name of requesting modifier
+     * @param {String} requested - name of requested modifier
      * @returns {Boolean}
      */
-
     Popper.prototype.isModifierRequired = function(requesting, requested) {
         var index = getArrayKeyIndex(this._options.modifiers, requesting);
         return !!this._options.modifiers.slice(0, index).filter(function(modifier) {
