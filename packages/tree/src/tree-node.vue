@@ -36,7 +36,7 @@
           v-for="child in node.childNodes"
           :key="getNodeKey(child)"
           :node="child"
-          @click.native="handleChildNodeClick(child)">
+          @node-expand="handleChildNodeExpand(child)">
         </el-tree-node>
       </div>
     </collapse-transition>
@@ -149,6 +149,7 @@
           this.node.collapse();
         } else {
           this.node.expand();
+          this.$emit('node-expand', this.node.data, this.node, this);
         }
       },
 
@@ -164,8 +165,8 @@
         }
       },
 
-      handleChildNodeClick(node) {
-        this.broadcast('ElTreeNode', 'tree-node-click', node);
+      handleChildNodeExpand(node) {
+        this.broadcast('ElTreeNode', 'tree-node-expand', node);
       }
     },
 
@@ -198,7 +199,7 @@
       }
 
       if(this.tree.accordion) {
-        this.$on('tree-node-click', node => {
+        this.$on('tree-node-expand', node => {
           if(this.node !== node) {
             this.node.collapse();
           }
