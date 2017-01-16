@@ -265,6 +265,13 @@ export default {
     },
 
     handleClick(event, column) {
+      let target = event.target;
+      if (!column.filters && column.sortable) {
+        this.handleHeaderClick(event, column);
+      } else if (column.filters && !column.sortable) {
+        this.handleFilterClick(event, column);
+      }
+
       this.$parent.$emit('header-click', column, event);
     },
 
@@ -372,6 +379,7 @@ export default {
     },
 
     handleHeaderClick(event, column) {
+      event.stopPropagation();
       let order = this.toggleOrder(column);
 
       let target = event.target;
