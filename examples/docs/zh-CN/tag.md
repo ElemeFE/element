@@ -3,18 +3,34 @@
     data() {
       return {
         tags: [
-          { key: 1, name: '标签一', type: '' },
-          { key: 2, name: '标签二', type: 'gray' },
-          { key: 5, name: '标签三', type: 'primary' },
-          { key: 3, name: '标签四', type: 'success' },
-          { key: 4, name: '标签五', type: 'warning' },
-          { key: 6, name: '标签六', type: 'danger' }
-        ]
+          { name: '标签一', type: '' },
+          { name: '标签二', type: 'gray' },
+          { name: '标签三', type: 'primary' },
+          { name: '标签四', type: 'success' },
+          { name: '标签五', type: 'warning' },
+          { name: '标签六', type: 'danger' }
+        ],
+        dynamicTags: ['标签一', '标签二', '标签三'],
+        inputVisible: false,
+        inputValue: ''
       };
     },
     methods: {
       handleClose(tag) {
-        this.tags.splice(this.tags.indexOf(tag), 1);
+        this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
+      },
+
+      showInput() {
+        this.inputVisible = true;
+      },
+
+      handleInputConfirm() {
+        let inputValue = this.inputValue;
+        if (inputValue) {
+          this.dynamicTags.push(inputValue);
+        }
+        this.inputVisible = false;
+        this.inputValue = '';
       }
     }
   }
@@ -24,6 +40,20 @@
   .demo-box.demo-tag {
     .el-tag + .el-tag {
       margin-left: 10px;
+    }
+    .button-new-tag {
+      margin-left: 10px;
+      height: 24px;
+      line-height: 22px;
+      padding: 0 *;
+    }
+    .input-new-tag {
+      width: 78px;
+      margin-left: 10px;
+
+      .el-input__inner {
+        height: 24px;
+      }
     }
   }
 </style>
@@ -48,16 +78,13 @@
 
 ### 可移除标签
 
-:::demo 设置`closable`属性来定义一个可移除的标签，接受一个`Boolean`，设置为`true`即可。默认的标签移除时会附带渐变动画，如果不想使用，可以设置`close-transition`属性，它接受一个`Boolean`，true 为关闭。设置`close`事件可以处理关闭后的回调函数。
+:::demo 设置`closable`属性可以定义一个标签是否可移除。默认的标签移除时会附带渐变动画，如果不想使用，可以设置`close-transition`属性，它接受一个`Boolean`，true 为关闭。
 
 ```html
 <el-tag
   v-for="tag in tags"
   :closable="true"
   :type="tag.type"
-  :key="tag"
-  :close-transition="false"
-  @close="handleClose(tag)"
 >
 {{tag.name}}
 </el-tag>
@@ -67,18 +94,70 @@
     data() {
       return {
         tags: [
-          { key: 1, name: '标签一', type: '' },
-          { key: 2, name: '标签二', type: 'gray' },
-          { key: 5, name: '标签三', type: 'primary' },
-          { key: 3, name: '标签四', type: 'success' },
-          { key: 4, name: '标签五', type: 'warning' },
-          { key: 6, name: '标签六', type: 'danger' }
+          { name: '标签一', type: '' },
+          { name: '标签二', type: 'gray' },
+          { name: '标签三', type: 'primary' },
+          { name: '标签四', type: 'success' },
+          { name: '标签五', type: 'warning' },
+          { name: '标签六', type: 'danger' }
         ]
+      };
+    }
+  }
+</script>
+```
+:::
+
+### 动态编辑标签
+
+动态编辑标签可以通过点击标签关闭按钮后触发的 `close` 事件来实现
+
+:::demo
+```html
+<el-tag
+  v-for="tag in dynamicTags"
+  :closable="true"
+  :close-transition="false"
+  @close="handleClose(tag)"
+>
+{{tag}}
+</el-tag>
+<el-input
+  class="input-new-tag"
+  v-if="inputVisible"
+  v-model="inputValue"
+  ref="saveTagInput"
+  size="mini"
+  @keyup.enter.native="handleInputConfirm"
+  @blur="handleInputConfirm"
+>
+</el-input>
+<el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
+<script>
+  export default {
+    data() {
+      return {
+        dynamicTags: ['标签一', '标签二', '标签三'],
+        inputVisible: false,
+        inputValue: ''
       };
     },
     methods: {
       handleClose(tag) {
-        this.tags.splice(this.tags.indexOf(tag), 1);
+        this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
+      },
+
+      showInput() {
+        this.inputVisible = true;
+      },
+
+      handleInputConfirm() {
+        let inputValue = this.inputValue;
+        if (inputValue) {
+          this.dynamicTags.push(inputValue);
+        }
+        this.inputVisible = false;
+        this.inputValue = '';
       }
     }
   }
