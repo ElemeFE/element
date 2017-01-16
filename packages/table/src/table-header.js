@@ -104,7 +104,7 @@ export default {
                     on-mousemove={ ($event) => this.handleMouseMove($event, column) }
                     on-mouseout={ this.handleMouseOut }
                     on-mousedown={ ($event) => this.handleMouseDown($event, column) }
-                    on-click={ ($event) => this.handleClick($event, column) }
+                    on-click={ ($event) => this.handleHeaderClick($event, column) }
                     class={ [column.id, column.order, column.headerAlign, column.className || '', rowIndex === 0 && this.isCellHidden(cellIndex) ? 'is-hidden' : '', !column.children ? 'is-leaf' : ''] }>
                     <div class={ ['cell', column.filteredValue && column.filteredValue.length > 0 ? 'highlight' : ''] }>
                     {
@@ -114,7 +114,7 @@ export default {
                     }
                     {
                       column.sortable
-                        ? <span class="caret-wrapper" on-click={ ($event) => this.handleHeaderClick($event, column) }>
+                        ? <span class="caret-wrapper" on-click={ ($event) => this.handleSortClick($event, column) }>
                             <i class="sort-caret ascending"></i>
                             <i class="sort-caret descending"></i>
                           </span>
@@ -264,7 +264,13 @@ export default {
       }, 16);
     },
 
-    handleClick(event, column) {
+    handleHeaderClick(event, column) {
+      if (!column.filters && column.sortable) {
+        this.handleSortClick(event, column);
+      } else if (column.filters && !column.sortable) {
+        this.handleFilterClick(event, column);
+      }
+
       this.$parent.$emit('header-click', column, event);
     },
 
@@ -371,7 +377,8 @@ export default {
       return 'ascending';
     },
 
-    handleHeaderClick(event, column) {
+    handleSortClick(event, column) {
+      event.stopPropagation();
       let order = this.toggleOrder(column);
 
       let target = event.target;
