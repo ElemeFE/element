@@ -152,15 +152,17 @@ TableStore.prototype.mutations = {
     }
 
     const prop = column.property;
+    const filters = [];
+
     if (prop) {
       states.filters[column.id] = values;
+      filters[column.columnKey || column.id] = values;
     }
 
     let data = states._data;
-    const filters = states.filters;
 
-    Object.keys(filters).forEach((columnId) => {
-      const values = filters[columnId];
+    Object.keys(states.filters).forEach((columnId) => {
+      const values = states.filters[columnId];
       if (!values || values.length === 0) return;
       const column = getColumnById(this.states, columnId);
       if (column && column.filterMethod) {

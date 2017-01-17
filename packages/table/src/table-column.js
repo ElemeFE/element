@@ -182,8 +182,7 @@ export default {
   created() {
     this.customRender = this.$options.render;
     this.$options.render = h => h('div', this.$slots.default);
-
-    let columnId = this.columnId = this.columnKey || ((this.$parent.tableId || (this.$parent.columnId + '_')) + 'column_' + columnIdSeed++);
+    this.columnId = (this.$parent.tableId || (this.$parent.columnId + '_')) + 'column_' + columnIdSeed++;
 
     let parent = this.$parent;
     let owner = this.owner;
@@ -210,7 +209,8 @@ export default {
     let isColumnGroup = false;
 
     let column = getDefaultColumn(type, {
-      id: columnId,
+      id: this.columnId,
+      columnKey: this.columnKey,
       label: this.label,
       className: this.className,
       property: this.prop || this.property,
