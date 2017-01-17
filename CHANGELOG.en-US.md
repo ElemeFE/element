@@ -1,5 +1,12 @@
 ## Changelog
 
+### 1.1.5
+
+*2017-01-17*
+
+- Fixed Menu not activating corresponding menu item after router switching in router mode, #2451
+- Fixed `value` attribute of Collapse not supporting `Number` typed value, #2455
+
 ### 1.1.4
 
 *2017-01-16*
