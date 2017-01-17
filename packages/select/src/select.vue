@@ -606,6 +606,11 @@
 
       resetInputWidth() {
         this.inputWidth = this.$refs.reference.$el.getBoundingClientRect().width;
+      },
+
+      handleResize() {
+        this.resetInputWidth();
+        if (this.multiple) this.resetInputHeight();
       }
     },
 
@@ -632,7 +637,7 @@
       if (this.multiple && Array.isArray(this.value) && this.value.length > 0) {
         this.currentPlaceholder = '';
       }
-      addResizeListener(this.$el, this.resetInputWidth);
+      addResizeListener(this.$el, this.handleResize);
       if (this.remote && this.multiple) {
         this.resetInputHeight();
       }
@@ -644,7 +649,7 @@
     },
 
     destroyed() {
-      if (this.resetInputWidth) removeResizeListener(this.$el, this.resetInputWidth);
+      if (this.handleResize) removeResizeListener(this.$el, this.handleResize);
     }
   };
 </script>
