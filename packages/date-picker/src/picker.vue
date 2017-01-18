@@ -325,7 +325,7 @@ export default {
 
   created() {
     // vue-popper
-    this.options = {
+    this.popperOptions = {
       boundariesPadding: 0,
       gpuAcceleration: false
     };

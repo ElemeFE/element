@@ -26,7 +26,7 @@ export default {
       type: String,
       default: 'fade-in-linear'
     },
-    options: {
+    popperOptions: {
       default() {
         return {
           boundariesPadding: 10,

@@ -34,7 +34,7 @@ export default {
       type: Boolean,
       default: true
     },
-    options: {
+    popperOptions: {
       type: Object,
       default() {
         return {
@@ -74,7 +74,7 @@ export default {
         return;
       }
 
-      const options = this.options;
+      const options = this.popperOptions;
       const popper = this.popperElm = this.popperElm || this.popper || this.$refs.popper;
       let reference = this.referenceElm = this.referenceElm || this.reference || this.$refs.reference;
 
