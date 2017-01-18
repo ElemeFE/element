@@ -146,8 +146,10 @@
 
       handleExpandIconClick() {
         if (this.expanded) {
+          this.tree.$emit('node-close', this.node.data, this.node, this);
           this.node.collapse();
         } else {
+          this.tree.$emit('node-open', this.node.data, this.node, this);
           this.node.expand();
           this.$emit('node-expand', this.node.data, this.node, this);
         }

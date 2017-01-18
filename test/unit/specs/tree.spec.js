@@ -369,4 +369,45 @@ describe('Tree', () => {
       }, DELAY);
     }, DELAY);
   });
+
+  it('handleNodeOpen & handleNodeClose', (done) => {
+    vm = getTreeVm(':props="defaultProps" lazy :load="loadNode" @node-open="handleNodeOpen" @node-close="handleNodeClose"', {
+      methods: {
+        loadNode(node, resolve) {
+          if (node.level === 0) {
+            return resolve([{label: 'region1'}, {label: 'region2'}]);
+          }
+          if (node.level > 4) return resolve([]);
+          setTimeout(() => {
+            resolve([{
+              label: 'zone' + this.count++
+            }, {
+              label: 'zone' + this.count++
+            }]);
+          }, 50);
+        },
+        handleNodeOpen(data, node, vm) {
+          this.currentNode = data;
+          this.nodeExpended = true;
+        },
+        handleNodeClose(data, node, vm) {
+          this.currentNode = data;
+          this.nodeExpended = false;
+        }
+      }
+    });
+    const firstNode = document.querySelector('.el-tree-node__content');
+    expect(firstNode.nextElementSibling.childNodes.length).to.equal(0);
+    firstNode.click();
+    setTimeout(() => {
+      expect(vm.nodeExpended).to.equal(true);
+      expect(vm.currentNode.label).to.equal('region1');
+      firstNode.click();
+      setTimeout(() => {
+        expect(vm.nodeExpended).to.equal(false);
+        expect(vm.currentNode.label).to.equal('region1');
+        done();
+      }, 100);
+    }, 100);
+  });
 });
