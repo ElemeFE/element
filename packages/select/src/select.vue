@@ -363,7 +363,13 @@
       },
 
       getOption(value) {
-        const option = this.cachedOptions.filter(option => option.value === value)[0];
+        let option;
+        for (let i = 0, len = this.cachedOptions.length; i < len; i++) {
+          const cachedOption = this.cachedOptions[i];
+          if (cachedOption.value === value) {
+            option = cachedOption;
+          }
+        }
         if (option) return option;
         const label = typeof value === 'string' || typeof value === 'number'
           ? value : '';
@@ -606,6 +612,11 @@
 
       resetInputWidth() {
         this.inputWidth = this.$refs.reference.$el.getBoundingClientRect().width;
+      },
+
+      handleResize() {
+        this.resetInputWidth();
+        if (this.multiple) this.resetInputHeight();
       }
     },
 
@@ -632,7 +643,7 @@
       if (this.multiple && Array.isArray(this.value) && this.value.length > 0) {
         this.currentPlaceholder = '';
       }
-      addResizeListener(this.$el, this.resetInputWidth);
+      addResizeListener(this.$el, this.handleResize);
       if (this.remote && this.multiple) {
         this.resetInputHeight();
       }
@@ -644,7 +655,7 @@
     },
 
     destroyed() {
-      if (this.resetInputWidth) removeResizeListener(this.$el, this.resetInputWidth);
+      if (this.handleResize) removeResizeListener(this.$el, this.handleResize);
     }
   };
 </script>
