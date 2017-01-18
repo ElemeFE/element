@@ -363,7 +363,13 @@
       },
 
       getOption(value) {
-        const option = this.cachedOptions.filter(option => option.value === value)[0];
+        let option;
+        for (let i = 0, len = this.cachedOptions.length; i < len; i++) {
+          const cachedOption = this.cachedOptions[i];
+          if (cachedOption.value === value) {
+            option = cachedOption;
+          }
+        }
         if (option) return option;
         const label = typeof value === 'string' || typeof value === 'number'
           ? value : '';
