@@ -69,7 +69,7 @@ export default {
     };
   },
 
-  created() {
+  beforeCreate() {
     this.$parent.steps.push(this);
   },
 
