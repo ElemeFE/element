@@ -11,7 +11,7 @@ export default {
   name: 'ElSteps',
 
   props: {
-    space: Number,
+    space: [Number, String],
     active: Number,
     direction: {
       type: String,
