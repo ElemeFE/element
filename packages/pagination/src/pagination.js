@@ -204,7 +204,7 @@ export default {
               class="el-pagination__editor"
               type="number"
               min={ 1 }
-              max={ this.internalPageCount }
+              max={ this.$parent.internalPageCount }
               domProps-value={ this.$parent.internalCurrentPage }
               on-change={ this.handleChange }
               on-focus={ this.handleFocus }
