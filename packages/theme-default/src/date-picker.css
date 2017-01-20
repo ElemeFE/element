@@ -6,3 +6,5 @@
 @import "./date-picker/date-picker.css";
 @import "./date-picker/date-range-picker.css";
 @import "./date-picker/time-range-picker.css";
+@import "./date-picker/time-picker.css";
+@import "./input.css";
