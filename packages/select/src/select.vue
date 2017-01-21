@@ -511,10 +511,13 @@
             this.value.push(option.value);
           }
           if (option.created) {
-            this.query = '';
             this.inputLength = 20;
-            this.$refs.input.focus();
           }
+
+          // after an option be select/created the focus must be retored and the
+          // query erased
+          this.$refs.input.focus();
+          this.query = '';
         }
       },
 
