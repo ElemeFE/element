@@ -161,6 +161,7 @@
 
   --select-option-color: var(--link-color);
   --select-option-disabled-color: var(--color-extra-light-silver);
+  --select-option-disabled-background: var(--color-white);
   --select-option-height: 36px;
   --select-option-hover-background: var(--color-light-gray);
   --select-option-selected: var(--color-primary);

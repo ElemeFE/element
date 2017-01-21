@@ -9,7 +9,8 @@
         activeValue: [],
         value: [],
         expandTrigger: 'click',
-        changeOnSelect: false
+        changeOnSelect: false,
+        popperClass: ''
       };
     },
 
@@ -66,7 +67,7 @@
         }
 
         if (this.changeOnSelect) {
-          this.$emit('change', this.activeValue, closeMenu);
+          this.$emit('pick', this.activeValue, closeMenu);
         }
       },
       expandItem(item, menuIndex) {
@@ -81,7 +82,7 @@
         this.selectItem(item, menuIndex);
 
         if (!item.children && !this.changeOnSelect) {
-          this.$emit('change', this.activeValue);
+          this.$emit('pick', this.activeValue);
         }
       }
     },
@@ -91,7 +92,8 @@
         activeValue,
         activeOptions,
         visible,
-        expandTrigger
+        expandTrigger,
+        popperClass
       } = this;
 
       const menus = this._l(activeOptions, (menu, index) => {
@@ -100,10 +102,12 @@
             on: {}
           };
 
-          if (expandTrigger === 'click' || !item.children) {
-            events.on['click'] = () => { this.handleItemClick(item, index); };
-          } else {
-            events.on['mouseenter'] = () => { this.expandItem(item, index); };
+          if (!item.disabled) {
+            if (expandTrigger === 'click' || !item.children) {
+              events.on['click'] = () => { this.handleItemClick(item, index); };
+            } else {
+              events.on['mouseenter'] = () => { this.expandItem(item, index); };
+            }
           }
 
           return (
@@ -111,7 +115,8 @@
               class={{
                 'el-cascader-menu__item': true,
                 'el-cascader-menu__item--extensible': item.children,
-                'is-active': item.value === activeValue[index]
+                'is-active': item.value === activeValue[index],
+                'is-disabled': item.disabled
               }}
               {...events}
             >
@@ -123,7 +128,7 @@
       });
       return (
         <transition name="el-zoom-in-top">
-          <div class="el-cascader-menus" v-show={visible}>
+          <div class={['el-cascader-menus', popperClass]} v-show={visible}>
             {menus}
           </div>
         </transition>

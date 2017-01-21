@@ -12,9 +12,11 @@
   >
     <el-input
       :readonly="!showSearch"
-      :placeholder="placeholder"
+      :placeholder="displayValue ? undefined : placeholder"
       v-model="inputValue"
       @change="handleInputChange"
+      :validate-event="false"
+      :size="size"
     >
       <template slot="icon">
         <i
@@ -41,6 +43,7 @@ import ElCascaderMenu from './menu';
 import ElInput from 'element-ui/packages/input';
 import Popper from 'element-ui/src/utils/vue-popper';
 import Clickoutside from 'element-ui/src/utils/clickoutside';
+import emitter from 'element-ui/src/mixins/emitter';
 
 const popperMixin = {
   props: {
@@ -63,7 +66,7 @@ export default {
 
   directives: { Clickoutside },
 
-  mixins: [popperMixin],
+  mixins: [popperMixin, emitter],
 
   components: {
     ElInput
@@ -92,7 +95,8 @@ export default {
       type: String,
       default: 'click'
     },
-    showSearch: Boolean
+    showSearch: Boolean,
+    size: String
   },
 
   data() {
@@ -115,6 +119,7 @@ export default {
     },
     currentValue(value) {
       this.displayValue = value.join('/');
+      this.dispatch('ElFormItem', 'el.form.change', [value]);
     }
   },
 
@@ -125,12 +130,13 @@ export default {
         this.menu.options = this.options;
         this.menu.expandTrigger = this.expandTrigger;
         this.menu.changeOnSelect = this.changeOnSelect;
+        this.menu.popperClass = this.popperClass;
         this.popperElm = this.menu.$el;
       }
 
       this.menu.value = this.currentValue.slice(0);
       this.menu.visible = true;
-      this.menu.$on('change', this.handlePick);
+      this.menu.$on('pick', this.handlePick);
       this.updatePopper();
     },
     hideMenu() {
@@ -140,6 +146,7 @@ export default {
     handlePick(value, close = true) {
       this.currentValue = value;
       this.$emit('input', value);
+      this.$emit('change', value);
       if (close) {
         this.menuVisible = false;
       }
@@ -165,7 +172,7 @@ export default {
           };
         });
       } else {
-        return [{ label: 'notFoundContent', value: 'ANT_CASCADER_NOT_FOUND', disabled: true }];
+        return [{ label: 'not found content', value: '', disabled: true }];
       }
     },
     renderRenderFilteredOption(inputValue, optionsStack) {

@@ -106,6 +106,7 @@
 
       @when disabled {
         color: var(--select-option-disabled-color);
+        background-color: var(--select-option-disabled-background);
         cursor: not-allowed;
 
         &:hover {

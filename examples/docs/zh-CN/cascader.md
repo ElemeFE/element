@@ -32,17 +32,56 @@
             }],
           }],
         }],
+        optionsWithDisabled: [{
+          value: 'zhejiang',
+          label: 'Zhejiang',
+          disabled: true,
+          children: [{
+            value: 'hangzhou',
+            label: 'Hangzhou',
+            children: [{
+              value: 'xihu',
+              label: 'West Lake',
+            }],
+          }, {
+            value: 'ningbo',
+            label: 'NingBo',
+            children: [{
+              value: 'jiangbei',
+              label: 'Jiang Bei',
+            }],
+          }],
+        }, {
+          value: 'jiangsu',
+          label: 'Jiangsu',
+          children: [{
+            value: 'nanjing',
+            label: 'Nanjing',
+            children: [{
+              value: 'zhonghuamen',
+              label: 'Zhong Hua Men',
+            }],
+          }],
+        }],
         selectedOptions: [],
-        selectedOptions2: ['jiangsu', 'nanjing', 'zhonghuamen'],
-        selectedOptions3: [],
-        selectedOptions4: [],
-        selectedOptions5: []
+        selectedOptions2: ['jiangsu', 'nanjing', 'zhonghuamen']
       };
     },
     methods: {
+      handleChange(value) {
+        console.log(value);
+      }
     }
   };
 </script>
+
+<style>
+  .demo-cascader {
+    .el-cascader {
+      width: 222px;
+    }
+  }
+</style>
 
 ## 级联选择
 
@@ -55,55 +94,329 @@
 :::demo
 ```html
 <el-cascader
+  placeholder="请选择"
   :options="options"
   v-model="selectedOptions"
+  @change="handleChange"
 ></el-cascader>
+<script>
+  module.exports = {
+    data() {
+      return {
+        options: [{
+          value: 'zhejiang',
+          label: 'Zhejiang',
+          children: [{
+            value: 'hangzhou',
+            label: 'Hangzhou',
+            children: [{
+              value: 'xihu',
+              label: 'West Lake',
+            }],
+          }, {
+            value: 'ningbo',
+            label: 'NingBo',
+            children: [{
+              value: 'jiangbei',
+              label: 'Jiang Bei',
+            }],
+          }],
+        }, {
+          value: 'jiangsu',
+          label: 'Jiangsu',
+          children: [{
+            value: 'nanjing',
+            label: 'Nanjing',
+            children: [{
+              value: 'zhonghuamen',
+              label: 'Zhong Hua Men',
+            }],
+          }],
+        }],
+        selectedOptions: []
+      };
+    },
+    methods: {
+      handleChange(value) {
+        console.log(value);
+      }
+    }
+  };
+</script>
+```
+:::
+
+### 禁用值
+
+:::demo
+```html
+<el-cascader
+  placeholder="请选择"
+  :options="optionsWithDisabled"
+></el-cascader>
+<script>
+  module.exports = {
+    data() {
+      return {
+        optionsWithDisabled: [{
+          value: 'zhejiang',
+          label: 'Zhejiang',
+          disabled: true,
+          children: [{
+            value: 'hangzhou',
+            label: 'Hangzhou',
+            children: [{
+              value: 'xihu',
+              label: 'West Lake',
+            }],
+          }, {
+            value: 'ningbo',
+            label: 'NingBo',
+            children: [{
+              value: 'jiangbei',
+              label: 'Jiang Bei',
+            }],
+          }],
+        }, {
+          value: 'jiangsu',
+          label: 'Jiangsu',
+          children: [{
+            value: 'nanjing',
+            label: 'Nanjing',
+            children: [{
+              value: 'zhonghuamen',
+              label: 'Zhong Hua Men',
+            }],
+          }],
+        }]
+      };
+    }
+  };
+</script>
 ```
 :::
 
 ### 默认值
 
-:::demo
+:::demo 默认值通过数组的方式指定。
 ```html
 <el-cascader
+  placeholder="请选择"
   :options="options"
   v-model="selectedOptions2"
 ></el-cascader>
+<script>
+  module.exports = {
+    data() {
+      return {
+        options: [{
+          value: 'zhejiang',
+          label: 'Zhejiang',
+          children: [{
+            value: 'hangzhou',
+            label: 'Hangzhou',
+            children: [{
+              value: 'xihu',
+              label: 'West Lake',
+            }],
+          }, {
+            value: 'ningbo',
+            label: 'NingBo',
+            children: [{
+              value: 'jiangbei',
+              label: 'Jiang Bei',
+            }],
+          }],
+        }, {
+          value: 'jiangsu',
+          label: 'Jiangsu',
+          children: [{
+            value: 'nanjing',
+            label: 'Nanjing',
+            children: [{
+              value: 'zhonghuamen',
+              label: 'Zhong Hua Men',
+            }],
+          }],
+        }],
+        selectedOptions2: ['jiangsu', 'nanjing', 'zhonghuamen']
+      };
+    }
+  };
+</script>
 ```
 :::
 
 ### 移入展开
 
+在鼠标移入时就展开下级菜单，完成选择仍需要进行点击。
+
 :::demo
 ```html
 <el-cascader
+  placeholder="请选择"
   :options="options"
-  v-model="selectedOptions3"
   expand-trigger="hover"
 ></el-cascader>
+<script>
+  module.exports = {
+    data() {
+      return {
+        options: [{
+          value: 'zhejiang',
+          label: 'Zhejiang',
+          children: [{
+            value: 'hangzhou',
+            label: 'Hangzhou',
+            children: [{
+              value: 'xihu',
+              label: 'West Lake',
+            }],
+          }, {
+            value: 'ningbo',
+            label: 'NingBo',
+            children: [{
+              value: 'jiangbei',
+              label: 'Jiang Bei',
+            }],
+          }],
+        }, {
+          value: 'jiangsu',
+          label: 'Jiangsu',
+          children: [{
+            value: 'nanjing',
+            label: 'Nanjing',
+            children: [{
+              value: 'zhonghuamen',
+              label: 'Zhong Hua Men',
+            }],
+          }],
+        }]
+      };
+    }
+  };
+</script>
 ```
 :::
 
 ### 选择即改变
 
+该模式下允许只选中父级选项。
+
 :::demo
 ```html
 <el-cascader
+  placeholder="请选择"
   :options="options"
-  v-model="selectedOptions4"
   change-on-select
 ></el-cascader>
+<script>
+  module.exports = {
+    data() {
+      return {
+        options: [{
+          value: 'zhejiang',
+          label: 'Zhejiang',
+          children: [{
+            value: 'hangzhou',
+            label: 'Hangzhou',
+            children: [{
+              value: 'xihu',
+              label: 'West Lake',
+            }],
+          }, {
+            value: 'ningbo',
+            label: 'NingBo',
+            children: [{
+              value: 'jiangbei',
+              label: 'Jiang Bei',
+            }],
+          }],
+        }, {
+          value: 'jiangsu',
+          label: 'Jiangsu',
+          children: [{
+            value: 'nanjing',
+            label: 'Nanjing',
+            children: [{
+              value: 'zhonghuamen',
+              label: 'Zhong Hua Men',
+            }],
+          }],
+        }]
+      };
+    }
+  };
+</script>
 ```
 :::
 
 ### 可搜索
 
+可以直接搜索选项并选择。
+
 :::demo
 ```html
 <el-cascader
+  placeholder="请选择"
   :options="options"
-  v-model="selectedOptions5"
   show-search
 ></el-cascader>
+<script>
+  module.exports = {
+    data() {
+      return {
+        options: [{
+          value: 'zhejiang',
+          label: 'Zhejiang',
+          children: [{
+            value: 'hangzhou',
+            label: 'Hangzhou',
+            children: [{
+              value: 'xihu',
+              label: 'West Lake',
+            }],
+          }, {
+            value: 'ningbo',
+            label: 'NingBo',
+            children: [{
+              value: 'jiangbei',
+              label: 'Jiang Bei',
+            }],
+          }],
+        }, {
+          value: 'jiangsu',
+          label: 'Jiangsu',
+          children: [{
+            value: 'nanjing',
+            label: 'Nanjing',
+            children: [{
+              value: 'zhonghuamen',
+              label: 'Zhong Hua Men',
+            }],
+          }],
+        }]
+      };
+    }
+  };
+</script>
 ```
 :::
+
+### Attributes
+| 参数      | 说明    | 类型      | 可选值       | 默认值   |
+|---------- |-------- |---------- |-------------  |-------- |
+| options   | 可选项数据源 | array  |       —        |     —    |
+| value | 指定选中项   | array | — |     —    |
+| popup-class | 自定义浮层类名   | string |      —         |     —    |
+| placeholder | 输入框占位文本 | string    |      —         |     —    |
+| disabled  | 是否禁用    | boolean   |  — | false   |
+| allowClear  | 是否支持清除    | boolean   |  — | false   |
+| expand-trigger  | 次级菜单的展开方式 | string | click / hover | 'click'   |
+| showSearch  | 是否支持搜索选项 | boolean | — | — |
+| size  | 尺寸 | string | large / small / mini | — |
+
+### Events
+| 事件名称      | 说明    | 回调参数      |
+|---------- |-------- |---------- |
+| change  | 当绑定值变化时触发的事件 | 当前值 |
