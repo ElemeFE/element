@@ -60,15 +60,7 @@ export default {
     }
     if (this.trigger === 'click') {
       on(reference, 'click', () => { this.showPopper = !this.showPopper; });
-      on(document, 'click', (e) => {
-        if (!this.$el ||
-            !reference ||
-            this.$el.contains(e.target) ||
-            reference.contains(e.target) ||
-            !popper ||
-            popper.contains(e.target)) return;
-        this.showPopper = false;
-      });
+      on(document, 'click', this.handleDocumentClick.bind(this, reference, popper));
     } else if (this.trigger === 'hover') {
       on(reference, 'mouseenter', this.handleMouseEnter);
       on(popper, 'mouseenter', this.handleMouseEnter);
@@ -111,6 +103,15 @@ export default {
       this._timer = setTimeout(() => {
         this.showPopper = false;
       }, 200);
+    },
+    handleDocumentClick(reference, popper, e) {
+      if (!this.$el ||
+        !reference ||
+        this.$el.contains(e.target) ||
+        reference.contains(e.target) ||
+        !popper ||
+        popper.contains(e.target)) return;
+      this.showPopper = false;
     }
   },
 
@@ -123,6 +124,7 @@ export default {
     off(reference, 'blur');
     off(reference, 'mouseleave');
     off(reference, 'mouseenter');
+    off(document, 'click', this.handleDocumentClick);
   }
 };
 </script>
