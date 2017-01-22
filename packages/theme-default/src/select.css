@@ -5,6 +5,7 @@
 @import "./tag.css";
 @import "./option.css";
 @import "./option-group.css";
+@import "./scrollbar.css";
 
 @component-namespace el {
 

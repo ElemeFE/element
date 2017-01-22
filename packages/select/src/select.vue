@@ -26,6 +26,7 @@
         class="el-select__input"
         :class="`is-${ size }`"
         @focus="visible = true"
+        :disabled="disabled"
         @keyup="managePlaceholder"
         @keydown="resetInputState"
         @keydown.down.prevent="navigateOptions('next')"
@@ -364,10 +365,11 @@
 
       getOption(value) {
         let option;
-        for (let i = 0, len = this.cachedOptions.length; i < len; i++) {
+        for (let i = this.cachedOptions.length - 1; i >= 0; i--) {
           const cachedOption = this.cachedOptions[i];
           if (cachedOption.value === value) {
             option = cachedOption;
+            break;
           }
         }
         if (option) return option;
@@ -513,8 +515,8 @@
           if (option.created) {
             this.query = '';
             this.inputLength = 20;
-            this.$refs.input.focus();
           }
+          if (this.filterable) this.$refs.input.focus();
         }
       },
 
