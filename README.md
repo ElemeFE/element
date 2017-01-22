@@ -29,6 +29,7 @@
 - [awesome-element](https://github.com/ElementUI/awesome-element)
 - [FAQ](./FAQ.md)
 - [Customize Theme](http://element.eleme.io/#/en-US/component/custom-theme)
+- [Preview and generate theme online](https://elementui.github.io/theme-preview)
 - Starter Kit
  - [element-starter](https://github.com/ElementUI/element-starter)
  - [element-cooking-starter](https://github.com/ElementUI/element-cooking-starter)
