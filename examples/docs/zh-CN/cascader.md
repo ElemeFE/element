@@ -81,6 +81,12 @@
       width: 222px;
     }
   }
+  .demo-cascader-size {
+    .el-cascader {
+      vertical-align: top;
+      margin-right: 15px;
+    }
+  }
 </style>
 
 ## 级联选择
@@ -240,6 +246,67 @@
           }],
         }],
         selectedOptions2: ['jiangsu', 'nanjing', 'zhonghuamen']
+      };
+    }
+  };
+</script>
+```
+:::
+
+### 尺寸
+
+:::demo 提供三种尺寸的级联选择器
+```html
+<div class="demo-cascader-size">
+  <el-cascader
+    placeholder="请选择"
+    :options="options"
+    size="large"
+  ></el-cascader>
+  <el-cascader
+    placeholder="请选择"
+    :options="options"
+  ></el-cascader>
+  <el-cascader
+    placeholder="请选择"
+    :options="options"
+    size="small"
+  ></el-cascader>
+</div>
+<script>
+  module.exports = {
+    data() {
+      return {
+        options: [{
+          value: 'zhejiang',
+          label: 'Zhejiang',
+          children: [{
+            value: 'hangzhou',
+            label: 'Hangzhou',
+            children: [{
+              value: 'xihu',
+              label: 'West Lake',
+            }],
+          }, {
+            value: 'ningbo',
+            label: 'NingBo',
+            children: [{
+              value: 'jiangbei',
+              label: 'Jiang Bei',
+            }],
+          }],
+        }, {
+          value: 'jiangsu',
+          label: 'Jiangsu',
+          children: [{
+            value: 'nanjing',
+            label: 'Nanjing',
+            children: [{
+              value: 'zhonghuamen',
+              label: 'Zhong Hua Men',
+            }],
+          }],
+        }]
       };
     }
   };

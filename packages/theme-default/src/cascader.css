@@ -33,8 +33,8 @@
       position: absolute;
       left: 0;
       top: 0;
-      height: var(--input-height);
-      line-height: @height;
+      height: 100%;
+      line-height: 34px;
       padding: 0 15px 0 10px;
       color: var(--input-color);
       width: 100%;
@@ -43,6 +43,21 @@
       overflow: hidden;
       box-sizing: border-box;
       cursor: pointer;
+    }
+
+    @m large {
+      font-size: var(--input-large-font-size);
+
+      .el-cascader__label {
+        line-height: calc(var(--input-large-height) - 2);
+      }
+    }
+    @m small {
+      font-size: var(--input-small-font-size);
+
+      .el-cascader__label {
+        line-height: calc(var(--input-small-height) - 2);
+      }
     }
   }
 

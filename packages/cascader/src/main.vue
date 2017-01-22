@@ -1,9 +1,10 @@
 <template>
   <span
     class="el-cascader"
-    :class="{
-      'is-opened': menuVisible
-    }"
+    :class="[
+      { 'is-opened': menuVisible },
+      size ? 'el-cascader--' + size : ''
+    ]"
     @click="menuVisible = !menuVisible"
     @mouseenter="inputHover = true"
     @mouseleave="inputHover = false"
