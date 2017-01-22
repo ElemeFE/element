@@ -40,7 +40,7 @@
       vertical-align: middle;
       float: left;
       font-size: 14px;
-      color: #5e6d82;
+      color: var(--color-extra-light-black);
       line-height: 1;
       padding: 11px 12px 11px 0;
       box-sizing: border-box;
@@ -52,7 +52,7 @@
       @utils-clearfix;
     }
     @e error {
-      color: #ff4949;
+      color: var(--color-danger);
       font-size: 12px;
       line-height: 1;
       padding-top: 4px;

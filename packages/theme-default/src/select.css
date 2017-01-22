@@ -9,7 +9,7 @@
 @component-namespace el {
 
   @b select {
-    display: block;
+    display: inline-block;
     position: relative;
 
     &:hover {

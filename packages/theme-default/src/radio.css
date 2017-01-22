@@ -87,7 +87,7 @@
       }
 
       &::after {
-        circle: 6px #fff;
+        circle: 6px var(--color-white);
         content: "";
         position: absolute;
         left: 50%;
@@ -170,6 +170,14 @@
       position: absolute;
       z-index: -1;
       left: -999px;
+
+      &:checked {
+        & + .el-radio-button__inner {
+          color: var(--radio-button-checked-color);
+          background-color: var(--radio-button-checked-fill);
+          border-color: var(--radio-button-checked-border-color);
+        }
+      }
 
       &:disabled {
         & + .el-radio-button__inner {

@@ -39,7 +39,7 @@
   import ElCheckboxGroup from 'element-ui/packages/checkbox-group';
 
   export default {
-    name: 'el-table-filter-panel',
+    name: 'ElTableFilterPanel',
 
     mixins: [Popper, Locale],
 
@@ -93,7 +93,7 @@
       handleSelect(filterValue) {
         this.filterValue = filterValue;
 
-        if (filterValue) {
+        if ((typeof filterValue !== 'undefined') && (filterValue !== null)) {
           this.confirmFilter(this.filteredValue);
         } else {
           this.confirmFilter([]);
@@ -129,7 +129,7 @@
         },
         set(value) {
           if (this.filteredValue) {
-            if (value) {
+            if ((typeof value !== 'undefined') && (value !== null)) {
               this.filteredValue.splice(0, 1, value);
             } else {
               this.filteredValue.splice(0, 1);
@@ -163,7 +163,7 @@
     mounted() {
       this.popperElm = this.$el;
       this.referenceElm = this.cell;
-      this.table.$refs.bodyWrapper.addEventListener('scroll', () => {
+      this.table.bodyWrapper.addEventListener('scroll', () => {
         this.updatePopper();
       });
 

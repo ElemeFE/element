@@ -48,7 +48,8 @@
       :size="size"
       :disabled="disabled"
       :readonly="!filterable || multiple"
-      @focus="toggleMenu"
+      :validate-event="false"
+      @focus="handleFocus"
       @click="handleIconClick"
       @mousedown.native="handleMouseDown"
       @keyup.native="debouncedOnInputChange"
@@ -65,8 +66,10 @@
       <el-select-menu
         ref="popper"
         v-show="visible && emptyText !== false">
-        <ul
-          class="el-select-dropdown__list"
+        <el-scrollbar
+          tag="ul"
+          wrap-class="el-select-dropdown__wrap"
+          view-class="el-select-dropdown__list"
           :class="{ 'is-empty': !allowCreate && filteredOptionsCount === 0 }"
           v-show="options.length > 0 && !loading">
           <el-option
@@ -75,7 +78,7 @@
             v-if="showNewOption">
           </el-option>
           <slot></slot>
-        </ul>
+        </el-scrollbar>
         <p class="el-select-dropdown__empty" v-if="emptyText && !allowCreate">{{ emptyText }}</p>
       </el-select-menu>
     </transition>
@@ -89,11 +92,13 @@
   import ElSelectMenu from './select-dropdown.vue';
   import ElOption from './option.vue';
   import ElTag from 'element-ui/packages/tag';
+  import ElScrollbar from 'element-ui/packages/scrollbar';
   import debounce from 'throttle-debounce/debounce';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
-  import { addClass, removeClass, hasClass } from 'wind-dom/src/class';
+  import { addClass, removeClass, hasClass } from 'element-ui/src/utils/dom';
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
   import { t } from 'element-ui/src/locale';
+  import merge from 'element-ui/src/utils/merge';
   const sizeMap = {
     'large': 42,
     'small': 30,
@@ -148,7 +153,8 @@
       ElInput,
       ElSelectMenu,
       ElOption,
-      ElTag
+      ElTag,
+      ElScrollbar
     },
 
     directives: { Clickoutside },
@@ -186,6 +192,8 @@
       return {
         options: [],
         cachedOptions: [],
+        createdOption: null,
+        createdSelected: false,
         selected: this.multiple ? [] : {},
         isSelect: true,
         inputLength: 20,
@@ -219,13 +227,13 @@
           } else {
             this.currentPlaceholder = this.cachedPlaceHolder;
           }
-          this.dispatch('ElFormItem', 'el.form.change', val);
         }
         this.setSelected();
         if (this.filterable && !this.multiple) {
           this.inputLength = 20;
         }
         this.$emit('change', val);
+        this.dispatch('ElFormItem', 'el.form.change', val);
       },
 
       query(val) {
@@ -260,6 +268,7 @@
           }
           this.query = '';
           this.selectedLabel = '';
+          this.inputLength = 20;
           this.resetHoverIndex();
           this.$nextTick(() => {
             if (this.$refs.input &&
@@ -271,7 +280,12 @@
           if (!this.multiple) {
             this.getOverflows();
             if (this.selected) {
-              this.selectedLabel = this.selected.currentLabel;
+              if (this.filterable && this.allowCreate &&
+                this.createdSelected && this.createdOption) {
+                this.selectedLabel = this.createdOption.currentLabel;
+              } else {
+                this.selectedLabel = this.selected.currentLabel;
+              }
               if (this.filterable) this.query = this.selectedLabel;
             }
           }
@@ -290,8 +304,7 @@
             }
           }
           if (!this.dropdownUl) {
-            let dropdownChildNodes = this.$refs.popper.$el.childNodes;
-            this.dropdownUl = [].filter.call(dropdownChildNodes, item => item.tagName === 'UL')[0];
+            this.dropdownUl = this.$refs.popper.$el.querySelector('.el-select-dropdown__wrap');
           }
           if (!this.multiple && this.dropdownUl) {
             this.setOverflow();
@@ -301,6 +314,7 @@
       },
 
       options(val) {
+        if (this.$isServer) return;
         this.optionsAllDisabled = val.length === val.filter(item => item.disabled === true).length;
         if (this.multiple) {
           this.resetInputHeight();
@@ -349,7 +363,13 @@
       },
 
       getOption(value) {
-        const option = this.cachedOptions.filter(option => option.value === value)[0];
+        let option;
+        for (let i = 0, len = this.cachedOptions.length; i < len; i++) {
+          const cachedOption = this.cachedOptions[i];
+          if (cachedOption.value === value) {
+            option = cachedOption;
+          }
+        }
         if (option) return option;
         const label = typeof value === 'string' || typeof value === 'number'
           ? value : '';
@@ -366,8 +386,15 @@
       setSelected() {
         if (!this.multiple) {
           let option = this.getOption(this.value);
+          if (option.created) {
+            this.createdOption = merge({}, option);
+            this.createdSelected = true;
+          } else {
+            this.createdSelected = false;
+          }
           this.selectedLabel = option.currentLabel;
           this.selected = option;
+          if (this.filterable) this.query = this.selectedLabel;
           return;
         }
         let result = [];
@@ -377,6 +404,13 @@
           });
         }
         this.selected = result;
+        this.$nextTick(() => {
+          this.resetInputHeight();
+        });
+      },
+
+      handleFocus() {
+        this.visible = true;
       },
 
       handleIconClick(event) {
@@ -578,6 +612,11 @@
 
       resetInputWidth() {
         this.inputWidth = this.$refs.reference.$el.getBoundingClientRect().width;
+      },
+
+      handleResize() {
+        this.resetInputWidth();
+        if (this.multiple) this.resetInputHeight();
       }
     },
 
@@ -604,7 +643,7 @@
       if (this.multiple && Array.isArray(this.value) && this.value.length > 0) {
         this.currentPlaceholder = '';
       }
-      addResizeListener(this.$el, this.resetInputWidth);
+      addResizeListener(this.$el, this.handleResize);
       if (this.remote && this.multiple) {
         this.resetInputHeight();
       }
@@ -616,7 +655,7 @@
     },
 
     destroyed() {
-      if (this.resetInputWidth) removeResizeListener(this.$el, this.resetInputWidth);
+      if (this.handleResize) removeResizeListener(this.$el, this.handleResize);
     }
   };
 </script>

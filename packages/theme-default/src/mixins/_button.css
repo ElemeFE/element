@@ -30,13 +30,13 @@
 
     &:hover,
     &:focus {
-      background: #fff;
+      background: var(--color-white);
       border-color: $border-color;
       color: $background-color;
     }
     
     &:active {
-      background: #fff;
+      background: var(--color-white);
       border-color: shade($border-color, var(--button-active-shade-percent));
       color: shade($background-color, var(--button-active-shade-percent));
       outline: none;

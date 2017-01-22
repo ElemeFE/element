@@ -33,6 +33,7 @@ export default ${ComponentName};`
     filename: 'cooking.conf.js',
     content: `var cooking = require('cooking');
 var path = require('path');
+var config = require('../../build/config');
 
 cooking.set({
   entry: {
@@ -52,7 +53,7 @@ module.exports = cooking.resolve();`
   {
     filename: 'package.json',
     content: `{
-  "name": "el-${componentname}",
+  "name": "element-${componentname}",
   "version": "0.0.0",
   "description": "A ${componentname} component for Vue.js.",
   "keywords": [
@@ -75,7 +76,7 @@ module.exports = cooking.resolve();`
 
 <script>
 export default {
-  name: 'el-${componentname}'
+  name: 'El${ComponentName}'
 };
 </script>`
   },
@@ -90,16 +91,16 @@ export default {
   {
     filename: path.join('../../test/unit/specs', `${componentname}.spec.js`),
     content: `import { createTest, destroyVM } from '../util';
-import Alert from 'packages/{{componentname}}';
+import ${ComponentName} from 'packages/${componentname}';
 
-describe('{{ComponentName}}', () => {
+describe('${ComponentName}', () => {
   let vm;
   afterEach(() => {
     destroyVM(vm);
   });
 
   it('create', () => {
-    vm = createTest({{ComponentName}}, true);
+    vm = createTest(${ComponentName}, true);
     expect(vm.$el).to.exist;
   });
 });

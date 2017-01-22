@@ -1,6 +1,11 @@
 <script>
+  import TabBar from './tab-bar';
   module.exports = {
-    name: 'el-tabs',
+    name: 'ElTabs',
+
+    components: {
+      TabBar
+    },
 
     props: {
       type: String,
@@ -15,125 +20,123 @@
     data() {
       return {
         children: null,
-        currentName: this.value || this.activeName
+        currentName: this.value || this.activeName,
+        panes: []
       };
     },
 
     watch: {
-      activeName(val) {
-        this.currentName = val;
+      activeName(value) {
+        this.setCurrentName(value);
       },
-      value(val) {
-        this.currentName = val;
-      },
-      currentName(val) {
-        this.$emit('input', val);
+      value(value) {
+        this.setCurrentName(value);
+      }
+    },
+
+    computed: {
+      currentTab() {
+        let result;
+        this.panes.forEach(tab => {
+          if (this.currentName === (tab.name || tab.index)) {
+            result = tab;
+          }
+        });
+        return result;
       }
     },
 
     methods: {
-      handleTabRemove(tab, event) {
+      handleTabRemove(pane, event) {
         event.stopPropagation();
-        const tabs = this.$children;
+        const panes = this.panes;
+        const currentTab = this.currentTab;
 
-        let index = tabs.indexOf(tab);
-        tab.$destroy();
+        let index = panes.indexOf(pane);
 
-        this.$emit('tab-remove', tab);
-        this.$forceUpdate();
+        if (index === -1) return;
+
+        panes.splice(index, 1);
+        pane.$destroy();
+
+        this.$emit('tab-remove', pane);
 
         this.$nextTick(_ => {
-          if (tab.active) {
-            let nextChild = tabs[index];
-            let prevChild = tabs[index - 1];
+          if (pane.active) {
+            const panes = this.panes;
+            let nextChild = panes[index];
+            let prevChild = panes[index - 1];
             let nextActiveTab = nextChild || prevChild || null;
 
             if (nextActiveTab) {
-              this.currentName = nextActiveTab.name || nextActiveTab.index;
+              this.setCurrentName(nextActiveTab.name || nextActiveTab.index);
             }
+            return;
+          } else {
+            this.setCurrentName(currentTab.name || currentTab.index);
           }
         });
       },
       handleTabClick(tab, tabName, event) {
         if (tab.disabled) return;
-        this.currentName = tabName;
+        this.setCurrentName(tabName);
         this.$emit('tab-click', tab, event);
+      },
+      setCurrentName(value) {
+        this.currentName = value;
+        this.$emit('input', value);
+      },
+      addPanes(item) {
+        this.panes.push(item);
+      },
+      removePanes(item) {
+        const panes = this.panes;
+        const index = panes.indexOf(item);
+        if (index > -1) {
+          panes.splice(index, 1);
+        }
       }
-    },
-    mounted() {
-      this.$forceUpdate();
     },
     render(h) {
       let {
         type,
         handleTabRemove,
         handleTabClick,
-        currentName
+        currentName,
+        panes
       } = this;
 
-      const getBarStyle = () => {
-        if (this.type || !this.$refs.tabs) return {};
-        let style = {};
-        let offset = 0;
-        let tabWidth = 0;
-
-        this.$children.every((tab, index) => {
-          let $el = this.$refs.tabs[index];
-          if (!$el) { return false; }
-
-          if (!tab.active) {
-            offset += $el.clientWidth;
-            return true;
-          } else {
-            tabWidth = $el.clientWidth;
-            return false;
-          }
-        });
-
-        style.width = tabWidth + 'px';
-        style.transform = `translateX(${offset}px)`;
-
-        return style;
-      };
-
-      const tabs = this.$children.map((tab, index) => {
-        let tabName = tab.name || tab.index || index;
+      const tabs = this._l(panes, (pane, index) => {
+        let tabName = pane.name || pane.index || index;
         if (currentName === undefined && index === 0) {
-          this.currentName = tabName;
+          this.setCurrentName(tabName);
         }
 
-        tab.index = index;
+        pane.index = index;
 
-        const activeBar = !type && index === 0
-          ? <div class="el-tabs__active-bar" style={getBarStyle()}></div>
+        const btnClose = pane.isClosable
+          ? <span class="el-icon-close" on-click={(ev) => { handleTabRemove(pane, ev); }}></span>
           : null;
 
-        const btnClose = tab.isClosable
-          ? <span class="el-icon-close" on-click={(ev) => { handleTabRemove(tab, ev); }}></span>
-          : null;
-
-        const tabLabelContent = tab.labelContent
-          ? tab.labelContent.call(this._renderProxy, h, tab)
-          : tab.label;
-
+        const tabLabelContent = pane.$slots.label || pane.label;
         return (
           <div
             class={{
               'el-tabs__item': true,
-              'is-active': tab.active,
-              'is-disabled': tab.disabled,
-              'is-closable': tab.isClosable
+              'is-active': pane.active,
+              'is-disabled': pane.disabled,
+              'is-closable': pane.isClosable
             }}
             ref="tabs"
             refInFor
-            on-click={(ev) => { handleTabClick(tab, tabName, ev); }}
+            on-click={(ev) => { handleTabClick(pane, tabName, ev); }}
           >
             {tabLabelContent}
             {btnClose}
-            {activeBar}
           </div>
         );
       });
+
       return (
         <div class={{
           'el-tabs': true,
@@ -141,6 +144,7 @@
           'el-tabs--border-card': type === 'border-card'
         }}>
           <div class="el-tabs__header">
+            {!type ? <tab-bar tabs={panes}></tab-bar> : null}
             {tabs}
           </div>
           <div class="el-tabs__content">

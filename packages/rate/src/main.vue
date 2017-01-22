@@ -24,16 +24,15 @@
 </template>
 
 <script type="text/babel">
-  import { hasClass } from 'wind-dom/src/class';
+  import { hasClass } from 'element-ui/src/utils/dom';
 
   export default {
-    name: 'el-rate',
+    name: 'ElRate',
 
     data() {
       return {
         classMap: {},
         colorMap: {},
-        classes: null,
         pointerAtLeftHalf: false,
         currentValue: this.value,
         hoverIndex: -1

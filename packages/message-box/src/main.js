@@ -20,7 +20,9 @@ const defaults = {
   confirmButtonText: '',
   cancelButtonText: '',
   confirmButtonClass: '',
-  cancelButtonClass: ''
+  cancelButtonClass: '',
+  customClass: '',
+  beforeClose: null
 };
 
 import Vue from 'vue';
@@ -87,6 +89,12 @@ const showNextMsg = () => {
       if (options.callback === undefined) {
         instance.callback = defaultCallback;
       }
+
+      let oldCb = instance.callback;
+      instance.callback = action => {
+        oldCb(action);
+        showNextMsg();
+      };
       ['modal', 'showClose', 'closeOnClickModal', 'closeOnPressEscape'].forEach(prop => {
         if (instance[prop] === undefined) {
           instance[prop] = true;
@@ -102,6 +110,7 @@ const showNextMsg = () => {
 };
 
 const MessageBox = function(options, callback) {
+  if (Vue.prototype.$isServer) return;
   if (typeof options === 'string') {
     options = {
       message: options

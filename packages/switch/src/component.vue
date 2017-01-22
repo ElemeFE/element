@@ -34,7 +34,7 @@
 
 <script>
   export default {
-    name: 'el-switch',
+    name: 'ElSwitch',
     props: {
       value: {
         type: Boolean,

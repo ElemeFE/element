@@ -147,8 +147,7 @@ Select date and time in one picker.
     <el-date-picker
       v-model="value3"
       type="datetimerange"
-      placeholder="Select time range"
-      style="width:350px">
+      placeholder="Select time range">
     </el-date-picker>
   </div>
   <div class="block">
@@ -158,8 +157,7 @@ Select date and time in one picker.
       type="datetimerange"
       :picker-options="pickerOptions2"
       placeholder="Select time range"
-      align="right"
-      style="width:350px">
+      align="right">
     </el-date-picker>
   </div>
 </template>
@@ -195,7 +193,7 @@ Select date and time in one picker.
             }
           }]
         },
-        value3: '',
+        value3: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
         value4: ''
       };
     }
@@ -208,9 +206,9 @@ Select date and time in one picker.
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | readonly | whether DatePicker is read only | boolean | — | false |
-| disabled | whether DatePicker is disabled | boolean | - | false |
-| editable | whether the input is editable | boolean | - | true |
-| clearable | Whether to show clear button | boolean | - | true |
+| disabled | whether DatePicker is disabled | boolean | — | false |
+| editable | whether the input is editable | boolean | — | true |
+| clearable | Whether to show clear button | boolean | — | true |
 |size | size of Input | string | large/small/mini | — |
 | placeholder | placeholder | string | — | — |
 | type | type of the picker | string | year/month/date/datetime/ week/datetimerange/daterange | date |

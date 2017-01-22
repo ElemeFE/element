@@ -1,5 +1,94 @@
 ## Changelog
 
+### 1.1.5
+
+*2017-01-17*
+
+- Fixed Menu not activating corresponding menu item after router switching in router mode, #2451
+- Fixed `value` attribute of Collapse not supporting `Number` typed value, #2455
+
+### 1.1.4
+
+*2017-01-16*
+
+- Fixed Input Number triggering `change` event when bound value is changed programmatically, #2329
+- Fixed Menu not responding to `$router` changing in router mode, #2391
+- Fixed Menu and Tree expanding state malfunctioning when clicked multiple times quickly, #2354
+- Fixed `change` event triggering mechanism of Input Number and Checkbox Group, now they do not fire when bound value is changed programmatically
+- Added `on-icon-click` attribute for Input, #2414
+- Added `disabled` attribute for Radio Group, #2411
+- Added `accordion` attribute for Tree, #2408
+- Added `show-message` attribute for Form, #2356
+- Fixed sort clicking area of Table, updated default sorting related APIs, #2309 #2405 (by @njleonzhang)
+- Fixed `firstDayOfWeek` not working in ranged typed of DatePicker, #2353
+- Fixed DatePicker displaying 1970 when initial value is null, #2388
+- Fixed `filteredValue` attribute for Table, #2348
+- Fixed scrollable Table's style with empty data, #2396
+- Added `beforeClose` attribute for MessageBox, #2204
+- Fixed filterable Select not showing dropdown when triangle icon is clicked, #2389
+
+Breaking change
+- The `default-sort-prop` and `default-sort-order` attributes added in 1.1.3 are now merged into an object-typed attribute
+
+### 1.1.3
+
+*2017-01-09*
+
+- Fixed DatePicker not firing change event when cleared for the first time upon page load, #2167
+- Fixed DatePicker year calculating error when choosing the next year, #2152
+- Added `default-sort-prop` and `default-sort-order` attributes for Table, #2182 (by @njleonzhang)
+- Fixed filterable Select filtering other options with initial value, #2196
+- Added custom i18n processing, making Element compatible with i18n plugins other than `vue-i18n`, #2129
+- Added `resize` attribute for Input, #2263 (by @Kingwl)
+- Fixed Autocomplete not hiding dropdown when blurred, #2247
+- Fixed style issues with nested Tabs, #2212 (by @Kingwl)
+- Fixed Tabs' tab bar locating error when non-first item is initially activated, #2192
+
+### 1.1.2
+
+*2016-12-30*
+
+- Fixed `sortable` and `fixed` attribute of Table not working in Vue 2.1.7+
+- Fixed Input Number not resetting on blur when input with illegal values, #2098
+- Removed `title` scoped slot of Collapse, and added `title` named slot, #2100
+- Fixed range selection in TimePicker not working issue
+- Fixed Tabs' active tab switching when a non-active tab is removed, #2106
+- Fixed console error reporting when navigating Select with arrow keys, #2120
+- Fixed incorrect validation timing of filterable Select in Form, #2120
+
+### 1.1.1
+
+*2016-12-29*
+
+- Fixed compatibility issue with latest Vue due to compilation
+
+### 1.1.0 Helium
+
+*2016-12-29*
+
+New features:
+- Two brand new components: Carousel and Collapse
+- SSR supported
+- Scrollbars' style inside components is upgraded
+- Table now supports custom templates via [scoped slots](http://vuejs.org/v2/guide/components.html#Scoped-Slots); the good old `inline-template` is still compatible, but it's no longer recommended and is likely to be removed in the future
+- Table now supports expandable rows
+- DatePicker now supports specifying the first day of week
+- TimeSelect now supports `maxTime`
+- Autocomplete now supports `popper-class`
+- To customize template of Tab-Pane, now you can use the `slot` named `label`
+
+Fixes:
+- `change` event of DatePicker incorrectly triggering multiple times, #2070
+- Width shaking of tab-pane while initializing, #1883
+
+Breaking changes:
+- Only compatible with Vue 2.1.6 and beyond
+- Parameters of Form validateField() methods are updated
+- Alert's render-content attribute is removed, and now you can pass your custom template via default slot
+- The box models of Input and Select are updated from `block` to `inline-block`
+- The box model of Tabs is updated from `inline-block` to `block`, and Tab-Pane's `label-content` attribute is removed
+- The dropdown of Autocomplete now inserts directly to `<body>`, not `<el-autocomplete>` any more
+
 ### 1.0.9
 
 *2016-12-27*

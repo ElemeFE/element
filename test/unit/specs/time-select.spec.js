@@ -140,4 +140,62 @@ describe('TimeSelect', () => {
       }, 50);
     }, 50);
   });
+
+  it('set maxTime', done => {
+    vm = createVue(`
+      <el-time-select
+        ref="picker"
+        :picker-options="{
+          maxTime: '14:30',
+          step: '00:30'
+        }">
+      </el-time-select>
+    `, true);
+    const input = vm.$el.querySelector('input');
+    const picker = vm.$refs.picker;
+
+    input.focus();
+    input.blur();
+
+    setTimeout(_ => {
+      const elm = picker.picker.$el.querySelector('.disabled');
+
+      expect(elm.textContent).to.equal('14:30');
+      destroyVM(vm);
+      done();
+    }, 50);
+  });
+
+  it('maxTime > value', done => {
+    vm = createVue({
+      template: `
+        <el-time-select
+          ref="picker"
+          v-model="value"
+          :picker-options="{
+            maxTime: '14:30'
+          }">
+        </el-time-select>
+      `,
+      data() {
+        return { value: '09:30' };
+      }
+    }, true);
+    const input = vm.$el.querySelector('input');
+    const picker = vm.$refs.picker;
+
+    input.focus();
+    input.blur();
+
+    setTimeout(_ => {
+      vm.value = '10:30';
+
+      setTimeout(_ => {
+        expect(picker.picker.value).to.equal('09:30');
+        destroyVM(vm);
+        done();
+      }, 50);
+    }, 50);
+  });
+
 });

@@ -1,5 +1,88 @@
 ## 更新日志
 
+### 1.1.5
+*2017-01-17*
+
+- 修复 Menu 在启用 router 模式下点击菜单跳转后没有激活对应菜单项的问题，#2451
+- 新增 Collapse `value` 属性增加对 `Number` 类型的支持，#2455
+
+### 1.1.4
+*2017-01-16*
+
+- 修复 Input Number 在主动改变绑定值时也会触发 change 事件的问题，#2329
+- 修复 Menu 在启用 router 模式后没有对 `$route` 变化进行响应的问题，#2391
+- 修复 Menu、Tree 在快速点击时出现展开状态错误的问题，#2354
+- 修复 Input Number 和 Checkbox Group 的 change 事件触发时机，现在主动改变绑定值时不触发该事件。
+- 新增 Input 增加点击图标后的钩子函数属性，#2414
+- 新增 Radio Group 的 `disabled` 属性，#2411
+- 新增 Tree 增加 `accordion` 属性，#2408
+- 新增 Form 增加 `show-message` 属性，#2356
+- 修复 Table 排序点击区域，调整默认排序的 API，#2309 #2405（by @njleonzhang）
+- 修复 DatePicker firstDayOfWeek 在范围类型中无法使用，#2353
+- 修复 DatePicker 初始值为 null 显示 1970，#2388
+- 修复 Table 缺少 filteredValue 属性，#2348
+- 修复 Table 空数据时且存在滚动条时的样式，#2396
+- 新增 MessageBox 的 `beforeClose` 属性，#2204
+- 修复可过滤的 Select 点击三角图标不显示下拉框的问题，#2389
+
+非兼容性更新
+- 1.1.3 新增的 `default-sort-prop` 和 `default-sort-order` 属性现在合并为一个对象类型属性
+
+### 1.1.3
+*2017-01-09*
+
+- 修复 DatePicker 页面加载后首次清空不会触发 `change` 事件，#2167
+- 修复 DatePicker 选择下一年时，年份计算错误，#2152
+- 新增 Table 的 `default-sort-prop` 和 `default-sort-order` 属性，#2182（by @njleonzhang）
+- 修复有默认值的可搜索 Select 其他数据被过滤的问题，#2196
+- 新增自定义 i18n 处理方法，方便和除了 `vue-i18n` 之外的插件使用，#2129
+- 新增 Input `resize` 属性，#2263（by @Kingwl）
+- 修复 Autocomplete 在 blur 事件触发时没有隐藏下拉列表的问题，#2247
+- 修复 Tabs 嵌套使用时的样式问题，#2212（by @Kingwl）
+- 修复 Tabs 默认激活非第一项时 tabBar 的显示位置不正确的问题，#2192
+
+### 1.1.2
+*2016-12-30*
+
+- 修复 Vue 2.1.7 升级导致的 Table `sortable` 和 `fixed` 无法使用的问题
+- 修正 Input Number 在手动输入越界值时，blur 触发时没有重置为原来的值的问题，#2098
+- 移除 Collapse 的 `title` scoped slot, 并新增 `title` named slot，#2100
+- 修复 TimePicker 范围选择无法使用的问题
+- 修复 Tabs 删除非当前激活的 tab 后，当前激活的 tab 变化的问题，#2106
+- 修复 Select 在使用方向键导航时控制台报错的问题，#2120
+- 修复 Form 中可搜索的 Select 验证时机错误的问题，#2120
+
+### 1.1.1
+*2016-12-29*
+
+- 修复由于编译而出现的不兼容新版 Vue 的问题
+
+### 1.1.0 Helium
+*2016-12-29*
+
+新特性：
+- 新增 Carousel、Collapse 组件
+- 支持 SSR
+- 组件内的滚动条样式优化
+- Table 支持通过 [Scoped Slots](http://vuejs.org/v2/guide/components.html#Scoped-Slots) 传入模板；原来的 `inline-template` 仍然兼容，但是不再推荐使用，未来可能会被移除
+- Table 支持展开行功能(Expandable rows)
+- DatePicker 支持指定周起始日(first day of week)
+- TimeSelect 支持设置 `maxTime`
+- Autocomplete 新增 `popper-class`属性
+- Tab-Pane 新增 name 为 label 的具名 `slot`，用于实现自定义标签内容
+
+修复：
+- DatePicker 的 `change` 事件错误地触发多次的问题，#2070
+- Tabs 组件内 tab-pane 初始化时宽度抖动的问题，#1883
+
+非兼容性更新：
+- 最低兼容 Vue 2.1.6
+- Form validateField() 方法回调的参数更新
+- Alert 取消了 render-content 属性，现在自定义模板需要通过默认 slot 传入
+- Input 和 Select 盒模型从 `block` 修改为 `inline-block`
+- Tabs 盒模型从 `inline-block` 修改为 `block`，Tab-Pane 移除 `label-content` 属性
+- Autocomplete 下拉列表现在直接插入到 `<body>` 标签下，而不是 `<el-autocomplete>` 下
+
 ### 1.0.9
 *2016-12-27*
 

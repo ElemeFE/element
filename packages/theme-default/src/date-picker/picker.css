@@ -6,6 +6,22 @@
     position: relative;
     display: inline-block;
 
+    &.el-input {
+      width: 193px;
+    }
+
+    @m daterange {
+      &.el-input {
+        width: 220px;
+      }
+    }
+
+    @m datetimerange {
+      &.el-input {
+        width: 350px;
+      }
+    }
+
     .el-picker-panel {
       position: absolute;
       min-width: 180px;

@@ -127,10 +127,11 @@ Set value via a input box.
 | disabled | whether Slider is disabled | boolean | — | false |
 | step | step size | number | — | 1 |
 | show-input | whether to display an input box | boolean | — | false |
+| show-input-controls | whether to display control buttons when `show-input` is true | boolean | — | true |
 | show-stops | whether to display breakpoints | boolean | — | false |
 
 ## Events
 | Event Name | Description | Parameters |
 |---------- |-------- |---------- |
-| change | triggers when the value changes | value after changing |
+| change | triggers when the value changes (if the mouse is being dragged, this event only fires when the mouse is released) | value after changing |
 

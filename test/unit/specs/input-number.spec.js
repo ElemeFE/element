@@ -234,6 +234,35 @@ describe('InputNumber', () => {
     expect(vm.$el.querySelector('.el-input-number__decrease')).to.not.exist;
     expect(vm.$el.querySelector('.el-input-number__increase')).to.not.exist;
   });
+  it('invalid value reset', done => {
+    vm = createVue({
+      template: `
+        <el-input-number v-model="value" :min="5" :max="10" ref="inputNumber">
+        </el-input-number>
+      `,
+      data() {
+        return {
+          value: 5
+        };
+      }
+    }, true);
+    const inputNumber = vm.$refs.inputNumber;
+    vm.value = 100;
+    vm.$nextTick(_ => {
+      expect(inputNumber.currentValue).to.be.equal(10);
+      vm.value = 4;
+
+      vm.$nextTick(_ => {
+        expect(inputNumber.currentValue).to.be.equal(5);
+        vm.value = 'dsajkhd';
+
+        vm.$nextTick(_ => {
+          expect(inputNumber.currentValue).to.be.equal(5);
+          done();
+        });
+      });
+    });
+  });
   it('event:change', done => {
     vm = createVue({
       template: `

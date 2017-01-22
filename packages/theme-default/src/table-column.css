@@ -12,9 +12,9 @@
   }
 
   @b table-filter {
-    border: solid 1px #d3dce6;
+    border: solid 1px var(--color-base-gray);
     border-radius: 2px;
-    background-color: #fff;
+    background-color: var(--color-white);
     box-shadow: var(--dropdown-menu-box-shadow);
     box-sizing: border-box;
     margin: 2px 0;
@@ -39,8 +39,8 @@
       }
 
       @when active {
-        background-color: #20a0ff;
-        color: #fff;
+        background-color: var(--color-primary);
+        color: var(--color-white);
       }
     }
 
@@ -49,19 +49,19 @@
     }
 
     @e bottom {
-      border-top: 1px solid #d3dce6;
+      border-top: 1px solid var(--color-base-gray);
       padding: 8px;
 
       button {
         background: transparent;
         border: none;
-        color: #8492a6;
+        color: var(--color-base-silver);
         cursor: pointer;
         font-size: var(--font-size-base);
         padding: 0 3px;
 
         &:hover {
-          color: #20a0ff;
+          color: var(--color-primary);
         }
 
         &:focus {
@@ -69,7 +69,7 @@
         }
 
         &.is-disabled {
-          color: #c0ccda;
+          color: var(--color-extra-light-silver);
           cursor: not-allowed;
         }
       }

@@ -4,8 +4,8 @@
 @component-namespace el {
   @b tree {
     cursor: default;
-    background: #ffffff;
-    border: 1px solid #d3dce6;
+    background: var(--color-white);
+    border: 1px solid var(--color-base-gray);
 
     @e empty-block {
       position: relative;
@@ -20,7 +20,7 @@
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
-      color: #5e6d82;
+      color: color(var(--color-primary) s(16%) l(44%));
     }
   }
 
@@ -40,7 +40,7 @@
         vertical-align: middle;
       }
       &:hover {
-        background: #e5e9f2;
+        background: var(--color-light-gray);
       }
     }
 
@@ -53,7 +53,7 @@
       margin-left: 10px;
       border: 6px solid transparent;
       border-right-width: 0;
-      border-left-color: #99a9bf;
+      border-left-color: var(--color-light-silver);
       border-left-width: 7px;
 
       transform: rotate(0deg);
@@ -84,14 +84,12 @@
       vertical-align: middle;
       margin-right: 4px;
       font-size: 14px;
-      color: #99a9bf;
+      color: var(--color-light-silver);
     }
 
     & > .el-tree-node__children {
       overflow: hidden;
       background-color: transparent;
-      /** padding-left: 16px; */
-      display: none;
     }
 
     &.is-expanded > .el-tree-node__children {
@@ -101,7 +99,7 @@
 }
 
 .el-tree--highlight-current .el-tree-node.is-current > .el-tree-node__content {
-  background-color: #eff7ff;
+  background-color: color(var(--color-primary) tint(92%));
 }
 
 .collapse-transition {

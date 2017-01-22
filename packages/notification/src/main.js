@@ -1,5 +1,6 @@
 import Vue from 'vue';
-import { PopupManager } from 'vue-popup';
+import { PopupManager } from 'element-ui/src/utils/popup';
+import { isVNode } from 'element-ui/src/utils/vdom';
 let NotificationConstructor = Vue.extend(require('./main.vue'));
 
 let instance;
@@ -7,6 +8,7 @@ let instances = [];
 let seed = 1;
 
 var Notification = function(options) {
+  if (Vue.prototype.$isServer) return;
   options = options || {};
   let userOnClose = options.onClose;
   let id = 'notification_' + seed++;
@@ -18,6 +20,11 @@ var Notification = function(options) {
   instance = new NotificationConstructor({
     data: options
   });
+
+  if (isVNode(options.message)) {
+    instance.$slots.default = [options.message];
+    options.message = '';
+  }
   instance.id = id;
   instance.vm = instance.$mount();
   document.body.appendChild(instance.vm.$el);
@@ -38,7 +45,7 @@ var Notification = function(options) {
 
 ['success', 'warning', 'info', 'error'].forEach(type => {
   Notification[type] = options => {
-    if (typeof options === 'string') {
+    if (typeof options === 'string' || isVNode(options)) {
       options = {
         message: options
       };

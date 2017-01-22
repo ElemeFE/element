@@ -51,18 +51,8 @@
           user: '',
           region: ''
         },
-        formStacked: {
-          name: '',
-          region: '',
-          type: '',
-          remark: ''
-        },
-        formAlignRight: {
-          name: '',
-          region: '',
-          type: ''
-        },
-        formAlignLeft: {
+        labelPosition: 'right',
+        formLabelAlign: {
           name: '',
           region: '',
           type: ''
@@ -120,24 +110,27 @@
             { validator: checkAge, trigger: 'blur' }
           ]
         },
-        dynamicForm: {
+        dynamicValidateForm: {
           domains: [{
             key: Date.now(),
             value: ''
           }],
           email: ''
         },
-        dynamicRule: {
-          email: [
-            { required: true, message: 'Please input email address', trigger: 'blur' },
-            { type: 'email', message: 'Please input correct email address', trigger: 'blur,change' }
-          ]
+        numberValidateForm: {
+          age: ''
         }
       };
     },
     methods: {
-      handleSubmit(ev) {
-        this.$refs.ruleForm.validate((valid) => {
+      onSubmit() {
+        console.log('submit!');
+      },
+      onRuleFormSubmit() {
+        console.log('onRuleFormSubmit');
+      },
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
           if (valid) {
             alert('submit!');
           } else {
@@ -146,52 +139,17 @@
           }
         });
       },
-      handleSubmit2(ev) {
-        this.$refs.ruleForm2.validate(valid => {
-          if (valid) {
-            alert('Submit');
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
-      },
-      handleSubmit3(ev) {
-        this.$refs.dynamicForm.validate(valid => {
-          if (valid) {
-            alert('Submit');
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
-      },
-      handleReset() {
-        this.$refs.ruleForm.resetFields();
-      },
-      handleReset2() {
-        this.$refs.ruleForm2.resetFields();
-      },
-      handleReset3() {
-        this.$refs.dynamicForm.resetFields();
-      },
-      handleValidate(prop, errorMsg) {
-        console.log(prop, errorMsg);
-      },
-      onSubmit() {
-        console.log('submit!');
-      },
-      onRuleFormSubmit() {
-        console.log('onRuleFormSubmit');
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
       },
       removeDomain(item) {
-        var index = this.dynamicForm.domains.indexOf(item)
+        var index = this.dynamicValidateForm.domains.indexOf(item)
         if (index !== -1) {
-          this.dynamicForm.domains.splice(index, 1)
+          this.dynamicValidateForm.domains.splice(index, 1)
         }
       },
       addDomain() {
-        this.dynamicForm.domains.push({
+        this.dynamicValidateForm.domains.push({
           key: Date.now(),
           value: ''
         });
@@ -219,7 +177,7 @@
       padding: 0;
       list-style: none;
 
-      &:after,&:before {
+      &:after, &:before {
         content: ' ';
         display: table;
       }
@@ -253,20 +211,8 @@
         margin-right: 10px;
       }
     }
-    .demo-form-stacked {
-      width: 270px;
-
-      .el-select .el-input {
-        width: 100%;
-      }
-    }
     .demo-ruleForm {
       width: 480px;
-
-      .el-input,
-      .el-textarea {
-        width: auto;
-      }
 
       .el-select .el-input {
         width: 360px;
@@ -274,7 +220,6 @@
     }
     .demo-dynamic {
       .el-input {
-        display: inline-block;
         margin-right: 10px;
         width: 270px;
         vertical-align: top;
@@ -410,27 +355,32 @@ When the vertical space is limited and the form is relatively simple, you can pu
 
 Depending on your design, there are several different ways to align your label element.
 
-#### Top
-
 :::demo The `label-position` attribute decides how labels align, it can be `top` or `left`. When set to `top`, labels will be placed at the top of the form field.
 
 ```html
-<el-form label-position="top" :model="formStacked" class="demo-form-stacked">
+<el-radio-group v-model="labelPosition" size="small">
+  <el-radio-button label="left">Left</el-radio-button>
+  <el-radio-button label="right">Right</el-radio-button>
+  <el-radio-button label="top">Top</el-radio-button>
+</el-radio-group>
+<div style="margin: 20px;"></div>
+<el-form :label-position="labelPosition" label-width="100px" :model="formLabelAlign">
   <el-form-item label="Name">
-    <el-input v-model="formStacked.name"></el-input>
+    <el-input v-model="formLabelAlign.name"></el-input>
   </el-form-item>
   <el-form-item label="Activity zone">
-    <el-input v-model="formStacked.region"></el-input>
+    <el-input v-model="formLabelAlign.region"></el-input>
   </el-form-item>
   <el-form-item label="Activity form">
-    <el-input v-model="formStacked.type"></el-input>
+    <el-input v-model="formLabelAlign.type"></el-input>
   </el-form-item>
 </el-form>
 <script>
   export default {
     data() {
       return {
-        formStacked: {
+        labelPosition: 'right',
+        formLabelAlign: {
           name: '',
           region: '',
           type: ''
@@ -440,71 +390,6 @@ Depending on your design, there are several different ways to align your label e
   }
 </script>
 ```
-:::
-
-#### Right
-
-:::demo When `label-position` is omitted, labels will align to the right
-
-```html
-<el-form :model="formAlignRight" label-width="120px">
-  <el-form-item label="Activity name">
-    <el-input v-model="formAlignRight.name"></el-input>
-  </el-form-item>
-  <el-form-item label="Promote area">
-    <el-input v-model="formAlignRight.region"></el-input>
-  </el-form-item>
-  <el-form-item label="Form of activity">
-    <el-input v-model="formAlignRight.type"></el-input>
-  </el-form-item>
-</el-form>
-<script>
-  export default {
-    data() {
-      return {
-        formAlignRight: {
-          name: '',
-          region: '',
-          type: ''
-        }
-      };
-    }
-  }
-</script>
-```
-:::
-
-#### Left
-
-:::demo When `label-position` is set to `top`, labels will align to the left.
-
-```html
-<el-form :model="formAlignLeft" label-position="left" label-width="120px">
-  <el-form-item label="Activity name">
-    <el-input v-model="formAlignLeft.name"></el-input>
-  </el-form-item>
-  <el-form-item label="Promotion area">
-    <el-input v-model="formAlignLeft.region"></el-input>
-  </el-form-item>
-  <el-form-item label="Activity form">
-    <el-input v-model="formAlignLeft.type"></el-input>
-  </el-form-item>
-</el-form>
-<script>
-  export default {
-    data() {
-      return {
-        formAlignLeft: {
-          name: '',
-          region: '',
-          type: ''
-        }
-      };
-    }
-  }
-</script>
-```
-
 :::
 
 ### Validation
@@ -558,8 +443,8 @@ Form component allows you to verify your data, helping you find and correct erro
     <el-input type="textarea" v-model="ruleForm.desc"></el-input>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="handleSubmit">Create</el-button>
-    <el-button @click="handleReset">Reset</el-button>
+    <el-button type="primary" @click="submitForm('ruleForm')">Create</el-button>
+    <el-button @click="resetForm('ruleForm')">Reset</el-button>
   </el-form-item>
 </el-form>
 <script>
@@ -603,11 +488,8 @@ Form component allows you to verify your data, helping you find and correct erro
       };
     },
     methods: {
-      handleReset() {
-        this.$refs.ruleForm.resetFields();
-      },
-      handleSubmit(ev) {
-        this.$refs.ruleForm.validate((valid) => {
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
           if (valid) {
             alert('submit!');
           } else {
@@ -615,6 +497,9 @@ Form component allows you to verify your data, helping you find and correct erro
             return false;
           }
         });
+      },
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
       }
     }
   }
@@ -638,8 +523,8 @@ Form component allows you to verify your data, helping you find and correct erro
     <el-input v-model.number="ruleForm2.age"></el-input>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="handleSubmit2">Submit</el-button>
-    <el-button @click="handleReset2">Reset</el-button>
+    <el-button type="primary" @click="submitForm('ruleForm2')">Submit</el-button>
+    <el-button @click="resetForm('ruleForm2')">Reset</el-button>
   </el-form-item>
 </el-form>
 <script>
@@ -700,11 +585,8 @@ Form component allows you to verify your data, helping you find and correct erro
       };
     },
     methods: {
-      handleReset2() {
-        this.$refs.ruleForm2.resetFields();
-      },
-      handleSubmit2(ev) {
-        this.$refs.ruleForm2.validate((valid) => {
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
           if (valid) {
             alert('submit!');
           } else {
@@ -712,6 +594,9 @@ Form component allows you to verify your data, helping you find and correct erro
             return false;
           }
         });
+      },
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
       }
     }
   }
@@ -724,12 +609,19 @@ Form component allows you to verify your data, helping you find and correct erro
 :::demo In addition to passing all validation rules at once on the form component, you can also pass the validation rules or delete rules on a single form field dynamically.
 
 ```html
-<el-form :model="dynamicForm" :rules="dynamicRule" ref="dynamicForm" label-width="120px" class="demo-dynamic">
-  <el-form-item prop="email" label="Email">
-    <el-input v-model="dynamicForm.email"></el-input>
+<el-form :model="dynamicValidateForm" ref="dynamicValidateForm" label-width="120px" class="demo-dynamic">
+  <el-form-item
+    prop="email"
+    label="Email"
+    :rules="[
+      { required: true, message: 'Please input email address', trigger: 'blur' },
+      { type: 'email', message: 'Please input correct email address', trigger: 'blur,change' }
+    ]"
+  >
+    <el-input v-model="dynamicValidateForm.email"></el-input>
   </el-form-item>
   <el-form-item
-    v-for="(domain, index) in dynamicForm.domains"
+    v-for="(domain, index) in dynamicValidateForm.domains"
     :label="'Domain' + index"
     :key="domain.key"
     :prop="'domains.' + index + '.value'"
@@ -740,33 +632,27 @@ Form component allows you to verify your data, helping you find and correct erro
     <el-input v-model="domain.value"></el-input><el-button @click.prevent="removeDomain(domain)">Delete</el-button>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="handleSubmit3">Submit</el-button>
+    <el-button type="primary" @click="submitForm('dynamicValidateForm')">Submit</el-button>
     <el-button @click="addDomain">New domain</el-button>
-    <el-button @click="handleReset3">Reset</el-button>
+    <el-button @click="resetForm('dynamicValidateForm')">Reset</el-button>
   </el-form-item>
 </el-form>
 <script>
   export default {
     data() {
       return {
-        dynamicForm: {
+        dynamicValidateForm: {
           domains: [{
             key: 1,
             value: ''
           }],
           email: ''
-        },
-        dynamicRule: {
-          email: [
-            { required: true, message: 'Please input email address', trigger: 'blur' },
-            { type: 'email', message: 'Please input correct email address', trigger: 'blur,change' }
-          ]
         }
       };
     },
     methods: {
-      handleSubmit3(ev) {
-        this.$refs.dynamicForm.validate((valid) => {
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
           if (valid) {
             alert('submit!');
           } else {
@@ -775,17 +661,17 @@ Form component allows you to verify your data, helping you find and correct erro
           }
         });
       },
-      handleReset3() {
-        this.$refs.dynamicForm.resetFields();
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
       },
       removeDomain(item) {
-        var index = this.dynamicForm.domains.indexOf(item);
+        var index = this.dynamicValidateForm.domains.indexOf(item);
         if (index !== -1) {
-          this.dynamicForm.domains.splice(index, 1);
+          this.dynamicValidateForm.domains.splice(index, 1);
         }
       },
       addDomain() {
-        this.dynamicForm.domains.push({
+        this.dynamicValidateForm.domains.push({
           key: Date.now(),
           value: ''
         });
@@ -794,7 +680,56 @@ Form component allows you to verify your data, helping you find and correct erro
   }
 </script>
 ```
-::: 
+:::
+
+### Number Validate
+
+::: demo Number Validate need a `.number` modifier added on the input `v-model` binding，it's used to transform the string value to the number which is provided by Vuejs.
+```html
+<el-form :model="numberValidateForm" ref="numberValidateForm" label-width="100px" class="demo-ruleForm">
+  <el-form-item
+    label="age"
+    prop="age"
+    :rules="[
+      { required: true, message: 'age is required'},
+      { type: 'number', message: 'age must be a number'}
+    ]"
+  >
+    <el-input type="age" v-model.number="numberValidateForm.age" auto-complete="off"></el-input>
+  </el-form-item>
+  <el-form-item>
+    <el-button type="primary" @click="submitForm('numberValidateForm')">Submit</el-button>
+    <el-button @click="resetForm('numberValidateForm')">Reset</el-button>
+  </el-form-item>
+</el-form>
+<script>
+  export default {
+    data() {
+      return {
+        numberValidateForm: {
+          age: ''
+        }
+      };
+    },
+    methods: {
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            alert('submit!');
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+      },
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
+      }
+    }
+  }
+</script>
+```
+:::
 
 ### Form Attributes
 
@@ -806,14 +741,15 @@ Form component allows you to verify your data, helping you find and correct erro
 | label-position | position of label | string | left/right/top | right |
 | label-width | width of label, and all form items will inherit from `Form` | string | — | — |
 | label-suffix | suffix of the label | string | — | — |
+| show-message  | whether to show the error message | boolean | — | true |
 
 ### Form Methods
 
-| Method | Description |
-| ---- | ---- |
-| validate(cb) | the method to validate the whole form |
-| validateField(prop, cb) | the method to validate a certain form item |
-| resetFields | reset all the fields to initial value and remove validation result |
+| Method | Description | Parameters |
+| ---- | ---- | ---- |
+| validate | the method to validate the whole form | Function(callback: Function(boolean)) |
+| validateField | the method to validate a certain form item | Function(prop: string, callback: Function(errorMessage: string)) |
+| resetFields | reset all the fields and remove validation result | — |
 
 ### Form-Item Attributes
 
@@ -825,3 +761,4 @@ Form component allows you to verify your data, helping you find and correct erro
 | required | whether the field is required or not, will be determined by validation rules if omitted | string |  — | false |
 | rules | validation rules of form | object | — | — |
 | error | field error message, set its value and the field will validate error and show this message immediately | string | — | — |
+| show-message  | whether to show the error message | boolean | — | true |

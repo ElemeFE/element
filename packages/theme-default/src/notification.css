@@ -10,7 +10,7 @@
     border-radius: var(--border-radius-small);
     position: fixed;
     right: 16px;
-    background-color: #fff;
+    background-color: var(--color-white);
     box-shadow: var(--notification-shadow);
     transition: opacity 0.3s, transform .3s, right .3s, top 0.4s;
     overflow: hidden;
@@ -20,18 +20,20 @@
       @when with-icon {
         margin-left: 55px;
       }
-      & span {
-        font-size: var(--notification-title-font-size);
-        color: var(--notification-title-color);
-      }
+    }
 
-      & p {
-        font-size: var(--notification-font-size);
-        line-height: 21px;
-        margin: 10px 0 0 0;
-        color: var(--notification-color);
-        text-align: justify;
-      }
+    @e title {
+      font-weight: normal;
+      font-size: var(--notification-title-font-size);
+      color: var(--notification-title-color);
+    }
+
+    @e content {
+      font-size: var(--notification-font-size);
+      line-height: 21px;
+      margin: 10px 0 0 0;
+      color: var(--notification-color);
+      text-align: justify;
     }
 
     @e icon {

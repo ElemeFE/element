@@ -11,6 +11,12 @@ export default {
     isRange: Boolean
   },
 
+  data() {
+    return {
+      type: ''
+    };
+  },
+
   created() {
     this.type = this.isRange ? 'timerange' : 'time';
     this.panel = this.isRange ? TimeRangePanel : TimePanel;

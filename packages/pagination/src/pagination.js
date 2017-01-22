@@ -1,13 +1,10 @@
 import Pager from './pager.vue';
 import ElSelect from 'element-ui/packages/select';
 import ElOption from 'element-ui/packages/option';
-import Migrating from 'element-ui/src/mixins/migrating';
 import Locale from 'element-ui/src/mixins/locale';
 
 export default {
   name: 'ElPagination',
-
-  mixins: [Migrating],
 
   props: {
     pageSize: {
@@ -235,16 +232,6 @@ export default {
   },
 
   methods: {
-    getMigratingConfig() {
-      return {
-        props: {},
-        events: {
-          'currentchange': 'Pagination: currentchange has been renamed to current-change',
-          'sizechange': 'Pagination: sizechange has been renamed to size-change'
-        }
-      };
-    },
-
     handleCurrentChange(val) {
       this.internalCurrentPage = this.getValidCurrentPage(val);
     },

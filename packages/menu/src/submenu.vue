@@ -15,20 +15,31 @@
       }">
       </i>
     </div>
-    <transition :name="rootMenu.mode === 'horizontal' ? 'el-zoom-in-top' : ''">
+    <template v-if="rootMenu.mode === 'horizontal'">
+      <transition name="el-zoom-in-top">
+        <ul class="el-menu" v-show="opened"><slot></slot></ul>
+      </transition>
+    </template>
+    <collapse-transition v-else>
       <ul class="el-menu" v-show="opened"><slot></slot></ul>
-    </transition>
+    </collapse-transition>
   </li>
 </template>
 <script>
   import menuMixin from './menu-mixin';
+  import Emitter from 'element-ui/src/mixins/emitter';
+  import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
   module.exports = {
     name: 'ElSubmenu',
 
     componentName: 'ElSubmenu',
 
-    mixins: [menuMixin],
+    mixins: [menuMixin, Emitter],
+
+    components: {
+      CollapseTransition
+    },
 
     props: {
       index: {
@@ -39,17 +50,52 @@
     data() {
       return {
         timeout: null,
-        active: false
+        items: {},
+        submenus: {}
       };
     },
     computed: {
       opened() {
-        return this.rootMenu.openedMenus.indexOf(this.index) !== -1;
+        return this.rootMenu.openedMenus.indexOf(this.index) > -1;
+      },
+      active: {
+        cache: false,
+        get() {
+          let isActive = false;
+          const submenus = this.submenus;
+          const items = this.items;
+
+          Object.keys(items).forEach(index => {
+            if (items[index].active) {
+              isActive = true;
+            }
+          });
+
+          Object.keys(submenus).forEach(index => {
+            if (submenus[index].active) {
+              isActive = true;
+            }
+          });
+
+          return isActive;
+        }
       }
     },
     methods: {
+      addItem(item) {
+        this.$set(this.items, item.index, item);
+      },
+      removeItem(item) {
+        delete this.items[item.index];
+      },
+      addSubmenu(item) {
+        this.$set(this.submenus, item.index, item);
+      },
+      removeSubmenu(item) {
+        delete this.submenus[item.index];
+      },
       handleClick() {
-        this.rootMenu.handleSubmenuClick(this.index, this.indexPath);
+        this.dispatch('ElMenu', 'submenu-click', this);
       },
       handleMouseenter() {
         clearTimeout(this.timeout);
@@ -83,12 +129,14 @@
       }
     },
     created() {
-      this.rootMenu.submenus[this.index] = this;
+      this.parentMenu.addSubmenu(this);
+      this.rootMenu.addSubmenu(this);
+    },
+    beforeDestroy() {
+      this.parentMenu.removeSubmenu(this);
+      this.rootMenu.removeSubmenu(this);
     },
     mounted() {
-      this.$on('item-select', (index, indexPath) => {
-        this.active = indexPath.indexOf(this.index) !== -1;
-      });
       this.initEvents();
     }
   };

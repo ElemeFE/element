@@ -12,6 +12,5 @@
   "author": "elemefe",
   "license": "MIT",
   "devDependencies": {
-    "wind-dom": "0.0.3"
   }
 }

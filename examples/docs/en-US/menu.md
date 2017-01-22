@@ -32,7 +32,7 @@ Top bar NavMenu can be used in a variety of scenarios.
     <el-menu-item index="2-2">item two</el-menu-item>
     <el-menu-item index="2-3">item three</el-menu-item>
   </el-submenu>
-  <el-menu-item index="3">Orders</el-menu-item>
+  <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">Orders</a></el-menu-item>
 </el-menu>
 <div class="line"></div>
 <el-menu default-active="1" class="el-menu-demo" mode="horizontal" @select="handleSelect">
@@ -43,7 +43,7 @@ Top bar NavMenu can be used in a variety of scenarios.
     <el-menu-item index="2-2">item two</el-menu-item>
     <el-menu-item index="2-3">item three</el-menu-item>
   </el-submenu>
-  <el-menu-item index="3">Orders </el-menu-item>
+  <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">Orders</a></el-menu-item>
 </el-menu>
 
 <script>

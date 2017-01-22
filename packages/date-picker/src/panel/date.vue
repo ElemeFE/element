@@ -88,6 +88,7 @@
               :value="value"
               :week="week"
               :selection-mode="selectionMode"
+              :first-day-of-week="firstDayOfWeek"
               :disabled-date="disabledDate">
             </date-table>
             <year-table
@@ -377,6 +378,7 @@
         visible: false,
         currentView: 'date',
         disabledDate: '',
+        firstDayOfWeek: 7,
         year: null,
         month: null,
         week: null,
@@ -434,7 +436,10 @@
         const yearTranslation = this.t('el.datepicker.year');
         if (this.currentView === 'year') {
           const startYear = Math.floor(year / 10) * 10;
-          return startYear + ' ' + yearTranslation + '-' + (startYear + 9) + ' ' + yearTranslation;
+          if (yearTranslation) {
+            return startYear + ' ' + yearTranslation + ' - ' + (startYear + 9) + ' ' + yearTranslation;
+          }
+          return startYear + ' - ' + (startYear + 9);
         }
         return this.year + ' ' + yearTranslation;
       }

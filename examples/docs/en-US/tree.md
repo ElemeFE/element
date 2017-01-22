@@ -2,21 +2,36 @@
   const data = [{
     label: 'Level one 1',
     children: [{
-      label: 'Level two 1-1'
+      label: 'Level two 1-1',
+      children: [{
+        label: 'Level three 1-1-1'
+      }]
     }]
   }, {
     label: 'Level one 2',
     children: [{
-      label: 'Level two 2-1'
+      label: 'Level two 2-1',
+      children: [{
+        label: 'Level three 2-1-1'
+      }]
     }, {
-      label: 'Level two 2-2'
+      label: 'Level two 2-2',
+      children: [{
+        label: 'Level three 2-2-1'
+      }]
     }]
   }, {
     label: 'Level one 3',
     children: [{
-      label: 'Level two 3-1'
+      label: 'Level two 3-1',
+      children: [{
+        label: 'Level three 3-1-1'
+      }]
     }, {
-      label: 'Level two 3-2'
+      label: 'Level two 3-2',
+      children: [{
+        label: 'Level three 3-2-1'
+      }]
     }]
   }];
 
@@ -107,21 +122,36 @@ Basic tree structure.
         data: [{
           label: 'Level one 1',
           children: [{
-            label: 'Level two 1-1'
+            label: 'Level two 1-1',
+            children: [{
+              label: 'Level three 1-1-1'
+            }]
           }]
         }, {
           label: 'Level one 2',
           children: [{
-            label: 'Level two 2-1'
+            label: 'Level two 2-1',
+            children: [{
+              label: 'Level three 2-1-1'
+            }]
           }, {
-            label: 'Level two 2-2'
+            label: 'Level two 2-2',
+            children: [{
+              label: 'Level three 2-2-1'
+            }]
           }]
         }, {
           label: 'Level one 3',
           children: [{
-            label: 'Level two 3-1'
+            label: 'Level two 3-1',
+            children: [{
+              label: 'Level three 3-1-1'
+            }]
           }, {
-            label: 'Level two 3-2'
+            label: 'Level two 3-2',
+            children: [{
+              label: 'Level three 3-2-1'
+            }]
           }]
         }],
         defaultProps: {
@@ -214,6 +244,69 @@ Used for node selection. In the following example, data for each layer is acquir
 ```
 :::
 
+### Accordion
+
+Only one node among the same level can be expanded at one time.
+
+::: demo
+```html
+<el-tree :data="data" :props="defaultProps" accordion @node-click="handleNodeClick"></el-tree>
+
+<script>
+  export default {
+    data() {
+      return {
+        data: [{
+          label: 'Level one 1',
+          children: [{
+            label: 'Level two 1-1',
+            children: [{
+              label: 'Level three 1-1-1'
+            }]
+          }]
+        }, {
+          label: 'Level one 2',
+          children: [{
+            label: 'Level two 2-1',
+            children: [{
+              label: 'Level three 2-1-1'
+            }]
+          }, {
+            label: 'Level two 2-2',
+            children: [{
+              label: 'Level three 2-2-1'
+            }]
+          }]
+        }, {
+          label: 'Level one 3',
+          children: [{
+            label: 'Level two 3-1',
+            children: [{
+              label: 'Level three 3-1-1'
+            }]
+          }, {
+            label: 'Level two 3-2',
+            children: [{
+              label: 'Level three 3-2-1'
+            }]
+          }]
+        }],
+        defaultProps: {
+          children: 'children',
+          label: 'label'
+        }
+      };
+    },
+    methods: {
+      handleNodeClick(data) {
+        console.log(data);
+      }
+    }
+  };
+</script>
+```
+:::
+
 ### Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -222,17 +315,18 @@ Used for node selection. In the following example, data for each layer is acquir
 | node-key | unique identity key name for nodes, its value should be unique across the whole tree | string | — | — |
 | props | configuration options, see the following table | object | — | — |
 | load | method for loading subtree data | function(node, resolve) | — | — |
-| render-content | render function for tree node | Function(h, { node } | - | - |
-| highlight-current | whether current node is highlighted | boolean | - | false |
-| current-node-key | key of current node, a set only prop | string, number | - | - |
-| default-expand-all | whether to expand all nodes by default | boolean | - | false |
-| expand-on-click-node | whether to expand or collapse node when clicking on the node, if false, then expand or collapse node only when clicking on the arrow icon.  | - | true |
+| render-content | render function for tree node | Function(h, { node } | — | — |
+| highlight-current | whether current node is highlighted | boolean | — | false |
+| current-node-key | key of current node, a set only prop | string, number | — | — |
+| default-expand-all | whether to expand all nodes by default | boolean | — | false |
+| expand-on-click-node | whether to expand or collapse node when clicking on the node, if false, then expand or collapse node only when clicking on the arrow icon.  | — | true |
 | auto-expand-parent | whether to expand father node when a child node is expanded | boolean | — | true |
 | default-expanded-keys | array of keys of initially expanded nodes | array | — | — |
 | show-checkbox | whether node is selectable | boolean | — | false |
 | check-strictly | whether checked state of a node not affects its father and child nodes when `show-checkbox` is `true` | boolean | — | false |
 | default-checked-keys | array of keys of initially checked nodes | array | — | — |
-| filter-node-method | this function will be executed on each node when use filter method. if return `false`, tree node will be hidden. | Function(value, data, node) | - | - |
+| filter-node-method | this function will be executed on each node when use filter method. if return `false`, tree node will be hidden. | Function(value, data, node) | — | — |
+| accordion | whether only one node among the same level can be expanded at one time | boolean | — | false |
 
 ### props
 | Attribute      | Description          | Type      | Accepted Values       | Default  |

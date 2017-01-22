@@ -16,7 +16,14 @@
       </div>
       <!-- input 图标 -->
       <slot name="icon">
-        <i class="el-input__icon" :class="'el-icon-' + icon" v-if="icon" @click="handleIconClick"></i>
+        <i class="el-input__icon"
+          :class="[
+            'el-icon-' + icon,
+            onIconClick ? 'is-clickable' : ''
+          ]"
+          v-if="icon"
+          @click="handleIconClick">
+        </i>
       </slot>
       <input
         v-if="type !== 'textarea'"
@@ -88,6 +95,7 @@
       value: [String, Number],
       placeholder: String,
       size: String,
+      resize: String,
       readonly: Boolean,
       autofocus: Boolean,
       icon: String,
@@ -113,7 +121,12 @@
       maxlength: Number,
       minlength: Number,
       max: {},
-      min: {}
+      min: {},
+      validateEvent: {
+        type: Boolean,
+        default: true
+      },
+      onIconClick: Function
     },
 
     computed: {
@@ -131,20 +144,24 @@
     methods: {
       handleBlur(event) {
         this.$emit('blur', event);
-        this.dispatch('ElFormItem', 'el.form.blur', [this.currentValue]);
+        if (this.validateEvent) {
+          this.dispatch('ElFormItem', 'el.form.blur', [this.currentValue]);
+        }
       },
       inputSelect() {
         this.$refs.input.select();
       },
       resizeTextarea() {
+        if (this.$isServer) return;
         var { autosize, type } = this;
-        if (!autosize || type !== 'textarea') {
-          return;
-        }
+        if (!autosize || type !== 'textarea') return;
         const minRows = autosize.minRows;
         const maxRows = autosize.maxRows;
 
-        this.textareaStyle = calcTextareaHeight(this.$refs.textarea, minRows, maxRows);
+        const options = {
+          resize: this.resize
+        };
+        this.textareaStyle = calcTextareaHeight(this.$refs.textarea, minRows, maxRows, options);
       },
       handleFocus(event) {
         this.$emit('focus', event);
@@ -153,6 +170,9 @@
         this.setCurrentValue(event.target.value);
       },
       handleIconClick(event) {
+        if (this.onIconClick) {
+          this.onIconClick(event);
+        }
         this.$emit('click', event);
       },
       setCurrentValue(value) {
@@ -163,7 +183,9 @@
         this.currentValue = value;
         this.$emit('input', value);
         this.$emit('change', value);
-        this.dispatch('ElFormItem', 'el.form.change', [value]);
+        if (this.validateEvent) {
+          this.dispatch('ElFormItem', 'el.form.change', [value]);
+        }
       }
     },
 

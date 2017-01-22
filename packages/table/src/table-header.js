@@ -66,7 +66,7 @@ const convertToRows = (originColumns) => {
 };
 
 export default {
-  name: 'el-table-header',
+  name: 'ElTableHeader',
 
   render(h) {
     const originColumns = this.store.states.originColumns;
@@ -78,61 +78,63 @@ export default {
         cellspacing="0"
         cellpadding="0"
         border="0">
-        {
-          this._l(this.columns, column =>
-            <col
-              name={ column.id }
-              width={ column.realWidth || column.width }
-            />)
-        }
-        {
-          !this.fixed && this.layout.gutterWidth
-            ? <col name="gutter" width={ this.layout.scrollY ? this.layout.gutterWidth : '' }></col>
-            : ''
-        }
+        <colgroup>
+          {
+            this._l(this.columns, column =>
+              <col
+                name={ column.id }
+                width={ column.realWidth || column.width }
+              />)
+          }
+          {
+            !this.fixed && this.layout.gutterWidth
+              ? <col name="gutter" width={ this.layout.scrollY ? this.layout.gutterWidth : '' }></col>
+              : ''
+          }
+        </colgroup>
         <thead>
           {
             this._l(columnRows, (columns, rowIndex) =>
               <tr>
-                {
-                  this._l(columns, (column, cellIndex) =>
-                    <th
-                      colspan={ column.colSpan }
-                      rowspan={ column.rowSpan }
-                      on-mousemove={ ($event) => this.handleMouseMove($event, column) }
-                      on-mouseout={ this.handleMouseOut }
-                      on-mousedown={ ($event) => this.handleMouseDown($event, column) }
-                      on-click={ ($event) => this.handleClick($event, column) }
-                      class={ [column.id, column.order, column.headerAlign, column.className || '', rowIndex === 0 && this.isCellHidden(cellIndex) ? 'is-hidden' : '', !column.children ? 'is-leaf' : ''] }>
-                      <div class={ ['cell', column.filteredValue && column.filteredValue.length > 0 ? 'highlight' : ''] }>
-                      {
-                        column.renderHeader
-                          ? column.renderHeader.call(this._renderProxy, h, { column, $index: cellIndex, store: this.store, _self: this.$parent.$vnode.context })
-                          : column.label
-                      }
-                      {
-                        column.sortable
-                          ? <span class="caret-wrapper">
-                              <i class="sort-caret ascending" on-click={ ($event) => this.handleHeaderClick($event, column, 'ascending')}></i>
-                              <i class="sort-caret descending" on-click={ ($event) => this.handleHeaderClick($event, column, 'descending')}></i>
-                            </span>
-                          : ''
-                       }
-                       {
-                         column.filterable
-                           ? <span class="el-table__column-filter-trigger" on-click={ ($event) => this.handleFilterClick($event, column) }><i class={ ['el-icon-arrow-down', column.filterOpened ? 'el-icon-arrow-up' : ''] }></i></span>
-                           : ''
-                        }
-                       </div>
-                      </th>
-                    )
-                  }
-                  {
-                    !this.fixed && this.layout.gutterWidth
-                      ? <th class="gutter" style={{ width: this.layout.scrollY ? this.layout.gutterWidth + 'px' : '0' }}></th>
-                      : ''
-                  }
-                </tr>
+              {
+                this._l(columns, (column, cellIndex) =>
+                  <th
+                    colspan={ column.colSpan }
+                    rowspan={ column.rowSpan }
+                    on-mousemove={ ($event) => this.handleMouseMove($event, column) }
+                    on-mouseout={ this.handleMouseOut }
+                    on-mousedown={ ($event) => this.handleMouseDown($event, column) }
+                    on-click={ ($event) => this.handleHeaderClick($event, column) }
+                    class={ [column.id, column.order, column.headerAlign, column.className || '', rowIndex === 0 && this.isCellHidden(cellIndex) ? 'is-hidden' : '', !column.children ? 'is-leaf' : ''] }>
+                    <div class={ ['cell', column.filteredValue && column.filteredValue.length > 0 ? 'highlight' : ''] }>
+                    {
+                      column.renderHeader
+                        ? column.renderHeader.call(this._renderProxy, h, { column, $index: cellIndex, store: this.store, _self: this.$parent.$vnode.context })
+                        : column.label
+                    }
+                    {
+                      column.sortable
+                        ? <span class="caret-wrapper" on-click={ ($event) => this.handleSortClick($event, column) }>
+                            <i class="sort-caret ascending"></i>
+                            <i class="sort-caret descending"></i>
+                          </span>
+                        : ''
+                    }
+                    {
+                      column.filterable
+                         ? <span class="el-table__column-filter-trigger" on-click={ ($event) => this.handleFilterClick($event, column) }><i class={ ['el-icon-arrow-down', column.filterOpened ? 'el-icon-arrow-up' : ''] }></i></span>
+                        : ''
+                    }
+                    </div>
+                  </th>
+                )
+              }
+              {
+                !this.fixed && this.layout.gutterWidth
+                  ? <th class="gutter" style={{ width: this.layout.scrollY ? this.layout.gutterWidth + 'px' : '0' }}></th>
+                  : ''
+              }
+              </tr>
             )
           }
         </thead>
@@ -148,7 +150,16 @@ export default {
     layout: {
       required: true
     },
-    border: Boolean
+    border: Boolean,
+    defaultSort: {
+      type: Object,
+      default() {
+        return {
+          prop: '',
+          order: ''
+        };
+      }
+    }
   },
 
   components: {
@@ -180,6 +191,28 @@ export default {
 
   created() {
     this.filterPanels = {};
+  },
+
+  mounted() {
+    if (this.defaultSort.prop) {
+      const states = this.store.states;
+      states.sortProp = this.defaultSort.prop;
+      states.sortOrder = this.defaultSort.order || 'ascending';
+      this.$nextTick(_ => {
+        for (let i = 0, length = this.columns.length; i < length; i++) {
+          let column = this.columns[i];
+          if (column.property === states.sortProp) {
+            column.order = states.sortOrder;
+            states.sortingColumn = column;
+            break;
+          }
+        }
+
+        if (states.sortingColumn) {
+          this.store.commit('changeSortCondition');
+        }
+      });
+    }
   },
 
   beforeDestroy() {
@@ -226,7 +259,7 @@ export default {
         filterPanel.table = table;
         filterPanel.cell = cell;
         filterPanel.column = column;
-        filterPanel.$mount(document.createElement('div'));
+        !this.$isServer && filterPanel.$mount(document.createElement('div'));
       }
 
       setTimeout(() => {
@@ -234,11 +267,18 @@ export default {
       }, 16);
     },
 
-    handleClick(event, column) {
+    handleHeaderClick(event, column) {
+      if (!column.filters && column.sortable) {
+        this.handleSortClick(event, column);
+      } else if (column.filters && !column.sortable) {
+        this.handleFilterClick(event, column);
+      }
+
       this.$parent.$emit('header-click', column, event);
     },
 
     handleMouseDown(event, column) {
+      if (this.$isServer) return;
       if (column.children && column.children.length > 0) return;
       /* istanbul ignore if */
       if (this.draggingColumn && this.border) {
@@ -329,10 +369,18 @@ export default {
     },
 
     handleMouseOut() {
+      if (this.$isServer) return;
       document.body.style.cursor = '';
     },
 
-    handleHeaderClick(event, column, order) {
+    toggleOrder(order) {
+      return !order ? 'ascending' : order === 'ascending' ? 'descending' : null;
+    },
+
+    handleSortClick(event, column) {
+      event.stopPropagation();
+      let order = this.toggleOrder(column.order);
+
       let target = event.target;
       while (target && target.tagName !== 'TH') {
         target = target.parentNode;
@@ -360,7 +408,7 @@ export default {
         sortProp = column.property;
       }
 
-      if (column.order === order) {
+      if (!order) {
         sortOrder = column.order = null;
         states.sortingColumn = null;
         sortProp = null;
