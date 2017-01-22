@@ -515,8 +515,8 @@
           if (option.created) {
             this.query = '';
             this.inputLength = 20;
-            this.$refs.input.focus();
           }
+          if (this.filterable) this.$refs.input.focus();
         }
       },
 
