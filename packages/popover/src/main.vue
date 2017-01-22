@@ -60,7 +60,7 @@ export default {
     }
     if (this.trigger === 'click') {
       on(reference, 'click', () => { this.showPopper = !this.showPopper; });
-      on(document, 'click', this.handleDocumentClick.bind(this, reference, popper));
+      on(document, 'click', this.handleDocumentClick);
     } else if (this.trigger === 'hover') {
       on(reference, 'mouseenter', this.handleMouseEnter);
       on(popper, 'mouseenter', this.handleMouseEnter);
@@ -104,7 +104,13 @@ export default {
         this.showPopper = false;
       }, 200);
     },
-    handleDocumentClick(reference, popper, e) {
+    handleDocumentClick(e) {
+      let reference = this.reference || this.$refs.reference;
+      const popper = this.popper || this.$refs.popper;
+
+      if (!reference && this.$slots.reference && this.$slots.reference[0]) {
+        reference = this.referenceElm = this.$slots.reference[0].elm;
+      }
       if (!this.$el ||
         !reference ||
         this.$el.contains(e.target) ||
