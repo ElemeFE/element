@@ -2,10 +2,13 @@
   <span
     class="el-cascader"
     :class="[
-      { 'is-opened': menuVisible },
+      {
+        'is-opened': menuVisible,
+        'is-disabled': disabled
+      },
       size ? 'el-cascader--' + size : ''
     ]"
-    @click="menuVisible = !menuVisible"
+    @click="handleClick"
     @mouseenter="inputHover = true"
     @mouseleave="inputHover = false"
     ref="reference"
@@ -18,6 +21,7 @@
       @change="handleInputChange"
       :validate-event="false"
       :size="size"
+      :disabled="disabled"
     >
       <template slot="icon">
         <i
@@ -209,6 +213,11 @@ export default {
     },
     handleClickoutside() {
       this.menuVisible = false;
+    },
+    handleClick() {
+      if (!this.disabled) {
+        this.menuVisible = !this.menuVisible;
+      }
     }
   }
 };
