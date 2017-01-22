@@ -81,11 +81,73 @@ describe('Cascader', () => {
             expect(vm.selectedOptions[0]).to.be.equal('zhejiang');
             expect(vm.selectedOptions[1]).to.be.equal('hangzhou');
             expect(vm.selectedOptions[2]).to.be.equal('xihu');
-            done();
+
+            triggerEvent(vm.$refs.cascader.$el, 'mouseenter');
+            vm.$nextTick(_ => {
+              vm.$refs.cascader.$el.querySelector('.el-cascader__clearIcon').click();
+              vm.$nextTick(_ => {
+                expect(vm.selectedOptions.length).to.be.equal(0);
+                done();
+              });
+            });
           }, 500);
         });
       });
     }, 300);
+  });
+  it('not allow clearable', done => {
+    vm = createVue({
+      template: `
+        <el-cascader
+          ref="cascader"
+          placeholder="请选择"
+          :options="options"
+          :clearable="false"
+          v-model="selectedOptions"
+        ></el-cascader>
+      `,
+      data() {
+        return {
+          options: [{
+            value: 'zhejiang',
+            label: 'Zhejiang',
+            children: [{
+              value: 'hangzhou',
+              label: 'Hangzhou',
+              children: [{
+                value: 'xihu',
+                label: 'West Lake'
+              }]
+            }, {
+              value: 'ningbo',
+              label: 'NingBo',
+              children: [{
+                value: 'jiangbei',
+                label: 'Jiang Bei'
+              }]
+            }]
+          }, {
+            value: 'jiangsu',
+            label: 'Jiangsu',
+            children: [{
+              value: 'nanjing',
+              label: 'Nanjing',
+              children: [{
+                value: 'zhonghuamen',
+                label: 'Zhong Hua Men'
+              }]
+            }]
+          }],
+          selectedOptions: []
+        };
+      }
+    }, true);
+    expect(vm.$el).to.be.exist;
+    triggerEvent(vm.$refs.cascader.$el, 'mouseenter');
+    vm.$nextTick(_ => {
+      expect(vm.$refs.cascader.$el.querySelector('.el-cascader__clearIcon')).to.not.exist;
+      done();
+    });
   });
   it('disabled options', done => {
     vm = createVue({

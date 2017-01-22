@@ -480,7 +480,7 @@
 | popup-class | 自定义浮层类名   | string |      —         |     —    |
 | placeholder | 输入框占位文本 | string    |      —         |     —    |
 | disabled  | 是否禁用    | boolean   |  — | false   |
-| allowClear  | 是否支持清除    | boolean   |  — | false   |
+| clearable  | 是否支持清除    | boolean   |  — | false   |
 | expand-trigger  | 次级菜单的展开方式 | string | click / hover | 'click'   |
 | filterable  | 是否支持搜索选项 | boolean | — | — |
 | size  | 尺寸 | string | large / small / mini | — |

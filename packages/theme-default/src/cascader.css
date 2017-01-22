@@ -1,7 +1,6 @@
 @charset "UTF-8";
 @import "./input.css";
 @import "./common/var.css";
-/*@import "./core/dropdown.css";*/
 
 @component-namespace el {
 

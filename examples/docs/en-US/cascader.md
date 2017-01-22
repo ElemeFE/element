@@ -476,7 +476,7 @@ Search and select options directly.
 | popup-class | className of popup overlay   | string |      —         |     —    |
 | placeholder | input placeholder | string    |      —         |     —    |
 | disabled  | 是否禁用    | boolean   |  — | false   |
-| allowClear  | whether allow clear    | boolean   |  — | false   |
+| clearable  | whether allow clear    | boolean   |  — | false   |
 | expand-trigger  | trigger mode of expandind the current item | string | click / hover | 'click'   |
 | filterable  | whether the options can be searched | boolean | — | — |
 | size  | size | string | large / small / mini | — |

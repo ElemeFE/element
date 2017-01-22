@@ -27,7 +27,7 @@
         <i
           key="1"
           v-if="inputHover && displayValue !== ''"
-          class="el-input__icon el-icon-circle-close"
+          class="el-input__icon el-icon-circle-close el-cascader__clearIcon"
           @click="clearValue"
         ></i>
         <i
@@ -134,7 +134,7 @@ export default {
   methods: {
     showMenu() {
       if (!this.menu) {
-        this.menu = new Vue(ElCascaderMenu).$mount(document.createElement('div'));
+        this.menu = new Vue(ElCascaderMenu).$mount();
         this.menu.options = this.options;
         this.menu.expandTrigger = this.expandTrigger;
         this.menu.changeOnSelect = this.changeOnSelect;
