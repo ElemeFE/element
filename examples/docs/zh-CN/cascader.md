@@ -10,16 +10,16 @@
             label: 'Hangzhou',
             children: [{
               value: 'xihu',
-              label: 'West Lake',
-            }],
+              label: 'West Lake'
+            }]
           }, {
             value: 'ningbo',
             label: 'NingBo',
             children: [{
               value: 'jiangbei',
-              label: 'Jiang Bei',
-            }],
-          }],
+              label: 'Jiang Bei'
+            }]
+          }]
         }, {
           value: 'jiangsu',
           label: 'Jiangsu',
@@ -28,9 +28,9 @@
             label: 'Nanjing',
             children: [{
               value: 'zhonghuamen',
-              label: 'Zhong Hua Men',
-            }],
-          }],
+              label: 'Zhong Hua Men'
+            }]
+          }]
         }],
         optionsWithDisabled: [{
           value: 'zhejiang',
@@ -41,16 +41,16 @@
             label: 'Hangzhou',
             children: [{
               value: 'xihu',
-              label: 'West Lake',
-            }],
+              label: 'West Lake'
+            }]
           }, {
             value: 'ningbo',
             label: 'NingBo',
             children: [{
               value: 'jiangbei',
-              label: 'Jiang Bei',
-            }],
-          }],
+              label: 'Jiang Bei'
+            }]
+          }]
         }, {
           value: 'jiangsu',
           label: 'Jiangsu',
@@ -59,9 +59,9 @@
             label: 'Nanjing',
             children: [{
               value: 'zhonghuamen',
-              label: 'Zhong Hua Men',
-            }],
-          }],
+              label: 'Zhong Hua Men'
+            }]
+          }]
         }],
         selectedOptions: [],
         selectedOptions2: ['jiangsu', 'nanjing', 'zhonghuamen']
@@ -429,7 +429,7 @@
 <el-cascader
   placeholder="请选择"
   :options="options"
-  show-search
+  filterable
 ></el-cascader>
 <script>
   module.exports = {
@@ -482,7 +482,7 @@
 | disabled  | 是否禁用    | boolean   |  — | false   |
 | allowClear  | 是否支持清除    | boolean   |  — | false   |
 | expand-trigger  | 次级菜单的展开方式 | string | click / hover | 'click'   |
-| showSearch  | 是否支持搜索选项 | boolean | — | — |
+| filterable  | 是否支持搜索选项 | boolean | — | — |
 | size  | 尺寸 | string | large / small / mini | — |
 
 ### Events

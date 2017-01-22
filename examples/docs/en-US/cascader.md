@@ -425,7 +425,7 @@ Search and select options directly.
 <el-cascader
   placeholder="Please select"
   :options="options"
-  show-search
+  filterable
 ></el-cascader>
 <script>
   module.exports = {
@@ -478,7 +478,7 @@ Search and select options directly.
 | disabled  | 是否禁用    | boolean   |  — | false   |
 | allowClear  | whether allow clear    | boolean   |  — | false   |
 | expand-trigger  | trigger mode of expandind the current item | string | click / hover | 'click'   |
-| showSearch  | whether the options can be searched | boolean | — | — |
+| filterable  | whether the options can be searched | boolean | — | — |
 | size  | size | string | large / small / mini | — |
 
 ### Events

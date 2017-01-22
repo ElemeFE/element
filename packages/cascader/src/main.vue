@@ -15,7 +15,7 @@
     v-clickoutside="handleClickoutside"
   >
     <el-input
-      :readonly="!showSearch"
+      :readonly="!filterable"
       :placeholder="displayValue ? undefined : placeholder"
       v-model="inputValue"
       @change="handleInputChange"
@@ -100,7 +100,7 @@ export default {
       type: String,
       default: 'click'
     },
-    showSearch: Boolean,
+    filterable: Boolean,
     size: String
   },
 
@@ -111,7 +111,7 @@ export default {
       menuVisible: false,
       inputHover: false,
       inputValue: '',
-      flatOptions: this.showSearch && this.flattenOptions(this.options)
+      flatOptions: this.filterable && this.flattenOptions(this.options)
     };
   },
 
@@ -125,6 +125,9 @@ export default {
     currentValue(value) {
       this.displayValue = value.join('/');
       this.dispatch('ElFormItem', 'el.form.change', [value]);
+    },
+    options(value) {
+      this.menu.options = value;
     }
   },
 
