@@ -1,5 +1,19 @@
 ## Changelog
 
+### 1.1.6
+
+*2017-01-23*
+
+- Fixed `customClass` of MessageBox affecting follow-up instances, #2472
+- Fixed style issue of Select after being activated when located in a non-default-activated tab pane inside Tabs, #2466
+- Fixed style missing issue for some components when imported on demand
+- Fixed disabled filterable multiple Select still showing dropdown when clicked on a certain area, #2540
+- Restored returning to original sorting in sortable Table columns, #2491
+- Added `reset.css` in `theme-default`, #2378
+- Added `range-separator` attribute for DatePicker, #2579
+- Published individual component packages: Table, DatePicker, Loading, Upload and Carousel
+- Add Finnish (@groenroos)
+
 ### 1.1.5
 
 *2017-01-17*
