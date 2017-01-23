@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 git checkout master
 git merge dev
 
@@ -16,11 +17,11 @@ then
   VERSION=$VERSION npm run dist
 
   # publish theme
-  echo "Releasing theme-default $VERSION ..."
-  cd packages/theme-default
-  npm version $VERSION --message "[release] $VERSION"
-  npm publish
-  cd ../..
+#  echo "Releasing theme-default $VERSION ..."
+#  cd packages/theme-default
+#  npm version $VERSION --message "[release] $VERSION"
+#  npm publish
+#  cd ../..
 
   # commit
   git add -A
