@@ -1,18 +1,6 @@
 var cooking = require('cooking');
-var path = require('path');
-var config = require('../../build/config');
+var gen = require('../../build/gen-single-config');
 
-cooking.set({
-  entry: {
-    index: path.join(__dirname, '_index.js')
-  },
-  dist: path.join(__dirname, 'lib'),
-  template: false,
-  format: 'umd',
-  moduleName: 'ElCarousel',
-  extends: ['vue2'],
-  alias: config.alias,
-  externals: { vue: config.vue }
-});
+cooking.set(gen(__dirname, 'ElCarousel', '_index.js'));
 
 module.exports = cooking.resolve();
