@@ -63,7 +63,7 @@
       @mouseleave.native="inputHovering = false"
       :icon="iconClass">
     </el-input>
-    <i class="el-input__icon el-icon-loading"></i>
+    <i v-if="loading" class="el-input__icon el-icon-loading"></i>
     <transition name="el-zoom-in-top" @after-leave="doDestroy">
       <el-select-menu
         ref="popper"
@@ -116,13 +116,16 @@
 
     computed: {
       iconClass() {
+        if (this.loading) {
+          return '';
+        }
         let criteria = this.clearable &&
           !this.disabled &&
           this.inputHovering &&
           !this.multiple &&
           this.value !== undefined &&
           this.value !== '';
-        return criteria ? 'circle-close is-show-close' : (this.remote && this.filterable ? '' : this.loading ? '' : 'caret-top');
+        return criteria ? 'circle-close is-show-close' : (this.remote && this.filterable ? '' : 'caret-top');
       },
 
       debounce() {
