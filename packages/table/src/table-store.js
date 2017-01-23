@@ -87,14 +87,14 @@ TableStore.prototype.mutations = {
     states._data = data;
     states.data = sortData((data || []), states);
 
-    states.data.forEach((item) => {
-      if (!item.$extra) {
-        Object.defineProperty(item, '$extra', {
-          value: {},
-          enumerable: false
-        });
-      }
-    });
+    // states.data.forEach((item) => {
+    //   if (!item.$extra) {
+    //     Object.defineProperty(item, '$extra', {
+    //       value: {},
+    //       enumerable: false
+    //     });
+    //   }
+    // });
 
     this.updateCurrentRow();
 
