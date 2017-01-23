@@ -63,7 +63,7 @@
       @mouseleave.native="inputHovering = false"
       :icon="iconClass">
     </el-input>
-    <i class="el-input__icon el-icon-loading" v-if="loading"></i>
+    <i class="el-input__icon el-icon-loading"></i>
     <transition name="el-zoom-in-top" @after-leave="doDestroy">
       <el-select-menu
         ref="popper"
