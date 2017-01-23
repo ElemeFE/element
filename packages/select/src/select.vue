@@ -239,7 +239,7 @@
 
       query(val) {
         this.$nextTick(() => {
-          this.broadcast('ElSelectDropdown', 'updatePopper');
+          if (this.visible) this.broadcast('ElSelectDropdown', 'updatePopper');
         });
         this.hoverIndex = -1;
         if (this.multiple && this.filterable) {
