@@ -1,7 +1,7 @@
 <style lang="css">
   @import 'highlight.js/styles/color-brewer.css';
   @import 'assets/styles/common.css';
-  @import 'packages/theme-default/src/reset.css';
+  @import 'assets/styles/fonts/style.css';
 
   html, body {
     margin: 0;
@@ -14,15 +14,22 @@
   }
 
   body {
+    font-family: 'Helvetica Neue',Helvetica,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',SimSun,sans-serif;
+    overflow: auto;
+    font-weight: 400;
     -webkit-font-smoothing: antialiased;
-  }
-
-  p {
-    margin: 1em 0;
   }
 
   a {
     color: #4078c0;
+    text-decoration: none;
+  }
+
+  button, input, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    color: inherit;
   }
 
   .hljs {
