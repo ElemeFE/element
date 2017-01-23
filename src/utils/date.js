@@ -195,7 +195,7 @@
       }
     }]
   };
-  parseFlags.DD = parseFlags.DD;
+  parseFlags.DD = parseFlags.D;
   parseFlags.dddd = parseFlags.ddd;
   parseFlags.Do = parseFlags.dd = parseFlags.d;
   parseFlags.mm = parseFlags.m;

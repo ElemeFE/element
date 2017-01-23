@@ -104,7 +104,7 @@ export default {
                     on-mousemove={ ($event) => this.handleMouseMove($event, column) }
                     on-mouseout={ this.handleMouseOut }
                     on-mousedown={ ($event) => this.handleMouseDown($event, column) }
-                    on-click={ ($event) => this.handleClick($event, column) }
+                    on-click={ ($event) => this.handleHeaderClick($event, column) }
                     class={ [column.id, column.order, column.headerAlign, column.className || '', rowIndex === 0 && this.isCellHidden(cellIndex) ? 'is-hidden' : '', !column.children ? 'is-leaf' : ''] }>
                     <div class={ ['cell', column.filteredValue && column.filteredValue.length > 0 ? 'highlight' : ''] }>
                     {
@@ -114,7 +114,7 @@ export default {
                     }
                     {
                       column.sortable
-                        ? <span class="caret-wrapper" on-click={ ($event) => this.handleHeaderClick($event, column) }>
+                        ? <span class="caret-wrapper" on-click={ ($event) => this.handleSortClick($event, column) }>
                             <i class="sort-caret ascending"></i>
                             <i class="sort-caret descending"></i>
                           </span>
@@ -151,10 +151,14 @@ export default {
       required: true
     },
     border: Boolean,
-    defaultSortProp: String,
-    defaultSortOrder: {
-      type: String,
-      default: 'ascending'
+    defaultSort: {
+      type: Object,
+      default() {
+        return {
+          prop: '',
+          order: ''
+        };
+      }
     }
   },
 
@@ -190,16 +194,15 @@ export default {
   },
 
   mounted() {
-    if (this.defaultSortProp) {
+    if (this.defaultSort.prop) {
       const states = this.store.states;
-      states.sortProp = this.defaultSortProp;
-      states.sortOrder = this.defaultSortOrder;
-
+      states.sortProp = this.defaultSort.prop;
+      states.sortOrder = this.defaultSort.order || 'ascending';
       this.$nextTick(_ => {
         for (let i = 0, length = this.columns.length; i < length; i++) {
           let column = this.columns[i];
-          if (column.property === this.defaultSortProp) {
-            column.order = this.defaultSortOrder;
+          if (column.property === states.sortProp) {
+            column.order = states.sortOrder;
             states.sortingColumn = column;
             break;
           }
@@ -264,7 +267,13 @@ export default {
       }, 16);
     },
 
-    handleClick(event, column) {
+    handleHeaderClick(event, column) {
+      if (!column.filters && column.sortable) {
+        this.handleSortClick(event, column);
+      } else if (column.filters && !column.sortable) {
+        this.handleFilterClick(event, column);
+      }
+
       this.$parent.$emit('header-click', column, event);
     },
 
@@ -364,15 +373,13 @@ export default {
       document.body.style.cursor = '';
     },
 
-    toggleOrder(column) {
-      if (column.order === 'ascending') {
-        return 'descending';
-      }
-      return 'ascending';
+    toggleOrder(order) {
+      return !order ? 'ascending' : order === 'ascending' ? 'descending' : null;
     },
 
-    handleHeaderClick(event, column) {
-      let order = this.toggleOrder(column);
+    handleSortClick(event, column) {
+      event.stopPropagation();
+      let order = this.toggleOrder(column.order);
 
       let target = event.target;
       while (target && target.tagName !== 'TH') {
@@ -401,7 +408,7 @@ export default {
         sortProp = column.property;
       }
 
-      if (column.order === order) {
+      if (!order) {
         sortOrder = column.order = null;
         states.sortingColumn = null;
         sortProp = null;

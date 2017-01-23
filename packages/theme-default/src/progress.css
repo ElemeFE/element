@@ -8,7 +8,7 @@
 
     @e text {
       font-size:14px;
-      color:#475669;
+      color:var(--color-extra-light-black);
       display: inline-block;
       vertical-align: middle;
       margin-left: 10px;
@@ -81,7 +81,7 @@
     @e outer {
       height: 6px;
       border-radius: 100px;
-      background-color: #e5e9f2;
+      background-color: var(--color-light-gray);
       overflow: hidden;
       position: relative;
       vertical-align: middle;
@@ -102,7 +102,7 @@
     @e innerText {
       display: inline-block;
       vertical-align: middle;
-      color: #fff;
+      color: var(--color-white);
       font-size: 12px;
       margin: 0 5px;
     }

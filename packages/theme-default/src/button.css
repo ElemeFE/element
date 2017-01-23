@@ -48,13 +48,13 @@
     @when plain {
       &:hover,
       &:focus {
-        background: #fff;
+        background: var(--color-white);
         border-color: var(--color-primary);
         color: var(--color-primary);
       }
       
       &:active {
-        background: #fff;
+        background: var(--color-white);
         border-color: shade(var(--color-primary), var(--button-active-shade-percent));
         color: shade(var(--color-primary), var(--button-active-shade-percent));
         outline: none;
@@ -85,9 +85,9 @@
         &,
         &:hover,
         &:focus {
-          background-color: #fff;
-          border-color: #d3dce6;
-          color: #C0CCDA;
+          background-color: var(--color-white);
+          border-color: var(--color-base-gray);
+          color: var(--color-extra-light-silver);
         }
       }
     }
@@ -190,14 +190,14 @@
     @each $type in (primary, success, warning, danger, info) {
       .el-button--$type {
         &:first-child {
-          border-right-color: rgba(#fff, 0.5);
+          border-right-color: rgba(var(--color-white), 0.5);
         }
         &:last-child {
-          border-left-color: rgba(#fff, 0.5);
+          border-left-color: rgba(var(--color-white), 0.5);
         }
         &:not(:first-child):not(:last-child) {
-          border-left-color: rgba(#fff, 0.5);
-          border-right-color: rgba(#fff, 0.5);
+          border-left-color: rgba(var(--color-white), 0.5);
+          border-right-color: rgba(var(--color-white), 0.5);
         }
       }
     }

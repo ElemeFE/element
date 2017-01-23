@@ -15,8 +15,7 @@
         :store="store"
         :layout="layout"
         :border="border"
-        :default-sort-prop="defaultSortProp"
-        :default-sort-order="defaultSortOrder"
+        :default-sort="defaultSort"
         :style="{ width: layout.bodyWidth ? layout.bodyWidth + 'px' : '' }">
       </table-header>
     </div>
@@ -31,9 +30,9 @@
         :row-class-name="rowClassName"
         :row-style="rowStyle"
         :highlight="highlightCurrentRow"
-        :style="{ width: layout.bodyWidth ? layout.bodyWidth - (layout.scrollY ? layout.gutterWidth : 0 ) + 'px' : '' }">
+        :style="{ width: bodyWidth }">
       </table-body>
-      <div class="el-table__empty-block" v-if="!data || data.length === 0">
+      <div :style="{ width: bodyWidth }" class="el-table__empty-block" v-if="!data || data.length === 0">
         <span class="el-table__empty-text"><slot name="empty">{{ emptyText || t('el.table.emptyText') }}</slot></span>
       </div>
     </div>
@@ -170,9 +169,7 @@
 
       defaultExpandAll: Boolean,
 
-      defaultSortProp: String,
-
-      defaultSortOrder: String
+      defaultSort: Object
     },
 
     components: {
@@ -295,6 +292,11 @@
         }
 
         return style;
+      },
+
+      bodyWidth() {
+        const { bodyWidth, scrollY, gutterWidth } = this.layout;
+        return bodyWidth ? bodyWidth - (scrollY ? gutterWidth : 0) + 'px' : '';
       },
 
       fixedBodyHeight() {

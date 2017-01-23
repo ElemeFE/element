@@ -143,6 +143,7 @@ export default {
     selectable: Function,
     reserveSelection: Boolean,
     filterMethod: Function,
+    filteredValue: Array,
     filters: Array,
     filterMultiple: {
       type: Boolean,
@@ -235,7 +236,7 @@ export default {
       filterable: this.filters || this.filterMethod,
       filterMultiple: this.filterMultiple,
       filterOpened: false,
-      filteredValue: []
+      filteredValue: this.filteredValue || []
     });
 
     objectAssign(column, forced[type] || {});

@@ -31,7 +31,7 @@
 
       &.current .cell {
         background-color: var(--datepicker-active-color) !important;
-        color: #fff;
+        color: var(--color-white);
       }
     }
   }

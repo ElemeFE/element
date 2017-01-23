@@ -12,8 +12,8 @@
       left: 0;
       top: 110%;
       margin: 5px 0 0;
-      background-color: #fff;
-      border: 1px solid #D3DCE6;
+      background-color: var(--color-white);
+      border: 1px solid var(--color-base-gray);
       width: 100%;
       padding: 6px 0;
       z-index: 10;
@@ -29,7 +29,7 @@
         padding: 0 10px;
         margin: 0;
         cursor: pointer;
-        color: #475669;
+        color: var(--color-extra-light-black);
         font-size: 14px;
         white-space: nowrap;
         overflow: hidden;
@@ -40,14 +40,14 @@
         }
         &.highlighted {
           background-color: var(--color-primary);
-          color: #fff;
+          color: var(--color-white);
         }
         &:active {
           background-color: darken(var(--color-primary), 0.2);
         }
         &.divider {
           margin-top: 6px;
-          border-top: 1px solid #D3DCE6;
+          border-top: 1px solid var(--color-base-gray);
         }
         &.divider:last-child {
           margin-bottom: -6px;
@@ -64,7 +64,7 @@
           @utils-vertical-center;
 
           &:hover {
-            background-color: #fff;
+            background-color: var(--color-white);
           }
         }
 

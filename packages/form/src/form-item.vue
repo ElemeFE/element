@@ -4,7 +4,7 @@
     'is-validating': validateState === 'validating',
     'is-required': isRequired || required
   }">
-    <label class="el-form-item__label" v-bind:style="labelStyle" v-if="label">
+    <label :for="prop" class="el-form-item__label" v-bind:style="labelStyle" v-if="label">
       {{label + form.labelSuffix}}
     </label>
     <div class="el-form-item__content" v-bind:style="contentStyle">
@@ -76,6 +76,7 @@
     computed: {
       labelStyle() {
         var ret = {};
+        if (this.form.labelPosition === 'top') return ret;
         var labelWidth = this.labelWidth || this.form.labelWidth;
         if (labelWidth) {
           ret.width = labelWidth;
@@ -84,6 +85,7 @@
       },
       contentStyle() {
         var ret = {};
+        if (this.form.labelPosition === 'top') return ret;
         var labelWidth = this.labelWidth || this.form.labelWidth;
         if (labelWidth) {
           ret.marginLeft = labelWidth;

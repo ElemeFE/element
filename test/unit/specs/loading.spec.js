@@ -7,8 +7,18 @@ describe('Loading', () => {
   let vm, loadingInstance, loadingInstance2;
   afterEach(() => {
     destroyVM(vm);
-    loadingInstance && loadingInstance.close();
-    loadingInstance2 && loadingInstance2.close();
+    if (loadingInstance) {
+      loadingInstance.close();
+      loadingInstance.$el &&
+      loadingInstance.$el.parentNode &&
+      loadingInstance.$el.parentNode.removeChild(loadingInstance.$el);
+    }
+    if (loadingInstance2) {
+      loadingInstance2.close();
+      loadingInstance2.$el &&
+      loadingInstance2.$el.parentNode &&
+      loadingInstance2.$el.parentNode.removeChild(loadingInstance2.$el);
+    }
   });
 
   describe('as a directive', () => {
@@ -171,7 +181,7 @@ describe('Loading', () => {
     it('close', () => {
       loadingInstance = Loading();
       loadingInstance.close();
-      expect(document.querySelector('.el-loading-mask')).to.not.exist;
+      expect(loadingInstance.visible).to.false;
     });
 
     it('target', () => {
@@ -216,11 +226,13 @@ describe('Loading', () => {
           let masks = document.querySelectorAll('.el-loading-mask');
           expect(masks.length).to.equal(1);
           loadingInstance2.close();
-          masks = document.querySelectorAll('.el-loading-mask');
-          expect(masks.length).to.equal(0);
-          done();
-        }, 100);
-      }, 100);
+          setTimeout(() => {
+            masks = document.querySelectorAll('.el-loading-mask');
+            expect(masks.length).to.equal(0);
+            done();
+          }, 350);
+        }, 10);
+      }, 10);
     });
 
     it('lock', () => {

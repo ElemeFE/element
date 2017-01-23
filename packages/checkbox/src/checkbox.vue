@@ -18,7 +18,7 @@
         :true-value="trueLabel"
         :false-value="falseLabel"
         v-model="model"
-        @change="$emit('change', $event)"
+        @change="handleChange"
         @focus="focus = true"
         @blur="focus = false">
       <input
@@ -29,7 +29,7 @@
         :value="label"
         :name="name"
         v-model="model"
-        @change="$emit('change', $event)"
+        @change="handleChange"
         @focus="focus = true"
         @blur="focus = false">
     </span>
@@ -123,6 +123,14 @@
           this.model.push(this.label);
         } else {
           this.model = this.trueLabel || true;
+        }
+      },
+      handleChange(ev) {
+        this.$emit('change', ev);
+        if (this.isGroup) {
+          this.$nextTick(_ => {
+            this.dispatch('ElCheckboxGroup', 'change', [this._checkboxGroup.value]);
+          });
         }
       }
     },

@@ -51,18 +51,8 @@
           user: '',
           region: ''
         },
-        formStacked: {
-          name: '',
-          region: '',
-          type: '',
-          remark: ''
-        },
-        formAlignRight: {
-          name: '',
-          region: '',
-          type: ''
-        },
-        formAlignLeft: {
+        labelPosition: 'right',
+        formLabelAlign: {
           name: '',
           region: '',
           type: ''
@@ -216,13 +206,6 @@
         margin-right: 10px;
       }
     }
-    .demo-form-stacked {
-      width: 270px;
-
-      .el-select .el-input {
-        width: 100%;
-      }
-    }
     .demo-ruleForm {
       width: 460px;
 
@@ -365,88 +348,31 @@
 
 根据具体目标和制约因素，选择最佳的标签对齐方式。
 
-顶部对齐
-
 ::: demo 通过设置 `label-position` 属性可以改变表单域标签的位置，可选值为 `top`、`left`，当设为 `top` 时标签会置于表单域的顶部
 ```html
-<el-form label-position="top" :model="formStacked" class="demo-form-stacked">
+<el-radio-group v-model="labelPosition" size="small">
+  <el-radio-button label="left">左对齐</el-radio-button>
+  <el-radio-button label="right">右对齐</el-radio-button>
+  <el-radio-button label="top">顶部对齐</el-radio-button>
+</el-radio-group>
+<div style="margin: 20px;"></div>
+<el-form :label-position="labelPosition" label-width="80px" :model="formLabelAlign">
   <el-form-item label="名称">
-    <el-input v-model="formStacked.name"></el-input>
+    <el-input v-model="formLabelAlign.name"></el-input>
   </el-form-item>
   <el-form-item label="活动区域">
-    <el-input v-model="formStacked.region"></el-input>
-  </el-form-item>
-  <el-form-item label="活动展开形式">
-    <el-input v-model="formStacked.type"></el-input>
-  </el-form-item>
-</el-form>
-<script>
-  export default {
-    data() {
-      return {
-        formStacked: {
-          name: '',
-          region: '',
-          type: ''
-        }
-      };
-    }
-  }
-</script>
-```
-:::
-
-右对齐
-
-::: demo 通过设置 `label-position` 属性可以改变表单域标签的位置，默认不设置的情况下标签是右对齐的
-```html
-<el-form :model="formAlignRight" label-width="80px">
-  <el-form-item label="活动名称">
-    <el-input v-model="formAlignRight.name"></el-input>
-  </el-form-item>
-  <el-form-item label="推广地">
-    <el-input v-model="formAlignRight.region"></el-input>
+    <el-input v-model="formLabelAlign.region"></el-input>
   </el-form-item>
   <el-form-item label="活动形式">
-    <el-input v-model="formAlignRight.type"></el-input>
+    <el-input v-model="formLabelAlign.type"></el-input>
   </el-form-item>
 </el-form>
 <script>
   export default {
     data() {
       return {
-        formAlignRight: {
-          name: '',
-          region: '',
-          type: ''
-        }
-      };
-    }
-  }
-</script>
-```
-:::
-
-左对齐
-
-::: demo 通过设置 `label-position` 属性可以改变表单域标签的位置，可选值为 `top`、`left`，当设为 `left` 时标签会变为左对齐
-```html
-<el-form :model="formAlignLeft" label-position="left" label-width="80px">
-  <el-form-item label="活动名称">
-    <el-input v-model="formAlignLeft.name"></el-input>
-  </el-form-item>
-  <el-form-item label="推广地">
-    <el-input v-model="formAlignLeft.region"></el-input>
-  </el-form-item>
-  <el-form-item label="活动形式">
-    <el-input v-model="formAlignLeft.type"></el-input>
-  </el-form-item>
-</el-form>
-<script>
-  export default {
-    data() {
-      return {
-        formAlignLeft: {
+        labelPosition: 'right',
+        formLabelAlign: {
           name: '',
           region: '',
           type: ''

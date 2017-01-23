@@ -1,5 +1,35 @@
 ## Changelog
 
+### 1.1.5
+
+*2017-01-17*
+
+- Fixed Menu not activating corresponding menu item after router switching in router mode, #2451
+- Fixed `value` attribute of Collapse not supporting `Number` typed value, #2455
+
+### 1.1.4
+
+*2017-01-16*
+
+- Fixed Input Number triggering `change` event when bound value is changed programmatically, #2329
+- Fixed Menu not responding to `$router` changing in router mode, #2391
+- Fixed Menu and Tree expanding state malfunctioning when clicked multiple times quickly, #2354
+- Fixed `change` event triggering mechanism of Input Number and Checkbox Group, now they do not fire when bound value is changed programmatically
+- Added `on-icon-click` attribute for Input, #2414
+- Added `disabled` attribute for Radio Group, #2411
+- Added `accordion` attribute for Tree, #2408
+- Added `show-message` attribute for Form, #2356
+- Fixed sort clicking area of Table, updated default sorting related APIs, #2309 #2405 (by @njleonzhang)
+- Fixed `firstDayOfWeek` not working in ranged typed of DatePicker, #2353
+- Fixed DatePicker displaying 1970 when initial value is null, #2388
+- Fixed `filteredValue` attribute for Table, #2348
+- Fixed scrollable Table's style with empty data, #2396
+- Added `beforeClose` attribute for MessageBox, #2204
+- Fixed filterable Select not showing dropdown when triangle icon is clicked, #2389
+
+Breaking change
+- The `default-sort-prop` and `default-sort-order` attributes added in 1.1.3 are now merged into an object-typed attribute
+
 ### 1.1.3
 
 *2017-01-09*

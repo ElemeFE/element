@@ -69,6 +69,7 @@ class TableLayout {
 
   updateHeight() {
     const height = this.tableHeight = this.table.$el.clientHeight;
+    const noData = !this.table.data || this.table.data.length === 0;
     const { headerWrapper } = this.table.$refs;
     if (this.showHeader && !headerWrapper) return;
     if (!this.showHeader) {
@@ -85,7 +86,7 @@ class TableLayout {
       }
       this.fixedBodyHeight = this.scrollX ? bodyHeight - this.gutterWidth : bodyHeight;
     }
-    this.viewportHeight = this.scrollX ? height - this.gutterWidth : height;
+    this.viewportHeight = this.scrollX ? height - (noData ? 0 : this.gutterWidth) : height;
   }
 
   update() {

@@ -31,7 +31,7 @@
       right: -2px;
 
       &:hover {
-        background-color: #fff;
+        background-color: var(--color-white);
         color: var(--tag-fill);
       }
     }
@@ -46,7 +46,7 @@
 
       & .el-tag__close:hover {
         background-color: var(--tag-gray-color);
-        color: #fff;
+        color: var(--color-white);
       }
     }
     @m primary {
@@ -59,7 +59,7 @@
 
       & .el-tag__close:hover {
         background-color: var(--tag-primary-color);
-        color: #fff;
+        color: var(--color-white);
       }
     }
     @m success {
@@ -72,7 +72,7 @@
 
       & .el-tag__close:hover {
         background-color: var(--tag-success-color);
-        color: #fff;
+        color: var(--color-white);
       }
     }
     @m warning {
@@ -85,7 +85,7 @@
 
       & .el-tag__close:hover {
         background-color: var(--tag-warning-color);
-        color: #fff;
+        color: var(--color-white);
       }
     }
     @m danger {
@@ -98,7 +98,7 @@
 
       & .el-tag__close:hover {
         background-color: var(--tag-danger-color);
-        color: #fff;
+        color: var(--color-white);
       }
     }
   }
