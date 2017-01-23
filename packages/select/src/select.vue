@@ -63,7 +63,7 @@
       @mouseleave.native="inputHovering = false"
       :icon="iconClass">
     </el-input>
-    <i v-if="loading" class="el-input__icon el-icon-loading"></i>
+    <i v-if="loadingIcon" class="el-input__icon el-icon-loading"></i>
     <transition name="el-zoom-in-top" @after-leave="doDestroy">
       <el-select-menu
         ref="popper"
@@ -116,7 +116,7 @@
 
     computed: {
       iconClass() {
-        if (this.loading) {
+        if (this.loadingIcon) {
           return '';
         }
         let criteria = this.clearable &&
@@ -173,6 +173,7 @@
       filterable: Boolean,
       allowCreate: Boolean,
       loading: Boolean,
+      loadingIcon: Boolean,
       popperClass: String,
       remote: Boolean,
       loadingText: String,
