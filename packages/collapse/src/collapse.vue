@@ -12,7 +12,7 @@
     props: {
       accordion: Boolean,
       value: {
-        type: [Array, String],
+        type: [Array, String, Number],
         default() {
           return [];
         }

@@ -57,15 +57,6 @@
       },
       defaultOpeneds(value) {
         this.openedMenus = value;
-      },
-      '$route': {
-        immediate: true,
-        handler(value) {
-          if (this.router) {
-            this.activedIndex = value.path;
-            this.initOpenedMenu();
-          }
-        }
       }
     },
     methods: {
@@ -109,7 +100,7 @@
       },
       handleItemClick(item) {
         let { index, indexPath } = item;
-
+        this.activedIndex = item.index;
         this.$emit('select', index, indexPath, item);
 
         if (this.mode === 'horizontal') {
@@ -118,8 +109,6 @@
 
         if (this.router) {
           this.routeToItem(item);
-        } else {
-          this.activedIndex = item.index;
         }
       },
       // 初始化展开菜单

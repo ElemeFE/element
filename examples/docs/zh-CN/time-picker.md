@@ -156,7 +156,6 @@
 | clearable | 是否显示清除按钮 | boolean | — | true |
 | size          | 输入框尺寸     | string          | large, small, mini  | — |
 | placeholder | 占位内容 | string | — | — |
-| format | 时间格式化(TimePicker) | string | 小时：`HH`，分：`mm`，秒：`ss` | 'HH:mm:ss' |
 | value | 绑定值 | TimePicker: DateTimeSelect: String | — | — |
 | align | 对齐方式 | string | left, center, right | left |
 | popper-class | TimePicker 下拉框的类名 | string | — | — |
@@ -175,6 +174,7 @@
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | selectableRange | 可选时间段，例如`'18:30:00 - 20:30:00'`或者传入数组`['09:30:00 - 12:00:00', '14:30:00 - 18:30:00']` | string/array | — | — |
+| format | 时间格式化(TimePicker) | string | 小时：`HH`，分：`mm`，秒：`ss` | 'HH:mm:ss' |
 
 
 ### Events

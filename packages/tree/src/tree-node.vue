@@ -35,7 +35,8 @@
           :render-content="renderContent"
           v-for="child in node.childNodes"
           :key="getNodeKey(child)"
-          :node="child">
+          :node="child"
+          @node-expand="handleChildNodeExpand(child)">
         </el-tree-node>
       </div>
     </collapse-transition>
@@ -45,9 +46,14 @@
 <script type="text/jsx">
   import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
   import ElCheckbox from 'element-ui/packages/checkbox';
+  import emitter from 'element-ui/src/mixins/emitter';
 
   export default {
     name: 'ElTreeNode',
+
+    componentName: 'ElTreeNode',
+
+    mixins: [emitter],
 
     props: {
       node: {
@@ -143,6 +149,7 @@
           this.node.collapse();
         } else {
           this.node.expand();
+          this.$emit('node-expand', this.node.data, this.node, this);
         }
       },
 
@@ -156,6 +163,10 @@
         if (!this.node.indeterminate) {
           this.node.setChecked(ev.target.checked, !this.tree.checkStrictly);
         }
+      },
+
+      handleChildNodeExpand(node) {
+        this.broadcast('ElTreeNode', 'tree-node-expand', node);
       }
     },
 
@@ -185,6 +196,14 @@
       if (this.node.expanded) {
         this.expanded = true;
         this.childNodeRendered = true;
+      }
+
+      if(this.tree.accordion) {
+        this.$on('tree-node-expand', node => {
+          if(this.node !== node) {
+            this.node.collapse();
+          }
+        });
       }
     }
   };

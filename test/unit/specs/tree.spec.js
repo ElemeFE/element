@@ -354,4 +354,19 @@ describe('Tree', () => {
       done();
     }, 100);
   });
+
+  it('accordion', done => {
+    vm = getTreeVm(':props="defaultProps" accordion');
+    const firstNode = vm.$el.querySelector('.el-tree-node__content');
+    const secondNode = vm.$el.querySelector('.el-tree-node:nth-child(2) .el-tree-node__content');
+    firstNode.click();
+    setTimeout(() => {
+      expect(vm.$el.querySelector('.el-tree-node').classList.contains('is-expanded')).to.true;
+      secondNode.click();
+      setTimeout(() => {
+        expect(vm.$el.querySelector('.el-tree-node').classList.contains('is-expanded')).to.false;
+        done();
+      }, DELAY);
+    }, DELAY);
+  });
 });

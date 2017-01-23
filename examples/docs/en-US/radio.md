@@ -5,7 +5,9 @@
         radio: '1',
         radio1: 'selected and disabled',
         radio2: 3,
-        radio3: ''
+        radio3: 'New York',
+        radio4: 'New York',
+        radio5: 'New York'
       };
     }
   };
@@ -95,7 +97,21 @@ Radio with button styles.
 <el-radio-group v-model="radio3">
   <el-radio-button label="New York"></el-radio-button>
   <el-radio-button label="Washington"></el-radio-button>
-  <el-radio-button label="Los Angeles" :disabled="true"></el-radio-button>
+  <el-radio-button label="Los Angeles"></el-radio-button>
+  <el-radio-button label="Chicago"></el-radio-button>
+</el-radio-group>
+<div style="margin: 15px 0;"></div>
+<el-radio-group v-model="radio4">
+  <el-radio-button label="New York"></el-radio-button>
+  <el-radio-button label="Washington" :disabled="true"></el-radio-button>
+  <el-radio-button label="Los Angeles"></el-radio-button>
+  <el-radio-button label="Chicago"></el-radio-button>
+</el-radio-group>
+<div style="margin: 15px 0;"></div>
+<el-radio-group v-model="radio5" :disabled="true">
+  <el-radio-button label="New York"></el-radio-button>
+  <el-radio-button label="Washington"></el-radio-button>
+  <el-radio-button label="Los Angeles"></el-radio-button>
   <el-radio-button label="Chicago"></el-radio-button>
 </el-radio-group>
 
@@ -103,7 +119,9 @@ Radio with button styles.
   export default {
     data () {
       return {
-        radio3: ''
+        radio3: 'New York',
+        radio4: 'New York',
+        radio5: 'New York'
       };
     }
   }

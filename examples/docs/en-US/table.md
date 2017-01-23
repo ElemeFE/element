@@ -1122,15 +1122,14 @@ You can also select multiple rows.
 
 Sort the data to find or compare data quickly.
 
-:::demo Set table attribute `default-sort-prop` and `default-sort-order` to determine default sort column and order. Set attribute `sortable` in a certain column to sort the data based on this column. It accepts `Boolean` with a default value `false`. In this example we use another attribute named `formatter` to format the value of certain columns. It accepts a function which has two parameters: `row` and `column`. You can handle it according to your own needs.
+:::demo Set table attribute `default-sort` to determine default sort column and order. Set attribute `sortable` in a certain column to sort the data based on this column. It accepts `Boolean` with a default value `false`. In this example we use another attribute named `formatter` to format the value of certain columns. It accepts a function which has two parameters: `row` and `column`. You can handle it according to your own needs.
 ```html
 <template>
   <el-table
     :data="tableData"
     border
-    style="width: 100%"
-    default-sort-prop="date"
-    default-sort-order="descending">
+    :default-sort = "{prop: 'date', order: 'descending'}"
+    style="width: 100%">
     <el-table-column
       prop="date"
       label="Date"
@@ -1455,8 +1454,7 @@ When the row content is too long and you do not want to display the horizontal s
 | empty-text | Displayed text when data is empty. You can customize this area with `slot="empty"` | String | — | No Data |
 | default-expand-all | whether expand all rows by default, only works when the table has a column type="expand" | Boolean | — | false |
 | expand-row-keys | set expanded rows by this prop, prop's value is the keys of expand rows, you should set row-key before using this prop | Array | — | |
-| default-sort-prop | set the `prop` of default sort column. | String | - | - |
-| default-sort-order | set the default sort order. You should set `default-sort-prop` before using this prop. | String | ascending, descending | ascending |
+| default-sort | set the default sort column and order. property `prop` is used to set default sort column, property `order` is used to set default sort order | Object | `order`: ascending, descending | if `prop` is set, and `order` is not set, then `order` is default to ascending |
 
 ### Table Events
 | Event Name | Description | Parameters |

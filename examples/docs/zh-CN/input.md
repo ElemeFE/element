@@ -231,13 +231,13 @@ export default {
 
 带有图标标记输入类型
 
-::: demo 可以通过 `icon` 属性在 input 组件尾部增加显示图标。
+::: demo 可以通过 `icon` 属性在 input 组件尾部增加显示图标，可以通过 `on-icon-click` 钩子函数来在点击图标后执行需要的逻辑。
 ```html
 <el-input
   placeholder="请选择日期"
-  icon="time"
+  icon="search"
   v-model="input2"
-  @click="handleIconClick">
+  :on-icon-click="handleIconClick">
 </el-input>
 
 <script>
@@ -771,13 +771,14 @@ export default {
 | resize | 控制是否能被用户缩放 | string | none, both, horizontal, vertical | — |
 | autofocus | 原生属性，自动获取焦点 | boolean | true, false | false |
 | form | 原生属性 | string | — | — |
+| on-icon-click | 点击 Input 内的图标的钩子函数 | function | — | — |
 
 ### Input Events
 | 事件名称 | 说明 | 回调参数 |
 |---------|--------|---------|
 | click | 点击 Input 内的图标时触发 | (event: Event) |
 | blur | 在 Input 失去焦点时触发 | (event: Event) |
-| focus | 在 Input 或得焦点时触发 | (event: Event) |
+| focus | 在 Input 获得焦点时触发 | (event: Event) |
 | change | 在 Input 值改变时触发 | (value: string \| number) |
 
 ### Autocomplete Attributes

@@ -1,6 +1,7 @@
 @import "./date-picker/picker.css";
 @import "./date-picker/date-picker.css";
 @import "./common/var.css";
+@import "./scrollbar.css";
 
 .time-select {
   margin: 5px 0;
