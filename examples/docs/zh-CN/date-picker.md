@@ -295,6 +295,7 @@
 | align | 对齐方式 | string | left, center, right | left |
 | popper-class | DatePicker 下拉框的类名 | string | — | — |
 |picker-options | 当前时间日期选择器特有的选项参考下表 | object |  — | {} |
+| range-separator | 选择范围时的分隔符 | string | - | ' - ' |
 
 ### Picker Options
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
