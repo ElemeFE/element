@@ -371,7 +371,7 @@ describe('Tree', () => {
   });
 
   it('handleNodeOpen & handleNodeClose', (done) => {
-    vm = getTreeVm(':props="defaultProps" lazy :load="loadNode" @node-open="handleNodeOpen" @node-close="handleNodeClose"', {
+    vm = getTreeVm(':props="defaultProps" lazy :load="loadNode" @node-expand="handleNodeOpen" @node-collapse="handleNodeClose"', {
       methods: {
         loadNode(node, resolve) {
           if (node.level === 0) {
