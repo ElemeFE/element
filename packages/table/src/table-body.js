@@ -17,7 +17,8 @@ export default {
     rowClassName: [String, Function],
     rowStyle: [Object, Function],
     fixed: String,
-    highlight: Boolean
+    highlight: Boolean,
+    autoCheckbox: Boolean
   },
 
   render(h) {
@@ -111,6 +112,16 @@ export default {
       if (newRow) {
         newRow.classList.add('current-row');
       }
+    },
+    'store.states.selection'(newVal) {
+      if (!this.autoCheckbox) return;
+      const el = this.$el;
+      if (!el) return;
+      if (newVal.length) {
+        el.classList.add('show-cell-checkbox');
+      } else {
+        el.classList.remove('show-cell-checkbox');
+      }
     }
   },
 
@@ -198,7 +209,7 @@ export default {
 
       // 判断是否text-overflow, 如果是就显示tooltip
       const cellChild = event.target.querySelector('.cell');
-
+      if (!cellChild) return;
       this.tooltipDisabled = cellChild.scrollWidth <= cellChild.offsetWidth;
     },
 
@@ -207,6 +218,7 @@ export default {
       if (!cell) return;
 
       const oldHoverState = this.table.hoverState;
+      if (!oldHoverState) return;
       this.table.$emit('cell-mouse-leave', oldHoverState.row, oldHoverState.column, oldHoverState.cell, event);
     },
 

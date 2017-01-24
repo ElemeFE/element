@@ -38,10 +38,11 @@ const forced = {
         domProps-value={ this.isAllSelected } />;
     },
     renderCell: function(h, { row, column, store, $index }) {
-      return <el-checkbox
+      return <div class="auto-show-box-cell"><el-checkbox
+        class="auto-display-checkbox"
         domProps-value={ store.isSelected(row) }
         disabled={ column.selectable ? !column.selectable.call(null, row, $index) : false }
-        on-input={ () => { store.commit('rowSelectedChanged', row); } } />;
+        on-input={ () => { store.commit('rowSelectedChanged', row); } } /><div class="checkbox-label"><span>{$index + 1}</span></div></div>;
     },
     sortable: false,
     resizable: false

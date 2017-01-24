@@ -275,6 +275,10 @@
       vertical-align: middle;
       width: 100%;
       box-sizing: border-box;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
       &.highlight {
         color: var(--color-primary);
@@ -354,6 +358,40 @@
       line-height: 24px;
       padding-left: 18px;
       padding-right: 18px;
+    }
+
+    & .el-table-column--selection .cell {
+      height: 100%;
+      padding: 0;
+    }
+
+    & .auto-show-box-cell {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &:hover {
+        & .auto-display-checkbox {
+          display: block;
+        }
+        & .checkbox-label {
+          display: none;
+        }
+      }
+    }
+
+    & .auto-show-box-cell .auto-display-checkbox {
+      display: none;
+    }
+
+    & .show-cell-checkbox {
+      .auto-display-checkbox {
+        display: block;
+      }
+      .checkbox-label {
+        display: none;
+      }
     }
 
     & tr input[type="checkbox"] {

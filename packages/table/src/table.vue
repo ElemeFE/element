@@ -30,6 +30,7 @@
         :row-class-name="rowClassName"
         :row-style="rowStyle"
         :highlight="highlightCurrentRow"
+        :auto-checkbox="autoCheckbox"
         :style="{ width: bodyWidth }">
       </table-body>
       <div :style="{ width: bodyWidth }" class="el-table__empty-block" v-if="!data || data.length === 0">
@@ -169,7 +170,10 @@
 
       defaultExpandAll: Boolean,
 
-      defaultSort: Object
+      defaultSort: Object,
+
+      // 勾选框自动隐藏
+      autoCheckbox: Boolean
     },
 
     components: {

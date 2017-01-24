@@ -1064,6 +1064,7 @@
   <el-table
     :data="tableData3"
     border
+    :auto-checkbox="true"
     style="width: 100%"
     @selection-change="handleSelectionChange">
     <el-table-column
