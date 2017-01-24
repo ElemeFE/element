@@ -458,8 +458,8 @@
   --tag-gray-border: var(--color-light-gray);
   --tag-gray-color: var(--link-color);
 
-  --tag-primary-fill: rgba(32,159,255,0.10);
-  --tag-primary-border: rgba(32,159,255,0.20);
+  --tag-primary-fill: rgba(var(--color-primary),0.10);
+  --tag-primary-border: rgba(var(--color-primary),0.20);
   --tag-primary-color: var(--color-primary);
 
   --tag-success-fill: rgba(18,206,102,0.10);
