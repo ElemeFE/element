@@ -59,6 +59,7 @@
       @keydown.native.enter.prevent="selectOption"
       @keydown.native.esc.prevent="visible = false"
       @keydown.native.tab="visible = false"
+      @paste.native="debouncedOnInputChange"
       @mouseenter.native="inputHovering = true"
       @mouseleave.native="inputHovering = false"
       :icon="iconClass">
@@ -243,6 +244,8 @@
         });
         this.hoverIndex = -1;
         if (this.multiple && this.filterable) {
+          this.inputLength = this.$refs.input.value.length * 15 + 20;
+          this.managePlaceholder();
           this.resetInputHeight();
         }
         if (this.remote && typeof this.remoteMethod === 'function') {
