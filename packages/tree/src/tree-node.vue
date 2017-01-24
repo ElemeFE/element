@@ -145,6 +145,7 @@
       },
 
       handleExpandIconClick() {
+        if (this.node.isLeaf) return;
         if (this.expanded) {
           this.tree.$emit('node-collapse', this.node.data, this.node, this);
           this.node.collapse();
