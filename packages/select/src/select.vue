@@ -650,7 +650,7 @@
         this.resetInputHeight();
       }
       this.$nextTick(() => {
-        if (this.$refs.reference.$el) {
+        if (this.$refs.reference && this.$refs.reference.$el) {
           this.inputWidth = this.$refs.reference.$el.getBoundingClientRect().width;
         }
       });
