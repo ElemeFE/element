@@ -300,6 +300,7 @@
             } else {
               if (!this.remote) {
                 this.broadcast('ElOption', 'queryChange', '');
+                this.broadcast('ElOptionGroup', 'queryChange');
               }
               this.broadcast('ElInput', 'inputSelect');
             }
