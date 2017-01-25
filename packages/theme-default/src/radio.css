@@ -171,6 +171,14 @@
       z-index: -1;
       left: -999px;
 
+      &:checked {
+        & + .el-radio-button__inner {
+          color: var(--radio-button-checked-color);
+          background-color: var(--radio-button-checked-fill);
+          border-color: var(--radio-button-checked-border-color);
+        }
+      }
+
       &:disabled {
         & + .el-radio-button__inner {
           color: var(--button-disabled-color);

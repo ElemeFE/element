@@ -369,7 +369,8 @@
      * @method
      * @memberof Popper
      * @param config {HTMLElement} popper element
-     * @returns {HTMLElement} reference element
+     * @param reference {HTMLElement} reference element
+     * @returns {String} position
      */
     Popper.prototype._getPosition = function(popper, reference) {
         var container = getOffsetParent(reference);
@@ -574,9 +575,10 @@
      * Helper used to know if the given modifier depends from another one.
      * @method
      * @memberof Popper
+     * @param {String} requesting - name of requesting modifier
+     * @param {String} requested - name of requested modifier
      * @returns {Boolean}
      */
-
     Popper.prototype.isModifierRequired = function(requesting, requested) {
         var index = getArrayKeyIndex(this._options.modifiers, requesting);
         return !!this._options.modifiers.slice(0, index).filter(function(modifier) {
@@ -1115,7 +1117,7 @@
      * Check if the given variable is a function
      * @function
      * @ignore
-     * @argument {Element} element - Element to check
+     * @argument {*} functionToCheck - variable to check
      * @returns {Boolean} answer to: is a function?
      */
     function isFunction(functionToCheck) {
@@ -1158,7 +1160,7 @@
         // whether the IE version is lower than 11
         var isIE = navigator.userAgent.indexOf("MSIE") != -1;
 
-        // fix ie document bouding top always 0 bug
+        // fix ie document bounding top always 0 bug
         var rectTop = isIE && element.tagName === 'HTML'
             ? -element.scrollTop
             : rect.top;

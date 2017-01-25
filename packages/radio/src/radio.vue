@@ -2,7 +2,7 @@
   <label class="el-radio">
     <span class="el-radio__input"
       :class="{
-        'is-disabled': disabled,
+        'is-disabled': isDisabled,
         'is-checked': model === label,
         'is-focus': focus
       }"
@@ -16,7 +16,7 @@
         @focus="focus = true"
         @blur="focus = false"
         :name="name"
-        :disabled="disabled">
+        :disabled="isDisabled">
     </span>
     <span class="el-radio__label">
       <slot></slot>
@@ -73,6 +73,12 @@
             this.$emit('input', val);
           }
         }
+      },
+
+      isDisabled() {
+        return this.isGroup
+          ? this._radioGroup.disabled || this.disabled
+          : this.disabled;
       }
     }
   };

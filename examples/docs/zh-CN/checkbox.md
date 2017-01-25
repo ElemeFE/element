@@ -1,4 +1,5 @@
 <script>
+  const cityOptions = ['上海', '北京', '广州', '深圳'];
   module.exports = {
     data() {
       return {
@@ -7,12 +8,25 @@
         checked: false,
         checked1: false,
         checked2: true,
-        isValid: '可用'
+        isValid: '可用',
+        checkAll: false,
+        cities: cityOptions,
+        checkedCities: ['上海', '北京'],
+        isIndeterminate: false
       };
     },
     methods: {
       handleChange(ev) {
         console.log(ev);
+      },
+      handleCheckAllChange(event) {
+        this.checkedCities = event.target.checked ? cityOptions : [];
+        this.isIndeterminate = false;
+      },
+      handleCheckedCitiesChange(value) {
+        let checkedCount = value.length;
+        this.checkAll = checkedCount === this.cities.length;
+        this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
       }
     }
   };
@@ -102,6 +116,47 @@
       return {
         checkList: ['选中且禁用','复选框 A']
       };
+    }
+  };
+</script>
+```
+:::
+
+### indeterminate 状态
+
+`indeterminate` 属性用以表示 checkbox 的不确定状态，一般用于实现全选的效果
+
+:::demo
+
+```html
+<template>
+  <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
+  <div style="margin: 15px 0;"></div>
+  <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
+    <el-checkbox v-for="city in cities" :label="city">{{city}}</el-checkbox>
+  </el-checkbox-group>
+</template>
+<script>
+  const cityOptions = ['上海', '北京', '广州', '深圳'];
+  export default {
+    data() {
+      return {
+        checkAll: true,
+        checkedCities: [],
+        cities: cityOptions,
+        isIndeterminate: false
+      };
+    },
+    methods: {
+      handleCheckAllChange(event) {
+        this.checkedCities = event.target.checked ? cityOptions : [];
+        this.isIndeterminate = false;
+      },
+      handleCheckedCitiesChange(value) {
+        let checkedCount = value.length;
+        this.checkAll = checkedCount === this.cities.length;
+        this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
+      }
     }
   };
 </script>

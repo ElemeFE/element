@@ -51,18 +51,8 @@
           user: '',
           region: ''
         },
-        formStacked: {
-          name: '',
-          region: '',
-          type: '',
-          remark: ''
-        },
-        formAlignRight: {
-          name: '',
-          region: '',
-          type: ''
-        },
-        formAlignLeft: {
+        labelPosition: 'right',
+        formLabelAlign: {
           name: '',
           region: '',
           type: ''
@@ -221,13 +211,6 @@
         margin-right: 10px;
       }
     }
-    .demo-form-stacked {
-      width: 270px;
-
-      .el-select .el-input {
-        width: 100%;
-      }
-    }
     .demo-ruleForm {
       width: 480px;
 
@@ -372,27 +355,32 @@ When the vertical space is limited and the form is relatively simple, you can pu
 
 Depending on your design, there are several different ways to align your label element.
 
-#### Top
-
 :::demo The `label-position` attribute decides how labels align, it can be `top` or `left`. When set to `top`, labels will be placed at the top of the form field.
 
 ```html
-<el-form label-position="top" :model="formStacked" class="demo-form-stacked">
+<el-radio-group v-model="labelPosition" size="small">
+  <el-radio-button label="left">Left</el-radio-button>
+  <el-radio-button label="right">Right</el-radio-button>
+  <el-radio-button label="top">Top</el-radio-button>
+</el-radio-group>
+<div style="margin: 20px;"></div>
+<el-form :label-position="labelPosition" label-width="100px" :model="formLabelAlign">
   <el-form-item label="Name">
-    <el-input v-model="formStacked.name"></el-input>
+    <el-input v-model="formLabelAlign.name"></el-input>
   </el-form-item>
   <el-form-item label="Activity zone">
-    <el-input v-model="formStacked.region"></el-input>
+    <el-input v-model="formLabelAlign.region"></el-input>
   </el-form-item>
   <el-form-item label="Activity form">
-    <el-input v-model="formStacked.type"></el-input>
+    <el-input v-model="formLabelAlign.type"></el-input>
   </el-form-item>
 </el-form>
 <script>
   export default {
     data() {
       return {
-        formStacked: {
+        labelPosition: 'right',
+        formLabelAlign: {
           name: '',
           region: '',
           type: ''
@@ -402,71 +390,6 @@ Depending on your design, there are several different ways to align your label e
   }
 </script>
 ```
-:::
-
-#### Right
-
-:::demo When `label-position` is omitted, labels will align to the right
-
-```html
-<el-form :model="formAlignRight" label-width="120px">
-  <el-form-item label="Activity name">
-    <el-input v-model="formAlignRight.name"></el-input>
-  </el-form-item>
-  <el-form-item label="Promote area">
-    <el-input v-model="formAlignRight.region"></el-input>
-  </el-form-item>
-  <el-form-item label="Form of activity">
-    <el-input v-model="formAlignRight.type"></el-input>
-  </el-form-item>
-</el-form>
-<script>
-  export default {
-    data() {
-      return {
-        formAlignRight: {
-          name: '',
-          region: '',
-          type: ''
-        }
-      };
-    }
-  }
-</script>
-```
-:::
-
-#### Left
-
-:::demo When `label-position` is set to `top`, labels will align to the left.
-
-```html
-<el-form :model="formAlignLeft" label-position="left" label-width="120px">
-  <el-form-item label="Activity name">
-    <el-input v-model="formAlignLeft.name"></el-input>
-  </el-form-item>
-  <el-form-item label="Promotion area">
-    <el-input v-model="formAlignLeft.region"></el-input>
-  </el-form-item>
-  <el-form-item label="Activity form">
-    <el-input v-model="formAlignLeft.type"></el-input>
-  </el-form-item>
-</el-form>
-<script>
-  export default {
-    data() {
-      return {
-        formAlignLeft: {
-          name: '',
-          region: '',
-          type: ''
-        }
-      };
-    }
-  }
-</script>
-```
-
 :::
 
 ### Validation

@@ -21,6 +21,7 @@ const defaults = {
   cancelButtonText: '',
   confirmButtonClass: '',
   cancelButtonClass: '',
+  customClass: '',
   beforeClose: null
 };
 
