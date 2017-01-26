@@ -3,13 +3,6 @@
 
 @component-namespace el {
   @b tooltip {
-    display: inline-block;
-
-    @e rel {
-      display: inline-block;
-      position: relative;
-    }
-
     @e popper {
       position: absolute;
       border-radius: 4px;

@@ -93,6 +93,10 @@ export default {
     },
     modalClass: {
     },
+    modalAppendToBody: {
+      type: Boolean,
+      default: false
+    },
     lockScroll: {
       type: Boolean,
       default: true
@@ -208,7 +212,7 @@ export default {
           PopupManager.closeModal(this._popupId);
           this._closing = false;
         }
-        PopupManager.openModal(this._popupId, PopupManager.nextZIndex(), dom, props.modalClass, props.modalFade);
+        PopupManager.openModal(this._popupId, PopupManager.nextZIndex(), this.modalAppendToBody ? undefined : dom, props.modalClass, props.modalFade);
         if (props.lockScroll) {
           if (!this.bodyOverflow) {
             this.bodyPaddingRight = document.body.style.paddingRight;

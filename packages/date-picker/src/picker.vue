@@ -329,7 +329,7 @@ export default {
   created() {
     RANGE_SEPARATOR = this.rangeSeparator;
     // vue-popper
-    this.options = {
+    this.popperOptions = {
       boundariesPadding: 0,
       gpuAcceleration: false
     };

@@ -69,7 +69,7 @@ export default {
     };
   },
 
-  created() {
+  beforeCreate() {
     this.$parent.steps.push(this);
   },
 
@@ -118,9 +118,11 @@ export default {
     const isCenter = parent.center;
     const len = parent.steps.length;
     const isLast = this.isLast = parent.steps[parent.steps.length - 1] === this;
-    const space = parent.space
+    const space = typeof parent.space === 'number'
       ? parent.space + 'px'
-      : 100 / (isCenter ? len - 1 : len) + '%';
+      : parent.space
+        ? parent.space
+        : 100 / (isCenter ? len - 1 : len) + '%';
 
     if (parent.direction === 'horizontal') {
       this.style = { width: space };
