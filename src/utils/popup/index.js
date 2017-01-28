@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import merge from 'element-ui/src/utils/merge';
 import PopupManager from 'element-ui/src/utils/popup/popup-manager';
+import getScrollBarWidth from '../scrollbar-width';
 
 let idSeed = 1;
 const transitions = [];
@@ -38,29 +39,6 @@ const hookTransition = (transition) => {
 };
 
 let scrollBarWidth;
-const getScrollBarWidth = () => {
-  if (Vue.prototype.$isServer) return;
-  if (scrollBarWidth !== undefined) return scrollBarWidth;
-
-  const outer = document.createElement('div');
-  outer.style.visibility = 'hidden';
-  outer.style.width = '100px';
-  outer.style.position = 'absolute';
-  outer.style.top = '-9999px';
-  document.body.appendChild(outer);
-
-  const widthNoScroll = outer.offsetWidth;
-  outer.style.overflow = 'scroll';
-
-  const inner = document.createElement('div');
-  inner.style.width = '100%';
-  outer.appendChild(inner);
-
-  const widthWithScroll = inner.offsetWidth;
-  outer.parentNode.removeChild(outer);
-
-  return widthNoScroll - widthWithScroll;
-};
 
 const getDOM = function(dom) {
   if (dom.nodeType === 3) {
@@ -91,8 +69,7 @@ export default {
       type: Boolean,
       default: true
     },
-    modalClass: {
-    },
+    modalClass: {},
     lockScroll: {
       type: Boolean,
       default: true
@@ -294,4 +271,6 @@ export default {
   }
 };
 
-export { PopupManager };
+export {
+  PopupManager
+};
