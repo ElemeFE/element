@@ -1,5 +1,7 @@
 import Vue from 'vue';
-import { PopupManager } from 'element-ui/src/utils/popup';
+import {
+  PopupManager
+} from 'element-ui/src/utils/popup';
 
 const PopperJS = Vue.prototype.$isServer ? function() {} : require('./popper');
 const stop = e => e.stopPropagation();
@@ -7,7 +9,7 @@ const stop = e => e.stopPropagation();
 /**
  * @param {HTMLElement} [reference=$refs.reference] - The reference element used to position the popper.
  * @param {HTMLElement} [popper=$refs.popper] - The HTML element used as popper, or a configuration used to generate the popper.
- * @param {String} [placement=button] - Placement of the popper accepted values: top(-start, -end), right(-start, -end), bottom(-start, -right), left(-start, -end)
+ * @param {String} [placement=button] - Placement of the popper accepted values: top(-start, -end), right(-start, -end), bottom(-start, -end), left(-start, -end)
  * @param {Number} [offset=0] - Amount of pixels the popper will be shifted (can be negative).
  * @param {Boolean} [visible=false] Visibility of the popup element.
  * @param {Boolean} [visible-arrow=false] Visibility of the arrow, no style.
@@ -79,8 +81,8 @@ export default {
       let reference = this.referenceElm = this.referenceElm || this.reference || this.$refs.reference;
 
       if (!reference &&
-          this.$slots.reference &&
-          this.$slots.reference[0]) {
+        this.$slots.reference &&
+        this.$slots.reference[0]) {
         reference = this.referenceElm = this.$slots.reference[0].elm;
       }
       if (!popper || !reference) return;
@@ -120,12 +122,15 @@ export default {
     },
 
     resetTransformOrigin() {
-      let placementMap = { top: 'bottom', bottom: 'top', left: 'right', right: 'left' };
+      let placementMap = {
+        top: 'bottom',
+        bottom: 'top',
+        left: 'right',
+        right: 'left'
+      };
       let placement = this.popperJS._popper.getAttribute('x-placement').split('-')[0];
       let origin = placementMap[placement];
-      this.popperJS._popper.style.transformOrigin = ['top', 'bottom'].indexOf(placement) > -1
-        ? `center ${ origin }`
-        : `${ origin } center`;
+      this.popperJS._popper.style.transformOrigin = ['top', 'bottom'].indexOf(placement) > -1 ? `center ${ origin }` : `${ origin } center`;
     },
 
     appendArrow(element) {
