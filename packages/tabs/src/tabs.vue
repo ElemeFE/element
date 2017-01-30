@@ -1,10 +1,11 @@
 <script>
-  import TabBar from './tab-bar';
+  import TabNav from './tab-nav';
+
   module.exports = {
     name: 'ElTabs',
 
     components: {
-      TabBar
+      TabNav
     },
 
     props: {
@@ -18,7 +19,6 @@
 
     data() {
       return {
-        children: null,
         currentName: this.value || this.activeName,
         panes: []
       };
@@ -30,6 +30,13 @@
       },
       value(value) {
         this.setCurrentName(value);
+      },
+      currentName(value) {
+        if (this.$refs.nav) {
+          this.$nextTick(_ => {
+            this.$refs.nav.scrollToActiveTab();
+          });
+        }
       }
     },
 
@@ -78,7 +85,7 @@
       const newButton = editable || addable
         ? (
             <span
-              class="el-tabs__new-button"
+              class="el-tabs__new-tab"
               on-click={ handleTabAdd }
             >
                 <i class="el-icon-plus"></i>
@@ -86,38 +93,17 @@
           )
         : null;
 
-      const tabs = this._l(panes, (pane, index) => {
-        let tabName = pane.name || pane.index || index;
-        const closable = pane.isClosable || editable;
-
-        if (currentName === undefined && index === 0) {
-          this.setCurrentName(tabName);
-        }
-
-        pane.index = index;
-
-        const btnClose = closable
-          ? <span class="el-icon-close" on-click={(ev) => { handleTabRemove(pane, ev); }}></span>
-          : null;
-
-        const tabLabelContent = pane.$slots.label || pane.label;
-        return (
-          <div
-            class={{
-              'el-tabs__item': true,
-              'is-active': pane.active,
-              'is-disabled': pane.disabled,
-              'is-closable': closable
-            }}
-            ref="tabs"
-            refInFor
-            on-click={(ev) => { handleTabClick(pane, tabName, ev); }}
-          >
-            {tabLabelContent}
-            {btnClose}
-          </div>
-        );
-      });
+      const navData = {
+        props: {
+          currentName,
+          onTabClick: handleTabClick,
+          onTabRemove: handleTabRemove,
+          editable,
+          type,
+          panes
+        },
+        ref: 'nav'
+      };
 
       return (
         <div class={{
@@ -126,15 +112,19 @@
           'el-tabs--border-card': type === 'border-card'
         }}>
           <div class="el-tabs__header">
-            {!type ? <tab-bar tabs={panes}></tab-bar> : null}
-            {tabs}
             {newButton}
+            <tab-nav { ...navData }></tab-nav>
           </div>
           <div class="el-tabs__content">
             {this.$slots.default}
           </div>
         </div>
       );
+    },
+    created() {
+      if (!this.currentName) {
+        this.setCurrentName('1');
+      }
     }
   };
 </script>
