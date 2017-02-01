@@ -24,7 +24,7 @@ describe('Tabs', () => {
     vm.$refs.tabs.$on('tab-click', spy);
 
     setTimeout(_ => {
-      const tabList = vm.$refs.tabs.$refs.tabs;
+      const tabList = vm.$refs.tabs.$refs.nav.$refs.tabs;
       expect(tabList[0].classList.contains('is-active')).to.be.true;
       expect(paneList[0].style.display).to.not.ok;
 
@@ -60,7 +60,7 @@ describe('Tabs', () => {
     }, true);
     setTimeout(_ => {
       const paneList = vm.$el.querySelector('.el-tabs__content').children;
-      const tabList = vm.$refs.tabs.$refs.tabs;
+      const tabList = vm.$refs.tabs.$refs.nav.$refs.tabs;
 
       expect(tabList[1].classList.contains('is-active')).to.be.true;
       expect(paneList[1].style.display).to.not.ok;
@@ -204,7 +204,7 @@ describe('Tabs', () => {
     }, true);
 
     setTimeout(_ => {
-      const tabList = vm.$refs.tabs.$refs.tabs;
+      const tabList = vm.$refs.tabs.$refs.nav.$refs.tabs;
       const paneList = vm.$el.querySelector('.el-tabs__content').children;
 
       tabList[1].querySelector('.el-icon-close').click();
@@ -213,7 +213,7 @@ describe('Tabs', () => {
         expect(paneList.length).to.be.equal(2);
         expect(tabList[1].classList.contains('is-active')).to.be.true;
 
-        vm.$refs.tabs.$el.querySelector('.el-tabs__new-button').click();
+        vm.$refs.tabs.$el.querySelector('.el-tabs__new-tab').click();
         vm.$nextTick(_ => {
           expect(tabList.length).to.be.equal(3);
           expect(paneList.length).to.be.equal(3);
@@ -289,10 +289,10 @@ describe('Tabs', () => {
     }, true);
 
     setTimeout(_ => {
-      const tabList = vm.$refs.tabs.$refs.tabs;
+      const tabList = vm.$refs.tabs.$refs.nav.$refs.tabs;
       const paneList = vm.$el.querySelector('.el-tabs__content').children;
 
-      vm.$refs.tabs.$el.querySelector('.el-tabs__new-button').click();
+      vm.$refs.tabs.$el.querySelector('.el-tabs__new-tab').click();
 
       vm.$nextTick(_ => {
         expect(tabList.length).to.be.equal(3);
@@ -339,7 +339,7 @@ describe('Tabs', () => {
     }, true);
 
     vm.$nextTick(_ => {
-      const tabList = vm.$refs.tabs.$refs.tabs;
+      const tabList = vm.$refs.tabs.$refs.nav.$refs.tabs;
 
       tabList[1].click();
       vm.$nextTick(_ => {
