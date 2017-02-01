@@ -123,7 +123,7 @@
     },
     created() {
       if (!this.currentName) {
-        this.setCurrentName('1');
+        this.setCurrentName('0');
       }
     }
   };
