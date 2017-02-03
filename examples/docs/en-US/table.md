@@ -1429,6 +1429,7 @@ When the row content is too long and you do not want to display the horizontal s
           address: 'No. 189, Grove St, Los Angeles',
           zip: 'CA 90036'
         }]
+      }
     }
   }
 </script>
