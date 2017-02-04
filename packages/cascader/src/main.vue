@@ -15,6 +15,7 @@
     v-clickoutside="handleClickoutside"
   >
     <el-input
+      ref="input"
       :readonly="!filterable"
       :placeholder="displayValue ? undefined : placeholder"
       v-model="inputValue"
@@ -49,6 +50,7 @@ import ElInput from 'element-ui/packages/input';
 import Popper from 'element-ui/src/utils/vue-popper';
 import Clickoutside from 'element-ui/src/utils/clickoutside';
 import emitter from 'element-ui/src/mixins/emitter';
+import Locale from 'element-ui/src/mixins/locale';
 
 const popperMixin = {
   props: {
@@ -71,7 +73,7 @@ export default {
 
   directives: { Clickoutside },
 
-  mixins: [popperMixin, emitter],
+  mixins: [popperMixin, emitter, Locale],
 
   components: {
     ElInput
@@ -146,6 +148,9 @@ export default {
       this.menu.visible = true;
       this.menu.$on('pick', this.handlePick);
       this.updatePopper();
+      this.$nextTick(_ => {
+        this.menu.inputWidth = this.$refs.input.$el.offsetWidth - 2;
+      });
     },
     hideMenu() {
       this.menu.visible = false;
@@ -172,18 +177,24 @@ export default {
       });
 
       if (filteredFlatOptions.length > 0) {
-        this.menu.options = filteredFlatOptions.map(optionStack => {
+        filteredFlatOptions = filteredFlatOptions.map(optionStack => {
           return {
             __IS__FLAT__OPTIONS: true,
             value: optionStack.map(item => item.value),
-            label: this.renderRenderFilteredOption(value, optionStack)
+            label: this.renderFilteredOptionLabel(value, optionStack)
           };
         });
       } else {
-        return [{ label: 'not found content', value: '', disabled: true }];
+        filteredFlatOptions = [{
+          __IS__FLAT__OPTIONS: true,
+          label: this.t('el.cascader.noMatch'),
+          value: '',
+          disabled: true
+        }];
       }
+      this.menu.options = filteredFlatOptions;
     },
-    renderRenderFilteredOption(inputValue, optionsStack) {
+    renderFilteredOptionLabel(inputValue, optionsStack) {
       return optionsStack.map(({ label }, index) => {
         const node = label.indexOf(inputValue) > -1 ? this.highlightKeyword(label, inputValue) : label;
         return index === 0 ? node : [' / ', node];
@@ -203,8 +214,7 @@ export default {
         const optionsStack = ancestor.concat(option);
         if (!option.children) {
           flatOptions.push(optionsStack);
-        }
-        if (option.children) {
+        } else {
           flatOptions = flatOptions.concat(this.flattenOptions(option.children, optionsStack));
         }
       });

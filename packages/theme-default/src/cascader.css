@@ -150,5 +150,15 @@
         }
       }
     }
+
+    @m flexible {
+      height: auto;
+      max-height: 180px;
+      overflow: auto;
+
+      .el-cascader-menu__item {
+        overflow: visible;
+      }
+    }
   }
 }

@@ -4,6 +4,7 @@
 
     data() {
       return {
+        inputWidth: 0,
         options: [],
         visible: false,
         activeValue: [],
@@ -56,34 +57,19 @@
     },
 
     methods: {
-      selectItem(item, menuIndex) {
-        const len = this.activeOptions.length;
-        const closeMenu = !item.children;
-
+      select(item, menuIndex) {
         if (item.__IS__FLAT__OPTIONS) {
-          this.activeValue.splice(menuIndex, len, ...item.value);
+          this.activeValue = item.value;
         } else {
-          this.activeValue.splice(menuIndex, len, item.value);
+          this.activeValue.splice(menuIndex, 1, item.value);
         }
-
-        if (this.changeOnSelect) {
-          this.$emit('pick', this.activeValue, closeMenu);
-        }
+        this.$emit('pick', this.activeValue);
       },
-      expandItem(item, menuIndex) {
+      activeItem(item, menuIndex) {
         const len = this.activeOptions.length;
-        if (item.children) {
-          this.activeValue.splice(menuIndex, len, item.value);
-          this.activeOptions.splice(menuIndex + 1, len, item.children);
-        }
-      },
-      handleItemClick(item, menuIndex) {
-        this.expandItem(item, menuIndex);
-        this.selectItem(item, menuIndex);
-
-        if (!item.children && !this.changeOnSelect) {
-          this.$emit('pick', this.activeValue);
-        }
+        this.activeValue.splice(menuIndex, len, item.value);
+        this.activeOptions.splice(menuIndex + 1, len, item.children);
+        if (this.changeOnSelect) this.$emit('pick', this.activeValue, false);
       }
     },
 
@@ -96,17 +82,24 @@
         popperClass
       } = this;
 
-      const menus = this._l(activeOptions, (menu, index) => {
+      const menus = this._l(activeOptions, (menu, menuIndex) => {
+        let isFlat = false;
         const items = this._l(menu, item => {
           const events = {
             on: {}
           };
 
+          if (item.__IS__FLAT__OPTIONS) isFlat = true;
+
           if (!item.disabled) {
-            if (expandTrigger === 'click' || !item.children) {
-              events.on['click'] = () => { this.handleItemClick(item, index); };
+            if (item.children) {
+              let triggerEvent = {
+                click: 'click',
+                hover: 'mouseenter'
+              }[expandTrigger];
+              events.on[triggerEvent] = () => { this.activeItem(item, menuIndex); };
             } else {
-              events.on['mouseenter'] = () => { this.expandItem(item, index); };
+              events.on.click = () => { this.select(item, menuIndex); };
             }
           }
 
@@ -115,7 +108,7 @@
               class={{
                 'el-cascader-menu__item': true,
                 'el-cascader-menu__item--extensible': item.children,
-                'is-active': item.value === activeValue[index],
+                'is-active': item.value === activeValue[menuIndex],
                 'is-disabled': item.disabled
               }}
               {...events}
@@ -124,11 +117,31 @@
             </li>
           );
         });
-        return <ul class="el-cascader-menu">{items}</ul>;
+        let menuStyle = {};
+        if (isFlat) {
+          menuStyle.width = this.inputWidth + 'px';
+        }
+
+        return (
+          <ul
+            class={{
+              'el-cascader-menu': true,
+              'el-cascader-menu--flexible': isFlat
+            }}
+            style={menuStyle}>
+            {items}
+          </ul>
+        );
       });
       return (
         <transition name="el-zoom-in-top">
-          <div class={['el-cascader-menus', popperClass]} v-show={visible}>
+          <div
+            v-show={visible}
+            class={[
+              'el-cascader-menus',
+              popperClass
+            ]}
+          >
             {menus}
           </div>
         </transition>
