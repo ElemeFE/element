@@ -34,7 +34,6 @@
         cache: false,
         get() {
           const activeValue = this.activeValue;
-          let options = this.options;
 
           const loadActiveOptions = (options, activeOptions = []) => {
             const level = activeOptions.length;
@@ -49,9 +48,7 @@
             return activeOptions;
           };
 
-          const result = loadActiveOptions(options);
-
-          return result;
+          return loadActiveOptions(this.options);
         }
       }
     },

@@ -146,6 +146,7 @@ export default {
 
       this.menu.value = this.currentValue.slice(0);
       this.menu.visible = true;
+      this.menu.options = this.options;
       this.menu.$on('pick', this.handlePick);
       this.updatePopper();
       this.$nextTick(_ => {
@@ -153,18 +154,20 @@ export default {
       });
     },
     hideMenu() {
-      this.menu.visible = false;
       this.inputValue = '';
+      this.menu.visible = false;
     },
     handlePick(value, close = true) {
       this.currentValue = value;
       this.$emit('input', value);
       this.$emit('change', value);
+
       if (close) {
         this.menuVisible = false;
       }
     },
     handleInputChange(value) {
+      if (!this.menuVisible) return;
       const flatOptions = this.flatOptions;
 
       if (!value) {
@@ -228,9 +231,12 @@ export default {
       this.menuVisible = false;
     },
     handleClick() {
-      if (!this.disabled) {
-        this.menuVisible = !this.menuVisible;
+      if (this.disabled) return;
+      if (this.filterable) {
+        this.menuVisible = true;
+        return;
       }
+      this.menuVisible = !this.menuVisible;
     }
   }
 };

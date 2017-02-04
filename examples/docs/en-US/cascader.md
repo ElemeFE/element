@@ -473,7 +473,7 @@ Search and select options directly.
 |---------- |-------------------- |---------|-------------  |-------- |
 | options   | data source of the options | array  |       —        |     —    |
 | value | selected value   | array | — |     —    |
-| popup-class | className of popup overlay   | string |      —         |     —    |
+| popper-class | className of popup overlay   | string |      —         |     —    |
 | placeholder | input placeholder | string    |      —         |     —    |
 | disabled  | 是否禁用    | boolean   |  — | false   |
 | clearable  | whether allow clear    | boolean   |  — | false   |

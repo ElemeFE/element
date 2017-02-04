@@ -477,7 +477,7 @@
 |---------- |-------- |---------- |-------------  |-------- |
 | options   | 可选项数据源 | array  |       —        |     —    |
 | value | 指定选中项   | array | — |     —    |
-| popup-class | 自定义浮层类名   | string |      —         |     —    |
+| popper-class | 自定义浮层类名   | string |      —         |     —    |
 | placeholder | 输入框占位文本 | string    |      —         |     —    |
 | disabled  | 是否禁用    | boolean   |  — | false   |
 | clearable  | 是否支持清除    | boolean   |  — | false   |
