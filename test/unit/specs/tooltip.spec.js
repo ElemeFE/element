@@ -78,9 +78,12 @@ describe('Tooltip', () => {
     triggerEvent(tooltip.$el, 'mouseenter');
     it('popperElm is exist', () => expect(tooltip.popperElm).to.exist);
     it('showPopper is true', () => expect(tooltip.showPopper).to.true);
-    it('close popper', () => {
+    it('close popper', done => {
       triggerEvent(tooltip.$el, 'mouseleave');
-      expect(tooltip.showPopper).to.false;
+      setTimeout(() => {
+        expect(tooltip.showPopper).to.false;
+        done();
+      }, 300);
     });
   });
 
