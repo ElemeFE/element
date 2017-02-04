@@ -7,7 +7,9 @@
         ref="dialog"
         :style="style">
         <div class="el-dialog__header">
-          <span class="el-dialog__title">{{title}}</span>
+          <slot name="title">
+            <span class="el-dialog__title">{{title}}</span>
+          </slot>
           <div class="el-dialog__headerbtn">
             <i v-if="showClose" class="el-dialog__close el-icon el-icon-close" @click='close()'></i>
           </div>
