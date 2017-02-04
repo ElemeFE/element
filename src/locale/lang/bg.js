@@ -56,6 +56,10 @@ export default {
       noData: 'Няма данни',
       placeholder: 'Избери'
     },
+    cascader: {
+      noMatch: 'Няма намерени',
+      placeholder: 'Избери'
+    },
     pagination: {
       goto: 'Иди на',
       pagesize: '/страница',
