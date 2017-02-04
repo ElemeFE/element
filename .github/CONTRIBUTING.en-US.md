@@ -1,38 +1,38 @@
 # Element UI Contributing Guide
 
-First of all, it is so grateful for your usage of Element UI.
+Hi! Thank you for choosing Element UI.
 
-Element UI is a Vue 2.0 based component library for developers, designers and product managers, with a set of design resources.
+Element UI is a Vue 2.0 based component library for developers, designers and product managers.
 
-When contributing to this repository, please read guides below.
+We are excited that you are interested in contributing to Element. Before submitting your contribution though, please make sure to take a moment and read through the following guidelines.
 
-## Issue Guide
+## Issue Guidelines
 
-- Issue is only used for bug, feature, and things about design, otherwise it will be closed directly. Any questions during your usage can be asked in Slack or [Gitter](https://gitter.im/ElemeFE/element).
+- Issues are exclusively for bug reports, feature requests and design-related topics. Other questions may be closed directly. If any questions come up when you are using Element, please hit [Gitter](https://gitter.im/ElemeFE/element) for help.
 
-- You should search related contents before commit one new issue to reduce duplicated issues.
+- Before submitting an issue, please check if similar problems have already been issued.
 
-- Please provide the versions of `Element UI` and `Vue` you are using, infos about os and browsers are required too. It is better for you to reproduce your situations in [JSFiddle](https://jsfiddle.net/).
+- Please specify which version of `Element` and `Vue` you are using, and provide OS and browser information. [JSFiddle](https://jsfiddle.net/) is recommended to build a live demo so that your issue can be reproduced clearly.
 
-## Pull Request Guide
+## Pull Request Guidelines
 
-- Please create your own fork, instead of creating branch in the repository directly.
+- Fork this repository to your own account. Do not create branches here.
 
-- Information about commits should format like `[Component Name]: Info about commit.` (e.g. `Button: Fix bug xxx`)
+- Commit info should be formatted as `[Component Name]: Info about commit.` (e.g. `Button: Fix xxx bug`)
 
-- **DO NOT** commit files inside `lib`.
+- **DO NOT** include files inside `lib` directory.
 
-- Make sure `npm run dist` can output the correct files.
+- Make sure that running `npm run dist` outputs the correct files.
 
-- Considering that the need of compatibility and file size, we only include `preset-2015` in `babel`. Things like `Array.prototype.find` and `Object.assign` in `ES2015` are not recommended. You can import 3rd `polyfill` if needed.
+- For the sake of compatibility and file size, our babel configuration only imported `preset-2015`, so APIs like `Array.prototype.find` and `Object.assign` in `ES2015` are not recommended. You can import third party polyfills if necessary.
 
-- Use `reabse` before `pull request` to make sure a clean `commit`.
+- Rebase before creating a PR to keep commit history clear.
 
-- Make sure `pull request` to `dev` branch, instead of `master` branch.
+- Make sure PRs are created to `dev` branch instead of `master` branch.
 
-- You should write descriptions in `pull request` when fixing bugs.
+- If your PR fixes a bug, please provide a description about the related bug.
 
-- Two members are required when merging codes: The first one review codes and approve the merge, then the second one review codes again and merge it.
+- Merging a PR takes two maintainers: one approves the changes after reviewing, and then the other reviews and merges.
 
 ## Prerequisites
 `Node.js 4+` and `NPM 3+` are required.
@@ -43,7 +43,7 @@ npm run dev
 # open http://localhost:8085
 ```
 
-For popele in China, it is a better choice to use [yarn](https://github.com/yarnpkg/yarn) with taobao registry.
+For Chinese users, [yarn](https://github.com/yarnpkg/yarn) with taobao registry is recommended if the dependency installation is slow.
 ```shell
 npm i yarn -g
 yarn config set registry https://registry.npm.taobao.org
@@ -59,10 +59,10 @@ To build:
 npm run dist
 ```
 
-## Component Develop Guide
-- Use `make new` to create project directory about component, which include test codes, entry file, config of cooking, documentation and `package.json`.
-- Refer to `Button` to create nested component.
-- Refer to `Select` to create component depends on other coponents.
+## Component Developing Guidelines
+- Run `make new` to create project directory for a new component. Test codes, entry file, cooking config, documentation and `package.json` are included.
+- Refer to `Button` for nested components.
+- Refer to `Select` for components that depend on other components.
 
-## Style Guide
-All JavaScript must adhere to  [ESLint](https://github.com/ElemeFE/eslint-config-elemefe).
+## Code Style
+Just comply with the [ESLint](https://github.com/ElemeFE/eslint-config-elemefe) configuration of [ElemeFE](https://github.com/elemefe).
