@@ -19,7 +19,7 @@
       </template>
       <template slot="append" v-if="$slots.append">
         <slot name="append"></slot>
-      </template> 
+      </template>
     </el-input>
     <el-autocomplete-suggestions
       :class="[popperClass ? popperClass : '']"
@@ -113,7 +113,7 @@
         }, 100);
       },
       handleKeyEnter() {
-        if (this.suggestionVisible) {
+        if (this.suggestionVisible && this.highlightedIndex >= 0 && this.highlightedIndex < this.suggestions.length) {
           this.select(this.suggestions[this.highlightedIndex]);
         }
       },
