@@ -98,6 +98,10 @@
       },
       handleChange(value) {
         this.$emit('input', value);
+        if (!this.triggerOnFocus && !value) {
+          this.suggestions = [];
+          return;
+        }
         this.getData(value);
       },
       handleFocus() {
