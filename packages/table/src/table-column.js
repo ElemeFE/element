@@ -220,7 +220,9 @@ export default {
       renderHeader: this.renderHeader,
       minWidth,
       width,
-      summary: this.summary,
+      summary: this.summary ? () => {
+        return this.summary;
+      } : null,
       isColumnGroup,
       context: this.context,
       align: this.align ? 'is-' + this.align : null,

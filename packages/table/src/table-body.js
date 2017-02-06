@@ -77,14 +77,14 @@ export default {
           }
         </tbody>
         {
-          this.columns.filter((column) => column.summary).length > 0
+          this.columns.filter((column) => typeof column.summary === 'function').length > 0
             ? (<tfoot>
                 <tr>
                   {
                     this._l(this.columns, (column, cellIndex) =>
                       <td
                           class={ [column.id, column.align, column.className || ' ', columnsHidden[cellIndex] ? 'is-hidden' : '' ] }>
-                          <div class="cell">{column.summary}</div>
+                          <div class="cell">{column.summary ? column.summary() : null}</div>
                       </td>
                     )
                   }
