@@ -1,7 +1,7 @@
 <script>
   import TabNav from './tab-nav';
 
-  module.exports = {
+  export default {
     name: 'ElTabs',
 
     components: {
