@@ -120,7 +120,7 @@
       }
     }
   }
-  .el-autocomplete__suggestions.my-autocomplete {
+  .el-autocomplete-suggestion.my-autocomplete {
     li {
       line-height: normal;
       padding: 7px *;
@@ -133,7 +133,6 @@
         font-size: 12px;
         color: #b4b4b4;
       }
-
       .highlighted .addr {
         color: #ddd;
       }
