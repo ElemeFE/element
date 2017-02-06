@@ -1617,7 +1617,7 @@
 | column-key | column 的 key，如果需要使用 filter-change 事件，则需要此属性标识是哪个 column 的筛选条件 | string | — | — |
 | label | 显示的标题 | string | — | — |
 | prop | 对应列内容的字段名，也可以使用 property 属性 | string | — | — |
-| summary | 表格末尾是否显示合计行，也可以使用 property 属性 | string | — | — |
+| summary | 显示在表尾，表格对应列的合计值，如果都不指定，则不显示合计行。也可以使用 property 属性 | string | — | — |
 | width | 对应列的宽度 | string | — | — |
 | min-width | 对应列的最小宽度，与 width 的区别是 width 是固定的，min-width 会把剩余宽度按比例分配给设置了 min-width 的列 | string | — | — |
 | fixed | 列是否固定在左侧或者右侧，true 表示固定在左侧 | string, boolean | true, left, right | — |
