@@ -56,6 +56,10 @@ export default {
       noData: 'Veri yok',
       placeholder: 'Seç'
     },
+    cascader: {
+      noMatch: 'Eşleşen veri bulunamadı',
+      placeholder: 'Seç'
+    },
     pagination: {
       goto: 'Git',
       pagesize: '/page',

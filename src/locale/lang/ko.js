@@ -56,6 +56,10 @@ export default {
       noData: '데이터 없음',
       placeholder: '선택'
     },
+    cascader: {
+      noMatch: '맞는 데이터가 없습니다',
+      placeholder: '선택'
+    },
     pagination: {
       goto: '이동',
       pagesize: '/page',
