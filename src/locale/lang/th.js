@@ -1,5 +1,9 @@
 export default {
   el: {
+    colorpicker: {
+      confirm: 'ตกลง',
+      clear: 'ล้างข้อมูล'
+    },
     datepicker: {
       now: 'ตอนนี้',
       today: 'วันนี้',
