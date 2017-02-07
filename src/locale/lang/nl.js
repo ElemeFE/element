@@ -1,5 +1,9 @@
 export default {
   el: {
+    colorpicker: {
+      confirm: 'Bevestig',
+      clear: 'Legen'
+    },
     datepicker: {
       now: 'Nu',
       today: 'Vandaag',

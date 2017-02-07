@@ -219,6 +219,10 @@
             {
               "path": "/collapse",
               "title": "Collapse 折叠面板"
+            },
+            {
+              "path": "/color-picker",
+              "title": "ColorPicker"
             }
           ]
         }
@@ -445,6 +449,10 @@
             {
               "path": "/collapse",
               "title": "Collapse"
+            },
+            {
+              "path": "/color-picker",
+              "title": "ColorPicker"
             }
           ]
         }

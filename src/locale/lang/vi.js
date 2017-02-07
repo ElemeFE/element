@@ -1,5 +1,9 @@
 export default {
   el: {
+    colorpicker: {
+      confirm: 'OK',
+      clear: 'Xóa'
+    },
     datepicker: {
       now: 'Hiện tại',
       today: 'Hôm nay',
