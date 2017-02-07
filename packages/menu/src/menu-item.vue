@@ -13,7 +13,7 @@
   import Menu from './menu-mixin';
   import Emitter from 'element-ui/src/mixins/emitter';
 
-  module.exports = {
+  export default {
     name: 'ElMenuItem',
 
     componentName: 'ElMenuItem',

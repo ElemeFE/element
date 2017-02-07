@@ -30,7 +30,7 @@
   import Emitter from 'element-ui/src/mixins/emitter';
   import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
-  module.exports = {
+  export default {
     name: 'ElSubmenu',
 
     componentName: 'ElSubmenu',

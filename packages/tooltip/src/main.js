@@ -1,4 +1,5 @@
 import Popper from 'element-ui/src/utils/vue-popper';
+import debounce from 'throttle-debounce/debounce';
 import Vue from 'vue';
 
 export default {
@@ -43,6 +44,8 @@ export default {
         return this.node;
       }
     }).$mount();
+
+    this.debounceClose = debounce(200, () => this.handleClosePopper());
   },
 
   render(h) {
@@ -51,6 +54,8 @@ export default {
         name={ this.transition }
         onAfterLeave={ this.doDestroy }>
         <div
+          onMouseleave={ () => { this.debounceClose(); this.togglePreventClose(); } }
+          onMouseenter= { this.togglePreventClose }
           ref="popper"
           v-show={!this.disabled && this.showPopper}
           class={
@@ -67,7 +72,7 @@ export default {
     const on = vnode.data.on = vnode.data.on || {};
 
     on.mouseenter = this.addEventHandle(on.mouseenter, this.handleShowPopper);
-    on.mouseleave = this.addEventHandle(on.mouseleave, this.handleClosePopper);
+    on.mouseleave = this.addEventHandle(on.mouseleave, this.debounceClose);
     data.staticClass = this.concatClass(data.staticClass, 'el-tooltip');
 
     return vnode;
@@ -83,6 +88,7 @@ export default {
     },
 
     concatClass(a, b) {
+      if (a && a.indexOf(b) > -1) return a;
       return a ? b ? (a + ' ' + b) : a : (b || '');
     },
 
@@ -95,9 +101,13 @@ export default {
     },
 
     handleClosePopper() {
-      if (this.manual) return;
+      if (this.preventClose || this.manual) return;
       clearTimeout(this.timeout);
       this.showPopper = false;
+    },
+
+    togglePreventClose() {
+      this.preventClose = !this.preventClose;
     }
   }
 };

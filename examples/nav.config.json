@@ -77,6 +77,10 @@
               "title": "Select 选择器"
             },
             {
+              "path": "/cascader",
+              "title": "Cascader 级联选择"
+            },
+            {
               "path": "/switch",
               "title": "Switch 开关"
             },
@@ -297,6 +301,10 @@
             {
               "path": "/select",
               "title": "Select"
+            },
+            {
+              "path": "/cascader",
+              "title": "Cascader"
             },
             {
               "path": "/switch",

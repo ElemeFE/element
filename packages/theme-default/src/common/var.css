@@ -161,6 +161,7 @@
 
   --select-option-color: var(--link-color);
   --select-option-disabled-color: var(--color-extra-light-silver);
+  --select-option-disabled-background: var(--color-white);
   --select-option-height: 36px;
   --select-option-hover-background: var(--color-light-gray);
   --select-option-selected: var(--color-primary);
@@ -458,8 +459,8 @@
   --tag-gray-border: var(--color-light-gray);
   --tag-gray-color: var(--link-color);
 
-  --tag-primary-fill: rgba(32,159,255,0.10);
-  --tag-primary-border: rgba(32,159,255,0.20);
+  --tag-primary-fill: rgba(var(--color-primary),0.10);
+  --tag-primary-border: rgba(var(--color-primary),0.20);
   --tag-primary-color: var(--color-primary);
 
   --tag-success-fill: rgba(18,206,102,0.10);

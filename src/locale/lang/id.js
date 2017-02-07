@@ -56,6 +56,10 @@ export default {
       noData: 'Tidak ada data',
       placeholder: 'Pilih'
     },
+    cascader: {
+      noMatch: 'Tidak ada data yang cocok',
+      placeholder: 'Pilih'
+    },
     pagination: {
       goto: 'Pergi ke',
       pagesize: '/page',

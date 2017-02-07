@@ -56,6 +56,10 @@ export default {
       noData: 'Không tìm thấy dữ liệu',
       placeholder: 'Chọn'
     },
+    cascader: {
+      noMatch: 'Dữ liệu không phù hợp',
+      placeholder: 'Chọn'
+    },
     pagination: {
       goto: 'Nhảy tới',
       pagesize: '/trang',
