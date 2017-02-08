@@ -4,7 +4,7 @@
 
 @component-namespace el {
   @b upload {
-    width: 360px;
+    display: inline-block;
 
     @e input {
       display: none;
@@ -39,7 +39,7 @@
       width: 100%;
       position: relative;
 
-      a {
+      @e name {
         color: var(--color-extra-light-black);
         display: block;
         margin-right: 40px;
@@ -55,6 +55,12 @@
           height: 100%;
           line-height: inherit;
         }
+      }
+      @e icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+        line-height: inherit;
       }
       & .el-progress {
         position: absolute;
@@ -74,16 +80,27 @@
       &:hover {
         background-color: var(--color-extra-light-gray);
       }
-      @when finished {
-        & a:hover {
+      @when success {
+        .el-upload__file__icon {
+          color: var(--color-success);
+        }
+        .el-upload__file__name:hover {
           color: var(--link-hover-color);
           cursor: pointer;
         }
         &:hover {
+          .el-upload__file__icon {
+            display: none;
+          }
           .el-upload__btn-delete {
             display: block;
             cursor: pointer;
           }
+        }
+      }
+      @when fail {
+        .el-upload__file__icon {
+          color: var(--color-error);
         }
       }
     }
@@ -100,168 +117,187 @@
       color: var(--color-primary);
       display: none;
     }
-  }
-  @b upload-dragger {
-    background-color: var(--color-dark-white);
-    border: 1px solid var(--color-extra-light-silver);
-    box-sizing: border-box;
-    width: 360px;
-    height: 180px;
-    border-radius: 4px;
-    text-align: center;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-
-    & .el-upload__inner {
-      display: block;
-      height: 100%;
-    }
-    & .el-icon-upload {
-      font-size: 67px;
-      color: var(--color-light-silver);
-      margin: 40px 0 16px;
-      line-height: 50px;
-    }
-
-    & + .el-upload__tip {
+    /* 拖拽模式 */
+    @m draggable {
+      background-color: var(--color-dark-white);
+      border: 1px solid var(--color-extra-light-silver);
+      box-sizing: border-box;
+      width: 360px;
+      height: 180px;
+      border-radius: 4px;
       text-align: center;
-    }
-    & ~ .el-upload__files {
-      margin-top: 7px;
-      padding-top: 5px;
-      border-top: 1px solid rgba(var(--color-extra-light-silver), .2);
-    }
-
-    @e cover {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
+      cursor: pointer;
+      position: relative;
       overflow: hidden;
-      z-index: 10;
-      cursor: default;
-      @utils-vertical-center;
 
-      & img {
+      & .el-upload__inner {
         display: block;
-        width: 100%;
         height: 100%;
       }
-
-      @e progress {
-        display: inline-block;
-        vertical-align: middle;
-        position: static;
-        width: 243px;
-
-        & + .el-upload__inner {
-          opacity: 0;
-        }
+      & .el-icon-upload {
+        font-size: 67px;
+        color: var(--color-light-silver);
+        margin: 40px 0 16px;
+        line-height: 50px;
       }
 
-      @e content {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+      & + .el-upload__tip {
+        text-align: center;
+      }
+      & ~ .el-upload__files {
+        margin-top: 7px;
+        padding-top: 5px;
+        border-top: 1px solid rgba(var(--color-extra-light-silver), .2);
       }
 
-      @e interact {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(#000, .72);
+      @e text {
+        color: var(--color-light-silver);
+        font-size: 14px;
         text-align: center;
 
-        & .btn {
-          display: inline-block;
-          color: var(--color-white);
-          font-size: 14px;
-          cursor: pointer;
-          vertical-align: middle;
-          transition: var(--md-fade-transition);
-          margin-top: 60px;
-
-          & i {
-            margin-top: 0;
-          }
-
-          & span {
-            opacity: 0;
-            transition: opacity .15s linear;
-          }
-
-          &:not(:first-child) {
-            margin-left: 35px;
-          }
-
-          &:hover {
-            transform: translateY(-13px);
-
-            & span {
-              opacity: 1;
-            }
-          }
-
-          & i {
-            color: var(--color-white);
-            display: block;
-            font-size: 24px;
-            line-height: inherit;
-            margin: 0 auto 5px;
-          }
+        & em {
+          color: var(--color-primary);
+          font-style: normal;
         }
       }
 
-      @e title {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        background-color: var(--color-white);
-        height: 36px;
-        width: 100%;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        font-weight: normal;
-        text-align: left;
-        padding: 0 10px;
-        margin: 0;
-        line-height: 36px;
-        font-size: 14px;
-        color: var(--color-extra-light-black);
+      &:not(.is-showCover):hover {
+        border-color: var(--color-primary);
       }
+
+      @when dragOver {
+        background-color: rgba(32, 159, 255, .06);
+        border: 2px dashed var(--color-primary);
+      }
+    }
+  }
+  @b upload-cover {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 10;
+    cursor: default;
+    @utils-vertical-center;
+
+    & img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    @e label {
+      position: absolute;
+      right: -15px;
+      top: -6px;
+      width: 40px;
+      height: 24px;
+      background: #13ce66;
+      text-align: center;
+      transform: rotate(45deg);
+      box-shadow: 0 0 1pc 1px rgba(0,0,0,0.2);
+
+      i {
+        font-size: 12px;
+        margin-top: 11px;
+        transform: rotate(-45deg) scale(0.8);
+        color: #fff;
+      }
+    }
+
+    @e progress {
+      display: inline-block;
+      vertical-align: middle;
+      position: static;
+      width: 243px;
 
       & + .el-upload__inner {
         opacity: 0;
-        position: relative;
-        z-index: 1;
       }
     }
 
-    @e text {
-      color: var(--color-light-silver);
-      font-size: 14px;
+    @e content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    @e interact {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(#000, .72);
       text-align: center;
 
-      & em {
-        color: var(--color-primary);
-        font-style: normal;
+      & .btn {
+        display: inline-block;
+        color: var(--color-white);
+        font-size: 14px;
+        cursor: pointer;
+        vertical-align: middle;
+        transition: var(--md-fade-transition);
+        margin-top: 60px;
+
+        & i {
+          margin-top: 0;
+        }
+
+        & span {
+          opacity: 0;
+          transition: opacity .15s linear;
+        }
+
+        &:not(:first-child) {
+          margin-left: 35px;
+        }
+
+        &:hover {
+          transform: translateY(-13px);
+
+          & span {
+            opacity: 1;
+          }
+        }
+
+        & i {
+          color: var(--color-white);
+          display: block;
+          font-size: 24px;
+          line-height: inherit;
+          margin: 0 auto 5px;
+        }
       }
     }
 
-    &:not(.is-showCover):hover {
-      border-color: var(--color-primary);
+    @e title {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      background-color: var(--color-white);
+      height: 36px;
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-weight: normal;
+      text-align: left;
+      padding: 0 10px;
+      margin: 0;
+      line-height: 36px;
+      font-size: 14px;
+      color: var(--color-extra-light-black);
     }
 
-    @when dragOver {
-      background-color: rgba(32, 159, 255, .06);
-      border: 2px dashed var(--color-primary);
+    & + .el-upload__inner {
+      opacity: 0;
+      position: relative;
+      z-index: 1;
     }
   }
 }

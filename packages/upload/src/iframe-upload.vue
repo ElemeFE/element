@@ -160,7 +160,7 @@ export default {
           </input>
           <input type="hidden" name="documentDomain" value={ this.$isServer ? '' : document.domain } />
           <span ref="data"></span>
-         </form>
+        </form>
         {!this.showCover ? this.$slots.default : cover}
       </div>
     );

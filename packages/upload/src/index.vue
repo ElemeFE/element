@@ -5,8 +5,7 @@ import UploadDragger from './upload-dragger';
 import IframeUpload from './iframe-upload';
 import ElProgress from 'element-ui/packages/progress';
 
-function noop() {
-}
+function noop() {}
 
 export default {
   name: 'ElUpload',
@@ -79,6 +78,10 @@ export default {
       default() {
         return [];
       }
+    },
+    autoUpload: {
+      type: Boolean,
+      default: true
     }
   },
 
@@ -96,78 +99,71 @@ export default {
       immediate: true,
       handler(fileList) {
         this.uploadFiles = fileList.map(item => {
-          if (!item.uid) {
-            item.uid = Date.now() + this.tempIndex++;
-          }
+          item.uid = item.uid || (Date.now() + this.tempIndex++);
+          item.status = 'success';
           return item;
         });
       }
-    },
-    uploadFiles(value, oldValue) {
-      // console.log(value, oldValue);
     }
   },
 
   methods: {
-    handleStart(file) {
-      file.uid = Date.now() + this.tempIndex++;
-      let _file = {
-        status: 'uploading',
-        name: file.name,
-        size: file.size,
+    handleStart(rawFile) {
+      rawFile.uid = Date.now() + this.tempIndex++;
+      let file = {
+        status: 'ready',
+        name: rawFile.name,
+        size: rawFile.size,
         percentage: 0,
-        uid: file.uid,
-        showProgress: true
+        uid: rawFile.uid,
+        raw: rawFile
       };
 
       try {
-        _file.url = URL.createObjectURL(file);
+        file.url = URL.createObjectURL(rawFile);
       } catch (err) {
         console.error(err);
         return;
       }
 
-      this.uploadFiles.push(_file);
+      this.uploadFiles.push(file);
     },
-    handleProgress(ev, file) {
-      var _file = this.getFile(file);
-      this.onProgress(ev, _file, this.uploadFiles);
-      _file.percentage = ev.percent || 0;
+    handleProgress(ev, rawFile) {
+      var file = this.getFile(rawFile);
+      this.onProgress(ev, file, this.uploadFiles);
+      file.status = 'uploading';
+      file.percentage = ev.percent || 0;
     },
-    handleSuccess(res, file) {
-      var _file = this.getFile(file);
+    handleSuccess(res, rawFile) {
+      var file = this.getFile(rawFile);
 
-      if (_file) {
-        _file.status = 'finished';
-        _file.response = res;
+      if (file) {
+        file.status = 'success';
+        file.response = res;
 
-        this.onSuccess(res, _file, this.uploadFiles);
-
-        setTimeout(() => {
-          _file.showProgress = false;
-        }, 1000);
+        this.onSuccess(res, file, this.uploadFiles);
       }
     },
-    handleError(err, response, file) {
-      var _file = this.getFile(file);
+    handleError(err, response, rawFile) {
+      var file = this.getFile(rawFile);
       var fileList = this.uploadFiles;
 
-      _file.status = 'fail';
+      file.status = 'fail';
 
-      fileList.splice(fileList.indexOf(_file), 1);
+      fileList.splice(fileList.indexOf(file), 1);
 
-      this.onError(err, response, file);
+      this.onError(err, response, rawFile);
     },
     handleRemove(file) {
       var fileList = this.uploadFiles;
       fileList.splice(fileList.indexOf(file), 1);
       this.onRemove(file, fileList);
     },
-    getFile(file) {
+    getFile(rawFile) {
       var fileList = this.uploadFiles;
       var target;
       fileList.every(item => {
-        target = file.uid === item.uid ? item : null;
+        target = rawFile.uid === item.uid ? item : null;
         return !target;
       });
       return target;
@@ -180,34 +176,19 @@ export default {
     clearFiles() {
       this.uploadFiles = [];
     },
-    initDraggable() {
-      const target = this.$el;
-      const _this = this;
-      target.addEventListener('dragover', event => {
-        event.preventDefault();
-        _this.draggable = true;
-      });
-      target.addEventListener('drop', event => {
-        event.preventDefault();
-        _this.draggable = false;
-      });
-      target.addEventListener('dragleave', event => {
-        event.preventDefault();
-        _this.draggable = false;
-      });
-    }
-  },
-
-  mounted() {
-    if (this.draggable) {
-      this.initDraggable();
+    submit() {
+      this.uploadFiles
+        .filter(file => file.status === 'ready')
+        .forEach(file => {
+          this.$refs['upload-inner'].upload(file.raw, file);
+        });
     }
   },
 
   render(h) {
     var uploadList;
 
-    if (this.showUploadList && !this.thumbnailMode && this.uploadFiles.length) {
+    if (this.showUploadList && this.uploadFiles.length) {
       uploadList = (
         <UploadList
           files={this.uploadFiles}
@@ -217,7 +198,7 @@ export default {
       );
     }
 
-    var props = {
+    var uploadData = {
       props: {
         type: this.type,
         draggable: this.draggable,
@@ -229,6 +210,8 @@ export default {
         name: this.name,
         data: this.data,
         accept: this.thumbnailMode ? 'image/gif, image/png, image/jpeg, image/bmp, image/webp' : this.accept,
+        fileList: this.uploadFiles,
+        autoUpload: this.autoUpload,
         'on-start': this.handleStart,
         'on-progress': this.handleProgress,
         'on-success': this.handleSuccess,
@@ -243,10 +226,10 @@ export default {
     //     ? <upload {...props}>{this.$slots.default}</upload>
     //     : <iframeUpload {...props}>{this.$slots.default}</iframeUpload>;
 
-    if (this.dragger) {
+    if (this.draggable) {
       return (
         <div>
-          <upload-dragger {...props}>{this.$slots.default}</upload-dragger>
+          <upload {...uploadData}>{this.$slots.trigger || this.$slots.default}</upload>
           {this.$slots.tip}
           {uploadList}
         </div>
@@ -256,7 +239,8 @@ export default {
     return (
       <div>
         {uploadList}
-        <upload {...props}>{this.$slots.default}</upload>
+        <upload {...uploadData}>{this.$slots.trigger || this.$slots.default}</upload>
+        {this.$slots.default}
         {this.$slots.tip}
       </div>
     );
