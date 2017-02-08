@@ -608,6 +608,7 @@ Search data from server-side.
 |autosize | whether textarea has an adaptive height, only works when `type` is 'textarea'. Can accept an object, e.g. { minRows: 2, maxRows: 6 }  | boolean/object | — | false |
 |auto-complete | same as `auto-complete` in native input | string | on/off | off |
 |name | same as `name` in native input | string | — | — |
+| readonly | same as `readonly` in native input | boolean | — | false |
 |max | same as `max` in native input | * | — | — |
 |min | same as `min` in native input | * | — | — |
 |resize| control the resizability | string | none, both, horizontal, vertical | — |
