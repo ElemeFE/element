@@ -1,16 +1,11 @@
-<template>
-  <div class="el-upload" @click="handleClick">
-    <slot></slot>
-    <input class="el-upload__input" type="file" ref="input" @change="handleChange" :multiple="multiple" :accept="accept">
-  </div>
-</template>
-
 <script>
+import merge from 'element-ui/src/utils/merge';
 import ajax from './ajax';
+import dragger from './dragger';
 
 export default {
-  components: {
-  },
+  mixins: [dragger],
+
   props: {
     type: String,
     action: {
@@ -31,6 +26,7 @@ export default {
     onSuccess: Function,
     onError: Function,
     beforeUpload: Function,
+    draggable: Boolean,
     onPreview: {
       type: Function,
       default: function() {}
@@ -38,7 +34,9 @@ export default {
     onRemove: {
       type: Function,
       default: function() {}
-    }
+    },
+    fileList: Array,
+    autoUpload: Boolean
   },
 
   data() {
@@ -54,9 +52,7 @@ export default {
     handleChange(ev) {
       const files = ev.target.files;
 
-      if (!files) {
-        return;
-      }
+      if (!files) return;
       this.uploadFiles(files);
       this.$refs.input.value = null;
     },
@@ -66,64 +62,111 @@ export default {
 
       if (postFiles.length === 0) { return; }
 
-      postFiles.forEach(file => {
-        let isImage = this.isImage(file.type);
-
-        if (this.thumbnailMode && !isImage) {
-          return;
-        } else {
-          this.upload(file);
+      postFiles.forEach(rawFile => {
+        if (!this.thumbnailMode || this.isImage(rawFile.type)) {
+          this.onStart(rawFile);
+          if (this.autoUpload) this.upload(rawFile);
         }
       });
     },
-    upload(file) {
+    upload(rawFile, file) {
       if (!this.beforeUpload) {
-        return this.post(file);
+        return this.post(rawFile);
       }
 
-      const before = this.beforeUpload(file);
+      const before = this.beforeUpload(rawFile);
       if (before && before.then) {
         before.then(processedFile => {
           if (Object.prototype.toString.call(processedFile) === '[object File]') {
             this.post(processedFile);
           } else {
-            this.post(file);
+            this.post(rawFile);
           }
         }, () => {
-          // this.$emit('cancel', file);
+          if (file) this.onRemove(file);
         });
       } else if (before !== false) {
-        this.post(file);
+        this.post(rawFile);
       } else {
-        // this.$emit('cancel', file);
+        if (file) this.onRemove(file);
       }
     },
-    post(file) {
-      this.onStart(file);
-      let formData = new FormData();
-      formData.append(this.name, file);
-
+    post(rawFile) {
       ajax({
         headers: this.headers,
         withCredentials: this.withCredentials,
-        file: file,
+        file: rawFile,
         data: this.data,
         filename: this.name,
         action: this.action,
         onProgress: e => {
-          this.onProgress(e, file);
+          this.onProgress(e, rawFile);
         },
         onSuccess: res => {
-          this.onSuccess(res, file);
+          this.onSuccess(res, rawFile);
         },
         onError: (err, response) => {
-          this.onError(err, response, file);
+          this.onError(err, response, rawFile);
         }
       });
     },
     handleClick() {
       this.$refs.input.click();
     }
+  },
+
+  render(h) {
+    let {
+      handleClick,
+      draggable,
+      onDrop,
+      showCover,
+      onPreview,
+      onRemove,
+      handleChange,
+      multiple,
+      accept,
+      lastestFile
+    } = this;
+    const data = {
+      class: {
+        'el-upload': true
+      },
+      on: {
+        click: handleClick
+      }
+    };
+    if (draggable) {
+      merge(data.on, {
+        dragover: (ev) => {
+          ev.preventDefault();
+          this.dragOver = true;
+        },
+        dragleave: (ev) => {
+          ev.preventDefault();
+          this.dragOver = false;
+        },
+        drop: (ev) => {
+          ev.preventDefault();
+          onDrop(ev);
+        }
+      });
+      merge(data.class, {
+        'el-upload--draggable': true,
+        'is-dragOver': this.dragOver,
+        'is-showCover': this.showCover
+      });
+    }
+    return (
+      <div {...data}>
+        {
+          showCover
+          ? <cover image={lastestFile} on-preview={onPreview} on-remove={onRemove}></cover>
+          : this.$slots.default
+        }
+        <input class="el-upload__input" type="file" ref="input" on-change={handleChange} multiple={multiple} accept={accept}></input>
+      </div>
+    );
   }
 };
 </script>

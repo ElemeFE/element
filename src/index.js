@@ -109,6 +109,7 @@ const components = [
   Row,
   Col,
   Upload,
+  UploadDragger,
   Progress,
   Spinner,
   Badge,
