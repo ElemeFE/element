@@ -17,7 +17,7 @@
           type="primary"
           @close="deleteTag($event, item)"
           close-transition>
-          {{ item.currentLabel }}
+          <span class="el-select__tags-text">{{ item.currentLabel }}</span>
         </el-tag>
       </transition-group>
 
