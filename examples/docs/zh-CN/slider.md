@@ -7,7 +7,8 @@
         value3: 42,
         value4: 0,
         value5: 0,
-        value6: 0
+        value6: 0,
+        value7: [4, 8]
       };
     }
   }
@@ -143,6 +144,35 @@
 ```
 :::
 
+### 范围选择
+
+支持选择某一数值范围
+
+:::demo 设置`range`即可开启范围选择，此时绑定值是一个数组，其元素分别为最小边界值和最大边界值
+```html
+<template>
+  <div class="block">
+    <el-slider
+      v-model="value7"
+      range
+      show-stops
+      :max="10">
+    </el-slider>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        value7: [4, 8]
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -150,9 +180,10 @@
 | max | 最大值 | number | — | 100 |
 | disabled | 是否禁用 | boolean | — | false |
 | step | 步长 | number | — | 1 |
-| show-input | 是否显示输入框 | boolean | — | false |
+| show-input | 是否显示输入框，仅在非范围选择时有效 | boolean | — | false |
 | show-input-controls | 在显示输入框的情况下，是否显示输入框的控制按钮 | boolean | — | true|
 | show-stops | 是否显示间断点 | boolean | — | false |
+| range | 是否为范围选择 | boolean | — | false |
 
 ### Events
 | 事件名称      | 说明    | 回调参数      |
