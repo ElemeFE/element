@@ -55,6 +55,7 @@
       transform: translateX(-50%);
       margin: 0;
       padding: 0;
+      z-index: calc(var(--index-normal) + 1);
 
       @modifier outside {
         bottom: calc(var(--carousel-indicator-height) + var(--carousel-indicator-padding-vertical) * 2);

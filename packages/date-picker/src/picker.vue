@@ -43,7 +43,7 @@ const NewPopper = {
   beforeDestroy: Popper.beforeDestroy
 };
 
-const RANGE_SEPARATOR = ' - ';
+let RANGE_SEPARATOR = ' - ';
 const DEFAULT_FORMATS = {
   date: 'yyyy-MM-dd',
   month: 'yyyy-MM',
@@ -202,6 +202,9 @@ export default {
       default: 'left'
     },
     value: {},
+    rangeSeparator: {
+      default: ' - '
+    },
     pickerOptions: {}
   },
 
@@ -324,6 +327,7 @@ export default {
   },
 
   created() {
+    RANGE_SEPARATOR = this.rangeSeparator;
     // vue-popper
     this.popperOptions = {
       boundariesPadding: 0,

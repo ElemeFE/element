@@ -101,7 +101,3 @@
 .el-tree--highlight-current .el-tree-node.is-current > .el-tree-node__content {
   background-color: color(var(--color-primary) tint(92%));
 }
-
-.collapse-transition {
-    transition: 0.3s height ease-in-out, 0.3s padding-top ease-in-out, 0.3s padding-bottom ease-in-out;
-}

@@ -373,16 +373,13 @@ export default {
       document.body.style.cursor = '';
     },
 
-    toggleOrder(column) {
-      if (column.order === 'ascending') {
-        return 'descending';
-      }
-      return 'ascending';
+    toggleOrder(order) {
+      return !order ? 'ascending' : order === 'ascending' ? 'descending' : null;
     },
 
     handleSortClick(event, column) {
       event.stopPropagation();
-      let order = this.toggleOrder(column);
+      let order = this.toggleOrder(column.order);
 
       let target = event.target;
       while (target && target.tagName !== 'TH') {
@@ -411,7 +408,7 @@ export default {
         sortProp = column.property;
       }
 
-      if (column.order === order) {
+      if (!order) {
         sortOrder = column.order = null;
         states.sortingColumn = null;
         sortProp = null;

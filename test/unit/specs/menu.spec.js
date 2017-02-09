@@ -27,6 +27,35 @@ describe('Menu', () => {
       });
     });
   });
+  it('menu-item click', done => {
+    vm = createVue({
+      template: `
+        <el-menu>
+          <el-menu-item @click="onMenuItemClick" index="1" ref="item1">处理中心</el-menu-item>
+          <el-menu-item index="2" ref="item2">订单管理</el-menu-item>
+        </el-menu>
+      `,
+      methods: {
+        onMenuItemClick(el) {
+          expect(el).to.be.equal(vm.$refs.item1);
+          this.clicksCount = this.clicksCount + 1;
+        }
+      },
+      data() {
+        return {
+          clicksCount: 0
+        };
+      }
+    }, true);
+    var item1 = vm.$refs.item1;
+    item1.$el.click();
+
+    vm.$nextTick(_ => {
+      expect(vm.clicksCount).to.be.equal(1);
+      done();
+    });
+
+  });
   describe('default active', () => {
     it('normal active', done => {
       vm = createVue({

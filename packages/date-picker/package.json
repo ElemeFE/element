@@ -11,6 +11,5 @@
   "repository": "https://github.com/ElemeFE/element/tree/master/packages/datepicker",
   "author": "long.zhang@ele.me",
   "license": "MIT",
-  "dependencies": {
-  }
+  "dependencies": {}
 }
