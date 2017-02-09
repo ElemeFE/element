@@ -54,6 +54,7 @@
     h2 {
       font-size: <%= titleSize >px;
       margin: 0;
+      color: #fff;
     }
 
     p {

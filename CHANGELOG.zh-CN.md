@@ -1,5 +1,18 @@
 ## 更新日志
 
+### 1.1.6
+*2017-01-23*
+
+- 修复 MessageBox 的 `customClass` 会影响后续实例的问题，#2472
+- 修复位于 Tabs 非默认激活页中的 Select 在激活后样式不正确的问题，#2466
+- 修复一些组件在单独引入时样式缺失的问题
+- 修复被禁用的可搜索多选 Select 点击特定区域仍能打开下拉框的问题，#2540
+- 修复 Table 排序支持返回原始顺序，#2491
+- 新增 `reset.css` 在 `theme-default` 内，#2378
+- 新增 DatePicker 的 `range-separator` 属性，#2579
+- 发布单独组件包：Table，DatePicker，Loading，Upload，Carousel
+- 新增芬兰语（@groenroos）
+
 ### 1.1.5
 *2017-01-17*
 

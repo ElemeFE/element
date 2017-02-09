@@ -143,6 +143,7 @@
       },
       handleNodeExpand(nodeData, node, instance) {
         this.broadcast('ElTreeNode', 'tree-node-expand', node);
+        this.$emit('node-expand', nodeData, node, instance);
       }
     },
 

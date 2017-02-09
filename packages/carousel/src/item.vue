@@ -70,11 +70,10 @@
       translateItem(index, activeIndex) {
         const parentWidth = this.$parent.$el.offsetWidth;
         const length = this.$parent.items.length;
-
+        if (index !== activeIndex && length > 2) {
+          index = this.processIndex(index, activeIndex, length);
+        }
         if (this.$parent.type === 'card') {
-          if (index !== activeIndex && length > 2) {
-            index = this.processIndex(index, activeIndex, length);
-          }
           this.inStage = Math.round(Math.abs(index - activeIndex)) <= 1;
           this.active = index === activeIndex;
           this.translate = this.calculateTranslate(index, activeIndex, parentWidth);

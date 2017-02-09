@@ -42,6 +42,7 @@
     methods: {
       handleClick() {
         this.dispatch('ElMenu', 'item-click', this);
+        this.$emit('click', this);
       }
     },
     created() {

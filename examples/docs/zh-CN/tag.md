@@ -118,6 +118,7 @@
 :::demo
 ```html
 <el-tag
+  :key="tag"
   v-for="tag in dynamicTags"
   :closable="true"
   :close-transition="false"

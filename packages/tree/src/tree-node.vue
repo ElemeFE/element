@@ -36,7 +36,7 @@
           v-for="child in node.childNodes"
           :key="getNodeKey(child)"
           :node="child"
-          @node-expand="handleChildNodeExpand(child)">
+          @node-expand="handleChildNodeExpand">
         </el-tree-node>
       </div>
     </collapse-transition>
@@ -145,7 +145,9 @@
       },
 
       handleExpandIconClick() {
+        if (this.node.isLeaf) return;
         if (this.expanded) {
+          this.tree.$emit('node-collapse', this.node.data, this.node, this);
           this.node.collapse();
         } else {
           this.node.expand();
@@ -165,8 +167,9 @@
         }
       },
 
-      handleChildNodeExpand(node) {
+      handleChildNodeExpand(nodeData, node, instance) {
         this.broadcast('ElTreeNode', 'tree-node-expand', node);
+        this.tree.$emit('node-expand', nodeData, node, instance);
       }
     },
 

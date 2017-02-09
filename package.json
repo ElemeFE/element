@@ -1,6 +1,6 @@
 {
   "name": "element-ui",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "A Component Library for Vue.js.",
   "main": "lib/element-ui.common.js",
   "files": [
@@ -24,7 +24,7 @@
     "i18n": "node build/bin/i18n.js",
     "lint": "eslint src/**/* test/**/* packages/**/*.{js,vue} build/**/* --quiet",
     "pub": "npm run bootstrap && sh build/git-release.sh && sh build/release.sh",
-    "pub:all": "npm run dist:all && lerna publish",
+    "pub:all": "npm run dist:all && lerna publish --skip-git && git commit -am 'publish independent packages' && git push eleme dev",
     "test": "npm run lint && cross-env CI_ENV=/dev/ karma start test/unit/karma.conf.js --single-run",
     "test:watch": "karma start test/unit/karma.conf.js"
   },
@@ -96,7 +96,7 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-spec-reporter": "0.0.26",
     "karma-webpack": "^1.8.0",
-    "lerna": "2.0.0-beta.18",
+    "lerna": "^2.0.0-beta.32",
     "lolex": "^1.5.1",
     "markdown-it": "^6.1.1",
     "markdown-it-anchor": "^2.5.0",

@@ -12,7 +12,7 @@ export default {
       startTime: 'Начален час',
       endDate: 'Крайна дата',
       endTime: 'Краен час',
-      year: 'Година',
+      year: '',
       month1: 'Януари',
       month2: 'Февруари',
       month3: 'Март',

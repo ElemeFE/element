@@ -22,8 +22,8 @@
     </span>
     <el-input
       :value="currentValue"
-      @keydown.up.native="increase"
-      @keydown.down.native="decrease"
+      @keydown.up.native.prevent="increase"
+      @keydown.down.native.prevent="decrease"
       @blur="handleBlur"
       @input="handleInput"
       :disabled="disabled"

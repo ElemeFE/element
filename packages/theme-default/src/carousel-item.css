@@ -13,10 +13,13 @@
       display: inline-block;
       transition: .4s ease-in-out;
       overflow: hidden;
+      z-index: calc(var(--index-normal) - 1);
+      @when active {
+        z-index: calc(var(--index-normal) + 1);
+      }
 
       @modifier card {
         width: 50%;
-        z-index: calc(var(--index-normal) - 1);
         &.is-in-stage {
           cursor: pointer;
           z-index: var(--index-normal);
