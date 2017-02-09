@@ -175,7 +175,7 @@
 
     watch: {
       inputValue(val) {
-        if (this.$type === 'prompt' && val !== null) {
+        if (this.$refs.input && this.$type === 'prompt' && val !== null) {
           this.validate();
         }
       },
