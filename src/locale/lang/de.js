@@ -58,6 +58,10 @@ export default {
       noData: 'Keine Datei',
       placeholder: 'Datei wählen'
     },
+    cascader: {
+      noMatch: 'Nichts gefunden.',
+      placeholder: 'Datei wählen'
+    },
     pagination: {
       goto: 'Gehe zu',
       pagesize: 'pro Seite',

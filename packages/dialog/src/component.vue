@@ -41,6 +41,11 @@
         type: Boolean,
         default: true
       },
+  
+      modalAppendToBody: {
+        type: Boolean,
+        default: true
+      },
 
       lockScroll: {
         type: Boolean,

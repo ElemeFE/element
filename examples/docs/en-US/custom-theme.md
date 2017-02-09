@@ -1,5 +1,15 @@
 ## Custom theme
-Element uses BEM-styled CSS so that you can override styles easily. But if you need to replace styles at a large scale, e.g. change the theme color from blue to orange or green, maybe overriding them one by one is not a good idea, and this is where our theme customization tool kicks in.
+Element uses BEM-styled CSS so that you can override styles easily. But if you need to replace styles at a large scale, e.g. change the theme color from blue to orange or green, maybe overriding them one by one is not a good idea, and this is where our theme customization tools kick in.
+
+## Changing theme color
+If you just want to change the theme color of Element, the [theme preview website](https://elementui.github.io/theme-preview/#/en-US) is recommended.
+
+The main color of Element is bright and friendly blue. By changing it, you can make Element more visually connected to specific projects.
+
+The above website enables you to preview theme of a new theme color in real-time, and it can generate a complete style package based on the new theme color for you to download directly (to import new style files in your project, please refer to the 'Import custom theme' or 'Import component theme on demand' part of this section).
+
+## More customizations
+If you need more customization than just changing the theme color, please follow these steps:
 
 ### Install related tool
 First install the theme generator globally or locally. Local install is recommended because in this way, when others clone your project, npm will automatically install it for them.

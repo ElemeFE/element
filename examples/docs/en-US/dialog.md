@@ -164,6 +164,7 @@ The content of Dialog can be anything, even a table or a form. This example show
 | size      | size of Dialog | string    | tiny/small/large/full | small |
 | top      | value for `top` of Dialog CSS, works when `size` is not `full` | string    | — | 15% |
 | modal     | whether a mask is displayed | boolean   | — | true |
+| modal-append-to-body     | whether to append modal to body element. If false, the modal will be appended to Dialog's parent element | boolean   | — | true |
 | lock-scroll     | whether scroll of body is disabled while Dialog is displayed | boolean   | — | true |
 | custom-class      | custom class names for Dialog | string    | — | — |
 | close-on-click-modal | whether the Dialog can be closed by clicking the mask | boolean    | — | true |

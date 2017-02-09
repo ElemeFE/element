@@ -98,6 +98,10 @@
       },
       handleChange(value) {
         this.$emit('input', value);
+        if (!this.triggerOnFocus && !value) {
+          this.suggestions = [];
+          return;
+        }
         this.getData(value);
       },
       handleFocus() {
@@ -129,22 +133,22 @@
       },
       highlight(index) {
         if (!this.suggestionVisible || this.loading) { return; }
-        if (index < 0) {
-          index = 0;
-        } else if (index >= this.suggestions.length) {
+        if (index < 0) index = 0;
+        if (index >= this.suggestions.length) {
           index = this.suggestions.length - 1;
         }
-        var elSuggestions = this.$refs.suggestions.$el;
+        const suggestion = this.$refs.suggestions.$el.querySelector('.el-autocomplete-suggestion__wrap');
+        const suggestionList = suggestion.querySelectorAll('.el-autocomplete-suggestion__list li');
 
-        var elSelect = elSuggestions.children[index];
-        var scrollTop = elSuggestions.scrollTop;
-        var offsetTop = elSelect.offsetTop;
+        let highlightItem = suggestionList[index];
+        let scrollTop = suggestion.scrollTop;
+        let offsetTop = highlightItem.offsetTop;
 
-        if (offsetTop + elSelect.scrollHeight > (scrollTop + elSuggestions.clientHeight)) {
-          elSuggestions.scrollTop += elSelect.scrollHeight;
+        if (offsetTop + highlightItem.scrollHeight > (scrollTop + suggestion.clientHeight)) {
+          suggestion.scrollTop += highlightItem.scrollHeight;
         }
         if (offsetTop < scrollTop) {
-          elSuggestions.scrollTop -= elSelect.scrollHeight;
+          suggestion.scrollTop -= highlightItem.scrollHeight;
         }
 
         this.highlightedIndex = index;

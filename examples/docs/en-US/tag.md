@@ -22,6 +22,9 @@
 
       showInput() {
         this.inputVisible = true;
+        this.$nextTick(_ => {
+          this.$refs.saveTagInput.$refs.input.focus();
+        });
       },
 
       handleInputConfirm() {
@@ -150,6 +153,9 @@ You can use the `close` event to add and remove tag dynamically.
 
       showInput() {
         this.inputVisible = true;
+        this.$nextTick(_ => {
+          this.$refs.saveTagInput.$refs.input.focus();
+        });
       },
 
       handleInputConfirm() {
