@@ -2,6 +2,7 @@ var cooking = require('cooking');
 var config = require('./config');
 var md = require('markdown-it')();
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+var OfflinePlugin = require('offline-plugin');
 var striptags = require('./strip-tags');
 var slugify = require('transliteration').slugify;
 var isProd = process.env.NODE_ENV === 'production';
@@ -117,5 +118,6 @@ if (isProd) {
 cooking.add('plugin.CopyWebpackPlugin', new CopyWebpackPlugin([
   { from: 'examples/versions.json' }
 ]));
+cooking.add('plugin.OfflinePlugin', new OfflinePlugin());
 cooking.add('vue.preserveWhitespace', false);
 module.exports = cooking.resolve();
