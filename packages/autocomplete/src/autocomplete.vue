@@ -10,8 +10,8 @@
       @change="handleChange"
       @focus="handleFocus"
       @blur="handleBlur"
-      @keydown.up.native="highlight(highlightedIndex - 1)"
-      @keydown.down.native="highlight(highlightedIndex + 1)"
+      @keydown.up.native.prevent="highlight(highlightedIndex - 1)"
+      @keydown.down.native.prevent="highlight(highlightedIndex + 1)"
       @keydown.enter.stop.native="handleKeyEnter"
     >
       <template slot="prepend" v-if="$slots.prepend">
