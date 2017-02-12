@@ -1,7 +1,6 @@
 <script>
 import UploadList from './upload-list';
 import Upload from './upload';
-import UploadDragger from './upload-dragger';
 import IframeUpload from './iframe-upload';
 import ElProgress from 'element-ui/packages/progress';
 
@@ -14,7 +13,6 @@ export default {
     ElProgress,
     UploadList,
     Upload,
-    UploadDragger,
     IframeUpload
   },
 
@@ -35,11 +33,11 @@ export default {
       type: String,
       default: 'file'
     },
-    draggable: Boolean,
+    drag: Boolean,
     dragger: Boolean,
     withCredentials: Boolean,
     thumbnailMode: Boolean,
-    showUploadList: {
+    showFileList: {
       type: Boolean,
       default: true
     },
@@ -58,8 +56,7 @@ export default {
       default: noop
     },
     onPreview: {
-      type: Function,
-      default: noop
+      type: Function
     },
     onSuccess: {
       type: Function,
@@ -82,6 +79,10 @@ export default {
     autoUpload: {
       type: Boolean,
       default: true
+    },
+    listType: {
+      type: String,
+      default: 'text'   // text,picture,picture-card
     }
   },
 
@@ -168,11 +169,6 @@ export default {
       });
       return target;
     },
-    handlePreview(file) {
-      if (file.status === 'finished') {
-        this.onPreview(file);
-      }
-    },
     clearFiles() {
       this.uploadFiles = [];
     },
@@ -188,12 +184,13 @@ export default {
   render(h) {
     var uploadList;
 
-    if (this.showUploadList && this.uploadFiles.length) {
+    if (this.showFileList) {
       uploadList = (
         <UploadList
+          listType={this.listType}
           files={this.uploadFiles}
           on-remove={this.handleRemove}
-          on-preview={this.handlePreview}>
+          handlePreview={this.onPreview}>
         </UploadList>
       );
     }
@@ -201,7 +198,7 @@ export default {
     var uploadData = {
       props: {
         type: this.type,
-        draggable: this.draggable,
+        drag: this.drag,
         action: this.action,
         multiple: this.multiple,
         'before-upload': this.beforeUpload,
@@ -212,36 +209,31 @@ export default {
         accept: this.thumbnailMode ? 'image/gif, image/png, image/jpeg, image/bmp, image/webp' : this.accept,
         fileList: this.uploadFiles,
         autoUpload: this.autoUpload,
+        listType: this.listType,
         'on-start': this.handleStart,
         'on-progress': this.handleProgress,
         'on-success': this.handleSuccess,
         'on-error': this.handleError,
-        'on-preview': this.handlePreview,
+        'on-preview': this.onPreview,
         'on-remove': this.handleRemove
       },
       ref: 'upload-inner'
     };
 
-    // var uploadComponent = (typeof FormData !== 'undefined' || this.$isServer)
-    //     ? <upload {...props}>{this.$slots.default}</upload>
-    //     : <iframeUpload {...props}>{this.$slots.default}</iframeUpload>;
-
-    if (this.draggable) {
-      return (
-        <div>
-          <upload {...uploadData}>{this.$slots.trigger || this.$slots.default}</upload>
-          {this.$slots.tip}
-          {uploadList}
-        </div>
-      );
-    }
+    const trigger = this.$slots.trigger || this.$slots.default;
+    const uploadComponent = (typeof FormData !== 'undefined' || this.$isServer)
+        ? <upload {...uploadData}>{trigger}</upload>
+        : <iframeUpload {...uploadData}>{trigger}</iframeUpload>;
 
     return (
       <div>
-        {uploadList}
-        <upload {...uploadData}>{this.$slots.trigger || this.$slots.default}</upload>
-        {this.$slots.default}
+        {
+          this.$slots.trigger
+          ? [uploadComponent, this.$slots.default]
+          : uploadComponent
+        }
         {this.$slots.tip}
+        {uploadList}
       </div>
     );
   }
