@@ -10,13 +10,13 @@
     >
       <span class="el-checkbox__inner"></span>
       <input
-        v-if="trueLabel || falseLabel"
+        v-if="trueValue || falseValue"
         class="el-checkbox__original"
         type="checkbox"
         :name="name"
         :disabled="disabled"
-        :true-value="trueLabel"
-        :false-value="falseLabel"
+        :true-value="trueValue"
+        :false-value="falseValue"
         v-model="model"
         @change="handleChange"
         @focus="focus = true"
@@ -26,7 +26,7 @@
         class="el-checkbox__original"
         type="checkbox"
         :disabled="disabled"
-        :value="label"
+        :value="value"
         :name="name"
         v-model="model"
         @change="handleChange"
@@ -79,9 +79,9 @@
         if ({}.toString.call(this.model) === '[object Boolean]') {
           return this.model;
         } else if (Array.isArray(this.model)) {
-          return this.model.indexOf(this.label) > -1;
+          return this.model.indexOf(this.value) > -1;
         } else if (this.model !== null && this.model !== undefined) {
-          return this.model === this.trueLabel;
+          return this.model === this.trueValue;
         }
       },
 
@@ -110,19 +110,19 @@
       disabled: Boolean,
       checked: Boolean,
       name: String,
-      trueLabel: [String, Number],
-      falseLabel: [String, Number]
+      trueValue: [String, Number],
+      falseValue: [String, Number]
     },
 
     methods: {
       addToStore() {
         if (
           Array.isArray(this.model) &&
-          this.model.indexOf(this.label) === -1
+          this.model.indexOf(this.value) === -1
         ) {
-          this.model.push(this.label);
+          this.model.push(this.value);
         } else {
-          this.model = this.trueLabel || true;
+          this.model = this.trueValue || true;
         }
       },
       handleChange(ev) {

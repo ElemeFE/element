@@ -3,7 +3,7 @@
   module.exports = {
     data() {
       return {
-        checkList: ['选中且禁用','复选框 A'],
+        checkList: ['1','5'],
         // checkList2: ['复选框 A'],
         checked: false,
         checked1: false,
@@ -12,7 +12,7 @@
         checkAll: false,
         cities: cityOptions,
         checkedCities: ['上海', '北京'],
-        isIndeterminate: false
+        isIndeterminate: true
       };
     },
     methods: {
@@ -97,16 +97,16 @@
 
 适用于多个勾选框绑定到同一个数组的情景，通过是否勾选来表示这一组选项中选中的项。
 
-:::demo `checkbox-group`元素能把多个 checkbox 管理为一组，只需要在 Group 中使用`v-model`绑定`Array`类型的变量即可，`label`属性除了改变 checkbox 按钮后的介绍外，同时也是该 checkbox 对应的值，`label`与数组中的元素值相对应，如果存在指定的值则为选中状态，否则为不选中。
+:::demo `checkbox-group`元素能把多个 checkbox 管理为一组，只需要在 Group 中使用`v-model`绑定`Array`类型的变量即可，`label`属性为 checkbox 按钮后的介绍，`value`与数组中的元素值相对应，如果存在指定的值则为选中状态，否则为不选中。
 
 ```html
 <template>
   <el-checkbox-group v-model="checkList">
-    <el-checkbox label="复选框 A"></el-checkbox>
-    <el-checkbox label="复选框 B"></el-checkbox>
-    <el-checkbox label="复选框 C"></el-checkbox>
-    <el-checkbox label="禁用" disabled></el-checkbox>
-    <el-checkbox label="选中且禁用" disabled></el-checkbox>
+    <el-checkbox value="1" label="复选框"></el-checkbox>
+    <el-checkbox value="2" label="复选框 B"></el-checkbox>
+    <el-checkbox value="3" label="复选框 C"></el-checkbox>
+    <el-checkbox value="4" label="禁用" disabled></el-checkbox>
+    <el-checkbox value="5" label="选中且禁用" disabled></el-checkbox>
   </el-checkbox-group>
 </template>
 
@@ -114,7 +114,7 @@
   export default {
     data () {
       return {
-        checkList: ['选中且禁用','复选框 A']
+        checkList: ['1', '5']
       };
     }
   };
@@ -133,7 +133,7 @@
   <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
   <div style="margin: 15px 0;"></div>
   <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
-    <el-checkbox v-for="city in cities" :label="city">{{city}}</el-checkbox>
+    <el-checkbox v-for="city in cities" :value="city" :label="city">{{city}}</el-checkbox>
   </el-checkbox-group>
 </template>
 <script>
@@ -144,7 +144,7 @@
         checkAll: true,
         checkedCities: [],
         cities: cityOptions,
-        isIndeterminate: false
+        isIndeterminate: true
       };
     },
     methods: {
@@ -166,9 +166,10 @@
 ### Checkbox Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
-| label     | 选中状态的值（只有在`checkbox-group`或者绑定对象类型为`array`时有效）| string    |       —        |     —    |
-| true-label | 选中时的值   | string, number | — |     —    |
-| false-label | 没有选中时的值   | string, number    |      —         |     —    |
+| value     | 选中状态的值（只有在`checkbox-group`或者绑定对象类型为`array`时有效）| string    |       —        |     —    |
+| label | checkbox 按钮后的介绍 | string    |       —        |     —    |
+| true-value | 选中时的值   | string, number | — |     —    |
+| false-value | 没有选中时的值   | string, number    |      —         |     —    |
 | name | 原生 name 属性 | string    |      —         |     —    |
 | disabled  | 按钮禁用    | boolean   |  — | false   |
 | checked  | 当前是否勾选    | boolean   |  — | false   |
