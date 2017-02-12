@@ -110,7 +110,7 @@ describe('Carousel', () => {
       expect(vm.val).to.equal(1);
       expect(vm.oldVal).to.equal(0);
       done();
-    }, 100);
+    }, 60);
   });
 
   describe('manual control', () => {
