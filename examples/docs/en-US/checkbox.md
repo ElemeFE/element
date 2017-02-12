@@ -11,8 +11,8 @@
         isValid: 'valid',
         checkAll: false,
         cities: cityOptions,
-        checkedCities: ['上海', '北京'],
-        isIndeterminate: false
+        checkedCities: ['ShangHai', 'BeiJing'],
+        isIndeterminate: true
       };
     },
     methods: {
@@ -34,7 +34,7 @@
 
 ## Checkbox
 
-A group of options for multiple choices.
+A group of options for multiple choices. content in that tag will become the description following the button of the checkbox.
 
 ### Basic usage
 
@@ -87,7 +87,7 @@ Disabled state for checkbox.
 
 It is used for multiple checkboxes which are bound in one group, and indicates whether one option is selected by checking if it is checked.
 
-:::demo `checkbox-group` element can manage multiple checkboxes in one group by using `v-model` which is bound as an `Array`. `label` can modify the description following the button of the checkbox. It is also the value of the checkbox. `label` corresponds with the element values in the array. It is selected if the specified value exists in the array, and vice versa.
+:::demo `checkbox-group` element can manage multiple checkboxes in one group by using `v-model` which is bound as an `Array`. in `el-checkbox` element, `label` is the value of the checkbox. While no content in that tag, it's also modify the description following the button of the checkbox. `label` also corresponds with the element values in the array. It is selected if the specified value exists in the array, and vice versa.
 
 ```html
 <template>
@@ -132,9 +132,9 @@ The `indeterminate` property can help you to achieve a 'check all' effect.
     data() {
       return {
         checkAll: true,
-        checkedCities: [],
+        checkedCities: ['ShangHai', 'BeiJing'],
         cities: cityOptions,
-        isIndeterminate: false
+        isIndeterminate: true
       };
     },
     methods: {
