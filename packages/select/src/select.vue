@@ -17,7 +17,7 @@
           type="primary"
           @close="deleteTag($event, item)"
           close-transition>
-          {{ item.currentLabel }}
+          <span class="el-select__tags-text">{{ item.currentLabel }}</span>
         </el-tag>
       </transition-group>
 
@@ -64,7 +64,10 @@
       @mouseleave.native="inputHovering = false"
       :icon="iconClass">
     </el-input>
-    <transition name="el-zoom-in-top" @after-leave="doDestroy">
+    <transition
+      name="el-zoom-in-top"
+      @after-leave="doDestroy"
+      @after-enter="handleMenuEnter">
       <el-select-menu
         ref="popper"
         v-show="visible && emptyText !== false">
@@ -208,8 +211,8 @@
         selectedLabel: '',
         hoverIndex: -1,
         query: '',
-        bottomOverflowBeforeHidden: 0,
-        topOverflowBeforeHidden: 0,
+        bottomOverflow: 0,
+        topOverflow: 0,
         optionsAllDisabled: false,
         inputHovering: false,
         currentPlaceholder: ''
@@ -308,12 +311,6 @@
               this.broadcast('ElInput', 'inputSelect');
             }
           }
-          if (!this.dropdownUl) {
-            this.dropdownUl = this.$refs.popper.$el.querySelector('.el-select-dropdown__wrap');
-          }
-          if (!this.multiple && this.dropdownUl) {
-            this.setOverflow();
-          }
         }
         this.$emit('visible-change', val);
       },
@@ -346,24 +343,30 @@
         }
       },
 
+      handleMenuEnter() {
+        if (!this.dropdownUl) {
+          this.dropdownUl = this.$refs.popper.$el.querySelector('.el-select-dropdown__wrap');
+          this.getOverflows();
+        }
+        if (!this.multiple && this.dropdownUl) {
+          this.resetMenuScroll();
+        }
+      },
+
       getOverflows() {
         if (this.dropdownUl && this.selected && this.selected.$el) {
           let selectedRect = this.selected.$el.getBoundingClientRect();
           let popperRect = this.$refs.popper.$el.getBoundingClientRect();
-          this.bottomOverflowBeforeHidden = selectedRect.bottom - popperRect.bottom;
-          this.topOverflowBeforeHidden = selectedRect.top - popperRect.top;
+          this.bottomOverflow = selectedRect.bottom - popperRect.bottom;
+          this.topOverflow = selectedRect.top - popperRect.top;
         }
       },
 
-      setOverflow() {
-        if (this.bottomOverflowBeforeHidden > 0) {
-          this.$nextTick(() => {
-            this.dropdownUl.scrollTop += this.bottomOverflowBeforeHidden;
-          });
-        } else if (this.topOverflowBeforeHidden < 0) {
-          this.$nextTick(() => {
-            this.dropdownUl.scrollTop += this.topOverflowBeforeHidden;
-          });
+      resetMenuScroll() {
+        if (this.bottomOverflow > 0) {
+          this.dropdownUl.scrollTop += this.bottomOverflow;
+        } else if (this.topOverflow < 0) {
+          this.dropdownUl.scrollTop += this.topOverflow;
         }
       },
 
@@ -436,7 +439,7 @@
       },
 
       doDestroy() {
-        this.$refs.popper.doDestroy();
+        this.$refs.popper && this.$refs.popper.doDestroy();
       },
 
       handleClose() {
