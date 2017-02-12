@@ -44,6 +44,8 @@
       line-height: 1;
       padding: 11px 12px 11px 0;
       box-sizing: border-box;
+      position: relative;
+      z-index: 2;
     }
     @e content {
       line-height: 36px;
