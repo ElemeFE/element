@@ -1,11 +1,11 @@
 <script>
-import merge from 'element-ui/src/utils/merge';
 import ajax from './ajax';
-import dragger from './dragger';
+import UploadDragger from './upload-dragger.vue';
 
 export default {
-  mixins: [dragger],
-
+  components: {
+    UploadDragger
+  },
   props: {
     type: String,
     action: {
@@ -26,7 +26,7 @@ export default {
     onSuccess: Function,
     onError: Function,
     beforeUpload: Function,
-    draggable: Boolean,
+    drag: Boolean,
     onPreview: {
       type: Function,
       default: function() {}
@@ -36,7 +36,8 @@ export default {
       default: function() {}
     },
     fileList: Array,
-    autoUpload: Boolean
+    autoUpload: Boolean,
+    listType: String
   },
 
   data() {
@@ -118,15 +119,12 @@ export default {
   render(h) {
     let {
       handleClick,
-      draggable,
-      onDrop,
-      showCover,
-      onPreview,
-      onRemove,
+      drag,
       handleChange,
       multiple,
       accept,
-      lastestFile
+      listType,
+      uploadFiles
     } = this;
     const data = {
       class: {
@@ -136,32 +134,12 @@ export default {
         click: handleClick
       }
     };
-    if (draggable) {
-      merge(data.on, {
-        dragover: (ev) => {
-          ev.preventDefault();
-          this.dragOver = true;
-        },
-        dragleave: (ev) => {
-          ev.preventDefault();
-          this.dragOver = false;
-        },
-        drop: (ev) => {
-          ev.preventDefault();
-          onDrop(ev);
-        }
-      });
-      merge(data.class, {
-        'el-upload--draggable': true,
-        'is-dragOver': this.dragOver,
-        'is-showCover': this.showCover
-      });
-    }
+    data.class[`el-upload--${listType}`] = true;
     return (
       <div {...data}>
         {
-          showCover
-          ? <cover image={lastestFile} on-preview={onPreview} on-remove={onRemove}></cover>
+          drag
+          ? <upload-dragger on-file={uploadFiles}>{this.$slots.default}</upload-dragger>
           : this.$slots.default
         }
         <input class="el-upload__input" type="file" ref="input" on-change={handleChange} multiple={multiple} accept={accept}></input>

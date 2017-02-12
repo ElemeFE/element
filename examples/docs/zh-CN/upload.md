@@ -10,6 +10,32 @@
     .upload-demo {
       width: 360px;
     }
+    .avatar-uploader {
+      .el-upload {
+        border: 1px dashed #d9d9d9;
+        border-radius: 6px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+
+        &:hover {
+          border-color: #20a0ff;
+        }
+      }
+      .avatar-uploader-icon {
+        font-size: 28px;
+        color: #8c939d;
+        width: 178px;
+        height: @width;
+        line-height: @height;
+        text-align: center;
+      }
+      .avatar {
+        width: 178px;
+        height: @width;
+        display: block;
+      }
+    }
   }
 </style>
 <script>
@@ -24,7 +50,8 @@
           name: 'food2.jpeg',
           url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
           status: 'finished'
-        }]
+        }],
+        imageUrl: ''
       };
     },
     methods: {
@@ -52,6 +79,21 @@
       },
       submitUpload() {
         this.$refs.upload.submit();
+      },
+      handleAvatarScucess(res, file) {
+        this.imageUrl = URL.createObjectURL(file.raw);
+      },
+      beforeAvatarUpload(file) {
+        const isJPG = file.type === 'image/jpeg';
+        const isLt2M = file.size / 1024 / 1024 < 2;
+
+        if (!isJPG) {
+          this.$message.error('上传头像图片只能是 JPG 格式!');
+        }
+        if (!isLt2M) {
+          this.$message.error('上传头像图片大小不能超过 2MB!');
+        }
+        return isJPG && isLt2M;
       }
     }
   }
@@ -61,13 +103,13 @@
 
 通过点击或者拖拽上传文件
 
-### 点击上传多个文件
+### 点击上传
 
 ::: demo 通过 slot 你可以传入自定义的上传按钮类型和文字提示。
 ```html
 <el-upload
   class="upload-demo"
-  action="//jsonplaceholder.typicode.com/posts/"
+  action="http://localhost:9000/upload"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
   :file-list="fileList">
@@ -94,18 +136,121 @@
 ```
 :::
 
-::: demo 通过 slot 你可以传入自定义的上传按钮类型和文字提示。
+### 用户头像上传
+
+使用 beforeUpload 限制用户上传的图片格式和大小。
+
+::: demo
+```html
+<el-upload
+  class="avatar-uploader"
+  action="http://localhost:9000/upload"
+  :show-file-list="false"
+  :on-success="handleAvatarScucess"
+  :before-upload="beforeAvatarUpload">
+  <img v-if="imageUrl" :src="imageUrl" class="avatar">
+  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+</el-upload>
+<script>
+  export default {
+    data() {
+      return {
+        fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
+      };
+    },
+    methods: {
+      handleRemove(file, fileList) {
+        console.log(file, fileList);
+      },
+      handlePreview(file) {
+        console.log(file);
+      }
+    }
+  }
+</script>
+```
+:::
+
+### 照片墙
+
+使用 listType 属性来设置文件列表的样式。
+
+::: demo
+```html
+<el-upload
+  action="http://localhost:9000/upload"
+  list-type="picture-card"
+  :on-preview="handlePreview">
+  <i class="el-icon-plus"></i>
+</el-upload>
+<script>
+  export default {
+    data() {
+      return {
+        fileList: []
+      };
+    },
+    methods: {
+      handleRemove(file, fileList) {
+        console.log(file, fileList);
+      },
+      handlePreview(file) {
+        console.log(file);
+      }
+    }
+  }
+</script>
+```
+:::
+
+### 图片列表缩略图
+
+::: demo
 ```html
 <el-upload
   class="upload-demo"
-  draggable
-  action="//jsonplaceholder.typicode.com/posts/"
+  action="http://localhost:9000/upload"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
   :file-list="fileList"
-  thumbnail-mode>
+  list-type="picture">
+  <el-button size="small" type="primary">点击上传</el-button>
+  <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+</el-upload>
+<script>
+  export default {
+    data() {
+      return {
+        fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
+      };
+    },
+    methods: {
+      handleRemove(file, fileList) {
+        console.log(file, fileList);
+      },
+      handlePreview(file) {
+        console.log(file);
+      }
+    }
+  }
+</script>
+```
+:::
+
+### 拖拽上传
+
+::: demo
+```html
+<el-upload
+  class="upload-demo"
+  drag
+  action="http://localhost:9000/upload"
+  :on-preview="handlePreview"
+  :on-remove="handleRemove"
+  :file-list="fileList"
+  mutiple>
   <i class="el-icon-upload"></i>
-  <div class="el-upload-dragger__text">将文件拖到此处，或<em>点击上传</em></div>
+  <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
   <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
 </el-upload>
 ```
@@ -118,7 +263,7 @@
 <el-upload
   class="upload-demo"
   ref="upload"
-  action="//jsonplaceholder.typicode.com/posts/"
+  action="http://localhost:9000/upload"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
   :file-list="fileList"
@@ -147,84 +292,6 @@
 ```
 :::
 
-<!-- ### 拖拽上传
-
-可将文件拖入指定区域进行上传。
-
-::: demo 将 `type` 属性指定为 'drag' 可以将上传控件变为支持拖拽的形式，并且你可以通过 `multiple` 属性来控制是否支持多选，`on-preview` 和 `on-remove` 是一个钩子函数，分别在点击上传后的文件链接和点击移除上传后的文件后被调用。
-```html
-<el-upload
-  action="//jsonplaceholder.typicode.com/posts/"
-  type="drag"
-  :multiple="true"
-  :on-preview="handlePreview"
-  :on-remove="handleRemove"
-  :on-success="handleSuccess"
-  :on-error="handleError"
-  :file-list="fileList"
->
-  <i class="el-icon-upload"></i>
-  <div class="el-dragger__text">将文件拖到此处，或<em>点击上传</em></div>
-  <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
-</el-upload>
-<script>
-  export default {
-    data() {
-      return {
-        fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
-      };
-    },
-    methods: {
-      handleRemove(file, fileList) {
-        console.log(file, fileList);
-      },
-      handlePreview(file) {
-        console.log(file);
-      }
-    }
-  }
-</script>
-```
-:::
-
-### 上传单个图片
-
-专门针对图片类型文件的上传，上传后在原位置显示缩略图。
-
-::: demo `thumbnail-mode` 属性允许你将上传组件强制只允许图片上传，并支持展示上传文件的缩略图。
-```html
-<el-upload
-  action="//jsonplaceholder.typicode.com/posts/"
-  type="drag"
-  :thumbnail-mode="true"
-  :on-preview="handlePreview"
-  :on-remove="handleRemove"
-  :file-list="fileList"
->
-  <i class="el-icon-upload"></i>
-  <div class="el-dragger__text">将文件拖到此处，或<em>点击上传</em></div>
-  <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
-</el-upload>
-<script>
-  export default {
-    data() {
-      return {
-        fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
-      };
-    },
-    methods: {
-      handleRemove(file, fileList) {
-        console.log(file, fileList);
-      },
-      handlePreview(file) {
-        console.log(file);
-      }
-    }
-  }
-</script>
-```
-::: -->
-
 ### Attribute
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -234,7 +301,7 @@
 | data | 可选参数, 上传时附带的额外参数 | object | — | — |
 | name | 可选参数, 上传的文件字段名 | string | — | file |
 | with-credentials | 支持发送 cookie 凭证信息 | boolean | — | false |
-| show-upload-list | 是否显示已上传文件列表 | boolean | — | true |
+| show-file-list | 是否显示已上传文件列表 | boolean | — | true |
 | type | 上传控件类型 | string | select,drag | select |
 | accept | 可选参数, 接受上传的[文件类型](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept)（thumbnail-mode 模式下此参数无效）| string | — | — |
 | on-preview | 可选参数, 点击已上传的文件链接时的钩子, 可以通过 file.response 拿到服务端返回数据 | function(file) | — | — |
@@ -243,8 +310,9 @@
 | on-error | 可选参数, 文件上传失败时的钩子 | function(err, response, file) | — | — |
 | on-progress | 可选参数, 文件上传时的钩子 | function(event, file, fileList) | — | — |
 | before-upload | 可选参数, 上传文件之前的钩子，参数为上传的文件，若返回 false 或者 Promise 则停止上传。 | function(file) | — | — |
-| thumbnail-mode | 是否设置为图片模式，该模式下会显示图片缩略图 | boolean | — | false |
-| fileList | 默认已上传的文件列表, 例如: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}] | array | — | [] |
+| list-type | 文件列表的类型 | string | text/picture/picture-card | text |
+| auto-upload | 是否在选取文件后立即进行上传 | boolean | — | true |
+| fileList | 上传的文件列表, 例如: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}] | array | — | [] |
 
 ### Methods
 | 方法名      | 说明          | 参数 |

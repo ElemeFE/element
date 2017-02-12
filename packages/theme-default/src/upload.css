@@ -5,63 +5,110 @@
 @component-namespace el {
   @b upload {
     display: inline-block;
+    text-align: center;
 
     @e input {
       display: none;
     }
-    @e inner {
-      display: inline-block;
-      position: relative;
+    @e tip {
+      font-size: 12px;
+      color: var(--color-base-silver);
+      margin-top: 7px;
+    }
+    & iframe {
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      filter: alpha(opacity=0);
+    }
+    /* 照片墙模式 */
+    @m picture-card {
+      background-color: #fbfdff;
+      border: 1px dashed #c0ccda;
+      border-radius: 6px;
+      box-sizing: border-box;
+      width: 148px;
+      height: @width;
+      cursor: pointer;
+      line-height: calc(@height - 2);
 
-      & iframe {
-        position: absolute;
-        z-index: -1;
-        top: 0;
-        left: 0;
-        opacity: 0;
-        filter: alpha(opacity=0);
+      i {
+        font-size: 28px;
+        color: #8c939d;
+      }
+
+      &:hover {
+        border-color: var(--color-primary);
+        color: var(--color-primary);
       }
     }
-    @e files {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      margin-bottom: 10px;
+  }
+  @b upload-dragger {
+    background-color: #fff;
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    box-sizing: border-box;
+    width: 360px;
+    height: 180px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+
+    & .el-icon-upload {
+      font-size: 67px;
+      color: var(--color-light-silver);
+      margin: 40px 0 16px;
+      line-height: 50px;
     }
-    @e file {
+
+    & + .el-upload__tip {
+      text-align: center;
+    }
+    & ~ .el-upload__files {
+      border-top: 1px solid rgba(var(--color-extra-light-silver), .2);
+      margin-top: 7px;
+      padding-top: 5px;
+    }
+    .el-upload__text {
+      color: var(--color-light-silver);
+      font-size: 14px;
+      text-align: center;
+
+      & em {
+        color: var(--color-primary);
+        font-style: normal;
+      }
+    }
+
+    &:hover {
+      border-color: var(--color-primary);
+    }
+
+    @when dragOver {
+      background-color: rgba(32, 159, 255, .06);
+      border: 2px dashed var(--color-primary);
+    }
+  }
+  @b upload-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    @e item {
       transition: all .5s cubic-bezier(.55,0,.1,1);
       font-size: 14px;
       color: var(--color-extra-light-black);
-      line-height: 32px;
+      line-height: 1.8;
+      margin-top: 5px;
       position: relative;
       box-sizing: border-box;
       border-radius: 4px;
       width: 100%;
       position: relative;
 
-      @e name {
-        color: var(--color-extra-light-black);
-        display: block;
-        margin-right: 40px;
-        overflow: hidden;
-        padding-left: 4px;
-        text-overflow: ellipsis;
-        transition: color .3s;
-        white-space: nowrap;
-
-        [class^="el-icon"] {
-          color: var(--color-light-silver);
-          margin-right: 7px;
-          height: 100%;
-          line-height: inherit;
-        }
-      }
-      @e icon {
-        position: absolute;
-        right: 0;
-        top: 0;
-        line-height: inherit;
-      }
       & .el-progress {
         position: absolute;
         bottom: -3px;
@@ -77,97 +124,205 @@
         margin-right: 0;
         padding-right: 0;
       }
+      &:first-child {
+        margin-top: 10px;
+      }
       &:hover {
         background-color: var(--color-extra-light-gray);
       }
       @when success {
-        .el-upload__file__icon {
-          color: var(--color-success);
-        }
-        .el-upload__file__name:hover {
+        .el-upload-list__item-name:hover {
           color: var(--link-hover-color);
           cursor: pointer;
         }
+        .el-icon-close {
+          display: none;
+        }
         &:hover {
-          .el-upload__file__icon {
+          .el-icon-close {
+            display: inline-block;
+            cursor: pointer;
+            opacity: .75;
+            transform: scale(.7);
+            color: var(--color-extra-light-black);
+            &:hover {
+              opacity: 1;
+            }
+          }
+          .el-icon-circle-check,
+          .el-icon-check {
             display: none;
           }
-          .el-upload__btn-delete {
-            display: block;
-            cursor: pointer;
+        }
+      }
+    }
+    @e item-name {
+      color: var(--color-extra-light-black);
+      display: block;
+      margin-right: 40px;
+      overflow: hidden;
+      padding-left: 4px;
+      text-overflow: ellipsis;
+      transition: color .3s;
+      white-space: nowrap;
+
+      [class^="el-icon"] {
+        color: var(--color-light-silver);
+        margin-right: 7px;
+        height: 100%;
+        line-height: inherit;
+      }
+    }
+    @e item-status-label {
+      position: absolute;
+      right: 10px;
+      top: 0;
+      line-height: inherit;
+      color: var(--color-success);
+    }
+    @e item-delete {
+      position: absolute;
+      right: 10px;
+      top: 0;
+      font-size: 12px;
+      color: var(--color-extra-light-black);
+      display: none;
+
+      &: hover {
+        color: var(--color-primary);
+      }
+    }
+    @m picture-card {
+      float: left;
+      margin: 0;
+
+      .el-upload-list__item {
+        overflow: hidden;
+        background-color: #fff;
+        border: 1px solid #c0ccda;
+        border-radius: 6px;
+        box-sizing: border-box;
+        width: 148px;
+        height: @width;
+        margin: 0 8px 8px 0;
+        display: inline-block;
+
+        &:hover .el-upload-list__item-status-label {
+          display: none;
+        }
+      }
+      .el-upload-list__item-name {
+        display: none;
+      }
+      .el-upload-list__item-thumbnail {
+        width: 100%;
+        height: 100%;
+      }
+      .el-upload-list__item-status-label {
+        position: absolute;
+        right: -15px;
+        top: -6px;
+        width: 40px;
+        height: 24px;
+        background: #13ce66;
+        text-align: center;
+        transform: rotate(45deg);
+        box-shadow: 0 0 1pc 1px rgba(0,0,0,0.2);
+
+        i {
+          font-size: 12px;
+          margin-top: 11px;
+          transform: rotate(-45deg) scale(0.8);
+          color: #fff;
+        }
+      }
+      .el-upload-list__item-actions {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        cursor: default;
+        text-align: center;
+        color: #fff;
+        opacity: 0;
+        font-size: 20px;
+        background-color: rgba(0, 0, 0, .5);
+        transition: opacity .3s;
+        @utils-vertical-center;
+
+        span {
+          display: none;
+          cursor: pointer;
+        }
+        span + span {
+          margin-left: 15px;
+        }
+
+        .el-upload-list__item-delete {
+          position: static;
+          font-size: inherit;
+          color: inherit;
+        }
+
+        &:hover {
+          opacity: 1;
+          span {
+            display: inline-block;
           }
         }
       }
-      @when fail {
-        .el-upload__file__icon {
-          color: var(--color-error);
+    }
+    @m picture {
+      .el-upload-list__item {
+        overflow: hidden;
+        background-color: #fff;
+        border: 1px solid #c0ccda;
+        border-radius: 6px;
+        box-sizing: border-box;
+        margin-top: 10px;
+
+        &:hover {
+          .el-upload-list__item-status-label {
+            background: transparent;
+            box-shadow: none;
+            top: -2px;
+            right: -12px;
+
+            .el-icon-close {
+              transform: rotate(45deg) scale(.7);
+            }
+          }
         }
       }
-    }
-    @e tip {
-      font-size: 12px;
-      color: var(--color-base-silver);
-      margin-top: 7px;
-    }
-    @e btn-delete {
-      position: absolute;
-      right: 15px;
-      top: 0;
-      font-size: 12px;
-      color: var(--color-primary);
-      display: none;
-    }
-    /* 拖拽模式 */
-    @m draggable {
-      background-color: var(--color-dark-white);
-      border: 1px solid var(--color-extra-light-silver);
-      box-sizing: border-box;
-      width: 360px;
-      height: 180px;
-      border-radius: 4px;
-      text-align: center;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-
-      & .el-upload__inner {
-        display: block;
-        height: 100%;
+      .el-upload-list__item-thumbnail {
+        vertical-align: middle;
+        display: inline-block;
+        width: 70px;
+        height: 70px;
+        margin: 10px;
       }
-      & .el-icon-upload {
-        font-size: 67px;
-        color: var(--color-light-silver);
-        margin: 40px 0 16px;
-        line-height: 50px;
+      .el-upload-list__item-name {
+        display: inline-block;
+        vertical-align: middle;
       }
-
-      & + .el-upload__tip {
+      .el-upload-list__item-status-label {
+        position: absolute;
+        right: -17px;
+        top: -7px;
+        width: 46px;
+        height: 26px;
+        background: #13ce66;
         text-align: center;
-      }
-      & ~ .el-upload__files {
-        margin-top: 7px;
-        padding-top: 5px;
-        border-top: 1px solid rgba(var(--color-extra-light-silver), .2);
-      }
+        transform: rotate(45deg);
+        box-shadow: 0 1px 1px #ccc;
 
-      @e text {
-        color: var(--color-light-silver);
-        font-size: 14px;
-        text-align: center;
-
-        & em {
-          color: var(--color-primary);
-          font-style: normal;
+        i {
+          font-size: 12px;
+          margin-top: 12px;
+          transform: rotate(-45deg) scale(0.8);
+          color: #fff;
         }
-      }
-
-      &:not(.is-showCover):hover {
-        border-color: var(--color-primary);
-      }
-
-      @when dragOver {
-        background-color: rgba(32, 159, 255, .06);
-        border: 2px dashed var(--color-primary);
       }
     }
   }

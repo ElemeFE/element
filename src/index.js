@@ -47,7 +47,6 @@ import Icon from '../packages/icon';
 import Row from '../packages/row';
 import Col from '../packages/col';
 import Upload from '../packages/upload';
-import UploadDragger from '../packages/upload-dragger';
 import Progress from '../packages/progress';
 import Spinner from '../packages/spinner';
 import Message from '../packages/message';
@@ -109,7 +108,6 @@ const components = [
   Row,
   Col,
   Upload,
-  UploadDragger,
   Progress,
   Spinner,
   Badge,
@@ -203,7 +201,6 @@ module.exports = {
   Row,
   Col,
   Upload,
-  UploadDragger,
   Progress,
   Spinner,
   Message,
