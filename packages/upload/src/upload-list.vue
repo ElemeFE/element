@@ -9,7 +9,11 @@
       :class="['el-upload-list__item', 'is-' + file.status]"
       :key="file"
     >
-      <img class="el-upload-list__item-thumbnail" v-if="['picture-card', 'picture'].indexOf(listType) > -1" :src="file.url" alt="">
+      <img
+        class="el-upload-list__item-thumbnail"
+        v-if="['picture-card', 'picture'].indexOf(listType) > -1 && file.status === 'success'"
+        :src="file.url" alt=""
+      >
       <a class="el-upload-list__item-name" @click="handleClick(file)">
         <i class="el-icon-document"></i>{{file.name}}
       </a>
