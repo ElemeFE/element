@@ -49,7 +49,8 @@
       </span>
       <el-progress
         v-if="file.status === 'uploading'"
-        :stroke-width="2"
+        :type="listType === 'picture-card' ? 'circle' : 'line'"
+        :stroke-width="listType === 'picture-card' ? 6 : 2"
         :percentage="parsePercentage(file.percentage)">
       </el-progress>
     </li>
