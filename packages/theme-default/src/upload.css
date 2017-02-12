@@ -281,6 +281,8 @@
         border-radius: 6px;
         box-sizing: border-box;
         margin-top: 10px;
+        padding: 10px 10px 10px 90px;
+        height: 92px;
 
         &:hover {
           .el-upload-list__item-status-label {
@@ -294,17 +296,36 @@
             }
           }
         }
+        &.is-success {
+          .el-upload-list__item-name {
+            line-height: 70px;
+            margin-top: 0;
+
+            i {
+              display: none;
+            }
+          }
+        }
       }
       .el-upload-list__item-thumbnail {
         vertical-align: middle;
         display: inline-block;
         width: 70px;
         height: 70px;
-        margin: 10px;
+        float: left;
+        margin-left: -80px;
       }
       .el-upload-list__item-name {
-        display: inline-block;
-        vertical-align: middle;
+        display: block;
+        margin-top: 20px;
+
+        i {
+          font-size: 70px;
+          line-height: 1;
+          position: absolute;
+          left: 9px;
+          top: 10px;
+        }
       }
       .el-upload-list__item-status-label {
         position: absolute;
@@ -323,6 +344,9 @@
           transform: rotate(-45deg) scale(0.8);
           color: #fff;
         }
+      }
+      .el-progress {
+        position: static;
       }
     }
   }
