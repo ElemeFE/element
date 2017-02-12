@@ -7,6 +7,8 @@
       :placeholder="placeholder"
       :name="name"
       :size="size"
+      :icon="icon"
+      :on-icon-click="onIconClick"
       @change="handleChange"
       @focus="handleFocus"
       @blur="handleBlur"
@@ -62,7 +64,9 @@
         type: Boolean,
         default: true
       },
-      customItem: String
+      customItem: String,
+      icon: String,
+      onIconClick: Function
     },
     data() {
       return {
