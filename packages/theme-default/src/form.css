@@ -74,6 +74,11 @@
       & .el-textarea__inner {
         border-color: var(--color-danger);
       }
+      & .el-select {
+        & .el-input__inner {
+          border-color: transparent;
+        }
+      }
     }
   }
 }
