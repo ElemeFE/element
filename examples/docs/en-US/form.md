@@ -731,6 +731,33 @@ Form component allows you to verify your data, helping you find and correct erro
 ```
 :::
 
+### Accessible labels
+
+::: demo Labels follow the native HTML for / id pattern. By adding `for` and to a el-form-item and the corresponding `name` to a nested el-input, the input will be focused when pressing on a label.
+```html
+<el-form :model="accessibleLabelForm" ref="accessibleLabelForm" label-width="100px" class="demo-ruleForm">
+  <el-form-item
+    label="name"
+    prop="name"
+    for="name"
+  >
+    <el-input name="name" v-model="accessibleLabelForm.name" auto-complete="off"></el-input>
+  </el-form-item>
+</el-form>
+<script>
+  export default {
+    data() {
+      return {
+        accessibleLabelForm: {
+          name: ''
+        }
+      };
+    }
+  }
+</script>
+```
+:::
+
 ### Form Attributes
 
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
