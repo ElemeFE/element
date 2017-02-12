@@ -33,6 +33,7 @@
       height: @width;
       cursor: pointer;
       line-height: calc(@height - 2);
+      vertical-align: top;
 
       i {
         font-size: 28px;
@@ -193,8 +194,9 @@
       }
     }
     @m picture-card {
-      float: left;
       margin: 0;
+      display: inline;
+      vertical-align: top;
 
       .el-upload-list__item {
         overflow: hidden;
@@ -270,6 +272,17 @@
           span {
             display: inline-block;
           }
+        }
+      }
+      .el-progress {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        bottom: auto;
+        width: 126px;
+
+        .el-progress__text {
+          top: 50%;
         }
       }
     }
