@@ -791,6 +791,8 @@ export default {
 | fetch-suggestions | 返回输入建议的方法，仅当你的输入建议数据 resolve 时，通过调用 callback(data:[]) 来返回它  | Function(queryString, callback)  | — | — |
 | popper-class | Autocomplete 下拉列表的类名 | string | — | — |
 | trigger-on-focus | 是否在输入框 focus 时显示建议列表 | boolean | — | true |
+| on-icon-click | 点击 Input 内的图标的钩子函数 | function | — | — |
+| icon          | 输入框尾部图标    | string          | — | — |
 
 ### Autocomplete Events
 | 事件名称 | 说明 | 回调参数 |
