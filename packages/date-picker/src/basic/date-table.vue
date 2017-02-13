@@ -270,7 +270,7 @@
       getDateOfCell(row, column) {
         const startDate = this.startDate;
 
-        return new Date(startDate.getTime() + (row * 7 + (column - (this.showWeekNumber ? 1 : 0))) * DAY_DURATION);
+        return new Date(startDate.getTime() + (row * 7 + (column - (this.showWeekNumber ? 1 : 0)) - this.offsetDay) * DAY_DURATION);
       },
 
       getCellByDate(date) {
@@ -322,7 +322,7 @@
 
             const cell = row[j];
             const index = i * 7 + j + (this.showWeekNumber ? -1 : 0);
-            const time = startDate.getTime() + DAY_DURATION * index;
+            const time = startDate.getTime() + DAY_DURATION * (index - this.offsetDay);
 
             cell.inRange = minDate && time >= clearHours(minDate) && time <= clearHours(maxDate);
             cell.start = minDate && time === clearHours(minDate.getTime());
