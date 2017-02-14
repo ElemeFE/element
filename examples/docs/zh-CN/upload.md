@@ -55,9 +55,6 @@
       };
     },
     methods: {
-      handleChange(file, fileList, event) {
-        console.log(file, fileList, event);
-      },
       handleRemove(file, fileList) {
         console.log(file, fileList);
       },
@@ -70,12 +67,6 @@
       },
       handlePreview(file) {
         console.log(file);
-      },
-      handleSuccess(file, fileList) {
-        console.log(file, fileList);
-      },
-      handleError(err, file, fileList) {
-        console.log(err);
       },
       submitUpload() {
         this.$refs.upload.submit();
@@ -156,15 +147,24 @@
   export default {
     data() {
       return {
-        fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
+        imageUrl: ''
       };
     },
     methods: {
-      handleRemove(file, fileList) {
-        console.log(file, fileList);
+      handleAvatarScucess(res, file) {
+        this.imageUrl = URL.createObjectURL(file.raw);
       },
-      handlePreview(file) {
-        console.log(file);
+      beforeAvatarUpload(file) {
+        const isJPG = file.type === 'image/jpeg';
+        const isLt2M = file.size / 1024 / 1024 < 2;
+
+        if (!isJPG) {
+          this.$message.error('上传头像图片只能是 JPG 格式!');
+        }
+        if (!isLt2M) {
+          this.$message.error('上传头像图片大小不能超过 2MB!');
+        }
+        return isJPG && isLt2M;
       }
     }
   }
@@ -181,16 +181,12 @@
 <el-upload
   action="http://localhost:9000/upload"
   list-type="picture-card"
-  :on-preview="handlePreview">
+  :on-preview="handlePreview"
+  :on-remove="handleRemove">
   <i class="el-icon-plus"></i>
 </el-upload>
 <script>
   export default {
-    data() {
-      return {
-        fileList: []
-      };
-    },
     methods: {
       handleRemove(file, fileList) {
         console.log(file, fileList);
@@ -246,9 +242,6 @@
   class="upload-demo"
   drag
   action="http://localhost:9000/upload"
-  :on-preview="handlePreview"
-  :on-remove="handleRemove"
-  :file-list="fileList"
   mutiple>
   <i class="el-icon-upload"></i>
   <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>

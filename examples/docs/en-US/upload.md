@@ -2,13 +2,19 @@
   export default {
     data() {
       return {
-        fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
+        fileList: [{
+          name: 'food.jpeg',
+          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
+          status: 'finished'
+        }, {
+          name: 'food2.jpeg',
+          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
+          status: 'finished'
+        }],
+        imageUrl: ''
       };
     },
     methods: {
-      handleChange(file, fileList, event) {
-        console.log(file, fileList, event);
-      },
       handleRemove(file, fileList) {
         console.log(file, fileList);
       },
@@ -22,11 +28,23 @@
       handlePreview(file) {
         console.log(file);
       },
-      handleSuccess(file, fileList) {
-        console.log(file, fileList);
+      submitUpload() {
+        this.$refs.upload.submit();
       },
-      handleError(err, file, fileList) {
-        console.log(err);
+      handleAvatarScucess(res, file) {
+        this.imageUrl = URL.createObjectURL(file.raw);
+      },
+      beforeAvatarUpload(file) {
+        const isJPG = file.type === 'image/jpeg';
+        const isLt2M = file.size / 1024 / 1024 < 2;
+
+        if (!isJPG) {
+          this.$message.error('Avatar picture must be JPG format!');
+        }
+        if (!isLt2M) {
+          this.$message.error('Avatar picture size can not exceed 2MB!');
+        }
+        return isJPG && isLt2M;
       }
     }
   }
@@ -40,12 +58,119 @@ Upload files by clicking or drag-and-drop
 :::demo Customize upload button type and text using `slot`.
 ```html
 <el-upload
-  action="//jsonplaceholder.typicode.com/posts/"
+  class="upload-demo"
+  action="http://localhost:9000/upload"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
-  :default-file-list="fileList">
+  :file-list="fileList">
   <el-button size="small" type="primary">Click to upload</el-button>
-  <div class="el-upload__tip" slot="tip">jpg/png files with a size less than 500kb</div>
+  <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
+</el-upload>
+<script>
+  export default {
+    data() {
+      return {
+        fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
+      };
+    },
+    methods: {
+      handleRemove(file, fileList) {
+        console.log(file, fileList);
+      },
+      handlePreview(file) {
+        console.log(file);
+      }
+    }
+  }
+</script>
+```
+:::
+
+### User avatar upload
+
+Use beforeUpload hook to limit the upload file format and size.
+
+::: demo
+```html
+<el-upload
+  class="avatar-uploader"
+  action="http://localhost:9000/upload"
+  :show-file-list="false"
+  :on-success="handleAvatarScucess"
+  :before-upload="beforeAvatarUpload">
+  <img v-if="imageUrl" :src="imageUrl" class="avatar">
+  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+</el-upload>
+<script>
+  export default {
+    data() {
+      return {
+        imageUrl: ''
+      };
+    },
+    methods: {
+      handleAvatarScucess(res, file) {
+        this.imageUrl = URL.createObjectURL(file.raw);
+      },
+      beforeAvatarUpload(file) {
+        const isJPG = file.type === 'image/jpeg';
+        const isLt2M = file.size / 1024 / 1024 < 2;
+
+        if (!isJPG) {
+          this.$message.error('Avatar picture must be JPG format!');
+        }
+        if (!isLt2M) {
+          this.$message.error('Avatar picture size can not exceed 2MB!');
+        }
+        return isJPG && isLt2M;
+      }
+    }
+  }
+</script>
+```
+:::
+
+### Photo Wall
+
+Use listType to change the fileList style.
+
+::: demo
+```html
+<el-upload
+  action="http://localhost:9000/upload"
+  list-type="picture-card"
+  :on-preview="handlePreview"
+  :on-remove="handleRemove">
+  <i class="el-icon-plus"></i>
+</el-upload>
+<script>
+  export default {
+    methods: {
+      handleRemove(file, fileList) {
+        console.log(file, fileList);
+      },
+      handlePreview(file) {
+        console.log(file);
+      }
+    }
+  }
+</script>
+```
+:::
+
+### FileList with thumbnail
+
+::: demo
+```html
+<el-upload
+  class="upload-demo"
+  action="http://localhost:9000/upload"
+  :on-preview="handlePreview"
+  :on-remove="handleRemove"
+  :file-list="fileList"
+  list-type="picture">
+  <el-button size="small" type="primary">Click to upload</el-button>
+  <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
 </el-upload>
 <script>
   export default {
@@ -71,73 +196,41 @@ Upload files by clicking or drag-and-drop
 
 You can drag your file to a certain area to upload it.
 
-:::demo Specifying the `type` attribute as `drag` will change the upload control to a drag-and-drop style. Additionally, you can use the `multiple` attribute to control whether uploading multiple files is permitted. `on-preview` and `on-remove` are hook functions that will be called after clicking on the uploaded file link and after clicking to remove the uploaded file, respectively.
+::: demo
 ```html
 <el-upload
-  action="//jsonplaceholder.typicode.com/posts/"
-  type="drag"
-  :multiple="true"
+  class="upload-demo"
+  drag
+  action="http://localhost:9000/upload"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
-  :on-success="handleSuccess"
-  :on-error="handleError"
-  :default-file-list="fileList"
->
+  :file-list="fileList"
+  mutiple>
   <i class="el-icon-upload"></i>
-  <div class="el-dragger__text">Drop file here or <em>click to upload</em></div>
+  <div class="el-upload__text">Drop file here or <em>click to upload</em></div>
   <div class="el-upload__tip" slot="tip">jpg/png files with a size less than 500kb</div>
 </el-upload>
-<script>
-  export default {
-    data() {
-      return {
-        fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
-      };
-    },
-    methods: {
-      handleRemove(file, fileList) {
-        console.log(file, fileList);
-      },
-      handlePreview(file) {
-        console.log(file);
-      }
-    }
-  }
-</script>
 ```
 :::
 
-### Upload single image
+### Manual upload
 
-This mode is specifically for image uploading, and the thumbnail will display in the origin place.
-
-:::demo `thumbnail-mode` attribute allows you to force the upload content to image only, and can display the thumbnail of the uploaded image.
+::: demo
 ```html
 <el-upload
-  action="//jsonplaceholder.typicode.com/posts/"
-  type="drag"
-  :thumbnail-mode="true"
-  :on-preview="handlePreview"
-  :on-remove="handleRemove"
-  :default-file-list="fileList"
->
-  <i class="el-icon-upload"></i>
-  <div class="el-dragger__text">Drop file here or <em>click to upload</em></div>
+  class="upload-demo"
+  ref="upload"
+  action="http://localhost:9000/upload"
+  :auto-upload="false">
+  <el-button slot="trigger" size="small" type="primary">select file</el-button>
+  <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">upload to server</el-button>
   <div class="el-upload__tip" slot="tip">jpg/png files with a size less than 500kb</div>
 </el-upload>
 <script>
   export default {
-    data() {
-      return {
-        fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
-      };
-    },
     methods: {
-      handleRemove(file, fileList) {
-        console.log(file, fileList);
-      },
-      handlePreview(file) {
-        console.log(file);
+      submitUpload() {
+        this.$refs.upload.submit();
       }
     }
   }
@@ -160,11 +253,14 @@ accept | accepted [file types](https://developer.mozilla.org/en-US/docs/Web/HTML
 on-preview | hook function when clicking the uploaded files | function(file) | — | —
 on-remove | hook function when files are removed | function(file, fileList) | — | —
 on-success | hook function when uploaded successfully | function(response, file, fileList) | — | —
-on-error | hook function when some errors occurs | function(err, response, file) | — | —
+on-error | hook function when some errors occurs | function(err, file, fileList) | — | —
 on-progress | hook function when some progress occurs | function(event, file, fileList) | — | — |
+on-change | hook function when file status change | function(file, fileList) | — | — |
 before-upload | hook function before uploading with the file to be uploaded as its parameter. If `false` or a `Promise` is returned, uploading will be aborted | function(file) | — | —
 thumbnail-mode | whether thumbnail is displayed | boolean | — | false
 default-file-list | default uploaded files, i.e: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}] | array | — | []
+list-type | type of fileList | string | text/picture/picture-card | text |
+auto-upload | whether to auto upload file | boolean | — | true |
 
 ### Events
 | Event Name | Description | Parameters |
