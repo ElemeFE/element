@@ -74,6 +74,12 @@
       & .el-textarea__inner {
         border-color: var(--color-danger);
       }
+      & .el-input-group__append,
+      & .el-input-group__prepend, {
+        & .el-input__inner {
+          border-color: transparent;
+        }
+      }
     }
   }
 }
