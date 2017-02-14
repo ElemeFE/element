@@ -1,9 +1,12 @@
 function getError(action, option, xhr) {
-  const msg = xhr.response
-    ? (xhr.response.error || xhr.response)
-    : xhr.responseText
-    ? xhr.responseText
-    : `fail to post ${action} ${xhr.status}'`;
+  let msg;
+  if (xhr.response) {
+    msg = `${xhr.status} ${xhr.response.error || xhr.response}`;
+  } else if (xhr.responseText) {
+    msg = `${xhr.status} ${xhr.responseText}`;
+  } else {
+    msg = `fail to post ${action} ${xhr.status}'`;
+  }
 
   const err = new Error(msg);
   err.status = xhr.status;
