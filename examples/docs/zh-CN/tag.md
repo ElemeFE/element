@@ -53,6 +53,7 @@
     .input-new-tag {
       width: 78px;
       margin-left: 10px;
+      vertical-align: bottom;
 
       .el-input__inner {
         height: 24px;
