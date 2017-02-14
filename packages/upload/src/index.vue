@@ -143,9 +143,10 @@ export default {
         file.response = res;
 
         this.onSuccess(res, file, this.uploadFiles);
+        this.onChange(file, this.uploadFiles);
       }
     },
-    handleError(err, response, rawFile) {
+    handleError(err, rawFile) {
       var file = this.getFile(rawFile);
       var fileList = this.uploadFiles;
 
@@ -153,7 +154,8 @@ export default {
 
       fileList.splice(fileList.indexOf(file), 1);
 
-      this.onError(err, response, rawFile);
+      this.onError(err, file, this.uploadFiles);
+      this.onChange(file, this.uploadFiles);
     },
     handleRemove(file) {
       var fileList = this.uploadFiles;
