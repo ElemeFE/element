@@ -1,5 +1,10 @@
 function getError(action, option, xhr) {
-  const msg = `fail to post ${action} ${xhr.status}'`;
+  const msg = xhr.response
+    ? (xhr.response.error || xhr.response)
+    : xhr.responseText
+    ? xhr.responseText
+    : `fail to post ${action} ${xhr.status}'`;
+
   const err = new Error(msg);
   err.status = xhr.status;
   err.method = 'post';
@@ -53,7 +58,7 @@ export default function upload(option) {
 
   xhr.onload = function onload() {
     if (xhr.status < 200 || xhr.status >= 300) {
-      return option.onError(getError(action, option, xhr), getBody(xhr));
+      return option.onError(getError(action, option, xhr));
     }
 
     option.onSuccess(getBody(xhr));

@@ -105,6 +105,7 @@
 
 ### 点击上传
 
+
 ::: demo 通过 slot 你可以传入自定义的上传按钮类型和文字提示。
 ```html
 <el-upload
@@ -307,8 +308,9 @@
 | on-preview | 可选参数, 点击已上传的文件链接时的钩子, 可以通过 file.response 拿到服务端返回数据 | function(file) | — | — |
 | on-remove | 可选参数, 文件列表移除文件时的钩子 | function(file, fileList) | — | — |
 | on-success | 可选参数, 文件上传成功时的钩子 | function(response, file, fileList) | — | — |
-| on-error | 可选参数, 文件上传失败时的钩子 | function(err, response, file) | — | — |
+| on-error | 可选参数, 文件上传失败时的钩子 | function(err, file, fileList) | — | — |
 | on-progress | 可选参数, 文件上传时的钩子 | function(event, file, fileList) | — | — |
+| on-change | 可选参数, 文件状态改变时的钩子 | function(file, fileList) | — | — |
 | before-upload | 可选参数, 上传文件之前的钩子，参数为上传的文件，若返回 false 或者 Promise 则停止上传。 | function(file) | — | — |
 | list-type | 文件列表的类型 | string | text/picture/picture-card | text |
 | auto-upload | 是否在选取文件后立即进行上传 | boolean | — | true |

@@ -106,8 +106,8 @@ export default {
         onSuccess: res => {
           this.onSuccess(res, rawFile);
         },
-        onError: (err, response) => {
-          this.onError(err, response, rawFile);
+        onError: err => {
+          this.onError(err, rawFile);
         }
       });
     },
