@@ -3,11 +3,14 @@ import UploadList from './upload-list';
 import Upload from './upload';
 import IframeUpload from './iframe-upload';
 import ElProgress from 'element-ui/packages/progress';
+import Migrating from 'element-ui/src/mixins/migrating';
 
 function noop() {}
 
 export default {
   name: 'ElUpload',
+
+  mixins: [Migrating],
 
   components: {
     ElProgress,
@@ -36,7 +39,6 @@ export default {
     drag: Boolean,
     dragger: Boolean,
     withCredentials: Boolean,
-    thumbnailMode: Boolean,
     showFileList: {
       type: Boolean,
       default: true
@@ -180,6 +182,15 @@ export default {
         .forEach(file => {
           this.$refs['upload-inner'].upload(file.raw, file);
         });
+    },
+    getMigratingConfig() {
+      return {
+        props: {
+          'default-file-list': 'default-file-list is renamed to file-list.',
+          'show-upload-list': 'show-file-list is renamed to show-file-list.',
+          'thumbnail-mode': 'thumbnail-mode has been deprecated, you can implement the same effect according to this case: http://element.eleme.io/#/zh-CN/component/upload#yong-hu-tou-xiang-shang-chuan'
+        }
+      };
     }
   },
 
@@ -208,7 +219,7 @@ export default {
         headers: this.headers,
         name: this.name,
         data: this.data,
-        accept: this.thumbnailMode ? 'image/gif, image/png, image/jpeg, image/bmp, image/webp' : this.accept,
+        accept: this.accept,
         fileList: this.uploadFiles,
         autoUpload: this.autoUpload,
         listType: this.listType,
