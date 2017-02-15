@@ -1,5 +1,3 @@
-import merge from 'element-ui/src/utils/merge';
-
 let hiddenTextarea;
 
 const HIDDEN_STYLE = `
@@ -55,8 +53,7 @@ function calculateNodeStyling(node) {
 export default function calcTextareaHeight(
   targetNode,
   minRows = null,
-  maxRows = null,
-  options = null
+  maxRows = null
 ) {
   if (!hiddenTextarea) {
     hiddenTextarea = document.createElement('textarea');
@@ -99,5 +96,5 @@ export default function calcTextareaHeight(
     height = Math.min(maxHeight, height);
   }
 
-  return merge({ height: height + 'px'}, options);
+  return { height: height + 'px'};
 };
