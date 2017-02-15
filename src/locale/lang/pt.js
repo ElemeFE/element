@@ -12,7 +12,7 @@ export default {
       startTime: 'Hora de inicio',
       endDate: 'Data de fim',
       endTime: 'Hora de fim',
-      year: 'Ano',
+      year: '',
       month1: 'Janeiro',
       month2: 'Fevereiro',
       month3: 'Março',

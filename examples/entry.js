@@ -1,4 +1,4 @@
-require('offline-plugin/runtime').install();
+process.env.NODE_ENV === 'production' && require('offline-plugin/runtime').install();
 
 import Vue from 'vue';
 import entry from './app';

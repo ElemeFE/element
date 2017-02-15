@@ -13,6 +13,7 @@ describe('Cascader', () => {
           ref="cascader"
           placeholder="请选择"
           :options="options"
+          clearable
           v-model="selectedOptions"
         ></el-cascader>
       `,
@@ -507,7 +508,7 @@ describe('Cascader', () => {
       const item1 = menuElm.querySelector('.el-cascader-menu__item');
 
       expect(menuElm.children.length).to.be.equal(1);
-      expect(menuElm.children[0].children.length).to.be.equal(1);
+      expect(menuElm.children[0].children.length).to.be.equal(3);
       done();
 
       item1.click();
