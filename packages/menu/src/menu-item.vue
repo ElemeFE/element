@@ -13,7 +13,7 @@
   import Menu from './menu-mixin';
   import Emitter from 'element-ui/src/mixins/emitter';
 
-  module.exports = {
+  export default {
     name: 'ElMenuItem',
 
     componentName: 'ElMenuItem',
@@ -42,6 +42,7 @@
     methods: {
       handleClick() {
         this.dispatch('ElMenu', 'item-click', this);
+        this.$emit('click', this);
       }
     },
     created() {

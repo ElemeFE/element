@@ -56,6 +56,10 @@ export default {
       noData: 'データなし',
       placeholder: '選択してください'
     },
+    cascader: {
+      noMatch: 'データなし',
+      placeholder: '選択してください'
+    },
     pagination: {
       goto: '',
       pagesize: '件/ページ',

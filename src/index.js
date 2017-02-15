@@ -60,6 +60,7 @@ import Scrollbar from '../packages/scrollbar';
 import CarouselItem from '../packages/carousel-item';
 import Collapse from '../packages/collapse';
 import CollapseItem from '../packages/collapse-item';
+import Cascader from '../packages/cascader';
 import locale from 'element-ui/src/locale';
 
 const components = [
@@ -118,7 +119,8 @@ const components = [
   Scrollbar,
   CarouselItem,
   Collapse,
-  CollapseItem
+  CollapseItem,
+  Cascader
 ];
 
 const install = function(Vue, opts = {}) {
@@ -211,5 +213,6 @@ module.exports = {
   Scrollbar,
   CarouselItem,
   Collapse,
-  CollapseItem
+  CollapseItem,
+  Cascader
 };

@@ -7,11 +7,13 @@
       :placeholder="placeholder"
       :name="name"
       :size="size"
+      :icon="icon"
+      :on-icon-click="onIconClick"
       @change="handleChange"
       @focus="handleFocus"
       @blur="handleBlur"
-      @keydown.up.native="highlight(highlightedIndex - 1)"
-      @keydown.down.native="highlight(highlightedIndex + 1)"
+      @keydown.up.native.prevent="highlight(highlightedIndex - 1)"
+      @keydown.down.native.prevent="highlight(highlightedIndex + 1)"
       @keydown.enter.stop.native="handleKeyEnter"
     >
       <template slot="prepend" v-if="$slots.prepend">
@@ -19,7 +21,7 @@
       </template>
       <template slot="append" v-if="$slots.append">
         <slot name="append"></slot>
-      </template> 
+      </template>
     </el-input>
     <el-autocomplete-suggestions
       :class="[popperClass ? popperClass : '']"
@@ -62,7 +64,9 @@
         type: Boolean,
         default: true
       },
-      customItem: String
+      customItem: String,
+      icon: String,
+      onIconClick: Function
     },
     data() {
       return {
@@ -98,6 +102,10 @@
       },
       handleChange(value) {
         this.$emit('input', value);
+        if (!this.triggerOnFocus && !value) {
+          this.suggestions = [];
+          return;
+        }
         this.getData(value);
       },
       handleFocus() {
@@ -113,7 +121,7 @@
         }, 100);
       },
       handleKeyEnter() {
-        if (this.suggestionVisible) {
+        if (this.suggestionVisible && this.highlightedIndex >= 0 && this.highlightedIndex < this.suggestions.length) {
           this.select(this.suggestions[this.highlightedIndex]);
         }
       },
@@ -129,22 +137,22 @@
       },
       highlight(index) {
         if (!this.suggestionVisible || this.loading) { return; }
-        if (index < 0) {
-          index = 0;
-        } else if (index >= this.suggestions.length) {
+        if (index < 0) index = 0;
+        if (index >= this.suggestions.length) {
           index = this.suggestions.length - 1;
         }
-        var elSuggestions = this.$refs.suggestions.$el;
+        const suggestion = this.$refs.suggestions.$el.querySelector('.el-autocomplete-suggestion__wrap');
+        const suggestionList = suggestion.querySelectorAll('.el-autocomplete-suggestion__list li');
 
-        var elSelect = elSuggestions.children[index];
-        var scrollTop = elSuggestions.scrollTop;
-        var offsetTop = elSelect.offsetTop;
+        let highlightItem = suggestionList[index];
+        let scrollTop = suggestion.scrollTop;
+        let offsetTop = highlightItem.offsetTop;
 
-        if (offsetTop + elSelect.scrollHeight > (scrollTop + elSuggestions.clientHeight)) {
-          elSuggestions.scrollTop += elSelect.scrollHeight;
+        if (offsetTop + highlightItem.scrollHeight > (scrollTop + suggestion.clientHeight)) {
+          suggestion.scrollTop += highlightItem.scrollHeight;
         }
         if (offsetTop < scrollTop) {
-          elSuggestions.scrollTop -= elSelect.scrollHeight;
+          suggestion.scrollTop -= highlightItem.scrollHeight;
         }
 
         this.highlightedIndex = index;

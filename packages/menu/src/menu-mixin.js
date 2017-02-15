@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   computed: {
     indexPath() {
       var path = [this.index];

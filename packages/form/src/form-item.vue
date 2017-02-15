@@ -67,7 +67,7 @@
     watch: {
       error(value) {
         this.validateMessage = value;
-        this.validateState = 'error';
+        this.validateState = value ? 'error' : '';
       },
       validateStatus(value) {
         this.validateState = value;

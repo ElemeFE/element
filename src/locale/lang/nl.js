@@ -56,6 +56,10 @@ export default {
       noData: 'Geen data',
       placeholder: 'Selecteer'
     },
+    cascader: {
+      noMatch: 'Geen overeenkomende resultaten',
+      placeholder: 'Selecteer'
+    },
     pagination: {
       goto: 'Ga naar',
       pagesize: '/page',

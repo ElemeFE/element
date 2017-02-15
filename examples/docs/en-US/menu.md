@@ -156,6 +156,11 @@ Vertical NavMenu with sub-menus.
 | open  | callback function when sub-menu expands | index: index of expanded sub-menu, indexPath: index path of expanded sub-menu |
 | close  | callback function when sub-menu collapses | index: index of collapsed sub-menu, indexPath: index path of collapsed sub-menu |
 
+### Menu-Item Events
+| Event Name | Description | Parameters |
+|---------- |-------- |---------- |
+| click  | callback function when menu-item is clicked | el: menu-item instance  |
+
 ### SubMenu Attribute
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------- |---------- |-------------  |-------- |

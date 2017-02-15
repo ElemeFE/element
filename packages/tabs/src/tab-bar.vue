@@ -3,9 +3,12 @@
 </template>
 <script>
   export default {
+    name: 'TabBar',
+
     props: {
       tabs: Array
     },
+
     computed: {
       barStyle: {
         cache: false,
