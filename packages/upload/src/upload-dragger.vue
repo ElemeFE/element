@@ -2,11 +2,11 @@
   <div
     class="el-upload-dragger"
     :class="{
-      'is-dragOver': dragOver
+      'is-dragover': dragover
     }"
     @drop.prevent="onDrop"
-    @dragover.prevent="dragOver = true"
-    @dragleave.prevent="dragOver = false"
+    @dragover.prevent="dragover = true"
+    @dragleave.prevent="dragover = false"
   >
     <slot></slot>
   </div>
@@ -17,12 +17,12 @@
 
     data() {
       return {
-        dragOver: false
+        dragover: false
       };
     },
     methods: {
       onDrop(e) {
-        this.dragOver = false;
+        this.dragover = false;
         this.$emit('file', e.dataTransfer.files);
       }
     }

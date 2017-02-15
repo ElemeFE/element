@@ -88,7 +88,7 @@
       border-color: var(--color-primary);
     }
 
-    @when dragOver {
+    @when dragover {
       background-color: rgba(32, 159, 255, .06);
       border: 2px dashed var(--color-primary);
     }
