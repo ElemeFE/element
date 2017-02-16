@@ -105,6 +105,28 @@ describe('Input', () => {
     expect(vm.$el.querySelector('.el-textarea__inner').getAttribute('rows')).to.be.equal('3');
   });
 
+  // Github issue #2836
+  it('resize', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-input type="textarea" :resize="resize"></el-input>
+        </div>
+      `,
+      data: {
+        resize: 'none'
+      }
+    }, true);
+    vm.$nextTick(() => {
+      expect(vm.$el.querySelector('.el-textarea__inner').style.resize).to.be.equal(vm.resize);
+      vm.resize = 'horizontal';
+      vm.$nextTick(() => {
+        expect(vm.$el.querySelector('.el-textarea__inner').style.resize).to.be.equal(vm.resize);
+        done();
+      });
+    });
+  });
+
   it('autosize', done => {
     vm = createVue({
       template: `
