@@ -26,13 +26,9 @@ const convertToRows = (originColumns) => {
       }
     }
     if (column.children) {
-      let childrenMax = 1;
       let colSpan = 0;
       column.children.forEach((subColumn) => {
-        const temp = traverse(subColumn, column);
-        if (temp > childrenMax) {
-          childrenMax = temp;
-        }
+        traverse(subColumn, column);
         colSpan += subColumn.colSpan;
       });
       column.colSpan = colSpan;
@@ -105,7 +101,7 @@ export default {
                     on-mouseout={ this.handleMouseOut }
                     on-mousedown={ ($event) => this.handleMouseDown($event, column) }
                     on-click={ ($event) => this.handleHeaderClick($event, column) }
-                    class={ [column.id, column.order, column.headerAlign, column.className || '', rowIndex === 0 && this.isCellHidden(cellIndex) ? 'is-hidden' : '', !column.children ? 'is-leaf' : ''] }>
+                    class={ [column.id, column.order, column.headerAlign, column.className || '', rowIndex === 0 && this.isCellHidden(cellIndex, columns) ? 'is-hidden' : '', !column.children ? 'is-leaf' : ''] }>
                     <div class={ ['cell', column.filteredValue && column.filteredValue.length > 0 ? 'highlight' : ''] }>
                     {
                       column.renderHeader
@@ -225,11 +221,15 @@ export default {
   },
 
   methods: {
-    isCellHidden(index) {
+    isCellHidden(index, columns) {
       if (this.fixed === true || this.fixed === 'left') {
         return index >= this.leftFixedCount;
       } else if (this.fixed === 'right') {
-        return index < this.columnsCount - this.rightFixedCount;
+        let before = 0;
+        for (let i = 0; i < index; i++) {
+          before += columns[i].colSpan;
+        }
+        return before < this.columnsCount - this.rightFixedCount;
       } else {
         return (index < this.leftFixedCount) || (index >= this.columnsCount - this.rightFixedCount);
       }
