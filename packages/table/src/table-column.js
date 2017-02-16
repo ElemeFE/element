@@ -121,6 +121,7 @@ export default {
     property: String,
     prop: String,
     width: {},
+    summary: [Number, String],
     minWidth: {},
     renderHeader: Function,
     sortable: {
@@ -220,6 +221,9 @@ export default {
       minWidth,
       width,
       isColumnGroup,
+      summary: this.summary ? () => {
+         return this.summary;
+       } : null,
       context: this.context,
       align: this.align ? 'is-' + this.align : null,
       headerAlign: this.headerAlign ? 'is-' + this.headerAlign : (this.align ? 'is-' + this.align : null),
