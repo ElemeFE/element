@@ -2,7 +2,7 @@
   <form class="el-form" :class="[
     labelPosition ? 'el-form--label-' + labelPosition : '',
     { 'el-form--inline': inline }
-  ]">
+  ]" onsubmit="return false;">
     <slot></slot>
   </form>
 </template>
