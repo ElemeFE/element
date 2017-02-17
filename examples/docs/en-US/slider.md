@@ -7,7 +7,8 @@
         value3: 42,
         value4: 0,
         value5: 0,
-        value6: 0
+        value6: 0,
+        value7: [4, 8]
       };
     }
   }
@@ -119,6 +120,35 @@ Set value via a input box.
 ```
 :::
 
+### Range selection
+
+Selecting a range of values is supported.
+
+:::demo Setting the `range` attribute activates range mode, where the binding value is an array made up of two boundary values.
+```html
+<template>
+  <div class="block">
+    <el-slider
+      v-model="value7"
+      range
+      show-stops
+      :max="10">
+    </el-slider>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        value7: [4, 8]
+      }
+    }
+  }
+</script>
+```
+:::
+
 ## Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -126,9 +156,10 @@ Set value via a input box.
 | max | maximum value | number | — | 100 |
 | disabled | whether Slider is disabled | boolean | — | false |
 | step | step size | number | — | 1 |
-| show-input | whether to display an input box | boolean | — | false |
+| show-input | whether to display an input box, works when `range` is false | boolean | — | false |
 | show-input-controls | whether to display control buttons when `show-input` is true | boolean | — | true |
 | show-stops | whether to display breakpoints | boolean | — | false |
+| range | whether to select a range | boolean | — | false |
 
 ## Events
 | Event Name | Description | Parameters |
