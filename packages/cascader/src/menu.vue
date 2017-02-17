@@ -40,7 +40,8 @@
           const formatOptions = options => {
             options.forEach(option => {
               configurableProps.forEach(prop => {
-                option[prop] = option[this.props[prop] || prop];
+                const value = option[this.props[prop] || prop];
+                if (value) option[prop] = value;
               });
               if (Array.isArray(option.children)) {
                 formatOptions(option.children);
