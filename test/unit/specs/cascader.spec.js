@@ -13,6 +13,7 @@ describe('Cascader', () => {
           ref="cascader"
           placeholder="请选择"
           :options="options"
+          clearable
           v-model="selectedOptions"
         ></el-cascader>
       `,
@@ -456,6 +457,7 @@ describe('Cascader', () => {
           placeholder="请选择"
           :options="options"
           filterable
+          :debounce="0"
           v-model="selectedOptions"
         ></el-cascader>
       `,
@@ -507,7 +509,7 @@ describe('Cascader', () => {
       const item1 = menuElm.querySelector('.el-cascader-menu__item');
 
       expect(menuElm.children.length).to.be.equal(1);
-      expect(menuElm.children[0].children.length).to.be.equal(1);
+      expect(menuElm.children[0].children.length).to.be.equal(3);
       done();
 
       item1.click();
@@ -520,5 +522,107 @@ describe('Cascader', () => {
         done();
       }, 500);
     }, 300);
+  });
+  it('props', done => {
+    vm = createVue({
+      template: `
+        <el-cascader
+          ref="cascader"
+          :options="options"
+          :props="props"
+          v-model="selectedOptions"
+        ></el-cascader>
+      `,
+      data() {
+        return {
+          options: [{
+            label: 'Zhejiang',
+            cities: [{
+              label: 'Hangzhou'
+            }, {
+              label: 'NingBo'
+            }]
+          }, {
+            label: 'Jiangsu',
+            cities: [{
+              label: 'Nanjing'
+            }]
+          }],
+          props: {
+            value: 'label',
+            children: 'cities'
+          },
+          selectedOptions: []
+        };
+      }
+    }, true);
+    vm.$el.click();
+    setTimeout(_ => {
+      expect(document.body.querySelector('.el-cascader-menus')).to.be.exist;
+
+      const menu = vm.$refs.cascader.menu;
+      const menuElm = menu.$el;
+      let items = menuElm.querySelectorAll('.el-cascader-menu__item');
+      expect(items.length).to.equal(2);
+      items[0].click();
+      setTimeout(_ => {
+        items = menuElm.querySelectorAll('.el-cascader-menu__item');
+        expect(items.length).to.equal(4);
+        expect(items[items.length - 1].innerText).to.equal('NingBo');
+        done();
+      }, 100);
+    }, 100);
+  });
+  it('show last level', done => {
+    vm = createVue({
+      template: `
+        <el-cascader
+          ref="cascader"
+          :options="options"
+          :show-all-levels="false"
+          v-model="selectedOptions"
+        ></el-cascader>
+      `,
+      data() {
+        return {
+          options: [{
+            value: 'zhejiang',
+            label: 'Zhejiang',
+            children: [{
+              value: 'hangzhou',
+              label: 'Hangzhou',
+              children: [{
+                value: 'xihu',
+                label: 'West Lake'
+              }]
+            }, {
+              value: 'ningbo',
+              label: 'NingBo',
+              children: [{
+                value: 'jiangbei',
+                label: 'Jiang Bei'
+              }]
+            }]
+          }, {
+            value: 'jiangsu',
+            label: 'Jiangsu',
+            children: [{
+              value: 'nanjing',
+              label: 'Nanjing',
+              children: [{
+                value: 'zhonghuamen',
+                label: 'Zhong Hua Men'
+              }]
+            }]
+          }],
+          selectedOptions: ['zhejiang', 'ningbo', 'jiangbei']
+        };
+      }
+    }, true);
+    setTimeout(_ => {
+      const span = vm.$el.querySelector('.el-cascader__label');
+      expect(span.innerText).to.equal('Jiang Bei');
+      done();
+    }, 100);
   });
 });
