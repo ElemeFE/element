@@ -80,22 +80,11 @@
     },
 
     watch: {
-      hours(newVal) {
-        this.ajustElTop('hour', newVal);
-      },
-
-      minutes(newVal) {
-        this.ajustElTop('minute', newVal);
-      },
-
-      seconds(newVal) {
-        this.ajustElTop('second', newVal);
-      },
-
       hoursPrivate(newVal, oldVal) {
         if (!(newVal >= 0 && newVal <= 23)) {
           this.hoursPrivate = oldVal;
         }
+        this.ajustElTop('hour', newVal);
         this.$emit('change', { hours: newVal });
       },
 
@@ -103,6 +92,7 @@
         if (!(newVal >= 0 && newVal <= 59)) {
           this.minutesPrivate = oldVal;
         }
+        this.ajustElTop('minute', newVal);
         this.$emit('change', { minutes: newVal });
       },
 
@@ -110,7 +100,7 @@
         if (!(newVal >= 0 && newVal <= 59)) {
           this.secondsPrivate = oldVal;
         }
-
+        this.ajustElTop('second', newVal);
         this.$emit('change', { seconds: newVal });
       }
     },
