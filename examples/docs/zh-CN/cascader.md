@@ -1675,6 +1675,7 @@
 | expand-trigger | 次级菜单的展开方式 | string | click / hover | click |
 | show-all-levels | 输入框中是否显示选中值的完整路径 | boolean | — | true |
 | filterable | 是否可搜索选项 | boolean | — | — |
+| debounce | 搜索关键词输入的去抖延迟，毫秒 | number | — | 300 |
 | change-on-select | 是否允许选择任意一级的选项 | boolean | — | false |
 | size | 尺寸 | string | large / small / mini | — |
 

@@ -19,7 +19,7 @@
       :readonly="!filterable"
       :placeholder="currentLabels.length ? undefined : placeholder"
       v-model="inputValue"
-      @change="handleInputChange"
+      @change="debouncedInputChange"
       :validate-event="false"
       :size="size"
       :disabled="disabled"
@@ -62,6 +62,7 @@ import Clickoutside from 'element-ui/src/utils/clickoutside';
 import emitter from 'element-ui/src/mixins/emitter';
 import Locale from 'element-ui/src/mixins/locale';
 import { t } from 'element-ui/src/locale';
+import debounce from 'throttle-debounce/debounce';
 
 const popperMixin = {
   props: {
@@ -134,12 +135,18 @@ export default {
     showAllLevels: {
       type: Boolean,
       default: true
+    },
+    debounce: {
+      type: Number,
+      default: 300
     }
   },
 
   data() {
     return {
       currentValue: this.value,
+      menu: null,
+      debouncedInputChange() {},
       menuVisible: false,
       inputHover: false,
       inputValue: '',
@@ -181,11 +188,15 @@ export default {
     currentValue(value) {
       this.dispatch('ElFormItem', 'el.form.change', [value]);
     },
-    options(value) {
-      if (!this.menu) {
-        this.initMenu();
+    options: {
+      deep: true,
+      handler(value) {
+        if (!this.menu) {
+          this.initMenu();
+        }
+        this.flatOptions = this.flattenOptions(this.options);
+        this.menu.options = value;
       }
-      this.menu.options = value;
     }
   },
 
@@ -235,9 +246,6 @@ export default {
     },
     handleInputChange(value) {
       if (!this.menuVisible) return;
-      if (!this.flatOptions) {
-        this.flatOptions = this.flattenOptions(this.options);
-      }
       const flatOptions = this.flatOptions;
 
       if (!value) {
@@ -314,6 +322,16 @@ export default {
       }
       this.menuVisible = !this.menuVisible;
     }
+  },
+
+  created() {
+    this.debouncedInputChange = debounce(this.debounce, value => {
+      this.handleInputChange(value);
+    });
+  },
+
+  mounted() {
+    this.flatOptions = this.flattenOptions(this.options);
   }
 };
 </script>

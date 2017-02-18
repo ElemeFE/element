@@ -457,6 +457,7 @@ describe('Cascader', () => {
           placeholder="请选择"
           :options="options"
           filterable
+          :debounce="0"
           v-model="selectedOptions"
         ></el-cascader>
       `,

@@ -39,6 +39,7 @@
 
           const formatOptions = options => {
             options.forEach(option => {
+              if (option.__IS__FLAT__OPTIONS) return;
               configurableProps.forEach(prop => {
                 const value = option[this.props[prop] || prop];
                 if (value) option[prop] = value;
