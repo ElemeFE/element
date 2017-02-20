@@ -6,6 +6,7 @@
   @b upload {
     display: inline-block;
     text-align: center;
+    cursor: pointer;
 
     @e input {
       display: none;
