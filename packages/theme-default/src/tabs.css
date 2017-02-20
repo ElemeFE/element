@@ -69,7 +69,6 @@
     @e nav {
       white-space: nowrap;
       position: relative;
-      float: left;
       transition: transform .3s;
     }
     @e item {
