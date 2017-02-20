@@ -48,10 +48,10 @@ describe('Checkbox', () => {
     vm = createVue({
       template: `
         <el-checkbox-group v-model="checkList">
-          <el-checkbox label="a" ref="a"></el-checkbox>
-          <el-checkbox label="b" ref="b"></el-checkbox>
-          <el-checkbox label="c" ref="c"></el-checkbox>
-          <el-checkbox label="d" ref="d"></el-checkbox>
+          <el-checkbox value="a" label="a" ref="a"></el-checkbox>
+          <el-checkbox value="b" label="b" ref="b"></el-checkbox>
+          <el-checkbox value="c" label="c" ref="c"></el-checkbox>
+          <el-checkbox value="d" label="d" ref="d"></el-checkbox>
         </el-checkbox-group>
       `,
       data() {
@@ -73,10 +73,10 @@ describe('Checkbox', () => {
       template: `
         <el-checkbox-group v-model="checkList">
           <el-row>
-            <el-checkbox label="a" ref="a"></el-checkbox>
-            <el-checkbox label="b" ref="b"></el-checkbox>
-            <el-checkbox label="c" ref="c"></el-checkbox>
-            <el-checkbox label="d" ref="d"></el-checkbox>
+            <el-checkbox value="a" label="a" ref="a"></el-checkbox>
+            <el-checkbox value="b" label="b" ref="b"></el-checkbox>
+            <el-checkbox value="c" label="c" ref="c"></el-checkbox>
+            <el-checkbox value="d" label="d" ref="d"></el-checkbox>
           </el-row>
         </el-checkbox-group>
       `,
@@ -94,10 +94,10 @@ describe('Checkbox', () => {
     });
   });
 
-  it('true false label', done => {
+  it('true false value', done => {
     vm = createVue({
       template: `
-        <el-checkbox true-label="a" :false-label="3" v-model="checked"></el-checkbox>
+        <el-checkbox true-value="a" :false-value="3" v-model="checked"></el-checkbox>
       `,
       data() {
         return {
@@ -117,7 +117,7 @@ describe('Checkbox', () => {
         <div>
           <el-checkbox v-model="checked" checked></el-checkbox>
           <el-checkbox-group v-model="checklist">
-            <el-checkbox checked label="a"></el-checkbox>
+            <el-checkbox checked value="a" label="a"></el-checkbox>
           </el-checkbox-group>
         </div>
       `,

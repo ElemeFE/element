@@ -3,7 +3,7 @@
   module.exports = {
     data() {
       return {
-        checkList: ['selected and disabled','Option A'],
+        checkList: ['1','5'],
         // checkList2: ['Option A'],
         checked: true,
         checked1: false,
@@ -11,7 +11,7 @@
         isValid: 'valid',
         checkAll: false,
         cities: cityOptions,
-        checkedCities: ['上海', '北京'],
+        checkedCities: ['ShangHai', 'BeiJing'],
         isIndeterminate: false
       };
     },
@@ -87,16 +87,16 @@ Disabled state for checkbox.
 
 It is used for multiple checkboxes which are bound in one group, and indicates whether one option is selected by checking if it is checked.
 
-:::demo `checkbox-group` element can manage multiple checkboxes in one group by using `v-model` which is bound as an `Array`. `label` can modify the description following the button of the checkbox. It is also the value of the checkbox. `label` corresponds with the element values in the array. It is selected if the specified value exists in the array, and vice versa.
+:::demo `checkbox-group` element can manage multiple checkboxes in one group by using `v-model` which is bound as an `Array`. `label` can modify the description following the button of the checkbox. `value` is the value of the checkbox. `value` corresponds with the element values in the array. It is selected if the specified value exists in the array, and vice versa.
 
 ```html
 <template>
   <el-checkbox-group v-model="checkList">
-    <el-checkbox label="Option A"></el-checkbox>
-    <el-checkbox label="Option B"></el-checkbox>
-    <el-checkbox label="Option C"></el-checkbox>
-    <el-checkbox label="disabled" disabled></el-checkbox>
-    <el-checkbox label="selected and disabled" disabled></el-checkbox>
+    <el-checkbox value="1" label="Option A"></el-checkbox>
+    <el-checkbox value="2" label="Option B"></el-checkbox>
+    <el-checkbox value="3" label="Option C"></el-checkbox>
+    <el-checkbox value="4" label="disabled" disabled></el-checkbox>
+    <el-checkbox value="5" label="selected and disabled" disabled></el-checkbox>
   </el-checkbox-group>
 </template>
 
@@ -123,7 +123,7 @@ The `indeterminate` property can help you to achieve a 'check all' effect.
   <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">Check all</el-checkbox>
   <div style="margin: 15px 0;"></div>
   <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
-    <el-checkbox v-for="city in cities" :label="city">{{city}}</el-checkbox>
+    <el-checkbox v-for="city in cities" :value="city" :label="city">{{city}}</el-checkbox>
   </el-checkbox-group>
 </template>
 <script>
@@ -156,9 +156,10 @@ The `indeterminate` property can help you to achieve a 'check all' effect.
 ### Checkbox Attributes
 | Attribute      | Description         | Type    | Options                         | Default|
 |---------- |-------- |---------- |-------------  |-------- |
-| label     | value of the checkbox when used inside a `checkbox-group`   | string    |       —        |     —    |
-| true-label | value of the checkbox if it's checked   | string, number    |       —        |     —    |
-| false-label | value of the checkbox if it's not checked   | string, number    |      —         |     —    |
+| value     | value of the checkbox when used inside a `checkbox-group`   | string    |       —        |     —    |
+| label | description following the button of the checkbox | string    |       —        |     —    |
+| true-vaue | value of the checkbox if it's checked   | string, number    |       —        |     —    |
+| false-vaue | value of the checkbox if it's not checked   | string, number    |      —         |     —    |
 | name | native 'name' attribute | string    |      —         |     —    |
 | disabled  | if the checkbox is disabled   | boolean   |  — | false   |
 | checked  | if the checkbox is checked   | boolean   |  — | false   |
