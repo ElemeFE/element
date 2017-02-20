@@ -204,6 +204,8 @@
       width: 480px;
     }
     .demo-form-inline {
+      width: auto;
+
       .el-input {
         width: 150px;
       }
@@ -320,9 +322,10 @@ When the vertical space is limited and the form is relatively simple, you can pu
 
 ```html
 <el-form :inline="true" :model="formInline" class="demo-form-inline">
-  <el-form-item>
+  <el-form-item label="Approved by">
     <el-input v-model="formInline.user" placeholder="Approved by"></el-input>
-  </el-form-item><el-form-item>
+  </el-form-item>
+  <el-form-item label="Activity zone">
     <el-select v-model="formInline.region" placeholder="Activity zone">
       <el-option label="Zone one" value="shanghai"></el-option>
       <el-option label="Zone two" value="beijing"></el-option>
