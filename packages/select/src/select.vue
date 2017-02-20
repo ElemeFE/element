@@ -221,7 +221,7 @@
 
     watch: {
       placeholder(val) {
-        this.currentPlaceholder = val;
+        this.cachedPlaceHolder = this.currentPlaceholder = val;
       },
 
       value(val) {
