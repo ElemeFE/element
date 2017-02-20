@@ -12,7 +12,7 @@
       appearance: none;
       background-color: var(--color-white);
       background-image: none;
-      border-radius: 4px;
+      border-radius: var(--border-radius-small);
       border: var(--input-border);
       box-sizing: border-box;
       color: var(--input-color);
