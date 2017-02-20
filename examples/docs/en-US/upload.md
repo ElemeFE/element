@@ -11,7 +11,27 @@
           url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
           status: 'finished'
         }],
-        imageUrl: ''
+        fileList2: [{
+          name: 'food.jpeg',
+          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
+          status: 'finished'
+        }, {
+          name: 'food2.jpeg',
+          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
+          status: 'finished'
+        }],
+        fileList3: [{
+          name: 'food.jpeg',
+          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
+          status: 'finished'
+        }, {
+          name: 'food2.jpeg',
+          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
+          status: 'finished'
+        }],
+        imageUrl: '',
+        dialogImageUrl: '',
+        dialogVisible: false
       };
     },
     methods: {
@@ -27,6 +47,10 @@
       },
       handlePreview(file) {
         console.log(file);
+      },
+      handlePictureCardPreview(file) {
+        this.dialogImageUrl = file.url;
+        this.dialogVisible = true;
       },
       submitUpload() {
         this.$refs.upload.submit();
@@ -45,6 +69,9 @@
           this.$message.error('Avatar picture size can not exceed 2MB!');
         }
         return isJPG && isLt2M;
+      },
+      handleChange(file, fileList) {
+        this.fileList3 = fileList.slice(-3);
       }
     }
   }
@@ -88,7 +115,7 @@ Upload files by clicking or drag-and-drop
 
 ### User avatar upload
 
-Use beforeUpload hook to limit the upload file format and size.
+Use `before-upload` hook to limit the upload file format and size.
 
 ::: demo
 ```html
@@ -132,25 +159,35 @@ Use beforeUpload hook to limit the upload file format and size.
 
 ### Photo Wall
 
-Use listType to change the fileList style.
+Use `list-type` to change the fileList style.
 
 ::: demo
 ```html
 <el-upload
   action="http://localhost:9000/upload"
   list-type="picture-card"
-  :on-preview="handlePreview"
+  :on-preview="handlePictureCardPreview"
   :on-remove="handleRemove">
   <i class="el-icon-plus"></i>
 </el-upload>
+<el-dialog v-model="dialogVisible" size="tiny">
+  <img width="100%" :src="dialogImageUrl" alt="">
+</el-dialog>
 <script>
   export default {
+    data() {
+      return {
+        dialogImageUrl: '',
+        dialogVisible: false
+      };
+    },
     methods: {
       handleRemove(file, fileList) {
         console.log(file, fileList);
       },
-      handlePreview(file) {
-        console.log(file);
+      handlePictureCardPreview(file) {
+        this.dialogImageUrl = file.url;
+        this.dialogVisible = true;
       }
     }
   }
@@ -167,7 +204,7 @@ Use listType to change the fileList style.
   action="http://localhost:9000/upload"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
-  :file-list="fileList"
+  :file-list="fileList2"
   list-type="picture">
   <el-button size="small" type="primary">Click to upload</el-button>
   <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
@@ -176,7 +213,7 @@ Use listType to change the fileList style.
   export default {
     data() {
       return {
-        fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
+        fileList2: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
       };
     },
     methods: {
@@ -185,6 +222,45 @@ Use listType to change the fileList style.
       },
       handlePreview(file) {
         console.log(file);
+      }
+    }
+  }
+</script>
+```
+:::
+
+### File list control
+
+Use `on-change` hook function to control upload file list
+
+::: demo
+```html
+<el-upload
+  class="upload-demo"
+  action="http://localhost:9000/upload"
+  :on-change="handleChange"
+  :file-list="fileList3">
+  <el-button size="small" type="primary">Click to upload</el-button>
+  <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
+</el-upload>
+<script>
+  export default {
+    data() {
+      return {
+        fileList3: [{
+          name: 'food.jpeg',
+          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
+          status: 'finished'
+        }, {
+          name: 'food2.jpeg',
+          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
+          status: 'finished'
+        }]
+      };
+    },
+    methods: {
+      handleChange(file, fileList) {
+        this.fileList3 = fileList.slice(-3);
       }
     }
   }

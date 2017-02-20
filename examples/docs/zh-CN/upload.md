@@ -51,7 +51,27 @@
           url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
           status: 'finished'
         }],
-        imageUrl: ''
+        fileList2: [{
+          name: 'food.jpeg',
+          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
+          status: 'finished'
+        }, {
+          name: 'food2.jpeg',
+          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
+          status: 'finished'
+        }],
+        fileList3: [{
+          name: 'food.jpeg',
+          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
+          status: 'finished'
+        }, {
+          name: 'food2.jpeg',
+          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
+          status: 'finished'
+        }],
+        imageUrl: '',
+        dialogImageUrl: '',
+        dialogVisible: false
       };
     },
     methods: {
@@ -67,6 +87,10 @@
       },
       handlePreview(file) {
         console.log(file);
+      },
+      handlePictureCardPreview(file) {
+        this.dialogImageUrl = file.url;
+        this.dialogVisible = true;
       },
       submitUpload() {
         this.$refs.upload.submit();
@@ -85,6 +109,9 @@
           this.$message.error('上传头像图片大小不能超过 2MB!');
         }
         return isJPG && isLt2M;
+      },
+      handleChange(file, fileList) {
+        this.fileList3 = fileList.slice(-3);
       }
     }
   }
@@ -95,7 +122,6 @@
 通过点击或者拖拽上传文件
 
 ### 点击上传
-
 
 ::: demo 通过 slot 你可以传入自定义的上传按钮类型和文字提示。
 ```html
@@ -130,7 +156,7 @@
 
 ### 用户头像上传
 
-使用 beforeUpload 限制用户上传的图片格式和大小。
+使用 `before-upload` 限制用户上传的图片格式和大小。
 
 ::: demo
 ```html
@@ -174,25 +200,35 @@
 
 ### 照片墙
 
-使用 listType 属性来设置文件列表的样式。
+使用 `list-type` 属性来设置文件列表的样式。
 
 ::: demo
 ```html
 <el-upload
   action="http://localhost:9000/upload"
   list-type="picture-card"
-  :on-preview="handlePreview"
+  :on-preview="handlePictureCardPreview"
   :on-remove="handleRemove">
   <i class="el-icon-plus"></i>
 </el-upload>
+<el-dialog v-model="dialogVisible" size="tiny">
+  <img width="100%" :src="dialogImageUrl" alt="">
+</el-dialog>
 <script>
   export default {
+    data() {
+      return {
+        dialogImageUrl: '',
+        dialogVisible: false
+      };
+    },
     methods: {
       handleRemove(file, fileList) {
         console.log(file, fileList);
       },
-      handlePreview(file) {
-        console.log(file);
+      handlePictureCardPreview(file) {
+        this.dialogImageUrl = file.url;
+        this.dialogVisible = true;
       }
     }
   }
@@ -209,7 +245,7 @@
   action="http://localhost:9000/upload"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
-  :file-list="fileList"
+  :file-list="fileList2"
   list-type="picture">
   <el-button size="small" type="primary">点击上传</el-button>
   <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
@@ -218,7 +254,7 @@
   export default {
     data() {
       return {
-        fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
+        fileList2: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
       };
     },
     methods: {
@@ -227,6 +263,45 @@
       },
       handlePreview(file) {
         console.log(file);
+      }
+    }
+  }
+</script>
+```
+:::
+
+### 上传文件列表控制
+
+通过 `on-change` 钩子函数来对列表进行控制
+
+::: demo
+```html
+<el-upload
+  class="upload-demo"
+  action="http://localhost:9000/upload"
+  :on-change="handleChange"
+  :file-list="fileList3">
+  <el-button size="small" type="primary">点击上传</el-button>
+  <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+</el-upload>
+<script>
+  export default {
+    data() {
+      return {
+        fileList3: [{
+          name: 'food.jpeg',
+          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
+          status: 'finished'
+        }, {
+          name: 'food2.jpeg',
+          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
+          status: 'finished'
+        }]
+      };
+    },
+    methods: {
+      handleChange(file, fileList) {
+        this.fileList3 = fileList.slice(-3);
       }
     }
   }
@@ -303,7 +378,7 @@
 | on-success | 可选参数, 文件上传成功时的钩子 | function(response, file, fileList) | — | — |
 | on-error | 可选参数, 文件上传失败时的钩子 | function(err, file, fileList) | — | — |
 | on-progress | 可选参数, 文件上传时的钩子 | function(event, file, fileList) | — | — |
-| on-change | 可选参数, 文件状态改变时的钩子 | function(file, fileList) | — | — |
+| on-change | 可选参数, 文件状态改变时的钩子，上传成功或者失败时都会被调用 | function(file, fileList) | — | — |
 | before-upload | 可选参数, 上传文件之前的钩子，参数为上传的文件，若返回 false 或者 Promise 则停止上传。 | function(file) | — | — |
 | list-type | 文件列表的类型 | string | text/picture/picture-card | text |
 | auto-upload | 是否在选取文件后立即进行上传 | boolean | — | true |
