@@ -30,9 +30,7 @@
       color: {
         required: true
       },
-      vertical: {
-        type: Boolean
-      }
+      vertical: Boolean
     },
 
     watch: {

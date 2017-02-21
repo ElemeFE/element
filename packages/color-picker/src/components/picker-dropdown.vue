@@ -22,7 +22,6 @@
   import HueSlider from './hue-slider';
   import AlphaSlider from './alpha-slider';
   import Popper from 'element-ui/src/utils/vue-popper';
-  import Clickoutside from 'element-ui/src/utils/clickoutside';
   import Locale from 'element-ui/src/mixins/locale';
 
   export default {
@@ -36,15 +35,11 @@
       AlphaSlider
     },
 
-    directives: { Clickoutside },
-
     props: {
       color: {
         required: true
       },
-      showAlpha: {
-        type: Boolean
-      }
+      showAlpha: Boolean
     },
 
     methods: {

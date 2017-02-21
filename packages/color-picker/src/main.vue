@@ -1,6 +1,6 @@
 <template>
   <div class="el-color-picker" v-clickoutside="hide">
-    <div class="el-color-picker__trigger" @click.stop="showPicker = !showPicker">
+    <div class="el-color-picker__trigger" @click="showPicker = !showPicker">
       <span class="el-color-picker__color" :class="{ 'is-alpha': showAlpha }">
         <span class="el-color-picker__color-inner"
           :style="{
