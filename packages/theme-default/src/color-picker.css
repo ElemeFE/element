@@ -62,7 +62,6 @@
     height: 180px;
 
     @descendent white, black {
-      cursor: pointer;
       position: absolute;
       top: 0;
       left: 0;
@@ -79,7 +78,6 @@
     }
 
     @descendent cursor {
-      cursor: pointer;
       position: absolute;
 
       > div {
