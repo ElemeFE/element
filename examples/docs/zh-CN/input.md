@@ -771,8 +771,9 @@ export default {
 | auto-complete | 原生属性，自动补全 | string | on, off | off |
 | name | 原生属性 | string | — | — |
 | readonly | 原生属性，是否只读 | boolean | — | false |
-| max | 原生属性，设置最大值 | * | — | — |
-| min | 原生属性，设置最小值 | * | — | — |
+| max | 原生属性，设置最大值 | — | — | — |
+| min | 原生属性，设置最小值 | — | — | — |
+| step | 原生属性，设置输入字段的合法数字间隔 | — | — | — |
 | resize | 控制是否能被用户缩放 | string | none, both, horizontal, vertical | — |
 | autofocus | 原生属性，自动获取焦点 | boolean | true, false | false |
 | form | 原生属性 | string | — | — |
