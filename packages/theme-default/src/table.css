@@ -221,6 +221,7 @@
       position: absolute;
       left: 0;
       top: 37px;
+      bottom: 0;
       overflow: hidden;
       z-index: 3;
     }
@@ -231,6 +232,7 @@
 
     @e header, body {
       table-layout: fixed;
+      height: 100%;
     }
 
     @e header-wrapper {
