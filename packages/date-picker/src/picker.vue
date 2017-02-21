@@ -448,7 +448,8 @@ export default {
 
         this.picker.$on('dodestroy', this.doDestroy);
         this.picker.$on('pick', (date, visible = false) => {
-          if (this.dateChanged(date, this.value)) this.$emit('input', date);
+          // if (this.dateChanged(date, this.value)) this.$emit('input', date);
+          this.$emit('input', date);
           this.pickerVisible = this.picker.visible = visible;
           this.picker.resetView && this.picker.resetView();
         });
