@@ -25,9 +25,7 @@
         required: true
       },
 
-      vertical: {
-        type: Boolean
-      }
+      vertical: Boolean
     },
 
     data() {
