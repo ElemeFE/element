@@ -190,7 +190,7 @@
       color: var(--color-extra-light-black);
       display: none;
 
-      &: hover {
+      &:hover {
         color: var(--color-primary);
       }
     }
