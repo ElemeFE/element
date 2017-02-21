@@ -39,6 +39,7 @@
         :autofocus="autofocus"
         :min="min"
         :max="max"
+        :step="step"
         :form="form"
         :value="currentValue"
         ref="input"
@@ -123,6 +124,7 @@
       minlength: Number,
       max: {},
       min: {},
+      step: {},
       validateEvent: {
         type: Boolean,
         default: true

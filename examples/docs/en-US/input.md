@@ -609,8 +609,9 @@ Search data from server-side.
 |auto-complete | same as `auto-complete` in native input | string | on/off | off |
 |name | same as `name` in native input | string | — | — |
 | readonly | same as `readonly` in native input | boolean | — | false |
-|max | same as `max` in native input | * | — | — |
-|min | same as `min` in native input | * | — | — |
+|max | same as `max` in native input | — | — | — |
+|min | same as `min` in native input | — | — | — |
+|step| same as `step` in native input | — | — | — |
 |resize| control the resizability | string | none, both, horizontal, vertical | — |
 |autofocus | same as `autofocus` in native input | boolean | — | false |
 |form | same as `form` in native input | string | — | — |
