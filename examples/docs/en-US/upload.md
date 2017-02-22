@@ -86,7 +86,7 @@ Upload files by clicking or drag-and-drop
 ```html
 <el-upload
   class="upload-demo"
-  action="http://localhost:9000/upload"
+  action="//jsonplaceholder.typicode.com/posts/"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
   :file-list="fileList">
@@ -121,7 +121,7 @@ Use `before-upload` hook to limit the upload file format and size.
 ```html
 <el-upload
   class="avatar-uploader"
-  action="http://localhost:9000/upload"
+  action="//jsonplaceholder.typicode.com/posts/"
   :show-file-list="false"
   :on-success="handleAvatarScucess"
   :before-upload="beforeAvatarUpload">
@@ -164,7 +164,7 @@ Use `list-type` to change the fileList style.
 ::: demo
 ```html
 <el-upload
-  action="http://localhost:9000/upload"
+  action="//jsonplaceholder.typicode.com/posts/"
   list-type="picture-card"
   :on-preview="handlePictureCardPreview"
   :on-remove="handleRemove">
@@ -201,7 +201,7 @@ Use `list-type` to change the fileList style.
 ```html
 <el-upload
   class="upload-demo"
-  action="http://localhost:9000/upload"
+  action="//jsonplaceholder.typicode.com/posts/"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
   :file-list="fileList2"
@@ -237,7 +237,7 @@ Use `on-change` hook function to control upload file list
 ```html
 <el-upload
   class="upload-demo"
-  action="http://localhost:9000/upload"
+  action="//jsonplaceholder.typicode.com/posts/"
   :on-change="handleChange"
   :file-list="fileList3">
   <el-button size="small" type="primary">Click to upload</el-button>
@@ -277,7 +277,7 @@ You can drag your file to a certain area to upload it.
 <el-upload
   class="upload-demo"
   drag
-  action="http://localhost:9000/upload"
+  action="//jsonplaceholder.typicode.com/posts/"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
   :file-list="fileList"
@@ -296,7 +296,7 @@ You can drag your file to a certain area to upload it.
 <el-upload
   class="upload-demo"
   ref="upload"
-  action="http://localhost:9000/upload"
+  action="//jsonplaceholder.typicode.com/posts/"
   :auto-upload="false">
   <el-button slot="trigger" size="small" type="primary">select file</el-button>
   <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">upload to server</el-button>
