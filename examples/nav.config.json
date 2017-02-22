@@ -109,6 +109,10 @@
               "title": "Rate 评分"
             },
             {
+              "path": "/color-picker",
+              "title": "ColorPicker 颜色选择器"
+            },
+            {
               "path": "/form",
               "title": "Form 表单"
             }
@@ -219,10 +223,6 @@
             {
               "path": "/collapse",
               "title": "Collapse 折叠面板"
-            },
-            {
-              "path": "/color-picker",
-              "title": "ColorPicker"
             }
           ]
         }
@@ -339,6 +339,10 @@
               "title": "Rate"
             },
             {
+              "path": "/color-picker",
+              "title": "ColorPicker"
+            },
+            {
               "path": "/form",
               "title": "Form"
             }
@@ -449,10 +453,6 @@
             {
               "path": "/collapse",
               "title": "Collapse"
-            },
-            {
-              "path": "/color-picker",
-              "title": "ColorPicker"
             }
           ]
         }

@@ -18,7 +18,7 @@
 <style>
 </style>
 
-<script type="babel">
+<script>
   import draggable from '../draggable';
 
   export default {
@@ -91,7 +91,7 @@
         cursorTop: 0,
         cursorLeft: 0,
         background: 'hsl(0, 100%, 50%)'
-      }
+      };
     }
-  }
+  };
 </script>

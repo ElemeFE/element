@@ -62,13 +62,13 @@
           left = Math.max(thumb.offsetWidth / 2, left);
           left = Math.min(left, rect.width - thumb.offsetWidth / 2);
 
-          this.color._alpha = Math.round((left - thumb.offsetWidth / 2) / (rect.width - thumb.offsetWidth) * 100);
+          this.color.set('alpha', Math.round((left - thumb.offsetWidth / 2) / (rect.width - thumb.offsetWidth) * 100));
         } else {
           let top = event.clientY - rect.top;
           top = Math.max(thumb.offsetHeight / 2, top);
           top = Math.min(top, rect.height - thumb.offsetHeight / 2);
 
-          this.color._alpha = Math.round((top - thumb.offsetHeight / 2) / (rect.height - thumb.offsetHeight) * 100);
+          this.color.set('alpha', Math.round((top - thumb.offsetHeight / 2) / (rect.height - thumb.offsetHeight) * 100));
         }
       },
 

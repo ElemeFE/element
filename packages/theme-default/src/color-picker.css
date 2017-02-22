@@ -4,7 +4,7 @@
   @component hue-slider {
     position: relative;
     box-sizing: border-box;
-    width: 240px;
+    width: 280px;
     height: 12px;
     background-color: #f00;
     padding: 0 2px;
@@ -58,7 +58,7 @@
 
   @component svpanel {
     position: relative;
-    width: 240px;
+    width: 280px;
     height: 180px;
 
     @descendent white, black {
@@ -94,7 +94,7 @@
   @component alpha-slider {
     position: relative;
     box-sizing: border-box;
-    width: 240px;
+    width: 280px;
     height: 12px;
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==);
 
@@ -141,7 +141,7 @@
   }
 
   @component dropdown {
-    width: 260px;
+    width: 300px;
 
     @descendent main-wrapper {
       margin-bottom: 6px;
@@ -156,6 +156,13 @@
     @descendent btns {
       margin-top: 6px;
       text-align: right;
+    }
+
+    @descendent value {
+      float: left;
+      line-height: 26px;
+      font-size: 12px;
+      color: var(--color-base-black);
     }
 
     @descendent btn {
@@ -173,6 +180,10 @@
         color: #cccccc;
         cursor: not-allowed;
       }
+      &:hover {
+        color: var(--color-primary);
+        border-color: var(--color-primary);
+      }
     }
 
     @descendent link-btn {
@@ -181,6 +192,9 @@
       text-decoration: none;
       padding: 15px;
       font-size: 12px;
+      &:hover {
+        color: tint(var(--color-primary), var(--button-hover-tint-percent));
+      }
     }
   }
 

@@ -4,9 +4,9 @@
       <span class="el-color-picker__color" :class="{ 'is-alpha': showAlpha }">
         <span class="el-color-picker__color-inner"
           :style="{
-            backgroundColor: value ? value : 'transparent'
+            backgroundColor: displayedColor
           }"></span>
-        <span class="el-color-picker__empty el-icon-close" v-if="!value"></span>
+        <span class="el-color-picker__empty el-icon-close" v-if="!value && !showPanelColor"></span>
       </span>
       <span class="el-color-picker__icon el-icon-caret-bottom"></span>
     </div>
@@ -47,10 +47,29 @@
 
     directives: { Clickoutside },
 
+    computed: {
+      displayedColor() {
+        if (!this.value && !this.showPanelColor) {
+          return 'transparent';
+        } else {
+          const { r, g, b } = this.color.toRgb();
+          return this.showAlpha
+            ? `rgba(${ r }, ${ g }, ${ b }, ${ this.color.get('alpha') / 100 })`
+            : `rgb(${ r }, ${ g }, ${ b })`;
+        }
+      }
+    },
+
     watch: {
       value(val) {
         if (val && val !== this.color.value) {
           this.color.fromString(val);
+        }
+      },
+      color: {
+        deep: true,
+        handler() {
+          this.showPanelColor = true;
         }
       }
     },
@@ -62,10 +81,22 @@
       },
       clearValue() {
         this.$emit('input', null);
+        this.showPanelColor = false;
         this.showPicker = false;
+        this.resetColor();
       },
       hide() {
         this.showPicker = false;
+        this.resetColor();
+      },
+      resetColor() {
+        this.$nextTick(_ => {
+          if (this.value) {
+            this.color.fromString(this.value);
+          } else {
+            this.showPanelColor = false;
+          }
+        });
       }
     },
 
@@ -84,7 +115,8 @@
       });
       return {
         color,
-        showPicker: false
+        showPicker: false,
+        showPanelColor: false
       };
     },
 
