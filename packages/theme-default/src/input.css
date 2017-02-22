@@ -12,7 +12,7 @@
       appearance: none;
       background-color: var(--color-white);
       background-image: none;
-      border-radius: 4px;
+      border-radius: var(--input-border-radius);
       border: var(--input-border);
       box-sizing: border-box;
       color: var(--input-color);
@@ -132,7 +132,7 @@
       display: table-cell;
       position: relative;
       border: var(--border-base);
-      border-radius: 4px;
+      border-radius: var(--input-border-radius);
       padding: 0 10px;
       width: 1%;
       white-space: nowrap;
@@ -199,7 +199,7 @@
       background-color: var(--color-white);
       background-image: none;
       border: var(--input-border);
-      border-radius: 4px;
+      border-radius: var(--input-border-radius);
       transition: var(--border-transition-base);
 
       &::placeholder {

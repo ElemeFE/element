@@ -39,6 +39,7 @@
         :autofocus="autofocus"
         :min="min"
         :max="max"
+        :step="step"
         :form="form"
         :value="currentValue"
         ref="input"
@@ -76,6 +77,7 @@
 <script>
   import emitter from 'element-ui/src/mixins/emitter';
   import calcTextareaHeight from './calcTextareaHeight';
+  import merge from 'element-ui/src/utils/merge';
 
   export default {
     name: 'ElInput',
@@ -87,7 +89,7 @@
     data() {
       return {
         currentValue: this.value,
-        textareaStyle: {}
+        textareaCalcStyle: {}
       };
     },
 
@@ -122,6 +124,7 @@
       minlength: Number,
       max: {},
       min: {},
+      step: {},
       validateEvent: {
         type: Boolean,
         default: true
@@ -132,6 +135,9 @@
     computed: {
       validating() {
         return this.$parent.validateState === 'validating';
+      },
+      textareaStyle() {
+        return merge({}, this.textareaCalcStyle, { resize: this.resize });
       }
     },
 
@@ -158,10 +164,7 @@
         const minRows = autosize.minRows;
         const maxRows = autosize.maxRows;
 
-        const options = {
-          resize: this.resize
-        };
-        this.textareaStyle = calcTextareaHeight(this.$refs.textarea, minRows, maxRows, options);
+        this.textareaCalcStyle = calcTextareaHeight(this.$refs.textarea, minRows, maxRows);
       },
       handleFocus(event) {
         this.$emit('focus', event);

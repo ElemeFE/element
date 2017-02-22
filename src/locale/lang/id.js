@@ -1,5 +1,9 @@
 export default {
   el: {
+    colorpicker: {
+      confirm: 'YA',
+      clear: 'Kosongkan'
+    },
     datepicker: {
       now: 'Sekarang',
       today: 'Hari ini',

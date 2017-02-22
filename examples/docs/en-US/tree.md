@@ -35,6 +35,44 @@
     }]
   }];
 
+  const data2 = [{
+    id: 1,
+    label: 'Level one 1',
+    children: [{
+      id: 4,
+      label: 'Level two 1-1',
+      children: [{
+        id: 9,
+        label: 'Level three 1-1-1'
+      }, {
+        id: 10,
+        label: 'Level three 1-1-2'
+      }]
+    }]
+  }, {
+    id: 2,
+    label: 'Level one 2',
+    children: [{
+      id: 5,
+      label: 'Level two 2-1'
+    }, {
+      id: 6,
+      label: 'Level two 2-2'
+    }]
+  }, {
+    id: 3,
+    label: 'Level one 3',
+    children: [{
+      id: 7,
+      label: 'Level two 3-1'
+    }, {
+      id: 8,
+      label: 'Level two 3-2'
+    }]
+  }];
+
+  let id = 1000;
+
   const regions = [{
     'name': 'region1'
   }, {
@@ -48,12 +86,18 @@
     children: 'zones'
   };
 
-  var defaultProps = {
+  const defaultProps = {
     children: 'children',
     label: 'label'
   };
 
   export default {
+    watch: {
+      filterText(val) {
+        this.$refs.tree2.filter(val);
+      }
+    },
+
     methods: {
       handleCheckChange(data, checked, indeterminate) {
         console.log(data, checked, indeterminate);
@@ -89,15 +133,68 @@
     
           resolve(data);
         }, 500);
+      },
+      getCheckedNodes() {
+        console.log(this.$refs.tree.getCheckedNodes());
+      },
+      getCheckedKeys() {
+        console.log(this.$refs.tree.getCheckedKeys());
+      },
+      setCheckedNodes() {
+        this.$refs.tree.setCheckedNodes([
+          {
+            id: 5,
+            label: '二级 2-1'
+          },
+          {
+            id: 9,
+            label: '三级 1-1-1'
+          }
+        ]);
+      },
+      setCheckedKeys() {
+        this.$refs.tree.setCheckedKeys([8]);
+      },
+      resetChecked() {
+        this.$refs.tree.setCheckedKeys([]);
+      },
+      append(store, data) {
+        store.append({ id: id++, label: 'testtest', children: [] }, data);
+      },
+  
+      remove(store, data) {
+        store.remove(data);
+      },
+  
+      renderContent(h, { node, data, store }) {
+        return (
+          <span>
+            <span>
+              <span>{node.label}</span>
+            </span>
+            <span style="float: right; margin-right: 20px">
+              <el-button size="mini" on-click={ () => this.append(store, data) }>Append</el-button>
+              <el-button size="mini" on-click={ () => this.remove(store, data) }>Delete</el-button>
+            </span>
+          </span>);
+      },
+  
+      filterNode(value, data) {
+        if (!value) return true;
+        return data.label.indexOf(value) !== -1;
       }
     },
     
     data() {
       return {
         data,
+        data2,
         regions,
         defaultProps,
-        props
+        props,
+        defaultCheckedKeys: [5],
+        defaultExpandedKeys: [2, 3],
+        filterText: ''
       };
     }
   };
@@ -244,13 +341,351 @@ Used for node selection. In the following example, data for each layer is acquir
 ```
 :::
 
+### Default expanded and default checked
+Tree nodes can be initially expanded or checked
+
+::: demo Use `default-expanded-keys` and `default-checked-keys` to set initially expanded and initially checked nodes respectively. Note that for them to work, `node-key` is required. Its value is the name of a key in the data object, and the value of that key should be unique across the whole tree.
+```html
+<el-tree
+  :data="data2"
+  show-checkbox
+  node-key="id"
+  :default-expanded-keys="[2, 3]"
+  :default-checked-keys="[5]"
+  :props="defaultProps">
+</el-tree>
+
+<script>
+  export default {
+    data() {
+      return {
+        data2: [{
+          id: 1,
+          label: 'Level one 1',
+          children: [{
+            id: 4,
+            label: 'Level two 1-1',
+            children: [{
+              id: 9,
+              label: 'Level three 1-1-1'
+            }, {
+              id: 10,
+              label: 'Level three 1-1-2'
+            }]
+          }]
+        }, {
+          id: 2,
+          label: 'Level one 2',
+          children: [{
+            id: 5,
+            label: 'Level two 2-1'
+          }, {
+            id: 6,
+            label: 'Level two 2-2'
+          }]
+        }, {
+          id: 3,
+          label: 'Level one 3',
+          children: [{
+            id: 7,
+            label: 'Level two 3-1'
+          }, {
+            id: 8,
+            label: 'Level two 3-2'
+          }]
+        }],
+        defaultProps: {
+          children: 'children',
+          label: 'label'
+        }
+      };
+    }
+  };
+</script>
+```
+:::
+
+### Checking tree nodes
+
+::: demo This example shows how to get and set checked nodes. They both can be done in two approaches: node and key. If you are taking the key approach, `node-key` is required.
+```html
+<el-tree
+  :data="data2"
+  show-checkbox
+  default-expand-all
+  node-key="id"
+  ref="tree"
+  highlight-current
+  :props="defaultProps">
+</el-tree>
+
+<div class="buttons">
+  <el-button @click="getCheckedNodes">get by node</el-button>
+  <el-button @click="getCheckedKeys">get by key</el-button>
+  <el-button @click="setCheckedNodes">set by node</el-button>
+  <el-button @click="setCheckedKeys">set by key</el-button>
+  <el-button @click="resetChecked">reset</el-button>
+</div>
+
+<script>
+  export default {
+    methods: {
+      getCheckedNodes() {
+        console.log(this.$refs.tree.getCheckedNodes());
+      },
+      getCheckedKeys() {
+        console.log(this.$refs.tree.getCheckedKeys());
+      },
+      setCheckedNodes() {
+        this.$refs.tree.setCheckedNodes([{
+          id: 5,
+          label: 'Level two 2-1'
+        }, {
+          id: 9,
+          label: 'Level three 1-1-1'
+        }]);
+      },
+      setCheckedKeys() {
+        this.$refs.tree.setCheckedKeys([8]);
+      },
+      resetChecked() {
+        this.$refs.tree.setCheckedKeys([]);
+      }
+    },
+    
+    data() {
+      return {
+        data2: [{
+          id: 1,
+          label: 'Level one 1',
+          children: [{
+            id: 4,
+            label: 'Level two 1-1',
+            children: [{
+              id: 9,
+              label: 'Level three 1-1-1'
+            }, {
+              id: 10,
+              label: 'Level three 1-1-2'
+            }]
+          }]
+        }, {
+          id: 2,
+          label: 'Level one 2',
+          children: [{
+            id: 5,
+            label: 'Level two 2-1'
+          }, {
+            id: 6,
+            label: 'Level two 2-2'
+          }]
+        }, {
+          id: 3,
+          label: 'Level one 3',
+          children: [{
+            id: 7,
+            label: 'Level two 3-1'
+          }, {
+            id: 8,
+            label: 'Level two 3-2'
+          }]
+        }],
+        defaultProps: {
+          children: 'children',
+          label: 'label'
+        }
+      };
+    }
+  };
+</script>
+```
+:::
+
+### Custom node content
+The content of tree nodes can be customized, so you can add icons or buttons as you will
+
+::: demo Use `render-content` to assign a render function that returns the content of tree nodes. See Vue's documentation for a detailed introduction of render functions.
+```html
+<el-tree
+  :data="data2"
+  :props="defaultProps"
+  show-checkbox
+  node-key="id"
+  default-expand-all
+  :expand-on-click-node="false"
+  :render-content="renderContent">
+</el-tree>
+
+<script>
+  let id = 1000;
+  
+  export default {
+    data() {
+      return {
+        data2: [{
+          id: 1,
+          label: 'Level one 1',
+          children: [{
+            id: 4,
+            label: 'Level two 1-1',
+            children: [{
+              id: 9,
+              label: 'Level three 1-1-1'
+            }, {
+              id: 10,
+              label: 'Level three 1-1-2'
+            }]
+          }]
+        }, {
+          id: 2,
+          label: 'Level one 2',
+          children: [{
+            id: 5,
+            label: 'Level two 2-1'
+          }, {
+            id: 6,
+            label: 'Level two 2-2'
+          }]
+        }, {
+          id: 3,
+          label: 'Level one 3',
+          children: [{
+            id: 7,
+            label: 'Level two 3-1'
+          }, {
+            id: 8,
+            label: 'Level two 3-2'
+          }]
+        }],
+        defaultProps: {
+          children: 'children',
+          label: 'label'
+        }
+      }
+    },
+    
+    methods: {
+      append(store, data) {
+        store.append({ id: id++, label: 'testtest', children: [] }, data);
+      },
+      
+      remove(store, data) {
+        store.remove(data);
+      },
+      
+      renderContent(h, { node, data, store }) {
+        return (
+          <span>
+            <span>
+              <span>{node.label}</span>
+            </span>
+            <span style="float: right; margin-right: 20px">
+              <el-button size="mini" on-click={ () => this.append(store, data) }>Append</el-button>
+              <el-button size="mini" on-click={ () => this.remove(store, data) }>Delete</el-button>
+            </span>
+          </span>);
+      }
+    }
+  };
+</script>
+```
+:::
+
+### Tree node filtering
+Tree nodes can be filtered
+
+::: demo Invoke the `filter` method of the Tree instance to filter tree nodes. Its parameter is the filtering keyword. Note that for it to work, `filter-node-method` is required, and its value is the filtering method.
+```html
+<el-input
+  placeholder="Filter keyword"
+  v-model="filterText">
+</el-input>
+
+<el-tree
+  class="filter-tree"
+  :data="data2"
+  :props="defaultProps"
+  default-expand-all
+  :filter-node-method="filterNode"
+  ref="tree2">
+</el-tree>
+
+<script>
+  export default {
+    watch: {
+      filterText(val) {
+        this.$refs.tree2.filter(val);
+      }
+    },
+
+    methods: {
+      filterNode(value, data) {
+        if (!value) return true;
+        return data.label.indexOf(value) !== -1;
+      }
+    },
+
+    data() {
+      return {
+        filterText: '',
+        data2: [{
+          id: 1,
+          label: 'Level one 1',
+          children: [{
+            id: 4,
+            label: 'Level two 1-1',
+            children: [{
+              id: 9,
+              label: 'Level three 1-1-1'
+            }, {
+              id: 10,
+              label: 'Level three 1-1-2'
+            }]
+          }]
+        }, {
+          id: 2,
+          label: 'Level one 2',
+          children: [{
+            id: 5,
+            label: 'Level two 2-1'
+          }, {
+            id: 6,
+            label: 'Level two 2-2'
+          }]
+        }, {
+          id: 3,
+          label: 'Level one 3',
+          children: [{
+            id: 7,
+            label: 'Level two 3-1'
+          }, {
+            id: 8,
+            label: 'Level two 3-2'
+          }]
+        }],
+        defaultProps: {
+          children: 'children',
+          label: 'label'
+        }
+      };
+    }
+  };
+</script>
+```
+:::
+
 ### Accordion
 
 Only one node among the same level can be expanded at one time.
 
 ::: demo
 ```html
-<el-tree :data="data" :props="defaultProps" accordion @node-click="handleNodeClick"></el-tree>
+<el-tree
+  :data="data"
+  :props="defaultProps"
+  accordion
+  @node-click="handleNodeClick">
+</el-tree>
 
 <script>
   export default {
@@ -327,6 +762,7 @@ Only one node among the same level can be expanded at one time.
 | default-checked-keys  | array of keys of initially checked nodes | array                       | —               | —       |
 | filter-node-method    | this function will be executed on each node when use filter method. if return `false`, tree node will be hidden. | Function(value, data, node) | —               | —       |
 | accordion             | whether only one node among the same level can be expanded at one time | boolean                     | —               | false   |
+| indent                | horizontal indentation of nodes in adjacent levels in pixels | number                     | —    | 16 |
 
 ### props
 | Attribute | Description                              | Type   | Accepted Values | Default |

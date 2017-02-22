@@ -21,6 +21,10 @@
         margin-right: 10px;
         vertical-align: top;
       }
+      & .el-form-item__label,
+      & .el-form-item__content {
+        display: inline-block;
+      }
     }
   }
   @b form-item {

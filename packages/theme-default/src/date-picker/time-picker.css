@@ -24,7 +24,7 @@
         color: var(--color-white);
         position: absolute;
         font-size: 14px;
-        margin-top: -15px;
+        margin-top: -7px;
         line-height: 16px;
         background-color: var(--datepicker-active-color);
         height: 32px;

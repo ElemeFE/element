@@ -1,5 +1,9 @@
 export default {
   el: {
+    colorpicker: {
+      confirm: 'OK',
+      clear: 'Tøm'
+    },
     datepicker: {
       now: 'Nå',
       today: 'I dag',
