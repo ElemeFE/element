@@ -63,14 +63,24 @@ const parseHexChannel = function(hex) {
 };
 
 const hsl2hsv = function(hue, sat, light) {
-  sat *= light < 0.5 ? light : 1 - light;
+  sat = sat / 100;
+  light = light / 100;
+  let smin = sat;
+  const lmin = Math.max(light, 0.01);
+  let sv;
+  let v;
 
-  return [ // [hue, saturation, value]
-    // Range should be between 0 - 1
-    hue, // Hue stays the same
-    2 * sat / (light + sat), // Saturation
-    light + sat // Value
-  ];
+  light *= 2;
+  sat *= (light <= 1) ? light : 2 - light;
+  smin *= lmin <= 1 ? lmin : 2 - lmin;
+  v = (light + sat) / 2;
+  sv = light === 0 ? (2 * smin) / (lmin + smin) : (2 * sat) / (light + sat);
+
+  return {
+    h: hue,
+    s: sv * 100,
+    v: v * 100
+  };
 };
 
 // `rgbToHsv`
@@ -201,37 +211,35 @@ export default class Color {
 
     if (value.indexOf('hsl') !== -1) {
       const parts = value.replace(/hsla|hsl|\(|\)/gm, '')
-        .split(/\s|,/g, '').filter((val) => val !== '').map((val, index) => index > 2 ? parseFloat(val) : parseInt(val, 10));
+        .split(/\s|,/g).filter((val) => val !== '').map((val, index) => index > 2 ? parseFloat(val) : parseInt(val, 10));
 
-      if (parts.length > 3) {
+      if (parts.length === 4) {
+        this._alpha = Math.floor(parseFloat(parts[3]) * 100);
+      }
+      if (parts.length >= 3) {
         const { h, s, v } = hsl2hsv(parts[0], parts[1], parts[2]);
         fromHSV(h, s, v);
       }
-      if (parts.length === 4) {
-        this._alpha = Math.floor(parseFloat(parts[3]) * 100);
-      }
     } else if (value.indexOf('hsv') !== -1) {
       const parts = value.replace(/hsva|hsv|\(|\)/gm, '')
-        .split(/\s|,/g, '').filter((val) => val !== '').map((val, index) => index > 2 ? parseFloat(val) : parseInt(val, 10));
-
-      if (parts.length >= 3) {
-        fromHSV(parts[0], parts[1], parts[2]);
-      }
+        .split(/\s|,/g).filter((val) => val !== '').map((val, index) => index > 2 ? parseFloat(val) : parseInt(val, 10));
 
       if (parts.length === 4) {
         this._alpha = Math.floor(parseFloat(parts[3]) * 100);
+      }
+      if (parts.length >= 3) {
+        fromHSV(parts[0], parts[1], parts[2]);
       }
     } else if (value.indexOf('rgb') !== -1) {
       const parts = value.replace(/rgba|rgb|\(|\)/gm, '')
         .split(/\s|,/g).filter((val) => val !== '').map((val, index) => index > 2 ? parseFloat(val) : parseInt(val, 10));
 
+      if (parts.length === 4) {
+        this._alpha = Math.floor(parseFloat(parts[3]) * 100);
+      }
       if (parts.length >= 3) {
         const { h, s, v } = rgb2hsv(parts[0], parts[1], parts[2]);
         fromHSV(h, s, v);
-      }
-
-      if (parts.length === 4) {
-        this._alpha = Math.floor(parseFloat(parts[3]) * 100);
       }
     } else if (value.indexOf('#') !== -1) {
       const hex = value.replace('#', '').trim();
@@ -259,10 +267,10 @@ export default class Color {
       switch (format) {
         case 'hsl':
           const hsl = hsv2hsl(_hue, _saturation / 100, _value / 100);
-          this.value = `hsla(${ _hue }, ${ hsl[1] * 100 }%, ${ hsl[2] * 100 }%, ${ _alpha / 100})`;
+          this.value = `hsla(${ _hue }, ${ Math.round(hsl[1] * 100) }%, ${ Math.round(hsl[2] * 100) }%, ${ _alpha / 100})`;
           break;
         case 'hsv':
-          this.value = `hsva(${ _hue }, ${ _saturation }%, ${ _value }%, ${ _alpha / 100})`;
+          this.value = `hsva(${ _hue }, ${ Math.round(_saturation) }%, ${ Math.round(_value) }%, ${ _alpha / 100})`;
           break;
         default:
           const { r, g, b } = hsv2rgb(_hue, _saturation, _value);
@@ -272,10 +280,10 @@ export default class Color {
       switch (format) {
         case 'hsl':
           const hsl = hsv2hsl(_hue, _saturation / 100, _value / 100);
-          this.value = `hsl(${ _hue }, ${ hsl[1] * 100 }%, ${ hsl[2] * 100 }%)`;
+          this.value = `hsl(${ _hue }, ${ Math.round(hsl[1] * 100) }%, ${ Math.round(hsl[2] * 100) }%)`;
           break;
         case 'hsv':
-          this.value = `hsv(${ _hue }, ${ _saturation }%, ${ _value }%)`;
+          this.value = `hsv(${ _hue }, ${ Math.round(_saturation) }%, ${ Math.round(_value) }%)`;
           break;
         case 'rgb':
           const { r, g, b } = hsv2rgb(_hue, _saturation, _value);

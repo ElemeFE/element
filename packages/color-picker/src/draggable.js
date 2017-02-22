@@ -1,6 +1,8 @@
+import Vue from 'vue';
 let isDragging = false;
 
 export default function(element, options) {
+  if (Vue.prototype.$isServer) return;
   const moveFn = function(event) {
     if (options.drag) {
       options.drag(event);
