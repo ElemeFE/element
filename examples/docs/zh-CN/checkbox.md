@@ -5,7 +5,7 @@
       return {
         checkList: ['选中且禁用','复选框 A'],
         // checkList2: ['复选框 A'],
-        checked: false,
+        checked: true,
         checked1: false,
         checked2: true,
         isValid: '可用',
@@ -21,7 +21,7 @@
       },
       handleCheckAllChange(event) {
         this.checkedCities = event.target.checked ? cityOptions : [];
-        this.isIndeterminate = true;
+        this.isIndeterminate = false;
       },
       handleCheckedCitiesChange(value) {
         let checkedCount = value.length;
@@ -55,7 +55,7 @@
 ```html
 <template>
   <!-- `checked` 为 true 或 false -->
-  <el-checkbox v-model="checked" checked>备选项</el-checkbox>
+  <el-checkbox v-model="checked">备选项</el-checkbox>
 </template>
 <script>
   export default {
