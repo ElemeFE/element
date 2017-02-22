@@ -76,6 +76,22 @@ export default {
             )
           }
         </tbody>
+        {
+          this.columns.filter((column) => column.summary).length > 0
+            ? (<tfoot>
+                <tr>
+                  {
+                    this._l(this.columns, (column, cellIndex) =>
+                      <td
+                          class={ [column.id, column.align, column.className || ' ', columnsHidden[cellIndex] ? 'is-hidden' : '' ] }>
+                          <div class="cell">{column.summary}</div>
+                      </td>
+                    )
+                  }
+                </tr>
+              </tfoot>)
+            : ''
+        }
       </table>
     );
   },
