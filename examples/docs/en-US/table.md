@@ -55,6 +55,29 @@
           $positive: true
         }],
         tableData3: [{
+          date: '2016-05-02',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles',
+        }, {
+          date: '2016-05-04',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles',
+          $info: true
+        }, {
+          date: '2016-05-01',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles',
+        }, {
+          date: '2016-05-03',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles',
+          $positive: true
+        }],
+        tableData3_Summary: {
+          nameCount: 57,
+          addressCount: 21
+        },
+        tableData4: [{
           date: '2016-05-03',
           name: 'Tom',
           state: 'California',
@@ -104,7 +127,7 @@
           address: 'No. 189, Grove St, Los Angeles',
           zip: 'CA 90036'
         }],
-        tableData4: [{
+        tableData5: [{
           date: '2016-05-03',
           name: 'Tom',
           state: 'California',
@@ -456,6 +479,90 @@ You can highlight your table content to distinguish between "success, informatio
 ```
 :::
 
+### Table with summary
+
+You can add a line of "Summary" at the end of the table.
+
+:::demo Use ```summary``` to read the object's properties.
+
+```html
+<template>
+  <el-table
+    :data="tableData3"
+    style="width: 100%"
+    :row-class-name="tableRowClassName">
+    <el-table-column
+      prop="date"
+      label="Date"
+      :summary="'Summary'"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="name"
+      label="Name"
+      :summary="tableData3_Summary.nameCount"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="address"
+      label="Address"
+      :summary="tableData3_Summary.addressCount">
+    </el-table-column>
+  </el-table>
+</template>
+
+<style>
+  .el-table .info-row {
+    background: #c9e5f5;
+  }
+
+  .el-table .positive-row {
+    background: #e2f0e4;
+  }
+</style>
+
+<script>
+  export default {
+    methods: {
+      tableRowClassName(row, index) {
+        if (index === 1) {
+          return 'info-row';
+        } else if (index === 3) {
+          return 'positive-row';
+        }
+        return '';
+      }
+    },
+    data() {
+      return {
+        tableData3:  [{
+          date: '2016-05-03',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles'
+        }, {
+          date: '2016-05-02',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles'
+        }, {
+          date: '2016-05-04',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles'
+        }, {
+          date: '2016-05-01',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles'
+        }],
+        tableData3_Summary: {
+          nameCount: 57,
+          addressCount: 21
+        }
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Table with fixed header
 
 When there are too many rows, you can use a fixed header.
@@ -464,7 +571,7 @@ When there are too many rows, you can use a fixed header.
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData4"
     height="250"
     border
     style="width: 100%">
@@ -489,7 +596,7 @@ When there are too many rows, you can use a fixed header.
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData4: [{
           date: '2016-05-03',
           name: 'Tom',
           address: 'No. 189, Grove St, Los Angeles'
@@ -636,7 +743,7 @@ When you have huge chunks of data to put in a table, you can fix the header and 
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData4"
     border
     style="width: 100%"
     height="250">
@@ -678,7 +785,7 @@ When you have huge chunks of data to put in a table, you can fix the header and 
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData4: [{
           date: '2016-05-03',
           name: 'Tom',
           state: 'California',
@@ -743,7 +850,7 @@ When the the data is dynamically changed, you might want the table to have a max
 ```html
 <template>
   <el-table
-    :data="tableData4"
+    :data="tableData5"
     border
     style="width: 100%"
     max-height="250">
@@ -784,7 +891,7 @@ When the the data is dynamically changed, you might want the table to have a max
       width="120">
       <template scope="scope">
         <el-button
-          @click.native.prevent="deleteRow(scope.$index, tableData4)"
+          @click.native.prevent="deleteRow(scope.$index, tableData5)"
           type="text"
           size="small">
           Remove
@@ -803,7 +910,7 @@ When the the data is dynamically changed, you might want the table to have a max
     },
     data() {
       return {
-        tableData4: [{
+        tableData5: [{
           date: '2016-05-03',
           name: 'Tom',
           state: 'California',
@@ -868,7 +975,7 @@ When the data structure is complex, you can use group header to show the data hi
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData4"
     border
     style="width: 100%">
     <el-table-column
@@ -912,7 +1019,7 @@ When the data structure is complex, you can use group header to show the data hi
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData4: [{
           date: '2016-05-03',
           name: 'Tom',
           state: 'California',
@@ -1045,7 +1152,7 @@ You can also select multiple rows.
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData4"
     border
     style="width: 100%"
     @selection-change="handleSelectionChange">
@@ -1075,7 +1182,7 @@ You can also select multiple rows.
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData4: [{
           date: '2016-05-03',
           name: 'Tom',
           address: 'No. 189, Grove St, Los Angeles'
@@ -1354,7 +1461,7 @@ When the row content is too long and you do not want to display the horizontal s
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData4"
     style="width: 100%">
     <el-table-column type="expand">
       <template scope="props">
@@ -1379,7 +1486,7 @@ When the row content is too long and you do not want to display the horizontal s
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData4: [{
           date: '2016-05-03',
           name: 'Tom',
           state: 'California',
@@ -1488,6 +1595,7 @@ When the row content is too long and you do not want to display the horizontal s
 | label | column label | string | — | — |
 | column-key | column's key. If you need to use the filter-change event, you need this attribute to identify which column is being filtered | string | string | — | — |
 | prop |  field name. You can also use its alias: `property` | string | — | — |
+| summary | The sum of the columns of the table is displayed at the end of the table. If neither is specified, the total line is not displayed. You can also use property | [number, string] | — | — |
 | width | column width | string | — | — |
 | min-width | column minimum width. Columns with `width` has a fixed width, while columns with `min-width` has a width that is distributed in proportion | string | — | — |
 | fixed | whether column is fixed at left/right. Will be fixed at left if `true` | string/boolean | true/left/right | — |

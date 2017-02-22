@@ -55,6 +55,29 @@
           $positive: true
         }],
         tableData3: [{
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄',
+        }, {
+          date: '2016-05-04',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄',
+          $info: true
+        }, {
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄',
+        }, {
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄',
+          $positive: true
+        }],
+        tableData3_Summary: {
+          nameCount: 57,
+          addressCount: 21
+        },
+        tableData4: [{
           date: '2016-05-03',
           name: '王小虎',
           province: '上海',
@@ -111,7 +134,7 @@
           detailAddress: '金沙江路 1518 弄',
           zip: 200333
         }],
-        tableData4: [{
+        tableData5: [{
           date: '2016-05-03',
           name: '王小虎',
           province: '上海',
@@ -476,6 +499,89 @@
 ```
 :::
 
+### 带合计的表格
+
+可在末尾显示一行合计。
+
+:::demo 可通过```summary```来读取某个对象的属性，作为合计值。
+```html
+<template>
+  <el-table
+    :data="tableData3"
+    style="width: 100%"
+    :row-class-name="tableRowClassName">
+    <el-table-column
+      prop="date"
+      label="日期"
+      :summary="'合计'"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="name"
+      label="姓名"
+      :summary="tableData3_Summary.nameCount"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="address"
+      label="地址"
+      :summary="tableData3_Summary.addressCount">
+    </el-table-column>
+  </el-table>
+</template>
+
+<style>
+  .el-table .info-row {
+    background: #c9e5f5;
+  }
+
+  .el-table .positive-row {
+    background: #e2f0e4;
+  }
+</style>
+
+<script>
+  export default {
+    methods: {
+      tableRowClassName(row, index) {
+        if (index === 1) {
+          return 'info-row';
+        } else if (index === 3) {
+          return 'positive-row';
+        }
+        return '';
+      }
+    },
+    data() {
+      return {
+        tableData3: [{
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄',
+        }, {
+          date: '2016-05-04',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄',
+        }, {
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }],
+        tableData3_Summary: {
+          nameCount: 57,
+          addressCount: 21
+        }
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### 固定表头
 
 纵向内容过多时，可选择固定表头。
@@ -484,7 +590,7 @@
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData4"
     height="250"
     border
     style="width: 100%">
@@ -509,7 +615,7 @@
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData4: [{
           date: '2016-05-03',
           name: '王小虎',
           address: '上海市普陀区金沙江路 1518 弄'
@@ -653,7 +759,7 @@
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData4"
     border
     style="width: 100%"
     height="250">
@@ -695,7 +801,7 @@
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData4: [{
           date: '2016-05-03',
           name: '王小虎',
           province: '上海',
@@ -760,7 +866,7 @@
 ```html
 <template>
   <el-table
-    :data="tableData4"
+    :data="tableData5"
     border
     style="width: 100%"
     max-height="250">
@@ -801,7 +907,7 @@
       width="120">
       <template scope="scope">
         <el-button
-          @click.native.prevent="deleteRow(scope.$index, tableData4)"
+          @click.native.prevent="deleteRow(scope.$index, tableData5)"
           type="text"
           size="small">
           移除
@@ -820,7 +926,7 @@
     },
     data() {
       return {
-        tableData4: [{
+        tableData5: [{
           date: '2016-05-03',
           name: '王小虎',
           province: '上海',
@@ -885,7 +991,7 @@
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData4"
     border
     style="width: 100%">
     <el-table-column
@@ -929,7 +1035,7 @@
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData4: [{
           date: '2016-05-03',
           name: '王小虎',
           province: '上海',
@@ -1062,7 +1168,7 @@
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData4"
     border
     style="width: 100%"
     @selection-change="handleSelectionChange">
@@ -1092,7 +1198,7 @@
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData4: [{
           date: '2016-05-03',
           name: '王小虎',
           address: '上海市普陀区金沙江路 1518 弄'
@@ -1371,7 +1477,7 @@
 ```html
 <template>
   <el-table
-    :data="tableData3"
+    :data="tableData4"
     style="width: 100%">
     <el-table-column type="expand">
       <template scope="props">
@@ -1396,7 +1502,7 @@
   export default {
     data() {
       return {
-        tableData3: [{
+        tableData4: [{
           date: '2016-05-03',
           name: '王小虎',
           province: '上海',
@@ -1511,6 +1617,7 @@
 | column-key | column 的 key，如果需要使用 filter-change 事件，则需要此属性标识是哪个 column 的筛选条件 | string | — | — |
 | label | 显示的标题 | string | — | — |
 | prop | 对应列内容的字段名，也可以使用 property 属性 | string | — | — |
+| summary | 显示在表尾，表格对应列的合计值，如果都不指定，则不显示合计行。也可以使用 property 属性 | [number, string] | — | — |
 | width | 对应列的宽度 | string | — | — |
 | min-width | 对应列的最小宽度，与 width 的区别是 width 是固定的，min-width 会把剩余宽度按比例分配给设置了 min-width 的列 | string | — | — |
 | fixed | 列是否固定在左侧或者右侧，true 表示固定在左侧 | string, boolean | true, left, right | — |
