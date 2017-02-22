@@ -1,5 +1,39 @@
 ## Changelog
 
+### 1.2.0 Lithium
+
+*2017-02-22*
+
+#### New features:
+- Two brand new components: Cascader and ColorPicker
+- New attributes `editable` and `addable`, and new events `tab-add` and `edit` for Tabs
+- Language config files in UMD format
+- New events `node-expand` and `node-collapse` for Tree, #2507 (by @masterzhang)
+- New attribute `indent` for Tree, #2713
+- Dialog's title now supports named slot, #2657
+- New attribute `range` for Slider, #2751
+- Upload
+  - Attribute `auto-upload` that controls if files are uploaded immediately after selecting, and its default value is `true`
+  - Event `on-change` that fires when file status changes
+  - Attribute `list-type` that configures the appearance of file list
+- Scroll bars in Autocomplete are made prettier
+
+#### Fixes:
+- Carousel not responding to contents' update, #2775
+- Numbers in TimePicker not align in some conditions, #2948
+- TimePicker only responding to odd clicks in some conditions, #2884 (by @k55k32)
+- Tabs' display order error when tab-pane is dynamically changed, #2898
+- Menu highlighting menu-item when `default-active` is assigned to an non-existent item
+- Collapse's style issue when nested
+
+#### Breaking changes:
+- Tooltip is refactored, no additional HTML tags will be rendered so that the structures of nested component stay unchanged, #2459
+- The backdrop of Dialog now inserts to body element by default, #2556
+- Tabs don't maintain tab instances internally any more, so they should be handled externally via events emitted by Tabs, #2567
+- Upload is refactored
+  - `default-file-list` renamed to `file-list`, and `show-upload-list` renamed to `show-file-list`
+  - `thumbnail-mode` removed
+
 ### 1.1.6
 
 *2017-01-23*
@@ -80,7 +114,7 @@ Breaking change
 
 *2016-12-29*
 
-New features:
+#### New features:
 - Two brand new components: Carousel and Collapse
 - SSR supported
 - Scrollbars' style inside components is upgraded
@@ -91,11 +125,11 @@ New features:
 - Autocomplete now supports `popper-class`
 - To customize template of Tab-Pane, now you can use the `slot` named `label`
 
-Fixes:
+#### Fixes:
 - `change` event of DatePicker incorrectly triggering multiple times, #2070
 - Width shaking of tab-pane while initializing, #1883
 
-Breaking changes:
+#### Breaking changes:
 - Only compatible with Vue 2.1.6 and beyond
 - Parameters of Form validateField() methods are updated
 - Alert's render-content attribute is removed, and now you can pass your custom template via default slot
