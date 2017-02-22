@@ -214,7 +214,7 @@ describe('Input', () => {
       vm.input = 'b';
 
       vm.$nextTick(_ => {
-        expect(spy.withArgs('b').calledOnce).to.be.true;
+        expect(spy.withArgs('b').calledOnce).to.be.false;
         done();
       });
     });

@@ -170,7 +170,10 @@
         this.$emit('focus', event);
       },
       handleInput(event) {
-        this.setCurrentValue(event.target.value);
+        const value = event.target.value;
+        this.$emit('input', value);
+        this.setCurrentValue(value);
+        this.$emit('change', value);
       },
       handleIconClick(event) {
         if (this.onIconClick) {
@@ -184,8 +187,6 @@
           this.resizeTextarea();
         });
         this.currentValue = value;
-        this.$emit('input', value);
-        this.$emit('change', value);
         if (this.validateEvent) {
           this.dispatch('ElFormItem', 'el.form.change', [value]);
         }

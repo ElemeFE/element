@@ -498,30 +498,31 @@ describe('Cascader', () => {
       }
     }, true);
     expect(vm.$el).to.be.exist;
-    vm.$refs.cascader.inputValue = 'z';
     vm.$el.click();
-
-    setTimeout(_ => {
-      expect(document.body.querySelector('.el-cascader-menus')).to.be.exist;
-
-      const menu = vm.$refs.cascader.menu;
-      const menuElm = menu.$el;
-      const item1 = menuElm.querySelector('.el-cascader-menu__item');
-
-      expect(menuElm.children.length).to.be.equal(1);
-      expect(menuElm.children[0].children.length).to.be.equal(3);
-      done();
-
-      item1.click();
-
+    vm.$nextTick(_ => {
+      vm.$refs.cascader.handleInputChange('z');
       setTimeout(_ => {
-        expect(document.body.querySelector('.el-cascader-menus').style.display).to.be.equal('none');
-        expect(vm.selectedOptions[0]).to.be.equal('zhejiang');
-        expect(vm.selectedOptions[1]).to.be.equal('hangzhou');
-        expect(vm.selectedOptions[2]).to.be.equal('xihu');
+        expect(document.body.querySelector('.el-cascader-menus')).to.be.exist;
+
+        const menu = vm.$refs.cascader.menu;
+        const menuElm = menu.$el;
+        const item1 = menuElm.querySelector('.el-cascader-menu__item');
+
+        expect(menuElm.children.length).to.be.equal(1);
+        expect(menuElm.children[0].children.length).to.be.equal(3);
         done();
-      }, 500);
-    }, 300);
+
+        item1.click();
+
+        setTimeout(_ => {
+          expect(document.body.querySelector('.el-cascader-menus').style.display).to.be.equal('none');
+          expect(vm.selectedOptions[0]).to.be.equal('zhejiang');
+          expect(vm.selectedOptions[1]).to.be.equal('hangzhou');
+          expect(vm.selectedOptions[2]).to.be.equal('xihu');
+          done();
+        }, 500);
+      }, 300);
+    });
   });
   it('props', done => {
     vm = createVue({
