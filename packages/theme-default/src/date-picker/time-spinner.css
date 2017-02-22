@@ -12,7 +12,7 @@
       }
 
       .el-time-spinner__wrapper:nth-child(2) {
-        padding-left: 1%;
+        margin-left: 1%;
       }
     }
 
