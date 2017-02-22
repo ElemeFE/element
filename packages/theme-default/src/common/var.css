@@ -521,12 +521,10 @@
   --menu-item-color: var(--link-color);
   --menu-item-fill: var(--color-extra-light-gray);
   --menu-item-hover-fill: var(--disabled-border-base);
-  --submenu-item-fill: var(--color-light-gray);
 
   --dark-menu-item-color: var(--link-color);
   --dark-menu-item-fill: var(--color-light-black);
   --dark-menu-item-hover-fill: var(--link-color);
-  --dark-submenu-item-fill: var(--color-base-black);
 
   /* Rate
   --------------------------*/
