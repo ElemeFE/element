@@ -1,5 +1,16 @@
 ## Changelog
 
+### 1.2.1
+
+*2017-02-23*
+
+- Fixed SSR regression in version 1.2.0, #2982
+- Fixed horizontal scroll buttons not showing in Tabs, #2974
+- Fixed wrong calculation of height after the `height` attribute is updated dynamically in Table, #2979
+- Added `cell-dblclick` and `header-dragend` events for Table, #2983 #2988
+- Fixed form items showing a left padding inside an inline Form with a specified `label-width`, #2990
+- Fixed Cascader's dropdown misplaces in some conditions, #2992
+
 ### 1.2.0 Lithium
 
 *2017-02-22*
