@@ -220,8 +220,8 @@ export default {
       this.menu.value = this.currentValue.slice(0);
       this.menu.visible = true;
       this.menu.options = this.options;
-      this.updatePopper();
       this.$nextTick(_ => {
+        this.updatePopper();
         this.menu.inputWidth = this.$refs.input.$el.offsetWidth - 2;
       });
     },
