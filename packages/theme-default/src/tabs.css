@@ -70,6 +70,7 @@
       white-space: nowrap;
       position: relative;
       transition: transform .3s;
+      float: left;
     }
     @e item {
       padding: 0 16px;
