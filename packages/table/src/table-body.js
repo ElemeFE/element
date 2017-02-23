@@ -220,6 +220,14 @@ export default {
 
     handleContextMenu(event, row) {
       const table = this.table;
+      const cell = getCell(event);
+      let column;
+      if (cell) {
+        column = getColumnByCell(table, cell);
+        if (column) {
+          table.$emit('cell-dblclick', row, column, cell, event);
+        }
+      }
       table.$emit('row-contextmenu', row, event);
     },
 

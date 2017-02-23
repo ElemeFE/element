@@ -1466,6 +1466,7 @@ When the row content is too long and you do not want to display the horizontal s
 | cell-mouse-enter | triggers when hovering into a cell| row, column, cell, event |
 | cell-mouse-leave | triggers when hovering out of a cell | row, column, cell, event |
 | cell-click | triggers when clicking a cell | row, column, cell, event |
+| cell-dblclick | triggers when double clicking a cell | row, column, cell, event |
 | row-click | triggers when clicking a row | row, event, column |
 | row-contextmenu | triggers when user right clicks on a row | row, event |
 | row-dblclick | triggers when double clicking a row | row, event |
