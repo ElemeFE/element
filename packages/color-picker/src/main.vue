@@ -22,9 +22,6 @@
   </div>
 </template>
 
-<style>
-</style>
-
 <script>
   import Color from './color';
   import PickerDropdown from './components/picker-dropdown.vue';

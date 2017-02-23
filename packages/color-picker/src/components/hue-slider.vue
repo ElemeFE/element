@@ -11,9 +11,6 @@
   </div>
 </template>
 
-<style>
-</style>
-
 <script>
   import draggable from '../draggable';
 
