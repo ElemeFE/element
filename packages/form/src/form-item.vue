@@ -84,12 +84,11 @@
         return ret;
       },
       contentStyle() {
-        var ret = {};
-        if (this.form.labelPosition === 'top') return ret;
-        var labelWidth = this.labelWidth || this.form.labelWidth;
-        if (labelWidth) {
-          ret.marginLeft = labelWidth;
-        }
+        let ret = {};
+        const labelWidth = this.labelWidth || this.form.labelWidth;
+        const form = this.form;
+        if (form.labelPosition === 'top' || form.inline) return ret;
+        if (labelWidth) ret.marginLeft = labelWidth;
         return ret;
       },
       form() {
