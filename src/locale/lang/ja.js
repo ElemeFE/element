@@ -1,5 +1,9 @@
 export default {
   el: {
+    colorpicker: {
+      confirm: 'はい',
+      clear: 'クリア'
+    },
     datepicker: {
       now: '現在',
       today: '今日',

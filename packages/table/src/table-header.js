@@ -286,7 +286,8 @@ export default {
 
         this.$parent.resizeProxyVisible = true;
 
-        const tableEl = this.$parent.$el;
+        const table = this.$parent;
+        const tableEl = table.$el;
         const tableLeft = tableEl.getBoundingClientRect().left;
         const columnEl = this.$el.querySelector(`th.${column.id}`);
         const columnRect = columnEl.getBoundingClientRect();
@@ -301,7 +302,7 @@ export default {
           tableLeft
         };
 
-        const resizeProxy = this.$parent.$refs.resizeProxy;
+        const resizeProxy = table.$refs.resizeProxy;
         resizeProxy.style.left = this.dragState.startLeft + 'px';
 
         document.onselectstart = function() { return false; };
@@ -316,9 +317,14 @@ export default {
 
         const handleMouseUp = () => {
           if (this.dragging) {
+            const {
+              startColumnLeft,
+              startLeft
+            } = this.dragState;
             const finalLeft = parseInt(resizeProxy.style.left, 10);
-            const columnWidth = finalLeft - this.dragState.startColumnLeft;
+            const columnWidth = finalLeft - startColumnLeft;
             column.width = column.realWidth = columnWidth;
+            table.$emit('header-dragend', column.width, startLeft - startColumnLeft, column, event);
 
             this.store.scheduleLayout();
 
@@ -327,7 +333,7 @@ export default {
             this.draggingColumn = null;
             this.dragState = {};
 
-            this.$parent.resizeProxyVisible = false;
+            table.resizeProxyVisible = false;
           }
 
           document.removeEventListener('mousemove', handleMouseMove);

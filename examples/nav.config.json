@@ -109,6 +109,10 @@
               "title": "Rate 评分"
             },
             {
+              "path": "/color-picker",
+              "title": "ColorPicker 颜色选择器"
+            },
+            {
               "path": "/form",
               "title": "Form 表单"
             }
@@ -333,6 +337,10 @@
             {
               "path": "/rate",
               "title": "Rate"
+            },
+            {
+              "path": "/color-picker",
+              "title": "ColorPicker"
             },
             {
               "path": "/form",

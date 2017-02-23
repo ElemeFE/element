@@ -1,5 +1,9 @@
 export default {
   el: {
+    colorpicker: {
+      confirm: 'OK',
+      clear: 'Καθαρισμός'
+    },
     datepicker: {
       now: 'Τώρα',
       today: 'Σήμερα',

@@ -45,12 +45,15 @@ export default {
 
     if (gutter) {
       const gutterWith = `-${gutter}px`;
+      const gutterStyle = `margin-bottom: ${gutterWith}; margin-right: ${gutterWith};`;
 
       if (Array.isArray(this.wrapStyle)) {
         style = util.toObject(this.wrapStyle);
         style.marginRight = style.marginBottom = gutterWith;
       } else if (typeof this.wrapStyle === 'string') {
-        style += `margin-bottom: ${gutterWith}; margin-right: ${gutterWith};`;
+        style += gutterStyle;
+      } else {
+        style = gutterStyle;
       }
     }
     const view = h(this.tag, {
@@ -63,7 +66,7 @@ export default {
         ref="wrap"
         style={ style }
         onScroll={ this.handleScroll }
-        class={ [this.wrapClass, 'el-scrollbar__wrap el-scrollbar__wrap--hidden-default'] }>
+        class={ [this.wrapClass, 'el-scrollbar__wrap', gutter ? '' : 'el-scrollbar__wrap--hidden-default'] }>
         { [view] }
       </div>
     );
