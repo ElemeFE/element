@@ -16,8 +16,7 @@
     </div>
   </transition>
 </template>
-<style>
-</style>
+
 <script>
   import SvPanel from './sv-panel';
   import HueSlider from './hue-slider';
