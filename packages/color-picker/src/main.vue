@@ -74,10 +74,12 @@
     methods: {
       confirmValue(value) {
         this.$emit('input', this.color.value);
+        this.$emit('change', this.color.value);
         this.showPicker = false;
       },
       clearValue() {
         this.$emit('input', null);
+        this.$emit('change', null);
         this.showPanelColor = false;
         this.showPicker = false;
         this.resetColor();
