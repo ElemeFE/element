@@ -74,7 +74,7 @@
         if (item.__IS__FLAT__OPTIONS) {
           this.activeValue = item.value;
         } else {
-          this.activeValue.splice(menuIndex, 1, item.value);
+          this.activeValue.splice(menuIndex, this.activeValue.length - 1, item.value);
         }
         this.$emit('pick', this.activeValue);
       },
