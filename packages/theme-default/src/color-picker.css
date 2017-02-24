@@ -209,6 +209,7 @@
       padding: 6px;
       border: 1px solid #bfcbd9;
       border-radius: 4px;
+      font-size: 0;
     }
 
     @descendent color {
@@ -237,7 +238,7 @@
     @descendent empty {
       font-size: 12px;
       vertical-align: middle;
-      margin-top: -2px;
+      margin-top: 4px;
       color: #666;
     }
 
@@ -248,6 +249,7 @@
       margin-left: 8px;
       width: 12px;
       color: #888;
+      font-size: 12px;
     }
 
     @descendent panel {
