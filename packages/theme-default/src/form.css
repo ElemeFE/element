@@ -21,9 +21,15 @@
         margin-right: 10px;
         vertical-align: top;
       }
-      & .el-form-item__label,
+      & .el-form-item__label {
+        float: none;
+        display: inline-block;
+      }
       & .el-form-item__content {
         display: inline-block;
+      }
+      &.el-form--label-top .el-form-item__content {
+        display: block;
       }
     }
   }
