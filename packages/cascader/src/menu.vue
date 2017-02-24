@@ -78,6 +78,9 @@
         }
         this.$emit('pick', this.activeValue);
       },
+      handleMenuLeave() {
+        this.$emit('menuLeave');
+      },
       activeItem(item, menuIndex) {
         const len = this.activeOptions.length;
         this.activeValue.splice(menuIndex, len, item.value);
@@ -151,7 +154,7 @@
         );
       });
       return (
-        <transition name="el-zoom-in-top">
+        <transition name="el-zoom-in-top" on-after-leave={this.handleMenuLeave}>
           <div
             v-show={visible}
             class={[

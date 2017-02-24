@@ -211,6 +211,7 @@ export default {
       this.popperElm = this.menu.$el;
       this.menu.$on('pick', this.handlePick);
       this.menu.$on('activeItemChange', this.handleActiveItemChange);
+      this.menu.$on('menuLeave', this.doDestroy);
     },
     showMenu() {
       if (!this.menu) {
