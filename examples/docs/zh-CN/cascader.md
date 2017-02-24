@@ -505,7 +505,8 @@
             label: '组件交互文档'
           }]
         }],
-        selectedOptions: []
+        selectedOptions: [],
+        selectedOptions2: []
       };
     },
     methods: {
