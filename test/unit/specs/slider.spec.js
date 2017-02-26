@@ -77,7 +77,7 @@ describe('Slider', () => {
       }
     }, true);
     const slider = vm.$children[0].$children[0];
-    slider.onButtonDown({ clientX: 0 });
+    slider.onButtonDown({ clientX: 0, preventDefault() {} });
     slider.onDragging({ clientX: 100 });
     slider.onDragEnd();
     setTimeout(() => {
@@ -101,7 +101,7 @@ describe('Slider', () => {
       }
     }, true);
     const slider = vm.$children[0].$children[0];
-    slider.onButtonDown({ clientX: 0 });
+    slider.onButtonDown({ clientX: 0, preventDefault() {} });
     slider.onDragging({ clientX: 100 });
     slider.onDragEnd();
     setTimeout(() => {
