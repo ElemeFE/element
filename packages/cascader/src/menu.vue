@@ -6,6 +6,7 @@
       return {
         inputWidth: 0,
         options: [],
+        props: {},
         visible: false,
         activeValue: [],
         value: [],
@@ -34,6 +35,20 @@
         cache: false,
         get() {
           const activeValue = this.activeValue;
+          const configurableProps = ['label', 'value', 'children', 'disabled'];
+
+          const formatOptions = options => {
+            options.forEach(option => {
+              if (option.__IS__FLAT__OPTIONS) return;
+              configurableProps.forEach(prop => {
+                const value = option[this.props[prop] || prop];
+                if (value) option[prop] = value;
+              });
+              if (Array.isArray(option.children)) {
+                formatOptions(option.children);
+              }
+            });
+          };
 
           const loadActiveOptions = (options, activeOptions = []) => {
             const level = activeOptions.length;
@@ -48,6 +63,7 @@
             return activeOptions;
           };
 
+          formatOptions(this.options);
           return loadActiveOptions(this.options);
         }
       }
@@ -58,15 +74,22 @@
         if (item.__IS__FLAT__OPTIONS) {
           this.activeValue = item.value;
         } else {
-          this.activeValue.splice(menuIndex, 1, item.value);
+          this.activeValue.splice(menuIndex, this.activeValue.length - 1, item.value);
         }
         this.$emit('pick', this.activeValue);
+      },
+      handleMenuLeave() {
+        this.$emit('menuLeave');
       },
       activeItem(item, menuIndex) {
         const len = this.activeOptions.length;
         this.activeValue.splice(menuIndex, len, item.value);
         this.activeOptions.splice(menuIndex + 1, len, item.children);
-        if (this.changeOnSelect) this.$emit('pick', this.activeValue, false);
+        if (this.changeOnSelect) {
+          this.$emit('pick', this.activeValue, false);
+        } else {
+          this.$emit('activeItemChange', this.activeValue);
+        }
       }
     },
 
@@ -116,7 +139,7 @@
         });
         let menuStyle = {};
         if (isFlat) {
-          menuStyle.width = this.inputWidth + 'px';
+          menuStyle.minWidth = this.inputWidth + 'px';
         }
 
         return (
@@ -131,7 +154,7 @@
         );
       });
       return (
-        <transition name="el-zoom-in-top">
+        <transition name="el-zoom-in-top" on-after-leave={this.handleMenuLeave}>
           <div
             v-show={visible}
             class={[

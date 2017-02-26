@@ -8,17 +8,19 @@
   >
     <span
       v-if="controls"
-      class="el-input-number__decrease el-icon-minus"
+      class="el-input-number__decrease"
       :class="{'is-disabled': minDisabled}"
       v-repeat-click="decrease"
     >
+      <i class="el-icon-minus"></i>
     </span>
     <span
       v-if="controls"
-      class="el-input-number__increase el-icon-plus"
+      class="el-input-number__increase"
       :class="{'is-disabled': maxDisabled}"
       v-repeat-click="increase"
     >
+      <i class="el-icon-plus"></i>
     </span>
     <el-input
       :value="currentValue"

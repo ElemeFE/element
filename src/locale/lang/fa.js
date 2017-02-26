@@ -1,5 +1,9 @@
 export default {
   el: {
+    colorpicker: {
+      confirm: 'باشد',
+      clear: 'خذف'
+    },
     datepicker: {
       now: 'اکنون',
       today: 'امروز',

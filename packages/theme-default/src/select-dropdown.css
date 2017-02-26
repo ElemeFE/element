@@ -49,7 +49,6 @@
 
   @b select-dropdown__wrap {
     max-height: var(--select-dropdown-max-height);
-    width: 100%;
   }
 
   @b select-dropdown__list {

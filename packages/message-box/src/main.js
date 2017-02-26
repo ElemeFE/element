@@ -7,6 +7,7 @@ const defaults = {
   modalFade: true,
   lockScroll: true,
   closeOnClickModal: true,
+  closeOnPressEscape: true,
   inputValue: null,
   inputPlaceholder: '',
   inputPattern: null,
@@ -75,6 +76,7 @@ const showNextMsg = () => {
   if (!instance) {
     initInstance();
   }
+  instance.action = '';
 
   if (!instance.value || instance.closeTimer) {
     if (msgQueue.length > 0) {

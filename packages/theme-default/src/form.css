@@ -21,6 +21,10 @@
         margin-right: 10px;
         vertical-align: top;
       }
+      & .el-form-item__label,
+      & .el-form-item__content {
+        display: inline-block;
+      }
     }
   }
   @b form-item {
@@ -73,6 +77,12 @@
       & .el-input__inner,
       & .el-textarea__inner {
         border-color: var(--color-danger);
+      }
+      & .el-input-group__append,
+      & .el-input-group__prepend, {
+        & .el-input__inner {
+          border-color: transparent;
+        }
       }
     }
   }

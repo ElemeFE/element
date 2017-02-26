@@ -13,7 +13,7 @@
     .el-input__inner {
       cursor: pointer;
       background-color: transparent;
-      z-index: 1;
+      z-index: var(--index-normal);
     }
 
     .el-input__icon {
@@ -34,7 +34,7 @@
       top: 0;
       height: 100%;
       line-height: 34px;
-      padding: 0 15px 0 10px;
+      padding: 0 25px 0 10px;
       color: var(--input-color);
       width: 100%;
       white-space: nowrap;
@@ -42,6 +42,11 @@
       overflow: hidden;
       box-sizing: border-box;
       cursor: pointer;
+      font-size: 14px;
+      text-align: left;
+      span {
+        color: var(--color-light-silver);
+      }
     }
 
     @m large {
@@ -65,24 +70,23 @@
     background: #fff;
     position: absolute;
     margin: 5px 0;
-    z-index: 1001;
+    z-index: calc(var(--index-normal) + 1);
     border: var(--select-dropdown-border);
     border-radius: var(--border-radius-small);
-    overflow: hidden;
     box-shadow: var(--select-dropdown-shadow);
   }
 
   @b cascader-menu {
     display: inline-block;
     vertical-align: top;
-    height: 180px;
+    height: 204px;
     overflow: auto;
     border-right: var(--select-dropdown-border);
     background-color: var(--select-dropdown-background);
     box-sizing: border-box;
     margin: 0;
-    padding: 0;
-    min-width: 110px;
+    padding: 6px 0;
+    min-width: 160px;
 
     &:last-child {
       border-right: 0;
@@ -102,13 +106,13 @@
       cursor: pointer;
 
       @e keyword {
-        color: var(--color-danger);
+        font-weight: bold;
       }
       
       @m extensible {
         &:after {
           font-family: 'element-icons';
-          content: "\e602";
+          content: "\e606";
           font-size: 12px;
           transform: scale(0.8);
           color: rgb(191, 203, 217);
@@ -132,7 +136,7 @@
         color: var(--color-white);
         background-color: var(--select-option-selected);
 
-        &.hover {
+        &:hover {
           background-color: var(--select-option-selected-hover);
         }
       }

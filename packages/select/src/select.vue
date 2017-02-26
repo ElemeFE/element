@@ -221,7 +221,7 @@
 
     watch: {
       placeholder(val) {
-        this.currentPlaceholder = val;
+        this.cachedPlaceHolder = this.currentPlaceholder = val;
       },
 
       value(val) {
@@ -480,6 +480,7 @@
 
       resetInputHeight() {
         this.$nextTick(() => {
+          if (!this.$refs.reference) return;
           let inputChildNodes = this.$refs.reference.$el.childNodes;
           let input = [].filter.call(inputChildNodes, item => item.tagName === 'INPUT')[0];
           input.style.height = Math.max(this.$refs.tags.clientHeight + 6, sizeMap[this.size] || 36) + 'px';

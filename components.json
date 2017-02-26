@@ -59,5 +59,6 @@
   "carousel-item": "./packages/carousel-item/index.js",
   "collapse": "./packages/collapse/index.js",
   "collapse-item": "./packages/collapse-item/index.js",
-  "cascader": "./packages/cascader/index.js"
+  "cascader": "./packages/cascader/index.js",
+  "color-picker": "./packages/color-picker/index.js"
 }

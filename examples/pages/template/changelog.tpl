@@ -58,6 +58,17 @@
 
       ul {
         padding-left: 0;
+        ul {
+          padding-left: 20px;
+          li::before {
+            content: '';
+            circle: 4px #fff;
+            border: solid 1px #5e6d82;
+            margin-right: 5px;
+            display: inline-block;
+            vertical-align: middle;
+          }
+        }
       }
 
       li li {

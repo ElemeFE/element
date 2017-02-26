@@ -78,7 +78,7 @@
             },
             {
               "path": "/cascader",
-              "title": "Cascader 级联选择"
+              "title": "Cascader 级联选择器"
             },
             {
               "path": "/switch",
@@ -107,6 +107,10 @@
             {
               "path": "/rate",
               "title": "Rate 评分"
+            },
+            {
+              "path": "/color-picker",
+              "title": "ColorPicker 颜色选择器"
             },
             {
               "path": "/form",
@@ -333,6 +337,10 @@
             {
               "path": "/rate",
               "title": "Rate"
+            },
+            {
+              "path": "/color-picker",
+              "title": "ColorPicker"
             },
             {
               "path": "/form",

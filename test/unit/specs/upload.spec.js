@@ -41,7 +41,7 @@ describe('ajax', () => {
   });
   it('40x code should be error', done => {
     option.onError = e => {
-      expect(e.toString()).to.contain('404');
+      expect(e.toString()).to.contain('404 Not found');
       done();
     };
 
@@ -90,10 +90,10 @@ describe('Upload', () => {
             handlers.onSuccess(res, file, fileList);
           }
         },
-        onError(err, response, file) {
-          console.log('onError', err, response);
+        onError(err, file, fileList) {
+          console.log('onError', err, file, fileList);
           if (handlers.onError) {
-            handlers.onError(err, response, file);
+            handlers.onError(err, file, fileList);
           }
         },
         onPreview(file) {
@@ -148,9 +148,9 @@ describe('Upload', () => {
         type: 'xml'
       }];
 
-      handlers.onError = (err, response, file) => {
+      handlers.onError = (err, file, fileList) => {
         expect(err instanceof Error).to.equal(true);
-        expect(response).to.equal('error 400');
+        expect(file.name).to.equal('fail.png');
         done();
       };
 
@@ -173,7 +173,7 @@ describe('Upload', () => {
 
       handlers.onSuccess = (res, file, fileList) => {
         uploader.$nextTick(_ => {
-          uploader.$el.querySelector('.el-upload__files .is-finished a').click();
+          uploader.$el.querySelector('.el-upload-list .is-success a').click();
         });
       };
 
@@ -190,10 +190,9 @@ describe('Upload', () => {
       }];
 
       handlers.onSuccess = (res, file, fileList) => {
-        uploader.$el.querySelector('.el-upload__files .el-upload__btn-delete').click();
+        uploader.$el.querySelector('.el-upload-list .el-icon-close').click();
         uploader.$nextTick(_ => {
           expect(uploader.fileList.length).to.equal(0);
-          expect(uploader.$el.querySelector('.el-upload__files')).to.not.exist;
           done();
         });
       };
@@ -214,7 +213,6 @@ describe('Upload', () => {
         uploader.clearFiles();
         uploader.$nextTick(_ => {
           expect(uploader.fileList.length).to.equal(0);
-          expect(uploader.$el.querySelector('.el-upload__files')).to.not.exist;
           done();
         });
       };

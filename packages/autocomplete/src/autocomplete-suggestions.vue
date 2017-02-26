@@ -66,6 +66,12 @@
       }
     },
 
+    updated() {
+      this.$nextTick(_ => {
+        this.updatePopper();
+      });
+    },
+
     mounted() {
       this.popperElm = this.$el;
       this.referenceElm = this.$parent.$refs.input.$refs.input;

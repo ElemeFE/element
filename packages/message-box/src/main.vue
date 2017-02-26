@@ -174,9 +174,14 @@
     },
 
     watch: {
-      inputValue(val) {
-        if (this.$type === 'prompt' && val !== null) {
-          this.validate();
+      inputValue: {
+        immediate: true,
+        handler(val) {
+          this.$nextTick(_ => {
+            if (this.$type === 'prompt' && val !== null) {
+              this.validate();
+            }
+          });
         }
       },
 

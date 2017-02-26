@@ -39,28 +39,6 @@
   }
 </script>
 
-<style>
-  .demo-box.demo-tag {
-    .el-tag + .el-tag {
-      margin-left: 10px;
-    }
-    .button-new-tag {
-      margin-left: 10px;
-      height: 24px;
-      line-height: 22px;
-      padding: 0 *;
-    }
-    .input-new-tag {
-      width: 78px;
-      margin-left: 10px;
-
-      .el-input__inner {
-        height: 24px;
-      }
-    }
-  }
-</style>
-
 ## Tag
 
 Used for marking and selection.
