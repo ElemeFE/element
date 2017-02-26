@@ -96,6 +96,7 @@
 
       onButtonDown(event) {
         if (this.disabled) return;
+        event.preventDefault();
         this.onDragStart(event);
         window.addEventListener('mousemove', this.onDragging);
         window.addEventListener('mouseup', this.onDragEnd);
