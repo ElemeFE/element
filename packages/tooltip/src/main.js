@@ -39,7 +39,7 @@ export default {
   },
 
   beforeCreate() {
-    if (this.$isServegr) return;
+    if (this.$isServer) return;
 
     this.popperVM = new Vue({
       router: this.$router,
