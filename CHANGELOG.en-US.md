@@ -1,5 +1,15 @@
 ## Changelog
 
+### 1.2.2
+
+*2017-02-28*
+
+- Fixed compatibility issues with Vue 2.2, #3002 #3067 #3097
+- Fixed Cascader's dropdown hiding behind Dialog when nested in a Dialog, #3035
+- Fixed incorrect parameter of `change` event of Cascader, #3014
+- Add `change` event for ColorPicker, #3049 (by @nicoeg)
+- Fixed `setCheckedKeys` method of Tree not working on non-leaf nodes, #2967 (by @rainyLeo)
+
 ### 1.2.1
 
 *2017-02-23*

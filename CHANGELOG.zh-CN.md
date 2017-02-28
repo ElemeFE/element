@@ -1,5 +1,14 @@
 ## 更新日志
 
+### 1.2.2
+*2017-02-28*
+
+- 修复若干组件与 Vue 2.2 不兼容的问题，#3002 #3067 #3097
+- 修复嵌套在 Dialog 内的 Cascader 下拉框有时出现在 Dialog 之后的问题，#3035
+- 修复 Cascader 的 `change` 事件参数在某些情况下不正确的问题，#3014
+- 新增 ColorPicker 的 `change` 事件，#3049（by @nicoeg）
+- 修复 Tree 的 `setCheckedKeys` 方法对非叶子节点无效的问题，#2967（by @rainyLeo）
+
 ### 1.2.1
 *2017-02-23*
 
