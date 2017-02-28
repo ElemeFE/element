@@ -1,11 +1,9 @@
 CACHE MANIFEST
-#ver:2/22/2017, 10:50:22 AM
+#ver:2/28/2017, 10:09:11 AM
 #plugin:4.6.1
 
 CACHE:
-../static/element-icons.a61be9c.eot
 ../static/element-icons.b02bdc1.ttf
-../static/element-icons.09162bc.svg
 ../static/hamburger.50e4091.png
 ../static/navbar_1.499e088.png
 ../static/navbar_2.59ecae2.png
@@ -16,11 +14,10 @@ CACHE:
 ../static/resource.a72b8f8.png
 ../static/banner-bg.75437e1.svg
 ../static/qrcode.a88f522.png
-../docs.67c0e45.js
-../element-ui.dc4d754.js
-../manifest.85c6259.js
-../docs.0c78dc8.css
-../element-ui.d41d8cd.css
+../docs.c8029b5.js
+../element-ui.4fa0278.js
+../manifest.5273893.js
+../docs.95a8e82.css
 ../favicon.ico
 ../
 ../versions.json
