@@ -175,7 +175,7 @@
         ]);
       },
       setCheckedKeys() {
-        this.$refs.tree.setCheckedKeys([8]);
+        this.$refs.tree.setCheckedKeys([3]);
       },
       resetChecked() {
         this.$refs.tree.setCheckedKeys([]);
@@ -468,7 +468,7 @@
         }]);
       },
       setCheckedKeys() {
-        this.$refs.tree.setCheckedKeys([8]);
+        this.$refs.tree.setCheckedKeys([3]);
       },
       resetChecked() {
         this.$refs.tree.setCheckedKeys([]);

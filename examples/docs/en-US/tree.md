@@ -153,7 +153,7 @@
         ]);
       },
       setCheckedKeys() {
-        this.$refs.tree.setCheckedKeys([8]);
+        this.$refs.tree.setCheckedKeys([3]);
       },
       resetChecked() {
         this.$refs.tree.setCheckedKeys([]);
@@ -446,7 +446,7 @@ Tree nodes can be initially expanded or checked
         }]);
       },
       setCheckedKeys() {
-        this.$refs.tree.setCheckedKeys([8]);
+        this.$refs.tree.setCheckedKeys([3]);
       },
       resetChecked() {
         this.$refs.tree.setCheckedKeys([]);
