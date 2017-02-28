@@ -10,7 +10,7 @@
           <div class="el-message-box__status" :class="[ typeClass ]"></div>
           <div class="el-message-box__message" :style="{ 'margin-left': typeClass ? '50px' : '0' }"><p>{{ message }}</p></div>
           <div class="el-message-box__input" v-show="showInput">
-            <el-input v-model="inputValue" :placeholder="inputPlaceholder" ref="input"></el-input>
+            <el-input v-model="inputValue" :placeholder="inputPlaceholder" :type="inputType" :rows="inputRows" ref="input"></el-input>
             <div class="el-message-box__errormsg" :style="{ visibility: !!editorErrorMessage ? 'visible' : 'hidden' }">{{ editorErrorMessage }}</div>
           </div>
         </div>
@@ -196,12 +196,12 @@
         if (val) {
           setTimeout(() => {
             if (this.$refs.input && this.$refs.input.$el) {
-              this.$refs.input.$el.querySelector('input').focus();
+              this.$refs.input.$el.querySelector(this.inputType === 'textarea' ? 'textarea' : 'input').focus();
             }
           }, 500);
         } else {
           this.editorErrorMessage = '';
-          removeClass(this.$refs.input.$el.querySelector('input'), 'invalid');
+          removeClass(this.$refs.input.$el.querySelector(this.inputType === 'textarea' ? 'textarea' : 'input'), 'invalid');
         }
       }
     },
@@ -216,6 +216,8 @@
         showInput: false,
         inputValue: null,
         inputPlaceholder: '',
+        inputType: 'text',
+        inputRows: 2,
         inputPattern: null,
         inputValidator: null,
         inputErrorMessage: '',

@@ -287,7 +287,9 @@ The corresponding methods are: `MessageBox`, `MessageBox.alert`, `MessageBox.con
 | closeOnPressEscape | whether MessageBox can be closed by pressing the ESC | boolean | — | true (false when called with alert) |
 | showInput | whether to show an input | boolean | — | false (true when called with prompt) |
 | inputPlaceholder | placeholder of input | string | — | — |
+| inputType | Same as the type attribute of native input, except that it can be textarea | string | text/textarea | text |
 | inputValue | initial value of input | string | — | — |
+| inputRows | number of rows of textarea, only works when type is 'textarea' | number | — | 2 |
 | inputPattern | regexp for the input | regexp | — | — |
 | inputValidator | validation function for the input. Should returns a boolean or string. If a string is returned, it will be assigned to inputErrorMessage | function | — | — |
 | inputErrorMessage | error message when validation fails | string | — | Illegal input |

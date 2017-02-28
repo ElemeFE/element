@@ -284,7 +284,9 @@ import { MessageBox } from 'element-ui';
 | closeOnPressEscape | 是否可通过按下 ESC 键关闭 MessageBox | boolean | — | true（以 alert 方式调用时为 false） |
 | showInput | 是否显示输入框 | boolean | — | false（以 prompt 方式调用时为 true）|
 | inputPlaceholder | 输入框的占位符 | string | — | — |
+| inputType | 类型 | string | text/textarea | text |
 | inputValue | 输入框的初始文本 | string | — | — |
+| inputRows | 输入框行数，只对 type="textarea" 有效 | number | — | 2 |
 | inputPattern | 输入框的校验表达式 | regexp | — | — |
 | inputValidator | 输入框的校验函数。可以返回布尔值或字符串，若返回一个字符串, 则返回结果会被赋值给 inputErrorMessage | function | — | — |
 | inputErrorMessage | 校验未通过时的提示文本 | string | — | 输入的数据不合法! |
