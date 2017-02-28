@@ -8,6 +8,7 @@
 - 修复 Cascader 的 `change` 事件参数在某些情况下不正确的问题，#3014
 - 新增 ColorPicker 的 `change` 事件，#3049（by @nicoeg）
 - 修复 Tree 的 `setCheckedKeys` 方法对非叶子节点无效的问题，#2967（by @rainyLeo）
+- 修复 Tooltip 和 `router-link` 共用报错的问题，#3143
 
 ### 1.2.1
 *2017-02-23*

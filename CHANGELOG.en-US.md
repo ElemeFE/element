@@ -9,6 +9,7 @@
 - Fixed incorrect parameter of `change` event of Cascader, #3014
 - Add `change` event for ColorPicker, #3049 (by @nicoeg)
 - Fixed `setCheckedKeys` method of Tree not working on non-leaf nodes, #2967 (by @rainyLeo)
+- Fixed Tooltip not compatible with `router-link`, #3143
 
 ### 1.2.1
 
