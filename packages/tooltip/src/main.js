@@ -39,6 +39,8 @@ export default {
   },
 
   beforeCreate() {
+    if (this.$isServegr) return;
+
     this.popperVM = new Vue({
       router: this.$router,
       store: this.$store,
