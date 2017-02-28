@@ -18,6 +18,7 @@ function fileExists(filePath) {
 themes.forEach((theme) => {
   var indexContent = '@import "./base.css";\n';
   Components.forEach(function(key) {
+    if (['icon', 'option', 'option-group'].indexOf(key) > -1) return;
     var fileName = key + '.css';
     indexContent += '@import "./' + fileName + '";\n';
     var filePath = path.resolve(basepath, theme, 'src', fileName);
