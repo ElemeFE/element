@@ -40,6 +40,8 @@ export default {
 
   beforeCreate() {
     this.popperVM = new Vue({
+      router: this.$router,
+      store: this.$store,
       data: { node: '' },
       render(h) {
         return this.node;
