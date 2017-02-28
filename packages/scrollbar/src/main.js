@@ -2,7 +2,7 @@
 
 import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
 import scrollbarWidth from 'element-ui/src/utils/scrollbar-width';
-import * as util from './util';
+import { toObject } from 'element-ui/src/utils/util';
 import Bar from './bar';
 
 /* istanbul ignore next */
@@ -48,7 +48,7 @@ export default {
       const gutterStyle = `margin-bottom: ${gutterWith}; margin-right: ${gutterWith};`;
 
       if (Array.isArray(this.wrapStyle)) {
-        style = util.toObject(this.wrapStyle);
+        style = toObject(this.wrapStyle);
         style.marginRight = style.marginBottom = gutterWith;
       } else if (typeof this.wrapStyle === 'string') {
         style += gutterStyle;
