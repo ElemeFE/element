@@ -1,5 +1,5 @@
 CACHE MANIFEST
-#ver:2/28/2017, 10:09:11 AM
+#ver:3/1/2017, 7:30:03 AM
 #plugin:4.6.1
 
 CACHE:
@@ -14,10 +14,10 @@ CACHE:
 ../static/resource.a72b8f8.png
 ../static/banner-bg.75437e1.svg
 ../static/qrcode.a88f522.png
-../docs.c8029b5.js
-../element-ui.4fa0278.js
-../manifest.5273893.js
-../docs.95a8e82.css
+../docs.3a20368.js
+../element-ui.03d1a42.js
+../manifest.f1319e7.js
+../docs.ffe6d74.css
 ../favicon.ico
 ../
 ../versions.json
