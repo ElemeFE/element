@@ -1,6 +1,7 @@
 <template>
   <span class="el-breadcrumb__item">
-    <span class="el-breadcrumb__item__inner" ref="link"><slot></slot></span><span class="el-breadcrumb__separator">{{separator}}</span>
+    <span class="el-breadcrumb__item__inner" ref="link"><slot></slot></span>
+    <span class="el-breadcrumb__separator">{{separator}}</span>
   </span>
 </template>
 <script>
@@ -17,14 +18,20 @@
     },
     mounted() {
       this.separator = this.$parent.separator;
-      var self = this;
       if (this.to) {
-        let link = this.$refs.link;
+        const link = this.$refs.link;
         link.addEventListener('click', _ => {
-          let to = this.to;
-          self.replace ? self.$router.replace(to)
-                       : self.$router.push(to);
+          const to = this.to;
+          if (this.$router) {
+            this.replace ? this.$router.replace(to)
+                         : this.$router.push(to);
+          } else {
+            console.warn('Vue-Router Not Found');
+          }
         });
+      } else {
+        this.$refs.link.style.color = '#97a8be';
+        this.$refs.link.style.cursor = 'text';
       }
     }
   };
