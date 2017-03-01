@@ -1,3 +1,5 @@
+process.env.NODE_ENV === 'production' && require('offline-plugin/runtime').install();
+
 import Vue from 'vue';
 import entry from './app';
 import VueRouter from 'vue-router';

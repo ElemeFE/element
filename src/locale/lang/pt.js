@@ -1,5 +1,9 @@
 export default {
   el: {
+    colorpicker: {
+      confirm: 'Confirmar',
+      clear: 'Limpar'
+    },
     datepicker: {
       now: 'Agora',
       today: 'Hoje',
@@ -12,7 +16,7 @@ export default {
       startTime: 'Hora de inicio',
       endDate: 'Data de fim',
       endTime: 'Hora de fim',
-      year: 'Ano',
+      year: '',
       month1: 'Janeiro',
       month2: 'Fevereiro',
       month3: 'Março',
@@ -54,6 +58,10 @@ export default {
       loading: 'A carregar',
       noMatch: 'Sem correspondência',
       noData: 'Sem dados',
+      placeholder: 'Selecione'
+    },
+    cascader: {
+      noMatch: 'Sem correspondência',
       placeholder: 'Selecione'
     },
     pagination: {

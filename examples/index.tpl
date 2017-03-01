@@ -9,7 +9,7 @@
   <body>
     <div id="app"></div><% if (process.env.NODE_ENV === 'production') { %>
     <script src="//cdnjs.cloudflare.com/ajax/libs/vue/2.1.6/vue.runtime.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/vue-router/2.0.1/vue-router.min.js"></script><% } %>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/vue-router/2.1.1/vue-router.min.js"></script><% } %>
   </body>
   <% if (process.env.NODE_ENV === 'production') { %><script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

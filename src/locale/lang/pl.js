@@ -1,5 +1,9 @@
 export default {
   el: {
+    colorpicker: {
+      confirm: 'OK',
+      clear: 'Wyczyść'
+    },
     datepicker: {
       now: 'Teraz',
       today: 'Dzisiaj',
@@ -54,6 +58,10 @@ export default {
       loading: 'Ładowanie',
       noMatch: 'Brak dopasowań',
       noData: 'Brak danych',
+      placeholder: 'Wybierz'
+    },
+    cascader: {
+      noMatch: 'Brak dopasowań',
       placeholder: 'Wybierz'
     },
     pagination: {

@@ -13,7 +13,7 @@ export const equalDate = function(dateA, dateB) {
 };
 
 export const toDate = function(date) {
-  return isDate(date) ? date : null;
+  return isDate(date) ? new Date(date) : null;
 };
 
 export const isDate = function(date) {
@@ -141,11 +141,10 @@ export const getRangeHours = function(ranges) {
   return hours;
 };
 
-export const limitRange = function(date, ranges) {
+export const limitRange = function(date, ranges, format = 'yyyy-MM-dd HH:mm:ss') {
   if (!ranges || !ranges.length) return date;
 
   const len = ranges.length;
-  const format = 'HH:mm:ss';
 
   date = dateUtil.parse(dateUtil.format(date, format), format);
   for (let i = 0; i < len; i++) {

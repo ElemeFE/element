@@ -1,5 +1,9 @@
 export default {
   el: {
+    colorpicker: {
+      confirm: 'YA',
+      clear: 'Kosongkan'
+    },
     datepicker: {
       now: 'Sekarang',
       today: 'Hari ini',
@@ -54,6 +58,10 @@ export default {
       loading: 'Memuat',
       noMatch: 'Tidak ada data yang cocok',
       noData: 'Tidak ada data',
+      placeholder: 'Pilih'
+    },
+    cascader: {
+      noMatch: 'Tidak ada data yang cocok',
       placeholder: 'Pilih'
     },
     pagination: {

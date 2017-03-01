@@ -1,5 +1,75 @@
 ## Changelog
 
+### 1.2.2
+
+*2017-02-28*
+
+- Fixed compatibility issues with Vue 2.2, #3002 #3067 #3097
+- Fixed Cascader's dropdown hiding behind Dialog when nested in a Dialog, #3035
+- Fixed incorrect parameter of `change` event of Cascader, #3014
+- Add `change` event for ColorPicker, #3049 (by @nicoeg)
+- Fixed `setCheckedKeys` method of Tree not working on non-leaf nodes, #2967 (by @rainyLeo)
+- Fixed Tooltip not compatible with `router-link`, #3143
+
+### 1.2.1
+
+*2017-02-23*
+
+- Fixed SSR regression in version 1.2.0, #2982
+- Fixed horizontal scroll buttons not showing in Tabs, #2974
+- Fixed wrong calculation of height after the `height` attribute is updated dynamically in Table, #2979
+- Added `cell-dblclick` and `header-dragend` events for Table, #2983 #2988
+- Fixed form items showing a left padding inside an inline Form with a specified `label-width`, #2990
+- Fixed Cascader's dropdown misplaces in some conditions, #2992
+
+### 1.2.0 Lithium
+
+*2017-02-22*
+
+#### New features:
+- Two brand new components: Cascader and ColorPicker
+- New attributes `editable` and `addable`, and new events `tab-add` and `edit` for Tabs
+- Language config files in UMD format
+- New events `node-expand` and `node-collapse` for Tree, #2507 (by @masterzhang)
+- New attribute `indent` for Tree, #2713
+- Dialog's title now supports named slot, #2657
+- New attribute `range` for Slider, #2751
+- Upload
+  - Attribute `auto-upload` that controls if files are uploaded immediately after selecting, and its default value is `true`
+  - Event `on-change` that fires when file status changes
+  - Attribute `list-type` that configures the appearance of file list
+- Scroll bars in Autocomplete are made prettier
+
+#### Fixes:
+- Carousel not responding to contents' update, #2775
+- Numbers in TimePicker not align in some conditions, #2948
+- TimePicker only responding to odd clicks in some conditions, #2884 (by @k55k32)
+- Tabs' display order error when tab-pane is dynamically changed, #2898
+- Menu highlighting menu-item when `default-active` is assigned to an non-existent item
+- Collapse's style issue when nested
+
+#### Breaking changes:
+- Tooltip is refactored, no additional HTML tags will be rendered so that the structures of nested component stay unchanged, #2459
+- The backdrop of Dialog now inserts to body element by default, #2556
+- Tabs don't maintain tab instances internally any more, so they should be handled externally via events emitted by Tabs, #2567
+- Upload is refactored
+  - `default-file-list` renamed to `file-list`, and `show-upload-list` renamed to `show-file-list`
+  - `thumbnail-mode` removed
+
+### 1.1.6
+
+*2017-01-23*
+
+- Fixed `customClass` of MessageBox affecting follow-up instances, #2472
+- Fixed style issue of Select after being activated when located in a non-default-activated tab pane inside Tabs, #2466
+- Fixed style missing issue for some components when imported on demand
+- Fixed disabled filterable multiple Select still showing dropdown when clicked on a certain area, #2540
+- Restored returning to original sorting in sortable Table columns, #2491
+- Added `reset.css` in `theme-default`, #2378
+- Added `range-separator` attribute for DatePicker, #2579
+- Published individual component packages: Table, DatePicker, Loading, Upload and Carousel
+- Add Finnish (@groenroos)
+
 ### 1.1.5
 
 *2017-01-17*
@@ -66,7 +136,7 @@ Breaking change
 
 *2016-12-29*
 
-New features:
+#### New features:
 - Two brand new components: Carousel and Collapse
 - SSR supported
 - Scrollbars' style inside components is upgraded
@@ -77,11 +147,11 @@ New features:
 - Autocomplete now supports `popper-class`
 - To customize template of Tab-Pane, now you can use the `slot` named `label`
 
-Fixes:
+#### Fixes:
 - `change` event of DatePicker incorrectly triggering multiple times, #2070
 - Width shaking of tab-pane while initializing, #1883
 
-Breaking changes:
+#### Breaking changes:
 - Only compatible with Vue 2.1.6 and beyond
 - Parameters of Form validateField() methods are updated
 - Alert's render-content attribute is removed, and now you can pass your custom template via default slot

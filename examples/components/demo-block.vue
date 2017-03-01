@@ -185,7 +185,8 @@
           panel_js: 3,
           panel_css: 1
         };
-        const form = document.createElement('form');
+        const form = document.getElementById('fiddle-form') || document.createElement('form');
+        form.innerHTML = '';
         const node = document.createElement('textarea');
 
         form.method = 'post';
@@ -197,6 +198,9 @@
           node.value = data[name].toString();
           form.appendChild(node.cloneNode());
         }
+        form.setAttribute('id', 'fiddle-form');
+        form.style.display = 'none';
+        document.body.appendChild(form);
 
         form.submit();
       }

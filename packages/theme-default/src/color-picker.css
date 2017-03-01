@@ -1,0 +1,264 @@
+@import "./common/var.css";
+
+@component-namespace el-color {
+  @component hue-slider {
+    position: relative;
+    box-sizing: border-box;
+    width: 280px;
+    height: 12px;
+    background-color: #f00;
+    padding: 0 2px;
+
+    @descendent bar {
+      position: relative;
+      background: linear-gradient(
+        to right, #f00 0%,
+        #ff0 17%, #0f0 33%,
+        #0ff 50%, #00f 67%,
+        #f0f 83%, #f00 100%);
+      height: 100%;
+    }
+
+    @descendent thumb {
+      position: absolute;
+      cursor: pointer;
+      box-sizing: border-box;
+      left: 0;
+      top: 0;
+      width: 4px;
+      height: 100%;
+      border-radius: 1px;
+      background: #fff;
+      border: 1px solid #f0f0f0;
+      box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
+      z-index: 1;
+    }
+
+    @when vertical {
+      width: 12px;
+      height: 180px;
+      padding: 2px 0;
+
+      .el-color-hue-slider__bar {
+        background: linear-gradient(
+          to bottom, #f00 0%,
+          #ff0 17%, #0f0 33%,
+          #0ff 50%, #00f 67%,
+          #f0f 83%, #f00 100%);
+      }
+
+      .el-color-hue-slider__thumb {
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 4px;
+      }
+    }
+  }
+
+  @component svpanel {
+    position: relative;
+    width: 280px;
+    height: 180px;
+
+    @descendent white, black {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    @descendent white {
+      background: linear-gradient(to right, #fff, rgba(255,255,255,0));
+    }
+
+    @descendent black {
+      background: linear-gradient(to top, #000, rgba(0,0,0,0));
+    }
+
+    @descendent cursor {
+      position: absolute;
+
+      > div {
+        cursor: head;
+        width: 4px;
+        height: 4px;
+        box-shadow: 0 0 0 1.5px #fff, inset 0 0 1px 1px rgba(0,0,0,0.3), 0 0 1px 2px rgba(0,0,0,0.4);
+        border-radius: 50%;
+        transform: translate(-2px, -2px);
+      }
+    }
+  }
+
+  @component alpha-slider {
+    position: relative;
+    box-sizing: border-box;
+    width: 280px;
+    height: 12px;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==);
+
+    @descendent bar {
+      position: relative;
+      background: linear-gradient(
+        to right, rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 1) 100%);
+      height: 100%;
+    }
+
+    @descendent thumb {
+      position: absolute;
+      cursor: pointer;
+      box-sizing: border-box;
+      left: 0;
+      top: 0;
+      width: 4px;
+      height: 100%;
+      border-radius: 1px;
+      background: #fff;
+      border: 1px solid #f0f0f0;
+      box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
+      z-index: 1;
+    }
+
+    @when vertical {
+      width: 20px;
+      height: 180px;
+
+      .el-color-alpha-slider__bar {
+        background: linear-gradient(
+          to bottom, rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 1) 100%);
+      }
+
+      .el-color-alpha-slider__thumb {
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 4px;
+      }
+    }
+  }
+
+  @component dropdown {
+    width: 300px;
+
+    @descendent main-wrapper {
+      margin-bottom: 6px;
+
+      &::after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+    }
+
+    @descendent btns {
+      margin-top: 6px;
+      text-align: right;
+    }
+
+    @descendent value {
+      float: left;
+      line-height: 26px;
+      font-size: 12px;
+      color: var(--color-base-black);
+    }
+
+    @descendent btn {
+      border: 1px solid #dcdcdc;
+      color: #333;
+      line-height: 24px;
+      border-radius: 2px;
+      padding: 0 20px;
+      cursor: pointer;
+      background-color: transparent;
+      outline: none;
+      font-size: 12px;
+
+      &[disabled] {
+        color: #cccccc;
+        cursor: not-allowed;
+      }
+      &:hover {
+        color: var(--color-primary);
+        border-color: var(--color-primary);
+      }
+    }
+
+    @descendent link-btn {
+      cursor: pointer;
+      color: var(--color-primary);
+      text-decoration: none;
+      padding: 15px;
+      font-size: 12px;
+      &:hover {
+        color: tint(var(--color-primary), var(--button-hover-tint-percent));
+      }
+    }
+  }
+
+  @component picker {
+    display: inline-block;
+    position: relative;
+
+    @descendent trigger {
+      display: inline-block;
+      box-sizing: border-box;
+      height: 36px;
+      padding: 6px;
+      border: 1px solid #bfcbd9;
+      border-radius: 4px;
+      font-size: 0;
+    }
+
+    @descendent color {
+      position: relative;
+      display: inline-block;
+      box-sizing: border-box;
+      vertical-align: middle;
+      border: 1px solid #666;
+      width: 22px;
+      height: 22px;
+      text-align: center;
+
+      @when alpha {
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==);
+      }
+    }
+
+    @descendent color-inner {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    @descendent empty {
+      font-size: 12px;
+      vertical-align: middle;
+      margin-top: 4px;
+      color: #666;
+    }
+
+    @descendent icon {
+      display: inline-block;
+      position: relative;
+      vertical-align: middle;
+      margin-left: 8px;
+      width: 12px;
+      color: #888;
+      font-size: 12px;
+    }
+
+    @descendent panel {
+      position: absolute;
+      z-index: 10;
+      padding: 6px;
+      background-color: var(--color-white);
+      border: 1px solid var(--color-base-gray);
+      box-shadow: var(--dropdown-menu-box-shadow);
+    }
+  }
+}

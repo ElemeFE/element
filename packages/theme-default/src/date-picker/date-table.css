@@ -32,6 +32,17 @@
 
       &.today {
         color: var(--datepicker-text-hover-color);
+        position: relative;
+        &:before {
+          content: " ";
+          position: absolute;
+          top: 0px;
+          right: 0px;
+          width: 0;
+          height: 0;
+          border-top: 0.5em solid var(--datepicker-active-color);
+          border-left: .5em solid transparent;
+        }
       }
 
       &.available:hover {
@@ -45,7 +56,7 @@
         }
       }
 
-      &.current,
+      &.current:not(.disabled),
       &.start-date,
       &.end-date {
         background-color: var(--datepicker-active-color) !important;

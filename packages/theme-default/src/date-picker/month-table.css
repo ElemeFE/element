@@ -29,7 +29,7 @@
         }
       }
 
-      &.current .cell {
+      &.current:not(.disabled) .cell {
         background-color: var(--datepicker-active-color) !important;
         color: var(--color-white);
       }

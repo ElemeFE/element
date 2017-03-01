@@ -12,6 +12,7 @@
     @keydown.native="handleKeydown"
     :value="displayValue"
     @change.native="displayValue = $event.target.value"
+    :validateEvent="false"
     ref="reference">
     <i slot="icon"
       class="el-input__icon"
@@ -43,7 +44,7 @@ const NewPopper = {
   beforeDestroy: Popper.beforeDestroy
 };
 
-const RANGE_SEPARATOR = ' - ';
+let RANGE_SEPARATOR = ' - ';
 const DEFAULT_FORMATS = {
   date: 'yyyy-MM-dd',
   month: 'yyyy-MM',
@@ -202,6 +203,9 @@ export default {
       default: 'left'
     },
     value: {},
+    rangeSeparator: {
+      default: ' - '
+    },
     pickerOptions: {}
   },
 
@@ -219,6 +223,7 @@ export default {
 
   watch: {
     pickerVisible(val) {
+      if (!val) this.dispatch('ElFormItem', 'el.form.blur');
       if (this.readonly || this.disabled) return;
       val ? this.showPicker() : this.hidePicker();
     },
@@ -238,6 +243,7 @@ export default {
     },
     displayValue(val) {
       this.$emit('change', val);
+      this.dispatch('ElFormItem', 'el.form.change');
     }
   },
 
@@ -324,8 +330,9 @@ export default {
   },
 
   created() {
+    RANGE_SEPARATOR = this.rangeSeparator;
     // vue-popper
-    this.options = {
+    this.popperOptions = {
       boundariesPadding: 0,
       gpuAcceleration: false
     };
@@ -379,7 +386,6 @@ export default {
 
     handleBlur() {
       this.$emit('blur', this);
-      this.dispatch('ElFormItem', 'el.form.blur');
     },
 
     handleKeydown(event) {
@@ -442,7 +448,7 @@ export default {
 
         this.picker.$on('dodestroy', this.doDestroy);
         this.picker.$on('pick', (date, visible = false) => {
-          if (this.dateChanged(date, this.value)) this.$emit('input', date);
+          this.$emit('input', date);
           this.pickerVisible = this.picker.visible = visible;
           this.picker.resetView && this.picker.resetView();
         });

@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import merge from 'element-ui/src/utils/merge';
 import PopupManager from 'element-ui/src/utils/popup/popup-manager';
+import getScrollBarWidth from '../scrollbar-width';
 
 let idSeed = 1;
 const transitions = [];
@@ -38,29 +39,6 @@ const hookTransition = (transition) => {
 };
 
 let scrollBarWidth;
-const getScrollBarWidth = () => {
-  if (Vue.prototype.$isServer) return;
-  if (scrollBarWidth !== undefined) return scrollBarWidth;
-
-  const outer = document.createElement('div');
-  outer.style.visibility = 'hidden';
-  outer.style.width = '100px';
-  outer.style.position = 'absolute';
-  outer.style.top = '-9999px';
-  document.body.appendChild(outer);
-
-  const widthNoScroll = outer.offsetWidth;
-  outer.style.overflow = 'scroll';
-
-  const inner = document.createElement('div');
-  inner.style.width = '100%';
-  outer.appendChild(inner);
-
-  const widthWithScroll = inner.offsetWidth;
-  outer.parentNode.removeChild(outer);
-
-  return widthNoScroll - widthWithScroll;
-};
 
 const getDOM = function(dom) {
   if (dom.nodeType === 3) {
@@ -91,7 +69,10 @@ export default {
       type: Boolean,
       default: true
     },
-    modalClass: {
+    modalClass: {},
+    modalAppendToBody: {
+      type: Boolean,
+      default: false
     },
     lockScroll: {
       type: Boolean,
@@ -163,7 +144,7 @@ export default {
         this.$emit('input', true);
       }
 
-      const props = merge({}, this, options);
+      const props = merge({}, this.$props || this, options);
 
       if (this._closeTimer) {
         clearTimeout(this._closeTimer);
@@ -208,7 +189,7 @@ export default {
           PopupManager.closeModal(this._popupId);
           this._closing = false;
         }
-        PopupManager.openModal(this._popupId, PopupManager.nextZIndex(), dom, props.modalClass, props.modalFade);
+        PopupManager.openModal(this._popupId, PopupManager.nextZIndex(), this.modalAppendToBody ? undefined : dom, props.modalClass, props.modalFade);
         if (props.lockScroll) {
           if (!this.bodyOverflow) {
             this.bodyPaddingRight = document.body.style.paddingRight;
@@ -294,4 +275,6 @@ export default {
   }
 };
 
-export { PopupManager };
+export {
+  PopupManager
+};

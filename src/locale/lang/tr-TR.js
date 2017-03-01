@@ -1,5 +1,9 @@
 export default {
   el: {
+    colorpicker: {
+      confirm: 'OK',
+      clear: 'Temizle'
+    },
     datepicker: {
       now: 'Şimdi',
       today: 'Bugün',
@@ -54,6 +58,10 @@ export default {
       loading: 'Yükleniyor',
       noMatch: 'Eşleşen veri bulunamadı',
       noData: 'Veri yok',
+      placeholder: 'Seç'
+    },
+    cascader: {
+      noMatch: 'Eşleşen veri bulunamadı',
       placeholder: 'Seç'
     },
     pagination: {

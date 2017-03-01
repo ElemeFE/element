@@ -973,7 +973,7 @@ When the data structure is complex, you can use group header to show the data hi
 
 Single row selection is supported.
 
-:::demo Table supports single row selection. You can activate it by adding the `highlight-currnet-row` attribute. An event called `current-change` will be triggered when row selection changes, and its parameters are the rows after and before this change: `currentRow` and `oldCurrentRow`. If you need to display row index, you can add a new `el-table-column` with its `type` attribute assigned to `index`, and you will see the index starting from 1.
+:::demo Table supports single row selection. You can activate it by adding the `highlight-current-row` attribute. An event called `current-change` will be triggered when row selection changes, and its parameters are the rows after and before this change: `currentRow` and `oldCurrentRow`. If you need to display row index, you can add a new `el-table-column` with its `type` attribute assigned to `index`, and you will see the index starting from 1.
 ```html
 <template>
   <el-table
@@ -1296,7 +1296,6 @@ Customize table column so it can be integrated with other components.
       </template>
     </el-table-column>
     <el-table-column
-      :context="_self"
       label="Operations">
       <template scope="scope">
         <el-button
@@ -1429,6 +1428,7 @@ When the row content is too long and you do not want to display the horizontal s
           address: 'No. 189, Grove St, Los Angeles',
           zip: 'CA 90036'
         }]
+      }
     }
   }
 </script>
@@ -1450,7 +1450,6 @@ When the row content is too long and you do not want to display the horizontal s
 | row-class-name | function that returns custom class names for a row, or a string assigning class names for every row | Function(row, index)/String | — | — |
 | row-style | function that returns custom style for a row,  or a string assigning custom style for every row | Function(row, index)/Object | — | — |
 | row-key | key of row data, used for optimizing rendering. Required if `reserve-selection` is on | Function(row)/String | — | — |
-| context | context of Table, e.g. `_self` refers to the current context, `$parent` parent context, `$root` root context, can be overridden by `context` in `el-table-column` | Object | — | current context where Table lies |
 | empty-text | Displayed text when data is empty. You can customize this area with `slot="empty"` | String | — | No Data |
 | default-expand-all | whether expand all rows by default, only works when the table has a column type="expand" | Boolean | — | false |
 | expand-row-keys | set expanded rows by this prop, prop's value is the keys of expand rows, you should set row-key before using this prop | Array | — | |
@@ -1465,6 +1464,7 @@ When the row content is too long and you do not want to display the horizontal s
 | cell-mouse-enter | triggers when hovering into a cell| row, column, cell, event |
 | cell-mouse-leave | triggers when hovering out of a cell | row, column, cell, event |
 | cell-click | triggers when clicking a cell | row, column, cell, event |
+| cell-dblclick | triggers when double clicking a cell | row, column, cell, event |
 | row-click | triggers when clicking a row | row, event, column |
 | row-contextmenu | triggers when user right clicks on a row | row, event |
 | row-dblclick | triggers when double clicking a row | row, event |
@@ -1472,6 +1472,7 @@ When the row content is too long and you do not want to display the horizontal s
 | sort-change | triggers when Table's sorting changes | { column, prop, order } |
 | filter-change | column's key. If you need to use the filter-change event, this attribute is mandatory to identify which column is being filtered | filters |
 | current-change | triggers when current row changes | currentRow, oldCurrentRow |
+| header-dragend | triggers when finish dragging header | newWidth, oldWidth, column, event |
 | expand | triggers when user expands or collapses a row | row, expanded |
 
 ### Table Methods

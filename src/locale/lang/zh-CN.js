@@ -1,5 +1,9 @@
 export default {
   el: {
+    colorpicker: {
+      confirm: '确定',
+      clear: '清空'
+    },
     datepicker: {
       now: '此刻',
       today: '今天',
@@ -54,6 +58,10 @@ export default {
       loading: '加载中',
       noMatch: '无匹配数据',
       noData: '无数据',
+      placeholder: '请选择'
+    },
+    cascader: {
+      noMatch: '无匹配数据',
       placeholder: '请选择'
     },
     pagination: {

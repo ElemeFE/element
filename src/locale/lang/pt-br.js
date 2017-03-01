@@ -1,5 +1,9 @@
 export default {
   el: {
+    colorpicker: {
+      confirm: 'Confirmar',
+      clear: 'Limpar'
+    },
     datepicker: {
       now: 'Agora',
       today: 'Hoje',
@@ -12,7 +16,7 @@ export default {
       startTime: 'Hora inicial',
       endDate: 'Data final',
       endTime: 'Hora final',
-      year: 'Ano',
+      year: '',
       month1: 'Janeiro',
       month2: 'Fevereiro',
       month3: 'Março',
@@ -56,6 +60,10 @@ export default {
       noData: 'Sem dados',
       placeholder: 'Selecione'
     },
+    cascader: {
+      noMatch: 'Sem resultados',
+      placeholder: 'Selecione'
+    },
     pagination: {
       goto: 'Ir para',
       pagesize: '/pagina',
@@ -69,7 +77,7 @@ export default {
     },
     upload: {
       delete: 'Apagar',
-      preview: 'Previsualizar',
+      preview: 'Pré-visualizar',
       continue: 'Continuar'
     },
     table: {

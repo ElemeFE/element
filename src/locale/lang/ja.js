@@ -1,5 +1,9 @@
 export default {
   el: {
+    colorpicker: {
+      confirm: 'はい',
+      clear: 'クリア'
+    },
     datepicker: {
       now: '現在',
       today: '今日',
@@ -54,6 +58,10 @@ export default {
       loading: 'ロード中',
       noMatch: 'データなし',
       noData: 'データなし',
+      placeholder: '選択してください'
+    },
+    cascader: {
+      noMatch: 'データなし',
       placeholder: '選択してください'
     },
     pagination: {

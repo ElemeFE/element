@@ -81,7 +81,11 @@
       currentNodeKey: [String, Number],
       load: Function,
       filterNodeMethod: Function,
-      accordion: Boolean
+      accordion: Boolean,
+      indent: {
+        type: Number,
+        default: 16
+      }
     },
 
     computed: {
@@ -106,6 +110,7 @@
       },
       currentNodeKey(newVal) {
         this.store.setCurrentNodeKey(newVal);
+        this.store.currentNodeKey = newVal;
       },
       data(newVal) {
         this.store.setData(newVal);
@@ -143,6 +148,7 @@
       },
       handleNodeExpand(nodeData, node, instance) {
         this.broadcast('ElTreeNode', 'tree-node-expand', node);
+        this.$emit('node-expand', nodeData, node, instance);
       }
     },
 

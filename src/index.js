@@ -60,6 +60,8 @@ import Scrollbar from '../packages/scrollbar';
 import CarouselItem from '../packages/carousel-item';
 import Collapse from '../packages/collapse';
 import CollapseItem from '../packages/collapse-item';
+import Cascader from '../packages/cascader';
+import ColorPicker from '../packages/color-picker';
 import locale from 'element-ui/src/locale';
 
 const components = [
@@ -118,7 +120,9 @@ const components = [
   Scrollbar,
   CarouselItem,
   Collapse,
-  CollapseItem
+  CollapseItem,
+  Cascader,
+  ColorPicker
 ];
 
 const install = function(Vue, opts = {}) {
@@ -148,7 +152,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 };
 
 module.exports = {
-  version: '1.1.5',
+  version: '1.2.2',
   locale: locale.use,
   i18n: locale.i18n,
   install,
@@ -211,5 +215,7 @@ module.exports = {
   Scrollbar,
   CarouselItem,
   Collapse,
-  CollapseItem
+  CollapseItem,
+  Cascader,
+  ColorPicker
 };

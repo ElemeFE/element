@@ -1,5 +1,9 @@
 export default {
   el: {
+    colorpicker: {
+      confirm: 'باشد',
+      clear: 'خذف'
+    },
     datepicker: {
       now: 'اکنون',
       today: 'امروز',
@@ -54,6 +58,10 @@ export default {
       loading: 'بارگیری',
       noMatch: 'هیچ داده‌ای پیدا نشد',
       noData: 'اطلاعاتی وجود ندارد',
+      placeholder: 'انتخاب کنید'
+    },
+    cascader: {
+      noMatch: 'هیچ داده‌ای پیدا نشد',
       placeholder: 'انتخاب کنید'
     },
     pagination: {

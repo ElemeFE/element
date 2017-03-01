@@ -96,6 +96,10 @@ export default {
   },
 
   watch: {
+    items() {
+      this.setActiveItem(0);
+    },
+
     activeIndex(val, oldVal) {
       this.resetItemPosition();
       this.$emit('change', val, oldVal);
@@ -139,11 +143,9 @@ export default {
       });
     },
 
-    handleItemChange() {
-      debounce(100, () => {
-        this.updateItems();
-      });
-    },
+    handleItemChange: debounce(100, function() {
+      this.updateItems();
+    }),
 
     updateItems() {
       this.items = this.$children.filter(child => child.$options.name === 'ElCarouselItem');

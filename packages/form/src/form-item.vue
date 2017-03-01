@@ -67,7 +67,7 @@
     watch: {
       error(value) {
         this.validateMessage = value;
-        this.validateState = 'error';
+        this.validateState = value ? 'error' : '';
       },
       validateStatus(value) {
         this.validateState = value;
@@ -85,7 +85,7 @@
       },
       contentStyle() {
         var ret = {};
-        if (this.form.labelPosition === 'top') return ret;
+        if (this.form.labelPosition === 'top' || this.form.inline) return ret;
         var labelWidth = this.labelWidth || this.form.labelWidth;
         if (labelWidth) {
           ret.marginLeft = labelWidth;

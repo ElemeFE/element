@@ -42,7 +42,7 @@ if [ "$TRAVIS_TAG" ]; then
   export SUB_FOLDER=$(echo "$TRAVIS_TAG" | grep -o -E "\d+\.\d+")
   echo $SUB_FOLDER
 
-  SUB_FOLDER='1.1'
+  SUB_FOLDER='1.2'
   mkdir $SUB_FOLDER
   rm -rf *.js *.css *.map static
   rm -rf $SUB_FOLDER/**

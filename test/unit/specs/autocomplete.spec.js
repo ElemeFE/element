@@ -57,7 +57,7 @@ describe('Autocomplete', () => {
     setTimeout(_ => {
       const suggestions = vm.$refs.autocomplete.$refs.suggestions.$el;
       expect(suggestions.style.display).to.not.equal('none');
-      expect(suggestions.children.length).to.be.equal(4);
+      expect(suggestions.querySelectorAll('.el-autocomplete-suggestion__list li').length).to.be.equal(4);
 
       document.body.click();
       setTimeout(_ => {
@@ -74,14 +74,12 @@ describe('Autocomplete', () => {
           ref="autocomplete"
           :fetch-suggestions="querySearch"
           placeholder="请输入内容autocomplete2"
-          @select="handleSelect"
         ></el-autocomplete>
       `,
       data() {
         return {
           restaurants: [],
-          state: '',
-          onceSelected: false
+          state: ''
         };
       },
       methods: {
@@ -102,27 +100,29 @@ describe('Autocomplete', () => {
             { 'value': '新旺角茶餐厅', 'address': '上海市普陀区真北路988号创邑金沙谷6号楼113' },
             { 'value': '泷千家(天山西路店)', 'address': '天山西路438号' }
           ];
-        },
-        handleSelect() {
-          this.onceSelected = true;
         }
       },
       mounted() {
         this.restaurants = this.loadAll();
       }
     }, true);
-    let elm = vm.$el;
-    let inputElm = elm.querySelector('input');
+    const autocomplete = vm.$refs.autocomplete;
+    const elm = vm.$el;
+    const inputElm = elm.querySelector('input');
+    const spy = sinon.spy();
+
+    autocomplete.$on('select', spy);
     inputElm.focus();
 
     setTimeout(_ => {
-      let suggestionsList = vm.$refs.autocomplete.$refs.suggestions.$el;
-      suggestionsList.children[1].click();
+      const suggestions = autocomplete.$refs.suggestions.$el;
+      const suggestionList = suggestions.querySelectorAll('.el-autocomplete-suggestion__list li');
+      suggestionList[1].click();
       setTimeout(_ => {
         expect(inputElm.value).to.be.equal('Hot honey 首尔炸鸡（仙霞路）');
         expect(vm.state).to.be.equal('Hot honey 首尔炸鸡（仙霞路）');
-        expect(vm.onceSelected).to.be.true;
-        expect(elm.querySelector('.el-autocomplete__suggestions')).to.not.exist;
+        expect(spy.withArgs().calledOnce).to.be.true;
+        expect(suggestions.style.display).to.be.equal('none');
         done();
       }, 500);
     }, 500);
@@ -135,14 +135,12 @@ describe('Autocomplete', () => {
           v-model="state"
           :fetch-suggestions="querySearch"
           placeholder="请输入内容autocomplete3"
-          @select="handleSelect"
         ></el-autocomplete>
       `,
       data() {
         return {
           restaurants: [],
-          state: '',
-          onceSelected: false
+          state: ''
         };
       },
       methods: {
@@ -181,28 +179,25 @@ describe('Autocomplete', () => {
             { 'value': '纵食', 'address': '元丰天山花园(东门) 双流路267号' },
             { 'value': '钱记', 'address': '上海市长宁区天山西路' }
           ];
-        },
-        handleSelect() {
-          this.onceSelected = true;
         }
       },
       mounted() {
         this.restaurants = this.loadAll();
       }
     }, true);
-    let elm = vm.$el;
-    let inputElm = elm.querySelector('input');
+    const autocomplete = vm.$refs.autocomplete;
+    const inputElm = autocomplete.$el.querySelector('input');
+
     inputElm.focus();
 
     setTimeout(_ => {
-      vm.$refs.autocomplete.highlight(8);
+      autocomplete.highlight(8);
       vm.$nextTick(_ => {
-        let suggestionsList = vm.$refs.autocomplete.$refs.suggestions.$el;
-        let highlightedItem = suggestionsList.children[8];
-        expect(highlightedItem.className).to.be.equal('highlighted');
-        expect(suggestionsList.scrollTop === highlightedItem.scrollHeight).to.be.true;
-
-        vm.$refs.autocomplete.highlight(8);
+        const suggestions = autocomplete.$refs.suggestions.$el.querySelector('.el-autocomplete-suggestion__wrap');
+        let suggestionsList = suggestions.querySelectorAll('.el-autocomplete-suggestion__list li');
+        let highlightedItem = suggestionsList[8];
+        expect(highlightedItem.classList.contains('highlighted')).to.be.true;
+        expect(suggestions.scrollTop === highlightedItem.scrollHeight).to.be.true;
         done();
       });
     }, 500);
@@ -215,14 +210,12 @@ describe('Autocomplete', () => {
           v-model="state"
           :fetch-suggestions="querySearch"
           placeholder="请输入内容autocomplete3"
-          @select="handleSelect"
         ></el-autocomplete>
       `,
       data() {
         return {
           restaurants: [],
-          state: '',
-          onceSelected: false
+          state: ''
         };
       },
       methods: {
@@ -251,29 +244,27 @@ describe('Autocomplete', () => {
             { 'value': '阿姨奶茶/豪大大', 'address': '嘉定区曹安路1611号' },
             { 'value': '新麦甜四季甜品炸鸡', 'address': '嘉定区曹安公路2383弄55号' }
           ];
-        },
-        handleSelect() {
-          this.onceSelected = true;
         }
       },
       mounted() {
         this.restaurants = this.loadAll();
       }
     }, true);
-    let elm = vm.$el;
-    let inputElm = elm.querySelector('input');
+    const autocomplete = vm.$refs.autocomplete;
+    let inputElm = vm.$el.querySelector('input');
     inputElm.focus();
 
     setTimeout(_ => {
-      vm.$refs.autocomplete.highlight(15);
+      autocomplete.highlight(15);
       vm.$nextTick(_ => {
-        let suggestionsList = vm.$refs.autocomplete.$refs.suggestions.$el;
-        let highlightedItem = suggestionsList.children[11];
+        const suggestions = autocomplete.$refs.suggestions.$el;
+        const suggestionsList = suggestions.querySelectorAll('.el-autocomplete-suggestion__list li');
+        let highlightedItem = suggestionsList[11];
         expect(highlightedItem.className).to.be.equal('highlighted');
 
-        vm.$refs.autocomplete.highlight(-5);
+        autocomplete.highlight(-5);
         vm.$nextTick(_ => {
-          let highlightedItem = suggestionsList.children[0];
+          let highlightedItem = suggestionsList[0];
           expect(highlightedItem.className).to.be.equal('highlighted');
         });
         done();
@@ -321,13 +312,12 @@ describe('Autocomplete', () => {
         this.restaurants = this.loadAll();
       }
     }, true);
-    let elm = vm.$el;
-    let inputElm = elm.querySelector('input');
+    let inputElm = vm.$el.querySelector('input');
     inputElm.focus();
 
     setTimeout(_ => {
-      let suggestionsList = vm.$refs.autocomplete.$refs.suggestions.$el;
-      expect(suggestionsList.style.display).to.be.equal('none');
+      let suggestions = vm.$refs.autocomplete.$refs.suggestions.$el;
+      expect(suggestions.style.display).to.be.equal('none');
       done();
     }, 500);
   });

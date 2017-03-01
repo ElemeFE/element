@@ -1,5 +1,9 @@
 export default {
   el: {
+    colorpicker: {
+      confirm: 'OK',
+      clear: 'Effacer'
+    },
     datepicker: {
       now: 'Maintenant',
       today: 'Auj.',
@@ -54,6 +58,10 @@ export default {
       loading: 'Chargement',
       noMatch: 'Aucune correspondance',
       noData: 'Aucun résultat',
+      placeholder: 'Choisir'
+    },
+    cascader: {
+      noMatch: 'Aucune correspondance',
       placeholder: 'Choisir'
     },
     pagination: {
