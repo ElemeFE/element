@@ -52,6 +52,8 @@ export default {
   },
 
   render(h) {
+    if (this.$isServer) return;
+
     this.popperVM.node = (
       <transition
         name={ this.transition }
