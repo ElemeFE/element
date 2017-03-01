@@ -127,7 +127,7 @@
 ```html
 <el-upload
   class="upload-demo"
-  action="//jsonplaceholder.typicode.com/posts/"
+  action="https://jsonplaceholder.typicode.com/posts/"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
   :file-list="fileList">
@@ -162,7 +162,7 @@
 ```html
 <el-upload
   class="avatar-uploader"
-  action="//jsonplaceholder.typicode.com/posts/"
+  action="https://jsonplaceholder.typicode.com/posts/"
   :show-file-list="false"
   :on-success="handleAvatarScucess"
   :before-upload="beforeAvatarUpload">
@@ -232,7 +232,7 @@
 ::: demo
 ```html
 <el-upload
-  action="//jsonplaceholder.typicode.com/posts/"
+  action="https://jsonplaceholder.typicode.com/posts/"
   list-type="picture-card"
   :on-preview="handlePictureCardPreview"
   :on-remove="handleRemove">
@@ -269,7 +269,7 @@
 ```html
 <el-upload
   class="upload-demo"
-  action="//jsonplaceholder.typicode.com/posts/"
+  action="https://jsonplaceholder.typicode.com/posts/"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
   :file-list="fileList2"
@@ -305,7 +305,7 @@
 ```html
 <el-upload
   class="upload-demo"
-  action="//jsonplaceholder.typicode.com/posts/"
+  action="https://jsonplaceholder.typicode.com/posts/"
   :on-change="handleChange"
   :file-list="fileList3">
   <el-button size="small" type="primary">点击上传</el-button>
@@ -343,7 +343,7 @@
 <el-upload
   class="upload-demo"
   drag
-  action="//jsonplaceholder.typicode.com/posts/"
+  action="https://jsonplaceholder.typicode.com/posts/"
   mutiple>
   <i class="el-icon-upload"></i>
   <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
@@ -359,7 +359,7 @@
 <el-upload
   class="upload-demo"
   ref="upload"
-  action="//jsonplaceholder.typicode.com/posts/"
+  action="https://jsonplaceholder.typicode.com/posts/"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
   :file-list="fileList"
