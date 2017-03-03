@@ -96,8 +96,8 @@ export default {
   },
 
   watch: {
-    items() {
-      this.setActiveItem(0);
+    items(val) {
+      if (val.length > 0) this.setActiveItem(0);
     },
 
     activeIndex(val, oldVal) {
