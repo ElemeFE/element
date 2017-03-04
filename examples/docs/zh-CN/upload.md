@@ -376,6 +376,9 @@
       };
     },
     methods: {
+      submitUpload() {
+        this.$refs.upload.submit();
+      },
       handleRemove(file, fileList) {
         console.log(file, fileList);
       },
