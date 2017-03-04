@@ -30,8 +30,11 @@
           }
         });
       } else {
-        this.$refs.link.style.color = '#97a8be';
-        this.$refs.link.style.cursor = 'text';
+        if (this.$refs.link.classList) {
+          this.$refs.link.classList.add('el-breadcrumb__item__nolink');
+        } else {
+          this.$refs.link.className += ' el-breadcrumb__item__nolink';
+        }
       }
     }
   };
