@@ -1,7 +1,7 @@
 <template>
   <div class="el-slider">
     <el-input-number
-      v-model="inputValue"
+      v-model="firstValue"
       v-if="showInput && !range"
       class="el-slider__input"
       ref="input"
@@ -100,16 +100,11 @@
         secondValue: null,
         oldValue: null,
         precision: 0,
-        inputValue: null,
         dragging: false
       };
     },
 
     watch: {
-      inputValue(val) {
-        this.firstValue = val;
-      },
-
       value(val, oldVal) {
         if (this.dragging ||
           Array.isArray(val) &&
@@ -130,7 +125,6 @@
         if (this.range) {
           this.$emit('input', [this.minValue, this.maxValue]);
         } else {
-          this.inputValue = val;
           this.$emit('input', val);
         }
       },
@@ -281,7 +275,6 @@
         return decimal ? decimal.length : 0;
       });
       this.precision = Math.max.apply(null, precisions);
-      this.inputValue = this.inputValue || this.firstValue;
     }
   };
 </script>
