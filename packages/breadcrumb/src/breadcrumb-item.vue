@@ -5,6 +5,7 @@
   </span>
 </template>
 <script>
+  import { addClass } from 'element-ui/src/utils/dom';
   export default {
     name: 'ElBreadcrumbItem',
     props: {
@@ -30,11 +31,7 @@
           }
         });
       } else {
-        if (this.$refs.link.classList) {
-          this.$refs.link.classList.add('el-breadcrumb__item__nolink');
-        } else {
-          this.$refs.link.className += ' el-breadcrumb__item__nolink';
-        }
+        addClass(this.$refs.link, 'el-breadcrumb__item__nolink');
       }
     }
   };
