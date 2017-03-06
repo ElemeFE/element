@@ -27,6 +27,7 @@
       }
       & .el-form-item__content {
         display: inline-block;
+        vertical-align: top;
       }
       &.el-form--label-top .el-form-item__content {
         display: block;
