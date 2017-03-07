@@ -63,6 +63,12 @@
         line-height: calc(var(--input-small-height) - 2);
       }
     }
+    @when disabled {
+      .el-cascader__label {
+        z-index: calc(var(--index-normal) + 1);
+        color: var(--disabled-color-base);
+      }
+    }
   }
 
   @b cascader-menus {
