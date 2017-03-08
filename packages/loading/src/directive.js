@@ -90,8 +90,8 @@ exports.install = Vue => {
     },
 
     update: function(el, binding) {
+      el.instance.setText(el.getAttribute('element-loading-text'));
       if (binding.oldValue !== binding.value) {
-        el.instance.setText(el.getAttribute('element-loading-text'));
         toggleLoading(el, binding);
       }
     },
