@@ -353,6 +353,7 @@ with-credentials | whether cookies are sent | boolean | — |false
 show-upload-list | whether to show the uploaded file list | boolean | — | true
 type | type of Upload | string | select/drag | select
 accept | accepted [file types](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept), will not work when `thumbnail-mode` is `true` | string | — | —
+on-ajax | Optional parameters, the file when the server sends the hook, you can use the custom sdk [oss / bos] upload to the server to return data | function(optionts) | — | —
 on-preview | hook function when clicking the uploaded files | function(file) | — | —
 on-remove | hook function when files are removed | function(file, fileList) | — | —
 on-success | hook function when uploaded successfully | function(response, file, fileList) | — | —

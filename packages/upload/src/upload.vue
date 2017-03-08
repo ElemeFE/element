@@ -27,6 +27,10 @@ export default {
     onError: Function,
     beforeUpload: Function,
     drag: Boolean,
+    onAjax: {
+      type: Function,
+      default: ajax
+    },
     onPreview: {
       type: Function,
       default: function() {}
@@ -93,7 +97,7 @@ export default {
       }
     },
     post(rawFile) {
-      ajax({
+      this.onAjax({
         headers: this.headers,
         withCredentials: this.withCredentials,
         file: rawFile,
