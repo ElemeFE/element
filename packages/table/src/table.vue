@@ -116,6 +116,7 @@
   import TableBody from './table-body';
   import TableHeader from './table-header';
   import { mousewheel } from './util';
+  import CsvExport from './CsvExport';
 
   let tableIdSeed = 1;
 
