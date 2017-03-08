@@ -1,4 +1,4 @@
-import json2csv from 'json2csv'
+import json2csv from 'json2csv';
 
 export default (data, fields, fieldNames, fileName) => {
   try {
@@ -18,4 +18,4 @@ export default (data, fields, fieldNames, fileName) => {
   } catch (err) {
     console.error(err);
   }
-}
+};
