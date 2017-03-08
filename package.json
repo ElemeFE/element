@@ -48,6 +48,7 @@
     "async-validator": "^1.6.6",
     "babel-helper-vue-jsx-merge-props": "^2.0.0",
     "deepmerge": "^1.2.0",
+    "json2csv": "^3.7.3",
     "throttle-debounce": "^1.0.1"
   },
   "peerDependencies": {
