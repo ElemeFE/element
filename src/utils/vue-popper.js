@@ -106,7 +106,7 @@ export default {
     },
 
     updatePopper() {
-      this.popperJS ? this.popperJS.update() : this.createPopper();
+      this.popperJS ? (this.popperJS.update(), this.popperJS._popper.style.zIndex = PopupManager.nextZIndex()) : this.createPopper();
     },
 
     doDestroy() {
