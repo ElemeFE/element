@@ -5,6 +5,9 @@
   float: left;
   box-sizing: border-box;
 }
+.el-col-0 {
+  display: none;
+}
 
 @for $i from 1 to 24 {
   .el-col-$i {

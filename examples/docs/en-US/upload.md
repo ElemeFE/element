@@ -86,7 +86,7 @@ Upload files by clicking or drag-and-drop
 ```html
 <el-upload
   class="upload-demo"
-  action="//jsonplaceholder.typicode.com/posts/"
+  action="https://jsonplaceholder.typicode.com/posts/"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
   :file-list="fileList">
@@ -121,13 +121,40 @@ Use `before-upload` hook to limit the upload file format and size.
 ```html
 <el-upload
   class="avatar-uploader"
-  action="//jsonplaceholder.typicode.com/posts/"
+  action="https://jsonplaceholder.typicode.com/posts/"
   :show-file-list="false"
   :on-success="handleAvatarScucess"
   :before-upload="beforeAvatarUpload">
   <img v-if="imageUrl" :src="imageUrl" class="avatar">
   <i v-else class="el-icon-plus avatar-uploader-icon"></i>
 </el-upload>
+
+<style>
+  .avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #20a0ff;
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+  }
+  .avatar {
+    width: 178px;
+    height: 178px;
+    display: block;
+  }
+</style>
+
 <script>
   export default {
     data() {
@@ -164,7 +191,7 @@ Use `list-type` to change the fileList style.
 ::: demo
 ```html
 <el-upload
-  action="//jsonplaceholder.typicode.com/posts/"
+  action="https://jsonplaceholder.typicode.com/posts/"
   list-type="picture-card"
   :on-preview="handlePictureCardPreview"
   :on-remove="handleRemove">
@@ -201,7 +228,7 @@ Use `list-type` to change the fileList style.
 ```html
 <el-upload
   class="upload-demo"
-  action="//jsonplaceholder.typicode.com/posts/"
+  action="https://jsonplaceholder.typicode.com/posts/"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
   :file-list="fileList2"
@@ -237,7 +264,7 @@ Use `on-change` hook function to control upload file list
 ```html
 <el-upload
   class="upload-demo"
-  action="//jsonplaceholder.typicode.com/posts/"
+  action="https://jsonplaceholder.typicode.com/posts/"
   :on-change="handleChange"
   :file-list="fileList3">
   <el-button size="small" type="primary">Click to upload</el-button>
@@ -277,7 +304,7 @@ You can drag your file to a certain area to upload it.
 <el-upload
   class="upload-demo"
   drag
-  action="//jsonplaceholder.typicode.com/posts/"
+  action="https://jsonplaceholder.typicode.com/posts/"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
   :file-list="fileList"
@@ -296,7 +323,7 @@ You can drag your file to a certain area to upload it.
 <el-upload
   class="upload-demo"
   ref="upload"
-  action="//jsonplaceholder.typicode.com/posts/"
+  action="https://jsonplaceholder.typicode.com/posts/"
   :auto-upload="false">
   <el-button slot="trigger" size="small" type="primary">select file</el-button>
   <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">upload to server</el-button>

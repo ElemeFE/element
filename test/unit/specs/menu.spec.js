@@ -146,7 +146,8 @@ describe('Menu', () => {
       });
     });
   });
-  describe('submenu', () => {
+  describe('submenu', function() {
+    this.timeout(3000);
     it('toggle', done => {
       vm = createVue({
         template: `

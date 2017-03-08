@@ -1,5 +1,6 @@
 import Popper from 'element-ui/src/utils/vue-popper';
 import debounce from 'throttle-debounce/debounce';
+import { getFirstComponentChild } from 'element-ui/src/utils/vdom';
 import Vue from 'vue';
 
 export default {
@@ -38,6 +39,8 @@ export default {
   },
 
   beforeCreate() {
+    if (this.$isServer) return;
+
     this.popperVM = new Vue({
       data: { node: '' },
       render(h) {
@@ -49,6 +52,8 @@ export default {
   },
 
   render(h) {
+    if (this.$isServer) return;
+
     this.popperVM.node = (
       <transition
         name={ this.transition }
@@ -65,9 +70,10 @@ export default {
         </div>
       </transition>);
 
-    if (!this.$slots.default) return this.$slots.default;
+    if (!this.$slots.default || !this.$slots.default.length) return this.$slots.default;
 
-    const vnode = this.$slots.default[0];
+    const vnode = getFirstComponentChild(this.$slots.default);
+    if (!vnode) return vnode;
     const data = vnode.data = vnode.data || {};
     const on = vnode.data.on = vnode.data.on || {};
 

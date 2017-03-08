@@ -47,11 +47,9 @@
         this.cursorTop = (100 - value) * height / 100;
 
         this.background = 'hsl(' + this.color.get('hue') + ', 100%, 50%)';
-      }
-    },
+      },
 
-    mounted() {
-      const handleDrag = (event) => {
+      handleDrag(event) {
         const el = this.$el;
         const rect = el.getBoundingClientRect();
 
@@ -69,14 +67,16 @@
           saturation: left / rect.width * 100,
           value: 100 - top / rect.height * 100
         });
-      };
+      }
+    },
 
+    mounted() {
       draggable(this.$el, {
         drag: (event) => {
-          handleDrag(event);
+          this.handleDrag(event);
         },
         end: (event) => {
-          handleDrag(event);
+          this.handleDrag(event);
         }
       });
 

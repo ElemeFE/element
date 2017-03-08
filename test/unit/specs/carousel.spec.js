@@ -138,7 +138,7 @@ describe('Carousel', () => {
       vm = createVue({
         template: `
         <div>
-          <el-carousel :autoplay="false" trigger="click">
+          <el-carousel :autoplay="false" trigger="click" ref="carousel">
             <el-carousel-item v-for="item in 3"></el-carousel-item>
           </el-carousel>
         </div>
@@ -147,9 +147,11 @@ describe('Carousel', () => {
 
       setTimeout(() => {
         const items = vm.$el.querySelectorAll('.el-carousel__item');
+        const carousel = vm.$refs.carousel;
         vm.$el.querySelectorAll('.el-carousel__indicator')[2].click();
         setTimeout(() => {
           expect(items[2].classList.contains('is-active')).to.true;
+          carousel.handleButtonEnter('right');
           vm.$el.querySelector('.el-carousel__arrow--right').click();
           setTimeout(() => {
             expect(items[0].classList.contains('is-active')).to.true;
