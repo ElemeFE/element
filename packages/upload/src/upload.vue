@@ -37,7 +37,8 @@ export default {
     },
     fileList: Array,
     autoUpload: Boolean,
-    listType: String
+    listType: String,
+    httpRequest: Function
   },
 
   data() {
@@ -93,7 +94,8 @@ export default {
       }
     },
     post(rawFile) {
-      ajax({
+      const request = this.httpRequest || ajax;
+      request({
         headers: this.headers,
         withCredentials: this.withCredentials,
         file: rawFile,

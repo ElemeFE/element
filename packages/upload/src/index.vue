@@ -85,7 +85,8 @@ export default {
     listType: {
       type: String,
       default: 'text'   // text,picture,picture-card
-    }
+    },
+    httpRequest: Function
   },
 
   data() {
@@ -228,7 +229,8 @@ export default {
         'on-success': this.handleSuccess,
         'on-error': this.handleError,
         'on-preview': this.onPreview,
-        'on-remove': this.handleRemove
+        'on-remove': this.handleRemove,
+        httpRequest: this.httpRequest
       },
       ref: 'upload-inner'
     };

@@ -364,6 +364,7 @@ thumbnail-mode | whether thumbnail is displayed | boolean | — | false
 file-list | default uploaded files, i.e: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}] | array | — | []
 list-type | type of fileList | string | text/picture/picture-card | text |
 auto-upload | whether to auto upload file | boolean | — | true |
+http-request | override default xhr behavior, allowing you to implement your own upload-file's request | function | — | — |
 
 ### Events
 | Event Name | Description | Parameters |
