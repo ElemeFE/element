@@ -38,7 +38,10 @@ export default {
     fileList: Array,
     autoUpload: Boolean,
     listType: String,
-    httpRequest: Function
+    httpRequest: {
+      type: Function,
+      default: ajax
+    }
   },
 
   data() {
@@ -94,8 +97,7 @@ export default {
       }
     },
     post(rawFile) {
-      const request = this.httpRequest || ajax;
-      request({
+      const options = {
         headers: this.headers,
         withCredentials: this.withCredentials,
         file: rawFile,
@@ -111,7 +113,12 @@ export default {
         onError: err => {
           this.onError(err, rawFile);
         }
-      });
+      };
+      const requestPromise = this.httpRequest(options);
+      /* global Promise:true */
+      if (typeof Promise !== 'undefined' && requestPromise instanceof Promise) {
+        requestPromise.then(options.onSuccess, options.onError);
+      }
     },
     handleClick() {
       this.$refs.input.click();
