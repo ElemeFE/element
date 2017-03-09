@@ -12,7 +12,7 @@
       margin: 0;
       overflow: hidden;
     }
-    
+
     .nav-dropdown {
       margin-bottom: 6px;
       width: 100%;
@@ -73,6 +73,9 @@
           line-height: 40px;
           font-size: 13px;
           padding-left: 24px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
 
 
           &:hover {
