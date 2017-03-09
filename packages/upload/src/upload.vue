@@ -97,7 +97,7 @@ export default {
       }
     },
     post(rawFile) {
-      const optionts = {
+      const options = {
         headers: this.headers,
         withCredentials: this.withCredentials,
         file: rawFile,
@@ -114,10 +114,10 @@ export default {
           this.onError(err, rawFile);
         }
       };
-      var ajaxPromise = this.onAjax(optionts);
+      const ajaxPromise = this.onAjax(options);
       /* global Promise:true */
       if (typeof Promise !== 'undefined' && ajaxPromise instanceof Promise) {
-        ajaxPromise.then(optionts.onSuccess, optionts.onError);
+        ajaxPromise.then(options.onSuccess, options.onError);
       }
     },
     handleClick() {
