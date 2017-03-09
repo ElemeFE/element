@@ -27,10 +27,6 @@ export default {
     onError: Function,
     beforeUpload: Function,
     drag: Boolean,
-    onAjax: {
-      type: Function,
-      default: ajax
-    },
     onPreview: {
       type: Function,
       default: function() {}
@@ -97,7 +93,7 @@ export default {
       }
     },
     post(rawFile) {
-      const options = {
+      ajax({
         headers: this.headers,
         withCredentials: this.withCredentials,
         file: rawFile,
@@ -113,12 +109,7 @@ export default {
         onError: err => {
           this.onError(err, rawFile);
         }
-      };
-      const ajaxPromise = this.onAjax(options);
-      /* global Promise:true */
-      if (typeof Promise !== 'undefined' && ajaxPromise instanceof Promise) {
-        ajaxPromise.then(options.onSuccess, options.onError);
-      }
+      });
     },
     handleClick() {
       this.$refs.input.click();

@@ -48,7 +48,6 @@ export default {
       type: String,
       default: 'select'
     },
-    onAjax: Function,
     beforeUpload: Function,
     onRemove: {
       type: Function,
@@ -224,7 +223,6 @@ export default {
         fileList: this.uploadFiles,
         autoUpload: this.autoUpload,
         listType: this.listType,
-        'on-ajax': this.onAjax,
         'on-start': this.handleStart,
         'on-progress': this.handleProgress,
         'on-success': this.handleSuccess,
