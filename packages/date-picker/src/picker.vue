@@ -44,7 +44,6 @@ const NewPopper = {
   beforeDestroy: Popper.beforeDestroy
 };
 
-let RANGE_SEPARATOR = ' - ';
 const DEFAULT_FORMATS = {
   date: 'yyyy-MM-dd',
   month: 'yyyy-MM',
@@ -73,19 +72,19 @@ const DATE_FORMATTER = function(value, format) {
 const DATE_PARSER = function(text, format) {
   return parseDate(text, format);
 };
-const RANGE_FORMATTER = function(value, format) {
+const RANGE_FORMATTER = function(value, format, separator) {
   if (Array.isArray(value) && value.length === 2) {
     const start = value[0];
     const end = value[1];
 
     if (start && end) {
-      return formatDate(start, format) + RANGE_SEPARATOR + formatDate(end, format);
+      return formatDate(start, format) + separator + formatDate(end, format);
     }
   }
   return '';
 };
-const RANGE_PARSER = function(text, format) {
-  const array = text.split(RANGE_SEPARATOR);
+const RANGE_PARSER = function(text, format, separator) {
+  const array = text.split(separator);
   if (array.length === 2) {
     const range1 = array[0];
     const range2 = array[1];
@@ -306,7 +305,7 @@ export default {
         ).formatter;
         const format = DEFAULT_FORMATS[this.type];
 
-        return formatter(value, this.format || format);
+        return formatter(value, this.format || format, this.rangeSeparator);
       },
 
       set(value) {
@@ -316,7 +315,7 @@ export default {
             TYPE_VALUE_RESOLVER_MAP[type] ||
             TYPE_VALUE_RESOLVER_MAP['default']
           ).parser;
-          const parsedValue = parser(value, this.format || DEFAULT_FORMATS[type]);
+          const parsedValue = parser(value, this.format || DEFAULT_FORMATS[type], this.rangeSeparator);
 
           if (parsedValue && this.picker) {
             this.picker.value = parsedValue;
@@ -330,7 +329,6 @@ export default {
   },
 
   created() {
-    RANGE_SEPARATOR = this.rangeSeparator;
     // vue-popper
     this.popperOptions = {
       boundariesPadding: 0,
@@ -428,7 +426,7 @@ export default {
             const format = DEFAULT_FORMATS.timerange;
 
             ranges = Array.isArray(ranges) ? ranges : [ranges];
-            this.picker.selectableRange = ranges.map(range => parser(range, format));
+            this.picker.selectableRange = ranges.map(range => parser(range, format, this.rangeSeparator));
           }
 
           for (const option in options) {
