@@ -15,7 +15,7 @@ Thank you for contributing! Please carefully read the following before opening y
 ### ElementUI version
 <!-- 1.0.0-rc.2 -->
 
-### OS/Browers version
+### OS/Browsers version
 <!-- macOS/Chrome 53 -->
 
 ### Vue version
