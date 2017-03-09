@@ -1,5 +1,19 @@
 ## Changelog
 
+### 1.2.4
+
+*2017-03-09*
+
+- Fixed Carousel not responding to dynamic data updates, #3159
+- Fixed `cell-dblclick` of Table not firing issue, #3305
+- Fixed disabled Cascader not displaying initial value, #3297
+- Fixed Slider not correctly displaying initial value when `show-input` is true, #3281
+- Fixed Tooltip error in server-side rendering, #3214
+- Fixed `range-separator` of DatePicker not working issue, #3378
+- Added support for dynamically update loading text of Loading directive, #3345 (by @imyzf)
+- Added `http-request` attribute for Upload, #3387
+- Added support for hiding col if its `span` is 0, #3313
+
 ### 1.2.3
 *2017-03-01*
 - Fixed Tooltip, #3152
