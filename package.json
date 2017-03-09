@@ -102,7 +102,6 @@
     "markdown-it-anchor": "^2.5.0",
     "markdown-it-container": "^2.0.0",
     "mocha": "^3.1.1",
-    "offline-plugin": "^4.6.1",
     "phantomjs-prebuilt": "^2.1.13",
     "postcss": "^5.1.2",
     "postcss-loader": "^0.11.1",
