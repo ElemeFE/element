@@ -111,8 +111,8 @@ export default {
                     {
                       column.sortable
                         ? <span class="caret-wrapper" on-click={ ($event) => this.handleSortClick($event, column) }>
-                            <i class="sort-caret ascending"></i>
-                            <i class="sort-caret descending"></i>
+                            <i class="sort-caret ascending" on-click={ ($event) => this.handleSortClick($event, column, 'ascending') }></i>
+                            <i class="sort-caret descending" on-click={ ($event) => this.handleSortClick($event, column, 'descending') }></i>
                           </span>
                         : ''
                     }
@@ -383,9 +383,9 @@ export default {
       return !order ? 'ascending' : order === 'ascending' ? 'descending' : null;
     },
 
-    handleSortClick(event, column) {
+    handleSortClick(event, column, givenOrder) {
       event.stopPropagation();
-      let order = this.toggleOrder(column.order);
+      let order = givenOrder || this.toggleOrder(column.order);
 
       let target = event.target;
       while (target && target.tagName !== 'TH') {
