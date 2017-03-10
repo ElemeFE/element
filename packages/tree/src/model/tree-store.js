@@ -32,13 +32,26 @@ export default class TreeStore {
 
   filter(value) {
     const filterNodeMethod = this.filterNodeMethod;
+    // 自己添加的判断非子节点的的过滤
+    const isVisible = function(element) {
+      const subNode = element.childNodes;
+      subNode.forEach((subchild) => {
+        subchild.visible = true;
+        isVisible(subchild);
+      });
+    };
     const traverse = function(node) {
       const childNodes = node.root ? node.root.childNodes : node.childNodes;
 
       childNodes.forEach((child) => {
         child.visible = filterNodeMethod.call(child, value, child.data, child);
-
-        traverse(child);
+        // 自己添加的判断非子节点的的过滤
+        if (child.data !== null && child.data.name.indexOf(value) >= 0) {
+          child.visible = true;
+          isVisible(child);
+        } else {
+          traverse(child);
+        }
       });
 
       if (!node.visible && childNodes.length) {
