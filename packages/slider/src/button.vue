@@ -7,7 +7,7 @@
     :class="{ 'hover': hovering, 'dragging': dragging }"
     :style="{ left: currentPosition }"
     ref="button">
-    <el-tooltip placement="top" ref="tooltip">
+    <el-tooltip placement="top" ref="tooltip" :disabled="!showTooltip">
       <span slot="content">{{ value }}</span>
       <div class="el-slider__button" :class="{ 'hover': hovering, 'dragging': dragging }"></div>
     </el-tooltip>
@@ -60,6 +60,10 @@
         return this.$parent.step;
       },
 
+      showTooltip() {
+        return this.$parent.showTooltip;
+      },
+
       precision() {
         return this.$parent.precision;
       },
@@ -76,7 +80,7 @@
     },
 
     methods: {
-      showTooltip() {
+      displayTooltip() {
         this.$refs.tooltip && (this.$refs.tooltip.showPopper = true);
       },
 
@@ -86,9 +90,9 @@
 
       handleMouseEnter() {
         this.hovering = true;
-        this.showTooltip();
+        this.displayTooltip();
       },
-  
+
       handleMouseLeave() {
         this.hovering = false;
         this.hideTooltip();
@@ -111,7 +115,7 @@
 
       onDragging(event) {
         if (this.dragging) {
-          this.showTooltip();
+          this.displayTooltip();
           this.currentX = event.clientX;
           const diff = (this.currentX - this.startX) / this.$parent.$sliderWidth * 100;
           this.newPosition = this.startPosition + diff;
