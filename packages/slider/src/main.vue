@@ -79,6 +79,10 @@
         type: Boolean,
         default: false
       },
+      showTooltip: {
+        type: Boolean,
+        default: true
+      },
       disabled: {
         type: Boolean,
         default: false
