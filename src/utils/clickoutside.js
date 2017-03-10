@@ -4,7 +4,11 @@ import { on } from 'element-ui/src/utils/dom';
 const nodeList = [];
 const ctx = '@@clickoutsideContext';
 
-!Vue.prototype.$isServer && on(document, 'click', e => {
+let startClick;
+
+!Vue.prototype.$isServer && on(document, 'mousedown', e => (startClick = e));
+
+!Vue.prototype.$isServer && on(document, 'mouseup', e => {
   nodeList.forEach(node => node[ctx].documentHandler(e));
 });
 /**
@@ -21,8 +25,10 @@ export default {
     const documentHandler = function(e) {
       if (!vnode.context ||
         el.contains(e.target) ||
+        el.contains(startClick.target) ||
         (vnode.context.popperElm &&
-        vnode.context.popperElm.contains(e.target))) return;
+        (vnode.context.popperElm.contains(e.target)) ||
+        vnode.context.popperElm.contains(startClick.target))) return;
 
       if (binding.expression &&
         el[ctx].methodName &&
