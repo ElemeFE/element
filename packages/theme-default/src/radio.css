@@ -187,6 +187,7 @@
           background-image: none;
           background-color: var(--button-disabled-fill);
           border-color: var(--button-disabled-border);
+          box-shadow: none;
         }
       }
     }
