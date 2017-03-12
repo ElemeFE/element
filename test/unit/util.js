@@ -83,3 +83,15 @@ exports.triggerEvent = function(elm, name, ...opts) {
 
   return elm;
 };
+
+/**
+ * 触发 “mouseup” 和 “mousedown” 事件
+ * @param {Element} elm
+ * @param {*} opts
+ */
+exports.triggerClick = function(elm, ...opts) {
+  exports.triggerEvent(elm, 'mousedown', ...opts);
+  exports.triggerEvent(elm, 'mouseup', ...opts);
+
+  return elm;
+};

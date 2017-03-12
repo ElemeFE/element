@@ -1,4 +1,4 @@
-import { createVue, destroyVM } from '../util';
+import { createVue, triggerClick, destroyVM } from '../util';
 
 describe('Autocomplete', () => {
   let vm;
@@ -59,7 +59,7 @@ describe('Autocomplete', () => {
       expect(suggestions.style.display).to.not.equal('none');
       expect(suggestions.querySelectorAll('.el-autocomplete-suggestion__list li').length).to.be.equal(4);
 
-      document.body.click();
+      triggerClick(document);
       setTimeout(_ => {
         expect(suggestions.style.display).to.be.equal('none');
         done();
