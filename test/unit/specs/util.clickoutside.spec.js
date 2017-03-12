@@ -1,7 +1,7 @@
 import Clickoutside from 'element-ui/src/utils/clickoutside';
 const ctx = '@@clickoutsideContext';
 
-import { triggerClick } from '../util';
+import { triggerEvent, triggerClick } from '../util';
 
 describe('Utils:Clickoutside', () => {
   it('create', () => {
@@ -146,4 +146,25 @@ describe('Utils:Clickoutside', () => {
     triggerClick(document);
     expect(count).to.equal(1);
   });
+
+  it('stays open on drag click', () => {
+    const el = document.createElement('div');
+    const insideElm = document.createElement('div');
+    let count = 0;
+    const vnode = {
+      context: {
+        handleClick: () => ++count
+      }
+    };
+    const binding = {
+      expression: 'handleClick'
+    };
+
+    el.appendChild(insideElm);
+    Clickoutside.bind(el, binding, vnode);
+    triggerEvent(insideElm, 'mousedown');
+    triggerEvent(document, 'mouseup');
+    expect(count).to.equal(1);
+  });
 });
+
