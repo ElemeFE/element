@@ -371,7 +371,7 @@
         handler(val) {
           this.store.commit('setData', val);
           if (this.rowKey) {
-            this.nextTick(()=> {
+            this.$nextTick(()=> {
               this.store.setCurrentRowKey(this.currentRowKey);
             });
           }
