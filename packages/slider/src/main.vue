@@ -99,7 +99,6 @@
         firstValue: null,
         secondValue: null,
         oldValue: null,
-        precision: 0,
         dragging: false
       };
     },
@@ -113,10 +112,6 @@
           return;
         }
         this.setValues();
-      },
-
-      step() {
-        this.setPrecision();
       },
 
       dragging(val) {
@@ -210,14 +205,6 @@
         if (this.disabled || this.dragging) return;
         const sliderOffsetLeft = this.$refs.slider.getBoundingClientRect().left;
         this.setPosition((event.clientX - sliderOffsetLeft) / this.$sliderWidth * 100);
-      },
-
-      setPrecision() {
-        let precisions = [this.min, this.max, this.step].map(item => {
-          let decimal = ('' + item).split('.')[1];
-          return decimal ? decimal.length : 0;
-        });
-        this.precision = Math.max.apply(null, precisions);
       }
     },
 
@@ -261,6 +248,14 @@
         return this.range
           ? `${ 100 * (this.minValue - this.min) / (this.max - this.min) }%`
           : '0%';
+      },
+
+      precision() {
+        let precisions = [this.min, this.max, this.step].map(item => {
+          let decimal = ('' + item).split('.')[1];
+          return decimal ? decimal.length : 0;
+        });
+        return Math.max.apply(null, precisions);
       }
     },
 
@@ -282,7 +277,6 @@
         }
         this.oldValue = this.firstValue;
       }
-      this.setPrecision();
     }
   };
 </script>
