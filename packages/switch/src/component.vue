@@ -39,7 +39,7 @@
     name: 'ElSwitch',
     props: {
       value: {
-        type: [Boolean, String, Number],
+        type: null,
         default: true
       },
       disabled: {
@@ -75,11 +75,11 @@
         default: ''
       },
       onValue: {
-        type: [Boolean, String, Number],
+        type: null,
         default: true
       },
       offValue: {
-        type: [Boolean, String, Number],
+        type: null,
         default: false
       },
       name: {
