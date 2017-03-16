@@ -93,8 +93,8 @@ const showNextMsg = () => {
       }
 
       let oldCb = instance.callback;
-      instance.callback = action => {
-        oldCb(action);
+      instance.callback = (action, instance) => {
+        oldCb(action, instance);
         showNextMsg();
       };
       ['modal', 'showClose', 'closeOnClickModal', 'closeOnPressEscape'].forEach(prop => {
