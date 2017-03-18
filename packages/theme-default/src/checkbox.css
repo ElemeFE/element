@@ -134,6 +134,9 @@
       outline: none;
       position: absolute;
       margin: 0;
+      z-index: -1;
+      display:none;
+      visibility: hidden;
       left: -999px;
     }
 
