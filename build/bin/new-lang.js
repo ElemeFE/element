@@ -52,9 +52,9 @@ fileSave(path.join(__dirname, '../../examples/nav.config.json'))
 
 // docs 下新建对应文件夹
 try {
-  fs.statSync(path.resolve(__dirname, `../../examples/docs/${ lang }`));
+  fs.statSync(path.resolve(__dirname, `../../docs/${ lang }`));
 } catch (e) {
-  fs.mkdirSync(path.resolve(__dirname, `../../examples/docs/${ lang }`));
+  fs.mkdirSync(path.resolve(__dirname, `../../docs/${ lang }`));
 }
 
 console.log('DONE!');

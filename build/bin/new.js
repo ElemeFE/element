@@ -70,11 +70,11 @@ export default {
 </script>`
   },
   {
-    filename: path.join('../../examples/docs/zh-CN', `${componentname}.md`),
+    filename: path.join('../../docs/zh-CN', `${componentname}.md`),
     content: `## ${chineseName}`
   },
   {
-    filename: path.join('../../examples/docs/en-us', `${componentname}.md`),
+    filename: path.join('../../docs/en-us', `${componentname}.md`),
     content: `## ${componentname}`
   },
   {

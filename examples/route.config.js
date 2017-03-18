@@ -30,7 +30,7 @@ const registerRoute = (navConfig) => {
   function addRoute(page, lang, index) {
     const component = page.path === '/changelog'
       ? require(`./pages/${ lang }/changelog.vue`)
-      : require(`./docs/${ lang }${page.path}.md`);
+      : require(`../docs/${ lang }${page.path}.md`);
     let child = {
       path: page.path.slice(1),
       meta: {
