@@ -1,6 +1,7 @@
 @charset "UTF-8";
 @import "./input.css";
 @import "./common/var.css";
+@import "./scrollbar.css";
 
 @component-namespace el {
   @b autocomplete {
