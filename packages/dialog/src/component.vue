@@ -110,7 +110,7 @@
         return `el-dialog--${ this.size }`;
       },
       style() {
-        return this.size === 'full' ? {} : { 'margin-bottom': '50px', 'top': this.top };
+        return this.size === 'full' ? {} : { 'top': this.top };
       }
     },
 
