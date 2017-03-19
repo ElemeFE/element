@@ -1,5 +1,15 @@
 ## 更新日志
 
+### 1.2.5
+*2017-03-19*
+
+- 新增 Slider 的 `show-tooltip` 属性，#3430（by @gabrielboliveira）
+- 修复动态改变 Slider `step` 的精度时，其值的精度不随之改变的问题，#3475（by @gabrielboliveira）
+- 修复含有 Tooltip 的 Table 在当前窗口高度临界于出现滚动条时，弹出 Tooltip 会导致 Table 宽度抖动的问题，#3549
+- 修复 Table 在某些情况下高度自动往复变小的问题，#3539
+- 修复 Popover 中的弹出类组件在点击 Popover 的空白区域时不隐藏的问题，#3451（by @nicoeg）
+- 现在 `xs`、`sm`、`md`、`lg` 值为 0 的 Col 会被正确隐藏，#3564
+
 ### 1.2.4
 *2017-03-09*
 
