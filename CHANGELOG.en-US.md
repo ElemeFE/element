@@ -1,5 +1,16 @@
 ## Changelog
 
+### 1.2.5
+
+*2017-03-19*
+
+- Added `show-tooltip` property for Slider, #3430 (by @gabrielboliveira)
+- Fixed Slider precision not updating when `step` is updated, #3475 (by @gabrielboliveira)
+- Fixed a bug that when the window is at the criticality of showing the scrollbar, the popup of Tooltip inside a Table will cause the Table to shake horizontally, #3549
+- Fixed Table automatically shrinking vertically in some conditions, #3539
+- Fixed popup components inside a Popover not hiding when blank area is clicked, #3451 (by @nicoeg)
+- Now Col will hide itself if its `xs`, `sm`, `md` or `lg` is set to 0, #3564
+
 ### 1.2.4
 
 *2017-03-09*
