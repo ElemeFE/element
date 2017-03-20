@@ -1,3 +1,4 @@
+test commit
 <p align="center">
   <img src="https://cdn.rawgit.com/ElemeFE/element/dev/element_logo.svg">
 </p>
@@ -10,7 +11,7 @@
 ![JS gzip size](http://img.badgesize.io/https://unpkg.com/element-ui/lib/index.js?compression=gzip&label=gzip%20size:%20JS)
 ![CSS gzip size](http://img.badgesize.io/https://unpkg.com/element-ui/lib/theme-default/index.css?compression=gzip&label=gzip%20size:%20CSS)
 [![Join the chat at https://gitter.im/ElemeFE/element](https://badges.gitter.im/ElemeFE/element.svg)](https://gitter.im/ElemeFE/element?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![OpenCollective](https://opencollective.com/element/backers/badge.svg)](#backers) 
+[![OpenCollective](https://opencollective.com/element/backers/badge.svg)](#backers)
 [![OpenCollective](https://opencollective.com/element/sponsors/badge.svg)](#sponsors)
 
 > A Vue.js 2.0 UI Toolkit for Web.
@@ -42,13 +43,13 @@
 
 ## Install
 ```shell
-npm install element-ui -S
+npm install aty-element-ui -S
 ```
 
 ## Quick Start
 ``` javascript
 import Vue from 'vue'
-import Element from 'element-ui'
+import Element from 'aty-element-ui'
 
 Vue.use(Element)
 
@@ -57,7 +58,7 @@ import {
   Select,
   Button
   // ...
-} from 'element-ui'
+} from 'aty-element-ui'
 
 Vue.component(Select.name, Select)
 Vue.component(Button.name, Button)

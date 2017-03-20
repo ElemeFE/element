@@ -1,5 +1,5 @@
 {
-  "name": "element-ui",
+  "name": "aty-element-ui",
   "version": "1.2.5",
   "description": "A Component Library for Vue.js.",
   "main": "lib/element-ui.common.js",
@@ -30,17 +30,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:ElemeFE/element.git"
+    "url": "git+https://github.com/liangyj021/aty-element.git"
   },
-  "homepage": "http://element.eleme.io",
+  "homepage": "https://github.com/liangyj021/aty-element#readme",
   "keywords": [
     "eleme",
     "vue",
-    "components"
+    "components",
+    "artery",
+    "thunisoft"
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ElemeFE/element/issues"
+    "url": "https://github.com/liangyj021/aty-element/issues"
   },
   "unpkg": "lib/index.js",
   "style": "lib/theme-default/index.css",
@@ -104,7 +106,7 @@
     "mocha": "^3.1.1",
     "phantomjs-prebuilt": "^2.1.13",
     "postcss": "^5.1.2",
-    "postcss-loader": "^0.11.1",
+    "postcss-loader": "^1.0.0",
     "postcss-salad": "^1.0.8",
     "rimraf": "^2.5.4",
     "sinon": "^1.17.6",

@@ -453,6 +453,14 @@
             {
               "path": "/collapse",
               "title": "Collapse"
+            },
+            {
+              "path": "/factor-item",
+              "title": "FactorItem"
+            },
+            {
+              "path": "/suspect-item",
+              "title": "SuspectItem"
             }
           ]
         }

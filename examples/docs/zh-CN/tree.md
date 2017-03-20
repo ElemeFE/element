@@ -134,6 +134,7 @@
         if (node.level > 3) return resolve([]);
         var hasChild;
         if (node.data.name === 'region1') {
+          node.disable = true;
           hasChild = true;
         } else if (node.data.name === 'region2') {
           hasChild = false;          

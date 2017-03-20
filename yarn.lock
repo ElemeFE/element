@@ -5058,9 +5058,10 @@ postcss-inline-svg@^1.4.0:
     postcss-value-parser "^3.2.3"
     read-cache "^1.0.0"
 
-postcss-loader@^0.11.1:
-  version "0.11.1"
-  resolved "https://registry.yarnpkg.com/postcss-loader/-/postcss-loader-0.11.1.tgz#c4eb0054269ec32695fd5682fbd7e654cdcac636"
+postcss-loader@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/postcss-loader/-/postcss-loader-1.3.3.tgz#a621ea1fa2
+9062a83972a46f54486771301916eb"
   dependencies:
     babel-code-frame "^6.11.0"
     loader-utils "^0.2.15"
