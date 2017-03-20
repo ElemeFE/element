@@ -160,7 +160,10 @@ export default {
       this.onError(err, file, this.uploadFiles);
       this.onChange(file, this.uploadFiles);
     },
-    handleRemove(file) {
+    handleRemove(file, raw) {
+      if (raw) {
+        file = this.getFile(raw);
+      }
       var fileList = this.uploadFiles;
       fileList.splice(fileList.indexOf(file), 1);
       this.onRemove(file, fileList);
@@ -181,7 +184,7 @@ export default {
       this.uploadFiles
         .filter(file => file.status === 'ready')
         .forEach(file => {
-          this.$refs['upload-inner'].upload(file.raw, file);
+          this.$refs['upload-inner'].upload(file.raw);
         });
     },
     getMigratingConfig() {

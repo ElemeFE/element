@@ -85,12 +85,12 @@ export default {
             this.post(rawFile);
           }
         }, () => {
-          if (file) this.onRemove(file);
+          this.onRemove(rawFile, true);
         });
       } else if (before !== false) {
         this.post(rawFile);
       } else {
-        if (file) this.onRemove(file);
+        this.onRemove(rawFile, true);
       }
     },
     post(rawFile) {
