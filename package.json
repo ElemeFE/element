@@ -30,9 +30,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/liangyj021/element.git"
+    "url": "git+https://github.com/liangyj021/aty-element.git"
   },
-  "homepage": "https://github.com/liangyj021/element#readme",
+  "homepage": "https://github.com/liangyj021/aty-element#readme",
   "keywords": [
     "eleme",
     "vue",
@@ -42,7 +42,7 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/liangyj021/element/issues"
+    "url": "https://github.com/liangyj021/aty-element/issues"
   },
   "unpkg": "lib/index.js",
   "style": "lib/theme-default/index.css",
