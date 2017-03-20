@@ -52,23 +52,23 @@ export default {
   },
 
   render(h) {
-    if (this.$isServer) return;
-
-    this.popperVM.node = (
-      <transition
-        name={ this.transition }
-        onAfterLeave={ this.doDestroy }>
-        <div
-          onMouseleave={ () => { this.debounceClose(); this.togglePreventClose(); } }
-          onMouseenter= { this.togglePreventClose }
-          ref="popper"
-          v-show={!this.disabled && this.showPopper}
-          class={
-            ['el-tooltip__popper', 'is-' + this.effect, this.popperClass]
-          }>
-          { this.$slots.content || this.content }
-        </div>
-      </transition>);
+    if (this.popperVM) {
+      this.popperVM.node = (
+        <transition
+          name={ this.transition }
+          onAfterLeave={ this.doDestroy }>
+          <div
+            onMouseleave={ () => { this.debounceClose(); this.togglePreventClose(); } }
+            onMouseenter= { this.togglePreventClose }
+            ref="popper"
+            v-show={!this.disabled && this.showPopper}
+            class={
+              ['el-tooltip__popper', 'is-' + this.effect, this.popperClass]
+            }>
+            { this.$slots.content || this.content }
+          </div>
+        </transition>);
+    }
 
     if (!this.$slots.default || !this.$slots.default.length) return this.$slots.default;
 

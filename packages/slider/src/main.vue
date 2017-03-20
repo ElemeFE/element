@@ -1,7 +1,7 @@
 <template>
   <div class="el-slider">
     <el-input-number
-      v-model="inputValue"
+      v-model="firstValue"
       v-if="showInput && !range"
       class="el-slider__input"
       ref="input"
@@ -79,6 +79,10 @@
         type: Boolean,
         default: false
       },
+      showTooltip: {
+        type: Boolean,
+        default: true
+      },
       disabled: {
         type: Boolean,
         default: false
@@ -99,17 +103,11 @@
         firstValue: null,
         secondValue: null,
         oldValue: null,
-        precision: 0,
-        inputValue: null,
         dragging: false
       };
     },
 
     watch: {
-      inputValue(val) {
-        this.firstValue = val;
-      },
-
       value(val, oldVal) {
         if (this.dragging ||
           Array.isArray(val) &&
@@ -130,7 +128,6 @@
         if (this.range) {
           this.$emit('input', [this.minValue, this.maxValue]);
         } else {
-          this.inputValue = val;
           this.$emit('input', val);
         }
       },
@@ -255,6 +252,14 @@
         return this.range
           ? `${ 100 * (this.minValue - this.min) / (this.max - this.min) }%`
           : '0%';
+      },
+
+      precision() {
+        let precisions = [this.min, this.max, this.step].map(item => {
+          let decimal = ('' + item).split('.')[1];
+          return decimal ? decimal.length : 0;
+        });
+        return Math.max.apply(null, precisions);
       }
     },
 
@@ -276,12 +281,6 @@
         }
         this.oldValue = this.firstValue;
       }
-      let precisions = [this.min, this.max, this.step].map(item => {
-        let decimal = ('' + item).split('.')[1];
-        return decimal ? decimal.length : 0;
-      });
-      this.precision = Math.max.apply(null, precisions);
-      this.inputValue = this.inputValue || this.firstValue;
     }
   };
 </script>

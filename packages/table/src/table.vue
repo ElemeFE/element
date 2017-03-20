@@ -8,8 +8,7 @@
       'el-table--enable-row-hover': !store.states.isComplex,
       'el-table--enable-row-transition': true || (store.states.data || []).length !== 0 && (store.states.data || []).length < 100
     }"
-    @mouseleave="handleMouseLeave($event)"
-    :style="[tableHeight]">
+    @mouseleave="handleMouseLeave($event)">
     <div class="hidden-columns" ref="hiddenColumns"><slot></slot></div>
     <div class="el-table__header-wrapper" ref="headerWrapper" v-if="showHeader">
       <table-header
@@ -289,24 +288,6 @@
         } else if (this.maxHeight) {
           style = {
             'max-height': (this.showHeader ? this.maxHeight - this.layout.headerHeight : this.maxHeight) + 'px'
-          };
-        }
-
-        return style;
-      },
-
-      tableHeight() {
-        let style = {};
-
-        const height = this.layout.tableHeight ? this.layout.tableHeight + 'px' : '';
-
-        if (this.height) {
-          style = {
-            height
-          };
-        } else if (this.maxHeight) {
-          style = {
-            'max-height': height
           };
         }
 

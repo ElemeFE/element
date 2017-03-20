@@ -143,10 +143,6 @@ export default {
       });
     },
 
-    handleItemChange: debounce(100, function() {
-      this.updateItems();
-    }),
-
     updateItems() {
       this.items = this.$children.filter(child => child.$options.name === 'ElCarouselItem');
     },
@@ -217,6 +213,7 @@ export default {
   },
 
   created() {
+    this.handleItemChange = debounce(100, this.updateItems);
     this.throttledArrowClick = throttle(300, true, index => {
       this.setActiveItem(index);
     });

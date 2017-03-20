@@ -351,7 +351,7 @@ data | additions options of request | object | — | —
 name | key name for uploaded file | string | — | file
 with-credentials | whether cookies are sent | boolean | — |false
 show-upload-list | whether to show the uploaded file list | boolean | — | true
-type | type of Upload | string | select/drag | select
+ drag | whether to activate drag and drop mode | boolean | — | false
 accept | accepted [file types](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept), will not work when `thumbnail-mode` is `true` | string | — | —
 on-preview | hook function when clicking the uploaded files | function(file) | — | —
 on-remove | hook function when files are removed | function(file, fileList) | — | —
@@ -364,6 +364,7 @@ thumbnail-mode | whether thumbnail is displayed | boolean | — | false
 file-list | default uploaded files, i.e: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}] | array | — | []
 list-type | type of fileList | string | text/picture/picture-card | text |
 auto-upload | whether to auto upload file | boolean | — | true |
+http-request | override default xhr behavior, allowing you to implement your own upload-file's request | function | — | — |
 
 ### Events
 | Event Name | Description | Parameters |

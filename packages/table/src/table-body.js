@@ -219,37 +219,29 @@ export default {
     },
 
     handleContextMenu(event, row) {
-      const table = this.table;
-      const cell = getCell(event);
-      let column;
-      if (cell) {
-        column = getColumnByCell(table, cell);
-        if (column) {
-          table.$emit('cell-dblclick', row, column, cell, event);
-        }
-      }
-      table.$emit('row-contextmenu', row, event);
+      this.handleEvent(event, row, 'contextmenu');
     },
 
     handleDoubleClick(event, row) {
-      const table = this.table;
-      table.$emit('row-dblclick', row, event);
+      this.handleEvent(event, row, 'dblclick');
     },
 
     handleClick(event, row) {
+      this.store.commit('setCurrentRow', row);
+      this.handleEvent(event, row, 'click');
+    },
+
+    handleEvent(event, row, name) {
       const table = this.table;
       const cell = getCell(event);
       let column;
       if (cell) {
         column = getColumnByCell(table, cell);
         if (column) {
-          table.$emit('cell-click', row, column, cell, event);
+          table.$emit(`cell-${name}`, row, column, cell, event);
         }
       }
-
-      this.store.commit('setCurrentRow', row);
-
-      table.$emit('row-click', row, event, column);
+      table.$emit(`row-${name}`, row, event, column);
     },
 
     handleExpandClick(row) {

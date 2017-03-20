@@ -1,5 +1,30 @@
 ## Changelog
 
+### 1.2.5
+
+*2017-03-19*
+
+- Added `show-tooltip` property for Slider, #3430 (by @gabrielboliveira)
+- Fixed Slider precision not updating when `step` is updated, #3475 (by @gabrielboliveira)
+- Fixed a bug that when the window is at the criticality of showing the scrollbar, the popup of Tooltip inside a Table will cause the Table to shake horizontally, #3549
+- Fixed Table automatically shrinking vertically in some conditions, #3539
+- Fixed popup components inside a Popover not hiding when blank area is clicked, #3451 (by @nicoeg)
+- Now Col will hide itself if its `xs`, `sm`, `md` or `lg` is set to 0, #3564
+
+### 1.2.4
+
+*2017-03-09*
+
+- Fixed Carousel not responding to dynamic data updates, #3159
+- Fixed `cell-dblclick` of Table not firing issue, #3305
+- Fixed disabled Cascader not displaying initial value, #3297
+- Fixed Slider not correctly displaying initial value when `show-input` is true, #3281
+- Fixed Tooltip error in server-side rendering, #3214
+- Fixed `range-separator` of DatePicker not working issue, #3378
+- Added support for dynamically update loading text of Loading directive, #3345 (by @imyzf)
+- Added `http-request` attribute for Upload, #3387
+- Added support for hiding col if its `span` is 0, #3313
+
 ### 1.2.3
 *2017-03-01*
 - Fixed Tooltip, #3152

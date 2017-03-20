@@ -204,5 +204,5 @@ In fact, Tooltip is an extension based on [Vue-popper](https://github.com/elemen
 |  visible-arrow   |  whether an arrow is displayed. For more information, check [Vue-popper](https://github.com/element-component/vue-popper) page | boolean | — | true |
 |  options        | [popper.js](https://popper.js.org/documentation.html) parameters | Object            | refer to [popper.js](https://popper.js.org/documentation.html) doc | `{ boundariesElement: 'body', gpuAcceleration: false }` |
 | openDelay | delay of appearance, in millisecond | number | — | 0 |
-| manual | whether to control Tooltip manually. `mouseenter` and `mouseleave` won't have effects if set to `true`事件将不会生效 | boolean | — | false |
+| manual | whether to control Tooltip manually. `mouseenter` and `mouseleave` won't have effects if set to `true` | boolean | — | false |
 |  popper-class  |  custom class name for Tooltip's popper | string | — | — |

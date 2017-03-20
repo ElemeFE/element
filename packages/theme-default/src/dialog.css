@@ -12,6 +12,7 @@
     border-radius: var(--border-radius-small);
     box-shadow: var(--dialog-box-shadow);
     box-sizing: border-box;
+    margin-bottom: 50px;
 
     @modifier tiny {
       width: var(--dialog-tiny-width);
@@ -28,6 +29,7 @@
     @modifier full {
       width: 100%;
       top: 0;
+      margin-bottom: 0;
       height: 100%;
       overflow: auto;
     }
