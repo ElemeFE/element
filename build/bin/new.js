@@ -74,7 +74,7 @@ export default {
     content: `## ${chineseName}`
   },
   {
-    filename: path.join('../../examples/docs/en-us', `${componentname}.md`),
+    filename: path.join('../../examples/docs/en-US', `${componentname}.md`),
     content: `## ${componentname}`
   },
   {
