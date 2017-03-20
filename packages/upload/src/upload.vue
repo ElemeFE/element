@@ -65,10 +65,8 @@ export default {
       if (postFiles.length === 0) { return; }
 
       postFiles.forEach(rawFile => {
-        if (!this.thumbnailMode || this.isImage(rawFile.type)) {
-          this.onStart(rawFile);
-          if (this.autoUpload) this.upload(rawFile);
-        }
+        this.onStart(rawFile);
+        if (this.autoUpload) this.upload(rawFile);
       });
     },
     upload(rawFile, file) {
