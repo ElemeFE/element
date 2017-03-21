@@ -442,6 +442,66 @@ describe('Select', () => {
     }, 100);
   });
 
+  it('multiple delete-tag', done => {
+    sinon.stub(window.console, 'log');
+    vm = createVue({
+      template: `
+        <div>
+          <el-select v-model="value" multiple @delete-tag="handleDeleteTag">
+            <el-option
+              v-for="item in options"
+              :label="item.label"
+              :value="item.value">
+              <p>{{item.label}} {{item.value}}</p>
+            </el-option>
+          </el-select>
+        </div>
+      `,
+
+      data() {
+        return {
+          options: [{
+            value: '选项1',
+            label: '黄金糕'
+          }, {
+            value: '选项2',
+            label: '双皮奶'
+          }, {
+            value: '选项3',
+            label: '蚵仔煎'
+          }, {
+            value: '选项4',
+            label: '龙须面'
+          }, {
+            value: '选项5',
+            label: '北京烤鸭'
+          }],
+          value: ['选项1', '选项3']
+        };
+      },
+
+      methods: {
+        handleDeleteTag() {
+          console.log('delete tag');
+        }
+      }
+    }, true);
+    const tagCloseIcons = vm.$el.querySelectorAll('.el-tag__close');
+    expect(vm.value.length).to.equal(2);
+    tagCloseIcons[1].click();
+    setTimeout(() => {
+      expect(vm.value.length).to.equal(1);
+      expect(window.console.log.callCount).to.equal(1);
+      tagCloseIcons[0].click();
+      setTimeout(() => {
+        expect(vm.value.length).to.equal(0);
+        expect(window.console.log.callCount).to.equal(2);
+        window.console.log.restore();
+        done();
+      }, 100);
+    }, 100);
+  });
+
   it('multiple limit', done => {
     vm = getSelectVm({ multiple: true, multipleLimit: 1 });
     const options = vm.$el.querySelectorAll('.el-select-dropdown__item');
