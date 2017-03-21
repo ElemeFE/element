@@ -83,6 +83,7 @@
         type: Boolean,
         default: true
       },
+      formatTooltip: Function,
       disabled: {
         type: Boolean,
         default: false
