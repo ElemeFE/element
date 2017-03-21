@@ -181,6 +181,9 @@
         }
         this.$emit('click', event);
       },
+      focus() {
+        this.$refs.input.focus();
+      },
       setCurrentValue(value) {
         if (value === this.currentValue) return;
         this.$nextTick(_ => {
