@@ -49,17 +49,13 @@
     },
     watch: {
       defaultActive(value) {
-        const item = this.items[value];
-        if (item) {
-          this.activedIndex = item.index;
-          this.initOpenedMenu();
-        } else {
-          this.activedIndex = '';
-        }
-
+        this.updateActive(value);
       },
       defaultOpeneds(value) {
         this.openedMenus = value;
+      },
+      items(value) {
+        this.updateActive(this.defaultActive);
       }
     },
     methods: {
@@ -134,6 +130,15 @@
           this.$router.push(route);
         } catch (e) {
           console.error(e);
+        }
+      },
+      updateActive(value) {
+        const item = this.items[value];
+        if (item) {
+          this.activedIndex = item.index;
+          this.initOpenedMenu();
+        } else {
+          this.activedIndex = '';
         }
       }
     },
