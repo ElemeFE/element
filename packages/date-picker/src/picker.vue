@@ -49,6 +49,7 @@ const DEFAULT_FORMATS = {
   month: 'yyyy-MM',
   datetime: 'yyyy-MM-dd HH:mm:ss',
   time: 'HH:mm:ss',
+  week: 'yyyywWW',
   timerange: 'HH:mm:ss',
   daterange: 'yyyy-MM-dd',
   datetimerange: 'yyyy-MM-dd HH:mm:ss',
@@ -105,12 +106,14 @@ const TYPE_VALUE_RESOLVER_MAP = {
     }
   },
   week: {
-    formatter(value) {
-      if (value instanceof Date) {
-        const weekNumber = getWeekNumber(value);
-        return value.getFullYear() + 'w' + (weekNumber > 9 ? weekNumber : '0' + weekNumber);
-      }
-      return value;
+    formatter(value, format) {
+      let date = formatDate(value, format);
+      const week = getWeekNumber(value);
+
+      date = /WW/.test(date)
+            ? date.replace(/WW/, week < 10 ? '0' + week : week)
+            : date.replace(/W/, week);
+      return date;
     },
     parser(text) {
       const array = (text || '').split('w');
