@@ -13,7 +13,10 @@
         cities: cityOptions,
         checkedCities: ['上海', '北京'],
         checkedCities1: ['上海', '北京'],
-        isIndeterminate: true
+        isIndeterminate: true,
+        checkboxGroup1: ['上海'],
+        checkboxGroup2: ['北京'],
+        checkboxGroup3: ['广州']
       };
     },
     methods: {
@@ -195,7 +198,46 @@ The `min` and `max` properties can help you to limit the number of checked items
   };
 </script>
 ```
+
 :::
+
+### Button style (to be translated)
+
+Checkbox with button styles.
+
+:::demo 只需要把`el-checkbox`元素换成`el-checkbox-button`元素即可，此外，Element 还提供了`size`属性给按钮组，支持`large`和`small`两种（如果不设定为默认）
+```html
+<template>
+  <div style="margin: 15px 0;"></div>
+  <el-checkbox-group v-model="checkboxGroup1">
+    <el-checkbox-button v-for="city in cities" :label="city">{{city}}</el-checkbox-button>
+  </el-checkbox-group>
+  <div style="margin: 15px 0;"></div>
+  <el-checkbox-group v-model="checkboxGroup2" size="small">
+    <el-checkbox-button v-for="city in cities" :label="city">{{city}}</el-checkbox-button>
+  </el-checkbox-group>
+  <div style="margin: 15px 0;"></div>
+  <el-checkbox-group v-model="checkboxGroup3" size="large" fill="#FF0000" text-color="#000">
+    <el-checkbox-button v-for="city in cities" :label="city" :disabled="city === 'Shenzhen'">{{city}}</el-checkbox-button>
+  </el-checkbox-group>
+</template>
+<script>
+  const cityOptions = ['Shanghai', 'Beijing', 'Guangzhou', 'Shenzhen'];
+  export default {
+    data () {
+      return {
+        checkboxGroup1: ['Shanghai'],
+        checkboxGroup2: ['Beijing'],
+        checkboxGroup3: ['Guangzhou'],
+        cities: cityOptions
+      };
+    }
+  }
+</script>
+```
+
+:::
+
 ### Checkbox Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
@@ -208,8 +250,11 @@ The `min` and `max` properties can help you to limit the number of checked items
 | indeterminate  | 设置 indeterminate 状态，只负责样式控制    | boolean   |  — | false   |
 
 ### Checkbox-group Attributes (to be translated)
-| Attribute      | Description         | Type    | Options                         | Default|
+| 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
+| size     | Checkbox 按钮组尺寸   | string  | large, small  |    —     |
+| fill  | 按钮激活时的填充色和边框色    | string   | — | #20a0ff   |
+| text-color  | 按钮激活时的文本颜色    | string   | — | #ffffff   |
 | min     | minimum number of checkbox checked   | number    |       —        |     —    |
 | max     | maximum number of checkbox checked   | number    |       —        |     —    |
 

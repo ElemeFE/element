@@ -13,7 +13,14 @@
         cities: cityOptions,
         checkedCities: ['Shanghai', 'Beijing'],
         checkedCities1: ['Shanghai', 'Beijing'],
+<<<<<<< HEAD
         isIndeterminate: true
+=======
+        isIndeterminate: true,
+        checkboxGroup1: ['Shanghai'],
+        checkboxGroup2: ['Beijing'],
+        checkboxGroup3: ['Guangzhou']
+>>>>>>> 07b77b1... Add button style to checkbox
       };
     },
     methods: {
@@ -154,7 +161,10 @@ The `indeterminate` property can help you to achieve a 'check all' effect.
 ```
 :::
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 07b77b1... Add button style to checkbox
 ### Minimum / Maximum items checked
 
 The `min` and `max` properties can help you to limit the number of checked items.
@@ -185,6 +195,46 @@ The `min` and `max` properties can help you to limit the number of checked items
     }
   };
 </script>
+<<<<<<< HEAD
+=======
+```
+:::
+
+### Button style
+
+Checkbox with button styles.
+
+:::demo You just need to change `<el-checkbox>` element into `<el-checkbox-button>` element. We also provide `size` attribute for these buttons: `large` and `small`.
+```html
+<template>
+  <div style="margin: 15px 0;"></div>
+  <el-checkbox-group v-model="checkboxGroup1">
+    <el-checkbox-button v-for="city in cities" :label="city">{{city}}</el-checkbox-button>
+  </el-checkbox-group>
+  <div style="margin: 15px 0;"></div>
+  <el-checkbox-group v-model="checkboxGroup2" size="small">
+    <el-checkbox-button v-for="city in cities" :label="city">{{city}}</el-checkbox-button>
+  </el-checkbox-group>
+  <div style="margin: 15px 0;"></div>
+  <el-checkbox-group v-model="checkboxGroup3" size="large" fill="#FF0000" text-color="#000">
+    <el-checkbox-button v-for="city in cities" :label="city" :disabled="city === 'Shenzhen'">{{city}}</el-checkbox-button>
+  </el-checkbox-group>
+</template>
+<script>
+  const cityOptions = ['Shanghai', 'Beijing', 'Guangzhou', 'Shenzhen'];
+
+  export default {
+    data () {
+      return {
+        checkboxGroup1: ['Shanghai'],
+        checkboxGroup2: ['Beijing'],
+        checkboxGroup3: ['Guangzhou'],
+        cities: cityOptions
+      };
+    }
+  }
+</script>
+>>>>>>> 07b77b1... Add button style to checkbox
 ```
 :::
 
@@ -202,6 +252,9 @@ The `min` and `max` properties can help you to limit the number of checked items
 ### Checkbox-group Attributes
 | Attribute      | Description         | Type    | Options                         | Default|
 |---------- |-------- |---------- |-------------  |-------- |
+|size | the size of checkbox buttons | string | large/small | —
+|fill  | border and background color when button is active | string   | — | #20a0ff   |
+|text-color | font color when button is active | string   | — | #ffffff   |
 | min     | minimum number of checkbox checked   | number    |       —        |     —    |
 | max     | maximum number of checkbox checked   | number    |       —        |     —    |
 
