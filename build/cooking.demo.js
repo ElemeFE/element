@@ -90,7 +90,8 @@ cooking.add('vueMarkdown', {
         }
         return '</div></demo-block>\n';
       }
-    }]
+    }],
+    [require('markdown-it-container'), 'tip']
   ],
   preprocess: function(MarkdownIt, source) {
     MarkdownIt.renderer.rules.table_open = function() {
