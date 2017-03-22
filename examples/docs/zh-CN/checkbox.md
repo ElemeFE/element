@@ -12,6 +12,7 @@
         checkAll: false,
         cities: cityOptions,
         checkedCities: ['上海', '北京'],
+        checkedCities1: ['上海', '北京'],
         isIndeterminate: true
       };
     },
@@ -163,6 +164,38 @@
 ```
 :::
 
+### Minimum / Maximum items checked (to be translated)
+
+The `minimum` and `maximum` properties can help you to limit the number of checked items.
+
+:::demo
+
+```html
+<template>
+  <el-checkbox-group 
+    v-model="checkedCities1"
+    minimum="1"
+    maximum="2">
+    <el-checkbox v-for="city in cities" :label="city">{{city}}</el-checkbox>
+  </el-checkbox-group>
+</template>
+<script>
+  const cityOptions = ['上海', '北京', '广州', '深圳'];
+  let handlerLimitExceeded = (event) => {
+    currentEvent = event;
+    console.log(event);
+  }
+  export default {
+    data() {
+      return {
+        checkedCities1: ['上海', '北京'],
+        cities: cityOptions
+      };
+    }
+  };
+</script>
+```
+:::
 ### Checkbox Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
