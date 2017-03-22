@@ -107,7 +107,7 @@
       position: absolute;
       line-height: normal;
       white-space: normal;
-      z-index: 1;
+      z-index: var(--index-normal);
       top: 50%;
       transform: translateY(-50%);
     }
