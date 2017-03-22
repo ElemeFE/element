@@ -12,6 +12,7 @@
         checkAll: false,
         cities: cityOptions,
         checkedCities: ['Shanghai', 'Beijing'],
+        checkedCities1: ['Shanghai', 'Beijing'],
         isIndeterminate: true
       };
     },
@@ -147,6 +148,40 @@ The `indeterminate` property can help you to achieve a 'check all' effect.
         this.checkAll = checkedCount === this.cities.length;
         this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
       }
+    }
+  };
+</script>
+```
+:::
+
+
+### Minimum / Maximum items checked
+
+The `minimum` and `maximum` properties can help you to limit the number of checked items.
+
+:::demo
+
+```html
+<template>
+  <el-checkbox-group 
+    v-model="checkedCities1"
+    minimum="1"
+    maximum="2">
+    <el-checkbox v-for="city in cities" :label="city">{{city}}</el-checkbox>
+  </el-checkbox-group>
+</template>
+<script>
+  const cityOptions = ['Shanghai', 'Beijing', 'Guangzhou', 'Shenzhen'];
+  let handlerLimitExceeded = (event) => {
+    currentEvent = event;
+    console.log(event);
+  }
+  export default {
+    data() {
+      return {
+        checkedCities1: ['Shanghai', 'Beijing'],
+        cities: cityOptions
+      };
     }
   };
 </script>
