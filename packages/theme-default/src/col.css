@@ -8,6 +8,9 @@
 .el-col-0 {
   display: none;
 }
+.el-col-offset-0 {
+  margin-left: 0;
+}
 
 @for $i from 1 to 24 {
   .el-col-$i {
@@ -29,6 +32,9 @@
 @media (max-width: 768px) {
   .el-col-xs-0 {
     display: none;
+  }
+  .el-col-xs-offset-0 {
+    margin-left: 0;
   }
   @for $i from 1 to 24 {
     .el-col-xs-$i {
@@ -52,6 +58,9 @@
   .el-col-sm-0 {
     display: none;
   }
+  .el-col-sm-offset-0 {
+    margin-left: 0;
+  }
   @for $i from 1 to 24 {
     .el-col-sm-$i {
       width: calc(1 / 24 * $(i) * 100)%;
@@ -73,6 +82,9 @@
   .el-col-md-0 {
     display: none;
   }
+  .el-col-md-offset-0 {
+    margin-left: 0;
+  }
   @for $i from 1 to 24 {
     .el-col-md-$i {
       width: calc(1 / 24 * $(i) * 100)%;
@@ -93,6 +105,9 @@
 @media (min-width: 1200px) {
   .el-col-lg-0 {
     display: none;
+  }
+  .el-col-lg-offset-0 {
+    margin-left: 0;
   }
   @for $i from 1 to 24 {
     .el-col-lg-$i {
