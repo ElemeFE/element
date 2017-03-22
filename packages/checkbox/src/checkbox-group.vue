@@ -9,7 +9,9 @@
     mixins: [Emitter],
 
     props: {
-      value: {}
+      value: {},
+      minimum: String,
+      maximum: String
     },
 
     watch: {

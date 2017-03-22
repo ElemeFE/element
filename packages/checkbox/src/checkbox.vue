@@ -66,7 +66,18 @@
 
         set(val) {
           if (this.isGroup) {
+            let isLimitExceeded = false;
+            (this._checkboxGroup.minimum !== undefined &&
+              val.length < this._checkboxGroup.minimum &&
+              (isLimitExceeded = true));
+
+            (this._checkboxGroup.maximum !== undefined &&
+              val.length > this._checkboxGroup.maximum &&
+              (isLimitExceeded = true));
+
+            isLimitExceeded === false &&
             this.dispatch('ElCheckboxGroup', 'input', [val]);
+
           } else if (this.value !== undefined) {
             this.$emit('input', val);
           } else {

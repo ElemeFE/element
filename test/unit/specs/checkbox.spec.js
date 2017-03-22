@@ -68,6 +68,45 @@ describe('Checkbox', () => {
     });
   });
 
+  it('checkbox group minimum and maximum', done => {
+    vm = createVue({
+      template: `
+        <el-checkbox-group 
+          v-model="checkList" 
+          minimum="1" 
+          maximum="2"
+        >
+          <el-checkbox label="a" ref="a"></el-checkbox>
+          <el-checkbox label="b" ref="b"></el-checkbox>
+          <el-checkbox label="c" ref="c"></el-checkbox>
+          <el-checkbox label="d" ref="d"></el-checkbox>
+        </el-checkbox-group>
+      `,
+      data() {
+        return {
+          checkList: ['a'],
+          lastEvent: null
+        };
+      }
+    }, true);
+    expect(vm.checkList.length === 1).to.be.true;
+    vm.$refs.a.$el.click();
+    vm.$nextTick(() => {
+      expect(vm.checkList.indexOf('a') !== -1).to.be.true;
+      vm.$refs.b.$el.click();
+      vm.$nextTick(() => {
+        expect(vm.checkList.indexOf('a') !== -1).to.be.true;
+        expect(vm.checkList.indexOf('b') !== -1).to.be.true;
+        vm.$refs.c.$el.click();
+        vm.$nextTick(() => {
+          expect(vm.checkList.indexOf('c') !== -1).to.be.false;
+          expect(vm.checkList.indexOf('d') !== -1).to.be.false;
+          done();
+        });
+      });
+    });
+  });
+
   it('nested group', done => {
     vm = createVue({
       template: `
