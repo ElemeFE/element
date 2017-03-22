@@ -1,5 +1,5 @@
 <!--
-推荐使用 http://eleme-issue.surge.sh/#/zh-CN 直接生成 issue。
+请使用 http://eleme-issue.surge.sh/#/zh-CN 生成 issue，否则 issue 会被直接关闭。
 
 提交 issue 前请务必查看 FAQ：https://github.com/ElemeFE/element/blob/master/FAQ.md。如果你的问题可以在 FAQ 中找到解决方案，我们会直接关闭 issue。
 
@@ -9,7 +9,7 @@ issue 仅用于提交 bug 或 feature 以及设计相关的内容，其它疑问
 -->
 
 <!--
-It is recommended to generate issue by http://eleme-issue.surge.sh/#/en-US.
+It is required to generate issue with http://eleme-issue.surge.sh/#/en-US.
 
 Issues are exclusively for bug reports and feature requests. For other questions, please visit gitter: https://gitter.im/ElemeFE/element.
 
@@ -17,13 +17,13 @@ Thank you for contributing! Please carefully read the following before opening y
  -->
 
 ### ElementUI version
-<!-- 1.0.0-rc.2 -->
+<!-- 1.2.0 -->
 
 ### OS/Browsers version
 <!-- macOS/Chrome 53 -->
 
 ### Vue version
-<!-- 2.0.0-rc.4 -->
+<!-- 2.2.0 -->
 
 ### Reproduction Link
 <!-- A minimal JSBin, JSFiddle, Codepen, or a GitHub repository that can reproduce the bug. -->
