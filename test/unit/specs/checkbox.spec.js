@@ -73,8 +73,8 @@ describe('Checkbox', () => {
       template: `
         <el-checkbox-group 
           v-model="checkList" 
-          minimum="1" 
-          maximum="2"
+          :min="1" 
+          :max="2"
         >
           <el-checkbox label="a" ref="a"></el-checkbox>
           <el-checkbox label="b" ref="b"></el-checkbox>

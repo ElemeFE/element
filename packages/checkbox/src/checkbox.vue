@@ -67,12 +67,12 @@
         set(val) {
           if (this.isGroup) {
             let isLimitExceeded = false;
-            (this._checkboxGroup.minimum !== undefined &&
-              val.length < this._checkboxGroup.minimum &&
+            (this._checkboxGroup.min !== undefined &&
+              val.length < this._checkboxGroup.min &&
               (isLimitExceeded = true));
 
-            (this._checkboxGroup.maximum !== undefined &&
-              val.length > this._checkboxGroup.maximum &&
+            (this._checkboxGroup.max !== undefined &&
+              val.length > this._checkboxGroup.max &&
               (isLimitExceeded = true));
 
             isLimitExceeded === false &&
