@@ -10,8 +10,8 @@
 
     props: {
       value: {},
-      minimum: String,
-      maximum: String
+      min: Number,
+      max: Number
     },
 
     watch: {
