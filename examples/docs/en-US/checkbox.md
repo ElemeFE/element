@@ -157,7 +157,7 @@ The `indeterminate` property can help you to achieve a 'check all' effect.
 
 ### Minimum / Maximum items checked
 
-The `minimum` and `maximum` properties can help you to limit the number of checked items.
+The `min` and `max` properties can help you to limit the number of checked items.
 
 :::demo
 
@@ -165,8 +165,8 @@ The `minimum` and `maximum` properties can help you to limit the number of check
 <template>
   <el-checkbox-group 
     v-model="checkedCities1"
-    minimum="1"
-    maximum="2">
+    :min="1"
+    :max="2">
     <el-checkbox v-for="city in cities" :label="city">{{city}}</el-checkbox>
   </el-checkbox-group>
 </template>
@@ -198,6 +198,12 @@ The `minimum` and `maximum` properties can help you to limit the number of check
 | disabled  | if the checkbox is disabled   | boolean   |  — | false   |
 | checked  | if the checkbox is checked   | boolean   |  — | false   |
 | indeterminate  | same as `indeterminate` in native checkbox | boolean   |  — | false   |
+
+### Checkbox-group Attributes
+| Attribute      | Description         | Type    | Options                         | Default|
+|---------- |-------- |---------- |-------------  |-------- |
+| min     | minimum number of checkbox checked   | number    |       —        |     —    |
+| max     | maximum number of checkbox checked   | number    |       —        |     —    |
 
 ### Checkbox-group Events
 | Event Name | Description | Parameters |

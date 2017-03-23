@@ -166,7 +166,7 @@
 
 ### Minimum / Maximum items checked (to be translated)
 
-The `minimum` and `maximum` properties can help you to limit the number of checked items.
+The `min` and `max` properties can help you to limit the number of checked items.
 
 :::demo
 
@@ -174,8 +174,8 @@ The `minimum` and `maximum` properties can help you to limit the number of check
 <template>
   <el-checkbox-group 
     v-model="checkedCities1"
-    minimum="1"
-    maximum="2">
+    :min="1"
+    :max="2">
     <el-checkbox v-for="city in cities" :label="city">{{city}}</el-checkbox>
   </el-checkbox-group>
 </template>
@@ -206,6 +206,13 @@ The `minimum` and `maximum` properties can help you to limit the number of check
 | disabled  | 按钮禁用    | boolean   |  — | false   |
 | checked  | 当前是否勾选    | boolean   |  — | false   |
 | indeterminate  | 设置 indeterminate 状态，只负责样式控制    | boolean   |  — | false   |
+
+### Checkbox-group Attributes (to be translated)
+| Attribute      | Description         | Type    | Options                         | Default|
+|---------- |-------- |---------- |-------------  |-------- |
+| min     | minimum number of checkbox checked   | number    |       —        |     —    |
+| max     | maximum number of checkbox checked   | number    |       —        |     —    |
+
 
 ### Checkbox-group Events
 | 事件名称      | 说明    | 回调参数      |
