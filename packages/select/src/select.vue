@@ -599,8 +599,8 @@
       deleteTag(event, tag) {
         let index = this.selected.indexOf(tag);
         if (index > -1 && !this.disabled) {
-          let deletedTag = this.value.splice(index, 1)[0];
-          this.$emit('delete-tag', deletedTag);
+          this.value.splice(index, 1);
+          this.$emit('delete-tag', tag);
         }
         event.stopPropagation();
       },
