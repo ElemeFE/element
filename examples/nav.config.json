@@ -18,6 +18,10 @@
         {
           "path": "/custom-theme",
           "name": "自定义主题"
+        },
+        {
+          "path": "/transition",
+          "name": "内置过渡动画"
         }
       ]
     },
@@ -248,6 +252,10 @@
         {
           "path": "/custom-theme",
           "name": "Custom Theme"
+        },
+        {
+          "path": "/transition",
+          "name": "Built-in transition"
         }
       ]
     },
