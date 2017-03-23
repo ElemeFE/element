@@ -63,6 +63,7 @@ import CollapseItem from '../packages/collapse-item/index.js';
 import Cascader from '../packages/cascader/index.js';
 import ColorPicker from '../packages/color-picker/index.js';
 import locale from 'element-ui/src/locale';
+import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
 const components = [
   Pagination,
@@ -122,7 +123,8 @@ const components = [
   Collapse,
   CollapseItem,
   Cascader,
-  ColorPicker
+  ColorPicker,
+  CollapseTransition
 ];
 
 const install = function(Vue, opts = {}) {
@@ -156,6 +158,7 @@ module.exports = {
   locale: locale.use,
   i18n: locale.i18n,
   install,
+  CollapseTransition,
   Loading,
   Pagination,
   Dialog,

@@ -26,7 +26,7 @@ export default {
     },
     transition: {
       type: String,
-      default: 'fade-in-linear'
+      default: 'el-fade-in-linear'
     },
     popperOptions: {
       default() {

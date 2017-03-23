@@ -208,7 +208,7 @@ tooltip 内不支持 disabled form 元素，参考[MDN](https://developer.mozill
 |  value(v-model) |  状态是否可见  | Boolean           | — |  false |
 |  disabled       |  Tooltip 是否可用  | Boolean           | — |  false |
 |  offset        |  出现位置的偏移量  | Number           | — |  0 |
-|  transition     |  定义渐变动画      | String             | — | `fade-in-linear` |
+|  transition     |  定义渐变动画      | String             | — | el-fade-in-linear |
 |  visible-arrow   |  是否显示 Tooltip 箭头，更多参数可见[Vue-popper](https://github.com/element-component/vue-popper) | Boolean | — | true |
 |  popper-options        | [popper.js](https://popper.js.org/documentation.html) 的参数 | Object            | 参考 [popper.js](https://popper.js.org/documentation.html) 文档 | { boundariesElement: 'body', gpuAcceleration: false } |
 | open-delay | 延迟出现，单位毫秒 | Number | — | 0 |
