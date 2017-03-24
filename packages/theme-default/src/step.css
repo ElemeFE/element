@@ -6,6 +6,10 @@
     position: relative;
     vertical-align: top;
 
+    &:last-child .el-step__main {
+      padding-right: 0;
+    }
+
     @when horizontal {
       display: inline-block;
     }
