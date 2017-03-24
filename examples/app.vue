@@ -25,6 +25,13 @@
     text-decoration: none;
   }
 
+  code {
+    background-color: #f9fafc;
+    padding: 0 4px;
+    border: 1px solid #eaeefb;
+    border-radius: 4px;
+  }
+
   button, input, select, textarea {
     font-family: inherit;
     font-size: inherit;
@@ -88,9 +95,23 @@
         }
       }
     }
+
     p {
       font-size: 14px;
       color: #5e6d82;
+      line-height: 1.5em;
+    }
+
+    .tip {
+      padding: 8px 16px;
+      background-color: #ECF8FF;
+      border-radius: 4px;
+      border-left: #50bfff 5px solid;
+
+      code {
+        background-color: rgba(#fff, .7);
+        color: #445368;
+      }
     }
   }
   .demo {
