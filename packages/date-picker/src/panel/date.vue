@@ -296,14 +296,8 @@
           this.date.setMonth(value.getMonth());
           this.date.setDate(value.getDate());
         } else if (this.selectionMode === 'week') {
-          let date = formatDate(value.date, this.format || 'yyyywWW');
-          const week = this.week = value.week;
-
-          date = /WW/.test(date)
-            ? date.replace(/WW/, week < 10 ? '0' + week : week)
-            : date.replace(/W/, week);
-
-          this.$emit('pick', date);
+          this.week = value.week;
+          this.$emit('pick', value.date);
         }
 
         this.resetDate();
