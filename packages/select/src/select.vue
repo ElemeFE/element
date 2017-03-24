@@ -600,7 +600,7 @@
         let index = this.selected.indexOf(tag);
         if (index > -1 && !this.disabled) {
           this.value.splice(index, 1);
-          this.$emit('delete-tag', tag);
+          this.$emit('remove-tag', tag);
         }
         event.stopPropagation();
       },

@@ -647,7 +647,7 @@ Create and select new items that are not included in select options
 |---------|---------|---------|
 | change | triggers when the selected value changes | current selected value |
 | visible-change | triggers when the dropdown appears/disappears | true when it appears, and false otherwise |
-| delete-tag | triggers when a tag is deleted in multiple mode | deleted tag value |
+| remove-tag | triggers when a tag is removed in multiple mode | removed tag value |
 
 ### Option Group Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
