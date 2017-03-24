@@ -442,12 +442,12 @@ describe('Select', () => {
     }, 100);
   });
 
-  it('multiple delete-tag', done => {
+  it('multiple remove-tag', done => {
     sinon.stub(window.console, 'log');
     vm = createVue({
       template: `
         <div>
-          <el-select v-model="value" multiple @delete-tag="handleDeleteTag">
+          <el-select v-model="value" multiple @remove-tag="handleRemoveTag">
             <el-option
               v-for="item in options"
               :label="item.label"
@@ -481,8 +481,8 @@ describe('Select', () => {
       },
 
       methods: {
-        handleDeleteTag() {
-          console.log('delete tag');
+        handleRemoveTag() {
+          console.log('remove tag');
         }
       }
     }, true);
