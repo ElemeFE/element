@@ -71,6 +71,7 @@ export default {
       pageClassifier: ''
     },
     messagebox: {
+      title: 'Mensagem',
       confirm: 'Confirmar',
       cancel: 'Cancelar',
       error: 'Erro!'
