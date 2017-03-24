@@ -172,8 +172,12 @@
       handleInput(event) {
         const value = event.target.value;
         this.$emit('input', value);
-        this.setCurrentValue(value);
         this.$emit('change', value);
+        if (this.type === 'text') {
+          this.$refs.input.value = this.currentValue;
+        } else {
+          this.$refs.textarea.value = this.currentValue;
+        }
       },
       handleIconClick(event) {
         if (this.onIconClick) {
