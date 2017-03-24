@@ -85,7 +85,6 @@
               :year="year"
               :month="month"
               :date="date"
-              :value="value"
               :week="week"
               :selection-mode="selectionMode"
               :first-day-of-week="firstDayOfWeek"
@@ -127,7 +126,7 @@
 </template>
 
 <script type="text/babel">
-  import { formatDate, parseDate } from '../util';
+  import { formatDate, parseDate, getWeekNumber } from '../util';
   import Locale from 'element-ui/src/mixins/locale';
   import ElInput from 'element-ui/packages/input';
   import TimePicker from './time';
@@ -175,15 +174,14 @@
           if (this.currentView !== 'year' || this.currentView !== 'month') {
             this.currentView = 'month';
           }
+        } else if (newVal === 'week') {
+          this.week = getWeekNumber(this.date);
         }
       },
 
       date(newVal) {
-        /* istanbul ignore next */
-        if (!this.year) {
-          this.year = newVal.getFullYear();
-          this.month = newVal.getMonth();
-        }
+        this.year = newVal.getFullYear();
+        this.month = newVal.getMonth();
       }
     },
 
@@ -356,10 +354,6 @@
     },
 
     mounted() {
-      if (this.selectionMode === 'month') {
-        this.currentView = 'month';
-      }
-
       if (this.date && !this.year) {
         this.year = this.date.getFullYear();
         this.month = this.date.getMonth();
