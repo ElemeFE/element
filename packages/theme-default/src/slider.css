@@ -80,23 +80,11 @@
       background-color: transparent;
       text-align: center;
       user-select: none;
+      @utils-vertical-center;
 
       .el-tooltip {
-        line-height: 1;
-        height: 100%;
-        display: block;
-      }
-
-      .el-tooltip::after {
-        content: '';
-        width: 0;
-        height: 100%;
+        vertical-align: middle;
         display: inline-block;
-        vertical-align: middle;
-      }
-
-      .el-tooltip__rel {
-        vertical-align: middle;
       }
 
       &:hover,

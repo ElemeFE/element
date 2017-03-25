@@ -56,6 +56,10 @@ export default {
       noData: 'اطلاعاتی وجود ندارد',
       placeholder: 'انتخاب کنید'
     },
+    cascader: {
+      noMatch: 'هیچ داده‌ای پیدا نشد',
+      placeholder: 'انتخاب کنید'
+    },
     pagination: {
       goto: 'برو به',
       pagesize: '/صفحه',

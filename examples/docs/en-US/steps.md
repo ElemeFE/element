@@ -114,7 +114,7 @@ Vertical step bars.
 
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------- |---------- |-------------  |-------- |
-| space | the spacing of each step, will be responsive if omitted | Number | — | — |
+| space | the spacing of each step, will be responsive if omitted. Support percentage. | Number,String | — | — |
 | direction | display direction | string | vertical/horizontal | horizontal |
 | active | current activation step  | number | — | 0 |
 | process-status | status of current step | string | wait/process/finish/error/success | process |

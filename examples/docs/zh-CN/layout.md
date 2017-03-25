@@ -308,7 +308,7 @@
 
 ### 响应式布局
 
-参照了 Bootstrap 的 响应式设计，预设了四个响应尺寸：`xs` `sm` `md` `lg`。
+参照了 Bootstrap 的 响应式设计，预设了四个响应尺寸：`xs`、`sm`、`md`和`lg`。
 
 ::: demo
 ```html

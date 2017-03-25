@@ -127,7 +127,6 @@
   }
   @b radio-button {
     position: relative;
-    overflow: hidden;
     display: inline-block;
 
     @e inner {
@@ -138,6 +137,7 @@
       cursor: pointer;
       background: var(--button-default-fill);
       border: var(--border-base);
+      border-left: 0;
       color: var(--button-default-color);
       -webkit-appearance: none;
       text-align: center;
@@ -157,7 +157,7 @@
 
       & [class*="el-icon-"] {
         line-height: 0.9;
-        
+
         & + span {
           margin-left: 5px;
         }
@@ -176,6 +176,7 @@
           color: var(--radio-button-checked-color);
           background-color: var(--radio-button-checked-fill);
           border-color: var(--radio-button-checked-border-color);
+          box-shadow: -1px 0 0 0 var(--radio-button-checked-border-color);
         }
       }
 
@@ -190,12 +191,11 @@
       }
     }
 
-    &:not(:last-child) {
-      margin-right: -1px;
-    }
     &:first-child {
       .el-radio-button__inner {
+        border-left: var(--border-base);
         border-radius: var(--border-radius-base) 0 0 var(--border-radius-base);
+        box-shadow: none !important;
       }
     }
     &:last-child {

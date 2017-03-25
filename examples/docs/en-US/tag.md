@@ -22,6 +22,9 @@
 
       showInput() {
         this.inputVisible = true;
+        this.$nextTick(_ => {
+          this.$refs.saveTagInput.$refs.input.focus();
+        });
       },
 
       handleInputConfirm() {
@@ -35,28 +38,6 @@
     }
   }
 </script>
-
-<style>
-  .demo-box.demo-tag {
-    .el-tag + .el-tag {
-      margin-left: 10px;
-    }
-    .button-new-tag {
-      margin-left: 10px;
-      height: 24px;
-      line-height: 22px;
-      padding: 0 *;
-    }
-    .input-new-tag {
-      width: 78px;
-      margin-left: 10px;
-
-      .el-input__inner {
-        height: 24px;
-      }
-    }
-  }
-</style>
 
 ## Tag
 
@@ -115,6 +96,7 @@ You can use the `close` event to add and remove tag dynamically.
 :::demo
 ```html
 <el-tag
+  :key="tag"
   v-for="tag in dynamicTags"
   :closable="true"
   :close-transition="false"
@@ -149,6 +131,9 @@ You can use the `close` event to add and remove tag dynamically.
 
       showInput() {
         this.inputVisible = true;
+        this.$nextTick(_ => {
+          this.$refs.saveTagInput.$refs.input.focus();
+        });
       },
 
       handleInputConfirm() {

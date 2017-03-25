@@ -973,7 +973,7 @@ When the data structure is complex, you can use group header to show the data hi
 
 Single row selection is supported.
 
-:::demo Table supports single row selection. You can activate it by adding the `highlight-currnet-row` attribute. An event called `current-change` will be triggered when row selection changes, and its parameters are the rows after and before this change: `currentRow` and `oldCurrentRow`. If you need to display row index, you can add a new `el-table-column` with its `type` attribute assigned to `index`, and you will see the index starting from 1.
+:::demo Table supports single row selection. You can activate it by adding the `highlight-current-row` attribute. An event called `current-change` will be triggered when row selection changes, and its parameters are the rows after and before this change: `currentRow` and `oldCurrentRow`. If you need to display row index, you can add a new `el-table-column` with its `type` attribute assigned to `index`, and you will see the index starting from 1.
 ```html
 <template>
   <el-table
@@ -1429,6 +1429,7 @@ When the row content is too long and you do not want to display the horizontal s
           address: 'No. 189, Grove St, Los Angeles',
           zip: 'CA 90036'
         }]
+      }
     }
   }
 </script>

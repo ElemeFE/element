@@ -56,6 +56,10 @@ export default {
       noData: '無資料',
       placeholder: '請選擇'
     },
+    cascader: {
+      noMatch: '無匹配資料',
+      placeholder: '請選擇'
+    },
     pagination: {
       goto: '前往',
       pagesize: '項/頁',

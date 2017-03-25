@@ -56,6 +56,10 @@ export default {
       noData: 'ไม่พบข้อมูล',
       placeholder: 'เลือก'
     },
+    cascader: {
+      noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
+      placeholder: 'เลือก'
+    },
     pagination: {
       goto: 'ไปที่',
       pagesize: '/หน้า',

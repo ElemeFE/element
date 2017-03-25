@@ -56,6 +56,10 @@ export default {
       noData: 'Aucun résultat',
       placeholder: 'Choisir'
     },
+    cascader: {
+      noMatch: 'Aucune correspondance',
+      placeholder: 'Choisir'
+    },
     pagination: {
       goto: 'Aller à',
       pagesize: '/page',
