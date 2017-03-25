@@ -14,7 +14,6 @@
     width: var(--msgbox-width);
     border-radius: var(--msgbox-border-radius);
     font-size: var(--msgbox-font-size);
-    -webkit-user-select: none;
     overflow: hidden;
     backface-visibility: hidden;
     @e wrapper {

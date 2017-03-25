@@ -1,5 +1,85 @@
 ## 更新日志
 
+### 1.2.5
+*2017-03-19*
+
+- 新增 Slider 的 `show-tooltip` 属性，#3430（by @gabrielboliveira）
+- 修复动态改变 Slider `step` 的精度时，其值的精度不随之改变的问题，#3475（by @gabrielboliveira）
+- 修复含有 Tooltip 的 Table 在当前窗口高度临界于出现滚动条时，弹出 Tooltip 会导致 Table 宽度抖动的问题，#3549
+- 修复 Table 在某些情况下高度自动往复变小的问题，#3539
+- 修复 Popover 中的弹出类组件在点击 Popover 的空白区域时不隐藏的问题，#3451（by @nicoeg）
+- 现在 `xs`、`sm`、`md`、`lg` 值为 0 的 Col 会被正确隐藏，#3564
+
+### 1.2.4
+*2017-03-09*
+
+- 修复 Carousel 有时不响应数据动态更新的问题，#3159
+- 修复 Table 的 `cell-dblclick` 事件无法触发的问题，#3305
+- 修复禁用的 Cascader 不显示默认值的问题，#3297
+- 修复 Slider 在 `show-input` 时初始值不正确的问题，#3281
+- 修复 Tooltip 在服务端渲染时报错的问题，#3214
+- 修复 DatePicker 的 `range-separator` 属性有时无效的问题，#3378
+- 新增指令式调用 Loading 时响应动态加载文案的功能，#3345（by @imyzf）
+- 新增 Upload 的 `http-request` 参数，用于实现覆盖默认的上传行为，#3387
+- 新增 Col 支持将 `span` 值设为 0 时隐藏该列的功能，#3313
+
+### 1.2.3
+*2017-03-01*
+- 修复 Tooltip, #3152
+
+### 1.2.2
+*2017-02-28*
+
+- 修复若干组件与 Vue 2.2 不兼容的问题，#3002 #3067 #3097
+- 修复嵌套在 Dialog 内的 Cascader 下拉框有时出现在 Dialog 之后的问题，#3035
+- 修复 Cascader 的 `change` 事件参数在某些情况下不正确的问题，#3014
+- 新增 ColorPicker 的 `change` 事件，#3049（by @nicoeg）
+- 修复 Tree 的 `setCheckedKeys` 方法对非叶子节点无效的问题，#2967（by @rainyLeo）
+- 修复 Tooltip 和 `router-link` 共用报错的问题，#3143
+
+### 1.2.1
+*2017-02-23*
+
+- 修复用于 SSR 时报错的问题，#2982
+- 修复 Tabs 左右滚动按钮无法出现的问题，#2974
+- 修复 Table 在动态改变 `height` 属性后高度计算错误的问题，#2979
+- 新增 Table 的 `cell-dblclick` 和 `header-dragend` 事件，#2983 #2988
+- 修复行内表单在指定 `label-width` 时表单元素出现左边距的问题，#2990
+- 修复 Cascader 在某些情况下弹出框位置不正确的问题，#2992
+
+### 1.2.0 Lithium
+*2017-02-22*
+
+#### 新特性：
+- 新增 Cascader、ColorPicker 组件
+- Tabs 新增 `editable` 和 `addable` 属性以及 `tab-add` 和 `edit` 事件
+- 新增 UMD 格式的语言包文件
+- Tree 新增 `node-expand` 和 `node-collapse` 事件，#2507（by @masterzhang）
+- Tree 新增 `indent` 属性，#2713
+- Dialog 的标题支持以具名 slot 的方式传入，#2657
+- Slider 新增 `range` 属性，支持范围选择，#2751
+- Upload
+  - 新增 `auto-upload` 属性，用以控制是否在选择图片后自动上传，默认为开启
+  - 新增 `on-change` 钩子函数在文件状态改变时会调用
+  - 新增 `list-type` 设置文件列表展示外观
+- Autocomplete 滚动条使用 el-scrollbar
+
+#### 修复：
+- Carousel 不响应内容动态更新的问题，#2775
+- TimePicker 在某些情况下数字位置不居中的问题，#2948
+- TimePicker 在某些情况下范围选择时仅响应偶数次点击的问题，#2884（by @k55k32）
+- Tab 修复 tab-pane 动态显示时插入顺序问题, #2898
+- Menu 修复将 `default-active` 设置为不存在的 index 时 menu-item 还会高亮的问题
+- Collapse 修复嵌套使用时的样式问题
+
+#### 非兼容性更新:
+- 重构 Tooltip，不再生成额外的 HTML 标签，确保被 tooltip 包裹的组件的结构不变，#2459
+- Dialog 的遮罩层现在默认插入至 body 元素上，#2556
+- Tabs 现在内部不再维护 tab 实例，需要在外部通过相关事件去处理, #2567
+- Upload 重构升级
+  - `default-file-list` 属性更名为 `file-list`, `show-upload-list` 属性更名为 `show-file-list`
+  - `thumbnail-mode` 属性被移除
+
 ### 1.1.6
 *2017-01-23*
 
@@ -73,7 +153,7 @@
 ### 1.1.0 Helium
 *2016-12-29*
 
-新特性：
+#### 新特性：
 - 新增 Carousel、Collapse 组件
 - 支持 SSR
 - 组件内的滚动条样式优化
@@ -84,11 +164,11 @@
 - Autocomplete 新增 `popper-class`属性
 - Tab-Pane 新增 name 为 label 的具名 `slot`，用于实现自定义标签内容
 
-修复：
+#### 修复：
 - DatePicker 的 `change` 事件错误地触发多次的问题，#2070
 - Tabs 组件内 tab-pane 初始化时宽度抖动的问题，#1883
 
-非兼容性更新：
+#### 非兼容性更新：
 - 最低兼容 Vue 2.1.6
 - Form validateField() 方法回调的参数更新
 - Alert 取消了 render-content 属性，现在自定义模板需要通过默认 slot 传入

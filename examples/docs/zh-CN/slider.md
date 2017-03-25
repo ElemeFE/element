@@ -4,10 +4,12 @@
       return {
         value1: 0,
         value2: 50,
-        value3: 42,
-        value4: 0,
+        value3: 36,
+        value4: 42,
         value5: 0,
-        value6: 0
+        value6: 0,
+        value7: 0,
+        value8: [4, 8]
       };
     }
   }
@@ -60,8 +62,12 @@
     <el-slider v-model="value2"></el-slider>
   </div>
   <div class="block">
+    <span class="demonstration">隐藏 Tooltip</span>
+    <el-slider v-model="value3" :show-tooltip="false"></el-slider>
+  </div>
+  <div class="block">
     <span class="demonstration">禁用</span>
-    <el-slider v-model="value3" disabled></el-slider>
+    <el-slider v-model="value4" disabled></el-slider>
   </div>
 </template>
 
@@ -71,7 +77,8 @@
       return {
         value1: 0,
         value2: 50,
-        value3: 42
+        value3: 36,
+        value4: 42
       }
     }
   }
@@ -89,14 +96,14 @@
   <div class="block">
     <span class="demonstration">不显示间断点</span>
     <el-slider
-      v-model="value4"
+      v-model="value5"
       :step="10">
     </el-slider>
   </div>
   <div class="block">
     <span class="demonstration">显示间断点</span>
     <el-slider
-      v-model="value5"
+      v-model="value6"
       :step="10"
       show-stops>
     </el-slider>
@@ -107,8 +114,8 @@
   export default {
     data() {
       return {
-        value4: 0,
-        value5: 0
+        value5: 0,
+        value6: 0
       }
     }
   }
@@ -125,7 +132,7 @@
 <template>
   <div class="block">
     <el-slider
-      v-model="value6"
+      v-model="value7"
       show-input>
     </el-slider>
   </div>
@@ -135,7 +142,36 @@
   export default {
     data() {
       return {
-        value6: 0
+        value7: 0
+      }
+    }
+  }
+</script>
+```
+:::
+
+### 范围选择
+
+支持选择某一数值范围
+
+:::demo 设置`range`即可开启范围选择，此时绑定值是一个数组，其元素分别为最小边界值和最大边界值
+```html
+<template>
+  <div class="block">
+    <el-slider
+      v-model="value8"
+      range
+      show-stops
+      :max="10">
+    </el-slider>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        value8: [4, 8]
       }
     }
   }
@@ -150,9 +186,11 @@
 | max | 最大值 | number | — | 100 |
 | disabled | 是否禁用 | boolean | — | false |
 | step | 步长 | number | — | 1 |
-| show-input | 是否显示输入框 | boolean | — | false |
+| show-input | 是否显示输入框，仅在非范围选择时有效 | boolean | — | false |
 | show-input-controls | 在显示输入框的情况下，是否显示输入框的控制按钮 | boolean | — | true|
 | show-stops | 是否显示间断点 | boolean | — | false |
+| show-tooltip | 是否显示 tooltip | boolean | — | true |
+| range | 是否为范围选择 | boolean | — | false |
 
 ### Events
 | 事件名称      | 说明    | 回调参数      |

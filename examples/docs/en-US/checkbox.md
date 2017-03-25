@@ -1,5 +1,5 @@
 <script>
-  const cityOptions = ['ShangHai', 'BeiJing', 'GuangZhou', 'ShenZhen'];
+  const cityOptions = ['Shanghai', 'Beijing', 'Guangzhou', 'Shenzhen'];
   module.exports = {
     data() {
       return {
@@ -11,8 +11,8 @@
         isValid: 'valid',
         checkAll: false,
         cities: cityOptions,
-        checkedCities: ['上海', '北京'],
-        isIndeterminate: false
+        checkedCities: ['Shanghai', 'Beijing'],
+        isIndeterminate: true
       };
     },
     methods: {
@@ -40,7 +40,7 @@ A group of options for multiple choices.
 
 Checkbox can be used alone to switch between two states.
 
-:::demo Define `v-model`(bind variable) in `el-checkbox`. The default value is a `Boolean` for single `checkbox`, and it becomes `true` when selected.
+:::demo Define `v-model`(bind variable) in `el-checkbox`. The default value is a `Boolean` for single `checkbox`, and it becomes `true` when selected. Content inside the `el-checkbox` tag will become the description following the button of the checkbox.
 
 ```html
 <template>
@@ -87,7 +87,7 @@ Disabled state for checkbox.
 
 It is used for multiple checkboxes which are bound in one group, and indicates whether one option is selected by checking if it is checked.
 
-:::demo `checkbox-group` element can manage multiple checkboxes in one group by using `v-model` which is bound as an `Array`. `label` can modify the description following the button of the checkbox. It is also the value of the checkbox. `label` corresponds with the element values in the array. It is selected if the specified value exists in the array, and vice versa.
+:::demo `checkbox-group` element can manage multiple checkboxes in one group by using `v-model` which is bound as an `Array`. Inside the `el-checkbox` element, `label` is the value of the checkbox. If no content is nested in that tag, `label` will be rendered as the description following the button of the checkbox. `label` also corresponds with the element values in the array. It is selected if the specified value exists in the array, and vice versa.
 
 ```html
 <template>
@@ -127,14 +127,14 @@ The `indeterminate` property can help you to achieve a 'check all' effect.
   </el-checkbox-group>
 </template>
 <script>
-  const cityOptions = ['ShangHai', 'BeiJing', 'GuangZhou', 'ShenZhen'];
+  const cityOptions = ['Shanghai', 'Beijing', 'Guangzhou', 'Shenzhen'];
   export default {
     data() {
       return {
         checkAll: true,
-        checkedCities: [],
+        checkedCities: ['Shanghai', 'Beijing'],
         cities: cityOptions,
-        isIndeterminate: false
+        isIndeterminate: true
       };
     },
     methods: {

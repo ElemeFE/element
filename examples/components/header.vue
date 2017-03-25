@@ -259,7 +259,7 @@
       scroll(() => {
         if (this.isHome) {
           const threshold = 200;
-          let alpha = Math.min(document.body.scrollTop, threshold) / threshold;
+          let alpha = Math.min((document.documentElement.scrollTop || document.body.scrollTop), threshold) / threshold;
           this.$refs.header.style.backgroundColor = `rgba(32, 160, 255, ${ alpha })`;
         }
       });

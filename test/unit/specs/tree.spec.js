@@ -270,6 +270,46 @@ describe('Tree', () => {
     tree.setCheckedKeys([111]);
     expect(tree.getCheckedNodes().length).to.equal(3);
     expect(tree.getCheckedKeys().length).to.equal(3);
+
+    tree.setCheckedKeys([1]);
+    setTimeout(function() {
+      expect(tree.getCheckedNodes().length).to.equal(3);
+      expect(tree.getCheckedKeys().length).to.equal(3);
+    }, 0);
+
+    tree.setCheckedKeys([2]);
+    setTimeout(function() {
+      expect(tree.getCheckedNodes().length).to.equal(3);
+      expect(tree.getCheckedKeys().length).to.equal(3);
+    }, 0);
+
+    tree.setCheckedKeys([21]);
+    expect(tree.getCheckedNodes().length).to.equal(1);
+    expect(tree.getCheckedKeys().length).to.equal(1);
+  });
+
+  it('setCheckedKeys with checkStrictly', () => {
+    vm = getTreeVm(':props="defaultProps" checkStrictly show-checkbox node-key="id"');
+    const tree = vm.$children[0];
+    tree.setCheckedKeys([111]);
+    expect(tree.getCheckedNodes().length).to.equal(1);
+    expect(tree.getCheckedKeys().length).to.equal(1);
+
+    tree.setCheckedKeys([1]);
+    setTimeout(function() {
+      expect(tree.getCheckedNodes().length).to.equal(1);
+      expect(tree.getCheckedKeys().length).to.equal(1);
+    }, 0);
+
+    tree.setCheckedKeys([2]);
+    setTimeout(function() {
+      expect(tree.getCheckedNodes().length).to.equal(1);
+      expect(tree.getCheckedKeys().length).to.equal(1);
+    }, 0);
+
+    tree.setCheckedKeys([21, 22]);
+    expect(tree.getCheckedNodes().length).to.equal(2);
+    expect(tree.getCheckedKeys().length).to.equal(2);
   });
 
   it('method setChecked', () => {
@@ -288,8 +328,20 @@ describe('Tree', () => {
     vm = getTreeVm(':props="defaultProps" show-checkbox node-key="id"');
     const tree = vm.$children[0];
     tree.setCheckedKeys([1, 11, 111, 2], false);
-    expect(tree.getCheckedNodes().length).to.equal(6);
-    expect(tree.getCheckedKeys().length).to.equal(6);
+    setTimeout(function() {
+      expect(tree.getCheckedNodes().length).to.equal(6);
+      expect(tree.getCheckedKeys().length).to.equal(6);
+    }, 0);
+  });
+
+  it('setCheckedKeys with leafOnly=true', () => {
+    vm = getTreeVm(':props="defaultProps" show-checkbox node-key="id"');
+    const tree = vm.$children[0];
+    tree.setCheckedKeys([2], true);
+    setTimeout(function() {
+      expect(tree.getCheckedNodes().length).to.equal(2);
+      expect(tree.getCheckedKeys().length).to.equal(2);
+    }, 0);
   });
 
   it('check strictly', (done) => {

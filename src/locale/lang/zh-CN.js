@@ -1,5 +1,9 @@
 export default {
   el: {
+    colorpicker: {
+      confirm: '确定',
+      clear: '清空'
+    },
     datepicker: {
       now: '此刻',
       today: '今天',
