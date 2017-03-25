@@ -146,6 +146,14 @@ export default {
     reserveSelection: Boolean,
     filterMethod: Function,
     filteredValue: Array,
+    filteredTextValue: {
+      type: String,
+      default: ''
+    },
+    filterType: {
+      type: String,
+      default: 'checkbox' // checkbox text
+    },
     filters: Array,
     filterMultiple: {
       type: Boolean,
@@ -242,7 +250,8 @@ export default {
       filterable: this.filters || this.filterMethod,
       filterMultiple: this.filterMultiple,
       filterOpened: false,
-      filteredValue: this.filteredValue || []
+      filteredValue: this.filteredValue || [],
+      filteredTextValue: this.filteredTextValue || ''
     });
 
     objectAssign(column, forced[type] || {});
@@ -330,6 +339,12 @@ export default {
     filters(newVal) {
       if (this.columnConfig) {
         this.columnConfig.filters = newVal;
+      }
+    },
+
+    filterType(newVal) {
+      if (this.columnConfig) {
+        this.columnConfig.filterType = newVal;
       }
     },
 
