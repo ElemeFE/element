@@ -46,6 +46,7 @@
         @input="handleInput"
         @focus="handleFocus"
         @blur="handleBlur"
+        @keyup.enter="handleKeyupEnter"
       >
       <i class="el-input__icon el-icon-loading" v-if="validating"></i>
       <!-- 后置元素 -->
@@ -180,6 +181,9 @@
           this.onIconClick(event);
         }
         this.$emit('click', event);
+      },
+      handleKeyupEnter(event) {
+        this.$emit('keyup.enter', event);
       },
       setCurrentValue(value) {
         if (value === this.currentValue) return;
