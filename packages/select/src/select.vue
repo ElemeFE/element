@@ -665,8 +665,8 @@
       });
     },
 
-    destroyed() {
-      if (this.handleResize) removeResizeListener(this.$el, this.handleResize);
+    beforeDestroy() {
+      if (this.$el && this.handleResize) removeResizeListener(this.$el, this.handleResize);
     }
   };
 </script>
