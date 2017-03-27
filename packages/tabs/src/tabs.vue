@@ -125,6 +125,7 @@
           <div
             class={{
               'el-tabs__item': true,
+              'el-tabs__notice': pane.hasNotice,
               'is-active': pane.active,
               'is-disabled': pane.disabled,
               'is-closable': pane.isClosable

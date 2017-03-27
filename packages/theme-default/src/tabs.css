@@ -29,6 +29,20 @@
         background-color: var(--color-primary);
       }
     }
+
+    @e notice {
+      &:before {
+        content: '';
+        background-color: var(--color-danger);
+        width: 5px;
+        height: 5px;
+        position: absolute;
+        top: 18px;
+        left: 8px;
+        border-radius: 2.5px;
+      }
+    }
+
     @e item {
       padding: 0 16px;
       height: 42px;

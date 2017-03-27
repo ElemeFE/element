@@ -7,11 +7,11 @@
         tabs: [{
           title: 'Tab 1',
           name: '1',
-          content: 'Tab 1 content'
+          content: 'Tab 1 content',
         }, {
           title: 'Tab 2',
           name: '2',
-          content: 'Tab 2 content'
+          content: 'Tab 2 content',
         }],
         tabIndex: 2
       }
@@ -40,7 +40,7 @@
 ```html
 <template>
   <el-tabs v-model="activeName" @tab-click="handleClick" :active-bar-width="30">
-    <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
+    <el-tab-pane label="用户管理" name="first" :has-notice="true">用户管理</el-tab-pane>
     <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
     <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
     <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
@@ -195,3 +195,4 @@
 | disabled | 是否禁用 | boolean | — | false |
 | name      | 与选项卡 activeName 对应的标识符，表示选项卡别名 | string | — | 该选项卡在选项卡列表中的顺序值，如第一个选项卡则为'1' |
 | closable  | 标签是否可关闭   | boolean   | — |  false  |
+| has-notice  | 是否显示提示   | boolean   | — |  false  |
