@@ -152,7 +152,7 @@ TableStore.prototype.mutations = {
     }
 
     const prop = column.property;
-    const filters = [];
+    const filters = {};
 
     if (prop) {
       states.filters[column.id] = values;
