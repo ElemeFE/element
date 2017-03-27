@@ -1,10 +1,13 @@
 <template>
-  <div class="el-tabs__active-bar" :style="barStyle"></div>
+  <div class="el-tabs__active-bar" :class="fixActiveBarClass" :style="barStyle">
+    <div class="el-tabs__custom-active-bar" :style="customBarStyle"></div>
+  </div>
 </template>
 <script>
   export default {
     props: {
-      tabs: Array
+      tabs: Array,
+      activeWidth: [Number, String]
     },
     computed: {
       barStyle: {
@@ -36,6 +39,23 @@
 
           return style;
         }
+      },
+      customBarStyle: {
+        cache: false,
+        get() {
+          let style = {};
+          if (this.activeWidth && this.activeWidth >= 0) {
+            style.width = this.activeWidth + 'px';
+          }
+          return style;
+        }
+      },
+      fixActiveBarClass() {
+        let classList = {};
+        if (this.activeWidth) {
+          classList['el-tabs__fix-width-active-bar'] = true;
+        }
+        return classList;
       }
     }
   };

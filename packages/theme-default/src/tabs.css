@@ -20,6 +20,15 @@
       transition: transform .3s cubic-bezier(.645,.045,.355,1);
       list-style: none;
     }
+    @e fix-width-active-bar {
+      background-color: transparent;
+
+      &>.el-tabs__custom-active-bar {
+        margin: 0 auto;
+        height: 100%;
+        background-color: var(--color-primary);
+      }
+    }
     @e item {
       padding: 0 16px;
       height: 42px;

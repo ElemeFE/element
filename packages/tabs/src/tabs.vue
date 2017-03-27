@@ -14,7 +14,8 @@
         type: Boolean,
         default: false
       },
-      value: {}
+      value: {},
+      activeBarWidth: Number
     },
 
     data() {
@@ -103,7 +104,8 @@
         handleTabRemove,
         handleTabClick,
         currentName,
-        panes
+        panes,
+        activeBarWidth
       } = this;
 
       const tabs = this._l(panes, (pane, index) => {
@@ -144,7 +146,7 @@
           'el-tabs--border-card': type === 'border-card'
         }}>
           <div class="el-tabs__header">
-            {!type ? <tab-bar tabs={panes}></tab-bar> : null}
+            {!type ? <tab-bar tabs={panes} active-width={activeBarWidth}></tab-bar> : null}
             {tabs}
           </div>
           <div class="el-tabs__content">
