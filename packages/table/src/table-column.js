@@ -232,8 +232,8 @@ export default {
       width,
       isColumnGroup,
       summary: this.summary ? () => {
-         return this.summary;
-       } : null,
+        return this.summary;
+      } : null,
       context: this.context,
       align: this.align ? 'is-' + this.align : null,
       headerAlign: this.headerAlign ? 'is-' + this.headerAlign : (this.align ? 'is-' + this.align : null),
@@ -247,6 +247,7 @@ export default {
       fixed: this.fixed === '' ? true : this.fixed,
       filterMethod: this.filterMethod,
       filters: this.filters,
+      filterType: this.filterType,
       filterable: this.filters || this.filterMethod,
       filterMultiple: this.filterMultiple,
       filterOpened: false,

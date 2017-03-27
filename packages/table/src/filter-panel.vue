@@ -51,6 +51,7 @@
   import Locale from 'element-ui/src/mixins/locale';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
   import Dropdown from './dropdown';
+  import ElInput from 'element-ui/packages/input';
   import ElCheckbox from 'element-ui/packages/checkbox';
   import ElCheckboxGroup from 'element-ui/packages/checkbox-group';
 
@@ -65,7 +66,8 @@
 
     components: {
       ElCheckbox,
-      ElCheckboxGroup
+      ElCheckboxGroup,
+      ElInput
     },
 
     props: {
@@ -108,6 +110,13 @@
       handleReset() {
         this.filteredValue = [];
         this.confirmFilter(this.filteredValue);
+        this.handleOutsideClick();
+      },
+
+
+      handleResetText() {
+        this.filterValueText = '';
+        this.confirmFilter(this.filterValueText);
         this.handleOutsideClick();
       },
 
@@ -194,7 +203,7 @@
         return true;
       },
 
-       filterType() {
+      filterType() {
         return this.column.filterType;
       }
     },
