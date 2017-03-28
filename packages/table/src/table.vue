@@ -244,7 +244,7 @@
 
     created() {
       this.tableId = 'el-table_' + tableIdSeed + '_';
-      this.debouncedLayout = debounce(50, () => this.doLayout());
+      this.debouncedLayout = debounce(50, true, () => this.doLayout());
     },
 
     computed: {
