@@ -122,6 +122,7 @@ export default {
     property: String,
     prop: String,
     width: {},
+    summary: [Number, String],
     minWidth: {},
     renderHeader: Function,
     sortable: {
@@ -145,6 +146,14 @@ export default {
     reserveSelection: Boolean,
     filterMethod: Function,
     filteredValue: Array,
+    filteredTextValue: {
+      type: String,
+      default: ''
+    },
+    filterType: {
+      type: String,
+      default: 'checkbox' // checkbox text
+    },
     filters: Array,
     filterMultiple: {
       type: Boolean,
@@ -222,6 +231,9 @@ export default {
       minWidth,
       width,
       isColumnGroup,
+      summary: this.summary ? () => {
+        return this.summary;
+      } : null,
       context: this.context,
       align: this.align ? 'is-' + this.align : null,
       headerAlign: this.headerAlign ? 'is-' + this.headerAlign : (this.align ? 'is-' + this.align : null),
@@ -235,10 +247,12 @@ export default {
       fixed: this.fixed === '' ? true : this.fixed,
       filterMethod: this.filterMethod,
       filters: this.filters,
+      filterType: this.filterType,
       filterable: this.filters || this.filterMethod,
       filterMultiple: this.filterMultiple,
       filterOpened: false,
-      filteredValue: this.filteredValue || []
+      filteredValue: this.filteredValue || [],
+      filteredTextValue: this.filteredTextValue || ''
     });
 
     objectAssign(column, forced[type] || {});
@@ -326,6 +340,12 @@ export default {
     filters(newVal) {
       if (this.columnConfig) {
         this.columnConfig.filters = newVal;
+      }
+    },
+
+    filterType(newVal) {
+      if (this.columnConfig) {
+        this.columnConfig.filterType = newVal;
       }
     },
 
