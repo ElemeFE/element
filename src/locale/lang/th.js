@@ -1,5 +1,9 @@
 export default {
   el: {
+    colorpicker: {
+      confirm: 'ตกลง',
+      clear: 'ล้างข้อมูล'
+    },
     datepicker: {
       now: 'ตอนนี้',
       today: 'วันนี้',
@@ -27,13 +31,13 @@ export default {
       month12: 'ธันวาคม',
       // week: 'week',
       weeks: {
-        sun: 'อาทิตย์',
-        mon: 'จันทร์',
-        tue: 'อังคาร',
-        wed: 'พุธ',
-        thu: 'พฤหัสบดี',
-        fri: 'ศุกร์',
-        sat: 'เสาร์'
+        sun: 'อ',
+        mon: 'จ',
+        tue: 'อ',
+        wed: 'พ',
+        thu: 'พฤ',
+        fri: 'ศ',
+        sat: 'ส'
       },
       months: {
         jan: 'มกรา',
@@ -54,6 +58,10 @@ export default {
       loading: 'กำลังโหลด',
       noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
       noData: 'ไม่พบข้อมูล',
+      placeholder: 'เลือก'
+    },
+    cascader: {
+      noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
       placeholder: 'เลือก'
     },
     pagination: {

@@ -17,7 +17,7 @@
           type="primary"
           @close="deleteTag($event, item)"
           close-transition>
-          {{ item.currentLabel }}
+          <span class="el-select__tags-text">{{ item.currentLabel }}</span>
         </el-tag>
       </transition-group>
 
@@ -59,12 +59,16 @@
       @keydown.native.enter.prevent="selectOption"
       @keydown.native.esc.prevent="visible = false"
       @keydown.native.tab="visible = false"
+      @paste.native="debouncedOnInputChange"
       @mouseenter.native="inputHovering = true"
       @mouseleave.native="inputHovering = false"
       :icon="iconClass">
     </el-input>
-    <i v-if="loadingIcon" class="el-input__icon el-icon-loading"></i>
-    <transition name="el-zoom-in-top" @after-leave="doDestroy">
+      <i v-if="loadingIcon" class="el-input__icon el-icon-loading"></i>
+      <transition
+      name="el-zoom-in-top"
+      @after-leave="doDestroy"
+      @after-enter="handleMenuEnter">
       <el-select-menu
         ref="popper"
         v-show="visible && emptyText !== false">
@@ -212,8 +216,8 @@
         selectedLabel: '',
         hoverIndex: -1,
         query: '',
-        bottomOverflowBeforeHidden: 0,
-        topOverflowBeforeHidden: 0,
+        bottomOverflow: 0,
+        topOverflow: 0,
         optionsAllDisabled: false,
         inputHovering: false,
         currentPlaceholder: ''
@@ -222,7 +226,7 @@
 
     watch: {
       placeholder(val) {
-        this.currentPlaceholder = val;
+        this.cachedPlaceHolder = this.currentPlaceholder = val;
       },
 
       value(val) {
@@ -248,6 +252,8 @@
         });
         this.hoverIndex = -1;
         if (this.multiple && this.filterable) {
+          this.inputLength = this.$refs.input.value.length * 15 + 20;
+          this.managePlaceholder();
           this.resetInputHeight();
         }
         if (this.remote && typeof this.remoteMethod === 'function') {
@@ -305,15 +311,10 @@
             } else {
               if (!this.remote) {
                 this.broadcast('ElOption', 'queryChange', '');
+                this.broadcast('ElOptionGroup', 'queryChange');
               }
               this.broadcast('ElInput', 'inputSelect');
             }
-          }
-          if (!this.dropdownUl) {
-            this.dropdownUl = this.$refs.popper.$el.querySelector('.el-select-dropdown__wrap');
-          }
-          if (!this.multiple && this.dropdownUl) {
-            this.setOverflow();
           }
         }
         this.$emit('visible-change', val);
@@ -347,24 +348,30 @@
         }
       },
 
+      handleMenuEnter() {
+        if (!this.dropdownUl) {
+          this.dropdownUl = this.$refs.popper.$el.querySelector('.el-select-dropdown__wrap');
+          this.getOverflows();
+        }
+        if (!this.multiple && this.dropdownUl) {
+          this.resetMenuScroll();
+        }
+      },
+
       getOverflows() {
         if (this.dropdownUl && this.selected && this.selected.$el) {
           let selectedRect = this.selected.$el.getBoundingClientRect();
           let popperRect = this.$refs.popper.$el.getBoundingClientRect();
-          this.bottomOverflowBeforeHidden = selectedRect.bottom - popperRect.bottom;
-          this.topOverflowBeforeHidden = selectedRect.top - popperRect.top;
+          this.bottomOverflow = selectedRect.bottom - popperRect.bottom;
+          this.topOverflow = selectedRect.top - popperRect.top;
         }
       },
 
-      setOverflow() {
-        if (this.bottomOverflowBeforeHidden > 0) {
-          this.$nextTick(() => {
-            this.dropdownUl.scrollTop += this.bottomOverflowBeforeHidden;
-          });
-        } else if (this.topOverflowBeforeHidden < 0) {
-          this.$nextTick(() => {
-            this.dropdownUl.scrollTop += this.topOverflowBeforeHidden;
-          });
+      resetMenuScroll() {
+        if (this.bottomOverflow > 0) {
+          this.dropdownUl.scrollTop += this.bottomOverflow;
+        } else if (this.topOverflow < 0) {
+          this.dropdownUl.scrollTop += this.topOverflow;
         }
       },
 
@@ -437,7 +444,7 @@
       },
 
       doDestroy() {
-        this.$refs.popper.doDestroy();
+        this.$refs.popper && this.$refs.popper.doDestroy();
       },
 
       handleClose() {
@@ -478,6 +485,7 @@
 
       resetInputHeight() {
         this.$nextTick(() => {
+          if (!this.$refs.reference) return;
           let inputChildNodes = this.$refs.reference.$el.childNodes;
           let input = [].filter.call(inputChildNodes, item => item.tagName === 'INPUT')[0];
           input.style.height = Math.max(this.$refs.tags.clientHeight + 6, sizeMap[this.size] || 36) + 'px';
@@ -655,7 +663,7 @@
         this.resetInputHeight();
       }
       this.$nextTick(() => {
-        if (this.$refs.reference.$el) {
+        if (this.$refs.reference && this.$refs.reference.$el) {
           this.inputWidth = this.$refs.reference.$el.getBoundingClientRect().width;
         }
       });

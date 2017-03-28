@@ -21,6 +21,7 @@
       margin-left: 38px;
       position: relative;
       height: 20px;
+      line-height: 20px;
 
       @when with-icon {
         margin-left: 0;
@@ -28,13 +29,10 @@
 
       & p {
         font-size: var(--font-size-base);
-        line-height: 20px;
         margin: 0 34px 0 0;
         white-space: nowrap;
         color: var(--message-content-color);
         text-align: justify;
-        display: inline-block;
-        vertical-align: middle;
       }
     }
 

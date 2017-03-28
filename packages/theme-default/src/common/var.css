@@ -161,6 +161,7 @@
 
   --select-option-color: var(--link-color);
   --select-option-disabled-color: var(--color-extra-light-silver);
+  --select-option-disabled-background: var(--color-white);
   --select-option-height: 36px;
   --select-option-hover-background: var(--color-light-gray);
   --select-option-selected: var(--color-primary);
@@ -325,7 +326,6 @@
   -------------------------- */
   --button-font-size: 14px;
   --button-border-radius: var(--border-radius-base);
-  --button-paddding: 5px 20px;
   --button-padding-vertical: 10px;
   --button-padding-horizontal: 15px;
 
@@ -458,8 +458,8 @@
   --tag-gray-border: var(--color-light-gray);
   --tag-gray-color: var(--link-color);
 
-  --tag-primary-fill: rgba(32,159,255,0.10);
-  --tag-primary-border: rgba(32,159,255,0.20);
+  --tag-primary-fill: rgba(var(--color-primary),0.10);
+  --tag-primary-border: rgba(var(--color-primary),0.20);
   --tag-primary-color: var(--color-primary);
 
   --tag-success-fill: rgba(18,206,102,0.10);
@@ -520,12 +520,10 @@
   --menu-item-color: var(--link-color);
   --menu-item-fill: var(--color-extra-light-gray);
   --menu-item-hover-fill: var(--disabled-border-base);
-  --submenu-item-fill: var(--color-light-gray);
 
   --dark-menu-item-color: var(--link-color);
   --dark-menu-item-fill: var(--color-light-black);
   --dark-menu-item-hover-fill: var(--link-color);
-  --dark-submenu-item-fill: var(--color-base-black);
 
   /* Rate
   --------------------------*/

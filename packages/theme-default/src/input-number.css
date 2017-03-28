@@ -8,7 +8,10 @@
     overflow: hidden;
     width: 180px;
     position: relative;
-
+    
+    & .el-input {
+      display: block;
+    }
     & .el-input__inner {
       appearance: none;
       padding-right: calc(var(--input-height) * 2 + 10);

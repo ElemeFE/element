@@ -199,6 +199,8 @@
       width: 440px;
     }
     .demo-form-inline {
+      width: auto;
+
       .el-input {
         width: 150px;
       }
@@ -313,9 +315,10 @@
 ::: demo 设置 `inline` 属性可以让表单域变为行内的表单域
 ```html
 <el-form :inline="true" :model="formInline" class="demo-form-inline">
-  <el-form-item>
+  <el-form-item label="审批人">
     <el-input v-model="formInline.user" placeholder="审批人"></el-input>
-  </el-form-item><el-form-item>
+  </el-form-item>
+  <el-form-item label="活动区域">
     <el-select v-model="formInline.region" placeholder="活动区域">
       <el-option label="区域一" value="shanghai"></el-option>
       <el-option label="区域二" value="beijing"></el-option>
@@ -737,7 +740,7 @@
 |---------- |-------------- | --------------
 | validate | 对整个表单进行校验的方法 | Function(callback: Function(boolean))
 | validateField | 对部分表单字段进行校验的方法 | Function(prop: string, callback: Function(errorMessage: string))
-| resetFields | 对整个表单进行重置，将所有字段值重置为空并移除校验结果 | -
+| resetFields | 对整个表单进行重置，将所有字段值重置为初始值并移除校验结果 | -
 
 ### Form-Item Attributes
 

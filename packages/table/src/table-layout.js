@@ -59,6 +59,9 @@ class TableLayout {
 
       this.updateHeight();
     } else if (typeof value === 'string') {
+      if (value === '') {
+        el.style[prop] = '';
+      }
       this.updateHeight();
     }
   }

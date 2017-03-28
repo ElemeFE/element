@@ -1,5 +1,9 @@
 export default {
   el: {
+    colorpicker: {
+      confirm: 'OK',
+      clear: 'Изчисти'
+    },
     datepicker: {
       now: 'Сега',
       today: 'Днес',
@@ -54,6 +58,10 @@ export default {
       loading: 'Зареждане',
       noMatch: 'Няма намерени',
       noData: 'Няма данни',
+      placeholder: 'Избери'
+    },
+    cascader: {
+      noMatch: 'Няма намерени',
       placeholder: 'Избери'
     },
     pagination: {

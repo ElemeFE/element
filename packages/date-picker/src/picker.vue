@@ -12,6 +12,7 @@
     @keydown.native="handleKeydown"
     :value="displayValue"
     @change.native="displayValue = $event.target.value"
+    :validateEvent="false"
     ref="reference">
     <i slot="icon"
       class="el-input__icon"
@@ -43,7 +44,6 @@ const NewPopper = {
   beforeDestroy: Popper.beforeDestroy
 };
 
-let RANGE_SEPARATOR = ' - ';
 const DEFAULT_FORMATS = {
   date: 'yyyy-MM-dd',
   month: 'yyyy-MM',
@@ -72,19 +72,19 @@ const DATE_FORMATTER = function(value, format) {
 const DATE_PARSER = function(text, format) {
   return parseDate(text, format);
 };
-const RANGE_FORMATTER = function(value, format) {
+const RANGE_FORMATTER = function(value, format, separator) {
   if (Array.isArray(value) && value.length === 2) {
     const start = value[0];
     const end = value[1];
 
     if (start && end) {
-      return formatDate(start, format) + RANGE_SEPARATOR + formatDate(end, format);
+      return formatDate(start, format) + separator + formatDate(end, format);
     }
   }
   return '';
 };
-const RANGE_PARSER = function(text, format) {
-  const array = text.split(RANGE_SEPARATOR);
+const RANGE_PARSER = function(text, format, separator) {
+  const array = text.split(separator);
   if (array.length === 2) {
     const range1 = array[0];
     const range2 = array[1];
@@ -222,6 +222,7 @@ export default {
 
   watch: {
     pickerVisible(val) {
+      if (!val) this.dispatch('ElFormItem', 'el.form.blur');
       if (this.readonly || this.disabled) return;
       val ? this.showPicker() : this.hidePicker();
     },
@@ -241,6 +242,7 @@ export default {
     },
     displayValue(val) {
       this.$emit('change', val);
+      this.dispatch('ElFormItem', 'el.form.change');
     }
   },
 
@@ -303,7 +305,7 @@ export default {
         ).formatter;
         const format = DEFAULT_FORMATS[this.type];
 
-        return formatter(value, this.format || format);
+        return formatter(value, this.format || format, this.rangeSeparator);
       },
 
       set(value) {
@@ -313,7 +315,7 @@ export default {
             TYPE_VALUE_RESOLVER_MAP[type] ||
             TYPE_VALUE_RESOLVER_MAP['default']
           ).parser;
-          const parsedValue = parser(value, this.format || DEFAULT_FORMATS[type]);
+          const parsedValue = parser(value, this.format || DEFAULT_FORMATS[type], this.rangeSeparator);
 
           if (parsedValue && this.picker) {
             this.picker.value = parsedValue;
@@ -327,9 +329,8 @@ export default {
   },
 
   created() {
-    RANGE_SEPARATOR = this.rangeSeparator;
     // vue-popper
-    this.options = {
+    this.popperOptions = {
       boundariesPadding: 0,
       gpuAcceleration: false
     };
@@ -383,7 +384,6 @@ export default {
 
     handleBlur() {
       this.$emit('blur', this);
-      this.dispatch('ElFormItem', 'el.form.blur');
     },
 
     handleKeydown(event) {
@@ -426,7 +426,7 @@ export default {
             const format = DEFAULT_FORMATS.timerange;
 
             ranges = Array.isArray(ranges) ? ranges : [ranges];
-            this.picker.selectableRange = ranges.map(range => parser(range, format));
+            this.picker.selectableRange = ranges.map(range => parser(range, format, this.rangeSeparator));
           }
 
           for (const option in options) {
@@ -446,7 +446,7 @@ export default {
 
         this.picker.$on('dodestroy', this.doDestroy);
         this.picker.$on('pick', (date, visible = false) => {
-          if (this.dateChanged(date, this.value)) this.$emit('input', date);
+          this.$emit('input', date);
           this.pickerVisible = this.picker.visible = visible;
           this.picker.resetView && this.picker.resetView();
         });

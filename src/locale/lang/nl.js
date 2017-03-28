@@ -1,5 +1,9 @@
 export default {
   el: {
+    colorpicker: {
+      confirm: 'Bevestig',
+      clear: 'Legen'
+    },
     datepicker: {
       now: 'Nu',
       today: 'Vandaag',
@@ -54,6 +58,10 @@ export default {
       loading: 'Laden',
       noMatch: 'Geen overeenkomende resultaten',
       noData: 'Geen data',
+      placeholder: 'Selecteer'
+    },
+    cascader: {
+      noMatch: 'Geen overeenkomende resultaten',
       placeholder: 'Selecteer'
     },
     pagination: {

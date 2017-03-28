@@ -1,6 +1,8 @@
 import Clickoutside from 'element-ui/src/utils/clickoutside';
 const ctx = '@@clickoutsideContext';
 
+import { triggerEvent, triggerClick } from '../util';
+
 describe('Utils:Clickoutside', () => {
   it('create', () => {
     let count = 0;
@@ -42,7 +44,7 @@ describe('Utils:Clickoutside', () => {
     };
 
     Clickoutside.bind(el, binding, vnode);
-    document.body.click();
+    triggerClick(document);
     expect(count).to.equal(1);
   });
 
@@ -61,9 +63,9 @@ describe('Utils:Clickoutside', () => {
 
     el.appendChild(insideElm);
     Clickoutside.bind(el, binding, vnode);
-    insideElm.click();
+    triggerClick(insideElm);
     expect(count).to.equal(0);
-    document.body.click();
+    triggerClick(document);
     expect(count).to.equal(1);
   });
 
@@ -83,9 +85,9 @@ describe('Utils:Clickoutside', () => {
 
     vnode.context.popperElm.appendChild(insideElm);
     Clickoutside.bind(el, binding, vnode);
-    insideElm.click();
+    triggerClick(insideElm);
     expect(count).to.equal(0);
-    document.body.click();
+    triggerClick(document);
     expect(count).to.equal(1);
   });
 
@@ -101,7 +103,7 @@ describe('Utils:Clickoutside', () => {
 
     Clickoutside.bind(el, binding, vnode);
     expect(count).to.equal(0);
-    document.body.click();
+    triggerClick(document);
     expect(count).to.equal(1);
   });
 
@@ -139,9 +141,30 @@ describe('Utils:Clickoutside', () => {
     };
 
     Clickoutside.bind(el, binding, vnode);
-    document.body.click();
+    triggerClick(document);
     Clickoutside.unbind(el);
-    document.body.click();
+    triggerClick(document);
+    expect(count).to.equal(1);
+  });
+
+  it('stays open on drag click', () => {
+    const el = document.createElement('div');
+    const insideElm = document.createElement('div');
+    let count = 0;
+    const vnode = {
+      context: {
+        handleClick: () => ++count
+      }
+    };
+    const binding = {
+      expression: 'handleClick'
+    };
+
+    el.appendChild(insideElm);
+    Clickoutside.bind(el, binding, vnode);
+    triggerEvent(insideElm, 'mousedown');
+    triggerEvent(document, 'mouseup');
     expect(count).to.equal(1);
   });
 });
+

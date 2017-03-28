@@ -1,5 +1,9 @@
 export default {
   el: {
+    colorpicker: {
+      confirm: 'OK',
+      clear: 'Ryd'
+    },
     datepicker: {
       now: 'Nu',
       today: 'I dag',
@@ -54,6 +58,10 @@ export default {
       loading: 'Henter',
       noMatch: 'Ingen matchende data',
       noData: 'Ingen data',
+      placeholder: 'Vælg'
+    },
+    cascader: {
+      noMatch: 'Ingen matchende data',
       placeholder: 'Vælg'
     },
     pagination: {

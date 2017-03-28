@@ -1,4 +1,4 @@
-import { createVue, triggerEvent, destroyVM } from '../util';
+import { createVue, triggerEvent, triggerClick, destroyVM } from '../util';
 
 describe('InputNumber', () => {
   let vm;
@@ -39,7 +39,7 @@ describe('InputNumber', () => {
     let btnDecrease = vm.$el.querySelector('.el-input-number__decrease');
 
     triggerEvent(btnDecrease, 'mousedown');
-    triggerEvent(document, 'mouseup');
+    triggerClick(document, 'mouseup');
 
     vm.$nextTick(_ => {
       expect(vm.value).to.be.equal(4);
@@ -64,7 +64,7 @@ describe('InputNumber', () => {
     let btnIncrease = vm.$el.querySelector('.el-input-number__increase');
 
     triggerEvent(btnIncrease, 'mousedown');
-    triggerEvent(document, 'mouseup');
+    triggerClick(document, 'mouseup');
 
     vm.$nextTick(_ => {
       expect(vm.value).to.be.equal(2.5);
@@ -90,14 +90,14 @@ describe('InputNumber', () => {
     let btnIncrease = vm.$el.querySelector('.el-input-number__increase');
 
     triggerEvent(btnDecrease, 'mousedown');
-    triggerEvent(document, 'mouseup');
+    triggerClick(document, 'mouseup');
 
     vm.$nextTick(_ => {
       expect(vm.value).to.be.equal(2);
       expect(input.value).to.be.equal('2');
 
       triggerEvent(btnIncrease, 'mousedown');
-      triggerEvent(document, 'mouseup');
+      triggerClick(document, 'mouseup');
 
       vm.$nextTick(_ => {
         expect(vm.value).to.be.equal(2);
@@ -124,14 +124,14 @@ describe('InputNumber', () => {
     let btnDecrease = vm.$el.querySelector('.el-input-number__decrease');
 
     triggerEvent(btnIncrease, 'mousedown');
-    triggerEvent(document, 'mouseup');
+    triggerClick(document, 'mouseup');
 
     vm.$nextTick(_ => {
       expect(vm.value).to.be.equal(8.2);
       expect(input.value).to.be.equal('8.2');
 
       triggerEvent(btnDecrease, 'mousedown');
-      triggerEvent(document, 'mouseup');
+      triggerClick(document, 'mouseup');
 
       vm.$nextTick(_ => {
         expect(vm.value).to.be.equal(5);
@@ -171,7 +171,7 @@ describe('InputNumber', () => {
     let btnDecrease = vm.$el.querySelector('.el-input-number__decrease');
 
     triggerEvent(btnDecrease, 'mousedown');
-    triggerEvent(document, 'mouseup');
+    triggerClick(document, 'mouseup');
 
     vm.$nextTick(_ => {
       expect(vm.value).to.be.equal(6);
@@ -210,7 +210,7 @@ describe('InputNumber', () => {
     let btnIncrease = vm.$el.querySelector('.el-input-number__increase');
 
     triggerEvent(btnIncrease, 'mousedown');
-    triggerEvent(document, 'mouseup');
+    triggerClick(document, 'mouseup');
 
     vm.$nextTick(_ => {
       expect(vm.value).to.be.equal(8);
@@ -282,7 +282,7 @@ describe('InputNumber', () => {
     vm.$refs.input.$on('change', spy);
 
     triggerEvent(btnIncrease, 'mousedown');
-    triggerEvent(document, 'mouseup');
+    triggerClick(document, 'mouseup');
 
     vm.$nextTick(_ => {
       expect(spy.withArgs(2.5, 1.5).calledOnce).to.be.true;

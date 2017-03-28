@@ -7,7 +7,9 @@
         ref="dialog"
         :style="style">
         <div class="el-dialog__header">
-          <span class="el-dialog__title">{{title}}</span>
+          <slot name="title">
+            <span class="el-dialog__title">{{title}}</span>
+          </slot>
           <div class="el-dialog__headerbtn">
             <i v-if="showClose" class="el-dialog__close el-icon el-icon-close" @click='close()'></i>
           </div>
@@ -36,6 +38,11 @@
       },
 
       modal: {
+        type: Boolean,
+        default: true
+      },
+  
+      modalAppendToBody: {
         type: Boolean,
         default: true
       },
@@ -103,7 +110,7 @@
         return `el-dialog--${ this.size }`;
       },
       style() {
-        return this.size === 'full' ? {} : { 'margin-bottom': '50px', 'top': this.top };
+        return this.size === 'full' ? {} : { 'top': this.top };
       }
     },
 

@@ -26,7 +26,7 @@
         default: 0
       },
 
-      options: {
+      popperOptions: {
         default() {
           return {
             forceAbsolute: true,

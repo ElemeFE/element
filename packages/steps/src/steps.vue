@@ -11,7 +11,7 @@ export default {
   name: 'ElSteps',
 
   props: {
-    space: Number,
+    space: [Number, String],
     active: Number,
     direction: {
       type: String,
@@ -39,13 +39,13 @@ export default {
   watch: {
     active(newVal, oldVal) {
       this.$emit('change', newVal, oldVal);
-    }
-  },
+    },
 
-  mounted() {
-    this.steps.forEach((child, index) => {
-      child.index = index;
-    });
+    steps(steps) {
+      steps.forEach((child, index) => {
+        child.index = index;
+      });
+    }
   }
 };
 </script>

@@ -30,10 +30,6 @@
         required: true
       },
       label: [String, Number],
-      selected: {
-        type: Boolean,
-        default: false
-      },
       created: Boolean,
       disabled: {
         type: Boolean,

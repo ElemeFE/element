@@ -38,16 +38,8 @@
       z-index: 1;
     }
 
-    .el-tooltip {
-      display: block;
-    }
-
-    .el-tooltip__rel {
-      display: block;
-
-      .cell {
-         white-space: nowrap;
-      }
+    .el-tooltip.cell {
+      white-space: nowrap;
     }
 
     @e empty-block {
