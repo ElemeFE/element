@@ -1,6 +1,22 @@
 <template>
   <transition name="el-zoom-in-top">
-    <div class="el-table-filter" v-if="multiple" v-show="showPopper">
+     <div  class="el-table-filter" v-if="filterType === 'text'" v-show="showPopper">
+          <div class="el-table-filter__content">
+            <el-input v-model="filterValueText" placeholder="" @keyup.enter.native="handleTextConfirm"></el-input>
+            <!--<el-checkbox-group class="el-table-filter__checkbox-group" v-model="filteredValue">
+              <el-checkbox
+                v-for="filter in filters"
+                :label="filter.value">{{ filter.text }}</el-checkbox>
+            </el-checkbox-group>-->
+          </div>
+          <div class="el-table-filter__bottom">
+            <button @click="handleTextConfirm"
+              :class="{ 'is-disabled': filterValueText.length === 0 }"
+              :disabled="filterValueText.length === 0">{{ t('el.table.confirmFilter') }}</button>
+            <button @click="handleResetText">{{ t('el.table.resetFilter') }}</button>
+          </div>
+    </div>
+    <div class="el-table-filter" v-else-if="multiple" v-show="showPopper">
       <div class="el-table-filter__content">
         <el-checkbox-group class="el-table-filter__checkbox-group" v-model="filteredValue">
           <el-checkbox
@@ -35,6 +51,7 @@
   import Locale from 'element-ui/src/mixins/locale';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
   import Dropdown from './dropdown';
+  import ElInput from 'element-ui/packages/input';
   import ElCheckbox from 'element-ui/packages/checkbox';
   import ElCheckboxGroup from 'element-ui/packages/checkbox-group';
 
@@ -49,7 +66,8 @@
 
     components: {
       ElCheckbox,
-      ElCheckboxGroup
+      ElCheckboxGroup,
+      ElInput
     },
 
     props: {
@@ -84,9 +102,21 @@
         this.handleOutsideClick();
       },
 
+      handleTextConfirm() {
+        this.confirmFilter(this.filterValueText);
+        this.handleOutsideClick();
+      },
+
       handleReset() {
         this.filteredValue = [];
         this.confirmFilter(this.filteredValue);
+        this.handleOutsideClick();
+      },
+
+
+      handleResetText() {
+        this.filterValueText = '';
+        this.confirmFilter(this.filterValueText);
         this.handleOutsideClick();
       },
 
@@ -138,6 +168,20 @@
         }
       },
 
+      filterValueText: {
+        get() {
+          if (this.column) {
+            return this.column.filteredTextValue || '';
+          }
+          return '';
+        },
+        set(value) {
+          if (this.column) {
+            this.column.filteredTextValue = value;
+          }
+        }
+      },
+
       filteredValue: {
         get() {
           if (this.column) {
@@ -157,6 +201,10 @@
           return this.column.filterMultiple;
         }
         return true;
+      },
+
+      filterType() {
+        return this.column.filterType;
       }
     },
 

@@ -228,6 +228,14 @@
         return row.tag === value;
       },
 
+      filterName(value, row) {
+         if(value !== ''){
+            return row.name.indexOf(value) > -1;
+        }else{
+            return true;
+        }
+      },
+
       tableRowClassName(row, index) {
         if (index === 1) {
           return 'info-row';
@@ -1266,7 +1274,9 @@
     <el-table-column
       prop="name"
       label="姓名"
-      width="180">
+      width="180"
+      :filter-type="'text'"
+      :filter-method="filterName">
     </el-table-column>
     <el-table-column
       prop="address"
@@ -1321,6 +1331,13 @@
       },
       filterTag(value, row) {
         return row.tag === value;
+      },
+      filterName(value, row) {
+         if(value !== ''){
+            return row.name.indexOf(value) > -1;
+        }else{
+            return true;
+        }
       }
     }
   }
