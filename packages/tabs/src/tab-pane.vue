@@ -14,7 +14,8 @@
       labelContent: Function,
       name: String,
       closable: Boolean,
-      disabled: Boolean
+      disabled: Boolean,
+      hasNotice: Boolean
     },
 
     data() {

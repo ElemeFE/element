@@ -19,6 +19,27 @@
       transition: transform .3s cubic-bezier(.645,.045,.355,1);
       list-style: none;
     }
+    @e fix-width-active-bar {
+      background-color: transparent;
+
+      &>.el-tabs__custom-active-bar {
+        margin: 0 auto;
+        height: 100%;
+        background-color: var(--color-primary);
+      }
+    }
+    @e notice {
+      &:before {
+        content: '';
+        background-color: var(--color-danger);
+        width: 5px;
+        height: 5px;
+        position: absolute;
+        top: 18px;
+        left: 8px;
+        border-radius: 2.5px;
+      }
+    }
     @e new-tab {
       float: right;
       border: 1px solid #d3dce6;
