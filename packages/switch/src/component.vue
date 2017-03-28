@@ -9,7 +9,7 @@
       :name="name"
       :disabled="disabled">
     <span class="el-switch__core" ref="core" :style="{ 'width': coreWidth + 'px' }">
-      <span class="el-switch__button" :style="buttonStyle"></span>
+      <span class="el-switch__button" :style="{ transform }"></span>
     </span>
     <transition name="label-fade">
       <div
@@ -79,10 +79,7 @@
     },
     data() {
       return {
-        coreWidth: this.width,
-        buttonStyle: {
-          transform: ''
-        }
+        coreWidth: this.width
       };
     },
     computed: {
@@ -97,6 +94,9 @@
         set(val) {
           this.$emit('input', val);
         }
+      },
+      transform() {
+        return this.value ? `translate(${ this.coreWidth - 20 }px, 2px)` : 'translate(2px, 2px)';
       }
     },
     watch: {
@@ -104,15 +104,11 @@
         if (this.onColor || this.offColor) {
           this.setBackgroundColor();
         }
-        this.handleButtonTransform();
       }
     },
     methods: {
       handleChange(event) {
         this.$emit('change', event.currentTarget.checked);
-      },
-      handleButtonTransform() {
-        this.buttonStyle.transform = this.value ? `translate(${ this.coreWidth - 20 }px, 2px)` : 'translate(2px, 2px)';
       },
       setBackgroundColor() {
         let newColor = this.value ? this.onColor : this.offColor;
@@ -125,7 +121,6 @@
       if (this.width === 0) {
         this.coreWidth = this.hasText ? 58 : 46;
       }
-      this.handleButtonTransform();
       if (this.onColor || this.offColor) {
         this.setBackgroundColor();
       }
