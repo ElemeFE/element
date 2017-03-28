@@ -22,7 +22,8 @@
         type: Function,
         default: noop
       },
-      type: String
+      type: String,
+      activeBarWidth: Number
     },
 
     data() {
@@ -121,7 +122,8 @@
         navStyle,
         scrollable,
         scrollNext,
-        scrollPrev
+        scrollPrev,
+        activeBarWidth
       } = this;
 
       const scrollBtn = scrollable
@@ -146,6 +148,7 @@
             class={{
               'el-tabs__item': true,
               'is-active': pane.active,
+              'el-tabs__notice': pane.hasNotice,
               'is-disabled': pane.disabled,
               'is-closable': closable
             }}
@@ -163,7 +166,7 @@
           {scrollBtn}
           <div class={['el-tabs__nav-scroll']} ref="navScroll">
             <div class="el-tabs__nav" ref="nav" style={navStyle}>
-              {!type ? <tab-bar tabs={panes}></tab-bar> : null}
+              {!type ? <tab-bar tabs={panes} active-width={activeBarWidth}></tab-bar> : null}
               {tabs}
             </div>
           </div>
