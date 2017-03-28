@@ -1,5 +1,6 @@
 import { getCell, getColumnByCell, getRowIdentity } from './util';
 import ElCheckbox from 'element-ui/packages/checkbox';
+import debounce from 'throttle-debounce/debounce';
 
 export default {
   components: {
@@ -73,6 +74,8 @@ export default {
                   </tr>)
                 : ''
               ]
+            ).concat(
+              <el-tooltip placement="top" ref="tooltip" content={ this.tooltipContent }></el-tooltip>
             )
           }
         </tbody>
@@ -142,8 +145,14 @@ export default {
 
   data() {
     return {
-      tooltipDisabled: true
+      tooltipContent: ''
     };
+  },
+
+  created() {
+    this.activeTooltip = debounce(50, (tooltip, cell) => {
+      tooltip.handleShowPopper();
+    });
   },
 
   methods: {
@@ -199,10 +208,18 @@ export default {
       // 判断是否text-overflow, 如果是就显示tooltip
       const cellChild = event.target.querySelector('.cell');
 
-      this.tooltipDisabled = cellChild.scrollWidth <= cellChild.offsetWidth;
+      if (cellChild.scrollWidth > cellChild.offsetWidth) {
+        const tooltip = this.$refs.tooltip;
+
+        this.tooltipContent = cell.innerText;
+        tooltip.referenceElm = cell;
+        tooltip.doDestroy();
+        this.activeTooltip(tooltip, cell);
+      }
     },
 
     handleCellMouseLeave(event) {
+      this.$refs.tooltip.handleClosePopper();
       const cell = getCell(event);
       if (!cell) return;
 
