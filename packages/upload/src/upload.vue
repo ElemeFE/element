@@ -115,7 +115,6 @@ export default {
         }
       };
       const requestPromise = this.httpRequest(options);
-      /* global Promise:true */
       if (requestPromise && requestPromise.then) {
         requestPromise.then(options.onSuccess, options.onError);
       }
