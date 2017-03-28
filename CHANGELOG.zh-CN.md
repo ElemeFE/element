@@ -1,5 +1,22 @@
 ## 更新日志
 
+### 1.2.6
+*2017-03-28*
+
+- 修复 Switch 样式不兼容 vue SSR，#3752
+- 修复 TimePicker 日期计算错误，#3479
+- 修复 DatePicker 格式化 week 类型错误，#2774
+- 修复 DatePicker 周选择器默认值，#3058
+- 修复 Popover 销毁时未正确清除事件，#3555
+- 修复 InputNumber 鼠标左右键一起按下会导致值一直自增加，#3514（by @pengchongfu）
+- 修复 RadioButton 样式文件引入但无样式，#3276
+- 修复 Table 的 hover 样式，#3696（by @nicoeg）
+- 修复 Slider 跳动问题，#3664（by @gabrielboliveira）
+- 新增 Select `delete-tag` 事件 #3663（by @pengchongfu）
+- 新增 DatePicker 的 `onPick` 选项，#2921
+- 新增 Steps 可分别设置 step 的状态（status）和样式调整，#3722
+- 新增完整的按需引入组件的文档，#3302
+
 ### 1.2.5
 *2017-03-19*
 

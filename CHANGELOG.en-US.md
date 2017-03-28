@@ -1,5 +1,23 @@
 ## Changelog
 
+### 1.2.6
+
+*2017-03-28*
+
+- Fixed Switch compatible with SSR, #3752
+- Fixed the time of TimePicker calculating incorrectly, #3479
+- Fixed the week of DatePicker formatting incorrectly, #2774
+- Fixed the week of DatePicker initializing incorrectly, #3058
+- Fixed the events of Popover destroying incorrectly, #3555
+- Fixed InputNumber setInterval, #3514 (by @pengchongfu)
+- Fixed RadioButton css files, #3276
+- Fixed hover style on striped Table, #3696 (by @nicoeg)
+- Fixed Slider's button jumping left issue, #3664 (by @gabrielboliveira)
+- Added `delete-tag` event for Select, #3663 (by @pengchongfu)
+- Added `onPick` option for DatePicker, #2921
+- Added `status` for Step, #3722
+- Added full example for on-demand importing, #3302
+
 ### 1.2.5
 
 *2017-03-19*
