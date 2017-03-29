@@ -1109,6 +1109,7 @@
   <el-table
     :data="tableData3"
     border
+    tooltip-effect="dark"
     style="width: 100%"
     @selection-change="handleSelectionChange">
     <el-table-column
@@ -1524,6 +1525,7 @@
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | data | 显示的数据 | array | — | — |
 | height | Table 的高度，默认为自动高度。如果 height 为 number 类型，单位 px；如果 height 为 string 类型，则 Table 的高度受控于外部样式。  | string/number | — | — |
+| max-height | Table 的最大高度 | string/number | — | — |
 | stripe | 是否为斑马纹 table | boolean | — | false |
 | border | 是否带有纵向边框 | boolean | — | false |
 | fit | 列的宽度是否自撑开 | boolean | — | true |
@@ -1537,6 +1539,7 @@
 | default-expand-all | 是否默认展开所有行，当 Table 中存在 type="expand" 的 Column 的时候有效 | Boolean | — | false |
 | expand-row-keys | 可以通过该属性设置 Table 目前的展开行，需要设置 row-key 属性才能使用，该属性为展开行的 keys 数组。| Array | — | |
 | default-sort | 默认的排序列的prop和顺序。它的`prop`属性指定默认的排序的列，`order`指定默认排序的顺序| Object | `order`: ascending, descending | 如果只指定了`prop`, 没有指定`order`, 则默认顺序是ascending |
+| tooltip-effect | tooltip `effect` 属性 | String | dark/light | | dark |
 
 ### Table Events
 | 事件名 | 说明 | 参数 |

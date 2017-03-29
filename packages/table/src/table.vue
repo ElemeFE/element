@@ -169,7 +169,9 @@
 
       defaultExpandAll: Boolean,
 
-      defaultSort: Object
+      defaultSort: Object,
+
+      tooltipEffect: String
     },
 
     components: {

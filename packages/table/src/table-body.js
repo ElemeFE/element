@@ -75,7 +75,7 @@ export default {
                 : ''
               ]
             ).concat(
-              <el-tooltip placement="top" ref="tooltip" content={ this.tooltipContent }></el-tooltip>
+              <el-tooltip effect={ this.table.tooltipEffect } placement="top" ref="tooltip" content={ this.tooltipContent }></el-tooltip>
             )
           }
         </tbody>
@@ -150,9 +150,7 @@ export default {
   },
 
   created() {
-    this.activeTooltip = debounce(50, (tooltip, cell) => {
-      tooltip.handleShowPopper();
-    });
+    this.activateTooltip = debounce(50, tooltip => tooltip.handleShowPopper());
   },
 
   methods: {
@@ -214,7 +212,7 @@ export default {
         this.tooltipContent = cell.innerText;
         tooltip.referenceElm = cell;
         tooltip.doDestroy();
-        this.activeTooltip(tooltip, cell);
+        this.activateTooltip(tooltip);
       }
     },
 
