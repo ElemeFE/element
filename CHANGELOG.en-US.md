@@ -1,5 +1,13 @@
 ## Changelog
 
+### 1.2.7
+
+*2017-03-29*
+
+- Fixed Select not compatible with Vue 2.2.6, #3797
+- Improve performance for rendering tooltip in Table, #3478
+- Add `tooltip-effect` property for Table
+
 ### 1.2.6
 
 *2017-03-28*
