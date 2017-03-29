@@ -23,7 +23,7 @@ export default {
         }
       }
       if (parent) {
-        parent.$emit.apply(parent, [eventName].concat(params));
+        parent.$emit.apply(parent, [eventName].concat([params]));
       }
     },
     broadcast(componentName, eventName, params) {
