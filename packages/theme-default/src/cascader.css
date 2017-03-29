@@ -7,12 +7,12 @@
   @b cascader {
     display: inline-block;
     position: relative;
-    background-color: #fff;
+    background-color: transparent;
 
     .el-input,
     .el-input__inner {
       cursor: pointer;
-      background-color: transparent;
+      background-color: #fff;
       z-index: var(--index-normal);
     }
 
