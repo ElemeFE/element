@@ -69,3 +69,8 @@ ColorPicker is a color selector supporting multiple color formats.
 |---------- |-------- |---------- |-------------  |-------- |
 | show-alpha | whether to display the alpha slider | boolean | — | false |
 | color-format | color format of v-model | string | hsl / hsv / hex / rgb | hex (when show-alpha is false)/ rgb (when show-alpha is true) |
+
+### Events
+| Event Name | Description | Parameters |
+|---------|--------|---------|
+| change | triggers when input value changes | color value |

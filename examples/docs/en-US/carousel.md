@@ -164,7 +164,7 @@ When a page is wide enough but has limited height, you can activate card mode fo
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | height | height of the carousel | number | — | 300 |
 | initial-index | index of the initially active slide (starting from 0) | number | — | 0 |
-| trigger | how indicators are triggered | string | click | — |
+| trigger | how indicators are triggered | string | hover/click | hover |
 | autoplay | whether automatically loop the slides | boolean | — | true |
 | interval | interval of the auto loop, in milliseconds | number | — | 3000 |
 | indicator-position | position of the indicators | string | outside/none | — |

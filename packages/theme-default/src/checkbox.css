@@ -134,6 +134,7 @@
       outline: none;
       position: absolute;
       margin: 0;
+      visibility: hidden;
       left: -999px;
     }
 

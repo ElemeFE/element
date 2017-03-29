@@ -2,7 +2,6 @@ var cooking = require('cooking');
 var config = require('./config');
 var md = require('markdown-it')();
 var CopyWebpackPlugin = require('copy-webpack-plugin');
-var OfflinePlugin = require('offline-plugin');
 var striptags = require('./strip-tags');
 var slugify = require('transliteration').slugify;
 var isProd = process.env.NODE_ENV === 'production';
@@ -91,7 +90,8 @@ cooking.add('vueMarkdown', {
         }
         return '</div></demo-block>\n';
       }
-    }]
+    }],
+    [require('markdown-it-container'), 'tip']
   ],
   preprocess: function(MarkdownIt, source) {
     MarkdownIt.renderer.rules.table_open = function() {
@@ -118,6 +118,5 @@ if (isProd) {
 cooking.add('plugin.CopyWebpackPlugin', new CopyWebpackPlugin([
   { from: 'examples/versions.json' }
 ]));
-isProd && cooking.add('plugin.OfflinePlugin', new OfflinePlugin());
 cooking.add('vue.preserveWhitespace', false);
 module.exports = cooking.resolve();

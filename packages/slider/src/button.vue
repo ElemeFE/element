@@ -7,7 +7,7 @@
     :class="{ 'hover': hovering, 'dragging': dragging }"
     :style="{ left: currentPosition }"
     ref="button">
-    <el-tooltip placement="top" ref="tooltip">
+    <el-tooltip placement="top" ref="tooltip" :disabled="!showTooltip">
       <span slot="content">{{ value }}</span>
       <div class="el-slider__button" :class="{ 'hover': hovering, 'dragging': dragging }"></div>
     </el-tooltip>
@@ -60,6 +60,10 @@
         return this.$parent.step;
       },
 
+      showTooltip() {
+        return this.$parent.showTooltip;
+      },
+
       precision() {
         return this.$parent.precision;
       },
@@ -76,7 +80,7 @@
     },
 
     methods: {
-      showTooltip() {
+      displayTooltip() {
         this.$refs.tooltip && (this.$refs.tooltip.showPopper = true);
       },
 
@@ -86,9 +90,9 @@
 
       handleMouseEnter() {
         this.hovering = true;
-        this.showTooltip();
+        this.displayTooltip();
       },
-  
+
       handleMouseLeave() {
         this.hovering = false;
         this.hideTooltip();
@@ -96,6 +100,7 @@
 
       onButtonDown(event) {
         if (this.disabled) return;
+        event.preventDefault();
         this.onDragStart(event);
         window.addEventListener('mousemove', this.onDragging);
         window.addEventListener('mouseup', this.onDragEnd);
@@ -105,12 +110,12 @@
       onDragStart(event) {
         this.dragging = true;
         this.startX = event.clientX;
-        this.startPosition = parseInt(this.currentPosition, 10);
+        this.startPosition = parseFloat(this.currentPosition);
       },
 
       onDragging(event) {
         if (this.dragging) {
-          this.showTooltip();
+          this.displayTooltip();
           this.currentX = event.clientX;
           const diff = (this.currentX - this.startX) / this.$parent.$sliderWidth * 100;
           this.newPosition = this.startPosition + diff;

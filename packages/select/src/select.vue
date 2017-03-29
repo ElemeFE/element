@@ -480,6 +480,7 @@
 
       resetInputHeight() {
         this.$nextTick(() => {
+          if (!this.$refs.reference) return;
           let inputChildNodes = this.$refs.reference.$el.childNodes;
           let input = [].filter.call(inputChildNodes, item => item.tagName === 'INPUT')[0];
           input.style.height = Math.max(this.$refs.tags.clientHeight + 6, sizeMap[this.size] || 36) + 'px';
@@ -599,6 +600,7 @@
         let index = this.selected.indexOf(tag);
         if (index > -1 && !this.disabled) {
           this.value.splice(index, 1);
+          this.$emit('remove-tag', tag);
         }
         event.stopPropagation();
       },
@@ -663,8 +665,8 @@
       });
     },
 
-    destroyed() {
-      if (this.handleResize) removeResizeListener(this.$el, this.handleResize);
+    beforeDestroy() {
+      if (this.$el && this.handleResize) removeResizeListener(this.$el, this.handleResize);
     }
   };
 </script>

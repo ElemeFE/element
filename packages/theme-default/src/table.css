@@ -414,7 +414,7 @@
     }
 
     @modifier enable-row-hover {
-      tr:hover > td {
+      .el-table__body tr:hover > td {
         background-color: var(--color-extra-light-gray);
       }
     }

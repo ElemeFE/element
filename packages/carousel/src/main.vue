@@ -96,8 +96,8 @@ export default {
   },
 
   watch: {
-    items() {
-      this.setActiveItem(0);
+    items(val) {
+      if (val.length > 0) this.setActiveItem(0);
     },
 
     activeIndex(val, oldVal) {
@@ -142,10 +142,6 @@ export default {
         item.hover = false;
       });
     },
-
-    handleItemChange: debounce(100, function() {
-      this.updateItems();
-    }),
 
     updateItems() {
       this.items = this.$children.filter(child => child.$options.name === 'ElCarouselItem');
@@ -217,6 +213,7 @@ export default {
   },
 
   created() {
+    this.handleItemChange = debounce(100, this.updateItems);
     this.throttledArrowClick = throttle(300, true, index => {
       this.setActiveItem(index);
     });

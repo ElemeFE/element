@@ -37,7 +37,8 @@ export default {
     },
     fileList: Array,
     autoUpload: Boolean,
-    listType: String
+    listType: String,
+    httpRequest: Function
   },
 
   data() {
@@ -64,10 +65,8 @@ export default {
       if (postFiles.length === 0) { return; }
 
       postFiles.forEach(rawFile => {
-        if (!this.thumbnailMode || this.isImage(rawFile.type)) {
-          this.onStart(rawFile);
-          if (this.autoUpload) this.upload(rawFile);
-        }
+        this.onStart(rawFile);
+        if (this.autoUpload) this.upload(rawFile);
       });
     },
     upload(rawFile, file) {
@@ -84,16 +83,17 @@ export default {
             this.post(rawFile);
           }
         }, () => {
-          if (file) this.onRemove(file);
+          this.onRemove(rawFile, true);
         });
       } else if (before !== false) {
         this.post(rawFile);
       } else {
-        if (file) this.onRemove(file);
+        this.onRemove(rawFile, true);
       }
     },
     post(rawFile) {
-      ajax({
+      const request = this.httpRequest || ajax;
+      request({
         headers: this.headers,
         withCredentials: this.withCredentials,
         file: rawFile,

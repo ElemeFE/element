@@ -144,7 +144,7 @@
   export default {
     data() {
       return {
-        activeName: 'first'
+        activeName2: 'first'
       };
     },
     methods: {

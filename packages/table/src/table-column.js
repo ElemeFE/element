@@ -118,6 +118,7 @@ export default {
     },
     label: String,
     className: String,
+    labelClassName: String,
     property: String,
     prop: String,
     width: {},
@@ -213,6 +214,7 @@ export default {
       columnKey: this.columnKey,
       label: this.label,
       className: this.className,
+      labelClassName: this.labelClassName,
       property: this.prop || this.property,
       type,
       renderCell: null,
@@ -286,13 +288,7 @@ export default {
       }
 
       return _self.showOverflowTooltip || _self.showTooltipWhenOverflow
-        ? <el-tooltip
-            effect={ this.effect }
-            placement="top"
-            disabled={ this.tooltipDisabled }>
-            <div class="cell">{ renderCell(h, data) }</div>
-            <span slot="content">{ renderCell(h, data) }</span>
-          </el-tooltip>
+        ? <div class="cell el-tooltip">{ renderCell(h, data) }</div>
         : <div class="cell">{ renderCell(h, data) }</div>;
     };
   },

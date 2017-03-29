@@ -377,9 +377,9 @@
         if (this.maxDate === val.maxDate && this.minDate === val.minDate) {
           return;
         }
+        this.onPick && this.onPick(val);
         this.maxDate = val.maxDate;
         this.minDate = val.minDate;
-
         if (!close || this.showTime) return;
         this.handleConfirm();
       },

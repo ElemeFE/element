@@ -73,10 +73,15 @@
       select(item, menuIndex) {
         if (item.__IS__FLAT__OPTIONS) {
           this.activeValue = item.value;
+        } else if (menuIndex) {
+          this.activeValue.splice(menuIndex, this.activeValue.length - 1, item.value);
         } else {
-          this.activeValue.splice(menuIndex, 1, item.value);
+          this.activeValue = [item.value];
         }
         this.$emit('pick', this.activeValue);
+      },
+      handleMenuLeave() {
+        this.$emit('menuLeave');
       },
       activeItem(item, menuIndex) {
         const len = this.activeOptions.length;
@@ -151,7 +156,7 @@
         );
       });
       return (
-        <transition name="el-zoom-in-top">
+        <transition name="el-zoom-in-top" on-after-leave={this.handleMenuLeave}>
           <div
             v-show={visible}
             class={[

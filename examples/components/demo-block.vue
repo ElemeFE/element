@@ -190,7 +190,7 @@
         const node = document.createElement('textarea');
 
         form.method = 'post';
-        form.action = 'http://jsfiddle.net/api/post/library/pure/';
+        form.action = 'https://jsfiddle.net/api/post/library/pure/';
         form.target = '_blank';
 
         for (let name in data) {

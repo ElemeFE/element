@@ -85,7 +85,8 @@ export default {
     listType: {
       type: String,
       default: 'text'   // text,picture,picture-card
-    }
+    },
+    httpRequest: Function
   },
 
   data() {
@@ -159,7 +160,10 @@ export default {
       this.onError(err, file, this.uploadFiles);
       this.onChange(file, this.uploadFiles);
     },
-    handleRemove(file) {
+    handleRemove(file, raw) {
+      if (raw) {
+        file = this.getFile(raw);
+      }
       var fileList = this.uploadFiles;
       fileList.splice(fileList.indexOf(file), 1);
       this.onRemove(file, fileList);
@@ -180,14 +184,14 @@ export default {
       this.uploadFiles
         .filter(file => file.status === 'ready')
         .forEach(file => {
-          this.$refs['upload-inner'].upload(file.raw, file);
+          this.$refs['upload-inner'].upload(file.raw);
         });
     },
     getMigratingConfig() {
       return {
         props: {
           'default-file-list': 'default-file-list is renamed to file-list.',
-          'show-upload-list': 'show-file-list is renamed to show-file-list.',
+          'show-upload-list': 'show-upload-list is renamed to show-file-list.',
           'thumbnail-mode': 'thumbnail-mode has been deprecated, you can implement the same effect according to this case: http://element.eleme.io/#/zh-CN/component/upload#yong-hu-tou-xiang-shang-chuan'
         }
       };
@@ -228,7 +232,8 @@ export default {
         'on-success': this.handleSuccess,
         'on-error': this.handleError,
         'on-preview': this.onPreview,
-        'on-remove': this.handleRemove
+        'on-remove': this.handleRemove,
+        httpRequest: this.httpRequest
       },
       ref: 'upload-inner'
     };

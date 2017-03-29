@@ -44,12 +44,12 @@ const NewPopper = {
   beforeDestroy: Popper.beforeDestroy
 };
 
-let RANGE_SEPARATOR = ' - ';
 const DEFAULT_FORMATS = {
   date: 'yyyy-MM-dd',
   month: 'yyyy-MM',
   datetime: 'yyyy-MM-dd HH:mm:ss',
   time: 'HH:mm:ss',
+  week: 'yyyywWW',
   timerange: 'HH:mm:ss',
   daterange: 'yyyy-MM-dd',
   datetimerange: 'yyyy-MM-dd HH:mm:ss',
@@ -73,19 +73,19 @@ const DATE_FORMATTER = function(value, format) {
 const DATE_PARSER = function(text, format) {
   return parseDate(text, format);
 };
-const RANGE_FORMATTER = function(value, format) {
+const RANGE_FORMATTER = function(value, format, separator) {
   if (Array.isArray(value) && value.length === 2) {
     const start = value[0];
     const end = value[1];
 
     if (start && end) {
-      return formatDate(start, format) + RANGE_SEPARATOR + formatDate(end, format);
+      return formatDate(start, format) + separator + formatDate(end, format);
     }
   }
   return '';
 };
-const RANGE_PARSER = function(text, format) {
-  const array = text.split(RANGE_SEPARATOR);
+const RANGE_PARSER = function(text, format, separator) {
+  const array = text.split(separator);
   if (array.length === 2) {
     const range1 = array[0];
     const range2 = array[1];
@@ -106,12 +106,14 @@ const TYPE_VALUE_RESOLVER_MAP = {
     }
   },
   week: {
-    formatter(value) {
-      if (value instanceof Date) {
-        const weekNumber = getWeekNumber(value);
-        return value.getFullYear() + 'w' + (weekNumber > 9 ? weekNumber : '0' + weekNumber);
-      }
-      return value;
+    formatter(value, format) {
+      let date = formatDate(value, format);
+      const week = getWeekNumber(value);
+
+      date = /WW/.test(date)
+            ? date.replace(/WW/, week < 10 ? '0' + week : week)
+            : date.replace(/W/, week);
+      return date;
     },
     parser(text) {
       const array = (text || '').split('w');
@@ -306,7 +308,7 @@ export default {
         ).formatter;
         const format = DEFAULT_FORMATS[this.type];
 
-        return formatter(value, this.format || format);
+        return formatter(value, this.format || format, this.rangeSeparator);
       },
 
       set(value) {
@@ -316,7 +318,7 @@ export default {
             TYPE_VALUE_RESOLVER_MAP[type] ||
             TYPE_VALUE_RESOLVER_MAP['default']
           ).parser;
-          const parsedValue = parser(value, this.format || DEFAULT_FORMATS[type]);
+          const parsedValue = parser(value, this.format || DEFAULT_FORMATS[type], this.rangeSeparator);
 
           if (parsedValue && this.picker) {
             this.picker.value = parsedValue;
@@ -330,7 +332,6 @@ export default {
   },
 
   created() {
-    RANGE_SEPARATOR = this.rangeSeparator;
     // vue-popper
     this.popperOptions = {
       boundariesPadding: 0,
@@ -409,7 +410,7 @@ export default {
       if (this.$isServer) return;
       if (!this.picker) {
         this.panel.defaultValue = this.currentValue;
-        this.picker = new Vue(this.panel).$mount(document.createElement('div'));
+        this.picker = new Vue(this.panel).$mount();
         this.picker.popperClass = this.popperClass;
         this.popperElm = this.picker.$el;
         this.picker.width = this.reference.getBoundingClientRect().width;
@@ -428,7 +429,7 @@ export default {
             const format = DEFAULT_FORMATS.timerange;
 
             ranges = Array.isArray(ranges) ? ranges : [ranges];
-            this.picker.selectableRange = ranges.map(range => parser(range, format));
+            this.picker.selectableRange = ranges.map(range => parser(range, format, this.rangeSeparator));
           }
 
           for (const option in options) {

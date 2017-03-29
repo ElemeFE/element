@@ -144,7 +144,7 @@ export default {
         this.$emit('input', true);
       }
 
-      const props = merge({}, this, options);
+      const props = merge({}, this.$props || this, options);
 
       if (this._closeTimer) {
         clearTimeout(this._closeTimer);

@@ -95,7 +95,7 @@
       submitUpload() {
         this.$refs.upload.submit();
       },
-      handleAvatarScucess(res, file) {
+      handleAvatarSuccess(res, file) {
         this.imageUrl = URL.createObjectURL(file.raw);
       },
       beforeAvatarUpload(file) {
@@ -127,7 +127,7 @@
 ```html
 <el-upload
   class="upload-demo"
-  action="//jsonplaceholder.typicode.com/posts/"
+  action="https://jsonplaceholder.typicode.com/posts/"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
   :file-list="fileList">
@@ -162,13 +162,40 @@
 ```html
 <el-upload
   class="avatar-uploader"
-  action="//jsonplaceholder.typicode.com/posts/"
+  action="https://jsonplaceholder.typicode.com/posts/"
   :show-file-list="false"
-  :on-success="handleAvatarScucess"
+  :on-success="handleAvatarSuccess"
   :before-upload="beforeAvatarUpload">
   <img v-if="imageUrl" :src="imageUrl" class="avatar">
   <i v-else class="el-icon-plus avatar-uploader-icon"></i>
 </el-upload>
+
+<style>
+  .avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #20a0ff;
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+  }
+  .avatar {
+    width: 178px;
+    height: 178px;
+    display: block;
+  }
+</style>
+
 <script>
   export default {
     data() {
@@ -177,7 +204,7 @@
       };
     },
     methods: {
-      handleAvatarScucess(res, file) {
+      handleAvatarSuccess(res, file) {
         this.imageUrl = URL.createObjectURL(file.raw);
       },
       beforeAvatarUpload(file) {
@@ -205,7 +232,7 @@
 ::: demo
 ```html
 <el-upload
-  action="//jsonplaceholder.typicode.com/posts/"
+  action="https://jsonplaceholder.typicode.com/posts/"
   list-type="picture-card"
   :on-preview="handlePictureCardPreview"
   :on-remove="handleRemove">
@@ -242,7 +269,7 @@
 ```html
 <el-upload
   class="upload-demo"
-  action="//jsonplaceholder.typicode.com/posts/"
+  action="https://jsonplaceholder.typicode.com/posts/"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
   :file-list="fileList2"
@@ -278,7 +305,7 @@
 ```html
 <el-upload
   class="upload-demo"
-  action="//jsonplaceholder.typicode.com/posts/"
+  action="https://jsonplaceholder.typicode.com/posts/"
   :on-change="handleChange"
   :file-list="fileList3">
   <el-button size="small" type="primary">点击上传</el-button>
@@ -316,8 +343,8 @@
 <el-upload
   class="upload-demo"
   drag
-  action="//jsonplaceholder.typicode.com/posts/"
-  mutiple>
+  action="https://jsonplaceholder.typicode.com/posts/"
+  multiple>
   <i class="el-icon-upload"></i>
   <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
   <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
@@ -332,7 +359,7 @@
 <el-upload
   class="upload-demo"
   ref="upload"
-  action="//jsonplaceholder.typicode.com/posts/"
+  action="https://jsonplaceholder.typicode.com/posts/"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
   :file-list="fileList"
@@ -349,6 +376,9 @@
       };
     },
     methods: {
+      submitUpload() {
+        this.$refs.upload.submit();
+      },
       handleRemove(file, fileList) {
         console.log(file, fileList);
       },
@@ -371,7 +401,7 @@
 | name | 可选参数, 上传的文件字段名 | string | — | file |
 | with-credentials | 支持发送 cookie 凭证信息 | boolean | — | false |
 | show-file-list | 是否显示已上传文件列表 | boolean | — | true |
-| type | 上传控件类型 | string | select,drag | select |
+| drag | 是否启用拖拽上传 | boolean | — | false |
 | accept | 可选参数, 接受上传的[文件类型](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept)（thumbnail-mode 模式下此参数无效）| string | — | — |
 | on-preview | 可选参数, 点击已上传的文件链接时的钩子, 可以通过 file.response 拿到服务端返回数据 | function(file) | — | — |
 | on-remove | 可选参数, 文件列表移除文件时的钩子 | function(file, fileList) | — | — |
@@ -383,6 +413,7 @@
 | list-type | 文件列表的类型 | string | text/picture/picture-card | text |
 | auto-upload | 是否在选取文件后立即进行上传 | boolean | — | true |
 | file-list | 上传的文件列表, 例如: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}] | array | — | [] |
+| http-request | 覆盖默认的上传行为，可以自定义上传的实现 | function | — | — |
 
 ### Methods
 | 方法名      | 说明          | 参数 |

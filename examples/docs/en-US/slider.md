@@ -4,17 +4,18 @@
       return {
         value1: 0,
         value2: 50,
-        value3: 42,
-        value4: 0,
+        value3: 36,
+        value4: 42,
         value5: 0,
         value6: 0,
-        value7: [4, 8]
+        value7: 0,
+        value8: [4, 8]
       };
     }
   }
 </script>
 
-## Slider 
+## Slider
 
 Drag the slider within a fixed range.
 
@@ -28,15 +29,19 @@ The current value is displayed when the slider is being dragged.
 <template>
   <div class="block">
     <span class="demonstration">Default value</span>
-    <el-slider v-model="value1"></el-slider>  
+    <el-slider v-model="value1"></el-slider>
   </div>
   <div class="block">
     <span class="demonstration">Customized initial value</span>
     <el-slider v-model="value2"></el-slider>
   </div>
   <div class="block">
+    <span class="demonstration">Hide Tooltip</span>
+    <el-slider v-model="value3" :show-tooltip="false"></el-slider>
+  </div>
+  <div class="block">
     <span class="demonstration">Disabled</span>
-    <el-slider v-model="value3" disabled></el-slider>
+    <el-slider v-model="value4" disabled></el-slider>
   </div>
 </template>
 
@@ -46,7 +51,8 @@ The current value is displayed when the slider is being dragged.
       return {
         value1: 0,
         value2: 50,
-        value3: 42
+        value3: 36,
+        value4: 42
       }
     }
   }
@@ -65,14 +71,14 @@ The options can be discrete.
   <div class="block">
     <span class="demonstration">Breakpoints not displayed</span>
     <el-slider
-      v-model="value4"
+      v-model="value5"
       :step="10">
-    </el-slider>  
+    </el-slider>
   </div>
   <div class="block">
     <span class="demonstration">Breakpoints displayed</span>
     <el-slider
-      v-model="value5"
+      v-model="value6"
       :step="10"
       show-stops>
     </el-slider>
@@ -83,8 +89,8 @@ The options can be discrete.
   export default {
     data() {
       return {
-        value4: 0,
-        value5: 0
+        value5: 0,
+        value6: 0
       }
     }
   }
@@ -102,9 +108,9 @@ Set value via a input box.
 <template>
   <div class="block">
     <el-slider
-      v-model="value6"
+      v-model="value7"
       show-input>
-    </el-slider>  
+    </el-slider>
   </div>
 </template>
 
@@ -112,7 +118,7 @@ Set value via a input box.
   export default {
     data() {
       return {
-        value6: 0
+        value7: 0
       }
     }
   }
@@ -129,7 +135,7 @@ Selecting a range of values is supported.
 <template>
   <div class="block">
     <el-slider
-      v-model="value7"
+      v-model="value8"
       range
       show-stops
       :max="10">
@@ -141,7 +147,7 @@ Selecting a range of values is supported.
   export default {
     data() {
       return {
-        value7: [4, 8]
+        value8: [4, 8]
       }
     }
   }
@@ -159,6 +165,7 @@ Selecting a range of values is supported.
 | show-input | whether to display an input box, works when `range` is false | boolean | — | false |
 | show-input-controls | whether to display control buttons when `show-input` is true | boolean | — | true |
 | show-stops | whether to display breakpoints | boolean | — | false |
+| show-tooltip | whether to display tooltip value | boolean | — | true |
 | range | whether to select a range | boolean | — | false |
 
 ## Events

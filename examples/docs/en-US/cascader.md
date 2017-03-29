@@ -474,7 +474,8 @@ There are two ways to expand child option items.
             label: 'Design Documentation'
           }]
         }],
-        selectedOptions: []
+        selectedOptions: [],
+        selectedOptions2: []
       };
     },
     methods: {

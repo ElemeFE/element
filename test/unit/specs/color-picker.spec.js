@@ -11,7 +11,7 @@ describe('ColorPicker', () => {
     if (dropdown && dropdown.parentNode) dropdown.parentNode.removeChild(dropdown);
   });
 
-  it('should works', () => {
+  it('should work', () => {
     vm = createTest(ColorPicker, true);
     expect(vm.$el).to.exist;
   });
@@ -131,6 +131,88 @@ describe('ColorPicker', () => {
         expect(vm.color).to.equal(null);
         done();
       }, 30);
+    }, ANIMATION_TIME);
+  });
+
+  it('should change hue when clicking the hue bar', (done) => {
+    const vm = createVue({
+      template: `
+        <el-color-picker v-model="color"></el-color-picker>
+      `,
+
+      data() {
+        return {
+          color: '#f00'
+        };
+      }
+    }, true);
+
+    const trigger = vm.$el.querySelector('.el-color-picker__trigger');
+    trigger.click();
+
+    setTimeout(() => {
+      const hueBar = document.querySelector('.el-color-hue-slider');
+      hueBar.__vue__.handleClick({ target: null, clientX: 0, clientY: 1000 });
+      vm.$nextTick(() => {
+        const picker = vm.$children[0];
+        expect(picker.color._hue > 0).to.true;
+        done();
+      });
+    }, ANIMATION_TIME);
+  });
+
+  it('should change alpha when clicking the alpha bar', (done) => {
+    const vm = createVue({
+      template: `
+        <el-color-picker v-model="color" show-alpha></el-color-picker>
+      `,
+
+      data() {
+        return {
+          color: '#f00'
+        };
+      }
+    }, true);
+
+    const trigger = vm.$el.querySelector('.el-color-picker__trigger');
+    trigger.click();
+
+    setTimeout(() => {
+      const alphaBar = document.querySelector('.el-color-alpha-slider');
+      alphaBar.__vue__.handleClick({ target: null, clientX: 50, clientY: 0 });
+      vm.$nextTick(() => {
+        const picker = vm.$children[0];
+        expect(picker.color._alpha < 1).to.true;
+        done();
+      });
+    }, ANIMATION_TIME);
+  });
+
+  it('should change saturation and value when clicking the sv-panel', (done) => {
+    const vm = createVue({
+      template: `
+        <el-color-picker v-model="color" color-format="hsv"></el-color-picker>
+      `,
+
+      data() {
+        return {
+          color: 'hsv(0, 50%, 50%)'
+        };
+      }
+    }, true);
+
+    const trigger = vm.$el.querySelector('.el-color-picker__trigger');
+    trigger.click();
+
+    setTimeout(() => {
+      const svPanel = document.querySelector('.el-color-svpanel');
+      svPanel.__vue__.handleDrag({ clientX: 0, clientY: 0 });
+      vm.$nextTick(() => {
+        const picker = vm.$children[0];
+        expect(picker.color._saturation !== 50).to.true;
+        expect(picker.color._value !== 50).to.true;
+        done();
+      });
     }, ANIMATION_TIME);
   });
 });

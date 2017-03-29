@@ -62,6 +62,25 @@ describe('Slider', () => {
     expect(slider.$refs.tooltip.showPopper).to.false;
   });
 
+  it('hide tooltip', () => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-slider v-model="value" :show-tooltip="false">
+          </el-slider>
+        </div>
+      `,
+
+      data() {
+        return {
+          value: 0
+        };
+      }
+    }, true);
+    const slider = vm.$children[0].$children[0];
+    expect(slider.$refs.tooltip.disabled).to.true;
+  });
+
   it('drag', done => {
     vm = createVue({
       template: `
@@ -77,7 +96,7 @@ describe('Slider', () => {
       }
     }, true);
     const slider = vm.$children[0].$children[0];
-    slider.onButtonDown({ clientX: 0 });
+    slider.onButtonDown({ clientX: 0, preventDefault() {} });
     slider.onDragging({ clientX: 100 });
     slider.onDragEnd();
     setTimeout(() => {
@@ -101,7 +120,7 @@ describe('Slider', () => {
       }
     }, true);
     const slider = vm.$children[0].$children[0];
-    slider.onButtonDown({ clientX: 0 });
+    slider.onButtonDown({ clientX: 0, preventDefault() {} });
     slider.onDragging({ clientX: 100 });
     slider.onDragEnd();
     setTimeout(() => {
