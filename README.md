@@ -98,7 +98,7 @@ English documentation is brought to you by SwiftGG Translation Team. Our special
 
 ## Donation
 If you find Element useful, you can buy us a cup of coffee
-<img width="650" src="http://fuss10.elemecdn.com/2/d0/ab1b8e5a1d96bcdcd6092ce0c66ecjpeg.jpeg" alt="">
+<img width="650" src="http://fuss10.elemecdn.com/2/d0/ab1b8e5a1d96bcdcd6092ce0c66ecjpeg.jpeg?t=2017" alt="">
 
 ## Backers
 
