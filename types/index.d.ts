@@ -4,6 +4,7 @@ import { ElementUIComponent, ElementUIComponentSize } from './component'
 import { ElAutocomplete } from './autocomplete'
 import { ElButton } from './button'
 import { ElButtonGroup } from './button-group'
+import { ElCascader } from './cascader'
 import { ElCheckbox } from './checkbox'
 import { ElCheckboxGroup } from './checkbox-group'
 import { ElCol } from './col'
@@ -47,6 +48,9 @@ declare namespace ElementUI {
 
   /** Button Group Component */
   export class ButtonGroup extends ElButtonGroup {}
+
+  /** Cascader Component */
+  export class Cascader extends ElCascader {}
 
   /** Checkbox Component */
   export class Checkbox extends ElCheckbox {}
