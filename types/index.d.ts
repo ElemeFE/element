@@ -27,6 +27,7 @@ import { ElSlider } from './slider'
 import { ElSwitch } from './switch'
 import { ElTable } from './table'
 import { ElTableColumn } from './table-column'
+import { ElTag } from './tag'
 import { ElTimePicker } from './time-picker'
 import { ElTooltip } from './tooltip'
 import { ElUpload } from './upload'
@@ -132,6 +133,9 @@ declare namespace ElementUI {
 
   /** Table Column Component */
   export class TableColumn extends ElTableColumn {}
+
+  /** Tag Component */
+  export class Tag extends ElTag {}
 
   /** Time Picker and Time Select Component */
   export class TimePicker extends ElTimePicker {}
