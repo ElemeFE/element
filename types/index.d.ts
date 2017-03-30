@@ -5,6 +5,9 @@ import { ElButton } from './button'
 import { ElButtonGroup } from './button-group'
 import { ElCol } from './col'
 import { ElIcon } from './icon'
+import { ElRadio } from './radio'
+import { ElRadioButton } from './radio-button'
+import { ElRadioGroup } from './radio-group'
 import { ElRow } from './row'
 
 declare namespace ElementUI {
@@ -42,6 +45,15 @@ declare namespace ElementUI {
 
   /** Row Layout Component */
   export class Row extends ElRow {}
+
+  /** Radio Component */
+  export class Radio extends ElRadio {}
+
+  /** Radio Button Component */
+  export class RadioButton extends ElRadioButton {}
+
+  /** Radio Group Component */
+  export class RadioGroup extends ElRadioGroup {}
 }
 
 export = ElementUI
