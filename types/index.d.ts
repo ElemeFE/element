@@ -10,10 +10,13 @@ import { ElCol } from './col'
 import { ElIcon } from './icon'
 import { ElInput } from './input'
 import { ElInputNumber } from './input-number'
+import { ElOption } from './option'
+import { ElOptionGroup } from './option-group'
 import { ElRadio } from './radio'
 import { ElRadioButton } from './radio-button'
 import { ElRadioGroup } from './radio-group'
 import { ElRow } from './row'
+import { ElSelect } from './select'
 
 declare namespace ElementUI {
   export interface InstallationOptions {
@@ -63,6 +66,12 @@ declare namespace ElementUI {
   /** Input Number Component */
   export class InputNumber extends ElInputNumber {}
 
+  /** Dropdown Select Option Component */
+  export class Option extends ElOption {}
+
+  /** Dropdown Select Option Group Component */
+  export class OptionGroup extends ElOptionGroup {}
+
   /** Row Layout Component */
   export class Row extends ElRow {}
 
@@ -74,6 +83,9 @@ declare namespace ElementUI {
 
   /** Radio Group Component */
   export class RadioGroup extends ElRadioGroup {}
+
+  /** Dropdown Select Component */
+  export class Select extends ElSelect {}
 }
 
 export = ElementUI
