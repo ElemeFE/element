@@ -17,6 +17,7 @@ import { ElInput } from './input'
 import { ElInputNumber } from './input-number'
 import { ElOption } from './option'
 import { ElOptionGroup } from './option-group'
+import { ElProgress } from './progress'
 import { ElRate } from './rate'
 import { ElRadio } from './radio'
 import { ElRadioButton } from './radio-button'
@@ -103,6 +104,9 @@ declare namespace ElementUI {
 
   /** Dropdown Select Option Group Component */
   export class OptionGroup extends ElOptionGroup {}
+
+  /** Progress Component */
+  export class Progress extends ElProgress {}
 
   /** Rate Component */
   export class Rate extends ElRate {}
