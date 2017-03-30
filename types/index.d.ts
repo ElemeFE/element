@@ -2,6 +2,7 @@ import Vue from 'vue'
 import { ElementUIComponent, ElementUIComponentSize, ElementUIHorizontalAlignment } from './component'
 
 import { ElAutocomplete } from './autocomplete'
+import { ElBadge } from './badge'
 import { ElButton } from './button'
 import { ElButtonGroup } from './button-group'
 import { ElCascader } from './cascader'
@@ -61,6 +62,9 @@ declare namespace ElementUI {
 
   /** Autocomplete Component */
   export class Autocomplete extends ElAutocomplete {}
+
+  /** Bagde Component */
+  export class Badge extends ElBadge {}
 
   /** Button Component */
   export class Button extends ElButton {}
