@@ -10,6 +10,8 @@ import { ElCheckboxGroup } from './checkbox-group'
 import { ElCol } from './col'
 import { ElColorPicker } from './color-picker'
 import { ElDatePicker } from './date-picker'
+import { ElForm } from './form'
+import { ElFormItem } from './form-item'
 import { ElIcon } from './icon'
 import { ElInput } from './input'
 import { ElInputNumber } from './input-number'
@@ -73,6 +75,12 @@ declare namespace ElementUI {
 
   /** Date Picker Component */
   export class DatePicker extends ElDatePicker {}
+
+  /** Form Component */
+  export class Form extends ElForm {}
+
+  /** Form Item Component */
+  export class FormItem extends ElFormItem {}
 
   /** Icon Component */
   export class Icon extends ElIcon {}
