@@ -1,12 +1,14 @@
 import Vue from 'vue'
 import { ElementUIComponent, ElementUIComponentSize } from './component'
 
+import { ElAutocomplete } from './autocomplete'
 import { ElButton } from './button'
 import { ElButtonGroup } from './button-group'
 import { ElCheckbox } from './checkbox'
 import { ElCheckboxGroup } from './checkbox-group'
 import { ElCol } from './col'
 import { ElIcon } from './icon'
+import { ElInput } from './input'
 import { ElRadio } from './radio'
 import { ElRadioButton } from './radio-button'
 import { ElRadioGroup } from './radio-group'
@@ -33,6 +35,9 @@ declare namespace ElementUI {
 
   // TS cannot merge imported class with namespace, so declare subclasses instead
 
+  /** Autocomplete Component */
+  export class Autocomplete extends ElAutocomplete {}
+
   /** Button Component */
   export class Button extends ElButton {}
 
@@ -50,6 +55,9 @@ declare namespace ElementUI {
 
   /** Icon Component */
   export class Icon extends ElIcon {}
+
+  /** Input Component */
+  export class Input extends ElInput {}
 
   /** Row Layout Component */
   export class Row extends ElRow {}
