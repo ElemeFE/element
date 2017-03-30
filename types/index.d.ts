@@ -8,6 +8,7 @@ import { ElCascader } from './cascader'
 import { ElCheckbox } from './checkbox'
 import { ElCheckboxGroup } from './checkbox-group'
 import { ElCol } from './col'
+import { ElDatePicker } from './date-picker'
 import { ElIcon } from './icon'
 import { ElInput } from './input'
 import { ElInputNumber } from './input-number'
@@ -63,6 +64,9 @@ declare namespace ElementUI {
 
   /** Colunm Layout Component */
   export class Col extends ElCol {}
+
+  /** Date Picker Component */
+  export class DatePicker extends ElDatePicker {}
 
   /** Icon Component */
   export class Icon extends ElIcon {}
