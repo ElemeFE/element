@@ -1,4 +1,5 @@
 import { getCell, getColumnByCell, getRowIdentity } from './util';
+import { hasClass } from 'element-ui/src/utils/dom';
 import ElCheckbox from 'element-ui/packages/checkbox';
 import ElTooltip from 'element-ui/packages/tooltip';
 import debounce from 'throttle-debounce/debounce';
@@ -208,7 +209,7 @@ export default {
       // 判断是否text-overflow, 如果是就显示tooltip
       const cellChild = event.target.querySelector('.cell');
 
-      if (cellChild.scrollWidth > cellChild.offsetWidth) {
+      if (hasClass(cellChild, 'el-tooltip') && cellChild.scrollWidth > cellChild.offsetWidth) {
         const tooltip = this.$refs.tooltip;
 
         this.tooltipContent = cell.innerText;
