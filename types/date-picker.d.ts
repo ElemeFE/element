@@ -9,7 +9,7 @@ export interface DisabledDateChecker {
    *
    * @param date The date to check
    * @returns if `date` will be disabled in the picker
-   **/
+   */
   (date: Date): boolean
 }
 
@@ -24,7 +24,7 @@ export interface PickEventHandler {
    * Callback function that triggers when picks a date range
    *
    * @param dateRange The selected date range
-   **/
+   */
   (dateRange: DateRange): void
 }
 
@@ -33,7 +33,7 @@ export interface ShortcutClickEventHandler {
    * Callback function that triggers when clicking on a shortcut.
    * You can change the picker value by emitting the pick event.
    * Example: `vm.$emit('pick', new Date())`
-   **/
+   */
   (vm: ElDatePicker): void
 }
 

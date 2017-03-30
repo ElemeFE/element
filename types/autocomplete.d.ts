@@ -6,7 +6,7 @@ export interface FetchSuggestionsCallback {
    * Callback function used in fetch-suggestions function
    *
    * @param data Suggestions to use
-   **/
+   */
   (data: any[]): void
 }
 
@@ -16,7 +16,7 @@ export interface FetchSuggestions {
    *
    * @param queryString Current value of the text input
    * @param callback Callback function used to indicate that suggestions have completely fetched
-   **/
+   */
   (queryString: string, callback: FetchSuggestionsCallback): void
 }
 

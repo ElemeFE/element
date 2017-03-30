@@ -73,6 +73,6 @@ export declare class ElTable extends ElementUIComponent {
    *
    * @param row The row that is going to set its selected state
    * @param selected Whether the row is selected. The selected state will be toggled if not set
-   **/
+   */
   toggleRowSelection (row: object, selected?: boolean): void
 }
