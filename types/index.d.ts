@@ -25,8 +25,14 @@ declare namespace ElementUI {
   export type ComponentSize = ElementUIComponentSize
 
   // TS cannot merge imported class with namespace, so declare subclasses instead
+
+  /** Colunm Layout Component */
   export class Col extends ElCol {}
+
+  /** Icon Component */
   export class Icon extends ElIcon {}
+
+  /** Row Layout Component */
   export class Row extends ElRow {}
 }
 
