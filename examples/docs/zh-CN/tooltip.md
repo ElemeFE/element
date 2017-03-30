@@ -195,6 +195,8 @@ Tooltip 组件提供了两个不同的主题：`dark`和`light`。
 
 :::tip
 tooltip 内不支持 `router-link` 组件，请使用 `vm.$router.push` 代替。
+
+tooltip 内不支持 disabled form 元素，参考[MDN](https://developer.mozilla.org/en-US/docs/Web/Events/mouseenter)，请在 disabled form 元素外层添加一层包裹元素。
 :::
 
 ### Attributes
