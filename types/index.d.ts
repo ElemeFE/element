@@ -9,6 +9,7 @@ import { ElCheckboxGroup } from './checkbox-group'
 import { ElCol } from './col'
 import { ElIcon } from './icon'
 import { ElInput } from './input'
+import { ElInputNumber } from './input-number'
 import { ElRadio } from './radio'
 import { ElRadioButton } from './radio-button'
 import { ElRadioGroup } from './radio-group'
@@ -58,6 +59,9 @@ declare namespace ElementUI {
 
   /** Input Component */
   export class Input extends ElInput {}
+
+  /** Input Number Component */
+  export class InputNumber extends ElInputNumber {}
 
   /** Row Layout Component */
   export class Row extends ElRow {}
