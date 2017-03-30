@@ -3,6 +3,8 @@ import { ElementUIComponent, ElementUIComponentSize } from './component'
 
 import { ElButton } from './button'
 import { ElButtonGroup } from './button-group'
+import { ElCheckbox } from './checkbox'
+import { ElCheckboxGroup } from './checkbox-group'
 import { ElCol } from './col'
 import { ElIcon } from './icon'
 import { ElRadio } from './radio'
@@ -36,6 +38,12 @@ declare namespace ElementUI {
 
   /** Button Group Component */
   export class ButtonGroup extends ElButtonGroup {}
+
+  /** Checkbox Component */
+  export class Checkbox extends ElCheckbox {}
+
+  /** Checkbox Group Component */
+  export class CheckboxGroup extends ElCheckboxGroup {}
 
   /** Colunm Layout Component */
   export class Col extends ElCol {}
