@@ -31,6 +31,7 @@ import { ElTableColumn } from './table-column'
 import { ElTag } from './tag'
 import { ElTimePicker } from './time-picker'
 import { ElTooltip } from './tooltip'
+import { ElTree } from './tree'
 import { ElUpload } from './upload'
 
 declare namespace ElementUI {
@@ -146,6 +147,9 @@ declare namespace ElementUI {
 
   /** Tooltip Component */
   export class Tooltip extends ElTooltip {}
+
+  /** Tree Component */
+  export class Tree extends ElTree {}
 
   /** Upload Component */
   export class Upload extends ElUpload {}
