@@ -18,6 +18,7 @@ import { ElRadioButton } from './radio-button'
 import { ElRadioGroup } from './radio-group'
 import { ElRow } from './row'
 import { ElSelect } from './select'
+import { ElSwitch } from './switch'
 
 declare namespace ElementUI {
   export interface InstallationOptions {
@@ -90,6 +91,9 @@ declare namespace ElementUI {
 
   /** Dropdown Select Component */
   export class Select extends ElSelect {}
+
+  /** Switch Component */
+  export class Switch extends ElSwitch {}
 }
 
 export = ElementUI
