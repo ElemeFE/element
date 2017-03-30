@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import { ElementUIComponent } from './component'
 
+import { ElCol } from './col'
+import { ElRow } from './row'
+
 declare namespace ElementUI {
   export interface InstallationOptions {
     locale: any,
@@ -16,6 +19,10 @@ declare namespace ElementUI {
 
   /** ElementUI component common definition */
   export type Component = ElementUIComponent
+
+  // TS cannot merge imported class with namespace, so declare subclasses instead
+  export class Col extends ElCol {}
+  export class Row extends ElRow {}
 }
 
 export = ElementUI
