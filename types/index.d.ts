@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { ElementUIComponent } from './component'
+import { ElementUIComponent, ElementUIComponentSize } from './component'
 
 import { ElCol } from './col'
 import { ElIcon } from './icon'
@@ -20,6 +20,9 @@ declare namespace ElementUI {
 
   /** ElementUI component common definition */
   export type Component = ElementUIComponent
+
+  /** Component size definition for button, input, etc */
+  export type ComponentSize = ElementUIComponentSize
 
   // TS cannot merge imported class with namespace, so declare subclasses instead
   export class Col extends ElCol {}
