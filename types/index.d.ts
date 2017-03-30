@@ -26,6 +26,7 @@ import { ElSelect } from './select'
 import { ElSlider } from './slider'
 import { ElSwitch } from './switch'
 import { ElTimePicker } from './time-picker'
+import { ElTooltip } from './tooltip'
 import { ElUpload } from './upload'
 
 declare namespace ElementUI {
@@ -123,6 +124,9 @@ declare namespace ElementUI {
 
   /** Time Picker and Time Select Component */
   export class TimePicker extends ElTimePicker {}
+
+  /** Tooltip Component */
+  export class Tooltip extends ElTooltip {}
 
   /** Upload Component */
   export class Upload extends ElUpload {}
