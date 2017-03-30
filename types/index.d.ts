@@ -2,6 +2,7 @@ import Vue from 'vue'
 import { ElementUIComponent } from './component'
 
 import { ElCol } from './col'
+import { ElIcon } from './icon'
 import { ElRow } from './row'
 
 declare namespace ElementUI {
@@ -22,6 +23,7 @@ declare namespace ElementUI {
 
   // TS cannot merge imported class with namespace, so declare subclasses instead
   export class Col extends ElCol {}
+  export class Icon extends ElIcon {}
   export class Row extends ElRow {}
 }
 
