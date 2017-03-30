@@ -7,3 +7,5 @@ export declare class ElementUIComponent extends Vue {
 }
 
 export type ElementUIComponentSize = 'large' | 'small' | 'mini'
+
+export type TextAlignment = 'left' | 'center' | 'right'

@@ -20,6 +20,7 @@ import { ElRow } from './row'
 import { ElSelect } from './select'
 import { ElSlider } from './slider'
 import { ElSwitch } from './switch'
+import { ElTimePicker } from './time-picker'
 
 declare namespace ElementUI {
   export interface InstallationOptions {
@@ -98,6 +99,9 @@ declare namespace ElementUI {
 
   /** Switch Component */
   export class Switch extends ElSwitch {}
+
+  /** Time Picker and Time Select Component */
+  export class TimePicker extends ElTimePicker {}
 }
 
 export = ElementUI
