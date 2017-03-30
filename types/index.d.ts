@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import { ElementUIComponent, ElementUIComponentSize, ElementUIHorizontalAlignment } from './component'
 
+import { ElAlert } from './alert'
 import { ElAutocomplete } from './autocomplete'
 import { ElBadge } from './badge'
 import { ElButton } from './button'
@@ -59,6 +60,9 @@ declare namespace ElementUI {
   export type HorizontalAlignment = ElementUIHorizontalAlignment
 
   // TS cannot merge imported class with namespace, so declare subclasses instead
+
+  /** Alert Component */
+  export class Alert extends ElAlert {}
 
   /** Autocomplete Component */
   export class Autocomplete extends ElAutocomplete {}
