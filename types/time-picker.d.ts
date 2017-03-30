@@ -1,4 +1,4 @@
-import { ElementUIComponent, ElementUIComponentSize, TextAlignment } from './component'
+import { ElementUIComponent, ElementUIComponentSize, ElementUIHorizontalAlignment } from './component'
 
 /** Options when el-time-picker acts like a Time Picker */
 export interface TimePickerOptions {
@@ -55,7 +55,7 @@ export declare class ElTimePicker extends ElementUIComponent {
   value: string | Date
 
   /** Alignment */
-  align: TextAlignment
+  align: ElementUIHorizontalAlignment
 
   /** Custom class name for TimePicker's dropdown */
   popperClass: string

@@ -1,4 +1,4 @@
-import { ElementUIComponent, ElementUIComponentSize, TextAlignment } from './component'
+import { ElementUIComponent, ElementUIComponentSize, ElementUIHorizontalAlignment } from './component'
 
 export type DatePickerType = 'year' | 'month' | 'date' | 'datetime' | 'week' | 'datetimerange' | 'daterange'
 export type FirstDayOfWeek = 1 | 2 | 3 | 4 | 5 | 6 | 7
@@ -91,7 +91,7 @@ export declare class ElDatePicker extends ElementUIComponent {
   format: string
 
   /** Alignment */
-  align: TextAlignment
+  align: ElementUIHorizontalAlignment
 
   /** Custom class name for DatePicker's dropdown */
   popperClass: string

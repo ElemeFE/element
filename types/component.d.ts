@@ -6,6 +6,8 @@ export declare class ElementUIComponent extends Vue {
   static install (vue: typeof Vue)
 }
 
+/** Component size definition for button, input, etc */
 export type ElementUIComponentSize = 'large' | 'small' | 'mini'
 
-export type TextAlignment = 'left' | 'center' | 'right'
+/** Horizontal alignment */
+export type ElementUIHorizontalAlignment = 'left' | 'center' | 'right'

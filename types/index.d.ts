@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { ElementUIComponent, ElementUIComponentSize } from './component'
+import { ElementUIComponent, ElementUIComponentSize, ElementUIHorizontalAlignment } from './component'
 
 import { ElAutocomplete } from './autocomplete'
 import { ElButton } from './button'
@@ -49,6 +49,9 @@ declare namespace ElementUI {
 
   /** Component size definition for button, input, etc */
   export type ComponentSize = ElementUIComponentSize
+
+  /** Horizontal alignment */
+  export type HorizontalAlignment = ElementUIHorizontalAlignment
 
   // TS cannot merge imported class with namespace, so declare subclasses instead
 

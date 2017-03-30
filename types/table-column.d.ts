@@ -1,5 +1,5 @@
 import { CreateElement, VNode } from 'vue'
-import { ElementUIComponent, TextAlignment } from './component'
+import { ElementUIComponent, ElementUIHorizontalAlignment } from './component'
 
 export type TableColumnType = 'default' | 'selection' | 'index' | 'expand'
 export type TableColumnFixedType = 'left' | 'right'
@@ -67,10 +67,10 @@ export declare class ElTableColumn extends ElementUIComponent {
   showOverflowTooltip: boolean
 
   /** Alignment */
-  align: TextAlignment
+  align: ElementUIHorizontalAlignment
 
   /** Alignment of the table header. If omitted, the value of the `align` attribute will be applied */
-  headerAlign: TextAlignment
+  headerAlign: ElementUIHorizontalAlignment
 
   /** Class name of cells in the column */
   className: string
