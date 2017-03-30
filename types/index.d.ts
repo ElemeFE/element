@@ -14,6 +14,7 @@ import { ElInput } from './input'
 import { ElInputNumber } from './input-number'
 import { ElOption } from './option'
 import { ElOptionGroup } from './option-group'
+import { ElRate } from './rate'
 import { ElRadio } from './radio'
 import { ElRadioButton } from './radio-button'
 import { ElRadioGroup } from './radio-group'
@@ -84,8 +85,8 @@ declare namespace ElementUI {
   /** Dropdown Select Option Group Component */
   export class OptionGroup extends ElOptionGroup {}
 
-  /** Row Layout Component */
-  export class Row extends ElRow {}
+  /** Rate Component */
+  export class Rate extends ElRate {}
 
   /** Radio Component */
   export class Radio extends ElRadio {}
@@ -95,6 +96,9 @@ declare namespace ElementUI {
 
   /** Radio Group Component */
   export class RadioGroup extends ElRadioGroup {}
+
+  /** Row Layout Component */
+  export class Row extends ElRow {}
 
   /** Dropdown Select Component */
   export class Select extends ElSelect {}
