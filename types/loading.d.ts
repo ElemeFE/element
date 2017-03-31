@@ -28,7 +28,7 @@ export declare class ElLoadingComponent extends Vue {
 }
 
 /** Loading directive definition */
-export declare interface ElLoadingDirective extends VNodeDirective {
+export interface ElLoadingDirective extends VNodeDirective {
   name: 'loading',
   value: boolean,
   modifiers: {
@@ -38,7 +38,7 @@ export declare interface ElLoadingDirective extends VNodeDirective {
 }
 
 /** Show animation while loading data */
-export declare interface ElLoading {
+export interface ElLoading {
   /** Install Loading directive into Vue */
   install (vue: typeof Vue)
 
