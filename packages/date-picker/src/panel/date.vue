@@ -293,8 +293,7 @@
             this.$emit('pick', new Date(value.getTime()));
           }
           this.date.setFullYear(value.getFullYear());
-          this.date.setMonth(value.getMonth());
-          this.date.setDate(value.getDate());
+          this.date.setMonth(value.getMonth(), value.getDate());
         } else if (this.selectionMode === 'week') {
           this.week = value.week;
           this.$emit('pick', value.date);
