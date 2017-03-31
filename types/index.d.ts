@@ -15,6 +15,8 @@ import { ElCascader } from './cascader'
 import { ElCheckbox } from './checkbox'
 import { ElCheckboxGroup } from './checkbox-group'
 import { ElCol } from './col'
+import { ElCollapse } from './collapse'
+import { ElCollapseItem } from './collapse-item'
 import { ElColorPicker } from './color-picker'
 import { ElDatePicker } from './date-picker'
 import { ElDialog } from './dialog'
@@ -136,6 +138,12 @@ declare namespace ElementUI {
 
   /** Colunm Layout Component */
   export class Col extends ElCol {}
+
+  /** Collapse Component */
+  export class Collapse extends ElCollapse {}
+
+  /** Collapse Item Component */
+  export class CollapseItem extends ElCollapseItem {}
 
   /** Color Picker Component */
   export class ColorPicker extends ElColorPicker {}
