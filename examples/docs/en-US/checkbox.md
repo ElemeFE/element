@@ -13,14 +13,10 @@
         cities: cityOptions,
         checkedCities: ['Shanghai', 'Beijing'],
         checkedCities1: ['Shanghai', 'Beijing'],
-<<<<<<< HEAD
-        isIndeterminate: true
-=======
         isIndeterminate: true,
         checkboxGroup1: ['Shanghai'],
         checkboxGroup2: ['Beijing'],
         checkboxGroup3: ['Guangzhou']
->>>>>>> 07b77b1... Add button style to checkbox
       };
     },
     methods: {
@@ -161,10 +157,6 @@ The `indeterminate` property can help you to achieve a 'check all' effect.
 ```
 :::
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 07b77b1... Add button style to checkbox
 ### Minimum / Maximum items checked
 
 The `min` and `max` properties can help you to limit the number of checked items.
@@ -195,8 +187,6 @@ The `min` and `max` properties can help you to limit the number of checked items
     }
   };
 </script>
-<<<<<<< HEAD
-=======
 ```
 :::
 
@@ -234,7 +224,6 @@ Checkbox with button styles.
     }
   }
 </script>
->>>>>>> 07b77b1... Add button style to checkbox
 ```
 :::
 
