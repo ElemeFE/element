@@ -4,6 +4,8 @@ import { ElementUIComponent, ElementUIComponentSize, ElementUIHorizontalAlignmen
 import { ElAlert } from './alert'
 import { ElAutocomplete } from './autocomplete'
 import { ElBadge } from './badge'
+import { ElBreadcrumb } from './breadcrumb'
+import { ElBreadcrumbItem } from './breadcrumb-item'
 import { ElButton } from './button'
 import { ElButtonGroup } from './button-group'
 import { ElCascader } from './cascader'
@@ -91,6 +93,12 @@ declare namespace ElementUI {
 
   /** Bagde Component */
   export class Badge extends ElBadge {}
+
+  /** Breadcrumb Component */
+  export class Breadcrumb extends ElBreadcrumb {}
+
+  /** Breadcrumb Item Component */
+  export class BreadcrumbItem extends ElBreadcrumbItem {}
 
   /** Button Component */
   export class Button extends ElButton {}
