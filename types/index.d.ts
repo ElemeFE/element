@@ -17,6 +17,7 @@ import { ElFormItem } from './form-item'
 import { ElIcon } from './icon'
 import { ElInput } from './input'
 import { ElInputNumber } from './input-number'
+import { ElLoading } from './loading'
 import { ElOption } from './option'
 import { ElOptionGroup } from './option-group'
 import { ElPagination } from './pagination'
@@ -58,6 +59,9 @@ declare namespace ElementUI {
 
   /** Horizontal alignment */
   export type HorizontalAlignment = ElementUIHorizontalAlignment
+
+  /** Show animation while loading data */
+  export const Loading: ElLoading
 
   // TS cannot merge imported class with namespace, so declare subclasses instead
 
