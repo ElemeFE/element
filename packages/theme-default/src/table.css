@@ -361,6 +361,7 @@
         & tr:nth-child(2n) {
           td {
             background: #FAFAFA;
+            background-clip: padding-box;
           }
 
           &.current-row td {
@@ -416,6 +417,7 @@
     @modifier enable-row-hover {
       .el-table__body tr:hover > td {
         background-color: var(--color-extra-light-gray);
+        background-clip: padding-box;
       }
     }
 
