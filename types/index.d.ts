@@ -9,6 +9,8 @@ import { ElBreadcrumbItem } from './breadcrumb-item'
 import { ElButton } from './button'
 import { ElButtonGroup } from './button-group'
 import { ElCard } from './card'
+import { ElCarousel } from './carousel'
+import { ElCarouselItem } from './carousel-item'
 import { ElCascader } from './cascader'
 import { ElCheckbox } from './checkbox'
 import { ElCheckboxGroup } from './checkbox-group'
@@ -119,6 +121,12 @@ declare namespace ElementUI {
 
   /** Cascader Component */
   export class Cascader extends ElCascader {}
+
+  /** Carousel Component */
+  export class Carousel extends ElCarousel {}
+
+  /** Carousel Item Component */
+  export class CarouselItem extends ElCarouselItem {}
 
   /** Checkbox Component */
   export class Checkbox extends ElCheckbox {}
