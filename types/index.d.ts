@@ -14,6 +14,7 @@ import { ElCheckboxGroup } from './checkbox-group'
 import { ElCol } from './col'
 import { ElColorPicker } from './color-picker'
 import { ElDatePicker } from './date-picker'
+import { ElDialog } from './dialog'
 import { ElDropdown } from './dropdown'
 import { ElDropdownItem } from './dropdown-item'
 import { ElDropdownMenu } from './dropdown-menu'
@@ -128,6 +129,9 @@ declare namespace ElementUI {
 
   /** Date Picker Component */
   export class DatePicker extends ElDatePicker {}
+
+  /** Dialog Component */
+  export class Dialog extends ElDialog {}
 
   /** Dropdown Component */
   export class Dropdown extends ElDropdown {}
