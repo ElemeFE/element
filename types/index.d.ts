@@ -40,6 +40,8 @@ import { ElSwitch } from './switch'
 import { ElTable } from './table'
 import { ElTableColumn } from './table-column'
 import { ElTag } from './tag'
+import { ElTabs } from './tabs'
+import { ElTabPane } from './tab-pane'
 import { ElTimePicker } from './time-picker'
 import { ElTooltip } from './tooltip'
 import { ElTree } from './tree'
@@ -182,6 +184,12 @@ declare namespace ElementUI {
 
   /** Table Column Component */
   export class TableColumn extends ElTableColumn {}
+
+  /** Tabs Component */
+  export class Tabs extends ElTabs {}
+
+  /** Tab Pane Component */
+  export class TabPane extends ElTabPane {}
 
   /** Tag Component */
   export class Tag extends ElTag {}
