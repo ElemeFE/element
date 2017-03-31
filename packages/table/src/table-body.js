@@ -215,6 +215,7 @@ export default {
 
         this.tooltipContent = cell.innerText;
         tooltip.referenceElm = cell;
+        tooltip.$refs.popper.style.display = 'none';
         tooltip.doDestroy();
         this.activateTooltip(tooltip);
       }
