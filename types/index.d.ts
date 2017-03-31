@@ -20,6 +20,7 @@ import { ElInputNumber } from './input-number'
 import { ElLoading } from './loading'
 import { ElMessage } from './message'
 import { ElMessageBox } from './message-box'
+import { ElNotification } from './notification'
 import { ElOption } from './option'
 import { ElOptionGroup } from './option-group'
 import { ElPagination } from './pagination'
@@ -70,6 +71,9 @@ declare namespace ElementUI {
 
   /** A set of modal boxes simulating system message box, mainly for message prompt, success tips, error messages and query information */
   export const MessageBox: ElMessageBox
+
+  /** Displays a global notification message at the upper right corner of the page */
+  export const Notification: ElNotification
 
   // TS cannot merge imported class with namespace, so declare subclasses instead
 
