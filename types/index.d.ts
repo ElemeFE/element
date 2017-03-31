@@ -40,6 +40,8 @@ import { ElRadioGroup } from './radio-group'
 import { ElRow } from './row'
 import { ElSelect } from './select'
 import { ElSlider } from './slider'
+import { ElStep } from './step'
+import { ElSteps } from './steps'
 import { ElSubmenu } from './submenu'
 import { ElSwitch } from './switch'
 import { ElTable } from './table'
@@ -192,6 +194,12 @@ declare namespace ElementUI {
 
   /** Slider Component */
   export class Slider extends ElSlider {}
+
+  /** Step Component */
+  export class Step extends ElStep {}
+
+  /** Steps Component */
+  export class Steps extends ElSteps {}
 
   /** Submenu Component */
   export class Submenu extends ElSubmenu {}
