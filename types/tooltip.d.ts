@@ -1,7 +1,7 @@
 import { ElementUIComponent } from './component'
+import { PopoverPlacement } from './popover'
 
 export type TooltipEffect = 'dark' | 'light'
-export type TooltipPlacement = 'top' | 'top-start' | 'top-end' | 'bottom' | 'bottom-start' | 'bottom-end' | 'left' | 'left-start' | 'left-end' | 'right' | 'right-start' | 'right-end'
 
 /** Tooltip Component */
 export declare class ElTooltip extends ElementUIComponent {
@@ -12,7 +12,7 @@ export declare class ElTooltip extends ElementUIComponent {
   content: String
 
   /** Position of Tooltip */
-  placement: TooltipPlacement
+  placement: PopoverPlacement
 
   /** Visibility of Tooltip */
   value: boolean

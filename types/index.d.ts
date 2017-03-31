@@ -33,6 +33,7 @@ import { ElNotification } from './notification'
 import { ElOption } from './option'
 import { ElOptionGroup } from './option-group'
 import { ElPagination } from './pagination'
+import { ElPopover } from './popover'
 import { ElProgress } from './progress'
 import { ElRate } from './rate'
 import { ElRadio } from './radio'
@@ -174,6 +175,9 @@ declare namespace ElementUI {
 
   /** Pagination Component */
   export class Pagination extends ElPagination {}
+
+  /** Popover Component */
+  export class Popover extends ElPopover {}
 
   /** Progress Component */
   export class Progress extends ElProgress {}
