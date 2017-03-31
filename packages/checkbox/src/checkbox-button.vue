@@ -1,16 +1,16 @@
 <template>
   <label
     class="el-checkbox-button"
-    :class="[
-      size ? 'el-checkbox-button--' + size : '',
-      { 'is-disabled': disabled },
-      { 'is-checked': isChecked },
-      { 'is-focus': focus },
-    ]"
-  >
+      :class="[
+        size ? 'el-checkbox-button--' + size : '',
+        { 'is-disabled': disabled },
+        { 'is-checked': isChecked },
+        { 'is-focus': focus },
+      ]"
+    >
     <input
       v-if="trueLabel || falseLabel"
-      class="el-checkbox-button__orig-checkbox"
+      class="el-checkbox-button__original"
       type="checkbox"
       :name="name"
       :disabled="disabled"
@@ -22,7 +22,7 @@
       @blur="focus = false">
     <input
       v-else
-      class="el-checkbox-button__orig-checkbox"
+      class="el-checkbox-button__original"
       type="checkbox"
       :name="name"
       :disabled="disabled"
@@ -31,6 +31,7 @@
       @change="handleChange"
       @focus="focus = true"
       @blur="focus = false">
+
     <span class="el-checkbox-button__inner" 
       v-if="$slots.default || label"
       :style="isChecked ? activeStyle : null">
