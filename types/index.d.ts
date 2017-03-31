@@ -18,6 +18,7 @@ import { ElIcon } from './icon'
 import { ElInput } from './input'
 import { ElInputNumber } from './input-number'
 import { ElLoading } from './loading'
+import { ElMessage } from './message'
 import { ElOption } from './option'
 import { ElOptionGroup } from './option-group'
 import { ElPagination } from './pagination'
@@ -62,6 +63,9 @@ declare namespace ElementUI {
 
   /** Show animation while loading data */
   export const Loading: ElLoading
+
+  /** Used to show feedback after an activity. The difference with Notification is that the latter is often used to show a system level passive notification. */
+  export const Message: ElMessage
 
   // TS cannot merge imported class with namespace, so declare subclasses instead
 
