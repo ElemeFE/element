@@ -18,6 +18,9 @@ import { ElIcon } from './icon'
 import { ElInput } from './input'
 import { ElInputNumber } from './input-number'
 import { ElLoading } from './loading'
+import { ElMenu } from './menu'
+import { ElMenuItem } from './menu-item'
+import { ElMenuItemGroup } from './menu-item-group'
 import { ElMessage } from './message'
 import { ElMessageBox } from './message-box'
 import { ElNotification } from './notification'
@@ -32,6 +35,7 @@ import { ElRadioGroup } from './radio-group'
 import { ElRow } from './row'
 import { ElSelect } from './select'
 import { ElSlider } from './slider'
+import { ElSubmenu } from './submenu'
 import { ElSwitch } from './switch'
 import { ElTable } from './table'
 import { ElTableColumn } from './table-column'
@@ -125,6 +129,15 @@ declare namespace ElementUI {
   /** Input Number Component */
   export class InputNumber extends ElInputNumber {}
 
+  /** Menu that provides navigation for your website */
+  export class Menu extends ElMenu {}
+
+  /** Menu Item Component */
+  export class MenuItem extends ElMenuItem {}
+
+  /** Menu Item Group Component */
+  export class MenuItemGroup extends ElMenuItemGroup {}
+
   /** Dropdown Select Option Component */
   export class Option extends ElOption {}
 
@@ -157,6 +170,9 @@ declare namespace ElementUI {
 
   /** Slider Component */
   export class Slider extends ElSlider {}
+
+  /** Submenu Component */
+  export class Submenu extends ElSubmenu {}
 
   /** Switch Component */
   export class Switch extends ElSwitch {}
