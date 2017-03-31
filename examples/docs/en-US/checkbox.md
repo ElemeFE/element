@@ -213,11 +213,11 @@ Checkbox with button styles.
   </el-checkbox-group>
   <div style="margin: 15px 0;"></div>
   <el-checkbox-group v-model="checkboxGroup2" size="small">
-    <el-checkbox-button v-for="city in cities" :label="city">{{city}}</el-checkbox-button>
+    <el-checkbox-button v-for="city in cities" :label="city" :disabled="city === 'Shenzhen'">{{city}}</el-checkbox-button>
   </el-checkbox-group>
   <div style="margin: 15px 0;"></div>
-  <el-checkbox-group v-model="checkboxGroup3" size="large" fill="#FF0000" text-color="#000">
-    <el-checkbox-button v-for="city in cities" :label="city" :disabled="city === 'Shenzhen'">{{city}}</el-checkbox-button>
+  <el-checkbox-group v-model="checkboxGroup3" size="large" fill="#324057" text-color="#a4aebd" :min="1" :max="3">
+    <el-checkbox-button v-for="city in cities" :label="city">{{city}}</el-checkbox-button>
   </el-checkbox-group>
 </template>
 <script>
