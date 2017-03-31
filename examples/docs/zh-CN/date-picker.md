@@ -59,7 +59,7 @@
             }
           }]
         },
-        value1: '',
+        value1: 1490630400000,
         value2: '',
         value3: '',
         value4: '',
@@ -67,6 +67,16 @@
         value6: '',
         value7: ''
       };
+    },
+    methods: {
+      filterDate(date) {
+        console.log('value1', date);
+      }
+    },
+    watch: {
+      value6(val) {
+        console.log('value6', val);
+      }
     }
   };
 </script>
@@ -109,10 +119,10 @@
   <div class="block">
     <span class="demonstration">默认</span>
     <el-date-picker
-      v-model="value1"
+      :value="value1"
       type="date"
       placeholder="选择日期"
-      :picker-options="pickerOptions0">
+      @input="filterDate">
     </el-date-picker>
   </div>
   <div class="block">

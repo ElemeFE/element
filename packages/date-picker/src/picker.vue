@@ -446,12 +446,24 @@ export default {
 
         this.picker.$on('dodestroy', this.doDestroy);
         this.picker.$on('pick', (date, visible = false) => {
-          this.$emit('input', date);
+          if (date.getTime) {
+            this.$emit('input', date.getTime());
+          } else if (Array.isArray(date)) {
+            const stampArr = [];
+            date.forEach((item) => {
+              stampArr.push(item.getTime());
+            });
+            this.$emit('input', stampArr);
+          } else {
+            this.$emit('input', date);
+          }
+
           this.pickerVisible = this.picker.visible = visible;
           this.picker.resetView && this.picker.resetView();
         });
 
         this.picker.$on('select-range', (start, end) => {
+          console.log('range', start, end);
           this.refInput.setSelectionRange(start, end);
           this.refInput.focus();
         });
