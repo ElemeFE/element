@@ -8,6 +8,7 @@ import { ElBreadcrumb } from './breadcrumb'
 import { ElBreadcrumbItem } from './breadcrumb-item'
 import { ElButton } from './button'
 import { ElButtonGroup } from './button-group'
+import { ElCard } from './card'
 import { ElCascader } from './cascader'
 import { ElCheckbox } from './checkbox'
 import { ElCheckboxGroup } from './checkbox-group'
@@ -112,6 +113,9 @@ declare namespace ElementUI {
 
   /** Button Group Component */
   export class ButtonGroup extends ElButtonGroup {}
+
+  /** Card Component */
+  export class Card extends ElCard {}
 
   /** Cascader Component */
   export class Cascader extends ElCascader {}
