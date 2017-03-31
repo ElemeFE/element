@@ -19,6 +19,7 @@ import { ElInput } from './input'
 import { ElInputNumber } from './input-number'
 import { ElLoading } from './loading'
 import { ElMessage } from './message'
+import { ElMessageBox } from './message-box'
 import { ElOption } from './option'
 import { ElOptionGroup } from './option-group'
 import { ElPagination } from './pagination'
@@ -66,6 +67,9 @@ declare namespace ElementUI {
 
   /** Used to show feedback after an activity. The difference with Notification is that the latter is often used to show a system level passive notification. */
   export const Message: ElMessage
+
+  /** A set of modal boxes simulating system message box, mainly for message prompt, success tips, error messages and query information */
+  export const MessageBox: ElMessageBox
 
   // TS cannot merge imported class with namespace, so declare subclasses instead
 
