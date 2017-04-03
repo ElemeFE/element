@@ -6,7 +6,7 @@ import debounce from 'throttle-debounce/debounce';
 export default {
   components: {
     ElCheckbox,
-    'el-tooltip': ElTooltip
+    ElTooltip
   },
 
   props: {
