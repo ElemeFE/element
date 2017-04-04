@@ -206,7 +206,7 @@
 | show-input-controls | 在显示输入框的情况下，是否显示输入框的控制按钮 | boolean | — | true|
 | show-stops | 是否显示间断点 | boolean | — | false |
 | show-tooltip | 是否显示 tooltip | boolean | — | true |
-| format-tooltip | 格式化 tooltip message | function | — | — |
+| format-tooltip | 格式化 tooltip message | Function(value) | — | — |
 | range | 是否为范围选择 | boolean | — | false |
 
 ### Events
