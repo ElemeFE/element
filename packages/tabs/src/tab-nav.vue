@@ -182,7 +182,7 @@
       addResizeListener(this.$el, this.update);
     },
 
-    destroyed() {
+    beforeDestroy() {
       if (this.$el && this.update) removeResizeListener(this.$el, this.update);
     }
   };
