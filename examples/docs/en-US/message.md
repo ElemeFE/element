@@ -191,6 +191,7 @@ import { Message } from 'element-ui';
 ```
 
 In this case you should call `Message(options)`. We have also registered methods for different types, e.g. `Message.success(options)`.
+You can call `Message.closeAll()` to manually close all the instances.
 
 ### Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
