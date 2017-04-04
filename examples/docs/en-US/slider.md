@@ -182,7 +182,7 @@ Selecting a range of values is supported.
 | show-input-controls | whether to display control buttons when `show-input` is true | boolean | — | true |
 | show-stops | whether to display breakpoints | boolean | — | false |
 | show-tooltip | whether to display tooltip value | boolean | — | true |
-| format-tooltip | format to display tooltip value | function | — | — |
+| format-tooltip | format to display tooltip value | Function(value) | — | — |
 | range | whether to select a range | boolean | — | false |
 
 ## Events
