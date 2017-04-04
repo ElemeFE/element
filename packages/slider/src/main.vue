@@ -46,9 +46,12 @@
   import ElInputNumber from 'element-ui/packages/input-number';
   import SliderButton from './button.vue';
   import { getStyle } from 'element-ui/src/utils/dom';
+  import Emitter from 'element-ui/src/mixins/emitter';
 
   export default {
     name: 'ElSlider',
+
+    mixins: [Emitter],
 
     props: {
       min: {
@@ -173,6 +176,7 @@
             this.secondValue = val[1];
             if (this.valueChanged()) {
               this.$emit('change', [this.minValue, this.maxValue]);
+              this.dispatch('ElFormItem', 'el.form.change', [this.minValue, this.maxValue]);
               this.oldValue = val.slice();
             }
           }
@@ -185,6 +189,7 @@
             this.firstValue = val;
             if (this.valueChanged()) {
               this.$emit('change', val);
+              this.dispatch('ElFormItem', 'el.form.change', val);
               this.oldValue = val;
             }
           }
