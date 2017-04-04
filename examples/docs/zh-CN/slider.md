@@ -5,12 +5,18 @@
         value1: 0,
         value2: 50,
         value3: 36,
-        value4: 42,
-        value5: 0,
+        value4: 48,
+        value5: 42,
         value6: 0,
         value7: 0,
-        value8: [4, 8]
+        value8: 0,
+        value9: [4, 8]
       };
+    },
+    methods: {
+      formatTooltip(val) {
+        return val / 100;
+      }
     }
   }
 </script>
@@ -66,8 +72,12 @@
     <el-slider v-model="value3" :show-tooltip="false"></el-slider>
   </div>
   <div class="block">
+    <span class="demonstration">格式化 Tooltip</span>
+    <el-slider v-model="value4" :format-tooltip="formatTooltip"></el-slider>
+  </div>
+  <div class="block">
     <span class="demonstration">禁用</span>
-    <el-slider v-model="value4" disabled></el-slider>
+    <el-slider v-model="value5" disabled></el-slider>
   </div>
 </template>
 
@@ -78,7 +88,13 @@
         value1: 0,
         value2: 50,
         value3: 36,
-        value4: 42
+        value4: 48,
+        value5: 42
+      }
+    },
+    methods: {
+      formatTooltip(val) {
+        return val / 100;
       }
     }
   }
@@ -96,14 +112,14 @@
   <div class="block">
     <span class="demonstration">不显示间断点</span>
     <el-slider
-      v-model="value5"
+      v-model="value6"
       :step="10">
     </el-slider>
   </div>
   <div class="block">
     <span class="demonstration">显示间断点</span>
     <el-slider
-      v-model="value6"
+      v-model="value7"
       :step="10"
       show-stops>
     </el-slider>
@@ -114,8 +130,8 @@
   export default {
     data() {
       return {
-        value5: 0,
-        value6: 0
+        value6: 0,
+        value7: 0
       }
     }
   }
@@ -132,7 +148,7 @@
 <template>
   <div class="block">
     <el-slider
-      v-model="value7"
+      v-model="value8"
       show-input>
     </el-slider>
   </div>
@@ -142,7 +158,7 @@
   export default {
     data() {
       return {
-        value7: 0
+        value8: 0
       }
     }
   }
@@ -159,7 +175,7 @@
 <template>
   <div class="block">
     <el-slider
-      v-model="value8"
+      v-model="value9"
       range
       show-stops
       :max="10">
@@ -171,7 +187,7 @@
   export default {
     data() {
       return {
-        value8: [4, 8]
+        value9: [4, 8]
       }
     }
   }
@@ -190,6 +206,7 @@
 | show-input-controls | 在显示输入框的情况下，是否显示输入框的控制按钮 | boolean | — | true|
 | show-stops | 是否显示间断点 | boolean | — | false |
 | show-tooltip | 是否显示 tooltip | boolean | — | true |
+| format-tooltip | 格式化 tooltip message | Function(value) | — | — |
 | range | 是否为范围选择 | boolean | — | false |
 
 ### Events

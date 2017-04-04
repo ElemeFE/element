@@ -8,7 +8,7 @@
     :style="{ left: currentPosition }"
     ref="button">
     <el-tooltip placement="top" ref="tooltip" :disabled="!showTooltip">
-      <span slot="content">{{ value }}</span>
+      <span slot="content">{{ formatValue }}</span>
       <div class="el-slider__button" :class="{ 'hover': hovering, 'dragging': dragging }"></div>
     </el-tooltip>
   </div>
@@ -70,6 +70,14 @@
 
       currentPosition() {
         return `${ (this.value - this.min) / (this.max - this.min) * 100 }%`;
+      },
+
+      enableFormat() {
+        return this.$parent.formatTooltip instanceof Function;
+      },
+
+      formatValue() {
+        return this.enableFormat && this.$parent.formatTooltip(this.value) || this.value;
       }
     },
 
@@ -159,4 +167,3 @@
     }
   };
 </script>
-

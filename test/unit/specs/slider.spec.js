@@ -81,6 +81,33 @@ describe('Slider', () => {
     expect(slider.$refs.tooltip.disabled).to.true;
   });
 
+  it('format tooltip', () => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-slider v-model="value" :format-tooltip="formatTooltip">
+          </el-slider>
+        </div>
+      `,
+
+      data() {
+        return {
+          value: 0
+        };
+      },
+      methods: {
+        formatTooltip(val) {
+          return '$' + val;
+        }
+      }
+    }, true);
+    const slider = vm.$children[0].$children[0];
+    expect(slider.formatTooltip).to.function;
+    vm.$nextTick(() => {
+      expect(slider.formatValue).to.equal('$0');
+    });
+  });
+
   it('drag', done => {
     vm = createVue({
       template: `
