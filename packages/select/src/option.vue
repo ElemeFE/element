@@ -84,10 +84,10 @@
 
     watch: {
       currentLabel() {
-        if (!this.created) this.dispatch('ElSelect', 'setSelected');
+        if (!this.created && !this.parent.remote) this.dispatch('ElSelect', 'setSelected');
       },
       value() {
-        if (!this.created) this.dispatch('ElSelect', 'setSelected');
+        if (!this.created && !this.parent.remote) this.dispatch('ElSelect', 'setSelected');
       }
     },
 

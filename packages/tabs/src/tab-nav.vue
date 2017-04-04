@@ -107,6 +107,7 @@
           this.setOffset(navWidth - containerWidth);
         }
       } else if (currentOffset > 0) {
+        this.scrollable = false;
         this.setOffset(0);
       }
     },
@@ -172,3 +173,4 @@
     }
   };
 </script>
+

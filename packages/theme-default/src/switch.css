@@ -20,7 +20,6 @@
     @e label {
       transition: .2s;
       position: absolute;
-      z-index: 10;
       size: var(--switch-width) var(--switch-height);
       left: 0;
       top: 0;
@@ -74,7 +73,6 @@
         border-radius: var(--border-radius-circle);
         transition: transform .3s;
         size: var(--switch-button-size);
-        z-index: 20;
         background-color: var(--color-white);
       }
     }

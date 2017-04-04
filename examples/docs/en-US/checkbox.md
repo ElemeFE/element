@@ -12,6 +12,7 @@
         checkAll: false,
         cities: cityOptions,
         checkedCities: ['Shanghai', 'Beijing'],
+        checkedCities1: ['Shanghai', 'Beijing'],
         isIndeterminate: true
       };
     },
@@ -153,6 +154,40 @@ The `indeterminate` property can help you to achieve a 'check all' effect.
 ```
 :::
 
+
+### Minimum / Maximum items checked
+
+The `min` and `max` properties can help you to limit the number of checked items.
+
+:::demo
+
+```html
+<template>
+  <el-checkbox-group 
+    v-model="checkedCities1"
+    :min="1"
+    :max="2">
+    <el-checkbox v-for="city in cities" :label="city">{{city}}</el-checkbox>
+  </el-checkbox-group>
+</template>
+<script>
+  const cityOptions = ['Shanghai', 'Beijing', 'Guangzhou', 'Shenzhen'];
+  let handlerLimitExceeded = (event) => {
+    currentEvent = event;
+    console.log(event);
+  }
+  export default {
+    data() {
+      return {
+        checkedCities1: ['Shanghai', 'Beijing'],
+        cities: cityOptions
+      };
+    }
+  };
+</script>
+```
+:::
+
 ### Checkbox Attributes
 | Attribute      | Description         | Type    | Options                         | Default|
 |---------- |-------- |---------- |-------------  |-------- |
@@ -163,6 +198,12 @@ The `indeterminate` property can help you to achieve a 'check all' effect.
 | disabled  | if the checkbox is disabled   | boolean   |  — | false   |
 | checked  | if the checkbox is checked   | boolean   |  — | false   |
 | indeterminate  | same as `indeterminate` in native checkbox | boolean   |  — | false   |
+
+### Checkbox-group Attributes
+| Attribute      | Description         | Type    | Options                         | Default|
+|---------- |-------- |---------- |-------------  |-------- |
+| min     | minimum number of checkbox checked   | number    |       —        |     —    |
+| max     | maximum number of checkbox checked   | number    |       —        |     —    |
 
 ### Checkbox-group Events
 | Event Name | Description | Parameters |

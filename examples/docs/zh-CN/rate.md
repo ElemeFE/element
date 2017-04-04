@@ -29,7 +29,7 @@
       border-right: none;
     }
   }
-  
+
   .demo-rate .demonstration {
     display: block;
     color: #8492a6;
@@ -41,7 +41,7 @@
 ## Rate 评分
 
 评分组件
- 
+
 ### 基础用法
 
 :::demo 评分被分为三个等级，可以利用颜色对分数及情感倾向进行分级（默认情况下不区分颜色）。三个等级所对应的颜色用过`colors`属性设置，而它们对应的两个阈值则通过 `low-threshold` 和 `high-threshold` 设定。
@@ -160,7 +160,7 @@
 | void-icon-class | 未选中 icon 的类名 | string | — | el-icon-star-off |
 | disabled-void-icon-class | 只读时未选中 icon 的类名 | string | — | el-icon-star-on |
 | show-text | 是否显示辅助文字 | boolean | — | false |
-| text-color | 辅助文字的颜色 | string | — | 1F2D3D |
+| text-color | 辅助文字的颜色 | string | — | #1F2D3D |
 | texts | 辅助文字数组 | array | — | ['极差', '失望', '一般', '满意', '惊喜'] |
 | text-template | 只读时的辅助文字模板 | string | — | {value} |
 
