@@ -10,7 +10,7 @@
 
     @e inner {
       appearance: none;
-      background-color: var(--color-white);
+      background-color: var(--input-fill);
       background-image: none;
       border-radius: var(--input-border-radius);
       border: var(--input-border);
@@ -82,9 +82,9 @@
 
     @when disabled {
       .el-input__inner {
-        background-color: var(--disabled-fill-base);
-        border-color: var(--disabled-border-base);
-        color: var(--disabled-color-base);
+        background-color: var(--input-disabled-fill);
+        border-color: var(--input-disabled-border);
+        color: var(--input-disabled-color);
         cursor: not-allowed;
 
         &::placeholder {
@@ -196,7 +196,7 @@
       width: 100%;
       font-size: var(--font-size-base);
       color: var(--input-color);
-      background-color: var(--color-white);
+      background-color: var(--input-fill);
       background-image: none;
       border: var(--input-border);
       border-radius: var(--input-border-radius);
@@ -218,9 +218,9 @@
 
     @when disabled {
       .el-textarea__inner {
-        background-color: var(--disabled-fill-base);
-        border-color: var(--disabled-border-base);
-        color: var(--disabled-color-base);
+        background-color: var(--input-disabled-fill);
+        border-color: var(--input-disabled-border);
+        color: var(--input-disabled-color);
         cursor: not-allowed;
 
         &::placeholder {
