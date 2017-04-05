@@ -208,7 +208,7 @@ tooltip 内不支持 `router-link` 组件，请使用 `vm.$router.push` 代替�
 |  offset        |  出现位置的偏移量  | Number           | — |  0 |
 |  transition     |  定义渐变动画      | String             | — | `fade-in-linear` |
 |  visible-arrow   |  是否显示 Tooltip 箭头，更多参数可见[Vue-popper](https://github.com/element-component/vue-popper) | Boolean | — | true |
-|  options        | [popper.js](https://popper.js.org/documentation.html) 的参数 | Object            | 参考 [popper.js](https://popper.js.org/documentation.html) 文档 | { boundariesElement: 'body', gpuAcceleration: false } |
+|  popper-options        | [popper.js](https://popper.js.org/documentation.html) 的参数 | Object            | 参考 [popper.js](https://popper.js.org/documentation.html) 文档 | { boundariesElement: 'body', gpuAcceleration: false } |
 | open-delay | 延迟出现，单位毫秒 | Number | — | 0 |
 | manual | 手动控制模式，设置为 true 后，mouseenter 和 mouseleave 事件将不会生效 | Boolean | — | false |
 | popper-class | 为 Tooltip 的 popper 添加类名 | String | — | — |
