@@ -84,7 +84,7 @@ The content of Dialog can be anything, even a table or a form. This example show
 
 ```html
 <!-- Table -->
-<el-button type="text" @click="dialogTableVisible = true" type="text">open a Table nested Dialog</el-button>
+<el-button type="text" @click="dialogTableVisible = true">open a Table nested Dialog</el-button>
 
 <el-dialog title="Shipping address" v-model="dialogTableVisible">
   <el-table :data="gridData">
@@ -95,7 +95,7 @@ The content of Dialog can be anything, even a table or a form. This example show
 </el-dialog>
 
 <!-- Form -->
-<el-button type="text" @click="dialogFormVisible = true" type="text">open a Form nested Dialog</el-button>
+<el-button type="text" @click="dialogFormVisible = true">open a Form nested Dialog</el-button>
 
 <el-dialog title="Shipping address" v-model="dialogFormVisible">
   <el-form :model="form">
@@ -180,7 +180,7 @@ The content of Dialog can be anything, even a table or a form. This example show
 | footer | content of the Dialog footer |
 
 ### Methods
-Each `el-dialog` instance has the following methods that can be used to open/close the instance without explicitly changing the value of `v-model`: 
+Each `el-dialog` instance has the following methods that can be used to open/close the instance without explicitly changing the value of `v-model`:
 
 | Method | Description |
 |------|--------|
