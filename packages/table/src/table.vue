@@ -369,6 +369,16 @@
       this.bindEvents();
       this.doLayout();
 
+      // init filters
+      this.store.states.columns.forEach(column => {
+        if (column.filteredValue && column.filteredValue.length) {
+          this.store.commit('filterChange', {
+            column,
+            values: column.filteredValue
+          });
+        }
+      });
+
       this.$ready = true;
     },
 
