@@ -211,7 +211,7 @@
 ### Carousel Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| height | 走马灯的高度 | number | — | 300 |
+| height | 走马灯的高度 | string | — | — |
 | initial-index | 初始状态激活的幻灯片的索引，从 0 开始 | number | — | 0 |
 | trigger | 指示器的触发方式 | string | click | — |
 | autoplay | 是否自动切换 | boolean | — | true |
