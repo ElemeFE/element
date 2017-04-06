@@ -6,7 +6,7 @@
     @mouseleave.stop="handleMouseLeave">
     <div
       class="el-carousel__container"
-      :style="{ height: height }">
+      :style="{ height: `${height}px` }">
       <transition name="carousel-arrow-left">
         <button
           v-if="arrow !== 'never'"
