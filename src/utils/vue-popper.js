@@ -101,6 +101,9 @@ export default {
         this.resetTransformOrigin();
         this.$nextTick(this.updatePopper);
       });
+      if (typeof options.onUpdate === 'function') {
+        this.popperJS.onUpdate(options.onUpdate);
+      }
       this.popperJS._popper.style.zIndex = PopupManager.nextZIndex();
       this.popperElm.addEventListener('click', stop);
     },
