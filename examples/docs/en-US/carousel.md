@@ -162,7 +162,7 @@ When a page is wide enough but has limited height, you can activate card mode fo
 ### Carousel Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| height | height of the carousel | number | — | 300 |
+| height | height of the carousel | string | — | — |
 | initial-index | index of the initially active slide (starting from 0) | number | — | 0 |
 | trigger | how indicators are triggered | string | hover/click | hover |
 | autoplay | whether automatically loop the slides | boolean | — | true |
