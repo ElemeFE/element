@@ -146,7 +146,7 @@ TableStore.prototype.mutations = {
   },
 
   filterChange(states, options) {
-    let { column, values } = options;
+    let { column, values, silent } = options;
     if (values && !Array.isArray(values)) {
       values = [values];
     }
@@ -175,7 +175,9 @@ TableStore.prototype.mutations = {
     states.filteredData = data;
     states.data = sortData(data, states);
 
-    this.table.$emit('filter-change', filters);
+    if (!silent) {
+      this.table.$emit('filter-change', filters);
+    }
 
     Vue.nextTick(() => this.table.updateScrollY());
   },
