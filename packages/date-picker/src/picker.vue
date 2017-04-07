@@ -237,7 +237,11 @@ export default {
     value: {
       immediate: true,
       handler(val) {
-        this.currentValue = isDate(val) ? new Date(val) : val;
+        if (val === 0) {
+          this.currentValue = '';
+        } else {
+          this.currentValue = isDate(val) ? new Date(val) : val;
+        }
       }
     },
     displayValue(val) {
@@ -446,7 +450,10 @@ export default {
 
         this.picker.$on('dodestroy', this.doDestroy);
         this.picker.$on('pick', (date, visible = false) => {
-          if (date.getTime) {
+          console.log('pick', date);
+          if (!date) {
+            this.$emit('input', 0);
+          } else if (date.getTime) {
             this.$emit('input', date.getTime());
           } else if (Array.isArray(date)) {
             const stampArr = [];

@@ -70,6 +70,7 @@
     },
     methods: {
       filterDate(date) {
+        this.value1 = date;
         console.log('value1', date);
       }
     },
