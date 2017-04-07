@@ -450,7 +450,6 @@ export default {
 
         this.picker.$on('dodestroy', this.doDestroy);
         this.picker.$on('pick', (date, visible = false) => {
-          console.log('pick', date);
           if (!date) {
             this.$emit('input', 0);
           } else if (date.getTime) {
@@ -470,7 +469,6 @@ export default {
         });
 
         this.picker.$on('select-range', (start, end) => {
-          console.log('range', start, end);
           this.refInput.setSelectionRange(start, end);
           this.refInput.focus();
         });
