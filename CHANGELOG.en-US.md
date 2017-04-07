@@ -1,5 +1,18 @@
 ## Changelog
 
+### 1.2.8
+
+*2017-04-07*
+
+- Fixed `resetFields` of Form reassigning form items, #3840 (by @pengchongfu)
+- Added `max` and `min` attributes for CheckboxGroup, #3700 (by @mdartic)
+- Fixed DatePicker adding one to picked month in some specific days, #3935
+- Added `closeAll` method for Message, #3966 (by @pengchongfu)
+- Added `format-tooltip` attribute for Slider, #3657 (by @liyanlong)
+- Fixed filter panel of Table being when nested in a Dialog, #4023 (by @liyanlong)
+- Fixed single Select unable to create new items in Vue 2.2.x, #3984
+- Fixed Row disappearing in all breakpoints if its `span` is set to 0 in some breakpoints, #4053
+
 ### 1.2.7
 
 *2017-03-29*
