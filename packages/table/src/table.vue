@@ -374,7 +374,8 @@
         if (column.filteredValue && column.filteredValue.length) {
           this.store.commit('filterChange', {
             column,
-            values: column.filteredValue
+            values: column.filteredValue,
+            silent: true
           });
         }
       });
