@@ -504,7 +504,7 @@ Tree nodes can be initially expanded or checked
 ### Custom node content
 The content of tree nodes can be customized, so you can add icons or buttons as you will
 
-::: demo Use `render-content` to assign a render function that returns the content of tree nodes. See Vue's documentation for a detailed introduction of render functions.
+::: demo Use `render-content` to assign a render function that returns the content of tree nodes. See Vue's documentation for a detailed introduction of render functions. Note that this demo can't run in jsfiddle because it doesn't support JSX syntax. In a real project, `render-content` will work if relevant dependencies are correctly configured.
 ```html
 <el-tree
   :data="data2"

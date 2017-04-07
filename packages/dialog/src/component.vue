@@ -25,11 +25,13 @@
 
 <script>
   import Popup from 'element-ui/src/utils/popup';
+  import throttle from 'throttle-debounce/throttle';
+  import emitter from 'element-ui/src/mixins/emitter';
 
   export default {
     name: 'ElDialog',
 
-    mixins: [Popup],
+    mixins: [Popup, emitter],
 
     props: {
       title: {
@@ -96,10 +98,12 @@
         this.$emit('input', val);
         if (val) {
           this.$emit('open');
+          this.$el.addEventListener('scroll', this.throttledUpdatePopper);
           this.$nextTick(() => {
             this.$refs.dialog.scrollTop = 0;
           });
         } else {
+          this.$el.removeEventListener('scroll', this.throttledUpdatePopper);
           this.$emit('close');
         }
       }
@@ -119,7 +123,15 @@
         if (this.closeOnClickModal) {
           this.close();
         }
+      },
+      updatePopper() {
+        this.broadcast('ElSelectDropdown', 'updatePopper');
+        this.broadcast('ElDropdownMenu', 'updatePopper');
       }
+    },
+
+    created() {
+      this.throttledUpdatePopper = throttle(100, this.updatePopper);
     },
 
     mounted() {
