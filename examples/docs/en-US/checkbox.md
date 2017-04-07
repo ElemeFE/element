@@ -172,10 +172,6 @@ The `min` and `max` properties can help you to limit the number of checked items
 </template>
 <script>
   const cityOptions = ['Shanghai', 'Beijing', 'Guangzhou', 'Shenzhen'];
-  let handlerLimitExceeded = (event) => {
-    currentEvent = event;
-    console.log(event);
-  }
   export default {
     data() {
       return {

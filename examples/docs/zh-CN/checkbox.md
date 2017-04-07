@@ -164,9 +164,9 @@
 ```
 :::
 
-### Minimum / Maximum items checked (to be translated)
+### 可选项目数量的限制
 
-The `min` and `max` properties can help you to limit the number of checked items.
+使用 `min` 和 `max` 属性能够限制可以被勾选的项目的数量。
 
 :::demo
 
@@ -181,10 +181,6 @@ The `min` and `max` properties can help you to limit the number of checked items
 </template>
 <script>
   const cityOptions = ['上海', '北京', '广州', '深圳'];
-  let handlerLimitExceeded = (event) => {
-    currentEvent = event;
-    console.log(event);
-  }
   export default {
     data() {
       return {
@@ -207,11 +203,11 @@ The `min` and `max` properties can help you to limit the number of checked items
 | checked  | 当前是否勾选    | boolean   |  — | false   |
 | indeterminate  | 设置 indeterminate 状态，只负责样式控制    | boolean   |  — | false   |
 
-### Checkbox-group Attributes (to be translated)
-| Attribute      | Description         | Type    | Options                         | Default|
+### Checkbox-group Attributes
+| 参数       | 说明        | 类型    | 可选值                         | 默认值 |
 |---------- |-------- |---------- |-------------  |-------- |
-| min     | minimum number of checkbox checked   | number    |       —        |     —    |
-| max     | maximum number of checkbox checked   | number    |       —        |     —    |
+| min     | 可被勾选的 checkbox 的最大数量   | number    |       —        |     —    |
+| max     | 可被勾选的 checkbox 的最小数量   | number    |       —        |     —    |
 
 
 ### Checkbox-group Events
