@@ -180,7 +180,7 @@
     watch: {
       showPopper(val) {
         if (val === true && parseInt(this.popperJS._popper.style.zIndex, 10) < PopupManager.zIndex) {
-          this.popperJS._popper.style.zIndex = PopupManager.zIndex + 1;
+          this.popperJS._popper.style.zIndex = PopupManager.nextZIndex();
         }
       }
     }
