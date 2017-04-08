@@ -148,7 +148,7 @@ export default {
           ? <upload-dragger on-file={uploadFiles}>{this.$slots.default}</upload-dragger>
           : this.$slots.default
         }
-        <input class="el-upload__input" type="file" ref="input" on-change={handleChange} multiple={multiple} accept={accept}></input>
+        <input class="el-upload__input" type="file" ref="input" :name="name" on-change={handleChange} multiple={multiple} accept={accept}></input>
       </div>
     );
   }
