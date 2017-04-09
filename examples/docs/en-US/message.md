@@ -2,7 +2,7 @@
   module.exports = {
     methods: {
       open() {
-        this.$message('This is a message');
+        this.$message('This is a message.');
       },
 
       open2() {
@@ -26,7 +26,7 @@
       open5() {
         this.$message({
           showClose: true,
-          message: 'This is a message'
+          message: 'This is a message.'
         });
       },
 
@@ -101,7 +101,7 @@ Used to show the feedback of Success, Warning, Message and Error activities.
   export default {
     methods: {
       open() {
-        this.$message('This is a message');
+        this.$message('This is a message.');
       },
       open2() {
         this.$message({
@@ -145,23 +145,23 @@ A close button can be added.
       open5() {
         this.$message({
           showClose: true,
-          message: 'Congrats, this is a success message.'
+          message: 'This is a message.'
         });
       },
 
       open6() {
         this.$message({
           showClose: true,
-          message: 'Warning, this is a warning message.',
-          type: 'warning'
+          message: 'Congrats, this is a success message.',
+          type: 'success'
         });
       },
 
       open7() {
         this.$message({
           showClose: true,
-          message: 'Oops, this is a error message.',
-          type: 'error'
+          message: 'Warning, this is a warning message.',
+          type: 'warning'
         });
       },
 
