@@ -6,7 +6,7 @@ process.on('exit', () => {
 });
 
 if (!process.argv[2]) {
-  console.error('[组件名]必填.');
+  console.error('[组件名]必填 - Please enter new component name');
   process.exit(1);
 }
 
