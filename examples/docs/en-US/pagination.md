@@ -15,11 +15,10 @@ If you have too much data to display in one page, use pagination.
 </div>
 <div class="block">
   <span class="demonstration">When you have more than 7 pages</span>
-    <el-pagination
-      layout="prev, pager, next"
-      :total="1000">
-    </el-pagination>
-  </div>
+  <el-pagination
+    layout="prev, pager, next"
+    :total="1000">
+  </el-pagination>
 </div>
 ```
 :::
