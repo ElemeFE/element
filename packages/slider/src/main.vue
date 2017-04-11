@@ -1,5 +1,6 @@
 <template>
-  <div class="el-slider">
+  <div class="el-slider"
+    :class="{ 'el-slider__vertical': vertical, 'el-slider__with_input': showInput }">
     <el-input-number
       v-model="firstValue"
       v-if="showInput && !range"
@@ -14,20 +15,26 @@
     </el-input-number>
     <div class="el-slider__runway"
       :class="{ 'show-input': showInput, 'disabled': disabled }"
+      :style="vertical ? size && { height: size } : size && { width: size }"
       @click="onSliderClick"
       ref="slider">
       <div
         class="el-slider__bar"
-        :style="{
-          width: barWidth,
-          left: barLeft
+        :style="vertical ? {
+          height: barSize,
+          bottom: barStart
+        } : {
+          width: barSize,
+          left: barStart
         }">
       </div>
       <slider-button
+        :vertical="vertical"
         v-model="firstValue"
         ref="button1">
       </slider-button>
       <slider-button
+        :vertical="vertical"
         v-model="secondValue"
         ref="button2"
         v-if="range">
@@ -35,7 +42,7 @@
       <div
         class="el-slider__stop"
         v-for="item in stops"
-        :style="{ 'left': item + '%' }"
+        :style="vertical ? { 'bottom': item + '%' } : { 'left': item + '%' }"
         v-if="showStops">
       </div>
     </div>
@@ -94,6 +101,13 @@
       range: {
         type: Boolean,
         default: false
+      },
+      vertical: {
+        type: Boolean,
+        default: false
+      },
+      size: {
+        type: String
       }
     },
 
@@ -213,14 +227,19 @@
 
       onSliderClick(event) {
         if (this.disabled || this.dragging) return;
-        const sliderOffsetLeft = this.$refs.slider.getBoundingClientRect().left;
-        this.setPosition((event.clientX - sliderOffsetLeft) / this.$sliderWidth * 100);
+        if (this.vertical) {
+          const sliderOffsetBottom = this.$refs.slider.getBoundingClientRect().bottom;
+          this.setPosition((event.clientY - sliderOffsetBottom) / this.$sliderSize * 100);
+        } else {
+          const sliderOffsetLeft = this.$refs.slider.getBoundingClientRect().left;
+          this.setPosition((event.clientX - sliderOffsetLeft) / this.$sliderSize * 100);
+        }
       }
     },
 
     computed: {
-      $sliderWidth() {
-        return parseInt(getStyle(this.$refs.slider, 'width'), 10);
+      $sliderSize() {
+        return parseInt(getStyle(this.$refs.slider, (this.vertical ? 'height' : 'width')), 10);
       },
 
       stops() {
@@ -248,13 +267,13 @@
         return Math.max(this.firstValue, this.secondValue);
       },
 
-      barWidth() {
+      barSize() {
         return this.range
           ? `${ 100 * (this.maxValue - this.minValue) / (this.max - this.min) }%`
           : `${ 100 * (this.firstValue - this.min) / (this.max - this.min) }%`;
       },
 
-      barLeft() {
+      barStart() {
         return this.range
           ? `${ 100 * (this.minValue - this.min) / (this.max - this.min) }%`
           : '0%';
