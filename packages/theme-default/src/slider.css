@@ -128,5 +128,80 @@
       background-color: var(--slider-stop-background-color);
       transform: translateX(-50%);
     }
+
+    @e vertical {
+      position: relative;
+      .el-slider__runway {
+        width: 4px;
+        height: 100%;
+        margin: 0 16px;
+      }
+      .el-slider__bar {
+        width: 4px;
+        height: auto;
+        border-radius: 0 0 3px 3px;
+      }
+      .el-slider__button-wrapper {
+        top: auto;
+        left: var(--slider-button-wrapper-offset);
+        transform: translateY(50%);
+      }
+      .el-slider__stop {
+        transform: translateY(50%);
+      }
+      &.el-slider__with_input {
+        padding-bottom: var(--input-large-height);
+        .el-slider__input {
+          overflow: visible;
+          float: none;
+          position: absolute;
+          bottom: 0;
+          width: 36px;
+          margin-top: 15px;
+          .el-input__inner {
+            text-align: center;
+            padding-left: 5px;
+            padding-right: 5px;
+          }
+          .el-input-number__decrease,
+          .el-input-number__increase
+          {
+            top: var(--input-small-height);
+            margin-top: -1px;
+            border: var(--input-border);
+            line-height: 20px;
+            box-sizing: border-box;
+            transition: var(--border-transition-base);
+          }
+          .el-input-number__decrease {
+            width: 18px;
+            right: 18px;
+            border-bottom-left-radius: var(--input-border-radius);
+          }
+          .el-input-number__increase {
+            width: 19px;
+            border-bottom-right-radius: var(--input-border-radius);
+            & ~ .el-input .el-input__inner {
+              border-bottom-left-radius: 0;
+              border-bottom-right-radius: 0;
+            }
+          }
+          &:hover {
+            .el-input-number__decrease,
+            .el-input-number__increase
+            {
+              border-color: var(--input-hover-border);
+            }
+          }
+          &:active {
+            .el-input-number__decrease,
+            .el-input-number__increase
+            {
+              border-color: var(--input-focus-border);
+            }
+          }
+        }
+      }
+    }
   }
 }
