@@ -513,9 +513,9 @@
 <template>
   <el-select
     v-model="value9"
-    multiple
     filterable
     remote
+    allow-create
     placeholder="请输入关键词"
     :remote-method="remoteMethod"
     :loading="loading">

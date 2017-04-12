@@ -271,6 +271,10 @@
 
       visible(val) {
         if (!val) {
+          if (this.remote && this.allowCreate) {
+            this.handleOptionSelect({value: this.query});
+          }
+
           this.$refs.reference.$el.querySelector('input').blur();
           this.handleIconHide();
           this.broadcast('ElSelectDropdown', 'destroyPopper');
