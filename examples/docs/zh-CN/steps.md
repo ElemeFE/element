@@ -122,6 +122,7 @@
 | title | 标题 | string | — | — |
 | description | 描述性文字 | string | — | — |
 | icon | 图标 | Element Icon 提供的图标，如果要使用自定义图标可以通过 slot 方式写入 | string | — |
+| status | 设置当前步骤的状态，不设置则根据 steps 确定状态 | wait/process/finish/error/success | - |
 
 ### Step Slot
 | name | 说明  |

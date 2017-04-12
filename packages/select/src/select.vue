@@ -104,7 +104,6 @@
   import { addClass, removeClass, hasClass } from 'element-ui/src/utils/dom';
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
   import { t } from 'element-ui/src/locale';
-  import merge from 'element-ui/src/utils/merge';
   const sizeMap = {
     'large': 42,
     'small': 30,
@@ -202,7 +201,7 @@
       return {
         options: [],
         cachedOptions: [],
-        createdOption: null,
+        createdLabel: null,
         createdSelected: false,
         selected: this.multiple ? [] : {},
         isSelect: true,
@@ -294,7 +293,7 @@
             if (this.selected) {
               if (this.filterable && this.allowCreate &&
                 this.createdSelected && this.createdOption) {
-                this.selectedLabel = this.createdOption.currentLabel;
+                this.selectedLabel = this.createdLabel;
               } else {
                 this.selectedLabel = this.selected.currentLabel;
               }
@@ -401,7 +400,7 @@
         if (!this.multiple) {
           let option = this.getOption(this.value);
           if (option.created) {
-            this.createdOption = merge({}, option);
+            this.createdLabel = option.currentLabel;
             this.createdSelected = true;
           } else {
             this.createdSelected = false;
@@ -605,6 +604,7 @@
         let index = this.selected.indexOf(tag);
         if (index > -1 && !this.disabled) {
           this.value.splice(index, 1);
+          this.$emit('remove-tag', tag);
         }
         event.stopPropagation();
       },
@@ -669,8 +669,8 @@
       });
     },
 
-    destroyed() {
-      if (this.handleResize) removeResizeListener(this.$el, this.handleResize);
+    beforeDestroy() {
+      if (this.$el && this.handleResize) removeResizeListener(this.$el, this.handleResize);
     }
   };
 </script>

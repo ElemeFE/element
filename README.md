@@ -1,7 +1,9 @@
 <p align="center">
   <img src="https://cdn.rawgit.com/ElemeFE/element/dev/element_logo.svg">
 </p>
+
 # Element
+
 [![Build Status](https://travis-ci.org/ElemeFE/element.svg?branch=master)](https://travis-ci.org/ElemeFE/element)
 [![Coverage Status](https://coveralls.io/repos/github/ElemeFE/element/badge.svg?branch=master)](https://coveralls.io/github/ElemeFE/element?branch=master)
 [![CDNJS](https://img.shields.io/cdnjs/v/element-ui.svg)](https://cdnjs.com/libraries/element-ui)
@@ -31,13 +33,13 @@
 - [Customize Theme](http://element.eleme.io/#/en-US/component/custom-theme)
 - [Preview and generate theme online](https://elementui.github.io/theme-preview)
 - Starter Kit
- - [element-starter](https://github.com/ElementUI/element-starter)
- - [element-cooking-starter](https://github.com/ElementUI/element-cooking-starter)
- - [element-in-laravel-starter](https://github.com/ElementUI/element-in-laravel-starter)
+  - [element-starter](https://github.com/ElementUI/element-starter)
+  - [element-cooking-starter](https://github.com/ElementUI/element-cooking-starter)
+  - [element-in-laravel-starter](https://github.com/ElementUI/element-in-laravel-starter)
 - [Design resources](https://github.com/ElementUI/Resources)
 - Boilerplate for bug reports
- - [CodePen](https://codepen.io/anon/pen/ozYpNA)
- - [JSFiddle](https://jsfiddle.net/gmve9d3p/)
+  - [CodePen](https://codepen.io/anon/pen/ozYpNA)
+  - [JSFiddle](https://jsfiddle.net/gmve9d3p/)
 - [Mint UI](https://github.com/ElemeFE/mint-ui) - Mobile UI elements for Vue.js
 
 ## Install
@@ -96,7 +98,7 @@ English documentation is brought to you by SwiftGG Translation Team. Our special
 
 ## Donation
 If you find Element useful, you can buy us a cup of coffee
-<img width="650" src="http://fuss10.elemecdn.com/2/d0/ab1b8e5a1d96bcdcd6092ce0c66ecjpeg.jpeg" alt="">
+<img width="650" src="http://fuss10.elemecdn.com/2/d0/ab1b8e5a1d96bcdcd6092ce0c66ecjpeg.jpeg?t=2017" alt="">
 
 ## Backers
 

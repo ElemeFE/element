@@ -95,7 +95,7 @@
       submitUpload() {
         this.$refs.upload.submit();
       },
-      handleAvatarScucess(res, file) {
+      handleAvatarSuccess(res, file) {
         this.imageUrl = URL.createObjectURL(file.raw);
       },
       beforeAvatarUpload(file) {
@@ -164,7 +164,7 @@
   class="avatar-uploader"
   action="https://jsonplaceholder.typicode.com/posts/"
   :show-file-list="false"
-  :on-success="handleAvatarScucess"
+  :on-success="handleAvatarSuccess"
   :before-upload="beforeAvatarUpload">
   <img v-if="imageUrl" :src="imageUrl" class="avatar">
   <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -204,7 +204,7 @@
       };
     },
     methods: {
-      handleAvatarScucess(res, file) {
+      handleAvatarSuccess(res, file) {
         this.imageUrl = URL.createObjectURL(file.raw);
       },
       beforeAvatarUpload(file) {
@@ -344,7 +344,7 @@
   class="upload-demo"
   drag
   action="https://jsonplaceholder.typicode.com/posts/"
-  mutiple>
+  multiple>
   <i class="el-icon-upload"></i>
   <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
   <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>

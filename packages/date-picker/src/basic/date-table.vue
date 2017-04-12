@@ -14,7 +14,7 @@
     <tr
       class="el-date-table__row"
       v-for="row in rows"
-      :class="{ current: value && isWeekActive(row[1]) }">
+      :class="{ current: isWeekActive(row[1]) }">
       <td
         v-for="cell in row"
         :class="getCellClasses(cell)"
@@ -78,9 +78,7 @@
             column: null
           };
         }
-      },
-
-      value: {}
+      }
     },
 
     computed: {

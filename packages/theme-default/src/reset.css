@@ -70,3 +70,10 @@ sup, sub {
 small {
   font-size: calc(var(--font-size-base) - 2px);
 }
+
+hr {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 0;
+  border-top: 1px solid #eeeeee;
+}

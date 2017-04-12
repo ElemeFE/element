@@ -4,7 +4,7 @@
     box-sizing: border-box;
     .content {
       margin-left: -1px;
-      
+
       > {
         h3 {
           margin: 45px 0 15px;
@@ -16,7 +16,8 @@
           color: #5e6d82;
           font-size: 14px;
           margin-bottom: 45px;
-          
+          line-height: 1.5em;
+
           strong {
             font-weight: normal;
           }

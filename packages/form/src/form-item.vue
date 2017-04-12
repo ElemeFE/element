@@ -161,10 +161,10 @@
 
         let prop = getPropByPath(model, path);
 
-        if (Array.isArray(value) && value.length > 0) {
+        if (Array.isArray(value)) {
           this.validateDisabled = true;
-          prop.o[prop.k] = [];
-        } else if (value !== '') {
+          prop.o[prop.k] = [].concat(this.initialValue);
+        } else {
           this.validateDisabled = true;
           prop.o[prop.k] = this.initialValue;
         }
@@ -200,8 +200,12 @@
       if (this.prop) {
         this.dispatch('ElForm', 'el.form.addField', [this]);
 
+        let initialValue = this.fieldValue;
+        if (Array.isArray(initialValue)) {
+          initialValue = [].concat(initialValue);
+        }
         Object.defineProperty(this, 'initialValue', {
-          value: this.fieldValue
+          value: initialValue
         });
 
         let rules = this.getRules();

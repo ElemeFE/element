@@ -55,7 +55,7 @@
       submitUpload() {
         this.$refs.upload.submit();
       },
-      handleAvatarScucess(res, file) {
+      handleAvatarSuccess(res, file) {
         this.imageUrl = URL.createObjectURL(file.raw);
       },
       beforeAvatarUpload(file) {
@@ -123,7 +123,7 @@ Use `before-upload` hook to limit the upload file format and size.
   class="avatar-uploader"
   action="https://jsonplaceholder.typicode.com/posts/"
   :show-file-list="false"
-  :on-success="handleAvatarScucess"
+  :on-success="handleAvatarSuccess"
   :before-upload="beforeAvatarUpload">
   <img v-if="imageUrl" :src="imageUrl" class="avatar">
   <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -163,7 +163,7 @@ Use `before-upload` hook to limit the upload file format and size.
       };
     },
     methods: {
-      handleAvatarScucess(res, file) {
+      handleAvatarSuccess(res, file) {
         this.imageUrl = URL.createObjectURL(file.raw);
       },
       beforeAvatarUpload(file) {
@@ -308,7 +308,7 @@ You can drag your file to a certain area to upload it.
   :on-preview="handlePreview"
   :on-remove="handleRemove"
   :file-list="fileList"
-  mutiple>
+  multiple>
   <i class="el-icon-upload"></i>
   <div class="el-upload__text">Drop file here or <em>click to upload</em></div>
   <div class="el-upload__tip" slot="tip">jpg/png files with a size less than 500kb</div>

@@ -1440,7 +1440,7 @@ When the row content is too long and you do not want to display the horizontal s
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | data | table data | array | — | — |
 | height | Table's height. By default it has an `auto` height. If its value is a number, the height is measured in pixels; if its value is a string, the height is affected by external styles | string/number | — | — |
-| maxHeight | Table's max-height. The height of the table starts from `auto` until it reaches the maxHeight limit. The `maxHeight` is measured in pixels, same as `height` | string/number | — | — |
+| max-height | Table's max-height. The height of the table starts from `auto` until it reaches the maxHeight limit. The `maxHeight` is measured in pixels, same as `height` | string/number | — | — |
 | stripe | whether table is striped | boolean | — | false |
 | border | whether table has vertical border | boolean | — | false |
 | fit | whether width of column automatically fits its container | boolean | — | true |
@@ -1454,6 +1454,7 @@ When the row content is too long and you do not want to display the horizontal s
 | default-expand-all | whether expand all rows by default, only works when the table has a column type="expand" | Boolean | — | false |
 | expand-row-keys | set expanded rows by this prop, prop's value is the keys of expand rows, you should set row-key before using this prop | Array | — | |
 | default-sort | set the default sort column and order. property `prop` is used to set default sort column, property `order` is used to set default sort order | Object | `order`: ascending, descending | if `prop` is set, and `order` is not set, then `order` is default to ascending |
+| tooltip-effect | tooltip `effect` property | String | dark/light | | dark |
 
 ### Table Events
 | Event Name | Description | Parameters |

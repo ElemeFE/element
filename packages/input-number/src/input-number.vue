@@ -66,6 +66,7 @@
           on(el, 'mousedown', () => {
             startTime = new Date();
             once(document, 'mouseup', clear);
+            clearInterval(interval);
             interval = setInterval(handler, 100);
           });
         }

@@ -173,7 +173,9 @@
       defaultSort: Object,
 
       // 勾选框自动隐藏
-      autoCheckbox: Boolean
+      autoCheckbox: Boolean,
+
+      tooltipEffect: String
     },
 
     components: {
@@ -370,6 +372,17 @@
     mounted() {
       this.bindEvents();
       this.doLayout();
+
+      // init filters
+      this.store.states.columns.forEach(column => {
+        if (column.filteredValue && column.filteredValue.length) {
+          this.store.commit('filterChange', {
+            column,
+            values: column.filteredValue,
+            silent: true
+          });
+        }
+      });
 
       this.$ready = true;
     },

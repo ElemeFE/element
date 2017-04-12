@@ -59,7 +59,7 @@ export default {
       reference = this.referenceElm = this.$slots.reference[0].elm;
     }
     if (this.trigger === 'click') {
-      on(reference, 'click', () => { this.showPopper = !this.showPopper; });
+      on(reference, 'click', this.doToggle);
       on(document, 'click', this.handleDocumentClick);
     } else if (this.trigger === 'hover') {
       on(reference, 'mouseenter', this.handleMouseEnter);
@@ -75,8 +75,8 @@ export default {
         for (let i = 0; i < len; i++) {
           if (children[i].nodeName === 'INPUT' ||
               children[i].nodeName === 'TEXTAREA') {
-            on(children[i], 'focus', () => { this.showPopper = true; });
-            on(children[i], 'blur', () => { this.showPopper = false; });
+            on(children[i], 'focus', this.doShow);
+            on(children[i], 'blur', this.doClose);
             found = true;
             break;
           }
@@ -85,16 +85,25 @@ export default {
       if (found) return;
       if (reference.nodeName === 'INPUT' ||
         reference.nodeName === 'TEXTAREA') {
-        on(reference, 'focus', () => { this.showPopper = true; });
-        on(reference, 'blur', () => { this.showPopper = false; });
+        on(reference, 'focus', this.doShow);
+        on(reference, 'blur', this.doClose);
       } else {
-        on(reference, 'mousedown', () => { this.showPopper = true; });
-        on(reference, 'mouseup', () => { this.showPopper = false; });
+        on(reference, 'mousedown', this.doShow);
+        on(reference, 'mouseup', this.doClose);
       }
     }
   },
 
   methods: {
+    doToggle() {
+      this.showPopper = !this.showPopper;
+    },
+    doShow() {
+      this.showPopper = true;
+    },
+    doClose() {
+      this.showPopper = false;
+    },
     handleMouseEnter() {
       this.showPopper = true;
       clearTimeout(this._timer);
@@ -124,12 +133,13 @@ export default {
   destroyed() {
     const reference = this.reference;
 
-    off(reference, 'mouseup');
-    off(reference, 'mousedown');
-    off(reference, 'focus');
-    off(reference, 'blur');
-    off(reference, 'mouseleave');
-    off(reference, 'mouseenter');
+    off(reference, 'click', this.doToggle);
+    off(reference, 'mouseup', this.doClose);
+    off(reference, 'mousedown', this.doShow);
+    off(reference, 'focus', this.doShow);
+    off(reference, 'blur', this.doClose);
+    off(reference, 'mouseleave', this.handleMouseLeave);
+    off(reference, 'mouseenter', this.handleMouseEnter);
     off(document, 'click', this.handleDocumentClick);
   }
 };

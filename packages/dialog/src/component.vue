@@ -25,11 +25,12 @@
 
 <script>
   import Popup from 'element-ui/src/utils/popup';
+  import emitter from 'element-ui/src/mixins/emitter';
 
   export default {
     name: 'ElDialog',
 
-    mixins: [Popup],
+    mixins: [Popup, emitter],
 
     props: {
       title: {
@@ -96,10 +97,12 @@
         this.$emit('input', val);
         if (val) {
           this.$emit('open');
+          this.$el.addEventListener('scroll', this.updatePopper);
           this.$nextTick(() => {
             this.$refs.dialog.scrollTop = 0;
           });
         } else {
+          this.$el.removeEventListener('scroll', this.updatePopper);
           this.$emit('close');
         }
       }
@@ -119,6 +122,10 @@
         if (this.closeOnClickModal) {
           this.close();
         }
+      },
+      updatePopper() {
+        this.broadcast('ElSelectDropdown', 'updatePopper');
+        this.broadcast('ElDropdownMenu', 'updatePopper');
       }
     },
 

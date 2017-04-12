@@ -38,7 +38,10 @@ export default {
     fileList: Array,
     autoUpload: Boolean,
     listType: String,
-    httpRequest: Function
+    httpRequest: {
+      type: Function,
+      default: ajax
+    }
   },
 
   data() {
@@ -65,10 +68,8 @@ export default {
       if (postFiles.length === 0) { return; }
 
       postFiles.forEach(rawFile => {
-        if (!this.thumbnailMode || this.isImage(rawFile.type)) {
-          this.onStart(rawFile);
-          if (this.autoUpload) this.upload(rawFile);
-        }
+        this.onStart(rawFile);
+        if (this.autoUpload) this.upload(rawFile);
       });
     },
     upload(rawFile, file) {
@@ -85,17 +86,16 @@ export default {
             this.post(rawFile);
           }
         }, () => {
-          if (file) this.onRemove(file);
+          this.onRemove(rawFile, true);
         });
       } else if (before !== false) {
         this.post(rawFile);
       } else {
-        if (file) this.onRemove(file);
+        this.onRemove(rawFile, true);
       }
     },
     post(rawFile) {
-      const request = this.httpRequest || ajax;
-      request({
+      const options = {
         headers: this.headers,
         withCredentials: this.withCredentials,
         file: rawFile,
@@ -111,7 +111,11 @@ export default {
         onError: err => {
           this.onError(err, rawFile);
         }
-      });
+      };
+      const requestPromise = this.httpRequest(options);
+      if (requestPromise && requestPromise.then) {
+        requestPromise.then(options.onSuccess, options.onError);
+      }
     },
     handleClick() {
       this.$refs.input.click();

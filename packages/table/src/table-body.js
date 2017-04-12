@@ -1,9 +1,13 @@
 import { getCell, getColumnByCell, getRowIdentity } from './util';
+import { hasClass } from 'element-ui/src/utils/dom';
 import ElCheckbox from 'element-ui/packages/checkbox';
+import ElTooltip from 'element-ui/packages/tooltip';
+import debounce from 'throttle-debounce/debounce';
 
 export default {
   components: {
-    ElCheckbox
+    ElCheckbox,
+    ElTooltip
   },
 
   props: {
@@ -74,6 +78,8 @@ export default {
                   </tr>)
                 : ''
               ]
+            ).concat(
+              <el-tooltip effect={ this.table.tooltipEffect } placement="top" ref="tooltip" content={ this.tooltipContent }></el-tooltip>
             )
           }
         </tbody>
@@ -153,8 +159,12 @@ export default {
 
   data() {
     return {
-      tooltipDisabled: true
+      tooltipContent: ''
     };
+  },
+
+  created() {
+    this.activateTooltip = debounce(50, tooltip => tooltip.handleShowPopper());
   },
 
   methods: {
@@ -209,11 +219,20 @@ export default {
 
       // 判断是否text-overflow, 如果是就显示tooltip
       const cellChild = event.target.querySelector('.cell');
-      if (!cellChild) return;
-      this.tooltipDisabled = cellChild.scrollWidth <= cellChild.offsetWidth;
+
+      if (hasClass(cellChild, 'el-tooltip') && cellChild.scrollWidth > cellChild.offsetWidth) {
+        const tooltip = this.$refs.tooltip;
+
+        this.tooltipContent = cell.innerText;
+        tooltip.referenceElm = cell;
+        tooltip.$refs.popper.style.display = 'none';
+        tooltip.doDestroy();
+        this.activateTooltip(tooltip);
+      }
     },
 
     handleCellMouseLeave(event) {
+      this.$refs.tooltip.handleClosePopper();
       const cell = getCell(event);
       if (!cell) return;
 
