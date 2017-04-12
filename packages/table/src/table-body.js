@@ -221,7 +221,7 @@ export default {
     },
 
     handleCellMouseLeave(event) {
-      this.$refs.tooltip.handleClosePopper();
+      this.$refs.tooltip && this.$refs.tooltip.handleClosePopper();
       const cell = getCell(event);
       if (!cell) return;
 
