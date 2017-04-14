@@ -272,7 +272,7 @@
       visible(val) {
         if (!val) {
           if (this.remote && this.allowCreate) {
-            this.handleOptionSelect({value: this.query});
+            this.handleOptionSelect({value: this.selectedLabel});
           }
 
           this.$refs.reference.$el.querySelector('input').blur();

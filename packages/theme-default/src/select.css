@@ -57,10 +57,6 @@
         }
       }
 
-      & .el-icon-loading {
-          z-index: 100;
-      }
-
       &.is-disabled {
         & .el-input__inner {
           cursor: not-allowed;
@@ -74,6 +70,10 @@
 
     & > .el-input {
       display: block;
+    }
+
+    & .el-icon-loading {
+      z-index: 100;
     }
 
     @e input {
