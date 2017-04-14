@@ -21,6 +21,7 @@
 
     & .el-input__inner {
       cursor: pointer;
+      padding-right: 35px;
 
       &:focus {
         border-color: var(--select-input-focus-background);
