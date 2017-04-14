@@ -205,6 +205,7 @@ export default {
       default: 'left'
     },
     value: {},
+    defaultValue: {},
     rangeSeparator: {
       default: ' - '
     },
@@ -410,7 +411,7 @@ export default {
     showPicker() {
       if (this.$isServer) return;
       if (!this.picker) {
-        this.panel.defaultValue = this.currentValue;
+        this.panel.defaultValue = this.defaultValue || this.currentValue;
         this.picker = new Vue(this.panel).$mount();
         this.picker.popperClass = this.popperClass;
         this.popperElm = this.picker.$el;
