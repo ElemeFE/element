@@ -504,26 +504,23 @@
       },
 
       handleOptionSelect(option) {
-        if (!this.multiple) {
-          this.$emit('input', option.value);
-          this.visible = false;
-        } else {
-          let optionIndex = -1;
-          this.value.forEach((item, index) => {
-            if (item === option.value) {
-              optionIndex = index;
-            }
-          });
+        if (this.multiple) {
+          const value = this.value.slice();
+          const optionIndex = value.indexOf(option.value);
           if (optionIndex > -1) {
-            this.value.splice(optionIndex, 1);
-          } else if (this.multipleLimit <= 0 || this.value.length < this.multipleLimit) {
-            this.value.push(option.value);
+            value.splice(optionIndex, 1);
+          } else if (this.multipleLimit <= 0 || value.length < this.multipleLimit) {
+            value.push(option.value);
           }
+          this.$emit('input', value);
           if (option.created) {
             this.query = '';
             this.inputLength = 20;
           }
           if (this.filterable) this.$refs.input.focus();
+        } else {
+          this.$emit('input', option.value);
+          this.visible = false;
         }
       },
 
