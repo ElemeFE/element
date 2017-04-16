@@ -231,6 +231,7 @@ In this case you should call `Notification(options)`. We have also registered me
 | customClass | custom class name for Notification | string | — | — |
 | duration | duration before close. It will not automatically close if set 0 | number | — | 4500 |
 | onClose | callback function when closed | function | — | — |
+| onClick | callback function when notification clicked | function | — | — |
 | offset | offset from the top edge of the screen. Every Notification instance of the same moment should have the same offset | number | — | 0 |
 
 ### Methods
