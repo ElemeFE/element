@@ -258,7 +258,10 @@ import {
   Collapse,
   CollapseItem,
   Cascader,
-  ColorPicker
+  ColorPicker,
+  Loading,
+  MessageBox,
+  Message
 } from 'element-ui'
 
 Vue.use(Pagination)
