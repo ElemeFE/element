@@ -1,5 +1,44 @@
 ## Changelog
 
+### 1.2.8
+
+*2017-04-07*
+
+- Fixed `resetFields` of Form reassigning form items, #3840 (by @pengchongfu)
+- Added `max` and `min` attributes for CheckboxGroup, #3700 (by @mdartic)
+- Fixed DatePicker adding one to picked month in some specific days, #3935
+- Added `closeAll` method for Message, #3966 (by @pengchongfu)
+- Added `format-tooltip` attribute for Slider, #3657 (by @liyanlong)
+- Fixed filter panel of Table being when nested in a Dialog, #4023 (by @liyanlong)
+- Fixed single Select unable to create new items in Vue 2.2.x, #3984
+- Fixed Row disappearing in all breakpoints if its `span` is set to 0 in some breakpoints, #4053
+
+### 1.2.7
+
+*2017-03-29*
+
+- Fixed Select not compatible with Vue 2.2.6, #3797
+- Improve performance for rendering tooltip in Table, #3478
+- Add `tooltip-effect` property for Table
+
+### 1.2.6
+
+*2017-03-28*
+
+- Fixed Switch compatible with SSR, #3752
+- Fixed the time of TimePicker calculating incorrectly, #3479
+- Fixed the week of DatePicker formatting incorrectly, #2774
+- Fixed the week of DatePicker initializing incorrectly, #3058
+- Fixed the events of Popover destroying incorrectly, #3555
+- Fixed InputNumber setInterval, #3514 (by @pengchongfu)
+- Fixed RadioButton css files, #3276
+- Fixed hover style on striped Table, #3696 (by @nicoeg)
+- Fixed Slider's button jumping left issue, #3664 (by @gabrielboliveira)
+- Added `delete-tag` event for Select, #3663 (by @pengchongfu)
+- Added `onPick` option for DatePicker, #2921
+- Added `status` for Step, #3722
+- Added full example for on-demand importing, #3302
+
 ### 1.2.5
 
 *2017-03-19*

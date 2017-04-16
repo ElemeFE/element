@@ -233,7 +233,7 @@ export default {
         'on-error': this.handleError,
         'on-preview': this.onPreview,
         'on-remove': this.handleRemove,
-        httpRequest: this.httpRequest
+        'http-request': this.httpRequest
       },
       ref: 'upload-inner'
     };

@@ -12,6 +12,7 @@
         checkAll: false,
         cities: cityOptions,
         checkedCities: ['上海', '北京'],
+        checkedCities1: ['上海', '北京'],
         isIndeterminate: true
       };
     },
@@ -163,6 +164,34 @@
 ```
 :::
 
+### 可选项目数量的限制
+
+使用 `min` 和 `max` 属性能够限制可以被勾选的项目的数量。
+
+:::demo
+
+```html
+<template>
+  <el-checkbox-group 
+    v-model="checkedCities1"
+    :min="1"
+    :max="2">
+    <el-checkbox v-for="city in cities" :label="city">{{city}}</el-checkbox>
+  </el-checkbox-group>
+</template>
+<script>
+  const cityOptions = ['上海', '北京', '广州', '深圳'];
+  export default {
+    data() {
+      return {
+        checkedCities1: ['上海', '北京'],
+        cities: cityOptions
+      };
+    }
+  };
+</script>
+```
+:::
 ### Checkbox Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
@@ -173,6 +202,13 @@
 | disabled  | 按钮禁用    | boolean   |  — | false   |
 | checked  | 当前是否勾选    | boolean   |  — | false   |
 | indeterminate  | 设置 indeterminate 状态，只负责样式控制    | boolean   |  — | false   |
+
+### Checkbox-group Attributes
+| 参数       | 说明        | 类型    | 可选值                         | 默认值 |
+|---------- |-------- |---------- |-------------  |-------- |
+| min     | 可被勾选的 checkbox 的最大数量   | number    |       —        |     —    |
+| max     | 可被勾选的 checkbox 的最小数量   | number    |       —        |     —    |
+
 
 ### Checkbox-group Events
 | 事件名称      | 说明    | 回调参数      |

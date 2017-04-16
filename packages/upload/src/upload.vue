@@ -38,7 +38,10 @@ export default {
     fileList: Array,
     autoUpload: Boolean,
     listType: String,
-    httpRequest: Function
+    httpRequest: {
+      type: Function,
+      default: ajax
+    }
   },
 
   data() {
@@ -56,7 +59,6 @@ export default {
 
       if (!files) return;
       this.uploadFiles(files);
-      this.$refs.input.value = null;
     },
     uploadFiles(files) {
       let postFiles = Array.prototype.slice.call(files);
@@ -92,8 +94,7 @@ export default {
       }
     },
     post(rawFile) {
-      const request = this.httpRequest || ajax;
-      request({
+      const options = {
         headers: this.headers,
         withCredentials: this.withCredentials,
         file: rawFile,
@@ -109,7 +110,11 @@ export default {
         onError: err => {
           this.onError(err, rawFile);
         }
-      });
+      };
+      const requestPromise = this.httpRequest(options);
+      if (requestPromise && requestPromise.then) {
+        requestPromise.then(options.onSuccess, options.onError);
+      }
     },
     handleClick() {
       this.$refs.input.click();
@@ -120,6 +125,7 @@ export default {
     let {
       handleClick,
       drag,
+      name,
       handleChange,
       multiple,
       accept,
@@ -142,7 +148,7 @@ export default {
           ? <upload-dragger on-file={uploadFiles}>{this.$slots.default}</upload-dragger>
           : this.$slots.default
         }
-        <input class="el-upload__input" type="file" ref="input" on-change={handleChange} multiple={multiple} accept={accept}></input>
+        <input class="el-upload__input" type="file" ref="input" name={name} on-change={handleChange} multiple={multiple} accept={accept}></input>
       </div>
     );
   }

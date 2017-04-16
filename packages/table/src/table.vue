@@ -169,7 +169,9 @@
 
       defaultExpandAll: Boolean,
 
-      defaultSort: Object
+      defaultSort: Object,
+
+      tooltipEffect: String
     },
 
     components: {
@@ -366,6 +368,17 @@
     mounted() {
       this.bindEvents();
       this.doLayout();
+
+      // init filters
+      this.store.states.columns.forEach(column => {
+        if (column.filteredValue && column.filteredValue.length) {
+          this.store.commit('filterChange', {
+            column,
+            values: column.filteredValue,
+            silent: true
+          });
+        }
+      });
 
       this.$ready = true;
     },

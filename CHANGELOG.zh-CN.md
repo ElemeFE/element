@@ -1,5 +1,41 @@
 ## 更新日志
 
+### 1.2.8
+*2017-04-07*
+
+- 修复 Form 的 `resetFields` 会给表单项重新赋值的问题，#3840（by @pengchongfu）
+- 新增 CheckboxGroup 的 `max` 和 `min` 属性，#3700（by @mdartic）
+- 修复 DatePicker 在一些特定的日期会导致月份 +1 的问题，#3935
+- 新增 Message 的 `closeAll` 方法，#3966（by @pengchongfu）
+- 新增 Slider 的 `format-tooltip` 属性，#3657（by @liyanlong）
+- 修复内嵌于 Dialog 中的 Table 的筛选面板被遮挡的问题，#4023（by @liyanlong）
+- 修复单选的 Select 在 Vue 2.2.x 下无法创建条目的问题，#3984
+- 修复某些断点下 `span` 为 0 的 Row 在其他断点下也会消失的问题，#4053
+
+### 1.2.7
+*2017-03-29*
+
+- 修复 Select 不兼容 Vue 2.2.6 的问题，#3797
+- 优化 Table 的 Tooltip 渲染性能，#3478
+- 新增 Table `tooltip-effect` 属性
+
+### 1.2.6
+*2017-03-28*
+
+- 修复 Switch 样式不兼容 vue SSR，#3752
+- 修复 TimePicker 日期计算错误，#3479
+- 修复 DatePicker 格式化 week 类型错误，#2774
+- 修复 DatePicker 周选择器默认值，#3058
+- 修复 Popover 销毁时未正确清除事件，#3555
+- 修复 InputNumber 鼠标左右键一起按下会导致值一直自增加，#3514（by @pengchongfu）
+- 修复 RadioButton 样式文件引入但无样式，#3276
+- 修复 Table 的 hover 样式，#3696（by @nicoeg）
+- 修复 Slider 跳动问题，#3664（by @gabrielboliveira）
+- 新增 Select `delete-tag` 事件 #3663（by @pengchongfu）
+- 新增 DatePicker 的 `onPick` 选项，#2921
+- 新增 Steps 可分别设置 step 的状态（status）和样式调整，#3722
+- 新增完整的按需引入组件的文档，#3302
+
 ### 1.2.5
 *2017-03-19*
 

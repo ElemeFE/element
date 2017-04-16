@@ -41,6 +41,24 @@ describe('Message', () => {
     }, 500);
   });
 
+  it('close all', done => {
+    Message({
+      message: '夏天',
+      duration: 0
+    });
+    Message({
+      message: '淑女',
+      duration: 0
+    });
+    setTimeout(() => {
+      Message.closeAll();
+      setTimeout(() => {
+        expect(document.querySelector('.el-message')).to.not.exist;
+        done();
+      }, 500);
+    }, 500);
+  });
+
   it('create', () => {
     Message('娜梅莉亚');
     expect(document.querySelector('.el-message')).to.exist;
