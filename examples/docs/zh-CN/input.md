@@ -1,5 +1,5 @@
 <script>
-  var Vue = require('vue');
+  import Vue from 'vue';
   Vue.component('my-item-zh', {
     functional: true,
     render: function (h, ctx) {
