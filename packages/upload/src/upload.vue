@@ -135,12 +135,19 @@ export default {
     const data = {
       class: {
         'el-upload': true
-      },
-      on: {
-        click: handleClick
       }
     };
     data.class[`el-upload--${listType}`] = true;
+    if (drag) {
+      data.on = {
+        click: handleClick
+      };
+    } else {
+      this.$slots.default.forEach(comp => {
+        comp.data.on || (comp.data.on = {});
+        comp.data.on.click = handleClick;
+      });
+    }
     return (
       <div {...data}>
         {
