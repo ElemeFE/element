@@ -232,6 +232,7 @@ import { Notification } from 'element-ui';
 | customClass | 自定义类名 | string | — | — |
 | duration | 显示时间, 毫秒。设为 0 则不会自动关闭 | number | — | 4500 |
 | onClose | 关闭时的回调函数 | function | — | — |
+| onClick | 点击 Notification 时的回调函数 | function | — | — |
 | offset | 偏移的距离，在同一时刻，所有的 Notification 实例应当具有一个相同的偏移量 | number | — | 0 |
 
 ### 方法
