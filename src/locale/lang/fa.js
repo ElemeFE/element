@@ -89,6 +89,10 @@ export default {
     },
     tree: {
       emptyText: 'اطلاعاتی وجود ندارد'
+    },
+    transfer: {
+      noMatch: 'هیچ داده‌ای پیدا نشد',
+      noData: 'اطلاعاتی وجود ندارد'
     }
   }
 };

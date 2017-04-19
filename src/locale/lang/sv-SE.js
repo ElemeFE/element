@@ -60,6 +60,10 @@ export default {
       noData: 'Ingen data',
       placeholder: 'Välj'
     },
+    cascader: {
+      noMatch: 'Hittade inget',
+      placeholder: 'Välj'
+    },
     pagination: {
       goto: 'Gå till',
       pagesize: '/sida',
@@ -85,6 +89,10 @@ export default {
     },
     tree: {
       emptyText: 'Inga Data'
+    },
+    transfer: {
+      noMatch: 'Hittade inget',
+      noData: 'Ingen data'
     }
   }
 };

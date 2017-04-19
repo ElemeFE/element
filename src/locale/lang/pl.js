@@ -89,6 +89,10 @@ export default {
     },
     tree: {
       emptyText: 'Brak danych'
+    },
+    transfer: {
+      noMatch: 'Brak dopasowań',
+      noData: 'Brak danych'
     }
   }
 };

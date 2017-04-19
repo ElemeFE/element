@@ -71,11 +71,11 @@ export default {
   },
   {
     filename: path.join('../../examples/docs/zh-CN', `${componentname}.md`),
-    content: `## ${chineseName}`
+    content: `## ${ComponentName} ${chineseName}`
   },
   {
     filename: path.join('../../examples/docs/en-US', `${componentname}.md`),
-    content: `## ${componentname}`
+    content: `## ${ComponentName}`
   },
   {
     filename: path.join('../../test/unit/specs', `${componentname}.spec.js`),

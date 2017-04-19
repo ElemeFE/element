@@ -91,6 +91,10 @@ export default {
     },
     tree: {
       emptyText: 'Žádná data'
+    },
+    transfer: {
+      noMatch: 'Žádná shoda',
+      noData: 'Žádná data'
     }
   }
 };

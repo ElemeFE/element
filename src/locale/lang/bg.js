@@ -89,6 +89,10 @@ export default {
     },
     tree: {
       emptyText: 'Няма данни'
+    },
+    transfer: {
+      noMatch: 'Няма намерени',
+      noData: 'Няма данни'
     }
   }
 };

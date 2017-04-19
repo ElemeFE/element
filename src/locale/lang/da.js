@@ -88,6 +88,10 @@ export default {
     },
     tree: {
       emptyText: 'Ingen data'
+    },
+    transfer: {
+      noMatch: 'Ingen matchende data',
+      noData: 'Ingen data'
     }
   }
 };

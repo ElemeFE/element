@@ -89,6 +89,10 @@ export default {
     },
     tree: {
       emptyText: 'Veri yok'
+    },
+    transfer: {
+      noMatch: 'Eşleşen veri bulunamadı',
+      noData: 'Veri yok'
     }
   }
 };

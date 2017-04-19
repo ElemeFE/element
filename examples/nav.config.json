@@ -113,6 +113,10 @@
               "title": "ColorPicker 颜色选择器"
             },
             {
+              "path": "/transfer",
+              "title": "Transfer 穿梭框"
+            },
+            {
               "path": "/form",
               "title": "Form 表单"
             }
@@ -341,6 +345,10 @@
             {
               "path": "/color-picker",
               "title": "ColorPicker"
+            },
+            {
+              "path": "/transfer",
+              "title": "Transfer"
             },
             {
               "path": "/form",

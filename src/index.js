@@ -62,6 +62,7 @@ import Collapse from '../packages/collapse/index.js';
 import CollapseItem from '../packages/collapse-item/index.js';
 import Cascader from '../packages/cascader/index.js';
 import ColorPicker from '../packages/color-picker/index.js';
+import Transfer from '../packages/transfer/index.js';
 import locale from 'element-ui/src/locale';
 
 const components = [
@@ -122,7 +123,8 @@ const components = [
   Collapse,
   CollapseItem,
   Cascader,
-  ColorPicker
+  ColorPicker,
+  Transfer
 ];
 
 const install = function(Vue, opts = {}) {
@@ -217,5 +219,6 @@ module.exports = {
   Collapse,
   CollapseItem,
   Cascader,
-  ColorPicker
+  ColorPicker,
+  Transfer
 };
