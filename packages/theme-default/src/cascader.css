@@ -25,6 +25,10 @@
       }
     }
 
+    .el-icon-circle-close {
+      z-index: calc(var(--index-normal) + 1);
+    }
+
     @e label {
       position: absolute;
       left: 0;

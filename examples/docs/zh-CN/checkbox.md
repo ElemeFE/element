@@ -167,9 +167,9 @@
 ```
 :::
 
-### Minimum / Maximum items checked (to be translated)
+### 可选项目数量的限制
 
-The `min` and `max` properties can help you to limit the number of checked items.
+使用 `min` 和 `max` 属性能够限制可以被勾选的项目的数量。
 
 :::demo
 
@@ -184,10 +184,6 @@ The `min` and `max` properties can help you to limit the number of checked items
 </template>
 <script>
   const cityOptions = ['上海', '北京', '广州', '深圳'];
-  let handlerLimitExceeded = (event) => {
-    currentEvent = event;
-    console.log(event);
-  }
   export default {
     data() {
       return {
@@ -255,8 +251,8 @@ Checkbox with button styles.
 | size     | Checkbox 按钮组尺寸   | string  | large, small  |    —     |
 | fill  | 按钮激活时的填充色和边框色    | string   | — | #20a0ff   |
 | text-color  | 按钮激活时的文本颜色    | string   | — | #ffffff   |
-| min     | minimum number of checkbox checked   | number    |       —        |     —    |
-| max     | maximum number of checkbox checked   | number    |       —        |     —    |
+| min     | 可被勾选的 checkbox 的最大数量   | number    |       —        |     —    |
+| max     | 可被勾选的 checkbox 的最小数量   | number    |       —        |     —    |
 
 
 ### Checkbox-group Events

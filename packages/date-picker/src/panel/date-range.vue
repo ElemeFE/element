@@ -312,8 +312,7 @@
           const target = new Date(type === 'min' ? this.minDate : this.maxDate);
           if (target) {
             target.setFullYear(parsedValue.getFullYear());
-            target.setMonth(parsedValue.getMonth());
-            target.setDate(parsedValue.getDate());
+            target.setMonth(parsedValue.getMonth(), parsedValue.getDate());
           }
         }
       },
@@ -331,8 +330,7 @@
           const target = new Date(type === 'min' ? this.minDate : this.maxDate);
           if (target) {
             target.setFullYear(parsedValue.getFullYear());
-            target.setMonth(parsedValue.getMonth());
-            target.setDate(parsedValue.getDate());
+            target.setMonth(parsedValue.getMonth(), parsedValue.getDate());
           }
           if (type === 'min') {
             if (target < this.maxDate) {

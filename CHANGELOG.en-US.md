@@ -1,5 +1,32 @@
 ## Changelog
 
+### 1.2.9
+
+*2017-04-19*
+
+- Fixed RadioButton not working properly when some texts on the page are selected, #4217
+- Fixed the toggle-all checkbox of Tree not working in some browsers, #4107 (by @pengchongfu)
+- Fixed Cascader clear button not working, #4167 (by @pengchongfu)
+- Fixed router switching error when the page has a Table with Tooltips, #4085
+- Fixed Upload not able to remove selected files, #4233
+- Added `onClick` attribute for Notification, #4221 (by @amouillard)
+- Fixed binding value of DatePicker becoming undefined when cleared, #4186 (by @pengchongfu)
+- Fixed style error of ColorPicker when nested in a FormItem, #4303
+- Added `enterable` attribute for Tooltip, #4210
+
+### 1.2.8
+
+*2017-04-07*
+
+- Fixed `resetFields` of Form reassigning form items, #3840 (by @pengchongfu)
+- Added `max` and `min` attributes for CheckboxGroup, #3700 (by @mdartic)
+- Fixed DatePicker adding one to picked month in some specific days, #3935
+- Added `closeAll` method for Message, #3966 (by @pengchongfu)
+- Added `format-tooltip` attribute for Slider, #3657 (by @liyanlong)
+- Fixed filter panel of Table being when nested in a Dialog, #4023 (by @liyanlong)
+- Fixed single Select unable to create new items in Vue 2.2.x, #3984
+- Fixed Row disappearing in all breakpoints if its `span` is set to 0 in some breakpoints, #4053
+
 ### 1.2.7
 
 *2017-03-29*

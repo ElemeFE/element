@@ -129,28 +129,33 @@
       &:first-child {
         margin-top: 10px;
       }
+      & .el-icon-check,
+      & .el-icon-circle-check {
+        color: var(--color-success);
+      }
+      & .el-icon-close {
+        display: none;
+        cursor: pointer;
+        opacity: .75;
+        transform: scale(.7);
+        color: var(--color-extra-light-black);
+        &:hover {
+          opacity: 1;
+        }
+      }
       &:hover {
         background-color: var(--color-extra-light-gray);
+
+        .el-icon-close {
+          display: inline-block;
+        }
       }
       @when success {
         .el-upload-list__item-name:hover {
           color: var(--link-hover-color);
           cursor: pointer;
         }
-        .el-icon-close {
-          display: none;
-        }
         &:hover {
-          .el-icon-close {
-            display: inline-block;
-            cursor: pointer;
-            opacity: .75;
-            transform: scale(.7);
-            color: var(--color-extra-light-black);
-            &:hover {
-              opacity: 1;
-            }
-          }
           .el-icon-circle-check,
           .el-icon-check {
             display: none;
@@ -180,7 +185,6 @@
       right: 10px;
       top: 0;
       line-height: inherit;
-      color: var(--color-success);
     }
     @e item-delete {
       position: absolute;
@@ -210,6 +214,11 @@
         margin: 0 8px 8px 0;
         display: inline-block;
 
+        & .el-icon-check,
+        & .el-icon-circle-check {
+          color: var(--color-white);
+        }
+
         &:hover .el-upload-list__item-status-label {
           display: none;
         }
@@ -236,7 +245,6 @@
           font-size: 12px;
           margin-top: 11px;
           transform: rotate(-45deg) scale(0.8);
-          color: #fff;
         }
       }
       .el-upload-list__item-actions {
@@ -297,7 +305,11 @@
         margin-top: 10px;
         padding: 10px 10px 10px 90px;
         height: 92px;
-
+        
+        & .el-icon-check,
+        & .el-icon-circle-check {
+          color: var(--color-white);
+        }
         &:hover {
           .el-upload-list__item-status-label {
             background: transparent;
@@ -356,7 +368,6 @@
           font-size: 12px;
           margin-top: 12px;
           transform: rotate(-45deg) scale(0.8);
-          color: #fff;
         }
       }
       .el-progress {

@@ -324,6 +324,7 @@ export default {
             this.picker.value = parsedValue;
           }
         } else {
+          this.$emit('input', value);
           this.picker.value = value;
         }
         this.$forceUpdate();
@@ -448,7 +449,7 @@ export default {
         this.picker.resetView && this.picker.resetView();
 
         this.picker.$on('dodestroy', this.doDestroy);
-        this.picker.$on('pick', (date, visible = false) => {
+        this.picker.$on('pick', (date = '', visible = false) => {
           this.$emit('input', date);
           this.pickerVisible = this.picker.visible = visible;
           this.picker.resetView && this.picker.resetView();
