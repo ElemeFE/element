@@ -29,7 +29,8 @@
     name: 'ElCarouselItem',
 
     props: {
-      name: String
+      name: String,
+      label: String
     },
 
     data() {

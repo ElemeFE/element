@@ -41,7 +41,7 @@
         :class="{ 'is-active': index === activeIndex }"
         @mouseenter="throttledIndicatorHover(index)"
         @click.stop="handleIndicatorClick(index)">
-        <button class="el-carousel__button"></button>
+        <button class="el-carousel__button">{{ item.label }}</button>
       </li>
     </ul>
   </div>
