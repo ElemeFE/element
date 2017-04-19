@@ -1,5 +1,19 @@
 ## Changelog
 
+### 1.2.9
+
+*2017-04-19*
+
+- Fixed RadioButton not working properly when some texts on the page are selected, #4217
+- Fixed the toggle-all checkbox of Tree not working in some browsers, #4107 (by @pengchongfu)
+- Fixed Cascader clear button not working, #4167 (by @pengchongfu)
+- Fixed router switching error when the page has a Table with Tooltips, #4085
+- Fixed Upload not able to remove selected files, #4233
+- Added `onClick` attribute for Notification, #4221 (by @amouillard)
+- Fixed binding value of DatePicker becoming undefined when cleared, #4186 (by @pengchongfu)
+- Fixed style error of ColorPicker when nested in a FormItem, #4303
+- Added `enterable` attribute for Tooltip, #4210
+
 ### 1.2.8
 
 *2017-04-07*

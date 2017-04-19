@@ -1,5 +1,18 @@
 ## 更新日志
 
+### 1.2.9
+*2017-04-19*
+
+- 修复在有文本选中的情况下，RadioButton 需要多次点击才能生效的问题，#4217
+- 修复 Tree 的多选框在某些浏览器下不能全选的问题，#4107（by @pengchongfu）
+- 修复可清空的 Cascader 清空按钮无效的问题，#4167（by @pengchongfu）
+- 修复带有 Tooltip 的 Table 在路由切换时有时会报错的问题，#4085
+- 修复 Upload 无法移除待上传的文件的问题，#4233
+- 新增 Notification 的 `onClick` 属性，#4221（by @amouillard）
+- 修复 DatePicker 在清空后值变为 undefined 的问题，#4186（by @pengchongfu）
+- 修复 FormItem 中 ColorPicker 的样式错误，#4303
+- 新增 Tooltip 的 `enterable` 属性，#4210
+
 ### 1.2.8
 *2017-04-07*
 
