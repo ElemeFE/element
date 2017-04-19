@@ -66,7 +66,7 @@ export default {
     },
     pagination: {
       goto: 'Перейти',
-      pagesize: '/page',
+      pagesize: 'на странице',
       total: 'Всего {total}',
       pageClassifier: ''
     },

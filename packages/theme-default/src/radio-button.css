@@ -24,7 +24,6 @@
       position: relative;
       cursor: pointer;
       transition: var(--all-transition);
-      @utils-user-select none;
 
       @mixin button-size var(--button-padding-vertical), var(--button-padding-horizontal), var(--button-font-size), 0;
 

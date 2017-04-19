@@ -151,11 +151,9 @@
       handleChange() {
         if (this.minTime > this.maxTime) return;
         MIN_TIME.setFullYear(this.minTime.getFullYear());
-        MIN_TIME.setMonth(this.minTime.getMonth());
-        MIN_TIME.setDate(this.minTime.getDate());
+        MIN_TIME.setMonth(this.minTime.getMonth(), this.minTime.getDate());
         MAX_TIME.setFullYear(this.maxTime.getFullYear());
-        MAX_TIME.setMonth(this.maxTime.getMonth());
-        MAX_TIME.setDate(this.maxTime.getDate());
+        MAX_TIME.setMonth(this.maxTime.getMonth(), this.maxTime.getDate());
         this.$refs.minSpinner.selectableRange = [[MIN_TIME, this.maxTime]];
         this.$refs.maxSpinner.selectableRange = [[this.minTime, MAX_TIME]];
         this.handleConfirm(true);

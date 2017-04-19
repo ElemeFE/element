@@ -60,7 +60,7 @@ npm run dist
 ```
 
 ## Component Developing Guidelines
-- Run `make new` to create project directory for a new component. Test codes, entry file, cooking config, documentation and `package.json` are included.
+- Run `make new <component-name>` to create project directory for a new component. Test codes, entry file, cooking config, documentation and `package.json` are included.
 - Refer to `Button` for nested components.
 - Refer to `Select` for components that depend on other components.
 

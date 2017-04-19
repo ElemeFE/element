@@ -246,7 +246,7 @@
 
     created() {
       this.tableId = 'el-table_' + tableIdSeed + '_';
-      this.debouncedLayout = debounce(50, true, () => this.doLayout());
+      this.debouncedLayout = debounce(50, () => this.doLayout());
     },
 
     computed: {
@@ -368,6 +368,17 @@
     mounted() {
       this.bindEvents();
       this.doLayout();
+
+      // init filters
+      this.store.states.columns.forEach(column => {
+        if (column.filteredValue && column.filteredValue.length) {
+          this.store.commit('filterChange', {
+            column,
+            values: column.filteredValue,
+            silent: true
+          });
+        }
+      });
 
       this.$ready = true;
     },

@@ -33,13 +33,13 @@
 - [Customize Theme](http://element.eleme.io/#/en-US/component/custom-theme)
 - [Preview and generate theme online](https://elementui.github.io/theme-preview)
 - Starter Kit
- - [element-starter](https://github.com/ElementUI/element-starter)
- - [element-cooking-starter](https://github.com/ElementUI/element-cooking-starter)
- - [element-in-laravel-starter](https://github.com/ElementUI/element-in-laravel-starter)
+  - [element-starter](https://github.com/ElementUI/element-starter)
+  - [element-cooking-starter](https://github.com/ElementUI/element-cooking-starter)
+  - [element-in-laravel-starter](https://github.com/ElementUI/element-in-laravel-starter)
 - [Design resources](https://github.com/ElementUI/Resources)
 - Boilerplate for bug reports
- - [CodePen](https://codepen.io/anon/pen/ozYpNA)
- - [JSFiddle](https://jsfiddle.net/gmve9d3p/)
+  - [CodePen](https://codepen.io/anon/pen/ozYpNA)
+  - [JSFiddle](https://jsfiddle.net/gmve9d3p/)
 - [Mint UI](https://github.com/ElemeFE/mint-ui) - Mobile UI elements for Vue.js
 
 ## Install

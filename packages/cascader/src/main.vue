@@ -319,6 +319,7 @@ export default {
       if (this.disabled) return;
       if (this.filterable) {
         this.menuVisible = true;
+        this.$refs.input.$refs.input.focus();
         return;
       }
       this.menuVisible = !this.menuVisible;
