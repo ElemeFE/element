@@ -35,6 +35,10 @@ export default {
           gpuAcceleration: false
         };
       }
+    },
+    enterable: {
+      type: Boolean,
+      default: true
     }
   },
 
@@ -107,7 +111,7 @@ export default {
     },
 
     handleClosePopper() {
-      if (this.expectedState || this.manual) return;
+      if (this.enterable && this.expectedState || this.manual) return;
       clearTimeout(this.timeout);
       this.showPopper = false;
     },
