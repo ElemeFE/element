@@ -89,6 +89,10 @@ export default {
     },
     tree: {
       emptyText: 'Maglumat ýok'
+    },
+    transfer: {
+      noMatch: 'Hiçzat tapylmady',
+      noData: 'Hiçzat ýok'
     }
   }
 };

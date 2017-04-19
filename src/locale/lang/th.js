@@ -89,6 +89,10 @@ export default {
     },
     tree: {
       emptyText: 'ไม่พบข้อมูล'
+    },
+    transfer: {
+      noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
+      noData: 'ไม่พบข้อมูล'
     }
   }
 };

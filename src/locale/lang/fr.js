@@ -57,7 +57,7 @@ export default {
     select: {
       loading: 'Chargement',
       noMatch: 'Aucune correspondance',
-      noData: 'Aucun résultat',
+      noData: 'Aucune donnée',
       placeholder: 'Choisir'
     },
     cascader: {
@@ -88,6 +88,10 @@ export default {
     },
     tree: {
       emptyText: 'Aucune donnée'
+    },
+    transfer: {
+      noMatch: 'Aucune correspondance',
+      noData: 'Aucune donnée'
     }
   }
 };

@@ -60,6 +60,10 @@ export default {
       noData: 'Ei tietoja',
       placeholder: 'Valitse'
     },
+    cascader: {
+      noMatch: 'Ei vastaavia tietoja',
+      placeholder: 'Valitse'
+    },
     pagination: {
       goto: 'Mene',
       pagesize: '/sivu',
@@ -85,6 +89,10 @@ export default {
     },
     tree: {
       emptyText: 'Ei tietoja'
+    },
+    transfer: {
+      noMatch: 'Ei vastaavia tietoja',
+      noData: 'Ei tietoja'
     }
   }
 };

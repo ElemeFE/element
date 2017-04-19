@@ -90,6 +90,10 @@ export default {
     },
     tree: {
       emptyText: 'Keine Daten'
+    },
+    transfer: {
+      noMatch: 'Nichts gefunden.',
+      noData: 'Keine Datei'
     }
   }
 };
