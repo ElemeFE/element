@@ -214,3 +214,4 @@ tooltip 内不支持 disabled form 元素，参考[MDN](https://developer.mozill
 | open-delay | 延迟出现，单位毫秒 | Number | — | 0 |
 | manual | 手动控制模式，设置为 true 后，mouseenter 和 mouseleave 事件将不会生效 | Boolean | — | false |
 | popper-class | 为 Tooltip 的 popper 添加类名 | String | — | — |
+| enterable | 鼠标是否可进入到 tooltip 中 | Boolean | — | true |
