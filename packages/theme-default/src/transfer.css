@@ -1,5 +1,9 @@
 @charset "UTF-8";
 @import "./common/var.css";
+@import "./input.css";
+@import "./button.css";
+@import "./checkbox.css";
+@import "./checkbox-group.css";
 
 @component-namespace el {
   @b transfer {

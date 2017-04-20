@@ -30,7 +30,7 @@
             label: city,
             key: index,
             pinyin: pinyin[index]
-          })
+          });
         });
         return data;
       };
@@ -131,7 +131,7 @@
             label: city,
             key: index,
             pinyin: pinyin[index]
-          })
+          });
         });
         return data;
       };
@@ -278,4 +278,4 @@
 ### Events
 | 事件名称      | 说明    | 回调参数      |
 |---------- |-------- |---------- |
-| change | 当绑定值变化时触发 | 当前值、数据移动的方向（'left' / 'right'）、发生移动的数据 key 数组 |
+| change | 右侧列表元素变化时触发 | 当前值、数据移动的方向（'left' / 'right'）、发生移动的数据 key 数组 |

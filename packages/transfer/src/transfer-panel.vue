@@ -48,6 +48,7 @@
 <script>
   import ElCheckboxGroup from 'element-ui/packages/checkbox-group';
   import ElCheckbox from 'element-ui/packages/checkbox';
+  import ElInput from 'element-ui/packages/input';
   import Locale from 'element-ui/src/mixins/locale';
 
   export default {
@@ -55,16 +56,19 @@
 
     name: 'ElTransferPanel',
 
+    componentName: 'ElTransferPanel',
+
     components: {
       ElCheckboxGroup,
       ElCheckbox,
+      ElInput,
       OptionContent: {
         props: {
           option: Object
         },
         render(h) {
           const getParent = vm => {
-            if (vm.$options.name === 'ElTransferPanel') {
+            if (vm.$options.componentName === 'ElTransferPanel') {
               return vm;
             } else if (vm.$parent) {
               return getParent(vm.$parent);
