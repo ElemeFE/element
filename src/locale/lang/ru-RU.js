@@ -92,7 +92,11 @@ export default {
     },
     transfer: {
       noMatch: 'Совпадений не найдено',
-      noData: 'Нет данных'
+      noData: 'Нет данных',
+      titles: ['List 1', 'List 2'],
+      filterPlaceholder: 'Enter keyword',
+      noCheckedFormat: '{total} items',
+      hasCheckedFormat: '{checked}/{total} checked'
     }
   }
 };

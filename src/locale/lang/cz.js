@@ -94,7 +94,11 @@ export default {
     },
     transfer: {
       noMatch: 'Žádná shoda',
-      noData: 'Žádná data'
+      noData: 'Žádná data',
+      titles: ['List 1', 'List 2'],
+      filterPlaceholder: 'Enter keyword',
+      noCheckedFormat: '{total} items',
+      hasCheckedFormat: '{checked}/{total} checked'
     }
   }
 };

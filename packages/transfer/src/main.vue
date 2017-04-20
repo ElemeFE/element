@@ -5,10 +5,10 @@
       :filter-method="filterMethod"
       :data="sourceData"
       :render-content="renderContent"
-      :title="titles[0]"
+      :title="titles[0] || t('el.transfer.titles.0')"
       :format="footerFormat"
       :default-checked="leftDefaultChecked"
-      :placeholder="filterPlaceholder"
+      :placeholder="filterPlaceholder || t('el.transfer.filterPlaceholder')"
       :props="props"
       @checked-change="onSourceCheckedChange">
       <slot name="left-footer"></slot>
@@ -36,10 +36,10 @@
       :filter-method="filterMethod"
       :data="targetData"
       :render-content="renderContent"
-      :title="titles[1]"
+      :title="titles[1] || t('el.transfer.titles.1')"
       :format="footerFormat"
       :default-checked="rightDefaultChecked"
-      :placeholder="filterPlaceholder"
+      :placeholder="filterPlaceholder || t('el.transfer.filterPlaceholder')"
       :props="props"
       @checked-change="onTargetCheckedChange">
       <slot name="right-footer"></slot>
@@ -50,12 +50,13 @@
 <script>
   import ElButton from 'element-ui/packages/button';
   import Emitter from 'element-ui/src/mixins/emitter';
+  import Locale from 'element-ui/src/mixins/locale';
   import TransferPanel from './transfer-panel.vue';
 
   export default {
     name: 'ElTransfer',
 
-    mixins: [Emitter],
+    mixins: [Emitter, Locale],
 
     components: {
       TransferPanel,
@@ -72,7 +73,7 @@
       titles: {
         type: Array,
         default() {
-          return ['列表 1', '列表 2'];
+          return [];
         }
       },
       buttonTexts: {
@@ -83,7 +84,7 @@
       },
       filterPlaceholder: {
         type: String,
-        default: '请输入搜索内容'
+        default: ''
       },
       filterMethod: Function,
       leftDefaultChecked: {
@@ -108,10 +109,7 @@
       footerFormat: {
         type: Object,
         default() {
-          return {
-            noChecked: '共 ${total} 项',
-            hasChecked: '已选 ${checked}/${total} 项'
-          };
+          return {};
         }
       },
       filterable: Boolean,

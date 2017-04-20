@@ -92,7 +92,11 @@ export default {
     },
     transfer: {
       noMatch: 'هیچ داده‌ای پیدا نشد',
-      noData: 'اطلاعاتی وجود ندارد'
+      noData: 'اطلاعاتی وجود ندارد',
+      titles: ['List 1', 'List 2'],
+      filterPlaceholder: 'Enter keyword',
+      noCheckedFormat: '{total} items',
+      hasCheckedFormat: '{checked}/{total} checked'
     }
   }
 };

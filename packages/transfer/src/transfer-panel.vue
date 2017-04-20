@@ -38,8 +38,7 @@
       <el-checkbox
         v-model="allChecked"
         @change="handleAllCheckedChange"
-        :indeterminate="isIndeterminate">{{ checkedSummary }}
-      </el-checkbox>
+        :indeterminate="isIndeterminate">{{ checkedSummary }}</el-checkbox>
       <slot></slot>
     </p>
   </div>
@@ -168,9 +167,15 @@
         const checkedLength = this.checked.length;
         const dataLength = this.data.length;
         const { noChecked, hasChecked } = this.format;
-        return checkedLength > 0
-          ? hasChecked.replace(/\${checked}/g, checkedLength).replace(/\${total}/g, dataLength)
-          : noChecked.replace(/\${total}/g, dataLength);
+        if (noChecked && hasChecked) {
+          return checkedLength > 0
+            ? hasChecked.replace(/\${checked}/g, checkedLength).replace(/\${total}/g, dataLength)
+            : noChecked.replace(/\${total}/g, dataLength);
+        } else {
+          return checkedLength > 0
+            ? this.t('el.transfer.hasCheckedFormat', { total: dataLength, checked: checkedLength })
+            : this.t('el.transfer.noCheckedFormat', { total: dataLength });
+        }
       },
 
       isIndeterminate() {

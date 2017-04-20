@@ -92,7 +92,11 @@ export default {
     },
     transfer: {
       noMatch: 'Dữ liệu không phù hợp',
-      noData: 'Không tìm thấy dữ liệu'
+      noData: 'Không tìm thấy dữ liệu',
+      titles: ['List 1', 'List 2'],
+      filterPlaceholder: 'Enter keyword',
+      noCheckedFormat: '{total} items',
+      hasCheckedFormat: '{checked}/{total} checked'
     }
   }
 };

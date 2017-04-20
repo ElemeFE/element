@@ -92,7 +92,11 @@ export default {
     },
     transfer: {
       noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
-      noData: 'ไม่พบข้อมูล'
+      noData: 'ไม่พบข้อมูล',
+      titles: ['List 1', 'List 2'],
+      filterPlaceholder: 'Enter keyword',
+      noCheckedFormat: '{total} items',
+      hasCheckedFormat: '{checked}/{total} checked'
     }
   }
 };

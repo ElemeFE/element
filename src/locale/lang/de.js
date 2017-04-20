@@ -93,7 +93,11 @@ export default {
     },
     transfer: {
       noMatch: 'Nichts gefunden.',
-      noData: 'Keine Datei'
+      noData: 'Keine Datei',
+      titles: ['List 1', 'List 2'],
+      filterPlaceholder: 'Enter keyword',
+      noCheckedFormat: '{total} items',
+      hasCheckedFormat: '{checked}/{total} checked'
     }
   }
 };

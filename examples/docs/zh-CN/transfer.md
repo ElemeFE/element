@@ -257,17 +257,17 @@
 ### Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
-| data | Transfer 的数据源 | array[{ key, label, disabled }] | — | [] |
+| data | Transfer 的数据源 | array[{ key, label, disabled }] | — | [ ] |
 | filterable | 是否可搜索 | boolean | — | false |
 | filter-placeholder | 搜索框占位符 | string | — | 请输入搜索内容 |
 | filter-method | 自定义搜索方法 | function | — | — |
 | titles | 自定义列表标题 | array | — | ['列表 1', '列表 2'] |
-| button-texts | 自定义按钮文案 | array | — | [] |
+| button-texts | 自定义按钮文案 | array | — | [ ] |
 | render-content | 自定义数据项渲染函数 | function(h, option) | — | — |
 | footer-format | 列表底部勾选状态文案 | object{noChecked, hasChecked} | — | { noChecked: '共 ${total} 项', hasChecked: '已选 ${checked}/${total} 项' } |
 | props | 数据源的字段别名 | object{key, label, disabled} | — | — |
-| left-default-checked | 初始状态下左侧列表的已勾选项的 key 数组 | array | — | [] |
-| right-default-checked | 初始状态下右侧列表的已勾选项的 key 数组 | array | — | [] |
+| left-default-checked | 初始状态下左侧列表的已勾选项的 key 数组 | array | — | [ ] |
+| right-default-checked | 初始状态下右侧列表的已勾选项的 key 数组 | array | — | [ ] |
 
 ### Slot
 | name | 说明 |

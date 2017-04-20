@@ -92,7 +92,11 @@ export default {
     },
     transfer: {
       noMatch: '無匹配資料',
-      noData: '無資料'
+      noData: '無資料',
+      titles: ['List 1', 'List 2'],
+      filterPlaceholder: 'Enter keyword',
+      noCheckedFormat: '{total} items',
+      hasCheckedFormat: '{checked}/{total} checked'
     }
   }
 };

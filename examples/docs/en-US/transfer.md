@@ -69,12 +69,7 @@
 <template>
   <el-transfer
     v-model="value1"
-    :titles="['Source', 'Target']"
-    :data="data"
-    :footer-format="{
-      noChecked: '${total} items',
-      hasChecked: '${checked}/${total} checked'
-    }">
+    :data="data">
   </el-transfer>
 </template>
 
@@ -114,12 +109,7 @@ You can search and filter data items.
     :filter-method="filterMethod"
     filter-placeholder="State Abbreviations"
     v-model="value2"
-    :titles="['Source', 'Target']"
-    :data="data2"
-    :footer-format="{
-      noChecked: '${total} items',
-      hasChecked: '${checked}/${total} checked'
-    }">
+    :data="data2">
   </el-transfer>
 </template>
 
@@ -162,7 +152,6 @@ You can customize list titles, button texts, render function for data items, che
   <el-transfer
     v-model="value3"
     filterable
-    filter-placeholder="Enter keywords"
     :left-default-checked="[2, 3]"
     :right-default-checked="[1]"
     :render-content="renderFunc"
@@ -231,12 +220,7 @@ By default, Transfer looks for `key`, `label` and `disabled` in a data item. If 
       key: 'value',
       label: 'desc'
     }"
-    :data="data3"
-    :titles="['Source', 'Target']"
-    :footer-format="{
-      noChecked: '${total} items',
-      hasChecked: '${checked}/${total} checked'
-    }">
+    :data="data3">
   </el-transfer>
 </template>
 
@@ -267,17 +251,17 @@ By default, Transfer looks for `key`, `label` and `disabled` in a data item. If 
 ### Attributes
 | Attribute | Description | Type  | Accepted Values | Default |
 |---------- |-------- |---------- |-------------  |-------- |
-| data | data source | array[{ key, label, disabled }] | — | [] |
+| data | data source | array[{ key, label, disabled }] | — | [ ] |
 | filterable | whether Transfer is filterable | boolean | — | false |
-| filter-placeholder | placeholder for the filter input | string | — | 请输入搜索内容 |
+| filter-placeholder | placeholder for the filter input | string | — | Enter keyword |
 | filter-method | custom filter method | function | — | — |
-| titles | custom list titles | array | — | ['列表 1', '列表 2'] |
-| button-texts | custom button texts | array | — | [] |
+| titles | custom list titles | array | — | ['List 1', 'List 2'] |
+| button-texts | custom button texts | array | — | [ ] |
 | render-content | custom render function for data items | function(h, option) | — | — |
-| footer-format | texts for checking status in list footer | object{noChecked, hasChecked} | — | { noChecked: '共 ${total} 项', hasChecked: '已选 ${checked}/${total} 项' } |
+| footer-format | texts for checking status in list footer | object{noChecked, hasChecked} | — | { noChecked: '${total} items', hasChecked: '${checked}/${total} checked' } |
 | props | prop aliases for data source | object{key, label, disabled} | — | — |
-| left-default-checked | key array of initially checked data items of the left list | array | — | [] |
-| right-default-checked | key array of initially checked data items of the right list | array | — | [] |
+| left-default-checked | key array of initially checked data items of the left list | array | — | [ ] |
+| right-default-checked | key array of initially checked data items of the right list | array | — | [ ] |
 
 ### Slot
 | Name | Description |

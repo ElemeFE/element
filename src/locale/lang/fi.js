@@ -92,7 +92,11 @@ export default {
     },
     transfer: {
       noMatch: 'Ei vastaavia tietoja',
-      noData: 'Ei tietoja'
+      noData: 'Ei tietoja',
+      titles: ['List 1', 'List 2'],
+      filterPlaceholder: 'Enter keyword',
+      noCheckedFormat: '{total} items',
+      hasCheckedFormat: '{checked}/{total} checked'
     }
   }
 };

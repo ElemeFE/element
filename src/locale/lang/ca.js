@@ -91,7 +91,11 @@ export default {
     },
     transfer: {
       noMatch: 'No hi ha dades que coincideixin',
-      noData: 'Sense Dades'
+      noData: 'Sense Dades',
+      titles: ['List 1', 'List 2'],
+      filterPlaceholder: 'Enter keyword',
+      noCheckedFormat: '{total} items',
+      hasCheckedFormat: '{checked}/{total} checked'
     }
   }
 };

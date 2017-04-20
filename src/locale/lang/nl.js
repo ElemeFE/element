@@ -92,7 +92,11 @@ export default {
     },
     transfer: {
       noMatch: 'Geen overeenkomende resultaten',
-      noData: 'Geen data'
+      noData: 'Geen data',
+      titles: ['List 1', 'List 2'],
+      filterPlaceholder: 'Enter keyword',
+      noCheckedFormat: '{total} items',
+      hasCheckedFormat: '{checked}/{total} checked'
     }
   }
 };

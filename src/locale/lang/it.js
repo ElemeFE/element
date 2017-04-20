@@ -91,7 +91,11 @@ export default {
     },
     transfer: {
       noMatch: 'Nessuna corrispondenza',
-      noData: 'Nessun dato'
+      noData: 'Nessun dato',
+      titles: ['List 1', 'List 2'],
+      filterPlaceholder: 'Enter keyword',
+      noCheckedFormat: '{total} items',
+      hasCheckedFormat: '{checked}/{total} checked'
     }
   }
 };

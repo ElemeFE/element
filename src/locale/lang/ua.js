@@ -92,7 +92,11 @@ export default {
     },
     transfer: {
       noMatch: 'Співпадінь не знайдено',
-      noData: 'Обрати'
+      noData: 'Обрати',
+      titles: ['List 1', 'List 2'],
+      filterPlaceholder: 'Enter keyword',
+      noCheckedFormat: '{total} items',
+      hasCheckedFormat: '{checked}/{total} checked'
     }
   }
 };
