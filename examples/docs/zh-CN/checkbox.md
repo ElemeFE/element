@@ -197,11 +197,11 @@
 
 :::
 
-### Button style (to be translated)
+### 按钮样式
 
-Checkbox with button styles.
+按钮样式的多选组合。
 
-:::demo 只需要把`el-checkbox`元素换成`el-checkbox-button`元素即可，此外，Element 还提供了`size`属性给按钮组，支持`large`和`small`两种（如果不设定为默认）
+:::demo 只需要把`el-checkbox`元素替换为`el-checkbox-button`元素即可。此外，Element 还提供了`size`属性，支持`large`和`small`两种。
 ```html
 <template>
   <div style="margin: 15px 0;"></div>
@@ -245,7 +245,7 @@ Checkbox with button styles.
 | checked  | 当前是否勾选    | boolean   |  — | false   |
 | indeterminate  | 设置 indeterminate 状态，只负责样式控制    | boolean   |  — | false   |
 
-### Checkbox-group Attributes (to be translated)
+### Checkbox-group Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | size     | Checkbox 按钮组尺寸   | string  | large, small  |    —     |
@@ -253,7 +253,6 @@ Checkbox with button styles.
 | text-color  | 按钮激活时的文本颜色    | string   | — | #ffffff   |
 | min     | 可被勾选的 checkbox 的最大数量   | number    |       —        |     —    |
 | max     | 可被勾选的 checkbox 的最小数量   | number    |       —        |     —    |
-
 
 ### Checkbox-group Events
 | 事件名称      | 说明    | 回调参数      |
