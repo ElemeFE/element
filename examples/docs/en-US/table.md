@@ -160,6 +160,19 @@
     },
 
     methods: {
+      setCurrent(row) {
+        this.$refs.singleTable.setCurrentRow(row);
+      },
+      toggleSelection(rows) {
+        if (rows) {
+          rows.forEach(row => {
+            this.$refs.multipleTable.toggleRowSelection(row);
+          });
+        } else {
+          this.$refs.multipleTable.clearSelection();
+        }
+      },
+
       handleClick() {
         console.log('click');
       },
@@ -977,6 +990,7 @@ Single row selection is supported.
 ```html
 <template>
   <el-table
+    ref="singleTable"
     :data="tableData"
     highlight-current-row
     @current-change="handleCurrentChange"
@@ -1000,6 +1014,10 @@ Single row selection is supported.
       label="Address">
     </el-table-column>
   </el-table>
+  <div style="margin-top: 20px">
+    <el-button @click="setCurrent(tableData[1])">Select second row</el-button>
+    <el-button @click="setCurrent()">Clear selection</el-button>
+  </div>
 </template>
 
 <script>
@@ -1028,6 +1046,9 @@ Single row selection is supported.
     },
 
     methods: {
+      setCurrent(row) {
+        this.$refs.singleTable.setCurrentRow(row);
+      },
       handleCurrentChange(val) {
         this.currentRow = val;
       }
@@ -1045,6 +1066,7 @@ You can also select multiple rows.
 ```html
 <template>
   <el-table
+    ref="multipleTable"
     :data="tableData3"
     border
     style="width: 100%"
@@ -1069,6 +1091,10 @@ You can also select multiple rows.
       show-overflow-tooltip>
     </el-table-column>
   </el-table>
+  <div style="margin-top: 20px">
+    <el-button @click="toggleSelection([tableData3[1], tableData3[2]])">Toggle selection status of second and third rows</el-button>
+    <el-button @click="toggleSelection()">Clear selection</el-button>
+  </div>
 </template>
 
 <script>
@@ -1109,6 +1135,15 @@ You can also select multiple rows.
     },
 
     methods: {
+      toggleSelection(rows) {
+        if (rows) {
+          rows.forEach(row => {
+            this.$refs.multipleTable.toggleRowSelection(row);
+          });
+        } else {
+          this.$refs.multipleTable.clearSelection();
+        }
+      },
       handleSelectionChange(val) {
         this.multipleSelection = val;
       }
@@ -1479,8 +1514,9 @@ When the row content is too long and you do not want to display the horizontal s
 ### Table Methods
 | Method | Description | Parameters |
 |------|--------|-------|
-| clearSelection | clear selection, might be useful when `reserve-selection` is on | selection |
-| toggleRowSelection | toggle if a certain row is selected. With the second parameter, you can directly set if this row is selected | row, selected |
+| clearSelection | used in multiple selection Table, clear selection, might be useful when `reserve-selection` is on | selection |
+| toggleRowSelection | used in multiple selection Table, toggle if a certain row is selected. With the second parameter, you can directly set if this row is selected | row, selected |
+| setCurrentRow | used in single selection Table, set a certain row selected. If called without any parameter, it will clear selection. | row |
 
 ### Table-column Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
