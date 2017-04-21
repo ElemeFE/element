@@ -414,6 +414,7 @@
 | auto-upload | 是否在选取文件后立即进行上传 | boolean | — | true |
 | file-list | 上传的文件列表, 例如: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}] | array | — | [] |
 | http-request | 覆盖默认的上传行为，可以自定义上传的实现 | function | — | — |
+| disabled | 是否禁用 | boolean | — | false |
 
 ### Methods
 | 方法名      | 说明          | 参数 |

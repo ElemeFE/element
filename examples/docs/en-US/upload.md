@@ -365,6 +365,7 @@ file-list | default uploaded files, i.e: [{name: 'food.jpeg', url: 'https://fuss
 list-type | type of fileList | string | text/picture/picture-card | text |
 auto-upload | whether to auto upload file | boolean | — | true |
 http-request | override default xhr behavior, allowing you to implement your own upload-file's request | function | — | — |
+disabled | whether to disable upload | boolean | — | false |
 
 ### Events
 | Event Name | Description | Parameters |
