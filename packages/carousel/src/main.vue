@@ -41,7 +41,8 @@
         :class="{ 'is-active': index === activeIndex }"
         @mouseenter="throttledIndicatorHover(index)"
         @click.stop="handleIndicatorClick(index)">
-        <button class="el-carousel__button">{{ item.label }}</button>
+        <button class="el-carousel__button el-carousel__button--text" v-if="indicatorLabels">{{ item.label }}</button>
+        <button class="el-carousel__button" v-else></button>
       </li>
     </ul>
   </div>
@@ -74,6 +75,10 @@ export default {
       default: 3000
     },
     indicatorPosition: String,
+    indicatorLabels: {
+      type: Boolean,
+      default: false
+    },
     indicator: {
       type: Boolean,
       default: true

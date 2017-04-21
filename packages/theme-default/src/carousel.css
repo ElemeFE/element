@@ -100,6 +100,11 @@
       margin: 0;
       cursor: pointer;
       transition: .3s;
+      
+      &--text {
+        size: auto auto;
+        padding: 10px;
+      }
     }
   }
 
