@@ -238,6 +238,30 @@ describe('Slider', () => {
     expect(stops.length).to.equal(9);
   });
 
+  it('vertical mode', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-slider vertical v-model="value" height="200px"></el-slider>
+        </div>
+      `,
+
+      data() {
+        return {
+          value: 0
+        };
+      }
+    }, true);
+    const slider = vm.$children[0];
+    setTimeout(() => {
+      slider.onSliderClick({ clientY: 100 });
+      setTimeout(() => {
+        expect(vm.value > 0).to.true;
+        done();
+      }, 10);
+    }, 10);
+  });
+
   describe('range', () => {
     it('basic ranged slider', () => {
       vm = createVue({

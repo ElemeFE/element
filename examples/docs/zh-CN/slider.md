@@ -198,16 +198,14 @@
 
 ### 竖向模式
 
-竖向滑块
-
-:::demo 设置`vertical`可使滑块变成竖向模式，必须设置滑块高度`size`属性
+:::demo 设置`vertical`可使 Slider 变成竖向模式，此时必须设置高度`height`属性
 ```html
 <template>
   <div class="block">
     <el-slider
       v-model="value10"
       vertical
-      size="300px">
+      height="200px">
     </el-slider>
   </div>
 </template>
@@ -238,7 +236,7 @@
 | format-tooltip | 格式化 tooltip message | Function(value) | — | — |
 | range | 是否为范围选择 | boolean | — | false |
 | vertical | 是否竖向模式 | boolean | — | false |
-| size | 宽度或高度，竖向模式时务必设置 | String | — | - |
+| height | Slider 高度，竖向模式时必填 | String | — | — |
 
 ### Events
 | 事件名称      | 说明    | 回调参数      |

@@ -129,7 +129,7 @@
       transform: translateX(-50%);
     }
 
-    @e vertical {
+    @when vertical {
       position: relative;
       .el-slider__runway {
         width: 4px;
@@ -149,13 +149,13 @@
       .el-slider__stop {
         transform: translateY(50%);
       }
-      &.el-slider__with_input {
-        padding-bottom: var(--input-large-height);
+      &.el-slider--with-input {
+        padding-bottom: calc(var(--input-large-height) + 22px);
         .el-slider__input {
           overflow: visible;
           float: none;
           position: absolute;
-          bottom: 0;
+          bottom: 22px;
           width: 36px;
           margin-top: 15px;
           .el-input__inner {
