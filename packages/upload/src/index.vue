@@ -86,7 +86,8 @@ export default {
       type: String,
       default: 'text'   // text,picture,picture-card
     },
-    httpRequest: Function
+    httpRequest: Function,
+    disabled: Boolean
   },
 
   data() {
@@ -227,6 +228,7 @@ export default {
         fileList: this.uploadFiles,
         autoUpload: this.autoUpload,
         listType: this.listType,
+        disabled: this.disabled,
         'on-start': this.handleStart,
         'on-progress': this.handleProgress,
         'on-success': this.handleSuccess,
