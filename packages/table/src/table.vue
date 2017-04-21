@@ -115,6 +115,7 @@
   import TableBody from './table-body';
   import TableHeader from './table-header';
   import { mousewheel } from './util';
+  import CsvExport from './CsvExport';
 
   let tableIdSeed = 1;
 
@@ -181,6 +182,12 @@
     },
 
     methods: {
+      exportCsv(fileName) {
+        let columns = this.$children.filter(t => t.prop != null);
+        const fields = columns.map(t => t.prop);
+        const fieldNames = columns.map(t => t.label);
+        CsvExport(this.data, fields, fieldNames, fileName);
+      },
       toggleRowSelection(row, selected) {
         this.store.toggleRowSelection(row, selected);
         this.store.updateAllSelected();
