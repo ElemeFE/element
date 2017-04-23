@@ -46,7 +46,7 @@ Switch is used for switching between two opposing states.
 
 ### Expand value
 
-:::demo Set `on-value` and `off-value` attribute. It's receive `Boolean` or `String` type.
+:::demo Set `on-value` and `off-value` attribute. It's receive `Boolean`, `String` or `Number` type.
 
 ```html
  <el-tooltip class="item" effect="dark" :content="'switch value is ' + value3" placement="top-end">
@@ -110,8 +110,8 @@ on-close-icon | class name of the icon displayed when in `on` state, overrides `
 off-close-icon |class name of the icon displayed when in `off` state, overrides `off-text`| string | — | —
 on-text | text displayed when in `on` state | string | — | ON
 off-text | text displayed when in `off` state | string | — | OFF
-on-value  | switch value when in `on` state | boolean \| string   | — | true
-off-value  | switch value when in `off` state | boolean \| string   | — | false
+on-value  | switch value when in `on` state | boolean \| string \| number | — | true
+off-value  | switch value when in `off` state | boolean \| string \| number | — | false
 on-color | background color when in `on` state | string | — | #20A0FF
 off-color | background color when in `off` state | string | — | #C0CCDA
 name| input name of Switch | string | — | —
