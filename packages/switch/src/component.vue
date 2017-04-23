@@ -16,7 +16,7 @@
     <transition name="label-fade">
       <div
         class="el-switch__label el-switch__label--left"
-        v-show="value === onValue"
+        v-show="checked"
         :style="{ 'width': coreWidth + 'px' }">
         <i :class="[onIconClass]" v-if="onIconClass"></i>
         <span v-if="!onIconClass && onText">{{ onText }}</span>
@@ -25,7 +25,7 @@
     <transition name="label-fade">
       <div
         class="el-switch__label el-switch__label--right"
-        v-show="value === offValue"
+        v-show="!checked"
         :style="{ 'width': coreWidth + 'px' }">
         <i :class="[offIconClass]" v-if="offIconClass"></i>
         <span v-if="!offIconClass && offText">{{ offText }}</span>
@@ -39,7 +39,7 @@
     name: 'ElSwitch',
     props: {
       value: {
-        type: [Boolean, String],
+        type: [Boolean, String, Number],
         default: true
       },
       disabled: {
@@ -75,11 +75,11 @@
         default: ''
       },
       onValue: {
-        type: [Boolean, String],
+        type: [Boolean, String, Number],
         default: true
       },
       offValue: {
-        type: [Boolean, String],
+        type: [Boolean, String, Number],
         default: false
       },
       name: {
@@ -98,6 +98,9 @@
       }
     },
     computed: {
+      checked() {
+        return this.value === this.onValue;
+      },
       hasText() {
         /* istanbul ignore next */
         return this.onText || this.offText;
@@ -111,7 +114,7 @@
         }
       },
       transform() {
-        return this.value === this.onValue ? `translate(${ this.coreWidth - 20 }px, 2px)` : 'translate(2px, 2px)';
+        return this.checked ? `translate(${ this.coreWidth - 20 }px, 2px)` : 'translate(2px, 2px)';
       }
     },
     watch: {
@@ -126,7 +129,7 @@
         this.$emit('change', event.currentTarget.checked);
       },
       setBackgroundColor() {
-        let newColor = this.value === this.onValue ? this.onColor : this.offColor;
+        let newColor = this.checked ? this.onColor : this.offColor;
         this.$refs.core.style.borderColor = newColor;
         this.$refs.core.style.backgroundColor = newColor;
       }
