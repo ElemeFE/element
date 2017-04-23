@@ -4,7 +4,8 @@
       return {
         value1: true,
         value2: true,
-        value3: true
+        value3: '100',
+        value4: true
       }
     }
   };
@@ -43,19 +44,47 @@ Switch is used for switching between two opposing states.
 ```
 :::
 
+### Expand value
+
+:::demo Set `on-value` and `off-value` attribute. It's receive `Boolean` or `String` type.
+
+```html
+ <el-tooltip class="item" effect="dark" :content="'switch value is ' + value3" placement="top-end">
+    <el-switch
+      v-model="value3"
+      on-color="#13ce66"
+      off-color="#ff4949"
+      on-value="100"
+      off-value="0">
+    </el-switch>
+  </el-tooltip>
+
+<script>
+  export default {
+    data() {
+      return {
+        value3: '100'
+      }
+    }
+  };
+</script>
+```
+
+:::
+
 ### Disabled
 
 :::demo Adding the `disabled` attribute disables Switch.
 
 ```html
 <el-switch
-  v-model="value3"
+  v-model="value4"
   on-text=""
   off-text=""
   disabled>
 </el-switch>
 <el-switch
-  v-model="value3"
+  v-model="value4"
   disabled>
 </el-switch>
 
@@ -63,7 +92,7 @@ Switch is used for switching between two opposing states.
   export default {
     data() {
       return {
-        value3: true
+        value4: true
       }
     }
   };
@@ -81,6 +110,8 @@ on-close-icon | class name of the icon displayed when in `on` state, overrides `
 off-close-icon |class name of the icon displayed when in `off` state, overrides `off-text`| string | — | —
 on-text | text displayed when in `on` state | string | — | ON
 off-text | text displayed when in `off` state | string | — | OFF
+on-value  | switch value when in `on` state | boolean \| string   | — | true
+off-value  | switch value when in `off` state | boolean \| string   | — | false
 on-color | background color when in `on` state | string | — | #20A0FF
 off-color | background color when in `off` state | string | — | #C0CCDA
 name| input name of Switch | string | — | —
