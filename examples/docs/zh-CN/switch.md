@@ -12,7 +12,8 @@
       return {
         value1: true,
         value2: true,
-        value3: true
+        value3: '100',
+        value4: true
       }
     }
   };
@@ -37,7 +38,7 @@
   on-color="#13ce66"
   off-color="#ff4949">
 </el-switch>
-
+</el-switch>
 <script>
   export default {
     data() {
@@ -51,33 +52,62 @@
 ```
 :::
 
-### 禁用状态
+### 扩展 value
 
-:::demo 设置`disabled`属性，接受一个`Boolean`，设置`true`即可禁用。
+:::demo 设置`on-value` 和 `off-value`属性，接受`Boolean` 或 `String` 类型的值，`v-model`可以设置`on-value`或`off-value`的状态值。
 
 ```html
-<el-switch
-  v-model="value3"
-  on-text=""
-  off-text=""
-  disabled>
-</el-switch>
-<el-switch
-  v-model="value3"
-  disabled>
-</el-switch>
+ <el-tooltip class="item" effect="dark" :content="'switch value is ' + value3" placement="top-end">
+    <el-switch
+      v-model="value3"
+      on-color="#13ce66"
+      off-color="#ff4949"
+      on-value="100"
+      off-value="0">
+    </el-switch>
+  </el-tooltip>
 
 <script>
   export default {
     data() {
       return {
-        value3: true
+        value3: '100'
+      }
+    }
+  };
+</script>
+```
+
+:::
+
+### 禁用状态
+
+:::demo 设置`disabled`属性，接受一个`Boolean`，设置`true`即可禁用。
+
+
+```html
+<el-switch
+  v-model="value4"
+  on-text=""
+  off-text=""
+  disabled>
+</el-switch>
+<el-switch
+  v-model="value4"
+  disabled>
+</el-switch>
+<script>
+  export default {
+    data() {
+      return {
+        value4: true
       }
     }
   };
 </script>
 ```
 :::
+
 
 ### Attributes
 
@@ -89,6 +119,8 @@
 | off-icon-class  | switch 关闭时所显示图标的类名，设置此项会忽略 `off-text`    | string   | — | — |
 | on-text  | switch 打开时的文字    | string   | — | ON |
 | off-text  | switch 关闭时的文字    | string   | — | OFF |
+| on-value  | switch 打开时的值    | boolean \| string   | — | true |
+| off-value  | switch 关闭时的值    | boolean \| string   | — | false |
 | on-color  | switch 打开时的背景色    | string   | — | #20A0FF |
 | off-color  | switch 关闭时的背景色    | string   | — | #C0CCDA |
 | name  | switch 对应的 name 属性    | string   | — | — |
