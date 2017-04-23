@@ -32,6 +32,7 @@
         :highlight="highlightCurrentRow"
         :style="{ width: bodyWidth }">
       </table-body>
+      <slot name="infinite-loader"></slot>
       <div :style="{ width: bodyWidth }" class="el-table__empty-block" v-if="!data || data.length === 0">
         <span class="el-table__empty-text"><slot name="empty">{{ emptyText || t('el.table.emptyText') }}</slot></span>
       </div>
