@@ -42,13 +42,13 @@ export interface ElLoading {
   /** Install Loading directive into Vue */
   install (vue: typeof Vue)
 
-  // TODO: add description
+  /** If you do not have a specific DOM node to attach the Loading directive, or if you simply prefer not to use Loading as a directive, you can call this service with some configs to open a Loading instance. */
   service (options: LoadingServiceOptions): ElLoadingComponent
 }
 
 declare module 'vue/types/vue' {
   interface Vue {
-    // TODO: add description
+    /** If you do not have a specific DOM node to attach the Loading directive, or if you simply prefer not to use Loading as a directive, you can call this service with some configs to open a Loading instance. */
     $loading (options: LoadingServiceOptions): ElLoadingComponent
   }
 }
