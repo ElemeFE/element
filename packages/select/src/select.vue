@@ -165,7 +165,9 @@
 
     props: {
       name: String,
-      value: {},
+      value: {
+        required: true
+      },
       size: String,
       disabled: Boolean,
       clearable: Boolean,
