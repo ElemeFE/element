@@ -132,7 +132,7 @@ export default class TreeStore {
     if (!key || !node || !node.data) return;
 
     const nodeKey = node.key;
-    if (nodeKey) this.nodesMap[node.key] = node;
+    if (nodeKey !== undefined) this.nodesMap[node.key] = node;
   }
 
   deregisterNode(node) {
