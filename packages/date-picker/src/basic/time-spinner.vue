@@ -53,6 +53,7 @@
 <script type="text/babel">
   import { getRangeHours } from '../util';
   import ElScrollbar from 'element-ui/packages/scrollbar';
+  import debounce from 'throttle-debounce/debounce';
 
   export default {
     components: { ElScrollbar },
@@ -132,6 +133,10 @@
       };
     },
 
+    created() {
+      this.debounceAjustElTop = debounce(100, type => this.ajustElTop(type, this[`${type}s`]));
+    },
+
     mounted() {
       this.$nextTick(() => {
         this.bindScrollEvent();
@@ -171,6 +176,7 @@
       handleScroll(type) {
         const ajust = {};
         ajust[`${type}s`] = Math.min(Math.floor((this[`${type}El`].scrollTop - 80) / 32 + 3), 59);
+        this.debounceAjustElTop(type);
         this.$emit('change', ajust);
       },
 
