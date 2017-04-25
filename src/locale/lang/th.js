@@ -31,7 +31,7 @@ export default {
       month12: 'ธันวาคม',
       // week: 'week',
       weeks: {
-        sun: 'อ',
+        sun: 'อา',
         mon: 'จ',
         tue: 'อ',
         wed: 'พ',
