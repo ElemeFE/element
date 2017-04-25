@@ -6,8 +6,7 @@
     v-show="visible"
     :class="{
       'selected': itemSelected,
-      'is-disabled': disabled || groupDisabled || limitReached,
-      'hover': parent.hoverIndex === index
+      'is-disabled': disabled || groupDisabled || limitReached
     }">
     <slot>
       <span>{{ currentLabel }}</span>
