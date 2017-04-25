@@ -38,6 +38,13 @@
     methods: {
       openDialog() {
         this.$refs.dialogBind.open();
+      },
+      handleClose(done) {
+        this.$confirm('确认关闭？')
+          .then(_ => {
+            done();
+          })
+          .catch(_ => {});
       }
     }
   };
@@ -72,12 +79,16 @@
 
 Dialog 弹出一个对话框，适合需要定制性更大的场景。
 
-:::demo 需要设置`v-model`属性，它接收`Boolean`，当为`true`时显示 Dialog。Dialog 分为两个部分：`body`和`footer`，`footer`需要具名为`footer`的`slot`。`title`属性用于定义标题，它是可选的，默认值为空。本例通过显式改变`v-model`的值来打开 Dialog，此外我们还为 Dialog 实例提供了`open`和`close`方法，可以通过调用它们来打开/关闭 Dialog。
+:::demo 需要设置`v-model`属性，它接收`Boolean`，当为`true`时显示 Dialog。Dialog 分为两个部分：`body`和`footer`，`footer`需要具名为`footer`的`slot`。`title`属性用于定义标题，它是可选的，默认值为空。本例通过显式改变`v-model`的值来打开 Dialog，此外我们还为 Dialog 实例提供了`open`和`close`方法，可以通过调用它们来打开/关闭 Dialog。最后，本例还展示了`beforeClose`的用法。
 
 ```html
 <el-button type="text" @click="dialogVisible = true">点击打开 Dialog</el-button>
 
-<el-dialog title="提示" v-model="dialogVisible" size="tiny">
+<el-dialog
+  title="提示"
+  v-model="dialogVisible"
+  size="tiny"
+  :before-close="handleClose">
   <span>这是一段信息</span>
   <span slot="footer" class="dialog-footer">
     <el-button @click="dialogVisible = false">取 消</el-button>
@@ -91,6 +102,15 @@ Dialog 弹出一个对话框，适合需要定制性更大的场景。
       return {
         dialogVisible: false
       };
+    },
+    methods: {
+      handleClose(done) {
+        this.$confirm('确认关闭？')
+          .then(_ => {
+            done();
+          })
+          .catch(_ => {});
+      }
     }
   };
 </script>
@@ -189,6 +209,7 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
 | close-on-click-modal | 是否可以通过点击 modal 关闭 Dialog | boolean    | — | true |
 | close-on-press-escape | 是否可以通过按下 ESC 关闭 Dialog | boolean    | — | true |
 | show-close | 是否显示关闭按钮 | boolean    | — | true |
+| before-close | 关闭前的回调，会暂停 Dialog 的关闭 | function(done)，done 用于关闭 Dialog | — | — |
 
 ### Slot
 | name | 说明 |
