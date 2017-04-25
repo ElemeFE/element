@@ -132,6 +132,7 @@ export default {
       }
 
       this.uploadFiles.push(file);
+      this.onChange(file, this.uploadFiles);
     },
     handleProgress(ev, rawFile) {
       var file = this.getFile(rawFile);
