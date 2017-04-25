@@ -408,7 +408,7 @@
 | on-success | 可选参数, 文件上传成功时的钩子 | function(response, file, fileList) | — | — |
 | on-error | 可选参数, 文件上传失败时的钩子 | function(err, file, fileList) | — | — |
 | on-progress | 可选参数, 文件上传时的钩子 | function(event, file, fileList) | — | — |
-| on-change | 可选参数, 文件状态改变时的钩子，上传成功或者失败时都会被调用 | function(file, fileList) | — | — |
+| on-change | 可选参数, 文件状态改变时的钩子，添加文件、上传成功和上传失败时都会被调用 | function(file, fileList) | — | — |
 | before-upload | 可选参数, 上传文件之前的钩子，参数为上传的文件，若返回 false 或者 Promise 则停止上传。 | function(file) | — | — |
 | list-type | 文件列表的类型 | string | text/picture/picture-card | text |
 | auto-upload | 是否在选取文件后立即进行上传 | boolean | — | true |
