@@ -41,7 +41,8 @@
                 :date="date"
                 :picker-width="pickerWidth"
                 @pick="handleTimePick"
-                :visible="timePickerVisible">
+                :visible="timePickerVisible"
+                @mounted="$refs.timepicker.format=timeFormat">
               </time-picker>
             </span>
           </div>
@@ -371,7 +372,8 @@
         week: null,
         showWeekNumber: false,
         timePickerVisible: false,
-        width: 0
+        width: 0,
+        format: ''
       };
     },
 
@@ -382,12 +384,12 @@
 
       visibleTime: {
         get() {
-          return formatDate(this.date, 'HH:mm:ss');
+          return formatDate(this.date, this.timeFormat);
         },
 
         set(val) {
           if (val) {
-            const date = parseDate(val, 'HH:mm:ss');
+            const date = parseDate(val, this.timeFormat);
             if (date) {
               date.setFullYear(this.date.getFullYear());
               date.setMonth(this.date.getMonth());
@@ -433,6 +435,14 @@
           return startYear + ' - ' + (startYear + 9);
         }
         return this.year + ' ' + yearTranslation;
+      },
+
+      timeFormat() {
+        if (this.format && this.format.indexOf('ss') === -1) {
+          return 'HH:mm';
+        } else {
+          return 'HH:mm:ss';
+        }
       }
     }
   };
