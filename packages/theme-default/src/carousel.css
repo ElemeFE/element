@@ -70,6 +70,18 @@
           opacity: 0.24;
         }
       }
+      
+      @modifier labels {
+        left: 0;
+        right: 0;
+        transform: none;
+        text-align: center;
+        
+        button {
+          size: auto auto;
+          padding: 10px;
+        }
+      }
     }
 
     @e indicator {
@@ -100,11 +112,6 @@
       margin: 0;
       cursor: pointer;
       transition: .3s;
-      
-      &--text {
-        size: auto auto;
-        padding: 10px;
-      }
     }
   }
 

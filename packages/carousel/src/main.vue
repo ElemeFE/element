@@ -34,15 +34,14 @@
     <ul
       class="el-carousel__indicators"
       v-if="indicatorPosition !== 'none'"
-      :class="{ 'el-carousel__indicators--outside': indicatorPosition === 'outside' || type === 'card' }">
+      :class="{ 'el-carousel__indicators--labels': indicatorLabels, 'el-carousel__indicators--outside': indicatorPosition === 'outside' || type === 'card' }">
       <li
         v-for="(item, index) in items"
         class="el-carousel__indicator"
         :class="{ 'is-active': index === activeIndex }"
         @mouseenter="throttledIndicatorHover(index)"
         @click.stop="handleIndicatorClick(index)">
-        <button class="el-carousel__button el-carousel__button--text" v-if="indicatorLabels">{{ item.label }}</button>
-        <button class="el-carousel__button" v-else></button>
+        <button class="el-carousel__button"><span v-if="indicatorLabels">{{ item.label }}</span></button>
       </li>
     </ul>
   </div>
