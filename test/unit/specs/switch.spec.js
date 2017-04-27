@@ -120,4 +120,25 @@ describe('Switch', () => {
       done();
     });
   });
+
+  it('true value and false value', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-switch true-value="yes" false-value="no" v-model="value"></el-switch>
+        </div>
+      `,
+
+      data() {
+        return {
+          value: 'no'
+        };
+      }
+    }, true);
+    vm.$el.querySelector('.el-switch__core').click();
+    Vue.nextTick(() => {
+      expect(vm.value).to.equal('yes');
+      done();
+    });
+  });
 });

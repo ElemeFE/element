@@ -91,6 +91,8 @@
 | off-text  | switch 关闭时的文字    | string   | — | OFF |
 | on-color  | switch 打开时的背景色    | string   | — | #20A0FF |
 | off-color  | switch 关闭时的背景色    | string   | — | #C0CCDA |
+| true-value  | switch 打开时的值    | string / number / boolean   | — | true |
+| false-value  | switch 关闭时的值    | string / number / boolean  | — | false |
 | name  | switch 对应的 name 属性    | string   | — | — |
 
 ### Events
