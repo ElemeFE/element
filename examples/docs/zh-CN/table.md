@@ -1371,7 +1371,8 @@
       label="标签"
       width="100"
       :filters="[{ text: '家', value: '家' }, { text: '公司', value: '公司' }]"
-      :filter-method="filterTag">
+      :filter-method="filterTag"
+      filter-placement="bottom-start">
       <template scope="scope">
         <el-tag
           :type="scope.row.tag === '家' ? 'primary' : 'success'"

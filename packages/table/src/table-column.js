@@ -146,6 +146,7 @@ export default {
     filterMethod: Function,
     filteredValue: Array,
     filters: Array,
+    filterPlacement: String,
     filterMultiple: {
       type: Boolean,
       default: true
@@ -238,7 +239,8 @@ export default {
       filterable: this.filters || this.filterMethod,
       filterMultiple: this.filterMultiple,
       filterOpened: false,
-      filteredValue: this.filteredValue || []
+      filteredValue: this.filteredValue || [],
+      filterPlacement: this.filterPlacement || ''
     });
 
     objectAssign(column, forced[type] || {});
