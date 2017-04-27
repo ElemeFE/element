@@ -174,16 +174,14 @@ Selecting a range of values is supported.
 
 ### Vertical mode
 
-Vertical slider
-
-:::demo Setting the `vertical` attribute to switch to the vertical mode, the `size` attribute must be setted as the heigth of slider
+:::demo Setting the `vertical` attribute to `true` enables vertical mode. In vertical mode, the `height` attribute is required.
 ```html
 <template>
   <div class="block">
     <el-slider
       v-model="value10"
       vertical
-      size="300px">
+      height="200px">
     </el-slider>
   </div>
 </template>
@@ -214,7 +212,7 @@ Vertical slider
 | format-tooltip | format to display tooltip value | Function(value) | — | — |
 | range | whether to select a range | boolean | — | false |
 | vertical | vertical mode | boolean | — | false |
-| size | width or height, it should be setted when vertical mode | String | — | - |
+| height | Slider height, required in vertical mode | String | — | — |
 
 ## Events
 | Event Name | Description | Parameters |

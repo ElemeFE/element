@@ -1,6 +1,6 @@
 <template>
   <div class="el-slider"
-    :class="{ 'el-slider__vertical': vertical, 'el-slider__with_input': showInput }">
+    :class="{ 'is-vertical': vertical, 'el-slider--with-input': showInput }">
     <el-input-number
       v-model="firstValue"
       v-if="showInput && !range"
@@ -15,18 +15,12 @@
     </el-input-number>
     <div class="el-slider__runway"
       :class="{ 'show-input': showInput, 'disabled': disabled }"
-      :style="vertical ? size && { height: size } : size && { width: size }"
+      :style="runwayStyle"
       @click="onSliderClick"
       ref="slider">
       <div
         class="el-slider__bar"
-        :style="vertical ? {
-          height: barSize,
-          bottom: barStart
-        } : {
-          width: barSize,
-          left: barStart
-        }">
+        :style="barStyle">
       </div>
       <slider-button
         :vertical="vertical"
@@ -106,7 +100,7 @@
         type: Boolean,
         default: false
       },
-      size: {
+      height: {
         type: String
       }
     },
@@ -229,7 +223,7 @@
         if (this.disabled || this.dragging) return;
         if (this.vertical) {
           const sliderOffsetBottom = this.$refs.slider.getBoundingClientRect().bottom;
-          this.setPosition((event.clientY - sliderOffsetBottom) / this.$sliderSize * 100);
+          this.setPosition((sliderOffsetBottom - event.clientY) / this.$sliderSize * 100);
         } else {
           const sliderOffsetLeft = this.$refs.slider.getBoundingClientRect().left;
           this.setPosition((event.clientX - sliderOffsetLeft) / this.$sliderSize * 100);
@@ -285,6 +279,21 @@
           return decimal ? decimal.length : 0;
         });
         return Math.max.apply(null, precisions);
+      },
+
+      runwayStyle() {
+        return this.vertical ? { height: this.height } : {};
+      },
+
+      barStyle() {
+        return this.vertical
+          ? {
+            height: this.barSize,
+            bottom: this.barStart
+          } : {
+            width: this.barSize,
+            left: this.barStart
+          };
       }
     },
 

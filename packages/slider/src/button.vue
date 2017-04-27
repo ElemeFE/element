@@ -5,7 +5,7 @@
     @mouseleave="handleMouseLeave"
     @mousedown="onButtonDown"
     :class="{ 'hover': hovering, 'dragging': dragging }"
-    :style="this.vertical ? { bottom: currentPosition } : { left: currentPosition }"
+    :style="wrapperStyle"
     ref="button">
     <el-tooltip placement="top" ref="tooltip" :disabled="!showTooltip">
       <span slot="content">{{ formatValue }}</span>
@@ -84,6 +84,10 @@
 
       formatValue() {
         return this.enableFormat && this.$parent.formatTooltip(this.value) || this.value;
+      },
+
+      wrapperStyle() {
+        return this.vertical ? { bottom: this.currentPosition } : { left: this.currentPosition };
       }
     },
 
