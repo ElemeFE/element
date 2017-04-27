@@ -17,23 +17,21 @@ export default {
 
   computed: {
     gutter() {
-      return this.$parent.gutter;
-    },
-
-    style() {
-      var ret = {};
-
-      if (this.gutter) {
-        ret.paddingLeft = this.gutter / 2 + 'px';
-        ret.paddingRight = ret.paddingLeft;
+      let parent = this.$parent;
+      while (parent && parent.$options.componentName !== 'ElRow') {
+        parent = parent.$parent;
       }
-
-      return ret;
+      return parent ? parent.gutter : 0;
     }
   },
   render(h) {
-    let { style } = this;
     let classList = [];
+    let style = {};
+
+    if (this.gutter) {
+      style.paddingLeft = this.gutter / 2 + 'px';
+      style.paddingRight = style.paddingLeft;
+    }
 
     ['span', 'offset', 'pull', 'push'].forEach(prop => {
       if (this[prop]) {

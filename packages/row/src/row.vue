@@ -17,6 +17,8 @@
   export default {
     name: 'ElRow',
 
+    componentName: 'ElRow',
+
     props: {
       gutter: Number,
       type: String,
