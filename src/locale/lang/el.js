@@ -81,7 +81,8 @@ export default {
       emptyText: 'Χωρίς Δεδομένα',
       confirmFilter: 'Επιβεβαίωση',
       resetFilter: 'Επαναφορά',
-      clearFilter: 'Όλα'
+      clearFilter: 'Όλα',
+      sumText: 'Sum' // to be translated
     },
     tree: {
       emptyText: 'Χωρίς Δεδομένα'

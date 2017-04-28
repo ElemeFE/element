@@ -85,7 +85,8 @@ export default {
       emptyText: 'Tidak Ada Data',
       confirmFilter: 'Konfirmasi',
       resetFilter: 'Atur Ulang',
-      clearFilter: 'Semua'
+      clearFilter: 'Semua',
+      sumText: 'Sum' // to be translated
     },
     tree: {
       emptyText: 'Tidak Ada Data'

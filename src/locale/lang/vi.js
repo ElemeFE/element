@@ -85,7 +85,8 @@ export default {
       emptyText: 'Không có dữ liệu',
       confirmFilter: 'Xác nhận',
       resetFilter: 'Làm mới',
-      clearFilter: 'Xóa hết'
+      clearFilter: 'Xóa hết',
+      sumText: 'Sum' // to be translated
     },
     tree: {
       emptyText: 'Không có dữ liệu'

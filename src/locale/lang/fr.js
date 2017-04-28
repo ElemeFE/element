@@ -84,7 +84,8 @@ export default {
       emptyText: 'Aucune donnée',
       confirmFilter: 'Confirmer',
       resetFilter: 'Réinitialiser',
-      clearFilter: 'Tous'
+      clearFilter: 'Tous',
+      sumText: 'Sum' // to be translated
     },
     tree: {
       emptyText: 'Aucune donnée'

@@ -81,7 +81,8 @@ export default {
       emptyText: 'Ei tietoja',
       confirmFilter: 'Vahvista',
       resetFilter: 'Tyhjennä',
-      clearFilter: 'Kaikki'
+      clearFilter: 'Kaikki',
+      sumText: 'Sum' // to be translated
     },
     tree: {
       emptyText: 'Ei tietoja'

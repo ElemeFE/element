@@ -85,7 +85,8 @@ export default {
       emptyText: 'データなし',
       confirmFilter: '確認',
       resetFilter: '初期化',
-      clearFilter: 'すべて'
+      clearFilter: 'すべて',
+      sumText: 'Sum' // to be translated
     },
     tree: {
       emptyText: 'データなし'

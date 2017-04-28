@@ -85,7 +85,8 @@ export default {
       emptyText: 'Maglumat ýok',
       confirmFilter: 'Tassykla',
       resetFilter: 'Arassala',
-      clearFilter: 'Hemmesi'
+      clearFilter: 'Hemmesi',
+      sumText: 'Sum' // to be translated
     },
     tree: {
       emptyText: 'Maglumat ýok'

@@ -85,7 +85,8 @@ export default {
       emptyText: '데이터 없음',
       confirmFilter: '확인',
       resetFilter: '초기화',
-      clearFilter: '전체'
+      clearFilter: '전체',
+      sumText: 'Sum' // to be translated
     },
     tree: {
       emptyText: '데이터 없음'

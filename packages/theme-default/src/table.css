@@ -199,7 +199,9 @@
 
       box-shadow: -1px 0 8px #d3d4d6;
 
-      .el-table__fixed-header-wrapper, .el-table__fixed-body-wrapper {
+      .el-table__fixed-header-wrapper,
+      .el-table__fixed-body-wrapper,
+      .el-table__fixed-footer-wrapper {
         left: auto;
         right: 0;
       }
@@ -217,6 +219,19 @@
       }
     }
 
+    @e fixed-footer-wrapper {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      z-index: 3;
+
+      & tbody td {
+        border-top: 1px solid var(--table-border-color);
+        background-color: var(--table-footer-background);
+        color: var(--table-text-color);
+      }
+    }
+
     @e fixed-body-wrapper {
       position: absolute;
       left: 0;
@@ -225,19 +240,31 @@
       z-index: 3;
     }
 
-    @e header-wrapper, body-wrapper {
+    @e header-wrapper, body-wrapper, footer-wrapper {
       width: 100%;
     }
 
-    @e header, body {
+    @e footer-wrapper {
+      margin-top: -1px;
+      td {
+        border-top: 1px solid var(--table-border-color);
+      }
+    }
+
+    @e header, body, footer {
       table-layout: fixed;
     }
 
-    @e header-wrapper {
+    @e header-wrapper, footer-wrapper {
       overflow: hidden;
 
       & thead div {
         background-color: var(--table-header-background);
+        color: var(--table-text-color);
+      }
+
+      & tbody td {
+        background-color: var(--table-footer-background);
         color: var(--table-text-color);
       }
     }
@@ -263,7 +290,7 @@
       word-wrap: normal;
       text-overflow: ellipsis;
       display: inline-block;
-      line-height: 20px;
+      line-height: 30px;
       vertical-align: middle;
       width: 100%;
       box-sizing: border-box;
@@ -281,7 +308,7 @@
       margin-left: 5px;
       margin-top: -2px;
       width: 16px;
-      height: 34px;
+      height: 30px;
       overflow: initial;
     }
 
@@ -296,7 +323,7 @@
       z-index: 2;
 
       &.ascending {
-        top: 11px;
+        top: 9px;
         border-top: none;
         border-right: 5px solid transparent;
         border-bottom: 5px solid var(--color-light-silver);
@@ -304,7 +331,7 @@
       }
 
       &.descending {
-        bottom: 11px;
+        bottom: 9px;
         border-top: 5px solid var(--color-light-silver);
         border-right: 5px solid transparent;
         border-bottom: none;

@@ -364,6 +364,12 @@ export default {
         this.columnConfig.fixed = newVal;
         this.owner.store.scheduleLayout();
       }
+    },
+
+    sortable(newVal) {
+      if (this.columnConfig) {
+        this.columnConfig.sortable = newVal;
+      }
     }
   },
 

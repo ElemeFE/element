@@ -78,6 +78,8 @@ export default {
                 : ''
               ]
             ).concat(
+              this._self.$parent.$slots.append
+            ).concat(
               <el-tooltip effect={ this.table.tooltipEffect } placement="top" ref="tooltip" content={ this.tooltipContent }></el-tooltip>
             )
           }

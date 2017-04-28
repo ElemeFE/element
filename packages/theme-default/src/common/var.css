@@ -418,6 +418,7 @@
   --table-border-color: color(var(--border-color-base) h(-3) s(27%) l(90%));
   --table-text-color: var(--color-base-black);
   --table-header-background: var(--color-extra-light-gray);
+  --table-footer-background: var(--color-dark-white);
 
   /* Pagination
  -------------------------- */

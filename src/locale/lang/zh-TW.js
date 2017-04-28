@@ -85,7 +85,8 @@ export default {
       emptyText: '暫無資料',
       confirmFilter: '篩選',
       resetFilter: '重置',
-      clearFilter: '全部'
+      clearFilter: '全部',
+      sumText: 'Sum' // to be translated
     },
     tree: {
       emptyText: '暫無資料'

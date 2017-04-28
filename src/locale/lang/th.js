@@ -85,7 +85,8 @@ export default {
       emptyText: 'ไม่พบข้อมูล',
       confirmFilter: 'ยืนยัน',
       resetFilter: 'รีเซ็ต',
-      clearFilter: 'ทั้งหมด'
+      clearFilter: 'ทั้งหมด',
+      sumText: 'Sum' // to be translated
     },
     tree: {
       emptyText: 'ไม่พบข้อมูล'
