@@ -89,6 +89,14 @@ export default {
     },
     tree: {
       emptyText: 'Ingen data'
+    },
+    transfer: {
+      noMatch: 'Ingen matchende data',
+      noData: 'Ingen data',
+      titles: ['List 1', 'List 2'], // to be translated
+      filterPlaceholder: 'Enter keyword', // to be translated
+      noCheckedFormat: '{total} items', // to be translated
+      hasCheckedFormat: '{checked}/{total} checked' // to be translated
     }
   }
 };

@@ -62,6 +62,10 @@ export default {
       noData: 'Žiadne dáta',
       placeholder: 'Vybrať'
     },
+    cascader: {
+      noMatch: 'Žiadna zhoda',
+      placeholder: 'Vybrať'
+    },
     pagination: {
       goto: 'Choď na',
       pagesize: 'na stranu',
@@ -88,6 +92,14 @@ export default {
     },
     tree: {
       emptyText: 'Žiadne dáta'
+    },
+    transfer: {
+      noMatch: 'Žiadna zhoda',
+      noData: 'Žiadne dáta',
+      titles: ['List 1', 'List 2'], // to be translated
+      filterPlaceholder: 'Enter keyword', // to be translated
+      noCheckedFormat: '{total} items', // to be translated
+      hasCheckedFormat: '{checked}/{total} checked' // to be translated
     }
   }
 };

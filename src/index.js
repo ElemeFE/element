@@ -63,6 +63,7 @@ import Collapse from '../packages/collapse/index.js';
 import CollapseItem from '../packages/collapse-item/index.js';
 import Cascader from '../packages/cascader/index.js';
 import ColorPicker from '../packages/color-picker/index.js';
+import Transfer from '../packages/transfer/index.js';
 import locale from 'element-ui/src/locale';
 import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
@@ -125,6 +126,7 @@ const components = [
   Collapse,
   CollapseItem,
   Cascader,
+  Transfer,
   ColorPicker,
   CollapseTransition
 ];
@@ -223,5 +225,6 @@ module.exports = {
   Collapse,
   CollapseItem,
   Cascader,
-  ColorPicker
+  ColorPicker,
+  Transfer
 };

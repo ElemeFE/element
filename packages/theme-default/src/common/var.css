@@ -589,4 +589,17 @@
   --collapse-content-fill: var(--color-dark-white);
   --collapse-content-size: 13px;
   --collapse-content-color: var(--color-base-black);
+
+  /* Transfer
+  --------------------------*/
+  --transfer-border-color: var(--color-base-gray);
+  --transfer-box-shadow: var(--box-shadow-base);
+  --transfer-panel-width: 200px;
+  --transfer-panel-header-height: 36px;
+  --transfer-panel-header-background: var(--color-dark-white);
+  --transfer-panel-footer-height: 36px;
+  --transfer-panel-body-height: 246px;
+  --transfer-item-height: 32px;
+  --transfer-item-hover-background: var(--color-light-gray);
+  --transfer-filter-height: 22px;
 }

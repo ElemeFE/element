@@ -90,6 +90,14 @@ export default {
     },
     tree: {
       emptyText: '데이터 없음'
+    },
+    transfer: {
+      noMatch: '맞는 데이터가 없습니다',
+      noData: '데이터 없음',
+      titles: ['List 1', 'List 2'], // to be translated
+      filterPlaceholder: 'Enter keyword', // to be translated
+      noCheckedFormat: '{total} items', // to be translated
+      hasCheckedFormat: '{checked}/{total} checked' // to be translated
     }
   }
 };
