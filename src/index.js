@@ -126,8 +126,8 @@ const components = [
   Collapse,
   CollapseItem,
   Cascader,
-  Transfer,
   ColorPicker,
+  Transfer,
   CollapseTransition
 ];
 

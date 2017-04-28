@@ -22,6 +22,7 @@
           class="el-transfer-panel__item"
           :label="item[keyProp]"
           :disabled="item[disabledProp]"
+          :key="item[keyProp]"
           v-for="item in filteredData">
           <option-content :option="item"></option-content>
         </el-checkbox>
