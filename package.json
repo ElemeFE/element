@@ -45,7 +45,7 @@
   "unpkg": "lib/index.js",
   "style": "lib/theme-default/index.css",
   "dependencies": {
-    "async-validator": "^1.6.6",
+    "async-validator": "^1.6.9",
     "babel-helper-vue-jsx-merge-props": "^2.0.0",
     "deepmerge": "^1.2.0",
     "throttle-debounce": "^1.0.1"
@@ -114,12 +114,12 @@
     "transliteration": "^1.1.11",
     "uppercamelcase": "^1.1.0",
     "url-loader": "^0.5.7",
-    "vue": "^2.1.8",
-    "vue-loader": "^10.3.0",
+    "vue": "^2.3.0",
+    "vue-loader": "^12.0.2",
     "vue-markdown-loader": "^0.5.1",
     "vue-router": "^2.0.0",
-    "vue-template-compiler": "^2.1.8",
-    "vue-template-es2015-compiler": "^1.4.2",
+    "vue-template-compiler": "^2.3.0",
+    "vue-template-es2015-compiler": "^1.5.2",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.15.1",
     "webpack-node-externals": "^1.5.4"

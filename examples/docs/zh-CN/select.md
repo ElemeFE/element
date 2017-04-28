@@ -145,6 +145,7 @@
   <el-select v-model="value" placeholder="请选择">
     <el-option
       v-for="item in options"
+      :key="item.value"
       :label="item.label"
       :value="item.value">
     </el-option>
@@ -187,6 +188,7 @@
   <el-select v-model="value2" placeholder="请选择">
     <el-option
       v-for="item in options2"
+      :key="item.value"
       :label="item.label"
       :value="item.value"
       :disabled="item.disabled">
@@ -233,6 +235,7 @@
   <el-select v-model="value3" disabled placeholder="请选择">
     <el-option
       v-for="item in options"
+      :key="item.value"
       :label="item.label"
       :value="item.value">
     </el-option>
@@ -277,6 +280,7 @@
   <el-select v-model="value4" clearable placeholder="请选择">
     <el-option
       v-for="item in options"
+      :key="item.value"
       :label="item.label"
       :value="item.value">
     </el-option>
@@ -321,6 +325,7 @@
   <el-select v-model="value5" multiple placeholder="请选择">
     <el-option
       v-for="item in options"
+      :key="item.value"
       :label="item.label"
       :value="item.value">
     </el-option>
@@ -365,6 +370,7 @@
   <el-select v-model="value6" placeholder="请选择">
     <el-option
       v-for="item in cities"
+      :key="item.value"
       :label="item.label"
       :value="item.value">
       <span style="float: left">{{ item.label }}</span>
@@ -414,9 +420,11 @@
   <el-select v-model="value7" placeholder="请选择">
     <el-option-group
       v-for="group in options3"
+      :key="group.label"
       :label="group.label">
       <el-option
         v-for="item in group.options"
+        :key="item.value"
         :label="item.label"
         :value="item.value">
       </el-option>
@@ -471,6 +479,7 @@
   <el-select v-model="value8" filterable placeholder="请选择">
     <el-option
       v-for="item in options"
+      :key="item.value"
       :label="item.label"
       :value="item.value">
     </el-option>
@@ -594,6 +603,7 @@
     placeholder="请选择文章标签">
     <el-option
       v-for="item in options5"
+      :key="item.value"
       :label="item.label"
       :value="item.value">
     </el-option>

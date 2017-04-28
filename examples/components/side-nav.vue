@@ -118,6 +118,7 @@
         @input="handleDropdownToggle">
         <el-dropdown-item
           v-for="item in Object.keys(versions)"
+          :key="item"
           @click.native="switchVersion(item)">
           {{ item }}
         </el-dropdown-item>

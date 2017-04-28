@@ -22,7 +22,7 @@ Loop a series of images or texts in a limited space
   <div class="block">
     <span class="demonstration">Switch when indicator is hovered (default)</span>
     <el-carousel height="150px">
-      <el-carousel-item v-for="item in 4">
+      <el-carousel-item v-for="item in 4" :key="item">
         <h3>{{ item }}</h3>
       </el-carousel-item>
     </el-carousel>
@@ -30,7 +30,7 @@ Loop a series of images or texts in a limited space
   <div class="block">
     <span class="demonstration">Switch when indicator is clicked</span>
     <el-carousel trigger="click" height="150px">
-      <el-carousel-item v-for="item in 4">
+      <el-carousel-item v-for="item in 4" :key="item">
         <h3>{{ item }}</h3>
       </el-carousel-item>
     </el-carousel>
@@ -65,7 +65,7 @@ Indicators can be displayed outside the carousel
 ```html
 <template>
   <el-carousel indicator-position="outside">
-    <el-carousel-item v-for="item in 4">
+    <el-carousel-item v-for="item in 4" :key="item">
       <h3>{{ item }}</h3>
     </el-carousel-item>
   </el-carousel>
@@ -99,7 +99,7 @@ You can define when arrows are displayed
 ```html
 <template>
   <el-carousel :interval="5000" arrow="always">
-    <el-carousel-item v-for="item in 4">
+    <el-carousel-item v-for="item in 4" :key="item">
       <h3>{{ item }}</h3>
     </el-carousel-item>
   </el-carousel>
@@ -133,7 +133,7 @@ When a page is wide enough but has limited height, you can activate card mode fo
 ```html
 <template>
   <el-carousel :interval="4000" type="card" height="200px">
-    <el-carousel-item v-for="item in 6">
+    <el-carousel-item v-for="item in 6" :key="item">
       <h3>{{ item }}</h3>
     </el-carousel-item>
   </el-carousel>

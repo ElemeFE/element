@@ -52,12 +52,12 @@
 ```
 :::
 
-### 扩展 value
+### 扩展的 value 类型
 
-:::demo 设置`on-value` 和 `off-value`属性，接受`Boolean`, `String` 或 `Number` 类型的值。
+:::demo 设置`on-value`和`off-value`属性，接受`Boolean`, `String`或`Number`类型的值。
 
 ```html
- <el-tooltip class="item" effect="dark" :content="'switch value is ' + value3" placement="top-end">
+ <el-tooltip :content="'Switch value: ' + value3" placement="top">
     <el-switch
       v-model="value3"
       on-color="#13ce66"
@@ -119,8 +119,8 @@
 | off-icon-class  | switch 关闭时所显示图标的类名，设置此项会忽略 `off-text`    | string   | — | — |
 | on-text  | switch 打开时的文字    | string   | — | ON |
 | off-text  | switch 关闭时的文字    | string   | — | OFF |
-| on-value  | switch 打开时的值    | boolean \| string \| number | — | true |
-| off-value  | switch 关闭时的值    | boolean \| string \| number | — | false |
+| on-value  | switch 打开时的值    | boolean / string / number | — | true |
+| off-value  | switch 关闭时的值    | boolean / string / number | — | false |
 | on-color  | switch 打开时的背景色    | string   | — | #20A0FF |
 | off-color  | switch 关闭时的背景色    | string   | — | #C0CCDA |
 | name  | switch 对应的 name 属性    | string   | — | — |
@@ -128,4 +128,4 @@
 ### Events
 | 事件名称      | 说明    | 回调参数      |
 |---------- |-------- |---------- |
-| change  | switch 状态发生变化时的回调函数    | 新状态的布尔值 |
+| change  | switch 状态发生变化时的回调函数    | 新状态的值 |
