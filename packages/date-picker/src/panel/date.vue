@@ -441,7 +441,7 @@
         if (this.format && this.format.indexOf('ss') === -1) {
           return 'HH:mm';
         } else {
-          return 'HH:mm:ss';
+          return 'HH:mm:ss333';
         }
       }
     }
