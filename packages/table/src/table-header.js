@@ -256,7 +256,7 @@ export default {
         filterPanel = new Vue(FilterPanel);
         this.filterPanels[column.id] = filterPanel;
         if (column.filterPlacement) {
-            filterPanel.placement = column.filterPlacement;
+          filterPanel.placement = column.filterPlacement;
         }
         filterPanel.table = table;
         filterPanel.cell = cell;
