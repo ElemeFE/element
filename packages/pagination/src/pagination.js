@@ -205,7 +205,7 @@ export default {
               type="number"
               min={ 1 }
               max={ this.internalPageCount }
-              domProps-value={ this.$parent.internalCurrentPage }
+              value={ this.$parent.internalCurrentPage }
               on-change={ this.handleChange }
               on-focus={ this.handleFocus }
               style={{ width: '30px' }}

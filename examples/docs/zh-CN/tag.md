@@ -87,6 +87,7 @@
 ```html
 <el-tag
   v-for="tag in tags"
+  :key="item.name"
   :closable="true"
   :type="tag.type"
 >

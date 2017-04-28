@@ -137,7 +137,7 @@
   <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
   <div style="margin: 15px 0;"></div>
   <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
-    <el-checkbox v-for="city in cities" :label="city">{{city}}</el-checkbox>
+    <el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
   </el-checkbox-group>
 </template>
 <script>
@@ -179,7 +179,7 @@
     v-model="checkedCities1"
     :min="1"
     :max="2">
-    <el-checkbox v-for="city in cities" :label="city">{{city}}</el-checkbox>
+    <el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
   </el-checkbox-group>
 </template>
 <script>
@@ -206,15 +206,15 @@
 <template>
   <div style="margin: 15px 0;"></div>
   <el-checkbox-group v-model="checkboxGroup1">
-    <el-checkbox-button v-for="city in cities" :label="city">{{city}}</el-checkbox-button>
+    <el-checkbox-button v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox-button>
   </el-checkbox-group>
   <div style="margin: 15px 0;"></div>
   <el-checkbox-group v-model="checkboxGroup2" size="small">
-    <el-checkbox-button v-for="city in cities" :label="city" :disabled="city === '深圳'">{{city}}</el-checkbox-button>
+    <el-checkbox-button v-for="city in cities" :label="city" :disabled="city === '深圳'" :key="city">{{city}}</el-checkbox-button>
   </el-checkbox-group>
   <div style="margin: 15px 0;"></div>
   <el-checkbox-group v-model="checkboxGroup3" size="large" fill="#324057" text-color="#a4aebd" :min="1" :max="3">
-    <el-checkbox-button v-for="city in cities" :label="city">{{city}}</el-checkbox-button>
+    <el-checkbox-button v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox-button>
   </el-checkbox-group>
 </template>
 <script>
