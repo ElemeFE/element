@@ -10,7 +10,8 @@
         value6: 0,
         value7: 0,
         value8: 0,
-        value9: [4, 8]
+        value9: [4, 8],
+        value10: 0
       };
     },
     methods: {
@@ -195,6 +196,32 @@
 ```
 :::
 
+### 竖向模式
+
+:::demo 设置`vertical`可使 Slider 变成竖向模式，此时必须设置高度`height`属性
+```html
+<template>
+  <div class="block">
+    <el-slider
+      v-model="value10"
+      vertical
+      height="200px">
+    </el-slider>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        value10: 0
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -208,6 +235,8 @@
 | show-tooltip | 是否显示 tooltip | boolean | — | true |
 | format-tooltip | 格式化 tooltip message | Function(value) | — | — |
 | range | 是否为范围选择 | boolean | — | false |
+| vertical | 是否竖向模式 | boolean | — | false |
+| height | Slider 高度，竖向模式时必填 | String | — | — |
 
 ### Events
 | 事件名称      | 说明    | 回调参数      |

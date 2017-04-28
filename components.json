@@ -15,6 +15,7 @@
   "radio-group": "./packages/radio-group/index.js",
   "radio-button": "./packages/radio-button/index.js",
   "checkbox": "./packages/checkbox/index.js",
+  "checkbox-button": "./packages/checkbox-button/index.js",
   "checkbox-group": "./packages/checkbox-group/index.js",
   "switch": "./packages/switch/index.js",
   "select": "./packages/select/index.js",

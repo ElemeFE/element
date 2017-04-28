@@ -16,6 +16,7 @@ import Radio from '../packages/radio/index.js';
 import RadioGroup from '../packages/radio-group/index.js';
 import RadioButton from '../packages/radio-button/index.js';
 import Checkbox from '../packages/checkbox/index.js';
+import CheckboxButton from '../packages/checkbox-button/index.js';
 import CheckboxGroup from '../packages/checkbox-group/index.js';
 import Switch from '../packages/switch/index.js';
 import Select from '../packages/select/index.js';
@@ -82,6 +83,7 @@ const components = [
   RadioGroup,
   RadioButton,
   Checkbox,
+  CheckboxButton,
   CheckboxGroup,
   Switch,
   Select,
@@ -176,6 +178,7 @@ module.exports = {
   RadioGroup,
   RadioButton,
   Checkbox,
+  CheckboxButton,
   CheckboxGroup,
   Switch,
   Select,

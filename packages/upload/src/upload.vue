@@ -41,7 +41,8 @@ export default {
     httpRequest: {
       type: Function,
       default: ajax
-    }
+    },
+    disabled: Boolean
   },
 
   data() {
@@ -59,6 +60,7 @@ export default {
 
       if (!files) return;
       this.uploadFiles(files);
+      this.$refs.input.value = null;
     },
     uploadFiles(files) {
       let postFiles = Array.prototype.slice.call(files);
@@ -117,7 +119,9 @@ export default {
       }
     },
     handleClick() {
-      this.$refs.input.click();
+      if (!this.disabled) {
+        this.$refs.input.click();
+      }
     }
   },
 
@@ -130,7 +134,8 @@ export default {
       multiple,
       accept,
       listType,
-      uploadFiles
+      uploadFiles,
+      disabled
     } = this;
     const data = {
       class: {
@@ -145,7 +150,7 @@ export default {
       <div {...data}>
         {
           drag
-          ? <upload-dragger on-file={uploadFiles}>{this.$slots.default}</upload-dragger>
+          ? <upload-dragger disabled={disabled} on-file={uploadFiles}>{this.$slots.default}</upload-dragger>
           : this.$slots.default
         }
         <input class="el-upload__input" type="file" ref="input" name={name} on-change={handleChange} multiple={multiple} accept={accept}></input>

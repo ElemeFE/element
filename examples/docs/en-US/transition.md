@@ -1,10 +1,10 @@
 ## Built-in transition
 
-If you want, you can use Element built-in transition directly. Of course you need to know [vue#transition](https://vuejs.org/v2/api/#transition).
+You can use Element's built-in transitions directly. Before that, please read the [transition docs](https://vuejs.org/v2/api/#transition).
 
 ### fade
 
-:::demo You can use `el-fade-in-linear` and `el-fade-in`.
+:::demo We have two fading effects: `el-fade-in-linear` and `el-fade-in`.
 ```html
 <template>
   <div>
@@ -33,6 +33,7 @@ If you want, you can use Element built-in transition directly. Of course you nee
   .transition-box {
     margin-bottom: 10px;
     width: 200px;
+    height: 100px;
     border-radius: 4px;
     background-color: #20A0FF;
     text-align: center;
@@ -47,7 +48,7 @@ If you want, you can use Element built-in transition directly. Of course you nee
 
 ### zoom
 
-:::demo You can use `el-zoom-in-center`, `el-zoom-in-top` and `el-zoom-in-bottom`.
+:::demo `el-zoom-in-center`, `el-zoom-in-top` and `el-zoom-in-bottom` are provided.
 ```html
 <template>
   <div>
@@ -81,6 +82,7 @@ If you want, you can use Element built-in transition directly. Of course you nee
   .transition-box {
     margin-bottom: 10px;
     width: 200px;
+    height: 100px;
     border-radius: 4px;
     background-color: #20A0FF;
     text-align: center;
@@ -96,7 +98,7 @@ If you want, you can use Element built-in transition directly. Of course you nee
 
 ### collapse
 
-`el-collapse-transition` is a special component that implement collapse transtion.
+For collapse effect, use the `el-collapse-transition` component.
 
 :::demo
 ```html
@@ -127,6 +129,7 @@ If you want, you can use Element built-in transition directly. Of course you nee
   .transition-box {
     margin-bottom: 10px;
     width: 200px;
+    height: 100px;
     border-radius: 4px;
     background-color: #20A0FF;
     text-align: center;
@@ -138,20 +141,6 @@ If you want, you can use Element built-in transition directly. Of course you nee
 </style>
 ```
 :::
-
-<style>
-  .transition-box {
-    margin-bottom: 10px;
-    width: 200px;
-    border-radius: 4px;
-    background-color: #20A0FF;
-    text-align: center;
-    color: #fff;
-    padding: 40px 20px;
-    margin-right: 20px;
-    box-sizing: border-box;
-  }
-</style>
 
 <script>
   module.exports = {

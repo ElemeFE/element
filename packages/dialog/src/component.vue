@@ -11,7 +11,7 @@
             <span class="el-dialog__title">{{title}}</span>
           </slot>
           <div class="el-dialog__headerbtn">
-            <i v-if="showClose" class="el-dialog__close el-icon el-icon-close" @click='close()'></i>
+            <i v-if="showClose" class="el-dialog__close el-icon el-icon-close" @click='handleClose'></i>
           </div>
         </div>
         <div class="el-dialog__body" v-if="rendered"><slot></slot></div>
@@ -81,7 +81,8 @@
       top: {
         type: String,
         default: '15%'
-      }
+      },
+      beforeClose: Function
     },
     data() {
       return {
@@ -119,7 +120,13 @@
 
     methods: {
       handleWrapperClick() {
-        if (this.closeOnClickModal) {
+        if (!this.closeOnClickModal) return;
+        this.handleClose();
+      },
+      handleClose() {
+        if (typeof this.beforeClose === 'function') {
+          this.beforeClose(this.close);
+        } else {
           this.close();
         }
       },

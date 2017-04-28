@@ -205,6 +205,7 @@ export default {
       default: 'left'
     },
     value: {},
+    defaultValue: {},
     rangeSeparator: {
       default: ' - '
     },

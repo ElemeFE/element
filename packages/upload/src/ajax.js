@@ -5,7 +5,7 @@ function getError(action, option, xhr) {
   } else if (xhr.responseText) {
     msg = `${xhr.status} ${xhr.responseText}`;
   } else {
-    msg = `fail to post ${action} ${xhr.status}'`;
+    msg = `fail to post ${action} ${xhr.status}`;
   }
 
   const err = new Error(msg);

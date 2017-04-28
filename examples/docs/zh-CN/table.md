@@ -200,6 +200,19 @@
     },
 
     methods: {
+      setCurrent(row) {
+        this.$refs.singleTable.setCurrentRow(row);
+      },
+      toggleSelection(rows) {
+        if (rows) {
+          rows.forEach(row => {
+            this.$refs.multipleTable.toggleRowSelection(row);
+          });
+        } else {
+          this.$refs.multipleTable.clearSelection();
+        }
+      },
+
       handleClick() {
         console.log('click');
       },
@@ -1039,6 +1052,7 @@
 ```html
 <template>
   <el-table
+    ref="singleTable"
     :data="tableData"
     highlight-current-row
     @current-change="handleCurrentChange"
@@ -1062,6 +1076,10 @@
       label="地址">
     </el-table-column>
   </el-table>
+  <div style="margin-top: 20px">
+    <el-button @click="setCurrent(tableData[1])">选中第二行</el-button>
+    <el-button @click="setCurrent()">取消选择</el-button>
+  </div>
 </template>
 
 <script>
@@ -1090,6 +1108,9 @@
     },
 
     methods: {
+      setCurrent(row) {
+        this.$refs.singleTable.setCurrentRow(row);
+      },
       handleCurrentChange(val) {
         this.currentRow = val;
       }
@@ -1107,6 +1128,7 @@
 ```html
 <template>
   <el-table
+    ref="multipleTable"
     :data="tableData3"
     border
     tooltip-effect="dark"
@@ -1132,6 +1154,10 @@
       show-overflow-tooltip>
     </el-table-column>
   </el-table>
+  <div style="margin-top: 20px">
+    <el-button @click="toggleSelection([tableData3[1], tableData3[2]])">切换第二、第三行的选中状态</el-button>
+    <el-button @click="toggleSelection()">取消选择</el-button>
+  </div>
 </template>
 
 <script>
@@ -1172,6 +1198,15 @@
     },
 
     methods: {
+      toggleSelection(rows) {
+        if (rows) {
+          rows.forEach(row => {
+            this.$refs.multipleTable.toggleRowSelection(row);
+          });
+        } else {
+          this.$refs.multipleTable.clearSelection();
+        }
+      },
       handleSelectionChange(val) {
         this.multipleSelection = val;
       }
@@ -1564,8 +1599,9 @@
 ### Table Methods
 | 方法名 | 说明 | 参数 |
 | ---- | ---- | ---- |
-| clearSelection | 清空用户的选择，当使用 reserve-selection 功能的时候，可能会需要使用此方法 | selection |
-| toggleRowSelection | 切换某一行的选中状态，如果使用了第二个参数，则是设置这一行选中与否（selected 为 true 则选中） | row, selected |
+| clearSelection | 用于多选表格，清空用户的选择，当使用 reserve-selection 功能的时候，可能会需要使用此方法 | selection |
+| toggleRowSelection | 用于多选表格，切换某一行的选中状态，如果使用了第二个参数，则是设置这一行选中与否（selected 为 true 则选中） | row, selected |
+| setCurrentRow | 用于单选表格，设定某一行为选中行，如果调用时不加参数，则会取消目前高亮行的选中状态。 | row |
 
 ### Table-column Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |

@@ -112,6 +112,13 @@
 
   --checkbox-input-border-color-hover: var(--color-primary);
 
+  --checkbox-button-font-size: var(--font-size-base);
+  --checkbox-button-checked-fill: var(--color-primary);
+  --checkbox-button-checked-color: var(--color-white);
+  --checkbox-button-checked-border-color: var(--color-primary);
+
+
+
   /* Radio
   -------------------------- */
   --radio-font-size: 14px;

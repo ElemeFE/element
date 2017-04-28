@@ -10,7 +10,8 @@
         value6: 0,
         value7: 0,
         value8: 0,
-        value9: [4, 8]
+        value9: [4, 8],
+        value10: 0
       };
     },
     methods: {
@@ -171,6 +172,32 @@ Selecting a range of values is supported.
 ```
 :::
 
+### Vertical mode
+
+:::demo Setting the `vertical` attribute to `true` enables vertical mode. In vertical mode, the `height` attribute is required.
+```html
+<template>
+  <div class="block">
+    <el-slider
+      v-model="value10"
+      vertical
+      height="200px">
+    </el-slider>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        value10: 0
+      }
+    }
+  }
+</script>
+```
+:::
+
 ## Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -184,6 +211,8 @@ Selecting a range of values is supported.
 | show-tooltip | whether to display tooltip value | boolean | — | true |
 | format-tooltip | format to display tooltip value | Function(value) | — | — |
 | range | whether to select a range | boolean | — | false |
+| vertical | vertical mode | boolean | — | false |
+| height | Slider height, required in vertical mode | String | — | — |
 
 ## Events
 | Event Name | Description | Parameters |

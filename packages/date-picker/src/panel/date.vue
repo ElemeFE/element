@@ -187,7 +187,7 @@
 
     methods: {
       handleClear() {
-        this.date = new Date();
+        this.date = this.$options.defaultValue ? new Date(this.$options.defaultValue) : new Date();
         this.$emit('pick');
       },
 
@@ -357,7 +357,7 @@
       return {
         popperClass: '',
         pickerWidth: 0,
-        date: new Date(),
+        date: this.$options.defaultValue ? new Date(this.$options.defaultValue) : new Date(),
         value: '',
         showTime: false,
         selectionMode: 'day',
@@ -407,13 +407,17 @@
 
         set(val) {
           const date = parseDate(val, 'yyyy-MM-dd');
-          if (date) {
-            date.setHours(this.date.getHours());
-            date.setMinutes(this.date.getMinutes());
-            date.setSeconds(this.date.getSeconds());
-            this.date = date;
-            this.resetView();
+          if (!date) {
+            return;
           }
+          if (typeof this.disabledDate === 'function' && this.disabledDate(date)) {
+            return;
+          }
+          date.setHours(this.date.getHours());
+          date.setMinutes(this.date.getMinutes());
+          date.setSeconds(this.date.getSeconds());
+          this.date = date;
+          this.resetView();
         }
       },
 
