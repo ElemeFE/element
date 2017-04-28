@@ -93,10 +93,10 @@ export default {
     transfer: {
       noMatch: 'Sem resultados',
       noData: 'Sem dados',
-      titles: ['List 1', 'List 2'],
-      filterPlaceholder: 'Enter keyword',
-      noCheckedFormat: '{total} items',
-      hasCheckedFormat: '{checked}/{total} checked'
+      titles: ['List 1', 'List 2'], // to be translated
+      filterPlaceholder: 'Enter keyword', // to be translated
+      noCheckedFormat: '{total} items', // to be translated
+      hasCheckedFormat: '{checked}/{total} checked' // to be translated
     }
   }
 };

@@ -92,10 +92,10 @@ export default {
     transfer: {
       noMatch: 'No hi ha dades que coincideixin',
       noData: 'Sense Dades',
-      titles: ['List 1', 'List 2'],
-      filterPlaceholder: 'Enter keyword',
-      noCheckedFormat: '{total} items',
-      hasCheckedFormat: '{checked}/{total} checked'
+      titles: ['List 1', 'List 2'], // to be translated
+      filterPlaceholder: 'Enter keyword', // to be translated
+      noCheckedFormat: '{total} items', // to be translated
+      hasCheckedFormat: '{checked}/{total} checked' // to be translated
     }
   }
 };
