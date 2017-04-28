@@ -85,7 +85,8 @@ export default {
       emptyText: 'اطلاعاتی وجود ندارد',
       confirmFilter: 'تایید',
       resetFilter: 'حذف',
-      clearFilter: 'همه'
+      clearFilter: 'همه',
+      sumText: 'Sum' // to be translated
     },
     tree: {
       emptyText: 'اطلاعاتی وجود ندارد'

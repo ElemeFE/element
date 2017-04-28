@@ -81,7 +81,8 @@ export default {
       emptyText: 'Inga Data',
       confirmFilter: 'Bekräfta',
       resetFilter: 'Återställ',
-      clearFilter: 'Alla'
+      clearFilter: 'Alla',
+      sumText: 'Sum' // to be translated
     },
     tree: {
       emptyText: 'Inga Data'

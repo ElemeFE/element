@@ -85,7 +85,8 @@ export default {
       emptyText: 'Geen data',
       confirmFilter: 'Bevestigen',
       resetFilter: 'Reset',
-      clearFilter: 'Alles'
+      clearFilter: 'Alles',
+      sumText: 'Sum' // to be translated
     },
     tree: {
       emptyText: 'Geen data'

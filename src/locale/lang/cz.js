@@ -87,7 +87,8 @@ export default {
       emptyText: 'Žádná data',
       confirmFilter: 'Potvrdit',
       resetFilter: 'Resetovat',
-      clearFilter: 'Vše'
+      clearFilter: 'Vše',
+      sumText: 'Sum' // to be translated
     },
     tree: {
       emptyText: 'Žádná data'

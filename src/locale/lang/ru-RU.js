@@ -85,7 +85,8 @@ export default {
       emptyText: 'Нет данных',
       confirmFilter: 'Подтвердить',
       resetFilter: 'Сбросить',
-      clearFilter: 'Все'
+      clearFilter: 'Все',
+      sumText: 'Sum' // to be translated
     },
     tree: {
       emptyText: 'Нет данных'

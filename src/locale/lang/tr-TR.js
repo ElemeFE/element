@@ -85,7 +85,8 @@ export default {
       emptyText: 'Veri yok',
       confirmFilter: 'Onayla',
       resetFilter: 'Reset',
-      clearFilter: 'Hepsi'
+      clearFilter: 'Hepsi',
+      sumText: 'Sum' // to be translated
     },
     tree: {
       emptyText: 'Veri yok'

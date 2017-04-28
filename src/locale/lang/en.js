@@ -85,7 +85,8 @@ export default {
       emptyText: 'No Data',
       confirmFilter: 'Confirm',
       resetFilter: 'Reset',
-      clearFilter: 'All'
+      clearFilter: 'All',
+      sumText: 'Sum'
     },
     tree: {
       emptyText: 'No Data'
