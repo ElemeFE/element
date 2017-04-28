@@ -51,7 +51,7 @@
     "throttle-debounce": "^1.0.1"
   },
   "peerDependencies": {
-    "vue": "^2.1.6"
+    "vue": "^2.3.0"
   },
   "devDependencies": {
     "babel-cli": "^6.14.0",
