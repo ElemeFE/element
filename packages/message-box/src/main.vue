@@ -1,6 +1,6 @@
 <template>
   <transition name="msgbox-fade">
-    <div class="el-message-box__wrapper" v-show="value" @click.self="handleWrapperClick">
+    <div class="el-message-box__wrapper" v-show="visible" @click.self="handleWrapperClick">
       <div class="el-message-box" :class="customClass">
         <div class="el-message-box__header" v-if="title !== undefined">
           <div class="el-message-box__title">{{ title || t('el.messagebox.title') }}</div>
@@ -103,8 +103,8 @@
         };
       },
       doClose() {
-        if (!this.value) return;
-        this.value = false;
+        if (!this.visible) return;
+        this.visible = false;
         this._closing = true;
 
         this.onClose && this.onClose();
@@ -187,7 +187,7 @@
         }
       },
 
-      value(val) {
+      visible(val) {
         if (val) this.uid++;
         if (this.$type === 'alert' || this.$type === 'confirm') {
           this.$nextTick(() => {

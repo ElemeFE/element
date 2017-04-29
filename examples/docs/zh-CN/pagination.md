@@ -50,7 +50,7 @@
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="currentPage1"
+      :current-page.sync="currentPage1"
       :page-size="100"
       layout="total, prev, pager, next"
       :total="1000">
@@ -61,7 +61,7 @@
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="currentPage2"
+      :current-page.sync="currentPage2"
       :page-sizes="[100, 200, 300, 400]"
       :page-size="100"
       layout="sizes, prev, pager, next"
@@ -73,7 +73,7 @@
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="currentPage3"
+      :current-page.sync="currentPage3"
       :page-size="100"
       layout="prev, pager, next, jumper"
       :total="1000">
@@ -99,7 +99,6 @@
         console.log(`每页 ${val} 条`);
       },
       handleCurrentChange(val) {
-        this.currentPage = val;
         console.log(`当前页: ${val}`);
       }
     },
@@ -120,7 +119,6 @@
   export default {
     methods: {
       handleSizeChange(val) {
-        this.currentPage = val;
         console.log(`每页 ${val} 条`);
       },
       handleCurrentChange(val) {
@@ -204,7 +202,7 @@
 | page-size | 每页显示条目个数 | Number | — | 10 |
 | total | 总条目数 | Number | — | — |
 | page-count | 总页数，total 和 page-count 设置任意一个就可以达到显示页码的功能；如果要支持 page-sizes 的更改，则需要使用 total 属性 | Number | — | — |
-| current-page | 当前页数 | Number | — | 1 |
+| current-page | 当前页数，支持 .sync 修饰符 | Number | — | 1 |
 | layout | 组件布局，子组件名用逗号分隔| String | `sizes`, `prev`, `pager`, `next`, `jumper`, `->`, `total`, `slot` | 'prev, pager, next, jumper, ->, total'  |
 | page-sizes | 每页显示个数选择器的选项设置 | Number[] | — |  [10, 20, 30, 40, 50, 100] |
 

@@ -1,15 +1,11 @@
 <template>
   <div class="el-transfer">
     <transfer-panel
-      :filterable="filterable"
-      :filter-method="filterMethod"
+      v-bind="$props"
       :data="sourceData"
-      :render-content="renderContent"
       :title="titles[0] || t('el.transfer.titles.0')"
-      :format="footerFormat"
       :default-checked="leftDefaultChecked"
       :placeholder="filterPlaceholder || t('el.transfer.filterPlaceholder')"
-      :props="props"
       @checked-change="onSourceCheckedChange">
       <slot name="left-footer"></slot>
     </transfer-panel>
@@ -32,15 +28,11 @@
       </el-button>
     </div>
     <transfer-panel
-      :filterable="filterable"
-      :filter-method="filterMethod"
+      v-bind="$props"
       :data="targetData"
-      :render-content="renderContent"
       :title="titles[1] || t('el.transfer.titles.1')"
-      :format="footerFormat"
       :default-checked="rightDefaultChecked"
       :placeholder="filterPlaceholder || t('el.transfer.filterPlaceholder')"
-      :props="props"
       @checked-change="onTargetCheckedChange">
       <slot name="right-footer"></slot>
     </transfer-panel>

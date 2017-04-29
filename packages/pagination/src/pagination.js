@@ -312,10 +312,12 @@ export default {
         this.$nextTick(() => {
           this.internalCurrentPage = newVal;
           if (oldVal !== newVal) {
+            this.$emit('update:currentPage', newVal);
             this.$emit('current-change', this.internalCurrentPage);
           }
         });
       } else {
+        this.$emit('update:currentPage', newVal);
         this.$emit('current-change', this.internalCurrentPage);
       }
     },
