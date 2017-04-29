@@ -461,7 +461,9 @@
 
       deletePrevTag(e) {
         if (e.target.value.length <= 0 && !this.toggleLastOptionHitState()) {
-          this.value.pop();
+          const value = this.value.slice();
+          value.pop();
+          this.$emit('input', value);
         }
       },
 
@@ -595,7 +597,9 @@
       deleteTag(event, tag) {
         let index = this.selected.indexOf(tag);
         if (index > -1 && !this.disabled) {
-          this.value.splice(index, 1);
+          const value = this.value.slice();
+          value.splice(index, 1);
+          this.$emit('input', value);
           this.$emit('remove-tag', tag);
         }
         event.stopPropagation();
