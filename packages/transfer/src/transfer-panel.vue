@@ -95,7 +95,7 @@
       placeholder: String,
       title: String,
       filterable: Boolean,
-      format: Object,
+      footerFormat: Object,
       filterMethod: Function,
       defaultChecked: Array,
       props: Object
@@ -167,7 +167,7 @@
       checkedSummary() {
         const checkedLength = this.checked.length;
         const dataLength = this.data.length;
-        const { noChecked, hasChecked } = this.format;
+        const { noChecked, hasChecked } = this.footerFormat;
         if (noChecked && hasChecked) {
           return checkedLength > 0
             ? hasChecked.replace(/\${checked}/g, checkedLength).replace(/\${total}/g, dataLength)

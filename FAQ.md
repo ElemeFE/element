@@ -58,6 +58,12 @@
 </details>
 
 <details>
+<summary>所有组件的任意属性都支持 `.sync` 修饰符吗？</summary>
+  
+不是。对于支持 `.sync` 修饰符的属性，我们会在文档的 API 表格中注明。更多 `.sync` 的用法请查看 [Vue 文档](https://vuejs.org/v2/guide/components.html#sync-Modifier)。
+</details>
+
+<details>
 <summary>你们的文档怎么偷偷更新了？</summary>
 
 我们只会在 Element 发布新版本时同步更新文档，以体现最新的变化。详细的更新内容可以查看 [changelog](https://github.com/ElemeFE/element/blob/master/CHANGELOG.zh-CN.md)。
@@ -142,6 +148,12 @@ Now you can use them as you do with built-in icons. For example, in `el-input`:
 ```html
 <el-input icon="my-xxx" />
 ```
+</details>
+
+<details>
+<summary>Can I use `.sync` modifier on every attribute?</summary>
+  
+No, only a few attributes supports the `.sync` modifier, and we have explicitly marked them on the documentation's API table. For more information about `.sync`, please refer to [Vue documentation](https://vuejs.org/v2/guide/components.html#sync-Modifier).
 </details>
 
 <details>

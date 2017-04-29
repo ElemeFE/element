@@ -78,7 +78,7 @@ const showNextMsg = () => {
   }
   instance.action = '';
 
-  if (!instance.value || instance.closeTimer) {
+  if (!instance.visible || instance.closeTimer) {
     if (msgQueue.length > 0) {
       currentMsg = msgQueue.shift();
 
@@ -105,7 +105,7 @@ const showNextMsg = () => {
       document.body.appendChild(instance.$el);
 
       Vue.nextTick(() => {
-        instance.value = true;
+        instance.visible = true;
       });
     }
   }
@@ -194,7 +194,7 @@ MessageBox.prompt = (message, title, options) => {
 };
 
 MessageBox.close = () => {
-  instance.value = false;
+  instance.visible = false;
   msgQueue = [];
   currentMsg = null;
 };
