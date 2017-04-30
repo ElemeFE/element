@@ -29,7 +29,11 @@
     name: 'ElCarouselItem',
 
     props: {
-      name: String
+      name: String,
+      label: {
+        type: [String, Number],
+        default: ''
+      }
     },
 
     data() {
