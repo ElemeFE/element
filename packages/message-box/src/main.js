@@ -29,6 +29,7 @@ const defaults = {
 import Vue from 'vue';
 import msgboxVue from './main.vue';
 import merge from 'element-ui/src/utils/merge';
+import { isVNode } from 'element-ui/src/utils/vdom';
 
 const MessageBoxConstructor = Vue.extend(msgboxVue);
 
@@ -97,6 +98,10 @@ const showNextMsg = () => {
         oldCb(action, instance);
         showNextMsg();
       };
+      if (isVNode(instance.message)) {
+        instance.$slots.default = [instance.message];
+        instance.message = null;
+      }
       ['modal', 'showClose', 'closeOnClickModal', 'closeOnPressEscape'].forEach(prop => {
         if (instance[prop] === undefined) {
           instance[prop] = true;
