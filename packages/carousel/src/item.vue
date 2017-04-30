@@ -30,7 +30,10 @@
 
     props: {
       name: String,
-      label: String
+      label: {
+        type: [String, Number],
+        default: ''
+      }
     },
 
     data() {
