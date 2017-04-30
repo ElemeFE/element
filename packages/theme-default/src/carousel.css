@@ -77,9 +77,14 @@
         transform: none;
         text-align: center;
         
-        button {
+        .el-carousel__button {
           size: auto auto;
-          padding: 10px;
+          padding: 2px 18px;
+          font-size: 12px;
+        }
+
+        .el-carousel__indicator {
+          padding: 6px 4px;
         }
       }
     }
