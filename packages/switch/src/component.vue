@@ -92,11 +92,6 @@
         coreWidth: this.width
       };
     },
-    created() {
-      if (!~[this.onValue, this.offValue].indexOf(this.value)) {
-        this.$emit('input', this.onValue);
-      }
-    },
     computed: {
       on: {
         get() {
