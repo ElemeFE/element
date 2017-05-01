@@ -16,7 +16,7 @@
     <transition name="label-fade">
       <div
         class="el-switch__label el-switch__label--left"
-        v-show="checked"
+        v-show="on"
         :style="{ 'width': coreWidth + 'px' }">
         <i :class="[onIconClass]" v-if="onIconClass"></i>
         <span v-if="!onIconClass && onText">{{ onText }}</span>
@@ -25,7 +25,7 @@
     <transition name="label-fade">
       <div
         class="el-switch__label el-switch__label--right"
-        v-show="!checked"
+        v-show="off"
         :style="{ 'width': coreWidth + 'px' }">
         <i :class="[offIconClass]" v-if="offIconClass"></i>
         <span v-if="!offIconClass && offText">{{ offText }}</span>
@@ -98,8 +98,21 @@
       }
     },
     computed: {
-      checked() {
-        return this.value === this.onValue;
+      on: {
+        get() {
+          return this.value === this.onValue;
+        },
+        set(on) {
+          this.value = on ? this.onValue : this.offValue;
+        }
+      },
+      off: {
+        get() {
+          return !this.on;
+        },
+        set(off) {
+          this.on = !off;
+        }
       },
       hasText() {
         /* istanbul ignore next */
@@ -114,7 +127,7 @@
         }
       },
       transform() {
-        return this.checked ? `translate(${ this.coreWidth - 20 }px, 2px)` : 'translate(2px, 2px)';
+        return this.on ? `translate(${ this.coreWidth - 20 }px, 2px)` : 'translate(2px, 2px)';
       }
     },
     watch: {
@@ -129,7 +142,7 @@
         this.$emit('change', event.currentTarget.checked);
       },
       setBackgroundColor() {
-        let newColor = this.checked ? this.onColor : this.offColor;
+        let newColor = this.on ? this.onColor : this.offColor;
         this.$refs.core.style.borderColor = newColor;
         this.$refs.core.style.backgroundColor = newColor;
       }
