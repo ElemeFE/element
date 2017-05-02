@@ -40,12 +40,8 @@
   </label>
 </template>
 <script>
-  import Emitter from 'element-ui/src/mixins/emitter';
-
   export default {
     name: 'ElCheckbox',
-
-    mixins: [Emitter],
 
     componentName: 'ElCheckbox',
 
@@ -55,6 +51,8 @@
         focus: false
       };
     },
+
+    inject: ['ElCheckboxGroup'],
 
     computed: {
       model: {
@@ -67,17 +65,16 @@
         set(val) {
           if (this.isGroup) {
             let isLimitExceeded = false;
-            (this._checkboxGroup.min !== undefined &&
-              val.length < this._checkboxGroup.min &&
+            (this.group.min !== undefined &&
+              val.length < this.group.min &&
               (isLimitExceeded = true));
 
-            (this._checkboxGroup.max !== undefined &&
-              val.length > this._checkboxGroup.max &&
+            (this.group.max !== undefined &&
+              val.length > this.group.max &&
               (isLimitExceeded = true));
 
             isLimitExceeded === false &&
-            this.dispatch('ElCheckboxGroup', 'input', [val]);
-
+            this.group.$emit('input', val);
           } else if (this.value !== undefined) {
             this.$emit('input', val);
           } else {
@@ -96,21 +93,16 @@
         }
       },
 
+      group() {
+        return this.ElCheckboxGroup;
+      },
+
       isGroup() {
-        let parent = this.$parent;
-        while (parent) {
-          if (parent.$options.componentName !== 'ElCheckboxGroup') {
-            parent = parent.$parent;
-          } else {
-            this._checkboxGroup = parent;
-            return true;
-          }
-        }
-        return false;
+        return !!this.group;
       },
 
       store() {
-        return this._checkboxGroup ? this._checkboxGroup.value : this.value;
+        return this.group ? this.group.value : this.value;
       }
     },
 
@@ -140,7 +132,7 @@
         this.$emit('change', ev);
         if (this.isGroup) {
           this.$nextTick(_ => {
-            this.dispatch('ElCheckboxGroup', 'change', [this._checkboxGroup.value]);
+            this.group.$emit('change', this.group.value);
           });
         }
       }
