@@ -2,7 +2,7 @@
   <transition-group
     tag="ul"
     :class="['el-upload-list', 'el-upload-list--' + listType]"
-    name="list"
+    name="el-list"
   >
     <li
       v-for="file in files"
@@ -11,34 +11,25 @@
     >
       <img
         class="el-upload-list__item-thumbnail"
-        v-if="['picture-card', 'picture'].indexOf(listType) > -1 && file.status === 'success'"
+        v-if="file.status !== 'uploading' && ['picture-card', 'picture'].indexOf(listType) > -1"
         :src="file.url" alt=""
       >
       <a class="el-upload-list__item-name" @click="handleClick(file)">
         <i class="el-icon-document"></i>{{file.name}}
       </a>
       <label class="el-upload-list__item-status-label">
-        <i v-if="file.status === 'success'"
-          :class="{
-            'el-icon-circle-check': listType === 'text',
-            'el-icon-check': ['picture-card', 'picture'].indexOf(listType) > -1
-          }">
-        </i>
-        <i class="el-icon-close" @click="$emit('remove', file)"></i>
+        <i :class="{
+          'el-icon-upload-success': true,
+          'el-icon-circle-check': listType === 'text',
+          'el-icon-check': ['picture-card', 'picture'].indexOf(listType) > -1
+        }"></i>
       </label>
-      <span class="el-upload-list__item-actions"
-        v-if="
-          listType === 'picture-card' &&
-          file.status === 'success'
-        "
-      >
+      <i class="el-icon-close" @click="$emit('remove', file)"></i>
+      <span class="el-upload-list__item-actions" v-if="listType === 'picture-card'">
         <span
-          v-if="
-            handlePreview &&
-            listType === 'picture-card'
-          "
-          @click="handlePreview(file)"
           class="el-upload-list__item-preview"
+          v-if="handlePreview && listType === 'picture-card'"
+          @click="handlePreview(file)"
         >
           <i class="el-icon-view"></i>
         </span>
