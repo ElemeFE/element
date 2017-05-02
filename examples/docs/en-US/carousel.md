@@ -187,3 +187,4 @@ When a page is wide enough but has limited height, you can activate card mode fo
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | name | name of the item, can be used in `setActiveItem` | string | — | — |
+| label | text content for the corresponding indicator | string | — | — |
