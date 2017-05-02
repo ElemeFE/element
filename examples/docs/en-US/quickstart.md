@@ -27,9 +27,7 @@ Typical configurations for these config files are:
 **.babelrc**
 ```json
 {
-  "presets": [
-    ["es2015", { "modules": false }]
-  ]
+  "presets": ["vue-app"]
 }
 ```
 
@@ -50,7 +48,7 @@ Typical configurations for these config files are:
   "devDependencies": {
     "babel-core": "^6.0.0",
     "babel-loader": "^6.0.0",
-    "babel-preset-es2015": "^6.13.2",
+    "babel-preset-vue-app": "^1.2.0",
     "cross-env": "^1.0.6",
     "css-loader": "^0.23.1",
     "file-loader": "^0.8.5",
