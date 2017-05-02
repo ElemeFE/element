@@ -6,7 +6,7 @@
 
         this.$notify({
           title: 'Title',
-          message: h('p', { style: 'color: red' }, 'This is a reminder')
+          message: h('i', { style: 'color: teal' }, 'This is a reminder')
         });
       },
 
@@ -93,7 +93,7 @@ Displays a global notification message at the upper right corner of the page.
 
         this.$notify({
           title: 'Title',
-          message: h('p', { style: 'color: red' }, 'This is a reminder')
+          message: h('i', { style: 'color: teal' }, 'This is a reminder')
         });
       },
 
