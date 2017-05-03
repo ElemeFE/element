@@ -753,3 +753,9 @@
 | rules    | 表单验证规则 | object | — | — |
 | error    | 表单域验证错误信息, 设置该值会使表单验证状态变为`error`，并显示该错误信息 | string | — | — |
 | show-message  | 是否显示校验错误信息 | boolean | — | true |
+
+### Form-Item Slot
+| name | 说明 |
+|------|--------|
+| — | Form Item 的内容 |
+| label | 标签文本的内容 |
