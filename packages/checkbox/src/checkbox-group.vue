@@ -1,16 +1,12 @@
 <script>
+  import Emitter from 'element-ui/src/mixins/emitter';
+
   export default {
     name: 'ElCheckboxGroup',
 
     componentName: 'ElCheckboxGroup',
 
-    provide() {
-      return {
-        ElCheckboxGroup: this
-      };
-    },
-
-    inject: ['ElFormItem'],
+    mixins: [Emitter],
 
     props: {
       value: {},
@@ -23,7 +19,7 @@
 
     watch: {
       value(value) {
-        this.ElFormItem.$emit('el.form.change', value);
+        this.dispatch('ElFormItem', 'el.form.change', [value]);
       }
     }
   };
