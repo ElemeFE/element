@@ -354,7 +354,7 @@ export default {
     handleClickIcon() {
       if (this.readonly || this.disabled) return;
       if (this.showClose) {
-        this.currentValue = '';
+        this.currentValue = this.$options.defaultValue || '';
         this.showClose = false;
       } else {
         this.pickerVisible = !this.pickerVisible;
@@ -431,7 +431,7 @@ export default {
     },
 
     mountPicker() {
-      this.panel.defaultValue = this.currentValue;
+      this.panel.defaultValue = this.defaultValue || this.currentValue;
       this.picker = new Vue(this.panel).$mount();
       this.picker.popperClass = this.popperClass;
       this.popperElm = this.picker.$el;
