@@ -1,5 +1,20 @@
 ## Changelog
 
+### 1.3.0-beta.3
+
+*2017-05-03*
+
+#### New features:
+- Added `label` attribute for CarouselItem, #4317 (by @paul-blundell)
+- `message` of MessageBox now supports VNode, #4550
+- Added `filter-placement` attribute for TableColumn, #4491
+- Added `visible` attribute for Dialog, which supports the `.sync` modifier, #4539
+- `current-page` of Pagination `current-page` now supports `.sync`, #4539
+- Added `abort` method for Upload, #4575
+
+#### Fix:
+- Upload not displaying preview image when is `auto-upload` false, #4572
+
 ### 1.3.0-beta.1
 
 *2017-04-28*
