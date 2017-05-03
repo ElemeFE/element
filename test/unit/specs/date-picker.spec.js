@@ -202,6 +202,44 @@ describe('DatePicker', () => {
     }, DELAY);
   });
 
+  it('default value', done => {
+    const toDateStr = date => {
+      let d = new Date(date);
+      return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+    };
+    let today = new Date();
+    let nextMonth = new Date(today);
+    nextMonth.setDate(1);
+    if (nextMonth.getMonth() === 12) {
+      nextMonth.setFullYear(today.getFullYear + 1);
+      nextMonth.setMonth(1);
+    } else {
+      nextMonth.setMonth(today.getMonth() + 1);
+    }
+    let nextMonthStr = toDateStr(nextMonth);
+
+    vm = createVue({
+      template: `<el-date-picker v-model="value" ref="compo" default-value="${nextMonthStr}" />`,
+      data() {
+        return {
+          value: ''
+        };
+      }
+    }, true);
+
+    const input = vm.$el.querySelector('input');
+
+    input.focus();
+    setTimeout(_ => {
+      const $el = vm.$refs.compo.picker.$el;
+      $el.querySelector('td.current').click();
+      setTimeout(_ => {
+        expect(vm.value).to.equal(nextMonthStr);
+      });
+      done();
+    });
+  });
+
   describe('keydown', () => {
     let input;
     let keyDown = function(el, keyCode) {
