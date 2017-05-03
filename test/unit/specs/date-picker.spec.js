@@ -702,7 +702,6 @@ describe('DatePicker', () => {
 
   const currentMonth = new Date(new Date().getTime());
   currentMonth.setDate(1);
-  const FirstDayOfCurrentMonth = currentMonth.getDay();
   const chineseWeek = ['一', '二', '三', '四', '五', '六', '日'];
 
   const testWeek = (i) => it('picker-options:firstDayOfWeek ' + i, done => {
@@ -718,13 +717,8 @@ describe('DatePicker', () => {
     input.focus();
 
     setTimeout(_ => {
-      const prevMonthLen = vm.picker.$el.querySelectorAll('.prev-month').length;
       const firstWeek = vm.picker.$el.querySelector('tr th');
-      const offset = i > 3 ? 7 - i : -i;
-      const day = FirstDayOfCurrentMonth === 0 ? 7 : FirstDayOfCurrentMonth;
-
       expect(firstWeek.innerText).to.equal(chineseWeek[i - 1]);
-      expect(prevMonthLen - day).to.equal(offset);
       done();
     });
   });

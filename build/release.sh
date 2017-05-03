@@ -19,7 +19,12 @@ then
   echo "Releasing theme-default $VERSION ..."
   cd packages/theme-default
   npm version $VERSION --message "[release] $VERSION"
-  npm publish --tag beta
+  if [[ $VERSION =~ "beta" ]]
+  then
+    npm publish --tag beta
+  else
+    npm publish
+  fi
   cd ../..
 
   # commit
@@ -34,5 +39,10 @@ then
   git rebase master
   git push eleme dev
 
-  npm publish --tag beta
+  if [[ $VERSION =~ "beta" ]]
+  then
+    npm publish --tag beta
+  else
+    npm publish
+  fi
 fi
