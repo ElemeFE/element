@@ -1,5 +1,19 @@
 ## 更新日志
 
+### 1.3.0-beta.3
+*2017-05-03*
+
+#### 新特性：
+- CarouselItem 新增 `label` 属性，#4317（by @paul-blundell）
+- MessageBox 的 `message` 属性增加对 VNode 的支持，#4550
+- TableColumn 新增 `filter-placement` 属性，#4491
+- Dialog 新增 `visible` 属性，且支持 `.sync` 修饰符，#4539
+- Pagination 的 `current-page` 增加对 `.sync` 的支持，#4539
+- Upload 新增 `abort` 方法，#4575
+
+#### 修复：
+- `auto-upload` 为 false 的 Upload 不显示预览图片的问题，#4572
+
 ### 1.3.0-beta.1
 *2017-04-28*
 
