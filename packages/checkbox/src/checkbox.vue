@@ -40,8 +40,12 @@
   </label>
 </template>
 <script>
+  import Emitter from 'element-ui/src/mixins/emitter';
+
   export default {
     name: 'ElCheckbox',
+
+    mixins: [Emitter],
 
     componentName: 'ElCheckbox',
 
@@ -51,8 +55,6 @@
         focus: false
       };
     },
-
-    inject: ['ElCheckboxGroup'],
 
     computed: {
       model: {
@@ -65,16 +67,17 @@
         set(val) {
           if (this.isGroup) {
             let isLimitExceeded = false;
-            (this.group.min !== undefined &&
-              val.length < this.group.min &&
+            (this._checkboxGroup.min !== undefined &&
+              val.length < this._checkboxGroup.min &&
               (isLimitExceeded = true));
 
-            (this.group.max !== undefined &&
-              val.length > this.group.max &&
+            (this._checkboxGroup.max !== undefined &&
+              val.length > this._checkboxGroup.max &&
               (isLimitExceeded = true));
 
             isLimitExceeded === false &&
-            this.group.$emit('input', val);
+            this.dispatch('ElCheckboxGroup', 'input', [val]);
+
           } else if (this.value !== undefined) {
             this.$emit('input', val);
           } else {
@@ -93,16 +96,21 @@
         }
       },
 
-      group() {
-        return this.ElCheckboxGroup;
-      },
-
       isGroup() {
-        return !!this.group;
+        let parent = this.$parent;
+        while (parent) {
+          if (parent.$options.componentName !== 'ElCheckboxGroup') {
+            parent = parent.$parent;
+          } else {
+            this._checkboxGroup = parent;
+            return true;
+          }
+        }
+        return false;
       },
 
       store() {
-        return this.group ? this.group.value : this.value;
+        return this._checkboxGroup ? this._checkboxGroup.value : this.value;
       }
     },
 
@@ -132,7 +140,7 @@
         this.$emit('change', ev);
         if (this.isGroup) {
           this.$nextTick(_ => {
-            this.group.$emit('change', this.group.value);
+            this.dispatch('ElCheckboxGroup', 'change', [this._checkboxGroup.value]);
           });
         }
       }

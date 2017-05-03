@@ -17,6 +17,7 @@
 </template>
 <script>
   import AsyncValidator from 'async-validator';
+  import emitter from 'element-ui/src/mixins/emitter';
 
   function noop() {}
 
@@ -48,13 +49,7 @@
 
     componentName: 'ElFormItem',
 
-    provide() {
-      return {
-        ElFormItem: this
-      };
-    },
-
-    inject: ['ElForm'],
+    mixins: [emitter],
 
     props: {
       label: String,
@@ -98,7 +93,11 @@
         return ret;
       },
       form() {
-        return this.ElForm;
+        var parent = this.$parent;
+        while (parent.$options.componentName !== 'ElForm') {
+          parent = parent.$parent;
+        }
+        return parent;
       },
       fieldValue: {
         cache: false,
@@ -199,7 +198,8 @@
     },
     mounted() {
       if (this.prop) {
-        this.ElForm.$emit('el.form.addField', this);
+        this.dispatch('ElForm', 'el.form.addField', [this]);
+
         let initialValue = this.fieldValue;
         if (Array.isArray(initialValue)) {
           initialValue = [].concat(initialValue);
@@ -223,7 +223,7 @@
       }
     },
     beforeDestroy() {
-      this.ElForm.$emit('el.form.removeField', this);
+      this.dispatch('ElForm', 'el.form.removeField', [this]);
     }
   };
 </script>
