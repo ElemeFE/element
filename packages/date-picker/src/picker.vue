@@ -182,6 +182,20 @@ const PLACEMENT_MAP = {
   right: 'bottom-end'
 };
 
+// only considers date-picker's value: Date or [Date, Date]
+const valueEquals = function(a, b) {
+  const aIsArray = a instanceof Array;
+  const bIsArray = b instanceof Array;
+  if (aIsArray && bIsArray) {
+    return new Date(a[0]).getTime() === new Date(b[0]).getTime() &&
+           new Date(a[1]).getTime() === new Date(b[1]).getTime();
+  }
+  if (!aIsArray && !bIsArray) {
+    return new Date(a).getTime() === new Date(b).getTime();
+  }
+  return false;
+};
+
 export default {
   mixins: [Emitter, NewPopper],
 
@@ -470,7 +484,10 @@ export default {
 
       this.picker.$on('dodestroy', this.doDestroy);
       this.picker.$on('pick', (date = '', visible = false) => {
-        this.$emit('input', date);
+        // do not emit if values are same
+        if (!valueEquals(this.value, date)) {
+          this.$emit('input', date);
+        }
         this.pickerVisible = this.picker.visible = visible;
         this.picker.resetView && this.picker.resetView();
       });
