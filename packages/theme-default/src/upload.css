@@ -113,13 +113,13 @@
 
       & .el-progress {
         position: absolute;
-        bottom: -3px;
+        top: 20px;
         width: 100%;
       }
       & .el-progress__text {
         position: absolute;
         right: 0;
-        top: -10px;
+        top: -13px;
         right: 0;
       }
       .el-progress-bar {
@@ -151,6 +151,9 @@
 
         .el-icon-close {
           display: inline-block;
+        }
+        .el-progress__text {
+          display: none;
         }
       }
       @when success {
@@ -379,7 +382,8 @@
         }
       }
       .el-progress {
-        position: static;
+        position: relative;
+        top: -7px;
       }
     }
   }
