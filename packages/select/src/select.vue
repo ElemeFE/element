@@ -150,6 +150,10 @@
         let hasExistingOption = this.options.filter(option => !option.created)
           .some(option => option.currentLabel === this.query);
         return this.filterable && this.allowCreate && this.query !== '' && !hasExistingOption;
+      },
+
+      isDisabled() {
+        return this.disabled || this.readonly;
       }
     },
 
@@ -633,10 +637,6 @@
       handleResize() {
         this.resetInputWidth();
         if (this.multiple) this.resetInputHeight();
-      },
-
-      isDisabled() {
-        return this.disabled || this.readonly;
       }
     },
 

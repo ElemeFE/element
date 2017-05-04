@@ -84,15 +84,16 @@
         return this.isGroup
           ? this._radioGroup.disabled || this.disabled
           : this.disabled;
-      }
-    },
-    methods: {
+      },
+
+      isReadOnly() {
+        return this.isGroup
+          ? this._radioGroup.readonly || this.readonly
+          : this.readonly;
+      },
+
       isClassDisabled() {
         return this.isDisabled && !this.isReadOnly;
-      },
-      isReadOnly() {
-        /* eslint no-underscore-dangle: ["error", { "allow": ["_radioGroup"] }]*/
-        return this.readonly || this._radioGroup.readonly;
       }
     }
   };

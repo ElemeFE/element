@@ -64,6 +64,29 @@
 ```
 :::
 
+### 只读状态
+
+单选框只读的状态。
+
+:::demo 注意：请牢记，选中的条件是绑定的变量值等于`label`中的值。只要在`el-radio`元素中设置`readonly`属性即可，它接受一个`Boolean`，`true`为禁用。
+```html
+<template>
+  <el-radio readonly v-model="radio1" label="禁用">备选项</el-radio>
+  <el-radio readonly v-model="radio1" label="选中且禁用">备选项</el-radio>
+</template>
+
+<script>
+  export default {
+    data () {
+      return {
+        radio1: '选中且只读'
+      };
+    }
+  }
+</script>
+```
+:::
+
 ### 单选框组
 
 适用于在多个互斥的选项中选择的场景
@@ -139,6 +162,7 @@
 |---------- |-------- |---------- |-------------  |-------- |
 | label     | Radio 的 value   | string,number,boolean    |       —        |      —   |
 | disabled  | 是否禁用    | boolean   | — | false   |
+| readonly  | 是否只读    | boolean   | — | false   |
 | name | 原生 name 属性 | string    |      —         |     —    |
 
 ### Radio-group Attributes
