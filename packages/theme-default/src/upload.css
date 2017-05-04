@@ -232,8 +232,13 @@
           display: none;
         }
 
-        &:hover .el-upload-list__item-status-label {
-          display: none;
+        &:hover {
+          .el-upload-list__item-status-label {
+            display: none;
+          }
+          .el-progress__text {
+            display: block;
+          }
         }
       }
       .el-upload-list__item-name {
@@ -329,6 +334,9 @@
             box-shadow: none;
             top: -2px;
             right: -12px;
+          }
+          .el-progress__text {
+            display: block;
           }
         }
         &.is-success {
