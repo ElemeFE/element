@@ -59,8 +59,8 @@
   </transition-group>
 </template>
 <script>
-  import Locale from 'element-ui/src/mixins/locale';
-  import ElProgress from 'element-ui/packages/progress';
+  import Locale from 'setaria-ui/src/mixins/locale';
+  import ElProgress from 'setaria-ui/packages/progress';
 
   export default {
     mixins: [Locale],

@@ -62,7 +62,7 @@ import Collapse from '../packages/collapse/index.js';
 import CollapseItem from '../packages/collapse-item/index.js';
 import Cascader from '../packages/cascader/index.js';
 import ColorPicker from '../packages/color-picker/index.js';
-import locale from 'element-ui/src/locale';
+import locale from 'setaria-ui/src/locale';
 
 const components = [
   Pagination,
@@ -152,7 +152,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 };
 
 module.exports = {
-  version: '1.0.1',
+  version: '1.0.2',
   locale: locale.use,
   i18n: locale.i18n,
   install,

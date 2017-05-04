@@ -32,10 +32,10 @@
   </div>
 </template>
 <script>
-  import ElInput from 'element-ui/packages/input';
-  import Clickoutside from 'element-ui/src/utils/clickoutside';
+  import ElInput from 'setaria-ui/packages/input';
+  import Clickoutside from 'setaria-ui/src/utils/clickoutside';
   import ElAutocompleteSuggestions from './autocomplete-suggestions.vue';
-  import Emitter from 'element-ui/src/mixins/emitter';
+  import Emitter from 'setaria-ui/src/mixins/emitter';
 
   export default {
     name: 'ElAutocomplete',

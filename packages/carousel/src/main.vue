@@ -50,7 +50,7 @@
 <script>
 import throttle from 'throttle-debounce/throttle';
 import debounce from 'throttle-debounce/debounce';
-import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
+import { addResizeListener, removeResizeListener } from 'setaria-ui/src/utils/resize-event';
 
 export default {
   name: 'ElCarousel',

@@ -27,8 +27,8 @@
 </template>
 <script>
   import menuMixin from './menu-mixin';
-  import Emitter from 'element-ui/src/mixins/emitter';
-  import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
+  import Emitter from 'setaria-ui/src/mixins/emitter';
+  import CollapseTransition from 'setaria-ui/src/transitions/collapse-transition';
 
   export default {
     name: 'ElSubmenu',

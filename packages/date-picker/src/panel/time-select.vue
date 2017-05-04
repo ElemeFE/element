@@ -17,7 +17,7 @@
 </template>
 
 <script type="text/babel">
-  import ElScrollbar from 'element-ui/packages/scrollbar';
+  import ElScrollbar from 'setaria-ui/packages/scrollbar';
 
   const parseTime = function(time) {
     const values = ('' || time).split(':');

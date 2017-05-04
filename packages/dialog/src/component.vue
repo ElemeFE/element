@@ -24,8 +24,8 @@
 </template>
 
 <script>
-  import Popup from 'element-ui/src/utils/popup';
-  import emitter from 'element-ui/src/mixins/emitter';
+  import Popup from 'setaria-ui/src/utils/popup';
+  import emitter from 'setaria-ui/src/mixins/emitter';
 
   export default {
     name: 'ElDialog',
@@ -42,7 +42,7 @@
         type: Boolean,
         default: true
       },
-  
+
       modalAppendToBody: {
         type: Boolean,
         default: true

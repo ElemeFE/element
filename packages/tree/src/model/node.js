@@ -1,4 +1,4 @@
-import objectAssign from 'element-ui/src/utils/merge';
+import objectAssign from 'setaria-ui/src/utils/merge';
 import { markNodeData, NODE_KEY } from './util';
 
 const reInitChecked = function(node) {

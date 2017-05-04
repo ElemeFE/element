@@ -39,13 +39,13 @@
         </template>
         <template slot="append" v-if="$slots.append">
           <slot name="append"></slot>
-        </template> 
+        </template>
     </el-input>
   </div>
 </template>
 <script>
-  import ElInput from 'element-ui/packages/input';
-  import { once, on } from 'element-ui/src/utils/dom';
+  import ElInput from 'setaria-ui/packages/input';
+  import { once, on } from 'setaria-ui/src/utils/dom';
 
   export default {
     name: 'ElInputNumber',

@@ -28,7 +28,7 @@ const defaults = {
 
 import Vue from 'vue';
 import msgboxVue from './main.vue';
-import merge from 'element-ui/src/utils/merge';
+import merge from 'setaria-ui/src/utils/merge';
 
 const MessageBoxConstructor = Vue.extend(msgboxVue);
 

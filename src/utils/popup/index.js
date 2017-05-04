@@ -1,6 +1,6 @@
 import Vue from 'vue';
-import merge from 'element-ui/src/utils/merge';
-import PopupManager from 'element-ui/src/utils/popup/popup-manager';
+import merge from 'setaria-ui/src/utils/merge';
+import PopupManager from 'setaria-ui/src/utils/popup/popup-manager';
 import getScrollBarWidth from '../scrollbar-width';
 
 let idSeed = 1;

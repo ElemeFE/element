@@ -2,8 +2,8 @@
 import UploadList from './upload-list';
 import Upload from './upload';
 import IframeUpload from './iframe-upload';
-import ElProgress from 'element-ui/packages/progress';
-import Migrating from 'element-ui/src/mixins/migrating';
+import ElProgress from 'setaria-ui/packages/progress';
+import Migrating from 'setaria-ui/src/mixins/migrating';
 
 function noop() {}
 

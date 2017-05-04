@@ -44,9 +44,9 @@
 </template>
 
 <script type="text/jsx">
-  import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
-  import ElCheckbox from 'element-ui/packages/checkbox';
-  import emitter from 'element-ui/src/mixins/emitter';
+  import CollapseTransition from 'setaria-ui/src/transitions/collapse-transition';
+  import ElCheckbox from 'setaria-ui/packages/checkbox';
+  import emitter from 'setaria-ui/src/mixins/emitter';
 
   export default {
     name: 'ElTreeNode',

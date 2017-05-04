@@ -105,11 +105,11 @@
 </template>
 
 <script type="text/babel">
-  import ElCheckbox from 'element-ui/packages/checkbox';
+  import ElCheckbox from 'setaria-ui/packages/checkbox';
   import throttle from 'throttle-debounce/throttle';
   import debounce from 'throttle-debounce/debounce';
-  import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
-  import Locale from 'element-ui/src/mixins/locale';
+  import { addResizeListener, removeResizeListener } from 'setaria-ui/src/utils/resize-event';
+  import Locale from 'setaria-ui/src/mixins/locale';
   import TableStore from './table-store';
   import TableLayout from './table-layout';
   import TableBody from './table-body';

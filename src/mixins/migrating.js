@@ -2,7 +2,7 @@
  * Show migrating guide in browser console.
  *
  * Usage:
- * import Migrating from 'element-ui/src/mixins/migrating';
+ * import Migrating from 'setaria-ui/src/mixins/migrating';
  *
  * mixins: [Migrating]
  *

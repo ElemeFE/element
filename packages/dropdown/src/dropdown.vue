@@ -1,8 +1,8 @@
 <script>
-  import Clickoutside from 'element-ui/src/utils/clickoutside';
-  import Emitter from 'element-ui/src/mixins/emitter';
-  import ElButton from 'element-ui/packages/button';
-  import ElButtonGroup from 'element-ui/packages/button-group';
+  import Clickoutside from 'setaria-ui/src/utils/clickoutside';
+  import Emitter from 'setaria-ui/src/mixins/emitter';
+  import ElButton from 'setaria-ui/packages/button';
+  import ElButtonGroup from 'setaria-ui/packages/button-group';
 
   export default {
     name: 'ElDropdown',

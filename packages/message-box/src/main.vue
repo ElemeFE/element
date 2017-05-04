@@ -37,12 +37,12 @@
 </template>
 
 <script type="text/babel">
-  import Popup from 'element-ui/src/utils/popup';
-  import Locale from 'element-ui/src/mixins/locale';
-  import ElInput from 'element-ui/packages/input';
-  import ElButton from 'element-ui/packages/button';
-  import { addClass, removeClass } from 'element-ui/src/utils/dom';
-  import { t } from 'element-ui/src/locale';
+  import Popup from 'setaria-ui/src/utils/popup';
+  import Locale from 'setaria-ui/src/mixins/locale';
+  import ElInput from 'setaria-ui/packages/input';
+  import ElButton from 'setaria-ui/packages/button';
+  import { addClass, removeClass } from 'setaria-ui/src/utils/dom';
+  import { t } from 'setaria-ui/src/locale';
 
   let typeMap = {
     success: 'circle-check',
