@@ -117,10 +117,14 @@
       },
       handleClose() {
         if (typeof this.beforeClose === 'function') {
-          this.beforeClose(this.close);
+          this.beforeClose(this.hide);
         } else {
-          this.close();
+          this.hide();
         }
+      },
+      hide() {
+        this.$emit('update:visible', false);
+        this.$emit('visible-change', false);
       },
       updatePopper() {
         this.broadcast('ElSelectDropdown', 'updatePopper');
