@@ -2,7 +2,7 @@
   <label class="el-radio">
     <span class="el-radio__input"
       :class="{
-        'is-disabled': isDisabled,
+        'is-disabled': isClassDisabled,
         'is-checked': model === label,
         'is-focus': focus
       }"
@@ -16,7 +16,7 @@
         @focus="focus = true"
         @blur="focus = false"
         :name="name"
-        :disabled="isDisabled">
+        :disabled="isDisabled || isReadOnly">
     </span>
     <span class="el-radio__label">
       <slot></slot>
@@ -38,7 +38,12 @@
       value: {},
       label: {},
       disabled: Boolean,
-      name: String
+      name: String,
+      // 只读
+      readonly: {
+        type: Boolean,
+        default: false
+      }
     },
 
     data() {
@@ -79,6 +84,15 @@
         return this.isGroup
           ? this._radioGroup.disabled || this.disabled
           : this.disabled;
+      }
+    },
+    methods: {
+      isClassDisabled() {
+        return this.isDisabled && !this.isReadOnly;
+      },
+      isReadOnly() {
+        /* eslint no-underscore-dangle: ["error", { "allow": ["_radioGroup"] }]*/
+        return this.readonly || this._radioGroup.readonly;
       }
     }
   };

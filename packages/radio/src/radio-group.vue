@@ -18,7 +18,12 @@
       size: String,
       fill: String,
       textColor: String,
-      disabled: Boolean
+      disabled: Boolean,
+      // 只读
+      readonly: {
+        type: Boolean,
+        default: false
+      }
     },
     watch: {
       value(value) {

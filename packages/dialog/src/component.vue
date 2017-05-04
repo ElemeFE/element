@@ -14,7 +14,9 @@
             <i v-if="showClose" class="el-dialog__close el-icon el-icon-close" @click='close()'></i>
           </div>
         </div>
-        <div class="el-dialog__body" v-if="rendered"><slot></slot></div>
+        <div class="el-dialog__body" v-if="rendered">
+          <slot v-if="isCacheDialogContent"></slot>
+        </div>
         <div class="el-dialog__footer" v-if="$slots.footer">
           <slot name="footer"></slot>
         </div>
@@ -81,6 +83,11 @@
       top: {
         type: String,
         default: '15%'
+      },
+
+      cache: {
+        type: Boolean,
+        default: true
       }
     },
     data() {
@@ -114,6 +121,13 @@
       },
       style() {
         return this.size === 'full' ? {} : { 'top': this.top };
+      },
+      isCacheDialogContent() {
+        let ret = this.cache;
+        if (!ret) {
+          ret = this.value;
+        }
+        return ret;
       }
     },
 

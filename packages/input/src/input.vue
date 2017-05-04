@@ -3,7 +3,7 @@
     type === 'textarea' ? 'el-textarea' : 'el-input',
     size ? 'el-input--' + size : '',
     {
-      'is-disabled': disabled,
+      'is-disabled': isClassDisabled,
       'el-input-group': $slots.prepend || $slots.append,
       'el-input-group--append': $slots.append,
       'el-input-group--prepend': $slots.prepend
@@ -138,6 +138,9 @@
       },
       textareaStyle() {
         return merge({}, this.textareaCalcStyle, { resize: this.resize });
+      },
+      isClassDisabled() {
+        return this.disabled && !this.readonly;
       }
     },
 

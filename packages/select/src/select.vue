@@ -26,7 +26,7 @@
         class="el-select__input"
         :class="`is-${ size }`"
         @focus="visible = true"
-        :disabled="disabled"
+        :disabled="isDisabled"
         @keyup="managePlaceholder"
         @keydown="resetInputState"
         @keydown.down.prevent="navigateOptions('next')"
@@ -47,7 +47,7 @@
       :placeholder="currentPlaceholder"
       :name="name"
       :size="size"
-      :disabled="disabled"
+      :disabled="isDisabled"
       :readonly="!filterable || multiple"
       :validate-event="false"
       @focus="handleFocus"
@@ -189,6 +189,11 @@
         default() {
           return t('el.select.placeholder');
         }
+      },
+      // 只读
+      readonly: {
+        type: Boolean,
+        default: false
       }
     },
 
@@ -628,6 +633,10 @@
       handleResize() {
         this.resetInputWidth();
         if (this.multiple) this.resetInputHeight();
+      },
+
+      isDisabled() {
+        return this.disabled || this.readonly;
       }
     },
 

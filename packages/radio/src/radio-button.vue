@@ -4,7 +4,7 @@
     :class="[
       size ? 'el-radio-button--' + size : '',
       { 'is-active': value === label },
-      { 'is-disabled': isDisabled }
+      { 'is-disabled': isClassDisabled }
     ]"
   >
     <input
@@ -13,7 +13,7 @@
       type="radio"
       v-model="value"
       :name="name"
-      :disabled="isDisabled">
+      :disabled="isDisabled || isReadOnly">
     <span class="el-radio-button__inner" :style="value === label ? activeStyle : null">
       <slot></slot>
       <template v-if="!$slots.default">{{label}}</template>
@@ -27,7 +27,12 @@
     props: {
       label: {},
       disabled: Boolean,
-      name: String
+      name: String,
+      // 只读
+      readonly: {
+        type: Boolean,
+        default: false
+      }
     },
     computed: {
       value: {
@@ -62,6 +67,12 @@
       },
       isDisabled() {
         return this.disabled || this._radioGroup.disabled;
+      },
+      isClassDisabled() {
+        return this.isDisabled && !this.isReadOnly;
+      },
+      isReadOnly() {
+        return this.readonly || this._radioGroup.readonly;
       }
     }
   };
