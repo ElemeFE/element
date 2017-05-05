@@ -5,6 +5,7 @@
         <el-checkbox-group class="el-table-filter__checkbox-group" v-model="filteredValue">
           <el-checkbox
             v-for="filter in filters"
+            :key="filter.value"
             :label="filter.value">{{ filter.text }}</el-checkbox>
         </el-checkbox-group>
       </div>
@@ -23,6 +24,7 @@
         <li class="el-table-filter__list-item"
             v-for="filter in filters"
             :label="filter.value"
+            :key="filter.value"
             :class="{ 'is-active': isActive(filter) }"
             @click="handleSelect(filter.value)" >{{ filter.text }}</li>
       </ul>

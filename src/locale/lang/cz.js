@@ -87,10 +87,19 @@ export default {
       emptyText: 'Žádná data',
       confirmFilter: 'Potvrdit',
       resetFilter: 'Resetovat',
-      clearFilter: 'Vše'
+      clearFilter: 'Vše',
+      sumText: 'Sum' // to be translated
     },
     tree: {
       emptyText: 'Žádná data'
+    },
+    transfer: {
+      noMatch: 'Žádná shoda',
+      noData: 'Žádná data',
+      titles: ['List 1', 'List 2'], // to be translated
+      filterPlaceholder: 'Enter keyword', // to be translated
+      noCheckedFormat: '{total} items', // to be translated
+      hasCheckedFormat: '{checked}/{total} checked' // to be translated
     }
   }
 };

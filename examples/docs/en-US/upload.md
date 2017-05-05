@@ -367,7 +367,8 @@ auto-upload | whether to auto upload file | boolean | — | true |
 http-request | override default xhr behavior, allowing you to implement your own upload-file's request | function | — | — |
 disabled | whether to disable upload | boolean | — | false |
 
-### Events
-| Event Name | Description | Parameters |
+### Methods
+| Methods Name | Description | Parameters |
 |---------- |-------- |---------- |
 | clearFiles | clear the uploaded file list | — |
+| abort | cancel upload request | （ file: fileList's item ） |

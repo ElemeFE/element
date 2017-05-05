@@ -36,9 +36,6 @@
       };
     },
     methods: {
-      openDialog() {
-        this.$refs.dialogBind.open();
-      },
       handleClose(done) {
         this.$confirm('确认关闭？')
           .then(_ => {
@@ -79,14 +76,14 @@
 
 Dialog 弹出一个对话框，适合需要定制性更大的场景。
 
-:::demo 需要设置`v-model`属性，它接收`Boolean`，当为`true`时显示 Dialog。Dialog 分为两个部分：`body`和`footer`，`footer`需要具名为`footer`的`slot`。`title`属性用于定义标题，它是可选的，默认值为空。本例通过显式改变`v-model`的值来打开 Dialog，此外我们还为 Dialog 实例提供了`open`和`close`方法，可以通过调用它们来打开/关闭 Dialog。最后，本例还展示了`beforeClose`的用法。
+:::demo 需要设置`visible`属性，它接收`Boolean`，当为`true`时显示 Dialog。Dialog 分为两个部分：`body`和`footer`，`footer`需要具名为`footer`的`slot`。`title`属性用于定义标题，它是可选的，默认值为空。最后，本例还展示了`beforeClose`的用法。
 
 ```html
 <el-button type="text" @click="dialogVisible = true">点击打开 Dialog</el-button>
 
 <el-dialog
   title="提示"
-  v-model="dialogVisible"
+  :visible.sync="dialogVisible"
   size="tiny"
   :before-close="handleClose">
   <span>这是一段信息</span>
@@ -126,7 +123,7 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
 <!-- Table -->
 <el-button type="text" @click="dialogTableVisible = true">打开嵌套表格的 Dialog</el-button>
 
-<el-dialog title="收货地址" v-model="dialogTableVisible">
+<el-dialog title="收货地址" :visible.sync="dialogTableVisible">
   <el-table :data="gridData">
     <el-table-column property="date" label="日期" width="150"></el-table-column>
     <el-table-column property="name" label="姓名" width="200"></el-table-column>
@@ -137,7 +134,7 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
 <!-- Form -->
 <el-button type="text" @click="dialogFormVisible = true">打开嵌套表单的 Dialog</el-button>
 
-<el-dialog title="收货地址" v-model="dialogFormVisible">
+<el-dialog title="收货地址" :visible.sync="dialogFormVisible">
   <el-form :model="form">
     <el-form-item label="活动名称" :label-width="formLabelWidth">
       <el-input v-model="form.name" auto-complete="off"></el-input>
@@ -199,6 +196,7 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
 ### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
+| visible   | 是否显示 Dialog，支持 .sync 修饰符 | boolean | — | false |
 | title     | Dialog 的标题，也可通过具名 slot （见下表）传入 | string    | — | — |
 | size      | Dialog 的大小 | string    | tiny/small/large/full | small |
 | top       | Dialog CSS 中的 top 值（仅在 size 不为 full 时有效） | string | — | 15% |
@@ -217,13 +215,6 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
 | — | Dialog 的内容 |
 | title | Dialog 标题区的内容 |
 | footer | Dialog 按钮操作区的内容 |
-
-### 方法
-每个 `el-dialog` 实例都暴露了如下方法，用于在不显式改变 `v-model` 值的情况下打开 / 关闭实例：
-| 方法名 | 说明 |
-|------|--------|
-| open | 打开当前实例 |
-| close | 关闭当前实例 |
 
 ### Events
 | 事件名称      | 说明    | 回调参数      |

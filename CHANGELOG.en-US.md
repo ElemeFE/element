@@ -1,5 +1,51 @@
 ## Changelog
 
+### 1.3.0 Beryllium
+
+*2017-05-05*
+
+#### New features:
+- New component: Transfer
+- Now you can use our pre-defined transitions
+- Vertical mode for Slider, can be activated by the `vertical` attribute, #4410 (by @devange)
+- Button style for CheckboxGroup, #3697 (by @mdartic)
+- Table
+  - Added `setCurrentRow` method, #4390
+  - Added summary row, with three attributes: `show-summary`, `sum-text` and `summary-method`, #4484
+  - Added `filter-placement` attribute for TableColumn, #4491
+- Dialog
+  - Added a `before-close` hook, #4432
+  - Added `visible` attribute, which supports the `.sync` modifier, #4539
+- Upload
+  - Added `disabled` attribute, #4473
+  - `on-change` now also triggers when a file is added, #4447
+  - Added `abort` method
+- Switch now supports `on-value` and `off-value`, so that you can customize its values, #4403
+- DatePicker
+  - Added `default-value` attribute for initially displayed date in the dropdown, #4222 (by @wacky6)
+  - `type` now supports dynamic updates, #4417 (by @coffeedeveloper)
+  - Added `label` attribute for CarouselItem, #4317 (by @paul-blundell)
+- `message` of MessageBox now supports VNode, #4550
+- `current-page` of Pagination `current-page` now supports `.sync`, #4539
+- Added `label` slot for Form, so you can customize label's content, #4634
+
+#### Fixes:
+- Compatibility issues of Select and Table with Vue 2.3.x, #4518
+- `disabledDate` of DatePicker having no effect on typed value in the input box, #4309
+- An issue when the key of a Tree node is number 0, #4415
+- TimePicker number not align when picked, #4425 (by @pengchongfu)
+- Autocomplete frequently triggering searching method when typing Chinese, #4393 (by @qazbnm456)
+- Upload
+  - not able to select the same file multiple times, #4461
+  - not displaying preview image when is `auto-upload` false, #4572
+  - some style errors, #4643
+- Style bug of RadioGroup when nested in a FormItem, #4336
+- ColorPicker not clear the color panel when bound value is emptied, #4668 (by @pengchongfu)
+- `show-overflow-tooltip` of Table not working in Safari, #4157 (by @renxia)
+
+#### Breaking changes:
+- Only compatible with Vue 2.3.0+
+
 ### 1.2.9
 
 *2017-04-19*

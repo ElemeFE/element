@@ -84,18 +84,10 @@
       },
       beforeClose: Function
     },
-    data() {
-      return {
-        visible: false
-      };
-    },
 
     watch: {
-      value(val) {
-        this.visible = val;
-      },
       visible(val) {
-        this.$emit('input', val);
+        this.$emit('update:visible', val);
         if (val) {
           this.$emit('open');
           this.$el.addEventListener('scroll', this.updatePopper);
@@ -125,10 +117,14 @@
       },
       handleClose() {
         if (typeof this.beforeClose === 'function') {
-          this.beforeClose(this.close);
+          this.beforeClose(this.hide);
         } else {
-          this.close();
+          this.hide();
         }
+      },
+      hide() {
+        this.$emit('update:visible', false);
+        this.$emit('visible-change', false);
       },
       updatePopper() {
         this.broadcast('ElSelectDropdown', 'updatePopper');
@@ -137,7 +133,7 @@
     },
 
     mounted() {
-      if (this.value) {
+      if (this.visible) {
         this.rendered = true;
         this.open();
       }

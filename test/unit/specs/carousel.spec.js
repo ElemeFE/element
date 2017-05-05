@@ -113,6 +113,22 @@ describe('Carousel', () => {
     }, 60);
   });
 
+  it('label', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-carousel>
+            <el-carousel-item v-for="item in 3" :key="item" :label="item"></el-carousel-item>
+          </el-carousel>
+        </div>
+      `
+    });
+    setTimeout(_ => {
+      expect(vm.$el.querySelector('.el-carousel__button').innerText).to.equal('1');
+      done();
+    }, 10);
+  });
+
   describe('manual control', () => {
     it('hover', done => {
       vm = createVue({

@@ -216,7 +216,7 @@
       }
     }
     
-    @.is-focus {
+    &.is-focus {
       & .el-checkbox-button__inner {
         border-color: var(--checkbox-button-checked-border-color);
       }

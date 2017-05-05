@@ -85,10 +85,19 @@ export default {
       emptyText: 'Veri yok',
       confirmFilter: 'Onayla',
       resetFilter: 'Reset',
-      clearFilter: 'Hepsi'
+      clearFilter: 'Hepsi',
+      sumText: 'Sum' // to be translated
     },
     tree: {
       emptyText: 'Veri yok'
+    },
+    transfer: {
+      noMatch: 'Eşleşen veri bulunamadı',
+      noData: 'Veri yok',
+      titles: ['List 1', 'List 2'], // to be translated
+      filterPlaceholder: 'Enter keyword', // to be translated
+      noCheckedFormat: '{total} items', // to be translated
+      hasCheckedFormat: '{checked}/{total} checked' // to be translated
     }
   }
 };

@@ -127,7 +127,7 @@ The `indeterminate` property can help you to achieve a 'check all' effect.
   <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">Check all</el-checkbox>
   <div style="margin: 15px 0;"></div>
   <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
-    <el-checkbox v-for="city in cities" :label="city">{{city}}</el-checkbox>
+    <el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
   </el-checkbox-group>
 </template>
 <script>
@@ -169,7 +169,7 @@ The `min` and `max` properties can help you to limit the number of checked items
     v-model="checkedCities1"
     :min="1"
     :max="2">
-    <el-checkbox v-for="city in cities" :label="city">{{city}}</el-checkbox>
+    <el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
   </el-checkbox-group>
 </template>
 <script>
@@ -195,15 +195,15 @@ Checkbox with button styles.
 <template>
   <div style="margin: 15px 0;"></div>
   <el-checkbox-group v-model="checkboxGroup1">
-    <el-checkbox-button v-for="city in cities" :label="city">{{city}}</el-checkbox-button>
+    <el-checkbox-button v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox-button>
   </el-checkbox-group>
   <div style="margin: 15px 0;"></div>
   <el-checkbox-group v-model="checkboxGroup2" size="small">
-    <el-checkbox-button v-for="city in cities" :label="city" :disabled="city === 'Shenzhen'">{{city}}</el-checkbox-button>
+    <el-checkbox-button v-for="city in cities" :label="city" :disabled="city === 'Shenzhen'" :key="city">{{city}}</el-checkbox-button>
   </el-checkbox-group>
   <div style="margin: 15px 0;"></div>
   <el-checkbox-group v-model="checkboxGroup3" size="large" fill="#324057" text-color="#a4aebd" :min="1" :max="3">
-    <el-checkbox-button v-for="city in cities" :label="city">{{city}}</el-checkbox-button>
+    <el-checkbox-button v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox-button>
   </el-checkbox-group>
 </template>
 <script>

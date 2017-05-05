@@ -63,6 +63,7 @@ import Collapse from '../packages/collapse/index.js';
 import CollapseItem from '../packages/collapse-item/index.js';
 import Cascader from '../packages/cascader/index.js';
 import ColorPicker from '../packages/color-picker/index.js';
+import Transfer from '../packages/transfer/index.js';
 import locale from 'element-ui/src/locale';
 import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
@@ -126,6 +127,7 @@ const components = [
   CollapseItem,
   Cascader,
   ColorPicker,
+  Transfer,
   CollapseTransition
 ];
 
@@ -156,7 +158,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 };
 
 module.exports = {
-  version: '1.2.9',
+  version: '1.3.0',
   locale: locale.use,
   i18n: locale.i18n,
   install,
@@ -223,5 +225,6 @@ module.exports = {
   Collapse,
   CollapseItem,
   Cascader,
-  ColorPicker
+  ColorPicker,
+  Transfer
 };

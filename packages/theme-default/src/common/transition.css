@@ -1,6 +1,7 @@
 @charset "UTF-8";
 @import './var.css';
 
+
 /* DEPRECATED */
 .fade-in-linear-enter-active,
 .fade-in-linear-leave-active {
@@ -69,4 +70,13 @@
 
 .collapse-transition {
   transition: 0.3s height ease-in-out, 0.3s padding-top ease-in-out, 0.3s padding-bottom ease-in-out;
+}
+
+.el-list-enter-active,
+.el-list-leave-active {
+  transition: all 1s;
+}
+.el-list-enter, .el-list-leave-active {
+  opacity: 0;
+  transform: translateY(-30px);
 }

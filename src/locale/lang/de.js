@@ -86,10 +86,19 @@ export default {
       emptyText: 'Keine Daten',
       confirmFilter: 'Anwenden',
       resetFilter: 'Zurücksetzen',
-      clearFilter: 'Alles '
+      clearFilter: 'Alles ',
+      sumText: 'Sum' // to be translated
     },
     tree: {
       emptyText: 'Keine Daten'
+    },
+    transfer: {
+      noMatch: 'Nichts gefunden.',
+      noData: 'Keine Datei',
+      titles: ['List 1', 'List 2'], // to be translated
+      filterPlaceholder: 'Enter keyword', // to be translated
+      noCheckedFormat: '{total} items', // to be translated
+      hasCheckedFormat: '{checked}/{total} checked' // to be translated
     }
   }
 };

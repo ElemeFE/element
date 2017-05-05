@@ -139,6 +139,7 @@ When there are plenty of options, use a drop-down menu to display and select des
   <el-select v-model="value" placeholder="Select">
     <el-option
       v-for="item in options"
+      :key="item.value"
       :label="item.label"
       :value="item.value">
     </el-option>
@@ -182,6 +183,7 @@ When there are plenty of options, use a drop-down menu to display and select des
   <el-select v-model="value2" placeholder="Select">
     <el-option
       v-for="item in options2"
+      :key="item.value"
       :label="item.label"
       :value="item.value"
       :disabled="item.disabled">
@@ -228,6 +230,7 @@ Disable the whole component.
   <el-select v-model="value3" disabled placeholder="Select">
     <el-option
       v-for="item in options"
+      :key="item.value"
       :label="item.label"
       :value="item.value">
     </el-option>
@@ -272,6 +275,7 @@ You can clear Select using a clear icon.
   <el-select v-model="value4" clearable placeholder="Select">
     <el-option
       v-for="item in options"
+      :key="item.value"
       :label="item.label"
       :value="item.value">
     </el-option>
@@ -316,6 +320,7 @@ Multiple select uses tags to display selected options.
   <el-select v-model="value5" multiple placeholder="Select">
     <el-option
       v-for="item in options"
+      :key="item.value"
       :label="item.label"
       :value="item.value">
     </el-option>
@@ -361,6 +366,7 @@ You can customize HTML templates for options.
   <el-select v-model="value6" placeholder="Select">
     <el-option
       v-for="item in cities"
+      :key="item.value"
       :label="item.label"
       :value="item.value">
       <span style="float: left">{{ item.label }}</span>
@@ -411,9 +417,11 @@ Display options in groups.
   <el-select v-model="value7" placeholder="Select">
     <el-option-group
       v-for="group in options3"
+      :key="group.label"
       :label="group.label">
       <el-option
         v-for="item in group.options"
+        :key="item.value"
         :label="item.label"
         :value="item.value">
       </el-option>
@@ -468,6 +476,7 @@ You can filter options for your desired ones.
   <el-select v-model="value8" filterable placeholder="Select">
     <el-option
       v-for="item in options"
+      :key="item.value"
       :label="item.label"
       :value="item.value">
     </el-option>
@@ -593,6 +602,7 @@ Create and select new items that are not included in select options
     placeholder="Choose tags for your article">
     <el-option
       v-for="item in options5"
+      :key="item.value"
       :label="item.label"
       :value="item.value">
     </el-option>

@@ -85,10 +85,19 @@ export default {
       emptyText: 'Няма данни',
       confirmFilter: 'Потвърди',
       resetFilter: 'Изчисти',
-      clearFilter: 'Всички'
+      clearFilter: 'Всички',
+      sumText: 'Sum' // to be translated
     },
     tree: {
       emptyText: 'Няма данни'
+    },
+    transfer: {
+      noMatch: 'Няма намерени',
+      noData: 'Няма данни',
+      titles: ['List 1', 'List 2'], // to be translated
+      filterPlaceholder: 'Enter keyword', // to be translated
+      noCheckedFormat: '{total} items', // to be translated
+      hasCheckedFormat: '{checked}/{total} checked' // to be translated
     }
   }
 };
