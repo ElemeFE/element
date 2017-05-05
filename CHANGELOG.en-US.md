@@ -1,23 +1,8 @@
 ## Changelog
 
-### 1.3.0-beta.3
+### 1.3.0 Beryllium
 
-*2017-05-03*
-
-#### New features:
-- Added `label` attribute for CarouselItem, #4317 (by @paul-blundell)
-- `message` of MessageBox now supports VNode, #4550
-- Added `filter-placement` attribute for TableColumn, #4491
-- Added `visible` attribute for Dialog, which supports the `.sync` modifier, #4539
-- `current-page` of Pagination `current-page` now supports `.sync`, #4539
-- Added `abort` method for Upload, #4575
-
-#### Fix:
-- Upload not displaying preview image when is `auto-upload` false, #4572
-
-### 1.3.0-beta.1
-
-*2017-04-28*
+*2017-05-05*
 
 #### New features:
 - New component: Transfer
@@ -27,14 +12,22 @@
 - Table
   - Added `setCurrentRow` method, #4390
   - Added summary row, with three attributes: `show-summary`, `sum-text` and `summary-method`, #4484
-- Dialog now has a `before-close` hook, #4432
+  - Added `filter-placement` attribute for TableColumn, #4491
+- Dialog
+  - Added a `before-close` hook, #4432
+  - Added `visible` attribute, which supports the `.sync` modifier, #4539
 - Upload
   - Added `disabled` attribute, #4473
   - `on-change` now also triggers when a file is added, #4447
+  - Added `abort` method
 - Switch now supports `on-value` and `off-value`, so that you can customize its values, #4403
 - DatePicker
   - Added `default-value` attribute for initially displayed date in the dropdown, #4222 (by @wacky6)
   - `type` now supports dynamic updates, #4417 (by @coffeedeveloper)
+  - Added `label` attribute for CarouselItem, #4317 (by @paul-blundell)
+- `message` of MessageBox now supports VNode, #4550
+- `current-page` of Pagination `current-page` now supports `.sync`, #4539
+- Added `label` slot for Form, so you can customize label's content, #4634
 
 #### Fixes:
 - Compatibility issues of Select and Table with Vue 2.3.x, #4518
@@ -42,8 +35,13 @@
 - An issue when the key of a Tree node is number 0, #4415
 - TimePicker number not align when picked, #4425 (by @pengchongfu)
 - Autocomplete frequently triggering searching method when typing Chinese, #4393 (by @qazbnm456)
-- Upload not able to select the same file multiple times, #4461
+- Upload
+  - not able to select the same file multiple times, #4461
+  - not displaying preview image when is `auto-upload` false, #4572
+  - some style errors, #4643
 - Style bug of RadioGroup when nested in a FormItem, #4336
+- ColorPicker not clear the color panel when bound value is emptied, #4668 (by @pengchongfu)
+- `show-overflow-tooltip` of Table not working in Safari, #4157 (by @renxia)
 
 #### Breaking changes:
 - Only compatible with Vue 2.3.0+
