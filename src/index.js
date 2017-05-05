@@ -158,7 +158,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 };
 
 module.exports = {
-  version: '1.3.0-beta.3',
+  version: '1.3.0',
   locale: locale.use,
   i18n: locale.i18n,
   install,
