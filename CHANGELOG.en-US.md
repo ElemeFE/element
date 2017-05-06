@@ -1,5 +1,14 @@
 ## Changelog
 
+### 1.3.1
+
+*2017-05-06*
+
+- Fixed Autocomplete clearing input box when typing Chinese, #4718
+- Fixed async Table's summary row not scroll with Table, #4717
+- Fixed Dialog not closing correctly after pressing ESC when `close-on-press-esc` is true, #4706
+- Fixed wrong parameter in `change` event of Switch when `on-value` and `off-value` are assigned, #4675
+
 ### 1.3.0 Beryllium
 
 *2017-05-05*
