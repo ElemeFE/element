@@ -1,5 +1,13 @@
 ## 更新日志
 
+### 1.3.1
+*2017-05-06*
+
+- 修复 Autocomplete 输入中文时会清空输入框的问题，#4718
+- 修复异步获取数据的 Table 的合计行不随表格其余部分滚动的问题，#4717
+- 修复 `close-on-press-esc` 为 true 的 Dialog 在按下 ESC 时无法正确关闭的问题，#4706
+- 修复设置了 `on-value` 和 `off-value` 的 Switch `change` 事件参数不正确的问题，#4675
+
 ### 1.3.0 Beryllium
 *2017-05-05*
 
