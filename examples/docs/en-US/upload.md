@@ -370,5 +370,5 @@ disabled | whether to disable upload | boolean | — | false |
 ### Methods
 | Methods Name | Description | Parameters |
 |---------- |-------- |---------- |
-| clearFiles | clear the uploaded file list | — |
+| clearFiles | clear the uploaded file list (this method is not supported in the `before-upload` hook) | — |
 | abort | cancel upload request | （ file: fileList's item ） |
