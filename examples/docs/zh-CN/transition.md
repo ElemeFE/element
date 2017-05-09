@@ -142,6 +142,18 @@ Element 内应用在部分组件的过渡动画，你也可以直接使用。在
 ```
 :::
 
+### 按需引入
+
+```js
+// fade/zoom 等
+import 'element-ui/lib/theme-defaut/base.css';
+// collapse 展开折叠
+import CollapseTransition from 'element-ui/lib/transitions/collapse-transition';
+import Vue from 'vue'
+
+Vue.component(CollapseTransition.name, CollapseTransition)
+```
+
 <style>
   .transition-box {
     margin-bottom: 10px;
