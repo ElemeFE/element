@@ -126,7 +126,7 @@
     },
     methods: {
       handleChange(event) {
-        this.$emit('change', event.currentTarget.checked);
+        this.$emit('change', event.currentTarget.checked ? this.onValue : this.offValue);
       },
       setBackgroundColor() {
         let newColor = this.checked ? this.onColor : this.offColor;

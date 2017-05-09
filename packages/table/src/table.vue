@@ -36,7 +36,7 @@
         <span class="el-table__empty-text"><slot name="empty">{{ emptyText || t('el.table.emptyText') }}</slot></span>
       </div>
     </div>
-    <div class="el-table__footer-wrapper" ref="footerWrapper" v-if="showSummary && data && data.length > 0">
+    <div class="el-table__footer-wrapper" ref="footerWrapper" v-if="showSummary" v-show="data && data.length > 0">
       <table-footer
         :store="store"
         :layout="layout"
@@ -76,7 +76,7 @@
           :style="{ width: layout.fixedWidth ? layout.fixedWidth + 'px' : '' }">
         </table-body>
       </div>
-      <div class="el-table__fixed-footer-wrapper" ref="fixedFooterWrapper" v-if="showSummary && data && data.length > 0">
+      <div class="el-table__fixed-footer-wrapper" ref="fixedFooterWrapper" v-if="showSummary" v-show="data && data.length > 0">
         <table-footer
           fixed="left"
           :border="border"
@@ -117,7 +117,7 @@
           :style="{ width: layout.rightFixedWidth ? layout.rightFixedWidth + 'px' : '' }">
         </table-body>
       </div>
-      <div class="el-table__fixed-footer-wrapper" ref="rightFixedFooterWrapper" v-if="showSummary && data && data.length > 0">
+      <div class="el-table__fixed-footer-wrapper" ref="rightFixedFooterWrapper" v-if="showSummary" v-show="data && data.length > 0">
         <table-footer
           fixed="right"
           :border="border"
@@ -252,16 +252,20 @@
           if (refs.rightFixedBodyWrapper) refs.rightFixedBodyWrapper.scrollTop = this.scrollTop;
         });
 
-        if (headerWrapper) {
-          mousewheel(headerWrapper, throttle(16, event => {
-            const deltaX = event.deltaX;
+        const scrollBodyWrapper = event => {
+          const deltaX = event.deltaX;
 
-            if (deltaX > 0) {
-              this.bodyWrapper.scrollLeft += 10;
-            } else {
-              this.bodyWrapper.scrollLeft -= 10;
-            }
-          }));
+          if (deltaX > 0) {
+            this.bodyWrapper.scrollLeft += 10;
+          } else {
+            this.bodyWrapper.scrollLeft -= 10;
+          }
+        };
+        if (headerWrapper) {
+          mousewheel(headerWrapper, throttle(16, scrollBodyWrapper));
+        }
+        if (footerWrapper) {
+          mousewheel(footerWrapper, throttle(16, scrollBodyWrapper));
         }
 
         if (this.fit) {
