@@ -325,8 +325,8 @@ Taking example by Bootstrap's responsive design, four breakpoints are preset: xs
 | offset | number of spacing on the left side of the grid | number | — | 0 |
 | push |  number of columns that grid moves to the right | number | — | 0 |
 | pull |  number of columns that grid moves to the left | number | — | 0 |
-| xs | `<768px` Responsive columns or column props object | number/object (i.g. {span: 4, offset: 4}) | — | — |
-| sm | `≥768px` Responsive columns or column props object | number/object (i.g. {span: 4, offset: 4}) | — | — |
-| md | `≥992` Responsive columns or column props object | number/object (i.g. {span: 4, offset: 4}) | — | — |
-| lg | `≥1200` Responsive columns or column props object | number/object (i.g. {span: 4, offset: 4}) | — | — |
+| xs | `<768px` Responsive columns or column props object | number/object (e.g. {span: 4, offset: 4}) | — | — |
+| sm | `≥768px` Responsive columns or column props object | number/object (e.g. {span: 4, offset: 4}) | — | — |
+| md | `≥992` Responsive columns or column props object | number/object (e.g. {span: 4, offset: 4}) | — | — |
+| lg | `≥1200` Responsive columns or column props object | number/object (e.g. {span: 4, offset: 4}) | — | — |
 
