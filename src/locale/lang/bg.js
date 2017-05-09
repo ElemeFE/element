@@ -62,6 +62,7 @@ export default {
     },
     cascader: {
       noMatch: 'Няма намерени',
+      loading: 'Зареждане',
       placeholder: 'Избери'
     },
     pagination: {

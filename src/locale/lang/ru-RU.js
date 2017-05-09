@@ -62,6 +62,7 @@ export default {
     },
     cascader: {
       noMatch: 'Совпадений не найдено',
+      loading: 'Загрузка',
       placeholder: 'Выбрать'
     },
     pagination: {
