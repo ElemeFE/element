@@ -62,6 +62,7 @@ export default {
     },
     cascader: {
       noMatch: 'Sem resultados',
+      loading: 'Carregando',
       placeholder: 'Selecione'
     },
     pagination: {
