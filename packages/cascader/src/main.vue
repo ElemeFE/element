@@ -139,7 +139,8 @@ export default {
     debounce: {
       type: Number,
       default: 300
-    }
+    },
+    parentSelectable: Boolean
   },
 
   data() {
@@ -208,6 +209,7 @@ export default {
       this.menu.expandTrigger = this.expandTrigger;
       this.menu.changeOnSelect = this.changeOnSelect;
       this.menu.popperClass = this.popperClass;
+      this.menu.parentSelectable = this.parentSelectable;
       this.popperElm = this.menu.$el;
       this.menu.$on('pick', this.handlePick);
       this.menu.$on('activeItemChange', this.handleActiveItemChange);

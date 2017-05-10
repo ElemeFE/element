@@ -12,7 +12,8 @@
         value: [],
         expandTrigger: 'click',
         changeOnSelect: false,
-        popperClass: ''
+        popperClass: '',
+        parentSelectable: false
       };
     },
 
@@ -119,7 +120,11 @@
                 click: 'click',
                 hover: 'mouseenter'
               }[expandTrigger];
+
               events.on[triggerEvent] = () => { this.activeItem(item, menuIndex); };
+              if (this.parentSelectable && expandTrigger === 'hover') {
+                events.on.click = () => { this.select(item, menuIndex); };
+              }
             } else {
               events.on.click = () => { this.select(item, menuIndex); };
             }
