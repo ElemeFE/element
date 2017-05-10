@@ -1656,7 +1656,7 @@ Search and select options with a keyword.
 | value     | specify which key of option object is used as the option's value | string | — | — |
 | children  | specify which key of option object is used as the option's child options | string | — | — |
 | disabled  | specify which key of option object indicates if the option is disabled | string | — | — |
-| before-filter | hook function before filtering with the value to be filtered as its parameter. If `false` or a `Promise` is returned, filtering will be aborted | function(value) | — | — |
+| before-filter | hook function before filtering with the value to be filtered as its parameter. If `false` is returned or a `Promise` is returned and then is rejected, filtering will be aborted | function(value) | — | — |
 
 ### Events
 | Event Name | Description | Parameters |

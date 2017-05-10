@@ -409,7 +409,7 @@
 | on-error | 可选参数, 文件上传失败时的钩子 | function(err, file, fileList) | — | — |
 | on-progress | 可选参数, 文件上传时的钩子 | function(event, file, fileList) | — | — |
 | on-change | 可选参数, 文件状态改变时的钩子，添加文件、上传成功和上传失败时都会被调用 | function(file, fileList) | — | — |
-| before-upload | 可选参数, 上传文件之前的钩子，参数为上传的文件，若返回 false 或者 Promise 则停止上传。 | function(file) | — | — |
+| before-upload | 可选参数, 上传文件之前的钩子，参数为上传的文件，若返回 false 或者返回 Promise 且被 reject，则停止上传。 | function(file) | — | — |
 | list-type | 文件列表的类型 | string | text/picture/picture-card | text |
 | auto-upload | 是否在选取文件后立即进行上传 | boolean | — | true |
 | file-list | 上传的文件列表, 例如: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}] | array | — | [] |

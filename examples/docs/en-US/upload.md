@@ -359,7 +359,7 @@ on-success | hook function when uploaded successfully | function(response, file,
 on-error | hook function when some errors occurs | function(err, file, fileList) | — | —
 on-progress | hook function when some progress occurs | function(event, file, fileList) | — | — |
 on-change | hook function when select file or upload file success or upload file fail | function(file, fileList) | — | — |
-before-upload | hook function before uploading with the file to be uploaded as its parameter. If `false` or a `Promise` is returned, uploading will be aborted | function(file) | — | —
+before-upload | hook function before uploading with the file to be uploaded as its parameter. If `false` is returned or a `Promise` is returned and then is rejected, uploading will be aborted | function(file) | — | —
 thumbnail-mode | whether thumbnail is displayed | boolean | — | false
 file-list | default uploaded files, e.g. [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}] | array | — | []
 list-type | type of fileList | string | text/picture/picture-card | text |
