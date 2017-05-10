@@ -91,7 +91,7 @@
       setNav() {
         let nav = navConfig[this.lang];
         this.nav = nav[0].children.concat(nav[1]);
-        nav[2].groups.map(group => group.list).forEach(list => {
+        nav[3].groups.map(group => group.list).forEach(list => {
           this.nav = this.nav.concat(list);
         });
       },

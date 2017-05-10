@@ -1,5 +1,16 @@
 ## Changelog
 
+### 1.3.2
+
+*2017-05-10*
+
+- Fixed undefined custom component `el-collapse-transition` error when importing some components on demand, #4728
+- Fixed vertical alignment issue of Pagination in FireFox, #4756
+- Fixed dropdown panel view not updating after binding value of DatePicker is programmatically changed when `type` is week, #4739
+- Fixed height calculation errors of Table with summary rows, #4736
+- Added `before-filter` attribute for Cascader, #4774
+- Added `debounce` attribute for InputNumber, #4712（by @pengchongfu）
+
 ### 1.3.1
 
 *2017-05-06*
