@@ -317,6 +317,7 @@ Taking example by Bootstrap's responsive design, four breakpoints are preset: xs
 | type | layout mode, you can use flex, works in modern browsers | string | — | — |
 | justify | horizontal alignment of flex layout | string | start/end/center/space-around/space-between | start |
 | align | vertical alignment of flex layout | string | top/middle/bottom | top |
+| tag | custom element tag | string | * | div |
 
 ### Col Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
@@ -329,4 +330,6 @@ Taking example by Bootstrap's responsive design, four breakpoints are preset: xs
 | sm | `≥768px` Responsive columns or column props object | number/object (e.g. {span: 4, offset: 4}) | — | — |
 | md | `≥992` Responsive columns or column props object | number/object (e.g. {span: 4, offset: 4}) | — | — |
 | lg | `≥1200` Responsive columns or column props object | number/object (e.g. {span: 4, offset: 4}) | — | — |
+| tag | custom element tag | string | * | div |
+
 
