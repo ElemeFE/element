@@ -87,7 +87,7 @@ export default {
       confirmFilter: 'Xác nhận',
       resetFilter: 'Làm mới',
       clearFilter: 'Xóa hết',
-      sumText: 'Tổng' // to be translated
+      sumText: 'Tổng' 
     },
     tree: {
       emptyText: 'Không có dữ liệu'
@@ -95,10 +95,10 @@ export default {
     transfer: {
       noMatch: 'Dữ liệu không phù hợp',
       noData: 'Không tìm thấy dữ liệu',
-      titles: ['Danh sách 1', 'Danh sách 2'], // to be translated
-      filterPlaceholder: 'Nhập từ khóa', // to be translated
-      noCheckedFormat: '{total} mục', // to be translated
-      hasCheckedFormat: '{checked}/{total} đã chọn ' // to be translated
+      titles: ['Danh sách 1', 'Danh sách 2'], 
+      filterPlaceholder: 'Nhập từ khóa', 
+      noCheckedFormat: '{total} mục',
+      hasCheckedFormat: '{checked}/{total} đã chọn ' 
     }
   }
 };
