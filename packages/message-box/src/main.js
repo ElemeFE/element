@@ -29,6 +29,7 @@ const defaults = {
 import Vue from 'vue';
 import msgboxVue from './main.vue';
 import merge from 'element-ui/src/utils/merge';
+import { isVNode } from 'element-ui/src/utils/vdom';
 
 const MessageBoxConstructor = Vue.extend(msgboxVue);
 
@@ -78,7 +79,7 @@ const showNextMsg = () => {
   }
   instance.action = '';
 
-  if (!instance.value || instance.closeTimer) {
+  if (!instance.visible || instance.closeTimer) {
     if (msgQueue.length > 0) {
       currentMsg = msgQueue.shift();
 
@@ -93,10 +94,14 @@ const showNextMsg = () => {
       }
 
       let oldCb = instance.callback;
-      instance.callback = action => {
-        oldCb(action);
+      instance.callback = (action, instance) => {
+        oldCb(action, instance);
         showNextMsg();
       };
+      if (isVNode(instance.message)) {
+        instance.$slots.default = [instance.message];
+        instance.message = null;
+      }
       ['modal', 'showClose', 'closeOnClickModal', 'closeOnPressEscape'].forEach(prop => {
         if (instance[prop] === undefined) {
           instance[prop] = true;
@@ -105,7 +110,7 @@ const showNextMsg = () => {
       document.body.appendChild(instance.$el);
 
       Vue.nextTick(() => {
-        instance.value = true;
+        instance.visible = true;
       });
     }
   }
@@ -194,7 +199,7 @@ MessageBox.prompt = (message, title, options) => {
 };
 
 MessageBox.close = () => {
-  instance.value = false;
+  instance.visible = false;
   msgQueue = [];
   currentMsg = null;
 };

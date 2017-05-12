@@ -201,6 +201,7 @@
   @component picker {
     display: inline-block;
     position: relative;
+    line-height: normal;
 
     @descendent trigger {
       display: inline-block;
@@ -216,7 +217,6 @@
       position: relative;
       display: inline-block;
       box-sizing: border-box;
-      vertical-align: middle;
       border: 1px solid #666;
       width: 22px;
       height: 22px;
@@ -238,14 +238,16 @@
     @descendent empty {
       font-size: 12px;
       vertical-align: middle;
-      margin-top: 4px;
       color: #666;
+      position: absolute;
+      top: 4px;
+      left: 4px;
     }
 
     @descendent icon {
       display: inline-block;
       position: relative;
-      vertical-align: middle;
+      top: -6px;
       margin-left: 8px;
       width: 12px;
       color: #888;

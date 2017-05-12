@@ -62,6 +62,7 @@ export default {
     },
     cascader: {
       noMatch: 'Ingen samsvarende data',
+      loading: 'Laster',
       placeholder: 'Velg'
     },
     pagination: {
@@ -84,10 +85,19 @@ export default {
       emptyText: 'Ingen Data',
       confirmFilter: 'Bekreft',
       resetFilter: 'Tilbakestill',
-      clearFilter: 'Alle'
+      clearFilter: 'Alle',
+      sumText: 'Sum' // to be translated
     },
     tree: {
       emptyText: 'Ingen Data'
+    },
+    transfer: {
+      noMatch: 'Ingen samsvarende data',
+      noData: 'Ingen data',
+      titles: ['List 1', 'List 2'], // to be translated
+      filterPlaceholder: 'Enter keyword', // to be translated
+      noCheckedFormat: '{total} items', // to be translated
+      hasCheckedFormat: '{checked}/{total} checked' // to be translated
     }
   }
 };

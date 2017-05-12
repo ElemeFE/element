@@ -49,6 +49,7 @@ const DEFAULT_FORMATS = {
   month: 'yyyy-MM',
   datetime: 'yyyy-MM-dd HH:mm:ss',
   time: 'HH:mm:ss',
+  week: 'yyyywWW',
   timerange: 'HH:mm:ss',
   daterange: 'yyyy-MM-dd',
   datetimerange: 'yyyy-MM-dd HH:mm:ss',
@@ -105,12 +106,14 @@ const TYPE_VALUE_RESOLVER_MAP = {
     }
   },
   week: {
-    formatter(value) {
-      if (value instanceof Date) {
-        const weekNumber = getWeekNumber(value);
-        return value.getFullYear() + 'w' + (weekNumber > 9 ? weekNumber : '0' + weekNumber);
-      }
-      return value;
+    formatter(value, format) {
+      let date = formatDate(value, format);
+      const week = getWeekNumber(value);
+
+      date = /WW/.test(date)
+            ? date.replace(/WW/, week < 10 ? '0' + week : week)
+            : date.replace(/W/, week);
+      return date;
     },
     parser(text) {
       const array = (text || '').split('w');
@@ -202,6 +205,7 @@ export default {
       default: 'left'
     },
     value: {},
+    defaultValue: {},
     rangeSeparator: {
       default: ' - '
     },
@@ -216,7 +220,8 @@ export default {
     return {
       pickerVisible: false,
       showClose: false,
-      currentValue: ''
+      currentValue: '',
+      unwatchPickerOptions: null
     };
   },
 
@@ -321,6 +326,7 @@ export default {
             this.picker.value = parsedValue;
           }
         } else {
+          this.$emit('input', value);
           this.picker.value = value;
         }
         this.$forceUpdate();
@@ -348,7 +354,7 @@ export default {
     handleClickIcon() {
       if (this.readonly || this.disabled) return;
       if (this.showClose) {
-        this.currentValue = '';
+        this.currentValue = this.$options.defaultValue || '';
         this.showClose = false;
       } else {
         this.pickerVisible = !this.pickerVisible;
@@ -406,58 +412,9 @@ export default {
     showPicker() {
       if (this.$isServer) return;
       if (!this.picker) {
-        this.panel.defaultValue = this.currentValue;
-        this.picker = new Vue(this.panel).$mount(document.createElement('div'));
-        this.picker.popperClass = this.popperClass;
-        this.popperElm = this.picker.$el;
-        this.picker.width = this.reference.getBoundingClientRect().width;
-        this.picker.showTime = this.type === 'datetime' || this.type === 'datetimerange';
-        this.picker.selectionMode = this.selectionMode;
-        if (this.format) {
-          this.picker.format = this.format;
-        }
-
-        const updateOptions = () => {
-          const options = this.pickerOptions;
-
-          if (options && options.selectableRange) {
-            let ranges = options.selectableRange;
-            const parser = TYPE_VALUE_RESOLVER_MAP.datetimerange.parser;
-            const format = DEFAULT_FORMATS.timerange;
-
-            ranges = Array.isArray(ranges) ? ranges : [ranges];
-            this.picker.selectableRange = ranges.map(range => parser(range, format, this.rangeSeparator));
-          }
-
-          for (const option in options) {
-            if (options.hasOwnProperty(option) &&
-                // 忽略 time-picker 的该配置项
-                option !== 'selectableRange') {
-              this.picker[option] = options[option];
-            }
-          }
-        };
-        updateOptions();
-        this.$watch('pickerOptions', () => updateOptions(), { deep: true });
-
-        this.$el.appendChild(this.picker.$el);
-        this.pickerVisible = this.picker.visible = true;
-        this.picker.resetView && this.picker.resetView();
-
-        this.picker.$on('dodestroy', this.doDestroy);
-        this.picker.$on('pick', (date, visible = false) => {
-          this.$emit('input', date);
-          this.pickerVisible = this.picker.visible = visible;
-          this.picker.resetView && this.picker.resetView();
-        });
-
-        this.picker.$on('select-range', (start, end) => {
-          this.refInput.setSelectionRange(start, end);
-          this.refInput.focus();
-        });
-      } else {
-        this.pickerVisible = this.picker.visible = true;
+        this.mountPicker();
       }
+      this.pickerVisible = this.picker.visible = true;
 
       this.updatePopper();
 
@@ -471,6 +428,68 @@ export default {
       this.$nextTick(() => {
         this.picker.ajustScrollTop && this.picker.ajustScrollTop();
       });
+    },
+
+    mountPicker() {
+      this.panel.defaultValue = this.defaultValue || this.currentValue;
+      this.picker = new Vue(this.panel).$mount();
+      this.picker.popperClass = this.popperClass;
+      this.popperElm = this.picker.$el;
+      this.picker.width = this.reference.getBoundingClientRect().width;
+      this.picker.showTime = this.type === 'datetime' || this.type === 'datetimerange';
+      this.picker.selectionMode = this.selectionMode;
+      if (this.format) {
+        this.picker.format = this.format;
+      }
+
+      const updateOptions = () => {
+        const options = this.pickerOptions;
+
+        if (options && options.selectableRange) {
+          let ranges = options.selectableRange;
+          const parser = TYPE_VALUE_RESOLVER_MAP.datetimerange.parser;
+          const format = DEFAULT_FORMATS.timerange;
+
+          ranges = Array.isArray(ranges) ? ranges : [ranges];
+          this.picker.selectableRange = ranges.map(range => parser(range, format, this.rangeSeparator));
+        }
+
+        for (const option in options) {
+          if (options.hasOwnProperty(option) &&
+              // 忽略 time-picker 的该配置项
+              option !== 'selectableRange') {
+            this.picker[option] = options[option];
+          }
+        }
+      };
+      updateOptions();
+      this.unwatchPickerOptions = this.$watch('pickerOptions', () => updateOptions(), { deep: true });
+
+      this.$el.appendChild(this.picker.$el);
+      this.picker.resetView && this.picker.resetView();
+
+      this.picker.$on('dodestroy', this.doDestroy);
+      this.picker.$on('pick', (date = '', visible = false) => {
+        this.$emit('input', date);
+        this.pickerVisible = this.picker.visible = visible;
+        this.picker.resetView && this.picker.resetView();
+      });
+
+      this.picker.$on('select-range', (start, end) => {
+        this.refInput.setSelectionRange(start, end);
+        this.refInput.focus();
+      });
+    },
+
+    unmountPicker() {
+      if (this.picker) {
+        this.picker.$destroy();
+        this.picker.$off();
+        if (typeof this.unwatchPickerOptions === 'function') {
+          this.unwatchPickerOptions();
+        }
+        this.picker.$el.parentNode.removeChild(this.picker.$el);
+      }
     }
   }
 };

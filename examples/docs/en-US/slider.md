@@ -5,12 +5,19 @@
         value1: 0,
         value2: 50,
         value3: 36,
-        value4: 42,
-        value5: 0,
+        value4: 48,
+        value5: 42,
         value6: 0,
         value7: 0,
-        value8: [4, 8]
+        value8: 0,
+        value9: [4, 8],
+        value10: 0
       };
+    },
+    methods: {
+      formatTooltip(val) {
+        return val / 100;
+      }
     }
   }
 </script>
@@ -40,8 +47,12 @@ The current value is displayed when the slider is being dragged.
     <el-slider v-model="value3" :show-tooltip="false"></el-slider>
   </div>
   <div class="block">
+    <span class="demonstration">Format Tooltip</span>
+    <el-slider v-model="value4" :format-tooltip="formatTooltip"></el-slider>
+  </div>
+  <div class="block">
     <span class="demonstration">Disabled</span>
-    <el-slider v-model="value4" disabled></el-slider>
+    <el-slider v-model="value5" disabled></el-slider>
   </div>
 </template>
 
@@ -52,7 +63,13 @@ The current value is displayed when the slider is being dragged.
         value1: 0,
         value2: 50,
         value3: 36,
-        value4: 42
+        value4: 48,
+        value5: 42
+      }
+    },
+    methods: {
+      formatTooltip(val) {
+        return val / 100;
       }
     }
   }
@@ -71,14 +88,14 @@ The options can be discrete.
   <div class="block">
     <span class="demonstration">Breakpoints not displayed</span>
     <el-slider
-      v-model="value5"
+      v-model="value6"
       :step="10">
     </el-slider>
   </div>
   <div class="block">
     <span class="demonstration">Breakpoints displayed</span>
     <el-slider
-      v-model="value6"
+      v-model="value7"
       :step="10"
       show-stops>
     </el-slider>
@@ -89,8 +106,8 @@ The options can be discrete.
   export default {
     data() {
       return {
-        value5: 0,
-        value6: 0
+        value6: 0,
+        value7: 0
       }
     }
   }
@@ -108,7 +125,7 @@ Set value via a input box.
 <template>
   <div class="block">
     <el-slider
-      v-model="value7"
+      v-model="value8"
       show-input>
     </el-slider>
   </div>
@@ -118,7 +135,7 @@ Set value via a input box.
   export default {
     data() {
       return {
-        value7: 0
+        value8: 0
       }
     }
   }
@@ -135,7 +152,7 @@ Selecting a range of values is supported.
 <template>
   <div class="block">
     <el-slider
-      v-model="value8"
+      v-model="value9"
       range
       show-stops
       :max="10">
@@ -147,7 +164,33 @@ Selecting a range of values is supported.
   export default {
     data() {
       return {
-        value8: [4, 8]
+        value9: [4, 8]
+      }
+    }
+  }
+</script>
+```
+:::
+
+### Vertical mode
+
+:::demo Setting the `vertical` attribute to `true` enables vertical mode. In vertical mode, the `height` attribute is required.
+```html
+<template>
+  <div class="block">
+    <el-slider
+      v-model="value10"
+      vertical
+      height="200px">
+    </el-slider>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        value10: 0
       }
     }
   }
@@ -166,7 +209,10 @@ Selecting a range of values is supported.
 | show-input-controls | whether to display control buttons when `show-input` is true | boolean | — | true |
 | show-stops | whether to display breakpoints | boolean | — | false |
 | show-tooltip | whether to display tooltip value | boolean | — | true |
+| format-tooltip | format to display tooltip value | Function(value) | — | — |
 | range | whether to select a range | boolean | — | false |
+| vertical | vertical mode | boolean | — | false |
+| height | Slider height, required in vertical mode | String | — | — |
 
 ## Events
 | Event Name | Description | Parameters |

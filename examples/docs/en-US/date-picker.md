@@ -262,6 +262,7 @@ Picking a date range is supported.
 | popper-class | custom class name for DatePicker's dropdown | string | — | — |
 | picker-options | additional options, check the table below | object | — | {} |
 | range-separator | range separator | string | - | ' - ' |
+| default-value | optional default time of the picker | Date | anything accepted by `new Date()` | - |
 
 ### Picker Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
@@ -269,6 +270,7 @@ Picking a date range is supported.
 | shortcuts | a { text, onClick } object array to set shortcut options, check the table below | object[] | — | — |
 | disabledDate | a function determining if a date is disabled with that date as its parameter. Should return a Boolean | function | — | — |
 | firstDayOfWeek | first day of week | Number | 1 to 7 | 7 |
+| onPick | a callback that triggers when the seleted date is changed. Only for `daterange` and `datetimerange`. | Function({ maxDate, minDate }) | - | - |
 
 ### shortcuts
 | Attribute      | Description          | Type      | Accepted Values       | Default  |

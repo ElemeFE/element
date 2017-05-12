@@ -32,7 +32,8 @@ export default {
       default: function() {}
     },
     drag: Boolean,
-    listType: String
+    listType: String,
+    disabled: Boolean
   },
 
   data() {
@@ -40,7 +41,7 @@ export default {
       mouseover: false,
       domain: '',
       file: null,
-      disabled: false
+      submitting: false
     };
   },
 
@@ -49,7 +50,9 @@ export default {
       return str.indexOf('image') !== -1;
     },
     handleClick() {
-      this.$refs.input.click();
+      if (!this.disabled) {
+        this.$refs.input.click();
+      }
     },
     handleChange(ev) {
       const file = ev.target.value;
@@ -58,8 +61,8 @@ export default {
       }
     },
     uploadFiles(file) {
-      if (this.disabled) return;
-      this.disabled = true;
+      if (this.submitting) return;
+      this.submitting = true;
       this.file = file;
       this.onStart(file);
 
@@ -103,7 +106,7 @@ export default {
       } else if (response.result === 'failed') {
         self.onError(response, self.file);
       }
-      self.disabled = false;
+      self.submitting = false;
       self.file = null;
     }, false);
   },
@@ -113,7 +116,8 @@ export default {
       drag,
       uploadFiles,
       listType,
-      frameName
+      frameName,
+      disabled
     } = this;
     const oClass = { 'el-upload': true };
     oClass[`el-upload--${listType}`] = true;
@@ -146,7 +150,7 @@ export default {
         </form>
         {
           drag
-          ? <upload-dragger on-file={uploadFiles}>{this.$slots.default}</upload-dragger>
+          ? <upload-dragger on-file={uploadFiles} disabled={disabled}>{this.$slots.default}</upload-dragger>
           : this.$slots.default
         }
       </div>

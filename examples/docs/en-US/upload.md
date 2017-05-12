@@ -55,7 +55,7 @@
       submitUpload() {
         this.$refs.upload.submit();
       },
-      handleAvatarScucess(res, file) {
+      handleAvatarSuccess(res, file) {
         this.imageUrl = URL.createObjectURL(file.raw);
       },
       beforeAvatarUpload(file) {
@@ -123,7 +123,7 @@ Use `before-upload` hook to limit the upload file format and size.
   class="avatar-uploader"
   action="https://jsonplaceholder.typicode.com/posts/"
   :show-file-list="false"
-  :on-success="handleAvatarScucess"
+  :on-success="handleAvatarSuccess"
   :before-upload="beforeAvatarUpload">
   <img v-if="imageUrl" :src="imageUrl" class="avatar">
   <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -163,7 +163,7 @@ Use `before-upload` hook to limit the upload file format and size.
       };
     },
     methods: {
-      handleAvatarScucess(res, file) {
+      handleAvatarSuccess(res, file) {
         this.imageUrl = URL.createObjectURL(file.raw);
       },
       beforeAvatarUpload(file) {
@@ -308,7 +308,7 @@ You can drag your file to a certain area to upload it.
   :on-preview="handlePreview"
   :on-remove="handleRemove"
   :file-list="fileList"
-  mutiple>
+  multiple>
   <i class="el-icon-upload"></i>
   <div class="el-upload__text">Drop file here or <em>click to upload</em></div>
   <div class="el-upload__tip" slot="tip">jpg/png files with a size less than 500kb</div>
@@ -358,15 +358,17 @@ on-remove | hook function when files are removed | function(file, fileList) | �
 on-success | hook function when uploaded successfully | function(response, file, fileList) | — | —
 on-error | hook function when some errors occurs | function(err, file, fileList) | — | —
 on-progress | hook function when some progress occurs | function(event, file, fileList) | — | — |
-on-change | hook function when file status change | function(file, fileList) | — | — |
-before-upload | hook function before uploading with the file to be uploaded as its parameter. If `false` or a `Promise` is returned, uploading will be aborted | function(file) | — | —
+on-change | hook function when select file or upload file success or upload file fail | function(file, fileList) | — | — |
+before-upload | hook function before uploading with the file to be uploaded as its parameter. If `false` is returned or a `Promise` is returned and then is rejected, uploading will be aborted | function(file) | — | —
 thumbnail-mode | whether thumbnail is displayed | boolean | — | false
-file-list | default uploaded files, i.e: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}] | array | — | []
+file-list | default uploaded files, e.g. [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}] | array | — | []
 list-type | type of fileList | string | text/picture/picture-card | text |
 auto-upload | whether to auto upload file | boolean | — | true |
 http-request | override default xhr behavior, allowing you to implement your own upload-file's request | function | — | — |
+disabled | whether to disable upload | boolean | — | false |
 
-### Events
-| Event Name | Description | Parameters |
+### Methods
+| Methods Name | Description | Parameters |
 |---------- |-------- |---------- |
-| clearFiles | clear the uploaded file list | — |
+| clearFiles | clear the uploaded file list (this method is not supported in the `before-upload` hook) | — |
+| abort | cancel upload request | （ file: fileList's item ） |

@@ -139,6 +139,10 @@ export default {
     debounce: {
       type: Number,
       default: 300
+    },
+    beforeFilter: {
+      type: Function,
+      default: null
     }
   },
 
@@ -319,6 +323,7 @@ export default {
       if (this.disabled) return;
       if (this.filterable) {
         this.menuVisible = true;
+        this.$refs.input.$refs.input.focus();
         return;
       }
       this.menuVisible = !this.menuVisible;
@@ -327,7 +332,26 @@ export default {
 
   created() {
     this.debouncedInputChange = debounce(this.debounce, value => {
-      this.handleInputChange(value);
+      const before = this.beforeFilter(value);
+
+      if (before && before.then) {
+        this.menu.options = [{
+          __IS__FLAT__OPTIONS: true,
+          label: this.t('el.cascader.loading'),
+          value: '',
+          disabled: true
+        }];
+        before
+          .then(() => {
+            this.$nextTick(() => {
+              this.handleInputChange(value);
+            });
+          });
+      } else if (before !== false) {
+        this.$nextTick(() => {
+          this.handleInputChange(value);
+        });
+      }
     });
   },
 

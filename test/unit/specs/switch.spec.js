@@ -120,4 +120,32 @@ describe('Switch', () => {
       done();
     });
   });
+
+  it('expand switch value', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-switch v-model="value" :on-value="onValue" :off-value="offValue"></el-switch>
+        </div>
+      `,
+      data() {
+        return {
+          value: '100',
+          onValue: '100',
+          offValue: '0'
+        };
+      }
+    }, true);
+
+    const core = vm.$el.querySelector('.el-switch__core');
+    core.click();
+    setTimeout(() => {
+      expect(vm.value).to.equal('0');
+      core.click();
+      setTimeout(() => {
+        expect(vm.value).to.equal('100');
+        done();
+      }, 10);
+    }, 10);
+  });
 });

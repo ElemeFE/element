@@ -27,7 +27,7 @@
       </span>
       <node-content :node="node"></node-content>
     </div>
-    <collapse-transition>
+    <el-collapse-transition>
       <div
         class="el-tree-node__children"
         v-show="expanded">
@@ -39,12 +39,12 @@
           @node-expand="handleChildNodeExpand">
         </el-tree-node>
       </div>
-    </collapse-transition>
+    </el-collapse-transition>
   </div>
 </template>
 
 <script type="text/jsx">
-  import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
+  import ElCollapseTransition from 'element-ui/src/transitions/collapse-transition';
   import ElCheckbox from 'element-ui/packages/checkbox';
   import emitter from 'element-ui/src/mixins/emitter';
 
@@ -66,8 +66,8 @@
     },
 
     components: {
+      ElCollapseTransition,
       ElCheckbox,
-      CollapseTransition,
       NodeContent: {
         props: {
           node: {

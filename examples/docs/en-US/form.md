@@ -765,3 +765,10 @@ Form component allows you to verify your data, helping you find and correct erro
 | rules | validation rules of form | object | — | — |
 | error | field error message, set its value and the field will validate error and show this message immediately | string | — | — |
 | show-message  | whether to show the error message | boolean | — | true |
+
+
+### Form-Item Slot
+| name | Description |
+|------|--------|
+| — | content of Form Item |
+| label | content of label |

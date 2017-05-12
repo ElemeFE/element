@@ -20,15 +20,15 @@
         <ul class="el-menu" v-show="opened"><slot></slot></ul>
       </transition>
     </template>
-    <collapse-transition v-else>
+    <el-collapse-transition v-else>
       <ul class="el-menu" v-show="opened"><slot></slot></ul>
-    </collapse-transition>
+    </el-collapse-transition>
   </li>
 </template>
 <script>
+  import ElCollapseTransition from 'element-ui/src/transitions/collapse-transition';
   import menuMixin from './menu-mixin';
   import Emitter from 'element-ui/src/mixins/emitter';
-  import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
   export default {
     name: 'ElSubmenu',
@@ -37,9 +37,7 @@
 
     mixins: [menuMixin, Emitter],
 
-    components: {
-      CollapseTransition
-    },
+    components: { ElCollapseTransition },
 
     props: {
       index: {

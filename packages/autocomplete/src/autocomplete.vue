@@ -9,6 +9,9 @@
       :size="size"
       :icon="icon"
       :on-icon-click="onIconClick"
+      @compositionstart.native="handleComposition"
+      @compositionupdate.native="handleComposition"
+      @compositionend.native="handleComposition"
       @change="handleChange"
       @focus="handleFocus"
       @blur="handleBlur"
@@ -71,6 +74,7 @@
     data() {
       return {
         isFocus: false,
+        isOnComposition: false,
         suggestions: [],
         loading: false,
         highlightedIndex: -1
@@ -100,9 +104,17 @@
           }
         });
       },
+      handleComposition(event) {
+        if (event.type === 'compositionend') {
+          this.isOnComposition = false;
+          this.handleChange(this.value);
+        } else {
+          this.isOnComposition = true;
+        }
+      },
       handleChange(value) {
         this.$emit('input', value);
-        if (!this.triggerOnFocus && !value) {
+        if (this.isOnComposition || (!this.triggerOnFocus && !value)) {
           this.suggestions = [];
           return;
         }

@@ -113,13 +113,13 @@
 
       & .el-progress {
         position: absolute;
-        bottom: -3px;
+        top: 20px;
         width: 100%;
       }
       & .el-progress__text {
         position: absolute;
         right: 0;
-        top: -10px;
+        top: -13px;
         right: 0;
       }
       .el-progress-bar {
@@ -129,30 +129,43 @@
       &:first-child {
         margin-top: 10px;
       }
+      & .el-icon-upload-success {
+        color: var(--color-success);
+      }
+      & .el-icon-close {
+        display: none;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        cursor: pointer;
+        opacity: .75;
+        color: var(--color-extra-light-black);
+        transform: scale(.7);
+
+        &:hover {
+          opacity: 1;
+        }
+      }
       &:hover {
         background-color: var(--color-extra-light-gray);
+
+        .el-icon-close {
+          display: inline-block;
+        }
+        .el-progress__text {
+          display: none;
+        }
       }
       @when success {
+        .el-upload-list__item-status-label {
+          display: block;
+        }
         .el-upload-list__item-name:hover {
           color: var(--link-hover-color);
           cursor: pointer;
         }
-        .el-icon-close {
-          display: none;
-        }
         &:hover {
-          .el-icon-close {
-            display: inline-block;
-            cursor: pointer;
-            opacity: .75;
-            transform: scale(.7);
-            color: var(--color-extra-light-black);
-            &:hover {
-              opacity: 1;
-            }
-          }
-          .el-icon-circle-check,
-          .el-icon-check {
+          .el-upload-list__item-status-label {
             display: none;
           }
         }
@@ -177,10 +190,10 @@
     }
     @e item-status-label {
       position: absolute;
-      right: 10px;
+      right: 5px;
       top: 0;
       line-height: inherit;
-      color: var(--color-success);
+      display: none;
     }
     @e item-delete {
       position: absolute;
@@ -210,8 +223,22 @@
         margin: 0 8px 8px 0;
         display: inline-block;
 
-        &:hover .el-upload-list__item-status-label {
+        & .el-icon-check,
+        & .el-icon-circle-check {
+          color: var(--color-white);
+        }
+
+        & .el-icon-close {
           display: none;
+        }
+
+        &:hover {
+          .el-upload-list__item-status-label {
+            display: none;
+          }
+          .el-progress__text {
+            display: block;
+          }
         }
       }
       .el-upload-list__item-name {
@@ -236,7 +263,6 @@
           font-size: 12px;
           margin-top: 11px;
           transform: rotate(-45deg) scale(0.8);
-          color: #fff;
         }
       }
       .el-upload-list__item-actions {
@@ -297,17 +323,20 @@
         margin-top: 10px;
         padding: 10px 10px 10px 90px;
         height: 92px;
-
+        
+        & .el-icon-check,
+        & .el-icon-circle-check {
+          color: var(--color-white);
+        }
         &:hover {
           .el-upload-list__item-status-label {
             background: transparent;
             box-shadow: none;
             top: -2px;
             right: -12px;
-
-            .el-icon-close {
-              transform: rotate(45deg) scale(.7);
-            }
+          }
+          .el-progress__text {
+            display: block;
           }
         }
         &.is-success {
@@ -327,6 +356,8 @@
         width: 70px;
         height: 70px;
         float: left;
+        position: relative;
+        z-index: 1;
         margin-left: -80px;
       }
       .el-upload-list__item-name {
@@ -356,11 +387,11 @@
           font-size: 12px;
           margin-top: 12px;
           transform: rotate(-45deg) scale(0.8);
-          color: #fff;
         }
       }
       .el-progress {
-        position: static;
+        position: relative;
+        top: -7px;
       }
     }
   }

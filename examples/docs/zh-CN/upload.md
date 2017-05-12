@@ -95,7 +95,7 @@
       submitUpload() {
         this.$refs.upload.submit();
       },
-      handleAvatarScucess(res, file) {
+      handleAvatarSuccess(res, file) {
         this.imageUrl = URL.createObjectURL(file.raw);
       },
       beforeAvatarUpload(file) {
@@ -164,7 +164,7 @@
   class="avatar-uploader"
   action="https://jsonplaceholder.typicode.com/posts/"
   :show-file-list="false"
-  :on-success="handleAvatarScucess"
+  :on-success="handleAvatarSuccess"
   :before-upload="beforeAvatarUpload">
   <img v-if="imageUrl" :src="imageUrl" class="avatar">
   <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -204,7 +204,7 @@
       };
     },
     methods: {
-      handleAvatarScucess(res, file) {
+      handleAvatarSuccess(res, file) {
         this.imageUrl = URL.createObjectURL(file.raw);
       },
       beforeAvatarUpload(file) {
@@ -344,7 +344,7 @@
   class="upload-demo"
   drag
   action="https://jsonplaceholder.typicode.com/posts/"
-  mutiple>
+  multiple>
   <i class="el-icon-upload"></i>
   <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
   <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
@@ -408,14 +408,16 @@
 | on-success | 可选参数, 文件上传成功时的钩子 | function(response, file, fileList) | — | — |
 | on-error | 可选参数, 文件上传失败时的钩子 | function(err, file, fileList) | — | — |
 | on-progress | 可选参数, 文件上传时的钩子 | function(event, file, fileList) | — | — |
-| on-change | 可选参数, 文件状态改变时的钩子，上传成功或者失败时都会被调用 | function(file, fileList) | — | — |
-| before-upload | 可选参数, 上传文件之前的钩子，参数为上传的文件，若返回 false 或者 Promise 则停止上传。 | function(file) | — | — |
+| on-change | 可选参数, 文件状态改变时的钩子，添加文件、上传成功和上传失败时都会被调用 | function(file, fileList) | — | — |
+| before-upload | 可选参数, 上传文件之前的钩子，参数为上传的文件，若返回 false 或者返回 Promise 且被 reject，则停止上传。 | function(file) | — | — |
 | list-type | 文件列表的类型 | string | text/picture/picture-card | text |
 | auto-upload | 是否在选取文件后立即进行上传 | boolean | — | true |
 | file-list | 上传的文件列表, 例如: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}] | array | — | [] |
 | http-request | 覆盖默认的上传行为，可以自定义上传的实现 | function | — | — |
+| disabled | 是否禁用 | boolean | — | false |
 
 ### Methods
 | 方法名      | 说明          | 参数 |
 |---------- |-------------- | -- |
-| clearFiles | 清空已上传的文件列表 | — |
+| clearFiles | 清空已上传的文件列表（该方法不支持在 before-upload 中调用） | — |
+| abort | 取消上传请求 | （ file: fileList 中的 file 对象 ） |

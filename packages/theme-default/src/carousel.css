@@ -70,6 +70,23 @@
           opacity: 0.24;
         }
       }
+      
+      @modifier labels {
+        left: 0;
+        right: 0;
+        transform: none;
+        text-align: center;
+        
+        .el-carousel__button {
+          size: auto auto;
+          padding: 2px 18px;
+          font-size: 12px;
+        }
+
+        .el-carousel__indicator {
+          padding: 6px 4px;
+        }
+      }
     }
 
     @e indicator {

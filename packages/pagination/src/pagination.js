@@ -77,7 +77,7 @@ export default {
     });
 
     if (haveRightWrapper) {
-      template.children.push(rightWrapper);
+      template.children.unshift(rightWrapper);
     }
 
     return template;
@@ -205,7 +205,7 @@ export default {
               type="number"
               min={ 1 }
               max={ this.internalPageCount }
-              domProps-value={ this.$parent.internalCurrentPage }
+              value={ this.$parent.internalCurrentPage }
               on-change={ this.handleChange }
               on-focus={ this.handleFocus }
               style={{ width: '30px' }}
@@ -312,10 +312,12 @@ export default {
         this.$nextTick(() => {
           this.internalCurrentPage = newVal;
           if (oldVal !== newVal) {
+            this.$emit('update:currentPage', newVal);
             this.$emit('current-change', this.internalCurrentPage);
           }
         });
       } else {
+        this.$emit('update:currentPage', newVal);
         this.$emit('current-change', this.internalCurrentPage);
       }
     },
