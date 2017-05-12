@@ -87,7 +87,7 @@ export default {
       confirmFilter: 'Xác nhận',
       resetFilter: 'Làm mới',
       clearFilter: 'Xóa hết',
-      sumText: 'Tổng' 
+      sumText: 'Tổng'
     },
     tree: {
       emptyText: 'Không có dữ liệu'
@@ -95,10 +95,10 @@ export default {
     transfer: {
       noMatch: 'Dữ liệu không phù hợp',
       noData: 'Không tìm thấy dữ liệu',
-      titles: ['Danh sách 1', 'Danh sách 2'], 
-      filterPlaceholder: 'Nhập từ khóa', 
+      titles: ['Danh sách 1', 'Danh sách 2'],
+      filterPlaceholder: 'Nhập từ khóa',
       noCheckedFormat: '{total} mục',
-      hasCheckedFormat: '{checked}/{total} đã chọn ' 
+      hasCheckedFormat: '{checked}/{total} đã chọn '
     }
   }
 };
