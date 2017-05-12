@@ -176,7 +176,7 @@ Clicking each dropdown item fires an event whose parameter is assigned by each i
 |---------- |-------- |---------- |
 | click | if `split-button` is `true`, triggers when left button is clicked | — |
 | command | triggers when a dropdown item is clicked | the command dispatched from the dropdown item |
-| visible-change  | triggers when the dropdown appears/disappears | true when it appears, and false otherwise |
+| visible-change | triggers when the dropdown appears/disappears | true when it appears, and false otherwise |
 
 ### Dropdown Menu Item Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
