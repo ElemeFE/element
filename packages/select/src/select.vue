@@ -191,7 +191,8 @@
         default() {
           return t('el.select.placeholder');
         }
-      }
+      },
+      defaultFirstOption: Boolean
     },
 
     data() {
@@ -263,6 +264,25 @@
           this.filteredOptionsCount = this.optionsCount;
           this.broadcast('ElOption', 'queryChange', val);
           this.broadcast('ElOptionGroup', 'queryChange');
+        }
+        if (this.defaultFirstOption && (this.filterable || this.remote) && this.filteredOptionsCount) {
+          this.hoverIndex = -1;
+          for (let i = 0; i !== this.options.length; ++i) {
+            const option = this.options[i];
+            if (val) {
+              // pick first options that passes the filter
+              if (!option.disabled && !option.groupDisabled && option.visible) {
+                this.hoverIndex = i;
+                break;
+              }
+            } else {
+              // pick currently selected option
+              if (option.itemSelected) {
+                this.hoverIndex = i;
+                break;
+              }
+            }
+          }
         }
       },
 
