@@ -216,7 +216,7 @@
 |---------- |-------- |---------- |
 | click  | `split-button` 为 true 时，点击左侧按钮的回调 | — |
 | command  | 点击菜单项触发的事件回调 | dropdown-item 的指令 |
-| change  | 触发下拉行为时，显示状态发生变化的回调函数 | 状态 (true: 显示，false: 隐藏) |
+| visible-change  | 下拉框出现/隐藏时触发 | 出现则为 true，隐藏则为 false |
 
 ### Dropdown Menu Item Attributes
 | 参数          | 说明            | 类型            | 可选值                 | 默认值   |
