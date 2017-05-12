@@ -62,6 +62,7 @@ export default {
     },
     cascader: {
       noMatch: 'No matching data',
+      loading: 'Loading',
       placeholder: 'Select'
     },
     pagination: {

@@ -40,6 +40,7 @@
 
     .el-tooltip.cell {
       white-space: nowrap;
+      min-width: 50px;
     }
 
     @e empty-block {

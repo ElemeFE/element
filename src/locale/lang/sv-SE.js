@@ -62,6 +62,7 @@ export default {
     },
     cascader: {
       noMatch: 'Hittade inget',
+      loading: 'Laddar',
       placeholder: 'Välj'
     },
     pagination: {

@@ -26,6 +26,7 @@
   </li>
 </template>
 <script>
+  import ElCollapseTransition from 'element-ui/src/transitions/collapse-transition';
   import menuMixin from './menu-mixin';
   import Emitter from 'element-ui/src/mixins/emitter';
 
@@ -35,6 +36,8 @@
     componentName: 'ElSubmenu',
 
     mixins: [menuMixin, Emitter],
+
+    components: { ElCollapseTransition },
 
     props: {
       index: {

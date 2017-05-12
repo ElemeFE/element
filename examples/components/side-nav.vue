@@ -126,9 +126,10 @@
     </el-dropdown>
     <ul>
       <li class="nav-item" v-for="item in data">
-        <a v-if="!item.path" @click="expandMenu">{{item.name}}</a>
+        <a v-if="!item.path && !item.href" @click="expandMenu">{{item.name}}</a>
+        <a v-if="item.href" :href="item.href" target="_blank">{{item.name}}</a>
         <router-link
-          v-else
+          v-if="item.path"
           active-class="active"
           :to="base + item.path"
           exact
