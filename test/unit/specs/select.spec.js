@@ -404,6 +404,22 @@ describe('Select', () => {
     }, 10);
   });
 
+  it('filterable, select first on enter', done => {
+    vm = getSelectVm({ filterable: true });
+    const select = vm.$children[0];
+    const input = select.$el.querySelector('input');
+    input.focus();
+    setTimeout(() => {
+      // assume selectOption is called on keydown
+      // simplify keydown.enter event generation
+      select.selectOption();
+      setTimeout(() => {
+        expect(select.value).to.equal(select.options[0].value);
+        done();
+      }, 10);
+    }, 10);
+  });
+
   it('allow create', done => {
     vm = getSelectVm({ filterable: true, allowCreate: true });
     const select = vm.$children[0];

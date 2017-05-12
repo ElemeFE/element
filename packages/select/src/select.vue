@@ -586,6 +586,9 @@
       },
 
       selectOption() {
+        if (this.hoverIndex === -1 && this.filterable) {
+          this.hoverIndex = 0;
+        }
         if (this.options[this.hoverIndex]) {
           this.handleOptionSelect(this.options[this.hoverIndex]);
         }
