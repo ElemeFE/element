@@ -37,8 +37,8 @@ export default {
     return h(this.tag, {
       class: [
         'el-row',
-        justify !== 'start' ? `is-justify-${this.justify}` : '',
-        align !== 'top' ? `is-align-${this.align}` : '',
+        this.justify !== 'start' ? `is-justify-${this.justify}` : '',
+        this.align !== 'top' ? `is-align-${this.align}` : '',
         { 'el-row--flex': this.type === 'flex' }
       ],
       style: this.style
