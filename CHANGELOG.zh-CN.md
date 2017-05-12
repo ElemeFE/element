@@ -1,5 +1,15 @@
 ## 更新日志
 
+### 1.3.2
+*2017-05-10*
+
+- 修复在按需引入某些组件时，报 `el-collapse-transition` 未找到的错，#4728
+- 修复 Pagination 在 FireFox 中的垂直居中问题，#4756
+- 修复 `type` 为 week 时的 DatePicker 在更新绑定值后面板视图不更新的问题，#4739
+- 修复 `show-summary` 的 Table 的一些高度计算错误，#4736
+- 新增 Cascader 的 `before-filter` 属性，#4774
+- 新增 InputNumber 的 `debounce` 属性，#4712（by @pengchongfu）
+
 ### 1.3.1
 *2017-05-06*
 
