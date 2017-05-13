@@ -86,7 +86,7 @@ export default {
       confirmFilter: 'Confirmar',
       resetFilter: 'Netejar',
       clearFilter: 'Tot',
-      sumText: 'Sum' // to be translated
+      sumText: 'Tot'
     },
     tree: {
       emptyText: 'Sense Dades'
