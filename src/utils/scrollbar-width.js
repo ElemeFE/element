@@ -7,22 +7,19 @@ export default function() {
   if (scrollBarWidth !== undefined) return scrollBarWidth;
 
   const outer = document.createElement('div');
+  const styles = {
+    width: '100px',
+    height: '100px',
+    overflowY: 'scroll',
+    visibility: 'hidden',
+    position: 'absolute',
+    top: '-9999px'
+  };
   outer.className = 'el-scrollbar__wrap';
-  outer.style.visibility = 'hidden';
-  outer.style.width = '100px';
-  outer.style.position = 'absolute';
-  outer.style.top = '-9999px';
+  let i = '';
+  for (i in styles) outer.style[i] = styles[i];
   document.body.appendChild(outer);
-
-  const widthNoScroll = outer.offsetWidth;
-  outer.style.overflow = 'scroll';
-
-  const inner = document.createElement('div');
-  inner.style.width = '100%';
-  outer.appendChild(inner);
-
-  const widthWithScroll = inner.offsetWidth;
+  const scrollbarWidth = outer.offsetWidth - outer.clientWidth;
   outer.parentNode.removeChild(outer);
-
-  return widthNoScroll - widthWithScroll;
+  return scrollbarWidth;
 };
