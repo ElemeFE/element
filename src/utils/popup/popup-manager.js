@@ -156,8 +156,9 @@ const PopupManager = {
       if (!topItem) return;
       const instance = PopupManager.getInstance(topItem.id);
       if (instance.closeOnPressEscape) {
-        instance.$emit('update:visible', false);
-        (instance.handleClose) ? instance.handleClose() : (instance.handleAction ? instance.handleAction('cancel') : instance.close());
+        instance.handleClose
+          ? instance.handleClose()
+          : (instance.handleAction ? instance.handleAction('cancel') : instance.close());
       }
     }
   }
