@@ -62,7 +62,9 @@ const PopupManager = {
 
     const instance = PopupManager.getInstance(topItem.id);
     if (instance && instance.closeOnClickModal) {
-      instance.close();
+      instance.handleClose
+        ? instance.handleClose()
+        : (instance.handleAction ? instance.handleAction('cancel') : instance.close());
     }
   },
 
