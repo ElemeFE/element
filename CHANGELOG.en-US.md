@@ -1,5 +1,18 @@
 ## Changelog
 
+### 1.3.3
+
+*2017-05-14*
+
+- Added `visible-change` event for Dropdown, #4818 (by @luciy)
+- Added `tag` attribute for Col and Row, #4799
+- Fixed Cascader search functionality regression, #4812
+- Fixed DatePicker triggering watch when `type` is range, #4837 (by @wacky6)
+- Fixed numbers in TimePicker not align vertically, #4847 (by @pengchongfu)
+- Fixed Dialog not triggering `before-close` hook when ESC is pressed, #4819 (by @patriciussanctus)
+- Fixed multiple MessageBox not rendering content correctly when some of the `message` is a VNode
+- Fixed Checkbox not focused when navigating with tab
+
 ### 1.3.2
 
 *2017-05-10*
