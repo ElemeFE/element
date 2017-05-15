@@ -421,6 +421,10 @@
 
       handleFocus() {
         this.visible = true;
+
+        if (!this.filterable && this.$refs.reference.$el) {
+          this.$refs.reference.$el.blur();
+        }
       },
 
       handleIconClick(event) {
