@@ -4,18 +4,18 @@
       <i class="el-collapse-item__header__arrow el-icon-arrow-right"></i>
       <slot name="title">{{title}}</slot>
     </div>
-    <collapse-transition>
+    <el-collapse-transition>
       <div class="el-collapse-item__wrap" v-show="isActive">
         <div class="el-collapse-item__content">
           <slot></slot>
         </div>
       </div>
-    </collapse-transition>
+    </el-collapse-transition>
   </div>
 </template>
 <script>
+  import ElCollapseTransition from 'element-ui/src/transitions/collapse-transition';
   import Emitter from 'element-ui/src/mixins/emitter';
-  import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
   export default {
     name: 'ElCollapseItem',
@@ -24,9 +24,7 @@
 
     mixins: [Emitter],
 
-    components: {
-      CollapseTransition
-    },
+    components: { ElCollapseTransition },
 
     data() {
       return {

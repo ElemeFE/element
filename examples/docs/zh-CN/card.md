@@ -61,7 +61,7 @@
     <span style="line-height: 36px;">卡片名称</span>
     <el-button style="float: right;" type="primary">操作按钮</el-button>
   </div>
-  <div v-for="o in 4" class="text item">
+  <div v-for="o in 4" :key="o" class="text item">
     {{'列表内容 ' + o }}
   </div>
 </el-card>
@@ -98,7 +98,7 @@
 :::demo
 ```html
 <el-card class="box-card">
-  <div v-for="o in 4" class="text item">
+  <div v-for="o in 4" :key="o" class="text item">
     {{'列表内容 ' + o }}
   </div>
 </el-card>
@@ -126,7 +126,7 @@
 :::demo 配置`body-style`属性来自定义`body`部分的`style`，我们还使用了布局组件。
 ```html
 <el-row>
-  <el-col :span="8" v-for="(o, index) in 2" :offset="index > 0 ? 2 : 0">
+  <el-col :span="8" v-for="(o, index) in 2" :key="o" :offset="index > 0 ? 2 : 0">
     <el-card :body-style="{ padding: '0px' }">
       <img src="~examples/assets/images/hamburger.png" class="image">
       <div style="padding: 14px;">

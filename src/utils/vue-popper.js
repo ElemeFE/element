@@ -36,7 +36,7 @@ export default {
       type: Boolean,
       default: true
     },
-    options: {
+    popperOptions: {
       type: Object,
       default() {
         return {
@@ -76,7 +76,7 @@ export default {
         return;
       }
 
-      const options = this.options;
+      const options = this.popperOptions;
       const popper = this.popperElm = this.popperElm || this.popper || this.$refs.popper;
       let reference = this.referenceElm = this.referenceElm || this.reference || this.$refs.reference;
 
@@ -85,6 +85,7 @@ export default {
         this.$slots.reference[0]) {
         reference = this.referenceElm = this.$slots.reference[0].elm;
       }
+
       if (!popper || !reference) return;
       if (this.visibleArrow) this.appendArrow(popper);
       if (this.appendToBody) document.body.appendChild(this.popperElm);
@@ -100,6 +101,9 @@ export default {
         this.resetTransformOrigin();
         this.$nextTick(this.updatePopper);
       });
+      if (typeof options.onUpdate === 'function') {
+        this.popperJS.onUpdate(options.onUpdate);
+      }
       this.popperJS._popper.style.zIndex = PopupManager.nextZIndex();
       this.popperElm.addEventListener('click', stop);
     },

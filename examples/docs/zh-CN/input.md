@@ -1,5 +1,5 @@
 <script>
-  var Vue = require('vue');
+  import Vue from 'vue';
   Vue.component('my-item-zh', {
     functional: true,
     render: function (h, ctx) {
@@ -161,7 +161,7 @@
       }
     }
   }
-  .el-autocomplete__suggestions.my-autocomplete {
+  .el-autocomplete-suggestion.my-autocomplete {
     li {
       line-height: normal;
       padding: 7px *;
@@ -174,7 +174,6 @@
         font-size: 12px;
         color: #b4b4b4;
       }
-
       .highlighted .addr {
         color: #ddd;
       }
@@ -529,6 +528,8 @@ export default {
   custom-item="my-item-zh"
   placeholder="请输入内容"
   @select="handleSelect"
+  icon="edit"
+  :on-icon-click="handleIconClick"
 ></el-autocomplete>
 
 <style>
@@ -640,6 +641,9 @@ export default {
       },
       handleSelect(item) {
         console.log(item);
+      },
+      handleIconClick(ev) {
+        console.log(ev);
       }
     },
     mounted() {
@@ -766,8 +770,10 @@ export default {
 | autosize      | 自适应内容高度，只对 `type="textarea"` 有效，可传入对象，如，{ minRows: 2, maxRows: 6 }  |  boolean/object | — |  false   |
 | auto-complete | 原生属性，自动补全 | string | on, off | off |
 | name | 原生属性 | string | — | — |
-| max | 原生属性，设置最大值 | * | — | — |
-| min | 原生属性，设置最小值 | * | — | — |
+| readonly | 原生属性，是否只读 | boolean | — | false |
+| max | 原生属性，设置最大值 | — | — | — |
+| min | 原生属性，设置最小值 | — | — | — |
+| step | 原生属性，设置输入字段的合法数字间隔 | — | — | — |
 | resize | 控制是否能被用户缩放 | string | none, both, horizontal, vertical | — |
 | autofocus | 原生属性，自动获取焦点 | boolean | true, false | false |
 | form | 原生属性 | string | — | — |
@@ -792,6 +798,8 @@ export default {
 | fetch-suggestions | 返回输入建议的方法，仅当你的输入建议数据 resolve 时，通过调用 callback(data:[]) 来返回它  | Function(queryString, callback)  | — | — |
 | popper-class | Autocomplete 下拉列表的类名 | string | — | — |
 | trigger-on-focus | 是否在输入框 focus 时显示建议列表 | boolean | — | true |
+| on-icon-click | 点击图标的回调函数 | function | — | — |
+| icon          | 输入框尾部图标    | string          | — | — |
 
 ### Autocomplete Events
 | 事件名称 | 说明 | 回调参数 |

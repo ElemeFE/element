@@ -1,5 +1,9 @@
 export default {
   el: {
+    colorpicker: {
+      confirm: 'OK',
+      clear: 'Wyczyść'
+    },
     datepicker: {
       now: 'Teraz',
       today: 'Dzisiaj',
@@ -56,6 +60,11 @@ export default {
       noData: 'Brak danych',
       placeholder: 'Wybierz'
     },
+    cascader: {
+      noMatch: 'Brak dopasowań',
+      loading: 'Ładowanie',
+      placeholder: 'Wybierz'
+    },
     pagination: {
       goto: 'Idź do',
       pagesize: '/strona',
@@ -77,10 +86,19 @@ export default {
       emptyText: 'Brak danych',
       confirmFilter: 'Potwierdź',
       resetFilter: 'Resetuj',
-      clearFilter: 'Wszystko'
+      clearFilter: 'Wszystko',
+      sumText: 'Sum' // to be translated
     },
     tree: {
       emptyText: 'Brak danych'
+    },
+    transfer: {
+      noMatch: 'Brak dopasowań',
+      noData: 'Brak danych',
+      titles: ['List 1', 'List 2'], // to be translated
+      filterPlaceholder: 'Enter keyword', // to be translated
+      noCheckedFormat: '{total} items', // to be translated
+      hasCheckedFormat: '{checked}/{total} checked' // to be translated
     }
   }
 };

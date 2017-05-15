@@ -49,8 +49,12 @@ const getDOM = function(dom) {
 };
 
 export default {
+  model: {
+    prop: 'visible',
+    event: 'visible-change'
+  },
   props: {
-    value: {
+    visible: {
       type: Boolean,
       default: false
     },
@@ -70,6 +74,10 @@ export default {
       default: true
     },
     modalClass: {},
+    modalAppendToBody: {
+      type: Boolean,
+      default: false
+    },
     lockScroll: {
       type: Boolean,
       default: true
@@ -116,7 +124,7 @@ export default {
   },
 
   watch: {
-    value(val) {
+    visible(val) {
       if (val) {
         if (this._opening) return;
         if (!this.rendered) {
@@ -137,10 +145,10 @@ export default {
     open(options) {
       if (!this.rendered) {
         this.rendered = true;
-        this.$emit('input', true);
+        this.$emit('visible-change', true);
       }
 
-      const props = merge({}, this, options);
+      const props = merge({}, this.$props || this, options);
 
       if (this._closeTimer) {
         clearTimeout(this._closeTimer);
@@ -166,10 +174,7 @@ export default {
 
       this._opening = true;
 
-      // 使用 vue-popup 的组件，如果需要和父组件通信显示的状态，应该使用 value，它是一个 prop，
-      // 这样在父组件中用 v-model 即可；否则可以使用 visible，它是一个 data
-      this.visible = true;
-      this.$emit('input', true);
+      this.$emit('visible-change', true);
 
       const dom = getDOM(this.$el);
 
@@ -185,7 +190,7 @@ export default {
           PopupManager.closeModal(this._popupId);
           this._closing = false;
         }
-        PopupManager.openModal(this._popupId, PopupManager.nextZIndex(), dom, props.modalClass, props.modalFade);
+        PopupManager.openModal(this._popupId, PopupManager.nextZIndex(), this.modalAppendToBody ? undefined : dom, props.modalClass, props.modalFade);
         if (props.lockScroll) {
           if (!this.bodyOverflow) {
             this.bodyPaddingRight = document.body.style.paddingRight;
@@ -240,8 +245,7 @@ export default {
     },
 
     doClose() {
-      this.visible = false;
-      this.$emit('input', false);
+      this.$emit('visible-change', false);
       this._closing = true;
 
       this.onClose && this.onClose();

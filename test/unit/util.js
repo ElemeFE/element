@@ -31,12 +31,10 @@ exports.destroyVM = function(vm) {
  * @return {Object} vm
  */
 exports.createVue = function(Compo, mounted = false) {
-  const elm = createElm();
-
   if (Object.prototype.toString.call(Compo) === '[object String]') {
     Compo = { template: Compo };
   }
-  return new Vue(Compo).$mount(mounted === false ? null : elm);
+  return new Vue(Compo).$mount(mounted === false ? null : createElm());
 };
 
 /**
@@ -80,6 +78,18 @@ exports.triggerEvent = function(elm, name, ...opts) {
   elm.dispatchEvent
     ? elm.dispatchEvent(evt)
     : elm.fireEvent('on' + name, evt);
+
+  return elm;
+};
+
+/**
+ * 触发 “mouseup” 和 “mousedown” 事件
+ * @param {Element} elm
+ * @param {*} opts
+ */
+exports.triggerClick = function(elm, ...opts) {
+  exports.triggerEvent(elm, 'mousedown', ...opts);
+  exports.triggerEvent(elm, 'mouseup', ...opts);
 
   return elm;
 };

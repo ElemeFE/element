@@ -459,7 +459,7 @@ describe('Table', () => {
         const cell = vm.$el.querySelectorAll('.el-table__body .cell')[2]; // first row
 
         triggerEvent(cell.parentNode.parentNode, 'dblclick');
-        expect(vm.result).to.length(2); // row, event
+        expect(vm.result).to.length(3); // row, event, column
         expect(vm.result[0]).to.have.property('name').to.equal(getTestData()[0].name);
         destroyVM(vm);
         done();
@@ -1166,6 +1166,102 @@ describe('Table', () => {
           done();
         }, DELAY);
       });
+    });
+  });
+
+  describe('summary row', () => {
+    it('should render', done => {
+      const vm = createVue({
+        template: `
+          <el-table :data="testData" show-summary>
+            <el-table-column prop="name" />
+            <el-table-column prop="release"/>
+            <el-table-column prop="director"/>
+            <el-table-column prop="runtime"/>
+          </el-table>
+        `,
+
+        created() {
+          this.testData = getTestData();
+        }
+      }, true);
+
+      setTimeout(_ => {
+        const footer = vm.$el.querySelector('.el-table__footer');
+        expect(footer).to.exist;
+        const cells = toArray(footer.querySelectorAll('.cell'));
+        expect(cells[cells.length - 1].innerText).to.equal('459');
+        destroyVM(vm);
+        done();
+      }, DELAY);
+    });
+
+    it('custom sum text', done => {
+      const vm = createVue({
+        template: `
+          <el-table :data="testData" show-summary sum-text="Time">
+            <el-table-column prop="name" />
+            <el-table-column prop="release"/>
+            <el-table-column prop="director"/>
+            <el-table-column prop="runtime"/>
+          </el-table>
+        `,
+
+        created() {
+          this.testData = getTestData();
+        }
+      }, true);
+
+      setTimeout(_ => {
+        const cells = toArray(vm.$el.querySelectorAll('.el-table__footer .cell'));
+        expect(cells[0].innerText).to.equal('Time');
+        destroyVM(vm);
+        done();
+      }, DELAY);
+    });
+
+    it('custom summary method', done => {
+      const vm = createVue({
+        template: `
+          <el-table :data="testData" show-summary :summary-method="getSummary">
+            <el-table-column prop="name" />
+            <el-table-column prop="release"/>
+            <el-table-column prop="director"/>
+            <el-table-column prop="runtime"/>
+          </el-table>
+        `,
+
+        created() {
+          this.testData = getTestData();
+        },
+
+        methods: {
+          getSummary(param) {
+            const { columns, data } = param;
+            const result = [];
+            columns.forEach(column => {
+              const prop = column.property;
+              if (prop === 'release') {
+                const dates = data.map(item => item[prop]);
+                const releaseYears = dates.map(date => Number(date.slice(0, 4)));
+                result.push(releaseYears.reduce((prev, curr) => {
+                  return prev + curr;
+                }));
+              } else {
+                result.push('');
+              }
+            });
+            return result;
+          }
+        }
+      }, true);
+
+      setTimeout(_ => {
+        const cells = toArray(vm.$el.querySelectorAll('.el-table__footer .cell'));
+        expect(cells[1].innerText).to.equal('9996');
+        destroyVM(vm);
+        done();
+      }, DELAY);
     });
   });
 

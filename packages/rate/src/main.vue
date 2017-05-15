@@ -98,7 +98,7 @@
       },
       textColor: {
         type: String,
-        default: '1f2d3d'
+        default: '#1f2d3d'
       },
       texts: {
         type: Array,

@@ -1,7 +1,9 @@
 <p align="center">
   <img src="https://cdn.rawgit.com/ElemeFE/element/dev/element_logo.svg">
 </p>
+
 # Element
+
 [![Build Status](https://travis-ci.org/ElemeFE/element.svg?branch=master)](https://travis-ci.org/ElemeFE/element)
 [![Coverage Status](https://coveralls.io/repos/github/ElemeFE/element/badge.svg?branch=master)](https://coveralls.io/github/ElemeFE/element?branch=master)
 [![CDNJS](https://img.shields.io/cdnjs/v/element-ui.svg)](https://cdnjs.com/libraries/element-ui)
@@ -9,7 +11,8 @@
 [![NPM downloads](http://img.shields.io/npm/dm/element-ui.svg)](https://npmjs.org/package/element-ui)
 ![JS gzip size](http://img.badgesize.io/https://unpkg.com/element-ui/lib/index.js?compression=gzip&label=gzip%20size:%20JS)
 ![CSS gzip size](http://img.badgesize.io/https://unpkg.com/element-ui/lib/theme-default/index.css?compression=gzip&label=gzip%20size:%20CSS)
-[![Join the chat at https://gitter.im/ElemeFE/element](https://badges.gitter.im/ElemeFE/element.svg)](https://gitter.im/ElemeFE/element?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join the chat at https://gitter.im/ElemeFE/element](https://badges.gitter.im/ElemeFE/element.svg)](https://gitter.im/ElemeFE/element?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)(Chinese)
+[![Join the chat at https://gitter.im/element-en/Lobby](https://badges.gitter.im/element-en/Lobby.svg)](https://gitter.im/element-en/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)(English)
 [![OpenCollective](https://opencollective.com/element/backers/badge.svg)](#backers) 
 [![OpenCollective](https://opencollective.com/element/sponsors/badge.svg)](#sponsors)
 
@@ -29,14 +32,16 @@
 - [awesome-element](https://github.com/ElementUI/awesome-element)
 - [FAQ](./FAQ.md)
 - [Customize Theme](http://element.eleme.io/#/en-US/component/custom-theme)
+- [Preview and generate theme online](https://elementui.github.io/theme-preview)
+- [Element for React](https://github.com/eleme/element-react)
 - Starter Kit
- - [element-starter](https://github.com/ElementUI/element-starter)
- - [element-cooking-starter](https://github.com/ElementUI/element-cooking-starter)
- - [element-in-laravel-starter](https://github.com/ElementUI/element-in-laravel-starter)
+  - [element-starter](https://github.com/ElementUI/element-starter)
+  - [element-cooking-starter](https://github.com/ElementUI/element-cooking-starter)
+  - [element-in-laravel-starter](https://github.com/ElementUI/element-in-laravel-starter)
 - [Design resources](https://github.com/ElementUI/Resources)
 - Boilerplate for bug reports
- - [CodePen](https://codepen.io/anon/pen/ozYpNA)
- - [JSFiddle](https://jsfiddle.net/gmve9d3p/)
+  - [CodePen](https://codepen.io/anon/pen/ozYpNA)
+  - [JSFiddle](https://jsfiddle.net/gmve9d3p/)
 - [Mint UI](https://github.com/ElemeFE/mint-ui) - Mobile UI elements for Vue.js
 
 ## Install
@@ -95,7 +100,7 @@ English documentation is brought to you by SwiftGG Translation Team. Our special
 
 ## Donation
 If you find Element useful, you can buy us a cup of coffee
-<img width="650" src="http://fuss10.elemecdn.com/2/d0/ab1b8e5a1d96bcdcd6092ce0c66ecjpeg.jpeg" alt="">
+<img width="650" src="http://fuss10.elemecdn.com/2/d0/ab1b8e5a1d96bcdcd6092ce0c66ecjpeg.jpeg?t=2017" alt="">
 
 ## Backers
 

@@ -35,11 +35,11 @@ const forced = {
     renderHeader: function(h) {
       return <el-checkbox
         nativeOn-click={ this.toggleAllSelection }
-        domProps-value={ this.isAllSelected } />;
+        value={ this.isAllSelected } />;
     },
     renderCell: function(h, { row, column, store, $index }) {
       return <el-checkbox
-        domProps-value={ store.isSelected(row) }
+        value={ store.isSelected(row) }
         disabled={ column.selectable ? !column.selectable.call(null, row, $index) : false }
         on-input={ () => { store.commit('rowSelectedChanged', row); } } />;
     },
@@ -118,6 +118,7 @@ export default {
     },
     label: String,
     className: String,
+    labelClassName: String,
     property: String,
     prop: String,
     width: {},
@@ -145,6 +146,7 @@ export default {
     filterMethod: Function,
     filteredValue: Array,
     filters: Array,
+    filterPlacement: String,
     filterMultiple: {
       type: Boolean,
       default: true
@@ -182,8 +184,7 @@ export default {
   created() {
     this.customRender = this.$options.render;
     this.$options.render = h => h('div', this.$slots.default);
-
-    let columnId = this.columnId = this.columnKey || ((this.$parent.tableId || (this.$parent.columnId + '_')) + 'column_' + columnIdSeed++);
+    this.columnId = (this.$parent.tableId || (this.$parent.columnId + '_')) + 'column_' + columnIdSeed++;
 
     let parent = this.$parent;
     let owner = this.owner;
@@ -210,9 +211,11 @@ export default {
     let isColumnGroup = false;
 
     let column = getDefaultColumn(type, {
-      id: columnId,
+      id: this.columnId,
+      columnKey: this.columnKey,
       label: this.label,
       className: this.className,
+      labelClassName: this.labelClassName,
       property: this.prop || this.property,
       type,
       renderCell: null,
@@ -236,7 +239,8 @@ export default {
       filterable: this.filters || this.filterMethod,
       filterMultiple: this.filterMultiple,
       filterOpened: false,
-      filteredValue: this.filteredValue || []
+      filteredValue: this.filteredValue || [],
+      filterPlacement: this.filterPlacement || ''
     });
 
     objectAssign(column, forced[type] || {});
@@ -286,13 +290,7 @@ export default {
       }
 
       return _self.showOverflowTooltip || _self.showTooltipWhenOverflow
-        ? <el-tooltip
-            effect={ this.effect }
-            placement="top"
-            disabled={ this.tooltipDisabled }>
-            <div class="cell">{ renderCell(h, data) }</div>
-            <span slot="content">{ renderCell(h, data) }</span>
-          </el-tooltip>
+        ? <div class="cell el-tooltip" style={'width:' + (data.column.realWidth || data.column.width) + 'px'}>{ renderCell(h, data) }</div>
         : <div class="cell">{ renderCell(h, data) }</div>;
     };
   },
@@ -367,6 +365,12 @@ export default {
       if (this.columnConfig) {
         this.columnConfig.fixed = newVal;
         this.owner.store.scheduleLayout();
+      }
+    },
+
+    sortable(newVal) {
+      if (this.columnConfig) {
+        this.columnConfig.sortable = newVal;
       }
     }
   },

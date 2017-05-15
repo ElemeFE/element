@@ -1,5 +1,11 @@
 <script>
   export default {
+    data() {
+      return {
+        activeIndex: '1',
+        activeIndex2: '1'
+      };
+    },
     methods: {
       handleOpen(key, keyPath) {
         console.log(key, keyPath);
@@ -24,7 +30,7 @@ Top bar NavMenu can be used in a variety of scenarios.
 
 ::: demo By default Menu is vertical, but you can change it to horizontal by setting the mode prop to 'horizontal'. In addition, you can use the submenu component to create a second level menu.
 ```html
-<el-menu theme="dark" default-active="1" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+<el-menu theme="dark" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
   <el-menu-item index="1">Processing Center</el-menu-item>
   <el-submenu index="2">
     <template slot="title">Workspace</template>
@@ -35,7 +41,7 @@ Top bar NavMenu can be used in a variety of scenarios.
   <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">Orders</a></el-menu-item>
 </el-menu>
 <div class="line"></div>
-<el-menu default-active="1" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+<el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" @select="handleSelect">
   <el-menu-item index="1">Processing Center</el-menu-item>
   <el-submenu index="2">
     <template slot="title">Workspace</template>
@@ -48,6 +54,12 @@ Top bar NavMenu can be used in a variety of scenarios.
 
 <script>
   export default {
+    data() {
+      return {
+        activeIndex: '1',
+        activeIndex2: '1'
+      };
+    },
     methods: {
       handleSelect(key, keyPath) {
         console.log(key, keyPath);

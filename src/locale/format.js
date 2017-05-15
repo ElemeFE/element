@@ -1,13 +1,12 @@
+import { hasOwn } from 'element-ui/src/utils/util';
+
+const RE_NARGS = /(%|)\{([0-9a-zA-Z_]+)\}/g;
 /**
  *  String format template
  *  - Inspired:
  *    https://github.com/Matt-Esch/string-template/index.js
  */
-
-const RE_NARGS = /(%|)\{([0-9a-zA-Z_]+)\}/g;
-
 export default function(Vue) {
-  const { hasOwn } = Vue.util;
 
   /**
    * template

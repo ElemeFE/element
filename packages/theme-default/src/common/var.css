@@ -112,6 +112,13 @@
 
   --checkbox-input-border-color-hover: var(--color-primary);
 
+  --checkbox-button-font-size: var(--font-size-base);
+  --checkbox-button-checked-fill: var(--color-primary);
+  --checkbox-button-checked-color: var(--color-white);
+  --checkbox-button-checked-border-color: var(--color-primary);
+
+
+
   /* Radio
   -------------------------- */
   --radio-font-size: 14px;
@@ -161,6 +168,7 @@
 
   --select-option-color: var(--link-color);
   --select-option-disabled-color: var(--color-extra-light-silver);
+  --select-option-disabled-background: var(--color-white);
   --select-option-height: 36px;
   --select-option-hover-background: var(--color-light-gray);
   --select-option-selected: var(--color-primary);
@@ -325,7 +333,6 @@
   -------------------------- */
   --button-font-size: 14px;
   --button-border-radius: var(--border-radius-base);
-  --button-paddding: 5px 20px;
   --button-padding-vertical: 10px;
   --button-padding-horizontal: 15px;
 
@@ -411,6 +418,7 @@
   --table-border-color: color(var(--border-color-base) h(-3) s(27%) l(90%));
   --table-text-color: var(--color-base-black);
   --table-header-background: var(--color-extra-light-gray);
+  --table-footer-background: var(--color-dark-white);
 
   /* Pagination
  -------------------------- */
@@ -458,8 +466,8 @@
   --tag-gray-border: var(--color-light-gray);
   --tag-gray-color: var(--link-color);
 
-  --tag-primary-fill: rgba(32,159,255,0.10);
-  --tag-primary-border: rgba(32,159,255,0.20);
+  --tag-primary-fill: rgba(var(--color-primary),0.10);
+  --tag-primary-border: rgba(var(--color-primary),0.20);
   --tag-primary-color: var(--color-primary);
 
   --tag-success-fill: rgba(18,206,102,0.10);
@@ -520,12 +528,10 @@
   --menu-item-color: var(--link-color);
   --menu-item-fill: var(--color-extra-light-gray);
   --menu-item-hover-fill: var(--disabled-border-base);
-  --submenu-item-fill: var(--color-light-gray);
 
   --dark-menu-item-color: var(--link-color);
   --dark-menu-item-fill: var(--color-light-black);
   --dark-menu-item-hover-fill: var(--link-color);
-  --dark-submenu-item-fill: var(--color-base-black);
 
   /* Rate
   --------------------------*/
@@ -583,4 +589,17 @@
   --collapse-content-fill: var(--color-dark-white);
   --collapse-content-size: 13px;
   --collapse-content-color: var(--color-base-black);
+
+  /* Transfer
+  --------------------------*/
+  --transfer-border-color: var(--color-base-gray);
+  --transfer-box-shadow: var(--box-shadow-base);
+  --transfer-panel-width: 200px;
+  --transfer-panel-header-height: 36px;
+  --transfer-panel-header-background: var(--color-dark-white);
+  --transfer-panel-footer-height: 36px;
+  --transfer-panel-body-height: 246px;
+  --transfer-item-height: 32px;
+  --transfer-item-hover-background: var(--color-light-gray);
+  --transfer-filter-height: 22px;
 }

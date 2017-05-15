@@ -134,7 +134,7 @@
 
       handleConfirm(visible = false, first) {
         if (first) return;
-        const date = new Date(limitRange(this.currentDate, this.selectableRange));
+        const date = new Date(limitRange(this.currentDate, this.selectableRange, 'HH:mm:ss'));
         this.$emit('pick', date, visible, first);
       },
 
@@ -151,6 +151,7 @@
 
     mounted() {
       this.$nextTick(() => this.handleConfirm(true, true));
+      this.$emit('mounted');
     }
   };
 </script>

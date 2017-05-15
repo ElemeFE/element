@@ -1,5 +1,223 @@
 ## Changelog
 
+### 1.3.3
+
+*2017-05-14*
+
+- Added `visible-change` event for Dropdown, #4818 (by @luciy)
+- Added `tag` attribute for Col and Row, #4799
+- Fixed Cascader search functionality regression, #4812
+- Fixed DatePicker triggering watch when `type` is range, #4837 (by @wacky6)
+- Fixed numbers in TimePicker not align vertically, #4847 (by @pengchongfu)
+- Fixed Dialog not triggering `before-close` hook when ESC is pressed, #4819 (by @patriciussanctus)
+- Fixed multiple MessageBox not rendering content correctly when some of the `message` is a VNode
+- Fixed Checkbox not focused when navigating with tab
+
+### 1.3.2
+
+*2017-05-10*
+
+- Fixed undefined custom component `el-collapse-transition` error when importing some components on demand, #4728
+- Fixed vertical alignment issue of Pagination in FireFox, #4756
+- Fixed dropdown panel view not updating after binding value of DatePicker is programmatically changed when `type` is week, #4739
+- Fixed height calculation errors of Table with summary rows, #4736
+- Added `before-filter` attribute for Cascader, #4774
+- Added `debounce` attribute for InputNumber, #4712（by @pengchongfu）
+
+### 1.3.1
+
+*2017-05-06*
+
+- Fixed Autocomplete clearing input box when typing Chinese, #4718
+- Fixed async Table's summary row not scroll with Table, #4717
+- Fixed Dialog not closing correctly after pressing ESC when `close-on-press-esc` is true, #4706
+- Fixed wrong parameter in `change` event of Switch when `on-value` and `off-value` are assigned, #4675
+
+### 1.3.0 Beryllium
+
+*2017-05-05*
+
+#### New features:
+- New component: Transfer
+- Now you can use our pre-defined transitions
+- Vertical mode for Slider, can be activated by the `vertical` attribute, #4410 (by @devange)
+- Button style for CheckboxGroup, #3697 (by @mdartic)
+- Table
+  - Added `setCurrentRow` method, #4390
+  - Added summary row, with three attributes: `show-summary`, `sum-text` and `summary-method`, #4484
+  - Added `filter-placement` attribute for TableColumn, #4491
+- Dialog
+  - Added a `before-close` hook, #4432
+  - Added `visible` attribute, which supports the `.sync` modifier, #4539
+- Upload
+  - Added `disabled` attribute, #4473
+  - `on-change` now also triggers when a file is added, #4447
+  - Added `abort` method
+- Switch now supports `on-value` and `off-value`, so that you can customize its values, #4403
+- DatePicker
+  - Added `default-value` attribute for initially displayed date in the dropdown, #4222 (by @wacky6)
+  - `type` now supports dynamic updates, #4417 (by @coffeedeveloper)
+  - Added `label` attribute for CarouselItem, #4317 (by @paul-blundell)
+- `message` of MessageBox now supports VNode, #4550
+- `current-page` of Pagination `current-page` now supports `.sync`, #4539
+- Added `label` slot for Form, so you can customize label's content, #4634
+
+#### Fixes:
+- Compatibility issues of Select and Table with Vue 2.3.x, #4518
+- `disabledDate` of DatePicker having no effect on typed value in the input box, #4309
+- An issue when the key of a Tree node is number 0, #4415
+- TimePicker number not align when picked, #4425 (by @pengchongfu)
+- Autocomplete frequently triggering searching method when typing Chinese, #4393 (by @qazbnm456)
+- Upload
+  - not able to select the same file multiple times, #4461
+  - not displaying preview image when is `auto-upload` false, #4572
+  - some style errors, #4643
+- Style bug of RadioGroup when nested in a FormItem, #4336
+- ColorPicker not clear the color panel when bound value is emptied, #4668 (by @pengchongfu)
+- `show-overflow-tooltip` of Table not working in Safari, #4157 (by @renxia)
+
+#### Breaking changes:
+- Only compatible with Vue 2.3.0+
+
+### 1.2.9
+
+*2017-04-19*
+
+- Fixed RadioButton not working properly when some texts on the page are selected, #4217
+- Fixed the toggle-all checkbox of Tree not working in some browsers, #4107 (by @pengchongfu)
+- Fixed Cascader clear button not working, #4167 (by @pengchongfu)
+- Fixed router switching error when the page has a Table with Tooltips, #4085
+- Fixed Upload not able to remove selected files, #4233
+- Added `onClick` attribute for Notification, #4221 (by @amouillard)
+- Fixed binding value of DatePicker becoming undefined when cleared, #4186 (by @pengchongfu)
+- Fixed style error of ColorPicker when nested in a FormItem, #4303
+- Added `enterable` attribute for Tooltip, #4210
+
+### 1.2.8
+
+*2017-04-07*
+
+- Fixed `resetFields` of Form reassigning form items, #3840 (by @pengchongfu)
+- Added `max` and `min` attributes for CheckboxGroup, #3700 (by @mdartic)
+- Fixed DatePicker adding one to picked month in some specific days, #3935
+- Added `closeAll` method for Message, #3966 (by @pengchongfu)
+- Added `format-tooltip` attribute for Slider, #3657 (by @liyanlong)
+- Fixed filter panel of Table being when nested in a Dialog, #4023 (by @liyanlong)
+- Fixed single Select unable to create new items in Vue 2.2.x, #3984
+- Fixed Row disappearing in all breakpoints if its `span` is set to 0 in some breakpoints, #4053
+
+### 1.2.7
+
+*2017-03-29*
+
+- Fixed Select not compatible with Vue 2.2.6, #3797
+- Improve performance for rendering tooltip in Table, #3478
+- Add `tooltip-effect` property for Table
+
+### 1.2.6
+
+*2017-03-28*
+
+- Fixed Switch compatible with SSR, #3752
+- Fixed the time of TimePicker calculating incorrectly, #3479
+- Fixed the week of DatePicker formatting incorrectly, #2774
+- Fixed the week of DatePicker initializing incorrectly, #3058
+- Fixed the events of Popover destroying incorrectly, #3555
+- Fixed InputNumber setInterval, #3514 (by @pengchongfu)
+- Fixed RadioButton css files, #3276
+- Fixed hover style on striped Table, #3696 (by @nicoeg)
+- Fixed Slider's button jumping left issue, #3664 (by @gabrielboliveira)
+- Added `delete-tag` event for Select, #3663 (by @pengchongfu)
+- Added `onPick` option for DatePicker, #2921
+- Added `status` for Step, #3722
+- Added full example for on-demand importing, #3302
+
+### 1.2.5
+
+*2017-03-19*
+
+- Added `show-tooltip` property for Slider, #3430 (by @gabrielboliveira)
+- Fixed Slider precision not updating when `step` is updated, #3475 (by @gabrielboliveira)
+- Fixed a bug that when the window is at the criticality of showing the scrollbar, the popup of Tooltip inside a Table will cause the Table to shake horizontally, #3549
+- Fixed Table automatically shrinking vertically in some conditions, #3539
+- Fixed popup components inside a Popover not hiding when blank area is clicked, #3451 (by @nicoeg)
+- Now Col will hide itself if its `xs`, `sm`, `md` or `lg` is set to 0, #3564
+
+### 1.2.4
+
+*2017-03-09*
+
+- Fixed Carousel not responding to dynamic data updates, #3159
+- Fixed `cell-dblclick` of Table not firing issue, #3305
+- Fixed disabled Cascader not displaying initial value, #3297
+- Fixed Slider not correctly displaying initial value when `show-input` is true, #3281
+- Fixed Tooltip error in server-side rendering, #3214
+- Fixed `range-separator` of DatePicker not working issue, #3378
+- Added support for dynamically update loading text of Loading directive, #3345 (by @imyzf)
+- Added `http-request` attribute for Upload, #3387
+- Added support for hiding col if its `span` is 0, #3313
+
+### 1.2.3
+*2017-03-01*
+- Fixed Tooltip, #3152
+
+
+### 1.2.2
+
+*2017-02-28*
+
+- Fixed compatibility issues with Vue 2.2, #3002 #3067 #3097
+- Fixed Cascader's dropdown hiding behind Dialog when nested in a Dialog, #3035
+- Fixed incorrect parameter of `change` event of Cascader, #3014
+- Add `change` event for ColorPicker, #3049 (by @nicoeg)
+- Fixed `setCheckedKeys` method of Tree not working on non-leaf nodes, #2967 (by @rainyLeo)
+- Fixed Tooltip not compatible with `router-link`, #3143
+
+### 1.2.1
+
+*2017-02-23*
+
+- Fixed SSR regression in version 1.2.0, #2982
+- Fixed horizontal scroll buttons not showing in Tabs, #2974
+- Fixed wrong calculation of height after the `height` attribute is updated dynamically in Table, #2979
+- Added `cell-dblclick` and `header-dragend` events for Table, #2983 #2988
+- Fixed form items showing a left padding inside an inline Form with a specified `label-width`, #2990
+- Fixed Cascader's dropdown misplaces in some conditions, #2992
+
+### 1.2.0 Lithium
+
+*2017-02-22*
+
+#### New features:
+- Two brand new components: Cascader and ColorPicker
+- New attributes `editable` and `addable`, and new events `tab-add` and `edit` for Tabs
+- Language config files in UMD format
+- New events `node-expand` and `node-collapse` for Tree, #2507 (by @masterzhang)
+- New attribute `indent` for Tree, #2713
+- Dialog's title now supports named slot, #2657
+- New attribute `range` for Slider, #2751
+- Upload
+  - Attribute `auto-upload` that controls if files are uploaded immediately after selecting, and its default value is `true`
+  - Event `on-change` that fires when file status changes
+  - Attribute `list-type` that configures the appearance of file list
+- Scroll bars in Autocomplete are made prettier
+
+#### Fixes:
+- Carousel not responding to contents' update, #2775
+- Numbers in TimePicker not align in some conditions, #2948
+- TimePicker only responding to odd clicks in some conditions, #2884 (by @k55k32)
+- Tabs' display order error when tab-pane is dynamically changed, #2898
+- Menu highlighting menu-item when `default-active` is assigned to an non-existent item
+- Collapse's style issue when nested
+
+#### Breaking changes:
+- Tooltip is refactored, no additional HTML tags will be rendered so that the structures of nested component stay unchanged, #2459
+- The backdrop of Dialog now inserts to body element by default, #2556
+- Tabs don't maintain tab instances internally any more, so they should be handled externally via events emitted by Tabs, #2567
+- Upload is refactored
+  - `default-file-list` renamed to `file-list`, and `show-upload-list` renamed to `show-file-list`
+  - `thumbnail-mode` removed
+
 ### 1.1.6
 
 *2017-01-23*
@@ -80,7 +298,7 @@ Breaking change
 
 *2016-12-29*
 
-New features:
+#### New features:
 - Two brand new components: Carousel and Collapse
 - SSR supported
 - Scrollbars' style inside components is upgraded
@@ -91,11 +309,11 @@ New features:
 - Autocomplete now supports `popper-class`
 - To customize template of Tab-Pane, now you can use the `slot` named `label`
 
-Fixes:
+#### Fixes:
 - `change` event of DatePicker incorrectly triggering multiple times, #2070
 - Width shaking of tab-pane while initializing, #1883
 
-Breaking changes:
+#### Breaking changes:
 - Only compatible with Vue 2.1.6 and beyond
 - Parameters of Form validateField() methods are updated
 - Alert's render-content attribute is removed, and now you can pass your custom template via default slot

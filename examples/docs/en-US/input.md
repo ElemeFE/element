@@ -1,5 +1,5 @@
 <script>
-  var Vue = require('vue');
+  import Vue from 'vue';
   Vue.component('my-item-en', {
     functional: true,
     render: function (h, ctx) {
@@ -120,7 +120,7 @@
       }
     }
   }
-  .el-autocomplete__suggestions.my-autocomplete {
+  .el-autocomplete-suggestion.my-autocomplete {
     li {
       line-height: normal;
       padding: 7px *;
@@ -133,7 +133,6 @@
         font-size: 12px;
         color: #b4b4b4;
       }
-
       .highlighted .addr {
         color: #ddd;
       }
@@ -453,6 +452,8 @@ Customize how suggestions are displayed.
   custom-item="my-item-en"
   placeholder="Please input"
   @select="handleSelect"
+  icon="edit"
+  :on-icon-click="handleIconClick"
 ></el-autocomplete>
 
 <style>
@@ -519,6 +520,9 @@ Customize how suggestions are displayed.
       },
       handleSelect(item) {
         console.log(item);
+      },
+      handleIconClick(ev) {
+        console.log(ev);
       }
     },
     mounted() {
@@ -604,8 +608,10 @@ Search data from server-side.
 |autosize | whether textarea has an adaptive height, only works when `type` is 'textarea'. Can accept an object, e.g. { minRows: 2, maxRows: 6 }  | boolean/object | — | false |
 |auto-complete | same as `auto-complete` in native input | string | on/off | off |
 |name | same as `name` in native input | string | — | — |
-|max | same as `max` in native input | * | — | — |
-|min | same as `min` in native input | * | — | — |
+| readonly | same as `readonly` in native input | boolean | — | false |
+|max | same as `max` in native input | — | — | — |
+|min | same as `min` in native input | — | — | — |
+|step| same as `step` in native input | — | — | — |
 |resize| control the resizability | string | none, both, horizontal, vertical | — |
 |autofocus | same as `autofocus` in native input | boolean | — | false |
 |form | same as `form` in native input | string | — | — |
@@ -626,11 +632,13 @@ Attribute | Description | Type | Options | Default
 |----| ----| ----| ---- | -----|
 |placeholder| the placeholder of Autocomplete| string | — | — |
 |disabled | whether Autocomplete is disabled  | boolean | — | false|
+|icon | icon name | string | — | — |
 |value | binding value | string | — | — |
 |custom-item | component name of your customized suggestion list item | string | — | — |
 |fetch-suggestions | a method to fetch input suggestions. When suggestions are ready, invoke `callback(data:[])` to return them to Autocomplete | Function(queryString, callback) | — | — |
 | popper-class | custom class name for autocomplete's dropdown | string | — | — |
 | trigger-on-focus | whether show suggestions when input focus | boolean | — | true |
+| on-icon-click | hook function when clicking on the input icon | function | — | — |
 
 ### Autocomplete Events
 

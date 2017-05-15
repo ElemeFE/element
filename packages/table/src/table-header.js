@@ -26,13 +26,9 @@ const convertToRows = (originColumns) => {
       }
     }
     if (column.children) {
-      let childrenMax = 1;
       let colSpan = 0;
       column.children.forEach((subColumn) => {
-        const temp = traverse(subColumn, column);
-        if (temp > childrenMax) {
-          childrenMax = temp;
-        }
+        traverse(subColumn, column);
         colSpan += subColumn.colSpan;
       });
       column.colSpan = colSpan;
@@ -105,8 +101,8 @@ export default {
                     on-mouseout={ this.handleMouseOut }
                     on-mousedown={ ($event) => this.handleMouseDown($event, column) }
                     on-click={ ($event) => this.handleHeaderClick($event, column) }
-                    class={ [column.id, column.order, column.headerAlign, column.className || '', rowIndex === 0 && this.isCellHidden(cellIndex) ? 'is-hidden' : '', !column.children ? 'is-leaf' : ''] }>
-                    <div class={ ['cell', column.filteredValue && column.filteredValue.length > 0 ? 'highlight' : ''] }>
+                    class={ [column.id, column.order, column.headerAlign, column.className || '', rowIndex === 0 && this.isCellHidden(cellIndex, columns) ? 'is-hidden' : '', !column.children ? 'is-leaf' : '', column.labelClassName] }>
+                    <div class={ ['cell', column.filteredValue && column.filteredValue.length > 0 ? 'highlight' : '', column.labelClassName] }>
                     {
                       column.renderHeader
                         ? column.renderHeader.call(this._renderProxy, h, { column, $index: cellIndex, store: this.store, _self: this.$parent.$vnode.context })
@@ -115,8 +111,8 @@ export default {
                     {
                       column.sortable
                         ? <span class="caret-wrapper" on-click={ ($event) => this.handleSortClick($event, column) }>
-                            <i class="sort-caret ascending"></i>
-                            <i class="sort-caret descending"></i>
+                            <i class="sort-caret ascending" on-click={ ($event) => this.handleSortClick($event, column, 'ascending') }></i>
+                            <i class="sort-caret descending" on-click={ ($event) => this.handleSortClick($event, column, 'descending') }></i>
                           </span>
                         : ''
                     }
@@ -225,11 +221,15 @@ export default {
   },
 
   methods: {
-    isCellHidden(index) {
+    isCellHidden(index, columns) {
       if (this.fixed === true || this.fixed === 'left') {
         return index >= this.leftFixedCount;
       } else if (this.fixed === 'right') {
-        return index < this.columnsCount - this.rightFixedCount;
+        let before = 0;
+        for (let i = 0; i < index; i++) {
+          before += columns[i].colSpan;
+        }
+        return before < this.columnsCount - this.rightFixedCount;
       } else {
         return (index < this.leftFixedCount) || (index >= this.columnsCount - this.rightFixedCount);
       }
@@ -255,7 +255,9 @@ export default {
       if (!filterPanel) {
         filterPanel = new Vue(FilterPanel);
         this.filterPanels[column.id] = filterPanel;
-
+        if (column.filterPlacement) {
+          filterPanel.placement = column.filterPlacement;
+        }
         filterPanel.table = table;
         filterPanel.cell = cell;
         filterPanel.column = column;
@@ -286,7 +288,8 @@ export default {
 
         this.$parent.resizeProxyVisible = true;
 
-        const tableEl = this.$parent.$el;
+        const table = this.$parent;
+        const tableEl = table.$el;
         const tableLeft = tableEl.getBoundingClientRect().left;
         const columnEl = this.$el.querySelector(`th.${column.id}`);
         const columnRect = columnEl.getBoundingClientRect();
@@ -301,7 +304,7 @@ export default {
           tableLeft
         };
 
-        const resizeProxy = this.$parent.$refs.resizeProxy;
+        const resizeProxy = table.$refs.resizeProxy;
         resizeProxy.style.left = this.dragState.startLeft + 'px';
 
         document.onselectstart = function() { return false; };
@@ -316,9 +319,14 @@ export default {
 
         const handleMouseUp = () => {
           if (this.dragging) {
+            const {
+              startColumnLeft,
+              startLeft
+            } = this.dragState;
             const finalLeft = parseInt(resizeProxy.style.left, 10);
-            const columnWidth = finalLeft - this.dragState.startColumnLeft;
+            const columnWidth = finalLeft - startColumnLeft;
             column.width = column.realWidth = columnWidth;
+            table.$emit('header-dragend', column.width, startLeft - startColumnLeft, column, event);
 
             this.store.scheduleLayout();
 
@@ -327,7 +335,7 @@ export default {
             this.draggingColumn = null;
             this.dragState = {};
 
-            this.$parent.resizeProxyVisible = false;
+            table.resizeProxyVisible = false;
           }
 
           document.removeEventListener('mousemove', handleMouseMove);
@@ -377,9 +385,9 @@ export default {
       return !order ? 'ascending' : order === 'ascending' ? 'descending' : null;
     },
 
-    handleSortClick(event, column) {
+    handleSortClick(event, column, givenOrder) {
       event.stopPropagation();
-      let order = this.toggleOrder(column.order);
+      let order = givenOrder || this.toggleOrder(column.order);
 
       let target = event.target;
       while (target && target.tagName !== 'TH') {

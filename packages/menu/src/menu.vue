@@ -50,10 +50,13 @@
     watch: {
       defaultActive(value) {
         const item = this.items[value];
-        if (!item) return;
+        if (item) {
+          this.activedIndex = item.index;
+          this.initOpenedMenu();
+        } else {
+          this.activedIndex = '';
+        }
 
-        this.activedIndex = item.index;
-        this.initOpenedMenu();
       },
       defaultOpeneds(value) {
         this.openedMenus = value;

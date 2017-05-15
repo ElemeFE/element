@@ -39,8 +39,10 @@
     }
 
     @when active {
-      .el-collapse-item__header__arrow {
-        transform: rotate(90deg);
+      > .el-collapse-item__header {
+        .el-collapse-item__header__arrow {
+          transform: rotate(90deg);
+        }
       }
     }
 

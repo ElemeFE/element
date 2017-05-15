@@ -1,5 +1,9 @@
 export default {
   el: {
+    colorpicker: {
+      confirm: 'OK',
+      clear: 'Temizle'
+    },
     datepicker: {
       now: 'Şimdi',
       today: 'Bugün',
@@ -56,6 +60,11 @@ export default {
       noData: 'Veri yok',
       placeholder: 'Seç'
     },
+    cascader: {
+      noMatch: 'Eşleşen veri bulunamadı',
+      loading: 'Yükleniyor',
+      placeholder: 'Seç'
+    },
     pagination: {
       goto: 'Git',
       pagesize: '/page',
@@ -77,10 +86,19 @@ export default {
       emptyText: 'Veri yok',
       confirmFilter: 'Onayla',
       resetFilter: 'Reset',
-      clearFilter: 'Hepsi'
+      clearFilter: 'Hepsi',
+      sumText: 'Sum' // to be translated
     },
     tree: {
       emptyText: 'Veri yok'
+    },
+    transfer: {
+      noMatch: 'Eşleşen veri bulunamadı',
+      noData: 'Veri yok',
+      titles: ['List 1', 'List 2'], // to be translated
+      filterPlaceholder: 'Enter keyword', // to be translated
+      noCheckedFormat: '{total} items', // to be translated
+      hasCheckedFormat: '{checked}/{total} checked' // to be translated
     }
   }
 };

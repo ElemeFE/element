@@ -199,6 +199,8 @@
       width: 440px;
     }
     .demo-form-inline {
+      width: auto;
+
       .el-input {
         width: 150px;
       }
@@ -313,9 +315,10 @@
 ::: demo 设置 `inline` 属性可以让表单域变为行内的表单域
 ```html
 <el-form :inline="true" :model="formInline" class="demo-form-inline">
-  <el-form-item>
+  <el-form-item label="审批人">
     <el-input v-model="formInline.user" placeholder="审批人"></el-input>
-  </el-form-item><el-form-item>
+  </el-form-item>
+  <el-form-item label="活动区域">
     <el-select v-model="formInline.region" placeholder="活动区域">
       <el-option label="区域一" value="shanghai"></el-option>
       <el-option label="区域二" value="beijing"></el-option>
@@ -388,7 +391,7 @@
 
 在防止用户犯错的前提下，尽可能让用户更早地发现并纠正错误。
 
-::: demo Form 组件提供了表单验证的功能，只需要通过 `rule` 属性传入约定的验证规则，并 Form-Item 的 `prop` 属相设置为需校验的字段名即可。校验规则参见 [async-validator](https://github.com/yiminghe/async-validator)
+::: demo Form 组件提供了表单验证的功能，只需要通过 `rule` 属性传入约定的验证规则，并 Form-Item 的 `prop` 属性设置为需校验的字段名即可。校验规则参见 [async-validator](https://github.com/yiminghe/async-validator)
 ```html
 <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
   <el-form-item label="活动名称" prop="name">
@@ -737,7 +740,7 @@
 |---------- |-------------- | --------------
 | validate | 对整个表单进行校验的方法 | Function(callback: Function(boolean))
 | validateField | 对部分表单字段进行校验的方法 | Function(prop: string, callback: Function(errorMessage: string))
-| resetFields | 对整个表单进行重置，将所有字段值重置为空并移除校验结果 | -
+| resetFields | 对整个表单进行重置，将所有字段值重置为初始值并移除校验结果 | -
 
 ### Form-Item Attributes
 
@@ -750,3 +753,9 @@
 | rules    | 表单验证规则 | object | — | — |
 | error    | 表单域验证错误信息, 设置该值会使表单验证状态变为`error`，并显示该错误信息 | string | — | — |
 | show-message  | 是否显示校验错误信息 | boolean | — | true |
+
+### Form-Item Slot
+| name | 说明 |
+|------|--------|
+| — | Form Item 的内容 |
+| label | 标签文本的内容 |

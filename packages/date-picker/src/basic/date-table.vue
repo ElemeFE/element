@@ -14,7 +14,7 @@
     <tr
       class="el-date-table__row"
       v-for="row in rows"
-      :class="{ current: value && isWeekActive(row[1]) }">
+      :class="{ current: isWeekActive(row[1]) }">
       <td
         v-for="cell in row"
         :class="getCellClasses(cell)"
@@ -78,9 +78,7 @@
             column: null
           };
         }
-      },
-
-      value: {}
+      }
     },
 
     computed: {
@@ -270,7 +268,7 @@
       getDateOfCell(row, column) {
         const startDate = this.startDate;
 
-        return new Date(startDate.getTime() + (row * 7 + (column - (this.showWeekNumber ? 1 : 0))) * DAY_DURATION);
+        return new Date(startDate.getTime() + (row * 7 + (column - (this.showWeekNumber ? 1 : 0)) - this.offsetDay) * DAY_DURATION);
       },
 
       getCellByDate(date) {
@@ -322,7 +320,7 @@
 
             const cell = row[j];
             const index = i * 7 + j + (this.showWeekNumber ? -1 : 0);
-            const time = startDate.getTime() + DAY_DURATION * index;
+            const time = startDate.getTime() + DAY_DURATION * (index - this.offsetDay);
 
             cell.inRange = minDate && time >= clearHours(minDate) && time <= clearHours(maxDate);
             cell.start = minDate && time === clearHours(minDate.getTime());

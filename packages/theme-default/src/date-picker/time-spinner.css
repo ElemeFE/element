@@ -8,7 +8,7 @@
       }
 
       .el-time-spinner__wrapper:nth-child(2) {
-        padding-left: 1%;
+        margin-left: 1%;
       }
     }
 
@@ -19,6 +19,10 @@
       width: 50%;
       vertical-align: top;
       position: relative;
+
+      & .el-scrollbar__wrap:not(.el-scrollbar__wrap--hidden-default) {
+        padding-bottom: 15px;
+      }
     }
 
     @e list {

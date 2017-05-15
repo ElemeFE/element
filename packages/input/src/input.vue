@@ -28,18 +28,8 @@
       <input
         v-if="type !== 'textarea'"
         class="el-input__inner"
-        :type="type"
-        :name="name"
-        :placeholder="placeholder"
-        :disabled="disabled"
-        :readonly="readonly"
-        :maxlength="maxlength"
-        :minlength="minlength"
+        v-bind="$props"
         :autocomplete="autoComplete"
-        :autofocus="autofocus"
-        :min="min"
-        :max="max"
-        :form="form"
         :value="currentValue"
         ref="input"
         @input="handleInput"
@@ -58,16 +48,8 @@
       :value="currentValue"
       @input="handleInput"
       ref="textarea"
-      :name="name"
-      :placeholder="placeholder"
-      :disabled="disabled"
+      v-bind="$props"
       :style="textareaStyle"
-      :readonly="readonly"
-      :rows="rows"
-      :form="form"
-      :autofocus="autofocus"
-      :maxlength="maxlength"
-      :minlength="minlength"
       @focus="handleFocus"
       @blur="handleBlur">
     </textarea>
@@ -76,6 +58,7 @@
 <script>
   import emitter from 'element-ui/src/mixins/emitter';
   import calcTextareaHeight from './calcTextareaHeight';
+  import merge from 'element-ui/src/utils/merge';
 
   export default {
     name: 'ElInput',
@@ -87,7 +70,7 @@
     data() {
       return {
         currentValue: this.value,
-        textareaStyle: {}
+        textareaCalcStyle: {}
       };
     },
 
@@ -122,6 +105,7 @@
       minlength: Number,
       max: {},
       min: {},
+      step: {},
       validateEvent: {
         type: Boolean,
         default: true
@@ -132,6 +116,9 @@
     computed: {
       validating() {
         return this.$parent.validateState === 'validating';
+      },
+      textareaStyle() {
+        return merge({}, this.textareaCalcStyle, { resize: this.resize });
       }
     },
 
@@ -158,16 +145,16 @@
         const minRows = autosize.minRows;
         const maxRows = autosize.maxRows;
 
-        const options = {
-          resize: this.resize
-        };
-        this.textareaStyle = calcTextareaHeight(this.$refs.textarea, minRows, maxRows, options);
+        this.textareaCalcStyle = calcTextareaHeight(this.$refs.textarea, minRows, maxRows);
       },
       handleFocus(event) {
         this.$emit('focus', event);
       },
       handleInput(event) {
-        this.setCurrentValue(event.target.value);
+        const value = event.target.value;
+        this.$emit('input', value);
+        this.setCurrentValue(value);
+        this.$emit('change', value);
       },
       handleIconClick(event) {
         if (this.onIconClick) {
@@ -181,8 +168,6 @@
           this.resizeTextarea();
         });
         this.currentValue = value;
-        this.$emit('input', value);
-        this.$emit('change', value);
         if (this.validateEvent) {
           this.dispatch('ElFormItem', 'el.form.change', [value]);
         }

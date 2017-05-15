@@ -36,6 +36,17 @@
         <span class="el-table__empty-text"><slot name="empty">{{ emptyText || t('el.table.emptyText') }}</slot></span>
       </div>
     </div>
+    <div class="el-table__footer-wrapper" ref="footerWrapper" v-if="showSummary" v-show="data && data.length > 0">
+      <table-footer
+        :store="store"
+        :layout="layout"
+        :border="border"
+        :sum-text="sumText || t('el.table.sumText')"
+        :summary-method="summaryMethod"
+        :default-sort="defaultSort"
+        :style="{ width: layout.bodyWidth ? layout.bodyWidth + 'px' : '' }">
+      </table-footer>
+    </div>
     <div class="el-table__fixed" ref="fixedWrapper"
       v-if="fixedColumns.length > 0"
       :style="[
@@ -64,6 +75,16 @@
           :row-style="rowStyle"
           :style="{ width: layout.fixedWidth ? layout.fixedWidth + 'px' : '' }">
         </table-body>
+      </div>
+      <div class="el-table__fixed-footer-wrapper" ref="fixedFooterWrapper" v-if="showSummary" v-show="data && data.length > 0">
+        <table-footer
+          fixed="left"
+          :border="border"
+          :sum-text="sumText || t('el.table.sumText')"
+          :summary-method="summaryMethod"
+          :store="store"
+          :layout="layout"
+          :style="{ width: layout.fixedWidth ? layout.fixedWidth + 'px' : '' }"></table-footer>
       </div>
     </div>
     <div class="el-table__fixed-right" ref="rightFixedWrapper"
@@ -96,6 +117,16 @@
           :style="{ width: layout.rightFixedWidth ? layout.rightFixedWidth + 'px' : '' }">
         </table-body>
       </div>
+      <div class="el-table__fixed-footer-wrapper" ref="rightFixedFooterWrapper" v-if="showSummary" v-show="data && data.length > 0">
+        <table-footer
+          fixed="right"
+          :border="border"
+          :sum-text="sumText || t('el.table.sumText')"
+          :summary-method="summaryMethod"
+          :store="store"
+          :layout="layout"
+          :style="{ width: layout.rightFixedWidth ? layout.rightFixedWidth + 'px' : '' }"></table-footer>
+      </div>
     </div>
     <div class="el-table__fixed-right-patch"
       v-if="rightFixedColumns.length > 0"
@@ -114,6 +145,7 @@
   import TableLayout from './table-layout';
   import TableBody from './table-body';
   import TableHeader from './table-header';
+  import TableFooter from './table-footer';
   import { mousewheel } from './util';
 
   let tableIdSeed = 1;
@@ -155,6 +187,12 @@
         default: true
       },
 
+      showSummary: Boolean,
+
+      sumText: String,
+
+      summaryMethod: Function,
+
       rowClassName: [String, Function],
 
       rowStyle: [Object, Function],
@@ -169,16 +207,23 @@
 
       defaultExpandAll: Boolean,
 
-      defaultSort: Object
+      defaultSort: Object,
+
+      tooltipEffect: String
     },
 
     components: {
       TableHeader,
+      TableFooter,
       TableBody,
       ElCheckbox
     },
 
     methods: {
+      setCurrentRow(row) {
+        this.store.commit('setCurrentRow', row);
+      },
+
       toggleRowSelection(row, selected) {
         this.store.toggleRowSelection(row, selected);
         this.store.updateAllSelected();
@@ -198,24 +243,29 @@
       },
 
       bindEvents() {
-        const { headerWrapper } = this.$refs;
+        const { headerWrapper, footerWrapper } = this.$refs;
         const refs = this.$refs;
         this.bodyWrapper.addEventListener('scroll', function() {
           if (headerWrapper) headerWrapper.scrollLeft = this.scrollLeft;
+          if (footerWrapper) footerWrapper.scrollLeft = this.scrollLeft;
           if (refs.fixedBodyWrapper) refs.fixedBodyWrapper.scrollTop = this.scrollTop;
           if (refs.rightFixedBodyWrapper) refs.rightFixedBodyWrapper.scrollTop = this.scrollTop;
         });
 
-        if (headerWrapper) {
-          mousewheel(headerWrapper, throttle(16, event => {
-            const deltaX = event.deltaX;
+        const scrollBodyWrapper = event => {
+          const deltaX = event.deltaX;
 
-            if (deltaX > 0) {
-              this.bodyWrapper.scrollLeft += 10;
-            } else {
-              this.bodyWrapper.scrollLeft -= 10;
-            }
-          }));
+          if (deltaX > 0) {
+            this.bodyWrapper.scrollLeft += 10;
+          } else {
+            this.bodyWrapper.scrollLeft -= 10;
+          }
+        };
+        if (headerWrapper) {
+          mousewheel(headerWrapper, throttle(16, scrollBodyWrapper));
+        }
+        if (footerWrapper) {
+          mousewheel(footerWrapper, throttle(16, scrollBodyWrapper));
         }
 
         if (this.fit) {
@@ -287,7 +337,9 @@
           };
         } else if (this.maxHeight) {
           style = {
-            'max-height': (this.showHeader ? this.maxHeight - this.layout.headerHeight : this.maxHeight) + 'px'
+            'max-height': (this.showHeader
+              ? this.maxHeight - this.layout.headerHeight - this.layout.footerHeight
+              : this.maxHeight - this.layout.footerHeight) + 'px'
           };
         }
 
@@ -366,6 +418,17 @@
     mounted() {
       this.bindEvents();
       this.doLayout();
+
+      // init filters
+      this.store.states.columns.forEach(column => {
+        if (column.filteredValue && column.filteredValue.length) {
+          this.store.commit('filterChange', {
+            column,
+            values: column.filteredValue,
+            silent: true
+          });
+        }
+      });
 
       this.$ready = true;
     },
