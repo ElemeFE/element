@@ -52,7 +52,7 @@ export default {
                 on-contextmenu={ ($event) => this.handleContextMenu($event, row) }
                 on-mouseenter={ _ => this.handleMouseEnter($index) }
                 on-mouseleave={ _ => this.handleMouseLeave() }
-                class={ [this.getRowClass(row, $index)] }>
+                class={ ['el-table__row', this.getRowClass(row, $index)] }>
                 {
                   this._l(this.columns, (column, cellIndex) =>
                     <td
@@ -108,7 +108,7 @@ export default {
       const el = this.$el;
       if (!el) return;
       const data = this.store.states.data;
-      const rows = el.querySelectorAll('tbody > tr');
+      const rows = el.querySelectorAll('tbody > tr.el-table__row');
       const oldRow = rows[data.indexOf(oldVal)];
       const newRow = rows[data.indexOf(newVal)];
       if (oldRow) {
