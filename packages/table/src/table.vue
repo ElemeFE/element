@@ -26,6 +26,7 @@
       <table-body
         :context="context"
         :store="store"
+        :stripe="stripe"
         :layout="layout"
         :row-class-name="rowClassName"
         :row-style="rowStyle"
@@ -69,6 +70,7 @@
         <table-body
           fixed="left"
           :store="store"
+          :stripe="stripe"
           :layout="layout"
           :highlight="highlightCurrentRow"
           :row-class-name="rowClassName"
@@ -110,6 +112,7 @@
         <table-body
           fixed="right"
           :store="store"
+          :stripe="stripe"
           :layout="layout"
           :row-class-name="rowClassName"
           :row-style="rowStyle"
