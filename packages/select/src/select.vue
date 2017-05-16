@@ -246,7 +246,7 @@
         this.$nextTick(() => {
           if (this.visible) this.broadcast('ElSelectDropdown', 'updatePopper');
         });
-        this.hoverIndex = -1;
+        this.hoverIndex = this.allowCreate && this.options.length === 1 ? 0 : -1;
         if (this.multiple && this.filterable) {
           this.inputLength = this.$refs.input.value.length * 15 + 20;
           this.managePlaceholder();
