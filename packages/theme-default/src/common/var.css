@@ -112,6 +112,13 @@
 
   --checkbox-input-border-color-hover: var(--color-primary);
 
+  --checkbox-button-font-size: var(--font-size-base);
+  --checkbox-button-checked-fill: var(--color-primary);
+  --checkbox-button-checked-color: var(--color-white);
+  --checkbox-button-checked-border-color: var(--color-primary);
+
+
+
   /* Radio
   -------------------------- */
   --radio-font-size: 14px;
@@ -411,6 +418,7 @@
   --table-border-color: color(var(--border-color-base) h(-3) s(27%) l(90%));
   --table-text-color: var(--color-base-black);
   --table-header-background: var(--color-extra-light-gray);
+  --table-footer-background: var(--color-dark-white);
 
   /* Pagination
  -------------------------- */
@@ -581,4 +589,17 @@
   --collapse-content-fill: var(--color-dark-white);
   --collapse-content-size: 13px;
   --collapse-content-color: var(--color-base-black);
+
+  /* Transfer
+  --------------------------*/
+  --transfer-border-color: var(--color-base-gray);
+  --transfer-box-shadow: var(--box-shadow-base);
+  --transfer-panel-width: 200px;
+  --transfer-panel-header-height: 36px;
+  --transfer-panel-header-background: var(--color-dark-white);
+  --transfer-panel-footer-height: 36px;
+  --transfer-panel-body-height: 246px;
+  --transfer-item-height: 32px;
+  --transfer-item-hover-background: var(--color-light-gray);
+  --transfer-filter-height: 22px;
 }

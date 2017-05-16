@@ -62,11 +62,12 @@ export default {
     },
     cascader: {
       noMatch: 'Совпадений не найдено',
+      loading: 'Загрузка',
       placeholder: 'Выбрать'
     },
     pagination: {
       goto: 'Перейти',
-      pagesize: '/page',
+      pagesize: 'на странице',
       total: 'Всего {total}',
       pageClassifier: ''
     },
@@ -85,10 +86,19 @@ export default {
       emptyText: 'Нет данных',
       confirmFilter: 'Подтвердить',
       resetFilter: 'Сбросить',
-      clearFilter: 'Все'
+      clearFilter: 'Все',
+      sumText: 'Sum' // to be translated
     },
     tree: {
       emptyText: 'Нет данных'
+    },
+    transfer: {
+      noMatch: 'Совпадений не найдено',
+      noData: 'Нет данных',
+      titles: ['List 1', 'List 2'], // to be translated
+      filterPlaceholder: 'Enter keyword', // to be translated
+      noCheckedFormat: '{total} items', // to be translated
+      hasCheckedFormat: '{checked}/{total} checked' // to be translated
     }
   }
 };

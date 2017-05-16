@@ -32,7 +32,7 @@ Just assign the class name to `el-icon-iconName`.
 ### Icons
 
 <ul class="icon-list">
-  <li v-for="name in icons">
+  <li v-for="name in icons" :key="name">
     <span>
       <i :class="'el-icon-' + name"></i>
       {{'el-icon-' + name}}

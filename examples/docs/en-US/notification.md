@@ -6,7 +6,7 @@
 
         this.$notify({
           title: 'Title',
-          message: h('p', { style: 'color: red' }, 'This is a reminder')
+          message: h('i', { style: 'color: teal' }, 'This is a reminder')
         });
       },
 
@@ -93,7 +93,7 @@ Displays a global notification message at the upper right corner of the page.
 
         this.$notify({
           title: 'Title',
-          message: h('p', { style: 'color: red' }, 'This is a reminder')
+          message: h('i', { style: 'color: teal' }, 'This is a reminder')
         });
       },
 
@@ -231,6 +231,7 @@ In this case you should call `Notification(options)`. We have also registered me
 | customClass | custom class name for Notification | string | — | — |
 | duration | duration before close. It will not automatically close if set 0 | number | — | 4500 |
 | onClose | callback function when closed | function | — | — |
+| onClick | callback function when notification clicked | function | — | — |
 | offset | offset from the top edge of the screen. Every Notification instance of the same moment should have the same offset | number | — | 0 |
 
 ### Methods

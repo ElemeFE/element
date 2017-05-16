@@ -128,6 +128,7 @@ Vertical step bars.
 | title | step title | string | — | — |
 | description | step description | string | — | — |
 | icon | step icon | icons provided by Element Icon. Can be overwritten by a named slot if you want to use  custom icons | string | — |
+| status | current status. It will be automatically set by Steps if not configured. | wait/process/finish/error/success | - |
 
 ### Step Slot
 | Name | Description |

@@ -59,9 +59,13 @@
       },
 
       open4() {
+        const h = this.$createElement;
         this.$msgbox({
           title: 'Message',
-          message: 'This is a message',
+          message: h('p', null, [
+            h('span', null, 'Message can be '),
+            h('i', { style: 'color: teal' }, 'VNode')
+          ]),
           showCancelButton: true,
           confirmButtonText: 'OK',
           cancelButtonText: 'Cancel',
@@ -219,9 +223,13 @@ Can be customized to show various content.
   export default {
     methods: {
       open4() {
+        const h = this.$createElement;
         this.$msgbox({
           title: 'Message',
-          message: 'This is a message',
+          message: h('p', null, [
+            h('span', null, 'Message can be '),
+            h('i', { style: 'color: teal' }, 'VNode')
+          ]),
           showCancelButton: true,
           confirmButtonText: 'OK',
           cancelButtonText: 'Cancel',

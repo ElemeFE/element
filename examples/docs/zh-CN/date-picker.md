@@ -296,6 +296,7 @@
 | popper-class | DatePicker 下拉框的类名 | string | — | — |
 |picker-options | 当前时间日期选择器特有的选项参考下表 | object |  — | {} |
 | range-separator | 选择范围时的分隔符 | string | - | ' - ' |
+| default-value | 可选，DatePicker打开时默认显示的时间 | Date | 可被new Date()解析 | - |
 
 ### Picker Options
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
@@ -303,6 +304,7 @@
 | shortcuts | 设置快捷选项，需要传入 { text, onClick } 对象用法参考 demo 或下表 | Object[] | — | — |
 | disabledDate | 设置禁用状态，参数为当前日期，要求返回 Boolean | Function | — | — |
 | firstDayOfWeek | 周起始日 | Number | 1 到 7 | 7 |
+| onPick | 选中日期后会执行的回调，只有当 `daterange` 或 `datetimerange` 才生效 | Function({ maxDate, minDate }) | - | - |
 
 ### Shortcuts
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |

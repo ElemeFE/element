@@ -78,7 +78,7 @@
     @e checkbox-group {
       padding: 10px;
 
-      .el-checkbox {
+      label.el-checkbox {
         display: block;
         margin-bottom: 8px;
         margin-left: 5px;

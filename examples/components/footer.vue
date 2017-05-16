@@ -2,9 +2,10 @@
   <footer class="footer">
     <div class="container">
       <div class="footer-main">
-        <p class="footer-main-title">Element {{ version }} Lithium</p>
+        <p class="footer-main-title">Element {{ version }} Beryllium</p>
         <a href="https://github.com/ElemeFE/element/issues" class="footer-main-link" target="_blank">{{ langConfig.feedback }}</a>
         <a :href="`https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.${ lang }.md`" class="footer-main-link" target="_blank">{{ langConfig.contribution }}</a>
+        <a :href="`https://eleme.github.io/element-react/#/${ lang }/quick-start`" class="footer-main-link" target="_blank">Element-React</a>
       </div>
       <div class="footer-social">
         <el-popover
@@ -145,7 +146,7 @@
 
     computed: {
       lang() {
-        return this.$route.path.split('/')[1];
+        return this.$route.path.split('/')[1] || 'zh-CN';
       },
 
       langConfig() {

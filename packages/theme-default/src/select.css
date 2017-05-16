@@ -21,6 +21,7 @@
 
     & .el-input__inner {
       cursor: pointer;
+      padding-right: 35px;
 
       &:focus {
         border-color: var(--select-input-focus-background);
@@ -107,7 +108,7 @@
       position: absolute;
       line-height: normal;
       white-space: normal;
-      z-index: var(--index-top);
+      z-index: var(--index-normal);
       top: 50%;
       transform: translateY(-50%);
     }

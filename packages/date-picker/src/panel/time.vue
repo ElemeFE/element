@@ -151,6 +151,7 @@
 
     mounted() {
       this.$nextTick(() => this.handleConfirm(true, true));
+      this.$emit('mounted');
     }
   };
 </script>

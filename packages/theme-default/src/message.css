@@ -22,6 +22,8 @@
       position: relative;
       height: 20px;
       line-height: 20px;
+      display: flex;
+      align-items: center;
 
       @when with-icon {
         margin-left: 0;

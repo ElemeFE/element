@@ -60,9 +60,13 @@
 
 
       open4() {
+        const h = this.$createElement;
         this.$msgbox({
           title: '消息',
-          message: '这是一段内容, 这是一段内容, 这是一段内容, 这是一段内容, 这是一段内容, 这是一段内容, 这是一段内容',
+          message: h('p', null, [
+            h('span', null, '内容可以是 '),
+            h('i', { style: 'color: teal' }, 'VNode')
+          ]),
           showCancelButton: true,
           confirmButtonText: '确定',
           cancelButtonText: '取消',
@@ -216,9 +220,13 @@
   export default {
     methods: {
       open4() {
+        const h = this.$createElement;
         this.$msgbox({
           title: '消息',
-          message: '这是一段内容, 这是一段内容, 这是一段内容, 这是一段内容, 这是一段内容, 这是一段内容, 这是一段内容',
+          message: h('p', null, [
+            h('span', null, '内容可以是 '),
+            h('i', { style: 'color: teal' }, 'VNode')
+          ]),
           showCancelButton: true,
           confirmButtonText: '确定',
           cancelButtonText: '取消',
@@ -268,7 +276,7 @@ import { MessageBox } from 'element-ui';
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | title | MessageBox 标题 | string | — | — |
-| message | MessageBox 消息正文内容 | string | — | — |
+| message | MessageBox 消息正文内容 | string / VNode | — | — |
 | type | 消息类型，用于显示图标 | string | success/info/warning/error | — |
 | customClass | MessageBox 的自定义类名 | string | — | — |
 | callback | 若不使用 Promise，可以使用此参数指定 MessageBox 关闭后的回调 | function(action, instance)，action 的值为'confirm'或'cancel', instance 为 MessageBox 实例，可以通过它访问实例上的属性和方法 | — | — |

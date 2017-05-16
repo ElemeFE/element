@@ -15,11 +15,10 @@ If you have too much data to display in one page, use pagination.
 </div>
 <div class="block">
   <span class="demonstration">When you have more than 7 pages</span>
-    <el-pagination
-      layout="prev, pager, next"
-      :total="1000">
-    </el-pagination>
-  </div>
+  <el-pagination
+    layout="prev, pager, next"
+    :total="1000">
+  </el-pagination>
 </div>
 ```
 :::
@@ -51,7 +50,7 @@ Add more modules based on your scenario.
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="currentPage1"
+      :current-page.sync="currentPage1"
       :page-size="100"
       layout="total, prev, pager, next"
       :total="1000">
@@ -62,7 +61,7 @@ Add more modules based on your scenario.
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="currentPage2"
+      :current-page.sync="currentPage2"
       :page-sizes="[100, 200, 300, 400]"
       :page-size="100"
       layout="sizes, prev, pager, next"
@@ -74,7 +73,7 @@ Add more modules based on your scenario.
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="currentPage3"
+      :current-page.sync="currentPage3"
       :page-size="100"
       layout="prev, pager, next, jumper"
       :total="1000">
@@ -85,7 +84,7 @@ Add more modules based on your scenario.
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="currentPage4"
+      :current-page.sync="currentPage4"
       :page-sizes="[100, 200, 300, 400]"
       :page-size="100"
       layout="total, sizes, prev, pager, next, jumper"
@@ -100,7 +99,6 @@ Add more modules based on your scenario.
         console.log(`${val} items per page`);
       },
       handleCurrentChange(val) {
-        this.currentPage = val;
         console.log(`current page: ${val}`);
       }
     },
@@ -132,7 +130,6 @@ Add more modules based on your scenario.
         console.log(`${val} items per page`);
       },
       handleCurrentChange(val) {
-        this.currentPage = val;
         console.log(`current page: ${val}`);
       }
     },
@@ -155,7 +152,7 @@ Add more modules based on your scenario.
 | page-size              | item count of each page  | number |      —       | 10 |
 | total | total item count | number | — | — |
 | page-count | total page count. Set either `total` or `page-count` and pages will be displayed; if you need `page-sizes`, `total` is required | number | — | — |
-| current-page | current page number | number | — | 1 |
+| current-page | current page number, supports the .sync modifier | number | — | 1 |
 | layout | layout of Pagination, elements separated with a comma | string | `sizes`, `prev`, `pager`, `next`, `jumper`, `->`, `total`, `slot` | 'prev, pager, next, jumper, ->, total'  |
 | page-sizes | options of item count per page | number[] | — |  [10, 20, 30, 40, 50, 100] |
 

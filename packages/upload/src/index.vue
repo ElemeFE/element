@@ -19,6 +19,10 @@ export default {
     IframeUpload
   },
 
+  provide: {
+    uploader: this
+  },
+
   props: {
     action: {
       type: String,
@@ -86,7 +90,8 @@ export default {
       type: String,
       default: 'text'   // text,picture,picture-card
     },
-    httpRequest: Function
+    httpRequest: Function,
+    disabled: Boolean
   },
 
   data() {
@@ -131,6 +136,7 @@ export default {
       }
 
       this.uploadFiles.push(file);
+      this.onChange(file, this.uploadFiles);
     },
     handleProgress(ev, rawFile) {
       var file = this.getFile(rawFile);
@@ -160,7 +166,11 @@ export default {
       this.onError(err, file, this.uploadFiles);
       this.onChange(file, this.uploadFiles);
     },
-    handleRemove(file) {
+    handleRemove(file, raw) {
+      if (raw) {
+        file = this.getFile(raw);
+      }
+      this.abort(file);
       var fileList = this.uploadFiles;
       fileList.splice(fileList.indexOf(file), 1);
       this.onRemove(file, fileList);
@@ -174,6 +184,9 @@ export default {
       });
       return target;
     },
+    abort(file) {
+      this.$refs['upload-inner'].abort(file);
+    },
     clearFiles() {
       this.uploadFiles = [];
     },
@@ -181,14 +194,14 @@ export default {
       this.uploadFiles
         .filter(file => file.status === 'ready')
         .forEach(file => {
-          this.$refs['upload-inner'].upload(file.raw, file);
+          this.$refs['upload-inner'].upload(file.raw);
         });
     },
     getMigratingConfig() {
       return {
         props: {
           'default-file-list': 'default-file-list is renamed to file-list.',
-          'show-upload-list': 'show-file-list is renamed to show-file-list.',
+          'show-upload-list': 'show-upload-list is renamed to show-file-list.',
           'thumbnail-mode': 'thumbnail-mode has been deprecated, you can implement the same effect according to this case: http://element.eleme.io/#/zh-CN/component/upload#yong-hu-tou-xiang-shang-chuan'
         }
       };
@@ -224,13 +237,14 @@ export default {
         fileList: this.uploadFiles,
         autoUpload: this.autoUpload,
         listType: this.listType,
+        disabled: this.disabled,
         'on-start': this.handleStart,
         'on-progress': this.handleProgress,
         'on-success': this.handleSuccess,
         'on-error': this.handleError,
         'on-preview': this.onPreview,
         'on-remove': this.handleRemove,
-        httpRequest: this.httpRequest
+        'http-request': this.httpRequest
       },
       ref: 'upload-inner'
     };
