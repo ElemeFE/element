@@ -429,14 +429,16 @@ describe('Select', () => {
     vm.value = ['选项1'];
     setTimeout(() => {
       options[1].click();
-      options[3].click();
       setTimeout(() => {
-        expect(vm.value.indexOf('选项2') > -1 && vm.value.indexOf('选项4') > -1).to.true;
-        const tagCloseIcons = vm.$el.querySelectorAll('.el-tag__close');
-        tagCloseIcons[0].click();
+        options[3].click();
         setTimeout(() => {
-          expect(vm.value.indexOf('选项1')).to.equal(-1);
-          done();
+          expect(vm.value.indexOf('选项2') > -1 && vm.value.indexOf('选项4') > -1).to.true;
+          const tagCloseIcons = vm.$el.querySelectorAll('.el-tag__close');
+          tagCloseIcons[0].click();
+          setTimeout(() => {
+            expect(vm.value.indexOf('选项1')).to.equal(-1);
+            done();
+          }, 100);
         }, 100);
       }, 100);
     }, 100);

@@ -1,5 +1,98 @@
 ## Changelog
 
+### 1.3.3
+
+*2017-05-14*
+
+- Added `visible-change` event for Dropdown, #4818 (by @luciy)
+- Added `tag` attribute for Col and Row, #4799
+- Fixed Cascader search functionality regression, #4812
+- Fixed DatePicker triggering watch when `type` is range, #4837 (by @wacky6)
+- Fixed numbers in TimePicker not align vertically, #4847 (by @pengchongfu)
+- Fixed Dialog not triggering `before-close` hook when ESC is pressed, #4819 (by @patriciussanctus)
+- Fixed multiple MessageBox not rendering content correctly when some of the `message` is a VNode
+- Fixed Checkbox not focused when navigating with tab
+
+### 1.3.2
+
+*2017-05-10*
+
+- Fixed undefined custom component `el-collapse-transition` error when importing some components on demand, #4728
+- Fixed vertical alignment issue of Pagination in FireFox, #4756
+- Fixed dropdown panel view not updating after binding value of DatePicker is programmatically changed when `type` is week, #4739
+- Fixed height calculation errors of Table with summary rows, #4736
+- Added `before-filter` attribute for Cascader, #4774
+- Added `debounce` attribute for InputNumber, #4712（by @pengchongfu）
+
+### 1.3.1
+
+*2017-05-06*
+
+- Fixed Autocomplete clearing input box when typing Chinese, #4718
+- Fixed async Table's summary row not scroll with Table, #4717
+- Fixed Dialog not closing correctly after pressing ESC when `close-on-press-esc` is true, #4706
+- Fixed wrong parameter in `change` event of Switch when `on-value` and `off-value` are assigned, #4675
+
+### 1.3.0 Beryllium
+
+*2017-05-05*
+
+#### New features:
+- New component: Transfer
+- Now you can use our pre-defined transitions
+- Vertical mode for Slider, can be activated by the `vertical` attribute, #4410 (by @devange)
+- Button style for CheckboxGroup, #3697 (by @mdartic)
+- Table
+  - Added `setCurrentRow` method, #4390
+  - Added summary row, with three attributes: `show-summary`, `sum-text` and `summary-method`, #4484
+  - Added `filter-placement` attribute for TableColumn, #4491
+- Dialog
+  - Added a `before-close` hook, #4432
+  - Added `visible` attribute, which supports the `.sync` modifier, #4539
+- Upload
+  - Added `disabled` attribute, #4473
+  - `on-change` now also triggers when a file is added, #4447
+  - Added `abort` method
+- Switch now supports `on-value` and `off-value`, so that you can customize its values, #4403
+- DatePicker
+  - Added `default-value` attribute for initially displayed date in the dropdown, #4222 (by @wacky6)
+  - `type` now supports dynamic updates, #4417 (by @coffeedeveloper)
+  - Added `label` attribute for CarouselItem, #4317 (by @paul-blundell)
+- `message` of MessageBox now supports VNode, #4550
+- `current-page` of Pagination `current-page` now supports `.sync`, #4539
+- Added `label` slot for Form, so you can customize label's content, #4634
+
+#### Fixes:
+- Compatibility issues of Select and Table with Vue 2.3.x, #4518
+- `disabledDate` of DatePicker having no effect on typed value in the input box, #4309
+- An issue when the key of a Tree node is number 0, #4415
+- TimePicker number not align when picked, #4425 (by @pengchongfu)
+- Autocomplete frequently triggering searching method when typing Chinese, #4393 (by @qazbnm456)
+- Upload
+  - not able to select the same file multiple times, #4461
+  - not displaying preview image when is `auto-upload` false, #4572
+  - some style errors, #4643
+- Style bug of RadioGroup when nested in a FormItem, #4336
+- ColorPicker not clear the color panel when bound value is emptied, #4668 (by @pengchongfu)
+- `show-overflow-tooltip` of Table not working in Safari, #4157 (by @renxia)
+
+#### Breaking changes:
+- Only compatible with Vue 2.3.0+
+
+### 1.2.9
+
+*2017-04-19*
+
+- Fixed RadioButton not working properly when some texts on the page are selected, #4217
+- Fixed the toggle-all checkbox of Tree not working in some browsers, #4107 (by @pengchongfu)
+- Fixed Cascader clear button not working, #4167 (by @pengchongfu)
+- Fixed router switching error when the page has a Table with Tooltips, #4085
+- Fixed Upload not able to remove selected files, #4233
+- Added `onClick` attribute for Notification, #4221 (by @amouillard)
+- Fixed binding value of DatePicker becoming undefined when cleared, #4186 (by @pengchongfu)
+- Fixed style error of ColorPicker when nested in a FormItem, #4303
+- Added `enterable` attribute for Tooltip, #4210
+
 ### 1.2.8
 
 *2017-04-07*

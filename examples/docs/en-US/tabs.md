@@ -201,6 +201,7 @@ Only card type Tabs support addable & closeable.
 <el-tabs v-model="editableTabsValue" type="card" editable @edit="handleTabsEdit">
   <el-tab-pane
     v-for="(item, index) in editableTabs"
+    :key="item.name"
     :label="item.title"
     :name="item.name"
   >
@@ -274,6 +275,7 @@ Only card type Tabs support addable & closeable.
 <el-tabs v-model="editableTabsValue2" type="card" closable @tab-remove="removeTab">
   <el-tab-pane
     v-for="(item, index) in editableTabs2"
+    :key="item.name"
     :label="item.title"
     :name="item.name"
   >
@@ -353,5 +355,5 @@ Only card type Tabs support addable & closeable.
 |---------- |-------- |---------- |-------------  |-------- |
 | label     | title of the tab   | string   | — |    —     |
 | disabled | whether Tab is disabled | boolean | — | false |
-| name      | identifier corresponding to the activeName of Tabs, representing the alias of the tab-pane | string | — | ordinal number of the tab-pane in the sequence, i.e. the first tab-pane is '1' |
+| name      | identifier corresponding to the activeName of Tabs, representing the alias of the tab-pane | string | — | ordinal number of the tab-pane in the sequence, e.g. the first tab-pane is '1' |
 | closable  | whether Tab is closable | boolean   | — |  false  |

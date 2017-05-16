@@ -26,7 +26,7 @@ export default {
     },
     transition: {
       type: String,
-      default: 'fade-in-linear'
+      default: 'el-fade-in-linear'
     },
     popperOptions: {
       default() {
@@ -35,6 +35,10 @@ export default {
           gpuAcceleration: false
         };
       }
+    },
+    enterable: {
+      type: Boolean,
+      default: true
     }
   },
 
@@ -58,8 +62,8 @@ export default {
           name={ this.transition }
           onAfterLeave={ this.doDestroy }>
           <div
-            onMouseleave={ () => { this.debounceClose(); this.togglePreventClose(); } }
-            onMouseenter= { this.togglePreventClose }
+            onMouseleave={ () => { this.setExpectedState(false); this.debounceClose(); } }
+            onMouseenter= { () => { this.setExpectedState(true); } }
             ref="popper"
             v-show={!this.disabled && this.showPopper}
             class={
@@ -77,8 +81,8 @@ export default {
     const data = vnode.data = vnode.data || {};
     const on = vnode.data.on = vnode.data.on || {};
 
-    on.mouseenter = this.addEventHandle(on.mouseenter, this.handleShowPopper);
-    on.mouseleave = this.addEventHandle(on.mouseleave, this.debounceClose);
+    on.mouseenter = this.addEventHandle(on.mouseenter, () => { this.setExpectedState(true); this.handleShowPopper(); });
+    on.mouseleave = this.addEventHandle(on.mouseleave, () => { this.setExpectedState(false); this.debounceClose(); });
     data.staticClass = this.concatClass(data.staticClass, 'el-tooltip');
 
     return vnode;
@@ -99,7 +103,7 @@ export default {
     },
 
     handleShowPopper() {
-      if (this.manual) return;
+      if (!this.expectedState || this.manual) return;
       clearTimeout(this.timeout);
       this.timeout = setTimeout(() => {
         this.showPopper = true;
@@ -107,13 +111,13 @@ export default {
     },
 
     handleClosePopper() {
-      if (this.preventClose || this.manual) return;
+      if (this.enterable && this.expectedState || this.manual) return;
       clearTimeout(this.timeout);
       this.showPopper = false;
     },
 
-    togglePreventClose() {
-      this.preventClose = !this.preventClose;
+    setExpectedState(expectedState) {
+      this.expectedState = expectedState;
     }
   }
 };

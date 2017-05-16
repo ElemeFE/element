@@ -145,23 +145,23 @@
       open5() {
         this.$message({
           showClose: true,
-          message: '恭喜你，这是一条成功消息'
+          message: '这是一条消息提示'
         });
       },
 
       open6() {
         this.$message({
           showClose: true,
-          message: '警告哦，这是一条警告消息',
-          type: 'warning'
+          message: '恭喜你，这是一条成功消息',
+          type: 'success'
         });
       },
 
       open7() {
         this.$message({
           showClose: true,
-          message: '错了哦，这是一条错误消息',
-          type: 'error'
+          message: '警告哦，这是一条警告消息',
+          type: 'warning'
         });
       },
 

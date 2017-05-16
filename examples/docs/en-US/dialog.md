@@ -36,8 +36,12 @@
       };
     },
     methods: {
-      openDialog() {
-        this.$refs.dialogBind.open();
+      handleClose(done) {
+        this.$confirm('Are you sure to close this dialog?')
+          .then(_ => {
+            done();
+          })
+          .catch(_ => {});
       }
     }
   };
@@ -51,12 +55,16 @@ Informs users while preserving the current page state.
 
 Dialog pops up a dialog box, and it's quite customizable.
 
-:::demo Set the `v-model` attribute with a `Boolean`, and Dialog shows when it is `true`. The Dialog has two parts: `body` and `footer`, and the latter requires a `slot` named `footer`. The optional `title` attribute (empty by default) is for defining a title. This example explicitly changes the value of `v-model` to toggle Dialog. In addition, we also provide `open` and `close` method, which you can call to open/close the Dialog.
+:::demo Set the `visible` attribute with a `Boolean`, and Dialog shows when it is `true`. The Dialog has two parts: `body` and `footer`, and the latter requires a `slot` named `footer`. The optional `title` attribute (empty by default) is for defining a title. Finally, this example demonstrates how `before-close` is used.
 
 ```html
 <el-button type="text" @click="dialogVisible = true">click to open the Dialog</el-button>
 
-<el-dialog title="Tips" v-model="dialogVisible" size="tiny">
+<el-dialog
+  title="Tips"
+  :visible.sync="dialogVisible"
+  size="tiny"
+  :before-close="handleClose">
   <span>This is a message</span>
   <span slot="footer" class="dialog-footer">
     <el-button @click="dialogVisible = false">Cancel</el-button>
@@ -70,6 +78,15 @@ Dialog pops up a dialog box, and it's quite customizable.
       return {
         dialogVisible: false
       };
+    },
+    methods: {
+      handleClose(done) {
+        this.$confirm('Are you sure to close this dialog?')
+          .then(_ => {
+            done();
+          })
+          .catch(_ => {});
+      }
     }
   };
 </script>
@@ -86,7 +103,7 @@ The content of Dialog can be anything, even a table or a form. This example show
 <!-- Table -->
 <el-button type="text" @click="dialogTableVisible = true">open a Table nested Dialog</el-button>
 
-<el-dialog title="Shipping address" v-model="dialogTableVisible">
+<el-dialog title="Shipping address" :visible.sync="dialogTableVisible">
   <el-table :data="gridData">
     <el-table-column property="date" label="Date" width="150"></el-table-column>
     <el-table-column property="name" label="Name" width="200"></el-table-column>
@@ -97,7 +114,7 @@ The content of Dialog can be anything, even a table or a form. This example show
 <!-- Form -->
 <el-button type="text" @click="dialogFormVisible = true">open a Form nested Dialog</el-button>
 
-<el-dialog title="Shipping address" v-model="dialogFormVisible">
+<el-dialog title="Shipping address" :visible.sync="dialogFormVisible">
   <el-form :model="form">
     <el-form-item label="Promotion name" :label-width="formLabelWidth">
       <el-input v-model="form.name" auto-complete="off"></el-input>
@@ -160,6 +177,7 @@ The content of Dialog can be anything, even a table or a form. This example show
 
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
+| visible   | visibility of Dialog, supports the .sync modifier | boolean | — | false |
 | title     | title of Dialog. Can also be passed with a named slot (see the following table) | string    | — | — |
 | size      | size of Dialog | string    | tiny/small/large/full | small |
 | top      | value for `top` of Dialog CSS, works when `size` is not `full` | string    | — | 15% |
@@ -170,6 +188,7 @@ The content of Dialog can be anything, even a table or a form. This example show
 | close-on-click-modal | whether the Dialog can be closed by clicking the mask | boolean    | — | true |
 | close-on-press-escape | whether the Dialog can be closed by pressing ESC | boolean    | — | true |
 | show-close | whether to show a close button | boolean    | — | true |
+| before-close | callback before Dialog closes, and it will prevent Dialog from closing | function(done)，done is used to close the Dialog | — | — |
 
 ### Slot
 
@@ -179,17 +198,8 @@ The content of Dialog can be anything, even a table or a form. This example show
 | title | content of the Dialog title |
 | footer | content of the Dialog footer |
 
-### Methods
-Each `el-dialog` instance has the following methods that can be used to open/close the instance without explicitly changing the value of `v-model`:
-
-| Method | Description |
-|------|--------|
-| open | open the current instance |
-| close | close the current instance |
-
 ### Events
 | Event Name | Description | Parameters |
 |---------- |-------- |---------- |
 | open | triggers when the Dialog opens | — |
 | close | triggers when the Dialog closes | — |
-

@@ -143,9 +143,9 @@
         margin: -10px;
       }
 
-      & .el-button,
-      & .el-select .el-input__inner,
-      & .el-select:hover .el-input__inner {
+      & button.el-button,
+      & div.el-select .el-input__inner,
+      & div.el-select:hover .el-input__inner {
         border-color: transparent;
         background-color: transparent;
         color: inherit;

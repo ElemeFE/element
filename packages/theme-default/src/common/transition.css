@@ -1,6 +1,8 @@
 @charset "UTF-8";
 @import './var.css';
 
+
+/* DEPRECATED */
 .fade-in-linear-enter-active,
 .fade-in-linear-leave-active {
   transition: var(--fade-linear-transition);
@@ -8,6 +10,16 @@
 .fade-in-linear-enter,
 .fade-in-linear-leave,
 .fade-in-linear-leave-active {
+  opacity: 0;
+}
+
+.el-fade-in-linear-enter-active,
+.el-fade-in-linear-leave-active {
+  transition: var(--fade-linear-transition);
+}
+.el-fade-in-linear-enter,
+.el-fade-in-linear-leave,
+.el-fade-in-linear-leave-active {
   opacity: 0;
 }
 
@@ -60,10 +72,11 @@
   transition: 0.3s height ease-in-out, 0.3s padding-top ease-in-out, 0.3s padding-bottom ease-in-out;
 }
 
-.list-enter-active, .list-leave-active {
+.el-list-enter-active,
+.el-list-leave-active {
   transition: all 1s;
 }
-.list-enter, .list-leave-active {
+.el-list-enter, .el-list-leave-active {
   opacity: 0;
   transform: translateY(-30px);
 }

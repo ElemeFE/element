@@ -35,12 +35,12 @@ const forced = {
     renderHeader: function(h) {
       return <el-checkbox
         nativeOn-click={ this.toggleAllSelection }
-        domProps-value={ this.isAllSelected } />;
+        value={ this.isAllSelected } />;
     },
     renderCell: function(h, { row, column, store, $index }) {
       return <div class="auto-show-box-cell"><el-checkbox
         class="auto-display-checkbox"
-        domProps-value={ store.isSelected(row) }
+        value={ store.isSelected(row) }
         disabled={ column.selectable ? !column.selectable.call(null, row, $index) : false }
         on-input={ () => { store.commit('rowSelectedChanged', row); } } /><div class="checkbox-label"><span>{$index + 1}</span></div></div>;
     },
@@ -147,6 +147,7 @@ export default {
     filterMethod: Function,
     filteredValue: Array,
     filters: Array,
+    filterPlacement: String,
     filterMultiple: {
       type: Boolean,
       default: true
@@ -239,7 +240,8 @@ export default {
       filterable: this.filters || this.filterMethod,
       filterMultiple: this.filterMultiple,
       filterOpened: false,
-      filteredValue: this.filteredValue || []
+      filteredValue: this.filteredValue || [],
+      filterPlacement: this.filterPlacement || ''
     });
 
     objectAssign(column, forced[type] || {});
@@ -289,7 +291,7 @@ export default {
       }
 
       return _self.showOverflowTooltip || _self.showTooltipWhenOverflow
-        ? <div class="cell el-tooltip">{ renderCell(h, data) }</div>
+        ? <div class="cell el-tooltip" style={'width:' + (data.column.realWidth || data.column.width) + 'px'}>{ renderCell(h, data) }</div>
         : <div class="cell">{ renderCell(h, data) }</div>;
     };
   },
@@ -364,6 +366,12 @@ export default {
       if (this.columnConfig) {
         this.columnConfig.fixed = newVal;
         this.owner.store.scheduleLayout();
+      }
+    },
+
+    sortable(newVal) {
+      if (this.columnConfig) {
+        this.columnConfig.sortable = newVal;
       }
     }
   },

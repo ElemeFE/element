@@ -169,7 +169,9 @@
 
     props: {
       name: String,
-      value: {},
+      value: {
+        required: true
+      },
       size: String,
       disabled: Boolean,
       clearable: Boolean,
@@ -470,7 +472,9 @@
 
       deletePrevTag(e) {
         if (e.target.value.length <= 0 && !this.toggleLastOptionHitState()) {
-          this.value.pop();
+          const value = this.value.slice();
+          value.pop();
+          this.$emit('input', value);
         }
       },
 
@@ -513,26 +517,23 @@
       },
 
       handleOptionSelect(option) {
-        if (!this.multiple) {
-          this.$emit('input', option.value);
-          this.visible = false;
-        } else {
-          let optionIndex = -1;
-          this.value.forEach((item, index) => {
-            if (item === option.value) {
-              optionIndex = index;
-            }
-          });
+        if (this.multiple) {
+          const value = this.value.slice();
+          const optionIndex = value.indexOf(option.value);
           if (optionIndex > -1) {
-            this.value.splice(optionIndex, 1);
-          } else if (this.multipleLimit <= 0 || this.value.length < this.multipleLimit) {
-            this.value.push(option.value);
+            value.splice(optionIndex, 1);
+          } else if (this.multipleLimit <= 0 || value.length < this.multipleLimit) {
+            value.push(option.value);
           }
+          this.$emit('input', value);
           if (option.created) {
             this.query = '';
             this.inputLength = 20;
           }
           if (this.filterable) this.$refs.input.focus();
+        } else {
+          this.$emit('input', option.value);
+          this.visible = false;
         }
       },
 
@@ -551,6 +552,7 @@
           return;
         }
         if (this.options.length === 0 || this.filteredOptionsCount === 0) return;
+        this.optionsAllDisabled = this.options.length === this.options.filter(item => item.disabled === true).length;
         if (!this.optionsAllDisabled) {
           if (direction === 'next') {
             this.hoverIndex++;
@@ -607,7 +609,9 @@
       deleteTag(event, tag) {
         let index = this.selected.indexOf(tag);
         if (index > -1 && !this.disabled) {
-          this.value.splice(index, 1);
+          const value = this.value.slice();
+          value.splice(index, 1);
+          this.$emit('input', value);
           this.$emit('remove-tag', tag);
         }
         event.stopPropagation();

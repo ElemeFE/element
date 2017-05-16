@@ -79,6 +79,8 @@ export default {
                 : ''
               ]
             ).concat(
+              this._self.$parent.$slots.append
+            ).concat(
               <el-tooltip effect={ this.table.tooltipEffect } placement="top" ref="tooltip" content={ this.tooltipContent }></el-tooltip>
             )
           }
@@ -227,12 +229,17 @@ export default {
         tooltip.referenceElm = cell;
         tooltip.$refs.popper.style.display = 'none';
         tooltip.doDestroy();
+        tooltip.setExpectedState(true);
         this.activateTooltip(tooltip);
       }
     },
 
     handleCellMouseLeave(event) {
-      this.$refs.tooltip.handleClosePopper();
+      const tooltip = this.$refs.tooltip;
+      if (tooltip) {
+        tooltip.setExpectedState(false);
+        tooltip.handleClosePopper();
+      }
       const cell = getCell(event);
       if (!cell) return;
 

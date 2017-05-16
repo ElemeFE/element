@@ -132,7 +132,7 @@ export default class TreeStore {
     if (!key || !node || !node.data) return;
 
     const nodeKey = node.key;
-    if (nodeKey) this.nodesMap[node.key] = node;
+    if (nodeKey !== undefined) this.nodesMap[node.key] = node;
   }
 
   deregisterNode(node) {
@@ -189,7 +189,7 @@ export default class TreeStore {
 
   _setCheckedKeys(key, leafOnly = false, checkedKeys) {
     const allNodes = this._getAllNodes();
-    allNodes.sort((a, b) => a.level < b.level);
+    allNodes.sort((a, b) => b.level - a.level);
 
     const keys = Object.keys(checkedKeys);
     allNodes.forEach((node) => {

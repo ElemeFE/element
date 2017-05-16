@@ -62,6 +62,7 @@ export default {
     },
     cascader: {
       noMatch: 'データなし',
+      loading: 'ロード中',
       placeholder: '選択してください'
     },
     pagination: {
@@ -85,10 +86,19 @@ export default {
       emptyText: 'データなし',
       confirmFilter: '確認',
       resetFilter: '初期化',
-      clearFilter: 'すべて'
+      clearFilter: 'すべて',
+      sumText: 'Sum' // to be translated
     },
     tree: {
       emptyText: 'データなし'
+    },
+    transfer: {
+      noMatch: 'データなし',
+      noData: 'データなし',
+      titles: ['List 1', 'List 2'], // to be translated
+      filterPlaceholder: 'Enter keyword', // to be translated
+      noCheckedFormat: '{total} items', // to be translated
+      hasCheckedFormat: '{checked}/{total} checked' // to be translated
     }
   }
 };

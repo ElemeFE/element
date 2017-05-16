@@ -16,6 +16,7 @@ import Radio from '../packages/radio/index.js';
 import RadioGroup from '../packages/radio-group/index.js';
 import RadioButton from '../packages/radio-button/index.js';
 import Checkbox from '../packages/checkbox/index.js';
+import CheckboxButton from '../packages/checkbox-button/index.js';
 import CheckboxGroup from '../packages/checkbox-group/index.js';
 import Switch from '../packages/switch/index.js';
 import Select from '../packages/select/index.js';
@@ -62,7 +63,9 @@ import Collapse from '../packages/collapse/index.js';
 import CollapseItem from '../packages/collapse-item/index.js';
 import Cascader from '../packages/cascader/index.js';
 import ColorPicker from '../packages/color-picker/index.js';
+import Transfer from '../packages/transfer/index.js';
 import locale from 'element-ui/src/locale';
+import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
 const components = [
   Pagination,
@@ -81,6 +84,7 @@ const components = [
   RadioGroup,
   RadioButton,
   Checkbox,
+  CheckboxButton,
   CheckboxGroup,
   Switch,
   Select,
@@ -122,7 +126,9 @@ const components = [
   Collapse,
   CollapseItem,
   Cascader,
-  ColorPicker
+  ColorPicker,
+  Transfer,
+  CollapseTransition
 ];
 
 const install = function(Vue, opts = {}) {
@@ -156,6 +162,7 @@ module.exports = {
   locale: locale.use,
   i18n: locale.i18n,
   install,
+  CollapseTransition,
   Loading,
   Pagination,
   Dialog,
@@ -173,6 +180,7 @@ module.exports = {
   RadioGroup,
   RadioButton,
   Checkbox,
+  CheckboxButton,
   CheckboxGroup,
   Switch,
   Select,
@@ -217,5 +225,6 @@ module.exports = {
   Collapse,
   CollapseItem,
   Cascader,
-  ColorPicker
+  ColorPicker,
+  Transfer
 };

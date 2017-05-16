@@ -11,7 +11,7 @@
             <span class="el-dialog__title">{{title}}</span>
           </slot>
           <div class="el-dialog__headerbtn">
-            <i v-if="showClose" class="el-dialog__close el-icon el-icon-close" @click='close()'></i>
+            <i v-if="showClose" class="el-dialog__close el-icon el-icon-close" @click='handleClose'></i>
           </div>
         </div>
         <div class="el-dialog__body" v-if="rendered"><slot></slot></div>
@@ -81,20 +81,13 @@
       top: {
         type: String,
         default: '15%'
-      }
-    },
-    data() {
-      return {
-        visible: false
-      };
+      },
+      beforeClose: Function
     },
 
     watch: {
-      value(val) {
-        this.visible = val;
-      },
       visible(val) {
-        this.$emit('input', val);
+        this.$emit('update:visible', val);
         if (val) {
           this.$emit('open');
           this.$el.addEventListener('scroll', this.updatePopper);
@@ -119,9 +112,19 @@
 
     methods: {
       handleWrapperClick() {
-        if (this.closeOnClickModal) {
-          this.close();
+        if (!this.closeOnClickModal) return;
+        this.handleClose();
+      },
+      handleClose() {
+        if (typeof this.beforeClose === 'function') {
+          this.beforeClose(this.hide);
+        } else {
+          this.hide();
         }
+      },
+      hide() {
+        this.$emit('update:visible', false);
+        this.$emit('visible-change', false);
       },
       updatePopper() {
         this.broadcast('ElSelectDropdown', 'updatePopper');
@@ -130,7 +133,7 @@
     },
 
     mounted() {
-      if (this.value) {
+      if (this.visible) {
         this.rendered = true;
         this.open();
       }

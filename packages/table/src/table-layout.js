@@ -16,6 +16,7 @@ class TableLayout {
     this.rightFixedWidth = null;
     this.tableHeight = null;
     this.headerHeight = 44; // Table Header Height
+    this.footerHeight = 44; // Table Footer Height
     this.viewportHeight = null; // Table Height - Scroll Bar Height
     this.bodyHeight = null; // Table Height - Table Header Height
     this.fixedBodyHeight = null; // Table Height - Table Header Height - Scroll Bar Height
@@ -73,17 +74,18 @@ class TableLayout {
   updateHeight() {
     const height = this.tableHeight = this.table.$el.clientHeight;
     const noData = !this.table.data || this.table.data.length === 0;
-    const { headerWrapper } = this.table.$refs;
+    const { headerWrapper, footerWrapper } = this.table.$refs;
+    const footerHeight = this.footerHeight = footerWrapper ? footerWrapper.offsetHeight : 0;
     if (this.showHeader && !headerWrapper) return;
     if (!this.showHeader) {
       this.headerHeight = 0;
       if (this.height !== null && (!isNaN(this.height) || typeof this.height === 'string')) {
-        this.bodyHeight = height;
+        this.bodyHeight = height - footerHeight + (footerWrapper ? 1 : 0);
       }
       this.fixedBodyHeight = this.scrollX ? height - this.gutterWidth : height;
     } else {
       const headerHeight = this.headerHeight = headerWrapper.offsetHeight;
-      const bodyHeight = height - headerHeight;
+      const bodyHeight = height - headerHeight - footerHeight + (footerWrapper ? 1 : 0);
       if (this.height !== null && (!isNaN(this.height) || typeof this.height === 'string')) {
         this.bodyHeight = bodyHeight;
       }
