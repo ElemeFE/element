@@ -142,7 +142,7 @@ export default {
     },
     beforeFilter: {
       type: Function,
-      default: null
+      default: () => (() => {})
     }
   },
 

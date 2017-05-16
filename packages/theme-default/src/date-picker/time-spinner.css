@@ -5,10 +5,6 @@
     &.has-seconds {
       .el-time-spinner__wrapper {
         width: 33%;
-
-        .el-scrollbar__wrap:not(.el-scrollbar__wrap--hidden-default) {
-          padding-bottom: 15px;
-        }
       }
 
       .el-time-spinner__wrapper:nth-child(2) {
@@ -23,6 +19,10 @@
       width: 50%;
       vertical-align: top;
       position: relative;
+
+      & .el-scrollbar__wrap:not(.el-scrollbar__wrap--hidden-default) {
+        padding-bottom: 15px;
+      }
     }
 
     @e list {

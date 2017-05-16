@@ -122,9 +122,11 @@
           this.hide();
         }
       },
-      hide() {
-        this.$emit('update:visible', false);
-        this.$emit('visible-change', false);
+      hide(cancel) {
+        if (cancel !== false) {
+          this.$emit('update:visible', false);
+          this.$emit('visible-change', false);
+        }
       },
       updatePopper() {
         this.broadcast('ElSelectDropdown', 'updatePopper');
