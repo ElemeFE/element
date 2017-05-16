@@ -10,11 +10,11 @@
     }
   }
 </script>
-## Dropdown 
+## Dropdown
 Toggleable menu for displaying lists of links and actions.
 
 ### Basic usage
-Hover on the dropdown menu to unfold it for more actions. 
+Hover on the dropdown menu to unfold it for more actions.
 
 :::demo The triggering element is rendered by the default `slot`, and the dropdown part is rendered by the `slot` named `dropdown`. By default, dropdown list shows when you hover on the triggering element without having to click it.
 
@@ -176,6 +176,7 @@ Clicking each dropdown item fires an event whose parameter is assigned by each i
 |---------- |-------- |---------- |
 | click | if `split-button` is `true`, triggers when left button is clicked | — |
 | command | triggers when a dropdown item is clicked | the command dispatched from the dropdown item |
+| visible-change | triggers when the dropdown appears/disappears | true when it appears, and false otherwise |
 
 ### Dropdown Menu Item Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
@@ -183,7 +184,3 @@ Clicking each dropdown item fires an event whose parameter is assigned by each i
 | command       | a command to be dispatched to Dropdown's `command` callback | string  |          —             |    —     |
 | disabled      | whether the item is disabled  | boolean  |          —             |    false     |
 | divided       | whether a divider is displayed  | boolean  |          —             |    false     |
-
-
-
-

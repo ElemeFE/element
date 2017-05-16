@@ -1,5 +1,27 @@
 ## 更新日志
 
+### 1.3.3
+*2017-05-14*
+
+- 新增 Dropdown 的 `visible-change` 事件，#4818（by @luciy）
+- 新增 Col 和 Row 的 `tag` 属性，#4799
+- 修复上个版本中 Cascader 搜索功能不可用的问题，#4812
+- 修复 `type` 为 range 的 DatePicker 错误地触发 watch 的问题，#4837（by @wacky6）
+- 修复 TimePicker 在某些浏览器上数字不居中的问题，#4847（by @pengchongfu）
+- 修复当按下 ESC 关闭 Dialog 时不触发 `before-close` 钩子的问题，#4819（by @patriciussanctus）
+- 修复当多个 MessageBox 中存在 VNode 格式的 `message` 时渲染不正确的问题
+- 修复按下 tab 键无法使 Checkbox 获得焦点的问题
+
+### 1.3.2
+*2017-05-10*
+
+- 修复在按需引入某些组件时，报 `el-collapse-transition` 未找到的错，#4728
+- 修复 Pagination 在 FireFox 中的垂直居中问题，#4756
+- 修复 `type` 为 week 时的 DatePicker 在更新绑定值后面板视图不更新的问题，#4739
+- 修复 `show-summary` 的 Table 的一些高度计算错误，#4736
+- 新增 Cascader 的 `before-filter` 属性，#4774
+- 新增 InputNumber 的 `debounce` 属性，#4712（by @pengchongfu）
+
 ### 1.3.1
 *2017-05-06*
 

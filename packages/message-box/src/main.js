@@ -101,6 +101,8 @@ const showNextMsg = () => {
       if (isVNode(instance.message)) {
         instance.$slots.default = [instance.message];
         instance.message = null;
+      } else {
+        delete instance.$slots.default;
       }
       ['modal', 'showClose', 'closeOnClickModal', 'closeOnPressEscape'].forEach(prop => {
         if (instance[prop] === undefined) {

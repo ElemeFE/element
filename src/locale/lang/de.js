@@ -64,6 +64,7 @@ export default {
     },
     cascader: {
       noMatch: 'Nichts gefunden.',
+      loading: 'Lädt.',
       placeholder: 'Datei wählen'
     },
     pagination: {

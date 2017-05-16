@@ -1,5 +1,29 @@
 ## Changelog
 
+### 1.3.3
+
+*2017-05-14*
+
+- Added `visible-change` event for Dropdown, #4818 (by @luciy)
+- Added `tag` attribute for Col and Row, #4799
+- Fixed Cascader search functionality regression, #4812
+- Fixed DatePicker triggering watch when `type` is range, #4837 (by @wacky6)
+- Fixed numbers in TimePicker not align vertically, #4847 (by @pengchongfu)
+- Fixed Dialog not triggering `before-close` hook when ESC is pressed, #4819 (by @patriciussanctus)
+- Fixed multiple MessageBox not rendering content correctly when some of the `message` is a VNode
+- Fixed Checkbox not focused when navigating with tab
+
+### 1.3.2
+
+*2017-05-10*
+
+- Fixed undefined custom component `el-collapse-transition` error when importing some components on demand, #4728
+- Fixed vertical alignment issue of Pagination in FireFox, #4756
+- Fixed dropdown panel view not updating after binding value of DatePicker is programmatically changed when `type` is week, #4739
+- Fixed height calculation errors of Table with summary rows, #4736
+- Added `before-filter` attribute for Cascader, #4774
+- Added `debounce` attribute for InputNumber, #4712（by @pengchongfu）
+
 ### 1.3.1
 
 *2017-05-06*
