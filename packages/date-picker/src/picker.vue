@@ -256,11 +256,7 @@ export default {
     value: {
       immediate: true,
       handler(val) {
-        if (val === 0) {
-          this.currentValue = '';
-        } else {
-          this.currentValue = isDate(val) ? new Date(val) : val;
-        }
+        this.currentValue = isDate(val) ? new Date(val) : val;
       }
     },
     displayValue(val) {
@@ -486,28 +482,15 @@ export default {
       this.$el.appendChild(this.picker.$el);
       this.picker.resetView && this.picker.resetView();
 
-        this.picker.$on('dodestroy', this.doDestroy);
-        this.picker.$on('pick', (date = '', visible = false) => {
-          if (!date) {
-            this.$emit('input', 0);
-          } else if (date.getTime) {
-//            if (!valueEquals(this.value, date)) {
-//
-//            }
-            this.$emit('input', date.getTime());
-          } else if (Array.isArray(date)) {
-            const stampArr = [];
-            date.forEach((item) => {
-              stampArr.push(item.getTime());
-            });
-            this.$emit('input', stampArr);
-          } else {
-            this.$emit('input', date);
-          }
-
-          this.pickerVisible = this.picker.visible = visible;
-          this.picker.resetView && this.picker.resetView();
-        });
+      this.picker.$on('dodestroy', this.doDestroy);
+      this.picker.$on('pick', (date = '', visible = false) => {
+        // do not emit if values are same
+        if (!valueEquals(this.value, date)) {
+          this.$emit('input', date);
+        }
+        this.pickerVisible = this.picker.visible = visible;
+        this.picker.resetView && this.picker.resetView();
+      });
 
       this.picker.$on('select-range', (start, end) => {
         this.refInput.setSelectionRange(start, end);
