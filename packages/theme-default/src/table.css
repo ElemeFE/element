@@ -295,14 +295,18 @@
       vertical-align: middle;
       width: 100%;
       box-sizing: border-box;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
 
       &.highlight {
         color: var(--color-primary);
       }
+    }
+
+    & th > .cell > label {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     & .caret-wrapper {
