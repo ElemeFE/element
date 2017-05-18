@@ -16,6 +16,26 @@
   }
 </script>
 
+<style>
+  .demo-color-picker .block {
+    padding: 30px 0;
+    text-align: center;
+    border-right: solid 1px #EFF2F6;
+    float: left;
+    width: 50%;
+    box-sizing: border-box;
+    &:last-child {
+      border-right: none;
+    }
+  }
+  .demo-color-picker .demonstration {
+    display: block;
+    color: #8492a6;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+</style>
+
 ## ColorPicker
 
 ColorPicker is a color selector supporting multiple color formats.
