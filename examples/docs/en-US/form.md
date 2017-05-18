@@ -403,7 +403,7 @@ Form component allows you to verify your data, helping you find and correct erro
 
 ```html
 <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
-  <el-form-item label="Activity name" prop="name">
+  <el-form-item label="Activity name" prop="testName">
     <el-input v-model="ruleForm.name"></el-input>
   </el-form-item>
   <el-form-item label="Activity zone" prop="region">
@@ -465,7 +465,7 @@ Form component allows you to verify your data, helping you find and correct erro
           desc: ''
         },
         rules: {
-          name: [
+          testName: [
             { required: true, message: 'Please input Activity name', trigger: 'blur' },
             { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' }
           ],
