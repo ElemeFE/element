@@ -87,7 +87,7 @@ export default {
       confirmFilter: 'Onayla',
       resetFilter: 'Sıfırla',
       clearFilter: 'Hepsi',
-      sumText: 'Sum' // to be translated
+      sumText: 'Sum'
     },
     tree: {
       emptyText: 'Veri yok'
@@ -95,10 +95,10 @@ export default {
     transfer: {
       noMatch: 'Eşleşen veri bulunamadı',
       noData: 'Veri yok',
-      titles: ['Liste 1', 'Liste 2'], // to be translated
-      filterPlaceholder: 'Anahtar kelimeleri gir', // to be translated
-      noCheckedFormat: '{total} adet', // to be translated
-      hasCheckedFormat: '{checked}/{total} seçildi' // to be translated
+      titles: ['Liste 1', 'Liste 2'],
+      filterPlaceholder: 'Anahtar kelimeleri gir',
+      noCheckedFormat: '{total} adet',
+      hasCheckedFormat: '{checked}/{total} seçildi'
     }
   }
 };
