@@ -1,3 +1,44 @@
+<style>
+  .upload-tip {
+    color: #8492a6;
+    font-size: 12px;
+    margin-top: 7px;
+  }
+  .demo-box {
+    margin-bottom: 24px;
+
+    .upload-demo {
+      width: 360px;
+    }
+    .avatar-uploader {
+      .el-upload {
+        border: 1px dashed #d9d9d9;
+        border-radius: 6px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+
+        &:hover {
+          border-color: #20a0ff;
+        }
+      }
+      .avatar-uploader-icon {
+        font-size: 28px;
+        color: #8c939d;
+        width: 178px;
+        height: @width;
+        line-height: @height;
+        text-align: center;
+      }
+      .avatar {
+        width: 178px;
+        height: @width;
+        display: block;
+      }
+    }
+  }
+</style>
+
 <script>
   export default {
     data() {
