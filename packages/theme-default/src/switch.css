@@ -49,10 +49,6 @@
 
     @e input {
       display: none;
-      &:checked + .el-switch__core {
-        border-color: var(--switch-on-color);
-        background-color: var(--switch-on-color);
-      }
     }
 
     @e core {
@@ -77,6 +73,13 @@
       }
     }
 
+    @when checked {
+      .el-switch__core {
+        border-color: var(--switch-on-color);
+        background-color: var(--switch-on-color);
+      }
+    }
+
     @when disabled {
       .el-switch__core {
         border-color: var(--switch-disabled-color) !important;
@@ -89,11 +92,6 @@
         & ~ .el-switch__label * {
           color: var(--switch-disabled-text-color) !important;
         }
-      }
-
-      .el-switch__input:checked + .el-switch__core {
-        border-color: var(--switch-disabled-color);
-        background-color: var(--switch-disabled-color);
       }
     }
 
