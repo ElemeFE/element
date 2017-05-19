@@ -1,3 +1,11 @@
+<style>
+  .demo-box.demo-switch {
+    .el-switch {
+      margin: 20px 20px 20px 0;
+    }
+  }
+</style>
+
 <script>
   export default {
     data() {

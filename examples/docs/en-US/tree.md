@@ -1,3 +1,25 @@
+<style>
+  .demo-tree {
+    .leaf {
+      width: 20px;
+      background: #ddd;
+    }
+
+    .folder {
+      width: 20px;
+      background: #888;
+    }
+
+    .buttons {
+      margin-top: 20px;
+    }
+
+    .filter-tree {
+      margin-top: 20px;
+    }
+  }
+</style>
+
 <script>
   const data = [{
     label: 'Level one 1',
@@ -114,7 +136,7 @@
         if (node.data.name === 'region1') {
           hasChild = true;
         } else if (node.data.name === 'region2') {
-          hasChild = false;          
+          hasChild = false;
         } else {
           hasChild = Math.random() > 0.5;
         }

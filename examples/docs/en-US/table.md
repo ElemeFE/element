@@ -278,6 +278,32 @@
   };
 </script>
 
+<style>
+  .el-table .info-row {
+    background: #c9e5f5;
+  }
+
+  .el-table .positive-row {
+    background: #e2f0e4;
+  }
+
+  .demo-table .name-wrapper {
+    display: inline-block;
+  }
+
+  .demo-table .demo-table-expand {
+    label {
+      width: 90px;
+      color: #99a9bf;
+    }
+    .el-form-item {
+      margin-right: 0;
+      margin-bottom: 0;
+      width: 50%;
+    }
+  }
+</style>
+
 ## Table
 
 Display multiple data with similar format. You can sort, filter, compare your data in a table.
@@ -1563,7 +1589,7 @@ For table of numbers, you can add an extra row at the table footer displaying ea
       label="Amount 3">
     </el-table-column>
   </el-table>
-  
+
   <el-table
     :data="tableData6"
     border
