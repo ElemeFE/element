@@ -148,4 +148,31 @@ describe('Switch', () => {
       }, 10);
     }, 10);
   });
+
+  it('value is the single source of truth', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-switch :value="true"></el-switch>
+        </div>
+      `
+    }, true);
+
+    const component = vm.$children[0];
+    const input = vm.$el.querySelector('input');
+    const core = vm.$el.querySelector('.el-switch__core');
+    core.click();
+    setTimeout(() => {
+      expect(component.checked).to.equal(true);
+      expect(component.$el.classList.contains('is-checked')).to.equal(true);
+      expect(input.checked).to.equal(true);
+      core.click();
+      setTimeout(() => {
+        expect(component.checked).to.equal(true);
+        expect(component.$el.classList.contains('is-checked')).to.equal(true);
+        expect(input.checked).to.equal(true);
+        done();
+      }, 10);
+    }, 10);
+  });
 });
