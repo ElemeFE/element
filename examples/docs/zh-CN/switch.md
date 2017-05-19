@@ -38,7 +38,7 @@
   on-color="#13ce66"
   off-color="#ff4949">
 </el-switch>
-</el-switch>
+
 <script>
   export default {
     data() {
