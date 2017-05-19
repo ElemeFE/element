@@ -57,15 +57,15 @@
 :::demo 设置`on-value`和`off-value`属性，接受`Boolean`, `String`或`Number`类型的值。
 
 ```html
- <el-tooltip :content="'Switch value: ' + value3" placement="top">
-    <el-switch
-      v-model="value3"
-      on-color="#13ce66"
-      off-color="#ff4949"
-      on-value="100"
-      off-value="0">
-    </el-switch>
-  </el-tooltip>
+<el-tooltip :content="'Switch value: ' + value3" placement="top">
+  <el-switch
+    v-model="value3"
+    on-color="#13ce66"
+    off-color="#ff4949"
+    on-value="100"
+    off-value="0">
+  </el-switch>
+</el-tooltip>
 
 <script>
   export default {
