@@ -1,11 +1,11 @@
 <template>
-  <label class="el-switch" :class="{ 'is-disabled': disabled, 'el-switch--wide': hasText }">
+  <label class="el-switch" :class="{ 'is-disabled': disabled, 'el-switch--wide': hasText, 'is-checked': checked }">
     <div class="el-switch__mask" v-show="disabled"></div>
     <input
       class="el-switch__input"
       type="checkbox"
       @change="handleChange"
-      v-model="_value"
+      ref="input"
       :name="name"
       :true-value="onValue"
       :false-value="offValue"
@@ -105,20 +105,12 @@
         /* istanbul ignore next */
         return this.onText || this.offText;
       },
-      _value: {
-        get() {
-          return this.value;
-        },
-        set(val) {
-          this.$emit('input', val);
-        }
-      },
       transform() {
         return this.checked ? `translate(${ this.coreWidth - 20 }px, 2px)` : 'translate(2px, 2px)';
       }
     },
     watch: {
-      value() {
+      checked() {
         if (this.onColor || this.offColor) {
           this.setBackgroundColor();
         }
@@ -126,7 +118,13 @@
     },
     methods: {
       handleChange(event) {
-        this.$emit('change', event.currentTarget.checked ? this.onValue : this.offValue);
+        this.$emit('change', !this.checked ? this.onValue : this.offValue);
+        this.$emit('input', !this.checked ? this.onValue : this.offValue);
+        this.$nextTick(() => {
+          // set input's checked property
+          // in case parent refuses to change component's value
+          this.$refs.input.checked = this.checked;
+        });
       },
       setBackgroundColor() {
         let newColor = this.checked ? this.onColor : this.offColor;
@@ -142,6 +140,7 @@
       if (this.onColor || this.offColor) {
         this.setBackgroundColor();
       }
+      this.$refs.input.checked = this.checked;
     }
   };
 </script>
