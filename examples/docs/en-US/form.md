@@ -758,7 +758,7 @@ Form component allows you to verify your data, helping you find and correct erro
 
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 | ---- | ----| ---- | ---- | ---- |
-| prop | a key of `model` | string | keys of model that passed to `form` |
+| prop | a key of `model`. In the use of validate and resetFields method, the attribute is required | string | keys of model that passed to `form` |
 | label | label | string | — | — |
 | label-width | width of label, e.g. '50px' | string | — | — |
 | required | whether the field is required or not, will be determined by validation rules if omitted | string |  — | false |
