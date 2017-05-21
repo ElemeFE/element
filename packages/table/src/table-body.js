@@ -14,6 +14,7 @@ export default {
     store: {
       required: true
     },
+    stripe: Boolean,
     context: {},
     layout: {
       required: true
@@ -52,7 +53,7 @@ export default {
                 on-contextmenu={ ($event) => this.handleContextMenu($event, row) }
                 on-mouseenter={ _ => this.handleMouseEnter($index) }
                 on-mouseleave={ _ => this.handleMouseLeave() }
-                class={ ['el-table__row', this.getRowClass(row, $index)] }>
+                class={ [this.getRowClass(row, $index)] }>
                 {
                   this._l(this.columns, (column, cellIndex) =>
                     <td
@@ -186,8 +187,11 @@ export default {
     },
 
     getRowClass(row, index) {
-      const classes = [];
+      const classes = ['el-table__row'];
 
+      if (this.stripe && index % 2 === 1) {
+        classes.push('el-table__row--striped');
+      }
       const rowClassName = this.rowClassName;
       if (typeof rowClassName === 'string') {
         classes.push(rowClassName);
