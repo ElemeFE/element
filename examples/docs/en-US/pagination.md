@@ -1,3 +1,53 @@
+<style>
+  .demo-pagination .source.first {
+    padding: 0;
+  }
+
+  .demo-pagination .first .block {
+    padding: 30px 0;
+    text-align: center;
+    border-right: solid 1px #EFF2F6;
+    float: left;
+    width: 50%;
+    box-sizing: border-box;
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  .demo-pagination .first .demonstration {
+    display: block;
+    color: #8492a6;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  .demo-pagination .source.last {
+    padding: 0;
+  }
+
+  .demo-pagination .last .block {
+    padding: 30px 24px;
+    border-bottom: solid 1px #EFF2F6;
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .demo-pagination .last .demonstration {
+    font-size: 14px;
+    color: #8492a6;
+    line-height: 44px;
+  }
+
+  .demo-pagination .last .demonstration + .el-pagination {
+    float: right;
+    width: 70%;
+    margin: 5px 20px 0 0;
+  }
+</style>
+
 ## Pagination
 
 If you have too much data to display in one page, use pagination.

@@ -386,7 +386,7 @@
 
     @modifier striped {
       & .el-table__body {
-        & tr:nth-child(2n) {
+        & tr.el-table__row--striped {
           td {
             background: #FAFAFA;
             background-clip: padding-box;

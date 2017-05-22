@@ -14,6 +14,7 @@ export default {
     store: {
       required: true
     },
+    stripe: Boolean,
     context: {},
     layout: {
       required: true
@@ -108,7 +109,7 @@ export default {
       const el = this.$el;
       if (!el) return;
       const data = this.store.states.data;
-      const rows = el.querySelectorAll('tbody > tr');
+      const rows = el.querySelectorAll('tbody > tr.el-table__row');
       const oldRow = rows[data.indexOf(oldVal)];
       const newRow = rows[data.indexOf(newVal)];
       if (oldRow) {
@@ -186,8 +187,11 @@ export default {
     },
 
     getRowClass(row, index) {
-      const classes = [];
+      const classes = ['el-table__row'];
 
+      if (this.stripe && index % 2 === 1) {
+        classes.push('el-table__row--striped');
+      }
       const rowClassName = this.rowClassName;
       if (typeof rowClassName === 'string') {
         classes.push(rowClassName);

@@ -404,6 +404,49 @@ describe('Select', () => {
     }, 10);
   });
 
+  it('default-first-option', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-select
+            v-model="value"
+            default-first-option
+            filterable
+          >
+            <el-option
+              v-for="item in options"
+              :label="item"
+              :value="item"
+            />
+          </el-select>
+        </div>
+      `,
+      data() {
+        return {
+          options: ['1', '2', '3', '4', '5'],
+          value: ''
+        };
+      }
+    }, true);
+
+    const select = vm.$children[0];
+    setTimeout(() => {
+      select.$el.querySelector('input').focus();
+      select.query = '3';
+      select.selectedLabel = '3';
+      setTimeout(() => {
+        const enterKey = document.createEvent('Events');
+        enterKey.initEvent('keydown', true, true);
+        enterKey.keyCode = 13;
+        select.$el.querySelector('input').dispatchEvent(enterKey);
+        setTimeout(() => {
+          expect(select.value).to.equal('3');
+          done();
+        }, 10);
+      }, 10);
+    }, 10);
+  });
+
   it('allow create', done => {
     vm = getSelectVm({ filterable: true, allowCreate: true });
     const select = vm.$children[0];

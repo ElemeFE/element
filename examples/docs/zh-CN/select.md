@@ -652,6 +652,7 @@
 | no-match-text | 搜索条件无匹配时显示的文字 | string | — | 无匹配数据 |
 | no-data-text | 选项为空时显示的文字 | string | — | 无数据 |
 | popper-class | Select 下拉框的类名 | string | — | — |
+| default-first-option | 在输入框按下回车，选择第一个匹配项。需配合 `filterable` 或 `remote` 使用 | boolean | - | false |
 
 ### Select Events
 | 事件名称 | 说明 | 回调参数 |

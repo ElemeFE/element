@@ -146,7 +146,7 @@
 
     computed: {
       lang() {
-        return this.$route.path.split('/')[1];
+        return this.$route.path.split('/')[1] || 'zh-CN';
       },
 
       langConfig() {
