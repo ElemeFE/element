@@ -1,4 +1,4 @@
-import { createVue, triggerClick, destroyVM } from '../util';
+import { createVue, destroyVM } from '../util';
 
 describe('Autocomplete', () => {
   let vm;
@@ -59,11 +59,11 @@ describe('Autocomplete', () => {
       expect(suggestions.style.display).to.not.equal('none');
       expect(suggestions.querySelectorAll('.el-autocomplete-suggestion__list li').length).to.be.equal(4);
 
-      triggerClick(document);
+      inputElm.blur();
       setTimeout(_ => {
         expect(suggestions.style.display).to.be.equal('none');
         done();
-      }, 500);
+      }, 600);
     }, 500);
   });
   it('select', done => {
