@@ -94,10 +94,10 @@ export default {
     transfer: {
       noMatch: 'பொருத்தமான தரவு கிடைக்கவில்லை',
       noData: 'தரவு இல்லை',
-      titles: ['பட்டியல் 1', 'பட்டியல் 2'], // to be translated
-      filterPlaceholder: 'சொல்லை உள்ளீடு செய்', // to be translated
-      noCheckedFormat: '{மொத்தம்} items', // to be translated
-      hasCheckedFormat: '{தேர்வு செய்யப்பட்டவைகள்}/{மொத்தம்} தேர்வு செய்யப்பட்டவைகள்' // to be translated
+      titles: ['பட்டியல் 1', 'பட்டியல் 2'],
+      filterPlaceholder: 'சொல்லை உள்ளீடு செய்',
+      noCheckedFormat: '{மொத்தம்} items',
+      hasCheckedFormat: '{தேர்வு செய்யப்பட்டவைகள்}/{மொத்தம்} தேர்வு செய்யப்பட்டவைகள்'
     }
   }
 };
