@@ -1,5 +1,13 @@
 ## Changelog
 
+### 1.3.4
+
+*2017-05-23*
+
+- Fixed highlight and stripe effects of Table with expandable rows, #4871 (by @mu-yu)
+- Added `default-first-option` for Select, #4838 (by @wacky6)
+- Fixed Select with no options not displaying "No data" text when `allow-create` is true, #4977
+
 ### 1.3.3
 
 *2017-05-14*
