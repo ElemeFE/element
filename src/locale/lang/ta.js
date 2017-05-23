@@ -29,7 +29,6 @@ export default {
       month10: 'அக்டோபர்',
       month11: 'நவம்பர்',
       month12: 'டிசம்பர்',
-
       weeks: {
         sun: 'ஞாயிறு',
         mon: 'திங்கள்',
@@ -51,7 +50,7 @@ export default {
         sep: 'செப்டம்பர்',
         oct: 'அக்டோபர்',
         nov: 'நவம்பர்',
-        dec: 'டிசம்பர்',
+        dec: 'டிசம்பர்'
       }
     },
     select: {
