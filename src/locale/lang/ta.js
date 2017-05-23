@@ -13,7 +13,7 @@ export default {
       selectDate: 'தேதியை தேர்வு செய்',
       selectTime: 'நேரத்தை தேர்வு செய்',
       startDate: 'தொடங்கும் நாள்',
-      startTime: 'தொடங்கும் நேரம்,
+      startTime: 'தொடங்கும் நேரம்',
       endDate: 'முடியும் தேதி',
       endTime: 'முடியும் நேரம்',
       year: 'வருடம்',
