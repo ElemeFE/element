@@ -1,5 +1,5 @@
 <template>
-  <div class="el-autocomplete" v-clickoutside="handleClickoutside">
+  <div class="el-autocomplete">
     <el-input
       ref="input"
       :value="value"
@@ -36,7 +36,6 @@
 </template>
 <script>
   import ElInput from 'element-ui/packages/input';
-  import Clickoutside from 'element-ui/src/utils/clickoutside';
   import ElAutocompleteSuggestions from './autocomplete-suggestions.vue';
   import Emitter from 'element-ui/src/mixins/emitter';
 
@@ -51,8 +50,6 @@
       ElInput,
       ElAutocompleteSuggestions
     },
-
-    directives: { Clickoutside },
 
     props: {
       popperClass: String,
@@ -136,9 +133,6 @@
         if (this.suggestionVisible && this.highlightedIndex >= 0 && this.highlightedIndex < this.suggestions.length) {
           this.select(this.suggestions[this.highlightedIndex]);
         }
-      },
-      handleClickoutside() {
-        this.isFocus = false;
       },
       select(item) {
         this.$emit('input', item.value);
