@@ -52,6 +52,7 @@ Message.close = function(id, userOnClose) {
       if (typeof userOnClose === 'function') {
         userOnClose(instances[i]);
       }
+      instances[i].close();
       instances.splice(i, 1);
       break;
     }
