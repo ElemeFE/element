@@ -67,7 +67,7 @@ export default {
     },
     pagination: {
       goto: 'Ir para',
-      pagesize: '/pagina',
+      pagesize: '/página',
       total: 'Total {total}',
       pageClassifier: ''
     },
@@ -87,7 +87,7 @@ export default {
       confirmFilter: 'Confirmar',
       resetFilter: 'Limpar',
       clearFilter: 'Todos',
-      sumText: 'Sum' // to be translated
+      sumText: 'Total'
     },
     tree: {
       emptyText: 'Sem dados'
@@ -95,10 +95,10 @@ export default {
     transfer: {
       noMatch: 'Sem resultados',
       noData: 'Sem dados',
-      titles: ['List 1', 'List 2'], // to be translated
-      filterPlaceholder: 'Enter keyword', // to be translated
-      noCheckedFormat: '{total} items', // to be translated
-      hasCheckedFormat: '{checked}/{total} checked' // to be translated
+      titles: ['Lista 1', 'Lista 2'],
+      filterPlaceholder: 'Digite uma palavra-chave',
+      noCheckedFormat: '{total} itens',
+      hasCheckedFormat: '{checked}/{total} selecionados'
     }
   }
 };
