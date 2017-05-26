@@ -1413,16 +1413,16 @@ Load child options when their parent option is clicked or hovered over.
     },
 
     methods: {
-      handleItemChange(val) {
+      handleItemChange(val, options) {
         console.log('active item:', val);
+        console.log('active options:', options);
         setTimeout(_ => {
-          if (val.indexOf('California') > -1 && !this.options2[0].cities.length) {
-            this.options2[0].cities = [{
-              label: 'Los Angeles'
-            }];
-          } else if (val.indexOf('Florida') > -1 && !this.options2[1].cities.length) {
-            this.options2[1].cities = [{
-              label: 'Orlando'
+          const currentOption = options[options.length - 2];
+          if (!currentOption.cities.length) {
+            currentOption.cities = [{
+              label: 'City 1'
+            }, {
+              label: 'City 2'
             }];
           }
         }, 300);
