@@ -90,7 +90,7 @@
         if (this.changeOnSelect) {
           this.$emit('pick', this.activeValue, false);
         } else {
-          this.$emit('activeItemChange', this.activeValue);
+          this.$emit('activeItemChange', this.activeValue, this.activeOptions);
         }
       }
     },
