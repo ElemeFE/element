@@ -426,6 +426,14 @@ describe('Select', () => {
           options: ['1', '2', '3', '4', '5'],
           value: ''
         };
+      },
+      methods: {
+        filterMethod(query) {
+          // simulate async filterMethod / remoteMethod
+          setTimeout(() => {
+            this.options.filter(option => option.label.indexOf(query) !== -1);
+          }, 5);
+        }
       }
     }, true);
 
@@ -443,7 +451,7 @@ describe('Select', () => {
           expect(select.value).to.equal('3');
           done();
         }, 10);
-      }, 10);
+      }, 10);  // wait for async filterMethod
     }, 10);
   });
 
