@@ -409,9 +409,10 @@ export default {
     handleKeydown(event) {
       const keyCode = event.keyCode;
 
-      // tab
-      if (keyCode === 9) {
+      // TAB or ESC
+      if (keyCode === 9 || keyCode === 27) {
         this.pickerVisible = false;
+        event.stopPropagation();
       }
     },
 
