@@ -602,6 +602,7 @@
         event.stopPropagation();
         this.$emit('input', '');
         this.visible = false;
+        this.$emit('clear');
       },
 
       deleteTag(event, tag) {
