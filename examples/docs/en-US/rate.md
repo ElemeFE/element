@@ -1,3 +1,24 @@
+<style>
+  .demo-rate .block {
+    padding: 30px 0;
+    text-align: center;
+    border-right: solid 1px #EFF2F6;
+    float: left;
+    width: 50%;
+    box-sizing: border-box;
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  .demo-rate .demonstration {
+    display: block;
+    color: #8492a6;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+</style>
+
 <script>
   export default {
     data() {
@@ -21,10 +42,10 @@
 ## Rate
 
 Used for rating
- 
+
 ### Basic usage
 
-:::demo Rate divides rating scores into three levels and these levels can be distinguished by using different background colors. By default background colors are the same, but you can assign them to reflect three levels using the `colors` attribute, and their two thresholds can be defined by `low-threshold` and `high-threshold`.  
+:::demo Rate divides rating scores into three levels and these levels can be distinguished by using different background colors. By default background colors are the same, but you can assign them to reflect three levels using the `colors` attribute, and their two thresholds can be defined by `low-threshold` and `high-threshold`.
 
 ``` html
 <div class="block">
@@ -145,7 +166,7 @@ Read-only Rate is for displaying rating score. Half star is supported.
 | void-icon-class | class name of unselected icons | string | — | el-icon-star-off |
 | disabled-void-icon-class | class name of unselected read-only icons | string | — | el-icon-star-on |
 | show-text | whether to display texts | boolean | — | false |
-| text-color | color of texts | string | — | 1F2D3D |
+| text-color | color of texts | string | — | #1F2D3D |
 | texts | text array | array | — | ['极差', '失望', '一般', '满意', '惊喜'] |
 | text-template | text template when the component is read-only | string | — | {value} |
 

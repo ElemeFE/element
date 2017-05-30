@@ -114,7 +114,7 @@ Vertical step bars.
 
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------- |---------- |-------------  |-------- |
-| space | the spacing of each step, will be responsive if omitted | Number | — | — |
+| space | the spacing of each step, will be responsive if omitted. Support percentage. | Number,String | — | — |
 | direction | display direction | string | vertical/horizontal | horizontal |
 | active | current activation step  | number | — | 0 |
 | process-status | status of current step | string | wait/process/finish/error/success | process |
@@ -128,6 +128,7 @@ Vertical step bars.
 | title | step title | string | — | — |
 | description | step description | string | — | — |
 | icon | step icon | icons provided by Element Icon. Can be overwritten by a named slot if you want to use  custom icons | string | — |
+| status | current status. It will be automatically set by Steps if not configured. | wait/process/finish/error/success | - |
 
 ### Step Slot
 | Name | Description |

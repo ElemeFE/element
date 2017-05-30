@@ -154,12 +154,81 @@
           address: 'No. 189, Grove St, Los Angeles',
           zip: 'CA 90036'
         }],
+        tableData6: [{
+          id: '12987122',
+          name: 'Tom',
+          amount1: '234',
+          amount2: '3.2',
+          amount3: 10
+        }, {
+          id: '12987123',
+          name: 'Tom',
+          amount1: '165',
+          amount2: '4.43',
+          amount3: 12
+        }, {
+          id: '12987124',
+          name: 'Tom',
+          amount1: '324',
+          amount2: '1.9',
+          amount3: 9
+        }, {
+          id: '12987125',
+          name: 'Tom',
+          amount1: '621',
+          amount2: '2.2',
+          amount3: 17
+        }, {
+          id: '12987126',
+          name: 'Tom',
+          amount1: '539',
+          amount2: '4.1',
+          amount3: 15
+        }],
         currentRow: null,
         multipleSelection: []
       };
     },
 
     methods: {
+      getSummaries(param) {
+        const { columns, data } = param;
+        const sums = [];
+        columns.forEach((column, index) => {
+          if (index === 0) {
+            sums[index] = 'Total Cost';
+            return;
+          }
+          const values = data.map(item => Number(item[column.property]));
+          if (!values.every(value => isNaN(value))) {
+            sums[index] = '$ ' + values.reduce((prev, curr) => {
+              const value = Number(curr);
+              if (!isNaN(value)) {
+                return prev + curr;
+              } else {
+                return prev;
+              }
+            }, 0);
+          } else {
+            sums[index] = 'N/A';
+          }
+        });
+
+        return sums;
+      },
+      setCurrent(row) {
+        this.$refs.singleTable.setCurrentRow(row);
+      },
+      toggleSelection(rows) {
+        if (rows) {
+          rows.forEach(row => {
+            this.$refs.multipleTable.toggleRowSelection(row);
+          });
+        } else {
+          this.$refs.multipleTable.clearSelection();
+        }
+      },
+
       handleClick() {
         console.log('click');
       },
@@ -208,6 +277,32 @@
     }
   };
 </script>
+
+<style>
+  .el-table .info-row {
+    background: #c9e5f5;
+  }
+
+  .el-table .positive-row {
+    background: #e2f0e4;
+  }
+
+  .demo-table .name-wrapper {
+    display: inline-block;
+  }
+
+  .demo-table .demo-table-expand {
+    label {
+      width: 90px;
+      color: #99a9bf;
+    }
+    .el-form-item {
+      margin-right: 0;
+      margin-bottom: 0;
+      width: 50%;
+    }
+  }
+</style>
 
 ## Table
 
@@ -973,10 +1068,11 @@ When the data structure is complex, you can use group header to show the data hi
 
 Single row selection is supported.
 
-:::demo Table supports single row selection. You can activate it by adding the `highlight-currnet-row` attribute. An event called `current-change` will be triggered when row selection changes, and its parameters are the rows after and before this change: `currentRow` and `oldCurrentRow`. If you need to display row index, you can add a new `el-table-column` with its `type` attribute assigned to `index`, and you will see the index starting from 1.
+:::demo Table supports single row selection. You can activate it by adding the `highlight-current-row` attribute. An event called `current-change` will be triggered when row selection changes, and its parameters are the rows after and before this change: `currentRow` and `oldCurrentRow`. If you need to display row index, you can add a new `el-table-column` with its `type` attribute assigned to `index`, and you will see the index starting from 1.
 ```html
 <template>
   <el-table
+    ref="singleTable"
     :data="tableData"
     highlight-current-row
     @current-change="handleCurrentChange"
@@ -1000,6 +1096,10 @@ Single row selection is supported.
       label="Address">
     </el-table-column>
   </el-table>
+  <div style="margin-top: 20px">
+    <el-button @click="setCurrent(tableData[1])">Select second row</el-button>
+    <el-button @click="setCurrent()">Clear selection</el-button>
+  </div>
 </template>
 
 <script>
@@ -1028,6 +1128,9 @@ Single row selection is supported.
     },
 
     methods: {
+      setCurrent(row) {
+        this.$refs.singleTable.setCurrentRow(row);
+      },
       handleCurrentChange(val) {
         this.currentRow = val;
       }
@@ -1045,6 +1148,7 @@ You can also select multiple rows.
 ```html
 <template>
   <el-table
+    ref="multipleTable"
     :data="tableData3"
     border
     style="width: 100%"
@@ -1069,6 +1173,10 @@ You can also select multiple rows.
       show-overflow-tooltip>
     </el-table-column>
   </el-table>
+  <div style="margin-top: 20px">
+    <el-button @click="toggleSelection([tableData3[1], tableData3[2]])">Toggle selection status of second and third rows</el-button>
+    <el-button @click="toggleSelection()">Clear selection</el-button>
+  </div>
 </template>
 
 <script>
@@ -1109,6 +1217,15 @@ You can also select multiple rows.
     },
 
     methods: {
+      toggleSelection(rows) {
+        if (rows) {
+          rows.forEach(row => {
+            this.$refs.multipleTable.toggleRowSelection(row);
+          });
+        } else {
+          this.$refs.multipleTable.clearSelection();
+        }
+      },
       handleSelectionChange(val) {
         this.multipleSelection = val;
       }
@@ -1214,7 +1331,8 @@ Filter the table to find desired data.
       label="Tag"
       width="100"
       :filters="[{ text: 'Home', value: 'Home' }, { text: 'Office', value: 'Office' }]"
-      :filter-method="filterTag">
+      :filter-method="filterTag"
+      filter-placement="bottom-end">
       <template scope="scope">
         <el-tag
           :type="scope.row.tag === 'Home' ? 'primary' : 'success'"
@@ -1296,7 +1414,6 @@ Customize table column so it can be integrated with other components.
       </template>
     </el-table-column>
     <el-table-column
-      :context="_self"
       label="Operations">
       <template scope="scope">
         <el-button
@@ -1429,8 +1546,146 @@ When the row content is too long and you do not want to display the horizontal s
           address: 'No. 189, Grove St, Los Angeles',
           zip: 'CA 90036'
         }]
+      }
     }
   }
+</script>
+```
+:::
+
+### Summary row
+
+For table of numbers, you can add an extra row at the table footer displaying each column's sum.
+:::demo You can add the summary row by setting `show-summary` to `true`. By default, for the summary row, the first column does not sum anything up but always displays 'Sum' (you can configure the displayed text using `sum-text`), while other columns sum every number in that column up and display them. You can of course define your own sum behaviour. To do so, pass a method to `summary-method`, which returns an array, and each element of the returned array will be displayed in the columns of the summary row. The second table of this example is a detailed demo.
+```html
+<template>
+  <el-table
+    :data="tableData6"
+    border
+    show-summary
+    style="width: 100%">
+    <el-table-column
+      prop="id"
+      label="ID"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="name"
+      label="Name">
+    </el-table-column>
+    <el-table-column
+      prop="amount1"
+      sortable
+      label="Amount 1">
+    </el-table-column>
+    <el-table-column
+      prop="amount2"
+      sortable
+      label="Amount 2">
+    </el-table-column>
+    <el-table-column
+      prop="amount3"
+      sortable
+      label="Amount 3">
+    </el-table-column>
+  </el-table>
+
+  <el-table
+    :data="tableData6"
+    border
+    height="200"
+    :summary-method="getSummaries"
+    show-summary
+    style="width: 100%; margin-top: 20px">
+    <el-table-column
+      prop="id"
+      label="ID"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="name"
+      label="Name">
+    </el-table-column>
+    <el-table-column
+      prop="amount1"
+      label="Cost 1 ($)">
+    </el-table-column>
+    <el-table-column
+      prop="amount2"
+      label="Cost 2 ($)">
+    </el-table-column>
+    <el-table-column
+      prop="amount3"
+      label="Cost 3 ($)">
+    </el-table-column>
+  </el-table>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        tableData6: [{
+          id: '12987122',
+          name: 'Tom',
+          amount1: '234',
+          amount2: '3.2',
+          amount3: 10
+        }, {
+          id: '12987123',
+          name: 'Tom',
+          amount1: '165',
+          amount2: '4.43',
+          amount3: 12
+        }, {
+          id: '12987124',
+          name: 'Tom',
+          amount1: '324',
+          amount2: '1.9',
+          amount3: 9
+        }, {
+          id: '12987125',
+          name: 'Tom',
+          amount1: '621',
+          amount2: '2.2',
+          amount3: 17
+        }, {
+          id: '12987126',
+          name: 'Tom',
+          amount1: '539',
+          amount2: '4.1',
+          amount3: 15
+        }]
+      };
+    },
+    methods: {
+      getSummaries(param) {
+        const { columns, data } = param;
+        const sums = [];
+        columns.forEach((column, index) => {
+          if (index === 0) {
+            sums[index] = 'Total Cost';
+            return;
+          }
+          const values = data.map(item => Number(item[column.property]));
+          if (!values.every(value => isNaN(value))) {
+            sums[index] = '$ ' + values.reduce((prev, curr) => {
+              const value = Number(curr);
+              if (!isNaN(value)) {
+                return prev + curr;
+              } else {
+                return prev;
+              }
+            }, 0);
+          } else {
+            sums[index] = 'N/A';
+          }
+        });
+
+        return sums;
+      }
+    }
+  };
 </script>
 ```
 :::
@@ -1440,7 +1695,7 @@ When the row content is too long and you do not want to display the horizontal s
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | data | table data | array | — | — |
 | height | Table's height. By default it has an `auto` height. If its value is a number, the height is measured in pixels; if its value is a string, the height is affected by external styles | string/number | — | — |
-| maxHeight | Table's max-height. The height of the table starts from `auto` until it reaches the maxHeight limit. The `maxHeight` is measured in pixels, same as `height` | string/number | — | — |
+| max-height | Table's max-height. The height of the table starts from `auto` until it reaches the maxHeight limit. The `maxHeight` is measured in pixels, same as `height` | string/number | — | — |
 | stripe | whether table is striped | boolean | — | false |
 | border | whether table has vertical border | boolean | — | false |
 | fit | whether width of column automatically fits its container | boolean | — | true |
@@ -1450,11 +1705,14 @@ When the row content is too long and you do not want to display the horizontal s
 | row-class-name | function that returns custom class names for a row, or a string assigning class names for every row | Function(row, index)/String | — | — |
 | row-style | function that returns custom style for a row,  or a string assigning custom style for every row | Function(row, index)/Object | — | — |
 | row-key | key of row data, used for optimizing rendering. Required if `reserve-selection` is on | Function(row)/String | — | — |
-| context | context of Table, e.g. `_self` refers to the current context, `$parent` parent context, `$root` root context, can be overridden by `context` in `el-table-column` | Object | — | current context where Table lies |
 | empty-text | Displayed text when data is empty. You can customize this area with `slot="empty"` | String | — | No Data |
 | default-expand-all | whether expand all rows by default, only works when the table has a column type="expand" | Boolean | — | false |
 | expand-row-keys | set expanded rows by this prop, prop's value is the keys of expand rows, you should set row-key before using this prop | Array | — | |
 | default-sort | set the default sort column and order. property `prop` is used to set default sort column, property `order` is used to set default sort order | Object | `order`: ascending, descending | if `prop` is set, and `order` is not set, then `order` is default to ascending |
+| tooltip-effect | tooltip `effect` property | String | dark/light | | dark |
+| show-summary | whether to display a summary row | Boolean | — | false |
+| sum-text | displayed text for the first column of summary row | String | — | Sum |
+| summary-method | custom summary method | Function({ columns, data }) | — | — |
 
 ### Table Events
 | Event Name | Description | Parameters |
@@ -1465,6 +1723,7 @@ When the row content is too long and you do not want to display the horizontal s
 | cell-mouse-enter | triggers when hovering into a cell| row, column, cell, event |
 | cell-mouse-leave | triggers when hovering out of a cell | row, column, cell, event |
 | cell-click | triggers when clicking a cell | row, column, cell, event |
+| cell-dblclick | triggers when double clicking a cell | row, column, cell, event |
 | row-click | triggers when clicking a row | row, event, column |
 | row-contextmenu | triggers when user right clicks on a row | row, event |
 | row-dblclick | triggers when double clicking a row | row, event |
@@ -1472,13 +1731,20 @@ When the row content is too long and you do not want to display the horizontal s
 | sort-change | triggers when Table's sorting changes | { column, prop, order } |
 | filter-change | column's key. If you need to use the filter-change event, this attribute is mandatory to identify which column is being filtered | filters |
 | current-change | triggers when current row changes | currentRow, oldCurrentRow |
+| header-dragend | triggers when finish dragging header | newWidth, oldWidth, column, event |
 | expand | triggers when user expands or collapses a row | row, expanded |
 
 ### Table Methods
 | Method | Description | Parameters |
 |------|--------|-------|
-| clearSelection | clear selection, might be useful when `reserve-selection` is on | selection |
-| toggleRowSelection | toggle if a certain row is selected. With the second parameter, you can directly set if this row is selected | row, selected |
+| clearSelection | used in multiple selection Table, clear selection, might be useful when `reserve-selection` is on | selection |
+| toggleRowSelection | used in multiple selection Table, toggle if a certain row is selected. With the second parameter, you can directly set if this row is selected | row, selected |
+| setCurrentRow | used in single selection Table, set a certain row selected. If called without any parameter, it will clear selection. | row |
+
+### Table Slot
+| Name | Description |
+|------|--------|
+| append | Contents to be inserted after the last row. It is still nested inside the `<tbody>` tag. You may need this slot if you want to implement infinite scroll for the table. This slot will be displayed above the summary row if there is one. |
 
 ### Table-column Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
@@ -1499,9 +1765,11 @@ When the row content is too long and you do not want to display the horizontal s
 | align | alignment | string | left/center/right | left |
 | header-align | alignment of the table header. If omitted, the value of the above `align` attribute will be applied | String | left/center/right | — |
 | class-name | class name of cells in the column | string | — | — |
+| label-class-name | class name of the label of this column | string | — | — |
 | selectable | function that determines if a certain row can be selected, works when `type` is 'selection' | Function(row, index) | — | — |
 | reserve-selection | whether to reserve selection after data refreshing, works when `type` is 'selection' | boolean | — | false |
 | filters | an array of data filtering options. For each element in this array, `text` and `value` are required | Array[{ text, value }] | — | — |
+| filter-placement | placement for the filter dropdown | String | same as Tooltip's `placement` | — |
 | filter-multiple | whether data filtering supports multiple options | Boolean | — | true |
 | filter-method | data filtering method. If `filter-multiple` is on, this method will be called multiple times for each row, and a row will display if one of the calls returns `true` | Function(value, row) | — | — |
 | filtered-value | filter value for selected data, might be useful when table header is rendered with `render-header` | Array | — | — |

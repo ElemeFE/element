@@ -14,7 +14,7 @@
     mixins: [Emitter],
 
     props: {
-      value: [String, Number],
+      value: {},
       size: String,
       fill: String,
       textColor: String,

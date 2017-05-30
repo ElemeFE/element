@@ -51,6 +51,7 @@
     watch: {
       visible(val) {
         this.broadcast('ElDropdownMenu', 'visible', val);
+        this.$emit('visible-change', val);
       }
     },
 

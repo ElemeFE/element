@@ -52,10 +52,7 @@ export default {
     title: String,
     icon: String,
     description: String,
-    status: {
-      type: String,
-      default: 'wait'
-    }
+    status: String
   },
 
   data() {
@@ -65,12 +62,18 @@ export default {
       lineStyle: {},
       mainOffset: 0,
       isLast: false,
-      currentStatus: this.status
+      internalStatus: ''
     };
   },
 
-  created() {
+  beforeCreate() {
     this.$parent.steps.push(this);
+  },
+
+  computed: {
+    currentStatus() {
+      return this.status || this.internalStatus;
+    }
   },
 
   methods: {
@@ -78,14 +81,14 @@ export default {
       const prevChild = this.$parent.$children[this.index - 1];
 
       if (val > this.index) {
-        this.currentStatus = this.$parent.finishStatus;
+        this.internalStatus = this.$parent.finishStatus;
       } else if (val === this.index) {
-        this.currentStatus = this.$parent.processStatus;
+        this.internalStatus = this.$parent.processStatus;
       } else {
-        this.currentStatus = 'wait';
+        this.internalStatus = 'wait';
       }
 
-      if (prevChild) prevChild.calcProgress(this.currentStatus);
+      if (prevChild) prevChild.calcProgress(this.internalStatus);
     },
 
     calcProgress(status) {
@@ -100,6 +103,7 @@ export default {
         style.transitionDelay = (-150 * this.index) + 'ms';
       }
 
+      style.borderWidth = step ? '1px' : 0;
       this.$parent.direction === 'vertical'
         ? style.height = step + '%'
         : style.width = step + '%';
@@ -118,9 +122,11 @@ export default {
     const isCenter = parent.center;
     const len = parent.steps.length;
     const isLast = this.isLast = parent.steps[parent.steps.length - 1] === this;
-    const space = parent.space
+    const space = typeof parent.space === 'number'
       ? parent.space + 'px'
-      : 100 / (isCenter ? len - 1 : len) + '%';
+      : parent.space
+        ? parent.space
+        : 100 / (isCenter ? len - 1 : len) + '%';
 
     if (parent.direction === 'horizontal') {
       this.style = { width: space };

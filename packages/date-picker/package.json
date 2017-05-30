@@ -8,7 +8,7 @@
     "component"
   ],
   "main": "./lib/index.js",
-  "repository": "https://github.com/ElemeFE/element/tree/master/packages/datepicker",
+  "repository": "https://github.com/ElemeFE/element/tree/master/packages/date-picker",
   "author": "long.zhang@ele.me",
   "license": "MIT",
   "dependencies": {}

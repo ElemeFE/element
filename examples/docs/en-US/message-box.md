@@ -59,9 +59,13 @@
       },
 
       open4() {
+        const h = this.$createElement;
         this.$msgbox({
           title: 'Message',
-          message: 'This is a message',
+          message: h('p', null, [
+            h('span', null, 'Message can be '),
+            h('i', { style: 'color: teal' }, 'VNode')
+          ]),
           showCancelButton: true,
           confirmButtonText: 'OK',
           cancelButtonText: 'Cancel',
@@ -219,9 +223,13 @@ Can be customized to show various content.
   export default {
     methods: {
       open4() {
+        const h = this.$createElement;
         this.$msgbox({
           title: 'Message',
-          message: 'This is a message',
+          message: h('p', null, [
+            h('span', null, 'Message can be '),
+            h('i', { style: 'color: teal' }, 'VNode')
+          ]),
           showCancelButton: true,
           confirmButtonText: 'OK',
           cancelButtonText: 'Cancel',
@@ -284,9 +292,10 @@ The corresponding methods are: `MessageBox`, `MessageBox.alert`, `MessageBox.con
 | cancelButtonClass | custom class name of cancel button | string | — | — |
 | confirmButtonClass | custom class name of confirm button | string | — | — |
 | closeOnClickModal | whether MessageBox can be closed by clicking the mask | boolean | — | true (false when called with alert) |
-| closeOnPressEscape | whether MessageBox can be closed by pressing the ESC | boolean | — | false |
+| closeOnPressEscape | whether MessageBox can be closed by pressing the ESC | boolean | — | true (false when called with alert) |
 | showInput | whether to show an input | boolean | — | false (true when called with prompt) |
 | inputPlaceholder | placeholder of input | string | — | — |
+| inputValue | initial value of input | string | — | — |
 | inputPattern | regexp for the input | regexp | — | — |
 | inputValidator | validation function for the input. Should returns a boolean or string. If a string is returned, it will be assigned to inputErrorMessage | function | — | — |
 | inputErrorMessage | error message when validation fails | string | — | Illegal input |

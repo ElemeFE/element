@@ -8,7 +8,7 @@
       'is-hidden': !node.visible
     }">
     <div class="el-tree-node__content"
-      :style="{ 'padding-left': (node.level - 1) * 16 + 'px' }">
+      :style="{ 'padding-left': (node.level - 1) * tree.indent + 'px' }">
       <span
         class="el-tree-node__expand-icon"
         @click.stop="handleExpandIconClick"
@@ -27,7 +27,7 @@
       </span>
       <node-content :node="node"></node-content>
     </div>
-    <collapse-transition>
+    <el-collapse-transition>
       <div
         class="el-tree-node__children"
         v-show="expanded">
@@ -36,15 +36,15 @@
           v-for="child in node.childNodes"
           :key="getNodeKey(child)"
           :node="child"
-          @node-expand="handleChildNodeExpand(child)">
+          @node-expand="handleChildNodeExpand">
         </el-tree-node>
       </div>
-    </collapse-transition>
+    </el-collapse-transition>
   </div>
 </template>
 
 <script type="text/jsx">
-  import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
+  import ElCollapseTransition from 'element-ui/src/transitions/collapse-transition';
   import ElCheckbox from 'element-ui/packages/checkbox';
   import emitter from 'element-ui/src/mixins/emitter';
 
@@ -66,8 +66,8 @@
     },
 
     components: {
+      ElCollapseTransition,
       ElCheckbox,
-      CollapseTransition,
       NodeContent: {
         props: {
           node: {
@@ -145,7 +145,9 @@
       },
 
       handleExpandIconClick() {
+        if (this.node.isLeaf) return;
         if (this.expanded) {
+          this.tree.$emit('node-collapse', this.node.data, this.node, this);
           this.node.collapse();
         } else {
           this.node.expand();
@@ -165,8 +167,9 @@
         }
       },
 
-      handleChildNodeExpand(node) {
+      handleChildNodeExpand(nodeData, node, instance) {
         this.broadcast('ElTreeNode', 'tree-node-expand', node);
+        this.tree.$emit('node-expand', nodeData, node, instance);
       }
     },
 

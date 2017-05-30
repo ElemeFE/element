@@ -1,5 +1,41 @@
+<style>
+  .demo-box.demo-menu {
+    .el-menu-demo {
+      padding-left: 55px;
+    }
+    .el-menu-vertical-demo {
+      width: 200px;
+      min-height: 400px;
+    }
+    .line {
+      height: 1px;
+      background-color: #e0e6ed;
+      margin: 35px -24px;
+    }
+    h5 {
+      font-size: 14px;
+      color: #8492a6;
+      margin-top: 10px;
+    }
+    .tac {
+      text-align: center;
+
+      .el-menu-vertical-demo {
+        display: inline-block;
+        text-align: left;
+      }
+    }
+  }
+</style>
+
 <script>
   export default {
+    data() {
+      return {
+        activeIndex: '1',
+        activeIndex2: '1'
+      };
+    },
     methods: {
       handleOpen(key, keyPath) {
         console.log(key, keyPath);
@@ -24,7 +60,7 @@ Top bar NavMenu can be used in a variety of scenarios.
 
 ::: demo By default Menu is vertical, but you can change it to horizontal by setting the mode prop to 'horizontal'. In addition, you can use the submenu component to create a second level menu.
 ```html
-<el-menu theme="dark" default-active="1" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+<el-menu theme="dark" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
   <el-menu-item index="1">Processing Center</el-menu-item>
   <el-submenu index="2">
     <template slot="title">Workspace</template>
@@ -35,7 +71,7 @@ Top bar NavMenu can be used in a variety of scenarios.
   <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">Orders</a></el-menu-item>
 </el-menu>
 <div class="line"></div>
-<el-menu default-active="1" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+<el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" @select="handleSelect">
   <el-menu-item index="1">Processing Center</el-menu-item>
   <el-submenu index="2">
     <template slot="title">Workspace</template>
@@ -48,6 +84,12 @@ Top bar NavMenu can be used in a variety of scenarios.
 
 <script>
   export default {
+    data() {
+      return {
+        activeIndex: '1',
+        activeIndex2: '1'
+      };
+    },
     methods: {
       handleSelect(key, keyPath) {
         console.log(key, keyPath);
@@ -155,6 +197,11 @@ Vertical NavMenu with sub-menus.
 | select  | callback function when menu is activated | index: index of activated menu, indexPath: index path of activated menu  |
 | open  | callback function when sub-menu expands | index: index of expanded sub-menu, indexPath: index path of expanded sub-menu |
 | close  | callback function when sub-menu collapses | index: index of collapsed sub-menu, indexPath: index path of collapsed sub-menu |
+
+### Menu-Item Events
+| Event Name | Description | Parameters |
+|---------- |-------- |---------- |
+| click  | callback function when menu-item is clicked | el: menu-item instance  |
 
 ### SubMenu Attribute
 | Attribute      | Description          | Type      | Accepted Values       | Default  |

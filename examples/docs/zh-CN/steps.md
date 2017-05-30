@@ -108,7 +108,7 @@
 
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
-| space | 每个 step 的间距，不填写将自适应间距 | Number | — | — |
+| space | 每个 step 的间距，不填写将自适应间距。支持百分比。 | Number,String | — | — |
 | direction | 显示方向 | string | vertical/horizontal | horizontal |
 | active | 设置当前激活步骤  | number | — | 0 |
 | process-status | 设置当前步骤的状态 | string | wait/process/finish/error/success | process |
@@ -122,6 +122,7 @@
 | title | 标题 | string | — | — |
 | description | 描述性文字 | string | — | — |
 | icon | 图标 | Element Icon 提供的图标，如果要使用自定义图标可以通过 slot 方式写入 | string | — |
+| status | 设置当前步骤的状态，不设置则根据 steps 确定状态 | wait/process/finish/error/success | - |
 
 ### Step Slot
 | name | 说明  |

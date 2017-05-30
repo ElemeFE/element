@@ -1,5 +1,9 @@
 export default {
   el: {
+    colorpicker: {
+      confirm: 'Bevestig',
+      clear: 'Legen'
+    },
     datepicker: {
       now: 'Nu',
       today: 'Vandaag',
@@ -56,6 +60,11 @@ export default {
       noData: 'Geen data',
       placeholder: 'Selecteer'
     },
+    cascader: {
+      noMatch: 'Geen overeenkomende resultaten',
+      loading: 'Laden',
+      placeholder: 'Selecteer'
+    },
     pagination: {
       goto: 'Ga naar',
       pagesize: '/page',
@@ -77,10 +86,19 @@ export default {
       emptyText: 'Geen data',
       confirmFilter: 'Bevestigen',
       resetFilter: 'Reset',
-      clearFilter: 'Alles'
+      clearFilter: 'Alles',
+      sumText: 'Sum' // to be translated
     },
     tree: {
       emptyText: 'Geen data'
+    },
+    transfer: {
+      noMatch: 'Geen overeenkomende resultaten',
+      noData: 'Geen data',
+      titles: ['List 1', 'List 2'], // to be translated
+      filterPlaceholder: 'Enter keyword', // to be translated
+      noCheckedFormat: '{total} items', // to be translated
+      hasCheckedFormat: '{checked}/{total} checked' // to be translated
     }
   }
 };

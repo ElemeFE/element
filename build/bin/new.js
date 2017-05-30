@@ -6,7 +6,7 @@ process.on('exit', () => {
 });
 
 if (!process.argv[2]) {
-  console.error('[组件名]必填.');
+  console.error('[组件名]必填 - Please enter new component name');
   process.exit(1);
 }
 
@@ -71,11 +71,11 @@ export default {
   },
   {
     filename: path.join('../../examples/docs/zh-CN', `${componentname}.md`),
-    content: `## ${chineseName}`
+    content: `## ${ComponentName} ${chineseName}`
   },
   {
-    filename: path.join('../../examples/docs/en-us', `${componentname}.md`),
-    content: `## ${componentname}`
+    filename: path.join('../../examples/docs/en-US', `${componentname}.md`),
+    content: `## ${ComponentName}`
   },
   {
     filename: path.join('../../test/unit/specs', `${componentname}.spec.js`),
@@ -119,7 +119,7 @@ Files.forEach(file => {
 const navConfigFile = require('../../examples/nav.config.json');
 
 Object.keys(navConfigFile).forEach(lang => {
-  let groups = navConfigFile[lang][2].groups;
+  let groups = navConfigFile[lang][3].groups;
   groups[groups.length - 1].list.push({
     path: `/${componentname}`,
     title: lang === 'zh-CN' && componentname !== chineseName

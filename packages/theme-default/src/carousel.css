@@ -55,6 +55,7 @@
       transform: translateX(-50%);
       margin: 0;
       padding: 0;
+      z-index: calc(var(--index-normal) + 1);
 
       @modifier outside {
         bottom: calc(var(--carousel-indicator-height) + var(--carousel-indicator-padding-vertical) * 2);
@@ -67,6 +68,23 @@
         button {
           background-color: var(--carousel-indicator-out-color);
           opacity: 0.24;
+        }
+      }
+      
+      @modifier labels {
+        left: 0;
+        right: 0;
+        transform: none;
+        text-align: center;
+        
+        .el-carousel__button {
+          size: auto auto;
+          padding: 2px 18px;
+          font-size: 12px;
+        }
+
+        .el-carousel__indicator {
+          padding: 6px 4px;
         }
       }
     }

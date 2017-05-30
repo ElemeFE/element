@@ -404,6 +404,57 @@ describe('Select', () => {
     }, 10);
   });
 
+  it('default-first-option', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-select
+            v-model="value"
+            default-first-option
+            filterable
+          >
+            <el-option
+              v-for="item in options"
+              :label="item"
+              :value="item"
+            />
+          </el-select>
+        </div>
+      `,
+      data() {
+        return {
+          options: ['1', '2', '3', '4', '5'],
+          value: ''
+        };
+      },
+      methods: {
+        filterMethod(query) {
+          // simulate async filterMethod / remoteMethod
+          setTimeout(() => {
+            this.options.filter(option => option.label.indexOf(query) !== -1);
+          }, 5);
+        }
+      }
+    }, true);
+
+    const select = vm.$children[0];
+    setTimeout(() => {
+      select.$el.querySelector('input').focus();
+      select.query = '3';
+      select.selectedLabel = '3';
+      setTimeout(() => {
+        const enterKey = document.createEvent('Events');
+        enterKey.initEvent('keydown', true, true);
+        enterKey.keyCode = 13;
+        select.$el.querySelector('input').dispatchEvent(enterKey);
+        setTimeout(() => {
+          expect(select.value).to.equal('3');
+          done();
+        }, 10);
+      }, 10);  // wait for async filterMethod
+    }, 10);
+  });
+
   it('allow create', done => {
     vm = getSelectVm({ filterable: true, allowCreate: true });
     const select = vm.$children[0];
@@ -429,15 +480,77 @@ describe('Select', () => {
     vm.value = ['选项1'];
     setTimeout(() => {
       options[1].click();
-      options[3].click();
       setTimeout(() => {
-        expect(vm.value.indexOf('选项2') > -1 && vm.value.indexOf('选项4') > -1).to.true;
-        const tagCloseIcons = vm.$el.querySelectorAll('.el-tag__close');
-        tagCloseIcons[0].click();
+        options[3].click();
         setTimeout(() => {
-          expect(vm.value.indexOf('选项1')).to.equal(-1);
-          done();
+          expect(vm.value.indexOf('选项2') > -1 && vm.value.indexOf('选项4') > -1).to.true;
+          const tagCloseIcons = vm.$el.querySelectorAll('.el-tag__close');
+          tagCloseIcons[0].click();
+          setTimeout(() => {
+            expect(vm.value.indexOf('选项1')).to.equal(-1);
+            done();
+          }, 100);
         }, 100);
+      }, 100);
+    }, 100);
+  });
+
+  it('multiple remove-tag', done => {
+    sinon.stub(window.console, 'log');
+    vm = createVue({
+      template: `
+        <div>
+          <el-select v-model="value" multiple @remove-tag="handleRemoveTag">
+            <el-option
+              v-for="item in options"
+              :label="item.label"
+              :value="item.value">
+              <p>{{item.label}} {{item.value}}</p>
+            </el-option>
+          </el-select>
+        </div>
+      `,
+
+      data() {
+        return {
+          options: [{
+            value: '选项1',
+            label: '黄金糕'
+          }, {
+            value: '选项2',
+            label: '双皮奶'
+          }, {
+            value: '选项3',
+            label: '蚵仔煎'
+          }, {
+            value: '选项4',
+            label: '龙须面'
+          }, {
+            value: '选项5',
+            label: '北京烤鸭'
+          }],
+          value: ['选项1', '选项3']
+        };
+      },
+
+      methods: {
+        handleRemoveTag() {
+          console.log('remove tag');
+        }
+      }
+    }, true);
+    const tagCloseIcons = vm.$el.querySelectorAll('.el-tag__close');
+    expect(vm.value.length).to.equal(2);
+    tagCloseIcons[1].click();
+    setTimeout(() => {
+      expect(vm.value.length).to.equal(1);
+      expect(window.console.log.callCount).to.equal(1);
+      tagCloseIcons[0].click();
+      setTimeout(() => {
+        expect(vm.value.length).to.equal(0);
+        expect(window.console.log.callCount).to.equal(2);
+        window.console.log.restore();
+        done();
       }, 100);
     }, 100);
   });

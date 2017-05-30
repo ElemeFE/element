@@ -2,7 +2,6 @@
   <div class="el-time-spinner" :class="{ 'has-seconds': showSeconds }">
     <el-scrollbar
       @mouseenter.native="emitSelectRange('hours')"
-      @mousewheel.native="handleScroll('hour')"
       class="el-time-spinner__wrapper"
       wrap-style="max-height: inherit;"
       view-class="el-time-spinner__list"
@@ -19,7 +18,6 @@
     </el-scrollbar>
     <el-scrollbar
       @mouseenter.native="emitSelectRange('minutes')"
-      @mousewheel.native="handleScroll('minute')"
       class="el-time-spinner__wrapper"
       wrap-style="max-height: inherit;"
       view-class="el-time-spinner__list"
@@ -36,7 +34,6 @@
     <el-scrollbar
       v-show="showSeconds"
       @mouseenter.native="emitSelectRange('seconds')"
-      @mousewheel.native="handleScroll('second')"
       class="el-time-spinner__wrapper"
       wrap-style="max-height: inherit;"
       view-class="el-time-spinner__list"
@@ -56,6 +53,7 @@
 <script type="text/babel">
   import { getRangeHours } from '../util';
   import ElScrollbar from 'element-ui/packages/scrollbar';
+  import debounce from 'throttle-debounce/debounce';
 
   export default {
     components: { ElScrollbar },
@@ -87,7 +85,7 @@
         if (!(newVal >= 0 && newVal <= 23)) {
           this.hoursPrivate = oldVal;
         }
-        this.hourEl.scrollTop = Math.max(0, (this.hoursPrivate - 2.5) * 32 + 80);
+        this.ajustElTop('hour', newVal);
         this.$emit('change', { hours: newVal });
       },
 
@@ -95,7 +93,7 @@
         if (!(newVal >= 0 && newVal <= 59)) {
           this.minutesPrivate = oldVal;
         }
-        this.minuteEl.scrollTop = Math.max(0, (this.minutesPrivate - 2.5) * 32 + 80);
+        this.ajustElTop('minute', newVal);
         this.$emit('change', { minutes: newVal });
       },
 
@@ -103,7 +101,7 @@
         if (!(newVal >= 0 && newVal <= 59)) {
           this.secondsPrivate = oldVal;
         }
-        this.secondEl.scrollTop = Math.max(0, (this.secondsPrivate - 2.5) * 32 + 80);
+        this.ajustElTop('second', newVal);
         this.$emit('change', { seconds: newVal });
       }
     },
@@ -135,6 +133,16 @@
       };
     },
 
+    created() {
+      this.debounceAjustElTop = debounce(100, type => this.ajustElTop(type, this[`${type}s`]));
+    },
+
+    mounted() {
+      this.$nextTick(() => {
+        this.bindScrollEvent();
+      });
+    },
+
     methods: {
       handleClick(type, value, disabled) {
         if (value.disabled) {
@@ -156,17 +164,30 @@
         }
       },
 
+      bindScrollEvent() {
+        const bindFuntion = (type) => {
+          this[`${type}El`].onscroll = (e) => this.handleScroll(type, e);
+        };
+        bindFuntion('hour');
+        bindFuntion('minute');
+        bindFuntion('second');
+      },
+
       handleScroll(type) {
         const ajust = {};
-
         ajust[`${type}s`] = Math.min(Math.floor((this[`${type}El`].scrollTop - 80) / 32 + 3), 59);
+        this.debounceAjustElTop(type);
         this.$emit('change', ajust);
       },
 
       ajustScrollTop() {
-        this.hourEl.scrollTop = Math.max(0, (this.hours - 2.5) * 32 + 80);
-        this.minuteEl.scrollTop = Math.max(0, (this.minutes - 2.5) * 32 + 80);
-        this.secondEl.scrollTop = Math.max(0, (this.seconds - 2.5) * 32 + 80);
+        this.ajustElTop('hour', this.hours);
+        this.ajustElTop('minute', this.minutes);
+        this.ajustElTop('second', this.seconds);
+      },
+
+      ajustElTop(type, value) {
+        this[`${type}El`].scrollTop = Math.max(0, (value - 2.5) * 32 + 80);
       }
     }
   };

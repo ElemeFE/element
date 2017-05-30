@@ -1,5 +1,9 @@
 export default {
   el: {
+    colorpicker: {
+      confirm: 'OK',
+      clear: 'Leeren'
+    },
     datepicker: {
       now: 'Jetzt',
       today: 'Heute',
@@ -55,8 +59,13 @@ export default {
     select: {
       loading: 'Lädt.',
       noMatch: 'Nichts gefunden.',
-      noData: 'Keine Datei',
-      placeholder: 'Datei wählen'
+      noData: 'Keine Daten',
+      placeholder: 'Daten wählen'
+    },
+    cascader: {
+      noMatch: 'Nichts gefunden.',
+      loading: 'Lädt.',
+      placeholder: 'Daten wählen'
     },
     pagination: {
       goto: 'Gehe zu',
@@ -78,10 +87,19 @@ export default {
       emptyText: 'Keine Daten',
       confirmFilter: 'Anwenden',
       resetFilter: 'Zurücksetzen',
-      clearFilter: 'Alles '
+      clearFilter: 'Alles ',
+      sumText: 'Summe'
     },
     tree: {
-      emptyText: 'Keine Daten'
+      emptyText: 'Keine Einträge'
+    },
+    transfer: {
+      noMatch: 'Nichts gefunden.',
+      noData: 'Keine Einträge',
+      titles: ['Liste 1', 'Liste 2'],
+      filterPlaceholder: 'Einträge filtern',
+      noCheckedFormat: '{total} Einträge',
+      hasCheckedFormat: '{checked}/{total} ausgewählt'
     }
   }
 };

@@ -22,6 +22,9 @@
 
       showInput() {
         this.inputVisible = true;
+        this.$nextTick(_ => {
+          this.$refs.saveTagInput.$refs.input.focus();
+        });
       },
 
       handleInputConfirm() {
@@ -50,6 +53,7 @@
     .input-new-tag {
       width: 78px;
       margin-left: 10px;
+      vertical-align: bottom;
 
       .el-input__inner {
         height: 24px;
@@ -83,6 +87,7 @@
 ```html
 <el-tag
   v-for="tag in tags"
+  :key="tag.name"
   :closable="true"
   :type="tag.type"
 >
@@ -150,6 +155,9 @@
 
       showInput() {
         this.inputVisible = true;
+        this.$nextTick(_ => {
+          this.$refs.saveTagInput.$refs.input.focus();
+        });
       },
 
       handleInputConfirm() {

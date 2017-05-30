@@ -1,5 +1,9 @@
 export default {
   el: {
+    colorpicker: {
+      confirm: 'Confirmar',
+      clear: 'Limpar'
+    },
     datepicker: {
       now: 'Agora',
       today: 'Hoje',
@@ -56,13 +60,19 @@ export default {
       noData: 'Sem dados',
       placeholder: 'Selecione'
     },
+    cascader: {
+      noMatch: 'Sem resultados',
+      loading: 'Carregando',
+      placeholder: 'Selecione'
+    },
     pagination: {
       goto: 'Ir para',
-      pagesize: '/pagina',
+      pagesize: '/página',
       total: 'Total {total}',
       pageClassifier: ''
     },
     messagebox: {
+      title: 'Mensagem',
       confirm: 'Confirmar',
       cancel: 'Cancelar',
       error: 'Erro!'
@@ -76,10 +86,19 @@ export default {
       emptyText: 'Sem dados',
       confirmFilter: 'Confirmar',
       resetFilter: 'Limpar',
-      clearFilter: 'Todos'
+      clearFilter: 'Todos',
+      sumText: 'Total'
     },
     tree: {
       emptyText: 'Sem dados'
+    },
+    transfer: {
+      noMatch: 'Sem resultados',
+      noData: 'Sem dados',
+      titles: ['Lista 1', 'Lista 2'],
+      filterPlaceholder: 'Digite uma palavra-chave',
+      noCheckedFormat: '{total} itens',
+      hasCheckedFormat: '{checked}/{total} selecionados'
     }
   }
 };

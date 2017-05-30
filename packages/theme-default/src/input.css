@@ -10,9 +10,9 @@
 
     @e inner {
       appearance: none;
-      background-color: var(--color-white);
+      background-color: var(--input-fill);
       background-image: none;
-      border-radius: 4px;
+      border-radius: var(--input-border-radius);
       border: var(--input-border);
       box-sizing: border-box;
       color: var(--input-color);
@@ -82,9 +82,9 @@
 
     @when disabled {
       .el-input__inner {
-        background-color: var(--disabled-fill-base);
-        border-color: var(--disabled-border-base);
-        color: var(--disabled-color-base);
+        background-color: var(--input-disabled-fill);
+        border-color: var(--input-disabled-border);
+        color: var(--input-disabled-color);
         cursor: not-allowed;
 
         &::placeholder {
@@ -132,7 +132,7 @@
       display: table-cell;
       position: relative;
       border: var(--border-base);
-      border-radius: 4px;
+      border-radius: var(--input-border-radius);
       padding: 0 10px;
       width: 1%;
       white-space: nowrap;
@@ -143,9 +143,9 @@
         margin: -10px;
       }
 
-      & .el-button,
-      & .el-select .el-input__inner,
-      & .el-select:hover .el-input__inner {
+      & button.el-button,
+      & div.el-select .el-input__inner,
+      & div.el-select:hover .el-input__inner {
         border-color: transparent;
         background-color: transparent;
         color: inherit;
@@ -196,10 +196,10 @@
       width: 100%;
       font-size: var(--font-size-base);
       color: var(--input-color);
-      background-color: var(--color-white);
+      background-color: var(--input-fill);
       background-image: none;
       border: var(--input-border);
-      border-radius: 4px;
+      border-radius: var(--input-border-radius);
       transition: var(--border-transition-base);
 
       &::placeholder {
@@ -218,9 +218,9 @@
 
     @when disabled {
       .el-textarea__inner {
-        background-color: var(--disabled-fill-base);
-        border-color: var(--disabled-border-base);
-        color: var(--disabled-color-base);
+        background-color: var(--input-disabled-fill);
+        border-color: var(--input-disabled-border);
+        color: var(--input-disabled-color);
         cursor: not-allowed;
 
         &::placeholder {

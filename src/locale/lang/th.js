@@ -1,5 +1,9 @@
 export default {
   el: {
+    colorpicker: {
+      confirm: 'ตกลง',
+      clear: 'ล้างข้อมูล'
+    },
     datepicker: {
       now: 'ตอนนี้',
       today: 'วันนี้',
@@ -27,13 +31,13 @@ export default {
       month12: 'ธันวาคม',
       // week: 'week',
       weeks: {
-        sun: 'อาทิตย์',
-        mon: 'จันทร์',
-        tue: 'อังคาร',
-        wed: 'พุธ',
-        thu: 'พฤหัสบดี',
-        fri: 'ศุกร์',
-        sat: 'เสาร์'
+        sun: 'อา',
+        mon: 'จ',
+        tue: 'อ',
+        wed: 'พ',
+        thu: 'พฤ',
+        fri: 'ศ',
+        sat: 'ส'
       },
       months: {
         jan: 'มกรา',
@@ -54,6 +58,11 @@ export default {
       loading: 'กำลังโหลด',
       noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
       noData: 'ไม่พบข้อมูล',
+      placeholder: 'เลือก'
+    },
+    cascader: {
+      noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
+      loading: 'กำลังโหลด',
       placeholder: 'เลือก'
     },
     pagination: {
@@ -77,10 +86,19 @@ export default {
       emptyText: 'ไม่พบข้อมูล',
       confirmFilter: 'ยืนยัน',
       resetFilter: 'รีเซ็ต',
-      clearFilter: 'ทั้งหมด'
+      clearFilter: 'ทั้งหมด',
+      sumText: 'Sum' // to be translated
     },
     tree: {
       emptyText: 'ไม่พบข้อมูล'
+    },
+    transfer: {
+      noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
+      noData: 'ไม่พบข้อมูล',
+      titles: ['List 1', 'List 2'], // to be translated
+      filterPlaceholder: 'Enter keyword', // to be translated
+      noCheckedFormat: '{total} items', // to be translated
+      hasCheckedFormat: '{checked}/{total} checked' // to be translated
     }
   }
 };

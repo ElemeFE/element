@@ -1,6 +1,9 @@
-import Vue from 'vue';
+import { hasOwn } from 'element-ui/src/utils/util';
 
 export function isVNode(node) {
-  if (!node || typeof node !== 'object') return false;
-  return Vue.util.hasOwn(node, 'tag') && Vue.util.hasOwn(node, 'componentOptions');
+  return typeof node === 'object' && hasOwn(node, 'componentOptions');
+};
+
+export function getFirstComponentChild(children) {
+  return children && children.filter(c => c && c.tag)[0];
 };

@@ -204,6 +204,8 @@
       width: 480px;
     }
     .demo-form-inline {
+      width: auto;
+
       .el-input {
         width: 150px;
       }
@@ -320,9 +322,10 @@ When the vertical space is limited and the form is relatively simple, you can pu
 
 ```html
 <el-form :inline="true" :model="formInline" class="demo-form-inline">
-  <el-form-item>
+  <el-form-item label="Approved by">
     <el-input v-model="formInline.user" placeholder="Approved by"></el-input>
-  </el-form-item><el-form-item>
+  </el-form-item>
+  <el-form-item label="Activity zone">
     <el-select v-model="formInline.region" placeholder="Activity zone">
       <el-option label="Zone one" value="shanghai"></el-option>
       <el-option label="Zone two" value="beijing"></el-option>
@@ -755,10 +758,17 @@ Form component allows you to verify your data, helping you find and correct erro
 
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 | ---- | ----| ---- | ---- | ---- |
-| prop | a key of `model` | string | keys of model that passed to `form` |
+| prop | a key of `model`. In the use of validate and resetFields method, the attribute is required | string | keys of model that passed to `form` |
 | label | label | string | — | — |
 | label-width | width of label, e.g. '50px' | string | — | — |
 | required | whether the field is required or not, will be determined by validation rules if omitted | string |  — | false |
 | rules | validation rules of form | object | — | — |
 | error | field error message, set its value and the field will validate error and show this message immediately | string | — | — |
 | show-message  | whether to show the error message | boolean | — | true |
+
+
+### Form-Item Slot
+| name | Description |
+|------|--------|
+| — | content of Form Item |
+| label | content of label |
