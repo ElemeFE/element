@@ -16,7 +16,7 @@
       border: var(--input-border);
       box-sizing: border-box;
       color: var(--input-color);
-      display: block;
+      display: inline-block;
       font-size: inherit;
       height: var(--input-height);
       line-height: 1;
