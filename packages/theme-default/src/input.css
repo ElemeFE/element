@@ -134,7 +134,7 @@
       border: var(--border-base);
       border-radius: var(--input-border-radius);
       padding: 0 10px;
-      width: 1%;
+      width: 1px;
       white-space: nowrap;
 
       & .el-select,
