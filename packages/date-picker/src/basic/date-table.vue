@@ -32,7 +32,9 @@
   const WEEKS = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
   const clearHours = function(time) {
     const cloneDate = new Date(time);
-    cloneDate.setHours(0, 0, 0, 0);
+    const timeZoneOffset = cloneDate.getTimezoneOffset();
+    const timeZone = timeZoneOffset >= 0 ? 24 - timeZoneOffset / 60 : timeZoneOffset / 60;
+    cloneDate.setHours(timeZone, 0, 0, 0);
     return cloneDate.getTime();
   };
 
