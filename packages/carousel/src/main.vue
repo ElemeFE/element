@@ -109,6 +109,10 @@ export default {
     activeIndex(val, oldVal) {
       this.resetItemPosition();
       this.$emit('change', val, oldVal);
+    },
+
+    autoplay(val) {
+      val ? this.startTimer() : this.pauseTimer();
     }
   },
 

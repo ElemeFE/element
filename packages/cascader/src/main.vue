@@ -148,7 +148,7 @@ export default {
 
   data() {
     return {
-      currentValue: this.value,
+      currentValue: this.value || [],
       menu: null,
       debouncedInputChange() {},
       menuVisible: false,
