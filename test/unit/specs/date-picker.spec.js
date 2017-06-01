@@ -385,7 +385,7 @@ describe('DatePicker', () => {
       input.value = '2000-10-1';
       triggerEvent(input, 'change', true);
       setTimeout(_ => {
-        expect(vm.pickerVisible).to.true; // 敲回车不会消失
+        expect(vm.pickerVisible).to.false;
         expect(vm.picker.date.getFullYear()).to.equal(2000);
         expect(vm.picker.date.getMonth()).to.equal(9);
         expect(vm.picker.date.getDate()).to.equal(1);
