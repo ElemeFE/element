@@ -110,6 +110,8 @@ export default {
 
     updatePopper() {
       this.popperJS ? this.popperJS.update() : this.createPopper();
+      this.popperJS._popper.style.zIndex = PopupManager.nextZIndex();
+      
     },
 
     doDestroy() {
