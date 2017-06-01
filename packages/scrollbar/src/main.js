@@ -125,6 +125,6 @@ export default {
 
   beforeDestroy() {
     if (this.native) return;
-    !this.noresize && removeResizeListener(this.$refs.resize, this.update);
+    !this.noresize && this.$refs.resize && removeResizeListener(this.$refs.resize, this.update);
   }
 };
