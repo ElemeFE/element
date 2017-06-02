@@ -73,7 +73,7 @@ export default {
     },
     messagebox: {
       title: 'Paziņojums',
-      confirm: 'OK',
+      confirm: 'Labi',
       cancel: 'Atcelt',
       error: 'Nederīga ievade'
     },
