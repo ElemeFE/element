@@ -95,10 +95,10 @@ export default {
     transfer: {
       noMatch: 'Nav atbilstošu datu',
       noData: 'Nav datu',
-      titles: ['Saraksts 1', 'Saraksts 2'], // to be translated
-      filterPlaceholder: 'Ievadīt atslēgvārdu', // to be translated
-      noCheckedFormat: '{total} vienības', // to be translated
-      hasCheckedFormat: '{checked}/{total} atzīmēti' // to be translated
+      titles: ['Saraksts 1', 'Saraksts 2'],
+      filterPlaceholder: 'Ievadīt atslēgvārdu',
+      noCheckedFormat: '{total} vienības',
+      hasCheckedFormat: '{checked}/{total} atzīmēti'
     }
   }
 };
