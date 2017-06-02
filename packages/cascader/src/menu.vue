@@ -1,4 +1,6 @@
 <script>
+  import { isDef } from 'element-ui/src/utils/shared';
+
   export default {
     name: 'ElCascaderMenu',
 
@@ -54,7 +56,7 @@
             const level = activeOptions.length;
             activeOptions[level] = options;
             let active = activeValue[level];
-            if (active) {
+            if (isDef(active)) {
               options = options.filter(option => option.value === active)[0];
               if (options && options.children) {
                 loadActiveOptions(options.children, activeOptions);
