@@ -54,7 +54,7 @@
 
 ### 扩展的 value 类型
 
-:::demo 设置`on-value`和`off-value`属性，接受`Boolean`, `String`或`Number`类型的值。
+:::demo 设置`on-value`和`off-value`属性，接受任意类型的值。
 
 ```html
 <el-tooltip :content="'Switch value: ' + value3" placement="top">
@@ -119,8 +119,8 @@
 | off-icon-class  | switch 关闭时所显示图标的类名，设置此项会忽略 `off-text`    | string   | — | — |
 | on-text  | switch 打开时的文字    | string   | — | ON |
 | off-text  | switch 关闭时的文字    | string   | — | OFF |
-| on-value  | switch 打开时的值    | boolean / string / number | — | true |
-| off-value  | switch 关闭时的值    | boolean / string / number | — | false |
+| on-value  | switch 打开时的值    | any | — | true |
+| off-value  | switch 关闭时的值    | any | — | false |
 | on-color  | switch 打开时的背景色    | string   | — | #20A0FF |
 | off-color  | switch 关闭时的背景色    | string   | — | #C0CCDA |
 | name  | switch 对应的 name 属性    | string   | — | — |
