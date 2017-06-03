@@ -190,7 +190,7 @@
 
       renderContent(h, { node, data, store }) {
         return (
-          <span>
+          <span style="white-space: normal">
             <span>
               <span>{node.label}</span>
             </span>
