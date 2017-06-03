@@ -94,7 +94,7 @@
     },
     created() {
       if (!~[this.onValue, this.offValue].indexOf(this.value)) {
-        this.$emit('input', this.onValue);
+        this.$emit('input', this.offValue);
       }
     },
     computed: {
