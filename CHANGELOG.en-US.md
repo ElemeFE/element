@@ -1,5 +1,19 @@
 ## Changelog
 
+### 1.3.5
+
+*2017-06-03*
+
+- Fixed `default-first-option` of Select not working in remote filtering, #5084
+- Fixed InputNumber not aligning with other form components, #5127
+- Fixed inline FormItem having no effect on mixed Input, #5151
+- Fixed height of FormItem being different in Firefox from other browsers, #5152
+- Fixed items with a `value` of 0 in Cascader can not be expanded, #5172 (by @Kingwl)
+- Fixed Autocomplete not triggering native `keydown` and `keyup` events, #5129
+- Added `clear` event for Select, #5112
+- Fixed Cascader's dropdown menu not updating its position in some situations, #5064
+- Better accessibility for Dialog and MessageBox, #4786
+
 ### 1.3.4
 
 *2017-05-23*
