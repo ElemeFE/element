@@ -33,7 +33,7 @@
     },
 
     watch: {
-      'color.value'() {
+      'color._hue'() {
         this.update();
       }
     },
