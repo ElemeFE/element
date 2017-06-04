@@ -80,6 +80,29 @@ describe('ColorPicker', () => {
     }, ANIMATION_TIME);
   });
 
+  it('should show correct rgb value', (done) => {
+    const vm = createVue({
+      template: `
+        <el-color-picker v-model="color"></el-color-picker>
+      `,
+
+      data() {
+        return {
+          color: '#20A0FF'
+        };
+      }
+    }, true);
+
+    const trigger = vm.$el.querySelector('.el-color-picker__trigger');
+    trigger.click();
+
+    setTimeout(() => {
+      const value = document.querySelector('.el-color-dropdown__value');
+      expect(value.innerText.trim().toUpperCase()).to.equal('#20A0FF');
+      done();
+    }, ANIMATION_TIME);
+  });
+
   it('should init the right color when open', (done) => {
     const vm = createVue({
       template: `
@@ -216,4 +239,3 @@ describe('ColorPicker', () => {
     }, ANIMATION_TIME);
   });
 });
-
