@@ -14,7 +14,7 @@
 
     @e wrap {
       max-height: 280px;
-      overflow: auto;
+      overflow: scroll;
       background-color: var(--color-white);
       border: 1px solid var(--color-base-gray);
       padding: 6px 0;
