@@ -96,6 +96,7 @@
           this.loading = false;
           if (Array.isArray(suggestions)) {
             this.suggestions = suggestions;
+            this.highlight(0);
           } else {
             console.error('autocomplete suggestions must be an array');
           }
