@@ -1758,7 +1758,7 @@ For table of numbers, you can add an extra row at the table footer displaying ea
 | fixed | whether column is fixed at left/right. Will be fixed at left if `true` | string/boolean | true/left/right | — |
 | render-header | render function for table header of this column | Function(h, { column, $index }) | — | — |
 | sortable | whether column can be sorted | boolean | — | false |
-| sort-method | sorting method, works when `sortable` is `true` | Function(a, b) | — | — |
+| sort-method | sorting method, works when `sortable` is `true`. Should return a boolean. | Function(a, b) | — | — |
 | resizable | whether column width can be resized, works when `border` of `el-table` is `true` | boolean | — | false |
 | formatter | function that formats content | Function(row, column) | — | — |
 | show-overflow-tooltip | whether to hide extra content and show them in a tooltip when hovering on the cell | boolean | — | false |

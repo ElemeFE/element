@@ -1,6 +1,6 @@
 <template>
   <transition name="dialog-fade">
-    <div class="el-dialog__wrapper" v-show="visible" @click.self="handleWrapperClick">
+    <div class="el-dialog__wrapper" tabindex="-1" v-show="visible" @click.self="handleWrapperClick">
       <div
         class="el-dialog"
         :class="[sizeClass, customClass]"
@@ -10,9 +10,10 @@
           <slot name="title">
             <span class="el-dialog__title">{{title}}</span>
           </slot>
-          <div class="el-dialog__headerbtn">
-            <i v-if="showClose" class="el-dialog__close el-icon el-icon-close" @click='handleClose'></i>
-          </div>
+          <button type="button" class="el-dialog__headerbtn" aria-label="Close" 
+                  v-if="showClose" @click="handleClose">
+            <i class="el-dialog__close el-icon el-icon-close"></i>
+          </button>
         </div>
         <div class="el-dialog__body" v-if="rendered"><slot></slot></div>
         <div class="el-dialog__footer" v-if="$slots.footer">

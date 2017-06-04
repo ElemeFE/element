@@ -1,5 +1,18 @@
 ## 更新日志
 
+### 1.3.5
+*2017-06-03*
+
+- 修复 Select 的 `default-first-option` 属性在远程搜索时不生效的问题，#5084
+- 修复 InputNumber 与其他表单组件同行显示时不能对齐的问题，#5127
+- 修复行内 FormItem 对复合型 Input 失效的问题，#5151
+- 修复 FormItem 在 Firefox 中的高度与其他浏览器不一致的问题，#5152
+- 修复 Cascader 中 `value` 为 0 的数据不能展开下一级的问题，#5172（by @Kingwl）
+- 修复 Autocomplete 无法触发原生 `keydown` 和 `keyup` 事件的问题，#5129
+- 新增 Select 的 `clear` 事件，#5112
+- 修复 Cascader 在某些情况下下拉框的位置没有及时更新的问题，#5064
+- 提升 Dialog 和 MessageBox 的可访问性，#4786
+
 ### 1.3.4
 *2017-05-23*
 

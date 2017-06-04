@@ -660,6 +660,7 @@
 | change | 选中值发生变化时触发 | 目前的选中值 |
 | visible-change | 下拉框出现/隐藏时触发 | 出现则为 true，隐藏则为 false |
 | remove-tag | 多选模式下移除tag时触发 | 移除的tag值 |
+| clear | 可清空的单选模式下用户点击清空按钮时触发 | — |
 
 ### Option Group Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
