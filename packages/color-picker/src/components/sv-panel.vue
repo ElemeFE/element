@@ -27,18 +27,13 @@
       }
     },
 
-    watch: {
-      'color.value'() {
+    computed: {
+      // while watch hue and value with computed to call update once
+      colorValue() {
+        const hue = this.color.get('hue');
+        const value = this.color.get('value');
         this.update();
-      },
-      /*
-       * FIXME: trigger update twice
-       * when saturation is zero, modify hue will not change value.
-       * panel also not to be updated. so i subscribe the hue change to update panel too.
-       * but if hue changed, update will be call twice.
-       */
-      'color._hue'() {
-        this.update();
+        return { hue, value };
       }
     },
 
