@@ -28,12 +28,16 @@
     },
 
     computed: {
-      // while watch hue and value with computed to call update once
       colorValue() {
         const hue = this.color.get('hue');
         const value = this.color.get('value');
-        this.update();
         return { hue, value };
+      }
+    },
+
+    watch: {
+      colorValue() {
+        this.update();
       }
     },
 
