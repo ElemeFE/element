@@ -406,6 +406,11 @@
         immediate: true,
         handler(val) {
           this.store.commit('setData', val);
+          if (this.rowKey) {
+            this.nextTick(()=> {
+              this.store.setCurrentRowKey(this.currentRowKey);
+            });
+          }
         }
       },
 
