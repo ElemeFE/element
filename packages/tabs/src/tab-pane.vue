@@ -10,7 +10,7 @@
     componentName: 'ElTabPane',
 
     props: {
-      label: String,
+      label: [String, Number],
       labelContent: Function,
       name: String,
       closable: Boolean,
