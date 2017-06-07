@@ -17,13 +17,15 @@ describe('Menu', () => {
     }, true);
     var item1 = vm.$refs.item1;
     var item2 = vm.$refs.item2;
-    item1.$el.click();
     vm.$nextTick(_ => {
-      expect(item1.$el.classList.contains('is-active')).to.be.true;
-      item2.$el.click();
+      item1.$el.click();
       vm.$nextTick(_ => {
-        expect(item2.$el.classList.contains('is-active')).to.be.true;
-        done();
+        expect(item1.$el.classList.contains('is-active')).to.be.true;
+        item2.$el.click();
+        vm.$nextTick(_ => {
+          expect(item2.$el.classList.contains('is-active')).to.be.true;
+          done();
+        });
       });
     });
   });
@@ -66,11 +68,13 @@ describe('Menu', () => {
           </el-menu>
         `
       }, true);
-      expect(vm.$refs.item2.$el.classList.contains('is-active')).to.be.true;
-      vm.$refs.item1.$el.click();
       vm.$nextTick(_ => {
-        expect(vm.$refs.item1.$el.classList.contains('is-active')).to.be.true;
-        done();
+        expect(vm.$refs.item2.$el.classList.contains('is-active')).to.be.true;
+        vm.$refs.item1.$el.click();
+        vm.$nextTick(_ => {
+          expect(vm.$refs.item1.$el.classList.contains('is-active')).to.be.true;
+          done();
+        });
       });
     });
     it('dynamic active', done => {
@@ -257,10 +261,12 @@ describe('Menu', () => {
         };
       }
     }, true);
-    vm.$refs.submenu2.$el.querySelector('.el-submenu__title').click();
     vm.$nextTick(_ => {
-      expect(vm.$refs.submenu1.$el.classList.contains('is-opened')).to.not.true;
-      done();
+      vm.$refs.submenu2.$el.querySelector('.el-submenu__title').click();
+      vm.$nextTick(_ => {
+        expect(vm.$refs.submenu1.$el.classList.contains('is-opened')).to.not.true;
+        done();
+      });
     });
   });
   it('horizontal mode', done => {
