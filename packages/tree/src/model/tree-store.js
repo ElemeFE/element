@@ -195,7 +195,7 @@ export default class TreeStore {
     allNodes.forEach((node) => {
       let checked = keys.indexOf(node.data[key] + '') > -1;
 
-      if (!node.isLeaf) {
+      if (!node.isLeaf && !node.store.lazy) {
         if (!this.checkStrictly) {
           const childNodes = node.childNodes;
 
@@ -240,7 +240,11 @@ export default class TreeStore {
           traverse(node);
         }
       } else {
-        node.setChecked(checked, false);
+        if (!node.store.lazy) {
+          node.setChecked(checked, false);
+        } else {
+          node.setChecked(checked, !this.checkStrictly);
+        }
       }
     });
   }
