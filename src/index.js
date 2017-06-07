@@ -138,7 +138,7 @@ const install = function(Vue, opts = {}) {
   locale.i18n(opts.i18n);
 
   components.map(component => {
-    Vue.component(component.name, component);
+    component.install(Vue);
   });
 
   Vue.use(Loading.directive);
