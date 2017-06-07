@@ -233,7 +233,7 @@ export default {
 ::: demo 可以通过 `icon` 属性在 input 组件尾部增加显示图标，可以通过 `on-icon-click` 钩子函数来在点击图标后执行需要的逻辑。
 ```html
 <el-input
-  placeholder="请选择日期"
+  placeholder="请输入内容"
   icon="search"
   v-model="input2"
   :on-icon-click="handleIconClick">
