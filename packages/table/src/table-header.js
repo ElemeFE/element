@@ -381,13 +381,12 @@ export default {
       document.body.style.cursor = '';
     },
 
-    toggleOrder(order) {
-      return !order ? 'ascending' : order === 'ascending' ? 'descending' : null;
+    toggleOrder(order, preOrder) {
+      return !order ? preOrder ? preOrder : 'ascending' : order === 'ascending' ? 'descending' : null;
     },
 
     handleSortClick(event, column, givenOrder) {
       event.stopPropagation();
-      let order = givenOrder || this.toggleOrder(column.order);
 
       let target = event.target;
       while (target && target.tagName !== 'TH') {
@@ -405,6 +404,8 @@ export default {
 
       const states = this.store.states;
       let sortProp = states.sortProp;
+      let preOrder = states.sortOrder;
+      let order = givenOrder || this.toggleOrder(column.order, preOrder);
       let sortOrder;
       const sortingColumn = states.sortingColumn;
 
