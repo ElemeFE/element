@@ -11,6 +11,7 @@
     display: inline-block;
     vertical-align: middle;
     background-color: var(--color-white);
+    max-width: var(--msgbox-max-width);
     width: var(--msgbox-width);
     border-radius: var(--msgbox-border-radius);
     font-size: var(--msgbox-font-size);
@@ -22,6 +23,7 @@
       bottom: 0;
       left: 0;
       right: 0;
+      margin: var(--msgbox-wrapper-margin);
       text-align: center;
       &::after {
         content: "";
