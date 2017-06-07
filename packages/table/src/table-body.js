@@ -53,7 +53,7 @@ export default {
                 on-contextmenu={ ($event) => this.handleContextMenu($event, row) }
                 on-mouseenter={ _ => this.handleMouseEnter($index) }
                 on-mouseleave={ _ => this.handleMouseLeave() }
-                class={ [this.getRowClass(row, $index)] }>
+                class={ ['el-table__row', this.getRowClass(row, $index)] }>
                 {
                   this._l(this.columns, (column, cellIndex) =>
                     <td
