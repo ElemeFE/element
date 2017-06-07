@@ -35,7 +35,7 @@
 .el-icon-circle-check:before { content: "\e609"; }
 .el-icon-circle-close:before { content: "\e60a"; }
 .el-icon-circle-cross:before { content: "\e60b"; }
-.el-icon-close:before { content: "\e60c"; }
+.el-icon-close:before { content: "\e60c"; font-size: 11px; }
 .el-icon-upload:before { content: "\e60d"; }
 .el-icon-d-arrow-left:before { content: "\e60e"; }
 .el-icon-d-arrow-right:before { content: "\e60f"; }
