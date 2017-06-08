@@ -95,7 +95,7 @@ export default {
     transfer: {
       noMatch: 'Geen toepaslike data',
       noData: 'Geen data',
-      titles: ['Lys 1', 'Lys 2'], 
+      titles: ['Lys 1', 'Lys 2'],
       filterPlaceholder: 'Voer sleutelwoord in',
       noCheckedFormat: '{total} items',
       hasCheckedFormat: '{checked}/{total} gekies'
