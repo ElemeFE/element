@@ -95,10 +95,10 @@ export default {
     transfer: {
       noMatch: 'Sobivad andmed puuduvad',
       noData: 'Andmed puuduvad',
-      titles: ['Loend 1', 'Loend 2'], // to be translated
-      filterPlaceholder: 'Sisesta märksõna', // to be translated
-      noCheckedFormat: '{total} objekti', // to be translated
-      hasCheckedFormat: '{checked}/{total} valitud' // to be translated
+      titles: ['Loend 1', 'Loend 2'],
+      filterPlaceholder: 'Sisesta märksõna',
+      noCheckedFormat: '{total} objekti',
+      hasCheckedFormat: '{checked}/{total} valitud'
     }
   }
 };
