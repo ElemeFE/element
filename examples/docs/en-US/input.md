@@ -632,6 +632,7 @@ Attribute | Description | Type | Options | Default
 |----| ----| ----| ---- | -----|
 |placeholder| the placeholder of Autocomplete| string | — | — |
 |disabled | whether Autocomplete is disabled  | boolean | — | false|
+| props | configuration options, see the following table | object | — | — |
 |icon | icon name | string | — | — |
 |value | binding value | string | — | — |
 |custom-item | component name of your customized suggestion list item | string | — | — |
@@ -639,6 +640,12 @@ Attribute | Description | Type | Options | Default
 | popper-class | custom class name for autocomplete's dropdown | string | — | — |
 | trigger-on-focus | whether show suggestions when input focus | boolean | — | true |
 | on-icon-click | hook function when clicking on the input icon | function | — | — |
+
+### props
+| Attribute | Description | Type | Accepted Values | Default |
+| --------- | ----------------- | ------ | ------ | ------ |
+| label     | specify which key of option object is used as the option's label | string | — | value |
+| value     | specify which key of option object is used as the option's value | string | — | value |
 
 ### Autocomplete Events
 
