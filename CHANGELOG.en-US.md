@@ -1,5 +1,15 @@
 ## Changelog
 
+### 1.3.6
+
+*2017-06-09*
+
+- Fixed inconsistency of ColorPicker's default value and panel value, #5183 (by @Kingwl)
+- Fixed ColorPicker not able to change hue in the panel when its default value is white, #5184 (by @Kingwl)
+- Fixed Select's dropdown taking multiple clicks to expand when nested in a Dialog after scrolling, #5226
+- Added `props` property for Autocomplete, #5282
+- Fixed dropdown of DatePicker not hiding when Tab key is pressed after manual input, #5149 (by @ChuckFields)
+
 ### 1.3.5
 
 *2017-06-03*
