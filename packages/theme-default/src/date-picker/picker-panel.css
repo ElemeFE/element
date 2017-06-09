@@ -104,6 +104,7 @@
     box-sizing: border-box;
     padding-top: 6px;
     background-color: var(--color-dark-white);
+    overflow: auto;
   }
 
   .el-picker-panel *[slot=sidebar] + .el-picker-panel__body,
