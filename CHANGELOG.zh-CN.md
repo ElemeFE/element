@@ -1,5 +1,14 @@
 ## 更新日志
 
+### 1.3.6
+*2017-06-09*
+
+- 修复 ColorPicker 的默认值有时与面板中的值不一致的问题，#5183（by @Kingwl）
+- 修复默认值为白色的 ColorPicker 无法通过面板改变 hue 的问题，#5184（by @Kingwl）
+- 修复 Dialog 在滚动后，其嵌套的 Select 需多次点击才能呼出的问题，#5226
+- 新增 Autocomplete 的 `props` 属性，#5282
+- 修复 DatePicker 在手动输入值后按 Tab 切换焦点时下拉框不消失的问题，#5149（by @ChuckFields）
+
 ### 1.3.5
 *2017-06-03*
 
