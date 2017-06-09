@@ -208,7 +208,6 @@ export default {
               value={ this.$parent.internalCurrentPage }
               on-change={ this.handleChange }
               on-focus={ this.handleFocus }
-              style={{ width: '30px' }}
               number/>
             { this.t('el.pagination.pageClassifier') }
           </span>

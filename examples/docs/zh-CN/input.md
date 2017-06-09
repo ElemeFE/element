@@ -793,6 +793,7 @@ export default {
 |-------------  |---------------- |---------------- |---------------------- |-------- |
 | placeholder   | 输入框占位文本   | string          | — | — |
 | disabled      | 禁用            | boolean         | — | false   |
+| props | 配置选项，具体见下表 | object | — | — |
 | value         | 必填值输入绑定值   | string  | — | — |
 | custom-item  | 通过该参数指定自定义的输入建议列表项的组件名 | string  | — | — |
 | fetch-suggestions | 返回输入建议的方法，仅当你的输入建议数据 resolve 时，通过调用 callback(data:[]) 来返回它  | Function(queryString, callback)  | — | — |
@@ -800,6 +801,12 @@ export default {
 | trigger-on-focus | 是否在输入框 focus 时显示建议列表 | boolean | — | true |
 | on-icon-click | 点击图标的回调函数 | function | — | — |
 | icon          | 输入框尾部图标    | string          | — | — |
+
+### props
+| 参数     | 说明              | 类型   | 可选值 | 默认值 |
+| -------- | ----------------- | ------ | ------ | ------ |
+| value    | 指定选项的值为选项对象的某个属性值 | string | — | value |
+| label    | 指定选项标签为选项对象的某个属性值 | string | — | value |
 
 ### Autocomplete Events
 | 事件名称 | 说明 | 回调参数 |
