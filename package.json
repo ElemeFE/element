@@ -1,6 +1,6 @@
 {
   "name": "element-ui",
-  "version": "1.3.4",
+  "version": "1.3.6",
   "description": "A Component Library for Vue.js.",
   "main": "lib/element-ui.common.js",
   "files": [
@@ -45,7 +45,7 @@
   "unpkg": "lib/index.js",
   "style": "lib/theme-default/index.css",
   "dependencies": {
-    "async-validator": "^1.6.9",
+    "async-validator": "1.6.9",
     "babel-helper-vue-jsx-merge-props": "^2.0.0",
     "deepmerge": "^1.2.0",
     "throttle-debounce": "^1.0.1"

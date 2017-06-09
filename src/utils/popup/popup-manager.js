@@ -149,19 +149,41 @@ const PopupManager = {
     }
   }
 };
-!Vue.prototype.$isServer && window.addEventListener('keydown', function(event) {
-  if (event.keyCode === 27) { // ESC
-    if (PopupManager.modalStack.length > 0) {
-      const topItem = PopupManager.modalStack[PopupManager.modalStack.length - 1];
-      if (!topItem) return;
-      const instance = PopupManager.getInstance(topItem.id);
-      if (instance.closeOnPressEscape) {
-        instance.handleClose
-          ? instance.handleClose()
-          : (instance.handleAction ? instance.handleAction('cancel') : instance.close());
+
+const getTopPopup = function() {
+  if (Vue.prototype.$isServer) return;
+  if (PopupManager.modalStack.length > 0) {
+    const topPopup = PopupManager.modalStack[PopupManager.modalStack.length - 1];
+    if (!topPopup) return;
+    const instance = PopupManager.getInstance(topPopup.id);
+
+    return instance;
+  }
+};
+
+if (!Vue.prototype.$isServer) {
+  // handle `esc` key when the popup is shown
+  window.addEventListener('keydown', function(event) {
+    if (event.keyCode === 27) {
+      const topPopup = getTopPopup();
+
+      if (topPopup && topPopup.closeOnPressEscape) {
+        topPopup.handleClose
+          ? topPopup.handleClose()
+          : (topPopup.handleAction ? topPopup.handleAction('cancel') : topPopup.close());
       }
     }
-  }
-});
+  });
+
+  // keep focusing inside the popup by `tab` key
+  document.addEventListener('focusin', function(event) {
+    const topPopup = getTopPopup();
+
+    if (topPopup && !topPopup.$el.contains(event.target)) {
+      event.stopPropagation();
+      topPopup.$el.focus();
+    }
+  });
+}
 
 export default PopupManager;
