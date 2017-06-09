@@ -161,7 +161,7 @@
           this.date = newVal;
           this.year = newVal.getFullYear();
           this.month = newVal.getMonth();
-          this.$emit('pick', newVal, true);
+          this.$emit('pick', newVal, false);
         }
       },
 
