@@ -226,17 +226,17 @@
       });
     },
     methods: {
-      handleItemChange(val) {
+      handleItemChange(val, options) {
         console.log('active item:', val);
+        console.log('active options:', options);
         setTimeout(_ => {
-          if (val.indexOf('California') > -1 && !this.options2[0].cities.length) {
-            this.options2[0].cities = [{
-              label: 'Los Angeles'
-            }];
-          } else if (val.indexOf('Florida') > -1 && !this.options2[1].cities.length) {
-            this.options2[1].cities = [{
-              label: 'Orlando'
-            }];
+          const currentOption = options[options.length - 1];
+          if (currentOption.length === 0) {
+            currentOption.push({
+              label: 'City1'
+            }, {
+              label: 'City2'
+            });
           }
         }, 300);
       },
@@ -1413,20 +1413,20 @@ Load child options when their parent option is clicked or hovered over.
     },
 
     methods: {
-      handleItemChange(val) {
+      handleItemChange(val, options) {
         console.log('active item:', val);
+        console.log('active options:', options);
         setTimeout(_ => {
-          if (val.indexOf('California') > -1 && !this.options2[0].cities.length) {
-            this.options2[0].cities = [{
-              label: 'Los Angeles'
-            }];
-          } else if (val.indexOf('Florida') > -1 && !this.options2[1].cities.length) {
-            this.options2[1].cities = [{
-              label: 'Orlando'
-            }];
+          const currentOption = options[options.length - 1];
+          if (currentOption.length === 0) {
+            currentOption.push({
+              label: 'City1'
+            }, {
+              label: 'City2'
+            });
           }
         }, 300);
-      }
+      },
     }
   };
 </script>

@@ -226,17 +226,17 @@
       });
     },
     methods: {
-      handleItemChange(val) {
+      handleItemChange(val, options) {
         console.log('active item:', val);
+        console.log('active options:', options);
         setTimeout(_ => {
-          if (val.indexOf('江苏') > -1 && !this.options2[0].cities.length) {
-            this.options2[0].cities = [{
-              label: '南京'
-            }];
-          } else if (val.indexOf('浙江') > -1 && !this.options2[1].cities.length) {
-            this.options2[1].cities = [{
-              label: '杭州'
-            }];
+          const currentOption = options[options.length - 1];
+          if (currentOption.length === 0) {
+            currentOption.push({
+              label: '城市1'
+            }, {
+              label: '城市2'
+            });
           }
         }, 300);
       },
@@ -1413,17 +1413,17 @@
     },
 
     methods: {
-      handleItemChange(val) {
+      handleItemChange(val, options) {
         console.log('active item:', val);
+        console.log('active options:', options);
         setTimeout(_ => {
-          if (val.indexOf('江苏') > -1 && !this.options2[0].cities.length) {
-            this.options2[0].cities = [{
-              label: '南京'
-            }];
-          } else if (val.indexOf('浙江') > -1 && !this.options2[1].cities.length) {
-            this.options2[1].cities = [{
-              label: '杭州'
-            }];
+          const currentOption = options[options.length - 1];
+          if (currentOption.length === 0) {
+            currentOption.push({
+              label: '城市1'
+            }, {
+              label: '城市2'
+            });
           }
         }, 300);
       }
