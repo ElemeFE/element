@@ -234,11 +234,11 @@ export default {
       this.inputValue = '';
       this.menu.visible = false;
     },
-    handleActiveItemChange(value) {
+    handleActiveItemChange(value, options) {
       this.$nextTick(_ => {
         this.updatePopper();
       });
-      this.$emit('active-item-change', value);
+      this.$emit('active-item-change', value, options);
     },
     handlePick(value, close = true) {
       this.currentValue = value;
