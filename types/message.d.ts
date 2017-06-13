@@ -23,22 +23,22 @@ export interface ElMessageOptions {
   message: string
 
   /** Message type */
-  type: MessageType
+  type?: MessageType
 
   /** Custom icon's class, overrides type */
-  iconClass: string
+  iconClass?: string
 
   /** Custom class name for Message */
-  customClass: string
+  customClass?: string
 
   /** Display duration, millisecond. If set to 0, it will not turn off automatically */
-  duration: number
+  duration?: number
 
   /** Whether to show a close button */
-  showClose: boolean
+  showClose?: boolean
 
   /** Callback function when closed with the message instance as the parameter */
-  onClose: CloseEventHandler
+  onClose?: CloseEventHandler
 }
 
 export interface ElMessage {
