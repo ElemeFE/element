@@ -1,7 +1,6 @@
 import { ElementUIComponent, ElementUIComponentSize } from './component'
 
-// TODO: update the name of this interface
-export interface AlterItemsEventHandler {
+export interface QueryChangeHandler {
   /**
    * @param queryString Current value of the text input
    */
