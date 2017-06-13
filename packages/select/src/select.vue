@@ -114,6 +114,18 @@
     'mini': 22
   };
 
+  const valueEquals = (a, b) => {
+    // see: https://stackoverflow.com/questions/3115982/how-to-check-if-two-arrays-are-equal-with-javascript
+    if (a === b) return true;
+    if (!(a instanceof Array)) return false;
+    if (!(b instanceof Array)) return false;
+    if (a.length !== b.length) return false;
+    for (let i = 0; i !== a.length; ++i) {
+      if (a[i] !== b[i]) return false;
+    }
+    return true;
+  };
+
   export default {
     mixins: [Emitter, Locale, Focus('reference')],
 
@@ -245,7 +257,6 @@
         if (this.filterable && !this.multiple) {
           this.inputLength = 20;
         }
-        this.$emit('change', val);
         this.dispatch('ElFormItem', 'el.form.change', val);
       },
 
@@ -365,6 +376,12 @@
         this.$nextTick(() => this.scrollToOption());
       },
 
+      emitChange(val) {
+        if (!valueEquals(this.value, val)) {
+          this.$emit('change', val);
+        }
+      },
+
       getOption(value) {
         let option;
         const type = typeof value;
@@ -471,6 +488,7 @@
           const value = this.value.slice();
           value.pop();
           this.$emit('input', value);
+          this.emitChange(value);
         }
       },
 
@@ -522,6 +540,7 @@
             value.push(option.value);
           }
           this.$emit('input', value);
+          this.emitChange(value);
           if (option.created) {
             this.query = '';
             this.inputLength = 20;
@@ -529,6 +548,7 @@
           if (this.filterable) this.$refs.input.focus();
         } else {
           this.$emit('input', option.value);
+          this.emitChange(option.value);
           this.visible = false;
         }
         this.$nextTick(() => this.scrollToOption());
@@ -605,6 +625,7 @@
       deleteSelected(event) {
         event.stopPropagation();
         this.$emit('input', '');
+        this.emitChange('');
         this.visible = false;
         this.$emit('clear');
       },
@@ -615,6 +636,7 @@
           const value = this.value.slice();
           value.splice(index, 1);
           this.$emit('input', value);
+          this.emitChange(value);
           this.$emit('remove-tag', tag);
         }
         event.stopPropagation();
