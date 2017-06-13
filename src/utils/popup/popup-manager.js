@@ -174,16 +174,6 @@ if (!Vue.prototype.$isServer) {
       }
     }
   });
-
-  // keep focusing inside the popup by `tab` key
-  document.addEventListener('focusin', function(event) {
-    const topPopup = getTopPopup();
-
-    if (topPopup && !topPopup.$el.contains(event.target)) {
-      event.stopPropagation();
-      topPopup.$el.focus();
-    }
-  });
 }
 
 export default PopupManager;
