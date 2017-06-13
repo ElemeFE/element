@@ -13,7 +13,7 @@ export interface DisabledDateChecker {
   (date: Date): boolean
 }
 
-// TODO: add description
+// Picked date range
 export interface DateRange {
   minDate: Date,
   maxDate: Date
