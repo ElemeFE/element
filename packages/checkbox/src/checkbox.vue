@@ -77,10 +77,8 @@
 
             isLimitExceeded === false &&
             this.dispatch('ElCheckboxGroup', 'input', [val]);
-
-          } else if (this.value !== undefined) {
-            this.$emit('input', val);
           } else {
+            this.$emit('input', val);
             this.selfModel = val;
           }
         }
