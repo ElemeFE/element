@@ -64,6 +64,7 @@ import CollapseItem from '../packages/collapse-item/index.js';
 import Cascader from '../packages/cascader/index.js';
 import ColorPicker from '../packages/color-picker/index.js';
 import Transfer from '../packages/transfer/index.js';
+import RightMenu from '../packages/right-menu/index.js';
 import locale from 'element-ui/src/locale';
 import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
@@ -128,6 +129,7 @@ const components = [
   Cascader,
   ColorPicker,
   Transfer,
+  RightMenu,
   CollapseTransition
 ];
 
@@ -226,5 +228,6 @@ module.exports = {
   CollapseItem,
   Cascader,
   ColorPicker,
-  Transfer
+  Transfer,
+  RightMenu
 };

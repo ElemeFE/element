@@ -339,6 +339,7 @@ Only card type Tabs support addable & closeable.
 | closable  | whether Tab is closable | boolean   | — |  false  |
 | addable  | whether Tab is addable   | boolean   | — |  false  |
 | editable  | whether Tab is addable and closable | boolean   | — |  false  |
+| rightmenu  | right click custom menu   | boolean   | — |  false  |
 | active-name(deprecated)  | name of the selected tab  | string   |  —  |  name of first tab |
 | value  | name of the selected tab  | string   |  —  |  name of first tab |
 
@@ -346,6 +347,7 @@ Only card type Tabs support addable & closeable.
 | Event Name | Description | Parameters |
 |---------- |-------- |---------- |
 | tab-click  | triggers when a tab is clicked | clicked tab |
+| tab-menu  | triggers when a tab is right clicked | right clicked tab |
 | tab-remove  | triggers when tab-remove button is clicked | name of the removed tab |
 | tab-add  | triggers when tab-add button is clicked  | — |
 | edit  | triggers when tab-add button or tab-remove is clicked | (targetName, action) |
