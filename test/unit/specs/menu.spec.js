@@ -293,7 +293,7 @@ describe('Menu', () => {
         done();
       }, 1000);
     }, 500);
-  });
+  }).timeout(3000);
   it('menu trigger click', done => {
     vm = createVue({
       template: `
