@@ -23,6 +23,10 @@
         type: String,
         default: 'vertical'
       },
+      leftPadding: {
+        type: Number,
+        default: 10
+      },
       defaultActive: {
         type: String,
         default: ''

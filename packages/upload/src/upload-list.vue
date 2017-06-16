@@ -17,14 +17,14 @@
       <a class="el-upload-list__item-name" @click="handleClick(file)">
         <i class="el-icon-document"></i>{{file.name}}
       </a>
-      <label class="el-upload-list__item-status-label">
+      <label v-if="file.status !== 'uploading'" class="el-upload-list__item-status-label">
         <i :class="{
           'el-icon-upload-success': true,
           'el-icon-circle-check': listType === 'text',
           'el-icon-check': ['picture-card', 'picture'].indexOf(listType) > -1
         }"></i>
+        <i class="el-icon-close" @click="$emit('remove', file)"></i>
       </label>
-      <i class="el-icon-close" @click="$emit('remove', file)"></i>
       <el-progress
         v-if="file.status === 'uploading'"
         :type="listType === 'picture-card' ? 'circle' : 'line'"
