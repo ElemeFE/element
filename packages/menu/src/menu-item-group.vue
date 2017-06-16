@@ -18,6 +18,10 @@
     props: {
       title: {
         type: String
+      },
+      leftPadding: {
+          type: Number,
+          default: 10
       }
     },
     data() {
@@ -27,15 +31,15 @@
     },
     computed: {
       levelPadding() {
-        let padding = 10;
+        let padding = this.leftPadding;
         let parent = this.$parent;
         while (parent && parent.$options.componentName !== 'ElMenu') {
           if (parent.$options.componentName === 'ElSubmenu') {
-            padding += 20;
+            padding += this.leftPadding;
           }
           parent = parent.$parent;
         }
-        padding === 10 && (padding = 20);
+        padding === this.leftPadding && (padding = this.leftPadding);
         return padding;
       }
     }
