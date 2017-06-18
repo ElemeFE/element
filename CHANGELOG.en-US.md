@@ -1,5 +1,17 @@
 ## Changelog
 
+### 1.3.7
+
+*2017-06-18*
+
+- Fixed Table with async data not showing summary row, #5318
+- Fixed Pagination's jumper value not sync with current page, #5377
+- Fixed DatePicker's shortcut panel overflow issue, #5297 (by @alashow)
+- Fixed clicking Switch not responding when some text on the page is selected, #5411
+- The red wildcard indicating required field of Form is now responsive, #5403
+- Fixed initial-index of Carousel not working, #5334
+- Fixed Popover enable to be focused when nested in a Dialog, #5336
+
 ### 1.3.6
 
 *2017-06-09*

@@ -28,7 +28,7 @@ describe('Dialog', () => {
       expect(dialog.$el.style.display).to.not.equal('none');
       done();
     }, 10);
-  });
+  }).timeout(3000);
 
   it('render correct content', done => {
     vm = createVue({
