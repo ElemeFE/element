@@ -62,6 +62,7 @@ export default {
 
       if (!files) return;
       this.uploadFiles(files);
+      this.$refs.input.value = null;
     },
     uploadFiles(files) {
       let postFiles = Array.prototype.slice.call(files);
