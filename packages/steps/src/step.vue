@@ -58,10 +58,8 @@ export default {
   data() {
     return {
       index: -1,
-      style: {},
       lineStyle: {},
       mainOffset: 0,
-      isLast: false,
       internalStatus: ''
     };
   },
@@ -70,9 +68,43 @@ export default {
     this.$parent.steps.push(this);
   },
 
+  beforeDestroy() {
+    const steps = this.$parent.steps;
+    const index = steps.indexOf(this);
+    if (index >= 0) {
+      steps.splice(index, 1);
+    }
+  },
+
   computed: {
     currentStatus() {
       return this.status || this.internalStatus;
+    },
+    isLast: function() {
+      const parent = this.$parent;
+      return parent.steps[parent.steps.length - 1] === this;
+    },
+    style: function() {
+      const parent = this.$parent;
+      const isCenter = parent.center;
+      const len = parent.steps.length;
+
+      if (isCenter && this.isLast) {
+        return {};
+      }
+
+      const space = (typeof parent.space === 'number'
+        ? parent.space + 'px'
+        : parent.space
+          ? parent.space
+          : 100 / (isCenter ? len - 1 : len) + '%');
+      if (parent.direction === 'horizontal') {
+        return { width: space };
+      } else {
+        if (!this.isLast) {
+          return { height: space };
+        }
+      }
     }
   },
 
@@ -109,34 +141,15 @@ export default {
         : style.width = step + '%';
 
       this.lineStyle = style;
-    },
-
-    adjustPosition() {
-      this.style = {};
-      this.$parent.stepOffset = this.$el.getBoundingClientRect().width / (this.$parent.steps.length - 1);
     }
   },
 
   mounted() {
     const parent = this.$parent;
-    const isCenter = parent.center;
-    const len = parent.steps.length;
-    const isLast = this.isLast = parent.steps[parent.steps.length - 1] === this;
-    const space = typeof parent.space === 'number'
-      ? parent.space + 'px'
-      : parent.space
-        ? parent.space
-        : 100 / (isCenter ? len - 1 : len) + '%';
 
     if (parent.direction === 'horizontal') {
-      this.style = { width: space };
       if (parent.alignCenter) {
         this.mainOffset = -this.$refs.title.getBoundingClientRect().width / 2 + 16 + 'px';
-      }
-      isCenter && isLast && this.adjustPosition();
-    } else {
-      if (!isLast) {
-        this.style = { height: space };
       }
     }
 
