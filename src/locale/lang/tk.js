@@ -87,7 +87,7 @@ export default {
       confirmFilter: 'Tassykla',
       resetFilter: 'Arassala',
       clearFilter: 'Hemmesi',
-      sumText: 'Sum' // to be translated
+      sumText: 'Jemi'
     },
     tree: {
       emptyText: 'Maglumat ýok'
@@ -95,10 +95,10 @@ export default {
     transfer: {
       noMatch: 'Hiçzat tapylmady',
       noData: 'Hiçzat ýok',
-      titles: ['List 1', 'List 2'], // to be translated
-      filterPlaceholder: 'Enter keyword', // to be translated
-      noCheckedFormat: '{total} items', // to be translated
-      hasCheckedFormat: '{checked}/{total} checked' // to be translated
+      titles: ['Sanaw 1', 'Sanaw 2'],
+      filterPlaceholder: 'Gözleg sözlerini giriziň',
+      noCheckedFormat: '{total} element',
+      hasCheckedFormat: '{checked}/{total} saýlanan'
     }
   }
 };

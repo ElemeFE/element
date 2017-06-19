@@ -146,7 +146,7 @@ describe('Dropdown', () => {
         done();
       }, 300);
     }, 300);
-  });
+  }).timeout(3000);
   it('hide on click', done => {
     vm = createVue({
       template: `

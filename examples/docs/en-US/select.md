@@ -105,7 +105,7 @@
         states: ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
       };
     },
-    
+
     mounted() {
       this.list = this.states.map(item => { return { value: item, label: item }; });
     },
@@ -125,6 +125,12 @@
     }
   };
 </script>
+
+<style>
+  .demo-select .el-select {
+    width: 240px;
+  }
+</style>
 
 ## Select
 
@@ -236,7 +242,7 @@ Disable the whole component.
     </el-option>
   </el-select>
 </template>
-  
+
 <script>
   export default {
     data() {
@@ -651,6 +657,7 @@ Create and select new items that are not included in select options
 | no-match-text | displayed text when no data matches the filtering query | string | — | No matching data |
 | no-data-text | displayed text when there is no options | string | — | No data |
 | popper-class | custom class name for Select's dropdown | string | — | — |
+| default-first-option | select first matching option on enter key. Use with `filterable` or `remote` | boolean | - | false |
 
 ### Select Events
 | Event Name | Description | Parameters |
@@ -658,6 +665,7 @@ Create and select new items that are not included in select options
 | change | triggers when the selected value changes | current selected value |
 | visible-change | triggers when the dropdown appears/disappears | true when it appears, and false otherwise |
 | remove-tag | triggers when a tag is removed in multiple mode | removed tag value |
+| clear | triggers when the clear icon is clicked in a clearable Select | — |
 
 ### Option Group Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |

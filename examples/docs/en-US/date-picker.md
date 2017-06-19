@@ -63,6 +63,30 @@
   };
 </script>
 
+<style>
+  .demo-block.demo-date-picker .source {
+    padding: 0;
+    display: flex;
+  }
+
+  .demo-date-picker .block {
+    padding: 30px 0;
+    text-align: center;
+    border-right: solid 1px #EFF2F6;
+    flex: 1;
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  .demo-date-picker .demonstration {
+    display: block;
+    color: #8492a6;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+</style>
+
 ## DatePicker
 
 Use Date Picker for date input.

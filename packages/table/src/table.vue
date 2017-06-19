@@ -6,7 +6,7 @@
       'el-table--border': border,
       'el-table--fluid-height': maxHeight,
       'el-table--enable-row-hover': !store.states.isComplex,
-      'el-table--enable-row-transition': true || (store.states.data || []).length !== 0 && (store.states.data || []).length < 100
+      'el-table--enable-row-transition': (store.states.data || []).length !== 0 && (store.states.data || []).length < 100
     }"
     @mouseleave="handleMouseLeave($event)">
     <div class="hidden-columns" ref="hiddenColumns"><slot></slot></div>
@@ -26,6 +26,7 @@
       <table-body
         :context="context"
         :store="store"
+        :stripe="stripe"
         :layout="layout"
         :row-class-name="rowClassName"
         :row-style="rowStyle"
@@ -70,6 +71,7 @@
         <table-body
           fixed="left"
           :store="store"
+          :stripe="stripe"
           :layout="layout"
           :highlight="highlightCurrentRow"
           :row-class-name="rowClassName"
@@ -111,6 +113,7 @@
         <table-body
           fixed="right"
           :store="store"
+          :stripe="stripe"
           :layout="layout"
           :row-class-name="rowClassName"
           :row-style="rowStyle"
@@ -407,6 +410,7 @@
         immediate: true,
         handler(val) {
           this.store.commit('setData', val);
+          if (this.$ready) this.doLayout();
         }
       },
 

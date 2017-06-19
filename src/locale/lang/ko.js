@@ -87,7 +87,7 @@ export default {
       confirmFilter: '확인',
       resetFilter: '초기화',
       clearFilter: '전체',
-      sumText: 'Sum' // to be translated
+      sumText: '합'
     },
     tree: {
       emptyText: '데이터 없음'
@@ -95,10 +95,10 @@ export default {
     transfer: {
       noMatch: '맞는 데이터가 없습니다',
       noData: '데이터 없음',
-      titles: ['List 1', 'List 2'], // to be translated
-      filterPlaceholder: 'Enter keyword', // to be translated
-      noCheckedFormat: '{total} items', // to be translated
-      hasCheckedFormat: '{checked}/{total} checked' // to be translated
+      titles: ['리스트 1', '리스트 2'],
+      filterPlaceholder: ' 입력하세요',
+      noCheckedFormat: '{total} 항목',
+      hasCheckedFormat: '{checked}/{total} 선택됨'
     }
   }
 };

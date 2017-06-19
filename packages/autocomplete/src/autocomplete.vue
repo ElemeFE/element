@@ -1,5 +1,5 @@
 <template>
-  <div class="el-autocomplete" v-clickoutside="handleClickoutside">
+  <div class="el-autocomplete">
     <el-input
       ref="input"
       :value="value"
@@ -17,7 +17,7 @@
       @blur="handleBlur"
       @keydown.up.native.prevent="highlight(highlightedIndex - 1)"
       @keydown.down.native.prevent="highlight(highlightedIndex + 1)"
-      @keydown.enter.stop.native="handleKeyEnter"
+      @keydown.enter.native.prevent="handleKeyEnter"
     >
       <template slot="prepend" v-if="$slots.prepend">
         <slot name="prepend"></slot>
@@ -27,6 +27,7 @@
       </template>
     </el-input>
     <el-autocomplete-suggestions
+      :props="props"
       :class="[popperClass ? popperClass : '']"
       ref="suggestions"
       :suggestions="suggestions"
@@ -36,7 +37,6 @@
 </template>
 <script>
   import ElInput from 'element-ui/packages/input';
-  import Clickoutside from 'element-ui/src/utils/clickoutside';
   import ElAutocompleteSuggestions from './autocomplete-suggestions.vue';
   import Emitter from 'element-ui/src/mixins/emitter';
 
@@ -52,9 +52,16 @@
       ElAutocompleteSuggestions
     },
 
-    directives: { Clickoutside },
-
     props: {
+      props: {
+        type: Object,
+        default() {
+          return {
+            label: 'value',
+            value: 'value'
+          };
+        }
+      },
       popperClass: String,
       placeholder: String,
       disabled: Boolean,
@@ -137,11 +144,8 @@
           this.select(this.suggestions[this.highlightedIndex]);
         }
       },
-      handleClickoutside() {
-        this.isFocus = false;
-      },
       select(item) {
-        this.$emit('input', item.value);
+        this.$emit('input', item[this.props.value]);
         this.$emit('select', item);
         this.$nextTick(_ => {
           this.suggestions = [];

@@ -1,10 +1,13 @@
 <template>
   <transition name="msgbox-fade">
-    <div class="el-message-box__wrapper" v-show="visible" @click.self="handleWrapperClick">
+    <div class="el-message-box__wrapper" tabindex="-1" v-show="visible" @click.self="handleWrapperClick">
       <div class="el-message-box" :class="customClass">
         <div class="el-message-box__header" v-if="title !== undefined">
           <div class="el-message-box__title">{{ title || t('el.messagebox.title') }}</div>
-          <i class="el-message-box__close el-icon-close" @click="handleAction('cancel')" v-if="showClose"></i>
+          <button type="button" class="el-message-box__headerbtn" aria-label="Close" 
+                  v-if="showClose" @click="handleAction('cancel')">
+            <i class="el-message-box__close el-icon-close"></i>
+          </button>
         </div>
         <div class="el-message-box__content" v-if="message !== ''">
           <div class="el-message-box__status" :class="[ typeClass ]"></div>

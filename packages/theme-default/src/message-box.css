@@ -37,26 +37,33 @@
       padding: 20px 20px 0;
     }
 
+    @e headerbtn {
+      position: absolute;
+      top: 19px;
+      right: 20px;
+      background: transparent;
+      border: none;
+      outline: none;
+      padding: 0;
+      cursor: pointer;
+
+      .el-message-box__close {
+        color: #999;
+      }
+      
+      &:focus, &:hover {
+        .el-message-box__close {
+          color: var(--color-primary);
+        }
+      }
+
+    }
+
     @e content {
       padding: 30px 20px;
       color: var(--msgbox-content-color);
       font-size: var(--msgbox-content-font-size);
       position: relative;
-    }
-
-    @e close {
-      display: inline-block;
-      position: absolute;
-      top: 19px;
-      right: 20px;
-      color: #999;
-      cursor: pointer;
-      line-height: 20px;
-      text-align: center;
-
-      &:hover {
-        color: var(--color-primary);
-      }
     }
 
     @e input {

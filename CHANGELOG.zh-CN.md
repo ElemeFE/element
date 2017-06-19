@@ -1,5 +1,45 @@
 ## 更新日志
 
+### 1.3.7
+*2017-06-18*
+
+- 修复异步加载数据的 Table 不显示合计行的问题，#5318
+- 修复 Pagination 的输入框数值与当前页不同步的问题，#5377
+- 修复 DatePicker 的 shortcut 面板过长时的溢出问题，#5297（by @alashow）
+- 修复当页面上有被选中的文本时点击 Switch 无效的问题，#5411
+- Form 中表示必填项的小红点现在可以动态更新了，#5403
+- 修复 Carousel 的 initial-index 属性无效的问题，#5334
+- 修复嵌套于 Dialog 中的 Popover 无法被 focus 的问题，#5336
+
+### 1.3.6
+*2017-06-09*
+
+- 修复 ColorPicker 的默认值有时与面板中的值不一致的问题，#5183（by @Kingwl）
+- 修复默认值为白色的 ColorPicker 无法通过面板改变 hue 的问题，#5184（by @Kingwl）
+- 修复 Dialog 在滚动后，其嵌套的 Select 需多次点击才能呼出的问题，#5226
+- 新增 Autocomplete 的 `props` 属性，#5282
+- 修复 DatePicker 在手动输入值后按 Tab 切换焦点时下拉框不消失的问题，#5149（by @ChuckFields）
+
+### 1.3.5
+*2017-06-03*
+
+- 修复 Select 的 `default-first-option` 属性在远程搜索时不生效的问题，#5084
+- 修复 InputNumber 与其他表单组件同行显示时不能对齐的问题，#5127
+- 修复行内 FormItem 对复合型 Input 失效的问题，#5151
+- 修复 FormItem 在 Firefox 中的高度与其他浏览器不一致的问题，#5152
+- 修复 Cascader 中 `value` 为 0 的数据不能展开下一级的问题，#5172（by @Kingwl）
+- 修复 Autocomplete 无法触发原生 `keydown` 和 `keyup` 事件的问题，#5129
+- 新增 Select 的 `clear` 事件，#5112
+- 修复 Cascader 在某些情况下下拉框的位置没有及时更新的问题，#5064
+- 提升 Dialog 和 MessageBox 的可访问性，#4786
+
+### 1.3.4
+*2017-05-23*
+
+- 修复带展开行的 Table 在高亮和斑马纹效果下的问题，#4871（by @mu-yu）
+- 新增 Select 的 `default-first-option` 属性，#4838（by @wacky6）
+- 修复可创建选项的 Select 在没有选项数据时不显示「无数据」文本的问题，#4977
+
 ### 1.3.3
 *2017-05-14*
 

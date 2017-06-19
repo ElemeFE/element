@@ -1,5 +1,49 @@
 ## Changelog
 
+### 1.3.7
+
+*2017-06-18*
+
+- Fixed Table with async data not showing summary row, #5318
+- Fixed Pagination's jumper value not sync with current page, #5377
+- Fixed DatePicker's shortcut panel overflow issue, #5297 (by @alashow)
+- Fixed clicking Switch not responding when some text on the page is selected, #5411
+- The red wildcard indicating required field of Form is now responsive, #5403
+- Fixed initial-index of Carousel not working, #5334
+- Fixed Popover enable to be focused when nested in a Dialog, #5336
+
+### 1.3.6
+
+*2017-06-09*
+
+- Fixed inconsistency of ColorPicker's default value and panel value, #5183 (by @Kingwl)
+- Fixed ColorPicker not able to change hue in the panel when its default value is white, #5184 (by @Kingwl)
+- Fixed Select's dropdown taking multiple clicks to expand when nested in a Dialog after scrolling, #5226
+- Added `props` property for Autocomplete, #5282
+- Fixed dropdown of DatePicker not hiding when Tab key is pressed after manual input, #5149 (by @ChuckFields)
+
+### 1.3.5
+
+*2017-06-03*
+
+- Fixed `default-first-option` of Select not working in remote filtering, #5084
+- Fixed InputNumber not aligning with other form components, #5127
+- Fixed inline FormItem having no effect on mixed Input, #5151
+- Fixed height of FormItem being different in Firefox from other browsers, #5152
+- Fixed items with a `value` of 0 in Cascader can not be expanded, #5172 (by @Kingwl)
+- Fixed Autocomplete not triggering native `keydown` and `keyup` events, #5129
+- Added `clear` event for Select, #5112
+- Fixed Cascader's dropdown menu not updating its position in some situations, #5064
+- Better accessibility for Dialog and MessageBox, #4786
+
+### 1.3.4
+
+*2017-05-23*
+
+- Fixed highlight and stripe effects of Table with expandable rows, #4871 (by @mu-yu)
+- Added `default-first-option` for Select, #4838 (by @wacky6)
+- Fixed Select with no options not displaying "No data" text when `allow-create` is true, #4977
+
 ### 1.3.3
 
 *2017-05-14*
