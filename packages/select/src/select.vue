@@ -448,6 +448,7 @@
 
       doDestroy() {
         this.$refs.popper && this.$refs.popper.doDestroy();
+        this.dropdownUl = null;
       },
 
       handleClose() {
