@@ -34,3 +34,9 @@ git fetch project-a
 git merge --allow-unrelated-histories project-a/master # or whichever branch you want to merge
 git remote remove project-a
 ```
+
+### 主题 & 自定义 css
+自定义 css：修改 `packages/theme-default/src`  
+自定义主题色：修改 `packages/theme-default/src/common/var.css` 中的 `--color-primary`变量  
+  
+在 `packages/theme-default` 目录下运行 `gulp build`，生成的资源在 `packages/theme-default/lib`里面
