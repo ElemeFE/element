@@ -5,6 +5,16 @@
         this.$message('这是一条消息提示');
       },
 
+      openVn() {
+        const h = this.$createElement;
+        this.$message({
+          message: h('p', null, [
+            h('span', null, '内容可以是 '),
+            h('i', { style: 'color: teal' }, 'VNode')
+          ])
+        });
+      },
+
       open2() {
         this.$message({
           message: '恭喜你，这是一条成功消息',
@@ -70,6 +80,7 @@
 ```html
 <template>
   <el-button :plain="true" @click="open">打开消息提示</el-button>
+  <el-button :plain="true" @click="openVn">VNode</el-button>
 </template>
 
 <script>
@@ -77,6 +88,16 @@
     methods: {
       open() {
         this.$message('这是一条消息提示');
+      },
+
+      openVn() {
+        const h = this.$createElement;
+        this.$message({
+          message: h('p', null, [
+            h('span', null, '内容可以是 '),
+            h('i', { style: 'color: teal' }, 'VNode')
+          ])
+        });
       }
     }
   }
@@ -196,7 +217,7 @@ import { Message } from 'element-ui';
 ### Options
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| message | 消息文字 | string | — | — |
+| message | 消息文字 | string / VNode | — | — |
 | type | 主题 | string | success/warning/info/error | info |
 | iconClass | 自定义图标的类名，会覆盖 `type` | string | — | — |
 | customClass | 自定义类名 | string | — | — |
