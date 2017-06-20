@@ -94,7 +94,7 @@ export default {
       if (!this.store.states.isComplex) return;
       const el = this.$el;
       if (!el) return;
-      const rows = el.querySelectorAll('tbody > tr');
+      const rows = el.querySelectorAll('tbody > tr.el-table__row');
       const oldRow = rows[oldVal];
       const newRow = rows[newVal];
       if (oldRow) {
