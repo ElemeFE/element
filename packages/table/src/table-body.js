@@ -122,14 +122,20 @@ export default {
         newRow.classList.add('current-row');
       }
     },
-    'store.states.selection'(newVal) {
-      if (!this.autoCheckbox) return;
-      const el = this.$el;
-      if (!el) return;
-      if (newVal.length) {
-        el.classList.add('show-cell-checkbox');
-      } else {
-        el.classList.remove('show-cell-checkbox');
+    'store.states.selection': {
+      immediate: true,
+      handler(newVal) {
+        const el = this.$el;
+        if (!el) return;
+        if (!this.autoCheckbox) {
+          el.classList.add('show-cell-checkbox');
+          return;
+        }
+        if (newVal.length) {
+          el.classList.add('show-cell-checkbox');
+        } else {
+          el.classList.remove('show-cell-checkbox');
+        }
       }
     }
   },
@@ -168,6 +174,10 @@ export default {
 
   created() {
     this.activateTooltip = debounce(50, tooltip => tooltip.handleShowPopper());
+  },
+
+  mounted() {
+    this.$set(this.store.states, 'selection', [].concat(this.store.states.selection));
   },
 
   methods: {
