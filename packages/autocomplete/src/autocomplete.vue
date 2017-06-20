@@ -27,6 +27,7 @@
       </template>
     </el-input>
     <el-autocomplete-suggestions
+      :props="props"
       :class="[popperClass ? popperClass : '']"
       ref="suggestions"
       :suggestions="suggestions"
@@ -52,6 +53,15 @@
     },
 
     props: {
+      props: {
+        type: Object,
+        default() {
+          return {
+            label: 'value',
+            value: 'value'
+          };
+        }
+      },
       popperClass: String,
       placeholder: String,
       disabled: Boolean,
@@ -135,7 +145,7 @@
         }
       },
       select(item) {
-        this.$emit('input', item.value);
+        this.$emit('input', item[this.props.value]);
         this.$emit('select', item);
         this.$nextTick(_ => {
           this.suggestions = [];

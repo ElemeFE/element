@@ -184,6 +184,33 @@ describe('ColorPicker', () => {
     }, ANIMATION_TIME);
   });
 
+  it('should change hue when saturation is zero', (done) => {
+    const vm = createVue({
+      template: `
+        <el-color-picker v-model="color"></el-color-picker>
+      `,
+
+      data() {
+        return {
+          color: '#FFFFFF'
+        };
+      }
+    }, true);
+
+    const trigger = vm.$el.querySelector('.el-color-picker__trigger');
+    trigger.click();
+
+    setTimeout(() => {
+      const hueBar = document.querySelector('.el-color-hue-slider');
+      hueBar.__vue__.handleClick({ target: null, clientX: 0, clientY: 1000 });
+      vm.$nextTick(() => {
+        const thumb = document.querySelector('.el-color-hue-slider__thumb');
+        expect(parseInt(thumb.style.top, 10) > 0).to.true;
+        done();
+      });
+    }, ANIMATION_TIME);
+  });
+
   it('should change alpha when clicking the alpha bar', (done) => {
     const vm = createVue({
       template: `

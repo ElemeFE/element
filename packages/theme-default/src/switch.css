@@ -26,7 +26,6 @@
       display: inline-block;
       font-size: var(--switch-font-size);
       cursor: pointer;
-      user-select: none;
       @m left {
         i {
           left: 6px;

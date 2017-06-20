@@ -206,9 +206,9 @@ export default {
               min={ 1 }
               max={ this.internalPageCount }
               value={ this.$parent.internalCurrentPage }
+              domProps-value={ this.$parent.internalCurrentPage }
               on-change={ this.handleChange }
               on-focus={ this.handleFocus }
-              style={{ width: '30px' }}
               number/>
             { this.t('el.pagination.pageClassifier') }
           </span>

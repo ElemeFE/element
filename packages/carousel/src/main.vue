@@ -49,7 +49,6 @@
 
 <script>
 import throttle from 'throttle-debounce/throttle';
-import debounce from 'throttle-debounce/debounce';
 import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
 
 export default {
@@ -103,7 +102,7 @@ export default {
 
   watch: {
     items(val) {
-      if (val.length > 0) this.setActiveItem(0);
+      if (val.length > 0) this.setActiveItem(this.initialIndex);
     },
 
     activeIndex(val, oldVal) {
@@ -223,7 +222,6 @@ export default {
   },
 
   created() {
-    this.handleItemChange = debounce(100, this.updateItems);
     this.throttledArrowClick = throttle(300, true, index => {
       this.setActiveItem(index);
     });

@@ -32,8 +32,15 @@
       };
     },
 
+    computed: {
+      hueValue() {
+        const hue = this.color.get('hue');
+        return hue;
+      }
+    },
+
     watch: {
-      'color.value'() {
+      hueValue() {
         this.update();
       }
     },
