@@ -318,6 +318,7 @@ export default {
       get() {
         const value = this.currentValue;
         if (!value) return;
+        if (typeof value === 'string') return value;
         const formatter = (
           TYPE_VALUE_RESOLVER_MAP[this.type] ||
           TYPE_VALUE_RESOLVER_MAP['default']
