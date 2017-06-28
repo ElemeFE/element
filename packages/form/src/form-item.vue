@@ -85,7 +85,9 @@
       },
       contentStyle() {
         var ret = {};
+        const label = this.label;
         if (this.form.labelPosition === 'top' || this.form.inline) return ret;
+        if (!label && !this.labelWidth) return ret;
         var labelWidth = this.labelWidth || this.form.labelWidth;
         if (labelWidth) {
           ret.marginLeft = labelWidth;
