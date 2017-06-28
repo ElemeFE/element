@@ -1,4 +1,15 @@
 import dateUtil from 'element-ui/src/utils/date';
+import { t } from 'element-ui/src/locale';
+
+const weeks = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+
+dateUtil.i18n = {
+  dayNamesShort: weeks.map(week => t(`el.datepicker.weeks.${ week }`)),
+  dayNames: weeks.map(week => t(`el.datepicker.weeks.${ week }`)),
+  monthNamesShort: months.map(month => t(`el.datepicker.months.${ month }`)),
+  monthNames: months.map((month, index) => t(`el.datepicker.month${ index + 1 }`))
+};
 
 const newArray = function(start, end) {
   let result = [];
