@@ -734,6 +734,10 @@ Form component allows you to verify your data, helping you find and correct erro
 ```
 :::
 
+:::tip
+If an `el-form-item` has an empty `label`, and you wish to align it with other items, please add `label-width` on that `el-form-item`.
+:::
+
 ### Form Attributes
 
 | Attribute      | Description          | Type      | Accepted Values       | Default  |

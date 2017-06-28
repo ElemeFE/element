@@ -722,6 +722,10 @@
 ```
 :::
 
+:::tip
+当 `el-form-item` 的 `label` 属性为空时，如果希望和其他 `label` 属性不为空的表单项内容对齐，请在 `el-form-item` 上设置 `label-width` 属性。
+:::
+
 ### Form Attributes
 
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
