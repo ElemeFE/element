@@ -12,7 +12,8 @@
     :style="{
       msTransform: `translateX(${ translate }px) scale(${ scale })`,
       webkitTransform: `translateX(${ translate }px) scale(${ scale })`,
-      transform: `translateX(${ translate }px) scale(${ scale })`
+      transform: `translateX(${ translate }px) scale(${ scale })`,
+      zIndex: `${ zIndex }`
     }">
     <div
       v-if="$parent.type === 'card'"
@@ -43,11 +44,22 @@
         scale: 1,
         active: false,
         ready: false,
-        inStage: false
+        inStage: false,
+        zIndex: null
       };
     },
 
     methods: {
+      processZIndex(index, activeIndex, length) {
+        if (this.$parent.type === 'card') {
+          return ;
+        } else if (index > activeIndex + 1 && index - activeIndex >= length / 2) {
+          return -1;
+        } else if (index === activeIndex) {
+          return 2;
+        }
+        return 1;
+      },
       processIndex(index, activeIndex, length) {
         if (activeIndex === 0 && index === length - 1) {
           return -1;
@@ -74,6 +86,7 @@
       translateItem(index, activeIndex) {
         const parentWidth = this.$parent.$el.offsetWidth;
         const length = this.$parent.items.length;
+        this.zIndex = this.processZIndex(index, activeIndex, length);
         if (index !== activeIndex && length > 2) {
           index = this.processIndex(index, activeIndex, length);
         }
