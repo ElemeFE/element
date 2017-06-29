@@ -196,7 +196,16 @@
         }
         const newVal = Number(value);
         if (!isNaN(newVal)) {
-          this.setCurrentValue(newVal);
+          if (this.timer) {
+            clearTimeout(this.timer);
+          }
+          if (newVal <= this.max && newVal >= this.min) {
+            this.setCurrentValue(newVal);
+          } else {
+            this.timer = setTimeout(() => {
+              this.setCurrentValue(newVal);
+            }, 2000);
+          }
         } else {
           this.$refs.input.setCurrentValue(this.currentValue);
         }
