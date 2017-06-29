@@ -1,3 +1,4 @@
+import { hasClass, addClass, removeClass } from 'element-ui/src/utils/dom';
 import ElCheckbox from 'element-ui/packages/checkbox';
 import ElTag from 'element-ui/packages/tag';
 import Vue from 'vue';
@@ -295,7 +296,7 @@ export default {
         const columnRect = columnEl.getBoundingClientRect();
         const minLeft = columnRect.left - tableLeft + 30;
 
-        columnEl.classList.add('noclick');
+        addClass(columnEl, 'noclick');
 
         this.dragState = {
           startMouseLeft: event.clientX,
@@ -344,7 +345,7 @@ export default {
           document.ondragstart = null;
 
           setTimeout(function() {
-            columnEl.classList.remove('noclick');
+            removeClass(columnEl, 'noclick');
           }, 0);
         };
 
@@ -395,8 +396,8 @@ export default {
       }
 
       if (target && target.tagName === 'TH') {
-        if (target.classList.contains('noclick')) {
-          target.classList.remove('noclick');
+        if (hasClass(target, 'noclick')) {
+          removeClass(target, 'noclick');
           return;
         }
       }
