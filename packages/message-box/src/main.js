@@ -47,19 +47,14 @@ const defaultCallback = action => {
       }
     }
     if (currentMsg.resolve) {
-      let $type = currentMsg.options.$type;
-      if ($type === 'confirm' || $type === 'prompt') {
-        if (action === 'confirm') {
-          if (instance.showInput) {
-            currentMsg.resolve({ value: instance.inputValue, action });
-          } else {
-            currentMsg.resolve(action);
-          }
-        } else if (action === 'cancel' && currentMsg.reject) {
-          currentMsg.reject(action);
+      if (action === 'confirm') {
+        if (instance.showInput) {
+          currentMsg.resolve({ value: instance.inputValue, action });
+        } else {
+          currentMsg.resolve(action);
         }
-      } else {
-        currentMsg.resolve(action);
+      } else if (action === 'cancel' && currentMsg.reject) {
+        currentMsg.reject(action);
       }
     }
   }
