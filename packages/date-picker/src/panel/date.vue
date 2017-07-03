@@ -325,6 +325,7 @@
       },
 
       confirm() {
+        this.date.setMilliseconds(0);
         this.$emit('pick', this.date);
       },
 
