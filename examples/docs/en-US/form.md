@@ -283,7 +283,7 @@ It includes all kinds of input items, such as `input`, `select`, `radio` and `ch
   <el-form-item label="Activity form">
     <el-input type="textarea" v-model="form.desc"></el-input>
   </el-form-item>
-  <el-form-item>
+  <el-form-item label-width="120px">
     <el-button type="primary" @click="onSubmit">Create</el-button>
     <el-button>Cancel</el-button>
   </el-form-item>
@@ -445,7 +445,7 @@ Form component allows you to verify your data, helping you find and correct erro
   <el-form-item label="Activity form" prop="desc">
     <el-input type="textarea" v-model="ruleForm.desc"></el-input>
   </el-form-item>
-  <el-form-item>
+  <el-form-item label-width="120px">
     <el-button type="primary" @click="submitForm('ruleForm')">Create</el-button>
     <el-button @click="resetForm('ruleForm')">Reset</el-button>
   </el-form-item>
@@ -525,7 +525,7 @@ Form component allows you to verify your data, helping you find and correct erro
   <el-form-item label="Age" prop="age">
     <el-input v-model.number="ruleForm2.age"></el-input>
   </el-form-item>
-  <el-form-item>
+  <el-form-item label-width="120px">
     <el-button type="primary" @click="submitForm('ruleForm2')">Submit</el-button>
     <el-button @click="resetForm('ruleForm2')">Reset</el-button>
   </el-form-item>
@@ -634,7 +634,7 @@ Form component allows you to verify your data, helping you find and correct erro
   >
     <el-input v-model="domain.value"></el-input><el-button @click.prevent="removeDomain(domain)">Delete</el-button>
   </el-form-item>
-  <el-form-item>
+  <el-form-item label-width="120px">
     <el-button type="primary" @click="submitForm('dynamicValidateForm')">Submit</el-button>
     <el-button @click="addDomain">New domain</el-button>
     <el-button @click="resetForm('dynamicValidateForm')">Reset</el-button>
@@ -700,7 +700,7 @@ Form component allows you to verify your data, helping you find and correct erro
   >
     <el-input type="age" v-model.number="numberValidateForm.age" auto-complete="off"></el-input>
   </el-form-item>
-  <el-form-item>
+  <el-form-item label-width="100px">
     <el-button type="primary" @click="submitForm('numberValidateForm')">Submit</el-button>
     <el-button @click="resetForm('numberValidateForm')">Reset</el-button>
   </el-form-item>
@@ -732,6 +732,10 @@ Form component allows you to verify your data, helping you find and correct erro
   }
 </script>
 ```
+:::
+
+:::tip
+If an `el-form-item` has an empty `label`, and you wish to align it with other items, please add `label-width` on that `el-form-item`.
 :::
 
 ### Form Attributes
