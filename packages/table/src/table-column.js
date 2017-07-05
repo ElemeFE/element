@@ -293,6 +293,14 @@ export default {
         ? <div class="cell el-tooltip" style={'width:' + (data.column.realWidth || data.column.width) + 'px'}>{ renderCell(h, data) }</div>
         : <div class="cell">{ renderCell(h, data) }</div>;
     };
+ //      添加接口计算原来的列值
+    column.getOldValue = function(row, column) {
+      const property = column.property;
+      if (property && property.indexOf('.') === -1) {
+        return row[property];
+      }
+      return getValueByPath(row, property);
+    };
   },
 
   destroyed() {
