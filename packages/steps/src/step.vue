@@ -80,6 +80,10 @@ export default {
     currentStatus() {
       return this.status || this.internalStatus;
     },
+    prevStatus() {
+      const prevStep = this.$parent.steps[this.index - 1];
+      return prevStep ? prevStep.currentStatus : 'wait';
+    },
     isLast: function() {
       const parent = this.$parent;
       return parent.steps[parent.steps.length - 1] === this;
@@ -114,7 +118,7 @@ export default {
 
       if (val > this.index) {
         this.internalStatus = this.$parent.finishStatus;
-      } else if (val === this.index) {
+      } else if (val === this.index && this.prevStatus !== 'error') {
         this.internalStatus = this.$parent.processStatus;
       } else {
         this.internalStatus = 'wait';
@@ -129,7 +133,7 @@ export default {
 
       style.transitionDelay = 150 * this.index + 'ms';
       if (status === this.$parent.processStatus) {
-        step = 50;
+        step = this.currentStatus !== 'error' ? 50 : 0;
       } else if (status === 'wait') {
         step = 0;
         style.transitionDelay = (-150 * this.index) + 'ms';
