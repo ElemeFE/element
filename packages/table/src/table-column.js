@@ -97,15 +97,18 @@ const getDefaultColumn = function(type, options) {
 
 const DEFAULT_RENDER_CELL = function(h, { row, column }) {
   const property = column.property;
+  let oldVal = '';
+  if (property && property.indexOf('.') === -1) {
+    oldVal = row[property];
+  } else {
+    oldVal = getValueByPath(row, property);
+  }
   if (column && column.formatter) {
+//     export old value
+    column.oldVal = oldVal;
     return column.formatter(row, column);
   }
-
-  if (property && property.indexOf('.') === -1) {
-    return row[property];
-  }
-
-  return getValueByPath(row, property);
+  return oldVal;
 };
 
 export default {
@@ -292,14 +295,6 @@ export default {
       return _self.showOverflowTooltip || _self.showTooltipWhenOverflow
         ? <div class="cell el-tooltip" style={'width:' + (data.column.realWidth || data.column.width) + 'px'}>{ renderCell(h, data) }</div>
         : <div class="cell">{ renderCell(h, data) }</div>;
-    };
- //      添加接口计算原来的列值
-    column.getOldValue = function(row, column) {
-      const property = column.property;
-      if (property && property.indexOf('.') === -1) {
-        return row[property];
-      }
-      return getValueByPath(row, property);
     };
   },
 
