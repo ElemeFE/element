@@ -49,12 +49,14 @@ describe('Tree', () => {
               label: '二级 3-1'
             }, {
               id: 32,
-              label: '二级 3-2'
+              label: '二级 3-2',
+              disabled: true
             }]
           }],
           defaultProps: {
             children: 'children',
-            label: 'label'
+            label: 'label',
+            disabled: 'disabled'
           }
         };
       }
@@ -245,6 +247,22 @@ describe('Tree', () => {
     vm.$nextTick(() => {
       leafCheckbox.click();
       expect(tree.getCheckedNodes().length).to.equal(1);
+      done();
+    });
+  });
+
+  it('set disabled checkbox', done => {
+    vm = getTreeVm(':props="defaultProps" show-checkbox');
+    const tree = vm.$children[0];
+    const thirdNode = document.querySelectorAll('.el-tree-node__content')[6];
+    const expandIcon = thirdNode.querySelector('.el-tree-node__expand-icon');
+    const nodeCheckbox = thirdNode.querySelector('.el-checkbox');
+    expect(nodeCheckbox).to.be.exist;
+    expandIcon.click();
+    vm.$nextTick(() => {
+      nodeCheckbox.click();
+      expect(tree.getCheckedNodes().length).to.equal(2);
+      expect(tree.getCheckedNodes(true).length).to.equal(1);
       done();
     });
   });

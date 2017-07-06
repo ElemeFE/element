@@ -9,6 +9,9 @@ const reInitChecked = function(node) {
 
   for (let i = 0, j = siblings.length; i < j; i++) {
     const sibling = siblings[i];
+    if (sibling.disabled) {
+      continue;
+    }
     if (sibling.checked !== true || sibling.indeterminate) {
       all = false;
     }
@@ -265,6 +268,9 @@ export default class Node {
   }
 
   setChecked(value, deep) {
+    if (this.disabled) {
+      return;
+    }
     this.indeterminate = value === 'half';
     this.checked = value === true;
 
