@@ -40,7 +40,7 @@
     props: {
       value: {
         type: [Boolean, String, Number],
-        default: true
+        default: false
       },
       disabled: {
         type: Boolean,

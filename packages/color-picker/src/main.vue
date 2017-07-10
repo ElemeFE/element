@@ -70,6 +70,9 @@
         handler() {
           this.showPanelColor = true;
         }
+      },
+      displayedColor(val) {
+        this.$emit('active-change', val);
       }
     },
 
