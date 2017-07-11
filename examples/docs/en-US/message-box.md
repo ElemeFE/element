@@ -269,7 +269,7 @@ Element has added the following global methods for Vue.prototype: `$msgbox`, `$a
 Import `MessageBox`:
 
 ```javascript
-import { MessageBox } from 'element-ui';
+import { MessageBox } from 'my-element-ui';
 ```
 
 The corresponding methods are: `MessageBox`, `MessageBox.alert`, `MessageBox.confirm` and `MessageBox.prompt`.

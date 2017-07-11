@@ -23,36 +23,49 @@
 <script>
   const data = [{
     label: '一级 1',
+    id:1,
     children: [{
       label: '二级 1-1',
+      id:4,
       children: [{
-        label: '三级 1-1-1'
+        label: '三级 1-1-1',
+        id:5,
       }]
     }]
   }, {
     label: '一级 2',
+    id:2,
     children: [{
       label: '二级 2-1',
+      id:6,
       children: [{
-        label: '三级 2-1-1'
+        label: '三级 2-1-1',
+        id:7,
       }]
     }, {
       label: '二级 2-2',
+      id:8,
       children: [{
-        label: '三级 2-2-1'
+        label: '三级 2-2-1',
+        id:9,
       }]
     }]
   }, {
     label: '一级 3',
+    id:3,
     children: [{
       label: '二级 3-1',
+      id:10,
       children: [{
-        label: '三级 3-1-1'
+        label: '三级 3-1-1',
+        id:11
       }]
     }, {
       label: '二级 3-2',
+      id:12,
       children: [{
-        label: '三级 3-2-1'
+        label: '三级 3-2-1',
+        id:13
       }]
     }]
   }];
@@ -372,7 +385,7 @@
   :data="data2"
   show-checkbox
   node-key="id"
-  :default-expanded-keys="[2, 3]"
+  :default-expanded-keys="[1]"
   :default-checked-keys="[5]"
   :props="defaultProps">
 </el-tree>

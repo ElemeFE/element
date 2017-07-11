@@ -148,10 +148,10 @@
 
 <script type="text/babel">
   import { nextMonth, prevMonth, toDate, formatDate, parseDate } from '../util';
-  import Locale from 'element-ui/src/mixins/locale';
+  import Locale from 'my-element-ui/src/mixins/locale';
   import TimePicker from './time';
   import DateTable from '../basic/date-table';
-  import ElInput from 'element-ui/packages/input';
+  import ElInput from 'my-element-ui/packages/input';
 
   export default {
     mixins: [Locale],

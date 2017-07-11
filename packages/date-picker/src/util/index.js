@@ -1,4 +1,4 @@
-import dateUtil from 'element-ui/src/utils/date';
+import dateUtil from 'my-element-ui/src/utils/date';
 
 const newArray = function(start, end) {
   let result = [];

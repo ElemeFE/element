@@ -11,7 +11,7 @@
 </template>
 <script>
   import Menu from './menu-mixin';
-  import Emitter from 'element-ui/src/mixins/emitter';
+  import Emitter from 'my-element-ui/src/mixins/emitter';
 
   export default {
     name: 'ElMenuItem',

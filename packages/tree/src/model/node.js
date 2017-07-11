@@ -1,4 +1,4 @@
-import objectAssign from 'element-ui/src/utils/merge';
+import objectAssign from 'my-element-ui/src/utils/merge';
 import { markNodeData, NODE_KEY } from './util';
 
 const reInitChecked = function(node) {
@@ -291,6 +291,10 @@ export default class Node {
     if (!this.store.checkStrictly) {
       reInitChecked(parent);
     }
+  }
+
+  setCurrentLink(link) {
+    this.currentLink = link;
   }
 
   getChildren() { // this is data

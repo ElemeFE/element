@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { PopupManager } from 'element-ui/src/utils/popup';
+import { PopupManager } from 'my-element-ui/src/utils/popup';
 let MessageConstructor = Vue.extend(require('./main.vue'));
 
 let instance;

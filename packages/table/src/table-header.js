@@ -1,5 +1,5 @@
-import ElCheckbox from 'element-ui/packages/checkbox';
-import ElTag from 'element-ui/packages/tag';
+import ElCheckbox from 'my-element-ui/packages/checkbox';
+import ElTag from 'my-element-ui/packages/tag';
 import Vue from 'vue';
 import FilterPanel from './filter-panel.vue';
 

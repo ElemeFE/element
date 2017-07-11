@@ -13,12 +13,10 @@ export default class TreeStore {
     }
 
     this.nodesMap = {};
-
     this.root = new Node({
       data: this.data,
       store: this
     });
-
     if (this.lazy && this.load) {
       const loadFn = this.load;
       loadFn(this.root, (data) => {
@@ -269,11 +267,15 @@ export default class TreeStore {
   setDefaultExpandedKeys(keys) {
     keys = keys || [];
     this.defaultExpandedKeys = keys;
-
+    let expendNodes = [];
     keys.forEach((key) => {
       const node = this.getNode(key);
-      if (node) node.expand(null, this.autoExpandParent);
+      if (node) {
+          node.expand(null, this.autoExpandParent);
+          expendNodes.push(node);
+      }
     });
+    return expendNodes;
   }
 
   setChecked(data, checked, deep) {
@@ -297,5 +299,23 @@ export default class TreeStore {
     if (node) {
       this.currentNode = node;
     }
+  }
+  setCurrentLink(data) {
+      if (!this.key) return;
+      const allNodes = this._getAllNodes();
+      const that = this;
+      let keys = [];
+      let keyStr = '';
+      data.forEach((curNode) => {
+          keys.push(curNode[that.key]);
+      });
+      keyStr = keys.join(',');
+      allNodes.forEach((node)=>{
+          if (keyStr.indexOf(node[that.key]) !== -1) {
+              node.setCurrentLink(true);
+          } else {
+              node.setCurrentLink(false);
+          }
+      });
   }
 };

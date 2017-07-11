@@ -1,117 +1,19 @@
 <template>
-
   <div class="el-tree" :class="{ 'el-tree--highlight-current': highlightCurrent }">
-  <div class="el-tree-all" v-if="contianAll && showCheckbox">
-    <div class="el-tree-nodes">
-      <el-tree-node
-              v-for="child in root.childNodes"
-              :node="child"
-              :props="props"
-              :key="getNodeKey(child)"
-              :render-content="renderContent"
+    <el-tree-node
+      v-for="child in root.childNodes"
+      :node="child"
+      :props="props"
+      :key="getNodeKey(child)"
+      :render-content="renderContent"
       @node-expand="handleNodeExpand">
     </el-tree-node>
+    <div class="el-tree__empty-block" v-if="!root.childNodes || root.childNodes.length === 0">
+      <span class="el-tree__empty-text">{{ emptyText }}</span>
+    </div>
   </div>
-  </div>
-  <div class="el-tree-levels" :class="{'el-tree-levels-all':contianAll && showCheckbox}">
-    <table>
-      <tbody>
-      <tr>
-              <td v-if="!(contianAll && showCheckbox)">
-    <div class="el-tree-nodes">
-      <el-tree-node
-              v-for="child in root.childNodes"
-              :node="child"
-              :props="props"
-              :key="getNodeKey(child)"
-              :render-content="renderContent"
-      @node-expand="handleNodeExpand">
-    </el-tree-node>
-  </div>
-              </td>
-        <td v-if="expendNodes.length >0 " v-for="expendNode in expendNodes">
-          <div class="el-tree-sub" >
-            <el-tree-node
-                    v-for="child in expendNode.childNodes"
-                    :node="child"
-                    :props="props"
-                    :key="getNodeKey(child)"
-                    :render-content="renderContent"
-            @node-expand="handleNodeExpand">
-          </el-tree-node>
-        </div>
-        </td>
-
-      </tr>
-      </tbody>
-    </table>
-
-
-  </div>
-  <div class="el-tree__empty-block" v-if="!root.childNodes || root.childNodes.length === 0">
-    <span class="el-tree__empty-text">{{ emptyText }}</span>
-  </div>
-  <div style="clear: both"></div>
-</div>
-
 </template>
-<style>
-div{
-  box-sizing: border-box;
-}
-.el-tree{
-  height: 256px;
-  position: relative;
-}
-.el-tree .el-tree-node__label{
-  font-size: 12px;
-  color:#37474f;
-}
-.el-tree-all{
-  position: absolute;
-  width: 40px;
-  height: 100%;
-  padding-top: 110px;
-  border-right: 1px solid rgb(209, 219, 229);
-}
-.el-tree-all .el-tree-node{
-  border: none;
-}
-.el-tree-all .el-tree-node__expand-icon{
-  display: none;
-}
-.el-tree-all .el-tree-node__label{
-  display: block;
-  width: 20px;
-  word-wrap: break-word;
-  word-break: normal;
-  white-space: pre-wrap;
-  line-height: 16px;
-  text-align: center;
-}
-.el-tree-levels-all{
-  margin-left: 40px;
-}
-.el-tree-levels table{
-  border-collapse:collapse;
-  width:100%;
-  height: 100%;
-}
-.el-tree-levels table tr td{
-  width:17%;
-  border-right: 1px solid rgb(209, 219, 229);
-  vertical-align:top;
-  height: 100%;
-}
-.el-tree-levels table tr td:last-child{
-  width: 100%;
-}
-.el-tree-sub{
-  display: table;
-  width: 100%;
-  height: 100%;
-}
-</style>
+
 <script>
   import TreeStore from './model/tree-store';
   import {t} from 'my-element-ui/src/locale';
@@ -130,8 +32,7 @@ div{
       return {
         store: null,
         root: null,
-        currentNode: null,
-        expendNodes:[]
+        currentNode: null
       };
     },
 
@@ -145,14 +46,7 @@ div{
           return t('el.tree.emptyText');
         }
       },
-      contianAll:{
-          type:Boolean,
-          default:false
-      },
-      nodeKey: {
-          type:String,
-          default:'id'
-      },
+      nodeKey: String,
       checkStrictly: Boolean,
       defaultExpandAll: Boolean,
       expandOnClickNode: {
@@ -212,7 +106,7 @@ div{
       },
       defaultExpandedKeys(newVal) {
         this.store.defaultExpandedKeys = newVal;
-        this.expendNodes = this.store.setDefaultExpandedKeys(newVal);
+        this.store.setDefaultExpandedKeys(newVal);
       },
       currentNodeKey(newVal) {
         this.store.setCurrentNodeKey(newVal);
@@ -220,11 +114,7 @@ div{
       },
       data(newVal) {
         this.store.setData(newVal);
-      },
-        expendNodes(newVal){
-            const store = this.store;
-            store.setCurrentLink(newVal);
-        }
+      }
     },
 
     methods: {
@@ -256,15 +146,7 @@ div{
       setChecked(data, checked, deep) {
         this.store.setChecked(data, checked, deep);
       },
-
       handleNodeExpand(nodeData, node, instance) {
-          this.expendNodes[node.level-1] = node;
-          for(let i=0;i<this.expendNodes.length;i++){
-              if(i>node.level-1){
-                  this.expendNodes.splice(i,1);
-              }
-          }
-          this.expendNodes = Object.assign([],this.expendNodes);
         this.broadcast('ElTreeNode', 'tree-node-expand', node);
         this.$emit('node-expand', nodeData, node, instance);
       }
@@ -279,7 +161,6 @@ div{
         lazy: this.lazy,
         props: this.props,
         load: this.load,
-        containAll:this.containAll,
         currentNodeKey: this.currentNodeKey,
         checkStrictly: this.checkStrictly,
         defaultCheckedKeys: this.defaultCheckedKeys,
@@ -288,8 +169,8 @@ div{
         defaultExpandAll: this.defaultExpandAll,
         filterNodeMethod: this.filterNodeMethod
       });
+
       this.root = this.store.root;
-      this.expendNodes = this.store.setDefaultExpandedKeys(this.defaultExpandedKeys);
     }
   };
 </script>

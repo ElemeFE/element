@@ -2,7 +2,7 @@
  * Show migrating guide in browser console.
  *
  * Usage:
- * import Migrating from 'element-ui/src/mixins/migrating';
+ * import Migrating from 'my-element-ui/src/mixins/migrating';
  *
  * mixins: [Migrating]
  *

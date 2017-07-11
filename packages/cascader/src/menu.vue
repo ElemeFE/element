@@ -1,5 +1,5 @@
 <script>
-  import { isDef } from 'element-ui/src/utils/shared';
+  import { isDef } from 'my-element-ui/src/utils/shared';
 
   export default {
     name: 'ElCascaderMenu',

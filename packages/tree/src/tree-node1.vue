@@ -5,15 +5,14 @@
     :class="{
       'is-expanded': childNodeRendered && expanded,
       'is-current': tree.store.currentNode === node,
-      'is-hidden': !node.visible,
-      'is-curlink':node.currentLink,
-      'is-checked':node.checked
+      'is-hidden': !node.visible
     }">
-    <div class="el-tree-node__content">
+    <div class="el-tree-node__content"
+      :style="{ 'padding-left': (node.level - 1) * tree.indent + 'px' }">
       <span
         class="el-tree-node__expand-icon"
         @click.stop="handleExpandIconClick"
-        :class="{ 'is-leaf': node.isLeaf}">
+        :class="{ 'is-leaf': node.isLeaf, expanded: !node.isLeaf && expanded }">
       </span>
       <el-checkbox
         v-if="showCheckbox"
@@ -28,55 +27,22 @@
       </span>
       <node-content :node="node"></node-content>
     </div>
-
+    <el-collapse-transition>
+      <div
+        class="el-tree-node__children"
+        v-show="expanded">
+        <el-tree-node
+          :render-content="renderContent"
+          v-for="child in node.childNodes"
+          :key="getNodeKey(child)"
+          :node="child"
+          @node-expand="handleChildNodeExpand">
+        </el-tree-node>
+      </div>
+    </el-collapse-transition>
   </div>
 </template>
-<style>
-.el-tree-node__content > .el-checkbox{
-  vertical-align: inherit;
-}
-.el-tree-node{
-  border-bottom: 1px solid rgb(209, 219, 229);
-  position: relative;
-}
-.el-tree-node__content{
-  padding-left: 10px;
-}
-.el-tree-node__expand-icon{
-  position: absolute;
-  right: 0px;
-  top:12px;
-}
-.is-curlink{
-  background: #ebfcff;
-}
-.el-checkbox__inner{
-  width: 14px;
-  height: 14px;
-  border-radius:2px;
-}
-.el-checkbox__inner::after{
-  height: 6px;
-  width: 3px;
-  left: 4px;
-}
-.el-checkbox__input.is-checked .el-checkbox__inner{
-  background: #0dcfff;
-  border-color: #0dcfff;
-}
-.el-checkbox__input.is-indeterminate .el-checkbox__inner{
-  background: #0dcfff;
-  border-color: #0dcfff;
-}
-.el-tree-node__expand-icon{
-  border: 5px solid transparent;
-  border-left-width: 6px;
-  border-left-color: #dfdfdf;
-}
-.is-checked .el-tree-node__label{
-  color:#0dcfff;
-}
-</style>
+
 <script type="text/jsx">
   import ElCollapseTransition from 'my-element-ui/src/transitions/collapse-transition';
   import ElCheckbox from 'my-element-ui/packages/checkbox';
@@ -180,14 +146,13 @@
 
       handleExpandIconClick() {
         if (this.node.isLeaf) return;
-//        if (this.expanded) {
-//          this.tree.$emit('node-collapse', this.node.data, this.node, this);
-//          this.node.collapse();
-//        }
-//        else {
+        if (this.expanded) {
+          this.tree.$emit('node-collapse', this.node.data, this.node, this);
+          this.node.collapse();
+        } else {
           this.node.expand();
           this.$emit('node-expand', this.node.data, this.node, this);
-       // }
+        }
       },
 
       handleUserClick() {

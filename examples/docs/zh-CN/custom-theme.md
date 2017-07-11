@@ -76,7 +76,7 @@ et
 
 ```javascript
 import '../theme/index.css'
-import ElementUI from 'element-ui'
+import ElementUI from 'my-element-ui'
 import Vue from 'vue'
 
 Vue.use(ElementUI)
@@ -88,7 +88,7 @@ Vue.use(ElementUI)
 {
   "plugins": [["component", [
     {
-      "libraryName": "element-ui",
+      "libraryName": "my-element-ui",
       "styleLibraryName": "~theme"
     }
   ]]]

@@ -42,12 +42,12 @@
 </template>
 
 <script type="text/babel">
-  import Popup from 'element-ui/src/utils/popup';
-  import Locale from 'element-ui/src/mixins/locale';
-  import ElInput from 'element-ui/packages/input';
-  import ElButton from 'element-ui/packages/button';
-  import { addClass, removeClass } from 'element-ui/src/utils/dom';
-  import { t } from 'element-ui/src/locale';
+  import Popup from 'my-element-ui/src/utils/popup';
+  import Locale from 'my-element-ui/src/mixins/locale';
+  import ElInput from 'my-element-ui/packages/input';
+  import ElButton from 'my-element-ui/packages/button';
+  import { addClass, removeClass } from 'my-element-ui/src/utils/dom';
+  import { t } from 'my-element-ui/src/locale';
 
   let typeMap = {
     success: 'circle-check',

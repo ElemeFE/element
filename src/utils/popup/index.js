@@ -1,6 +1,6 @@
 import Vue from 'vue';
-import merge from 'element-ui/src/utils/merge';
-import PopupManager from 'element-ui/src/utils/popup/popup-manager';
+import merge from 'my-element-ui/src/utils/merge';
+import PopupManager from 'my-element-ui/src/utils/popup/popup-manager';
 import getScrollBarWidth from '../scrollbar-width';
 
 let idSeed = 1;
