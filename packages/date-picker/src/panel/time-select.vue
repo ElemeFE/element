@@ -1,6 +1,7 @@
 <template>
-  <transition name="el-zoom-in-top" @after-leave="$emit('dodestroy')">
+  <transition name="el-zoom-in-top" @before-enter="handleMenuEnter" @after-leave="$emit('dodestroy')">
     <div
+      ref="popper"
       v-show="visible"
       :style="{ width: width + 'px' }"
       :class="popperClass"
@@ -18,6 +19,7 @@
 
 <script type="text/babel">
   import ElScrollbar from 'element-ui/packages/scrollbar';
+  import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
 
   const parseTime = function(time) {
     const values = ('' || time).split(':');
@@ -81,6 +83,7 @@
         } else if (this.maxTime && compareTime(val, this.maxTime) > 0) {
           this.$emit('pick');
         }
+        this.$nextTick(() => this.scrollToOption());
       }
     },
 
@@ -93,6 +96,15 @@
 
       handleClear() {
         this.$emit('pick');
+      },
+
+      scrollToOption(className = 'selected') {
+        const menu = this.$refs.popper.querySelector('.el-picker-panel__content');
+        scrollIntoView(menu, menu.getElementsByClassName(className)[0]);
+      },
+
+      handleMenuEnter() {
+        this.$nextTick(() => this.scrollToOption());
       }
     },
 
