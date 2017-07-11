@@ -19,6 +19,10 @@
         type: Function,
         default: noop
       },
+      onRightClick: {
+        type: Function,
+        default: noop
+      },
       onTabRemove: {
         type: Function,
         default: noop
@@ -124,6 +128,7 @@
         panes,
         editable,
         onTabClick,
+        onRightClick,
         onTabRemove,
         navStyle,
         scrollable,
@@ -159,6 +164,7 @@
             ref="tabs"
             refInFor
             on-click={(ev) => { onTabClick(pane, tabName, ev); }}
+            on-contextmenu={(ev)=>{ onRightClick(pane, tabName, ev);}}
           >
             {tabLabelContent}
             {btnClose}

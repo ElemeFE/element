@@ -6,6 +6,7 @@
         activeName2: 'first',
         editableTabsValue: '2',
         editableTabsValue2: '2',
+        editableTabsValue3: '2',
         editableTabs: [{
           title: 'Tab 1',
           name: '1',
@@ -24,10 +25,30 @@
           name: '2',
           content: 'Tab 2 content'
         }],
+        editableTabs3: [{
+          title: 'Tab 1',
+          name: '1',
+          content: 'Tab 1 content'
+        }, {
+          title: 'Tab 2',
+          name: '2',
+          content: 'Tab 2 content'
+        }, {
+           title: 'Tab 3',
+           name: '3',
+           content: 'Tab 3 content'
+         }, {
+           title: 'Tab 4',
+           name: '4',
+           content: 'Tab 4 content'
+         }],
         tabIndex: 2
       }
     },
     methods: {
+      handleOpenMenu(tab, event){
+        this.editableTabsValue3 = tab.name
+      },
       handleClick(tab, event) {
         console.log(tab, event);
       },
@@ -67,6 +88,29 @@
           content: 'New Tab content'
         });
         this.editableTabsValue2 = newTabName;
+      },
+      removeOthers(){
+        let tabs = this.editableTabs3;
+        this.editableTabs3 = tabs.filter(tab => tab.name == this.editableTabsValue3);
+      },
+      reset(){
+        this.editableTabs3 = [{
+            title: 'Tab 1',
+            name: '1',
+            content: 'Tab 1 content'
+          }, {
+            title: 'Tab 2',
+            name: '2',
+            content: 'Tab 2 content'
+          }, {
+             title: 'Tab 3',
+             name: '3',
+             content: 'Tab 3 content'
+          }, {
+             title: 'Tab 4',
+             name: '4',
+             content: 'Tab 4 content'
+        }]
       },
       removeTab(targetName) {
         let tabs = this.editableTabs2;
@@ -258,6 +302,89 @@
 ```
 :::
 
+### 右键菜单关闭其他标签页
+
+增减标签页按钮只能在选项卡样式的标签页下使用
+
+:::demo
+```html
+<div style="margin-bottom: 20px;">
+  <el-button
+    size="small"
+    @click="reset(editableTabs3)"
+  >
+    重置
+  </el-button>
+</div>
+<el-tabs v-model="editableTabsValue3" type="card" rightmenu @tab-menu="handleOpenMenu" @edit="handleTabsEdit">
+  <el-tab-pane
+    :key="item.name"
+    v-for="(item, index) in editableTabs3"
+    :label="item.title"
+    :name="item.name"
+  >
+    {{item.content}}
+  </el-tab-pane>
+  <li slot="rightmenu" @click="removeOthers">关闭其他标签</li>
+</el-tabs>
+<script>
+  export default {
+    data() {
+      return {
+        editableTabsValue3: '2',
+        editableTabs3: [{
+          title: 'Tab 1',
+          name: '1',
+          content: 'Tab 1 content'
+        }, {
+          title: 'Tab 2',
+          name: '2',
+          content: 'Tab 2 content'
+        }, {
+          title: 'Tab 3',
+          name: '3',
+          content: 'Tab 3 content'
+        }, {
+          title: 'Tab 4',
+          name: '4',
+          content: 'Tab 4 content'
+        }],
+        tabIndex: 2
+      }
+    },
+    methods: {
+      handleOpenMenu(tab, event){
+        this.editableTabsValue3 = tab.name
+      },
+      removeOthers(){
+        let tabs = this.editableTabs3;
+        this.editableTabs3 = tabs.filter(tab => tab.name == this.editableTabsValue3);
+      },
+      reset(){
+          this.editableTabs3 = [{
+              title: 'Tab 1',
+              name: '1',
+              content: 'Tab 1 content'
+            }, {
+              title: 'Tab 2',
+              name: '2',
+              content: 'Tab 2 content'
+            }, {
+               title: 'Tab 3',
+               name: '3',
+               content: 'Tab 3 content'
+            }, {
+               title: 'Tab 4',
+               name: '4',
+               content: 'Tab 4 content'
+          }]
+        },
+    }
+  }
+</script>
+```
+:::
+
 ### 自定义增加标签页触发器
 
 :::demo
@@ -337,6 +464,7 @@
 | closable  | 标签是否可关闭   | boolean   | — |  false  |
 | addable  | 标签是否可增加   | boolean   | — |  false  |
 | editable  | 标签是否同时可增加和关闭   | boolean   | — |  false  |
+| rightmenu  | 右键打开自定义菜单   | boolean   | — |  false  |
 | active-name(deprecated)  | 选中选项卡的 name  | string   |  —  |  第一个选项卡的 name |
 | value  | 绑定值，选中选项卡的 name  | string   |  —  |  第一个选项卡的 name |
 
@@ -344,6 +472,7 @@
 | 事件名称 | 说明 | 回调参数 |
 |---------- |-------- |---------- |
 | tab-click  | tab 被选中时触发 | 被选中的标签 tab 实例 |
+| tab-menu  | tab 右键点击时触发 | 被右键点击的标签 tab 实例 |
 | tab-remove  | 点击 tab 移除按钮后触发  | 被删除的标签的 name |
 | tab-add  | 点击 tabs 的新增按钮后触发  | — |
 | edit  | 点击 tabs 的新增按钮或 tab 被关闭后触发  | (targetName, action) |

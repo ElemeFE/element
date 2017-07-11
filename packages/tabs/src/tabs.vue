@@ -14,7 +14,8 @@
       closable: Boolean,
       addable: Boolean,
       value: {},
-      editable: Boolean
+      editable: Boolean,
+      rightmenu: Boolean
     },
 
     data() {
@@ -41,6 +42,12 @@
     },
 
     methods: {
+      handleRightClick(tab, tabName, event) {
+        event.preventDefault();
+        if (tab.disabled || !this.rightmenu) return;
+        this.$refs.right.openMenu(event, tab, tabName);
+        this.$emit('tab-menu', tab, event);
+      },
       handleTabClick(tab, tabName, event) {
         if (tab.disabled) return;
         this.setCurrentName(tabName);
@@ -76,6 +83,7 @@
       let {
         type,
         handleTabClick,
+        handleRightClick,
         handleTabRemove,
         handleTabAdd,
         currentName,
@@ -100,6 +108,7 @@
           currentName,
           onTabClick: handleTabClick,
           onTabRemove: handleTabRemove,
+          onRightClick: handleRightClick,
           editable,
           type,
           panes
@@ -107,6 +116,11 @@
         ref: 'nav'
       };
 
+      let viewShow = {
+        ref: 'right'
+      };
+
+      const rightMenuContent = this.$slots.rightmenu;
       return (
         <div class={{
           'el-tabs': true,
@@ -120,7 +134,11 @@
           <div class="el-tabs__content">
             {this.$slots.default}
           </div>
+          <el-right-menu {...viewShow}>
+            <div slot="rightmenu">{rightMenuContent}</div>
+          </el-right-menu>
         </div>
+
       );
     },
     created() {
@@ -130,3 +148,5 @@
     }
   };
 </script>
+
+
