@@ -30,7 +30,10 @@ export default {
       default: 'click',
       validator: value => ['click', 'focus', 'hover', 'manual'].indexOf(value) > -1
     },
-    openDelay: 0,
+    openDelay: {
+      type: Number,
+      default: 0
+    },
     title: String,
     disabled: Boolean,
     content: String,
