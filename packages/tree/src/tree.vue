@@ -29,7 +29,7 @@
     </el-tree-node>
   </div>
               </td>
-        <td v-if="expendNodes.length >0 " v-for="expendNode in expendNodes">
+        <td v-if="expendNodes.length >0 && expendNode.childNodes.length > 0" v-for="expendNode in expendNodes">
           <div class="el-tree-sub" >
             <el-tree-node
                     v-for="child in expendNode.childNodes"
@@ -258,13 +258,17 @@ div{
       },
 
       handleNodeExpand(nodeData, node, instance) {
+          debugger;
           this.expendNodes[node.level-1] = node;
           for(let i=0;i<this.expendNodes.length;i++){
               if(i>node.level-1){
                   this.expendNodes.splice(i,1);
               }
           }
+
           this.expendNodes = Object.assign([],this.expendNodes);
+          const store = this.store;
+          store.setCurrentLink(this.expendNodes);
         this.broadcast('ElTreeNode', 'tree-node-expand', node);
         this.$emit('node-expand', nodeData, node, instance);
       }

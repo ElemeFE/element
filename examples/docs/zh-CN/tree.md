@@ -109,8 +109,10 @@
   let id = 1000;
 
   const regions = [{
+    'id':1,
     'name': 'region1'
   }, {
+    'id':2,
     'name': 'region2'
   }];
 

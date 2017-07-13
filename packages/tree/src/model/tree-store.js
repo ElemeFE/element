@@ -301,6 +301,7 @@ export default class TreeStore {
     }
   }
   setCurrentLink(data) {
+      debugger;
       if (!this.key) return;
       const allNodes = this._getAllNodes();
       const that = this;
