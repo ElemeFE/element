@@ -4,7 +4,6 @@
       <div
         class="el-popover"
         :class="[popperClass]"
-        :open-delay="3000"
         ref="popper"
         v-show="!disabled && showPopper"
         :style="{ width: width + 'px' }">
