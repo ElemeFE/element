@@ -4,6 +4,7 @@
       <div
         class="el-popover"
         :class="[popperClass]"
+        :open-delay="3000"
         ref="popper"
         v-show="!disabled && showPopper"
         :style="{ width: width + 'px' }">
@@ -30,6 +31,7 @@ export default {
       default: 'click',
       validator: value => ['click', 'focus', 'hover', 'manual'].indexOf(value) > -1
     },
+    openDelay: 0,
     title: String,
     disabled: Boolean,
     content: String,
@@ -105,7 +107,13 @@ export default {
       this.showPopper = false;
     },
     handleMouseEnter() {
-      this.showPopper = true;
+      if (this.openDelay) {
+        setTimeout(() => {
+          this.showPopper = true;
+        }, this.openDelay);
+      } else {
+        this.showPopper = true;
+      }
       clearTimeout(this._timer);
     },
     handleMouseLeave() {
