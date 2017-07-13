@@ -40,6 +40,7 @@
           <i class="el-icon-view"></i>
         </span>
         <span
+          v-if="!disabled"
           class="el-upload-list__item-delete"
           @click="$emit('remove', file)"
         >
@@ -64,6 +65,10 @@
         default() {
           return [];
         }
+      },
+      disabled: {
+        type: Boolean,
+        default: false
       },
       handlePreview: Function,
       listType: String
