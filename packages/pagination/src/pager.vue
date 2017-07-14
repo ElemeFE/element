@@ -96,11 +96,11 @@
         let showNextMore = false;
 
         if (pageCount > pagerCount) {
-          if (currentPage > pagerCount - 2) {
+          if (currentPage > pagerCount - 3) {
             showPrevMore = true;
           }
 
-          if (currentPage < pageCount - 2) {
+          if (currentPage < pageCount - 3) {
             showNextMore = true;
           }
         }
