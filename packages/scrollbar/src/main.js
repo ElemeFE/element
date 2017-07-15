@@ -12,6 +12,7 @@ export default {
   components: { Bar },
 
   props: {
+    disabled: Boolean,
     native: Boolean,
     wrapStyle: {},
     wrapClass: {},
@@ -65,6 +66,7 @@ export default {
       <div
         ref="wrap"
         style={ style }
+        onWheel={ this.dontScroll }
         onScroll={ this.handleScroll }
         class={ [this.wrapClass, 'el-scrollbar__wrap', gutter ? '' : 'el-scrollbar__wrap--hidden-default'] }>
         { [view] }
@@ -97,6 +99,12 @@ export default {
   },
 
   methods: {
+    dontScroll(e) {
+      if (this.disabled) {
+        e.preventDefault();
+      }
+
+    },
     handleScroll() {
       const wrap = this.wrap;
 

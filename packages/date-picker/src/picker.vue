@@ -200,6 +200,7 @@ export default {
   mixins: [Emitter, NewPopper],
 
   props: {
+    granularity: String,
     size: String,
     format: String,
     readonly: Boolean,
@@ -452,6 +453,7 @@ export default {
       this.popperElm = this.picker.$el;
       this.picker.width = this.reference.getBoundingClientRect().width;
       this.picker.showTime = this.type === 'datetime' || this.type === 'datetimerange';
+      this.picker.granularity = this.granularity;
       this.picker.selectionMode = this.selectionMode;
       if (this.format) {
         this.picker.format = this.format;

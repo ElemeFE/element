@@ -160,6 +160,44 @@
 ```
 :::
 
+###  日期和时间点（带时间精度）
+
+:::demo 通过设置`granularity`属性为`hour`，即可设置时间精度为时，不可选择分、秒。通过设置`granularity`属性为`minute`，即可设置时间精度为分，不可选择秒。
+```html
+<template>
+  <div class="block">
+    <span class="demonstration">时间精度为时</span>
+    <el-date-picker
+      v-model="value5"
+      type="datetime"
+      granularity="hour"
+      placeholder="选择日期时间">
+    </el-date-picker>
+  </div>
+  <div class="block">
+    <span class="demonstration">时间精度为分</span>
+    <el-date-picker
+      v-model="value6"
+      type="datetime"
+      granularity="minute"
+      placeholder="选择日期时间">
+    </el-date-picker>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        value5: '',
+        value6: ''
+      };
+    }
+  };
+</script>
+```
+:::
+
 ### 日期和时间范围
 
 :::demo 设置`type`为`datetimerange`即可选择日期和时间范围
@@ -235,6 +273,7 @@
 | size          | 输入框尺寸     | string          | large, small, mini  | — |
 | placeholder | 占位内容 | string | — | — |
 | type | 显示类型 | string | year/month/date/week/ datetime/datetimerange/daterange | date |
+| granularity | 时间精度 | string | hour, minute, second | second |
 | format | 时间日期格式化 | string | 年 `yyyy`，月 `MM`，日 `dd`，小时 `HH`，分 `mm`，秒 `ss` | yyyy-MM-dd |
 | align | 对齐方式 | string | left, center, right | left |
 | popper-class | DateTimePicker 下拉框的类名 | string | — | — |
