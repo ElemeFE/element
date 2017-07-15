@@ -103,7 +103,7 @@ const DEFAULT_RENDER_CELL = function(h, { row, column }) {
   if (column && column.formatter) {
     return column.formatter(row, column, value);
   }
-  return oldVal;
+  return value;
 };
 
 export default {
