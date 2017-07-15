@@ -97,15 +97,13 @@ const getDefaultColumn = function(type, options) {
 
 const DEFAULT_RENDER_CELL = function(h, { row, column }) {
   const property = column.property;
+  const value = property && property.indexOf('.') === -1
+    ? row[property]
+    : getValueByPath(row, property);
   if (column && column.formatter) {
-    return column.formatter(row, column);
+    return column.formatter(row, column, value);
   }
-
-  if (property && property.indexOf('.') === -1) {
-    return row[property];
-  }
-
-  return getValueByPath(row, property);
+  return value;
 };
 
 export default {
