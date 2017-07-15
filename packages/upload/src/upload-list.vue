@@ -5,9 +5,9 @@
     name="el-list"
   >
     <li
-      v-for="file in files"
+      v-for="(file, index) in files"
       :class="['el-upload-list__item', 'is-' + file.status]"
-      :key="file"
+      :key="index"
     >
       <img
         class="el-upload-list__item-thumbnail"
