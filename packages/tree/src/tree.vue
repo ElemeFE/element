@@ -131,7 +131,7 @@ div{
         store: null,
         root: null,
         currentNode: null,
-        expendNodes:[]
+        expendNodes: []
       };
     },
 
@@ -145,13 +145,13 @@ div{
           return t('el.tree.emptyText');
         }
       },
-      contianAll:{
-          type:Boolean,
-          default:false
+      contianAll: {
+        type: Boolean,
+        default: false
       },
       nodeKey: {
-          type:String,
-          default:'id'
+        type: String,
+        default: 'id'
       },
       checkStrictly: Boolean,
       defaultExpandAll: Boolean,
@@ -221,10 +221,10 @@ div{
       data(newVal) {
         this.store.setData(newVal);
       },
-        expendNodes(newVal){
-            const store = this.store;
-            store.setCurrentLink(newVal);
-        }
+      expendNodes(newVal) {
+        const store = this.store;
+        store.setCurrentLink(newVal);
+      }
     },
 
     methods: {
@@ -258,17 +258,16 @@ div{
       },
 
       handleNodeExpand(nodeData, node, instance) {
-          debugger;
-          this.expendNodes[node.level-1] = node;
-          for(let i=0;i<this.expendNodes.length;i++){
-              if(i>node.level-1){
-                  this.expendNodes.splice(i,1);
-              }
+        this.expendNodes[node.level - 1] = node;
+        for (let i = 0;i < this.expendNodes.length;i++) {
+          if (i > node.level - 1) {
+            this.expendNodes.splice(i, 1);
           }
+        }
 
-          this.expendNodes = Object.assign([],this.expendNodes);
-          const store = this.store;
-          store.setCurrentLink(this.expendNodes);
+        this.expendNodes = Object.assign([], this.expendNodes);
+        const store = this.store;
+        store.setCurrentLink(this.expendNodes);
         this.broadcast('ElTreeNode', 'tree-node-expand', node);
         this.$emit('node-expand', nodeData, node, instance);
       }
@@ -283,7 +282,7 @@ div{
         lazy: this.lazy,
         props: this.props,
         load: this.load,
-        containAll:this.containAll,
+        containAll: this.containAll,
         currentNodeKey: this.currentNodeKey,
         checkStrictly: this.checkStrictly,
         defaultCheckedKeys: this.defaultCheckedKeys,

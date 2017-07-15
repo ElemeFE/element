@@ -295,14 +295,14 @@ export default class Node {
 
   setCurrentLink(link) {
     let _this = this;
-      if (this.shouldLoadData()) {
-          // Only work on lazy load data.
-          this.loadData(() => {
-              _this.currentLink = link;
-          });
-      }else{
-        this.currentLink = link;
-      }
+    if (this.shouldLoadData()) {
+      // Only work on lazy load data.
+      this.loadData(() => {
+        _this.currentLink = link;
+      });
+    } else {
+      this.currentLink = link;
+    }
   }
 
   getChildren() { // this is data
