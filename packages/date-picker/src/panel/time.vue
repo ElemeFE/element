@@ -11,6 +11,7 @@
           @change="handleChange"
           :show-seconds="showSeconds"
           @select-range="setSelectionRange"
+          :granularity="granularity"
           :hours="hours"
           :minutes="minutes"
           :seconds="seconds">
@@ -42,6 +43,7 @@
     },
 
     props: {
+      granularity: '',
       pickerWidth: {},
       date: {
         default() {
