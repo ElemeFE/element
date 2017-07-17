@@ -51,6 +51,7 @@
       :readonly="!filterable || multiple"
       :validate-event="false"
       @focus="handleFocus"
+      @blur="handleBlur"
       @click="handleIconClick"
       @mousedown.native="handleMouseDown"
       @keyup.native="debouncedOnInputChange"
@@ -426,8 +427,13 @@
         });
       },
 
-      handleFocus() {
+      handleFocus(event) {
         this.visible = true;
+        this.$emit('focus', event);
+      },
+
+      handleBlur(event) {
+        this.$emit('blur', event);
       },
 
       handleIconClick(event) {
