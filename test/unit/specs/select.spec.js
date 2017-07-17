@@ -607,4 +607,26 @@ describe('Select', () => {
       }, 250);
     });
   });
+
+  it('event:focus & blur', done => {
+    vm = createVue({
+      template: `
+        <el-select ref="select"></el-select>
+      `
+    }, true);
+
+    const spyFocus = sinon.spy();
+    const spyBlur = sinon.spy();
+
+    vm.$refs.select.$on('focus', spyFocus);
+    vm.$refs.select.$on('blur', spyBlur);
+    vm.$el.querySelector('input').focus();
+    vm.$el.querySelector('input').blur();
+
+    vm.$nextTick(_ => {
+      expect(spyFocus.calledOnce).to.be.true;
+      expect(spyBlur.calledOnce).to.be.true;
+      done();
+    });
+  });
 });
