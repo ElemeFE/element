@@ -1,0 +1,15 @@
+{
+  "name": "element-re-picker",
+  "version": "0.0.0",
+  "description": "A re-picker component for Vue.js.",
+  "keywords": [
+    "element",
+    "vue",
+    "component"
+  ],
+  "main": "./lib/index.js",
+  "repository": "https://github.com/ElemeFE/element/tree/master/packages/re-picker",
+  "author": "elemefe",
+  "license": "MIT",
+  "dependencies": {}
+}

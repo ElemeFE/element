@@ -1,0 +1,15 @@
+{
+  "name": "element-craw",
+  "version": "0.0.0",
+  "description": "A craw component for Vue.js.",
+  "keywords": [
+    "element",
+    "vue",
+    "component"
+  ],
+  "main": "./lib/index.js",
+  "repository": "https://github.com/ElemeFE/element/tree/master/packages/craw",
+  "author": "elemefe",
+  "license": "MIT",
+  "dependencies": {}
+}
