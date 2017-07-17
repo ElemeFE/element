@@ -123,10 +123,8 @@
       },
       handleChange(value) {
         this.$emit('input', value);
-        this.activated = true;
         if (this.isOnComposition || (!this.triggerOnFocus && !value)) {
           this.suggestions = [];
-          this.activated = false;
           return;
         }
         this.getData(value);

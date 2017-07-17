@@ -27,6 +27,8 @@ export default {
         !mouseup.target ||
         !mousedown.target ||
         el.contains(mouseup.target) ||
+        el.contains(mousedown.target) ||
+        el === mouseup.target ||
         (vnode.context.popperElm &&
         (vnode.context.popperElm.contains(mouseup.target) ||
         vnode.context.popperElm.contains(mousedown.target)))) return;
