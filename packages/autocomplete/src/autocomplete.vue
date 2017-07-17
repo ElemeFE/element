@@ -82,7 +82,7 @@
     },
     data() {
       return {
-        isFocus: false,
+        activated: false,
         isOnComposition: false,
         suggestions: [],
         loading: false,
@@ -93,7 +93,7 @@
       suggestionVisible() {
         const suggestions = this.suggestions;
         let isValidData = Array.isArray(suggestions) && suggestions.length > 0;
-        return (isValidData || this.loading) && this.isFocus;
+        return (isValidData || this.loading) && this.activated;
       }
     },
     watch: {
@@ -123,20 +123,22 @@
       },
       handleChange(value) {
         this.$emit('input', value);
+        this.activated = true;
         if (this.isOnComposition || (!this.triggerOnFocus && !value)) {
           this.suggestions = [];
+          this.activated = false;
           return;
         }
         this.getData(value);
       },
       handleFocus() {
-        this.isFocus = true;
+        this.activated = true;
         if (this.triggerOnFocus) {
           this.getData(this.value);
         }
       },
-      close() {
-        this.isFocus = false;
+      close(e) {
+        this.activated = false;
       },
       handleKeyEnter() {
         if (this.suggestionVisible && this.highlightedIndex >= 0 && this.highlightedIndex < this.suggestions.length) {
