@@ -319,10 +319,10 @@
 
 适用性较广的基础多选，用 Tag 展示已选项
 
-:::demo 为`el-select`设置`multiple`属性即可启用多选，此时`v-model`的值为当前选中值所组成的数组
+:::demo 为`el-select`设置`multiple`属性即可启用多选，此时`v-model`的值为当前选中值所组成的数组，`list`为选择项所组成的数组。
 ```html
 <template>
-  <el-select v-model="value5" multiple placeholder="请选择">
+  <el-select v-model="value5" multiple placeholder="请选择" :list="options">
     <el-option
       v-for="item in options"
       :key="item.value"
@@ -636,6 +636,7 @@
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | multiple | 是否多选 | boolean | — | false |
+| list | 是否启用全选按钮,需配合 `multiple` 使用 | Array | 选择项列表 | - |
 | disabled | 是否禁用 | boolean | — | false |
 | size | 输入框尺寸 | string | large/small/mini | — |
 | clearable | 单选时是否可以清空选项 | boolean | — | false |

@@ -28,7 +28,43 @@
                 size="small"
                 @change.native="visibleDate = $event.target.value" />
             </span>
-            <span class="el-date-picker__editor-wrap">
+            <span class="el-date-picker__editor-wrap" v-if="granularity === 'hour'">
+              <el-input
+                ref="input"
+                @focus="timePickerVisible = !timePickerVisible"
+                :placeholder="t('el.datepicker.selectTime')"
+                :value="visibleTimeByHour"
+                size="small"
+                @change.native="visibleTimeByHour = $event.target.value" />
+              <time-picker
+                granularity="hour"
+                ref="timepicker"
+                :date="date"
+                :picker-width="pickerWidth"
+                @pick="handleTimePick"
+                :visible="timePickerVisible"
+                @mounted="$refs.timepicker.format=timeFormat">
+              </time-picker>
+            </span>
+            <span class="el-date-picker__editor-wrap" v-else-if="granularity === 'minute'">
+              <el-input
+                ref="input"
+                @focus="timePickerVisible = !timePickerVisible"
+                :placeholder="t('el.datepicker.selectTime')"
+                :value="visibleTimeByMinute"
+                size="small"
+                @change.native="visibleTimeByMinute = $event.target.value" />
+              <time-picker
+                granularity="minute"
+                ref="timepicker"
+                :date="date"
+                :picker-width="pickerWidth"
+                @pick="handleTimePick"
+                :visible="timePickerVisible"
+                @mounted="$refs.timepicker.format=timeFormat">
+              </time-picker>
+            </span>
+            <span class="el-date-picker__editor-wrap" v-else>
               <el-input
                 ref="input"
                 @focus="timePickerVisible = !timePickerVisible"
@@ -374,7 +410,8 @@
         showWeekNumber: false,
         timePickerVisible: false,
         width: 0,
-        format: ''
+        format: '',
+        granularity: ''
       };
     },
 
@@ -385,6 +422,49 @@
 
       visibleTime: {
         get() {
+          return formatDate(this.date, this.timeFormat);
+        },
+
+        set(val) {
+          if (val) {
+            const date = parseDate(val, this.timeFormat);
+            if (date) {
+              date.setFullYear(this.date.getFullYear());
+              date.setMonth(this.date.getMonth());
+              date.setDate(this.date.getDate());
+              this.date = date;
+              this.$refs.timepicker.value = date;
+              this.timePickerVisible = false;
+            }
+          }
+        }
+      },
+
+      visibleTimeByHour: {
+        get() {
+          this.date.setMinutes(0);
+          this.date.setSeconds(0);
+          return formatDate(this.date, this.timeFormat);
+        },
+
+        set(val) {
+          if (val) {
+            const date = parseDate(val, this.timeFormat);
+            if (date) {
+              date.setFullYear(this.date.getFullYear());
+              date.setMonth(this.date.getMonth());
+              date.setDate(this.date.getDate());
+              this.date = date;
+              this.$refs.timepicker.value = date;
+              this.timePickerVisible = false;
+            }
+          }
+        }
+      },
+
+      visibleTimeByMinute: {
+        get() {
+          this.date.setSeconds(0);
           return formatDate(this.date, this.timeFormat);
         },
 

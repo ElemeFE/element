@@ -225,6 +225,7 @@ div{
             const store = this.store;
             store.setCurrentLink(newVal);
         }
+
     },
 
     methods: {
@@ -264,8 +265,7 @@ div{
                   this.expendNodes.splice(i, 1);
               }
           }
-
-          this.expendNodes = Object.assign([], this.expendNodes);
+        this.expendNodes = Object.assign([], this.expendNodes);
           const store = this.store;
           store.setCurrentLink(this.expendNodes);
         this.broadcast('ElTreeNode', 'tree-node-expand', node);

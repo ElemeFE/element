@@ -83,6 +83,9 @@
             v-if="showNewOption">
           </el-option>
           <slot></slot>
+          <div style="padding: 6px 10px 0;" v-if="list">
+            <el-checkbox v-model="isSelectAll" @change="selectAll">全选</el-checkbox>
+          </div>
         </el-scrollbar>
         <p class="el-select-dropdown__empty" v-if="emptyText && (allowCreate && options.length === 0 || !allowCreate)">{{ emptyText }}</p>
       </el-select-menu>
@@ -164,6 +167,7 @@
     directives: { Clickoutside },
 
     props: {
+      list: Array,
       name: String,
       value: {
         required: true
@@ -197,6 +201,7 @@
 
     data() {
       return {
+        isSelectAll: true,
         options: [],
         cachedOptions: [],
         createdLabel: null,
@@ -228,6 +233,13 @@
 
       value(val) {
         if (this.multiple) {
+          if (this.list) {
+            if (val.length < this.list.length) {
+              this.isSelectAll = false;
+            } else {
+              this.isSelectAll = true;
+            }
+          }
           this.resetInputHeight();
           if (val.length > 0 || (this.$refs.input && this.query !== '')) {
             this.currentPlaceholder = '';
@@ -337,6 +349,16 @@
     },
 
     methods: {
+      selectAll() {
+        let value = [];
+        if (this.isSelectAll) {
+          for (let i = 0; i < this.list.length; i++) {
+            let item = this.list[i];
+            value.push(item.value);
+          }
+        }
+        this.$emit('input', value);
+      },
       handleIconHide() {
         let icon = this.$el.querySelector('.el-input__icon');
         if (icon) {
@@ -663,6 +685,14 @@
     },
 
     created() {
+      if (this.list) {
+        let value = [];
+        for (let i = 0; i < this.list.length; i++) {
+          let item = this.list[i];
+          value.push(item.value);
+        }
+        this.$emit('input', value);
+      }
       this.cachedPlaceHolder = this.currentPlaceholder = this.placeholder;
       if (this.multiple && !Array.isArray(this.value)) {
         this.$emit('input', []);

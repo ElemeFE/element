@@ -271,8 +271,8 @@ export default class TreeStore {
     keys.forEach((key) => {
       const node = this.getNode(key);
       if (node) {
-          node.expand(null, this.autoExpandParent);
-          expendNodes.push(node);
+        node.expand(null, this.autoExpandParent);
+        expendNodes.push(node);
       }
     });
     return expendNodes;

@@ -235,6 +235,14 @@
             {
               "path": "/collapse",
               "title": "Collapse 折叠面板"
+            },
+            {
+              "path": "/re-picker",
+              "title": "RePicker"
+            },
+            {
+              "path": "/craw",
+              "title": "Craw"
             }
           ]
         }
@@ -477,6 +485,14 @@
             {
               "path": "/collapse",
               "title": "Collapse"
+            },
+            {
+              "path": "/re-picker",
+              "title": "RePicker"
+            },
+            {
+              "path": "/craw",
+              "title": "Craw"
             }
           ]
         }

@@ -20,18 +20,11 @@
       @mouseenter.native="emitSelectRange('minutes')"
       class="el-time-spinner__wrapper"
       wrap-style="max-height: inherit;"
-      :disabled="disableMinute"
       view-class="el-time-spinner__list"
       noresize
       tag="ul"
       ref="minute">
-      <li v-if="granularity === 'hour'"
-        @click="handleClick('minutes', key, true)"
-        v-for="(minute, key) in 1"
-        class="el-time-spinner__item"
-        :class="{ 'active': key === minutes }"
-        v-text="key"></li>
-      <li v-if="granularity !== 'hour'"
+      <li
         @click="handleClick('minutes', key, true)"
         v-for="(minute, key) in 60"
         class="el-time-spinner__item"
@@ -43,18 +36,11 @@
       @mouseenter.native="emitSelectRange('seconds')"
       class="el-time-spinner__wrapper"
       wrap-style="max-height: inherit;"
-      :disabled="disableSecond"
       view-class="el-time-spinner__list"
       noresize
       tag="ul"
       ref="second">
-      <li v-if="granularity === 'hour' || granularity === 'minute'"
-        @click="handleClick('seconds', key, true)"
-        v-for="(second, key) in 1"
-        class="el-time-spinner__item"
-        :class="{ 'active': key === seconds }"
-        v-text="key"></li>
-      <li v-if="granularity !== 'hour' && granularity !== 'minute'"
+      <li
         @click="handleClick('seconds', key, true)"
         v-for="(second, key) in 60"
         class="el-time-spinner__item"
@@ -73,7 +59,6 @@
     components: { ElScrollbar },
 
     props: {
-      granularity: String,
       hours: {
         type: Number,
         default: 0
@@ -122,12 +107,6 @@
     },
 
     computed: {
-      disableSecond() {
-        return this.granularity === 'hour' || this.granularity === 'minute';
-      },
-      disableMinute() {
-        return this.granularity === 'hour';
-      },
       hoursList() {
         return getRangeHours(this.selectableRange);
       },
