@@ -289,4 +289,26 @@ describe('InputNumber', () => {
       done();
     });
   });
+  it('event:focus & blur', done => {
+    vm = createVue({
+      template: `
+        <el-input-number ref="input">
+        </el-input-number>
+      `
+    }, true);
+
+    const spyFocus = sinon.spy();
+    const spyBlur = sinon.spy();
+
+    vm.$refs.input.$on('focus', spyFocus);
+    vm.$refs.input.$on('blur', spyBlur);
+    vm.$el.querySelector('input').focus();
+    vm.$el.querySelector('input').blur();
+
+    vm.$nextTick(_ => {
+      expect(spyFocus.calledOnce).to.be.true;
+      expect(spyBlur.calledOnce).to.be.true;
+      done();
+    });
+  });
 });

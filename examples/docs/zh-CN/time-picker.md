@@ -176,11 +176,9 @@
 | selectableRange | 可选时间段，例如`'18:30:00 - 20:30:00'`或者传入数组`['09:30:00 - 12:00:00', '14:30:00 - 18:30:00']` | string/array | — | — |
 | format | 时间格式化(TimePicker) | string | 小时：`HH`，分：`mm`，秒：`ss` | 'HH:mm:ss' |
 
-
 ### Events
 | Event Name | Description | Parameters |
 |---------|--------|---------|
 | change | 当 input 的值改变时触发，返回值和文本框一致 | formatted value |
-
-
-
+| blur | 当 input 失去焦点时触发 | (event: Event) |
+| focus | 当 input 获得焦点时触发 | (event: Event) |

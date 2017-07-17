@@ -141,3 +141,5 @@ Additional `large` and `small` sizes of the input box are available
 | Event Name | Description | Parameters |
 |----| ---- | -----|
 |change | triggers when the value changes | value after change |
+| blur | triggers when the icon inside Input is blur | (event: Event) |
+| focus | triggers when the icon inside Input is focus | (event: Event) |

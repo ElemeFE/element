@@ -27,6 +27,7 @@
       @keydown.up.native.prevent="increase"
       @keydown.down.native.prevent="decrease"
       @blur="handleBlur"
+      @focus="handleFocus"
       @input="debounceHandleInput"
       :disabled="disabled"
       :size="size"
@@ -175,8 +176,12 @@
         if (newVal < this.min) return;
         this.setCurrentValue(newVal);
       },
-      handleBlur() {
+      handleBlur(event) {
+        this.$emit('blur', event);
         this.$refs.input.setCurrentValue(this.currentValue);
+      },
+      handleFocus(event) {
+        this.$emit('focus', event);
       },
       setCurrentValue(newVal) {
         const oldVal = this.currentValue;
