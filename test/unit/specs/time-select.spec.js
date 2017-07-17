@@ -198,4 +198,33 @@ describe('TimeSelect', () => {
     }, 50);
   });
 
+  it('event focus and blur', done => {
+    vm = createVue({
+      template: `
+        <el-time-select
+          ref="picker"
+          :picker-options="{
+            start: '08:30',
+            step: '00:15',
+            end: '18:30'
+          }"
+          placeholder="选择时间">
+        </el-time-select>
+      `
+    }, true);
+
+    const spyFocus = sinon.spy();
+    const spyBlur = sinon.spy();
+
+    vm.$refs.picker.$on('focus', spyFocus);
+    vm.$refs.picker.$on('blur', spyBlur);
+    vm.$el.querySelector('input').focus();
+    vm.$el.querySelector('input').blur();
+
+    vm.$nextTick(_ => {
+      expect(spyFocus.calledOnce).to.be.true;
+      expect(spyBlur.calledOnce).to.be.true;
+      done();
+    });
+  });
 });

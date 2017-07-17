@@ -307,3 +307,5 @@ Picking a date range is supported.
 | Event Name | Description | Parameters |
 |---------|--------|---------|
 | change | triggers when input value changes | formatted value |
+| blur | triggers when input is blur | (event: Event) |
+| focus | triggers when input is focus | (event: Event) |

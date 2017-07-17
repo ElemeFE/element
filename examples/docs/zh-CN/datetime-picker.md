@@ -253,10 +253,9 @@
 | text | 标题文本 | string | — | — |
 | onClick | 选中后的回调函数，参数是 vm，可通过触发 'pick' 事件设置选择器的值。例如 vm.$emit('pick', new Date()) | function | — | — |
 
-
 ### Events
 | Event Name | Description | Parameters |
 |---------|--------|---------|
 | change | 当 input 的值改变时触发，返回值和文本框一致 | formatted value |
-
-
+| blur | 当 input 失去焦点时触发 | (event: Event) |
+| focus | 当 input 获得焦点时触发 | (event: Event) |

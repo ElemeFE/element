@@ -316,6 +316,27 @@ describe('DatePicker', () => {
       }, DELAY);
     });
 
+    it('work for event focus and blur', done => {
+      vm = createVue({
+        template: `
+          <el-date-picker ref="picker"/>
+        `
+      }, true);
+
+      const spyFocus = sinon.spy();
+      const spyBlur = sinon.spy();
+
+      vm.$refs.picker.$on('focus', spyFocus);
+      vm.$refs.picker.$on('blur', spyBlur);
+      vm.$el.querySelector('input').focus();
+      vm.$el.querySelector('input').blur();
+
+      vm.$nextTick(_ => {
+        expect(spyFocus.calledOnce).to.be.true;
+        expect(spyBlur.calledOnce).to.be.true;
+        done();
+      });
+    });
   });
 
   it('default value', done => {
