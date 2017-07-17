@@ -100,14 +100,7 @@
         scrollIntoView(menu, menu.getElementsByClassName('is-active')[0]);
       },
       handleMenuEnter() {
-        this.$nextTick(() => this.getMenus().forEach(menu => this.scrollMenu(menu)));
-      },
-      getMenus() {
-        if (this.$refs.wrapper) {
-          return Array.prototype.slice.call(this.$refs.wrapper.getElementsByClassName('el-cascader-menu'));
-        } else {
-          return [];
-        }
+        this.$nextTick(() => this.$refs.menus.forEach(menu => this.scrollMenu(menu)));
       }
     },
 
@@ -139,14 +132,14 @@
                 this.activeItem(item, menuIndex);
                 this.$nextTick(() => {
                   // adjust self and next level
-                  this.scrollMenu(this.getMenus()[menuIndex]);
-                  this.scrollMenu(this.getMenus()[menuIndex + 1]);
+                  this.scrollMenu(this.$refs.menus[menuIndex]);
+                  this.scrollMenu(this.$refs.menus[menuIndex + 1]);
                 });
               };
             } else {
               events.on.click = () => {
                 this.select(item, menuIndex);
-                this.$nextTick(() => this.scrollMenu(this.getMenus()[menuIndex]));
+                this.$nextTick(() => this.scrollMenu(this.$refs.menus[menuIndex]));
               };
             }
           }
@@ -176,7 +169,9 @@
               'el-cascader-menu': true,
               'el-cascader-menu--flexible': isFlat
             }}
-            style={menuStyle}>
+            style={menuStyle}
+            refInFor
+            ref="menus">
             {items}
           </ul>
         );
