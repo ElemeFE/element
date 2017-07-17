@@ -301,21 +301,21 @@ export default class TreeStore {
     }
   }
   setCurrentLink(data) {
-      if (!this.key) return;
-      const allNodes = this._getAllNodes();
-      const that = this;
-      let keys = [];
-      let keyStr = '';
-      data.forEach((curNode) => {
-          keys.push(curNode[that.key]);
-      });
-      keyStr = keys.join(',');
-      allNodes.forEach((node)=>{
-          if (keyStr.indexOf(node[that.key]) !== -1) {
-              node.setCurrentLink(true);
-          } else {
-              node.setCurrentLink(false);
-          }
-      });
+    if (!this.key) return;
+    const allNodes = this._getAllNodes();
+    const that = this;
+    let keys = [];
+    let keyStr = '';
+    data.forEach((curNode) => {
+      keys.push(curNode[that.key]);
+    });
+    keyStr = keys.join(',');
+    allNodes.forEach((node)=>{
+      if (keyStr.indexOf(node[that.key]) !== -1) {
+        node.setCurrentLink(true);
+      } else {
+        node.setCurrentLink(false);
+      }
+    });
   }
 };
