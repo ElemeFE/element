@@ -300,7 +300,7 @@ export default class Node {
           this.loadData(() => {
               _this.currentLink = link;
           });
-      }else{
+      } else {
         this.currentLink = link;
       }
   }
