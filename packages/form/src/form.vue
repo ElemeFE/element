@@ -1,10 +1,10 @@
 <template>
-  <form class="el-form" :class="[
+    <form @submit="handleSubmit" class="el-form" :class="[
     labelPosition ? 'el-form--label-' + labelPosition : '',
     { 'el-form--inline': inline }
   ]">
-    <slot></slot>
-  </form>
+        <slot></slot>
+    </form>
 </template>
 <script>
   export default {
@@ -51,6 +51,10 @@
       });
     },
     methods: {
+      handleSubmit(evt) {
+        evt.preventDefault();
+        this.$emit('submit', evt);
+      },
       resetFields() {
         if (!this.model) {
           process.env.NODE_ENV !== 'production' &&
