@@ -202,6 +202,29 @@ describe('TimePicker', () => {
       done();
     });
   });
+
+  it('focus', done => {
+    vm = createVue({
+      template: `
+        <el-date-picker
+          type="date"
+          placeholder="选择日期"
+          ref="picker">
+        </el-date-picker>
+      `
+    }, true);
+
+    const spy = sinon.spy();
+
+    vm.$refs.picker.$on('focus', spy);
+    vm.$refs.picker.focus();
+
+    vm.$nextTick(_ => {
+      expect(spy.calledOnce).to.be.true;
+      done();
+    });
+  });
+
 });
 
 describe('TimePicker(range)', () => {

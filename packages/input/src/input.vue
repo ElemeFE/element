@@ -57,6 +57,7 @@
 </template>
 <script>
   import emitter from 'element-ui/src/mixins/emitter';
+  import Focus from 'element-ui/src/mixins/focus';
   import calcTextareaHeight from './calcTextareaHeight';
   import merge from 'element-ui/src/utils/merge';
 
@@ -65,7 +66,7 @@
 
     componentName: 'ElInput',
 
-    mixins: [emitter],
+    mixins: [emitter, Focus('input')],
 
     data() {
       return {

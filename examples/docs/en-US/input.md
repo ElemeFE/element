@@ -653,8 +653,7 @@ Attribute | Description | Type | Options | Default
 |----| ----| ----|
 |select | triggers when a suggestion is clicked | suggestion being clicked |
 
-
-
-
-
-
+### Methods
+| Method | Description | Parameters |
+|------|--------|-------|
+| focus | focus the Input component | - |

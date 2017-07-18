@@ -260,3 +260,8 @@ Select date and time in one picker.
 | change | triggers when input value changes | formatted value |
 | blur | triggers when Input blurs | (event: Event) |
 | focus | triggers when Input focuses | (event: Event) |
+
+### Methods
+| Method | Description | Parameters |
+|------|--------|-------|
+| focus | focus the Input component | - |

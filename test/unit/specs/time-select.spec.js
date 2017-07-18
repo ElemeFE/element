@@ -227,4 +227,23 @@ describe('TimeSelect', () => {
       done();
     });
   });
+
+  it('focus', done => {
+    vm = createVue({
+      template: `
+        <el-time-select ref="picker"></el-time-select>
+      `
+    }, true);
+
+    const spy = sinon.spy();
+
+    vm.$refs.picker.$on('focus', spy);
+    vm.$refs.picker.focus();
+
+    vm.$nextTick(_ => {
+      expect(spy.calledOnce).to.be.true;
+      destroyVM(vm);
+      done();
+    });
+  });
 });

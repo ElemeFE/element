@@ -167,6 +167,25 @@ describe('Input', () => {
     }, 200);
   });
 
+  it('focus', done => {
+    vm = createVue({
+      template: `
+        <el-input ref="input">
+        </el-input>
+      `
+    }, true);
+
+    const spy = sinon.spy();
+
+    vm.$refs.input.$on('focus', spy);
+    vm.$refs.input.focus();
+
+    vm.$nextTick(_ => {
+      expect(spy.calledOnce).to.be.true;
+      done();
+    });
+  });
+
   describe('Input Events', () => {
     it('event:focus & blur', done => {
       vm = createVue({

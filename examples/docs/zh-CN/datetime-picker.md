@@ -259,3 +259,8 @@
 | change | 当 input 的值改变时触发，返回值和文本框一致 | formatted value |
 | blur | 当 input 失去焦点时触发 | (event: Event) |
 | focus | 当 input 获得焦点时触发 | (event: Event) |
+
+### Methods
+| 方法名 | 说明 | 参数 |
+| ---- | ---- | ---- |
+| focus | 使 input 获取焦点 | - |
