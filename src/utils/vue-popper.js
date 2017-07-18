@@ -72,7 +72,7 @@ export default {
     createPopper() {
       if (this.$isServer) return;
       this.currentPlacement = this.currentPlacement || this.placement;
-      if (!/^(top|bottom|left|right)(-start|-end)?$/g.test(this.currentPlacement)) {
+      if (!/^(top|bottom|left|right)(-start|-end|-center)?$/g.test(this.currentPlacement)) {
         return;
       }
 
