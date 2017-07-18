@@ -258,5 +258,5 @@ Select date and time in one picker.
 | Event Name | Description | Parameters |
 |---------|--------|---------|
 | change | triggers when input value changes | formatted value |
-| blur | triggers when input is blur | (event: Event) |
-| focus | triggers when input is focus | (event: Event) |
+| blur | triggers when Input blurs | (event: Event) |
+| focus | triggers when Input focuses | (event: Event) |
