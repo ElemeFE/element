@@ -637,11 +637,16 @@ Create and select new items that are not included in select options
 ```
 :::
 
+:::tip
+If the binding value of Select is an object, make sure to assign `value-key` as its unique identity key name.
+:::
+
 ### Select Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | multiple | whether multiple-select is activated | boolean | — | false |
 | disabled | whether Select is disabled | boolean | — | false |
+| value-key | unique identity key name for value, required when value is an object | string | — | value |
 | size | size of Input | string | large/small/mini | — |
 | clearable | whether single select can be cleared | boolean | — | false |
 | multiple-limit | maximum number of options user can select when `multiple` is `true`. No limit when set to 0 | number | — | 0 |

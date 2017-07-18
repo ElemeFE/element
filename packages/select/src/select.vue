@@ -11,7 +11,7 @@
       <transition-group @after-leave="resetInputHeight">
         <el-tag
           v-for="item in selected"
-          :key="item.value"
+          :key="getValueKey(item)"
           closable
           :hit="item.hitState"
           type="primary"
@@ -104,6 +104,8 @@
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
   import { t } from 'element-ui/src/locale';
   import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
+  import { getValueByPath } from 'element-ui/src/utils/util';
+
   const sizeMap = {
     'large': 42,
     'small': 30,
@@ -193,7 +195,11 @@
           return t('el.select.placeholder');
         }
       },
-      defaultFirstOption: Boolean
+      defaultFirstOption: Boolean,
+      valueKey: {
+        type: String,
+        default: 'value'
+      }
     },
 
     data() {
@@ -359,15 +365,20 @@
 
       getOption(value) {
         let option;
+        const type = typeof value;
+        const isObject = type !== 'string' && type !== 'number';
         for (let i = this.cachedOptions.length - 1; i >= 0; i--) {
           const cachedOption = this.cachedOptions[i];
-          if (cachedOption.value === value) {
+          const isEqual = isObject
+            ? getValueByPath(cachedOption.value, this.valueKey) === getValueByPath(value, this.valueKey)
+            : cachedOption.value === value;
+          if (isEqual) {
             option = cachedOption;
             break;
           }
         }
         if (option) return option;
-        const label = typeof value === 'string' || typeof value === 'number'
+        const label = !isObject
           ? value : '';
         let newOption = {
           value: value,
@@ -497,7 +508,7 @@
       handleOptionSelect(option) {
         if (this.multiple) {
           const value = this.value.slice();
-          const optionIndex = value.indexOf(option.value);
+          const optionIndex = this.getValueIndex(value, option.value);
           if (optionIndex > -1) {
             value.splice(optionIndex, 1);
           } else if (this.multipleLimit <= 0 || value.length < this.multipleLimit) {
@@ -514,6 +525,25 @@
           this.visible = false;
         }
         this.$nextTick(() => this.scrollToOption());
+      },
+
+      getValueIndex(arr = [], value) {
+        const type = typeof value;
+        const isObject = type !== 'string' && type !== 'number';
+        if (!isObject) {
+          return arr.indexOf(value);
+        } else {
+          const valueKey = this.valueKey;
+          let index = -1;
+          arr.some((item, i) => {
+            if (getValueByPath(item, valueKey) === getValueByPath(value, valueKey)) {
+              index = i;
+              return true;
+            }
+            return false;
+          });
+          return index;
+        }
       },
 
       toggleMenu() {
@@ -625,6 +655,15 @@
               break;
             }
           }
+        }
+      },
+
+      getValueKey(item) {
+        const type = typeof item.value;
+        if (type === 'number' || type === 'string') {
+          return item.value;
+        } else {
+          return getValueByPath(item.value, this.valueKey);
         }
       }
     },
