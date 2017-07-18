@@ -312,7 +312,7 @@
       },
 
       selection() {
-        return this.store.selection;
+        return this.store.states.selection;
       },
 
       columns() {
