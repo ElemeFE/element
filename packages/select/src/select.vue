@@ -36,7 +36,7 @@
         @keydown.delete="deletePrevTag"
         v-model="query"
         :debounce="remote ? 300 : 0"
-        v-if="filterable"
+        v-if="filterable && !downfilterable"
         :style="{ width: inputLength + 'px', 'max-width': inputWidth - 42 + 'px' }"
         ref="input">
     </div>
@@ -48,7 +48,7 @@
       :name="name"
       :size="size"
       :disabled="disabled"
-      :readonly="!filterable || multiple"
+      :readonly="!filterable || multiple || (filterable && downfilterable)"
       :validate-event="false"
       @focus="handleFocus"
       @click="handleIconClick"
@@ -71,6 +71,16 @@
       <el-select-menu
         ref="popper"
         v-show="visible && emptyText !== false">
+        <el-input type="text"
+                  v-show="filterable && downfilterable"
+                  :icon="iconType"
+                  v-model="downText"
+                  :on-icon-click="clearText"
+                  @keyup.native="debouncedOnInputChange"
+                  @paste.native="debouncedOnInputChange"
+                  >
+          
+        </el-input>
         <el-scrollbar
           tag="ul"
           wrap-class="el-select-dropdown__wrap"
@@ -196,7 +206,8 @@
           return t('el.select.placeholder');
         }
       },
-      defaultFirstOption: Boolean
+      defaultFirstOption: Boolean,
+      downfilterable: Boolean
     },
 
     data() {
@@ -222,7 +233,9 @@
         topOverflow: 0,
         optionsAllDisabled: false,
         inputHovering: false,
-        currentPlaceholder: ''
+        currentPlaceholder: '',
+        iconType: '',
+        downText: ''
       };
     },
 
@@ -279,6 +292,13 @@
         }
         if (this.defaultFirstOption && (this.filterable || this.remote) && this.filteredOptionsCount) {
           this.checkDefaultFirstOption();
+        }
+        if (this.filterable && this.downfilterable) {
+          if (val) {
+            this.iconType = 'circle-close';
+          } else {
+            this.iconType = '';
+          }
         }
       },
 
@@ -640,7 +660,11 @@
 
       onInputChange() {
         if (this.filterable) {
-          this.query = this.selectedLabel;
+          if (!this.downfilterable) {
+            this.query = this.selectedLabel;
+          } else {
+            this.query = this.downText;
+          }
         }
       },
 
@@ -681,6 +705,11 @@
             }
           }
         }
+      },
+
+      clearText() {
+        this.downText = '';
+        this.query = '';
       }
     },
 

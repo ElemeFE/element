@@ -476,7 +476,7 @@
 :::demo 为`el-select`添加`filterable`属性即可启用搜索功能。默认情况下，Select 会找出所有`label`属性包含输入值的选项。如果希望使用其他的搜索逻辑，可以通过传入一个`filter-method`来实现。`filter-method`为一个`Function`，它会在输入值发生变化时调用，参数为当前输入值。
 ```html
 <template>
-  <el-select v-model="value8" filterable placeholder="请选择">
+  <el-select v-model="value8" filterable placeholder="请选择" :downfilterable="true">
     <el-option
       v-for="item in options"
       :key="item.value"
@@ -644,6 +644,7 @@
 | name | select input 的 name 属性 | string | — | — |
 | placeholder | 占位符 | string | — | 请选择 |
 | filterable | 是否可搜索 | boolean | — | false |
+| downfilterable | 搜索时，搜索文本框显示在下拉部分 | boolean | — | false |
 | allow-create | 是否允许用户创建新条目，需配合 `filterable` 使用 | boolean | — | false |
 | filter-method | 自定义过滤方法 | function | — | — |
 | remote | 是否为远程搜索 | boolean | — | false |
