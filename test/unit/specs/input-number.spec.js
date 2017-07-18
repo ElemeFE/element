@@ -311,4 +311,21 @@ describe('InputNumber', () => {
       done();
     });
   });
+  it('focus', done => {
+    vm = createVue({
+      template: `
+        <el-input-number ref="input"></el-input-number>
+      `
+    }, true);
+
+    const spy = sinon.spy();
+
+    vm.$refs.input.$on('focus', spy);
+    vm.$refs.input.focus();
+
+    vm.$nextTick(_ => {
+      expect(spy.calledOnce).to.be.true;
+      done();
+    });
+  });
 });

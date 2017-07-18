@@ -629,4 +629,21 @@ describe('Select', () => {
       done();
     });
   });
+
+  it('focus', done => {
+    vm = createVue({
+      template: `
+        <el-select ref="select"></el-select>
+      `
+    }, true);
+    const spy = sinon.spy();
+
+    vm.$refs.select.$on('focus', spy);
+    vm.$refs.select.focus();
+
+    vm.$nextTick(_ => {
+      expect(spy.calledOnce).to.be.true;
+      done();
+    });
+  });
 });

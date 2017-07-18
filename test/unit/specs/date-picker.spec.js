@@ -158,6 +158,24 @@ describe('DatePicker', () => {
     }, DELAY);
   });
 
+  it('focus', done => {
+    vm = createVue({
+      template: `
+        <el-date-picker ref="picker"></el-date-picker>
+      `
+    }, true);
+
+    const spy = sinon.spy();
+
+    vm.$refs.picker.$on('focus', spy);
+    vm.$refs.picker.focus();
+
+    vm.$nextTick(_ => {
+      expect(spy.calledOnce).to.be.true;
+      done();
+    });
+  });
+
   it('change event', done => {
     let inputValue;
 

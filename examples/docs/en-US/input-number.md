@@ -143,3 +143,8 @@ Additional `large` and `small` sizes of the input box are available
 |change | triggers when the value changes | value after change |
 | blur | triggers when Input blurs | (event: Event) |
 | focus | triggers when Input focuses | (event: Event) |
+
+### Methods
+| Method | Description | Parameters |
+|------|--------|-------|
+| focus | focus the Input component | - |

@@ -139,3 +139,8 @@
 | change | 绑定值被改变时触发 | 最后变更的值 |
 | blur | 在组件 Input 失去焦点时触发 | (event: Event) |
 | focus | 在组件 Input 获得焦点时触发 | (event: Event) |
+
+### Methods
+| 方法名 | 说明 | 参数 |
+| ---- | ---- | ---- |
+| focus | 使 input 获取焦点 | - |

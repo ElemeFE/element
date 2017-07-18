@@ -48,9 +48,11 @@
   import ElInput from 'element-ui/packages/input';
   import { once, on } from 'element-ui/src/utils/dom';
   import debounce from 'throttle-debounce/debounce';
+  import Focus from 'element-ui/src/mixins/focus';
 
   export default {
     name: 'ElInputNumber',
+    mixins: [Focus('input')],
     directives: {
       repeatClick: {
         bind(el, binding, vnode) {

@@ -93,6 +93,7 @@
 
 <script type="text/babel">
   import Emitter from 'element-ui/src/mixins/emitter';
+  import Focus from 'element-ui/src/mixins/focus';
   import Locale from 'element-ui/src/mixins/locale';
   import ElInput from 'element-ui/packages/input';
   import ElSelectMenu from './select-dropdown.vue';
@@ -111,7 +112,7 @@
   };
 
   export default {
-    mixins: [Emitter, Locale],
+    mixins: [Emitter, Locale, Focus('reference')],
 
     name: 'ElSelect',
 
