@@ -28,6 +28,7 @@
     </el-input>
     <el-autocomplete-suggestions
       :props="props"
+      :html='isHtml'
       :class="[popperClass ? popperClass : '']"
       ref="suggestions"
       :suggestions="suggestions"
@@ -76,7 +77,8 @@
       },
       customItem: String,
       icon: String,
-      onIconClick: Function
+      onIconClick: Function,
+      onhtml: Boolean
     },
     data() {
       return {
@@ -84,7 +86,8 @@
         isOnComposition: false,
         suggestions: [],
         loading: false,
-        highlightedIndex: -1
+        highlightedIndex: -1,
+        isHtml: this.onhtml
       };
     },
     computed: {

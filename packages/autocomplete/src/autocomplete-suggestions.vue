@@ -14,7 +14,14 @@
         <li v-if="parent.loading"><i class="el-icon-loading"></i></li>
         <template v-for="(item, index) in suggestions" v-else>
           <li
-            v-if="!parent.customItem"
+            v-if="!parent.customItem&&html"
+            :class="{'highlighted': parent.highlightedIndex === index}"
+            @click="select(item)"
+            v-html='item[props.label]'
+          >
+          </li>
+          <li
+            v-if="!parent.customItem&&!html"
             :class="{'highlighted': parent.highlightedIndex === index}"
             @click="select(item)"
           >
@@ -54,6 +61,7 @@
     props: {
       props: Object,
       suggestions: Array,
+      html: Boolean,
       options: {
         default() {
           return {
