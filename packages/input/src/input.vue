@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div v-if="type === 'number'" :class="[
+  <div v-if="type === 'number'">
+    <div :class="[
       type === 'textarea' ? 'el-textarea' : 'el-input',
       size ? 'el-input--' + size : '',
       {
@@ -21,8 +21,8 @@
         @blur="handleBlur"
       >
     </div>
-    <span v-if="type === 'number'" style="padding: 0 10px;">至</span>
-    <div v-if="type === 'number'" :class="[
+    <span style="padding: 0 10px;">至</span>
+    <div :class="[
       type === 'textarea' ? 'el-textarea' : 'el-input',
       size ? 'el-input--' + size : '',
       {
@@ -43,62 +43,61 @@
         @blur="handleBlur"
       >
     </div>
-
-    <div v-if="type !== 'number'" :class="[
-      type === 'textarea' ? 'el-textarea' : 'el-input',
-      size ? 'el-input--' + size : '',
-      {
-        'is-disabled': disabled,
-        'el-input-group': $slots.prepend || $slots.append,
-        'el-input-group--append': $slots.append,
-        'el-input-group--prepend': $slots.prepend
-      }
-    ]">
-      <template v-if="type !== 'textarea'">
-        <!-- 前置元素 -->
-        <div class="el-input-group__prepend" v-if="$slots.prepend">
-          <slot name="prepend"></slot>
-        </div>
-        <!-- input 图标 -->
-        <slot name="icon">
-          <i class="el-input__icon"
-            :class="[
-              'el-icon-' + icon,
-              onIconClick ? 'is-clickable' : ''
-            ]"
-            v-if="icon"
-            @click="handleIconClick">
-          </i>
-        </slot>
-        <input
-          v-if="type !== 'textarea'"
-          class="el-input__inner"
-          v-bind="$props"
-          :autocomplete="autoComplete"
-          :value="currentValue"
-          ref="input"
-          @input="handleInput"
-          @focus="handleFocus"
-          @blur="handleBlur"
-        >
-        <i class="el-input__icon el-icon-loading" v-if="validating"></i>
-        <!-- 后置元素 -->
-        <div class="el-input-group__append" v-if="$slots.append">
-          <slot name="append"></slot>
-        </div>
-      </template>
-      <textarea
-        v-else
-        class="el-textarea__inner"
-        :value="currentValue"
-        @input="handleInput"
-        ref="textarea"
+  </div>
+  <div v-else :class="[
+    type === 'textarea' ? 'el-textarea' : 'el-input',
+    size ? 'el-input--' + size : '',
+    {
+      'is-disabled': disabled,
+      'el-input-group': $slots.prepend || $slots.append,
+      'el-input-group--append': $slots.append,
+      'el-input-group--prepend': $slots.prepend
+    }
+  ]">
+    <template v-if="type !== 'textarea'">
+      <!-- 前置元素 -->
+      <div class="el-input-group__prepend" v-if="$slots.prepend">
+        <slot name="prepend"></slot>
+      </div>
+      <!-- input 图标 -->
+      <slot name="icon">
+        <i class="el-input__icon"
+          :class="[
+            'el-icon-' + icon,
+            onIconClick ? 'is-clickable' : ''
+          ]"
+          v-if="icon"
+          @click="handleIconClick">
+        </i>
+      </slot>
+      <input
+        v-if="type !== 'textarea'"
+        class="el-input__inner"
         v-bind="$props"
-        :style="textareaStyle"
+        :autocomplete="autoComplete"
+        :value="currentValue"
+        ref="input"
+        @input="handleInput"
         @focus="handleFocus"
-        @blur="handleBlur">
-      </textarea>
-    </div>
+        @blur="handleBlur"
+      >
+      <i class="el-input__icon el-icon-loading" v-if="validating"></i>
+      <!-- 后置元素 -->
+      <div class="el-input-group__append" v-if="$slots.append">
+        <slot name="append"></slot>
+      </div>
+    </template>
+    <textarea
+      v-else
+      class="el-textarea__inner"
+      :value="currentValue"
+      @input="handleInput"
+      ref="textarea"
+      v-bind="$props"
+      :style="textareaStyle"
+      @focus="handleFocus"
+      @blur="handleBlur">
+    </textarea>
   </div>
 </template>
 <script>
