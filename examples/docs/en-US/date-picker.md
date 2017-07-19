@@ -287,6 +287,7 @@ Picking a date range is supported.
 | picker-options | additional options, check the table below | object | — | {} |
 | range-separator | range separator | string | - | ' - ' |
 | default-value | optional default time of the picker | Date | anything accepted by `new Date()` | - |
+|name | same as `name` in native input | string | — | — |
 
 ### Picker Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |

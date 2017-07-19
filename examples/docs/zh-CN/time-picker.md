@@ -160,6 +160,7 @@
 | align | 对齐方式 | string | left, center, right | left |
 | popper-class | TimePicker 下拉框的类名 | string | — | — |
 | picker-options | 当前时间日期选择器特有的选项参考下表 | object | — | {} |
+| name | 原生属性 | string | — | — |
 
 ### Time Select Options
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
