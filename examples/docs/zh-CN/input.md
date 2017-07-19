@@ -17,11 +17,7 @@
     data() {
       return {
         restaurants: [],
-        // input: '',
-        input: {
-          from: 1,
-          to: 2
-        },
+        input: '',
         input1: '',
         input2: '',
         input3: '',
@@ -31,6 +27,10 @@
         input7: '',
         input8: '',
         input9: '',
+        input10: {
+          from: '',
+          to: ''
+        },
         textarea: '',
         textarea2: '',
         textarea3: '',
@@ -42,9 +42,6 @@
       };
     },
     methods: {
-      printVal(val) {
-        console.log(val);
-      },
       loadAll() {
         return [
           { "value": "三全鲜食（北新泾店）", "address": "长宁区新渔路144号" },
@@ -196,7 +193,7 @@
 
 ::: demo
 ```html
-<el-input v-model="input" placeholder="请输入内容" type="number" @change="printVal"></el-input>{{input}}
+<el-input v-model="input" placeholder="请输入内容"></el-input>
 
 <script>
 export default {
@@ -210,6 +207,26 @@ export default {
 ```
 :::
 
+### 数字范围输入框
+
+::: demo
+```html
+<el-input v-model="input10" type="number"></el-input>
+
+<script>
+export default {
+  data() {
+    return {
+      input10: {
+        from: '',
+        to: ''
+      }
+    }
+  }
+}
+</script>
+```
+:::
 
 ### 禁用状态
 
@@ -766,8 +783,8 @@ export default {
 
 | 参数          | 说明            | 类型            | 可选值                 | 默认值   |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
-| type         | 类型   | string  | text/textarea | text |
-| value         | 绑定值           | string, number  | — | — |
+| type         | 类型   | string  | text/textarea/number | text |
+| value         | 绑定值, 类型为 `object` 时属性必须有from和to | string, number, object  | — | — |
 | maxlength     | 最大输入长度      | number          |  —  | — |
 | minlength     | 最小输入长度      | number          | — | — |
 | placeholder   | 输入框占位文本    | string          | — | — |

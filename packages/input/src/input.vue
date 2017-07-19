@@ -13,6 +13,9 @@
       <input
         class="el-input__inner"
         :value="value.from"
+        v-bind="$props"
+        placeholder="最小值"
+        ref="inputFrom"
         @input="handleInputFrom"
         @focus="handleFocus"
         @blur="handleBlur"
@@ -32,6 +35,9 @@
       <input
         class="el-input__inner"
         :value="value.to"
+        v-bind="$props"
+        placeholder="最大值"
+        ref="inputTo"
         @input="handleInputTo"
         @focus="handleFocus"
         @blur="handleBlur"
@@ -198,14 +204,36 @@
         this.$emit('change', value);
       },
       handleInputFrom(event) {
-        const value = Number(event.target.value);
-        this.value.from = value;
+        const value = event.target.value;
+        if (value === '') {
+          this.value.from = '';
+          this.$refs.inputFrom.value = '';
+        } else if (/^\d+(\.\d{1,2})?$/.test(value) && value.length <= 16) {
+          if (this.value.to === '' || Number(value) <= this.value.to) {
+            this.value.from = Number(value);
+          } else {
+            this.$refs.inputFrom.value = this.value.from;
+          }
+        } else {
+          this.$refs.inputFrom.value = this.value.from;
+        }
         this.$emit('input', this.value);
         this.$emit('change', this.value);
       },
       handleInputTo(event) {
-        const value = Number(event.target.value);
-        this.value.to = value;
+        const value = event.target.value;
+        if (value === '') {
+          this.value.to = '';
+          this.$refs.inputTo.value = '';
+        } else if (/^\d+(\.\d{1,2})?$/.test(value) && value.length <= 16) {
+          if (this.value.from === '' || Number(value) >= this.value.from) {
+            this.value.to = Number(value);
+          } else {
+            this.$refs.inputTo.value = this.value.to;
+          }
+        } else {
+          this.$refs.inputTo.value = this.value.to;
+        }
         this.$emit('input', this.value);
         this.$emit('change', this.value);
       },
