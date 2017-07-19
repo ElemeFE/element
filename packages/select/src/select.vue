@@ -79,7 +79,6 @@
                   @keyup.native="debouncedOnInputChange"
                   @paste.native="debouncedOnInputChange"
                   >
-          
         </el-input>
         <el-scrollbar
           tag="ul"
@@ -90,6 +89,7 @@
           <el-option
             :value="query"
             created
+            :highlight="true"
             v-if="showNewOption">
           </el-option>
           <slot></slot>
@@ -330,13 +330,13 @@
               } else {
                 this.selectedLabel = this.selected.currentLabel;
               }
-              if (this.filterable) this.query = this.selectedLabel;
+              if (this.filterable && !this.downfilterable) this.query = this.selectedLabel;
             }
           }
         } else {
           this.handleIconShow();
           this.broadcast('ElSelectDropdown', 'updatePopper');
-          if (this.filterable) {
+          if (this.filterable && !this.downfilterable) {
             this.query = this.selectedLabel;
             if (this.multiple) {
               this.$refs.input.focus();
@@ -453,7 +453,8 @@
           }
           this.selectedLabel = option.currentLabel;
           this.selected = option;
-          if (this.filterable) this.query = this.selectedLabel;
+          if (this.filterable && !this.downfilterable) this.query = this.selectedLabel;
+          if (this.filterable && this.downfilterable) this.iconType = '';
           return;
         }
         let result = [];
