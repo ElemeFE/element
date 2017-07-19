@@ -1,58 +1,98 @@
 <template>
-  <div :class="[
-    type === 'textarea' ? 'el-textarea' : 'el-input',
-    size ? 'el-input--' + size : '',
-    {
-      'is-disabled': disabled,
-      'el-input-group': $slots.prepend || $slots.append,
-      'el-input-group--append': $slots.append,
-      'el-input-group--prepend': $slots.prepend
-    }
-  ]">
-    <template v-if="type !== 'textarea'">
-      <!-- 前置元素 -->
-      <div class="el-input-group__prepend" v-if="$slots.prepend">
-        <slot name="prepend"></slot>
-      </div>
-      <!-- input 图标 -->
-      <slot name="icon">
-        <i class="el-input__icon"
-          :class="[
-            'el-icon-' + icon,
-            onIconClick ? 'is-clickable' : ''
-          ]"
-          v-if="icon"
-          @click="handleIconClick">
-        </i>
-      </slot>
+  <div>
+    <div v-if="type === 'number'" :class="[
+      type === 'textarea' ? 'el-textarea' : 'el-input',
+      size ? 'el-input--' + size : '',
+      {
+        'is-disabled': disabled,
+        'el-input-group': $slots.prepend || $slots.append,
+        'el-input-group--append': $slots.append,
+        'el-input-group--prepend': $slots.prepend
+      }
+    ]">
       <input
-        v-if="type !== 'textarea'"
         class="el-input__inner"
-        v-bind="$props"
-        :autocomplete="autoComplete"
-        :value="currentValue"
-        ref="input"
-        @input="handleInput"
+        :value="value.from"
+        @input="handleInputFrom"
         @focus="handleFocus"
         @blur="handleBlur"
       >
-      <i class="el-input__icon el-icon-loading" v-if="validating"></i>
-      <!-- 后置元素 -->
-      <div class="el-input-group__append" v-if="$slots.append">
-        <slot name="append"></slot>
-      </div>
-    </template>
-    <textarea
-      v-else
-      class="el-textarea__inner"
-      :value="currentValue"
-      @input="handleInput"
-      ref="textarea"
-      v-bind="$props"
-      :style="textareaStyle"
-      @focus="handleFocus"
-      @blur="handleBlur">
-    </textarea>
+    </div>
+    <span v-if="type === 'number'" style="padding: 0 10px;">至</span>
+    <div v-if="type === 'number'" :class="[
+      type === 'textarea' ? 'el-textarea' : 'el-input',
+      size ? 'el-input--' + size : '',
+      {
+        'is-disabled': disabled,
+        'el-input-group': $slots.prepend || $slots.append,
+        'el-input-group--append': $slots.append,
+        'el-input-group--prepend': $slots.prepend
+      }
+    ]">
+      <input
+        class="el-input__inner"
+        :value="value.to"
+        @input="handleInputTo"
+        @focus="handleFocus"
+        @blur="handleBlur"
+      >
+    </div>
+
+    <div v-if="type !== 'number'" :class="[
+      type === 'textarea' ? 'el-textarea' : 'el-input',
+      size ? 'el-input--' + size : '',
+      {
+        'is-disabled': disabled,
+        'el-input-group': $slots.prepend || $slots.append,
+        'el-input-group--append': $slots.append,
+        'el-input-group--prepend': $slots.prepend
+      }
+    ]">
+      <template v-if="type !== 'textarea'">
+        <!-- 前置元素 -->
+        <div class="el-input-group__prepend" v-if="$slots.prepend">
+          <slot name="prepend"></slot>
+        </div>
+        <!-- input 图标 -->
+        <slot name="icon">
+          <i class="el-input__icon"
+            :class="[
+              'el-icon-' + icon,
+              onIconClick ? 'is-clickable' : ''
+            ]"
+            v-if="icon"
+            @click="handleIconClick">
+          </i>
+        </slot>
+        <input
+          v-if="type !== 'textarea'"
+          class="el-input__inner"
+          v-bind="$props"
+          :autocomplete="autoComplete"
+          :value="currentValue"
+          ref="input"
+          @input="handleInput"
+          @focus="handleFocus"
+          @blur="handleBlur"
+        >
+        <i class="el-input__icon el-icon-loading" v-if="validating"></i>
+        <!-- 后置元素 -->
+        <div class="el-input-group__append" v-if="$slots.append">
+          <slot name="append"></slot>
+        </div>
+      </template>
+      <textarea
+        v-else
+        class="el-textarea__inner"
+        :value="currentValue"
+        @input="handleInput"
+        ref="textarea"
+        v-bind="$props"
+        :style="textareaStyle"
+        @focus="handleFocus"
+        @blur="handleBlur">
+      </textarea>
+    </div>
   </div>
 </template>
 <script>
@@ -75,7 +115,7 @@
     },
 
     props: {
-      value: [String, Number],
+      value: [String, Number, Object],
       placeholder: String,
       size: String,
       resize: String,
@@ -124,6 +164,7 @@
 
     watch: {
       'value'(val, oldValue) {
+        console.log('watch: ', val);
         this.setCurrentValue(val);
       }
     },
@@ -155,6 +196,18 @@
         this.$emit('input', value);
         this.setCurrentValue(value);
         this.$emit('change', value);
+      },
+      handleInputFrom(event) {
+        const value = Number(event.target.value);
+        this.value.from = value;
+        this.$emit('input', this.value);
+        this.$emit('change', this.value);
+      },
+      handleInputTo(event) {
+        const value = Number(event.target.value);
+        this.value.to = value;
+        this.$emit('input', this.value);
+        this.$emit('change', this.value);
       },
       handleIconClick(event) {
         if (this.onIconClick) {

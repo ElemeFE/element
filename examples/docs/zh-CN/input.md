@@ -17,7 +17,11 @@
     data() {
       return {
         restaurants: [],
-        input: '',
+        // input: '',
+        input: {
+          from: 1,
+          to: 2
+        },
         input1: '',
         input2: '',
         input3: '',
@@ -38,6 +42,9 @@
       };
     },
     methods: {
+      printVal(val) {
+        console.log(val);
+      },
       loadAll() {
         return [
           { "value": "三全鲜食（北新泾店）", "address": "长宁区新渔路144号" },
@@ -189,7 +196,7 @@
 
 ::: demo
 ```html
-<el-input v-model="input" placeholder="请输入内容"></el-input>
+<el-input v-model="input" placeholder="请输入内容" type="number" @change="printVal"></el-input>{{input}}
 
 <script>
 export default {
