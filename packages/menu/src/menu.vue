@@ -1,15 +1,82 @@
 <template>
-  <ul class="el-menu"
-    :class="{
-      'el-menu--horizontal': mode === 'horizontal',
-      'el-menu--dark': theme === 'dark'
-    }"
-  >
-    <slot></slot>
-  </ul>
+  <el-menu-collapse-transition>
+    <ul class="el-menu"
+      :key="collapse"
+      :class="{
+        'el-menu--horizontal': mode === 'horizontal',
+        'el-menu--dark': theme === 'dark',
+        'el-menu--collapse': collapse
+      }"
+    >
+      <slot></slot>
+    </ul>
+  </el-menu-collapse-transition>
 </template>
 <script>
+  import Vue from 'vue';
   import emitter from 'element-ui/src/mixins/emitter';
+  import { addClass, removeClass, hasClass } from 'element-ui/src/utils/dom';
+
+  Vue.component('el-menu-collapse-transition', {
+    functional: true,
+    render(createElement, context) {
+      const data = {
+        props: {
+          mode: 'out-in'
+        },
+        on: {
+          beforeEnter(el) {
+            el.style.opacity = 0.2;
+          },
+
+          enter(el) {
+            addClass(el, 'el-opacity-transition');
+            el.style.opacity = 1;
+          },
+
+          afterEnter(el) {
+            removeClass(el, 'el-opacity-transition');
+            el.style.opacity = '';
+          },
+
+          beforeLeave(el) {
+            if (!el.dataset) el.dataset = {};
+
+            if (hasClass(el, 'el-menu--collapse')) {
+              removeClass(el, 'el-menu--collapse');
+              el.dataset.oldOverflow = el.style.overflow;
+              el.dataset.scrollWidth = el.scrollWidth;
+              addClass(el, 'el-menu--collapse');
+            }
+
+            el.style.width = el.scrollWidth + 'px';
+            el.style.overflow = 'hidden';
+          },
+
+          leave(el) {
+            if (!hasClass(el, 'el-menu--collapse')) {
+              addClass(el, 'horizontal-collapse-transition');
+              el.style.width = '64px';
+            } else {
+              addClass(el, 'horizontal-collapse-transition');
+              el.style.width = el.dataset.scrollWidth + 'px';
+            }
+          },
+
+          afterLeave(el) {
+            removeClass(el, 'horizontal-collapse-transition');
+            if (hasClass(el, 'el-menu--collapse')) {
+              el.style.width = el.dataset.scrollWidth + 'px';
+            } else {
+              el.style.width = '64px';
+            }
+            el.style.overflow = el.dataset.oldOverflow;
+          }
+        }
+      };
+      return createElement('transition', data, context.children);
+    }
+  });
 
   export default {
     name: 'ElMenu',
@@ -17,6 +84,12 @@
     componentName: 'ElMenu',
 
     mixins: [emitter],
+
+    provide() {
+      return {
+        rootMenu: this
+      };
+    },
 
     props: {
       mode: {
@@ -37,7 +110,8 @@
       menuTrigger: {
         type: String,
         default: 'hover'
-      }
+      },
+      collapse: Boolean
     },
     data() {
       return {
@@ -106,7 +180,7 @@
         this.activedIndex = item.index;
         this.$emit('select', index, indexPath, item);
 
-        if (this.mode === 'horizontal') {
+        if (this.mode === 'horizontal' || this.collapse) {
           this.openedMenus = [];
         }
 
