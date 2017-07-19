@@ -268,15 +268,12 @@ export default class Node {
   }
 
   setChecked(value, deep) {
-    if (this.disabled) {
-      return;
-    }
     this.indeterminate = value === 'half';
     this.checked = value === true;
 
     const handleDescendants = () => {
       if (deep) {
-        const childNodes = this.childNodes;
+        const childNodes = this.childNodes.filter((node) => node.disabled !== true);
         for (let i = 0, j = childNodes.length; i < j; i++) {
           const child = childNodes[i];
           child.setChecked(value !== false, deep);

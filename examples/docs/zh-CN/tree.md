@@ -112,6 +112,17 @@
       id: 6,
       label: '二级 2-2'
     }]
+  }, {
+    id: 3,
+    label: '一级 3',
+    disabled: true,
+    children: [{
+      id: 7,
+      label: '二级 3-1'
+    }, {
+      id: 8,
+      label: '二级 3-2'
+    }]
   }];
 
   let id = 1000;
@@ -421,6 +432,17 @@
             }, {
               id: 6,
               label: '二级 2-2'
+            }]
+          }, {
+            id: 3,
+            label: '一级 3',
+            disabled: true,
+            children: [{
+              id: 7,
+              label: '二级 3-1'
+            }, {
+              id: 8,
+              label: '二级 3-2'
             }]
           }],
         defaultProps: {

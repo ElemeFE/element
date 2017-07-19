@@ -112,6 +112,17 @@
       id: 6,
       label: 'Level two 2-2'
     }]
+  }, {
+    id: 3,
+    label: 'Level one 3',
+    disabled: true,
+    children: [{
+      id: 7,
+      label: 'Level two 3-1'
+    }, {
+      id: 8,
+      label: 'Level two 3-2'
+    }]
   }];
 
   let id = 1000;
@@ -421,6 +432,17 @@ The checkbox of a node can be set as disabled. In the example, 'disabled' proper
             }, {
               id: 6,
               label: 'Level two 2-2'
+            }]
+          }, {
+            id: 3,
+            label: 'Level one 3',
+            disabled: true,
+            children: [{
+              id: 7,
+              label: 'Level two 3-1'
+            }, {
+              id: 8,
+              label: 'Level two 3-2'
             }]
           }],
         defaultProps: {
