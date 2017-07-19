@@ -1,5 +1,5 @@
 <template>
-  <transition :name="closeTransition ? '' : 'el-zoom-in-center'">
+  <transition :name="!closeTransition ? '' : 'el-zoom-in-center'">
     <span
       class="el-tag"
       :class="[type ? 'el-tag--' + type : '', {'is-hit': hit}]"
