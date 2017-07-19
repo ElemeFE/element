@@ -1,4 +1,4 @@
-import Node from './node';
+import Node, { getChildState } from './node';
 import { getNodeKey } from './util';
 
 export default class TreeStore {
@@ -188,61 +188,47 @@ export default class TreeStore {
   }
 
   _setCheckedKeys(key, leafOnly = false, checkedKeys) {
-    const allNodes = this._getAllNodes();
-    allNodes.sort((a, b) => b.level - a.level);
+    let allNodes = this._getAllNodes().sort((a, b) => a.level - b.level);
 
     const keys = Object.keys(checkedKeys);
-    allNodes.forEach((node) => {
-      let checked = keys.indexOf(node.data[key] + '') > -1;
+    for (let node of allNodes) {
+      let checked = keys.indexOf(node.data[key].toString()) > -1;
+      if (!checked) {
+        node.setChecked(false, false);
+        continue;
+      }
 
-      if (!node.isLeaf) {
-        if (!this.checkStrictly) {
+      if (node.isLeaf || this.checkStrictly) {
+        node.setChecked(checked, false);
+        continue;
+      }
+
+      const { all, none, half } = getChildState(node.childNodes);
+
+      if (all) {
+        node.setChecked(true, !this.checkStrictly);
+      } else if (half) {
+        checked = checked ? true : 'half';
+        node.setChecked(checked, !this.checkStrictly && checked === true);
+      } else if (none) {
+        node.setChecked(checked, !this.checkStrictly);
+      }
+
+      if (leafOnly) {
+        node.setChecked(false, false);
+        const traverse = function(node) {
           const childNodes = node.childNodes;
 
-          let all = true;
-          let none = true;
-
-          for (let i = 0, j = childNodes.length; i < j; i++) {
-            const child = childNodes[i];
-            if (child.checked !== true || child.indeterminate) {
-              all = false;
+          childNodes.forEach((child) => {
+            if (!child.isLeaf) {
+              child.setChecked(false, false);
             }
-            if (child.checked !== false || child.indeterminate) {
-              none = false;
-            }
-          }
-
-          if (all) {
-            node.setChecked(true, !this.checkStrictly);
-          } else if (!all && !none) {
-            checked = checked ? true : 'half';
-            node.setChecked(checked, !this.checkStrictly && checked === true);
-          } else if (none) {
-            node.setChecked(checked, !this.checkStrictly);
-          }
-        } else {
-          node.setChecked(checked, false);
-        }
-
-        if (leafOnly) {
-          node.setChecked(false, false);
-          const traverse = function(node) {
-            const childNodes = node.childNodes;
-
-            childNodes.forEach((child) => {
-              if (!child.isLeaf) {
-                child.setChecked(false, false);
-              }
-              traverse(child);
-            });
-          };
-
-          traverse(node);
-        }
-      } else {
-        node.setChecked(checked, false);
+            traverse(child);
+          });
+        };
+        traverse(node);
       }
-    });
+    }
   }
 
   setCheckedNodes(array, leafOnly = false) {
