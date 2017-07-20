@@ -1,7 +1,7 @@
 <template>
   <el-menu-collapse-transition>
     <ul class="el-menu"
-      :key="collapse"
+      :key="+collapse"
       :class="{
         'el-menu--horizontal': mode === 'horizontal',
         'el-menu--dark': theme === 'dark',
