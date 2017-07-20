@@ -370,7 +370,7 @@ export default class Node {
   }
 
   loadData(callback, defaultProps = {}) {
-    if (this.store.lazy === true && this.store.load && !this.loaded && !this.loading) {
+    if (this.store.lazy === true && this.store.load && !this.loaded && (!this.loading || Object.keys(defaultProps).length)) {
       this.loading = true;
 
       const resolve = (children) => {
