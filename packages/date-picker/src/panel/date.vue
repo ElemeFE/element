@@ -406,11 +406,11 @@
 
       visibleDate: {
         get() {
-          return formatDate(this.date);
+          return formatDate(this.date, this.dateFormat);
         },
 
         set(val) {
-          const date = parseDate(val, 'yyyy-MM-dd');
+          const date = parseDate(val, this.dateFormat);
           if (!date) {
             return;
           }
@@ -444,6 +444,14 @@
           return 'HH:mm';
         } else {
           return 'HH:mm:ss';
+        }
+      },
+
+      dateFormat() {
+        if (this.format) {
+          return this.format.replace('HH:mm', '').replace(':ss', '').trim();
+        } else {
+          return 'yyyy-MM-dd';
         }
       }
     }
