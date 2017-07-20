@@ -5,18 +5,21 @@
       'is-active': active,
       'is-opened': opened
     }"
+    @mouseenter="handleMouseenter"
+    @mouseleave="handleMouseleave"
   >
-    <div class="el-submenu__title" ref="submenu-title" :style="paddingStyle">
+    <div class="el-submenu__title" ref="submenu-title" @click="handleClick" :style="paddingStyle">
       <slot name="title"></slot>
       <i :class="{
         'el-submenu__icon-arrow': true,
-        'el-icon-arrow-down': rootMenu.mode === 'vertical',
-        'el-icon-caret-bottom': rootMenu.mode === 'horizontal'
+        'el-icon-caret-bottom': rootMenu.mode === 'horizontal',
+        'el-icon-arrow-down': rootMenu.mode === 'vertical' && !rootMenu.collapse,
+        'el-icon-caret-right': rootMenu.mode === 'vertical' && rootMenu.collapse
       }">
       </i>
     </div>
-    <template v-if="rootMenu.mode === 'horizontal'">
-      <transition name="el-zoom-in-top">
+    <template v-if="rootMenu.mode === 'horizontal' || (rootMenu.mode === 'vertical' && rootMenu.collapse)">
+      <transition :name="menuTransitionName">
         <ul class="el-menu" v-show="opened"><slot></slot></ul>
       </transition>
     </template>
@@ -45,6 +48,7 @@
         required: true
       }
     },
+
     data() {
       return {
         timeout: null,
@@ -53,6 +57,9 @@
       };
     },
     computed: {
+      menuTransitionName() {
+        return this.rootMenu.collapse ? 'el-zoom-in-left' : 'el-zoom-in-top';
+      },
       opened() {
         return this.rootMenu.openedMenus.indexOf(this.index) > -1;
       },
@@ -93,37 +100,40 @@
         delete this.submenus[item.index];
       },
       handleClick() {
+        const {rootMenu} = this;
+        if (
+          (rootMenu.menuTrigger === 'hover' && rootMenu.mode === 'horizontal') ||
+          (rootMenu.collapse && rootMenu.mode === 'vertical')
+        ) {
+          return;
+        }
         this.dispatch('ElMenu', 'submenu-click', this);
       },
       handleMouseenter() {
+        const {rootMenu} = this;
+        if (
+          (rootMenu.menuTrigger === 'click' && rootMenu.mode === 'horizontal') ||
+          (!rootMenu.collapse && rootMenu.mode === 'vertical')
+        ) {
+          return;
+        }
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
           this.rootMenu.openMenu(this.index, this.indexPath);
         }, 300);
       },
       handleMouseleave() {
+        const {rootMenu} = this;
+        if (
+          (rootMenu.menuTrigger === 'click' && rootMenu.mode === 'horizontal') ||
+          (!rootMenu.collapse && rootMenu.mode === 'vertical')
+        ) {
+          return;
+        }
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
           this.rootMenu.closeMenu(this.index, this.indexPath);
         }, 300);
-      },
-      initEvents() {
-        let {
-          rootMenu,
-          handleMouseenter,
-          handleMouseleave,
-          handleClick
-        } = this;
-        let triggerElm;
-
-        if (rootMenu.mode === 'horizontal' && rootMenu.menuTrigger === 'hover') {
-          triggerElm = this.$el;
-          triggerElm.addEventListener('mouseenter', handleMouseenter);
-          triggerElm.addEventListener('mouseleave', handleMouseleave);
-        } else {
-          triggerElm = this.$refs['submenu-title'];
-          triggerElm.addEventListener('click', handleClick);
-        }
       }
     },
     created() {
@@ -133,9 +143,6 @@
     beforeDestroy() {
       this.parentMenu.removeSubmenu(this);
       this.rootMenu.removeSubmenu(this);
-    },
-    mounted() {
-      this.initEvents();
     }
   };
 </script>
