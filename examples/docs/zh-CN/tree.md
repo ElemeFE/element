@@ -93,6 +93,38 @@
     }]
   }];
 
+  const data3 = [{
+    id: 1,
+    label: '一级 1',
+    children: [{
+      id: 4,
+      label: '二级 1-1',
+      disabled: true
+    }]
+  }, {
+    id: 2,
+    label: '一级 2',
+    children: [{
+      id: 5,
+      label: '二级 2-1',
+      disabled: true
+    }, {
+      id: 6,
+      label: '二级 2-2'
+    }]
+  }, {
+    id: 3,
+    label: '一级 3',
+    disabled: true,
+    children: [{
+      id: 7,
+      label: '二级 3-1'
+    }, {
+      id: 8,
+      label: '二级 3-2'
+    }]
+  }];
+
   let id = 1000;
 
   const regions = [{
@@ -110,7 +142,8 @@
 
   const defaultProps = {
     children: 'children',
-    label: 'label'
+    label: 'label',
+    disabled: 'disabled',
   };
 
   export default {
@@ -211,6 +244,7 @@
       return {
         data,
         data2,
+        data3,
         regions,
         defaultProps,
         props,
@@ -356,6 +390,71 @@
 
           resolve(data);
         }, 500);
+      }
+    }
+  };
+</script>
+```
+:::
+
+### 可禁止的选择
+
+可将 Tree 的某些节点设置为禁止选择。在下例中，对于在defaultProps中声明了disabled属性，并且设置了disabled属性为true的选择框，该选择框被禁用，不可点击。
+
+::: demo
+```html
+<el-tree
+  :data="data3"
+  :props="defaultProps"
+  show-checkbox
+  @check-change="handleCheckChange">
+</el-tree>
+
+<script>
+  export default {
+    data() {
+      return {
+        data3: [{
+            id: 1,
+            label: '一级 1',
+            children: [{
+              id: 4,
+              label: '二级 1-1',
+              disabled: true
+            }]
+          }, {
+            id: 2,
+            label: '一级 2',
+            children: [{
+              id: 5,
+              label: '二级 2-1',
+              disabled: true
+            }, {
+              id: 6,
+              label: '二级 2-2'
+            }]
+          }, {
+            id: 3,
+            label: '一级 3',
+            disabled: true,
+            children: [{
+              id: 7,
+              label: '二级 3-1'
+            }, {
+              id: 8,
+              label: '二级 3-2'
+            }]
+          }],
+        defaultProps: {
+            children: 'children',
+            label: 'label',
+            disabled: 'disabled',
+        },
+      };
+    },
+    methods: {
+      handleNodeClick(data) {
+        console.log(data);
       }
     }
   };

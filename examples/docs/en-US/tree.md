@@ -93,6 +93,38 @@
     }]
   }];
 
+  const data3 = [{
+    id: 1,
+    label: 'Level one 1',
+    children: [{
+      id: 4,
+      label: 'Level two 1-1',
+      disabled: true
+    }]
+  }, {
+    id: 2,
+    label: 'Level one 2',
+    children: [{
+      id: 5,
+      label: 'Level two 2-1',
+      disabled: true
+    }, {
+      id: 6,
+      label: 'Level two 2-2'
+    }]
+  }, {
+    id: 3,
+    label: 'Level one 3',
+    disabled: true,
+    children: [{
+      id: 7,
+      label: 'Level two 3-1'
+    }, {
+      id: 8,
+      label: 'Level two 3-2'
+    }]
+  }];
+
   let id = 1000;
 
   const regions = [{
@@ -110,7 +142,8 @@
 
   const defaultProps = {
     children: 'children',
-    label: 'label'
+    label: 'label',
+    disabled: 'disabled',
   };
 
   export default {
@@ -166,7 +199,7 @@
         this.$refs.tree.setCheckedNodes([
           {
             id: 5,
-            label: '二级 2-1'
+            label: 'Level two 2-1'
           },
           {
             id: 9,
@@ -211,6 +244,7 @@
       return {
         data,
         data2,
+        data3,
         regions,
         defaultProps,
         props,
@@ -356,6 +390,71 @@ Used for node selection. In the following example, data for each layer is acquir
 
           resolve(data);
         }, 500);
+      }
+    }
+  };
+</script>
+```
+:::
+
+### Can disable checkbox
+
+The checkbox of a node can be set as disabled. In the example, 'disabled' property is declared in defaultProps, and some nodes are set as 'disabled:true'. The corresponding checkbox is disabled and can't be clicked.
+
+::: demo
+```html
+<el-tree
+  :data="data3"
+  :props="defaultProps"
+  show-checkbox
+  @check-change="handleCheckChange">
+</el-tree>
+
+<script>
+  export default {
+    data() {
+      return {
+        data3: [{
+            id: 1,
+            label: 'Level one 1',
+            children: [{
+              id: 4,
+              label: 'Level two 1-1',
+              disabled: true
+            }]
+          }, {
+            id: 2,
+            label: 'Level one 2',
+            children: [{
+              id: 5,
+              label: 'Level two 2-1',
+              disabled: true
+            }, {
+              id: 6,
+              label: 'Level two 2-2'
+            }]
+          }, {
+            id: 3,
+            label: 'Level one 3',
+            disabled: true,
+            children: [{
+              id: 7,
+              label: 'Level two 3-1'
+            }, {
+              id: 8,
+              label: 'Level two 3-2'
+            }]
+          }],
+        defaultProps: {
+            children: 'children',
+            label: 'label',
+            disabled: 'disabled',
+        },
+      };
+    },
+    methods: {
+      handleNodeClick(data) {
+        console.log(data);
       }
     }
   };

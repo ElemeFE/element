@@ -9,6 +9,9 @@ const reInitChecked = function(node) {
 
   for (let i = 0, j = siblings.length; i < j; i++) {
     const sibling = siblings[i];
+    if (sibling.disabled) {
+      continue;
+    }
     if (sibling.checked !== true || sibling.indeterminate) {
       all = false;
     }
@@ -139,6 +142,10 @@ export default class Node {
     return getPropertyFromData(this, 'icon');
   }
 
+  get disabled() {
+    return getPropertyFromData(this, 'disabled');
+  }
+
   get key() {
     const nodeKey = this.store.key;
     if (this.data) return this.data[nodeKey];
@@ -266,7 +273,7 @@ export default class Node {
 
     const handleDescendants = () => {
       if (deep) {
-        const childNodes = this.childNodes;
+        const childNodes = this.childNodes.filter((node) => node.disabled !== true);
         for (let i = 0, j = childNodes.length; i < j; i++) {
           const child = childNodes[i];
           child.setChecked(value !== false, deep);
