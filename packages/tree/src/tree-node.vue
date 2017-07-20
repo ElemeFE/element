@@ -16,6 +16,7 @@
       </span>
       <el-checkbox
         v-if="showCheckbox"
+        :disabled="node.disabled"
         v-model="node.checked"
         :indeterminate="node.indeterminate"
         @change="handleCheckChange"
