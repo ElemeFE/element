@@ -71,14 +71,17 @@
       <el-select-menu
         ref="popper"
         v-show="visible && emptyText !== false">
-        <el-input
-          type="text"
-          v-show="filterable && downfilterable"
-          :icon="iconType"
-          v-model="downText"
-          :on-icon-click="clearText"
-          @keyup.native="debouncedOnInputChange"
-          @paste.native="debouncedOnInputChange">
+        <el-input type="text"
+                  v-show="filterable && downfilterable"
+                  :icon="iconType"
+                  v-model="downText"
+                  :on-icon-click="clearText"
+                  @keyup.native="debouncedOnInputChange"
+                  @paste.native="debouncedOnInputChange"
+                  @keydown.native.down.prevent="navigateOptions('next')"
+                  @keydown.native.up.prevent="navigateOptions('prev')"
+                  @keydown.native.enter.prevent="selectOption"
+                  >
         </el-input>
         <el-scrollbar
           tag="ul"
@@ -89,12 +92,12 @@
           <el-option
             :value="query"
             created
+            :highlight="true"
             v-if="showNewOption">
           </el-option>
           <slot></slot>
           <div style="padding: 6px 10px 0;" v-if="list">
-            <el-checkbox v-model="isSelectAll" @change="selectAll">全部</el-checkbox>
-            <el-button :disabled="value.length === 0" type="primary" @click="confrimSelect">确定</el-button>
+            <el-checkbox v-model="isSelectAll" @change="selectAll">全选</el-checkbox>
           </div>
         </el-scrollbar>
         <p class="el-select-dropdown__empty" v-if="emptyText && (allowCreate && options.length === 0 || !allowCreate)">{{ emptyText }}</p>
@@ -212,7 +215,6 @@
 
     data() {
       return {
-        oldVal: [],
         isSelectAll: true,
         options: [],
         cachedOptions: [],
@@ -294,13 +296,6 @@
         if (this.defaultFirstOption && (this.filterable || this.remote) && this.filteredOptionsCount) {
           this.checkDefaultFirstOption();
         }
-        if (this.filterable && this.downfilterable) {
-          if (val) {
-            this.iconType = 'circle-close';
-          } else {
-            this.iconType = '';
-          }
-        }
       },
 
       visible(val) {
@@ -312,11 +307,8 @@
             this.$refs.input.blur();
           }
           this.query = '';
-          if (!this.list) {
-            this.selectedLabel = '';
-          } else {
-            this.$emit('input', this.oldVal);
-          }
+          this.downText = '';
+          this.selectedLabel = '';
           this.inputLength = 20;
           this.resetHoverIndex();
           this.$nextTick(() => {
@@ -341,7 +333,6 @@
         } else {
           this.handleIconShow();
           this.broadcast('ElSelectDropdown', 'updatePopper');
-          this.oldVal = this.value;
           if (this.filterable && !this.downfilterable) {
             this.query = this.selectedLabel;
             if (this.multiple) {
@@ -371,24 +362,20 @@
         if (this.defaultFirstOption && (this.filterable || this.remote) && this.filteredOptionsCount) {
           this.checkDefaultFirstOption();
         }
+      },
+
+      downText(val) {
+        if (this.filterable && this.downfilterable) {
+          if (val) {
+            this.iconType = 'circle-close';
+          } else {
+            this.iconType = '';
+          }
+        }
       }
     },
 
     methods: {
-      confrimSelect() {
-        this.oldVal = this.value;
-        let result = [];
-        this.value.forEach(value => {
-          result.push(this.getOption(value).currentLabel);
-        });
-        if (this.value.length === this.list.length) {
-          this.selectedLabel = '全部';
-        } else {
-          this.selectedLabel = result.join(',');
-        }
-        this.toggleMenu();
-      },
-
       selectAll() {
         let value = [];
         if (this.isSelectAll) {
@@ -399,7 +386,6 @@
         }
         this.$emit('input', value);
       },
-
       handleIconHide() {
         let icon = this.$el.querySelector('.el-input__icon');
         if (icon) {
@@ -475,10 +461,8 @@
           this.selectedLabel = option.currentLabel;
           this.selected = option;
           if (this.filterable && !this.downfilterable) this.query = this.selectedLabel;
-          if (this.filterable && this.downfilterable) this.iconType = '';
           return;
         }
-        if (this.list) return;
         let result = [];
         if (Array.isArray(this.value)) {
           this.value.forEach(value => {
@@ -596,6 +580,7 @@
           if (this.filterable) this.$refs.input.focus();
         } else {
           this.$emit('input', option.value);
+          this.downText = '';
           this.visible = false;
         }
       },
@@ -737,6 +722,14 @@
     },
 
     created() {
+      if (this.list) {
+        let value = [];
+        for (let i = 0; i < this.list.length; i++) {
+          let item = this.list[i];
+          value.push(item.value);
+        }
+        this.$emit('input', value);
+      }
       this.cachedPlaceHolder = this.currentPlaceholder = this.placeholder;
       if (this.multiple && !Array.isArray(this.value)) {
         this.$emit('input', []);
@@ -758,27 +751,6 @@
     mounted() {
       if (this.multiple && Array.isArray(this.value) && this.value.length > 0) {
         this.currentPlaceholder = '';
-        if (this.list) {
-          let result = [];
-          this.value.forEach(value => {
-            result.push(this.getOption(value).currentLabel);
-          });
-          if (this.value.length === this.list.length) {
-            this.selectedLabel = '全部';
-          } else {
-            this.selectedLabel = result.join(',');
-          }
-        }
-      } else if (this.multiple && Array.isArray(this.value) && this.value.length === 0) {
-        if (this.list) {
-          this.selectedLabel = '全部';
-          let value = [];
-          for (let i = 0; i < this.list.length; i++) {
-            let item = this.list[i];
-            value.push(item.value);
-          }
-          this.$emit('input', value);
-        }
       }
       addResizeListener(this.$el, this.handleResize);
       if (this.remote && this.multiple) {
