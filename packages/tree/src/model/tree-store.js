@@ -188,11 +188,10 @@ export default class TreeStore {
   }
 
   _setCheckedKeys(key, leafOnly = false, checkedKeys) {
-    let allNodes = this._getAllNodes().sort((a, b) => a.level - b.level);
-
+    const allNodes = this._getAllNodes().sort((a, b) => b.level - a.level);
     const keys = Object.keys(checkedKeys);
     for (let node of allNodes) {
-      let checked = keys.indexOf(node.data[key].toString()) > -1;
+      let checked = keys.indexOf(node.data[key] + '') > -1;
       if (!checked) {
         node.setChecked(false, false);
         continue;
