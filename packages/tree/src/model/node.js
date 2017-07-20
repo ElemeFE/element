@@ -5,8 +5,8 @@ export const getChildState = node => {
   let all = true;
   let none = true;
   let allWithoutDisable = true;
-
-  for (let n of node) {
+  for (let i = 0, j = node.length; i < j; i++) {
+    const n = node[i];
     if (n.checked !== true || n.indeterminate) {
       all = false;
       if (!n.disabled) {
@@ -23,7 +23,6 @@ export const getChildState = node => {
 
 const reInitChecked = function(node) {
   const {all, none, half} = getChildState(node.childNodes);
-
   if (all) {
     node.checked = true;
     node.indeterminate = false;
