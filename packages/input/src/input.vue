@@ -169,7 +169,6 @@
 
     watch: {
       'value'(val, oldValue) {
-        console.log('watch: ', val);
         this.setCurrentValue(val);
       }
     },
