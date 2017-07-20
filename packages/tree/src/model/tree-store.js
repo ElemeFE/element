@@ -1,4 +1,4 @@
-import Node, { getChildState } from './node';
+import Node from './node';
 import { getNodeKey } from './util';
 
 export default class TreeStore {
@@ -189,35 +189,36 @@ export default class TreeStore {
 
   _setCheckedKeys(key, leafOnly = false, checkedKeys) {
     const allNodes = this._getAllNodes().sort((a, b) => b.level - a.level);
+    const cache = Object.create(null);
     const keys = Object.keys(checkedKeys);
-    for (let node of allNodes) {
-      let checked = keys.indexOf(node.data[key] + '') > -1;
+    allNodes.forEach(node => node.setChecked(false, false));
+    for (let i = 0, j = allNodes.length; i < j; i++) {
+      const node = allNodes[i];
+      const nodeKey = node.data[key].toString();
+      let checked = keys.indexOf(nodeKey) > -1;
       if (!checked) {
-        node.setChecked(false, false);
+        if (node.checked && !cache[nodeKey]) {
+          node.setChecked(false, false);
+        }
         continue;
+      }
+
+      let parent = node.parent;
+      while (parent && parent.level > 0) {
+        cache[parent.data[key]] = true;
+        parent = parent.parent;
       }
 
       if (node.isLeaf || this.checkStrictly) {
-        node.setChecked(checked, false);
+        node.setChecked(true, false);
         continue;
       }
-
-      const { all, none, half } = getChildState(node.childNodes);
-
-      if (all) {
-        node.setChecked(true, !this.checkStrictly);
-      } else if (half) {
-        checked = checked ? true : 'half';
-        node.setChecked(checked, !this.checkStrictly && checked === true);
-      } else if (none) {
-        node.setChecked(checked, !this.checkStrictly);
-      }
+      node.setChecked(true, true);
 
       if (leafOnly) {
         node.setChecked(false, false);
         const traverse = function(node) {
           const childNodes = node.childNodes;
-
           childNodes.forEach((child) => {
             if (!child.isLeaf) {
               child.setChecked(false, false);
