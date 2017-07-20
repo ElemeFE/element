@@ -50,7 +50,7 @@
     computed: {
       isObject() {
         const type = typeof this.value;
-        return type !== 'string' && type !== 'number';
+        return type !== 'string' && type !== 'number' && type !== 'boolean';
       },
 
       currentLabel() {
