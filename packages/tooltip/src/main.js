@@ -80,9 +80,12 @@ export default {
     if (!vnode) return vnode;
     const data = vnode.data = vnode.data || {};
     const on = vnode.data.on = vnode.data.on || {};
+    const nativeOn = vnode.data.nativeOn = vnode.data.nativeOn || {};
 
     on.mouseenter = this.addEventHandle(on.mouseenter, () => { this.setExpectedState(true); this.handleShowPopper(); });
     on.mouseleave = this.addEventHandle(on.mouseleave, () => { this.setExpectedState(false); this.debounceClose(); });
+    nativeOn.mouseenter = this.addEventHandle(nativeOn.mouseenter, () => { this.setExpectedState(true); this.handleShowPopper(); });
+    nativeOn.mouseleave = this.addEventHandle(nativeOn.mouseleave, () => { this.setExpectedState(false); this.debounceClose(); });
     data.staticClass = this.concatClass(data.staticClass, 'el-tooltip');
 
     return vnode;

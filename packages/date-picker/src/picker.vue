@@ -179,7 +179,7 @@ const TYPE_VALUE_RESOLVER_MAP = {
 };
 const PLACEMENT_MAP = {
   left: 'bottom-start',
-  center: 'bottom-center',
+  center: 'bottom',
   right: 'bottom-end'
 };
 

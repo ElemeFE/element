@@ -3,7 +3,7 @@
     .el-menu-demo {
       padding-left: 55px;
     }
-    .el-menu-vertical-demo {
+    .el-menu-vertical-demo:not(.el-menu--collapse) {
       width: 200px;
       min-height: 400px;
     }
@@ -33,7 +33,8 @@
     data() {
       return {
         activeIndex: '1',
-        activeIndex2: '1'
+        activeIndex2: '1',
+        isCollapse: true
       };
     },
     methods: {
@@ -181,10 +182,68 @@
 ```
 :::
 
+### 折叠
+
+::: demo
+```html
+<el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
+  <el-radio-button :label="false">展开</el-radio-button>
+  <el-radio-button :label="true">收起</el-radio-button>
+</el-radio-group>
+<el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
+  <el-submenu index="1">
+    <template slot="title">
+      <i class="el-icon-message"></i>
+      <span slot="title">导航一</span>
+    </template>
+    <el-menu-item-group>
+      <span slot="title">分组一</span>
+      <el-menu-item index="1-1">选项1</el-menu-item>
+      <el-menu-item index="1-2">选项2</el-menu-item>
+    </el-menu-item-group>
+    <el-menu-item-group title="分组2">
+      <el-menu-item index="1-3">选项3</el-menu-item>
+    </el-menu-item-group>
+    <el-submenu index="1-4">
+      <span slot="title">选项4</span>
+      <el-menu-item index="1-4-1">选项1</el-menu-item>
+    </el-submenu>
+  </el-submenu>
+  <el-menu-item index="2">
+    <i class="el-icon-menu"></i>
+    <span slot="title">导航二</span>
+  </el-menu-item>
+  <el-menu-item index="3">
+    <i class="el-icon-setting"></i>
+    <span slot="title">导航三</span>
+  </el-menu-item>
+</el-menu>
+
+<script>
+  export default {
+    data() {
+      return {
+        isCollapse: false
+      };
+    },
+    methods: {
+      handleOpen(key, keyPath) {
+        console.log(key, keyPath);
+      },
+      handleClose(key, keyPath) {
+        console.log(key, keyPath);
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Menu Attribute
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | mode     | 模式   | string  |   horizontal,vertical   | vertical |
+| collapse  | 是否水平折叠收起菜单（仅在 mode 为 vertical 时可用）| boolean  |   —   | false |
 | theme     | 主题色   | string    | light,dark | light |
 | default-active | 当前激活菜单的 index | string    | — | — |
 | default-openeds | 当前打开的submenu的 key 数组 | Array    | — | — |

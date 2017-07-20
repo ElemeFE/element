@@ -1,5 +1,6 @@
 <script>
   import { isDef } from 'element-ui/src/utils/shared';
+  import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
 
   export default {
     name: 'ElCascaderMenu',
@@ -94,6 +95,12 @@
         } else {
           this.$emit('activeItemChange', this.activeValue);
         }
+      },
+      scrollMenu(menu) {
+        scrollIntoView(menu, menu.getElementsByClassName('is-active')[0]);
+      },
+      handleMenuEnter() {
+        this.$nextTick(() => this.$refs.menus.forEach(menu => this.scrollMenu(menu)));
       }
     },
 
@@ -121,9 +128,19 @@
                 click: 'click',
                 hover: 'mouseenter'
               }[expandTrigger];
-              events.on[triggerEvent] = () => { this.activeItem(item, menuIndex); };
+              events.on[triggerEvent] = () => {
+                this.activeItem(item, menuIndex);
+                this.$nextTick(() => {
+                  // adjust self and next level
+                  this.scrollMenu(this.$refs.menus[menuIndex]);
+                  this.scrollMenu(this.$refs.menus[menuIndex + 1]);
+                });
+              };
             } else {
-              events.on.click = () => { this.select(item, menuIndex); };
+              events.on.click = () => {
+                this.select(item, menuIndex);
+                this.$nextTick(() => this.scrollMenu(this.$refs.menus[menuIndex]));
+              };
             }
           }
 
@@ -152,19 +169,22 @@
               'el-cascader-menu': true,
               'el-cascader-menu--flexible': isFlat
             }}
-            style={menuStyle}>
+            style={menuStyle}
+            refInFor
+            ref="menus">
             {items}
           </ul>
         );
       });
       return (
-        <transition name="el-zoom-in-top" on-after-leave={this.handleMenuLeave}>
+        <transition name="el-zoom-in-top" on-before-enter={this.handleMenuEnter} on-after-leave={this.handleMenuLeave}>
           <div
             v-show={visible}
             class={[
               'el-cascader-menus',
               popperClass
             ]}
+            ref="wrapper"
           >
             {menus}
           </div>

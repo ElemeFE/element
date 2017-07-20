@@ -4,7 +4,7 @@
     'is-validating': validateState === 'validating',
     'is-required': isRequired || required
   }">
-    <label :for="prop" class="el-form-item__label" v-bind:style="labelStyle" v-if="label">
+    <label :for="prop" class="el-form-item__label" v-bind:style="labelStyle" v-if="label || $slots.label">
       <slot name="label">{{label + form.labelSuffix}}</slot>
     </label>
     <div class="el-form-item__content" v-bind:style="contentStyle">

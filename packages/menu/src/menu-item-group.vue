@@ -15,6 +15,7 @@
 
     componentName: 'ElMenuItemGroup',
 
+    inject: ['rootMenu'],
     props: {
       title: {
         type: String
@@ -29,6 +30,7 @@
       levelPadding() {
         let padding = 10;
         let parent = this.$parent;
+        if (this.rootMenu.collapse) return 20;
         while (parent && parent.$options.componentName !== 'ElMenu') {
           if (parent.$options.componentName === 'ElSubmenu') {
             padding += 20;
