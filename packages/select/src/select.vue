@@ -366,7 +366,7 @@
       getOption(value) {
         let option;
         const type = typeof value;
-        const isObject = type !== 'string' && type !== 'number';
+        const isObject = type !== 'string' && type !== 'number' && type !== 'boolean';
         for (let i = this.cachedOptions.length - 1; i >= 0; i--) {
           const cachedOption = this.cachedOptions[i];
           const isEqual = isObject
@@ -529,7 +529,7 @@
 
       getValueIndex(arr = [], value) {
         const type = typeof value;
-        const isObject = type !== 'string' && type !== 'number';
+        const isObject = type !== 'string' && type !== 'number' && type !== 'boolean';
         if (!isObject) {
           return arr.indexOf(value);
         } else {
