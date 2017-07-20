@@ -301,7 +301,6 @@ export default class Node {
           child.setChecked(isCheck, deep, true, passValue);
         }
         const { half, all } = getChildState(childNodes);
-        console.log(this.data.label, all);
         if (!all) {
           this.checked = all;
           this.indeterminate = half;
