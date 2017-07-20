@@ -393,11 +393,11 @@ Used for node selection. In the following example, data for each layer is acquir
 ```
 :::
 
-### Can disable checkbox
+### Disabled checkbox
 
-The checkbox of a node can be set as disabled. In the example, 'disabled' property is declared in defaultProps, and some nodes are set as 'disabled:true'. The corresponding checkbox is disabled and can't be clicked.
+The checkbox of a node can be set as disabled.
 
-::: demo
+::: demo In the example, 'disabled' property is declared in defaultProps, and some nodes are set as 'disabled:true'. The corresponding checkboxes are disabled and can't be clicked.
 ```html
 <el-tree
   :data="data3"
