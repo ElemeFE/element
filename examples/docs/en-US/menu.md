@@ -243,7 +243,7 @@ Vertical NavMenu could be collapsed.
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------- |---------- |-------------  |-------- |
 | mode     | menu display mode   | string  |   horizontal/vertical   | vertical |
-| collapse  | whether the menu is in the collapsed status (available when the mode is vertical) | boolean  |   —   | false |
+| collapse  | whether the menu is collapsed (available only in vertical mode) | boolean  |   —   | false |
 | theme     | theme color   | string    | light/dark | light |
 | default-active | index of currently active menu | string    | — | — |
 | default-openeds | array that contains keys of currently active sub-menus  | Array    | — | — |
