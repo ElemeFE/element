@@ -42,6 +42,22 @@ const reInitChecked = function(node) {
   }
 };
 
+const initLazyLoadChild = node => {
+  const childNodes = node.childNodes;
+  if (node.checked) {
+    for (let i = 0, j = childNodes.length; i < j; i++) {
+      const child = childNodes[i];
+      if (!child.disabled) {
+        child.checked = true;
+      }
+    }
+  }
+
+  const parent = node.parent;
+  if (!parent || parent.level === 0) return;
+  reInitChecked(parent);
+};
+
 const getPropertyFromData = function(node, prop) {
   const props = node.store.props;
   const data = node.data || {};
@@ -245,6 +261,7 @@ export default class Node {
     if (this.shouldLoadData()) {
       this.loadData((data) => {
         if (data instanceof Array) {
+          initLazyLoadChild(this);
           done();
         }
       });
@@ -290,8 +307,8 @@ export default class Node {
       value = false;
     }
 
-    const handleDescendants = () => {
-      if (deep) {
+    const handleDescendants = (lazy) => {
+      if (deep && !lazy) {
         const childNodes = this.childNodes;
         for (let i = 0, j = childNodes.length; i < j; i++) {
           const child = childNodes[i];
@@ -310,7 +327,7 @@ export default class Node {
     if (!this.store.checkStrictly && this.shouldLoadData()) {
       // Only work on lazy load data.
       this.loadData(() => {
-        handleDescendants();
+        handleDescendants(true);
       }, {
         checked: value !== false
       });
