@@ -1,5 +1,4 @@
 export default {
-  inject: ['rootMenu'],
   computed: {
     indexPath() {
       var path = [this.index];
@@ -11,6 +10,16 @@ export default {
         parent = parent.$parent;
       }
       return path;
+    },
+    rootMenu() {
+      var parent = this.$parent;
+      while (
+        parent &&
+        parent.$options.componentName !== 'ElMenu'
+      ) {
+        parent = parent.$parent;
+      }
+      return parent;
     },
     parentMenu() {
       let parent = this.$parent;
