@@ -1,8 +1,9 @@
 <template>
-  <li class="el-menu-item"
+  <li
     :style="paddingStyle"
     @click="handleClick"
     :class="{
+      'el-menu-item': true,
       'is-active': active,
       'is-disabled': disabled
     }">

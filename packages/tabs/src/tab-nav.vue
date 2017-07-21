@@ -168,7 +168,7 @@
       return (
         <div class={['el-tabs__nav-wrap', scrollable ? 'is-scrollable' : '']}>
           {scrollBtn}
-          <div class={['el-tabs__nav-scroll']} ref="navScroll">
+          <div class='el-tabs__nav-scroll' ref="navScroll">
             <div class="el-tabs__nav" ref="nav" style={navStyle}>
               {!type ? <tab-bar tabs={panes}></tab-bar> : null}
               {tabs}

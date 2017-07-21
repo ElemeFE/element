@@ -1,6 +1,7 @@
 <template>
-  <ul class="el-menu"
+  <ul
     :class="{
+      'el-menu': true,
       'el-menu--horizontal': mode === 'horizontal',
       'el-menu--dark': theme === 'dark'
     }"
