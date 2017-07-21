@@ -136,7 +136,7 @@
         return currentNode ? currentNode.data : null;
       },
       getCurrentKey() {
-        if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in setCheckedNodes');
+        if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in getCurrentKey');
         const currentNode = this.getCurrentNode();
         return currentNode ? currentNode[this.nodeKey] : null;
       },
@@ -145,18 +145,18 @@
         this.store.setCheckedNodes(nodes, leafOnly);
       },
       setCheckedKeys(keys, leafOnly) {
-        if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in setCheckedNodes');
+        if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in setCheckedKeys');
         this.store.setCheckedKeys(keys, leafOnly);
       },
       setChecked(data, checked, deep) {
         this.store.setChecked(data, checked, deep);
       },
       setCurrentNode(node) {
-        if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in setCheckedNodes');
+        if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in setCurrentNode');
         this.store.setUserCurrentNode(node);
       },
       setCurrentKey(key) {
-        if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in setCheckedNodes');
+        if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in setCurrentKey');
         this.store.setCurrentNodeKey(key);
       },
       handleNodeExpand(nodeData, node, instance) {
