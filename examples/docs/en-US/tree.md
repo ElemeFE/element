@@ -93,6 +93,35 @@
     }]
   }];
 
+  const data3 = [{
+    id: 1,
+    label: 'Level one 1',
+    children: [{
+      id: 3,
+      label: 'Level two 2-1',
+      children: [{
+        id: 4,
+        label: 'Level three 3-1-1'
+      }, {
+        id: 5,
+        label: 'Level three 3-1-2',
+        disabled: true
+      }]
+    }, {
+      id: 2,
+      label: 'Level two 2-2',
+      disabled: true,
+      children: [{
+        id: 6,
+        label: 'Level three 3-2-1'
+      }, {
+        id: 7,
+        label: 'Level three 3-2-2',
+        disabled: true
+      }]
+    }]
+  }];
+
   let id = 1000;
 
   const regions = [{
@@ -211,6 +240,7 @@
       return {
         data,
         data2,
+        data3,
         regions,
         defaultProps,
         props,
@@ -357,6 +387,63 @@ Used for node selection. In the following example, data for each layer is acquir
           resolve(data);
         }, 500);
       }
+    }
+  };
+</script>
+```
+:::
+
+### Disabled checkbox
+
+The checkbox of a node can be set as disabled.
+
+::: demo In the example, 'disabled' property is declared in defaultProps, and some nodes are set as 'disabled:true'. The corresponding checkboxes are disabled and can't be clicked.
+```html
+<el-tree
+  :data="data3"
+  :props="defaultProps"
+  show-checkbox
+  @check-change="handleCheckChange">
+</el-tree>
+
+<script>
+  export default {
+    data() {
+      return {
+        data3: [{
+          id: 1,
+          label: 'Level one 1',
+          children: [{
+            id: 3,
+            label: 'Level two 2-1',
+            children: [{
+              id: 4,
+              label: 'Level three 3-1-1'
+            }, {
+              id: 5,
+              label: 'Level three 3-1-2',
+              disabled: true
+            }]
+          }, {
+            id: 2,
+            label: 'Level two 2-2',
+            disabled: true,
+            children: [{
+              id: 6,
+              label: 'Level three 3-2-1'
+            }, {
+              id: 7,
+              label: 'Level three 3-2-2',
+              disabled: true
+            }]
+          }]
+        }],
+        defaultProps: {
+            children: 'children',
+            label: 'label',
+            disabled: 'disabled',
+        },
+      };
     }
   };
 </script>
@@ -789,8 +876,9 @@ Only one node among the same level can be expanded at one time.
 ### props
 | Attribute | Description                              | Type   | Accepted Values | Default |
 | --------- | ---------------------------------------- | ------ | --------------- | ------- |
-| label     | specify which key of node object is used as the node's label | string | —               | —       |
-| children  | specify which key of node object is used as the node's subtree | string | —               | —       |
+| label     | specify which key of node object is used as the node's label | string, function(data, node) | —               | —       |
+| children | specify which node object is used as the node's subtree | string, function(data, node) | —               | —       |
+| disabled | specify which node's checkbox disabled |  boolean, function(data, node) | —    | —    |
 
 ### Method
 `Tree` has the following method, which returns the currently selected array of nodes.

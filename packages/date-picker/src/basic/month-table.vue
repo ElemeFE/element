@@ -63,11 +63,29 @@
     methods: {
       getCellStyle(month) {
         const style = {};
-        const date = new Date(this.date);
 
+        var year = this.date.getFullYear();
+        var date = new Date(0);
+        date.setFullYear(year);
         date.setMonth(month);
-        style.disabled = typeof this.disabledDate === 'function' &&
-          this.disabledDate(date);
+        date.setHours(0);
+        var nextMonth = new Date(date);
+        nextMonth.setMonth(month + 1);
+
+        var flag = false;
+        if (typeof this.disabledDate === 'function') {
+
+          while (date < nextMonth) {
+            if (this.disabledDate(date)) {
+              date = new Date(date.getTime() + 8.64e7);
+            } else {
+              break;
+            }
+          }
+          if ((date - nextMonth) === 0) flag = true;
+        }
+
+        style.disabled = flag;
         style.current = this.month === month;
 
         return style;
