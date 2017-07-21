@@ -185,6 +185,10 @@
       value: {
         required: true
       },
+      valueName: {
+        type: String,
+        default: 'value'
+      },
       size: String,
       disabled: Boolean,
       clearable: Boolean,
@@ -401,7 +405,7 @@
         if (this.isSelectAll) {
           for (let i = 0; i < this.list.length; i++) {
             let item = this.list[i];
-            value.push(item.value);
+            value.push(item[this.valueName]);
           }
         }
         this.$emit('input', value);
@@ -782,7 +786,7 @@
           let value = [];
           for (let i = 0; i < this.list.length; i++) {
             let item = this.list[i];
-            value.push(item.value);
+            value.push(item[this.valueName]);
           }
           this.$emit('input', value);
         }

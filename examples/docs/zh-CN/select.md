@@ -639,7 +639,8 @@
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | multiple | 是否多选 | boolean | — | false |
-| list | 是否启用全选按钮,需配合 `multiple` 使用 | Array | 选择项列表 | - |
+| list | 是否启用全选按钮,需配合 `multiple` 使用 | array | 选择项列表 | - |
+| valueName | list中value值的属性名 | string | - | value |
 | disabled | 是否禁用 | boolean | — | false |
 | size | 输入框尺寸 | string | large/small/mini | — |
 | clearable | 单选时是否可以清空选项 | boolean | — | false |
