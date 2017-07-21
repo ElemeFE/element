@@ -3,7 +3,7 @@ export default {
     indexPath() {
       var path = [this.index];
       var parent = this.$parent;
-      while (parent.$options.componentName !== 'ElMenu') {
+      while (parent && parent.$options.componentName !== 'ElMenu') {
         if (parent.index) {
           path.unshift(parent.index);
         }
