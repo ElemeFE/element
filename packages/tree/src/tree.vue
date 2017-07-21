@@ -79,7 +79,6 @@
         default: false
       },
       highlightCurrent: Boolean,
-      currentNodeKey: [String, Number],
       load: Function,
       filterNodeMethod: Function,
       accordion: Boolean,
@@ -108,10 +107,6 @@
       defaultExpandedKeys(newVal) {
         this.store.defaultExpandedKeys = newVal;
         this.store.setDefaultExpandedKeys(newVal);
-      },
-      currentNodeKey(newVal) {
-        this.store.setCurrentNodeKey(newVal);
-        this.store.currentNodeKey = newVal;
       },
       data(newVal) {
         this.store.setData(newVal);

@@ -861,7 +861,6 @@ Only one node among the same level can be expanded at one time.
 | load                  | method for loading subtree data          | function(node, resolve)     | —               | —       |
 | render-content        | render function for tree node            | Function(h, { node }        | —               | —       |
 | highlight-current     | whether current node is highlighted      | boolean                     | —               | false   |
-| current-node-key      | key of current node, a set only prop     | string, number              | —               | —       |
 | default-expand-all    | whether to expand all nodes by default   | boolean                     | —               | false   |
 | expand-on-click-node  | whether to expand or collapse node when clicking on the node, if false, then expand or collapse node only when clicking on the arrow icon. | —                           | true            |         |
 | auto-expand-parent    | whether to expand father node when a child node is expanded | boolean                     | —               | true    |
