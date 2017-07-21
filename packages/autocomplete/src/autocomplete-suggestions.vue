@@ -15,7 +15,8 @@
         <template v-for="(item, index) in suggestions" v-else>
           <li
             v-if="!parent.customItem&&html"
-            :class="{'highlighted': parent.highlightedIndex === index}"
+            :class="{'highlighted': parent.highlightedIndex === index,'disabled':item.openType?(item.openType=='0'?true:false):false}"
+            :title="item.openType?(item.openType=='0'?'暂不支持爬取，如有需求请联系客服人员':''):''"
             @click="select(item)"
             v-html='item[props.label]'
           >
@@ -74,7 +75,11 @@
 
     methods: {
       select(item) {
-        this.dispatch('ElAutocomplete', 'item-click', item);
+        if (item.openType) {
+          if (item.openType === 1) {
+            this.dispatch('ElAutocomplete', 'item-click', item);
+          }
+        }
       }
     },
 
