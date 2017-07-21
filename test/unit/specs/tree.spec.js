@@ -399,6 +399,49 @@ describe('Tree', () => {
     }, 0);
   });
 
+  it('setCurrentKey', (done) => {
+    vm = getTreeVm(':props="defaultProps" show-checkbox node-key="id"');
+    const tree = vm.$children[0];
+    tree.setCurrentKey(111);
+    vm.$nextTick(() => {
+      expect(tree.store.currentNode.data.id).to.equal(111);
+      done();
+    });
+  });
+
+  it('setCurrentNode', (done) => {
+    vm = getTreeVm(':props="defaultProps" show-checkbox node-key="id"');
+    const tree = vm.$children[0];
+    tree.setCurrentNode({
+      id: 111,
+      label: '三级 1-1'
+    });
+    vm.$nextTick(() => {
+      expect(tree.store.currentNode.data.id).to.equal(111);
+      done();
+    });
+  });
+
+  it('getCurrentKey', (done) => {
+    vm = getTreeVm(':props="defaultProps" show-checkbox node-key="id"');
+    const tree = vm.$children[0];
+    tree.setCurrentKey(111);
+    vm.$nextTick(() => {
+      expect(tree.getCurrentKey()).to.equal(111);
+      done();
+    });
+  });
+
+  it('getCurrentNode', (done) => {
+    vm = getTreeVm(':props="defaultProps" show-checkbox node-key="id"');
+    const tree = vm.$children[0];
+    tree.setCurrentKey(111);
+    vm.$nextTick(() => {
+      expect(tree.getCurrentNode().id).to.equal(111);
+      done();
+    });
+  });
+
   it('set disabled checkbox', done => {
     vm = getDisableTreeVm(':props="defaultProps" show-checkbox node-key="id"');
     const node = document.querySelectorAll('.el-tree-node__content')[2];

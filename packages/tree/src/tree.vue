@@ -136,6 +136,15 @@
       getCheckedKeys(leafOnly) {
         return this.store.getCheckedKeys(leafOnly);
       },
+      getCurrentNode() {
+        const currentNode = this.store.getCurrentNode();
+        return currentNode ? currentNode.data : null;
+      },
+      getCurrentKey() {
+        if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in setCheckedNodes');
+        const currentNode = this.getCurrentNode();
+        return currentNode ? currentNode[this.nodeKey] : null;
+      },
       setCheckedNodes(nodes, leafOnly) {
         if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in setCheckedNodes');
         this.store.setCheckedNodes(nodes, leafOnly);
@@ -146,6 +155,14 @@
       },
       setChecked(data, checked, deep) {
         this.store.setChecked(data, checked, deep);
+      },
+      setCurrentNode(node) {
+        if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in setCheckedNodes');
+        this.store.setUserCurrentNode(node);
+      },
+      setCurrentKey(key) {
+        if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in setCheckedNodes');
+        this.store.setCurrentNodeKey(key);
       },
       handleNodeExpand(nodeData, node, instance) {
         this.broadcast('ElTreeNode', 'tree-node-expand', node);
