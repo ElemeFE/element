@@ -262,8 +262,7 @@
     },
     methods: {
       hideTable($event) {
-        let node = $event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
-        node.style.display = 'none';
+        this.$emit('pick-child');
       },
       calcId(cell) {
         if (this.getCellClasses(cell).indexOf('prev-month') > -1) {
@@ -473,7 +472,6 @@
         }
 
         newDate.setDate(parseInt(text, 10));
-
         if (this.selectionMode === 'range') {
           if (this.minDate && this.maxDate) {
             const minDate = new Date(newDate.getTime());

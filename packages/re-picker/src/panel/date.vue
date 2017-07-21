@@ -84,6 +84,7 @@
                         <date-table
                                 v-show="currentView === 'date'"
                                 @pick="handleDatePick"
+                                @pick-child="chooseDate"
                                 :year="year"
                                 :month="month"
                                 :date="date"
@@ -213,6 +214,10 @@
         this.currentView = 'year';
       },
 
+      chooseDate() {
+        this.$emit('pick', this.newDate);
+      },
+
       // XXX: 没用到
       // handleLabelClick() {
       //   if (this.currentView === 'date') {
@@ -338,7 +343,7 @@
       handleDatePick(value) {
         if (this.selectionMode === 'day') {
           if (!this.showTime) {
-            this.$emit('pick', new Date(value.getTime()));
+            this.newDate = new Date(value.getTime());
           }
           this.date.setFullYear(value.getFullYear());
           this.date.setMonth(value.getMonth(), value.getDate());
@@ -434,7 +439,8 @@
         width: 0,
         format: '',
         resource: [],
-        seedCount: 0
+        seedCount: 0,
+        newDate: ''
       };
     },
     computed: {
