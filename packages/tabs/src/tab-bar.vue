@@ -33,10 +33,9 @@
 
           const transform = `translateX(${offset}px)`;
           style.width = tabWidth + 'px';
-          style.transform = transform;
-          style.msTransform = transform;
-          style.webkitTransform = transform;
-
+          ['transfrom', 'msTransform', 'webkitTransform'].forEach(item => {
+            style[item] = transform
+          });
           return style;
         }
       }
