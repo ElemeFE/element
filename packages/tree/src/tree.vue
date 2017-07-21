@@ -162,6 +162,10 @@
       handleNodeExpand(nodeData, node, instance) {
         this.broadcast('ElTreeNode', 'tree-node-expand', node);
         this.$emit('node-expand', nodeData, node, instance);
+      },
+      updateKeyChildren(key, data) {
+        if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in updateKeyChild');
+        this.store.updateChildren(key, data);
       }
     },
 

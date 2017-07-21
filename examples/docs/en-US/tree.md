@@ -884,6 +884,7 @@ Only one node among the same level can be expanded at one time.
 | Method          | Description                              | Parameters                               |
 | --------------- | ---------------------------------------- | ---------------------------------------- |
 | filter          | filter all tree nodes, filtered nodes will be hidden | Accept a parameter which will be used as first parameter for filter-node-method |
+| updateKeyChildren | set new data to node, only works when `node-key` is assigned  | (key, data) Accept two parameters: 1. key of node 2. new data |
 | getCheckedNodes | If the node can be selected (`show-checkbox` is `true`), it returns the currently selected array of nodes | Accept a boolean type parameter whose default value is `false`. If the parameter is `true`, it only returns the currently selected array of sub-nodes. |
 | setCheckedNodes | set certain nodes to be checked, only works when `node-key` is assigned | an array of nodes to be checked          |
 | getCheckedKeys  | If the node can be selected (`show-checkbox` is `true`), it returns the currently selected array of node's keys | (leafOnly) Accept a boolean type parameter whose default value is `false`. If the parameter is `true`, it only returns the currently selected array of sub-nodes. |
