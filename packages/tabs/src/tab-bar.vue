@@ -34,7 +34,7 @@
           const transform = `translateX(${offset}px)`;
           style.width = tabWidth + 'px';
           ['transfrom', 'msTransform', 'webkitTransform'].forEach(item => {
-            style[item] = transform
+            style[item] = transform;
           });
           return style;
         }
