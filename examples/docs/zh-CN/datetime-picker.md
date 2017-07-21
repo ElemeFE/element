@@ -1,7 +1,13 @@
 <script>
   module.exports = {
+    methods: {
+      changeTime(granularity) {
+        this.granularity = granularity;
+      }
+    },
     data() {
       return {
+        granularity: 'second',
         pickerOptions1: {
           shortcuts: [{
             text: '今天',
@@ -166,11 +172,12 @@
 ```html
 <template>
   <div class="block">
-    <span class="demonstration">时间精度为时</span>
+    <span class="demonstration">时间精度为时</span><el-button @click="changeTime('hour')">时</el-button><el-button @click="changeTime('minute')">分</el-button>
     <el-date-picker
       v-model="value5"
+      :editable="false"
       type="datetime"
-      granularity="hour"
+      :granularity="granularity"
       placeholder="选择日期时间">
     </el-date-picker>
   </div>

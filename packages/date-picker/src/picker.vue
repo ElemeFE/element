@@ -241,6 +241,9 @@ export default {
   },
 
   watch: {
+    granularity(val) {
+      this.picker = '';
+    },
     pickerVisible(val) {
       if (!val) this.dispatch('ElFormItem', 'el.form.blur');
       if (this.readonly || this.disabled) return;
@@ -317,6 +320,12 @@ export default {
 
     displayValue: {
       get() {
+        if (this.granularity === 'hour' && this.currentValue) {
+          this.currentValue.setMinutes(0);
+          this.currentValue.setSeconds(0);
+        } else if (this.granularity === 'minute' && this.currentValue) {
+          this.currentValue.setSeconds(0);
+        }
         const value = this.currentValue;
         if (!value) return;
         const formatter = (

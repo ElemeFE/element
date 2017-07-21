@@ -150,6 +150,7 @@
         class="el-picker-panel__footer"
         v-show="footerVisible && currentView === 'date'">
         <a
+          v-if="!granularity"
           href="JavaScript:"
           class="el-picker-panel__link-btn"
           @click="changeToNow">{{ t('el.datepicker.now') }}</a>
