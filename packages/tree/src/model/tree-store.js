@@ -144,12 +144,10 @@ export default class TreeStore {
     const checkedNodes = [];
     const traverse = function(node) {
       const childNodes = node.root ? node.root.childNodes : node.childNodes;
-
       childNodes.forEach((child) => {
         if ((!leafOnly && child.checked) || (leafOnly && child.isLeaf && child.checked)) {
-          checkedNodes.push(child.data);
+          checkedNodes.push(child);
         }
-
         traverse(child);
       });
     };
