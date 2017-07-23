@@ -113,11 +113,6 @@
         }
       }
     },
-
-    updated() {
-      this.update();
-    },
-
     render(h) {
       const {
         type,
