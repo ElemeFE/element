@@ -79,7 +79,6 @@
         default: false
       },
       highlightCurrent: Boolean,
-      currentNodeKey: [String, Number],
       load: Function,
       filterNodeMethod: Function,
       accordion: Boolean,
@@ -109,10 +108,6 @@
         this.store.defaultExpandedKeys = newVal;
         this.store.setDefaultExpandedKeys(newVal);
       },
-      currentNodeKey(newVal) {
-        this.store.setCurrentNodeKey(newVal);
-        this.store.currentNodeKey = newVal;
-      },
       data(newVal) {
         this.store.setData(newVal);
       }
@@ -136,16 +131,33 @@
       getCheckedKeys(leafOnly) {
         return this.store.getCheckedKeys(leafOnly);
       },
+      getCurrentNode() {
+        const currentNode = this.store.getCurrentNode();
+        return currentNode ? currentNode.data : null;
+      },
+      getCurrentKey() {
+        if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in getCurrentKey');
+        const currentNode = this.getCurrentNode();
+        return currentNode ? currentNode[this.nodeKey] : null;
+      },
       setCheckedNodes(nodes, leafOnly) {
         if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in setCheckedNodes');
         this.store.setCheckedNodes(nodes, leafOnly);
       },
       setCheckedKeys(keys, leafOnly) {
-        if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in setCheckedNodes');
+        if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in setCheckedKeys');
         this.store.setCheckedKeys(keys, leafOnly);
       },
       setChecked(data, checked, deep) {
         this.store.setChecked(data, checked, deep);
+      },
+      setCurrentNode(node) {
+        if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in setCurrentNode');
+        this.store.setUserCurrentNode(node);
+      },
+      setCurrentKey(key) {
+        if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in setCurrentKey');
+        this.store.setCurrentNodeKey(key);
       },
       handleNodeExpand(nodeData, node, instance) {
         this.broadcast('ElTreeNode', 'tree-node-expand', node);

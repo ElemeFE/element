@@ -860,7 +860,6 @@
 | load                  | 加载子树数据的方法                                | function(node, resolve)     | —    | —     |
 | render-content        | 树节点的内容区的渲染 Function                      | Function(h, { node }        | —    | —     |
 | highlight-current     | 是否高亮当前选中节点，默认值是 false。                   | boolean                     | —    | false |
-| current-node-key      | 当前选中节点的 key，只写属性                         | string, number              | —    | —     |
 | default-expand-all    | 是否默认展开所有节点                               | boolean                     | —    | false |
 | expand-on-click-node  | 是否在点击节点的时候展开或者收缩节点， 默认值为 true，如果为 false，则只有点箭头图标的时候才会展开或者收缩节点。 | boolean                     | —    | true  |
 | auto-expand-parent    | 展开子节点的时候是否自动展开父节点                        | boolean                     | —    | true  |
@@ -889,6 +888,10 @@
 | getCheckedKeys  | 若节点可被选择（即 `show-checkbox` 为 `true`），则返回目前被选中的节点所组成的数组 | (leafOnly) 接收一个 boolean 类型的参数，若为 `true` 则仅返回被选中的叶子节点的 keys，默认值为 `false` |
 | setCheckedKeys  | 通过 keys 设置目前勾选的节点，使用此方法必须设置 node-key 属性  | (keys, leafOnly) 接收两个参数，1. 勾选节点的 key 的数组 2. boolean 类型的参数，若为 `true` 则仅设置叶子节点的选中状态，默认值为 `false` |
 | setChecked      | 通过 key / data 设置某个节点的勾选状态，使用此方法必须设置 node-key 属性 | (key/data, checked, deep) 接收三个参数，1. 勾选节点的 key 或者 data 2. boolean 类型，节点是否选中  3. boolean 类型，是否设置子节点 ，默认为 false |
+| getCurrentKey   | 获取当前被选中节点的 key，使用此方法必须设置 node-key 属性，若没有节点被选中则返回 null | — |
+| getCurrentNode  | 获取当前被选中节点的 node，若没有节点被选中则返回 null | — |
+| setCurrentKey   | 通过 key 设置某个节点的当前选中状态，使用此方法必须设置 node-key 属性 | (key) 待被选节点的 key |
+| setCurrentNode  | 通过 node 设置某个节点的当前选中状态，使用此方法必须设置 node-key 属性 | (node) 待被选节点的 node |
 
 ### Events
 | 事件名称           | 说明             | 回调参数                                     |

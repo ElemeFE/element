@@ -861,7 +861,6 @@ Only one node among the same level can be expanded at one time.
 | load                  | method for loading subtree data          | function(node, resolve)     | —               | —       |
 | render-content        | render function for tree node            | Function(h, { node }        | —               | —       |
 | highlight-current     | whether current node is highlighted      | boolean                     | —               | false   |
-| current-node-key      | key of current node, a set only prop     | string, number              | —               | —       |
 | default-expand-all    | whether to expand all nodes by default   | boolean                     | —               | false   |
 | expand-on-click-node  | whether to expand or collapse node when clicking on the node, if false, then expand or collapse node only when clicking on the arrow icon. | —                           | true            |         |
 | auto-expand-parent    | whether to expand father node when a child node is expanded | boolean                     | —               | true    |
@@ -890,6 +889,10 @@ Only one node among the same level can be expanded at one time.
 | getCheckedKeys  | If the node can be selected (`show-checkbox` is `true`), it returns the currently selected array of node's keys | (leafOnly) Accept a boolean type parameter whose default value is `false`. If the parameter is `true`, it only returns the currently selected array of sub-nodes. |
 | setCheckedKeys  | set certain nodes to be checked, only works when `node-key` is assigned | (keys, leafOnly) Accept two parameters: 1. an array of node's keys to be checked 2. a boolean type parameter whose default value is `false`. If the parameter is `true`, it only returns the currently selected array of sub-nodes. |
 | setChecked      | set node to be checked or not, only works when `node-key` is assigned | (key/data, checked, deep) Accept three parameters: 1. node's key or data to be checked 2. a boolean typed parameter indicating checked or not. 3. a boolean typed parameter indicating deep or not. |
+| getCurrentKey   | return the highlight node's key (null if no node is highlighted) | — |
+| getCurrentNode  | return the highlight node (null if no node is highlighted) | — |
+| setCurrentKey   | set highlighted node by key, only works when `node-key` is assigned | (key) the node's key to be highlighted |
+| setCurrentNode  | set highlighted node, only works when `node-key` is assigned | (node) the node to be highlighted |
 
 ### Events
 | Event Name     | Description                              | Parameters                               |
