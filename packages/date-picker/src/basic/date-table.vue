@@ -431,7 +431,8 @@
         } else if (selectionMode === 'day') {
           this.$emit('pick', newDate);
         } else if (selectionMode === 'week') {
-          var weekNumber = getWeekNumber(newDate);
+          var weekNumber = getWeekNumber(newDate, (this.firstDayOfWeek + 1) % 7);
+          newDate.setDate(newDate.getDate());
 
           const value = newDate.getFullYear() + 'w' + weekNumber;
           this.$emit('pick', {

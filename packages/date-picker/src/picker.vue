@@ -107,9 +107,9 @@ const TYPE_VALUE_RESOLVER_MAP = {
     }
   },
   week: {
-    formatter(value, format) {
+    formatter(value, format, offset) {
       let date = formatDate(value, format);
-      const week = getWeekNumber(value);
+      const week = getWeekNumber(value, offset);
 
       date = /WW/.test(date)
             ? date.replace(/WW/, week < 10 ? '0' + week : week)
@@ -324,8 +324,8 @@ export default {
           TYPE_VALUE_RESOLVER_MAP['default']
         ).formatter;
         const format = DEFAULT_FORMATS[this.type];
-
-        return formatter(value, this.format || format, this.rangeSeparator);
+        const arg = this.type === 'week' ? ((this.picker && this.picker.firstDayOfWeek) || 7 + 1) % 7 : this.rangeSeparator;
+        return formatter(value, this.format || format, arg);
       },
 
       set(value) {
