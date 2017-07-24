@@ -15,7 +15,7 @@
 - Tree
   - 新增 `disabled` 属性，#5937
 - Menu
-  - 新增 `collaspe` 属性，#5941
+  - 新增 `collapse` 属性，#5941
 - Select
   - 新增 `value-key` 属性，#5897
 
