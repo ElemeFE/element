@@ -13,13 +13,13 @@
     :value="displayValue"
     @change.native="displayValue = $event.target.value"
     :validateEvent="false"
+    @mouseenter.native="handleMouseEnterIcon"
+    @mouseleave.native="showClose = false"
     ref="reference">
     <i slot="icon"
       class="el-input__icon"
       @click="handleClickIcon"
       :class="[showClose ? 'el-icon-close' : triggerClass]"
-      @mouseenter="handleMouseEnterIcon"
-      @mouseleave="showClose = false"
       v-if="haveTrigger">
     </i>
   </el-input>
