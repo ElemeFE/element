@@ -22,7 +22,7 @@
   import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
 
   const parseTime = function(time) {
-    const values = ('' || time).split(':');
+    const values = (time || '').split(':');
     if (values.length >= 2) {
       const hours = parseInt(values[0], 10);
       const minutes = parseInt(values[1], 10);

@@ -1,5 +1,66 @@
 ## 更新日志
 
+### 1.4.0 Boron
+*2017-07-21*
+
+#### 新特性：
+- Message
+  - `message` 属性支持 VNode，#5463（by @egyptik）
+- ColorPicker
+  - 新增 `active-change` 事件，#5775
+- Popover
+  - 新增 `open-delay` 属性，#5842（by @kaungmyatlwin）
+- Table
+  - `formatter` 新增 `value` 参数，#5709（by @haledeng）
+- Tree
+  - 新增 `disabled` 属性，#5937
+- Menu
+  - 新增 `collapse` 属性，#5941
+- Select
+  - 新增 `value-key` 属性，#5897
+
+#### 修复：
+- DatePicker
+  - 部分内部文案不受 i18n 控制的问题，#5485
+  - 初始值为空时，选择时间后的返回值毫秒部分不为零的问题，#5663
+  - `disabledDate` 范围被扩大的问题，#4946（by @liyangworld）
+- Steps
+  - 动态增减步骤后的样式错误，#5456（by @elfman）
+- Table
+  - 带有固定列且可展开时，鼠标 hover 高亮行错位的问题，#5471（by @elfman）
+  - 部分浏览器不支持 `classList` 的问题，#5613（by @flynntsc）
+- Select
+  - 单选时打开下拉框有时无法定位到已选中项的问题，#5564（by @wacky6）
+  - 多选时 Vue 2.4.x 报错的问题，#5897
+- Radio
+  - RadioGroup 内只有一个 Radio 时的圆角丢失问题，#5646（by @YYvanYang）
+- Upload
+  - `auto-upload` 为 false 时，无法选择之前删除的文件的问题，#5706
+  - `disabled` 时删除按钮仍可见并可操作的问题，#5841
+  - 兼容 Vue 2.4 `key` 不能是对象的问题，#5872
+- MessageBox
+  - 非 `confirm` 或 `prompt` 情况下点击取消按钮仍然被 resolve 的问题，#5658
+- Rate
+  - 初始值带有小数时，激活的 icon 不显示小数部分的问题，#5785
+- Pagination
+  - 总页数的 i18n 不与 vue-i18n@6.x 兼容的问题，#5796（by @mario56）
+  - 当前页为最大页数减一时，错误地显示省略号的问题，#5861（by @openks）
+- Loading
+  - 不可见元素绑定 Loading 时的样式错误，#5649（by @xiongzixiao）
+- Cascader
+  - 输入框中的文字未垂直居中的问题，#5819（by @jianzhi92）
+- Tree
+  - 在 lazy 模式下 `setCheckedKeys` 和 `setCheckedNodes` 方法的 bug，#5937
+  - 在 lazy 模式下勾选父级节点会一次性加载全部后代节点的问题，#5963
+- Form
+  - 未在 FormItem 上指定 `label` 时，label 的具名 slot 失效的问题，#5921
+- Tooltip
+  - Vue 2.4.x 下触发元素为自定义组件时不工作的问题，#5916
+
+#### 非兼容性更新:
+- Select
+  - 值为对象类型时，需要提供一个 `value-key` 作为唯一性标识，#5897
+
 ### 1.3.7
 *2017-06-18*
 
