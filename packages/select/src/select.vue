@@ -248,9 +248,6 @@
     },
 
     watch: {
-      isSelectAll(val) {
-        this.$emit('select-all', val);
-      },
       placeholder(val) {
         this.cachedPlaceHolder = this.currentPlaceholder = val;
       },
@@ -400,6 +397,7 @@
         } else {
           this.selectedLabel = result.join(',');
         }
+        this.$emit('select-all', this.isSelectAll);
         this.toggleMenu();
       },
 
@@ -794,11 +792,7 @@
           this.$emit('input', value);
         }
       }
-      if (this.selectedLabel === '全部') {
-        this.$emit('select-all', true);
-      } else {
-        this.$emit('select-all', false);
-      }
+      this.$emit('select-all', this.isSelectAll);
       addResizeListener(this.$el, this.handleResize);
       if (this.remote && this.multiple) {
         this.resetInputHeight();
