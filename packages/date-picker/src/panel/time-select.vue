@@ -108,9 +108,18 @@
       },
 
       scrollDown(step) {
-        const index = this.items.map(item => item.value).indexOf(this.value);
-        const nextIndex = (index + step) % this.items.length;
-        this.value = this.items[nextIndex].value;
+        let index = this.items.map(item => item.value).indexOf(this.value);
+        let length = this.items.length;
+        while (length-- && step) {
+          index = (index + 1) % this.items.length;
+          const item = this.items[index];
+          if (!item.disabled) {
+            step--;
+          }
+        }
+        if (!this.items[index].disabled) {
+          this.value = this.items[index].value;
+        }
       }
     },
 
