@@ -17,7 +17,7 @@
           }
         }, 1000);
       };
-      var validaePass = (rule, value, callback) => {
+      var vaildatePass = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('Please input the password'));
         } else {
@@ -27,7 +27,7 @@
           callback();
         }
       };
-      var validaePass2 = (rule, value, callback) => {
+      var validatePass2 = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('Please input the password again'));
         } else if (value !== this.ruleForm2.pass) {
@@ -101,10 +101,10 @@
         },
         rules2: {
           pass: [
-            { validator: validaePass, trigger: 'blur' }
+            { validator: validatePass, trigger: 'blur' }
           ],
           checkPass: [
-            { validator: validaePass2, trigger: 'blur' }
+            { validator: validatePass2, trigger: 'blur' }
           ],
           age: [
             { validator: checkAge, trigger: 'blur' }
@@ -549,7 +549,7 @@ Form component allows you to verify your data, helping you find and correct erro
           }
         }, 1000);
       };
-      var validaePass = (rule, value, callback) => {
+      var validatePass = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('Please input the password'));
         } else {
@@ -559,7 +559,7 @@ Form component allows you to verify your data, helping you find and correct erro
           callback();
         }
       };
-      var validaePass2 = (rule, value, callback) => {
+      var validatePass2 = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('Please input the password again'));
         } else if (value !== this.ruleForm2.pass) {
@@ -576,10 +576,10 @@ Form component allows you to verify your data, helping you find and correct erro
         },
         rules2: {
           pass: [
-            { validator: validaePass, trigger: 'blur' }
+            { validator: validatePass, trigger: 'blur' }
           ],
           checkPass: [
-            { validator: validaePass2, trigger: 'blur' }
+            { validator: validatePass2, trigger: 'blur' }
           ],
           age: [
             { validator: checkAge, trigger: 'blur' }
