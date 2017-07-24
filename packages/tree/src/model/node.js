@@ -300,9 +300,9 @@ export default class Node {
   setChecked(value, deep, recursion, passValue) {
     this.indeterminate = value === 'half';
     this.checked = value === true;
-    let { allWithoutDisable } = getChildState(this.childNodes);
+    let { all, allWithoutDisable } = getChildState(this.childNodes);
 
-    if (this.childNodes.length && allWithoutDisable) {
+    if (this.childNodes.length && (!all && allWithoutDisable)) {
       this.checked = false;
       value = false;
     }
