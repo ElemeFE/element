@@ -409,7 +409,7 @@
             this.markRange(this.minDate);
           } else if (this.minDate && !this.maxDate) {
             if (newDate >= this.minDate) {
-              const maxDate = new Date(newDate.getTime());
+              const maxDate = new Date(newDate.getTime() + 1000 * 60 * 60 * 24 - 1);
               this.rangeState.selecting = false;
 
               this.$emit('pick', {
