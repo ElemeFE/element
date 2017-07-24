@@ -19,6 +19,7 @@
         v-model="node.checked"
         :indeterminate="node.indeterminate"
         :disabled="!!node.disabled"
+        @click.native.stop
         @change="handleCheckChange">
       </el-checkbox>
       <span
