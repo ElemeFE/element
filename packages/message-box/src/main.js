@@ -8,6 +8,7 @@ const defaults = {
   lockScroll: true,
   closeOnClickModal: true,
   closeOnPressEscape: true,
+  closeOnHashChange: true,
   inputValue: null,
   inputPlaceholder: '',
   inputPattern: null,
@@ -99,7 +100,7 @@ const showNextMsg = () => {
       } else {
         delete instance.$slots.default;
       }
-      ['modal', 'showClose', 'closeOnClickModal', 'closeOnPressEscape'].forEach(prop => {
+      ['modal', 'showClose', 'closeOnClickModal', 'closeOnPressEscape', 'closeOnHashChange'].forEach(prop => {
         if (instance[prop] === undefined) {
           instance[prop] = true;
         }
@@ -115,15 +116,12 @@ const showNextMsg = () => {
 
 const MessageBox = function(options, callback) {
   if (Vue.prototype.$isServer) return;
-  if (typeof options === 'string') {
+  if (typeof options === 'string' || isVNode(options)) {
     options = {
       message: options
     };
-    if (arguments[1]) {
+    if (typeof arguments[1] === 'string') {
       options.title = arguments[1];
-    }
-    if (arguments[2]) {
-      options.type = arguments[2];
     }
   } else if (options.callback && !callback) {
     callback = options.callback;

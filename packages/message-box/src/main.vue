@@ -12,7 +12,7 @@
         <div class="el-message-box__content" v-if="message !== ''">
           <div class="el-message-box__status" :class="[ typeClass ]"></div>
           <div class="el-message-box__message" :style="{ 'margin-left': typeClass ? '50px' : '0' }">
-            <slot><p>{{ message }}</p></slot>
+            <slot><p v-html="message"></p></slot>
           </div>
           <div class="el-message-box__input" v-show="showInput">
             <el-input v-model="inputValue" @keyup.enter.native="handleAction('confirm')" :placeholder="inputPlaceholder" ref="input"></el-input>
@@ -74,6 +74,9 @@
         default: true
       },
       closeOnPressEscape: {
+        default: true
+      },
+      closeOnHashChange: {
         default: true
       }
     },
@@ -207,6 +210,18 @@
           this.editorErrorMessage = '';
           removeClass(this.$refs.input.$el.querySelector('input'), 'invalid');
         }
+      }
+    },
+
+    mounted() {
+      if (this.closeOnHashChange) {
+        window.addEventListener('hashchange', this.close);
+      }
+    },
+
+    beforeDestroy() {
+      if (this.closeOnHashChange) {
+        window.removeEventListener('hashchange', this.close);
       }
     },
 

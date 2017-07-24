@@ -98,7 +98,11 @@
   };
 </script>
 ## MessageBox 弹框
-模拟系统的消息提示框而实现的一套模态对话框组件，用于消息提示、成功提示、错误提示、询问信息。
+模拟系统的消息提示框而实现的一套模态对话框组件，用于消息提示、确认消息和提交内容。
+
+:::tip
+从场景上说，MessageBox 的作用是美化系统自带的 `alert`、`confirm` 和 `prompt`，因此适合展示较为简单的内容。如果需要弹出较为复杂的内容，请使用 Dialog。
+:::
 
 ### 消息提示
 
@@ -171,7 +175,7 @@
 
 当用户进行操作时会被触发，中断用户操作，提示用户进行输入的对话框。
 
-:::demo 调用`$prompt`方法即可打开消息提示，它模拟了系统的 `prompt`。可以用`inputPattern`字段自己规定匹配模式，或者用`inputValidator`规定校验函数，可以返回`Boolean`或`String`，`Boolean`为`false`或字符串时均表示校验未通过，`String`相当于定义了`inputErrorMessage`字段。此外，可以用`inputPlaceholder`字段来定义输入框的占位符。
+:::demo 调用`$prompt`方法即可打开消息提示，它模拟了系统的 `prompt`。可以用`inputPattern`字段自己规定匹配模式，或者用`inputValidator`规定校验函数，可以返回`Boolean`或`String`，返回`false`或字符串时均表示校验未通过，同时返回的字符串相当于定义了`inputErrorMessage`字段。此外，可以用`inputPlaceholder`字段来定义输入框的占位符。
 
 ```html
 <template>
@@ -259,17 +263,25 @@
 
 ### 全局方法
 
-Element 为 Vue.prototype 添加了如下全局方法：$msgbox, $alert, $confirm 和 $prompt。因此在 vue instance 中可以采用本页面中的方式调用 `MessageBox`。
+如果你完整引入了 Element，它会为 Vue.prototype 添加如下全局方法：$msgbox, $alert, $confirm 和 $prompt。因此在 Vue instance 中可以采用本页面中的方式调用 `MessageBox`。调用参数为：
+- `$msgbox(options)`
+- `$alert(message, title, options)` 或 `$alert(message, options)`
+- `$confirm(message, title, options)` 或 `$confirm(message, options)`
+- `$prompt(message, title, options)` 或 `$prompt(message, options)`
 
 ### 单独引用
 
-单独引入 `MessageBox`：
+如果单独引入 `MessageBox`：
 
 ```javascript
 import { MessageBox } from 'element-ui';
 ```
 
-对应于上述四个全局方法的调用方法依次为：MessageBox, MessageBox.alert, MessageBox.confirm 和 MessageBox.prompt。
+那么对应于上述四个全局方法的调用方法依次为：MessageBox, MessageBox.alert, MessageBox.confirm 和 MessageBox.prompt，调用参数与全局方法相同。
+
+:::warning
+`message` 属性虽然支持传入 HTML 片段，但是在网站上动态渲染任意 HTML 是非常危险的，因为容易导致 [XSS 攻击](https://en.wikipedia.org/wiki/Cross-site_scripting)。请确保 `message` 的内容是可信的，**永远不要**将用户提交的内容赋值给 `message` 属性。
+:::
 
 ### Options
 
@@ -290,6 +302,7 @@ import { MessageBox } from 'element-ui';
 | confirmButtonClass | 确定按钮的自定义类名 | string | — | — |
 | closeOnClickModal | 是否可通过点击遮罩关闭 MessageBox | boolean | — | true（以 alert 方式调用时为 false） |
 | closeOnPressEscape | 是否可通过按下 ESC 键关闭 MessageBox | boolean | — | true（以 alert 方式调用时为 false） |
+| closeOnHashChange | 是否在 hashchange 时关闭 MessageBox | boolean | — | true |
 | showInput | 是否显示输入框 | boolean | — | false（以 prompt 方式调用时为 true）|
 | inputPlaceholder | 输入框的占位符 | string | — | — |
 | inputValue | 输入框的初始文本 | string | — | — |

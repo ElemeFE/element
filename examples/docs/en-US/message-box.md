@@ -99,7 +99,10 @@
 
 ## MessageBox
 
-A set of modal boxes simulating system message box, mainly for message prompt, success tips, error messages and query information.
+A set of modal boxes simulating system message box, mainly for alerting information, confirm operations and prompting messages.
+:::tip
+By design MessageBox provides simulations of system's `alert`, `confirm` and `prompt`，so it's content should be simple. For more complicated contents, please use Dialog.
+:::
 
 ### Alert
 
@@ -262,17 +265,25 @@ Can be customized to show various content.
 
 ### Global method
 
-Element has added the following global methods for Vue.prototype: `$msgbox`, `$alert`, `$confirm` and `$prompt`. So in a vue instance you can call `MessageBox` like what we did in this page.
+If Element is fully imported, it will add the following global methods for Vue.prototype: `$msgbox`, `$alert`, `$confirm` and `$prompt`. So in a Vue instance you can call `MessageBox` like what we did in this page. The parameters are:
+- `$msgbox(options)`
+- `$alert(message, title, options)` or `$alert(message, options)`
+- `$confirm(message, title, options)` or `$confirm(message, options)`
+- `$prompt(message, title, options)` or `$prompt(message, options)`
 
 ### Local import
 
-Import `MessageBox`:
+If you prefer importing `MessageBox` on demand:
 
 ```javascript
 import { MessageBox } from 'element-ui';
 ```
 
-The corresponding methods are: `MessageBox`, `MessageBox.alert`, `MessageBox.confirm` and `MessageBox.prompt`.
+The corresponding methods are: `MessageBox`, `MessageBox.alert`, `MessageBox.confirm` and `MessageBox.prompt`. The parameters are the same as above.
+
+:::warning
+Although `message` property supports HTML strings, dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily lead to [XSS attacks](https://en.wikipedia.org/wiki/Cross-site_scripting). Please make sure the content of `message` is trusted, and **never** assign `message` to user-provided content.
+:::
 
 ### Options
 
@@ -293,6 +304,7 @@ The corresponding methods are: `MessageBox`, `MessageBox.alert`, `MessageBox.con
 | confirmButtonClass | custom class name of confirm button | string | — | — |
 | closeOnClickModal | whether MessageBox can be closed by clicking the mask | boolean | — | true (false when called with alert) |
 | closeOnPressEscape | whether MessageBox can be closed by pressing the ESC | boolean | — | true (false when called with alert) |
+| closeOnHashChange | whether to close MessageBox when hash changes | boolean | — | true |
 | showInput | whether to show an input | boolean | — | false (true when called with prompt) |
 | inputPlaceholder | placeholder of input | string | — | — |
 | inputValue | initial value of input | string | — | — |
