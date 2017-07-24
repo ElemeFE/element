@@ -101,6 +101,10 @@
       debounce: {
         type: Number,
         default: 300
+      },
+      decimal: {
+        type: Number,
+        default: null
       }
     },
     data() {
@@ -180,9 +184,10 @@
       },
       setCurrentValue(newVal) {
         const oldVal = this.currentValue;
+        const reg = this.decimal ? new RegExp(`^(\\+|-)?\\d+\\.?\\d{0,${this.decimal}}$`) : null;
         if (newVal >= this.max) newVal = this.max;
         if (newVal <= this.min) newVal = this.min;
-        if (oldVal === newVal) {
+        if (reg && !reg.test(newVal.toString()) || oldVal === newVal) {
           this.$refs.input.setCurrentValue(this.currentValue);
           return;
         }
@@ -195,6 +200,11 @@
           return;
         }
         const newVal = Number(value);
+        if (value.endsWith('.') && value.indexOf('.') === value.lastIndexOf('.')) {
+          this.$emit('change', newVal, this.currentValue);
+          this.$emit('input', newVal);
+          this.currentValue = value;
+        }
         if (!isNaN(newVal)) {
           this.setCurrentValue(newVal);
         } else {
