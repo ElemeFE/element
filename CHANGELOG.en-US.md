@@ -16,7 +16,7 @@
 - Tree
   - Added `disabled` attribute, #5937
 - Menu
-  - Added `collaspe` attribute, #5941
+  - Added `collapse` attribute, #5941
 - Select
   - Added `value-key` attribute, #5897
 
