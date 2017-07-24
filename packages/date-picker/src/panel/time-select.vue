@@ -105,6 +105,12 @@
 
       handleMenuEnter() {
         this.$nextTick(() => this.scrollToOption());
+      },
+
+      scrollDown(step) {
+        const index = this.items.findIndex(item => item.value === this.value);
+        const nextIndex = (index + step) % this.items.length;
+        this.value = this.items[nextIndex].value;
       }
     },
 
