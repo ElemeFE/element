@@ -11,7 +11,8 @@
 
   /* Colors
   -------------------------- */
-  --color-primary: #20a0ff;
+  --color-primary: #0dcfff;
+  /*--color-primary: #20a0ff;*/
 
   --color-success: #13ce66;
   --color-warning: #f7ba2a;
@@ -62,7 +63,7 @@
 
   /* Font
   -------------------------- */
-  --font-size-base: 14px;
+  --font-size-base: 12px;
   --font-color-base: var(--color-base-black);
   --font-color-disabled-base: #bbb;
 
@@ -88,7 +89,7 @@
 
   /* Checkbox
   -------------------------- */
-  --checkbox-font-size: 14px;
+  --checkbox-font-size: 12px;
   --checkbox-color: var(--color-base-black);
   --checkbox-input-height: 18px;
   --checkbox-input-width: 18px;
@@ -255,7 +256,8 @@
   --input-font-size: var(--font-size-base);
   --input-color: var(--font-color-base);
   --input-width: 140px;
-  --input-height: 36px;
+  --input-height: 28px;
+  /*--input-height: 36px;*/
   --input-border: var(--border-base);
   --input-border-color: var(--border-color-base);
   --input-border-radius: var(--border-radius-base);
@@ -331,7 +333,7 @@
 
   /* Button
   -------------------------- */
-  --button-font-size: 14px;
+  --button-font-size: 12px;
   --button-border-radius: var(--border-radius-base);
   --button-padding-vertical: 10px;
   --button-padding-horizontal: 15px;

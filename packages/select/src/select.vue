@@ -95,9 +95,9 @@
             v-if="showNewOption">
           </el-option>
           <slot></slot>
-          <div style="padding: 6px 10px 0;" v-if="list">
-            <el-checkbox v-model="isSelectAll" @change="selectAll">全部</el-checkbox>
-            <el-button :disabled="value.length === 0" type="primary" @click="confrimSelect">确定</el-button>
+          <div style="padding: 6px 10px 0; text-align: right; border-top: 1px solid #e7e7e7;" v-if="list">
+            <el-checkbox style="float: left; margin-top: 4px" v-model="isSelectAll" @change="selectAll">全部</el-checkbox>
+            <el-button style="border-radius: 14px; padding: 7px 16px;" :disabled="value.length === 0" @click="confrimSelect">确定</el-button>
           </div>
         </el-scrollbar>
         <p class="el-select-dropdown__empty" v-if="emptyText && (allowCreate && options.length === 0 || !allowCreate)">{{ emptyText }}</p>
@@ -397,6 +397,7 @@
         } else {
           this.selectedLabel = result.join(',');
         }
+        this.$emit('select-all', this.isSelectAll);
         this.toggleMenu();
       },
 
@@ -568,7 +569,7 @@
           if (!this.$refs.reference) return;
           let inputChildNodes = this.$refs.reference.$el.childNodes;
           let input = [].filter.call(inputChildNodes, item => item.tagName === 'INPUT')[0];
-          input.style.height = Math.max(this.$refs.tags.clientHeight + 6, sizeMap[this.size] || 36) + 'px';
+          input.style.height = Math.max(this.$refs.tags.clientHeight + 6, sizeMap[this.size] || 28) + 'px';
           if (this.visible && this.emptyText !== false) {
             this.broadcast('ElSelectDropdown', 'updatePopper');
           }
@@ -791,6 +792,7 @@
           this.$emit('input', value);
         }
       }
+      this.$emit('select-all', this.isSelectAll);
       addResizeListener(this.$el, this.handleResize);
       if (this.remote && this.multiple) {
         this.resetInputHeight();

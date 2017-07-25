@@ -111,6 +111,9 @@
     },
 
     methods: {
+      print(val) {
+        console.log(val);
+      },
       remoteMethod(query) {
         if (query !== '') {
           this.loading = true;
@@ -322,7 +325,7 @@
 :::demo 为`el-select`设置`multiple`属性即可启用多选，此时`v-model`的值为当前选中值所组成的数组，`list`为选择项所组成的数组。
 ```html
 <template>
-  <el-select v-model="value5" multiple placeholder="请选择" :list="options">
+  <el-select v-model="value5" multiple placeholder="请选择" :list="options" @select-all="print">
     <el-option
       v-for="item in options"
       :key="item.value"
