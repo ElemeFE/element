@@ -108,17 +108,20 @@
       },
 
       scrollDown(step) {
-        let index = this.items.map(item => item.value).indexOf(this.value);
-        let length = this.items.length;
-        while (length-- && step) {
-          index = (index + 1) % this.items.length;
-          const item = this.items[index];
+        const items = this.items;
+        let index = items.map(item => item.value).indexOf(this.value);
+        let length = items.length;
+        let total = Math.abs(step);
+        step = step > 0 ? 1 : -1;
+        while (length-- && total) {
+          index = (index + step + items.length) % items.length;
+          const item = items[index];
           if (!item.disabled) {
-            step--;
+            total--;
           }
         }
-        if (!this.items[index].disabled) {
-          this.value = this.items[index].value;
+        if (!items[index].disabled) {
+          this.value = items[index].value;
         }
       }
     },
