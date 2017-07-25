@@ -59,6 +59,7 @@
       rules: [Object, Array],
       error: String,
       validateStatus: String,
+      for: String,
       showMessage: {
         type: Boolean,
         default: true

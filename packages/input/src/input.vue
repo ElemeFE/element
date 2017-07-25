@@ -80,15 +80,20 @@
       placeholder: String,
       size: String,
       resize: String,
+      icon: String,
+      name: String,
+      form: String,
+      id: String,
+      maxlength: Number,
+      minlength: Number,
       readonly: Boolean,
       autofocus: Boolean,
-      icon: String,
       disabled: Boolean,
+      onIconClick: Function,
       type: {
         type: String,
         default: 'text'
       },
-      name: String,
       autosize: {
         type: [Boolean, Object],
         default: false
@@ -101,17 +106,13 @@
         type: String,
         default: 'off'
       },
-      form: String,
-      maxlength: Number,
-      minlength: Number,
       max: {},
       min: {},
       step: {},
       validateEvent: {
         type: Boolean,
         default: true
-      },
-      onIconClick: Function
+      }
     },
 
     computed: {
