@@ -140,6 +140,14 @@
 
       ajustScrollTop() {
         return this.$refs.spinner.ajustScrollTop();
+      },
+
+      scrollDown(step) {
+        this.$refs.spinner.scrollDown(step);
+      },
+
+      changeSelectionRange(step) {
+        this.$refs.spinner.changeSelectionRange(step);
       }
     },
 
