@@ -91,8 +91,12 @@
         return (this.format || '').indexOf('ss') !== -1;
       },
 
+      offset() {
+        return this.showSeconds ? 11 : 8;
+      },
+
       spinner() {
-        return this.selectionRange[0] < 11 ? this.$refs.minSpinner : this.$refs.maxSpinner;
+        return this.selectionRange[0] < this.offset ? this.$refs.minSpinner : this.$refs.maxSpinner;
       }
     },
 
@@ -209,8 +213,8 @@
       },
 
       setMaxSelectionRange(start, end) {
-        this.$emit('select-range', start + 11, end + 11);
-        this.selectionRange = [start + 11, end + 11];
+        this.$emit('select-range', start + this.offset, end + this.offset);
+        this.selectionRange = [start + this.offset, end + this.offset];
       },
 
       handleConfirm(visible = false, first = false) {
@@ -234,14 +238,15 @@
       },
 
       changeSelectionRange(step) {
-        const list = [0, 3, 6, 11, 14, 17];
-        const mapping = ['hours', 'minutes', 'seconds'];
+        const list = this.showSeconds ? [0, 3, 6, 11, 14, 17] : [0, 3, 8, 11];
+        const mapping = ['hours', 'minutes'].concat(this.showSeconds ? ['seconds'] : []);
         const index = list.indexOf(this.selectionRange[0]);
         const next = (index + step + list.length) % list.length;
-        if (next < 3) {
+        const half = list.length / 2;
+        if (next < half) {
           this.$refs.minSpinner.emitSelectRange(mapping[next]);
         } else {
-          this.$refs.maxSpinner.emitSelectRange(mapping[next - 3]);
+          this.$refs.maxSpinner.emitSelectRange(mapping[next - half]);
         }
       }
     },

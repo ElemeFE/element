@@ -152,8 +152,8 @@
       },
 
       changeSelectionRange(step) {
-        const list = [0, 3, 6];
-        const mapping = ['hours', 'minutes', 'seconds'];
+        const list = [0, 3].concat(this.showSeconds ? [6] : []);
+        const mapping = ['hours', 'minutes'].concat(this.showSeconds ? ['seconds'] : []);
         const index = list.indexOf(this.selectionRange[0]);
         const next = (index + step + list.length) % list.length;
         this.$refs.spinner.emitSelectRange(mapping[next]);
