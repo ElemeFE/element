@@ -219,12 +219,6 @@
 
         this.$emit('change', { [label]: now });
         this.ajustElTop(label.slice(0, -1), now);
-      },
-
-      changeSelectionRange(step) {
-        const list = ['hours', 'minutes', 'seconds'];
-        const index = list.indexOf(this.currentScrollbar);
-        this.emitSelectRange(list[(index + step) % list.length]);
       }
     }
   };

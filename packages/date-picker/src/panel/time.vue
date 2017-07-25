@@ -54,6 +54,9 @@
     watch: {
       visible(val) {
         this.currentVisible = val;
+        if (val) {
+          this.$nextTick(() => this.$refs.spinner.emitSelectRange('hours'));
+        }
       },
 
       pickerWidth(val) {
@@ -92,7 +95,8 @@
         selectableRange: [],
         currentDate: this.$options.defaultValue || this.date || new Date(),
         currentVisible: this.visible || false,
-        width: this.pickerWidth || 0
+        width: this.pickerWidth || 0,
+        selectionRange: [0, 2]
       };
     },
 
@@ -130,6 +134,7 @@
 
       setSelectionRange(start, end) {
         this.$emit('select-range', start, end);
+        this.selectionRange = [start, end];
       },
 
       handleConfirm(visible = false, first) {
@@ -147,7 +152,11 @@
       },
 
       changeSelectionRange(step) {
-        this.$refs.spinner.changeSelectionRange(step);
+        const list = [0, 3, 6];
+        const mapping = ['hours', 'minutes', 'seconds'];
+        const index = list.indexOf(this.selectionRange[0]);
+        const next = (index + step + list.length) % list.length;
+        this.$refs.spinner.emitSelectRange(mapping[next]);
       }
     },
 
