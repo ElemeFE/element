@@ -17,9 +17,12 @@ export default {
       // TAB or ESC or Enter
       if (keyCode === 9 || keyCode === 27 || keyCode === 13) {
         const input = this.$refs.reference;
-        const exist = this.picker.items.map(v => v.value).indexOf(input.currentValue) !== -1;
+        const index = this.picker.items.map(v => v.value).indexOf(input.currentValue);
+        const exist = index !== -1;
         if (!exist) {
           input.currentValue = this.currentValue;
+        } else {
+          this.picker.handleClick(this.picker.items[index]);
         }
         this.pickerVisible = false;
         input.$refs.input.blur();
