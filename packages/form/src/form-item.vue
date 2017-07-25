@@ -87,7 +87,7 @@
         var ret = {};
         const label = this.label;
         if (this.form.labelPosition === 'top' || this.form.inline) return ret;
-        if (!label && !this.labelWidth) return ret;
+        if (!label && !this.labelWidth && this.isNested) return ret;
         var labelWidth = this.labelWidth || this.form.labelWidth;
         if (labelWidth) {
           ret.marginLeft = labelWidth;
@@ -95,9 +95,14 @@
         return ret;
       },
       form() {
-        var parent = this.$parent;
-        while (parent.$options.componentName !== 'ElForm') {
+        let parent = this.$parent;
+        let parentName = parent.$options.componentName;
+        while (parentName !== 'ElForm') {
+          if (parentName === 'ElFormItem') {
+            this.isNested = true;
+          }
           parent = parent.$parent;
+          parentName = parent.$options.componentName;
         }
         return parent;
       },
@@ -136,7 +141,8 @@
         validateState: '',
         validateMessage: '',
         validateDisabled: false,
-        validator: {}
+        validator: {},
+        isNested: false
       };
     },
     methods: {
