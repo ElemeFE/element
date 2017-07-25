@@ -43,7 +43,8 @@
                   ref="minTimePicker"
                   :date="minDate"
                   @pick="handleMinTimePick"
-                  :visible="minTimePickerVisible">
+                  :visible="minTimePickerVisible"
+                  @mounted="$refs.minTimePicker.format=timeFormat">
                 </time-picker>
               </span>
             </span>
@@ -74,7 +75,9 @@
                   ref="maxTimePicker"
                   :date="maxDate"
                   @pick="handleMaxTimePick"
-                  :visible="maxTimePickerVisible"></time-picker>
+                  :visible="maxTimePickerVisible"
+                  @mounted="$refs.maxTimePicker.format=timeFormat">
+                </time-picker>
               </span>
             </span>
           </div>
