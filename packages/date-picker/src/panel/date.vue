@@ -265,6 +265,11 @@
           oldDate.setHours(hour);
           oldDate.setMinutes(minute);
           oldDate.setSeconds(second);
+          if (typeof this.disabledDate === 'function' && this.disabledDate(oldDate)) {
+            this.$refs.timepicker.disabled = true;
+            return;
+          }
+          this.$refs.timepicker.disabled = false;
           this.date = new Date(oldDate.getTime());
         }
 
