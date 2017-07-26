@@ -5,30 +5,17 @@
 @component-namespace el {
 
   @b dialog {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    position: relative;
+    margin: 0 auto 50px;
     background: var(--color-white);
     border-radius: var(--border-radius-small);
     box-shadow: var(--dialog-box-shadow);
     box-sizing: border-box;
-    margin-bottom: 50px;
+    width: 50%;
 
-    @modifier tiny {
-      width: var(--dialog-tiny-width);
-    }
-
-    @modifier small {
-      width: var(--dialog-small-width);
-    }
-
-    @modifier large {
-      width: var(--dialog-large-width);
-    }
-
-    @modifier full {
+    @when fullscreen {
       width: 100%;
-      top: 0;
+      margin-top: 0;
       margin-bottom: 0;
       height: 100%;
       overflow: auto;
