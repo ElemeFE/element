@@ -75,6 +75,12 @@
         box-shadow: none !important;
       }
     }
+    &:focus {
+      outline: none;
+      .el-radio-button__inner { /*获得焦点时 样式提醒*/
+        box-shadow: 0 0 1px 1px var(--radio-button-checked-border-color) !important;
+      }
+    }
     &:last-child {
       .el-radio-button__inner {
         border-radius: 0 var(--border-radius-base) var(--border-radius-base) 0;
