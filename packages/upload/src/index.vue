@@ -90,10 +90,6 @@ export default {
       type: String,
       default: 'text'   // text,picture,picture-card
     },
-    onMove: {
-      type: Function,
-      default: noop
-    },
     httpRequest: Function,
     disabled: Boolean
   },
