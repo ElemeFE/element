@@ -33,6 +33,12 @@
       </el-progress>
       <span class="el-upload-list__item-actions" v-if="listType === 'picture-card'">
         <span
+          v-if="listType === 'picture-card' && index !== 0 && files.length > 1"
+          @click="$emit('moveIndex', index, index - 1)"
+          class="el-upload-list__item-move">
+          <i class="el-icon-arrow-left"></i>
+        </span>
+        <span
           class="el-upload-list__item-preview"
           v-if="handlePreview && listType === 'picture-card'"
           @click="handlePreview(file)"
@@ -45,6 +51,12 @@
           @click="$emit('remove', file)"
         >
           <i class="el-icon-delete2"></i>
+        </span>
+        <span
+          v-if="listType === 'picture-card' && index < files.length - 1 && index >= 0 && files.length > 1"
+          @click="$emit('moveIndex', index, index + 1)"
+          class="el-upload-list__item-move">
+          <i class="el-icon-arrow-right"></i>
         </span>
       </span>
     </li>

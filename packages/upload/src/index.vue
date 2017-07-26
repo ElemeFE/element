@@ -90,6 +90,10 @@ export default {
       type: String,
       default: 'text'   // text,picture,picture-card
     },
+    onMove: {
+      type: Function,
+      default: noop
+    },
     httpRequest: Function,
     disabled: Boolean
   },
@@ -205,6 +209,9 @@ export default {
           'thumbnail-mode': 'thumbnail-mode has been deprecated, you can implement the same effect according to this case: http://element.eleme.io/#/zh-CN/component/upload#yong-hu-tou-xiang-shang-chuan'
         }
       };
+    },
+    moveIndex(index, new_index) {
+      this.uploadFiles.splice(new_index, 0, this.uploadFiles.splice(index, 1)[0]);
     }
   },
 
@@ -218,6 +225,7 @@ export default {
           listType={this.listType}
           files={this.uploadFiles}
           on-remove={this.handleRemove}
+          on-moveIndex={this.moveIndex}
           handlePreview={this.onPreview}>
         </UploadList>
       );
@@ -245,6 +253,7 @@ export default {
         'on-error': this.handleError,
         'on-preview': this.onPreview,
         'on-remove': this.handleRemove,
+        'on-moveIndex': this.moveIndex,
         'http-request': this.httpRequest
       },
       ref: 'upload-inner'
