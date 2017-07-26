@@ -78,6 +78,11 @@
 
       selectableRange(val) {
         this.$refs.spinner.selectableRange = val;
+      },
+
+      date(val) {
+        this.currentDate = val;
+        this.reinitDate();
       }
     },
 
@@ -140,13 +145,17 @@
 
       ajustScrollTop() {
         return this.$refs.spinner.ajustScrollTop();
+      },
+
+      reinitDate() {
+        this.hours = this.currentDate.getHours();
+        this.minutes = this.currentDate.getMinutes();
+        this.seconds = this.currentDate.getSeconds();
       }
     },
 
     created() {
-      this.hours = this.currentDate.getHours();
-      this.minutes = this.currentDate.getMinutes();
-      this.seconds = this.currentDate.getSeconds();
+      this.reinitDate();
     },
 
     mounted() {
