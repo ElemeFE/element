@@ -22,6 +22,8 @@
         dialogVisible: false,
         dialogTableVisible: false,
         dialogFormVisible: false,
+        outerVisible: false,
+        innerVisible: false,
         form: {
           name: '',
           region: '',
@@ -86,7 +88,7 @@ Dialog pops up a dialog box, and it's quite customizable.
 <el-dialog
   title="Tips"
   :visible.sync="dialogVisible"
-  size="tiny"
+  width="30%"
   :before-close="handleClose">
   <span>This is a message</span>
   <span slot="footer" class="dialog-footer">
@@ -114,6 +116,10 @@ Dialog pops up a dialog box, and it's quite customizable.
   };
 </script>
 ```
+:::
+
+:::tip
+`before-close` only works when user clicks the close icon or the backdrop. If you have buttons that close the Dialog in the `footer` named slot, you can add what you would do with `before-close` in the buttons' click event handler.
 :::
 
 ### Customizations
@@ -196,16 +202,56 @@ The content of Dialog can be anything, even a table or a form. This example show
 ```
 :::
 
+### Nested Dialog
+If a Dialog is nested in another Dialog, `append-to-body` is required.
+:::demo Normally we do not recommend using nested Dialog. If you need multiple Dialogs rendered on the page, you can simply flat them so that they're siblings to each other. If you must nest a Dialog inside another Dialog, set `append-to-body` of the nested Dialog to true, and it will append to body instead of its parent node, so both Dialogs can be correctly rendered.
+```html
+<template>
+  <el-button type="text" @click="outerVisible = true">open the outer Dialog</el-button>
+  
+  <el-dialog title="外层 Dialog" :visible.sync="outerVisible">
+    <el-dialog
+        width="30%"
+        title="内层 Dialog"
+        :visible.sync="innerVisible"
+        append-to-body>
+    </el-dialog>
+    <div slot="footer" class="dialog-footer">
+      <el-button @click="outerVisible = false">Cancel</el-button>
+      <el-button type="primary" @click="innerVisible = true">open the inner Dialog</el-button>
+    </div>
+  </el-dialog>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        outerVisible: false,
+        innerVisible: false
+      };
+    }
+  }
+</script>
+```
+:::
+
+:::tip
+If the variable bound to `visible` is managed in Vuex store, the `.sync` can not work properly. In this case, please remove the `.sync` modifier, listen to `open` and `close` events of Dialog, and commit Vuex mutations to update the value of that variable in the event handlers.
+:::
+
 ### Attributes
 
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | visible   | visibility of Dialog, supports the .sync modifier | boolean | — | false |
 | title     | title of Dialog. Can also be passed with a named slot (see the following table) | string    | — | — |
-| size      | size of Dialog | string    | tiny/small/large/full | small |
-| top      | value for `top` of Dialog CSS, works when `size` is not `full` | string    | — | 15% |
+| width     | width of Dialog | string    | — | 50% |
+| fullscreen     | whether the Dialog takes up full screen | boolean    | — | false |
+| top      | value for `margin-top` of Dialog CSS, works when `size` is not `full` | string    | — | 15vh |
 | modal     | whether a mask is displayed | boolean   | — | true |
 | modal-append-to-body     | whether to append modal to body element. If false, the modal will be appended to Dialog's parent element | boolean   | — | true |
+| append-to-body     | whether to append Dialog itself to body. A nested Dialog should have this attribute set to `true` | boolean   | — | false |
 | lock-scroll     | whether scroll of body is disabled while Dialog is displayed | boolean   | — | true |
 | custom-class      | custom class names for Dialog | string    | — | — |
 | close-on-click-modal | whether the Dialog can be closed by clicking the mask | boolean    | — | true |

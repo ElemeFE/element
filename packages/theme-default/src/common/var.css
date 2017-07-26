@@ -405,9 +405,6 @@
  -------------------------- */
   --dialog-background-color: var(--color-secondary);
   --dialog-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  --dialog-tiny-width: 30%;
-  --dialog-small-width: 50%;
-  --dialog-large-width: 90%;
   --dialog-close-color: var(--color-extra-light-silver);
   --dialog-close-hover-color: var(--color-primary);
   --dialog-title-font-size: 16px;
