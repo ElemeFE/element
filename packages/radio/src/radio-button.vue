@@ -6,6 +6,11 @@
       { 'is-active': value === label },
       { 'is-disabled': isDisabled }
     ]"
+    role="radio"
+    :aria-checked="value === label"
+    :aria-disabled="isDisabled"
+    :tabindex="tabIndex"
+    @keydown.space.stop.prevent="value = label"
   >
     <input
       class="el-radio-button__orig-radio"
@@ -13,7 +18,9 @@
       type="radio"
       v-model="value"
       :name="name"
-      :disabled="isDisabled">
+      :disabled="isDisabled"
+      tabindex="-1"
+    >
     <span class="el-radio-button__inner" :style="value === label ? activeStyle : null">
       <slot></slot>
       <template v-if="!$slots.default">{{label}}</template>
@@ -62,6 +69,9 @@
       },
       isDisabled() {
         return this.disabled || this._radioGroup.disabled;
+      },
+      tabIndex() {
+        return !this.isDisabled ? (this._radioGroup ? (this.value === this.label ? 0 : -1) : 0) : -1;
       }
     }
   };

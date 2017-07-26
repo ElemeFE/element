@@ -1,5 +1,12 @@
 <template>
-  <label class="el-radio">
+  <label
+    class="el-radio"
+    role="radio"
+    :aria-checked="model === label"
+    :aria-disabled="isDisabled"
+    :tabindex="tabIndex"
+    @keydown.space.stop.prevent="model = label"
+  >
     <span class="el-radio__input"
       :class="{
         'is-disabled': isDisabled,
@@ -16,7 +23,9 @@
         @focus="focus = true"
         @blur="focus = false"
         :name="name"
-        :disabled="isDisabled">
+        :disabled="isDisabled"
+        tabindex="-1"
+      >
     </span>
     <span class="el-radio__label">
       <slot></slot>
@@ -46,7 +55,6 @@
         focus: false
       };
     },
-
     computed: {
       isGroup() {
         let parent = this.$parent;
@@ -60,12 +68,10 @@
         }
         return false;
       },
-
       model: {
         get() {
           return this.isGroup ? this._radioGroup.value : this.value;
         },
-
         set(val) {
           if (this.isGroup) {
             this.dispatch('ElRadioGroup', 'input', [val]);
@@ -79,6 +85,9 @@
         return this.isGroup
           ? this._radioGroup.disabled || this.disabled
           : this.disabled;
+      },
+      tabIndex() {
+        return !this.isDisabled ? (this.isGroup ? (this.model === this.label ? 0 : -1) : 0) : -1;
       }
     }
   };

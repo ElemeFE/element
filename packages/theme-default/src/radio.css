@@ -11,6 +11,13 @@
     white-space: nowrap;
     @utils-user-select none;
 
+    &:focus { /*获得焦点时 样式提醒*/
+      outline: none;
+      .el-radio__inner {
+        box-shadow: 0 0 1px 1px var(--radio-input-border-color-hover);
+      }
+    }
+
     & + .el-radio {
       margin-left: 15px;
     }
