@@ -398,6 +398,7 @@
           this.selectedLabel = result.join(',');
         }
         this.$emit('select-all', this.isSelectAll);
+        this.$emit('confirm-select', this.value);
         this.toggleMenu();
       },
 
