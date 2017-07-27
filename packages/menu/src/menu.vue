@@ -192,7 +192,7 @@
       initOpenedMenu() {
         const index = this.activedIndex;
         const activeItem = this.items[index];
-        if (!activeItem || this.mode === 'horizontal') return;
+        if (!activeItem || this.mode === 'horizontal' || this.collapse) return;
 
         let indexPath = activeItem.indexPath;
 

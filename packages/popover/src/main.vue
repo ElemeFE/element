@@ -109,16 +109,17 @@ export default {
       this.showPopper = false;
     },
     handleMouseEnter() {
+      clearTimeout(this._timer);
       if (this.openDelay) {
-        setTimeout(() => {
+        this._timer = setTimeout(() => {
           this.showPopper = true;
         }, this.openDelay);
       } else {
         this.showPopper = true;
       }
-      clearTimeout(this._timer);
     },
     handleMouseLeave() {
+      clearTimeout(this._timer);
       this._timer = setTimeout(() => {
         this.showPopper = false;
       }, 200);
