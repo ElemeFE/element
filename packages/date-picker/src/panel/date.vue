@@ -345,7 +345,7 @@
       },
 
       afterLeave() {
-        this.$refs.timepicker.handleConfirm();
+        this.$refs.timepicker && this.$refs.timepicker.$emit('pick');
         this.$emit('dodestroy');
       }
     },
