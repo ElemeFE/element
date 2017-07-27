@@ -1,7 +1,11 @@
 <template>
   <transition-group
     tag="ul"
-    :class="['el-upload-list', 'el-upload-list--' + listType]"
+    :class="[
+      'el-upload-list',
+      'el-upload-list--' + listType,
+      { 'is-disabled': disabled }
+    ]"
     name="el-list"
   >
     <li
@@ -24,7 +28,7 @@
           'el-icon-check': ['picture-card', 'picture'].indexOf(listType) > -1
         }"></i>
       </label>
-      <i class="el-icon-close" @click="$emit('remove', file)"></i>
+      <i class="el-icon-close" v-if="!disabled" @click="$emit('remove', file)"></i>
       <el-progress
         v-if="file.status === 'uploading'"
         :type="listType === 'picture-card' ? 'circle' : 'line'"
