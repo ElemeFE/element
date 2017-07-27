@@ -137,6 +137,12 @@
     children: 'zones'
   };
 
+  const props1 = {
+    label: 'name',
+    children: 'zones',
+    isLeaf: 'leaf'
+  };
+
   const defaultProps = {
     children: 'children',
     label: 'label'
@@ -181,6 +187,23 @@
           } else {
             data = [];
           }
+
+          resolve(data);
+        }, 500);
+      },
+      loadNode1(node, resolve) {
+        if (node.level === 0) {
+          return resolve([{ name: 'region' }]);
+        }
+        if (node.level > 1) return resolve([]);
+
+        setTimeout(() => {
+          const data = [{
+            name: 'leaf',
+            leaf: true
+          }, {
+            name: 'zone'
+          }];
 
           resolve(data);
         }, 500);
@@ -244,6 +267,7 @@
         regions,
         defaultProps,
         props,
+        props1,
         defaultCheckedKeys: [5],
         defaultExpandedKeys: [2, 3],
         filterText: ''
@@ -326,7 +350,6 @@
 ::: demo
 ```html
 <el-tree
-  :data="regions"
   :props="props"
   :load="loadNode"
   lazy
@@ -338,11 +361,6 @@
   export default {
     data() {
       return {
-        regions: [{
-          'name': 'region1'
-        }, {
-          'name': 'region2'
-        }],
         props: {
           label: 'name',
           children: 'zones'
@@ -383,6 +401,52 @@
           } else {
             data = [];
           }
+
+          resolve(data);
+        }, 500);
+      }
+    }
+  };
+</script>
+```
+:::
+
+### 懒加载自定义叶子节点
+
+::: demo
+```html
+<el-tree
+  :props="props1"
+  :load="loadNode1"
+  lazy
+  show-checkbox>
+</el-tree>
+
+<script>
+  export default {
+    data() {
+      return {
+        props1: {
+          label: 'name',
+          children: 'zones',
+          isLeaf: 'leaf'
+        },
+      };
+    },
+    methods: {
+      loadNode1(node, resolve) {
+        if (node.level === 0) {
+          return resolve([{ name: 'region' }]);
+        }
+        if (node.level > 1) return resolve([]);
+
+        setTimeout(() => {
+          const data = [{
+            name: 'leaf',
+            leaf: true
+          }, {
+            name: 'zone'
+          }];
 
           resolve(data);
         }, 500);
@@ -611,6 +675,10 @@
 
 ### 自定义节点内容
 节点的内容支持自定义，可以在节点区添加按钮或图标等内容
+
+:::warning
+`append` 和 `remove` 方法不会改变 `data` 上的数据
+:::
 
 ::: demo 使用`render-content`指定渲染函数，该函数返回需要的节点区内容即可。渲染函数的用法请参考 Vue 文档。注意：由于 jsfiddle 不支持 JSX 语法，所以本例在 jsfiddle 中无法运行。但是在实际的项目中，只要正确地配置了相关依赖，就可以正常运行。
 ```html
@@ -876,7 +944,8 @@
 | -------- | ----------------- | ------ | ---- | ---- |
 | label    | 指定节点标签为节点对象的某个属性值 | string, function(data, node) | —    | —    |
 | children | 指定子树为节点对象的某个属性值 | string, function(data, node) | —    | —    |
-| disabled | 指定节点选择框是否禁用 |  boolean, function(data, node) | —    | —    |
+| disabled | 指定节点选择框是否禁用 | boolean, function(data, node) | —    | —    |
+| isLeaf | 指定节点是否为叶子节点 | boolean, function(data, node) | —    | —    |
 
 ### 方法
 `Tree` 拥有如下方法，返回目前被选中的节点数组：
