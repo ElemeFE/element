@@ -1332,7 +1332,7 @@ Filter the table to find desired data.
       width="100"
       :filters="[{ text: 'Home', value: 'Home' }, { text: 'Office', value: 'Office' }]"
       :filter-method="filterTag"
-      filter-placement="bottom-end">
+      filter-placement="bottom-start">
       <template scope="scope">
         <el-tag
           :type="scope.row.tag === 'Home' ? 'primary' : 'success'"
