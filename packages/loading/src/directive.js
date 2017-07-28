@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { addClass, removeClass } from 'element-ui/src/utils/dom';
+import { addClass, removeClass, getStyle } from 'element-ui/src/utils/dom';
 let Mask = Vue.extend(require('./loading.vue'));
 
 exports.install = Vue => {
@@ -52,7 +52,7 @@ exports.install = Vue => {
     }
   };
   let insertDom = (parent, el, binding) => {
-    if (!el.domVisible) {
+    if (!el.domVisible && getStyle(el, 'display') !== 'none' && getStyle(el, 'visibility') !== 'hidden') {
       Object.keys(el.maskStyle).forEach(property => {
         el.mask.style[property] = el.maskStyle[property];
       });

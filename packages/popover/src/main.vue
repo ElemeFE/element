@@ -30,6 +30,10 @@ export default {
       default: 'click',
       validator: value => ['click', 'focus', 'hover', 'manual'].indexOf(value) > -1
     },
+    openDelay: {
+      type: Number,
+      default: 0
+    },
     title: String,
     disabled: Boolean,
     content: String,
@@ -105,10 +109,17 @@ export default {
       this.showPopper = false;
     },
     handleMouseEnter() {
-      this.showPopper = true;
       clearTimeout(this._timer);
+      if (this.openDelay) {
+        this._timer = setTimeout(() => {
+          this.showPopper = true;
+        }, this.openDelay);
+      } else {
+        this.showPopper = true;
+      }
     },
     handleMouseLeave() {
+      clearTimeout(this._timer);
       this._timer = setTimeout(() => {
         this.showPopper = false;
       }, 200);
