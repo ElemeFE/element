@@ -522,6 +522,100 @@ describe('Tree', () => {
     }, 100);
   });
 
+  it('lazy defaultChecked', done => {
+    vm = getTreeVm(':props="defaultProps" node-key="id" lazy :load="loadNode" show-checkbox', {
+      methods: {
+        loadNode(node, resolve) {
+          if (node.level === 0) {
+            return resolve([{ label: 'region1', id: this.count++ }, { label: 'region2', id: this.count++ }]);
+          }
+          if (node.level > 4) return resolve([]);
+          setTimeout(() => {
+            resolve([{
+              label: 'zone' + this.count,
+              id: this.count++
+            }, {
+              label: 'zone' + this.count,
+              id: this.count++
+            }]);
+          }, 50);
+        }
+      }
+    });
+    const tree = vm.$children[0];
+    const firstNode = document.querySelector('.el-tree-node__content');
+    const initStatus = firstNode.querySelector('.is-indeterminate');
+    expect(initStatus).to.equal(null);
+    tree.store.setCheckedKeys([3]);
+    firstNode.querySelector('.el-tree-node__expand-icon').click();
+    setTimeout(() => {
+      const clickStatus = firstNode.querySelector('.is-indeterminate');
+      expect(clickStatus).to.not.equal(null);
+      const child = document.querySelectorAll('.el-tree-node__content')[1];
+      expect(child.querySelector('input').checked).to.equal(true);
+      done();
+    }, 300);
+  });
+
+  it('lazy expandOnChecked', done => {
+    vm = getTreeVm(':props="defaultProps" node-key="id" lazy :load="loadNode" show-checkbox check-descendants', {
+      methods: {
+        loadNode(node, resolve) {
+          if (node.level === 0) {
+            return resolve([{ label: 'region1', id: this.count++ }, { label: 'region2', id: this.count++ }]);
+          }
+          if (node.level > 4) return resolve([]);
+          setTimeout(() => {
+            resolve([{
+              label: 'zone' + this.count,
+              id: this.count++
+            }, {
+              label: 'zone' + this.count,
+              id: this.count++
+            }]);
+          }, 50);
+        }
+      }
+    });
+    const tree = vm.$children[0];
+    tree.store.setCheckedKeys([1]);
+    setTimeout(() => {
+      const id5 = document.querySelectorAll('.el-tree-node__content')[3];
+      expect(id5.querySelector('input').checked).to.equal(true);
+      done();
+    }, 300);
+  });
+
+  it('lazy without expandOnChecked', done => {
+    vm = getTreeVm(':props="defaultProps" node-key="id" lazy :load="loadNode" show-checkbox', {
+      methods: {
+        loadNode(node, resolve) {
+          if (node.level === 0) {
+            return resolve([{ label: 'region1', id: this.count++ }, { label: 'region2', id: this.count++ }]);
+          }
+          if (node.level > 4) return resolve([]);
+          setTimeout(() => {
+            resolve([{
+              label: 'zone' + this.count,
+              id: this.count++
+            }, {
+              label: 'zone' + this.count,
+              id: this.count++
+            }]);
+          }, 50);
+        }
+      }
+    });
+    const tree = vm.$children[0];
+    tree.store.setCheckedKeys([1]);
+    setTimeout(() => {
+      const nodes = document.querySelectorAll('.el-tree-node__content');
+      expect(nodes[0].querySelector('input').checked).to.equal(true);
+      expect(nodes.length).to.equal(2);
+      done();
+    }, 300);
+  });
+
   it('accordion', done => {
     vm = getTreeVm(':props="defaultProps" accordion');
     const firstNode = vm.$el.querySelector('.el-tree-node__content');
