@@ -1,5 +1,6 @@
 <template>
   <el-input
+    v-if="hiddeInput"
     class="el-date-editor"
     :class="'el-date-editor--' + type"
     :readonly="!editable || readonly"
@@ -223,7 +224,15 @@ export default {
     rangeSeparator: {
       default: ' - '
     },
-    pickerOptions: {}
+    pickerOptions: {},
+    show:{
+      type: Boolean,
+      default: false
+    },
+    hiddeInput:{
+      type: Boolean,
+      default: false
+    },
   },
 
   components: { ElInput },
@@ -355,6 +364,7 @@ export default {
       gpuAcceleration: false
     };
     this.placement = PLACEMENT_MAP[this.align] || PLACEMENT_MAP.left;
+    this.showClose = this.show || this.hiddeInput;
   },
 
   methods: {
