@@ -1,5 +1,18 @@
 ## Changelog
 
+### 1.4.1
+
+*2017-07-28*
+
+- Fixed child nodes expanding when checking parent node in Tree, #6029
+- Fixed checking behavior error of Tree, #6034
+- Fixed FormItem not inheriting `label-width` as a Form's direct child, #6044
+- Fixed Menu incorrectly showing SubMenu in collapse mode, #6111
+- Fixed render order error of `v-if` controlled dynamic TabPanes, #6066
+- Fixed Popover still popping up after mouse leaves within `open-delay`, #6058 (by @laobubu)
+- Fixed delete buttons still rendered in file list of disabled Upload, #6091
+- Fixed background color error on hover of striped Table, #6024 (by @xtongs)
+
 ### 1.4.0 Boron
 
 *2017-07-21*
