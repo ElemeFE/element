@@ -355,8 +355,10 @@
       },
 
       scrollToOption(className = 'selected') {
-        const menu = this.$refs.popper.$el.querySelector('.el-select-dropdown__wrap');
-        scrollIntoView(menu, menu.getElementsByClassName(className)[0]);
+        if (this.$refs.popper) {
+          const menu = this.$refs.popper.$el.querySelector('.el-select-dropdown__wrap');
+          scrollIntoView(menu, menu.getElementsByClassName(className)[0]);
+        }
       },
 
       handleMenuEnter() {
