@@ -35,5 +35,28 @@ export default {
 
   created() {
     this.panel = getPanel(this.type);
+  },
+
+  methods: {
+    handleKeydown(event) {
+      const keyCode = event.keyCode;
+
+      // TAB or ESC or Enter
+      if (keyCode === 9 || keyCode === 27 || keyCode === 13) {
+        this.pickerVisible = false;
+        event.stopPropagation();
+        this.currentValue = this.picker.date;
+        this.$refs.reference.$refs.input.blur();
+        return;
+      }
+
+      const list = [38, 40, 37, 39];
+      if (list.indexOf(keyCode) !== -1) {
+        if (this.type === 'daterange' || this.type === 'datetimerange') return;
+        this.picker.handleKeyControl(keyCode);
+        event.stopPropagation();
+        return;
+      }
+    }
   }
 };
