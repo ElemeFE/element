@@ -35,6 +35,7 @@
         @keydown.esc.stop.prevent="visible = false"
         @keydown.delete="deletePrevTag"
         v-model="query"
+        @input="e => handleQueryChange(e.target.value)"
         :debounce="remote ? 300 : 0"
         v-if="filterable"
         :style="{ width: inputLength + 'px', 'max-width': inputWidth - 42 + 'px' }"
@@ -50,6 +51,7 @@
       :disabled="disabled"
       :readonly="!filterable || multiple"
       :validate-event="false"
+      :class="{ 'is-focus': visible }"
       @focus="handleFocus"
       @blur="handleBlur"
       @click="handleIconClick"
@@ -107,6 +109,7 @@
   import { t } from 'element-ui/src/locale';
   import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
   import { getValueByPath } from 'element-ui/src/utils/util';
+  import NavigationMixin from './navigation-mixin';
 
   const sizeMap = {
     'large': 42,
@@ -127,11 +130,17 @@
   };
 
   export default {
-    mixins: [Emitter, Locale, Focus('reference')],
+    mixins: [Emitter, Locale, Focus('reference'), NavigationMixin],
 
     name: 'ElSelect',
 
     componentName: 'ElSelect',
+
+    provide() {
+      return {
+        'select': this
+      };
+    },
 
     computed: {
       iconClass() {
@@ -223,7 +232,6 @@
         createdLabel: null,
         createdSelected: false,
         selected: this.multiple ? [] : {},
-        isSelect: true,
         inputLength: 20,
         inputWidth: 0,
         cachedPlaceHolder: '',
@@ -233,7 +241,7 @@
         selectedLabel: '',
         hoverIndex: -1,
         query: '',
-        optionsAllDisabled: false,
+        previousQuery: '',
         inputHovering: false,
         currentPlaceholder: ''
       };
@@ -258,33 +266,6 @@
           this.inputLength = 20;
         }
         this.dispatch('ElFormItem', 'el.form.change', val);
-      },
-
-      query(val) {
-        this.$nextTick(() => {
-          if (this.visible) this.broadcast('ElSelectDropdown', 'updatePopper');
-        });
-        this.hoverIndex = -1;
-        if (this.multiple && this.filterable) {
-          this.inputLength = this.$refs.input.value.length * 15 + 20;
-          this.managePlaceholder();
-          this.resetInputHeight();
-        }
-        if (this.remote && typeof this.remoteMethod === 'function') {
-          this.hoverIndex = -1;
-          this.remoteMethod(val);
-          this.broadcast('ElOption', 'resetIndex');
-        } else if (typeof this.filterMethod === 'function') {
-          this.filterMethod(val);
-          this.broadcast('ElOptionGroup', 'queryChange');
-        } else {
-          this.filteredOptionsCount = this.optionsCount;
-          this.broadcast('ElOption', 'queryChange', val);
-          this.broadcast('ElOptionGroup', 'queryChange');
-        }
-        if (this.defaultFirstOption && (this.filterable || this.remote) && this.filteredOptionsCount) {
-          this.checkDefaultFirstOption();
-        }
       },
 
       visible(val) {
@@ -321,7 +302,8 @@
           this.handleIconShow();
           this.broadcast('ElSelectDropdown', 'updatePopper');
           if (this.filterable) {
-            this.query = this.selectedLabel;
+            this.query = this.remote ? '' : this.selectedLabel;
+            this.handleQueryChange(this.query);
             if (this.multiple) {
               this.$refs.input.focus();
             } else {
@@ -336,9 +318,8 @@
         this.$emit('visible-change', val);
       },
 
-      options(val) {
+      options() {
         if (this.$isServer) return;
-        this.optionsAllDisabled = val.length === val.filter(item => item.disabled === true).length;
         if (this.multiple) {
           this.resetInputHeight();
         }
@@ -353,6 +334,35 @@
     },
 
     methods: {
+      handleQueryChange(val) {
+        if (this.previousQuery === val) return;
+        console.log(val);
+        this.previousQuery = val;
+        this.$nextTick(() => {
+          if (this.visible) this.broadcast('ElSelectDropdown', 'updatePopper');
+        });
+        this.hoverIndex = -1;
+        if (this.multiple && this.filterable) {
+          this.inputLength = this.$refs.input.value.length * 15 + 20;
+          this.managePlaceholder();
+          this.resetInputHeight();
+        }
+        if (this.remote && typeof this.remoteMethod === 'function') {
+          this.hoverIndex = -1;
+          this.remoteMethod(val);
+        } else if (typeof this.filterMethod === 'function') {
+          this.filterMethod(val);
+          this.broadcast('ElOptionGroup', 'queryChange');
+        } else {
+          this.filteredOptionsCount = this.optionsCount;
+          this.broadcast('ElOption', 'queryChange', val);
+          this.broadcast('ElOptionGroup', 'queryChange');
+        }
+        if (this.defaultFirstOption && (this.filterable || this.remote) && this.filteredOptionsCount) {
+          this.checkDefaultFirstOption();
+        }
+      },
+
       handleIconHide() {
         let icon = this.$el.querySelector('.el-input__icon');
         if (icon) {
@@ -464,7 +474,6 @@
 
       doDestroy() {
         this.$refs.popper && this.$refs.popper.doDestroy();
-        this.dropdownUl = null;
       },
 
       handleClose() {
@@ -545,6 +554,7 @@
           this.emitChange(value);
           if (option.created) {
             this.query = '';
+            this.handleQueryChange('');
             this.inputLength = 20;
           }
           if (this.filterable) this.$refs.input.focus();
@@ -583,40 +593,6 @@
         }
       },
 
-      navigateOptions(direction) {
-        if (!this.visible) {
-          this.visible = true;
-          return;
-        }
-        if (this.options.length === 0 || this.filteredOptionsCount === 0) return;
-        this.optionsAllDisabled = this.options.length === this.options.filter(item => item.disabled === true).length;
-        if (!this.optionsAllDisabled) {
-          if (direction === 'next') {
-            this.hoverIndex++;
-            if (this.hoverIndex === this.options.length) {
-              this.hoverIndex = 0;
-            }
-            if (this.options[this.hoverIndex].disabled === true ||
-              this.options[this.hoverIndex].groupDisabled === true ||
-              !this.options[this.hoverIndex].visible) {
-              this.navigateOptions('next');
-            }
-          }
-          if (direction === 'prev') {
-            this.hoverIndex--;
-            if (this.hoverIndex < 0) {
-              this.hoverIndex = this.options.length - 1;
-            }
-            if (this.options[this.hoverIndex].disabled === true ||
-              this.options[this.hoverIndex].groupDisabled === true ||
-              !this.options[this.hoverIndex].visible) {
-              this.navigateOptions('prev');
-            }
-          }
-        }
-        this.$nextTick(() => this.scrollToOption(this.options[this.hoverIndex]));
-      },
-
       selectOption() {
         if (this.options[this.hoverIndex]) {
           this.handleOptionSelect(this.options[this.hoverIndex]);
@@ -644,8 +620,9 @@
       },
 
       onInputChange() {
-        if (this.filterable) {
+        if (this.filterable && this.query !== this.selectedLabel) {
           this.query = this.selectedLabel;
+          this.handleQueryChange(this.query);
         }
       },
 
@@ -656,7 +633,6 @@
         if (index > -1) {
           this.options.splice(index, 1);
         }
-        this.broadcast('ElOption', 'resetIndex');
       },
 
       resetInputWidth() {

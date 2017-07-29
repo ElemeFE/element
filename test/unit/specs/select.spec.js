@@ -140,7 +140,6 @@ describe('Select', () => {
   });
 
   it('single select', done => {
-    sinon.stub(window.console, 'log');
     vm = createVue({
       template: `
         <div>
@@ -174,13 +173,14 @@ describe('Select', () => {
             value: '选项5',
             label: '北京烤鸭'
           }],
-          value: ''
+          value: '',
+          count: 0
         };
       },
 
       methods: {
         handleChange() {
-          console.log('changed');
+          this.count++;
         }
       }
     }, true);
@@ -190,12 +190,12 @@ describe('Select', () => {
     options[2].click();
     setTimeout(() => {
       expect(vm.value).to.equal('选项3');
-      expect(window.console.log.callCount).to.equal(1);
+      expect(vm.count).to.equal(1);
+      triggerEvent(options[2], 'mouseenter');
       options[4].click();
       setTimeout(() => {
         expect(vm.value).to.equal('选项5');
-        expect(window.console.log.callCount).to.equal(2);
-        window.console.log.restore();
+        expect(vm.count).to.equal(2);
         done();
       }, 100);
     }, 100);
@@ -460,7 +460,7 @@ describe('Select', () => {
             <el-option
               v-for="item in options"
               :label="item"
-              :key="item.value"
+              :key="item"
               :value="item"
             />
           </el-select>
@@ -471,14 +471,6 @@ describe('Select', () => {
           options: ['1', '2', '3', '4', '5'],
           value: ''
         };
-      },
-      methods: {
-        filterMethod(query) {
-          // simulate async filterMethod / remoteMethod
-          setTimeout(() => {
-            this.options.filter(option => option.label.indexOf(query) !== -1);
-          }, 5);
-        }
       }
     }, true);
 
@@ -486,7 +478,7 @@ describe('Select', () => {
     setTimeout(() => {
       select.$el.querySelector('input').focus();
       select.query = '3';
-      select.selectedLabel = '3';
+      select.handleQueryChange('3');
       setTimeout(() => {
         const enterKey = document.createEvent('Events');
         enterKey.initEvent('keydown', true, true);
@@ -635,10 +627,9 @@ describe('Select', () => {
     });
     const select = vm.$children[0];
     vm.$nextTick(() => {
-      select.query = '面';
+      select.handleQueryChange('面');
       setTimeout(() => {
         expect(select.filteredOptionsCount).to.equal(1);
-        select.query = '';
         select.options[0].$el.click();
         vm.$nextTick(() => {
           expect(vm.value[0]).to.equal('选项4');
