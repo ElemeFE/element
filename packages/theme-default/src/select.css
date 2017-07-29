@@ -67,6 +67,10 @@
           }
         }
       }
+
+      &.is-focus .el-input__inner {
+        border-color: var(--input-focus-border);
+      }
     }
 
     & > .el-input {
