@@ -354,15 +354,17 @@
         }
       },
 
-      scrollToOption(className = 'selected') {
-        if (this.$refs.popper) {
+      scrollToOption(option) {
+        if (this.$refs.popper && option) {
           const menu = this.$refs.popper.$el.querySelector('.el-select-dropdown__wrap');
-          scrollIntoView(menu, menu.getElementsByClassName(className)[0]);
+          scrollIntoView(menu, option.$el);
         }
       },
 
       handleMenuEnter() {
-        this.$nextTick(() => this.scrollToOption());
+        if (!this.multiple) {
+          this.$nextTick(() => this.scrollToOption(this.selected));
+        }
       },
 
       getOption(value) {
@@ -526,7 +528,7 @@
           this.$emit('input', option.value);
           this.visible = false;
         }
-        this.$nextTick(() => this.scrollToOption());
+        this.$nextTick(() => this.scrollToOption(option));
       },
 
       getValueIndex(arr = [], value) {
@@ -588,7 +590,7 @@
             }
           }
         }
-        this.$nextTick(() => this.scrollToOption('hover'));
+        this.$nextTick(() => this.scrollToOption(this.options[this.hoverIndex]));
       },
 
       selectOption() {
