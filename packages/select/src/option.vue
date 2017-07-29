@@ -49,8 +49,7 @@
 
     computed: {
       isObject() {
-        const type = typeof this.value;
-        return type !== 'string' && type !== 'number' && type !== 'boolean';
+        return Object.prototype.toString.call(this.value).toLowerCase() === '[object object]';
       },
 
       currentLabel() {
