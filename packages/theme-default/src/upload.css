@@ -171,6 +171,11 @@
         }
       }
     }
+    @when disabled {
+      .el-upload-list__item:hover .el-upload-list__item-status-label {
+        display: block;
+      }
+    }
     @e item-name {
       color: var(--color-extra-light-black);
       display: block;

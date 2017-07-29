@@ -17,7 +17,7 @@
           }
         }, 1000);
       };
-      var vaildatePass = (rule, value, callback) => {
+      var validatePass = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('Please input the password'));
         } else {
