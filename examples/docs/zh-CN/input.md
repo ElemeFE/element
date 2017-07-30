@@ -193,7 +193,7 @@
 
 ::: demo
 ```html
-<el-input v-model="input" placeholder="请输入内容"></el-input>
+<el-input v-model="input" placeholder="请输入内容" :maxlength='4' ></el-input>
 
 <script>
 export default {
@@ -553,6 +553,7 @@ export default {
   custom-item="my-item-zh"
   placeholder="请输入内容"
   @select="handleSelect"
+  :isdrop="true"
   icon="edit"
   :on-icon-click="handleIconClick"
 ></el-autocomplete>
@@ -822,6 +823,7 @@ export default {
 | value         | 必填值输入绑定值   | string  | — | — |
 | custom-item  | 通过该参数指定自定义的输入建议列表项的组件名 | string  | — | — |
 | onhtml  | 列表项字符串是否解析为HTML | boolean  | — | false |
+| isdrop  | 输入框获得焦点且值为空时，不进行查询；是否显示查无数据 | boolean  | — | false |
 | fetch-suggestions | 返回输入建议的方法，仅当你的输入建议数据 resolve 时，通过调用 callback(data:[]) 来返回它  | Function(queryString, callback)  | — | — |
 | popper-class | Autocomplete 下拉列表的类名 | string | — | — |
 | trigger-on-focus | 是否在输入框 focus 时显示建议列表 | boolean | — | true |

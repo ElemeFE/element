@@ -93,8 +93,9 @@
     computed: {
       suggestionVisible() {
         const suggestions = this.suggestions;
-        let isValidData = Array.isArray(suggestions) && suggestions.length > 0;
-        return (isValidData || this.loading) && this.isFocus;
+        //let isValidData = Array.isArray(suggestions) && suggestions.length > 0;
+        let isValidData = Array.isArray(suggestions);
+        return (isValidData || this.loading) && this.isFocus && this.value;
       }
     },
     watch: {
@@ -128,11 +129,14 @@
           this.suggestions = [];
           return;
         }
-        this.getData(value);
+        console.log(value);
+        if (value) {
+          this.getData(value);
+        }
       },
       handleFocus() {
         this.isFocus = true;
-        if (this.triggerOnFocus) {
+        if (this.triggerOnFocus && this.value) {
           this.getData(this.value);
         }
       },
