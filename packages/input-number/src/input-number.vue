@@ -33,14 +33,15 @@
       :size="size"
       :max="max"
       :min="min"
+      :name="name"
       ref="input"
     >
-        <template slot="prepend" v-if="$slots.prepend">
-          <slot name="prepend"></slot>
-        </template>
-        <template slot="append" v-if="$slots.append">
-          <slot name="append"></slot>
-        </template> 
+      <template slot="prepend" v-if="$slots.prepend">
+        <slot name="prepend"></slot>
+      </template>
+      <template slot="append" v-if="$slots.append">
+        <slot name="append"></slot>
+      </template> 
     </el-input>
   </div>
 </template>
@@ -104,7 +105,8 @@
       debounce: {
         type: Number,
         default: 300
-      }
+      },
+      name: String
     },
     data() {
       return {
