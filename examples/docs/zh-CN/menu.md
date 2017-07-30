@@ -219,11 +219,18 @@
   </el-menu-item>
 </el-menu>
 
+<style>
+  .el-menu-vertical-demo:not(.el-menu--collapse) {
+    width: 200px;
+    min-height: 400px;
+  }
+</style>
+
 <script>
   export default {
     data() {
       return {
-        isCollapse: false
+        isCollapse: true
       };
     },
     methods: {
