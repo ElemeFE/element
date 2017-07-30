@@ -175,11 +175,11 @@ Border card tabs.
 
 :::
 
-### 位置
+### Tab position
 
-You can use `tab-position` slot to set the tab's position.
+You can use `tab-position` attribute to set the tab's position.
 
-:::demo It provides you with a total four directions `tabPosition="left|right|top|bottom"`
+:::demo You can choose from four directions: `tabPosition="left|right|top|bottom"`
 
 ```html
 <template>
