@@ -336,7 +336,6 @@
     methods: {
       handleQueryChange(val) {
         if (this.previousQuery === val) return;
-        console.log(val);
         this.previousQuery = val;
         this.$nextTick(() => {
           if (this.visible) this.broadcast('ElSelectDropdown', 'updatePopper');
@@ -585,9 +584,6 @@
       },
 
       toggleMenu() {
-        if (this.filterable && this.query === '' && this.visible) {
-          return;
-        }
         if (!this.disabled) {
           this.visible = !this.visible;
         }
@@ -626,11 +622,10 @@
         }
       },
 
-      onOptionDestroy(option) {
-        this.optionsCount--;
-        this.filteredOptionsCount--;
-        let index = this.options.indexOf(option);
+      onOptionDestroy(index) {
         if (index > -1) {
+          this.optionsCount--;
+          this.filteredOptionsCount--;
           this.options.splice(index, 1);
         }
       },

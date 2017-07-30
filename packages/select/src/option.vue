@@ -143,14 +143,13 @@
       this.select.cachedOptions.push(this);
       this.select.optionsCount++;
       this.select.filteredOptionsCount++;
-      this.index = this.select.options.indexOf(this);
 
       this.$on('queryChange', this.queryChange);
       this.$on('handleGroupDisabled', this.handleGroupDisabled);
     },
 
     beforeDestroy() {
-      this.dispatch('ElSelect', 'onOptionDestroy', this);
+      this.dispatch('ElSelect', 'onOptionDestroy', this.select.options.indexOf(this));
     }
   };
 </script>
