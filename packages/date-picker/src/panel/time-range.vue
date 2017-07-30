@@ -89,6 +89,14 @@
     computed: {
       showSeconds() {
         return (this.format || '').indexOf('ss') !== -1;
+      },
+
+      offset() {
+        return this.showSeconds ? 11 : 8;
+      },
+
+      spinner() {
+        return this.selectionRange[0] < this.offset ? this.$refs.minSpinner : this.$refs.maxSpinner;
       }
     },
 
@@ -110,7 +118,8 @@
         minSeconds: time.minTime.getSeconds(),
         format: 'HH:mm:ss',
         visible: false,
-        width: 0
+        width: 0,
+        selectionRange: [0, 2]
       };
     },
 
@@ -118,6 +127,12 @@
       value(newVal) {
         this.panelCreated();
         this.$nextTick(_ => this.ajustScrollTop());
+      },
+
+      visible(val) {
+        if (val) {
+          this.$nextTick(() => this.$refs.minSpinner.emitSelectRange('hours'));
+        }
       }
     },
 
@@ -194,10 +209,12 @@
 
       setMinSelectionRange(start, end) {
         this.$emit('select-range', start, end);
+        this.selectionRange = [start, end];
       },
 
       setMaxSelectionRange(start, end) {
-        this.$emit('select-range', start + 11, end + 11);
+        this.$emit('select-range', start + this.offset, end + this.offset);
+        this.selectionRange = [start + this.offset, end + this.offset];
       },
 
       handleConfirm(visible = false, first = false) {
@@ -214,6 +231,23 @@
       ajustScrollTop() {
         this.$refs.minSpinner.ajustScrollTop();
         this.$refs.maxSpinner.ajustScrollTop();
+      },
+
+      scrollDown(step) {
+        this.spinner.scrollDown(step);
+      },
+
+      changeSelectionRange(step) {
+        const list = this.showSeconds ? [0, 3, 6, 11, 14, 17] : [0, 3, 8, 11];
+        const mapping = ['hours', 'minutes'].concat(this.showSeconds ? ['seconds'] : []);
+        const index = list.indexOf(this.selectionRange[0]);
+        const next = (index + step + list.length) % list.length;
+        const half = list.length / 2;
+        if (next < half) {
+          this.$refs.minSpinner.emitSelectRange(mapping[next]);
+        } else {
+          this.$refs.maxSpinner.emitSelectRange(mapping[next - half]);
+        }
       }
     },
 
