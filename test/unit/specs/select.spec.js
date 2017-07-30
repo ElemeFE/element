@@ -479,16 +479,11 @@ describe('Select', () => {
       select.$el.querySelector('input').focus();
       select.query = '3';
       select.handleQueryChange('3');
+      select.selectOption();
       setTimeout(() => {
-        const enterKey = document.createEvent('Events');
-        enterKey.initEvent('keydown', true, true);
-        enterKey.keyCode = 13;
-        select.$el.querySelector('input').dispatchEvent(enterKey);
-        setTimeout(() => {
-          expect(select.value).to.equal('3');
-          done();
-        }, 10);
-      }, 10);  // wait for async filterMethod
+        expect(select.value).to.equal('3');
+        done();
+      }, 10);
     }, 10);
   });
 

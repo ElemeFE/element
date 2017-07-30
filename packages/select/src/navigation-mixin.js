@@ -48,7 +48,7 @@ export default {
           this.navigateOptions(direction);
         }
       }
-      this.$nextTick(() => this.scrollToOption(this.hoverOption.$el));
+      this.$nextTick(() => this.scrollToOption(this.hoverOption));
     }
   }
 };
