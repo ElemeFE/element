@@ -152,7 +152,6 @@
         return this.$refs.spinner.ajustScrollTop();
       },
 
-<<<<<<< HEAD
       scrollDown(step) {
         this.$refs.spinner.scrollDown(step);
       },
@@ -165,8 +164,6 @@
         this.$refs.spinner.emitSelectRange(mapping[next]);
       },
 
-=======
->>>>>>> 0891a78a61b5ebbeacc1bf98806477f619985c62
       reinitDate() {
         this.hours = this.currentDate.getHours();
         this.minutes = this.currentDate.getMinutes();
