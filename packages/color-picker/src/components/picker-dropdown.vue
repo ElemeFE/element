@@ -9,7 +9,13 @@
       </div>
       <alpha-slider v-if="showAlpha" ref="alpha" :color="color"></alpha-slider>
       <div class="el-color-dropdown__btns">
-        <span class="el-color-dropdown__value">{{ currentColor }}</span>
+        <span class="el-color-dropdown__value">
+          <el-input
+            v-model="customInput"
+            @keyup.native.enter="handleConfirm"
+            size="mini">
+          </el-input>
+        </span>
         <a href="JavaScript:" class="el-color-dropdown__link-btn" @click="$emit('clear')">{{ t('el.colorpicker.clear') }}</a>
         <button class="el-color-dropdown__btn" @click="confirmValue">{{ t('el.colorpicker.confirm') }}</button>
       </div>
@@ -23,6 +29,7 @@
   import AlphaSlider from './alpha-slider';
   import Popper from 'element-ui/src/utils/vue-popper';
   import Locale from 'element-ui/src/mixins/locale';
+  import ElInput from 'element-ui/packages/input';
 
   export default {
     name: 'el-color-picker-dropdown',
@@ -32,7 +39,8 @@
     components: {
       SvPanel,
       HueSlider,
-      AlphaSlider
+      AlphaSlider,
+      ElInput
     },
 
     props: {
@@ -40,6 +48,12 @@
         required: true
       },
       showAlpha: Boolean
+    },
+
+    data() {
+      return {
+        customInput: ''
+      };
     },
 
     computed: {
@@ -52,6 +66,18 @@
     methods: {
       confirmValue() {
         this.$emit('pick');
+      },
+
+      handleConfirm() {
+        if (this.validRGBHex(this.customInput)) {
+          this.color.fromString(this.customInput);
+        } else {
+          this.customInput = this.currentColor;
+        }
+      },
+
+      validRGBHex(color) {
+        return /^#[A-Fa-f0-9]{6}$/.test(color);
       }
     },
 
@@ -70,6 +96,10 @@
             alpha && alpha.update();
           });
         }
+      },
+
+      currentColor(val) {
+        this.customInput = val;
       }
     }
   };
