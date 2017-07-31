@@ -12,7 +12,7 @@
         view-class="el-autocomplete-suggestion__list"
       >
         <li v-if="parent.loading"><i class="el-icon-loading"></i></li>
-        <li v-else-if='suggestions.length==0'>查无数据</li>
+        <li v-else-if='suggestions.length==0 && dropNone'>查无数据</li>
         <template v-for="(item, index) in suggestions" v-else>
           <li
             v-if="!parent.customItem&&html"
@@ -64,6 +64,7 @@
       props: Object,
       suggestions: Array,
       html: Boolean,
+      dropNone: Boolean,
       options: {
         default() {
           return {

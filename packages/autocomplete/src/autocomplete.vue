@@ -29,6 +29,7 @@
     <el-autocomplete-suggestions
       :props="props"
       :html='isHtml'
+      :dropNone='isDropNone'
       :class="[popperClass ? popperClass : '']"
       ref="suggestions"
       :suggestions="suggestions"
@@ -78,7 +79,8 @@
       customItem: String,
       icon: String,
       onIconClick: Function,
-      onhtml: Boolean
+      onhtml: Boolean,
+      isdrop: Boolean
     },
     data() {
       return {
@@ -87,15 +89,20 @@
         suggestions: [],
         loading: false,
         highlightedIndex: -1,
-        isHtml: this.onhtml
+        isHtml: this.onhtml,
+        isDropNone: this.isdrop
       };
     },
     computed: {
       suggestionVisible() {
         const suggestions = this.suggestions;
-        //let isValidData = Array.isArray(suggestions) && suggestions.length > 0;
-        let isValidData = Array.isArray(suggestions);
-        return (isValidData || this.loading) && this.isFocus && this.value;
+        if (!this.isdrop) {
+          let isValidData = Array.isArray(suggestions) && suggestions.length > 0;
+          return (isValidData || this.loading) && this.isFocus;
+        } else {
+          let isValidData = Array.isArray(suggestions);
+          return (isValidData || this.loading) && this.isFocus && this.value;
+        }
       }
     },
     watch: {
@@ -129,10 +136,9 @@
           this.suggestions = [];
           return;
         }
-        console.log(value);
         if (value) {
           this.getData(value);
-        }
+        } 
       },
       handleFocus() {
         this.isFocus = true;
