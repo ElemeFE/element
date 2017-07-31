@@ -123,7 +123,7 @@
           if (item.__IS__FLAT__OPTIONS) isFlat = true;
 
           if (!item.disabled) {
-            if (item.children) {
+            if (item.children.length) {
               let triggerEvent = {
                 click: 'click',
                 hover: 'mouseenter'
@@ -148,7 +148,7 @@
             <li
               class={{
                 'el-cascader-menu__item': true,
-                'el-cascader-menu__item--extensible': item.children,
+                'el-cascader-menu__item--extensible': item.children.length,
                 'is-active': item.value === activeValue[menuIndex],
                 'is-disabled': item.disabled
               }}
@@ -162,19 +162,20 @@
         if (isFlat) {
           menuStyle.minWidth = this.inputWidth + 'px';
         }
-
-        return (
-          <ul
-            class={{
-              'el-cascader-menu': true,
-              'el-cascader-menu--flexible': isFlat
-            }}
-            style={menuStyle}
-            refInFor
-            ref="menus">
-            {items}
-          </ul>
-        );
+        if(items.length) {
+          return (
+            <ul
+              class={{
+                'el-cascader-menu': true,
+                'el-cascader-menu--flexible': isFlat
+              }}
+              style={menuStyle}
+              refInFor
+              ref="menus">
+              {items}
+            </ul>
+          );
+        }
       });
       return (
         <transition name="el-zoom-in-top" on-before-enter={this.handleMenuEnter} on-after-leave={this.handleMenuLeave}>
