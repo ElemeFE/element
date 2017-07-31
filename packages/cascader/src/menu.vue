@@ -162,7 +162,8 @@
         if (isFlat) {
           menuStyle.minWidth = this.inputWidth + 'px';
         }
-        if(items.length) {
+
+        if (items.length) {
           return (
             <ul
               class={{
