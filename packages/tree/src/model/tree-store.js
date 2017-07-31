@@ -316,4 +316,7 @@ export default class TreeStore {
       }
     });
   }
+  loadMore(node) {
+    node.expand();
+  }
 };

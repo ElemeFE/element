@@ -1,6 +1,6 @@
 {
   "name": "my-element-ui",
-  "version": "1.5.9",
+  "version": "1.6.0",
   "description": "A Component Library for Vue.js.",
   "main": "lib/my-element-ui.common.js",
   "files": [
@@ -48,7 +48,10 @@
     "async-validator": "1.6.9",
     "babel-helper-vue-jsx-merge-props": "^2.0.0",
     "deepmerge": "^1.2.0",
-    "throttle-debounce": "^1.0.1"
+    "infinite-scroll": "^3.0.0",
+    "throttle-debounce": "^1.0.1",
+    "vue-infinite-scroll": "^2.0.1",
+    "vue-scroller": "^2.2.2"
   },
   "peerDependencies": {
     "vue": "^2.3.0"

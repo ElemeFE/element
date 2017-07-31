@@ -13,7 +13,9 @@
     .buttons {
       margin-top: 20px;
     }
-
+    .source {
+      height: 304px;
+    }
     .filter-tree {
       margin-top: 20px;
     }
@@ -109,11 +111,27 @@
   let id = 1000;
 
   const regions = [{
-    'id':1,
     'name': 'region1'
   }, {
-    'id':2,
     'name': 'region2'
+  }, {
+    'name': 'region3'
+  }, {
+    'name': 'region4'
+  }, {
+    'name': 'region5'
+  }, {
+    'name': 'region6'
+  }, {
+    'name': 'region7'
+  }, {
+    'name': 'region8'
+  }, {
+    'name': 'region9'
+  }, {
+    'name': 'region10'
+  }, {
+    'name': 'region11'
   }];
 
   let count = 1;
@@ -143,8 +161,31 @@
         console.log(data);
       },
       loadNode(node, resolve) {
+      
         if (node.level === 0) {
-          return resolve([{ name: 'region1' }, { name: 'region2' }]);
+          return resolve([{
+                                                'name': 'region1'
+                                              }, {
+                                                'name': 'region2'
+                                              }, {
+                                                'name': 'region3'
+                                              }, {
+                                                'name': 'region4'
+                                              }, {
+                                                'name': 'region5'
+                                              }, {
+                                                'name': 'region6'
+                                              }, {
+                                                'name': 'region7'
+                                              }, {
+                                                'name': 'region8'
+                                              }, {
+                                                'name': 'region9'
+                                              }, {
+                                                'name': 'region10'
+                                              }, {
+                                                'name': 'region11'
+                                              }]);
         }
         if (node.level > 3) return resolve([]);
         var hasChild;
@@ -324,10 +365,28 @@
     data() {
       return {
         regions: [{
-          'name': 'region1'
-        }, {
-          'name': 'region2'
-        }],
+                      'name': 'region1'
+                    }, {
+                      'name': 'region2'
+                    }, {
+                      'name': 'region3'
+                    }, {
+                      'name': 'region4'
+                    }, {
+                      'name': 'region5'
+                    }, {
+                      'name': 'region6'
+                    }, {
+                      'name': 'region7'
+                    }, {
+                      'name': 'region8'
+                    }, {
+                      'name': 'region9'
+                    }, {
+                      'name': 'region10'
+                    }, {
+                      'name': 'region11'
+                    }],
         props: {
           label: 'name',
           children: 'zones'
@@ -344,7 +403,29 @@
       },
       loadNode(node, resolve) {
         if (node.level === 0) {
-          return resolve([{ name: 'region1' }, { name: 'region2' }]);
+          return resolve([{
+                                                'name': 'region1'
+                                              }, {
+                                                'name': 'region2'
+                                              }, {
+                                                'name': 'region3'
+                                              }, {
+                                                'name': 'region4'
+                                              }, {
+                                                'name': 'region5'
+                                              }, {
+                                                'name': 'region6'
+                                              }, {
+                                                'name': 'region7'
+                                              }, {
+                                                'name': 'region8'
+                                              }, {
+                                                'name': 'region9'
+                                              }, {
+                                                'name': 'region10'
+                                              }, {
+                                                'name': 'region11'
+                                              }]);
         }
         if (node.level > 3) return resolve([]);
 

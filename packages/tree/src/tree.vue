@@ -18,7 +18,7 @@
       <tbody>
       <tr>
               <td v-if="!(contianAll && showCheckbox)">
-    <div class="el-tree-nodes">
+    <div class="el-tree-nodes" >
       <el-tree-node
               v-for="child in root.childNodes"
               :node="child"
@@ -30,7 +30,7 @@
   </div>
               </td>
         <td v-if="expendNodes.length > 0 && expendNode.childNodes.length > 0" v-for="expendNode in expendNodes">
-          <div class="el-tree-sub" >
+          <div class="el-tree-sub">
             <el-tree-node
                     v-for="child in expendNode.childNodes"
                     :node="child"
@@ -60,7 +60,7 @@ div{
   box-sizing: border-box;
 }
 .el-tree{
-  height: 256px;
+  height: 100%;
   position: relative;
 }
 .el-tree .el-tree-node__label{
@@ -73,6 +73,10 @@ div{
   height: 100%;
   padding-top: 110px;
   border-right: 1px solid rgb(209, 219, 229);
+}
+.el-tree-nodes{
+  height: 100%;
+  overflow-y: auto;
 }
 .el-tree-all .el-tree-node{
   border: none;
@@ -92,9 +96,15 @@ div{
 .el-tree-levels-all{
   margin-left: 40px;
 }
+.el-tree-levels{
+  height: 100%;
+}
 .el-tree-levels table{
   border-collapse:collapse;
   width:100%;
+  height: 100%;
+}
+.el-tree-levels table tr{
   height: 100%;
 }
 .el-tree-levels table tr td{
@@ -257,7 +267,8 @@ div{
       setChecked(data, checked, deep) {
         this.store.setChecked(data, checked, deep);
       },
-
+      loadMore(node) {
+      },
       handleNodeExpand(nodeData, node, instance) {
         this.expendNodes[node.level - 1] = node;
         for (let i = 0;i < this.expendNodes.length;i++) {
