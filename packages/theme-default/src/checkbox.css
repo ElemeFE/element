@@ -70,9 +70,10 @@
           }
         }
       }
-      @when focus {
+      @when focus { /*focus时 视觉上区分*/
         .el-checkbox__inner {
           border-color: var(--checkbox-input-border-color-hover);
+          box-shadow: 0 0 1px 0 var(--checkbox-input-border-color-hover);
         }
       }
       @when indeterminate {
@@ -192,7 +193,6 @@
       outline: none;
       position: absolute;
       margin: 0;
-      visibility: hidden;
       left: -999px;
     }
 
@@ -215,13 +215,6 @@
         box-shadow: none;
       }
     }
-    
-    &.is-focus {
-      & .el-checkbox-button__inner {
-        border-color: var(--checkbox-button-checked-border-color);
-      }
-    }
-
 
     &:first-child {
       .el-checkbox-button__inner {
@@ -230,6 +223,14 @@
         box-shadow: none !important;
       }
     }
+
+    &.is-focus {
+      & .el-checkbox-button__inner {
+        border-color: var(--checkbox-button-checked-border-color);
+        box-shadow: 0 0 1px 0 var(--checkbox-button-checked-border-color) !important;
+      }
+    }
+
     &:last-child {
       .el-checkbox-button__inner {
         border-radius: 0 var(--border-radius-base) var(--border-radius-base) 0;

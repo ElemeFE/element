@@ -1,5 +1,11 @@
 <template>
-  <label class="el-checkbox">
+  <label
+    class="el-checkbox"
+    role="checkbox"
+    :aria-checked="indeterminate ? 'mixed': isChecked"
+    :aria-disabled="disabled"
+    :id="id"
+  >
     <span class="el-checkbox__input"
       :class="{
         'is-disabled': disabled,
@@ -7,6 +13,7 @@
         'is-indeterminate': indeterminate,
         'is-focus': focus
       }"
+       aria-checked="mixed"
     >
       <span class="el-checkbox__inner"></span>
       <input
@@ -120,7 +127,9 @@
       checked: Boolean,
       name: String,
       trueLabel: [String, Number],
-      falseLabel: [String, Number]
+      falseLabel: [String, Number],
+      id: String, /* 当indeterminate为真时，为controls提供相关连的checkbox的id，表明元素间的控制关系*/
+      controls: String /* 当indeterminate为真时，为controls提供相关连的checkbox的id，表明元素间的控制关系*/
     },
 
     methods: {
@@ -146,6 +155,11 @@
 
     created() {
       this.checked && this.addToStore();
+    },
+    mounted() { // 为indeterminate元素 添加aria-controls 属性
+      if (this.indeterminate) {
+        this.$el.setAttribute('aria-controls', this.controls);
+      }
     }
   };
 </script>

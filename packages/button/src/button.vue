@@ -1,7 +1,8 @@
 <template>
-  <button :disabled="disabled" class="el-button"
+  <button
+    v-bind="$props"
+    class="el-button"
     @click="handleClick"
-    :autofocus="autofocus"
     :type="nativeType"
     :class="[
       type ? 'el-button--' + type : '',

@@ -106,7 +106,7 @@
 ```html
 <template>
   <el-checkbox-group v-model="checkList">
-    <el-checkbox label="复选框 A"></el-checkbox>
+    <el-checkbox label="复选框 A" ></el-checkbox>
     <el-checkbox label="复选框 B"></el-checkbox>
     <el-checkbox label="复选框 C"></el-checkbox>
     <el-checkbox label="禁用" disabled></el-checkbox>
@@ -134,10 +134,10 @@
 
 ```html
 <template>
-  <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
+  <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange" controls="id0 id1">全选</el-checkbox>
   <div style="margin: 15px 0;"></div>
   <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
-    <el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
+    <el-checkbox v-for="(city, index) in cities" :label="city" :key="city" :id="`id${index}`">{{city}}</el-checkbox>
   </el-checkbox-group>
 </template>
 <script>
