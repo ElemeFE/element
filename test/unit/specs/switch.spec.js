@@ -175,4 +175,29 @@ describe('Switch', () => {
       }, 10);
     }, 10);
   });
+
+  it('sets checkbox value', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-switch v-model="value"></el-switch>
+        </div>
+      `,
+      data() {
+        return {
+          value: false
+        };
+      }
+    }, true);
+
+    vm.value = true;
+    setTimeout(() => {
+      expect(vm.$el.querySelector('input').checked).to.equal(true);
+      vm.value = false;
+      setTimeout(() => {
+        expect(vm.$el.querySelector('input').checked).to.equal(false);
+        done();
+      }, 10);
+    }, 10);
+  });
 });
