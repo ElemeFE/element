@@ -271,7 +271,7 @@ div{
           console.log('test');
         node.loadData(()=>{
             el.dataset.promise = 'false';
-        },null,true);
+        }, null, true);
       },
       handleNodeExpand(nodeData, node, instance) {
         this.expendNodes[node.level - 1] = node;
@@ -291,12 +291,12 @@ div{
       scroll: {
         bind: function(el, binding) {
           el.dataset.promise = 'false';
-          el.addEventListener('scroll', function () {
-            if(el.scrollHeight - el.clientHeight - el.scrollTop < 5){
+          el.addEventListener('scroll', function() {
+            if (el.scrollHeight - el.clientHeight - el.scrollTop < 5) {
               let value = binding.value;
-              if(el.dataset.promise === 'false'){
+              if (el.dataset.promise === 'false') {
                 el.dataset.promise = 'true';
-                value.fun(el,value.arg);
+                value.fun(el, value.arg);
               }
             }
           });
