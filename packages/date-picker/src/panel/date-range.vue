@@ -457,7 +457,9 @@
       },
 
       handleConfirm(visible = false) {
-        this.$emit('pick', [this.minDate, this.maxDate], visible);
+        if (this.minDate && this.maxDate) {
+          this.$emit('pick', [this.minDate, this.maxDate], visible);
+        }
       },
 
       resetDate() {

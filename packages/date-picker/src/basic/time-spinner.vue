@@ -129,7 +129,8 @@
         hoursPrivate: 0,
         minutesPrivate: 0,
         secondsPrivate: 0,
-        selectableRange: []
+        selectableRange: [],
+        currentScrollbar: null
       };
     },
 
@@ -162,6 +163,7 @@
         } else if (type === 'seconds') {
           this.$emit('select-range', 6, 8);
         }
+        this.currentScrollbar = type;
       },
 
       bindScrollEvent() {
@@ -188,6 +190,35 @@
 
       ajustElTop(type, value) {
         this[`${type}El`].scrollTop = Math.max(0, (value - 2.5) * 32 + 80);
+      },
+
+      scrollDown(step) {
+        if (!this.currentScrollbar) {
+          this.emitSelectRange('hours');
+        }
+
+        const label = this.currentScrollbar;
+        const hoursList = this.hoursList;
+        let now = this[label];
+
+        if (this.currentScrollbar === 'hours') {
+          let total = Math.abs(step);
+          step = step > 0 ? 1 : -1;
+          let length = hoursList.length;
+          while (length-- && total) {
+            now = (now + step + hoursList.length) % hoursList.length;
+            if (hoursList[now]) {
+              continue;
+            }
+            total--;
+          }
+          if (hoursList[now]) return;
+        } else {
+          now = (now + step + 60) % 60;
+        }
+
+        this.$emit('change', { [label]: now });
+        this.ajustElTop(label.slice(0, -1), now);
       }
     }
   };

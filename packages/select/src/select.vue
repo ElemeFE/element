@@ -51,6 +51,7 @@
       :readonly="!filterable || multiple"
       :validate-event="false"
       @focus="handleFocus"
+      @blur="handleBlur"
       @click="handleIconClick"
       @mousedown.native="handleMouseDown"
       @keyup.native="debouncedOnInputChange"
@@ -92,6 +93,7 @@
 
 <script type="text/babel">
   import Emitter from 'element-ui/src/mixins/emitter';
+  import Focus from 'element-ui/src/mixins/focus';
   import Locale from 'element-ui/src/mixins/locale';
   import ElInput from 'element-ui/packages/input';
   import ElSelectMenu from './select-dropdown.vue';
@@ -112,8 +114,20 @@
     'mini': 22
   };
 
+  const valueEquals = (a, b) => {
+    // see: https://stackoverflow.com/questions/3115982/how-to-check-if-two-arrays-are-equal-with-javascript
+    if (a === b) return true;
+    if (!(a instanceof Array)) return false;
+    if (!(b instanceof Array)) return false;
+    if (a.length !== b.length) return false;
+    for (let i = 0; i !== a.length; ++i) {
+      if (a[i] !== b[i]) return false;
+    }
+    return true;
+  };
+
   export default {
-    mixins: [Emitter, Locale],
+    mixins: [Emitter, Locale, Focus('reference')],
 
     name: 'ElSelect',
 
@@ -243,7 +257,6 @@
         if (this.filterable && !this.multiple) {
           this.inputLength = 20;
         }
-        this.$emit('change', val);
         this.dispatch('ElFormItem', 'el.form.change', val);
       },
 
@@ -366,6 +379,12 @@
         this.$nextTick(() => this.scrollToOption(this.selected));
       },
 
+      emitChange(val) {
+        if (!valueEquals(this.value, val)) {
+          this.$emit('change', val);
+        }
+      },
+
       getOption(value) {
         let option;
         const isObject = Object.prototype.toString.call(value).toLowerCase() === '[object object]';
@@ -418,8 +437,13 @@
         });
       },
 
-      handleFocus() {
+      handleFocus(event) {
         this.visible = true;
+        this.$emit('focus', event);
+      },
+
+      handleBlur(event) {
+        this.$emit('blur', event);
       },
 
       handleIconClick(event) {
@@ -466,6 +490,7 @@
           const value = this.value.slice();
           value.pop();
           this.$emit('input', value);
+          this.emitChange(value);
         }
       },
 
@@ -517,6 +542,7 @@
             value.push(option.value);
           }
           this.$emit('input', value);
+          this.emitChange(value);
           if (option.created) {
             this.query = '';
             this.inputLength = 20;
@@ -524,6 +550,7 @@
           if (this.filterable) this.$refs.input.focus();
         } else {
           this.$emit('input', option.value);
+          this.emitChange(option.value);
           this.visible = false;
         }
         this.$nextTick(() => this.scrollToOption(option));
@@ -599,6 +626,7 @@
       deleteSelected(event) {
         event.stopPropagation();
         this.$emit('input', '');
+        this.emitChange('');
         this.visible = false;
         this.$emit('clear');
       },
@@ -609,6 +637,7 @@
           const value = this.value.slice();
           value.splice(index, 1);
           this.$emit('input', value);
+          this.emitChange(value);
           this.$emit('remove-tag', tag);
         }
         event.stopPropagation();

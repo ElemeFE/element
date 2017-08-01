@@ -14,7 +14,17 @@
       closable: Boolean,
       addable: Boolean,
       value: {},
-      editable: Boolean
+      editable: Boolean,
+      tabPosition: {
+        type: String,
+        default: 'top'
+      }
+    },
+
+    provide() {
+      return {
+        rootTabs: this
+      };
     },
 
     data() {
@@ -83,7 +93,8 @@
         currentName,
         panes,
         editable,
-        addable
+        addable,
+        tabPosition
       } = this;
 
       const newButton = editable || addable
@@ -108,20 +119,26 @@
         },
         ref: 'nav'
       };
+      const header = (
+        <div class="el-tabs__header">
+          {newButton}
+          <tab-nav { ...navData }></tab-nav>
+        </div>
+      );
+      const panels = (
+        <div class="el-tabs__content">
+          {this.$slots.default}
+        </div>
+      );
 
       return (
         <div class={{
           'el-tabs': true,
           'el-tabs--card': type === 'card',
+          [`el-tabs--${tabPosition}`]: true,
           'el-tabs--border-card': type === 'border-card'
         }}>
-          <div class="el-tabs__header">
-            {newButton}
-            <tab-nav { ...navData }></tab-nav>
-          </div>
-          <div class="el-tabs__content">
-            {this.$slots.default}
-          </div>
+          { tabPosition !== 'bottom' ? [header, panels] : [panels, header] }
         </div>
       );
     },

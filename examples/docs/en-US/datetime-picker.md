@@ -241,6 +241,7 @@ Select date and time in one picker.
 | popper-class | custom class name for DateTimePicker's dropdown | string | — | — |
 | picker-options | additional options, check the table below | object | — | {} |
 | range-separator | range separator | string | - | ' - ' |
+|name | same as `name` in native input | string | — | — |
 
 ### Picker Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
@@ -254,9 +255,14 @@ Select date and time in one picker.
 | text | title of the shortcut | string | — | — |
 | onClick | callback function, triggers when the shortcut is clicked, with the `vm` as its parameter. You can change the picker value by emitting the `pick` event. Example: `vm.$emit('pick', new Date())`| function | — | — |
 
-
 ### Events
 | Event Name | Description | Parameters |
 |---------|--------|---------|
 | change | triggers when input value changes | formatted value |
+| blur | triggers when Input blurs | (event: Event) |
+| focus | triggers when Input focuses | (event: Event) |
 
+### Methods
+| Method | Description | Parameters |
+|------|--------|-------|
+| focus | focus the Input component | - |

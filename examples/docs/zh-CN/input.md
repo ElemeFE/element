@@ -801,8 +801,9 @@ export default {
 | trigger-on-focus | 是否在输入框 focus 时显示建议列表 | boolean | — | true |
 | on-icon-click | 点击图标的回调函数 | function | — | — |
 | icon          | 输入框尾部图标    | string          | — | — |
+| name | 原生属性 | string | — | — |
 
-### props
+### Props
 | 参数     | 说明              | 类型   | 可选值 | 默认值 |
 | -------- | ----------------- | ------ | ------ | ------ |
 | value    | 指定选项的值为选项对象的某个属性值 | string | — | value |
@@ -812,3 +813,8 @@ export default {
 | 事件名称 | 说明 | 回调参数 |
 |---------|--------|---------|
 | select | 点击选中建议项时触发 | 选中建议项 |
+
+### Methods
+| 方法名 | 说明 | 参数 |
+| ---- | ---- | ---- |
+| focus | 使 input 获取焦点 | - |

@@ -671,6 +671,8 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 | visible-change | triggers when the dropdown appears/disappears | true when it appears, and false otherwise |
 | remove-tag | triggers when a tag is removed in multiple mode | removed tag value |
 | clear | triggers when the clear icon is clicked in a clearable Select | — |
+| blur | triggers when Input blurs | (event: Event) |
+| focus | triggers when Input focuses | (event: Event) |
 
 ### Option Group Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
@@ -685,3 +687,7 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 | label | label of option, same as `value` if omitted | string/number | — | — |
 | disabled | whether option is disabled | boolean | — | false |
 
+### Methods
+| Method | Description | Parameters |
+|------|--------|-------|
+| focus | focus the Input component | - |

@@ -27,19 +27,21 @@
       @keydown.up.native.prevent="increase"
       @keydown.down.native.prevent="decrease"
       @blur="handleBlur"
+      @focus="handleFocus"
       @input="debounceHandleInput"
       :disabled="disabled"
       :size="size"
       :max="max"
       :min="min"
+      :name="name"
       ref="input"
     >
-        <template slot="prepend" v-if="$slots.prepend">
-          <slot name="prepend"></slot>
-        </template>
-        <template slot="append" v-if="$slots.append">
-          <slot name="append"></slot>
-        </template> 
+      <template slot="prepend" v-if="$slots.prepend">
+        <slot name="prepend"></slot>
+      </template>
+      <template slot="append" v-if="$slots.append">
+        <slot name="append"></slot>
+      </template> 
     </el-input>
   </div>
 </template>
@@ -47,9 +49,11 @@
   import ElInput from 'element-ui/packages/input';
   import { once, on } from 'element-ui/src/utils/dom';
   import debounce from 'throttle-debounce/debounce';
+  import Focus from 'element-ui/src/mixins/focus';
 
   export default {
     name: 'ElInputNumber',
+    mixins: [Focus('input')],
     directives: {
       repeatClick: {
         bind(el, binding, vnode) {
@@ -101,7 +105,8 @@
       debounce: {
         type: Number,
         default: 300
-      }
+      },
+      name: String
     },
     data() {
       return {
@@ -175,8 +180,12 @@
         if (newVal < this.min) return;
         this.setCurrentValue(newVal);
       },
-      handleBlur() {
+      handleBlur(event) {
+        this.$emit('blur', event);
         this.$refs.input.setCurrentValue(this.currentValue);
+      },
+      handleFocus(event) {
+        this.$emit('focus', event);
       },
       setCurrentValue(newVal) {
         const oldVal = this.currentValue;

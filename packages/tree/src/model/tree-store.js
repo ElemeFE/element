@@ -139,6 +139,12 @@ export default class TreeStore {
     const key = this.key;
     if (!key || !node || !node.data) return;
 
+    const childNodes = node.childNodes;
+    for (let i = 0, j = childNodes.length; i < j; i++) {
+      const child = childNodes[i];
+      this.deregisterNode(child);
+    }
+
     delete this.nodesMap[node.key];
   }
 
@@ -185,6 +191,20 @@ export default class TreeStore {
     }
 
     return allNodes;
+  }
+
+  updateChildren(key, data) {
+    const node = this.nodesMap[key];
+    if (!node) return;
+    const childNodes = node.childNodes;
+    for (let i = 0, j = childNodes.length; i < j; i++) {
+      const child = childNodes[i];
+      this.remove(child.data);
+    }
+    for (let i = 0, j = data.length; i < j; i++) {
+      const child = data[i];
+      this.append(child, node.data);
+    }
   }
 
   _setCheckedKeys(key, leafOnly = false, checkedKeys) {
@@ -276,6 +296,12 @@ export default class TreeStore {
 
   setCurrentNode(node) {
     this.currentNode = node;
+  }
+
+  setUserCurrentNode(node) {
+    const key = node[this.key];
+    const currNode = this.nodesMap[key];
+    this.setCurrentNode(currNode);
   }
 
   setCurrentNodeKey(key) {

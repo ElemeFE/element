@@ -240,6 +240,7 @@
 | popper-class | DateTimePicker 下拉框的类名 | string | — | — |
 | picker-options | 当前时间日期选择器特有的选项参考下表 | object |  — | {} |
 | range-separator | 选择范围时的分隔符 | string | - | ' - ' |
+| name | 原生属性 | string | — | — |
 
 ### Picker Options
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
@@ -253,10 +254,14 @@
 | text | 标题文本 | string | — | — |
 | onClick | 选中后的回调函数，参数是 vm，可通过触发 'pick' 事件设置选择器的值。例如 vm.$emit('pick', new Date()) | function | — | — |
 
-
 ### Events
 | Event Name | Description | Parameters |
 |---------|--------|---------|
 | change | 当 input 的值改变时触发，返回值和文本框一致 | formatted value |
+| blur | 当 input 失去焦点时触发 | (event: Event) |
+| focus | 当 input 获得焦点时触发 | (event: Event) |
 
-
+### Methods
+| 方法名 | 说明 | 参数 |
+| ---- | ---- | ---- |
+| focus | 使 input 获取焦点 | - |

@@ -287,6 +287,7 @@ Picking a date range is supported.
 | picker-options | additional options, check the table below | object | — | {} |
 | range-separator | range separator | string | - | ' - ' |
 | default-value | optional default time of the picker | Date | anything accepted by `new Date()` | - |
+|name | same as `name` in native input | string | — | — |
 
 ### Picker Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
@@ -307,3 +308,10 @@ Picking a date range is supported.
 | Event Name | Description | Parameters |
 |---------|--------|---------|
 | change | triggers when input value changes | formatted value |
+| blur | triggers when Input blurs | (event: Event) |
+| focus | triggers when Input focuses | (event: Event) |
+
+### Methods
+| Method | Description | Parameters |
+|------|--------|-------|
+| focus | focus the Input component | - |

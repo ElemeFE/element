@@ -622,8 +622,8 @@ Search data from server-side.
 | Event Name | Description | Parameters |
 |----| ----| ----|
 |click | triggers when the icon inside Input is clicked | (event: Event) |
-| blur | triggers when the icon inside Input is blur | (event: Event) |
-| focus | triggers when the icon inside Input is focus | (event: Event) |
+| blur | triggers when Input blurs | (event: Event) |
+| focus | triggers when Input focuses | (event: Event) |
 | change | triggers when the icon inside Input value change | (value: string \| number) |
 
 ### Autocomplete Attributes
@@ -640,6 +640,7 @@ Attribute | Description | Type | Options | Default
 | popper-class | custom class name for autocomplete's dropdown | string | — | — |
 | trigger-on-focus | whether show suggestions when input focus | boolean | — | true |
 | on-icon-click | hook function when clicking on the input icon | function | — | — |
+|name | same as `name` in native input | string | — | — |
 
 ### props
 | Attribute | Description | Type | Accepted Values | Default |
@@ -653,8 +654,7 @@ Attribute | Description | Type | Options | Default
 |----| ----| ----|
 |select | triggers when a suggestion is clicked | suggestion being clicked |
 
-
-
-
-
-
+### Methods
+| Method | Description | Parameters |
+|------|--------|-------|
+| focus | focus the Input component | - |

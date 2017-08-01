@@ -161,6 +161,7 @@ Can pick an arbitrary time range.
 | align | alignment | left/center/right | left |
 | popper-class | custom class name for TimePicker's dropdown | string | — | — |
 | picker-options | additional options, check the table below | object | — | {} |
+|name | same as `name` in native input | string | — | — |
 
 ### Time Select Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
@@ -182,4 +183,5 @@ Can pick an arbitrary time range.
 | Event Name | Description | Parameters |
 |---------|--------|---------|
 | change | triggers when input value changes | formatted value |
-
+| blur | triggers when Input blurs | (event: Event) |
+| focus | triggers when Input focuses | (event: Event) |

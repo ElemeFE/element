@@ -653,4 +653,76 @@ describe('Select', () => {
       }, 250);
     });
   });
+
+  it('event:focus & blur', done => {
+    vm = createVue({
+      template: `
+        <el-select ref="select"></el-select>
+      `
+    }, true);
+
+    const spyFocus = sinon.spy();
+    const spyBlur = sinon.spy();
+
+    vm.$refs.select.$on('focus', spyFocus);
+    vm.$refs.select.$on('blur', spyBlur);
+    vm.$el.querySelector('input').focus();
+    vm.$el.querySelector('input').blur();
+
+    vm.$nextTick(_ => {
+      expect(spyFocus.calledOnce).to.be.true;
+      expect(spyBlur.calledOnce).to.be.true;
+      done();
+    });
+  });
+
+  it('focus', done => {
+    vm = createVue({
+      template: `
+        <el-select ref="select"></el-select>
+      `
+    }, true);
+    const spy = sinon.spy();
+
+    vm.$refs.select.$on('focus', spy);
+    vm.$refs.select.focus();
+
+    vm.$nextTick(_ => {
+      expect(spy.calledOnce).to.be.true;
+      done();
+    });
+  });
+
+  it('only emit change on user input', done => {
+    let callCount = 0;
+    vm = createVue({
+      template: `
+        <div>
+          <el-select v-model="value" @change="change" ref="select">
+            <el-option label="1" :value="1" />
+            <el-option label="2" :value="2" />
+            <el-option label="3" :value="3" />
+          </el-select>
+        </div>
+      `,
+      data() {
+        return {
+          value: 1,
+          change: () => ++callCount
+        };
+      }
+    });
+
+    vm.value = 2;
+    setTimeout(() => {
+      expect(callCount).to.equal(0);
+      const options = vm.$el.querySelectorAll('.el-select-dropdown__item');
+      triggerEvent(options[2], 'mouseenter');
+      options[2].click();
+      setTimeout(() => {
+        expect(callCount).to.equal(1);
+        done();
+      }, 10);
+    }, 10);
+  });
 });

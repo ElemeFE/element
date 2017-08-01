@@ -5,6 +5,7 @@
     :readonly="!editable || readonly"
     :disabled="disabled"
     :size="size"
+    :name="name"
     v-clickoutside="handleClose"
     :placeholder="placeholder"
     @focus="handleFocus"
@@ -31,6 +32,7 @@ import Clickoutside from 'element-ui/src/utils/clickoutside';
 import { formatDate, parseDate, getWeekNumber, equalDate, isDate } from './util';
 import Popper from 'element-ui/src/utils/vue-popper';
 import Emitter from 'element-ui/src/mixins/emitter';
+import Focus from 'element-ui/src/mixins/focus';
 import ElInput from 'element-ui/packages/input';
 
 const NewPopper = {
@@ -197,13 +199,14 @@ const valueEquals = function(a, b) {
 };
 
 export default {
-  mixins: [Emitter, NewPopper],
+  mixins: [Emitter, NewPopper, Focus('reference')],
 
   props: {
     size: String,
     format: String,
     readonly: Boolean,
     placeholder: String,
+    name: String,
     disabled: Boolean,
     clearable: {
       type: Boolean,

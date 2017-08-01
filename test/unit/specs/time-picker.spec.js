@@ -1,4 +1,4 @@
-import { createTest, destroyVM } from '../util';
+import { createTest, destroyVM, createVue } from '../util';
 import TimePicker from 'packages/time-picker';
 import Vue from 'vue';
 
@@ -176,6 +176,55 @@ describe('TimePicker', () => {
       done();
     }, 20);
   });
+
+  it('event focus and blur', done => {
+    vm = createVue({
+      template: `
+        <el-date-picker
+          type="date"
+          placeholder="选择日期"
+          ref="picker">
+        </el-date-picker>
+      `
+    }, true);
+
+    const spyFocus = sinon.spy();
+    const spyBlur = sinon.spy();
+
+    vm.$refs.picker.$on('focus', spyFocus);
+    vm.$refs.picker.$on('blur', spyBlur);
+    vm.$el.querySelector('input').focus();
+    vm.$el.querySelector('input').blur();
+
+    vm.$nextTick(_ => {
+      expect(spyFocus.calledOnce).to.be.true;
+      expect(spyBlur.calledOnce).to.be.true;
+      done();
+    });
+  });
+
+  it('focus', done => {
+    vm = createVue({
+      template: `
+        <el-date-picker
+          type="date"
+          placeholder="选择日期"
+          ref="picker">
+        </el-date-picker>
+      `
+    }, true);
+
+    const spy = sinon.spy();
+
+    vm.$refs.picker.$on('focus', spy);
+    vm.$refs.picker.focus();
+
+    vm.$nextTick(_ => {
+      expect(spy.calledOnce).to.be.true;
+      done();
+    });
+  });
+
 });
 
 describe('TimePicker(range)', () => {
