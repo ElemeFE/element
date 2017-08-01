@@ -111,6 +111,7 @@
     },
     watch: {
       checked() {
+        this.$refs.input.checked = this.checked;
         if (this.onColor || this.offColor) {
           this.setBackgroundColor();
         }
