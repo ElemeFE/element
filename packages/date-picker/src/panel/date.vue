@@ -1,5 +1,5 @@
 <template>
-  <transition name="el-zoom-in-top" @after-leave="afterLeave">
+  <transition name="el-zoom-in-top" @after-enter="handleEnter" @after-leave="handleLeave">
     <div
       v-show="visible"
       :style="{
@@ -344,9 +344,62 @@
         }
       },
 
-      afterLeave() {
+      handleEnter() {
+        document.body.addEventListener('keydown', this.handleKeyDown);
+      },
+
+      handleLeave() {
         this.$refs.timepicker && this.$refs.timepicker.$emit('pick');
-        this.$emit('dodestroy');
+        this.$emit('dodestory');
+        document.body.removeEventListener('keydown', this.handleKeyDown);
+      },
+
+      handleKeyDown(e) {
+        const keyCode = e.keyCode;
+        const list = [38, 40, 37, 39];
+        if (this.visible && !this.timePickerVisible) {
+          if (list.indexOf(keyCode) !== -1) {
+            this.handleKeyControl(keyCode);
+            event.stopPropagation();
+            event.preventDefault();
+          }
+
+          if (keyCode === 13) {
+            this.confirm();
+            event.stopPropagation();
+            event.preventDefault();
+          }
+        }
+      },
+
+      handleKeyControl(keyCode) {
+        const mapping = {
+          'year': {
+            38: -4, 40: 4, 37: -1, 39: 1, offset: (date, step) => date.setFullYear(date.getFullYear() + step)
+          },
+          'month': {
+            38: -4, 40: 4, 37: -1, 39: 1, offset: (date, step) => date.setMonth(date.getMonth() + step)
+          },
+          'week': {
+            38: -1, 40: 1, 37: -1, 39: 1, offset: (date, step) => date.setDate(date.getDate() + step * 7)
+          },
+          'day': {
+            38: -7, 40: 7, 37: -1, 39: 1, offset: (date, step) => date.setDate(date.getDate() + step)
+          }
+        };
+        const mode = this.selectionMode;
+        const year = 3.1536e10;
+        const now = this.date.getTime();
+        const newDate = new Date(this.date.getTime());
+        while (Math.abs(now - newDate.getTime()) <= year) {
+          const map = mapping[mode];
+          map.offset(newDate, map[keyCode]);
+          if (typeof this.disabledDate === 'function' && this.disabledDate(newDate)) {
+            continue;
+          }
+          this.date = newDate;
+          break;
+        }
       }
     },
 
