@@ -81,7 +81,7 @@
         } else {
           this.activeValue = [item.value];
         }
-        this.$emit('pick', this.activeValue);
+        this.$emit('pick', this.activeValue.slice());
       },
       handleMenuLeave() {
         this.$emit('menuLeave');
@@ -91,7 +91,7 @@
         this.activeValue.splice(menuIndex, len, item.value);
         this.activeOptions.splice(menuIndex + 1, len, item.children);
         if (this.changeOnSelect) {
-          this.$emit('pick', this.activeValue, false);
+          this.$emit('pick', this.activeValue.slice(), false);
         } else {
           this.$emit('activeItemChange', this.activeValue);
         }
