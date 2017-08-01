@@ -41,6 +41,18 @@ describe('Message', () => {
     }, 500);
   });
 
+  it('custom icon', done => {
+    Message({
+      message: '夏天',
+      iconClass: 'el-icon-close'
+    });
+    setTimeout(() => {
+      const icon = document.querySelector('.el-message__icon i');
+      expect(icon.classList.contains('el-icon-close')).to.true;
+      done();
+    }, 500);
+  });
+
   it('close all', done => {
     Message({
       message: '夏天',
