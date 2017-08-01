@@ -215,7 +215,7 @@
           this.$emit('pick', {
             minDate: this.minDate,
             maxDate: this.maxDate
-          });
+          }, true, false);
         }
       }
     },

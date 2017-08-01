@@ -75,7 +75,7 @@
           hours: date.getHours(),
           minutes: date.getMinutes(),
           seconds: date.getSeconds()
-        });
+        }, true);
         this.$nextTick(_ => this.ajustScrollTop());
       },
 
@@ -108,14 +108,14 @@
 
     methods: {
       handleClear() {
-        this.$emit('pick');
+        this.$emit('pick', '', false, true);
       },
 
       handleCancel() {
-        this.$emit('pick');
+        this.$emit('pick', '', false, true);
       },
 
-      handleChange(date) {
+      handleChange(date, notUser) {
         if (date.hours !== undefined) {
           this.currentDate.setHours(date.hours);
           this.hours = this.currentDate.getHours();
@@ -128,8 +128,7 @@
           this.currentDate.setSeconds(date.seconds);
           this.seconds = this.currentDate.getSeconds();
         }
-
-        this.handleConfirm(true);
+        this.handleConfirm(true, null, notUser);
       },
 
       setSelectionRange(start, end) {
@@ -137,10 +136,10 @@
         this.selectionRange = [start, end];
       },
 
-      handleConfirm(visible = false, first) {
+      handleConfirm(visible = false, first, notUser = false) {
         if (first) return;
         const date = new Date(limitRange(this.currentDate, this.selectableRange, 'HH:mm:ss'));
-        this.$emit('pick', date, visible, first);
+        this.$emit('pick', date, visible, !notUser);
       },
 
       ajustScrollTop() {
