@@ -348,16 +348,17 @@ export default class Node {
     this.updateLeafState();
   }
 
-  loadData(callback, defaultProps = {}) {
-    if (this.store.lazy === true && this.store.load && !this.loaded && !this.loading) {
+  loadData(callback, defaultProps = {}, isMore = false) {
+    if ((this.store.lazy === true && this.store.load && !this.loaded && !this.loading && !isMore) || (this.store.lazy === true && this.store.load && !this.loading && isMore)) {
       this.loading = true;
 
       const resolve = (children) => {
         this.loaded = true;
         this.loading = false;
-        this.childNodes = [];
-
-        this.doCreateChildren(children, defaultProps);
+        if (!isMore) {
+          this.childNodes = [];
+        }
+        this.doCreateChildren(children, defaultProps, isMore);
 
         this.updateLeafState();
         if (callback) {

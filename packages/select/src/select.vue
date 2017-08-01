@@ -95,11 +95,11 @@
             v-if="showNewOption">
           </el-option>
           <slot></slot>
-          <div style="padding: 6px 10px 0; text-align: right; border-top: 1px solid #e7e7e7;" v-if="list">
-            <el-checkbox style="float: left; margin-top: 4px" v-model="isSelectAll" @change="selectAll">全部</el-checkbox>
-            <el-button style="border-radius: 14px; padding: 7px 16px;" :disabled="value.length === 0" @click="confrimSelect">确定</el-button>
-          </div>
         </el-scrollbar>
+        <div style="padding: 6px 10px; text-align: right; border-top: 1px solid #e7e7e7;" v-if="list">
+          <el-checkbox style="float: left; margin-top: 5px" v-model="isSelectAll" @change="selectAll">全部</el-checkbox>
+          <el-button style="border-radius: 14px; padding: 7px 16px;" :disabled="value.length === 0" @click="confrimSelect">确定</el-button>
+        </div>
         <p class="el-select-dropdown__empty" v-if="emptyText && (allowCreate && options.length === 0 || !allowCreate)">{{ emptyText }}</p>
       </el-select-menu>
     </transition>
@@ -398,6 +398,7 @@
           this.selectedLabel = result.join(',');
         }
         this.$emit('select-all', this.isSelectAll);
+        this.$emit('confirm-select', this.value);
         this.toggleMenu();
       },
 

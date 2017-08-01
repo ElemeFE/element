@@ -18,7 +18,7 @@
       <tbody>
       <tr>
               <td v-if="!(contianAll && showCheckbox)">
-    <div class="el-tree-nodes" >
+    <div class="el-tree-nodes" v-scroll="{fun:loadMore,arg:root}">
       <el-tree-node
               v-for="child in root.childNodes"
               :node="child"
@@ -30,7 +30,7 @@
   </div>
               </td>
         <td v-if="expendNodes.length > 0 && expendNode.childNodes.length > 0" v-for="expendNode in expendNodes">
-          <div class="el-tree-sub">
+          <div class="el-tree-sub" v-scroll="{fun:loadMore,arg:expendNode}">
             <el-tree-node
                     v-for="child in expendNode.childNodes"
                     :node="child"
@@ -267,7 +267,11 @@ div{
       setChecked(data, checked, deep) {
         this.store.setChecked(data, checked, deep);
       },
-      loadMore(node) {
+      loadMore(el, node) {
+          console.log('test');
+        node.loadData(()=>{
+            el.dataset.promise = 'false';
+        },null,true);
       },
       handleNodeExpand(nodeData, node, instance) {
         this.expendNodes[node.level - 1] = node;
@@ -283,10 +287,24 @@ div{
         this.$emit('node-expand', nodeData, node, instance);
       }
     },
-
+    directives: {
+      scroll: {
+        bind: function(el, binding) {
+          el.dataset.promise = 'false';
+          el.addEventListener('scroll', function () {
+            if(el.scrollHeight - el.clientHeight - el.scrollTop < 5){
+              let value = binding.value;
+              if(el.dataset.promise === 'false'){
+                el.dataset.promise = 'true';
+                value.fun(el,value.arg);
+              }
+            }
+          });
+        }
+      }
+    },
     created() {
       this.isTree = true;
-
       this.store = new TreeStore({
         key: this.nodeKey,
         data: this.data,
