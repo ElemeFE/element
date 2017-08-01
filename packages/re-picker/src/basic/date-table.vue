@@ -20,8 +20,8 @@
           class="td"
           :class="getCellClasses(cell)"
           :name="calcId(cell)">
-          <span class="riqi" v-text="cell.text"></span>
-          <span class="xinyuan"v-text="0"></span>
+          <span :class="{ hasxinhuan: seedCount }" class="riqi" v-text="cell.text"></span>
+          <span v-if="seedCount" class="xinyuan"v-text="0"></span>
         </td>
       </tr>
     </tbody>
@@ -68,6 +68,11 @@
       month: {},
 
       week: {},
+
+      seedCount: {
+        default: 0,
+        type: Number
+      },
 
       selectionMode: {
         default: 'day'

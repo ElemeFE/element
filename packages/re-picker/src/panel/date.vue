@@ -89,6 +89,7 @@
                                 :month="month"
                                 :date="date"
                                 :week="week"
+                                :seedCount="seedCount"
                                 :selection-mode="selectionMode"
                                 :first-day-of-week="firstDayOfWeek"
                                 :disabled-date="disabledDate">
