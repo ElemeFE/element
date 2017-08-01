@@ -6,9 +6,14 @@
       v-show="visible"
       @mouseenter="clearTimer"
       @mouseleave="startTimer">
-      <img class="el-message__img" :src="typeImg" alt="" v-if="!iconClass">
-      <div class="el-message__group" :class="{ 'is-with-icon': iconClass }">
-        <slot><p><i class="el-message__icon" :class="iconClass" v-if="iconClass"></i>{{ message }}</p></slot>
+      <div :class="iconWrapClass">
+        <i :class="iconClass" v-if="iconClass"></i>
+        <i :class="typeClass" v-else></i>
+      </div>
+      <div class="el-message__group">
+        <slot>
+          <p v-html="message"></p>
+        </slot>
         <div v-if="showClose" class="el-message__closeBtn el-icon-close" @click="close"></div>
       </div>
     </div>
@@ -16,6 +21,13 @@
 </template>
 
 <script type="text/babel">
+  const typeMap = {
+    success: 'circle-check',
+    info: 'information',
+    warning: 'warning',
+    error: 'circle-cross'
+  };
+
   export default {
     data() {
       return {
@@ -33,8 +45,18 @@
     },
 
     computed: {
-      typeImg() {
-        return require(`../assets/${ this.type }.svg`);
+      iconWrapClass() {
+        const classes = ['el-message__icon'];
+        if (this.type && !this.iconClass) {
+          classes.push(`el-message__icon--${ this.type }`);
+        }
+        return classes;
+      },
+
+      typeClass() {
+        return this.type && !this.iconClass
+          ? `el-message__type el-icon-${ typeMap[this.type] }-plain`
+          : '';
       }
     },
 

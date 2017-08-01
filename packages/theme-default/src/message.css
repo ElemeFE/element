@@ -6,7 +6,6 @@
   @b message {
     box-shadow: var(--message-shadow);
     min-width: var(--message-min-width);
-    padding: var(--message-padding);
     box-sizing: border-box;
     border-radius: var(--border-radius-small);
     position: fixed;
@@ -18,16 +17,13 @@
     overflow: hidden;
 
     @e group {
-      margin-left: 38px;
+      margin-left: 40px;
       position: relative;
       height: 20px;
       line-height: 20px;
       display: flex;
       align-items: center;
-
-      @when with-icon {
-        margin-left: 0;
-      }
+      padding: var(--message-padding);
 
       & p {
         font-size: var(--font-size-base);
@@ -38,20 +34,39 @@
       }
     }
 
-    @e img {
-      size: 40px;
-      position: absolute;
-      left: 0;
-      top: 0;
-    }
-
     @e icon {
-      vertical-align: middle;
-      margin-right: 8px;
+      size: 40px;
+      display: inline-block;
+      float: left;
+      text-align: center;
+
+      i {
+        line-height: 40px;
+
+        &.el-message__type {
+          color: var(--color-white);
+        }
+      }
+
+      @modifier info {
+        background-color: var(--color-info);
+      }
+
+      @modifier warning {
+        background-color: var(--color-warning);
+      }
+
+      @modifier error {
+        background-color: var(--color-danger);
+      }
+
+      @modifier success {
+        background-color: var(--color-success);
+      }
     }
 
     @e closeBtn {
-      position: absolute 3px 0 * *;
+      position: absolute 13px 12px * *;
       cursor: pointer;
       color: var(--message-close-color);
       font-size: var(--font-size-base);
