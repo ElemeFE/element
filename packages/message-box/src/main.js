@@ -24,7 +24,8 @@ const defaults = {
   confirmButtonClass: '',
   cancelButtonClass: '',
   customClass: '',
-  beforeClose: null
+  beforeClose: null,
+  dangerouslyUseHTMLString: false
 };
 
 import Vue from 'vue';

@@ -92,8 +92,13 @@
             });
           }, 200);
         });
-      }
+      },
 
+      open5() {
+        this.$alert('<strong>这是 <i>HTML</i> 片段</strong>', 'HTML 片段', {
+          dangerouslyUseHTMLString: true
+        });
+      }
     }
   };
 </script>
@@ -254,11 +259,39 @@
             message: 'action: ' + action
           });
         });
-      },
+      }
     }
   }
 </script>
 ```
+:::
+
+### 使用 HTML 片段
+`message` 属性支持传入 HTML 片段
+
+:::demo 将`dangerouslyUseHTMLString`属性设置为 true，`message` 就会被当作 HTML 片段处理。
+
+```html
+<template>
+  <el-button type="text" @click="open5">点击打开 Message Box</el-button>
+</template>
+
+<script>
+  export default {
+    methods: {
+      open5() {
+        this.$alert('<strong>这是 <i>HTML</i> 片段</strong>', 'HTML 片段', {
+          dangerouslyUseHTMLString: true
+        });
+      }
+    }
+  }
+</script>
+```
+:::
+
+:::warning
+`message` 属性虽然支持传入 HTML 片段，但是在网站上动态渲染任意 HTML 是非常危险的，因为容易导致 [XSS 攻击](https://en.wikipedia.org/wiki/Cross-site_scripting)。因此在 `dangerouslyUseHTMLString` 打开的情况下，请确保 `message` 的内容是可信的，**永远不要**将用户提交的内容赋值给 `message` 属性。
 :::
 
 ### 全局方法
@@ -279,16 +312,13 @@ import { MessageBox } from 'element-ui';
 
 那么对应于上述四个全局方法的调用方法依次为：MessageBox, MessageBox.alert, MessageBox.confirm 和 MessageBox.prompt，调用参数与全局方法相同。
 
-:::warning
-`message` 属性虽然支持传入 HTML 片段，但是在网站上动态渲染任意 HTML 是非常危险的，因为容易导致 [XSS 攻击](https://en.wikipedia.org/wiki/Cross-site_scripting)。请确保 `message` 的内容是可信的，**永远不要**将用户提交的内容赋值给 `message` 属性。
-:::
-
 ### Options
 
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | title | MessageBox 标题 | string | — | — |
 | message | MessageBox 消息正文内容 | string / VNode | — | — |
+| dangerouslyUseHTMLString | 是否将 message 属性作为 HTML 片段处理 | boolean | — | false |
 | type | 消息类型，用于显示图标 | string | success/info/warning/error | — |
 | customClass | MessageBox 的自定义类名 | string | — | — |
 | callback | 若不使用 Promise，可以使用此参数指定 MessageBox 关闭后的回调 | function(action, instance)，action 的值为'confirm'或'cancel', instance 为 MessageBox 实例，可以通过它访问实例上的属性和方法 | — | — |

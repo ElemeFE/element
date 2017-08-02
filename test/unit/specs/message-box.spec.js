@@ -50,6 +50,19 @@ describe('MessageBox', () => {
     }, 300);
   });
 
+  it('html string', done => {
+    MessageBox({
+      title: 'html string',
+      dangerouslyUseHTMLString: true,
+      message: '<strong>html string</strong>'
+    });
+    setTimeout(() => {
+      const message = document.querySelector('.el-message-box__message strong');
+      expect(message.textContent).to.equal('html string');
+      done();
+    }, 300);
+  });
+
   it('alert', done => {
     MessageBox.alert('这是一段内容', {
       title: '标题名称',

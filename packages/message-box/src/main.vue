@@ -12,7 +12,10 @@
         <div class="el-message-box__content" v-if="message !== ''">
           <div class="el-message-box__status" :class="[ typeClass ]"></div>
           <div class="el-message-box__message" :style="{ 'margin-left': typeClass ? '50px' : '0' }">
-            <slot><p v-html="message"></p></slot>
+            <slot>
+              <p v-if="!dangerouslyUseHTMLString">{{ message }}</p>
+              <p v-else v-html="message"></p>
+            </slot>
           </div>
           <div class="el-message-box__input" v-show="showInput">
             <el-input v-model="inputValue" @keyup.enter.native="handleAction('confirm')" :placeholder="inputPlaceholder" ref="input"></el-input>
@@ -249,7 +252,8 @@
         confirmButtonDisabled: false,
         cancelButtonClass: '',
         editorErrorMessage: null,
-        callback: null
+        callback: null,
+        dangerouslyUseHTMLString: false
       };
     }
   };
