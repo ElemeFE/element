@@ -62,6 +62,13 @@
           message: '错了哦，这是一条错误消息',
           type: 'error'
         });
+      },
+
+      openHTML() {
+        this.$message({
+          dangerouslyUseHTMLString: true,
+          message: '<strong>这是 <i>HTML</i> 片段</strong>'
+        });
       }
     }
   };
@@ -199,6 +206,35 @@
 ```
 :::
 
+### 使用 HTML 片段
+`message` 属性支持传入 HTML 片段
+
+:::demo 将`dangerouslyUseHTMLString`属性设置为 true，`message` 就会被当作 HTML 片段处理。
+
+```html
+<template>
+  <el-button :plain="true" @click="openHTML">使用 HTML 片段</el-button>
+</template>
+
+<script>
+  export default {
+    methods: {
+      openHTML() {
+        this.$message({
+          dangerouslyUseHTMLString: true,
+          message: '<strong>这是 <i>HTML</i> 片段</strong>'
+        });
+      }
+    }
+  }
+</script>
+```
+:::
+
+:::warning
+`message` 属性虽然支持传入 HTML 片段，但是在网站上动态渲染任意 HTML 是非常危险的，因为容易导致 [XSS 攻击](https://en.wikipedia.org/wiki/Cross-site_scripting)。因此在 `dangerouslyUseHTMLString` 打开的情况下，请确保 `message` 的内容是可信的，**永远不要**将用户提交的内容赋值给 `message` 属性。
+:::
+
 ### 全局方法
 
 Element 为 Vue.prototype 添加了全局方法 $message。因此在 vue instance 中可以采用本页面中的方式调用 `Message`。
@@ -213,10 +249,6 @@ import { Message } from 'element-ui';
 
 此时调用方法为 `Message(options)`。我们也为每个 type 定义了各自的方法，如 `Message.success(options)`。
 并且可以调用 `Message.closeAll()` 手动关闭所有实例。
-
-:::warning
-`message` 属性虽然支持传入 HTML 片段，但是在网站上动态渲染任意 HTML 是非常危险的，因为容易导致 [XSS 攻击](https://en.wikipedia.org/wiki/Cross-site_scripting)。请确保 `message` 的内容是可信的，**永远不要**将用户提交的内容赋值给 `message` 属性。
-:::
 
 ### Options
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |

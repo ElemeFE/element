@@ -62,6 +62,13 @@
           message: 'Oops, this is a error message.',
           type: 'error'
         });
+      },
+
+      openHTML() {
+        this.$message({
+          dangerouslyUseHTMLString: true,
+          message: '<strong>This is <i>HTML</i> string</strong>'
+        });
       }
     }
   };
@@ -199,6 +206,35 @@ A close button can be added.
 ```
 :::
 
+### Use HTML String
+`message` supports HTML string.
+
+:::demo Set `dangerouslyUseHTMLString` to true and `message` will be treated as an HTML string.
+
+```html
+<template>
+  <el-button :plain="true" @click="openHTML">Use HTML String</el-button>
+</template>
+
+<script>
+  export default {
+    methods: {
+      openHTML() {
+        this.$message({
+          dangerouslyUseHTMLString: true,
+          message: '<strong>This is <i>HTML</i> string</strong>'
+        });
+      }
+    }
+  }
+</script>
+```
+:::
+
+:::warning
+Although `message` property supports HTML strings, dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily lead to [XSS attacks](https://en.wikipedia.org/wiki/Cross-site_scripting). So when `dangerouslyUseHTMLString` is on, please make sure the content of `message` is trusted, and **never** assign `message` to user-provided content.
+:::
+
 ### Global method
 
 Element has added a global method `$message` for Vue.prototype. So in a vue instance you can call `Message` like what we did in this page.
@@ -213,10 +249,6 @@ import { Message } from 'element-ui';
 
 In this case you should call `Message(options)`. We have also registered methods for different types, e.g. `Message.success(options)`.
 You can call `Message.closeAll()` to manually close all the instances.
-
-:::warning
-Although `message` property supports HTML strings, dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily lead to [XSS attacks](https://en.wikipedia.org/wiki/Cross-site_scripting). Please make sure the content of `message` is trusted, and **never** assign `message` to user-provided content.
-:::
 
 ### Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
