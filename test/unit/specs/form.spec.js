@@ -357,7 +357,7 @@ describe('Form', () => {
           }, 100);
         }, 100);
       });
-    }).timeout(3000);
+    });
     it('datepicker', done => {
       vm = createVue({
         template: `
