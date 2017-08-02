@@ -91,8 +91,13 @@
             });
           }, 200);
         });
-      }
+      },
 
+      open5() {
+        this.$alert('<strong>This is <i>HTML</i> string</strong>', 'HTML String', {
+          dangerouslyUseHTMLString: true
+        });
+      }
     }
   };
 </script>
@@ -263,6 +268,34 @@ Can be customized to show various content.
 ```
 :::
 
+### Use HTML String
+`message` supports HTML string.
+
+:::demo Set `dangerouslyUseHTMLString` to true and `message` will be treated as an HTML string.
+
+```html
+<template>
+  <el-button type="text" @click="open5">Click to open Message Box</el-button>
+</template>
+
+<script>
+  export default {
+    methods: {
+      open5() {
+        this.$alert('<strong>This is <i>HTML</i> string</strong>', 'HTML String', {
+          dangerouslyUseHTMLString: true
+        });
+      }
+    }
+  }
+</script>
+```
+:::
+
+:::warning
+Although `message` property supports HTML strings, dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily lead to [XSS attacks](https://en.wikipedia.org/wiki/Cross-site_scripting). So when `dangerouslyUseHTMLString` is on, please make sure the content of `message` is trusted, and **never** assign `message` to user-provided content.
+:::
+
 ### Global method
 
 If Element is fully imported, it will add the following global methods for Vue.prototype: `$msgbox`, `$alert`, `$confirm` and `$prompt`. So in a Vue instance you can call `MessageBox` like what we did in this page. The parameters are:
@@ -291,6 +324,7 @@ Although `message` property supports HTML strings, dynamically rendering arbitra
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | title | title of the MessageBox | string | — | — |
 | message | content of the MessageBox | string | — | — |
+| dangerouslyUseHTMLString | whether `message` is treated as HTML string | boolean | — | false |
 | type | message type, used for icon display | string | success/info/warning/error | — |
 | customClass | custom class name for MessageBox | string | — | — |
 | callback | MessageBox closing callback if you don't prefer Promise | function(action), where action can be 'confirm' or 'cancel', and `instance` is the MessageBox instance. You can access to that instance's attributes and methods | — | — |
