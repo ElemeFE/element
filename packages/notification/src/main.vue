@@ -1,10 +1,9 @@
 <template>
   <transition name="el-notification-fade">
     <div
-      class="el-notification"
-      :class="customClass"
+      :class="['el-notification', customClass, horizontalClass]"
       v-show="visible"
-      :style="{ top: top ? top + 'px' : 'auto' }"
+      :style="positionStyle"
       @mouseenter="clearTimer()"
       @mouseleave="startTimer()"
       @click="click">
@@ -15,7 +14,12 @@
       </i>
       <div class="el-notification__group" :class="{ 'is-with-icon': typeClass || iconClass }">
         <h2 class="el-notification__title" v-text="title"></h2>
-        <div class="el-notification__content"><slot>{{ message }}</slot></div>
+        <div class="el-notification__content">
+          <slot>
+            <p v-if="!dangerouslyUseHTMLString">{{ message }}</p>
+            <p v-else v-html="message"></p>
+          </slot>
+        </div>
         <div class="el-notification__closeBtn el-icon-close" @click.stop="close"></div>
       </div>
     </div>
@@ -43,14 +47,30 @@
         onClose: null,
         onClick: null,
         closed: false,
-        top: null,
-        timer: null
+        verticalOffset: 0,
+        timer: null,
+        dangerouslyUseHTMLString: false,
+        position: 'top-right'
       };
     },
 
     computed: {
       typeClass() {
         return this.type && typeMap[this.type] ? `el-icon-${ typeMap[this.type] }` : '';
+      },
+
+      horizontalClass() {
+        return this.position.indexOf('right') > -1 ? 'right' : 'left';
+      },
+
+      verticalProperty() {
+        return /^top-/.test(this.position) ? 'top' : 'bottom';
+      },
+
+      positionStyle() {
+        return {
+          [this.verticalProperty]: `${ this.verticalOffset }px`
+        };
       }
     },
 
