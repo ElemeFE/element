@@ -49,10 +49,49 @@
       },
 
       open7() {
-        this.$notify.success({
+        this.$notify({
+          title: 'Custom Position',
+          message: 'I\'m at the top right corner'
+        });
+      },
+
+      open8() {
+        this.$notify({
+          title: 'Custom Position',
+          message: 'I\'m at the bottom right corner',
+          position: 'bottom-right'
+        });
+      },
+
+      open9() {
+        this.$notify({
+          title: 'Custom Position',
+          message: 'I\'m at the bottom left corner',
+          position: 'bottom-left'
+        });
+      },
+
+      open10() {
+        this.$notify({
+          title: 'Custom Position',
+          message: 'I\'m at the top left corner',
+          position: 'top-left'
+        });
+      },
+
+      open11() {
+        this.$notify({
           title: 'Success',
           message: 'This is a success message',
           offset: 100
+        });
+      },
+
+      open12() {
+        this.$notify({
+          title: 'HTML String',
+          dangerouslyUseHTMLString: true,
+          message: '<strong>This is <i>HTML</i> string</strong>'
         });
       },
 
@@ -65,7 +104,7 @@
 
 ## Notification
 
-Displays a global notification message at the upper right corner of the page.
+Displays a global notification message at a corner of the page.
 
 ### Basic usage
 
@@ -177,17 +216,32 @@ We provide four types: success, warning, info and error.
 ```
 :::
 
-### With offset
+### Custom Position
 
-Customize Notification's offset from the top edge of the screen
+Notification can emerge from any corner you like.
 
-::: demo Set the `offset` attribute to customize Notification's offset from the top edge of the screen. Note that every Notification instance of the same moment should have the same offset.
+::: demo The `position` attribute defines which corner Notification slides in. It can be `top-right`, `top-left`, `bottom-right` or `bottom-left`. Defaults to `top-right`.
 ```html
 <template>
   <el-button
-      plain
-      @click="open7">
-    Notification with offset
+    plain
+    @click="open7">
+    Top Right
+  </el-button>
+  <el-button
+    plain
+    @click="open8">
+    Bottom Right
+  </el-button>
+  <el-button
+    plain
+    @click="open9">
+    Bottom Left
+  </el-button>
+  <el-button
+    plain
+    @click="open10">
+    Top Left
   </el-button>
 </template>
 
@@ -195,7 +249,60 @@ Customize Notification's offset from the top edge of the screen
   export default {
     methods: {
       open7() {
-        this.$notify.success({
+        this.$notify({
+          title: 'Custom Position',
+          message: 'I\'m at the top right corner'
+        });
+      },
+
+      open8() {
+        this.$notify({
+          title: 'Custom Position',
+          message: 'I\'m at the bottom right corner',
+          position: 'bottom-right'
+        });
+      },
+
+      open9() {
+        this.$notify({
+          title: 'Custom Position',
+          message: 'I\'m at the bottom left corner',
+          position: 'bottom-left'
+        });
+      },
+
+      open10() {
+        this.$notify({
+          title: 'Custom Position',
+          message: 'I\'m at the top left corner',
+          position: 'top-left'
+        });
+      }
+    }
+  }
+</script>
+```
+:::
+
+### With offset
+
+Customize Notification's offset from the edge of the screen.
+
+::: demo Set the `offset` attribute to customize Notification's offset from the edge of the screen. Note that every Notification instance of the same moment should have the same offset.
+```html
+<template>
+  <el-button
+    plain
+    @click="open11">
+    Notification with offset
+  </el-button>
+</template>
+
+<script>
+  export default {
+    methods: {
+      open11() {
+        this.$notify({
           title: 'Success',
           message: 'This is a success message',
           offset: 100
@@ -205,6 +312,39 @@ Customize Notification's offset from the top edge of the screen
   }
 </script>
 ```
+:::
+
+### Use HTML String
+`message` supports HTML string.
+
+::: demo Set `dangerouslyUseHTMLString` to true and `message` will be treated as an HTML string.
+```html
+<template>
+  <el-button
+    plain
+    @click="open12">
+    Use HTML String
+  </el-button>
+</template>
+
+<script>
+  export default {
+    methods: {
+      open12() {
+        this.$notify({
+          title: 'HTML String',
+          dangerouslyUseHTMLString: true,
+          message: '<strong>This is <i>HTML</i> string</strong>'
+        });
+      }
+    }
+  }
+</script>
+```
+:::
+
+:::warning
+Although `message` property supports HTML strings, dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily lead to [XSS attacks](https://en.wikipedia.org/wiki/Cross-site_scripting). So when `dangerouslyUseHTMLString` is on, please make sure the content of `message` is trusted, and **never** assign `message` to user-provided content.
 :::
 
 ### Global method
@@ -226,6 +366,7 @@ In this case you should call `Notification(options)`. We have also registered me
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | title | title | string | — | — |
 | message | description text | string/Vue.VNode | — | — |
+| dangerouslyUseHTMLString | whether `message` is treated as HTML string | boolean | — | false |
 | type | notification type | string | success/warning/info/error | — |
 | iconClass | custom icon's class. It will be overridden by `type` | string | — | — |
 | customClass | custom class name for Notification | string | — | — |
