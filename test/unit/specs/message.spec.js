@@ -53,6 +53,15 @@ describe('Message', () => {
     }, 500);
   });
 
+  it('html string', () => {
+    Message({
+      message: '<strong>夏天</strong>',
+      dangerouslyUseHTMLString: true
+    });
+    const message = document.querySelector('.el-message__group strong');
+    expect(message.textContent).to.equal('夏天');
+  });
+
   it('close all', done => {
     Message({
       message: '夏天',

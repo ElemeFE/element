@@ -12,7 +12,8 @@
       </div>
       <div class="el-message__group">
         <slot>
-          <p v-html="message"></p>
+          <p v-if="!dangerouslyUseHTMLString">{{ message }}</p>
+          <p v-else v-html="message"></p>
         </slot>
         <div v-if="showClose" class="el-message__closeBtn el-icon-close" @click="close"></div>
       </div>
@@ -40,7 +41,8 @@
         onClose: null,
         showClose: false,
         closed: false,
-        timer: null
+        timer: null,
+        dangerouslyUseHTMLString: false
       };
     },
 
