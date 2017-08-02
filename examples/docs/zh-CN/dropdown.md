@@ -207,7 +207,7 @@
 | type          | 菜单按钮类型，同 Button 组件(只在`split-button`为 true 的情况下有效)   | string  |          —             |    —     |
 | size          | 菜单按钮尺寸，同 Button 组件(只在`split-button`为 true 的情况下有效)     | string          | — | — |
 | split-button  | 下拉触发元素呈现为按钮组    | boolean  |    —  |  false |
-| menu-align    | 菜单水平对齐方向     | string          | start, end  | end |
+| placement    | 菜单弹出位置     | string | top/top-start/top-end/bottom/bottom-start/bottom-end  | bottom-end |
 | trigger       | 触发下拉的行为     | string          | hover, click  | hover |
 | hide-on-click | 是否在点击菜单项后隐藏菜单     | boolean          | — | true |
 

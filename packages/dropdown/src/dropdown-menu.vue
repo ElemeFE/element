@@ -15,6 +15,14 @@
 
     mixins: [Popper],
 
+    data() {
+      return {
+        placement: this.dropdown.placement
+      };
+    },
+
+    inject: ['dropdown'],
+
     created() {
       this.$on('updatePopper', () => {
         if (this.showPopper) this.updatePopper();
@@ -30,10 +38,10 @@
     },
 
     watch: {
-      '$parent.menuAlign': {
+      'dropdown.placement': {
         immediate: true,
         handler(val) {
-          this.currentPlacement = `bottom-${val}`;
+          this.currentPlacement = val;
         }
       }
     }

@@ -18,14 +18,16 @@
       ElButtonGroup
     },
 
+    provide() {
+      return {
+        dropdown: this
+      };
+    },
+
     props: {
       trigger: {
         type: String,
         default: 'hover'
-      },
-      menuAlign: {
-        type: String,
-        default: 'end'
       },
       type: String,
       size: String,
@@ -33,6 +35,10 @@
       hideOnClick: {
         type: Boolean,
         default: true
+      },
+      placement: {
+        type: String,
+        default: 'bottom-end'
       }
     },
 
@@ -100,14 +106,14 @@
     render(h) {
       let { hide, splitButton, type, size } = this;
 
-      var handleClick = _ => {
-        this.$emit('click');
+      var handleMainButtonClick = (event) => {
+        this.$emit('click', event);
       };
 
       let triggerElm = !splitButton
         ? this.$slots.default
         : (<el-button-group>
-            <el-button type={type} size={size} nativeOn-click={handleClick}>
+            <el-button type={type} size={size} nativeOn-click={handleMainButtonClick}>
               {this.$slots.default}
             </el-button>
             <el-button ref="trigger" type={type} size={size} class="el-dropdown__caret-button">

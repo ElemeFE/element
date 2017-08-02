@@ -207,7 +207,7 @@ Clicking each dropdown item fires an event whose parameter is assigned by each i
 | size          | menu button size, refer to `Button` Component, only works when `split-button` is true  | string  |          —             |    —     |
 | split-button | whether a button group is displayed | boolean         |     —       | false   |
 | size          | component size, refer to `Button` component     | string          | large, small, mini  |  —  |
-| menu-align    | horizontal alignment     | string          | start/end  | end |
+| placement    | placement of pop menu | string | top/top-start/top-end/bottom/bottom-start/bottom-end  | bottom-end |
 | trigger       | how to trigger     | string  |    hover/click  |  hover |
 | hide-on-click | whether to hide menu after clicking menu-item     | boolean          | — | true |
 
