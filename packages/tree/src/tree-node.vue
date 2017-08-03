@@ -3,7 +3,7 @@
     @click.stop="handleClick"
     v-show="node.visible"
     :class="{
-      'is-expanded': childNodeRendered && expanded,
+      'is-expanded': expanded,
       'is-current': tree.store.currentNode === node,
       'is-hidden': !node.visible
     }">
@@ -31,6 +31,7 @@
     <el-collapse-transition>
       <div
         class="el-tree-node__children"
+        v-if="childNodeRendered"
         v-show="expanded">
         <el-tree-node
           :render-content="renderContent"
@@ -110,7 +111,7 @@
       },
 
       'node.expanded'(val) {
-        this.expanded = val;
+        this.$nextTick(() => this.expanded = val);
         if (val) {
           this.childNodeRendered = true;
         }
