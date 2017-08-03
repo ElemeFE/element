@@ -46,7 +46,6 @@
 <script type="text/babel">
   import ElInputNumber from 'element-ui/packages/input-number';
   import SliderButton from './button.vue';
-  import { getStyle } from 'element-ui/src/utils/dom';
   import Emitter from 'element-ui/src/mixins/emitter';
 
   export default {
@@ -115,7 +114,8 @@
         firstValue: null,
         secondValue: null,
         oldValue: null,
-        dragging: false
+        dragging: false,
+        sliderSize: 1
       };
     },
 
@@ -223,19 +223,21 @@
         if (this.disabled || this.dragging) return;
         if (this.vertical) {
           const sliderOffsetBottom = this.$refs.slider.getBoundingClientRect().bottom;
-          this.setPosition((sliderOffsetBottom - event.clientY) / this.$sliderSize * 100);
+          this.setPosition((sliderOffsetBottom - event.clientY) / this.sliderSize * 100);
         } else {
           const sliderOffsetLeft = this.$refs.slider.getBoundingClientRect().left;
-          this.setPosition((event.clientX - sliderOffsetLeft) / this.$sliderSize * 100);
+          this.setPosition((event.clientX - sliderOffsetLeft) / this.sliderSize * 100);
+        }
+      },
+
+      resetSize() {
+        if (this.$refs.slider) {
+          this.sliderSize = this.$refs.slider[`client${ this.vertical ? 'Height' : 'Width' }`];
         }
       }
     },
 
     computed: {
-      $sliderSize() {
-        return parseInt(getStyle(this.$refs.slider, (this.vertical ? 'height' : 'width')), 10);
-      },
-
       stops() {
         if (this.step === 0) {
           process.env.NODE_ENV !== 'production' &&
@@ -320,6 +322,12 @@
         }
         this.oldValue = this.firstValue;
       }
+      this.resetSize();
+      window.addEventListener('resize', this.resetSize);
+    },
+
+    beforeDestroy() {
+      window.removeEventListener('resize', this.resetSize);
     }
   };
 </script>
