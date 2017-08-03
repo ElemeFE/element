@@ -268,9 +268,9 @@ div{
         this.store.setChecked(data, checked, deep);
       },
       loadMore(el, node) {
-          console.log('test');
+        console.log('test');
         node.loadData(()=>{
-            el.dataset.promise = 'false';
+          el.dataset.promise = 'false';
         }, null, true);
       },
       handleNodeExpand(nodeData, node, instance) {
