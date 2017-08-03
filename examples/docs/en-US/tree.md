@@ -233,10 +233,16 @@
         this.$refs.tree.setCheckedKeys([]);
       },
       append(store, data) {
-        store.append({ id: id++, label: 'testtest', children: [] }, data);
+        const newChild = { id: id++, label: 'testtest', children: [] };
+        store.append(newChild, data);
+        data.children = data.children || [];
+        data.children.push(newChild);
       },
 
-      remove(store, data) {
+      remove(store, node, data) {
+        const parent = node.parent;
+        const index = parent.data.children.findIndex(d => d.id === data.id);
+        parent.data.children.splice(index, 1);
         store.remove(data);
       },
 
@@ -248,7 +254,7 @@
             </span>
             <span style="float: right; margin-right: 20px">
               <el-button size="mini" on-click={ () => this.append(store, data) }>Append</el-button>
-              <el-button size="mini" on-click={ () => this.remove(store, data) }>Delete</el-button>
+              <el-button size="mini" on-click={ () => this.remove(store, node, data) }>Delete</el-button>
             </span>
           </span>);
       },
@@ -743,22 +749,28 @@ The content of tree nodes can be customized, so you can add icons or buttons as 
 
     methods: {
       append(store, data) {
-        store.append({ id: id++, label: 'testtest', children: [] }, data);
+        const newChild = { id: id++, label: 'testtest', children: [] };
+        store.append(newChild, data); // need change data by yourself
+        data.children = data.children || [];
+        data.children.push(newChild);
       },
 
-      remove(store, data) {
-        store.remove(data);
+      remove(store, node, data) {
+        const parent = node.parent;
+        const index = parent.data.children.findIndex(d => d.id === data.id);
+        parent.data.children.splice(index, 1);
+        store.remove(data); // need change data by yourself
       },
 
       renderContent(h, { node, data, store }) {
         return (
-          <span>
+          <span style="white-space: normal">
             <span>
               <span>{node.label}</span>
             </span>
             <span style="float: right; margin-right: 20px">
               <el-button size="mini" on-click={ () => this.append(store, data) }>Append</el-button>
-              <el-button size="mini" on-click={ () => this.remove(store, data) }>Delete</el-button>
+              <el-button size="mini" on-click={ () => this.remove(store, node, data) }>Delete</el-button>
             </span>
           </span>);
       }
