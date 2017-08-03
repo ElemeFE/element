@@ -17,6 +17,7 @@
       @keydown.up.native.prevent="highlight(highlightedIndex - 1)"
       @keydown.down.native.prevent="highlight(highlightedIndex + 1)"
       @keydown.enter.native.prevent="handleKeyEnter"
+      @keydown.native.tab="close"
     >
       <template slot="prepend" v-if="$slots.prepend">
         <slot name="prepend"></slot>
