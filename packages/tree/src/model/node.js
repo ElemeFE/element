@@ -302,7 +302,7 @@ export default class Node {
     this.checked = value === true;
     let { all, allWithoutDisable } = getChildState(this.childNodes);
 
-    if (this.childNodes.length && (!all && allWithoutDisable)) {
+    if (deep && this.childNodes.length && (!all && allWithoutDisable)) {
       this.checked = false;
       value = false;
     }
