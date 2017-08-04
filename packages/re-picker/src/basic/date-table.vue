@@ -26,7 +26,7 @@
       </tr>
     </tbody>
     <div class="table-bottom">
-      <span>提示：右下角表示当日剩余信源</span>
+      <span v-if="seedCount">提示：右下角表示当日剩余信源</span>
       <div @click="hideTable($event)" class="button btn btn-line">确定</div>
     </div>
   </table>

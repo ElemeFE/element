@@ -181,11 +181,17 @@
         }
       },
       handleFromBlur(event) {
+<<<<<<< HEAD
         if (this.value.to !== '') {
           if (this.value.from > this.value.to) {
             this.value.from = '';
             this.$refs.inputFrom.value = '';
           }
+=======
+        if (this.value.to !== '' && this.value.from > this.value.to) {
+          this.value.from = '';
+          this.$refs.inputFrom.value = '';
+>>>>>>> 537b75ea65e0d1d41e0a7c35384f4f2793aaba02
         }
         this.$emit('blur', event);
         if (this.validateEvent) {
@@ -193,11 +199,17 @@
         }
       },
       handleToBlur(event) {
+<<<<<<< HEAD
         if (this.value.from !== '') {
           if (this.value.to < this.value.from) {
             this.value.to = '';
             this.$refs.inputTo.value = '';
           }
+=======
+        if (this.value.from !== '' && this.value.from > this.value.to) {
+          this.value.to = '';
+          this.$refs.inputTo.value = '';
+>>>>>>> 537b75ea65e0d1d41e0a7c35384f4f2793aaba02
         }
         this.$emit('blur', event);
         if (this.validateEvent) {
