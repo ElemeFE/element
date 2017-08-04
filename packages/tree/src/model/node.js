@@ -157,7 +157,18 @@ export default class Node {
     }
 
     child.level = this.level + 1;
-
+    if (child.data.selected) {
+      switch (child.data.selected) {
+        case 1:
+          child.setChecked(true);
+          break;
+        case 2:
+          child.setChecked('half');
+          break;
+        case 3:
+          child.setChecked(false);
+      }
+    }
     if (typeof index === 'undefined' || index < 0) {
       this.childNodes.push(child);
     } else {
@@ -351,12 +362,17 @@ export default class Node {
   loadData(callback, defaultProps = {}, isMore = false) {
     if ((this.store.lazy === true && this.store.load && !this.loaded && !this.loading && !isMore) || (this.store.lazy === true && this.store.load && !this.loading && isMore)) {
       this.loading = true;
-
+      this.isMore = isMore;
       const resolve = (children) => {
         this.loaded = true;
         this.loading = false;
         if (!isMore) {
           this.childNodes = [];
+        }
+        if (children.length === 0) {
+          this.moreLoaded = true;
+        } else {
+          this.moreLoaded = false;
         }
         this.doCreateChildren(children, defaultProps, isMore);
 
@@ -366,7 +382,7 @@ export default class Node {
         }
       };
 
-      this.store.load(this, resolve);
+      this.store.load(this, resolve, isMore);
     } else {
       if (callback) {
         callback.call(this);

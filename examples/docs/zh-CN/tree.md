@@ -110,29 +110,7 @@
 
   let id = 1000;
 
-  const regions = [{
-    'name': 'region1'
-  }, {
-    'name': 'region2'
-  }, {
-    'name': 'region3'
-  }, {
-    'name': 'region4'
-  }, {
-    'name': 'region5'
-  }, {
-    'name': 'region6'
-  }, {
-    'name': 'region7'
-  }, {
-    'name': 'region8'
-  }, {
-    'name': 'region9'
-  }, {
-    'name': 'region10'
-  }, {
-    'name': 'region11'
-  }];
+  const regions = [];
 
   let count = 1;
 
@@ -160,57 +138,66 @@
       handleNodeClick(data) {
         console.log(data);
       },
-      loadNode(node, resolve) {
-      
+      loadNode(node, resolve, isMore) {
         if (node.level === 0) {
+        return resolve([{
+                                                        'name': '全部'
+                                                        
+                                                      }]);}
+        
+        if (node.level === 1) {
           return resolve([{
-                                                'name': 'region1'
+                                                'name': 'Aegion1',
+                                                'selected': 1,
+                                                'categroy': '行业',
+                                                'aggName': 'A',
+                                                
                                               }, {
-                                                'name': 'region2'
-                                              }, {
-                                                'name': 'region3'
-                                              }, {
-                                                'name': 'region4'
-                                              }, {
-                                                'name': 'region5'
-                                              }, {
-                                                'name': 'region6'
-                                              }, {
-                                                'name': 'region7'
-                                              }, {
-                                                'name': 'region8'
-                                              }, {
-                                                'name': 'region9'
-                                              }, {
-                                                'name': 'region10'
-                                              }, {
-                                                'name': 'region11'
+                                                'name': 'Begion2',
+                                                'selected': 2,
+                                                'aggName': 'B',
                                               }]);
         }
-        if (node.level > 3) return resolve([]);
-        var hasChild;
-        if (node.data.name === 'region1') {
-          hasChild = true;
-        } else if (node.data.name === 'region2') {
-          hasChild = false;          
-        } else {
-          hasChild = Math.random() > 0.5;
-        }
+        if (node.level === 2 && node.data.name === 'Aegion1') {
+                  return resolve([{
+                                                        'name': 'Cnode1',
+                                                        'selected': 1,
+                                                        'categroy': '品牌',
+                                                        'aggName': 'C',
+                                                      }, {
+                                                        'name': 'Znode2',
+                                                        'selected': 2,
+                                                        'aggName': 'Z',
+                                                      }]);
+                }
+                
+        if (node.level === 2 && node.data.name === 'Begion2') {
+                          return resolve([]);
+                        }
+        //if (node.level > 3) return resolve([]);
+        //var hasChild;
+        //if (node.data.name === 'region1') {
+        //  hasChild = true;
+        //} else if (node.data.name === 'region2') {
+        //  hasChild = false;          
+        //} else {
+        //  hasChild = Math.random() > 0.5;
+        //}
 
-        setTimeout(function() {
-          var data;
-          if (hasChild) {
-            data = [{
-              name: 'zone' + count++
-            }, {
-              name: 'zone' + count++
-            }];
-          } else {
-            data = [];
-          }
+        //setTimeout(function() {
+         // var data;
+         // if (hasChild) {
+         //   data = [{
+         //     name: 'zone' + count++
+         //   }, {
+         //     name: 'zone' + count++
+         //   }];
+         // } else {
+         //   data = [];
+         // }
 
-          resolve(data);
-        }, 500);
+         // resolve(data);
+        //}, 5000);
       },
       getCheckedNodes() {
         console.log(this.$refs.tree.getCheckedNodes());
@@ -402,6 +389,7 @@
         console.log(data);
       },
       loadNode(node, resolve) {
+          debugger;
         if (node.level === 0) {
           return resolve([{
                                                 'name': 'region1'
@@ -451,7 +439,7 @@
           }
 
           resolve(data);
-        }, 500);
+        }, 5000);
       }
     }
   };

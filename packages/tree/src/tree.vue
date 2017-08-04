@@ -17,7 +17,8 @@
     <table>
       <tbody>
       <tr>
-              <td v-if="!(contianAll && showCheckbox)">
+              <td v-if="!(contianAll && showCheckbox)" :class="root.childNodes[0].data.categroy?'categroy':''">
+                <div class="categroy-title" v-if="root.childNodes[0].data.categroy">{{root.childNodes[0].data.categroy}}</div>
     <div class="el-tree-nodes" v-scroll="{fun:loadMore,arg:root}">
       <el-tree-node
               v-for="child in root.childNodes"
@@ -27,9 +28,15 @@
               :render-content="renderContent"
       @node-expand="handleNodeExpand">
     </el-tree-node>
+    <div v-show="root.loading && root.isMore && !root.moreLoaded" style="text-align: center">
+            <span
+              class="el-tree-node__loading-icon el-icon-loading">
+            </span>
+    </div>
   </div>
               </td>
-        <td v-if="expendNodes.length > 0 && expendNode.childNodes.length > 0" v-for="expendNode in expendNodes">
+        <td v-if="expendNodes.length > 0 && expendNode.childNodes.length > 0" v-for="expendNode in expendNodes" :class="expendNode.childNodes[0].data.categroy?'categroy':''">
+          <div class="categroy-title" v-if="expendNode.childNodes[0].data.categroy">{{expendNode.childNodes[0].data.categroy}}</div>
           <div class="el-tree-sub" v-scroll="{fun:loadMore,arg:expendNode}">
             <el-tree-node
                     v-for="child in expendNode.childNodes"
@@ -39,6 +46,12 @@
                     :render-content="renderContent"
             @node-expand="handleNodeExpand">
           </el-tree-node>
+          <div v-show="expendNode.loading && expendNode.isMore && !expendNode.moreLoaded" style="text-align: center">
+            <span
+                class="el-tree-node__loading-icon el-icon-loading">
+            </span>
+          </div>
+
         </div>
         </td>
 
@@ -62,6 +75,7 @@ div{
 .el-tree{
   height: 100%;
   position: relative;
+  border-color: #e5e5e5;
 }
 .el-tree .el-tree-node__label{
   font-size: 12px;
@@ -72,7 +86,7 @@ div{
   width: 40px;
   height: 100%;
   padding-top: 110px;
-  border-right: 1px solid rgb(209, 219, 229);
+  border-right: #e5e5e5 1px solid;
 }
 .el-tree-nodes{
   height: 100%;
@@ -104,12 +118,32 @@ div{
   width:100%;
   height: 100%;
 }
+.el-tree-levels table tbody{
+  height: 100%;
+}
 .el-tree-levels table tr{
   height: 100%;
 }
+.el-tree-levels table .categroy-title{
+  height: 37px;
+  border-bottom: #e5e5e5 1px solid;
+  border-right: #e5e5e5 1px solid;
+  background: #eff1f3;
+  line-height: 36px;
+  position: absolute;
+  top:0px;
+  color:#37474f;
+  font-size: 12px;
+  text-align: center;
+  width: 100%;
+}
+.el-tree-levels table tr td.categroy{
+  padding-top: 37px;
+}
 .el-tree-levels table tr td{
   width:17%;
-  border-right: 1px solid rgb(209, 219, 229);
+  position: relative;
+  border-right: #e5e5e5 1px solid;
   vertical-align:top;
   height: 100%;
 }
@@ -117,9 +151,9 @@ div{
   width: 100%;
 }
 .el-tree-sub{
-  display: table;
   width: 100%;
   height: 100%;
+  overflow-y: auto;
 }
 </style>
 <script>
@@ -141,7 +175,8 @@ div{
         store: null,
         root: null,
         currentNode: null,
-        expendNodes: []
+        expendNodes: [],
+        oldExpend: []
       };
     },
 
@@ -157,7 +192,7 @@ div{
       },
       contianAll: {
         type: Boolean,
-        default: false
+        default: true
       },
       nodeKey: {
         type: String,
@@ -232,8 +267,12 @@ div{
         this.store.setData(newVal);
       },
       expendNodes(newVal) {
-        const store = this.store;
-        store.setCurrentLink(newVal);
+        this.oldExpend.forEach((node) => {
+          node.setCurrentLink(false);
+        });
+        newVal.forEach((node) => {
+          node.setCurrentLink(true);
+        });
       }
 
     },
@@ -268,21 +307,20 @@ div{
         this.store.setChecked(data, checked, deep);
       },
       loadMore(el, node) {
-          console.log('test');
         node.loadData(()=>{
-            el.dataset.promise = 'false';
+          el.dataset.promise = 'false';
         }, null, true);
       },
       handleNodeExpand(nodeData, node, instance) {
+        this.oldExpend = Object.assign([], this.expendNodes);
         this.expendNodes[node.level - 1] = node;
         for (let i = 0;i < this.expendNodes.length;i++) {
           if (i > node.level - 1) {
             this.expendNodes.splice(i, 1);
+            i = i - 1;
           }
         }
         this.expendNodes = Object.assign([], this.expendNodes);
-        const store = this.store;
-        store.setCurrentLink(this.expendNodes);
         this.broadcast('ElTreeNode', 'tree-node-expand', node);
         this.$emit('node-expand', nodeData, node, instance);
       }
@@ -303,6 +341,10 @@ div{
         }
       }
     },
+    mounted() {
+        this.expendNodes.push(this.root.childNodes[0]);
+        this.root.childNodes[0].expand();
+    },
     created() {
       this.isTree = true;
       this.store = new TreeStore({
@@ -322,6 +364,7 @@ div{
       });
       this.root = this.store.root;
       this.expendNodes = this.store.setDefaultExpandedKeys(this.defaultExpandedKeys);
+
     }
   };
 </script>

@@ -23,7 +23,7 @@
         @click.native.stop="handleUserClick">
       </el-checkbox>
       <span
-        v-if="node.loading"
+        v-if="node.loading && !node.isMore"
         class="el-tree-node__loading-icon el-icon-loading">
       </span>
       <node-content :node="node"></node-content>
@@ -36,7 +36,7 @@
   vertical-align: inherit;
 }
 .el-tree-node{
-  border-bottom: 1px solid rgb(209, 219, 229);
+  border-bottom: #e5e5e5 1px solid;
   position: relative;
 }
 .el-tree-node__content{
@@ -128,6 +128,7 @@
         expanded: false,
         childNodeRendered: false,
         showCheckbox: false,
+        showAggName: false,
         oldChecked: null,
         oldIndeterminate: null
       };
@@ -179,7 +180,7 @@
       },
 
       handleExpandIconClick() {
-        if (this.node.isLeaf) return;
+        //if (this.node.isLeaf) return;
 //        if (this.expanded) {
 //          this.tree.$emit('node-collapse', this.node.data, this.node, this);
 //          this.node.collapse();
