@@ -307,6 +307,10 @@ div{
         this.store.setChecked(data, checked, deep);
       },
       loadMore(el, node) {
+<<<<<<< HEAD
+=======
+        console.log('test');
+>>>>>>> 01f7db7d20815ad98b7822c6f80b73ab1a52cf90
         node.loadData(()=>{
           el.dataset.promise = 'false';
         }, null, true);

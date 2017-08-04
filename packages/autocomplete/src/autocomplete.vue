@@ -138,7 +138,7 @@
         }
         if (value) {
           this.getData(value);
-        } 
+        }
       },
       handleFocus() {
         this.isFocus = true;

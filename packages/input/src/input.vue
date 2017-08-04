@@ -207,11 +207,12 @@
           this.value.from = '';
           this.$refs.inputFrom.value = '';
         } else if (/^\d+(\.\d{1,2})?$/.test(value) && value.length <= 16) {
-          if (this.value.to === '' || Number(value) <= this.value.to) {
-            this.value.from = Number(value);
-          } else {
-            this.$refs.inputFrom.value = this.value.from;
-          }
+          this.value.from = Number(value);
+          // if (this.value.to === '' || Number(value) <= this.value.to) {
+          //   this.value.from = Number(value);
+          // } else {
+          //   this.$refs.inputFrom.value = this.value.from;
+          // }
         } else {
           this.$refs.inputFrom.value = this.value.from;
         }
@@ -224,11 +225,12 @@
           this.value.to = '';
           this.$refs.inputTo.value = '';
         } else if (/^\d+(\.\d{1,2})?$/.test(value) && value.length <= 16) {
-          if (this.value.from === '' || Number(value) >= this.value.from) {
-            this.value.to = Number(value);
-          } else {
-            this.$refs.inputTo.value = this.value.to;
-          }
+          this.value.to = Number(value);
+          // if (this.value.from === '' || Number(value) >= this.value.from) {
+          //   this.value.to = Number(value);
+          // } else {
+          //   this.$refs.inputTo.value = this.value.to;
+          // }
         } else {
           this.$refs.inputTo.value = this.value.to;
         }
