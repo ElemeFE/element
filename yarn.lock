@@ -1694,6 +1694,10 @@ deprecated@^0.0.1:
   version "0.0.1"
   resolved "http://registry.npmjs.org/deprecated/-/deprecated-0.0.1.tgz#f9c9af5464afa1e7a971458a8bdef2aa94d5bb19"
 
+desandro-matches-selector@^2.0.0:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/desandro-matches-selector/-/desandro-matches-selector-2.0.2.tgz#717beed4dc13e7d8f3762f707a6d58a6774218e1"
+
 destroy@~1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/destroy/-/destroy-1.0.4.tgz#978857442c44749e4206613e37946205826abd80"
@@ -2150,6 +2154,10 @@ etag@~1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.7.0.tgz#03d30b5f67dd6e632d2945d30d6652731a34d5d8"
 
+ev-emitter@^1.1.0:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/ev-emitter/-/ev-emitter-1.1.1.tgz#8f18b0ce5c76a5d18017f71c0a795c65b9138f2a"
+
 ev-store@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/ev-store/-/ev-store-7.0.0.tgz#1ab0c7f82136505dd74b31d17701cb2be6d26558"
@@ -2417,6 +2425,12 @@ fined@^1.0.1:
 first-chunk-stream@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/first-chunk-stream/-/first-chunk-stream-1.0.0.tgz#59bfb50cd905f60d7c394cd3d9acaab4e6ad934e"
+
+fizzy-ui-utils@^2.0.5:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/fizzy-ui-utils/-/fizzy-ui-utils-2.0.5.tgz#d72debc74d2c9d272dbcbb7b001707897f6c3210"
+  dependencies:
+    desandro-matches-selector "^2.0.0"
 
 flagged-respawn@^0.3.2:
   version "0.3.2"
@@ -3208,6 +3222,13 @@ indexof@0.0.1:
 individual@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/individual/-/individual-3.0.0.tgz#e7ca4f85f8957b018734f285750dc22ec2f9862d"
+
+infinite-scroll@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/infinite-scroll/-/infinite-scroll-3.0.0.tgz#b687ca3fe80bd965f1c0d8c6cafab7f55bd69362"
+  dependencies:
+    ev-emitter "^1.1.0"
+    fizzy-ui-utils "^2.0.5"
 
 inflight@^1.0.4:
   version "1.0.6"
@@ -6979,6 +7000,10 @@ vue-hot-reload-api@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.1.0.tgz#9ca58a6e0df9078554ce1708688b6578754d86de"
 
+vue-infinite-scroll@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/vue-infinite-scroll/-/vue-infinite-scroll-2.0.1.tgz#f418bd5cdca5e16837ce3b78333832288729e660"
+
 vue-loader@>=9.4.2, vue-loader@^12.0.2:
   version "12.0.2"
   resolved "https://registry.yarnpkg.com/vue-loader/-/vue-loader-12.0.2.tgz#f539036b1e0e9516b474a8fd1b5f533145248406"
@@ -7011,6 +7036,12 @@ vue-router@^2.0.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-2.1.1.tgz#10c31bbdcb6da92bd3e0223fa12345e73018625a"
 
+vue-scroller@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/vue-scroller/-/vue-scroller-2.2.2.tgz#ce525be775621e94554f147ce72f7e5bce0a9279"
+  dependencies:
+    vue "^2.2.6"
+
 vue-style-loader@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/vue-style-loader/-/vue-style-loader-3.0.1.tgz#c8b639bb2f24baf9d78274dc17e4f264c1deda08"
@@ -7028,6 +7059,10 @@ vue-template-compiler@*, vue-template-compiler@^2.3.0:
 vue-template-es2015-compiler@^1.2.2, vue-template-es2015-compiler@^1.5.2:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.5.2.tgz#a0a6c50c941d2a4abda963f2f42c337ac450ee95"
+
+vue@^2.2.6:
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-2.4.2.tgz#a9855261f191c978cc0dc1150531b8d08149b58c"
 
 vue@^2.3.0:
   version "2.3.0"

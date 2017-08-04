@@ -18,7 +18,7 @@
         ref="inputFrom"
         @input="handleInputFrom"
         @focus="handleFocus"
-        @blur="handleBlur"
+        @blur="handleFromBlur"
       >
     </div>
     <span style="padding: 0 10px;">至</span>
@@ -40,7 +40,7 @@
         ref="inputTo"
         @input="handleInputTo"
         @focus="handleFocus"
-        @blur="handleBlur"
+        @blur="handleToBlur"
       >
     </div>
   </div>
@@ -180,6 +180,26 @@
           this.dispatch('ElFormItem', 'el.form.blur', [this.currentValue]);
         }
       },
+      handleFromBlur(event) {
+        if (this.value.to !== '' && this.value.from > this.value.to) {
+          this.value.from = '';
+          this.$refs.inputFrom.value = '';
+        }
+        this.$emit('blur', event);
+        if (this.validateEvent) {
+          this.dispatch('ElFormItem', 'el.form.blur', [this.currentValue]);
+        }
+      },
+      handleToBlur(event) {
+        if (this.value.from !== '' && this.value.from > this.value.to) {
+          this.value.to = '';
+          this.$refs.inputTo.value = '';
+        }
+        this.$emit('blur', event);
+        if (this.validateEvent) {
+          this.dispatch('ElFormItem', 'el.form.blur', [this.currentValue]);
+        }
+      },
       inputSelect() {
         this.$refs.input.select();
       },
@@ -207,12 +227,11 @@
           this.value.from = '';
           this.$refs.inputFrom.value = '';
         } else if (/^\d+(\.\d{1,2})?$/.test(value) && value.length <= 16) {
-          this.value.from = Number(value);
-          // if (this.value.to === '' || Number(value) <= this.value.to) {
-          //   this.value.from = Number(value);
-          // } else {
-          //   this.$refs.inputFrom.value = this.value.from;
-          // }
+          if (this.value.to === '' || Number(value) <= this.value.to) {
+            this.value.from = Number(value);
+          } else {
+            this.$refs.inputFrom.value = this.value.from;
+          }
         } else {
           this.$refs.inputFrom.value = this.value.from;
         }
@@ -225,12 +244,11 @@
           this.value.to = '';
           this.$refs.inputTo.value = '';
         } else if (/^\d+(\.\d{1,2})?$/.test(value) && value.length <= 16) {
-          this.value.to = Number(value);
-          // if (this.value.from === '' || Number(value) >= this.value.from) {
-          //   this.value.to = Number(value);
-          // } else {
-          //   this.$refs.inputTo.value = this.value.to;
-          // }
+          if (this.value.from === '' || Number(value) >= this.value.from || value.length < this.value.from.toString().length) {
+            this.value.to = Number(value);
+          } else {
+            this.$refs.inputTo.value = this.value.to;
+          }
         } else {
           this.$refs.inputTo.value = this.value.to;
         }
