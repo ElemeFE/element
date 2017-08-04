@@ -193,7 +193,7 @@ export default {
           var key = event.key || '';
           var keyCode = event.keyCode || '';
           if ((key && key === 'Enter') || (keyCode && keyCode === 13)) {
-              this.handleChange({target: event.target});
+            this.handleChange({target: event.target});
           }
         },
         handleChange({ target }) {
