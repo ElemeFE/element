@@ -253,7 +253,9 @@ export default class Node {
   collapse() {
     this.expanded = false;
   }
-
+  setLoaded(val) {
+    this.loaded = val;
+  }
   shouldLoadData() {
     return this.store.lazy === true && this.store.load && !this.loaded;
   }

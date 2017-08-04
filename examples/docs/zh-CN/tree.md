@@ -72,41 +72,43 @@
     }]
   }];
 
-  const data2 = [{
-    id: 1,
-    label: '一级 1',
-    children: [{
-      id: 4,
-      label: '二级 1-1',
-      children: [{
-        id: 9,
-        label: '三级 1-1-1'
-      }, {
-        id: 10,
-        label: '三级 1-1-2'
-      }]
-    }]
-  }, {
-    id: 2,
-    label: '一级 2',
-    children: [{
-      id: 5,
-      label: '二级 2-1'
-    }, {
-      id: 6,
-      label: '二级 2-2'
-    }]
-  }, {
-    id: 3,
-    label: '一级 3',
-    children: [{
-      id: 7,
-      label: '二级 3-1'
-    }, {
-      id: 8,
-      label: '二级 3-2'
-    }]
-  }];
+  const data2 = [{id: 0,
+                      label: '全部',
+                      children:[{
+                                   id: 1,
+                                   label: '一级 1',
+                                   children: [{
+                                     id: 4,
+                                     label: '二级 1-1',
+                                     children: [{
+                                       id: 9,
+                                       label: '三级 1-1-1'
+                                     }, {
+                                       id: 10,
+                                       label: '三级 1-1-2'
+                                     }]
+                                   }]
+                                 }, {
+                                   id: 2,
+                                   label: '一级 2',
+                                   children: [{
+                                     id: 5,
+                                     label: '二级 2-1'
+                                   }, {
+                                     id: 6,
+                                     label: '二级 2-2'
+                                   }]
+                                 }, {
+                                   id: 3,
+                                   label: '一级 3',
+                                   children: [{
+                                     id: 7,
+                                     label: '二级 3-1'
+                                   }, {
+                                     id: 8,
+                                     label: '二级 3-2'
+                                   }]
+                                 }]}];
 
   let id = 1000;
 
@@ -139,6 +141,7 @@
         console.log(data);
       },
       loadNode(node, resolve, isMore) {
+      debugger;
         if (node.level === 0) {
         return resolve([{
                                                         'name': '全部'
@@ -206,7 +209,7 @@
         console.log(this.$refs.tree.getCheckedKeys());
       },
       setCheckedNodes() {
-        this.$refs.tree.setCheckedNodes([
+        this.$refs.tree1.resetData([
           {
             id: 5,
             label: '二级 2-1'
@@ -343,6 +346,7 @@
   :props="props"
   :load="loadNode"
   lazy
+  ref="tree1"
   show-checkbox
   @check-change="handleCheckChange">
 </el-tree>

@@ -306,6 +306,14 @@ div{
       setChecked(data, checked, deep) {
         this.store.setChecked(data, checked, deep);
       },
+      resetData() {
+        this.expendNodes = [this.root.childNodes[0]];
+        this.root.childNodes[0].expand();
+        this.root.childNodes[0].childNodes.forEach((node) => {
+          node.collapse();
+          node.setLoaded(false);
+        });
+      },
       loadMore(el, node) {
         node.loadData(()=>{
           el.dataset.promise = 'false';
