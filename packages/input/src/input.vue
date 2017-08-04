@@ -181,7 +181,7 @@
         }
       },
       handleFromBlur(event) {
-        if (this.value.to !== '' && this.value.from > this.value.to) {
+        if (this.value.to !== '' && Number(this.value.from) > Number(this.value.to)) {
           this.value.from = '';
           this.$refs.inputFrom.value = '';
         }
@@ -191,7 +191,7 @@
         }
       },
       handleToBlur(event) {
-        if (this.value.from !== '' && this.value.from > this.value.to) {
+        if (this.value.from !== '' && Number(this.value.from) > Number(this.value.to)) {
           this.value.to = '';
           this.$refs.inputTo.value = '';
         }
@@ -227,8 +227,8 @@
           this.value.from = '';
           this.$refs.inputFrom.value = '';
         } else if (/^\d+(\.\d{1,2})?$/.test(value) && value.length <= 16) {
-          if (this.value.to === '' || Number(value) <= this.value.to) {
-            this.value.from = Number(value);
+          if (this.value.to === '' || Number(value) <= Number(this.value.to)) {
+            this.value.from = value;
           } else {
             this.$refs.inputFrom.value = this.value.from;
           }
@@ -244,8 +244,8 @@
           this.value.to = '';
           this.$refs.inputTo.value = '';
         } else if (/^\d+(\.\d{1,2})?$/.test(value) && value.length <= 16) {
-          if (this.value.from === '' || Number(value) >= this.value.from || value.length < this.value.from.toString().length) {
-            this.value.to = Number(value);
+          if (this.value.from === '' || Number(value) >= Number(this.value.from) || value.length < this.value.from.length) {
+            this.value.to = value;
           } else {
             this.$refs.inputTo.value = this.value.to;
           }
