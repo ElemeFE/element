@@ -14,7 +14,7 @@
         class="el-input__inner"
         :value="value.from"
         v-bind="$props"
-        placeholder="全部"
+        placeholder="最小值"
         ref="inputFrom"
         @input="handleInputFrom"
         @focus="handleFocus"
@@ -36,7 +36,7 @@
         class="el-input__inner"
         :value="value.to"
         v-bind="$props"
-        placeholder="全部"
+        placeholder="最大值"
         ref="inputTo"
         @input="handleInputTo"
         @focus="handleFocus"
@@ -181,17 +181,9 @@
         }
       },
       handleFromBlur(event) {
-<<<<<<< HEAD
-        if (this.value.to !== '') {
-          if (this.value.from > this.value.to) {
-            this.value.from = '';
-            this.$refs.inputFrom.value = '';
-          }
-=======
         if (this.value.to !== '' && this.value.from > this.value.to) {
           this.value.from = '';
           this.$refs.inputFrom.value = '';
->>>>>>> 537b75ea65e0d1d41e0a7c35384f4f2793aaba02
         }
         this.$emit('blur', event);
         if (this.validateEvent) {
@@ -199,17 +191,9 @@
         }
       },
       handleToBlur(event) {
-<<<<<<< HEAD
-        if (this.value.from !== '') {
-          if (this.value.to < this.value.from) {
-            this.value.to = '';
-            this.$refs.inputTo.value = '';
-          }
-=======
         if (this.value.from !== '' && this.value.from > this.value.to) {
           this.value.to = '';
           this.$refs.inputTo.value = '';
->>>>>>> 537b75ea65e0d1d41e0a7c35384f4f2793aaba02
         }
         this.$emit('blur', event);
         if (this.validateEvent) {
