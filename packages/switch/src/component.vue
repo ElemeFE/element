@@ -119,8 +119,8 @@
     },
     methods: {
       handleChange(event) {
-        this.$emit('change', !this.checked ? this.onValue : this.offValue);
         this.$emit('input', !this.checked ? this.onValue : this.offValue);
+        this.$emit('change', !this.checked ? this.onValue : this.offValue);
         this.$nextTick(() => {
           // set input's checked property
           // in case parent refuses to change component's value
