@@ -216,6 +216,14 @@
           newDate.setMonth(month + 1);
         }
         return newDate;
+      },
+
+      timeFormat() {
+        if (this.format && this.format.indexOf('ss') === -1) {
+          return 'HH:mm';
+        } else {
+          return 'HH:mm:ss';
+        }
       }
     },
 
@@ -241,7 +249,8 @@
         firstDayOfWeek: 7,
         minTimePickerVisible: false,
         maxTimePickerVisible: false,
-        width: 0
+        width: 0,
+        format: ''
       };
     },
 
