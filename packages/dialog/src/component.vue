@@ -94,10 +94,17 @@
       beforeClose: Function
     },
 
+    data() {
+      return {
+        closed: false
+      };
+    },
+
     watch: {
       visible(val) {
         this.$emit('update:visible', val);
         if (val) {
+          this.closed = false;
           this.$emit('open');
           this.$el.addEventListener('scroll', this.updatePopper);
           this.$nextTick(() => {
@@ -108,7 +115,7 @@
           }
         } else {
           this.$el.removeEventListener('scroll', this.updatePopper);
-          this.$emit('close');
+          if (!this.closed) this.$emit('close');
         }
       }
     },
@@ -141,6 +148,8 @@
       hide(cancel) {
         if (cancel !== false) {
           this.$emit('update:visible', false);
+          this.$emit('close');
+          this.closed = true;
         }
       },
       updatePopper() {
