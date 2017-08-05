@@ -33,7 +33,7 @@
       return {
         classMap: {},
         colorMap: {},
-        pointerAtLeftHalf: false,
+        pointerAtLeftHalf: true,
         currentValue: this.value,
         hoverIndex: -1
       };
@@ -178,6 +178,7 @@
       value(val) {
         this.$emit('change', val);
         this.currentValue = val;
+        this.pointerAtLeftHalf = this.value !== Math.floor(this.value);
       }
     },
 
@@ -197,7 +198,10 @@
       showDecimalIcon(item) {
         let showWhenDisabled = this.disabled && this.valueDecimal > 0 && item - 1 < this.value && item > this.value;
         /* istanbul ignore next */
-        let showWhenAllowHalf = this.allowHalf && this.pointerAtLeftHalf && ((item - 0.5).toFixed(1) === this.currentValue.toFixed(1));
+        let showWhenAllowHalf = this.allowHalf &&
+          this.pointerAtLeftHalf &&
+          item - 0.5 <= this.currentValue &&
+          item > this.currentValue;
         return showWhenDisabled || showWhenAllowHalf;
       },
 

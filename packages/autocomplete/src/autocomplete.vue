@@ -1,5 +1,5 @@
 <template>
-  <div class="el-autocomplete">
+  <div class="el-autocomplete" v-clickoutside="close">
     <el-input
       ref="input"
       :value="value"
@@ -14,7 +14,6 @@
       @compositionend.native="handleComposition"
       @change="handleChange"
       @focus="handleFocus"
-      @blur="handleBlur"
       @keydown.up.native.prevent="highlight(highlightedIndex - 1)"
       @keydown.down.native.prevent="highlight(highlightedIndex + 1)"
       @keydown.enter.native.prevent="handleKeyEnter"
@@ -37,6 +36,7 @@
 </template>
 <script>
   import ElInput from 'element-ui/packages/input';
+  import Clickoutside from 'element-ui/src/utils/clickoutside';
   import ElAutocompleteSuggestions from './autocomplete-suggestions.vue';
   import Emitter from 'element-ui/src/mixins/emitter';
 
@@ -51,6 +51,8 @@
       ElInput,
       ElAutocompleteSuggestions
     },
+
+    directives: { Clickoutside },
 
     props: {
       props: {
@@ -80,7 +82,7 @@
     },
     data() {
       return {
-        isFocus: false,
+        activated: false,
         isOnComposition: false,
         suggestions: [],
         loading: false,
@@ -91,7 +93,7 @@
       suggestionVisible() {
         const suggestions = this.suggestions;
         let isValidData = Array.isArray(suggestions) && suggestions.length > 0;
-        return (isValidData || this.loading) && this.isFocus;
+        return (isValidData || this.loading) && this.activated;
       }
     },
     watch: {
@@ -128,16 +130,13 @@
         this.getData(value);
       },
       handleFocus() {
-        this.isFocus = true;
+        this.activated = true;
         if (this.triggerOnFocus) {
           this.getData(this.value);
         }
       },
-      handleBlur() {
-        // 因为 blur 事件处理优先于 select 事件执行
-        setTimeout(_ => {
-          this.isFocus = false;
-        }, 100);
+      close(e) {
+        this.activated = false;
       },
       handleKeyEnter() {
         if (this.suggestionVisible && this.highlightedIndex >= 0 && this.highlightedIndex < this.suggestions.length) {

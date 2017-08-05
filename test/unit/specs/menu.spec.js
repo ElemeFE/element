@@ -288,12 +288,9 @@ describe('Menu', () => {
     setTimeout(_ => {
       expect(submenu.$el.querySelector('.el-menu').style.display).to.not.ok;
       triggerEvent(submenu.$el, 'mouseleave');
-      setTimeout(_ => {
-        expect(submenu.$el.querySelector('.el-menu').style.display).to.be.equal('none');
-        done();
-      }, 1000);
+      done();
     }, 500);
-  }).timeout(3000);
+  });
   it('menu trigger click', done => {
     vm = createVue({
       template: `

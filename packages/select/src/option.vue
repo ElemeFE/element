@@ -17,6 +17,7 @@
 
 <script type="text/babel">
   import Emitter from 'element-ui/src/mixins/emitter';
+  import { getValueByPath } from 'element-ui/src/utils/util';
 
   export default {
     mixins: [Emitter],
@@ -47,8 +48,13 @@
     },
 
     computed: {
+      isObject() {
+        const type = typeof this.value;
+        return type !== 'string' && type !== 'number' && type !== 'boolean';
+      },
+
       currentLabel() {
-        return this.label || ((typeof this.value === 'string' || typeof this.value === 'number') ? this.value : '');
+        return this.label || (this.isObject ? '' : this.value);
       },
 
       currentValue() {
@@ -65,9 +71,9 @@
 
       itemSelected() {
         if (!this.parent.multiple) {
-          return this.value === this.parent.value;
+          return this.isEqual(this.value, this.parent.value);
         } else {
-          return this.parent.value.indexOf(this.value) > -1;
+          return this.contains(this.parent.value, this.value);
         }
       },
 
@@ -92,6 +98,26 @@
     },
 
     methods: {
+      isEqual(a, b) {
+        if (!this.isObject) {
+          return a === b;
+        } else {
+          const valueKey = this.parent.valueKey;
+          return getValueByPath(a, valueKey) === getValueByPath(b, valueKey);
+        }
+      },
+
+      contains(arr = [], target) {
+        if (!this.isObject) {
+          return arr.indexOf(target) > -1;
+        } else {
+          const valueKey = this.parent.valueKey;
+          return arr.some(item => {
+            return getValueByPath(item, valueKey) === getValueByPath(target, valueKey);
+          });
+        }
+      },
+
       handleGroupDisabled(val) {
         this.groupDisabled = val;
       },
