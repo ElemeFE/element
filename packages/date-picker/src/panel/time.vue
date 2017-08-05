@@ -81,6 +81,11 @@
 
       selectableRange(val) {
         this.$refs.spinner.selectableRange = val;
+      },
+
+      date(val) {
+        this.currentDate = val;
+        this.reinitDate();
       }
     },
 
@@ -157,13 +162,17 @@
         const index = list.indexOf(this.selectionRange[0]);
         const next = (index + step + list.length) % list.length;
         this.$refs.spinner.emitSelectRange(mapping[next]);
+      },
+
+      reinitDate() {
+        this.hours = this.currentDate.getHours();
+        this.minutes = this.currentDate.getMinutes();
+        this.seconds = this.currentDate.getSeconds();
       }
     },
 
     created() {
-      this.hours = this.currentDate.getHours();
-      this.minutes = this.currentDate.getMinutes();
-      this.seconds = this.currentDate.getSeconds();
+      this.reinitDate();
     },
 
     mounted() {

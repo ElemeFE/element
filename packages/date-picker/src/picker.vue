@@ -34,6 +34,7 @@ import Popper from 'element-ui/src/utils/vue-popper';
 import Emitter from 'element-ui/src/mixins/emitter';
 import Focus from 'element-ui/src/mixins/focus';
 import ElInput from 'element-ui/packages/input';
+import merge from 'element-ui/src/utils/merge';
 
 const NewPopper = {
   props: {
@@ -449,8 +450,9 @@ export default {
     },
 
     mountPicker() {
-      this.panel.defaultValue = this.defaultValue || this.currentValue;
-      this.picker = new Vue(this.panel).$mount();
+      const defaultValue = this.defaultValue || this.currentValue;
+      const panel = merge({}, this.panel, { defaultValue });
+      this.picker = new Vue(panel).$mount();
       this.picker.popperClass = this.popperClass;
       this.popperElm = this.picker.$el;
       this.picker.width = this.reference.getBoundingClientRect().width;
