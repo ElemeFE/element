@@ -137,6 +137,12 @@
     children: 'zones'
   };
 
+  const props1 = {
+    label: 'name',
+    children: 'zones',
+    isLeaf: 'leaf'
+  };
+
   const defaultProps = {
     children: 'children',
     label: 'label'
@@ -185,6 +191,23 @@
           resolve(data);
         }, 500);
       },
+      loadNode1(node, resolve) {
+        if (node.level === 0) {
+          return resolve([{ name: 'region' }]);
+        }
+        if (node.level > 1) return resolve([]);
+
+        setTimeout(() => {
+          const data = [{
+            name: 'leaf',
+            leaf: true
+          }, {
+            name: 'zone'
+          }];
+
+          resolve(data);
+        }, 500);
+      },
       getCheckedNodes() {
         console.log(this.$refs.tree.getCheckedNodes());
       },
@@ -210,10 +233,16 @@
         this.$refs.tree.setCheckedKeys([]);
       },
       append(store, data) {
-        store.append({ id: id++, label: 'testtest', children: [] }, data);
+        const newChild = { id: id++, label: 'testtest', children: [] };
+        store.append(newChild, data);
+        data.children = data.children || [];
+        data.children.push(newChild);
       },
 
-      remove(store, data) {
+      remove(store, node, data) {
+        const parent = node.parent;
+        const index = parent.data.children.findIndex(d => d.id === data.id);
+        parent.data.children.splice(index, 1);
         store.remove(data);
       },
 
@@ -225,7 +254,7 @@
             </span>
             <span style="float: right; margin-right: 20px">
               <el-button size="mini" on-click={ () => this.append(store, data) }>Append</el-button>
-              <el-button size="mini" on-click={ () => this.remove(store, data) }>Delete</el-button>
+              <el-button size="mini" on-click={ () => this.remove(store, node, data) }>Delete</el-button>
             </span>
           </span>);
       },
@@ -244,6 +273,7 @@
         regions,
         defaultProps,
         props,
+        props1,
         defaultCheckedKeys: [5],
         defaultExpandedKeys: [2, 3],
         filterText: ''
@@ -326,7 +356,6 @@ Used for node selection. In the following example, data for each layer is acquir
 ::: demo
 ```html
 <el-tree
-  :data="regions"
   :props="props"
   :load="loadNode"
   lazy
@@ -338,11 +367,6 @@ Used for node selection. In the following example, data for each layer is acquir
   export default {
     data() {
       return {
-        regions: [{
-          'name': 'region1'
-        }, {
-          'name': 'region2'
-        }],
         props: {
           label: 'name',
           children: 'zones'
@@ -383,6 +407,52 @@ Used for node selection. In the following example, data for each layer is acquir
           } else {
             data = [];
           }
+
+          resolve(data);
+        }, 500);
+      }
+    }
+  };
+</script>
+```
+:::
+
+### Custom leaf node in lazy mode
+
+::: demo
+```html
+<el-tree
+  :props="props1"
+  :load="loadNode1"
+  lazy
+  show-checkbox>
+</el-tree>
+
+<script>
+  export default {
+    data() {
+      return {
+        props1: {
+          label: 'name',
+          children: 'zones',
+          isLeaf: 'leaf'
+        },
+      };
+    },
+    methods: {
+      loadNode1(node, resolve) {
+        if (node.level === 0) {
+          return resolve([{ name: 'region' }]);
+        }
+        if (node.level > 1) return resolve([]);
+
+        setTimeout(() => {
+          const data = [{
+            name: 'leaf',
+            leaf: true
+          }, {
+            name: 'zone'
+          }];
 
           resolve(data);
         }, 500);
@@ -613,6 +683,10 @@ Tree nodes can be initially expanded or checked
 ### Custom node content
 The content of tree nodes can be customized, so you can add icons or buttons as you will
 
+:::warning
+`Append` and `remove` do not change `data`
+:::
+
 ::: demo Use `render-content` to assign a render function that returns the content of tree nodes. See Vue's documentation for a detailed introduction of render functions. Note that this demo can't run in jsfiddle because it doesn't support JSX syntax. In a real project, `render-content` will work if relevant dependencies are correctly configured.
 ```html
 <el-tree
@@ -675,22 +749,28 @@ The content of tree nodes can be customized, so you can add icons or buttons as 
 
     methods: {
       append(store, data) {
-        store.append({ id: id++, label: 'testtest', children: [] }, data);
+        const newChild = { id: id++, label: 'testtest', children: [] };
+        store.append(newChild, data); // need change data by yourself
+        data.children = data.children || [];
+        data.children.push(newChild);
       },
 
-      remove(store, data) {
-        store.remove(data);
+      remove(store, node, data) {
+        const parent = node.parent;
+        const index = parent.data.children.findIndex(d => d.id === data.id);
+        parent.data.children.splice(index, 1);
+        store.remove(data); // need change data by yourself
       },
 
       renderContent(h, { node, data, store }) {
         return (
-          <span>
+          <span style="white-space: normal">
             <span>
               <span>{node.label}</span>
             </span>
             <span style="float: right; margin-right: 20px">
               <el-button size="mini" on-click={ () => this.append(store, data) }>Append</el-button>
-              <el-button size="mini" on-click={ () => this.remove(store, data) }>Delete</el-button>
+              <el-button size="mini" on-click={ () => this.remove(store, node, data) }>Delete</el-button>
             </span>
           </span>);
       }
@@ -877,7 +957,8 @@ Only one node among the same level can be expanded at one time.
 | --------- | ---------------------------------------- | ------ | --------------- | ------- |
 | label     | specify which key of node object is used as the node's label | string, function(data, node) | —               | —       |
 | children | specify which node object is used as the node's subtree | string, function(data, node) | —               | —       |
-| disabled | specify which node's checkbox disabled |  boolean, function(data, node) | —    | —    |
+| disabled | specify which node's checkbox disabled | boolean, function(data, node) | —    | —    |
+| isLeaf | specify whether the node is a leaf node | boolean, function(data, node) | —    | —    |
 
 ### Method
 `Tree` has the following method, which returns the currently selected array of nodes.
