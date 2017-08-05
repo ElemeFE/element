@@ -19,7 +19,7 @@
     mixins: [Emitter],
 
     props: {
-      command: String,
+      command: null,
       disabled: Boolean,
       divided: Boolean
     },

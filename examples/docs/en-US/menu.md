@@ -3,7 +3,7 @@
     .el-menu-demo {
       padding-left: 55px;
     }
-    .el-menu-vertical-demo {
+    .el-menu-vertical-demo:not(.el-menu--collapse) {
       width: 200px;
       min-height: 400px;
     }
@@ -33,7 +33,8 @@
     data() {
       return {
         activeIndex: '1',
-        activeIndex2: '1'
+        activeIndex2: '1',
+        isCollapse: false
       };
     },
     methods: {
@@ -179,10 +180,70 @@ Vertical NavMenu with sub-menus.
 ```
 :::
 
+### Collapse
+
+Vertical NavMenu could be collapsed.
+
+::: demo 
+```html
+<el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
+  <el-radio-button :label="false">expand</el-radio-button>
+  <el-radio-button :label="true">collapse</el-radio-button>
+</el-radio-group>
+<el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
+  <el-submenu index="1">
+    <template slot="title">
+      <i class="el-icon-message"></i>
+      <span slot="title">Navigator One</span>
+    </template>
+    <el-menu-item-group>
+      <span slot="title">Group One</span>
+      <el-menu-item index="1-1">item one</el-menu-item>
+      <el-menu-item index="1-2">item two</el-menu-item>
+    </el-menu-item-group>
+    <el-menu-item-group title="Group Two">
+      <el-menu-item index="1-3">item three</el-menu-item>
+    </el-menu-item-group>
+    <el-submenu index="1-4">
+      <span slot="title">item four</span>
+      <el-menu-item index="1-4-1">item one</el-menu-item>
+    </el-submenu>
+  </el-submenu>
+  <el-menu-item index="2">
+    <i class="el-icon-menu"></i>
+    <span slot="title">Navigator Two</span>
+  </el-menu-item>
+  <el-menu-item index="3">
+    <i class="el-icon-setting"></i>
+    <span slot="title">Navigator Three</span>
+  </el-menu-item>
+</el-menu>
+
+<script>
+  export default {
+    data() {
+      return {
+        isCollapse: false
+      };
+    },
+    methods: {
+      handleOpen(key, keyPath) {
+        console.log(key, keyPath);
+      },
+      handleClose(key, keyPath) {
+        console.log(key, keyPath);
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Menu Attribute
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------- |---------- |-------------  |-------- |
 | mode     | menu display mode   | string  |   horizontal/vertical   | vertical |
+| collapse  | whether the menu is collapsed (available only in vertical mode) | boolean  |   —   | false |
 | theme     | theme color   | string    | light/dark | light |
 | default-active | index of currently active menu | string    | — | — |
 | default-openeds | array that contains keys of currently active sub-menus  | Array    | — | — |

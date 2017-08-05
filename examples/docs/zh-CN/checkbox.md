@@ -254,7 +254,7 @@
 | min     | 可被勾选的 checkbox 的最小数量   | number    |       —        |     —    |
 | max     | 可被勾选的 checkbox 的最大数量   | number    |       —        |     —    |
 
-### Checkbox-group Events
+### Checkbox Events
 | 事件名称      | 说明    | 回调参数      |
 |---------- |-------- |---------- |
 | change  | 当绑定值变化时触发的事件 | event 事件对象 |
