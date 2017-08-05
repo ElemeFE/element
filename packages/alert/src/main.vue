@@ -1,6 +1,11 @@
 <template>
   <transition name="el-alert-fade">
-    <div class="el-alert" :class="[ typeClass ]" v-show="visible">
+    <div
+      class="el-alert"
+      :class="[ typeClass ]"
+      v-show="visible"
+      role="alert"
+    >
       <i class="el-alert__icon" :class="[ iconClass, isBigIcon ]" v-if="showIcon"></i>
       <div class="el-alert__content">
         <span class="el-alert__title" :class="[ isBoldTitle ]" v-if="title">{{ title }}</span>

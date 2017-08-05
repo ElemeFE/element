@@ -7,6 +7,9 @@
         { 'is-checked': isChecked },
         { 'is-focus': focus },
       ]"
+    role="checkbox"
+    :aria-checked="isChecked"
+    :aria-disabled="disabled"
     >
     <input
       v-if="trueLabel || falseLabel"
