@@ -43,7 +43,8 @@
                   ref="minTimePicker"
                   :date="minDate"
                   @pick="handleMinTimePick"
-                  :visible="minTimePickerVisible">
+                  :visible="minTimePickerVisible"
+                  @mounted="$refs.minTimePicker.format=timeFormat">
                 </time-picker>
               </span>
             </span>
@@ -74,7 +75,9 @@
                   ref="maxTimePicker"
                   :date="maxDate"
                   @pick="handleMaxTimePick"
-                  :visible="maxTimePickerVisible"></time-picker>
+                  :visible="maxTimePickerVisible"
+                  @mounted="$refs.maxTimePicker.format=timeFormat">
+                </time-picker>
               </span>
             </span>
           </div>
@@ -213,6 +216,14 @@
           newDate.setMonth(month + 1);
         }
         return newDate;
+      },
+
+      timeFormat() {
+        if (this.format && this.format.indexOf('ss') === -1) {
+          return 'HH:mm';
+        } else {
+          return 'HH:mm:ss';
+        }
       }
     },
 
@@ -238,7 +249,8 @@
         firstDayOfWeek: 7,
         minTimePickerVisible: false,
         maxTimePickerVisible: false,
-        width: 0
+        width: 0,
+        format: ''
       };
     },
 
