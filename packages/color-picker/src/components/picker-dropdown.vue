@@ -13,6 +13,7 @@
           <el-input
             v-model="customInput"
             @keyup.native.enter="handleConfirm"
+            @blur="handleConfirm"
             size="mini">
           </el-input>
         </span>
