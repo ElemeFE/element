@@ -20,8 +20,8 @@
           class="td"
           :class="getCellClasses(cell)"
           :name="calcId(cell)">
-          <span :class="{ hasxinhuan: seedCount }" class="riqi" v-text="cell.text"></span>
-          <span v-if="seedCount" class="xinyuan"v-text="0"></span>
+          <span :class="{ hasxinyuan: seedCount }" class="riqi" v-text="cell.text"></span>
+          <span :class="{ hasxinyuan: seedCount }" v-if="seedCount" class="xinyuan"v-text="0"></span>
         </td>
       </tr>
     </tbody>
