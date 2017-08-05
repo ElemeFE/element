@@ -564,7 +564,7 @@ describe('Tree', () => {
           if (node.level === 0) {
             return resolve([{ label: 'region1', id: this.count++ }, { label: 'region2', id: this.count++ }]);
           }
-          if (node.level > 4) return resolve([]);
+          if (node.level > 2) return resolve([]);
           setTimeout(() => {
             resolve([{
               label: 'zone' + this.count,
@@ -580,8 +580,8 @@ describe('Tree', () => {
     const tree = vm.$children[0];
     tree.store.setCheckedKeys([1]);
     setTimeout(() => {
-      const id5 = document.querySelectorAll('.el-tree-node__content')[3];
-      expect(id5.querySelector('input').checked).to.equal(true);
+      const checkedKeys = tree.getCheckedKeys();
+      expect(checkedKeys.length).to.equal(7);
       done();
     }, 300);
   });
