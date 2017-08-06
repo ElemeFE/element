@@ -56,12 +56,12 @@ export default {
     },
     select: {
       loading: 'جار التحميل',
-      noMatch: 'لايوجد تاريخ مطابق',
-      noData: 'لايوجد تاريخ',
+      noMatch: 'لايوجد بيانات مطابقة',
+      noData: 'لايوجد بيانات',
       placeholder: 'أختر'
     },
     cascader: {
-      noMatch: 'لايوجد تاريخ مطابق',
+      noMatch: 'لايوجد بيانات مطابقة',
       loading: 'جار التحميل',
       placeholder: 'أختر'
     },
@@ -95,10 +95,10 @@ export default {
     transfer: {
       noMatch: 'لايوجد بيانات مطابقة',
       noData: 'لايوجد بيانات',
-      titles: ['List 1', 'List 2'], // to be translated
-      filterPlaceholder: 'Enter keyword', // to be translated
-      noCheckedFormat: '{total} items', // to be translated
-      hasCheckedFormat: '{checked}/{total} checked' // to be translated
+      titles: ['قائمة 1', 'قائمة 2'], // to be translated
+      filterPlaceholder: 'ادخل كلمة', // to be translated
+      noCheckedFormat: '{total} عناصر', // to be translated
+      hasCheckedFormat: '{checked}/{total} مختار' // to be translated
     }
   }
 };
