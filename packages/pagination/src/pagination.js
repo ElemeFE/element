@@ -32,7 +32,9 @@ export default {
       default() {
         return [10, 20, 30, 40, 50, 100];
       }
-    }
+    },
+
+    popperClass: String
   },
 
   data() {
@@ -147,6 +149,7 @@ export default {
           <span class="el-pagination__sizes">
             <el-select
               value={ this.$parent.internalPageSize }
+              popperClass={ this.$parent.popperClass }
               on-input={ this.handleChange }>
               {
                 this.pageSizes.map(item =>
