@@ -205,6 +205,7 @@ Add more modules based on your scenario.
 | current-page | current page number, supports the .sync modifier | number | — | 1 |
 | layout | layout of Pagination, elements separated with a comma | string | `sizes`, `prev`, `pager`, `next`, `jumper`, `->`, `total`, `slot` | 'prev, pager, next, jumper, ->, total'  |
 | page-sizes | options of item count per page | number[] | — |  [10, 20, 30, 40, 50, 100] |
+| popper-class | custom class name for the page size Select's dropdown | string | — | — |
 
 ### Events
 | Event Name | Description | Parameters |
