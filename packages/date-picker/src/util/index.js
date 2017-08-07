@@ -3,12 +3,13 @@ import { t } from 'element-ui/src/locale';
 
 const weeks = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
-
-dateUtil.i18n = {
-  dayNamesShort: weeks.map(week => t(`el.datepicker.weeks.${ week }`)),
-  dayNames: weeks.map(week => t(`el.datepicker.weeks.${ week }`)),
-  monthNamesShort: months.map(month => t(`el.datepicker.months.${ month }`)),
-  monthNames: months.map((month, index) => t(`el.datepicker.month${ index + 1 }`))
+const getI18nSettings = () => {
+  return {
+    dayNamesShort: weeks.map(week => t(`el.datepicker.weeks.${ week }`)),
+    dayNames: weeks.map(week => t(`el.datepicker.weeks.${ week }`)),
+    monthNamesShort: months.map(month => t(`el.datepicker.months.${ month }`)),
+    monthNames: months.map((month, index) => t(`el.datepicker.month${ index + 1 }`))
+  };
 };
 
 const newArray = function(start, end) {
@@ -36,11 +37,11 @@ export const isDate = function(date) {
 export const formatDate = function(date, format) {
   date = toDate(date);
   if (!date) return '';
-  return dateUtil.format(date, format || 'yyyy-MM-dd');
+  return dateUtil.format(date, format || 'yyyy-MM-dd', getI18nSettings());
 };
 
 export const parseDate = function(string, format) {
-  return dateUtil.parse(string, format || 'yyyy-MM-dd');
+  return dateUtil.parse(string, format || 'yyyy-MM-dd', getI18nSettings());
 };
 
 export const getDayCountOfMonth = function(year, month) {
