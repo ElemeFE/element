@@ -85,6 +85,11 @@
 
     data() {
       return {
+        oldDate: {
+          hours: 0,
+          minutes: 0,
+          seconds: 0
+        },
         popperClass: '',
         format: 'HH:mm:ss',
         value: '',
@@ -110,6 +115,7 @@
       },
 
       handleCancel() {
+        this.handleChange(this.oldDate);
         this.$emit('pick');
       },
 
@@ -146,9 +152,9 @@
     },
 
     created() {
-      this.hours = this.currentDate.getHours();
-      this.minutes = this.currentDate.getMinutes();
-      this.seconds = this.currentDate.getSeconds();
+      this.oldDate.hours = this.hours = this.currentDate.getHours();
+      this.oldDate.minutes = this.minutes = this.currentDate.getMinutes();
+      this.oldDate.seconds = this.seconds = this.currentDate.getSeconds();
     },
 
     mounted() {

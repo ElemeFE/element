@@ -436,6 +436,7 @@ export default {
 
     showPicker() {
       if (this.$isServer) return;
+      this.picker = '';
       if (!this.picker) {
         this.mountPicker();
       }
