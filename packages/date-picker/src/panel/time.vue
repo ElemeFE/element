@@ -147,6 +147,9 @@
       },
 
       ajustScrollTop() {
+        this.oldDate.hours = this.hours;
+        this.oldDate.minutes = this.minutes;
+        this.oldDate.seconds = this.seconds;
         return this.$refs.spinner.ajustScrollTop();
       }
     },
