@@ -14,29 +14,32 @@
       <div class="el-input-group__prepend" v-if="$slots.prepend">
         <slot name="prepend"></slot>
       </div>
-      <!-- input 图标 -->
-      <slot name="icon">
-        <i class="el-input__icon"
-          :class="[
-            'el-icon-' + icon,
-            onIconClick ? 'is-clickable' : ''
-          ]"
-          v-if="icon"
-          @click="handleIconClick">
-        </i>
-      </slot>
-      <input
-        v-if="type !== 'textarea'"
-        class="el-input__inner"
-        v-bind="$props"
-        :autocomplete="autoComplete"
-        :value="currentValue"
-        ref="input"
-        @input="handleInput"
-        @focus="handleFocus"
-        @blur="handleBlur"
-      >
-      <i class="el-input__icon el-icon-loading" v-if="validating"></i>
+      <!-- 主体元素 -->
+      <div class="el-input-group__main">
+        <input
+          v-if="type !== 'textarea'"
+          class="el-input__inner"
+          v-bind="$props"
+          :autocomplete="autoComplete"
+          :value="currentValue"
+          ref="input"
+          @input="handleInput"
+          @focus="handleFocus"
+          @blur="handleBlur"
+        >
+        <!-- input 图标 -->
+        <slot name="icon">
+          <i class="el-input__icon"
+            :class="[
+              'el-icon-' + icon,
+              onIconClick ? 'is-clickable' : ''
+            ]"
+            v-if="icon"
+            @click="handleIconClick">
+          </i>
+        </slot>
+        <i class="el-input__icon el-icon-loading" v-if="validating"></i>
+      </div>
       <!-- 后置元素 -->
       <div class="el-input-group__append" v-if="$slots.append">
         <slot name="append"></slot>
