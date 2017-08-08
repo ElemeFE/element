@@ -21,8 +21,20 @@
       value(value) {
         this.dispatch('ElFormItem', 'el.form.change', [value]);
       }
-    }
-  };
+    },
+    mounted() {
+      this.$on('input', this.limitExceeded);
+      this.$on('change', this.groupChange);
+    },
+    methods: {
+      limitExceeded(value) {
+        this.$emit('limitExceeded', value);
+      },
+      groupChange(value) {
+        this.$emit('groupChange', value);
+      }
+   }
+};
 </script>
 
 <template>
