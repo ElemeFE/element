@@ -167,17 +167,19 @@
                                                         'selected': 1,
                                                         'categroy': '品牌',
                                                         'aggName': 'C',
+                                                        'isLeaf': true
                                                       }, {
                                                         'name': 'Znode2',
                                                         'selected': 2,
                                                         'aggName': 'Z',
+                                                        'isLeaf': true
                                                       }]);
+                }else if(node.data.name === 'Begion2'){
+                return resolve([]);
                 }
                 
-        if (node.level === 2 && node.data.name === 'Begion2') {
-                          return resolve([]);
-                        }
-        //if (node.level > 3) return resolve([]);
+        
+        //if (node.level > 2) return resolve([]);
         //var hasChild;
         //if (node.data.name === 'region1') {
         //  hasChild = true;

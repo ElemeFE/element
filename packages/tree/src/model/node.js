@@ -169,6 +169,13 @@ export default class Node {
           child.setChecked(false);
       }
     }
+    if (this.checked) {
+      child.setChecked(true);
+    }
+
+    if (child.data.isLeaf) {
+      child.isLeaf = true;
+    }
     if (typeof index === 'undefined' || index < 0) {
       this.childNodes.push(child);
     } else {
