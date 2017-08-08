@@ -189,7 +189,13 @@ export default {
         handleFocus(event) {
           this.oldValue = event.target.value;
         },
-
+        handleKeyUp(event) {
+          const key = event.key || '';
+          const keyCode = event.keyCode || '';
+          if ((key && key === 'Enter') || (keyCode && keyCode === 13)) {
+            this.handleChange({ target: event.target });
+          }
+        },
         handleChange({ target }) {
           this.$parent.internalCurrentPage = this.$parent.getValidCurrentPage(target.value);
           this.oldValue = null;
@@ -209,6 +215,7 @@ export default {
               domProps-value={ this.$parent.internalCurrentPage }
               on-change={ this.handleChange }
               on-focus={ this.handleFocus }
+              on-keyup={ this.handleKeyUp }
               number/>
             { this.t('el.pagination.pageClassifier') }
           </span>

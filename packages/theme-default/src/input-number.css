@@ -63,7 +63,7 @@
       width: 200px;
 
       & .el-input-number__increase, .el-input-number__decrease {
-        line-height: var(--input-large-height);
+        line-height: calc(var(--input-large-height) - 2);
         width: var(--input-large-height);
         font-size: var(--input-large-font-size);
       }
@@ -78,7 +78,7 @@
       width: 130px;
 
       & .el-input-number__increase, .el-input-number__decrease {
-        line-height: var(--input-small-height);
+        line-height: calc(var(--input-small-height) - 2);
         width: var(--input-small-height);
         font-size: var(--input-small-font-size);
       }
