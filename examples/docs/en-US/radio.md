@@ -137,6 +137,12 @@ label | the value of radio | string/number/boolean | — | —
 disabled | whether radio is disabled | boolean | — | false
 name | native 'name' attribute | string    |      —         |     —
 
+### Radio Events
+
+| Event Name | Description | Parameters |
+| --- | --- | --- |
+| change | triggers when the bound value changes | the label value of the chosen radio |
+
 ### Radio-group Attributes
 
  Attribute      | Description          | Type      | Accepted Values       | Default
@@ -148,8 +154,8 @@ text-color | font color when button is active | string   | — | #ffffff   |
 ### Radio-group Events
 
 | Event Name | Description | Parameters |
---- | --- | ---
-change | triggers when the bound value changes | the label value of the chosen radio
+| --- | --- | --- |
+| change | triggers when the bound value changes | the label value of the chosen radio |
 
 ### Radio-button Attributes
 

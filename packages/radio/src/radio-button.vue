@@ -18,6 +18,7 @@
       type="radio"
       v-model="value"
       :name="name"
+      @change="handleChange"
       :disabled="isDisabled"
       tabindex="-1"
     >
@@ -28,8 +29,12 @@
   </label>
 </template>
 <script>
+  import Emitter from 'element-ui/src/mixins/emitter';
+
   export default {
     name: 'ElRadioButton',
+
+    mixins: [Emitter],
 
     props: {
       label: {},
@@ -72,6 +77,14 @@
       },
       tabIndex() {
         return !this.isDisabled ? (this._radioGroup ? (this.value === this.label ? 0 : -1) : 0) : -1;
+      }
+    },
+
+    methods: {
+      handleChange() {
+        this.$nextTick(() => {
+          this.dispatch('ElRadioGroup', 'handleChange', this.value);
+        });
       }
     }
   };

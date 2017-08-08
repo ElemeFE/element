@@ -30,6 +30,11 @@
       textColor: String,
       disabled: Boolean
     },
+    created() {
+      this.$on('handleChange', value => {
+        this.$emit('change', value);
+      });
+    },
     mounted() {
       // 当radioGroup没有默认选项时，第一个可以选中Tab导航
       let radios = this.$el.querySelectorAll('[type=radio]');
@@ -73,7 +78,6 @@
     },
     watch: {
       value(value) {
-        this.$emit('change', value);
         this.dispatch('ElFormItem', 'el.form.change', [this.value]);
       }
     }
