@@ -141,7 +141,6 @@
         console.log(data);
       },
       loadNode(node, resolve, isMore) {
-      debugger;
         if (node.level === 0) {
         return resolve([{
                                                         'name': '全部'

@@ -294,16 +294,16 @@ export default class Node {
       }
     };
 
-    if (!this.store.checkStrictly && this.shouldLoadData()) {
-      // Only work on lazy load data.
-      this.loadData(() => {
-        handleDescendants();
-      }, {
-        checked: value !== false
-      });
-    } else {
+    // if (!this.store.checkStrictly && this.shouldLoadData()) {
+    //   // Only work on lazy load data.
+    //   this.loadData(() => {
+    //     handleDescendants();
+    //   }, {
+    //     checked: value !== false
+    //   });
+    // } else {
       handleDescendants();
-    }
+
 
     const parent = this.parent;
     if (!parent || parent.level === 0) return;

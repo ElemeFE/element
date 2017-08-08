@@ -85,7 +85,6 @@ div{
   position: absolute;
   width: 40px;
   height: 100%;
-  padding-top: 110px;
   border-right: #e5e5e5 1px solid;
 }
 .el-tree-nodes{
@@ -94,9 +93,21 @@ div{
 }
 .el-tree-all .el-tree-node{
   border: none;
+  height: 70px;
+  overflow-y: auto;
+  position: absolute;
+  top: 50%;
+  margin-top: -45px;
 }
 .el-tree-all .el-tree-node__expand-icon{
   display: none;
+}
+.el-tree-all .el-tree-node__content > .el-checkbox, .el-tree-node__content > .el-tree-node__expand-icon{
+  margin-right: 0px;
+  margin-left: 3px;
+}
+.el-tree-all .el-tree-node__content:hover{
+  background: none;
 }
 .el-tree-all .el-tree-node__label{
   display: block;
