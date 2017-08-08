@@ -33,7 +33,7 @@
       groupChange(value) {
         this.$emit('groupChange', value);
       }
-  }
+    }
 };
 </script>
 
