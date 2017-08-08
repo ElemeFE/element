@@ -573,7 +573,7 @@ describe('Tree', () => {
               label: 'zone' + this.count,
               id: this.count++
             }]);
-          }, 50);
+          }, 10);
         }
       }
     });
@@ -583,7 +583,7 @@ describe('Tree', () => {
       const checkedKeys = tree.getCheckedKeys();
       expect(checkedKeys.length).to.equal(7);
       done();
-    }, 300);
+    }, 400);
   });
 
   it('lazy without expandOnChecked', done => {
