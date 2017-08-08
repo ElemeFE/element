@@ -2,13 +2,7 @@
   <div class="el-autocomplete" v-clickoutside="close">
     <el-input
       ref="input"
-      :value="value"
-      :disabled="disabled"
-      :placeholder="placeholder"
-      :name="name"
-      :size="size"
-      :icon="icon"
-      :on-icon-click="onIconClick"
+      v-bind="$props"
       @compositionstart.native="handleComposition"
       @compositionupdate.native="handleComposition"
       @compositionend.native="handleComposition"
