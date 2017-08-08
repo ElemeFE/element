@@ -22,6 +22,7 @@
         v-model="model"
         @focus="focus = true"
         @blur="focus = false"
+        @change="handleChange"
         :name="name"
         :disabled="isDisabled"
         tabindex="-1"
@@ -88,6 +89,15 @@
       },
       tabIndex() {
         return !this.isDisabled ? (this.isGroup ? (this.model === this.label ? 0 : -1) : 0) : -1;
+      }
+    },
+
+    methods: {
+      handleChange() {
+        this.$nextTick(() => {
+          this.$emit('change', this.model);
+          this.isGroup && this.dispatch('ElRadioGroup', 'handleChange', this.model);
+        });
       }
     }
   };
