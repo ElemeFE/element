@@ -146,6 +146,10 @@
       }
     }
 
+    @modifier hidden {
+      visibility: hidden;
+    }
+
     & th {
       background-color: var(--table-header-background);
       text-align: left;

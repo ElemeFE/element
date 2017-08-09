@@ -1,5 +1,21 @@
 ## Changelog
 
+### 1.4.2
+
+*2017-08-09*
+
+- Fixed Select marking option of `value` equal to `0` as selected when the initial value is null and bound to an object-typed value, #6143
+- Fixed Step style issue when `status` is `error`, #6155 @wacky6
+- Fixed Cascader selecting parent item when moving mouse quickly after clicking a leaf item, #6199
+- Fixed Menu not hiding submenus when collapsed, #6200
+- Fixed status of the inner native input of Switch not syncing with the component, #6205 @wacky6
+- Fixed wrong button positioning of Slider after window is resized, #6263
+- Fixed Autocomplete not hiding dropdown menu on blur, #6256
+- Fixed hitting enter on jumper of Pagination not trigger page change event in IE, #6306 @qingdengyue
+- Fixed InputNumber style issue when its `size` is `large` or `small`, #6310 @JeremyWuuuuu
+- Fixed i18n failure for some texts in DatePicker, #6328
+- Fixed Slider value changing to minimum when its button is clicked, #6359
+
 ### 1.4.1
 
 *2017-07-28*
