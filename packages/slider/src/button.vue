@@ -39,6 +39,7 @@
       return {
         hovering: false,
         dragging: false,
+        isClick: false,
         startX: 0,
         currentX: 0,
         startY: 0,
@@ -127,6 +128,7 @@
 
       onDragStart(event) {
         this.dragging = true;
+        this.isClick = true;
         if (this.vertical) {
           this.startY = event.clientY;
         } else {
@@ -137,6 +139,7 @@
 
       onDragging(event) {
         if (this.dragging) {
+          this.isClick = false;
           this.displayTooltip();
           let diff = 0;
           if (this.vertical) {
@@ -160,7 +163,10 @@
           setTimeout(() => {
             this.dragging = false;
             this.hideTooltip();
-            this.setPosition(this.newPosition);
+            if (!this.isClick) {
+              this.setPosition(this.newPosition);
+              this.$parent.emitChange();
+            }
           }, 0);
           window.removeEventListener('mousemove', this.onDragging);
           window.removeEventListener('mouseup', this.onDragEnd);
