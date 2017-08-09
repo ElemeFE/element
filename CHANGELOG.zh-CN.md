@@ -1,5 +1,20 @@
 ## 更新日志
 
+### 1.4.2
+*2017-08-09*
+
+- 修复绑定值为对象类型时，初始值为 null 的 Select 会选中 value 为 `0` 的问题，#6143
+- 修复 `status` 为 `error` 的 Step 样式问题，#6155 @wacky6
+- 修复当 Cascader 的 `expand-trigger` 为 `hover` 时，点击选择条目后快速移动会再次选到父级元素的问题，#6199
+- 修复 Menu 在 collaspse 时不能收起子级菜单的问题，#6200
+- 修复 Switch 内部的原生 input 状态与组件不同步的问题，#6205 @wacky6
+- 修复 Slider 在 resize 窗口后滑块位置不准的问题，#6263
+- 修复 Autocomplete 在 blur 时不会收起下拉框的问题，#6256
+- 修复 Pagination 的 jumper 在 IE 下敲击回车无法触发翻页的问题，#6306 @qingdengyue
+- 修复 InputNumber 当 `size` 为 `large` 和 `small` 时的样式问题，#6310 @JeremyWuuuuu
+- 修复 DatePicker 的部分格式化文字 i18n 不生效的问题，#6328
+- 修复点击 Slider 的滑块会使其移动至起点的问题，#6359
+
 ### 1.4.1
 *2017-07-28*
 
