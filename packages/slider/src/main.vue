@@ -6,6 +6,7 @@
       v-if="showInput && !range"
       class="el-slider__input"
       ref="input"
+      @change="$nextTick(emitChange)"
       :step="step"
       :disabled="disabled"
       :controls="showInputControls"
@@ -183,7 +184,6 @@
             this.firstValue = val[0];
             this.secondValue = val[1];
             if (this.valueChanged()) {
-              this.$emit('change', [this.minValue, this.maxValue]);
               this.dispatch('ElFormItem', 'el.form.change', [this.minValue, this.maxValue]);
               this.oldValue = val.slice();
             }
@@ -196,7 +196,6 @@
           } else {
             this.firstValue = val;
             if (this.valueChanged()) {
-              this.$emit('change', val);
               this.dispatch('ElFormItem', 'el.form.change', val);
               this.oldValue = val;
             }
@@ -228,12 +227,19 @@
           const sliderOffsetLeft = this.$refs.slider.getBoundingClientRect().left;
           this.setPosition((event.clientX - sliderOffsetLeft) / this.sliderSize * 100);
         }
+        this.emitChange();
       },
 
       resetSize() {
         if (this.$refs.slider) {
           this.sliderSize = this.$refs.slider[`client${ this.vertical ? 'Height' : 'Width' }`];
         }
+      },
+
+      emitChange() {
+        this.$nextTick(() => {
+          this.$emit('change', this.range ? [this.minValue, this.maxValue] : this.value);
+        });
       }
     },
 
