@@ -361,8 +361,8 @@ div{
       }
     },
     mounted() {
-        this.expendNodes.push(this.root.childNodes[0]);
-        this.root.childNodes[0].expand();
+      this.expendNodes.push(this.root.childNodes[0]);
+      this.root.childNodes[0].expand();
     },
     created() {
       this.isTree = true;
