@@ -302,8 +302,7 @@ export default class Node {
     //     checked: value !== false
     //   });
     // } else {
-      handleDescendants();
-
+    handleDescendants();
 
     const parent = this.parent;
     if (!parent || parent.level === 0) return;

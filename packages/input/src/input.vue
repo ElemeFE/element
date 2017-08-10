@@ -14,6 +14,8 @@
         class="el-input__inner"
         :value="value.from"
         v-bind="$props"
+        type="text"
+        maxlength="16"
         placeholder="全部"
         ref="inputFrom"
         @input="handleInputFrom"
@@ -36,6 +38,8 @@
         class="el-input__inner"
         :value="value.to"
         v-bind="$props"
+        type="text"
+        maxlength="16"
         placeholder="全部"
         ref="inputTo"
         @input="handleInputTo"
@@ -226,12 +230,8 @@
         if (value === '') {
           this.value.from = '';
           this.$refs.inputFrom.value = '';
-        } else if (/^\d+(\.\d{1,2})?$/.test(value) && value.length <= 16) {
-          if (this.value.to === '' || Number(value) < Number(this.value.to)) {
-            this.value.from = value;
-          } else {
-            this.$refs.inputFrom.value = this.value.from;
-          }
+        } else if (/^\d+(\.\d{1,2})?$/.test(value) && (this.value.to === '' || Number(value) < Number(this.value.to))) {
+          this.value.from = value;
         } else {
           this.$refs.inputFrom.value = this.value.from;
         }
@@ -243,16 +243,8 @@
         if (value === '') {
           this.value.to = '';
           this.$refs.inputTo.value = '';
-        } else if (/^\d+(\.\d{1,2})?$/.test(value) && value.length <= 16) {
-          if (this.value.from === '' || Number(value) > Number(this.value.from)) {
-            this.value.to = value;
-          } else {
-            if (this.value.from.length > 1) {
-              this.value.to = value;
-            } else {
-              this.$refs.inputTo.value = this.value.to;
-            }
-          }
+        } else if (/^\d+(\.\d{1,2})?$/.test(value) && (value.length < 16 || Number(value) > Number(this.value.from))) {
+          this.value.to = value;
         } else {
           this.$refs.inputTo.value = this.value.to;
         }
