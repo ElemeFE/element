@@ -6,7 +6,8 @@
       'is-active': active,
       'el-carousel__item--card': $parent.type === 'card',
       'is-in-stage': inStage,
-      'is-hover': hover
+      'is-hover': hover,
+      'is-animating': animating
     }"
     @click="handleItemClick"
     :style="{
@@ -43,7 +44,8 @@
         scale: 1,
         active: false,
         ready: false,
-        inStage: false
+        inStage: false,
+        animating: false
       };
     },
 
@@ -71,9 +73,12 @@
         }
       },
 
-      translateItem(index, activeIndex) {
+      translateItem(index, activeIndex, oldIndex) {
         const parentWidth = this.$parent.$el.offsetWidth;
         const length = this.$parent.items.length;
+        if (this.$parent.type !== 'card' && oldIndex !== undefined) {
+          this.animating = index === activeIndex || index === oldIndex;
+        }
         if (index !== activeIndex && length > 2) {
           index = this.processIndex(index, activeIndex, length);
         }
