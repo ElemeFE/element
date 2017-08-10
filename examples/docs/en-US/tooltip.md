@@ -213,3 +213,4 @@ Disabled form elements are not supported in tooltip, see more information at [MD
 | manual | whether to control Tooltip manually. `mouseenter` and `mouseleave` won't have effects if set to `true` | boolean | — | false |
 |  popper-class  |  custom class name for Tooltip's popper | string | — | — |
 | enterable | whether the mouse can enter the tooltip | Boolean | — | true |
+| hide-after | timeout in milliseconds to hide tooltip | number | — | 0 |
