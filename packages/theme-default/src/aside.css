@@ -1,0 +1,8 @@
+@charset "UTF-8";
+
+@component-namespace el {
+  @b aside {
+    overflow: auto;
+    box-sizing: border-box;
+  }
+}

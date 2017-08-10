@@ -44,6 +44,10 @@
               "title": "Layout 布局"
             },
             {
+              "path": "/container",
+              "title": "Container 布局容器"
+            },
+            {
               "path": "/color",
               "title": "Color 色彩"
             },
@@ -284,6 +288,10 @@
             {
               "path": "/layout",
               "title": "Layout"
+            },
+            {
+              "path": "/container",
+              "title": "Layout Container"
             },
             {
               "path": "/color",

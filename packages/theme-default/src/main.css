@@ -1,0 +1,11 @@
+@charset "UTF-8";
+@import "./common/var.css";
+
+@component-namespace el {
+  @b main {
+    flex: 1;
+    overflow: auto;
+    box-sizing: border-box;
+    padding: var(--main-padding);
+  }
+}
