@@ -69,7 +69,11 @@ export default {
             class={
               ['el-tooltip__popper', 'is-' + this.effect, this.popperClass]
             }>
-            { this.$slots.content || this.content }
+            <el-scrollbar>
+              <div style="max-width:287px; max-height:70px">
+                { this.$slots.content || this.content }
+              </div>
+            </el-scrollbar>
           </div>
         </transition>);
     }
