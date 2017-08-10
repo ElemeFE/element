@@ -56,6 +56,14 @@
         });
       },
 
+      open8() {
+        this.$notify.success({
+          title: 'Info',
+          message: 'This is a message without close button',
+          showClose: false
+        });
+      },
+
       onClose() {
         console.log('Notification is closed');
       }
@@ -207,6 +215,36 @@ Customize Notification's offset from the top edge of the screen
 ```
 :::
 
+### Hide Close button
+
+It is possible to hide the close button
+
+::: demo Set the `showClose` attribute to `false` so the notification cannot be closed by the user.
+```html
+<template>
+  <el-button
+      plain
+      @click="open8">
+    Hide close button
+  </el-button>
+</template>
+
+<script>
+  export default {
+    methods: {
+      open8() {
+        this.$notify.success({
+          title: 'Info',
+          message: 'This is a message without close button',
+          showClose: false
+        });
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Global method
 
 Element has added a global method `$notify` for Vue.prototype. So in a vue instance you can call `Notification` like what we did in this page.
@@ -230,6 +268,7 @@ In this case you should call `Notification(options)`. We have also registered me
 | iconClass | custom icon's class. It will be overridden by `type` | string | — | — |
 | customClass | custom class name for Notification | string | — | — |
 | duration | duration before close. It will not automatically close if set 0 | number | — | 4500 |
+| showClose | whether to show a close button | boolean | — | true |
 | onClose | callback function when closed | function | — | — |
 | onClick | callback function when notification clicked | function | — | — |
 | offset | offset from the top edge of the screen. Every Notification instance of the same moment should have the same offset | number | — | 0 |
