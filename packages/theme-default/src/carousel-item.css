@@ -11,15 +11,20 @@
       width: 100%;
       height: 100%;
       display: inline-block;
-      transition: .4s ease-in-out;
       overflow: hidden;
       z-index: calc(var(--index-normal) - 1);
+
       @when active {
         z-index: calc(var(--index-normal) + 1);
       }
 
+      @when animating {
+        transition: transform .4s ease-in-out;
+      }
+
       @modifier card {
         width: 50%;
+        transition: transform .4s ease-in-out;
         &.is-in-stage {
           cursor: pointer;
           z-index: var(--index-normal);

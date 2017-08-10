@@ -106,7 +106,7 @@ export default {
     },
 
     activeIndex(val, oldVal) {
-      this.resetItemPosition();
+      this.resetItemPosition(oldVal);
       this.$emit('change', val, oldVal);
     },
 
@@ -156,9 +156,9 @@ export default {
       this.items = this.$children.filter(child => child.$options.name === 'ElCarouselItem');
     },
 
-    resetItemPosition() {
+    resetItemPosition(oldIndex) {
       this.items.forEach((item, index) => {
-        item.translateItem(index, this.activeIndex);
+        item.translateItem(index, this.activeIndex, oldIndex);
       });
     },
 
