@@ -602,11 +602,11 @@
 
   /* Header
   --------------------------*/
-  --header-padding: 0 40px;
+  --header-padding: 0 20px;
 
   /* Footer
   --------------------------*/
-  --footer-padding: 0 40px;
+  --footer-padding: 0 20px;
 
   /* Main
   --------------------------*/
