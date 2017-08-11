@@ -61,7 +61,8 @@
           background: var(--radio-checked-icon-color);
 
           &::after {
-            transform: translate(-50%, -50%) scale(1);
+            transform: translate(-50%, -50%);
+            circle: var(--radio-input-checked-after-width) var(--radio-input-fill);
           }
         }
       }
@@ -86,13 +87,15 @@
       }
 
       &::after {
-        circle: 6px var(--color-white);
+        circle: 0 var(--color-white);
         content: "";
         position: absolute;
         left: 50%;
         top: 50%;
-        transform: translate(-50%, -50%) scale(0);
-        transition: transform .15s cubic-bezier(.71,-.46,.88,.6);
+        transform: translate(-50%, -50%);
+        transition-property: width, height, transform;
+        transition-duration: .15s;
+        transition-timing-function: cubic-bezier(.71,-.46,.88,.6);
       }
     }
 

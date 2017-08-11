@@ -142,6 +142,7 @@
   --radio-checked-input-border-color: var(--color-primary);
   --radio-checked-input-fill: var(--color-white);
   --radio-checked-icon-color: var(--color-primary);
+  --radio-input-checked-after-width: 6px;
 
   --radio-input-border-color-hover: var(--color-primary);
 
