@@ -299,16 +299,20 @@ describe('Tree', () => {
     const nodeCheckbox = secondNode.querySelector('.el-checkbox');
     expect(nodeCheckbox).to.be.exist;
     nodeCheckbox.click();
-    expect(tree.getCheckedNodes().length).to.equal(3);
-    expect(tree.getCheckedNodes(true).length).to.equal(2);
-    secondNode.querySelector('.el-tree-node__expand-icon').click();
     setTimeout(() => {
-      const firstLeaf = secondNode.nextElementSibling.querySelector('.el-tree-node__content');
-      const leafCheckbox = firstLeaf.querySelector('.el-checkbox');
-      leafCheckbox.click();
-      expect(tree.getCheckedNodes().length).to.equal(1);
-      done();
-    }, 100);
+      expect(tree.getCheckedNodes().length).to.equal(3);
+      expect(tree.getCheckedNodes(true).length).to.equal(2);
+      secondNode.querySelector('.el-tree-node__expand-icon').click();
+      setTimeout(() => {
+        const firstLeaf = secondNode.nextElementSibling.querySelector('.el-tree-node__content');
+        const leafCheckbox = firstLeaf.querySelector('.el-checkbox');
+        leafCheckbox.click();
+        setTimeout(() => {
+          expect(tree.getCheckedNodes().length).to.equal(1);
+          done();
+        }, 10);
+      }, 10);
+    }, 10);
   });
 
   it('setCheckedNodes', (done) => {
@@ -317,13 +321,15 @@ describe('Tree', () => {
     const secondNode = document.querySelectorAll('.el-tree-node__content')[1];
     const nodeCheckbox = secondNode.querySelector('.el-checkbox');
     nodeCheckbox.click();
-    expect(tree.getCheckedNodes().length).to.equal(3);
-    expect(tree.getCheckedNodes(true).length).to.equal(2);
-    vm.$nextTick(() => {
-      tree.setCheckedNodes([]);
-      expect(tree.getCheckedNodes().length).to.equal(0);
-      done();
-    });
+    setTimeout(() => {
+      expect(tree.getCheckedNodes().length).to.equal(3);
+      expect(tree.getCheckedNodes(true).length).to.equal(2);
+      setTimeout(() => {
+        tree.setCheckedNodes([]);
+        expect(tree.getCheckedNodes().length).to.equal(0);
+        done();
+      }, 10);
+    }, 10);
   });
 
   it('setCheckedKeys', () => {

@@ -157,7 +157,7 @@
         }
       },
 
-      handleCheckChange(ev) {
+      handleCheckChange(value, ev) {
         this.node.setChecked(ev.target.checked, !this.tree.checkStrictly);
       },
 

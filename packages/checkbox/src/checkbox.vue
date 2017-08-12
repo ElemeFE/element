@@ -59,7 +59,8 @@
     data() {
       return {
         selfModel: false,
-        focus: false
+        focus: false,
+        isLimitExceeded: false
       };
     },
 
@@ -73,16 +74,16 @@
 
         set(val) {
           if (this.isGroup) {
-            let isLimitExceeded = false;
+            this.isLimitExceeded = false;
             (this._checkboxGroup.min !== undefined &&
               val.length < this._checkboxGroup.min &&
-              (isLimitExceeded = true));
+              (this.isLimitExceeded = true));
 
             (this._checkboxGroup.max !== undefined &&
               val.length > this._checkboxGroup.max &&
-              (isLimitExceeded = true));
+              (this.isLimitExceeded = true));
 
-            isLimitExceeded === false &&
+            this.isLimitExceeded === false &&
             this.dispatch('ElCheckboxGroup', 'input', [val]);
           } else {
             this.$emit('input', val);
@@ -144,12 +145,13 @@
         }
       },
       handleChange(ev) {
-        this.$emit('change', ev);
-        if (this.isGroup) {
-          this.$nextTick(_ => {
+        this.$nextTick(() => {
+          if (this.isLimitExceeded) return;
+          this.$emit('change', this.model, ev);
+          if (this.isGroup) {
             this.dispatch('ElCheckboxGroup', 'change', [this._checkboxGroup.value]);
-          });
-        }
+          }
+        });
       }
     },
 
