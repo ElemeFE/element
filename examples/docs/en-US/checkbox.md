@@ -23,8 +23,8 @@
       handleChange(ev) {
         console.log(ev);
       },
-      handleCheckAllChange(event) {
-        this.checkedCities = event.target.checked ? cityOptions : [];
+      handleCheckAllChange(val) {
+        this.checkedCities = val ? cityOptions : [];
         this.isIndeterminate = false;
       },
       handleCheckedCitiesChange(value) {
@@ -234,6 +234,11 @@ Checkbox with button styles.
 | checked  | if the checkbox is checked   | boolean   |  — | false   |
 | indeterminate  | same as `indeterminate` in native checkbox | boolean   |  — | false   |
 
+### Checkbox Events
+| Event Name | Description | Parameters |
+|---------- |-------- |---------- |
+| change  | triggers when the binding value changes | the updated value |
+
 ### Checkbox-group Attributes
 | Attribute      | Description         | Type    | Options                         | Default|
 |---------- |-------- |---------- |-------------  |-------- |
@@ -243,8 +248,7 @@ Checkbox with button styles.
 | min     | minimum number of checkbox checked   | number    |       —        |     —    |
 | max     | maximum number of checkbox checked   | number    |       —        |     —    |
 
-### Checkbox Events
+### Checkbox-group Events
 | Event Name | Description | Parameters |
 |---------- |-------- |---------- |
-| change  | triggers when the binding value changes | Event object |
-
+| change  | triggers when the binding value changes | the updated value |

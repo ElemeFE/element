@@ -23,8 +23,8 @@
       handleChange(ev) {
         console.log(ev);
       },
-      handleCheckAllChange(event) {
-        this.checkedCities = event.target.checked ? cityOptions : [];
+      handleCheckAllChange(val) {
+        this.checkedCities = val ? cityOptions : [];
         this.isIndeterminate = false;
       },
       handleCheckedCitiesChange(value) {
@@ -245,6 +245,11 @@
 | checked  | 当前是否勾选    | boolean   |  — | false   |
 | indeterminate  | 设置 indeterminate 状态，只负责样式控制    | boolean   |  — | false   |
 
+### Checkbox Events
+| 事件名称      | 说明    | 回调参数      |
+|---------- |-------- |---------- |
+| change  | 当绑定值变化时触发的事件 | 更新后的值 |
+
 ### Checkbox-group Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
@@ -254,7 +259,7 @@
 | min     | 可被勾选的 checkbox 的最小数量   | number    |       —        |     —    |
 | max     | 可被勾选的 checkbox 的最大数量   | number    |       —        |     —    |
 
-### Checkbox Events
+### Checkbox-group Events
 | 事件名称      | 说明    | 回调参数      |
 |---------- |-------- |---------- |
-| change  | 当绑定值变化时触发的事件 | event 事件对象 |
+| change  | 当绑定值变化时触发的事件 | 更新后的值 |

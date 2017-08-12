@@ -215,7 +215,7 @@
       },
 
       handleAllCheckedChange(value) {
-        this.checked = value.target.checked
+        this.checked = value
           ? this.checkableData.map(item => item[this.keyProp])
           : [];
       },
