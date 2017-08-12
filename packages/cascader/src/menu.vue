@@ -2,6 +2,26 @@
   import { isDef } from 'element-ui/src/utils/shared';
   import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
 
+  const copyArray = (arr, props) => {
+    if (!arr || !Array.isArray(arr) || !props) return arr;
+    const result = [];
+    const configurableProps = ['__IS__FLAT__OPTIONS', 'label', 'value', 'disabled'];
+    const childrenProp = props.children || 'children';
+    arr.forEach(item => {
+      const itemCopy = {};
+      configurableProps.forEach(prop => {
+        const propName = props[prop] || prop;
+        const value = item[propName];
+        if (value !== undefined) itemCopy[propName] = value;
+      });
+      if (Array.isArray(item[childrenProp])) {
+        itemCopy[childrenProp] = copyArray(item[childrenProp], props);
+      }
+      result.push(itemCopy);
+    });
+    return result;
+  };
+
   export default {
     name: 'ElCascaderMenu',
 
@@ -45,7 +65,7 @@
               if (option.__IS__FLAT__OPTIONS) return;
               configurableProps.forEach(prop => {
                 const value = option[this.props[prop] || prop];
-                if (value) option[prop] = value;
+                if (value !== undefined) option[prop] = value;
               });
               if (Array.isArray(option.children)) {
                 formatOptions(option.children);
@@ -66,8 +86,9 @@
             return activeOptions;
           };
 
-          formatOptions(this.options);
-          return loadActiveOptions(this.options);
+          const optionsCopy = copyArray(this.options, this.props);
+          formatOptions(optionsCopy);
+          return loadActiveOptions(optionsCopy);
         }
       }
     },
