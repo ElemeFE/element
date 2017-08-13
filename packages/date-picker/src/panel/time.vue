@@ -23,7 +23,8 @@
           @click="handleCancel">{{ t('el.datepicker.cancel') }}</button>
         <button
           type="button"
-          class="el-time-panel__btn confirm"
+          class="el-time-panel__btn"
+          :class="{confirm: !disabled}"
           @click="handleConfirm()">{{ t('el.datepicker.confirm') }}</button>
       </div>
     </div>
@@ -101,7 +102,8 @@
         currentDate: this.$options.defaultValue || this.date || new Date(),
         currentVisible: this.visible || false,
         width: this.pickerWidth || 0,
-        selectionRange: [0, 2]
+        selectionRange: [0, 2],
+        disabled: false
       };
     },
 
