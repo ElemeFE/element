@@ -17,6 +17,7 @@
       :class="{ 'show-input': showInput, 'disabled': disabled }"
       :style="runwayStyle"
       @click="onSliderClick"
+      @mouseenter="resetSize"
       ref="slider">
       <div
         class="el-slider__bar"
