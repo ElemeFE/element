@@ -15,10 +15,10 @@ export default {
       required: true
     },
     rowSpans: {
-        type: Array,
-        default: function() {
-          return [];
-        }
+      type: Array,
+      default: function() {
+        return [];
+      }
     },
     rowSpanKey: {
       type: String,
@@ -177,10 +177,10 @@ export default {
     getColumnStyle(row, index, column, cellIndex) {
       if (this.rowSpanKey) {
         for (var i = index - 1 ; i >= 0; i--) {
-            let lastSpan = this.getRowSpan(this.data[i], i, column, cellIndex);
-            if (index - i < lastSpan) {
-              return 'display:none';
-            }
+          let lastSpan = this.getRowSpan(this.data[i], i, column, cellIndex);
+          if (index - i < lastSpan) {
+            return 'display:none';
+          }
         }
       }
     },
