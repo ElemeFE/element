@@ -17,26 +17,50 @@ const isObject = function(obj) {
   return obj !== null && typeof obj === 'object';
 };
 
-export const orderBy = function(array, sortKey, reverse, sortMethod) {
+export const orderBy = function(array, sortKey, reverse, sortMethod, sortBy) {
   if (typeof reverse === 'string') {
     reverse = reverse === 'descending' ? -1 : 1;
+  } else {
+    reverse = (reverse && reverse < 0) ? -1 : 1;
   }
-  if (!sortKey && !sortMethod) {
+  if (!sortKey && !sortMethod && !sortBy) {
     return array;
   }
-  const order = (reverse && reverse < 0) ? -1 : 1;
 
-  // sort on a copy to avoid mutating original array
-  return array.slice().sort(sortMethod ? function(a, b) {
-    return sortMethod(a, b) ? order : -order;
-  } : function(a, b) {
-    if (sortKey !== '$key') {
-      if (isObject(a) && '$value' in a) a = a.$value;
-      if (isObject(b) && '$value' in b) b = b.$value;
+  let getKey = sortMethod ? null : function(row, index) {
+    if (sortBy) {
+      if (typeof sortBy === 'string') {
+        return getValueByPath(row, sortBy);
+      }
+      return sortBy(row, index);
     }
-    a = isObject(a) ? getValueByPath(a, sortKey) : a;
-    b = isObject(b) ? getValueByPath(b, sortKey) : b;
-    return a === b ? 0 : a > b ? order : -order;
+    if (sortKey !== '$key') {
+      if (isObject(row) && '$value' in row) return row.$value;
+    }
+    return isObject(row) ? getValueByPath(row, sortKey) : row;
+  };
+  let compare = function(a, b) {
+    if (sortMethod) {
+      return sortMethod(a.row, b.row);
+    }
+    if (a.key < b.key) {
+      return -1;
+    }
+    if (a.key > b.key) {
+      return 1;
+    }
+    return 0;
+  };
+  return array.map(function(row, index) {
+    return { row: row, index: index, key: getKey ? getKey(row, index) : null };
+  }).sort(function(a, b) {
+    let order = compare(a, b);
+    if (!order) {
+      order = a.index - b.index;
+    }
+    return order * reverse;
+  }).map(function(item) {
+    return item.row;
   });
 };
 
