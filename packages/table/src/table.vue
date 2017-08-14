@@ -27,6 +27,8 @@
       <table-body
         :context="context"
         :store="store"
+        :row-spans=rowSpans
+        :row-span-key=rowSpanKey
         :stripe="stripe"
         :layout="layout"
         :row-class-name="rowClassName"
@@ -71,6 +73,8 @@
         <table-body
           fixed="left"
           :store="store"
+          :row-spans=rowSpans
+          :row-span-key=rowSpanKey
           :stripe="stripe"
           :layout="layout"
           :highlight="highlightCurrentRow"
@@ -113,6 +117,8 @@
         <table-body
           fixed="right"
           :store="store"
+          :row-spans=rowSpans
+          :row-span-key=rowSpanKey
           :stripe="stripe"
           :layout="layout"
           :row-class-name="rowClassName"
@@ -167,6 +173,18 @@
         }
       },
 
+      rowSpans: {
+        type: Array,
+        default: function() {
+          return [];
+        }
+      },
+      rowSpanKey: {
+        type: String,
+        default: function() {
+          return '';
+        }
+      },
       width: [String, Number],
 
       height: [String, Number],

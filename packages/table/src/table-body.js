@@ -14,6 +14,18 @@ export default {
     store: {
       required: true
     },
+    rowSpans: {
+        type: Array,
+        default: function() {
+          return [];
+        }
+    },
+    rowSpanKey: {
+      type: String,
+      default: function() {
+        return null;
+      }
+    },
     stripe: Boolean,
     context: {},
     layout: {
@@ -59,7 +71,9 @@ export default {
                     <td
                       class={ [column.id, column.align, column.className || '', columnsHidden[cellIndex] ? 'is-hidden' : '' ] }
                       on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
-                      on-mouseleave={ this.handleCellMouseLeave }>
+                      on-mouseleave={ this.handleCellMouseLeave }
+                      rowspan = {this.getRowSpan(row, $index, column, cellIndex)}
+                      style={ this.getColumnStyle(row, $index, column, cellIndex)}>
                       {
                         column.renderCell.call(this._renderProxy, h, { row, column, $index, store: this.store, _self: this.context || this.table.$vnode.context }, columnsHidden[cellIndex])
                       }
@@ -160,6 +174,30 @@ export default {
   },
 
   methods: {
+    getColumnStyle(row, index, column, cellIndex) {
+      if (this.rowSpanKey) {
+        for (var i = index - 1 ; i >= 0; i--) {
+            let lastSpan = this.getRowSpan(this.data[i], i, column, cellIndex);
+            if (index - i < lastSpan) {
+              return 'display:none';
+            }
+        }
+      }
+    },
+    getRowSpan(row, index, column, cellIndex) {
+      if (this.rowSpanKey) {
+        if (this.computeSpan) {
+          return this.computeSpan(row, index, column, cellIndex);
+        } else {
+          for (var key in this.rowSpans) {
+            if (this.rowSpans[key].keyIndex === row[this.rowSpanKey]) {
+              return this.rowSpans[key][column.property] ? this.rowSpans[key][column.property] : 1;
+            }
+          }
+        }
+        return 1;
+      }
+    },
     getKeyOfRow(row, index) {
       const rowKey = this.table.rowKey;
       if (rowKey) {
