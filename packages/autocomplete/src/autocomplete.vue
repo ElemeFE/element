@@ -135,7 +135,7 @@
       },
       handleKeyEnter(e) {
         if (this.suggestionVisible && this.highlightedIndex >= 0 && this.highlightedIndex < this.suggestions.length) {
-          e.preventDefault()
+          e.preventDefault();
           this.select(this.suggestions[this.highlightedIndex]);
         }
       },
