@@ -10,7 +10,7 @@
       @focus="handleFocus"
       @keydown.up.native.prevent="highlight(highlightedIndex - 1)"
       @keydown.down.native.prevent="highlight(highlightedIndex + 1)"
-      @keydown.enter.native.prevent="handleKeyEnter"
+      @keydown.enter.native="handleKeyEnter"
       @keydown.native.tab="close"
     >
       <template slot="prepend" v-if="$slots.prepend">
@@ -133,8 +133,9 @@
       close(e) {
         this.activated = false;
       },
-      handleKeyEnter() {
+      handleKeyEnter(e) {
         if (this.suggestionVisible && this.highlightedIndex >= 0 && this.highlightedIndex < this.suggestions.length) {
+          e.preventDefault()
           this.select(this.suggestions[this.highlightedIndex]);
         }
       },
