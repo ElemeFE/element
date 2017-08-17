@@ -243,7 +243,7 @@ export default {
     handlePick(value, close = true) {
       this.currentValue = value;
       this.$emit('input', value);
-      this.$emit('change', value);
+      this.$emit('change', value, this.menu.options[0].__IS__FLAT__OPTIONS);
 
       if (close) {
         this.menuVisible = false;
