@@ -259,12 +259,15 @@
 
       minDate() {
         this.$nextTick(() => {
-          if (this.maxDate && this.maxDate < this.minDate) {
+          if (this.maxDate) {
             const format = 'HH:mm:ss';
+            const minRange = this.minDate < this.maxDate
+              ? parseDate('00:00:00', format)
+              : parseDate(formatDate(this.minDate, format), format);
 
             this.$refs.maxTimePicker.selectableRange = [
               [
-                parseDate(formatDate(this.minDate, format), format),
+                minRange,
                 parseDate('23:59:59', format)
               ]
             ];
