@@ -465,6 +465,7 @@ describe('Cascader', () => {
           :options="options"
           change-on-select
           v-model="selectedOptions"
+          @change="handleChange"
         ></el-cascader>
       `,
       data() {
@@ -499,8 +500,14 @@ describe('Cascader', () => {
               }]
             }]
           }],
-          selectedOptions: []
+          selectedOptions: [],
+          selectedFromFilterList: false
         };
+      },
+      methods: {
+        handleChange(val, fromFilterList) {
+          this.selectedFromFilterList = fromFilterList;
+        }
       }
     }, true);
     expect(vm.$el).to.be.exist;
@@ -534,6 +541,7 @@ describe('Cascader', () => {
             expect(vm.selectedOptions[0]).to.be.equal('zhejiang');
             expect(vm.selectedOptions[1]).to.be.equal('hangzhou');
             expect(vm.selectedOptions[2]).to.be.equal('xihu');
+            expect(vm.selectedFromFilterList).to.not.be.true;
             done();
           }, 500);
         });
@@ -617,7 +625,7 @@ describe('Cascader', () => {
           expect(vm.selectedOptions[0]).to.be.equal('zhejiang');
           expect(vm.selectedOptions[1]).to.be.equal('hangzhou');
           expect(vm.selectedOptions[2]).to.be.equal('xihu');
-          expect(vm.selectedFromFilterList).to.be.equal(true);
+          expect(vm.selectedFromFilterList).to.be.true;
           done();
         }, 500);
       }, 300);
