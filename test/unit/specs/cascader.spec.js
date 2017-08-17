@@ -541,7 +541,7 @@ describe('Cascader', () => {
             expect(vm.selectedOptions[0]).to.be.equal('zhejiang');
             expect(vm.selectedOptions[1]).to.be.equal('hangzhou');
             expect(vm.selectedOptions[2]).to.be.equal('xihu');
-            expect(vm.selectedFromFilterList).to.not.be.true;
+            expect(vm.selectedFromFilterList).to.be.false;
             done();
           }, 500);
         });
