@@ -1,5 +1,139 @@
 ## Changelog
 
+### 1.4.2
+
+*2017-08-09*
+
+- Fixed Select marking option of `value` equal to `0` as selected when the initial value is null and bound to an object-typed value, #6143
+- Fixed Step style issue when `status` is `error`, #6155 @wacky6
+- Fixed Cascader selecting parent item when moving mouse quickly after clicking a leaf item, #6199
+- Fixed Menu not hiding submenus when collapsed, #6200
+- Fixed status of the inner native input of Switch not syncing with the component, #6205 @wacky6
+- Fixed wrong button positioning of Slider after window is resized, #6263
+- Fixed Autocomplete not hiding dropdown menu on blur, #6256
+- Fixed hitting enter on jumper of Pagination not trigger page change event in IE, #6306 @qingdengyue
+- Fixed InputNumber style issue when its `size` is `large` or `small`, #6310 @JeremyWuuuuu
+- Fixed i18n failure for some texts in DatePicker, #6328
+- Fixed Slider value changing to minimum when its button is clicked, #6359
+
+### 1.4.1
+
+*2017-07-28*
+
+- Fixed child nodes expanding when checking parent node in Tree, #6029
+- Fixed checking behavior error of Tree, #6034
+- Fixed FormItem not inheriting `label-width` as a Form's direct child, #6044
+- Fixed Menu incorrectly showing SubMenu in collapse mode, #6111
+- Fixed render order error of `v-if` controlled dynamic TabPanes, #6066
+- Fixed Popover still popping up after mouse leaves within `open-delay`, #6058 (by @laobubu)
+- Fixed delete buttons still rendered in file list of disabled Upload, #6091
+- Fixed background color error on hover of striped Table, #6024 (by @xtongs)
+
+### 1.4.0 Boron
+
+*2017-07-21*
+
+#### New features:
+- Message
+  - `message` attribute now supports VNode, #5463 (by @egyptik)
+- ColorPicker
+  - Added `active-change` event, #5775
+- Popover
+  - Added `open-delay` attribute, #5842 (by @kaungmyatlwin)
+- Table
+  - A third parameter `value` is passed to `formatter`, #5709 (by @haledeng)
+- Tree
+  - Added `disabled` attribute, #5937
+- Menu
+  - Added `collapse` attribute, #5941
+- Select
+  - Added `value-key` attribute, #5897
+
+#### Fixes:
+- DatePicker
+  - i18n failure for some texts, #5485
+  - returning a non-zero millisecond value when initial value is empty, #5663
+  - `disabledDate` affecting undesired date, #4946 (by @liyangworld)
+- Steps
+  - style problems when a step is dynamically added or removed, #5456 (by @elfman)
+- Table
+  - highlight row misplaced when an expandable Table has fixed table columns, #5471 (by @elfman)
+  - `classList` not supported in some browsers, #5613 (by @flynntsc)
+- Select
+  - single Select unable to scroll to the selected item when the dropdown menu pops up, #5564（by @wacky6）
+- Radio
+  - border radius lost in RadioGroups with only one Radio, #5646 (by @YYvanYang)
+- Upload
+  - unable to reselect previously deleted file when `auto-upload` is false, #5706
+  - delete button still visible and functioning when `disabled`, #5841
+  - compatibility issue with Vue 2.4 `key`, #5872
+- MessageBox
+  - clicking cancel buttons getting resolved when not invoked as a `confirm` or `prompt`, #5658
+- Rate
+  - active icons not reflecting decimal part of initial value, #5785
+- Pagination
+  - compatibility issue of total page display with vue-i18n@6.x, #5796 (by @mario56)
+  - apostrophe incorrectly showing up when current page is one page less than total page, #5861 (by @openks)
+- Loading
+  - style problems when bound to invisible elements, #5649 (by @xiongzixiao)
+- Cascader
+  - text in the input box not vertically aligned, #5819 (by @jianzhi92)
+- Tree
+  - `setCheckedKeys` and `setCheckedNodes` in lazy mode, #5937
+  - loading all descendent nodes when a parent node is checked in lazy mode, #5963
+- Form
+  - label named slot not working when `label` is not assigned on FormItem, #5921
+- Tooltip
+  - not working in Vue 2.4.x when the triggering element is a custom component, #5916
+
+#### Breaking changes:
+- Select
+  - when value is an object, `value-key` is required as its unique identity key, #5897
+
+### 1.3.7
+
+*2017-06-18*
+
+- Fixed Table with async data not showing summary row, #5318
+- Fixed Pagination's jumper value not sync with current page, #5377
+- Fixed DatePicker's shortcut panel overflow issue, #5297 (by @alashow)
+- Fixed clicking Switch not responding when some text on the page is selected, #5411
+- The red wildcard indicating required field of Form is now responsive, #5403
+- Fixed initial-index of Carousel not working, #5334
+- Fixed Popover enable to be focused when nested in a Dialog, #5336
+
+### 1.3.6
+
+*2017-06-09*
+
+- Fixed inconsistency of ColorPicker's default value and panel value, #5183 (by @Kingwl)
+- Fixed ColorPicker not able to change hue in the panel when its default value is white, #5184 (by @Kingwl)
+- Fixed Select's dropdown taking multiple clicks to expand when nested in a Dialog after scrolling, #5226
+- Added `props` property for Autocomplete, #5282
+- Fixed dropdown of DatePicker not hiding when Tab key is pressed after manual input, #5149 (by @ChuckFields)
+
+### 1.3.5
+
+*2017-06-03*
+
+- Fixed `default-first-option` of Select not working in remote filtering, #5084
+- Fixed InputNumber not aligning with other form components, #5127
+- Fixed inline FormItem having no effect on mixed Input, #5151
+- Fixed height of FormItem being different in Firefox from other browsers, #5152
+- Fixed items with a `value` of 0 in Cascader can not be expanded, #5172 (by @Kingwl)
+- Fixed Autocomplete not triggering native `keydown` and `keyup` events, #5129
+- Added `clear` event for Select, #5112
+- Fixed Cascader's dropdown menu not updating its position in some situations, #5064
+- Better accessibility for Dialog and MessageBox, #4786
+
+### 1.3.4
+
+*2017-05-23*
+
+- Fixed highlight and stripe effects of Table with expandable rows, #4871 (by @mu-yu)
+- Added `default-first-option` for Select, #4838 (by @wacky6)
+- Fixed Select with no options not displaying "No data" text when `allow-create` is true, #4977
+
 ### 1.3.3
 
 *2017-05-14*

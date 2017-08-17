@@ -59,6 +59,7 @@
       border-style: solid;
       border-color: inherit;
       transition: all 150ms;
+      box-sizing: border-box;
       width: 0;
       height: 0;
     }

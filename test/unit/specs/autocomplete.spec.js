@@ -127,6 +127,69 @@ describe('Autocomplete', () => {
       }, 500);
     }, 500);
   });
+  it('props', done => {
+    vm = createVue({
+      template: `
+        <el-autocomplete
+          v-model="state"
+          ref="autocomplete"
+          :props="{ label: 'address', value: 'name' }"
+          :fetch-suggestions="querySearch"
+          placeholder="请输入内容autocomplete2"
+        ></el-autocomplete>
+      `,
+      data() {
+        return {
+          restaurants: [],
+          state: ''
+        };
+      },
+      methods: {
+        querySearch(queryString, cb) {
+          var restaurants = this.restaurants;
+          var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
+          cb(results);
+        },
+        createFilter(queryString) {
+          return (restaurant) => {
+            return (restaurant.value.indexOf(queryString.toLowerCase()) === 0);
+          };
+        },
+        loadAll() {
+          return [
+            { 'name': '三全鲜食（北新泾店）', 'address': '长宁区新渔路144号' },
+            { 'name': 'Hot honey 首尔炸鸡（仙霞路）', 'address': '上海市长宁区淞虹路661号' },
+            { 'name': '新旺角茶餐厅', 'address': '上海市普陀区真北路988号创邑金沙谷6号楼113' },
+            { 'name': '泷千家(天山西路店)', 'address': '天山西路438号' }
+          ];
+        }
+      },
+      mounted() {
+        this.restaurants = this.loadAll();
+      }
+    }, true);
+    const autocomplete = vm.$refs.autocomplete;
+    const elm = vm.$el;
+    const inputElm = elm.querySelector('input');
+    const spy = sinon.spy();
+
+    autocomplete.$on('select', spy);
+    inputElm.focus();
+
+    setTimeout(_ => {
+      const suggestions = autocomplete.$refs.suggestions.$el;
+      const suggestionList = suggestions.querySelectorAll('.el-autocomplete-suggestion__list li');
+      expect(suggestionList[1].innerHTML === '上海市长宁区淞虹路661号');
+      suggestionList[1].click();
+      setTimeout(_ => {
+        expect(inputElm.value).to.be.equal('Hot honey 首尔炸鸡（仙霞路）');
+        expect(vm.state).to.be.equal('Hot honey 首尔炸鸡（仙霞路）');
+        expect(spy.withArgs().calledOnce).to.be.true;
+        expect(suggestions.style.display).to.be.equal('none');
+        done();
+      }, 500);
+    }, 500);
+  });
   it('highlight', done => {
     vm = createVue({
       template: `

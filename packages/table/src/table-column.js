@@ -1,7 +1,7 @@
 import ElCheckbox from 'element-ui/packages/checkbox';
 import ElTag from 'element-ui/packages/tag';
 import objectAssign from 'element-ui/src/utils/merge';
-import { getValueByPath } from './util';
+import { getValueByPath } from 'element-ui/src/utils/util';
 
 let columnIdSeed = 1;
 
@@ -97,15 +97,13 @@ const getDefaultColumn = function(type, options) {
 
 const DEFAULT_RENDER_CELL = function(h, { row, column }) {
   const property = column.property;
+  const value = property && property.indexOf('.') === -1
+    ? row[property]
+    : getValueByPath(row, property);
   if (column && column.formatter) {
-    return column.formatter(row, column);
+    return column.formatter(row, column, value);
   }
-
-  if (property && property.indexOf('.') === -1) {
-    return row[property];
-  }
-
-  return getValueByPath(row, property);
+  return value;
 };
 
 export default {

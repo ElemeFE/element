@@ -178,7 +178,7 @@ const TYPE_VALUE_RESOLVER_MAP = {
 };
 const PLACEMENT_MAP = {
   left: 'bottom-start',
-  center: 'bottom-center',
+  center: 'bottom',
   right: 'bottom-end'
 };
 
@@ -409,9 +409,10 @@ export default {
     handleKeydown(event) {
       const keyCode = event.keyCode;
 
-      // tab
-      if (keyCode === 9) {
+      // TAB or ESC
+      if (keyCode === 9 || keyCode === 27) {
         this.pickerVisible = false;
+        event.stopPropagation();
       }
     },
 

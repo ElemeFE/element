@@ -18,7 +18,7 @@
             :class="{'highlighted': parent.highlightedIndex === index}"
             @click="select(item)"
           >
-            {{item.value}}
+            {{item[props.label]}}
           </li>
           <component
             v-else
@@ -52,6 +52,7 @@
     },
 
     props: {
+      props: Object,
       suggestions: Array,
       options: {
         default() {
@@ -76,7 +77,7 @@
     },
 
     mounted() {
-      this.popperElm = this.$el;
+      this.$parent.popperElm = this.popperElm = this.$el;
       this.referenceElm = this.$parent.$refs.input.$refs.input;
     },
 

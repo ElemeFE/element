@@ -179,7 +179,7 @@
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | type | 主题 | string | primary/gray/success/warning/danger | — |
 | closable | 是否可关闭 | boolean | — | false |
-| close-transition | 是否禁用关闭时的渐变动画 | boolean | — | false |
+| close-transition | 是否禁用渐变动画 | boolean | — | false |
 | hit | 是否有边框描边 | boolean | — | false |
 | color | 背景色 | string | — | — |
 

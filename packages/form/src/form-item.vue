@@ -4,7 +4,7 @@
     'is-validating': validateState === 'validating',
     'is-required': isRequired || required
   }">
-    <label :for="prop" class="el-form-item__label" v-bind:style="labelStyle" v-if="label">
+    <label :for="prop" class="el-form-item__label" v-bind:style="labelStyle" v-if="label || $slots.label">
       <slot name="label">{{label + form.labelSuffix}}</slot>
     </label>
     <div class="el-form-item__content" v-bind:style="contentStyle">
@@ -85,7 +85,9 @@
       },
       contentStyle() {
         var ret = {};
+        const label = this.label;
         if (this.form.labelPosition === 'top' || this.form.inline) return ret;
+        if (!label && !this.labelWidth && this.isNested) return ret;
         var labelWidth = this.labelWidth || this.form.labelWidth;
         if (labelWidth) {
           ret.marginLeft = labelWidth;
@@ -93,9 +95,14 @@
         return ret;
       },
       form() {
-        var parent = this.$parent;
-        while (parent.$options.componentName !== 'ElForm') {
+        let parent = this.$parent;
+        let parentName = parent.$options.componentName;
+        while (parentName !== 'ElForm') {
+          if (parentName === 'ElFormItem') {
+            this.isNested = true;
+          }
           parent = parent.$parent;
+          parentName = parent.$options.componentName;
         }
         return parent;
       },
@@ -112,6 +119,21 @@
 
           return getPropByPath(model, path).v;
         }
+      },
+      isRequired() {
+        let rules = this.getRules();
+        let isRequired = false;
+
+        if (rules && rules.length) {
+          rules.every(rule => {
+            if (rule.required) {
+              isRequired = true;
+              return false;
+            }
+            return true;
+          });
+        }
+        return isRequired;
       }
     },
     data() {
@@ -120,7 +142,7 @@
         validateMessage: '',
         validateDisabled: false,
         validator: {},
-        isRequired: false
+        isNested: false
       };
     },
     methods: {
@@ -211,12 +233,6 @@
         let rules = this.getRules();
 
         if (rules.length) {
-          rules.every(rule => {
-            if (rule.required) {
-              this.isRequired = true;
-              return false;
-            }
-          });
           this.$on('el.form.blur', this.onFieldBlur);
           this.$on('el.form.change', this.onFieldChange);
         }

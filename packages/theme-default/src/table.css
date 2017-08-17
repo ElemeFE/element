@@ -146,6 +146,10 @@
       }
     }
 
+    @modifier hidden {
+      visibility: hidden;
+    }
+
     & th {
       background-color: var(--table-header-background);
       text-align: left;
@@ -400,8 +404,14 @@
     }
 
     @e body {
-      tr.hover-row > td {
-        background-color: var(--color-extra-light-gray);
+      tr.hover-row {
+        &, &.el-table__row--striped {
+          &, &.current-row {
+            > td {
+              background-color: var(--color-extra-light-gray);
+            }
+          }
+        }
       }
 
       tr.current-row > td {

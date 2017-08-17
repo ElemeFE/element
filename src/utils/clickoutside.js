@@ -22,9 +22,13 @@ let startClick;
 export default {
   bind(el, binding, vnode) {
     const id = nodeList.push(el) - 1;
-    const documentHandler = function(mouseup, mousedown) {
+    const documentHandler = function(mouseup = {}, mousedown = {}) {
       if (!vnode.context ||
+        !mouseup.target ||
+        !mousedown.target ||
         el.contains(mouseup.target) ||
+        el.contains(mousedown.target) ||
+        el === mouseup.target ||
         (vnode.context.popperElm &&
         (vnode.context.popperElm.contains(mouseup.target) ||
         vnode.context.popperElm.contains(mousedown.target)))) return;

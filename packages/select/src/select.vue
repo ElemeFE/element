@@ -11,8 +11,8 @@
       <transition-group @after-leave="resetInputHeight">
         <el-tag
           v-for="item in selected"
-          :key="item.value"
-          closable
+          :key="getValueKey(item)"
+          :closable="!disabled"
           :hit="item.hitState"
           type="primary"
           @close="deleteTag($event, item)"
@@ -32,7 +32,7 @@
         @keydown.down.prevent="navigateOptions('next')"
         @keydown.up.prevent="navigateOptions('prev')"
         @keydown.enter.prevent="selectOption"
-        @keydown.esc.prevent="visible = false"
+        @keydown.esc.stop.prevent="visible = false"
         @keydown.delete="deletePrevTag"
         v-model="query"
         :debounce="remote ? 300 : 0"
@@ -57,7 +57,7 @@
       @keydown.native.down.prevent="navigateOptions('next')"
       @keydown.native.up.prevent="navigateOptions('prev')"
       @keydown.native.enter.prevent="selectOption"
-      @keydown.native.esc.prevent="visible = false"
+      @keydown.native.esc.stop.prevent="visible = false"
       @keydown.native.tab="visible = false"
       @paste.native="debouncedOnInputChange"
       @mouseenter.native="inputHovering = true"
@@ -66,8 +66,8 @@
     </el-input>
     <transition
       name="el-zoom-in-top"
-      @after-leave="doDestroy"
-      @after-enter="handleMenuEnter">
+      @before-enter="handleMenuEnter"
+      @after-leave="doDestroy">
       <el-select-menu
         ref="popper"
         v-show="visible && emptyText !== false">
@@ -103,6 +103,9 @@
   import { addClass, removeClass, hasClass } from 'element-ui/src/utils/dom';
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
   import { t } from 'element-ui/src/locale';
+  import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
+  import { getValueByPath } from 'element-ui/src/utils/util';
+
   const sizeMap = {
     'large': 42,
     'small': 30,
@@ -192,7 +195,11 @@
           return t('el.select.placeholder');
         }
       },
-      defaultFirstOption: Boolean
+      defaultFirstOption: Boolean,
+      valueKey: {
+        type: String,
+        default: 'value'
+      }
     },
 
     data() {
@@ -208,13 +215,10 @@
         cachedPlaceHolder: '',
         optionsCount: 0,
         filteredOptionsCount: 0,
-        dropdownUl: null,
         visible: false,
         selectedLabel: '',
         hoverIndex: -1,
         query: '',
-        bottomOverflow: 0,
-        topOverflow: 0,
         optionsAllDisabled: false,
         inputHovering: false,
         currentPlaceholder: ''
@@ -266,23 +270,7 @@
           this.broadcast('ElOptionGroup', 'queryChange');
         }
         if (this.defaultFirstOption && (this.filterable || this.remote) && this.filteredOptionsCount) {
-          this.hoverIndex = -1;
-          for (let i = 0; i !== this.options.length; ++i) {
-            const option = this.options[i];
-            if (val) {
-              // pick first options that passes the filter
-              if (!option.disabled && !option.groupDisabled && option.visible) {
-                this.hoverIndex = i;
-                break;
-              }
-            } else {
-              // pick currently selected option
-              if (option.itemSelected) {
-                this.hoverIndex = i;
-                break;
-              }
-            }
-          }
+          this.checkDefaultFirstOption();
         }
       },
 
@@ -306,7 +294,6 @@
             }
           });
           if (!this.multiple) {
-            this.getOverflows();
             if (this.selected) {
               if (this.filterable && this.allowCreate &&
                 this.createdSelected && this.createdOption) {
@@ -346,6 +333,9 @@
         if ([].indexOf.call(inputs, document.activeElement) === -1) {
           this.setSelected();
         }
+        if (this.defaultFirstOption && (this.filterable || this.remote) && this.filteredOptionsCount) {
+          this.checkDefaultFirstOption();
+        }
       }
     },
 
@@ -364,44 +354,33 @@
         }
       },
 
+      scrollToOption(option) {
+        const target = Array.isArray(option) && option[0] ? option[0].$el : option.$el;
+        if (this.$refs.popper && target) {
+          const menu = this.$refs.popper.$el.querySelector('.el-select-dropdown__wrap');
+          scrollIntoView(menu, target);
+        }
+      },
+
       handleMenuEnter() {
-        if (!this.dropdownUl) {
-          this.dropdownUl = this.$refs.popper.$el.querySelector('.el-select-dropdown__wrap');
-          this.getOverflows();
-        }
-        if (!this.multiple && this.dropdownUl) {
-          this.resetMenuScroll();
-        }
-      },
-
-      getOverflows() {
-        if (this.dropdownUl && this.selected && this.selected.$el) {
-          let selectedRect = this.selected.$el.getBoundingClientRect();
-          let popperRect = this.$refs.popper.$el.getBoundingClientRect();
-          this.bottomOverflow = selectedRect.bottom - popperRect.bottom;
-          this.topOverflow = selectedRect.top - popperRect.top;
-        }
-      },
-
-      resetMenuScroll() {
-        if (this.bottomOverflow > 0) {
-          this.dropdownUl.scrollTop += this.bottomOverflow;
-        } else if (this.topOverflow < 0) {
-          this.dropdownUl.scrollTop += this.topOverflow;
-        }
+        this.$nextTick(() => this.scrollToOption(this.selected));
       },
 
       getOption(value) {
         let option;
+        const isObject = Object.prototype.toString.call(value).toLowerCase() === '[object object]';
         for (let i = this.cachedOptions.length - 1; i >= 0; i--) {
           const cachedOption = this.cachedOptions[i];
-          if (cachedOption.value === value) {
+          const isEqual = isObject
+            ? getValueByPath(cachedOption.value, this.valueKey) === getValueByPath(value, this.valueKey)
+            : cachedOption.value === value;
+          if (isEqual) {
             option = cachedOption;
             break;
           }
         }
         if (option) return option;
-        const label = typeof value === 'string' || typeof value === 'number'
+        const label = !isObject
           ? value : '';
         let newOption = {
           value: value,
@@ -461,6 +440,7 @@
 
       doDestroy() {
         this.$refs.popper && this.$refs.popper.doDestroy();
+        this.dropdownUl = null;
       },
 
       handleClose() {
@@ -530,7 +510,7 @@
       handleOptionSelect(option) {
         if (this.multiple) {
           const value = this.value.slice();
-          const optionIndex = value.indexOf(option.value);
+          const optionIndex = this.getValueIndex(value, option.value);
           if (optionIndex > -1) {
             value.splice(optionIndex, 1);
           } else if (this.multipleLimit <= 0 || value.length < this.multipleLimit) {
@@ -545,6 +525,25 @@
         } else {
           this.$emit('input', option.value);
           this.visible = false;
+        }
+        this.$nextTick(() => this.scrollToOption(option));
+      },
+
+      getValueIndex(arr = [], value) {
+        const isObject = Object.prototype.toString.call(value).toLowerCase() === '[object object]';
+        if (!isObject) {
+          return arr.indexOf(value);
+        } else {
+          const valueKey = this.valueKey;
+          let index = -1;
+          arr.some((item, i) => {
+            if (getValueByPath(item, valueKey) === getValueByPath(value, valueKey)) {
+              index = i;
+              return true;
+            }
+            return false;
+          });
+          return index;
         }
       },
 
@@ -570,7 +569,6 @@
             if (this.hoverIndex === this.options.length) {
               this.hoverIndex = 0;
             }
-            this.resetScrollTop();
             if (this.options[this.hoverIndex].disabled === true ||
               this.options[this.hoverIndex].groupDisabled === true ||
               !this.options[this.hoverIndex].visible) {
@@ -582,7 +580,6 @@
             if (this.hoverIndex < 0) {
               this.hoverIndex = this.options.length - 1;
             }
-            this.resetScrollTop();
             if (this.options[this.hoverIndex].disabled === true ||
               this.options[this.hoverIndex].groupDisabled === true ||
               !this.options[this.hoverIndex].visible) {
@@ -590,19 +587,7 @@
             }
           }
         }
-      },
-
-      resetScrollTop() {
-        let bottomOverflowDistance = this.options[this.hoverIndex].$el.getBoundingClientRect().bottom -
-          this.$refs.popper.$el.getBoundingClientRect().bottom;
-        let topOverflowDistance = this.options[this.hoverIndex].$el.getBoundingClientRect().top -
-          this.$refs.popper.$el.getBoundingClientRect().top;
-        if (bottomOverflowDistance > 0) {
-          this.dropdownUl.scrollTop += bottomOverflowDistance;
-        }
-        if (topOverflowDistance < 0) {
-          this.dropdownUl.scrollTop += topOverflowDistance;
-        }
+        this.$nextTick(() => this.scrollToOption(this.options[this.hoverIndex]));
       },
 
       selectOption() {
@@ -615,6 +600,7 @@
         event.stopPropagation();
         this.$emit('input', '');
         this.visible = false;
+        this.$emit('clear');
       },
 
       deleteTag(event, tag) {
@@ -651,6 +637,35 @@
       handleResize() {
         this.resetInputWidth();
         if (this.multiple) this.resetInputHeight();
+      },
+
+      checkDefaultFirstOption() {
+        this.hoverIndex = -1;
+        for (let i = 0; i !== this.options.length; ++i) {
+          const option = this.options[i];
+          if (this.query) {
+            // pick first options that passes the filter
+            if (!option.disabled && !option.groupDisabled && option.visible) {
+              this.hoverIndex = i;
+              break;
+            }
+          } else {
+            // pick currently selected option
+            if (option.itemSelected) {
+              this.hoverIndex = i;
+              break;
+            }
+          }
+        }
+      },
+
+      getValueKey(item) {
+        const type = typeof item.value;
+        if (type === 'number' || type === 'string') {
+          return item.value;
+        } else {
+          return getValueByPath(item.value, this.valueKey);
+        }
       }
     },
 
