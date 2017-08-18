@@ -8,8 +8,8 @@ exports.install = Vue => {
     if (binding.value) {
       Vue.nextTick(() => {
         if (binding.modifiers.fullscreen) {
-          el.originalPosition = document.body.style.position;
-          el.originalOverflow = document.body.style.overflow;
+          el.originalPosition = getStyle(document.body, 'position');
+          el.originalOverflow = getStyle(document.body, 'overflow');
 
           addClass(el.mask, 'is-fullscreen');
           insertDom(document.body, el, binding);
@@ -17,7 +17,7 @@ exports.install = Vue => {
           removeClass(el.mask, 'is-fullscreen');
 
           if (binding.modifiers.body) {
-            el.originalPosition = document.body.style.position;
+            el.originalPosition = getStyle(document.body, 'position');
 
             ['top', 'left'].forEach(property => {
               let scroll = property === 'top' ? 'scrollTop' : 'scrollLeft';
@@ -29,7 +29,7 @@ exports.install = Vue => {
 
             insertDom(document.body, el, binding);
           } else {
-            el.originalPosition = el.style.position;
+            el.originalPosition = getStyle(el, 'position');
             insertDom(el, el, binding);
           }
         }
@@ -57,7 +57,7 @@ exports.install = Vue => {
         el.mask.style[property] = el.maskStyle[property];
       });
 
-      if (el.originalPosition !== 'absolute') {
+      if (el.originalPosition !== 'absolute' && el.originalPosition !== 'fixed') {
         parent.style.position = 'relative';
       }
       if (binding.modifiers.fullscreen && binding.modifiers.lock) {
