@@ -12,7 +12,8 @@
     :style="{
       msTransform: `translateX(${ translate }px) scale(${ scale })`,
       webkitTransform: `translateX(${ translate }px) scale(${ scale })`,
-      transform: `translateX(${ translate }px) scale(${ scale })`
+      transform: `translateX(${ translate }px) scale(${ scale })`,
+      'z-index': zIndex
     }">
     <div
       v-if="$parent.type === 'card'"
@@ -43,7 +44,8 @@
         scale: 1,
         active: false,
         ready: false,
-        inStage: false
+        inStage: false,
+        zIndex: 0
       };
     },
 
@@ -83,7 +85,17 @@
           this.translate = this.calculateTranslate(index, activeIndex, parentWidth);
           this.scale = this.active ? 1 : CARD_SCALE;
         } else {
-          this.active = index === activeIndex;
+          if (index === activeIndex) {
+            this.zIndex = 1;
+            this.active = true;
+          } else {
+            if (this.active === true) {
+              this.zIndex = 0;
+            } else {
+              this.zIndex = -1;
+            }
+            this.active = false;
+          };
           this.translate = parentWidth * (index - activeIndex);
         }
         this.ready = true;
