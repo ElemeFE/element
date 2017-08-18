@@ -149,7 +149,7 @@
     },
 
     beforeDestroy() {
-      this.dispatch('ElSelect', 'onOptionDestroy', this.select.options.indexOf(this));
+      this.select.onOptionDestroy(this.select.options.indexOf(this));
     }
   };
 </script>

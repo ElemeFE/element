@@ -684,7 +684,6 @@
       });
 
       this.$on('handleOptionClick', this.handleOptionSelect);
-      this.$on('onOptionDestroy', this.onOptionDestroy);
       this.$on('setSelected', this.setSelected);
     },
 
