@@ -257,9 +257,9 @@
         });
 
         const scrollBodyWrapper = event => {
-          const deltaX = event.deltaX;
+          const deltaY = event.deltaY;
 
-          if (deltaX > 0) {
+          if (deltaY > 0) {
             this.bodyWrapper.scrollLeft += 10;
           } else {
             this.bodyWrapper.scrollLeft -= 10;
