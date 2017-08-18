@@ -249,7 +249,7 @@
       bindEvents() {
         const { headerWrapper, footerWrapper } = this.$refs;
         const refs = this.$refs;
-        this.bodyWrapper.addEventListener('scroll', function() {
+        this.bodyWrapper.addEventListener('mousewheel', function() {
           if (headerWrapper) headerWrapper.scrollLeft = this.scrollLeft;
           if (footerWrapper) footerWrapper.scrollLeft = this.scrollLeft;
           if (refs.fixedBodyWrapper) refs.fixedBodyWrapper.scrollTop = this.scrollTop;
@@ -257,11 +257,10 @@
         });
 
         const scrollBodyWrapper = event => {
-          const deltaY = event.deltaY;
-
-          if (deltaY > 0) {
+          const deltaX = event.deltaX;
+          if (deltaX > 0) {
             this.bodyWrapper.scrollLeft += 10;
-          } else {
+          } else if (deltaX < 0) {
             this.bodyWrapper.scrollLeft -= 10;
           }
         };
