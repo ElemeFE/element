@@ -87,9 +87,7 @@
           // var date = new Date('1988-04-01 00:00:00') Fri Apr 01 1988 00:00:00 GMT+0800 (CST)
           // date.setMonth(4) Sun May 01 1988 00:00:00 GMT+0900 (CDT)
           // Sometimes the time zone will change.
-          if (date.getFullYear() === nextMonth.getFullYear() &&
-            date.getMonth() === nextMonth.getMonth() &&
-            date.getDate() === nextMonth.getDate()) {
+          if (date - nextMonth < 8.64e7) {
             flag = true;
           }
         }
