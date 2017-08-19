@@ -353,7 +353,7 @@ Taking example by Bootstrap's responsive design, four breakpoints are preset: xs
 ### Col Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| span | number of column the grid spans | number | — | — |
+| span | number of column the grid spans | number | — | 24 |
 | offset | number of spacing on the left side of the grid | number | — | 0 |
 | push |  number of columns that grid moves to the right | number | — | 0 |
 | pull |  number of columns that grid moves to the left | number | — | 0 |
