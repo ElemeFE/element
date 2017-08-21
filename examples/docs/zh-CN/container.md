@@ -187,7 +187,7 @@
         </el-menu-item-group>
         <el-submenu index="1-4">
           <template slot="title">选项4</template>
-          <el-menu-item index="1-4-1">选项1</el-menu-item>
+          <el-menu-item index="1-4-1">选项4-1</el-menu-item>
         </el-submenu>
       </el-submenu>
       <el-submenu index="2">
@@ -202,7 +202,7 @@
         </el-menu-item-group>
         <el-submenu index="2-4">
           <template slot="title">选项4</template>
-          <el-menu-item index="2-4-1">选项1</el-menu-item>
+          <el-menu-item index="2-4-1">选项4-1</el-menu-item>
         </el-submenu>
       </el-submenu>
       <el-submenu index="3">
@@ -217,7 +217,7 @@
         </el-menu-item-group>
         <el-submenu index="3-4">
           <template slot="title">选项4</template>
-          <el-menu-item index="3-4-1">选项1</el-menu-item>
+          <el-menu-item index="3-4-1">选项4-1</el-menu-item>
         </el-submenu>
       </el-submenu>
     </el-menu>
@@ -258,6 +258,21 @@
     color: #fff;
   }
 </style>
+
+<script>
+  export default {
+    data() {
+      const item = {
+        date: '2016-05-02',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄'
+      };
+      return {
+        tableData: Array(20).fill(item)
+      }
+    }
+  };
+</script>
 ```
 :::
 
