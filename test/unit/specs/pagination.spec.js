@@ -235,27 +235,31 @@ describe('Pagination', () => {
       template: `
         <el-pagination
           :total="1000"
-          @current-change="change = true" />
+          :current-page="page"
+          @current-change="onChange" />
       `,
-
+      methods: {
+        onChange(val) {
+          this.change = val;
+        }
+      },
       data() {
-        return { change: false };
+        return {
+          change: 0,
+          page: 1
+        };
       }
     });
     const next = vm.$el.querySelector('button.btn-next');
-    const prev = vm.$el.querySelector('button.btn-prev');
 
-    expect(vm.change).to.false;
-    // click 9
-    let count = 9;
-    while (--count) {
-      next.click();
-    }
-
-    prev.click();
+    next.click();
     setTimeout(() => {
-      expect(vm.change).to.true;
-      done();
+      expect(vm.change).to.equal(2);
+      vm.page = 5;
+      setTimeout(() => {
+        expect(vm.change).to.equal(2);
+        done();
+      }, 50);
     }, 50);
   });
 
