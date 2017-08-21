@@ -42,6 +42,7 @@
 
     @e header {
       padding: 20px 20px 0;
+      @utils-clearfix;
     }
 
     @e headerbtn {
@@ -51,6 +52,7 @@
       outline: none;
       padding: 0;
       cursor: pointer;
+      font-size: 16px;
 
       .el-dialog__close {
         color: var(--dialog-close-color);
