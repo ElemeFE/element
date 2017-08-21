@@ -73,11 +73,11 @@
       },
 
       isBigIcon() {
-        return this.description ? 'is-big' : '';
+        return this.description || this.$slots.default ? 'is-big' : '';
       },
 
       isBoldTitle() {
-        return this.description ? 'is-bold' : '';
+        return this.description || this.$slots.default ? 'is-bold' : '';
       }
     }
   };
