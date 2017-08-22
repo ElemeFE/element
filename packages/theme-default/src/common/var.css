@@ -599,4 +599,16 @@
   --transfer-item-height: 32px;
   --transfer-item-hover-background: var(--color-light-gray);
   --transfer-filter-height: 22px;
+
+  /* Header
+  --------------------------*/
+  --header-padding: 0 20px;
+
+  /* Footer
+  --------------------------*/
+  --footer-padding: 0 20px;
+
+  /* Main
+  --------------------------*/
+  --main-padding: 20px;
 }
