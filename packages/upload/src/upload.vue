@@ -70,7 +70,7 @@ export default {
       if (postFiles.length === 0) { return; }
 
       postFiles.forEach(rawFile => {
-        this.onStart(rawFile);
+        if (this.onStart(rawFile) === false) return;
         if (this.autoUpload) this.upload(rawFile);
       });
     },
