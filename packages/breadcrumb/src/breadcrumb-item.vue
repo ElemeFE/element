@@ -1,6 +1,6 @@
 <template>
   <span class="el-breadcrumb__item">
-    <span class="el-breadcrumb__item__inner" ref="link" role="link"><slot></slot></span><span class="el-breadcrumb__separator" role="presentation">{{separator}}</span>
+    <span class="el-breadcrumb__inner" ref="link" role="link"><slot></slot></span><span class="el-breadcrumb__separator" role="presentation">{{separator}}</span>
   </span>
 </template>
 <script>

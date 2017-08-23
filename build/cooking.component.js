@@ -15,5 +15,9 @@ cooking.set({
 
 cooking.add('output.filename', '[name].js');
 cooking.add('loader.js.exclude', config.jsexclude);
+cooking.add('loader.scss', {
+  test: /\.scss$/,
+  loaders: ['style-loader', 'css-loader', 'sass-loader']
+});
 cooking.add('vue.preserveWhitespace', false);
 module.exports = cooking.resolve();

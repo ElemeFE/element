@@ -1,0 +1,52 @@
+@import "../common/var";
+@mixin button-variant($color, $background-color, $border-color) {
+  color: $color;
+  background-color: $background-color;
+  border-color: $border-color;
+
+  &:hover,
+  &:focus {
+    background: tint($background-color, $--button-hover-tint-percent);
+    border-color: tint($border-color, $--button-hover-tint-percent);
+    color: $color;
+  }
+  
+  &:active {
+    background: shade($background-color, $--button-active-shade-percent);
+    border-color: shade($border-color, $--button-active-shade-percent);
+    color: $color;
+    outline: none;
+  }
+
+  &.is-active {
+    background: shade($background-color, $--button-active-shade-percent);
+    border-color: shade($border-color, $--button-active-shade-percent);
+    color: $color;
+  }
+
+  &.is-plain {
+    background: $--button-default-fill;
+    border: $--border-base;
+    color: $--button-default-color;
+
+    &:hover,
+    &:focus {
+      background: $--color-white;
+      border-color: $border-color;
+      color: $background-color;
+    }
+    
+    &:active {
+      background: $--color-white;
+      border-color: shade($border-color, $--button-active-shade-percent);
+      color: shade($background-color, $--button-active-shade-percent);
+      outline: none;
+    }
+  }
+}
+
+@mixin button-size($padding-vertical, $padding-horizontal, $font-size, $border-radius) {
+  padding: $padding-vertical $padding-horizontal;
+  font-size: $font-size;
+  border-radius: $border-radius;
+}
