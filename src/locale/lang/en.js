@@ -66,6 +66,10 @@ export default {
       placeholder: 'Select'
     },
     pagination: {
+      home: 'HOME',
+      end: 'END',
+      prev: 'Page up',
+      next: 'Page down',
       goto: 'Go to',
       pagesize: '/page',
       total: 'Total {total}',
