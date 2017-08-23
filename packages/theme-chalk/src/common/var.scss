@@ -343,33 +343,33 @@ $--tab-vertical-header-count-fill: $--color-text-secondary;
 /* Button
 -------------------------- */
 $--button-font-size: 14px;
+$--button-font-weight: 500;
 $--button-border-radius: $--border-radius-base;
-$--button-padding-vertical: 10px;
-$--button-padding-horizontal: 15px;
+$--button-padding-vertical: 12px;
+$--button-padding-horizontal: 18px;
 
-$--button-large-font-size: 16px;
-$--button-large-padding-vertical: 11px;
-$--button-large-padding-horizontal: 19px;
+$--button-medium-font-size: 14px;
+$--button-medium-border-radius: $--border-radius-base;
+$--button-medium-padding-vertical: 10px;
+$--button-medium-padding-horizontal: 18px;
 
 $--button-small-font-size: 12px;
-$--button-small-padding-vertical: 7px;
-$--button-small-padding-horizontal: 9px;
+$--button-small-border-radius: #{$--border-radius-base - 1};
+$--button-small-padding-vertical: 9px;
+$--button-small-padding-horizontal: 15px;
 
 $--button-mini-font-size: 12px;
-$--button-mini-padding-vertical: 4px;
-$--button-mini-padding-horizontal: 4px;
+$--button-mini-border-radius: #{$--border-radius-base - 1};
+$--button-mini-padding-vertical: 7px;
+$--button-mini-padding-horizontal: 15px;
 
 $--button-default-color: $--color-text-primary;
 $--button-default-fill: $--color-white;
-$--button-default-border: #c4c4c4;
-
-$--button-ghost-color: #666;
-$--button-ghost-fill: transparent;
-$--button-ghost-border: none;
+$--button-default-border: $--border-color-base;
 
 $--button-disabled-color: $--color-text-secondary;
-$--button-disabled-fill: $--color-text-placeholder;
-$--button-disabled-border: $--disabled-border-base;
+$--button-disabled-fill: $--color-white;
+$--button-disabled-border: $--border-color-base;
 
 $--button-primary-border: $--color-primary;
 $--button-primary-color: $--color-white;

@@ -10,7 +10,8 @@
       {
         'is-disabled': disabled,
         'is-loading': loading,
-        'is-plain': plain
+        'is-plain': plain,
+        'is-round': round
       }
     ]"
   >
@@ -40,7 +41,8 @@
       loading: Boolean,
       disabled: Boolean,
       plain: Boolean,
-      autofocus: Boolean
+      autofocus: Boolean,
+      round: Boolean
     },
 
     methods: {

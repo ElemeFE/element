@@ -45,10 +45,10 @@ describe('Button', () => {
   });
   it('size', () => {
     vm = createTest(Button, {
-      size: 'large'
+      size: 'medium'
     }, true);
     let buttonElm = vm.$el;
-    expect(buttonElm.classList.contains('el-button--large')).to.be.true;
+    expect(buttonElm.classList.contains('el-button--medium')).to.be.true;
   });
   it('plain', () => {
     vm = createTest(Button, {

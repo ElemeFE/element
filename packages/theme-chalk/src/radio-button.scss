@@ -92,9 +92,9 @@
     }
   }
 
-  @include m(large) {
+  @include m(medium) {
     & .el-radio-button__inner {
-      @include button-size($--button-large-padding-vertical, $--button-large-padding-horizontal, $--button-large-font-size, 0);
+      @include button-size($--button-medium-padding-vertical, $--button-medium-padding-horizontal, $--button-medium-font-size, 0);
     }
   }
   @include m(small) {
