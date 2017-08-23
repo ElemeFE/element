@@ -26,7 +26,7 @@ Commonly used button.
 
 ### Basic usage
 
-::: demo Button provides 7 themes defined by the `type` attribute.
+::: demo Use `type`, `plain` and `round` to define Button's style.
 
 ```html
 <div>
