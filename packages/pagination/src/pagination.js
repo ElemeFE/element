@@ -47,10 +47,12 @@ export default {
     const layout = this.layout || '';
     if (!layout) return;
     const TEMPLATE_MAP = {
+      prevs: <prevs></prevs>,
       prev: <prev></prev>,
       jumper: <jumper></jumper>,
       pager: <pager currentPage={ this.internalCurrentPage } pageCount={ this.internalPageCount } on-change={ this.handleCurrentChange }></pager>,
       next: <next></next>,
+      nexte: <nexte></nexte>,
       sizes: <sizes pageSizes={ this.pageSizes }></sizes>,
       slot: <my-slot></my-slot>,
       total: <total></total>
@@ -93,20 +95,35 @@ export default {
         );
       }
     },
+    Prevs: {
+      mixins: [Locale],
+      render(h) {
+        return (
+          <button
+            type="button"
+            class={['btn-prev', { disabled: this.$parent.internalCurrentPage <= 1 }]}
+            on-click={ this.$parent.prevs }>
+            { this.t('el.pagination.home') }
+          </button>
+        );
+      }
+    },
     Prev: {
+      mixins: [Locale],
       render(h) {
         return (
           <button
             type="button"
             class={['btn-prev', { disabled: this.$parent.internalCurrentPage <= 1 }]}
             on-click={ this.$parent.prev }>
-            <i class="el-icon el-icon-arrow-left"></i>
+            <i class="el-icon-arrow-left  el-icon--left"></i>{ this.t('el.pagination.prev') }
           </button>
         );
       }
     },
 
     Next: {
+      mixins: [Locale],
       render(h) {
         return (
           <button
@@ -116,7 +133,24 @@ export default {
               { disabled: this.$parent.internalCurrentPage === this.$parent.internalPageCount || this.$parent.internalPageCount === 0 }
             ]}
             on-click={ this.$parent.next }>
-            <i class="el-icon el-icon-arrow-right"></i>
+            { this.t('el.pagination.next') }<i class="el-icon-arrow-right el-icon--right"></i>
+          </button>
+        );
+      }
+    },
+
+    Nexte: {
+      mixins: [Locale],
+      render(h) {
+        return (
+          <button
+            type="button"
+            class={[
+              'btn-next',
+              { disabled: this.$parent.internalCurrentPage === this.$parent.internalPageCount || this.$parent.internalPageCount === 0 }
+            ]}
+            on-click={ this.$parent.nexte }>
+            { this.t('el.pagination.end') }
           </button>
         );
       }
@@ -243,6 +277,10 @@ export default {
       this.internalCurrentPage = this.getValidCurrentPage(val);
     },
 
+    prevs() {
+      this.internalCurrentPage = this.getValidCurrentPage(1);
+    },
+
     prev() {
       const newVal = this.internalCurrentPage - 1;
       this.internalCurrentPage = this.getValidCurrentPage(newVal);
@@ -251,6 +289,10 @@ export default {
     next() {
       const newVal = this.internalCurrentPage + 1;
       this.internalCurrentPage = this.getValidCurrentPage(newVal);
+    },
+
+    nexte() {
+      this.internalCurrentPage = this.internalPageCount;
     },
 
     getValidCurrentPage(value) {

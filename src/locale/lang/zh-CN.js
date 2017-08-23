@@ -66,6 +66,10 @@ export default {
       placeholder: '请选择'
     },
     pagination: {
+      home: '首页',
+      end: '尾页',
+      prev: '上页',
+      next: '下页',
       goto: '前往',
       pagesize: '条/页',
       total: '共 {total} 条',
