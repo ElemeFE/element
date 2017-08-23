@@ -1,0 +1,167 @@
+@import "mixins/mixins";
+@import "common/var";
+@import "common/popup";
+@import "button";
+@import "input";
+
+@include b(message-box) {
+  text-align: left;
+  display: inline-block;
+  vertical-align: middle;
+  background-color: $--color-white;
+  width: $--msgbox-width;
+  border-radius: $--msgbox-border-radius;
+  font-size: $--msgbox-font-size;
+  overflow: hidden;
+  backface-visibility: hidden;
+  @include e(wrapper) {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    &::after {
+      content: "";
+      display: inline-block;
+      height: 100%;
+      width: 0;
+      vertical-align: middle;
+    }
+  }
+
+  @include e(header) {
+    position: relative;
+    padding: 20px 20px 0;
+  }
+
+  @include e(headerbtn) {
+    position: absolute;
+    top: 19px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+    cursor: pointer;
+
+    .el-message-box__close {
+      color: #999;
+    }
+
+    &:focus, &:hover {
+      .el-message-box__close {
+        color: $--color-primary;
+      }
+    }
+
+  }
+
+  @include e(content) {
+    padding: 30px 20px;
+    color: $--msgbox-content-color;
+    font-size: $--msgbox-content-font-size;
+    position: relative;
+  }
+
+  @include e(input) {
+    padding-top: 15px;
+    & input.invalid {
+      border-color: $--color-danger;
+      &:focus {
+        border-color: $--color-danger;
+      }
+    }
+  }
+
+  @include e(errormsg) {
+    color: $--color-danger;
+    font-size: $--msgbox-error-font-size;
+    min-height: 18px;
+    margin-top: 2px;
+  }
+
+  @include e(title) {
+    padding-left: 0;
+    margin-bottom: 0;
+    font-size: $--msgbox-font-size;
+    font-weight: bold;
+    height: 18px;
+    color: #333;
+  }
+
+  @include e(message) {
+    margin: 0;
+
+    & p {
+      margin: 0;
+      line-height: 1.4;
+    }
+  }
+
+  @include e(btns) {
+    padding: 10px 20px 15px;
+    text-align: right;
+
+    & button:nth-child(2) {
+      margin-left: 10px;
+    }
+  }
+
+  @include e(btns-reverse) {
+    flex-direction: row-reverse;
+  }
+
+  @include e(status) {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 36px !important;
+
+    &.el-icon-circle-check {
+      color: $--msgbox-success-color;
+    }
+
+    &.el-icon-information {
+      color: $--msgbox-info-color;
+    }
+
+    &.el-icon-warning {
+      color: $--msgbox-warning-color;
+    }
+
+    &.el-icon-circle-cross {
+      color: $--msgbox-danger-color;
+    }
+  }
+}
+
+.msgbox-fade-enter-active {
+  animation: msgbox-fade-in .3s;
+}
+
+.msgbox-fade-leave-active {
+  animation: msgbox-fade-out .3s;
+}
+
+@keyframes msgbox-fade-in {
+  0% {
+    transform: translate3d(0, -20px, 0);
+    opacity: 0;
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes msgbox-fade-out {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(0, -20px, 0);
+    opacity: 0;
+  }
+}

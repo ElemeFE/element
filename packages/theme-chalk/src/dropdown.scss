@@ -1,0 +1,73 @@
+@import "mixins/mixins";
+@import "common/var";
+@import "button";
+
+@include b(dropdown) {
+  display: inline-block;
+  position: relative;
+  color: $--color-black;
+  font-size: $--font-size-base;
+
+  .el-button-group {
+    display: block;
+    .el-button {
+      float: none;
+    }
+  }
+
+  & .el-dropdown__caret-button {
+    padding-left: 5px;
+    padding-right: 5px;
+
+    & .el-dropdown__icon {
+      padding-left: 0;
+    }
+  }
+  @include e(icon) {
+    font-size: 12px;
+    margin: 0 3px;
+  }
+}
+@include b(dropdown-menu) {
+  margin: 5px 0;
+  background-color: $--color-white;
+  border: 1px solid $--color-black;
+  box-shadow: $--dropdown-menu-box-shadow;
+  padding: 6px 0;
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100px;
+
+  @include e(item) {
+    list-style: none;
+    line-height: 36px;
+    padding: 0 10px;
+    margin: 0;
+    cursor: pointer;
+
+    &:not(.is-disabled):hover {
+      background-color: $--dropdown-menuItem-hover-fill;
+      color: $--dropdown-menuItem-hover-color;
+    }
+    @include m(divided) {
+      position: relative;
+      margin-top: 6px;
+      border-top: 1px solid $--color-black;
+
+      &:before {
+        content: '';
+        height: 6px;
+        display: block;
+        margin: 0 -10px;
+        background-color: $--color-white;
+      }
+    }
+    @include when(disabled) {
+      cursor: default;
+      color: $--color-black;
+      pointer-events: none;
+    }
+  }
+}

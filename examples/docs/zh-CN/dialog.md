@@ -140,7 +140,7 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
 <!-- Form -->
 <el-button type="text" @click="dialogFormVisible = true">打开嵌套表单的 Dialog</el-button>
 
-<el-dialog title="收货地址" :visible.sync="dialogFormVisible" fullscreen>
+<el-dialog title="收货地址" :visible.sync="dialogFormVisible">
   <el-form :model="form">
     <el-form-item label="活动名称" :label-width="formLabelWidth">
       <el-input v-model="form.name" auto-complete="off"></el-input>

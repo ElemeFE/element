@@ -1,0 +1,134 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(carousel) {
+  overflow-x: hidden;
+  position: relative;
+
+  @include e(container) {
+    position: relative;
+    height: 300px;
+  }
+
+  @include e(arrow) {
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    height: $--carousel-arrow-size;
+    width: $--carousel-arrow-size;
+    cursor: pointer;
+    transition: .3s;
+    border-radius: 50%;
+    background-color: $--carousel-arrow-background;
+    color: $--color-white;
+    position: absolute;
+    top: 50%;
+    z-index: 10;
+    transform: translateY(-50%);
+    text-align: center;
+    font-size: $--carousel-arrow-font-size;
+
+    @include m(left) {
+      left: 16px;
+    }
+
+    @include m(right) {
+      right: 16px;
+    }
+
+    &:hover {
+      background-color: $--carousel-arrow-hover-background;
+    }
+
+    & i {
+      cursor: pointer;
+    }
+  }
+
+  @include e(indicators) {
+    position: absolute;
+    list-style: none;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    padding: 0;
+    z-index: #{$--index-normal + 1};
+
+    @include m(outside) {
+      bottom: #{$--carousel-indicator-height + $--carousel-indicator-padding-vertical * 2};
+      text-align: center;
+      position: static;
+      transform: none;
+      .el-carousel__indicator:hover button {
+        opacity: 0.64;
+      }
+      button {
+        background-color: $--carousel-indicator-out-color;
+        opacity: 0.24;
+      }
+    }
+
+    @include m(labels) {
+      left: 0;
+      right: 0;
+      transform: none;
+      text-align: center;
+
+      .el-carousel__button {
+        height: auto;
+        width: auto;
+        padding: 2px 18px;
+        font-size: 12px;
+      }
+
+      .el-carousel__indicator {
+        padding: 6px 4px;
+      }
+    }
+  }
+
+  @include e(indicator) {
+    display: inline-block;
+    background-color: transparent;
+    padding: $--carousel-indicator-padding-vertical $--carousel-indicator-padding-horizontal;
+    cursor: pointer;
+
+    &:hover button {
+      opacity: 0.72;
+    }
+
+    @include when(active) {
+      button {
+        opacity: 1;
+      }
+    }
+  }
+
+  @include e(button) {
+    display: block;
+    opacity: 0.48;
+    width: $--carousel-indicator-width;
+    height: $--carousel-indicator-height;
+    background-color: $--color-white;
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    transition: .3s;
+  }
+}
+
+.carousel-arrow-left-enter,
+.carousel-arrow-left-leave-active {
+  transform: translateY(-50%) translateX(-10px);
+  opacity: 0;
+}
+
+.carousel-arrow-right-enter,
+.carousel-arrow-right-leave-active {
+  transform: translateY(-50%) translateX(10px);
+  opacity: 0;
+}

@@ -1,0 +1,7 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(footer) {
+  padding: $--footer-padding;
+  box-sizing: border-box;
+}

@@ -1,0 +1,101 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(message) {
+  box-shadow: $--message-shadow;
+  min-width: $--message-min-width;
+  box-sizing: border-box;
+  border-radius: $--border-radius-small;
+  position: fixed;
+  left: 50%;
+  top: 20px;
+  transform: translateX(-50%);
+  background-color: $--color-white;
+  transition: opacity 0.3s, transform .4s;
+  overflow: hidden;
+
+  @include e(group) {
+    margin-left: 40px;
+    position: relative;
+    height: 20px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    padding: $--message-padding;
+
+    & p {
+      font-size: $--font-size-base;
+      margin: 0 34px 0 0;
+      white-space: nowrap;
+      color: $--message-content-color;
+      text-align: justify;
+    }
+  }
+
+  @include e(icon) {
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    float: left;
+    text-align: center;
+
+    i {
+      line-height: 40px;
+
+      &.el-message__type {
+        color: $--color-white;
+      }
+    }
+
+    @include m(info) {
+      background-color: $--color-info;
+    }
+
+    @include m(warning) {
+      background-color: $--color-warning;
+    }
+
+    @include m(error) {
+      background-color: $--color-danger;
+    }
+
+    @include m(success) {
+      background-color: $--color-success;
+    }
+  }
+
+  @include e(closeBtn) {
+    position: absolute;
+    top: 13px;
+    right: 12px;
+    cursor: pointer;
+    color: $--message-close-color;
+    font-size: $--font-size-base;
+
+    &:hover {
+      color: $--message-close-hover-color;
+    }
+  }
+
+  & .el-icon-circle-check {
+    color: $--message-success-color;
+  }
+
+  & .el-icon-circle-cross {
+    color: $--message-danger-color;
+  }
+
+  & .el-icon-information {
+    color: $--message-info-color;
+  }
+
+  & .el-icon-warning {
+    color: $--message-warning-color;
+  }
+}
+
+.el-message-fade-enter,
+.el-message-fade-leave-active {
+  opacity: 0;
+  transform: translate(-50%, -100%);
+}

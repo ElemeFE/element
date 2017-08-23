@@ -1,0 +1,85 @@
+@import "../common/var";
+@import "../mixins/mixins";
+@import "./picker-panel.scss";
+
+@include b(date-picker) {
+  min-width: 254px;
+
+  &.has-sidebar.has-time {
+    min-width: 434px;
+  }
+
+  &.has-sidebar {
+    min-width: 370px;
+  }
+
+  &.has-time {
+    min-width: 324px;
+  }
+
+  .el-picker-panel__content {
+    min-width: 224px;
+  }
+
+  table {
+    table-layout: fixed;
+    width: 100%;
+  }
+
+  @include e(editor-wrap) {
+    position: relative;
+    display: table-cell;
+    padding: 0 5px;
+  }
+
+  @include e(time-header) {
+    position: relative;
+    border-bottom: 1px solid $--datepicker-inner-border-color;
+    font-size: 12px;
+    padding: 8px 5px 5px 5px;
+    display: table;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  @include e(header) {
+    margin: 12px;
+    text-align: center;
+  }
+
+  @include e(header-label) {
+    font-size: 14px;
+    padding: 0 5px;
+    line-height: 22px;
+    text-align: center;
+    cursor: pointer;
+
+    &:hover {
+      color: $--datepicker-text-hover-color;
+    }
+
+    &.active {
+      color: $--datepicker-active-color;
+    }
+  }
+
+  @include e(prev-btn) {
+    float: left;
+  }
+
+  @include e(next-btn) {
+    float: right;
+  }
+
+  @include e(time-wrap) {
+    padding: 10px;
+    text-align: center;
+  }
+
+  @include e(time-label) {
+    float: left;
+    cursor: pointer;
+    line-height: 30px;
+    margin-left: 10px;
+  }
+}
