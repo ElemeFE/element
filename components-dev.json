@@ -1,0 +1,6 @@
+{
+  "popover": "./packages/popover/index.js",
+  "button": "./packages/button/index.js",
+  "checkbox": "./packages/checkbox/index.js"
+
+}

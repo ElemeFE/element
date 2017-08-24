@@ -2,8 +2,9 @@ import Vue from 'vue';
 import {
   PopupManager
 } from 'element-ui/src/utils/popup';
+import Popper from 'popper.js';
 
-const PopperJS = Vue.prototype.$isServer ? function() {} : require('./popper');
+const PopperJS = Vue.prototype.$isServer ? function() {} : Popper;
 const stop = e => e.stopPropagation();
 
 /**
@@ -96,7 +97,7 @@ export default {
       options.placement = this.currentPlacement;
       options.offset = this.offset;
       this.popperJS = new PopperJS(reference, popper, options);
-      this.popperJS.onCreate(_ => {
+      this.popperJS.options.onCreate(_ => {
         this.$emit('created', this);
         this.resetTransformOrigin();
         this.$nextTick(this.updatePopper);
@@ -104,7 +105,7 @@ export default {
       if (typeof options.onUpdate === 'function') {
         this.popperJS.onUpdate(options.onUpdate);
       }
-      this.popperJS._popper.style.zIndex = PopupManager.nextZIndex();
+      this.popperJS.popper.style.zIndex = PopupManager.nextZIndex();
       this.popperElm.addEventListener('click', stop);
     },
 
@@ -132,9 +133,9 @@ export default {
         left: 'right',
         right: 'left'
       };
-      let placement = this.popperJS._popper.getAttribute('x-placement').split('-')[0];
+      let placement = this.popperJS.popper.getAttribute('x-placement').split('-')[0];
       let origin = placementMap[placement];
-      this.popperJS._popper.style.transformOrigin = ['top', 'bottom'].indexOf(placement) > -1 ? `center ${ origin }` : `${ origin } center`;
+      this.popperJS.popper.style.transformOrigin = ['top', 'bottom'].indexOf(placement) > -1 ? `center ${ origin }` : `${ origin } center`;
     },
 
     appendArrow(element) {

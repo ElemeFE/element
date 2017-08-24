@@ -17,6 +17,7 @@
     data() {
       return {
         visible2: false,
+        visible3: false,
         gridData: [{
           date: '2016-05-02',
           name: 'Jack',
@@ -91,7 +92,17 @@
         }],
         singleSelection: {},
         multipleSelection: [],
-        model: ''
+        model: '',
+        popperOptions: {
+          modifiers: {
+            flip: {
+        	   enabled: false
+            },
+            offset: {
+        	   offset: "0, -100%r - 12"
+            }
+   		 }
+      }
       };
     }
   };
@@ -196,6 +207,7 @@ Of course, you can nest other operations. It's more light-weight than using a di
   ref="popover5"
   placement="top"
   width="160"
+  offset="100"
   v-model="visible2">
   <p>Are you sure to delete this?</p>
   <div style="text-align: right; margin: 0">
@@ -214,6 +226,44 @@ Of course, you can nest other operations. It's more light-weight than using a di
       };
     }
   }
+</script>
+```
+:::
+
+### Popper options
+
+Send options to [popper.js](https://popper.js.org/popper-documentation.html#new_Popper_new)
+
+:::demo
+```html
+<el-popover v-model="visible3"  ref="popover6" :visible-arrow="false"  placement="bottom-start" width="160" :popper-options="popperOptions">
+  <p>Are you sure to delete this?</p>
+  <div style="text-align: right; margin: 0">
+    <el-button size="mini" type="text" @click="visible3 = false">cancel</el-button>
+    <el-button type="primary" size="mini" @click="visible3 = false">confirm</el-button>
+  </div>
+</el-popover>
+
+<el-button v-popover:popover6>Cover</el-button>
+
+<script>
+export default {
+  data() {
+    return {
+      visible3: false,
+      popperOptions: {
+      	modifiers: {
+          flip: {
+             enabled: false
+          },
+          offset: {
+             offset: "0, -100%r - 12"
+          }
+        }
+      }
+    }
+  }
+}
 </script>
 ```
 :::
