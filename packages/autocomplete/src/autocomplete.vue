@@ -8,6 +8,7 @@
       @compositionend.native="handleComposition"
       @change="handleChange"
       @focus="handleFocus"
+      :autofocus="autofocus"
       @keydown.up.native.prevent="highlight(highlightedIndex - 1)"
       @keydown.down.native.prevent="highlight(highlightedIndex + 1)"
       @keydown.enter.native="handleKeyEnter"
