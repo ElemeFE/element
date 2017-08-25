@@ -5,21 +5,86 @@
 
 @include b(radio) {
   color: $--radio-color;
+  font-weight: $--radio-font-weight;
+  line-height: 1;
   position: relative;
   cursor: pointer;
   display: inline-block;
   white-space: nowrap;
   @include utils-user-select(none);
 
+  @include when(bordered) {
+    padding: $--radio-bordered-padding;
+    border-radius: $--border-radius-base;
+    border: $--border-base;
+
+    &.is-checked {
+      border-color: $--color-primary;
+    }
+
+    &.is-disabled {
+      cursor: not-allowed;
+      border-color: $--border-color-lighter;
+    }
+
+    & + .el-radio.is-bordered {
+      margin-left: 10px;
+    }
+  }
+
+  @include m(medium) {
+    &.is-bordered {
+      padding: $--radio-bordered-medium-padding;
+      border-radius: $--button-medium-border-radius;
+      .el-radio__label {
+        font-size: $--button-medium-font-size;
+      }
+      .el-radio__inner {
+        height: $--radio-bordered-medium-input-height;
+        width: $--radio-bordered-medium-input-width;
+      }
+    }
+  }
+  @include m(small) {
+    &.is-bordered {
+      padding: $--radio-bordered-small-padding;
+      border-radius: $--button-small-border-radius;
+      .el-radio__label {
+        font-size: $--button-small-font-size;
+      }
+      .el-radio__inner {
+        height: $--radio-bordered-small-input-height;
+        width: $--radio-bordered-small-input-width;
+      }
+    }
+  }
+  @include m(mini) {
+    &.is-bordered {
+      padding: $--radio-bordered-mini-padding;
+      border-radius: $--button-mini-border-radius;
+      .el-radio__label {
+        font-size: $--button-mini-font-size;
+      }
+      .el-radio__inner {
+        height: $--radio-bordered-mini-input-height;
+        width: $--radio-bordered-mini-input-width;
+      }
+    }
+  }
+
   &:focus { /*获得焦点时 样式提醒*/
     outline: none;
     .el-radio__inner {
-      box-shadow: 0 0 1px 1px $--radio-input-border-color-hover;
+      border-color: $--color-primary;
+    }
+
+    .is-disabled .el-radio__inner {
+      border-color: $--border-color-base;
     }
   }
 
   & + .el-radio {
-    margin-left: 15px;
+    margin-left: 30px;
   }
 
   @include e(input) {
@@ -56,8 +121,8 @@
           }
         }
       }
-      & + .el-radio__label {
-        color: $--disabled-color-base;
+      & + span.el-radio__label {
+        color: $--color-text-placeholder;
         cursor: not-allowed;
       }
     }
@@ -71,6 +136,10 @@
           transform: translate(-50%, -50%) scale(1);
         }
       }
+
+      & + .el-radio__label {
+        color: $--radio-checked-text-color;
+      }
     }
 
     @include when(focus) {
@@ -83,7 +152,7 @@
     border: $--radio-input-border;
     border-radius: $--radio-input-border-radius;
     width: $--radio-input-width;
-    height: $--radio-input-width;
+    height: $--radio-input-height;
     background-color: $--radio-input-fill;
     position: relative;
     cursor: pointer;
@@ -95,8 +164,8 @@
     }
 
     &::after {
-      width: 6px;
-      height: 6px;
+      width: 4px;
+      height: 4px;
       border-radius: $--radio-input-border-radius;
       background-color: $--color-white;
       content: "";
@@ -122,6 +191,6 @@
 
   @include e(label) {
     font-size: $--radio-font-size;
-    padding-left: 5px;
+    padding-left: 10px;
   }
 }

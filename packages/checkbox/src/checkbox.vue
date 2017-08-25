@@ -1,14 +1,20 @@
 <template>
   <label
     class="el-checkbox"
+    :class="[
+      border && checkboxSize ? 'el-checkbox--' + checkboxSize : '',
+      { 'is-disabled': isDisabled },
+      { 'is-bordered': border },
+      { 'is-checked': isChecked }
+    ]"
     role="checkbox"
     :aria-checked="indeterminate ? 'mixed': isChecked"
-    :aria-disabled="disabled"
+    :aria-disabled="isDisabled"
     :id="id"
   >
     <span class="el-checkbox__input"
       :class="{
-        'is-disabled': disabled,
+        'is-disabled': isDisabled,
         'is-checked': isChecked,
         'is-indeterminate': indeterminate,
         'is-focus': focus
@@ -21,7 +27,7 @@
         class="el-checkbox__original"
         type="checkbox"
         :name="name"
-        :disabled="disabled"
+        :disabled="isDisabled"
         :true-value="trueLabel"
         :false-value="falseLabel"
         v-model="model"
@@ -32,7 +38,7 @@
         v-else
         class="el-checkbox__original"
         type="checkbox"
-        :disabled="disabled"
+        :disabled="isDisabled"
         :value="label"
         :name="name"
         v-model="model"
@@ -117,6 +123,18 @@
 
       store() {
         return this._checkboxGroup ? this._checkboxGroup.value : this.value;
+      },
+
+      isDisabled() {
+        return this.isGroup
+          ? this._checkboxGroup.disabled || this.disabled
+          : this.disabled;
+      },
+
+      checkboxSize() {
+        return this.isGroup
+          ? this._checkboxGroup.size || this.size
+          : this.size;
       }
     },
 
@@ -130,7 +148,9 @@
       trueLabel: [String, Number],
       falseLabel: [String, Number],
       id: String, /* 当indeterminate为真时，为controls提供相关连的checkbox的id，表明元素间的控制关系*/
-      controls: String /* 当indeterminate为真时，为controls提供相关连的checkbox的id，表明元素间的控制关系*/
+      controls: String, /* 当indeterminate为真时，为controls提供相关连的checkbox的id，表明元素间的控制关系*/
+      border: Boolean,
+      size: String
     },
 
     methods: {

@@ -76,6 +76,7 @@ $--fill-base: $--color-white;
 $--font-size-base: 14px;
 $--font-color-base: #5a5e66;
 $--font-color-disabled-base: #bbb;
+$--font-weight-primary: 500;
 
 /* Size
 -------------------------- */
@@ -89,9 +90,9 @@ $--index-popper: 2000;
 
 /* Disable base
 -------------------------- */
-$--disabled-fill-base: $--color-primary-light-9;
-$--disabled-color-base: #bbb;
-$--disabled-border-base: $--color-text-placeholder;
+$--disabled-fill-base: $--border-color-extra-light;
+$--disabled-color-base: $--color-text-placeholder;
+$--disabled-border-base: $--border-color-lighter;
 
 /* Icon
 -------------------------- */
@@ -100,10 +101,11 @@ $--icon-color: #666;
 /* Checkbox
 -------------------------- */
 $--checkbox-font-size: 14px;
+$--checkbox-font-weight: $--font-weight-primary;
 $--checkbox-color: $--color-text-regular;
-$--checkbox-input-height: 18px;
-$--checkbox-input-width: 18px;
-$--checkbox-input-border-radius: $--border-radius-base;
+$--checkbox-input-height: 14px;
+$--checkbox-input-width: 14px;
+$--checkbox-input-border-radius: $--border-radius-small;
 $--checkbox-input-fill: $--color-white;
 $--checkbox-input-border: $--border-base;
 $--checkbox-input-border-color: $--border-color-base;
@@ -111,17 +113,29 @@ $--checkbox-icon-color: $--color-white;
 
 $--checkbox-disabled-input-border-color: $--disabled-border-base;
 $--checkbox-disabled-input-fill: $--disabled-fill-base;
-$--checkbox-disabled-icon-color: $--disabled-fill-base;
+$--checkbox-disabled-icon-color: $--color-text-placeholder;
 
-$--checkbox-disabled-checked-input-fill: $--disabled-border-base;
-$--checkbox-disabled-checked-input-border-color: $--disabled-border-base;
-$--checkbox-disabled-checked-icon-color: $--color-white;
+$--checkbox-disabled-checked-input-fill: $--border-color-extra-light;
+$--checkbox-disabled-checked-input-border-color: $--border-color-base;
+$--checkbox-disabled-checked-icon-color: $--color-text-placeholder;
 
-$--checkbox-checked-input-border-color: $--color-primary-light-2;
+$--checkbox-checked-text-color: $--color-primary;
+$--checkbox-checked-input-border-color: $--color-primary;
 $--checkbox-checked-input-fill: $--color-primary;
 $--checkbox-checked-icon-color: $--fill-base;
 
 $--checkbox-input-border-color-hover: $--color-primary;
+
+$--checkbox-bordered-padding: 10px 20px 10px 10px;
+$--checkbox-bordered-medium-padding: 8px 20px 8px 10px;
+$--checkbox-bordered-small-padding: 6px 20px 6px 10px;
+$--checkbox-bordered-mini-padding: 4px 20px 4px 10px;
+$--checkbox-bordered-medium-input-height: 14px;
+$--checkbox-bordered-medium-input-width: 14px;
+$--checkbox-bordered-small-input-height: 12px;
+$--checkbox-bordered-small-input-width: 12px;
+$--checkbox-bordered-mini-input-height: 12px;
+$--checkbox-bordered-mini-input-width: 12px;
 
 $--checkbox-button-font-size: $--font-size-base;
 $--checkbox-button-checked-fill: $--color-primary;
@@ -133,9 +147,10 @@ $--checkbox-button-checked-border-color: $--color-primary;
 /* Radio
 -------------------------- */
 $--radio-font-size: 14px;
-$--radio-color: $--color-text-primary;
-$--radio-input-height: 18px;
-$--radio-input-width: 18px;
+$--radio-font-weight: $--font-weight-primary;
+$--radio-color: $--color-text-regular;
+$--radio-input-height: 14px;
+$--radio-input-width: 14px;
 $--radio-input-border-radius: $--border-radius-circle;
 $--radio-input-fill: $--color-white;
 $--radio-input-border: $--border-base;
@@ -146,20 +161,33 @@ $--radio-disabled-input-border-color: $--disabled-border-base;
 $--radio-disabled-input-fill: $--disabled-fill-base;
 $--radio-disabled-icon-color: $--disabled-fill-base;
 
-$--radio-disabled-checked-input-fill: $--disabled-border-base;
 $--radio-disabled-checked-input-border-color: $--disabled-border-base;
-$--radio-disabled-checked-icon-color: $--color-white;
+$--radio-disabled-checked-input-fill: $--disabled-fill-base;
+$--radio-disabled-checked-icon-color: $--color-text-placeholder;
 
+$--radio-checked-text-color: $--color-primary;
 $--radio-checked-input-border-color: $--color-primary;
 $--radio-checked-input-fill: $--color-white;
 $--radio-checked-icon-color: $--color-primary;
 
 $--radio-input-border-color-hover: $--color-primary;
 
+$--radio-bordered-padding: 10px 20px 10px 10px;
+$--radio-bordered-medium-padding: 8px 20px 8px 10px;
+$--radio-bordered-small-padding: 6px 20px 6px 10px;
+$--radio-bordered-mini-padding: 4px 20px 4px 10px;
+$--radio-bordered-medium-input-height: 14px;
+$--radio-bordered-medium-input-width: 14px;
+$--radio-bordered-small-input-height: 12px;
+$--radio-bordered-small-input-width: 12px;
+$--radio-bordered-mini-input-height: 12px;
+$--radio-bordered-mini-input-width: 12px;
+
 $--radio-button-font-size: $--font-size-base;
 $--radio-button-checked-fill: $--color-primary;
 $--radio-button-checked-color: $--color-white;
 $--radio-button-checked-border-color: $--color-primary;
+$--radio-button-disabled-checked-fill: $--border-color-extra-light;
 
 /* Select
 -------------------------- */
@@ -343,7 +371,7 @@ $--tab-vertical-header-count-fill: $--color-text-secondary;
 /* Button
 -------------------------- */
 $--button-font-size: 14px;
-$--button-font-weight: 500;
+$--button-font-weight: $--font-weight-primary;
 $--button-border-radius: $--border-radius-base;
 $--button-padding-vertical: 12px;
 $--button-padding-horizontal: 18px;

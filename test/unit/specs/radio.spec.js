@@ -150,7 +150,7 @@ describe('Radio', () => {
         }
       }, true);
       let radio2 = vm.$refs.radio2;
-      expect(vm.$el.querySelectorAll('.is-disabled').length).to.be.equal(3);
+      expect(vm.$el.querySelectorAll('label.is-disabled').length).to.be.equal(3);
       expect(vm.$refs.radio1.$el.querySelector('.is-checked')).to.be.exist;
       radio2.$el.click();
       vm.$nextTick(_ => {

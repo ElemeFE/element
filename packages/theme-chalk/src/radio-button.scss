@@ -13,6 +13,7 @@
     vertical-align: middle;
     background: $--button-default-fill;
     border: $--border-base;
+    font-weight: $--button-font-weight;
     border-left: 0;
     color: $--button-default-color;
     -webkit-appearance: none;
@@ -64,6 +65,9 @@
         border-color: $--button-disabled-border;
         box-shadow: none;
       }
+      &:checked + .el-radio-button__inner {
+        background-color: $--radio-button-disabled-checked-fill;
+      }
     }
   }
 
@@ -77,7 +81,10 @@
   &:focus {
     outline: none;
     .el-radio-button__inner { /*获得焦点时 样式提醒*/
-      box-shadow: 0 0 1px 1px $--radio-button-checked-border-color !important;
+      box-shadow: 0 0 1px 1px $--radio-button-checked-border-color;
+    }
+    &.is-disabled .el-radio-button__inner {
+      box-shadow: none;
     }
   }
   &:last-child {

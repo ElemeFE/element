@@ -5,11 +5,74 @@
 
 @include b(checkbox) {
   color: $--checkbox-color;
+  font-weight: $--checkbox-font-weight;
+  line-height: 1;
   position: relative;
   cursor: pointer;
   display: inline-block;
   white-space: nowrap;
   @include utils-user-select(none);
+
+  @include when(bordered) {
+    padding: $--checkbox-bordered-padding;
+    border-radius: $--border-radius-base;
+    border: $--border-base;
+
+    &.is-checked {
+      border-color: $--color-primary;
+    }
+
+    &.is-disabled {
+      border-color: $--border-color-lighter;
+      cursor: not-allowed;
+    }
+
+    & + .el-checkbox.is-bordered {
+      margin-left: 10px;
+    }
+
+    &.el-checkbox--medium {
+      padding: $--checkbox-bordered-medium-padding;
+      border-radius: $--button-medium-border-radius;
+      .el-checkbox__label {
+        font-size: $--button-medium-font-size;
+      }
+      .el-checkbox__inner {
+        height: $--checkbox-bordered-medium-input-height;
+        width: $--checkbox-bordered-medium-input-width;
+      }
+    }
+    &.el-checkbox--small {
+      padding: $--checkbox-bordered-small-padding;
+      border-radius: $--button-small-border-radius;
+      .el-checkbox__label {
+        font-size: $--button-small-font-size;
+      }
+      .el-checkbox__inner {
+        height: $--checkbox-bordered-small-input-height;
+        width: $--checkbox-bordered-small-input-width;
+        &::after {
+          height: 6px;
+          width: 2px;
+        }
+      }
+    }
+    &.el-checkbox--mini {
+      padding: $--checkbox-bordered-mini-padding;
+      border-radius: $--button-mini-border-radius;
+      .el-checkbox__label {
+        font-size: $--button-mini-font-size;
+      }
+      .el-checkbox__inner {
+        height: $--checkbox-bordered-mini-input-height;
+        width: $--checkbox-bordered-mini-input-width;
+        &::after {
+          height: 6px;
+          width: 2px;
+        }
+      }
+    }
+  }
 
   @include e(input) {
     white-space: nowrap;
@@ -55,7 +118,7 @@
           }
         }
       }
-      & + .el-checkbox__label {
+      & + span.el-checkbox__label {
         color: $--disabled-color-base;
         cursor: not-allowed;
       }
@@ -69,11 +132,14 @@
           transform: rotate(45deg) scaleY(1);
         }
       }
+
+      & + .el-checkbox__label {
+        color: $--checkbox-checked-text-color;
+      }
     }
     @include when(focus) { /*focus时 视觉上区分*/
       .el-checkbox__inner {
         border-color: $--checkbox-input-border-color-hover;
-        box-shadow: 0 0 1px 0 $--checkbox-input-border-color-hover;
       }
     }
     @include when(indeterminate) {
@@ -85,11 +151,12 @@
           content: '';
           position: absolute;
           display: block;
-          border: 1px solid $--checkbox-checked-icon-color;
-          margin-top: -1px;
-          left: 3px;
-          right: 3px;
-          top: 50%;
+          background-color: $--checkbox-checked-icon-color;
+          height: 2px;
+          transform: scale(0.5);
+          left: 0;
+          right: 0;
+          top: 5px;
         }
 
         &::after {
@@ -118,15 +185,15 @@
     &::after {
       box-sizing: content-box;
       content: "";
-      border: 2px solid $--checkbox-checked-icon-color;
+      border: 1px solid $--checkbox-checked-icon-color;
       border-left: 0;
       border-top: 0;
-      height: 8px;
-      left: 5px;
+      height: 7px;
+      left: 4px;
       position: absolute;
       top: 1px;
       transform: rotate(45deg) scaleY(0);
-      width: 4px;
+      width: 3px;
       transition: transform .15s cubic-bezier(.71,-.46,.88,.6) .05s;
       transform-origin: center;
     }
@@ -144,11 +211,11 @@
 
   @include e(label) {
     font-size: $--checkbox-font-size;
-    padding-left: 5px;
+    padding-left: 10px;
   }
 
   & + .el-checkbox {
-    margin-left: 15px;
+    margin-left: 30px;
   }
 }
 
@@ -159,6 +226,7 @@
   @include e(inner) {
     display: inline-block;
     line-height: 1;
+    font-weight: $--checkbox-font-weight;
     white-space: nowrap;
     vertical-align: middle;
     cursor: pointer;
@@ -203,7 +271,7 @@
       color: $--checkbox-button-checked-color;
       background-color: $--checkbox-button-checked-fill;
       border-color: $--checkbox-button-checked-border-color;
-      box-shadow: -1px 0 0 0 $--checkbox-button-checked-border-color;
+      box-shadow: -1px 0 0 0 $--color-primary-light-4;
     }
   }
 
@@ -229,7 +297,6 @@
   &.is-focus {
     & .el-checkbox-button__inner {
       border-color: $--checkbox-button-checked-border-color;
-      box-shadow: 0 0 1px 0 $--checkbox-button-checked-border-color !important;
     }
   }
 

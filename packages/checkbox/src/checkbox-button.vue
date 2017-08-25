@@ -3,20 +3,20 @@
     class="el-checkbox-button"
       :class="[
         size ? 'el-checkbox-button--' + size : '',
-        { 'is-disabled': disabled },
+        { 'is-disabled': isDisabled },
         { 'is-checked': isChecked },
         { 'is-focus': focus },
       ]"
     role="checkbox"
     :aria-checked="isChecked"
-    :aria-disabled="disabled"
+    :aria-disabled="isDisabled"
     >
     <input
       v-if="trueLabel || falseLabel"
       class="el-checkbox-button__original"
       type="checkbox"
       :name="name"
-      :disabled="disabled"
+      :disabled="isDisabled"
       :true-value="trueLabel"
       :false-value="falseLabel"
       v-model="model"
@@ -28,7 +28,7 @@
       class="el-checkbox-button__original"
       type="checkbox"
       :name="name"
-      :disabled="disabled"
+      :disabled="isDisabled"
       :value="label"
       v-model="model"
       @change="handleChange"
@@ -135,6 +135,12 @@
 
       size() {
         return this._checkboxGroup.size;
+      },
+
+      isDisabled() {
+        return this._checkboxGroup
+          ? this._checkboxGroup.disabled || this.disabled
+          : this.disabled;
       }
     },
     methods: {

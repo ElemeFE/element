@@ -1,4 +1,5 @@
 @import "../common/var";
+@import "../mixins/mixins";
 
 @include b(date-table) {
   font-size: 12px;

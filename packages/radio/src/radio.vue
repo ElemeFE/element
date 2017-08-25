@@ -1,6 +1,12 @@
 <template>
   <label
     class="el-radio"
+    :class="[
+      border && radioSize ? 'el-radio--' + radioSize : '',
+      { 'is-disabled': isDisabled },
+      { 'is-bordered': border },
+      { 'is-checked': model === label }
+    ]"
     role="radio"
     :aria-checked="model === label"
     :aria-disabled="isDisabled"
@@ -48,7 +54,9 @@
       value: {},
       label: {},
       disabled: Boolean,
-      name: String
+      name: String,
+      border: Boolean,
+      size: String
     },
 
     data() {
@@ -81,7 +89,11 @@
           }
         }
       },
-
+      radioSize() {
+        return this.isGroup
+          ? this._radioGroup.size || this.size
+          : this.size;
+      },
       isDisabled() {
         return this.isGroup
           ? this._radioGroup.disabled || this.disabled
