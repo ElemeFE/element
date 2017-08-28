@@ -160,15 +160,24 @@ TableStore.prototype.mutations = {
     }
 
     let data = states._data;
+    const customFilters = [];
 
     Object.keys(states.filters).forEach((columnId) => {
       const values = states.filters[columnId];
       if (!values || values.length === 0) return;
       const column = getColumnById(this.states, columnId);
       if (column && column.filterMethod) {
-        data = data.filter((row) => {
-          return values.some(value => column.filterMethod.call(null, value, row));
-        });
+        if (this.table.customFilter) {
+          customFilters.push({
+            prop: column.columnKey,
+            values,
+            filterMethod: column.filterMethod
+          });
+        } else {
+          data = data.filter((row) => {
+            return values.some(value => column.filterMethod.call(null, value, row));
+          });
+        }
       }
     });
 
@@ -176,7 +185,7 @@ TableStore.prototype.mutations = {
     states.data = sortData(data, states);
 
     if (!silent) {
-      this.table.$emit('filter-change', filters);
+      this.table.$emit('filter-change', this.table.customFilter ? customFilters : filters);
     }
 
     Vue.nextTick(() => this.table.updateScrollY());

@@ -213,7 +213,12 @@
 
       defaultSort: Object,
 
-      tooltipEffect: String
+      tooltipEffect: String,
+
+      customFilter: {
+        type: Boolean,
+        default: false
+      }
     },
 
     components: {
