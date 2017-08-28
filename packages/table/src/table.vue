@@ -4,7 +4,6 @@
       'el-table--fit': fit,
       'el-table--striped': stripe,
       'el-table--border': border,
-      'el-table--hidden': isHidden,
       'el-table--fluid-height': maxHeight,
       'el-table--enable-row-hover': !store.states.isComplex,
       'el-table--enable-row-transition': (store.states.data || []).length !== 0 && (store.states.data || []).length < 100
@@ -20,11 +19,31 @@
         :style="{ width: layout.bodyWidth ? layout.bodyWidth + 'px' : '' }">
       </table-header>
     </div>
+
+    <!-- 自定义筛选区域 start -->
+    <div class="v-table-filter" ref="filterWrapper">
+      <table-filter
+        v-if="advanced"
+        :store="store"
+        :layout="layout"
+        :border="border"
+        :filter-data="newFilterHead"
+        :default-sort="defaultSort"
+        :style="{ width: layout.bodyWidth ? layout.bodyWidth + 'px' : '' }">
+        <template scope="props" slot="filter">
+          <slot name="table-filter" :item="props.item"></slot>
+        </template>
+      </table-filter>
+    </div>
+    <!-- 自定义筛选区域 end -->
+
     <div
       class="el-table__body-wrapper"
       ref="bodyWrapper"
+      id="bodyWrapper"
       :style="[bodyHeight]">
       <table-body
+        ref="tableBody"
         :context="context"
         :store="store"
         :stripe="stripe"
@@ -34,7 +53,7 @@
         :highlight="highlightCurrentRow"
         :style="{ width: bodyWidth }">
       </table-body>
-      <div :style="{ width: bodyWidth }" class="el-table__empty-block" v-if="!data || data.length === 0">
+      <div class="el-table__empty-block" v-if="!data || data.length === 0">
         <span class="el-table__empty-text"><slot name="empty">{{ emptyText || t('el.table.emptyText') }}</slot></span>
       </div>
     </div>
@@ -53,7 +72,8 @@
       v-if="fixedColumns.length > 0"
       :style="[
         { width: layout.fixedWidth ? layout.fixedWidth + 'px' : '' },
-        fixedHeight
+        fixedHeight,
+        fixedMinHeight
       ]">
       <div class="el-table__fixed-header-wrapper" ref="fixedHeaderWrapper" v-if="showHeader">
         <table-header
@@ -63,11 +83,25 @@
           :layout="layout"
           :style="{ width: layout.fixedWidth ? layout.fixedWidth + 'px' : '' }"></table-header>
       </div>
+
+      <!-- 自定义筛选区域fixed状态 start -->
+      <div class="v-fixed-table-filter" ref="fixedFilterWrapper">
+        <table-filter
+          v-if="advanced"
+          fixed="left"
+          :store="store"
+          :layout="layout"
+          :border="border"
+          :filter-data="newFilterHead"
+          :default-sort="defaultSort"
+          :style="{ width: layout.bodyWidth ? layout.bodyWidth + 'px' : '' }">
+        </table-filter>
+      </div>
+      <!-- 自定义筛选区域fixed状态 end -->
+
+
       <div class="el-table__fixed-body-wrapper" ref="fixedBodyWrapper"
-        :style="[
-          { top: layout.headerHeight + 'px' },
-          fixedBodyHeight
-        ]">
+        :style="fixedStyle">
         <table-body
           fixed="left"
           :store="store"
@@ -95,7 +129,8 @@
       :style="[
         { width: layout.rightFixedWidth ? layout.rightFixedWidth + 'px' : '' },
         { right: layout.scrollY ? (border ? layout.gutterWidth : (layout.gutterWidth || 1)) + 'px' : '' },
-        fixedHeight
+        fixedHeight,
+        fixedMinHeight
       ]">
       <div class="el-table__fixed-header-wrapper" ref="rightFixedHeaderWrapper" v-if="showHeader">
         <table-header
@@ -106,10 +141,7 @@
           :style="{ width: layout.rightFixedWidth ? layout.rightFixedWidth + 'px' : '' }"></table-header>
       </div>
       <div class="el-table__fixed-body-wrapper" ref="rightFixedBodyWrapper"
-        :style="[
-          { top: layout.headerHeight + 'px' },
-          fixedBodyHeight
-        ]">
+        :style="fixedStyle">
         <table-body
           fixed="right"
           :store="store"
@@ -149,10 +181,12 @@
   import TableLayout from './table-layout';
   import TableBody from './table-body';
   import TableHeader from './table-header';
+  import TableFilter from './table-filter';
   import TableFooter from './table-footer';
   import { mousewheel } from './util';
 
   let tableIdSeed = 1;
+  let lazy;
 
   export default {
     name: 'ElTable',
@@ -213,13 +247,22 @@
 
       defaultSort: Object,
 
-      tooltipEffect: String
+      tooltipEffect: String,
+
+      filterHead: Array, // 自定义 props
+
+      hasListMenu: Boolean, // 左侧是否有操作
+
+      filterArray: Array, // 被过滤掉的字段
+
+      advanced: Boolean // 是否开启高级筛选
     },
 
     components: {
       TableHeader,
       TableFooter,
       TableBody,
+      TableFilter,
       ElCheckbox
     },
 
@@ -247,23 +290,22 @@
       },
 
       bindEvents() {
-        const { headerWrapper, footerWrapper } = this.$refs;
+        const { headerWrapper, footerWrapper, filterWrapper } = this.$refs;
         const refs = this.$refs;
         this.bodyWrapper.addEventListener('scroll', function() {
           if (headerWrapper) headerWrapper.scrollLeft = this.scrollLeft;
           if (footerWrapper) footerWrapper.scrollLeft = this.scrollLeft;
+          if (filterWrapper) filterWrapper.scrollLeft = this.scrollLeft;
           if (refs.fixedBodyWrapper) refs.fixedBodyWrapper.scrollTop = this.scrollTop;
           if (refs.rightFixedBodyWrapper) refs.rightFixedBodyWrapper.scrollTop = this.scrollTop;
         });
 
         const scrollBodyWrapper = event => {
-          const { deltaX, deltaY } = event;
-
-          if (Math.abs(deltaX) < Math.abs(deltaY)) return;
+          const deltaX = event.deltaX;
 
           if (deltaX > 0) {
             this.bodyWrapper.scrollLeft += 10;
-          } else if (deltaX < 0) {
+          } else {
             this.bodyWrapper.scrollLeft -= 10;
           }
         };
@@ -272,6 +314,9 @@
         }
         if (footerWrapper) {
           mousewheel(footerWrapper, throttle(16, scrollBodyWrapper));
+        }
+        if (filterWrapper) {
+          mousewheel(filterWrapper, throttle(16, scrollBodyWrapper));
         }
 
         if (this.fit) {
@@ -294,9 +339,6 @@
           } else if (this.shouldUpdateHeight) {
             this.layout.updateHeight();
           }
-          if (this.$el) {
-            this.isHidden = this.$el.clientWidth === 0;
-          }
         });
       }
     },
@@ -307,6 +349,7 @@
     },
 
     computed: {
+
       bodyWrapper() {
         return this.$refs.bodyWrapper;
       },
@@ -341,9 +384,16 @@
         let style = {};
 
         if (this.height) {
-          style = {
-            height: this.layout.bodyHeight ? this.layout.bodyHeight + 'px' : ''
-          };
+          // 根据筛选开关状态来动态改变table内容的高度
+          if (this.advanced) {
+            style = {
+              height: this.layout.bodyHeight ? this.layout.bodyHeight - 40 + 'px' : ''
+            };
+          } else {
+            style = {
+              height: this.layout.bodyHeight ? this.layout.bodyHeight + 'px' : ''
+            };
+          }
         } else if (this.maxHeight) {
           style = {
             'max-height': (this.showHeader
@@ -360,12 +410,31 @@
         return bodyWidth ? bodyWidth - (scrollY ? gutterWidth : 0) + 'px' : '';
       },
 
-      fixedBodyHeight() {
+      fixedHeight() {
         let style = {};
+
+        if (this.maxHeight) {
+          style = {
+            bottom: (this.layout.scrollX && this.data.length) ? this.layout.gutterWidth + 'px' : ''
+          };
+        } else {
+          style = {
+            height: this.layout.viewportHeight ? this.layout.viewportHeight + 'px' : ''
+          };
+        }
+
+        return style;
+      },
+
+      // 固定列样式
+      fixedStyle() {
+        let style = {};
+        let n = this.advanced ? 40 : 0;
 
         if (this.height) {
           style = {
-            height: this.layout.fixedBodyHeight ? this.layout.fixedBodyHeight + 'px' : ''
+            height: this.layout.fixedBodyHeight ? this.layout.fixedBodyHeight - n + 'px' : '',
+            top: this.layout.headerHeight + n + 'px'
           };
         } else if (this.maxHeight) {
           let maxHeight = this.layout.scrollX ? this.maxHeight - this.layout.gutterWidth : this.maxHeight;
@@ -382,26 +451,40 @@
         return style;
       },
 
-      fixedHeight() {
-        let style = {};
+      // 如果左侧有操作按钮，则向该数组开头插入一个空字符串
+      newFilterHead() {
 
-        if (this.maxHeight) {
-          style = {
-            bottom: (this.layout.scrollX && this.data.length) ? this.layout.gutterWidth + 'px' : ''
-          };
+        // 筛选过滤
+        let arr = this.filterHead.filter(item => {
+          return this.filterArray.indexOf(item.attr) === -1;
+        });
+        if (this.hasListMenu) {
+          let a = [''];
+          return a.concat(arr);
         } else {
-          style = {
-            height: this.layout.viewportHeight ? this.layout.viewportHeight + 'px' : ''
-          };
+          return arr;
         }
-
-        return style;
       }
     },
 
     watch: {
       height(value) {
         this.layout.setHeight(value);
+
+        // 监测table是否有纵向滚动条
+        clearTimeout(lazy);
+        lazy = setTimeout(() => {
+          let tbHeight = this.$refs.tableBody.$el.offsetHeight;
+          if (tbHeight > value) {
+            this.fixedMinHeight = {
+              'min-height': (value - 1) + 'px'
+            };
+          } else {
+            this.fixedMinHeight = {
+              'min-height': 0
+            };
+          }
+        }, 50);
       },
 
       currentRowKey(newVal) {
@@ -418,6 +501,15 @@
 
       expandRowKeys(newVal) {
         this.store.setExpandRowKeys(newVal);
+      },
+
+      // 由于showSummary的条件是异步绑定的，所以导致this.$refs.footerWrapper 无法被获取，这里重新执行绑定事件
+      showSummary(bol) {
+        if (bol) {
+          this.$nextTick(() => {
+            this.bindEvents();
+          });
+        }
       }
     },
 
@@ -457,10 +549,26 @@
       return {
         store,
         layout,
-        isHidden: false,
         renderExpanded: null,
-        resizeProxyVisible: false
+        resizeProxyVisible: false,
+        // 兼容滚动条bug
+        fixedMinHeight: {
+          'min-height': 0
+        }
       };
     }
   };
 </script>
+
+<style>
+  .v-table-filter {
+    width: 100%;
+    overflow: hidden;
+  }
+  .v-fixed-table-filter {
+    position: absolute;
+    left: 0;
+    top: 40px;
+    z-index: 3;
+  }
+</style>

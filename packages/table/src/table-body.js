@@ -1,13 +1,12 @@
 import { getCell, getColumnByCell, getRowIdentity } from './util';
 import { hasClass, addClass, removeClass } from 'element-ui/src/utils/dom';
 import ElCheckbox from 'element-ui/packages/checkbox';
-import ElTooltip from 'element-ui/packages/tooltip';
+// import ElTooltip from 'element-ui/packages/tooltip';
 import debounce from 'throttle-debounce/debounce';
 
 export default {
   components: {
-    ElCheckbox,
-    ElTooltip
+    ElCheckbox
   },
 
   props: {

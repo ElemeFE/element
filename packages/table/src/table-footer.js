@@ -23,7 +23,7 @@ export default {
         sums[index] = values.reduce((prev, curr) => {
           const value = Number(curr);
           if (!isNaN(value)) {
-            return parseFloat((prev + curr).toFixed(Math.min(precision, 20)));
+            return parseFloat((prev + curr).toFixed(precision));
           } else {
             return prev;
           }
@@ -61,11 +61,13 @@ export default {
                 colspan={ column.colSpan }
                 rowspan={ column.rowSpan }
                 class={ [column.id, column.headerAlign, column.className || '', this.isCellHidden(cellIndex, this.columns) ? 'is-hidden' : '', !column.children ? 'is-leaf' : '', column.labelClassName] }>
-                <div class={ ['cell', column.labelClassName] }>
-                {
-                  this.summaryMethod ? this.summaryMethod({ columns: this.columns, data: this.store.states.data })[cellIndex] : sums[cellIndex]
-                }
-                </div>
+                <el-tooltip effect={ this.table.tooltipEffect } placement="top" ref="tooltip" content={ this.summaryMethod ? this.summaryMethod({ columns: this.columns, data: this.store.states.data })[cellIndex] : sums[cellIndex] }>
+                  <div class={ ['cell', column.labelClassName] }>
+                  {
+                    this.summaryMethod ? this.summaryMethod({ columns: this.columns, data: this.store.states.data })[cellIndex] : sums[cellIndex]
+                  }
+                  </div>
+                </el-tooltip>
               </td>
             )
           }
@@ -103,6 +105,10 @@ export default {
   },
 
   computed: {
+    table() {
+      return this.$parent;
+    },
+    
     isAllSelected() {
       return this.store.states.isAllSelected;
     },
