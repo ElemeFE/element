@@ -4,7 +4,7 @@
       v-show="showPopper"
       class="el-autocomplete-suggestion"
       :class="{ 'is-loading': parent.loading }"
-      :style="{ width: dropdownWidth }"
+      :style="{ minWidth: dropdownWidth }"
     >
       <el-scrollbar
         tag="ul"
@@ -52,6 +52,9 @@
     },
 
     props: {
+      placement: {
+        default: 'bottom-start'
+      },
       props: Object,
       suggestions: Array,
       options: {
