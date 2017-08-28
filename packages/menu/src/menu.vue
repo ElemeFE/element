@@ -164,7 +164,7 @@
         }
         this.openedMenus.push(index);
       },
-      closeMenu(index, indexPath) {
+      closeMenu(index) {
         this.openedMenus.splice(this.openedMenus.indexOf(index), 1);
       },
       handleSubmenuClick(submenu) {
@@ -172,7 +172,7 @@
         let isOpened = this.openedMenus.indexOf(index) !== -1;
 
         if (isOpened) {
-          this.closeMenu(index, indexPath);
+          this.closeMenu(index);
           this.$emit('close', index, indexPath);
         } else {
           this.openMenu(index, indexPath);
