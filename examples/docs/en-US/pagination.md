@@ -199,7 +199,7 @@ Add more modules based on your scenario.
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |--------------------|----------------------------------------------------------|-------------------|-------------|--------|
 | small              |   whether to use small pagination    | boolean |      —       | false |
-| page-size              | item count of each page  | number |      —       | 10 |
+| page-size              | item count of each page, supports the .sync modifier  | number |      —       | 10 |
 | total | total item count | number | — | — |
 | page-count | total page count. Set either `total` or `page-count` and pages will be displayed; if you need `page-sizes`, `total` is required | number | — | — |
 | current-page | current page number, supports the .sync modifier | number | — | 1 |
