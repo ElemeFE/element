@@ -45,7 +45,7 @@
       });
       /* istanbul ignore next */
       this.$on('el.form.removeField', (field) => {
-        if (field.prop) {
+        if (field.prop && this.fields.indexOf(field) > -1) {
           this.fields.splice(this.fields.indexOf(field), 1);
         }
       });
