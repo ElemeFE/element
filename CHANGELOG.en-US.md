@@ -1,5 +1,34 @@
 ## Changelog
 
+### 1.4.3
+
+*2017-08-25*
+
+- Fixed style bug when Progress's `percentage` is `0`, #6551 @Kingwl
+- Fixed Carousel items flashing when switching, #6394
+- Fixed disabled Button not prevent event propagation when clicked on its text area, #6421
+- Fixed disabled dates calculation in DatePicker's month view, #6363
+- Fixed key enter event being stopped propagation in Autocomplete, #6499 @leezng
+- Fixed `amPm` not supported in DatePicker i18n, #6574
+- Fixed clicking or dragging error of Slider when it switches from invisible to visible, #6593
+- Fixed Alert using small icons when its `description` is passed via default slot, #6612 @leezng
+
+### 1.4.2
+
+*2017-08-09*
+
+- Fixed Select marking option of `value` equal to `0` as selected when the initial value is null and bound to an object-typed value, #6143
+- Fixed Step style issue when `status` is `error`, #6155 @wacky6
+- Fixed Cascader selecting parent item when moving mouse quickly after clicking a leaf item, #6199
+- Fixed Menu not hiding submenus when collapsed, #6200
+- Fixed status of the inner native input of Switch not syncing with the component, #6205 @wacky6
+- Fixed wrong button positioning of Slider after window is resized, #6263
+- Fixed Autocomplete not hiding dropdown menu on blur, #6256
+- Fixed hitting enter on jumper of Pagination not trigger page change event in IE, #6306 @qingdengyue
+- Fixed InputNumber style issue when its `size` is `large` or `small`, #6310 @JeremyWuuuuu
+- Fixed i18n failure for some texts in DatePicker, #6328
+- Fixed Slider value changing to minimum when its button is clicked, #6359
+
 ### 1.4.1
 
 *2017-07-28*

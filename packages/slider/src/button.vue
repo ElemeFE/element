@@ -138,6 +138,7 @@
       onDragging(event) {
         if (this.dragging) {
           this.displayTooltip();
+          this.$parent.resetSize();
           let diff = 0;
           if (this.vertical) {
             this.currentY = event.clientY;
@@ -169,6 +170,7 @@
       },
 
       setPosition(newPosition) {
+        if (newPosition === null) return;
         if (newPosition < 0) {
           newPosition = 0;
         } else if (newPosition > 100) {

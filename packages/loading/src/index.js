@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import loadingVue from './loading.vue';
+import { getStyle } from 'element-ui/src/utils/dom';
 import merge from 'element-ui/src/utils/merge';
 
 const LoadingConstructor = Vue.extend(loadingVue);
@@ -41,10 +42,10 @@ LoadingConstructor.prototype.close = function() {
 const addStyle = (options, parent, instance) => {
   let maskStyle = {};
   if (options.fullscreen) {
-    instance.originalPosition = document.body.style.position;
-    instance.originalOverflow = document.body.style.overflow;
+    instance.originalPosition = getStyle(document.body, 'position');
+    instance.originalOverflow = getStyle(document.body, 'overflow');
   } else if (options.body) {
-    instance.originalPosition = document.body.style.position;
+    instance.originalPosition = getStyle(document.body, 'position');
     ['top', 'left'].forEach(property => {
       let scroll = property === 'top' ? 'scrollTop' : 'scrollLeft';
       maskStyle[property] = options.target.getBoundingClientRect()[property] +
@@ -56,7 +57,7 @@ const addStyle = (options, parent, instance) => {
       maskStyle[property] = options.target.getBoundingClientRect()[property] + 'px';
     });
   } else {
-    instance.originalPosition = parent.style.position;
+    instance.originalPosition = getStyle(parent, 'position');
   }
   Object.keys(maskStyle).forEach(property => {
     instance.$el.style[property] = maskStyle[property];
@@ -86,7 +87,7 @@ const Loading = (options = {}) => {
   });
 
   addStyle(options, parent, instance);
-  if (instance.originalPosition !== 'absolute') {
+  if (instance.originalPosition !== 'absolute' && instance.originalPosition !== 'fixed') {
     parent.style.position = 'relative';
   }
   if (options.fullscreen && options.lock) {

@@ -23,7 +23,7 @@ export default {
         sums[index] = values.reduce((prev, curr) => {
           const value = Number(curr);
           if (!isNaN(value)) {
-            return parseFloat((prev + curr).toFixed(precision));
+            return parseFloat((prev + curr).toFixed(Math.min(precision, 20)));
           } else {
             return prev;
           }

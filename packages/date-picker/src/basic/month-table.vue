@@ -82,7 +82,14 @@
               break;
             }
           }
-          if ((date - nextMonth) === 0) flag = true;
+          // There is a bug of Chrome.
+          // For example:
+          // var date = new Date('1988-04-01 00:00:00') Fri Apr 01 1988 00:00:00 GMT+0800 (CST)
+          // date.setMonth(4) Sun May 01 1988 00:00:00 GMT+0900 (CDT)
+          // Sometimes the time zone will change.
+          if (date - nextMonth < 8.64e7) {
+            flag = true;
+          }
         }
 
         style.disabled = flag;

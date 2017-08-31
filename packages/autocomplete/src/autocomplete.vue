@@ -2,13 +2,7 @@
   <div class="el-autocomplete" v-clickoutside="close">
     <el-input
       ref="input"
-      :value="value"
-      :disabled="disabled"
-      :placeholder="placeholder"
-      :name="name"
-      :size="size"
-      :icon="icon"
-      :on-icon-click="onIconClick"
+      v-bind="$props"
       @compositionstart.native="handleComposition"
       @compositionupdate.native="handleComposition"
       @compositionend.native="handleComposition"
@@ -16,7 +10,7 @@
       @focus="handleFocus"
       @keydown.up.native.prevent="highlight(highlightedIndex - 1)"
       @keydown.down.native.prevent="highlight(highlightedIndex + 1)"
-      @keydown.enter.native.prevent="handleKeyEnter"
+      @keydown.enter.native="handleKeyEnter"
       @keydown.native.tab="close"
     >
       <template slot="prepend" v-if="$slots.prepend">
@@ -139,8 +133,9 @@
       close(e) {
         this.activated = false;
       },
-      handleKeyEnter() {
+      handleKeyEnter(e) {
         if (this.suggestionVisible && this.highlightedIndex >= 0 && this.highlightedIndex < this.suggestions.length) {
+          e.preventDefault();
           this.select(this.suggestions[this.highlightedIndex]);
         }
       },
