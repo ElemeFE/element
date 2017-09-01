@@ -10,6 +10,20 @@ const sortData = (data, states) => {
   return orderBy(data, states.sortProp, states.sortOrder, sortingColumn.sortMethod);
 };
 
+const filterData = (data, states) => {
+    Object.keys(states.filters).forEach((columnId) => {
+        const values = states.filters[columnId];
+        if (!values || values.length === 0) return;
+        const column = getColumnById(states, columnId);
+        if (column && column.filterMethod) {
+            data = data.filter((row) => {
+                return values.some(value => column.filterMethod.call(null, value, row));
+            });
+        }
+    });
+    return data;
+}
+
 const getKeysMap = function(array, rowKey) {
   const arrayMap = {};
   (array || []).forEach((row, index) => {
@@ -85,6 +99,8 @@ TableStore.prototype.mutations = {
   setData(states, data) {
     const dataInstanceChanged = states._data !== data;
     states._data = data;
+    data = filterData(data, states);
+    states.filteredData = data;
     states.data = sortData((data || []), states);
 
     // states.data.forEach((item) => {
@@ -159,18 +175,7 @@ TableStore.prototype.mutations = {
       filters[column.columnKey || column.id] = values;
     }
 
-    let data = states._data;
-
-    Object.keys(states.filters).forEach((columnId) => {
-      const values = states.filters[columnId];
-      if (!values || values.length === 0) return;
-      const column = getColumnById(this.states, columnId);
-      if (column && column.filterMethod) {
-        data = data.filter((row) => {
-          return values.some(value => column.filterMethod.call(null, value, row));
-        });
-      }
-    });
+    let data = filterData(states._data, states);
 
     states.filteredData = data;
     states.data = sortData(data, states);
