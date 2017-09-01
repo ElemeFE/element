@@ -11,18 +11,18 @@ const sortData = (data, states) => {
 };
 
 const filterData = (data, states) => {
-    Object.keys(states.filters).forEach((columnId) => {
-        const values = states.filters[columnId];
-        if (!values || values.length === 0) return;
-        const column = getColumnById(states, columnId);
-        if (column && column.filterMethod) {
-            data = data.filter((row) => {
-                return values.some(value => column.filterMethod.call(null, value, row));
-            });
+  Object.keys(states.filters).forEach((columnId) => {
+    const values = states.filters[columnId];
+      if (!values || values.length === 0) return;
+      const column = getColumnById(states, columnId);
+      if (column && column.filterMethod) {
+        data = data.filter((row) => {
+          return values.some(value => column.filterMethod.call(null, value, row));
+          });
         }
     });
-    return data;
-}
+  return data;
+};
 
 const getKeysMap = function(array, rowKey) {
   const arrayMap = {};
