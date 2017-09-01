@@ -131,6 +131,7 @@
       margin: 0 6px;
       box-sizing: border-box;
       transition: border .3s;
+      -moz-appearance: textfield;
 
       &::-webkit-inner-spin-button,
       &::-webkit-outer-spin-button {

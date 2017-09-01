@@ -141,6 +141,7 @@
         if (this.dragging) {
           this.isClick = false;
           this.displayTooltip();
+          this.$parent.resetSize();
           let diff = 0;
           if (this.vertical) {
             this.currentY = event.clientY;

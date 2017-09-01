@@ -391,7 +391,7 @@ multiple | whether uploading multiple files is permitted | boolean | — | —
 data | additions options of request | object | — | —
 name | key name for uploaded file | string | — | file
 with-credentials | whether cookies are sent | boolean | — |false
-show-upload-list | whether to show the uploaded file list | boolean | — | true
+show-file-list | whether to show the uploaded file list | boolean | — | true
  drag | whether to activate drag and drop mode | boolean | — | false
 accept | accepted [file types](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept), will not work when `thumbnail-mode` is `true` | string | — | —
 on-preview | hook function when clicking the uploaded files | function(file) | — | —

@@ -2,6 +2,7 @@ import Vue from 'vue';
 import merge from 'element-ui/src/utils/merge';
 import PopupManager from 'element-ui/src/utils/popup/popup-manager';
 import getScrollBarWidth from '../scrollbar-width';
+import { getStyle } from '../dom';
 
 let idSeed = 1;
 const transitions = [];
@@ -191,7 +192,8 @@ export default {
           }
           scrollBarWidth = getScrollBarWidth();
           let bodyHasOverflow = document.documentElement.clientHeight < document.body.scrollHeight;
-          if (scrollBarWidth > 0 && bodyHasOverflow) {
+          let bodyOverflowY = getStyle(document.body, 'overflowY');
+          if (scrollBarWidth > 0 && (bodyHasOverflow || bodyOverflowY === 'scroll')) {
             document.body.style.paddingRight = scrollBarWidth + 'px';
           }
           document.body.style.overflow = 'hidden';
