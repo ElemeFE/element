@@ -213,6 +213,7 @@ Selecting a range of values is supported.
 | range | whether to select a range | boolean | — | false |
 | vertical | vertical mode | boolean | — | false |
 | height | Slider height, required in vertical mode | String | — | — |
+|debounce| debounce delay when typing, in millisecond, works when `show-input` is true | number | — | 300 |
 
 ## Events
 | Event Name | Description | Parameters |
