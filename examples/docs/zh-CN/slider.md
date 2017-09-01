@@ -237,7 +237,7 @@
 | range | 是否为范围选择 | boolean | — | false |
 | vertical | 是否竖向模式 | boolean | — | false |
 | height | Slider 高度，竖向模式时必填 | String | — | — |
-| debounce | 输入时的去抖延迟，毫秒，show-input等于true时有效 | number | — | 300 |
+| debounce | 输入时的去抖延迟，毫秒，仅在`show-input`等于true时有效 | number | — | 300 |
 
 ### Events
 | 事件名称      | 说明    | 回调参数      |
