@@ -74,7 +74,7 @@ export default {
     messagebox: {
       confirm: 'Aceptar',
       cancel: 'Cancelar',
-      error: 'Entrada inválida'
+      error: 'Input inválido'
     },
     upload: {
       delete: 'Eliminar',
