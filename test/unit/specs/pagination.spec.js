@@ -219,6 +219,7 @@ describe('Pagination', () => {
       triggerEvent(input, 'change');
       setTimeout(() => {
         expect(vm.page).to.equal(10);
+        expect(input.value).to.equal('10');
 
         input.value = '我好帅';
         triggerEvent(input, 'change');
