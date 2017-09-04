@@ -230,7 +230,7 @@
         this.cachedPlaceHolder = this.currentPlaceholder = val;
       },
 
-      value(val) {
+      value(val, oldVal) {
         if (this.multiple) {
           this.resetInputHeight();
           if (val.length > 0 || (this.$refs.input && this.query !== '')) {
@@ -243,7 +243,7 @@
         if (this.filterable && !this.multiple) {
           this.inputLength = 20;
         }
-        this.$emit('change', val);
+        this.$emit('change', val, oldVal);
         this.dispatch('ElFormItem', 'el.form.change', val);
       },
 
