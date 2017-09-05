@@ -1,5 +1,14 @@
 ## Changelog
 
+### 1.4.4
+
+*2017-09-05*
+
+- Fixed all months disabled in DatePicker month view when `disabledDate` is set, #6768 @qingdengyue
+- Added `debounce` attribute for Slider, #6820 @langgo
+- Fixed value of Pagination jumper can be bigger than the total page count, #6842 @huguangju
+- Fixed TimePicker's focus slipping away when selecting hour to 23 with mouse scroll, #6719 @qingdengyue
+
 ### 1.4.3
 
 *2017-08-25*
