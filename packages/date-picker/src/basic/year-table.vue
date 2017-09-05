@@ -64,23 +64,12 @@
         const style = {};
 
         var date = new Date(0);
-        date.setFullYear(year);
+        date.setFullYear(year + 1);
         date.setHours(0);
-        var nextYear = new Date(date);
-        nextYear.setFullYear(year + 1);
-
+        date = new Date(date.getTime() - 8.64e7);
         var flag = false;
         if (typeof this.disabledDate === 'function') {
-
-          while (date < nextYear) {
-            if (this.disabledDate(date)) {
-              date = new Date(date.getTime() + 8.64e7);
-            } else {
-              break;
-            }
-          }
-          if ((date - nextYear) === 0) flag = true;
-
+            if (this.disabledDate(date)) flag = true;
         }
 
         style.disabled = flag;

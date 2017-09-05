@@ -67,23 +67,13 @@
         var year = this.date.getFullYear();
         var date = new Date(0);
         date.setFullYear(year);
-        date.setMonth(month);
+        date.setMonth(month + 1);
         date.setHours(0);
-        var nextMonth = new Date(date);
-        nextMonth.setMonth(month + 1);
+        date = new Date(n.getTime() - 8.64e7);
 
         var flag = false;
         if (typeof this.disabledDate === 'function') {
-
-          while (date < nextMonth) {
-            if (this.disabledDate(date)) {
-              date = new Date(date.getTime() + 8.64e7);
-              flag = true;
-            } else {
-              flag = false;
-              break;
-            }
-          }
+            if (this.disabledDate(date)) flag = true;
         }
 
         style.disabled = flag;
