@@ -1,5 +1,13 @@
 ## 更新日志
 
+### 1.4.4
+*2017-09-05*
+
+- 修复设置了 `disabledDate` 的 DatePicker 在月视图下全部不可选的问题，#6768 @qingdengyue
+- Slider 新增 `debounce` 属性，#6820 @langgo
+- 修复 Pagination 的 jumper 中可以输入比最大页数更大的数字的问题，#6842 @huguangju
+- 修复 TimePicker 的小时数难以通过滚动的方式选中 23 时的问题，#6719 @qingdengyue
+
 ### 1.4.3
 *2017-08-25*
 
