@@ -123,8 +123,7 @@ describe('Rate', () => {
       vm.muted = true;
       vm.$nextTick(() => {
         const thirdIcon = vm.$el.querySelectorAll('.el-rate__item')[2].querySelector('.el-rate__icon');
-        //expect(thirdIcon.style.color).to.equal('rgb(153, 153, 153)');
-        expect(thirdIcon.style.color).to.equal('rgb(0, 0, 0)');
+        expect(thirdIcon.style.color).to.equal('rgb(153, 153, 153)');
         done();
       });
     }, 10);
