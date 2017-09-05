@@ -106,9 +106,9 @@ describe('Rate', () => {
       computed: {
         colors() {
           if (this.muted) {
-            return ['#999', '#999', '#999']
+            return ['#999', '#999', '#999'];
           } else {
-            return ['#99A9BF', '#F7BA2A', '#FF9900']
+            return ['#99A9BF', '#F7BA2A', '#FF9900'];
           }
         }
       },
