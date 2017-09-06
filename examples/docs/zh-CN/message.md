@@ -64,6 +64,13 @@
         });
       },
 
+      openCenter() {
+        this.$message({
+          message: '居中的文字',
+          center: true
+        });
+      },
+
       openHTML() {
         this.$message({
           dangerouslyUseHTMLString: true,
@@ -206,6 +213,31 @@
 ```
 :::
 
+### 文字居中
+使用 `center` 属性让文字水平居中
+
+:::demo
+
+```html
+<template>
+  <el-button :plain="true" @click="openCenter">文字居中</el-button>
+</template>
+
+<script>
+  export default {
+    methods: {
+      openCenter() {
+        this.$message({
+          message: '居中的文字',
+          center: true
+        });
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### 使用 HTML 片段
 `message` 属性支持传入 HTML 片段
 
@@ -259,6 +291,7 @@ import { Message } from 'element-ui';
 | customClass | 自定义类名 | string | — | — |
 | duration | 显示时间, 毫秒。设为 0 则不会自动关闭 | number | — | 3000 |
 | showClose | 是否显示关闭按钮 | boolean | — | false |
+| center | 文字是否居中 | boolean | — | false |
 | onClose | 关闭时的回调函数, 参数为被关闭的 message 实例 | function | — | — |
 
 ### 方法

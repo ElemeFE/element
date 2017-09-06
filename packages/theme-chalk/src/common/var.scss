@@ -259,10 +259,11 @@ $--msgbox-danger-color: $--color-danger;
 /* Message
 -------------------------- */
 $--message-shadow: $--box-shadow-base;
-$--message-min-width: 300px;
-$--message-padding: 10px 12px;
+$--message-min-width: 380px;
+$--message-padding: 15px 15px 15px 20px;
 $--message-content-color: $--color-text-regular;
 $--message-close-color: $--color-text-placeholder;
+$--message-close-size: 12px;
 $--message-close-hover-color: $--color-text-secondary;
 
 $--message-success-color: $--color-success;
