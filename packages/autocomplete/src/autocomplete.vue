@@ -8,6 +8,7 @@
       @compositionend.native="handleComposition"
       @change="handleChange"
       @focus="handleFocus"
+      @blur="handleBlur"
       @keydown.up.native.prevent="highlight(highlightedIndex - 1)"
       @keydown.down.native.prevent="highlight(highlightedIndex + 1)"
       @keydown.enter.native="handleKeyEnter"
@@ -124,11 +125,15 @@
         }
         this.getData(value);
       },
-      handleFocus() {
+      handleFocus(event) {
+        this.$emit('focus', event);
         this.activated = true;
         if (this.triggerOnFocus) {
           this.getData(this.value);
         }
+      },
+      handleBlur(event) {
+        this.$emit('blur', event);
       },
       close(e) {
         this.activated = false;
