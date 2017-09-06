@@ -216,7 +216,7 @@ We provide four types: success, warning, info and error.
 ```
 :::
 
-### Custom Position
+### Custom position
 
 Notification can emerge from any corner you like.
 
@@ -314,7 +314,7 @@ Customize Notification's offset from the edge of the screen.
 ```
 :::
 
-### Use HTML String
+### Use HTML string
 `message` supports HTML string.
 
 ::: demo Set `dangerouslyUseHTMLString` to true and `message` will be treated as an HTML string.

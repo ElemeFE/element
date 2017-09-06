@@ -1,32 +1,31 @@
 <template>
   <transition name="el-message-fade">
     <div
-      class="el-message"
-      :class="customClass"
+      :class="[
+        'el-message',
+        type && !iconClass ? `el-message--${ type }` : '',
+        center ? 'is-center' : '',
+        customClass]"
       v-show="visible"
       @mouseenter="clearTimer"
       @mouseleave="startTimer">
-      <div :class="iconWrapClass">
-        <i :class="iconClass" v-if="iconClass"></i>
-        <i :class="typeClass" v-else></i>
-      </div>
-      <div class="el-message__group">
-        <slot>
-          <p v-if="!dangerouslyUseHTMLString">{{ message }}</p>
-          <p v-else v-html="message"></p>
-        </slot>
-        <div v-if="showClose" class="el-message__closeBtn el-icon-close" @click="close"></div>
-      </div>
+      <i :class="iconClass" v-if="iconClass"></i>
+      <i :class="typeClass" v-else></i>
+      <slot>
+        <p v-if="!dangerouslyUseHTMLString" class="el-message__content">{{ message }}</p>
+        <p v-else v-html="message" class="el-message__content"></p>
+      </slot>
+      <i v-if="showClose" class="el-message__closeBtn el-icon-close" @click="close"></i>
     </div>
   </transition>
 </template>
 
 <script type="text/babel">
   const typeMap = {
-    success: 'circle-check',
-    info: 'information',
+    success: 'success',
+    info: 'info',
     warning: 'warning',
-    error: 'circle-cross'
+    error: 'error'
   };
 
   export default {
@@ -42,7 +41,8 @@
         showClose: false,
         closed: false,
         timer: null,
-        dangerouslyUseHTMLString: false
+        dangerouslyUseHTMLString: false,
+        center: false
       };
     },
 
@@ -57,7 +57,7 @@
 
       typeClass() {
         return this.type && !this.iconClass
-          ? `el-message__type el-icon-${ typeMap[this.type] }-plain`
+          ? `el-message__icon el-icon-${ typeMap[this.type] }`
           : '';
       }
     },

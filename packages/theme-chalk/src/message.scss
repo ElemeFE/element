@@ -2,90 +2,97 @@
 @import "common/var";
 
 @include b(message) {
-  box-shadow: $--message-shadow;
   min-width: $--message-min-width;
   box-sizing: border-box;
-  border-radius: $--border-radius-small;
+  border-radius: $--border-radius-base;
+  border-width: $--border-width-base;
+  border-style: $--border-style-base;
+  border-color: $--border-color-lighter;
   position: fixed;
   left: 50%;
   top: 20px;
   transform: translateX(-50%);
-  background-color: $--color-white;
+  background-color: $--border-color-extra-light;
   transition: opacity 0.3s, transform .4s;
   overflow: hidden;
+  padding: $--message-padding;
+  display: flex;
+  align-items: center;
 
-  @include e(group) {
-    margin-left: 40px;
-    position: relative;
-    height: 20px;
-    line-height: 20px;
-    display: flex;
-    align-items: center;
-    padding: $--message-padding;
+  @include when(center) {
+    justify-content: center;
+  }
 
-    & p {
-      font-size: $--font-size-base;
-      margin: 0 34px 0 0;
-      white-space: nowrap;
-      color: $--message-content-color;
-      text-align: justify;
+  p {
+    margin: 0;
+  }
+
+  @include m(info) {
+    .el-message__content {
+      color: $--message-info-color;
+    }
+  }
+
+  @include m(success) {
+    background-color: $--color-success-lighter;
+    border-color: $--color-success-light;
+
+    .el-message__content {
+      color: $--message-success-color;
+    }
+  }
+
+  @include m(warning) {
+    background-color: $--color-warning-lighter;
+    border-color: $--color-warning-light;
+
+    .el-message__content {
+      color: $--message-warning-color;
+    }
+  }
+
+  @include m(error) {
+    background-color: $--color-danger-lighter;
+    border-color: $--color-danger-light;
+
+    .el-message__content {
+      color: $--message-danger-color;
     }
   }
 
   @include e(icon) {
-    height: 40px;
-    width: 40px;
-    display: inline-block;
-    float: left;
-    text-align: center;
+    margin-right: 10px;
+  }
 
-    i {
-      line-height: 40px;
-
-      &.el-message__type {
-        color: $--color-white;
-      }
-    }
-
-    @include m(info) {
-      background-color: $--color-info;
-    }
-
-    @include m(warning) {
-      background-color: $--color-warning;
-    }
-
-    @include m(error) {
-      background-color: $--color-danger;
-    }
-
-    @include m(success) {
-      background-color: $--color-success;
-    }
+  @include e(content) {
+    padding: 0;
+    font-size: 14px;
+    line-height: 1;
   }
 
   @include e(closeBtn) {
     position: absolute;
-    top: 13px;
-    right: 12px;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
     cursor: pointer;
     color: $--message-close-color;
-    font-size: $--font-size-base;
+    font-size: $--message-close-size;
 
     &:hover {
       color: $--message-close-hover-color;
     }
   }
 
-  & .el-icon-circle-check {
+  & .el-icon-success {
     color: $--message-success-color;
   }
 
-  & .el-icon-circle-cross {
+  & .el-icon-error {
     color: $--message-danger-color;
   }
 
-  & .el-icon-information {
+  & .el-icon-info {
     color: $--message-info-color;
   }
 

@@ -64,6 +64,13 @@
         });
       },
 
+      openCenter() {
+        this.$message({
+          message: 'Centered text',
+          center: true
+        });
+      },
+
       openHTML() {
         this.$message({
           dangerouslyUseHTMLString: true,
@@ -206,7 +213,32 @@ A close button can be added.
 ```
 :::
 
-### Use HTML String
+### Centered text
+Use the `center` attribute to center the text
+
+:::demo
+
+```html
+<template>
+  <el-button :plain="true" @click="openCenter">Centered text</el-button>
+</template>
+
+<script>
+  export default {
+    methods: {
+      openCenter() {
+        this.$message({
+          message: 'Centered text',
+          center: true
+        });
+      }
+    }
+  }
+</script>
+```
+:::
+
+### Use HTML string
 `message` supports HTML string.
 
 :::demo Set `dangerouslyUseHTMLString` to true and `message` will be treated as an HTML string.
@@ -259,6 +291,7 @@ You can call `Message.closeAll()` to manually close all the instances.
 | customClass | custom class name for Message | string | — | — |
 | duration | display duration, millisecond. If set to 0, it will not turn off automatically | number | — | 3000 |
 | showClose | whether to show a close button | boolean | — | false |
+| center | whether to center the text | boolean | — | false |
 | onClose | callback function when closed with the message instance as the parameter | function | — | — |
 
 ### Methods
