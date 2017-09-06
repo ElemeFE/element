@@ -114,7 +114,7 @@
           'el-tabs': true,
           'el-tabs--card': type === 'card',
           'el-tabs--border-card': type === 'border-card'
-        }}>
+        }} style="clear:both;">
           <div class="el-tabs__header">
             {newButton}
             <tab-nav { ...navData }></tab-nav>
