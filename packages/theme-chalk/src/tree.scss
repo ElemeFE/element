@@ -4,7 +4,7 @@
 @include b(tree) {
   cursor: default;
   background: $--color-white;
-  border: 1px solid $--color-black;
+  color: $--tree-text-color;
 
   @include e(empty-block) {
     position: relative;
@@ -27,40 +27,34 @@
   white-space: nowrap;
 
   @include e(content) {
-    line-height: 36px;
-    height: 36px;
+    display: flex;
+    align-items: center;
+    height: 26px;
     cursor: pointer;
 
-    & > .el-checkbox,
     & > .el-tree-node__expand-icon {
-      margin-right: 8px;
+      margin: 0 8px;
     }
     & > .el-checkbox {
-      vertical-align: middle;
+      margin-right: 8px;
     }
     &:hover {
-      background: $--color-black;
+      background-color: $--tree-node-hover-color;
     }
   }
 
   @include e(expand-icon) {
-    display: inline-block;
     cursor: pointer;
     width: 0;
     height: 0;
-    vertical-align: middle;
     margin-left: 10px;
-    border: 6px solid transparent;
+    border: 3.5px solid transparent;
     border-right-width: 0;
-    border-left-color: $--color-black;
-    border-left-width: 7px;
+    border-left-color: $--tree-expand-icon-color;
+    border-left-width: 6px;
 
     transform: rotate(0deg);
     transition: transform 0.3s ease-in-out;
-
-    &:hover {
-      border-left-color: #999;
-    }
 
     &.expanded {
       transform: rotate(90deg);
@@ -74,16 +68,12 @@
 
   @include e(label) {
     font-size: $--font-size-base;
-    vertical-align: middle;
-    display: inline-block;
   }
 
   @include e(loading-icon) {
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 4px;
+    margin-right: 8px;
     font-size: $--font-size-base;
-    color: $--color-black;
+    color: $--tree-expand-icon-color;
   }
 
   & > .el-tree-node__children {
