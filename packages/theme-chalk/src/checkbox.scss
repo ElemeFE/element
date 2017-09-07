@@ -114,6 +114,7 @@
           border-color: $--checkbox-disabled-checked-input-border-color;
 
           &::before {
+            background-color: $--checkbox-disabled-checked-icon-color;
             border-color: $--checkbox-disabled-checked-icon-color;
           }
         }
