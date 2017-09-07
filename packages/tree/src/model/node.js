@@ -132,7 +132,7 @@ export default class Node {
       this.expand(null, store.autoExpandParent);
     }
 
-    if (key && store.currentNodeKey && this.key === store.currentNodeKey) {
+    if (key && store.currentNodeKey !== undefined && this.key === store.currentNodeKey) {
       store.currentNode = this;
     }
 
