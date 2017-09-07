@@ -278,16 +278,20 @@ $--message-danger-color: $--color-danger;
 /* Notification
 -------------------------- */
 $--notification-width: 330px;
-$--notification-padding: 20px;
-$--notification-shadow: $--box-shadow-base;
-$--notification-icon-size: 40px;
+$--notification-padding: 14px 26px 14px 13px;
+$--notification-raduis: 8px;
+$--notification-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
+$--notification-border-color: $--border-color-lighter;
+$--notification-icon-size: 24px;
+$--notification-close-font-size: 12px;
+$--notification-group-margin: 13px;
 $--notification-font-size: $--font-size-base;
-$--notification-color: $--border-color-hover;
+$--notification-color: $--color-text-regular;
 $--notification-title-font-size: 16px;
 $--notification-title-color: $--color-text-primary;
 
-$--notification-close-color: $--color-text-placeholder;
-$--notification-close-hover-color: $--color-text-secondary;
+$--notification-close-color: $--color-text-secondary;
+$--notification-close-hover-color: $--color-text-regular;
 
 $--notification-success-color: $--color-success;
 $--notification-info-color: $--color-info;
