@@ -116,7 +116,7 @@ class TableLayout {
         bodyMinWidth += column.width || column.minWidth || 80;
       });
 
-      if (bodyMinWidth < bodyWidth - this.gutterWidth) { // DON'T HAVE SCROLL BAR
+      if (bodyMinWidth < bodyWidth) { // DON'T HAVE SCROLL BAR
         this.scrollX = false;
 
         let totalFlexWidth = bodyWidth - bodyMinWidth;
