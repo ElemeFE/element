@@ -111,7 +111,7 @@
       handleComposition(event) {
         if (event.type === 'compositionend') {
           this.isOnComposition = false;
-          this.handleChange(this.value);
+          this.handleChange(event.target.value);
         } else {
           this.isOnComposition = true;
         }
