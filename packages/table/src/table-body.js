@@ -114,7 +114,7 @@ export default {
       const newRow = rows[data.indexOf(newVal)];
       if (oldRow) {
         removeClass(oldRow, 'current-row');
-      } else if (rows) {
+      } else {
         [].forEach.call(rows, row => removeClass(row, 'current-row'));
       }
       if (newRow) {
