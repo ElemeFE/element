@@ -24,13 +24,14 @@ LoadingConstructor.prototype.close = function() {
   }
   if (this.fullscreen || this.body) {
     document.body.style.position = this.originalPosition;
-  } else {
-    this.target.style.position = this.originalPosition;
-  }
+  } 
   if (this.fullscreen) {
     fullscreenLoading = undefined;
   }
   this.$on('after-leave', _ => {
+    if (!this.fullscreen || !this.body) {
+      this.target.style.position = this.originalPosition;
+    }
     this.$el &&
     this.$el.parentNode &&
     this.$el.parentNode.removeChild(this.$el);
