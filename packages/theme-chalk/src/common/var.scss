@@ -616,14 +616,13 @@ $--carousel-indicator-out-color: $--border-color-hover;
 
 /* Collapse
 --------------------------*/
-$--collapse-border-color: $--border-color-base;
-$--collapse-header-height: 43px;
-$--collapse-border-radius: 0;
+$--collapse-border-color: $--border-color-lighter;
+$--collapse-header-height: 48px;
 $--collapse-header-padding: 20px;
 $--collapse-header-fill: $--color-white;
-$--collapse-header-color: $--color-text-placeholder;
+$--collapse-header-color: $--color-text-primary;
 $--collapse-header-size: 13px;
-$--collapse-content-fill: $--color-text-secondary;
+$--collapse-content-fill: $--color-white;
 $--collapse-content-size: 13px;
 $--collapse-content-color: $--color-text-primary;
 
