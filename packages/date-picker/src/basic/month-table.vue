@@ -78,11 +78,12 @@
           while (date < nextMonth) {
             if (this.disabledDate(date)) {
               date = new Date(date.getTime() + 8.64e7);
+              flag = true;
             } else {
+              flag = false;
               break;
             }
           }
-          if ((date - nextMonth) === 0) flag = true;
         }
 
         style.disabled = flag;

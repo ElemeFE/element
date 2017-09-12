@@ -132,7 +132,7 @@
         }
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
-          this.rootMenu.closeMenu(this.index, this.indexPath);
+          this.rootMenu.closeMenu(this.index);
         }, 300);
       }
     },

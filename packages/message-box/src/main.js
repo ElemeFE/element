@@ -158,6 +158,8 @@ MessageBox.alert = (message, title, options) => {
   if (typeof title === 'object') {
     options = title;
     title = '';
+  } else if (title === undefined) {
+    title = '';
   }
   return MessageBox(merge({
     title: title,
@@ -172,6 +174,8 @@ MessageBox.confirm = (message, title, options) => {
   if (typeof title === 'object') {
     options = title;
     title = '';
+  } else if (title === undefined) {
+    title = '';
   }
   return MessageBox(merge({
     title: title,
@@ -184,6 +188,8 @@ MessageBox.confirm = (message, title, options) => {
 MessageBox.prompt = (message, title, options) => {
   if (typeof title === 'object') {
     options = title;
+    title = '';
+  } else if (title === undefined) {
     title = '';
   }
   return MessageBox(merge({

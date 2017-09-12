@@ -32,7 +32,6 @@
     data() {
       return {
         classMap: {},
-        colorMap: {},
         pointerAtLeftHalf: true,
         currentValue: this.value,
         hoverIndex: -1
@@ -153,6 +152,16 @@
         return this.getValueFromMap(this.currentValue, this.classMap);
       },
 
+      colorMap() {
+        return {
+          lowColor: this.colors[0],
+          mediumColor: this.colors[1],
+          highColor: this.colors[2],
+          voidColor: this.voidColor,
+          disabledVoidColor: this.disabledVoidColor
+        };
+      },
+
       activeColor() {
         return this.getValueFromMap(this.currentValue, this.colorMap);
       },
@@ -266,13 +275,6 @@
         highClass: this.iconClasses[2],
         voidClass: this.voidIconClass,
         disabledVoidClass: this.disabledVoidIconClass
-      };
-      this.colorMap = {
-        lowColor: this.colors[0],
-        mediumColor: this.colors[1],
-        highColor: this.colors[2],
-        voidColor: this.voidColor,
-        disabledVoidColor: this.disabledVoidColor
       };
     }
   };
