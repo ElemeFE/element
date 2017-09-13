@@ -54,7 +54,6 @@
       :class="{ 'is-focus': visible }"
       @focus="handleFocus"
       @blur="handleBlur"
-      @click="handleIconClick"
       @mousedown.native="handleMouseDown"
       @keyup.native="debouncedOnInputChange"
       @keydown.native.down.prevent="navigateOptions('next')"
@@ -64,8 +63,11 @@
       @keydown.native.tab="visible = false"
       @paste.native="debouncedOnInputChange"
       @mouseenter.native="inputHovering = true"
-      @mouseleave.native="inputHovering = false"
-      :icon="iconClass">
+      @mouseleave.native="inputHovering = false">
+      <i slot="suffix"
+       :class="['el-input__icon', 'el-icon-' + iconClass]"
+       @click="handleIconClick"
+      ></i>
     </el-input>
     <transition
       name="el-zoom-in-top"

@@ -6,7 +6,9 @@
       'is-disabled': disabled,
       'el-input-group': $slots.prepend || $slots.append,
       'el-input-group--append': $slots.append,
-      'el-input-group--prepend': $slots.prepend
+      'el-input-group--prepend': $slots.prepend,
+      'el-input--prefix': $slots.prefix || prefixIcon,
+      'el-input--suffix': $slots.suffix || suffixIcon
     }
   ]">
     <template v-if="type !== 'textarea'">
@@ -14,17 +16,14 @@
       <div class="el-input-group__prepend" v-if="$slots.prepend">
         <slot name="prepend"></slot>
       </div>
-      <!-- input 图标 -->
-      <slot name="icon">
+      <!-- 前置内容 -->
+      <span class="el-input__prefix" v-if="$slots.prefix || prefixIcon">
+        <slot name="prefix"></slot>
         <i class="el-input__icon"
-          :class="[
-            'el-icon-' + icon,
-            onIconClick ? 'is-clickable' : ''
-          ]"
-          v-if="icon"
-          @click="handleIconClick">
+          v-if="prefixIcon"
+          :class="['el-icon-' + prefixIcon]">
         </i>
-      </slot>
+      </span>
       <input
         v-if="type !== 'textarea'"
         class="el-input__inner"
@@ -36,7 +35,14 @@
         @focus="handleFocus"
         @blur="handleBlur"
       >
-      <i class="el-input__icon el-icon-loading" v-if="validating"></i>
+      <!-- 后置内容 -->
+      <span class="el-input__suffix" v-if="$slots.suffix || suffixIcon">
+        <slot name="suffix"></slot>
+        <i class="el-input__icon"
+          v-if="suffixIcon"
+          :class="['el-icon-' + suffixIcon]">
+        </i>
+      </span>
       <!-- 后置元素 -->
       <div class="el-input-group__append" v-if="$slots.append">
         <slot name="append"></slot>
@@ -111,7 +117,9 @@
         type: Boolean,
         default: true
       },
-      onIconClick: Function
+      onIconClick: Function,
+      suffixIcon: String,
+      prefixIcon: String
     },
 
     computed: {
@@ -156,12 +164,6 @@
         this.$emit('input', value);
         this.setCurrentValue(value);
         this.$emit('change', value);
-      },
-      handleIconClick(event) {
-        if (this.onIconClick) {
-          this.onIconClick(event);
-        }
-        this.$emit('click', event);
       },
       setCurrentValue(value) {
         if (value === this.currentValue) return;

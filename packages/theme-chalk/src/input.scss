@@ -38,14 +38,53 @@
     }
   }
 
-  @include e(icon) {
+  @include e(suffix) {
     position: absolute;
-    width: 35px;
     height: 100%;
     right: 0;
     top: 0;
     text-align: center;
     color: $--input-icon-color;
+    transition: all .3s;
+
+    // @include when(clickable) {
+    //   &:hover {
+    //     cursor: pointer;
+    //     color: $--input-hover-border;
+
+    //     & + .el-input__inner {
+    //       border-color: $--input-hover-border;
+    //     }
+    //   }
+    // }
+  }
+
+  @include e(prefix) {
+    position: absolute;
+    height: 100%;
+    left: 0;
+    top: 0;
+    text-align: center;
+    color: $--input-icon-color;
+    transition: all .3s;
+
+    // @include when(clickable) {
+    //   &:hover {
+    //     cursor: pointer;
+    //     color: $--input-hover-border;
+
+    //     & + .el-input__inner {
+    //       border-color: $--input-hover-border;
+    //     }
+    //   }
+    // }
+  }
+
+  @include e(icon) {
+    height: 100%;
+    width: 30px;
+    text-align: center;
+    // color: $--input-icon-color;
     transition: all .3s;
 
     &:after {
@@ -54,21 +93,6 @@
       width: 0;
       display: inline-block;
       vertical-align: middle;
-    }
-
-    & + .el-input__inner {
-      padding-right: 35px;
-    }
-
-    @include when(clickable) {
-      &:hover {
-        cursor: pointer;
-        color: $--input-hover-border;
-
-        & + .el-input__inner {
-          border-color: $--input-hover-border;
-        }
-      }
     }
   }
 
@@ -93,6 +117,16 @@
 
     .el-input__icon {
       cursor: not-allowed;
+    }
+  }
+  @include m(suffix) {
+    .el-input__inner {
+      padding-right: 30px;
+    }
+  }
+  @include m(prefix) {
+    .el-input__inner {
+      padding-left: 30px;
     }
   }
   @include m(large) {

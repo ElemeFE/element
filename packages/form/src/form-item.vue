@@ -2,6 +2,7 @@
   <div class="el-form-item" :class="{
     'is-error': validateState === 'error',
     'is-validating': validateState === 'validating',
+    'is-success': validateState === 'success',
     'is-required': isRequired || required
   }">
     <label :for="prop" class="el-form-item__label" v-bind:style="labelStyle" v-if="label || $slots.label">
