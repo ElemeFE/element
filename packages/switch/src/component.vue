@@ -1,6 +1,5 @@
 <template>
-  <label class="el-switch" :class="{ 'is-disabled': disabled, 'el-switch--wide': hasText, 'is-checked': checked }">
-    <div class="el-switch__mask" v-show="disabled"></div>
+  <label class="el-switch" :class="{ 'is-disabled': disabled, 'is-checked': checked }">
     <input
       class="el-switch__input"
       type="checkbox"
@@ -10,27 +9,21 @@
       :true-value="onValue"
       :false-value="offValue"
       :disabled="disabled">
+    <span
+      :class="['el-switch__label', 'el-switch__label--left', !checked ? 'is-active' : '']"
+      v-if="offIconClass || offText">
+      <i :class="[offIconClass]" v-if="offIconClass"></i>
+      <span v-if="!offIconClass && offText">{{ offText }}</span>
+    </span>
     <span class="el-switch__core" ref="core" :style="{ 'width': coreWidth + 'px' }">
       <span class="el-switch__button" :style="{ transform }"></span>
     </span>
-    <transition name="label-fade">
-      <div
-        class="el-switch__label el-switch__label--left"
-        v-show="checked"
-        :style="{ 'width': coreWidth + 'px' }">
-        <i :class="[onIconClass]" v-if="onIconClass"></i>
-        <span v-if="!onIconClass && onText">{{ onText }}</span>
-      </div>
-    </transition>
-    <transition name="label-fade">
-      <div
-        class="el-switch__label el-switch__label--right"
-        v-show="!checked"
-        :style="{ 'width': coreWidth + 'px' }">
-        <i :class="[offIconClass]" v-if="offIconClass"></i>
-        <span v-if="!offIconClass && offText">{{ offText }}</span>
-      </div>
-    </transition>
+    <span
+      :class="['el-switch__label', 'el-switch__label--right', checked ? 'is-active' : '']"
+      v-if="onIconClass || onText">
+      <i :class="[onIconClass]" v-if="onIconClass"></i>
+      <span v-if="!onIconClass && onText">{{ onText }}</span>
+    </span>
   </label>
 </template>
 
@@ -58,14 +51,8 @@
         type: String,
         default: ''
       },
-      onText: {
-        type: String,
-        default: 'ON'
-      },
-      offText: {
-        type: String,
-        default: 'OFF'
-      },
+      onText: String,
+      offText: String,
       onColor: {
         type: String,
         default: ''
@@ -101,12 +88,8 @@
       checked() {
         return this.value === this.onValue;
       },
-      hasText() {
-        /* istanbul ignore next */
-        return this.onText || this.offText;
-      },
       transform() {
-        return this.checked ? `translate(${ this.coreWidth - 20 }px, 2px)` : 'translate(2px, 2px)';
+        return this.checked ? `translate3d(${ this.coreWidth - 20 }px, 0, 0)` : '';
       }
     },
     watch: {
@@ -135,9 +118,7 @@
     },
     mounted() {
       /* istanbul ignore if */
-      if (this.width === 0) {
-        this.coreWidth = this.hasText ? 58 : 46;
-      }
+      this.coreWidth = this.width || 40;
       if (this.onColor || this.offColor) {
         this.setBackgroundColor();
       }
