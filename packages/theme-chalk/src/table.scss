@@ -10,31 +10,9 @@
   width: 100%;
   max-width: 100%;
   background-color: $--color-white;
-  border: 1px solid $--table-border-color;
   font-size: 14px;
   color: $--table-text-color;
-
-  &::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 1px;
-    background-color: $--table-border-color;
-    z-index: 1;
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 1px;
-    height: 100%;
-    background-color: $--table-border-color;
-    z-index: 1;
-  }
+  font-weight: normal;
 
   .el-tooltip.cell {
     white-space: nowrap;
@@ -91,7 +69,7 @@
     box-shadow: inset 0 2px 0 #f4f4f4;
 
     &:hover {
-      background-color: $--color-black !important;
+      background-color: $--table-row-hover-background !important;
     }
   }
 
@@ -107,10 +85,11 @@
   & th {
     white-space: nowrap;
     overflow: hidden;
+    user-select: none;
   }
 
   & th, td {
-    height: 40px;
+    padding: 12px 0;
     min-width: 0;
     box-sizing: border-box;
     text-overflow: ellipsis;
@@ -149,7 +128,6 @@
   }
 
   & th {
-    background-color: $--table-header-background;
     text-align: left;
   }
 
@@ -217,7 +195,6 @@
     z-index: 3;
 
     & thead div {
-      background-color: $--table-header-background;
       color: $--table-text-color;
     }
   }
@@ -262,8 +239,8 @@
     overflow: hidden;
 
     & thead div {
-      background-color: $--table-header-background;
-      color: $--table-text-color;
+      color: $--table-header-color;
+      font-weight: normal;
     }
 
     & tbody td {
@@ -275,6 +252,8 @@
   @include e(body-wrapper) {
     overflow: auto;
     position: relative;
+
+    @include scroll-bar;
   }
 
   & th.required > div::before {
@@ -305,49 +284,59 @@
 
   & .caret-wrapper {
     position: relative;
-    cursor: pointer;
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 5px;
-    margin-top: -2px;
+    display: inline-flex;
+    align-items: center;
+    height: 12px;
     width: 16px;
-    height: 30px;
+    margin-left: 7px;
+    cursor: pointer;
     overflow: initial;
   }
 
   & .sort-caret {
-    display: inline-block;
-    width: 0;
-    height: 0;
-    border: 0;
-    content: "";
-    position: absolute;
-    left: 3px;
     z-index: 2;
+    min-width: 1px;
+    height: 8px;
+    margin: 0 1.5px;
+    color: $--icon-color-base;
+    background-color: currentColor;
+    transform: scale(1.5) translateY(-1px);
+
+    @include share-rule(sort-caret) {
+      &::after {
+        content: '';
+        position: absolute;
+        display: block;
+        width: 1px;
+        height: 4px;
+        transform-origin: 0 0;
+        transform: rotate(40deg);
+        background-color: currentColor;
+      }
+    }
 
     &.ascending {
-      top: 9px;
-      border-top: none;
-      border-right: 5px solid transparent;
-      border-bottom: 5px solid $--color-black;
-      border-left: 5px solid transparent;
+      @include extend-rule(sort-caret);
+      &::after {
+        top: 0;
+      }
     }
 
     &.descending {
-      bottom: 9px;
-      border-top: 5px solid $--color-black;
-      border-right: 5px solid transparent;
-      border-bottom: none;
-      border-left: 5px solid transparent;
+      @include extend-rule(sort-caret);
+      &::after {
+        bottom: 0;
+        left: 3px;
+      }
     }
   }
 
   & .ascending .sort-caret.ascending {
-    border-bottom-color: $--color-black;
+    color: $--color-primary;
   }
 
   & .descending .sort-caret.descending {
-    border-top-color: $--color-black;
+    color: $--color-primary;
   }
 
   & th.gutter, td.gutter {
@@ -373,7 +362,7 @@
     text-overflow: ellipsis;
     white-space: normal;
     word-break: break-all;
-    line-height: 24px;
+    line-height: 23px;
     padding-left: 18px;
     padding-right: 18px;
   }
@@ -395,7 +384,7 @@
         }
 
         &.current-row td {
-          background: color($--color-primary tint(92%));
+          background-color: $--table-current-row-background;
         }
       }
     }
@@ -406,14 +395,14 @@
       &, &.el-table__row--striped {
         &, &.current-row {
           > td {
-            background-color: $--color-black;
+            background-color: $--table-current-row-background;
           }
         }
       }
     }
 
     tr.current-row > td {
-      background: color($--color-primary tint(92%));
+      background-color: $--table-current-row-background;
     }
   }
 
@@ -440,7 +429,8 @@
     cursor: pointer;
 
     & i {
-      color: $--color-black;
+      color: $--color-info;
+      font-size: 12px;
     }
   }
 
@@ -452,7 +442,7 @@
 
   @include m(enable-row-hover) {
     .el-table__body tr:hover > td {
-      background-color: $--color-black;
+      background-color: $--table-row-hover-background;
       background-clip: padding-box;
     }
   }

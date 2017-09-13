@@ -13,30 +13,32 @@ $--color-white: #fff;
 $--color-black: #000;
 
 $--color-primary: #1989fa;
-$--color-primary-light-1: mix($--color-white, $--color-primary, 10%);
-$--color-primary-light-2: mix($--color-white, $--color-primary, 20%);
-$--color-primary-light-3: mix($--color-white, $--color-primary, 30%);
-$--color-primary-light-4: mix($--color-white, $--color-primary, 40%);
-$--color-primary-light-5: mix($--color-white, $--color-primary, 50%);
-$--color-primary-light-6: mix($--color-white, $--color-primary, 60%);
-$--color-primary-light-7: mix($--color-white, $--color-primary, 70%);
-$--color-primary-light-8: mix($--color-white, $--color-primary, 80%);
-$--color-primary-light-9: mix($--color-white, $--color-primary, 90%);
+$--color-primary-light-1: mix($--color-white, $--color-primary, 10%); // #3095fb
+$--color-primary-light-2: mix($--color-white, $--color-primary, 20%); // #47a1fb
+$--color-primary-light-3: mix($--color-white, $--color-primary, 30%); // #5eadfc
+$--color-primary-light-4: mix($--color-white, $--color-primary, 40%); // #75b8fc
+$--color-primary-light-5: mix($--color-white, $--color-primary, 50%); // #8cc4fd
+$--color-primary-light-6: mix($--color-white, $--color-primary, 60%); // #a3d0fd
+$--color-primary-light-7: mix($--color-white, $--color-primary, 70%); // #badcfe
+$--color-primary-light-8: mix($--color-white, $--color-primary, 80%); // #d1e7fe
+$--color-primary-light-9: mix($--color-white, $--color-primary, 90%); // #e8f3ff
+
+$--color-primary-lighter: mix($--color-primary, #fffeff, 3.48%); // #f7faff
 
 $--color-success: #67c23a;
 $--color-warning: #eb9e05;
 $--color-danger: #fa5555;
 $--color-info: #878d99;
 
-$--color-success-light: mix($--color-white, $--color-success, 80%);
-$--color-warning-light: mix($--color-white, $--color-warning, 80%);
-$--color-danger-light: mix($--color-white, $--color-danger, 80%);
-$--color-info-light: mix($--color-white, $--color-info, 80%);
+$--color-success-light: mix($--color-white, $--color-success, 80%); // #e1f3d8
+$--color-warning-light: mix($--color-white, $--color-warning, 80%); // #fbeccd
+$--color-danger-light: mix($--color-white, $--color-danger, 80%); // #fedddd
+$--color-info-light: mix($--color-white, $--color-info, 80%); // #e7e8eb
 
-$--color-success-lighter: mix($--color-white, $--color-success, 90%);
-$--color-warning-lighter: mix($--color-white, $--color-warning, 90%);
-$--color-danger-lighter: mix($--color-white, $--color-danger, 90%);
-$--color-info-lighter: mix($--color-white, $--color-info, 90%);
+$--color-success-lighter: mix($--color-white, $--color-success, 90%); // #f0f9ec
+$--color-warning-lighter: mix($--color-white, $--color-warning, 90%); // #fdf5e6
+$--color-danger-lighter: mix($--color-white, $--color-danger, 90%); // #ffeeee
+$--color-info-lighter: mix($--color-white, $--color-info, 90%); // #f3f4f5
 
 $--color-text-primary: #2d2f33;
 $--color-text-regular: #5a5e66;
@@ -66,7 +68,7 @@ $--border-radius-circle: 100%;
 -------------------------- */
 $--box-shadow-base: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
 $--box-shadow-dark: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .12);
-
+$--box-shadow-light: 0px 2px 12px 0 rgba(0, 0, 0, 0.03);
 /* Fill
 -------------------------- */
 $--fill-base: $--color-white;
@@ -74,6 +76,7 @@ $--fill-base: $--color-white;
 /* Font
 -------------------------- */
 $--font-size-base: 14px;
+$--font-size-small: 13px;
 $--font-color-base: #5a5e66;
 $--font-color-disabled-base: #bbb;
 $--font-weight-primary: 500;
@@ -97,6 +100,7 @@ $--disabled-border-base: $--border-color-lighter;
 /* Icon
 -------------------------- */
 $--icon-color: #666;
+$--icon-color-base: $--color-info;
 
 /* Checkbox
 -------------------------- */
@@ -452,8 +456,11 @@ $--dialog-font-size: 14px;
 
 /* Table
 -------------------------- */
-$--table-border-color: $--border-color-base;
+$--table-border-color: $--border-color-lighter;
 $--table-text-color: $--color-text-regular;
+$--table-header-color: $--color-text-secondary;
+$--table-row-hover-background: $--color-primary-lighter;
+$--table-current-row-background: $--color-primary-lighter;
 $--table-header-background: $--color-text-secondary;
 $--table-footer-background: $--color-text-placeholder;
 
@@ -521,7 +528,7 @@ $--tag-danger-color: $--color-danger;
 
 /* Dropdown
 -------------------------- */
-$--dropdown-menu-box-shadow: $--box-shadow-dark;
+$--dropdown-menu-box-shadow: $--box-shadow-light;
 $--dropdown-menuItem-hover-fill: $--color-text-secondary;
 $--dropdown-menuItem-hover-color: $--link-color;
 
