@@ -12,7 +12,7 @@
     <div class="el-transfer__buttons">
       <el-button
         type="primary"
-        size="small"
+        :class="['el-transfer__button', hasButtonTexts ? 'is-with-texts' : '']"
         @click.native="addToLeft"
         :disabled="rightChecked.length === 0">
         <i class="el-icon-arrow-left"></i>
@@ -20,7 +20,7 @@
       </el-button>
       <el-button
         type="primary"
-        size="small"
+        :class="['el-transfer__button', hasButtonTexts ? 'is-with-texts' : '']"
         @click.native="addToRight"
         :disabled="leftChecked.length === 0">
         <span v-if="buttonTexts[1] !== undefined">{{ buttonTexts[1] }}</span>
@@ -98,7 +98,7 @@
           return [];
         }
       },
-      footerFormat: {
+      format: {
         type: Object,
         default() {
           return {};
@@ -131,6 +131,10 @@
 
       targetData() {
         return this.data.filter(item => this.value.indexOf(item[this.props.key]) > -1);
+      },
+
+      hasButtonTexts() {
+        return this.buttonTexts.length === 2;
       }
     },
 
