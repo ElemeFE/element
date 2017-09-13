@@ -124,12 +124,11 @@
   }
 
   @include e(filter) {
-    margin-top: 15px;
-    margin-bottom: 5px;
     text-align: center;
-    padding: 0 15px;
-    width: 100%;
+    margin: 15px;
     box-sizing: border-box;
+    display: block;
+    width: auto;
 
     .el-input__inner {
       height: $--transfer-filter-height;
@@ -142,8 +141,7 @@
     }
 
     .el-input__icon {
-      right: auto;
-      left: 15px;
+      margin-left: 5px;
     }
 
     .el-icon-circle-close {

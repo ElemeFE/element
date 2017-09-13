@@ -16,11 +16,14 @@
         v-model="query"
         size="small"
         :placeholder="placeholder"
-        :icon="inputIcon"
         @mouseenter.native="inputHover = true"
         @mouseleave.native="inputHover = false"
-        @click="clearQuery"
-        v-if="filterable"></el-input>
+        v-if="filterable">
+        <i slot="prefix"
+          :class="['el-input__icon', 'el-icon-' + inputIcon]"
+          @click="clearQuery"
+        ></i>
+      </el-input>
       <el-checkbox-group
         v-model="checked"
         v-show="!hasNoMatch && data.length > 0"

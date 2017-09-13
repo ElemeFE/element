@@ -20,6 +20,9 @@
         input: '',
         input1: '',
         input2: '',
+        input21: '',
+        input22: '',
+        input23: '',
         input3: '',
         input4: '',
         input5: '',
@@ -190,26 +193,43 @@ export default {
 
 Add an icon to indicate input type.
 
-::: demo You can add an icon at the end of Input by setting the `icon` attribute and use `on-icon-click` hook to complete some work after clicking the icon.
-
+::: demo 可以通过 `suffix-icon` 和 `prefix-icon` 属性在 input 组件首部和尾部增加显示图标，也可以通过 slot 来放置图标。
 ```html
-<el-input
-  placeholder="Pick a date"
-  icon="search"
-  v-model="input2"
-  :on-icon-click="handleIconClick">
-</el-input>
+<div class="demo-input-suffix">
+  属性方式：
+  <el-input
+    placeholder="请选择日期"
+    suffix-icon="date"
+    v-model="input2">
+  </el-input>
+  <el-input
+    placeholder="请输入内容"
+    prefix-icon="search"
+    v-model="input21">
+  </el-input>
+</div>
+<div class="demo-input-suffix">
+  slot 方式：
+  <el-input
+    placeholder="请选择日期"
+    v-model="input22">
+    <i slot="suffix" class="el-input__icon el-icon-date"></i>
+  </el-input>
+  <el-input
+    placeholder="请输入内容"
+    v-model="input23">
+    <i slot="prefix" class="el-input__icon el-icon-search"></i>
+  </el-input>
+</div>
 
 <script>
 export default {
   data() {
     return {
-      input2: ''
-    }
-  },
-  methods: {
-    handleIconClick(ev) {
-      console.log(ev);
+      input2: '',
+      input21: '',
+      input22: '',
+      input23: ''
     }
   }
 }
