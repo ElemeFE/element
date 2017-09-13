@@ -48,6 +48,10 @@ $--color-text-placeholder: #b4bccc;
 $--link-color: $--color-primary-light-2;
 $--link-hover-color: $--color-primary;
 
+/* Background
+-------------------------- */
+$--background-color-base: #f5f7fa;
+
 /* Border
 -------------------------- */
 $--border-width-base: 1px;
@@ -628,16 +632,16 @@ $--collapse-content-color: $--color-text-primary;
 
 /* Transfer
 --------------------------*/
-$--transfer-border-color: $--color-text-regular;
-$--transfer-box-shadow: $--box-shadow-base;
+$--transfer-border-color: $--border-color-lighter;
+$--transfer-border-radius: $--border-radius-base;
 $--transfer-panel-width: 200px;
-$--transfer-panel-header-height: 36px;
-$--transfer-panel-header-background: $--color-text-primary;
-$--transfer-panel-footer-height: 36px;
+$--transfer-panel-header-height: 40px;
+$--transfer-panel-header-background: $--background-color-base;
+$--transfer-panel-footer-height: 40px;
 $--transfer-panel-body-height: 246px;
-$--transfer-item-height: 32px;
+$--transfer-item-height: 30px;
 $--transfer-item-hover-background: $--color-text-secondary;
-$--transfer-filter-height: 22px;
+$--transfer-filter-height: 32px;
 
 /* Header
   --------------------------*/
