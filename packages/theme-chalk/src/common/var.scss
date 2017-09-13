@@ -435,14 +435,14 @@ $--cascader-height: 200px;
 /* Switch
 -------------------------- */
 $--switch-on-color: $--color-primary;
-$--switch-off-color: $--color-text-placeholder;
-$--switch-disabled-color: $--color-text-secondary;
+$--switch-off-color: $--border-color-base;
+$--switch-disabled-color: $--border-color-lighter;
 $--switch-disabled-text-color: $--color-text-placeholder;
 
 $--switch-font-size: $--font-size-base;
-$--switch-core-border-radius: 12px;
-$--switch-width: 46px;
-$--switch-height: 22px;
+$--switch-core-border-radius: 10px;
+$--switch-width: 40px;
+$--switch-height: 20px;
 $--switch-button-size: 16px;
 
 /* Dialog
