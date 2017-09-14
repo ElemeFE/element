@@ -214,8 +214,7 @@
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
-          inputErrorMessage: '邮箱格式不正确',
-          alignCenter: true
+          inputErrorMessage: '邮箱格式不正确'
         }).then(({ value }) => {
           this.$message({
             type: 'success',
