@@ -54,6 +54,11 @@
     watch: {
       visible(val) {
         this.currentVisible = val;
+        if (val) {
+          this.oldHours = this.hours;
+          this.oldMinutes = this.minutes;
+          this.oldSeconds = this.seconds;
+        }
       },
 
       pickerWidth(val) {
@@ -89,6 +94,9 @@
         hours: 0,
         minutes: 0,
         seconds: 0,
+        oldHours: 0,
+        oldMinutes: 0,
+        oldSeconds: 0,
         selectableRange: [],
         currentDate: this.$options.defaultValue || this.date || new Date(),
         currentVisible: this.visible || false,
@@ -108,7 +116,14 @@
       },
 
       handleCancel() {
-        this.$emit('pick');
+        this.currentDate.setHours(this.oldHours);
+        this.currentDate.setMinutes(this.oldMinutes);
+        this.currentDate.setSeconds(this.oldSeconds);
+        this.hours = this.currentDate.getHours();
+        this.minutes = this.currentDate.getMinutes();
+        this.seconds = this.currentDate.getSeconds();
+        const date = new Date(limitRange(this.currentDate, this.selectableRange, 'HH:mm:ss'));
+        this.$emit('pick', date);
       },
 
       handleChange(date) {
