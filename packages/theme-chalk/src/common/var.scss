@@ -241,10 +241,10 @@ $--alert-description-font-size: 12px;
 $--alert-close-font-size: 12px;
 $--alert-close-customed-font-size: 13px;
 
-$--alert-success-color: $--color-success;
-$--alert-info-color: $--color-info;
-$--alert-warning-color: $--color-warning;
-$--alert-danger-color: $--color-danger;
+$--alert-success-color: $--color-success-lighter;
+$--alert-info-color: $--color-info-lighter;
+$--alert-warning-color: $--color-warning-lighter;
+$--alert-danger-color: $--color-danger-lighter;
 
 $--alert-icon-size: 16px;
 $--alert-icon-large-size: 28px;
@@ -282,16 +282,20 @@ $--message-danger-color: $--color-danger;
 /* Notification
 -------------------------- */
 $--notification-width: 330px;
-$--notification-padding: 20px;
-$--notification-shadow: $--box-shadow-base;
-$--notification-icon-size: 40px;
+$--notification-padding: 14px 26px 14px 13px;
+$--notification-raduis: 8px;
+$--notification-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
+$--notification-border-color: $--border-color-lighter;
+$--notification-icon-size: 24px;
+$--notification-close-font-size: 12px;
+$--notification-group-margin: 13px;
 $--notification-font-size: $--font-size-base;
-$--notification-color: $--border-color-hover;
+$--notification-color: $--color-text-regular;
 $--notification-title-font-size: 16px;
 $--notification-title-color: $--color-text-primary;
 
-$--notification-close-color: $--color-text-placeholder;
-$--notification-close-hover-color: $--color-text-secondary;
+$--notification-close-color: $--color-text-secondary;
+$--notification-close-hover-color: $--color-text-regular;
 
 $--notification-success-color: $--color-success;
 $--notification-info-color: $--color-info;
@@ -439,14 +443,14 @@ $--cascader-height: 200px;
 /* Switch
 -------------------------- */
 $--switch-on-color: $--color-primary;
-$--switch-off-color: $--color-text-placeholder;
-$--switch-disabled-color: $--color-text-secondary;
+$--switch-off-color: $--border-color-base;
+$--switch-disabled-color: $--border-color-lighter;
 $--switch-disabled-text-color: $--color-text-placeholder;
 
 $--switch-font-size: $--font-size-base;
-$--switch-core-border-radius: 12px;
-$--switch-width: 46px;
-$--switch-height: 22px;
+$--switch-core-border-radius: 10px;
+$--switch-width: 40px;
+$--switch-height: 20px;
 $--switch-button-size: 16px;
 
 /* Dialog
@@ -504,32 +508,38 @@ $--tooltip-padding: 10px;
 
 /* Tag
 -------------------------- */
-$--tag-padding: 0 5px;
-$--tag-fill: $--border-color-hover;
-$--tag-color: $--color-white;
-$--tag-close-color: #666;
+$--tag-padding: 0 10px;
+$--tag-fill: rgba($--color-primary, 0.10);
+$--tag-color: $--color-primary;
+$--tag-border: rgba($--color-primary, 0.20);
 $--tag-font-size: 12px;
 $--tag-border-radius: 4px;
 
-$--tag-gray-fill: $--color-text-secondary;
-$--tag-gray-border: $--color-text-secondary;
-$--tag-gray-color: $--link-color;
+$--tag-info-fill: rgba($--color-info, 0.10);
+$--tag-info-border: rgba($--color-info, 0.20);
+$--tag-info-color: $--color-info;
 
-$--tag-primary-fill: rgba($--color-primary,0.10);
-$--tag-primary-border: rgba($--color-primary,0.20);
+$--tag-primary-fill: rgba($--color-primary, 0.10);
+$--tag-primary-border: rgba($--color-primary, 0.20);
 $--tag-primary-color: $--color-primary;
 
-$--tag-success-fill: rgba(18,206,102,0.10);
-$--tag-success-border: rgba(18,206,102,0.20);
+$--tag-success-fill: rgba($--color-success, 0.10);
+$--tag-success-border: rgba($--color-success, 0.20);
 $--tag-success-color: $--color-success;
 
-$--tag-warning-fill: rgba(247,186,41,0.10);
-$--tag-warning-border: rgba(247,186,41,0.20);
+$--tag-warning-fill: rgba($--color-warning, 0.10);
+$--tag-warning-border: rgba($--color-warning, 0.20);
 $--tag-warning-color: $--color-warning;
 
-$--tag-danger-fill: rgba(255,73,73,0.10);
-$--tag-danger-border: rgba(255,73,73,0.20);
+$--tag-danger-fill: rgba($--color-danger, 0.10);
+$--tag-danger-border: rgba($--color-danger, 0.20);
 $--tag-danger-color: $--color-danger;
+
+/* Tree
+-------------------------- */
+$--tree-node-hover-color: $--background-color-base;
+$--tree-text-color: $--color-text-regular;
+$--tree-expand-icon-color: $--color-text-placeholder;
 
 /* Dropdown
 -------------------------- */
@@ -547,7 +557,7 @@ $--badge-size: 18px;
 
 /* Card
 --------------------------*/
-$--card-border-color: $--disabled-border-base;
+$--card-border-color: $--border-color-lighter;
 $--card-border-radius: 4px;
 $--card-padding: 20px;
 
@@ -628,29 +638,28 @@ $--carousel-indicator-out-color: $--border-color-hover;
 
 /* Collapse
 --------------------------*/
-$--collapse-border-color: $--border-color-base;
-$--collapse-header-height: 43px;
-$--collapse-border-radius: 0;
+$--collapse-border-color: $--border-color-lighter;
+$--collapse-header-height: 48px;
 $--collapse-header-padding: 20px;
 $--collapse-header-fill: $--color-white;
-$--collapse-header-color: $--color-text-placeholder;
+$--collapse-header-color: $--color-text-primary;
 $--collapse-header-size: 13px;
-$--collapse-content-fill: $--color-text-secondary;
+$--collapse-content-fill: $--color-white;
 $--collapse-content-size: 13px;
 $--collapse-content-color: $--color-text-primary;
 
 /* Transfer
 --------------------------*/
-$--transfer-border-color: $--color-text-regular;
-$--transfer-box-shadow: $--box-shadow-base;
+$--transfer-border-color: $--border-color-lighter;
+$--transfer-border-radius: $--border-radius-base;
 $--transfer-panel-width: 200px;
-$--transfer-panel-header-height: 36px;
-$--transfer-panel-header-background: $--color-text-primary;
-$--transfer-panel-footer-height: 36px;
+$--transfer-panel-header-height: 40px;
+$--transfer-panel-header-background: $--background-color-base;
+$--transfer-panel-footer-height: 40px;
 $--transfer-panel-body-height: 246px;
-$--transfer-item-height: 32px;
+$--transfer-item-height: 30px;
 $--transfer-item-hover-background: $--color-text-secondary;
-$--transfer-filter-height: 22px;
+$--transfer-filter-height: 32px;
 
 /* Header
   --------------------------*/

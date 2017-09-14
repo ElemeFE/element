@@ -88,7 +88,7 @@
       accordion: Boolean,
       indent: {
         type: Number,
-        default: 16
+        default: 18
       }
     },
 

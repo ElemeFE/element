@@ -214,7 +214,7 @@ A close button can be added.
 :::
 
 ### Centered text
-Use the `center` attribute to center the text
+Use the `center` attribute to center the text.
 
 :::demo
 
