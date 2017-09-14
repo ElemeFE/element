@@ -19,21 +19,21 @@ LoadingConstructor.prototype.originalPosition = '';
 LoadingConstructor.prototype.originalOverflow = '';
 
 LoadingConstructor.prototype.close = function() {
-  if (this.fullscreen && this.originalOverflow !== 'hidden') {
-    document.body.style.overflow = this.originalOverflow;
-  }
-  if (this.fullscreen || this.body) {
-    document.body.style.position = this.originalPosition;
-  } else {
-    this.target.style.position = this.originalPosition;
-  }
   if (this.fullscreen) {
     fullscreenLoading = undefined;
   }
   this.$on('after-leave', _ => {
-    this.$el &&
-    this.$el.parentNode &&
-    this.$el.parentNode.removeChild(this.$el);
+    if (this.fullscreen && this.originalOverflow !== 'hidden') {
+      document.body.style.overflow = this.originalOverflow;
+    }
+    if (this.fullscreen || this.body) {
+      document.body.style.position = this.originalPosition;
+    } else {
+      this.target.style.position = this.originalPosition;
+    }
+    if (this.$el && this.$el.parentNode) {
+      this.$el.parentNode.removeChild(this.$el);
+    }
     this.$destroy();
   });
   this.visible = false;
