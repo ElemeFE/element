@@ -39,11 +39,16 @@ export default {
     enterable: {
       type: Boolean,
       default: true
+    },
+    hideAfter: {
+      type: Number,
+      default: 0
     }
   },
 
   data() {
     return {
+      timeoutPending: null,
       handlerAdded: false
     };
   },
@@ -118,15 +123,28 @@ export default {
       this.timeout = setTimeout(() => {
         this.showPopper = true;
       }, this.openDelay);
+
+      if (this.hideAfter > 0) {
+        this.timeoutPending = setTimeout(() => {
+          this.showPopper = false;
+        }, this.hideAfter);
+      }
     },
 
     handleClosePopper() {
       if (this.enterable && this.expectedState || this.manual) return;
       clearTimeout(this.timeout);
+
+      if (this.timeoutPending) {
+        clearTimeout(this.timeoutPending);
+      }
       this.showPopper = false;
     },
 
     setExpectedState(expectedState) {
+      if (expectedState === false) {
+        clearTimeout(this.timeoutPending);
+      }
       this.expectedState = expectedState;
     }
   }
