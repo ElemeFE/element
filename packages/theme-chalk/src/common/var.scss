@@ -533,6 +533,12 @@ $--tag-danger-fill: rgba(255,73,73,0.10);
 $--tag-danger-border: rgba(255,73,73,0.20);
 $--tag-danger-color: $--color-danger;
 
+/* Tree
+-------------------------- */
+$--tree-node-hover-color: $--background-color-base;
+$--tree-text-color: $--color-text-regular;
+$--tree-expand-icon-color: $--color-text-placeholder;
+
 /* Dropdown
 -------------------------- */
 $--dropdown-menu-box-shadow: $--box-shadow-light;
