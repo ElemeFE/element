@@ -585,20 +585,22 @@ describe('Select', () => {
         }
       }
     }, true);
-    const tagCloseIcons = vm.$el.querySelectorAll('.el-tag__close');
     expect(vm.value.length).to.equal(2);
-    tagCloseIcons[1].click();
     setTimeout(() => {
-      expect(vm.value.length).to.equal(1);
-      expect(window.console.log.callCount).to.equal(1);
-      tagCloseIcons[0].click();
+      const tagCloseIcons = vm.$el.querySelectorAll('.el-tag__close');
+      tagCloseIcons[1].click();
       setTimeout(() => {
-        expect(vm.value.length).to.equal(0);
-        expect(window.console.log.callCount).to.equal(2);
-        window.console.log.restore();
-        done();
-      }, 100);
-    }, 100);
+        expect(vm.value.length).to.equal(1);
+        expect(window.console.log.callCount).to.equal(1);
+        tagCloseIcons[0].click();
+        setTimeout(() => {
+          expect(vm.value.length).to.equal(0);
+          expect(window.console.log.callCount).to.equal(2);
+          window.console.log.restore();
+          done();
+        }, 50);
+      }, 50);
+    }, 50);
   });
 
   it('multiple limit', done => {
