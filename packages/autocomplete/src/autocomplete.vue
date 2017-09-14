@@ -73,7 +73,11 @@
       },
       customItem: String,
       icon: String,
-      onIconClick: Function
+      onIconClick: Function,
+      selectWhenUnmatched: {
+        type: Boolean,
+        default: false
+      }
     },
     data() {
       return {
@@ -137,7 +141,7 @@
         if (this.suggestionVisible && this.highlightedIndex >= 0 && this.highlightedIndex < this.suggestions.length) {
           e.preventDefault();
           this.select(this.suggestions[this.highlightedIndex]);
-        } else {
+        } else if (this.selectWhenUnmatched) {
           this.$emit('select', {value: this.value});
           this.$nextTick(_ => {
             this.suggestions = [];
