@@ -23,8 +23,6 @@ $--color-primary-light-7: mix($--color-white, $--color-primary, 70%); // #badcfe
 $--color-primary-light-8: mix($--color-white, $--color-primary, 80%); // #d1e7fe#
 $--color-primary-light-9: mix($--color-white, $--color-primary, 90%); // #e8f3ff#
 
-$--color-primary-lighter: mix($--color-primary, #fffeff, 3.48%); // #f7faff#
-
 $--color-success: #67c23a;
 $--color-warning: #eb9e05;
 $--color-danger: #fa5555;
@@ -50,6 +48,10 @@ $--color-text-placeholder: #b4bccc;
 $--link-color: $--color-primary-light-2;
 $--link-hover-color: $--color-primary;
 
+/* Background
+-------------------------- */
+$--background-color-base: #f5f7fa;
+
 /* Border
 -------------------------- */
 $--border-width-base: 1px;
@@ -68,7 +70,7 @@ $--border-radius-circle: 100%;
 -------------------------- */
 $--box-shadow-base: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
 $--box-shadow-dark: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .12);
-$--box-shadow-light: 0px 2px 12px 0 rgba(0, 0, 0, 0.03);
+$--box-shadow-light: 0 2px 12px 0 rgba(0, 0, 0, 0.03);
 /* Fill
 -------------------------- */
 $--fill-base: $--color-white;
@@ -459,8 +461,8 @@ $--dialog-font-size: 14px;
 $--table-border-color: $--border-color-lighter;
 $--table-text-color: $--color-text-regular;
 $--table-header-color: $--color-text-secondary;
-$--table-row-hover-background: $--color-primary-lighter;
-$--table-current-row-background: $--color-primary-lighter;
+$--table-row-hover-background: $--background-color-base;
+$--table-current-row-background: $--background-color-base;
 $--table-header-background: $--color-text-secondary;
 $--table-footer-background: $--color-text-placeholder;
 
