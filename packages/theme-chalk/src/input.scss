@@ -41,48 +41,30 @@
   @include e(suffix) {
     position: absolute;
     height: 100%;
-    right: 0;
+    right: 5px;
     top: 0;
     text-align: center;
     color: $--input-icon-color;
     transition: all .3s;
-
-    // @include when(clickable) {
-    //   &:hover {
-    //     cursor: pointer;
-    //     color: $--input-hover-border;
-
-    //     & + .el-input__inner {
-    //       border-color: $--input-hover-border;
-    //     }
-    //   }
-    // }
+    pointer-events: none;
+  }
+  @include e(suffix-inner) {
+    pointer-events: all;
   }
 
   @include e(prefix) {
     position: absolute;
     height: 100%;
-    left: 0;
+    left: 5px;
     top: 0;
     text-align: center;
     color: $--input-icon-color;
     transition: all .3s;
-
-    // @include when(clickable) {
-    //   &:hover {
-    //     cursor: pointer;
-    //     color: $--input-hover-border;
-
-    //     & + .el-input__inner {
-    //       border-color: $--input-hover-border;
-    //     }
-    //   }
-    // }
   }
 
   @include e(icon) {
     height: 100%;
-    width: 30px;
+    width: 25px;
     text-align: center;
     // color: $--input-icon-color;
     transition: all .3s;
@@ -94,6 +76,10 @@
       display: inline-block;
       vertical-align: middle;
     }
+  }
+
+  @include e(validateIcon) {
+    pointer-events: none;
   }
 
   @include when(active) {
@@ -121,12 +107,12 @@
   }
   @include m(suffix) {
     .el-input__inner {
-      padding-right: 30px;
+      padding-right: 25px;
     }
   }
   @include m(prefix) {
     .el-input__inner {
-      padding-left: 30px;
+      padding-left: 25px;
     }
   }
   @include m(large) {

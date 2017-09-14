@@ -65,7 +65,7 @@
       @mouseenter.native="inputHovering = true"
       @mouseleave.native="inputHovering = false">
       <i slot="suffix"
-       :class="['el-input__icon', 'el-icon-' + iconClass]"
+       :class="['el-select__caret', 'el-input__icon', 'el-icon-' + iconClass]"
        @click="handleIconClick"
       ></i>
     </el-input>

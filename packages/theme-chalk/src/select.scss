@@ -27,13 +27,12 @@
   }
 
   & .el-input {
-    & .el-input__icon {
+    & .el-select__caret {
       color: $--select-input-color;
       font-size: $--select-input-font-size;
       transition: transform .3s;
       transform: rotateZ(180deg);
       line-height: 16px;
-      top: 50%;
       cursor: pointer;
 
       @include when(reverse) {
@@ -42,10 +41,10 @@
 
       @include when(show-close) {
         transition: 0s;
-        height: 16px;
-        width: 16px;
+        // height: 16px;
+        // width: 16px;
         font-size: $--select-font-size;
-        right: 8px;
+        // right: 8px;
         text-align: center;
         transform: rotateZ(180deg);
         border-radius: $--border-radius-circle;
