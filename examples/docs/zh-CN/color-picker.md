@@ -2,9 +2,10 @@
   export default {
     data() {
       return {
-        color1: '#20a0ff',
+        color1: '#1989fa',
         color2: null,
-        color3: 'rgba(19, 206, 102, 0.8)'
+        color3: 'rgba(19, 206, 102, 0.8)',
+        color4: '#20a0ff'
       };
     },
     mounted() {
@@ -34,6 +35,9 @@
     font-size: 14px;
     margin-bottom: 20px;
   }
+  .demo-color-picker .el-color-picker + .el-color-picker {
+    margin-left: 20px;
+  }
 </style>
 
 ## ColorPicker 颜色选择器
@@ -57,7 +61,7 @@
   export default {
     data() {
       return {
-        color1: '#20a0ff',
+        color1: '#1989fa',
         color2: null
       }
     }
@@ -84,9 +88,32 @@
 ```
 :::
 
+### 不同尺寸
+
+:::demo
+```html
+<el-color-picker v-model="color4"></el-color-picker>
+<el-color-picker v-model="color4" size="medium"></el-color-picker>
+<el-color-picker v-model="color4" size="small"></el-color-picker>
+<el-color-picker v-model="color4" size="mini"></el-color-picker>
+
+<script>
+  export default {
+    data() {
+      return {
+        color4: '#20a0ff'
+      }
+    }
+  };
+</script>
+```
+:::
+
 ### Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
+| disabled | 是否禁用 | boolean | — | false |
+| size | 尺寸 | string | — | medium / small / mini |
 | show-alpha | 是否支持透明度选择 | boolean | — | false |
 | color-format | 写入 v-model 的颜色的格式 | string | hsl / hsv / hex / rgb | hex（show-alpha 为 false）/ rgb（show-alpha 为 true） |
 
