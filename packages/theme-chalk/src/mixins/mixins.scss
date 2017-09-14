@@ -1,20 +1,6 @@
 @import "function";
 @import "../common/var";
 
-/* Transition
- -------------------------- */
-@mixin primary-transition {
-  transition: $t-primary;
-}
-
-@mixin specific-transition($attr) {
-  transition: $attr $t-primary;
-}
-
-@mixin specific-transition-with-time($attr, $time) {
-  transition: $attr $t-primary;
-}
-
 /* Flex
  -------------------------- */
 @mixin flex-center {
@@ -27,16 +13,47 @@
   align-items: center;
 }
 
+/* Scrollbar
+ -------------------------- */
+@mixin scroll-bar {
+  $--scrollbar-thumb-background: #b4bccc;
+  $--scrollbar-track-background: #edeff5;
 
-/* placeholder
+  &::-webkit-scrollbar {
+    z-index: 11;
+    width: 6px;
+    background: black;
+
+    &:horizontal {
+      height: 6px;
+    }
+
+    &-thumb {
+      border-radius: 5px;
+      background: $--scrollbar-thumb-background;
+    }
+
+    &-corner {
+      background: $--scrollbar-track-background;
+    }
+
+    &-track {
+      background: $--scrollbar-track-background;
+    }
+  }
+}
+
+/* Placeholder
  -------------------------- */
 @mixin placeholder {
   &::-webkit-input-placeholder {
     @content
   }
+
   &::-moz-placeholder {
     @content
   }
+
   &:-ms-input-placeholder {
     @content
   }
