@@ -25,7 +25,7 @@
   }
 
   .item {
-    padding: 18px 0;
+    margin-bottom: 18px;
   }
 
   .button {
@@ -58,8 +58,8 @@
 ```html
 <el-card class="box-card">
   <div slot="header" class="clearfix">
-    <span style="line-height: 36px;">卡片名称</span>
-    <el-button style="float: right;" type="primary">操作按钮</el-button>
+    <span>卡片名称</span>
+    <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
   </div>
   <div v-for="o in 4" :key="o" class="text item">
     {{'列表内容 ' + o }}
@@ -72,16 +72,16 @@
   }
 
   .item {
-    padding: 18px 0;
+    margin-bottom: 18px;
   }
 
   .clearfix:before,
   .clearfix:after {
-      display: table;
-      content: "";
+    display: table;
+    content: "";
   }
   .clearfix:after {
-      clear: both
+    clear: both
   }
 
   .box-card {
