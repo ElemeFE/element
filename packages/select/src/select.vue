@@ -660,8 +660,7 @@
       },
 
       getValueKey(item) {
-        const type = typeof item.value;
-        if (type === 'number' || type === 'string') {
+        if (Object.prototype.toString.call(item.value).toLowerCase() !== '[object object]') {
           return item.value;
         } else {
           return getValueByPath(item.value, this.valueKey);
@@ -677,7 +676,6 @@
       if (!this.multiple && Array.isArray(this.value)) {
         this.$emit('input', '');
       }
-      this.setSelected();
 
       this.debouncedOnInputChange = debounce(this.debounce, () => {
         this.onInputChange();
@@ -701,6 +699,7 @@
           this.inputWidth = this.$refs.reference.$el.getBoundingClientRect().width;
         }
       });
+      this.setSelected();
     },
 
     beforeDestroy() {

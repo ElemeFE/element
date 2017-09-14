@@ -48,7 +48,7 @@
     },
     computed: {
       active() {
-        return this.index === this.rootMenu.activedIndex;
+        return this.index === this.rootMenu.activeIndex;
       }
     },
     methods: {
