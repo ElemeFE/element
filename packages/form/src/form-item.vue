@@ -52,6 +52,12 @@
 
     mixins: [emitter],
 
+    provide() {
+      return {
+        formItem: this
+      };
+    },
+
     props: {
       label: String,
       labelWidth: String,

@@ -15,7 +15,7 @@
     @change.native="displayValue = $event.target.value"
     :validateEvent="false"
     ref="reference">
-    <i slot="icon"
+    <i slot="suffix"
       class="el-input__icon"
       @click="handleClickIcon"
       :class="[showClose ? 'el-icon-close' : triggerClass]"

@@ -36,11 +36,17 @@
         @blur="handleBlur"
       >
       <!-- 后置内容 -->
-      <span class="el-input__suffix" v-if="$slots.suffix || suffixIcon">
-        <slot name="suffix"></slot>
+      <span class="el-input__suffix" v-if="$slots.suffix || suffixIcon || validateState">
+        <span class="el-input__suffix-inner">
+          <slot name="suffix"></slot>
+          <i class="el-input__icon"
+            v-if="suffixIcon"
+            :class="['el-icon-' + suffixIcon]">
+          </i>
+        </span>
         <i class="el-input__icon"
-          v-if="suffixIcon"
-          :class="['el-icon-' + suffixIcon]">
+          v-if="validateState"
+          :class="['el-input__validateIcon', validateIcon]">
         </i>
       </span>
       <!-- 后置元素 -->
@@ -73,6 +79,8 @@
     componentName: 'ElInput',
 
     mixins: [emitter, Focus('input')],
+
+    inject: ['formItem'],
 
     data() {
       return {
@@ -123,8 +131,15 @@
     },
 
     computed: {
-      validating() {
-        return this.$parent.validateState === 'validating';
+      validateState() {
+        return this.formItem ? this.formItem.validateState : '';
+      },
+      validateIcon() {
+        return {
+          validating: 'el-icon-loading',
+          success: 'el-icon-circle-check',
+          error: 'el-icon-circle-cross'
+        }[this.validateState];
       },
       textareaStyle() {
         return merge({}, this.textareaCalcStyle, { resize: this.resize });
