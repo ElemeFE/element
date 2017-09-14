@@ -131,6 +131,8 @@ export default {
 
     handleClosePopper() {
       if (this.enterable && this.expectedState || this.manual) return;
+      clearTimeout(this.timeout);
+
       if (this.timeoutPending) {
         clearTimeout(this.timeoutPending);
       }
