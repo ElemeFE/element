@@ -15,15 +15,41 @@
         width: 110px;
       }
     }
+    .el-tooltip + .el-tooltip {
+      margin-left: 15px;
+    }
     .box {
+      width: 400px;
+    
+      .top {
+        text-align: center;
+      }
+      
       .left {
         float: left;
         width: 110px;
       }
-
+      
       .right {
         float: right;
         width: 110px;
+      }
+      
+      .bottom {
+        clear: both;
+        text-align: center;
+      }
+      
+      .item {
+        margin: 4px;
+      }
+      
+      .left .el-tooltip__popper,
+      .right .el-tooltip__popper {
+        padding: 8px 10px;
+      }
+      .el-tooltip {
+        margin-left: 0;
       }
     }
   }
