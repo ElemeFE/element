@@ -104,7 +104,7 @@
           confirmButtonText: 'OK',
           cancelButtonText: 'Cancel',
           type: 'warning',
-          alignCenter: true
+          center: true
         }).then(() => {
           this.$message({
             type: 'success',
@@ -314,7 +314,7 @@ Can be customized to show various content.
 ### Align in center
 Align the content in center
 
-:::demo set `alignCenter` to `true` will align the content in center
+:::demo set `center` to `true` will align the content in center
 
 ```html
 <template>
@@ -329,7 +329,7 @@ Align the content in center
           confirmButtonText: 'OK',
           cancelButtonText: 'Cancel',
           type: 'warning',
-          alignCenter: true
+          center: true
         }).then(() => {
           this.$message({
             type: 'success',
@@ -401,5 +401,5 @@ Although `message` property supports HTML strings, dynamically rendering arbitra
 | inputPattern | regexp for the input | regexp | — | — |
 | inputValidator | validation function for the input. Should returns a boolean or string. If a string is returned, it will be assigned to inputErrorMessage | function | — | — |
 | inputErrorMessage | error message when validation fails | string | — | Illegal input |
-| alignCenter | whether to align the content in center | boolean | — | false |
+| center | whether to align the content in center | boolean | — | false |
 | roundButton | whether to use round button | boolean | — | false |

@@ -1,10 +1,10 @@
 <template>
   <transition name="msgbox-fade">
     <div class="el-message-box__wrapper" tabindex="-1" v-show="visible" @click.self="handleWrapperClick">
-      <div class="el-message-box" :class="[customClass, alignCenter && 'el-message-box--center']">
+      <div class="el-message-box" :class="[customClass, center && 'el-message-box--center']">
         <div class="el-message-box__header" v-if="title !== undefined">
           <div class="el-message-box__title">
-            <div class="el-message-box__status" :class="[ typeClass ]" v-if="typeClass && alignCenter"></div>
+            <div class="el-message-box__status" :class="[ typeClass ]" v-if="typeClass && center"></div>
             <span>{{ title }}</span>
           </div>
           <button type="button" class="el-message-box__headerbtn" aria-label="Close" 
@@ -13,7 +13,7 @@
           </button>
         </div>
         <div class="el-message-box__content" v-if="message !== ''">
-          <div class="el-message-box__status" :class="[ typeClass ]" v-if="typeClass && !alignCenter"></div>
+          <div class="el-message-box__status" :class="[ typeClass ]" v-if="typeClass && !center"></div>
           <div class="el-message-box__message">
             <slot>
               <p v-if="!dangerouslyUseHTMLString">{{ message }}</p>
@@ -89,7 +89,7 @@
       closeOnHashChange: {
         default: true
       },
-      alignCenter: {
+      center: {
         default: false,
         type: Boolean
       },
