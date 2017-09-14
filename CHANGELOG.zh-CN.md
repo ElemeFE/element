@@ -1,5 +1,25 @@
 ## 更新日志
 
+### 1.4.4
+*2017-09-05*
+
+- 修复设置了 `disabledDate` 的 DatePicker 在月视图下全部不可选的问题，#6768 @qingdengyue
+- Slider 新增 `debounce` 属性，#6820 @langgo
+- 修复 Pagination 的 jumper 中可以输入比最大页数更大的数字的问题，#6842 @huguangju
+- 修复 TimePicker 的小时数难以通过滚动的方式选中 23 时的问题，#6719 @qingdengyue
+
+### 1.4.3
+*2017-08-25*
+
+- 修复 Progress 百分比为 `0` 时的样式问题，#6551 @Kingwl
+- 修复 Carousel 在切换时幻灯片闪烁的问题，#6394
+- 修复禁用的 Button 在点击文字部分时未阻止事件传播的问题，#6421
+- 修复 DatePicker 的月视图错误计算禁用日期的问题，#6363
+- 修复 Autocomplete 键盘回车被阻止传播的问题，#6499 @leezng
+- 修复 DatePicker 的 i18n 不支持 `amPm` 的问题，#6574
+- 修复 Slider 由隐藏变为可见时交互错误的问题，#6593
+- 修复通过默认 slot 传递 `description` 的 Alert 错误地使用小图标的问题，#6612 @leezng
+
 ### 1.4.2
 *2017-08-09*
 

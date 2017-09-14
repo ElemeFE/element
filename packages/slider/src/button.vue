@@ -138,6 +138,7 @@
       onDragging(event) {
         if (this.dragging) {
           this.displayTooltip();
+          this.$parent.resetSize();
           let diff = 0;
           if (this.vertical) {
             this.currentY = event.clientY;

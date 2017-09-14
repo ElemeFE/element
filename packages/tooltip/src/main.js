@@ -48,7 +48,8 @@ export default {
 
   data() {
     return {
-      timeoutPending: null
+      timeoutPending: null,
+      handlerAdded: false
     };
   },
 
@@ -87,7 +88,7 @@ export default {
     if (!this.$slots.default || !this.$slots.default.length) return this.$slots.default;
 
     const vnode = getFirstComponentChild(this.$slots.default);
-    if (!vnode) return vnode;
+    if (!vnode || this.handlerAdded) return vnode;
     const data = vnode.data = vnode.data || {};
     const on = vnode.data.on = vnode.data.on || {};
     const nativeOn = vnode.data.nativeOn = vnode.data.nativeOn || {};
@@ -107,6 +108,7 @@ export default {
 
   methods: {
     addEventHandle(old, fn) {
+      this.handlerAdded = true;
       return old ? Array.isArray(old) ? old.concat(fn) : [old, fn] : fn;
     },
 

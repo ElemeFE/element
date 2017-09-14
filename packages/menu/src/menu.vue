@@ -116,7 +116,7 @@
     },
     data() {
       return {
-        activedIndex: this.defaultActive,
+        activeIndex: this.defaultActive,
         openedMenus: this.defaultOpeneds ? this.defaultOpeneds.slice(0) : [],
         items: {},
         submenus: {}
@@ -126,10 +126,10 @@
       defaultActive(value) {
         const item = this.items[value];
         if (item) {
-          this.activedIndex = item.index;
+          this.activeIndex = item.index;
           this.initOpenedMenu();
         } else {
-          this.activedIndex = '';
+          this.activeIndex = '';
         }
 
       },
@@ -164,7 +164,7 @@
         }
         this.openedMenus.push(index);
       },
-      closeMenu(index, indexPath) {
+      closeMenu(index) {
         this.openedMenus.splice(this.openedMenus.indexOf(index), 1);
       },
       handleSubmenuClick(submenu) {
@@ -172,7 +172,7 @@
         let isOpened = this.openedMenus.indexOf(index) !== -1;
 
         if (isOpened) {
-          this.closeMenu(index, indexPath);
+          this.closeMenu(index);
           this.$emit('close', index, indexPath);
         } else {
           this.openMenu(index, indexPath);
@@ -181,7 +181,7 @@
       },
       handleItemClick(item) {
         let { index, indexPath } = item;
-        this.activedIndex = item.index;
+        this.activeIndex = item.index;
         this.$emit('select', index, indexPath, item);
 
         if (this.mode === 'horizontal' || this.collapse) {
@@ -194,7 +194,7 @@
       },
       // 初始化展开菜单
       initOpenedMenu() {
-        const index = this.activedIndex;
+        const index = this.activeIndex;
         const activeItem = this.items[index];
         if (!activeItem || this.mode === 'horizontal' || this.collapse) return;
 
