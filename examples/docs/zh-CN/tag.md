@@ -4,11 +4,10 @@
       return {
         tags: [
           { name: '标签一', type: '' },
-          { name: '标签二', type: 'gray' },
-          { name: '标签三', type: 'primary' },
-          { name: '标签四', type: 'success' },
-          { name: '标签五', type: 'warning' },
-          { name: '标签六', type: 'danger' }
+          { name: '标签二', type: 'success' },
+          { name: '标签三', type: 'info' },
+          { name: '标签四', type: 'warning' },
+          { name: '标签五', type: 'danger' }
         ],
         dynamicTags: ['标签一', '标签二', '标签三'],
         inputVisible: false,
@@ -46,17 +45,17 @@
     }
     .button-new-tag {
       margin-left: 10px;
-      height: 24px;
-      line-height: 22px;
+      height: 30px;
+      line-height: 28px;
       padding: 0 *;
     }
     .input-new-tag {
-      width: 78px;
+      width: 90px;
       margin-left: 10px;
       vertical-align: bottom;
 
       .el-input__inner {
-        height: 24px;
+        height: 30px;
       }
     }
   }
@@ -72,11 +71,10 @@
 
 ```html
 <el-tag>标签一</el-tag>
-<el-tag type="gray">标签二</el-tag>
-<el-tag type="primary">标签三</el-tag>
-<el-tag type="success">标签四</el-tag>
-<el-tag type="warning">标签五</el-tag>
-<el-tag type="danger">标签六</el-tag>
+<el-tag type="success">标签二</el-tag>
+<el-tag type="info">标签三</el-tag>
+<el-tag type="warning">标签四</el-tag>
+<el-tag type="danger">标签五</el-tag>
 ```
 :::
 
@@ -88,10 +86,9 @@
 <el-tag
   v-for="tag in tags"
   :key="tag.name"
-  :closable="true"
-  :type="tag.type"
->
-{{tag.name}}
+  closable
+  :type="tag.type">
+  {{tag.name}}
 </el-tag>
 
 <script>
@@ -100,11 +97,10 @@
       return {
         tags: [
           { name: '标签一', type: '' },
-          { name: '标签二', type: 'gray' },
-          { name: '标签三', type: 'primary' },
-          { name: '标签四', type: 'success' },
-          { name: '标签五', type: 'warning' },
-          { name: '标签六', type: 'danger' }
+          { name: '标签二', type: 'success' },
+          { name: '标签三', type: 'info' },
+          { name: '标签四', type: 'warning' },
+          { name: '标签五', type: 'danger' }
         ]
       };
     }
@@ -122,11 +118,10 @@
 <el-tag
   :key="tag"
   v-for="tag in dynamicTags"
-  :closable="true"
+  closable
   :close-transition="false"
-  @close="handleClose(tag)"
->
-{{tag}}
+  @close="handleClose(tag)">
+ {{tag}}
 </el-tag>
 <el-input
   class="input-new-tag"
@@ -139,6 +134,28 @@
 >
 </el-input>
 <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
+
+<style>
+  .el-tag + .el-tag {
+    margin-left: 10px;
+  }
+  .button-new-tag {
+    margin-left: 10px;
+    height: 30px;
+    line-height: 28px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .input-new-tag {
+    width: 90px;
+    margin-left: 10px;
+    vertical-align: bottom;
+  }
+  .el-input__inner {
+    height: 30px;
+  }
+</style>
+
 <script>
   export default {
     data() {
@@ -177,7 +194,7 @@
 ### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| type | 主题 | string | primary/gray/success/warning/danger | — |
+| type | 主题 | string | success/info/warning/danger | — |
 | closable | 是否可关闭 | boolean | — | false |
 | close-transition | 是否禁用渐变动画 | boolean | — | false |
 | hit | 是否有边框描边 | boolean | — | false |
@@ -187,4 +204,4 @@
 ### Events
 | 事件名称 | 说明 | 回调参数 |
 |---------- |-------- |---------- |
-| close | 关闭tag时触发的事件 | — |
+| close | 关闭 Tag 时触发的事件 | — |
