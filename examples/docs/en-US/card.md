@@ -25,7 +25,7 @@
   }
 
   .item {
-    padding: 18px 0;
+    margin-bottom: 18px;
   }
 
   .button {
@@ -57,8 +57,8 @@ Card includes title, content and operations.
 ```html
 <el-card class="box-card">
   <div slot="header" class="clearfix">
-    <span style="line-height: 36px;">Card name</span>
-    <el-button style="float: right;" type="primary">Operation button</el-button>
+    <span>Card name</span>
+    <el-button style="float: right; padding: 3px 0" type="text">Operation button</el-button>
   </div>
   <div v-for="o in 4" :key="o" class="text item">
     {{'List item ' + o }}
@@ -71,16 +71,16 @@ Card includes title, content and operations.
   }
 
   .item {
-    padding: 18px 0;
+    margin-bottom: 18px;
   }
 
   .clearfix:before,
   .clearfix:after {
-      display: table;
-      content: "";
+    display: table;
+    content: "";
   }
   .clearfix:after {
-      clear: both
+    clear: both
   }
 
   .box-card {
