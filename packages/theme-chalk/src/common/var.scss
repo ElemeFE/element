@@ -520,7 +520,7 @@ $--tag-danger-color: $--color-danger;
 
 /* Tree
 -------------------------- */
-$--tree-node-hover-color: #f5f7fa;
+$--tree-node-hover-color: $--background-color-base;
 $--tree-text-color: $--color-text-regular;
 $--tree-expand-icon-color: $--color-text-placeholder;
 
