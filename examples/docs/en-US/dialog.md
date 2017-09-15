@@ -24,6 +24,7 @@
         dialogFormVisible: false,
         outerVisible: false,
         innerVisible: false,
+        centerDialogVisible: false,
         form: {
           name: '',
           region: '',
@@ -209,10 +210,10 @@ If a Dialog is nested in another Dialog, `append-to-body` is required.
 <template>
   <el-button type="text" @click="outerVisible = true">open the outer Dialog</el-button>
   
-  <el-dialog title="外层 Dialog" :visible.sync="outerVisible">
+  <el-dialog title="Outter Dialog" :visible.sync="outerVisible">
     <el-dialog
         width="30%"
-        title="内层 Dialog"
+        title="Inner Dialog"
         :visible.sync="innerVisible"
         append-to-body>
     </el-dialog>
@@ -232,6 +233,40 @@ If a Dialog is nested in another Dialog, `append-to-body` is required.
       };
     }
   }
+</script>
+```
+:::
+
+:::
+
+### Align in center
+Make the dialog's header & footer align in center
+
+:::demo Set `center` to `true` will align dialog's header & footer in center，while the content of it will not, to prevent breaking your own content's layout
+
+```html
+<el-button type="text" @click="centerDialogVisible = true">Click to open the Dialog</el-button>
+
+<el-dialog
+  title="Warning"
+  :visible.sync="centerDialogVisible"
+  width="30%"
+  center>
+  <span>It should be noted that the content will not be aligned in center by default</span>
+  <span slot="footer" class="dialog-footer">
+    <el-button @click="centerDialogVisible = false">Cancel</el-button>
+    <el-button type="primary" @click="centerDialogVisible = false">Confirm</el-button>
+  </span>
+</el-dialog>
+
+<script>
+  export default {
+    data() {
+      return {
+        centerDialogVisible: false
+      };
+    }
+  };
 </script>
 ```
 :::
@@ -258,6 +293,7 @@ If the variable bound to `visible` is managed in Vuex store, the `.sync` can not
 | close-on-press-escape | whether the Dialog can be closed by pressing ESC | boolean    | — | true |
 | show-close | whether to show a close button | boolean    | — | true |
 | before-close | callback before Dialog closes, and it will prevent Dialog from closing | function(done)，done is used to close the Dialog | — | — |
+| center | whether to align the header and footer in center | function(done)，done is used to close the Dialog | — | — |
 
 ### Slot
 

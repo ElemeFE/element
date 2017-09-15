@@ -83,6 +83,7 @@ $--font-size-large: 18px;
 $--font-color-base: #5a5e66;
 $--font-color-disabled-base: #bbb;
 $--font-weight-primary: 500;
+$--font-line-height-primary: 24px;
 
 /* Size
 -------------------------- */
@@ -457,10 +458,11 @@ $--switch-button-size: 16px;
 -------------------------- */
 $--dialog-background-color: $--color-primary-light-4;
 $--dialog-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-$--dialog-close-color: $--color-text-placeholder;
 $--dialog-close-hover-color: $--color-primary;
-$--dialog-title-font-size: 16px;
+$--dialog-title-font-size: $--font-size-large;
 $--dialog-font-size: 14px;
+$--dialog-line-height: $--font-line-height-primary;
+$--dialog-padding-primary: 15px;
 
 /* Table
 -------------------------- */

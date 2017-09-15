@@ -3,7 +3,7 @@
     <div class="el-dialog__wrapper" v-show="visible" @click.self="handleWrapperClick">
       <div
         class="el-dialog"
-        :class="[{ 'is-fullscreen': fullscreen }, customClass]"
+        :class="[{ 'is-fullscreen': fullscreen, 'el-dialog--center': center }, customClass]"
         ref="dialog"
         :style="style">
         <div class="el-dialog__header">
@@ -91,7 +91,11 @@
         type: String,
         default: '15vh'
       },
-      beforeClose: Function
+      beforeClose: Function,
+      center: {
+        type: Boolean,
+        default: false
+      }
     },
 
     data() {
