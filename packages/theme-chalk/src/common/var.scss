@@ -79,6 +79,7 @@ $--fill-base: $--color-white;
 -------------------------- */
 $--font-size-base: 14px;
 $--font-size-small: 13px;
+$--font-size-large: 18px;
 $--font-color-base: #5a5e66;
 $--font-color-disabled-base: #bbb;
 $--font-weight-primary: 500;
@@ -251,11 +252,12 @@ $--alert-icon-large-size: 28px;
 /* Message Box
 -------------------------- */
 $--msgbox-width: 420px;
-$--msgbox-border-radius: 3px;
-$--msgbox-font-size: 16px;
-$--msgbox-content-font-size: 14px;
-$--msgbox-content-color: $--link-color;
+$--msgbox-border-radius: 4px;
+$--msgbox-font-size: $--font-size-large;
+$--msgbox-content-font-size: $--font-size-base;
+$--msgbox-content-color: $--color-text-regular;
 $--msgbox-error-font-size: 12px;
+$--msgbox-padding-primary: 15px;
 
 $--msgbox-success-color: $--color-success;
 $--msgbox-info-color: $--color-info;
