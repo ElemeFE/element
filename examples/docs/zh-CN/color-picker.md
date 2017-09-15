@@ -4,7 +4,8 @@
       return {
         color1: '#20a0ff',
         color2: null,
-        color3: 'rgba(19, 206, 102, 0.8)'
+        color3: 'rgba(19, 206, 102, 0.8)',
+        color4: '#f0f'
       };
     },
     mounted() {
@@ -84,9 +85,28 @@
 ```
 :::
 
+### 隐藏清空按钮
+
+:::demo 将`show-clear`属性设置为`false`即可隐藏清空按钮。
+```html
+<el-color-picker v-model="color4" :show-clear="false"></el-color-picker>
+
+<script>
+  export default {
+    data() {
+      return {
+        color4: '#f0f'
+      }
+    }
+  };
+</script>
+```
+:::
+
 ### Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
+| show-clear | 是否显示清空按钮 | boolean | — | true |
 | show-alpha | 是否支持透明度选择 | boolean | — | false |
 | color-format | 写入 v-model 的颜色的格式 | string | hsl / hsv / hex / rgb | hex（show-alpha 为 false）/ rgb（show-alpha 为 true） |
 

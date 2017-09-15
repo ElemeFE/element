@@ -59,6 +59,7 @@
         },
         ruleForm: {
           name: '',
+          color: '#f0f',
           region: '',
           date1: '',
           date2: '',
@@ -79,6 +80,9 @@
           name: [
             { required: true, message: 'Please input Activity name', trigger: 'blur' },
             { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' }
+          ],
+          color: [
+            { required: true, message: 'Please pick a color', trigger: 'change' }
           ],
           region: [
             { required: true, message: 'Please select Activity zone', trigger: 'change' }
@@ -406,6 +410,9 @@ Form component allows you to verify your data, helping you find and correct erro
   <el-form-item label="Activity name" prop="name">
     <el-input v-model="ruleForm.name"></el-input>
   </el-form-item>
+  <el-form-item label="Background color" prop="color">
+    <el-color-picker v-model="ruleForm.color"></el-color-picker>
+  </el-form-item>
   <el-form-item label="Activity zone" prop="region">
     <el-select v-model="ruleForm.region" placeholder="Activity zone">
       <el-option label="Zone one" value="shanghai"></el-option>
@@ -456,6 +463,7 @@ Form component allows you to verify your data, helping you find and correct erro
       return {
         ruleForm: {
           name: '',
+          color: '#f0f',
           region: '',
           date1: '',
           date2: '',
@@ -468,6 +476,9 @@ Form component allows you to verify your data, helping you find and correct erro
           name: [
             { required: true, message: 'Please input Activity name', trigger: 'blur' },
             { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' }
+          ],
+          color: [
+            { required: true, message: 'Please pick a color', trigger: 'change' }
           ],
           region: [
             { required: true, message: 'Please select Activity zone', trigger: 'change' }

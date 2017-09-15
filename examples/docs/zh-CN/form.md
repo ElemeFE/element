@@ -59,6 +59,7 @@
         },
         ruleForm: {
           name: '',
+          color: '#f0f',
           region: '',
           date1: '',
           date2: '',
@@ -77,6 +78,9 @@
           name: [
             { required: true, message: '请输入活动名称', trigger: 'blur' },
             { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+          ],
+          color: [
+            { required: true, message: '请选择背景颜色', trigger: 'change' }
           ],
           region: [
             { required: true, message: '请选择活动区域', trigger: 'change' }
@@ -397,6 +401,9 @@
   <el-form-item label="活动名称" prop="name">
     <el-input v-model="ruleForm.name"></el-input>
   </el-form-item>
+  <el-form-item label="背景颜色" prop="color">
+    <el-color-picker v-model="ruleForm.color"></el-color-picker>
+  </el-form-item>
   <el-form-item label="活动区域" prop="region">
     <el-select v-model="ruleForm.region" placeholder="请选择活动区域">
       <el-option label="区域一" value="shanghai"></el-option>
@@ -447,6 +454,7 @@
       return {
         ruleForm: {
           name: '',
+          color: '#f0f',
           region: '',
           date1: '',
           date2: '',
@@ -459,6 +467,9 @@
           name: [
             { required: true, message: '请输入活动名称', trigger: 'blur' },
             { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+          ],
+          color: [
+            { required: true, message: '请选择背景颜色', trigger: 'change' }
           ],
           region: [
             { required: true, message: '请选择活动区域', trigger: 'change' }

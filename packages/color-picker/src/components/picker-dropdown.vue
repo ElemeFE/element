@@ -10,7 +10,7 @@
       <alpha-slider v-if="showAlpha" ref="alpha" :color="color"></alpha-slider>
       <div class="el-color-dropdown__btns">
         <span class="el-color-dropdown__value">{{ currentColor }}</span>
-        <a href="JavaScript:" class="el-color-dropdown__link-btn" @click="$emit('clear')">{{ t('el.colorpicker.clear') }}</a>
+        <a v-if="showClear" href="JavaScript:" class="el-color-dropdown__link-btn" @click="$emit('clear')">{{ t('el.colorpicker.clear') }}</a>
         <button class="el-color-dropdown__btn" @click="confirmValue">{{ t('el.colorpicker.confirm') }}</button>
       </div>
     </div>
@@ -39,6 +39,7 @@
       color: {
         required: true
       },
+      showClear: Boolean,
       showAlpha: Boolean
     },
 
