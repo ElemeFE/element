@@ -239,8 +239,8 @@ If a Dialog is nested in another Dialog, `append-to-body` is required.
 
 :::
 
-### Align in center
-Make the dialog's header & footer align in center
+### Centered content
+Header and footer of Dialog can be centered
 
 :::demo Set `center` to `true` will align dialog's header & footer in center，while the content of it will not, to prevent breaking your own content's layout
 
