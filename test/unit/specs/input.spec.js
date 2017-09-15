@@ -47,30 +47,24 @@ describe('Input', () => {
     expect(vm.$el.querySelector('input').getAttribute('disabled')).to.ok;
   });
 
-  it('icon', () => {
+  it('suffixIcon', () => {
     vm = createVue({
       template: `
-        <el-input
-          icon="time"
-          @click="handleIconClick"
-        >
-        </el-input>
-      `,
-      data() {
-        return {
-          iconClicked: false
-        };
-      },
-      methods: {
-        handleIconClick(ev) {
-          this.iconClicked = true;
-        }
-      }
+        <el-input suffix-icon="time"></el-input>
+      `
     }, true);
     var icon = vm.$el.querySelector('.el-input__icon');
-    icon.click();
-    expect(icon.classList.contains('el-icon-time')).to.true;
-    expect(vm.iconClicked).to.true;
+    expect(icon).to.be.exist;
+  });
+
+  it('prefixIcon', () => {
+    vm = createVue({
+      template: `
+        <el-input prefix-icon="time"></el-input>
+      `
+    }, true);
+    var icon = vm.$el.querySelector('.el-input__icon');
+    expect(icon).to.be.exist;
   });
 
   it('size', () => {
