@@ -35,6 +35,7 @@
         @input="handleInput"
         @focus="handleFocus"
         @blur="handleBlur"
+        @keyup.enter="handleEnter"
       >
       <i class="el-input__icon el-icon-loading" v-if="validating"></i>
       <!-- 后置元素 -->
@@ -51,6 +52,7 @@
       v-bind="$props"
       :style="textareaStyle"
       @focus="handleFocus"
+      @keyup.enter="handleEnter"
       @blur="handleBlur">
     </textarea>
   </div>
@@ -129,6 +131,9 @@
     },
 
     methods: {
+      handleEnter(event) {
+        this.$emit('enter', event);
+      },
       handleBlur(event) {
         this.$emit('blur', event);
         if (this.validateEvent) {
