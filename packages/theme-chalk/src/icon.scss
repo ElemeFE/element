@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'element-icons';
-  src: url('fonts/element-icons.woff?t=1504667669908') format('woff'), /* chrome, firefox */
-       url('fonts/element-icons.ttf?t=1504667669908') format('truetype'); /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  src: url('fonts/element-icons.woff?t=1505459769526') format('woff'), /* chrome, firefox */
+       url('fonts/element-icons.ttf?t=1505459769526') format('truetype'); /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
   font-weight: normal;
-  font-style: normal;
+  font-style: normal
 }
 
 [class^="el-icon-"], [class*=" el-icon-"] {
@@ -70,6 +70,8 @@
 .el-icon-error:before { content: "\e62c"; }
 .el-icon-success:before { content: "\e62d"; }
 .el-icon-warning:before { content: "\e62e"; }
+.el-icon-sort-down:before { content: "\e630"; }
+.el-icon-sort-up:before { content: "\e631"; }
 
 .el-icon-loading {
   animation: rotating 1s linear infinite;

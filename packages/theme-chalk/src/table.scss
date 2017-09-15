@@ -12,7 +12,33 @@
   background-color: $--color-white;
   font-size: 14px;
   color: $--table-text-color;
-  font-weight: normal;
+
+  // 拥有多级表头
+  @include m(group) {
+    border: 1px solid $--table-border-color;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 1px;
+      background-color: $--table-border-color;
+      z-index: 1;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 1px;
+      height: 100%;
+      background-color: $--table-border-color;
+      z-index: 1;
+    }
+  }
 
   .el-tooltip.cell {
     white-space: nowrap;
@@ -64,9 +90,13 @@
   }
 
   @include e(expanded-cell) {
-    padding: 20px 50px;
-    background-color: $--color-black;
+    background-color: $--color-white;
     box-shadow: inset 0 2px 0 #f4f4f4;
+
+    // 纯属为了增加权重
+    &[class*=cell] {
+      padding: 20px 50px;
+    }
 
     &:hover {
       background-color: $--table-row-hover-background !important;
@@ -86,6 +116,12 @@
     white-space: nowrap;
     overflow: hidden;
     user-select: none;
+  }
+
+  thead.is-group {
+    th {
+      background: $--background-color-base;
+    }
   }
 
   & th, td {
@@ -116,6 +152,10 @@
   @include m(border) {
     & th, td {
       border-right: 1px solid $--table-border-color;
+
+      .cell {
+        padding-left: 10px;
+      }
     }
 
     & th {
@@ -133,8 +173,8 @@
 
   & th > div {
     display: inline-block;
-    padding-left: 18px;
-    padding-right: 18px;
+    padding-left: 10px;
+    padding-right: 10px;
     line-height: 40px;
     box-sizing: border-box;
     overflow: hidden;
@@ -150,8 +190,9 @@
     position: absolute;
     top: 0;
     left: 0;
-    box-shadow: 1px 0 8px #d3d4d6;
     overflow-x: hidden;
+    @include scroll-bar;
+    box-shadow: $--table-fixed-box-shadow;
 
     &::before {
       content: '';
@@ -169,16 +210,14 @@
     position: absolute;
     top: -1px;
     right: 0;
-    background-color: $--table-header-background;
+    background-color: transparent;
     border-bottom: 1px solid $--table-border-color;
   }
 
   @include e(fixed-right) {
     top: 0;
     left: auto;
-    right: 0;
-
-    box-shadow: -1px 0 8px #d3d4d6;
+    right: -1px;
 
     .el-table__fixed-header-wrapper,
     .el-table__fixed-body-wrapper,
@@ -207,7 +246,7 @@
 
     & tbody td {
       border-top: 1px solid $--table-border-color;
-      background-color: $--table-footer-background;
+      background-color: $--table-row-hover-background;
       color: $--table-text-color;
     }
   }
@@ -244,7 +283,7 @@
     }
 
     & tbody td {
-      background-color: $--table-footer-background;
+      background-color: $--table-row-hover-background;
       color: $--table-text-color;
     }
   }
@@ -252,8 +291,20 @@
   @include e(body-wrapper) {
     overflow: auto;
     position: relative;
-
     @include scroll-bar;
+
+    @include when(scroll-left) {
+      ~ .el-table__fixed {
+        box-shadow: none;
+      }
+    }
+
+    @include when(scroll-right) {
+      ~ .el-table__fixed-right {
+        box-shadow: none;
+        border-left: 1px solid $--table-border-color;
+      }
+    }
   }
 
   & th.required > div::before {
@@ -272,7 +323,6 @@
     word-wrap: normal;
     text-overflow: ellipsis;
     display: inline-block;
-    line-height: 30px;
     vertical-align: middle;
     width: 100%;
     box-sizing: border-box;
@@ -286,49 +336,17 @@
     position: relative;
     display: inline-flex;
     align-items: center;
-    height: 12px;
-    width: 16px;
-    margin-left: 7px;
+    height: 13px;
+    width: 24px;
     cursor: pointer;
     overflow: initial;
   }
 
   & .sort-caret {
-    z-index: 2;
-    min-width: 1px;
-    height: 8px;
-    margin: 0 1.5px;
     color: $--icon-color-base;
-    background-color: currentColor;
-    transform: scale(1.5) translateY(-1px);
-
-    @include share-rule(sort-caret) {
-      &::after {
-        content: '';
-        position: absolute;
-        display: block;
-        width: 1px;
-        height: 4px;
-        transform-origin: 0 0;
-        transform: rotate(40deg);
-        background-color: currentColor;
-      }
-    }
-
-    &.ascending {
-      @include extend-rule(sort-caret);
-      &::after {
-        top: 0;
-      }
-    }
-
-    &.descending {
-      @include extend-rule(sort-caret);
-      &::after {
-        bottom: 0;
-        left: 3px;
-      }
-    }
+    width: 14px;
+    overflow: hidden;
+    font-size: 13px;
   }
 
   & .ascending .sort-caret.ascending {
@@ -363,8 +381,8 @@
     white-space: normal;
     word-break: break-all;
     line-height: 23px;
-    padding-left: 18px;
-    padding-right: 18px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   & tr input[type="checkbox"] {
@@ -425,12 +443,12 @@
   @include e(column-filter-trigger) {
     display: inline-block;
     line-height: 34px;
-    margin-left: 5px;
     cursor: pointer;
 
     & i {
       color: $--color-info;
       font-size: 12px;
+      transform: scale(.75);
     }
   }
 

@@ -68,6 +68,9 @@ export default {
   render(h) {
     const originColumns = this.store.states.originColumns;
     const columnRows = convertToRows(originColumns, this.columns);
+    // 是否拥有多级表头
+    const isGroup = columnRows.length > 1;
+    if (isGroup) this.$parent.isGroup = true;
 
     return (
       <table
@@ -89,7 +92,7 @@ export default {
               : ''
           }
         </colgroup>
-        <thead>
+        <thead class={ [isGroup ? 'is-group' : ''] }>
           {
             this._l(columnRows, (columns, rowIndex) =>
               <tr>
@@ -102,7 +105,7 @@ export default {
                     on-mouseout={ this.handleMouseOut }
                     on-mousedown={ ($event) => this.handleMouseDown($event, column) }
                     on-click={ ($event) => this.handleHeaderClick($event, column) }
-                    class={ [column.id, column.order, column.headerAlign, column.className || '', rowIndex === 0 && this.isCellHidden(cellIndex, columns) ? 'is-hidden' : '', !column.children ? 'is-leaf' : '', column.labelClassName] }>
+                    class={ [column.id, column.order, column.headerAlign, column.className || '', rowIndex === 0 && this.isCellHidden(cellIndex, columns) ? 'is-hidden' : '', !column.children ? 'is-leaf' : 'mutile', column.labelClassName] }>
                     <div class={ ['cell', column.filteredValue && column.filteredValue.length > 0 ? 'highlight' : '', column.labelClassName] }>
                     {
                       column.renderHeader
@@ -112,8 +115,12 @@ export default {
                     {
                       column.sortable
                         ? <span class="caret-wrapper" on-click={ ($event) => this.handleSortClick($event, column) }>
-                            <span class="sort-caret ascending" on-click={ ($event) => this.handleSortClick($event, column, 'ascending') }></span>
-                            <span class="sort-caret descending" on-click={ ($event) => this.handleSortClick($event, column, 'descending') }></span>
+                            <span class="sort-caret ascending" on-click={ ($event) => this.handleSortClick($event, column, 'ascending') }>
+                              <i class="el-icon-sort-up"></i>
+                            </span>
+                            <span class="sort-caret descending" on-click={ ($event) => this.handleSortClick($event, column, 'descending') }>
+                              <i class="el-icon-sort-down"></i>
+                            </span>
                           </span>
                         : ''
                     }
