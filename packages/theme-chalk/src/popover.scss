@@ -5,13 +5,20 @@
   position: absolute;
   background: $--popover-fill;
   min-width: 150px;
-  border-radius: 2px;
+  border-radius: 4px;
   border: 1px solid $--popover-border-color;
   padding: $--popover-padding;
   z-index: $--index-popper;
+  color: $--color-text-regular;
+  line-height: 1.7;
+  text-align: justify;
+  word-break: break-all;
   font-size: $--popover-font-size;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .12),
-              0 0 6px 0 rgba(0, 0, 0, .04);
+  box-shadow: $--box-shadow-light;
+
+  @include m(plain) {
+    padding: $--popover-padding-large;
+  }
 
   .popper__arrow,
   .popper__arrow::after {
@@ -25,6 +32,7 @@
 
   .popper__arrow {
     border-width: $--popover-arrow-size;
+    filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.03))
   }
 
   .popper__arrow::after {
@@ -113,6 +121,6 @@
     color: $--popover-title-color;
     font-size: $--popover-title-font-size;
     line-height: 1;
-    margin-bottom: 9px;
+    margin-bottom: 15px;
   }
 }

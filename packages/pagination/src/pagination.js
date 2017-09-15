@@ -192,16 +192,25 @@ export default {
         handleFocus(event) {
           this.oldValue = event.target.value;
         },
+        handleBlur({ target }) {
+          this.reassignMaxValue(target);
+        },
         handleKeyUp(event) {
           const key = event.key || '';
           const keyCode = event.keyCode || '';
           if ((key && key === 'Enter') || (keyCode && keyCode === 13)) {
+            this.reassignMaxValue(event.target);
             this.handleChange({ target: event.target });
           }
         },
         handleChange({ target }) {
           this.$parent.internalCurrentPage = this.$parent.getValidCurrentPage(target.value);
           this.oldValue = null;
+        },
+        reassignMaxValue(target) {
+          if (+target.value > this.$parent.internalPageCount) {
+            target.value = this.$parent.internalPageCount;
+          }
         }
       },
 
@@ -213,11 +222,12 @@ export default {
               class="el-pagination__editor"
               type="number"
               min={ 1 }
-              max={ this.internalPageCount }
+              max={ this.$parent.internalPageCount }
               value={ this.$parent.internalCurrentPage }
               domProps-value={ this.$parent.internalCurrentPage }
               on-change={ this.handleChange }
               on-focus={ this.handleFocus }
+              on-blur={ this.handleBlur }
               on-keyup={ this.handleKeyUp }
               number/>
             { this.t('el.pagination.pageClassifier') }

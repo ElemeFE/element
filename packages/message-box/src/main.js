@@ -25,7 +25,9 @@ const defaults = {
   cancelButtonClass: '',
   customClass: '',
   beforeClose: null,
-  dangerouslyUseHTMLString: false
+  dangerouslyUseHTMLString: false,
+  center: false,
+  roundButton: false
 };
 
 import Vue from 'vue';

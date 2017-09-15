@@ -5,13 +5,13 @@
   background-color: $--tag-fill;
   display: inline-block;
   padding: $--tag-padding;
-  height: 24px;
-  line-height: 22px;
+  height: 30px;
+  line-height: 28px;
   font-size: $--tag-font-size;
   color: $--tag-color;
   border-radius: $--tag-border-radius;
   box-sizing: border-box;
-  border: 1px solid transparent;
+  border: 1px solid $--tag-border;
   white-space: nowrap;
 
   & .el-icon-close {
@@ -27,36 +27,28 @@
     vertical-align: middle;
     top: -1px;
     right: -2px;
+    color: $--tag-color;
 
     &:hover {
-      background-color: $--color-white;
-      color: $--tag-fill;
-    }
-  }
-
-  @include m(gray) {
-    background-color: $--tag-gray-fill;
-    border-color: $--tag-gray-border;
-    color: $--tag-gray-color;
-    @include when(hit) {
-      border-color: $--tag-gray-color;
-    }
-
-    & .el-tag__close:hover {
-      background-color: $--tag-gray-color;
+      background-color: $--tag-color;
       color: $--color-white;
     }
   }
-  @include m(primary) {
-    background-color: $--tag-primary-fill;
-    border-color: $--tag-primary-border;
-    color: $--tag-primary-color;
+
+  @include m(info) {
+    background-color: $--tag-info-fill;
+    border-color: $--tag-info-border;
+    color: $--tag-info-color;
     @include when(hit) {
-      border-color: $--tag-primary-color;
+      border-color: $--tag-info-color;
+    }
+
+    & .el-tag__close {
+      color: $--tag-info-color;
     }
 
     & .el-tag__close:hover {
-      background-color: $--tag-primary-color;
+      background-color: $--tag-info-color;
       color: $--color-white;
     }
   }
@@ -66,6 +58,10 @@
     color: $--tag-success-color;
     @include when(hit) {
       border-color: $--tag-success-color;
+    }
+
+    & .el-tag__close {
+      color: $--tag-success-color;
     }
 
     & .el-tag__close:hover {
@@ -81,6 +77,10 @@
       border-color: $--tag-warning-color;
     }
 
+    & .el-tag__close {
+      color: $--tag-warning-color;
+    }
+
     & .el-tag__close:hover {
       background-color: $--tag-warning-color;
       color: $--color-white;
@@ -92,6 +92,10 @@
     color: $--tag-danger-color;
     @include when(hit) {
       border-color: $--tag-danger-color;
+    }
+
+    & .el-tag__close {
+      color: $--tag-danger-color;
     }
 
     & .el-tag__close:hover {

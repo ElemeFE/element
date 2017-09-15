@@ -98,6 +98,25 @@
         this.$alert('<strong>这是 <i>HTML</i> 片段</strong>', 'HTML 片段', {
           dangerouslyUseHTMLString: true
         });
+      },
+
+      open6() {
+        this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning',
+          center: true
+        }).then(() => {
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });
+        });
       }
     }
   };
@@ -290,6 +309,43 @@
 ```
 :::
 
+### 居中布局
+内容支持居中布局
+
+:::demo 将 `center` 为 `true` 将采用居中布局
+
+```html
+<template>
+  <el-button type="text" @click="open6">点击打开 Message Box</el-button>
+</template>
+
+<script>
+  export default {
+    methods: {
+      open6() {
+        this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning',
+          center: true
+        }).then(() => {
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });
+        });
+      }
+    }
+  }
+</script>
+```
+:::
+
 :::warning
 `message` 属性虽然支持传入 HTML 片段，但是在网站上动态渲染任意 HTML 是非常危险的，因为容易导致 [XSS 攻击](https://en.wikipedia.org/wiki/Cross-site_scripting)。因此在 `dangerouslyUseHTMLString` 打开的情况下，请确保 `message` 的内容是可信的，**永远不要**将用户提交的内容赋值给 `message` 属性。
 :::
@@ -339,3 +395,5 @@ import { MessageBox } from 'element-ui';
 | inputPattern | 输入框的校验表达式 | regexp | — | — |
 | inputValidator | 输入框的校验函数。可以返回布尔值或字符串，若返回一个字符串, 则返回结果会被赋值给 inputErrorMessage | function | — | — |
 | inputErrorMessage | 校验未通过时的提示文本 | string | — | 输入的数据不合法! |
+| center | 是否居中布局 | boolean | — | false |
+| roundButton | 是否使用圆角按钮 | boolean | — | false |
