@@ -237,7 +237,7 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
 ### 居中布局
 标题和底部采用居中布局
 
-:::demo 将 `center` 为 `true` 将使标题和底部居中，同时为了防止破坏弹窗内容的布局，内容默认是不局中的
+:::demo 将 `center` 设置为 `true` 即可使标题和底部居中，同时为了防止破坏内容的布局，内容默认是不居中的
 
 ```html
 <el-button type="text" @click="centerDialogVisible = true">点击打开 Dialog</el-button>
