@@ -29,6 +29,16 @@
       z-index: calc(var(--index-normal) + 1);
     }
 
+    .el-input__suffix-inner {
+      position: relative;
+      z-index: 2;
+    }
+
+    @e clearIcon {
+      z-index: 2;
+      position: relative;
+    }
+
     @e label {
       position: absolute;
       left: 0;
