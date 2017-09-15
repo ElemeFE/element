@@ -311,10 +311,14 @@ Can be customized to show various content.
 ```
 :::
 
-### Align in center
-Align the content in center
+:::warning
+Although `message` property supports HTML strings, dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily lead to [XSS attacks](https://en.wikipedia.org/wiki/Cross-site_scripting). So when `dangerouslyUseHTMLString` is on, please make sure the content of `message` is trusted, and **never** assign `message` to user-provided content.
+:::
 
-:::demo set `center` to `true` will align the content in center
+### Centered content
+Content of MessageBox can be centered.
+
+:::demo Setting `center` to `true` will center the content
 
 ```html
 <template>
@@ -348,10 +352,6 @@ Align the content in center
 ```
 :::
 
-:::warning
-Although `message` property supports HTML strings, dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily lead to [XSS attacks](https://en.wikipedia.org/wiki/Cross-site_scripting). So when `dangerouslyUseHTMLString` is on, please make sure the content of `message` is trusted, and **never** assign `message` to user-provided content.
-:::
-
 ### Global method
 
 If Element is fully imported, it will add the following global methods for Vue.prototype: `$msgbox`, `$alert`, `$confirm` and `$prompt`. So in a Vue instance you can call `MessageBox` like what we did in this page. The parameters are:
@@ -369,10 +369,6 @@ import { MessageBox } from 'element-ui';
 ```
 
 The corresponding methods are: `MessageBox`, `MessageBox.alert`, `MessageBox.confirm` and `MessageBox.prompt`. The parameters are the same as above.
-
-:::warning
-Although `message` property supports HTML strings, dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily lead to [XSS attacks](https://en.wikipedia.org/wiki/Cross-site_scripting). Please make sure the content of `message` is trusted, and **never** assign `message` to user-provided content.
-:::
 
 ### Options
 
