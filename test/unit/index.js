@@ -4,7 +4,7 @@ Function.prototype.bind = require('function-bind');
 require('packages/theme-default/src/index.css');
 
 // require all test files (files that ends with .spec.js)
-const testsContext = require.context('./specs', true, /\.spec$/);
+const testsContext = require.context('./specs', true, /cascader\.spec$/);
 testsContext.keys().forEach(testsContext);
 
 // require all src files except main.js for coverage.

@@ -24,7 +24,7 @@
       :size="size"
       :disabled="disabled"
     >
-      <template slot="icon">
+      <template slot="suffix">
         <i
           key="1"
           v-if="clearable && inputHover && currentLabels.length"

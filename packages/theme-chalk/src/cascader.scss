@@ -27,6 +27,11 @@
     z-index: #{$--index-normal + 1};
   }
 
+  @include e(clearIcon) {
+    z-index: 2;
+    position: relative;
+  }
+
   @include e(label) {
     position: absolute;
     left: 0;
