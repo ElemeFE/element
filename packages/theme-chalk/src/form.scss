@@ -43,6 +43,10 @@
     margin-bottom: 0;
   }
 
+  & .el-input__validateIcon {
+    display: none;
+  }
+
   @include e(label) {
     text-align: right;
     vertical-align: middle;
@@ -80,7 +84,7 @@
   @include when(error) {
     & .el-input__inner,
     & .el-textarea__inner {
-      &:focus {
+      &, &:focus {
         border-color: $--color-danger;
       }
     }
@@ -109,6 +113,11 @@
     }
     .el-input__validateIcon {
       color: $--color-success;
+    }
+  }
+  @include m(feedback) {
+    .el-input__validateIcon {
+      display: inline-block;
     }
   }
 }

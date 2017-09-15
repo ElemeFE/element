@@ -1,5 +1,6 @@
 <template>
   <div class="el-form-item" :class="{
+    'el-form-item--feedback': statusFeedback,
     'is-error': validateState === 'error',
     'is-validating': validateState === 'validating',
     'is-success': validateState === 'success',
@@ -63,6 +64,7 @@
       labelWidth: String,
       prop: String,
       required: Boolean,
+      statusFeedback: Boolean,
       rules: [Object, Array],
       error: String,
       validateStatus: String,
