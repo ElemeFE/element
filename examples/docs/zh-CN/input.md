@@ -801,6 +801,7 @@ export default {
 | trigger-on-focus | 是否在输入框 focus 时显示建议列表 | boolean | — | true |
 | on-icon-click | 点击图标的回调函数 | function | — | — |
 | icon          | 输入框尾部图标    | string          | — | — |
+| select-when-unmatched | 在输入没有任何匹配建议的情况下，按下回车是否触发 `select` 事件 | boolean | — | false |
 
 ### props
 | 参数     | 说明              | 类型   | 可选值 | 默认值 |
