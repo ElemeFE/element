@@ -32,47 +32,69 @@
   }
 
   @include e(header) {
-    padding: 20px 20px 0;
-    @include utils-clearfix;
+    padding: $--dialog-padding-primary;
+    padding-bottom: 10px;
   }
 
   @include e(headerbtn) {
-    float: right;
+    position: absolute;
+    top: $--dialog-padding-primary;
+    right: $--dialog-padding-primary;
+    padding: 0;
     background: transparent;
     border: none;
     outline: none;
-    padding: 0;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 12px;
 
     .el-dialog__close {
-      color: $--dialog-close-color;
+      color: $--color-info;
     }
 
     &:focus, &:hover {
       .el-dialog__close {
-        color: $--dialog-close-hover-color;
+        color: $--color-primary;
       }
     }
   }
 
   @include e(title) {
-    line-height: 1;
+    line-height: $--dialog-line-height;
     font-size: $--dialog-title-font-size;
-    font-weight: bold;
-    color: $--color-black;
+    color: $--color-text-primary;
   }
 
   @include e(body) {
     padding: 30px 20px;
-    color: $--color-black;
+    color: $--color-text-regular;
+    line-height: $--dialog-line-height;
     font-size: $--dialog-font-size;
   }
 
   @include e(footer) {
-    padding: 10px 20px 15px;
+    padding: $--dialog-padding-primary;
+    padding-top: 10px;
     text-align: right;
     box-sizing: border-box;
+  }
+
+  // 内容居中布局
+  @include m(center) {
+    text-align: center;
+
+    @include e(header) {
+      padding-top: 30px;
+    }
+
+    @include e(body) {
+      text-align: initial;
+      padding: 25px ($--dialog-padding-primary + 12px) 30px;
+    }
+
+    @include e(footer) {
+      text-align: inherit;
+      padding-bottom: 30px;
+    }
   }
 }
 
