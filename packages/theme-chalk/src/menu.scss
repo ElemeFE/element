@@ -16,7 +16,7 @@
 }
 
 @include b(menu) {
-  border-radius: 2px;
+  border-right: solid 1px #e6e6e6;
   list-style: none;
   position: relative;
   margin: 0;
@@ -28,27 +28,9 @@
     list-style: none;
   }
 
-  @include m(dark) {
-    background-color: $--dark-menu-item-fill;
-
-    & .el-menu-item,
-    & .el-submenu__title {
-      color: $--color-black;
-
-      &:hover {
-        background-color: $--color-black;
-      }
-    }
-
-    & .el-submenu .el-menu {
-      background-color: $--color-black;
-
-      & .el-menu-item:hover {
-        background-color: $--color-black;
-      }
-    }
-  }
   @include m(horizontal) {
+    border-right: none;
+    border-bottom: solid 1px #e6e6e6;
     & .el-menu-item {
       float: left;
       height: 60px;
@@ -57,7 +39,8 @@
       cursor: pointer;
       position: relative;
       box-sizing: border-box;
-      border-bottom: 5px solid transparent;
+      border-bottom: 2px solid transparent;
+      color: $--color-text-secondary;
 
       a,
       a:hover {
@@ -65,7 +48,7 @@
       }
 
       &:hover {
-        background-color: $--menu-item-hover-fill;
+        background-color: #fff;
       }
     }
     & .el-submenu {
@@ -76,18 +59,23 @@
         position: absolute;
         top: 65px;
         left: 0;
-        border:1px solid $--color-black;
+        border: none;
         padding: 5px 0;
         background-color: $--color-white;
         z-index: 100;
         min-width: 100%;
-        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.12), 0 0 6px 0 rgba(0,0,0,0.04);
+        box-shadow: $--box-shadow-light;
       }
 
       & .el-submenu__title {
         height: 60px;
         line-height: 60px;
-        border-bottom: 5px solid transparent;
+        border-bottom: 2px solid transparent;
+        color: $--color-text-secondary;
+      }
+
+      .el-submenu__title:hover {
+        background-color: #fff;
       }
 
       & .el-menu-item {
@@ -101,40 +89,18 @@
       & .el-submenu__icon-arrow {
         position: static;
         vertical-align: middle;
-        margin-left: 5px;
-        color: $--color-black;
+        margin-left: 8px;
         margin-top: -3px;
       }
     }
     & .el-menu-item:hover,
     & .el-submenu__title:hover {
-      background-color: $--menu-item-fill;
+      color: $--color-text-primary;
     }
-    & > .el-menu-item:hover,
-    & > .el-submenu:hover .el-submenu__title,
+    & > .el-menu-item.is-active,
     & > .el-submenu.is-active .el-submenu__title {
-      border-bottom: 5px solid $--color-primary;
-    }
-
-    &.el-menu--dark {
-      & .el-menu-item:hover,
-      & .el-submenu__title:hover {
-        background-color: $--dark-menu-item-fill;
-      }
-
-      & .el-submenu {
-        .el-menu-item,
-        .el-submenu-title {
-          color: $--color-black;
-
-          &:hover {
-            background-color: $--color-black;
-          }
-        }
-        .el-menu-item.is-active {
-          color: $--color-primary;
-        }
-      }
+      border-bottom: 2px solid $--color-primary;
+      color: $--color-text-primary;
     }
   }
   @include m(collapse) {
@@ -160,6 +126,10 @@
       }
     }
 
+    > .el-menu-item.is-active i {
+      color: inherit;
+    }
+
     .el-submenu {
       position: relative;
       & .el-menu {
@@ -168,6 +138,7 @@
         top: 0;
         left: 100%;
         z-index: 10;
+        box-shadow: $--box-shadow-light;
       }
 
       &.is-opened {
@@ -196,7 +167,10 @@
     margin-right: 0;
   }
   &:hover {
-    background-color: $--color-black;
+    background-color: $--menu-item-hover-fill;
+  }
+  i {
+    color: $--color-text-secondary;
   }
   @include when(active) {
     color: $--color-primary;
@@ -208,26 +182,26 @@
     position: relative;
     @include menu-item;
 
-    &:hover {
-      background-color: $--color-black;
-    }
-
     & * {
       vertical-align: middle;
     }
+
+    i {
+      color: $--color-text-secondary;
+    }
+
+    &:hover {
+      background-color: $--menu-item-hover-fill;
+    }
   }
   & .el-menu {
-    background-color: $--color-black;
+    border: none;
   }
   & .el-menu-item {
     height: 50px;
     line-height: 50px;
     padding: 0 45px;
     min-width: 200px;
-
-    &:hover {
-      background-color: $--color-black;
-    }
   }
   @include e(icon-arrow) {
     position: absolute;
@@ -260,11 +234,10 @@
     padding: 0;
   }
   @include e(title) {
-    padding-top: 15px;
+    padding: 7px 0 7px 20px;
     line-height: normal;
-    font-size: 14px;
-    padding-left: 20px;
-    color: $--color-black;
+    font-size: 12px;
+    color: $--color-text-secondary;
   }
 }
 
