@@ -240,9 +240,9 @@ If a Dialog is nested in another Dialog, `append-to-body` is required.
 :::
 
 ### Centered content
-Header and footer of Dialog can be centered
+Dialog's content can be centered.
 
-:::demo Set `center` to `true` will align dialog's header & footer in center，while the content of it will not, to prevent breaking your own content's layout
+:::demo Setting `center` to `true` will center dialog's header and footer horizontally.
 
 ```html
 <el-button type="text" @click="centerDialogVisible = true">Click to open the Dialog</el-button>
@@ -272,6 +272,10 @@ Header and footer of Dialog can be centered
 :::
 
 :::tip
+`center` only affects Dialog's header and footer. The body of Dialog can be anything, so sometimes it may not look good when centered. You need to write some CSS if you wish to center the body as well.
+:::
+
+:::tip
 If the variable bound to `visible` is managed in Vuex store, the `.sync` can not work properly. In this case, please remove the `.sync` modifier, listen to `open` and `close` events of Dialog, and commit Vuex mutations to update the value of that variable in the event handlers.
 :::
 
@@ -293,7 +297,7 @@ If the variable bound to `visible` is managed in Vuex store, the `.sync` can not
 | close-on-press-escape | whether the Dialog can be closed by pressing ESC | boolean    | — | true |
 | show-close | whether to show a close button | boolean    | — | true |
 | before-close | callback before Dialog closes, and it will prevent Dialog from closing | function(done)，done is used to close the Dialog | — | — |
-| center | whether to align the header and footer in center | function(done)，done is used to close the Dialog | — | — |
+| center | whether to align the header and footer in center | boolean | — | false |
 
 ### Slot
 
