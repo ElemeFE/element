@@ -584,13 +584,9 @@ $--steps-padding: 20px;
 
 /* Menu
 --------------------------*/
-$--menu-item-color: $--link-color;
-$--menu-item-fill: $--color-text-placeholder;
-$--menu-item-hover-fill: $--disabled-border-base;
-
-$--dark-menu-item-color: $--link-color;
-$--dark-menu-item-fill: $--color-text-secondary;
-$--dark-menu-item-hover-fill: $--link-color;
+$--menu-item-color: $--color-text-primary;
+$--menu-item-fill: $--color-white;
+$--menu-item-hover-fill: $--color-primary-light-9;
 
 /* Rate
 --------------------------*/
