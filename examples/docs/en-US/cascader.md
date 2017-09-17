@@ -302,7 +302,6 @@ There are two ways to expand child option items.
     expand-trigger="hover"
     :options="options"
     v-model="selectedOptions2"
-    clearable
     @change="handleChange">
   </el-cascader>
 </div>

@@ -12,7 +12,13 @@
     <div class="el-form-item__content" v-bind:style="contentStyle">
       <slot></slot>
       <transition name="el-zoom-in-top">
-        <div class="el-form-item__error" v-if="validateState === 'error' && showMessage && form.showMessage">{{validateMessage}}</div>
+        <div
+          v-if="validateState === 'error' && showMessage && form.showMessage"
+          class="el-form-item__error"
+          :class="{'el-form-item__error--inline': inlineMessage}"
+        >
+          {{validateMessage}}
+        </div>
       </transition>
     </div>
   </div>
@@ -55,9 +61,11 @@
 
     provide() {
       return {
-        formItem: this
+        elFormItem: this
       };
     },
+
+    inject: ['elForm'],
 
     props: {
       label: String,
@@ -68,6 +76,7 @@
       rules: [Object, Array],
       error: String,
       validateStatus: String,
+      inlineMessage: Boolean,
       showMessage: {
         type: Boolean,
         default: true
