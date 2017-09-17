@@ -95,10 +95,10 @@ export default {
     transfer: {
       noMatch: 'אין נתונים מתאימים',
       noData: 'ללא נתונים',
-      titles: ['רשימה 1', 'רשימה 2'], // to be translated
-      filterPlaceholder: 'הקלד', // to be translated
-      noCheckedFormat: 'פריטים {total}', // to be translated
-      hasCheckedFormat: ' אישור {checked}/{total}' // to be translated
+      titles: ['רשימה 1', 'רשימה 2'],
+      filterPlaceholder: 'הקלד',
+      noCheckedFormat: 'פריטים {total}',
+      hasCheckedFormat: ' אישור {checked}/{total}'
     }
   }
 };
