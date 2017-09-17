@@ -770,6 +770,7 @@ When an `el-form-item` is nested in another `el-form-item`, its label width will
 | rules | validation rules of form | object | — | — |
 | error | field error message, set its value and the field will validate error and show this message immediately | string | — | — |
 | show-message  | whether to show the error message | boolean | — | true |
+| inline-message  | inline style validate message | boolean | — | false |
 
 
 ### Form-Item Slot

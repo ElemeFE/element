@@ -41,10 +41,7 @@
 
       @include when(show-close) {
         transition: 0s;
-        // height: 16px;
-        // width: 16px;
         font-size: $--select-font-size;
-        // right: 8px;
         text-align: center;
         transform: rotateZ(180deg);
         border-radius: $--border-radius-circle;

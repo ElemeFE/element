@@ -80,7 +80,7 @@
 
     mixins: [emitter, Focus('input')],
 
-    inject: ['formItem'],
+    inject: ['elFormItem'],
 
     data() {
       return {

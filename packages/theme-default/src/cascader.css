@@ -34,11 +34,6 @@
       z-index: 2;
     }
 
-    @e clearIcon {
-      z-index: 2;
-      position: relative;
-    }
-
     @e label {
       position: absolute;
       left: 0;

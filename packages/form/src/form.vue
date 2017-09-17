@@ -12,6 +12,12 @@
 
     componentName: 'ElForm',
 
+    provide() {
+      return {
+        elForm: this
+      };
+    },
+
     props: {
       model: Object,
       rules: Object,

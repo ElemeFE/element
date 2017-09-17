@@ -71,6 +71,14 @@
     position: absolute;
     top: 100%;
     left: 0;
+
+    @include m(inline) {
+      position: relative;
+      top: auto;
+      left: auto;
+      display: inline-block;
+      margin-left: 10px;
+    }
   }
 
   @include when(required) {
