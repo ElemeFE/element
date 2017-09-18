@@ -15,28 +15,29 @@
 
   // 拥有多级表头
   @include m(group) {
-    border: 1px solid $--table-border-color;
+    border: $--table-border;
 
-    &::before {
+    @include share-rule(group-pseudo) {
       content: '';
       position: absolute;
+      background-color: $--border-color-lighter;
+      z-index: 1;
+    }
+
+    &::before {
+      @include extend-rule(group-pseudo);
       left: 0;
       bottom: 0;
       width: 100%;
       height: 1px;
-      background-color: $--table-border-color;
-      z-index: 1;
     }
 
     &::after {
-      content: '';
-      position: absolute;
+      @include extend-rule(group-pseudo);
       top: 0;
       right: 0;
       width: 1px;
       height: 100%;
-      background-color: $--table-border-color;
-      z-index: 1;
     }
   }
 
@@ -146,20 +147,24 @@
   }
 
   & th.is-leaf, td {
-    border-bottom: 1px solid $--table-border-color;
+    border-bottom: $--table-border;
   }
 
+  // 带 border
   @include m(border) {
-    & th, td {
-      border-right: 1px solid $--table-border-color;
+    border-top: $--table-border;
+    border-left: $--table-border;
 
-      .cell {
-        padding-left: 10px;
-      }
+    & th, td {
+      border-right: $--table-border;
+    }
+
+    .cell {
+      padding-left: 10px;
     }
 
     & th {
-      border-bottom: 1px solid $--table-border-color;
+      border-bottom: $--table-border;
     }
   }
 
@@ -191,7 +196,6 @@
     top: 0;
     left: 0;
     overflow-x: hidden;
-    @include scroll-bar;
     box-shadow: $--table-fixed-box-shadow;
 
     &::before {
@@ -201,7 +205,7 @@
       bottom: 0;
       width: 100%;
       height: 1px;
-      background-color: $--table-border-color;
+      background-color: $--border-color-lighter;
       z-index: 4;
     }
   }
@@ -211,7 +215,7 @@
     top: -1px;
     right: 0;
     background-color: transparent;
-    border-bottom: 1px solid $--table-border-color;
+    border-bottom: $--table-border;
   }
 
   @include e(fixed-right) {
@@ -245,7 +249,7 @@
     z-index: 3;
 
     & tbody td {
-      border-top: 1px solid $--table-border-color;
+      border-top: $--table-border;
       background-color: $--table-row-hover-background;
       color: $--table-text-color;
     }
@@ -266,7 +270,7 @@
   @include e(footer-wrapper) {
     margin-top: -1px;
     td {
-      border-top: 1px solid $--table-border-color;
+      border-top: $--table-border;
     }
   }
 
@@ -291,7 +295,6 @@
   @include e(body-wrapper) {
     overflow: auto;
     position: relative;
-    @include scroll-bar;
 
     @include when(scroll-left) {
       ~ .el-table__fixed {
@@ -302,7 +305,20 @@
     @include when(scroll-right) {
       ~ .el-table__fixed-right {
         box-shadow: none;
-        border-left: 1px solid $--table-border-color;
+      }
+    }
+
+    .el-table--border {
+      @include when(scroll-right) {
+        ~ .el-table__fixed-right {
+          border-left: $--table-border;
+        }
+      }
+
+      @include when(scroll-left) {
+        ~ .el-table__fixed {
+          border-right: $--table-border;
+        }
       }
     }
   }
@@ -430,7 +446,7 @@
     top: 0;
     bottom: 0;
     width: 0;
-    border-left: 1px solid $--table-border-color;
+    border-left: $--table-border;
     z-index: 10;
   }
 

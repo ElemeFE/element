@@ -3,7 +3,7 @@
     :class="{
       'el-table--fit': fit,
       'el-table--striped': stripe,
-      'el-table--border': border,
+      'el-table--border': border || isGroup,
       'el-table--hidden': isHidden,
       'el-table--group': isGroup,
       'el-table--fluid-height': maxHeight,

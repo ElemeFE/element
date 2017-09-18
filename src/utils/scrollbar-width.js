@@ -6,9 +6,6 @@ export default function() {
   if (Vue.prototype.$isServer) return 0;
   if (scrollBarWidth !== undefined) return scrollBarWidth;
 
-  // webkit 下定制了 scrollbar 的宽度为6
-  if (window.navigator.userAgent.search('webkit') > 0) return 6;
-
   const outer = document.createElement('div');
   outer.className = 'el-scrollbar__wrap';
   outer.style.visibility = 'hidden';
