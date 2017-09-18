@@ -101,9 +101,10 @@ export default {
     abort(file) {
       const { reqs } = this;
       if (file) {
-        let uid = file;
-        if (file.uid) uid = file.uid;
-        if (reqs[uid]) {
+        if (!file.uid){
+          return;
+        } else {
+          const { uid } = file;
           reqs[uid].abort();
         }
       } else {
