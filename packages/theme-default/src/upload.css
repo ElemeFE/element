@@ -113,13 +113,13 @@
 
       & .el-progress {
         position: absolute;
-        bottom: -3px;
+        top: 20px;
         width: 100%;
       }
       & .el-progress__text {
         position: absolute;
         right: 0;
-        top: -10px;
+        top: -13px;
         right: 0;
       }
       .el-progress-bar {
@@ -152,6 +152,9 @@
         .el-icon-close {
           display: inline-block;
         }
+        .el-progress__text {
+          display: none;
+        }
       }
       @when success {
         .el-upload-list__item-status-label {
@@ -166,6 +169,11 @@
             display: none;
           }
         }
+      }
+    }
+    @when disabled {
+      .el-upload-list__item:hover .el-upload-list__item-status-label {
+        display: block;
       }
     }
     @e item-name {
@@ -229,8 +237,13 @@
           display: none;
         }
 
-        &:hover .el-upload-list__item-status-label {
-          display: none;
+        &:hover {
+          .el-upload-list__item-status-label {
+            display: none;
+          }
+          .el-progress__text {
+            display: block;
+          }
         }
       }
       .el-upload-list__item-name {
@@ -327,6 +340,9 @@
             top: -2px;
             right: -12px;
           }
+          .el-progress__text {
+            display: block;
+          }
         }
         &.is-success {
           .el-upload-list__item-name {
@@ -379,7 +395,8 @@
         }
       }
       .el-progress {
-        position: static;
+        position: relative;
+        top: -7px;
       }
     }
   }

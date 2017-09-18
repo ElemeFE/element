@@ -11,6 +11,9 @@
 
     .el-button-group {
       display: block;
+      .el-button {
+        float: none;
+      }
     }
 
     & .el-dropdown__caret-button {

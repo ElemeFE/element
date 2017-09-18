@@ -161,7 +161,7 @@
       for (let len = changeLogNodes.length, i = 2; i < len; i++) {
         let node = changeLogNodes[i];
         a = changeLogNodes[i].querySelector('a');
-        a && a.remove();
+        a && a.getAttribute('class') === 'header-anchor' && a.remove();
         if (node.tagName !== 'H3') {
           fragments += changeLogNodes[i].outerHTML;
         } else {

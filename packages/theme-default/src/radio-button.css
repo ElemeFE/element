@@ -80,6 +80,13 @@
         border-radius: 0 var(--border-radius-base) var(--border-radius-base) 0;
       }
     }
+
+    &:first-child:last-child {
+      .el-radio-button__inner {
+        border-radius: var(--border-radius-base);
+      }
+    }
+    
     @m large {
       & .el-radio-button__inner {
         @mixin button-size var(--button-large-padding-vertical), var(--button-large-padding-horizontal), var(--button-large-font-size), 0;

@@ -18,6 +18,14 @@
   };
 </script>
 
+<style>
+  .demo-box.demo-input-number {
+    .el-input-number + .el-input-number {
+      margin-left: 10px;
+    }
+  }
+</style>
+
 ## InputNumber
 
 Input numerical values with a customizable range.
@@ -126,6 +134,7 @@ Additional `large` and `small` sizes of the input box are available
 |size | size of the component | string | large/small| — |
 |disabled| whether the component is disabled | boolean | — | false |
 |controls| whether to enable the control buttons | boolean | — | true |
+|debounce| debounce delay when typing, in millisecond | number | — | 300 |
 
 ### Events
 

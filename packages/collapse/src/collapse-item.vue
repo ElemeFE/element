@@ -14,6 +14,7 @@
   </div>
 </template>
 <script>
+  import ElCollapseTransition from 'element-ui/src/transitions/collapse-transition';
   import Emitter from 'element-ui/src/mixins/emitter';
 
   export default {
@@ -22,6 +23,8 @@
     componentName: 'ElCollapseItem',
 
     mixins: [Emitter],
+
+    components: { ElCollapseTransition },
 
     data() {
       return {

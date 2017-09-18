@@ -18,8 +18,9 @@
         v-if="showCheckbox"
         v-model="node.checked"
         :indeterminate="node.indeterminate"
-        @change="handleCheckChange"
-        @click.native.stop="handleUserClick">
+        :disabled="!!node.disabled"
+        @click.native.stop
+        @change="handleCheckChange">
       </el-checkbox>
       <span
         v-if="node.loading"
@@ -44,6 +45,7 @@
 </template>
 
 <script type="text/jsx">
+  import ElCollapseTransition from 'element-ui/src/transitions/collapse-transition';
   import ElCheckbox from 'element-ui/packages/checkbox';
   import emitter from 'element-ui/src/mixins/emitter';
 
@@ -65,6 +67,7 @@
     },
 
     components: {
+      ElCollapseTransition,
       ElCheckbox,
       NodeContent: {
         props: {
@@ -153,16 +156,8 @@
         }
       },
 
-      handleUserClick() {
-        if (this.node.indeterminate) {
-          this.node.setChecked(this.node.checked, !this.tree.checkStrictly);
-        }
-      },
-
       handleCheckChange(ev) {
-        if (!this.node.indeterminate) {
-          this.node.setChecked(ev.target.checked, !this.tree.checkStrictly);
-        }
+        this.node.setChecked(ev.target.checked, !this.tree.checkStrictly);
       },
 
       handleChildNodeExpand(nodeData, node, instance) {

@@ -62,6 +62,7 @@ export default {
     },
     cascader: {
       noMatch: 'データなし',
+      loading: 'ロード中',
       placeholder: '選択してください'
     },
     pagination: {

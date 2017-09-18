@@ -243,7 +243,7 @@ Checkbox with button styles.
 | min     | minimum number of checkbox checked   | number    |       —        |     —    |
 | max     | maximum number of checkbox checked   | number    |       —        |     —    |
 
-### Checkbox-group Events
+### Checkbox Events
 | Event Name | Description | Parameters |
 |---------- |-------- |---------- |
 | change  | triggers when the binding value changes | Event object |

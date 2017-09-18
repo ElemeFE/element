@@ -18,7 +18,7 @@ describe('Switch', () => {
     });
 
     const core = vm.$el.querySelector('.el-switch__core');
-    expect(core.style.backgroundColor).to.equal('rgb(0, 255, 0)');
+    expect(core.style.backgroundColor).to.equal('rgb(255, 0, 0)');
     expect(core.style.width).to.equal('100px');
     expect(vm.$el.querySelector('.el-switch__label--left').querySelector('span').textContent).to.equal('on');
   });
@@ -144,6 +144,58 @@ describe('Switch', () => {
       core.click();
       setTimeout(() => {
         expect(vm.value).to.equal('100');
+        done();
+      }, 10);
+    }, 10);
+  });
+
+  it('value is the single source of truth', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-switch :value="true"></el-switch>
+        </div>
+      `
+    }, true);
+
+    const component = vm.$children[0];
+    const input = vm.$el.querySelector('input');
+    const core = vm.$el.querySelector('.el-switch__core');
+    core.click();
+    setTimeout(() => {
+      expect(component.checked).to.equal(true);
+      expect(component.$el.classList.contains('is-checked')).to.equal(true);
+      expect(input.checked).to.equal(true);
+      core.click();
+      setTimeout(() => {
+        expect(component.checked).to.equal(true);
+        expect(component.$el.classList.contains('is-checked')).to.equal(true);
+        expect(input.checked).to.equal(true);
+        done();
+      }, 10);
+    }, 10);
+  });
+
+  it('sets checkbox value', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-switch v-model="value"></el-switch>
+        </div>
+      `,
+      data() {
+        return {
+          value: false
+        };
+      }
+    }, true);
+
+    vm.value = true;
+    setTimeout(() => {
+      expect(vm.$el.querySelector('input').checked).to.equal(true);
+      vm.value = false;
+      setTimeout(() => {
+        expect(vm.$el.querySelector('input').checked).to.equal(false);
         done();
       }, 10);
     }, 10);

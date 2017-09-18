@@ -1,3 +1,11 @@
+<style>
+  .demo-box {
+    .el-date-editor + .el-date-editor {
+      margin-left: 10px;
+    }
+  }
+</style>
+
 ## TimePicker
 
 Use Time Picker for time input.

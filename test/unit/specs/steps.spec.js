@@ -122,4 +122,22 @@ describe('Steps', () => {
       done();
     });
   });
+
+  it('step:status=error', done => {
+    vm = createVue(`
+      <el-steps :active="2" process-status="process" finish-status="success" direction="horizontal">
+        <el-step title="step1"></el-step>
+        <el-step title="step2" status="error"></el-step>
+        <el-step title="step3"></el-step>
+      </el-steps>
+    `);
+
+    vm.$nextTick(_ => {
+      const errorLine = vm.$el.querySelector('.el-step:nth-child(2) .el-step__line-inner');
+      expect(errorLine.getBoundingClientRect().width).to.equal(0);
+      const nextStep = vm.$el.querySelector('.el-step:nth-child(3) .el-step__head');
+      expect(nextStep.classList.contains('is-wait')).to.equal(true);
+      done();
+    });
+  });
 });

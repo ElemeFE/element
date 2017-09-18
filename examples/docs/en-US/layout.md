@@ -1,3 +1,34 @@
+<style>
+  .demo-layout {
+    .el-row {
+      margin-bottom: 20px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    .el-col {
+      border-radius: 4px;
+    }
+    .bg-purple-dark {
+      background: #99a9bf;
+    }
+    .bg-purple {
+      background: #d3dce6;
+    }
+    .bg-purple-light {
+      background: #e5e9f2;
+    }
+    .grid-content {
+      border-radius: 4px;
+      min-height: 36px;
+    }
+    .row-bg {
+      padding: 10px 0;
+      background-color: #f9fafc;
+    }
+  }
+</style>
+
 ## Layout
 
 Quickly and easily create layouts with the basic 24-column.
@@ -317,16 +348,19 @@ Taking example by Bootstrap's responsive design, four breakpoints are preset: xs
 | type | layout mode, you can use flex, works in modern browsers | string | — | — |
 | justify | horizontal alignment of flex layout | string | start/end/center/space-around/space-between | start |
 | align | vertical alignment of flex layout | string | top/middle/bottom | top |
+| tag | custom element tag | string | * | div |
 
 ### Col Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| span | number of column the grid spans | number | — | — |
+| span | number of column the grid spans | number | — | 24 |
 | offset | number of spacing on the left side of the grid | number | — | 0 |
 | push |  number of columns that grid moves to the right | number | — | 0 |
 | pull |  number of columns that grid moves to the left | number | — | 0 |
-| xs | `<768px` Responsive columns or column props object | number/object (i.e： {span: 4, offset: 4}) | — | — |
-| sm | `≥768px` Responsive columns or column props object | number/object (i.e： {span: 4, offset: 4}) | — | — |
-| md | `≥992` Responsive columns or column props object | number/object (i.e： {span: 4, offset: 4}) | — | — |
-| lg | `≥1200` Responsive columns or column props object | number/object (i.e： {span: 4, offset: 4}) | — | — |
+| xs | `<768px` Responsive columns or column props object | number/object (e.g. {span: 4, offset: 4}) | — | — |
+| sm | `≥768px` Responsive columns or column props object | number/object (e.g. {span: 4, offset: 4}) | — | — |
+| md | `≥992` Responsive columns or column props object | number/object (e.g. {span: 4, offset: 4}) | — | — |
+| lg | `≥1200` Responsive columns or column props object | number/object (e.g. {span: 4, offset: 4}) | — | — |
+| tag | custom element tag | string | * | div |
+
 

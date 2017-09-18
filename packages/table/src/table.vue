@@ -4,9 +4,10 @@
       'el-table--fit': fit,
       'el-table--striped': stripe,
       'el-table--border': border,
+      'el-table--hidden': isHidden,
       'el-table--fluid-height': maxHeight,
       'el-table--enable-row-hover': !store.states.isComplex,
-      'el-table--enable-row-transition': true || (store.states.data || []).length !== 0 && (store.states.data || []).length < 100
+      'el-table--enable-row-transition': (store.states.data || []).length !== 0 && (store.states.data || []).length < 100
     }"
     @mouseleave="handleMouseLeave($event)">
     <div class="hidden-columns" ref="hiddenColumns"><slot></slot></div>
@@ -26,6 +27,7 @@
       <table-body
         :context="context"
         :store="store"
+        :stripe="stripe"
         :layout="layout"
         :row-class-name="rowClassName"
         :row-style="rowStyle"
@@ -36,7 +38,7 @@
         <span class="el-table__empty-text"><slot name="empty">{{ emptyText || t('el.table.emptyText') }}</slot></span>
       </div>
     </div>
-    <div class="el-table__footer-wrapper" ref="footerWrapper" v-if="showSummary && data && data.length > 0">
+    <div class="el-table__footer-wrapper" ref="footerWrapper" v-if="showSummary" v-show="data && data.length > 0">
       <table-footer
         :store="store"
         :layout="layout"
@@ -69,6 +71,7 @@
         <table-body
           fixed="left"
           :store="store"
+          :stripe="stripe"
           :layout="layout"
           :highlight="highlightCurrentRow"
           :row-class-name="rowClassName"
@@ -76,7 +79,7 @@
           :style="{ width: layout.fixedWidth ? layout.fixedWidth + 'px' : '' }">
         </table-body>
       </div>
-      <div class="el-table__fixed-footer-wrapper" ref="fixedFooterWrapper" v-if="showSummary && data && data.length > 0">
+      <div class="el-table__fixed-footer-wrapper" ref="fixedFooterWrapper" v-if="showSummary" v-show="data && data.length > 0">
         <table-footer
           fixed="left"
           :border="border"
@@ -110,6 +113,7 @@
         <table-body
           fixed="right"
           :store="store"
+          :stripe="stripe"
           :layout="layout"
           :row-class-name="rowClassName"
           :row-style="rowStyle"
@@ -117,7 +121,7 @@
           :style="{ width: layout.rightFixedWidth ? layout.rightFixedWidth + 'px' : '' }">
         </table-body>
       </div>
-      <div class="el-table__fixed-footer-wrapper" ref="rightFixedFooterWrapper" v-if="showSummary && data && data.length > 0">
+      <div class="el-table__fixed-footer-wrapper" ref="rightFixedFooterWrapper" v-if="showSummary" v-show="data && data.length > 0">
         <table-footer
           fixed="right"
           :border="border"
@@ -252,16 +256,22 @@
           if (refs.rightFixedBodyWrapper) refs.rightFixedBodyWrapper.scrollTop = this.scrollTop;
         });
 
-        if (headerWrapper) {
-          mousewheel(headerWrapper, throttle(16, event => {
-            const deltaX = event.deltaX;
+        const scrollBodyWrapper = event => {
+          const { deltaX, deltaY } = event;
 
-            if (deltaX > 0) {
-              this.bodyWrapper.scrollLeft += 10;
-            } else {
-              this.bodyWrapper.scrollLeft -= 10;
-            }
-          }));
+          if (Math.abs(deltaX) < Math.abs(deltaY)) return;
+
+          if (deltaX > 0) {
+            this.bodyWrapper.scrollLeft += 10;
+          } else if (deltaX < 0) {
+            this.bodyWrapper.scrollLeft -= 10;
+          }
+        };
+        if (headerWrapper) {
+          mousewheel(headerWrapper, throttle(16, scrollBodyWrapper));
+        }
+        if (footerWrapper) {
+          mousewheel(footerWrapper, throttle(16, scrollBodyWrapper));
         }
 
         if (this.fit) {
@@ -284,6 +294,9 @@
           } else if (this.shouldUpdateHeight) {
             this.layout.updateHeight();
           }
+          if (this.$el) {
+            this.isHidden = this.$el.clientWidth === 0;
+          }
         });
       }
     },
@@ -305,7 +318,7 @@
       },
 
       selection() {
-        return this.store.selection;
+        return this.store.states.selection;
       },
 
       columns() {
@@ -333,7 +346,9 @@
           };
         } else if (this.maxHeight) {
           style = {
-            'max-height': (this.showHeader ? this.maxHeight - this.layout.headerHeight : this.maxHeight) + 'px'
+            'max-height': (this.showHeader
+              ? this.maxHeight - this.layout.headerHeight - this.layout.footerHeight
+              : this.maxHeight - this.layout.footerHeight) + 'px'
           };
         }
 
@@ -397,6 +412,7 @@
         immediate: true,
         handler(val) {
           this.store.commit('setData', val);
+          if (this.$ready) this.doLayout();
         }
       },
 
@@ -441,6 +457,7 @@
       return {
         store,
         layout,
+        isHidden: false,
         renderExpanded: null,
         resizeProxyVisible: false
       };

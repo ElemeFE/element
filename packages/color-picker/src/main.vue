@@ -59,7 +59,9 @@
 
     watch: {
       value(val) {
-        if (val && val !== this.color.value) {
+        if (!val) {
+          this.showPanelColor = false;
+        } else if (val && val !== this.color.value) {
           this.color.fromString(val);
         }
       },
@@ -68,6 +70,9 @@
         handler() {
           this.showPanelColor = true;
         }
+      },
+      displayedColor(val) {
+        this.$emit('active-change', val);
       }
     },
 

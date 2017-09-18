@@ -39,6 +39,29 @@
   }
 </script>
 
+<style>
+  .demo-box.demo-tag {
+    .el-tag + .el-tag {
+      margin-left: 10px;
+    }
+    .button-new-tag {
+      margin-left: 10px;
+      height: 24px;
+      line-height: 22px;
+      padding: 0 *;
+    }
+    .input-new-tag {
+      width: 78px;
+      margin-left: 10px;
+      vertical-align: bottom;
+
+      .el-input__inner {
+        height: 24px;
+      }
+    }
+  }
+</style>
+
 ## Tag
 
 Used for marking and selection.
@@ -156,7 +179,7 @@ You can use the `close` event to add and remove tag dynamically.
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | type | theme | string | primary/gray/success/warning/danger | — |
 | closable | whether Tab can be removed | boolean | — | false |
-| close-transition | whether the removal animation is disabled | boolean | — | false |
+| close-transition | whether to disable animations | boolean | — | false |
 | hit | whether Tag has a highlighted border | boolean | — | false |
 | color | background color of the tag | string | — | — |
 

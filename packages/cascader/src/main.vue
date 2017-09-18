@@ -139,12 +139,16 @@ export default {
     debounce: {
       type: Number,
       default: 300
+    },
+    beforeFilter: {
+      type: Function,
+      default: () => (() => {})
     }
   },
 
   data() {
     return {
-      currentValue: this.value,
+      currentValue: this.value || [],
       menu: null,
       debouncedInputChange() {},
       menuVisible: false,
@@ -243,6 +247,8 @@ export default {
 
       if (close) {
         this.menuVisible = false;
+      } else {
+        this.$nextTick(this.updatePopper);
       }
     },
     handleInputChange(value) {
@@ -251,6 +257,7 @@ export default {
 
       if (!value) {
         this.menu.options = this.options;
+        this.$nextTick(this.updatePopper);
         return;
       }
 
@@ -275,6 +282,7 @@ export default {
         }];
       }
       this.menu.options = filteredFlatOptions;
+      this.$nextTick(this.updatePopper);
     },
     renderFilteredOptionLabel(inputValue, optionsStack) {
       return optionsStack.map((option, index) => {
@@ -328,7 +336,26 @@ export default {
 
   created() {
     this.debouncedInputChange = debounce(this.debounce, value => {
-      this.handleInputChange(value);
+      const before = this.beforeFilter(value);
+
+      if (before && before.then) {
+        this.menu.options = [{
+          __IS__FLAT__OPTIONS: true,
+          label: this.t('el.cascader.loading'),
+          value: '',
+          disabled: true
+        }];
+        before
+          .then(() => {
+            this.$nextTick(() => {
+              this.handleInputChange(value);
+            });
+          });
+      } else if (before !== false) {
+        this.$nextTick(() => {
+          this.handleInputChange(value);
+        });
+      }
     });
   },
 

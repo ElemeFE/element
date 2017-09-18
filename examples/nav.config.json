@@ -30,6 +30,10 @@
       "path": "/changelog"
     },
     {
+      "name": "Element React",
+      "href": "https://eleme.github.io/element-react/"
+    },
+    {
       "name": "基础组件",
       "groups": [
         {
@@ -266,6 +270,10 @@
     {
       "name": "Changelog",
       "path": "/changelog"
+    },
+    {
+      "name": "Element React",
+      "href": "https://eleme.github.io/element-react/"
     },
     {
       "name": "Components",

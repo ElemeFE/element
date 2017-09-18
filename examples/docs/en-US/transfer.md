@@ -1,3 +1,12 @@
+<style>
+  .demo-transfer {
+    .transfer-footer {
+      margin-left: 20px;
+      padding: 6px 5px;
+    }
+  }
+</style>
+
 <script>
   export default {
     data() {

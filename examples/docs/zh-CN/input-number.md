@@ -131,6 +131,7 @@
 | size     | 计数器尺寸           | string   | large, small | — |
 | disabled | 是否禁用计数器        | boolean | — | false |
 | controls | 是否使用控制按钮        | boolean | — | true |
+| debounce | 输入时的去抖延迟，毫秒 | number | — | 300 |
 
 ### Events
 | 事件名称 | 说明 | 回调参数 |

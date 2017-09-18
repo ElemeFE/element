@@ -47,19 +47,14 @@ const defaultCallback = action => {
       }
     }
     if (currentMsg.resolve) {
-      let $type = currentMsg.options.$type;
-      if ($type === 'confirm' || $type === 'prompt') {
-        if (action === 'confirm') {
-          if (instance.showInput) {
-            currentMsg.resolve({ value: instance.inputValue, action });
-          } else {
-            currentMsg.resolve(action);
-          }
-        } else if (action === 'cancel' && currentMsg.reject) {
-          currentMsg.reject(action);
+      if (action === 'confirm') {
+        if (instance.showInput) {
+          currentMsg.resolve({ value: instance.inputValue, action });
+        } else {
+          currentMsg.resolve(action);
         }
-      } else {
-        currentMsg.resolve(action);
+      } else if (action === 'cancel' && currentMsg.reject) {
+        currentMsg.reject(action);
       }
     }
   }
@@ -101,6 +96,8 @@ const showNextMsg = () => {
       if (isVNode(instance.message)) {
         instance.$slots.default = [instance.message];
         instance.message = null;
+      } else {
+        delete instance.$slots.default;
       }
       ['modal', 'showClose', 'closeOnClickModal', 'closeOnPressEscape'].forEach(prop => {
         if (instance[prop] === undefined) {
@@ -161,6 +158,8 @@ MessageBox.alert = (message, title, options) => {
   if (typeof title === 'object') {
     options = title;
     title = '';
+  } else if (title === undefined) {
+    title = '';
   }
   return MessageBox(merge({
     title: title,
@@ -175,6 +174,8 @@ MessageBox.confirm = (message, title, options) => {
   if (typeof title === 'object') {
     options = title;
     title = '';
+  } else if (title === undefined) {
+    title = '';
   }
   return MessageBox(merge({
     title: title,
@@ -187,6 +188,8 @@ MessageBox.confirm = (message, title, options) => {
 MessageBox.prompt = (message, title, options) => {
   if (typeof title === 'object') {
     options = title;
+    title = '';
+  } else if (title === undefined) {
     title = '';
   }
   return MessageBox(merge({

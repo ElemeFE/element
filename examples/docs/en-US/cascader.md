@@ -247,6 +247,37 @@
   };
 </script>
 
+<style>
+  .demo-cascader {
+    .el-cascader {
+      width: 222px;
+    }
+  }
+  .demo-cascader-size {
+    .el-cascader {
+      vertical-align: top;
+      margin-right: 15px;
+    }
+  }
+  .demo-cascader .block {
+    padding: 30px 0;
+    text-align: center;
+    border-right: solid 1px #EFF2F6;
+    float: left;
+    width: 50%;
+    box-sizing: border-box;
+    &:last-child {
+      border-right: none;
+    }
+  }
+  .demo-cascader .demonstration {
+    display: block;
+    color: #8492a6;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+</style>
+
 ## Cascader
 
 If the options have a clear hierarchical structure, Cascader can be used to view and select them.
@@ -1380,7 +1411,7 @@ Load child options when their parent option is clicked or hovered over.
         }
       };
     },
-    
+
     methods: {
       handleItemChange(val) {
         console.log('active item:', val);
@@ -1656,6 +1687,7 @@ Search and select options with a keyword.
 | value     | specify which key of option object is used as the option's value | string | — | — |
 | children  | specify which key of option object is used as the option's child options | string | — | — |
 | disabled  | specify which key of option object indicates if the option is disabled | string | — | — |
+| before-filter | hook function before filtering with the value to be filtered as its parameter. If `false` is returned or a `Promise` is returned and then is rejected, filtering will be aborted | function(value) | — | — |
 
 ### Events
 | Event Name | Description | Parameters |

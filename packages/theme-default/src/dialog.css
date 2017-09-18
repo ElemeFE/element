@@ -42,14 +42,26 @@
 
     @e header {
       padding: 20px 20px 0;
+      @utils-clearfix;
     }
 
-    @e close {
+    @e headerbtn {
+      float: right;
+      background: transparent;
+      border: none;
+      outline: none;
+      padding: 0;
       cursor: pointer;
-      color: var(--dialog-close-color);
+      font-size: 16px;
 
-      &:hover {
-        color: var(--dialog-close-hover-color);
+      .el-dialog__close {
+        color: var(--dialog-close-color);
+      }
+      
+      &:focus, &:hover {
+        .el-dialog__close {
+          color: var(--dialog-close-hover-color);
+        }
       }
     }
 
@@ -64,10 +76,6 @@
       padding: 30px 20px;
       color: var(--color-extra-light-black);
       font-size: var(--dialog-font-size);
-    }
-
-    @e headerbtn {
-      float: right;
     }
 
     @e footer {

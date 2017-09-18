@@ -632,11 +632,16 @@
 ```
 :::
 
+:::tip
+如果 Select 的绑定值为对象类型，请务必指定 `value-key` 作为它的唯一性标识。
+:::
+
 ### Select Attributes 
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | multiple | 是否多选 | boolean | — | false |
 | disabled | 是否禁用 | boolean | — | false |
+| value-key | 作为 value 唯一标识的键名，绑定值为对象类型时必填 | string | — | value |
 | size | 输入框尺寸 | string | large/small/mini | — |
 | clearable | 单选时是否可以清空选项 | boolean | — | false |
 | multiple-limit | 多选时用户最多可以选择的项目数，为 0 则不限制 | number | — | 0 |
@@ -652,6 +657,7 @@
 | no-match-text | 搜索条件无匹配时显示的文字 | string | — | 无匹配数据 |
 | no-data-text | 选项为空时显示的文字 | string | — | 无数据 |
 | popper-class | Select 下拉框的类名 | string | — | — |
+| default-first-option | 在输入框按下回车，选择第一个匹配项。需配合 `filterable` 或 `remote` 使用 | boolean | - | false |
 
 ### Select Events
 | 事件名称 | 说明 | 回调参数 |
@@ -659,6 +665,7 @@
 | change | 选中值发生变化时触发 | 目前的选中值 |
 | visible-change | 下拉框出现/隐藏时触发 | 出现则为 true，隐藏则为 false |
 | remove-tag | 多选模式下移除tag时触发 | 移除的tag值 |
+| clear | 可清空的单选模式下用户点击清空按钮时触发 | — |
 
 ### Option Group Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |

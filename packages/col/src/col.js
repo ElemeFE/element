@@ -6,6 +6,10 @@ export default {
       type: Number,
       default: 24
     },
+    tag: {
+      type: String,
+      default: 'div'
+    },
     offset: Number,
     pull: Number,
     push: Number,
@@ -58,12 +62,9 @@ export default {
       }
     });
 
-    return (
-      <div
-        class={['el-col', classList]}
-        style={style}>
-        {this.$slots.default}
-      </div>
-    );
+    return h(this.tag, {
+      class: ['el-col', classList],
+      style
+    }, this.$slots.default);
   }
 };

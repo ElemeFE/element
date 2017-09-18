@@ -74,7 +74,7 @@
     }
 
     @e label {
-      font-size: 14px;
+      font-size: var(--font-size-base);
       vertical-align: middle;
       display: inline-block;
     }
@@ -83,7 +83,7 @@
       display: inline-block;
       vertical-align: middle;
       margin-right: 4px;
-      font-size: 14px;
+      font-size: var(--font-size-base);
       color: var(--color-light-silver);
     }
 

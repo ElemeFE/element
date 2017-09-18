@@ -32,8 +32,7 @@
     data() {
       return {
         classMap: {},
-        colorMap: {},
-        pointerAtLeftHalf: false,
+        pointerAtLeftHalf: true,
         currentValue: this.value,
         hoverIndex: -1
       };
@@ -153,6 +152,16 @@
         return this.getValueFromMap(this.currentValue, this.classMap);
       },
 
+      colorMap() {
+        return {
+          lowColor: this.colors[0],
+          mediumColor: this.colors[1],
+          highColor: this.colors[2],
+          voidColor: this.voidColor,
+          disabledVoidColor: this.disabledVoidColor
+        };
+      },
+
       activeColor() {
         return this.getValueFromMap(this.currentValue, this.colorMap);
       },
@@ -178,6 +187,7 @@
       value(val) {
         this.$emit('change', val);
         this.currentValue = val;
+        this.pointerAtLeftHalf = this.value !== Math.floor(this.value);
       }
     },
 
@@ -197,7 +207,10 @@
       showDecimalIcon(item) {
         let showWhenDisabled = this.disabled && this.valueDecimal > 0 && item - 1 < this.value && item > this.value;
         /* istanbul ignore next */
-        let showWhenAllowHalf = this.allowHalf && this.pointerAtLeftHalf && ((item - 0.5).toFixed(1) === this.currentValue.toFixed(1));
+        let showWhenAllowHalf = this.allowHalf &&
+          this.pointerAtLeftHalf &&
+          item - 0.5 <= this.currentValue &&
+          item > this.currentValue;
         return showWhenDisabled || showWhenAllowHalf;
       },
 
@@ -262,13 +275,6 @@
         highClass: this.iconClasses[2],
         voidClass: this.voidIconClass,
         disabledVoidClass: this.disabledVoidIconClass
-      };
-      this.colorMap = {
-        lowColor: this.colors[0],
-        mediumColor: this.colors[1],
-        highColor: this.colors[2],
-        voidColor: this.voidColor,
-        disabledVoidColor: this.disabledVoidColor
       };
     }
   };

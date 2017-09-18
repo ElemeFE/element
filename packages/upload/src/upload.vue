@@ -62,7 +62,6 @@ export default {
 
       if (!files) return;
       this.uploadFiles(files);
-      this.$refs.input.value = null;
     },
     uploadFiles(files) {
       let postFiles = Array.prototype.slice.call(files);
@@ -76,6 +75,8 @@ export default {
       });
     },
     upload(rawFile, file) {
+      this.$refs.input.value = null;
+
       if (!this.beforeUpload) {
         return this.post(rawFile);
       }
@@ -89,12 +90,12 @@ export default {
             this.post(rawFile);
           }
         }, () => {
-          this.onRemove(rawFile, true);
+          this.onRemove(null, rawFile);
         });
       } else if (before !== false) {
         this.post(rawFile);
       } else {
-        this.onRemove(rawFile, true);
+        this.onRemove(null, rawFile);
       }
     },
     abort(file) {
@@ -141,6 +142,7 @@ export default {
     },
     handleClick() {
       if (!this.disabled) {
+        this.$refs.input.value = null;
         this.$refs.input.click();
       }
     }

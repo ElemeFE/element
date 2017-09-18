@@ -69,7 +69,8 @@
           return {
             children: 'children',
             label: 'label',
-            icon: 'icon'
+            icon: 'icon',
+            disabled: 'disabled'
           };
         }
       },

@@ -17,7 +17,7 @@
           }
         }, 1000);
       };
-      var validaePass = (rule, value, callback) => {
+      var validatePass = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('Please input the password'));
         } else {
@@ -27,7 +27,7 @@
           callback();
         }
       };
-      var validaePass2 = (rule, value, callback) => {
+      var validatePass2 = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('Please input the password again'));
         } else if (value !== this.ruleForm2.pass) {
@@ -101,10 +101,10 @@
         },
         rules2: {
           pass: [
-            { validator: validaePass, trigger: 'blur' }
+            { validator: validatePass, trigger: 'blur' }
           ],
           checkPass: [
-            { validator: validaePass2, trigger: 'blur' }
+            { validator: validatePass2, trigger: 'blur' }
           ],
           age: [
             { validator: checkAge, trigger: 'blur' }
@@ -549,7 +549,7 @@ Form component allows you to verify your data, helping you find and correct erro
           }
         }, 1000);
       };
-      var validaePass = (rule, value, callback) => {
+      var validatePass = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('Please input the password'));
         } else {
@@ -559,7 +559,7 @@ Form component allows you to verify your data, helping you find and correct erro
           callback();
         }
       };
-      var validaePass2 = (rule, value, callback) => {
+      var validatePass2 = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('Please input the password again'));
         } else if (value !== this.ruleForm2.pass) {
@@ -576,10 +576,10 @@ Form component allows you to verify your data, helping you find and correct erro
         },
         rules2: {
           pass: [
-            { validator: validaePass, trigger: 'blur' }
+            { validator: validatePass, trigger: 'blur' }
           ],
           checkPass: [
-            { validator: validaePass2, trigger: 'blur' }
+            { validator: validatePass2, trigger: 'blur' }
           ],
           age: [
             { validator: checkAge, trigger: 'blur' }
@@ -734,6 +734,10 @@ Form component allows you to verify your data, helping you find and correct erro
 ```
 :::
 
+:::tip
+When an `el-form-item` is nested in another `el-form-item`, its label width will be `0`. You can set `label-width` on that `el-form-item` if needed.
+:::
+
 ### Form Attributes
 
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
@@ -742,7 +746,7 @@ Form component allows you to verify your data, helping you find and correct erro
 | rules | validation rules of form | object | — | — |
 | inline | whether the form is inline | boolean | — | false |
 | label-position | position of label | string | left/right/top | right |
-| label-width | width of label, and all form items will inherit from `Form` | string | — | — |
+| label-width | width of label, and all its direct child form items will inherit this value | string | — | — |
 | label-suffix | suffix of the label | string | — | — |
 | show-message  | whether to show the error message | boolean | — | true |
 
@@ -758,10 +762,17 @@ Form component allows you to verify your data, helping you find and correct erro
 
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 | ---- | ----| ---- | ---- | ---- |
-| prop | a key of `model` | string | keys of model that passed to `form` |
+| prop | a key of `model`. In the use of validate and resetFields method, the attribute is required | string | keys of model that passed to `form` |
 | label | label | string | — | — |
 | label-width | width of label, e.g. '50px' | string | — | — |
 | required | whether the field is required or not, will be determined by validation rules if omitted | string |  — | false |
 | rules | validation rules of form | object | — | — |
 | error | field error message, set its value and the field will validate error and show this message immediately | string | — | — |
 | show-message  | whether to show the error message | boolean | — | true |
+
+
+### Form-Item Slot
+| name | Description |
+|------|--------|
+| — | content of Form Item |
+| label | content of label |

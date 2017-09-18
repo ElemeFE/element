@@ -138,13 +138,14 @@
       onDragging(event) {
         if (this.dragging) {
           this.displayTooltip();
+          this.$parent.resetSize();
           let diff = 0;
           if (this.vertical) {
             this.currentY = event.clientY;
-            diff = (this.startY - this.currentY) / this.$parent.$sliderSize * 100;
+            diff = (this.startY - this.currentY) / this.$parent.sliderSize * 100;
           } else {
             this.currentX = event.clientX;
-            diff = (this.currentX - this.startX) / this.$parent.$sliderSize * 100;
+            diff = (this.currentX - this.startX) / this.$parent.sliderSize * 100;
           }
           this.newPosition = this.startPosition + diff;
           this.setPosition(this.newPosition);
@@ -169,6 +170,7 @@
       },
 
       setPosition(newPosition) {
+        if (newPosition === null) return;
         if (newPosition < 0) {
           newPosition = 0;
         } else if (newPosition > 100) {

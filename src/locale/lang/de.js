@@ -19,7 +19,7 @@ export default {
       day: 'Tag',
       week: 'Woche',
       month: 'Monat',
-      year: 'Jahr',
+      year: '',
       month1: 'Januar',
       month2: 'Februar',
       month3: 'März',
@@ -59,12 +59,13 @@ export default {
     select: {
       loading: 'Lädt.',
       noMatch: 'Nichts gefunden.',
-      noData: 'Keine Datei',
-      placeholder: 'Datei wählen'
+      noData: 'Keine Daten',
+      placeholder: 'Daten wählen'
     },
     cascader: {
       noMatch: 'Nichts gefunden.',
-      placeholder: 'Datei wählen'
+      loading: 'Lädt.',
+      placeholder: 'Daten wählen'
     },
     pagination: {
       goto: 'Gehe zu',
@@ -87,18 +88,18 @@ export default {
       confirmFilter: 'Anwenden',
       resetFilter: 'Zurücksetzen',
       clearFilter: 'Alles ',
-      sumText: 'Sum' // to be translated
+      sumText: 'Summe'
     },
     tree: {
-      emptyText: 'Keine Daten'
+      emptyText: 'Keine Einträge'
     },
     transfer: {
       noMatch: 'Nichts gefunden.',
-      noData: 'Keine Datei',
-      titles: ['List 1', 'List 2'], // to be translated
-      filterPlaceholder: 'Enter keyword', // to be translated
-      noCheckedFormat: '{total} items', // to be translated
-      hasCheckedFormat: '{checked}/{total} checked' // to be translated
+      noData: 'Keine Einträge',
+      titles: ['Liste 1', 'Liste 2'],
+      filterPlaceholder: 'Einträge filtern',
+      noCheckedFormat: '{total} Einträge',
+      hasCheckedFormat: '{checked}/{total} ausgewählt'
     }
   }
 };
