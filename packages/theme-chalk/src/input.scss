@@ -106,19 +106,19 @@
   }
   @include m(suffix) {
     .el-input__inner {
-      padding-right: 25px;
+      padding-right: 30px;
     }
   }
   @include m(prefix) {
     .el-input__inner {
-      padding-left: 25px;
+      padding-left: 30px;
     }
   }
-  @include m(large) {
-    font-size: $--input-large-font-size;
+  @include m(medium) {
+    font-size: $--input-medium-font-size;
 
     & .el-input__inner {
-      height: $--input-large-height;
+      height: $--input-medium-height;
     }
   }
   @include m(small) {

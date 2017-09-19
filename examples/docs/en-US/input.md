@@ -193,30 +193,30 @@ export default {
 
 Add an icon to indicate input type.
 
-::: demo 可以通过 `suffix-icon` 和 `prefix-icon` 属性在 input 组件首部和尾部增加显示图标，也可以通过 slot 来放置图标。
+::: demo To add icons in Input, you can simply use `prefix-icon` and `suffix-icon` attributes. Also, the `prefix` and `suffix` named slots works as well.
 ```html
 <div class="demo-input-suffix">
-  属性方式：
+  Using attributes
   <el-input
-    placeholder="请选择日期"
-    suffix-icon="date"
+    placeholder="Pick a date"
+    suffix-icon="el-icon-date"
     v-model="input2">
   </el-input>
   <el-input
-    placeholder="请输入内容"
-    prefix-icon="search"
+    placeholder="Type something"
+    prefix-icon="el-icon-search"
     v-model="input21">
   </el-input>
 </div>
 <div class="demo-input-suffix">
-  slot 方式：
+  Using slots
   <el-input
-    placeholder="请选择日期"
+    placeholder="Pick a date"
     v-model="input22">
     <i slot="suffix" class="el-input__icon el-icon-date"></i>
   </el-input>
   <el-input
-    placeholder="请输入内容"
+    placeholder="Type something"
     v-model="input23">
     <i slot="prefix" class="el-input__icon el-icon-search"></i>
   </el-input>
@@ -351,11 +351,11 @@ export default {
 ```html
 <div class="demo-input-size">
   <el-input
-    size="large"
     placeholder="Please Input"
     v-model="input6">
   </el-input>
   <el-input
+    size="medium"
     placeholder="Please Input"
     v-model="input7">
   </el-input>
@@ -623,7 +623,8 @@ Search data from server-side.
 |placeholder| placeholder of Input| string | — | — |
 |disabled | whether Input is disabled | boolean | — | false |
 |size | size of Input, works when `type` is not 'textarea' | string | large/small/mini | — |
-|icon | icon name | string | — | — |
+| prefix-icon   | prefix icon class  | string          | — | — |
+| suffix-icon   | suffix icon class  | string          | — | — |
 |rows | number of rows of textarea, only works when `type` is 'textarea' | number | — | 2 |
 |autosize | whether textarea has an adaptive height, only works when `type` is 'textarea'. Can accept an object, e.g. { minRows: 2, maxRows: 6 }  | boolean/object | — | false |
 |auto-complete | same as `auto-complete` in native input | string | on/off | off |
@@ -637,11 +638,19 @@ Search data from server-side.
 |form | same as `form` in native input | string | — | — |
 | on-icon-click | hook function when clicking on the input icon | function | — | — |
 
+### Input slot
+
+| Name | Description |
+|------|--------|
+| prefix | content as Input prefix |
+| suffix | content as Input suffix |
+| prepend | content to prepend before Input |
+| append | content to append after Input |
+
 ### Input Events
 
 | Event Name | Description | Parameters |
 |----| ----| ----|
-|click | triggers when the icon inside Input is clicked | (event: Event) |
 | blur | triggers when Input blurs | (event: Event) |
 | focus | triggers when Input focuses | (event: Event) |
 | change | triggers when the icon inside Input value change | (value: string \| number) |

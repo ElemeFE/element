@@ -53,11 +53,11 @@
     }
   }
 
-  @include m(large) {
-    font-size: $--input-large-font-size;
+  @include m(medium) {
+    font-size: $--input-medium-font-size;
 
     .el-cascader__label {
-      line-height: #{$--input-large-height - 2};
+      line-height: #{$--input-medium-height - 2};
     }
   }
   @include m(small) {

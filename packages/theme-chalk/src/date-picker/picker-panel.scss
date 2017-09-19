@@ -1,11 +1,11 @@
 @import "../common/var";
 
 @include b(picker-panel) {
-  color: $--datepicker-color;
+  color: $--color-text-regular;
   border: 1px solid $--datepicker-border-color;
-  box-shadow: 0 2px 6px #ccc;
+  box-shadow: $--box-shadow-light;
   background: $--color-white;
-  border-radius: 2px;
+  border-radius: $--border-radius-base;
   line-height: 20px;
   margin: 5px 0;
 
@@ -90,6 +90,10 @@
     text-decoration: none;
     padding: 15px;
     font-size: 12px;
+  }
+
+  .popper__arrow {
+    transform: translateX(-400%);
   }
 }
 

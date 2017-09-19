@@ -19,12 +19,8 @@
 }
 
 .time-select-item.selected:not(.disabled) {
-  background-color: $--datepicker-active-color;
-  color: $--color-white;
-
-  &:hover {
-    background-color: $--color-primary;
-  }
+  color: $--color-primary;
+  font-weight: bold;
 }
 
 .time-select-item.disabled {
@@ -33,6 +29,7 @@
 }
 
 .time-select-item:hover {
-  background-color: $--datepicker-cell-hover-color;
+  background-color: $--background-color-base;
+  font-weight: bold;
   cursor: pointer;
 }

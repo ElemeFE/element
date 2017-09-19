@@ -3,7 +3,7 @@
     <div
       v-show="visible"
       :style="{ width: width + 'px' }"
-      class="el-picker-panel el-date-range-picker"
+      class="el-picker-panel el-date-range-picker el-popper"
       :class="[{
         'has-sidebar': $slots.sidebar || shortcuts,
         'has-time': showTime
@@ -285,11 +285,11 @@
       },
 
       minTimePickerVisible(val) {
-        if (val) this.$nextTick(() => this.$refs.minTimePicker.ajustScrollTop());
+        if (val) this.$nextTick(() => this.$refs.minTimePicker.adjustScrollTop());
       },
 
       maxTimePickerVisible(val) {
-        if (val) this.$nextTick(() => this.$refs.maxTimePicker.ajustScrollTop());
+        if (val) this.$nextTick(() => this.$refs.maxTimePicker.adjustScrollTop());
       },
 
       value(newVal) {

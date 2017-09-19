@@ -6,7 +6,6 @@
 @include b(checkbox) {
   color: $--checkbox-color;
   font-weight: $--checkbox-font-weight;
-  line-height: 1;
   position: relative;
   cursor: pointer;
   display: inline-block;

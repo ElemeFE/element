@@ -3,7 +3,7 @@
     <div
       v-show="currentVisible"
       :style="{width: width + 'px'}"
-      class="el-time-panel"
+      class="el-time-panel el-popper"
       :class="popperClass">
       <div class="el-time-panel__content" :class="{ 'has-seconds': showSeconds }">
         <time-spinner
@@ -80,7 +80,7 @@
           minutes: date.getMinutes(),
           seconds: date.getSeconds()
         });
-        this.$nextTick(_ => this.ajustScrollTop());
+        this.$nextTick(_ => this.adjustScrollTop());
       },
 
       selectableRange(val) {
@@ -163,8 +163,8 @@
         this.$emit('pick', date, visible, first);
       },
 
-      ajustScrollTop() {
-        return this.$refs.spinner.ajustScrollTop();
+      adjustScrollTop() {
+        return this.$refs.spinner.adjustScrollTop();
       },
 
       scrollDown(step) {
