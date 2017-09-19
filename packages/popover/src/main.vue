@@ -2,7 +2,7 @@
   <span>
     <transition :name="transition" @after-leave="doDestroy">
       <div
-        class="el-popover"
+        class="el-popover el-popper"
         :class="[popperClass, content && 'el-popover--plain']"
         ref="popper"
         v-show="!disabled && showPopper"

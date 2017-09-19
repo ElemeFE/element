@@ -30,7 +30,10 @@
         default: 'hover'
       },
       type: String,
-      size: String,
+      size: {
+        type: String,
+        default: ''
+      },
       splitButton: Boolean,
       hideOnClick: {
         type: Boolean,
@@ -39,6 +42,9 @@
       placement: {
         type: String,
         default: 'bottom-end'
+      },
+      visibleArrow: {
+        default: true
       }
     },
 
@@ -112,6 +118,7 @@
 
       var handleMainButtonClick = (event) => {
         this.$emit('click', event);
+        hide();
       };
 
       let triggerElm = !splitButton
