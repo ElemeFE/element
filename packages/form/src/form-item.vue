@@ -1,7 +1,9 @@
 <template>
   <div class="el-form-item" :class="{
+    'el-form-item--feedback': statusFeedback,
     'is-error': validateState === 'error',
     'is-validating': validateState === 'validating',
+    'is-success': validateState === 'success',
     'is-required': isRequired || required
   }">
     <label :for="prop" class="el-form-item__label" v-bind:style="labelStyle" v-if="label || $slots.label">
@@ -10,7 +12,13 @@
     <div class="el-form-item__content" v-bind:style="contentStyle">
       <slot></slot>
       <transition name="el-zoom-in-top">
-        <div class="el-form-item__error" v-if="validateState === 'error' && showMessage && form.showMessage">{{validateMessage}}</div>
+        <div
+          v-if="validateState === 'error' && showMessage && form.showMessage"
+          class="el-form-item__error"
+          :class="{'el-form-item__error--inline': inlineMessage}"
+        >
+          {{validateMessage}}
+        </div>
       </transition>
     </div>
   </div>
@@ -51,14 +59,24 @@
 
     mixins: [emitter],
 
+    provide() {
+      return {
+        elFormItem: this
+      };
+    },
+
+    inject: ['elForm'],
+
     props: {
       label: String,
       labelWidth: String,
       prop: String,
       required: Boolean,
+      statusFeedback: Boolean,
       rules: [Object, Array],
       error: String,
       validateStatus: String,
+      inlineMessage: Boolean,
       showMessage: {
         type: Boolean,
         default: true

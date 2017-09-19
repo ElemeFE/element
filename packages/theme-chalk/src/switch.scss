@@ -17,31 +17,28 @@
 
   @include e(label) {
     transition: .2s;
-    position: absolute;
-    width: $--switch-width;
     height: $--switch-height;
-    left: 0;
-    top: 0;
     display: inline-block;
     font-size: $--switch-font-size;
+    font-weight: 500;
     cursor: pointer;
+    vertical-align: middle;
+    color: $--color-text-primary;
+
+    @include when(active) {
+      color: $--color-primary;
+    }
+
     @include m(left) {
-      i {
-        left: 6px;
-      }
+      margin-right: 10px;
     }
     @include m(right) {
-      i {
-        right: 6px;
-      }
+      margin-left: 10px;
     }
     & * {
       line-height: 1;
-      top: 4px;
-      position: absolute;
       font-size: $--switch-font-size;
       display: inline-block;
-      color: $--color-white;
     }
   }
 
@@ -62,11 +59,12 @@
     background: $--switch-off-color;
     cursor: pointer;
     transition: border-color .3s, background-color .3s;
+    vertical-align: middle;
 
     & .el-switch__button {
       position: absolute;
-      top: 0;
-      left: 0;
+      top: 1px;
+      left: 1px;
       border-radius: $--border-radius-circle;
       transition: transform .3s;
       width: $--switch-button-size;
@@ -86,14 +84,10 @@
     .el-switch__core {
       border-color: $--switch-disabled-color !important;
       background: $--switch-disabled-color !important;
+    }
 
-      & span {
-        background-color: $--switch-disabled-text-color !important;
-      }
-
-      & ~ .el-switch__label * {
-        color: $--switch-disabled-text-color !important;
-      }
+    .el-switch__label * {
+      color: $--switch-disabled-text-color !important;
     }
   }
 

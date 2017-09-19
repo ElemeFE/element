@@ -248,13 +248,13 @@
 
       renderContent(h, { node, data, store }) {
         return (
-          <span style="white-space: normal">
+          <span style="flex: 1; display: flex; align-items: center; justify-content: space-between; font-size: 14px; padding-right: 8px;">
             <span>
               <span>{node.label}</span>
             </span>
-            <span style="float: right; margin-right: 20px">
-              <el-button size="mini" on-click={ () => this.append(store, data) }>Append</el-button>
-              <el-button size="mini" on-click={ () => this.remove(store, node, data) }>Delete</el-button>
+            <span>
+              <el-button style="font-size: 12px;" type="text" on-click={ () => this.append(store, data) }>Append</el-button>
+              <el-button style="font-size: 12px;" type="text" on-click={ () => this.remove(store, node, data) }>Delete</el-button>
             </span>
           </span>);
       },
@@ -763,13 +763,13 @@
 
       renderContent(h, { node, data, store }) {
         return (
-          <span style="white-space: normal">
+          <span style="flex: 1; display: flex; align-items: center; justify-content: space-between; font-size: 14px; padding-right: 8px;">
             <span>
               <span>{node.label}</span>
             </span>
-            <span style="float: right; margin-right: 20px">
-              <el-button size="mini" on-click={ () => this.append(store, data) }>Append</el-button>
-              <el-button size="mini" on-click={ () => this.remove(store, node, data) }>Delete</el-button>
+            <span>
+              <el-button style="font-size: 12px;" type="text" on-click={ () => this.append(store, data) }>Append</el-button>
+              <el-button style="font-size: 12px;" type="text" on-click={ () => this.remove(store, node, data) }>Delete</el-button>
             </span>
           </span>);
       }
@@ -935,7 +935,7 @@
 | --------------------- | ---------------------------------------- | --------------------------- | ---- | ----- |
 | data                  | 展示数据                                     | array                       | —    | —     |
 | empty-text            | 内容为空的时候展示的文本                             | String                      | —    | —     |
-| node-key              | 每个树节点用来作为唯一标识的属性，整颗树应该是唯一的               | String                      | —    | —     |
+| node-key              | 每个树节点用来作为唯一标识的属性，整棵树应该是唯一的               | String                      | —    | —     |
 | props                 | 配置选项，具体看下表                               | object                      | —    | —     |
 | load                  | 加载子树数据的方法                                | function(node, resolve)     | —    | —     |
 | render-content        | 树节点的内容区的渲染 Function                      | Function(h, { node }        | —    | —     |

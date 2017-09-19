@@ -1,7 +1,9 @@
 <template>
   <li class="el-menu-item"
-    :style="paddingStyle"
+    :style="[paddingStyle, itemStyle, { backgroundColor }]"
     @click="handleClick"
+    @mouseenter="onMouseEnter"
+    @mouseleave="onMouseLeave"
     :class="{
       'is-active': active,
       'is-disabled': disabled
@@ -49,9 +51,46 @@
     computed: {
       active() {
         return this.index === this.rootMenu.activeIndex;
+      },
+      hoverBackground() {
+        return this.rootMenu.hoverBackground;
+      },
+      backgroundColor() {
+        return this.rootMenu.backgroundColor || '';
+      },
+      activeTextColor() {
+        return this.rootMenu.activeTextColor || '';
+      },
+      textColor() {
+        return this.rootMenu.textColor || '';
+      },
+      mode() {
+        return this.rootMenu.mode;
+      },
+      itemStyle() {
+        const style = {
+          color: this.active ? this.activeTextColor : this.textColor
+        };
+        if (this.mode === 'horizontal' && !this.isNested) {
+          style.borderBottomColor = this.active
+            ? (this.rootMenu.activeTextColor ? this.activeTextColor : '')
+            : 'transparent';
+        }
+        return style;
+      },
+      isNested() {
+        return this.parentMenu !== this.rootMenu;
       }
     },
     methods: {
+      onMouseEnter() {
+        if (this.mode === 'horizontal' && !this.rootMenu.backgroundColor) return;
+        this.$el.style.backgroundColor = this.hoverBackground;
+      },
+      onMouseLeave() {
+        if (this.mode === 'horizontal' && !this.rootMenu.backgroundColor) return;
+        this.$el.style.backgroundColor = this.backgroundColor;
+      },
       handleClick() {
         this.dispatch('ElMenu', 'item-click', this);
         this.$emit('click', this);

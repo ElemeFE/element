@@ -24,6 +24,7 @@
         dialogFormVisible: false,
         outerVisible: false,
         innerVisible: false,
+        centerDialogVisible: false,
         form: {
           name: '',
           region: '',
@@ -233,6 +234,43 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
 ```
 :::
 
+### 居中布局
+
+标题和底部可水平居中
+
+:::demo 将 `center` 设置为 `true` 即可使标题和底部居中。
+
+```html
+<el-button type="text" @click="centerDialogVisible = true">点击打开 Dialog</el-button>
+
+<el-dialog
+  title="提示"
+  :visible.sync="centerDialogVisible"
+  width="30%"
+  center>
+  <span>需要注意的是内容是默认不居中的</span>
+  <span slot="footer" class="dialog-footer">
+    <el-button @click="centerDialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="centerDialogVisible = false">确 定</el-button>
+  </span>
+</el-dialog>
+
+<script>
+  export default {
+    data() {
+      return {
+        centerDialogVisible: false
+      };
+    }
+  };
+</script>
+```
+:::
+
+:::tip
+`center` 仅影响标题和底部区域。Dialog 的内容是任意的，在一些情况下，内容并不适合居中布局。如果需要内容也水平居中，请自行为其添加 CSS。
+:::
+
 :::tip
 如果 `visible` 属性绑定的变量位于 Vuex 的 store 内，那么 `.sync` 不会正常工作。此时需要去除 `.sync` 修饰符，同时监听 Dialog 的 `open` 和 `close` 事件，在事件回调中执行 Vuex 中对应的 mutation 更新 `visible` 属性绑定的变量的值。
 :::
@@ -254,6 +292,7 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
 | close-on-press-escape | 是否可以通过按下 ESC 关闭 Dialog | boolean    | — | true |
 | show-close | 是否显示关闭按钮 | boolean    | — | true |
 | before-close | 关闭前的回调，会暂停 Dialog 的关闭 | function(done)，done 用于关闭 Dialog | — | — |
+| center | 是否对头部和底部采用居中布局 | boolean | — | false |
 
 ### Slot
 | name | 说明 |

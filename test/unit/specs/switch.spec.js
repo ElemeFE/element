@@ -20,7 +20,7 @@ describe('Switch', () => {
     const core = vm.$el.querySelector('.el-switch__core');
     expect(core.style.backgroundColor).to.equal('rgb(255, 0, 0)');
     expect(core.style.width).to.equal('100px');
-    expect(vm.$el.querySelector('.el-switch__label--left').querySelector('span').textContent).to.equal('on');
+    expect(vm.$el.querySelector('.el-switch__label--left').querySelector('span').textContent).to.equal('off');
   });
 
   it('switch with icons', () => {
@@ -30,7 +30,7 @@ describe('Switch', () => {
     });
 
     const icon = vm.$el.querySelector('.el-switch__label--left').querySelector('i');
-    expect(icon.classList.contains('el-icon-check')).to.true;
+    expect(icon.classList.contains('el-icon-close')).to.true;
   });
 
   it('value correctly update', done => {

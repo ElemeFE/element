@@ -54,7 +54,6 @@
       :class="{ 'is-focus': visible }"
       @focus="handleFocus"
       @blur="handleBlur"
-      @click="handleIconClick"
       @mousedown.native="handleMouseDown"
       @keyup.native="debouncedOnInputChange"
       @keydown.native.down.prevent="navigateOptions('next')"
@@ -64,8 +63,11 @@
       @keydown.native.tab="visible = false"
       @paste.native="debouncedOnInputChange"
       @mouseenter.native="inputHovering = true"
-      @mouseleave.native="inputHovering = false"
-      :icon="iconClass">
+      @mouseleave.native="inputHovering = false">
+      <i slot="suffix"
+       :class="['el-select__caret', 'el-input__icon', 'el-icon-' + iconClass]"
+       @click="handleIconClick"
+      ></i>
     </el-input>
     <transition
       name="el-zoom-in-top"
@@ -660,8 +662,7 @@
       },
 
       getValueKey(item) {
-        const type = typeof item.value;
-        if (type === 'number' || type === 'string') {
+        if (Object.prototype.toString.call(item.value).toLowerCase() !== '[object object]') {
           return item.value;
         } else {
           return getValueByPath(item.value, this.valueKey);
@@ -677,7 +678,6 @@
       if (!this.multiple && Array.isArray(this.value)) {
         this.$emit('input', '');
       }
-      this.setSelected();
 
       this.debouncedOnInputChange = debounce(this.debounce, () => {
         this.onInputChange();
@@ -700,6 +700,7 @@
           this.inputWidth = this.$refs.reference.$el.getBoundingClientRect().width;
         }
       });
+      this.setSelected();
     },
 
     beforeDestroy() {

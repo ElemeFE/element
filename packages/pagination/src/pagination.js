@@ -206,16 +206,25 @@ export default {
         handleFocus(event) {
           this.oldValue = event.target.value;
         },
+        handleBlur({ target }) {
+          this.reassignMaxValue(target);
+        },
         handleKeyUp(event) {
           const key = event.key || '';
           const keyCode = event.keyCode || '';
           if ((key && key === 'Enter') || (keyCode && keyCode === 13)) {
+            this.reassignMaxValue(event.target);
             this.handleChange({ target: event.target });
           }
         },
         handleChange(value) {
           this.$parent.internalCurrentPage = this.$parent.getValidCurrentPage(value);
           this.oldValue = null;
+        },
+        reassignMaxValue(target) {
+          if (+target.value > this.$parent.internalPageCount) {
+            target.value = this.$parent.internalPageCount;
+          }
         }
       },
 
@@ -226,12 +235,13 @@ export default {
             <el-input
               class="el-pagination__editor is-in-pagination"
               min={ 1 }
-              max={ this.internalPageCount }
+              max={ this.$parent.internalPageCount }
               value={ this.$parent.internalCurrentPage }
               domPropsValue={ this.$parent.internalCurrentPage }
               type="number"
               onChange={ this.handleChange }
               onFocus={ this.handleFocus }
+              onBlur={ this.handleBlur }
               nativeOnKeyup={ this.handleKeyUp }/>
             { this.t('el.pagination.pageClassifier') }
           </span>

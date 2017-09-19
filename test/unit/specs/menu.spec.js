@@ -185,7 +185,7 @@ describe('Menu', () => {
     it('default opened', done => {
       vm = createVue({
         template: `
-          <el-menu theme="dark" :default-openeds="defaultOpeneds">
+          <el-menu :default-openeds="defaultOpeneds">
             <el-menu-item index="1">default opened处理中心</el-menu-item>
             <el-submenu index="2" ref="submenu1">
               <template slot="title">default opened我的工作台</template>
@@ -217,25 +217,10 @@ describe('Menu', () => {
       });
     });
   });
-  it('theme', () => {
-    vm = createVue({
-      template: `
-        <el-menu theme="dark">
-          <el-menu-item index="1" ref="item1">处理中心</el-menu-item>
-          <el-menu-item index="3">订单管理</el-menu-item>
-        </el-menu>
-      `,
-      data() {
-        return {
-        };
-      }
-    }, true);
-    expect(vm.$el.classList.contains('el-menu--dark')).to.be.true;
-  });
   it('unique-opened', done => {
     vm = createVue({
       template: `
-        <el-menu theme="dark" unique-opened default-active="2-2">
+        <el-menu unique-opened default-active="2-2">
           <el-menu-item index="1">处理中心</el-menu-item>
           <el-submenu index="2" ref="submenu1">
             <template slot="title">我的工作台</template>

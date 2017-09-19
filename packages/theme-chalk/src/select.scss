@@ -27,27 +27,23 @@
   }
 
   & .el-input {
-    & .el-input__icon {
+    & .el-select__caret {
       color: $--select-input-color;
       font-size: $--select-input-font-size;
       transition: transform .3s;
-      transform: translateY(-50%) rotateZ(180deg);
+      transform: rotateZ(180deg);
       line-height: 16px;
-      top: 50%;
       cursor: pointer;
 
       @include when(reverse) {
-        transform: translateY(-50%);
+        transform: rotateZ(0deg);
       }
 
       @include when(show-close) {
         transition: 0s;
-        height: 16px;
-        width: 16px;
         font-size: $--select-font-size;
-        right: 8px;
         text-align: center;
-        transform: translateY(-50%) rotateZ(180deg);
+        transform: rotateZ(180deg);
         border-radius: $--border-radius-circle;
         color: $--select-input-color;
 

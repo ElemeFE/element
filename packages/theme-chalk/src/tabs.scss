@@ -3,7 +3,6 @@
 
 @include b(tabs) {
   @include e(header) {
-    border-bottom: 1px solid $--color-black;
     padding: 0;
     position: relative;
     margin: 0 0 15px;
@@ -12,7 +11,7 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    height: 3px;
+    height: 2px;
     background-color: $--color-primary;
     z-index: 1;
     transition: transform .3s cubic-bezier(.645,.045,.355,1);
@@ -45,8 +44,19 @@
     margin-bottom: -1px;
     position: relative;
 
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 2px;
+      background-color: $--border-color-light;
+      z-index: $--index-normal;
+    }
+
     @include when(scrollable) {
-      padding: 0 15px;
+      padding: 0 20px;
       box-sizing: border-box;
     }
   }
@@ -58,7 +68,7 @@
     cursor: pointer;
     line-height: 44px;
     font-size: 12px;
-    color: $--color-black;
+    color: $--color-text-secondary;
   }
   @include e(nav-next) {
     right: 0;
@@ -71,16 +81,18 @@
     position: relative;
     transition: transform .3s;
     float: left;
+    z-index: #{$--index-normal + 1};
   }
   @include e(item) {
-    padding: 0 16px;
-    height: 42px;
+    padding: 0 20px;
+    height: 40px;
     box-sizing: border-box;
     line-height: 40px;
     display: inline-block;
     list-style: none;
     font-size: 14px;
-    color: $--color-black;
+    font-weight: 500;
+    color: $--color-text-primary;
     position: relative;
 
     & .el-icon-close {
@@ -94,7 +106,7 @@
       }
 
       &:hover {
-        background-color: $--color-black;
+        background-color: $--color-text-placeholder;
         color: $--color-white;
       }
     }
@@ -104,7 +116,7 @@
     }
 
     &:hover {
-      color: $--color-black;
+      color: $--color-primary;
       cursor: pointer;
     }
 
@@ -118,6 +130,17 @@
     position: relative;
   }
   @include m(card) {
+    > .el-tabs__header {
+      border-bottom: 1px solid $--border-color-light;
+    }
+    > .el-tabs__header .el-tabs__nav-wrap::after {
+      content: none;
+    }
+    > .el-tabs__header .el-tabs__nav {
+      border: 1px solid $--border-color-light;
+      border-bottom: none;
+      border-radius: 4px 4px 0 0;
+    }
     > .el-tabs__header .el-tabs__active-bar {
       display: none;
     }
@@ -134,13 +157,16 @@
       transform-origin: 100% 50%;
     }
     > .el-tabs__header .el-tabs__item {
-      border: 1px solid transparent;
-      transition: all .3s cubic-bezier(.645,.045,.355,1);
-
+      border-bottom: 1px solid transparent;
+      border-left: 1px solid $--border-color-light;
+      transition: color .3s cubic-bezier(.645,.045,.355,1), padding .3s cubic-bezier(.645,.045,.355,1);
+      &:first-child {
+        border-left: none;
+      }
       &.is-closable {
         &:hover {
-          padding-left: 9px;
-          padding-right: 9px;
+          padding-left: 13px;
+          padding-right: 13px;
 
           & .el-icon-close {
             width: 14px;
@@ -148,13 +174,11 @@
         }
       }
       &.is-active {
-        border: 1px solid $--color-black;
         border-bottom-color: $--color-white;
-        border-radius: 4px 4px 0 0;
 
         &.is-closable {
-          padding-left: 16px;
-          padding-right: 16px;
+          padding-left: 20px;
+          padding-right: 20px;
 
           .el-icon-close {
             width: 14px;
@@ -165,25 +189,34 @@
   }
   @include m(border-card) {
     background: $--color-white;
-    border: 1px solid $--color-black;
+    border: 1px solid $--border-color-base;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.12), 0 0 6px 0 rgba(0,0,0,0.04);
 
     >.el-tabs__content {
       padding: 15px;
     }
     >.el-tabs__header {
-      background-color: $--color-black;
+      background-color: $--background-color-base;
+      border-bottom: 1px solid $--border-color-light;
       margin: 0;
+    }
+    > .el-tabs__header .el-tabs__nav-wrap::after {
+      content: none;
     }
     >.el-tabs__header .el-tabs__item {
       transition: all .3s cubic-bezier(.645,.045,.355,1);
       border: 1px solid transparent;
       margin: -1px -1px 0;
+      color: $--color-text-secondary;
 
       &.is-active {
+        color: $--color-primary;
         background-color: $--color-white;
-        border-right-color: $--color-black;
-        border-left-color: $--color-black;
+        border-right-color: $--border-color-base;
+        border-left-color: $--border-color-base;
+      }
+      &:hover {
+        color: $--color-primary;
       }
     }
   }
@@ -195,7 +228,7 @@
     &.el-tabs--border-card {
       .el-tabs__header {
         border-bottom: 0;
-        border-top: 1px solid $--color-black;
+        border-top: 1px solid $--border-color-base;
       }
       .el-tabs__nav-wrap {
         margin-top: -1px;
@@ -219,7 +252,7 @@
     .el-tabs__active-bar {
       top: 0;
       bottom: auto;
-      width: 3px;
+      width: 2px;
       height: auto;
     }
 
@@ -228,6 +261,13 @@
 
       &.is-scrollable {
         padding: 30px 0;
+      }
+
+      &::after {
+        height: 100%;
+        width: 2px;
+        bottom: auto;
+        top: 0;
       }
     }
 
@@ -262,13 +302,15 @@
   @include m(left) {
     .el-tabs__header {
       float: left;
-      border-bottom: none;
-      border-right: 1px solid $--color-black;
       margin-bottom: 0;
       margin-right: 10px;
     }
     .el-tabs__nav-wrap {
       margin-right: -1px;
+      &::after {
+        left: auto;
+        right: 0;
+      }
     }
     .el-tabs__active-bar {
       right: 0;
@@ -279,10 +321,37 @@
     }
 
     &.el-tabs--card {
+      .el-tabs__active-bar {
+        display: none;
+      }
+      .el-tabs__item {
+        border-left: none;
+        border-right: 1px solid $--border-color-light;
+        border-bottom: none;
+        border-top: 1px solid $--border-color-light;
+      }
+      .el-tabs__item:first-child {
+        border-right: 1px solid $--border-color-light;
+        border-top: none;
+      }
       .el-tabs__item.is-active {
-        border: 1px solid rgb(209, 219, 229);
+        border: 1px solid $--border-color-light;
         border-right-color: #fff;
+        border-left: none;
+        border-bottom: none;
+
+        &:first-child {
+          border-top: none;
+        }
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+
+      .el-tabs__nav {
         border-radius: 4px 0 0 4px;
+        border-bottom: 1px solid $--border-color-light;
+        border-right: none;
       }
 
       .el-tabs__new-tab {
@@ -291,6 +360,9 @@
     }
 
     &.el-tabs--border-card {
+      .el-tabs__header {
+        border-right: 1px solid #dfe4ed;
+      }
       .el-tabs__item {
         border: 1px solid transparent;
         margin: -1px 0 -1px -1px;
@@ -306,14 +378,16 @@
   @include m(right) {
     .el-tabs__header {
       float: right;
-      border-bottom: none;
-      border-left: 1px solid $--color-black;
       margin-bottom: 0;
       margin-left: 10px;
     }
 
     .el-tabs__nav-wrap {
       margin-left: -1px;
+      &::after {
+        left: 0;
+        right: auto;
+      }
     }
 
     .el-tabs__active-bar {
@@ -321,13 +395,41 @@
     }
 
     &.el-tabs--card {
+      .el-tabs__active-bar {
+        display: none;
+      }
+      .el-tabs__item {
+        border-bottom: none;
+        border-top: 1px solid $--border-color-light;
+      }
+      .el-tabs__item:first-child {
+        border-left: 1px solid $--border-color-light;
+        border-top: none;
+      }
       .el-tabs__item.is-active {
-        border: 1px solid rgb(209, 219, 229);
+        border: 1px solid $--border-color-light;
         border-left-color: #fff;
+        border-right: none;
+        border-bottom: none;
+
+        &:first-child {
+          border-top: none;
+        }
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+
+      .el-tabs__nav {
         border-radius: 0 4px 4px 0;
+        border-bottom: 1px solid $--border-color-light;
+        border-left: none;
       }
     }
     &.el-tabs--border-card {
+      .el-tabs__header {
+        border-left: 1px solid #dfe4ed;
+      }
       .el-tabs__item {
         border: 1px solid transparent;
         margin: -1px -1px -1px 0;

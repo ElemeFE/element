@@ -512,8 +512,9 @@ Form component allows you to verify your data, helping you find and correct erro
 
 ### Custom validation rules
 
-:::demo This example shows how to customize your own validation rules to finish a two-factor password verification.
+This example shows how to customize your own validation rules to finish a two-factor password verification. And you can you `status-feedback` to add validate status icon。
 
+:::demo
 ```html
 <el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-width="120px" class="demo-ruleForm">
   <el-form-item label="Password" prop="pass">
@@ -769,6 +770,7 @@ When an `el-form-item` is nested in another `el-form-item`, its label width will
 | rules | validation rules of form | object | — | — |
 | error | field error message, set its value and the field will validate error and show this message immediately | string | — | — |
 | show-message  | whether to show the error message | boolean | — | true |
+| inline-message  | inline style validate message | boolean | — | false |
 
 
 ### Form-Item Slot

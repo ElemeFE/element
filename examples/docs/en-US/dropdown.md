@@ -199,12 +199,61 @@ Clicking each dropdown item fires an event whose parameter is assigned by each i
 ```
 :::
 
+### Sizes
+
+Besides default size, Dropdown component provides three additional sizes for you to choose among different scenarios.
+
+:::demo Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
+
+```html
+<el-dropdown  split-button type="primary">
+  Default
+  <el-dropdown-menu slot="dropdown">
+    <el-dropdown-item>Action 1</el-dropdown-item>
+    <el-dropdown-item>Action 2</el-dropdown-item>
+    <el-dropdown-item>Action 3</el-dropdown-item>
+    <el-dropdown-item>Action 4</el-dropdown-item>
+  </el-dropdown-menu>
+</el-dropdown>
+
+<el-dropdown size="medium" split-button type="primary">
+  Medium
+  <el-dropdown-menu slot="dropdown">
+    <el-dropdown-item>Action 1</el-dropdown-item>
+    <el-dropdown-item>Action 2</el-dropdown-item>
+    <el-dropdown-item>Action 3</el-dropdown-item>
+    <el-dropdown-item>Action 4</el-dropdown-item>
+  </el-dropdown-menu>
+</el-dropdown>
+
+<el-dropdown size="small" split-button type="primary">
+  Small
+  <el-dropdown-menu slot="dropdown">
+   <el-dropdown-item>Action 1</el-dropdown-item>
+   <el-dropdown-item>Action 2</el-dropdown-item>
+   <el-dropdown-item>Action 3</el-dropdown-item>
+   <el-dropdown-item>Action 4</el-dropdown-item>
+  </el-dropdown-menu>
+</el-dropdown>
+
+<el-dropdown size="mini" split-button type="primary">
+  Mini
+  <el-dropdown-menu slot="dropdown">
+    <el-dropdown-item>Action 1</el-dropdown-item>
+    <el-dropdown-item>Action 2</el-dropdown-item>
+    <el-dropdown-item>Action 3</el-dropdown-item>
+    <el-dropdown-item>Action 4</el-dropdown-item>
+  </el-dropdown-menu>
+</el-dropdown>
+```
+:::
+
 
 ### Dropdown Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
-| type          | menu button type, refer to `Button` Component, only works when `split-button` is true  | string  |          —             |    —     |
-| size          | menu button size, refer to `Button` Component, only works when `split-button` is true  | string  |          —             |    —     |
+| type          | menu button type, refer to `Button` Component, only works when `split-button` is true  | string  |  —   |    —     |
+| size          | menu size, refer to `Button` Component, also works on the Split-button  | string  | large / small / mini  |    —     |
 | split-button | whether a button group is displayed | boolean         |     —       | false   |
 | size          | component size, refer to `Button` component     | string          | large, small, mini  |  —  |
 | placement    | placement of pop menu | string | top/top-start/top-end/bottom/bottom-start/bottom-end  | bottom-end |
