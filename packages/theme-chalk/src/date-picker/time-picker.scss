@@ -4,7 +4,7 @@
   margin: 5px 0;
   border: solid 1px $--datepicker-border-color;
   background-color: $--color-white;
-  box-shadow: $--box-shadow-base;
+  box-shadow: $--box-shadow-light;
   border-radius: 2px;
   position: absolute;
   width: 180px;
@@ -18,14 +18,10 @@
     overflow: hidden;
 
     &::after, &::before {
-      content: ":";
+      content: "";
       top: 50%;
-      color: $--color-white;
       position: absolute;
-      font-size: 14px;
       margin-top: -15px;
-      line-height: 16px;
-      background-color: $--datepicker-active-color;
       height: 32px;
       z-index: -1;
       left: 0;
@@ -33,16 +29,20 @@
       box-sizing: border-box;
       padding-top: 6px;
       text-align: left;
+      border-top: 1px solid $--border-color-light;
+      border-bottom: 1px solid $--border-color-light;
     }
 
     &::after {
       left: 50%;
-      margin-left: -2px;
+      margin-left: 12%;
+      margin-right: 12%;
     }
 
     &::before {
       padding-left: 50%;
-      margin-right: -2px;
+      margin-right: 12%;
+      margin-left: 12%;
     }
 
     &.has-seconds {
@@ -74,11 +74,15 @@
     background-color: transparent;
     outline: none;
     font-size: 12px;
-    color: $--color-black;
+    color: $--color-text-primary;
 
     &.confirm {
       font-weight: 800;
       color: $--datepicker-active-color;
     }
+  }
+
+  .popper__arrow {
+    transform: translateX(-400%);
   }
 }

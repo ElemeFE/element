@@ -239,18 +239,18 @@ export default {
 
 带有图标标记输入类型
 
-::: demo 可以通过 `suffix-icon` 和 `prefix-icon` 属性在 input 组件首部和尾部增加显示图标，也可以通过 slot 来放置图标。
+::: demo 可以通过 `prefix-icon` 和 `suffix-icon` 属性在 input 组件首部和尾部增加显示图标，也可以通过 slot 来放置图标。
 ```html
 <div class="demo-input-suffix">
   属性方式：
   <el-input
     placeholder="请选择日期"
-    suffix-icon="date"
+    suffix-icon="el-icon-date"
     v-model="input2">
   </el-input>
   <el-input
     placeholder="请输入内容"
-    prefix-icon="search"
+    prefix-icon="el-icon-search"
     v-model="input21">
   </el-input>
 </div>
@@ -393,22 +393,26 @@ export default {
 ```html
 <div class="demo-input-size">
   <el-input
-    size="large"
     placeholder="请输入内容"
+    suffix-icon="el-icon-date"
     v-model="input6">
   </el-input>
   <el-input
+    size="medium"
     placeholder="请输入内容"
+    suffix-icon="el-icon-date"
     v-model="input7">
   </el-input>
   <el-input
     size="small"
     placeholder="请输入内容"
+    suffix-icon="el-icon-date"
     v-model="input8">
   </el-input>
   <el-input
     size="mini"
     placeholder="请输入内容"
+    suffix-icon="el-icon-date"
     v-model="input9">
   </el-input>
 </div>
@@ -792,7 +796,8 @@ export default {
 | placeholder   | 输入框占位文本    | string          | — | — |
 | disabled      | 禁用            | boolean         | — | false   |
 | size          | 输入框尺寸，只在 `type!="textarea"` 时有效      | string          | large, small, mini  | — |
-| icon          | 输入框尾部图标    | string          | — | — |
+| prefix-icon   | 输入框头部图标    | string          | — | — |
+| suffix-icon   | 输入框尾部图标    | string          | — | — |
 | rows          | 输入框行数，只对 `type="textarea"` 有效  |  number | — |  2   |
 | autosize      | 自适应内容高度，只对 `type="textarea"` 有效，可传入对象，如，{ minRows: 2, maxRows: 6 }  |  boolean/object | — |  false   |
 | auto-complete | 原生属性，自动补全 | string | on, off | off |
@@ -804,12 +809,18 @@ export default {
 | resize | 控制是否能被用户缩放 | string | none, both, horizontal, vertical | — |
 | autofocus | 原生属性，自动获取焦点 | boolean | true, false | false |
 | form | 原生属性 | string | — | — |
-| on-icon-click | 点击 Input 内的图标的钩子函数 | function | — | — |
+
+### Input slot
+| name | 说明 |
+|------|--------|
+| prefix | 输入框头部内容 |
+| suffix | 输入框尾部内容 |
+| prepend | 输入框前置内容 |
+| append | 输入框后置内容 |
 
 ### Input Events
 | 事件名称 | 说明 | 回调参数 |
 |---------|--------|---------|
-| click | 点击 Input 内的图标时触发 | (event: Event) |
 | blur | 在 Input 失去焦点时触发 | (event: Event) |
 | focus | 在 Input 获得焦点时触发 | (event: Event) |
 | change | 在 Input 值改变时触发 | (value: string \| number) |

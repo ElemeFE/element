@@ -6,7 +6,7 @@
     <div
       v-show="visible"
       :style="{ width: width + 'px' }"
-      class="el-time-range-picker el-picker-panel"
+      class="el-time-range-picker el-picker-panel el-popper"
       :class="popperClass">
       <div class="el-time-range-picker__content">
         <div class="el-time-range-picker__cell">
@@ -126,7 +126,7 @@
     watch: {
       value(newVal) {
         this.panelCreated();
-        this.$nextTick(_ => this.ajustScrollTop());
+        this.$nextTick(_ => this.adjustScrollTop());
       },
 
       visible(val) {
@@ -228,9 +228,9 @@
         this.$emit('pick', [this.minTime, this.maxTime], visible, first);
       },
 
-      ajustScrollTop() {
-        this.$refs.minSpinner.ajustScrollTop();
-        this.$refs.maxSpinner.ajustScrollTop();
+      adjustScrollTop() {
+        this.$refs.minSpinner.adjustScrollTop();
+        this.$refs.maxSpinner.adjustScrollTop();
       },
 
       scrollDown(step) {

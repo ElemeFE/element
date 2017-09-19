@@ -38,15 +38,15 @@ describe('TimePicker', () => {
     input.focus();
     input.blur();
 
-    Vue.nextTick(_ => {
+    setTimeout(_ => {
       const times = vm.picker.$el.querySelectorAll('.active');
 
       expect(times[0].textContent).to.equal('18');
       expect(times[1].textContent).to.equal('40');
-      expect(times[2].textContent).to.equal('0');
+      expect(times[2].textContent).to.equal('00');
       destroyVM(vm);
       done();
-    });
+    }, 100);
   });
 
   it('select time', done => {

@@ -13,8 +13,7 @@
         v-for="(disabled, hour) in hoursList"
         track-by="hour"
         class="el-time-spinner__item"
-        :class="{ 'active': hour === hours, 'disabled': disabled }"
-        v-text="hour"></li>
+        :class="{ 'active': hour === hours, 'disabled': disabled }">{{ ('0' + hour).slice(-2) }}</li>
     </el-scrollbar>
     <el-scrollbar
       @mouseenter.native="emitSelectRange('minutes')"
@@ -28,8 +27,7 @@
         @click="handleClick('minutes', key, true)"
         v-for="(minute, key) in 60"
         class="el-time-spinner__item"
-        :class="{ 'active': key === minutes }"
-        v-text="key"></li>
+        :class="{ 'active': key === minutes }">{{ ('0' + key).slice(-2) }}</li>
     </el-scrollbar>
     <el-scrollbar
       v-show="showSeconds"
@@ -44,8 +42,7 @@
         @click="handleClick('seconds', key, true)"
         v-for="(second, key) in 60"
         class="el-time-spinner__item"
-        :class="{ 'active': key === seconds }"
-        v-text="key"></li>
+        :class="{ 'active': key === seconds }">{{ ('0' + key).slice(-2) }}</li>
     </el-scrollbar>
   </div>
 </template>
@@ -85,7 +82,7 @@
         if (!(newVal >= 0 && newVal <= 23)) {
           this.hoursPrivate = oldVal;
         }
-        this.ajustElTop('hour', newVal);
+        this.adjustElTop('hour', newVal);
         this.$emit('change', { hours: newVal });
       },
 
@@ -93,7 +90,7 @@
         if (!(newVal >= 0 && newVal <= 59)) {
           this.minutesPrivate = oldVal;
         }
-        this.ajustElTop('minute', newVal);
+        this.adjustElTop('minute', newVal);
         this.$emit('change', { minutes: newVal });
       },
 
@@ -101,7 +98,7 @@
         if (!(newVal >= 0 && newVal <= 59)) {
           this.secondsPrivate = oldVal;
         }
-        this.ajustElTop('second', newVal);
+        this.adjustElTop('second', newVal);
         this.$emit('change', { seconds: newVal });
       }
     },
@@ -135,7 +132,7 @@
     },
 
     created() {
-      this.debounceAjustElTop = debounce(100, type => this.ajustElTop(type, this[`${type}s`]));
+      this.debounceAdjustElTop = debounce(200, type => this.adjustElTop(type, this[`${type}s`]));
     },
 
     mounted() {
@@ -168,7 +165,9 @@
 
       bindScrollEvent() {
         const bindFuntion = (type) => {
-          this[`${type}El`].onscroll = (e) => this.handleScroll(type, e);
+          this[`${type}El`].onscroll = (e) => {
+            this.handleScroll(type, e);
+          };
         };
         bindFuntion('hour');
         bindFuntion('minute');
@@ -176,19 +175,19 @@
       },
 
       handleScroll(type) {
-        const ajust = {};
-        ajust[`${type}s`] = Math.min(Math.floor((this[`${type}El`].scrollTop - 80) / 32 + 3), (`${type}` === 'hour' ? 23 : 59));
-        this.debounceAjustElTop(type);
-        this.$emit('change', ajust);
+        const adjust = {};
+        adjust[`${type}s`] = Math.min(Math.floor((this[`${type}El`].scrollTop - 80) / 32 + 3), (`${type}` === 'hour' ? 23 : 59));
+        this.debounceAdjustElTop(type);
+        this.$emit('change', adjust);
       },
 
-      ajustScrollTop() {
-        this.ajustElTop('hour', this.hours);
-        this.ajustElTop('minute', this.minutes);
-        this.ajustElTop('second', this.seconds);
+      adjustScrollTop() {
+        this.adjustElTop('hour', this.hours);
+        this.adjustElTop('minute', this.minutes);
+        this.adjustElTop('second', this.seconds);
       },
 
-      ajustElTop(type, value) {
+      adjustElTop(type, value) {
         this[`${type}El`].scrollTop = Math.max(0, (value - 2.5) * 32 + 80);
       },
 
@@ -218,7 +217,7 @@
         }
 
         this.$emit('change', { [label]: now });
-        this.ajustElTop(label.slice(0, -1), now);
+        this.adjustElTop(label.slice(0, -1), now);
       }
     }
   };

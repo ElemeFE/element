@@ -153,7 +153,7 @@
       transform: translateY(50%);
     }
     &.el-slider--with-input {
-      padding-bottom: #{$--input-large-height + 22px};
+      padding-bottom: #{$--input-medium-height + 22px};
       .el-slider__input {
         overflow: visible;
         float: none;

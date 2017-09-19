@@ -58,19 +58,19 @@
       }
     }
   }
-  @include m(large) {
+  @include m(medium) {
     width: 200px;
 
     & .el-input-number__increase, .el-input-number__decrease {
-      line-height: #{$--input-large-height - 2};
-      width: $--input-large-height;
-      font-size: $--input-large-font-size;
+      line-height: #{$--input-medium-height - 2};
+      width: $--input-medium-height;
+      font-size: $--input-medium-font-size;
     }
     & .el-input-number__decrease {
-      right: #{$--input-large-height + 1};
+      right: #{$--input-medium-height + 1};
     }
     & .el-input__inner {
-      padding-right: #{$--input-large-height * 2 + 10};
+      padding-right: #{$--input-medium-height * 2 + 10};
     }
   }
   @include m(small) {

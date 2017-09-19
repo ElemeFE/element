@@ -1,6 +1,6 @@
 <template>
   <div class="el-form-item" :class="{
-    'el-form-item--feedback': statusFeedback,
+    'el-form-item--feedback': elForm && elForm.statusIcon,
     'is-error': validateState === 'error',
     'is-validating': validateState === 'validating',
     'is-success': validateState === 'success',
@@ -15,7 +15,11 @@
         <div
           v-if="validateState === 'error' && showMessage && form.showMessage"
           class="el-form-item__error"
-          :class="{'el-form-item__error--inline': inlineMessage}"
+          :class="{
+            'el-form-item__error--inline': typeof inlineMessage === 'boolean'
+              ? inlineMessage
+              : (elForm && elForm.inlineMessage || false)
+          }"
         >
           {{validateMessage}}
         </div>
@@ -72,11 +76,13 @@
       labelWidth: String,
       prop: String,
       required: Boolean,
-      statusFeedback: Boolean,
       rules: [Object, Array],
       error: String,
       validateStatus: String,
-      inlineMessage: Boolean,
+      inlineMessage: {
+        type: [String, Boolean],
+        default: ''
+      },
       showMessage: {
         type: Boolean,
         default: true

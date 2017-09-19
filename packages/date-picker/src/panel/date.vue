@@ -5,7 +5,7 @@
       :style="{
         width: width + 'px'
       }"
-      class="el-picker-panel el-date-picker"
+      class="el-picker-panel el-date-picker el-popper"
       :class="[{
         'has-sidebar': $slots.sidebar || shortcuts,
         'has-time': showTime
@@ -166,7 +166,7 @@
       },
 
       timePickerVisible(val) {
-        if (val) this.$nextTick(() => this.$refs.timepicker.ajustScrollTop());
+        if (val) this.$nextTick(() => this.$refs.timepicker.adjustScrollTop());
       },
 
       selectionMode(newVal) {

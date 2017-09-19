@@ -43,18 +43,20 @@
     height: 32px;
     line-height: 32px;
     font-size: 12px;
+    color: $--font-color-base;
 
     &:hover:not(.disabled):not(.active) {
-      background: $--datepicker-cell-hover-color;
+      background: $--background-color-base;
       cursor: pointer;
     }
 
     &.active:not(.disabled) {
-      color: $--color-white;
+      color: $--color-text-primary;
+      font-weight: bold;
     }
 
     &.disabled {
-      color: $--datepicker-border-color;
+      color: $--color-text-placeholder;
       cursor: not-allowed;
     }
   }

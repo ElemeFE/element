@@ -28,6 +28,8 @@
         default: ''
       },
       inline: Boolean,
+      inlineMessage: Boolean,
+      statusIcon: Boolean,
       showMessage: {
         type: Boolean,
         default: true

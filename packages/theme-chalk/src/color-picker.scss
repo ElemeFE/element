@@ -61,7 +61,7 @@
   width: 280px;
   height: 180px;
 
-  @include e((white, black)) {
+  @include e(('white', 'black')) {
     position: absolute;
     top: 0;
     left: 0;
@@ -69,11 +69,11 @@
     bottom: 0;
   }
 
-  @include e(white) {
+  @include e('white') {
     background: linear-gradient(to right, #fff, rgba(255,255,255,0));
   }
 
-  @include e(black) {
+  @include e('black') {
     background: linear-gradient(to top, #000, rgba(0,0,0,0));
   }
 

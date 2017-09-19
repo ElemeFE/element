@@ -393,7 +393,7 @@
 
 ::: demo Form 组件提供了表单验证的功能，只需要通过 `rule` 属性传入约定的验证规则，并 Form-Item 的 `prop` 属性设置为需校验的字段名即可。校验规则参见 [async-validator](https://github.com/yiminghe/async-validator)
 ```html
-<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" message-position="right">
+<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
   <el-form-item label="活动名称" prop="name">
     <el-input v-model="ruleForm.name"></el-input>
   </el-form-item>
@@ -503,18 +503,18 @@
 
 ### 自定义校验规则
 
-这个例子中展示了如何使用自定义验证规则来完成密码的二次验证，并且你可以通过 `status-feedback` 来给输入框添加反馈图标。
+这个例子中展示了如何使用自定义验证规则来完成密码的二次验证。
 
-::: demo
+::: demo 本例还使用`status-icon`属性为输入框添加了表示校验结果的反馈图标。
 ```html
-<el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
-  <el-form-item status-feedback label="密码" prop="pass">
+<el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
+  <el-form-item label="密码" prop="pass">
     <el-input type="password" v-model="ruleForm2.pass" auto-complete="off"></el-input>
   </el-form-item>
-  <el-form-item status-feedback label="确认密码" prop="checkPass">
+  <el-form-item label="确认密码" prop="checkPass">
     <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off"></el-input>
   </el-form-item>
-  <el-form-item status-feedback label="年龄" prop="age">
+  <el-form-item label="年龄" prop="age">
     <el-input v-model.number="ruleForm2.age"></el-input>
   </el-form-item>
   <el-form-item>
@@ -739,6 +739,8 @@
 | label-width | 表单域标签的宽度，作为 Form 直接子元素的 form-item 会继承该值 | string | — | — |
 | label-suffix | 表单域标签的后缀 | string | — | — |
 | show-message  | 是否显示校验错误信息 | boolean | — | true |
+| inline-message  | 是否以行内形式展示校验信息 | boolean | — | false |
+| status-icon  | 是否在输入框中显示校验结果反馈图标 | boolean | — | false |
 
 ### Form Methods
 

@@ -21,7 +21,7 @@
         <slot name="prefix"></slot>
         <i class="el-input__icon"
           v-if="prefixIcon"
-          :class="['el-icon-' + prefixIcon]">
+          :class="prefixIcon">
         </i>
       </span>
       <input
@@ -41,7 +41,7 @@
           <slot name="suffix"></slot>
           <i class="el-input__icon"
             v-if="suffixIcon"
-            :class="['el-icon-' + suffixIcon]">
+            :class="suffixIcon">
           </i>
         </span>
         <i class="el-input__icon"
@@ -132,7 +132,7 @@
 
     computed: {
       validateState() {
-        return this.formItem ? this.formItem.validateState : '';
+        return this.elFormItem ? this.elFormItem.validateState : '';
       },
       validateIcon() {
         return {
