@@ -65,6 +65,7 @@
         z-index: 100;
         min-width: 100%;
         box-shadow: $--box-shadow-light;
+        border-radius: $--border-radius-small;
       }
 
       & .el-submenu__title {
@@ -138,6 +139,8 @@
         top: 0;
         left: 100%;
         z-index: 10;
+        border: 1px solid $--border-color-light;
+        border-radius: $--border-radius-small;
         box-shadow: $--box-shadow-light;
       }
 

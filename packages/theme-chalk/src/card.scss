@@ -3,9 +3,10 @@
 
 @include b(card) {
   border-radius: $--card-border-radius;
+  border: 1px solid $--card-border-color;
   background-color: $--color-white;
   overflow: hidden;
-  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.05);
+  box-shadow: $--box-shadow-light;
   color: $--color-text-primary;
 
   @include e(header) {
