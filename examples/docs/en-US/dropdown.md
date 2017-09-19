@@ -203,7 +203,7 @@ Clicking each dropdown item fires an event whose parameter is assigned by each i
 
 Besides default size, Dropdown component provides three additional sizes for you to choose among different scenarios.
 
-:::demo 额外的尺寸：Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
+:::demo Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
 
 ```html
 <el-dropdown  split-button type="primary">
