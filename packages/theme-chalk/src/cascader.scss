@@ -5,6 +5,7 @@
 @include b(cascader) {
   display: inline-block;
   position: relative;
+  min-width: 224px;
 
   .el-input,
   .el-input__inner {
@@ -25,6 +26,11 @@
 
   .el-icon-circle-close {
     z-index: #{$--index-normal + 1};
+    transition: $--color-transition-base;
+
+    &:hover {
+      color: $--color-text-secondary;
+    }
   }
 
   @include e(clearIcon) {
@@ -46,8 +52,9 @@
     overflow: hidden;
     box-sizing: border-box;
     cursor: pointer;
-    font-size: 14px;
+    font-size: $--font-size-small;
     text-align: left;
+
     span {
       color: $--color-black;
     }
@@ -84,6 +91,11 @@
   border: $--select-dropdown-border;
   border-radius: $--border-radius-small;
   box-shadow: $--select-dropdown-shadow;
+
+  &.el-popper[x-placement^="bottom"] .popper__arrow {
+    // dont do that, bro dont do that
+    left: 24px !important;
+  }
 }
 
 @include b(cascader-menu) {
@@ -104,7 +116,7 @@
 
   @include e(item) {
     font-size: $--select-font-size;
-    padding: 8px 30px 8px 10px;
+    padding: 8px 20px;
     position: relative;
     white-space: nowrap;
     overflow: hidden;
@@ -122,12 +134,12 @@
     @include m(extensible) {
       &:after {
         font-family: 'element-icons';
-        content: "\e606";
+        content: "\e602";
         font-size: 12px;
         transform: scale(0.8);
         color: rgb(191, 203, 217);
         position: absolute;
-        right: 10px;
+        right: 15px;
         margin-top: 1px;
       }
     }
@@ -157,11 +169,7 @@
 
     &.selected {
       color: $--color-white;
-      background-color: $--select-option-selected;
-
-      &.hover {
-        background-color: $--select-option-selected-hover;
-      }
+      background-color: $--select-option-selected-hover;
     }
   }
 

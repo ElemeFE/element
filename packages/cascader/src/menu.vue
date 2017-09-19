@@ -202,12 +202,13 @@
           <div
             v-show={visible}
             class={[
-              'el-cascader-menus',
+              'el-cascader-menus el-popper',
               popperClass
             ]}
             ref="wrapper"
           >
             {menus}
+            <div x-arrow class="popper__arrow"></div>
           </div>
         </transition>
       );

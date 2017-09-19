@@ -34,7 +34,7 @@
         <i
           key="2"
           v-else
-          class="el-input__icon el-icon-caret-bottom"
+          class="el-input__icon el-icon-arrow-down"
           :class="{ 'is-reverse': menuVisible }"
         ></i>
       </template>
@@ -73,7 +73,8 @@ const popperMixin = {
     appendToBody: Popper.props.appendToBody,
     offset: Popper.props.offset,
     boundariesPadding: Popper.props.boundariesPadding,
-    popperOptions: Popper.props.popperOptions
+    popperOptions: Popper.props.popperOptions,
+    visibleArrow: true
   },
   methods: Popper.methods,
   data: Popper.data,

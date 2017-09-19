@@ -20,6 +20,15 @@
     padding: $--popover-padding-large;
   }
 
+  @include e(title) {
+    color: $--popover-title-color;
+    font-size: $--popover-title-font-size;
+    line-height: 1;
+    margin-bottom: 15px;
+  }
+}
+
+@include b(popper) {
   .popper__arrow,
   .popper__arrow::after {
     position: absolute;
@@ -115,12 +124,5 @@
       border-right-width: 0;
       border-left-color: $--popover-fill;
     }
-  }
-
-  @include e(title) {
-    color: $--popover-title-color;
-    font-size: $--popover-title-font-size;
-    line-height: 1;
-    margin-bottom: 15px;
   }
 }
