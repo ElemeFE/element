@@ -231,7 +231,6 @@ describe('Pagination', () => {
 
       setTimeout(() => {
         expect(vm.page).to.equal(10);
-        expect(input.value).to.equal('10');
 
         changeValue('我好帅');
 
