@@ -7,6 +7,7 @@
   white-space: nowrap;
   padding: 2px 5px;
   color: $--pagination-color;
+  font-weight: bold;
   @include utils-clearfix;
 
   span,
@@ -18,6 +19,15 @@
     line-height: $--pagination-button-height;
     vertical-align: top;
     box-sizing: border-box;
+  }
+
+  .el-input__inner {
+    font-weight: bold;
+  }
+
+  // pagesize 的下拉 icon
+  .el-input__suffix {
+    right: -3px;
   }
 
   .el-select .el-input {
@@ -192,7 +202,6 @@
 
     &.active + li {
       border-left: 0;
-      padding-left: 5px;
     }
 
     &:hover {
