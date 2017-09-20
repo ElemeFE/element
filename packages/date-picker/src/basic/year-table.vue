@@ -63,9 +63,7 @@
       getCellStyle(year) {
         const style = {};
 
-        var date = new Date(0);
-        date.setFullYear(year);
-        date.setHours(0);
+        var date = new Date(year, 0, 1, 0);
         var nextYear = new Date(date);
         nextYear.setFullYear(year + 1);
 

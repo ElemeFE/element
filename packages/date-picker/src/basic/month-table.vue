@@ -67,7 +67,7 @@
         var year = this.date.getFullYear();
         var date = new Date(0);
         date.setFullYear(year);
-        date.setMonth(month);
+        date.setMonth(month, 1);
         date.setHours(0);
         var nextMonth = new Date(date);
         nextMonth.setMonth(month + 1);
