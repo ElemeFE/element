@@ -98,7 +98,7 @@
       v-if="rightFixedColumns.length > 0"
       :style="[
         { width: layout.rightFixedWidth ? layout.rightFixedWidth + 'px' : '' },
-        { right: layout.scrollY ? (border ? layout.gutterWidth : (layout.gutterWidth || 1)) + 'px' : '' },
+        { right: layout.scrollY ? (border ? layout.gutterWidth : (layout.gutterWidth || 0)) + 'px' : '' },
         fixedHeight
       ]">
       <div class="el-table__fixed-header-wrapper" ref="rightFixedHeaderWrapper" v-if="showHeader">

@@ -13,34 +13,6 @@
   font-size: 14px;
   color: $--table-text-color;
 
-  // 拥有多级表头
-  @include m(group) {
-    border: $--table-border;
-
-    @include share-rule(group-pseudo) {
-      content: '';
-      position: absolute;
-      background-color: $--border-color-lighter;
-      z-index: 1;
-    }
-
-    &::before {
-      @include extend-rule(group-pseudo);
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: 1px;
-    }
-
-    &::after {
-      @include extend-rule(group-pseudo);
-      top: 0;
-      right: 0;
-      width: 1px;
-      height: 100%;
-    }
-  }
-
   .el-tooltip.cell {
     white-space: nowrap;
     min-width: 50px;
@@ -92,7 +64,6 @@
 
   @include e(expanded-cell) {
     background-color: $--color-white;
-    box-shadow: inset 0 2px 0 #f4f4f4;
 
     // 纯属为了增加权重
     &[class*=cell] {
@@ -150,21 +121,58 @@
     border-bottom: $--table-border;
   }
 
-  // 带 border
-  @include m(border) {
-    border-top: $--table-border;
-    border-left: $--table-border;
+  // 拥有多级表头
+  @include m((group, border)) {
+    border: $--table-border;
 
-    & th, td {
+    @include share-rule(border-pseudo) {
+      content: '';
+      position: absolute;
+      background-color: $--border-color-lighter;
+      z-index: 1;
+    }
+
+    // 表格右部伪 border
+    &::after {
+      @include extend-rule(border-pseudo);
+      top: 0;
+      right: 0;
+      width: 1px;
+      height: 100%;
+    }
+  }
+
+  // 表格底部伪 border，总是有的
+  &::before {
+    @include extend-rule(border-pseudo);
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+  }
+
+  // table--border
+  @include m('border') {
+    border-right: none;
+    border-bottom: none;
+
+    th:not(.gutter):not(:nth-last-child(2)), td:not(.gutter) {
       border-right: $--table-border;
     }
 
-    .cell {
-      padding-left: 10px;
+    th.gutter:last-of-type {
+      border-bottom: $--table-border;
+      border-bottom-width: 1px;
     }
 
     & th {
       border-bottom: $--table-border;
+    }
+  }
+
+  @include e(footer) {
+    td:nth-last-child(2) {
+      border-right: none;
     }
   }
 
@@ -221,7 +229,7 @@
   @include e(fixed-right) {
     top: 0;
     left: auto;
-    right: -1px;
+    right: 0;
 
     .el-table__fixed-header-wrapper,
     .el-table__fixed-body-wrapper,
