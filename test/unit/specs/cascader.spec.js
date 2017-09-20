@@ -601,7 +601,6 @@ describe('Cascader', () => {
 
         expect(menuElm.children.length).to.be.equal(1);
         expect(menuElm.children[0].children.length).to.be.equal(3);
-        done();
 
         item1.click();
 

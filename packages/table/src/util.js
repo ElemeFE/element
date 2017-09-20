@@ -21,7 +21,7 @@ export const orderBy = function(array, sortKey, reverse, sortMethod) {
   if (typeof reverse === 'string') {
     reverse = reverse === 'descending' ? -1 : 1;
   }
-  if (!sortKey) {
+  if (!sortKey && !sortMethod) {
     return array;
   }
   const order = (reverse && reverse < 0) ? -1 : 1;

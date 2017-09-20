@@ -3,7 +3,7 @@
     <div
       v-show="visible"
       :style="{ width: width + 'px' }"
-      class="el-picker-panel el-date-range-picker"
+      class="el-picker-panel el-date-range-picker el-popper"
       :class="[{
         'has-sidebar': $slots.sidebar || shortcuts,
         'has-time': showTime
@@ -43,7 +43,8 @@
                   ref="minTimePicker"
                   :date="minDate"
                   @pick="handleMinTimePick"
-                  :visible="minTimePickerVisible">
+                  :visible="minTimePickerVisible"
+                  @mounted="$refs.minTimePicker.format=timeFormat">
                 </time-picker>
               </span>
             </span>
@@ -74,7 +75,9 @@
                   ref="maxTimePicker"
                   :date="maxDate"
                   @pick="handleMaxTimePick"
-                  :visible="maxTimePickerVisible"></time-picker>
+                  :visible="maxTimePickerVisible"
+                  @mounted="$refs.maxTimePicker.format=timeFormat">
+                </time-picker>
               </span>
             </span>
           </div>
@@ -153,6 +156,14 @@
   import DateTable from '../basic/date-table';
   import ElInput from 'element-ui/packages/input';
 
+  const calcDefaultValue = defaultValue => {
+    if (Array.isArray(defaultValue)) {
+      return new Date(defaultValue[0]);
+    } else {
+      return new Date(defaultValue);
+    }
+  };
+
   export default {
     mixins: [Locale],
 
@@ -213,6 +224,14 @@
           newDate.setMonth(month + 1);
         }
         return newDate;
+      },
+
+      timeFormat() {
+        if (this.format && this.format.indexOf('ss') === -1) {
+          return 'HH:mm';
+        } else {
+          return 'HH:mm:ss';
+        }
       }
     },
 
@@ -221,7 +240,7 @@
         popperClass: '',
         minPickerWidth: 0,
         maxPickerWidth: 0,
-        date: new Date(),
+        date: this.$options.defaultValue ? calcDefaultValue(this.$options.defaultValue) : new Date(),
         minDate: '',
         maxDate: '',
         rangeState: {
@@ -238,7 +257,8 @@
         firstDayOfWeek: 7,
         minTimePickerVisible: false,
         maxTimePickerVisible: false,
-        width: 0
+        width: 0,
+        format: ''
       };
     },
 
@@ -273,11 +293,11 @@
       },
 
       minTimePickerVisible(val) {
-        if (val) this.$nextTick(() => this.$refs.minTimePicker.ajustScrollTop());
+        if (val) this.$nextTick(() => this.$refs.minTimePicker.adjustScrollTop());
       },
 
       maxTimePickerVisible(val) {
-        if (val) this.$nextTick(() => this.$refs.maxTimePicker.ajustScrollTop());
+        if (val) this.$nextTick(() => this.$refs.maxTimePicker.adjustScrollTop());
       },
 
       value(newVal) {
@@ -297,6 +317,7 @@
       handleClear() {
         this.minDate = null;
         this.maxDate = null;
+        this.date = this.$options.defaultValue ? calcDefaultValue(this.$options.defaultValue) : new Date();
         this.handleConfirm(false);
       },
 

@@ -1,0 +1,211 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(step) {
+  position: relative;
+  vertical-align: top;
+
+  &:last-child .el-step__main {
+    padding-right: 0;
+  }
+
+  @include when(horizontal) {
+    display: inline-block;
+  }
+
+  @include when(vertical) {
+    & .el-step__head,
+    & .el-step__main {
+      display: inline-block;
+    }
+
+    & .el-step__main {
+      padding-left: 10px;
+    }
+  }
+
+  @include e(line) {
+    display: inline-block;
+    position: absolute;
+    border-color: inherit;
+    background-color: $--color-black;
+
+    @include when(icon) {
+      @include when(horizontal) {
+        right: 4px;
+      }
+    }
+
+    @include when(horizontal) {
+      top: 15px;
+      height: 2px;
+      left: 32px;
+      right: 0;
+    }
+
+    @include when(vertical) {
+      width: 2px;
+      box-sizing: border-box;
+      top: 32px;
+      bottom: 0;
+      left: 15px;
+    }
+  }
+
+  @include e(line-inner) {
+    display: block;
+    border-width: 1px;
+    border-style: solid;
+    border-color: inherit;
+    transition: all 150ms;
+    box-sizing: border-box;
+    width: 0;
+    height: 0;
+  }
+
+  @include e(icon) {
+    display: block;
+    line-height: 28px;
+
+    > * {
+      line-height: inherit;
+      vertical-align: middle;
+    }
+  }
+
+  @include e(head) {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border-color: transparent;
+    text-align: center;
+    line-height: 28px;
+    font-size: 28px;
+    vertical-align: top;
+    transition: all 150ms;
+
+    @include when(text) {
+      font-size: 14px;
+      border-width: 2px;
+      border-style: solid;
+
+      @include when(process) {
+        color: $--color-white;
+        background-color: $--color-black;
+        border-color: $--color-black;
+      }
+
+      @include when(wait) {
+        color: $--color-black;
+        background-color: $--color-white;
+        border-color: $--color-black;
+      }
+
+      @include when(success) {
+        color: $--color-white;
+        background-color: $--color-success;
+        border-color: $--color-success;
+      }
+
+      @include when(error) {
+        color: $--color-white;
+        background-color: $--color-danger;
+        border-color: $--color-danger;
+      }
+
+      @include when(finish) {
+        color: $--color-white;
+        background-color: $--color-primary;
+        border-color: $--color-primary;
+      }
+    }
+
+    @include when(process) {
+      color: $--color-black;
+      border-color: $--color-black;
+    }
+
+    @include when(wait) {
+      color: $--color-black;
+      border-color: $--color-black;
+    }
+
+    @include when(success) {
+      color: $--color-success;
+      border-color: $--color-success;
+    }
+
+    @include when(error) {
+      color: $--color-danger;
+      border-color: $--color-danger;
+    }
+
+    @include when(finish) {
+      color: $--color-primary;
+      border-color: $--color-primary;
+    }
+  }
+
+  @include e(main) {
+    white-space: normal;
+    padding-right: 10px;
+    text-align: left;
+  }
+
+  @include e(title) {
+    font-size: 14px;
+    line-height: 32px;
+    display: inline-block;
+
+    @include when(process) {
+      font-weight: 700;
+      color: $--color-black;
+    }
+
+    @include when(wait) {
+      font-weight: normal;
+      color: $--color-black;
+    }
+
+    @include when(success) {
+      font-weight: 700;
+      color: $--color-success;
+    }
+
+    @include when(error) {
+      font-weight: 700;
+      color: $--color-danger;
+    }
+
+    @include when(finish) {
+      font-weight: 700;
+      color: $--color-primary;
+    }
+  }
+
+  @include e(description) {
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 14px;
+
+    @include when(process) {
+      color: $--color-black;
+    }
+
+    @include when(wait) {
+      color: $--color-black;
+    }
+
+    @include when(success) {
+      color: $--color-success;
+    }
+
+    @include when(error) {
+      color: $--color-danger;
+    }
+
+    @include when(finish) {
+      color: $--color-primary;
+    }
+  }
+}

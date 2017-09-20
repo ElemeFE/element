@@ -12,6 +12,12 @@
 
     componentName: 'ElForm',
 
+    provide() {
+      return {
+        elForm: this
+      };
+    },
+
     props: {
       model: Object,
       rules: Object,
@@ -22,6 +28,8 @@
         default: ''
       },
       inline: Boolean,
+      inlineMessage: Boolean,
+      statusIcon: Boolean,
       showMessage: {
         type: Boolean,
         default: true

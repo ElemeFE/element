@@ -1,18 +1,24 @@
 <template>
   <transition name="msgbox-fade">
     <div class="el-message-box__wrapper" tabindex="-1" v-show="visible" @click.self="handleWrapperClick">
-      <div class="el-message-box" :class="customClass">
+      <div class="el-message-box" :class="[customClass, center && 'el-message-box--center']">
         <div class="el-message-box__header" v-if="title !== undefined">
-          <div class="el-message-box__title">{{ title || t('el.messagebox.title') }}</div>
+          <div class="el-message-box__title">
+            <div class="el-message-box__status" :class="[ typeClass ]" v-if="typeClass && center"></div>
+            <span>{{ title }}</span>
+          </div>
           <button type="button" class="el-message-box__headerbtn" aria-label="Close" 
                   v-if="showClose" @click="handleAction('cancel')">
             <i class="el-message-box__close el-icon-close"></i>
           </button>
         </div>
         <div class="el-message-box__content" v-if="message !== ''">
-          <div class="el-message-box__status" :class="[ typeClass ]"></div>
-          <div class="el-message-box__message" :style="{ 'margin-left': typeClass ? '50px' : '0' }">
-            <slot><p v-html="message"></p></slot>
+          <div class="el-message-box__status" :class="[ typeClass ]" v-if="typeClass && !center"></div>
+          <div class="el-message-box__message">
+            <slot>
+              <p v-if="!dangerouslyUseHTMLString">{{ message }}</p>
+              <p v-else v-html="message"></p>
+            </slot>
           </div>
           <div class="el-message-box__input" v-show="showInput">
             <el-input v-model="inputValue" @keyup.enter.native="handleAction('confirm')" :placeholder="inputPlaceholder" ref="input"></el-input>
@@ -24,6 +30,8 @@
             :loading="cancelButtonLoading"
             :class="[ cancelButtonClasses ]"
             v-show="showCancelButton"
+            :round="roundButton"
+            size="small"
             @click.native="handleAction('cancel')">
             {{ cancelButtonText || t('el.messagebox.cancel') }}
           </el-button>
@@ -32,6 +40,8 @@
             ref="confirm"
             :class="[ confirmButtonClasses ]"
             v-show="showConfirmButton"
+            :round="roundButton"
+            size="small"
             @click.native="handleAction('confirm')">
             {{ confirmButtonText || t('el.messagebox.confirm') }}
           </el-button>
@@ -78,6 +88,14 @@
       },
       closeOnHashChange: {
         default: true
+      },
+      center: {
+        default: false,
+        type: Boolean
+      },
+      roundButton: {
+        default: false,
+        type: Boolean
       }
     },
 
@@ -249,7 +267,8 @@
         confirmButtonDisabled: false,
         cancelButtonClass: '',
         editorErrorMessage: null,
-        callback: null
+        callback: null,
+        dangerouslyUseHTMLString: false
       };
     }
   };

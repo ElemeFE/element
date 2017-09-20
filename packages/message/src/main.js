@@ -7,7 +7,7 @@ let instance;
 let instances = [];
 let seed = 1;
 
-var Message = function(options) {
+const Message = function(options) {
   if (Vue.prototype.$isServer) return;
   options = options || {};
   if (typeof options === 'string') {

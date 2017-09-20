@@ -1,0 +1,17 @@
+@import "mixins/mixins";
+
+@include b(steps) {
+  font-size: 0;
+
+  > :last-child .el-step__line {
+    display: none;
+  }
+
+  @include when(horizontal) {
+    white-space: nowrap;
+
+    @include when(center) {
+      text-align: center;
+    }
+  }
+}

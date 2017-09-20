@@ -3,7 +3,7 @@
     <div
       v-show="currentVisible"
       :style="{width: width + 'px'}"
-      class="el-time-panel"
+      class="el-time-panel el-popper"
       :class="popperClass">
       <div class="el-time-panel__content" :class="{ 'has-seconds': showSeconds }">
         <time-spinner
@@ -23,7 +23,8 @@
           @click="handleCancel">{{ t('el.datepicker.cancel') }}</button>
         <button
           type="button"
-          class="el-time-panel__btn confirm"
+          class="el-time-panel__btn"
+          :class="{confirm: !disabled}"
           @click="handleConfirm()">{{ t('el.datepicker.confirm') }}</button>
       </div>
     </div>
@@ -55,6 +56,9 @@
       visible(val) {
         this.currentVisible = val;
         if (val) {
+          this.oldHours = this.hours;
+          this.oldMinutes = this.minutes;
+          this.oldSeconds = this.seconds;
           this.$nextTick(() => this.$refs.spinner.emitSelectRange('hours'));
         }
       },
@@ -76,11 +80,16 @@
           minutes: date.getMinutes(),
           seconds: date.getSeconds()
         }, true);
-        this.$nextTick(_ => this.ajustScrollTop());
+        this.$nextTick(_ => this.adjustScrollTop());
       },
 
       selectableRange(val) {
         this.$refs.spinner.selectableRange = val;
+      },
+
+      date(val) {
+        this.currentDate = val;
+        this.reinitDate();
       }
     },
 
@@ -92,11 +101,15 @@
         hours: 0,
         minutes: 0,
         seconds: 0,
+        oldHours: 0,
+        oldMinutes: 0,
+        oldSeconds: 0,
         selectableRange: [],
         currentDate: this.$options.defaultValue || this.date || new Date(),
         currentVisible: this.visible || false,
         width: this.pickerWidth || 0,
-        selectionRange: [0, 2]
+        selectionRange: [0, 2],
+        disabled: false
       };
     },
 
@@ -112,7 +125,14 @@
       },
 
       handleCancel() {
-        this.$emit('pick', '', false, true);
+        this.currentDate.setHours(this.oldHours);
+        this.currentDate.setMinutes(this.oldMinutes);
+        this.currentDate.setSeconds(this.oldSeconds);
+        this.hours = this.currentDate.getHours();
+        this.minutes = this.currentDate.getMinutes();
+        this.seconds = this.currentDate.getSeconds();
+        const date = new Date(limitRange(this.currentDate, this.selectableRange, 'HH:mm:ss'));
+        this.$emit('pick', date, false, true);
       },
 
       handleChange(date, notUser) {
@@ -142,8 +162,8 @@
         this.$emit('pick', date, visible, !notUser);
       },
 
-      ajustScrollTop() {
-        return this.$refs.spinner.ajustScrollTop();
+      adjustScrollTop() {
+        return this.$refs.spinner.adjustScrollTop();
       },
 
       scrollDown(step) {
@@ -156,13 +176,17 @@
         const index = list.indexOf(this.selectionRange[0]);
         const next = (index + step + list.length) % list.length;
         this.$refs.spinner.emitSelectRange(mapping[next]);
+      },
+
+      reinitDate() {
+        this.hours = this.currentDate.getHours();
+        this.minutes = this.currentDate.getMinutes();
+        this.seconds = this.currentDate.getSeconds();
       }
     },
 
     created() {
-      this.hours = this.currentDate.getHours();
-      this.minutes = this.currentDate.getMinutes();
-      this.seconds = this.currentDate.getSeconds();
+      this.reinitDate();
     },
 
     mounted() {

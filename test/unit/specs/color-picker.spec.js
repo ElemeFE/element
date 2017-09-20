@@ -97,8 +97,8 @@ describe('ColorPicker', () => {
     trigger.click();
 
     setTimeout(() => {
-      const value = document.querySelector('.el-color-dropdown__value');
-      expect(value.innerText.trim().toUpperCase()).to.equal('#20A0FF');
+      const input = document.querySelector('.el-color-dropdown__value input');
+      expect(input.value.trim().toUpperCase()).to.equal('#20A0FF');
       done();
     }, ANIMATION_TIME);
   });

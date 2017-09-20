@@ -91,8 +91,32 @@
             });
           }, 200);
         });
-      }
+      },
 
+      open5() {
+        this.$alert('<strong>This is <i>HTML</i> string</strong>', 'HTML String', {
+          dangerouslyUseHTMLString: true
+        });
+      },
+
+      open6() {
+        this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
+          confirmButtonText: 'OK',
+          cancelButtonText: 'Cancel',
+          type: 'warning',
+          center: true
+        }).then(() => {
+          this.$message({
+            type: 'success',
+            message: 'Delete completed'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: 'Delete canceled'
+          });
+        });
+      }
     }
   };
 </script>
@@ -263,6 +287,71 @@ Can be customized to show various content.
 ```
 :::
 
+### Use HTML String
+`message` supports HTML string.
+
+:::demo Set `dangerouslyUseHTMLString` to true and `message` will be treated as an HTML string.
+
+```html
+<template>
+  <el-button type="text" @click="open5">Click to open Message Box</el-button>
+</template>
+
+<script>
+  export default {
+    methods: {
+      open5() {
+        this.$alert('<strong>This is <i>HTML</i> string</strong>', 'HTML String', {
+          dangerouslyUseHTMLString: true
+        });
+      }
+    }
+  }
+</script>
+```
+:::
+
+:::warning
+Although `message` property supports HTML strings, dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily lead to [XSS attacks](https://en.wikipedia.org/wiki/Cross-site_scripting). So when `dangerouslyUseHTMLString` is on, please make sure the content of `message` is trusted, and **never** assign `message` to user-provided content.
+:::
+
+### Centered content
+Content of MessageBox can be centered.
+
+:::demo Setting `center` to `true` will center the content
+
+```html
+<template>
+  <el-button type="text" @click="open6">Click to open Message Box</el-button>
+</template>
+
+<script>
+  export default {
+    methods: {
+      open6() {
+        this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
+          confirmButtonText: 'OK',
+          cancelButtonText: 'Cancel',
+          type: 'warning',
+          center: true
+        }).then(() => {
+          this.$message({
+            type: 'success',
+            message: 'Delete completed'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: 'Delete canceled'
+          });
+        });
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### Global method
 
 If Element is fully imported, it will add the following global methods for Vue.prototype: `$msgbox`, `$alert`, `$confirm` and `$prompt`. So in a Vue instance you can call `MessageBox` like what we did in this page. The parameters are:
@@ -281,16 +370,13 @@ import { MessageBox } from 'element-ui';
 
 The corresponding methods are: `MessageBox`, `MessageBox.alert`, `MessageBox.confirm` and `MessageBox.prompt`. The parameters are the same as above.
 
-:::warning
-Although `message` property supports HTML strings, dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily lead to [XSS attacks](https://en.wikipedia.org/wiki/Cross-site_scripting). Please make sure the content of `message` is trusted, and **never** assign `message` to user-provided content.
-:::
-
 ### Options
 
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | title | title of the MessageBox | string | — | — |
 | message | content of the MessageBox | string | — | — |
+| dangerouslyUseHTMLString | whether `message` is treated as HTML string | boolean | — | false |
 | type | message type, used for icon display | string | success/info/warning/error | — |
 | customClass | custom class name for MessageBox | string | — | — |
 | callback | MessageBox closing callback if you don't prefer Promise | function(action), where action can be 'confirm' or 'cancel', and `instance` is the MessageBox instance. You can access to that instance's attributes and methods | — | — |
@@ -311,3 +397,5 @@ Although `message` property supports HTML strings, dynamically rendering arbitra
 | inputPattern | regexp for the input | regexp | — | — |
 | inputValidator | validation function for the input. Should returns a boolean or string. If a string is returned, it will be assigned to inputErrorMessage | function | — | — |
 | inputErrorMessage | error message when validation fails | string | — | Illegal input |
+| center | whether to align the content in center | boolean | — | false |
+| roundButton | whether to use round button | boolean | — | false |

@@ -91,6 +91,10 @@
           color: var(--input-disabled-placeholder-color);
         }
       }
+
+      .el-input__icon {
+        cursor: not-allowed;
+      }
     }
     @m large {
       font-size: var(--input-large-font-size);

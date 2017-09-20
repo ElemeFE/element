@@ -1,0 +1,25 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(select-group) {
+  margin: 0;
+  padding: 0;
+
+  @include e(wrap) {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  @include e(title) {
+    padding-left: 10px;
+    font-size: $--select-group-font-size;
+    color: $--select-group-color;
+    height: $--select-group-height;
+    line-height: $--select-group-height;
+  }
+
+  & .el-select-dropdown__item {
+    padding-left: 20px;
+  }
+}

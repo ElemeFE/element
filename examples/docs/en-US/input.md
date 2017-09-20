@@ -20,6 +20,9 @@
         input: '',
         input1: '',
         input2: '',
+        input21: '',
+        input22: '',
+        input23: '',
         input3: '',
         input4: '',
         input5: '',
@@ -190,26 +193,43 @@ export default {
 
 Add an icon to indicate input type.
 
-::: demo You can add an icon at the end of Input by setting the `icon` attribute and use `on-icon-click` hook to complete some work after clicking the icon.
-
+::: demo To add icons in Input, you can simply use `prefix-icon` and `suffix-icon` attributes. Also, the `prefix` and `suffix` named slots works as well.
 ```html
-<el-input
-  placeholder="Pick a date"
-  icon="search"
-  v-model="input2"
-  :on-icon-click="handleIconClick">
-</el-input>
+<div class="demo-input-suffix">
+  Using attributes
+  <el-input
+    placeholder="Pick a date"
+    suffix-icon="el-icon-date"
+    v-model="input2">
+  </el-input>
+  <el-input
+    placeholder="Type something"
+    prefix-icon="el-icon-search"
+    v-model="input21">
+  </el-input>
+</div>
+<div class="demo-input-suffix">
+  Using slots
+  <el-input
+    placeholder="Pick a date"
+    v-model="input22">
+    <i slot="suffix" class="el-input__icon el-icon-date"></i>
+  </el-input>
+  <el-input
+    placeholder="Type something"
+    v-model="input23">
+    <i slot="prefix" class="el-input__icon el-icon-search"></i>
+  </el-input>
+</div>
 
 <script>
 export default {
   data() {
     return {
-      input2: ''
-    }
-  },
-  methods: {
-    handleIconClick(ev) {
-      console.log(ev);
+      input2: '',
+      input21: '',
+      input22: '',
+      input23: ''
     }
   }
 }
@@ -331,11 +351,11 @@ export default {
 ```html
 <div class="demo-input-size">
   <el-input
-    size="large"
     placeholder="Please Input"
     v-model="input6">
   </el-input>
   <el-input
+    size="medium"
     placeholder="Please Input"
     v-model="input7">
   </el-input>
@@ -603,7 +623,8 @@ Search data from server-side.
 |placeholder| placeholder of Input| string | — | — |
 |disabled | whether Input is disabled | boolean | — | false |
 |size | size of Input, works when `type` is not 'textarea' | string | large/small/mini | — |
-|icon | icon name | string | — | — |
+| prefix-icon   | prefix icon class  | string          | — | — |
+| suffix-icon   | suffix icon class  | string          | — | — |
 |rows | number of rows of textarea, only works when `type` is 'textarea' | number | — | 2 |
 |autosize | whether textarea has an adaptive height, only works when `type` is 'textarea'. Can accept an object, e.g. { minRows: 2, maxRows: 6 }  | boolean/object | — | false |
 |auto-complete | same as `auto-complete` in native input | string | on/off | off |
@@ -617,11 +638,19 @@ Search data from server-side.
 |form | same as `form` in native input | string | — | — |
 | on-icon-click | hook function when clicking on the input icon | function | — | — |
 
+### Input slot
+
+| Name | Description |
+|------|--------|
+| prefix | content as Input prefix |
+| suffix | content as Input suffix |
+| prepend | content to prepend before Input |
+| append | content to append after Input |
+
 ### Input Events
 
 | Event Name | Description | Parameters |
 |----| ----| ----|
-|click | triggers when the icon inside Input is clicked | (event: Event) |
 | blur | triggers when Input blurs | (event: Event) |
 | focus | triggers when Input focuses | (event: Event) |
 | change | triggers when the icon inside Input value change | (value: string \| number) |
@@ -640,7 +669,8 @@ Attribute | Description | Type | Options | Default
 | popper-class | custom class name for autocomplete's dropdown | string | — | — |
 | trigger-on-focus | whether show suggestions when input focus | boolean | — | true |
 | on-icon-click | hook function when clicking on the input icon | function | — | — |
-|name | same as `name` in native input | string | — | — |
+| name | same as `name` in native input | string | — | — |
+| select-when-unmatched | whether to emit a `select` event on enter when there is no autocomplete match | boolean | — | false |
 
 ### props
 | Attribute | Description | Type | Accepted Values | Default |

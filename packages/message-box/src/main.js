@@ -24,7 +24,10 @@ const defaults = {
   confirmButtonClass: '',
   cancelButtonClass: '',
   customClass: '',
-  beforeClose: null
+  beforeClose: null,
+  dangerouslyUseHTMLString: false,
+  center: false,
+  roundButton: false
 };
 
 import Vue from 'vue';
@@ -156,6 +159,8 @@ MessageBox.alert = (message, title, options) => {
   if (typeof title === 'object') {
     options = title;
     title = '';
+  } else if (title === undefined) {
+    title = '';
   }
   return MessageBox(merge({
     title: title,
@@ -170,6 +175,8 @@ MessageBox.confirm = (message, title, options) => {
   if (typeof title === 'object') {
     options = title;
     title = '';
+  } else if (title === undefined) {
+    title = '';
   }
   return MessageBox(merge({
     title: title,
@@ -182,6 +189,8 @@ MessageBox.confirm = (message, title, options) => {
 MessageBox.prompt = (message, title, options) => {
   if (typeof title === 'object') {
     options = title;
+    title = '';
+  } else if (title === undefined) {
     title = '';
   }
   return MessageBox(merge({

@@ -96,6 +96,7 @@
       text-align: right;
       border-radius: 100px;
       line-height: 1;
+      white-space: nowrap;
 
       @utils-vertical-center;
     }

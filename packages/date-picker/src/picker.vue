@@ -12,15 +12,16 @@
     @blur="handleBlur"
     @keydown.native="handleKeydown"
     :value="displayValue"
+    @mouseenter.native="handleMouseEnter"
+    @mouseleave.native="showClose = false"
     @change.native="displayValue = $event.target.value"
     :validateEvent="false"
+    :prefix-icon="triggerClass"
     ref="reference">
-    <i slot="icon"
+    <i slot="suffix"
       class="el-input__icon"
       @click="handleClickIcon"
-      :class="[showClose ? 'el-icon-close' : triggerClass]"
-      @mouseenter="handleMouseEnterIcon"
-      @mouseleave="showClose = false"
+      :class="{ 'el-icon-circle-close': showClose }"
       v-if="haveTrigger">
     </i>
   </el-input>
@@ -34,6 +35,7 @@ import Popper from 'element-ui/src/utils/vue-popper';
 import Emitter from 'element-ui/src/mixins/emitter';
 import Focus from 'element-ui/src/mixins/focus';
 import ElInput from 'element-ui/packages/input';
+import merge from 'element-ui/src/utils/merge';
 
 const NewPopper = {
   props: {
@@ -42,7 +44,9 @@ const NewPopper = {
     boundariesPadding: Popper.props.boundariesPadding
   },
   methods: Popper.methods,
-  data: Popper.data,
+  data() {
+    return merge({ visibleArrow: true }, Popper.data);
+  },
   beforeDestroy: Popper.beforeDestroy
 };
 
@@ -360,7 +364,7 @@ export default {
   },
 
   methods: {
-    handleMouseEnterIcon() {
+    handleMouseEnter() {
       if (this.readonly || this.disabled) return;
       if (!this.valueIsEmpty && this.clearable) {
         this.showClose = true;
@@ -443,13 +447,14 @@ export default {
       this.picker.resetView && this.picker.resetView();
 
       this.$nextTick(() => {
-        this.picker.ajustScrollTop && this.picker.ajustScrollTop();
+        this.picker.adjustScrollTop && this.picker.adjustScrollTop();
       });
     },
 
     mountPicker() {
-      this.panel.defaultValue = this.defaultValue || this.currentValue;
-      this.picker = new Vue(this.panel).$mount();
+      const defaultValue = this.defaultValue || this.currentValue;
+      const panel = merge({}, this.panel, { defaultValue });
+      this.picker = new Vue(panel).$mount();
       this.picker.popperClass = this.popperClass;
       this.popperElm = this.picker.$el;
       this.picker.width = this.reference.getBoundingClientRect().width;

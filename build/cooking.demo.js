@@ -55,6 +55,11 @@ cooking.add('loader.md', {
   loader: 'vue-markdown-loader'
 });
 
+cooking.add('loader.scss', {
+  test: /\.scss$/,
+  loaders: ['style-loader', 'css-loader', 'sass-loader']
+});
+
 cooking.add(
   'output.chunkFilename',
   isProd ? '[name].[chunkhash:7].js' : '[name].js'

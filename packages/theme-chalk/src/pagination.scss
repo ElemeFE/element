@@ -1,0 +1,208 @@
+@import "mixins/mixins";
+@import "mixins/utils";
+@import "common/var";
+@import "select";
+
+@include b(pagination) {
+  white-space: nowrap;
+  padding: 2px 5px;
+  color: $--pagination-color;
+  @include utils-clearfix;
+
+  span,
+  button {
+    display: inline-block;
+    font-size: $--pagination-font-size;
+    min-width: $--pagination-button-size;
+    height: $--pagination-button-size;
+    line-height: $--pagination-button-size;
+    vertical-align: top;
+    box-sizing: border-box;
+  }
+
+  .el-select .el-input {
+    width: 110px;
+    input {
+      padding-right: 25px;
+      border-radius: $--border-radius-small;
+      height: 28px;
+    }
+  }
+
+  button {
+    border: none;
+    padding: 0 6px;
+    background: transparent;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover {
+      color: $--pagination-hover-fill;
+    }
+
+    &.disabled {
+      color: $--pagination-button-disabled-color;
+      background-color: $--pagination-button-disabled-fill;
+      cursor: not-allowed;
+    }
+  }
+
+  .btn-prev,
+  .btn-next {
+    background: center center no-repeat;
+    background-size: 16px;
+    background-color: $--pagination-fill;
+    border: 1px solid $--pagination-border-color;
+    cursor: pointer;
+    margin: 0;
+    color: $--pagination-button-color;
+
+    .el-icon {
+      display: block;
+      font-size: 12px;
+    }
+  }
+
+  .btn-prev {
+    border-radius: $--pagination-border-radius 0 0 $--pagination-border-radius;
+    border-right: 0;
+  }
+
+  .btn-next {
+    border-radius: 0 $--pagination-border-radius $--pagination-border-radius 0;
+    border-left: 0;
+  }
+
+  @include m(small) {
+    .btn-prev,
+    .btn-next,
+    .el-pager li,
+    .el-pager li:last-child {
+      border-color: transparent;
+      font-size: 12px;
+      line-height: 22px;
+      height: 22px;
+      min-width: 22px;
+    }
+
+    .arrow.disabled {
+      visibility: hidden;
+    }
+
+    .el-pager li {
+      border-radius: $--pagination-border-radius;
+    }
+  }
+
+  @include e(sizes) {
+    margin: 0 10px 0 0;
+
+    .el-input .el-input__inner {
+      font-size: 13px;
+      border-color: $--pagination-border-color;
+
+      &:hover {
+        border-color: $--pagination-hover-fill;
+      }
+    }
+  }
+
+  @include e(jump) {
+    margin-left: 10px;
+  }
+
+  @include e(total) {
+    margin: 0 10px;
+  }
+
+  @include e(rightwrapper) {
+    float: right;
+  }
+
+  @include e(editor) {
+    border: 1px solid $--pagination-border-color;
+    border-radius: $--pagination-border-radius;
+    line-height: 18px;
+    padding: 4px 2px;
+    width: 30px;
+    text-align: center;
+    margin: 0 6px;
+    box-sizing: border-box;
+    transition: border .3s;
+    -moz-appearance: textfield;
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $--pagination-hover-fill;
+    };
+  }
+}
+
+@include b(pager) {
+  user-select: none;
+  list-style: none;
+  display: inline-block;
+  vertical-align: top;
+  font-size: 0;
+  padding: 0;
+  margin: 0;
+
+  li {
+    padding: 0 4px;
+    border: 1px solid $--pagination-border-color;
+    border-right: 0;
+    background: $--pagination-fill;
+    vertical-align: top;
+    display: inline-block;
+    font-size: $--pagination-font-size;
+    min-width: $--pagination-button-size;
+    height: $--pagination-button-size;
+    line-height: $--pagination-button-size;
+    cursor: pointer;
+    box-sizing: border-box;
+    text-align: center;
+    margin: 0;
+
+    &:last-child {
+      border-right: 1px solid $--pagination-border-color;
+    }
+
+    &.btn-quicknext,
+    &.btn-quickprev {
+      line-height: 28px;
+      color: $--pagination-button-color;
+    }
+
+    &.btn-quickprev:hover {
+      cursor: pointer;
+    }
+
+    &.btn-quicknext:hover {
+      cursor: pointer;
+    }
+
+    &.active + li {
+      border-left: 0;
+      padding-left: 5px;
+    }
+
+    &:hover {
+      color: $--pagination-hover-fill;
+    }
+
+    &.active {
+      border-color: $--pagination-hover-fill;
+      background-color: $--pagination-hover-fill;
+      color: $--pagination-hover-color;
+      cursor: default;
+    }
+  }
+}

@@ -2,13 +2,7 @@
   <div class="el-autocomplete" v-clickoutside="close">
     <el-input
       ref="input"
-      :value="value"
-      :disabled="disabled"
-      :placeholder="placeholder"
-      :name="name"
-      :size="size"
-      :icon="icon"
-      :on-icon-click="onIconClick"
+      v-bind="$props"
       @compositionstart.native="handleComposition"
       @compositionupdate.native="handleComposition"
       @compositionend.native="handleComposition"
@@ -17,7 +11,8 @@
       @blur="handleBlur"
       @keydown.up.native.prevent="highlight(highlightedIndex - 1)"
       @keydown.down.native.prevent="highlight(highlightedIndex + 1)"
-      @keydown.enter.native.prevent="handleKeyEnter"
+      @keydown.enter.native="handleKeyEnter"
+      @keydown.native.tab="close"
     >
       <template slot="prepend" v-if="$slots.prepend">
         <slot name="prepend"></slot>
@@ -79,7 +74,11 @@
       },
       customItem: String,
       icon: String,
-      onIconClick: Function
+      onIconClick: Function,
+      selectWhenUnmatched: {
+        type: Boolean,
+        default: false
+      }
     },
     data() {
       return {
@@ -143,9 +142,16 @@
       close(e) {
         this.activated = false;
       },
-      handleKeyEnter() {
+      handleKeyEnter(e) {
         if (this.suggestionVisible && this.highlightedIndex >= 0 && this.highlightedIndex < this.suggestions.length) {
+          e.preventDefault();
           this.select(this.suggestions[this.highlightedIndex]);
+        } else if (this.selectWhenUnmatched) {
+          this.$emit('select', {value: this.value});
+          this.$nextTick(_ => {
+            this.suggestions = [];
+            this.highlightedIndex = -1;
+          });
         }
       },
       select(item) {
@@ -153,11 +159,15 @@
         this.$emit('select', item);
         this.$nextTick(_ => {
           this.suggestions = [];
+          this.highlightedIndex = -1;
         });
       },
       highlight(index) {
         if (!this.suggestionVisible || this.loading) { return; }
-        if (index < 0) index = 0;
+        if (index < 0) {
+          this.highlightedIndex = -1;
+          return;
+        }
         if (index >= this.suggestions.length) {
           index = this.suggestions.length - 1;
         }

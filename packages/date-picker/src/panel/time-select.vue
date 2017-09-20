@@ -5,7 +5,7 @@
       v-show="visible"
       :style="{ width: width + 'px' }"
       :class="popperClass"
-      class="el-picker-panel time-select">
+      class="el-picker-panel time-select el-popper">
       <el-scrollbar noresize wrap-class="el-picker-panel__content">
         <div class="time-select-item"
           v-for="item in items"

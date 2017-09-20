@@ -137,6 +137,12 @@
     children: 'zones'
   };
 
+  const props1 = {
+    label: 'name',
+    children: 'zones',
+    isLeaf: 'leaf'
+  };
+
   const defaultProps = {
     children: 'children',
     label: 'label'
@@ -185,6 +191,23 @@
           resolve(data);
         }, 500);
       },
+      loadNode1(node, resolve) {
+        if (node.level === 0) {
+          return resolve([{ name: 'region' }]);
+        }
+        if (node.level > 1) return resolve([]);
+
+        setTimeout(() => {
+          const data = [{
+            name: 'leaf',
+            leaf: true
+          }, {
+            name: 'zone'
+          }];
+
+          resolve(data);
+        }, 500);
+      },
       getCheckedNodes() {
         console.log(this.$refs.tree.getCheckedNodes());
       },
@@ -210,22 +233,28 @@
         this.$refs.tree.setCheckedKeys([]);
       },
       append(store, data) {
-        store.append({ id: id++, label: 'testtest', children: [] }, data);
+        const newChild = { id: id++, label: 'testtest', children: [] };
+        store.append(newChild, data);
+        data.children = data.children || [];
+        data.children.push(newChild);
       },
 
-      remove(store, data) {
+      remove(store, node, data) {
+        const parent = node.parent;
+        const index = parent.data.children.findIndex(d => d.id === data.id);
+        parent.data.children.splice(index, 1);
         store.remove(data);
       },
 
       renderContent(h, { node, data, store }) {
         return (
-          <span style="white-space: normal">
+          <span style="flex: 1; display: flex; align-items: center; justify-content: space-between; font-size: 14px; padding-right: 8px;">
             <span>
               <span>{node.label}</span>
             </span>
-            <span style="float: right; margin-right: 20px">
-              <el-button size="mini" on-click={ () => this.append(store, data) }>Append</el-button>
-              <el-button size="mini" on-click={ () => this.remove(store, data) }>Delete</el-button>
+            <span>
+              <el-button style="font-size: 12px;" type="text" on-click={ () => this.append(store, data) }>Append</el-button>
+              <el-button style="font-size: 12px;" type="text" on-click={ () => this.remove(store, node, data) }>Delete</el-button>
             </span>
           </span>);
       },
@@ -244,6 +273,7 @@
         regions,
         defaultProps,
         props,
+        props1,
         defaultCheckedKeys: [5],
         defaultExpandedKeys: [2, 3],
         filterText: ''
@@ -326,7 +356,6 @@
 ::: demo
 ```html
 <el-tree
-  :data="regions"
   :props="props"
   :load="loadNode"
   lazy
@@ -338,11 +367,6 @@
   export default {
     data() {
       return {
-        regions: [{
-          'name': 'region1'
-        }, {
-          'name': 'region2'
-        }],
         props: {
           label: 'name',
           children: 'zones'
@@ -383,6 +407,52 @@
           } else {
             data = [];
           }
+
+          resolve(data);
+        }, 500);
+      }
+    }
+  };
+</script>
+```
+:::
+
+### 懒加载自定义叶子节点
+
+::: demo
+```html
+<el-tree
+  :props="props1"
+  :load="loadNode1"
+  lazy
+  show-checkbox>
+</el-tree>
+
+<script>
+  export default {
+    data() {
+      return {
+        props1: {
+          label: 'name',
+          children: 'zones',
+          isLeaf: 'leaf'
+        },
+      };
+    },
+    methods: {
+      loadNode1(node, resolve) {
+        if (node.level === 0) {
+          return resolve([{ name: 'region' }]);
+        }
+        if (node.level > 1) return resolve([]);
+
+        setTimeout(() => {
+          const data = [{
+            name: 'leaf',
+            leaf: true
+          }, {
+            name: 'zone'
+          }];
 
           resolve(data);
         }, 500);
@@ -612,6 +682,10 @@
 ### 自定义节点内容
 节点的内容支持自定义，可以在节点区添加按钮或图标等内容
 
+:::warning
+`append` 和 `remove` 方法不会改变 `data` 上的数据
+:::
+
 ::: demo 使用`render-content`指定渲染函数，该函数返回需要的节点区内容即可。渲染函数的用法请参考 Vue 文档。注意：由于 jsfiddle 不支持 JSX 语法，所以本例在 jsfiddle 中无法运行。但是在实际的项目中，只要正确地配置了相关依赖，就可以正常运行。
 ```html
 <el-tree
@@ -674,22 +748,28 @@
 
     methods: {
       append(store, data) {
-        store.append({ id: id++, label: 'testtest', children: [] }, data);
+        const newChild = { id: id++, label: 'testtest', children: [] };
+        store.append(newChild, data); // append 不会改变 data
+        data.children = data.children || [];
+        data.children.push(newChild);
       },
 
-      remove(store, data) {
-        store.remove(data);
+      remove(store, node, data) {
+        const parent = node.parent;
+        const index = parent.data.children.findIndex(d => d.id === data.id);
+        parent.data.children.splice(index, 1);
+        store.remove(data); // remove 不会改变 data
       },
 
       renderContent(h, { node, data, store }) {
         return (
-          <span>
+          <span style="flex: 1; display: flex; align-items: center; justify-content: space-between; font-size: 14px; padding-right: 8px;">
             <span>
               <span>{node.label}</span>
             </span>
-            <span style="float: right; margin-right: 20px">
-              <el-button size="mini" on-click={ () => this.append(store, data) }>Append</el-button>
-              <el-button size="mini" on-click={ () => this.remove(store, data) }>Delete</el-button>
+            <span>
+              <el-button style="font-size: 12px;" type="text" on-click={ () => this.append(store, data) }>Append</el-button>
+              <el-button style="font-size: 12px;" type="text" on-click={ () => this.remove(store, node, data) }>Delete</el-button>
             </span>
           </span>);
       }
@@ -855,7 +935,7 @@
 | --------------------- | ---------------------------------------- | --------------------------- | ---- | ----- |
 | data                  | 展示数据                                     | array                       | —    | —     |
 | empty-text            | 内容为空的时候展示的文本                             | String                      | —    | —     |
-| node-key              | 每个树节点用来作为唯一标识的属性，整颗树应该是唯一的               | String                      | —    | —     |
+| node-key              | 每个树节点用来作为唯一标识的属性，整棵树应该是唯一的               | String                      | —    | —     |
 | props                 | 配置选项，具体看下表                               | object                      | —    | —     |
 | load                  | 加载子树数据的方法                                | function(node, resolve)     | —    | —     |
 | render-content        | 树节点的内容区的渲染 Function                      | Function(h, { node }        | —    | —     |
@@ -876,7 +956,8 @@
 | -------- | ----------------- | ------ | ---- | ---- |
 | label    | 指定节点标签为节点对象的某个属性值 | string, function(data, node) | —    | —    |
 | children | 指定子树为节点对象的某个属性值 | string, function(data, node) | —    | —    |
-| disabled | 指定节点选择框是否禁用 |  boolean, function(data, node) | —    | —    |
+| disabled | 指定节点选择框是否禁用 | boolean, function(data, node) | —    | —    |
+| isLeaf | 指定节点是否为叶子节点 | boolean, function(data, node) | —    | —    |
 
 ### 方法
 `Tree` 拥有如下方法，返回目前被选中的节点数组：

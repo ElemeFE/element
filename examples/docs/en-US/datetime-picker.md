@@ -100,6 +100,10 @@
 
 Select date and time in one picker.
 
+:::tip
+DateTimePicker is derived from DatePicker and TimePicker. For a more detailed explanation on `pickerOptions` and other attributes, you can refer to DatePicker and TimePicker.
+:::
+
 ###  Date and time
 
 :::demo You can select date and time in one picker at the same time by setting `type` to `datetime`. The way to use shortcuts is the same as Date Picker.
@@ -248,6 +252,7 @@ Select date and time in one picker.
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | shortcuts | a { text, onClick } object array to set shortcut options, check the table below | object[] | — | — |
 | disabledDate | a function determining if a date is disabled with that date as its parameter. Should return a Boolean | function | — | — |
+| firstDayOfWeek | first day of week | Number | 1 to 7 | 7 |
 
 ### shortcuts
 | Attribute      | Description          | Type      | Accepted Values       | Default  |

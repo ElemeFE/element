@@ -1,7 +1,8 @@
 <template>
-  <button :disabled="disabled" class="el-button"
+  <button
+    v-bind="$props"
+    class="el-button"
     @click="handleClick"
-    :autofocus="autofocus"
     :type="nativeType"
     :class="[
       type ? 'el-button--' + type : '',
@@ -9,13 +10,14 @@
       {
         'is-disabled': disabled,
         'is-loading': loading,
-        'is-plain': plain
+        'is-plain': plain,
+        'is-round': round
       }
     ]"
   >
-    <i class="el-icon-loading" v-if="loading"></i>
-    <i :class="'el-icon-' + icon" v-if="icon && !loading"></i>
-    <span v-if="$slots.default"><slot></slot></span>
+    <i class="el-icon-loading" v-if="loading" @click="handleInnerClick"></i>
+    <i :class="'el-icon-' + icon" v-if="icon && !loading" @click="handleInnerClick"></i>
+    <span v-if="$slots.default" @click="handleInnerClick"><slot></slot></span>
   </button>
 </template>
 <script>
@@ -39,12 +41,18 @@
       loading: Boolean,
       disabled: Boolean,
       plain: Boolean,
-      autofocus: Boolean
+      autofocus: Boolean,
+      round: Boolean
     },
 
     methods: {
       handleClick(evt) {
         this.$emit('click', evt);
+      },
+      handleInnerClick(evt) {
+        if (this.disabled) {
+          evt.stopPropagation();
+        }
       }
     }
   };

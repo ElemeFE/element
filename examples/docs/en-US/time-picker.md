@@ -155,10 +155,10 @@ Can pick an arbitrary time range.
 | disabled | whether DatePicker is disabled | boolean | — | false |
 | editable | whether the input is editable | boolean | — | true |
 | clearable | Whether to show clear button | boolean | — | true |
-| size | size of Input | string | large/small/mini | — |
+| size | size of Input | string | medium / small / mini | — |
 | placeholder | placeholder | string | — | — |
 | value | value of the picker | date for Time Picker, and string for Time Select | hour `HH`, minute `mm`, second `ss` | HH:mm:ss |
-| align | alignment | left/center/right | left |
+| align | alignment | left / center / right | left |
 | popper-class | custom class name for TimePicker's dropdown | string | — | — |
 | picker-options | additional options, check the table below | object | — | {} |
 |name | same as `name` in native input | string | — | — |
@@ -175,7 +175,7 @@ Can pick an arbitrary time range.
 ### Time Picker Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| selectableRange | available time range, e.g.`'18:30:00 - 20:30:00'`or`['09:30:00 - 12:00:00', '14:30:00 - 18:30:00']` | string/array | — | — |
+| selectableRange | available time range, e.g.`'18:30:00 - 20:30:00'`or`['09:30:00 - 12:00:00', '14:30:00 - 18:30:00']` | string / array | — | — |
 | format | format of the picker | string | hour `HH`, minute `mm`, second `ss` | HH:mm:ss |
 
 
