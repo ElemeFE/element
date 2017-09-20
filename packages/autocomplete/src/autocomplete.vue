@@ -74,7 +74,11 @@
       },
       customItem: String,
       icon: String,
-      onIconClick: Function
+      onIconClick: Function,
+      selectWhenUnmatched: {
+        type: Boolean,
+        default: false
+      }
     },
     data() {
       return {
@@ -142,6 +146,12 @@
         if (this.suggestionVisible && this.highlightedIndex >= 0 && this.highlightedIndex < this.suggestions.length) {
           e.preventDefault();
           this.select(this.suggestions[this.highlightedIndex]);
+        } else if (this.selectWhenUnmatched) {
+          this.$emit('select', {value: this.value});
+          this.$nextTick(_ => {
+            this.suggestions = [];
+            this.highlightedIndex = -1;
+          });
         }
       },
       select(item) {
@@ -149,11 +159,15 @@
         this.$emit('select', item);
         this.$nextTick(_ => {
           this.suggestions = [];
+          this.highlightedIndex = -1;
         });
       },
       highlight(index) {
         if (!this.suggestionVisible || this.loading) { return; }
-        if (index < 0) index = 0;
+        if (index < 0) {
+          this.highlightedIndex = -1;
+          return;
+        }
         if (index >= this.suggestions.length) {
           index = this.suggestions.length - 1;
         }

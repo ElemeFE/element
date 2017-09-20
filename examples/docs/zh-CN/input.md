@@ -825,6 +825,11 @@ export default {
 | focus | 在 Input 获得焦点时触发 | (event: Event) |
 | change | 在 Input 值改变时触发 | (value: string \| number) |
 
+### Input Methods
+| 方法名 | 说明 | 参数 |
+| ---- | ---- | ---- |
+| focus | 使 input 获取焦点 | - |
+
 ### Autocomplete Attributes
 
 | 参数          | 说明            | 类型            | 可选值                 | 默认值   |
@@ -840,8 +845,9 @@ export default {
 | on-icon-click | 点击图标的回调函数 | function | — | — |
 | icon          | 输入框尾部图标    | string          | — | — |
 | name | 原生属性 | string | — | — |
+| select-when-unmatched | 在输入没有任何匹配建议的情况下，按下回车是否触发 `select` 事件 | boolean | — | false |
 
-### Props
+### props
 | 参数     | 说明              | 类型   | 可选值 | 默认值 |
 | -------- | ----------------- | ------ | ------ | ------ |
 | value    | 指定选项的值为选项对象的某个属性值 | string | — | value |
@@ -851,8 +857,3 @@ export default {
 | 事件名称 | 说明 | 回调参数 |
 |---------|--------|---------|
 | select | 点击选中建议项时触发 | 选中建议项 |
-
-### Methods
-| 方法名 | 说明 | 参数 |
-| ---- | ---- | ---- |
-| focus | 使 input 获取焦点 | - |
