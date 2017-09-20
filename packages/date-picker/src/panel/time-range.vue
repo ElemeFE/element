@@ -147,12 +147,12 @@
           hours: time.minTime.getHours(),
           minutes: time.minTime.getMinutes(),
           seconds: time.minTime.getSeconds()
-        });
+        }, true);
         this.handleMaxChange({
           hours: time.maxTime.getHours(),
           minutes: time.maxTime.getMinutes(),
           seconds: time.maxTime.getSeconds()
-        });
+        }, true);
       },
 
       handleClear() {
@@ -163,7 +163,7 @@
         this.$emit('pick');
       },
 
-      handleChange() {
+      handleChange(notUser) {
         if (this.minTime > this.maxTime) return;
         MIN_TIME.setFullYear(this.minTime.getFullYear());
         MIN_TIME.setMonth(this.minTime.getMonth(), this.minTime.getDate());
@@ -171,10 +171,10 @@
         MAX_TIME.setMonth(this.maxTime.getMonth(), this.maxTime.getDate());
         this.$refs.minSpinner.selectableRange = [[MIN_TIME, this.maxTime]];
         this.$refs.maxSpinner.selectableRange = [[this.minTime, MAX_TIME]];
-        this.handleConfirm(true);
+        this.handleConfirm(true, false, notUser);
       },
 
-      handleMaxChange(date) {
+      handleMaxChange(date, notUser) {
         if (date.hours !== undefined) {
           this.maxTime.setHours(date.hours);
           this.maxHours = this.maxTime.getHours();
@@ -190,7 +190,7 @@
         this.handleChange();
       },
 
-      handleMinChange(date) {
+      handleMinChange(date, notUser) {
         if (date.hours !== undefined) {
           this.minTime.setHours(date.hours);
           this.minHours = this.minTime.getHours();
@@ -217,7 +217,7 @@
         this.selectionRange = [start + this.offset, end + this.offset];
       },
 
-      handleConfirm(visible = false, first = false) {
+      handleConfirm(visible = false, first = false, notUser = false) {
         const minSelectableRange = this.$refs.minSpinner.selectableRange;
         const maxSelectableRange = this.$refs.maxSpinner.selectableRange;
 
@@ -225,7 +225,7 @@
         this.maxTime = limitRange(this.maxTime, maxSelectableRange);
 
         if (first) return;
-        this.$emit('pick', [this.minTime, this.maxTime], visible, first);
+        this.$emit('pick', [this.minTime, this.maxTime], visible, !notUser);
       },
 
       adjustScrollTop() {

@@ -267,7 +267,6 @@ export default {
       }
     },
     displayValue(val) {
-      this.$emit('change', val);
       this.dispatch('ElFormItem', 'el.form.change');
     }
   },
@@ -492,10 +491,13 @@ export default {
       this.picker.resetView && this.picker.resetView();
 
       this.picker.$on('dodestroy', this.doDestroy);
-      this.picker.$on('pick', (date = '', visible = false) => {
+      this.picker.$on('pick', (date = '', visible = false, user = true) => {
         // do not emit if values are same
         if (!valueEquals(this.value, date)) {
           this.$emit('input', date);
+          if (user && this.value !== date) {
+            this.$nextTick(() => this.$emit('change', this.displayValue));
+          };
         }
         this.pickerVisible = this.picker.visible = visible;
         this.picker.resetView && this.picker.resetView();

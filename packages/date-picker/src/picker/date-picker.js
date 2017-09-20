@@ -45,6 +45,7 @@ export default {
       if (keyCode === 9 || keyCode === 27 || keyCode === 13) {
         this.pickerVisible = false;
         event.stopPropagation();
+        this.picker.confirm();
         this.currentValue = this.picker.date;
         this.$refs.reference.$refs.input.blur();
         return;

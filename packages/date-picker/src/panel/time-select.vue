@@ -79,9 +79,9 @@
       value(val) {
         if (!val) return;
         if (this.minTime && compareTime(val, this.minTime) < 0) {
-          this.$emit('pick');
+          this.$emit('pick', '', false, false);
         } else if (this.maxTime && compareTime(val, this.maxTime) > 0) {
-          this.$emit('pick');
+          this.$emit('pick', '', false, false);
         }
         this.$nextTick(() => this.scrollToOption());
       }
@@ -95,7 +95,7 @@
       },
 
       handleClear() {
-        this.$emit('pick');
+        this.$emit('pick', '', false, false);
       },
 
       scrollToOption(className = 'selected') {
@@ -122,6 +122,7 @@
         }
         if (!items[index].disabled) {
           this.value = items[index].value;
+          this.$emit('pick', this.value, true);
         }
       }
     },

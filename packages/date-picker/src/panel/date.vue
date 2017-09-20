@@ -161,7 +161,7 @@
           this.date = newVal;
           this.year = newVal.getFullYear();
           this.month = newVal.getMonth();
-          this.$emit('pick', newVal, false);
+          this.$emit('pick', newVal, false, false);
         }
       },
 
@@ -190,7 +190,7 @@
     methods: {
       handleClear() {
         this.date = this.$options.defaultValue ? new Date(this.$options.defaultValue) : new Date();
-        this.$emit('pick');
+        this.$emit('pick', this.date);
       },
 
       resetDate() {
@@ -256,7 +256,7 @@
         }
       },
 
-      handleTimePick(picker, visible, first) {
+      handleTimePick(picker, visible) {
         if (picker) {
           let oldDate = new Date(this.date.getTime());
           let hour = picker.getHours();
@@ -273,9 +273,7 @@
           this.date = new Date(oldDate.getTime());
         }
 
-        if (!first) {
-          this.timePickerVisible = visible;
-        }
+        this.timePickerVisible = visible;
       },
 
       handleMonthPick(month) {
@@ -294,28 +292,28 @@
         }
       },
 
-      handleDatePick(value) {
+      handleDatePick(value, close, user = true) {
         if (this.selectionMode === 'day') {
           if (!this.showTime) {
-            this.$emit('pick', new Date(value.getTime()));
+            this.$emit('pick', new Date(value.getTime()), false, user);
           }
           this.date.setFullYear(value.getFullYear());
           this.date.setMonth(value.getMonth(), value.getDate());
         } else if (this.selectionMode === 'week') {
           this.week = value.week;
-          this.$emit('pick', value.date);
+          this.$emit('pick', value.date, false, user);
         }
 
         this.resetDate();
       },
 
-      handleYearPick(year, close = true) {
+      handleYearPick(year, close = true, user) {
         this.year = year;
         if (!close) return;
 
         this.date.setFullYear(year);
         if (this.selectionMode === 'year') {
-          this.$emit('pick', new Date(year, 0, 1));
+          this.$emit('pick', new Date(year, 0, 1), false, user);
         } else {
           this.currentView = 'month';
         }
@@ -330,6 +328,7 @@
       },
 
       confirm() {
+        console.log(111);
         this.date.setMilliseconds(0);
         this.$emit('pick', this.date);
       },
