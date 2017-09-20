@@ -38,7 +38,8 @@ export default {
   data() {
     return {
       internalCurrentPage: 1,
-      internalPageSize: 0
+      internalPageSize: 0,
+      shouldTriggerCurrenChange: true
     };
   },
 
@@ -304,6 +305,10 @@ export default {
     currentPage: {
       immediate: true,
       handler(val) {
+        /* only execute when component is mounted */
+        if (this._isMounted) {
+          this.shouldTriggerCurrenChange = (val === this.internalCurrentPage);
+        }
         this.internalCurrentPage = val;
       }
     },
@@ -328,10 +333,11 @@ export default {
       if (newVal !== undefined) {
         this.$nextTick(() => {
           this.internalCurrentPage = newVal;
-          if (oldVal !== newVal) {
+          if (this.shouldTriggerCurrenChange && (oldVal !== newVal)) {
             this.$emit('update:currentPage', newVal);
             this.$emit('current-change', this.internalCurrentPage);
           }
+          this.shouldTriggerCurrenChange = true;
         });
       } else {
         this.$emit('update:currentPage', newVal);
