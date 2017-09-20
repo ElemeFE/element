@@ -18,10 +18,22 @@ const getKeysMap = function(array, rowKey) {
   return arrayMap;
 };
 
+const indexOf = function(arr, target) {
+  let index = -1;
+  if (Array.isArray(arr)) {
+    arr.forEach((item, i) => {
+      if (JSON.stringify(item) === JSON.stringify(target)) {
+        index = i;
+      }
+    });
+  }
+  return index;
+};
+
 const toggleRowSelection = function(states, row, selected) {
   let changed = false;
   const selection = states.selection;
-  const index = selection.indexOf(row);
+  const index = indexOf(selection, row);
   if (typeof selected === 'undefined') {
     if (index === -1) {
       selection.push(row);
@@ -315,7 +327,7 @@ TableStore.prototype.updateColumns = function() {
 };
 
 TableStore.prototype.isSelected = function(row) {
-  return (this.states.selection || []).indexOf(row) > -1;
+  return indexOf(this.states.selection, row) > -1;
 };
 
 TableStore.prototype.clearSelection = function() {
@@ -367,12 +379,12 @@ TableStore.prototype.cleanSelection = function() {
     }
   } else {
     deleted = selection.filter((item) => {
-      return data.indexOf(item) === -1;
+      return indexOf(data, item) === -1;
     });
   }
 
   deleted.forEach((deletedItem) => {
-    selection.splice(selection.indexOf(deletedItem), 1);
+    selection.splice(indexOf(selection, deletedItem), 1);
   });
 
   if (deleted.length) {
@@ -397,7 +409,7 @@ TableStore.prototype.updateAllSelected = function() {
     if (selectedMap) {
       return !!selectedMap[getRowIdentity(row, rowKey)];
     } else {
-      return selection.indexOf(row) !== -1;
+      return indexOf(selection, row) !== -1;
     }
   };
 
