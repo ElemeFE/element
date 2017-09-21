@@ -29,12 +29,7 @@
     }
 
     &.selected {
-      color: $--color-white;
-      background-color: $--select-option-selected;
-
-      &.hover {
-        background-color: $--select-option-selected-hover;
-      }
+      color: $--select-option-selected;
     }
 
     & span {
