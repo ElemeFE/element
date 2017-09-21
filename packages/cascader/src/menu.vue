@@ -208,7 +208,6 @@
             ref="wrapper"
           >
             {menus}
-            <div x-arrow class="popper__arrow"></div>
           </div>
         </transition>
       );

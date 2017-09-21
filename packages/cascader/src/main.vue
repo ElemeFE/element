@@ -73,8 +73,7 @@ const popperMixin = {
     appendToBody: Popper.props.appendToBody,
     offset: Popper.props.offset,
     boundariesPadding: Popper.props.boundariesPadding,
-    popperOptions: Popper.props.popperOptions,
-    visibleArrow: true
+    popperOptions: Popper.props.popperOptions
   },
   methods: Popper.methods,
   data: Popper.data,
