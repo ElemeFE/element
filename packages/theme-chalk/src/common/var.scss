@@ -220,7 +220,7 @@ $--select-option-disabled-background: $--color-white;
 $--select-option-height: 34px;
 $--select-option-hover-background: $--background-color-base;
 $--select-option-selected: $--color-primary;
-$--select-option-selected-hover: mix($--color-primary, black, 95%);
+$--select-option-selected-hover: $--background-color-base;
 
 $--select-group-color: $--color-info;
 $--select-group-height: 30px;
@@ -601,15 +601,14 @@ $--rate-icon-color: $--color-text-placeholder;
 
 /* DatePicker
 --------------------------*/
-$--datepicker-color: $--link-color;
-$--datepicker-off-color: #ddd;
-$--datepicker-header-color: $--border-color-hover;
-$--datepicker-icon-color: $--color-text-secondary;
+$--datepicker-color: $--color-text-regular;
+$--datepicker-off-color: $--color-text-placeholder;
+$--datepicker-header-color: $--color-text-regular;
+$--datepicker-icon-color: $--color-text-primary;
 $--datepicker-border-color: $--disabled-border-base;
 $--datepicker-inner-border-color: #e4e4e4;
-$--datepicker-cell-hover-color: $--color-text-secondary;
-$--datepicker-inrange-color: tint($--color-primary, 0.8);
-$--datepicker-inrange-hover-color: tint($--color-primary, 0.64);
+$--datepicker-inrange-color: $--border-color-extra-light;
+$--datepicker-inrange-hover-color: $--border-color-extra-light;
 $--datepicker-active-color: $--color-primary;
 $--datepicker-text-hover-color: $--color-primary;
 

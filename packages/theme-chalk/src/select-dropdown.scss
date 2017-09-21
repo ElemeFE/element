@@ -36,8 +36,8 @@
     padding: 0;
   }
 
-  &[x-placement^="bottom"] .popper__arrow {
-    left: 10% !important;
+  & .popper__arrow {
+    left: 24px !important;
   }
 }
 

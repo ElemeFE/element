@@ -232,7 +232,7 @@ describe('ColorPicker', () => {
       alphaBar.__vue__.handleClick({ target: null, clientX: 50, clientY: 0 });
       vm.$nextTick(() => {
         const picker = vm.$children[0];
-        expect(picker.color._alpha < 1).to.true;
+        expect(picker.color._alpha < 100).to.true;
         done();
       });
     }, ANIMATION_TIME);

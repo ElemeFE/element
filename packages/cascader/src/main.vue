@@ -63,6 +63,7 @@ import emitter from 'element-ui/src/mixins/emitter';
 import Locale from 'element-ui/src/mixins/locale';
 import { t } from 'element-ui/src/locale';
 import debounce from 'throttle-debounce/debounce';
+import merge from 'element-ui/src/utils/merge';
 
 const popperMixin = {
   props: {
@@ -76,7 +77,9 @@ const popperMixin = {
     popperOptions: Popper.props.popperOptions
   },
   methods: Popper.methods,
-  data: Popper.data,
+  data() {
+    return merge({ visibleArrow: true }, Popper.data);
+  },
   beforeDestroy: Popper.beforeDestroy
 };
 

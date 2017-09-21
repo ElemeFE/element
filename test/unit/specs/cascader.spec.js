@@ -64,17 +64,17 @@ describe('Cascader', () => {
 
       item1.click();
       menu.$nextTick(_ => {
-        expect(menuElm.children.length).to.be.equal(2);
+        expect(menuElm.children.length).to.be.equal(3); // two menus and an arrow
         expect(item1.classList.contains('is-active')).to.be.true;
 
-        const item2 = menuElm.children[1].querySelector('.el-cascader-menu__item');
+        const item2 = menuElm.children[2].querySelector('.el-cascader-menu__item');
         item2.click();
 
         menu.$nextTick(_ => {
-          expect(menuElm.children.length).to.be.equal(3);
+          expect(menuElm.children.length).to.be.equal(4);
           expect(item2.classList.contains('is-active')).to.be.true;
 
-          const item3 = menuElm.children[2].querySelector('.el-cascader-menu__item');
+          const item3 = menuElm.children[3].querySelector('.el-cascader-menu__item');
           item3.click();
 
           setTimeout(_ => {
@@ -155,17 +155,17 @@ describe('Cascader', () => {
 
       item1.click();
       menu.$nextTick(_ => {
-        expect(menuElm.children.length).to.be.equal(2);
+        expect(menuElm.children.length).to.be.equal(3);
         expect(item1.classList.contains('is-active')).to.be.true;
 
-        const item2 = menuElm.children[1].querySelector('.el-cascader-menu__item');
+        const item2 = menuElm.children[2].querySelector('.el-cascader-menu__item');
         item2.click();
 
         menu.$nextTick(_ => {
-          expect(menuElm.children.length).to.be.equal(3);
+          expect(menuElm.children.length).to.be.equal(4);
           expect(item2.classList.contains('is-active')).to.be.true;
 
-          const item3 = menuElm.children[2].querySelector('.el-cascader-menu__item');
+          const item3 = menuElm.children[3].querySelector('.el-cascader-menu__item');
           item3.click();
 
           setTimeout(_ => {
@@ -299,7 +299,7 @@ describe('Cascader', () => {
 
       item1.click();
       menu.$nextTick(_ => {
-        expect(menuElm.children.length).to.be.equal(1);
+        expect(menuElm.children.length).to.be.equal(2);
         expect(item1.classList.contains('is-active')).to.be.false;
         done();
       });
@@ -362,7 +362,7 @@ describe('Cascader', () => {
       const item2 = menuElm.children[1].querySelector('.el-cascader-menu__item');
       const item3 = menuElm.children[2].querySelector('.el-cascader-menu__item');
 
-      expect(menuElm.children.length).to.be.equal(3);
+      expect(menuElm.children.length).to.be.equal(4);
       expect(item1.classList.contains('is-active')).to.be.true;
       expect(item2.classList.contains('is-active')).to.be.true;
       expect(item3.classList.contains('is-active')).to.be.true;
@@ -432,17 +432,17 @@ describe('Cascader', () => {
 
       triggerEvent(item1, 'mouseenter');
       menu.$nextTick(_ => {
-        expect(menuElm.children.length).to.be.equal(2);
+        expect(menuElm.children.length).to.be.equal(3);
         expect(item1.classList.contains('is-active')).to.be.true;
 
-        const item2 = menuElm.children[1].querySelector('.el-cascader-menu__item');
+        const item2 = menuElm.children[2].querySelector('.el-cascader-menu__item');
         triggerEvent(item2, 'mouseenter');
 
         menu.$nextTick(_ => {
-          expect(menuElm.children.length).to.be.equal(3);
+          expect(menuElm.children.length).to.be.equal(4);
           expect(item2.classList.contains('is-active')).to.be.true;
 
-          const item3 = menuElm.children[2].querySelector('.el-cascader-menu__item');
+          const item3 = menuElm.children[3].querySelector('.el-cascader-menu__item');
           item3.click();
 
           setTimeout(_ => {
@@ -514,19 +514,19 @@ describe('Cascader', () => {
 
       item1.click();
       menu.$nextTick(_ => {
-        expect(menuElm.children.length).to.be.equal(2);
+        expect(menuElm.children.length).to.be.equal(3);
         expect(item1.classList.contains('is-active')).to.be.true;
         expect(vm.selectedOptions[0]).to.be.equal('zhejiang');
 
-        const item2 = menuElm.children[1].querySelector('.el-cascader-menu__item');
+        const item2 = menuElm.children[2].querySelector('.el-cascader-menu__item');
         item2.click();
 
         menu.$nextTick(_ => {
-          expect(menuElm.children.length).to.be.equal(3);
+          expect(menuElm.children.length).to.be.equal(4);
           expect(item2.classList.contains('is-active')).to.be.true;
           expect(vm.selectedOptions[1]).to.be.equal('hangzhou');
 
-          const item3 = menuElm.children[2].querySelector('.el-cascader-menu__item');
+          const item3 = menuElm.children[3].querySelector('.el-cascader-menu__item');
           item3.click();
 
           setTimeout(_ => {
@@ -599,7 +599,7 @@ describe('Cascader', () => {
         const menuElm = menu.$el;
         const item1 = menuElm.querySelector('.el-cascader-menu__item');
 
-        expect(menuElm.children.length).to.be.equal(1);
+        expect(menuElm.children.length).to.be.equal(2);
         expect(menuElm.children[0].children.length).to.be.equal(3);
 
         item1.click();
