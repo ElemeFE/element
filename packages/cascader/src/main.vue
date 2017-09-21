@@ -34,7 +34,7 @@
         <i
           key="2"
           v-else
-          class="el-input__icon el-icon-caret-bottom"
+          class="el-input__icon el-icon-arrow-down"
           :class="{ 'is-reverse': menuVisible }"
         ></i>
       </template>

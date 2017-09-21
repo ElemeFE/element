@@ -10,6 +10,7 @@
 @include b(select) {
   display: inline-block;
   position: relative;
+  min-width: 224px;
 
   &:hover {
     .el-input__inner {
@@ -40,12 +41,12 @@
       }
 
       @include when(show-close) {
-        transition: 0s;
         font-size: $--select-font-size;
         text-align: center;
         transform: rotateZ(180deg);
         border-radius: $--border-radius-circle;
         color: $--select-input-color;
+        transition: $--color-transition-base;
 
         &:hover {
           color: $--select-close-hover-color;
@@ -61,10 +62,6 @@
           border-color: $--select-disabled-border;
         }
       }
-    }
-
-    &.is-focus .el-input__inner {
-      border-color: $--input-focus-border;
     }
   }
 
@@ -110,6 +107,10 @@
     z-index: $--index-normal;
     top: 50%;
     transform: translateY(-50%);
+
+    .el-tag {
+
+    }
   }
 
   & .el-tag__close {
@@ -120,7 +121,23 @@
     height: $--select-tag-height;
     line-height: $--select-tag-height;
     box-sizing: border-box;
+    border-color: transparent;
     margin: 3px 0 3px 6px;
+
+    &__close.el-icon-close {
+      background-color: $--color-text-placeholder;
+      right: -7px;
+      color: $--color-white;
+
+      &:hover {
+        background-color: $--color-text-secondary;
+      }
+
+      &::before {
+        display: block;
+        transform: scale(.6);
+      }
+    }
   }
 
   @include e(tag) {

@@ -203,7 +203,7 @@ $--radio-button-disabled-checked-fill: $--border-color-extra-light;
 $--select-border-color-hover: $--border-color-hover;
 $--select-disabled-border: $--disabled-border-base;
 $--select-font-size: $--font-size-base;
-$--select-close-hover-color: $--color-text-placeholder;
+$--select-close-hover-color: $--color-text-secondary;
 
 $--select-input-color: $--color-text-placeholder;
 $--select-multiple-input-color: #666;
@@ -214,25 +214,25 @@ $--select-tag-height: 24px;
 $--select-tag-color: $--color-white;
 $--select-tag-background: $--color-primary;
 
-$--select-option-color: $--link-color;
+$--select-option-color: $--font-color-base;
 $--select-option-disabled-color: $--color-text-placeholder;
 $--select-option-disabled-background: $--color-white;
-$--select-option-height: 36px;
-$--select-option-hover-background: $--color-text-secondary;
+$--select-option-height: 34px;
+$--select-option-hover-background: $--background-color-base;
 $--select-option-selected: $--color-primary;
-$--select-option-selected-hover: shade($--color-primary, 0.12);
+$--select-option-selected-hover: mix($--color-primary, black, 95%);
 
-$--select-group-color: #999;
+$--select-group-color: $--color-info;
 $--select-group-height: 30px;
 $--select-group-font-size: 12px;
 
 $--select-dropdown-background: $--color-white;
-$--select-dropdown-shadow: $--box-shadow-base;
+$--select-dropdown-shadow: $--box-shadow-light;
 $--select-dropdown-empty-color: #999;
 $--select-dropdown-max-height: 274px;
 $--select-dropdown-padding: 6px 0;
 $--select-dropdown-empty-padding: 10px 0;
-$--select-dropdown-border: solid 1px $--disabled-border-base;
+$--select-dropdown-border: solid 1px $--border-color-light;
 
 /* Alert
 -------------------------- */

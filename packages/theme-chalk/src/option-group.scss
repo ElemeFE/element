@@ -2,24 +2,41 @@
 @import "common/var";
 
 @include b(select-group) {
+  $gap: 20px;
+
   margin: 0;
   padding: 0;
 
   @include e(wrap) {
+    position: relative;
     list-style: none;
     margin: 0;
     padding: 0;
+
+    &:not(:last-of-type) {
+      padding-bottom: 24px;
+
+      &::after {
+        content: '';
+        position: absolute;
+        display: block;
+        left: $gap;
+        right: $gap;
+        bottom: 12px;
+        height: 1px;
+        background: $--border-color-light;
+      }
+    }
   }
 
   @include e(title) {
-    padding-left: 10px;
+    padding-left: $gap;
     font-size: $--select-group-font-size;
     color: $--select-group-color;
-    height: $--select-group-height;
     line-height: $--select-group-height;
   }
 
   & .el-select-dropdown__item {
-    padding-left: 20px;
+    padding-left: $gap;
   }
 }

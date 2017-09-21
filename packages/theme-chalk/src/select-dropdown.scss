@@ -5,7 +5,7 @@
   position: absolute;
   z-index: #{$--index-top + 1};
   border: $--select-dropdown-border;
-  border-radius: $--border-radius-small;
+  border-radius: $--border-radius-base;
   background-color: $--select-dropdown-background;
   box-shadow: $--select-dropdown-shadow;
   box-sizing: border-box;
@@ -22,7 +22,7 @@
 
       &::after {
         position: absolute;
-        right: 10px;
+        right: 20px;
         font-family: 'element-icons';
         content: "\E608";
         font-size: 11px;
@@ -34,6 +34,10 @@
 
   .el-scrollbar.is-empty .el-select-dropdown__list{
     padding: 0;
+  }
+
+  &[x-placement^="bottom"] .popper__arrow {
+    left: 10% !important;
   }
 }
 

@@ -14,7 +14,7 @@
           :key="getValueKey(item)"
           :closable="!disabled"
           :hit="item.hitState"
-          type="primary"
+          type="info"
           @close="deleteTag($event, item)"
           close-transition>
           <span class="el-select__tags-text">{{ item.currentLabel }}</span>
@@ -152,7 +152,7 @@
           !this.multiple &&
           this.value !== undefined &&
           this.value !== '';
-        return criteria ? 'circle-close is-show-close' : (this.remote && this.filterable ? '' : 'caret-top');
+        return criteria ? 'circle-close is-show-close' : (this.remote && this.filterable ? '' : 'arrow-up');
       },
 
       debounce() {
