@@ -234,6 +234,7 @@
 | clearable | 是否显示清除按钮 | boolean | — | true |
 | size          | 输入框尺寸     | string          | large, small, mini  | — |
 | placeholder | 占位内容 | string | — | — |
+| name | 输入框标签的 name 属性 | string | — | — |
 | type | 显示类型 | string | year/month/date/week/ datetime/datetimerange/daterange | date |
 | format | 时间日期格式化 | string | 年 `yyyy`，月 `MM`，日 `dd`，小时 `HH`，分 `mm`，秒 `ss` | yyyy-MM-dd |
 | align | 对齐方式 | string | left, center, right | left |

@@ -5,6 +5,7 @@
     :readonly="!editable || readonly"
     :disabled="disabled"
     :size="size"
+    :name="name"
     v-clickoutside="handleClose"
     :placeholder="placeholder"
     @focus="handleFocus"
@@ -204,6 +205,7 @@ export default {
     format: String,
     readonly: Boolean,
     placeholder: String,
+    name: String,
     disabled: Boolean,
     clearable: {
       type: Boolean,

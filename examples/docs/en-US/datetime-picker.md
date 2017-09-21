@@ -235,6 +235,7 @@ Select date and time in one picker.
 | clearable | Whether to show clear button | boolean | — | true |
 |size | size of Input | string | large/small/mini | — |
 | placeholder | placeholder | string | — | — |
+| name | name of input element | string | — | — |
 | type | type of the picker | string | year/month/date/datetime/ week/datetimerange/daterange | date |
 | format | format of the picker | string | year `yyyy` month `MM` day `dd`, hour `HH`, minute `mm`, second `ss` | yyyy-MM-dd |
 | align | alignment | left/center/right | left |

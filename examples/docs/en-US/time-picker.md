@@ -157,6 +157,7 @@ Can pick an arbitrary time range.
 | clearable | Whether to show clear button | boolean | — | true |
 | size | size of Input | string | large/small/mini | — |
 | placeholder | placeholder | string | — | — |
+| name | name of input element | string | — | — |
 | value | value of the picker | date for Time Picker, and string for Time Select | hour `HH`, minute `mm`, second `ss` | HH:mm:ss |
 | align | alignment | left/center/right | left |
 | popper-class | custom class name for TimePicker's dropdown | string | — | — |
