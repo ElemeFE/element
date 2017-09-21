@@ -13,11 +13,7 @@
   font-size: 14px;
   color: $--table-text-color;
 
-  .el-tooltip.cell {
-    white-space: nowrap;
-    min-width: 50px;
-  }
-
+  // 数据为空
   @include e(empty-block) {
     position: relative;
     min-height: 60px;
@@ -34,6 +30,7 @@
     color: color($--color-primary s(16%) l(44%));
   }
 
+  // 展开行
   @include e(expand-column) {
     .cell {
       padding: 0;
@@ -79,24 +76,23 @@
     border-right: 0;
     border-bottom: 0;
 
-    & th.gutter, td.gutter {
+    th.gutter, td.gutter {
       border-right-width: 1px;
     }
   }
 
-  & th {
-    white-space: nowrap;
-    overflow: hidden;
-    user-select: none;
-  }
+  thead {
+    color: $--table-header-color;
+    font-weight: 500;
 
-  thead.is-group {
-    th {
-      background: $--background-color-base;
+    &.is-group {
+      th {
+        background: $--background-color-base;
+      }
     }
   }
 
-  & th, td {
+  th, td {
     padding: 12px 0;
     min-width: 0;
     box-sizing: border-box;
@@ -115,10 +111,100 @@
     @include when(right) {
       text-align: right;
     }
+
+    &.gutter {
+      width: 15px;
+      border-right-width: 0;
+      border-bottom-width: 0;
+      padding: 0;
+    }
+
+    &.is-hidden {
+      > * {
+        visibility: hidden;
+      }
+    }
   }
 
-  & th.is-leaf, td {
+  tr {
+    background-color: $--color-white;
+
+    input[type="checkbox"] {
+      margin: 0;
+    }
+  }
+
+  th.is-leaf, td {
     border-bottom: $--table-border;
+  }
+
+  th {
+    white-space: nowrap;
+    overflow: hidden;
+    user-select: none;
+    text-align: left;
+
+    div {
+      display: inline-block;
+      padding-left: 10px;
+      padding-right: 10px;
+      line-height: 40px;
+      box-sizing: border-box;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    > .cell {
+      position: relative;
+      word-wrap: normal;
+      text-overflow: ellipsis;
+      display: inline-block;
+      vertical-align: middle;
+      width: 100%;
+      box-sizing: border-box;
+
+      &.highlight {
+        color: $--color-primary;
+      }
+    }
+
+    &.required > div::before {
+      display: inline-block;
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ff4d51;
+      margin-right: 5px;
+      vertical-align: middle;
+    }
+  }
+
+  td {
+    div {
+      box-sizing: border-box;
+    }
+
+    &.gutter {
+      width: 0;
+    }
+  }
+
+  .cell {
+    box-sizing: border-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    word-break: break-all;
+    line-height: 23px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    &.el-tooltip {
+      white-space: nowrap;
+      min-width: 50px;
+    }
   }
 
   // 拥有多级表头
@@ -152,12 +238,18 @@
   }
 
   // table--border
-  @include m('border') {
+  @include m(border) {
     border-right: none;
     border-bottom: none;
 
-    th:not(.gutter):not(:nth-last-child(2)), td:not(.gutter) {
+    th, td {
       border-right: $--table-border;
+    }
+
+    .has-gutter {
+      th:nth-last-of-type(2), td:nth-last-of-type(1) {
+        border-right: none;
+      }
     }
 
     th.gutter:last-of-type {
@@ -170,33 +262,8 @@
     }
   }
 
-  @include e(footer) {
-    td:nth-last-child(2) {
-      border-right: none;
-    }
-  }
-
   @include m(hidden) {
     visibility: hidden;
-  }
-
-  & th {
-    text-align: left;
-  }
-
-  & th > div {
-    display: inline-block;
-    padding-left: 10px;
-    padding-right: 10px;
-    line-height: 40px;
-    box-sizing: border-box;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-
-  & td > div {
-    box-sizing: border-box;
   }
 
   @include e((fixed, fixed-right)) {
@@ -222,7 +289,7 @@
     position: absolute;
     top: -1px;
     right: 0;
-    background-color: transparent;
+    background-color: $--color-white;
     border-bottom: $--table-border;
   }
 
@@ -244,10 +311,6 @@
     left: 0;
     top: 0;
     z-index: 3;
-
-    & thead div {
-      color: $--table-text-color;
-    }
   }
 
   @include e(fixed-footer-wrapper) {
@@ -289,11 +352,6 @@
   @include e((header-wrapper, footer-wrapper)) {
     overflow: hidden;
 
-    & thead div {
-      color: $--table-header-color;
-      font-weight: normal;
-    }
-
     & tbody td {
       background-color: $--table-row-hover-background;
       color: $--table-text-color;
@@ -331,32 +389,7 @@
     }
   }
 
-  & th.required > div::before {
-    display: inline-block;
-    content: "";
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #ff4d51;
-    margin-right: 5px;
-    vertical-align: middle;
-  }
-
-  & th > .cell {
-    position: relative;
-    word-wrap: normal;
-    text-overflow: ellipsis;
-    display: inline-block;
-    vertical-align: middle;
-    width: 100%;
-    box-sizing: border-box;
-
-    &.highlight {
-      color: $--color-primary;
-    }
-  }
-
-  & .caret-wrapper {
+  .caret-wrapper {
     position: relative;
     display: inline-flex;
     align-items: center;
@@ -366,55 +399,25 @@
     overflow: initial;
   }
 
-  & .sort-caret {
+  .sort-caret {
     color: $--icon-color-base;
     width: 14px;
     overflow: hidden;
     font-size: 13px;
   }
 
-  & .ascending .sort-caret.ascending {
+  .ascending .sort-caret.ascending {
     color: $--color-primary;
   }
 
-  & .descending .sort-caret.descending {
+  .descending .sort-caret.descending {
     color: $--color-primary;
   }
 
-  & th.gutter, td.gutter {
-    width: 15px;
-    border-right-width: 0;
-    border-bottom-width: 0;
-    padding: 0;
-  }
-
-  & td.gutter {
-    width: 0;
-  }
-
-  & td.is-hidden, th.is-hidden {
-    > * {
-      visibility: hidden;
-    }
-  }
-
-  & .cell {
-    box-sizing: border-box;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
-    word-break: break-all;
-    line-height: 23px;
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-
-  & tr input[type="checkbox"] {
-    margin: 0;
-  }
-
-  & tr {
-    background-color: $--color-white;
+  .hidden-columns {
+    visibility: hidden;
+    position: absolute;
+    z-index: -1;
   }
 
   @include m(striped) {
@@ -422,7 +425,6 @@
       & tr.el-table__row--striped {
         td {
           background: #FAFAFA;
-          background-clip: padding-box;
         }
 
         &.current-row td {
@@ -458,12 +460,6 @@
     z-index: 10;
   }
 
-  & .hidden-columns {
-    visibility: hidden;
-    position: absolute;
-    z-index: -1;
-  }
-
   @include e(column-filter-trigger) {
     display: inline-block;
     line-height: 34px;
@@ -485,7 +481,6 @@
   @include m(enable-row-hover) {
     .el-table__body tr:hover > td {
       background-color: $--table-row-hover-background;
-      background-clip: padding-box;
     }
   }
 

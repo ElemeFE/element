@@ -92,7 +92,7 @@ export default {
               : ''
           }
         </colgroup>
-        <thead class={ [isGroup ? 'is-group' : ''] }>
+        <thead class={ [{ 'is-group': isGroup, 'has-gutter': this.hasGutter }] }>
           {
             this._l(columnRows, (columns, rowIndex) =>
               <tr>
@@ -134,7 +134,7 @@ export default {
                 )
               }
               {
-                !this.fixed && this.layout.gutterWidth
+                this.hasGutter
                   ? <th class="gutter" style={{ width: this.layout.scrollY ? this.layout.gutterWidth + 'px' : '0' }}></th>
                   : ''
               }
@@ -190,6 +190,10 @@ export default {
 
     columns() {
       return this.store.states.columns;
+    },
+
+    hasGutter() {
+      return !this.fixed && this.layout.gutterWidth;
     }
   },
 
