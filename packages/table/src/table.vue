@@ -49,7 +49,12 @@
         :style="{ width: layout.bodyWidth ? layout.bodyWidth + 'px' : '' }">
       </table-footer>
     </div>
-    <div class="el-table__fixed" ref="fixedWrapper"
+    <div
+      :class="[
+        'el-table__fixed',
+        { 'el-table__fixed-without-h-scroll-bar': !this.layout.scrollX }
+      ]"
+      ref="fixedWrapper"
       v-if="fixedColumns.length > 0"
       :style="[
         { width: layout.fixedWidth ? layout.fixedWidth + 'px' : '' },
@@ -90,7 +95,12 @@
           :style="{ width: layout.fixedWidth ? layout.fixedWidth + 'px' : '' }"></table-footer>
       </div>
     </div>
-    <div class="el-table__fixed-right" ref="rightFixedWrapper"
+    <div
+      :class="[
+        'el-table__fixed-right',
+        { 'el-table__fixed-without-h-scroll-bar': !this.layout.scrollX }
+      ]"
+      ref="rightFixedWrapper"
       v-if="rightFixedColumns.length > 0"
       :style="[
         { width: layout.rightFixedWidth ? layout.rightFixedWidth + 'px' : '' },
