@@ -10,37 +10,10 @@
   width: 100%;
   max-width: 100%;
   background-color: $--color-white;
-  border: 1px solid $--table-border-color;
   font-size: 14px;
   color: $--table-text-color;
 
-  &::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 1px;
-    background-color: $--table-border-color;
-    z-index: 1;
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 1px;
-    height: 100%;
-    background-color: $--table-border-color;
-    z-index: 1;
-  }
-
-  .el-tooltip.cell {
-    white-space: nowrap;
-    min-width: 50px;
-  }
-
+  // 数据为空
   @include e(empty-block) {
     position: relative;
     min-height: 60px;
@@ -57,6 +30,7 @@
     color: color($--color-primary s(16%) l(44%));
   }
 
+  // 展开行
   @include e(expand-column) {
     .cell {
       padding: 0;
@@ -86,12 +60,15 @@
   }
 
   @include e(expanded-cell) {
-    padding: 20px 50px;
-    background-color: $--color-black;
-    box-shadow: inset 0 2px 0 #f4f4f4;
+    background-color: $--color-white;
+
+    // 纯属为了增加权重
+    &[class*=cell] {
+      padding: 20px 50px;
+    }
 
     &:hover {
-      background-color: $--color-black !important;
+      background-color: $--table-row-hover-background !important;
     }
   }
 
@@ -99,18 +76,24 @@
     border-right: 0;
     border-bottom: 0;
 
-    & th.gutter, td.gutter {
+    th.gutter, td.gutter {
       border-right-width: 1px;
     }
   }
 
-  & th {
-    white-space: nowrap;
-    overflow: hidden;
+  thead {
+    color: $--table-header-color;
+    font-weight: 500;
+
+    &.is-group {
+      th {
+        background: $--background-color-base;
+      }
+    }
   }
 
-  & th, td {
-    height: 40px;
+  th, td {
+    padding: 12px 0;
     min-width: 0;
     box-sizing: border-box;
     text-overflow: ellipsis;
@@ -128,19 +111,154 @@
     @include when(right) {
       text-align: right;
     }
+
+    &.gutter {
+      width: 15px;
+      border-right-width: 0;
+      border-bottom-width: 0;
+      padding: 0;
+    }
+
+    &.is-hidden {
+      > * {
+        visibility: hidden;
+      }
+    }
   }
 
-  & th.is-leaf, td {
-    border-bottom: 1px solid $--table-border-color;
+  tr {
+    background-color: $--color-white;
+
+    input[type="checkbox"] {
+      margin: 0;
+    }
   }
 
+  th.is-leaf, td {
+    border-bottom: $--table-border;
+  }
+
+  th {
+    white-space: nowrap;
+    overflow: hidden;
+    user-select: none;
+    text-align: left;
+
+    div {
+      display: inline-block;
+      padding-left: 10px;
+      padding-right: 10px;
+      line-height: 40px;
+      box-sizing: border-box;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    > .cell {
+      position: relative;
+      word-wrap: normal;
+      text-overflow: ellipsis;
+      display: inline-block;
+      vertical-align: middle;
+      width: 100%;
+      box-sizing: border-box;
+
+      &.highlight {
+        color: $--color-primary;
+      }
+    }
+
+    &.required > div::before {
+      display: inline-block;
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ff4d51;
+      margin-right: 5px;
+      vertical-align: middle;
+    }
+  }
+
+  td {
+    div {
+      box-sizing: border-box;
+    }
+
+    &.gutter {
+      width: 0;
+    }
+  }
+
+  .cell {
+    box-sizing: border-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    word-break: break-all;
+    line-height: 23px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    &.el-tooltip {
+      white-space: nowrap;
+      min-width: 50px;
+    }
+  }
+
+  // 拥有多级表头
+  @include m((group, border)) {
+    border: $--table-border;
+
+    @include share-rule(border-pseudo) {
+      content: '';
+      position: absolute;
+      background-color: $--border-color-lighter;
+      z-index: 1;
+    }
+
+    // 表格右部伪 border
+    &::after {
+      @include extend-rule(border-pseudo);
+      top: 0;
+      right: 0;
+      width: 1px;
+      height: 100%;
+    }
+  }
+
+  // 表格底部伪 border，总是有的
+  &::before {
+    @include extend-rule(border-pseudo);
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+  }
+
+  // table--border
   @include m(border) {
-    & th, td {
-      border-right: 1px solid $--table-border-color;
+    border-right: none;
+    border-bottom: none;
+
+    th, td {
+      border-right: $--table-border;
+    }
+
+    .has-gutter {
+      th:nth-last-of-type(2), td:nth-last-of-type(2) {
+        border-right: none;
+      }
+    }
+
+    th.gutter:last-of-type {
+      border-bottom: $--table-border;
+      border-bottom-width: 1px;
     }
 
     & th {
-      border-bottom: 1px solid $--table-border-color;
+      border-bottom: $--table-border;
     }
   }
 
@@ -148,32 +266,12 @@
     visibility: hidden;
   }
 
-  & th {
-    background-color: $--table-header-background;
-    text-align: left;
-  }
-
-  & th > div {
-    display: inline-block;
-    padding-left: 18px;
-    padding-right: 18px;
-    line-height: 40px;
-    box-sizing: border-box;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-
-  & td > div {
-    box-sizing: border-box;
-  }
-
   @include e((fixed, fixed-right)) {
     position: absolute;
     top: 0;
     left: 0;
-    box-shadow: 1px 0 8px #d3d4d6;
     overflow-x: hidden;
+    box-shadow: $--table-fixed-box-shadow;
 
     &::before {
       content: '';
@@ -182,7 +280,7 @@
       bottom: 0;
       width: 100%;
       height: 1px;
-      background-color: $--table-border-color;
+      background-color: $--border-color-lighter;
       z-index: 4;
     }
   }
@@ -191,16 +289,14 @@
     position: absolute;
     top: -1px;
     right: 0;
-    background-color: $--table-header-background;
-    border-bottom: 1px solid $--table-border-color;
+    background-color: $--color-white;
+    border-bottom: $--table-border;
   }
 
   @include e(fixed-right) {
     top: 0;
     left: auto;
     right: 0;
-
-    box-shadow: -1px 0 8px #d3d4d6;
 
     .el-table__fixed-header-wrapper,
     .el-table__fixed-body-wrapper,
@@ -215,11 +311,6 @@
     left: 0;
     top: 0;
     z-index: 3;
-
-    & thead div {
-      background-color: $--table-header-background;
-      color: $--table-text-color;
-    }
   }
 
   @include e(fixed-footer-wrapper) {
@@ -229,8 +320,8 @@
     z-index: 3;
 
     & tbody td {
-      border-top: 1px solid $--table-border-color;
-      background-color: $--table-footer-background;
+      border-top: $--table-border;
+      background-color: $--table-row-hover-background;
       color: $--table-text-color;
     }
   }
@@ -250,7 +341,7 @@
   @include e(footer-wrapper) {
     margin-top: -1px;
     td {
-      border-top: 1px solid $--table-border-color;
+      border-top: $--table-border;
     }
   }
 
@@ -261,13 +352,8 @@
   @include e((header-wrapper, footer-wrapper)) {
     overflow: hidden;
 
-    & thead div {
-      background-color: $--table-header-background;
-      color: $--table-text-color;
-    }
-
     & tbody td {
-      background-color: $--table-footer-background;
+      background-color: $--table-row-hover-background;
       color: $--table-text-color;
     }
   }
@@ -275,115 +361,63 @@
   @include e(body-wrapper) {
     overflow: auto;
     position: relative;
-  }
 
-  & th.required > div::before {
-    display: inline-block;
-    content: "";
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #ff4d51;
-    margin-right: 5px;
-    vertical-align: middle;
-  }
+    @include when(scroll-left) {
+      ~ .el-table__fixed {
+        box-shadow: none;
+      }
+    }
 
-  & th > .cell {
-    position: relative;
-    word-wrap: normal;
-    text-overflow: ellipsis;
-    display: inline-block;
-    line-height: 30px;
-    vertical-align: middle;
-    width: 100%;
-    box-sizing: border-box;
+    @include when(scroll-right) {
+      ~ .el-table__fixed-right {
+        box-shadow: none;
+      }
+    }
 
-    &.highlight {
-      color: $--color-primary;
+    .el-table--border {
+      @include when(scroll-right) {
+        ~ .el-table__fixed-right {
+          border-left: $--table-border;
+        }
+      }
+
+      @include when(scroll-left) {
+        ~ .el-table__fixed {
+          border-right: $--table-border;
+        }
+      }
     }
   }
 
-  & .caret-wrapper {
+  .caret-wrapper {
     position: relative;
+    display: inline-flex;
+    align-items: center;
+    height: 13px;
+    width: 24px;
     cursor: pointer;
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 5px;
-    margin-top: -2px;
-    width: 16px;
-    height: 30px;
     overflow: initial;
   }
 
-  & .sort-caret {
-    display: inline-block;
-    width: 0;
-    height: 0;
-    border: 0;
-    content: "";
-    position: absolute;
-    left: 3px;
-    z-index: 2;
-
-    &.ascending {
-      top: 9px;
-      border-top: none;
-      border-right: 5px solid transparent;
-      border-bottom: 5px solid $--color-black;
-      border-left: 5px solid transparent;
-    }
-
-    &.descending {
-      bottom: 9px;
-      border-top: 5px solid $--color-black;
-      border-right: 5px solid transparent;
-      border-bottom: none;
-      border-left: 5px solid transparent;
-    }
-  }
-
-  & .ascending .sort-caret.ascending {
-    border-bottom-color: $--color-black;
-  }
-
-  & .descending .sort-caret.descending {
-    border-top-color: $--color-black;
-  }
-
-  & th.gutter, td.gutter {
-    width: 15px;
-    border-right-width: 0;
-    border-bottom-width: 0;
-    padding: 0;
-  }
-
-  & td.gutter {
-    width: 0;
-  }
-
-  & td.is-hidden, th.is-hidden {
-    > * {
-      visibility: hidden;
-    }
-  }
-
-  & .cell {
-    box-sizing: border-box;
+  .sort-caret {
+    color: $--icon-color-base;
+    width: 14px;
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
-    word-break: break-all;
-    line-height: 24px;
-    padding-left: 18px;
-    padding-right: 18px;
+    font-size: 13px;
   }
 
-  & tr input[type="checkbox"] {
-    margin: 0;
+  .ascending .sort-caret.ascending {
+    color: $--color-primary;
   }
 
-  & tr {
-    background-color: $--color-white;
+  .descending .sort-caret.descending {
+    color: $--color-primary;
+  }
+
+  .hidden-columns {
+    visibility: hidden;
+    position: absolute;
+    z-index: -1;
   }
 
   @include m(striped) {
@@ -391,11 +425,10 @@
       & tr.el-table__row--striped {
         td {
           background: #FAFAFA;
-          background-clip: padding-box;
         }
 
         &.current-row td {
-          background: color($--color-primary tint(92%));
+          background-color: $--table-current-row-background;
         }
       }
     }
@@ -406,14 +439,14 @@
       &, &.el-table__row--striped {
         &, &.current-row {
           > td {
-            background-color: $--color-black;
+            background-color: $--table-current-row-background;
           }
         }
       }
     }
 
     tr.current-row > td {
-      background: color($--color-primary tint(92%));
+      background-color: $--table-current-row-background;
     }
   }
 
@@ -423,24 +456,19 @@
     top: 0;
     bottom: 0;
     width: 0;
-    border-left: 1px solid $--table-border-color;
+    border-left: $--table-border;
     z-index: 10;
-  }
-
-  & .hidden-columns {
-    visibility: hidden;
-    position: absolute;
-    z-index: -1;
   }
 
   @include e(column-filter-trigger) {
     display: inline-block;
     line-height: 34px;
-    margin-left: 5px;
     cursor: pointer;
 
     & i {
-      color: $--color-black;
+      color: $--color-info;
+      font-size: 12px;
+      transform: scale(.75);
     }
   }
 
@@ -452,8 +480,7 @@
 
   @include m(enable-row-hover) {
     .el-table__body tr:hover > td {
-      background-color: $--color-black;
-      background-clip: padding-box;
+      background-color: $--table-row-hover-background;
     }
   }
 

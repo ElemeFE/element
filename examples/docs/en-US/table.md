@@ -561,7 +561,6 @@ When there are too many rows, you can use a fixed header.
   <el-table
     :data="tableData3"
     height="250"
-    border
     style="width: 100%">
     <el-table-column
       prop="date"
@@ -629,7 +628,6 @@ When there are too many columns, you can fix some of them.
 <template>
   <el-table
     :data="tableData"
-    border
     style="width: 100%">
     <el-table-column
       fixed
@@ -732,7 +730,6 @@ When you have huge chunks of data to put in a table, you can fix the header and 
 <template>
   <el-table
     :data="tableData3"
-    border
     style="width: 100%"
     height="250">
     <el-table-column
@@ -839,7 +836,6 @@ When the the data is dynamically changed, you might want the table to have a max
 <template>
   <el-table
     :data="tableData4"
-    border
     style="width: 100%"
     max-height="250">
     <el-table-column
@@ -964,7 +960,6 @@ When the data structure is complex, you can use group header to show the data hi
 <template>
   <el-table
     :data="tableData3"
-    border
     style="width: 100%">
     <el-table-column
       prop="date"
@@ -1150,7 +1145,6 @@ You can also select multiple rows.
   <el-table
     ref="multipleTable"
     :data="tableData3"
-    border
     style="width: 100%"
     @selection-change="handleSelectionChange">
     <el-table-column
@@ -1244,7 +1238,6 @@ Sort the data to find or compare data quickly.
 <template>
   <el-table
     :data="tableData"
-    border
     :default-sort = "{prop: 'date', order: 'descending'}"
     style="width: 100%">
     <el-table-column
@@ -1308,7 +1301,6 @@ Filter the table to find desired data.
 <template>
   <el-table
     :data="tableData"
-    border
     style="width: 100%">
     <el-table-column
       prop="date"
@@ -1390,7 +1382,6 @@ Customize table column so it can be integrated with other components.
 <template>
   <el-table
     :data="tableData"
-    border
     style="width: 100%">
     <el-table-column
       label="Date"

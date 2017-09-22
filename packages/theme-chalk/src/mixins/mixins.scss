@@ -17,7 +17,7 @@
  -------------------------- */
 @mixin scroll-bar {
   $--scrollbar-thumb-background: #b4bccc;
-  $--scrollbar-track-background: #edeff5;
+  $--scrollbar-track-background: #fff;
 
   &::-webkit-scrollbar {
     z-index: 11;
@@ -30,6 +30,7 @@
 
     &-thumb {
       border-radius: 5px;
+      width: 6px;
       background: $--scrollbar-thumb-background;
     }
 
@@ -39,6 +40,11 @@
 
     &-track {
       background: $--scrollbar-track-background;
+
+      &-piece {
+        background: $--scrollbar-track-background;
+        width: 6px;
+      }
     }
   }
 }

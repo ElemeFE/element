@@ -467,13 +467,14 @@ $--dialog-padding-primary: 15px;
 
 /* Table
 -------------------------- */
-$--table-border-color: $--border-color-lighter;
+$--table-border:  1px solid $--border-color-lighter;
 $--table-text-color: $--color-text-regular;
 $--table-header-color: $--color-text-secondary;
 $--table-row-hover-background: $--background-color-base;
-$--table-current-row-background: $--background-color-base;
+$--table-current-row-background: $--color-primary-light-9;
 $--table-header-background: $--color-text-secondary;
 $--table-footer-background: $--color-text-placeholder;
+$--table-fixed-box-shadow: 0 0 10px rgba(0, 0, 0, .12);
 
 /* Pagination
 -------------------------- */

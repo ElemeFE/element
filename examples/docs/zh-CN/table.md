@@ -769,7 +769,6 @@
 <template>
   <el-table
     :data="tableData3"
-    border
     style="width: 100%"
     height="250">
     <el-table-column
@@ -876,7 +875,6 @@
 <template>
   <el-table
     :data="tableData4"
-    border
     style="width: 100%"
     max-height="250">
     <el-table-column
@@ -1001,7 +999,6 @@
 <template>
   <el-table
     :data="tableData3"
-    border
     style="width: 100%">
     <el-table-column
       prop="date"
@@ -1187,7 +1184,6 @@
   <el-table
     ref="multipleTable"
     :data="tableData3"
-    border
     tooltip-effect="dark"
     style="width: 100%"
     @selection-change="handleSelectionChange">
@@ -1282,7 +1278,6 @@
 <template>
   <el-table
     :data="tableData"
-    border
     style="width: 100%"
     :default-sort = "{prop: 'date', order: 'descending'}"
     >
@@ -1348,7 +1343,6 @@
 <template>
   <el-table
     :data="tableData"
-    border
     style="width: 100%">
     <el-table-column
       prop="date"
@@ -1430,7 +1424,6 @@
 <template>
   <el-table
     :data="tableData"
-    border
     style="width: 100%">
     <el-table-column
       label="日期"

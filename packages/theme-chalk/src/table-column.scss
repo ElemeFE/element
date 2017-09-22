@@ -13,7 +13,7 @@
 }
 
 @include b(table-filter) {
-  border: solid 1px $--color-black;
+  border: solid 1px $--border-color-lighter;
   border-radius: 2px;
   background-color: $--color-white;
   box-shadow: $--dropdown-menu-box-shadow;
@@ -50,15 +50,15 @@
   }
 
   @include e(bottom) {
-    border-top: 1px solid $--color-black;
+    border-top: 1px solid $--border-color-lighter;
     padding: 8px;
 
     button {
       background: transparent;
       border: none;
-      color: $--color-black;
+      color: $--color-text-regular;
       cursor: pointer;
-      font-size: $--font-size-base;
+      font-size: $--font-size-small;
       padding: 0 3px;
 
       &:hover {
@@ -70,7 +70,7 @@
       }
 
       &.is-disabled {
-        color: $--color-black;
+        color: $--disabled-color-base;
         cursor: not-allowed;
       }
     }

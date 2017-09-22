@@ -3,8 +3,9 @@
     :class="{
       'el-table--fit': fit,
       'el-table--striped': stripe,
-      'el-table--border': border,
+      'el-table--border': border || isGroup,
       'el-table--hidden': isHidden,
+      'el-table--group': isGroup,
       'el-table--fluid-height': maxHeight,
       'el-table--enable-row-hover': !store.states.isComplex,
       'el-table--enable-row-transition': (store.states.data || []).length !== 0 && (store.states.data || []).length < 100
@@ -23,6 +24,7 @@
     <div
       class="el-table__body-wrapper"
       ref="bodyWrapper"
+      :class="[`is-scroll-${scrollPosition}`]"
       :style="[bodyHeight]">
       <table-body
         :context="context"
@@ -63,7 +65,9 @@
           :layout="layout"
           :style="{ width: layout.fixedWidth ? layout.fixedWidth + 'px' : '' }"></table-header>
       </div>
-      <div class="el-table__fixed-body-wrapper" ref="fixedBodyWrapper"
+      <div
+        class="el-table__fixed-body-wrapper"
+        ref="fixedBodyWrapper"
         :style="[
           { top: layout.headerHeight + 'px' },
           fixedBodyHeight
@@ -94,7 +98,7 @@
       v-if="rightFixedColumns.length > 0"
       :style="[
         { width: layout.rightFixedWidth ? layout.rightFixedWidth + 'px' : '' },
-        { right: layout.scrollY ? (border ? layout.gutterWidth : (layout.gutterWidth || 1)) + 'px' : '' },
+        { right: layout.scrollY ? (border ? layout.gutterWidth : (layout.gutterWidth || 0)) + 'px' : '' },
         fixedHeight
       ]">
       <div class="el-table__fixed-header-wrapper" ref="rightFixedHeaderWrapper" v-if="showHeader">
@@ -249,11 +253,21 @@
       bindEvents() {
         const { headerWrapper, footerWrapper } = this.$refs;
         const refs = this.$refs;
+        let self = this;
         this.bodyWrapper.addEventListener('scroll', function() {
           if (headerWrapper) headerWrapper.scrollLeft = this.scrollLeft;
           if (footerWrapper) footerWrapper.scrollLeft = this.scrollLeft;
           if (refs.fixedBodyWrapper) refs.fixedBodyWrapper.scrollTop = this.scrollTop;
           if (refs.rightFixedBodyWrapper) refs.rightFixedBodyWrapper.scrollTop = this.scrollTop;
+          const maxScrollLeftPosition = this.scrollWidth - this.offsetWidth - 1;
+          const scrollLeft = this.scrollLeft;
+          if (scrollLeft >= maxScrollLeftPosition) {
+            self.scrollPosition = 'right';
+          } else if (scrollLeft === 0) {
+            self.scrollPosition = 'left';
+          } else {
+            self.scrollPosition = 'middle';
+          }
         });
 
         const scrollBodyWrapper = event => {
@@ -459,7 +473,10 @@
         layout,
         isHidden: false,
         renderExpanded: null,
-        resizeProxyVisible: false
+        resizeProxyVisible: false,
+        // 是否拥有多级表头
+        isGroup: false,
+        scrollPosition: 'left'
       };
     }
   };
