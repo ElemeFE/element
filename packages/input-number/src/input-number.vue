@@ -3,7 +3,8 @@
     :class="[
       size ? 'el-input-number--' + size : '',
       { 'is-disabled': disabled },
-      { 'is-without-controls': !controls}
+      { 'is-without-controls': !controls },
+      { 'is-controls-right': controlsAtRight }
     ]"
   >
     <span
@@ -12,7 +13,7 @@
       :class="{'is-disabled': minDisabled}"
       v-repeat-click="decrease"
     >
-      <i class="el-icon-minus"></i>
+      <i :class="`el-icon-${controlsAtRight ? 'arrow-down' : 'minus'}`"></i>
     </span>
     <span
       v-if="controls"
@@ -20,7 +21,7 @@
       :class="{'is-disabled': maxDisabled}"
       v-repeat-click="increase"
     >
-      <i class="el-icon-plus"></i>
+      <i :class="`el-icon-${controlsAtRight ? 'arrow-up' : 'plus'}`"></i>
     </span>
     <el-input
       :value="currentValue"
@@ -102,6 +103,10 @@
         type: Boolean,
         default: true
       },
+      controlsPosition: {
+        type: String,
+        default: ''
+      },
       debounce: {
         type: Number,
         default: 300
@@ -136,6 +141,9 @@
       precision() {
         const { value, step, getPrecision } = this;
         return Math.max(getPrecision(value), getPrecision(step));
+      },
+      controlsAtRight() {
+        return this.controlsPosition === 'right';
       }
     },
     methods: {

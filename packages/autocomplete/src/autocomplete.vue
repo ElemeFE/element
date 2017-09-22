@@ -23,6 +23,7 @@
     </el-input>
     <el-autocomplete-suggestions
       :props="props"
+      visible-arrow
       :class="[popperClass ? popperClass : '']"
       ref="suggestions"
       :suggestions="suggestions"

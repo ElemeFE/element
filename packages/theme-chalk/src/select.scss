@@ -10,7 +10,6 @@
 @include b(select) {
   display: inline-block;
   position: relative;
-  min-width: 224px;
 
   &:hover {
     .el-input__inner {
@@ -18,7 +17,7 @@
     }
   }
 
-  & .el-input__inner {
+  .el-input__inner {
     cursor: pointer;
     padding-right: 35px;
 
@@ -27,7 +26,7 @@
     }
   }
 
-  & .el-input {
+  .el-input {
     & .el-select__caret {
       color: $--select-input-color;
       font-size: $--select-input-font-size;
@@ -65,7 +64,7 @@
     }
   }
 
-  & > .el-input {
+  > .el-input {
     display: block;
   }
 
@@ -109,11 +108,11 @@
     transform: translateY(-50%);
   }
 
-  & .el-tag__close {
+  .el-tag__close {
     margin-top: -2px;
   }
 
-  & .el-tag {
+  .el-tag {
     height: $--select-tag-height;
     line-height: $--select-tag-height;
     box-sizing: border-box;

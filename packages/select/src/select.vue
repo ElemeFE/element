@@ -1,6 +1,7 @@
 <template>
   <div
     class="el-select"
+    :class="[size ? 'el-select--' + size : '']"
     v-clickoutside="handleClose">
     <div
       class="el-select__tags"
@@ -114,9 +115,9 @@
   import NavigationMixin from './navigation-mixin';
 
   const sizeMap = {
-    'large': 42,
-    'small': 30,
-    'mini': 22
+    'medium': 36,
+    'small': 32,
+    'mini': 28
   };
 
   const valueEquals = (a, b) => {
@@ -521,7 +522,7 @@
           if (!this.$refs.reference) return;
           let inputChildNodes = this.$refs.reference.$el.childNodes;
           let input = [].filter.call(inputChildNodes, item => item.tagName === 'INPUT')[0];
-          input.style.height = Math.max(this.$refs.tags.clientHeight + 6, sizeMap[this.size] || 36) + 'px';
+          input.style.height = Math.max(this.$refs.tags.clientHeight + 6, sizeMap[this.size] || 40) + 'px';
           if (this.visible && this.emptyText !== false) {
             this.broadcast('ElSelectDropdown', 'updatePopper');
           }

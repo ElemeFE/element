@@ -5,7 +5,7 @@
 @include b(cascader) {
   display: inline-block;
   position: relative;
-  min-width: 224px;
+  font-size: $--font-size-base;
 
   .el-input,
   .el-input__inner {
@@ -43,8 +43,8 @@
     left: 0;
     top: 0;
     height: 100%;
-    line-height: 36px;
-    padding: 0 25px 0 10px;
+    line-height: 40px;
+    padding: 0 25px 0 15px;
     color: $--input-color;
     width: 100%;
     white-space: nowrap;
@@ -52,8 +52,8 @@
     overflow: hidden;
     box-sizing: border-box;
     cursor: pointer;
-    font-size: $--font-size-small;
     text-align: left;
+    font-size: inherit;
 
     span {
       color: $--color-black;
@@ -63,17 +63,27 @@
   @include m(medium) {
     font-size: $--input-medium-font-size;
 
-    .el-cascader__label {
-      line-height: #{$--input-medium-height - 2};
+    @include e(label) {
+      line-height: #{$--input-medium-height };
     }
   }
+
   @include m(small) {
     font-size: $--input-small-font-size;
 
-    .el-cascader__label {
-      line-height: #{$--input-small-height - 2};
+    @include e(label) {
+      line-height: #{$--input-small-height };
     }
   }
+
+  @include m(mini) {
+    font-size: $--input-mini-font-size;
+
+    @include e(label) {
+      line-height: #{$--input-mini-height};
+    }
+  }
+
   @include when(disabled) {
     .el-cascader__label {
       z-index: #{$--index-normal + 1};
@@ -92,8 +102,8 @@
   border-radius: $--border-radius-small;
   box-shadow: $--select-dropdown-shadow;
 
-  &.el-popper .popper__arrow {
-    left: 24px !important;
+  .popper__arrow {
+    transform: translateX(-400%);
   }
 }
 
