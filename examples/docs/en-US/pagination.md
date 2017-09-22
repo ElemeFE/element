@@ -206,6 +206,8 @@ Add more modules based on your scenario.
 | layout | layout of Pagination, elements separated with a comma | string | `sizes`, `prev`, `pager`, `next`, `jumper`, `->`, `total`, `slot` | 'prev, pager, next, jumper, ->, total'  |
 | page-sizes | options of item count per page | number[] | — |  [10, 20, 30, 40, 50, 100] |
 | popper-class | custom class name for the page size Select's dropdown | string | — | — |
+| prev-text | text for the prev button | string | — | — |
+| next-text | text for the next button | string | — | — |
 
 ### Events
 | Event Name | Description | Parameters |

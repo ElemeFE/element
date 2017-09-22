@@ -7,25 +7,40 @@
   white-space: nowrap;
   padding: 2px 5px;
   color: $--pagination-color;
+  font-weight: bold;
   @include utils-clearfix;
 
   span,
   button {
     display: inline-block;
     font-size: $--pagination-font-size;
-    min-width: $--pagination-button-size;
-    height: $--pagination-button-size;
-    line-height: $--pagination-button-size;
+    min-width: $--pagination-button-width;
+    height: $--pagination-button-height;
+    line-height: $--pagination-button-height;
     vertical-align: top;
     box-sizing: border-box;
   }
 
+  .el-input__inner {
+    font-weight: bold;
+  }
+
+  // pagesize 的下拉 icon
+  .el-input__suffix {
+    right: -3px;
+  }
+
   .el-select .el-input {
-    width: 110px;
-    input {
+    width: 100px;
+    margin: 0 5px;
+    .el-input__icon {
+      width: 24px;
+    }
+
+    .el-input__inner {
       padding-right: 25px;
-      border-radius: $--border-radius-small;
-      height: 28px;
+      border-radius: $--pagination-border-radius;
+      height: $--pagination-button-height;
     }
   }
 
@@ -54,7 +69,6 @@
     background: center center no-repeat;
     background-size: 16px;
     background-color: $--pagination-fill;
-    border: 1px solid $--pagination-border-color;
     cursor: pointer;
     margin: 0;
     color: $--pagination-button-color;
@@ -66,13 +80,11 @@
   }
 
   .btn-prev {
-    border-radius: $--pagination-border-radius 0 0 $--pagination-border-radius;
-    border-right: 0;
+    padding-right: 12px;
   }
 
   .btn-next {
-    border-radius: 0 $--pagination-border-radius $--pagination-border-radius 0;
-    border-left: 0;
+    padding-left: 12px;    
   }
 
   @include m(small) {
@@ -90,18 +102,13 @@
     .arrow.disabled {
       visibility: hidden;
     }
-
-    .el-pager li {
-      border-radius: $--pagination-border-radius;
-    }
   }
 
   @include e(sizes) {
     margin: 0 10px 0 0;
 
     .el-input .el-input__inner {
-      font-size: 13px;
-      border-color: $--pagination-border-color;
+      font-size: $--pagination-font-size;
 
       &:hover {
         border-color: $--pagination-hover-fill;
@@ -109,12 +116,16 @@
     }
   }
 
-  @include e(jump) {
-    margin-left: 10px;
+  @include e(total) {
+    margin-right: 10px;
+
+    & + .el-pagination__sizes {
+      margin-left: -10px;
+    }
   }
 
-  @include e(total) {
-    margin: 0 10px;
+  @include e(jump) {
+    margin-left: 24px;
   }
 
   @include e(rightwrapper) {
@@ -122,27 +133,29 @@
   }
 
   @include e(editor) {
-    border: 1px solid $--pagination-border-color;
-    border-radius: $--pagination-border-radius;
     line-height: 18px;
-    padding: 4px 2px;
-    width: 30px;
+    padding: 0 2px;
+    height: $--pagination-button-height;
+      
     text-align: center;
-    margin: 0 6px;
+    margin: 0 2px;
     box-sizing: border-box;
-    transition: border .3s;
+    border-radius: $--pagination-border-radius;
     -moz-appearance: textfield;
 
-    &::-webkit-inner-spin-button,
-    &::-webkit-outer-spin-button {
+    &.el-input {
+      width: 50px;
+    }
+
+    .el-input__inner {
+      height: $--pagination-button-height;
+    }
+
+    .el-input__inner::-webkit-inner-spin-button,
+    .el-input__inner::-webkit-outer-spin-button {
       -webkit-appearance: none;
       margin: 0;
     }
-
-    &:focus {
-      outline: none;
-      border-color: $--pagination-hover-fill;
-    };
   }
 }
 
@@ -155,25 +168,23 @@
   padding: 0;
   margin: 0;
 
+  .el-icon-more::before {
+    vertical-align: -4px;
+  }
+
   li {
     padding: 0 4px;
-    border: 1px solid $--pagination-border-color;
-    border-right: 0;
     background: $--pagination-fill;
     vertical-align: top;
     display: inline-block;
     font-size: $--pagination-font-size;
-    min-width: $--pagination-button-size;
-    height: $--pagination-button-size;
-    line-height: $--pagination-button-size;
+    min-width: $--pagination-button-width;
+    height: $--pagination-button-height;
+    line-height: $--pagination-button-height;
     cursor: pointer;
     box-sizing: border-box;
     text-align: center;
     margin: 0;
-
-    &:last-child {
-      border-right: 1px solid $--pagination-border-color;
-    }
 
     &.btn-quicknext,
     &.btn-quickprev {
@@ -191,7 +202,6 @@
 
     &.active + li {
       border-left: 0;
-      padding-left: 5px;
     }
 
     &:hover {
@@ -199,9 +209,7 @@
     }
 
     &.active {
-      border-color: $--pagination-hover-fill;
-      background-color: $--pagination-hover-fill;
-      color: $--pagination-hover-color;
+      color: $--pagination-hover-fill;
       cursor: default;
     }
   }

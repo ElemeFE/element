@@ -478,15 +478,15 @@ $--table-fixed-box-shadow: 0 0 10px rgba(0, 0, 0, .12);
 
 /* Pagination
 -------------------------- */
-$--pagination-font-size: 13px;
+$--pagination-font-size: 14px;
 $--pagination-fill: $--color-white;
-$--pagination-color: $--link-color;
-$--pagination-border-radius: 2px;
-$--pagination-button-color: $--color-text-secondary;
-$--pagination-button-size: 28px;
-$--pagination-button-disabled-color: #e4e4e4;
+$--pagination-color: $--color-text-primary;
+$--pagination-border-radius: 3px;
+$--pagination-button-color: $--color-text-primary;
+$--pagination-button-width: 35.5px;
+$--pagination-button-height: 28px;
+$--pagination-button-disabled-color: $--color-text-placeholder;
 $--pagination-button-disabled-fill: $--color-white;
-$--pagination-border-color: $--disabled-border-base;
 $--pagination-hover-fill: $--color-primary;
 $--pagination-hover-color: $--color-white;
 

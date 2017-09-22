@@ -23,6 +23,7 @@
     padding: 3px 10px;
     transition: $--border-transition-base;
     width: 100%;
+    text-align: inherit;
 
     &::placeholder {
       color: $--input-placeholder-color;
