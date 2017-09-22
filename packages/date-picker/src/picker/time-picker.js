@@ -66,8 +66,14 @@ export default {
       }
 
       if (keyCode === 13) {
-        this.picker.handleConfirm();
-        this.$refs.reference.$refs.input.blur();
+        !this.isRange && this.picker.handleConfirm();
+        if (this.$refs.reference.$refs) {
+          this.$refs.reference.$refs.input.blur();
+        } else {
+          [].slice.call(this.$refs.reference.querySelectorAll('input')).forEach(input => {
+            input.blur();
+          });
+        }
         event.preventDefault();
         return;
       }

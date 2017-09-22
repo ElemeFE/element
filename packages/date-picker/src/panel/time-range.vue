@@ -5,7 +5,6 @@
     @after-leave="$emit('dodestroy')">
     <div
       v-show="visible"
-      :style="{ width: width + 'px' }"
       class="el-time-range-picker el-picker-panel el-popper"
       :class="popperClass">
       <div class="el-time-range-picker__content">
@@ -118,7 +117,6 @@
         minSeconds: time.minTime.getSeconds(),
         format: 'HH:mm:ss',
         visible: false,
-        width: 0,
         selectionRange: [0, 2]
       };
     },
@@ -208,12 +206,12 @@
       },
 
       setMinSelectionRange(start, end) {
-        this.$emit('select-range', start, end);
+        this.$emit('select-range', start, end, 'min');
         this.selectionRange = [start, end];
       },
 
       setMaxSelectionRange(start, end) {
-        this.$emit('select-range', start + this.offset, end + this.offset);
+        this.$emit('select-range', start, end, 'max');
         this.selectionRange = [start + this.offset, end + this.offset];
       },
 

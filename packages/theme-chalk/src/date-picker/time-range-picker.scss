@@ -1,7 +1,7 @@
 @import "../common/var";
 
 @include b(time-range-picker) {
-  min-width: 354px;
+  width: 354px;
   overflow: visible;
 
   @include e(content) {

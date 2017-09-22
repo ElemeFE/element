@@ -3,22 +3,18 @@
 @import "./picker-panel.scss";
 
 @include b(date-picker) {
-  min-width: 254px;
+  width: 322px;
 
   &.has-sidebar.has-time {
-    min-width: 434px;
+    width: 434px;
   }
 
   &.has-sidebar {
-    min-width: 370px;
-  }
-
-  &.has-time {
-    min-width: 324px;
+    width: 438px;
   }
 
   .el-picker-panel__content {
-    min-width: 224px;
+    width: 292px;
   }
 
   table {
@@ -45,6 +41,16 @@
   @include e(header) {
     margin: 12px;
     text-align: center;
+
+    @include m(bordered) {
+      margin-bottom: 0;
+      padding-bottom: 12px;
+      border-bottom: solid 1px $--border-color-lighter;
+
+      & + .el-picker-panel__content {
+        margin-top: 0;
+      }
+    }
   }
 
   @include e(header-label) {
@@ -53,6 +59,7 @@
     line-height: 22px;
     text-align: center;
     cursor: pointer;
+    color: $--color-text-regular;
 
     &:hover {
       color: $--datepicker-text-hover-color;

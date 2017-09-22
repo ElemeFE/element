@@ -215,7 +215,9 @@ Picking a date range is supported.
     <el-date-picker
       v-model="value6"
       type="daterange"
-      placeholder="Pick a range">
+      range-separator="To"
+      start-placeholder="Start date"
+      end-placeholder="End date">
     </el-date-picker>
   </div>
   <div class="block">
@@ -224,7 +226,9 @@ Picking a date range is supported.
       v-model="value7"
       type="daterange"
       align="right"
-      placeholder="Pick a range"
+      range-separator="To"
+      start-placeholder="Start date"
+      end-placeholder="End date"
       :picker-options="pickerOptions2">
     </el-date-picker>
   </div>
@@ -279,13 +283,15 @@ Picking a date range is supported.
 |size | size of Input | string | large/small/mini | — |
 | editable | whether the input is editable | boolean | — | true |
 | clearable | Whether to show clear button | boolean | — | true |
-| placeholder | placeholder | string | — | — |
+| placeholder | placeholder in non-range mode | string | — | — |
+| start-placeholder | placeholder for the start date in range mode | string | — | — |
+| end-placeholder | placeholder for the end date in range mode | string | — | — |
 | type | type of the picker | string | year/month/date/datetime/ week/datetimerange/daterange | date |
 | format | format of the picker | string | year `yyyy` month `MM` day `dd`, hour `HH`, minute `mm`, second `ss` | yyyy-MM-dd |
 | align | alignment | left/center/right | left |
 | popper-class | custom class name for DatePicker's dropdown | string | — | — |
 | picker-options | additional options, check the table below | object | — | {} |
-| range-separator | range separator | string | - | ' - ' |
+| range-separator | range separator | string | - | '-' |
 | default-value | optional default time of the picker | Date | anything accepted by `new Date()` | - |
 |name | same as `name` in native input | string | — | — |
 

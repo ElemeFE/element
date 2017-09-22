@@ -236,9 +236,7 @@ describe('TimePicker(range)', () => {
     }, true);
     const input = vm.$el.querySelector('input');
 
-    input.blur();
-    input.focus();
-    input.blur();
+    input.click();
     setTimeout(done, 20);
   });
 
@@ -260,9 +258,7 @@ describe('TimePicker(range)', () => {
     }, true);
     const input = vm2.$el.querySelector('input');
 
-    input.blur();
-    input.focus();
-    input.blur();
+    input.click();
     setTimeout(() => {
       expect(vm2.picker.maxTime >= vm2.picker.minTime).to.true;
       destroyVM(vm2);

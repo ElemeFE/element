@@ -175,7 +175,9 @@ DateTimePicker is derived from DatePicker and TimePicker. For a more detailed ex
     <el-date-picker
       v-model="value3"
       type="datetimerange"
-      placeholder="Select time range">
+      range-separator="To"
+      start-placeholder="Start date"
+      end-placeholder="End date">
     </el-date-picker>
   </div>
   <div class="block">
@@ -184,7 +186,9 @@ DateTimePicker is derived from DatePicker and TimePicker. For a more detailed ex
       v-model="value4"
       type="datetimerange"
       :picker-options="pickerOptions2"
-      placeholder="Select time range"
+      range-separator="To"
+      start-placeholder="Start date"
+      end-placeholder="End date"
       align="right">
     </el-date-picker>
   </div>
@@ -238,13 +242,15 @@ DateTimePicker is derived from DatePicker and TimePicker. For a more detailed ex
 | editable | whether the input is editable | boolean | — | true |
 | clearable | Whether to show clear button | boolean | — | true |
 |size | size of Input | string | large/small/mini | — |
-| placeholder | placeholder | string | — | — |
+| placeholder | placeholder in non-range mode | string | — | — |
+| start-placeholder | placeholder for the start date in range mode | string | — | — |
+| end-placeholder | placeholder for the end date in range mode | string | — | — |
 | type | type of the picker | string | year/month/date/datetime/ week/datetimerange/daterange | date |
 | format | format of the picker | string | year `yyyy` month `MM` day `dd`, hour `HH`, minute `mm`, second `ss` | yyyy-MM-dd |
 | align | alignment | left/center/right | left |
 | popper-class | custom class name for DateTimePicker's dropdown | string | — | — |
 | picker-options | additional options, check the table below | object | — | {} |
-| range-separator | range separator | string | - | ' - ' |
+| range-separator | range separator | string | - | '-' |
 |name | same as `name` in native input | string | — | — |
 
 ### Picker Options

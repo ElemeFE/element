@@ -11,9 +11,13 @@
     cursor: pointer;
 
     &.disabled .cell {
-      background-color: #f4f4f4;
+      background-color: $--background-color-base;
       cursor: not-allowed;
-      color: #ccc;
+      color: $--color-text-placeholder;
+
+      &:hover {
+        color: $--color-text-placeholder;
+      }
     }
 
     .cell {
@@ -22,15 +26,15 @@
       display: block;
       line-height: 32px;
       color: $--datepicker-color;
+      margin: 0 auto;
 
       &:hover {
-        background-color: $--datepicker-cell-hover-color;
+        color: $--datepicker-text-hover-color;
       }
     }
 
     &.current:not(.disabled) .cell {
-      background-color: $--datepicker-active-color !important;
-      color: $--color-white;
+      color: $--datepicker-active-color;
     }
   }
 }

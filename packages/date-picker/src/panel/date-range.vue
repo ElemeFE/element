@@ -2,7 +2,6 @@
   <transition name="el-zoom-in-top" @after-leave="$emit('dodestroy')">
     <div
       v-show="visible"
-      :style="{ width: width + 'px' }"
       class="el-picker-panel el-date-range-picker el-popper"
       :class="[{
         'has-sidebar': $slots.sidebar || shortcuts,
@@ -39,7 +38,6 @@
                   @focus="minTimePickerVisible = !minTimePickerVisible"
                   @change.native="handleTimeChange($event, 'min')" />
                 <time-picker
-                  :picker-width="minPickerWidth"
                   ref="minTimePicker"
                   :date="minDate"
                   @pick="handleMinTimePick"
@@ -71,7 +69,6 @@
                   :readonly="!minDate"
                   @change.native="handleTimeChange($event, 'max')" />
                 <time-picker
-                  :picker-width="maxPickerWidth"
                   ref="maxTimePicker"
                   :date="maxDate"
                   @pick="handleMaxTimePick"
@@ -238,8 +235,6 @@
     data() {
       return {
         popperClass: '',
-        minPickerWidth: 0,
-        maxPickerWidth: 0,
         date: this.$options.defaultValue ? calcDefaultValue(this.$options.defaultValue) : new Date(),
         minDate: '',
         maxDate: '',
@@ -257,26 +252,11 @@
         firstDayOfWeek: 7,
         minTimePickerVisible: false,
         maxTimePickerVisible: false,
-        width: 0,
         format: ''
       };
     },
 
     watch: {
-      showTime(val) {
-        if (!val) return;
-        this.$nextTick(_ => {
-          const minInputElm = this.$refs.minInput.$el;
-          const maxInputElm = this.$refs.maxInput.$el;
-          if (minInputElm) {
-            this.minPickerWidth = minInputElm.getBoundingClientRect().width + 10;
-          }
-          if (maxInputElm) {
-            this.maxPickerWidth = maxInputElm.getBoundingClientRect().width + 10;
-          }
-        });
-      },
-
       minDate() {
         this.$nextTick(() => {
           if (this.maxDate && this.maxDate < this.minDate) {
@@ -429,7 +409,7 @@
         return new Date(oldDate.getTime());
       },
 
-      handleMinTimePick(value, visible, first) {
+      handleMinTimePick(value, visible, user, first) {
         this.minDate = this.minDate || new Date();
         if (value) {
           this.minDate = this.setTime(this.minDate, value);
@@ -440,7 +420,7 @@
         }
       },
 
-      handleMaxTimePick(value, visible, first) {
+      handleMaxTimePick(value, visible, user, first) {
         if (!this.maxDate) {
           const now = new Date();
           if (now >= this.minDate) {
@@ -478,9 +458,7 @@
       },
 
       handleConfirm(visible = false, user = true) {
-        if (this.minDate && this.maxDate) {
-          this.$emit('pick', [this.minDate, this.maxDate], visible, user);
-        }
+        this.$emit('pick', [this.minDate, this.maxDate], visible, user);
       },
 
       resetDate() {

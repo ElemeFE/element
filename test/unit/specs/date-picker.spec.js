@@ -302,8 +302,7 @@ describe('DatePicker', () => {
 
       const input = vm.$el.querySelector('input');
 
-      input.blur();
-      input.focus();
+      input.click();
 
       setTimeout(_ => {
         const picker = vm.$refs.compo.picker;
@@ -628,8 +627,7 @@ describe('DatePicker', () => {
     }, true);
     const input = vm.$el.querySelector('input');
 
-    input.blur();
-    input.focus();
+    input.click();
 
     setTimeout(_ => {
       const panels = vm.picker.$el.querySelectorAll('.el-date-range-picker__content');
@@ -661,8 +659,7 @@ describe('DatePicker', () => {
       }, true);
       const input = vm.$el.querySelector('input');
 
-      input.blur();
-      input.focus();
+      input.click();
 
       setTimeout(done, DELAY);
     });

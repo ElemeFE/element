@@ -6,7 +6,7 @@
   box-shadow: $--box-shadow-light;
   background: $--color-white;
   border-radius: $--border-radius-base;
-  line-height: 20px;
+  line-height: 30px;
   margin: 5px 0;
 
   @include e((body, body-wrapper)) {
@@ -44,7 +44,7 @@
     cursor: pointer;
 
     &:hover {
-      background-color: $--datepicker-cell-hover-color;
+      color: $--datepicker-text-hover-color;
     }
 
     &.active {
@@ -77,7 +77,7 @@
     background: transparent;
     cursor: pointer;
     outline: none;
-    margin-top: 3px;
+    margin-top: 8px;
 
     &:hover {
       color: $--datepicker-text-hover-color;
@@ -106,7 +106,7 @@
   border-right: 1px solid $--datepicker-inner-border-color;
   box-sizing: border-box;
   padding-top: 6px;
-  background-color: $--color-black;
+  background-color: $--color-white;
   overflow: auto;
 }
 

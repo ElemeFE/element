@@ -117,6 +117,9 @@
   <el-time-picker
     is-range
     v-model="value3"
+    range-separator="至"
+    start-placeholder="开始时间"
+    end-placeholder="结束时间"
     placeholder="选择时间范围">
   </el-time-picker>
 </template>
@@ -155,11 +158,14 @@
 | editable | 文本框可输入 | boolean | — | true |
 | clearable | 是否显示清除按钮 | boolean | — | true |
 | size          | 输入框尺寸     | string          | medium / small / mini  | — |
-| placeholder | 占位内容 | string | — | — |
+| placeholder | 非范围选择时的占位内容 | string | — | — |
+| start-placeholder | 范围选择时开始日期的占位内容 | string | — | — |
+| end-placeholder | 范围选择时开始日期的占位内容 | string | — | — |
 | value | 绑定值 | date(TimePicker) / string(TimeSelect) | — | — |
 | align | 对齐方式 | string | left / center / right | left |
 | popper-class | TimePicker 下拉框的类名 | string | — | — |
 | picker-options | 当前时间日期选择器特有的选项参考下表 | object | — | {} |
+| range-separator | 选择范围时的分隔符 | string | - | '-' |
 | name | 原生属性 | string | — | — |
 
 ### Time Select Options

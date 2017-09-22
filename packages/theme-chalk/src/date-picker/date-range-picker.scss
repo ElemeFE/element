@@ -1,18 +1,10 @@
 @import "../common/var";
 
 @include b(date-range-picker) {
-  min-width: 520px;
-
-  &.has-sidebar.has-time {
-    min-width: 766px;
-  }
+  width: 646px;
 
   &.has-sidebar {
-    min-width: 620px;
-  }
-
-  &.has-time {
-    min-width: 660px;
+    width: 756px;
   }
 
   table {

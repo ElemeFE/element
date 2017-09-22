@@ -2,9 +2,6 @@
   <transition name="el-zoom-in-top" @after-enter="handleEnter" @after-leave="handleLeave">
     <div
       v-show="visible"
-      :style="{
-        width: width + 'px'
-      }"
       class="el-picker-panel el-date-picker el-popper"
       :class="[{
         'has-sidebar': $slots.sidebar || shortcuts,
@@ -39,14 +36,16 @@
               <time-picker
                 ref="timepicker"
                 :date="date"
-                :picker-width="pickerWidth"
                 @pick="handleTimePick"
                 :visible="timePickerVisible"
                 @mounted="$refs.timepicker.format=timeFormat">
               </time-picker>
             </span>
           </div>
-          <div class="el-date-picker__header" v-show="currentView !== 'time'">
+          <div
+            class="el-date-picker__header"
+            :class="{ 'el-date-picker__header--bordered': currentView === 'year' || currentView === 'month' }"
+            v-show="currentView !== 'time'">
             <button
               type="button"
               @click="prevYear"
@@ -139,17 +138,6 @@
     mixins: [Locale],
 
     watch: {
-      showTime(val) {
-        /* istanbul ignore if */
-        if (!val) return;
-        this.$nextTick(_ => {
-          const inputElm = this.$refs.input.$el;
-          if (inputElm) {
-            this.pickerWidth = inputElm.getBoundingClientRect().width + 10;
-          }
-        });
-      },
-
       value(newVal) {
         if (!newVal) return;
         newVal = new Date(newVal);
@@ -190,7 +178,7 @@
     methods: {
       handleClear() {
         this.date = this.$options.defaultValue ? new Date(this.$options.defaultValue) : new Date();
-        this.$emit('pick', this.date);
+        this.$emit('pick');
       },
 
       resetDate() {
@@ -328,7 +316,6 @@
       },
 
       confirm() {
-        console.log(111);
         this.date.setMilliseconds(0);
         this.$emit('pick', this.date);
       },
@@ -421,7 +408,6 @@
     data() {
       return {
         popperClass: '',
-        pickerWidth: 0,
         date: this.$options.defaultValue ? new Date(this.$options.defaultValue) : new Date(),
         value: '',
         showTime: false,
@@ -436,7 +422,6 @@
         week: null,
         showWeekNumber: false,
         timePickerVisible: false,
-        width: 0,
         format: ''
       };
     },
