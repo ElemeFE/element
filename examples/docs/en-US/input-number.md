@@ -99,7 +99,7 @@ Allows you to define incremental steps.
 
 ### Size
 
-Additional `large` and `small` sizes of the input box are available
+Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
 
 :::demo
 
