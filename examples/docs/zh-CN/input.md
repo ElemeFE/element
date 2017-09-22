@@ -129,7 +129,7 @@
 <style>
   .demo-input.demo-zh-CN {
     .el-select .el-input {
-      width: 110px;
+      width: 130px;
     }
     .el-input {
       width: 180px;
@@ -369,7 +369,7 @@ export default {
 </div>
 <style>
   .el-select .el-input {
-    width: 110px;
+    width: 130px;
   }
 </style>
 <script>

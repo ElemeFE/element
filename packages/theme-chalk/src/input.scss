@@ -20,7 +20,7 @@
     height: $--input-height;
     line-height: 1;
     outline: none;
-    padding: 3px 10px;
+    padding: 0 15px;
     transition: $--border-transition-base;
     width: 100%;
     text-align: inherit;
@@ -49,6 +49,7 @@
     transition: all .3s;
     pointer-events: none;
   }
+
   @include e(suffix-inner) {
     pointer-events: all;
   }
@@ -105,34 +106,37 @@
       cursor: not-allowed;
     }
   }
+
   @include m(suffix) {
     .el-input__inner {
       padding-right: 30px;
     }
   }
+
   @include m(prefix) {
     .el-input__inner {
       padding-left: 30px;
     }
   }
+
   @include m(medium) {
     font-size: $--input-medium-font-size;
 
-    & .el-input__inner {
+    @include e(inner) {
       height: $--input-medium-height;
     }
   }
   @include m(small) {
     font-size: $--input-small-font-size;
 
-    & .el-input__inner {
+    @include e(inner) {
       height: $--input-small-height;
     }
   }
   @include m(mini) {
     font-size: $--input-mini-font-size;
 
-    & .el-input__inner {
+    @include e(inner) {
       height: $--input-mini-height;
     }
   }
@@ -144,47 +148,51 @@
   width: 100%;
   border-collapse: separate;
 
-  & > .el-input__inner {
+  > .el-input__inner {
     vertical-align: middle;
     display: table-cell;
   }
+
   @include e((append, prepend)) {
-    background-color: $--color-black;
-    color: $--color-black;
+    background-color: $--background-color-base;
+    color: $--color-info;
     vertical-align: middle;
     display: table-cell;
     position: relative;
     border: $--border-base;
     border-radius: $--input-border-radius;
-    padding: 0 10px;
+    padding: 0 20px;
     width: 1px;
     white-space: nowrap;
 
-    & .el-select,
-    & .el-button {
+    .el-select,
+    .el-button {
       display: block;
-      margin: -10px;
+      margin: -20px;
     }
 
-    & button.el-button,
-    & div.el-select .el-input__inner,
-    & div.el-select:hover .el-input__inner {
+    button.el-button,
+    div.el-select .el-input__inner,
+    div.el-select:hover .el-input__inner {
       border-color: transparent;
       background-color: transparent;
       color: inherit;
       border-top: 0;
       border-bottom: 0;
     }
-    & .el-button,
-    & .el-input {
+
+    .el-button,
+    .el-input {
       font-size: inherit;
     }
   }
+
   @include e(prepend) {
     border-right: 0;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
   }
+
   @include e(append) {
     border-left: 0;
     border-top-left-radius: 0;
@@ -197,6 +205,7 @@
       border-bottom-left-radius: 0;
     }
   }
+
   @include m(append) {
     .el-input__inner {
       border-top-right-radius: 0;

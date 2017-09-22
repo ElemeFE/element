@@ -7,7 +7,9 @@
         num3: 5,
         num4: 1,
         num5: 1,
-        num6: 1
+        num6: 1,
+        num7: 1,
+        num8: 1
       }
     },
     methods: {
@@ -97,15 +99,16 @@
 
 ### 尺寸
 
-额外提供了 `large`、`small` 两种尺寸的数字输入框
+额外提供了 `medium`、`small`、`mini` 三种尺寸的数字输入框
 
 :::demo
 
 ```html
 <template>
-  <el-input-number size="large" v-model="num4"></el-input-number>
-  <el-input-number v-model="num5"></el-input-number>
+  <el-input-number v-model="num4"></el-input-number>
+  <el-input-number size="medium" v-model="num5"></el-input-number>
   <el-input-number size="small" v-model="num6"></el-input-number>
+  <el-input-number size="mini" v-model="num7"></el-input-number>
 </template>
 <script>
   export default {
@@ -113,7 +116,32 @@
       return {
         num4: 1,
         num5: 1,
-        num6: 1
+        num6: 1,
+        num7: 1
+      }
+    }
+  };
+</script>
+```
+:::
+
+### 按钮位置
+
+:::demo 设置 `controls-position` 属性可以控制按钮位置。
+```html
+<template>
+  <el-input-number v-model="num8" controls-position="right" @change="handleChange" :min="1" :max="10"></el-input-number>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        num8: 1
+      };
+    },
+    methods: {
+      handleChange(value) {
+        console.log(value);
       }
     }
   };
@@ -132,6 +160,7 @@
 | disabled | 是否禁用计数器        | boolean | — | false |
 | controls | 是否使用控制按钮        | boolean | — | true |
 | debounce | 输入时的去抖延迟，毫秒 | number | — | 300 |
+| controls-position | 控制按钮位置 | string | right | - |
 | name | 原生属性 | string | — | — |
 
 ### Events

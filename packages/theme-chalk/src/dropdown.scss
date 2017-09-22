@@ -18,6 +18,24 @@
   & .el-dropdown__caret-button {
     padding-left: 5px;
     padding-right: 5px;
+    position: relative;
+    border-left: none;
+
+    &::before {
+      $gap: 5px;
+
+      content: '';
+      position: absolute;
+      display: block;
+      width: 1px;
+      top: $gap;
+      bottom: $gap;
+      left: 0;
+      background: mix(white, transparent, 50%);
+    }
+
+    &:hover {
+    }
 
     & .el-dropdown__icon {
       padding-left: 0;

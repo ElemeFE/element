@@ -98,7 +98,7 @@ $--index-popper: 2000;
 
 /* Disable base
 -------------------------- */
-$--disabled-fill-base: $--border-color-extra-light;
+$--disabled-fill-base: $--background-color-base;
 $--disabled-color-base: $--color-text-placeholder;
 $--disabled-border-base: $--border-color-lighter;
 
@@ -612,6 +612,7 @@ $--datepicker-inrange-color: $--border-color-extra-light;
 $--datepicker-inrange-hover-color: $--border-color-extra-light;
 $--datepicker-active-color: $--color-primary;
 $--datepicker-text-hover-color: $--color-primary;
+$--datepicker-cell-hover-color: #fff;
 
 /* Loading
 --------------------------*/

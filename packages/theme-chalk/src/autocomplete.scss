@@ -11,16 +11,20 @@
 
 @include b(autocomplete-suggestion) {
   margin: 5px 0;
-  box-shadow: 0 0 6px 0 rgba(0,0,0,0.04), 0 2px 4px 0 rgba(0,0,0,0.12);
+  box-shadow: $--box-shadow-light;
+
+  &.el-popper .popper__arrow {
+    left: 24px !important;
+  }
 
   @include e(wrap) {
     max-height: 280px;
+    padding: 6px 0;
+    box-sizing: border-box;
     overflow: auto;
     background-color: $--color-white;
-    border: 1px solid $--color-black;
-    padding: 6px 0;
-    border-radius: 2px;
-    box-sizing: border-box;
+    border: 1px solid $--border-color-light;
+    border-radius: $--border-radius-base;
   }
 
   @include e(list) {
@@ -29,13 +33,13 @@
   }
 
   & li {
-    list-style: none;
-    line-height: 36px;
-    padding: 0 10px;
+    padding: 0 20px;
     margin: 0;
+    line-height: 33px;
     cursor: pointer;
-    color: $--color-black;
-    font-size: 14px;
+    color: $--color-text-regular;
+    font-size: $--font-size-base;
+    list-style: none;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -43,17 +47,21 @@
     &:hover {
       background-color: $--select-option-hover-background;
     }
+
     &.highlighted {
+      color: $--color-primary;
+    }
+
+    &:active {
       background-color: $--color-primary;
       color: $--color-white;
     }
-    &:active {
-      background-color: darken($--color-primary, 0.2);
-    }
+
     &.divider {
       margin-top: 6px;
       border-top: 1px solid $--color-black;
     }
+
     &.divider:last-child {
       margin-bottom: -6px;
     }

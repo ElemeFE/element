@@ -88,7 +88,7 @@
 <style>
   .demo-input.demo-en-US {
     .el-select .el-input {
-      width: 110px;
+      width: 130px;
     }
     .el-input {
       width: 180px;
@@ -104,6 +104,16 @@
         vertical-align: top;
         margin: 0 10px 10px 0;
       }
+    }
+    .demo-input-suffix {
+      padding: 10px;
+    }
+    .demo-input-suffix .el-input {
+      margin-right: 15px;
+    }
+    .demo-input-label {
+      display: inline-block;
+      width: 130px;
     }
     .demo-autocomplete {
       text-align: center;
@@ -196,7 +206,7 @@ Add an icon to indicate input type.
 ::: demo To add icons in Input, you can simply use `prefix-icon` and `suffix-icon` attributes. Also, the `prefix` and `suffix` named slots works as well.
 ```html
 <div class="demo-input-suffix">
-  Using attributes
+  <span class="demo-input-label">Using attributes</span>
   <el-input
     placeholder="Pick a date"
     suffix-icon="el-icon-date"
@@ -209,7 +219,7 @@ Add an icon to indicate input type.
   </el-input>
 </div>
 <div class="demo-input-suffix">
-  Using slots
+  <span class="demo-input-label">Using slots</span>
   <el-input
     placeholder="Pick a date"
     v-model="input22">
@@ -221,6 +231,13 @@ Add an icon to indicate input type.
     <i slot="prefix" class="el-input__icon el-icon-search"></i>
   </el-input>
 </div>
+
+<style>
+  .demo-input-label {
+    display: inline-block;
+    width: 130px;
+  }
+</style>
 
 <script>
 export default {

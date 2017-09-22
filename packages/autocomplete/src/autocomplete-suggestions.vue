@@ -2,7 +2,7 @@
   <transition name="el-zoom-in-top" @after-leave="doDestroy">
     <div
       v-show="showPopper"
-      class="el-autocomplete-suggestion"
+      class="el-autocomplete-suggestion el-popper"
       :class="{ 'is-loading': parent.loading }"
       :style="{ width: dropdownWidth }"
     >

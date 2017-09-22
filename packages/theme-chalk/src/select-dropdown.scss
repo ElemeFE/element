@@ -36,8 +36,8 @@
     padding: 0;
   }
 
-  & .popper__arrow {
-    left: 24px !important;
+  .popper__arrow {
+    transform: translateX(-400%);
   }
 }
 
