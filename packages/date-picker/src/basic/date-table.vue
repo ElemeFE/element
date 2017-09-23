@@ -17,8 +17,13 @@
       :class="{ current: isWeekActive(row[1]) }">
       <td
         v-for="cell in row"
-        :class="getCellClasses(cell)"
-        v-text="cell.type === 'today' ? t('el.datepicker.today') : cell.text"></td>
+        :class="getCellClasses(cell)">
+        <div>
+          <span>
+            {{ cell.text }}
+          </span>
+        </div>
+      </td>
     </tr>
     </tbody>
   </table>
@@ -313,9 +318,9 @@
 
         const rows = this.rows;
         const minDate = this.minDate;
-        for (var i = 0, k = rows.length; i < k; i++) {
+        for (let i = 0, k = rows.length; i < k; i++) {
           const row = rows[i];
-          for (var j = 0, l = row.length; j < l; j++) {
+          for (let j = 0, l = row.length; j < l; j++) {
             if (this.showWeekNumber && j === 0) continue;
 
             const cell = row[j];
@@ -338,7 +343,13 @@
           rangeState: this.rangeState
         });
 
-        const target = event.target;
+        let target = event.target;
+        if (target.tagName === 'SPAN') {
+          target = target.parentNode.parentNode;
+        }
+        if (target.tagName === 'DIV') {
+          target = target.parentNode;
+        }
         if (target.tagName !== 'TD') return;
 
         const column = target.cellIndex;
@@ -355,11 +366,17 @@
 
       handleClick(event) {
         let target = event.target;
+        if (target.tagName === 'SPAN') {
+          target = target.parentNode.parentNode;
+        }
+        if (target.tagName === 'DIV') {
+          target = target.parentNode;
+        }
 
         if (target.tagName !== 'TD') return;
         if (hasClass(target, 'disabled') || hasClass(target, 'week')) return;
 
-        var selectionMode = this.selectionMode;
+        const selectionMode = this.selectionMode;
 
         if (selectionMode === 'week') {
           target = target.parentNode.cells[1];
@@ -407,6 +424,9 @@
             this.$emit('pick', { minDate, maxDate }, false);
             this.rangeState.selecting = true;
             this.markRange(this.minDate);
+            this.$nextTick(() => {
+              this.handleMouseMove(event);
+            });
           } else if (this.minDate && !this.maxDate) {
             if (newDate >= this.minDate) {
               const maxDate = new Date(newDate.getTime());

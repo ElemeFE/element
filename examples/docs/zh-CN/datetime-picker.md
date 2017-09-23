@@ -174,7 +174,9 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
     <el-date-picker
       v-model="value3"
       type="datetimerange"
-      placeholder="选择时间范围">
+      range-separator="至"
+      start-placeholder="开始日期"
+      end-placeholder="结束日期">
     </el-date-picker>
   </div>
   <div class="block">
@@ -183,7 +185,9 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
       v-model="value4"
       type="datetimerange"
       :picker-options="pickerOptions2"
-      placeholder="选择时间范围"
+      range-separator="至"
+      start-placeholder="开始日期"
+      end-placeholder="结束日期"
       align="right">
     </el-date-picker>
   </div>
@@ -237,13 +241,15 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
 | editable | 文本框可输入 | boolean | — | true |
 | clearable | 是否显示清除按钮 | boolean | — | true |
 | size          | 输入框尺寸     | string          | large, small, mini  | — |
-| placeholder | 占位内容 | string | — | — |
+| placeholder | 非范围选择时的占位内容 | string | — | — |
+| start-placeholder | 范围选择时开始日期的占位内容 | string | — | — |
+| end-placeholder | 范围选择时结束日期的占位内容 | string | — | — |
 | type | 显示类型 | string | year/month/date/week/ datetime/datetimerange/daterange | date |
 | format | 时间日期格式化 | string | 年 `yyyy`，月 `MM`，日 `dd`，小时 `HH`，分 `mm`，秒 `ss` | yyyy-MM-dd |
 | align | 对齐方式 | string | left, center, right | left |
 | popper-class | DateTimePicker 下拉框的类名 | string | — | — |
 | picker-options | 当前时间日期选择器特有的选项参考下表 | object |  — | {} |
-| range-separator | 选择范围时的分隔符 | string | - | ' - ' |
+| range-separator | 选择范围时的分隔符 | string | - | '-' |
 | name | 原生属性 | string | — | — |
 
 ### Picker Options

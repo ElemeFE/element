@@ -118,7 +118,9 @@ Can pick an arbitrary time range.
   <el-time-picker
     is-range
     v-model="value3"
-    placeholder="Pick a time range">
+    range-separator="To"
+    start-placeholder="Start time"
+    end-placeholder="End time">
   </el-time-picker>
 </template>
 
@@ -156,11 +158,14 @@ Can pick an arbitrary time range.
 | editable | whether the input is editable | boolean | — | true |
 | clearable | Whether to show clear button | boolean | — | true |
 | size | size of Input | string | medium / small / mini | — |
-| placeholder | placeholder | string | — | — |
+| placeholder | placeholder in non-range mode | string | — | — |
+| start-placeholder | placeholder for the start time in range mode | string | — | — |
+| end-placeholder | placeholder for the end time in range mode | string | — | — |
 | value | value of the picker | date for Time Picker, and string for Time Select | hour `HH`, minute `mm`, second `ss` | HH:mm:ss |
 | align | alignment | left / center / right | left |
 | popper-class | custom class name for TimePicker's dropdown | string | — | — |
 | picker-options | additional options, check the table below | object | — | {} |
+| range-separator | range separator | string | - | '-' |
 |name | same as `name` in native input | string | — | — |
 
 ### Time Select Options

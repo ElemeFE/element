@@ -69,6 +69,7 @@
     width: 25px;
     text-align: center;
     transition: all .3s;
+    line-height: $--input-height;
 
     &:after {
       content: '';
@@ -125,6 +126,10 @@
     @include e(inner) {
       height: $--input-medium-height;
     }
+
+    .el-input__icon {
+      line-height: $--input-medium-height;
+    }
   }
   @include m(small) {
     font-size: $--input-small-font-size;
@@ -132,12 +137,20 @@
     @include e(inner) {
       height: $--input-small-height;
     }
+
+    .el-input__icon {
+      line-height: $--input-small-height;
+    }
   }
   @include m(mini) {
     font-size: $--input-mini-font-size;
 
     @include e(inner) {
       height: $--input-mini-height;
+    }
+
+    .el-input__icon {
+      line-height: $--input-mini-height;
     }
   }
 }

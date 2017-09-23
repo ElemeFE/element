@@ -43,11 +43,17 @@ export default {
 
       // TAB or ESC or Enter
       if (keyCode === 9 || keyCode === 27 || keyCode === 13) {
-        this.pickerVisible = false;
+        !this.ranged && (this.pickerVisible = false);
         event.stopPropagation();
-        this.picker.confirm();
-        this.currentValue = this.picker.date;
-        this.$refs.reference.$refs.input.blur();
+        this.picker.confirm && this.picker.confirm();
+        !this.ranged && (this.currentValue = this.picker.date);
+        if (this.$refs.reference.$refs) {
+          this.$refs.reference.$refs.input.blur();
+        } else {
+          [].slice.call(this.$refs.reference.querySelectorAll('input')).forEach(input => {
+            input.blur();
+          });
+        }
         return;
       }
 

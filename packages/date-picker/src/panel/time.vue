@@ -2,7 +2,6 @@
   <transition name="el-zoom-in-top" @after-leave="$emit('dodestroy')">
     <div
       v-show="currentVisible"
-      :style="{width: width + 'px'}"
       class="el-time-panel el-popper"
       :class="popperClass">
       <div class="el-time-panel__content" :class="{ 'has-seconds': showSeconds }">
@@ -43,7 +42,6 @@
     },
 
     props: {
-      pickerWidth: {},
       date: {
         default() {
           return new Date();
@@ -61,10 +59,6 @@
           this.oldSeconds = this.seconds;
           this.$nextTick(() => this.$refs.spinner.emitSelectRange('hours'));
         }
-      },
-
-      pickerWidth(val) {
-        this.width = val;
       },
 
       value(newVal) {
@@ -88,6 +82,7 @@
       },
 
       date(val) {
+        if (!val) return;
         this.currentDate = val;
         this.reinitDate();
       }
@@ -107,7 +102,6 @@
         selectableRange: [],
         currentDate: this.$options.defaultValue || this.date || new Date(),
         currentVisible: this.visible || false,
-        width: this.pickerWidth || 0,
         selectionRange: [0, 2],
         disabled: false
       };
@@ -159,7 +153,7 @@
       handleConfirm(visible = false, first, notUser = false) {
         if (first) return;
         const date = new Date(limitRange(this.currentDate, this.selectableRange, 'HH:mm:ss'));
-        this.$emit('pick', date, visible, !notUser);
+        this.$emit('pick', date, visible, !notUser, false);
       },
 
       adjustScrollTop() {
