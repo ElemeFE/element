@@ -52,6 +52,12 @@ export default {
   watch: {
     showPopper(newVal, oldVal) {
       newVal ? this.$emit('show') : this.$emit('hide');
+    },
+    '$refs.reference': {
+      deep: true,
+      handler(val) {
+        console.log(val);
+      }
     }
   },
 

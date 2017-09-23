@@ -44,7 +44,7 @@
     color: #666;
     font-size: 12px;
     transition: transform 0.2s ease-in-out;
-    height: 40px;
+    height: 20px;
 
     @include m(expanded) {
       transform: rotate(90deg);

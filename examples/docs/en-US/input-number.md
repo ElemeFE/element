@@ -127,7 +127,7 @@ Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
 
 ### Controls Position
 
-:::demo Set `controls-position` to decide controls position
+:::demo Set `controls-position` to decide the position of control buttons.
 ```html
 <template>
   <el-input-number v-model="num8" controls-position="right" @change="handleChange" :min="1" :max="10"></el-input-number>
