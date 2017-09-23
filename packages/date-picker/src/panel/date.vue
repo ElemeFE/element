@@ -449,7 +449,7 @@
 
       dateFormat() {
         if (this.format) {
-          return this.format.replace('HH:mm', '').replace(':ss', '').trim();
+          return this.format.replace('HH', '').replace(':mm', '').replace(':ss', '').trim();
         } else {
           return 'yyyy-MM-dd';
         }
