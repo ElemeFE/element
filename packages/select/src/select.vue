@@ -248,6 +248,7 @@
       },
 
       query(val) {
+        if (val === null || val === undefined) return;
         this.$nextTick(() => {
           if (this.visible) this.broadcast('ElSelectDropdown', 'updatePopper');
         });
