@@ -169,7 +169,7 @@
       :close-on-press-escape="false"
       :close-on-click-modal="false">
       <img
-        src="~examples/assets/images/carbon-teaser.png"
+        src="https://i.loli.net/2017/09/24/59c75f601d52b.png"
         class="carbon-teaser__main">
       <img
         @click="dialogVisible = false"
@@ -247,9 +247,11 @@
 
       const intrigued = localStorage.getItem('CARBON_TEASER');
       if (!intrigued) {
-        setTimeout(() => {
+        const img = new Image();
+        img.onload = () => {
           this.dialogVisible = true;
-        }, 2000);
+        };
+        img.src = 'https://i.loli.net/2017/09/24/59c75f601d52b.png';
       }
     },
 
