@@ -22,12 +22,18 @@
       </template>
     </el-input>
     <el-autocomplete-suggestions
-      :props="props"
       visible-arrow
       :class="[popperClass ? popperClass : '']"
-      ref="suggestions"
-      :suggestions="suggestions"
-    >
+      ref="suggestions">
+      <li
+        v-for="(item, index) in suggestions"
+        :key="index"
+        :class="{'highlighted': highlightedIndex === index}"
+        @click="select(item)">
+        <slot :item="item">
+          {{ item[props.label] }}
+        </slot>
+      </li>
     </el-autocomplete-suggestions>
   </div>
 </template>
@@ -156,7 +162,7 @@
         }
       },
       select(item) {
-        this.$emit('input', item[this.props.value]);
+        this.$emit('input', item[this.props.label]);
         this.$emit('select', item);
         this.$nextTick(_ => {
           this.suggestions = [];

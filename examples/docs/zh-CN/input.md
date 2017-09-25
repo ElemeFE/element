@@ -1,18 +1,4 @@
 <script>
-  import Vue from 'vue';
-  Vue.component('my-item-zh', {
-    functional: true,
-    render: function (h, ctx) {
-      var item = ctx.props.item;
-      return h('li', ctx.data, [
-        h('div', { attrs: { class: 'name' } }, [item.value]),
-        h('span', { attrs: { class: 'addr' } }, [item.address])
-      ]);
-    },
-    props: {
-      item: { type: Object, required: true }
-    }
-  });
   export default {
     data() {
       return {
@@ -550,18 +536,21 @@ export default {
 
 可自定义输入建议的显示
 
-::: demo
+::: demo 使用`scoped slot`自定义输入建议的模板。该 scope 的参数为`item`，表示当前输入建议对象。
 ```html
 <el-autocomplete
   popper-class="my-autocomplete"
   v-model="state3"
   :fetch-suggestions="querySearch"
-  custom-item="my-item-zh"
   placeholder="请输入内容"
   @select="handleSelect"
   icon="edit"
-  :on-icon-click="handleIconClick"
-></el-autocomplete>
+  :on-icon-click="handleIconClick">
+  <template scope="props">
+    <div class="name">{{ props.item.value }}</div>
+    <span class="addr">{{ props.item.address }}</span>
+  </template>
+</el-autocomplete>
 
 <style>
 .my-autocomplete {
@@ -586,19 +575,6 @@ export default {
 </style>
 
 <script>
-  Vue.component('my-item-zh', {
-    functional: true,
-    render: function (h, ctx) {
-      var item = ctx.props.item;
-      return h('li', ctx.data, [
-        h('div', { attrs: { class: 'name' } }, [item.value]),
-        h('span', { attrs: { class: 'addr' } }, [item.address])
-      ]);
-    },
-    props: {
-      item: { type: Object, required: true }
-    }
-  });
   export default {
     data() {
       return {
@@ -838,7 +814,6 @@ export default {
 | disabled      | 禁用            | boolean         | — | false   |
 | props | 配置选项，具体见下表 | object | — | — |
 | value         | 必填值输入绑定值   | string  | — | — |
-| custom-item  | 通过该参数指定自定义的输入建议列表项的组件名 | string  | — | — |
 | fetch-suggestions | 返回输入建议的方法，仅当你的输入建议数据 resolve 时，通过调用 callback(data:[]) 来返回它  | Function(queryString, callback)  | — | — |
 | popper-class | Autocomplete 下拉列表的类名 | string | — | — |
 | trigger-on-focus | 是否在输入框 focus 时显示建议列表 | boolean | — | true |

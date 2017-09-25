@@ -622,32 +622,6 @@ describe('Table', () => {
       }, DELAY);
     });
 
-    it('inline-template', done => {
-      const vm = createVue({
-        template: `
-          <el-table :data="testData">
-            <el-table-column prop="name" inline-template>
-              <span>[{{ row.name }}]</span>
-            </el-table-column>
-            <el-table-column prop="release"/>
-            <el-table-column prop="director"/>
-            <el-table-column prop="runtime"/>
-          </el-table>
-        `,
-
-        created() {
-          this.testData = getTestData();
-        }
-      });
-
-      setTimeout(_ => {
-        const cells = toArray(vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr td:first-child'));
-        expect(cells.map(n => n.textContent)).to.eql(getTestData().map(o => `[${o.name}]`));
-        destroyVM(vm);
-        done();
-      }, DELAY);
-    });
-
     it('render-header', done => {
       const vm = createVue({
         template: `
