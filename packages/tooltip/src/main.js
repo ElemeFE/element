@@ -48,8 +48,7 @@ export default {
 
   data() {
     return {
-      timeoutPending: null,
-      handlerAdded: false
+      timeoutPending: null
     };
   },
 
@@ -94,11 +93,10 @@ export default {
     const nativeOn = vnode.data.nativeOn = vnode.data.nativeOn || {};
 
     data.staticClass = this.concatClass(data.staticClass, 'el-tooltip');
-    if (this.handlerAdded) return vnode;
-    on.mouseenter = this.addEventHandle(on.mouseenter, () => { this.setExpectedState(true); this.handleShowPopper(); });
-    on.mouseleave = this.addEventHandle(on.mouseleave, () => { this.setExpectedState(false); this.debounceClose(); });
-    nativeOn.mouseenter = this.addEventHandle(nativeOn.mouseenter, () => { this.setExpectedState(true); this.handleShowPopper(); });
-    nativeOn.mouseleave = this.addEventHandle(nativeOn.mouseleave, () => { this.setExpectedState(false); this.debounceClose(); });
+    on.mouseenter = this.addEventHandle(on.mouseenter, this.show);
+    on.mouseleave = this.addEventHandle(on.mouseleave, this.hide);
+    nativeOn.mouseenter = this.addEventHandle(nativeOn.mouseenter, this.show);
+    nativeOn.mouseleave = this.addEventHandle(nativeOn.mouseleave, this.hide);
 
     return vnode;
   },
@@ -108,9 +106,24 @@ export default {
   },
 
   methods: {
+    show() {
+      this.setExpectedState(true);
+      this.handleShowPopper();
+    },
+
+    hide() {
+      this.setExpectedState(false);
+      this.debounceClose();
+    },
+
     addEventHandle(old, fn) {
-      this.handlerAdded = true;
-      return old ? Array.isArray(old) ? old.concat(fn) : [old, fn] : fn;
+      if (!old) {
+        return fn;
+      } else if (Array.isArray(old)) {
+        return old.indexOf(fn) > -1 ? old : old.concat(fn);
+      } else {
+        return old === fn ? old : [old, fn];
+      }
     },
 
     concatClass(a, b) {

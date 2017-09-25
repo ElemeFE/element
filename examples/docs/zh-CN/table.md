@@ -270,8 +270,8 @@
         }
       },
 
-      handleClick() {
-        console.log('click');
+      handleClick(row) {
+        console.log(row);
       },
 
       handleEdit(index, row) {
@@ -707,7 +707,7 @@
       label="操作"
       width="100">
       <template scope="scope">
-        <el-button @click="handleClick" type="text" size="small">查看</el-button>
+        <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
         <el-button type="text" size="small">编辑</el-button>
       </template>
     </el-table-column>
@@ -717,8 +717,8 @@
 <script>
   export default {
     methods: {
-      handleClick() {
-        console.log(1);
+      handleClick(row) {
+        console.log(row);
       }
     },
 
