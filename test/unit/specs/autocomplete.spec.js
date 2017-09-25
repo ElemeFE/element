@@ -182,8 +182,8 @@ describe('Autocomplete', () => {
       expect(suggestionList[1].innerHTML === '上海市长宁区淞虹路661号');
       suggestionList[1].click();
       setTimeout(_ => {
-        expect(inputElm.value).to.be.equal('Hot honey 首尔炸鸡（仙霞路）');
-        expect(vm.state).to.be.equal('Hot honey 首尔炸鸡（仙霞路）');
+        expect(inputElm.value).to.be.equal('上海市长宁区淞虹路661号');
+        expect(vm.state).to.be.equal('上海市长宁区淞虹路661号');
         expect(spy.withArgs().calledOnce).to.be.true;
         expect(suggestions.style.display).to.be.equal('none');
         done();
@@ -324,12 +324,6 @@ describe('Autocomplete', () => {
         const suggestionsList = suggestions.querySelectorAll('.el-autocomplete-suggestion__list li');
         let highlightedItem = suggestionsList[11];
         expect(highlightedItem.className).to.be.equal('highlighted');
-
-        autocomplete.highlight(-5);
-        vm.$nextTick(_ => {
-          let highlightedItem = suggestionsList[0];
-          expect(highlightedItem.className).to.be.equal('highlighted');
-        });
         done();
       });
     }, 500);

@@ -12,23 +12,8 @@
         view-class="el-autocomplete-suggestion__list"
       >
         <li v-if="parent.loading"><i class="el-icon-loading"></i></li>
-        <template v-for="(item, index) in suggestions" v-else>
-          <li
-            v-if="!parent.customItem"
-            :class="{'highlighted': parent.highlightedIndex === index}"
-            @click="select(item)"
-          >
-            {{item[props.label]}}
-          </li>
-          <component
-            v-else
-            :class="{'highlighted': parent.highlightedIndex === index}"
-            @click="select(item)"
-            :is="parent.customItem"
-            :item="item"
-            :index="index">
-          </component>
-        </template>
+        <slot v-else>
+        </slot>
       </el-scrollbar>
     </div>
   </transition>
@@ -52,8 +37,6 @@
     },
 
     props: {
-      props: Object,
-      suggestions: Array,
       options: {
         default() {
           return {

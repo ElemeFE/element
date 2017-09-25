@@ -1,18 +1,4 @@
 <script>
-  import Vue from 'vue';
-  Vue.component('my-item-en', {
-    functional: true,
-    render: function (h, ctx) {
-      var item = ctx.props.item;
-      return h('li', ctx.data, [
-        h('div', { attrs: { class: 'value' } }, [item.value]),
-        h('span', { attrs: { class: 'link' } }, [item.link])
-      ]);
-    },
-    props: {
-      item: { type: Object, required: true }
-    }
-  });
   export default {
     data() {
       return {
@@ -480,18 +466,21 @@ You can get some recommended tips based on the current input.
 
 Customize how suggestions are displayed.
 
-:::demo
+:::demo Use `scoped slot` to customize suggestion items. In the scope, you can access the suggestion object via the `item` key.
 ```html
 <el-autocomplete
   popper-class="my-autocomplete"
   v-model="state3"
   :fetch-suggestions="querySearch"
-  custom-item="my-item-en"
   placeholder="Please input"
   @select="handleSelect"
   icon="edit"
-  :on-icon-click="handleIconClick"
-></el-autocomplete>
+  :on-icon-click="handleIconClick">
+  <template scope="props">
+    <div class="value">{{ props.item.value }}</div>
+    <span class="link">{{ props.item.link }}</span>
+  </template>
+</el-autocomplete>
 
 <style>
   .my-autocomplete {
@@ -512,19 +501,6 @@ Customize how suggestions are displayed.
 </style>
 
 <script>
-  Vue.component('my-item-en', {
-    functional: true,
-    render: function (h, ctx) {
-      var item = ctx.props.item;
-      return h('li', ctx.data, [
-        h('div', { attrs: { class: 'value' } }, [item.value]),
-        h('span', { attrs: { class: 'link' } }, [item.link])
-      ]);
-    },
-    props: {
-      item: { type: Object, required: true }
-    }
-  });
   export default {
     data() {
       return {
@@ -536,7 +512,7 @@ Customize how suggestions are displayed.
       querySearch(queryString, cb) {
         var links = this.links;
         var results = queryString ? link.filter(this.createFilter(queryString)) : links;
-        // call callback function to return recommended data
+        // call callback function to return suggestion objects
         cb(results);
       },
       createFilter(queryString) {
@@ -681,7 +657,6 @@ Attribute | Description | Type | Options | Default
 | props | configuration options, see the following table | object | — | — |
 |icon | icon name | string | — | — |
 |value | binding value | string | — | — |
-|custom-item | component name of your customized suggestion list item | string | — | — |
 |fetch-suggestions | a method to fetch input suggestions. When suggestions are ready, invoke `callback(data:[])` to return them to Autocomplete | Function(queryString, callback) | — | — |
 | popper-class | custom class name for autocomplete's dropdown | string | — | — |
 | trigger-on-focus | whether show suggestions when input focus | boolean | — | true |

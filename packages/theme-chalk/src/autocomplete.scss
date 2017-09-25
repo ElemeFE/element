@@ -49,12 +49,7 @@
     }
 
     &.highlighted {
-      color: $--color-primary;
-    }
-
-    &:active {
-      background-color: $--color-primary;
-      color: $--color-white;
+      background-color: $--select-option-hover-background;
     }
 
     &.divider {
