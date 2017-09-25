@@ -118,6 +118,28 @@
   .demo {
     margin: 20px 0;
   }
+  
+  .carbon-teaser {
+    border-radius: 0;
+    .el-dialog__header {
+      display: none;
+    }
+    .el-dialog__body {
+      padding: 0;
+      position: relative;
+    }
+    .carbon-teaser__main {
+      width: 100%;
+    }
+    .carbon-teaser__close {
+      position: absolute;
+      width: 50px;
+      top: -25px;
+      right: -25px;
+      cursor: pointer;
+    }
+  }
+  
   @media (max-width: 1140px) {
     .container,
     .page-container {
@@ -140,6 +162,20 @@
       <router-view></router-view>
     </div>
     <main-footer v-if="lang !== 'play'"></main-footer>
+    <el-dialog
+      :visible.sync="dialogVisible"
+      custom-class="carbon-teaser"
+      @close="handleDialogClose"
+      :close-on-press-escape="false"
+      :close-on-click-modal="false">
+      <img
+        src="https://i.loli.net/2017/09/24/59c75f601d52b.png"
+        class="carbon-teaser__main">
+      <img
+        @click="dialogVisible = false"
+        src="~examples/assets/images/dialog-close.png"
+        class="carbon-teaser__close">
+    </el-dialog>
   </div>
 </template>
 
@@ -151,6 +187,12 @@
 
   export default {
     name: 'app',
+
+    data() {
+      return {
+        dialogVisible: false
+      };
+    },
 
     computed: {
       lang() {
@@ -191,6 +233,10 @@
             document.documentElement.scrollTop = document.body.scrollTop = elm.offsetTop + 120;
           }, 50);
         }
+      },
+
+      handleDialogClose() {
+        localStorage.setItem('CARBON_TEASER', 1);
       }
     },
 
@@ -198,6 +244,15 @@
       this.localize();
       this.renderAnchorHref();
       this.goAnchor();
+
+      const intrigued = localStorage.getItem('CARBON_TEASER');
+      if (!intrigued) {
+        const img = new Image();
+        img.onload = () => {
+          this.dialogVisible = true;
+        };
+        img.src = 'https://i.loli.net/2017/09/24/59c75f601d52b.png';
+      }
     },
 
     created() {

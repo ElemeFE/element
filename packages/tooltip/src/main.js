@@ -39,7 +39,18 @@ export default {
     enterable: {
       type: Boolean,
       default: true
+    },
+    hideAfter: {
+      type: Number,
+      default: 0
     }
+  },
+
+  data() {
+    return {
+      timeoutPending: null,
+      handlerAdded: false
+    };
   },
 
   beforeCreate() {
@@ -82,11 +93,12 @@ export default {
     const on = vnode.data.on = vnode.data.on || {};
     const nativeOn = vnode.data.nativeOn = vnode.data.nativeOn || {};
 
+    data.staticClass = this.concatClass(data.staticClass, 'el-tooltip');
+    if (this.handlerAdded) return vnode;
     on.mouseenter = this.addEventHandle(on.mouseenter, () => { this.setExpectedState(true); this.handleShowPopper(); });
     on.mouseleave = this.addEventHandle(on.mouseleave, () => { this.setExpectedState(false); this.debounceClose(); });
     nativeOn.mouseenter = this.addEventHandle(nativeOn.mouseenter, () => { this.setExpectedState(true); this.handleShowPopper(); });
     nativeOn.mouseleave = this.addEventHandle(nativeOn.mouseleave, () => { this.setExpectedState(false); this.debounceClose(); });
-    data.staticClass = this.concatClass(data.staticClass, 'el-tooltip');
 
     return vnode;
   },
@@ -97,6 +109,7 @@ export default {
 
   methods: {
     addEventHandle(old, fn) {
+      this.handlerAdded = true;
       return old ? Array.isArray(old) ? old.concat(fn) : [old, fn] : fn;
     },
 
@@ -111,15 +124,28 @@ export default {
       this.timeout = setTimeout(() => {
         this.showPopper = true;
       }, this.openDelay);
+
+      if (this.hideAfter > 0) {
+        this.timeoutPending = setTimeout(() => {
+          this.showPopper = false;
+        }, this.hideAfter);
+      }
     },
 
     handleClosePopper() {
       if (this.enterable && this.expectedState || this.manual) return;
       clearTimeout(this.timeout);
+
+      if (this.timeoutPending) {
+        clearTimeout(this.timeoutPending);
+      }
       this.showPopper = false;
     },
 
     setExpectedState(expectedState) {
+      if (expectedState === false) {
+        clearTimeout(this.timeoutPending);
+      }
       this.expectedState = expectedState;
     }
   }

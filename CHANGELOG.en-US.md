@@ -1,5 +1,41 @@
 ## Changelog
 
+### 1.4.5
+
+*2017-09-24*
+
+- Rate's `colors` attribute now supports dynamic updates, #6872 @lukaszb
+- Fixed Tree not highlighting tree node whose value of `node-key` is 0, #6917
+- Fixed initially disabled Dropdown not showing menu when it's enabled, #6969
+- Added `hide-after` attribute for Tooltip, #6401 @ryatziv
+- Fixed cancel button of TimePicker not cancel picked value when clicked, #7028
+- Added `selectWhenUnmatched` attribute for Autocomplete, #6428 @ryatziv
+- Fixed when `beforeUpload` of a file returns false, other files are aborted by Upload, #7077
+- Fixed disabled dates of DatePicker in month view and year view not displayed correctly in the west hemisphere, #7114
+- `default-value` of DatePicker now supports daterange type, #7073 @wacky6
+
+### 1.4.4
+
+*2017-09-05*
+
+- Fixed all months disabled in DatePicker month view when `disabledDate` is set, #6768 @qingdengyue
+- Added `debounce` attribute for Slider, #6820 @langgo
+- Fixed value of Pagination jumper can be bigger than the total page count, #6842 @huguangju
+- Fixed TimePicker's focus slipping away when selecting hour to 23 with mouse scroll, #6719 @qingdengyue
+
+### 1.4.3
+
+*2017-08-25*
+
+- Fixed style bug when Progress's `percentage` is `0`, #6551 @Kingwl
+- Fixed Carousel items flashing when switching, #6394
+- Fixed disabled Button not prevent event propagation when clicked on its text area, #6421
+- Fixed disabled dates calculation in DatePicker's month view, #6363
+- Fixed key enter event being stopped propagation in Autocomplete, #6499 @leezng
+- Fixed `amPm` not supported in DatePicker i18n, #6574
+- Fixed clicking or dragging error of Slider when it switches from invisible to visible, #6593
+- Fixed Alert using small icons when its `description` is passed via default slot, #6612 @leezng
+
 ### 1.4.2
 
 *2017-08-09*

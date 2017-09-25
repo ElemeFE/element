@@ -90,12 +90,12 @@ export default {
             this.post(rawFile);
           }
         }, () => {
-          this.onRemove(rawFile, true);
+          this.onRemove(null, rawFile);
         });
       } else if (before !== false) {
         this.post(rawFile);
       } else {
-        this.onRemove(rawFile, true);
+        this.onRemove(null, rawFile);
       }
     },
     abort(file) {

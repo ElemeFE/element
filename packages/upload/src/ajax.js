@@ -48,7 +48,7 @@ export default function upload(option) {
   const formData = new FormData();
 
   if (option.data) {
-    Object.keys(option.data).map(key => {
+    Object.keys(option.data).forEach(key => {
       formData.append(key, option.data[key]);
     });
   }
