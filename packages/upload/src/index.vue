@@ -70,7 +70,7 @@ export default {
     },
     onProgress: {
       type: Function,
-      default: noop
+      default: null
     },
     onError: {
       type: Function,
@@ -240,7 +240,6 @@ export default {
         listType: this.listType,
         disabled: this.disabled,
         'on-start': this.handleStart,
-        'on-progress': this.handleProgress,
         'on-success': this.handleSuccess,
         'on-error': this.handleError,
         'on-preview': this.onPreview,
@@ -249,6 +248,7 @@ export default {
       },
       ref: 'upload-inner'
     };
+    uploadData.props['on-progress'] = this.onProgress ? this.handleProgress : null;
 
     const trigger = this.$slots.trigger || this.$slots.default;
     const uploadComponent = (typeof FormData !== 'undefined' || this.$isServer)

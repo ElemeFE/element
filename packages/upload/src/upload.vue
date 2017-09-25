@@ -122,9 +122,6 @@ export default {
         data: this.data,
         filename: this.name,
         action: this.action,
-        onProgress: e => {
-          this.onProgress(e, rawFile);
-        },
         onSuccess: res => {
           this.onSuccess(res, rawFile);
           delete this.reqs[uid];
@@ -134,6 +131,13 @@ export default {
           delete this.reqs[uid];
         }
       };
+      if (this.onProgress) {
+        options.onProgress = (e) => {
+          this.onProgress(e, rawFile);
+        };
+      } else {
+        options.onProgress = null;
+      }
       const req = this.httpRequest(options);
       this.reqs[uid] = req;
       if (req && req.then) {
