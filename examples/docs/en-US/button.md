@@ -166,7 +166,7 @@ Besides default size, Button component provides three additional sizes for you t
 ### Attributes
 | Attribute      | Description    | Type      | Accepted values       | Default   |
 |---------- |-------- |---------- |-------------  |-------- |
-| size     | button size   | string  |   large / small / mini            |    —     |
+| size     | button size   | string  |   medium / small / mini            |    —     |
 | type     | button type   | string    |   primary / success / warning / danger / info / text |     —    |
 | plain     | determine whether it's a plain button   | boolean    | — | false   |
 | round     | determine whether it's a round button   | boolean    | — | false   |

@@ -80,7 +80,7 @@ Used for marking and selection.
 
 ### Removable Tag
 
-:::demo `closable` attribute can be used to define a removable tag. It accepts a `Boolean`. By default the removal of Tag has a fading animation. If you don't want to use it, you can set the `close-transition` attribute, which accepts a `Boolean`, to `true`. `close` event triggers when Tag is removed.
+:::demo `closable` attribute can be used to define a removable tag. It accepts a `Boolean`. By default the removal of Tag has a fading animation. If you don't want to use it, you can set the `disable-transition` attribute, which accepts a `Boolean`, to `true`. `close` event triggers when Tag is removed.
 
 ```html
 <el-tag
@@ -191,14 +191,29 @@ You can use the `close` event to add and remove tag dynamically.
 ```
 :::
 
+### Sizes
+
+Besides default size, Tag component provides three additional sizes for you to choose among different scenarios.
+
+:::demo Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
+
+```html
+<el-tag>Default</el-tag>
+<el-tag size="medium">Medium</el-tag>
+<el-tag size="small">Small</el-tag>
+<el-tag size="mini">Mini</el-tag>
+```
+:::
+
 ### Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | type | theme | string | success/info/warning/danger | — |
 | closable | whether Tag can be removed | boolean | — | false |
-| close-transition | whether to disable animations | boolean | — | false |
+| disable-transition | whether to disable animations | boolean | — | false |
 | hit | whether Tag has a highlighted border | boolean | — | false |
 | color | background color of the Tag | string | — | — |
+| size | tag size | string | medium / small / mini | — |
 
 
 ### Events

@@ -8,7 +8,7 @@
   width: 100%;
 
   @include e(inner) {
-    appearance: none;
+    -webkit-appearance: none;
     background-color: $--input-fill;
     background-image: none;
     border-radius: $--input-border-radius;
@@ -23,7 +23,6 @@
     padding: 0 15px;
     transition: $--border-transition-base;
     width: 100%;
-    text-align: inherit;
 
     &::placeholder {
       color: $--input-placeholder-color;

@@ -113,8 +113,6 @@
   }
 
   .el-tag {
-    height: $--select-tag-height;
-    line-height: $--select-tag-height;
     box-sizing: border-box;
     border-color: transparent;
     margin: 3px 0 3px 6px;
@@ -130,7 +128,7 @@
 
       &::before {
         display: block;
-        transform: scale(.6);
+        transform: scale(.65);
       }
     }
   }
