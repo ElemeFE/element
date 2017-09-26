@@ -288,7 +288,7 @@
           this.minDate = newVal[0] ? toDate(newVal[0]) : null;
           this.maxDate = newVal[1] ? toDate(newVal[1]) : null;
           if (this.minDate) this.date = new Date(this.minDate);
-          this.handleConfirm(true, false);
+          this.handleConfirm(true);
         }
       }
     },
@@ -372,7 +372,7 @@
         }
       },
 
-      handleRangePick(val, close = true, user = true) {
+      handleRangePick(val, close = true) {
         if (this.maxDate === val.maxDate && this.minDate === val.minDate) {
           return;
         }
@@ -380,7 +380,7 @@
         this.maxDate = val.maxDate;
         this.minDate = val.minDate;
         if (!close || this.showTime) return;
-        this.handleConfirm(false, user);
+        this.handleConfirm();
       },
 
       changeToToday() {
@@ -457,8 +457,8 @@
         this.resetDate();
       },
 
-      handleConfirm(visible = false, user = true) {
-        this.$emit('pick', [this.minDate, this.maxDate], visible, user);
+      handleConfirm(visible = false) {
+        this.$emit('pick', [this.minDate, this.maxDate], visible);
       },
 
       resetDate() {

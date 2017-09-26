@@ -149,7 +149,7 @@
           this.date = newVal;
           this.year = newVal.getFullYear();
           this.month = newVal.getMonth();
-          this.$emit('pick', newVal, false, false);
+          this.$emit('pick', newVal, false);
         }
       },
 
@@ -244,7 +244,7 @@
         }
       },
 
-      handleTimePick(picker, visible) {
+      handleTimePick(picker, visible, first) {
         if (picker) {
           let oldDate = new Date(this.date.getTime());
           let hour = picker.getHours();
@@ -261,7 +261,9 @@
           this.date = new Date(oldDate.getTime());
         }
 
-        this.timePickerVisible = visible;
+        if (!first) {
+          this.timePickerVisible = visible;
+        }
       },
 
       handleMonthPick(month) {
@@ -280,28 +282,28 @@
         }
       },
 
-      handleDatePick(value, close, user = true) {
+      handleDatePick(value) {
         if (this.selectionMode === 'day') {
           if (!this.showTime) {
-            this.$emit('pick', new Date(value.getTime()), false, user);
+            this.$emit('pick', new Date(value.getTime()));
           }
           this.date.setFullYear(value.getFullYear());
           this.date.setMonth(value.getMonth(), value.getDate());
         } else if (this.selectionMode === 'week') {
           this.week = value.week;
-          this.$emit('pick', value.date, false, user);
+          this.$emit('pick', value.date);
         }
 
         this.resetDate();
       },
 
-      handleYearPick(year, close = true, user) {
+      handleYearPick(year, close = true) {
         this.year = year;
         if (!close) return;
 
         this.date.setFullYear(year);
         if (this.selectionMode === 'year') {
-          this.$emit('pick', new Date(year, 0, 1), false, user);
+          this.$emit('pick', new Date(year, 0, 1));
         } else {
           this.currentView = 'month';
         }

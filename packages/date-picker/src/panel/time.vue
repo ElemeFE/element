@@ -73,7 +73,7 @@
           hours: date.getHours(),
           minutes: date.getMinutes(),
           seconds: date.getSeconds()
-        }, true);
+        });
         this.$nextTick(_ => this.adjustScrollTop());
       },
 
@@ -115,7 +115,7 @@
 
     methods: {
       handleClear() {
-        this.$emit('pick', '', false, true);
+        this.$emit('pick');
       },
 
       handleCancel() {
@@ -126,10 +126,10 @@
         this.minutes = this.currentDate.getMinutes();
         this.seconds = this.currentDate.getSeconds();
         const date = new Date(limitRange(this.currentDate, this.selectableRange, 'HH:mm:ss'));
-        this.$emit('pick', date, false, true);
+        this.$emit('pick', date);
       },
 
-      handleChange(date, notUser) {
+      handleChange(date) {
         if (date.hours !== undefined) {
           this.currentDate.setHours(date.hours);
           this.hours = this.currentDate.getHours();
@@ -142,7 +142,8 @@
           this.currentDate.setSeconds(date.seconds);
           this.seconds = this.currentDate.getSeconds();
         }
-        this.handleConfirm(true, null, notUser);
+
+        this.handleConfirm(true);
       },
 
       setSelectionRange(start, end) {
@@ -150,10 +151,10 @@
         this.selectionRange = [start, end];
       },
 
-      handleConfirm(visible = false, first, notUser = false) {
+      handleConfirm(visible = false, first) {
         if (first) return;
         const date = new Date(limitRange(this.currentDate, this.selectableRange, 'HH:mm:ss'));
-        this.$emit('pick', date, visible, !notUser, false);
+        this.$emit('pick', date, visible, first);
       },
 
       adjustScrollTop() {
