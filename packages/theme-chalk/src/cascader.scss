@@ -16,8 +16,9 @@
     transition: none;
   }
 
-  .el-icon-caret-bottom {
+  .el-icon-arrow-down {
     transition: transform .3s;
+    font-size: 12px;
 
     @include when(reverse) {
       transform: rotateZ(180deg);
@@ -136,10 +137,6 @@
     box-sizing: border-box;
     cursor: pointer;
 
-    @include e(keyword) {
-      font-weight: bold;
-    }
-
     @include m(extensible) {
       &:after {
         font-family: 'element-icons';
@@ -175,6 +172,10 @@
       color: $--color-white;
       background-color: $--select-option-selected-hover;
     }
+  }
+
+  @include e(item__keyword) {
+    font-weight: bold;
   }
 
   @include m(flexible) {
