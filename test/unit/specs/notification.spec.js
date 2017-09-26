@@ -107,4 +107,15 @@ describe('Notification', () => {
       }, 700);
     }, 500);
   });
+
+  it('no close button', done => {
+    Notification({
+      message: 'Hello',
+      showClose: false
+    });
+    setTimeout(() => {
+      expect(document.querySelector('.el-notification__closeBtn')).to.not.exist;
+      done();
+    }, 500);
+  });
 });

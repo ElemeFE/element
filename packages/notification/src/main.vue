@@ -20,7 +20,10 @@
             <p v-else v-html="message"></p>
           </slot>
         </div>
-        <div class="el-notification__closeBtn el-icon-close" @click.stop="close"></div>
+        <div
+          class="el-notification__closeBtn el-icon-close"
+          v-if="showClose"
+          @click.stop="close"></div>
       </div>
     </div>
   </transition>
@@ -42,6 +45,7 @@
         message: '',
         duration: 4500,
         type: '',
+        showClose: true,
         customClass: '',
         iconClass: '',
         onClose: null,
