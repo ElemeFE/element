@@ -7,6 +7,7 @@
         'el-menu--horizontal': mode === 'horizontal',
         'el-menu--collapse': collapse
       }"
+      role="menubar"
     >
       <slot></slot>
     </ul>
@@ -14,6 +15,7 @@
 </template>
 <script>
   import emitter from 'element-ui/src/mixins/emitter';
+  import Menubar from 'element-ui/src/utils/menu/aria-menubar';
   import { addClass, removeClass, hasClass } from 'element-ui/src/utils/dom';
 
   export default {
@@ -259,6 +261,10 @@
       this.initOpenedMenu();
       this.$on('item-click', this.handleItemClick);
       this.$on('submenu-click', this.handleSubmenuClick);
+      if (this.mode === 'horizontal') {
+        let menu = new Menubar(this.$el); // eslint-disable-line
+      }
+
     }
   };
 </script>

@@ -47,14 +47,19 @@
         color: inherit;
       }
 
-      &:hover {
+      &:hover, &:focus{
         background-color: #fff;
       }
     }
     & .el-submenu {
       float: left;
       position: relative;
-
+      &:focus {
+        outline: none;
+        > .el-submenu__title {
+          color: $--color-text-primary;
+        }
+      }
       > .el-menu {
         position: absolute;
         top: 65px;
@@ -95,7 +100,9 @@
       }
     }
     & .el-menu-item:hover,
-    & .el-submenu__title:hover {
+    & .el-submenu__title:hover,
+    & .el-menu-item:focus {
+      outline: none;
       color: $--color-text-primary;
     }
     & > .el-menu-item.is-active,
@@ -169,7 +176,8 @@
   &:last-child {
     margin-right: 0;
   }
-  &:hover {
+  &:hover, &:focus {
+    outline: none;
     background-color: $--menu-item-hover-fill;
   }
   i {
