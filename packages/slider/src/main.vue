@@ -1,6 +1,12 @@
 <template>
   <div class="el-slider"
-    :class="{ 'is-vertical': vertical, 'el-slider--with-input': showInput }">
+    :class="{ 'is-vertical': vertical, 'el-slider--with-input': showInput }"
+     role="slider"
+     :aria-valuemin="min"
+     :aria-valuemax="max"
+     :aria-orientation="vertical ? 'vertical': 'horizontal'"
+     :aria-disabled="disabled"
+  >
     <el-input-number
       v-model="firstValue"
       v-if="showInput && !range"
@@ -107,6 +113,9 @@
       debounce: {
         type: Number,
         default: 300
+      },
+      label: {
+        type: String
       }
     },
 
@@ -317,6 +326,7 @@
     },
 
     mounted() {
+      let valuetext;
       if (this.range) {
         if (Array.isArray(this.value)) {
           this.firstValue = Math.max(this.min, this.value[0]);
@@ -326,6 +336,7 @@
           this.secondValue = this.max;
         }
         this.oldValue = [this.firstValue, this.secondValue];
+        valuetext = `${this.firstValue}-${this.secondValue}`;
       } else {
         if (typeof this.value !== 'number' || isNaN(this.value)) {
           this.firstValue = this.min;
@@ -333,7 +344,13 @@
           this.firstValue = Math.min(this.max, Math.max(this.min, this.value));
         }
         this.oldValue = this.firstValue;
+        valuetext = this.firstValue;
       }
+      this.$el.setAttribute('aria-valuetext', valuetext);
+
+      // label screen reader
+      this.$el.setAttribute('aria-label', this.label ? this.label : `slider between ${this.min} and ${this.max}`);
+
       this.resetSize();
       window.addEventListener('resize', this.resetSize);
     },

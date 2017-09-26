@@ -6,7 +6,15 @@
     @mousedown="onButtonDown"
     :class="{ 'hover': hovering, 'dragging': dragging }"
     :style="wrapperStyle"
-    ref="button">
+    ref="button"
+    tabindex="0"
+    @focus="handleMouseEnter"
+    @blur="handleMouseLeave"
+    @keydown.left="onLeftKeyDown"
+    @keydown.right="onRightKeyDown"
+    @keydown.down.prevent="onLeftKeyDown"
+    @keydown.up.prevent="onRightKeyDown"
+  >
     <el-tooltip placement="top" ref="tooltip" :disabled="!showTooltip">
       <span slot="content">{{ formatValue }}</span>
       <div class="el-slider__button" :class="{ 'hover': hovering, 'dragging': dragging }"></div>
@@ -125,7 +133,16 @@
         window.addEventListener('mouseup', this.onDragEnd);
         window.addEventListener('contextmenu', this.onDragEnd);
       },
-
+      onLeftKeyDown() {
+        if (this.disabled) return;
+        this.newPosition = parseFloat(this.currentPosition) - this.step / (this.max - this.min) * 100;
+        this.setPosition(this.newPosition);
+      },
+      onRightKeyDown() {
+        if (this.disabled) return;
+        this.newPosition = parseFloat(this.currentPosition) + this.step / (this.max - this.min) * 100;
+        this.setPosition(this.newPosition);
+      },
       onDragStart(event) {
         this.dragging = true;
         this.isClick = true;
@@ -187,7 +204,9 @@
         let value = steps * lengthPerStep * (this.max - this.min) * 0.01 + this.min;
         value = parseFloat(value.toFixed(this.precision));
         this.$emit('input', value);
-        this.$refs.tooltip && this.$refs.tooltip.updatePopper();
+        this.$nextTick(() => {
+          this.$refs.tooltip && this.$refs.tooltip.updatePopper();
+        });
         if (!this.dragging && this.value !== this.oldValue) {
           this.oldValue = this.value;
         }
