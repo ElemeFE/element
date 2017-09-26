@@ -877,7 +877,7 @@
 | -------- | ----------------- | ------ | ---- | ---- |
 | label    | 指定节点标签为节点对象的某个属性值 | string, function(data, node) | —    | —    |
 | children | 指定子树为节点对象的某个属性值 | string, function(data, node) | —    | —    |
-| disabled | 指定节点选择框是否禁用 |  boolean, function(data, node) | —    | —    |
+| disabled | 指定节点选择框是否禁用为节点对象的某个属性值 |  boolean, function(data, node) | —    | —    |
 
 ### 方法
 `Tree` 拥有如下方法，返回目前被选中的节点数组：

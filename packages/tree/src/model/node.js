@@ -68,7 +68,8 @@ const getPropertyFromData = function(node, prop) {
   } else if (typeof config === 'string') {
     return data[config];
   } else if (typeof config === 'undefined') {
-    return '';
+    const dataProp = data[prop];
+    return dataProp === undefined ? '' : dataProp;
   }
 };
 
