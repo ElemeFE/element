@@ -48,6 +48,7 @@
 
       @when scrollable {
         padding: 0 15px;
+        box-sizing: border-box;
       }
     }
     @e nav-scroll {
@@ -76,7 +77,7 @@
       padding: 0 16px;
       height: 42px;
       box-sizing: border-box;
-      line-height: @height;
+      line-height: 40px;
       display: inline-block;
       list-style: none;
       font-size: 14px;
@@ -176,19 +177,164 @@
       >.el-tabs__header .el-tabs__item {
         transition: all .3s cubic-bezier(.645,.045,.355,1);
         border: 1px solid transparent;
-        border-top: 0;
-        margin: * -1px;
+        margin: -1px -1px 0;
 
         &.is-active {
           background-color: var(--color-white);
           border-right-color: var(--color-base-gray);
           border-left-color: var(--color-base-gray);
+        }
+      }
+    }
+    @m bottom {
+      .el-tabs__header {
+        margin-bottom: 0;
+        margin-top: 10px;
+      }
+      &.el-tabs--border-card {
+        .el-tabs__header {
+          border-bottom: 0;
+          border-top: 1px solid var(--color-base-gray);
+        }
+        .el-tabs__nav-wrap {
+          margin-top: -1px;
+          margin-bottom: 0;
+        }
+        .el-tabs__item {
+          border: 1px solid transparent;
+          margin: 0 -1px -1px -1px;
+        }
+      }
+    }
+    @m left, right {
+      overflow: hidden;
 
-          &:first-child {
-            border-left-color: var(--color-base-gray);
+      .el-tabs__header,
+      .el-tabs__nav-wrap,
+      .el-tabs__nav-scroll {
+        height: 100%;
+      }
+
+      .el-tabs__active-bar {
+        top: 0;
+        bottom: auto;
+        width: 3px;
+        height: auto;
+      }
+
+      .el-tabs__nav-wrap {
+        margin-bottom: 0;
+
+        &.is-scrollable {
+          padding: 30px 0;
+        }
+      }
+
+      .el-tabs__nav {
+        float: none;
+      }
+      .el-tabs__item {
+        display: block;
+      }
+
+      .el-tabs__nav-prev,
+      .el-tabs__nav-next {
+        height: 30px;
+        line-height: 30px;
+        width: 100%;
+        text-align: center;
+        cursor: pointer;
+
+        i {
+          transform: rotateZ(90deg);
+        }
+      }
+      .el-tabs__nav-prev {
+        left: auto;
+        top: 0;
+      }
+      .el-tabs__nav-next {
+        right: auto;
+        bottom: 0;
+      }
+    }
+    @m left {
+      .el-tabs__header {
+        float: left;
+        border-bottom: none;
+        border-right: 1px solid var(--color-base-gray);
+        margin-bottom: 0;
+        margin-right: 10px;
+      }
+      .el-tabs__nav-wrap {
+        margin-right: -1px;
+      }
+      .el-tabs__active-bar {
+        right: 0;
+        left: auto;
+      }
+      .el-tabs__item {
+        text-align: right;
+      }
+
+      &.el-tabs--card {
+        .el-tabs__item.is-active {
+          border: 1px solid rgb(209, 219, 229);
+          border-right-color: #fff;
+          border-radius: 4px 0 0 4px;
+        }
+
+        .el-tabs__new-tab {
+          float: none;
+        }
+      }
+
+      &.el-tabs--border-card {
+        .el-tabs__item {
+          border: 1px solid transparent;
+          margin: -1px 0 -1px -1px;
+
+          &.is-active {
+            border-color: transparent;
+            border-top-color: rgb(209, 219, 229);
+            border-bottom-color: rgb(209, 219, 229);
           }
-          &:last-child {
-            border-right-color: var(--color-base-gray);
+        }
+      }
+    }
+    @m right {
+      .el-tabs__header {
+        float: right;
+        border-bottom: none;
+        border-left: 1px solid var(--color-base-gray);
+        margin-bottom: 0;
+        margin-left: 10px;
+      }
+
+      .el-tabs__nav-wrap {
+        margin-left: -1px;
+      }
+
+      .el-tabs__active-bar {
+        left: 0;
+      }
+
+      &.el-tabs--card {
+        .el-tabs__item.is-active {
+          border: 1px solid rgb(209, 219, 229);
+          border-left-color: #fff;
+          border-radius: 0 4px 4px 0;
+        }
+      }
+      &.el-tabs--border-card {
+        .el-tabs__item {
+          border: 1px solid transparent;
+          margin: -1px -1px -1px 0;
+
+          &.is-active {
+            border-color: transparent;
+            border-top-color: rgb(209, 219, 229);
+            border-bottom-color: rgb(209, 219, 229);
           }
         }
       }

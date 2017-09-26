@@ -1,4 +1,4 @@
-import { createTest, destroyVM } from '../util';
+import { createTest, destroyVM, createVue } from '../util';
 import TimePicker from 'packages/time-picker';
 import Vue from 'vue';
 
@@ -38,15 +38,15 @@ describe('TimePicker', () => {
     input.focus();
     input.blur();
 
-    Vue.nextTick(_ => {
+    setTimeout(_ => {
       const times = vm.picker.$el.querySelectorAll('.active');
 
       expect(times[0].textContent).to.equal('18');
       expect(times[1].textContent).to.equal('40');
-      expect(times[2].textContent).to.equal('0');
+      expect(times[2].textContent).to.equal('00');
       destroyVM(vm);
       done();
-    });
+    }, 100);
   });
 
   it('select time', done => {
@@ -176,6 +176,55 @@ describe('TimePicker', () => {
       done();
     }, 20);
   });
+
+  it('event focus and blur', done => {
+    vm = createVue({
+      template: `
+        <el-date-picker
+          type="date"
+          placeholder="选择日期"
+          ref="picker">
+        </el-date-picker>
+      `
+    }, true);
+
+    const spyFocus = sinon.spy();
+    const spyBlur = sinon.spy();
+
+    vm.$refs.picker.$on('focus', spyFocus);
+    vm.$refs.picker.$on('blur', spyBlur);
+    vm.$el.querySelector('input').focus();
+    vm.$el.querySelector('input').blur();
+
+    vm.$nextTick(_ => {
+      expect(spyFocus.calledOnce).to.be.true;
+      expect(spyBlur.calledOnce).to.be.true;
+      done();
+    });
+  });
+
+  it('focus', done => {
+    vm = createVue({
+      template: `
+        <el-date-picker
+          type="date"
+          placeholder="选择日期"
+          ref="picker">
+        </el-date-picker>
+      `
+    }, true);
+
+    const spy = sinon.spy();
+
+    vm.$refs.picker.$on('focus', spy);
+    vm.$refs.picker.focus();
+
+    vm.$nextTick(_ => {
+      expect(spy.calledOnce).to.be.true;
+      done();
+    });
+  });
+
 });
 
 describe('TimePicker(range)', () => {
@@ -187,9 +236,7 @@ describe('TimePicker(range)', () => {
     }, true);
     const input = vm.$el.querySelector('input');
 
-    input.blur();
-    input.focus();
-    input.blur();
+    input.click();
     setTimeout(done, 20);
   });
 
@@ -211,9 +258,7 @@ describe('TimePicker(range)', () => {
     }, true);
     const input = vm2.$el.querySelector('input');
 
-    input.blur();
-    input.focus();
-    input.blur();
+    input.click();
     setTimeout(() => {
       expect(vm2.picker.maxTime >= vm2.picker.minTime).to.true;
       destroyVM(vm2);

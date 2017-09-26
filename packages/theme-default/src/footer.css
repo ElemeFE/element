@@ -1,0 +1,9 @@
+@charset "UTF-8";
+@import "./common/var.css";
+
+@component-namespace el {
+  @b footer {
+    padding: var(--footer-padding);
+    box-sizing: border-box;
+  }
+}

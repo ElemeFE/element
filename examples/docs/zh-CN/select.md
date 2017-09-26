@@ -666,6 +666,8 @@
 | visible-change | 下拉框出现/隐藏时触发 | 出现则为 true，隐藏则为 false |
 | remove-tag | 多选模式下移除tag时触发 | 移除的tag值 |
 | clear | 可清空的单选模式下用户点击清空按钮时触发 | — |
+| blur | 当 input 失去焦点时触发 | (event: Event) |
+| focus | 当 input 获得焦点时触发 | (event: Event) |
 
 ### Option Group Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
@@ -679,3 +681,8 @@
 | value | 选项的值 | string/number/object | — | — |
 | label | 选项的标签，若不设置则默认与 `value` 相同 | string/number | — | — |
 | disabled | 是否禁用该选项 | boolean | — | false |
+
+### Methods
+| 方法名 | 说明 | 参数 |
+| ---- | ---- | ---- |
+| focus | 使 input 获取焦点 | - |

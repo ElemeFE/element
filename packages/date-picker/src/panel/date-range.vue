@@ -2,8 +2,7 @@
   <transition name="el-zoom-in-top" @after-leave="$emit('dodestroy')">
     <div
       v-show="visible"
-      :style="{ width: width + 'px' }"
-      class="el-picker-panel el-date-range-picker"
+      class="el-picker-panel el-date-range-picker el-popper"
       :class="[{
         'has-sidebar': $slots.sidebar || shortcuts,
         'has-time': showTime
@@ -39,11 +38,11 @@
                   @focus="minTimePickerVisible = !minTimePickerVisible"
                   @change.native="handleTimeChange($event, 'min')" />
                 <time-picker
-                  :picker-width="minPickerWidth"
                   ref="minTimePicker"
                   :date="minDate"
                   @pick="handleMinTimePick"
-                  :visible="minTimePickerVisible">
+                  :visible="minTimePickerVisible"
+                  @mounted="$refs.minTimePicker.format=timeFormat">
                 </time-picker>
               </span>
             </span>
@@ -70,11 +69,12 @@
                   :readonly="!minDate"
                   @change.native="handleTimeChange($event, 'max')" />
                 <time-picker
-                  :picker-width="maxPickerWidth"
                   ref="maxTimePicker"
                   :date="maxDate"
                   @pick="handleMaxTimePick"
-                  :visible="maxTimePickerVisible"></time-picker>
+                  :visible="maxTimePickerVisible"
+                  @mounted="$refs.maxTimePicker.format=timeFormat">
+                </time-picker>
               </span>
             </span>
           </div>
@@ -153,6 +153,14 @@
   import DateTable from '../basic/date-table';
   import ElInput from 'element-ui/packages/input';
 
+  const calcDefaultValue = defaultValue => {
+    if (Array.isArray(defaultValue)) {
+      return new Date(defaultValue[0]);
+    } else {
+      return new Date(defaultValue);
+    }
+  };
+
   export default {
     mixins: [Locale],
 
@@ -213,15 +221,21 @@
           newDate.setMonth(month + 1);
         }
         return newDate;
+      },
+
+      timeFormat() {
+        if (this.format && this.format.indexOf('ss') === -1) {
+          return 'HH:mm';
+        } else {
+          return 'HH:mm:ss';
+        }
       }
     },
 
     data() {
       return {
         popperClass: '',
-        minPickerWidth: 0,
-        maxPickerWidth: 0,
-        date: new Date(),
+        date: this.$options.defaultValue ? calcDefaultValue(this.$options.defaultValue) : new Date(),
         minDate: '',
         maxDate: '',
         rangeState: {
@@ -238,25 +252,11 @@
         firstDayOfWeek: 7,
         minTimePickerVisible: false,
         maxTimePickerVisible: false,
-        width: 0
+        format: ''
       };
     },
 
     watch: {
-      showTime(val) {
-        if (!val) return;
-        this.$nextTick(_ => {
-          const minInputElm = this.$refs.minInput.$el;
-          const maxInputElm = this.$refs.maxInput.$el;
-          if (minInputElm) {
-            this.minPickerWidth = minInputElm.getBoundingClientRect().width + 10;
-          }
-          if (maxInputElm) {
-            this.maxPickerWidth = maxInputElm.getBoundingClientRect().width + 10;
-          }
-        });
-      },
-
       minDate() {
         this.$nextTick(() => {
           if (this.maxDate && this.maxDate < this.minDate) {
@@ -273,11 +273,11 @@
       },
 
       minTimePickerVisible(val) {
-        if (val) this.$nextTick(() => this.$refs.minTimePicker.ajustScrollTop());
+        if (val) this.$nextTick(() => this.$refs.minTimePicker.adjustScrollTop());
       },
 
       maxTimePickerVisible(val) {
-        if (val) this.$nextTick(() => this.$refs.maxTimePicker.ajustScrollTop());
+        if (val) this.$nextTick(() => this.$refs.maxTimePicker.adjustScrollTop());
       },
 
       value(newVal) {
@@ -288,7 +288,7 @@
           this.minDate = newVal[0] ? toDate(newVal[0]) : null;
           this.maxDate = newVal[1] ? toDate(newVal[1]) : null;
           if (this.minDate) this.date = new Date(this.minDate);
-          this.handleConfirm(true);
+          this.handleConfirm(true, false);
         }
       }
     },
@@ -297,6 +297,7 @@
       handleClear() {
         this.minDate = null;
         this.maxDate = null;
+        this.date = this.$options.defaultValue ? calcDefaultValue(this.$options.defaultValue) : new Date();
         this.handleConfirm(false);
       },
 
@@ -371,7 +372,7 @@
         }
       },
 
-      handleRangePick(val, close = true) {
+      handleRangePick(val, close = true, user = true) {
         if (this.maxDate === val.maxDate && this.minDate === val.minDate) {
           return;
         }
@@ -379,7 +380,7 @@
         this.maxDate = val.maxDate;
         this.minDate = val.minDate;
         if (!close || this.showTime) return;
-        this.handleConfirm();
+        this.handleConfirm(false, user);
       },
 
       changeToToday() {
@@ -408,7 +409,7 @@
         return new Date(oldDate.getTime());
       },
 
-      handleMinTimePick(value, visible, first) {
+      handleMinTimePick(value, visible, user, first) {
         this.minDate = this.minDate || new Date();
         if (value) {
           this.minDate = this.setTime(this.minDate, value);
@@ -419,7 +420,7 @@
         }
       },
 
-      handleMaxTimePick(value, visible, first) {
+      handleMaxTimePick(value, visible, user, first) {
         if (!this.maxDate) {
           const now = new Date();
           if (now >= this.minDate) {
@@ -456,8 +457,8 @@
         this.resetDate();
       },
 
-      handleConfirm(visible = false) {
-        this.$emit('pick', [this.minDate, this.maxDate], visible);
+      handleConfirm(visible = false, user = true) {
+        this.$emit('pick', [this.minDate, this.maxDate], visible, user);
       },
 
       resetDate() {

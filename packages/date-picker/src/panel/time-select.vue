@@ -5,7 +5,7 @@
       v-show="visible"
       :style="{ width: width + 'px' }"
       :class="popperClass"
-      class="el-picker-panel time-select">
+      class="el-picker-panel time-select el-popper">
       <el-scrollbar noresize wrap-class="el-picker-panel__content">
         <div class="time-select-item"
           v-for="item in items"
@@ -79,9 +79,9 @@
       value(val) {
         if (!val) return;
         if (this.minTime && compareTime(val, this.minTime) < 0) {
-          this.$emit('pick');
+          this.$emit('pick', '', false, false);
         } else if (this.maxTime && compareTime(val, this.maxTime) > 0) {
-          this.$emit('pick');
+          this.$emit('pick', '', false, false);
         }
         this.$nextTick(() => this.scrollToOption());
       }
@@ -95,7 +95,7 @@
       },
 
       handleClear() {
-        this.$emit('pick');
+        this.$emit('pick', '', false, false);
       },
 
       scrollToOption(className = 'selected') {
@@ -105,6 +105,25 @@
 
       handleMenuEnter() {
         this.$nextTick(() => this.scrollToOption());
+      },
+
+      scrollDown(step) {
+        const items = this.items;
+        let index = items.map(item => item.value).indexOf(this.value);
+        let length = items.length;
+        let total = Math.abs(step);
+        step = step > 0 ? 1 : -1;
+        while (length-- && total) {
+          index = (index + step + items.length) % items.length;
+          const item = items[index];
+          if (!item.disabled) {
+            total--;
+          }
+        }
+        if (!items[index].disabled) {
+          this.value = items[index].value;
+          this.$emit('pick', this.value, true);
+        }
       }
     },
 

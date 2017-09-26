@@ -180,6 +180,39 @@ describe('Slider', () => {
     }, 10);
   });
 
+  it('change event', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-slider v-model="value" @change="onChange">
+          </el-slider>
+        </div>
+      `,
+
+      data() {
+        return {
+          data: 0,
+          value: 0
+        };
+      },
+      methods: {
+        onChange(val) {
+          this.data = val;
+        }
+      }
+    }, true);
+    const slider = vm.$children[0];
+    vm.value = 10;
+    setTimeout(() => {
+      expect(vm.data).to.equal(0);
+      slider.onSliderClick({ clientX: 100 });
+      setTimeout(() => {
+        expect(vm.data > 0).to.true;
+        done();
+      }, 10);
+    }, 10);
+  });
+
   it('disabled', done => {
     vm = createVue({
       template: `

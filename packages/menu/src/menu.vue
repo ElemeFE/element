@@ -2,9 +2,9 @@
   <el-menu-collapse-transition>
     <ul class="el-menu"
       :key="+collapse"
+      :style="{ backgroundColor: backgroundColor || '' }"
       :class="{
         'el-menu--horizontal': mode === 'horizontal',
-        'el-menu--dark': theme === 'dark',
         'el-menu--collapse': collapse
       }"
     >
@@ -102,34 +102,38 @@
         default: ''
       },
       defaultOpeneds: Array,
-      theme: {
-        type: String,
-        default: 'light'
-      },
       uniqueOpened: Boolean,
       router: Boolean,
       menuTrigger: {
         type: String,
         default: 'hover'
       },
-      collapse: Boolean
+      collapse: Boolean,
+      backgroundColor: String,
+      textColor: String,
+      activeTextColor: String
     },
     data() {
       return {
-        activedIndex: this.defaultActive,
+        activeIndex: this.defaultActive,
         openedMenus: this.defaultOpeneds ? this.defaultOpeneds.slice(0) : [],
         items: {},
         submenus: {}
       };
     },
+    computed: {
+      hoverBackground() {
+        return this.backgroundColor ? this.mixColor(this.backgroundColor, 0.2) : '';
+      }
+    },
     watch: {
       defaultActive(value) {
         const item = this.items[value];
         if (item) {
-          this.activedIndex = item.index;
+          this.activeIndex = item.index;
           this.initOpenedMenu();
         } else {
-          this.activedIndex = '';
+          this.activeIndex = '';
         }
 
       },
@@ -141,6 +145,42 @@
       }
     },
     methods: {
+      getColorChannels(color) {
+        color = color.replace('#', '');
+        if (/^[1-9a-fA-F]{3}$/.test(color)) {
+          color = color.split('');
+          for (let i = 2; i >= 0; i--) {
+            color.splice(i, 0, color[i]);
+          }
+          color = color.join('');
+        }
+        if (/^[1-9a-fA-F]{6}$/.test(color)) {
+          return {
+            red: parseInt(color.slice(0, 2), 16),
+            green: parseInt(color.slice(2, 4), 16),
+            blue: parseInt(color.slice(4, 6), 16)
+          };
+        } else {
+          return {
+            red: 255,
+            green: 255,
+            blue: 255
+          };
+        }
+      },
+      mixColor(color, percent) {
+        let { red, green, blue } = this.getColorChannels(color);
+        if (percent > 0) { // shade given color
+          red *= 1 - percent;
+          green *= 1 - percent;
+          blue *= 1 - percent;
+        } else { // tint given color
+          red += (255 - red) * percent;
+          green += (255 - green) * percent;
+          blue += (255 - blue) * percent;
+        }
+        return `rgb(${ Math.round(red) }, ${ Math.round(green) }, ${ Math.round(blue) })`;
+      },
       addItem(item) {
         this.$set(this.items, item.index, item);
       },
@@ -164,7 +204,7 @@
         }
         this.openedMenus.push(index);
       },
-      closeMenu(index, indexPath) {
+      closeMenu(index) {
         this.openedMenus.splice(this.openedMenus.indexOf(index), 1);
       },
       handleSubmenuClick(submenu) {
@@ -172,7 +212,7 @@
         let isOpened = this.openedMenus.indexOf(index) !== -1;
 
         if (isOpened) {
-          this.closeMenu(index, indexPath);
+          this.closeMenu(index);
           this.$emit('close', index, indexPath);
         } else {
           this.openMenu(index, indexPath);
@@ -181,7 +221,7 @@
       },
       handleItemClick(item) {
         let { index, indexPath } = item;
-        this.activedIndex = item.index;
+        this.activeIndex = item.index;
         this.$emit('select', index, indexPath, item);
 
         if (this.mode === 'horizontal' || this.collapse) {
@@ -194,7 +234,7 @@
       },
       // 初始化展开菜单
       initOpenedMenu() {
-        const index = this.activedIndex;
+        const index = this.activeIndex;
         const activeItem = this.items[index];
         if (!activeItem || this.mode === 'horizontal' || this.collapse) return;
 

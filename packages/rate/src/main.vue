@@ -19,7 +19,7 @@
         </i>
       </i>
     </span>
-    <span v-if="showText" class="el-rate__text" :style="{ color: textColor }">{{ text }}</span>
+    <span v-if="showText || showScore" class="el-rate__text" :style="{ color: textColor }">{{ text }}</span>
   </div>
 </template>
 
@@ -32,7 +32,6 @@
     data() {
       return {
         classMap: {},
-        colorMap: {},
         pointerAtLeftHalf: true,
         currentValue: this.value,
         hoverIndex: -1
@@ -96,6 +95,10 @@
         type: Boolean,
         default: false
       },
+      showScore: {
+        type: Boolean,
+        default: false
+      },
       textColor: {
         type: String,
         default: '#1f2d3d'
@@ -106,7 +109,7 @@
           return ['极差', '失望', '一般', '满意', '惊喜'];
         }
       },
-      textTemplate: {
+      scoreTemplate: {
         type: String,
         default: '{value}'
       }
@@ -115,9 +118,11 @@
     computed: {
       text() {
         let result = '';
-        if (this.disabled) {
-          result = this.textTemplate.replace(/\{\s*value\s*\}/, this.value);
-        } else {
+        if (this.showScore) {
+          result = this.scoreTemplate.replace(/\{\s*value\s*\}/, this.disabled
+            ? this.value
+            : this.currentValue);
+        } else if (this.showText) {
           result = this.texts[Math.ceil(this.currentValue) - 1];
         }
         return result;
@@ -153,6 +158,16 @@
         return this.getValueFromMap(this.currentValue, this.classMap);
       },
 
+      colorMap() {
+        return {
+          lowColor: this.colors[0],
+          mediumColor: this.colors[1],
+          highColor: this.colors[2],
+          voidColor: this.voidColor,
+          disabledVoidColor: this.disabledVoidColor
+        };
+      },
+
       activeColor() {
         return this.getValueFromMap(this.currentValue, this.colorMap);
       },
@@ -176,7 +191,6 @@
 
     watch: {
       value(val) {
-        this.$emit('change', val);
         this.currentValue = val;
         this.pointerAtLeftHalf = this.value !== Math.floor(this.value);
       }
@@ -218,8 +232,10 @@
         }
         if (this.allowHalf && this.pointerAtLeftHalf) {
           this.$emit('input', this.currentValue);
+          this.$emit('change', this.currentValue);
         } else {
           this.$emit('input', value);
+          this.$emit('change', value);
         }
       },
 
@@ -266,13 +282,6 @@
         highClass: this.iconClasses[2],
         voidClass: this.voidIconClass,
         disabledVoidClass: this.disabledVoidIconClass
-      };
-      this.colorMap = {
-        lowColor: this.colors[0],
-        mediumColor: this.colors[1],
-        highColor: this.colors[2],
-        voidColor: this.voidColor,
-        disabledVoidColor: this.disabledVoidColor
       };
     }
   };

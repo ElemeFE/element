@@ -332,7 +332,6 @@ Customize Notification's offset from the edge of the screen.
     plain
     @click="open12">
     Use HTML String
->>>>>>> carbon
   </el-button>
 </template>
 

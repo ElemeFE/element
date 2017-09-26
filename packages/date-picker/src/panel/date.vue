@@ -1,11 +1,8 @@
 <template>
-  <transition name="el-zoom-in-top" @after-leave="$emit('dodestroy')">
+  <transition name="el-zoom-in-top" @after-enter="handleEnter" @after-leave="handleLeave">
     <div
       v-show="visible"
-      :style="{
-        width: width + 'px'
-      }"
-      class="el-picker-panel el-date-picker"
+      class="el-picker-panel el-date-picker el-popper"
       :class="[{
         'has-sidebar': $slots.sidebar || shortcuts,
         'has-time': showTime
@@ -39,14 +36,16 @@
               <time-picker
                 ref="timepicker"
                 :date="date"
-                :picker-width="pickerWidth"
                 @pick="handleTimePick"
                 :visible="timePickerVisible"
                 @mounted="$refs.timepicker.format=timeFormat">
               </time-picker>
             </span>
           </div>
-          <div class="el-date-picker__header" v-show="currentView !== 'time'">
+          <div
+            class="el-date-picker__header"
+            :class="{ 'el-date-picker__header--bordered': currentView === 'year' || currentView === 'month' }"
+            v-show="currentView !== 'time'">
             <button
               type="button"
               @click="prevYear"
@@ -139,17 +138,6 @@
     mixins: [Locale],
 
     watch: {
-      showTime(val) {
-        /* istanbul ignore if */
-        if (!val) return;
-        this.$nextTick(_ => {
-          const inputElm = this.$refs.input.$el;
-          if (inputElm) {
-            this.pickerWidth = inputElm.getBoundingClientRect().width + 10;
-          }
-        });
-      },
-
       value(newVal) {
         if (!newVal) return;
         newVal = new Date(newVal);
@@ -161,12 +149,12 @@
           this.date = newVal;
           this.year = newVal.getFullYear();
           this.month = newVal.getMonth();
-          this.$emit('pick', newVal, false);
+          this.$emit('pick', newVal, false, false);
         }
       },
 
       timePickerVisible(val) {
-        if (val) this.$nextTick(() => this.$refs.timepicker.ajustScrollTop());
+        if (val) this.$nextTick(() => this.$refs.timepicker.adjustScrollTop());
       },
 
       selectionMode(newVal) {
@@ -256,7 +244,7 @@
         }
       },
 
-      handleTimePick(picker, visible, first) {
+      handleTimePick(picker, visible) {
         if (picker) {
           let oldDate = new Date(this.date.getTime());
           let hour = picker.getHours();
@@ -265,12 +253,15 @@
           oldDate.setHours(hour);
           oldDate.setMinutes(minute);
           oldDate.setSeconds(second);
+          if (typeof this.disabledDate === 'function' && this.disabledDate(oldDate)) {
+            this.$refs.timepicker.disabled = true;
+            return;
+          }
+          this.$refs.timepicker.disabled = false;
           this.date = new Date(oldDate.getTime());
         }
 
-        if (!first) {
-          this.timePickerVisible = visible;
-        }
+        this.timePickerVisible = visible;
       },
 
       handleMonthPick(month) {
@@ -289,28 +280,28 @@
         }
       },
 
-      handleDatePick(value) {
+      handleDatePick(value, close, user = true) {
         if (this.selectionMode === 'day') {
           if (!this.showTime) {
-            this.$emit('pick', new Date(value.getTime()));
+            this.$emit('pick', new Date(value.getTime()), false, user);
           }
           this.date.setFullYear(value.getFullYear());
           this.date.setMonth(value.getMonth(), value.getDate());
         } else if (this.selectionMode === 'week') {
           this.week = value.week;
-          this.$emit('pick', value.date);
+          this.$emit('pick', value.date, false, user);
         }
 
         this.resetDate();
       },
 
-      handleYearPick(year, close = true) {
+      handleYearPick(year, close = true, user) {
         this.year = year;
         if (!close) return;
 
         this.date.setFullYear(year);
         if (this.selectionMode === 'year') {
-          this.$emit('pick', new Date(year, 0, 1));
+          this.$emit('pick', new Date(year, 0, 1), false, user);
         } else {
           this.currentView = 'month';
         }
@@ -342,6 +333,64 @@
           this.year = this.date.getFullYear();
           this.month = this.date.getMonth();
         }
+      },
+
+      handleEnter() {
+        document.body.addEventListener('keydown', this.handleKeyDown);
+      },
+
+      handleLeave() {
+        this.$refs.timepicker && this.$refs.timepicker.$emit('pick');
+        this.$emit('dodestory');
+        document.body.removeEventListener('keydown', this.handleKeyDown);
+      },
+
+      handleKeyDown(e) {
+        const keyCode = e.keyCode;
+        const list = [38, 40, 37, 39];
+        if (this.visible && !this.timePickerVisible) {
+          if (list.indexOf(keyCode) !== -1) {
+            this.handleKeyControl(keyCode);
+            event.stopPropagation();
+            event.preventDefault();
+          }
+
+          if (keyCode === 13) {
+            this.confirm();
+            event.stopPropagation();
+            event.preventDefault();
+          }
+        }
+      },
+
+      handleKeyControl(keyCode) {
+        const mapping = {
+          'year': {
+            38: -4, 40: 4, 37: -1, 39: 1, offset: (date, step) => date.setFullYear(date.getFullYear() + step)
+          },
+          'month': {
+            38: -4, 40: 4, 37: -1, 39: 1, offset: (date, step) => date.setMonth(date.getMonth() + step)
+          },
+          'week': {
+            38: -1, 40: 1, 37: -1, 39: 1, offset: (date, step) => date.setDate(date.getDate() + step * 7)
+          },
+          'day': {
+            38: -7, 40: 7, 37: -1, 39: 1, offset: (date, step) => date.setDate(date.getDate() + step)
+          }
+        };
+        const mode = this.selectionMode;
+        const year = 3.1536e10;
+        const now = this.date.getTime();
+        const newDate = new Date(this.date.getTime());
+        while (Math.abs(now - newDate.getTime()) <= year) {
+          const map = mapping[mode];
+          map.offset(newDate, map[keyCode]);
+          if (typeof this.disabledDate === 'function' && this.disabledDate(newDate)) {
+            continue;
+          }
+          this.date = newDate;
+          break;
+        }
       }
     },
 
@@ -359,7 +408,6 @@
     data() {
       return {
         popperClass: '',
-        pickerWidth: 0,
         date: this.$options.defaultValue ? new Date(this.$options.defaultValue) : new Date(),
         value: '',
         showTime: false,
@@ -374,7 +422,6 @@
         week: null,
         showWeekNumber: false,
         timePickerVisible: false,
-        width: 0,
         format: ''
       };
     },

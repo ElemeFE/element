@@ -114,6 +114,39 @@
         color: #445368;
       }
     }
+
+    .warning {
+      border-bottom-right-radius: 4px;
+      border-left: 4px solid #f66;
+      border-top-right-radius: 4px;
+      padding: 12px 24px 12px 30px;
+      position: relative;
+      background-color: #f8f8f8;
+      margin-top: 20px;
+      
+      &::before {
+        background-color: #f66;
+        border-radius: 100%;
+        color: #fff;
+        content: "!";
+        font-family: Dosis,Source Sans Pro,Helvetica Neue,Arial,sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        left: -12px;
+        line-height: 20px;
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        text-align: center;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+  
+      code {
+        background-color: rgba(#fff, .7);
+        color: #445368;
+      }
+    }
   }
   .demo {
     margin: 20px 0;

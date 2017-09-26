@@ -55,6 +55,11 @@ cooking.add('loader.md', {
   loader: 'vue-markdown-loader'
 });
 
+cooking.add('loader.scss', {
+  test: /\.scss$/,
+  loaders: ['style-loader', 'css-loader', 'sass-loader']
+});
+
 cooking.add(
   'output.chunkFilename',
   isProd ? '[name].[chunkhash:7].js' : '[name].js'
@@ -96,7 +101,8 @@ cooking.add('vueMarkdown', {
         return '</div></demo-block>\n';
       }
     }],
-    [require('markdown-it-container'), 'tip']
+    [require('markdown-it-container'), 'tip'],
+    [require('markdown-it-container'), 'warning']
   ],
   preprocess: function(MarkdownIt, source) {
     MarkdownIt.renderer.rules.table_open = function() {

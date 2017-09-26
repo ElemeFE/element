@@ -5,8 +5,7 @@
     @after-leave="$emit('dodestroy')">
     <div
       v-show="visible"
-      :style="{ width: width + 'px' }"
-      class="el-time-range-picker el-picker-panel"
+      class="el-time-range-picker el-picker-panel el-popper"
       :class="popperClass">
       <div class="el-time-range-picker__content">
         <div class="el-time-range-picker__cell">
@@ -89,6 +88,14 @@
     computed: {
       showSeconds() {
         return (this.format || '').indexOf('ss') !== -1;
+      },
+
+      offset() {
+        return this.showSeconds ? 11 : 8;
+      },
+
+      spinner() {
+        return this.selectionRange[0] < this.offset ? this.$refs.minSpinner : this.$refs.maxSpinner;
       }
     },
 
@@ -110,14 +117,20 @@
         minSeconds: time.minTime.getSeconds(),
         format: 'HH:mm:ss',
         visible: false,
-        width: 0
+        selectionRange: [0, 2]
       };
     },
 
     watch: {
       value(newVal) {
         this.panelCreated();
-        this.$nextTick(_ => this.ajustScrollTop());
+        this.$nextTick(_ => this.adjustScrollTop());
+      },
+
+      visible(val) {
+        if (val) {
+          this.$nextTick(() => this.$refs.minSpinner.emitSelectRange('hours'));
+        }
       }
     },
 
@@ -132,12 +145,12 @@
           hours: time.minTime.getHours(),
           minutes: time.minTime.getMinutes(),
           seconds: time.minTime.getSeconds()
-        });
+        }, true);
         this.handleMaxChange({
           hours: time.maxTime.getHours(),
           minutes: time.maxTime.getMinutes(),
           seconds: time.maxTime.getSeconds()
-        });
+        }, true);
       },
 
       handleClear() {
@@ -148,7 +161,7 @@
         this.$emit('pick');
       },
 
-      handleChange() {
+      handleChange(notUser) {
         if (this.minTime > this.maxTime) return;
         MIN_TIME.setFullYear(this.minTime.getFullYear());
         MIN_TIME.setMonth(this.minTime.getMonth(), this.minTime.getDate());
@@ -156,10 +169,10 @@
         MAX_TIME.setMonth(this.maxTime.getMonth(), this.maxTime.getDate());
         this.$refs.minSpinner.selectableRange = [[MIN_TIME, this.maxTime]];
         this.$refs.maxSpinner.selectableRange = [[this.minTime, MAX_TIME]];
-        this.handleConfirm(true);
+        this.handleConfirm(true, false, notUser);
       },
 
-      handleMaxChange(date) {
+      handleMaxChange(date, notUser) {
         if (date.hours !== undefined) {
           this.maxTime.setHours(date.hours);
           this.maxHours = this.maxTime.getHours();
@@ -175,7 +188,7 @@
         this.handleChange();
       },
 
-      handleMinChange(date) {
+      handleMinChange(date, notUser) {
         if (date.hours !== undefined) {
           this.minTime.setHours(date.hours);
           this.minHours = this.minTime.getHours();
@@ -193,14 +206,16 @@
       },
 
       setMinSelectionRange(start, end) {
-        this.$emit('select-range', start, end);
+        this.$emit('select-range', start, end, 'min');
+        this.selectionRange = [start, end];
       },
 
       setMaxSelectionRange(start, end) {
-        this.$emit('select-range', start + 11, end + 11);
+        this.$emit('select-range', start, end, 'max');
+        this.selectionRange = [start + this.offset, end + this.offset];
       },
 
-      handleConfirm(visible = false, first = false) {
+      handleConfirm(visible = false, first = false, notUser = false) {
         const minSelectableRange = this.$refs.minSpinner.selectableRange;
         const maxSelectableRange = this.$refs.maxSpinner.selectableRange;
 
@@ -208,12 +223,29 @@
         this.maxTime = limitRange(this.maxTime, maxSelectableRange);
 
         if (first) return;
-        this.$emit('pick', [this.minTime, this.maxTime], visible, first);
+        this.$emit('pick', [this.minTime, this.maxTime], visible, !notUser);
       },
 
-      ajustScrollTop() {
-        this.$refs.minSpinner.ajustScrollTop();
-        this.$refs.maxSpinner.ajustScrollTop();
+      adjustScrollTop() {
+        this.$refs.minSpinner.adjustScrollTop();
+        this.$refs.maxSpinner.adjustScrollTop();
+      },
+
+      scrollDown(step) {
+        this.spinner.scrollDown(step);
+      },
+
+      changeSelectionRange(step) {
+        const list = this.showSeconds ? [0, 3, 6, 11, 14, 17] : [0, 3, 8, 11];
+        const mapping = ['hours', 'minutes'].concat(this.showSeconds ? ['seconds'] : []);
+        const index = list.indexOf(this.selectionRange[0]);
+        const next = (index + step + list.length) % list.length;
+        const half = list.length / 2;
+        if (next < half) {
+          this.$refs.minSpinner.emitSelectRange(mapping[next]);
+        } else {
+          this.$refs.maxSpinner.emitSelectRange(mapping[next - half]);
+        }
       }
     },
 

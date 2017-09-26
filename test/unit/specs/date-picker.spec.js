@@ -158,6 +158,24 @@ describe('DatePicker', () => {
     }, DELAY);
   });
 
+  it('focus', done => {
+    vm = createVue({
+      template: `
+        <el-date-picker ref="picker"></el-date-picker>
+      `
+    }, true);
+
+    const spy = sinon.spy();
+
+    vm.$refs.picker.$on('focus', spy);
+    vm.$refs.picker.focus();
+
+    vm.$nextTick(_ => {
+      expect(spy.calledOnce).to.be.true;
+      done();
+    });
+  });
+
   it('change event', done => {
     let inputValue;
 
@@ -284,8 +302,7 @@ describe('DatePicker', () => {
 
       const input = vm.$el.querySelector('input');
 
-      input.blur();
-      input.focus();
+      input.click();
 
       setTimeout(_ => {
         const picker = vm.$refs.compo.picker;
@@ -316,26 +333,35 @@ describe('DatePicker', () => {
       }, DELAY);
     });
 
+    it('work for event focus and blur', done => {
+      vm = createVue({
+        template: `
+          <el-date-picker ref="picker"/>
+        `
+      }, true);
+
+      const spyFocus = sinon.spy();
+      const spyBlur = sinon.spy();
+
+      vm.$refs.picker.$on('focus', spyFocus);
+      vm.$refs.picker.$on('blur', spyBlur);
+      vm.$el.querySelector('input').focus();
+      vm.$el.querySelector('input').blur();
+
+      vm.$nextTick(_ => {
+        expect(spyFocus.calledOnce).to.be.true;
+        expect(spyBlur.calledOnce).to.be.true;
+        done();
+      });
+    });
   });
 
   it('default value', done => {
-    const toDateStr = date => {
-      let d = new Date(date);
-      return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
-    };
-    let today = new Date();
-    let nextMonth = new Date(today);
-    nextMonth.setDate(1);
-    if (nextMonth.getMonth() === 12) {
-      nextMonth.setFullYear(today.getFullYear + 1);
-      nextMonth.setMonth(1);
-    } else {
-      nextMonth.setMonth(today.getMonth() + 1);
-    }
-    let nextMonthStr = toDateStr(nextMonth);
+    let defaultValue = '2000-01-01';
+    let expectValue = new Date(2000, 0, 1);
 
     vm = createVue({
-      template: `<el-date-picker v-model="value" ref="compo" default-value="${nextMonthStr}" />`,
+      template: `<el-date-picker v-model="value" ref="compo" default-value="${defaultValue}" />`,
       data() {
         return {
           value: ''
@@ -350,10 +376,10 @@ describe('DatePicker', () => {
       const $el = vm.$refs.compo.picker.$el;
       $el.querySelector('td.current').click();
       setTimeout(_ => {
-        expect(vm.value).to.equal(nextMonthStr);
-      });
-      done();
-    });
+        expect(+vm.value).to.equal(+expectValue);
+        done();
+      }, 10);
+    }, 10);
   });
 
   describe('keydown', () => {
@@ -601,8 +627,7 @@ describe('DatePicker', () => {
     }, true);
     const input = vm.$el.querySelector('input');
 
-    input.blur();
-    input.focus();
+    input.click();
 
     setTimeout(_ => {
       const panels = vm.picker.$el.querySelectorAll('.el-date-range-picker__content');
@@ -632,10 +657,8 @@ describe('DatePicker', () => {
         type: 'datetimerange',
         value: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)]
       }, true);
-      const input = vm.$el.querySelector('input');
 
-      input.blur();
-      input.focus();
+      vm.$el.click();
 
       setTimeout(done, DELAY);
     });
@@ -644,56 +667,6 @@ describe('DatePicker', () => {
 
     it('create', () => {
       expect(Array.prototype.slice.call(vm.picker.$el.querySelectorAll('.el-time-panel'))).to.length(2);
-    });
-
-    it('click timepicker', done => {
-      const input = vm.picker.$el.querySelectorAll('.el-date-range-picker__editors-wrap input')[1];
-      input.blur();
-      input.focus();
-      input.blur();
-
-      setTimeout(_ => {
-        expect(vm.picker.$el.querySelector('.el-date-range-picker__time-picker-wrap .el-time-panel')).to.have.deep.property('style.display').to.equal('');
-        done();
-      }, DELAY);
-    });
-
-    it('click timepicker in right', done => {
-      const input = vm.picker.$el.querySelectorAll('.el-date-range-picker__editors-wrap input')[3];
-      input.blur();
-      input.focus();
-      input.blur();
-
-      setTimeout(_ => {
-        expect(vm.picker.$el.querySelectorAll('.el-date-range-picker__time-picker-wrap .el-time-panel')[1]).to.have.deep.property('style.display').to.equal('');
-        done();
-      }, DELAY);
-    });
-
-    it('input timepicker', done => {
-      const input = vm.picker.$el.querySelectorAll('.el-date-range-picker__editors-wrap input')[1];
-
-      input.value = '10:22:14';
-      triggerEvent(input, 'change', true);
-      setTimeout(_ => {
-        expect(vm.picker.minDate.getHours()).to.equal(10);
-        expect(vm.picker.minDate.getMinutes()).to.equal(22);
-        expect(vm.picker.minDate.getSeconds()).to.equal(14);
-        done();
-      }, DELAY);
-    });
-
-    it('input timepicker in right', done => {
-      const input = vm.picker.$el.querySelectorAll('.el-date-range-picker__editors-wrap input')[3];
-
-      input.value = '10:22:14';
-      triggerEvent(input, 'change', true);
-      setTimeout(_ => {
-        expect(vm.picker.maxDate.getHours()).to.equal(10);
-        expect(vm.picker.maxDate.getMinutes()).to.equal(22);
-        expect(vm.picker.maxDate.getSeconds()).to.equal(14);
-        done();
-      }, DELAY);
     });
 
     it('select daterange', done => {

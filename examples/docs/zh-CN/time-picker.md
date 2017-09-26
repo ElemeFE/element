@@ -117,6 +117,9 @@
   <el-time-picker
     is-range
     v-model="value3"
+    range-separator="至"
+    start-placeholder="开始时间"
+    end-placeholder="结束时间"
     placeholder="选择时间范围">
   </el-time-picker>
 </template>
@@ -154,12 +157,16 @@
 | disabled | 禁用 | boolean | — | false |
 | editable | 文本框可输入 | boolean | — | true |
 | clearable | 是否显示清除按钮 | boolean | — | true |
-| size          | 输入框尺寸     | string          | large, small, mini  | — |
-| placeholder | 占位内容 | string | — | — |
-| value | 绑定值 | TimePicker: DateTimeSelect: String | — | — |
-| align | 对齐方式 | string | left, center, right | left |
+| size          | 输入框尺寸     | string          | medium / small / mini  | — |
+| placeholder | 非范围选择时的占位内容 | string | — | — |
+| start-placeholder | 范围选择时开始日期的占位内容 | string | — | — |
+| end-placeholder | 范围选择时开始日期的占位内容 | string | — | — |
+| value | 绑定值 | date(TimePicker) / string(TimeSelect) | — | — |
+| align | 对齐方式 | string | left / center / right | left |
 | popper-class | TimePicker 下拉框的类名 | string | — | — |
 | picker-options | 当前时间日期选择器特有的选项参考下表 | object | — | {} |
+| range-separator | 选择范围时的分隔符 | string | - | '-' |
+| name | 原生属性 | string | — | — |
 
 ### Time Select Options
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
@@ -173,14 +180,17 @@
 ### Time Picker Options
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| selectableRange | 可选时间段，例如`'18:30:00 - 20:30:00'`或者传入数组`['09:30:00 - 12:00:00', '14:30:00 - 18:30:00']` | string/array | — | — |
+| selectableRange | 可选时间段，例如`'18:30:00 - 20:30:00'`或者传入数组`['09:30:00 - 12:00:00', '14:30:00 - 18:30:00']` | string / array | — | — |
 | format | 时间格式化(TimePicker) | string | 小时：`HH`，分：`mm`，秒：`ss` | 'HH:mm:ss' |
 
-
 ### Events
-| Event Name | Description | Parameters |
+| 事件名 | 说明 | 参数 |
 |---------|--------|---------|
 | change | 当 input 的值改变时触发，返回值和文本框一致 | formatted value |
+| blur | 当 input 失去焦点时触发 | (event: Event) |
+| focus | 当 input 获得焦点时触发 | (event: Event) |
 
-
-
+### Methods
+| 方法名 | 说明 | 参数 |
+| ---- | ---- | ---- |
+| focus | 使 input 获取焦点 | - |

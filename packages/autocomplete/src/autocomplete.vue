@@ -8,9 +8,10 @@
       @compositionend.native="handleComposition"
       @change="handleChange"
       @focus="handleFocus"
+      @blur="handleBlur"
       @keydown.up.native.prevent="highlight(highlightedIndex - 1)"
       @keydown.down.native.prevent="highlight(highlightedIndex + 1)"
-      @keydown.enter.native.prevent="handleKeyEnter"
+      @keydown.enter.native="handleKeyEnter"
       @keydown.native.tab="close"
     >
       <template slot="prepend" v-if="$slots.prepend">
@@ -21,11 +22,18 @@
       </template>
     </el-input>
     <el-autocomplete-suggestions
-      :props="props"
+      visible-arrow
       :class="[popperClass ? popperClass : '']"
-      ref="suggestions"
-      :suggestions="suggestions"
-    >
+      ref="suggestions">
+      <li
+        v-for="(item, index) in suggestions"
+        :key="index"
+        :class="{'highlighted': highlightedIndex === index}"
+        @click="select(item)">
+        <slot :item="item">
+          {{ item[props.label] }}
+        </slot>
+      </li>
     </el-autocomplete-suggestions>
   </div>
 </template>
@@ -73,7 +81,11 @@
       },
       customItem: String,
       icon: String,
-      onIconClick: Function
+      onIconClick: Function,
+      selectWhenUnmatched: {
+        type: Boolean,
+        default: false
+      }
     },
     data() {
       return {
@@ -124,30 +136,45 @@
         }
         this.getData(value);
       },
-      handleFocus() {
+      handleFocus(event) {
         this.activated = true;
+        this.$emit('focus', event);
         if (this.triggerOnFocus) {
           this.getData(this.value);
         }
       },
+      handleBlur(event) {
+        this.$emit('blur', event);
+      },
       close(e) {
         this.activated = false;
       },
-      handleKeyEnter() {
+      handleKeyEnter(e) {
         if (this.suggestionVisible && this.highlightedIndex >= 0 && this.highlightedIndex < this.suggestions.length) {
+          e.preventDefault();
           this.select(this.suggestions[this.highlightedIndex]);
+        } else if (this.selectWhenUnmatched) {
+          this.$emit('select', {value: this.value});
+          this.$nextTick(_ => {
+            this.suggestions = [];
+            this.highlightedIndex = -1;
+          });
         }
       },
       select(item) {
-        this.$emit('input', item[this.props.value]);
+        this.$emit('input', item[this.props.label]);
         this.$emit('select', item);
         this.$nextTick(_ => {
           this.suggestions = [];
+          this.highlightedIndex = -1;
         });
       },
       highlight(index) {
         if (!this.suggestionVisible || this.loading) { return; }
-        if (index < 0) index = 0;
+        if (index < 0) {
+          this.highlightedIndex = -1;
+          return;
+        }
         if (index >= this.suggestions.length) {
           index = this.suggestions.length - 1;
         }

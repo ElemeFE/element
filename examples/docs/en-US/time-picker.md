@@ -118,7 +118,9 @@ Can pick an arbitrary time range.
   <el-time-picker
     is-range
     v-model="value3"
-    placeholder="Pick a time range">
+    range-separator="To"
+    start-placeholder="Start time"
+    end-placeholder="End time">
   </el-time-picker>
 </template>
 
@@ -155,12 +157,16 @@ Can pick an arbitrary time range.
 | disabled | whether DatePicker is disabled | boolean | — | false |
 | editable | whether the input is editable | boolean | — | true |
 | clearable | Whether to show clear button | boolean | — | true |
-| size | size of Input | string | large/small/mini | — |
-| placeholder | placeholder | string | — | — |
+| size | size of Input | string | medium / small / mini | — |
+| placeholder | placeholder in non-range mode | string | — | — |
+| start-placeholder | placeholder for the start time in range mode | string | — | — |
+| end-placeholder | placeholder for the end time in range mode | string | — | — |
 | value | value of the picker | date for Time Picker, and string for Time Select | hour `HH`, minute `mm`, second `ss` | HH:mm:ss |
-| align | alignment | left/center/right | left |
+| align | alignment | left / center / right | left |
 | popper-class | custom class name for TimePicker's dropdown | string | — | — |
 | picker-options | additional options, check the table below | object | — | {} |
+| range-separator | range separator | string | - | '-' |
+|name | same as `name` in native input | string | — | — |
 
 ### Time Select Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
@@ -174,7 +180,7 @@ Can pick an arbitrary time range.
 ### Time Picker Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| selectableRange | available time range, e.g.`'18:30:00 - 20:30:00'`or`['09:30:00 - 12:00:00', '14:30:00 - 18:30:00']` | string/array | — | — |
+| selectableRange | available time range, e.g.`'18:30:00 - 20:30:00'`or`['09:30:00 - 12:00:00', '14:30:00 - 18:30:00']` | string / array | — | — |
 | format | format of the picker | string | hour `HH`, minute `mm`, second `ss` | HH:mm:ss |
 
 
@@ -182,4 +188,5 @@ Can pick an arbitrary time range.
 | Event Name | Description | Parameters |
 |---------|--------|---------|
 | change | triggers when input value changes | formatted value |
-
+| blur | triggers when Input blurs | (event: Event) |
+| focus | triggers when Input focuses | (event: Event) |

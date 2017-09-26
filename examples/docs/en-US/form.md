@@ -512,10 +512,11 @@ Form component allows you to verify your data, helping you find and correct erro
 
 ### Custom validation rules
 
-:::demo This example shows how to customize your own validation rules to finish a two-factor password verification.
+This example shows how to customize your own validation rules to finish a two-factor password verification.
 
+:::demo Here we use `status-icon` to reflect validation result as an icon.
 ```html
-<el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-width="120px" class="demo-ruleForm">
+<el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="120px" class="demo-ruleForm">
   <el-form-item label="Password" prop="pass">
     <el-input type="password" v-model="ruleForm2.pass" auto-complete="off"></el-input>
   </el-form-item>
@@ -749,6 +750,8 @@ When an `el-form-item` is nested in another `el-form-item`, its label width will
 | label-width | width of label, and all its direct child form items will inherit this value | string | — | — |
 | label-suffix | suffix of the label | string | — | — |
 | show-message  | whether to show the error message | boolean | — | true |
+| inline-message  | whether to display the error message inline with the form item | boolean | — | false |
+| status-icon  | whether to display an icon indicating the validation result | boolean | — | false |
 
 ### Form Methods
 
@@ -769,10 +772,10 @@ When an `el-form-item` is nested in another `el-form-item`, its label width will
 | rules | validation rules of form | object | — | — |
 | error | field error message, set its value and the field will validate error and show this message immediately | string | — | — |
 | show-message  | whether to show the error message | boolean | — | true |
-
+| inline-message  | inline style validate message | boolean | — | false |
 
 ### Form-Item Slot
-| name | Description |
+| Name | Description |
 |------|--------|
 | — | content of Form Item |
 | label | content of label |

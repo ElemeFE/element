@@ -1,6 +1,7 @@
 import Pager from './pager.vue';
 import ElSelect from 'element-ui/packages/select';
 import ElOption from 'element-ui/packages/option';
+import ElInput from 'element-ui/packages/input';
 import Locale from 'element-ui/src/mixins/locale';
 
 export default {
@@ -32,7 +33,13 @@ export default {
       default() {
         return [10, 20, 30, 40, 50, 100];
       }
-    }
+    },
+
+    popperClass: String,
+
+    prevText: String,
+
+    nextText: String
   },
 
   data() {
@@ -100,7 +107,11 @@ export default {
             type="button"
             class={['btn-prev', { disabled: this.$parent.internalCurrentPage <= 1 }]}
             on-click={ this.$parent.prev }>
-            <i class="el-icon el-icon-arrow-left"></i>
+            {
+              this.$parent.prevText
+                ? <span>{ this.$parent.prevText }</span>
+                : <i class="el-icon el-icon-arrow-left"></i>
+            }
           </button>
         );
       }
@@ -116,7 +127,11 @@ export default {
               { disabled: this.$parent.internalCurrentPage === this.$parent.internalPageCount || this.$parent.internalPageCount === 0 }
             ]}
             on-click={ this.$parent.next }>
-            <i class="el-icon el-icon-arrow-right"></i>
+            {
+              this.$parent.nextText
+                ? <span>{ this.$parent.nextText }</span>
+                : <i class="el-icon el-icon-arrow-right"></i>
+            }
           </button>
         );
       }
@@ -147,6 +162,7 @@ export default {
           <span class="el-pagination__sizes">
             <el-select
               value={ this.$parent.internalPageSize }
+              popperClass={ this.$parent.popperClass }
               on-input={ this.handleChange }>
               {
                 this.pageSizes.map(item =>
@@ -163,7 +179,8 @@ export default {
 
       components: {
         ElSelect,
-        ElOption
+        ElOption,
+        ElInput
       },
 
       methods: {
@@ -189,16 +206,25 @@ export default {
         handleFocus(event) {
           this.oldValue = event.target.value;
         },
+        handleBlur({ target }) {
+          this.reassignMaxValue(target);
+        },
         handleKeyUp(event) {
           const key = event.key || '';
           const keyCode = event.keyCode || '';
           if ((key && key === 'Enter') || (keyCode && keyCode === 13)) {
+            this.reassignMaxValue(event.target);
             this.handleChange({ target: event.target });
           }
         },
-        handleChange({ target }) {
-          this.$parent.internalCurrentPage = this.$parent.getValidCurrentPage(target.value);
+        handleChange(value) {
+          this.$parent.internalCurrentPage = this.$parent.getValidCurrentPage(value);
           this.oldValue = null;
+        },
+        reassignMaxValue(target) {
+          if (+target.value > this.$parent.internalPageCount) {
+            target.value = this.$parent.internalPageCount;
+          }
         }
       },
 
@@ -206,17 +232,17 @@ export default {
         return (
           <span class="el-pagination__jump">
             { this.t('el.pagination.goto') }
-            <input
-              class="el-pagination__editor"
-              type="number"
+            <el-input
+              class="el-pagination__editor is-in-pagination"
               min={ 1 }
-              max={ this.internalPageCount }
+              max={ this.$parent.internalPageCount }
               value={ this.$parent.internalCurrentPage }
-              domProps-value={ this.$parent.internalCurrentPage }
-              on-change={ this.handleChange }
-              on-focus={ this.handleFocus }
-              on-keyup={ this.handleKeyUp }
-              number/>
+              domPropsValue={ this.$parent.internalCurrentPage }
+              type="number"
+              onChange={ this.handleChange }
+              onFocus={ this.handleFocus }
+              onBlur={ this.handleBlur }
+              nativeOnKeyup={ this.handleKeyUp }/>
             { this.t('el.pagination.pageClassifier') }
           </span>
         );

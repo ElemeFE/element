@@ -3,6 +3,9 @@
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
 
   function noop() {}
+  const firstUpperCase = str => {
+    return str.toLowerCase().replace(/( |^)[a-z]/g, (L) => L.toUpperCase());
+  };
 
   export default {
     name: 'TabNav',
@@ -10,6 +13,8 @@
     components: {
       TabBar
     },
+
+    inject: ['rootTabs'],
 
     props: {
       panes: Array,
@@ -29,37 +34,47 @@
     data() {
       return {
         scrollable: false,
-        navStyle: {
-          transform: ''
-        }
+        navOffset: 0
       };
+    },
+
+    computed: {
+      navStyle() {
+        const dir = ['top', 'bottom'].indexOf(this.rootTabs.tabPosition) !== -1 ? 'X' : 'Y';
+        return {
+          transform: `translate${dir}(-${this.navOffset}px)`
+        };
+      },
+      sizeName() {
+        return ['top', 'bottom'].indexOf(this.rootTabs.tabPosition) !== -1 ? 'width' : 'height';
+      }
     },
 
     methods: {
       scrollPrev() {
-        const containerWidth = this.$refs.navScroll.offsetWidth;
-        const currentOffset = this.getCurrentScrollOffset();
+        const containerSize = this.$refs.navScroll[`offset${firstUpperCase(this.sizeName)}`];
+        const currentOffset = this.navOffset;
 
         if (!currentOffset) return;
 
-        let newOffset = currentOffset > containerWidth
-          ? currentOffset - containerWidth
+        let newOffset = currentOffset > containerSize
+          ? currentOffset - containerSize
           : 0;
 
-        this.setOffset(newOffset);
+        this.navOffset = newOffset;
       },
       scrollNext() {
-        const navWidth = this.$refs.nav.offsetWidth;
-        const containerWidth = this.$refs.navScroll.offsetWidth;
-        const currentOffset = this.getCurrentScrollOffset();
+        const navSize = this.$refs.nav[`offset${firstUpperCase(this.sizeName)}`];
+        const containerSize = this.$refs.navScroll[`offset${firstUpperCase(this.sizeName)}`];
+        const currentOffset = this.navOffset;
 
-        if (navWidth - currentOffset <= containerWidth) return;
+        if (navSize - currentOffset <= containerSize) return;
 
-        let newOffset = navWidth - currentOffset > containerWidth * 2
-          ? currentOffset + containerWidth
-          : (navWidth - containerWidth);
+        let newOffset = navSize - currentOffset > containerSize * 2
+          ? currentOffset + containerSize
+          : (navSize - containerSize);
 
-        this.setOffset(newOffset);
+        this.navOffset = newOffset;
       },
       scrollToActiveTab() {
         if (!this.scrollable) return;
@@ -69,7 +84,7 @@
         const activeTabBounding = activeTab.getBoundingClientRect();
         const navScrollBounding = navScroll.getBoundingClientRect();
         const navBounding = nav.getBoundingClientRect();
-        const currentOffset = this.getCurrentScrollOffset();
+        const currentOffset = this.navOffset;
         let newOffset = currentOffset;
 
         if (activeTabBounding.left < navScrollBounding.left) {
@@ -81,34 +96,27 @@
         if (navBounding.right < navScrollBounding.right) {
           newOffset = nav.offsetWidth - navScrollBounding.width;
         }
-        this.setOffset(Math.max(newOffset, 0));
-      },
-      getCurrentScrollOffset() {
-        const { navStyle } = this;
-        return navStyle.transform
-          ? Number(navStyle.transform.match(/translateX\(-(\d+(\.\d+)*)px\)/)[1])
-          : 0;
-      },
-      setOffset(value) {
-        this.navStyle.transform = `translateX(-${value}px)`;
+        this.navOffset = Math.max(newOffset, 0);
       },
       update() {
-        const navWidth = this.$refs.nav.offsetWidth;
-        const containerWidth = this.$refs.navScroll.offsetWidth;
-        const currentOffset = this.getCurrentScrollOffset();
+        if (!this.$refs.nav) return;
+        const sizeName = this.sizeName;
+        const navSize = this.$refs.nav[`offset${firstUpperCase(sizeName)}`];
+        const containerSize = this.$refs.navScroll[`offset${firstUpperCase(sizeName)}`];
+        const currentOffset = this.navOffset;
 
-        if (containerWidth < navWidth) {
-          const currentOffset = this.getCurrentScrollOffset();
+        if (containerSize < navSize) {
+          const currentOffset = this.navOffset;
           this.scrollable = this.scrollable || {};
           this.scrollable.prev = currentOffset;
-          this.scrollable.next = currentOffset + containerWidth < navWidth;
-          if (navWidth - currentOffset < containerWidth) {
-            this.setOffset(navWidth - containerWidth);
+          this.scrollable.next = currentOffset + containerSize < navSize;
+          if (navSize - currentOffset < containerSize) {
+            this.navOffset = navSize - containerSize;
           }
         } else {
           this.scrollable = false;
           if (currentOffset > 0) {
-            this.setOffset(0);
+            this.navOffset = 0;
           }
         }
       }

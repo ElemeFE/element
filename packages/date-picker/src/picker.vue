@@ -5,24 +5,61 @@
     :readonly="!editable || readonly"
     :disabled="disabled"
     :size="size"
+    :name="name"
+    v-if="!ranged"
     v-clickoutside="handleClose"
     :placeholder="placeholder"
     @focus="handleFocus"
     @blur="handleBlur"
     @keydown.native="handleKeydown"
     :value="displayValue"
+    @mouseenter.native="handleMouseEnter"
+    @mouseleave.native="showClose = false"
     @change.native="displayValue = $event.target.value"
     :validateEvent="false"
+    :prefix-icon="triggerClass"
     ref="reference">
-    <i slot="icon"
+    <i slot="suffix"
       class="el-input__icon"
       @click="handleClickIcon"
-      :class="[showClose ? 'el-icon-close' : triggerClass]"
-      @mouseenter="handleMouseEnterIcon"
-      @mouseleave="showClose = false"
+      :class="{ 'el-icon-circle-close': showClose }"
       v-if="haveTrigger">
     </i>
   </el-input>
+  <div
+    class="el-date-editor el-range-editor el-input__inner"
+    :class="[
+      'el-date-editor--' + type,
+      'el-range-editor--' + size,
+      pickerVisible ? 'is-active' : ''
+    ]"
+    @click="handleRangeClick"
+    @mouseenter="handleMouseEnter"
+    @mouseleave="showClose = false"
+    ref="reference"
+    v-clickoutside="handleClose"
+    v-else>
+    <i :class="['el-input__icon', 'el-range__icon', triggerClass]"></i>
+    <input
+      :placeholder="startPlaceholder"
+      :value="displayValue && displayValue[0]"
+      @keydown="handleKeydown"
+      @change="handleStartChange"
+      class="el-range-input">
+    <span class="el-range-separator">{{ rangeSeparator }}</span>
+    <input
+      :placeholder="endPlaceholder"
+      :value="displayValue && displayValue[1]"
+      @keydown="handleKeydown"
+      @change="handleEndChange"
+      class="el-range-input">
+    <i
+      @click="handleClickIcon"
+      v-if="haveTrigger"
+      :class="{ 'el-icon-circle-close': showClose }"
+      class="el-input__icon el-range__close-icon">
+    </i>
+  </div>
 </template>
 
 <script>
@@ -31,7 +68,9 @@ import Clickoutside from 'element-ui/src/utils/clickoutside';
 import { formatDate, parseDate, getWeekNumber, equalDate, isDate } from './util';
 import Popper from 'element-ui/src/utils/vue-popper';
 import Emitter from 'element-ui/src/mixins/emitter';
+import Focus from 'element-ui/src/mixins/focus';
 import ElInput from 'element-ui/packages/input';
+import merge from 'element-ui/src/utils/merge';
 
 const NewPopper = {
   props: {
@@ -40,7 +79,9 @@ const NewPopper = {
     boundariesPadding: Popper.props.boundariesPadding
   },
   methods: Popper.methods,
-  data: Popper.data,
+  data() {
+    return merge({ visibleArrow: true }, Popper.data);
+  },
   beforeDestroy: Popper.beforeDestroy
 };
 
@@ -73,19 +114,21 @@ const DATE_FORMATTER = function(value, format) {
 const DATE_PARSER = function(text, format) {
   return parseDate(text, format);
 };
-const RANGE_FORMATTER = function(value, format, separator) {
+const RANGE_FORMATTER = function(value, format) {
   if (Array.isArray(value) && value.length === 2) {
     const start = value[0];
     const end = value[1];
 
     if (start && end) {
-      return formatDate(start, format) + separator + formatDate(end, format);
+      return [formatDate(start, format), formatDate(end, format)];
     }
   }
   return '';
 };
-const RANGE_PARSER = function(text, format, separator) {
-  const array = text.split(separator);
+const RANGE_PARSER = function(array, format, separator) {
+  if (!Array.isArray(array)) {
+    array = array.split(separator);
+  }
   if (array.length === 2) {
     const range1 = array[0];
     const range2 = array[1];
@@ -197,13 +240,16 @@ const valueEquals = function(a, b) {
 };
 
 export default {
-  mixins: [Emitter, NewPopper],
+  mixins: [Emitter, NewPopper, Focus('reference')],
 
   props: {
     size: String,
     format: String,
     readonly: Boolean,
     placeholder: String,
+    startPlaceholder: String,
+    endPlaceholder: String,
+    name: String,
     disabled: Boolean,
     clearable: {
       type: Boolean,
@@ -221,7 +267,7 @@ export default {
     value: {},
     defaultValue: {},
     rangeSeparator: {
-      default: ' - '
+      default: '-'
     },
     pickerOptions: {}
   },
@@ -260,19 +306,25 @@ export default {
       }
     },
     displayValue(val) {
-      this.$emit('change', val);
       this.dispatch('ElFormItem', 'el.form.change');
     }
   },
 
   computed: {
+    ranged() {
+      return this.type.indexOf('range') > -1;
+    },
+
     reference() {
-      return this.$refs.reference.$el;
+      const reference = this.$refs.reference;
+      return reference.$el || reference;
     },
 
     refInput() {
-      if (this.reference) return this.reference.querySelector('input');
-      return {};
+      if (this.reference) {
+        return [].slice.call(this.reference.querySelectorAll('input'));
+      }
+      return [];
     },
 
     valueIsEmpty() {
@@ -324,7 +376,7 @@ export default {
         ).formatter;
         const format = DEFAULT_FORMATS[this.type];
 
-        return formatter(value, this.format || format, this.rangeSeparator);
+        return formatter(value, this.format || format);
       },
 
       set(value) {
@@ -334,7 +386,7 @@ export default {
             TYPE_VALUE_RESOLVER_MAP[type] ||
             TYPE_VALUE_RESOLVER_MAP['default']
           ).parser;
-          const parsedValue = parser(value, this.format || DEFAULT_FORMATS[type], this.rangeSeparator);
+          const parsedValue = parser(value, this.format || DEFAULT_FORMATS[type]);
 
           if (parsedValue && this.picker) {
             this.picker.value = parsedValue;
@@ -358,18 +410,35 @@ export default {
   },
 
   methods: {
-    handleMouseEnterIcon() {
+    handleMouseEnter() {
       if (this.readonly || this.disabled) return;
       if (!this.valueIsEmpty && this.clearable) {
         this.showClose = true;
       }
     },
 
-    handleClickIcon() {
+    handleStartChange(event) {
+      if (this.displayValue && this.displayValue[1]) {
+        this.displayValue = [event.target.value, this.displayValue[1]];
+      } else {
+        this.displayValue = [event.target.value, event.target.value];
+      }
+    },
+
+    handleEndChange(event) {
+      if (this.displayValue && this.displayValue[0]) {
+        this.displayValue = [this.displayValue[0], event.target.value];
+      } else {
+        this.displayValue = [event.target.value, event.target.value];
+      }
+    },
+
+    handleClickIcon(event) {
       if (this.readonly || this.disabled) return;
       if (this.showClose) {
         this.currentValue = this.$options.defaultValue || '';
         this.showClose = false;
+        event.stopPropagation();
       } else {
         this.pickerVisible = !this.pickerVisible;
       }
@@ -391,6 +460,9 @@ export default {
 
     handleClose() {
       this.pickerVisible = false;
+      if (this.ranged) {
+        this.$emit('blur', this);
+      }
     },
 
     handleFocus() {
@@ -414,6 +486,15 @@ export default {
         this.pickerVisible = false;
         event.stopPropagation();
       }
+    },
+
+    handleRangeClick() {
+      const type = this.type;
+
+      if (HAVE_TRIGGER_TYPES.indexOf(type) !== -1 && !this.pickerVisible) {
+        this.pickerVisible = true;
+      }
+      this.$emit('focus', this);
     },
 
     hidePicker() {
@@ -441,13 +522,14 @@ export default {
       this.picker.resetView && this.picker.resetView();
 
       this.$nextTick(() => {
-        this.picker.ajustScrollTop && this.picker.ajustScrollTop();
+        this.picker.adjustScrollTop && this.picker.adjustScrollTop();
       });
     },
 
     mountPicker() {
-      this.panel.defaultValue = this.defaultValue || this.currentValue;
-      this.picker = new Vue(this.panel).$mount();
+      const defaultValue = this.defaultValue || this.currentValue;
+      const panel = merge({}, this.panel, { defaultValue });
+      this.picker = new Vue(panel).$mount();
       this.picker.popperClass = this.popperClass;
       this.popperElm = this.picker.$el;
       this.picker.width = this.reference.getBoundingClientRect().width;
@@ -484,18 +566,27 @@ export default {
       this.picker.resetView && this.picker.resetView();
 
       this.picker.$on('dodestroy', this.doDestroy);
-      this.picker.$on('pick', (date = '', visible = false) => {
+      this.picker.$on('pick', (date = '', visible = false, user = true) => {
         // do not emit if values are same
         if (!valueEquals(this.value, date)) {
           this.$emit('input', date);
+          if (user && this.value !== date) {
+            this.$nextTick(() => this.$emit('change', this.displayValue));
+          };
         }
         this.pickerVisible = this.picker.visible = visible;
         this.picker.resetView && this.picker.resetView();
       });
 
-      this.picker.$on('select-range', (start, end) => {
-        this.refInput.setSelectionRange(start, end);
-        this.refInput.focus();
+      this.picker.$on('select-range', (start, end, pos) => {
+        if (this.refInput.length === 0) return;
+        if (!pos || pos === 'min') {
+          this.refInput[0].setSelectionRange(start, end);
+          this.refInput[0].focus();
+        } else if (pos === 'max') {
+          this.refInput[1].setSelectionRange(start, end);
+          this.refInput[1].focus();
+        }
       });
     },
 

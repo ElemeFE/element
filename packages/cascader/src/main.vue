@@ -24,7 +24,7 @@
       :size="size"
       :disabled="disabled"
     >
-      <template slot="icon">
+      <template slot="suffix">
         <i
           key="1"
           v-if="clearable && inputHover && currentLabels.length"
@@ -34,7 +34,7 @@
         <i
           key="2"
           v-else
-          class="el-input__icon el-icon-caret-bottom"
+          class="el-input__icon el-icon-arrow-down"
           :class="{ 'is-reverse': menuVisible }"
         ></i>
       </template>
@@ -63,6 +63,7 @@ import emitter from 'element-ui/src/mixins/emitter';
 import Locale from 'element-ui/src/mixins/locale';
 import { t } from 'element-ui/src/locale';
 import debounce from 'throttle-debounce/debounce';
+import merge from 'element-ui/src/utils/merge';
 
 const popperMixin = {
   props: {
@@ -76,7 +77,9 @@ const popperMixin = {
     popperOptions: Popper.props.popperOptions
   },
   methods: Popper.methods,
-  data: Popper.data,
+  data() {
+    return merge({ visibleArrow: true }, Popper.data);
+  },
   beforeDestroy: Popper.beforeDestroy
 };
 
@@ -327,7 +330,7 @@ export default {
       if (this.disabled) return;
       if (this.filterable) {
         this.menuVisible = true;
-        this.$refs.input.$refs.input.focus();
+        this.$refs.input.focus();
         return;
       }
       this.menuVisible = !this.menuVisible;

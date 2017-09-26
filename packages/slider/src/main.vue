@@ -6,11 +6,13 @@
       v-if="showInput && !range"
       class="el-slider__input"
       ref="input"
+      @change="$nextTick(emitChange)"
       :step="step"
       :disabled="disabled"
       :controls="showInputControls"
       :min="min"
       :max="max"
+      :debounce="debounce"
       size="small">
     </el-input-number>
     <div class="el-slider__runway"
@@ -101,6 +103,10 @@
       },
       height: {
         type: String
+      },
+      debounce: {
+        type: Number,
+        default: 300
       }
     },
 
@@ -183,7 +189,6 @@
             this.firstValue = val[0];
             this.secondValue = val[1];
             if (this.valueChanged()) {
-              this.$emit('change', [this.minValue, this.maxValue]);
               this.dispatch('ElFormItem', 'el.form.change', [this.minValue, this.maxValue]);
               this.oldValue = val.slice();
             }
@@ -196,7 +201,6 @@
           } else {
             this.firstValue = val;
             if (this.valueChanged()) {
-              this.$emit('change', val);
               this.dispatch('ElFormItem', 'el.form.change', val);
               this.oldValue = val;
             }
@@ -221,6 +225,7 @@
 
       onSliderClick(event) {
         if (this.disabled || this.dragging) return;
+        this.resetSize();
         if (this.vertical) {
           const sliderOffsetBottom = this.$refs.slider.getBoundingClientRect().bottom;
           this.setPosition((sliderOffsetBottom - event.clientY) / this.sliderSize * 100);
@@ -228,12 +233,19 @@
           const sliderOffsetLeft = this.$refs.slider.getBoundingClientRect().left;
           this.setPosition((event.clientX - sliderOffsetLeft) / this.sliderSize * 100);
         }
+        this.emitChange();
       },
 
       resetSize() {
         if (this.$refs.slider) {
           this.sliderSize = this.$refs.slider[`client${ this.vertical ? 'Height' : 'Width' }`];
         }
+      },
+
+      emitChange() {
+        this.$nextTick(() => {
+          this.$emit('change', this.range ? [this.minValue, this.maxValue] : this.value);
+        });
       }
     },
 
