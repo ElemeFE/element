@@ -177,7 +177,7 @@
       },
 
       timePickerVisible(val) {
-        if (val) this.$nextTick(() => this.$refs.timepicker.adjustScrollTop());
+        if (val) this.$nextTick(() => this.$refs.timepicker.adjustSpinners());
       },
 
       selectionMode(newVal) {

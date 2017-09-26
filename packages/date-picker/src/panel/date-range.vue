@@ -273,11 +273,11 @@
       },
 
       minTimePickerVisible(val) {
-        if (val) this.$nextTick(() => this.$refs.minTimePicker.adjustScrollTop());
+        if (val) this.$nextTick(() => this.$refs.minTimePicker.adjustSpinners());
       },
 
       maxTimePickerVisible(val) {
-        if (val) this.$nextTick(() => this.$refs.maxTimePicker.adjustScrollTop());
+        if (val) this.$nextTick(() => this.$refs.maxTimePicker.adjustSpinners());
       },
 
       value(newVal) {

@@ -124,7 +124,7 @@
     watch: {
       value(newVal) {
         this.panelCreated();
-        this.$nextTick(_ => this.adjustScrollTop());
+        this.$nextTick(_ => this.adjustSpinners());
       },
 
       visible(val) {
@@ -226,9 +226,9 @@
         this.$emit('pick', [this.minTime, this.maxTime], visible, first);
       },
 
-      adjustScrollTop() {
-        this.$refs.minSpinner.adjustScrollTop();
-        this.$refs.maxSpinner.adjustScrollTop();
+      adjustSpinners() {
+        this.$refs.minSpinner.adjustSpinners();
+        this.$refs.maxSpinner.adjustSpinners();
       },
 
       scrollDown(step) {

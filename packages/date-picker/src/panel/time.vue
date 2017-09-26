@@ -54,14 +54,14 @@
       value(newVal) {
         let date;
         if (newVal instanceof Date) {
-          date = limitTimeRange(newVal, this.selectableRange);
+          date = limitTimeRange(newVal, this.selectableRange, this.format);
         } else if (!newVal) {
           date = this.defaultValue ? new Date(this.defaultValue) : new Date();
         }
 
         this.date = date;
         if (this.visible) {
-          this.$nextTick(_ => this.adjustScrollTop());
+          this.$nextTick(_ => this.adjustSpinners());
         }
       },
 

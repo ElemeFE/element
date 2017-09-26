@@ -650,7 +650,7 @@ export default {
       this.picker.resetView && this.picker.resetView();
 
       this.$nextTick(() => {
-        this.picker.adjustScrollTop && this.picker.adjustScrollTop();
+        this.picker.adjustSpinners && this.picker.adjustSpinners();
       });
     },
 
