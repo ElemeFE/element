@@ -7,6 +7,10 @@
     }"
     @mouseenter="handleMouseenter"
     @mouseleave="handleMouseleave"
+    @focus="handleMouseenter"
+    role="menuitem"
+    aria-haspopup="true"
+    :aria-expanded="opened"
   >
     <div
       class="el-submenu__title"
@@ -25,11 +29,11 @@
     </div>
     <template v-if="rootMenu.mode === 'horizontal' || (rootMenu.mode === 'vertical' && rootMenu.collapse)">
       <transition :name="menuTransitionName">
-        <ul class="el-menu" v-show="opened" :style="{ backgroundColor: rootMenu.backgroundColor || '' }"><slot></slot></ul>
+        <ul class="el-menu" v-show="opened" :style="{ backgroundColor: rootMenu.backgroundColor || '' }" role="menu"><slot></slot></ul>
       </transition>
     </template>
     <el-collapse-transition v-else>
-      <ul class="el-menu" v-show="opened" :style="{ backgroundColor: rootMenu.backgroundColor || '' }"><slot></slot></ul>
+      <ul class="el-menu" v-show="opened" :style="{ backgroundColor: rootMenu.backgroundColor || '' }" role="menu"><slot></slot></ul>
     </el-collapse-transition>
   </li>
 </template>

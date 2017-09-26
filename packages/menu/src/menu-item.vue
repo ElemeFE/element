@@ -3,11 +3,16 @@
     :style="[paddingStyle, itemStyle, { backgroundColor }]"
     @click="handleClick"
     @mouseenter="onMouseEnter"
+    @focus="onMouseEnter"
+    @blur="onMouseLeave"
     @mouseleave="onMouseLeave"
     :class="{
       'is-active': active,
       'is-disabled': disabled
-    }">
+    }"
+    role="menuitem"
+    tabindex="-1"
+  >
     <el-tooltip
       v-if="$parent === rootMenu && rootMenu.collapse"
       effect="dark"
