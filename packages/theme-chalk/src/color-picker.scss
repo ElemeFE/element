@@ -323,11 +323,12 @@
   @include e(icon) {
     display: inline-block;
     position: absolute;
+    width: 100%;
     top: 50%;
     left: 50%;
     transform: translate3d(-50%, -50%, 0) scale(0.8);
-    width: 12px;
     color: $--color-white;
+    text-align: center;
     font-size: 12px;
   }
 

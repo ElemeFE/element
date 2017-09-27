@@ -5,8 +5,8 @@
   background-color: $--tag-fill;
   display: inline-block;
   padding: $--tag-padding;
-  height: 30px;
-  line-height: 28px;
+  height: 32px;
+  line-height: 30px;
   font-size: $--tag-font-size;
   color: $--tag-color;
   border-radius: $--tag-border-radius;
@@ -117,8 +117,8 @@
   }
 
   @include m(medium) {
-    height: 26px;
-    line-height: 24px;
+    height: 28px;
+    line-height: 26px;
 
     .el-icon-close {
       transform: scale(.8);
@@ -126,7 +126,7 @@
   }
 
   @include m(small) {
-    height: 23px;
+    height: 24px;
     padding: 0 8px;
     line-height: 22px;
 

@@ -45,18 +45,14 @@
     }
     .button-new-tag {
       margin-left: 10px;
-      height: 30px;
-      line-height: 28px;
+      height: 32px;
+      line-height: 30px;
       padding: 0 *;
     }
     .input-new-tag {
       width: 90px;
       margin-left: 10px;
       vertical-align: bottom;
-
-      .el-input__inner {
-        height: 30px;
-      }
     }
   }
 </style>
@@ -128,7 +124,7 @@
   v-if="inputVisible"
   v-model="inputValue"
   ref="saveTagInput"
-  size="mini"
+  size="small"
   @keyup.enter.native="handleInputConfirm"
   @blur="handleInputConfirm"
 >
@@ -141,8 +137,8 @@
   }
   .button-new-tag {
     margin-left: 10px;
-    height: 30px;
-    line-height: 28px;
+    height: 32px;
+    line-height: 30px;
     padding-top: 0;
     padding-bottom: 0;
   }
@@ -150,9 +146,6 @@
     width: 90px;
     margin-left: 10px;
     vertical-align: bottom;
-  }
-  .el-input__inner {
-    height: 30px;
   }
 </style>
 

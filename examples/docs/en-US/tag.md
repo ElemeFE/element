@@ -45,18 +45,14 @@
     }
     .button-new-tag {
       margin-left: 10px;
-      height: 30px;
-      line-height: 28px;
+      height: 32px;
+      line-height: 30px;
       padding: 0 *;
     }
     .input-new-tag {
       width: 90px;
       margin-left: 10px;
       vertical-align: bottom;
-
-      .el-input__inner {
-        height: 30px;
-      }
     }
   }
 </style>
@@ -141,8 +137,8 @@ You can use the `close` event to add and remove tag dynamically.
   }
   .button-new-tag {
     margin-left: 10px;
-    height: 30px;
-    line-height: 28px;
+    height: 32px;
+    line-height: 30px;
     padding-top: 0;
     padding-bottom: 0;
   }
@@ -150,9 +146,6 @@ You can use the `close` event to add and remove tag dynamically.
     width: 90px;
     margin-left: 10px;
     vertical-align: bottom;
-  }
-  .el-input__inner {
-    height: 30px;
   }
 </style>
 
