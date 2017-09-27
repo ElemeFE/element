@@ -110,7 +110,7 @@
       margin-top: 20px;
 
       code {
-        background-color: rgba(#fff, .7);
+        background-color: rgba(255, 255, 255, .7);
         color: #445368;
       }
     }
@@ -143,7 +143,7 @@
       }
   
       code {
-        background-color: rgba(#fff, .7);
+        background-color: rgba(255, 255, 255, .7);
         color: #445368;
       }
     }

@@ -22,7 +22,7 @@
     margin: 0 20px;
   }
 
-  .icon-list {
+  .page-component .content > ul.icon-list {
     overflow: hidden;
     list-style: none;
     padding: 0;

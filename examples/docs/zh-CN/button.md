@@ -104,10 +104,10 @@
 :::demo 设置`icon`属性即可，icon 的列表可以参考 Element 的 icon 组件，也可以设置在文字右边的 icon ，只要使用`i`标签即可，可以使用自定义图标。
 
 ```html
-<el-button type="primary" icon="edit"></el-button>
-<el-button type="primary" icon="share"></el-button>
-<el-button type="primary" icon="delete"></el-button>
-<el-button type="primary" icon="search">搜索</el-button>
+<el-button type="primary" icon="el-icon-edit"></el-button>
+<el-button type="primary" icon="el-icon-share"></el-button>
+<el-button type="primary" icon="el-icon-delete"></el-button>
+<el-button type="primary" icon="el-icon-search">搜索</el-button>
 <el-button type="primary">上传<i class="el-icon-upload el-icon--right"></i></el-button>
 ```
 :::
@@ -120,13 +120,13 @@
 
 ```html
 <el-button-group>
-  <el-button type="primary" icon="arrow-left">上一页</el-button>
+  <el-button type="primary" icon="el-icon-arrow-left">上一页</el-button>
   <el-button type="primary">下一页<i class="el-icon-arrow-right el-icon--right"></i></el-button>
 </el-button-group>
 <el-button-group>
-  <el-button type="primary" icon="edit"></el-button>
-  <el-button type="primary" icon="share"></el-button>
-  <el-button type="primary" icon="delete"></el-button>
+  <el-button type="primary" icon="el-icon-edit"></el-button>
+  <el-button type="primary" icon="el-icon-share"></el-button>
+  <el-button type="primary" icon="el-icon-delete"></el-button>
 </el-button-group>
 ```
 :::
@@ -173,6 +173,6 @@ Button 组件提供除了默认值以外的三种尺寸，可以在不同场景�
 | round     | 是否圆形按钮   | boolean    | — | false   |
 | loading     | 是否加载中状态   | boolean    | — | false   |
 | disabled  | 是否禁用状态    | boolean   | —   | false   |
-| icon  | 图标，已有的图标库中的图标名 | string   |  —  |  —  |
+| icon  | 图标类名 | string   |  —  |  —  |
 | autofocus  | 是否默认聚焦 | boolean   |  —  |  false  |
 | native-type | 原生 type 属性 | string | button / submit / reset | button |
