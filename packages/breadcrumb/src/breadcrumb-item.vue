@@ -16,7 +16,8 @@
     },
     data() {
       return {
-        separator: ''
+        separator: '',
+        separatorClass: ''
       };
     },
     mounted() {

@@ -1,5 +1,5 @@
 <template>
-  <transition :name="disableTransition ? '' : 'el-zoom-in-center'">
+  <transition :name="disableTransitions ? '' : 'el-zoom-in-center'">
     <span
       class="el-tag"
       :class="[
@@ -23,7 +23,7 @@
       closable: Boolean,
       type: String,
       hit: Boolean,
-      disableTransition: Boolean,
+      disableTransitions: Boolean,
       color: String,
       size: String
     },

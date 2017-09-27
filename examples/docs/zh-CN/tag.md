@@ -80,7 +80,7 @@
 
 ### 可移除标签
 
-:::demo 设置`closable`属性可以定义一个标签是否可移除。默认的标签移除时会附带渐变动画，如果不想使用，可以设置`disable-transition`属性，它接受一个`Boolean`，true 为关闭。
+:::demo 设置`closable`属性可以定义一个标签是否可移除。默认的标签移除时会附带渐变动画，如果不想使用，可以设置`disable-transitions`属性，它接受一个`Boolean`，true 为关闭。
 
 ```html
 <el-tag
@@ -119,9 +119,9 @@
   :key="tag"
   v-for="tag in dynamicTags"
   closable
-  :close-transition="false"
+  :disable-transitions="false"
   @close="handleClose(tag)">
- {{tag}}
+  {{tag}}
 </el-tag>
 <el-input
   class="input-new-tag"
@@ -210,7 +210,7 @@ Tag 组件提供除了默认值以外的三种尺寸，可以在不同场景下�
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | type | 主题 | string | success/info/warning/danger | — |
 | closable | 是否可关闭 | boolean | — | false |
-| disable-transition | 是否禁用渐变动画 | boolean | — | false |
+| disable-transitions | 是否禁用渐变动画 | boolean | — | false |
 | hit | 是否有边框描边 | boolean | — | false |
 | color | 背景色 | string | — | — |
 | size | 尺寸 | string | medium / small / mini | — |
