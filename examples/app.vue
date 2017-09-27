@@ -121,22 +121,112 @@
   
   .carbon-teaser {
     border-radius: 0;
+    overflow: hidden;
+
     .el-dialog__header {
       display: none;
     }
+
     .el-dialog__body {
       padding: 0;
+      display: flex;
+      justify-content: center;
       position: relative;
+      background: #000;
     }
+
     .carbon-teaser__main {
-      width: 100%;
+      height: 100vh;
+      min-height: 600px;
     }
+
     .carbon-teaser__close {
       position: absolute;
-      width: 50px;
-      top: -25px;
-      right: -25px;
+      width: 40px;
+      height: 40px;
+      top: 25px;
+      right: 45px;
+      text-align: center;
       cursor: pointer;
+      opacity: .8;
+      transition: .2s ease-out;
+
+      &::after,
+      &::before {
+         position: absolute;
+         content: '';
+         display: inline-block;
+         width: 4px;
+         border-radius: 1px;
+         height: 40px;
+         background: #ff3737;
+         box-shadow: 1px 0 1px 0 rgba(255, 255, 255, .3) inset, -2px 0 1px 0 rgba(0, 0, 0, .1) inset;
+         transition: .2s ease-out;
+      }
+
+      &::after {
+        transform: rotate(45deg);
+      }
+
+      &::before {
+        transform: rotate(-45deg);
+      }
+
+      &:hover {
+         opacity: 1;
+
+         &::after,
+         &::before {
+            box-shadow: 2px 0 1px 0 rgba(255, 255, 255, .4) inset, -2px 0 1px 0 rgba(0, 0, 0, .1) inset, 0 0 10px 3px #ff1616;
+         }
+      }
+
+    }
+
+    .carbon-teaser__button {
+      position: absolute;
+      bottom: 12%;
+      display: block;
+      width: 400px;
+      height: 19.11%;
+
+      [class*=carbon-teaser__more] {
+        position: absolute;
+        top: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: auto 80%;
+        transition: .2s ease-in;
+      }
+
+      [class*=dark] {
+        background-image: url(~examples/assets/images/button-d-cn.png);
+        &.is-en {
+          background-image: url(~examples/assets/images/button-d-en.png);
+        }
+      }
+
+      [class*=light] {
+        opacity: 0;
+        background-image: url(~examples/assets/images/button-l-cn.png);
+        &.is-en {
+          background-image: url(~examples/assets/images/button-l-en.png);
+        }
+      }
+
+      &:hover {
+        [class*=light] {
+          opacity: 1;
+        }
+
+        [class*=dark] {
+          opacity: 0;
+        }
+      }
     }
   }
   
@@ -164,17 +254,20 @@
     <main-footer v-if="lang !== 'play'"></main-footer>
     <el-dialog
       :visible.sync="dialogVisible"
+      size="full"
       custom-class="carbon-teaser"
       @close="handleDialogClose"
       :close-on-press-escape="false"
       :close-on-click-modal="false">
       <img
-        src="https://i.loli.net/2017/09/24/59c75f601d52b.png"
+        src="https://i.loli.net/2017/09/27/59cb11edaa26d.jpg"
         class="carbon-teaser__main">
-      <img
-        @click="dialogVisible = false"
-        src="~examples/assets/images/dialog-close.png"
-        class="carbon-teaser__close">
+      <a :href="hrefOfCarbonLearnMore" target="_blank" class="carbon-teaser__button">
+        <span class="carbon-teaser__more-dark" :class="lang !== 'zh-CN' && 'is-en'"></span>
+        <span class="carbon-teaser__more-light" :class="lang !== 'zh-CN' && 'is-en'"></span>
+      </a>
+
+      <div class="carbon-teaser__close" @click="dialogVisible = false"></div>
     </el-dialog>
   </div>
 </template>
@@ -197,6 +290,10 @@
     computed: {
       lang() {
         return this.$route.path.split('/')[1] || 'zh-CN';
+      },
+
+      hrefOfCarbonLearnMore() {
+        return this.lang === 'zh-CN' ? 'https://github.com/ElemeFE/element/issues/7236' : 'https://github.com/ElemeFE/element/issues/7237';
       }
     },
 
@@ -236,7 +333,7 @@
       },
 
       handleDialogClose() {
-        localStorage.setItem('CARBON_TEASER', 1);
+        localStorage.setItem('CARBON_TEASER_V2', 1);
       }
     },
 
@@ -251,7 +348,7 @@
         img.onload = () => {
           this.dialogVisible = true;
         };
-        img.src = 'https://i.loli.net/2017/09/24/59c75f601d52b.png';
+        img.src = 'https://i.loli.net/2017/09/27/59cb11edaa26d.jpg';
       }
     },
 
