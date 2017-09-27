@@ -34,6 +34,7 @@
         @input="handleInput"
         @focus="handleFocus"
         @blur="handleBlur"
+        @change="handleChange"
       >
       <!-- 后置内容 -->
       <span class="el-input__suffix" v-if="$slots.suffix || suffixIcon || validateState">
@@ -63,7 +64,8 @@
       v-bind="$props"
       :style="textareaStyle"
       @focus="handleFocus"
-      @blur="handleBlur">
+      @blur="handleBlur"
+      @change="handleChange">
     </textarea>
   </div>
 </template>
@@ -178,7 +180,9 @@
         const value = event.target.value;
         this.$emit('input', value);
         this.setCurrentValue(value);
-        this.$emit('change', value);
+      },
+      handleChange(event) {
+        this.$emit('change', event.target.value);
       },
       setCurrentValue(value) {
         if (value === this.currentValue) return;
