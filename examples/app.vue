@@ -342,7 +342,7 @@
       this.renderAnchorHref();
       this.goAnchor();
 
-      const intrigued = localStorage.getItem('CARBON_TEASER');
+      const intrigued = localStorage.getItem('CARBON_TEASER_V2');
       if (!intrigued) {
         const img = new Image();
         img.onload = () => {
