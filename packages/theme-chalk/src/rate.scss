@@ -5,6 +5,10 @@
   height: $--rate-height;
   line-height: 1;
 
+  &:focus:not(.focusing), &:active {
+    outline-width: 0;
+  }
+
   @include e(item) {
     display: inline-block;
     position: relative;
