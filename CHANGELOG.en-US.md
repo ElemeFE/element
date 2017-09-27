@@ -1,5 +1,14 @@
 ## Changelog
 
+### 1.4.6
+
+*2017-09-27*
+
+- Fixed Slider's button jumping to previous position when clicked, #7190
+- Fixed Tooltip `disabled` regression, #7198
+- Fixed Cascader not correctly filter options when `props` is set, #7225
+- Fixed an error when range typed DatePicker has an initial value of `[]`, #7233
+
 ### 1.4.5
 
 *2017-09-24*
