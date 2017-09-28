@@ -1,6 +1,11 @@
 <style scoped>
   .headerWrapper {
     height: 80px;
+    transition: transform .3s;
+    
+    &.is-hidden {
+      transform: translateY(-80px);
+    }
   }
   .header {
     height: 80px;
@@ -25,7 +30,7 @@
       font-weight: normal;
 
       a {
-        color: #fff;
+        color: #333;
         text-decoration: none;
         display: block;
       }
@@ -90,7 +95,7 @@
 
       a {
         text-decoration: none;
-        color: #fff;
+        color: #333;
         display: block;
         padding: 0 20px;
         opacity: .8;
@@ -157,7 +162,9 @@
   }
 </style>
 <template>
-  <div class="headerWrapper">
+  <div
+    class="headerWrapper"
+    :class="{ 'is-hidden': !visible }">
     <header class="header"
     ref="header"
     :style="headerStyle"
@@ -216,6 +223,7 @@
   </div>
 </template>
 <script>
+  import bus from '../bus';
   import compoLang from '../i18n/component.json';
 
   export default {
@@ -223,7 +231,8 @@
       return {
         active: '',
         isHome: false,
-        headerStyle: {}
+        headerStyle: {},
+        visible: true
       };
     },
     watch: {
@@ -231,6 +240,10 @@
         immediate: true,
         handler() {
           this.isHome = /^home/.test(this.$route.name);
+          if (/^component/.test(this.$route.name)) {
+            this.headerStyle.backgroundColor = '#fff';
+            return;
+          }
           this.headerStyle.backgroundColor = `rgba(32, 160, 255, ${ this.isHome ? '0' : '1' })`;
         }
       }
@@ -250,11 +263,14 @@
         this.$router.push(this.$route.path.replace(this.lang, targetLang));
       }
     },
+    created() {
+      bus.$on('toggleHeader', visible => {
+        this.visible = visible;
+      });
+    },
     mounted() {
       function scroll(fn) {
-        window.addEventListener('scroll', () => {
-          fn();
-        }, false);
+        window.addEventListener('scroll', fn, false);
       }
       scroll(() => {
         if (this.isHome) {
