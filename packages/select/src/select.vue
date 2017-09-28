@@ -590,6 +590,9 @@
       toggleMenu() {
         if (!this.disabled) {
           this.visible = !this.visible;
+          if (this.visible) {
+            (this.$refs.input || this.$refs.reference).focus();
+          }
         }
       },
 

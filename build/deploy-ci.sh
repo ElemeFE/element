@@ -8,9 +8,6 @@ if [ "$ROT_TOKEN" = "" ]; then
   exit 0
 fi
 
-SUB_FOLDER=$(echo "2.0.0-alpha.1" | grep -o -E "\d+\.\d+")
-echo $SUB_FOLDER
-
 # release
 if [ "$TRAVIS_TAG" ]; then
   # build lib
@@ -42,8 +39,6 @@ if [ "$TRAVIS_TAG" ]; then
   git clone -b gh-pages https://$ROT_TOKEN@github.com/ElemeFE/element.git && cd element
   # build sub folder
   echo $TRAVIS_TAG
-  SUB_FOLDER=$(echo "$TRAVIS_TAG" | grep -o -E "\d+\.\d+")
-  echo $SUB_FOLDER
 
   SUB_FOLDER='2.0'
   mkdir $SUB_FOLDER
