@@ -7,6 +7,7 @@
     li {
       list-style: none;
     }
+
     ul {
       padding: 0;
       margin: 0;
@@ -36,7 +37,7 @@
       }
       @when active {
         span, i {
-          color: #20a0ff;
+          color: #1989FA;
         }
         i {
           transform: rotateZ(180deg) translateY(2px);
@@ -44,7 +45,7 @@
       }
       &:hover {
         span, i {
-          color: #20a0ff;
+          color: #1989FA;
         }
       }
     }
@@ -52,7 +53,7 @@
     .nav-item {
       a {
         font-size: 16px;
-        color: #5e6d82;
+        color: #333;
         line-height: 40px;
         height: 40px;
         margin: 0;
@@ -60,36 +61,39 @@
         text-decoration: none;
         display: block;
         position: relative;
-        transition: all .3s;
+        transition: .15s ease-out;
+        font-weight: bold;
 
         &.active {
-          color: #20a0ff;
+          color: #1989FA;
         }
       }
+
       .nav-item {
         a {
           display: block;
           height: 40px;
+          color: #666;
           line-height: 40px;
-          font-size: 13px;
-          padding-left: 24px;
+          font-size: 14px;
           overflow: hidden;
           white-space: nowrap;
           text-overflow: ellipsis;
+          font-weight: normal;
 
-
-          &:hover {
-            color: #20a0ff;
+          &:hover,
+          &.active {
+            color: #1989FA;
           }
         }
       }
     }
+
     .nav-group__title {
       font-size: 12px;
-      color: #99a9bf;
-      padding-left: 8px;
+      color: #999;
       line-height: 26px;
-      margin-top: 10px;
+      margin-top: 15px;
     }
   }
   .nav-dropdown-list {
@@ -102,28 +106,6 @@
 </style>
 <template>
   <div class="side-nav" :style="navStyle">
-    <el-dropdown
-      v-show="isComponentPage"
-      trigger="click"
-      class="nav-dropdown"
-      :class="{ 'is-active': dropdownVisible }">
-      <span>
-        {{ langConfig.dropdown }}{{ version }}
-        <i class="el-icon-caret-bottom el-icon--right"></i>
-      </span>
-      <el-dropdown-menu
-        slot="dropdown"
-        :offset="-80"
-        class="nav-dropdown-list"
-        @input="handleDropdownToggle">
-        <el-dropdown-item
-          v-for="item in Object.keys(versions)"
-          :key="item"
-          @click.native="switchVersion(item)">
-          {{ item }}
-        </el-dropdown-item>
-      </el-dropdown-menu>
-    </el-dropdown>
     <ul>
       <li class="nav-item" v-for="item in data">
         <a v-if="!item.path && !item.href" @click="expandMenu">{{item.name}}</a>
