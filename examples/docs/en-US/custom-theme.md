@@ -20,10 +20,10 @@ npm i element-theme -g
 Then install the default theme from npm or GitHub.
 ```shell
 # from npm
-npm i element-theme-default -D
+npm i element-theme-chalk -D
 
 # from GitHub
-npm i https://github.com/ElementUI/theme-default -D
+npm i https://github.com/ElementUI/theme-chalk -D
 ```
 
 ### Initialize variable file
