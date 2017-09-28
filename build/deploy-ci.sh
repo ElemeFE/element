@@ -8,6 +8,9 @@ if [ "$ROT_TOKEN" = "" ]; then
   exit 0
 fi
 
+SUB_FOLDER=$(echo "2.0.0-alpha.1" | grep -o -E "\d+\.\d+")
+echo $SUB_FOLDER
+
 # release
 if [ "$TRAVIS_TAG" ]; then
   # build lib
@@ -22,11 +25,11 @@ if [ "$TRAVIS_TAG" ]; then
   git push origin master --tags
   cd ../..
 
-  # build theme-default
+  # build theme-chalk
   cd temp_web
-  git clone https://$ROT_TOKEN@github.com/ElementUI/theme-default.git && cd theme-default
+  git clone https://$ROT_TOKEN@github.com/ElementUI/theme-chalk.git && cd theme-chalk
   rm -rf *
-  cp -rf ../../packages/theme-default/** .
+  cp -rf ../../packages/theme-chalk/** .
   git add -A .
   git commit -m "[build] $TRAVIS_TAG"
   git tag $TRAVIS_TAG
@@ -39,14 +42,14 @@ if [ "$TRAVIS_TAG" ]; then
   git clone -b gh-pages https://$ROT_TOKEN@github.com/ElemeFE/element.git && cd element
   # build sub folder
   echo $TRAVIS_TAG
-  export SUB_FOLDER=$(echo "$TRAVIS_TAG" | grep -o -E "\d+\.\d+")
+  SUB_FOLDER=$(echo "$TRAVIS_TAG" | grep -o -E "\d+\.\d+")
   echo $SUB_FOLDER
 
-  SUB_FOLDER='1.4'
+  SUB_FOLDER='2.0'
   mkdir $SUB_FOLDER
-  rm -rf *.js *.css *.map static
+  # rm -rf *.js *.css *.map static
   rm -rf $SUB_FOLDER/**
-  cp -rf ../../examples/element-ui/** .
+  # cp -rf ../../examples/element-ui/** .
   cp -rf ../../examples/element-ui/** $SUB_FOLDER/
   git add -A .
   git commit -m "$TRAVIS_COMMIT_MSG"
@@ -69,11 +72,11 @@ git commit -m "$TRAVIS_COMMIT_MSG"
 git push origin master
 cd ../..
 
-# push dev theme-default
+# push dev theme-chalk
 cd temp_web
-git clone -b $TRAVIS_BRANCH https://$ROT_TOKEN@github.com/ElementUI/theme-default.git && cd theme-default
+git clone -b $TRAVIS_BRANCH https://$ROT_TOKEN@github.com/ElementUI/theme-chalk.git && cd theme-chalk
 rm -rf *
-cp -rf ../../packages/theme-default/** .
+cp -rf ../../packages/theme-chalk/** .
 git add -A .
 git commit -m "$TRAVIS_COMMIT_MSG"
 git push origin $TRAVIS_BRANCH
