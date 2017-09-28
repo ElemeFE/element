@@ -16,7 +16,7 @@
     ]"
   >
     <i class="el-icon-loading" v-if="loading" @click="handleInnerClick"></i>
-    <i :class="'el-icon-' + icon" v-if="icon && !loading" @click="handleInnerClick"></i>
+    <i :class="icon" v-if="icon && !loading" @click="handleInnerClick"></i>
     <span v-if="$slots.default" @click="handleInnerClick"><slot></slot></span>
   </button>
 </template>

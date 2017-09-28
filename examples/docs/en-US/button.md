@@ -103,10 +103,10 @@ Use icons to add more meaning to Button. You can use icon alone to save some spa
 :::demo Use the `icon` attribute to add icon. You can find the icon list in Element icon component. Adding icons to the right side of the text is achievable with an `<i>` tag. Custom icons can be used as well.
 
 ```html
-<el-button type="primary" icon="edit"></el-button>
-<el-button type="primary" icon="share"></el-button>
-<el-button type="primary" icon="delete"></el-button>
-<el-button type="primary" icon="search">Search</el-button>
+<el-button type="primary" icon="el-icon-edit"></el-button>
+<el-button type="primary" icon="el-icon-share"></el-button>
+<el-button type="primary" icon="el-icon-delete"></el-button>
+<el-button type="primary" icon="el-icon-search">Search</el-button>
 <el-button type="primary">Upload<i class="el-icon-upload el-icon-right"></i></el-button>
 ```
 :::
@@ -119,13 +119,13 @@ Displayed as a button group, can be used to group a series of similar operations
 
 ```html
 <el-button-group>
-  <el-button type="primary" icon="arrow-left">Previous Page</el-button>
+  <el-button type="primary" icon="el-icon-arrow-left">Previous Page</el-button>
   <el-button type="primary">Next Page<i class="el-icon-arrow-right el-icon-right"></i></el-button>
 </el-button-group>
 <el-button-group>
-  <el-button type="primary" icon="edit"></el-button>
-  <el-button type="primary" icon="share"></el-button>
-  <el-button type="primary" icon="delete"></el-button>
+  <el-button type="primary" icon="el-icon-edit"></el-button>
+  <el-button type="primary" icon="el-icon-share"></el-button>
+  <el-button type="primary" icon="el-icon-delete"></el-button>
 </el-button-group>
 ```
 :::
@@ -172,6 +172,6 @@ Besides default size, Button component provides three additional sizes for you t
 | round     | determine whether it's a round button   | boolean    | — | false   |
 | loading   | determine whether it's loading   | boolean    | — | false   |
 | disabled  | disable the button    | boolean   | —   | false   |
-| icon  | button icon, accepts an icon name of Element icon component | string   |  —  |  —  |
+| icon  | icon class name | string   |  —  |  —  |
 | autofocus  | same as native button's `autofocus` | boolean   |  —  |  false  |
 | native-type | same as native button's `type` | string | button / submit / reset | button |
