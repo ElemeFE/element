@@ -45,18 +45,14 @@
     }
     .button-new-tag {
       margin-left: 10px;
-      height: 30px;
-      line-height: 28px;
+      height: 32px;
+      line-height: 30px;
       padding: 0 *;
     }
     .input-new-tag {
       width: 90px;
       margin-left: 10px;
       vertical-align: bottom;
-
-      .el-input__inner {
-        height: 30px;
-      }
     }
   }
 </style>
@@ -80,7 +76,7 @@
 
 ### 可移除标签
 
-:::demo 设置`closable`属性可以定义一个标签是否可移除。默认的标签移除时会附带渐变动画，如果不想使用，可以设置`close-transition`属性，它接受一个`Boolean`，true 为关闭。
+:::demo 设置`closable`属性可以定义一个标签是否可移除。默认的标签移除时会附带渐变动画，如果不想使用，可以设置`disable-transitions`属性，它接受一个`Boolean`，true 为关闭。
 
 ```html
 <el-tag
@@ -119,16 +115,16 @@
   :key="tag"
   v-for="tag in dynamicTags"
   closable
-  :close-transition="false"
+  :disable-transitions="false"
   @close="handleClose(tag)">
- {{tag}}
+  {{tag}}
 </el-tag>
 <el-input
   class="input-new-tag"
   v-if="inputVisible"
   v-model="inputValue"
   ref="saveTagInput"
-  size="mini"
+  size="small"
   @keyup.enter.native="handleInputConfirm"
   @blur="handleInputConfirm"
 >
@@ -141,8 +137,8 @@
   }
   .button-new-tag {
     margin-left: 10px;
-    height: 30px;
-    line-height: 28px;
+    height: 32px;
+    line-height: 30px;
     padding-top: 0;
     padding-bottom: 0;
   }
@@ -150,9 +146,6 @@
     width: 90px;
     margin-left: 10px;
     vertical-align: bottom;
-  }
-  .el-input__inner {
-    height: 30px;
   }
 </style>
 
@@ -191,14 +184,29 @@
 ```
 :::
 
+### 不同尺寸
+
+Tag 组件提供除了默认值以外的三种尺寸，可以在不同场景下选择合适的按钮尺寸。
+
+:::demo 额外的尺寸：`medium`、`small`、`mini`，通过设置`size`属性来配置它们。
+
+```html
+<el-tag closable>默认标签</el-tag>
+<el-tag size="medium" closable>中等标签</el-tag>
+<el-tag size="small" closable>小型标签</el-tag>
+<el-tag size="mini" closable>超小标签</el-tag>
+```
+:::
+
 ### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | type | 主题 | string | success/info/warning/danger | — |
 | closable | 是否可关闭 | boolean | — | false |
-| close-transition | 是否禁用渐变动画 | boolean | — | false |
+| disable-transitions | 是否禁用渐变动画 | boolean | — | false |
 | hit | 是否有边框描边 | boolean | — | false |
 | color | 背景色 | string | — | — |
+| size | 尺寸 | string | medium / small / mini | — |
 
 
 ### Events

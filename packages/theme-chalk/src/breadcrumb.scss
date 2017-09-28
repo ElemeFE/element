@@ -3,21 +3,30 @@
 @import "common/var";
 
 @include b(breadcrumb) {
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1;
   @include utils-clearfix;
 
   @include e(separator) {
-    margin: 0 8px;
-    color: $--color-black;
+    margin: 0 9px;
+    font-weight: bold;
+    color: $--color-text-placeholder;
+
+    &[class*=el-icon] {
+      margin: 0 6px;
+      font-weight: normal;
+      transform: scale(.8);
+    }
   }
+
   @include e(item) {
     float: left;
 
     @include e(inner) {
       &, & a {
-        transition: color .15s linear;
-        color: $--color-black;
+        font-weight: bold;
+        transition: $--color-transition-base;
+        color: $--color-text-primary;
 
         &:hover {
           color: $--color-primary;
@@ -30,7 +39,8 @@
       .el-breadcrumb__inner,
       .el-breadcrumb__inner a {
         &, &:hover {
-          color: $--color-black;
+          font-weight: normal;
+          color: $--font-color-base;
           cursor: text;
         }
       }

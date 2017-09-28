@@ -478,7 +478,7 @@ $--table-fixed-box-shadow: 0 0 10px rgba(0, 0, 0, .12);
 
 /* Pagination
 -------------------------- */
-$--pagination-font-size: 14px;
+$--pagination-font-size: 13px;
 $--pagination-fill: $--color-white;
 $--pagination-color: $--color-text-primary;
 $--pagination-border-radius: 3px;
@@ -568,8 +568,8 @@ $--card-padding: 20px;
 /* Slider
 --------------------------*/
 $--slider-main-background-color: $--color-primary;
-$--slider-runway-background-color: $--color-text-secondary;
-$--slider-button-hover-color: shade($--color-primary, 0.12);
+$--slider-runway-background-color: $--border-color-light;
+$--slider-button-hover-color: mix($--color-primary, black, 97%);
 $--slider-stop-background-color: $--color-text-placeholder;
 $--slider-disable-color: $--color-text-placeholder;
 

@@ -17,10 +17,25 @@
 ```
 :::
 
+### 图标分隔符
+
+:::demo 通过设置 `separator-class` 可使用相应的 `iconfont` 作为分隔符，注意这将使 `separator` 设置失效
+
+```html
+<el-breadcrumb separator-class="el-icon-arrow-right">
+  <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+  <el-breadcrumb-item>活动管理</el-breadcrumb-item>
+  <el-breadcrumb-item>活动列表</el-breadcrumb-item>
+  <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+</el-breadcrumb>
+```
+:::
+
 ### Breadcrumb Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | separator | 分隔符 | string | — | 斜杠'/' |
+| separator-class | 图标分隔符 class | string | — | - |
 
 ### Breadcrumb Item Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
