@@ -94,3 +94,4 @@ ColorPicker is a color selector supporting multiple color formats.
 | Event Name | Description | Parameters |
 |---------|--------|---------|
 | change | triggers when input value changes | color value |
+| active-change | triggers when the current active color changes | active color value |

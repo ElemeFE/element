@@ -1,5 +1,134 @@
 ## 更新日志
 
+### 1.4.6
+*2017-09-27*
+
+- 修复点击 Slider 的按钮会使其返回上一个位置的问题，#7190
+- 修复 Tooltip 无法正确切换 `disabled` 的问题，#7198
+- 修复 Cascader 的过滤功能在配置了 `props` 的情况下的异常问题，#7225
+- 修复 DatePicker 的范围选择在初始值为空数组时会报错的问题，#7233
+
+### 1.4.5
+*2017-09-24*
+
+- Rate 的 `colors` 属性现在可以动态更新了，#6872 @lukaszb
+- 修复 Tree 无法高亮 `node-key` 值为 0 的节点的问题，#6917
+- 修复初始状态被禁用的 Dropdown 在取消禁用后无法弹出下拉菜单的问题，#6969
+- Tooltip 新增 `hide-after` 属性，#6401 @ryatziv
+- 修复 TimePicker 取消按钮无法正确取消所选值的问题，#7028
+- Autocomplete 新增 `selectWhenUnmatched` 属性，#6428 @ryatziv
+- 修复 Upload 中某个文件的 `beforeUpload` 返回 `false` 时会错误地取消其他文件上传的问题，#7077
+- 修复 DatePicker 在西半球使用时月视图和年视图禁用日期显示错误的问题，#7114
+- DatePicker 的 `default-value` 属性支持 daterange 模式，#7073 @wacky6
+
+### 1.4.4
+*2017-09-05*
+
+- 修复设置了 `disabledDate` 的 DatePicker 在月视图下全部不可选的问题，#6768 @qingdengyue
+- Slider 新增 `debounce` 属性，#6820 @langgo
+- 修复 Pagination 的 jumper 中可以输入比最大页数更大的数字的问题，#6842 @huguangju
+- 修复 TimePicker 的小时数难以通过滚动的方式选中 23 时的问题，#6719 @qingdengyue
+
+### 1.4.3
+*2017-08-25*
+
+- 修复 Progress 百分比为 `0` 时的样式问题，#6551 @Kingwl
+- 修复 Carousel 在切换时幻灯片闪烁的问题，#6394
+- 修复禁用的 Button 在点击文字部分时未阻止事件传播的问题，#6421
+- 修复 DatePicker 的月视图错误计算禁用日期的问题，#6363
+- 修复 Autocomplete 键盘回车被阻止传播的问题，#6499 @leezng
+- 修复 DatePicker 的 i18n 不支持 `amPm` 的问题，#6574
+- 修复 Slider 由隐藏变为可见时交互错误的问题，#6593
+- 修复通过默认 slot 传递 `description` 的 Alert 错误地使用小图标的问题，#6612 @leezng
+
+### 1.4.2
+*2017-08-09*
+
+- 修复绑定值为对象类型时，初始值为 null 的 Select 会选中 value 为 `0` 的问题，#6143
+- 修复 `status` 为 `error` 的 Step 样式问题，#6155 @wacky6
+- 修复当 Cascader 的 `expand-trigger` 为 `hover` 时，点击选择条目后快速移动会再次选到父级元素的问题，#6199
+- 修复 Menu 在 collaspse 时不能收起子级菜单的问题，#6200
+- 修复 Switch 内部的原生 input 状态与组件不同步的问题，#6205 @wacky6
+- 修复 Slider 在 resize 窗口后滑块位置不准的问题，#6263
+- 修复 Autocomplete 在 blur 时不会收起下拉框的问题，#6256
+- 修复 Pagination 的 jumper 在 IE 下敲击回车无法触发翻页的问题，#6306 @qingdengyue
+- 修复 InputNumber 当 `size` 为 `large` 和 `small` 时的样式问题，#6310 @JeremyWuuuuu
+- 修复 DatePicker 的部分格式化文字 i18n 不生效的问题，#6328
+- 修复点击 Slider 的滑块会使其移动至起点的问题，#6359
+
+### 1.4.1
+*2017-07-28*
+
+- 修复 Tree 勾选父节点会弹出子节点的问题，#6029
+- 修复 Tree 勾选逻辑错误，#6034
+- 修复作为 Form 直接子元素的 FormItem 不继承 `label-width` 的问题，#6044
+- 修复 collapse 模式下的 Menu 自动弹出子菜单的问题，#6111
+- 修复使用 `v-if` 的动态 TabPane 顺序错误的问题，#6066
+- 修复鼠标在 `open-delay` 时间内移开元素后，仍然会弹出 Popover 的问题，#6058（by @laobubu）
+- 修复禁用的 Upload 的文件列表仍然显示删除按钮并可操作的问题，#6091
+- 修复斑马纹的 Table 的背景色在 hover 时不正确的问题，#6024（by @xtongs）
+
+### 1.4.0 Boron
+*2017-07-21*
+
+#### 新特性：
+- Message
+  - `message` 属性支持 VNode，#5463（by @egyptik）
+- ColorPicker
+  - 新增 `active-change` 事件，#5775
+- Popover
+  - 新增 `open-delay` 属性，#5842（by @kaungmyatlwin）
+- Table
+  - `formatter` 新增 `value` 参数，#5709（by @haledeng）
+- Tree
+  - 新增 `disabled` 属性，#5937
+- Menu
+  - 新增 `collapse` 属性，#5941
+- Select
+  - 新增 `value-key` 属性，#5897
+
+#### 修复：
+- DatePicker
+  - 部分内部文案不受 i18n 控制的问题，#5485
+  - 初始值为空时，选择时间后的返回值毫秒部分不为零的问题，#5663
+  - `disabledDate` 范围被扩大的问题，#4946（by @liyangworld）
+- Steps
+  - 动态增减步骤后的样式错误，#5456（by @elfman）
+- Table
+  - 带有固定列且可展开时，鼠标 hover 高亮行错位的问题，#5471（by @elfman）
+  - 部分浏览器不支持 `classList` 的问题，#5613（by @flynntsc）
+- Select
+  - 单选时打开下拉框有时无法定位到已选中项的问题，#5564（by @wacky6）
+  - 多选时 Vue 2.4.x 报错的问题，#5897
+- Radio
+  - RadioGroup 内只有一个 Radio 时的圆角丢失问题，#5646（by @YYvanYang）
+- Upload
+  - `auto-upload` 为 false 时，无法选择之前删除的文件的问题，#5706
+  - `disabled` 时删除按钮仍可见并可操作的问题，#5841
+  - 兼容 Vue 2.4 `key` 不能是对象的问题，#5872
+- MessageBox
+  - 非 `confirm` 或 `prompt` 情况下点击取消按钮仍然被 resolve 的问题，#5658
+- Rate
+  - 初始值带有小数时，激活的 icon 不显示小数部分的问题，#5785
+- Pagination
+  - 总页数的 i18n 不与 vue-i18n@6.x 兼容的问题，#5796（by @mario56）
+  - 当前页为最大页数减一时，错误地显示省略号的问题，#5861（by @openks）
+- Loading
+  - 不可见元素绑定 Loading 时的样式错误，#5649（by @xiongzixiao）
+- Cascader
+  - 输入框中的文字未垂直居中的问题，#5819（by @jianzhi92）
+- Tree
+  - 在 lazy 模式下 `setCheckedKeys` 和 `setCheckedNodes` 方法的 bug，#5937
+  - 在 lazy 模式下勾选父级节点会一次性加载全部后代节点的问题，#5963
+- Form
+  - 未在 FormItem 上指定 `label` 时，label 的具名 slot 失效的问题，#5921
+- Tooltip
+  - Vue 2.4.x 下触发元素为自定义组件时不工作的问题，#5916
+
+#### 非兼容性更新:
+- Select
+  - 值为对象类型时，需要提供一个 `value-key` 作为唯一性标识，#5897
+
 ### 1.3.7
 *2017-06-18*
 

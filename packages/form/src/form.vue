@@ -62,6 +62,10 @@
         });
       },
       validate(callback) {
+        if (!this.model) {
+          console.warn('[Element Warn][Form]model is required for validate to work!');
+          return;
+        };
         let valid = true;
         let count = 0;
         // 如果需要验证的fields为空，调用验证时立刻返回callback

@@ -1,5 +1,140 @@
 ## Changelog
 
+### 1.4.6
+
+*2017-09-27*
+
+- Fixed Slider's button jumping to previous position when clicked, #7190
+- Fixed Tooltip `disabled` regression, #7198
+- Fixed Cascader not correctly filter options when `props` is set, #7225
+- Fixed an error when range typed DatePicker has an initial value of `[]`, #7233
+
+### 1.4.5
+
+*2017-09-24*
+
+- Rate's `colors` attribute now supports dynamic updates, #6872 @lukaszb
+- Fixed Tree not highlighting tree node whose value of `node-key` is 0, #6917
+- Fixed initially disabled Dropdown not showing menu when it's enabled, #6969
+- Added `hide-after` attribute for Tooltip, #6401 @ryatziv
+- Fixed cancel button of TimePicker not cancel picked value when clicked, #7028
+- Added `selectWhenUnmatched` attribute for Autocomplete, #6428 @ryatziv
+- Fixed when `beforeUpload` of a file returns false, other files are aborted by Upload, #7077
+- Fixed disabled dates of DatePicker in month view and year view not displayed correctly in the west hemisphere, #7114
+- `default-value` of DatePicker now supports daterange type, #7073 @wacky6
+
+### 1.4.4
+
+*2017-09-05*
+
+- Fixed all months disabled in DatePicker month view when `disabledDate` is set, #6768 @qingdengyue
+- Added `debounce` attribute for Slider, #6820 @langgo
+- Fixed value of Pagination jumper can be bigger than the total page count, #6842 @huguangju
+- Fixed TimePicker's focus slipping away when selecting hour to 23 with mouse scroll, #6719 @qingdengyue
+
+### 1.4.3
+
+*2017-08-25*
+
+- Fixed style bug when Progress's `percentage` is `0`, #6551 @Kingwl
+- Fixed Carousel items flashing when switching, #6394
+- Fixed disabled Button not prevent event propagation when clicked on its text area, #6421
+- Fixed disabled dates calculation in DatePicker's month view, #6363
+- Fixed key enter event being stopped propagation in Autocomplete, #6499 @leezng
+- Fixed `amPm` not supported in DatePicker i18n, #6574
+- Fixed clicking or dragging error of Slider when it switches from invisible to visible, #6593
+- Fixed Alert using small icons when its `description` is passed via default slot, #6612 @leezng
+
+### 1.4.2
+
+*2017-08-09*
+
+- Fixed Select marking option of `value` equal to `0` as selected when the initial value is null and bound to an object-typed value, #6143
+- Fixed Step style issue when `status` is `error`, #6155 @wacky6
+- Fixed Cascader selecting parent item when moving mouse quickly after clicking a leaf item, #6199
+- Fixed Menu not hiding submenus when collapsed, #6200
+- Fixed status of the inner native input of Switch not syncing with the component, #6205 @wacky6
+- Fixed wrong button positioning of Slider after window is resized, #6263
+- Fixed Autocomplete not hiding dropdown menu on blur, #6256
+- Fixed hitting enter on jumper of Pagination not trigger page change event in IE, #6306 @qingdengyue
+- Fixed InputNumber style issue when its `size` is `large` or `small`, #6310 @JeremyWuuuuu
+- Fixed i18n failure for some texts in DatePicker, #6328
+- Fixed Slider value changing to minimum when its button is clicked, #6359
+
+### 1.4.1
+
+*2017-07-28*
+
+- Fixed child nodes expanding when checking parent node in Tree, #6029
+- Fixed checking behavior error of Tree, #6034
+- Fixed FormItem not inheriting `label-width` as a Form's direct child, #6044
+- Fixed Menu incorrectly showing SubMenu in collapse mode, #6111
+- Fixed render order error of `v-if` controlled dynamic TabPanes, #6066
+- Fixed Popover still popping up after mouse leaves within `open-delay`, #6058 (by @laobubu)
+- Fixed delete buttons still rendered in file list of disabled Upload, #6091
+- Fixed background color error on hover of striped Table, #6024 (by @xtongs)
+
+### 1.4.0 Boron
+
+*2017-07-21*
+
+#### New features:
+- Message
+  - `message` attribute now supports VNode, #5463 (by @egyptik)
+- ColorPicker
+  - Added `active-change` event, #5775
+- Popover
+  - Added `open-delay` attribute, #5842 (by @kaungmyatlwin)
+- Table
+  - A third parameter `value` is passed to `formatter`, #5709 (by @haledeng)
+- Tree
+  - Added `disabled` attribute, #5937
+- Menu
+  - Added `collapse` attribute, #5941
+- Select
+  - Added `value-key` attribute, #5897
+
+#### Fixes:
+- DatePicker
+  - i18n failure for some texts, #5485
+  - returning a non-zero millisecond value when initial value is empty, #5663
+  - `disabledDate` affecting undesired date, #4946 (by @liyangworld)
+- Steps
+  - style problems when a step is dynamically added or removed, #5456 (by @elfman)
+- Table
+  - highlight row misplaced when an expandable Table has fixed table columns, #5471 (by @elfman)
+  - `classList` not supported in some browsers, #5613 (by @flynntsc)
+- Select
+  - single Select unable to scroll to the selected item when the dropdown menu pops up, #5564（by @wacky6）
+- Radio
+  - border radius lost in RadioGroups with only one Radio, #5646 (by @YYvanYang)
+- Upload
+  - unable to reselect previously deleted file when `auto-upload` is false, #5706
+  - delete button still visible and functioning when `disabled`, #5841
+  - compatibility issue with Vue 2.4 `key`, #5872
+- MessageBox
+  - clicking cancel buttons getting resolved when not invoked as a `confirm` or `prompt`, #5658
+- Rate
+  - active icons not reflecting decimal part of initial value, #5785
+- Pagination
+  - compatibility issue of total page display with vue-i18n@6.x, #5796 (by @mario56)
+  - apostrophe incorrectly showing up when current page is one page less than total page, #5861 (by @openks)
+- Loading
+  - style problems when bound to invisible elements, #5649 (by @xiongzixiao)
+- Cascader
+  - text in the input box not vertically aligned, #5819 (by @jianzhi92)
+- Tree
+  - `setCheckedKeys` and `setCheckedNodes` in lazy mode, #5937
+  - loading all descendent nodes when a parent node is checked in lazy mode, #5963
+- Form
+  - label named slot not working when `label` is not assigned on FormItem, #5921
+- Tooltip
+  - not working in Vue 2.4.x when the triggering element is a custom component, #5916
+
+#### Breaking changes:
+- Select
+  - when value is an object, `value-key` is required as its unique identity key, #5897
+
 ### 1.3.7
 
 *2017-06-18*

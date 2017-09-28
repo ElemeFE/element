@@ -40,7 +40,7 @@
     props: {
       value: {
         type: [Boolean, String, Number],
-        default: true
+        default: false
       },
       disabled: {
         type: Boolean,
@@ -111,6 +111,7 @@
     },
     watch: {
       checked() {
+        this.$refs.input.checked = this.checked;
         if (this.onColor || this.offColor) {
           this.setBackgroundColor();
         }
@@ -118,8 +119,8 @@
     },
     methods: {
       handleChange(event) {
-        this.$emit('change', !this.checked ? this.onValue : this.offValue);
         this.$emit('input', !this.checked ? this.onValue : this.offValue);
+        this.$emit('change', !this.checked ? this.onValue : this.offValue);
         this.$nextTick(() => {
           // set input's checked property
           // in case parent refuses to change component's value

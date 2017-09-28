@@ -1704,7 +1704,7 @@ For table of numbers, you can add an extra row at the table footer displaying ea
 | current-row-key | key of current row, a set only prop | string,number | — | — |
 | row-class-name | function that returns custom class names for a row, or a string assigning class names for every row | Function(row, index)/String | — | — |
 | row-style | function that returns custom style for a row,  or a string assigning custom style for every row | Function(row, index)/Object | — | — |
-| row-key | key of row data, used for optimizing rendering. Required if `reserve-selection` is on | Function(row)/String | — | — |
+| row-key | key of row data, used for optimizing rendering. Required if `reserve-selection` is on. When its type is String, multi-level access is supported, e.g. `user.info.id`, but `user.info[0].id` is not supported, in which case `Function` should be used. | Function(row)/String | — | — |
 | empty-text | Displayed text when data is empty. You can customize this area with `slot="empty"` | String | — | No Data |
 | default-expand-all | whether expand all rows by default, only works when the table has a column type="expand" | Boolean | — | false |
 | expand-row-keys | set expanded rows by this prop, prop's value is the keys of expand rows, you should set row-key before using this prop | Array | — | |
@@ -1760,7 +1760,7 @@ For table of numbers, you can add an extra row at the table footer displaying ea
 | sortable | whether column can be sorted. Remote sorting can be done by setting this attribute to 'custom' and listening to the `sort-change` event of Table | boolean, string | true, false, custom | false |
 | sort-method | sorting method, works when `sortable` is `true`. Should return a boolean. | Function(a, b) | — | — |
 | resizable | whether column width can be resized, works when `border` of `el-table` is `true` | boolean | — | false |
-| formatter | function that formats content | Function(row, column) | — | — |
+| formatter | function that formats cell content | Function(row, column, cellValue) | — | — |
 | show-overflow-tooltip | whether to hide extra content and show them in a tooltip when hovering on the cell | boolean | — | false |
 | align | alignment | string | left/center/right | left |
 | header-align | alignment of the table header. If omitted, the value of the above `align` attribute will be applied | String | left/center/right | — |

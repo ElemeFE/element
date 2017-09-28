@@ -62,11 +62,26 @@
     methods: {
       getCellStyle(year) {
         const style = {};
-        const date = new Date(this.date);
 
-        date.setFullYear(year);
-        style.disabled = typeof this.disabledDate === 'function' &&
-          this.disabledDate(date);
+        var date = new Date(year, 0, 1, 0);
+        var nextYear = new Date(date);
+        nextYear.setFullYear(year + 1);
+
+        var flag = false;
+        if (typeof this.disabledDate === 'function') {
+
+          while (date < nextYear) {
+            if (this.disabledDate(date)) {
+              date = new Date(date.getTime() + 8.64e7);
+            } else {
+              break;
+            }
+          }
+          if ((date - nextYear) === 0) flag = true;
+
+        }
+
+        style.disabled = flag;
         style.current = Number(this.year) === year;
 
         return style;

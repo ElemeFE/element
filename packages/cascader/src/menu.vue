@@ -1,5 +1,30 @@
 <script>
   import { isDef } from 'element-ui/src/utils/shared';
+  import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
+
+  const copyArray = (arr, props) => {
+    if (!arr || !Array.isArray(arr) || !props) return arr;
+    const result = [];
+    const configurableProps = ['__IS__FLAT__OPTIONS', 'label', 'value', 'disabled'];
+    const childrenProp = props.children || 'children';
+    arr.forEach(item => {
+      const itemCopy = {};
+      configurableProps.forEach(prop => {
+        let name = props[prop];
+        let value = item[name];
+        if (value === undefined) {
+          name = prop;
+          value = item[name];
+        }
+        if (value !== undefined) itemCopy[name] = value;
+      });
+      if (Array.isArray(item[childrenProp])) {
+        itemCopy[childrenProp] = copyArray(item[childrenProp], props);
+      }
+      result.push(itemCopy);
+    });
+    return result;
+  };
 
   export default {
     name: 'ElCascaderMenu',
@@ -44,7 +69,7 @@
               if (option.__IS__FLAT__OPTIONS) return;
               configurableProps.forEach(prop => {
                 const value = option[this.props[prop] || prop];
-                if (value) option[prop] = value;
+                if (value !== undefined) option[prop] = value;
               });
               if (Array.isArray(option.children)) {
                 formatOptions(option.children);
@@ -65,8 +90,9 @@
             return activeOptions;
           };
 
-          formatOptions(this.options);
-          return loadActiveOptions(this.options);
+          const optionsCopy = copyArray(this.options, this.props);
+          formatOptions(optionsCopy);
+          return loadActiveOptions(optionsCopy);
         }
       }
     },
@@ -80,7 +106,7 @@
         } else {
           this.activeValue = [item.value];
         }
-        this.$emit('pick', this.activeValue);
+        this.$emit('pick', this.activeValue.slice());
       },
       handleMenuLeave() {
         this.$emit('menuLeave');
@@ -90,10 +116,16 @@
         this.activeValue.splice(menuIndex, len, item.value);
         this.activeOptions.splice(menuIndex + 1, len, item.children);
         if (this.changeOnSelect) {
-          this.$emit('pick', this.activeValue, false);
+          this.$emit('pick', this.activeValue.slice(), false);
         } else {
           this.$emit('activeItemChange', this.activeValue);
         }
+      },
+      scrollMenu(menu) {
+        scrollIntoView(menu, menu.getElementsByClassName('is-active')[0]);
+      },
+      handleMenuEnter() {
+        this.$nextTick(() => this.$refs.menus.forEach(menu => this.scrollMenu(menu)));
       }
     },
 
@@ -121,9 +153,19 @@
                 click: 'click',
                 hover: 'mouseenter'
               }[expandTrigger];
-              events.on[triggerEvent] = () => { this.activeItem(item, menuIndex); };
+              events.on[triggerEvent] = () => {
+                this.activeItem(item, menuIndex);
+                this.$nextTick(() => {
+                  // adjust self and next level
+                  this.scrollMenu(this.$refs.menus[menuIndex]);
+                  this.scrollMenu(this.$refs.menus[menuIndex + 1]);
+                });
+              };
             } else {
-              events.on.click = () => { this.select(item, menuIndex); };
+              events.on.click = () => {
+                this.select(item, menuIndex);
+                this.$nextTick(() => this.scrollMenu(this.$refs.menus[menuIndex]));
+              };
             }
           }
 
@@ -152,19 +194,22 @@
               'el-cascader-menu': true,
               'el-cascader-menu--flexible': isFlat
             }}
-            style={menuStyle}>
+            style={menuStyle}
+            refInFor
+            ref="menus">
             {items}
           </ul>
         );
       });
       return (
-        <transition name="el-zoom-in-top" on-after-leave={this.handleMenuLeave}>
+        <transition name="el-zoom-in-top" on-before-enter={this.handleMenuEnter} on-after-leave={this.handleMenuLeave}>
           <div
             v-show={visible}
             class={[
               'el-cascader-menus',
               popperClass
             ]}
+            ref="wrapper"
           >
             {menus}
           </div>

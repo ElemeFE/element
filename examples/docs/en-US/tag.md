@@ -179,7 +179,7 @@ You can use the `close` event to add and remove tag dynamically.
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | type | theme | string | primary/gray/success/warning/danger | — |
 | closable | whether Tab can be removed | boolean | — | false |
-| close-transition | whether the removal animation is disabled | boolean | — | false |
+| close-transition | whether to disable animations | boolean | — | false |
 | hit | whether Tag has a highlighted border | boolean | — | false |
 | color | background color of the tag | string | — | — |
 
