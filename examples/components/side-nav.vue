@@ -65,7 +65,7 @@
     }
 
     #code-sponsor-widget {
-      margin: 50px 0 0 -20px;
+      margin: 0 0 0 -20px;
     }
   }
   .nav-dropdown-list {

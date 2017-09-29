@@ -18,7 +18,7 @@ Get the latest version from [unpkg.com/element-ui](https://unpkg.com/element-ui@
 ```
 
 ### Hello world
-If you are using CDN, a hello-world page is easy with Element. [Online Demo](https://jsfiddle.net/leopoldthecuber/hzfpyvg6/)
+If you are using CDN, a hello-world page is easy with Element. [Online Demo](https://jsfiddle.net/leopoldthecuber/hzfpyvg6/1/)
 
 ```html
 <!DOCTYPE html>
@@ -31,7 +31,7 @@ If you are using CDN, a hello-world page is easy with Element. [Online Demo](htt
 <body>
   <div id="app">
     <el-button @click="visible = true">Button</el-button>
-    <el-dialog v-model="visible" title="Hello world">
+    <el-dialog :visible.sync="visible" title="Hello world">
       <p>Try Element</p>
     </el-dialog>
   </div>
