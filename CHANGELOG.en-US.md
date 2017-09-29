@@ -1,5 +1,28 @@
 ## Changelog
 
+### 1.4.6
+
+*2017-09-27*
+
+- Fixed Slider's button jumping to previous position when clicked, #7190
+- Fixed Tooltip `disabled` regression, #7198
+- Fixed Cascader not correctly filter options when `props` is set, #7225
+- Fixed an error when range typed DatePicker has an initial value of `[]`, #7233
+
+### 1.4.5
+
+*2017-09-24*
+
+- Rate's `colors` attribute now supports dynamic updates, #6872 @lukaszb
+- Fixed Tree not highlighting tree node whose value of `node-key` is 0, #6917
+- Fixed initially disabled Dropdown not showing menu when it's enabled, #6969
+- Added `hide-after` attribute for Tooltip, #6401 @ryatziv
+- Fixed cancel button of TimePicker not cancel picked value when clicked, #7028
+- Added `selectWhenUnmatched` attribute for Autocomplete, #6428 @ryatziv
+- Fixed when `beforeUpload` of a file returns false, other files are aborted by Upload, #7077
+- Fixed disabled dates of DatePicker in month view and year view not displayed correctly in the west hemisphere, #7114
+- `default-value` of DatePicker now supports daterange type, #7073 @wacky6
+
 ### 1.4.4
 
 *2017-09-05*
