@@ -13,7 +13,7 @@ npm i element-pagination -D
 ```javascript
 import Vue from 'vue'
 import ElPagination from 'element-pagination'
-import 'element-theme-default/dist/pagination.css'
+import 'element-theme-chalk/dist/pagination.css'
 
 Vue.use(ElPagination)
 ```

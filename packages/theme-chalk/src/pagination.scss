@@ -10,7 +10,7 @@
   font-weight: bold;
   @include utils-clearfix;
 
-  span,
+  span:not([class*=suffix]),
   button {
     display: inline-block;
     font-size: $--pagination-font-size;
@@ -23,18 +23,20 @@
 
   .el-input__inner {
     font-weight: bold;
+    text-align: center;
   }
 
   // pagesize 的下拉 icon
   .el-input__suffix {
-    right: -3px;
+    right: 0;
+    transform: scale(.8);
   }
 
   .el-select .el-input {
     width: 100px;
     margin: 0 5px;
+
     .el-input__icon {
-      width: 24px;
     }
 
     .el-input__inner {
@@ -109,6 +111,7 @@
 
     .el-input .el-input__inner {
       font-size: $--pagination-font-size;
+      padding-left: 8px;
 
       &:hover {
         border-color: $--pagination-hover-fill;
@@ -118,10 +121,6 @@
 
   @include e(total) {
     margin-right: 10px;
-
-    & + .el-pagination__sizes {
-      margin-left: -10px;
-    }
   }
 
   @include e(jump) {

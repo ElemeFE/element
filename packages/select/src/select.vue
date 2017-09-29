@@ -14,6 +14,7 @@
           v-for="item in selected"
           :key="getValueKey(item)"
           :closable="!disabled"
+          size="small"
           :hit="item.hitState"
           type="info"
           @close="deleteTag($event, item)"
@@ -589,6 +590,9 @@
       toggleMenu() {
         if (!this.disabled) {
           this.visible = !this.visible;
+          if (this.visible) {
+            (this.$refs.input || this.$refs.reference).focus();
+          }
         }
       },
 

@@ -2,7 +2,6 @@ var fs = require('fs');
 var path = require('path');
 var Components = require('../../components.json');
 var themes = [
-  'theme-default',
   'theme-chalk'
 ];
 Components = Object.keys(Components);
