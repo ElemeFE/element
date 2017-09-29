@@ -11,6 +11,22 @@
 
   #app {
     height: 100%;
+    
+    @when component {
+      .main-cnt {
+        padding: 0;
+        margin-top: 0;
+        min-height: auto;
+      }
+      .headerWrapper {
+        position: fixed;
+        width: 100%;
+        left: 0;
+        top: 0;
+        z-index: 1000;
+        border-bottom: solid 1px #ccc;
+      }
+    }
   }
 
   body {
@@ -167,12 +183,12 @@
 </style>
 
 <template>
-  <div id="app">
+  <div id="app" :class="{ 'is-component': isComponent }">
     <main-header v-if="lang !== 'play'"></main-header>
     <div class="main-cnt">
       <router-view></router-view>
     </div>
-    <main-footer v-if="lang !== 'play'"></main-footer>
+    <main-footer v-if="lang !== 'play' && !isComponent"></main-footer>
   </div>
 </template>
 
@@ -188,6 +204,9 @@
     computed: {
       lang() {
         return this.$route.path.split('/')[1] || 'zh-CN';
+      },
+      isComponent() {
+        return /^component-/.test(this.$route.name || '');
       }
     },
 

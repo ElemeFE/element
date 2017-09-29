@@ -1,10 +1,43 @@
 <style>
   .page-component {
-    padding-bottom: 95px;
     box-sizing: border-box;
-    .content {
-      margin-left: -1px;
+    height: 100%;
+  
+    &.page-container {
+      padding: 0;
+    }
+  
+    .page-component__nav {
+      width: 240px;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      overflow: auto;
+      padding-top: 80px;
+      transition: padding-top .3s;
+      
+      &.is-extended {
+        padding-top: 0;
+      }
+    }
+    
+    .side-nav {
+      height: 100%;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      padding-right: 0;
+      
+      & > ul {
+        padding-bottom: 50px;
+      }
+    }
 
+    .page-component__content {
+      padding-left: 270px;
+    }
+    
+    .content {
+      padding-top: 130px;
       > {
         h3 {
           margin: 45px 0 20px;
@@ -83,15 +116,15 @@
 </style>
 <template>
   <div class="page-container page-component">
-    <el-row>
-      <el-col :xs="24" :sm="6">
-        <side-nav :data="navsData[lang]" :base="`/${ lang }/component`"></side-nav>
-      </el-col>
-      <el-col :xs="24" :sm="18">
-        <router-view class="content"></router-view>
-        <footer-nav></footer-nav>
-      </el-col>
-    </el-row>
+    <div
+      class="page-component__nav"
+      :class="{ 'is-extended': !showHeader }">
+      <side-nav :data="navsData[lang]" :base="`/${ lang }/component`"></side-nav>
+    </div>
+    <div class="page-component__content">
+      <router-view class="content"></router-view>
+      <footer-nav></footer-nav>
+    </div>
     <transition name="back-top-fade">
       <div
         class="page-component-up"
@@ -106,6 +139,7 @@
   </div>
 </template>
 <script>
+  import bus from '../../bus';
   import navsData from '../../nav.config.json';
   import throttle from 'throttle-debounce/throttle';
 
@@ -115,7 +149,9 @@
         lang: this.$route.meta.lang,
         navsData,
         hover: false,
-        showBackToTop: false
+        showBackToTop: false,
+        scrollTop: 0,
+        showHeader: true
       };
     },
     methods: {
@@ -126,7 +162,17 @@
         document.documentElement.scrollTop = 0;
       },
       handleScroll() {
-        this.showBackToTop = (document.body.scrollTop || document.documentElement.scrollTop) >= 0.5 * document.body.clientHeight;
+        const scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+        this.showBackToTop = scrollTop >= 0.5 * document.body.clientHeight;
+        if (this.showHeader !== this.scrollTop > scrollTop) {
+          this.showHeader = this.scrollTop > scrollTop;
+          bus.$emit('toggleHeader', this.showHeader);
+        }
+        if (scrollTop === 0) {
+          this.showHeader = true;
+          bus.$emit('toggleHeader', this.showHeader);
+        }
+        this.scrollTop = scrollTop;
       }
     },
     mounted() {
