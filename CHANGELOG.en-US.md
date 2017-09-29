@@ -641,4 +641,4 @@ Breaking change
 
 *2016-11-9*
 
-Element 1.0.0 released.
+- Element 1.0.0 released.
