@@ -1,5 +1,5 @@
 <template>
-  <div class="el-collapse">
+  <div class="el-collapse" role="tablist" aria-multiselectable="true">
     <slot></slot>
   </div>
 </template>

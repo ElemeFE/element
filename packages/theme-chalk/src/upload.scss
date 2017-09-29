@@ -156,6 +156,17 @@
       }
     }
 
+    & .el-icon-close-tip {
+      display: none;
+      position: absolute;
+      top: 5px;
+      right: 0;
+      cursor: pointer;
+      opacity: 1;
+      color: $--color-primary;
+      transform: translate(15%,0) scale(.7);
+    }
+    
     &:hover {
       background-color: $--background-color-base;
 
@@ -173,12 +184,25 @@
         display: block;
       }
 
-      .el-upload-list__item-name:hover {
+      .el-upload-list__item-name:hover, .el-upload-list__item-name:focus {
         color: $--link-hover-color;
         cursor: pointer;
       }
 
-      &:hover {
+      &:focus {
+        .el-icon-close-tip {
+          display: inline-block;
+        }
+      }
+
+      &:focus:not(.focusing), &:active {
+        outline-width: 0;
+        .el-icon-close-tip {
+          display: none;
+        }
+      }
+
+      &:hover, &:focus {  /*键盘焦点时 显示提示文字 focus*/
         .el-upload-list__item-status-label {
           display: none;
         }
@@ -255,7 +279,6 @@
       .el-icon-close {
         display: none;
       }
-
       &:hover {
         .el-upload-list__item-status-label {
           display: none;
@@ -378,7 +401,6 @@
         .el-upload-list__item-name {
           line-height: 70px;
           margin-top: 0;
-
           i {
             display: none;
           }

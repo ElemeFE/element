@@ -1,5 +1,12 @@
 <template>
-  <label class="el-switch" :class="{ 'is-disabled': disabled, 'is-checked': checked }">
+  <div
+    class="el-switch"
+    :class="{ 'is-disabled': disabled, 'is-checked': checked }"
+    role="switch"
+    :aria-checked="checked"
+    :aria-disabled="disabled"
+    @click="switchValue"
+  >
     <input
       class="el-switch__input"
       type="checkbox"
@@ -8,12 +15,14 @@
       :name="name"
       :true-value="onValue"
       :false-value="offValue"
-      :disabled="disabled">
+      :disabled="disabled"
+      @keydown.enter="switchValue"
+    >
     <span
       :class="['el-switch__label', 'el-switch__label--left', !checked ? 'is-active' : '']"
       v-if="offIconClass || offText">
       <i :class="[offIconClass]" v-if="offIconClass"></i>
-      <span v-if="!offIconClass && offText">{{ offText }}</span>
+      <span v-if="!offIconClass && offText" :aria-hidden="checked">{{ offText }}</span>
     </span>
     <span class="el-switch__core" ref="core" :style="{ 'width': coreWidth + 'px' }">
       <span class="el-switch__button" :style="{ transform }"></span>
@@ -22,11 +31,10 @@
       :class="['el-switch__label', 'el-switch__label--right', checked ? 'is-active' : '']"
       v-if="onIconClass || onText">
       <i :class="[onIconClass]" v-if="onIconClass"></i>
-      <span v-if="!onIconClass && onText">{{ onText }}</span>
+      <span v-if="!onIconClass && onText" :aria-hidden="!checked">{{ onText }}</span>
     </span>
-  </label>
+  </div>
 </template>
-
 <script>
   export default {
     name: 'ElSwitch',
@@ -114,6 +122,9 @@
         let newColor = this.checked ? this.onColor : this.offColor;
         this.$refs.core.style.borderColor = newColor;
         this.$refs.core.style.backgroundColor = newColor;
+      },
+      switchValue() {
+        this.$refs.input.click();
       }
     },
     mounted() {
