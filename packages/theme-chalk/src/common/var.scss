@@ -570,15 +570,15 @@ $--card-padding: 20px;
 $--slider-main-background-color: $--color-primary;
 $--slider-runway-background-color: $--border-color-light;
 $--slider-button-hover-color: mix($--color-primary, black, 97%);
-$--slider-stop-background-color: $--color-text-placeholder;
+$--slider-stop-background-color: $--color-white;
 $--slider-disable-color: $--color-text-placeholder;
 
 $--slider-margin: 16px 0;
 $--slider-border-radius: 3px;
-$--slider-height: 4px;
-$--slider-button-size: 12px;
+$--slider-height: 6px;
+$--slider-button-size: 16px;
 $--slider-button-wrapper-size: 36px;
-$--slider-button-wrapper-offset: -16px;
+$--slider-button-wrapper-offset: -15px;
 
 /* Steps
 --------------------------*/

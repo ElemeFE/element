@@ -1,12 +1,12 @@
 <style>
   .el-header, .el-footer {
-    background-color: #1f2d3d;
-    color: #fff;
+    background-color: #B3C0D1;
+    color: #333;
     line-height: 60px;
   }
   
   .el-aside {
-    color: #fff;
+    color: #333;
   }
   
   #chang-jian-ye-mian-bu-ju + .demo-container {
@@ -15,14 +15,14 @@
     }
   
     .el-aside {
-      background-color: #8492a6;
+      background-color: #D3DCE6;
       text-align: center;
       line-height: 200px;
     }
   
     .el-main {
-      background-color: #d3dce6;
-      color: #5e6d82;
+      background-color: #E9EEF3;
+      color: #333;
       text-align: center;
       line-height: 160px;
     }
@@ -132,22 +132,22 @@
 
 <style>
   .el-header, .el-footer {
-    background-color: #1f2d3d;
-    color: #fff;
+    background-color: #B3C0D1;
+    color: #333;
     text-align: center;
     line-height: 60px;
   }
   
   .el-aside {
-    background-color: #8492a6;
-    color: #fff;
+    background-color: #D3DCE6;
+    color: #333;
     text-align: center;
     line-height: 200px;
   }
   
   .el-main {
-    background-color: #d3dce6;
-    color: #5e6d82;
+    background-color: #E9EEF3;
+    color: #333;
     text-align: center;
     line-height: 160px;
   }
@@ -222,6 +222,7 @@
       </el-submenu>
     </el-menu>
   </el-aside>
+  
   <el-container>
     <el-header style="text-align: right; font-size: 12px">
       <el-dropdown>
@@ -234,6 +235,7 @@
       </el-dropdown>
       <span>王小虎</span>
     </el-header>
+    
     <el-main>
       <el-table :data="tableData">
         <el-table-column prop="date" label="日期" width="140">
@@ -249,13 +251,13 @@
 
 <style>
   .el-header {
-    background-color: #1f2d3d;
-    color: #fff;
+    background-color: #B3C0D1;
+    color: #333;
     line-height: 60px;
   }
   
   .el-aside {
-    color: #fff;
+    color: #333;
   }
 </style>
 

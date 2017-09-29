@@ -247,6 +247,14 @@
   ],
   "en-US": [
     {
+      "name": "Changelog",
+      "path": "/changelog"
+    },
+    {
+      "name": "Element React",
+      "href": "https://eleme.github.io/element-react/"
+    },
+    {
       "name": "Development",
       "children": [
         {
@@ -270,14 +278,6 @@
           "name": "Built-in transition"
         }
       ]
-    },
-    {
-      "name": "Changelog",
-      "path": "/changelog"
-    },
-    {
-      "name": "Element React",
-      "href": "https://eleme.github.io/element-react/"
     },
     {
       "name": "Components",
