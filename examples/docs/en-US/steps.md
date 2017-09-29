@@ -68,7 +68,7 @@ Shows the status of the step for each step.
 
 ### Center 
 
-Title & desription will be centered
+Title and desription can be centered.
 
 :::demo
 ```html
