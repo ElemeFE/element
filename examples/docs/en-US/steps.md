@@ -128,7 +128,7 @@ Vertical step bars.
 :::
 
 ### Simple step bar
-Simple step bars, `align-center` / `description` / `direction` / `space` will not work in this condition。
+Simple step bars, where `align-center`, `description`, `direction` and `space` will be ignored.
 
 :::demo
 ```html
@@ -151,11 +151,11 @@ Simple step bars, `align-center` / `description` / `direction` / `space` will no
 
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------- |---------- |-------------  |-------- |
-| space | the spacing of each step, will be responsive if omitted. Support percentage. | Number, String | — | — |
+| space | the spacing of each step, will be responsive if omitted. Supports percentage. | number / string | — | — |
 | direction | display direction | string | vertical/horizontal | horizontal |
 | active | current activation step  | number | — | 0 |
-| process-status | status of current step | string | wait/process/finish/error/success | process |
-| finish-status | status of end step | string | wait/process/finish/error/success | finish |
+| process-status | status of current step | string | wait / process / finish / error / success | process |
+| finish-status | status of end step | string | wait / process / finish / error / success | finish |
 | align-center | center title and description | boolean | — | false |
 | simple | whether to apply simple theme | boolean | - | false |
 
@@ -164,8 +164,8 @@ Simple step bars, `align-center` / `description` / `direction` / `space` will no
 |---------- |-------- |---------- |-------------  |-------- |
 | title | step title | string | — | — |
 | description | step description | string | — | — |
-| icon | step icon | use icon's class-name to custom icon | string | — |
-| status | current status. It will be automatically set by Steps if not configured. | wait/process/finish/error/success | - |
+| icon | step icon | step icon's class name. Icons can be passed via named slot as well | string | — |
+| status | current status. It will be automatically set by Steps if not configured. | wait / process / finish / error / success | - |
 
 ### Step Slot
 | Name | Description |
