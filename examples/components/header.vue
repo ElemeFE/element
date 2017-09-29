@@ -180,6 +180,7 @@
       a.active::after {
         width: 14px;
         left: calc(50% - 7px);
+        bottom: 15px;
         background: #1989fa;
       }
     }
