@@ -428,6 +428,11 @@
         const routerName = this.$route.name;
         this.isComponentPage = /^component-/.test(routerName);
         this.isHome = /^home/.test(routerName);
+        if (this.isComponentPage) {
+          this.headerStyle.backgroundColor = '#fff';
+          return;
+        }
+        this.headerStyle.backgroundColor = `rgba(32, 160, 255, ${ this.isHome ? '0' : '1' })`;
       }
     },
 
