@@ -16,6 +16,9 @@
     font-size: $--collapse-header-size;
     font-weight: 500;
     transition: border-bottom-color .3s;
+    &:focus:not(.focusing), &:active {
+      outline-width: 0;
+    }
 
     @include e(arrow) {
       margin-right: 8px;
@@ -42,9 +45,8 @@
   }
 
   @include when(active) {
-    > .el-collapse-item__header {
+    .el-collapse-item__header {
       border-bottom-color: transparent;
-
       .el-collapse-item__arrow {
         transform: rotate(90deg);
       }

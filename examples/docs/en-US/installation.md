@@ -4,21 +4,21 @@
 Installing with npm is recommended and it works seamlessly with [webpack](https://webpack.js.org/).
 
 ```shell
-npm i element-ui -S
+npm i element-ui@next -S
 ```
 
 ### CDN
-Get the latest version from [unpkg.com/element-ui](https://unpkg.com/element-ui/) , and import JavaScript and CSS file in your page.
+Get the latest version from [unpkg.com/element-ui](https://unpkg.com/element-ui@next/) , and import JavaScript and CSS file in your page.
 
 ```html
 <!-- import CSS -->
-<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<link rel="stylesheet" href="https://unpkg.com/element-ui@next/lib/theme-chalk/index.css">
 <!-- import JavaScript -->
-<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="https://unpkg.com/element-ui@next/lib/index.js"></script>
 ```
 
 ### Hello world
-If you are using CDN, a hello-world page is easy with Element. [Online Demo](http://codepen.io/QingWei-Li/pen/vXwJrY)
+If you are using CDN, a hello-world page is easy with Element. [Online Demo](https://jsfiddle.net/leopoldthecuber/hzfpyvg6/)
 
 ```html
 <!DOCTYPE html>
@@ -26,7 +26,7 @@ If you are using CDN, a hello-world page is easy with Element. [Online Demo](htt
 <head>
   <meta charset="UTF-8">
   <!-- import CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <link rel="stylesheet" href="https://unpkg.com/element-ui@next/lib/theme-chalk/index.css">
 </head>
 <body>
   <div id="app">
@@ -39,7 +39,7 @@ If you are using CDN, a hello-world page is easy with Element. [Online Demo](htt
   <!-- import Vue before Element -->
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
   <!-- import JavaScript -->
-  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="https://unpkg.com/element-ui@next/lib/index.js"></script>
   <script>
     new Vue({
       el: '#app',

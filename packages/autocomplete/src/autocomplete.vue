@@ -1,5 +1,12 @@
 <template>
-  <div class="el-autocomplete" v-clickoutside="close">
+  <div
+    class="el-autocomplete"
+    v-clickoutside="close"
+    aria-haspopup="listbox"
+    role="combobox"
+    :aria-expanded="suggestionVisible"
+    :aria-owns="id"
+  >
     <el-input
       ref="input"
       v-bind="$props"
@@ -13,6 +20,7 @@
       @keydown.down.native.prevent="highlight(highlightedIndex + 1)"
       @keydown.enter.native="handleKeyEnter"
       @keydown.native.tab="close"
+      :label="label"
     >
       <template slot="prepend" v-if="$slots.prepend">
         <slot name="prepend"></slot>
@@ -24,12 +32,17 @@
     <el-autocomplete-suggestions
       visible-arrow
       :class="[popperClass ? popperClass : '']"
-      ref="suggestions">
+      ref="suggestions"
+      :id="id">
       <li
         v-for="(item, index) in suggestions"
         :key="index"
         :class="{'highlighted': highlightedIndex === index}"
-        @click="select(item)">
+        @click="select(item)"
+        :id="`${id}-item-${index}`"
+        role="option"
+        :aria-selected="highlightedIndex === index"
+      >
         <slot :item="item">
           {{ item[props.label] }}
         </slot>
@@ -42,6 +55,7 @@
   import Clickoutside from 'element-ui/src/utils/clickoutside';
   import ElAutocompleteSuggestions from './autocomplete-suggestions.vue';
   import Emitter from 'element-ui/src/mixins/emitter';
+  import { generateId } from 'element-ui/src/utils/util';
 
   export default {
     name: 'ElAutocomplete',
@@ -85,7 +99,8 @@
       selectWhenUnmatched: {
         type: Boolean,
         default: false
-      }
+      },
+      label: String
     },
     data() {
       return {
@@ -101,6 +116,9 @@
         const suggestions = this.suggestions;
         let isValidData = Array.isArray(suggestions) && suggestions.length > 0;
         return (isValidData || this.loading) && this.activated;
+      },
+      id() {
+        return `el-autocomplete-${generateId()}`;
       }
     },
     watch: {
@@ -191,14 +209,19 @@
         if (offsetTop < scrollTop) {
           suggestion.scrollTop -= highlightItem.scrollHeight;
         }
-
         this.highlightedIndex = index;
+        this.$el.querySelector('.el-input__inner').setAttribute('aria-activedescendant', `${this.id}-item-${this.highlightedIndex}`);
       }
     },
     mounted() {
       this.$on('item-click', item => {
         this.select(item);
       });
+      let $input = this.$el.querySelector('.el-input__inner');
+      $input.setAttribute('role', 'textbox');
+      $input.setAttribute('aria-autocomplete', 'list');
+      $input.setAttribute('aria-controls', 'id');
+      $input.setAttribute('aria-activedescendant', `${this.id}-item-${this.highlightedIndex}`);
     },
     beforeDestroy() {
       this.$refs.suggestions.$destroy();

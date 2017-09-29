@@ -785,7 +785,7 @@ export default {
 | resize | 控制是否能被用户缩放 | string | none, both, horizontal, vertical | — |
 | autofocus | 原生属性，自动获取焦点 | boolean | true, false | false |
 | form | 原生属性 | string | — | — |
-
+| label | 输入框关联的label文字 | string | — | — |
 ### Input slot
 | name | 说明 |
 |------|--------|
@@ -821,7 +821,7 @@ export default {
 | icon          | 输入框尾部图标    | string          | — | — |
 | name | 原生属性 | string | — | — |
 | select-when-unmatched | 在输入没有任何匹配建议的情况下，按下回车是否触发 `select` 事件 | boolean | — | false |
-
+| label | 输入框关联的label文字 | string | — | — |
 ### props
 | 参数     | 说明              | 类型   | 可选值 | 默认值 |
 | -------- | ----------------- | ------ | ------ | ------ |

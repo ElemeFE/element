@@ -3,6 +3,10 @@
     width: 100%;
     box-sizing: border-box;
     padding-right: 30px;
+    transition: opacity .5s;
+    &:hover {
+      opacity: 1 !important;
+    }
 
     li {
       list-style: none;
@@ -59,6 +63,10 @@
       line-height: 26px;
       margin-top: 15px;
     }
+
+    #code-sponsor-widget {
+      margin: 50px 0 0 -20px;
+    }
   }
   .nav-dropdown-list {
     width: 120px;
@@ -69,7 +77,10 @@
   }
 </style>
 <template>
-  <div class="side-nav" :style="navStyle">
+  <div
+    class="side-nav"
+    @mouseenter="isFade = false"
+    :style="navStyle">
     <ul>
       <li class="nav-item" v-for="item in data">
         <a v-if="!item.path && !item.href" @click="expandMenu">{{item.name}}</a>
@@ -111,9 +122,11 @@
         </template>
       </li>
     </ul>
+    <div id="code-sponsor-widget"></div>
   </div>
 </template>
 <script>
+  import bus from '../bus';
   import compoLang from '../i18n/component.json';
 
   export default {
@@ -128,17 +141,28 @@
       return {
         highlights: [],
         navState: [],
-        isSmallScreen: false
+        isSmallScreen: false,
+        isFade: false
       };
     },
     watch: {
       '$route.path'() {
         this.handlePathChange();
+      },
+      isFade(val) {
+        bus.$emit('navFade', val);
       }
     },
     computed: {
       navStyle() {
-        return this.isSmallScreen ? { 'padding-bottom': '60px' } : {};
+        const style = {};
+        if (this.isSmallScreen) {
+          style.paddingBottom = '60px';
+        }
+        if (this.isFade) {
+          style.opacity = '0.5';
+        }
+        return style;
       },
       langConfig() {
         return compoLang.filter(config => config.lang === this.$route.meta.lang)[0]['nav'];
@@ -181,6 +205,11 @@
         this.hideAllMenu();
         event.currentTarget.nextElementSibling.style.height = 'auto';
       }
+    },
+    created() {
+      bus.$on('fadeNav', () => {
+        this.isFade = true;
+      });
     },
     mounted() {
       this.handleResize();

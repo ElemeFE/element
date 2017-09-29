@@ -10,9 +10,13 @@
     arr.forEach(item => {
       const itemCopy = {};
       configurableProps.forEach(prop => {
-        const propName = props[prop] || prop;
-        const value = item[propName];
-        if (value !== undefined) itemCopy[propName] = value;
+        let name = props[prop];
+        let value = item[name];
+        if (value === undefined) {
+          name = prop;
+          value = item[name];
+        }
+        if (value !== undefined) itemCopy[name] = value;
       });
       if (Array.isArray(item[childrenProp])) {
         itemCopy[childrenProp] = copyArray(item[childrenProp], props);

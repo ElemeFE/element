@@ -41,7 +41,7 @@
       padding-top: 130px;
       > {
         h3 {
-          margin: 45px 0 20px;
+          margin: 55px 0 20px;
         }
 
         table {
@@ -176,8 +176,16 @@
           this.showHeader = true;
           bus.$emit('toggleHeader', this.showHeader);
         }
+        if (!this.navFaded) {
+          bus.$emit('fadeNav');
+        }
         this.scrollTop = scrollTop;
       }
+    },
+    created() {
+      bus.$on('navFade', val => {
+        this.navFaded = val;
+      });
     },
     mounted() {
       this.throttledScrollHandler = throttle(300, this.handleScroll);

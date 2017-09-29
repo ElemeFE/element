@@ -1,6 +1,5 @@
 <template>
   <button
-    v-bind="$props"
     class="el-button"
     @click="handleClick"
     :type="nativeType"

@@ -5,30 +5,43 @@
     @mouseenter="hovering = true"
     @mouseleave="hovering = false">
     <slot name="source"></slot>
-    <div class="meta">
-      <div class="description">
+    <div class="meta" ref="meta">
+      <div class="description" v-if="$slots.default">
         <slot></slot>
-        <el-tooltip effect="dark" :content="langConfig['tooltip-text']" placement="right">
-          <el-button size="small" type="primary" @click="goJsfiddle">{{ langConfig['button-text'] }}</el-button>
-        </el-tooltip>
       </div>
       <slot name="highlight"></slot>
     </div>
-    <div class="demo-block-control" @click="isExpanded = !isExpanded">
+    <div
+      class="demo-block-control"
+      ref="control"
+      :class="{ 'is-fixed': fixedControl }"
+      @click="isExpanded = !isExpanded">
       <transition name="arrow-slide">
         <i :class="[iconClass, { 'hovering': hovering }]"></i>
       </transition>
       <transition name="text-slide">
         <span v-show="hovering">{{ controlText }}</span>
       </transition>
+      <el-tooltip effect="dark" :content="langConfig['tooltip-text']" placement="right">
+        <transition name="text-slide">
+          <el-button
+            v-show="hovering || isExpanded"
+            size="small"
+            type="text"
+            class="control-button"
+            @click.stop="goJsfiddle">
+            {{ langConfig['button-text'] }}
+          </el-button>
+        </transition>
+      </el-tooltip>
     </div>
   </div>
 </template>
 
 <style>
   .demo-block {
-    border: solid 1px #eaeefb;
-    border-radius: 4px;
+    border: solid 1px #ebebeb;
+    border-radius: 3px;
     transition: .2s;
 
     &.hover {
@@ -48,28 +61,28 @@
     }
 
     .meta {
-      background-color: #f9fafc;
+      background-color: #fafafa;
       border-top: solid 1px #eaeefb;
-      clear: both;
       overflow: hidden;
       height: 0;
       transition: height .2s;
     }
 
     .description {
-      padding: 18px 24px;
-      width: 40%;
+      padding: 20px;
       box-sizing: border-box;
-      border-left: solid 1px #eaeefb;
-      float: right;
+      border: solid 1px #ebebeb;
+      border-radius: 3px;
       font-size: 14px;
-      line-height: 1.8;
-      color: #5e6d82;
+      line-height: 22px;
+      color: #666;
       word-break: break-word;
+      margin: 10px;
+      background-color: #fff;
 
       p {
-        margin: 0 0 12px;
-        line-height: 1.8;
+        margin: 0;
+        line-height: 26px;
       }
 
       code {
@@ -86,9 +99,6 @@
     }
 
     .highlight {
-      width: 60%;
-      border-right: solid 1px #eaeefb;
-
       pre {
         margin: 0;
       }
@@ -107,7 +117,7 @@
 
     .demo-block-control {
       border-top: solid 1px #eaeefb;
-      height: 36px;
+      height: 44px;
       box-sizing: border-box;
       background-color: #fff;
       border-bottom-left-radius: 4px;
@@ -116,23 +126,28 @@
       margin-top: -1px;
       color: #d3dce6;
       cursor: pointer;
-      transition: .2s;
       position: relative;
+    
+      &.is-fixed {
+        position: fixed;
+        bottom: 0;
+        width: 868px;
+      }
 
       i {
         font-size: 12px;
-        line-height: 36px;
+        line-height: 44px;
         transition: .3s;
         &.hovering {
           transform: translateX(-40px);
         }
       }
 
-      span {
+      > span {
         position: absolute;
         transform: translateX(-30px);
         font-size: 14px;
-        line-height: 36px;
+        line-height: 44px;
         transition: .3s;
         display: inline-block;
       }
@@ -147,19 +162,27 @@
         opacity: 0;
         transform: translateX(10px);
       }
+      
+      .control-button {
+        line-height: 26px;
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 14px;
+      }
     }
   }
 </style>
 
 <script type="text/babel">
   import compoLang from '../i18n/component.json';
-  import { version } from 'main/index.js';
 
   export default {
     data() {
       return {
         hovering: false,
-        isExpanded: false
+        isExpanded: false,
+        fixedControl: false
       };
     },
 
@@ -174,10 +197,10 @@
       goJsfiddle() {
         const { script, html, style } = this.jsfiddle;
         const resourcesTpl = '<scr' + 'ipt src="//unpkg.com/vue/dist/vue.js"></scr' + 'ipt>' +
-        '\n<scr' + `ipt src="//unpkg.com/element-ui@${ version }/lib/index.js"></scr` + 'ipt>';
+        '\n<scr' + 'ipt src="//unpkg.com/element-ui@next/lib/index.js"></scr' + 'ipt>';
         let jsTpl = (script || '').replace(/export default/, 'var Main =').trim();
         let htmlTpl = `${resourcesTpl}\n<div id="app">\n${html.trim()}\n</div>`;
-        let cssTpl = `@import url("//unpkg.com/element-ui@${ version }/lib/theme-chalk/index.css");\n${(style || '').trim()}\n`;
+        let cssTpl = `@import url("//unpkg.com/element-ui@next/lib/theme-chalk/index.css");\n${(style || '').trim()}\n`;
         jsTpl = jsTpl
           ? jsTpl + '\nvar Ctor = Vue.extend(Main)\nnew Ctor().$mount(\'#app\')'
           : 'new Vue().$mount(\'#app\')';
@@ -206,6 +229,17 @@
         document.body.appendChild(form);
 
         form.submit();
+      },
+
+      scrollHandler() {
+        const { top, bottom, left } = this.$refs.meta.getBoundingClientRect();
+        this.fixedControl = bottom > document.documentElement.clientHeight &&
+          top + 44 <= document.documentElement.clientHeight;
+        this.$refs.control.style.left = this.fixedControl ? `${ left }px` : '0';
+      },
+
+      removeScrollHandler() {
+        document.removeEventListener('scroll', this.scrollHandler);
       }
     },
 
@@ -236,7 +270,8 @@
 
       codeAreaHeight() {
         if (this.$el.getElementsByClassName('description').length > 0) {
-          return Math.max(this.$el.getElementsByClassName('description')[0].clientHeight, this.$el.getElementsByClassName('highlight')[0].clientHeight);
+          return this.$el.getElementsByClassName('description')[0].clientHeight +
+            this.$el.getElementsByClassName('highlight')[0].clientHeight + 20;
         }
         return this.$el.getElementsByClassName('highlight')[0].clientHeight;
       }
@@ -245,6 +280,16 @@
     watch: {
       isExpanded(val) {
         this.codeArea.style.height = val ? `${ this.codeAreaHeight + 1 }px` : '0';
+        if (!val) {
+          this.fixedControl = false;
+          this.$refs.control.style.left = '0';
+          this.removeScrollHandler();
+          return;
+        }
+        setTimeout(() => {
+          document.addEventListener('scroll', this.scrollHandler);
+          this.scrollHandler();
+        }, 200);
       }
     },
 
@@ -256,6 +301,10 @@
           highlight.borderRight = 'none';
         }
       });
+    },
+
+    beforeDestroy() {
+      this.removeScrollHandler();
     }
   };
 </script>

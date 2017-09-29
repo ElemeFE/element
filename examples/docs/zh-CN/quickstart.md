@@ -4,9 +4,7 @@
 
 ### 使用 Starter Kit
 
-我们提供了通用的[项目模板](https://github.com/ElementUI/element-starter)，你可以直接使用。对于熟悉 [cooking](https://github.com/ElementUI/element-cooking-starter) 或 [Laravel](https://github.com/ElementUI/element-in-laravel-starter) 的用户，我们也准备了相应的模板，同样可以直接下载使用。
-
-如果不希望使用我们提供的模板，请继续阅读。
+整理中。
 
 ### 配置文件
 
@@ -42,8 +40,8 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
-    "element-ui": "^1.0.0",
-    "vue": "^2.1.6"
+    "element-ui": "next",
+    "vue": "^2.4.2"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",
@@ -194,7 +192,7 @@ new Vue({
 })
 ```
 
-完整组件列表和引入方式（完整组件列表以 [components.json](https://github.com/ElemeFE/element/blob/dev/components.json) 为准）
+完整组件列表和引入方式（完整组件列表以 [components.json](https://github.com/ElemeFE/element/blob/carbon/components.json) 为准）
 
 ```javascript
 import Vue from 'vue'
@@ -215,6 +213,7 @@ import {
   RadioGroup,
   RadioButton,
   Checkbox,
+  CheckboxButton,
   CheckboxGroup,
   Switch,
   Select,
@@ -244,19 +243,23 @@ import {
   Col,
   Upload,
   Progress,
-  Spinner,
   Badge,
   Card,
   Rate,
   Steps,
   Step,
   Carousel,
-  Scrollbar,
   CarouselItem,
   Collapse,
   CollapseItem,
   Cascader,
   ColorPicker,
+  Transfer,
+  Container,
+  Header,
+  Aside,
+  Main,
+  Footer,
   Loading,
   MessageBox,
   Message,
@@ -308,19 +311,22 @@ Vue.use(Row)
 Vue.use(Col)
 Vue.use(Upload)
 Vue.use(Progress)
-Vue.use(Spinner)
 Vue.use(Badge)
 Vue.use(Card)
 Vue.use(Rate)
 Vue.use(Steps)
 Vue.use(Step)
 Vue.use(Carousel)
-Vue.use(Scrollbar)
 Vue.use(CarouselItem)
 Vue.use(Collapse)
 Vue.use(CollapseItem)
 Vue.use(Cascader)
 Vue.use(ColorPicker)
+Vue.use(Container)
+Vue.use(Header)
+Vue.use(Aside)
+Vue.use(Main)
+Vue.use(Footer)
 
 Vue.use(Loading.directive)
 

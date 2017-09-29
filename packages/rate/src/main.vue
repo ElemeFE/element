@@ -1,12 +1,24 @@
 <template>
-  <div class="el-rate">
+  <div class="el-rate"
+       @keydown="handelKey"
+       role="slider"
+       :aria-valuenow="currentValue"
+       :aria-valuetext="text"
+       aria-valuemin="0"
+       :aria-valuemin="max"
+       tabindex="0"
+       @focus="focusing = true"
+       @blur="focusing = false"
+       :class="{'focusing': focusing}"
+  >
     <span
       v-for="item in max"
       class="el-rate__item"
       @mousemove="setCurrentValue(item, $event)"
       @mouseleave="resetCurrentValue"
       @click="selectValue(item)"
-      :style="{ cursor: disabled ? 'auto' : 'pointer' }">
+      :style="{ cursor: disabled ? 'auto' : 'pointer' }"
+    >
       <i
         :class="[classes[item - 1], { 'hover': hoverIndex === item }]"
         class="el-rate__icon"
@@ -34,7 +46,8 @@
         classMap: {},
         pointerAtLeftHalf: true,
         currentValue: this.value,
-        hoverIndex: -1
+        hoverIndex: -1,
+        focusing: false
       };
     },
 
@@ -237,6 +250,34 @@
           this.$emit('input', value);
           this.$emit('change', value);
         }
+        this.focusing = false;
+      },
+
+      handelKey(e) {
+        let currentValue = this.currentValue;
+        const keyCode = e.keyCode;
+        if (keyCode === 38 || keyCode === 39) { // left / down
+          if (this.allowHalf) {
+            currentValue += 0.5;
+          } else {
+            currentValue += 1;
+          }
+          e.stopPropagation();
+          e.preventDefault();
+        } else if (keyCode === 37 || keyCode === 40) {
+          if (this.allowHalf) {
+            currentValue -= 0.5;
+          } else {
+            currentValue -= 1;
+          }
+          e.stopPropagation();
+          e.preventDefault();
+        }
+        currentValue = currentValue < 0 ? 0 : currentValue;
+        currentValue = currentValue > this.max ? this.max : currentValue;
+
+        this.$emit('input', currentValue);
+        this.$emit('change', currentValue);
       },
 
       setCurrentValue(value, event) {

@@ -5,6 +5,7 @@
       class="el-autocomplete-suggestion el-popper"
       :class="{ 'is-loading': parent.loading }"
       :style="{ width: dropdownWidth }"
+      role="region"
     >
       <el-scrollbar
         tag="ul"
@@ -40,11 +41,11 @@
       options: {
         default() {
           return {
-            forceAbsolute: true,
             gpuAcceleration: false
           };
         }
-      }
+      },
+      id: String
     },
 
     methods: {
@@ -62,6 +63,9 @@
     mounted() {
       this.$parent.popperElm = this.popperElm = this.$el;
       this.referenceElm = this.$parent.$refs.input.$refs.input;
+      this.referenceList = this.$el.querySelector('.el-autocomplete-suggestion__list');
+      this.referenceList.setAttribute('role', 'listbox');
+      this.referenceList.setAttribute('id', this.id);
     },
 
     created() {

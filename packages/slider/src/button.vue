@@ -152,6 +152,7 @@
           this.startX = event.clientX;
         }
         this.startPosition = parseFloat(this.currentPosition);
+        this.newPosition = this.startPosition;
       },
 
       onDragging(event) {
