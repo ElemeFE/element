@@ -23,7 +23,7 @@
         width: 100%;
         left: 0;
         top: 0;
-        z-index: 10;
+        z-index: 1000;
         border-bottom: solid 1px #ccc;
       }
     }
