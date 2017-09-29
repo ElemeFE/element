@@ -18,42 +18,6 @@
       overflow: hidden;
     }
 
-    .nav-dropdown {
-      margin-bottom: 6px;
-      width: 100%;
-      span {
-        display: block;
-        width: 100%;
-        font-size: 16px;
-        color: #5e6d82;
-        line-height: 40px;
-        transition: .2s;
-        padding-bottom: 6px;
-        border-bottom: 1px solid #eaeefb;
-        &:hover {
-          cursor: pointer;
-        }
-      }
-      i {
-        transition: .2s;
-        font-size: 12px;
-        color: #d3dce6;
-      }
-      @when active {
-        span, i {
-          color: #1989FA;
-        }
-        i {
-          transform: rotateZ(180deg) translateY(2px);
-        }
-      }
-      &:hover {
-        span, i {
-          color: #1989FA;
-        }
-      }
-    }
-
     .nav-item {
       a {
         font-size: 16px;
@@ -99,7 +63,7 @@
       line-height: 26px;
       margin-top: 15px;
     }
-    
+
     #code-sponsor-widget {
       margin: 50px 0 0 -20px;
     }
@@ -164,7 +128,6 @@
 <script>
   import bus from '../bus';
   import compoLang from '../i18n/component.json';
-  import { version } from 'main/index.js';
 
   export default {
     props: {
@@ -179,9 +142,6 @@
         highlights: [],
         navState: [],
         isSmallScreen: false,
-        versions: [],
-        version,
-        dropdownVisible: false,
         isFade: false
       };
     },
@@ -204,18 +164,11 @@
         }
         return style;
       },
-      isComponentPage() {
-        return /^component-/.test(this.$route.name);
-      },
       langConfig() {
         return compoLang.filter(config => config.lang === this.$route.meta.lang)[0]['nav'];
       }
     },
     methods: {
-      switchVersion(version) {
-        if (version === this.version) return;
-        location.href = `${ location.origin }/${ this.versions[version] }/${ location.hash } `;
-      },
       handleResize() {
         this.isSmallScreen = document.documentElement.clientWidth < 768;
         this.handlePathChange();
@@ -251,23 +204,12 @@
         if (!target.nextElementSibling || target.nextElementSibling.tagName !== 'UL') return;
         this.hideAllMenu();
         event.currentTarget.nextElementSibling.style.height = 'auto';
-      },
-      handleDropdownToggle(visible) {
-        this.dropdownVisible = visible;
       }
     },
     created() {
       bus.$on('fadeNav', () => {
         this.isFade = true;
       });
-      const xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = _ => {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-          this.versions = JSON.parse(xhr.responseText);
-        }
-      };
-      xhr.open('GET', '/versions.json');
-      xhr.send();
     },
     mounted() {
       this.handleResize();

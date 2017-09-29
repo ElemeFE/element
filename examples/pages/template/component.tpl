@@ -34,6 +34,7 @@
 
     .page-component__content {
       padding-left: 270px;
+      padding-bottom: 100px;
     }
     
     .content {
@@ -87,22 +88,24 @@
       }
     }
     .page-component-up {
-      background-color: #58b7ff;
+      background-color: #fff;
       position: fixed;
       right: 100px;
       bottom: 150px;
-      size: 50px;
-      border-radius: 25px;
+      size: 40px;
+      border-radius: 20px;
       cursor: pointer;
-      opacity: 0.4;
       transition: .3s;
+      box-shadow: 0 0 6px rgba(0,0,0, .12);
+
       i {
-        color: #fff;
+        color: #1989fa;
         display: block;
-        line-height: 50px;
+        line-height: 40px;
         text-align: center;
-        font-size: 22px;
+        font-size: 12px;
       }
+
       &.hover {
         opacity: 1;
       }
