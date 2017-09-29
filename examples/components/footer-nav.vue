@@ -19,8 +19,8 @@
 
 <style>
   .footer-nav {
-    padding: 24px 0;
-    color: #99a9bf;
+    padding: 40px 0;
+    color: #333;
     font-size: 14px;
     
     &::after {
@@ -31,7 +31,7 @@
      
     & i {
       transition: .3s;
-      color: #d9def1;
+      color: #999;
       vertical-align: baseline;
     }
   }
@@ -41,10 +41,10 @@
     transition: .3s;
     
     &:hover {
-      color: #20a0ff;
+      color: #1989fa;
      
       & i {
-        color: #20a0ff;
+        color: #1989fa;
       }
     }
   }
