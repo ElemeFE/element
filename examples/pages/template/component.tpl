@@ -90,12 +90,11 @@
     .page-component-up {
       background-color: #fff;
       position: fixed;
-      right: calc((100vw - 1140px) / 2);
+      right: 100px;
       bottom: 150px;
       size: 40px;
       border-radius: 20px;
       cursor: pointer;
-      opacity: 0.4;
       transition: .3s;
       box-shadow: 0 0 6px rgba(0,0,0, .12);
 
