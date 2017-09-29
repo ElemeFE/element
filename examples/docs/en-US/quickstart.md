@@ -4,9 +4,7 @@ This part walks you through the process of using Element in a webpack project.
 
 ### Use Starter Kit
 
-We provide a general [project template](https://github.com/ElementUI/element-starter) for you. For those who are familiar with [cooking](https://github.com/ElementUI/element-cooking-starter) or [Laravel](https://github.com/ElementUI/element-in-laravel-starter), we also provide corresponding templates, and you can download and use them as well.
-
-If you prefer not to use them, please read the following.
+Under construction.
 
 ### Config files
 
@@ -42,8 +40,8 @@ Typical configurations for these config files are:
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
-    "element-ui": "^1.0.0",
-    "vue": "^2.1.6"
+    "element-ui": "next",
+    "vue": "^2.4.2"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",
@@ -194,7 +192,7 @@ new Vue({
 })
 ```
 
-Full example (Component list reference [components.json](https://github.com/ElemeFE/element/blob/dev/components.json))
+Full example (Component list reference [components.json](https://github.com/ElemeFE/element/blob/carbon/components.json))
 
 ```javascript
 import Vue from 'vue'
@@ -215,6 +213,7 @@ import {
   RadioGroup,
   RadioButton,
   Checkbox,
+  CheckboxButton,
   CheckboxGroup,
   Switch,
   Select,
@@ -244,19 +243,23 @@ import {
   Col,
   Upload,
   Progress,
-  Spinner,
   Badge,
   Card,
   Rate,
   Steps,
   Step,
   Carousel,
-  Scrollbar,
   CarouselItem,
   Collapse,
   CollapseItem,
   Cascader,
   ColorPicker,
+  Transfer,
+  Container,
+  Header,
+  Aside,
+  Main,
+  Footer,
   Loading,
   MessageBox,
   Message,
@@ -308,19 +311,22 @@ Vue.use(Row)
 Vue.use(Col)
 Vue.use(Upload)
 Vue.use(Progress)
-Vue.use(Spinner)
 Vue.use(Badge)
 Vue.use(Card)
 Vue.use(Rate)
 Vue.use(Steps)
 Vue.use(Step)
 Vue.use(Carousel)
-Vue.use(Scrollbar)
 Vue.use(CarouselItem)
 Vue.use(Collapse)
 Vue.use(CollapseItem)
 Vue.use(Cascader)
 Vue.use(ColorPicker)
+Vue.use(Container)
+Vue.use(Header)
+Vue.use(Aside)
+Vue.use(Main)
+Vue.use(Footer)
 
 Vue.use(Loading.directive)
 

@@ -3,6 +3,10 @@
     width: 100%;
     box-sizing: border-box;
     padding-right: 30px;
+    transition: opacity .5s;
+    &:hover {
+      opacity: 1 !important;
+    }
 
     li {
       list-style: none;
@@ -105,7 +109,10 @@
   }
 </style>
 <template>
-  <div class="side-nav" :style="navStyle">
+  <div
+    class="side-nav"
+    @mouseenter="isFade = false"
+    :style="navStyle">
     <ul>
       <li class="nav-item" v-for="item in data">
         <a v-if="!item.path && !item.href" @click="expandMenu">{{item.name}}</a>
@@ -150,6 +157,7 @@
   </div>
 </template>
 <script>
+  import bus from '../bus';
   import compoLang from '../i18n/component.json';
   import { version } from 'main/index.js';
 
@@ -168,17 +176,28 @@
         isSmallScreen: false,
         versions: [],
         version,
-        dropdownVisible: false
+        dropdownVisible: false,
+        isFade: false
       };
     },
     watch: {
       '$route.path'() {
         this.handlePathChange();
+      },
+      isFade(val) {
+        bus.$emit('navFade', val);
       }
     },
     computed: {
       navStyle() {
-        return this.isSmallScreen ? { 'padding-bottom': '60px' } : {};
+        const style = {};
+        if (this.isSmallScreen) {
+          style.paddingBottom = '60px';
+        }
+        if (this.isFade) {
+          style.opacity = '0.5';
+        }
+        return style;
       },
       isComponentPage() {
         return /^component-/.test(this.$route.name);
@@ -233,6 +252,9 @@
       }
     },
     created() {
+      bus.$on('fadeNav', () => {
+        this.isFade = true;
+      });
       const xhr = new XMLHttpRequest();
       xhr.onreadystatechange = _ => {
         if (xhr.readyState === 4 && xhr.status === 200) {

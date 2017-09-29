@@ -25,8 +25,12 @@
     &.disabled {
       cursor: default;
 
-      .el-slider__bar, .el-slider__button {
+      .el-slider__bar {
         background-color: $--slider-disable-color;
+      }
+
+      .el-slider__button {
+        border-color: $--slider-disable-color;
       }
 
       .el-slider__button-wrapper {
@@ -102,7 +106,8 @@
   @include e(button) {
     width: $--slider-button-size;
     height: $--slider-button-size;
-    background-color: $--slider-main-background-color;
+    border: solid 2px $--slider-main-background-color;
+    background-color: $--color-white;
     border-radius: 50%;
     transition: .2s;
     user-select: none;
@@ -110,8 +115,7 @@
     &:hover,
     &.hover,
     &.dragging {
-      transform: scale(1.5);
-      background-color: $--slider-button-hover-color;
+      transform: scale(1.2);
     }
 
     &:hover,
