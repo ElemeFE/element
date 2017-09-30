@@ -168,7 +168,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 };
 
 module.exports = {
-  version: '1.4.6',
+  version: '2.0.0-alpha.1',
   locale: locale.use,
   i18n: locale.i18n,
   install,
