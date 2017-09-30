@@ -12,12 +12,40 @@
       position: fixed;
       top: 0;
       bottom: 0;
-      overflow: auto;
-      padding-top: 80px;
+      overflow-x: hidden;
+      overflow-y: auto;
+      transform: translateY(80px);
       transition: padding-top .3s;
-      
+
       &.is-extended {
         padding-top: 0;
+      }
+
+      &::-webkit-scrollbar {
+        z-index: 11;
+        width: 0;
+        transition: .2s ease-out;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        width: 1px;
+        transition: .2s ease-out;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: #fff;
+      }
+
+      &:hover {
+        &::-webkit-scrollbar-thumb {
+           width: 5px;
+           background: rgba(#b4bccc, .8);
+        }
+
+        &::-webkit-scrollbar {
+           width: 5px;
+         }
       }
     }
     
@@ -87,6 +115,7 @@
         }
       }
     }
+
     .page-component-up {
       background-color: #fff;
       position: fixed;
@@ -95,12 +124,11 @@
       size: 40px;
       border-radius: 20px;
       cursor: pointer;
-      opacity: 0.4;
       transition: .3s;
       box-shadow: 0 0 6px rgba(0,0,0, .12);
 
       i {
-        color: #1989fa;
+        color: #409EFF;
         display: block;
         line-height: 40px;
         text-align: center;
@@ -120,9 +148,7 @@
 </style>
 <template>
   <div class="page-container page-component">
-    <div
-      class="page-component__nav"
-      :class="{ 'is-extended': !showHeader }">
+    <div class="page-component__nav">
       <side-nav :data="navsData[lang]" :base="`/${ lang }/component`"></side-nav>
     </div>
     <div class="page-component__content">

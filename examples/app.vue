@@ -36,7 +36,7 @@
   }
 
   a {
-    color: #1989FA;
+    color: #409EFF;
     text-decoration: none;
   }
 
@@ -70,7 +70,7 @@
     margin-top: -80px;
     padding: 80px 0 120px;
     box-sizing: border-box;
-    min-height: 100%;
+    overflow-y: auto;
   }
 
   .container,

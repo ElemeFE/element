@@ -25,7 +25,7 @@
     }
   }
   .bg-blue {
-    background-color: #1989fa;
+    background-color: #409EFF;
   }
 
   .bg-success {
@@ -82,7 +82,7 @@ Element 主要品牌颜色是鲜艳、友好的蓝色。
 
 <el-row :gutter="12">
   <el-col :span="6">
-    <div class="demo-color-box bg-blue">Blue<div class="value">#1989FA</div></div>
+    <div class="demo-color-box bg-blue">Blue<div class="value">#409EFF</div></div>
   </el-col>
 </el-row>
 
