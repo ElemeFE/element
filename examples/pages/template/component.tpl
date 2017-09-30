@@ -1,4 +1,9 @@
 <style>
+  .page-component__scroll {
+    height: calc(100% - 80px);
+    margin-top: 80px;
+  }
+
   .page-component {
     box-sizing: border-box;
     height: 100%;
@@ -6,7 +11,7 @@
     &.page-container {
       padding: 0;
     }
-  
+
     .page-component__nav {
       width: 240px;
       position: fixed;
@@ -18,41 +23,14 @@
       &.is-extended {
         padding-top: 0;
       }
-
-      &::-webkit-scrollbar {
-        z-index: 11;
-        width: 0;
-        transition: .2s ease-out;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        border-radius: 5px;
-        width: 1px;
-        transition: .2s ease-out;
-      }
-
-      &::-webkit-scrollbar-track {
-        background: #fff;
-      }
-
-      &:hover {
-        &::-webkit-scrollbar-thumb {
-           width: 5px;
-           background: rgba(#b4bccc, .8);
-        }
-
-        &::-webkit-scrollbar {
-           width: 5px;
-         }
-      }
     }
-    
+
     .side-nav {
       height: 100%;
       padding-top: 50px;
       padding-bottom: 50px;
       padding-right: 0;
-      
+
       & > ul {
         padding-bottom: 50px;
       }
@@ -61,10 +39,12 @@
     .page-component__content {
       padding-left: 270px;
       padding-bottom: 100px;
+      box-sizing: border-box;
     }
-    
+
     .content {
-      padding-top: 130px;
+      padding-top: 50px;
+
       > {
         h3 {
           margin: 55px 0 20px;
@@ -117,7 +97,7 @@
     .page-component-up {
       background-color: #fff;
       position: fixed;
-      right: calc((100vw - 1140px) / 2);
+      right: 100px;
       bottom: 150px;
       size: 40px;
       border-radius: 20px;
@@ -145,8 +125,9 @@
   }
 </style>
 <template>
+  <el-scrollbar class="page-component__scroll" noresize>
   <div class="page-container page-component">
-    <el-scrollbar class="page-component__nav">
+    <el-scrollbar class="page-component__nav" noresize>
       <side-nav :data="navsData[lang]" :base="`/${ lang }/component`"></side-nav>
     </el-scrollbar>
     <div class="page-component__content">
@@ -165,6 +146,7 @@
       </div>
     </transition>
   </div>
+  </el-scrollbar>
 </template>
 <script>
   import bus from '../../bus';

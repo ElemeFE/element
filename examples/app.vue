@@ -7,15 +7,19 @@
     margin: 0;
     padding: 0;
     height: 100%;
+    overflow-y: hidden;
   }
 
   #app {
     height: 100%;
     
     @when component {
+      overflow-y: hidden;
+
       .main-cnt {
         padding: 0;
         margin-top: 0;
+        height: 100%;
         min-height: auto;
       }
       .headerWrapper {
@@ -70,7 +74,7 @@
     margin-top: -80px;
     padding: 80px 0 120px;
     box-sizing: border-box;
-    overflow-y: auto;
+    min-height: 100%;
   }
 
   .container,
