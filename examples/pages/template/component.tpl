@@ -133,7 +133,7 @@
   }
 </style>
 <template>
-  <el-scrollbar class="page-component__scroll" ref="componentScrollBar" noresize>
+  <el-scrollbar class="page-component__scroll" ref="componentScrollBar">
   <div class="page-container page-component">
     <el-scrollbar class="page-component__nav" noresize>
       <side-nav :data="navsData[lang]" :base="`/${ lang }/component`"></side-nav>
