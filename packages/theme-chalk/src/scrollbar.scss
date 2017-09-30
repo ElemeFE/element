@@ -16,6 +16,7 @@
 
   @include e(wrap) {
     overflow: scroll;
+    height: 100%;
 
     @include m(hidden-default) {
       &::-webkit-scrollbar {

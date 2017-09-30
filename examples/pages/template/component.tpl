@@ -12,8 +12,6 @@
       position: fixed;
       top: 0;
       bottom: 0;
-      overflow-x: hidden;
-      overflow-y: auto;
       transform: translateY(80px);
       transition: padding-top .3s;
 
@@ -148,9 +146,9 @@
 </style>
 <template>
   <div class="page-container page-component">
-    <div class="page-component__nav">
+    <el-scrollbar class="page-component__nav">
       <side-nav :data="navsData[lang]" :base="`/${ lang }/component`"></side-nav>
-    </div>
+    </el-scrollbar>
     <div class="page-component__content">
       <router-view class="content"></router-view>
       <footer-nav></footer-nav>
