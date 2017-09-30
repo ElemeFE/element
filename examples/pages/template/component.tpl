@@ -169,16 +169,17 @@
         hover: false,
         showBackToTop: false,
         scrollTop: 0,
-        showHeader: true
+        showHeader: true,
+        componentScrollBar: null,
+        componentScrollBoxElement: null
       };
     },
     watch: {
       '$route.path'() {
         // 触发伪滚动条更新
-        let componentScrollBar = this.$refs.componentScrollBar;
-        componentScrollBar.$el.querySelector('.el-scrollbar__wrap').scrollTop = 0;
+        this.componentScrollBox.scrollTop = 0;
         this.$nextTick(() => {
-          componentScrollBar.update();
+          this.componentScrollBar.update();
         });
       }
     },
@@ -212,11 +213,13 @@
       });
     },
     mounted() {
+      this.componentScrollBar = this.$refs.componentScrollBar;
+      this.componentScrollBox = this.componentScrollBar.$el.querySelector('.el-scrollbar__wrap');
       this.throttledScrollHandler = throttle(300, this.handleScroll);
-      document.addEventListener('scroll', this.throttledScrollHandler);
+      this.componentScrollBox.addEventListener('scroll', this.throttledScrollHandler);
     },
     beforeDestroy() {
-      document.removeEventListener('scroll', this.throttledScrollHandler);
+      this.componentScrollBox.removeEventListener('scroll', this.throttledScrollHandler);
     }
   };
 </script>
