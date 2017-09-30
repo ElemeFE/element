@@ -7,15 +7,19 @@
     margin: 0;
     padding: 0;
     height: 100%;
+    overflow-y: hidden;
   }
 
   #app {
     height: 100%;
     
     @when component {
+      overflow-y: hidden;
+
       .main-cnt {
         padding: 0;
         margin-top: 0;
+        height: 100%;
         min-height: auto;
       }
       .headerWrapper {
@@ -36,7 +40,7 @@
   }
 
   a {
-    color: #1989FA;
+    color: #409EFF;
     text-decoration: none;
   }
 

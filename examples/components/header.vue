@@ -158,7 +158,7 @@
       &.acive {
         font-weight: normal;
         opacity: 1;
-        color: #1989fa;
+        color: #409EFF;
       }
     }
 
@@ -215,7 +215,7 @@
 
     @when active {
       span, i {
-        color: #1989FA;
+        color: #409EFF;
       }
       i {
         transform: rotateZ(180deg) translateY(2px) scale(.6);
@@ -224,7 +224,7 @@
 
     &:hover {
       span, i {
-        color: #1989FA;
+        color: #409EFF;
       }
     }
   }
@@ -267,7 +267,7 @@
 <template>
   <div
     class="headerWrapper"
-    :class="{ 'is-hidden': !visible }">
+    :class="{ 'is-hidden': !visible && !isComponentPage }">
     <header class="header"
       ref="header"
       :style="headerStyle"

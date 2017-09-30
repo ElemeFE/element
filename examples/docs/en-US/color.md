@@ -25,7 +25,7 @@
     }
   }
   .bg-blue {
-    background-color: #1989fa;
+    background-color: #409EFF;
   }
 
   .bg-success {
@@ -81,7 +81,7 @@ The main color of Element is bright and friendly blue.
 
 <el-row :gutter="12">
   <el-col :span="6">
-    <div class="demo-color-box bg-blue">Blue<div class="value">#1989FA</div></div>
+    <div class="demo-color-box bg-blue">Blue<div class="value">#409EFF</div></div>
   </el-col>
 </el-row>
 

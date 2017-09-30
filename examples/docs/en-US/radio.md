@@ -214,7 +214,7 @@ name | native 'name' attribute | string    |      —         |     —
 size | the size of radio buttons or bordered radios | string | medium / small / mini | —
 disabled  | whether the nesting radios are disabled | boolean   | — | false
 text-color | font color when button is active | string   | — | #ffffff   |
-fill  | border and background color when button is active | string   | — | #1989fa   |
+fill  | border and background color when button is active | string   | — | #409EFF   |
 
 ### Radio-group Events
 

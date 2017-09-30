@@ -1,4 +1,13 @@
 <style>
+  .page-component__scroll {
+    height: calc(100% - 80px);
+    margin-top: 80px;
+
+    .el-scrollbar__wrap {
+      overflow-x: auto;
+    }
+  }
+
   .page-component {
     box-sizing: border-box;
     height: 100%;
@@ -6,27 +15,30 @@
     &.page-container {
       padding: 0;
     }
-  
+
     .page-component__nav {
       width: 240px;
       position: fixed;
       top: 0;
       bottom: 0;
-      overflow: auto;
-      padding-top: 80px;
+      margin-top: 80px;
       transition: padding-top .3s;
-      
+
+      .el-scrollbar__wrap {
+        height: 100%;
+      }
+
       &.is-extended {
         padding-top: 0;
       }
     }
-    
+
     .side-nav {
       height: 100%;
       padding-top: 50px;
       padding-bottom: 50px;
       padding-right: 0;
-      
+
       & > ul {
         padding-bottom: 50px;
       }
@@ -35,10 +47,12 @@
     .page-component__content {
       padding-left: 270px;
       padding-bottom: 100px;
+      box-sizing: border-box;
     }
-    
+
     .content {
-      padding-top: 130px;
+      padding-top: 50px;
+
       > {
         h3 {
           margin: 55px 0 20px;
@@ -87,6 +101,7 @@
         }
       }
     }
+
     .page-component-up {
       background-color: #fff;
       position: fixed;
@@ -99,7 +114,7 @@
       box-shadow: 0 0 6px rgba(0,0,0, .12);
 
       i {
-        color: #1989fa;
+        color: #409EFF;
         display: block;
         line-height: 40px;
         text-align: center;
@@ -118,12 +133,11 @@
   }
 </style>
 <template>
+  <el-scrollbar class="page-component__scroll" ref="componentScrollBar">
   <div class="page-container page-component">
-    <div
-      class="page-component__nav"
-      :class="{ 'is-extended': !showHeader }">
+    <el-scrollbar class="page-component__nav">
       <side-nav :data="navsData[lang]" :base="`/${ lang }/component`"></side-nav>
-    </div>
+    </el-scrollbar>
     <div class="page-component__content">
       <router-view class="content"></router-view>
       <footer-nav></footer-nav>
@@ -140,6 +154,7 @@
       </div>
     </transition>
   </div>
+  </el-scrollbar>
 </template>
 <script>
   import bus from '../../bus';
@@ -154,8 +169,19 @@
         hover: false,
         showBackToTop: false,
         scrollTop: 0,
-        showHeader: true
+        showHeader: true,
+        componentScrollBar: null,
+        componentScrollBoxElement: null
       };
+    },
+    watch: {
+      '$route.path'() {
+        // 触发伪滚动条更新
+        this.componentScrollBox.scrollTop = 0;
+        this.$nextTick(() => {
+          this.componentScrollBar.update();
+        });
+      }
     },
     methods: {
       toTop() {
@@ -187,11 +213,13 @@
       });
     },
     mounted() {
+      this.componentScrollBar = this.$refs.componentScrollBar;
+      this.componentScrollBox = this.componentScrollBar.$el.querySelector('.el-scrollbar__wrap');
       this.throttledScrollHandler = throttle(300, this.handleScroll);
-      document.addEventListener('scroll', this.throttledScrollHandler);
+      this.componentScrollBox.addEventListener('scroll', this.throttledScrollHandler);
     },
     beforeDestroy() {
-      document.removeEventListener('scroll', this.throttledScrollHandler);
+      this.componentScrollBox.removeEventListener('scroll', this.throttledScrollHandler);
     }
   };
 </script>

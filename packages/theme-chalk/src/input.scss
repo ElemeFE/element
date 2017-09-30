@@ -6,6 +6,7 @@
   font-size: $--font-size-base;
   display: inline-block;
   width: 100%;
+  @include scroll-bar;
 
   @include e(inner) {
     -webkit-appearance: none;
