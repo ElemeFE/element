@@ -2,6 +2,10 @@
   .page-component__scroll {
     height: calc(100% - 80px);
     margin-top: 80px;
+
+    .el-scrollbar__wrap {
+      overflow-x: auto;
+    }
   }
 
   .page-component {
@@ -17,8 +21,12 @@
       position: fixed;
       top: 0;
       bottom: 0;
-      transform: translateY(80px);
+      margin-top: 80px;
       transition: padding-top .3s;
+
+      .el-scrollbar__wrap {
+        height: 100%;
+      }
 
       &.is-extended {
         padding-top: 0;
@@ -125,7 +133,7 @@
   }
 </style>
 <template>
-  <el-scrollbar class="page-component__scroll" noresize>
+  <el-scrollbar class="page-component__scroll" ref="componentScrollBar" noresize>
   <div class="page-container page-component">
     <el-scrollbar class="page-component__nav" noresize>
       <side-nav :data="navsData[lang]" :base="`/${ lang }/component`"></side-nav>
@@ -163,6 +171,16 @@
         scrollTop: 0,
         showHeader: true
       };
+    },
+    watch: {
+      '$route.path'() {
+        // 触发伪滚动条更新
+        let componentScrollBar = this.$refs.componentScrollBar;
+        componentScrollBar.$el.querySelector('.el-scrollbar__wrap').scrollTop = 0;
+        this.$nextTick(() => {
+          componentScrollBar.update();
+        });
+      }
     },
     methods: {
       toTop() {
