@@ -187,11 +187,10 @@
       toTop() {
         this.hover = false;
         this.showBackToTop = false;
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
+        this.componentScrollBox.scrollTop = 0;
       },
       handleScroll() {
-        const scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+        const scrollTop = this.componentScrollBox.scrollTop;
         this.showBackToTop = scrollTop >= 0.5 * document.body.clientHeight;
         if (this.showHeader !== this.scrollTop > scrollTop) {
           this.showHeader = this.scrollTop > scrollTop;
