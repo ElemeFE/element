@@ -86,6 +86,11 @@
           vertical-align: middle;
         }
       }
+  
+      i {
+        padding: 0 20px;
+        display: inline-block;
+      }
 
       h3 {
         margin:0;

@@ -1,5 +1,122 @@
 ## Changelog
 
+### 2.0.0-alpha.1
+
+*2017-09-30*
+
+#### New features
+- General
+  - A new theme: `theme-chalk`
+  - Accessibility of the following components are improved: Alert, AutoComplete, Breadcrumb, Button, Checkbox, Collapse, Input, InputNumber, Menu, Progress, Radio, Rate, Slider, Switch, Upload
+  - Layout components: Container, Header, Aside, Main, Footer
+- Button
+  - Added `round` attribute. It's used for round-cornered Buttons #6643
+- TimeSelect
+  - Now can be navigated by `Up` and `Down`, and hitting `Enter` selects the time #6023
+- TimePicker
+  - Now can be navigated by arrow keys, and hitting `Enter` selects the time #6050
+  - Added `start-placeholder` and `end-placeholder`. They're placeholders for the two input boxes in range mode #7169
+- Tree
+  - Now child nodes don't render before the first expand #6257
+  - Added `check-descendants` attribute. It determines if child nodes are checked when checking their parent node
+in `lazy` mode #6235
+- Tag
+  - Added `size` attribute #7203
+- Datepicker
+  - Now `timeFormat` can format the TimePicker when type is set to `datetimerange` #6052
+  - Added `start-placeholder` and `end-placeholder`. They're placeholders for the two input boxes in range mode #7169
+- MessageBox
+  - Added `closeOnHashChange` attribute #6043
+  - Added `center` attribute so that the content can be centered #7029
+  - Added `roundButton` attribute to display round Buttons #7029
+  - Added `dangerouslyUseHTMLString` attribute. When set to `true`, `message` will be parsed as HTML string<sup>*</sup> #6043
+- Dialog
+  - Added `width`、`fullscreen`、`append-to-body` attributes. Now Dialog can be nested
+  - Added `center` attribute so that the content can be centered #7042
+  - Added `focus-after-closed`、`focus-after-open` to improve accessibility #6511
+- ColorPicker
+  - Now you can type colors in the input box #6167
+  - Added `size` and `disabled` attributes #7026
+- Message
+  - Now color of the icons can be overridden by CSS #6207
+  - Added `dangerouslyUseHTMLString` attribute. When set to `true`, `message` will be parsed as HTML string<sup>*</sup> #6207
+  - Added `center` attribute so that the content can be centered #6875
+- Notification
+  - Added `position` attribute to configure where Notification pops up #6231
+  - Added `dangerouslyUseHTMLString` attribute. When set to `true`, `message` will be parsed as HTML string<sup>*</sup> #6231
+  - Added `showClose` attribute to hide the close button #6402
+- Rate
+  - Added `show-score` attribute to determine if current score is displayed #6295
+- Tabs
+  - Added `tab-position` attribute #6096
+- Radio
+  - Improved accessibility #6101
+  - Added `border` and `size` attributes #6690
+- Checkbox
+  - Added `border` and `size` attributes #6690
+- Alert
+  - Added `center` attribute so that the content can be centered #6876
+- Menu
+  - Added `background-color`, `text-color` and `active-text-color` attributes #7064
+- Form
+  - Added `inline-message` attribute to determine if the validation message is displayed in inline style #7032
+  - Added `status-icon` attribute to display a feedback icon when validated #7032
+- Input
+  - Added `suffix` and `prefix` named slots, `suffixIcon` and `prefixIcon` attributes to add contents inside the input box #7032
+- Breadcrumb
+  - Added `separator-class` attribute to support icons as item separators #7203
+- Steps
+  - Added `simple` attribute to activate simple-styled Steps #7274
+
+#### Bug fixes
+- DatePicker
+  - Fixed `v-model` returning the second day of the selected week in week mode #6038
+  - Fixed the first input being cleared in `daterange` type #6021
+- DateTimePicker
+  - Fixed DateTimePicker and TimePicker affecting each other when picked #6090
+  - Fixed hour and second can be beyond limit when selecting time #6076
+- TimePicker
+  - Fixed `v-model` not update correctly when blurred #6023
+- Dialog
+  - Fixed texts having blurry edges when opening and closing nesting dropdowns #6088
+- Select
+  - Improved performance. Now Vue dev-tool won't crash when a large number of Selects are destroyed #6151
+
+#### Breaking changes
+- General
+  - Removed `theme-default`
+  - `change` event of form components and `current-change` event of Pagination now only trigger on user interaction
+  - `size` attribute of Button and form components can no longer be set to `large`. Now they accept `medium`, `small` and `mini`
+  - To facilitate the use of third-party icons, `icon` attribute of Button and Steps, `prefix-icon` and `suffix-icon` attributes of Input now require a full class name
+- Dialog
+  - Removed `size` attribute. Now the size of Dialog can be configured by `width` and `fullscreen`
+  - Now the visibility of Dialog cannot be controlled by `v-model`
+- Rate
+  - `text-template` is renamed to `score-template`
+- Dropdown
+  - `menu-align` is renamed to `placement`. Now it supports more positions
+- Transfer
+  - `footer-format` is renamed to `format`
+- Switch
+  - `on-text` and `off-text` attributes now don't have default values
+- Tag
+  - `type` attribute now accepts `success`, `info`, `warning` and `danger`
+- Menu
+  - Removed `theme` attribute. The color of Menu can be configured using `background-color`, `text-color` and `active-text-color`
+- Input
+  - Removed `icon` attribute. Now the suffix icon can be configured using `suffix-icon` attribute or `suffix` named slot
+  - Removed `on-icon-click` attribute and `click` event. Now to add click handler on icons, please use named slots
+- Autocomplete
+  - Removed `custom-item` attribute. Now the template of input suggestions can be customized using `scoped slot`
+- Table
+  - Removed support for customizing column template using `inline-template`
+- Steps
+  - Removed `center` attribute
+  - Now the Steps will fill its parent container by default
+
+##
+<i><sup>*</sup> Dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily lead to [XSS attacks](https://en.wikipedia.org/wiki/Cross-site_scripting). So when `dangerouslyUseHTMLString` is on, please make sure the content of `message` is trusted, and **never** assign `message` to user-provided content.</i>
+
 ### 1.4.6
 
 *2017-09-27*

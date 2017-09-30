@@ -28,6 +28,10 @@
         left: 0;
         top: 0;
         z-index: 1500;
+        
+        .container {
+          padding: 0;
+        }
       }
     }
   }
