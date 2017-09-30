@@ -18,7 +18,7 @@ npm i element-ui@next -S
 ```
 
 ### Hello world
-通过 CDN 的方式我们可以很容易地使用 Element 写出一个 Hello world 页面。[在线演示](https://jsfiddle.net/leopoldthecuber/hzfpyvg6/)
+通过 CDN 的方式我们可以很容易地使用 Element 写出一个 Hello world 页面。[在线演示](https://jsfiddle.net/leopoldthecuber/hzfpyvg6/1/)
 
 ```html
 <!DOCTYPE html>
@@ -31,7 +31,7 @@ npm i element-ui@next -S
 <body>
   <div id="app">
     <el-button @click="visible = true">按钮</el-button>
-    <el-dialog v-model="visible" title="Hello world">
+    <el-dialog :visible.sync="visible" title="Hello world">
       <p>欢迎使用 Element</p>
     </el-dialog>
   </div>

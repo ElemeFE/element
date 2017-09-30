@@ -50,7 +50,6 @@
 <script type="text/babel">
   import { getRangeHours } from '../util';
   import ElScrollbar from 'element-ui/packages/scrollbar';
-  import debounce from 'throttle-debounce/debounce';
 
   export default {
     components: { ElScrollbar },
@@ -131,10 +130,6 @@
       };
     },
 
-    created() {
-      this.debounceAdjustElTop = debounce(200, type => this.adjustElTop(type, this[`${type}s`]));
-    },
-
     mounted() {
       this.$nextTick(() => {
         this.bindScrollEvent();
@@ -155,10 +150,16 @@
       emitSelectRange(type) {
         if (type === 'hours') {
           this.$emit('select-range', 0, 2);
+          this.adjustElTop('minute', this.minutes);
+          this.adjustElTop('second', this.seconds);
         } else if (type === 'minutes') {
           this.$emit('select-range', 3, 5);
+          this.adjustElTop('hour', this.hours);
+          this.adjustElTop('second', this.seconds);
         } else if (type === 'seconds') {
           this.$emit('select-range', 6, 8);
+          this.adjustElTop('minute', this.minutes);
+          this.adjustElTop('hour', this.hours);
         }
         this.currentScrollbar = type;
       },
@@ -177,7 +178,6 @@
       handleScroll(type) {
         const adjust = {};
         adjust[`${type}s`] = Math.min(Math.floor((this[`${type}El`].scrollTop - 80) / 32 + 3), (`${type}` === 'hour' ? 23 : 59));
-        this.debounceAdjustElTop(type);
         this.$emit('change', adjust);
       },
 
@@ -188,6 +188,7 @@
       },
 
       adjustElTop(type, value) {
+        if (!this[`${type}El`]) return;
         this[`${type}El`].scrollTop = Math.max(0, (value - 2.5) * 32 + 80);
       },
 

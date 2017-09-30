@@ -185,6 +185,9 @@
   }
   @include when(active) {
     color: $--color-primary;
+    i {
+      color: inherit;
+    }
   }
 }
   

@@ -1,5 +1,120 @@
 ## 更新日志
 
+### 2.0.0-alpha.1
+*2017-09-30*
+
+#### 新特性
+- 综合
+  - 新增 `theme-chalk` 主题
+  - 增强以下组件的可访问性：Alert、AutoComplete、Breadcrumb、Button、Checkbox、Collapse、Input、InputNumber、Menu、Progress、Radio、Rate、Slider、Switch 和 Upload
+  - 新增布局组件 Container、Header、Aside、Main 和 Footer
+- Button
+  - 新增 `round` 属性，用于圆角按钮 #6643
+- TimeSelect
+  - 可以用 `Up`、`Down` 导航，用 `Enter` 选中时间 #6023
+- TimePicker
+  - 可以用方向键导航，用 `Enter` 选中时间 #6050
+  - 新增 `start-placeholder` 和 `end-placeholder`，用于设置范围选择时两个输入框的占位符 #7169
+- Tree
+  - 子节点在首次被展开之前不进行渲染 #6257
+  - 新增 `check-descendants` 属性，设置 `lazy` 模式下勾选节点时，是否完全展开整个子树 #6235
+- Tag
+  - 新增 `size` 属性 #7203
+- Datepicker
+  - type 为 `datetimerange` 时可以使用 `timeFormat` 格式化时间选择器 #6052
+  - 新增 `start-placeholder` 和 `end-placeholder`，用于设置范围选择时两个输入框的占位符 #7169
+- MessageBox
+  - 新增 `closeOnHashChange` 属性 #6043
+  - 新增 `center` 属性，提供居中布局 #7029
+  - 新增 `roundButton` 属性，使得内部按钮为圆角按钮 #7029
+  - 新增 `dangerouslyUseHTMLString` 属性，使得 `message` 支持传入 HTML 字符串<sup>*</sup> #6043
+- Dialog
+  - 新增 `width`、`fullscreen`、`append-to-body` 属性，支持嵌套使用
+  - 新增 `center` 属性，提供居中布局 #7042
+  - 新增 `focus-after-closed`、`focus-after-open`属性，支持无障碍访问 #6511
+- ColorPicker
+  - 增加手动输入色值的支持 #6167
+  - 新增 `size` 属性，用于控制组件的大小 #7026
+  - 新增 `disabled` 属性，用于禁用组件 #7026
+- Message
+  - 图标部分使用 icon 代替图片，从而支持通过 CSS 修改图标背景色 #6207
+  - 新增 `dangerouslyUseHTMLString` 属性，使得 `message` 属性支持传入 HTML 字符串<sup>*</sup> #6207
+  - 新增 `center` 属性，提供居中布局 #6875
+- Notification
+  - 新增 `position` 属性，用于配置 Notification 出现的位置 #6231
+  - 新增 `dangerouslyUseHTMLString` 属性，使得 `message` 属性支持传入 HTML 字符串<sup>*</sup> #6231
+  - 新增 `showClose` 属性，用于隐藏关闭按钮 #6402
+- Rate
+  - 新增 `show-score` 属性，控制是否在右侧显示当前分数 #6295
+- Tabs
+  - 新增 `tab-position` 属性，控制选项面板内容显示的上、下、左、右四个方向 #6096
+- Radio
+  - 增加 `border` 属性和 `size` 属性 #6690
+- Checkbox
+  - 增加 `border` 属性和 `size` 属性 #6690
+- Alert
+  - 新增 `center` 属性，提供居中布局 #6876
+- Menu
+  - 新增 `background-color`、`text-color` 和 `active-text-color` 属性，分别用于设置菜单的背景色、菜单的文字颜色和当前激活菜单的文字颜色 #7064
+- Form
+  - 新增 `inline-message` 属性，设置后校验信息会以行内样式显示 #7032
+  - 新增 `status-icon` 属性，用于在输入框中显示校验结果反馈图标 #7032
+- Input
+  - 新增 `suffix`、`prefix` 的 slot，以及 `suffixIcon`、`prefixIcon` 属性，用于给输入框内部增加前置和后置内容 #7032
+- Breadcrumb
+  - 新增 `separator-class` 属性，可使用图标作为分隔符 #7203
+- Steps
+  - 新增 `simple` 属性，用于开启简洁风格的步骤条 #7274
+
+#### 修复
+- DatePicker
+  - 选择周数时，`v-model` 结果返回该周第二天的问题 #6038
+  - 在 `daterange` 类型中，第一次的输入会被清空的问题 #6021
+- DateTimePicker
+  - 和 TimePicker 相互影响的问题 #6090
+  - 选择时间小时和秒可超出限制的问题 #6076
+- TimePicker
+  - 失去焦点时无法正确改变 `v-model` 值的问题 #6023
+- Dialog
+  - 当含有下拉框时，下拉框的打开和关闭会造成文字虚晃的问题 #6088
+- Select
+  - 提升性能，修复组件销毁时可能导致 Vue dev-tool 卡死的问题 #6151
+
+#### 非兼容性更新
+- 综合
+  - 移除 `theme-default`
+  - 表单组件的 `change` 事件和 Pagination 的 `current-change` 事件现在仅响应用户交互
+  - Button 和表单组件的 `size` 属性不再接受 `large` 值，可接受 `medium`、`small` 和 `mini`
+  - 为了方便使用第三方图标，Button 的 `icon` 属性、Input 的 `prefix-icon` 和 `suffix-icon` 属性、Steps 的 `icon` 属性现在需要传入完整的图标类名
+- Dialog
+  - 移除 `size` 属性。现在 Dialog 的尺寸由 `width` 和 `fullscreen` 控制
+  - 移除通过 `v-model` 控制 Dialog 显示和隐藏的功能
+- Rate
+  - `text-template` 属性更名为 `score-template`
+- Dropdown
+  - `menu-align` 属性变更为 `placement`，增加更多方位属性
+- Transfer
+  - `footer-format` 属性更名为 `format`
+- Switch
+  - `on-text` 和 `off-text` 属性不再有默认值
+- Tag
+  - `type` 属性现在支持 `success`、`info`、`warning` 和 `danger` 四个值
+- Menu
+  - 移除 `theme` 属性。现在通过 `background-color`、`text-color` 和 `active-text-color` 属性进行颜色的自定义
+- Input
+  - 移除 `icon` 属性。现在通过 `suffix-icon` 属性或者 `suffix` 具名 slot 来加入尾部图标
+  - 移除 `on-icon-click` 属性和 `click` 事件。现在如果需要为输入框中的图标添加点击事件，请以具名 slot 的方式添加图标
+- Autocomplete
+  - 移除 `custom-item` 属性。现在通过 `scoped slot` 自定义输入建议列表项的内容
+- Table
+  - 移除通过 `inline-template` 自定义列模板的功能
+- Steps
+  - 移除 `center` 属性
+  - 现在步骤条将默认充满父容器
+
+##
+<i><sup>*</sup> 在网站上动态渲染任意 HTML 是非常危险的，因为容易导致 [XSS 攻击](https://en.wikipedia.org/wiki/Cross-site_scripting)。因此请在 `dangerouslyUseHTMLString` 打开的情况下，确保 `message` 的内容是可信的，**永远不要**将用户提交的内容赋值给 `message` 属性。</i>
+
 ### 1.4.6
 *2017-09-27*
 

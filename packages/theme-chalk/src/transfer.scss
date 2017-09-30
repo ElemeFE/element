@@ -169,8 +169,8 @@
         font-weight: normal;
 
         span {
-          float: right;
-          margin-right: 15px;
+          position: absolute;
+          right: 15px;
           color: $--color-text-secondary;
           font-size: 12px;
           font-weight: normal;
