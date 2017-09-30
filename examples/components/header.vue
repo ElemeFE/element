@@ -228,6 +228,10 @@
       }
     }
   }
+  
+  .nav-dropdown-list {
+    width: auto;
+  }
 
   @media (max-width: 850px) {
     .header {
@@ -265,9 +269,7 @@
   }
 </style>
 <template>
-  <div
-    class="headerWrapper"
-    :class="{ 'is-hidden': !visible && !isComponentPage }">
+  <div class="headerWrapper">
     <header class="header"
       ref="header"
       :style="headerStyle"
@@ -456,7 +458,7 @@
 
     mounted() {
       function scroll(fn) {
-        window.addEventListener('scroll', fn, false);
+        document.body.addEventListener('scroll', fn, false);
       }
       scroll(() => {
         if (this.isHome) {
