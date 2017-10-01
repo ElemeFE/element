@@ -101,6 +101,7 @@ in `lazy` mode #6235
   - `on-text` and `off-text` attributes now don't have default values
 - Tag
   - `type` attribute now accepts `success`, `info`, `warning` and `danger`
+  - `close-transition` is renamed to `disable-transitions`
 - Menu
   - Removed `theme` attribute. The color of Menu can be configured using `background-color`, `text-color` and `active-text-color`
 - Input
