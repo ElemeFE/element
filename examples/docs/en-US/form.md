@@ -779,3 +779,9 @@ When an `el-form-item` is nested in another `el-form-item`, its label width will
 |------|--------|
 | — | content of Form Item |
 | label | content of label |
+
+### Form-Item Methods
+
+| Method | Description | Parameters |
+| ---- | ---- | ---- |
+| resetField | reset current field and remove validation result | — |

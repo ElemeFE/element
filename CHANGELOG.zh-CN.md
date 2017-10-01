@@ -99,6 +99,7 @@
   - `on-text` 和 `off-text` 属性不再有默认值
 - Tag
   - `type` 属性现在支持 `success`、`info`、`warning` 和 `danger` 四个值
+  - `close-transition` 属性更名为 `disable-transitions`
 - Menu
   - 移除 `theme` 属性。现在通过 `background-color`、`text-color` 和 `active-text-color` 属性进行颜色的自定义
 - Input
