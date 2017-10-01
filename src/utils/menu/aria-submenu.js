@@ -1,6 +1,6 @@
 import Utils from '../aria-utils';
 
-var Menu = function(parent, domNode) {
+const SubMenu = function(parent, domNode) {
   this.domNode = domNode;
   this.parent = parent;
   this.subMenuItems = [];
@@ -8,12 +8,12 @@ var Menu = function(parent, domNode) {
   this.init();
 };
 
-Menu.prototype.init = function() {
+SubMenu.prototype.init = function() {
   this.subMenuItems = this.domNode.querySelectorAll('li');
   this.addListeners();
 };
 
-Menu.prototype.gotoSubIndex = function(idx) {
+SubMenu.prototype.gotoSubIndex = function(idx) {
   if (idx === this.subMenuItems.length) {
     idx = 0;
   } else if (idx < 0) {
@@ -23,31 +23,31 @@ Menu.prototype.gotoSubIndex = function(idx) {
   this.subIndex = idx;
 };
 
-Menu.prototype.addListeners = function() {
+SubMenu.prototype.addListeners = function() {
   const keys = Utils.keys;
   const parentNode = this.parent.domNode;
   Array.prototype.forEach.call(this.subMenuItems, el => {
     el.addEventListener('keydown', event => {
-      let prevdef = false;
+      let prevDef = false;
       switch (event.keyCode) {
         case keys.down:
           this.gotoSubIndex(this.subIndex + 1);
-          prevdef = true;
+          prevDef = true;
           break;
         case keys.up:
           this.gotoSubIndex(this.subIndex - 1);
-          prevdef = true;
+          prevDef = true;
           break;
         case keys.tab:
           Utils.triggerEvent(parentNode, 'mouseleave');
           break;
         case keys.enter:
         case keys.space:
-          prevdef = true;
+          prevDef = true;
           event.currentTarget.click();
           break;
       }
-      if (prevdef) {
+      if (prevDef) {
         event.preventDefault();
         event.stopPropagation();
       }
@@ -56,4 +56,4 @@ Menu.prototype.addListeners = function() {
   });
 };
 
-export default Menu;
+export default SubMenu;

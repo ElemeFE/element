@@ -1,13 +1,13 @@
 import Utils from '../aria-utils';
 import SubMenu from './aria-submenu';
 
-var menuItem = function(domNode) {
+const MenuItem = function(domNode) {
   this.domNode = domNode;
   this.submenu = null;
   this.init();
 };
 
-menuItem.prototype.init = function() {
+MenuItem.prototype.init = function() {
   this.domNode.setAttribute('tabindex', '0');
   let menuChild = this.domNode.querySelector('.el-menu');
   if (menuChild) {
@@ -16,34 +16,34 @@ menuItem.prototype.init = function() {
   this.addListeners();
 };
 
-menuItem.prototype.addListeners = function() {
+MenuItem.prototype.addListeners = function() {
   const keys = Utils.keys;
   this.domNode.addEventListener('keydown', event => {
-    var prevdef = false;
+    let prevDef = false;
     switch (event.keyCode) {
       case keys.down:
         Utils.triggerEvent(event.currentTarget, 'mouseenter');
         this.submenu.gotoSubIndex(0);
-        prevdef = true;
+        prevDef = true;
         break;
       case keys.up:
         Utils.triggerEvent(event.currentTarget, 'mouseenter');
         this.submenu.gotoSubIndex(this.submenu.subMenuItems.length - 1);
-        prevdef = true;
+        prevDef = true;
         break;
       case keys.tab:
         Utils.triggerEvent(event.currentTarget, 'mouseleave');
         break;
       case keys.enter:
       case keys.space:
-        prevdef = true;
+        prevDef = true;
         event.currentTarget.click();
         break;
     }
-    if (prevdef) {
+    if (prevDef) {
       event.preventDefault();
     }
   });
 };
 
-export default menuItem;
+export default MenuItem;
