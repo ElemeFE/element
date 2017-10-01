@@ -27,7 +27,6 @@ describe('TimeSelect', () => {
       expect(vm.picker.end).to.equal('18:30');
       expect(vm.picker.step).to.equal('00:15');
       expect(vm.$el.querySelector('input').getAttribute('placeholder')).to.equal('test');
-      destroyVM(vm);
       done();
     });
   });
@@ -60,7 +59,6 @@ describe('TimeSelect', () => {
       target.click();
       Vue.nextTick(_ => {
         expect(vm.value).to.equal(time);
-        destroyVM(vm);
         done();
       });
     });
@@ -79,7 +77,6 @@ describe('TimeSelect', () => {
       expect(input.value).to.equal('14:30');
       expect(vm.picker.$el.querySelector('.selected')).to.be.ok;
       expect(vm.picker.$el.querySelector('.selected').textContent).to.equal('14:30');
-      destroyVM(vm);
       done();
     }, 50);
   });
@@ -104,7 +101,6 @@ describe('TimeSelect', () => {
       const elm = elms[elms.length - 1];
 
       expect(elm.textContent).to.equal('14:30');
-      destroyVM(vm);
       done();
     }, 50);
   });
@@ -134,8 +130,7 @@ describe('TimeSelect', () => {
       vm.value = '10:30';
 
       setTimeout(_ => {
-        expect(picker.picker.value).to.equal('09:30');
-        destroyVM(vm);
+        expect(picker.picker.value).to.equal('10:30');
         done();
       }, 50);
     }, 50);
@@ -161,7 +156,6 @@ describe('TimeSelect', () => {
       const elm = picker.picker.$el.querySelector('.disabled');
 
       expect(elm.textContent).to.equal('14:30');
-      destroyVM(vm);
       done();
     }, 50);
   });
@@ -191,8 +185,7 @@ describe('TimeSelect', () => {
       vm.value = '10:30';
 
       setTimeout(_ => {
-        expect(picker.picker.value).to.equal('09:30');
-        destroyVM(vm);
+        expect(picker.picker.value).to.equal('10:30');
         done();
       }, 50);
     }, 50);
@@ -242,7 +235,6 @@ describe('TimeSelect', () => {
 
     vm.$nextTick(_ => {
       expect(spy.calledOnce).to.be.true;
-      destroyVM(vm);
       done();
     });
   });
