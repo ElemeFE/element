@@ -114,10 +114,6 @@
     },
 
     methods: {
-      handleClear() {
-        this.$emit('pick');
-      },
-
       handleCancel() {
         this.currentDate.setHours(this.oldHours);
         this.currentDate.setMinutes(this.oldMinutes);

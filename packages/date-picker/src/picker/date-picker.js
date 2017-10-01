@@ -35,35 +35,5 @@ export default {
 
   created() {
     this.panel = getPanel(this.type);
-  },
-
-  methods: {
-    handleKeydown(event) {
-      const keyCode = event.keyCode;
-
-      // TAB or ESC or Enter
-      if (keyCode === 9 || keyCode === 27 || keyCode === 13) {
-        !this.ranged && (this.pickerVisible = false);
-        event.stopPropagation();
-        this.picker.confirm && this.picker.confirm();
-        !this.ranged && (this.currentValue = this.picker.date);
-        if (this.$refs.reference.$refs) {
-          this.$refs.reference.$refs.input.blur();
-        } else {
-          [].slice.call(this.$refs.reference.querySelectorAll('input')).forEach(input => {
-            input.blur();
-          });
-        }
-        return;
-      }
-
-      const list = [38, 40, 37, 39];
-      if (list.indexOf(keyCode) !== -1) {
-        if (this.type === 'daterange' || this.type === 'datetimerange') return;
-        this.picker.handleKeyControl(keyCode);
-        event.stopPropagation();
-        return;
-      }
-    }
   }
 };

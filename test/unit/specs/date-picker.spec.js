@@ -374,7 +374,7 @@ describe('DatePicker', () => {
     input.focus();
     setTimeout(_ => {
       const $el = vm.$refs.compo.picker.$el;
-      $el.querySelector('td.current').click();
+      $el.querySelector('td.default').click();
       setTimeout(_ => {
         expect(+vm.value).to.equal(+expectValue);
         done();
