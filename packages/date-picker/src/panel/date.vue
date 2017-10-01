@@ -342,7 +342,6 @@
       },
 
       handleLeave() {
-        this.$refs.timepicker && this.$refs.timepicker.$emit('pick');
         this.$emit('dodestory');
         document.body.removeEventListener('keydown', this.handleKeyDown);
       },
