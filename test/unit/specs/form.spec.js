@@ -320,7 +320,7 @@ describe('Form', () => {
             <el-form-item label="记住密码" prop="region" ref="field">
               <el-select v-model="form.region" placeholder="请选择活动区域">
                 <el-option label="区域一" value="shanghai"></el-option>
-                <el-option label="区域二" value="beijing"></el-option>
+                <el-option label="区域二" ref="opt" value="beijing"></el-option>
               </el-select>
             </el-form-item>
           </el-form>
@@ -328,7 +328,7 @@ describe('Form', () => {
         data() {
           return {
             form: {
-              region: 'shanghai'
+              region: ''
             },
             rules: {
               region: [
@@ -336,24 +336,23 @@ describe('Form', () => {
               ]
             }
           };
-        },
-        methods: {
-          setValue(value) {
-            this.form.region = value;
-          }
         }
       }, true);
       vm.$refs.form.validate(valid => {
         let field = vm.$refs.field;
-        expect(valid).to.true;
-        vm.setValue('');
+        expect(valid).to.false;
         setTimeout(_ => {
           expect(field.validateMessage).to.equal('请选择活动区域');
-          vm.setValue('shanghai');
-
+          // programatic modification of bound value does not triggers change validation
+          vm.form.region = 'shanghai';
           setTimeout(_ => {
-            expect(field.validateMessage).to.equal('');
-            done();
+            expect(field.validateMessage).to.equal('请选择活动区域');
+            // user modification of bound value triggers change validation
+            vm.$refs.opt.$el.click();
+            setTimeout(_ => {
+              expect(field.validateMessage).to.equal('');
+              done();
+            }, 100);
           }, 100);
         }, 100);
       });
