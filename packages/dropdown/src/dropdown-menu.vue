@@ -15,9 +15,15 @@
 
     mixins: [Popper],
 
+    props: {
+      visibleArrow: {
+        type: Boolean,
+        default: true
+      }
+    },
+
     data() {
       return {
-        visibleArrow: this.dropdown.visibleArrow,
         size: this.dropdown.size
       };
     },

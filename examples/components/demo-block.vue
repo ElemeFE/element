@@ -153,7 +153,7 @@
       }
 
       &:hover {
-        color: #20a0ff;
+        color: #409EFF;
         background-color: #f9fafc;
       }
 
@@ -167,8 +167,10 @@
         line-height: 26px;
         position: absolute;
         top: 0;
-        right: 25px;
+        right: 0;
         font-size: 14px;
+        padding-left: 5px;
+        padding-right: 25px;
       }
     }
   }

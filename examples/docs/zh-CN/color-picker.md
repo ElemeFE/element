@@ -5,7 +5,7 @@
         color1: '#409EFF',
         color2: null,
         color3: 'rgba(19, 206, 102, 0.8)',
-        color4: '#20a0ff'
+        color4: '#409EFF'
       };
     },
     mounted() {
@@ -101,7 +101,7 @@
   export default {
     data() {
       return {
-        color4: '#20a0ff'
+        color4: '#409EFF'
       }
     }
   };
