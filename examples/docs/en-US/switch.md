@@ -149,7 +149,7 @@ on-text | text displayed when in `on` state | string | — | —
 off-text | text displayed when in `off` state | string | — | —
 on-value  | switch value when in `on` state | boolean / string / number | — | true
 off-value  | switch value when in `off` state | boolean / string / number | — | false
-on-color | background color when in `on` state | string | — | #20A0FF
+on-color | background color when in `on` state | string | — | #409EFF
 off-color | background color when in `off` state | string | — | #C0CCDA
 name| input name of Switch | string | — | —
 

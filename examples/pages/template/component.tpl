@@ -71,7 +71,7 @@
           }
 
           td, th {
-            border-bottom: 1px solid #eaeefb;
+            border-bottom: 1px solid #d8d8d8;
             padding: 15px;
             max-width: 250px;
           }

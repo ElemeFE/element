@@ -17,7 +17,7 @@
       }
 
       &:hover a {
-        color: #20a0ff;
+        color: #409EFF;
       }
     }
 

@@ -17,6 +17,10 @@
       margin: 0;
       overflow: hidden;
     }
+    
+    > ul > .nav-item > a {
+      margin-top: 15px;
+    }
 
     .nav-item {
       a {

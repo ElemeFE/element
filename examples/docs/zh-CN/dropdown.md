@@ -9,7 +9,7 @@
     }
     .el-dropdown-link {
       cursor: pointer;
-      color: #20a0ff;
+      color: #409EFF;
     }
     .el-icon-caret-bottom {
       font-size: 12px;
@@ -74,6 +74,17 @@
   </el-dropdown-menu>
 </el-dropdown>
 ```
+
+<style>
+  .el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+  }
+  .el-icon-caret-bottom {
+    font-size: 12px;
+  }
+</style>
+
 :::
 
 ### 触发对象
@@ -105,6 +116,28 @@
     <el-dropdown-item>蚵仔煎</el-dropdown-item>
   </el-dropdown-menu>
 </el-dropdown>
+
+<style>
+  .el-dropdown {
+    vertical-align: top;
+  }
+  .el-dropdown + .el-dropdown {
+    margin-left: 15px;
+  }
+  .el-icon-caret-bottom {
+    font-size: 12px;
+  }
+</style>
+
+<script>
+  export default {
+    methods: {
+      handleClick() {
+        alert('button click');
+      }
+    }
+  }
+</script>
 
 ```
 :::
@@ -148,6 +181,23 @@
   </el-col>
 </el-row>
 ```
+
+<style>
+  .el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+  }
+  .el-icon-caret-bottom {
+    font-size: 12px;
+  }
+  .demonstration {
+    display: block;
+    color: #8492a6;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+</style>
+
 :::
 
 ### 菜单隐藏方式
@@ -168,6 +218,16 @@
     <el-dropdown-item divided>蚵仔煎</el-dropdown-item>
   </el-dropdown-menu>
 </el-dropdown>
+
+<style>
+  .el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+  }
+  .el-icon-caret-bottom {
+    font-size: 12px;
+  }
+</style>
 ```
 :::
 
@@ -189,6 +249,17 @@
     <el-dropdown-item command="e" divided>蚵仔煎</el-dropdown-item>
   </el-dropdown-menu>
 </el-dropdown>
+
+<style>
+  .el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+  }
+  .el-icon-caret-bottom {
+    font-size: 12px;
+  }
+</style>
+
 <script>
   export default {
     methods: {
@@ -208,7 +279,7 @@ Dropdown 组件提供除了默认值以外的三种尺寸，可以在不同场�
 :::demo 额外的尺寸：`medium`、`small`、`mini`，通过设置`size`属性来配置它们。
 
 ```html
-<el-dropdown  split-button type="primary">
+<el-dropdown split-button type="primary">
   默认尺寸
   <el-dropdown-menu slot="dropdown">
     <el-dropdown-item>黄金糕</el-dropdown-item>
