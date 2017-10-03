@@ -131,6 +131,31 @@
       opacity: 0;
     }
   }
+
+  @media (max-width: 768px) {
+    .page-component {
+      .page-component__nav {
+        width: 100%;
+        position: static;
+        margin-top: 0;
+      }
+      .side-nav {
+        padding-top: 0;
+        padding-left: 50px;
+      }
+      .page-component__content {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+      .content {
+        padding-top: 0;
+      }
+      .content > table {
+        overflow: auto;
+        display: block;
+      }
+    }
+  }
 </style>
 <template>
   <el-scrollbar class="page-component__scroll" ref="componentScrollBar">
