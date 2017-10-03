@@ -265,6 +265,12 @@
         font-size: 12px;
         vertical-align: top;
       }
+      .nav-dropdown {
+        padding: 0;
+      }
+      .nav-gap {
+        padding: 0 8px;
+      }
     }
   }
 </style>

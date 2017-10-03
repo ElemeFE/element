@@ -12,21 +12,21 @@ $--color-transition-base: color .2s cubic-bezier(.645,.045,.355,1);
 $--color-white: #fff;
 $--color-black: #000;
 
-$--color-primary: #69B3FF;
-$--color-primary-light-1: mix($--color-white, $--color-primary, 10%);
-$--color-primary-light-2: mix($--color-white, $--color-primary, 20%);
-$--color-primary-light-3: mix($--color-white, $--color-primary, 30%);
-$--color-primary-light-4: mix($--color-white, $--color-primary, 40%);
-$--color-primary-light-5: mix($--color-white, $--color-primary, 50%);
-$--color-primary-light-6: mix($--color-white, $--color-primary, 60%);
-$--color-primary-light-7: mix($--color-white, $--color-primary, 70%);
-$--color-primary-light-8: mix($--color-white, $--color-primary, 80%);
-$--color-primary-light-9: mix($--color-white, $--color-primary, 90%);
+$--color-primary: #69B3FF !default;
+$--color-primary-light-1: mix($--color-white, $--color-primary, 10%); /* 78bbff */
+$--color-primary-light-2: mix($--color-white, $--color-primary, 20%); /* 87c2ff */
+$--color-primary-light-3: mix($--color-white, $--color-primary, 30%); /* 96caff */
+$--color-primary-light-4: mix($--color-white, $--color-primary, 40%); /* a5d1ff */
+$--color-primary-light-5: mix($--color-white, $--color-primary, 50%); /* b4d9ff */
+$--color-primary-light-6: mix($--color-white, $--color-primary, 60%); /* c3e1ff */
+$--color-primary-light-7: mix($--color-white, $--color-primary, 70%); /* d2e8ff */
+$--color-primary-light-8: mix($--color-white, $--color-primary, 80%); /* e1f0ff */
+$--color-primary-light-9: mix($--color-white, $--color-primary, 90%); /* f0f7ff */
 
-$--color-success: #67c23a;
-$--color-warning: #eb9e05;
-$--color-danger: #fa5555;
-$--color-info: #878d99;
+$--color-success: #67c23a !default;
+$--color-warning: #eb9e05 !default;
+$--color-danger: #fa5555 !default;
+$--color-info: #878d99 !default;
 
 $--color-success-light: mix($--color-white, $--color-success, 80%);
 $--color-warning-light: mix($--color-white, $--color-warning, 80%);
@@ -38,10 +38,10 @@ $--color-warning-lighter: mix($--color-white, $--color-warning, 90%);
 $--color-danger-lighter: mix($--color-white, $--color-danger, 90%);
 $--color-info-lighter: mix($--color-white, $--color-info, 90%);
 
-$--color-text-primary: #2d2f33;
-$--color-text-regular: #5a5e66;
-$--color-text-secondary: #878d99;
-$--color-text-placeholder: #b4bccc;
+$--color-text-primary: #2d2f33 !default;
+$--color-text-regular: #5a5e66 !default;
+$--color-text-secondary: #878d99 !default;
+$--color-text-placeholder: #b4bccc !default;
 
 /* Link
 -------------------------- */
@@ -56,10 +56,10 @@ $--background-color-base: #f5f7fa;
 -------------------------- */
 $--border-width-base: 1px;
 $--border-style-base: solid;
-$--border-color-base: #d8dce6;
-$--border-color-light: #dfe4ed;
-$--border-color-lighter: #e6ebf5;
-$--border-color-extra-light: #edf2fc;
+$--border-color-base: #d8dce6 !default;
+$--border-color-light: #dfe4ed !default;
+$--border-color-lighter: #e6ebf5 !default;
+$--border-color-extra-light: #edf2fc !default;
 $--border-color-hover: $--color-text-placeholder;
 $--border-base: $--border-width-base $--border-style-base $--border-color-base;
 $--border-radius-base: 4px;

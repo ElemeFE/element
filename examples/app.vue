@@ -166,6 +166,10 @@
     .page-container {
       padding: 0 20px;
     }
+  
+    #app.is-component .headerWrapper .container {
+      padding: 0 12px;
+    }
   }
 </style>
 
