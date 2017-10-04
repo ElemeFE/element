@@ -49,7 +49,7 @@
 ```html
 <template>
   <el-table
-    v-loading.body="loading"
+    v-loading="loading"
     :data="tableData"
     style="width: 100%">
     <el-table-column
