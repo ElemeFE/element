@@ -2,6 +2,8 @@
   <button
     class="el-button"
     @click="handleClick"
+    :disabled="disabled"
+    :autofocus="autofocus"
     :type="nativeType"
     :class="[
       type ? 'el-button--' + type : '',

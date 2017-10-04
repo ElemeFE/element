@@ -97,7 +97,7 @@
           let green = parseInt(color.slice(2, 4), 16);
           let blue = parseInt(color.slice(4, 6), 16);
 
-          if (tint === 0) {
+          if (tint === 0) { // when primary color is in its rgb space
             return [red, green, blue].join(',');
           } else {
             red += Math.round(tint * (255 - red));
