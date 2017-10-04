@@ -28,7 +28,8 @@
   export default {
     data() {
       return {
-        chalk: '',
+        chalk: '', // content of theme-chalk css
+        docs: '', // content of docs css
         theme: ORIGINAL_THEME
       };
     },
@@ -38,29 +39,43 @@
         if (typeof val !== 'string') return;
         const themeCluster = this.getThemeCluster(val.replace('#', ''));
         const originalCluster = this.getThemeCluster(oldVal.replace('#', ''));
-        const handler = () => {
-          const originalCluster = this.getThemeCluster(ORIGINAL_THEME.replace('#', ''));
-          let newStyle = this.updateStyle(this.chalk, originalCluster, themeCluster);
+        const getHandler = (text, id) => {
+          return () => {
+            const originalCluster = this.getThemeCluster(ORIGINAL_THEME.replace('#', ''));
+            let newStyle = this.updateStyle(text, originalCluster, themeCluster);
 
-          let styleTag = document.getElementById('theme-style');
-          if (!styleTag) {
-            styleTag = document.createElement('style');
-            styleTag.setAttribute('id', 'theme-style');
-            document.head.appendChild(styleTag);
-          }
-          styleTag.innerText = newStyle;
+            let styleTag = document.getElementById(id);
+            if (!styleTag) {
+              styleTag = document.createElement('style');
+              styleTag.setAttribute('id', id);
+              document.head.appendChild(styleTag);
+            }
+            styleTag.innerText = newStyle;
+          };
         };
 
+        const chalkHandler = getHandler(this.chalk, 'chalk-style');
+        const docsHandler = getHandler(this.docs, 'docs-style');
+
         if (!this.chalk) {
-          this.getChalkString(handler);
+          this.getCSSString(`https://unpkg.com/element-ui@${ version }/lib/theme-chalk/index.css`, chalkHandler);
         } else {
-          handler();
+          chalkHandler();
+        }
+
+        if (!this.docs) {
+          const links = [].filter.call(document.querySelectorAll('link'), link => {
+            return /docs\..+\.css/.test(link.href || '');
+          });
+          links[0] && this.getCSSString(links[0].href, docsHandler);
+        } else {
+          docsHandler();
         }
 
         const styles = [].slice.call(document.querySelectorAll('style'))
           .filter(style => {
             const text = style.innerText;
-            return new RegExp(oldVal).test(text) && !/Chalk Variables/.test(text);
+            return new RegExp(oldVal, 'i').test(text) && !/Chalk Variables/.test(text);
           });
         styles.forEach(style => {
           const { innerText } = style;
@@ -79,7 +94,7 @@
         return newStyle;
       },
 
-      getChalkString(callback) {
+      getCSSString(url, callback) {
         const xhr = new XMLHttpRequest();
         xhr.onreadystatechange = () => {
           if (xhr.readyState === 4 && xhr.status === 200) {
@@ -87,7 +102,7 @@
             callback();
           }
         };
-        xhr.open('GET', `https://unpkg.com/element-ui@${ version }/lib/theme-chalk/index.css`);
+        xhr.open('GET', url);
         xhr.send();
       },
 
