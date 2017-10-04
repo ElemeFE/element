@@ -58,7 +58,8 @@
         const docsHandler = getHandler(this.docs, 'docs-style');
 
         if (!this.chalk) {
-          this.getCSSString(`https://unpkg.com/element-ui@${ version }/lib/theme-chalk/index.css`, chalkHandler);
+          const url = `https://unpkg.com/element-ui@${ version }/lib/theme-chalk/index.css`;
+          this.getCSSString(url, chalkHandler, 'chalk');
         } else {
           chalkHandler();
         }
@@ -67,7 +68,7 @@
           const links = [].filter.call(document.querySelectorAll('link'), link => {
             return /docs\..+\.css/.test(link.href || '');
           });
-          links[0] && this.getCSSString(links[0].href, docsHandler);
+          links[0] && this.getCSSString(links[0].href, docsHandler, 'docs');
         } else {
           docsHandler();
         }
@@ -94,11 +95,11 @@
         return newStyle;
       },
 
-      getCSSString(url, callback) {
+      getCSSString(url, callback, variable) {
         const xhr = new XMLHttpRequest();
         xhr.onreadystatechange = () => {
           if (xhr.readyState === 4 && xhr.status === 200) {
-            this.chalk = xhr.responseText.replace(/@font-face{[^}]+}/, '');
+            this[variable] = xhr.responseText.replace(/@font-face{[^}]+}/, '');
             callback();
           }
         };
