@@ -92,6 +92,7 @@
       position: relative;
       cursor: pointer;
     
+      &.lang-item,
       &:last-child {
         cursor: default;
         margin-left: 34px;
@@ -112,6 +113,7 @@
           &.active {
             font-weight: 700;
             opacity: 1;
+            color: #409EFF;
           }
         }
       }
@@ -181,7 +183,7 @@
         width: 14px;
         left: calc(50% - 7px);
         bottom: 15px;
-        background: #1989fa;
+        background: #409EFF;
       }
     }
   }
@@ -244,6 +246,7 @@
       .nav-item {
         margin-left: 6px;
 
+        &.lang-item,
         &:last-child {
           margin-left: 10px;
         }
@@ -361,7 +364,7 @@
           </li>
 
           <!-- lang -->
-          <li class="nav-item">
+          <li class="nav-item lang-item">
             <span
               class="nav-lang"
               :class="{ 'active': lang === 'zh-CN' }"
@@ -376,12 +379,18 @@
               En
             </span>
           </li>
+          
+          <!--theme picker-->
+          <li  class="nav-item" v-show="isComponentPage">
+            <theme-picker></theme-picker>
+          </li>
         </ul>
       </div>
     </header>
   </div>
 </template>
 <script>
+  import ThemePicker from './theme-picker.vue';
   import bus from '../bus';
   import compoLang from '../i18n/component.json';
   import { version } from 'main/index.js';
@@ -399,6 +408,9 @@
         isComponentPage: true
       };
     },
+
+    components: { ThemePicker },
+
     watch: {
       '$route.path': {
         immediate: true,

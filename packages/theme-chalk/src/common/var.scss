@@ -1,3 +1,5 @@
+/* Element Chalk Variables */
+
 /* Transition
 -------------------------- */
 $--all-transition: all .3s cubic-bezier(.645,.045,.355,1);
@@ -12,16 +14,16 @@ $--color-transition-base: color .2s cubic-bezier(.645,.045,.355,1);
 $--color-white: #fff;
 $--color-black: #000;
 
-$--color-primary: #69B3FF !default;
-$--color-primary-light-1: mix($--color-white, $--color-primary, 10%); /* 78bbff */
-$--color-primary-light-2: mix($--color-white, $--color-primary, 20%); /* 87c2ff */
-$--color-primary-light-3: mix($--color-white, $--color-primary, 30%); /* 96caff */
-$--color-primary-light-4: mix($--color-white, $--color-primary, 40%); /* a5d1ff */
-$--color-primary-light-5: mix($--color-white, $--color-primary, 50%); /* b4d9ff */
-$--color-primary-light-6: mix($--color-white, $--color-primary, 60%); /* c3e1ff */
-$--color-primary-light-7: mix($--color-white, $--color-primary, 70%); /* d2e8ff */
-$--color-primary-light-8: mix($--color-white, $--color-primary, 80%); /* e1f0ff */
-$--color-primary-light-9: mix($--color-white, $--color-primary, 90%); /* f0f7ff */
+$--color-primary: #409EFF !default;
+$--color-primary-light-1: mix($--color-white, $--color-primary, 10%); /* 53a8ff */
+$--color-primary-light-2: mix($--color-white, $--color-primary, 20%); /* 66b1ff */
+$--color-primary-light-3: mix($--color-white, $--color-primary, 30%); /* 79bbff */
+$--color-primary-light-4: mix($--color-white, $--color-primary, 40%); /* 8cc5ff */
+$--color-primary-light-5: mix($--color-white, $--color-primary, 50%); /* a0cfff */
+$--color-primary-light-6: mix($--color-white, $--color-primary, 60%); /* b3d8ff */
+$--color-primary-light-7: mix($--color-white, $--color-primary, 70%); /* c6e2ff */
+$--color-primary-light-8: mix($--color-white, $--color-primary, 80%); /* d9ecff */
+$--color-primary-light-9: mix($--color-white, $--color-primary, 90%); /* ecf5ff */
 
 $--color-success: #67c23a !default;
 $--color-warning: #eb9e05 !default;

@@ -19,7 +19,7 @@
     </div>
     <picker-dropdown
        ref="dropdown"
-       class="el-color-picker__panel"
+       :class="['el-color-picker__panel', popperClass || '']"
        v-model="showPicker"
        @pick="confirmValue"
        @clear="clearValue"
@@ -42,7 +42,8 @@
       showAlpha: Boolean,
       colorFormat: String,
       disabled: Boolean,
-      size: String
+      size: String,
+      popperClass: String
     },
 
     directives: { Clickoutside },

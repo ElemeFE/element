@@ -116,6 +116,7 @@
 | size | 尺寸 | string | — | medium / small / mini |
 | show-alpha | 是否支持透明度选择 | boolean | — | false |
 | color-format | 写入 v-model 的颜色的格式 | string | hsl / hsv / hex / rgb | hex（show-alpha 为 false）/ rgb（show-alpha 为 true） |
+| popper-class | ColorPicker 下拉框的类名 | string | — | — |
 
 ### Events
 | 事件名称      | 说明    | 回调参数      |
