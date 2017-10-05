@@ -39,10 +39,10 @@
         if (typeof val !== 'string') return;
         const themeCluster = this.getThemeCluster(val.replace('#', ''));
         const originalCluster = this.getThemeCluster(oldVal.replace('#', ''));
-        const getHandler = (text, id) => {
+        const getHandler = (variable, id) => {
           return () => {
             const originalCluster = this.getThemeCluster(ORIGINAL_THEME.replace('#', ''));
-            let newStyle = this.updateStyle(text, originalCluster, themeCluster);
+            let newStyle = this.updateStyle(this[variable], originalCluster, themeCluster);
 
             let styleTag = document.getElementById(id);
             if (!styleTag) {
@@ -54,8 +54,8 @@
           };
         };
 
-        const chalkHandler = getHandler(this.chalk, 'chalk-style');
-        const docsHandler = getHandler(this.docs, 'docs-style');
+        const chalkHandler = getHandler('chalk', 'chalk-style');
+        const docsHandler = getHandler('docs', 'docs-style');
 
         if (!this.chalk) {
           const url = `https://unpkg.com/element-ui@${ version }/lib/theme-chalk/index.css`;

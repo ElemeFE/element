@@ -1,5 +1,15 @@
 ## Changelog
 
+### 2.0.0-alpha.2
+
+*2017-10-05*
+
+- Updated the primary color of `theme-chalk`, #7351
+- Fixed console error when using Dropdown, #7322
+- Fixed console error when using Menu, #7321
+- Added `popper-class` attribute for ColorPicker, #7351
+- Now Button's `disabled` attribute works correctly, #7352
+
 ### 2.0.0-alpha.1
 
 *2017-09-30*
