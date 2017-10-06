@@ -161,12 +161,14 @@ Can pick an arbitrary time range.
 | placeholder | placeholder in non-range mode | string | — | — |
 | start-placeholder | placeholder for the start time in range mode | string | — | — |
 | end-placeholder | placeholder for the end time in range mode | string | — | — |
-| value | value of the picker | date for Time Picker, and string for Time Select | hour `HH`, minute `mm`, second `ss` | HH:mm:ss |
+| value | value of the picker | Date for Time Picker, and string for Time Select | hour `HH`, minute `mm`, second `ss` | HH:mm:ss |
 | align | alignment | left / center / right | left |
 | popper-class | custom class name for TimePicker's dropdown | string | — | — |
 | picker-options | additional options, check the table below | object | — | {} |
 | range-separator | range separator | string | - | '-' |
-|name | same as `name` in native input | string | — | — |
+| default-value | optional, default date of the calendar | Date for TimePicker, string for TimeSelect | anything accepted by `new Date()` for TimePicker, selectable value for TimeSelect | — |
+| value-format | optional, only for TimePicker, format of bounded value | string | hour `HH`, minute `mm`, second `ss` | — |
+| name | same as `name` in native input | string | — | — |
 
 ### Time Select Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
@@ -187,6 +189,6 @@ Can pick an arbitrary time range.
 ### Events
 | Event Name | Description | Parameters |
 |---------|--------|---------|
-| change | triggers when input value changes | formatted value |
+| change | triggers when user confirms the value | component's bounded value |
 | blur | triggers when Input blurs | (event: Event) |
 | focus | triggers when Input focuses | (event: Event) |

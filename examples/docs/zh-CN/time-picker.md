@@ -166,6 +166,8 @@
 | popper-class | TimePicker 下拉框的类名 | string | — | — |
 | picker-options | 当前时间日期选择器特有的选项参考下表 | object | — | {} |
 | range-separator | 选择范围时的分隔符 | string | - | '-' |
+| value-format | 可选，仅TimePicker时可用，绑定值的格式，同DatePicker | string | 小时 `HH`，分 `mm`，秒 `ss` | — |
+| default-value | 可选，选择器打开时默认显示的时间 | Date(TimePicker) / string(TimeSelect) | 可被`new Date()`解析(TimePicker) / 可选值(TimeSelect) | — |
 | name | 原生属性 | string | — | — |
 
 ### Time Select Options
@@ -186,7 +188,7 @@
 ### Events
 | 事件名 | 说明 | 参数 |
 |---------|--------|---------|
-| change | 当 input 的值改变时触发，返回值和文本框一致 | formatted value |
+| change | 用户确认选定的值时触发 | 组件绑定值 |
 | blur | 当 input 失去焦点时触发 | (event: Event) |
 | focus | 当 input 获得焦点时触发 | (event: Event) |
 
