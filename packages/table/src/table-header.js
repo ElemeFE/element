@@ -368,7 +368,7 @@ export default {
 
         const bodyStyle = document.body.style;
         if (rect.width > 12 && rect.right - event.pageX < 8) {
-          bodyStyle.cursor = 'col-resize';
+          bodyStyle.setProperty('cursor' ,'col-resize', 'important');
           this.draggingColumn = column;
         } else if (!this.dragging) {
           bodyStyle.cursor = '';
