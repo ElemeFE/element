@@ -133,8 +133,10 @@ TableStore.prototype.mutations = {
     Vue.nextTick(() => this.table.updateScrollY());
   },
 
-  changeSortCondition(states) {
-    states.data = sortData((states.filteredData || states._data || []), states);
+  changeSortCondition(states, options) {
+    if (options.ajaxSort !== true) {
+      states.data = sortData((states.filteredData || states._data || []), states);
+    }
 
     this.table.$emit('sort-change', {
       column: this.states.sortingColumn,
