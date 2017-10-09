@@ -53,6 +53,10 @@
     stroke: $--color-primary;
     stroke-linecap: round;
   }
+
+  i {
+    color: $--color-primary;
+  }
 }
 
 .el-loading-fade-enter,
