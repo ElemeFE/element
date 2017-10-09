@@ -71,6 +71,9 @@
         // 如果需要验证的fields为空，调用验证时立刻返回callback
         if (this.fields.length === 0 && callback) {
           callback(true);
+          if (typeof Promise !== 'undefined') {
+            return Promise.resolve(); // eslint-disable-line
+          }
         }
         this.fields.forEach((field, index) => {
           field.validate('', errors => {
@@ -82,6 +85,9 @@
             }
           });
         });
+        if (typeof Promise !== 'undefined') {
+          return valid ? Promise.resolve() : Promise.reject(); // eslint-disable-line
+        }
       },
       validateField(prop, cb) {
         var field = this.fields.filter(field => field.prop === prop)[0];
