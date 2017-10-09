@@ -17,6 +17,7 @@
         :layout="layout"
         :border="border"
         :default-sort="defaultSort"
+        :ajax-sort="ajaxSort"
         :style="{ width: layout.bodyWidth ? layout.bodyWidth + 'px' : '' }">
       </table-header>
     </div>
@@ -46,6 +47,7 @@
         :sum-text="sumText || t('el.table.sumText')"
         :summary-method="summaryMethod"
         :default-sort="defaultSort"
+        :ajax-sort="ajaxSort"
         :style="{ width: layout.bodyWidth ? layout.bodyWidth + 'px' : '' }">
       </table-footer>
     </div>
@@ -212,6 +214,8 @@
       defaultExpandAll: Boolean,
 
       defaultSort: Object,
+
+      ajaxSort: Boolean,
 
       tooltipEffect: String
     },

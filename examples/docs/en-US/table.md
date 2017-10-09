@@ -1,7 +1,10 @@
 <script>
+  import { orderBy } from '../../../packages/table/src/util';
+
   export default {
     data() {
       return {
+        loading: false,
         tableData: [{
           date: '2016-05-03',
           name: 'Tom',
@@ -267,6 +270,15 @@
 
       deleteRow(index, rows) {
         rows.splice(index, 1);
+      },
+
+      sortChange(obj) {
+        console.log(obj);
+        this.loading = true;
+        setTimeout(() => {
+          this.loading = false;
+          this.tableData = orderBy(this.tableData, obj.prop, obj.order);
+        }, 1000);
       }
     },
 
@@ -1246,6 +1258,9 @@ Sort the data to find or compare data quickly.
     :data="tableData"
     border
     :default-sort = "{prop: 'date', order: 'descending'}"
+    :ajax-sort="true"
+    @sort-change="sortChange"
+    v-loading="loading"
     style="width: 100%">
     <el-table-column
       prop="date"
@@ -1270,6 +1285,7 @@ Sort the data to find or compare data quickly.
   export default {
     data() {
       return {
+        loading: false,
         tableData: [{
           date: '2016-05-03',
           name: 'Tom',
@@ -1292,6 +1308,15 @@ Sort the data to find or compare data quickly.
     methods: {
       formatter(row, column) {
         return row.address;
+      },
+
+      sortChange(obj) {
+        console.log(obj);
+        this.loading = true;
+        setTimeout(() => {
+          this.loading = false;
+          this.tableData = orderBy(this.tableData, obj.prop, obj.order);
+        }, 1000);
       }
     }
   }
@@ -1709,6 +1734,7 @@ For table of numbers, you can add an extra row at the table footer displaying ea
 | default-expand-all | whether expand all rows by default, only works when the table has a column type="expand" | Boolean | — | false |
 | expand-row-keys | set expanded rows by this prop, prop's value is the keys of expand rows, you should set row-key before using this prop | Array | — | |
 | default-sort | set the default sort column and order. property `prop` is used to set default sort column, property `order` is used to set default sort order | Object | `order`: ascending, descending | if `prop` is set, and `order` is not set, then `order` is default to ascending |
+| ajax-sort | whether to use server side sort，need used with `sort-change` event，when set `true`，then in `sort-change` handling function sending ajax request to update table data。 | Boolean | — | false |
 | tooltip-effect | tooltip `effect` property | String | dark/light | | dark |
 | show-summary | whether to display a summary row | Boolean | — | false |
 | sum-text | displayed text for the first column of summary row | String | — | Sum |

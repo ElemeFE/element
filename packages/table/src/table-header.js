@@ -156,6 +156,10 @@ export default {
           order: ''
         };
       }
+    },
+    ajaxSort: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -206,7 +210,7 @@ export default {
         }
 
         if (states.sortingColumn) {
-          this.store.commit('changeSortCondition');
+          this.store.commit('changeSortCondition', {ajaxSort: this.ajaxSort});
         }
       });
     }
@@ -434,7 +438,7 @@ export default {
       states.sortProp = sortProp;
       states.sortOrder = sortOrder;
 
-      this.store.commit('changeSortCondition');
+      this.store.commit('changeSortCondition', {ajaxSort: this.ajaxSort});
     }
   },
 
