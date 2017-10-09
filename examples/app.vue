@@ -7,7 +7,13 @@
     margin: 0;
     padding: 0;
     height: 100%;
-    overflow-y: hidden;
+    font-family: 'Helvetica Neue',Helvetica,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',SimSun,sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+
+    &.is-component {
+      overflow: hidden;
+    }
   }
 
   #app {
@@ -22,6 +28,7 @@
         height: 100%;
         min-height: auto;
       }
+
       .headerWrapper {
         position: fixed;
         width: 100%;
@@ -34,13 +41,6 @@
         }
       }
     }
-  }
-
-  body {
-    font-family: 'Helvetica Neue',Helvetica,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',SimSun,sans-serif;
-    overflow: auto;
-    font-weight: 400;
-    -webkit-font-smoothing: antialiased;
   }
 
   a {
