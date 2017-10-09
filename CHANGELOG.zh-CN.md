@@ -1,5 +1,34 @@
 ## 更新日志
 
+### 1.4.6
+*2017-09-27*
+
+- 修复点击 Slider 的按钮会使其返回上一个位置的问题，#7190
+- 修复 Tooltip 无法正确切换 `disabled` 的问题，#7198
+- 修复 Cascader 的过滤功能在配置了 `props` 的情况下的异常问题，#7225
+- 修复 DatePicker 的范围选择在初始值为空数组时会报错的问题，#7233
+
+### 1.4.5
+*2017-09-24*
+
+- Rate 的 `colors` 属性现在可以动态更新了，#6872 @lukaszb
+- 修复 Tree 无法高亮 `node-key` 值为 0 的节点的问题，#6917
+- 修复初始状态被禁用的 Dropdown 在取消禁用后无法弹出下拉菜单的问题，#6969
+- Tooltip 新增 `hide-after` 属性，#6401 @ryatziv
+- 修复 TimePicker 取消按钮无法正确取消所选值的问题，#7028
+- Autocomplete 新增 `selectWhenUnmatched` 属性，#6428 @ryatziv
+- 修复 Upload 中某个文件的 `beforeUpload` 返回 `false` 时会错误地取消其他文件上传的问题，#7077
+- 修复 DatePicker 在西半球使用时月视图和年视图禁用日期显示错误的问题，#7114
+- DatePicker 的 `default-value` 属性支持 daterange 模式，#7073 @wacky6
+
+### 1.4.4
+*2017-09-05*
+
+- 修复设置了 `disabledDate` 的 DatePicker 在月视图下全部不可选的问题，#6768 @qingdengyue
+- Slider 新增 `debounce` 属性，#6820 @langgo
+- 修复 Pagination 的 jumper 中可以输入比最大页数更大的数字的问题，#6842 @huguangju
+- 修复 TimePicker 的小时数难以通过滚动的方式选中 23 时的问题，#6719 @qingdengyue
+
 ### 1.4.3
 *2017-08-25*
 

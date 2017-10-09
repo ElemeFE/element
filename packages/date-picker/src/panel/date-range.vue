@@ -153,6 +153,14 @@
   import DateTable from '../basic/date-table';
   import ElInput from 'element-ui/packages/input';
 
+  const calcDefaultValue = defaultValue => {
+    if (Array.isArray(defaultValue)) {
+      return defaultValue[0] ? new Date(defaultValue[0]) : new Date();
+    } else {
+      return new Date(defaultValue);
+    }
+  };
+
   export default {
     mixins: [Locale],
 
@@ -221,7 +229,7 @@
         popperClass: '',
         minPickerWidth: 0,
         maxPickerWidth: 0,
-        date: new Date(),
+        date: this.$options.defaultValue ? calcDefaultValue(this.$options.defaultValue) : new Date(),
         minDate: '',
         maxDate: '',
         rangeState: {
@@ -297,6 +305,7 @@
       handleClear() {
         this.minDate = null;
         this.maxDate = null;
+        this.date = this.$options.defaultValue ? calcDefaultValue(this.$options.defaultValue) : new Date();
         this.handleConfirm(false);
       },
 

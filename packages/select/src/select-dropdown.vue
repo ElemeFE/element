@@ -29,7 +29,6 @@
       popperOptions: {
         default() {
           return {
-            forceAbsolute: true,
             gpuAcceleration: false
           };
         }

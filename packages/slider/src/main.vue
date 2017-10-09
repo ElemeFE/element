@@ -11,6 +11,7 @@
       :controls="showInputControls"
       :min="min"
       :max="max"
+      :debounce="debounce"
       size="small">
     </el-input-number>
     <div class="el-slider__runway"
@@ -101,6 +102,10 @@
       },
       height: {
         type: String
+      },
+      debounce: {
+        type: Number,
+        default: 300
       }
     },
 

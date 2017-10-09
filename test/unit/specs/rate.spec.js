@@ -95,6 +95,40 @@ describe('Rate', () => {
     expect(thirdIcon.style.color).to.equal('rgb(255, 153, 0)');
   });
 
+  it('colors are updated after prop is changed', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-rate v-model="value" :colors="colors"></el-rate>
+        </div>
+      `,
+
+      computed: {
+        colors() {
+          if (this.muted) {
+            return ['#999', '#999', '#999'];
+          } else {
+            return ['#99A9BF', '#F7BA2A', '#FF9900'];
+          }
+        }
+      },
+      data() {
+        return {
+          value: 4,
+          muted: false
+        };
+      }
+    }, true);
+    setTimeout(() => {
+      vm.muted = true;
+      vm.$nextTick(() => {
+        const thirdIcon = vm.$el.querySelectorAll('.el-rate__item')[2].querySelector('.el-rate__icon');
+        expect(thirdIcon.style.color).to.equal('rgb(153, 153, 153)');
+        done();
+      });
+    }, 10);
+  });
+
   it('threshold', () => {
     vm = createVue({
       template: `
