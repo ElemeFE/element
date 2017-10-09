@@ -46,6 +46,7 @@ if [ "$TRAVIS_TAG" ]; then
   rm -rf $SUB_FOLDER/**
   # cp -rf ../../examples/element-ui/** .
   cp -rf ../../examples/element-ui/** $SUB_FOLDER/
+  cp -rf ../../examples/element-ui/versions.json .
   git add -A .
   git commit -m "$TRAVIS_COMMIT_MSG"
   git push origin gh-pages

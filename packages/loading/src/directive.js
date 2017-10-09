@@ -74,11 +74,17 @@ exports.install = Vue => {
   };
 
   Vue.directive('loading', {
-    bind: function(el, binding) {
+    bind: function(el, binding, vnode) {
+      const textExr = el.getAttribute('element-loading-text');
+      const spinnerExr = el.getAttribute('element-loading-spinner');
+      const backgroundExr = el.getAttribute('element-loading-background');
+      const vm = vnode.context;
       const mask = new Mask({
         el: document.createElement('div'),
         data: {
-          text: el.getAttribute('element-loading-text'),
+          text: vm && vm[textExr] || textExr,
+          spinner: vm && vm[spinnerExr] || spinnerExr,
+          background: vm && vm[backgroundExr] || backgroundExr,
           fullscreen: !!binding.modifiers.fullscreen
         }
       });
