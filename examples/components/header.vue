@@ -476,7 +476,7 @@
 
     mounted() {
       function scroll(fn) {
-        document.body.addEventListener('scroll', fn, false);
+        window.addEventListener('scroll', fn, false);
       }
       scroll(() => {
         if (this.isHome) {

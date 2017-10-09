@@ -241,6 +241,10 @@
       this.componentScrollBox = this.componentScrollBar.$el.querySelector('.el-scrollbar__wrap');
       this.throttledScrollHandler = throttle(300, this.handleScroll);
       this.componentScrollBox.addEventListener('scroll', this.throttledScrollHandler);
+      document.body.classList.add('is-component');
+    },
+    destroyed() {
+      document.body.classList.remove('is-component');
     },
     beforeDestroy() {
       this.componentScrollBox.removeEventListener('scroll', this.throttledScrollHandler);
