@@ -369,9 +369,15 @@ export default {
         const bodyStyle = document.body.style;
         if (rect.width > 12 && rect.right - event.pageX < 8) {
           bodyStyle.cursor = 'col-resize';
+          if (hasClass(target, 'is-sortable')) {
+            target.style.cursor = 'col-resize';
+          }
           this.draggingColumn = column;
         } else if (!this.dragging) {
           bodyStyle.cursor = '';
+          if (hasClass(target, 'is-sortable')) {
+            target.style.cursor = 'pointer';
+          }
           this.draggingColumn = null;
         }
       }
