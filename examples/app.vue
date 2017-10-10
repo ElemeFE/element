@@ -119,27 +119,6 @@
     margin: 20px 0;
   }
   
-  .carbon-teaser {
-    border-radius: 0;
-    .el-dialog__header {
-      display: none;
-    }
-    .el-dialog__body {
-      padding: 0;
-      position: relative;
-    }
-    .carbon-teaser__main {
-      width: 100%;
-    }
-    .carbon-teaser__close {
-      position: absolute;
-      width: 50px;
-      top: -25px;
-      right: -25px;
-      cursor: pointer;
-    }
-  }
-  
   @media (max-width: 1140px) {
     .container,
     .page-container {
@@ -162,20 +141,6 @@
       <router-view></router-view>
     </div>
     <main-footer v-if="lang !== 'play'"></main-footer>
-    <el-dialog
-      :visible.sync="dialogVisible"
-      custom-class="carbon-teaser"
-      @close="handleDialogClose"
-      :close-on-press-escape="false"
-      :close-on-click-modal="false">
-      <img
-        src="https://i.loli.net/2017/09/24/59c75f601d52b.png"
-        class="carbon-teaser__main">
-      <img
-        @click="dialogVisible = false"
-        src="~examples/assets/images/dialog-close.png"
-        class="carbon-teaser__close">
-    </el-dialog>
   </div>
 </template>
 
@@ -187,12 +152,6 @@
 
   export default {
     name: 'app',
-
-    data() {
-      return {
-        dialogVisible: false
-      };
-    },
 
     computed: {
       lang() {
@@ -233,10 +192,6 @@
             document.documentElement.scrollTop = document.body.scrollTop = elm.offsetTop + 120;
           }, 50);
         }
-      },
-
-      handleDialogClose() {
-        localStorage.setItem('CARBON_TEASER', 1);
       }
     },
 
@@ -244,15 +199,35 @@
       this.localize();
       this.renderAnchorHref();
       this.goAnchor();
-
-      const intrigued = localStorage.getItem('CARBON_TEASER');
-      if (!intrigued) {
-        const img = new Image();
-        img.onload = () => {
-          this.dialogVisible = true;
-        };
-        img.src = 'https://i.loli.net/2017/09/24/59c75f601d52b.png';
-      }
+      setTimeout(() => {
+        const notified = localStorage.getItem('ALPHA_NOTIFIED');
+        if (!notified) {
+          const h = this.$createElement;
+          const title = this.lang === 'zh-CN'
+            ? '2.0.0-alpha.1 发布'
+            : '2.0.0-alpha.1 released';
+          const messages = this.lang === 'zh-CN'
+            ? ['点击', '这里', '查看详情']
+            : ['Click ', 'here', ' to learn more'];
+          this.$notify.success({
+            title,
+            duration: 0,
+            message: h('span', [
+              messages[0],
+              h('a', {
+                attrs: {
+                  target: '_blank',
+                  href: `https://github.com/ElemeFE/element/issues/${ this.lang === 'zh-CN' ? '7304' : '7305' }`
+                }
+              }, messages[1]),
+              messages[2]
+            ]),
+            onClose() {
+              localStorage.setItem('ALPHA_NOTIFIED', 1);
+            }
+          });
+        }
+      }, 3500);
     },
 
     created() {
