@@ -43,7 +43,9 @@ export default {
       type: Function,
       default: ajax
     },
-    disabled: Boolean
+    disabled: Boolean,
+    limit: Number,
+    onExceed: Function
   },
 
   data() {
@@ -64,6 +66,11 @@ export default {
       this.uploadFiles(files);
     },
     uploadFiles(files) {
+      if (this.limit && this.fileList.length + files.length > this.limit) {
+        this.onExceed && this.onExceed(files, this.fileList);
+        return;
+      }
+
       let postFiles = Array.prototype.slice.call(files);
       if (!this.multiple) { postFiles = postFiles.slice(0, 1); }
 

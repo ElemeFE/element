@@ -29,7 +29,7 @@
         :aria-label="label"
       >
       <!-- 前置内容 -->
-      <span class="el-input__prefix" v-if="$slots.prefix || prefixIcon">
+      <span class="el-input__prefix" v-if="$slots.prefix || prefixIcon" :style="prefixOffset">
         <slot name="prefix"></slot>
         <i class="el-input__icon"
            v-if="prefixIcon"
@@ -37,7 +37,7 @@
         </i>
       </span>
       <!-- 后置内容 -->
-      <span class="el-input__suffix" v-if="$slots.suffix || suffixIcon || validateState">
+      <span class="el-input__suffix" v-if="$slots.suffix || suffixIcon || validateState" :style="suffixOffset">
         <span class="el-input__suffix-inner">
           <slot name="suffix"></slot>
           <i class="el-input__icon"
@@ -88,7 +88,9 @@
     data() {
       return {
         currentValue: this.value,
-        textareaCalcStyle: {}
+        textareaCalcStyle: {},
+        prefixOffset: null,
+        suffixOffset: null
       };
     },
 
@@ -147,6 +149,9 @@
       },
       textareaStyle() {
         return merge({}, this.textareaCalcStyle, { resize: this.resize });
+      },
+      isGroup() {
+        return this.$slots.prepend || this.$slots.append;
       }
     },
 
@@ -193,6 +198,18 @@
         if (this.validateEvent) {
           this.dispatch('ElFormItem', 'el.form.change', [value]);
         }
+      },
+      calcIconOffset(place) {
+        const pendantMap = {
+          'suf': 'append',
+          'pre': 'prepend'
+        };
+
+        const pendant = pendantMap[place];
+
+        if (this.$slots[pendant]) {
+          return { transform: `translateX(${place === 'suf' ? '-' : ''}${this.$el.querySelector(`.el-input-group__${pendant}`).offsetWidth}px)` };
+        }
       }
     },
 
@@ -202,6 +219,10 @@
 
     mounted() {
       this.resizeTextarea();
+      if (this.isGroup) {
+        this.prefixOffset = this.calcIconOffset('pre');
+        this.suffixOffset = this.calcIconOffset('suf');
+      }
     }
   };
 </script>

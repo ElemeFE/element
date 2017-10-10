@@ -112,6 +112,9 @@
       },
       handleChange(file, fileList) {
         this.fileList3 = fileList.slice(-3);
+      },
+      handleExceed(files, fileList) {
+        this.$message.warning(`当前限制选择3个文件，这次选择了${files.length}个，合起来共${files.length + fileList.length}个`);
       }
     }
   }
@@ -123,13 +126,16 @@
 
 ### 点击上传
 
-::: demo 通过 slot 你可以传入自定义的上传按钮类型和文字提示。
+::: demo 通过 slot 你可以传入自定义的上传按钮类型和文字提示。可通过设置 `limit` 和 `on-exceed` 来限制上传文件的个数和超出限制时的行为。 
 ```html
 <el-upload
   class="upload-demo"
   action="https://jsonplaceholder.typicode.com/posts/"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
+  multiple
+  :limit="3"
+  :on-exceed="handleExceed"
   :file-list="fileList">
   <el-button size="small" type="primary">点击上传</el-button>
   <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
@@ -147,6 +153,9 @@
       },
       handlePreview(file) {
         console.log(file);
+      },
+      handleExceed(files, fileList) {
+        this.$message.warning(`当前限制选择 3 个文件，这次选择了 ${files.length} 个，合起来共 ${files.length + fileList.length} 个`);
       }
     }
   }
@@ -415,6 +424,8 @@
 | file-list | 上传的文件列表, 例如: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}] | array | — | [] |
 | http-request | 覆盖默认的上传行为，可以自定义上传的实现 | function | — | — |
 | disabled | 是否禁用 | boolean | — | false |
+| limit | 文件上传个数限制 |  number | — | false |
+| on-exceed | 可选参数, 文件超出个数限制时的钩子 | function(files, fileList) | — | - |
 
 ### Methods
 | 方法名      | 说明          | 参数 |
