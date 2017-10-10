@@ -250,6 +250,8 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
 | popper-class | DateTimePicker 下拉框的类名 | string | — | — |
 | picker-options | 当前时间日期选择器特有的选项参考下表 | object |  — | {} |
 | range-separator | 选择范围时的分隔符 | string | - | '-' |
+| default-value | 可选，选择器打开时默认显示的时间 | Date | 可被`new Date()`解析 | — |
+| value-format | 可选，绑定值的格式 | string | 年 `yyyy`，月 `MM`，日 `dd`，小时 `HH`，分 `mm`，秒 `ss` | — |
 | name | 原生属性 | string | — | — |
 
 ### Picker Options
@@ -268,7 +270,7 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
 ### Events
 | Event Name | Description | Parameters |
 |---------|--------|---------|
-| change | 当 input 的值改变时触发，返回值和文本框一致 | formatted value |
+| change | 用户确认选定的值时触发 | 组件绑定值 |
 | blur | 当 input 失去焦点时触发 | (event: Event) |
 | focus | 当 input 获得焦点时触发 | (event: Event) |
 

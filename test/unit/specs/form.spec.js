@@ -1,5 +1,7 @@
 import { createVue, destroyVM } from '../util';
 
+const DELAY = 50;
+
 describe('Form', () => {
   let vm;
   afterEach(() => {
@@ -362,7 +364,7 @@ describe('Form', () => {
         template: `
           <el-form :model="form" :rules="rules" ref="form">
             <el-form-item label="记住密码" prop="date" ref="field">
-              <el-date-picker type="date" placeholder="选择日期" v-model="form.date" style="width: 100%;"></el-date-picker>
+              <el-date-picker type="date" ref="picker" placeholder="选择日期" v-model="form.date" style="width: 100%;"></el-date-picker>
             </el-form-item>
           </el-form>
         `,
@@ -377,26 +379,38 @@ describe('Form', () => {
               ]
             }
           };
-        },
-        methods: {
-          setValue(value) {
-            this.form.date = value;
-          }
         }
       }, true);
       vm.$refs.form.validate(valid => {
         let field = vm.$refs.field;
         expect(valid).to.not.true;
-        vm.$refs.form.$nextTick(_ => {
+        setTimeout(_ => {
           expect(field.validateMessage).to.equal('请选择日期');
-
-          vm.setValue(new Date());
-
-          vm.$refs.form.$nextTick(_ => {
-            expect(field.validateMessage).to.equal('');
-            done();
-          });
-        });
+          // programatic modification does not trigger change
+          vm.value = new Date();
+          setTimeout(_ => {
+            expect(field.validateMessage).to.equal('请选择日期');
+            vm.value = '';
+            // user modification triggers change
+            const input = vm.$refs.picker.$el.querySelector('input');
+            input.blur();
+            input.focus();
+            setTimeout(_ => {
+              const keyDown = (el, keyCode) => {
+                const evt = document.createEvent('Events');
+                evt.initEvent('keydown', true, true);
+                evt.keyCode = keyCode;
+                el.dispatchEvent(evt);
+              };
+              keyDown(input, 37);
+              keyDown(input, 13);
+              setTimeout(_ => {
+                expect(field.validateMessage).to.equal('');
+                done();
+              }, DELAY);
+            }, DELAY);
+          }, DELAY);
+        }, DELAY);
       });
     });
     it('timepicker', done => {
@@ -404,7 +418,7 @@ describe('Form', () => {
         template: `
           <el-form :model="form" :rules="rules" ref="form">
             <el-form-item label="记住密码" prop="date" ref="field">
-              <el-time-picker type="fixed-time" placeholder="选择时间" v-model="form.date" style="width: 100%;"></el-time-picker>
+              <el-time-picker type="fixed-time" ref="picker" placeholder="选择时间" v-model="form.date" style="width: 100%;"></el-time-picker>
             </el-form-item>
           </el-form>
         `,
@@ -419,25 +433,31 @@ describe('Form', () => {
               ]
             }
           };
-        },
-        methods: {
-          setValue(value) {
-            this.form.date = value;
-          }
         }
       }, true);
       vm.$refs.form.validate(valid => {
         let field = vm.$refs.field;
         expect(valid).to.not.true;
-        vm.$refs.form.$nextTick(_ => {
+        setTimeout(_ => {
           expect(field.validateMessage).to.equal('请选择时间');
-          vm.setValue(new Date());
-
-          vm.$refs.form.$nextTick(_ => {
-            expect(field.validateMessage).to.equal('');
-            done();
-          });
-        });
+          // programatic modification does not trigger change
+          vm.value = new Date();
+          setTimeout(_ => {
+            expect(field.validateMessage).to.equal('请选择时间');
+            vm.value = '';
+            // user modification triggers change
+            const input = vm.$refs.picker.$el.querySelector('input');
+            input.blur();
+            input.focus();
+            setTimeout(_ => {
+              vm.$refs.picker.picker.$el.querySelector('.confirm').click();
+              setTimeout(_ => {
+                expect(field.validateMessage).to.equal('');
+                done();
+              }, DELAY);
+            }, DELAY);
+          }, DELAY);
+        }, DELAY);
       });
     });
     it('checkbox group', done => {

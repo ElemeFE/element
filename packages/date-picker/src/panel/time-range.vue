@@ -1,7 +1,6 @@
 <template>
   <transition
     name="el-zoom-in-top"
-    @before-enter="panelCreated"
     @after-leave="$emit('dodestroy')">
     <div
       v-show="visible"
@@ -18,9 +17,7 @@
               :show-seconds="showSeconds"
               @change="handleMinChange"
               @select-range="setMinSelectionRange"
-              :hours="minHours"
-              :minutes="minMinutes"
-              :seconds="minSeconds">
+              :date="minDate">
             </time-spinner>
           </div>
         </div>
@@ -34,9 +31,7 @@
               :show-seconds="showSeconds"
               @change="handleMaxChange"
               @select-range="setMaxSelectionRange"
-              :hours="maxHours"
-              :minutes="maxMinutes"
-              :seconds="maxSeconds">
+              :date="maxDate">
             </time-spinner>
           </div>
         </div>
@@ -57,27 +52,30 @@
 </template>
 
 <script type="text/babel">
-  import { parseDate, limitRange } from '../util';
+  import {
+    parseDate,
+    limitTimeRange,
+    modifyDate,
+    clearMilliseconds,
+    timeWithinRange
+  } from '../util';
   import Locale from 'element-ui/src/mixins/locale';
   import TimeSpinner from '../basic/time-spinner';
 
   const MIN_TIME = parseDate('00:00:00', 'HH:mm:ss');
   const MAX_TIME = parseDate('23:59:59', 'HH:mm:ss');
-  const isDisabled = function(minTime, maxTime) {
-    const minValue = minTime.getHours() * 3600 + minTime.getMinutes() * 60 + minTime.getSeconds();
-    const maxValue = maxTime.getHours() * 3600 + maxTime.getMinutes() * 60 + maxTime.getSeconds();
 
-    return minValue > maxValue;
+  const minTimeOfDay = function(date) {
+    return modifyDate(MIN_TIME, date.getFullYear(), date.getMonth(), date.getDate());
   };
-  const clacTime = function(time) {
-    time = Array.isArray(time) ? time : [time];
-    const minTime = time[0] || new Date();
-    const date = new Date();
-    date.setHours(date.getHours() + 1);
-    const maxTime = time[1] || date;
+  
+  const maxTimeOfDay = function(date) {
+    return modifyDate(MAX_TIME, date.getFullYear(), date.getMonth(), date.getDate());
+  };
 
-    if (minTime > maxTime) return clacTime();
-    return { minTime, maxTime };
+  // increase time by amount of milliseconds, but within the range of day
+  const advanceTime = function(date, amount) {
+    return new Date(Math.min(date.getTime() + amount, maxTimeOfDay(date).getTime()));
   };
 
   export default {
@@ -96,25 +94,21 @@
 
       spinner() {
         return this.selectionRange[0] < this.offset ? this.$refs.minSpinner : this.$refs.maxSpinner;
+      },
+
+      btnDisabled() {
+        return this.minDate.getTime() > this.maxDate.getTime();
       }
     },
 
-    props: ['value'],
-
     data() {
-      const time = clacTime(this.$options.defaultValue);
-
       return {
         popperClass: '',
-        minTime: time.minTime,
-        maxTime: time.maxTime,
-        btnDisabled: isDisabled(time.minTime, time.maxTime),
-        maxHours: time.maxTime.getHours(),
-        maxMinutes: time.maxTime.getMinutes(),
-        maxSeconds: time.maxTime.getSeconds(),
-        minHours: time.minTime.getHours(),
-        minMinutes: time.minTime.getMinutes(),
-        minSeconds: time.minTime.getSeconds(),
+        minDate: new Date(),
+        maxDate: new Date(),
+        value: [],
+        oldValue: [new Date(), new Date()],
+        defaultValue: null,
         format: 'HH:mm:ss',
         visible: false,
         selectionRange: [0, 2]
@@ -122,87 +116,60 @@
     },
 
     watch: {
-      value(newVal) {
-        this.panelCreated();
-        this.$nextTick(_ => this.adjustScrollTop());
+      value(value) {
+        if (Array.isArray(value)) {
+          this.minDate = new Date(value[0]);
+          this.maxDate = new Date(value[1]);
+        } else {
+          if (Array.isArray(this.defaultValue)) {
+            this.minDate = new Date(this.defaultValue[0]);
+            this.maxDate = new Date(this.defaultValue[1]);
+          } else if (this.defaultValue) {
+            this.minDate = new Date(this.defaultValue);
+            this.maxDate = advanceTime(new Date(this.defaultValue), 60 * 60 * 1000);
+          } else {
+            this.minDate = new Date();
+            this.maxDate = advanceTime(new Date(), 60 * 60 * 1000);
+          }
+        }
+        if (this.visible) {
+          this.$nextTick(_ => this.adjustSpinners());
+        }
       },
 
       visible(val) {
         if (val) {
+          this.oldValue = this.value;
           this.$nextTick(() => this.$refs.minSpinner.emitSelectRange('hours'));
         }
       }
     },
 
     methods: {
-      panelCreated() {
-        const time = clacTime(this.value);
-        if (time.minTime === this.minTime && time.maxTime === this.maxTime) {
-          return;
-        }
-
-        this.handleMinChange({
-          hours: time.minTime.getHours(),
-          minutes: time.minTime.getMinutes(),
-          seconds: time.minTime.getSeconds()
-        }, true);
-        this.handleMaxChange({
-          hours: time.maxTime.getHours(),
-          minutes: time.maxTime.getMinutes(),
-          seconds: time.maxTime.getSeconds()
-        }, true);
-      },
-
       handleClear() {
-        this.handleCancel();
+        this.$emit('pick', []);
       },
 
       handleCancel() {
-        this.$emit('pick');
+        this.$emit('pick', this.oldValue);
       },
 
-      handleChange(notUser) {
-        if (this.minTime > this.maxTime) return;
-        MIN_TIME.setFullYear(this.minTime.getFullYear());
-        MIN_TIME.setMonth(this.minTime.getMonth(), this.minTime.getDate());
-        MAX_TIME.setFullYear(this.maxTime.getFullYear());
-        MAX_TIME.setMonth(this.maxTime.getMonth(), this.maxTime.getDate());
-        this.$refs.minSpinner.selectableRange = [[MIN_TIME, this.maxTime]];
-        this.$refs.maxSpinner.selectableRange = [[this.minTime, MAX_TIME]];
-        this.handleConfirm(true, false, notUser);
-      },
-
-      handleMaxChange(date, notUser) {
-        if (date.hours !== undefined) {
-          this.maxTime.setHours(date.hours);
-          this.maxHours = this.maxTime.getHours();
-        }
-        if (date.minutes !== undefined) {
-          this.maxTime.setMinutes(date.minutes);
-          this.maxMinutes = this.maxTime.getMinutes();
-        }
-        if (date.seconds !== undefined) {
-          this.maxTime.setSeconds(date.seconds);
-          this.maxSeconds = this.maxTime.getSeconds();
-        }
+      handleMinChange(date) {
+        this.minDate = clearMilliseconds(date);
         this.handleChange();
       },
 
-      handleMinChange(date, notUser) {
-        if (date.hours !== undefined) {
-          this.minTime.setHours(date.hours);
-          this.minHours = this.minTime.getHours();
-        }
-        if (date.minutes !== undefined) {
-          this.minTime.setMinutes(date.minutes);
-          this.minMinutes = this.minTime.getMinutes();
-        }
-        if (date.seconds !== undefined) {
-          this.minTime.setSeconds(date.seconds);
-          this.minSeconds = this.minTime.getSeconds();
-        }
-
+      handleMaxChange(date) {
+        this.maxDate = clearMilliseconds(date);
         this.handleChange();
+      },
+
+      handleChange() {
+        if (this.isValidValue([this.minDate, this.maxDate])) {
+          this.$refs.minSpinner.selectableRange = [[minTimeOfDay(this.minDate), this.maxDate]];
+          this.$refs.maxSpinner.selectableRange = [[this.minDate, maxTimeOfDay(this.maxDate)]];
+          this.$emit('pick', [this.minDate, this.maxDate], true);
+        }
       },
 
       setMinSelectionRange(start, end) {
@@ -215,24 +182,19 @@
         this.selectionRange = [start + this.offset, end + this.offset];
       },
 
-      handleConfirm(visible = false, first = false, notUser = false) {
+      handleConfirm(visible = false) {
         const minSelectableRange = this.$refs.minSpinner.selectableRange;
         const maxSelectableRange = this.$refs.maxSpinner.selectableRange;
 
-        this.minTime = limitRange(this.minTime, minSelectableRange);
-        this.maxTime = limitRange(this.maxTime, maxSelectableRange);
+        this.minDate = limitTimeRange(this.minDate, minSelectableRange, this.format);
+        this.maxDate = limitTimeRange(this.maxDate, maxSelectableRange, this.format);
 
-        if (first) return;
-        this.$emit('pick', [this.minTime, this.maxTime], visible, !notUser);
+        this.$emit('pick', [this.minDate, this.maxDate], visible);
       },
 
-      adjustScrollTop() {
-        this.$refs.minSpinner.adjustScrollTop();
-        this.$refs.maxSpinner.adjustScrollTop();
-      },
-
-      scrollDown(step) {
-        this.spinner.scrollDown(step);
+      adjustSpinners() {
+        this.$refs.minSpinner.adjustSpinners();
+        this.$refs.maxSpinner.adjustSpinners();
       },
 
       changeSelectionRange(step) {
@@ -246,11 +208,34 @@
         } else {
           this.$refs.maxSpinner.emitSelectRange(mapping[next - half]);
         }
-      }
-    },
+      },
 
-    mounted() {
-      this.$nextTick(() => this.handleConfirm(true, true));
+      isValidValue(date) {
+        return Array.isArray(date) &&
+          timeWithinRange(this.minDate, this.$refs.minSpinner.selectableRange) &&
+          timeWithinRange(this.maxDate, this.$refs.maxSpinner.selectableRange);
+      },
+
+      handleKeydown(event) {
+        const keyCode = event.keyCode;
+        const mapping = { 38: -1, 40: 1, 37: -1, 39: 1 };
+
+         // Left or Right
+        if (keyCode === 37 || keyCode === 39) {
+          const step = mapping[keyCode];
+          this.changeSelectionRange(step);
+          event.preventDefault();
+          return;
+        }
+
+        // Up or Down
+        if (keyCode === 38 || keyCode === 40) {
+          const step = mapping[keyCode];
+          this.spinner.scrollDown(step);
+          event.preventDefault();
+          return;
+        }
+      }
     }
   };
 </script>

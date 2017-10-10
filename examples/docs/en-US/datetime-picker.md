@@ -251,7 +251,9 @@ DateTimePicker is derived from DatePicker and TimePicker. For a more detailed ex
 | popper-class | custom class name for DateTimePicker's dropdown | string | — | — |
 | picker-options | additional options, check the table below | object | — | {} |
 | range-separator | range separator | string | - | '-' |
-|name | same as `name` in native input | string | — | — |
+| default-value | optional, default date of the calendar | Date | anything accepted by `new Date()` | — |
+| value-format | optional, format of bounded value | string | year `yyyy`, month `MM`, day `dd`, hour `HH`, minute `mm`, second `ss` | — |
+| name | same as `name` in native input | string | — | — |
 
 ### Picker Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
@@ -269,7 +271,7 @@ DateTimePicker is derived from DatePicker and TimePicker. For a more detailed ex
 ### Events
 | Event Name | Description | Parameters |
 |---------|--------|---------|
-| change | triggers when input value changes | formatted value |
+| change | triggers when user confirms the value | component's bounded value |
 | blur | triggers when Input blurs | (event: Event) |
 | focus | triggers when Input focuses | (event: Event) |
 

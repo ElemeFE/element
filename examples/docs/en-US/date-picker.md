@@ -57,7 +57,11 @@
         value4: '',
         value5: '',
         value6: '',
-        value7: ''
+        value7: '',
+        value8: '',
+        value9: '',
+        value10: '',
+        value11: ''
       };
     }
   };
@@ -275,25 +279,116 @@ Picking a date range is supported.
 
 :::
 
+###  Default Value
+
+If user hasn't picked a date, shows today's calendar by default. You can use `default-value` to set another date. Its value should be parsable by `new Date()`.
+
+If type is `daterange`, `default-value` sets the left side calendar.
+
+:::demo
+```html
+<template>
+  <div class="block">
+    <span class="demonstration">date</span>
+    <el-date-picker
+      v-model="value8"
+      type="date"
+      placeholder="Pick a date"
+      default-value="2010-10-01">
+    </el-date-picker>
+  </div>
+  <div class="block">
+    <span class="demonstration">daterange</span>
+    <el-date-picker
+      v-model="value9"
+      type="daterange"
+      start-placeholder="Start Date"
+      end-placeholder="End Date"
+      default-value="2010-10-01">
+    </el-date-picker>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        value8: '',
+        value9: ''
+      };
+    }
+  };
+</script>
+```
+:::
+
+###  Formatted Value
+
+By default, DatePicker emits `Date` object. You can use `value-format` to designate the format of emitted value, it accepts the same format string of `format` attribute.
+
+:::warning
+This feature is at alpha stage. Feedback welcome.
+:::
+
+:::demo
+```html
+<template>
+  <div class="block">
+    <span class="demonstration">Emits Date object</span>
+    <div class="demonstration">Value: {{ value10 }}</div>
+    <el-date-picker
+      v-model="value10"
+      type="date"
+      placeholder="Pick a Date"
+      format="yyyy/MM/dd">
+    </el-date-picker>
+  </div>
+  <div class="block">
+    <span class="demonstration">Emits formatted date</span>
+    <div class="demonstration">Value: {{ value11 }}</div>
+    <el-date-picker
+      v-model="value11"
+      type="date"
+      placeholder="Pick a Date"
+      format="yyyy/MM/dd"
+      value-format="yyyy-MM-dd">
+    </el-date-picker>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        value10: '',
+        value11: '',
+      };
+    }
+  };
+</script>
+```
+:::
+
 ### Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | readonly | whether DatePicker is read only | boolean | — | false |
 | disabled | whether DatePicker is disabled | boolean | — | false |
-|size | size of Input | string | large/small/mini | — |
+| size | size of Input | string | large/small/mini | — |
 | editable | whether the input is editable | boolean | — | true |
 | clearable | Whether to show clear button | boolean | — | true |
 | placeholder | placeholder in non-range mode | string | — | — |
 | start-placeholder | placeholder for the start date in range mode | string | — | — |
 | end-placeholder | placeholder for the end date in range mode | string | — | — |
 | type | type of the picker | string | year/month/date/datetime/ week/datetimerange/daterange | date |
-| format | format of the picker | string | year `yyyy` month `MM` day `dd`, hour `HH`, minute `mm`, second `ss` | yyyy-MM-dd |
+| format | format of the input box | string | year `yyyy`, month `MM`, day `dd`, hour `HH`, minute `mm`, second `ss` | yyyy-MM-dd |
 | align | alignment | left/center/right | left |
 | popper-class | custom class name for DatePicker's dropdown | string | — | — |
 | picker-options | additional options, check the table below | object | — | {} |
-| range-separator | range separator | string | - | '-' |
-| default-value | optional default time of the picker | Date | anything accepted by `new Date()` | - |
-|name | same as `name` in native input | string | — | — |
+| range-separator | range separator | string | — | '-' |
+| default-value | optional, default date of the calendar | Date | anything accepted by `new Date()` | — |
+| value-format | optional, format of bounded value | string | year `yyyy`, month `MM`, day `dd`, hour `HH`, minute `mm`, second `ss` | — |
+| name | same as `name` in native input | string | — | — |
 
 ### Picker Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
@@ -313,7 +408,7 @@ Picking a date range is supported.
 ### Events
 | Event Name | Description | Parameters |
 |---------|--------|---------|
-| change | triggers when input value changes | formatted value |
+| change | triggers when user confirms the value | component's bounded value |
 | blur | triggers when Input blurs | (event: Event) |
 | focus | triggers when Input focuses | (event: Event) |
 

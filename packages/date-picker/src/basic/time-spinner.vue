@@ -7,9 +7,9 @@
       view-class="el-time-spinner__list"
       noresize
       tag="ul"
-      ref="hour">
+      ref="hours">
       <li
-        @click="handleClick('hours', { value: hour, disabled: disabled }, true)"
+        @click="handleClick('hours', { value: hour, disabled: disabled })"
         v-for="(disabled, hour) in hoursList"
         track-by="hour"
         class="el-time-spinner__item"
@@ -22,9 +22,9 @@
       view-class="el-time-spinner__list"
       noresize
       tag="ul"
-      ref="minute">
+      ref="minutes">
       <li
-        @click="handleClick('minutes', key, true)"
+        @click="handleClick('minutes', { value: key, disabled: false })"
         v-for="(minute, key) in 60"
         class="el-time-spinner__item"
         :class="{ 'active': key === minutes }">{{ ('0' + key).slice(-2) }}</li>
@@ -37,9 +37,9 @@
       view-class="el-time-spinner__list"
       noresize
       tag="ul"
-      ref="second">
+      ref="seconds">
       <li
-        @click="handleClick('seconds', key, true)"
+        @click="handleClick('seconds', { value: key, disabled: false })"
         v-for="(second, key) in 60"
         class="el-time-spinner__item"
         :class="{ 'active': key === seconds }">{{ ('0' + key).slice(-2) }}</li>
@@ -48,83 +48,38 @@
 </template>
 
 <script type="text/babel">
-  import { getRangeHours } from '../util';
+  import { getRangeHours, modifyTime } from '../util';
   import ElScrollbar from 'element-ui/packages/scrollbar';
 
   export default {
     components: { ElScrollbar },
 
     props: {
-      hours: {
-        type: Number,
-        default: 0
-      },
-
-      minutes: {
-        type: Number,
-        default: 0
-      },
-
-      seconds: {
-        type: Number,
-        default: 0
-      },
-
+      date: {},
+      defaultValue: {},  // reserved for future use
       showSeconds: {
         type: Boolean,
         default: true
       }
     },
 
-    watch: {
-      hoursPrivate(newVal, oldVal) {
-        if (!(newVal >= 0 && newVal <= 23)) {
-          this.hoursPrivate = oldVal;
-        }
-        this.adjustElTop('hour', newVal);
-        this.$emit('change', { hours: newVal });
-      },
-
-      minutesPrivate(newVal, oldVal) {
-        if (!(newVal >= 0 && newVal <= 59)) {
-          this.minutesPrivate = oldVal;
-        }
-        this.adjustElTop('minute', newVal);
-        this.$emit('change', { minutes: newVal });
-      },
-
-      secondsPrivate(newVal, oldVal) {
-        if (!(newVal >= 0 && newVal <= 59)) {
-          this.secondsPrivate = oldVal;
-        }
-        this.adjustElTop('second', newVal);
-        this.$emit('change', { seconds: newVal });
-      }
-    },
-
     computed: {
+      hours() {
+        return this.date.getHours();
+      },
+      minutes() {
+        return this.date.getMinutes();
+      },
+      seconds() {
+        return this.date.getSeconds();
+      },
       hoursList() {
         return getRangeHours(this.selectableRange);
-      },
-
-      hourEl() {
-        return this.$refs.hour.wrap;
-      },
-
-      minuteEl() {
-        return this.$refs.minute.wrap;
-      },
-
-      secondEl() {
-        return this.$refs.second.wrap;
       }
     },
 
     data() {
       return {
-        hoursPrivate: 0,
-        minutesPrivate: 0,
-        secondsPrivate: 0,
         selectableRange: [],
         currentScrollbar: null
       };
@@ -137,59 +92,71 @@
     },
 
     methods: {
-      handleClick(type, value, disabled) {
-        if (value.disabled) {
-          return;
+      modifyDateField(type, value) {
+        switch (type) {
+          case 'hours': this.$emit('change', modifyTime(this.date, value, this.minutes, this.seconds)); break;
+          case 'minutes': this.$emit('change', modifyTime(this.date, this.hours, value, this.seconds)); break;
+          case 'seconds': this.$emit('change', modifyTime(this.date, this.hours, this.minutes, value)); break;
         }
+      },
 
-        this[type + 'Private'] = value.value >= 0 ? value.value : value;
-
-        this.emitSelectRange(type);
+      handleClick(type, {value, disabled}) {
+        if (!disabled) {
+          this.modifyDateField(type, value);
+          this.emitSelectRange(type);
+          this.adjustSpinner(type, value);
+        }
       },
 
       emitSelectRange(type) {
         if (type === 'hours') {
           this.$emit('select-range', 0, 2);
-          this.adjustElTop('minute', this.minutes);
-          this.adjustElTop('second', this.seconds);
+          this.adjustSpinner('minutes', this.minutes);
+          this.adjustSpinner('seconds', this.seconds);
         } else if (type === 'minutes') {
           this.$emit('select-range', 3, 5);
-          this.adjustElTop('hour', this.hours);
-          this.adjustElTop('second', this.seconds);
+          this.adjustSpinner('hours', this.hours);
+          this.adjustSpinner('seconds', this.seconds);
         } else if (type === 'seconds') {
           this.$emit('select-range', 6, 8);
-          this.adjustElTop('minute', this.minutes);
-          this.adjustElTop('hour', this.hours);
+          this.adjustSpinner('minutes', this.minutes);
+          this.adjustSpinner('hours', this.hours);
         }
         this.currentScrollbar = type;
       },
 
       bindScrollEvent() {
         const bindFuntion = (type) => {
-          this[`${type}El`].onscroll = (e) => {
+          this.$refs[type].wrap.onscroll = (e) => {
+            // TODO: scroll is emitted when set scrollTop programatically
+            // should find better solutions in the future!
             this.handleScroll(type, e);
           };
         };
-        bindFuntion('hour');
-        bindFuntion('minute');
-        bindFuntion('second');
+        bindFuntion('hours');
+        bindFuntion('minutes');
+        bindFuntion('seconds');
       },
 
       handleScroll(type) {
-        const adjust = {};
-        adjust[`${type}s`] = Math.min(Math.floor((this[`${type}El`].scrollTop - 80) / 32 + 3), (`${type}` === 'hour' ? 23 : 59));
-        this.$emit('change', adjust);
+        const value = Math.min(Math.floor((this.$refs[type].wrap.scrollTop - 80) / 32 + 3), (type === 'hours' ? 23 : 59));
+        this.modifyDateField(type, value);
       },
 
-      adjustScrollTop() {
-        this.adjustElTop('hour', this.hours);
-        this.adjustElTop('minute', this.minutes);
-        this.adjustElTop('second', this.seconds);
+      // NOTE: used by datetime / date-range panel
+      //       renamed from adjustScrollTop
+      //       should try to refactory it
+      adjustSpinners() {
+        this.adjustSpinner('hours', this.hours);
+        this.adjustSpinner('minutes', this.minutes);
+        this.adjustSpinner('seconds', this.seconds);
       },
 
-      adjustElTop(type, value) {
-        if (!this[`${type}El`]) return;
-        this[`${type}El`].scrollTop = Math.max(0, (value - 2.5) * 32 + 80);
+      adjustSpinner(type, value) {
+        const el = this.$refs[type].wrap;
+        if (el) {
+          el.scrollTop = Math.max(0, (value - 2.5) * 32 + 80);
+        }
       },
 
       scrollDown(step) {
@@ -217,8 +184,8 @@
           now = (now + step + 60) % 60;
         }
 
-        this.$emit('change', { [label]: now });
-        this.adjustElTop(label.slice(0, -1), now);
+        this.modifyDateField(label, now);
+        this.adjustSpinner(label, now);
       }
     }
   };

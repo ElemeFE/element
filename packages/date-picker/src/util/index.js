@@ -21,10 +21,6 @@ const newArray = function(start, end) {
   return result;
 };
 
-export const equalDate = function(dateA, dateB) {
-  return dateA === dateB || new Date(dateA).getTime() === new Date(dateB).getTime();
-};
-
 export const toDate = function(date) {
   return isDate(date) ? new Date(date) : null;
 };
@@ -93,44 +89,6 @@ export const getWeekNumber = function(src) {
   return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
 };
 
-export const prevMonth = function(src) {
-  const year = src.getFullYear();
-  const month = src.getMonth();
-  const date = src.getDate();
-
-  const newYear = month === 0 ? year - 1 : year;
-  const newMonth = month === 0 ? 11 : month - 1;
-
-  const newMonthDayCount = getDayCountOfMonth(newYear, newMonth);
-  if (newMonthDayCount < date) {
-    src.setDate(newMonthDayCount);
-  }
-
-  src.setMonth(newMonth);
-  src.setFullYear(newYear);
-
-  return new Date(src.getTime());
-};
-
-export const nextMonth = function(src) {
-  const year = src.getFullYear();
-  const month = src.getMonth();
-  const date = src.getDate();
-
-  const newYear = month === 11 ? year + 1 : year;
-  const newMonth = month === 11 ? 0 : month + 1;
-
-  const newMonthDayCount = getDayCountOfMonth(newYear, newMonth);
-  if (newMonthDayCount < date) {
-    src.setDate(newMonthDayCount);
-  }
-
-  src.setMonth(newMonth);
-  src.setFullYear(newYear);
-
-  return new Date(src.getTime());
-};
-
 export const getRangeHours = function(ranges) {
   const hours = [];
   let disabledHours = [];
@@ -154,26 +112,105 @@ export const getRangeHours = function(ranges) {
   return hours;
 };
 
-export const limitRange = function(date, ranges, format = 'yyyy-MM-dd HH:mm:ss') {
-  if (!ranges || !ranges.length) return date;
+export const range = function(n) {
+  // see https://stackoverflow.com/questions/3746725/create-a-javascript-array-containing-1-n
+  return Array.apply(null, {length: n}).map((_, n) => n);
+};
 
-  const len = ranges.length;
+export const modifyDate = function(date, y, m, d) {
+  return new Date(y, m, d, date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds());
+};
 
-  date = dateUtil.parse(dateUtil.format(date, format), format);
-  for (let i = 0; i < len; i++) {
-    const range = ranges[i];
-    if (date >= range[0] && date <= range[1]) {
-      return date;
-    }
-  }
+export const modifyTime = function(date, h, m, s) {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate(), h, m, s, date.getMilliseconds());
+};
 
-  let maxDate = ranges[0][0];
-  let minDate = ranges[0][0];
+export const clearTime = function(date) {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+};
 
-  ranges.forEach(range => {
-    minDate = new Date(Math.min(range[0], minDate));
-    maxDate = new Date(Math.max(range[1], maxDate));
+export const clearMilliseconds = function(date) {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), 0);
+};
+
+export const limitTimeRange = function(date, ranges, format = 'HH:mm:ss') {
+  // TODO: refactory a more elegant solution
+  if (ranges.length === 0) return date;
+  const normalizeDate = date => dateUtil.parse(dateUtil.format(date, format), format);
+  const ndate = normalizeDate(date);
+  const nranges = ranges.map(range => range.map(normalizeDate));
+  if (nranges.some(nrange => ndate >= nrange[0] && ndate <= nrange[1])) return date;
+
+  let minDate = nranges[0][0];
+  let maxDate = nranges[0][0];
+
+  nranges.forEach(nrange => {
+    minDate = new Date(Math.min(nrange[0], minDate));
+    maxDate = new Date(Math.max(nrange[1], minDate));
   });
 
-  return date < minDate ? minDate : maxDate;
+  const ret = ndate < minDate ? minDate : maxDate;
+  // preserve Year/Month/Date
+  return modifyDate(
+    ret,
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate()
+  );
+};
+
+export const timeWithinRange = function(date, selectableRange, format) {
+  const limitedDate = limitTimeRange(date, selectableRange, format);
+  return limitedDate.getTime() === date.getTime();
+};
+
+export const prevMonth = function(date) {
+  let year = date.getFullYear();
+  let month = date.getMonth();
+  if (month === 0) {
+    year -= 1;
+    month = 11;
+  } else {
+    month -= 1;
+  }
+  const monthDate = Math.min(date.getDate(), getDayCountOfMonth(year, month));
+  return modifyDate(date, year, month, monthDate);
+};
+
+export const nextMonth = function(date) {
+  let year = date.getFullYear();
+  let month = date.getMonth();
+  if (month === 11) {
+    year += 1;
+    month = 0;
+  } else {
+    month += 1;
+  }
+  const monthDate = Math.min(date.getDate(), getDayCountOfMonth(year, month));
+  return modifyDate(date, year, month, monthDate);
+};
+
+// check for leap year Feburary
+export const prevYear = function(date, amount = 1) {
+  const year = date.getFullYear() - amount;
+  const month = date.getMonth();
+  const monthDate = Math.min(date.getDate(), getDayCountOfMonth(year, month));
+  return modifyDate(date, year, month, monthDate);
+};
+
+export const nextYear = function(date, amount = 1) {
+  const year = date.getFullYear() + amount;
+  const month = date.getMonth();
+  const monthDate = Math.min(date.getDate(), getDayCountOfMonth(year, month));
+  return modifyDate(date, year, month, monthDate);
+};
+
+// {prev, next} Date works for daylight saving time
+// add / subtract one day's duration does not work
+export const prevDate = function(date, amount = 1) {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate() - amount);
+};
+
+export const nextDate = function(date, amount = 1) {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate() + amount);
 };

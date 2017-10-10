@@ -13,9 +13,10 @@
     @blur="handleBlur"
     @keydown.native="handleKeydown"
     :value="displayValue"
+    @input="value => userInput = value"
     @mouseenter.native="handleMouseEnter"
     @mouseleave.native="showClose = false"
-    @change.native="displayValue = $event.target.value"
+    @change.native="handleChange"
     :validateEvent="false"
     :prefix-icon="triggerClass"
     ref="reference">
@@ -36,6 +37,7 @@
     @click="handleRangeClick"
     @mouseenter="handleMouseEnter"
     @mouseleave="showClose = false"
+    @keydown="handleKeydown"
     ref="reference"
     v-clickoutside="handleClose"
     v-else>
@@ -43,15 +45,17 @@
     <input
       :placeholder="startPlaceholder"
       :value="displayValue && displayValue[0]"
-      @keydown="handleKeydown"
+      @input="handleStartInput"
       @change="handleStartChange"
+      @focus="handleFocus"
       class="el-range-input">
     <span class="el-range-separator">{{ rangeSeparator }}</span>
     <input
       :placeholder="endPlaceholder"
       :value="displayValue && displayValue[1]"
-      @keydown="handleKeydown"
+      @input="handleEndInput"
       @change="handleEndChange"
+      @focus="handleFocus"
       class="el-range-input">
     <i
       @click="handleClickIcon"
@@ -65,7 +69,7 @@
 <script>
 import Vue from 'vue';
 import Clickoutside from 'element-ui/src/utils/clickoutside';
-import { formatDate, parseDate, getWeekNumber, equalDate, isDate } from './util';
+import { formatDate, parseDate, isDate, getWeekNumber } from './util';
 import Popper from 'element-ui/src/utils/vue-popper';
 import Emitter from 'element-ui/src/mixins/emitter';
 import Focus from 'element-ui/src/mixins/focus';
@@ -225,6 +229,26 @@ const PLACEMENT_MAP = {
   right: 'bottom-end'
 };
 
+const parseAsFormatAndType = (value, cutsomFormat, type, rangeSeparator = '-') => {
+  if (!value) return null;
+  const parser = (
+    TYPE_VALUE_RESOLVER_MAP[type] ||
+    TYPE_VALUE_RESOLVER_MAP['default']
+  ).parser;
+  const format = cutsomFormat || DEFAULT_FORMATS[type];
+  return parser(value, format, rangeSeparator);
+};
+
+const formatAsFormatAndType = (value, cutsomFormat, type) => {
+  if (!value) return null;
+  const formatter = (
+    TYPE_VALUE_RESOLVER_MAP[type] ||
+    TYPE_VALUE_RESOLVER_MAP['default']
+  ).formatter;
+  const format = cutsomFormat || DEFAULT_FORMATS[type];
+  return formatter(value, format);
+};
+
 // only considers date-picker's value: Date or [Date, Date]
 const valueEquals = function(a, b) {
   const aIsArray = a instanceof Array;
@@ -245,6 +269,7 @@ export default {
   props: {
     size: String,
     format: String,
+    valueFormat: String,
     readonly: Boolean,
     placeholder: String,
     startPlaceholder: String,
@@ -280,33 +305,44 @@ export default {
     return {
       pickerVisible: false,
       showClose: false,
-      currentValue: '',
+      userInput: null,
+      valueOnOpen: null,  // value when picker opens, used to determine whether to emit change
       unwatchPickerOptions: null
     };
   },
 
   watch: {
     pickerVisible(val) {
-      if (!val) this.dispatch('ElFormItem', 'el.form.blur');
       if (this.readonly || this.disabled) return;
-      val ? this.showPicker() : this.hidePicker();
-    },
-    currentValue(val) {
-      if (val) return;
-      if (this.picker && typeof this.picker.handleClear === 'function') {
-        this.picker.handleClear();
+      if (val) {
+        this.showPicker();
+        this.valueOnOpen = this.value;
       } else {
-        this.$emit('input');
+        this.hidePicker();
+        this.emitChange(this.value);
+        // flush user input if it is parsable
+        // this.displayValue here is not a typo, it merges text for both panels in range mode
+        const parsedValue = this.parseString(this.displayValue);
+        if (this.userInput && parsedValue && this.isValidValue(parsedValue)) {
+          this.userInput = null;
+        }
+        this.dispatch('ElFormItem', 'el.form.blur');
+        this.blur();
       }
     },
-    value: {
+    parsedValue: {
       immediate: true,
       handler(val) {
-        this.currentValue = isDate(val) ? new Date(val) : val;
+        if (this.picker) {
+          this.picker.value = val;
+        }
       }
     },
-    displayValue(val) {
-      this.dispatch('ElFormItem', 'el.form.change');
+    defaultValue(val) {
+      // NOTE: should eventually move to jsx style picker + panel ?
+      if (this.picker) {
+        this.picker.defaultValue = val;
+      }
     }
   },
 
@@ -328,7 +364,7 @@ export default {
     },
 
     valueIsEmpty() {
-      const val = this.currentValue;
+      const val = this.value;
       if (Array.isArray(val)) {
         for (let i = 0, len = val.length; i < len; i++) {
           if (val[i]) {
@@ -366,36 +402,24 @@ export default {
       return HAVE_TRIGGER_TYPES.indexOf(this.type) !== -1;
     },
 
-    displayValue: {
-      get() {
-        const value = this.currentValue;
-        if (!value) return;
-        const formatter = (
-          TYPE_VALUE_RESOLVER_MAP[this.type] ||
-          TYPE_VALUE_RESOLVER_MAP['default']
-        ).formatter;
-        const format = DEFAULT_FORMATS[this.type];
+    displayValue() {
+      const formattedValue = formatAsFormatAndType(this.parsedValue, this.format, this.type, this.rangeSeparator);
+      if (Array.isArray(this.userInput)) {
+        return [
+          this.userInput[0] || (formattedValue && formattedValue[0]) || '',
+          this.userInput[1] || (formattedValue && formattedValue[1]) || ''
+        ];
+      } else {
+        return this.userInput !== null ? this.userInput : formattedValue || '';
+      }
+    },
 
-        return formatter(value, this.format || format);
-      },
-
-      set(value) {
-        if (value) {
-          const type = this.type;
-          const parser = (
-            TYPE_VALUE_RESOLVER_MAP[type] ||
-            TYPE_VALUE_RESOLVER_MAP['default']
-          ).parser;
-          const parsedValue = parser(value, this.format || DEFAULT_FORMATS[type]);
-
-          if (parsedValue && this.picker) {
-            this.picker.value = parsedValue;
-          }
-        } else {
-          this.$emit('input', value);
-          this.picker.value = value;
-        }
-        this.$forceUpdate();
+    parsedValue() {
+      const isParsed = isDate(this.value) || (Array.isArray(this.value) && this.value.every(isDate));
+      if (this.valueFormat && !isParsed) {
+        return parseAsFormatAndType(this.value, this.valueFormat, this.type, this.rangeSeparator) || this.value;
+      } else {
+        return this.value;
       }
     }
   },
@@ -410,6 +434,41 @@ export default {
   },
 
   methods: {
+    blur() {
+      this.refInput.forEach(input => input.blur());
+    },
+
+    // {parse, formatTo} Value deals maps component value with internal Date
+    // parseValue validates value according to panel, requires picker to be mounted
+    parseValue(value, customFormat) {
+      if (!value || (!Array.isArray(value) || !value.every(val => val))) {
+        return null;
+      }
+      const format = customFormat || this.valueFormat;
+      const parsedValue = parseAsFormatAndType(value, format, this.type, this.rangeSeparator);
+      return this.isValidValue(parsedValue) ? parsedValue : null;
+    },
+
+    formatToValue(date, customFormat) {
+      if (this.valueFormat && (isDate(date) || Array.isArray(date))) {
+        const format = customFormat || this.valueFormat;
+        return formatAsFormatAndType(date, format, this.type, this.rangeSeparator);
+      } else {
+        return date;
+      }
+    },
+
+    // {parse, formatTo} String deals with user input
+    parseString(value) {
+      const type = Array.isArray(value) ? this.type : this.type.replace('range', '');
+      return parseAsFormatAndType(value, this.format, type);
+    },
+
+    formatToString(value) {
+      const type = Array.isArray(value) ? this.type : this.type.replace('range', '');
+      return formatAsFormatAndType(value, this.format, type);
+    },
+
     handleMouseEnter() {
       if (this.readonly || this.disabled) return;
       if (!this.valueIsEmpty && this.clearable) {
@@ -417,45 +476,74 @@ export default {
       }
     },
 
-    handleStartChange(event) {
-      if (this.displayValue && this.displayValue[1]) {
-        this.displayValue = [event.target.value, this.displayValue[1]];
+    handleChange() {
+      if (this.userInput) {
+        const value = this.parseString(this.displayValue);
+        if (value) {
+          this.picker.value = value;
+          if (this.isValidValue(value)) {
+            this.emitInput(value);
+            this.userInput = null;
+          }
+        }
+      }
+    },
+
+    handleStartInput(event) {
+      if (this.userInput) {
+        this.userInput = [event.target.value, this.userInput[1]];
       } else {
-        this.displayValue = [event.target.value, event.target.value];
+        this.userInput = [event.target.value, null];
+      }
+    },
+
+    handleEndInput(event) {
+      if (this.userInput) {
+        this.userInput = [this.userInput[0], event.target.value];
+      } else {
+        this.userInput = [null, event.target.value];
+      }
+    },
+
+    handleStartChange(event) {
+      const value = this.parseString(this.userInput && this.userInput[0]);
+      if (value) {
+        this.userInput = [this.formatToString(value), this.displayValue[1]];
+        const newValue = [value, this.picker.value && this.picker.value[1]];
+        this.picker.value = newValue;
+        if (this.isValidValue(newValue)) {
+          this.emitInput(newValue);
+          this.userInput = null;
+        }
       }
     },
 
     handleEndChange(event) {
-      if (this.displayValue && this.displayValue[0]) {
-        this.displayValue = [this.displayValue[0], event.target.value];
-      } else {
-        this.displayValue = [event.target.value, event.target.value];
+      const value = this.parseString(this.userInput && this.userInput[1]);
+      if (value) {
+        this.userInput = [this.displayValue[0], this.formatToString(value)];
+        const newValue = [this.picker.value && this.picker.value[0], value];
+        this.picker.value = newValue;
+        if (this.isValidValue(newValue)) {
+          this.emitInput(newValue);
+          this.userInput = null;
+        }
       }
     },
 
     handleClickIcon(event) {
       if (this.readonly || this.disabled) return;
       if (this.showClose) {
-        this.currentValue = this.$options.defaultValue || '';
-        this.showClose = false;
         event.stopPropagation();
+        this.emitInput(null);
+        this.emitChange(null);
+        this.showClose = false;
+        if (this.picker && typeof this.picker.handleClear === 'function') {
+          this.picker.handleClear();
+        }
       } else {
         this.pickerVisible = !this.pickerVisible;
       }
-    },
-
-    dateChanged(dateA, dateB) {
-      if (Array.isArray(dateA)) {
-        let len = dateA.length;
-        if (!dateB) return true;
-        while (len--) {
-          if (!equalDate(dateA[len], dateB[len])) return true;
-        }
-      } else {
-        if (!equalDate(dateA, dateB)) return true;
-      }
-
-      return false;
     },
 
     handleClose() {
@@ -481,10 +569,54 @@ export default {
     handleKeydown(event) {
       const keyCode = event.keyCode;
 
-      // TAB or ESC
-      if (keyCode === 9 || keyCode === 27) {
+      // ESC
+      if (keyCode === 27) {
         this.pickerVisible = false;
         event.stopPropagation();
+        return;
+      }
+
+      // Tab
+      if (keyCode === 9) {
+        if (!this.ranged) {
+          this.handleChange();
+          this.pickerVisible = this.picker.visible = false;
+          this.blur();
+          event.stopPropagation();
+        } else {
+          // user may change focus between two input
+          setTimeout(() => {
+            if (this.refInput.indexOf(document.activeElement) === -1) {
+              this.pickerVisible = false;
+              this.blur();
+              event.stopPropagation();
+            }
+          }, 0);
+        }
+        return;
+      }
+
+      // Enter
+      if (keyCode === 13 && this.displayValue) {
+        const value = this.parseString(this.displayValue);
+        if (this.isValidValue(value)) {
+          this.handleChange();
+          this.pickerVisible = this.picker.visible = false;
+          this.blur();
+        }
+        event.stopPropagation();
+        return;
+      }
+
+      // if user is typing, do not let picker handle key input
+      if (this.userInput) {
+        event.stopPropagation();
+        return;
+      }
+
+      // delegate other keys to panel
+      if (this.picker && this.picker.handleKeydown) {
+        this.picker.handleKeydown(event);
       }
     },
 
@@ -514,22 +646,17 @@ export default {
 
       this.updatePopper();
 
-      if (this.currentValue instanceof Date) {
-        this.picker.date = new Date(this.currentValue.getTime());
-      } else {
-        this.picker.value = this.currentValue;
-      }
+      this.picker.value = this.parsedValue;
       this.picker.resetView && this.picker.resetView();
 
       this.$nextTick(() => {
-        this.picker.adjustScrollTop && this.picker.adjustScrollTop();
+        this.picker.adjustSpinners && this.picker.adjustSpinners();
       });
     },
 
     mountPicker() {
-      const defaultValue = this.defaultValue || this.currentValue;
-      const panel = merge({}, this.panel, { defaultValue });
-      this.picker = new Vue(panel).$mount();
+      this.picker = new Vue(this.panel).$mount();
+      this.picker.defaultValue = this.defaultValue;
       this.picker.popperClass = this.popperClass;
       this.popperElm = this.picker.$el;
       this.picker.width = this.reference.getBoundingClientRect().width;
@@ -566,15 +693,10 @@ export default {
       this.picker.resetView && this.picker.resetView();
 
       this.picker.$on('dodestroy', this.doDestroy);
-      this.picker.$on('pick', (date = '', visible = false, user = true) => {
-        // do not emit if values are same
-        if (!valueEquals(this.value, date)) {
-          this.$emit('input', date);
-          if (user && this.value !== date) {
-            this.$nextTick(() => this.$emit('change', this.displayValue));
-          };
-        }
+      this.picker.$on('pick', (date = '', visible = false) => {
+        this.userInput = null;
         this.pickerVisible = this.picker.visible = visible;
+        this.emitInput(date);
         this.picker.resetView && this.picker.resetView();
       });
 
@@ -598,6 +720,33 @@ export default {
           this.unwatchPickerOptions();
         }
         this.picker.$el.parentNode.removeChild(this.picker.$el);
+      }
+    },
+
+    emitChange(val) {
+      const formatted = this.formatToValue(val);
+      if (!valueEquals(this.valueOnOpen, formatted)) {
+        this.$emit('change', formatted);
+        this.dispatch('ElFormItem', 'el.form.change', formatted);
+        this.valueOnOpen = formatted;
+      }
+    },
+
+    emitInput(val) {
+      const formatted = this.formatToValue(val);
+      if (!valueEquals(this.value, formatted)) {
+        this.$emit('input', formatted);
+      }
+    },
+
+    isValidValue(value) {
+      if (!this.picker) {
+        this.mountPicker();
+      }
+      if (this.picker.isValidValue) {
+        return value && this.picker.isValidValue(value);
+      } else {
+        return true;
       }
     }
   }

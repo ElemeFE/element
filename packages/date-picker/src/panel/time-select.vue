@@ -9,7 +9,7 @@
       <el-scrollbar noresize wrap-class="el-picker-panel__content">
         <div class="time-select-item"
           v-for="item in items"
-          :class="{ selected: value === item.value, disabled: item.disabled }"
+          :class="{ selected: value === item.value, disabled: item.disabled, default: item.value === defaultValue }"
           :disabled="item.disabled"
           @click="handleClick(item)">{{ item.value }}</div>
       </el-scrollbar>
@@ -78,11 +78,6 @@
     watch: {
       value(val) {
         if (!val) return;
-        if (this.minTime && compareTime(val, this.minTime) < 0) {
-          this.$emit('pick', '', false, false);
-        } else if (this.maxTime && compareTime(val, this.maxTime) > 0) {
-          this.$emit('pick', '', false, false);
-        }
         this.$nextTick(() => this.scrollToOption());
       }
     },
@@ -95,34 +90,47 @@
       },
 
       handleClear() {
-        this.$emit('pick', '', false, false);
+        this.$emit('pick');
       },
 
-      scrollToOption(className = 'selected') {
+      scrollToOption(selector = '.selected') {
         const menu = this.$refs.popper.querySelector('.el-picker-panel__content');
-        scrollIntoView(menu, menu.getElementsByClassName(className)[0]);
+        scrollIntoView(menu, menu.querySelector(selector));
       },
 
       handleMenuEnter() {
-        this.$nextTick(() => this.scrollToOption());
+        const selected = this.items.map(item => item.value).indexOf(this.value) !== -1;
+        const hasDefault = this.items.map(item => item.value).indexOf(this.defaultValue) !== -1;
+        const option = (selected && '.selected') || (hasDefault && '.default') || '.time-select-item:not(.disabled)';
+        this.$nextTick(() => this.scrollToOption(option));
       },
 
       scrollDown(step) {
         const items = this.items;
+        const length = items.length;
+        let total = items.length;
         let index = items.map(item => item.value).indexOf(this.value);
-        let length = items.length;
-        let total = Math.abs(step);
-        step = step > 0 ? 1 : -1;
-        while (length-- && total) {
-          index = (index + step + items.length) % items.length;
-          const item = items[index];
-          if (!item.disabled) {
-            total--;
+        while (total--) {
+          index = (index + step + length) % length;
+          if (!items[index].disabled) {
+            this.$emit('pick', items[index].value, true);
+            return;
           }
         }
-        if (!items[index].disabled) {
-          this.value = items[index].value;
-          this.$emit('pick', this.value, true);
+      },
+
+      isValidValue(date) {
+        return this.items.filter(item => !item.disabled).map(item => item.value).indexOf(date) !== -1;
+      },
+
+      handleKeydown(event) {
+        const keyCode = event.keyCode;
+        if (keyCode === 38 || keyCode === 40) {
+          const mapping = { 40: 1, 38: -1 };
+          const offset = mapping[keyCode.toString()];
+          this.scrollDown(offset);
+          event.stopPropagation();
+          return;
         }
       }
     },
@@ -134,6 +142,7 @@
         end: '18:00',
         step: '00:30',
         value: '',
+        defaultValue: '',
         visible: false,
         minTime: '',
         maxTime: '',

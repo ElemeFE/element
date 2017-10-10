@@ -23,7 +23,7 @@
                 :placeholder="t('el.datepicker.selectDate')"
                 :value="visibleDate"
                 size="small"
-                @change.native="visibleDate = $event.target.value" />
+                @change.native="handleVisibleDateChange" />
             </span>
             <span class="el-date-picker__editor-wrap">
               <el-input
@@ -32,7 +32,7 @@
                 :placeholder="t('el.datepicker.selectTime')"
                 :value="visibleTime"
                 size="small"
-                @change.native="visibleTime = $event.target.value" />
+                @change.native="handleVisibleTimeChange" />
               <time-picker
                 ref="timepicker"
                 :date="date"
@@ -82,27 +82,27 @@
             <date-table
               v-show="currentView === 'date'"
               @pick="handleDatePick"
-              :year="year"
-              :month="month"
-              :date="date"
-              :week="week"
               :selection-mode="selectionMode"
               :first-day-of-week="firstDayOfWeek"
+              :value="new Date(value)"
+              :default-value="defaultValue ? new Date(defaultValue) : null"
+              :date="date"
               :disabled-date="disabledDate">
             </date-table>
             <year-table
-              ref="yearTable"
-              :year="year"
-              :date="date"
               v-show="currentView === 'year'"
               @pick="handleYearPick"
+              :value="new Date(value)"
+              :default-value="defaultValue ? new Date(defaultValue) : null"
+              :date="date"
               :disabled-date="disabledDate">
             </year-table>
             <month-table
-              :month="month"
-              :date="date"
               v-show="currentView === 'month'"
               @pick="handleMonthPick"
+              :value="new Date(value)"
+              :default-value="defaultValue ? new Date(defaultValue) : null"
+              :date="date"
               :disabled-date="disabledDate">
             </month-table>
           </div>
@@ -126,7 +126,20 @@
 </template>
 
 <script type="text/babel">
-  import { formatDate, parseDate, getWeekNumber } from '../util';
+  import {
+    formatDate,
+    parseDate,
+    getWeekNumber,
+    isDate,
+    modifyDate,
+    modifyTime,
+    clearMilliseconds,
+    clearTime,
+    prevYear,
+    nextYear,
+    prevMonth,
+    nextMonth
+  } from '../util';
   import Locale from 'element-ui/src/mixins/locale';
   import ElInput from 'element-ui/packages/input';
   import TimePicker from './time';
@@ -138,23 +151,33 @@
     mixins: [Locale],
 
     watch: {
-      value(newVal) {
-        if (!newVal) return;
-        newVal = new Date(newVal);
-        if (!isNaN(newVal)) {
-          if (typeof this.disabledDate === 'function' &&
-            this.disabledDate(new Date(newVal))) {
-            return;
+      showTime(val) {
+        /* istanbul ignore if */
+        if (!val) return;
+        this.$nextTick(_ => {
+          const inputElm = this.$refs.input.$el;
+          if (inputElm) {
+            this.pickerWidth = inputElm.getBoundingClientRect().width + 10;
           }
-          this.date = newVal;
-          this.year = newVal.getFullYear();
-          this.month = newVal.getMonth();
-          this.$emit('pick', newVal, false, false);
+        });
+      },
+
+      value(val) {
+        if (isDate(val)) {
+          this.date = new Date(val);
+        } else {
+          this.date = this.defaultValue ? new Date(this.defaultValue) : new Date();
+        }
+      },
+
+      defaultValue(val) {
+        if (!isDate(this.value)) {
+          this.date = val ? new Date(val) : new Date();
         }
       },
 
       timePickerVisible(val) {
-        if (val) this.$nextTick(() => this.$refs.timepicker.adjustScrollTop());
+        if (val) this.$nextTick(() => this.$refs.timepicker.adjustSpinners());
       },
 
       selectionMode(newVal) {
@@ -166,24 +189,30 @@
         } else if (newVal === 'week') {
           this.week = getWeekNumber(this.date);
         }
-      },
-
-      date(newVal) {
-        this.year = newVal.getFullYear();
-        this.month = newVal.getMonth();
-        if (this.selectionMode === 'week') this.week = getWeekNumber(newVal);
       }
     },
 
     methods: {
       handleClear() {
-        this.date = this.$options.defaultValue ? new Date(this.$options.defaultValue) : new Date();
+        this.date = this.defaultValue ? new Date(this.defaultValue) : new Date();
         this.$emit('pick');
       },
 
-      resetDate() {
-        this.date = new Date(this.date);
+      emit(value, ...args) {
+        if (!value) {
+          this.emit('pick', value, ...args);
+          return;
+        }
+        if (this.showTime) {
+          this.$emit('pick', clearMilliseconds(value), ...args);
+        } else {
+          this.$emit('pick', clearTime(value), ...args);
+        }
       },
+
+      // resetDate() {
+      //   this.date = new Date(this.date);
+      // },
 
       showMonthPicker() {
         this.currentView = 'month';
@@ -203,38 +232,26 @@
       // },
 
       prevMonth() {
-        this.month--;
-        if (this.month < 0) {
-          this.month = 11;
-          this.year--;
-        }
+        this.date = prevMonth(this.date);
       },
 
       nextMonth() {
-        this.month++;
-        if (this.month > 11) {
-          this.month = 0;
-          this.year++;
+        this.date = nextMonth(this.date);
+      },
+
+      prevYear() {
+        if (this.currentView === 'year') {
+          this.date = prevYear(this.date, 10);
+        } else {
+          this.date = prevYear(this.date);
         }
       },
 
       nextYear() {
         if (this.currentView === 'year') {
-          this.$refs.yearTable.nextTenYear();
+          this.date = nextYear(this.date, 10);
         } else {
-          this.year++;
-          this.date.setFullYear(this.year);
-          this.resetDate();
-        }
-      },
-
-      prevYear() {
-        if (this.currentView === 'year') {
-          this.$refs.yearTable.prevTenYear();
-        } else {
-          this.year--;
-          this.date.setFullYear(this.year);
-          this.resetDate();
+          this.date = nextYear(this.date);
         }
       },
 
@@ -244,80 +261,61 @@
         }
       },
 
-      handleTimePick(picker, visible) {
-        if (picker) {
-          let oldDate = new Date(this.date.getTime());
-          let hour = picker.getHours();
-          let minute = picker.getMinutes();
-          let second = picker.getSeconds();
-          oldDate.setHours(hour);
-          oldDate.setMinutes(minute);
-          oldDate.setSeconds(second);
-          if (typeof this.disabledDate === 'function' && this.disabledDate(oldDate)) {
-            this.$refs.timepicker.disabled = true;
-            return;
-          }
-          this.$refs.timepicker.disabled = false;
-          this.date = new Date(oldDate.getTime());
+      handleTimePick(value, visible, first) {
+        const newDate = modifyTime(this.date, value.getHours(), value.getMinutes(), value.getSeconds());
+        if (typeof this.disabledDate === 'function' && this.disabledDate(newDate)) {
+          this.$refs.timepicker.disabled = true;
+          return;
         }
+        this.$refs.timepicker.disabled = false;
+        this.date = newDate;
+        this.emit(this.date, true);
 
-        this.timePickerVisible = visible;
+        if (!first) {
+          this.timePickerVisible = visible;
+        }
       },
 
       handleMonthPick(month) {
-        this.month = month;
-        const selectionMode = this.selectionMode;
-        if (selectionMode !== 'month') {
-          this.date.setMonth(month);
+        if (this.selectionMode === 'month') {
+          this.date = modifyDate(this.date, this.year, month, 1);
+          this.emit(this.date);
+        } else {
+          this.date = modifyDate(this.date, this.year, month, this.monthDate);
+          // TODO: should emit intermediate value ??
+          // this.emit(this.date);
           this.currentView = 'date';
-          this.resetDate();
-        } else {
-          this.date.setMonth(month);
-          this.year && this.date.setFullYear(this.year);
-          this.resetDate();
-          const value = new Date(this.date.getFullYear(), month, 1);
-          this.$emit('pick', value);
         }
       },
 
-      handleDatePick(value, close, user = true) {
+      handleDatePick(value) {
         if (this.selectionMode === 'day') {
-          if (!this.showTime) {
-            this.$emit('pick', new Date(value.getTime()), false, user);
-          }
-          this.date.setFullYear(value.getFullYear());
-          this.date.setMonth(value.getMonth(), value.getDate());
+          this.date = modifyDate(this.date, value.getFullYear(), value.getMonth(), value.getDate());
+          this.emit(this.date, this.showTime);
         } else if (this.selectionMode === 'week') {
-          this.week = value.week;
-          this.$emit('pick', value.date, false, user);
+          this.emit(value.date);
         }
-
-        this.resetDate();
       },
 
-      handleYearPick(year, close = true, user) {
-        this.year = year;
-        if (!close) return;
-
-        this.date.setFullYear(year);
+      handleYearPick(year) {
         if (this.selectionMode === 'year') {
-          this.$emit('pick', new Date(year, 0, 1), false, user);
+          this.date = modifyDate(this.date, year, 0, 1);
+          this.emit(this.date);
         } else {
+          this.date = modifyDate(this.date, year, this.month, this.monthDate);
+          // TODO: should emit intermediate value ??
+          // this.emit(this.date, true);
           this.currentView = 'month';
         }
-
-        this.resetDate();
       },
 
       changeToNow() {
-        this.date.setTime(+new Date());
-        this.$emit('pick', new Date(this.date.getTime()));
-        this.resetDate();
+        this.date = new Date();
+        this.emit(this.date);
       },
 
       confirm() {
-        this.date.setMilliseconds(0);
-        this.$emit('pick', this.date);
+        this.emit(this.date);
       },
 
       resetView() {
@@ -328,24 +326,18 @@
         } else {
           this.currentView = 'date';
         }
-
-        if (this.selectionMode !== 'week') {
-          this.year = this.date.getFullYear();
-          this.month = this.date.getMonth();
-        }
       },
 
       handleEnter() {
-        document.body.addEventListener('keydown', this.handleKeyDown);
+        document.body.addEventListener('keydown', this.handleKeydown);
       },
 
       handleLeave() {
-        this.$refs.timepicker && this.$refs.timepicker.$emit('pick');
         this.$emit('dodestory');
-        document.body.removeEventListener('keydown', this.handleKeyDown);
+        document.body.removeEventListener('keydown', this.handleKeydown);
       },
 
-      handleKeyDown(e) {
+      handleKeydown(e) {
         const keyCode = e.keyCode;
         const list = [38, 40, 37, 39];
         if (this.visible && !this.timePickerVisible) {
@@ -354,11 +346,8 @@
             event.stopPropagation();
             event.preventDefault();
           }
-
-          if (keyCode === 13) {
-            this.confirm();
-            event.stopPropagation();
-            event.preventDefault();
+          if (keyCode === 13) {    // Enter
+            this.$emit('pick', this.date, false);
           }
         }
       },
@@ -389,8 +378,39 @@
             continue;
           }
           this.date = newDate;
+          this.$emit('pick', newDate, true);
           break;
         }
+      },
+
+      handleVisibleTimeChange(event) {
+        const time = parseDate(event.target.value, this.timeFormat);
+        if (time) {
+          this.date = modifyDate(time, this.year, this.month, this.monthDate);
+          this.$refs.timepicker.value = this.date;
+          this.timePickerVisible = false;
+          this.$emit('pick', this.date, true);
+        }
+      },
+
+      handleVisibleDateChange(event) {
+        const date = parseDate(event.target.value, this.dateFormat);
+        if (date) {
+          if (typeof this.disabledDate === 'function' && this.disabledDate(date)) {
+            return;
+          }
+          this.date = modifyTime(date, this.date.getHours(), this.date.getMinutes(), this.date.getSeconds());
+          this.resetView();
+          this.$emit('pick', this.date, true);
+        }
+      },
+
+      isValidValue(value) {
+        return value && !isNaN(value) && (
+          typeof this.disabledDate === 'function'
+          ? !this.disabledDate(value)
+          : true
+        );
       }
     },
 
@@ -398,18 +418,12 @@
       TimePicker, YearTable, MonthTable, DateTable, ElInput
     },
 
-    mounted() {
-      if (this.date && !this.year) {
-        this.year = this.date.getFullYear();
-        this.month = this.date.getMonth();
-      }
-    },
-
     data() {
       return {
         popperClass: '',
-        date: this.$options.defaultValue ? new Date(this.$options.defaultValue) : new Date(),
+        date: new Date(),
         value: '',
+        defaultValue: null,
         showTime: false,
         selectionMode: 'day',
         shortcuts: '',
@@ -417,9 +431,6 @@
         currentView: 'date',
         disabledDate: '',
         firstDayOfWeek: 7,
-        year: null,
-        month: null,
-        week: null,
         showWeekNumber: false,
         timePickerVisible: false,
         format: ''
@@ -427,57 +438,40 @@
     },
 
     computed: {
+      year() {
+        return this.date.getFullYear();
+      },
+
+      month() {
+        return this.date.getMonth();
+      },
+
+      week() {
+        return getWeekNumber(this.date);
+      },
+
+      monthDate() {
+        return this.date.getDate();
+      },
+
       footerVisible() {
         return this.showTime;
       },
 
-      visibleTime: {
-        get() {
-          return formatDate(this.date, this.timeFormat);
-        },
-
-        set(val) {
-          if (val) {
-            const date = parseDate(val, this.timeFormat);
-            if (date) {
-              date.setFullYear(this.date.getFullYear());
-              date.setMonth(this.date.getMonth());
-              date.setDate(this.date.getDate());
-              this.date = date;
-              this.$refs.timepicker.value = date;
-              this.timePickerVisible = false;
-            }
-          }
-        }
+      visibleTime() {
+        const date = this.value || this.defaultValue;
+        return date ? formatDate(date, this.timeFormat) : '';
       },
 
-      visibleDate: {
-        get() {
-          return formatDate(this.date, this.dateFormat);
-        },
-
-        set(val) {
-          const date = parseDate(val, this.dateFormat);
-          if (!date) {
-            return;
-          }
-          if (typeof this.disabledDate === 'function' && this.disabledDate(date)) {
-            return;
-          }
-          date.setHours(this.date.getHours());
-          date.setMinutes(this.date.getMinutes());
-          date.setSeconds(this.date.getSeconds());
-          this.date = date;
-          this.resetView();
-        }
+      visibleDate() {
+        const date = this.value || this.defaultValue;
+        return date ? formatDate(date, this.dateFormat) : '';
       },
 
       yearLabel() {
-        const year = this.year;
-        if (!year) return '';
         const yearTranslation = this.t('el.datepicker.year');
         if (this.currentView === 'year') {
-          const startYear = Math.floor(year / 10) * 10;
+          const startYear = Math.floor(this.year / 10) * 10;
           if (yearTranslation) {
             return startYear + ' ' + yearTranslation + ' - ' + (startYear + 9) + ' ' + yearTranslation;
           }
