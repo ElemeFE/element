@@ -129,14 +129,21 @@
         </div>
       </div>
       <div class="el-picker-panel__footer" v-if="showTime">
-        <a
+        <el-button
+          size="mini"
+          type="text"
           class="el-picker-panel__link-btn"
-          @click="handleClear">{{ t('el.datepicker.clear') }}</a>
-        <button
-          type="button"
-          class="el-picker-panel__btn"
-          @click="handleConfirm()"
-          :disabled="btnDisabled">{{ t('el.datepicker.confirm') }}</button>
+          @click="handleClear">
+          {{ t('el.datepicker.clear') }}
+        </el-button>
+        <el-button
+          plain
+          size="mini"
+          class="el-picker-panel__link-btn"
+          :disabled="btnDisabled"
+          @click="handleConfirm()">
+          {{ t('el.datepicker.confirm') }}
+        </el-button>
       </div>
     </div>
   </transition>

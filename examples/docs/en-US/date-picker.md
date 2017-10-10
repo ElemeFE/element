@@ -381,13 +381,13 @@ This feature is at alpha stage. Feedback welcome.
 | start-placeholder | placeholder for the start date in range mode | string | — | — |
 | end-placeholder | placeholder for the end date in range mode | string | — | — |
 | type | type of the picker | string | year/month/date/datetime/ week/datetimerange/daterange | date |
-| format | format of the input box | string | year `yyyy`, month `MM`, day `dd`, hour `HH`, minute `mm`, second `ss` | yyyy-MM-dd |
+| format | format of the displayed value in the input box | string | year `yyyy`, month `MM`, day `dd`, hour `HH`, minute `mm`, second `ss` | yyyy-MM-dd |
 | align | alignment | left/center/right | left |
 | popper-class | custom class name for DatePicker's dropdown | string | — | — |
 | picker-options | additional options, check the table below | object | — | {} |
 | range-separator | range separator | string | — | '-' |
 | default-value | optional, default date of the calendar | Date | anything accepted by `new Date()` | — |
-| value-format | optional, format of bounded value | string | year `yyyy`, month `MM`, day `dd`, hour `HH`, minute `mm`, second `ss` | — |
+| value-format | optional, format of binding value. If not specified, the binding value will be a Date object | string | year `yyyy`, month `MM`, day `dd`, hour `HH`, minute `mm`, second `ss` | — |
 | name | same as `name` in native input | string | — | — |
 
 ### Picker Options
@@ -396,7 +396,7 @@ This feature is at alpha stage. Feedback welcome.
 | shortcuts | a { text, onClick } object array to set shortcut options, check the table below | object[] | — | — |
 | disabledDate | a function determining if a date is disabled with that date as its parameter. Should return a Boolean | function | — | — |
 | firstDayOfWeek | first day of week | Number | 1 to 7 | 7 |
-| onPick | a callback that triggers when the seleted date is changed. Only for `daterange` and `datetimerange`. | Function({ maxDate, minDate }) | - | - |
+| onPick | a callback that triggers when the selected date is changed. Only for `daterange` and `datetimerange`. | Function({ maxDate, minDate }) | - | - |
 
 ### shortcuts
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
@@ -408,11 +408,11 @@ This feature is at alpha stage. Feedback welcome.
 ### Events
 | Event Name | Description | Parameters |
 |---------|--------|---------|
-| change | triggers when user confirms the value | component's bounded value |
+| change | triggers when user confirms the value | component's binding value |
 | blur | triggers when Input blurs | (event: Event) |
 | focus | triggers when Input focuses | (event: Event) |
 
 ### Methods
 | Method | Description | Parameters |
 |------|--------|-------|
-| focus | focus the Input component | - |
+| focus | focus the Input component | — |

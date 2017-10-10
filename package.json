@@ -28,6 +28,10 @@
     "test": "npm run lint && npm run build:theme && cross-env CI_ENV=/dev/ karma start test/unit/karma.conf.js --single-run",
     "test:watch": "npm run build:theme && karma start test/unit/karma.conf.js"
   },
+  "faas": {
+    "domain": "element",
+    "public": "examples/element-ui"
+  },
   "repository": {
     "type": "git",
     "url": "git@github.com:ElemeFE/element.git"
@@ -54,6 +58,7 @@
     "vue": "^2.3.0"
   },
   "devDependencies": {
+    "algoliasearch": "^3.24.5",
     "babel-cli": "^6.14.0",
     "babel-core": "^6.14.0",
     "babel-loader": "^6.2.5",

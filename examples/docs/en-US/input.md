@@ -657,6 +657,7 @@ Attribute | Description | Type | Options | Default
 | props | configuration options, see the following table | object | — | — |
 |icon | icon name | string | — | — |
 |value | binding value | string | — | — |
+| debounce | debounce delay when typing, in milliseconds | number | — | 300 |
 |fetch-suggestions | a method to fetch input suggestions. When suggestions are ready, invoke `callback(data:[])` to return them to Autocomplete | Function(queryString, callback) | — | — |
 | popper-class | custom class name for autocomplete's dropdown | string | — | — |
 | trigger-on-focus | whether show suggestions when input focus | boolean | — | true |

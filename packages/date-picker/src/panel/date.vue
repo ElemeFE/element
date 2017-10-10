@@ -112,14 +112,20 @@
       <div
         class="el-picker-panel__footer"
         v-show="footerVisible && currentView === 'date'">
-        <a
-          href="JavaScript:"
+        <el-button
+          size="mini"
+          type="text"
           class="el-picker-panel__link-btn"
-          @click="changeToNow">{{ t('el.datepicker.now') }}</a>
-        <button
-          type="button"
-          class="el-picker-panel__btn"
-          @click="confirm">{{ t('el.datepicker.confirm') }}</button>
+          @click="changeToNow">
+          {{ t('el.datepicker.now') }}
+        </el-button>
+        <el-button
+          plain
+          size="mini"
+          class="el-picker-panel__link-btn"
+          @click="confirm">
+          {{ t('el.datepicker.confirm') }}
+        </el-button>
       </div>
     </div>
   </transition>

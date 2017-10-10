@@ -1676,7 +1676,7 @@ Search and select options with a keyword.
 | expand-trigger  | trigger mode of expanding current item | string | click / hover | click |
 | show-all-levels | whether to display all levels of the selected value in the input | boolean | — | true |
 | filterable  | whether the options can be searched | boolean | — | — |
-| debounce | debounce delay when typing filter keyword, in millisecond | number | — | 300 |
+| debounce | debounce delay when typing filter keyword, in milliseconds | number | — | 300 |
 | change-on-select | whether selecting an option of any level is permitted | boolean | — | false |
 | size  | size of Input | string | large / small / mini | — |
 
