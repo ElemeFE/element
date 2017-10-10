@@ -95,6 +95,7 @@ export default function calcTextareaHeight(
     }
     height = Math.min(maxHeight, height);
   }
-
+  hiddenTextarea.parentNode && hiddenTextarea.parentNode.removeChild(hiddenTextarea);
+  hiddenTextarea = null;
   return { height: height + 'px'};
 };

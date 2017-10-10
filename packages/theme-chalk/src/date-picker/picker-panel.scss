@@ -28,6 +28,7 @@
     text-align: right;
     background-color: $--color-white;
     position: relative;
+    font-size: 0;
   }
 
   @include e(shortcut) {
@@ -85,11 +86,7 @@
   }
 
   @include e(link-btn) {
-    cursor: pointer;
-    color: $--color-primary;
-    text-decoration: none;
-    padding: 15px;
-    font-size: 12px;
+    vertical-align: middle;
   }
 
   .popper__arrow {

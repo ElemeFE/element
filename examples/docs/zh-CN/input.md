@@ -813,7 +813,8 @@ export default {
 | placeholder   | 输入框占位文本   | string          | — | — |
 | disabled      | 禁用            | boolean         | — | false   |
 | props | 配置选项，具体见下表 | object | — | — |
-| value         | 必填值输入绑定值   | string  | — | — |
+| value         | 必填值，输入绑定值   | string  | — | — |
+| debounce      | 获取输入建议的去抖延时 | number         | — | 300 |
 | fetch-suggestions | 返回输入建议的方法，仅当你的输入建议数据 resolve 时，通过调用 callback(data:[]) 来返回它  | Function(queryString, callback)  | — | — |
 | popper-class | Autocomplete 下拉列表的类名 | string | — | — |
 | trigger-on-focus | 是否在输入框 focus 时显示建议列表 | boolean | — | true |
@@ -822,6 +823,7 @@ export default {
 | name | 原生属性 | string | — | — |
 | select-when-unmatched | 在输入没有任何匹配建议的情况下，按下回车是否触发 `select` 事件 | boolean | — | false |
 | label | 输入框关联的label文字 | string | — | — |
+
 ### props
 | 参数     | 说明              | 类型   | 可选值 | 默认值 |
 | -------- | ----------------- | ------ | ------ | ------ |
