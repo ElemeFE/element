@@ -315,6 +315,9 @@
         <!-- nav -->
         <ul class="nav">
           <li class="nav-item">
+            <algolia-search></algolia-search>
+          </li>
+          <li class="nav-item">
             <router-link
               active-class="active"
               :to="`/${ lang }/guide`">{{ langConfig.guide }}
@@ -391,6 +394,7 @@
 </template>
 <script>
   import ThemePicker from './theme-picker.vue';
+  import AlgoliaSearch from './search.vue';
   import bus from '../bus';
   import compoLang from '../i18n/component.json';
   import { version } from 'main/index.js';
@@ -409,7 +413,10 @@
       };
     },
 
-    components: { ThemePicker },
+    components: {
+      ThemePicker,
+      AlgoliaSearch
+    },
 
     watch: {
       '$route.path': {

@@ -12,6 +12,7 @@
 @include b(autocomplete-suggestion) {
   margin: 5px 0;
   box-shadow: $--box-shadow-light;
+  border-radius: $--border-radius-base;
 
   &.el-popper .popper__arrow {
     left: 24px !important;

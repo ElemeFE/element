@@ -33,6 +33,7 @@
       visible-arrow
       :class="[popperClass ? popperClass : '']"
       ref="suggestions"
+      placement="bottom-start"
       :id="id">
       <li
         v-for="(item, index) in suggestions"
@@ -51,6 +52,7 @@
   </div>
 </template>
 <script>
+  import debounce from 'throttle-debounce/debounce';
   import ElInput from 'element-ui/packages/input';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
   import ElAutocompleteSuggestions from './autocomplete-suggestions.vue';
@@ -100,7 +102,11 @@
         type: Boolean,
         default: false
       },
-      label: String
+      label: String,
+      debounce: {
+        type: Number,
+        default: 300
+      }
     },
     data() {
       return {
@@ -152,13 +158,13 @@
           this.suggestions = [];
           return;
         }
-        this.getData(value);
+        this.debouncedGetData(value);
       },
       handleFocus(event) {
         this.activated = true;
         this.$emit('focus', event);
         if (this.triggerOnFocus) {
-          this.getData(this.value);
+          this.debouncedGetData(this.value);
         }
       },
       handleBlur(event) {
@@ -214,6 +220,9 @@
       }
     },
     mounted() {
+      this.debouncedGetData = debounce(this.debounce, (val) => {
+        this.getData(val);
+      });
       this.$on('item-click', item => {
         this.select(item);
       });
