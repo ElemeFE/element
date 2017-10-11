@@ -779,6 +779,51 @@ describe('DatePicker', () => {
       expect(vm.picker.$el.querySelector('.el-time-panel')).to.ok;
     });
 
+    it('both picker show correct value', done => {
+      vm = createVue({
+        template: '<el-date-picker type="datetime" v-model="value" ref="compo" />',
+        data() {
+          return {
+            value: new Date(2000, 9, 1, 10, 0, 1)
+          };
+        }
+      }, true);
+
+      const input = vm.$refs.compo.$el.querySelector('input');
+      input.blur();
+      input.focus();
+      setTimeout(_ => {
+        const datePanel = vm.$refs.compo.picker;
+        const dateInput = datePanel.$el.querySelector('.el-date-picker__time-header > span:nth-child(1) input');
+        const timeInput = datePanel.$el.querySelector('.el-date-picker__time-header > span:nth-child(2) input');
+        timeInput.focus();
+        setTimeout(_ => {
+          const timePanel = datePanel.$refs.timepicker;
+          // both input shows correct value
+          expect(dateInput.value).to.equal('2000-10-01');
+          expect(timeInput.value).to.equal('10:00:01');
+          // time spinner highlight is correct
+          const [hours, minutes, seconds] = timePanel.$el.querySelectorAll('.el-time-spinner ul li.active');
+          expect(hours.textContent).to.include('10');
+          expect(minutes.textContent).to.include('00');
+          expect(seconds.textContent).to.include('01');
+          // sets value updates displayed value
+          vm.value = new Date(2001, 10, 2, 11, 1, 2);
+          setTimeout(_ => {
+            expect(dateInput.value).to.equal('2001-11-02');
+            expect(timeInput.value).to.equal('11:01:02');
+            const [hours, minutes, seconds] = timePanel.$el.querySelectorAll('.el-time-spinner ul li.active');
+            expect(hours.textContent).to.include('11');
+            expect(minutes.textContent).to.include('01');
+            expect(seconds.textContent).to.include('02');
+            expect(datePanel.visible).to.true;
+            expect(timePanel.visible).to.true;
+            done();
+          }, DELAY);
+        }, DELAY);
+      }, DELAY);
+    });
+
     it('click now button', done => {
       const date = new Date(1999, 10, 10, 10, 10);
 
@@ -840,6 +885,72 @@ describe('DatePicker', () => {
           done();
         }, DELAY);
       }, DELAY);
+    });
+
+    describe('cancel time', () => {
+      it('cancel to empty', done => {
+        vm = createVue({
+          template: '<el-date-picker type="datetime" v-model="value" ref="compo" />',
+          data() {
+            return {
+              value: ''
+            };
+          }
+        }, true);
+
+        const input = vm.$refs.compo.$el.querySelector('input');
+        input.blur();
+        input.focus();
+
+        setTimeout(_ => {
+          const timeInput = vm.$refs.compo.picker.$el.querySelector('.el-date-picker__time-header > span:nth-child(2) input');
+          timeInput.focus();
+          setTimeout(_ => {
+            const cancel = vm.$refs.compo.picker.$refs.timepicker.$el.querySelector('button.cancel');
+            cancel.click();
+            setTimeout(_ => {
+              expect(vm.value).to.equal('');
+              expect(vm.$refs.compo.pickerVisible).to.true;
+              done();
+            }, DELAY);
+          }, DELAY);
+        }, DELAY);
+      });
+
+      it('cancel to old value', done => {
+        vm = createVue({
+          template: '<el-date-picker type="datetime" v-model="value" ref="compo" />',
+          data() {
+            return {
+              value: new Date(2000, 9, 1, 10, 0, 0)
+            };
+          }
+        }, true);
+
+        const input = vm.$refs.compo.$el.querySelector('input');
+        input.blur();
+        input.focus();
+
+        const oldValue = vm.value.toISOString();
+
+        setTimeout(_ => {
+          const timeInput = vm.$refs.compo.picker.$el.querySelector('.el-date-picker__time-header > span:nth-child(2) input');
+          timeInput.focus();
+          setTimeout(_ => {
+            const nextTime = vm.$refs.compo.picker.$refs.timepicker.$el.querySelector('.active + *');
+            nextTime.click();
+            setTimeout(_ => {
+              const cancel = vm.$refs.compo.picker.$refs.timepicker.$el.querySelector('button.cancel');
+              cancel.click();
+              setTimeout(_ => {
+                expect(vm.value.toISOString()).to.equal(oldValue);
+                expect(vm.$refs.compo.pickerVisible).to.true;
+                done();
+              }, DELAY);
+            }, DELAY);
+          }, DELAY);
+        }, DELAY);
+      });
     });
 
     describe('default value', () => {
