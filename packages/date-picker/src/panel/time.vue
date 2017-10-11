@@ -8,6 +8,7 @@
         <time-spinner
           ref="spinner"
           @change="handleChange"
+          :arrow-control="useArrow"
           :show-seconds="showSeconds"
           @select-range="setSelectionRange"
           :date="date">
@@ -31,16 +32,18 @@
 <script type="text/babel">
   import { limitTimeRange, isDate, clearMilliseconds, timeWithinRange } from '../util';
   import Locale from 'element-ui/src/mixins/locale';
+  import TimeSpinner from '../basic/time-spinner';
 
   export default {
     mixins: [Locale],
 
     components: {
-      TimeSpinner: require('../basic/time-spinner')
+      TimeSpinner
     },
 
     props: {
-      visible: Boolean
+      visible: Boolean,
+      timeArrowControl: Boolean
     },
 
     watch: {
@@ -86,13 +89,17 @@
         oldValue: new Date(),
         selectableRange: [],
         selectionRange: [0, 2],
-        disabled: false
+        disabled: false,
+        arrowControl: false
       };
     },
 
     computed: {
       showSeconds() {
         return (this.format || '').indexOf('ss') !== -1;
+      },
+      useArrow() {
+        return this.arrowControl || this.timeArrowControl || false;
       }
     },
 

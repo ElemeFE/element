@@ -49,6 +49,10 @@
         border-bottom-right-radius: 4px;
         box-sizing: border-box;
         text-align: right;
+       
+        &:hover {
+          background-color: #dfe4ed;
+        }
         
         img {
           display: inline-block;
@@ -77,6 +81,9 @@
       font-size: 12px;
       margin: 6px 0;
       line-height: 2.4;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
 </style>
@@ -126,12 +133,9 @@
               let content = hit._highlightResult.content.value.replace(/\s+/g, ' ');
               const highlightStart = content.indexOf('<span class="algolia-highlight">');
               if (highlightStart > -1) {
-                const highlightEnd = content.lastIndexOf('</span>');
                 const startEllipsis = highlightStart - 15 > 0;
-                const endEllipsis = highlightEnd + 22 < content.length;
                 content = (startEllipsis ? '...' : '') +
-                  content.slice(Math.max(0, highlightStart - 15), Math.min(highlightEnd + 22, content.length)) +
-                  (endEllipsis ? '...' : '');
+                  content.slice(Math.max(0, highlightStart - 15), content.length);
               } else if (content.indexOf('|') > -1) {
                 content = '';
               }

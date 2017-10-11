@@ -53,35 +53,15 @@
 </template>
 <script>
   import ElInput from 'element-ui/packages/input';
-  import { once, on } from 'element-ui/src/utils/dom';
   import debounce from 'throttle-debounce/debounce';
   import Focus from 'element-ui/src/mixins/focus';
+  import RepeatClick from 'element-ui/src/directives/repeat-click';
 
   export default {
     name: 'ElInputNumber',
     mixins: [Focus('input')],
     directives: {
-      repeatClick: {
-        bind(el, binding, vnode) {
-          let interval = null;
-          let startTime;
-          const handler = () => vnode.context[binding.expression].apply();
-          const clear = () => {
-            if (new Date() - startTime < 100) {
-              handler();
-            }
-            clearInterval(interval);
-            interval = null;
-          };
-
-          on(el, 'mousedown', () => {
-            startTime = new Date();
-            once(document, 'mouseup', clear);
-            clearInterval(interval);
-            interval = setInterval(handler, 100);
-          });
-        }
-      }
+      repeatClick: RepeatClick
     },
     components: {
       ElInput

@@ -36,6 +36,7 @@
               <time-picker
                 ref="timepicker"
                 :date="date"
+                :time-arrow-control="arrowControl"
                 @pick="handleTimePick"
                 :visible="timePickerVisible"
                 @mounted="$refs.timepicker.format=timeFormat">
@@ -439,7 +440,8 @@
         firstDayOfWeek: 7,
         showWeekNumber: false,
         timePickerVisible: false,
-        format: ''
+        format: '',
+        arrowControl: false
       };
     },
 
