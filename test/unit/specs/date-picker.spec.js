@@ -376,17 +376,17 @@ describe('DatePicker', () => {
             ref="compo"
             v-model="value"
             type="date"
-            @change="handleChange"
             value-format="dd-MM-yyyy" />`,
         data() {
           return {
-            value: '',
-            handleChange: null
+            value: ''
           };
         }
       }, true);
+
       const spy = sinon.spy();
-      vm.handleChange = spy;
+      vm.$refs.compo.$on('change', spy);
+
       vm.$refs.compo.$el.querySelector('input').focus();
       setTimeout(_ => {
         vm.$refs.compo.picker.$el.querySelector('.el-date-table td.available').click();
