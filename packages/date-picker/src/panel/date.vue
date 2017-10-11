@@ -35,7 +35,6 @@
                 @change.native="handleVisibleTimeChange" />
               <time-picker
                 ref="timepicker"
-                :date="date"
                 :time-arrow-control="arrowControl"
                 @pick="handleTimePick"
                 :visible="timePickerVisible"
@@ -175,6 +174,9 @@
         } else {
           this.date = this.defaultValue ? new Date(this.defaultValue) : new Date();
         }
+        if (this.$refs.timepicker) {
+          this.$refs.timepicker.value = val;
+        }
       },
 
       defaultValue(val) {
@@ -207,7 +209,7 @@
 
       emit(value, ...args) {
         if (!value) {
-          this.emit('pick', value, ...args);
+          this.$emit('pick', value, ...args);
           return;
         }
         if (this.showTime) {
@@ -269,15 +271,13 @@
       },
 
       handleTimePick(value, visible, first) {
-        const newDate = modifyTime(this.date, value.getHours(), value.getMinutes(), value.getSeconds());
-        if (typeof this.disabledDate === 'function' && this.disabledDate(newDate)) {
-          this.$refs.timepicker.disabled = true;
-          return;
+        if (isDate(value)) {
+          const newDate = modifyTime(this.date, value.getHours(), value.getMinutes(), value.getSeconds());
+          this.date = newDate;
+          this.emit(this.date, true);
+        } else {
+          this.emit(value, true);
         }
-        this.$refs.timepicker.disabled = false;
-        this.date = newDate;
-        this.emit(this.date, true);
-
         if (!first) {
           this.timePickerVisible = visible;
         }
