@@ -51,6 +51,8 @@
 
     mixins: [Emitter],
 
+    inject: ['elFormItem'],
+
     data() {
       return {
         selfModel: false,
@@ -133,8 +135,12 @@
         };
       },
 
+      _elFormItemSize() {
+        return (this.elFormItem || {}).elFormItemSize;
+      },
+
       size() {
-        return this._checkboxGroup.size;
+        return this._checkboxGroup.checkboxGroupSize || this._elFormItemSize || (this.$ELEMENT || {}).size;
       },
 
       isDisabled() {

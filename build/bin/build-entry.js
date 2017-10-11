@@ -31,6 +31,9 @@ const install = function(Vue, opts = {}) {
 
   Vue.use(Loading.directive);
 
+  const ELEMENT = {};
+  ELEMENT.size = opts.size || '';
+
   Vue.prototype.$loading = Loading.service;
   Vue.prototype.$msgbox = MessageBox;
   Vue.prototype.$alert = MessageBox.alert;
@@ -38,6 +41,8 @@ const install = function(Vue, opts = {}) {
   Vue.prototype.$prompt = MessageBox.prompt;
   Vue.prototype.$notify = Notification;
   Vue.prototype.$message = Message;
+
+  Vue.prototype.$ELEMENT = ELEMENT;
 };
 
 /* istanbul ignore if */

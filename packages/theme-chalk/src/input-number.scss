@@ -6,6 +6,7 @@
   position: relative;
   display: inline-block;
   width: 180px;
+  line-height: #{$--input-height - 2};
 
   .el-input {
     display: block;
@@ -23,7 +24,6 @@
     top: 1px;
     width: $--input-height;
     height: auto;
-    line-height: #{$--input-height - 2};
     text-align: center;
     background: $--background-color-base;
     color: $--color-text-regular;
@@ -70,9 +70,9 @@
 
   @include m(medium) {
     width: 200px;
+    line-height: #{$--input-medium-height - 2};
 
     @include e((increase, decrease)) {
-      line-height: #{$--input-medium-height - 2};
       width: $--input-medium-height;
       font-size: $--input-medium-font-size;
     }
@@ -85,9 +85,9 @@
 
   @include m(small) {
     width: 130px;
+    line-height: #{$--input-small-height - 2};
 
     @include e((increase, decrease)) {
-      line-height: #{$--input-small-height - 2};
       width: $--input-small-height;
       font-size: $--input-small-font-size;
 
@@ -104,9 +104,9 @@
 
   @include m(mini) {
     width: 130px;
+    line-height: #{$--input-mini-height - 2};
 
     @include e((increase, decrease)) {
-      line-height: #{$--input-mini-height - 2};
       width: $--input-mini-height;
       font-size: $--input-mini-font-size;
 

@@ -36,11 +36,14 @@
 
     mixins: [Emitter],
 
+    inject: ['elFormItem'],
+
     props: {
       label: {},
       disabled: Boolean,
       name: String
     },
+
     computed: {
       value: {
         get() {
@@ -69,8 +72,11 @@
           color: this._radioGroup.textColor || ''
         };
       },
+      _elFormItemSize() {
+        return (this.elFormItem || {}).elFormItemSize;
+      },
       size() {
-        return this._radioGroup.size;
+        return this._radioGroup.radioGroupSize || this._elFormItemSize || (this.$ELEMENT || {}).size;
       },
       isDisabled() {
         return this.disabled || this._radioGroup.disabled;

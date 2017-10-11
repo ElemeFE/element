@@ -7,7 +7,7 @@
     :type="nativeType"
     :class="[
       type ? 'el-button--' + type : '',
-      size ? 'el-button--' + size : '',
+      buttonSize ? 'el-button--' + buttonSize : '',
       {
         'is-disabled': disabled,
         'is-loading': loading,
@@ -24,6 +24,8 @@
 <script>
   export default {
     name: 'ElButton',
+
+    inject: ['elFormItem'],
 
     props: {
       type: {
@@ -44,6 +46,15 @@
       plain: Boolean,
       autofocus: Boolean,
       round: Boolean
+    },
+
+    computed: {
+      _elFormItemSize() {
+        return (this.elFormItem || {}).elFormItemSize;
+      },
+      buttonSize() {
+        return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
+      }
     },
 
     methods: {

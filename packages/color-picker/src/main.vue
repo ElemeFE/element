@@ -3,7 +3,7 @@
     :class="[
       'el-color-picker',
       disabled ? 'is-disabled' : '',
-      size ? `el-color-picker--${ size }` : ''
+      colorSize ? `el-color-picker--${ colorSize }` : ''
     ]"
     v-clickoutside="hide">
     <div class="el-color-picker__mask" v-if="disabled"></div>
@@ -46,6 +46,8 @@
       popperClass: String
     },
 
+    inject: ['elFormItem'],
+
     directives: { Clickoutside },
 
     computed: {
@@ -58,6 +60,14 @@
             ? `rgba(${ r }, ${ g }, ${ b }, ${ this.color.get('alpha') / 100 })`
             : `rgb(${ r }, ${ g }, ${ b })`;
         }
+      },
+
+      _elFormItemSize() {
+        return (this.elFormItem || {}).elFormItemSize;
+      },
+
+      colorSize() {
+        return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
       }
     },
 

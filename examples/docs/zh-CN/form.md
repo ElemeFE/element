@@ -728,6 +728,52 @@
 嵌套在 `el-form-item` 中的 `el-form-item` 标签宽度默认为零，不会继承 `el-form` 的 `label-width`。如果需要可以为其单独设置 `label-width` 属性。
 :::
 
+### 表单内组件尺寸控制
+
+通过设置 Form 上的 `size` 属性可以使该表单内所有可调节大小的组件继承该尺寸。Form-Item 也具有该属性。
+
+::: demo 如果希望某个表单项或某个表单组件的尺寸不同于 Form 上的`size`属性，直接为这个表单项或表单组件设置自己的`size`即可。
+```html
+<el-form ref="form" :model="form" label-width="80px" size="mini">
+  <el-form-item label="活动名称">
+    <el-input v-model="form.name"></el-input>
+  </el-form-item>
+  <el-form-item label="活动区域">
+    <el-select v-model="form.region" placeholder="请选择活动区域">
+      <el-option label="区域一" value="shanghai"></el-option>
+      <el-option label="区域二" value="beijing"></el-option>
+    </el-select>
+  </el-form-item>
+  <el-form-item label="活动时间">
+    <el-col :span="11">
+      <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
+    </el-col>
+    <el-col class="line" :span="2">-</el-col>
+    <el-col :span="11">
+      <el-time-picker type="fixed-time" placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>
+    </el-col>
+  </el-form-item>
+  <el-form-item label="活动性质">
+    <el-checkbox-group v-model="form.type">
+      <el-checkbox-button label="美食/餐厅线上活动" name="type"></el-checkbox-button>
+      <el-checkbox-button label="地推活动" name="type"></el-checkbox-button>
+      <el-checkbox-button label="线下主题活动" name="type"></el-checkbox-button>
+    </el-checkbox-group>
+  </el-form-item>
+  <el-form-item label="特殊资源">
+    <el-radio-group v-model="form.resource" size="medium">
+      <el-radio border label="线上品牌商赞助"></el-radio>
+      <el-radio border label="线下场地免费"></el-radio>
+    </el-radio-group>
+  </el-form-item>
+  <el-form-item size="large">
+    <el-button type="primary" @click="onSubmit">立即创建</el-button>
+    <el-button>取消</el-button>
+  </el-form-item>
+</el-form>
+```
+:::
+
 ### Form Attributes
 
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
@@ -741,6 +787,7 @@
 | show-message  | 是否显示校验错误信息 | boolean | — | true |
 | inline-message  | 是否以行内形式展示校验信息 | boolean | — | false |
 | status-icon  | 是否在输入框中显示校验结果反馈图标 | boolean | — | false |
+| size  | 用于控制该表单内组件的尺寸 | string | medium / small / mini | - |
 
 ### Form Methods
 
@@ -762,6 +809,7 @@
 | error    | 表单域验证错误信息, 设置该值会使表单验证状态变为`error`，并显示该错误信息 | string | — | — |
 | show-message  | 是否显示校验错误信息 | boolean | — | true |
 | inline-message  | 以行内形式展示校验信息 | boolean | — | false |
+| size  | 用于控制该表单域下组件的尺寸 | string | medium / small / mini | - |
 
 ### Form-Item Slot
 | name | 说明 |

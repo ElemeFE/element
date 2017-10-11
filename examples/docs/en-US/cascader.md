@@ -1678,7 +1678,7 @@ Search and select options with a keyword.
 | filterable  | whether the options can be searched | boolean | — | — |
 | debounce | debounce delay when typing filter keyword, in milliseconds | number | — | 300 |
 | change-on-select | whether selecting an option of any level is permitted | boolean | — | false |
-| size  | size of Input | string | large / small / mini | — |
+| size  | size of Input | string | medium / small / mini | — |
 
 ### props
 | Attribute | Description | Type | Accepted Values | Default |

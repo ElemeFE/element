@@ -8,6 +8,8 @@
 
     mixins: [Emitter],
 
+    inject: ['elFormItem'],
+
     props: {
       value: {},
       disabled: Boolean,
@@ -16,6 +18,15 @@
       size: String,
       fill: String,
       textColor: String
+    },
+
+    computed: {
+      _elFormItemSize() {
+        return (this.elFormItem || {}).elFormItemSize;
+      },
+      checkboxGroupSize() {
+        return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
+      }
     },
 
     watch: {

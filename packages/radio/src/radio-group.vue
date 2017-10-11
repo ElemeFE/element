@@ -21,6 +21,8 @@
 
     componentName: 'ElRadioGroup',
 
+    inject: ['elFormItem'],
+
     mixins: [Emitter],
 
     props: {
@@ -30,6 +32,16 @@
       textColor: String,
       disabled: Boolean
     },
+
+    computed: {
+      _elFormItemSize() {
+        return (this.elFormItem || {}).elFormItemSize;
+      },
+      radioGroupSize() {
+        return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
+      }
+    },
+
     created() {
       this.$on('handleChange', value => {
         this.$emit('change', value);

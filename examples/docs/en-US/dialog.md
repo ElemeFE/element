@@ -287,7 +287,7 @@ If the variable bound to `visible` is managed in Vuex store, the `.sync` can not
 | title     | title of Dialog. Can also be passed with a named slot (see the following table) | string    | — | — |
 | width     | width of Dialog | string    | — | 50% |
 | fullscreen     | whether the Dialog takes up full screen | boolean    | — | false |
-| top      | value for `margin-top` of Dialog CSS, works when `size` is not `full` | string    | — | 15vh |
+| top      | value for `margin-top` of Dialog CSS | string    | — | 15vh |
 | modal     | whether a mask is displayed | boolean   | — | true |
 | modal-append-to-body     | whether to append modal to body element. If false, the modal will be appended to Dialog's parent element | boolean   | — | true |
 | append-to-body     | whether to append Dialog itself to body. A nested Dialog should have this attribute set to `true` | boolean   | — | false |

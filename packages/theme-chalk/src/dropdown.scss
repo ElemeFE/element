@@ -35,6 +35,10 @@
     }
 
     &:hover {
+      &::before {
+        top: 0;
+        bottom: 0;
+      }
     }
 
     & .el-dropdown__icon {

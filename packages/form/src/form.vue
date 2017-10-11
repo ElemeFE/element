@@ -33,7 +33,8 @@
       showMessage: {
         type: Boolean,
         default: true
-      }
+      },
+      size: String
     },
     watch: {
       rules() {

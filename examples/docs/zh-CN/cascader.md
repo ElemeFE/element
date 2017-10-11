@@ -1678,7 +1678,7 @@
 | filterable | 是否可搜索选项 | boolean | — | — |
 | debounce | 搜索关键词输入的去抖延迟，毫秒 | number | — | 300 |
 | change-on-select | 是否允许选择任意一级的选项 | boolean | — | false |
-| size | 尺寸 | string | large / small / mini | — |
+| size | 尺寸 | string | medium / small / mini | — |
 
 ### props
 | 参数     | 说明              | 类型   | 可选值 | 默认值 |
