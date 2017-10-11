@@ -40,6 +40,7 @@
                 <time-picker
                   ref="minTimePicker"
                   @pick="handleMinTimePick"
+                  :time-arrow-control="arrowControl"
                   :visible="minTimePickerVisible"
                   @mounted="$refs.minTimePicker.format=timeFormat">
                 </time-picker>
@@ -70,6 +71,7 @@
                 <time-picker
                   ref="maxTimePicker"
                   @pick="handleMaxTimePick"
+                  :time-arrow-control="arrowControl"
                   :visible="maxTimePickerVisible"
                   @mounted="$refs.maxTimePicker.format=timeFormat">
                 </time-picker>
@@ -273,7 +275,8 @@
         firstDayOfWeek: 7,
         minTimePickerVisible: false,
         maxTimePickerVisible: false,
-        format: ''
+        format: '',
+        arrowControl: false
       };
     },
 

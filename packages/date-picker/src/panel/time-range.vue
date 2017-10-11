@@ -10,12 +10,13 @@
         <div class="el-time-range-picker__cell">
           <div class="el-time-range-picker__header">{{ t('el.datepicker.startTime') }}</div>
           <div
-            :class="{ 'has-seconds': showSeconds }"
+            :class="{ 'has-seconds': showSeconds, 'is-arrow': arrowControl }"
             class="el-time-range-picker__body el-time-panel__content">
             <time-spinner
               ref="minSpinner"
               :show-seconds="showSeconds"
               @change="handleMinChange"
+              :arrow-control="arrowControl"
               @select-range="setMinSelectionRange"
               :date="minDate">
             </time-spinner>
@@ -24,12 +25,13 @@
         <div class="el-time-range-picker__cell">
           <div class="el-time-range-picker__header">{{ t('el.datepicker.endTime') }}</div>
           <div
-            :class="{ 'has-seconds': showSeconds }"
+            :class="{ 'has-seconds': showSeconds, 'is-arrow': arrowControl }"
             class="el-time-range-picker__body el-time-panel__content">
             <time-spinner
               ref="maxSpinner"
               :show-seconds="showSeconds"
               @change="handleMaxChange"
+              :arrow-control="arrowControl"
               @select-range="setMaxSelectionRange"
               :date="maxDate">
             </time-spinner>
@@ -111,7 +113,8 @@
         defaultValue: null,
         format: 'HH:mm:ss',
         visible: false,
-        selectionRange: [0, 2]
+        selectionRange: [0, 2],
+        arrowControl: false
       };
     },
 

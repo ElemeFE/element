@@ -1,6 +1,7 @@
 import Vue from 'vue';
+import Loading from './loading.vue';
 import { addClass, removeClass, getStyle } from 'element-ui/src/utils/dom';
-const Mask = Vue.extend(require('./loading.vue'));
+const Mask = Vue.extend(Loading);
 
 exports.install = Vue => {
   if (Vue.prototype.$isServer) return;

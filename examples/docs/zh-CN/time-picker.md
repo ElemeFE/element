@@ -42,11 +42,19 @@
 
 可以选择任意时间
 
-:::demo 使用 el-time-picker 标签，通过`selectableRange`限制可选时间范围
+:::demo 使用 el-time-picker 标签，通过`selectableRange`限制可选时间范围。提供了两种交互方式：默认情况下通过鼠标滚轮进行选择，打开`arrow-control`属性则通过界面上的箭头进行选择。
 ```html
 <template>
   <el-time-picker
     v-model="value2"
+    :picker-options="{
+      selectableRange: '18:30:00 - 20:30:00'
+    }"
+    placeholder="任意时间点">
+  </el-time-picker>
+  <el-time-picker
+    arrow-control
+    v-model="value3"
     :picker-options="{
       selectableRange: '18:30:00 - 20:30:00'
     }"
@@ -58,7 +66,8 @@
   export default {
     data() {
       return {
-        value2: new Date(2016, 9, 10, 18, 40)
+        value2: new Date(2016, 9, 10, 18, 40),
+        value3: new Date(2016, 9, 10, 18, 40)
       };
     }
   }
@@ -111,12 +120,21 @@
 
 可选择任意的时间范围
 
-:::demo 添加`is-range`属性即可选择时间范围
+:::demo 添加`is-range`属性即可选择时间范围，同样支持`arrow-control`属性。
 ```html
 <template>
   <el-time-picker
     is-range
-    v-model="value3"
+    v-model="value4"
+    range-separator="至"
+    start-placeholder="开始时间"
+    end-placeholder="结束时间"
+    placeholder="选择时间范围">
+  </el-time-picker>
+  <el-time-picker
+    is-range
+    arrow-control
+    v-model="value5"
     range-separator="至"
     start-placeholder="开始时间"
     end-placeholder="结束时间"
@@ -128,7 +146,8 @@
   export default {
     data() {
       return {
-        value3: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)]
+        value4: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
+        value5: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)]
       };
     }
   }
@@ -142,7 +161,9 @@
       return {
         value1: '',
         value2: new Date(2016, 9, 10, 18, 40),
-        value3: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
+        value3: new Date(2016, 9, 10, 18, 40),
+        value4: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
+        value5: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
         startTime: '',
         endTime: ''
       };
@@ -161,6 +182,8 @@
 | placeholder | 非范围选择时的占位内容 | string | — | — |
 | start-placeholder | 范围选择时开始日期的占位内容 | string | — | — |
 | end-placeholder | 范围选择时开始日期的占位内容 | string | — | — |
+| is-range | 是否为时间范围选择，仅对`<el-time-picker>`有效 | boolean | — | false |
+| arrow-control | 是否使用箭头进行时间选择，仅对`<el-time-picker>`有效 | boolean | — | false |
 | value | 绑定值 | date(TimePicker) / string(TimeSelect) | — | — |
 | align | 对齐方式 | string | left / center / right | left |
 | popper-class | TimePicker 下拉框的类名 | string | — | — |

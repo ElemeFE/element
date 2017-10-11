@@ -16,6 +16,7 @@
 
 <script>
   import TreeStore from './model/tree-store';
+  import ElTreeNode from './tree-node.vue';
   import {t} from 'element-ui/src/locale';
   import emitter from 'element-ui/src/mixins/emitter';
 
@@ -25,7 +26,7 @@
     mixins: [emitter],
 
     components: {
-      ElTreeNode: require('./tree-node.vue')
+      ElTreeNode
     },
 
     data() {
