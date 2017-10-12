@@ -284,6 +284,11 @@ Vertical NavMenu could be collapsed.
 | menu-trigger | how sub-menus are triggered, only works when `mode` is 'horizontal' | string    | — | hover |
 | router  | whether `vue-router` mode is activated. If true, index will be used as 'path' to activate the route action | boolean   | — | false   |
 
+### Menu Methods
+| Event Name | Description | Parameters |
+|---------- |-------- |---------- |
+| open  | open a specific sub-menu | index: index of the sub-menu to open |
+| close  | close a specific sub-menu | index: index of the sub-menu to close |
 
 ### Menu Events
 | Event Name | Description | Parameters |
@@ -312,10 +317,3 @@ Vertical NavMenu could be collapsed.
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------- |---------- |-------------  |-------- |
 | title     | group title   | string  | — | — |
-
-
-
-
-
-
-
