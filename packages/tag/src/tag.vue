@@ -4,7 +4,7 @@
       class="el-tag"
       :class="[
         type ? 'el-tag--' + type : '',
-        size && `el-tag--${size}`,
+        tagSize && `el-tag--${tagSize}`,
         {'is-hit': hit}
       ]"
       :style="{backgroundColor: color}">
@@ -30,6 +30,11 @@
     methods: {
       handleClose(event) {
         this.$emit('close', event);
+      }
+    },
+    computed: {
+      tagSize() {
+        return this.size || (this.$ELEMENT || {}).size;
       }
     }
   };

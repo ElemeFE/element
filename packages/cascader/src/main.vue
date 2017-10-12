@@ -6,7 +6,7 @@
         'is-opened': menuVisible,
         'is-disabled': disabled
       },
-      size ? 'el-cascader--' + size : ''
+      cascaderSize ? 'el-cascader--' + cascaderSize : ''
     ]"
     @click="handleClick"
     @mouseenter="inputHover = true"
@@ -86,6 +86,8 @@ export default {
   directives: { Clickoutside },
 
   mixins: [popperMixin, emitter, Locale],
+
+  inject: ['elFormItem'],
 
   components: {
     ElInput
@@ -179,6 +181,12 @@ export default {
         }
       });
       return labels;
+    },
+    _elFormItemSize() {
+      return (this.elFormItem || {}).elFormItemSize;
+    },
+    cascaderSize() {
+      return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
     }
   },
 

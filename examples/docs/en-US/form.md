@@ -739,6 +739,51 @@ This example shows how to customize your own validation rules to finish a two-fa
 When an `el-form-item` is nested in another `el-form-item`, its label width will be `0`. You can set `label-width` on that `el-form-item` if needed.
 :::
 
+### Size control
+
+All components in a Form inherit their `size` attribute from that Form. Similarly, FormItem also has a `size` attribute.
+
+::: demo Still you can fine tune each component's `size` if you don't want that component to inherit its size from From or FormIten.
+```html
+<el-form ref="form" :model="form" label-width="120px" size="mini">
+  <el-form-item label="Activity name">
+    <el-input v-model="form.name"></el-input>
+  </el-form-item>
+  <el-form-item label="Activity zone">
+    <el-select v-model="form.region" placeholder="please select your zone">
+      <el-option label="Zone one" value="shanghai"></el-option>
+      <el-option label="Zone two" value="beijing"></el-option>
+    </el-select>
+  </el-form-item>
+  <el-form-item label="Activity time">
+    <el-col :span="11">
+      <el-date-picker type="date" placeholder="Pick a date" v-model="form.date1" style="width: 100%;"></el-date-picker>
+    </el-col>
+    <el-col class="line" :span="2">-</el-col>
+    <el-col :span="11">
+      <el-time-picker type="fixed-time" placeholder="Pick a time" v-model="form.date2" style="width: 100%;"></el-time-picker>
+    </el-col>
+  </el-form-item>
+  <el-form-item label="Activity type">
+    <el-checkbox-group v-model="form.type">
+      <el-checkbox-button label="Online activities" name="type"></el-checkbox-button>
+      <el-checkbox-button label="Promotion activities" name="type"></el-checkbox-button>
+    </el-checkbox-group>
+  </el-form-item>
+  <el-form-item label="Resources">
+    <el-radio-group v-model="form.resource" size="medium">
+      <el-radio border label="Sponsor"></el-radio>
+      <el-radio border label="Venue"></el-radio>
+    </el-radio-group>
+  </el-form-item>
+  <el-form-item size="large">
+    <el-button type="primary" @click="onSubmit">Create</el-button>
+    <el-button>Cancel</el-button>
+  </el-form-item>
+</el-form>
+```
+:::
+
 ### Form Attributes
 
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
@@ -752,6 +797,7 @@ When an `el-form-item` is nested in another `el-form-item`, its label width will
 | show-message  | whether to show the error message | boolean | — | true |
 | inline-message  | whether to display the error message inline with the form item | boolean | — | false |
 | status-icon  | whether to display an icon indicating the validation result | boolean | — | false |
+| size  | control the size of components in this form | string | medium / small / mini | - |
 
 ### Form Methods
 
@@ -773,6 +819,7 @@ When an `el-form-item` is nested in another `el-form-item`, its label width will
 | error | field error message, set its value and the field will validate error and show this message immediately | string | — | — |
 | show-message  | whether to show the error message | boolean | — | true |
 | inline-message  | inline style validate message | boolean | — | false |
+| size  | control the size of components in this form-item | string | medium / small / mini | - |
 
 ### Form-Item Slot
 | Name | Description |

@@ -60,6 +60,8 @@
 
     mixins: [Emitter],
 
+    inject: ['elFormItem'],
+
     componentName: 'ElCheckbox',
 
     data() {
@@ -131,10 +133,15 @@
           : this.disabled;
       },
 
+      _elFormItemSize() {
+        return (this.elFormItem || {}).elFormItemSize;
+      },
+
       checkboxSize() {
+        const temCheckboxSize = this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
         return this.isGroup
-          ? this._checkboxGroup.size || this.size
-          : this.size;
+          ? this._checkboxGroup.checkboxGroupSize || temCheckboxSize
+          : temCheckboxSize;
       }
     },
 

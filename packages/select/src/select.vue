@@ -1,7 +1,7 @@
 <template>
   <div
     class="el-select"
-    :class="[size ? 'el-select--' + size : '']"
+    :class="[selectSize ? 'el-select--' + selectSize : '']"
     v-clickoutside="handleClose">
     <div
       class="el-select__tags"
@@ -140,6 +140,8 @@
 
     componentName: 'ElSelect',
 
+    inject: ['elFormItem'],
+
     provide() {
       return {
         'select': this
@@ -147,6 +149,9 @@
     },
 
     computed: {
+      _elFormItemSize() {
+        return (this.elFormItem || {}).elFormItemSize;
+      },
       iconClass() {
         let criteria = this.clearable &&
           !this.disabled &&
@@ -180,6 +185,10 @@
         let hasExistingOption = this.options.filter(option => !option.created)
           .some(option => option.currentLabel === this.query);
         return this.filterable && this.allowCreate && this.query !== '' && !hasExistingOption;
+      },
+
+      selectSize() {
+        return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
       }
     },
 

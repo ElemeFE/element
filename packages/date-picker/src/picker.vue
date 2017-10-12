@@ -4,7 +4,7 @@
     :class="'el-date-editor--' + type"
     :readonly="!editable || readonly"
     :disabled="disabled"
-    :size="size"
+    :size="pickerSize"
     :name="name"
     v-if="!ranged"
     v-clickoutside="handleClose"
@@ -31,7 +31,7 @@
     class="el-date-editor el-range-editor el-input__inner"
     :class="[
       'el-date-editor--' + type,
-      'el-range-editor--' + size,
+      'el-range-editor--' + pickerSize,
       pickerVisible ? 'is-active' : ''
     ]"
     @click="handleRangeClick"
@@ -266,6 +266,8 @@ const valueEquals = function(a, b) {
 export default {
   mixins: [Emitter, NewPopper, Focus('reference')],
 
+  inject: ['elFormItem'],
+
   props: {
     size: String,
     format: String,
@@ -421,6 +423,14 @@ export default {
       } else {
         return this.value;
       }
+    },
+
+    _elFormItemSize() {
+      return (this.elFormItem || {}).elFormItemSize;
+    },
+
+    pickerSize() {
+      return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
     }
   },
 

@@ -6,6 +6,7 @@
   display: inline-block;
   position: relative;
   font-size: $--font-size-base;
+  line-height: $--input-height;
 
   .el-input,
   .el-input__inner {
@@ -44,7 +45,6 @@
     left: 0;
     top: 0;
     height: 100%;
-    line-height: 40px;
     padding: 0 25px 0 15px;
     color: $--input-color;
     width: 100%;
@@ -63,26 +63,17 @@
 
   @include m(medium) {
     font-size: $--input-medium-font-size;
-
-    @include e(label) {
-      line-height: #{$--input-medium-height };
-    }
+    line-height: #{$--input-medium-height};
   }
 
   @include m(small) {
     font-size: $--input-small-font-size;
-
-    @include e(label) {
-      line-height: #{$--input-small-height };
-    }
+    line-height: #{$--input-small-height};
   }
 
   @include m(mini) {
     font-size: $--input-mini-font-size;
-
-    @include e(label) {
-      line-height: #{$--input-mini-height};
-    }
+    line-height: #{$--input-mini-height};
   }
 
   @include when(disabled) {

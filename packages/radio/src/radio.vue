@@ -48,6 +48,8 @@
 
     mixins: [Emitter],
 
+    inject: ['elFormItem'],
+
     componentName: 'ElRadio',
 
     props: {
@@ -89,10 +91,14 @@
           }
         }
       },
+      _elFormItemSize() {
+        return (this.elFormItem || {}).elFormItemSize;
+      },
       radioSize() {
+        const temRadioSize = this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
         return this.isGroup
-          ? this._radioGroup.size || this.size
-          : this.size;
+          ? this._radioGroup.radioGroupSize || temRadioSize
+          : temRadioSize;
       },
       isDisabled() {
         return this.isGroup

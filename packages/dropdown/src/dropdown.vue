@@ -56,6 +56,12 @@
       };
     },
 
+    computed: {
+      dropdownSize() {
+        return this.size || (this.$ELEMENT || {}).size;
+      }
+    },
+
     mounted() {
       this.$on('menu-item-click', this.handleMenuItemClick);
       this.initEvent();
@@ -114,7 +120,7 @@
     },
 
     render(h) {
-      let { hide, splitButton, type, size } = this;
+      let { hide, splitButton, type, dropdownSize } = this;
 
       var handleMainButtonClick = (event) => {
         this.$emit('click', event);
@@ -124,10 +130,10 @@
       let triggerElm = !splitButton
         ? this.$slots.default
         : (<el-button-group>
-            <el-button type={type} size={size} nativeOn-click={handleMainButtonClick}>
+            <el-button type={type} size={dropdownSize} nativeOn-click={handleMainButtonClick}>
               {this.$slots.default}
             </el-button>
-            <el-button ref="trigger" type={type} size={size} class="el-dropdown__caret-button">
+            <el-button ref="trigger" type={type} size={dropdownSize} class="el-dropdown__caret-button">
               <i class="el-dropdown__icon el-icon-caret-bottom"></i>
             </el-button>
           </el-button-group>);

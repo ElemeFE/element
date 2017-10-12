@@ -1,7 +1,7 @@
 <template>
   <div class="el-input-number"
     :class="[
-      size ? 'el-input-number--' + size : '',
+      inputNumberSize ? 'el-input-number--' + inputNumberSize : '',
       { 'is-disabled': disabled },
       { 'is-without-controls': !controls },
       { 'is-controls-right': controlsAtRight }
@@ -35,7 +35,7 @@
       @focus="handleFocus"
       @input="debounceHandleInput"
       :disabled="disabled"
-      :size="size"
+      :size="inputNumberSize"
       :max="max"
       :min="min"
       :name="name"
@@ -60,6 +60,7 @@
   export default {
     name: 'ElInputNumber',
     mixins: [Focus('input')],
+    inject: ['elFormItem'],
     directives: {
       repeatClick: RepeatClick
     },
@@ -130,6 +131,12 @@
       },
       controlsAtRight() {
         return this.controlsPosition === 'right';
+      },
+      _elFormItemSize() {
+        return (this.elFormItem || {}).elFormItemSize;
+      },
+      inputNumberSize() {
+        return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
       }
     },
     methods: {

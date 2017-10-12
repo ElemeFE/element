@@ -86,7 +86,8 @@
       showMessage: {
         type: Boolean,
         default: true
-      }
+      },
+      size: String
     },
     watch: {
       error(value) {
@@ -158,6 +159,12 @@
           });
         }
         return isRequired;
+      },
+      _formSize() {
+        return this.elForm.size;
+      },
+      elFormItemSize() {
+        return this.size || this._formSize;
       }
     },
     data() {

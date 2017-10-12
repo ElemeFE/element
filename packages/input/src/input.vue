@@ -1,7 +1,7 @@
 <template>
   <div :class="[
     type === 'textarea' ? 'el-textarea' : 'el-input',
-    size ? 'el-input--' + size : '',
+    inputSize ? 'el-input--' + inputSize : '',
     {
       'is-disabled': disabled,
       'el-input-group': $slots.prepend || $slots.append,
@@ -139,6 +139,9 @@
     },
 
     computed: {
+      _elFormItemSize() {
+        return (this.elFormItem || {}).elFormItemSize;
+      },
       validateState() {
         return this.elFormItem ? this.elFormItem.validateState : '';
       },
@@ -151,6 +154,9 @@
       },
       textareaStyle() {
         return merge({}, this.textareaCalcStyle, { resize: this.resize });
+      },
+      inputSize() {
+        return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
       },
       isGroup() {
         return this.$slots.prepend || this.$slots.append;
