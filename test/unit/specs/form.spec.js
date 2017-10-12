@@ -4,6 +4,20 @@ const DELAY = 50;
 
 describe('Form', () => {
   let vm;
+  let hasPromise = true;
+  before(() => {
+    if (!window.Promise) {
+      hasPromise = false;
+      window.Promise = require('es6-promise').Promise;
+    }
+  });
+
+  after(() => {
+    if (!hasPromise) {
+      window.Promise = undefined;
+    }
+  });
+
   afterEach(() => {
     destroyVM(vm);
   });
@@ -668,6 +682,40 @@ describe('Form', () => {
           expect(field.validateMessage).to.equal('输入不合法');
           done();
         });
+      });
+    });
+    it('validate return promise', done => {
+      var checkName = (rule, value, callback) => {
+        if (value.length < 5) {
+          callback(new Error('长度至少为5'));
+        } else {
+          callback();
+        }
+      };
+      vm = createVue({
+        template: `
+          <el-form :model="form" :rules="rules" ref="form">
+            <el-form-item label="活动名称" prop="name" ref="field">
+              <el-input v-model="form.name"></el-input>
+            </el-form-item>
+          </el-form>
+        `,
+        data() {
+          return {
+            form: {
+              name: ''
+            },
+            rules: {
+              name: [
+                { validator: checkName, trigger: 'change' }
+              ]
+            }
+          };
+        }
+      }, true);
+      vm.$refs.form.validate().catch(validFailed => {
+        expect(validFailed).to.false;
+        done();
       });
     });
   });

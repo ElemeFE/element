@@ -1,58 +1,110 @@
 <template>
   <div class="el-time-spinner" :class="{ 'has-seconds': showSeconds }">
-    <el-scrollbar
-      @mouseenter.native="emitSelectRange('hours')"
-      class="el-time-spinner__wrapper"
-      wrap-style="max-height: inherit;"
-      view-class="el-time-spinner__list"
-      noresize
-      tag="ul"
-      ref="hours">
-      <li
-        @click="handleClick('hours', { value: hour, disabled: disabled })"
-        v-for="(disabled, hour) in hoursList"
-        track-by="hour"
-        class="el-time-spinner__item"
-        :class="{ 'active': hour === hours, 'disabled': disabled }">{{ ('0' + hour).slice(-2) }}</li>
-    </el-scrollbar>
-    <el-scrollbar
-      @mouseenter.native="emitSelectRange('minutes')"
-      class="el-time-spinner__wrapper"
-      wrap-style="max-height: inherit;"
-      view-class="el-time-spinner__list"
-      noresize
-      tag="ul"
-      ref="minutes">
-      <li
-        @click="handleClick('minutes', { value: key, disabled: false })"
-        v-for="(minute, key) in 60"
-        class="el-time-spinner__item"
-        :class="{ 'active': key === minutes }">{{ ('0' + key).slice(-2) }}</li>
-    </el-scrollbar>
-    <el-scrollbar
-      v-show="showSeconds"
-      @mouseenter.native="emitSelectRange('seconds')"
-      class="el-time-spinner__wrapper"
-      wrap-style="max-height: inherit;"
-      view-class="el-time-spinner__list"
-      noresize
-      tag="ul"
-      ref="seconds">
-      <li
-        @click="handleClick('seconds', { value: key, disabled: false })"
-        v-for="(second, key) in 60"
-        class="el-time-spinner__item"
-        :class="{ 'active': key === seconds }">{{ ('0' + key).slice(-2) }}</li>
-    </el-scrollbar>
+    <template v-if="!arrowControl">
+      <el-scrollbar
+        @mouseenter.native="emitSelectRange('hours')"
+        class="el-time-spinner__wrapper"
+        wrap-style="max-height: inherit;"
+        view-class="el-time-spinner__list"
+        noresize
+        tag="ul"
+        ref="hours">
+        <li
+          @click="handleClick('hours', { value: hour, disabled: disabled })"
+          v-for="(disabled, hour) in hoursList"
+          track-by="hour"
+          class="el-time-spinner__item"
+          :class="{ 'active': hour === hours, 'disabled': disabled }">{{ ('0' + hour).slice(-2) }}</li>
+      </el-scrollbar>
+      <el-scrollbar
+        @mouseenter.native="emitSelectRange('minutes')"
+        class="el-time-spinner__wrapper"
+        wrap-style="max-height: inherit;"
+        view-class="el-time-spinner__list"
+        noresize
+        tag="ul"
+        ref="minutes">
+        <li
+          @click="handleClick('minutes', { value: key, disabled: false })"
+          v-for="(minute, key) in 60"
+          class="el-time-spinner__item"
+          :class="{ 'active': key === minutes }">{{ ('0' + key).slice(-2) }}</li>
+      </el-scrollbar>
+      <el-scrollbar
+        v-show="showSeconds"
+        @mouseenter.native="emitSelectRange('seconds')"
+        class="el-time-spinner__wrapper"
+        wrap-style="max-height: inherit;"
+        view-class="el-time-spinner__list"
+        noresize
+        tag="ul"
+        ref="seconds">
+        <li
+          @click="handleClick('seconds', { value: key, disabled: false })"
+          v-for="(second, key) in 60"
+          class="el-time-spinner__item"
+          :class="{ 'active': key === seconds }">{{ ('0' + key).slice(-2) }}</li>
+      </el-scrollbar>
+    </template>
+    <template v-if="arrowControl">
+      <div
+        @mouseenter="emitSelectRange('hours')"
+        class="el-time-spinner__wrapper is-arrow">
+        <i v-repeat-click="decrease" class="el-time-spinner__arrow el-icon-arrow-up"></i>
+        <i v-repeat-click="increase" class="el-time-spinner__arrow el-icon-arrow-down"></i>
+        <ul class="el-time-spinner__list" ref="hours">
+          <li
+            class="el-time-spinner__item"
+            :class="{ 'active': hour === hours, 'disabled': hoursList[hour] }"
+            v-for="hour in arrowHourList">
+            {{ hour === undefined ? '' : ('0' + hour).slice(-2) }}
+          </li>
+        </ul>
+      </div>
+      <div
+        @mouseenter="emitSelectRange('minutes')"
+        class="el-time-spinner__wrapper is-arrow">
+        <i v-repeat-click="decrease" class="el-time-spinner__arrow el-icon-arrow-up"></i>
+        <i v-repeat-click="increase" class="el-time-spinner__arrow el-icon-arrow-down"></i>
+        <ul class="el-time-spinner__list" ref="minutes">
+          <li
+            class="el-time-spinner__item"
+            :class="{ 'active': minute === minutes }"
+            v-for="minute in arrowMinuteList">
+            {{ minute === undefined ? '' : ('0' + minute).slice(-2) }}
+          </li>
+        </ul>
+      </div>
+      <div
+        @mouseenter="emitSelectRange('seconds')"
+        class="el-time-spinner__wrapper is-arrow"
+        v-if="showSeconds">
+        <i v-repeat-click="decrease" class="el-time-spinner__arrow el-icon-arrow-up"></i>
+        <i v-repeat-click="increase" class="el-time-spinner__arrow el-icon-arrow-down"></i>
+        <ul class="el-time-spinner__list" ref="seconds">
+          <li
+            class="el-time-spinner__item"
+            :class="{ 'active': second === seconds }"
+            v-for="second in arrowSecondList">
+            {{ second === undefined ? '' : ('0' + second).slice(-2) }}
+          </li>
+        </ul>
+      </div>
+    </template>
   </div>
 </template>
 
 <script type="text/babel">
   import { getRangeHours, modifyTime } from '../util';
   import ElScrollbar from 'element-ui/packages/scrollbar';
+  import RepeatClick from 'element-ui/src/directives/repeat-click';
 
   export default {
     components: { ElScrollbar },
+
+    directives: {
+      repeatClick: RepeatClick
+    },
 
     props: {
       date: {},
@@ -60,7 +112,8 @@
       showSeconds: {
         type: Boolean,
         default: true
-      }
+      },
+      arrowControl: Boolean
     },
 
     computed: {
@@ -75,6 +128,30 @@
       },
       hoursList() {
         return getRangeHours(this.selectableRange);
+      },
+      arrowHourList() {
+        const hours = this.hours;
+        return [
+          hours > 0 ? hours - 1 : undefined,
+          hours,
+          hours < 23 ? hours + 1 : undefined
+        ];
+      },
+      arrowMinuteList() {
+        const minutes = this.minutes;
+        return [
+          minutes > 0 ? minutes - 1 : undefined,
+          minutes,
+          minutes < 59 ? minutes + 1 : undefined
+        ];
+      },
+      arrowSecondList() {
+        const seconds = this.seconds;
+        return [
+          seconds > 0 ? seconds - 1 : undefined,
+          seconds,
+          seconds < 59 ? seconds + 1 : undefined
+        ];
       }
     },
 
@@ -87,11 +164,19 @@
 
     mounted() {
       this.$nextTick(() => {
-        this.bindScrollEvent();
+        !this.arrowControl && this.bindScrollEvent();
       });
     },
 
     methods: {
+      increase() {
+        this.scrollDown(1);
+      },
+
+      decrease() {
+        this.scrollDown(-1);
+      },
+
       modifyDateField(type, value) {
         switch (type) {
           case 'hours': this.$emit('change', modifyTime(this.date, value, this.minutes, this.seconds)); break;
@@ -153,6 +238,7 @@
       },
 
       adjustSpinner(type, value) {
+        if (this.arrowControl) return;
         const el = this.$refs[type].wrap;
         if (el) {
           el.scrollTop = Math.max(0, (value - 2.5) * 32 + 80);

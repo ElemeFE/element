@@ -255,6 +255,13 @@
         } catch (e) {
           console.error(e);
         }
+      },
+      open(index) {
+        const { indexPath } = this.submenus[index.toString()];
+        indexPath.forEach(i => this.openMenu(i, indexPath));
+      },
+      close(index) {
+        this.closeMenu(index);
       }
     },
     mounted() {
