@@ -115,7 +115,7 @@
         this.fileList3 = fileList.slice(-3);
       },
       handleExceed(files, fileList) {
-        this.$message.warning(`The limit is 3, you selected ${files.length} files this time, add up to ${files.length + fileList.length} totally`);
+        this.$message.warning(`You can upload up to 3 files. You selected ${files.length} files this time, and ${files.length + fileList.length} files totally`);
       }
     }
   }
@@ -126,7 +126,7 @@ Upload files by clicking or drag-and-drop
 
 ### Click to upload files
 
-:::demo Customize upload button type and text using `slot`. Set `limit` and `on-exceed` to limit the number of files and behavior when exceed.
+:::demo Customize upload button type and text using `slot`. Set `limit` and `on-exceed` to limit the maximum number of uploads allowed and specify method when the limit is exceeded.
 ```html
 <el-upload
   class="upload-demo"
@@ -416,8 +416,8 @@ list-type | type of fileList | string | text/picture/picture-card | text |
 auto-upload | whether to auto upload file | boolean | — | true |
 http-request | override default xhr behavior, allowing you to implement your own upload-file's request | function | — | — |
 disabled | whether to disable upload | boolean | — | false |
-limit | Number of files limit | number | — | false |
-on-exceed | hook function when number of files exceed | function(files, fileList) | — | - |
+limit | maximum number of uploads allowed | number | — | — |
+on-exceed | hook function when limit is exceeded | function(files, fileList) | — | - |
 
 ### Methods
 | Methods Name | Description | Parameters |
