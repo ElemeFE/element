@@ -22,6 +22,10 @@
       margin-top: 15px;
     }
 
+    > ul > .nav-item:nth-child(-n + 3) > a {
+      margin-top: 0;
+    }
+
     .nav-item {
       a {
         font-size: 16px;
@@ -45,7 +49,7 @@
         a {
           display: block;
           height: 40px;
-          color: #666;
+          color: #444;
           line-height: 40px;
           font-size: 14px;
           overflow: hidden;

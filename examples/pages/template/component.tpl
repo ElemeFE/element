@@ -243,11 +243,9 @@
         this.showBackToTop = scrollTop >= 0.5 * document.body.clientHeight;
         if (this.showHeader !== this.scrollTop > scrollTop) {
           this.showHeader = this.scrollTop > scrollTop;
-          bus.$emit('toggleHeader', this.showHeader);
         }
         if (scrollTop === 0) {
           this.showHeader = true;
-          bus.$emit('toggleHeader', this.showHeader);
         }
         if (!this.navFaded) {
           bus.$emit('fadeNav');

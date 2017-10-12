@@ -314,7 +314,7 @@
 
         <!-- nav -->
         <ul class="nav">
-          <li class="nav-item">
+          <li class="nav-item" v-show="isComponentPage">
             <algolia-search></algolia-search>
           </li>
           <li class="nav-item">
@@ -395,7 +395,6 @@
 <script>
   import ThemePicker from './theme-picker.vue';
   import AlgoliaSearch from './search.vue';
-  import bus from '../bus';
   import compoLang from '../i18n/component.json';
   import { version } from 'main/index.js';
 
@@ -405,7 +404,6 @@
         active: '',
         isHome: true,
         headerStyle: {},
-        visible: true,
         versions: [],
         version,
         dropdownVisible: true,
@@ -466,10 +464,6 @@
 
     created() {
       this.handlePathChange();
-
-      bus.$on('toggleHeader', visible => {
-        this.visible = visible;
-      });
 
       const xhr = new XMLHttpRequest();
       xhr.onreadystatechange = _ => {

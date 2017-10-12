@@ -19,7 +19,7 @@
       :readonly="!filterable"
       :placeholder="currentLabels.length ? undefined : placeholder"
       v-model="inputValue"
-      @change="debouncedInputChange"
+      @input="debouncedInputChange"
       :validate-event="false"
       :size="size"
       :disabled="disabled"

@@ -13,7 +13,7 @@
       @compositionstart.native="handleComposition"
       @compositionupdate.native="handleComposition"
       @compositionend.native="handleComposition"
-      @change="handleChange"
+      @input="handleChange"
       @focus="handleFocus"
       @blur="handleBlur"
       @keydown.up.native.prevent="highlight(highlightedIndex - 1)"
