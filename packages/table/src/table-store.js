@@ -88,6 +88,8 @@ TableStore.prototype.mutations = {
     states._data = data;
     if (!this.states.serverSort) {
       states.data = sortData((data || []), states);
+    } else {
+      states.data = (data || []);
     }
 
     // states.data.forEach((item) => {
@@ -185,6 +187,8 @@ TableStore.prototype.mutations = {
 
     if (!this.states.serverSort) {
       states.data = sortData(data, states);
+    } else {
+      states.data = (data || []);
     }
 
     if (!silent) {
