@@ -287,8 +287,8 @@ Vertical NavMenu could be collapsed.
 ### Menu Methods
 | Event Name | Description | Parameters |
 |---------- |-------- |---------- |
-| open  | open the specified subMenu | index: the index of subMenu to open |
-| close  | close the specified subMenu | index: the index of subMenu to close |
+| open  | open a specific sub-menu | index: index of the sub-menu to open |
+| close  | close a specific sub-menu | index: index of the sub-menu to close |
 
 ### Menu Events
 | Event Name | Description | Parameters |
@@ -317,10 +317,3 @@ Vertical NavMenu could be collapsed.
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------- |---------- |-------------  |-------- |
 | title     | group title   | string  | — | — |
-
-
-
-
-
-
-
