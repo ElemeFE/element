@@ -26,6 +26,7 @@
         @input="handleInput"
         @focus="handleFocus"
         @blur="handleBlur"
+        @change="handleChange"
         :aria-label="label"
       >
       <!-- 前置内容 -->
@@ -65,6 +66,7 @@
       :style="textareaStyle"
       @focus="handleFocus"
       @blur="handleBlur"
+      @change="handleChange">
       :aria-label="label"
     >
     </textarea>
@@ -182,7 +184,9 @@
         const value = event.target.value;
         this.$emit('input', value);
         this.setCurrentValue(value);
-        this.$emit('change', value);
+      },
+      handleChange(event) {
+        this.$emit('change', event.target.value);
       },
       setCurrentValue(value) {
         if (value === this.currentValue) return;

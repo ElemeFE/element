@@ -207,6 +207,7 @@ describe('Input', () => {
       });
     });
     it('event:change', done => {
+      // NOTE: should be same as native's change behavior
       vm = createVue({
         template: `
           <el-input
@@ -222,12 +223,21 @@ describe('Input', () => {
         }
       }, true);
 
+      const inputElm = vm.$el.querySelector('input');
+      const simulateEvent = (text, event) => {
+        inputElm.value = text;
+        inputElm.dispatchEvent(new Event(event));
+      };
+
       const spy = sinon.spy();
       vm.$refs.input.$on('change', spy);
-      vm.input = 'b';
 
+      // simplified test, component should emit change when native does
+      simulateEvent('1', 'input');
+      simulateEvent('2', 'change');
       vm.$nextTick(_ => {
-        expect(spy.withArgs('b').calledOnce).to.be.false;
+        expect(spy.calledWith('2')).to.be.true;
+        expect(spy.calledOnce).to.be.true;
         done();
       });
     });
