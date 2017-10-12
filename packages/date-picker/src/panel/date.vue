@@ -35,11 +35,10 @@
                 @change.native="handleVisibleTimeChange" />
               <time-picker
                 ref="timepicker"
-                :date="date"
                 :time-arrow-control="arrowControl"
                 @pick="handleTimePick"
                 :visible="timePickerVisible"
-                @mounted="$refs.timepicker.format=timeFormat">
+                @mounted="proxyTimePickerDataProperties">
               </time-picker>
             </span>
           </div>
@@ -200,6 +199,20 @@
     },
 
     methods: {
+      proxyTimePickerDataProperties() {
+        const format = timeFormat => {this.$refs.timepicker.format = timeFormat;};
+        const value = value => {this.$refs.timepicker.value = value;};
+        const date = date => {this.$refs.timepicker.date = date;};
+
+        this.$watch('format', format);
+        this.$watch('value', value);
+        this.$watch('date', date);
+
+        format(this.timeFormat);
+        value(this.value);
+        date(this.date);
+      },
+
       handleClear() {
         this.date = this.defaultValue ? new Date(this.defaultValue) : new Date();
         this.$emit('pick');
@@ -207,7 +220,7 @@
 
       emit(value, ...args) {
         if (!value) {
-          this.emit('pick', value, ...args);
+          this.$emit('pick', value, ...args);
           return;
         }
         if (this.showTime) {
@@ -269,15 +282,13 @@
       },
 
       handleTimePick(value, visible, first) {
-        const newDate = modifyTime(this.date, value.getHours(), value.getMinutes(), value.getSeconds());
-        if (typeof this.disabledDate === 'function' && this.disabledDate(newDate)) {
-          this.$refs.timepicker.disabled = true;
-          return;
+        if (isDate(value)) {
+          const newDate = modifyTime(this.date, value.getHours(), value.getMinutes(), value.getSeconds());
+          this.date = newDate;
+          this.emit(this.date, true);
+        } else {
+          this.emit(value, true);
         }
-        this.$refs.timepicker.disabled = false;
-        this.date = newDate;
-        this.emit(this.date, true);
-
         if (!first) {
           this.timePickerVisible = visible;
         }

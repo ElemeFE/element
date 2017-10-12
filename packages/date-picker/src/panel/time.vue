@@ -105,14 +105,17 @@
 
     methods: {
       handleCancel() {
-        this.$emit('pick', this.oldValue);
+        this.$emit('pick', this.oldValue, false);
       },
 
       handleChange(date) {
-        this.date = clearMilliseconds(date);
-        // if date is out of range, do not emit
-        if (this.isValidValue(this.date)) {
-          this.$emit('pick', this.date, true);
+        // this.visible avoids edge cases, when use scrolls during panel closing animation
+        if (this.visible) {
+          this.date = clearMilliseconds(date);
+          // if date is out of range, do not emit
+          if (this.isValidValue(this.date)) {
+            this.$emit('pick', this.date, true);
+          }
         }
       },
 
