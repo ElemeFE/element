@@ -14,6 +14,7 @@
           v-for="item in selected"
           :key="getValueKey(item)"
           :closable="!disabled"
+          size="small"
           :hit="item.hitState"
           type="info"
           @close="deleteTag($event, item)"
@@ -268,7 +269,6 @@
         if (this.filterable && !this.multiple) {
           this.inputLength = 20;
         }
-        this.dispatch('ElFormItem', 'el.form.change', val);
       },
 
       visible(val) {
@@ -394,6 +394,7 @@
       emitChange(val) {
         if (!valueEquals(this.value, val)) {
           this.$emit('change', val);
+          this.dispatch('ElFormItem', 'el.form.change', val);
         }
       },
 
@@ -589,6 +590,9 @@
       toggleMenu() {
         if (!this.disabled) {
           this.visible = !this.visible;
+          if (this.visible) {
+            (this.$refs.input || this.$refs.reference).focus();
+          }
         }
       },
 

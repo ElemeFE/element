@@ -262,9 +262,8 @@
       this.$on('item-click', this.handleItemClick);
       this.$on('submenu-click', this.handleSubmenuClick);
       if (this.mode === 'horizontal') {
-        let menu = new Menubar(this.$el); // eslint-disable-line
+        new Menubar(this.$el); // eslint-disable-line
       }
-
     }
   };
 </script>

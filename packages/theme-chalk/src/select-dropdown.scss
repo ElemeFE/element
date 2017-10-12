@@ -39,6 +39,12 @@
   .popper__arrow {
     transform: translateX(-400%);
   }
+
+  @include when(arrow-fixed){
+    .popper__arrow {
+      transform: translateX(-200%);
+    }
+  }
 }
 
 @include b(select-dropdown__empty) {

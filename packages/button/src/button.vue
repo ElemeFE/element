@@ -1,8 +1,9 @@
 <template>
   <button
-    v-bind="$props"
     class="el-button"
     @click="handleClick"
+    :disabled="disabled"
+    :autofocus="autofocus"
     :type="nativeType"
     :class="[
       type ? 'el-button--' + type : '',
@@ -16,7 +17,7 @@
     ]"
   >
     <i class="el-icon-loading" v-if="loading" @click="handleInnerClick"></i>
-    <i :class="'el-icon-' + icon" v-if="icon && !loading" @click="handleInnerClick"></i>
+    <i :class="icon" v-if="icon && !loading" @click="handleInnerClick"></i>
     <span v-if="$slots.default" @click="handleInnerClick"><slot></slot></span>
   </button>
 </template>

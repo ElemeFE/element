@@ -957,7 +957,7 @@ Only one node among the same level can be expanded at one time.
 | --------- | ---------------------------------------- | ------ | --------------- | ------- |
 | label     | specify which key of node object is used as the node's label | string, function(data, node) | —               | —       |
 | children | specify which node object is used as the node's subtree | string, function(data, node) | —               | —       |
-| disabled | specify which node's checkbox disabled | boolean, function(data, node) | —    | —    |
+| disabled | specify which key of node object represents if node's checkbox is disabled | boolean, function(data, node) | —    | —    |
 | isLeaf | specify whether the node is a leaf node | boolean, function(data, node) | —    | —    |
 
 ### Method

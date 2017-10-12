@@ -7,21 +7,44 @@
     margin: 0;
     padding: 0;
     height: 100%;
+    font-family: 'Helvetica Neue',Helvetica,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',SimSun,sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+
+    &.is-component {
+      overflow: hidden;
+    }
   }
 
   #app {
     height: 100%;
-  }
+    
+    @when component {
+      overflow-y: hidden;
 
-  body {
-    font-family: 'Helvetica Neue',Helvetica,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',SimSun,sans-serif;
-    overflow: auto;
-    font-weight: 400;
-    -webkit-font-smoothing: antialiased;
+      .main-cnt {
+        padding: 0;
+        margin-top: 0;
+        height: 100%;
+        min-height: auto;
+      }
+
+      .headerWrapper {
+        position: fixed;
+        width: 100%;
+        left: 0;
+        top: 0;
+        z-index: 1500;
+        
+        .container {
+          padding: 0;
+        }
+      }
+    }
   }
 
   a {
-    color: #4078c0;
+    color: #409EFF;
     text-decoration: none;
   }
 
@@ -44,7 +67,7 @@
     font-family: Menlo, Monaco, Consolas, Courier, monospace;
     font-size: 12px;
     padding: 18px 24px;
-    background-color: #f9fafc;
+    background-color: #fafafa;
     border: solid 1px #eaeefb;
     margin-bottom: 25px;
     border-radius: 4px;
@@ -107,43 +130,23 @@
       background-color: #ECF8FF;
       border-radius: 4px;
       border-left: #50bfff 5px solid;
-      margin-top: 20px;
+      margin: 20px 0;
 
       code {
-        background-color: rgba(#fff, .7);
+        background-color: rgba(255, 255, 255, .7);
         color: #445368;
       }
     }
 
     .warning {
-      border-bottom-right-radius: 4px;
-      border-left: 4px solid #f66;
-      border-top-right-radius: 4px;
-      padding: 12px 24px 12px 30px;
-      position: relative;
-      background-color: #f8f8f8;
-      margin-top: 20px;
-      
-      &::before {
-        background-color: #f66;
-        border-radius: 100%;
-        color: #fff;
-        content: "!";
-        font-family: Dosis,Source Sans Pro,Helvetica Neue,Arial,sans-serif;
-        font-size: 14px;
-        font-weight: 700;
-        left: -12px;
-        line-height: 20px;
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        text-align: center;
-        top: 50%;
-        transform: translateY(-50%);
-      }
-  
+      padding: 8px 16px;
+      background-color: #fff6f7;
+      border-radius: 4px;
+      border-left: #FE6C6F 5px solid;
+      margin: 20px 0;
+
       code {
-        background-color: rgba(#fff, .7);
+        background-color: rgba(255, 255, 255, .7);
         color: #445368;
       }
     }
@@ -163,16 +166,20 @@
     .page-container {
       padding: 0 20px;
     }
+  
+    #app.is-component .headerWrapper .container {
+      padding: 0 12px;
+    }
   }
 </style>
 
 <template>
-  <div id="app">
+  <div id="app" :class="{ 'is-component': isComponent }">
     <main-header v-if="lang !== 'play'"></main-header>
     <div class="main-cnt">
       <router-view></router-view>
     </div>
-    <main-footer v-if="lang !== 'play'"></main-footer>
+    <main-footer v-if="lang !== 'play' && !isComponent"></main-footer>
   </div>
 </template>
 
@@ -188,6 +195,9 @@
     computed: {
       lang() {
         return this.$route.path.split('/')[1] || 'zh-CN';
+      },
+      isComponent() {
+        return /^component-/.test(this.$route.name || '');
       }
     },
 
@@ -200,48 +210,11 @@
     methods: {
       localize() {
         use(this.lang === 'zh-CN' ? zhLocale : enLocale);
-      },
-
-      renderAnchorHref() {
-        if (/changelog/g.test(location.href)) return;
-        const anchors = document.querySelectorAll('h2 a,h3 a');
-        const basePath = location.href.split('#').splice(0, 2).join('#');
-
-        [].slice.call(anchors).forEach(a => {
-          const href = a.getAttribute('href');
-          a.href = basePath + href;
-        });
-      },
-
-      goAnchor() {
-        if (location.href.match(/#/g).length > 1) {
-          const anchor = location.href.match(/#[^#]+$/g);
-          if (!anchor) return;
-          const elm = document.querySelector(anchor[0]);
-          if (!elm) return;
-
-          setTimeout(_ => {
-            document.documentElement.scrollTop = document.body.scrollTop = elm.offsetTop + 120;
-          }, 50);
-        }
       }
     },
 
     mounted() {
       this.localize();
-      this.renderAnchorHref();
-      this.goAnchor();
-    },
-
-    created() {
-      window.addEventListener('hashchange', () => {
-        if (location.href.match(/#/g).length < 2) {
-          document.documentElement.scrollTop = document.body.scrollTop = 0;
-          this.renderAnchorHref();
-        } else {
-          this.goAnchor();
-        }
-      });
     }
   };
 </script>

@@ -11,6 +11,10 @@
       separator: {
         type: String,
         default: '/'
+      },
+      separatorClass: {
+        type: String,
+        default: ''
       }
     },
     mounted() {

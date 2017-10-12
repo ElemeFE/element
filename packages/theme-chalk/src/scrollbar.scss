@@ -8,7 +8,7 @@
   &:hover,
   &:active,
   &:focus {
-    .el-scrollbar__bar {
+    > .el-scrollbar__bar {
       opacity: 1;
       transition: opacity 340ms ease-out;
     }
@@ -16,6 +16,7 @@
 
   @include e(wrap) {
     overflow: scroll;
+    height: 100%;
 
     @include m(hidden-default) {
       &::-webkit-scrollbar {

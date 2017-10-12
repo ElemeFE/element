@@ -1,3 +1,5 @@
+/* Element Chalk Variables */
+
 /* Transition
 -------------------------- */
 $--all-transition: all .3s cubic-bezier(.645,.045,.355,1);
@@ -12,36 +14,36 @@ $--color-transition-base: color .2s cubic-bezier(.645,.045,.355,1);
 $--color-white: #fff;
 $--color-black: #000;
 
-$--color-primary: #1989fa;
-$--color-primary-light-1: mix($--color-white, $--color-primary, 10%); // #3095fb#
-$--color-primary-light-2: mix($--color-white, $--color-primary, 20%); // #47a1fb#
-$--color-primary-light-3: mix($--color-white, $--color-primary, 30%); // #5eadfc#
-$--color-primary-light-4: mix($--color-white, $--color-primary, 40%); // #75b8fc#
-$--color-primary-light-5: mix($--color-white, $--color-primary, 50%); // #8cc4fd#
-$--color-primary-light-6: mix($--color-white, $--color-primary, 60%); // #a3d0fd#
-$--color-primary-light-7: mix($--color-white, $--color-primary, 70%); // #badcfe#
-$--color-primary-light-8: mix($--color-white, $--color-primary, 80%); // #d1e7fe#
-$--color-primary-light-9: mix($--color-white, $--color-primary, 90%); // #e8f3ff#
+$--color-primary: #409EFF !default;
+$--color-primary-light-1: mix($--color-white, $--color-primary, 10%); /* 53a8ff */
+$--color-primary-light-2: mix($--color-white, $--color-primary, 20%); /* 66b1ff */
+$--color-primary-light-3: mix($--color-white, $--color-primary, 30%); /* 79bbff */
+$--color-primary-light-4: mix($--color-white, $--color-primary, 40%); /* 8cc5ff */
+$--color-primary-light-5: mix($--color-white, $--color-primary, 50%); /* a0cfff */
+$--color-primary-light-6: mix($--color-white, $--color-primary, 60%); /* b3d8ff */
+$--color-primary-light-7: mix($--color-white, $--color-primary, 70%); /* c6e2ff */
+$--color-primary-light-8: mix($--color-white, $--color-primary, 80%); /* d9ecff */
+$--color-primary-light-9: mix($--color-white, $--color-primary, 90%); /* ecf5ff */
 
-$--color-success: #67c23a;
-$--color-warning: #eb9e05;
-$--color-danger: #fa5555;
-$--color-info: #878d99;
+$--color-success: #67c23a !default;
+$--color-warning: #eb9e05 !default;
+$--color-danger: #fa5555 !default;
+$--color-info: #878d99 !default;
 
-$--color-success-light: mix($--color-white, $--color-success, 80%); // #e1f3d8#
-$--color-warning-light: mix($--color-white, $--color-warning, 80%); // #fbeccd#
-$--color-danger-light: mix($--color-white, $--color-danger, 80%); // #fedddd#
-$--color-info-light: mix($--color-white, $--color-info, 80%); // #e7e8eb#
+$--color-success-light: mix($--color-white, $--color-success, 80%);
+$--color-warning-light: mix($--color-white, $--color-warning, 80%);
+$--color-danger-light: mix($--color-white, $--color-danger, 80%);
+$--color-info-light: mix($--color-white, $--color-info, 80%);
 
-$--color-success-lighter: mix($--color-white, $--color-success, 90%); // #f0f9ec#
-$--color-warning-lighter: mix($--color-white, $--color-warning, 90%); // #fdf5e6#
-$--color-danger-lighter: mix($--color-white, $--color-danger, 90%); // #ffeeee#
-$--color-info-lighter: mix($--color-white, $--color-info, 90%); // #f3f4f5#
+$--color-success-lighter: mix($--color-white, $--color-success, 90%);
+$--color-warning-lighter: mix($--color-white, $--color-warning, 90%);
+$--color-danger-lighter: mix($--color-white, $--color-danger, 90%);
+$--color-info-lighter: mix($--color-white, $--color-info, 90%);
 
-$--color-text-primary: #2d2f33;
-$--color-text-regular: #5a5e66;
-$--color-text-secondary: #878d99;
-$--color-text-placeholder: #b4bccc;
+$--color-text-primary: #2d2f33 !default;
+$--color-text-regular: #5a5e66 !default;
+$--color-text-secondary: #878d99 !default;
+$--color-text-placeholder: #b4bccc !default;
 
 /* Link
 -------------------------- */
@@ -56,10 +58,10 @@ $--background-color-base: #f5f7fa;
 -------------------------- */
 $--border-width-base: 1px;
 $--border-style-base: solid;
-$--border-color-base: #d8dce6;
-$--border-color-light: #dfe4ed;
-$--border-color-lighter: #e6ebf5;
-$--border-color-extra-light: #edf2fc;
+$--border-color-base: #d8dce6 !default;
+$--border-color-light: #dfe4ed !default;
+$--border-color-lighter: #e6ebf5 !default;
+$--border-color-extra-light: #edf2fc !default;
 $--border-color-hover: $--color-text-placeholder;
 $--border-base: $--border-width-base $--border-style-base $--border-color-base;
 $--border-radius-base: 4px;
@@ -81,7 +83,6 @@ $--fill-base: $--color-white;
 $--font-size-base: 14px;
 $--font-size-small: 13px;
 $--font-size-large: 18px;
-$--font-color-base: #5a5e66;
 $--font-color-disabled-base: #bbb;
 $--font-weight-primary: 500;
 $--font-line-height-primary: 24px;
@@ -214,7 +215,7 @@ $--select-tag-height: 24px;
 $--select-tag-color: $--color-white;
 $--select-tag-background: $--color-primary;
 
-$--select-option-color: $--font-color-base;
+$--select-option-color: $--color-text-regular;
 $--select-option-disabled-color: $--color-text-placeholder;
 $--select-option-disabled-background: $--color-white;
 $--select-option-height: 34px;
@@ -307,7 +308,7 @@ $--notification-danger-color: $--color-danger;
 /* Input
 -------------------------- */
 $--input-font-size: $--font-size-base;
-$--input-color: $--font-color-base;
+$--input-color: $--color-text-regular;
 $--input-width: 140px;
 $--input-height: 40px;
 $--input-border: $--border-base;
@@ -348,10 +349,10 @@ $--cascader-menu-radius: $--border-radius-base;
 $--cascader-menu-border: $--border-base;
 $--cascader-menu-border-color: $--border-color-base;
 $--cascader-menu-border-width: $--border-width-base;
-$--cascader-menu-color: $--font-color-base;
+$--cascader-menu-color: $--color-text-regular;
 $--cascader-menu-option-color-active: $--color-text-secondary;
 $--cascader-menu-option-fill-active: rgba($--color-text-secondary, 0.12);
-$--cascader-menu-option-color-hover: $--font-color-base;
+$--cascader-menu-option-color-hover: $--color-text-regular;
 $--cascader-menu-option-fill-hover: rgba($--color-text-primary, 0.06);
 $--cascader-menu-option-color-disabled: #999;
 $--cascader-menu-option-fill-disabled: rgba($--color-black, 0.06);
@@ -375,8 +376,8 @@ $--group-title-width: 66px;
 $--tab-font-size: $--font-size-base;
 $--tab-border-line: 1px solid #e4e4e4;
 $--tab-header-color-active: $--color-text-secondary;
-$--tab-header-color-hover: $--font-color-base;
-$--tab-header-color: $--font-color-base;
+$--tab-header-color-hover: $--color-text-regular;
+$--tab-header-color: $--color-text-regular;
 $--tab-header-fill-active: rgba($--color-black, 0.06);
 $--tab-header-fill-hover: rgba($--color-black, 0.06);
 $--tab-vertical-header-width: 90px;
@@ -478,7 +479,7 @@ $--table-fixed-box-shadow: 0 0 10px rgba(0, 0, 0, .12);
 
 /* Pagination
 -------------------------- */
-$--pagination-font-size: 14px;
+$--pagination-font-size: 13px;
 $--pagination-fill: $--color-white;
 $--pagination-color: $--color-text-primary;
 $--pagination-border-radius: 3px;
@@ -568,17 +569,17 @@ $--card-padding: 20px;
 /* Slider
 --------------------------*/
 $--slider-main-background-color: $--color-primary;
-$--slider-runway-background-color: $--color-text-secondary;
-$--slider-button-hover-color: shade($--color-primary, 0.12);
-$--slider-stop-background-color: $--color-text-placeholder;
+$--slider-runway-background-color: $--border-color-light;
+$--slider-button-hover-color: mix($--color-primary, black, 97%);
+$--slider-stop-background-color: $--color-white;
 $--slider-disable-color: $--color-text-placeholder;
 
 $--slider-margin: 16px 0;
 $--slider-border-radius: 3px;
-$--slider-height: 4px;
-$--slider-button-size: 12px;
+$--slider-height: 6px;
+$--slider-button-size: 16px;
 $--slider-button-wrapper-size: 36px;
-$--slider-button-wrapper-offset: -16px;
+$--slider-button-wrapper-offset: -15px;
 
 /* Steps
 --------------------------*/

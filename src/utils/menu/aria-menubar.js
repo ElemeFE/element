@@ -1,14 +1,14 @@
 import MenuItem from './aria-menuitem';
 
-var menu = function(domNode) {
+const Menu = function(domNode) {
   this.domNode = domNode;
   this.init();
 };
 
-menu.prototype.init = function() {
-  let menuChild = this.domNode.childNodes;
-  menuChild.forEach((child) => {
-    let menuItem = new MenuItem(child); // eslint-disable-line
+Menu.prototype.init = function() {
+  let menuChildren = this.domNode.childNodes;
+  [].filter.call(menuChildren, child => child.nodeType === 1).forEach(child => {
+    new MenuItem(child); // eslint-disable-line
   });
 };
-export default menu;
+export default Menu;

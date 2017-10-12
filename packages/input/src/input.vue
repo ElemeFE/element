@@ -13,17 +13,9 @@
   ]">
     <template v-if="type !== 'textarea'">
       <!-- 前置元素 -->
-      <div class="el-input-group__prepend" v-if="$slots.prepend">
+      <div class="el-input-group__prepend" v-if="$slots.prepend"  tabindex="0">
         <slot name="prepend"></slot>
       </div>
-      <!-- 前置内容 -->
-      <span class="el-input__prefix" v-if="$slots.prefix || prefixIcon">
-        <slot name="prefix"></slot>
-        <i class="el-input__icon"
-          v-if="prefixIcon"
-          :class="prefixIcon">
-        </i>
-      </span>
       <input
         v-if="type !== 'textarea'"
         class="el-input__inner"
@@ -35,7 +27,16 @@
         @focus="handleFocus"
         @blur="handleBlur"
         @change="handleChange"
+        :aria-label="label"
       >
+      <!-- 前置内容 -->
+      <span class="el-input__prefix" v-if="$slots.prefix || prefixIcon">
+        <slot name="prefix"></slot>
+        <i class="el-input__icon"
+           v-if="prefixIcon"
+           :class="prefixIcon">
+        </i>
+      </span>
       <!-- 后置内容 -->
       <span class="el-input__suffix" v-if="$slots.suffix || suffixIcon || validateState">
         <span class="el-input__suffix-inner">
@@ -66,6 +67,8 @@
       @focus="handleFocus"
       @blur="handleBlur"
       @change="handleChange">
+      :aria-label="label"
+    >
     </textarea>
   </div>
 </template>
@@ -129,7 +132,8 @@
       },
       onIconClick: Function,
       suffixIcon: String,
-      prefixIcon: String
+      prefixIcon: String,
+      label: String
     },
 
     computed: {

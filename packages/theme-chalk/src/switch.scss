@@ -43,7 +43,13 @@
   }
 
   @include e(input) {
-    display: none;
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    &:focus ~ .el-switch__core {
+      outline: 1px solid #f00;
+    }
   }
 
   @include e(core) {

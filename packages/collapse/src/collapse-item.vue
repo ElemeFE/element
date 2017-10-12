@@ -1,11 +1,35 @@
 <template>
   <div class="el-collapse-item" :class="{'is-active': isActive}">
-    <div class="el-collapse-item__header" @click="handleHeaderClick">
-      <i class="el-collapse-item__arrow el-icon-arrow-right"></i>
-      <slot name="title">{{title}}</slot>
+    <div
+      role="tab"
+      :aria-expanded="isActive"
+      :aria-controls="`el-collapse-content-${id}`"
+      :aria-describedby ="`el-collapse-content-${id}`"
+    >
+      <div
+        class="el-collapse-item__header"
+        @click="handleHeaderClick"
+        role="button"
+        :id="`el-collapse-head-${id}`"
+        tabindex="0"
+        @keyup.space.enter.stop="handleEnterClick"
+        :class="{'focusing': focusing}"
+        @focus="focusing = true"
+        @blur="focusing = false"
+      >
+        <i class="el-collapse-item__arrow el-icon-arrow-right"></i>
+        <slot name="title">{{title}}</slot>
+      </div>
     </div>
     <el-collapse-transition>
-      <div class="el-collapse-item__wrap" v-show="isActive">
+      <div
+        class="el-collapse-item__wrap"
+        v-show="isActive"
+        role="tabpanel"
+        :aria-hidden="!isActive"
+        :aria-labelledby="`el-collapse-head-${id}`"
+        :id="`el-collapse-content-${id}`"
+      >
         <div class="el-collapse-item__content">
           <slot></slot>
         </div>
@@ -16,6 +40,7 @@
 <script>
   import ElCollapseTransition from 'element-ui/src/transitions/collapse-transition';
   import Emitter from 'element-ui/src/mixins/emitter';
+  import { generateId } from 'element-ui/src/utils/util';
 
   export default {
     name: 'ElCollapseItem',
@@ -32,7 +57,8 @@
           height: 'auto',
           display: 'block'
         },
-        contentHeight: 0
+        contentHeight: 0,
+        focusing: false
       };
     },
 
@@ -49,6 +75,9 @@
     computed: {
       isActive() {
         return this.$parent.activeNames.indexOf(this.name) > -1;
+      },
+      id() {
+        return generateId();
       }
     },
 
@@ -59,6 +88,10 @@
 
     methods: {
       handleHeaderClick() {
+        this.dispatch('ElCollapse', 'item-click', this);
+        this.focusing = false;
+      },
+      handleEnterClick() {
         this.dispatch('ElCollapse', 'item-click', this);
       }
     },

@@ -2,10 +2,10 @@
   export default {
     data() {
       return {
-        color1: '#1989fa',
+        color1: '#409EFF',
         color2: null,
         color3: 'rgba(19, 206, 102, 0.8)',
-        color4: '#20a0ff'
+        color4: '#409EFF'
       };
     },
     mounted() {
@@ -22,7 +22,7 @@
     padding: 30px 0;
     text-align: center;
     border-right: solid 1px #EFF2F6;
-    float: left;
+    display: inline-block;
     width: 50%;
     box-sizing: border-box;
     &:last-child {
@@ -61,7 +61,7 @@
   export default {
     data() {
       return {
-        color1: '#1989fa',
+        color1: '#409EFF',
         color2: null
       }
     }
@@ -101,7 +101,7 @@
   export default {
     data() {
       return {
-        color4: '#20a0ff'
+        color4: '#409EFF'
       }
     }
   };
@@ -116,6 +116,7 @@
 | size | 尺寸 | string | — | medium / small / mini |
 | show-alpha | 是否支持透明度选择 | boolean | — | false |
 | color-format | 写入 v-model 的颜色的格式 | string | hsl / hsv / hex / rgb | hex（show-alpha 为 false）/ rgb（show-alpha 为 true） |
+| popper-class | ColorPicker 下拉框的类名 | string | — | — |
 
 ### Events
 | 事件名称      | 说明    | 回调参数      |

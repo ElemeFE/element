@@ -30,7 +30,7 @@
 </template>
 
 <script>
-  import { getFirstDayOfMonth, getDayCountOfMonth, getWeekNumber, getStartDateOfMonth, DAY_DURATION } from '../util';
+  import { getFirstDayOfMonth, getDayCountOfMonth, getWeekNumber, getStartDateOfMonth, DAY_DURATION, isDate } from '../util';
   import { hasClass } from 'element-ui/src/utils/dom';
   import Locale from 'element-ui/src/mixins/locale';
 
@@ -51,13 +51,16 @@
         validator: val => val >= 1 && val <= 7
       },
 
+      value: {},
+
+      defaultValue: {
+        validator(val) {
+          // either: null, valid Date object, Array of valid Date objects
+          return val === null || isDate(val) || (Array.isArray(val) && val.every(isDate));
+        }
+      },
+
       date: {},
-
-      year: {},
-
-      month: {},
-
-      week: {},
 
       selectionMode: {
         default: 'day'
@@ -98,8 +101,12 @@
         return WEEKS.concat(WEEKS).slice(week, week + 7);
       },
 
-      monthDate() {
-        return this.date.getDate();
+      year() {
+        return this.date.getFullYear();
+      },
+
+      month() {
+        return this.date.getMonth();
       },
 
       startDate() {
@@ -107,6 +114,7 @@
       },
 
       rows() {
+        // TODO: refactory rows / getCellClasses
         const date = new Date(this.year, this.month, 1);
         let day = getFirstDayOfMonth(date); // day of first day
         const dateCountOfMonth = getDayCountOfMonth(date.getFullYear(), date.getMonth());
@@ -220,7 +228,7 @@
           this.$emit('pick', {
             minDate: this.minDate,
             maxDate: this.maxDate
-          }, true, false);
+          });
         }
       }
     },
@@ -232,9 +240,16 @@
     },
 
     methods: {
+      cellMatchesDate(cell, date) {
+        const value = new Date(date);
+        return this.year === value.getFullYear() &&
+          this.month === value.getMonth() &&
+          Number(cell.text) === value.getDate();
+      },
+
       getCellClasses(cell) {
         const selectionMode = this.selectionMode;
-        const monthDate = this.monthDate;
+        const defaultValue = this.defaultValue ? Array.isArray(this.defaultValue) ? this.defaultValue : [this.defaultValue] : [];
 
         let classes = [];
         if ((cell.type === 'normal' || cell.type === 'today') && !cell.disabled) {
@@ -246,8 +261,11 @@
           classes.push(cell.type);
         }
 
-        if (selectionMode === 'day' && (cell.type === 'normal' || cell.type === 'today') &&
-          Number(this.year) === this.date.getFullYear() && this.month === this.date.getMonth() && monthDate === Number(cell.text)) {
+        if (cell.type === 'normal' && defaultValue.some(date => this.cellMatchesDate(cell, date))) {
+          classes.push('default');
+        }
+
+        if (selectionMode === 'day' && (cell.type === 'normal' || cell.type === 'today') && this.cellMatchesDate(cell, this.value)) {
           classes.push('current');
         }
 
@@ -307,7 +325,7 @@
 
         newDate.setDate(parseInt(cell.text, 10));
 
-        return getWeekNumber(newDate) === this.week;
+        return getWeekNumber(newDate) === getWeekNumber(this.date);
       },
 
       markRange(maxDate) {

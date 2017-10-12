@@ -19,7 +19,7 @@
         overflow: hidden;
 
         &:hover {
-          border-color: #20a0ff;
+          border-color: #409EFF;
         }
       }
       .avatar-uploader-icon {
@@ -179,7 +179,7 @@ Use `before-upload` hook to limit the upload file format and size.
     overflow: hidden;
   }
   .avatar-uploader .el-upload:hover {
-    border-color: #20a0ff;
+    border-color: #409EFF;
   }
   .avatar-uploader-icon {
     font-size: 28px;

@@ -1,0 +1,170 @@
+<template>
+  <el-autocomplete
+    v-model="query"
+    size="small"
+    popper-class="algolia-search"
+    :fetch-suggestions="querySearch"
+    :placeholder="placeholder"
+    :trigger-on-focus="false"
+    @select="handleSelect">
+    <template scope="props">
+      <p class="algolia-search-title" v-if="props.item.title">
+        <span v-html="props.item.highlightedCompo"></span>
+        <span class="algolia-search-separator">></span>
+        <span v-html="props.item.title"></span>
+      </p>
+      <p
+        class="algolia-search-content"
+        v-if="props.item.content"
+        v-html="props.item.content"></p>
+      <img
+        class="algolia-search-logo"
+        src="../assets/images/search-by-algolia.svg"
+        alt="algolia-logo"
+        v-if="props.item.img">
+    </template>
+  </el-autocomplete>
+</template>
+
+<style>
+  .algolia-search {
+    width: 450px !important;
+
+    .el-autocomplete-suggestion__list {
+      position: static !important;
+      padding-bottom: 31px;
+    }
+
+    li {
+      border-bottom: solid 1px #ebebeb;
+      
+      &:last-child {
+        border-bottom: none;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #dfe4ed;
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+        box-sizing: border-box;
+        text-align: right;
+       
+        &:hover {
+          background-color: #dfe4ed;
+        }
+        
+        img {
+          display: inline-block;
+          height: 17px;
+          margin-top: 10px;
+        }
+      }
+    }
+    
+    .algolia-highlight {
+      color: #409EFF;
+      font-weight: bold;
+    }
+    
+    .algolia-search-title {
+      font-size: 14px;
+      margin: 6px 0;
+      line-height: 1.8;
+    }
+    
+    .algolia-search-separator {
+      padding: 0 6px;
+    }
+    
+    .algolia-search-content {
+      font-size: 12px;
+      margin: 6px 0;
+      line-height: 2.4;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+</style>
+
+<script>
+  import algoliasearch from 'algoliasearch';
+
+  export default {
+    data() {
+      return {
+        index: null,
+        query: ''
+      };
+    },
+
+    computed: {
+      lang() {
+        return this.$route.meta.lang;
+      },
+
+      placeholder() {
+        return this.lang === 'zh-CN' ? '搜索文档' : 'Search';
+      }
+    },
+
+    watch: {
+      lang() {
+        this.initIndex();
+      }
+    },
+
+    methods: {
+      initIndex() {
+        const client = algoliasearch('9NLTR1QH8B', 'a75cbec97cda75ab7334fed9219ecc57');
+        this.index = client.initIndex(`element-${ this.lang === 'zh-CN' ? 'zh' : 'en' }`);
+      },
+
+      querySearch(query, cb) {
+        if (!query) return;
+        this.index.search({ query, hitsPerPage: 6 }, (err, res) => {
+          if (err) {
+            console.error(err);
+            return;
+          }
+          if (res.hits.length > 0) {
+            cb(res.hits.map(hit => {
+              let content = hit._highlightResult.content.value.replace(/\s+/g, ' ');
+              const highlightStart = content.indexOf('<span class="algolia-highlight">');
+              if (highlightStart > -1) {
+                const startEllipsis = highlightStart - 15 > 0;
+                content = (startEllipsis ? '...' : '') +
+                  content.slice(Math.max(0, highlightStart - 15), content.length);
+              } else if (content.indexOf('|') > -1) {
+                content = '';
+              }
+              return {
+                anchor: hit.anchor,
+                component: hit.component,
+                highlightedCompo: hit._highlightResult.component.value,
+                title: hit._highlightResult.title.value,
+                content
+              };
+            }).concat({
+              img: true
+            }));
+          } else {
+            cb([]);
+          }
+        });
+      },
+
+      handleSelect(val) {
+        if (val.img) return;
+        const component = val.component || '';
+        const anchor = val.anchor;
+        this.$router.push(`/${ this.lang }/component/${ component }${ anchor ? `#${ anchor }` : '' }`);
+      }
+    },
+
+    mounted() {
+      this.initIndex();
+    }
+  };
+</script>

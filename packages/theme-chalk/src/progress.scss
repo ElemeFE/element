@@ -8,7 +8,7 @@
 
   @include e(text) {
     font-size:14px;
-    color: $--color-black;
+    color: $--color-text-regular;
     display: inline-block;
     vertical-align: middle;
     margin-left: 10px;
@@ -19,6 +19,7 @@
       display: block;
     }
   }
+
   @include m(circle) {
     display: inline-block;
 
@@ -37,34 +38,41 @@
       }
     }
   }
+
   @include m(without-text) {
     .el-progress__text {
       display: none;
     }
+
     .el-progress-bar {
       padding-right: 0;
       margin-right: 0;
       display: block;
     }
   }
+
   @include m(text-inside) {
     .el-progress-bar {
       padding-right: 0;
       margin-right: 0;
     }
   }
+
   @include when(success) {
     .el-progress-bar__inner {
       background-color: $--color-success;
     }
+
     .el-progress__text {
       color: $--color-success;
     }
   }
+
   @include when(exception) {
     .el-progress-bar__inner {
       background-color: $--color-danger;
     }
+
     .el-progress__text {
       color: $--color-danger;
     }
@@ -82,7 +90,7 @@
   @include e(outer) {
     height: 6px;
     border-radius: 100px;
-    background-color: $--color-black;
+    background-color: $--border-color-light;
     overflow: hidden;
     position: relative;
     vertical-align: middle;
@@ -100,6 +108,7 @@
 
     @include utils-vertical-center;
   }
+
   @include e(innerText) {
     display: inline-block;
     vertical-align: middle;
@@ -113,6 +122,7 @@
   0% {
     background-position: 0 0;
   }
+
   100% {
     background-position: 32px 0;
   }

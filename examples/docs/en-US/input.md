@@ -630,7 +630,7 @@ Search data from server-side.
 |autofocus | same as `autofocus` in native input | boolean | — | false |
 |form | same as `form` in native input | string | — | — |
 | on-icon-click | hook function when clicking on the input icon | function | — | — |
-
+| label | label text | string | — | — |
 ### Input slot
 
 | Name | Description |
@@ -657,13 +657,14 @@ Attribute | Description | Type | Options | Default
 | props | configuration options, see the following table | object | — | — |
 |icon | icon name | string | — | — |
 |value | binding value | string | — | — |
+| debounce | debounce delay when typing, in milliseconds | number | — | 300 |
 |fetch-suggestions | a method to fetch input suggestions. When suggestions are ready, invoke `callback(data:[])` to return them to Autocomplete | Function(queryString, callback) | — | — |
 | popper-class | custom class name for autocomplete's dropdown | string | — | — |
 | trigger-on-focus | whether show suggestions when input focus | boolean | — | true |
 | on-icon-click | hook function when clicking on the input icon | function | — | — |
 | name | same as `name` in native input | string | — | — |
 | select-when-unmatched | whether to emit a `select` event on enter when there is no autocomplete match | boolean | — | false |
-
+| label | label text | string | — | — |
 ### props
 | Attribute | Description | Type | Accepted Values | Default |
 | --------- | ----------------- | ------ | ------ | ------ |

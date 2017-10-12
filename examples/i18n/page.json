@@ -82,7 +82,7 @@
       "resource": {
         "paraHeight": "1.8",
         "1": "资源",
-        "2": "这里提供 Element 相关设计资源和设计工具的下载，更多设计资源正在整理和完善中。",
+        "2": "整理中",
         "3": "Axure Components",
         "4": "通过在 Axure 中导入 Element 组件库，可以在交互设计阶段方便地调用常用的组件",
         "5": "下载",
@@ -176,7 +176,7 @@
       "resource": {
         "paraHeight": "1.6",
         "1": "Resource",
-        "2": "Here you can download design resources and tools that shaped Element UI. More design resources are being prepared.",
+        "2": "Under construction.",
         "3": "Axure Components",
         "4": "By importing Element UI in Axure, you can easily apply all the components we provide during interaction design.",
         "5": "Download",

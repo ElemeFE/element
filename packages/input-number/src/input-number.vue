@@ -12,6 +12,8 @@
       class="el-input-number__decrease"
       :class="{'is-disabled': minDisabled}"
       v-repeat-click="decrease"
+      @keydown.enter="decrease"
+      role="button"
     >
       <i :class="`el-icon-${controlsAtRight ? 'arrow-down' : 'minus'}`"></i>
     </span>
@@ -20,6 +22,8 @@
       class="el-input-number__increase"
       :class="{'is-disabled': maxDisabled}"
       v-repeat-click="increase"
+      @keydown.enter="increase"
+      role="button"
     >
       <i :class="`el-icon-${controlsAtRight ? 'arrow-up' : 'plus'}`"></i>
     </span>
@@ -36,6 +40,7 @@
       :min="min"
       :name="name"
       ref="input"
+      :label="label"
     >
       <template slot="prepend" v-if="$slots.prepend">
         <slot name="prepend"></slot>
@@ -48,35 +53,15 @@
 </template>
 <script>
   import ElInput from 'element-ui/packages/input';
-  import { once, on } from 'element-ui/src/utils/dom';
   import debounce from 'throttle-debounce/debounce';
   import Focus from 'element-ui/src/mixins/focus';
+  import RepeatClick from 'element-ui/src/directives/repeat-click';
 
   export default {
     name: 'ElInputNumber',
     mixins: [Focus('input')],
     directives: {
-      repeatClick: {
-        bind(el, binding, vnode) {
-          let interval = null;
-          let startTime;
-          const handler = () => vnode.context[binding.expression].apply();
-          const clear = () => {
-            if (new Date() - startTime < 100) {
-              handler();
-            }
-            clearInterval(interval);
-            interval = null;
-          };
-
-          on(el, 'mousedown', () => {
-            startTime = new Date();
-            once(document, 'mouseup', clear);
-            clearInterval(interval);
-            interval = setInterval(handler, 100);
-          });
-        }
-      }
+      repeatClick: RepeatClick
     },
     components: {
       ElInput
@@ -111,7 +96,8 @@
         type: Number,
         default: 300
       },
-      name: String
+      name: String,
+      label: String
     },
     data() {
       return {
@@ -223,6 +209,18 @@
       this.debounceHandleInput = debounce(this.debounce, value => {
         this.handleInput(value);
       });
+    },
+    mounted() {
+      let innerInput = this.$refs.input.$refs.input;
+      innerInput.setAttribute('role', 'spinbutton');
+      innerInput.setAttribute('aria-valuemax', this.max);
+      innerInput.setAttribute('aria-valuemin', this.min);
+      innerInput.setAttribute('aria-valuenow', this.currentValue);
+      innerInput.setAttribute('aria-disabled', this.disabled);
+    },
+    updated() {
+      let innerInput = this.$refs.input.$refs.input;
+      innerInput.setAttribute('aria-valuenow', this.currentValue);
     }
   };
 </script>

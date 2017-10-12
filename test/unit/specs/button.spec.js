@@ -16,7 +16,7 @@ describe('Button', () => {
   });
   it('icon', () => {
     vm = createTest(Button, {
-      icon: 'search'
+      icon: 'el-icon-search'
     }, true);
     let buttonElm = vm.$el;
     expect(buttonElm.querySelector('.el-icon-search')).to.be.ok;

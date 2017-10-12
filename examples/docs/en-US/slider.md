@@ -214,7 +214,7 @@ Selecting a range of values is supported.
 | vertical | vertical mode | boolean | — | false |
 | height | Slider height, required in vertical mode | String | — | — |
 | label | label for screen reader | String | — | — |
-|debounce| debounce delay when typing, in millisecond, works when `show-input` is true | number | — | 300 |
+|debounce| debounce delay when typing, in milliseconds, works when `show-input` is true | number | — | 300 |
 
 ## Events
 | Event Name | Description | Parameters |

@@ -9,7 +9,7 @@
     }
     .el-dropdown-link {
       cursor: pointer;
-      color: #20a0ff;
+      color: #409EFF;
     }
     .el-icon-caret-bottom {
       font-size: 12px;
@@ -71,6 +71,17 @@ Hover on the dropdown menu to unfold it for more actions.
     <el-dropdown-item divided>Action 5</el-dropdown-item>
   </el-dropdown-menu>
 </el-dropdown>
+
+<style>
+  .el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+  }
+  .el-icon-caret-bottom {
+    font-size: 12px;
+  }
+</style>
+
 ```
 
 :::
@@ -103,6 +114,28 @@ Use the button to trigger the dropdown list.
     <el-dropdown-item>Action 5</el-dropdown-item>
   </el-dropdown-menu>
 </el-dropdown>
+
+<style>
+  .el-dropdown {
+    vertical-align: top;
+  }
+  .el-dropdown + .el-dropdown {
+    margin-left: 15px;
+  }
+  .el-icon-caret-bottom {
+    font-size: 12px;
+  }
+</style>
+
+<script>
+  export default {
+    methods: {
+      handleClick() {
+        alert('button click');
+      }
+    }
+  }
+</script>
 ```
 :::
 
@@ -145,6 +178,22 @@ Click the triggering element or hover on it.
     </el-dropdown>
   </el-col>
 </el-row>
+
+<style>
+  .el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+  }
+  .el-icon-caret-bottom {
+    font-size: 12px;
+  }
+  .demonstration {
+    display: block;
+    color: #8492a6;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+</style>
 ```
 :::
 
@@ -166,6 +215,16 @@ Use `hide-on-click` to define if menu closes on clicking.
     <el-dropdown-item divided>Action 5</el-dropdown-item>
   </el-dropdown-menu>
 </el-dropdown>
+
+<style>
+  .el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+  }
+  .el-icon-caret-bottom {
+    font-size: 12px;
+  }
+</style>
 ```
 :::
 
@@ -187,6 +246,17 @@ Clicking each dropdown item fires an event whose parameter is assigned by each i
     <el-dropdown-item command="e" divided>Action 5</el-dropdown-item>
   </el-dropdown-menu>
 </el-dropdown>
+
+<style>
+  .el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+  }
+  .el-icon-caret-bottom {
+    font-size: 12px;
+  }
+</style>
+
 <script>
   export default {
     methods: {
@@ -206,7 +276,7 @@ Besides default size, Dropdown component provides three additional sizes for you
 :::demo Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
 
 ```html
-<el-dropdown  split-button type="primary">
+<el-dropdown split-button type="primary">
   Default
   <el-dropdown-menu slot="dropdown">
     <el-dropdown-item>Action 1</el-dropdown-item>

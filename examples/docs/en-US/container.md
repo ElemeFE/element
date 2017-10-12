@@ -1,12 +1,12 @@
 <style>
   .el-header, .el-footer {
-    background-color: #1f2d3d;
-    color: #fff;
+    background-color: #B3C0D1;
+    color: #333;
     line-height: 60px;
   }
   
   .el-aside {
-    color: #fff;
+    color: #333;
   }
   
   #common-layouts + .demo-container {
@@ -15,14 +15,14 @@
     }
     
     .el-aside {
-      background-color: #8492a6;
+      background-color: #D3DCE6;
       text-align: center;
       line-height: 200px;
     }
     
     .el-main {
-      background-color: #d3dce6;
-      color: #5e6d82;
+      background-color: #E9EEF3;
+      color: #333;
       text-align: center;
       line-height: 160px;
     }
@@ -132,22 +132,22 @@ These components use flex for layout, so please make sure your browser supports 
 
 <style>
   .el-header, .el-footer {
-    background-color: #1f2d3d;
-    color: #fff;
+    background-color: #B3C0D1;
+    color: #333;
     text-align: center;
     line-height: 60px;
   }
   
   .el-aside {
-    background-color: #8492a6;
-    color: #fff;
+    background-color: #D3DCE6;
+    color: #333;
     text-align: center;
     line-height: 200px;
   }
   
   .el-main {
-    background-color: #d3dce6;
-    color: #5e6d82;
+    background-color: #E9EEF3;
+    color: #333;
     text-align: center;
     line-height: 160px;
   }
@@ -222,6 +222,7 @@ These components use flex for layout, so please make sure your browser supports 
       </el-submenu>
     </el-menu>
   </el-aside>
+  
   <el-container>
     <el-header style="text-align: right; font-size: 12px">
       <el-dropdown>
@@ -234,6 +235,7 @@ These components use flex for layout, so please make sure your browser supports 
       </el-dropdown>
       <span>Tom</span>
     </el-header>
+    
     <el-main>
       <el-table :data="tableData">
         <el-table-column prop="date" label="Date" width="140">
@@ -249,13 +251,13 @@ These components use flex for layout, so please make sure your browser supports 
 
 <style>
   .el-header {
-    background-color: #1f2d3d;
-    color: #fff;
+    background-color: #B3C0D1;
+    color: #333;
     line-height: 60px;
   }
   
   .el-aside {
-    color: #fff;
+    color: #333;
   }
 </style>
 

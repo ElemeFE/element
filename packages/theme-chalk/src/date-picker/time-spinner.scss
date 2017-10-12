@@ -22,6 +22,57 @@
     & .el-scrollbar__wrap:not(.el-scrollbar__wrap--hidden-default) {
       padding-bottom: 15px;
     }
+
+    @include when(arrow) {
+      box-sizing: border-box;
+      text-align: center;
+      overflow: hidden;
+
+      .el-time-spinner__list {
+        transform: translateY(-32px);
+      }
+
+      .el-time-spinner__item:hover:not(.disabled):not(.active) {
+        background: $--color-white;
+        cursor: default;
+      }
+    }
+  }
+
+  @include e(arrow) {
+    font-size: 12px;
+    color: $--color-text-secondary;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    z-index: $--index-normal;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    cursor: pointer;
+
+    &:hover {
+      color: $--color-primary;
+    }
+
+    &.el-icon-arrow-up {
+      top: 10px;
+    }
+
+    &.el-icon-arrow-down {
+      bottom: 10px;
+    }
+  }
+
+  @include e(input) {
+    &.el-input {
+      width: 70%;
+
+      .el-input__inner {
+        padding: 0;
+        text-align: center;
+      }
+    }
   }
 
   @include e(list) {
@@ -43,7 +94,7 @@
     height: 32px;
     line-height: 32px;
     font-size: 12px;
-    color: $--font-color-base;
+    color: $--color-text-regular;
 
     &:hover:not(.disabled):not(.active) {
       background: $--background-color-base;
