@@ -91,7 +91,12 @@ export default {
       default: 'text'   // text,picture,picture-card
     },
     httpRequest: Function,
-    disabled: Boolean
+    disabled: Boolean,
+    limit: Number,
+    onExceed: {
+      type: Function,
+      default: noop
+    }
   },
 
   data() {
@@ -239,6 +244,8 @@ export default {
         autoUpload: this.autoUpload,
         listType: this.listType,
         disabled: this.disabled,
+        limit: this.limit,
+        'on-exceed': this.onExceed,
         'on-start': this.handleStart,
         'on-progress': this.handleProgress,
         'on-success': this.handleSuccess,

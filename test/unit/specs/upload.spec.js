@@ -101,6 +101,13 @@ describe('Upload', () => {
           if (handlers.onPreview) {
             handlers.onPreview(file);
           }
+        },
+        limit: 2,
+        onExceed(files, fileList) {
+          console.log('onExceed', files, fileList);
+          if (handlers.onExceed) {
+            handlers.onExceed(files, fileList);
+          }
         }
       }
     };
@@ -222,6 +229,32 @@ describe('Upload', () => {
       setTimeout(() => {
         requests[0].respond(200, {}, `${files[0].name}`);
       }, 100);
+    });
+
+    it('limit files', done => {
+      const files = [{
+        name: 'exceed2.png',
+        type: 'xml'
+      }, {
+        name: 'exceed3.png',
+        type: 'xml'
+      }];
+
+      uploader.uploadFiles = [{
+        name: 'exceed1.png',
+        type: 'xml'
+      }];
+
+      handlers.onExceed = (files, fileList) => {
+        uploader.$nextTick(_ => {
+          expect(uploader.uploadFiles.length).to.equal(1);
+          done();
+        });
+      };
+
+      console.log(uploader.$refs['upload-inner'].limit, uploader.$refs['upload-inner'].fileList, uploader.$refs['upload-inner'].onExceed);
+
+      uploader.$nextTick(_ => uploader.$refs['upload-inner'].handleChange({ target: { files }}));
     });
   });
 });

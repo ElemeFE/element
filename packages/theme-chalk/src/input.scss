@@ -178,6 +178,10 @@
     width: 1px;
     white-space: nowrap;
 
+    &:focus {
+      outline: none;
+    }
+
     .el-select,
     .el-button {
       display: block;
