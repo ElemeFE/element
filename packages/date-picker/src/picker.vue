@@ -266,7 +266,11 @@ const valueEquals = function(a, b) {
 export default {
   mixins: [Emitter, NewPopper, Focus('reference')],
 
-  inject: ['elFormItem'],
+  inject: {
+    elFormItem: {
+      default: ''
+    }
+  },
 
   props: {
     size: String,

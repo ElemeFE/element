@@ -706,7 +706,7 @@
       fixed="right"
       label="操作"
       width="100">
-      <template scope="scope">
+      <template slot-scope="scope">
         <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
         <el-button type="text" size="small">编辑</el-button>
       </template>
@@ -912,7 +912,7 @@
       fixed="right"
       label="操作"
       width="120">
-      <template scope="scope">
+      <template slot-scope="scope">
         <el-button
           @click.native.prevent="deleteRow(scope.$index, tableData4)"
           type="text"
@@ -1194,7 +1194,7 @@
     <el-table-column
       label="日期"
       width="120">
-      <template scope="scope">{{ scope.row.date }}</template>
+      <template slot-scope="scope">{{ scope.row.date }}</template>
     </el-table-column>
     <el-table-column
       prop="name"
@@ -1367,7 +1367,7 @@
       :filters="[{ text: '家', value: '家' }, { text: '公司', value: '公司' }]"
       :filter-method="filterTag"
       filter-placement="bottom-end">
-      <template scope="scope">
+      <template slot-scope="scope">
         <el-tag
           :type="scope.row.tag === '家' ? 'primary' : 'success'"
           close-transition>{{scope.row.tag}}</el-tag>
@@ -1428,7 +1428,7 @@
     <el-table-column
       label="日期"
       width="180">
-      <template scope="scope">
+      <template slot-scope="scope">
         <el-icon name="time"></el-icon>
         <span style="margin-left: 10px">{{ scope.row.date }}</span>
       </template>
@@ -1436,7 +1436,7 @@
     <el-table-column
       label="姓名"
       width="180">
-      <template scope="scope">
+      <template slot-scope="scope">
         <el-popover trigger="hover" placement="top">
           <p>姓名: {{ scope.row.name }}</p>
           <p>住址: {{ scope.row.address }}</p>
@@ -1447,7 +1447,7 @@
       </template>
     </el-table-column>
     <el-table-column label="操作">
-      <template scope="scope">
+      <template slot-scope="scope">
         <el-button
           size="small"
           @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
@@ -1506,7 +1506,7 @@
     :data="tableData5"
     style="width: 100%">
     <el-table-column type="expand">
-      <template scope="props">
+      <template slot-scope="props">
         <el-form label-position="left" inline class="demo-table-expand">
           <el-form-item label="商品名称">
             <span>{{ props.row.name }}</span>

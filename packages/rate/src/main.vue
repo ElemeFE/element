@@ -1,24 +1,20 @@
 <template>
-  <div class="el-rate"
-       @keydown="handelKey"
-       role="slider"
-       :aria-valuenow="currentValue"
-       :aria-valuetext="text"
-       aria-valuemin="0"
-       :aria-valuemin="max"
-       tabindex="0"
-       @focus="focusing = true"
-       @blur="focusing = false"
-       :class="{'focusing': focusing}"
-  >
+  <div
+    class="el-rate"
+    @keydown="handelKey"
+    role="slider"
+    :aria-valuenow="currentValue"
+    :aria-valuetext="text"
+    aria-valuemin="0"
+    :aria-valuemax="max"
+    tabindex="0">
     <span
       v-for="item in max"
       class="el-rate__item"
       @mousemove="setCurrentValue(item, $event)"
       @mouseleave="resetCurrentValue"
       @click="selectValue(item)"
-      :style="{ cursor: disabled ? 'auto' : 'pointer' }"
-    >
+      :style="{ cursor: disabled ? 'auto' : 'pointer' }">
       <i
         :class="[classes[item - 1], { 'hover': hoverIndex === item }]"
         class="el-rate__icon"
@@ -35,7 +31,7 @@
   </div>
 </template>
 
-<script type="text/babel">
+<script>
   import { hasClass } from 'element-ui/src/utils/dom';
 
   export default {
@@ -46,8 +42,7 @@
         classMap: {},
         pointerAtLeftHalf: true,
         currentValue: this.value,
-        hoverIndex: -1,
-        focusing: false
+        hoverIndex: -1
       };
     },
 
@@ -250,7 +245,6 @@
           this.$emit('input', value);
           this.$emit('change', value);
         }
-        this.focusing = false;
       },
 
       handelKey(e) {

@@ -87,7 +87,11 @@ export default {
 
   mixins: [popperMixin, emitter, Locale],
 
-  inject: ['elFormItem'],
+  inject: {
+    elFormItem: {
+      default: ''
+    }
+  },
 
   components: {
     ElInput

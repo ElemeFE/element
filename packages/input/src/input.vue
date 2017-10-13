@@ -85,7 +85,11 @@
 
     mixins: [emitter, Focus('input')],
 
-    inject: ['elFormItem'],
+    inject: {
+      elFormItem: {
+        default: ''
+      }
+    },
 
     data() {
       return {

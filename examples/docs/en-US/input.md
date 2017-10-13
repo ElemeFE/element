@@ -476,7 +476,7 @@ Customize how suggestions are displayed.
   @select="handleSelect"
   icon="edit"
   :on-icon-click="handleIconClick">
-  <template scope="props">
+  <template slot-scope="props">
     <div class="value">{{ props.item.value }}</div>
     <span class="link">{{ props.item.link }}</span>
   </template>
