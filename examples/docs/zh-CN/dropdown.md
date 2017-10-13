@@ -11,7 +11,7 @@
       cursor: pointer;
       color: #409EFF;
     }
-    .el-icon-caret-bottom {
+    .el-icon-arrow-down {
       font-size: 12px;
     }
   }
@@ -63,7 +63,7 @@
 ```html
 <el-dropdown>
   <span class="el-dropdown-link">
-    下拉菜单<i class="el-icon-caret-bottom el-icon--right"></i>
+    下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
   </span>
   <el-dropdown-menu slot="dropdown">
     <el-dropdown-item>黄金糕</el-dropdown-item>
@@ -80,7 +80,7 @@
     cursor: pointer;
     color: #409EFF;
   }
-  .el-icon-caret-bottom {
+  .el-icon-arrow-down {
     font-size: 12px;
   }
 </style>
@@ -96,7 +96,7 @@
 ```html
 <el-dropdown>
   <el-button type="primary">
-    更多菜单<i class="el-icon-caret-bottom el-icon--right"></i>
+    更多菜单<i class="el-icon-arrow-down el-icon--right"></i>
   </el-button>
   <el-dropdown-menu slot="dropdown">
     <el-dropdown-item>黄金糕</el-dropdown-item>
@@ -124,7 +124,7 @@
   .el-dropdown + .el-dropdown {
     margin-left: 15px;
   }
-  .el-icon-caret-bottom {
+  .el-icon-arrow-down {
     font-size: 12px;
   }
 </style>
@@ -153,7 +153,7 @@
     <span class="demonstration">hover 激活</span>
     <el-dropdown>
       <span class="el-dropdown-link">
-        下拉菜单<i class="el-icon-caret-bottom el-icon--right"></i>
+        下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item>黄金糕</el-dropdown-item>
@@ -168,7 +168,7 @@
     <span class="demonstration">click 激活</span>
     <el-dropdown trigger="click">
       <span class="el-dropdown-link">
-        下拉菜单<i class="el-icon-caret-bottom el-icon--right"></i>
+        下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item>黄金糕</el-dropdown-item>
@@ -187,7 +187,7 @@
     cursor: pointer;
     color: #409EFF;
   }
-  .el-icon-caret-bottom {
+  .el-icon-arrow-down {
     font-size: 12px;
   }
   .demonstration {
@@ -208,7 +208,7 @@
 ```html
 <el-dropdown :hide-on-click="false">
   <span class="el-dropdown-link">
-    下拉菜单<i class="el-icon-caret-bottom el-icon--right"></i>
+    下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
   </span>
   <el-dropdown-menu slot="dropdown">
     <el-dropdown-item>黄金糕</el-dropdown-item>
@@ -224,7 +224,7 @@
     cursor: pointer;
     color: #409EFF;
   }
-  .el-icon-caret-bottom {
+  .el-icon-arrow-down {
     font-size: 12px;
   }
 </style>
@@ -239,7 +239,7 @@
 ```html
 <el-dropdown @command="handleCommand">
   <span class="el-dropdown-link">
-    下拉菜单<i class="el-icon-caret-bottom el-icon--right"></i>
+    下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
   </span>
   <el-dropdown-menu slot="dropdown">
     <el-dropdown-item command="a">黄金糕</el-dropdown-item>
@@ -255,7 +255,7 @@
     cursor: pointer;
     color: #409EFF;
   }
-  .el-icon-caret-bottom {
+  .el-icon-arrow-down {
     font-size: 12px;
   }
 </style>

@@ -156,10 +156,10 @@
 <style>
   .demo-form.demo-zh-CN {
     .el-select .el-input {
-      width: 360px;
+      width: 380px;
     }
     .el-form {
-      width: 440px;
+      width: 460px;
     }
 
     .line {
@@ -196,7 +196,7 @@
       }
     }
     .demo-form-normal {
-      width: 440px;
+      width: 460px;
     }
     .demo-form-inline {
       width: auto;
