@@ -399,6 +399,7 @@
 | default-value | 可选，选择器打开时默认显示的时间 | Date | 可被`new Date()`解析 | — |
 | value-format | 可选，绑定值的格式。不指定则绑定值为 Date 对象 | string | 年 `yyyy`，月 `MM`，日 `dd`，小时 `HH`，分 `mm`，秒 `ss` | — |
 | name | 原生属性 | string | — | — |
+| unlink-panels | 在范围选择器里取消两个日期面板之间的联动 | boolean | — | false |
 
 ### Picker Options
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
