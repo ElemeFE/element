@@ -83,6 +83,14 @@
     &:hover {
       color: $--datepicker-text-hover-color;
     }
+
+    @include when(disabled) {
+      color: $--font-color-disabled-base;
+
+      &:hover {
+        cursor: not-allowed;
+      }
+    }
   }
 
   @include e(link-btn) {
