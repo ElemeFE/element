@@ -6,7 +6,7 @@
       'is-success': validateState === 'success',
       'is-required': isRequired || required
     },
-    elFormItemSize ? 'el-form-item--' + elFormItemSize : ''
+    sizeClass ? 'el-form-item--' + sizeClass : ''
   ]">
     <label :for="prop" class="el-form-item__label" v-bind:style="labelStyle" v-if="label || $slots.label">
       <slot name="label">{{label + form.labelSuffix}}</slot>
@@ -167,6 +167,9 @@
       },
       elFormItemSize() {
         return this.size || this._formSize;
+      },
+      sizeClass() {
+        return (this.$ELEMENT || {}).size || this.elFormItemSize;
       }
     },
     data() {

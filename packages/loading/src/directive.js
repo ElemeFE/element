@@ -105,13 +105,9 @@ exports.install = Vue => {
 
     unbind: function(el, binding) {
       if (el.domInserted) {
-        if (binding.modifiers.fullscreen || binding.modifiers.body) {
-          document.body.removeChild(el.mask);
-        } else {
-          el.mask &&
-          el.mask.parentNode &&
-          el.mask.parentNode.removeChild(el.mask);
-        }
+        el.mask &&
+        el.mask.parentNode &&
+        el.mask.parentNode.removeChild(el.mask);
       }
     }
   });

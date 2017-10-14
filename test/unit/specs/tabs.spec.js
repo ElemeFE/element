@@ -106,7 +106,7 @@ describe('Tabs', () => {
     vm = createVue({
       template: `
         <el-tabs type="card" ref="tabs">
-          <el-tab-pane :label="tab.label" :name="tab.name" v-for="tab in tabs">Test Content</el-tab-pane>
+          <el-tab-pane :label="tab.label" :name="tab.name" v-for="tab in tabs" :key="tab.name">Test Content</el-tab-pane>
         </el-tabs>
       `,
       data() {
@@ -146,6 +146,7 @@ describe('Tabs', () => {
         <el-tabs ref="tabs" v-model="editableTabsValue" type="card" editable @edit="handleTabsEdit">
           <el-tab-pane
             v-for="(item, index) in editableTabs"
+            :key="item.name"
             :label="item.title"
             :name="item.name"
           >
@@ -238,6 +239,7 @@ describe('Tabs', () => {
           <el-tab-pane
             v-for="(item, index) in editableTabs"
             :label="item.title"
+            :key="item.name"
             :name="item.name"
           >
             {{item.content}}
