@@ -3,14 +3,17 @@
     <div class="el-switch__mask" v-show="disabled"></div>
     <input
       class="el-switch__input"
+      :class="{ 'allow-focus': allowFocus }"
       type="checkbox"
       @change="handleChange"
+      @focus="handleFocus"
+      @blur="handleBlur"
       ref="input"
       :name="name"
       :true-value="onValue"
       :false-value="offValue"
       :disabled="disabled">
-    <span class="el-switch__core" ref="core" :style="{ 'width': coreWidth + 'px' }">
+    <span class="el-switch__core" ref="core" :style="{ 'width': coreWidth + 'px' }" @click="setFocus">
       <span class="el-switch__button" :style="{ transform }"></span>
     </span>
     <transition name="label-fade">
@@ -85,6 +88,10 @@
       name: {
         type: String,
         default: ''
+      },
+      allowFocus: {
+        type: Boolean,
+        default: false
       }
     },
     data() {
@@ -131,6 +138,22 @@
         let newColor = this.checked ? this.onColor : this.offColor;
         this.$refs.core.style.borderColor = newColor;
         this.$refs.core.style.backgroundColor = newColor;
+      },
+      setFocus() {
+        // set focus on input
+        if (this.allowFocus) {
+          this.$refs.input.focus();
+        }
+      },
+      handleBlur(event) {
+        if (this.allowFocus) {
+          this.$emit('blur', event);
+        }
+      },
+      handleFocus(event) {
+        if (this.allowFocus) {
+          this.$emit('focus', event);
+        }
       }
     },
     mounted() {
