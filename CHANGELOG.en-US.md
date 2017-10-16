@@ -177,6 +177,14 @@ in `lazy` mode #6235
 ##
 <i><sup>*</sup> Dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily lead to [XSS attacks](https://en.wikipedia.org/wiki/Cross-site_scripting). So when `dangerouslyUseHTMLString` is on, please make sure the content of `message` is trusted, and **never** assign `message` to user-provided content.</i>
 
+### 1.4.7
+
+*2017-10-16*
+
+- Fixed compatibility of Autocomplete and Vue 2.5.x, #6942 (by @rennai)
+- Added `allow-focus` attribute for Switch, #7494 (by @breadadams)
+
+
 ### 1.4.6
 
 *2017-09-27*
