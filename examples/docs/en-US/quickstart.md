@@ -339,6 +339,26 @@ Vue.prototype.$notify = Notification
 Vue.prototype.$message = Message
 ```
 
+### Global config
+When importing Element, you can define a global config object. For now this object has only one property: `size`, which sets the default size for all components:
+
+Fully import Element：
+```JS
+import Vue from 'vue'
+import Element from 'element-ui'
+Vue.use(Element, { size: 'small' })
+```
+
+Partial import Element：
+```JS
+import Vue from 'vue'
+import { Button } from 'element-ui'
+
+Vue.prototype.$ELEMENT = { size: 'small' }
+Vue.use(Button)
+```
+With the above config, the default size of all components that have size attribute will be 'small'.
+
 ### Start coding
 
 Now you have implemented Vue and Element to your project, and it's time to write your code. Start development mode:

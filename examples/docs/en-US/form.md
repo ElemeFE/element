@@ -803,7 +803,7 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 
 | Method | Description | Parameters |
 | ---- | ---- | ---- |
-| validate | the method to validate the whole form | Function(callback: Function(boolean)) |
+| validate | the method to validate the whole form. Returns a promise if callback is omitted | Function(callback: Function(boolean)) |
 | validateField | the method to validate a certain form item | Function(prop: string, callback: Function(errorMessage: string)) |
 | resetFields | reset all the fields and remove validation result | — |
 

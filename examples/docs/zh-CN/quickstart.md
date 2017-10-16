@@ -339,6 +339,26 @@ Vue.prototype.$notify = Notification
 Vue.prototype.$message = Message
 ```
 
+### 全局配置
+在引入 Element 时，可以传入一个全局配置对象。该对象目前仅支持 `size` 字段，用于改变组件的默认尺寸。按照引入 Element 的方式，具体操作如下：
+
+完整引入 Element：
+```JS
+import Vue from 'vue'
+import Element from 'element-ui'
+Vue.use(Element, { size: 'small' })
+```
+
+按需引入 Element：
+```JS
+import Vue from 'vue'
+import { Button } from 'element-ui'
+
+Vue.prototype.$ELEMENT = { size: 'small' }
+Vue.use(Button)
+```
+按照以上设置，项目中所有拥有 `size` 属性的组件的默认尺寸均为 'small'。
+
 ### 开始使用
 
 至此，一个基于 Vue 和 Element 的开发环境已经搭建完毕，现在就可以编写代码了。启动开发模式：
