@@ -94,34 +94,3 @@ Just assign the class name to `el-icon-iconName`.
     </span>
   </li>
 </ul>
-
-### Third-party icons
-
-Some of Element's components has an `icon` attribute, e.g. Input. If you want to use a third-party icon in the `icon` attribute, here's what you need to do:
-<p>
-  <span>1.</span> Modify the class name prefix of the third-party library
-</p>
-
-Please read third-party icon library documentation on how to do it. For example, if you're using [iconfont.cn](http://iconfont.cn/), you can find prefix editor in the "Edit Project" dialog. If you're using [Font Awesome](http://fontawesome.io/), you can refer to [this demo](https://github.com/ElementUI/element-font-awesome).
-
-<p>
-  <span>2.</span> Add some CSS:
-</p>
-
-```CSS
-[class^="el-icon-my"], [class*=" el-icon-my"] {
-font-family:"your-font-family" !important;
-
-/* The following is based on original CSS rules of third-party library */
-font-size: inherit;
-font-style:normal;
--webkit-font-smoothing: antialiased;
--moz-osx-font-smoothing: grayscale;
-}
-```
-
-Now you can use them as you do with Element built-in icons. For example, in el-input:
-
-```html
-<el-input icon="my-xxx" />
-```

@@ -158,3 +158,8 @@ name| input name of Switch | string | — | —
  Event Name | Description | Parameters
 ---- | ----| ----
 change | triggers when value changes | value after changing
+
+### Methods
+Method | Description | Parameters
+------|--------|-------
+focus | focus the Switch component | —

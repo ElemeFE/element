@@ -154,6 +154,9 @@
         overflow: auto;
         display: block;
       }
+      .page-component-up {
+        display: none;
+      }
     }
   }
 </style>

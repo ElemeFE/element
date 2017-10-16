@@ -47,8 +47,9 @@
     width: 0;
     height: 0;
     opacity: 0;
+    margin: 0;
     &:focus ~ .el-switch__core {
-      outline: 1px solid #f00;
+      outline: 1px solid $--color-primary;
     }
   }
 

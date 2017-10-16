@@ -84,7 +84,7 @@
   .container,
   .page-container {
     width: 1140px;
-    padding: 0 30px;
+    padding: 0;
     margin: 0 auto;
   }
 

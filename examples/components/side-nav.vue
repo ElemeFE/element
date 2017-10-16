@@ -130,7 +130,7 @@
         </template>
       </li>
     </ul>
-    <div id="code-sponsor-widget"></div>
+    <!--<div id="code-sponsor-widget"></div>-->
   </div>
 </template>
 <script>

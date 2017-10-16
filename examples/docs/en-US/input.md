@@ -680,4 +680,4 @@ Attribute | Description | Type | Options | Default
 ### Methods
 | Method | Description | Parameters |
 |------|--------|-------|
-| focus | focus the Input component | - |
+| focus | focus the Input component | — |

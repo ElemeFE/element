@@ -92,6 +92,10 @@
       position: relative;
       cursor: pointer;
     
+      &.nav-algolia-search {
+        cursor: default;
+      }
+    
       &.lang-item,
       &:last-child {
         cursor: default;
@@ -255,6 +259,9 @@
           padding: 0 5px;
         }
       }
+      .nav-theme-switch, .nav-algolia-search {
+        display: none;
+      }
     }
   }
 
@@ -284,37 +291,37 @@
       :style="headerStyle"
       :class="{
         'header-home': isHome,
-        'header-light': isComponentPage
+        'header-light': !isHome
       }">
       <div class="container">
         <h1><router-link :to="`/${ lang }`">
           <!-- logo -->
-          <slot v-if="isComponentPage">
+          <slot v-if="!isHome">
             <img
-                src="../assets/images/element-logo.svg"
-                alt="element-logo"
-                class="nav-logo">
+              src="../assets/images/element-logo.svg"
+              alt="element-logo"
+              class="nav-logo">
             <img
-                src="../assets/images/element-logo-small.svg"
-                alt="element-logo"
-                class="nav-logo-small">
+              src="../assets/images/element-logo-small.svg"
+              alt="element-logo"
+              class="nav-logo-small">
           </slot>
-          <slot v-else>
+          <slot v-if="isHome">
             <img
-                src="../assets/images/element-logo-white.svg"
-                alt="element-logo"
-                class="nav-logo">
+              src="../assets/images/element-logo-white.svg"
+              alt="element-logo"
+              class="nav-logo">
             <img
-                src="../assets/images/element-logo-small-white.svg"
-                alt="element-logo"
-                class="nav-logo-small">
+              src="../assets/images/element-logo-small-white.svg"
+              alt="element-logo"
+              class="nav-logo-small">
           </slot>
 
         </router-link></h1>
 
         <!-- nav -->
         <ul class="nav">
-          <li class="nav-item" v-show="isComponentPage">
+          <li class="nav-item nav-algolia-search" v-show="isComponentPage">
             <algolia-search></algolia-search>
           </li>
           <li class="nav-item">
@@ -384,7 +391,7 @@
           </li>
           
           <!--theme picker-->
-          <li  class="nav-item" v-show="isComponentPage">
+          <li class="nav-item nav-theme-switch" v-show="isComponentPage">
             <theme-picker></theme-picker>
           </li>
         </ul>
@@ -406,8 +413,7 @@
         headerStyle: {},
         versions: [],
         version,
-        dropdownVisible: true,
-        isComponentPage: true
+        dropdownVisible: true
       };
     },
 
@@ -431,6 +437,9 @@
       },
       langConfig() {
         return compoLang.filter(config => config.lang === this.lang)[0]['header'];
+      },
+      isComponentPage() {
+        return /^component/.test(this.$route.name);
       }
     },
 
@@ -452,13 +461,12 @@
 
       handlePathChange() {
         const routerName = this.$route.name;
-        this.isComponentPage = /^component-/.test(routerName);
         this.isHome = /^home/.test(routerName);
-        if (this.isComponentPage) {
+        if (!this.isHome) {
           this.headerStyle.backgroundColor = '#fff';
           return;
         }
-        this.headerStyle.backgroundColor = `rgba(32, 160, 255, ${ this.isHome ? '0' : '1' })`;
+        this.headerStyle.backgroundColor = 'rgba(32, 160, 255, 0)';
       }
     },
 
