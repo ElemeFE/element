@@ -5,7 +5,7 @@
 # Element
 <p align="left">
 forked from <a href="https://github.com/ElemeFE/element" >
-ElemeFE/element
+ElemeFE/element version1.4.6
 </a>
 </p>
 ## LICENSE
