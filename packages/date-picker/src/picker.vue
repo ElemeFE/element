@@ -69,7 +69,7 @@
 <script>
 import Vue from 'vue';
 import Clickoutside from 'element-ui/src/utils/clickoutside';
-import { formatDate, parseDate, isDate, isDateObject, getWeekNumber } from './util';
+import { formatDate, parseDate, isDateObject, getWeekNumber } from './util';
 import Popper from 'element-ui/src/utils/vue-popper';
 import Emitter from 'element-ui/src/mixins/emitter';
 import Focus from 'element-ui/src/mixins/focus';
@@ -464,7 +464,7 @@ export default {
     },
 
     formatToValue(date, customFormat) {
-      if (this.valueFormat && (isDate(date) || Array.isArray(date))) {
+      if (this.valueFormat && (isDateObject(date) || Array.isArray(date))) {
         const format = customFormat || this.valueFormat;
         return formatAsFormatAndType(date, format, this.type, this.rangeSeparator);
       } else {
