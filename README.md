@@ -3,7 +3,7 @@
 </p>
 
 # Element
-<p align="center">
+<p align="left">
 forked from <a href="https://github.com/ElemeFE/element" >
 ElemeFE/element
 </a>
