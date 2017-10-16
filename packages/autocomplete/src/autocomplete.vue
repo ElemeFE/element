@@ -147,9 +147,7 @@
       handleComposition(event) {
         if (event.type === 'compositionend') {
           this.isOnComposition = false;
-          this.$nextTick(() => {
-            this.handleChange(this.value);
-          });
+          this.handleChange(event.target.value);
         } else {
           this.isOnComposition = true;
         }

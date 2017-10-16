@@ -1,5 +1,52 @@
 ## Changelog
 
+### 2.0.0-alpha.3
+
+*2017-10-16*
+
+#### New features
+- General
+  - Configure component sizes globally. Now when you import Element, you can add a global config object with a `size` prop to configure default sizes for all components. For fully import:
+  ```JS
+  import Vue from 'vue'
+  import Element from 'element-ui'
+  Vue.use(Element, { size: 'small' })
+  ```
+  For partial import:
+  ```JS
+  import Vue from 'vue'
+  import { Button } from 'element-ui'
+  
+  Vue.prototype.$ELEMENT = { size: 'small' }
+  Vue.use(Button)
+  ```
+  With the above config, the default size of all components that have `size` attribute will be 'small'.
+- Loading
+  - Now you can customize spinner icon and background color with `spinner` and `background` prop, #7390
+- Autocomplete
+  - Added `debounce` attribute, #7413
+- Upload
+  - Added `limit` and `on-exceed` attributes to limit the amount of files, #7405
+- Menu
+  - Added `open` and `close` methods to open and close SubMenu programmatically, #7412
+- DatePicker
+  - Added `value-format` attribute to customize the format of the binding value, #7367
+- TimePicker
+  - Added `arrow-control` attribute to spin the time with arrows #7438
+- DateTimePicker
+  - Added `time-arrow-control` attribute to activate `arrow-control` of the nesting TimePicker, #7438
+- Form
+  - Form and Form-item now have a `size` attribute. Inner components will inherit this size if not specified on themselves, #7428
+  - `validate` method will now return a promise if the callback is omitted, #7405
+
+#### Fixes
+- Fixed the console warning `Injection "elFormItem" not found` of some components
+
+#### Breaking changes
+- The params of DatePicker's `change` event is now the binding value itself. Its format is controlled by `value-format`
+- Input's `change` event now behaves like the native input element, which triggers only on blur or pressing enter. If you need to respond to user input in real time, you can use `input` event.
+- Only compatible with Vue 2.5.2 and beyond
+
 ### 2.0.0-alpha.2
 
 *2017-10-05*
