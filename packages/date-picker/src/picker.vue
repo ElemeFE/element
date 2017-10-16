@@ -69,7 +69,7 @@
 <script>
 import Vue from 'vue';
 import Clickoutside from 'element-ui/src/utils/clickoutside';
-import { formatDate, parseDate, isDate, getWeekNumber } from './util';
+import { formatDate, parseDate, isDate, isDateObject, getWeekNumber } from './util';
 import Popper from 'element-ui/src/utils/vue-popper';
 import Emitter from 'element-ui/src/mixins/emitter';
 import Focus from 'element-ui/src/mixins/focus';
@@ -229,23 +229,23 @@ const PLACEMENT_MAP = {
   right: 'bottom-end'
 };
 
-const parseAsFormatAndType = (value, cutsomFormat, type, rangeSeparator = '-') => {
+const parseAsFormatAndType = (value, customFormat, type, rangeSeparator = '-') => {
   if (!value) return null;
   const parser = (
     TYPE_VALUE_RESOLVER_MAP[type] ||
     TYPE_VALUE_RESOLVER_MAP['default']
   ).parser;
-  const format = cutsomFormat || DEFAULT_FORMATS[type];
+  const format = customFormat || DEFAULT_FORMATS[type];
   return parser(value, format, rangeSeparator);
 };
 
-const formatAsFormatAndType = (value, cutsomFormat, type) => {
+const formatAsFormatAndType = (value, customFormat, type) => {
   if (!value) return null;
   const formatter = (
     TYPE_VALUE_RESOLVER_MAP[type] ||
     TYPE_VALUE_RESOLVER_MAP['default']
   ).formatter;
-  const format = cutsomFormat || DEFAULT_FORMATS[type];
+  const format = customFormat || DEFAULT_FORMATS[type];
   return formatter(value, format);
 };
 
@@ -421,7 +421,7 @@ export default {
     },
 
     parsedValue() {
-      const isParsed = isDate(this.value) || (Array.isArray(this.value) && this.value.every(isDate));
+      const isParsed = isDateObject(this.value) || (Array.isArray(this.value) && this.value.every(isDateObject));
       if (this.valueFormat && !isParsed) {
         return parseAsFormatAndType(this.value, this.valueFormat, this.type, this.rangeSeparator) || this.value;
       } else {
