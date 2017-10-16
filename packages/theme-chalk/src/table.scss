@@ -138,6 +138,10 @@
     border-bottom: $--table-border;
   }
 
+  th.is-sortable {
+    cursor: pointer;
+  }
+
   th {
     white-space: nowrap;
     overflow: hidden;

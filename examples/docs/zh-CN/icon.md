@@ -91,33 +91,3 @@
     </span>
   </li>
 </ul>
-
-### 第三方图标库
-
-Element 的一些组件提供了 `icon` 属性（如 Input），如果希望传入第三方图标库中的图标，需要进行如下操作：
-<p>
-  <span>1.</span> 修改第三方图标库的前缀（见下方说明）
-</p>
-<p>
-  <span>2.</span> 添加以下 CSS：
-</p>
-
-```CSS
-[class^="el-icon-my"], [class*=" el-icon-my"] {
-  font-family:"your-font-family" !important;
-  
-  /* 以下内容参照第三方图标库本身的规则 */
-  font-size: inherit;
-  font-style:normal;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-```
-
-之后就可以像使用 Element 内置图标一样使用第三方图标。比如在 el-input 中：
-
-```html
-<el-input icon="my-xxx" />
-```
-
-关于如何修改第三方图标库的前缀，请参阅第三方图标库的文档。比如，如果使用 [iconfont.cn](http://iconfont.cn/)，则可以在「编辑项目」弹框中修改；如果使用 [Font Awesome](http://fontawesome.io/)，可以参考[这个示例](https://github.com/ElementUI/element-font-awesome)。

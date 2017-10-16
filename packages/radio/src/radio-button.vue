@@ -39,7 +39,11 @@
 
     mixins: [Emitter],
 
-    inject: ['elFormItem'],
+    inject: {
+      elFormItem: {
+        default: ''
+      }
+    },
 
     props: {
       label: {},

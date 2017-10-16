@@ -664,7 +664,7 @@ When there are too many columns, you can fix some of them.
       fixed="right"
       label="Operations"
       width="120">
-      <template scope="scope">
+      <template slot-scope="scope">
         <el-button @click="handleClick" type="text" size="small">Detail</el-button>
         <el-button type="text" size="small">Edit</el-button>
       </template>
@@ -873,7 +873,7 @@ When the the data is dynamically changed, you might want the table to have a max
       fixed="right"
       label="Operations"
       width="120">
-      <template scope="scope">
+      <template slot-scope="scope">
         <el-button
           @click.native.prevent="deleteRow(scope.$index, tableData4)"
           type="text"
@@ -1154,7 +1154,7 @@ You can also select multiple rows.
     <el-table-column
       label="Date"
       width="120">
-      <template scope="scope">{{ scope.row.date }}</template>
+      <template slot-scope="scope">{{ scope.row.date }}</template>
     </el-table-column>
     <el-table-column
       property="name"
@@ -1325,7 +1325,7 @@ Filter the table to find desired data.
       :filters="[{ text: 'Home', value: 'Home' }, { text: 'Office', value: 'Office' }]"
       :filter-method="filterTag"
       filter-placement="bottom-end">
-      <template scope="scope">
+      <template slot-scope="scope">
         <el-tag
           :type="scope.row.tag === 'Home' ? 'primary' : 'success'"
           close-transition>{{scope.row.tag}}</el-tag>
@@ -1386,7 +1386,7 @@ Customize table column so it can be integrated with other components.
     <el-table-column
       label="Date"
       width="180">
-      <template scope="scope">
+      <template slot-scope="scope">
         <el-icon name="time"></el-icon>
         <span style="margin-left: 10px">{{ scope.row.date }}</span>
       </template>
@@ -1394,7 +1394,7 @@ Customize table column so it can be integrated with other components.
     <el-table-column
       label="Name"
       width="180">
-      <template scope="scope">
+      <template slot-scope="scope">
         <el-popover trigger="hover" placement="top">
           <p>Name: {{ scope.row.name }}</p>
           <p>Addr: {{ scope.row.address }}</p>
@@ -1406,7 +1406,7 @@ Customize table column so it can be integrated with other components.
     </el-table-column>
     <el-table-column
       label="Operations">
-      <template scope="scope">
+      <template slot-scope="scope">
         <el-button
           size="small"
           @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
@@ -1465,7 +1465,7 @@ When the row content is too long and you do not want to display the horizontal s
     :data="tableData3"
     style="width: 100%">
     <el-table-column type="expand">
-      <template scope="props">
+      <template slot-scope="props">
         <p>State: {{ props.row.state }}</p>
         <p>City: {{ props.row.city }}</p>
         <p>Address: {{ props.row.address }}</p>

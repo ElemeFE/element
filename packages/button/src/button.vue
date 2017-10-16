@@ -25,7 +25,11 @@
   export default {
     name: 'ElButton',
 
-    inject: ['elFormItem'],
+    inject: {
+      elFormItem: {
+        default: ''
+      }
+    },
 
     props: {
       type: {

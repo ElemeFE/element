@@ -60,7 +60,11 @@
   export default {
     name: 'ElInputNumber',
     mixins: [Focus('input')],
-    inject: ['elFormItem'],
+    inject: {
+      elFormItem: {
+        default: ''
+      }
+    },
     directives: {
       repeatClick: RepeatClick
     },

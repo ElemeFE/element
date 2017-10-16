@@ -22,7 +22,6 @@
   }
 
   .el-input__inner {
-    font-weight: bold;
     text-align: center;
   }
 
@@ -108,6 +107,8 @@
 
   @include e(sizes) {
     margin: 0 10px 0 0;
+    font-weight: normal;
+    color: $--color-text-regular;
 
     .el-input .el-input__inner {
       font-size: $--pagination-font-size;
@@ -121,10 +122,18 @@
 
   @include e(total) {
     margin-right: 10px;
+    font-weight: normal;
+    color: $--color-text-regular;
   }
 
   @include e(jump) {
     margin-left: 24px;
+    font-weight: normal;
+    color: $--color-text-regular;
+
+    .el-input__inner {
+      padding: 0 3px;
+    }
   }
 
   @include e(rightwrapper) {

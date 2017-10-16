@@ -46,7 +46,11 @@
       popperClass: String
     },
 
-    inject: ['elFormItem'],
+    inject: {
+      elFormItem: {
+        default: ''
+      }
+    },
 
     directives: { Clickoutside },
 

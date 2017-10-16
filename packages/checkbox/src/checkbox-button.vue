@@ -51,7 +51,11 @@
 
     mixins: [Emitter],
 
-    inject: ['elFormItem'],
+    inject: {
+      elFormItem: {
+        default: ''
+      }
+    },
 
     data() {
       return {

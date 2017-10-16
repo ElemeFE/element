@@ -1,11 +1,13 @@
 <template>
-  <div class="el-form-item" :class="{
-    'el-form-item--feedback': elForm && elForm.statusIcon,
-    'is-error': validateState === 'error',
-    'is-validating': validateState === 'validating',
-    'is-success': validateState === 'success',
-    'is-required': isRequired || required
-  }">
+  <div class="el-form-item" :class="[{
+      'el-form-item--feedback': elForm && elForm.statusIcon,
+      'is-error': validateState === 'error',
+      'is-validating': validateState === 'validating',
+      'is-success': validateState === 'success',
+      'is-required': isRequired || required
+    },
+    sizeClass ? 'el-form-item--' + sizeClass : ''
+  ]">
     <label :for="prop" class="el-form-item__label" v-bind:style="labelStyle" v-if="label || $slots.label">
       <slot name="label">{{label + form.labelSuffix}}</slot>
     </label>
@@ -165,6 +167,9 @@
       },
       elFormItemSize() {
         return this.size || this._formSize;
+      },
+      sizeClass() {
+        return (this.$ELEMENT || {}).size || this.elFormItemSize;
       }
     },
     data() {

@@ -411,7 +411,7 @@ on-progress | hook function when some progress occurs | function(event, file, fi
 on-change | hook function when select file or upload file success or upload file fail | function(file, fileList) | — | — |
 before-upload | hook function before uploading with the file to be uploaded as its parameter. If `false` is returned or a `Promise` is returned and then is rejected, uploading will be aborted | function(file) | — | —
 thumbnail-mode | whether thumbnail is displayed | boolean | — | false
-file-list | default uploaded files, e.g. [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}] | array | — | []
+file-list | default uploaded files, e.g. [{name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg'}] | array | — | []
 list-type | type of fileList | string | text/picture/picture-card | text |
 auto-upload | whether to auto upload file | boolean | — | true |
 http-request | override default xhr behavior, allowing you to implement your own upload-file's request | function | — | — |

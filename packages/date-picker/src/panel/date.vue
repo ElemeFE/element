@@ -192,8 +192,6 @@
           if (this.currentView !== 'year' || this.currentView !== 'month') {
             this.currentView = 'month';
           }
-        } else if (newVal === 'week') {
-          this.week = getWeekNumber(this.date);
         }
       }
     },

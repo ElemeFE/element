@@ -977,7 +977,7 @@ describe('Table', () => {
             template: `
             <el-table row-key="id" :data="testData" @expand="handleExpand" ${extra}>
               <el-table-column type="expand">
-                <template scope="props">
+                <template slot-scope="props">
                   <div>{{props.row.name}}</div>
                 </template>
               </el-table-column>

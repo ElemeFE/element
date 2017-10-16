@@ -74,6 +74,8 @@
   - 新增 `separator-class` 属性，可使用图标作为分隔符 #7203
 - Steps
   - 新增 `simple` 属性，用于开启简洁风格的步骤条 #7274
+- Pagination
+  - 新增 `prev-text` 和 `next-text` 属性，用于自定义上一页和下一页的文本 #7005
 
 #### 修复
 - DatePicker

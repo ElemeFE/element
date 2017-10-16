@@ -140,7 +140,11 @@
 
     componentName: 'ElSelect',
 
-    inject: ['elFormItem'],
+    inject: {
+      elFormItem: {
+        default: ''
+      }
+    },
 
     provide() {
       return {

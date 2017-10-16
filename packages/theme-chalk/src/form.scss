@@ -47,18 +47,55 @@
     display: none;
   }
 
+  @include m(medium) {
+    .el-form-item__label {
+      line-height: 36px;
+    }
+    .el-form-item__content {
+      line-height: 36px;
+    }
+  }
+  @include m(small) {
+    .el-form-item__label {
+      line-height: 32px;
+    }
+    .el-form-item__content {
+      line-height: 32px;
+    }
+    &.el-form-item {
+      margin-bottom: 18px;
+    }
+    .el-form-item__error {
+      padding-top: 2px;
+    }
+  }
+  @include m(mini) {
+    .el-form-item__label {
+      line-height: 28px;
+    }
+    .el-form-item__content {
+      line-height: 28px;
+    }
+    &.el-form-item {
+      margin-bottom: 18px;
+    }
+    .el-form-item__error {
+      padding-top: 1px;
+    }
+  }
+
   @include e(label) {
     text-align: right;
     vertical-align: middle;
     float: left;
     font-size: 14px;
-    color: $--color-black;
-    line-height: 1;
-    padding: 11px 12px 11px 0;
+    color: $--color-text-regular;
+    line-height: 40px;
+    padding: 0 12px 0 0;
     box-sizing: border-box;
   }
   @include e(content) {
-    line-height: 36px;
+    line-height: 40px;
     position: relative;
     font-size: 14px;
     @include utils-clearfix;

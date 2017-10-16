@@ -77,6 +77,8 @@ in `lazy` mode #6235
   - Added `separator-class` attribute to support icons as item separators #7203
 - Steps
   - Added `simple` attribute to activate simple-styled Steps #7274
+- Pagination
+  - Added `prev-text` and `next-text` attributes to customize texts of prev page and next page #7005
 
 #### Bug fixes
 - DatePicker

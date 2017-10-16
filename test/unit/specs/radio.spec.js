@@ -21,10 +21,10 @@ describe('Radio', () => {
     let radioElm = vm.$el;
     expect(radioElm.classList.contains('el-radio')).to.be.true;
     radioElm.click();
-    vm.$nextTick(_ => {
+    setTimeout(_ => {
       expect(radioElm.querySelector('.is-checked')).to.be.ok;
       done();
-    });
+    }, 10);
   });
   it('disabled', done => {
     vm = createVue({
@@ -44,11 +44,11 @@ describe('Radio', () => {
     }, true);
     let radioElm = vm.$el;
     radioElm.click();
-    vm.$nextTick(_ => {
+    setTimeout(_ => {
       expect(vm.radio === '').to.be.true;
       expect(radioElm.querySelector('.is-disabled')).to.be.ok;
       done();
-    });
+    }, 10);
   });
   it('change event', done => {
     vm = createVue({
@@ -127,11 +127,11 @@ describe('Radio', () => {
         expect(vm.$refs.radio1.$el.querySelector('.is-checked')).to.be.ok;
         let radioElm = vm.$refs.radio2.$el;
         radioElm.click();
-        vm.$nextTick(_ => {
+        setTimeout(_ => {
           expect(radioElm.querySelector('.is-checked')).to.be.ok;
           expect(vm.radio === 6).to.be.true;
           done();
-        });
+        }, 10);
       }, 50);
     });
     it('disabled', done => {
@@ -153,11 +153,11 @@ describe('Radio', () => {
       expect(vm.$el.querySelectorAll('label.is-disabled').length).to.be.equal(3);
       expect(vm.$refs.radio1.$el.querySelector('.is-checked')).to.be.exist;
       radio2.$el.click();
-      vm.$nextTick(_ => {
+      setTimeout(_ => {
         expect(vm.radio === 3).to.be.true;
         expect(vm.$refs.radio1.$el.querySelector('.is-checked')).to.be.exist;
         done();
-      });
+      }, 10);
     });
     it('change event', done => {
       vm = createVue({
@@ -233,11 +233,11 @@ describe('Radio', () => {
       expect(vm.$el.querySelectorAll('.is-disabled').length).to.be.equal(3);
       expect(vm.$refs.radio1.$el.classList.contains('is-active')).to.be.true;
       radio2.$el.click();
-      vm.$nextTick(_ => {
+      setTimeout(_ => {
         expect(vm.radio === 3).to.be.true;
         expect(vm.$refs.radio1.$el.classList.contains('is-active')).to.be.true;
         done();
-      });
+      }, 10);
     });
     describe('Radio Button', () => {
       it('create', done => {
@@ -258,11 +258,11 @@ describe('Radio', () => {
         expect(vm.$refs.radio1.$el.classList.contains('is-active')).to.be.true;
         let radio = vm.$refs.radio2;
         radio.$el.click();
-        vm.$nextTick(_ => {
+        setTimeout(_ => {
           expect(radio.$el.classList.contains('is-active')).to.be.true;
           expect(vm.radio === 6).to.be.true;
           done();
-        });
+        }, 10);
       });
       it('custom color', done => {
         vm = createVue({
@@ -279,12 +279,12 @@ describe('Radio', () => {
             };
           }
         }, true);
-        vm.$nextTick(_ => {
+        setTimeout(_ => {
           expect(vm.$refs.radio1.activeStyle.backgroundColor).to.equal('#000');
           expect(vm.$refs.radio1.activeStyle.borderColor).to.equal('#000');
           expect(vm.$refs.radio1.activeStyle.color).to.equal('#ff0');
           done();
-        });
+        }, 10);
       });
       it('change event', done => {
         vm = createVue({
@@ -356,10 +356,10 @@ describe('Radio', () => {
             };
           }
         }, true);
-        vm.$nextTick(_ => {
+        setTimeout(_ => {
           expect(vm.$el.querySelectorAll('.el-radio-button--large').length).to.be.equal(3);
           done();
-        });
+        }, 10);
       });
     });
   });

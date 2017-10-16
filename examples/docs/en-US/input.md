@@ -476,7 +476,7 @@ Customize how suggestions are displayed.
   @select="handleSelect"
   icon="edit"
   :on-icon-click="handleIconClick">
-  <template scope="props">
+  <template slot-scope="props">
     <div class="value">{{ props.item.value }}</div>
     <span class="link">{{ props.item.link }}</span>
   </template>
@@ -680,4 +680,4 @@ Attribute | Description | Type | Options | Default
 ### Methods
 | Method | Description | Parameters |
 |------|--------|-------|
-| focus | focus the Input component | - |
+| focus | focus the Input component | — |

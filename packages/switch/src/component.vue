@@ -36,8 +36,11 @@
   </div>
 </template>
 <script>
+  import Focus from 'element-ui/src/mixins/focus';
+
   export default {
     name: 'ElSwitch',
+    mixins: [Focus('input')],
     props: {
       value: {
         type: [Boolean, String, Number],

@@ -1,7 +1,7 @@
 var webpackConfig = require('../../build/cooking.test');
 
 // no need for app entry during tests
-delete webpackConfig.entry;
+// delete webpackConfig.entry;
 
 module.exports = function(config) {
   config.set({

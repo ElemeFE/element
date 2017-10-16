@@ -116,7 +116,7 @@ cooking.add('vueMarkdown', {
 var wrap = function(render) {
   return function() {
     return render.apply(this, arguments)
-      .replace('<code class="', '<code class="hljs ')
+      .replace('<code v-pre class="', '<code class="hljs ')
       .replace('<code>', '<code class="hljs">');
   };
 };

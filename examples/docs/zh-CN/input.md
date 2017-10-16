@@ -546,7 +546,7 @@ export default {
   @select="handleSelect"
   icon="edit"
   :on-icon-click="handleIconClick">
-  <template scope="props">
+  <template slot-scope="props">
     <div class="name">{{ props.item.value }}</div>
     <span class="addr">{{ props.item.address }}</span>
   </template>
