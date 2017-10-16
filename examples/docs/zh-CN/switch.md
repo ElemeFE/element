@@ -124,8 +124,11 @@
 | on-color  | switch 打开时的背景色    | string   | — | #20A0FF |
 | off-color  | switch 关闭时的背景色    | string   | — | #C0CCDA |
 | name  | switch 对应的 name 属性    | string   | — | — |
+| allow-focus  | 允许 switch 触发 focus 和 blur 事件 | boolean | — | false |
 
 ### Events
 | 事件名称      | 说明    | 回调参数      |
 |---------- |-------- |---------- |
 | change  | switch 状态发生变化时的回调函数    | 新状态的值 |
+| blur  | switch 失去焦点时触发，仅当 `allow-focus` 为 true 时生效 | Event 事件对象 |
+| focus  | switch 获得焦点时触发，仅当 `allow-focus` 为 true 时生效 | Event 事件对象 |

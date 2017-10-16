@@ -1,5 +1,12 @@
 ## Changelog
 
+### 1.4.7
+
+*2017-10-16*
+
+- Fixed compatibility of Autocomplete and Vue 2.5.x, #6942 (by @rennai)
+- Added `allow-focus` attribute for Switch, #7494 (by @breadadams)
+
 ### 1.4.6
 
 *2017-09-27*

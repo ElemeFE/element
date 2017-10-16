@@ -1,5 +1,11 @@
 ## 更新日志
 
+### 1.4.7
+*2017-10-16*
+
+- 修复 Autocomplete 与 Vue 2.5.x 不兼容的问题，#6942（by @rennai）
+- Switch 新增 `allow-focus` 属性，#7494（by @breadadams）
+
 ### 1.4.6
 *2017-09-27*
 
