@@ -1,4 +1,4 @@
-import { getValueByPath } from 'element-ui/src/utils/util';
+import { getValueByPath } from 'ele-fork-ui/src/utils/util';
 
 export const getCell = function(event) {
   let cell = event.target;

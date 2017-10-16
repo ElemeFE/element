@@ -5,9 +5,9 @@
     "utils": {
       "plugins": [
         ["module-resolver", {
-          "root": ["element-ui"],
+          "root": ["ele-fork-ui"],
           "alias": {
-            "element-ui/src": "element-ui/lib"
+            "ele-fork-ui/src": "ele-fork-ui/lib"
           }
         }]
       ]

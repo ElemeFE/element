@@ -24,7 +24,7 @@
 </template>
 
 <script type="text/babel">
-  import { hasClass } from 'element-ui/src/utils/dom';
+  import { hasClass } from 'ele-fork-ui/src/utils/dom';
 
   export default {
     name: 'ElRate',

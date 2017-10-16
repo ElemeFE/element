@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-  import Emitter from 'element-ui/src/mixins/emitter';
+  import Emitter from 'ele-fork-ui/src/mixins/emitter';
 
   export default {
     name: 'ElRadioGroup',

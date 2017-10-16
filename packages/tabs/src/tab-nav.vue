@@ -1,6 +1,6 @@
 <script>
   import TabBar from './tab-bar';
-  import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
+  import { addResizeListener, removeResizeListener } from 'ele-fork-ui/src/utils/resize-event';
 
   function noop() {}
 

@@ -1,6 +1,6 @@
 <script>
-  import { isDef } from 'element-ui/src/utils/shared';
-  import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
+  import { isDef } from 'ele-fork-ui/src/utils/shared';
+  import scrollIntoView from 'ele-fork-ui/src/utils/scroll-into-view';
 
   const copyArray = (arr, props) => {
     if (!arr || !Array.isArray(arr) || !props) return arr;

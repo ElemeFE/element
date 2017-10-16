@@ -32,7 +32,7 @@
 
 <script type="text/babel">
   import { limitRange } from '../util';
-  import Locale from 'element-ui/src/mixins/locale';
+  import Locale from 'ele-fork-ui/src/mixins/locale';
 
   export default {
     mixins: [Locale],

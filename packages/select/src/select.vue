@@ -91,20 +91,20 @@
 </template>
 
 <script type="text/babel">
-  import Emitter from 'element-ui/src/mixins/emitter';
-  import Locale from 'element-ui/src/mixins/locale';
-  import ElInput from 'element-ui/packages/input';
+  import Emitter from 'ele-fork-ui/src/mixins/emitter';
+  import Locale from 'ele-fork-ui/src/mixins/locale';
+  import ElInput from 'ele-fork-ui/packages/input';
   import ElSelectMenu from './select-dropdown.vue';
   import ElOption from './option.vue';
-  import ElTag from 'element-ui/packages/tag';
-  import ElScrollbar from 'element-ui/packages/scrollbar';
+  import ElTag from 'ele-fork-ui/packages/tag';
+  import ElScrollbar from 'ele-fork-ui/packages/scrollbar';
   import debounce from 'throttle-debounce/debounce';
-  import Clickoutside from 'element-ui/src/utils/clickoutside';
-  import { addClass, removeClass, hasClass } from 'element-ui/src/utils/dom';
-  import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
-  import { t } from 'element-ui/src/locale';
-  import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
-  import { getValueByPath } from 'element-ui/src/utils/util';
+  import Clickoutside from 'ele-fork-ui/src/utils/clickoutside';
+  import { addClass, removeClass, hasClass } from 'ele-fork-ui/src/utils/dom';
+  import { addResizeListener, removeResizeListener } from 'ele-fork-ui/src/utils/resize-event';
+  import { t } from 'ele-fork-ui/src/locale';
+  import scrollIntoView from 'ele-fork-ui/src/utils/scroll-into-view';
+  import { getValueByPath } from 'ele-fork-ui/src/utils/util';
 
   const sizeMap = {
     'large': 42,

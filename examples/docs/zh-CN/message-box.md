@@ -266,7 +266,7 @@ Element 为 Vue.prototype 添加了如下全局方法：$msgbox, $alert, $confir
 单独引入 `MessageBox`：
 
 ```javascript
-import { MessageBox } from 'element-ui';
+import { MessageBox } from 'ele-fork-ui';
 ```
 
 对应于上述四个全局方法的调用方法依次为：MessageBox, MessageBox.alert, MessageBox.confirm 和 MessageBox.prompt。

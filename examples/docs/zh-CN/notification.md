@@ -217,7 +217,7 @@ Element 为 `Vue.prototype` 添加了全局方法 `$notify`。因此在 vue inst
 单独引入 Notification：
 
 ```javascript
-import { Notification } from 'element-ui';
+import { Notification } from 'ele-fork-ui';
 ```
 
 此时调用方法为 `Notification(options)`。我们也为每个 type 定义了各自的方法，如 `Notification.success(options)`。

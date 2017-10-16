@@ -193,7 +193,7 @@
 ### 服务
 Loading 还可以以服务的方式调用。引入 Loading 服务：
 ```javascript
-import { Loading } from 'element-ui';
+import { Loading } from 'ele-fork-ui';
 ```
 在需要调用时：
 ```javascript

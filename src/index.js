@@ -64,8 +64,8 @@ import CollapseItem from '../packages/collapse-item/index.js';
 import Cascader from '../packages/cascader/index.js';
 import ColorPicker from '../packages/color-picker/index.js';
 import Transfer from '../packages/transfer/index.js';
-import locale from 'element-ui/src/locale';
-import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
+import locale from 'ele-fork-ui/src/locale';
+import CollapseTransition from 'ele-fork-ui/src/transitions/collapse-transition';
 
 const components = [
   Pagination,
