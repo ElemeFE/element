@@ -411,20 +411,28 @@ describe('DatePicker', () => {
             ref="compo"
             v-model="value"
             type="date"
-            value-format="dd-MM-yyyy" />`,
+            format="yyyy-MM-dd"
+            value-format="dd/MM yyyy" />`,
         data() {
           return {
-            value: '01-02-2000'
+            value: '01/02 2000'
           };
         }
       }, true);
-      vm.$refs.compo.$el.querySelector('input').focus();
+      const input = vm.$refs.compo.$el.querySelector('input');
+      expect(input.value).to.equal('2000-02-01');
+      expect(vm.$refs.compo.parsedValue).to.be.an.instanceof(Date);
+      input.focus();
       setTimeout(_ => {
         const date = vm.$refs.compo.picker.date;
         expect(date.getFullYear()).to.equal(2000);
         expect(date.getMonth()).to.equal(1);
         expect(date.getDate()).to.equal(1);
-        done();
+        vm.$refs.compo.picker.$el.querySelector('.el-date-table .current').click();
+        setTimeout(_ => {
+          expect(input.value).to.equal('2000-02-01');
+          done();
+        }, DELAY);
       }, DELAY);
     });
 

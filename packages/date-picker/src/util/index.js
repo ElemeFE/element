@@ -31,6 +31,10 @@ export const isDate = function(date) {
   return true;
 };
 
+export const isDateObject = function(val) {
+  return val instanceof Date;
+};
+
 export const formatDate = function(date, format) {
   date = toDate(date);
   if (!date) return '';
