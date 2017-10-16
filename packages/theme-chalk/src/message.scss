@@ -68,6 +68,9 @@
     padding: 0;
     font-size: 14px;
     line-height: 1;
+    &:focus {
+      outline-width: 0;
+    }
   }
 
   @include e(closeBtn) {
@@ -79,6 +82,9 @@
     color: $--message-close-color;
     font-size: $--message-close-size;
 
+    &:focus {
+      outline-width: 0;
+    }
     &:hover {
       color: $--message-close-hover-color;
     }

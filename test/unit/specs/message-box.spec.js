@@ -164,9 +164,11 @@ describe('MessageBox', () => {
     });
     setTimeout(() => {
       document.querySelector('.el-message-box__close').click();
-      expect(msgAction).to.equal('cancel');
-      done();
-    }, 50);
+      setTimeout(() => {
+        expect(msgAction).to.equal('cancel');
+        done();
+      }, 10);
+    }, 10);
   });
 
   it('beforeClose', done => {

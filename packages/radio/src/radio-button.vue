@@ -4,7 +4,8 @@
     :class="[
       size ? 'el-radio-button--' + size : '',
       { 'is-active': value === label },
-      { 'is-disabled': isDisabled }
+      { 'is-disabled': isDisabled },
+      { 'is-focus': focus }
     ]"
     role="radio"
     :aria-checked="value === label"
@@ -21,6 +22,8 @@
       @change="handleChange"
       :disabled="isDisabled"
       tabindex="-1"
+      @focus="focus = true"
+      @blur="focus = false"
     >
     <span class="el-radio-button__inner" :style="value === label ? activeStyle : null">
       <slot></slot>
@@ -43,7 +46,11 @@
       disabled: Boolean,
       name: String
     },
-
+    data() {
+      return {
+        focus: false
+      };
+    },
     computed: {
       value: {
         get() {

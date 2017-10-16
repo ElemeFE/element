@@ -34,7 +34,8 @@
     data() {
       return {
         scrollable: false,
-        navOffset: 0
+        navOffset: 0,
+        isFocus: false
       };
     },
 
@@ -119,6 +120,38 @@
             this.navOffset = 0;
           }
         }
+      },
+      changeTab(e) {
+        const keyCode = e.keyCode;
+        let nextIndex;
+        let currentIndex, tabList;
+        if ([37, 38, 39, 40].indexOf(keyCode) !== -1) { // 左右上下键更换tab
+          tabList = e.currentTarget.querySelectorAll('[role=tab]');
+          currentIndex = Array.prototype.indexOf.call(tabList, e.target);
+        } else {
+          return;
+        }
+        if (keyCode === 37 || keyCode === 38) { // left
+          if (currentIndex === 0) { // first
+            nextIndex = tabList.length - 1;
+          } else {
+            nextIndex = currentIndex - 1;
+          }
+        } else { // right
+          if (currentIndex < tabList.length - 1) { // not last
+            nextIndex = currentIndex + 1;
+          } else {
+            nextIndex = 0;
+          }
+        }
+        tabList[nextIndex].focus(); // 改变焦点元素
+        tabList[nextIndex].click(); // 选中下一个tab
+      },
+      setFocus() {
+        this.isFocus = true;
+      },
+      removeFocus() {
+        this.isFocus = false;
       }
     },
 
@@ -136,9 +169,11 @@
         navStyle,
         scrollable,
         scrollNext,
-        scrollPrev
+        scrollPrev,
+        changeTab,
+        setFocus,
+        removeFocus
       } = this;
-
       const scrollBtn = scrollable
       ? [
         <span class={['el-tabs__nav-prev', scrollable.prev ? '' : 'is-disabled']} on-click={scrollPrev}><i class="el-icon-arrow-left"></i></span>,
@@ -156,17 +191,27 @@
           : null;
 
         const tabLabelContent = pane.$slots.label || pane.label;
+        const tabindex = pane.active ? 0 : -1;
         return (
           <div
             class={{
               'el-tabs__item': true,
               'is-active': pane.active,
               'is-disabled': pane.disabled,
-              'is-closable': closable
+              'is-closable': closable,
+              'is-focus': this.isFocus
             }}
+            id={`tab-${tabName}`}
+            aria-controls={`pane-${tabName}`}
+            role="tab"
+            aria-selected= { pane.active }
             ref="tabs"
+            tabindex= {tabindex}
             refInFor
-            on-click={(ev) => { onTabClick(pane, tabName, ev); }}
+            on-focus= { ()=> { setFocus(); }}
+            on-blur = { ()=> { removeFocus(); }}
+            on-click={(ev) => { removeFocus(); onTabClick(pane, tabName, ev); }}
+            on-keydown={(ev) => { if (closable && (ev.keyCode === 46 || ev.keyCode === 8)) { onTabRemove(pane, ev);} }}
           >
             {tabLabelContent}
             {btnClose}
@@ -177,7 +222,7 @@
         <div class={['el-tabs__nav-wrap', scrollable ? 'is-scrollable' : '']}>
           {scrollBtn}
           <div class={['el-tabs__nav-scroll']} ref="navScroll">
-            <div class="el-tabs__nav" ref="nav" style={navStyle}>
+            <div class="el-tabs__nav" ref="nav" style={navStyle} role="tablist" on-keydown={ changeTab }>
               {!type ? <tab-bar tabs={panes}></tab-bar> : null}
               {tabs}
             </div>
