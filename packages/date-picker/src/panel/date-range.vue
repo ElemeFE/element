@@ -279,11 +279,11 @@
       enableMonthArrow() {
         const nextMonth = (this.leftMonth + 1) % 12;
         const yearOffset = this.leftMonth + 1 >= 12 ? 1 : 0;
-        return this.unlockPanelLink && new Date(`${this.leftYear + yearOffset}-${nextMonth + 1}`) < new Date(`${this.rightYear}-${this.rightMonth + 1}`);
+        return this.unlinkPanels && new Date(`${this.leftYear + yearOffset}-${nextMonth + 1}`) < new Date(`${this.rightYear}-${this.rightMonth + 1}`);
       },
 
       enableYearArrow() {
-        return this.unlockPanelLink && this.rightYear * 12 + this.rightMonth - (this.leftYear * 12 + this.leftMonth + 1) >= 12;
+        return this.unlinkPanels && this.rightYear * 12 + this.rightMonth - (this.leftYear * 12 + this.leftMonth + 1) >= 12;
       }
     },
 
@@ -311,7 +311,7 @@
         maxTimePickerVisible: false,
         format: '',
         arrowControl: false,
-        unlockPanelLink: false
+        unlinkPanels: false
       };
     },
 
@@ -515,7 +515,7 @@
 
       leftPrevYear() {
         this.leftDate = modifyDate(this.leftDate, this.leftYear - 1, this.leftMonth, this.leftMonthDate);
-        if (!this.unlockPanelLink) {
+        if (!this.unlinkPanels) {
           this.rightDate = nextMonth(this.leftDate);
         }
       },
@@ -526,7 +526,7 @@
 
       leftPrevMonth() {
         this.leftDate = prevMonth(this.leftDate);
-        if (!this.unlockPanelLink) {
+        if (!this.unlinkPanels) {
           this.rightDate = nextMonth(this.leftDate);
         }
       },
@@ -540,7 +540,7 @@
       },
 
       rightNextYear() {
-        if (!this.unlockPanelLink) {
+        if (!this.unlinkPanels) {
           this.leftDate = modifyDate(this.leftDate, this.leftYear + 1, this.leftMonth, this.leftMonthDate);
           this.rightDate = nextMonth(this.leftDate);
         } else {
@@ -553,7 +553,7 @@
       },
 
       rightNextMonth() {
-        if (!this.unlockPanelLink) {
+        if (!this.unlinkPanels) {
           this.leftDate = nextMonth(this.leftDate);
           this.rightDate = nextMonth(this.leftDate);
         } else {
