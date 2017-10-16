@@ -4,6 +4,7 @@
     :class="[
       border && radioSize ? 'el-radio--' + radioSize : '',
       { 'is-disabled': isDisabled },
+      { 'is-focus': focus },
       { 'is-bordered': border },
       { 'is-checked': model === label }
     ]"
@@ -16,8 +17,7 @@
     <span class="el-radio__input"
       :class="{
         'is-disabled': isDisabled,
-        'is-checked': model === label,
-        'is-focus': focus
+        'is-checked': model === label
       }"
     >
       <span class="el-radio__inner"></span>

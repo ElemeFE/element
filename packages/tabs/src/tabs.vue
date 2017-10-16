@@ -102,6 +102,8 @@
             <span
               class="el-tabs__new-tab"
               on-click={ handleTabAdd }
+              tabindex="0"
+              on-keydown={ (ev) => { if (ev.keyCode === 13) { handleTabAdd(); }} }
             >
                 <i class="el-icon-plus"></i>
             </span>

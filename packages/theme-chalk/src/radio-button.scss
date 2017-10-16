@@ -5,6 +5,7 @@
 @include b(radio-button) {
   position: relative;
   display: inline-block;
+  outline: none;
 
   @include e(inner) {
     display: inline-block;
@@ -78,15 +79,6 @@
       box-shadow: none !important;
     }
   }
-  &:focus {
-    outline: none;
-    .el-radio-button__inner { /*获得焦点时 样式提醒*/
-      box-shadow: 0 0 1px 1px $--radio-button-checked-border-color;
-    }
-    &.is-disabled .el-radio-button__inner {
-      box-shadow: none;
-    }
-  }
   &:last-child {
     .el-radio-button__inner {
       border-radius: 0 $--border-radius-base $--border-radius-base 0;
@@ -113,5 +105,9 @@
     & .el-radio-button__inner {
       @include button-size($--button-mini-padding-vertical, $--button-mini-padding-horizontal, $--button-mini-font-size, 0);
     }
+  }
+
+  &:focus:not(.is-focus):not(:active){ /*获得焦点时 样式提醒*/
+    box-shadow: 0 0 2px 2px $--radio-button-checked-border-color;
   }
 }
