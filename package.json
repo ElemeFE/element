@@ -1,6 +1,6 @@
 {
   "name": "ele-fork-ui",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A Component Library for Vue.js.",
   "main": "lib/ele-fork-ui.common.js",
   "files": [
