@@ -2,11 +2,10 @@
 # yarn lockfile v1
 
 
-"2webpack2@^0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/2webpack2/-/2webpack2-0.5.0.tgz#20c6818b9feb558381f457daeff039557e60d7d7"
+"2webpack2@^1.0.0":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/2webpack2/-/2webpack2-1.2.1.tgz#5f0ffe0693bf407154fb5bef8960e4e7e11c6d28"
   dependencies:
-    chalk "^1.1.3"
     object-set "^1.0.1"
 
 CSSselect@~0.4.0:
@@ -1557,18 +1556,17 @@ cooking-lint@^0.1.3:
     eslint-plugin-react "*"
     eslint-plugin-vue "*"
 
-cooking-vue2@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/cooking-vue2/-/cooking-vue2-0.3.0.tgz#a38062164d80df49a788b1669dcb45eddab91238"
+cooking-vue2@^0.3.3:
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/cooking-vue2/-/cooking-vue2-0.3.3.tgz#c5a9959de4babedb66925c48498267758d4014cb"
   dependencies:
     vue-loader ">=9.4.2"
-    vue-template-compiler "*"
 
-cooking@^1.2.0:
-  version "1.2.7"
-  resolved "https://registry.yarnpkg.com/cooking/-/cooking-1.2.7.tgz#89f0f8a38aa506b11fd7bdceeca9b8242bb0c9e1"
+cooking@^1.5.4:
+  version "1.5.4"
+  resolved "https://registry.yarnpkg.com/cooking/-/cooking-1.5.4.tgz#1f40d898cc78b2c00635c04475fad8ef38979553"
   dependencies:
-    "2webpack2" "^0.5.0"
+    "2webpack2" "^1.0.0"
     chalk "^1.1.3"
     commander "^2.9.0"
     is-path-inside "^1.0.0"
@@ -2956,11 +2954,7 @@ fstream@^1.0.0, fstream@^1.0.2, fstream@~1.0.10:
     mkdirp ">=0.5 0"
     rimraf "2"
 
-function-bind@^1.0.2, function-bind@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/function-bind/-/function-bind-1.1.0.tgz#16176714c801798e4e8f2cf7f7529467bb4a5771"
-
-function-bind@^1.1.1:
+function-bind@^1.0.2, function-bind@^1.1.0, function-bind@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/function-bind/-/function-bind-1.1.1.tgz#a56899d3ea3c9bab874bb9773b7c5ede92f4895d"
 
@@ -7951,7 +7945,7 @@ vue-style-loader@^3.0.0:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
 
-vue-template-compiler@*, vue-template-compiler@^2.5.2:
+vue-template-compiler@^2.5.2:
   version "2.5.2"
   resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.5.2.tgz#6f198ebc677b8f804315cd33b91e849315ae7177"
   dependencies:
