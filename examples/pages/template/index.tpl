@@ -37,7 +37,7 @@
     margin-top: -140px;
     transform: skewY(-5deg);
     transform-origin: center;
-    background-image: linear-gradient(180deg, #0d1a44 13%, #3c4f91 56%, #5fc1e4 100%);
+    background-image: linear-gradient(180deg, #0d1a44 13%, #fc7814 56%, #FFCAA3 100%);
   }
   img.banner-stars {
     top: -10px;
