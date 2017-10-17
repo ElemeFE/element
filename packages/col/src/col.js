@@ -38,7 +38,7 @@ export default {
     }
 
     ['span', 'offset', 'pull', 'push'].forEach(prop => {
-      if (this[prop]) {
+      if (this[prop] || this[prop] === 0) {
         classList.push(
           prop !== 'span'
           ? `el-col-${prop}-${this[prop]}`

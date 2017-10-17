@@ -340,6 +340,21 @@
 ```
 :::
 
+### 基于断点的隐藏
+
+```js
+import 'element-ui/lib/theme-chalk/display.scss';
+```
+
+- `hidden-xs-only` - 当视口在 `xs` 尺寸时隐藏
+- `hidden-sm-only` - 当视口在 `sm` 尺寸时隐藏
+- `hidden-sm-and-down` - 当视口在 `sm` 及以下尺寸时隐藏
+- `hidden-sm-and-up` - 当视口在 `sm` 及以上尺寸时隐藏
+- `hidden-md-only` - 当视口在 `md` 尺寸时隐藏
+- `hidden-md-and-down` - 当视口在 `md` 及以下尺寸时隐藏
+- `hidden-md-and-up` - 当视口在 `md` 及以上尺寸时隐藏
+- `hidden-lg-only` - 当视口在 `lg` 及以下尺寸时隐藏
+
 ### Row Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
