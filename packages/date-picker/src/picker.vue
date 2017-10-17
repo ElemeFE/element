@@ -69,7 +69,7 @@
 <script>
 import Vue from 'vue';
 import Clickoutside from 'element-ui/src/utils/clickoutside';
-import { formatDate, parseDate, isDate, isDateObject, getWeekNumber } from './util';
+import { formatDate, parseDate, isDateObject, getWeekNumber } from './util';
 import Popper from 'element-ui/src/utils/vue-popper';
 import Emitter from 'element-ui/src/mixins/emitter';
 import Focus from 'element-ui/src/mixins/focus';
@@ -453,20 +453,19 @@ export default {
     },
 
     // {parse, formatTo} Value deals maps component value with internal Date
-    // parseValue validates value according to panel, requires picker to be mounted
-    parseValue(value, customFormat) {
-      if (!value || (!Array.isArray(value) || !value.every(val => val))) {
-        return null;
+    parseValue(value) {
+      const isParsed = isDateObject(value) || (Array.isArray(value) && value.every(isDateObject));
+      if (this.valueFormat && !isParsed) {
+        return parseAsFormatAndType(value, this.valueFormat, this.type, this.rangeSeparator) || value;
+      } else {
+        return value;
       }
-      const format = customFormat || this.valueFormat;
-      const parsedValue = parseAsFormatAndType(value, format, this.type, this.rangeSeparator);
-      return this.isValidValue(parsedValue) ? parsedValue : null;
     },
 
-    formatToValue(date, customFormat) {
-      if (this.valueFormat && (isDate(date) || Array.isArray(date))) {
-        const format = customFormat || this.valueFormat;
-        return formatAsFormatAndType(date, format, this.type, this.rangeSeparator);
+    formatToValue(date) {
+      const isFormattable = isDateObject(date) || (Array.isArray(date) && date.every(isDateObject));
+      if (this.valueFormat && isFormattable) {
+        return formatAsFormatAndType(date, this.valueFormat, this.type, this.rangeSeparator);
       } else {
         return date;
       }
@@ -739,12 +738,9 @@ export default {
     },
 
     emitChange(val) {
-      const formatted = this.formatToValue(val);
-      if (!valueEquals(this.valueOnOpen, formatted)) {
-        this.$emit('change', formatted);
-        this.dispatch('ElFormItem', 'el.form.change', formatted);
-        this.valueOnOpen = formatted;
-      }
+      this.$emit('change', val);
+      this.dispatch('ElFormItem', 'el.form.change', val);
+      this.valueOnOpen = val;
     },
 
     emitInput(val) {
