@@ -8,17 +8,7 @@
         <a :href="`https://eleme.github.io/element-react/#/${ lang }/quick-start`" class="footer-main-link" target="_blank">Element-React</a>
       </div>
       <div class="footer-social">
-        <el-popover
-          ref="weixin"
-          placement="top"
-          width="120"
-          popper-class="footer-popover"
-          trigger="hover">
-          <div class="footer-popover-title">{{ langConfig.eleme }} UED</div>
-          <img src="../assets/images/qrcode.png" alt="">
-        </el-popover>
-        <i class="doc-icon-weixin elementdoc" v-popover:weixin></i>
-        <a href="//github.com/elemefe" target="_blank">
+        <a href="https://github.com/zhcx-web-org" target="_blank">
           <i class="doc-icon-github elementdoc"></i>
         </a>
       </div>
