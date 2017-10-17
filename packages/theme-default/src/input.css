@@ -194,6 +194,7 @@
       line-height: 1.5;
       box-sizing: border-box;
       width: 100%;
+      min-height: 33px;
       font-size: var(--font-size-base);
       color: var(--input-color);
       background-color: var(--input-fill);
