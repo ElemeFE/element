@@ -376,7 +376,7 @@ describe('DatePicker', () => {
             ref="compo"
             v-model="value"
             type="date"
-            value-format="dd-MM-yyyy" />`,
+            value-format="dd/MM yyyy" />`,
         data() {
           return {
             value: ''
@@ -395,7 +395,7 @@ describe('DatePicker', () => {
           const yyyy = today.getFullYear();
           const MM = ('0' + (today.getMonth() + 1)).slice(-2);
           const dd = '01';   // first available one should be first day of month
-          const expectValue = `${dd}-${MM}-${yyyy}`;
+          const expectValue = `${dd}/${MM} ${yyyy}`;
           expect(vm.value).to.equal(expectValue);
           expect(spy.calledOnce).to.be.true;
           expect(spy.calledWith(expectValue)).to.be.true;
@@ -443,8 +443,8 @@ describe('DatePicker', () => {
             ref="compo"
             v-model="value"
             type="date"
-            value-format="dd-MM-yyyy"
-            format="yyyy-MM-dd" />`,
+            format="yyyy-MM-dd"
+            value-format="dd/MM yyyy" />`,
         data() {
           return {
             value: ''
@@ -458,7 +458,7 @@ describe('DatePicker', () => {
         triggerEvent(input, 'input');
         keyDown(input, ENTER);
         setTimeout(_ => {
-          expect(vm.value).to.equal('01-10-2000');
+          expect(vm.value).to.equal('01/10 2000');
           done();
         }, DELAY);
       }, DELAY);
@@ -471,7 +471,8 @@ describe('DatePicker', () => {
             ref="compo"
             v-model="value"
             type="daterange"
-            value-format="dd-MM-yyyy" />`,
+            format="yyyy-MM-dd"
+            value-format="dd/MM yyyy" />`,
         data() {
           return {
             value: ''
@@ -490,7 +491,7 @@ describe('DatePicker', () => {
           triggerEvent(inputs[1], 'input');
           keyDown(inputs[0], ENTER);
           setTimeout(_ => {
-            expect(vm.value).to.eql(['01-10-2000', '02-10-2000']);
+            expect(vm.value).to.eql(['01/10 2000', '02/10 2000']);
             done();
           }, DELAY);
         }, DELAY);
