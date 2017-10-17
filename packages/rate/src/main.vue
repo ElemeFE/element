@@ -33,9 +33,12 @@
 
 <script>
   import { hasClass } from 'element-ui/src/utils/dom';
+  import Migrating from 'element-ui/src/mixins/migrating';
 
   export default {
     name: 'ElRate',
+
+    mixins: [Migrating],
 
     data() {
       return {
@@ -205,6 +208,14 @@
     },
 
     methods: {
+      getMigratingConfig() {
+        return {
+          props: {
+            'text-template': 'text-template is renamed to score-template.'
+          }
+        };
+      },
+
       getValueFromMap(value, map) {
         let result = '';
         if (value <= this.lowThreshold) {
