@@ -75,6 +75,7 @@
 <script>
   import emitter from 'element-ui/src/mixins/emitter';
   import Focus from 'element-ui/src/mixins/focus';
+  import Migrating from 'element-ui/src/mixins/migrating';
   import calcTextareaHeight from './calcTextareaHeight';
   import merge from 'element-ui/src/utils/merge';
 
@@ -83,7 +84,7 @@
 
     componentName: 'ElInput',
 
-    mixins: [emitter, Focus('input')],
+    mixins: [emitter, Focus('input'), Migrating],
 
     inject: {
       elFormItem: {
@@ -174,6 +175,17 @@
     },
 
     methods: {
+      getMigratingConfig() {
+        return {
+          props: {
+            'icon': 'icon is removed, use suffix-icon / prefix-icon instead.',
+            'on-icon-click': 'on-icon-click is removed.'
+          },
+          events: {
+            'click': 'click is removed.'
+          }
+        };
+      },
       handleBlur(event) {
         this.$emit('blur', event);
         if (this.validateEvent) {

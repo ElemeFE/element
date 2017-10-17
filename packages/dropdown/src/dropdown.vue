@@ -1,6 +1,7 @@
 <script>
   import Clickoutside from 'element-ui/src/utils/clickoutside';
   import Emitter from 'element-ui/src/mixins/emitter';
+  import Migrating from 'element-ui/src/mixins/migrating';
   import ElButton from 'element-ui/packages/button';
   import ElButtonGroup from 'element-ui/packages/button-group';
 
@@ -9,7 +10,7 @@
 
     componentName: 'ElDropdown',
 
-    mixins: [Emitter],
+    mixins: [Emitter, Migrating],
 
     directives: { Clickoutside },
 
@@ -75,6 +76,13 @@
     },
 
     methods: {
+      getMigratingConfig() {
+        return {
+          props: {
+            'menu-align': 'menu-align is renamed to placement.'
+          }
+        };
+      },
       show() {
         if (this.triggerElm.disabled) return;
         clearTimeout(this.timeout);

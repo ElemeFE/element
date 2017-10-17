@@ -30,12 +30,13 @@
 
 <script>
   import Popup from 'element-ui/src/utils/popup';
+  import Migrating from 'element-ui/src/mixins/migrating';
   import emitter from 'element-ui/src/mixins/emitter';
 
   export default {
     name: 'ElDialog',
 
-    mixins: [Popup, emitter],
+    mixins: [Popup, emitter, Migrating],
 
     props: {
       title: {
@@ -138,6 +139,13 @@
     },
 
     methods: {
+      getMigratingConfig() {
+        return {
+          props: {
+            'size': 'size is removed.'
+          }
+        };
+      },
       handleWrapperClick() {
         if (!this.closeOnClickModal) return;
         this.handleClose();

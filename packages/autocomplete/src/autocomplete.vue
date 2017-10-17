@@ -63,12 +63,13 @@
   import Clickoutside from 'element-ui/src/utils/clickoutside';
   import ElAutocompleteSuggestions from './autocomplete-suggestions.vue';
   import Emitter from 'element-ui/src/mixins/emitter';
+  import Migrating from 'element-ui/src/mixins/migrating';
   import { generateId } from 'element-ui/src/utils/util';
 
   export default {
     name: 'ElAutocomplete',
 
-    mixins: [Emitter],
+    mixins: [Emitter, Migrating],
 
     componentName: 'ElAutocomplete',
 
@@ -137,6 +138,13 @@
       }
     },
     methods: {
+      getMigratingConfig() {
+        return {
+          props: {
+            'custom-item': 'custom-item is removed, use scoped slot intstead.'
+          }
+        };
+      },
       getData(queryString) {
         this.loading = true;
         this.fetchSuggestions(queryString, (suggestions) => {
