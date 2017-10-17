@@ -142,7 +142,7 @@ name | native 'name' attribute | string    |      —         |     —
  Attribute      | Description          | Type      | Accepted Values       | Default
 ---- | ---- | ---- | ---- | ----
 size | the size of radio buttons | string | large/small | —
-fill  | border and background color when button is active | string   | — | #20a0ff   |
+fill  | border and background color when button is active | string   | — | #fc7814   |
 text-color | font color when button is active | string   | — | #ffffff   |
 
 ### Radio-group Events

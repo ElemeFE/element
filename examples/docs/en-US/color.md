@@ -29,7 +29,7 @@
   }
   .bg-blue,
   .bg-info {
-    background-color: #20a0ff;
+    background-color: #fc7814;
   }
   .bg-blue-dark {
     background-color: #1d8ce0;
@@ -96,7 +96,7 @@ The main color of Element is bright and friendly blue.
     <div class="demo-color-box bg-blue-light">Light Blue<div class="value">#58B7FF</div></div>
   </el-col>
   <el-col :span="8">
-    <div class="demo-color-box bg-blue">Blue<div class="value">#20A0FF</div></div>
+    <div class="demo-color-box bg-blue">Blue<div class="value">#fc7814</div></div>
   </el-col>
   <el-col :span="8">
     <div class="demo-color-box bg-blue-dark">Dark Blue<div class="value">#1D8CE0</div></div>
@@ -109,7 +109,7 @@ Besides the main color, you need to use different scene colors in different scen
 
 <el-row :gutter="12">
   <el-col :span="6">
-    <div class="demo-color-box bg-info">Blue<div class="value">#20A0FF</div></div>
+    <div class="demo-color-box bg-info">Blue<div class="value">#fc7814</div></div>
   </el-col>
   <el-col :span="6">
     <div class="demo-color-box bg-success">Success<div class="value">#13CE66</div></div>

@@ -249,7 +249,7 @@
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | size     | Checkbox 按钮组尺寸   | string  | large, small  |    —     |
-| fill  | 按钮激活时的填充色和边框色    | string   | — | #20a0ff   |
+| fill  | 按钮激活时的填充色和边框色    | string   | — | #fc7814   |
 | text-color  | 按钮激活时的文本颜色    | string   | — | #ffffff   |
 | min     | 可被勾选的 checkbox 的最小数量   | number    |       —        |     —    |
 | max     | 可被勾选的 checkbox 的最大数量   | number    |       —        |     —    |

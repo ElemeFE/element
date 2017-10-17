@@ -29,7 +29,7 @@
   }
   .bg-blue,
   .bg-info {
-    background-color: #20a0ff;
+    background-color: #fc7814;
   }
   .bg-blue-dark {
     background-color: #1d8ce0;
@@ -97,7 +97,7 @@ Element 主要品牌颜色是鲜艳、友好的蓝色。
     <div class="demo-color-box bg-blue-light">Light Blue<div class="value">#58B7FF</div></div>
   </el-col>
   <el-col :span="8">
-    <div class="demo-color-box bg-blue">Blue<div class="value">#20A0FF</div></div>
+    <div class="demo-color-box bg-blue">Blue<div class="value">#fc7814</div></div>
   </el-col>
   <el-col :span="8">
     <div class="demo-color-box bg-blue-dark">Dark Blue<div class="value">#1D8CE0</div></div>
@@ -110,7 +110,7 @@ Element 主要品牌颜色是鲜艳、友好的蓝色。
 
 <el-row :gutter="12">
   <el-col :span="6">
-    <div class="demo-color-box bg-info">Blue<div class="value">#20A0FF</div></div>
+    <div class="demo-color-box bg-info">Blue<div class="value">#fc7814</div></div>
   </el-col>
   <el-col :span="6">
     <div class="demo-color-box bg-success">Success<div class="value">#13CE66</div></div>

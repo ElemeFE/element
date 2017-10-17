@@ -2,7 +2,7 @@
   export default {
     data() {
       return {
-        color1: '#20a0ff',
+        color1: '#fc7814',
         color2: null,
         color3: 'rgba(19, 206, 102, 0.8)'
       };
@@ -57,7 +57,7 @@
   export default {
     data() {
       return {
-        color1: '#20a0ff',
+        color1: '#fc7814',
         color2: null
       }
     }

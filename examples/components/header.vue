@@ -4,7 +4,7 @@
   }
   .header {
     height: 80px;
-    background-color: rgba(32, 160, 255, 1);
+    background-color: #fc7814;
     color: #fff;
     top: 0;
     left: 0;
@@ -111,7 +111,7 @@
           left: 0;
           width: 100%;
           height: 4px;
-          background:#99d2fc;
+          background:#FFCAA3;
         }
       }
     }
@@ -231,7 +231,7 @@
         immediate: true,
         handler() {
           this.isHome = /^home/.test(this.$route.name);
-          this.headerStyle.backgroundColor = `rgba(32, 160, 255, ${ this.isHome ? '0' : '1' })`;
+          this.headerStyle.backgroundColor = `rgba(252, 120, 20, ${ this.isHome ? '0' : '1' })`;
         }
       }
     },

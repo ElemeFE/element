@@ -43,7 +43,7 @@ et -i [可以自定义变量文件]
 
   /* Colors
   -------------------------- */
-  --color-primary: #20a0ff;
+  --color-primary: #fc7814;
   --color-success: #13ce66;
   --color-warning: #f7ba2a;
   --color-danger: #ff4949;

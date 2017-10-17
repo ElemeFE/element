@@ -104,7 +104,7 @@
             ret = '#ff4949';
             break;
           default:
-            ret = '#20a0ff';
+            ret = '#fc7814';
         }
         return ret;
       },

@@ -41,7 +41,7 @@ In `element-variables.css` you can find all the variables we used to style Eleme
 
   /* Colors
   -------------------------- */
-  --color-primary: #20a0ff;
+  --color-primary: #fc7814;
   --color-success: #13ce66;
   --color-warning: #f7ba2a;
   --color-danger: #ff4949;

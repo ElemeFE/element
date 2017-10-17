@@ -238,7 +238,7 @@ Checkbox with button styles.
 | Attribute      | Description         | Type    | Options                         | Default|
 |---------- |-------- |---------- |-------------  |-------- |
 |size | the size of checkbox buttons | string | large/small | —
-|fill  | border and background color when button is active | string   | — | #20a0ff   |
+|fill  | border and background color when button is active | string   | — | #fc7814   |
 |text-color | font color when button is active | string   | — | #ffffff   |
 | min     | minimum number of checkbox checked   | number    |       —        |     —    |
 | max     | maximum number of checkbox checked   | number    |       —        |     —    |

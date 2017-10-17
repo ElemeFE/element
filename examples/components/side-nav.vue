@@ -36,7 +36,7 @@
       }
       @when active {
         span, i {
-          color: #20a0ff;
+          color: #fc7814;
         }
         i {
           transform: rotateZ(180deg) translateY(2px);
@@ -44,7 +44,7 @@
       }
       &:hover {
         span, i {
-          color: #20a0ff;
+          color: #fc7814;
         }
       }
     }
@@ -63,7 +63,7 @@
         transition: all .3s;
 
         &.active {
-          color: #20a0ff;
+          color: #fc7814;
         }
       }
       .nav-item {
@@ -79,7 +79,7 @@
 
 
           &:hover {
-            color: #20a0ff;
+            color: #fc7814;
           }
         }
       }
@@ -120,12 +120,15 @@
         :offset="-80"
         class="nav-dropdown-list"
         @input="handleDropdownToggle">
-        <el-dropdown-item
-          v-for="item in Object.keys(versions)"
-          :key="item"
-          @click.native="switchVersion(item)">
-          {{ item }}
+        <el-dropdown-item>
+          {{ version }}
         </el-dropdown-item>
+        <!--<el-dropdown-item-->
+          <!--v-for="item in Object.keys(versions)"-->
+          <!--:key="item"-->
+          <!--@click.native="switchVersion(item)">-->
+          <!--{{ item }}-->
+        <!--</el-dropdown-item>-->
       </el-dropdown-menu>
     </el-dropdown>
     <ul>
