@@ -91,12 +91,14 @@
               <button
                   type="button"
                   @click="leftNextYear"
+                  v-if="unlinkPanels"
                   :disabled="!enableYearArrow"
                   :class="{ 'is-disabled': !enableYearArrow }"
                   class="el-picker-panel__icon-btn el-icon-d-arrow-right"></button>
               <button
                   type="button"
                   @click="leftNextMonth"
+                  v-if="unlinkPanels"
                   :disabled="!enableMonthArrow"
                   :class="{ 'is-disabled': !enableMonthArrow }"
                   class="el-picker-panel__icon-btn el-icon-arrow-right"></button>
@@ -120,12 +122,14 @@
               <button
                   type="button"
                   @click="rightPrevYear"
+                  v-if="unlinkPanels"
                   :disabled="!enableYearArrow"
                   :class="{ 'is-disabled': !enableYearArrow }"
                   class="el-picker-panel__icon-btn el-icon-d-arrow-left"></button>
               <button
                   type="button"
                   @click="rightPrevMonth"
+                  v-if="unlinkPanels"
                   :disabled="!enableMonthArrow"
                   :class="{ 'is-disabled': !enableMonthArrow }"
                   class="el-picker-panel__icon-btn el-icon-arrow-left"></button>
