@@ -341,6 +341,21 @@ Taking example by Bootstrap's responsive design, four breakpoints are preset: xs
 ```
 :::
 
+### Classes for Visibility
+
+```js
+import 'element-ui/lib/theme-chalk/display.scss';
+```
+
+- `hide-xs-only` - hide when on extra small viewports only
+- `hide-sm-only` - hide when on small viewports and down
+- `hide-sm-and-down` - hide when on small viewports and down
+- `hide-sm-and-up` - hide when on small viewports and up
+- `hide-md-only` - hide when on medium viewports only
+- `hide-md-and-down` - hide when on medium viewports and down
+- `hide-md-and-up` - hide when on medium viewports and up
+- `hide-lg-only` - hide when on large viewports only
+
 ### Row Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
