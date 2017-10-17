@@ -25,8 +25,12 @@
     text-align: center;
     height: 28px;
 
-    button {
+    [class*=arrow-left] {
       float: left;
+    }
+
+    [class*=arrow-right] {
+      float: right;
     }
 
     div {
@@ -48,9 +52,6 @@
 
     @include when(right) {
       .el-date-range-picker__header {
-        button {
-          float: right;
-        }
 
         div {
           margin-left: 50px;

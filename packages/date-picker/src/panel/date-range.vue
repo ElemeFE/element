@@ -82,12 +82,26 @@
             <div class="el-date-range-picker__header">
               <button
                 type="button"
-                @click="prevYear"
+                @click="leftPrevYear"
                 class="el-picker-panel__icon-btn el-icon-d-arrow-left"></button>
               <button
                 type="button"
-                @click="prevMonth"
+                @click="leftPrevMonth"
                 class="el-picker-panel__icon-btn el-icon-arrow-left"></button>
+              <button
+                  type="button"
+                  @click="leftNextYear"
+                  v-if="unlinkPanels"
+                  :disabled="!enableYearArrow"
+                  :class="{ 'is-disabled': !enableYearArrow }"
+                  class="el-picker-panel__icon-btn el-icon-d-arrow-right"></button>
+              <button
+                  type="button"
+                  @click="leftNextMonth"
+                  v-if="unlinkPanels"
+                  :disabled="!enableMonthArrow"
+                  :class="{ 'is-disabled': !enableMonthArrow }"
+                  class="el-picker-panel__icon-btn el-icon-arrow-right"></button>
               <div>{{ leftLabel }}</div>
             </div>
             <date-table
@@ -106,12 +120,26 @@
           <div class="el-picker-panel__content el-date-range-picker__content is-right">
             <div class="el-date-range-picker__header">
               <button
+                  type="button"
+                  @click="rightPrevYear"
+                  v-if="unlinkPanels"
+                  :disabled="!enableYearArrow"
+                  :class="{ 'is-disabled': !enableYearArrow }"
+                  class="el-picker-panel__icon-btn el-icon-d-arrow-left"></button>
+              <button
+                  type="button"
+                  @click="rightPrevMonth"
+                  v-if="unlinkPanels"
+                  :disabled="!enableMonthArrow"
+                  :class="{ 'is-disabled': !enableMonthArrow }"
+                  class="el-picker-panel__icon-btn el-icon-arrow-left"></button>
+              <button
                 type="button"
-                @click="nextYear"
+                @click="rightNextYear"
                 class="el-picker-panel__icon-btn el-icon-d-arrow-right"></button>
               <button
                 type="button"
-                @click="nextMonth"
+                @click="rightNextMonth"
                 class="el-picker-panel__icon-btn el-icon-arrow-right"></button>
               <div>{{ rightLabel }}</div>
             </div>
@@ -250,6 +278,16 @@
         } else {
           return 'HH:mm:ss';
         }
+      },
+
+      enableMonthArrow() {
+        const nextMonth = (this.leftMonth + 1) % 12;
+        const yearOffset = this.leftMonth + 1 >= 12 ? 1 : 0;
+        return this.unlinkPanels && new Date(`${this.leftYear + yearOffset}-${nextMonth + 1}`) < new Date(`${this.rightYear}-${this.rightMonth + 1}`);
+      },
+
+      enableYearArrow() {
+        return this.unlinkPanels && this.rightYear * 12 + this.rightMonth - (this.leftYear * 12 + this.leftMonth + 1) >= 12;
       }
     },
 
@@ -276,7 +314,8 @@
         minTimePickerVisible: false,
         maxTimePickerVisible: false,
         format: '',
-        arrowControl: false
+        arrowControl: false,
+        unlinkPanels: false
       };
     },
 
@@ -478,24 +517,52 @@
         }
       },
 
-      prevMonth() {
-        this.leftDate = prevMonth(this.leftDate);
-        this.rightDate = nextMonth(this.leftDate);
-      },
-
-      nextMonth() {
-        this.leftDate = nextMonth(this.leftDate);
-        this.rightDate = nextMonth(this.leftDate);
-      },
-
-      nextYear() {
-        this.leftDate = modifyDate(this.leftDate, this.leftYear + 1, this.leftMonth, this.leftMonthDate);
-        this.rightDate = nextMonth(this.leftDate);
-      },
-
-      prevYear() {
+      leftPrevYear() {
         this.leftDate = modifyDate(this.leftDate, this.leftYear - 1, this.leftMonth, this.leftMonthDate);
-        this.rightDate = nextMonth(this.leftDate);
+        if (!this.unlinkPanels) {
+          this.rightDate = nextMonth(this.leftDate);
+        }
+      },
+
+      leftNextYear() {
+        this.leftDate = modifyDate(this.leftDate, this.leftYear + 1, this.leftMonth, this.leftMonthDate);
+      },
+
+      leftPrevMonth() {
+        this.leftDate = prevMonth(this.leftDate);
+        if (!this.unlinkPanels) {
+          this.rightDate = nextMonth(this.leftDate);
+        }
+      },
+
+      leftNextMonth() {
+        this.leftDate = nextMonth(this.leftDate);
+      },
+
+      rightPrevYear() {
+        this.rightDate = modifyDate(this.rightDate, this.rightYear - 1, this.rightMonth, this.rightMonthDate);
+      },
+
+      rightNextYear() {
+        if (!this.unlinkPanels) {
+          this.leftDate = modifyDate(this.leftDate, this.leftYear + 1, this.leftMonth, this.leftMonthDate);
+          this.rightDate = nextMonth(this.leftDate);
+        } else {
+          this.rightDate = modifyDate(this.rightDate, this.rightYear + 1, this.rightMonth, this.rightMonthDate);
+        }
+      },
+
+      rightPrevMonth() {
+        this.rightDate = prevMonth(this.rightDate);
+      },
+
+      rightNextMonth() {
+        if (!this.unlinkPanels) {
+          this.leftDate = nextMonth(this.leftDate);
+          this.rightDate = nextMonth(this.leftDate);
+        } else {
+          this.rightDate = nextMonth(this.rightDate);
+        }
       },
 
       handleConfirm(visible = false) {
