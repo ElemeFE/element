@@ -52,7 +52,7 @@ function calculateNodeStyling(targetElement) {
 
 export default function calcTextareaHeight(
   targetElement,
-  minRows = null,
+  minRows = 1,
   maxRows = null
 ) {
   if (!hiddenTextarea) {
@@ -71,6 +71,7 @@ export default function calcTextareaHeight(
   hiddenTextarea.value = targetElement.value || targetElement.placeholder || '';
 
   let height = hiddenTextarea.scrollHeight;
+  const result = {};
 
   if (boxSizing === 'border-box') {
     height = height + borderSize;
@@ -87,6 +88,7 @@ export default function calcTextareaHeight(
       minHeight = minHeight + paddingSize + borderSize;
     }
     height = Math.max(minHeight, height);
+    result.minHeight = `${ minHeight }px`;
   }
   if (maxRows !== null) {
     let maxHeight = singleRowHeight * maxRows;
@@ -95,6 +97,7 @@ export default function calcTextareaHeight(
     }
     height = Math.min(maxHeight, height);
   }
+  result.height = `${ height }px`;
 
-  return { height: height + 'px'};
+  return result;
 };

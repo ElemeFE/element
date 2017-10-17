@@ -141,7 +141,13 @@
       resizeTextarea() {
         if (this.$isServer) return;
         var { autosize, type } = this;
-        if (!autosize || type !== 'textarea') return;
+        if (type !== 'textarea') return;
+        if (!autosize) {
+          this.textareaCalcStyle = {
+            minHeight: calcTextareaHeight(this.$refs.textarea).minHeight
+          };
+          return;
+        }
         const minRows = autosize.minRows;
         const maxRows = autosize.maxRows;
 
