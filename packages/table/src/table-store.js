@@ -150,14 +150,16 @@ TableStore.prototype.mutations = {
     Vue.nextTick(() => this.table.updateScrollY());
   },
 
-  changeSortCondition(states) {
+  changeSortCondition(states, options) {
     states.data = sortData((states.filteredData || states._data || []), states);
 
-    this.table.$emit('sort-change', {
-      column: this.states.sortingColumn,
-      prop: this.states.sortProp,
-      order: this.states.sortOrder
-    });
+    if (!options || !options.silent) {
+      this.table.$emit('sort-change', {
+        column: this.states.sortingColumn,
+        prop: this.states.sortProp,
+        order: this.states.sortOrder
+      });
+    }
 
     Vue.nextTick(() => this.table.updateScrollY());
   },
@@ -433,6 +435,20 @@ TableStore.prototype.clearFilter = function() {
   });
 
   this.table.$emit('filter-clear');
+};
+
+TableStore.prototype.clearSort = function() {
+  const states = this.states;
+  if (!states.sortingColumn) return;
+  states.sortingColumn.order = null;
+  states.sortProp = null;
+  states.sortOrder = null;
+
+  this.commit('changeSortCondition', {
+    silent: true
+  });
+
+  this.table.$emit('sort-clear');
 };
 
 TableStore.prototype.updateAllSelected = function() {

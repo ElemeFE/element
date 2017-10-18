@@ -250,6 +250,10 @@
         this.store.clearFilter();
       },
 
+      clearSort() {
+        this.store.clearSort();
+      },
+
       handleMouseLeave() {
         this.store.commit('setHoverRow', null);
         if (this.hoverState) this.hoverState = null;
