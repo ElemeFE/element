@@ -18,7 +18,7 @@
           :hit="item.hitState"
           type="info"
           @close="deleteTag($event, item)"
-          close-transition>
+          disable-transitions>
           <span class="el-select__tags-text">{{ item.currentLabel }}</span>
         </el-tag>
       </transition-group>
@@ -536,7 +536,9 @@
           if (!this.$refs.reference) return;
           let inputChildNodes = this.$refs.reference.$el.childNodes;
           let input = [].filter.call(inputChildNodes, item => item.tagName === 'INPUT')[0];
-          input.style.height = Math.max(this.$refs.tags.clientHeight + 10, sizeMap[this.size] || 40) + 'px';
+          input.style.height = this.selected.length === 0 && this.size === 'mini'
+            ? sizeMap[this.size]
+            : Math.max(this.$refs.tags.clientHeight + 10, sizeMap[this.size] || 40) + 'px';
           if (this.visible && this.emptyText !== false) {
             this.broadcast('ElSelectDropdown', 'updatePopper');
           }

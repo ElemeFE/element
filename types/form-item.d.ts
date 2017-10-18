@@ -1,4 +1,4 @@
-import { ElementUIComponent } from './component'
+import { ElementUIComponent, ElementUIComponentSize } from './component'
 
 /** FormItem Component */
 export declare class ElFormItem extends ElementUIComponent {
@@ -22,4 +22,10 @@ export declare class ElFormItem extends ElementUIComponent {
 
   /** Whether to show the error message */
   showMessage: boolean
+
+  /** Whether to display the error message inline with the form item */
+  inlineMessage: boolean
+
+  /** Controls the size of components in this form */
+  size: ElementUIComponentSize
 }

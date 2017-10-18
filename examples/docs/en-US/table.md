@@ -1387,7 +1387,7 @@ Customize table column so it can be integrated with other components.
       label="Date"
       width="180">
       <template slot-scope="scope">
-        <el-icon name="time"></el-icon>
+        <i class="el-icon-time"></i>
         <span style="margin-left: 10px">{{ scope.row.date }}</span>
       </template>
     </el-table-column>
@@ -1399,7 +1399,7 @@ Customize table column so it can be integrated with other components.
           <p>Name: {{ scope.row.name }}</p>
           <p>Addr: {{ scope.row.address }}</p>
           <div slot="reference" class="name-wrapper">
-            <el-tag>{{ scope.row.name }}</el-tag>
+            <el-tag size="medium">{{ scope.row.name }}</el-tag>
           </div>
         </el-popover>
       </template>
@@ -1408,10 +1408,10 @@ Customize table column so it can be integrated with other components.
       label="Operations">
       <template slot-scope="scope">
         <el-button
-          size="small"
+          size="mini"
           @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
         <el-button
-          size="small"
+          size="mini"
           type="danger"
           @click="handleDelete(scope.$index, scope.row)">Delete</el-button>
       </template>

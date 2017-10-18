@@ -8,7 +8,4 @@ export declare class ElMenuItem extends ElementUIComponent {
 
   /** Vue Router object */
   route: Route
-
-  /** Is menu item disabled */
-  disabled: boolean
 }

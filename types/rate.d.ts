@@ -38,6 +38,9 @@ export declare class ElRate extends ElementUIComponent {
   /** Whether to display texts */
   showText: boolean
 
+  /** Whether to display current score. show-score and show-text cannot be true at the same time */
+  showScore: boolean
+
   /** Color of texts */
   textColor: string
 
@@ -45,5 +48,5 @@ export declare class ElRate extends ElementUIComponent {
   texts: string[]
 
   /** Text template when the component is read-only */
-  textTemplate: string
+  scoreTemplate: string
 }

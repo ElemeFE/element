@@ -3,7 +3,7 @@ import Vue, { VNodeDirective } from 'vue'
 /** Options used in Loading service */
 export interface LoadingServiceOptions {
   /** The DOM node Loading needs to cover. Accepts a DOM object or a string. If it's a string, it will be passed to `document.querySelector` to get the corresponding DOM node */
-  target: HTMLElement | string
+  target?: HTMLElement | string
 
   /** Whether to make the mask append to the body element */
   body?: boolean
@@ -16,6 +16,12 @@ export interface LoadingServiceOptions {
 
   /** Loading text that displays under the spinner */
   text?: string
+
+  /** Class name of the custom spinner */
+  spinner?: string
+
+  /** Background color of the mask */
+  background?: string
 
   /** Custom class name for Loading */
   customClass?: string

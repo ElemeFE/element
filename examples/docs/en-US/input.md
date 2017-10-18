@@ -473,9 +473,12 @@ Customize how suggestions are displayed.
   v-model="state3"
   :fetch-suggestions="querySearch"
   placeholder="Please input"
-  @select="handleSelect"
-  icon="edit"
-  :on-icon-click="handleIconClick">
+  @select="handleSelect">
+  <i
+    class="el-icon-edit el-input__icon"
+    slot="suffix"
+    @click="handleIconClick">
+  </i>
   <template slot-scope="props">
     <div class="value">{{ props.item.value }}</div>
     <span class="link">{{ props.item.link }}</span>
@@ -609,17 +612,17 @@ Search data from server-side.
 
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 | ----| ----| ----| ---- | ----- |
-|type| Same as the `type` attribute of native input, except that it can be `textarea` | string | — | text |
-|value| binding value | string/number| — | — |
+|type| type of input | string | text / textarea | text |
+|value| binding value | string / number| — | — |
 |maxlength| maximum Input text length| number| — | — |
 |minlength| minimum Input text length| number | — | — |
 |placeholder| placeholder of Input| string | — | — |
 |disabled | whether Input is disabled | boolean | — | false |
-|size | size of Input, works when `type` is not 'textarea' | string | large/small/mini | — |
+|size | size of Input, works when `type` is not 'textarea' | string | medium / small / mini | — |
 | prefix-icon   | prefix icon class  | string          | — | — |
 | suffix-icon   | suffix icon class  | string          | — | — |
 |rows | number of rows of textarea, only works when `type` is 'textarea' | number | — | 2 |
-|autosize | whether textarea has an adaptive height, only works when `type` is 'textarea'. Can accept an object, e.g. { minRows: 2, maxRows: 6 }  | boolean/object | — | false |
+|autosize | whether textarea has an adaptive height, only works when `type` is 'textarea'. Can accept an object, e.g. { minRows: 2, maxRows: 6 }  | boolean / object | — | false |
 |auto-complete | same as `auto-complete` in native input | string | on/off | off |
 |name | same as `name` in native input | string | — | — |
 | readonly | same as `readonly` in native input | boolean | — | false |
@@ -629,9 +632,9 @@ Search data from server-side.
 |resize| control the resizability | string | none, both, horizontal, vertical | — |
 |autofocus | same as `autofocus` in native input | boolean | — | false |
 |form | same as `form` in native input | string | — | — |
-| on-icon-click | hook function when clicking on the input icon | function | — | — |
 | label | label text | string | — | — |
-### Input slot
+
+### Input slots
 
 | Name | Description |
 |------|--------|
@@ -665,11 +668,21 @@ Attribute | Description | Type | Options | Default
 | name | same as `name` in native input | string | — | — |
 | select-when-unmatched | whether to emit a `select` event on enter when there is no autocomplete match | boolean | — | false |
 | label | label text | string | — | — |
+
 ### props
 | Attribute | Description | Type | Accepted Values | Default |
 | --------- | ----------------- | ------ | ------ | ------ |
 | label     | specify which key of option object is used as the option's label | string | — | value |
 | value     | specify which key of option object is used as the option's value | string | — | value |
+
+### Autocomplete slots
+
+| Name | Description |
+|------|--------|
+| prefix | content as Input prefix |
+| suffix | content as Input suffix |
+| prepend | content to prepend before Input |
+| append | content to append after Input |
 
 ### Autocomplete Events
 

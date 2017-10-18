@@ -1,4 +1,4 @@
-import { ElementUIComponent } from './component'
+import { ElementUIComponent, ElementUIComponentSize } from './component'
 
 export type FormItemLabelPosition = 'left' | 'right' | 'top'
 
@@ -43,12 +43,21 @@ export declare class ElForm extends ElementUIComponent {
   /** Whether to show the error message */
   showMessage: boolean
 
+  /** Whether to display the error message inline with the form item */
+  inlineMessage: boolean
+
+  /** Whether to display an icon indicating the validation result */
+  statusIcon: boolean
+
+  /** Controls the size of components in this form */
+  size: ElementUIComponentSize
+
   /**
    * Validate the whole form
    *
    * @param callback A callback to tell the validation result
    */
-  validate (callback: ValidateCallback): void
+  validate (callback?: ValidateCallback): void
 
   /**
    * Validate a certain form item

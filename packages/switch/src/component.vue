@@ -13,34 +13,35 @@
       @change="handleChange"
       ref="input"
       :name="name"
-      :true-value="onValue"
-      :false-value="offValue"
+      :true-value="trueValue"
+      :false-value="falseValue"
       :disabled="disabled"
       @keydown.enter="switchValue"
     >
     <span
       :class="['el-switch__label', 'el-switch__label--left', !checked ? 'is-active' : '']"
-      v-if="offIconClass || offText">
-      <i :class="[offIconClass]" v-if="offIconClass"></i>
-      <span v-if="!offIconClass && offText" :aria-hidden="checked">{{ offText }}</span>
+      v-if="falseIconClass || falseText">
+      <i :class="[falseIconClass]" v-if="falseIconClass"></i>
+      <span v-if="!falseIconClass && falseText" :aria-hidden="checked">{{ falseText }}</span>
     </span>
     <span class="el-switch__core" ref="core" :style="{ 'width': coreWidth + 'px' }">
       <span class="el-switch__button" :style="{ transform }"></span>
     </span>
     <span
       :class="['el-switch__label', 'el-switch__label--right', checked ? 'is-active' : '']"
-      v-if="onIconClass || onText">
-      <i :class="[onIconClass]" v-if="onIconClass"></i>
-      <span v-if="!onIconClass && onText" :aria-hidden="!checked">{{ onText }}</span>
+      v-if="trueIconClass || trueText">
+      <i :class="[trueIconClass]" v-if="trueIconClass"></i>
+      <span v-if="!trueIconClass && trueText" :aria-hidden="!checked">{{ trueText }}</span>
     </span>
   </div>
 </template>
 <script>
   import Focus from 'element-ui/src/mixins/focus';
+  import Migrating from 'element-ui/src/mixins/migrating';
 
   export default {
     name: 'ElSwitch',
-    mixins: [Focus('input')],
+    mixins: [Focus('input'), Migrating],
     props: {
       value: {
         type: [Boolean, String, Number],
@@ -54,29 +55,29 @@
         type: Number,
         default: 0
       },
-      onIconClass: {
+      trueIconClass: {
         type: String,
         default: ''
       },
-      offIconClass: {
+      falseIconClass: {
         type: String,
         default: ''
       },
-      onText: String,
-      offText: String,
-      onColor: {
+      trueText: String,
+      falseText: String,
+      trueColor: {
         type: String,
         default: ''
       },
-      offColor: {
+      falseColor: {
         type: String,
         default: ''
       },
-      onValue: {
+      trueValue: {
         type: [Boolean, String, Number],
         default: true
       },
-      offValue: {
+      falseValue: {
         type: [Boolean, String, Number],
         default: false
       },
@@ -91,13 +92,13 @@
       };
     },
     created() {
-      if (!~[this.onValue, this.offValue].indexOf(this.value)) {
-        this.$emit('input', this.offValue);
+      if (!~[this.trueValue, this.falseValue].indexOf(this.value)) {
+        this.$emit('input', this.falseValue);
       }
     },
     computed: {
       checked() {
-        return this.value === this.onValue;
+        return this.value === this.trueValue;
       },
       transform() {
         return this.checked ? `translate3d(${ this.coreWidth - 20 }px, 0, 0)` : '';
@@ -106,15 +107,15 @@
     watch: {
       checked() {
         this.$refs.input.checked = this.checked;
-        if (this.onColor || this.offColor) {
+        if (this.trueColor || this.falseColor) {
           this.setBackgroundColor();
         }
       }
     },
     methods: {
       handleChange(event) {
-        this.$emit('input', !this.checked ? this.onValue : this.offValue);
-        this.$emit('change', !this.checked ? this.onValue : this.offValue);
+        this.$emit('input', !this.checked ? this.trueValue : this.falseValue);
+        this.$emit('change', !this.checked ? this.trueValue : this.falseValue);
         this.$nextTick(() => {
           // set input's checked property
           // in case parent refuses to change component's value
@@ -122,18 +123,32 @@
         });
       },
       setBackgroundColor() {
-        let newColor = this.checked ? this.onColor : this.offColor;
+        let newColor = this.checked ? this.trueColor : this.falseColor;
         this.$refs.core.style.borderColor = newColor;
         this.$refs.core.style.backgroundColor = newColor;
       },
       switchValue() {
         this.$refs.input.click();
+      },
+      getMigratingConfig() {
+        return {
+          props: {
+            'on-color': 'on-color is renamed to true-color.',
+            'off-color': 'off-color is renamed to false-color.',
+            'on-text': 'on-text is renamed to true-text.',
+            'off-text': 'off-text is renamed to false-text.',
+            'on-value': 'on-value is renamed to true-value.',
+            'off-value': 'off-value is renamed to false-value.',
+            'on-icon-class': 'on-icon-class is renamed to true-icon-class.',
+            'off-icon-class': 'off-icon-class is renamed to false-icon-class.'
+          }
+        };
       }
     },
     mounted() {
       /* istanbul ignore if */
       this.coreWidth = this.width || 40;
-      if (this.onColor || this.offColor) {
+      if (this.trueColor || this.falseColor) {
         this.setBackgroundColor();
       }
       this.$refs.input.checked = this.checked;

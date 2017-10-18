@@ -323,9 +323,8 @@ Besides default size, Dropdown component provides three additional sizes for you
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
 | type          | menu button type, refer to `Button` Component, only works when `split-button` is true  | string  |  —   |    —     |
-| size          | menu size, refer to `Button` Component, also works on the Split-button  | string  | large / small / mini  |    —     |
+| size          | menu size, also works on the split button  | string  | medium / small / mini  |    —     |
 | split-button | whether a button group is displayed | boolean         |     —       | false   |
-| size          | component size, refer to `Button` component     | string          | large, small, mini  |  —  |
 | placement    | placement of pop menu | string | top/top-start/top-end/bottom/bottom-start/bottom-end  | bottom-end |
 | trigger       | how to trigger     | string  |    hover/click  |  hover |
 | hide-on-click | whether to hide menu after clicking menu-item     | boolean          | — | true |

@@ -10,4 +10,7 @@ export declare class ElRadioButton extends ElementUIComponent {
 
   /** Whether radio is disabled */
   disabled: boolean
+
+  /** Native 'name' attribute */
+  name: string
 }

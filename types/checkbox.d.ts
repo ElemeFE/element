@@ -1,4 +1,4 @@
-import { ElementUIComponent } from './component'
+import { ElementUIComponent, ElementUIComponentSize } from './component'
 
 /** Checkbox Component */
 export declare class ElCheckbox extends ElementUIComponent {
@@ -6,7 +6,7 @@ export declare class ElCheckbox extends ElementUIComponent {
   value: string | string[]
 
   /** Value of the checkbox when used inside a checkbox-group */
-  label: string
+  label: string | number | boolean
 
   /** Value of the checkbox if it's checked */
   trueLabel: string | number
@@ -16,6 +16,12 @@ export declare class ElCheckbox extends ElementUIComponent {
 
   /** Native 'name' attribute */
   name: string
+
+  /** Whether to add a border around Checkbox */
+  border: boolean
+
+  /** Size of the Checkbox, only works when border is true */
+  size: ElementUIComponentSize
 
   /** If the checkbox is disabled */
   disabled: boolean

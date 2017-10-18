@@ -17,6 +17,9 @@ export declare class ElRow extends ElementUIComponent {
   /** Horizontal alignment of flex layout */
   justify: HorizontalAlignment
 
-  /** vertical alignment of flex layout */
+  /** Vertical alignment of flex layout */
   align: VertialAlignment
+
+  /** Custom element tag */
+  tag: string
 }

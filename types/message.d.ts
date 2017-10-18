@@ -37,6 +37,12 @@ export interface ElMessageOptions {
   /** Whether to show a close button */
   showClose?: boolean
 
+  /** Whether to center the text */
+  center?: boolean
+
+  /** Whether message is treated as HTML string */
+  dangerouslyUseHTMLString?: boolean
+
   /** Callback function when closed with the message instance as the parameter */
   onClose?: CloseEventHandler
 }

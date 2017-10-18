@@ -11,6 +11,9 @@ export declare class ElRadio extends ElementUIComponent {
   /** Whether radio is disabled */
   disabled: boolean
 
+  /** Whether to add a border around Radio */
+  border: boolean
+
   /** Native 'name' attribute */
   name: string
 }

@@ -25,4 +25,13 @@ export declare class ElPagination extends ElementUIComponent {
 
   /** Options of item count per page */
   pageSizes: number[]
+
+  /** Custom class name for the page size Select's dropdown */
+  popperClass: string
+
+  /** Text for the prev button */
+  prevText: string
+
+  /** Text for the prev button */
+  nextText: string
 }

@@ -18,6 +18,9 @@ export declare class ElSelect extends ElementUIComponent {
   /** Whether Select is disabled */
   disabled: boolean
 
+  /** Unique identity key name for value, required when value is an object */
+  valueKey: string
+
   /** Size of Input */
   size: ElementUIComponentSize
 
@@ -40,13 +43,13 @@ export declare class ElSelect extends ElementUIComponent {
   allowCreate: boolean
 
   /** Custom filter method */
-  filterMethod: AlterItemsEventHandler
+  filterMethod: QueryChangeHandler
 
   /** Whether options are loaded from server */
   remote: boolean
 
   /** Custom remote search method */
-  remoteMethod: AlterItemsEventHandler
+  remoteMethod: QueryChangeHandler
 
   /** Whether Select is loading data from server */
   loading: boolean
@@ -62,4 +65,7 @@ export declare class ElSelect extends ElementUIComponent {
 
   /** Custom class name for Select's dropdown */
   popperClass: string
+
+  /** Select first matching option on enter key. Use with filterable or remote */
+  defaultFirstOption: boolean
 }

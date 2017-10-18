@@ -2,7 +2,7 @@ import { ElementUIComponent } from './component'
 
 export type CarouselIndicatorTrigger = 'hover' | 'click'
 export type CarouselIndicatorPosition = 'outside' | 'none'
-export type CarouselArrawVisibility = 'always' | 'hover' | 'never'
+export type CarouselArrowVisibility = 'always' | 'hover' | 'never'
 export type CarouselType = 'card'
 
 /** Loop a series of images or texts in a limited space */
@@ -26,7 +26,7 @@ export declare class ElCarousel extends ElementUIComponent {
   indicatorPosition: CarouselIndicatorPosition
 
   /** When arrows are shown */
-  arrow: CarouselArrawVisibility
+  arrow: CarouselArrowVisibility
 
   /** Type of the Carousel */
   type: CarouselType

@@ -24,4 +24,13 @@ export declare class ElInputNumber extends ElementUIComponent {
 
   /** Whether to enable the control buttons */
   controls: boolean
+
+  /** Debounce delay when typing, in milliseconds */
+  debounce: number
+
+  /** Position of the control buttons */
+  controlsPosition: string
+
+  /** Same as name in native input */
+  name: string
 }

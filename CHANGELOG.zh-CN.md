@@ -162,6 +162,7 @@
   - 移除 `icon` 属性。现在通过 `suffix-icon` 属性或者 `suffix` 具名 slot 来加入尾部图标
   - 移除 `on-icon-click` 属性和 `click` 事件。现在如果需要为输入框中的图标添加点击事件，请以具名 slot 的方式添加图标
 - Autocomplete
+  - 移除 `icon` 和 `on-icon-click` 属性。现在通过 `prefix` 和 `suffix` 具名 slot 来加入图标
   - 移除 `custom-item` 属性。现在通过 `scoped slot` 自定义输入建议列表项的内容
 - Table
   - 移除通过 `inline-template` 自定义列模板的功能

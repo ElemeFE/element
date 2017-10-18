@@ -28,11 +28,17 @@ export declare class ElAutocomplete extends ElementUIComponent {
   /** Whether Autocomplete is disabled */
   disabled: boolean
 
-  /** Icon name */
-  icon: string
-
   /** Binding value */
   value: string
+
+  /** Debounce delay when typing */
+  debounce: number
+
+  /** name for the inner native input */
+  name: string
+
+  /** whether to emit select event on enter when there is no autocomplete match */
+  selectWhenUnmatched: boolean
 
   /** Component name of your customized suggestion list item */
   customItem: string
@@ -45,7 +51,4 @@ export declare class ElAutocomplete extends ElementUIComponent {
 
   /** Whether show suggestions when input focus */
   triggerOnFocus: boolean
-
-  /** Hook function when clicking on the input icon */
-  onIconClick: IconClickEventHandler
 }

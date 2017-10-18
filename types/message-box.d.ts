@@ -19,6 +19,7 @@ export declare class ElMessageBoxComponent extends Vue {
   type: MessageType
   customClass: string
   showInput: boolean
+  showClose: boolean
   inputValue: string
   inputPlaceholder: string
   inputPattern: RegExp
@@ -27,6 +28,7 @@ export declare class ElMessageBoxComponent extends Vue {
   showConfirmButton: boolean
   showCancelButton: boolean
   action: MessageBoxCloseAction
+  dangerouslyUseHTMLString: boolean
   confirmButtonText: string
   cancelButtonText: string
   confirmButtonLoading: boolean
@@ -78,11 +80,23 @@ export interface ElMessageBoxOptions {
   /** Custom class name of confirm button */
   confirmButtonClass?: string
 
+  /** Whether to align the content in center */
+  center?: boolean
+
+  /** Whether message is treated as HTML string */
+  dangerouslyUseHTMLString?: boolean
+
+  /** Whether to use round button */
+  roundButton?: boolean
+
   /** Whether MessageBox can be closed by clicking the mask */
   closeOnClickModal?: boolean
 
   /** Whether MessageBox can be closed by pressing the ESC */
   closeOnPressEscape?: boolean
+
+  /** Whether to close MessageBox when hash changes */
+  closeOnHashChange?: boolean
 
   /** Whether to show an input */
   showInput?: boolean

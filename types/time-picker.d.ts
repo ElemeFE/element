@@ -51,6 +51,15 @@ export declare class ElTimePicker extends ElementUIComponent {
   /** Placeholder */
   placeholder: string
 
+  /** Placeholder for the start time in range mode */
+  startPlaceholder: string
+
+  /** Placeholder for the end time in range mode */
+  endPlaceholder: string
+
+  /** Whether to pick a time range, only works with <el-time-picker> */
+  isRange: boolean
+
   /** Value of the picker */
   value: string | Date
 
@@ -62,4 +71,7 @@ export declare class ElTimePicker extends ElementUIComponent {
 
   /** Additional options, check the table below */
   pickerOptions: object
+
+  /** Range separator */
+  rangeSeparator: string
 }

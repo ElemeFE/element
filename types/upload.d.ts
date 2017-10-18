@@ -1,4 +1,3 @@
-// TODO: need to check if the api matches
 import { ElementUIComponent } from './component'
 
 export type ListType = 'text' | 'picture' | 'picture-card'
@@ -56,7 +55,7 @@ export declare class ElUpload extends ElementUIComponent {
   withCredentials: boolean
 
   /** Whether to show the uploaded file list */
-  showUploadList: boolean
+  showFileList: boolean
 
   /** Whether to activate drag and drop mode */
   drag: boolean
@@ -99,4 +98,13 @@ export declare class ElUpload extends ElementUIComponent {
 
   /** Override default xhr behavior, allowing you to implement your own upload-file's request */
   httpRequest: (options: HttpRequestOptions) => void
+
+  /** Whether to disable upload */
+  disabled: boolean
+
+  /** Maximum number of uploads allowed */
+  limit: number
+
+  /** Hook function when limit is exceeded */
+  onExceed: (file: ElUploadInternalFileDetail, fileList: ElUploadInternalFileDetail[]) => void
 }

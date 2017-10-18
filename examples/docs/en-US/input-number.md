@@ -7,7 +7,9 @@
         num3: 5,
         num4: 1,
         num5: 1,
-        num6: 1
+        num6: 1,
+        num7: 1,
+        num8: 1
       }
     },
     methods: {

@@ -1,7 +1,7 @@
 import { ElementUIComponent, ElementUIComponentSize } from './component'
 import { ButtonType } from './button'
 
-export type DropdownMenuAlignment = 'start' | 'end'
+export type DropdownMenuAlignment = 'top' | 'top-start' | 'top-end' | 'bottom' | 'bottom-start' | 'bottom-end'
 export type DropdownMenuTrigger = 'hover' | 'click'
 
 /** Toggleable menu for displaying lists of links and actions */
@@ -12,11 +12,11 @@ export declare class ElDropdown extends ElementUIComponent {
   /** Whether a button group is displayed */
   splitButton: boolean
 
-  /** Component size */
+  /** menu size, also works on the split button */
   size: ElementUIComponentSize
 
-  /** Horizontal alignment */
-  menuAlign: DropdownMenuAlignment
+  /** Placement of the menu */
+  placement: DropdownMenuAlignment
 
   /** How to trigger */
   trigger: DropdownMenuTrigger

@@ -1,6 +1,7 @@
 import { ElementUIComponent } from './component'
 
 export type TabType = 'card' | 'border-card'
+export type TabPosition = 'top' | 'right' | 'bottom' | 'left'
 
 /** Divide data collections which are related yet belong to different types */
 export declare class ElTabs extends ElementUIComponent {
@@ -18,4 +19,7 @@ export declare class ElTabs extends ElementUIComponent {
 
   /** Name of the selected tab */
   value: string
+
+  /** Position of tabs */
+  tabPosition: TabPosition
 }

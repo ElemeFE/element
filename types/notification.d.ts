@@ -26,8 +26,17 @@ export interface ElNotificationOptions {
   /** Duration before close. It will not automatically close if set 0 */
   duration: number
 
+  /** Whether to show a close button */
+  showClose: boolean
+
+  /** Whether message is treated as HTML string */
+  dangerouslyUseHTMLString?: boolean
+
   /** Callback function when closed */
   onClose: () => void
+
+  /** Callback function when notification clicked */
+  onClick: () => void
 
   /** Offset from the top edge of the screen. Every Notification instance of the same moment should have the same offset */
   offset: number

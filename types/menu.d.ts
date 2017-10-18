@@ -8,8 +8,17 @@ export declare class ElMenu extends ElementUIComponent {
   /** Menu display mode */
   mode: MenuDisplayMode
 
-  /** Theme color */
-  theme: MenuTheme
+  /** Whether the menu is collapsed (available only in vertical mode) */
+  collapse: boolean
+
+  /** Background color of Menu (hex format) */
+  backgroundColor: string
+
+  /** Text color of Menu (hex format) */
+  textColor: string
+
+  /** Text color of currently active menu item (hex format) */
+  activeTextColor: string
 
   /** Index of currently active menu */
   defaultActive: string
