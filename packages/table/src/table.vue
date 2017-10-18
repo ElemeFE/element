@@ -443,8 +443,13 @@
         }
       },
 
-      expandRowKeys(newVal) {
-        this.store.setExpandRowKeys(newVal);
+      expandRowKeys: {
+        immediate: true,
+        handler(newVal) {
+          if (newVal) {
+            this.store.setExpandRowKeys(newVal);
+          }
+        }
       }
     },
 
