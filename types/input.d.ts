@@ -2,6 +2,7 @@ import { ElementUIComponent, ElementUIComponentSize } from './component'
 
 /** The resizability of el-input component */
 export type Resizability = 'none' | 'both' | 'horizontal' | 'vertical'
+export type InputType = 'text' | 'textarea'
 
 /** Controls how el-input component automatically sets size */
 export interface AutoSize {
@@ -19,8 +20,8 @@ export interface IconClickEventHandler {
 
 /** Input Component */
 export declare class ElInput extends ElementUIComponent {
-  /** Same as the type attribute of native input, except that it can be textarea */
-  type: string
+  /** Type of input */
+  type: InputType
 
   /** Binding value */
   value: string | number
@@ -40,8 +41,11 @@ export declare class ElInput extends ElementUIComponent {
   /** Size of Input, works when type is not 'textarea' */
   size: ElementUIComponentSize
 
-  /** Icon name */
-  icon: string
+  /** Prefix icon class */
+  prefixIcon: string
+
+  /** Suffix icon class */
+  suffixIcon: string
 
   /** Number of rows of textarea, only works when type is 'textarea' */
   rows: number

@@ -23,6 +23,6 @@ export declare class ElSteps extends ElementUIComponent {
   /** Whether step description is centered */
   alignCenter: boolean
 
-  /** Center whole Steps component */
-  center: boolean
+  /** Whether to apply simple theme */
+  simple: boolean
 }

@@ -30,7 +30,7 @@ export declare class ElTooltip extends ElementUIComponent {
   visibleArrow: boolean
 
   /** Popper.js parameters */
-  options: object
+  popperOptions: object
 
   /** Delay of appearance, in millisecond */
   openDelay: number
@@ -40,4 +40,10 @@ export declare class ElTooltip extends ElementUIComponent {
 
   /** Custom class name for Tooltip's popper */
   popperClass: string
+
+  /** Whether the mouse can enter the tooltip	 */
+  enterable: string
+
+  /** Timeout in milliseconds to hide tooltip */
+  hideAfter: string
 }

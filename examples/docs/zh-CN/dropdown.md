@@ -329,7 +329,7 @@ Dropdown 组件提供除了默认值以外的三种尺寸，可以在不同场�
 | 参数          | 说明            | 类型            | 可选值                 | 默认值   |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
 | type          | 菜单按钮类型，同 Button 组件(只在`split-button`为 true 的情况下有效)   | string  |          —             |    —     |
-| size          | 菜单尺寸，同 Button 组件，在`split-button`为 true 的情况下也对触发按钮生效  | string | medium / small / mini | — |
+| size          | 菜单尺寸，在`split-button`为 true 的情况下也对触发按钮生效  | string | medium / small / mini | — |
 | split-button  | 下拉触发元素呈现为按钮组    | boolean  |    —  |  false |
 | placement    | 菜单弹出位置     | string | top/top-start/top-end/bottom/bottom-start/bottom-end  | bottom-end |
 | trigger       | 触发下拉的行为     | string          | hover, click  | hover |

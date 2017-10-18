@@ -7,7 +7,7 @@ export declare class ElementUIComponent extends Vue {
 }
 
 /** Component size definition for button, input, etc */
-export type ElementUIComponentSize = 'large' | 'small' | 'mini'
+export type ElementUIComponentSize = 'large' | 'medium' | 'small' | 'mini'
 
 /** Horizontal alignment */
 export type ElementUIHorizontalAlignment = 'left' | 'center' | 'right'

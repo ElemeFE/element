@@ -16,6 +16,9 @@ export declare class ElAlert extends ElementUIComponent {
   /** If closable or not */
   closable: boolean
 
+  /** whether to center the text */
+  center: boolean
+
   /** Customized close button text */
   closeText: string
 

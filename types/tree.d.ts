@@ -1,10 +1,12 @@
 import { CreateElement, VNode } from 'vue'
 import { ElementUIComponent } from './component'
+import {Tree} from "./index";
 
 /** The node of the tree */
 export interface TreeNode {
   id?: any,
   label?: string,
+  isLeaf?: boolean,
   children?: TreeNode[]
 }
 
@@ -19,8 +21,14 @@ export interface RenderContent {
 }
 
 export interface FilterNodeMethod {
-  // TODO: complete type and description here
-  (value: any, data: TreeNode, node: any): boolean
+  /**
+   * Filter method for each node
+   *
+   * @param value The query string
+   * @param data The original data object
+   * @param node Tree node
+   */
+  (value: string, data: TreeNode, node: any): boolean
 }
 
 /** Tree Component */
@@ -45,9 +53,6 @@ export declare class ElTree extends ElementUIComponent {
 
   /** Whether current node is highlighted */
   highlightCurrent: boolean
-
-  /** Key of current node, a set only prop */
-  currentNodeKey: string | number
 
   /** Whether to expand all nodes by default */
   defaultExpandAll: boolean
@@ -124,4 +129,28 @@ export declare class ElTree extends ElementUIComponent {
    * @param deep Indicating whether to checked state deeply or not
    */
   setChecked (data: TreeNode | any, checked: boolean, deep: boolean)
+
+  /**
+   * Return the highlight node's key (null if no node is highlighted)
+   */
+  getCurrentKey (): any
+
+  /**
+   * Set highlighted node by key, only works when node-key is assigned
+   *
+   * @param key The node's key to be highlighted
+   */
+  setCurrentKey (key: any): void
+
+  /**
+   * Return the highlight node (null if no node is highlighted)
+   */
+  getCurrentNode (): TreeNode
+
+  /**
+   * Set highlighted node, only works when node-key is assigned
+   *
+   * @param node The node to be highlighted
+   */
+  setCurrentNode (node: TreeNode): void
 }

@@ -12,6 +12,11 @@ export interface DefaultSortOptions {
   order: SortOrder
 }
 
+export interface SummaryMethodParams {
+  columns: object[],
+  data: object
+}
+
 /** Table Component */
 export declare class ElTable extends ElementUIComponent {
   /** Table data */
@@ -65,6 +70,15 @@ export declare class ElTable extends ElementUIComponent {
   /** Tooltip effect property */
   tooltipEffect: TooltipEffect
 
+  /** Whether to display a summary row */
+  showSummary: boolean
+
+  /** Displayed text for the first column of summary row */
+  sumText: string
+
+  /** Custom summary method */
+  summaryMethod: (param: SummaryMethodParams) => any[]
+
   /** Clear selection. Might be useful when `reserve-selection` is on */
   clearSelection (): void
 
@@ -75,4 +89,11 @@ export declare class ElTable extends ElementUIComponent {
    * @param selected Whether the row is selected. The selected state will be toggled if not set
    */
   toggleRowSelection (row: object, selected?: boolean): void
+
+  /**
+   * Set a certain row as selected
+   *
+   * @param row The row that is going to set as selected
+   */
+  setCurrentRow (row?: object): void
 }

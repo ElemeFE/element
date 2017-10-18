@@ -15,10 +15,13 @@ export declare class ElButton extends ElementUIComponent {
   type: ButtonType
 
   /** Determine whether it's a plain button */
-  plain: Boolean
+  plain: boolean
+
+  /** Determine whether it's a round button */
+  round: boolean
 
   /** Determine whether it's loading */
-  loading: Boolean
+  loading: boolean
 
   /** Disable the button */
   disabled: boolean

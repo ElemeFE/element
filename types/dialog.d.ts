@@ -1,8 +1,6 @@
 import { VNode } from 'vue'
 import { ElementUIComponent } from './component'
 
-export type DialogSize = 'tiny' | 'small' | 'large' | 'full'
-
 export interface DialogSlots {
   /** Content of the Dialog */
   default: VNode[],
@@ -21,10 +19,13 @@ export declare class ElDialog extends ElementUIComponent {
   /** Title of Dialog */
   title: string
 
-  /** Size of Dialog */
-  size: DialogSize
+  /** Width of Dialog */
+  width: string
 
-  /** Value for `top` of Dialog CSS, works when `size` is not `full` */
+  /** Whether the Dialog takes up full screen */
+  fullscreen: boolean
+
+  /** Value for margin-top of Dialog CSS */
   top: string
 
   /** Whether a mask is displayed */
@@ -48,11 +49,11 @@ export declare class ElDialog extends ElementUIComponent {
   /** Whether to show a close button */
   showClose: boolean
 
+  /** Callback before Dialog closes, and it will prevent Dialog from closing */
+  beforeClose: (done: Function) => void
+
+  /** Whether to align the header and footer in center */
+  center: boolean
+
   $slots: DialogSlots
-
-  /** Open the current instance */
-  open ()
-
-  /** Close the current instance */
-  close ()
 }

@@ -64,7 +64,7 @@ export interface DatePickerOptions {
 /** DatePicker Component */
 export declare class ElDatePicker extends ElementUIComponent {
   /** The value of the date picker */
-  value: Date | Date[]
+  value: Date | string | Date[] | string[]
 
   /** Whether DatePicker is read only */
   readonly: boolean
@@ -84,6 +84,12 @@ export declare class ElDatePicker extends ElementUIComponent {
   /** Placeholder */
   placeholder: string
 
+  /** Placeholder for the start date in range mode */
+  startPlaceholder: string
+
+  /** Placeholder for the end date in range mode */
+  endPlaceholder: string
+
   /** Type of the picker */
   type: DatePickerType
 
@@ -101,4 +107,13 @@ export declare class ElDatePicker extends ElementUIComponent {
 
   /** Range separator */
   rangeSeparator: string
+
+  /** Default date of the calendar */
+  defaultValue: Date | number | string
+
+  /** Format of binding value. If not specified, the binding value will be a Date object */
+  valueFormat: string
+
+  /** name for the inner native input */
+  name: string
 }

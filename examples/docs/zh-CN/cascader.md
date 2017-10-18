@@ -1679,6 +1679,7 @@
 | debounce | 搜索关键词输入的去抖延迟，毫秒 | number | — | 300 |
 | change-on-select | 是否允许选择任意一级的选项 | boolean | — | false |
 | size | 尺寸 | string | medium / small / mini | — |
+| before-filter | 筛选之前的钩子，参数为输入的值，若返回 false 或者返回 Promise 且被 reject，则停止筛选 | function(value) | — | — |
 
 ### props
 | 参数     | 说明              | 类型   | 可选值 | 默认值 |
@@ -1687,7 +1688,6 @@
 | label    | 指定选项标签为选项对象的某个属性值 | string | — | — |
 | children | 指定选项的子选项为选项对象的某个属性值 | string | — | — |
 | disabled | 指定选项的禁用为选项对象的某个属性值 | string | — | — |
-| before-filter | 可选参数, 筛选之前的钩子，参数为输入的值，若返回 false 或者返回 Promise 且被 reject，则停止筛选。 | function(value) | — | — |
 
 ### Events
 | 事件名称      | 说明    | 回调参数      |

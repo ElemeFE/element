@@ -12,22 +12,28 @@ export declare class ElSwitch extends ElementUIComponent {
   width: number
 
   /** Class name of the icon displayed when in on state, overrides on-text */
-  onCloseIcon: string
+  trueIconClass: string
 
   /** Class name of the icon displayed when in off state, overrides off-text */
-  offCloseIcon: string
+  falseIconClass: string
 
   /** Text displayed when in on state */
-  onText: string
+  trueText: string
 
   /** Text displayed when in off state */
-  offText: string
+  falseText: string
 
   /** Background color when in on state */
-  onColor: string
+  trueColor: string
 
   /** Background color when in off state */
-  offColor: string
+  falseColor: string
+
+  /** Switch value when in on state */
+  trueValue: string | boolean | number
+
+  /** Switch value when in off state */
+  falseValue: string | boolean | number
 
   /** Input name of Switch */
   name: string

@@ -1,6 +1,5 @@
 import { VNode } from 'vue'
 import { ElementUIComponent } from './component'
-import { ElementUIIcon } from './icon'
 
 export type StepStatus = 'wait' | 'process' | 'finish' | 'error' | 'success'
 
@@ -26,7 +25,7 @@ export declare class ElStep extends ElementUIComponent {
   description: string
 
   /** Step icon */
-  icon: ElementUIIcon
+  icon: string
 
   /** Current status. It will be automatically set by Steps if not configured. */
   status: StepStatus

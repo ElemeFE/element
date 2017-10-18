@@ -16,7 +16,7 @@ export declare class ElCascader extends ElementUIComponent {
   /** Data of the options */
   options: CascaderOption[]
 
-  /** Configuration options, see the following table */
+  /** Configuration options */
   props: object
 
   /** Selected value */
@@ -51,4 +51,7 @@ export declare class ElCascader extends ElementUIComponent {
 
   /** Size of Input */
   size: ElementUIComponentSize
+
+  /** Hook function before filtering with the value to be filtered as its parameter */
+  beforeFilter: (value: string) => boolean | Promise
 }

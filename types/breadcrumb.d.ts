@@ -4,4 +4,7 @@ import { ElementUIComponent } from './component'
 export declare class ElBreadcrumb extends ElementUIComponent {
   /** Separator character */
   separator: string
+
+  /** Class name of the icon separator */
+  separatorClass: string
 }

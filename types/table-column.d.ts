@@ -1,11 +1,23 @@
 import { CreateElement, VNode } from 'vue'
 import { ElementUIComponent, ElementUIHorizontalAlignment } from './component'
+import { PopoverPlacement } from './popover'
 
 export type TableColumnType = 'default' | 'selection' | 'index' | 'expand'
 export type TableColumnFixedType = 'left' | 'right'
 
-// TODO: complete type here
-export type TableColumn = any
+export type TableColumn = {
+  /** Label of the column */
+  label: string,
+
+  /** Property name of the source data */
+  property: string,
+
+  /** Type of the column */
+  type: string,
+
+  /** Whether column is fixed at left/right */
+  fixed: boolean | string
+}
 
 /** Data used in renderHeader function */
 export interface RenderHeaderData {
@@ -87,13 +99,15 @@ export declare class ElTableColumn extends ElementUIComponent {
   /** An array of data filtering options */
   filters: TableColumnFilter[]
 
+  /** Placement for the filter dropdown */
+  filterPlacement: PopoverPlacement
+
   /** Whether data filtering supports multiple options */
   filterMultiple: Boolean
 
   /** Data filtering method. If `filter-multiple` is on, this method will be called multiple times for each row, and a row will display if one of the calls returns `true` */
   filterMethod: (value: any, row: object) => boolean
 
-  // TODO: complete type here
   /** Filter value for selected data, might be useful when table header is rendered with `render-header` */
-  filteredValue: any[]
+  filteredValue: TableColumnFilter[]
 }

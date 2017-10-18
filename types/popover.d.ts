@@ -53,10 +53,13 @@ export declare class ElPopover extends ElementUIComponent {
   visibleArrow: boolean
 
   /** Parameters for popper.js */
-  options: object
+  popperOptions: object
 
   /** Custom class name for popover */
   popperClass: string
+
+  /** Delay of appearance when trigger is hover, in milliseconds */
+  openDelay: number
 
   $slots: PopoverSlots
 }
