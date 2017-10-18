@@ -295,6 +295,10 @@ export default {
         classes.push(rowClassName.call(null, row, index) || '');
       }
 
+      if (this.store.states.expandRows.indexOf(row) > -1) {
+        classes.push('expanded');
+      }
+
       return classes.join(' ');
     },
 
