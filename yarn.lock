@@ -239,9 +239,11 @@ async-each@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/async-each/-/async-each-1.0.1.tgz#19d386a1d9edc6e7c1c85d388aedbcc56d33602d"
 
-async-validator@1.6.9:
-  version "1.6.9"
-  resolved "https://registry.yarnpkg.com/async-validator/-/async-validator-1.6.9.tgz#a8309daa8b83421cdbd4628e026d6abb25192d34"
+async-validator@~1.8.1:
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/async-validator/-/async-validator-1.8.1.tgz#6665788ca39269af770e5ee02f0e557f2438d2ca"
+  dependencies:
+    babel-runtime "6.x"
 
 async@1.5.2, async@1.x, async@^1.3.0, async@^1.4.0, async@^1.5.0:
   version "1.5.2"
@@ -695,6 +697,13 @@ babel-register@^6.18.0:
     lodash "^4.2.0"
     mkdirp "^0.5.1"
     source-map-support "^0.4.2"
+
+babel-runtime@6.x:
+  version "6.26.0"
+  resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
+  dependencies:
+    core-js "^2.4.0"
+    regenerator-runtime "^0.11.0"
 
 babel-runtime@^6.0.0, babel-runtime@^6.11.6, babel-runtime@^6.18.0, babel-runtime@^6.20.0, babel-runtime@^6.9.0:
   version "6.20.0"
@@ -5849,6 +5858,10 @@ regenerate@^1.2.1:
 regenerator-runtime@^0.10.0:
   version "0.10.1"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.10.1.tgz#257f41961ce44558b18f7814af48c17559f9faeb"
+
+regenerator-runtime@^0.11.0:
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.11.0.tgz#7e54fe5b5ccd5d6624ea6255c3473be090b802e1"
 
 regenerator-transform@0.9.8:
   version "0.9.8"
