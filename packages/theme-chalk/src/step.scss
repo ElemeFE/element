@@ -91,7 +91,7 @@
 
     // 组件自身表示状态的图标
     @include when(status) {
-      transform: scale(.65) translateY(1px);
+      transform: translateY(1px);
     }
   }
 
@@ -256,7 +256,7 @@
       }
 
       &.is-status {
-        transform: scale(.5) translateY(1px);
+        transform: scale(.8) translateY(1px);
       }
     }
 

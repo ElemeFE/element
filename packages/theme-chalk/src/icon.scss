@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'element-icons';
-  src: url('fonts/element-icons.woff?t=1505459769526') format('woff'), /* chrome, firefox */
-       url('fonts/element-icons.ttf?t=1505459769526') format('truetype'); /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  src: url('fonts/element-icons.woff?t=1508313898411') format('woff'), /* chrome, firefox */
+       url('fonts/element-icons.ttf?t=1508313898411') format('truetype'); /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
   font-weight: normal;
   font-style: normal
 }
@@ -23,55 +23,143 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.el-icon-arrow-down:before { content: "\e600"; }
-.el-icon-arrow-left:before { content: "\e601"; }
-.el-icon-arrow-right:before { content: "\e602"; }
-.el-icon-arrow-up:before { content: "\e603"; }
-.el-icon-caret-bottom:before { content: "\e604"; }
-.el-icon-caret-left:before { content: "\e605"; }
-.el-icon-caret-right:before { content: "\e606"; }
-.el-icon-caret-top:before { content: "\e607"; }
-.el-icon-check:before { content: "\e608"; }
-.el-icon-circle-check:before { content: "\e609"; }
-.el-icon-circle-close:before { content: "\e60a"; }
-.el-icon-circle-cross:before { content: "\e60b"; }
-.el-icon-close:before { content: "\e60c"; }
 .el-icon-upload:before { content: "\e60d"; }
-.el-icon-d-arrow-left:before { content: "\e60e"; }
-.el-icon-d-arrow-right:before { content: "\e60f"; }
-.el-icon-d-caret:before { content: "\e610"; }
-.el-icon-date:before { content: "\e611"; }
-.el-icon-delete:before { content: "\e612"; }
-.el-icon-document:before { content: "\e613"; }
-.el-icon-edit:before { content: "\e614"; }
-.el-icon-information:before { content: "\e615"; }
-.el-icon-loading:before { content: "\e616"; }
-.el-icon-menu:before { content: "\e617"; }
-.el-icon-message:before { content: "\e618"; }
-.el-icon-minus:before { content: "\e619"; }
-.el-icon-more:before { content: "\e61a"; }
-.el-icon-picture:before { content: "\e61b"; }
-.el-icon-plus:before { content: "\e61c"; }
-.el-icon-search:before { content: "\e61d"; }
-.el-icon-setting:before { content: "\e61e"; }
-.el-icon-share:before { content: "\e61f"; }
-.el-icon-star-off:before { content: "\e620"; }
-.el-icon-star-on:before { content: "\e621"; }
-.el-icon-time:before { content: "\e622"; }
-.el-icon-warning_default:before { content: "\e623"; }
-.el-icon-delete2:before { content: "\e624"; }
-.el-icon-upload2:before { content: "\e627"; }
-.el-icon-view:before { content: "\e626"; }
-.el-icon-circle-check-plain:before { content: "\e625"; }
-.el-icon-circle-cross-plain:before { content: "\e628"; }
-.el-icon-information-plain:before { content: "\e629"; }
-.el-icon-warning-plain:before { content: "\e62a"; }
-.el-icon-info:before { content: "\e62b"; }
+
 .el-icon-error:before { content: "\e62c"; }
+
 .el-icon-success:before { content: "\e62d"; }
+
 .el-icon-warning:before { content: "\e62e"; }
+
 .el-icon-sort-down:before { content: "\e630"; }
+
 .el-icon-sort-up:before { content: "\e631"; }
+
+.el-icon-arrow-left:before { content: "\e600"; }
+
+.el-icon-circle-plus:before { content: "\e601"; }
+
+.el-icon-circle-plus-outline:before { content: "\e602"; }
+
+.el-icon-arrow-down:before { content: "\e603"; }
+
+.el-icon-arrow-right:before { content: "\e604"; }
+
+.el-icon-arrow-up:before { content: "\e605"; }
+
+.el-icon-back:before { content: "\e606"; }
+
+.el-icon-circle-close:before { content: "\e607"; }
+
+.el-icon-date:before { content: "\e608"; }
+
+.el-icon-circle-close-outline:before { content: "\e609"; }
+
+.el-icon-caret-left:before { content: "\e60a"; }
+
+.el-icon-caret-bottom:before { content: "\e60b"; }
+
+.el-icon-caret-top:before { content: "\e60c"; }
+
+.el-icon-caret-right:before { content: "\e60e"; }
+
+.el-icon-close:before { content: "\e60f"; }
+
+.el-icon-d-arrow-left:before { content: "\e610"; }
+
+.el-icon-check:before { content: "\e611"; }
+
+.el-icon-delete:before { content: "\e612"; }
+
+.el-icon-d-arrow-right:before { content: "\e613"; }
+
+.el-icon-document:before { content: "\e614"; }
+
+.el-icon-d-caret:before { content: "\e615"; }
+
+.el-icon-edit-outline:before { content: "\e616"; }
+
+.el-icon-download:before { content: "\e617"; }
+
+.el-icon-goods:before { content: "\e618"; }
+
+.el-icon-search:before { content: "\e619"; }
+
+.el-icon-info:before { content: "\e61a"; }
+
+.el-icon-message:before { content: "\e61b"; }
+
+.el-icon-edit:before { content: "\e61c"; }
+
+.el-icon-location:before { content: "\e61d"; }
+
+.el-icon-loading:before { content: "\e61e"; }
+
+.el-icon-location-outline:before { content: "\e61f"; }
+
+.el-icon-menu:before { content: "\e620"; }
+
+.el-icon-minus:before { content: "\e621"; }
+
+.el-icon-bell:before { content: "\e622"; }
+
+.el-icon-moblie-phone:before { content: "\e624"; }
+
+.el-icon-news:before { content: "\e625"; }
+
+.el-icon-more:before { content: "\e626"; }
+
+.el-icon-phone:before { content: "\e627"; }
+
+.el-icon-phone-outline:before { content: "\e628"; }
+
+.el-icon-picture:before { content: "\e629"; }
+
+.el-icon-picture-outline:before { content: "\e62a"; }
+
+.el-icon-plus:before { content: "\e62b"; }
+
+.el-icon-printer:before { content: "\e62f"; }
+
+.el-icon-rank:before { content: "\e632"; }
+
+.el-icon-refresh:before { content: "\e633"; }
+
+.el-icon-question:before { content: "\e634"; }
+
+.el-icon-remove:before { content: "\e635"; }
+
+.el-icon-share:before { content: "\e636"; }
+
+.el-icon-star-on:before { content: "\e637"; }
+
+.el-icon-setting:before { content: "\e638"; }
+
+.el-icon-circle-check:before { content: "\e639"; }
+
+.el-icon-service:before { content: "\e63a"; }
+
+.el-icon-sold-out:before { content: "\e63b"; }
+
+.el-icon-remove-outline:before { content: "\e63c"; }
+
+.el-icon-star-off:before { content: "\e63d"; }
+
+.el-icon-circle-check-outline:before { content: "\e63e"; }
+
+.el-icon-tickets:before { content: "\e63f"; }
+
+.el-icon-sort:before { content: "\e640"; }
+
+.el-icon-zoom-in:before { content: "\e641"; }
+
+.el-icon-time:before { content: "\e642"; }
+
+.el-icon-view:before { content: "\e643"; }
+
+.el-icon-upload2:before { content: "\e644"; }
+
+.el-icon-zoom-out:before { content: "\e645"; }
 
 .el-icon-loading {
   animation: rotating 1s linear infinite;

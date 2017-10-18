@@ -125,7 +125,7 @@
       @close="handleClose">
       <el-submenu index="1">
         <template slot="title">
-          <i class="el-icon-message"></i>
+          <i class="el-icon-location"></i>
           <span>导航一</span>
         </template>
         <el-menu-item-group>
@@ -163,7 +163,7 @@
       active-text-color="#ffd04b">
       <el-submenu index="1">
         <template slot="title">
-          <i class="el-icon-message"></i>
+          <i class="el-icon-location"></i>
           <span>导航一</span>
         </template>
         <el-menu-item-group>
@@ -217,7 +217,7 @@
 <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
   <el-submenu index="1">
     <template slot="title">
-      <i class="el-icon-message"></i>
+      <i class="el-icon-location"></i>
       <span slot="title">导航一</span>
     </template>
     <el-menu-item-group>

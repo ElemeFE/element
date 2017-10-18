@@ -124,7 +124,7 @@ Vertical NavMenu with sub-menus.
       @close="handleClose">
       <el-submenu index="1">
         <template slot="title">
-          <i class="el-icon-message"></i>
+          <i class="el-icon-location"></i>
           <span>Navigator One</span>
         </template>
         <el-menu-item-group title="Group One">
@@ -161,7 +161,7 @@ Vertical NavMenu with sub-menus.
       active-text-color="#ffd04b">
       <el-submenu index="1">
         <template slot="title">
-          <i class="el-icon-message"></i>
+          <i class="el-icon-location"></i>
           <span>Navigator One</span>
         </template>
         <el-menu-item-group title="Group One">
@@ -216,7 +216,7 @@ Vertical NavMenu could be collapsed.
 <el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
   <el-submenu index="1">
     <template slot="title">
-      <i class="el-icon-message"></i>
+      <i class="el-icon-location"></i>
       <span slot="title">Navigator One</span>
     </template>
     <el-menu-item-group>

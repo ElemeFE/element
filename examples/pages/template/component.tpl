@@ -118,7 +118,8 @@
         display: block;
         line-height: 40px;
         text-align: center;
-        font-size: 12px;
+        font-size: 18px;
+        transform: translateY(-2px);
       }
 
       &.hover {

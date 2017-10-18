@@ -240,7 +240,7 @@
 
     .el-color-picker__icon,
     .el-color-picker__empty {
-      transform: translate3d(-50%, -50%, 0) scale(0.6);
+      transform: translate3d(-50%, -50%, 0) scale(0.8);
     }
   }
 
@@ -259,7 +259,7 @@
 
     .el-color-picker__icon,
     .el-color-picker__empty {
-      transform: translate3d(-50%, -50%, 0) scale(0.6);
+      transform: translate3d(-50%, -50%, 0) scale(0.8);
     }
   }
 
@@ -317,7 +317,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate3d(-50%, -50%, 0) scale(0.8);
+    transform: translate3d(-50%, -50%, 0);
   }
 
   @include e(icon) {
@@ -326,7 +326,7 @@
     width: 100%;
     top: 50%;
     left: 50%;
-    transform: translate3d(-50%, -50%, 0) scale(0.8);
+    transform: translate3d(-50%, -50%, 0);
     color: $--color-white;
     text-align: center;
     font-size: 12px;

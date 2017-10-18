@@ -20,7 +20,6 @@
     position: relative;
     cursor: pointer;
     font-size: 12px;
-    transform: scale(.75, .75);
     height: 18px;
     width: 18px;
     line-height: 18px;
@@ -31,7 +30,6 @@
 
     &::before {
       display: block;
-      transform: scale(.8);
     }
 
     &:hover {
@@ -142,7 +140,7 @@
 
     .el-icon-close {
       margin-left: -3px;
-      transform: scale(.65);
+      transform: scale(.7);
     }
   }
 }
