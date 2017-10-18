@@ -14,6 +14,7 @@
     <div class="hidden-columns" ref="hiddenColumns"><slot></slot></div>
     <div class="el-table__header-wrapper" ref="headerWrapper" v-if="showHeader">
       <table-header
+        ref="tableHeader"
         :store="store"
         :layout="layout"
         :border="border"
@@ -59,6 +60,7 @@
       ]">
       <div class="el-table__fixed-header-wrapper" ref="fixedHeaderWrapper" v-if="showHeader">
         <table-header
+          ref="fixedTableHeader"
           fixed="left"
           :border="border"
           :store="store"
@@ -103,6 +105,7 @@
       ]">
       <div class="el-table__fixed-header-wrapper" ref="rightFixedHeaderWrapper" v-if="showHeader">
         <table-header
+          ref="rightFixedTableHeader"
           fixed="right"
           :border="border"
           :store="store"
@@ -241,6 +244,10 @@
 
       clearSelection() {
         this.store.clearSelection();
+      },
+
+      clearFilter() {
+        this.store.clearFilter();
       },
 
       handleMouseLeave() {

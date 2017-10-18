@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import debounce from 'throttle-debounce/debounce';
+import merge from 'element-ui/src/utils/merge';
 import { orderBy, getColumnById, getRowIdentity } from './util';
 
 const sortData = (data, states) => {
@@ -405,6 +406,33 @@ TableStore.prototype.cleanSelection = function() {
   if (deleted.length) {
     this.table.$emit('selection-change', selection);
   }
+};
+
+TableStore.prototype.clearFilter = function() {
+  const states = this.states;
+  const { tableHeader, fixedTableHeader, rightFixedTableHeader } = this.table.$refs;
+  let panels = {};
+
+  if (tableHeader) panels = merge(panels, tableHeader.filterPanels);
+  if (fixedTableHeader) panels = merge(panels, fixedTableHeader.filterPanels);
+  if (rightFixedTableHeader) panels = merge(panels, rightFixedTableHeader.filterPanels);
+
+  const keys = Object.keys(panels);
+  if (!keys.length) return;
+
+  keys.forEach(key => {
+    panels[key].filteredValue = [];
+  });
+
+  states.filters = {};
+
+  this.commit('filterChange', {
+    column: {},
+    values: [],
+    silent: true
+  });
+
+  this.table.$emit('filter-clear');
 };
 
 TableStore.prototype.updateAllSelected = function() {
