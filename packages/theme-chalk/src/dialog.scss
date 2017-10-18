@@ -45,7 +45,7 @@
     border: none;
     outline: none;
     cursor: pointer;
-    font-size: 12px;
+    font-size: $--message-close-size;
 
     .el-dialog__close {
       color: $--color-info;

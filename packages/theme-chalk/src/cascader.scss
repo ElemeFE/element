@@ -19,7 +19,7 @@
 
   .el-icon-arrow-down {
     transition: transform .3s;
-    font-size: 12px;
+    font-size: 14px;
 
     @include when(reverse) {
       transform: rotateZ(180deg);
@@ -131,13 +131,11 @@
     @include m(extensible) {
       &:after {
         font-family: 'element-icons';
-        content: "\e602";
-        font-size: 12px;
-        transform: scale(0.8);
+        content: "\e604";
+        font-size: 14px;
         color: rgb(191, 203, 217);
         position: absolute;
         right: 15px;
-        margin-top: 1px;
       }
     }
 

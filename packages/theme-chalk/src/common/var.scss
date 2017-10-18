@@ -209,7 +209,7 @@ $--select-close-hover-color: $--color-text-secondary;
 $--select-input-color: $--color-text-placeholder;
 $--select-multiple-input-color: #666;
 $--select-input-focus-background: $--color-primary;
-$--select-input-font-size: 12px;
+$--select-input-font-size: 14px;
 
 $--select-tag-height: 24px;
 $--select-tag-color: $--color-white;
@@ -274,7 +274,7 @@ $--message-min-width: 380px;
 $--message-padding: 15px 15px 15px 20px;
 $--message-content-color: $--color-text-regular;
 $--message-close-color: $--color-text-placeholder;
-$--message-close-size: 12px;
+$--message-close-size: 14px;
 $--message-close-hover-color: $--color-text-secondary;
 
 $--message-success-color: $--color-success;
@@ -290,7 +290,7 @@ $--notification-raduis: 8px;
 $--notification-shadow: $--box-shadow-light;
 $--notification-border-color: $--border-color-lighter;
 $--notification-icon-size: 24px;
-$--notification-close-font-size: 12px;
+$--notification-close-font-size: $--message-close-size;
 $--notification-group-margin: 13px;
 $--notification-font-size: $--font-size-base;
 $--notification-color: $--color-text-regular;
