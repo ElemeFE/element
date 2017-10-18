@@ -31,7 +31,8 @@
     class="el-date-editor el-range-editor el-input__inner"
     :class="[
       'el-date-editor--' + type,
-      'el-range-editor--' + pickerSize,
+      pickerSize ? `el-range-editor--${ pickerSize }` : '',
+      disabled ? 'is-disabled' : '',
       pickerVisible ? 'is-active' : ''
     ]"
     @click="handleRangeClick"
@@ -45,6 +46,7 @@
     <input
       :placeholder="startPlaceholder"
       :value="displayValue && displayValue[0]"
+      :disabled="disabled"
       @input="handleStartInput"
       @change="handleStartChange"
       @focus="handleFocus"
@@ -53,6 +55,7 @@
     <input
       :placeholder="endPlaceholder"
       :value="displayValue && displayValue[1]"
+      :disabled="disabled"
       @input="handleEndInput"
       @change="handleEndChange"
       @focus="handleFocus"
