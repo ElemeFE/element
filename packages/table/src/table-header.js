@@ -188,6 +188,14 @@ export default {
       return this.store.states.rightFixedColumns.length;
     },
 
+    leftFixedLeafCount() {
+      return this.store.states.fixedLeafColumnsLength;
+    },
+
+    rightFixedLeafCount() {
+      return this.store.states.rightFixedLeafColumnsLength;
+    },
+
     columns() {
       return this.store.states.columns;
     },
@@ -234,16 +242,17 @@ export default {
 
   methods: {
     isCellHidden(index, columns) {
+      let start = 0;
+      for (let i = 0; i < index; i++) {
+        start += columns[i].colSpan;
+      }
+      const after = start + columns[index].colSpan - 1;
       if (this.fixed === true || this.fixed === 'left') {
-        return index >= this.leftFixedCount;
+        return after >= this.leftFixedLeafCount;
       } else if (this.fixed === 'right') {
-        let before = 0;
-        for (let i = 0; i < index; i++) {
-          before += columns[i].colSpan;
-        }
-        return before < this.columnsCount - this.rightFixedCount;
+        return start < this.columnsCount - this.rightFixedLeafCount;
       } else {
-        return (index < this.leftFixedCount) || (index >= this.columnsCount - this.rightFixedCount);
+        return (after < this.leftFixedLeafCount) || (start >= this.columnsCount - this.rightFixedLeafCount);
       }
     },
 

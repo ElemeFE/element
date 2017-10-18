@@ -56,6 +56,9 @@ const TableStore = function(table, initialState = {}) {
     columns: [],
     fixedColumns: [],
     rightFixedColumns: [],
+    leafColumns: [],
+    fixedLeafColumns: [],
+    rightFixedLeafColumns: [],
     isComplex: false,
     _data: null,
     filteredData: null,
@@ -322,8 +325,19 @@ TableStore.prototype.updateColumns = function() {
     _columns[0].fixed = true;
     states.fixedColumns.unshift(_columns[0]);
   }
-  states.originColumns = [].concat(states.fixedColumns).concat(_columns.filter((column) => !column.fixed)).concat(states.rightFixedColumns);
-  states.columns = doFlattenColumns(states.originColumns);
+
+  const notFixedColumns = _columns.filter(column => !column.fixed);
+  states.originColumns = [].concat(states.fixedColumns).concat(notFixedColumns).concat(states.rightFixedColumns);
+
+  const leafColumns = doFlattenColumns(notFixedColumns);
+  const fixedLeafColumns = doFlattenColumns(states.fixedColumns);
+  const rightFixedLeafColumns = doFlattenColumns(states.rightFixedColumns);
+
+  states.leafColumnsLength = leafColumns.length;
+  states.fixedLeafColumnsLength = fixedLeafColumns.length;
+  states.rightFixedLeafColumnsLength = rightFixedLeafColumns.length;
+
+  states.columns = [].concat(fixedLeafColumns).concat(leafColumns).concat(rightFixedLeafColumns);
   states.isComplex = states.fixedColumns.length > 0 || states.rightFixedColumns.length > 0;
 };
 

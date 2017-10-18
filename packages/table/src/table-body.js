@@ -136,6 +136,14 @@ export default {
       return this.store.states.columns.length;
     },
 
+    leftFixedLeafCount() {
+      return this.store.states.fixedLeafColumnsLength;
+    },
+
+    rightFixedLeafCount() {
+      return this.store.states.rightFixedLeafColumnsLength;
+    },
+
     leftFixedCount() {
       return this.store.states.fixedColumns.length;
     },
@@ -170,11 +178,11 @@ export default {
 
     isColumnHidden(index) {
       if (this.fixed === true || this.fixed === 'left') {
-        return index >= this.leftFixedCount;
+        return index >= this.leftFixedLeafCount;
       } else if (this.fixed === 'right') {
-        return index < this.columnsCount - this.rightFixedCount;
+        return index < this.columnsCount - this.rightFixedLeafCount;
       } else {
-        return (index < this.leftFixedCount) || (index >= this.columnsCount - this.rightFixedCount);
+        return (index < this.leftFixedLeafCount) || (index >= this.columnsCount - this.rightFixedLeafCount);
       }
     },
 
