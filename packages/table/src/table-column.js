@@ -181,7 +181,7 @@ export default {
 
   created() {
     this.customRender = this.$options.render;
-    this.$options.render = h => h('div', this.$slots.default);
+    this.$options.render = h => h('div');
     this.columnId = (this.$parent.tableId || (this.$parent.columnId + '_')) + 'column_' + columnIdSeed++;
 
     let parent = this.$parent;
