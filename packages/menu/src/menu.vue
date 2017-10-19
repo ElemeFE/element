@@ -165,7 +165,10 @@
         this.openedMenus.push(index);
       },
       closeMenu(index) {
-        this.openedMenus.splice(this.openedMenus.indexOf(index), 1);
+        const i = this.openedMenus.indexOf(index);
+        if (i !== -1) {
+          this.openedMenus.splice(i, 1);
+        }
       },
       handleSubmenuClick(submenu) {
         const { index, indexPath } = submenu;
