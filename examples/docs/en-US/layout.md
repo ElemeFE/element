@@ -309,15 +309,15 @@ Use the flex layout to make flexible alignment of columns.
 
 ### Responsive Layout
 
-Taking example by Bootstrap's responsive design, four breakpoints are preset: xs, sm, md and lg.
+Taking example by Bootstrap's responsive design, five breakpoints are preset: xs, sm, md, lg and xl.
 
 ::: demo
 ```html
 <el-row :gutter="10">
-  <el-col :xs="8" :sm="6" :md="4" :lg="3"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :xs="4" :sm="6" :md="8" :lg="9"><div class="grid-content bg-purple-light"></div></el-col>
-  <el-col :xs="4" :sm="6" :md="8" :lg="9"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :xs="8" :sm="6" :md="4" :lg="3"><div class="grid-content bg-purple-light"></div></el-col>
+  <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1"><div class="grid-content bg-purple"></div></el-col>
+  <el-col :xs="4" :sm="6" :md="8" :lg="9" :xl="11"><div class="grid-content bg-purple-light"></div></el-col>
+  <el-col :xs="4" :sm="6" :md="8" :lg="9" :xl="11"><div class="grid-content bg-purple"></div></el-col>
+  <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1"><div class="grid-content bg-purple-light"></div></el-col>
 </el-row>
 
 <style>
@@ -341,12 +341,15 @@ Taking example by Bootstrap's responsive design, four breakpoints are preset: xs
 ```
 :::
 
-### Classes for Visibility
+### Utility classes for hiding elements
+
+Additionally, Element provides a series of classes for hiding elements under certain conditions. These classes can be added to any DOM elements or custom components. You need to import the following CSS file to use these classes:
 
 ```js
-import 'element-ui/lib/theme-chalk/display.scss';
+import 'element-ui/lib/theme-chalk/display.css';
 ```
 
+The classes are:
 - `hide-xs-only` - hide when on extra small viewports only
 - `hide-sm-only` - hide when on small viewports and down
 - `hide-sm-and-down` - hide when on small viewports and down
@@ -355,6 +358,9 @@ import 'element-ui/lib/theme-chalk/display.scss';
 - `hide-md-and-down` - hide when on medium viewports and down
 - `hide-md-and-up` - hide when on medium viewports and up
 - `hide-lg-only` - hide when on large viewports only
+- `hide-lg-and-down` - hide when on large viewports and down
+- `hide-lg-and-up` - hide when on large viewports and up
+- `hide-xl-only` - hide when on extra large viewports only
 
 ### Row Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
@@ -374,8 +380,9 @@ import 'element-ui/lib/theme-chalk/display.scss';
 | pull |  number of columns that grid moves to the left | number | — | 0 |
 | xs | `<768px` Responsive columns or column props object | number/object (e.g. {span: 4, offset: 4}) | — | — |
 | sm | `≥768px` Responsive columns or column props object | number/object (e.g. {span: 4, offset: 4}) | — | — |
-| md | `≥992` Responsive columns or column props object | number/object (e.g. {span: 4, offset: 4}) | — | — |
-| lg | `≥1200` Responsive columns or column props object | number/object (e.g. {span: 4, offset: 4}) | — | — |
+| md | `≥992px` Responsive columns or column props object | number/object (e.g. {span: 4, offset: 4}) | — | — |
+| lg | `≥1200px` Responsive columns or column props object | number/object (e.g. {span: 4, offset: 4}) | — | — |
+| xl | `≥1920px` Responsive columns or column props object | number/object (e.g. {span: 4, offset: 4}) | — | — |
 | tag | custom element tag | string | * | div |
 
 

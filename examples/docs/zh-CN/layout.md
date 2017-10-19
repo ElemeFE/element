@@ -308,15 +308,15 @@
 
 ### 响应式布局
 
-参照了 Bootstrap 的 响应式设计，预设了四个响应尺寸：`xs`、`sm`、`md`和`lg`。
+参照了 Bootstrap 的 响应式设计，预设了五个响应尺寸：`xs`、`sm`、`md`、`lg` 和 `xl`。
 
 ::: demo
 ```html
 <el-row :gutter="10">
-  <el-col :xs="8" :sm="6" :md="4" :lg="3"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :xs="4" :sm="6" :md="8" :lg="9"><div class="grid-content bg-purple-light"></div></el-col>
-  <el-col :xs="4" :sm="6" :md="8" :lg="9"><div class="grid-content bg-purple"></div></el-col>
-  <el-col :xs="8" :sm="6" :md="4" :lg="3"><div class="grid-content bg-purple-light"></div></el-col>
+  <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1"><div class="grid-content bg-purple"></div></el-col>
+  <el-col :xs="4" :sm="6" :md="8" :lg="9" :xl="11"><div class="grid-content bg-purple-light"></div></el-col>
+  <el-col :xs="4" :sm="6" :md="8" :lg="9" :xl="11"><div class="grid-content bg-purple"></div></el-col>
+  <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1"><div class="grid-content bg-purple-light"></div></el-col>
 </el-row>
 
 <style>
@@ -340,12 +340,15 @@
 ```
 :::
 
-### 基于断点的隐藏
+### 基于断点的隐藏类
+
+Element 额外提供了一系列类名，用于在某些条件下隐藏元素。这些类名可以添加在任何 DOM 元素或自定义组件上。如果需要，请自行引入以下文件：
 
 ```js
-import 'element-ui/lib/theme-chalk/display.scss';
+import 'element-ui/lib/theme-chalk/display.css';
 ```
 
+包含的类名及其含义为：
 - `hidden-xs-only` - 当视口在 `xs` 尺寸时隐藏
 - `hidden-sm-only` - 当视口在 `sm` 尺寸时隐藏
 - `hidden-sm-and-down` - 当视口在 `sm` 及以下尺寸时隐藏
@@ -353,7 +356,10 @@ import 'element-ui/lib/theme-chalk/display.scss';
 - `hidden-md-only` - 当视口在 `md` 尺寸时隐藏
 - `hidden-md-and-down` - 当视口在 `md` 及以下尺寸时隐藏
 - `hidden-md-and-up` - 当视口在 `md` 及以上尺寸时隐藏
-- `hidden-lg-only` - 当视口在 `lg` 及以下尺寸时隐藏
+- `hidden-lg-only` - 当视口在 `lg` 尺寸时隐藏
+- `hidden-lg-and-down` - 当视口在 `lg` 及以下尺寸时隐藏
+- `hidden-lg-and-up` - 当视口在 `lg` 及以上尺寸时隐藏
+- `hidden-xl-only` - 当视口在 `xl` 尺寸时隐藏
 
 ### Row Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
@@ -373,6 +379,7 @@ import 'element-ui/lib/theme-chalk/display.scss';
 | pull |  栅格向左移动格数 | number | — | 0 |
 | xs | `<768px` 响应式栅格数或者栅格属性对象 | number/object (例如： {span: 4, offset: 4}) | — | — |
 | sm | `≥768px` 响应式栅格数或者栅格属性对象 | number/object (例如： {span: 4, offset: 4}) | — | — |
-| md | `≥992` 响应式栅格数或者栅格属性对象 | number/object (例如： {span: 4, offset: 4}) | — | — |
-| lg | `≥1200` 响应式栅格数或者栅格属性对象 | number/object (例如： {span: 4, offset: 4}) | — | — |
+| md | `≥992px` 响应式栅格数或者栅格属性对象 | number/object (例如： {span: 4, offset: 4}) | — | — |
+| lg | `≥1200px` 响应式栅格数或者栅格属性对象 | number/object (例如： {span: 4, offset: 4}) | — | — |
+| xl | `≥1920px` 响应式栅格数或者栅格属性对象 | number/object (例如： {span: 4, offset: 4}) | — | — |
 | tag | 自定义元素标签 | string | * | div |

@@ -222,7 +222,7 @@
 
 可在一个选择器中便捷地选择一个时间范围
 
-:::demo
+:::demo 在选择日期范围时，默认情况下左右面板会联动。如果希望两个面板各自独立切换当前月份，可以使用`unlink-panels`属性解除联动。
 ```html
 <template>
   <div class="block">
@@ -241,6 +241,7 @@
       v-model="value7"
       type="daterange"
       align="right"
+      unlink-panels
       range-separator="至"
       start-placeholder="开始日期"
       end-placeholder="结束日期"

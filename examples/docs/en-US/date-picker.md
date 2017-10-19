@@ -210,7 +210,7 @@ You can choose week, month or year by extending the standard date picker compone
 
 Picking a date range is supported.
 
-:::demo
+:::demo When in range mode, the left and right panels are linked by default. If you want the two panels to switch current months independently, you can use the `unlink-panels` attribute.
 
 ```html
 <template>
@@ -230,6 +230,7 @@ Picking a date range is supported.
       v-model="value7"
       type="daterange"
       align="right"
+      unlink-panels
       range-separator="To"
       start-placeholder="Start date"
       end-placeholder="End date"
@@ -389,7 +390,7 @@ This feature is at alpha stage. Feedback welcome.
 | default-value | optional, default date of the calendar | Date | anything accepted by `new Date()` | — |
 | value-format | optional, format of binding value. If not specified, the binding value will be a Date object | string | year `yyyy`, month `MM`, day `dd`, hour `HH`, minute `mm`, second `ss` | — |
 | name | same as `name` in native input | string | — | — |
-| unlink-panels | unllink two date-panels in range-picker | boolean | — | false |
+| unlink-panels | unlink two date-panels in range-picker | boolean | — | false |
 
 ### Picker Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |

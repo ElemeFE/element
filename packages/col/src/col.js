@@ -16,7 +16,8 @@ export default {
     xs: [Number, Object],
     sm: [Number, Object],
     md: [Number, Object],
-    lg: [Number, Object]
+    lg: [Number, Object],
+    xl: [Number, Object]
   },
 
   computed: {
@@ -47,7 +48,7 @@ export default {
       }
     });
 
-    ['xs', 'sm', 'md', 'lg'].forEach(size => {
+    ['xs', 'sm', 'md', 'lg', 'xl'].forEach(size => {
       if (typeof this[size] === 'number') {
         classList.push(`el-col-${size}-${this[size]}`);
       } else if (typeof this[size] === 'object') {

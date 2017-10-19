@@ -6,7 +6,7 @@
   box-sizing: border-box;
 }
 
-[class*="-0"] {
+.el-col-0 {
   display: none;
 }
 
@@ -31,6 +31,9 @@
 }
 
 @include res(xs) {
+  .el-col-xs-0 {
+    display: none;
+  }
   @for $i from 1 through 24 {
     .el-col-xs-#{$i} {
       width: (1 / 24 * $i * 100) * 1%;
@@ -53,6 +56,9 @@
 }
 
 @include res(sm) {
+  .el-col-sm-0 {
+    display: none;
+  }
   @for $i from 1 through 24 {
     .el-col-sm-#{$i} {
       width: (1 / 24 * $i * 100) * 1%;
@@ -75,6 +81,9 @@
 }
 
 @include res(md) {
+  .el-col-md-0 {
+    display: none;
+  }
   @for $i from 1 through 24 {
     .el-col-md-#{$i} {
       width: (1 / 24 * $i * 100) * 1%;
@@ -97,6 +106,9 @@
 }
 
 @include res(lg) {
+  .el-col-lg-0 {
+    display: none;
+  }
   @for $i from 1 through 24 {
     .el-col-lg-#{$i} {
       width: (1 / 24 * $i * 100) * 1%;
@@ -112,6 +124,31 @@
     }
 
     .el-col-lg-push-#{$i} {
+      position: relative;
+      left: (1 / 24 * $i * 100) * 1%;
+    }
+  }
+}
+
+@include res(xl) {
+  .el-col-xl-0 {
+    display: none;
+  }
+  @for $i from 1 through 24 {
+    .el-col-xl-#{$i} {
+      width: (1 / 24 * $i * 100) * 1%;
+    }
+
+    .el-col-xl-offset-#{$i} {
+      margin-left: (1 / 24 * $i * 100) * 1%;
+    }
+
+    .el-col-xl-pull-#{$i} {
+      position: relative;
+      right: (1 / 24 * $i * 100) * 1%;
+    }
+
+    .el-col-xl-push-#{$i} {
       position: relative;
       left: (1 / 24 * $i * 100) * 1%;
     }
