@@ -255,6 +255,7 @@ DateTimePicker is derived from DatePicker and TimePicker. For a more detailed ex
 | default-value | optional, default date of the calendar | Date | anything accepted by `new Date()` | — |
 | value-format | optional, format of binding value. If not specified, the binding value will be a Date object | string | year `yyyy`, month `MM`, day `dd`, hour `HH`, minute `mm`, second `ss` | — |
 | name | same as `name` in native input | string | — | — |
+| unlink-panels | unllink two date-panels in range-picker | boolean | — | false |
 
 ### Picker Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
