@@ -167,6 +167,7 @@ in `lazy` mode #6235
   - Removed `icon` attribute. Now the suffix icon can be configured using `suffix-icon` attribute or `suffix` named slot
   - Removed `on-icon-click` attribute and `click` event. Now to add click handler on icons, please use named slots
 - Autocomplete
+  - Removed `icon` and `on-icon-click` attributes. Now the icons can be configured using `prefix` or `suffix` named slot
   - Removed `custom-item` attribute. Now the template of input suggestions can be customized using `scoped slot`
 - Table
   - Removed support for customizing column template using `inline-template`

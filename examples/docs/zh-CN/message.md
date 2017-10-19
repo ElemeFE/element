@@ -288,6 +288,7 @@ import { Message } from 'element-ui';
 | message | 消息文字 | string / VNode | — | — |
 | type | 主题 | string | success/warning/info/error | info |
 | iconClass | 自定义图标的类名，会覆盖 `type` | string | — | — |
+| dangerouslyUseHTMLString | 是否将 message 属性作为 HTML 片段处理 | boolean | — | false |
 | customClass | 自定义类名 | string | — | — |
 | duration | 显示时间, 毫秒。设为 0 则不会自动关闭 | number | — | 3000 |
 | showClose | 是否显示关闭按钮 | boolean | — | false |

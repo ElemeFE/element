@@ -35,7 +35,7 @@ Displays the location of the current page, making it easier to browser back.
 | Attribute      | Description          | Type      | Accepted Values            | Default|
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | separator | separator character | string | — | / |
-| separator-class | iconfont-separator's class | string | — | - |
+| separator-class | class name of icon separator | string | — | - |
 
 ### Breadcrumb Item Attributes
 | Attribute      | Description          | Type      | Accepted Values            | Default|

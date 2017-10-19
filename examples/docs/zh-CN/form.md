@@ -258,7 +258,7 @@
     </el-col>
   </el-form-item>
   <el-form-item label="即时配送">
-    <el-switch on-text="" off-text="" v-model="form.delivery"></el-switch>
+    <el-switch v-model="form.delivery"></el-switch>
   </el-form-item>
   <el-form-item label="活动性质">
     <el-checkbox-group v-model="form.type">
@@ -417,7 +417,7 @@
     </el-col>
   </el-form-item>
   <el-form-item label="即时配送" prop="delivery">
-    <el-switch on-text="" off-text="" v-model="ruleForm.delivery"></el-switch>
+    <el-switch v-model="ruleForm.delivery"></el-switch>
   </el-form-item>
   <el-form-item label="活动性质" prop="type">
     <el-checkbox-group v-model="ruleForm.type">

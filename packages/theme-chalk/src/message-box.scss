@@ -57,7 +57,7 @@
     border: none;
     outline: none;
     background: transparent;
-    font-size: 12px;
+    font-size: $--message-close-size;
     cursor: pointer;
 
     .el-message-box__close {

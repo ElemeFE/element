@@ -28,6 +28,12 @@
       <template slot="append" v-if="$slots.append">
         <slot name="append"></slot>
       </template>
+      <template slot="prefix" v-if="$slots.prefix">
+        <slot name="prefix"></slot>
+      </template>
+      <template slot="suffix" v-if="$slots.suffix">
+        <slot name="suffix"></slot>
+      </template>
     </el-input>
     <el-autocomplete-suggestions
       visible-arrow
@@ -96,8 +102,6 @@
         default: true
       },
       customItem: String,
-      icon: String,
-      onIconClick: Function,
       selectWhenUnmatched: {
         type: Boolean,
         default: false

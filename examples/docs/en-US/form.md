@@ -264,7 +264,7 @@ It includes all kinds of input items, such as `input`, `select`, `radio` and `ch
     </el-col>
   </el-form-item>
   <el-form-item label="Instant delivery">
-    <el-switch on-text="" off-text="" v-model="form.delivery"></el-switch>
+    <el-switch v-model="form.delivery"></el-switch>
   </el-form-item>
   <el-form-item label="Activity type">
     <el-checkbox-group v-model="form.type">
@@ -426,7 +426,7 @@ Form component allows you to verify your data, helping you find and correct erro
     </el-col>
   </el-form-item>
   <el-form-item label="Instant delivery" prop="delivery">
-    <el-switch on-text="" off-text="" v-model="ruleForm.delivery"></el-switch>
+    <el-switch v-model="ruleForm.delivery"></el-switch>
   </el-form-item>
   <el-form-item label="Activity type" prop="type">
     <el-checkbox-group v-model="ruleForm.type">
@@ -791,7 +791,7 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 | model| data of form component | object | — | — |
 | rules | validation rules of form | object | — | — |
 | inline | whether the form is inline | boolean | — | false |
-| label-position | position of label | string | left/right/top | right |
+| label-position | position of label | string | left / right / top | right |
 | label-width | width of label, and all its direct child form items will inherit this value | string | — | — |
 | label-suffix | suffix of the label | string | — | — |
 | show-message  | whether to show the error message | boolean | — | true |

@@ -125,7 +125,7 @@
       @close="handleClose">
       <el-submenu index="1">
         <template slot="title">
-          <i class="el-icon-message"></i>
+          <i class="el-icon-location"></i>
           <span>导航一</span>
         </template>
         <el-menu-item-group>
@@ -163,7 +163,7 @@
       active-text-color="#ffd04b">
       <el-submenu index="1">
         <template slot="title">
-          <i class="el-icon-message"></i>
+          <i class="el-icon-location"></i>
           <span>导航一</span>
         </template>
         <el-menu-item-group>
@@ -217,7 +217,7 @@
 <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
   <el-submenu index="1">
     <template slot="title">
-      <i class="el-icon-message"></i>
+      <i class="el-icon-location"></i>
       <span slot="title">导航一</span>
     </template>
     <el-menu-item-group>
@@ -273,7 +273,7 @@
 ### Menu Attribute
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
-| mode     | 模式   | string  |   horizontal,vertical   | vertical |
+| mode     | 模式   | string  |   horizontal / vertical   | vertical |
 | collapse  | 是否水平折叠收起菜单（仅在 mode 为 vertical 时可用）| boolean  |   —   | false |
 | background-color  | 菜单的背景色（仅支持 hex 格式） | string |   —   | #ffffff |
 | text-color  | 菜单的文字颜色（仅支持 hex 格式） | string |   —   | #2d2f33 |

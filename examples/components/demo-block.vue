@@ -135,7 +135,7 @@
       }
 
       i {
-        font-size: 12px;
+        font-size: 16px;
         line-height: 44px;
         transition: .3s;
         &.hovering {

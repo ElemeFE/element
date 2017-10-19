@@ -543,9 +543,12 @@ export default {
   v-model="state3"
   :fetch-suggestions="querySearch"
   placeholder="请输入内容"
-  @select="handleSelect"
-  icon="edit"
-  :on-icon-click="handleIconClick">
+  @select="handleSelect">
+  <i
+    class="el-icon-edit el-input__icon"
+    slot="suffix"
+    @click="handleIconClick">
+  </i>
   <template slot-scope="props">
     <div class="name">{{ props.item.value }}</div>
     <span class="addr">{{ props.item.address }}</span>
@@ -765,17 +768,17 @@ export default {
 
 | 参数          | 说明            | 类型            | 可选值                 | 默认值   |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
-| type         | 类型   | string  | text/textarea | text |
-| value         | 绑定值           | string, number  | — | — |
+| type         | 类型   | string  | text / textarea | text |
+| value         | 绑定值           | string / number  | — | — |
 | maxlength     | 最大输入长度      | number          |  —  | — |
 | minlength     | 最小输入长度      | number          | — | — |
 | placeholder   | 输入框占位文本    | string          | — | — |
 | disabled      | 禁用            | boolean         | — | false   |
-| size          | 输入框尺寸，只在 `type!="textarea"` 时有效      | string          | large, small, mini  | — |
+| size          | 输入框尺寸，只在 `type!="textarea"` 时有效      | string          | medium / small / mini  | — |
 | prefix-icon   | 输入框头部图标    | string          | — | — |
 | suffix-icon   | 输入框尾部图标    | string          | — | — |
 | rows          | 输入框行数，只对 `type="textarea"` 有效  |  number | — |  2   |
-| autosize      | 自适应内容高度，只对 `type="textarea"` 有效，可传入对象，如，{ minRows: 2, maxRows: 6 }  |  boolean/object | — |  false   |
+| autosize      | 自适应内容高度，只对 `type="textarea"` 有效，可传入对象，如，{ minRows: 2, maxRows: 6 }  |  boolean / object | — |  false   |
 | auto-complete | 原生属性，自动补全 | string | on, off | off |
 | name | 原生属性 | string | — | — |
 | readonly | 原生属性，是否只读 | boolean | — | false |
@@ -786,7 +789,8 @@ export default {
 | autofocus | 原生属性，自动获取焦点 | boolean | true, false | false |
 | form | 原生属性 | string | — | — |
 | label | 输入框关联的label文字 | string | — | — |
-### Input slot
+
+### Input slots
 | name | 说明 |
 |------|--------|
 | prefix | 输入框头部内容 |
@@ -818,8 +822,6 @@ export default {
 | fetch-suggestions | 返回输入建议的方法，仅当你的输入建议数据 resolve 时，通过调用 callback(data:[]) 来返回它  | Function(queryString, callback)  | — | — |
 | popper-class | Autocomplete 下拉列表的类名 | string | — | — |
 | trigger-on-focus | 是否在输入框 focus 时显示建议列表 | boolean | — | true |
-| on-icon-click | 点击图标的回调函数 | function | — | — |
-| icon          | 输入框尾部图标    | string          | — | — |
 | name | 原生属性 | string | — | — |
 | select-when-unmatched | 在输入没有任何匹配建议的情况下，按下回车是否触发 `select` 事件 | boolean | — | false |
 | label | 输入框关联的label文字 | string | — | — |
@@ -829,6 +831,14 @@ export default {
 | -------- | ----------------- | ------ | ------ | ------ |
 | value    | 指定选项的值为选项对象的某个属性值 | string | — | value |
 | label    | 指定选项标签为选项对象的某个属性值 | string | — | value |
+
+### Autocomplete slots
+| name | 说明 |
+|------|--------|
+| prefix | 输入框头部内容 |
+| suffix | 输入框尾部内容 |
+| prepend | 输入框前置内容 |
+| append | 输入框后置内容 |
 
 ### Autocomplete Events
 | 事件名称 | 说明 | 回调参数 |

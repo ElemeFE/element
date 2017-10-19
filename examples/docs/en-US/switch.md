@@ -27,15 +27,15 @@
 Switch is used for switching between two opposing states.
 
 ### Basic usage
-:::demo Bind `v-model` to a `Boolean` typed variable. The `on-color` and `off-color` attribute decides the background color in two states.
+:::demo Bind `v-model` to a `Boolean` typed variable. The `true-color` and `false-color` attribute decides the background color in two states.
 
 ```html
 <el-switch v-model="value1">
 </el-switch>
 <el-switch
   v-model="value2"
-  on-color="#13ce66"
-  off-color="#ff4949">
+  true-color="#13ce66"
+  false-color="#ff4949">
 </el-switch>
 
 <script>
@@ -52,21 +52,21 @@ Switch is used for switching between two opposing states.
 :::
 
 ### Text description
-:::demo You can add `on-text` and `off-text` attribute to show texts.
+:::demo You can add `true-text` and `false-text` attribute to show texts.
 
 ```html
 <el-switch
   v-model="value3"
-  on-text="Pay by month"
-  off-text="Pay by year">
+  true-text="Pay by month"
+  false-text="Pay by year">
 </el-switch>
 <el-switch
   style="display: block"
   v-model="value4"
-  on-color="#13ce66"
-  off-color="#ff4949"
-  on-text="Pay by month"
-  off-text="Pay by year">
+  true-color="#13ce66"
+  false-color="#ff4949"
+  true-text="Pay by month"
+  false-text="Pay by year">
 </el-switch>
 
 <script>
@@ -84,16 +84,16 @@ Switch is used for switching between two opposing states.
 
 ### Extended value types
 
-:::demo You can set `on-value` and `off-value` attributes. They both receive a `Boolean`, `String` or `Number` typed value.
+:::demo You can set `true-value` and `false-value` attributes. They both receive a `Boolean`, `String` or `Number` typed value.
 
 ```html
 <el-tooltip :content="'Switch value: ' + value5" placement="top">
   <el-switch
     v-model="value5"
-    on-color="#13ce66"
-    off-color="#ff4949"
-    on-value="100"
-    off-value="0">
+    true-color="#13ce66"
+    false-color="#ff4949"
+    true-value="100"
+    false-value="0">
   </el-switch>
 </el-tooltip>
 
@@ -143,14 +143,14 @@ Switch is used for switching between two opposing states.
 ----| ----| ----| ----|----
 disabled | whether Switch is disabled | boolean | — | false
 width | width of Switch | number | — | 40
-on-close-icon | class name of the icon displayed when in `on` state, overrides `on-text` | string | — | —
-off-close-icon |class name of the icon displayed when in `off` state, overrides `off-text`| string | — | —
-on-text | text displayed when in `on` state | string | — | —
-off-text | text displayed when in `off` state | string | — | —
-on-value  | switch value when in `on` state | boolean / string / number | — | true
-off-value  | switch value when in `off` state | boolean / string / number | — | false
-on-color | background color when in `on` state | string | — | #409EFF
-off-color | background color when in `off` state | string | — | #C0CCDA
+true-icon-class | class name of the icon displayed when in `on` state, overrides `true-text` | string | — | —
+false-icon-class |class name of the icon displayed when in `off` state, overrides `false-text`| string | — | —
+true-text | text displayed when in `on` state | string | — | —
+false-text | text displayed when in `off` state | string | — | —
+true-value  | switch value when in `on` state | boolean / string / number | — | true
+false-value  | switch value when in `off` state | boolean / string / number | — | false
+true-color | background color when in `on` state | string | — | #409EFF
+false-color | background color when in `off` state | string | — | #C0CCDA
 name| input name of Switch | string | — | —
 
 ### Events

@@ -377,7 +377,7 @@ The corresponding methods are: `MessageBox`, `MessageBox.alert`, `MessageBox.con
 | title | title of the MessageBox | string | — | — |
 | message | content of the MessageBox | string | — | — |
 | dangerouslyUseHTMLString | whether `message` is treated as HTML string | boolean | — | false |
-| type | message type, used for icon display | string | success/info/warning/error | — |
+| type | message type, used for icon display | string | success / info / warning / error | — |
 | customClass | custom class name for MessageBox | string | — | — |
 | callback | MessageBox closing callback if you don't prefer Promise | function(action), where action can be 'confirm' or 'cancel', and `instance` is the MessageBox instance. You can access to that instance's attributes and methods | — | — |
 | beforeClose | callback before MessageBox closes, and it will prevent MessageBox from closing | function(action, instance, done), where `action` can be 'confirm' or 'cancel'; `instance` is the MessageBox instance, and you can access to that instance's attributes and methods; `done` is for closing the instance | — | — |

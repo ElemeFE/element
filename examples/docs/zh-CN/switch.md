@@ -28,15 +28,13 @@
 
 ### 基本用法
 
-:::demo 绑定`v-model`到一个`Boolean`类型的变量。可以使用`on-color`属性与`off-color`属性来设置开关的背景色。
+:::demo 绑定`v-model`到一个`Boolean`类型的变量。可以使用`true-color`属性与`false-color`属性来设置开关的背景色。
 
 ```html
-<el-switch v-model="value1">
-</el-switch>
 <el-switch
   v-model="value2"
-  on-color="#13ce66"
-  off-color="#ff4949">
+  true-color="#13ce66"
+  false-color="#ff4949">
 </el-switch>
 
 <script>
@@ -54,21 +52,21 @@
 
 ### 文字描述
 
-:::demo 使用`on-text`属性与`off-text`属性来设置开关的文字描述。
+:::demo 使用`true-text`属性与`false-text`属性来设置开关的文字描述。
 
 ```html
 <el-switch
   v-model="value3"
-  on-text="按月付费"
-  off-text="按年付费">
+  true-text="按月付费"
+  false-text="按年付费">
 </el-switch>
 <el-switch
   style="display: block"
   v-model="value4"
-  on-color="#13ce66"
-  off-color="#ff4949"
-  on-text="按月付费"
-  off-text="按年付费">
+  true-color="#13ce66"
+  false-color="#ff4949"
+  true-text="按月付费"
+  false-text="按年付费">
 </el-switch>
 
 <script>
@@ -86,16 +84,16 @@
 
 ### 扩展的 value 类型
 
-:::demo 设置`on-value`和`off-value`属性，接受`Boolean`, `String`或`Number`类型的值。
+:::demo 设置`true-value`和`false-value`属性，接受`Boolean`, `String`或`Number`类型的值。
 
 ```html
 <el-tooltip :content="'Switch value: ' + value5" placement="top">
   <el-switch
     v-model="value5"
-    on-color="#13ce66"
-    off-color="#ff4949"
-    on-value="100"
-    off-value="0">
+    true-color="#13ce66"
+    false-color="#ff4949"
+    true-value="100"
+    false-value="0">
   </el-switch>
 </el-tooltip>
 
@@ -146,14 +144,14 @@
 |---------- |-------- |---------- |-------------  |-------- |
 | disabled  | 是否禁用    | boolean   | — | false   |
 | width  | switch 的宽度（像素）    | number   | — | 40 |
-| on-icon-class  | switch 打开时所显示图标的类名，设置此项会忽略 `on-text`    | string   | — | — |
-| off-icon-class  | switch 关闭时所显示图标的类名，设置此项会忽略 `off-text`    | string   | — | — |
-| on-text  | switch 打开时的文字描述    | string   | — | — |
-| off-text  | switch 关闭时的文字描述    | string   | — | — |
-| on-value  | switch 打开时的值    | boolean / string / number | — | true |
-| off-value  | switch 关闭时的值    | boolean / string / number | — | false |
-| on-color  | switch 打开时的背景色    | string   | — | #409EFF |
-| off-color  | switch 关闭时的背景色    | string   | — | #C0CCDA |
+| true-icon-class  | switch 打开时所显示图标的类名，设置此项会忽略 `true-text`    | string   | — | — |
+| false-icon-class  | switch 关闭时所显示图标的类名，设置此项会忽略 `false-text`    | string   | — | — |
+| true-text  | switch 打开时的文字描述    | string   | — | — |
+| false-text  | switch 关闭时的文字描述    | string   | — | — |
+| true-value  | switch 打开时的值    | boolean / string / number | — | true |
+| false-value  | switch 关闭时的值    | boolean / string / number | — | false |
+| true-color  | switch 打开时的背景色    | string   | — | #409EFF |
+| false-color  | switch 关闭时的背景色    | string   | — | #C0CCDA |
 | name  | switch 对应的 name 属性    | string   | — | — |
 
 ### Events

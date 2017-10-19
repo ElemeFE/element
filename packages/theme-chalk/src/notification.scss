@@ -65,19 +65,19 @@
     }
   }
 
-  & .el-icon-circle-check {
+  .el-icon-success {
     color: $--notification-success-color;
   }
 
-  & .el-icon-circle-cross {
+  .el-icon-error {
     color: $--notification-danger-color;
   }
 
-  & .el-icon-information {
+  .el-icon-info {
     color: $--notification-info-color;
   }
 
-  & .el-icon-warning {
+  .el-icon-warning {
     color: $--notification-warning-color;
   }
 }

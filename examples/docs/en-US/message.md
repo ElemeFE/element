@@ -288,6 +288,7 @@ You can call `Message.closeAll()` to manually close all the instances.
 | message | message text | string / VNode | — | — |
 | type | message type | string | success/warning/info/error | info |
 | iconClass | custom icon's class, overrides `type` | string | — | — |
+| dangerouslyUseHTMLString | whether `message` is treated as HTML string | boolean | — | false |
 | customClass | custom class name for Message | string | — | — |
 | duration | display duration, millisecond. If set to 0, it will not turn off automatically | number | — | 3000 |
 | showClose | whether to show a close button | boolean | — | false |

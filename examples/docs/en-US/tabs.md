@@ -374,7 +374,6 @@ Only card type Tabs support addable & closeable.
 | closable  | whether Tab is closable | boolean   | — |  false  |
 | addable  | whether Tab is addable   | boolean   | — |  false  |
 | editable  | whether Tab is addable and closable | boolean   | — |  false  |
-| active-name(deprecated)  | name of the selected tab  | string   |  —  |  name of first tab |
 | value  | name of the selected tab  | string   |  —  |  name of first tab |
 | tab-position  | position of tabs | string   |  top/right/bottom/left  |  top |
 
