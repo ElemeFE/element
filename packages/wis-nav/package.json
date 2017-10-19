@@ -1,0 +1,15 @@
+{
+  "name": "zhcx-wis-nav",
+  "version": "0.0.0",
+  "description": "A wis-nav component for Vue.js.",
+  "keywords": [
+    "zhcx",
+    "vue",
+    "component"
+  ],
+  "main": "./lib/index.js",
+  "repository": "https://github.com/killwinv/fork-ui/tree/master/packages/wis-nav",
+  "author": "zhcxfed",
+  "license": "MIT",
+  "dependencies": {}
+}
