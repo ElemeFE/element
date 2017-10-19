@@ -163,10 +163,8 @@
 }
 
 @mixin when($state) {
-  $selector: &;
-
   @at-root {
-    #{$selector}.#{$state-prefix + $state} {
+    &.#{$state-prefix + $state} {
       @content;
     }
   }
