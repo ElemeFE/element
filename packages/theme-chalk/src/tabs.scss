@@ -95,7 +95,7 @@
     color: $--color-text-primary;
     position: relative;
 
-    &:focus:not(.is-focus), &:focus:active {
+    &:focus, &:focus:active {
       outline: none;
     }
 
