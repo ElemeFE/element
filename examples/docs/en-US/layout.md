@@ -350,17 +350,17 @@ import 'element-ui/lib/theme-chalk/display.css';
 ```
 
 The classes are:
-- `hide-xs-only` - hide when on extra small viewports only
-- `hide-sm-only` - hide when on small viewports and down
-- `hide-sm-and-down` - hide when on small viewports and down
-- `hide-sm-and-up` - hide when on small viewports and up
-- `hide-md-only` - hide when on medium viewports only
-- `hide-md-and-down` - hide when on medium viewports and down
-- `hide-md-and-up` - hide when on medium viewports and up
-- `hide-lg-only` - hide when on large viewports only
-- `hide-lg-and-down` - hide when on large viewports and down
-- `hide-lg-and-up` - hide when on large viewports and up
-- `hide-xl-only` - hide when on extra large viewports only
+- `hidden-xs-only` - hide when on extra small viewports only
+- `hidden-sm-only` - hide when on small viewports and down
+- `hidden-sm-and-down` - hide when on small viewports and down
+- `hidden-sm-and-up` - hide when on small viewports and up
+- `hidden-md-only` - hide when on medium viewports only
+- `hidden-md-and-down` - hide when on medium viewports and down
+- `hidden-md-and-up` - hide when on medium viewports and up
+- `hidden-lg-only` - hide when on large viewports only
+- `hidden-lg-and-down` - hide when on large viewports and down
+- `hidden-lg-and-up` - hide when on large viewports and up
+- `hidden-xl-only` - hide when on extra large viewports only
 
 ### Row Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
