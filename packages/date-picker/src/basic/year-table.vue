@@ -45,15 +45,12 @@
 
 <script type="text/babel">
   import { hasClass } from 'element-ui/src/utils/dom';
-  import { isDate, range } from '../util';
-
-  const isLeapYear = year => year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0);
+  import { isDate, range, nextDate, getDayCountOfYear } from '../util';
 
   const datesInYear = year => {
-    const numOfDays = isLeapYear(year) ? 366 : 365;
+    const numOfDays = getDayCountOfYear(year);
     const firstDay = new Date(year, 0, 1);
-    const ONE_DAY = 8.64e7;
-    return range(numOfDays).map(n => new Date(firstDay.getTime() + ONE_DAY));
+    return range(numOfDays).map(n => nextDate(firstDay, n));
   };
 
   export default {

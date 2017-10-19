@@ -30,7 +30,7 @@
 </template>
 
 <script>
-  import { getFirstDayOfMonth, getDayCountOfMonth, getWeekNumber, getStartDateOfMonth, DAY_DURATION, isDate } from '../util';
+  import { getFirstDayOfMonth, getDayCountOfMonth, getWeekNumber, getStartDateOfMonth, nextDate, isDate } from '../util';
   import { hasClass } from 'element-ui/src/utils/dom';
   import Locale from 'element-ui/src/mixins/locale';
 
@@ -136,7 +136,7 @@
 
           if (this.showWeekNumber) {
             if (!row[0]) {
-              row[0] = { type: 'week', text: getWeekNumber(new Date(startDate.getTime() + DAY_DURATION * (i * 7 + 1))) };
+              row[0] = { type: 'week', text: getWeekNumber(nextDate(startDate, i * 7 + 1)) };
             }
           }
 
@@ -149,7 +149,7 @@
             cell.type = 'normal';
 
             const index = i * 7 + j;
-            const time = startDate.getTime() + DAY_DURATION * (index - offset);
+            const time = nextDate(startDate, index - offset).getTime();
             cell.inRange = time >= clearHours(this.minDate) && time <= clearHours(this.maxDate);
             cell.start = this.minDate && time === clearHours(this.minDate);
             cell.end = this.maxDate && time === clearHours(this.maxDate);
@@ -289,22 +289,8 @@
       },
 
       getDateOfCell(row, column) {
-        const startDate = this.startDate;
-
-        return new Date(startDate.getTime() + (row * 7 + (column - (this.showWeekNumber ? 1 : 0)) - this.offsetDay) * DAY_DURATION);
-      },
-
-      getCellByDate(date) {
-        const startDate = this.startDate;
-        const rows = this.rows;
-        const index = (date - startDate) / DAY_DURATION;
-        const row = rows[Math.floor(index / 7)];
-
-        if (this.showWeekNumber) {
-          return row[index % 7 + 1];
-        } else {
-          return row[index % 7];
-        }
+        const offsetFromStart = row * 7 + (column - (this.showWeekNumber ? 1 : 0)) - this.offsetDay;
+        return nextDate(this.startDate, offsetFromStart);
       },
 
       isWeekActive(cell) {
@@ -343,7 +329,7 @@
 
             const cell = row[j];
             const index = i * 7 + j + (this.showWeekNumber ? -1 : 0);
-            const time = startDate.getTime() + DAY_DURATION * (index - this.offsetDay);
+            const time = nextDate(startDate, index - this.offsetDay).getTime();
 
             cell.inRange = minDate && time >= clearHours(minDate) && time <= clearHours(maxDate);
             cell.start = minDate && time === clearHours(minDate.getTime());

@@ -49,14 +49,13 @@
 
 <script type="text/babel">
   import Locale from 'element-ui/src/mixins/locale';
-  import { isDate, range, getDayCountOfMonth } from '../util';
+  import { isDate, range, getDayCountOfMonth, nextDate } from '../util';
   import { hasClass } from 'element-ui/src/utils/dom';
 
   const datesInMonth = (year, month) => {
     const numOfDays = getDayCountOfMonth(year, month);
     const firstDay = new Date(year, month, 1);
-    const ONE_DAY = 8.64e7;
-    return range(numOfDays).map(n => new Date(firstDay.getTime() + n * ONE_DAY));
+    return range(numOfDays).map(n => nextDate(firstDay, n));
   };
 
   export default {
