@@ -138,6 +138,10 @@
       color: inherit;
     }
 
+    .el-menu .el-submenu {
+      min-width: 200px;
+    }
+
     .el-submenu {
       position: relative;
       & .el-menu {
