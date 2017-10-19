@@ -366,6 +366,13 @@
     overflow: auto;
     position: relative;
 
+    @include when(scroll-none) {
+      ~ .el-table__fixed,
+      ~ .el-table__fixed-right {
+        box-shadow: none;
+      }
+    }
+
     @include when(scroll-left) {
       ~ .el-table__fixed {
         box-shadow: none;
