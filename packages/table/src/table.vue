@@ -296,6 +296,9 @@
           }
           if (this.$el) {
             this.isHidden = this.$el.clientWidth === 0;
+            if (this.isHidden && this.layout.bodyWidth) {
+              setTimeout(() => this.doLayout());
+            }
           }
         });
       }
