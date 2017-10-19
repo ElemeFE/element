@@ -10,10 +10,10 @@ describe('Switch', () => {
 
   it('create', () => {
     vm = createTest(Switch, {
-      trueText: 'on',
-      falseText: 'off',
-      trueColor: '#0f0',
-      falseColor: '#f00',
+      activeText: 'on',
+      inactiveText: 'off',
+      activeColor: '#0f0',
+      inactiveColor: '#f00',
       width: 100
     });
 
@@ -25,8 +25,8 @@ describe('Switch', () => {
 
   it('switch with icons', () => {
     vm = createTest(Switch, {
-      trueIconClass: 'el-icon-check',
-      falseIconClass: 'el-icon-close'
+      activeIconClass: 'el-icon-check',
+      inactiveIconClass: 'el-icon-close'
     });
 
     const icon = vm.$el.querySelector('.el-switch__label--left').querySelector('i');
@@ -125,7 +125,7 @@ describe('Switch', () => {
     vm = createVue({
       template: `
         <div>
-          <el-switch v-model="value" :true-value="onValue" :false-value="offValue"></el-switch>
+          <el-switch v-model="value" :active-value="onValue" :inactive-value="offValue"></el-switch>
         </div>
       `,
       data() {

@@ -13,25 +13,25 @@
       @change="handleChange"
       ref="input"
       :name="name"
-      :true-value="trueValue"
-      :false-value="falseValue"
+      :true-value="activeValue"
+      :false-value="inactiveValue"
       :disabled="disabled"
       @keydown.enter="switchValue"
     >
     <span
       :class="['el-switch__label', 'el-switch__label--left', !checked ? 'is-active' : '']"
-      v-if="falseIconClass || falseText">
-      <i :class="[falseIconClass]" v-if="falseIconClass"></i>
-      <span v-if="!falseIconClass && falseText" :aria-hidden="checked">{{ falseText }}</span>
+      v-if="inactiveIconClass || inactiveText">
+      <i :class="[inactiveIconClass]" v-if="inactiveIconClass"></i>
+      <span v-if="!inactiveIconClass && inactiveText" :aria-hidden="checked">{{ inactiveText }}</span>
     </span>
     <span class="el-switch__core" ref="core" :style="{ 'width': coreWidth + 'px' }">
       <span class="el-switch__button" :style="{ transform }"></span>
     </span>
     <span
       :class="['el-switch__label', 'el-switch__label--right', checked ? 'is-active' : '']"
-      v-if="trueIconClass || trueText">
-      <i :class="[trueIconClass]" v-if="trueIconClass"></i>
-      <span v-if="!trueIconClass && trueText" :aria-hidden="!checked">{{ trueText }}</span>
+      v-if="activeIconClass || activeText">
+      <i :class="[activeIconClass]" v-if="activeIconClass"></i>
+      <span v-if="!activeIconClass && activeText" :aria-hidden="!checked">{{ activeText }}</span>
     </span>
   </div>
 </template>
@@ -55,29 +55,29 @@
         type: Number,
         default: 0
       },
-      trueIconClass: {
+      activeIconClass: {
         type: String,
         default: ''
       },
-      falseIconClass: {
+      inactiveIconClass: {
         type: String,
         default: ''
       },
-      trueText: String,
-      falseText: String,
-      trueColor: {
+      activeText: String,
+      inactiveText: String,
+      activeColor: {
         type: String,
         default: ''
       },
-      falseColor: {
+      inactiveColor: {
         type: String,
         default: ''
       },
-      trueValue: {
+      activeValue: {
         type: [Boolean, String, Number],
         default: true
       },
-      falseValue: {
+      inactiveValue: {
         type: [Boolean, String, Number],
         default: false
       },
@@ -92,13 +92,13 @@
       };
     },
     created() {
-      if (!~[this.trueValue, this.falseValue].indexOf(this.value)) {
-        this.$emit('input', this.falseValue);
+      if (!~[this.activeValue, this.inactiveValue].indexOf(this.value)) {
+        this.$emit('input', this.inactiveValue);
       }
     },
     computed: {
       checked() {
-        return this.value === this.trueValue;
+        return this.value === this.activeValue;
       },
       transform() {
         return this.checked ? `translate3d(${ this.coreWidth - 20 }px, 0, 0)` : '';
@@ -107,15 +107,15 @@
     watch: {
       checked() {
         this.$refs.input.checked = this.checked;
-        if (this.trueColor || this.falseColor) {
+        if (this.activeColor || this.inactiveColor) {
           this.setBackgroundColor();
         }
       }
     },
     methods: {
       handleChange(event) {
-        this.$emit('input', !this.checked ? this.trueValue : this.falseValue);
-        this.$emit('change', !this.checked ? this.trueValue : this.falseValue);
+        this.$emit('input', !this.checked ? this.activeValue : this.inactiveValue);
+        this.$emit('change', !this.checked ? this.activeValue : this.inactiveValue);
         this.$nextTick(() => {
           // set input's checked property
           // in case parent refuses to change component's value
@@ -123,7 +123,7 @@
         });
       },
       setBackgroundColor() {
-        let newColor = this.checked ? this.trueColor : this.falseColor;
+        let newColor = this.checked ? this.activeColor : this.inactiveColor;
         this.$refs.core.style.borderColor = newColor;
         this.$refs.core.style.backgroundColor = newColor;
       },
@@ -133,14 +133,14 @@
       getMigratingConfig() {
         return {
           props: {
-            'on-color': 'on-color is renamed to true-color.',
-            'off-color': 'off-color is renamed to false-color.',
-            'on-text': 'on-text is renamed to true-text.',
-            'off-text': 'off-text is renamed to false-text.',
-            'on-value': 'on-value is renamed to true-value.',
-            'off-value': 'off-value is renamed to false-value.',
-            'on-icon-class': 'on-icon-class is renamed to true-icon-class.',
-            'off-icon-class': 'off-icon-class is renamed to false-icon-class.'
+            'on-color': 'on-color is renamed to active-color.',
+            'off-color': 'off-color is renamed to inactive-color.',
+            'on-text': 'on-text is renamed to active-text.',
+            'off-text': 'off-text is renamed to inactive-text.',
+            'on-value': 'on-value is renamed to active-value.',
+            'off-value': 'off-value is renamed to inactive-value.',
+            'on-icon-class': 'on-icon-class is renamed to active-icon-class.',
+            'off-icon-class': 'off-icon-class is renamed to inactive-icon-class.'
           }
         };
       }
@@ -148,7 +148,7 @@
     mounted() {
       /* istanbul ignore if */
       this.coreWidth = this.width || 40;
-      if (this.trueColor || this.falseColor) {
+      if (this.activeColor || this.inactiveColor) {
         this.setBackgroundColor();
       }
       this.$refs.input.checked = this.checked;

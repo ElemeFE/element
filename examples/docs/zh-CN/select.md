@@ -525,6 +525,7 @@
     multiple
     filterable
     remote
+    reserve-keyword
     placeholder="请输入关键词"
     :remote-method="remoteMethod"
     :loading="loading">
@@ -649,7 +650,7 @@
 | placeholder | 占位符 | string | — | 请选择 |
 | filterable | 是否可搜索 | boolean | — | false |
 | allow-create | 是否允许用户创建新条目，需配合 `filterable` 使用 | boolean | — | false |
-| filter-method | 自定义过滤方法 | function | — | — |
+| filter-method | 自定义搜索方法 | function | — | — |
 | remote | 是否为远程搜索 | boolean | — | false |
 | remote-method | 远程搜索方法 | function | — | — |
 | loading | 是否正在从远程获取数据 | boolean | — | false |
@@ -657,6 +658,7 @@
 | no-match-text | 搜索条件无匹配时显示的文字 | string | — | 无匹配数据 |
 | no-data-text | 选项为空时显示的文字 | string | — | 无数据 |
 | popper-class | Select 下拉框的类名 | string | — | — |
+| reserve-keyword | 多选且可搜索时，是否在选中一个选项后保留当前的搜索关键词 | boolean | — | false |
 | default-first-option | 在输入框按下回车，选择第一个匹配项。需配合 `filterable` 或 `remote` 使用 | boolean | - | false |
 
 ### Select Events

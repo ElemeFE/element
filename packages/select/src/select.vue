@@ -236,6 +236,7 @@
         }
       },
       defaultFirstOption: Boolean,
+      reserveKeyword: Boolean,
       valueKey: {
         type: String,
         default: 'value'
@@ -276,6 +277,10 @@
             this.currentPlaceholder = '';
           } else {
             this.currentPlaceholder = this.cachedPlaceHolder;
+          }
+          if (this.filterable && !this.reserveKeyword) {
+            this.query = '';
+            this.handleQueryChange(this.query);
           }
         }
         this.setSelected();

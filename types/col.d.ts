@@ -32,11 +32,14 @@ export declare class ElCol extends ElementUIComponent {
   /** ≥768px Responsive columns or column props object */
   sm: ResponsiveColumn
 
-  /** ≥992 Responsive columns or column props object */
+  /** ≥992px Responsive columns or column props object */
   md: ResponsiveColumn
 
-  /** ≥1200 Responsive columns or column props object */
+  /** ≥1200px Responsive columns or column props object */
   lg: ResponsiveColumn
+
+  /** ≥1920px Responsive columns or column props object */
+  xl: ResponsiveColumn
 
   /** custom element tag */
   tag: string
