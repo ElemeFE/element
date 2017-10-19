@@ -1076,64 +1076,105 @@ describe('DatePicker', () => {
     });
   });
 
-  it('type:daterange', done => {
-    vm = createTest(DatePicker, {
-      type: 'daterange'
-    }, true);
-    const input = vm.$el.querySelector('input');
+  describe('type:daterange', () => {
+    it('works', done => {
+      vm = createVue({
+        template: '<el-date-picker type="daterange" v-model="value" ref="compo" />',
+        data() {
+          return {
+            value: ''
+          };
+        }
+      }, true);
 
-    input.click();
-
-    setTimeout(_ => {
-      const panels = vm.picker.$el.querySelectorAll('.el-date-range-picker__content');
-
-      expect(Array.prototype.slice.call(panels)).to.length(2);
-
-      panels[0].querySelector('td.available').click();
-      setTimeout(_ => {
-        panels[1].querySelector('td.available').click();
-
-        const {
-          minDate,
-          maxDate
-        } = vm.picker;
-        expect(minDate).to.exist;
-        expect(maxDate).to.exist;
-        expect(maxDate > minDate).to.true;
-        done();
-      }, DELAY);
-    }, DELAY);
-  });
-
-  it('type:daterange with unlink-panels', done => {
-    vm = createTest(DatePicker, {
-      type: 'daterange',
-      unlinkPanels: true
-    }, true);
-    const input = vm.$el.querySelector('input');
-
-    input.click();
-
-    setTimeout(_ => {
-      const panels = vm.picker.$el.querySelectorAll('.el-date-range-picker__content');
-
-      expect(Array.prototype.slice.call(panels)).to.length(2);
-
-      panels[1].querySelector('.el-icon-d-arrow-right').click();
-      panels[1].querySelector('.el-icon-arrow-right').click();
+      const rangePicker = vm.$refs.compo;
+      const inputs = rangePicker.$el.querySelectorAll('input');
+      inputs[0].focus();
 
       setTimeout(_ => {
-        const left = panels[0].querySelector('.el-date-range-picker__header');
-        const right = panels[1].querySelector('.is-right .el-date-range-picker__header');
-        const leftText = left.textContent.match(/\d+/g);
-        const rightText = right.textContent.match(/\d+/g);
+        const panels = rangePicker.picker.$el.querySelectorAll('.el-date-range-picker__content');
+        expect(Array.prototype.slice.call(panels)).to.length(2);
+        panels[0].querySelector('td.available').click();
+        setTimeout(_ => {
+          panels[1].querySelector('td.available').click();
+          setTimeout(_ => {
+            inputs[0].focus();
+            setTimeout(_ => {
+              // correct highlight
+              const startDate = rangePicker.picker.$el.querySelectorAll('.start-date');
+              const endDate = rangePicker.picker.$el.querySelectorAll('.end-date');
+              const inRangeDate = rangePicker.picker.$el.querySelectorAll('.in-range');
+              expect(startDate.length).to.equal(1);
+              expect(endDate.length).to.equal(1);
+              expect(inRangeDate.length).to.above(0);
+              // value is array
+              expect(vm.value).to.be.an.instanceof(Array);
+              // input text is something like date string
+              expect(inputs[0].value.length).to.equal(10);
+              expect(inputs[1].value.length).to.equal(10);
+              done();
+            }, DELAY);
+          }, DELAY);
+        }, DELAY);
+      }, DELAY);
+    });
 
-        expect(rightText[0] - leftText[0]).to.equal(1);
-        expect((rightText[1] <= 2 ? rightText[1] + 12 : rightText[1]) - leftText[1]).to.equal(2);
+    it('unlink panels', done => {
+      vm = createTest(DatePicker, {
+        type: 'daterange',
+        unlinkPanels: true
+      }, true);
+      const input = vm.$el.querySelector('input');
 
+      input.click();
+
+      setTimeout(_ => {
+        const panels = vm.picker.$el.querySelectorAll('.el-date-range-picker__content');
+
+        expect(Array.prototype.slice.call(panels)).to.length(2);
+
+        panels[1].querySelector('.el-icon-d-arrow-right').click();
+        panels[1].querySelector('.el-icon-arrow-right').click();
+
+        setTimeout(_ => {
+          const left = panels[0].querySelector('.el-date-range-picker__header');
+          const right = panels[1].querySelector('.is-right .el-date-range-picker__header');
+          const leftText = left.textContent.match(/\d+/g);
+          const rightText = right.textContent.match(/\d+/g);
+
+          expect(rightText[0] - leftText[0]).to.equal(1);
+          expect((rightText[1] <= 2 ? rightText[1] + 12 : rightText[1]) - leftText[1]).to.equal(2);
+
+          done();
+        }, DELAY);
+      }, DELAY);
+    });
+
+    it('daylight saving time highlight', done => {
+      // Run test with environment variable TZ=Australia/Sydney
+      // The following test uses Australian Eastern Daylight Time (AEDT)
+      // AEST -> AEDT shift happened on 2016-10-02 02:00:00
+      vm = createVue({
+        template: '<el-date-picker type="daterange" v-model="value" ref="compo" />',
+        data() {
+          return {
+            value: [new Date(2016, 9, 1), new Date(2016, 9, 3)]
+          };
+        }
+      }, true);
+
+      const rangePicker = vm.$refs.compo;
+      const inputs = rangePicker.$el.querySelectorAll('input');
+      inputs[0].focus();
+
+      setTimeout(_ => {
+        const startDate = rangePicker.picker.$el.querySelectorAll('.start-date');
+        const endDate = rangePicker.picker.$el.querySelectorAll('.end-date');
+        expect(startDate.length).to.equal(1);
+        expect(endDate.length).to.equal(1);
         done();
       }, DELAY);
-    }, DELAY);
+    });
   });
 
   describe('type:datetimerange', () => {
