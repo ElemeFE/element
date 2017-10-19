@@ -40,6 +40,9 @@
       <div :style="{ width: bodyWidth }" class="el-table__empty-block" v-if="!data || data.length === 0">
         <span class="el-table__empty-text"><slot name="empty">{{ emptyText || t('el.table.emptyText') }}</slot></span>
       </div>
+      <div class="el-table__append-wrapper" ref="appendWrapper" v-if="$slots.append">
+        <slot name="append"></slot>
+      </div>
     </div>
     <div class="el-table__footer-wrapper" ref="footerWrapper" v-if="showSummary" v-show="data && data.length > 0">
       <table-footer
@@ -84,6 +87,7 @@
           :row-style="rowStyle"
           :style="{ width: layout.fixedWidth ? layout.fixedWidth + 'px' : '' }">
         </table-body>
+        <div class="el-table__append-gutter" :style="{ height: layout.appendHeight + 'px' }" v-if="$slots.append"></div>
       </div>
       <div class="el-table__fixed-footer-wrapper" ref="fixedFooterWrapper" v-if="showSummary" v-show="data && data.length > 0">
         <table-footer
@@ -273,8 +277,11 @@
           if (refs.fixedBodyWrapper) refs.fixedBodyWrapper.scrollTop = this.scrollTop;
           if (refs.rightFixedBodyWrapper) refs.rightFixedBodyWrapper.scrollTop = this.scrollTop;
           const maxScrollLeftPosition = this.scrollWidth - this.offsetWidth - 1;
+
           const scrollLeft = this.scrollLeft;
-          if (scrollLeft >= maxScrollLeftPosition) {
+          if (!self.layout.scrollX) {
+            self.scrollPosition = 'none';
+          } else if (scrollLeft >= maxScrollLeftPosition) {
             self.scrollPosition = 'right';
           } else if (scrollLeft === 0) {
             self.scrollPosition = 'left';
@@ -494,7 +501,7 @@
         resizeProxyVisible: false,
         // 是否拥有多级表头
         isGroup: false,
-        scrollPosition: 'left'
+        scrollPosition: layout.scrollX ? 'left' : 'none'
       };
     }
   };
