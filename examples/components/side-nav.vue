@@ -120,15 +120,15 @@
         :offset="-80"
         class="nav-dropdown-list"
         @input="handleDropdownToggle">
-        <el-dropdown-item>
-          {{ version }}
-        </el-dropdown-item>
-        <!--<el-dropdown-item-->
-          <!--v-for="item in Object.keys(versions)"-->
-          <!--:key="item"-->
-          <!--@click.native="switchVersion(item)">-->
-          <!--{{ item }}-->
+        <!--<el-dropdown-item>-->
+          <!--{{ version }}-->
         <!--</el-dropdown-item>-->
+        <el-dropdown-item
+                v-for="item in Object.keys(versions)"
+                :key="item"
+                @click.native="switchVersion(item)">
+          {{ item }}
+        </el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
     <ul>

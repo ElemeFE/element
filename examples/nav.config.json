@@ -237,6 +237,15 @@
               "title": "Collapse 折叠面板"
             }
           ]
+        },
+        {
+          "groupName": "ZHCX",
+          "list": [
+            {
+              "path": "/wis-nav",
+              "title": "WisNav"
+            }
+          ]
         }
       ]
     }
@@ -477,6 +486,15 @@
             {
               "path": "/collapse",
               "title": "Collapse"
+            }
+          ]
+        },
+        {
+          "groupName": "ZHCX",
+          "list": [
+            {
+              "path": "/wis-nav",
+              "title": "WisNav"
             }
           ]
         }
