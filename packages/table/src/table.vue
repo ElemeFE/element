@@ -277,11 +277,8 @@
           if (refs.fixedBodyWrapper) refs.fixedBodyWrapper.scrollTop = this.scrollTop;
           if (refs.rightFixedBodyWrapper) refs.rightFixedBodyWrapper.scrollTop = this.scrollTop;
           const maxScrollLeftPosition = this.scrollWidth - this.offsetWidth - 1;
-
           const scrollLeft = this.scrollLeft;
-          if (!self.layout.scrollX) {
-            self.scrollPosition = 'none';
-          } else if (scrollLeft >= maxScrollLeftPosition) {
+          if (scrollLeft >= maxScrollLeftPosition) {
             self.scrollPosition = 'right';
           } else if (scrollLeft === 0) {
             self.scrollPosition = 'left';
@@ -504,7 +501,7 @@
         resizeProxyVisible: false,
         // 是否拥有多级表头
         isGroup: false,
-        scrollPosition: layout.scrollX ? 'left' : 'none'
+        scrollPosition: 'left'
       };
     }
   };
