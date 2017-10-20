@@ -55,7 +55,7 @@
   }
 
   .bg-border-base {
-    background-color: #d8dce6;
+    background-color: #d8dce5;
   }
   .bg-border-light {
     background-color: #dfe4ed;
@@ -120,7 +120,7 @@ Element 主要品牌颜色是鲜艳、友好的蓝色。
   </el-col>
   <el-col :span="6">
     <div class="demo-color-box-group">
-      <div class="demo-color-box bg-border-base">一级边框<div class="value">#D8DCE6</div></div>
+      <div class="demo-color-box bg-border-base">一级边框<div class="value">#D8DCE5</div></div>
       <div class="demo-color-box bg-border-light">二级边框<div class="value">#DFE4ED</div></div>
       <div class="demo-color-box bg-border-lighter">三级边框<div class="value">#E6EBF5</div></div>
       <div class="demo-color-box bg-border-extra-light">四级边框<div class="value">#EDF2FC</div></div>

@@ -140,15 +140,15 @@
   export default {
     data() {
       return {
-        checkAll: true,
+        checkAll: false,
         checkedCities: ['上海', '北京'],
         cities: cityOptions,
         isIndeterminate: true
       };
     },
     methods: {
-      handleCheckAllChange(event) {
-        this.checkedCities = event.target.checked ? cityOptions : [];
+      handleCheckAllChange(val) {
+        this.checkedCities = val ? cityOptions : [];
         this.isIndeterminate = false;
       },
       handleCheckedCitiesChange(value) {

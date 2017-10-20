@@ -53,5 +53,5 @@ export declare class ElCascader extends ElementUIComponent {
   size: ElementUIComponentSize
 
   /** Hook function before filtering with the value to be filtered as its parameter */
-  beforeFilter: (value: string) => boolean | Promise
+  beforeFilter: (value: string) => boolean | Promise<any>
 }

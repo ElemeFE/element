@@ -58,7 +58,7 @@ $--background-color-base: #f5f7fa;
 -------------------------- */
 $--border-width-base: 1px;
 $--border-style-base: solid;
-$--border-color-base: #d8dce6 !default;
+$--border-color-base: #d8dce5 !default;
 $--border-color-light: #dfe4ed !default;
 $--border-color-lighter: #e6ebf5 !default;
 $--border-color-extra-light: #edf2fc !default;
@@ -121,8 +121,8 @@ $--checkbox-input-border: $--border-base;
 $--checkbox-input-border-color: $--border-color-base;
 $--checkbox-icon-color: $--color-white;
 
-$--checkbox-disabled-input-border-color: $--disabled-border-base;
-$--checkbox-disabled-input-fill: $--disabled-fill-base;
+$--checkbox-disabled-input-border-color: $--border-color-base;
+$--checkbox-disabled-input-fill: #edf2fc;
 $--checkbox-disabled-icon-color: $--color-text-placeholder;
 
 $--checkbox-disabled-checked-input-fill: $--border-color-extra-light;
@@ -138,8 +138,8 @@ $--checkbox-input-border-color-hover: $--color-primary;
 
 $--checkbox-bordered-padding: 9px 20px 9px 10px;
 $--checkbox-bordered-medium-padding: 7px 20px 7px 10px;
-$--checkbox-bordered-small-padding: 4px 20px 6px 10px;
-$--checkbox-bordered-mini-padding: 2px 20px 4px 10px;
+$--checkbox-bordered-small-padding: 3px 15px 7px 10px;
+$--checkbox-bordered-mini-padding: 1px 15px 5px 10px;
 $--checkbox-bordered-medium-input-height: 14px;
 $--checkbox-bordered-medium-input-width: 14px;
 $--checkbox-bordered-small-input-height: 12px;
@@ -184,8 +184,8 @@ $--radio-input-border-color-hover: $--color-primary;
 
 $--radio-bordered-padding: 10px 20px 10px 10px;
 $--radio-bordered-medium-padding: 8px 20px 8px 10px;
-$--radio-bordered-small-padding: 6px 20px 6px 10px;
-$--radio-bordered-mini-padding: 4px 20px 4px 10px;
+$--radio-bordered-small-padding: 6px 15px 6px 10px;
+$--radio-bordered-mini-padding: 4px 15px 4px 10px;
 $--radio-bordered-medium-input-height: 14px;
 $--radio-bordered-medium-input-width: 14px;
 $--radio-bordered-small-input-height: 12px;
@@ -271,10 +271,11 @@ $--msgbox-danger-color: $--color-danger;
 -------------------------- */
 $--message-shadow: $--box-shadow-base;
 $--message-min-width: 380px;
+$--message-background-color: #edf2fc;
 $--message-padding: 15px 15px 15px 20px;
 $--message-content-color: $--color-text-regular;
 $--message-close-color: $--color-text-placeholder;
-$--message-close-size: 14px;
+$--message-close-size: 16px;
 $--message-close-hover-color: $--color-text-secondary;
 
 $--message-success-color: $--color-success;
@@ -390,12 +391,12 @@ $--button-font-size: 14px;
 $--button-font-weight: $--font-weight-primary;
 $--button-border-radius: $--border-radius-base;
 $--button-padding-vertical: 12px;
-$--button-padding-horizontal: 18px;
+$--button-padding-horizontal: 20px;
 
 $--button-medium-font-size: 14px;
 $--button-medium-border-radius: $--border-radius-base;
 $--button-medium-padding-vertical: 10px;
-$--button-medium-padding-horizontal: 18px;
+$--button-medium-padding-horizontal: 20px;
 
 $--button-small-font-size: 12px;
 $--button-small-border-radius: #{$--border-radius-base - 1};
@@ -411,9 +412,9 @@ $--button-default-color: $--color-text-regular;
 $--button-default-fill: $--color-white;
 $--button-default-border: $--border-color-base;
 
-$--button-disabled-color: $--color-text-secondary;
+$--button-disabled-color: $--color-text-placeholder;
 $--button-disabled-fill: $--color-white;
-$--button-disabled-border: $--border-color-base;
+$--button-disabled-border: $--border-color-lighter;
 
 $--button-primary-border: $--color-primary;
 $--button-primary-color: $--color-white;
