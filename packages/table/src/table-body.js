@@ -255,8 +255,6 @@ export default {
           columnIndex
         });
 
-        console.log(result);
-
         if (Array.isArray(result)) {
           rowspan = result[0];
           colspan = result[1];
