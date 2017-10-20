@@ -1,5 +1,48 @@
 ## Changelog
 
+### 2.0.0-beta.1
+
+*2017-10-20*
+
+#### New features
+- General
+  - Added TypeScript typings
+  - All existing icons are redesigned. Some new icons are added.
+  - To help you migrate from Element 1.x, we added some console warnings against deprecated APIs. When you use a
+  removed or renamed attribute or event in your project, you'll get a warning like this:
+  ```
+  [Element Migrating][ElSwitch][Attribute]: on-color is renamed to active-color.
+  ```
+  - Added a series of breakpoint-based utility classes that hide elements when the viewport size meets certain conditions
+- Layout
+  - Added a new breakpoint `xl` for viewport wider than 1920px
+- Table
+  - Added `span-method` attribute for merging cells
+  - Added `clearSort` method to clear sorting programmatically
+  - Added `clearFilter` method to clear filter programmatically
+  - For expandable rows, when a row is expanded, a `.expanded` class will be added to its class list, so that you can customize its styles
+- DatePicker
+  - Added `unlink-panels` attribute to unlink the two date panels when selecting a date range
+- Select
+  - Added `reserve-keyword` attribute for reserving current search keyword after selecting an option
+
+#### Fixes
+- Table
+  - Now `header-align` of TableColumn works properly
+  - Fixed a bug that Table remains hiding when its parent element appears from `display: none`
+  - Fixed Table expanding its width when its parent element has `display: flex`
+  - Fixed a bug that fixed columns of a Table with `append` slot would disappear when data is dynamically fetched
+  - Fixed `expand-row-keys` attribute not working with initial value
+  - Fixed filter failing when `data` updates
+  - Fixed a calculation error of fixed columns layout with grouped headers
+
+#### Breaking changes
+- Switch
+  - Attributes starting with `on-*` will be parsed to events in JSX, making all `on-*` attributes of Switch not
+able to work in JSX. So `on-*` attributes are renamed to `active-*`, and accordingly `off-*` attributes are renamed to `inactive-*`. This changes affects the following attributes: `on-icon-class`, `off-icon-class`, `on-text`, `off-text`, `on-color`, `off-color`, `on-value`, `off-value`
+- Table
+  - `sort-method` now aligns with `Array.sort`. It should return a number instead of a boolean
+
 ### 2.0.0-alpha.3
 
 *2017-10-16*
