@@ -1,4 +1,3 @@
-import { Route } from 'vue-router'
 import { ElementUIComponent } from './component'
 
 /** Menu Item Component */
@@ -7,5 +6,5 @@ export declare class ElMenuItem extends ElementUIComponent {
   index: string
 
   /** Vue Router object */
-  route: Route
+  route: object
 }

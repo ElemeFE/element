@@ -55,7 +55,7 @@
   }
 
   .bg-border-base {
-    background-color: #d8dce6;
+    background-color: #d8dce5;
   }
   .bg-border-light {
     background-color: #dfe4ed;
@@ -119,7 +119,7 @@ Neutral colors are for text, background and border colors. You can use different
   </el-col>
   <el-col :span="6">
     <div class="demo-color-box-group">
-      <div class="demo-color-box bg-border-base">Base Border<div class="value">#D8DCE6</div></div>
+      <div class="demo-color-box bg-border-base">Base Border<div class="value">#D8DCE5</div></div>
       <div class="demo-color-box bg-border-light">Light Border<div class="value">#DFE4ED</div></div>
       <div class="demo-color-box bg-border-lighter">Lighter Border<div class="value">#E6EBF5</div></div>
       <div class="demo-color-box bg-border-extra-light">Extra Light Border<div class="value">#EDF2FC</div></div>

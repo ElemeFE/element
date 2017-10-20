@@ -55,7 +55,7 @@
       },
       createStateFilter(queryString) {
         return (state) => {
-          return (state.value.indexOf(queryString.toLowerCase()) === 0);
+          return (state.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
         };
       },
       handleSelect(item) {
@@ -436,7 +436,7 @@ You can get some recommended tips based on the current input.
       },
       createFilter(queryString) {
         return (link) => {
-          return (link.value.indexOf(queryString.toLowerCase()) === 0);
+          return (link.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
         };
       },
       loadAll() {
@@ -520,7 +520,7 @@ Customize how suggestions are displayed.
       },
       createFilter(queryString) {
         return (link) => {
-          return (link.value.indexOf(queryString.toLowerCase()) === 0);
+          return (link.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
         };
       },
       loadAll() {
@@ -593,7 +593,7 @@ Search data from server-side.
       },
       createFilter(queryString) {
         return (link) => {
-          return (link.value.indexOf(queryString.toLowerCase()) === 0);
+          return (link.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
         };
       },
       handleSelect(item) {

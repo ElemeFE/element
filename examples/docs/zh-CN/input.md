@@ -96,7 +96,7 @@
       },
       createStateFilter(queryString) {
         return (state) => {
-          return (state.value.indexOf(queryString.toLowerCase()) === 0);
+          return (state.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
         };
       },
       handleSelect(item) {
@@ -465,7 +465,7 @@ export default {
       },
       createFilter(queryString) {
         return (restaurant) => {
-          return (restaurant.value.indexOf(queryString.toLowerCase()) === 0);
+          return (restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
         };
       },
       loadAll() {
@@ -594,7 +594,7 @@ export default {
       },
       createFilter(queryString) {
         return (restaurant) => {
-          return (restaurant.value.indexOf(queryString.toLowerCase()) === 0);
+          return (restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
         };
       },
       loadAll() {
@@ -749,7 +749,7 @@ export default {
       },
       createStateFilter(queryString) {
         return (state) => {
-          return (state.value.indexOf(queryString.toLowerCase()) === 0);
+          return (state.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
         };
       },
       handleSelect(item) {

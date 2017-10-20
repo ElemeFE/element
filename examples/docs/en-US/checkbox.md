@@ -142,15 +142,15 @@ The `indeterminate` property can help you to achieve a 'check all' effect.
   export default {
     data() {
       return {
-        checkAll: true,
+        checkAll: false,
         checkedCities: ['Shanghai', 'Beijing'],
         cities: cityOptions,
         isIndeterminate: true
       };
     },
     methods: {
-      handleCheckAllChange(event) {
-        this.checkedCities = event.target.checked ? cityOptions : [];
+      handleCheckAllChange(val) {
+        this.checkedCities = val ? cityOptions : [];
         this.isIndeterminate = false;
       },
       handleCheckedCitiesChange(value) {
