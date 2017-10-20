@@ -438,6 +438,10 @@
         this.layout.setHeight(value);
       },
 
+      maxHeight(value) {
+        this.layout.setMaxHeight(value);
+      },
+
       currentRowKey(newVal) {
         this.store.setCurrentRowKey(newVal);
       },
