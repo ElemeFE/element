@@ -68,7 +68,8 @@ const getPropertyFromData = function(node, prop) {
   } else if (typeof config === 'string') {
     return data[config];
   } else if (typeof config === 'undefined') {
-    return '';
+    const dataProp = data[prop];
+    return dataProp === undefined ? '' : dataProp;
   }
 };
 
@@ -132,7 +133,7 @@ export default class Node {
       this.expand(null, store.autoExpandParent);
     }
 
-    if (key && store.currentNodeKey && this.key === store.currentNodeKey) {
+    if (key && store.currentNodeKey !== undefined && this.key === store.currentNodeKey) {
       store.currentNode = this;
     }
 

@@ -28,8 +28,8 @@ const CONTEXT_STYLE = [
   'box-sizing'
 ];
 
-function calculateNodeStyling(node) {
-  const style = window.getComputedStyle(node);
+function calculateNodeStyling(targetElement) {
+  const style = window.getComputedStyle(targetElement);
 
   const boxSizing = style.getPropertyValue('box-sizing');
 
@@ -51,7 +51,7 @@ function calculateNodeStyling(node) {
 }
 
 export default function calcTextareaHeight(
-  targetNode,
+  targetElement,
   minRows = null,
   maxRows = null
 ) {
@@ -65,10 +65,10 @@ export default function calcTextareaHeight(
     borderSize,
     boxSizing,
     contextStyle
-  } = calculateNodeStyling(targetNode);
+  } = calculateNodeStyling(targetElement);
 
   hiddenTextarea.setAttribute('style', `${contextStyle};${HIDDEN_STYLE}`);
-  hiddenTextarea.value = targetNode.value || targetNode.placeholder || '';
+  hiddenTextarea.value = targetElement.value || targetElement.placeholder || '';
 
   let height = hiddenTextarea.scrollHeight;
 

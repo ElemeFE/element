@@ -13,70 +13,8 @@
   </el-menu-collapse-transition>
 </template>
 <script>
-  import Vue from 'vue';
   import emitter from 'element-ui/src/mixins/emitter';
   import { addClass, removeClass, hasClass } from 'element-ui/src/utils/dom';
-
-  Vue.component('el-menu-collapse-transition', {
-    functional: true,
-    render(createElement, context) {
-      const data = {
-        props: {
-          mode: 'out-in'
-        },
-        on: {
-          beforeEnter(el) {
-            el.style.opacity = 0.2;
-          },
-
-          enter(el) {
-            addClass(el, 'el-opacity-transition');
-            el.style.opacity = 1;
-          },
-
-          afterEnter(el) {
-            removeClass(el, 'el-opacity-transition');
-            el.style.opacity = '';
-          },
-
-          beforeLeave(el) {
-            if (!el.dataset) el.dataset = {};
-
-            if (hasClass(el, 'el-menu--collapse')) {
-              removeClass(el, 'el-menu--collapse');
-              el.dataset.oldOverflow = el.style.overflow;
-              el.dataset.scrollWidth = el.scrollWidth;
-              addClass(el, 'el-menu--collapse');
-            }
-
-            el.style.width = el.scrollWidth + 'px';
-            el.style.overflow = 'hidden';
-          },
-
-          leave(el) {
-            if (!hasClass(el, 'el-menu--collapse')) {
-              addClass(el, 'horizontal-collapse-transition');
-              el.style.width = '64px';
-            } else {
-              addClass(el, 'horizontal-collapse-transition');
-              el.style.width = el.dataset.scrollWidth + 'px';
-            }
-          },
-
-          afterLeave(el) {
-            removeClass(el, 'horizontal-collapse-transition');
-            if (hasClass(el, 'el-menu--collapse')) {
-              el.style.width = el.dataset.scrollWidth + 'px';
-            } else {
-              el.style.width = '64px';
-            }
-            el.style.overflow = el.dataset.oldOverflow;
-          }
-        }
-      };
-      return createElement('transition', data, context.children);
-    }
-  });
 
   export default {
     name: 'ElMenu',
@@ -89,6 +27,69 @@
       return {
         rootMenu: this
       };
+    },
+
+    components: {
+      'el-menu-collapse-transition': {
+        functional: true,
+        render(createElement, context) {
+          const data = {
+            props: {
+              mode: 'out-in'
+            },
+            on: {
+              beforeEnter(el) {
+                el.style.opacity = 0.2;
+              },
+
+              enter(el) {
+                addClass(el, 'el-opacity-transition');
+                el.style.opacity = 1;
+              },
+
+              afterEnter(el) {
+                removeClass(el, 'el-opacity-transition');
+                el.style.opacity = '';
+              },
+
+              beforeLeave(el) {
+                if (!el.dataset) el.dataset = {};
+
+                if (hasClass(el, 'el-menu--collapse')) {
+                  removeClass(el, 'el-menu--collapse');
+                  el.dataset.oldOverflow = el.style.overflow;
+                  el.dataset.scrollWidth = el.scrollWidth;
+                  addClass(el, 'el-menu--collapse');
+                }
+
+                el.style.width = el.scrollWidth + 'px';
+                el.style.overflow = 'hidden';
+              },
+
+              leave(el) {
+                if (!hasClass(el, 'el-menu--collapse')) {
+                  addClass(el, 'horizontal-collapse-transition');
+                  el.style.width = '64px';
+                } else {
+                  addClass(el, 'horizontal-collapse-transition');
+                  el.style.width = el.dataset.scrollWidth + 'px';
+                }
+              },
+
+              afterLeave(el) {
+                removeClass(el, 'horizontal-collapse-transition');
+                if (hasClass(el, 'el-menu--collapse')) {
+                  el.style.width = el.dataset.scrollWidth + 'px';
+                } else {
+                  el.style.width = '64px';
+                }
+                el.style.overflow = el.dataset.oldOverflow;
+              }
+            }
+          };
+          return createElement('transition', data, context.children);
+        }
+      }
     },
 
     props: {
@@ -115,7 +116,7 @@
     },
     data() {
       return {
-        activedIndex: this.defaultActive,
+        activeIndex: this.defaultActive,
         openedMenus: this.defaultOpeneds ? this.defaultOpeneds.slice(0) : [],
         items: {},
         submenus: {}
@@ -125,15 +126,18 @@
       defaultActive(value) {
         const item = this.items[value];
         if (item) {
-          this.activedIndex = item.index;
+          this.activeIndex = item.index;
           this.initOpenedMenu();
         } else {
-          this.activedIndex = '';
+          this.activeIndex = '';
         }
 
       },
       defaultOpeneds(value) {
         this.openedMenus = value;
+      },
+      collapse(value) {
+        if (value) this.openedMenus = [];
       }
     },
     methods: {
@@ -160,7 +164,7 @@
         }
         this.openedMenus.push(index);
       },
-      closeMenu(index, indexPath) {
+      closeMenu(index) {
         this.openedMenus.splice(this.openedMenus.indexOf(index), 1);
       },
       handleSubmenuClick(submenu) {
@@ -168,7 +172,7 @@
         let isOpened = this.openedMenus.indexOf(index) !== -1;
 
         if (isOpened) {
-          this.closeMenu(index, indexPath);
+          this.closeMenu(index);
           this.$emit('close', index, indexPath);
         } else {
           this.openMenu(index, indexPath);
@@ -177,7 +181,7 @@
       },
       handleItemClick(item) {
         let { index, indexPath } = item;
-        this.activedIndex = item.index;
+        this.activeIndex = item.index;
         this.$emit('select', index, indexPath, item);
 
         if (this.mode === 'horizontal' || this.collapse) {
@@ -190,7 +194,7 @@
       },
       // 初始化展开菜单
       initOpenedMenu() {
-        const index = this.activedIndex;
+        const index = this.activeIndex;
         const activeItem = this.items[index];
         if (!activeItem || this.mode === 'horizontal' || this.collapse) return;
 

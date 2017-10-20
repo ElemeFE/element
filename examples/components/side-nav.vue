@@ -91,6 +91,10 @@
       line-height: 26px;
       margin-top: 10px;
     }
+    
+    #code-sponsor-widget {
+      margin: 50px 0 0 -20px;
+    }
   }
   .nav-dropdown-list {
     width: 120px;
@@ -165,6 +169,7 @@
         </template>
       </li>
     </ul>
+    <div id="code-sponsor-widget"></div>
   </div>
 </template>
 <script>

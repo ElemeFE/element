@@ -67,7 +67,7 @@
         var year = this.date.getFullYear();
         var date = new Date(0);
         date.setFullYear(year);
-        date.setMonth(month);
+        date.setMonth(month, 1);
         date.setHours(0);
         var nextMonth = new Date(date);
         nextMonth.setMonth(month + 1);
@@ -78,11 +78,12 @@
           while (date < nextMonth) {
             if (this.disabledDate(date)) {
               date = new Date(date.getTime() + 8.64e7);
+              flag = true;
             } else {
+              flag = false;
               break;
             }
           }
-          if ((date - nextMonth) === 0) flag = true;
         }
 
         style.disabled = flag;

@@ -3,7 +3,7 @@
     <div class="el-message-box__wrapper" tabindex="-1" v-show="visible" @click.self="handleWrapperClick">
       <div class="el-message-box" :class="customClass">
         <div class="el-message-box__header" v-if="title !== undefined">
-          <div class="el-message-box__title">{{ title || t('el.messagebox.title') }}</div>
+          <div class="el-message-box__title">{{ title }}</div>
           <button type="button" class="el-message-box__headerbtn" aria-label="Close" 
                   v-if="showClose" @click="handleAction('cancel')">
             <i class="el-message-box__close el-icon-close"></i>

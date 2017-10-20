@@ -2,6 +2,30 @@
   import { isDef } from 'element-ui/src/utils/shared';
   import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
 
+  const copyArray = (arr, props) => {
+    if (!arr || !Array.isArray(arr) || !props) return arr;
+    const result = [];
+    const configurableProps = ['__IS__FLAT__OPTIONS', 'label', 'value', 'disabled'];
+    const childrenProp = props.children || 'children';
+    arr.forEach(item => {
+      const itemCopy = {};
+      configurableProps.forEach(prop => {
+        let name = props[prop];
+        let value = item[name];
+        if (value === undefined) {
+          name = prop;
+          value = item[name];
+        }
+        if (value !== undefined) itemCopy[name] = value;
+      });
+      if (Array.isArray(item[childrenProp])) {
+        itemCopy[childrenProp] = copyArray(item[childrenProp], props);
+      }
+      result.push(itemCopy);
+    });
+    return result;
+  };
+
   export default {
     name: 'ElCascaderMenu',
 
@@ -45,7 +69,7 @@
               if (option.__IS__FLAT__OPTIONS) return;
               configurableProps.forEach(prop => {
                 const value = option[this.props[prop] || prop];
-                if (value) option[prop] = value;
+                if (value !== undefined) option[prop] = value;
               });
               if (Array.isArray(option.children)) {
                 formatOptions(option.children);
@@ -66,8 +90,9 @@
             return activeOptions;
           };
 
-          formatOptions(this.options);
-          return loadActiveOptions(this.options);
+          const optionsCopy = copyArray(this.options, this.props);
+          formatOptions(optionsCopy);
+          return loadActiveOptions(optionsCopy);
         }
       }
     },
@@ -81,7 +106,7 @@
         } else {
           this.activeValue = [item.value];
         }
-        this.$emit('pick', this.activeValue);
+        this.$emit('pick', this.activeValue.slice());
       },
       handleMenuLeave() {
         this.$emit('menuLeave');
@@ -91,7 +116,7 @@
         this.activeValue.splice(menuIndex, len, item.value);
         this.activeOptions.splice(menuIndex + 1, len, item.children);
         if (this.changeOnSelect) {
-          this.$emit('pick', this.activeValue, false);
+          this.$emit('pick', this.activeValue.slice(), false);
         } else {
           this.$emit('activeItemChange', this.activeValue);
         }
