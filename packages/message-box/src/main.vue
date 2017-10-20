@@ -34,7 +34,14 @@
             </slot>
           </div>
           <div class="el-message-box__input" v-show="showInput">
-            <el-input v-model="inputValue" @keyup.enter.native="handleAction('confirm')" :placeholder="inputPlaceholder" ref="input"></el-input>
+            <el-input
+              v-model="inputValue"
+              @compositionstart.native="handleComposition"
+              @compositionupdate.native="handleComposition"
+              @compositionend.native="handleComposition"
+              @keyup.enter.native="handleKeyup"
+              :placeholder="inputPlaceholder"
+              ref="input"></el-input>
             <div class="el-message-box__errormsg" :style="{ visibility: !!editorErrorMessage ? 'visible' : 'hidden' }">{{ editorErrorMessage }}</div>
           </div>
         </div>
@@ -137,6 +144,18 @@
     },
 
     methods: {
+      handleComposition(event) {
+        if (event.type === 'compositionend') {
+          setTimeout(() => {
+            this.isOnComposition = false;
+          }, 100);
+        } else {
+          this.isOnComposition = true;
+        }
+      },
+      handleKeyup() {
+        !this.isOnComposition && this.handleAction('confirm');
+      },
       getSafeClose() {
         const currentId = this.uid;
         return () => {
@@ -304,7 +323,8 @@
         editorErrorMessage: null,
         callback: null,
         dangerouslyUseHTMLString: false,
-        focusAfterClosed: null
+        focusAfterClosed: null,
+        isOnComposition: false
       };
     }
   };

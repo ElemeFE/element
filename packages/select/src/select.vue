@@ -266,6 +266,12 @@
     },
 
     watch: {
+      disabled() {
+        this.$nextTick(() => {
+          this.resetInputHeight();
+        });
+      },
+
       placeholder(val) {
         this.cachedPlaceHolder = this.currentPlaceholder = val;
       },
