@@ -173,7 +173,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 };
 
 module.exports = {
-  version: '2.0.0-alpha.3',
+  version: '2.0.0-beta.1',
   locale: locale.use,
   i18n: locale.i18n,
   install,
