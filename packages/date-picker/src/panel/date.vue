@@ -349,7 +349,7 @@
       },
 
       handleLeave() {
-        this.$emit('dodestory');
+        this.$emit('dodestroy');
         document.body.removeEventListener('keydown', this.handleKeydown);
       },
 
