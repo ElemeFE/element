@@ -1707,10 +1707,10 @@ For table of numbers, you can add an extra row at the table footer displaying ea
 ```
 :::
 
-### 合并行或列
+### Rowspan and colspan
 
-多行或多列共用一个数据时，可以合并行或列。
-:::demo 通过给`table`传入`span-method`方法可以实现合并行或列，方法的参数是一个对象，里面包含当前行`row`、当前列`column`、当前行号`rowIndex`、当前列号`columnIndex`四个属性。该函数可以返回一个包含两个元素的数组，第一个元素代表`rowspan`，第二个元素代表`colspan`。 也可以返回一个键名为`rowsapn`和`colspan`的对象。
+Configuring rowspan and colspan allows you to merge cells
+:::demo Use the `span-method` attribute to configure rowspan and colspan. It accepts a method, and passes an object to that method including current row `row`, current column `column`, current row index `rowIndex` and current column index `columnIndex`. The method should return an array of two numbers, the first number being `rowspan` and second `colspan`. It can also return an object with `rowsapn` and `colspan` props.
 
 ```html
 <template>
@@ -1727,22 +1727,22 @@ For table of numbers, you can add an extra row at the table footer displaying ea
       </el-table-column>
       <el-table-column
         prop="name"
-        label="姓名">
+        label="Name">
       </el-table-column>
       <el-table-column
         prop="amount1"
         sortable
-        label="数值 1">
+        label="Amount 1">
       </el-table-column>
       <el-table-column
         prop="amount2"
         sortable
-        label="数值 2">
+        label="Amount 2">
       </el-table-column>
       <el-table-column
         prop="amount3"
         sortable
-        label="数值 3">
+        label="Amount 3">
       </el-table-column>
     </el-table>
 
@@ -1750,7 +1750,6 @@ For table of numbers, you can add an extra row at the table footer displaying ea
       :data="tableData6"
       :span-method="objectSpanMethod"
       border
-      height="200"
       style="width: 100%; margin-top: 20px">
       <el-table-column
         prop="id"
@@ -1759,19 +1758,19 @@ For table of numbers, you can add an extra row at the table footer displaying ea
       </el-table-column>
       <el-table-column
         prop="name"
-        label="姓名">
+        label="Name">
       </el-table-column>
       <el-table-column
         prop="amount1"
-        label="数值 1（元）">
+        label="Amount 1">
       </el-table-column>
       <el-table-column
         prop="amount2"
-        label="数值 2（元）">
+        label="Amount 2">
       </el-table-column>
       <el-table-column
         prop="amount3"
-        label="数值 3（元）">
+        label="Amount 3">
       </el-table-column>
     </el-table>
   </div>
@@ -1783,31 +1782,31 @@ For table of numbers, you can add an extra row at the table footer displaying ea
       return {
         tableData6: [{
           id: '12987122',
-          name: '王小虎',
+          name: 'Tom',
           amount1: '234',
           amount2: '3.2',
           amount3: 10
         }, {
           id: '12987123',
-          name: '王小虎',
+          name: 'Tom',
           amount1: '165',
           amount2: '4.43',
           amount3: 12
         }, {
           id: '12987124',
-          name: '王小虎',
+          name: 'Tom',
           amount1: '324',
           amount2: '1.9',
           amount3: 9
         }, {
           id: '12987125',
-          name: '王小虎',
+          name: 'Tom',
           amount1: '621',
           amount2: '2.2',
           amount3: 17
         }, {
           id: '12987126',
-          name: '王小虎',
+          name: 'Tom',
           amount1: '539',
           amount2: '4.1',
           amount3: 15
@@ -1869,7 +1868,7 @@ For table of numbers, you can add an extra row at the table footer displaying ea
 | show-summary | whether to display a summary row | Boolean | — | false |
 | sum-text | displayed text for the first column of summary row | String | — | Sum |
 | summary-method | custom summary method | Function({ columns, data }) | — | — |
-| span-method | 合并行或列的计算方法 | Function({ row, column, rowIndex, columnIndex }) | — | — |
+| span-method | method that returns rowspan and colspan | Function({ row, column, rowIndex, columnIndex }) | — | — |
 
 ### Table Events
 | Event Name | Description | Parameters |
@@ -1897,8 +1896,8 @@ For table of numbers, you can add an extra row at the table footer displaying ea
 | clearSelection | used in multiple selection Table, clear selection, might be useful when `reserve-selection` is on | selection |
 | toggleRowSelection | used in multiple selection Table, toggle if a certain row is selected. With the second parameter, you can directly set if this row is selected | row, selected |
 | setCurrentRow | used in single selection Table, set a certain row selected. If called without any parameter, it will clear selection. | row |
-| clearSort | 用于清空排序条件，数据会恢复成未排序的状态 | - |
-| clearFilter | 用于清空过滤条件，数据会恢复成未过滤的状态 | - |
+| clearSort | clear sorting, restore data to the original order | - |
+| clearFilter | clear filter | - |
 
 ### Table Slot
 | Name | Description |
@@ -1917,7 +1916,7 @@ For table of numbers, you can add an extra row at the table footer displaying ea
 | fixed | whether column is fixed at left/right. Will be fixed at left if `true` | string/boolean | true/left/right | — |
 | render-header | render function for table header of this column | Function(h, { column, $index }) | — | — |
 | sortable | whether column can be sorted. Remote sorting can be done by setting this attribute to 'custom' and listening to the `sort-change` event of Table | boolean, string | true, false, custom | false |
-| sort-method | sorting method, works when `sortable` is `true`. 和 Array#sort 表现一致 | Function(a, b) | — | — |
+| sort-method | sorting method, works when `sortable` is `true`. Should return a number, just like Array.sort | Function(a, b) | — | — |
 | resizable | whether column width can be resized, works when `border` of `el-table` is `true` | boolean | — | false |
 | formatter | function that formats cell content | Function(row, column, cellValue) | — | — |
 | show-overflow-tooltip | whether to hide extra content and show them in a tooltip when hovering on the cell | boolean | — | false |
