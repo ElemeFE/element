@@ -9,7 +9,7 @@
   </head>
   <body>
     <div id="app"></div><% if (process.env.NODE_ENV === 'production') { %>
-    <script src="https://app.codesponsor.io/scripts/qFcVkt4f3DQEg4zrwINGVg?theme=light&height=250&width=240"></script>
+    <!--<script src="https://app.codesponsor.io/scripts/qFcVkt4f3DQEg4zrwINGVg?theme=light&height=250&width=240"></script>-->
     <script src="//cdn.jsdelivr.net/npm/vue@2.3.0/dist/vue.runtime.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/vue-router@2.1.1/dist/vue-router.min.js"></script><% } %>
   </body>

@@ -200,12 +200,12 @@
       this.renderAnchorHref();
       this.goAnchor();
       setTimeout(() => {
-        const notified = localStorage.getItem('ALPHA_NOTIFIED');
+        const notified = localStorage.getItem('BETA_NOTIFIED');
         if (!notified) {
           const h = this.$createElement;
           const title = this.lang === 'zh-CN'
-            ? '2.0.0 Alpha 发布'
-            : '2.0.0 Alpha released';
+            ? '2.0.0 Beta 发布'
+            : '2.0.0 Beta released';
           const messages = this.lang === 'zh-CN'
             ? ['点击', '这里', '查看详情']
             : ['Click ', 'here', ' to learn more'];
@@ -217,13 +217,13 @@
               h('a', {
                 attrs: {
                   target: '_blank',
-                  href: `https://github.com/ElemeFE/element/issues/${ this.lang === 'zh-CN' ? '7304' : '7305' }`
+                  href: `https://github.com/ElemeFE/element/issues/${ this.lang === 'zh-CN' ? '7612' : '7613' }`
                 }
               }, messages[1]),
               messages[2]
             ]),
             onClose() {
-              localStorage.setItem('ALPHA_NOTIFIED', 1);
+              localStorage.setItem('BETA_NOTIFIED', 1);
             }
           });
         }
