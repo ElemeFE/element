@@ -315,8 +315,8 @@
 
       doLayout() {
         this.store.updateColumns();
-        this.layout.update();
         this.updateScrollY();
+        this.layout.update();
         this.$nextTick(() => {
           if (this.height) {
             this.layout.setHeight(this.height);
