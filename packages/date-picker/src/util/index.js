@@ -61,25 +61,37 @@ export const getDayCountOfMonth = function(year, month) {
   return 31;
 };
 
+export const getDayCountOfYear = function(year) {
+  const isLeapYear = year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0);
+  return isLeapYear ? 366 : 365;
+};
+
 export const getFirstDayOfMonth = function(date) {
   const temp = new Date(date.getTime());
   temp.setDate(1);
   return temp.getDay();
 };
 
-export const DAY_DURATION = 86400000;
+// see: https://stackoverflow.com/questions/3674539/incrementing-a-date-in-javascript
+// {prev, next} Date should work for Daylight Saving Time
+// Adding 24 * 60 * 60 * 1000 does not work in the above scenario
+export const prevDate = function(date, amount = 1) {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate() - amount);
+};
+
+export const nextDate = function(date, amount = 1) {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate() + amount);
+};
 
 export const getStartDateOfMonth = function(year, month) {
   const result = new Date(year, month, 1);
   const day = result.getDay();
 
   if (day === 0) {
-    result.setTime(result.getTime() - DAY_DURATION * 7);
+    return prevDate(result, 7);
   } else {
-    result.setTime(result.getTime() - DAY_DURATION * day);
+    return prevDate(result, day);
   }
-
-  return result;
 };
 
 export const getWeekNumber = function(src) {
@@ -90,6 +102,7 @@ export const getWeekNumber = function(src) {
   // January 4 is always in week 1.
   const week1 = new Date(date.getFullYear(), 0, 4);
   // Adjust to Thursday in week 1 and count number of weeks from date to week 1.
+  // Rounding should be fine for Daylight Saving Time. Its shift should never be more than 12 hours.
   return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
 };
 
@@ -207,14 +220,4 @@ export const nextYear = function(date, amount = 1) {
   const month = date.getMonth();
   const monthDate = Math.min(date.getDate(), getDayCountOfMonth(year, month));
   return modifyDate(date, year, month, monthDate);
-};
-
-// {prev, next} Date works for daylight saving time
-// add / subtract one day's duration does not work
-export const prevDate = function(date, amount = 1) {
-  return new Date(date.getFullYear(), date.getMonth(), date.getDate() - amount);
-};
-
-export const nextDate = function(date, amount = 1) {
-  return new Date(date.getFullYear(), date.getMonth(), date.getDate() + amount);
 };
