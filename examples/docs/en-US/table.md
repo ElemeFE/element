@@ -1710,7 +1710,7 @@ For table of numbers, you can add an extra row at the table footer displaying ea
 ### 合并行或列
 
 多行或多列共用一个数据时，可以合并行或列。
-:::demo 通过给`table`传入`span-method`方法可以实现合并行或列，方法的参数是一个对象，里面包含当前行`row`、当前列`column`、当前行号`rowIndex`、当前列号`columnIndex`四个属性。该函数可以返回一个二维数组，第一个元素代表`rowspan`，第二个元素代表`colspan`。 也可以返回一个键名为`rowsapn`和`colspan`的对象。
+:::demo 通过给`table`传入`span-method`方法可以实现合并行或列，方法的参数是一个对象，里面包含当前行`row`、当前列`column`、当前行号`rowIndex`、当前列号`columnIndex`四个属性。该函数可以返回一个包含两个元素的数组，第一个元素代表`rowspan`，第二个元素代表`colspan`。 也可以返回一个键名为`rowsapn`和`colspan`的对象。
 
 ```html
 <template>
@@ -1890,8 +1890,6 @@ For table of numbers, you can add an extra row at the table footer displaying ea
 | current-change | triggers when current row changes | currentRow, oldCurrentRow |
 | header-dragend | triggers when finish dragging header | newWidth, oldWidth, column, event |
 | expand | triggers when user expands or collapses a row | row, expanded |
-| sort-clear | 当调用清空排序条件的时候会触发该事件 | - |
-| filter-clear | 当调用清空条件的时候会触发该事件 | - |
 
 ### Table Methods
 | Method | Description | Parameters |

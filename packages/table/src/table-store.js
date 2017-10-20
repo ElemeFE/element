@@ -433,8 +433,6 @@ TableStore.prototype.clearFilter = function() {
     values: [],
     silent: true
   });
-
-  this.table.$emit('filter-clear');
 };
 
 TableStore.prototype.clearSort = function() {
@@ -447,8 +445,6 @@ TableStore.prototype.clearSort = function() {
   this.commit('changeSortCondition', {
     silent: true
   });
-
-  this.table.$emit('sort-clear');
 };
 
 TableStore.prototype.updateAllSelected = function() {
