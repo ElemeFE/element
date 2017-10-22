@@ -81,6 +81,7 @@
       rules: [Object, Array],
       error: String,
       validateStatus: String,
+      for: String,
       inlineMessage: {
         type: [String, Boolean],
         default: ''
