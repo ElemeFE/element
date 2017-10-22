@@ -47,6 +47,16 @@
           resource: '',
           desc: ''
         },
+        sizeForm: {
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
+        },
         formInline: {
           user: '',
           region: ''
@@ -745,33 +755,33 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 
 ::: demo Still you can fine tune each component's `size` if you don't want that component to inherit its size from From or FormIten.
 ```html
-<el-form ref="form" :model="form" label-width="120px" size="mini">
+<el-form ref="form" :model="sizeForm" label-width="120px" size="mini">
   <el-form-item label="Activity name">
-    <el-input v-model="form.name"></el-input>
+    <el-input v-model="sizeForm.name"></el-input>
   </el-form-item>
   <el-form-item label="Activity zone">
-    <el-select v-model="form.region" placeholder="please select your zone">
+    <el-select v-model="sizeForm.region" placeholder="please select your zone">
       <el-option label="Zone one" value="shanghai"></el-option>
       <el-option label="Zone two" value="beijing"></el-option>
     </el-select>
   </el-form-item>
   <el-form-item label="Activity time">
     <el-col :span="11">
-      <el-date-picker type="date" placeholder="Pick a date" v-model="form.date1" style="width: 100%;"></el-date-picker>
+      <el-date-picker type="date" placeholder="Pick a date" v-model="sizeForm.date1" style="width: 100%;"></el-date-picker>
     </el-col>
     <el-col class="line" :span="2">-</el-col>
     <el-col :span="11">
-      <el-time-picker type="fixed-time" placeholder="Pick a time" v-model="form.date2" style="width: 100%;"></el-time-picker>
+      <el-time-picker type="fixed-time" placeholder="Pick a time" v-model="sizeForm.date2" style="width: 100%;"></el-time-picker>
     </el-col>
   </el-form-item>
   <el-form-item label="Activity type">
-    <el-checkbox-group v-model="form.type">
+    <el-checkbox-group v-model="sizeForm.type">
       <el-checkbox-button label="Online activities" name="type"></el-checkbox-button>
       <el-checkbox-button label="Promotion activities" name="type"></el-checkbox-button>
     </el-checkbox-group>
   </el-form-item>
   <el-form-item label="Resources">
-    <el-radio-group v-model="form.resource" size="medium">
+    <el-radio-group v-model="sizeForm.resource" size="medium">
       <el-radio border label="Sponsor"></el-radio>
       <el-radio border label="Venue"></el-radio>
     </el-radio-group>
@@ -781,6 +791,30 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
     <el-button>Cancel</el-button>
   </el-form-item>
 </el-form>
+
+<script>
+  export default {
+    data() {
+      return {
+        sizeForm: {
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
+        }
+      };
+    },
+    methods: {
+      onSubmit() {
+        console.log('submit!');
+      }
+    }
+  };
+</script>
 ```
 :::
 
@@ -806,6 +840,7 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 | validate | the method to validate the whole form. Returns a promise if callback is omitted | Function(callback: Function(boolean)) |
 | validateField | the method to validate a certain form item | Function(prop: string, callback: Function(errorMessage: string)) |
 | resetFields | reset all the fields and remove validation result | — |
+| clearValidate | clear validation message for all fields | -
 
 ### Form-Item Attributes
 
