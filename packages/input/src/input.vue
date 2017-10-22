@@ -106,7 +106,6 @@
       placeholder: String,
       size: String,
       resize: String,
-      icon: String,
       name: String,
       form: String,
       id: String,
@@ -115,7 +114,6 @@
       readonly: Boolean,
       autofocus: Boolean,
       disabled: Boolean,
-      onIconClick: Function,
       type: {
         type: String,
         default: 'text'
@@ -139,7 +137,6 @@
         type: Boolean,
         default: true
       },
-      onIconClick: Function,
       suffixIcon: String,
       prefixIcon: String,
       label: String

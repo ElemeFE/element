@@ -8,7 +8,7 @@
     },
     sizeClass ? 'el-form-item--' + sizeClass : ''
   ]">
-    <label :for="prop" class="el-form-item__label" v-bind:style="labelStyle" v-if="label || $slots.label">
+    <label :for="labelFor" class="el-form-item__label" v-bind:style="labelStyle" v-if="label || $slots.label">
       <slot name="label">{{label + form.labelSuffix}}</slot>
     </label>
     <div class="el-form-item__content" v-bind:style="contentStyle">
@@ -102,6 +102,9 @@
       }
     },
     computed: {
+      labelFor() {
+        return this.for || this.prop;
+      },
       labelStyle() {
         var ret = {};
         if (this.form.labelPosition === 'top') return ret;
@@ -206,6 +209,11 @@
 
           callback(this.validateMessage);
         });
+      },
+      clearValidate() {
+        this.validateState = '';
+        this.validateMessage = '';
+        this.validateDisabled = false;
       },
       resetField() {
         this.validateState = '';
