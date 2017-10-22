@@ -194,6 +194,7 @@ describe('Pagination', () => {
         <el-pagination
           @current-change="handleChange"
           :page-size="10"
+          layout="pager, jumper"
           :total="100" />
       `,
 
@@ -204,24 +205,35 @@ describe('Pagination', () => {
       },
 
       data() {
-        return { page: 1 };
+        return {
+          page: 1,
+          inputer: null
+        };
+      },
+
+      mounted() {
+        this.inputer = this.$children[0].$children[1].$children[0];
       }
     }, true);
-    const input = vm.$el.querySelector('.el-pagination__jump input');
+    const input = vm.inputer;
+    const changeValue = (value) => {
+      input.$emit('input', value);
+      input.setCurrentValue(value);
+      input.$emit('change', value);
+    };
 
-    input.focus();
-    input.value = -1;
-    triggerEvent(input, 'change');
+    changeValue(1);
+
     setTimeout(() => {
       expect(vm.page).to.equal(1);
 
-      input.value = 10000;
-      triggerEvent(input, 'change');
+      changeValue(10000);
+
       setTimeout(() => {
         expect(vm.page).to.equal(10);
 
-        input.value = '我好帅';
-        triggerEvent(input, 'change');
+        changeValue('我好帅');
+
         setTimeout(() => {
           expect(vm.page).to.equal(1);
           done();

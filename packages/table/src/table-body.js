@@ -55,16 +55,74 @@ export default {
                 on-mouseleave={ _ => this.handleMouseLeave() }
                 class={ [this.getRowClass(row, $index)] }>
                 {
-                  this._l(this.columns, (column, cellIndex) =>
-                    <td
-                      class={ [column.id, column.align, column.className || '', columnsHidden[cellIndex] ? 'is-hidden' : '' ] }
-                      on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
-                      on-mouseleave={ this.handleCellMouseLeave }>
-                      {
-                        column.renderCell.call(this._renderProxy, h, { row, column, $index, store: this.store, _self: this.context || this.table.$vnode.context }, columnsHidden[cellIndex])
+                  this._l(this.columns, (column, cellIndex) => {
+                    const { rowspan, colspan } = this.getSpan(row, column, $index, cellIndex);
+                    if (!rowspan || !colspan) {
+                      return '';
+                    } else {
+                      if (rowspan === 1 && colspan === 1) {
+                        return (
+                          <td
+                            class={
+                              [
+                                column.id,
+                                column.align,
+                                column.className || '',
+                                columnsHidden[cellIndex] ? 'is-hidden' : ''
+                              ]
+                            }
+                            on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
+                            on-mouseleave={ this.handleCellMouseLeave }>
+                            {
+                              column.renderCell.call(
+                                this._renderProxy,
+                                h,
+                                {
+                                  row,
+                                  column,
+                                  $index,
+                                  store: this.store,
+                                  _self: this.context || this.table.$vnode.context
+                                },
+                                columnsHidden[cellIndex]
+                              )
+                            }
+                          </td>
+                        );
+                      } else {
+                        return (
+                          <td
+                            class={
+                              [
+                                column.id,
+                                column.align,
+                                column.className || '',
+                                columnsHidden[cellIndex] ? 'is-hidden' : ''
+                              ]
+                            }
+                            rowspan={ rowspan }
+                            colspan={ colspan }
+                            on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
+                            on-mouseleave={ this.handleCellMouseLeave }>
+                            {
+                              column.renderCell.call(
+                                this._renderProxy,
+                                h,
+                                {
+                                  row,
+                                  column,
+                                  $index,
+                                  store: this.store,
+                                  _self: this.context || this.table.$vnode.context
+                                },
+                                columnsHidden[cellIndex]
+                              )
+                            }
+                          </td>
+                        );
                       }
-                    </td>
-                  )
+                    }
+                  })
                 }
                 {
                   !this.fixed && this.layout.scrollY && this.layout.gutterWidth ? <td class="gutter" /> : ''
@@ -78,8 +136,6 @@ export default {
                   </tr>)
                 : ''
               ]
-            ).concat(
-              this._self.$parent.$slots.append
             ).concat(
               <el-tooltip effect={ this.table.tooltipEffect } placement="top" ref="tooltip" content={ this.tooltipContent }></el-tooltip>
             )
@@ -136,6 +192,14 @@ export default {
       return this.store.states.columns.length;
     },
 
+    leftFixedLeafCount() {
+      return this.store.states.fixedLeafColumnsLength;
+    },
+
+    rightFixedLeafCount() {
+      return this.store.states.rightFixedLeafColumnsLength;
+    },
+
     leftFixedCount() {
       return this.store.states.fixedColumns.length;
     },
@@ -170,12 +234,40 @@ export default {
 
     isColumnHidden(index) {
       if (this.fixed === true || this.fixed === 'left') {
-        return index >= this.leftFixedCount;
+        return index >= this.leftFixedLeafCount;
       } else if (this.fixed === 'right') {
-        return index < this.columnsCount - this.rightFixedCount;
+        return index < this.columnsCount - this.rightFixedLeafCount;
       } else {
-        return (index < this.leftFixedCount) || (index >= this.columnsCount - this.rightFixedCount);
+        return (index < this.leftFixedLeafCount) || (index >= this.columnsCount - this.rightFixedLeafCount);
       }
+    },
+
+    getSpan(row, column, rowIndex, columnIndex) {
+      let rowspan = 1;
+      let colspan = 1;
+
+      const fn = this.table.spanMethod;
+      if (typeof fn === 'function') {
+        const result = fn({
+          row,
+          column,
+          rowIndex,
+          columnIndex
+        });
+
+        if (Array.isArray(result)) {
+          rowspan = result[0];
+          colspan = result[1];
+        } else if (typeof result === 'object') {
+          rowspan = result.rowspan;
+          colspan = result.colspan;
+        }
+      }
+
+      return {
+        rowspan,
+        colspan
+      };
     },
 
     getRowStyle(row, index) {
@@ -199,6 +291,10 @@ export default {
         classes.push(rowClassName.call(null, row, index) || '');
       }
 
+      if (this.store.states.expandRows.indexOf(row) > -1) {
+        classes.push('expanded');
+      }
+
       return classes.join(' ');
     },
 
@@ -220,7 +316,7 @@ export default {
 
         this.tooltipContent = cell.innerText;
         tooltip.referenceElm = cell;
-        tooltip.$refs.popper.style.display = 'none';
+        tooltip.$refs.popper && (tooltip.$refs.popper.style.display = 'none');
         tooltip.doDestroy();
         tooltip.setExpectedState(true);
         this.activateTooltip(tooltip);

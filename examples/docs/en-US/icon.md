@@ -12,7 +12,6 @@
 
 <style>
   .demo-icon .source > i {
-    font-size: 24px;
     color: #8492a6;
     margin: 0 20px;
     font-size: 1.5em;
@@ -23,7 +22,7 @@
     margin: 0 20px;
   }
 
-  .icon-list {
+  .page-component .content > ul.icon-list {
     overflow: hidden;
     list-style: none;
     padding: 0;
@@ -80,7 +79,7 @@ Just assign the class name to `el-icon-iconName`.
 <i class="el-icon-edit"></i>
 <i class="el-icon-share"></i>
 <i class="el-icon-delete"></i>
-<el-button type="primary" icon="search">Search</el-button>
+<el-button type="primary" icon="el-icon-search">Search</el-button>
 
 ```
 :::

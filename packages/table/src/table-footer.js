@@ -23,7 +23,7 @@ export default {
         sums[index] = values.reduce((prev, curr) => {
           const value = Number(curr);
           if (!isNaN(value)) {
-            return parseFloat((prev + curr).toFixed(precision));
+            return parseFloat((prev + curr).toFixed(Math.min(precision, 20)));
           } else {
             return prev;
           }
@@ -53,7 +53,7 @@ export default {
               : ''
           }
         </colgroup>
-        <tbody>
+        <tbody class={ [{ 'has-gutter': this.hasGutter }] }>
           <tr>
           {
             this._l(this.columns, (column, cellIndex) =>
@@ -70,7 +70,7 @@ export default {
             )
           }
           {
-            !this.fixed && this.layout.gutterWidth
+            this.hasGutter
               ? <td class="gutter" style={{ width: this.layout.scrollY ? this.layout.gutterWidth + 'px' : '0' }}></td>
               : ''
           }
@@ -121,6 +121,10 @@ export default {
 
     columns() {
       return this.store.states.columns;
+    },
+
+    hasGutter() {
+      return !this.fixed && this.layout.gutterWidth;
     }
   },
 

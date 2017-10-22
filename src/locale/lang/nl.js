@@ -16,7 +16,7 @@ export default {
       startTime: 'Starttijd',
       endDate: 'Einddatum',
       endTime: 'Eindtijd',
-      year: 'Jaar',
+      year: '',
       month1: 'januari',
       month2: 'februari',
       month3: 'maart',
@@ -78,6 +78,7 @@ export default {
       error: 'Ongeldige invoer'
     },
     upload: {
+      deleteTip: 'press delete to remove', // to be translated
       delete: 'Verwijder',
       preview: 'Voorbeeld',
       continue: 'Doorgaan'

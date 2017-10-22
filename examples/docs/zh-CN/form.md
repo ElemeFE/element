@@ -156,10 +156,10 @@
 <style>
   .demo-form.demo-zh-CN {
     .el-select .el-input {
-      width: 360px;
+      width: 380px;
     }
     .el-form {
-      width: 440px;
+      width: 460px;
     }
 
     .line {
@@ -196,7 +196,7 @@
       }
     }
     .demo-form-normal {
-      width: 440px;
+      width: 460px;
     }
     .demo-form-inline {
       width: auto;
@@ -258,7 +258,7 @@
     </el-col>
   </el-form-item>
   <el-form-item label="即时配送">
-    <el-switch on-text="" off-text="" v-model="form.delivery"></el-switch>
+    <el-switch v-model="form.delivery"></el-switch>
   </el-form-item>
   <el-form-item label="活动性质">
     <el-checkbox-group v-model="form.type">
@@ -277,7 +277,7 @@
   <el-form-item label="活动形式">
     <el-input type="textarea" v-model="form.desc"></el-input>
   </el-form-item>
-  <el-form-item label-width="80px">
+  <el-form-item>
     <el-button type="primary" @click="onSubmit">立即创建</el-button>
     <el-button>取消</el-button>
   </el-form-item>
@@ -417,7 +417,7 @@
     </el-col>
   </el-form-item>
   <el-form-item label="即时配送" prop="delivery">
-    <el-switch on-text="" off-text="" v-model="ruleForm.delivery"></el-switch>
+    <el-switch v-model="ruleForm.delivery"></el-switch>
   </el-form-item>
   <el-form-item label="活动性质" prop="type">
     <el-checkbox-group v-model="ruleForm.type">
@@ -436,7 +436,7 @@
   <el-form-item label="活动形式" prop="desc">
     <el-input type="textarea" v-model="ruleForm.desc"></el-input>
   </el-form-item>
-  <el-form-item label-width="100px">
+  <el-form-item>
     <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
     <el-button @click="resetForm('ruleForm')">重置</el-button>
   </el-form-item>
@@ -503,9 +503,11 @@
 
 ### 自定义校验规则
 
-::: demo 这个例子中展示了如何使用自定义验证规则来完成密码的二次验证
+这个例子中展示了如何使用自定义验证规则来完成密码的二次验证。
+
+::: demo 本例还使用`status-icon`属性为输入框添加了表示校验结果的反馈图标。
 ```html
-<el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
+<el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
   <el-form-item label="密码" prop="pass">
     <el-input type="password" v-model="ruleForm2.pass" auto-complete="off"></el-input>
   </el-form-item>
@@ -515,7 +517,7 @@
   <el-form-item label="年龄" prop="age">
     <el-input v-model.number="ruleForm2.age"></el-input>
   </el-form-item>
-  <el-form-item label-width="100px">
+  <el-form-item>
     <el-button type="primary" @click="submitForm('ruleForm2')">提交</el-button>
     <el-button @click="resetForm('ruleForm2')">重置</el-button>
   </el-form-item>
@@ -623,7 +625,7 @@
   >
     <el-input v-model="domain.value"></el-input><el-button @click.prevent="removeDomain(domain)">删除</el-button>
   </el-form-item>
-  <el-form-item label-width="100px">
+  <el-form-item>
     <el-button type="primary" @click="submitForm('dynamicValidateForm')">提交</el-button>
     <el-button @click="addDomain">新增域名</el-button>
     <el-button @click="resetForm('dynamicValidateForm')">重置</el-button>
@@ -688,7 +690,7 @@
   >
     <el-input type="age" v-model.number="numberValidateForm.age" auto-complete="off"></el-input>
   </el-form-item>
-  <el-form-item label-width="100px">
+  <el-form-item>
     <el-button type="primary" @click="submitForm('numberValidateForm')">提交</el-button>
     <el-button @click="resetForm('numberValidateForm')">重置</el-button>
   </el-form-item>
@@ -723,7 +725,53 @@
 :::
 
 :::tip
-当 `el-form-item` 的 `label` 属性为空时，如果希望和其他 `label` 属性不为空的表单项内容对齐，请在 `el-form-item` 上设置 `label-width` 属性。
+嵌套在 `el-form-item` 中的 `el-form-item` 标签宽度默认为零，不会继承 `el-form` 的 `label-width`。如果需要可以为其单独设置 `label-width` 属性。
+:::
+
+### 表单内组件尺寸控制
+
+通过设置 Form 上的 `size` 属性可以使该表单内所有可调节大小的组件继承该尺寸。Form-Item 也具有该属性。
+
+::: demo 如果希望某个表单项或某个表单组件的尺寸不同于 Form 上的`size`属性，直接为这个表单项或表单组件设置自己的`size`即可。
+```html
+<el-form ref="form" :model="form" label-width="80px" size="mini">
+  <el-form-item label="活动名称">
+    <el-input v-model="form.name"></el-input>
+  </el-form-item>
+  <el-form-item label="活动区域">
+    <el-select v-model="form.region" placeholder="请选择活动区域">
+      <el-option label="区域一" value="shanghai"></el-option>
+      <el-option label="区域二" value="beijing"></el-option>
+    </el-select>
+  </el-form-item>
+  <el-form-item label="活动时间">
+    <el-col :span="11">
+      <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
+    </el-col>
+    <el-col class="line" :span="2">-</el-col>
+    <el-col :span="11">
+      <el-time-picker type="fixed-time" placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>
+    </el-col>
+  </el-form-item>
+  <el-form-item label="活动性质">
+    <el-checkbox-group v-model="form.type">
+      <el-checkbox-button label="美食/餐厅线上活动" name="type"></el-checkbox-button>
+      <el-checkbox-button label="地推活动" name="type"></el-checkbox-button>
+      <el-checkbox-button label="线下主题活动" name="type"></el-checkbox-button>
+    </el-checkbox-group>
+  </el-form-item>
+  <el-form-item label="特殊资源">
+    <el-radio-group v-model="form.resource" size="medium">
+      <el-radio border label="线上品牌商赞助"></el-radio>
+      <el-radio border label="线下场地免费"></el-radio>
+    </el-radio-group>
+  </el-form-item>
+  <el-form-item size="large">
+    <el-button type="primary" @click="onSubmit">立即创建</el-button>
+    <el-button>取消</el-button>
+  </el-form-item>
+</el-form>
+```
 :::
 
 ### Form Attributes
@@ -734,15 +782,18 @@
 | rules    | 表单验证规则 | object | — | — |
 | inline    | 行内表单模式 | boolean | — | false |
 | label-position | 表单域标签的位置 | string |  right/left/top            | right |
-| label-width | 表单域标签的宽度，所有的 form-item 都会继承 form 组件的 labelWidth 的值 | string | — | — |
+| label-width | 表单域标签的宽度，作为 Form 直接子元素的 form-item 会继承该值 | string | — | — |
 | label-suffix | 表单域标签的后缀 | string | — | — |
 | show-message  | 是否显示校验错误信息 | boolean | — | true |
+| inline-message  | 是否以行内形式展示校验信息 | boolean | — | false |
+| status-icon  | 是否在输入框中显示校验结果反馈图标 | boolean | — | false |
+| size  | 用于控制该表单内组件的尺寸 | string | medium / small / mini | - |
 
 ### Form Methods
 
 | 方法名      | 说明          | 参数
 |---------- |-------------- | --------------
-| validate | 对整个表单进行校验的方法 | Function(callback: Function(boolean))
+| validate | 对整个表单进行校验的方法。若不传入回调函数，则会返回一个 promise | Function(callback: Function(boolean))
 | validateField | 对部分表单字段进行校验的方法 | Function(prop: string, callback: Function(errorMessage: string))
 | resetFields | 对整个表单进行重置，将所有字段值重置为初始值并移除校验结果 | -
 
@@ -757,9 +808,17 @@
 | rules    | 表单验证规则 | object | — | — |
 | error    | 表单域验证错误信息, 设置该值会使表单验证状态变为`error`，并显示该错误信息 | string | — | — |
 | show-message  | 是否显示校验错误信息 | boolean | — | true |
+| inline-message  | 以行内形式展示校验信息 | boolean | — | false |
+| size  | 用于控制该表单域下组件的尺寸 | string | medium / small / mini | - |
 
 ### Form-Item Slot
 | name | 说明 |
 |------|--------|
 | — | Form Item 的内容 |
 | label | 标签文本的内容 |
+
+### Form-Item Methods
+
+| 方法名      | 说明          | 参数
+|---------- |-------------- | --------------
+| resetField | 对该表单项进行重置，将其值重置为初始值并移除校验结果 | -

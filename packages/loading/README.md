@@ -13,7 +13,7 @@ npm i element-loading -D
 ```javascript
 import Vue from 'vue'
 import ElLoading from 'element-loading'
-import 'element-theme-default/dist/loading.css'
+import 'element-theme-chalk/dist/loading.css'
 
 Vue.use(ElLoading)
 ```

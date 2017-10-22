@@ -16,6 +16,7 @@
 
 <script>
   import TreeStore from './model/tree-store';
+  import ElTreeNode from './tree-node.vue';
   import {t} from 'element-ui/src/locale';
   import emitter from 'element-ui/src/mixins/emitter';
 
@@ -25,7 +26,7 @@
     mixins: [emitter],
 
     components: {
-      ElTreeNode: require('./tree-node.vue')
+      ElTreeNode
     },
 
     data() {
@@ -52,6 +53,10 @@
       expandOnClickNode: {
         type: Boolean,
         default: true
+      },
+      checkDescendants: {
+        type: Boolean,
+        default: false
       },
       autoExpandParent: {
         type: Boolean,
@@ -84,7 +89,7 @@
       accordion: Boolean,
       indent: {
         type: Number,
-        default: 16
+        default: 18
       }
     },
 
@@ -180,6 +185,7 @@
         load: this.load,
         currentNodeKey: this.currentNodeKey,
         checkStrictly: this.checkStrictly,
+        checkDescendants: this.checkDescendants,
         defaultCheckedKeys: this.defaultCheckedKeys,
         defaultExpandedKeys: this.defaultExpandedKeys,
         autoExpandParent: this.autoExpandParent,

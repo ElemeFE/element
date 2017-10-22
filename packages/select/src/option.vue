@@ -7,7 +7,7 @@
     :class="{
       'selected': itemSelected,
       'is-disabled': disabled || groupDisabled || limitReached,
-      'hover': parent.hoverIndex === index
+      'hover': hover
     }">
     <slot>
       <span>{{ currentLabel }}</span>
@@ -26,6 +26,8 @@
 
     componentName: 'ElOption',
 
+    inject: ['select'],
+
     props: {
       value: {
         required: true
@@ -43,14 +45,14 @@
         index: -1,
         groupDisabled: false,
         visible: true,
-        hitState: false
+        hitState: false,
+        hover: false
       };
     },
 
     computed: {
       isObject() {
-        const type = typeof this.value;
-        return type !== 'string' && type !== 'number' && type !== 'boolean';
+        return Object.prototype.toString.call(this.value).toLowerCase() === '[object object]';
       },
 
       currentLabel() {
@@ -61,27 +63,19 @@
         return this.value || this.label || '';
       },
 
-      parent() {
-        let result = this.$parent;
-        while (!result.isSelect) {
-          result = result.$parent;
-        }
-        return result;
-      },
-
       itemSelected() {
-        if (!this.parent.multiple) {
-          return this.isEqual(this.value, this.parent.value);
+        if (!this.select.multiple) {
+          return this.isEqual(this.value, this.select.value);
         } else {
-          return this.contains(this.parent.value, this.value);
+          return this.contains(this.select.value, this.value);
         }
       },
 
       limitReached() {
-        if (this.parent.multiple) {
+        if (this.select.multiple) {
           return !this.itemSelected &&
-            this.parent.value.length >= this.parent.multipleLimit &&
-            this.parent.multipleLimit > 0;
+            this.select.value.length >= this.select.multipleLimit &&
+            this.select.multipleLimit > 0;
         } else {
           return false;
         }
@@ -90,10 +84,10 @@
 
     watch: {
       currentLabel() {
-        if (!this.created && !this.parent.remote) this.dispatch('ElSelect', 'setSelected');
+        if (!this.created && !this.select.remote) this.dispatch('ElSelect', 'setSelected');
       },
       value() {
-        if (!this.created && !this.parent.remote) this.dispatch('ElSelect', 'setSelected');
+        if (!this.created && !this.select.remote) this.dispatch('ElSelect', 'setSelected');
       }
     },
 
@@ -102,7 +96,7 @@
         if (!this.isObject) {
           return a === b;
         } else {
-          const valueKey = this.parent.valueKey;
+          const valueKey = this.select.valueKey;
           return getValueByPath(a, valueKey) === getValueByPath(b, valueKey);
         }
       },
@@ -111,7 +105,7 @@
         if (!this.isObject) {
           return arr.indexOf(target) > -1;
         } else {
-          const valueKey = this.parent.valueKey;
+          const valueKey = this.select.valueKey;
           return arr.some(item => {
             return getValueByPath(item, valueKey) === getValueByPath(target, valueKey);
           });
@@ -124,7 +118,7 @@
 
       hoverItem() {
         if (!this.disabled && !this.groupDisabled) {
-          this.parent.hoverIndex = this.parent.options.indexOf(this);
+          this.select.hoverIndex = this.select.options.indexOf(this);
         }
       },
 
@@ -139,31 +133,23 @@
         let parsedQuery = String(query).replace(/(\^|\(|\)|\[|\]|\$|\*|\+|\.|\?|\\|\{|\}|\|)/g, '\\$1');
         this.visible = new RegExp(parsedQuery, 'i').test(this.currentLabel) || this.created;
         if (!this.visible) {
-          this.parent.filteredOptionsCount--;
+          this.select.filteredOptionsCount--;
         }
-      },
-
-      resetIndex() {
-        this.$nextTick(() => {
-          this.index = this.parent.options.indexOf(this);
-        });
       }
     },
 
     created() {
-      this.parent.options.push(this);
-      this.parent.cachedOptions.push(this);
-      this.parent.optionsCount++;
-      this.parent.filteredOptionsCount++;
-      this.index = this.parent.options.indexOf(this);
+      this.select.options.push(this);
+      this.select.cachedOptions.push(this);
+      this.select.optionsCount++;
+      this.select.filteredOptionsCount++;
 
       this.$on('queryChange', this.queryChange);
       this.$on('handleGroupDisabled', this.handleGroupDisabled);
-      this.$on('resetIndex', this.resetIndex);
     },
 
     beforeDestroy() {
-      this.dispatch('ElSelect', 'onOptionDestroy', this);
+      this.select.onOptionDestroy(this.select.options.indexOf(this));
     }
   };
 </script>

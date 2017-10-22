@@ -21,14 +21,15 @@ export const orderBy = function(array, sortKey, reverse, sortMethod) {
   if (typeof reverse === 'string') {
     reverse = reverse === 'descending' ? -1 : 1;
   }
-  if (!sortKey) {
+  if (!sortKey && !sortMethod) {
     return array;
   }
   const order = (reverse && reverse < 0) ? -1 : 1;
 
   // sort on a copy to avoid mutating original array
   return array.slice().sort(sortMethod ? function(a, b) {
-    return sortMethod(a, b) ? order : -order;
+    const result = sortMethod(a, b);
+    return result === 0 ? 0 : result > 0 ? order : -order;
   } : function(a, b) {
     if (sortKey !== '$key') {
       if (isObject(a) && '$value' in a) a = a.$value;

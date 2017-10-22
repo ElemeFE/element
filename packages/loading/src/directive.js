@@ -1,15 +1,16 @@
 import Vue from 'vue';
+import Loading from './loading.vue';
 import { addClass, removeClass, getStyle } from 'element-ui/src/utils/dom';
-let Mask = Vue.extend(require('./loading.vue'));
+const Mask = Vue.extend(Loading);
 
 exports.install = Vue => {
   if (Vue.prototype.$isServer) return;
-  let toggleLoading = (el, binding) => {
+  const toggleLoading = (el, binding) => {
     if (binding.value) {
       Vue.nextTick(() => {
         if (binding.modifiers.fullscreen) {
-          el.originalPosition = document.body.style.position;
-          el.originalOverflow = document.body.style.overflow;
+          el.originalPosition = getStyle(document.body, 'position');
+          el.originalOverflow = getStyle(document.body, 'overflow');
 
           addClass(el.mask, 'is-fullscreen');
           insertDom(document.body, el, binding);
@@ -17,10 +18,10 @@ exports.install = Vue => {
           removeClass(el.mask, 'is-fullscreen');
 
           if (binding.modifiers.body) {
-            el.originalPosition = document.body.style.position;
+            el.originalPosition = getStyle(document.body, 'position');
 
             ['top', 'left'].forEach(property => {
-              let scroll = property === 'top' ? 'scrollTop' : 'scrollLeft';
+              const scroll = property === 'top' ? 'scrollTop' : 'scrollLeft';
               el.maskStyle[property] = el.getBoundingClientRect()[property] + document.body[scroll] + document.documentElement[scroll] + 'px';
             });
             ['height', 'width'].forEach(property => {
@@ -29,7 +30,7 @@ exports.install = Vue => {
 
             insertDom(document.body, el, binding);
           } else {
-            el.originalPosition = el.style.position;
+            el.originalPosition = getStyle(el, 'position');
             insertDom(el, el, binding);
           }
         }
@@ -51,13 +52,13 @@ exports.install = Vue => {
       }
     }
   };
-  let insertDom = (parent, el, binding) => {
+  const insertDom = (parent, el, binding) => {
     if (!el.domVisible && getStyle(el, 'display') !== 'none' && getStyle(el, 'visibility') !== 'hidden') {
       Object.keys(el.maskStyle).forEach(property => {
         el.mask.style[property] = el.maskStyle[property];
       });
 
-      if (el.originalPosition !== 'absolute') {
+      if (el.originalPosition !== 'absolute' && el.originalPosition !== 'fixed') {
         parent.style.position = 'relative';
       }
       if (binding.modifiers.fullscreen && binding.modifiers.lock) {
@@ -74,11 +75,17 @@ exports.install = Vue => {
   };
 
   Vue.directive('loading', {
-    bind: function(el, binding) {
-      let mask = new Mask({
+    bind: function(el, binding, vnode) {
+      const textExr = el.getAttribute('element-loading-text');
+      const spinnerExr = el.getAttribute('element-loading-spinner');
+      const backgroundExr = el.getAttribute('element-loading-background');
+      const vm = vnode.context;
+      const mask = new Mask({
         el: document.createElement('div'),
         data: {
-          text: el.getAttribute('element-loading-text'),
+          text: vm && vm[textExr] || textExr,
+          spinner: vm && vm[spinnerExr] || spinnerExr,
+          background: vm && vm[backgroundExr] || backgroundExr,
           fullscreen: !!binding.modifiers.fullscreen
         }
       });
@@ -98,13 +105,9 @@ exports.install = Vue => {
 
     unbind: function(el, binding) {
       if (el.domInserted) {
-        if (binding.modifiers.fullscreen || binding.modifiers.body) {
-          document.body.removeChild(el.mask);
-        } else {
-          el.mask &&
-          el.mask.parentNode &&
-          el.mask.parentNode.removeChild(el.mask);
-        }
+        el.mask &&
+        el.mask.parentNode &&
+        el.mask.parentNode.removeChild(el.mask);
       }
     }
   });

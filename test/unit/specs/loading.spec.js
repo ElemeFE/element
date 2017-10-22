@@ -184,7 +184,7 @@ describe('Loading', () => {
       expect(loadingInstance.visible).to.false;
     });
 
-    it('target', () => {
+    it('target', done => {
       vm = createVue({
         template: `
         <div class="loading-container"></div>
@@ -192,8 +192,14 @@ describe('Loading', () => {
       }, true);
       loadingInstance = Loading({ target: '.loading-container' });
       let mask = document.querySelector('.el-loading-mask');
+      let container = document.querySelector('.loading-container');
       expect(mask).to.exist;
-      expect(mask.parentNode).to.equal(document.querySelector('.loading-container'));
+      expect(mask.parentNode).to.equal(container);
+      loadingInstance.close();
+      setTimeout(() => {
+        expect(container.style.position).to.equal('relative');
+        done();
+      }, 200);
     });
 
     it('body', () => {

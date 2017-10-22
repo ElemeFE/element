@@ -78,6 +78,7 @@ export default {
       error: '올바르지 않은 입력'
     },
     upload: {
+      deleteTip: 'press delete to remove', // to be translated
       delete: '삭제',
       preview: '미리보기',
       continue: '계속하기'
