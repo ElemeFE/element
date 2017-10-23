@@ -2,6 +2,29 @@
   .page-resource {
     padding-top: 55px;
     box-sizing: border-box;
+    
+    .resource-placeholder {
+      margin: 50px auto 0;
+      text-align: center;
+      
+      img {
+        width: 150px;
+      }
+      
+      h4 {
+        margin: 20px 0 16px;
+        font-size: 16px;
+        color: #1f2f3d;
+        line-height: 1;
+      }
+      
+      p {
+        margin: 0;
+        font-size: 14px;
+        color: #99a9bf;
+        line-height: 1;
+      }
+    }
   }
   .cards {
     margin: 35px auto 110px;
@@ -98,7 +121,13 @@
 <template>
   <div class="page-container page-resource">
     <h2><%= 1 ></h2>
-    <p><%= 2 ></p>
+    <div class="resource-placeholder">
+      <img src="~examples/assets/images/resource-placeholder.svg" alt="">
+      <h4><%= placeholder1 ></h4>
+      <p><%= placeholder2 ></p>
+    </div>
+    
+    <!--<p><%= 2 ></p>-->
     <!--<div class="cards">-->
       <!--<ul class="container">-->
         <!--<li>-->

@@ -4,14 +4,10 @@
     "pages": {
       "index": {
         "lang": "zh-CN",
-        "titleSize": "46",
-        "theatreSize": "46",
-        "paraHeight": "1.8",
-        "theatreParam": "",
-        "typingFunc": ".addScene('产品设计师', 1800, -5, 800)\n          .addScene('交互设计师', 1800, -5, 500)\n          .addScene('视觉设计师', 1800, -5, 700)\n          .addScene('产品经理', 1800, -4, 600)\n          .addScene('前端工程师', 1800, -5, 800)",
-        "typingInvoke": ".addActor('line2', { speed: 0.5, accuracy: 1 })\n        .addScene(2600)\n        .addScene('line2:只为守护世界和平', 300, -6, 1000)\n        .addScene('让你少加班', 300, -5)\n        .addScene('line2:只为这样的你: ', 400)",
+        "titleSize": "34",
+        "paraSize": "20",
         "1": "网站快速成型工具",
-        "2": "Element，一套为开发者、设计师和产品经理准备的基于 Vue 2.0 的组件库，提供了配套设计资源，帮助你的网站快速成型。",
+        "2": "Element，一套为开发者、设计师和产品经理准备的基于 Vue 2.0 的桌面端组件库",
         "3": "指南",
         "4": "了解设计指南，帮助产品设计人员搭建逻辑清晰、结构合理且高效易用的产品。",
         "5": "查看详情",
@@ -81,6 +77,8 @@
       },
       "resource": {
         "paraHeight": "1.8",
+        "placeholder1": "整理中",
+        "placeholder2": "设计资源正在整理和完善中",
         "1": "资源",
         "2": "整理中",
         "3": "Axure Components",
@@ -98,9 +96,8 @@
     "pages": {
       "index": {
         "lang": "en-US",
-        "titleSize": "50",
-        "theatreSize": "42",
-        "paraHeight": "1.6",
+        "titleSize": "34",
+        "paraSize": "20",
         "theatreParam": "{ maxSpeed: 100 }",
         "typingFunc": ".addScene('product designers', 1800, -17, 800)\n          .addScene('UI designers', 1800, -12, 800)\n          .addScene('UX designers', 1800, -12, 800)\n          .addScene('product managers', 1800, -16, 800)\n          .addScene('FE developers', 1800, -13, 800)",
         "typingInvoke": ".addActor('line2', { speed: 1, accuracy: 1 })\n        .addScene(2600)\n        .addScene('line2:For ', 500)",
@@ -175,6 +172,8 @@
       },
       "resource": {
         "paraHeight": "1.6",
+        "placeholder1": "Under construction",
+        "placeholder2": "Please wait while we prepare the design resources",
         "1": "Resource",
         "2": "Under construction.",
         "3": "Axure Components",

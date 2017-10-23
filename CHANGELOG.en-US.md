@@ -39,7 +39,7 @@
 #### Breaking changes
 - Switch
   - Attributes starting with `on-*` will be parsed to events in JSX, making all `on-*` attributes of Switch not
-able to work in JSX. So `on-*` attributes are renamed to `active-*`, and accordingly `off-*` attributes are renamed to `inactive-*`. This changes affects the following attributes: `on-icon-class`, `off-icon-class`, `on-text`, `off-text`, `on-color`, `off-color`, `on-value`, `off-value`
+able to work in JSX. So `on-*` attributes are renamed to `active-*`, and accordingly `off-*` attributes are renamed to `inactive-*`. This change affects the following attributes: `on-icon-class`, `off-icon-class`, `on-text`, `off-text`, `on-color`, `off-color`, `on-value`, `off-value`
 - Table
   - `sort-method` now aligns with `Array.sort`. It should return a number instead of a boolean
 

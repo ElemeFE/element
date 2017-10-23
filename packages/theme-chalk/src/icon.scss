@@ -1,7 +1,9 @@
+@import "common/var";
+
 @font-face {
   font-family: 'element-icons';
-  src: url('fonts/element-icons.woff?t=1508313898411') format('woff'), /* chrome, firefox */
-       url('fonts/element-icons.ttf?t=1508313898411') format('truetype'); /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  src: url('#{$--font-path}/element-icons.woff?t=1508751886602') format('woff'), /* chrome, firefox */
+       url('#{$--font-path}/element-icons.ttf?t=1508751886602') format('truetype'); /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
   font-weight: normal;
   font-style: normal
 }
@@ -107,7 +109,9 @@
 
 .el-icon-news:before { content: "\e625"; }
 
-.el-icon-more:before { content: "\e626"; }
+.el-icon-more:before { content: "\e646"; }
+
+.el-icon-more-outline:before { content: "\e626"; }
 
 .el-icon-phone:before { content: "\e627"; }
 
