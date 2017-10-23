@@ -393,6 +393,7 @@ The corresponding methods are: `MessageBox`, `MessageBox.alert`, `MessageBox.con
 | closeOnHashChange | whether to close MessageBox when hash changes | boolean | — | true |
 | showInput | whether to show an input | boolean | — | false (true when called with prompt) |
 | inputPlaceholder | placeholder of input | string | — | — |
+| inputType | type of input | string | — | text |
 | inputValue | initial value of input | string | — | — |
 | inputPattern | regexp for the input | regexp | — | — |
 | inputValidator | validation function for the input. Should returns a boolean or string. If a string is returned, it will be assigned to inputErrorMessage | function | — | — |

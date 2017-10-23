@@ -134,6 +134,7 @@
     .el-input__inner {
       height: $--transfer-filter-height;
       width: 100%;
+      font-size: 12px;
       display: inline-block;
       box-sizing: border-box;
       border-radius: #{$--transfer-filter-height / 2};

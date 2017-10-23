@@ -11,6 +11,7 @@ const defaults = {
   closeOnHashChange: true,
   inputValue: null,
   inputPlaceholder: '',
+  inputType: 'text',
   inputPattern: null,
   inputValidator: null,
   inputErrorMessage: '',

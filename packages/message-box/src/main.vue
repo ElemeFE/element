@@ -36,6 +36,7 @@
           <div class="el-message-box__input" v-show="showInput">
             <el-input
               v-model="inputValue"
+              :type="inputType"
               @compositionstart.native="handleComposition"
               @compositionupdate.native="handleComposition"
               @compositionend.native="handleComposition"
@@ -307,6 +308,7 @@
         showInput: false,
         inputValue: null,
         inputPlaceholder: '',
+        inputType: 'text',
         inputPattern: null,
         inputValidator: null,
         inputErrorMessage: '',

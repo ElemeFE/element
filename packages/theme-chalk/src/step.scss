@@ -118,7 +118,7 @@
   }
 
   @include e(title) {
-    font-size: 15px;
+    font-size: 16px;
     line-height: 38px;
 
     @include when(process) {

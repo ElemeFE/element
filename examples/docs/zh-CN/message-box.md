@@ -391,6 +391,7 @@ import { MessageBox } from 'element-ui';
 | closeOnHashChange | 是否在 hashchange 时关闭 MessageBox | boolean | — | true |
 | showInput | 是否显示输入框 | boolean | — | false（以 prompt 方式调用时为 true）|
 | inputPlaceholder | 输入框的占位符 | string | — | — |
+| inputType | 输入框的类型 | string | — | text |
 | inputValue | 输入框的初始文本 | string | — | — |
 | inputPattern | 输入框的校验表达式 | regexp | — | — |
 | inputValidator | 输入框的校验函数。可以返回布尔值或字符串，若返回一个字符串, 则返回结果会被赋值给 inputErrorMessage | function | — | — |
