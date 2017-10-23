@@ -86,10 +86,10 @@
 
   let messageBox;
   let typeMap = {
-    success: 'circle-check',
-    info: 'information',
+    success: 'success',
+    info: 'info',
     warning: 'warning',
-    error: 'circle-cross'
+    error: 'error'
   };
 
   export default {

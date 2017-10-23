@@ -106,11 +106,11 @@
       padding-right: 12px;
     }
 
-    &.el-icon-circle-check {
+    &.el-icon-success {
       color: $--msgbox-success-color;
     }
 
-    &.el-icon-information {
+    &.el-icon-info {
       color: $--msgbox-info-color;
     }
 
@@ -118,7 +118,7 @@
       color: $--msgbox-warning-color;
     }
 
-    &.el-icon-circle-cross {
+    &.el-icon-error {
       color: $--msgbox-danger-color;
     }
   }
