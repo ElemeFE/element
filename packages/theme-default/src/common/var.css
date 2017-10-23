@@ -400,6 +400,7 @@
   --switch-width: 46px;
   --switch-height: 22px;
   --switch-button-size: 16px;
+  --switch-focus-border: var(--color-primary);
 
   /* Dialog
  -------------------------- */
