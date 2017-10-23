@@ -106,7 +106,7 @@
     background-color: var(--color-dark-white);
     overflow: auto;
   }
-  
+
   .el-picker-panel *[slot=sidebar] + .el-picker-panel__body,
   .el-picker-panel__sidebar + .el-picker-panel__body {
     margin-left: 110px;
