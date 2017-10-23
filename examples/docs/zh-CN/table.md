@@ -1,6 +1,30 @@
 <script>
   export default {
     data() {
+      let tableData7 = []
+      for (let i = 0; i < 8; ++i) {
+        tableData7 = tableData7.concat([{
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄',
+          tag: '家'
+        }, {
+          date: '2016-05-04',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1517 弄',
+          tag: '公司'
+        }, {
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1519 弄',
+          tag: '家'
+        }, {
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1516 弄',
+          tag: '公司'
+        }])
+      }
       return {
         tableData: [{
           date: '2016-05-03',
@@ -225,8 +249,27 @@
           amount2: '4.1',
           amount3: 15
         }],
+        tableData7: tableData7,
+        tableData8: [],
         currentRow: null,
-        multipleSelection: []
+        multipleSelection: [],
+        pagination: {
+          pageSizes: [10, 20, 50],
+          pageSize: 10,
+          layout: 'total, sizes, prev, pager, next',
+          currentChange: this.pageCurrentChange,
+          sizeChange: this.pageSizeChange
+        },
+        pagination2: {
+          pageSizes: [10, 20, 50],
+          pageSize: 10,
+          total: 0,
+          currentPage: 1,
+          layout: 'total, sizes, prev, pager, next',
+          currentChange: this.handlePageCurrentChange,
+          sizeChange: this.pageSizeChange
+        },
+        loading: false
       };
     },
 
@@ -335,6 +378,46 @@
             };
           }
         }
+      },
+
+      pageSizeChange(size) {
+        console.log('pageSizeChange, size:', size)
+      },
+
+      pageCurrentChange(current) {
+        console.log('pageCurrentChange, current:', current)
+      },
+
+      filterGender(value, row) {
+        return row.gender === value;
+      },
+
+      handlePageCurrentChange(current) {
+        this.pagination2.currentPage = current
+        this.fetchData({
+          results: this.pagination2.pageSize,
+          page: current
+        })
+      },
+
+      fetchData(params) {
+        this.loading = true;
+        if (!params) {
+          params = {
+            results: 10,
+            page: 1
+          }
+        }
+        const url = 'https://randomuser.me/api' + '?results=' + params.results + '&page=' + params.page;
+        fetch(url, {
+          method: 'get'
+        }).then(res => {
+          return res.json()
+        }).then(data => {
+          this.pagination2.total = 200;
+          this.loading = false;
+          this.tableData8 = data.results;
+        })
       }
     },
 
@@ -342,7 +425,11 @@
       multipleSelection(val) {
         console.log('selection: ', val);
       }
-    }
+    },
+
+    mounted() {
+      this.fetchData()
+    },
   };
 </script>
 
@@ -1442,6 +1529,204 @@
 ```
 :::
 
+### 分页
+
+内置分页器的表格，支持对排序/筛选后的结果分页。
+
+:::demo 通过设置Table 组件的 `pagination` 属性开启分页，设为`true`启用表格默认分页效果，支持传入`pagination`对象，详细参数参见`ElPagination`，其中原事件`current-change`及`size-change`分别对应属性`currentChange`及`sizeChange`。
+```html
+<template>
+  <el-table
+    :data="tableData7"
+    :pagination="pagination"
+    border
+    style="width: 100%">
+    <el-table-column
+      prop="date"
+      label="日期"
+      sortable
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="name"
+      label="姓名"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="address"
+      label="地址"
+      :formatter="formatter">
+    </el-table-column>
+    <el-table-column
+      prop="tag"
+      label="标签"
+      width="100"
+      :filters="[{ text: '家', value: '家' }, { text: '公司', value: '公司' }]"
+      :filter-method="filterTag"
+      filter-placement="bottom-end">
+      <template scope="scope">
+        <el-tag
+          :type="scope.row.tag === '家' ? 'primary' : 'success'"
+          close-transition>{{scope.row.tag}}</el-tag>
+      </template>
+    </el-table-column>
+  </el-table>
+</template>
+
+<script>
+  export default {
+    data() {
+      let tableData7 = []
+      for (let i = 0; i < 8; ++i) {
+        tableData7 = tableData7.concat([{
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄',
+          tag: '家'
+        }, {
+          date: '2016-05-04',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1517 弄',
+          tag: '公司'
+        }, {
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1519 弄',
+          tag: '家'
+        }, {
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1516 弄',
+          tag: '公司'
+        }])
+      }
+      return {
+        tableData7: tableData7,
+        pagination: {
+          pageSizes: [10, 20, 50],
+          pageSize: 10,
+          layout: 'total, sizes, prev, pager, next',
+          currentChange: this.pageCurrentChange,
+          sizeChange: this.pageSizeChange
+        }
+      }
+    },
+    methods: {
+      formatter(row, column) {
+        return row.address;
+      },
+      filterTag(value, row) {
+        return row.tag === value;
+      }
+    }
+  }
+</script>
+```
+:::
+
+### 远程加载数据
+
+通过简单的 ajax 读取方式，演示如何从服务端读取并展现数据，具有筛选、排序等功能以及页面 loading 效果。开发者可以自行接入其他数据处理方式。
+
+:::demo 这个例子通过简单的 ajax 读取方式，演示了如何从服务端读取并展现数据，具有筛选、排序等功能以及页面 loading 效果。开发者可以自行接入其他数据处理方式。注意，此示例使用[模拟接口](https://randomuser.me/)，展示数据可能不准确，请打开网络面板查看请求
+```html
+<template>
+  <el-table
+    :data="tableData8"
+    :pagination="pagination2"
+    border
+    style="width: 100%"
+    v-loading="loading">
+    <el-table-column
+      prop="name"
+      label="姓名"
+      :sortable="true"
+      width="180">
+      <template scope="scope">
+      {{scope.row.name.first}} {{scope.row.name.last}}
+      </template>
+    </el-table-column>
+    <el-table-column
+      prop="gender"
+      label="性别"
+      :filters="[{ text: '男', value: 'male' }, { text: '女', value: 'female' }]"
+      :filter-method="filterGender"
+      width="180">
+      <template scope="scope">
+        <el-tag
+          :type="scope.row.gender === 'female' ? 'primary' : 'success'"
+          close-transition>{{scope.row.gender}}</el-tag>
+      </template>
+    </el-table-column>
+    <el-table-column
+      prop="email"
+      label="邮箱">
+    </el-table-column>
+  </el-table>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        tableData8: [],
+        pagination2: {
+          pageSizes: [10, 20, 50],
+          pageSize: 10,
+          total: 0,
+          currentPage: 1,
+          layout: 'total, sizes, prev, pager, next',
+          currentChange: this.handlePageCurrentChange,
+          sizeChange: this.pageSizeChange
+        },
+        loading: false
+      }
+    },
+    mounted() {
+      this.fetchData()
+    },
+    methods: {
+      formatter(row, column) {
+        return row.address;
+      },
+      filterTag(value, row) {
+        return row.tag === value;
+      },
+      filterGender(value, row) {
+        return row.gender === value;
+      },
+      handlePageCurrentChange(current) {
+        this.pagination2.currentPage = current
+        this.fetchData({
+          results: this.pagination2.pageSize,
+          page: current
+        })
+      },
+      fetchData(params) {
+        this.loading = true;
+        if (!params) {
+          params = {
+            results: 10,
+            page: 1
+          }
+        }
+        const url = 'https://randomuser.me/api' + '?results=' + params.results + '&page=' + params.page;
+        fetch(url, {
+          method: 'get'
+        }).then(res => {
+          return res.json()
+        }).then(data => {
+          this.pagination2.total = 200;
+          this.loading = false;
+          this.tableData8 = data.results;
+        })
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### 自定义列模板
 
 自定义列的显示内容，可组合其他组件使用。
@@ -1932,6 +2217,7 @@
 | sum-text | 合计行第一列的文本 | String | — | 合计 |
 | summary-method | 自定义的合计计算方法 | Function({ columns, data }) | — | — |
 | span-method | 合并行或列的计算方法 | Function({ row, column, rowIndex, columnIndex }) | — | — |
+| pagination | 分页器，配置项参考 `Pagination`，设为 false 时不展示和进行分页 | object/boolean | — | false |
 
 ### Table Events
 | 事件名 | 说明 | 参数 |

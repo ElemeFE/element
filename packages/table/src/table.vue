@@ -147,6 +147,12 @@
       v-if="rightFixedColumns.length > 0"
       :style="{ width: layout.scrollY ? layout.gutterWidth + 'px' : '0', height: layout.headerHeight + 'px' }"></div>
     <div class="el-table__column-resize-proxy" ref="resizeProxy" v-show="resizeProxyVisible"></div>
+    <div class="el-table__pagination-wrapper" ref="paginationWrapper" v-show="pagination">
+      <table-pagination
+        :store="store"
+        :layout="layout">
+      </table-pagination>
+    </div>
   </div>
 </template>
 
@@ -161,6 +167,7 @@
   import TableBody from './table-body';
   import TableHeader from './table-header';
   import TableFooter from './table-footer';
+  import TablePagination from './table-pagination';
   import { mousewheel } from './util';
 
   let tableIdSeed = 1;
@@ -226,14 +233,20 @@
 
       tooltipEffect: String,
 
-      spanMethod: Function
+      spanMethod: Function,
+
+      pagination: {
+        type: [Object, Boolean],
+        default: false
+      }
     },
 
     components: {
       TableHeader,
       TableFooter,
       TableBody,
-      ElCheckbox
+      ElCheckbox,
+      TablePagination
     },
 
     methods: {
@@ -456,6 +469,14 @@
           if (newVal) {
             this.store.setExpandRowKeys(newVal);
           }
+        }
+      },
+
+      pagination: {
+        immediate: true,
+        deep: true,
+        handler(val) {
+          this.store.commit('setPagination', val);
         }
       }
     },
