@@ -337,9 +337,9 @@ export default {
     },
     handleClick() {
       if (this.disabled) return;
+      this.$refs.input.focus();
       if (this.filterable) {
         this.menuVisible = true;
-        this.$refs.input.focus();
         return;
       }
       this.menuVisible = !this.menuVisible;

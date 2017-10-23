@@ -113,6 +113,10 @@
       background-color: rgba(255,255,255,.35);
     }
   }
+  @include when(round) {
+    border-radius: 20px;
+    padding: 12px 23px;
+  }
   @include m(primary) {
     @include button-variant($--button-primary-color, $--button-primary-fill, $--button-primary-border);
   }
@@ -155,10 +159,6 @@
       border-color: transparent;
       background-color: transparent;
     }
-  }
-  @include when(round) {
-    border-radius: 20px;
-    padding: 12px 23px;
   }
 }
 

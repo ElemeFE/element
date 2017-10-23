@@ -65,11 +65,12 @@
   import Emitter from 'element-ui/src/mixins/emitter';
   import Migrating from 'element-ui/src/mixins/migrating';
   import { generateId } from 'element-ui/src/utils/util';
+  import Focus from 'element-ui/src/mixins/focus';
 
   export default {
     name: 'ElAutocomplete',
 
-    mixins: [Emitter, Migrating],
+    mixins: [Emitter, Focus('input'), Migrating],
 
     componentName: 'ElAutocomplete',
 

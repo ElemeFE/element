@@ -2071,7 +2071,7 @@ dom-serializer@~0.0.0:
     domelementtype "~1.1.1"
     entities "~1.1.1"
 
-dom-walk@^0.1.0:
+dom-walk@^0.1.0, dom-walk@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/dom-walk/-/dom-walk-0.1.1.tgz#672226dc74c8f799ad35307df936aba11acd6018"
 
@@ -5627,6 +5627,14 @@ pbkdf2@^3.0.3:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
+perspective.js@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/perspective.js/-/perspective.js-1.0.0.tgz#b14aca449043fcfd21297fabd2dfa184f42cb26c"
+  dependencies:
+    color-convert "^1.9.0"
+    dom-walk "^0.1.1"
+    throttle-debounce "^1.0.1"
+
 pify@^2.0.0, pify@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/pify/-/pify-2.3.0.tgz#ed141a6ac043a849ea588498e7dca8b15330e90c"
@@ -7457,10 +7465,6 @@ tempfile@~0.1.2:
 text-table@^0.2.0, text-table@~0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
-
-theaterjs@^3.0.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/theaterjs/-/theaterjs-3.1.0.tgz#74b1a750c54c4b3bef74383ea83cbcb19ab4f185"
 
 thenify-all@^1.0.0, thenify-all@^1.6.0:
   version "1.6.0"
