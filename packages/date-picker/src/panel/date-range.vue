@@ -204,7 +204,7 @@
     } else if (defaultValue) {
       return [new Date(defaultValue), advanceDate(defaultValue, 24 * 60 * 60 * 1000)];
     } else {
-      return [new Date(), advanceDate(Date.now, 24 * 60 * 60 * 1000)];
+      return [new Date(), advanceDate(Date.now(), 24 * 60 * 60 * 1000)];
     }
   };
 
@@ -378,7 +378,9 @@
           //       should allow them to be set individually in the future
           if (this.minDate) {
             this.leftDate = this.minDate;
-            this.rightDate = nextMonth(this.leftDate);
+            this.rightDate = this.unlinkPanels && this.maxDate
+              ? this.maxDate
+              : nextMonth(this.leftDate);
           } else {
             this.leftDate = calcDefaultValue(this.defaultValue)[0];
             this.rightDate = nextMonth(this.leftDate);
@@ -388,8 +390,11 @@
 
       defaultValue(val) {
         if (!Array.isArray(this.value)) {
-          this.leftDate = calcDefaultValue(val)[0];
-          this.rightDate = nextMonth(this.leftDate);
+          const [left, right] = calcDefaultValue(val);
+          this.leftDate = left;
+          this.rightDate = val && val[1] && this.unlinkPanels
+            ? right
+            : nextMonth(this.leftDate);
         }
       }
     },

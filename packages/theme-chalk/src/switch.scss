@@ -88,14 +88,7 @@
   }
 
   @include when(disabled) {
-    .el-switch__core {
-      border-color: $--switch-disabled-color !important;
-      background: $--switch-disabled-color !important;
-    }
-
-    .el-switch__label * {
-      color: $--switch-disabled-text-color !important;
-    }
+    opacity: 0.6;
   }
 
   @include m(wide) {
