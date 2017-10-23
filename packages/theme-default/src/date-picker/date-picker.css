@@ -16,7 +16,9 @@
     &.has-time {
       min-width: 324px;
     }
-
+    &.has-time .el-picker-panel__body-wrapper {
+      position: relative;
+    }
     .el-picker-panel__content {
       min-width: 224px;
     }
