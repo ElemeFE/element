@@ -212,6 +212,18 @@
 
       rowStyle: [Object, Function],
 
+      cellClassName: [String, Function],
+
+      cellStyle: [Object, Function],
+
+      headerRowClassName: [String, Function],
+
+      headerRowStyle: [Object, Function],
+
+      headerCellClassName: [String, Function],
+
+      headerCellStyle: [Object, Function],
+
       highlightCurrentRow: Boolean,
 
       currentRowKey: [String, Number],

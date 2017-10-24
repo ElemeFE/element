@@ -32,7 +32,7 @@
 <script>
   import AsyncValidator from 'async-validator';
   import emitter from 'element-ui/src/mixins/emitter';
-  import { noop, getPropByPath } from 'element-ui/src/utils/util';
+  import { noop, getValueByPath } from 'element-ui/src/utils/util';
 
   export default {
     name: 'ElFormItem',
@@ -124,7 +124,7 @@
             path = path.replace(/:/, '.');
           }
 
-          return getPropByPath(model, path, true).v;
+          return getValueByPath(model, path, true).v;
         }
       },
       isRequired() {
@@ -202,7 +202,7 @@
           path = path.replace(/:/, '.');
         }
 
-        let prop = getPropByPath(model, path, true);
+        let prop = getValueByPath(model, path, true);
 
         if (Array.isArray(value)) {
           this.validateDisabled = true;

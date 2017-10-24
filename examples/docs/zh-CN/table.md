@@ -298,10 +298,10 @@
         return row.tag === value;
       },
 
-      tableRowClassName(row, index) {
-        if (index === 1) {
+      tableRowClassName({row, rowndex}) {
+        if (rowndex === 1) {
           return 'info-row';
-        } else if (index === 3) {
+        } else if (rowndex === 3) {
           return 'positive-row';
         }
         return '';
@@ -582,10 +582,10 @@
 <script>
   export default {
     methods: {
-      tableRowClassName(row, index) {
-        if (index === 1) {
+      tableRowClassName({row, rowIndex}) {
+        if (rowIndex === 1) {
           return 'info-row';
-        } else if (index === 3) {
+        } else if (rowIndex === 3) {
           return 'positive-row';
         }
         return '';
@@ -1920,8 +1920,14 @@
 | show-header | 是否显示表头 | boolean | — | true |
 | highlight-current-row | 是否要高亮当前行 | boolean | — | false |
 | current-row-key | 当前行的 key，只写属性 | String,Number | — | — |
-| row-class-name | 行的 className 的回调方法，也可以使用字符串为所有行设置一个固定的 className。 | Function(row, index)/String | — | — |
-| row-style | 行的 style 的回调方法，也可以使用一个固定的 Object 为所有行设置一样的 Style。 | Function(row, index)/Object | — | — |
+| row-class-name | 行的 className 的回调方法，也可以使用字符串为所有行设置一个固定的 className。 | Function({row, rowIndex})/String | — | — |
+| row-style | 行的 style 的回调方法，也可以使用一个固定的 Object 为所有行设置一样的 Style。 | Function({row, rowIndex})/Object | — | — |
+| cell-class-name | 单元格的 className 的回调方法，也可以使用字符串为所有单元格设置一个固定的 className。 | Function({row, column, rowIndex, columnIndex})/String | — | — |
+| cell-style | 单元格的 style 的回调方法，也可以使用一个固定的 Object 为所有单元格设置一样的 Style。 | Function({row, rowIndex, rowIndex, columnIndex})/Object | — | — |
+| header-row-class-name | 表头行的 className 的回调方法，也可以使用字符串为所有表头行设置一个固定的 className。 | Function({row, rowIndex})/String | — | — |
+| header-row-style | 表头行的 style 的回调方法，也可以使用一个固定的 Object 为所有表头行设置一样的 Style。 | Function({row, rowIndex})/Object | — | — |
+| header-cell-class-name | 表头单元格的 className 的回调方法，也可以使用字符串为所有表头单元格设置一个固定的 className。 | Function({row, column, rowIndex, columnIndex})/String | — | — |
+| header-cell-style | 表头单元格的 style 的回调方法，也可以使用一个固定的 Object 为所有表头单元格设置一样的 Style。 | Function({row, rowIndex, rowIndex, columnIndex})/Object | — | — |
 | row-key | 行数据的 Key，用来优化 Table 的渲染；在使用 reserve-selection 功能的情况下，该属性是必填的。类型为 String 时，支持多层访问：`user.info.id`，但不支持 `user.info[0].id`，此种情况请使用 `Function`。 | Function(row)/String | — | — |
 | empty-text | 空数据时显示的文本内容，也可以通过 `slot="empty"` 设置 | String | — | 暂无数据 |
 | default-expand-all | 是否默认展开所有行，当 Table 中存在 type="expand" 的 Column 的时候有效 | Boolean | — | false |
@@ -1951,7 +1957,7 @@
 | filter-change | 当表格的筛选条件发生变化的时候会触发该事件，参数的值是一个对象，对象的 key 是 column 的 columnKey，对应的 value 为用户选择的筛选条件的数组。 | filters |
 | current-change | 当表格的当前行发生变化的时候会触发该事件，如果要高亮当前行，请打开表格的 highlight-current-row 属性 | currentRow, oldCurrentRow |
 | header-dragend | 当拖动表头改变了列的宽度的时候会触发该事件 | newWidth, oldWidth, column, event |
-| expand-change | 当用户对某一行展开或者关闭的上会触发该事件 | row, expanded |
+| expand-change | 当用户对某一行展开或者关闭的时候会触发该事件 | row, expanded |
 
 ### Table Methods
 | 方法名 | 说明 | 参数 |

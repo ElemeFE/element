@@ -23,7 +23,7 @@ export function toObject(arr) {
   return res;
 };
 
-export function getPropByPath(obj, path, strict) {
+export function getValueByPath(obj, path, strict) {
   let tempObj = obj;
   path = path.replace(/\[(\w+)\]/g, '.$1');
   path = path.replace(/^\./, '');

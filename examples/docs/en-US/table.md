@@ -256,10 +256,10 @@
         return row.tag === value;
       },
 
-      tableRowClassName(row, index) {
-        if (index === 1) {
+      tableRowClassName({row, rowIndex}) {
+        if (rowIndex === 1) {
           return 'info-row';
-        } else if (index === 3) {
+        } else if (rowIndex === 3) {
           return 'positive-row';
         }
         return '';
@@ -542,10 +542,10 @@ You can highlight your table content to distinguish between "success, informatio
 <script>
   export default {
     methods: {
-      tableRowClassName(row, index) {
-        if (index === 1) {
+      tableRowClassName({row, rowIndex}) {
+        if (rowIndex === 1) {
           return 'info-row';
-        } else if (index === 3) {
+        } else if (rowIndex === 3) {
           return 'positive-row';
         }
         return '';
@@ -1857,8 +1857,14 @@ Configuring rowspan and colspan allows you to merge cells
 | show-header | whether table header is visible | boolean | — | true |
 | highlight-current-row | whether current row is highlighted | boolean | — | false |
 | current-row-key | key of current row, a set only prop | string,number | — | — |
-| row-class-name | function that returns custom class names for a row, or a string assigning class names for every row | Function(row, index)/String | — | — |
-| row-style | function that returns custom style for a row,  or a string assigning custom style for every row | Function(row, index)/Object | — | — |
+| row-class-name | function that returns custom class names for a row, or a string assigning class names for every row | Function({row, rowIndex})/String | — | — |
+| row-style | function that returns custom style for a row,  or a string assigning custom style for every row | Function({row, rowIndex})/Object | — | — |
+| cell-class-name | function that returns custom class names for a cell, or a string assigning class names for every cell | Function({row, rowIndex})/String | — | — |
+| cell-style | function that returns custom style for a cell,  or a string assigning custom style for every cell | Function({row, rowIndex})/Object | — | — |
+| header-row-class-name | function that returns custom class names for a row in table header, or a string assigning class names for every row in table header | Function({row, rowIndex})/String | — | — |
+| header-row-style | function that returns custom style for a row in table header,  or a string assigning custom style for every row in table header | Function({row, rowIndex})/Object | — | — |
+| header-cell-class-name | function that returns custom class names for a cell in table header, or a string assigning class names for every cell in table header | Function({row, rowIndex})/String | — | — |
+| header-cell-style | function that returns custom style for a cell in table header,  or a string assigning custom style for every cell in table header | Function({row, rowIndex})/Object | — | — |
 | row-key | key of row data, used for optimizing rendering. Required if `reserve-selection` is on. When its type is String, multi-level access is supported, e.g. `user.info.id`, but `user.info[0].id` is not supported, in which case `Function` should be used. | Function(row)/String | — | — |
 | empty-text | Displayed text when data is empty. You can customize this area with `slot="empty"` | String | — | No Data |
 | default-expand-all | whether expand all rows by default, only works when the table has a column type="expand" | Boolean | — | false |
