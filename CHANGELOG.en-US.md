@@ -1,5 +1,13 @@
 ## Changelog
 
+### 1.4.8
+
+*2017-10-24*
+
+- Fixed SubMenu retracting when moving the mouse rapidly on the SubMenu of collapsed Menu, #7579
+- Fixed hidden last shortcut of DateTimePicker when the shortcut menu is long, #7567 (by @DuLinRain)
+- Added `show-timeout` and `hide-timeout` attributes for Dropdown, #7621 (by @phongkt-dev)
+
 ### 1.4.7
 
 *2017-10-16*
