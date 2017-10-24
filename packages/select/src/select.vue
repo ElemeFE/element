@@ -544,7 +544,7 @@
 
       resetInputHeight() {
         this.$nextTick(() => {
-          if (!this.$refs.reference) return;
+          if (!this.$refs.reference || !this.$refs.tags) return;
           let inputChildNodes = this.$refs.reference.$el.childNodes;
           let input = [].filter.call(inputChildNodes, item => item.tagName === 'INPUT')[0];
           input.style.height = this.selected.length === 0 && this.size === 'mini'
