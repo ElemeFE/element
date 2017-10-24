@@ -28,7 +28,7 @@
     provide() {
       return {
         collapse: this
-      }
+      };
     },
 
     watch: {
