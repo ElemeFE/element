@@ -94,9 +94,7 @@ const Loading = (options = {}) => {
     parent.style.overflow = 'hidden';
   }
   parent.appendChild(instance.$el);
-  Vue.nextTick(() => {
-    instance.visible = true;
-  });
+  instance.visible = true;
   if (options.fullscreen) {
     fullscreenLoading = instance;
   }
