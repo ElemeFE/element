@@ -62,6 +62,8 @@
       };
     },
 
+    inject: ['collapse'],
+
     props: {
       title: String,
       name: {
@@ -74,15 +76,10 @@
 
     computed: {
       isActive() {
-        return this.$parent.activeNames.indexOf(this.name) > -1;
+        return this.collapse.activeNames.indexOf(this.name) > -1;
       },
       id() {
         return generateId();
-      }
-    },
-
-    watch: {
-      'isActive'(value) {
       }
     },
 
@@ -94,9 +91,6 @@
       handleEnterClick() {
         this.dispatch('ElCollapse', 'item-click', this);
       }
-    },
-
-    mounted() {
     }
   };
 </script>
