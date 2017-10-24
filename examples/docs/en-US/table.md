@@ -1888,13 +1888,14 @@ Configuring rowspan and colspan allows you to merge cells
 | filter-change | column's key. If you need to use the filter-change event, this attribute is mandatory to identify which column is being filtered | filters |
 | current-change | triggers when current row changes | currentRow, oldCurrentRow |
 | header-dragend | triggers when finish dragging header | newWidth, oldWidth, column, event |
-| expand | triggers when user expands or collapses a row | row, expanded |
+| expand-change | triggers when user expands or collapses a row | row, expandedRows |
 
 ### Table Methods
 | Method | Description | Parameters |
 |------|--------|-------|
 | clearSelection | used in multiple selection Table, clear selection, might be useful when `reserve-selection` is on | selection |
 | toggleRowSelection | used in multiple selection Table, toggle if a certain row is selected. With the second parameter, you can directly set if this row is selected | row, selected |
+| toggleRowExpanded | used in expand Table, toggle if a certain row is expanded. With the second parameter, you can directly set if this row is expanded | row, expanded |
 | setCurrentRow | used in single selection Table, set a certain row selected. If called without any parameter, it will clear selection. | row |
 | clearSort | clear sorting, restore data to the original order | — |
 | clearFilter | clear filter | — |
