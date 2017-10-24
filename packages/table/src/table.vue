@@ -156,6 +156,7 @@
   import debounce from 'throttle-debounce/debounce';
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
   import Locale from 'element-ui/src/mixins/locale';
+  import Migrating from 'element-ui/src/mixins/migrating';
   import TableStore from './table-store';
   import TableLayout from './table-layout';
   import TableBody from './table-body';
@@ -168,7 +169,7 @@
   export default {
     name: 'ElTable',
 
-    mixins: [Locale],
+    mixins: [Locale, Migrating],
 
     props: {
       data: {
@@ -249,6 +250,14 @@
     },
 
     methods: {
+      getMigratingConfig() {
+        return {
+          events: {
+            expand: 'expand is renamed to `expand-change`'
+          }
+        };
+      },
+
       setCurrentRow(row) {
         this.store.commit('setCurrentRow', row);
       },
