@@ -34,14 +34,14 @@ export declare class ElAutocomplete extends ElementUIComponent {
   /** Debounce delay when typing */
   debounce: number
 
-  /** name for the inner native input */
+  /** Name for the inner native input */
   name: string
 
-  /** whether to emit select event on enter when there is no autocomplete match */
-  selectWhenUnmatched: boolean
+  /** Key name of the input suggestion object for display */
+  valueKey: string
 
-  /** Component name of your customized suggestion list item */
-  customItem: string
+  /** Whether to emit select event on enter when there is no autocomplete match */
+  selectWhenUnmatched: boolean
 
   /** A method to fetch input suggestions. When suggestions are ready, invoke callback(data:[]) to return them to Autocomplete */
   fetchSuggestions: FetchSuggestions

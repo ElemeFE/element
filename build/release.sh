@@ -16,7 +16,7 @@ then
   echo "Releasing theme-chalk $VERSION ..."
   cd packages/theme-chalk
   npm version $VERSION --message "[release] $VERSION"
-  npm publish --tag next
+  npm publish
   cd ../..
 
   # commit
