@@ -23,7 +23,6 @@
     width: 890px;
     height: 465px;
     margin: 30px auto 100px;
-    /*border: solid 1px black;*/
     position: relative;
 
     div {

@@ -232,18 +232,19 @@
       resetChecked() {
         this.$refs.tree.setCheckedKeys([]);
       },
-      append(store, data) {
+      append(data) {
         const newChild = { id: id++, label: 'testtest', children: [] };
-        store.append(newChild, data);
-        data.children = data.children || [];
+        if (!data.children) {
+          this.$set(data, 'children', []);
+        }
         data.children.push(newChild);
       },
 
-      remove(store, node, data) {
+      remove(node, data) {
         const parent = node.parent;
-        const index = parent.data.children.findIndex(d => d.id === data.id);
-        parent.data.children.splice(index, 1);
-        store.remove(data);
+        const children = parent.data.children || parent.data;
+        const index = children.findIndex(d => d.id === data.id);
+        children.splice(index, 1);
       },
 
       renderContent(h, { node, data, store }) {
@@ -253,8 +254,8 @@
               <span>{node.label}</span>
             </span>
             <span>
-              <el-button style="font-size: 12px;" type="text" on-click={ () => this.append(store, data) }>Append</el-button>
-              <el-button style="font-size: 12px;" type="text" on-click={ () => this.remove(store, node, data) }>Delete</el-button>
+              <el-button style="font-size: 12px;" type="text" on-click={ () => this.append(data) }>Append</el-button>
+              <el-button style="font-size: 12px;" type="text" on-click={ () => this.remove(node, data) }>Delete</el-button>
             </span>
           </span>);
       },
@@ -270,6 +271,7 @@
         data,
         data2,
         data3,
+        data4: JSON.parse(JSON.stringify(data2)),
         regions,
         defaultProps,
         props,
@@ -683,14 +685,10 @@ Tree nodes can be initially expanded or checked
 ### Custom node content
 The content of tree nodes can be customized, so you can add icons or buttons as you will
 
-:::warning
-`Append` and `remove` do not change `data`
-:::
-
 ::: demo Use `render-content` to assign a render function that returns the content of tree nodes. See Vue's documentation for a detailed introduction of render functions. Note that this demo can't run in jsfiddle because it doesn't support JSX syntax. In a real project, `render-content` will work if relevant dependencies are correctly configured.
 ```html
 <el-tree
-  :data="data2"
+  :data="data4"
   :props="defaultProps"
   show-checkbox
   node-key="id"
@@ -705,7 +703,7 @@ The content of tree nodes can be customized, so you can add icons or buttons as 
   export default {
     data() {
       return {
-        data2: [{
+        data4: [{
           id: 1,
           label: 'Level one 1',
           children: [{
@@ -748,18 +746,19 @@ The content of tree nodes can be customized, so you can add icons or buttons as 
     },
 
     methods: {
-      append(store, data) {
+      append(data) {
         const newChild = { id: id++, label: 'testtest', children: [] };
-        store.append(newChild, data); // need change data by yourself
-        data.children = data.children || [];
+        if (!data.children) {
+          this.$set(data, 'children', []);
+        }
         data.children.push(newChild);
       },
 
-      remove(store, node, data) {
+      remove(node, data) {
         const parent = node.parent;
-        const index = parent.data.children.findIndex(d => d.id === data.id);
-        parent.data.children.splice(index, 1);
-        store.remove(data); // need change data by yourself
+        const children = parent.data.children || parent.data;
+        const index = children.findIndex(d => d.id === data.id);
+        children.splice(index, 1);
       },
 
       renderContent(h, { node, data, store }) {
@@ -769,8 +768,8 @@ The content of tree nodes can be customized, so you can add icons or buttons as 
               <span>{node.label}</span>
             </span>
             <span>
-              <el-button style="font-size: 12px;" type="text" on-click={ () => this.append(store, data) }>Append</el-button>
-              <el-button style="font-size: 12px;" type="text" on-click={ () => this.remove(store, node, data) }>Delete</el-button>
+              <el-button style="font-size: 12px;" type="text" on-click={ () => this.append(data) }>Append</el-button>
+              <el-button style="font-size: 12px;" type="text" on-click={ () => this.remove(node, data) }>Delete</el-button>
             </span>
           </span>);
       }
@@ -939,7 +938,7 @@ Only one node among the same level can be expanded at one time.
 | node-key              | unique identity key name for nodes, its value should be unique across the whole tree | string                      | —               | —       |
 | props                 | configuration options, see the following table | object                      | —               | —       |
 | load                  | method for loading subtree data          | function(node, resolve)     | —               | —       |
-| render-content        | render function for tree node            | Function(h, { node }        | —               | —       |
+| render-content        | render function for tree node            | Function(h, { node, data, store }        | —               | —       |
 | highlight-current     | whether current node is highlighted      | boolean                     | —               | false   |
 | default-expand-all    | whether to expand all nodes by default   | boolean                     | —               | false   |
 | expand-on-click-node  | whether to expand or collapse node when clicking on the node, if false, then expand or collapse node only when clicking on the arrow icon. | —                           | true            |         |

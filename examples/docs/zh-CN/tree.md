@@ -232,29 +232,30 @@
       resetChecked() {
         this.$refs.tree.setCheckedKeys([]);
       },
-      append(store, data) {
+      append(data) {
         const newChild = { id: id++, label: 'testtest', children: [] };
-        store.append(newChild, data);
-        data.children = data.children || [];
+        if (!data.children) {
+          this.$set(data, 'children', []);
+        }
         data.children.push(newChild);
       },
 
-      remove(store, node, data) {
+      remove(node, data) {
         const parent = node.parent;
-        const index = parent.data.children.findIndex(d => d.id === data.id);
-        parent.data.children.splice(index, 1);
-        store.remove(data);
+        const children = parent.data.children || parent.data;
+        const index = children.findIndex(d => d.id === data.id);
+        children.splice(index, 1);
       },
 
-      renderContent(h, { node, data, store }) {
+      renderContent(h, { node, data }) {
         return (
           <span style="flex: 1; display: flex; align-items: center; justify-content: space-between; font-size: 14px; padding-right: 8px;">
             <span>
               <span>{node.label}</span>
             </span>
             <span>
-              <el-button style="font-size: 12px;" type="text" on-click={ () => this.append(store, data) }>Append</el-button>
-              <el-button style="font-size: 12px;" type="text" on-click={ () => this.remove(store, node, data) }>Delete</el-button>
+              <el-button style="font-size: 12px;" type="text" on-click={ () => this.append(data) }>Append</el-button>
+              <el-button style="font-size: 12px;" type="text" on-click={ () => this.remove(node, data) }>Delete</el-button>
             </span>
           </span>);
       },
@@ -270,6 +271,7 @@
         data,
         data2,
         data3,
+        data4: JSON.parse(JSON.stringify(data2)),
         regions,
         defaultProps,
         props,
@@ -682,14 +684,10 @@
 ### 自定义节点内容
 节点的内容支持自定义，可以在节点区添加按钮或图标等内容
 
-:::warning
-`append` 和 `remove` 方法不会改变 `data` 上的数据
-:::
-
 ::: demo 使用`render-content`指定渲染函数，该函数返回需要的节点区内容即可。渲染函数的用法请参考 Vue 文档。注意：由于 jsfiddle 不支持 JSX 语法，所以本例在 jsfiddle 中无法运行。但是在实际的项目中，只要正确地配置了相关依赖，就可以正常运行。
 ```html
 <el-tree
-  :data="data2"
+  :data="data4"
   :props="defaultProps"
   show-checkbox
   node-key="id"
@@ -704,7 +702,7 @@
   export default {
     data() {
       return {
-        data2: [{
+        data4: [{
           id: 1,
           label: '一级 1',
           children: [{
@@ -747,18 +745,19 @@
     },
 
     methods: {
-      append(store, data) {
+      append(data) {
         const newChild = { id: id++, label: 'testtest', children: [] };
-        store.append(newChild, data); // append 不会改变 data
-        data.children = data.children || [];
+        if (!data.children) {
+          this.$set(data, 'children', []);
+        }
         data.children.push(newChild);
       },
 
-      remove(store, node, data) {
+      remove(node, data) {
         const parent = node.parent;
-        const index = parent.data.children.findIndex(d => d.id === data.id);
-        parent.data.children.splice(index, 1);
-        store.remove(data); // remove 不会改变 data
+        const children = parent.data.children || parent.data;
+        const index = children.findIndex(d => d.id === data.id);
+        children.splice(index, 1);
       },
 
       renderContent(h, { node, data, store }) {
@@ -768,8 +767,8 @@
               <span>{node.label}</span>
             </span>
             <span>
-              <el-button style="font-size: 12px;" type="text" on-click={ () => this.append(store, data) }>Append</el-button>
-              <el-button style="font-size: 12px;" type="text" on-click={ () => this.remove(store, node, data) }>Delete</el-button>
+              <el-button style="font-size: 12px;" type="text" on-click={ () => this.append(data) }>Append</el-button>
+              <el-button style="font-size: 12px;" type="text" on-click={ () => this.remove(node, data) }>Delete</el-button>
             </span>
           </span>);
       }
@@ -938,7 +937,7 @@
 | node-key              | 每个树节点用来作为唯一标识的属性，整棵树应该是唯一的               | String                      | —    | —     |
 | props                 | 配置选项，具体看下表                               | object                      | —    | —     |
 | load                  | 加载子树数据的方法                                | function(node, resolve)     | —    | —     |
-| render-content        | 树节点的内容区的渲染 Function                      | Function(h, { node }        | —    | —     |
+| render-content        | 树节点的内容区的渲染 Function                      | Function(h, { node, data, store }        | —    | —     |
 | highlight-current     | 是否高亮当前选中节点，默认值是 false。                   | boolean                     | —    | false |
 | default-expand-all    | 是否默认展开所有节点                               | boolean                     | —    | false |
 | expand-on-click-node  | 是否在点击节点的时候展开或者收缩节点， 默认值为 true，如果为 false，则只有点箭头图标的时候才会展开或者收缩节点。 | boolean                     | —    | true  |
