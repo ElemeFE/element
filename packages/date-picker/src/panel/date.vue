@@ -148,6 +148,7 @@
   } from '../util';
   import Locale from 'element-ui/src/mixins/locale';
   import ElInput from 'element-ui/packages/input';
+  import ElButton from 'element-ui/packages/button';
   import TimePicker from './time';
   import YearTable from '../basic/year-table';
   import MonthTable from '../basic/month-table';
@@ -431,7 +432,7 @@
     },
 
     components: {
-      TimePicker, YearTable, MonthTable, DateTable, ElInput
+      TimePicker, YearTable, MonthTable, DateTable, ElInput, ElButton
     },
 
     data() {

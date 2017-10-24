@@ -193,6 +193,7 @@
   import TimePicker from './time';
   import DateTable from '../basic/date-table';
   import ElInput from 'element-ui/packages/input';
+  import ElButton from 'element-ui/packages/button';
 
   const advanceDate = (date, amount) => {
     return new Date(new Date(date).getTime() + amount);
@@ -586,6 +587,6 @@
       }
     },
 
-    components: { TimePicker, DateTable, ElInput }
+    components: { TimePicker, DateTable, ElInput, ElButton }
   };
 </script>
