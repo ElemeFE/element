@@ -1,4 +1,7 @@
 const hasOwnProperty = Object.prototype.hasOwnProperty;
+
+export function noop() {};
+
 export function hasOwn(obj, key) {
   return hasOwnProperty.call(obj, key);
 };
@@ -20,22 +23,29 @@ export function toObject(arr) {
   return res;
 };
 
-export const getValueByPath = function(object, prop) {
-  prop = prop || '';
-  const paths = prop.split('.');
-  let current = object;
-  let result = null;
-  for (let i = 0, j = paths.length; i < j; i++) {
-    const path = paths[i];
-    if (!current) break;
+export function getPropByPath(obj, path, strict) {
+  let tempObj = obj;
+  path = path.replace(/\[(\w+)\]/g, '.$1');
+  path = path.replace(/^\./, '');
 
-    if (i === j - 1) {
-      result = current[path];
+  let keyArr = path.split('.');
+  let i = 0;
+  for (let len = keyArr.length; i < len - 1; ++i) {
+    let key = keyArr[i];
+    if (key in tempObj) {
+      tempObj = tempObj[key];
+    } else {
+      if (strict) {
+        throw new Error('please transfer a valid prop path to form item!');
+      }
       break;
     }
-    current = current[path];
   }
-  return result;
+  return {
+    o: tempObj,
+    k: keyArr[i],
+    v: tempObj[keyArr[i]]
+  };
 };
 
 export const generateId = function() {
