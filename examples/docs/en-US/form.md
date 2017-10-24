@@ -5,17 +5,15 @@
         if (!value) {
           return callback(new Error('Please input the age'));
         }
-        setTimeout(() => {
-          if (!Number.isInteger(value)) {
-            callback(new Error('Please input digits'));
+        if (!Number.isInteger(value)) {
+          callback(new Error('Please input digits'));
+        } else {
+          if (value < 18) {
+            callback(new Error('Age must be greater than 18'));
           } else {
-            if (value < 18) {
-              callback(new Error('Age must be greater than 18'));
-            } else {
-              callback();
-            }
+            callback();
           }
-        }, 1000);
+        }
       };
       var validatePass = (rule, value, callback) => {
         if (value === '') {
@@ -548,17 +546,15 @@ This example shows how to customize your own validation rules to finish a two-fa
         if (!value) {
           return callback(new Error('Please input the age'));
         }
-        setTimeout(() => {
-          if (!Number.isInteger(value)) {
-            callback(new Error('Please input digits'));
+        if (!Number.isInteger(value)) {
+          callback(new Error('Please input digits'));
+        } else {
+          if (value < 18) {
+            callback(new Error('Age must be greater than 18'));
           } else {
-            if (value < 18) {
-              callback(new Error('Age must be greater than 18'));
-            } else {
-              callback();
-            }
+            callback();
           }
-        }, 1000);
+        }
       };
       var validatePass = (rule, value, callback) => {
         if (value === '') {
