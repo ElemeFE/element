@@ -1,5 +1,12 @@
 ## 更新日志
 
+### 1.4.8
+*2017-10-24*
+
+- 修复鼠标在折叠的 Menu 子菜单中快速移动时会将菜单收起的问题，#7579
+- 修复 DateTimePicker 的快捷菜单过长时，最后一项会被隐藏的问题，#7567（by @DuLinRain）
+- 新增 Dropdown 的 `show-timeout` 和 `hide-timeout` 属性，#7621（by @phongkt-dev）
+
 ### 1.4.7
 *2017-10-16*
 
