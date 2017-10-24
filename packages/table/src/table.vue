@@ -246,6 +246,10 @@
         this.store.updateAllSelected();
       },
 
+      toggleRowExpanded(row, expanded) {
+        this.store.toggleRowExpanded(row, expanded);
+      },
+
       clearSelection() {
         this.store.clearSelection();
       },

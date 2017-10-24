@@ -371,7 +371,7 @@ export default {
     },
 
     handleExpandClick(row) {
-      this.store.commit('toggleRowExpanded', row);
+      this.store.toggleRowExpanded(row);
     }
   }
 };
