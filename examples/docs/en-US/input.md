@@ -657,7 +657,7 @@ Attribute | Description | Type | Options | Default
 |----| ----| ----| ---- | -----|
 |placeholder| the placeholder of Autocomplete| string | — | — |
 |disabled | whether Autocomplete is disabled  | boolean | — | false|
-| props | configuration options, see the following table | object | — | — |
+| valueKey | key name of the input suggestion object for display | string | — | value |
 |icon | icon name | string | — | — |
 |value | binding value | string | — | — |
 | debounce | debounce delay when typing, in milliseconds | number | — | 300 |
@@ -668,12 +668,6 @@ Attribute | Description | Type | Options | Default
 | name | same as `name` in native input | string | — | — |
 | select-when-unmatched | whether to emit a `select` event on enter when there is no autocomplete match | boolean | — | false |
 | label | label text | string | — | — |
-
-### props
-| Attribute | Description | Type | Accepted Values | Default |
-| --------- | ----------------- | ------ | ------ | ------ |
-| label     | specify which key of option object is used as the option's label | string | — | value |
-| value     | specify which key of option object is used as the option's value | string | — | value |
 
 ### Autocomplete slots
 

@@ -50,6 +50,7 @@
 
     .container {
       box-sizing: border-box;
+      width: auto;
     }
 
     .footer-main {
