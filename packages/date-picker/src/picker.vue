@@ -5,6 +5,7 @@
     :readonly="!editable || readonly"
     :disabled="disabled"
     :size="size"
+    :id="id"
     v-clickoutside="handleClose"
     :placeholder="placeholder"
     @focus="handleFocus"
@@ -209,6 +210,7 @@ export default {
       type: Boolean,
       default: true
     },
+    id: String,
     popperClass: String,
     editable: {
       type: Boolean,
