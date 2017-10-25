@@ -293,6 +293,10 @@
             };
           }
         }
+      },
+
+      indexMethod(index) {
+        return index * 2;
       }
     },
 
@@ -1845,6 +1849,49 @@ Configuring rowspan and colspan allows you to merge cells
 ```
 :::
 
+### 自定义索引
+
+自定义 `type=index` 列的行号。
+:::demo 通过给 `type=index` 的列传入 `index` 属性，可以自定义索引。该属性传入数字时，将作为索引的起始值。也可以传入一个方法，它提供当前行的行号（从 `0` 开始）作为参数，返回值将作为索引展示。
+
+```html
+<template>
+  <el-table
+    :data="tableData"
+    style="width: 100%">
+    <el-table-column
+      type="index"
+      :index="indexMethod">
+    </el-table-column>
+    <el-table-column
+      prop="date"
+      label="日期"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="name"
+      label="姓名"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="address"
+      label="地址">
+    </el-table-column>
+  </el-table>
+</template>
+
+<script>
+  export default {
+    methods: {
+      indexMethod(index) {
+        return index * 2;
+      }
+    }
+  };
+</script>
+```
+:::
+
 ### Table Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -1915,6 +1962,7 @@ Configuring rowspan and colspan allows you to merge cells
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | type | type of the column. If set to `selection`, the column will display checkbox. If set to `index`, the column will display index of the row (staring from 1). If set to `expand`, the column will display expand icon.  | string | selection/index/expand | — |
+| index | 如果设置了 `type=index`，可以通过传递 `index` 属性来自定义索引 | string, Function(index) | - | - |
 | label | column label | string | — | — |
 | column-key | column's key. If you need to use the filter-change event, you need this attribute to identify which column is being filtered | string | string | — | — |
 | prop |  field name. You can also use its alias: `property` | string | — | — |

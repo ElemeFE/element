@@ -50,8 +50,17 @@ const forced = {
     renderHeader: function(h, { column }) {
       return column.label || '#';
     },
-    renderCell: function(h, { $index }) {
-      return <div>{ $index + 1 }</div>;
+    renderCell: function(h, { $index, column }) {
+      let i = $index + 1;
+      const index = column.index;
+
+      if (typeof index === 'number') {
+        i = $index + index;
+      } else if (typeof index === 'function') {
+        i = index($index);
+      }
+
+      return <div>{ i }</div>;
     },
     sortable: false
   },
@@ -146,7 +155,8 @@ export default {
     filterMultiple: {
       type: Boolean,
       default: true
-    }
+    },
+    index: [Number, Function]
   },
 
   data() {
@@ -236,7 +246,8 @@ export default {
       filterMultiple: this.filterMultiple,
       filterOpened: false,
       filteredValue: this.filteredValue || [],
-      filterPlacement: this.filterPlacement || ''
+      filterPlacement: this.filterPlacement || '',
+      index: this.index
     });
 
     objectAssign(column, forced[type] || {});
@@ -351,6 +362,12 @@ export default {
     sortable(newVal) {
       if (this.columnConfig) {
         this.columnConfig.sortable = newVal;
+      }
+    },
+
+    index(newVal) {
+      if (this.columnConfig) {
+        this.columnConfig.index = newVal;
       }
     }
   },
