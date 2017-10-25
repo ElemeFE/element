@@ -8,6 +8,7 @@
     :id="id"
     v-clickoutside="handleClose"
     :placeholder="placeholder"
+    :name="name"
     @focus="handleFocus"
     @blur="handleBlur"
     @keydown.native="handleKeydown"
@@ -206,6 +207,7 @@ export default {
     readonly: Boolean,
     placeholder: String,
     disabled: Boolean,
+    name: String,
     clearable: {
       type: Boolean,
       default: true
