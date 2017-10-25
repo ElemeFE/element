@@ -1,6 +1,6 @@
 <template>
   <div class="el-table"
-    :class="{
+    :class="[{
       'el-table--fit': fit,
       'el-table--striped': stripe,
       'el-table--border': border || isGroup,
@@ -9,7 +9,7 @@
       'el-table--fluid-height': maxHeight,
       'el-table--enable-row-hover': !store.states.isComplex,
       'el-table--enable-row-transition': (store.states.data || []).length !== 0 && (store.states.data || []).length < 100
-    }"
+    }, tableSize ? `el-table--${ tableSize }` : '']"
     @mouseleave="handleMouseLeave($event)">
     <div class="hidden-columns" ref="hiddenColumns"><slot></slot></div>
     <div class="el-table__header-wrapper" ref="headerWrapper" v-if="showHeader">
@@ -178,6 +178,8 @@
         }
       },
 
+      size: String,
+
       width: [String, Number],
 
       height: [String, Number],
@@ -341,6 +343,10 @@
     },
 
     computed: {
+      tableSize() {
+        return this.size || (this.$ELEMENT || {}).size;
+      },
+
       bodyWrapper() {
         return this.$refs.bodyWrapper;
       },

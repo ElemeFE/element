@@ -353,9 +353,9 @@ Basic tree structure.
 
 ### Selectable
 
-Used for node selection. In the following example, data for each layer is acquired after being clicked. If there is no child data, the expanding icon will disappear.
+Used for node selection.
 
-::: demo
+::: demo This example also shows how to load node data asynchronously.
 ```html
 <el-tree
   :props="props"
@@ -421,7 +421,7 @@ Used for node selection. In the following example, data for each layer is acquir
 
 ### Custom leaf node in lazy mode
 
-::: demo
+::: demo A node's data is not fetched until it is clicked, so the Tree cannot predict whether a node is a leaf node. That's why a drop-down button is added to each node, and if it is a leaf node, the drop-down button will disappear when clicked. That being said, you can also tell the Tree in advance whether the node is a leaf node, avoiding the render of the drop-down button before a leaf node.
 ```html
 <el-tree
   :props="props1"

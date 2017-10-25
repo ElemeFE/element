@@ -101,6 +101,9 @@
       display: inline-block;
       width: 130px;
     }
+    .input-with-select .el-input-group__prepend {
+      background-color: #fff;
+    }
     .demo-autocomplete {
       text-align: center;
 
@@ -318,7 +321,7 @@ Prepend or append an element, generally a label or a button.
   </el-input>
 </div>
 <div style="margin-top: 15px;">
-  <el-input placeholder="Please input" v-model="input5">
+  <el-input placeholder="Please input" v-model="input5" class="input-with-select">
     <el-select v-model="select" slot="prepend" placeholder="Select">
       <el-option label="Restaurant" value="1"></el-option>
       <el-option label="Order No." value="2"></el-option>
@@ -331,6 +334,9 @@ Prepend or append an element, generally a label or a button.
 <style>
   .el-select .el-input {
     width: 110px;
+  }
+  .input-with-select .el-input-group__prepend {
+    background-color: #fff;
   }
 </style>
 <script>
