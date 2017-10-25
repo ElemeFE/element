@@ -66,7 +66,7 @@
       :style="textareaStyle"
       @focus="handleFocus"
       @blur="handleBlur"
-      @change="handleChange">
+      @change="handleChange"
       :aria-label="label"
     >
     </textarea>
