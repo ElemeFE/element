@@ -1,5 +1,7 @@
 import { createVue, triggerEvent, triggerClick, destroyVM } from '../util';
 
+const DELAY = 1;
+
 describe('InputNumber', () => {
   let vm;
   afterEach(() => {
@@ -263,30 +265,51 @@ describe('InputNumber', () => {
       });
     });
   });
-  it('event:change', done => {
-    vm = createVue({
-      template: `
-        <el-input-number v-model="value" ref="input">
-        </el-input-number>
-      `,
-      data() {
-        return {
-          value: 1.5
-        };
-      }
-    }, true);
+  describe('event:change', () => {
+    let spy;
 
-    let btnIncrease = vm.$el.querySelector('.el-input-number__increase');
-    const spy = sinon.spy();
+    beforeEach(() => {
+      vm = createVue({
+        template: `
+          <el-input-number v-model="value" ref="compo" :min='2' :max='3' :step='1'>
+          </el-input-number>
+        `,
+        data() {
+          return {
+            value: 2
+          };
+        }
+      }, true);
+      spy = sinon.spy();
+      vm.$refs.compo.$on('change', spy);
+    });
 
-    vm.$refs.input.$on('change', spy);
+    it('emit on input', done => {
+      vm.$refs.compo.handleInput('3');
+      setTimeout(_ => {
+        expect(spy.calledOnce).to.be.true;
+        expect(spy.args[0][0]).to.equal(3);
+        done();
+      }, DELAY);
+    });
 
-    triggerEvent(btnIncrease, 'mousedown');
-    triggerClick(document, 'mouseup');
+    it('emit on button', done => {
+      const btnIncrease = vm.$el.querySelector('.el-input-number__increase');
+      triggerEvent(btnIncrease, 'mousedown');
+      triggerClick(document, 'mouseup');
+      setTimeout(_ => {
+        expect(spy.calledOnce).to.be.true;
+        expect(spy.args[0][0]).to.equal(3);
+        done();
+      }, DELAY);
+    });
 
-    vm.$nextTick(_ => {
-      expect(spy.withArgs(2.5, 1.5).calledOnce).to.be.true;
-      done();
+    it('does not emit on programatic change', done => {
+      vm.value = 3;
+      setTimeout(_ => {
+        expect(spy.notCalled).to.be.true;
+        done();
+      }, DELAY);
     });
   });
   it('event:focus & blur', done => {
