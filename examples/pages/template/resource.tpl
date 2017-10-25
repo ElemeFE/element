@@ -4,7 +4,7 @@
     box-sizing: border-box;
     
     .resource-placeholder {
-      margin: 50px auto 0;
+      margin: 50px auto 100px;
       text-align: center;
       
       img {

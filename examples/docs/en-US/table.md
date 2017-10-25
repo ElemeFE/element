@@ -258,9 +258,9 @@
 
       tableRowClassName(row, index) {
         if (index === 1) {
-          return 'info-row';
+          return 'warning-row';
         } else if (index === 3) {
-          return 'positive-row';
+          return 'success-row';
         }
         return '';
       },
@@ -305,12 +305,12 @@
 </script>
 
 <style>
-  .el-table .info-row {
-    background: #c9e5f5;
+  .el-table .warning-row {
+    background: oldlace;
   }
 
-  .el-table .positive-row {
-    background: #e2f0e4;
+  .el-table .success-row {
+    background: #f0f9eb;
   }
 
   .demo-table .name-wrapper {
@@ -530,12 +530,12 @@ You can highlight your table content to distinguish between "success, informatio
 </template>
 
 <style>
-  .el-table .info-row {
-    background: #c9e5f5;
+  .el-table .warning-row {
+    background: oldlace;
   }
 
-  .el-table .positive-row {
-    background: #e2f0e4;
+  .el-table .success-row {
+    background: #f0f9eb;
   }
 </style>
 
@@ -544,9 +544,9 @@ You can highlight your table content to distinguish between "success, informatio
     methods: {
       tableRowClassName(row, index) {
         if (index === 1) {
-          return 'info-row';
+          return 'warning-row';
         } else if (index === 3) {
-          return 'positive-row';
+          return 'success-row';
         }
         return '';
       }
@@ -1848,13 +1848,14 @@ Configuring rowspan and colspan allows you to merge cells
 ### Table Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| data | table data | array | — | — |
+| data | Table data | array | — | — |
 | height | Table's height. By default it has an `auto` height. If its value is a number, the height is measured in pixels; if its value is a string, the height is affected by external styles | string/number | — | — |
 | max-height | Table's max-height. The height of the table starts from `auto` until it reaches the maxHeight limit. The `maxHeight` is measured in pixels, same as `height` | string/number | — | — |
-| stripe | whether table is striped | boolean | — | false |
-| border | whether table has vertical border | boolean | — | false |
+| stripe | whether Table is striped | boolean | — | false |
+| border | whether Table has vertical border | boolean | — | false |
+| size | size of Table | string | medium / small / mini | — |
 | fit | whether width of column automatically fits its container | boolean | — | true |
-| show-header | whether table header is visible | boolean | — | true |
+| show-header | whether Table header is visible | boolean | — | true |
 | highlight-current-row | whether current row is highlighted | boolean | — | false |
 | current-row-key | key of current row, a set only prop | string,number | — | — |
 | row-class-name | function that returns custom class names for a row, or a string assigning class names for every row | Function(row, index)/String | — | — |
