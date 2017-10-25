@@ -44,7 +44,7 @@ const toggleRowSelection = function(states, row, selected) {
   return changed;
 };
 
-const toggleRowExpanded = function(states, row, expanded) {
+const toggleRowExpansion = function(states, row, expanded) {
   let changed = false;
   const expandRows = states.expandRows;
   if (typeof expanded !== 'undefined') {
@@ -391,8 +391,8 @@ TableStore.prototype.toggleRowSelection = function(row, selected) {
   }
 };
 
-TableStore.prototype.toggleRowExpanded = function(row, expanded) {
-  const changed = toggleRowExpanded(this.states, row, expanded);
+TableStore.prototype.toggleRowExpansion = function(row, expanded) {
+  const changed = toggleRowExpansion(this.states, row, expanded);
   if (changed) {
     this.table.$emit('expand-change', row, this.states.expandRows);
   }

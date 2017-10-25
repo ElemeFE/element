@@ -232,6 +232,10 @@
     }
   }
 
+  th:first-child .cell, td:first-child .cell {
+    padding-left: 0;
+  }
+
   // 拥有多级表头
   @include m((group, border)) {
     border: $--table-border;
@@ -269,6 +273,10 @@
 
     th, td {
       border-right: $--table-border;
+
+      &:first-child .cell {
+        padding-left: 10px;
+      }
     }
 
     .has-gutter {

@@ -1,8 +1,55 @@
 ## Custom theme
-Element uses BEM-styled CSS so that you can override styles easily. But if you need to replace styles at a large scale, e.g. change the theme color from blue to orange or green, maybe overriding them one by one is not a good idea, and this is where our theme customization tools kick in.
+Element uses BEM-styled CSS so that you can override styles easily. But if you need to replace styles at a large scale, e.g. change the theme color from blue to orange or green, maybe overriding them one by one is not a good idea. We provide three ways to change the style variables.
 
 ### Changing theme color
-Under construction.
+If you just want to change the theme color of Element, the [theme preview website](https://elementui.github.io/theme-chalk-preview/#/en-US) is recommended. The theme color of Element is bright and friendly blue. By changing it, you can make Element more visually connected to specific projects.
+
+The above website enables you to preview theme of a new theme color in real-time, and it can generate a complete style package based on the new theme color for you to download directly (to import new style files in your project, please refer to the 'Import custom theme' or 'Import component theme on demand' part of this section).
+
+### Update SCSS variables in your project
+`theme-chalk` is written in SCSS. If your project also uses SCSS, you can directly change Element style variables. Create a new style file, e.g. `element-variables.scss`:
+
+```html
+/* theme color */
+$--color-primary: teal;
+
+/* icon font path, required */
+$--font-path: '../node_modules/element-ui/lib/theme-chalk/fonts';
+
+@import "../node_modules/element-ui/packages/theme-chalk/src/index";
+```
+
+Then in the entry file of your project, import this style file instead of Element's built CSS:
+```JS
+import Vue from 'vue'
+import Element from 'element-ui'
+import './element-variables.scss'
+
+Vue.use(Element)
+```
+
+Note that it is required to override icon font path to the relative path of Element's font files. You can edit the following variables in this way:
+
+| Variable | Description | Default value |
+| ------ | ---- | ------ |
+| $--sm | `sm` breakpoint for responsive layout | 768px |
+| $--md | `md` breakpoint for responsive layout | 992px |
+| $--lg | `lg` breakpoint for responsive layout | 1200px |
+| $--xl | `xl` breakpoint for responsive layout | 1920px |
+| $--color-primary | theme color | #409EFF |
+| $--color-success | color for success | #67C23A |
+| $--color-warning | color for warning | #EB9E05 |
+| $--color-danger | color for danger | #FA5555 |
+| $--color-info | color for info | #878D99 |
+| $--color-text-primary | color for primary texts | #2D2F33 |
+| $--color-text-regular | color for regular texts | #5A5E66 |
+| $--color-text-secondary | color for secondary texts | #878D99 |
+| $--color-text-placeholder | color for placeholder texts | #B4BCCC |
+| $--border-color-base | base border color | #D8DCE5 |
+| $--border-color-light | light border color | #DFE4ED |
+| $--border-color-lighter | lighter border color | #E6EBF5 |
+| $--border-color-extra-light | extra light border color | #EDF2FC |
+| $--font-path | icon font file path | 'fonts' |
 
 ### More customizations
 If you need more customization than just changing the theme color, please follow these steps:

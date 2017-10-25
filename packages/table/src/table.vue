@@ -255,7 +255,7 @@
       getMigratingConfig() {
         return {
           events: {
-            expand: 'expand is renamed to `expand-change`'
+            expand: 'expand is renamed to expand-change'
           }
         };
       },
@@ -269,8 +269,8 @@
         this.store.updateAllSelected();
       },
 
-      toggleRowExpanded(row, expanded) {
-        this.store.toggleRowExpanded(row, expanded);
+      toggleRowExpansion(row, expanded) {
+        this.store.toggleRowExpansion(row, expanded);
       },
 
       clearSelection() {

@@ -10,7 +10,7 @@
   padding: $--popover-padding;
   z-index: $--index-popper;
   color: $--color-text-regular;
-  line-height: 1.7;
+  line-height: 1.4;
   text-align: justify;
   word-break: break-all;
   font-size: $--popover-font-size;
@@ -24,7 +24,7 @@
     color: $--popover-title-color;
     font-size: $--popover-title-font-size;
     line-height: 1;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
   }
 }
 
