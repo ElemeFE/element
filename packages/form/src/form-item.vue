@@ -32,31 +32,7 @@
 <script>
   import AsyncValidator from 'async-validator';
   import emitter from 'element-ui/src/mixins/emitter';
-
-  function noop() {}
-
-  function getPropByPath(obj, path) {
-    let tempObj = obj;
-    path = path.replace(/\[(\w+)\]/g, '.$1');
-    path = path.replace(/^\./, '');
-
-    let keyArr = path.split('.');
-    let i = 0;
-
-    for (let len = keyArr.length; i < len - 1; ++i) {
-      let key = keyArr[i];
-      if (key in tempObj) {
-        tempObj = tempObj[key];
-      } else {
-        throw new Error('please transfer a valid prop path to form item!');
-      }
-    }
-    return {
-      o: tempObj,
-      k: keyArr[i],
-      v: tempObj[keyArr[i]]
-    };
-  }
+  import { noop, getPropByPath } from 'element-ui/src/utils/util';
 
   export default {
     name: 'ElFormItem',
@@ -148,7 +124,7 @@
             path = path.replace(/:/, '.');
           }
 
-          return getPropByPath(model, path).v;
+          return getPropByPath(model, path, true).v;
         }
       },
       isRequired() {
@@ -226,7 +202,7 @@
           path = path.replace(/:/, '.');
         }
 
-        let prop = getPropByPath(model, path);
+        let prop = getPropByPath(model, path, true);
 
         if (Array.isArray(value)) {
           this.validateDisabled = true;

@@ -44,6 +44,36 @@ const toggleRowSelection = function(states, row, selected) {
   return changed;
 };
 
+const toggleRowExpanded = function(states, row, expanded) {
+  let changed = false;
+  const expandRows = states.expandRows;
+  if (typeof expanded !== 'undefined') {
+    const index = expandRows.indexOf(row);
+    if (expanded) {
+      if (index === -1) {
+        expandRows.push(row);
+        changed = true;
+      }
+    } else {
+      if (index !== -1) {
+        expandRows.splice(index, 1);
+        changed = true;
+      }
+    }
+  } else {
+    const index = expandRows.indexOf(row);
+    if (index === -1) {
+      expandRows.push(row);
+      changed = true;
+    } else {
+      expandRows.splice(index, 1);
+      changed = true;
+    }
+  }
+
+  return changed;
+};
+
 const TableStore = function(table, initialState = {}) {
   if (!table) {
     throw new Error('Table is required.');
@@ -259,26 +289,6 @@ TableStore.prototype.mutations = {
     this.updateAllSelected();
   },
 
-  toggleRowExpanded: function(states, row, expanded) {
-    const expandRows = states.expandRows;
-    if (typeof expanded !== 'undefined') {
-      const index = expandRows.indexOf(row);
-      if (expanded) {
-        if (index === -1) expandRows.push(row);
-      } else {
-        if (index !== -1) expandRows.splice(index, 1);
-      }
-    } else {
-      const index = expandRows.indexOf(row);
-      if (index === -1) {
-        expandRows.push(row);
-      } else {
-        expandRows.splice(index, 1);
-      }
-    }
-    this.table.$emit('expand', row, expandRows.indexOf(row) !== -1);
-  },
-
   toggleAllSelection: debounce(10, function(states) {
     const data = states.data || [];
     const value = !states.isAllSelected;
@@ -378,6 +388,13 @@ TableStore.prototype.toggleRowSelection = function(row, selected) {
   const changed = toggleRowSelection(this.states, row, selected);
   if (changed) {
     this.table.$emit('selection-change', this.states.selection);
+  }
+};
+
+TableStore.prototype.toggleRowExpanded = function(row, expanded) {
+  const changed = toggleRowExpanded(this.states, row, expanded);
+  if (changed) {
+    this.table.$emit('expand-change', row, this.states.expandRows);
   }
 };
 

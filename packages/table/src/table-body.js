@@ -63,14 +63,8 @@ export default {
                       if (rowspan === 1 && colspan === 1) {
                         return (
                           <td
-                            class={
-                              [
-                                column.id,
-                                column.align,
-                                column.className || '',
-                                columnsHidden[cellIndex] ? 'is-hidden' : ''
-                              ]
-                            }
+                            style={ this.getCellStyle($index, cellIndex, row, column) }
+                            class={ this.getCellClass($index, cellIndex, row, column) }
                             on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
                             on-mouseleave={ this.handleCellMouseLeave }>
                             {
@@ -92,14 +86,8 @@ export default {
                       } else {
                         return (
                           <td
-                            class={
-                              [
-                                column.id,
-                                column.align,
-                                column.className || '',
-                                columnsHidden[cellIndex] ? 'is-hidden' : ''
-                              ]
-                            }
+                            style={ this.getCellStyle($index, cellIndex, row, column) }
+                            class={ this.getCellClass($index, cellIndex, row, column) }
                             rowspan={ rowspan }
                             colspan={ colspan }
                             on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
@@ -270,29 +258,70 @@ export default {
       };
     },
 
-    getRowStyle(row, index) {
-      const rowStyle = this.rowStyle;
+    getRowStyle(row, rowIndex) {
+      const rowStyle = this.table.rowStyle;
       if (typeof rowStyle === 'function') {
-        return rowStyle.call(null, row, index);
+        return rowStyle.call(null, {
+          row,
+          rowIndex
+        });
       }
       return rowStyle;
     },
 
-    getRowClass(row, index) {
+    getRowClass(row, rowIndex) {
       const classes = ['el-table__row'];
 
-      if (this.stripe && index % 2 === 1) {
+      if (this.stripe && rowIndex % 2 === 1) {
         classes.push('el-table__row--striped');
       }
-      const rowClassName = this.rowClassName;
+      const rowClassName = this.table.rowClassName;
       if (typeof rowClassName === 'string') {
         classes.push(rowClassName);
       } else if (typeof rowClassName === 'function') {
-        classes.push(rowClassName.call(null, row, index) || '');
+        classes.push(rowClassName.call(null, {
+          row,
+          rowIndex
+        }));
       }
 
       if (this.store.states.expandRows.indexOf(row) > -1) {
         classes.push('expanded');
+      }
+
+      return classes.join(' ');
+    },
+
+    getCellStyle(rowIndex, columnIndex, row, column) {
+      const cellStyle = this.table.cellStyle;
+      if (typeof cellStyle === 'function') {
+        return cellStyle.call(null, {
+          rowIndex,
+          columnIndex,
+          row,
+          column
+        });
+      }
+      return cellStyle;
+    },
+
+    getCellClass(rowIndex, columnIndex, row, column) {
+      const classes = [column.id, column.align, column.className];
+
+      if (this.isColumnHidden(columnIndex)) {
+        classes.push('is-hidden');
+      }
+
+      const cellClassName = this.table.cellClassName;
+      if (typeof cellClassName === 'string') {
+        classes.push(cellClassName);
+      } else if (typeof cellClassName === 'function') {
+        classes.push(cellClassName.call(null, {
+          rowIndex,
+          columnIndex,
+          row,
+          column
+        }));
       }
 
       return classes.join(' ');
@@ -371,7 +400,7 @@ export default {
     },
 
     handleExpandClick(row) {
-      this.store.commit('toggleRowExpanded', row);
+      this.store.toggleRowExpanded(row);
     }
   }
 };

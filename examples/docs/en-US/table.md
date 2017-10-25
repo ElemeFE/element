@@ -256,10 +256,10 @@
         return row.tag === value;
       },
 
-      tableRowClassName(row, index) {
-        if (index === 1) {
+      tableRowClassName({row, rowIndex}) {
+        if (rowIndex === 1) {
           return 'warning-row';
-        } else if (index === 3) {
+        } else if (rowIndex === 3) {
           return 'success-row';
         }
         return '';
@@ -293,6 +293,10 @@
             };
           }
         }
+      },
+
+      indexMethod(index) {
+        return index * 2;
       }
     },
 
@@ -542,10 +546,10 @@ You can highlight your table content to distinguish between "success, informatio
 <script>
   export default {
     methods: {
-      tableRowClassName(row, index) {
-        if (index === 1) {
+      tableRowClassName({row, rowIndex}) {
+        if (rowIndex === 1) {
           return 'warning-row';
-        } else if (index === 3) {
+        } else if (rowIndex === 3) {
           return 'success-row';
         }
         return '';
@@ -1845,6 +1849,49 @@ Configuring rowspan and colspan allows you to merge cells
 ```
 :::
 
+### 自定义索引
+
+自定义 `type=index` 列的行号。
+:::demo 通过给 `type=index` 的列传入 `index` 属性，可以自定义索引。该属性传入数字时，将作为索引的起始值。也可以传入一个方法，它提供当前行的行号（从 `0` 开始）作为参数，返回值将作为索引展示。
+
+```html
+<template>
+  <el-table
+    :data="tableData"
+    style="width: 100%">
+    <el-table-column
+      type="index"
+      :index="indexMethod">
+    </el-table-column>
+    <el-table-column
+      prop="date"
+      label="日期"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="name"
+      label="姓名"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="address"
+      label="地址">
+    </el-table-column>
+  </el-table>
+</template>
+
+<script>
+  export default {
+    methods: {
+      indexMethod(index) {
+        return index * 2;
+      }
+    }
+  };
+</script>
+```
+:::
+
 ### Table Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -1858,8 +1905,14 @@ Configuring rowspan and colspan allows you to merge cells
 | show-header | whether Table header is visible | boolean | — | true |
 | highlight-current-row | whether current row is highlighted | boolean | — | false |
 | current-row-key | key of current row, a set only prop | string,number | — | — |
-| row-class-name | function that returns custom class names for a row, or a string assigning class names for every row | Function(row, index)/String | — | — |
-| row-style | function that returns custom style for a row,  or a string assigning custom style for every row | Function(row, index)/Object | — | — |
+| row-class-name | function that returns custom class names for a row, or a string assigning class names for every row | Function({row, rowIndex})/String | — | — |
+| row-style | function that returns custom style for a row,  or a string assigning custom style for every row | Function({row, rowIndex})/Object | — | — |
+| cell-class-name | function that returns custom class names for a cell, or a string assigning class names for every cell | Function({row, rowIndex})/String | — | — |
+| cell-style | function that returns custom style for a cell,  or a string assigning custom style for every cell | Function({row, rowIndex})/Object | — | — |
+| header-row-class-name | function that returns custom class names for a row in table header, or a string assigning class names for every row in table header | Function({row, rowIndex})/String | — | — |
+| header-row-style | function that returns custom style for a row in table header,  or a string assigning custom style for every row in table header | Function({row, rowIndex})/Object | — | — |
+| header-cell-class-name | function that returns custom class names for a cell in table header, or a string assigning class names for every cell in table header | Function({row, rowIndex})/String | — | — |
+| header-cell-style | function that returns custom style for a cell in table header,  or a string assigning custom style for every cell in table header | Function({row, rowIndex})/Object | — | — |
 | row-key | key of row data, used for optimizing rendering. Required if `reserve-selection` is on. When its type is String, multi-level access is supported, e.g. `user.info.id`, but `user.info[0].id` is not supported, in which case `Function` should be used. | Function(row)/String | — | — |
 | empty-text | Displayed text when data is empty. You can customize this area with `slot="empty"` | String | — | No Data |
 | default-expand-all | whether expand all rows by default, only works when the table has a column type="expand" | Boolean | — | false |
@@ -1889,13 +1942,14 @@ Configuring rowspan and colspan allows you to merge cells
 | filter-change | column's key. If you need to use the filter-change event, this attribute is mandatory to identify which column is being filtered | filters |
 | current-change | triggers when current row changes | currentRow, oldCurrentRow |
 | header-dragend | triggers when finish dragging header | newWidth, oldWidth, column, event |
-| expand | triggers when user expands or collapses a row | row, expanded |
+| expand-change | triggers when user expands or collapses a row | row, expandedRows |
 
 ### Table Methods
 | Method | Description | Parameters |
 |------|--------|-------|
 | clearSelection | used in multiple selection Table, clear selection, might be useful when `reserve-selection` is on | selection |
 | toggleRowSelection | used in multiple selection Table, toggle if a certain row is selected. With the second parameter, you can directly set if this row is selected | row, selected |
+| toggleRowExpanded | used in expand Table, toggle if a certain row is expanded. With the second parameter, you can directly set if this row is expanded | row, expanded |
 | setCurrentRow | used in single selection Table, set a certain row selected. If called without any parameter, it will clear selection. | row |
 | clearSort | clear sorting, restore data to the original order | — |
 | clearFilter | clear filter | — |
@@ -1909,6 +1963,7 @@ Configuring rowspan and colspan allows you to merge cells
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | type | type of the column. If set to `selection`, the column will display checkbox. If set to `index`, the column will display index of the row (staring from 1). If set to `expand`, the column will display expand icon.  | string | selection/index/expand | — |
+| index | 如果设置了 `type=index`，可以通过传递 `index` 属性来自定义索引 | string, Function(index) | - | - |
 | label | column label | string | — | — |
 | column-key | column's key. If you need to use the filter-change event, you need this attribute to identify which column is being filtered | string | string | — | — |
 | prop |  field name. You can also use its alias: `property` | string | — | — |
