@@ -46,6 +46,14 @@
       },
       visibleArrow: {
         default: true
+      },
+      showTimeout: {
+        type: Number,
+        default: 250
+      },
+      hideTimeout: {
+        type: Number,
+        default: 150
       }
     },
 
@@ -88,14 +96,14 @@
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
           this.visible = true;
-        }, 250);
+        }, this.showTimeout);
       },
       hide() {
         if (this.triggerElm.disabled) return;
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
           this.visible = false;
-        }, 150);
+        }, this.hideTimeout);
       },
       handleClick() {
         if (this.triggerElm.disabled) return;

@@ -18,28 +18,29 @@
 
 > A Vue.js 2.0 UI Toolkit for Web.
 
-<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/bD3dKbdDE2F7Ky9LUN1kjTFK/ElemeFE/element'>
-  <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/bD3dKbdDE2F7Ky9LUN1kjTFK/ElemeFE/element.svg' />
-</a >
+<!--<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/bD3dKbdDE2F7Ky9LUN1kjTFK/ElemeFE/element'>-->
+  <!--<img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/bD3dKbdDE2F7Ky9LUN1kjTFK/ElemeFE/element.svg' />-->
+<!--</a >-->
 
 ## Links
-- [Home Page](http://element.eleme.io/)
-- [Docs](http://element.eleme.io/#/component)
+- Homepage and documentation
+  - International users: http://element.eleme.io/
+  - Chinese users: http://element-cn.eleme.io/
 - [awesome-element](https://github.com/ElementUI/awesome-element)
 - [FAQ](./FAQ.md)
-- [Customize Theme](http://element.eleme.io/#/en-US/component/custom-theme)
-- [Preview and generate theme online](https://elementui.github.io/theme-preview)
+- [Customize theme](http://element.eleme.io/#/en-US/component/custom-theme)
+- [Preview and generate theme online](https://elementui.github.io/theme-chalk-preview)
 - [Element for React](https://github.com/eleme/element-react)
+- [Element for Angular](https://github.com/eleme/element-angular)
 - [Atom helper](https://github.com/ElemeFE/element-helper)
-- Starter Kit
+- Starter kit
   - [element-starter](https://github.com/ElementUI/element-starter)
   - [element-cooking-starter](https://github.com/ElementUI/element-cooking-starter)
   - [element-in-laravel-starter](https://github.com/ElementUI/element-in-laravel-starter)
-- [Design resources](https://github.com/ElementUI/Resources)
+- [Design resources](https://github.com/ElementUI/Resources) (working in progress)
 - Boilerplate for bug reports
   - [CodePen](https://codepen.io/anon/pen/ozYpNA)
   - [JSFiddle](https://jsfiddle.net/gmve9d3p/)
-- [Mint UI](https://github.com/ElemeFE/mint-ui) - Mobile UI elements for Vue.js
 
 ## Install
 ```shell

@@ -5,17 +5,15 @@
         if (!value) {
           return callback(new Error('Please input the age'));
         }
-        setTimeout(() => {
-          if (!Number.isInteger(value)) {
-            callback(new Error('Please input digits'));
+        if (!Number.isInteger(value)) {
+          callback(new Error('Please input digits'));
+        } else {
+          if (value < 18) {
+            callback(new Error('Age must be greater than 18'));
           } else {
-            if (value < 18) {
-              callback(new Error('Age must be greater than 18'));
-            } else {
-              callback();
-            }
+            callback();
           }
-        }, 1000);
+        }
       };
       var validatePass = (rule, value, callback) => {
         if (value === '') {
@@ -409,7 +407,7 @@ Depending on your design, there are several different ways to align your label e
 
 Form component allows you to verify your data, helping you find and correct errors.
 
-:::demo Just add the `rule` attribute for `Form` component, pass validation rules, and set `prop` attribute for `Form-Item` as a specific key that needs to be validated. See more information at [async-validator](https://github.com/yiminghe/async-validator).
+:::demo Just add the `rules` attribute for `Form` component, pass validation rules, and set `prop` attribute for `Form-Item` as a specific key that needs to be validated. See more information at [async-validator](https://github.com/yiminghe/async-validator).
 
 ```html
 <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
@@ -548,17 +546,15 @@ This example shows how to customize your own validation rules to finish a two-fa
         if (!value) {
           return callback(new Error('Please input the age'));
         }
-        setTimeout(() => {
-          if (!Number.isInteger(value)) {
-            callback(new Error('Please input digits'));
+        if (!Number.isInteger(value)) {
+          callback(new Error('Please input digits'));
+        } else {
+          if (value < 18) {
+            callback(new Error('Age must be greater than 18'));
           } else {
-            if (value < 18) {
-              callback(new Error('Age must be greater than 18'));
-            } else {
-              callback();
-            }
+            callback();
           }
-        }, 1000);
+        }
       };
       var validatePass = (rule, value, callback) => {
         if (value === '') {

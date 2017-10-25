@@ -300,9 +300,9 @@
 
       tableRowClassName({row, rowndex}) {
         if (rowndex === 1) {
-          return 'info-row';
+          return 'warning-row';
         } else if (rowndex === 3) {
-          return 'positive-row';
+          return 'success-row';
         }
         return '';
       },
@@ -351,12 +351,12 @@
 </script>
 
 <style>
-  .el-table .info-row {
-    background: #c9e5f5;
+  .el-table .warning-row {
+    background: oldlace;
   }
 
-  .el-table .positive-row {
-    background: #e2f0e4;
+  .el-table .success-row {
+    background: #f0f9eb;
   }
 
   .demo-table .name-wrapper {
@@ -574,12 +574,12 @@
 </template>
 
 <style>
-  .el-table .info-row {
-    background: #c9e5f5;
+  .el-table .warning-row {
+    background: oldlace;
   }
 
-  .el-table .positive-row {
-    background: #e2f0e4;
+  .el-table .success-row {
+    background: #f0f9eb;
   }
 </style>
 
@@ -588,9 +588,9 @@
     methods: {
       tableRowClassName({row, rowIndex}) {
         if (rowIndex === 1) {
-          return 'info-row';
+          return 'warning-row';
         } else if (rowIndex === 3) {
-          return 'positive-row';
+          return 'success-row';
         }
         return '';
       }
@@ -1963,6 +1963,7 @@
 | max-height | Table 的最大高度 | string/number | — | — |
 | stripe | 是否为斑马纹 table | boolean | — | false |
 | border | 是否带有纵向边框 | boolean | — | false |
+| size | Table 的尺寸 | string | medium / small / mini | — |
 | fit | 列的宽度是否自撑开 | boolean | — | true |
 | show-header | 是否显示表头 | boolean | — | true |
 | highlight-current-row | 是否要高亮当前行 | boolean | — | false |

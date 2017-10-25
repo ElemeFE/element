@@ -127,6 +127,26 @@
     }
   }
 
+  @include m(medium) {
+    th, td {
+      padding: 10px 0;
+    }
+  }
+
+  @include m(small) {
+    font-size: 12px;
+    th, td {
+      padding: 8px 0;
+    }
+  }
+
+  @include m(mini) {
+    font-size: 12px;
+    th, td {
+      padding: 6px 0;
+    }
+  }
+
   tr {
     background-color: $--color-white;
 
