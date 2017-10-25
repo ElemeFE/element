@@ -47,6 +47,7 @@
       :placeholder="currentPlaceholder"
       :name="name"
       :size="size"
+      :id="id"
       :disabled="disabled"
       :readonly="!filterable || multiple"
       :validate-event="false"
@@ -171,6 +172,7 @@
       value: {
         required: true
       },
+      id: String,
       size: String,
       disabled: Boolean,
       clearable: Boolean,
