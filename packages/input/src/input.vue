@@ -38,7 +38,10 @@
         </i>
       </span>
       <!-- 后置内容 -->
-      <span class="el-input__suffix" v-if="$slots.suffix || suffixIcon || validateState" :style="suffixOffset">
+      <span
+        class="el-input__suffix"
+        v-if="$slots.suffix || suffixIcon || validateState && needStatusIcon"
+        :style="suffixOffset">
         <span class="el-input__suffix-inner">
           <slot name="suffix"></slot>
           <i class="el-input__icon"
@@ -87,6 +90,9 @@
     mixins: [emitter, Focus('input'), Migrating],
 
     inject: {
+      elForm: {
+        default: ''
+      },
       elFormItem: {
         default: ''
       }
@@ -149,11 +155,14 @@
       validateState() {
         return this.elFormItem ? this.elFormItem.validateState : '';
       },
+      needStatusIcon() {
+        return this.elForm ? this.elForm.statusIcon : false;
+      },
       validateIcon() {
         return {
           validating: 'el-icon-loading',
           success: 'el-icon-circle-check',
-          error: 'el-icon-circle-cross'
+          error: 'el-icon-circle-close'
         }[this.validateState];
       },
       textareaStyle() {

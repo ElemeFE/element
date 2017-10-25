@@ -400,7 +400,7 @@ export default {
     },
 
     handleExpandClick(row) {
-      this.store.toggleRowExpanded(row);
+      this.store.toggleRowExpansion(row);
     }
   }
 };

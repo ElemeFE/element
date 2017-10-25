@@ -1,11 +1,57 @@
 ## 自定义主题
-Element 默认提供一套主题，CSS 命名采用 BEM 的风格方便使用者覆盖样式。如果你想完全替换主题色或者部分样式，可以使用下面的方法。
+Element 默认提供一套主题，CSS 命名采用 BEM 的风格，方便使用者覆盖样式。我们提供了三种方法，可以进行不同程度的样式自定义。
 
 ### 仅替换主题色
-整理中。
+如果仅希望更换 Element 的主题色，推荐使用[在线主题生成工具](https://elementui.github.io/theme-chalk-preview)。Element 默认的主题色是鲜艳、友好的蓝色。通过替换主题色，能够让 Element 的视觉更加符合具体项目的定位。
+
+使用上述工具，可以很方便地实时预览主题色改变之后的视觉，同时它还可以基于新的主题色生成完整的样式文件包，供直接下载使用（关于如何使用下载的主题包，请参考本节「引入自定义主题」和「搭配插件按需引入组件主题」部分）。
+
+### 在项目中改变 SCSS 变量
+Element 的 theme-chalk 使用 SCSS 编写，如果你的项目也使用了 SCSS，那么可以直接在项目中改变 Element 的样式变量。新建一个样式文件，例如 `element-variables.scss`，写入以下内容：
+```html
+/* 改变主题色变量 */
+$--color-primary: teal;
+
+/* 改变 icon 字体路径变量，必需 */
+$--font-path: '../node_modules/element-ui/lib/theme-chalk/fonts';
+
+@import "../node_modules/element-ui/packages/theme-chalk/src/index";
+```
+
+之后，在项目的入口文件中，直接引入以上样式文件即可（无需引入 Element 编译好的 CSS 文件）：
+```JS
+import Vue from 'vue'
+import Element from 'element-ui'
+import './element-variables.scss'
+
+Vue.use(Element)
+```
+
+需要注意的是，覆盖字体路径变量是必需的，将其赋值为 Element 中 icon 图标所在的相对路径即可。使用这种方式可以自定义的变量为：
+
+| 变量名 | 含义 | 默认值 |
+| ------ | ---- | ------ |
+| $--sm | 响应式布局中 `sm` 的断点值 | 768px |
+| $--md | 响应式布局中 `md` 的断点值 | 992px |
+| $--lg | 响应式布局中 `lg` 的断点值 | 1200px |
+| $--xl | 响应式布局中 `xl` 的断点值 | 1920px |
+| $--color-primary | 主题色 | #409EFF |
+| $--color-success | 表示「成功」的状态色 | #67C23A |
+| $--color-warning | 表示「警告」的状态色 | #EB9E05 |
+| $--color-danger | 表示「危险」的状态色 | #FA5555 |
+| $--color-info | 表示「信息」的状态色 | #878D99 |
+| $--color-text-primary | 主要文字色 | #2D2F33 |
+| $--color-text-regular | 常规文字色 | #5A5E66 |
+| $--color-text-secondary | 次要文字色 | #878D99 |
+| $--color-text-placeholder | 占位文字色 | #B4BCCC |
+| $--border-color-base | 一级边框 | #D8DCE5 |
+| $--border-color-light | 二级边框 | #DFE4ED |
+| $--border-color-lighter | 三级边框 | #E6EBF5 |
+| $--border-color-extra-light | 四级边框 | #EDF2FC |
+| $--font-path | icon 字体图标路径 | 'fonts' |
 
 ### 深层次的定制
-如果仅仅改变主题色不能满足你的需求，请按以下步骤进行更深层次的主题定制：
+如果仅仅改变以上变量不能满足你的需求，请按以下步骤进行更深层次的主题定制：
 
 #### <strong>安装工具</strong>
 首先安装「主题生成工具」，可以全局安装或者安装在当前项目下，推荐安装在项目里，方便别人 clone 项目时能直接安装依赖并启动，这里以全局安装做演示。
