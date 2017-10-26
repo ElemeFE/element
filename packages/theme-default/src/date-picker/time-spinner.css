@@ -13,16 +13,13 @@
     }
 
     @e wrapper {
-      max-height: 190px;
+      box-sizing: content-box;
+      max-height: 192px;
       overflow: auto;
       display: inline-block;
       width: 50%;
       vertical-align: top;
       position: relative;
-
-      & .el-scrollbar__wrap:not(.el-scrollbar__wrap--hidden-default) {
-        padding-bottom: 15px;
-      }
     }
 
     @e list {
