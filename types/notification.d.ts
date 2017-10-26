@@ -4,7 +4,7 @@ import { MessageType } from './message'
 /** Notification Component */
 export declare class ElNotificationComponent extends Vue {
   /** Close the Notification instance */
-  close ()
+  close (): void
 }
 
 export interface ElNotificationOptions {
