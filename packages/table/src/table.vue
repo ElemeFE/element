@@ -301,6 +301,62 @@
             }
           }
         });
+      },
+
+      changeSortState(column, order) {
+        const states = this.store.states;
+        let sortProp = states.sortProp;
+        let sortOrder;
+        const sortingColumn = states.sortingColumn;
+
+        if (typeof column === 'string') {
+          let col = null;
+          for (let i = 0; i < this.columns.length; i++) {
+            if (this.columns[i].property === column) {
+              col = this.columns[i];
+              break;
+            }
+          }
+          if (col === null) {
+            return;
+          } else {
+            column = col;
+          }
+        }
+
+        if (typeof order === 'boolean') {
+          order = order ? 'ascending' : 'descending';
+        } else if (!order) {
+          order = 'ascending';
+        }
+
+        if (column && column.property) {
+          if (sortingColumn !== column) {
+            if (sortingColumn) {
+              sortingColumn.order = null;
+            }
+            states.sortingColumn = column;
+            sortProp = column.property;
+          }
+
+          if (!order) {
+            sortOrder = column.order = null;
+            states.sortingColumn = null;
+            sortProp = null;
+          } else {
+            sortOrder = column.order = order;
+          }
+        } else {
+          sortingColumn.order = null;
+          states.sortingColumn = null;
+          sortProp = null;
+          sortOrder = null;
+        }
+
+        states.sortProp = sortProp;
+        states.sortOrder = sortOrder;
+
+        this.store.commit('changeSortCondition');
       }
     },
 

@@ -1740,6 +1740,7 @@ For table of numbers, you can add an extra row at the table footer displaying ea
 | clearSelection | used in multiple selection Table, clear selection, might be useful when `reserve-selection` is on | selection |
 | toggleRowSelection | used in multiple selection Table, toggle if a certain row is selected. With the second parameter, you can directly set if this row is selected | row, selected |
 | setCurrentRow | used in single selection Table, set a certain row selected. If called without any parameter, it will clear selection. | row |
+| changeSortState | change the sort state of the table | column(string): `prop` of the column which to be sorted，push will reset sort state<br>order(boolean): true(ascending), false(descending) |
 
 ### Table Slot
 | Name | Description |

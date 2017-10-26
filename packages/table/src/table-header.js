@@ -423,7 +423,7 @@ export default {
         sortProp = column.property;
       }
 
-      if (!order) {
+      if (!order || (sortingColumn === column && order === column.order)) {
         sortOrder = column.order = null;
         states.sortingColumn = null;
         sortProp = null;
