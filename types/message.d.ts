@@ -5,7 +5,7 @@ export type MessageType = 'success' | 'warning' | 'info' | 'error'
 /** Message Component */
 export declare class ElMessageComponent extends Vue {
   /** Close the Loading instance */
-  close ()
+  close (): void
 }
 
 export interface CloseEventHandler {
