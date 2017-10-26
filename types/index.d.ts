@@ -77,7 +77,7 @@ declare namespace ElementUI {
    * Please do not invoke this method directly.
    * Call `Vue.use(ElementUI)` to install.
    */
-  export function install (vue: typeof Vue, options: ElementUI.InstallationOptions)
+  export function install (vue: typeof Vue, options: ElementUI.InstallationOptions): void
 
   /** ElementUI component common definition */
   export type Component = ElementUIComponent
