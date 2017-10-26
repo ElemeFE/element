@@ -7,11 +7,10 @@ git clone -b gh-pages https://github.com/ElemeFE/element.git && cd element
 # build sub folder
 SUB_FOLDER='2.0'
 mkdir $SUB_FOLDER
-# rm -rf *.js *.css *.map static
+rm -rf *.js *.css *.map static
 rm -rf $SUB_FOLDER/**
-# cp -rf ../../examples/element-ui/** .
+cp -rf ../../examples/element-ui/** .
 cp -rf ../../examples/element-ui/** $SUB_FOLDER/
-cp -rf ../../examples/element-ui/versions.json .
 cd ../..
 
 # deploy domestic site

@@ -390,7 +390,11 @@
       const xhr = new XMLHttpRequest();
       xhr.onreadystatechange = _ => {
         if (xhr.readyState === 4 && xhr.status === 200) {
-          this.versions = JSON.parse(xhr.responseText);
+          const versions = JSON.parse(xhr.responseText);
+          this.versions = Object.keys(versions).slice(-2).reduce((prev, next) => {
+            prev[next] = versions[next];
+            return prev;
+          }, {});
         }
       };
       xhr.open('GET', '/versions.json');
