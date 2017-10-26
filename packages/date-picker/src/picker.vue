@@ -254,7 +254,7 @@ export default {
       if (this.picker && typeof this.picker.handleClear === 'function') {
         this.picker.handleClear();
       } else {
-        this.$emit('input');
+        this.$emit('input', '');
       }
     },
     value: {
@@ -321,7 +321,7 @@ export default {
     displayValue: {
       get() {
         const value = this.currentValue;
-        if (!value) return;
+        if (!value) return '';
         const formatter = (
           TYPE_VALUE_RESOLVER_MAP[this.type] ||
           TYPE_VALUE_RESOLVER_MAP['default']
