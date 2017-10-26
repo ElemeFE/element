@@ -245,6 +245,9 @@
       <div>
         <img class="jumbotron-plant-2" src="~examples/assets/images/plant-2.png" alt="">
         <img class="jumbotron-web" src="~examples/assets/images/web.png" alt="">
+        <img class="jumbotron-plant-1" src="~examples/assets/images/plant-1.png" alt="">
+        <img class="jumbotron-figure-1" src="~examples/assets/images/figure-1.png" alt="">
+        <img class="jumbotron-figure-2" src="~examples/assets/images/figure-2.png" alt="">
       </div>
       <div data-hover-layer="0">
         <img class="jumbotron-cloud-1" src="~examples/assets/images/cloud-1.png" alt="">
@@ -254,11 +257,6 @@
         <img class="jumbotron-compo-1" src="~examples/assets/images/compo-1.png" alt="">
         <img class="jumbotron-compo-2" src="~examples/assets/images/compo-2.png" alt="">
         <img class="jumbotron-compo-3" src="~examples/assets/images/compo-3.png" alt="">
-      </div>
-      <div data-hover-layer="2">
-        <img class="jumbotron-plant-1" src="~examples/assets/images/plant-1.png" alt="">
-        <img class="jumbotron-figure-1" src="~examples/assets/images/figure-1.png" alt="">
-        <img class="jumbotron-figure-2" src="~examples/assets/images/figure-2.png" alt="">
       </div>
     </div>
     <div class="cards">
@@ -309,17 +307,14 @@
   export default {
     mounted() {
       new Hover('.jumbotron', { // eslint-disable-line
-        max: 1,
+        max: 3,
         scale: 1,
         perspective: 700,
         layers: [{
           multiple: 0.01,
           reverseTranslate: true
         }, {
-          multiple: 0.04,
-          reverseTranslate: true
-        }, {
-          multiple: 0.015,
+          multiple: 0.02,
           reverseTranslate: true
         }]
       });
