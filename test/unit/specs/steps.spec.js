@@ -25,7 +25,6 @@ describe('Steps', () => {
         <el-step title="step1"></el-step>
         <el-step title="step2"></el-step>
         <el-step title="step3"></el-step>
-        <el-step title="step4"></el-step>
       </el-steps>
     `);
 
@@ -39,8 +38,8 @@ describe('Steps', () => {
     `);
 
     Vue.nextTick(_ => {
-      expect(vm.$el.querySelector('.el-step')).have.deep.property('style.width').equal('25%');
-      expect(vm2.$el.querySelector('.el-step')).have.deep.property('style.width').equal('100px');
+      expect(vm.$el.querySelector('.el-step')).have.deep.property('style.webkitFlexBasis').equal('50%');
+      expect(vm2.$el.querySelector('.el-step')).have.deep.property('style.webkitFlexBasis').equal('100px');
       done();
     });
   });
@@ -118,7 +117,7 @@ describe('Steps', () => {
     `);
 
     vm.$nextTick(_ => {
-      expect(vm.$el.querySelector('.el-step')).have.deep.property('style.height').equal('200px');
+      expect(vm.$el.querySelector('.el-step')).have.deep.property('style.webkitFlexBasis').equal('200px');
       done();
     });
   });

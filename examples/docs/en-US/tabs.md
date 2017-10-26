@@ -24,7 +24,8 @@
           name: '2',
           content: 'Tab 2 content'
         }],
-        tabIndex: 2
+        tabIndex: 2,
+        tabPosition: 'top'
       }
     },
     methods: {
@@ -172,6 +173,40 @@ Border card tabs.
 </el-tabs>
 ```
 
+:::
+
+### Tab position
+
+You can use `tab-position` attribute to set the tab's position.
+
+:::demo You can choose from four directions: `tabPosition="left|right|top|bottom"`
+
+```html
+<template>
+  <el-radio-group v-model="tabPosition" style="margin-bottom: 30px;">
+    <el-radio-button label="top">top</el-radio-button>
+    <el-radio-button label="right">right</el-radio-button>
+    <el-radio-button label="bottom">bottom</el-radio-button>
+    <el-radio-button label="left">left</el-radio-button>
+  </el-radio-group>
+
+  <el-tabs :tab-position="tabPosition" style="height: 200px;">
+    <el-tab-pane label="User">User</el-tab-pane>
+    <el-tab-pane label="Config">Config</el-tab-pane>
+    <el-tab-pane label="Role">Role</el-tab-pane>
+    <el-tab-pane label="Task">Task</el-tab-pane>
+  </el-tabs>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        tabPosition: 'top'
+      };
+    }
+  };
+</script>
+```
 :::
 
 ### Custom Tab
@@ -339,8 +374,8 @@ Only card type Tabs support addable & closeable.
 | closable  | whether Tab is closable | boolean   | — |  false  |
 | addable  | whether Tab is addable   | boolean   | — |  false  |
 | editable  | whether Tab is addable and closable | boolean   | — |  false  |
-| active-name(deprecated)  | name of the selected tab  | string   |  —  |  name of first tab |
 | value  | name of the selected tab  | string   |  —  |  name of first tab |
+| tab-position  | position of tabs | string   |  top/right/bottom/left  |  top |
 
 ### Tabs Events
 | Event Name | Description | Parameters |

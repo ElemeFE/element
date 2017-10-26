@@ -138,10 +138,10 @@ describe('Table', () => {
     it('tableRowClassName', done => {
       const vm = createTable(':row-class-name="tableRowClassName"', {
         methods: {
-          tableRowClassName(row, index) {
-            if (index === 1) {
+          tableRowClassName({row, rowIndex}) {
+            if (rowIndex === 1) {
               return 'info-row';
-            } else if (index === 3) {
+            } else if (rowIndex === 3) {
               return 'positive-row';
             }
 
@@ -171,8 +171,8 @@ describe('Table', () => {
     it('tableRowStyle[Function]', done => {
       const vm = createTable(':row-style="tableRowStyle"', {
         methods: {
-          tableRowStyle(row, index) {
-            if (index === 1) {
+          tableRowStyle({row, rowIndex}) {
+            if (rowIndex === 1) {
               return { height: '60px' };
             }
 
@@ -622,32 +622,6 @@ describe('Table', () => {
       }, DELAY);
     });
 
-    it('inline-template', done => {
-      const vm = createVue({
-        template: `
-          <el-table :data="testData">
-            <el-table-column prop="name" inline-template>
-              <span>[{{ row.name }}]</span>
-            </el-table-column>
-            <el-table-column prop="release"/>
-            <el-table-column prop="director"/>
-            <el-table-column prop="runtime"/>
-          </el-table>
-        `,
-
-        created() {
-          this.testData = getTestData();
-        }
-      });
-
-      setTimeout(_ => {
-        const cells = toArray(vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr td:first-child'));
-        expect(cells.map(n => n.textContent)).to.eql(getTestData().map(o => `[${o.name}]`));
-        destroyVM(vm);
-        done();
-      }, DELAY);
-    });
-
     it('render-header', done => {
       const vm = createVue({
         template: `
@@ -923,12 +897,12 @@ describe('Table', () => {
           extra = extra || '';
           return createVue({
             template: `
-            <el-table row-key="id" :data="testData" @expand="handleExpand" ${extra}>
+            <el-table row-key="id" :data="testData" @expand-change="handleExpand" ${extra}>
               <el-table-column type="expand">
-                <template scope="props">
+                <template slot-scope="props">
                   <div>{{props.row.name}}</div>
                 </template>
-              </el-table-column>
+            </el-table-column>
               <el-table-column prop="release" label="release" />
               <el-table-column prop="director" label="director" />
               <el-table-column prop="runtime" label="runtime" />

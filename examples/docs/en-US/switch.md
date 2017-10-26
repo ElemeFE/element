@@ -12,8 +12,11 @@
       return {
         value1: true,
         value2: true,
-        value3: '100',
-        value4: true
+        value3: true,
+        value4: true,
+        value5: '100',
+        value6: true,
+        value7: false
       }
     }
   };
@@ -24,19 +27,15 @@
 Switch is used for switching between two opposing states.
 
 ### Basic usage
-
-:::demo Bind `v-model` to a `Boolean` typed variable. You can add `on-text` or `off-text` attribute to show texts when the component is `on` or `off`, respectively. The `on-color` and `off-color` attribute decides the background color in two states.
+:::demo Bind `v-model` to a `Boolean` typed variable. The `active-color` and `inactive-color` attribute decides the background color in two states.
 
 ```html
-<el-switch
-  v-model="value1"
-  on-text=""
-  off-text="">
+<el-switch v-model="value1">
 </el-switch>
 <el-switch
   v-model="value2"
-  on-color="#13ce66"
-  off-color="#ff4949">
+  active-color="#13ce66"
+  inactive-color="#ff4949">
 </el-switch>
 
 <script>
@@ -52,18 +51,49 @@ Switch is used for switching between two opposing states.
 ```
 :::
 
-### Extended value types
-
-:::demo You can set `on-value` and `off-value` attributes. They both receive a `Boolean`, `String` or `Number` typed value.
+### Text description
+:::demo You can add `active-text` and `inactive-text` attribute to show texts.
 
 ```html
-<el-tooltip :content="'Switch value: ' + value3" placement="top">
+<el-switch
+  v-model="value3"
+  active-text="Pay by month"
+  inactive-text="Pay by year">
+</el-switch>
+<el-switch
+  style="display: block"
+  v-model="value4"
+  active-color="#13ce66"
+  inactive-color="#ff4949"
+  active-text="Pay by month"
+  inactive-text="Pay by year">
+</el-switch>
+
+<script>
+  export default {
+    data() {
+      return {
+        value3: true,
+        value4: true
+      }
+    }
+  };
+</script>
+```
+:::
+
+### Extended value types
+
+:::demo You can set `active-value` and `inactive-value` attributes. They both receive a `Boolean`, `String` or `Number` typed value.
+
+```html
+<el-tooltip :content="'Switch value: ' + value5" placement="top">
   <el-switch
-    v-model="value3"
-    on-color="#13ce66"
-    off-color="#ff4949"
-    on-value="100"
-    off-value="0">
+    v-model="value5"
+    active-color="#13ce66"
+    inactive-color="#ff4949"
+    active-value="100"
+    inactive-value="0">
   </el-switch>
 </el-tooltip>
 
@@ -71,7 +101,7 @@ Switch is used for switching between two opposing states.
   export default {
     data() {
       return {
-        value3: '100'
+        value5: '100'
       }
     }
   };
@@ -86,13 +116,11 @@ Switch is used for switching between two opposing states.
 
 ```html
 <el-switch
-  v-model="value4"
-  on-text=""
-  off-text=""
+  v-model="value6"
   disabled>
 </el-switch>
 <el-switch
-  v-model="value4"
+  v-model="value7"
   disabled>
 </el-switch>
 
@@ -100,7 +128,8 @@ Switch is used for switching between two opposing states.
   export default {
     data() {
       return {
-        value4: true
+        value6: true,
+        value7: false
       }
     }
   };
@@ -113,22 +142,24 @@ Switch is used for switching between two opposing states.
  Attribute      | Description          | Type      | Accepted Values       | Default
 ----| ----| ----| ----|----
 disabled | whether Switch is disabled | boolean | — | false
-width | width of Switch | number | — | 58 (with text) / 46 (no text)
-on-close-icon | class name of the icon displayed when in `on` state, overrides `on-text` | string | — | —
-off-close-icon |class name of the icon displayed when in `off` state, overrides `off-text`| string | — | —
-on-text | text displayed when in `on` state | string | — | ON
-off-text | text displayed when in `off` state | string | — | OFF
-on-value  | switch value when in `on` state | boolean / string / number | — | true
-off-value  | switch value when in `off` state | boolean / string / number | — | false
-on-color | background color when in `on` state | string | — | #20A0FF
-off-color | background color when in `off` state | string | — | #C0CCDA
-name | input name of Switch | string | — | —
-allow-focus | allow `focus` and `blur` events on the input | boolean | — | false
+width | width of Switch | number | — | 40
+active-icon-class | class name of the icon displayed when in `on` state, overrides `active-text` | string | — | —
+inactive-icon-class |class name of the icon displayed when in `off` state, overrides `inactive-text`| string | — | —
+active-text | text displayed when in `on` state | string | — | —
+inactive-text | text displayed when in `off` state | string | — | —
+active-value  | switch value when in `on` state | boolean / string / number | — | true
+inactive-value  | switch value when in `off` state | boolean / string / number | — | false
+active-color | background color when in `on` state | string | — | #409EFF
+inactive-color | background color when in `off` state | string | — | #C0CCDA
+name| input name of Switch | string | — | —
 
 ### Events
 
  Event Name | Description | Parameters
 ---- | ----| ----
 change | triggers when value changes | value after changing
-blur | triggers on blur (if `allow-focus` is true) | event: Event
-focus | triggers on focus (if `allow-focus` is true) | event: Event
+
+### Methods
+Method | Description | Parameters
+------|--------|-------
+focus | focus the Switch component | —
