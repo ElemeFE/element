@@ -46,7 +46,7 @@ export declare class ElTree extends ElementUIComponent {
   props: object
 
   /** Method for loading subtree data */
-  load: (node: TreeNode, resolve) => void
+  load: (node: TreeNode, resolve: Function) => void
 
   /** Render function for tree node */
   renderContent: RenderContent
@@ -128,7 +128,7 @@ export declare class ElTree extends ElementUIComponent {
    * @param checked Indicating the node checked or not
    * @param deep Indicating whether to checked state deeply or not
    */
-  setChecked (data: TreeNode | any, checked: boolean, deep: boolean)
+  setChecked (data: TreeNode | any, checked: boolean, deep: boolean): void
 
   /**
    * Return the highlight node's key (null if no node is highlighted)
