@@ -10,8 +10,13 @@
   >
     <li
       v-for="(file, index) in files"
-      :class="['el-upload-list__item', 'is-' + file.status]"
+      :class="['el-upload-list__item', 'is-' + file.status, focusing ? 'focusing' : '']"
       :key="index"
+      tabindex="0"
+      @keydown.delete="$emit('remove', file)"
+      @focus="focusing = true"
+      @blur="focusing = false"
+      @click="focusing = false"
     >
       <img
         class="el-upload-list__item-thumbnail"
@@ -29,13 +34,14 @@
         }"></i>
       </label>
       <i class="el-icon-close" v-if="!disabled" @click="$emit('remove', file)"></i>
+      <i class="el-icon-close-tip" v-if="!disabled">{{ t('el.upload.deleteTip') }}</i> <!--因为close按钮只在li:focus的时候 display, li blur后就不存在了，所以键盘导航时永远无法 focus到 close按钮上-->
       <el-progress
         v-if="file.status === 'uploading'"
         :type="listType === 'picture-card' ? 'circle' : 'line'"
         :stroke-width="listType === 'picture-card' ? 6 : 2"
         :percentage="parsePercentage(file.percentage)">
       </el-progress>
-      <span class="el-upload-list__item-actions" v-if="listType === 'picture-card'">
+        <span class="el-upload-list__item-actions" v-if="listType === 'picture-card'">
         <span
           class="el-upload-list__item-preview"
           v-if="handlePreview && listType === 'picture-card'"
@@ -61,6 +67,11 @@
   export default {
     mixins: [Locale],
 
+    data() {
+      return {
+        focusing: false
+      };
+    },
     components: { ElProgress },
 
     props: {

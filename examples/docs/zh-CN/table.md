@@ -298,17 +298,47 @@
         return row.tag === value;
       },
 
-      tableRowClassName(row, index) {
-        if (index === 1) {
-          return 'info-row';
-        } else if (index === 3) {
-          return 'positive-row';
+      tableRowClassName({row, rowndex}) {
+        if (rowndex === 1) {
+          return 'warning-row';
+        } else if (rowndex === 3) {
+          return 'success-row';
         }
         return '';
       },
 
       deleteRow(index, rows) {
         rows.splice(index, 1);
+      },
+
+      arraySpanMethod({ row, column, rowIndex, columnIndex }) {
+        if (rowIndex % 2 === 0) {
+          if (columnIndex === 0) {
+            return [1, 2];
+          } else if (columnIndex === 1) {
+            return [0, 0];
+          }
+        }
+      },
+
+      objectSpanMethod({ row, column, rowIndex, columnIndex }) {
+        if (columnIndex === 0) {
+          if (rowIndex % 2 === 0) {
+            return {
+              rowspan: 2,
+              colspan: 1
+            };
+          } else {
+            return {
+              rowspan: 0,
+              colspan: 0
+            };
+          }
+        }
+      },
+
+      indexMethod(index) {
+        return index * 2;
       }
     },
 
@@ -321,12 +351,12 @@
 </script>
 
 <style>
-  .el-table .info-row {
-    background: #c9e5f5;
+  .el-table .warning-row {
+    background: oldlace;
   }
 
-  .el-table .positive-row {
-    background: #e2f0e4;
+  .el-table .success-row {
+    background: #f0f9eb;
   }
 
   .demo-table .name-wrapper {
@@ -544,23 +574,23 @@
 </template>
 
 <style>
-  .el-table .info-row {
-    background: #c9e5f5;
+  .el-table .warning-row {
+    background: oldlace;
   }
 
-  .el-table .positive-row {
-    background: #e2f0e4;
+  .el-table .success-row {
+    background: #f0f9eb;
   }
 </style>
 
 <script>
   export default {
     methods: {
-      tableRowClassName(row, index) {
-        if (index === 1) {
-          return 'info-row';
-        } else if (index === 3) {
-          return 'positive-row';
+      tableRowClassName({row, rowIndex}) {
+        if (rowIndex === 1) {
+          return 'warning-row';
+        } else if (rowIndex === 3) {
+          return 'success-row';
         }
         return '';
       }
@@ -706,7 +736,7 @@
       fixed="right"
       label="操作"
       width="100">
-      <template scope="scope">
+      <template slot-scope="scope">
         <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
         <el-button type="text" size="small">编辑</el-button>
       </template>
@@ -769,7 +799,6 @@
 <template>
   <el-table
     :data="tableData3"
-    border
     style="width: 100%"
     height="250">
     <el-table-column
@@ -876,7 +905,6 @@
 <template>
   <el-table
     :data="tableData4"
-    border
     style="width: 100%"
     max-height="250">
     <el-table-column
@@ -914,7 +942,7 @@
       fixed="right"
       label="操作"
       width="120">
-      <template scope="scope">
+      <template slot-scope="scope">
         <el-button
           @click.native.prevent="deleteRow(scope.$index, tableData4)"
           type="text"
@@ -1001,7 +1029,6 @@
 <template>
   <el-table
     :data="tableData3"
-    border
     style="width: 100%">
     <el-table-column
       prop="date"
@@ -1187,7 +1214,6 @@
   <el-table
     ref="multipleTable"
     :data="tableData3"
-    border
     tooltip-effect="dark"
     style="width: 100%"
     @selection-change="handleSelectionChange">
@@ -1198,7 +1224,7 @@
     <el-table-column
       label="日期"
       width="120">
-      <template scope="scope">{{ scope.row.date }}</template>
+      <template slot-scope="scope">{{ scope.row.date }}</template>
     </el-table-column>
     <el-table-column
       prop="name"
@@ -1282,7 +1308,6 @@
 <template>
   <el-table
     :data="tableData"
-    border
     style="width: 100%"
     :default-sort = "{prop: 'date', order: 'descending'}"
     >
@@ -1348,7 +1373,6 @@
 <template>
   <el-table
     :data="tableData"
-    border
     style="width: 100%">
     <el-table-column
       prop="date"
@@ -1373,7 +1397,7 @@
       :filters="[{ text: '家', value: '家' }, { text: '公司', value: '公司' }]"
       :filter-method="filterTag"
       filter-placement="bottom-end">
-      <template scope="scope">
+      <template slot-scope="scope">
         <el-tag
           :type="scope.row.tag === '家' ? 'primary' : 'success'"
           close-transition>{{scope.row.tag}}</el-tag>
@@ -1430,36 +1454,35 @@
 <template>
   <el-table
     :data="tableData"
-    border
     style="width: 100%">
     <el-table-column
       label="日期"
       width="180">
-      <template scope="scope">
-        <el-icon name="time"></el-icon>
+      <template slot-scope="scope">
+        <i class="el-icon-time"></i>
         <span style="margin-left: 10px">{{ scope.row.date }}</span>
       </template>
     </el-table-column>
     <el-table-column
       label="姓名"
       width="180">
-      <template scope="scope">
+      <template slot-scope="scope">
         <el-popover trigger="hover" placement="top">
           <p>姓名: {{ scope.row.name }}</p>
           <p>住址: {{ scope.row.address }}</p>
           <div slot="reference" class="name-wrapper">
-            <el-tag>{{ scope.row.name }}</el-tag>
+            <el-tag size="medium">{{ scope.row.name }}</el-tag>
           </div>
         </el-popover>
       </template>
     </el-table-column>
     <el-table-column label="操作">
-      <template scope="scope">
+      <template slot-scope="scope">
         <el-button
-          size="small"
+          size="mini"
           @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
         <el-button
-          size="small"
+          size="mini"
           type="danger"
           @click="handleDelete(scope.$index, scope.row)">删除</el-button>
       </template>
@@ -1513,7 +1536,7 @@
     :data="tableData5"
     style="width: 100%">
     <el-table-column type="expand">
-      <template scope="props">
+      <template slot-scope="props">
         <el-form label-position="left" inline class="demo-table-expand">
           <el-form-item label="商品名称">
             <span>{{ props.row.name }}</span>
@@ -1751,6 +1774,224 @@
 ```
 :::
 
+### 合并行或列
+
+多行或多列共用一个数据时，可以合并行或列。
+:::demo 通过给`table`传入`span-method`方法可以实现合并行或列，方法的参数是一个对象，里面包含当前行`row`、当前列`column`、当前行号`rowIndex`、当前列号`columnIndex`四个属性。该函数可以返回一个包含两个元素的数组，第一个元素代表`rowspan`，第二个元素代表`colspan`。 也可以返回一个键名为`rowsapn`和`colspan`的对象。
+
+```html
+<template>
+  <div>
+    <el-table
+      :data="tableData6"
+      :span-method="arraySpanMethod"
+      border
+      style="width: 100%">
+      <el-table-column
+        prop="id"
+        label="ID"
+        width="180">
+      </el-table-column>
+      <el-table-column
+        prop="name"
+        label="姓名">
+      </el-table-column>
+      <el-table-column
+        prop="amount1"
+        sortable
+        label="数值 1">
+      </el-table-column>
+      <el-table-column
+        prop="amount2"
+        sortable
+        label="数值 2">
+      </el-table-column>
+      <el-table-column
+        prop="amount3"
+        sortable
+        label="数值 3">
+      </el-table-column>
+    </el-table>
+
+    <el-table
+      :data="tableData6"
+      :span-method="objectSpanMethod"
+      border
+      style="width: 100%; margin-top: 20px">
+      <el-table-column
+        prop="id"
+        label="ID"
+        width="180">
+      </el-table-column>
+      <el-table-column
+        prop="name"
+        label="姓名">
+      </el-table-column>
+      <el-table-column
+        prop="amount1"
+        label="数值 1（元）">
+      </el-table-column>
+      <el-table-column
+        prop="amount2"
+        label="数值 2（元）">
+      </el-table-column>
+      <el-table-column
+        prop="amount3"
+        label="数值 3（元）">
+      </el-table-column>
+    </el-table>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        tableData6: [{
+          id: '12987122',
+          name: '王小虎',
+          amount1: '234',
+          amount2: '3.2',
+          amount3: 10
+        }, {
+          id: '12987123',
+          name: '王小虎',
+          amount1: '165',
+          amount2: '4.43',
+          amount3: 12
+        }, {
+          id: '12987124',
+          name: '王小虎',
+          amount1: '324',
+          amount2: '1.9',
+          amount3: 9
+        }, {
+          id: '12987125',
+          name: '王小虎',
+          amount1: '621',
+          amount2: '2.2',
+          amount3: 17
+        }, {
+          id: '12987126',
+          name: '王小虎',
+          amount1: '539',
+          amount2: '4.1',
+          amount3: 15
+        }]
+      };
+    },
+    methods: {
+      arraySpanMethod({ row, column, rowIndex, columnIndex }) {
+        if (rowIndex % 2 === 0) {
+          if (columnIndex === 0) {
+            return [1, 2];
+          } else if (columnIndex === 1) {
+            return [0, 0];
+          }
+        }
+      },
+
+      objectSpanMethod({ row, column, rowIndex, columnIndex }) {
+        if (columnIndex === 0) {
+          if (rowIndex % 2 === 0) {
+            return {
+              rowspan: 2,
+              colspan: 1
+            };
+          } else {
+            return {
+              rowspan: 0,
+              colspan: 0
+            };
+          }
+        }
+      }
+    }
+  };
+</script>
+```
+:::
+
+### 自定义索引
+
+自定义 `type=index` 列的行号。
+:::demo 通过给 `type=index` 的列传入 `index` 属性，可以自定义索引。该属性传入数字时，将作为索引的起始值。也可以传入一个方法，它提供当前行的行号（从 `0` 开始）作为参数，返回值将作为索引展示。
+
+```html
+<template>
+  <el-table
+    :data="tableData"
+    style="width: 100%">
+    <el-table-column
+      type="index"
+      :index="indexMethod">
+    </el-table-column>
+    <el-table-column
+      prop="date"
+      label="日期"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="name"
+      label="姓名"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="address"
+      label="地址">
+    </el-table-column>
+  </el-table>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        tableData: [{
+          date: '2016-05-03',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333,
+          tag: '家'
+        }, {
+          date: '2016-05-02',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333,
+          tag: '公司'
+        }, {
+          date: '2016-05-04',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333,
+          tag: '家'
+        }, {
+          date: '2016-05-01',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333,
+          tag: '公司'
+        }],
+      }
+    },
+    methods: {
+      indexMethod(index) {
+        return index * 2;
+      }
+    }
+  };
+</script>
+```
+:::
+
 ### Table Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -1759,12 +2000,19 @@
 | max-height | Table 的最大高度 | string/number | — | — |
 | stripe | 是否为斑马纹 table | boolean | — | false |
 | border | 是否带有纵向边框 | boolean | — | false |
+| size | Table 的尺寸 | string | medium / small / mini | — |
 | fit | 列的宽度是否自撑开 | boolean | — | true |
 | show-header | 是否显示表头 | boolean | — | true |
 | highlight-current-row | 是否要高亮当前行 | boolean | — | false |
 | current-row-key | 当前行的 key，只写属性 | String,Number | — | — |
-| row-class-name | 行的 className 的回调方法，也可以使用字符串为所有行设置一个固定的 className。 | Function(row, index)/String | — | — |
-| row-style | 行的 style 的回调方法，也可以使用一个固定的 Object 为所有行设置一样的 Style。 | Function(row, index)/Object | — | — |
+| row-class-name | 行的 className 的回调方法，也可以使用字符串为所有行设置一个固定的 className。 | Function({row, rowIndex})/String | — | — |
+| row-style | 行的 style 的回调方法，也可以使用一个固定的 Object 为所有行设置一样的 Style。 | Function({row, rowIndex})/Object | — | — |
+| cell-class-name | 单元格的 className 的回调方法，也可以使用字符串为所有单元格设置一个固定的 className。 | Function({row, column, rowIndex, columnIndex})/String | — | — |
+| cell-style | 单元格的 style 的回调方法，也可以使用一个固定的 Object 为所有单元格设置一样的 Style。 | Function({row, rowIndex, rowIndex, columnIndex})/Object | — | — |
+| header-row-class-name | 表头行的 className 的回调方法，也可以使用字符串为所有表头行设置一个固定的 className。 | Function({row, rowIndex})/String | — | — |
+| header-row-style | 表头行的 style 的回调方法，也可以使用一个固定的 Object 为所有表头行设置一样的 Style。 | Function({row, rowIndex})/Object | — | — |
+| header-cell-class-name | 表头单元格的 className 的回调方法，也可以使用字符串为所有表头单元格设置一个固定的 className。 | Function({row, column, rowIndex, columnIndex})/String | — | — |
+| header-cell-style | 表头单元格的 style 的回调方法，也可以使用一个固定的 Object 为所有表头单元格设置一样的 Style。 | Function({row, rowIndex, rowIndex, columnIndex})/Object | — | — |
 | row-key | 行数据的 Key，用来优化 Table 的渲染；在使用 reserve-selection 功能的情况下，该属性是必填的。类型为 String 时，支持多层访问：`user.info.id`，但不支持 `user.info[0].id`，此种情况请使用 `Function`。 | Function(row)/String | — | — |
 | empty-text | 空数据时显示的文本内容，也可以通过 `slot="empty"` 设置 | String | — | 暂无数据 |
 | default-expand-all | 是否默认展开所有行，当 Table 中存在 type="expand" 的 Column 的时候有效 | Boolean | — | false |
@@ -1774,6 +2022,7 @@
 | show-summary | 是否在表尾显示合计行 | Boolean | — | false |
 | sum-text | 合计行第一列的文本 | String | — | 合计 |
 | summary-method | 自定义的合计计算方法 | Function({ columns, data }) | — | — |
+| span-method | 合并行或列的计算方法 | Function({ row, column, rowIndex, columnIndex }) | — | — |
 
 ### Table Events
 | 事件名 | 说明 | 参数 |
@@ -1793,24 +2042,28 @@
 | filter-change | 当表格的筛选条件发生变化的时候会触发该事件，参数的值是一个对象，对象的 key 是 column 的 columnKey，对应的 value 为用户选择的筛选条件的数组。 | filters |
 | current-change | 当表格的当前行发生变化的时候会触发该事件，如果要高亮当前行，请打开表格的 highlight-current-row 属性 | currentRow, oldCurrentRow |
 | header-dragend | 当拖动表头改变了列的宽度的时候会触发该事件 | newWidth, oldWidth, column, event |
-| expand | 当用户对某一行展开或者关闭的上会触发该事件 | row, expanded |
+| expand-change | 当用户对某一行展开或者关闭的时候会触发该事件 | row, expandedRows |
 
 ### Table Methods
 | 方法名 | 说明 | 参数 |
 | ---- | ---- | ---- |
 | clearSelection | 用于多选表格，清空用户的选择，当使用 reserve-selection 功能的时候，可能会需要使用此方法 | selection |
 | toggleRowSelection | 用于多选表格，切换某一行的选中状态，如果使用了第二个参数，则是设置这一行选中与否（selected 为 true 则选中） | row, selected |
+| toggleRowExpansion | 用于可展开表格，切换某一行的展开状态，如果使用了第二个参数，则是设置这一行展开与否（expanded 为 true 则展开） | row, expanded |
 | setCurrentRow | 用于单选表格，设定某一行为选中行，如果调用时不加参数，则会取消目前高亮行的选中状态。 | row |
+| clearSort | 用于清空排序条件，数据会恢复成未排序的状态 | — |
+| clearFilter | 用于清空过滤条件，数据会恢复成未过滤的状态 | — |
 
 ### Table Slot
 | name | 说明 |
 |------|--------|
-| append | 插入至表格最后一行之后的内容，仍然位于 `<tbody>` 标签内。如果需要对表格的内容进行无限滚动操作，可能需要用到这个 slot。若表格有合计行，该 slot 会位于合计行之上。 |
+| append | 插入至表格最后一行之后的内容，如果需要对表格的内容进行无限滚动操作，可能需要用到这个 slot。若表格有合计行，该 slot 会位于合计行之上。 |
 
 ### Table-column Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| type | 对应列的类型。如果设置了 `selection` 则显示多选框；如果设置了 `index` 则显示该行的索引（从 1 开始计算）；如果设置了 expand 则显示为一个可展开的按钮 | string | selection/index/expand | — |
+| type | 对应列的类型。如果设置了 `selection` 则显示多选框；如果设置了 `index` 则显示该行的索引（从 1 开始计算）；如果设置了 `expand` 则显示为一个可展开的按钮 | string | selection/index/expand | — |
+| index | 如果设置了 `type=index`，可以通过传递 `index` 属性来自定义索引 | string, Function(index) | - | - |
 | column-key | column 的 key，如果需要使用 filter-change 事件，则需要此属性标识是哪个 column 的筛选条件 | string | — | — |
 | label | 显示的标题 | string | — | — |
 | prop | 对应列内容的字段名，也可以使用 property 属性 | string | — | — |
@@ -1819,7 +2072,7 @@
 | fixed | 列是否固定在左侧或者右侧，true 表示固定在左侧 | string, boolean | true, left, right | — |
 | render-header | 列标题 Label 区域渲染使用的 Function | Function(h, { column, $index }) | — | — |
 | sortable | 对应列是否可以排序，如果设置为 'custom'，则代表用户希望远程排序，需要监听 Table 的 sort-change 事件 | boolean, string | true, false, 'custom' | false |
-| sort-method | 对数据进行排序的时候使用的方法，仅当 sortable 设置为 true 的时候有效，需返回一个布尔值 | Function(a, b) | — | — |
+| sort-method | 对数据进行排序的时候使用的方法，仅当 sortable 设置为 true 的时候有效，需返回一个数字，和 Array.sort 表现一致 | Function(a, b) | — | — |
 | resizable | 对应列是否可以通过拖动改变宽度（需要在 el-table 上设置 border 属性为真） | boolean | — | true |
 | formatter | 用来格式化内容 | Function(row, column, cellValue) | — | — |
 | show-overflow-tooltip | 当内容过长被隐藏时显示 tooltip | Boolean | — | false |

@@ -16,6 +16,7 @@ class TableLayout {
     this.rightFixedWidth = null;
     this.tableHeight = null;
     this.headerHeight = 44; // Table Header Height
+    this.appendHeight = 0; // Append Slot Height
     this.footerHeight = 44; // Table Footer Height
     this.viewportHeight = null; // Table Height - Scroll Bar Height
     this.bodyHeight = null; // Table Height - Table Header Height
@@ -74,8 +75,9 @@ class TableLayout {
   updateHeight() {
     const height = this.tableHeight = this.table.$el.clientHeight;
     const noData = !this.table.data || this.table.data.length === 0;
-    const { headerWrapper, footerWrapper } = this.table.$refs;
+    const { headerWrapper, appendWrapper, footerWrapper } = this.table.$refs;
     const footerHeight = this.footerHeight = footerWrapper ? footerWrapper.offsetHeight : 0;
+    this.appendHeight = appendWrapper ? appendWrapper.offsetHeight : 0;
     if (this.showHeader && !headerWrapper) return;
     if (!this.showHeader) {
       this.headerHeight = 0;
@@ -116,10 +118,12 @@ class TableLayout {
         bodyMinWidth += column.width || column.minWidth || 80;
       });
 
-      if (bodyMinWidth < bodyWidth - this.gutterWidth) { // DON'T HAVE SCROLL BAR
+      const scrollYWidth = this.scrollY ? this.gutterWidth : 0;
+
+      if (bodyMinWidth <= bodyWidth - scrollYWidth) { // DON'T HAVE SCROLL BAR
         this.scrollX = false;
 
-        const totalFlexWidth = bodyWidth - this.gutterWidth - bodyMinWidth;
+        const totalFlexWidth = bodyWidth - scrollYWidth - bodyMinWidth;
 
         if (flexColumns.length === 1) {
           flexColumns[0].realWidth = (flexColumns[0].minWidth || 80) + totalFlexWidth;

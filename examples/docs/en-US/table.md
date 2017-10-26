@@ -256,17 +256,47 @@
         return row.tag === value;
       },
 
-      tableRowClassName(row, index) {
-        if (index === 1) {
-          return 'info-row';
-        } else if (index === 3) {
-          return 'positive-row';
+      tableRowClassName({row, rowIndex}) {
+        if (rowIndex === 1) {
+          return 'warning-row';
+        } else if (rowIndex === 3) {
+          return 'success-row';
         }
         return '';
       },
 
       deleteRow(index, rows) {
         rows.splice(index, 1);
+      },
+
+      arraySpanMethod({ row, column, rowIndex, columnIndex }) {
+        if (rowIndex % 2 === 0) {
+          if (columnIndex === 0) {
+            return [1, 2];
+          } else if (columnIndex === 1) {
+            return [0, 0];
+          }
+        }
+      },
+
+      objectSpanMethod({ row, column, rowIndex, columnIndex }) {
+        if (columnIndex === 0) {
+          if (rowIndex % 2 === 0) {
+            return {
+              rowspan: 2,
+              colspan: 1
+            };
+          } else {
+            return {
+              rowspan: 0,
+              colspan: 0
+            };
+          }
+        }
+      },
+
+      indexMethod(index) {
+        return index * 2;
       }
     },
 
@@ -279,12 +309,12 @@
 </script>
 
 <style>
-  .el-table .info-row {
-    background: #c9e5f5;
+  .el-table .warning-row {
+    background: oldlace;
   }
 
-  .el-table .positive-row {
-    background: #e2f0e4;
+  .el-table .success-row {
+    background: #f0f9eb;
   }
 
   .demo-table .name-wrapper {
@@ -504,23 +534,23 @@ You can highlight your table content to distinguish between "success, informatio
 </template>
 
 <style>
-  .el-table .info-row {
-    background: #c9e5f5;
+  .el-table .warning-row {
+    background: oldlace;
   }
 
-  .el-table .positive-row {
-    background: #e2f0e4;
+  .el-table .success-row {
+    background: #f0f9eb;
   }
 </style>
 
 <script>
   export default {
     methods: {
-      tableRowClassName(row, index) {
-        if (index === 1) {
-          return 'info-row';
-        } else if (index === 3) {
-          return 'positive-row';
+      tableRowClassName({row, rowIndex}) {
+        if (rowIndex === 1) {
+          return 'warning-row';
+        } else if (rowIndex === 3) {
+          return 'success-row';
         }
         return '';
       }
@@ -561,7 +591,6 @@ When there are too many rows, you can use a fixed header.
   <el-table
     :data="tableData3"
     height="250"
-    border
     style="width: 100%">
     <el-table-column
       prop="date"
@@ -629,7 +658,6 @@ When there are too many columns, you can fix some of them.
 <template>
   <el-table
     :data="tableData"
-    border
     style="width: 100%">
     <el-table-column
       fixed
@@ -666,7 +694,7 @@ When there are too many columns, you can fix some of them.
       fixed="right"
       label="Operations"
       width="120">
-      <template scope="scope">
+      <template slot-scope="scope">
         <el-button @click="handleClick" type="text" size="small">Detail</el-button>
         <el-button type="text" size="small">Edit</el-button>
       </template>
@@ -732,7 +760,6 @@ When you have huge chunks of data to put in a table, you can fix the header and 
 <template>
   <el-table
     :data="tableData3"
-    border
     style="width: 100%"
     height="250">
     <el-table-column
@@ -839,7 +866,6 @@ When the the data is dynamically changed, you might want the table to have a max
 <template>
   <el-table
     :data="tableData4"
-    border
     style="width: 100%"
     max-height="250">
     <el-table-column
@@ -877,7 +903,7 @@ When the the data is dynamically changed, you might want the table to have a max
       fixed="right"
       label="Operations"
       width="120">
-      <template scope="scope">
+      <template slot-scope="scope">
         <el-button
           @click.native.prevent="deleteRow(scope.$index, tableData4)"
           type="text"
@@ -964,7 +990,6 @@ When the data structure is complex, you can use group header to show the data hi
 <template>
   <el-table
     :data="tableData3"
-    border
     style="width: 100%">
     <el-table-column
       prop="date"
@@ -1150,7 +1175,6 @@ You can also select multiple rows.
   <el-table
     ref="multipleTable"
     :data="tableData3"
-    border
     style="width: 100%"
     @selection-change="handleSelectionChange">
     <el-table-column
@@ -1160,7 +1184,7 @@ You can also select multiple rows.
     <el-table-column
       label="Date"
       width="120">
-      <template scope="scope">{{ scope.row.date }}</template>
+      <template slot-scope="scope">{{ scope.row.date }}</template>
     </el-table-column>
     <el-table-column
       property="name"
@@ -1244,7 +1268,6 @@ Sort the data to find or compare data quickly.
 <template>
   <el-table
     :data="tableData"
-    border
     :default-sort = "{prop: 'date', order: 'descending'}"
     style="width: 100%">
     <el-table-column
@@ -1308,7 +1331,6 @@ Filter the table to find desired data.
 <template>
   <el-table
     :data="tableData"
-    border
     style="width: 100%">
     <el-table-column
       prop="date"
@@ -1333,7 +1355,7 @@ Filter the table to find desired data.
       :filters="[{ text: 'Home', value: 'Home' }, { text: 'Office', value: 'Office' }]"
       :filter-method="filterTag"
       filter-placement="bottom-end">
-      <template scope="scope">
+      <template slot-scope="scope">
         <el-tag
           :type="scope.row.tag === 'Home' ? 'primary' : 'success'"
           close-transition>{{scope.row.tag}}</el-tag>
@@ -1390,37 +1412,36 @@ Customize table column so it can be integrated with other components.
 <template>
   <el-table
     :data="tableData"
-    border
     style="width: 100%">
     <el-table-column
       label="Date"
       width="180">
-      <template scope="scope">
-        <el-icon name="time"></el-icon>
+      <template slot-scope="scope">
+        <i class="el-icon-time"></i>
         <span style="margin-left: 10px">{{ scope.row.date }}</span>
       </template>
     </el-table-column>
     <el-table-column
       label="Name"
       width="180">
-      <template scope="scope">
+      <template slot-scope="scope">
         <el-popover trigger="hover" placement="top">
           <p>Name: {{ scope.row.name }}</p>
           <p>Addr: {{ scope.row.address }}</p>
           <div slot="reference" class="name-wrapper">
-            <el-tag>{{ scope.row.name }}</el-tag>
+            <el-tag size="medium">{{ scope.row.name }}</el-tag>
           </div>
         </el-popover>
       </template>
     </el-table-column>
     <el-table-column
       label="Operations">
-      <template scope="scope">
+      <template slot-scope="scope">
         <el-button
-          size="small"
+          size="mini"
           @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
         <el-button
-          size="small"
+          size="mini"
           type="danger"
           @click="handleDelete(scope.$index, scope.row)">Delete</el-button>
       </template>
@@ -1474,7 +1495,7 @@ When the row content is too long and you do not want to display the horizontal s
     :data="tableData3"
     style="width: 100%">
     <el-table-column type="expand">
-      <template scope="props">
+      <template slot-scope="props">
         <p>State: {{ props.row.state }}</p>
         <p>City: {{ props.row.city }}</p>
         <p>Address: {{ props.row.address }}</p>
@@ -1690,20 +1711,245 @@ For table of numbers, you can add an extra row at the table footer displaying ea
 ```
 :::
 
+### Rowspan and colspan
+
+Configuring rowspan and colspan allows you to merge cells
+:::demo Use the `span-method` attribute to configure rowspan and colspan. It accepts a method, and passes an object to that method including current row `row`, current column `column`, current row index `rowIndex` and current column index `columnIndex`. The method should return an array of two numbers, the first number being `rowspan` and second `colspan`. It can also return an object with `rowsapn` and `colspan` props.
+
+```html
+<template>
+  <div>
+    <el-table
+      :data="tableData6"
+      :span-method="arraySpanMethod"
+      border
+      style="width: 100%">
+      <el-table-column
+        prop="id"
+        label="ID"
+        width="180">
+      </el-table-column>
+      <el-table-column
+        prop="name"
+        label="Name">
+      </el-table-column>
+      <el-table-column
+        prop="amount1"
+        sortable
+        label="Amount 1">
+      </el-table-column>
+      <el-table-column
+        prop="amount2"
+        sortable
+        label="Amount 2">
+      </el-table-column>
+      <el-table-column
+        prop="amount3"
+        sortable
+        label="Amount 3">
+      </el-table-column>
+    </el-table>
+
+    <el-table
+      :data="tableData6"
+      :span-method="objectSpanMethod"
+      border
+      style="width: 100%; margin-top: 20px">
+      <el-table-column
+        prop="id"
+        label="ID"
+        width="180">
+      </el-table-column>
+      <el-table-column
+        prop="name"
+        label="Name">
+      </el-table-column>
+      <el-table-column
+        prop="amount1"
+        label="Amount 1">
+      </el-table-column>
+      <el-table-column
+        prop="amount2"
+        label="Amount 2">
+      </el-table-column>
+      <el-table-column
+        prop="amount3"
+        label="Amount 3">
+      </el-table-column>
+    </el-table>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        tableData6: [{
+          id: '12987122',
+          name: 'Tom',
+          amount1: '234',
+          amount2: '3.2',
+          amount3: 10
+        }, {
+          id: '12987123',
+          name: 'Tom',
+          amount1: '165',
+          amount2: '4.43',
+          amount3: 12
+        }, {
+          id: '12987124',
+          name: 'Tom',
+          amount1: '324',
+          amount2: '1.9',
+          amount3: 9
+        }, {
+          id: '12987125',
+          name: 'Tom',
+          amount1: '621',
+          amount2: '2.2',
+          amount3: 17
+        }, {
+          id: '12987126',
+          name: 'Tom',
+          amount1: '539',
+          amount2: '4.1',
+          amount3: 15
+        }]
+      };
+    },
+    methods: {
+      arraySpanMethod({ row, column, rowIndex, columnIndex }) {
+        if (rowIndex % 2 === 0) {
+          if (columnIndex === 0) {
+            return [1, 2];
+          } else if (columnIndex === 1) {
+            return [0, 0];
+          }
+        }
+      },
+
+      objectSpanMethod({ row, column, rowIndex, columnIndex }) {
+        if (columnIndex === 0) {
+          if (rowIndex % 2 === 0) {
+            return {
+              rowspan: 2,
+              colspan: 1
+            };
+          } else {
+            return {
+              rowspan: 0,
+              colspan: 0
+            };
+          }
+        }
+      }
+    }
+  };
+</script>
+```
+:::
+
+### Custom index
+
+You can customize row index in `type=index` columns.
+:::demo To customize row indices, use `index` attribute on <el-table-column> with `type=index`. If it is assigned to a number, all indices will have an offset of that number. It also accepts a method with each index (starting from `0`) as parameter, and the returned value will be displayed as index.
+
+```html
+<template>
+  <el-table
+    :data="tableData"
+    style="width: 100%">
+    <el-table-column
+      type="index"
+      :index="indexMethod">
+    </el-table-column>
+    <el-table-column
+      prop="date"
+      label="Date"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="name"
+      label="Name"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="address"
+      label="Address">
+    </el-table-column>
+  </el-table>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        tableData: [{
+          date: '2016-05-03',
+          name: 'Tom',
+          state: 'California',
+          city: 'Los Angeles',
+          address: 'No. 189, Grove St, Los Angeles',
+          zip: 'CA 90036',
+          tag: 'Home'
+        }, {
+          date: '2016-05-02',
+          name: 'Tom',
+          state: 'California',
+          city: 'Los Angeles',
+          address: 'No. 189, Grove St, Los Angeles',
+          zip: 'CA 90036',
+          tag: 'Office'
+        }, {
+          date: '2016-05-04',
+          name: 'Tom',
+          state: 'California',
+          city: 'Los Angeles',
+          address: 'No. 189, Grove St, Los Angeles',
+          zip: 'CA 90036',
+          tag: 'Home'
+        }, {
+          date: '2016-05-01',
+          name: 'Tom',
+          state: 'California',
+          city: 'Los Angeles',
+          address: 'No. 189, Grove St, Los Angeles',
+          zip: 'CA 90036',
+          tag: 'Office'
+        }],
+      }
+    },
+    methods: {
+      indexMethod(index) {
+        return index * 2;
+      }
+    }
+  };
+</script>
+```
+:::
+
 ### Table Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| data | table data | array | — | — |
+| data | Table data | array | — | — |
 | height | Table's height. By default it has an `auto` height. If its value is a number, the height is measured in pixels; if its value is a string, the height is affected by external styles | string/number | — | — |
 | max-height | Table's max-height. The height of the table starts from `auto` until it reaches the maxHeight limit. The `maxHeight` is measured in pixels, same as `height` | string/number | — | — |
-| stripe | whether table is striped | boolean | — | false |
-| border | whether table has vertical border | boolean | — | false |
+| stripe | whether Table is striped | boolean | — | false |
+| border | whether Table has vertical border | boolean | — | false |
+| size | size of Table | string | medium / small / mini | — |
 | fit | whether width of column automatically fits its container | boolean | — | true |
-| show-header | whether table header is visible | boolean | — | true |
+| show-header | whether Table header is visible | boolean | — | true |
 | highlight-current-row | whether current row is highlighted | boolean | — | false |
 | current-row-key | key of current row, a set only prop | string,number | — | — |
-| row-class-name | function that returns custom class names for a row, or a string assigning class names for every row | Function(row, index)/String | — | — |
-| row-style | function that returns custom style for a row,  or a string assigning custom style for every row | Function(row, index)/Object | — | — |
+| row-class-name | function that returns custom class names for a row, or a string assigning class names for every row | Function({row, rowIndex})/String | — | — |
+| row-style | function that returns custom style for a row, or an object assigning custom style for every row | Function({row, rowIndex})/Object | — | — |
+| cell-class-name | function that returns custom class names for a cell, or a string assigning class names for every cell | Function({row, rowIndex})/String | — | — |
+| cell-style | function that returns custom style for a cell, or an object assigning custom style for every cell | Function({row, rowIndex})/Object | — | — |
+| header-row-class-name | function that returns custom class names for a row in table header, or a string assigning class names for every row in table header | Function({row, rowIndex})/String | — | — |
+| header-row-style | function that returns custom style for a row in table header, or an object assigning custom style for every row in table header | Function({row, rowIndex})/Object | — | — |
+| header-cell-class-name | function that returns custom class names for a cell in table header, or a string assigning class names for every cell in table header | Function({row, rowIndex})/String | — | — |
+| header-cell-style | function that returns custom style for a cell in table header, or an object assigning custom style for every cell in table header | Function({row, rowIndex})/Object | — | — |
 | row-key | key of row data, used for optimizing rendering. Required if `reserve-selection` is on. When its type is String, multi-level access is supported, e.g. `user.info.id`, but `user.info[0].id` is not supported, in which case `Function` should be used. | Function(row)/String | — | — |
 | empty-text | Displayed text when data is empty. You can customize this area with `slot="empty"` | String | — | No Data |
 | default-expand-all | whether expand all rows by default, only works when the table has a column type="expand" | Boolean | — | false |
@@ -1713,6 +1959,7 @@ For table of numbers, you can add an extra row at the table footer displaying ea
 | show-summary | whether to display a summary row | Boolean | — | false |
 | sum-text | displayed text for the first column of summary row | String | — | Sum |
 | summary-method | custom summary method | Function({ columns, data }) | — | — |
+| span-method | method that returns rowspan and colspan | Function({ row, column, rowIndex, columnIndex }) | — | — |
 
 ### Table Events
 | Event Name | Description | Parameters |
@@ -1732,24 +1979,28 @@ For table of numbers, you can add an extra row at the table footer displaying ea
 | filter-change | column's key. If you need to use the filter-change event, this attribute is mandatory to identify which column is being filtered | filters |
 | current-change | triggers when current row changes | currentRow, oldCurrentRow |
 | header-dragend | triggers when finish dragging header | newWidth, oldWidth, column, event |
-| expand | triggers when user expands or collapses a row | row, expanded |
+| expand-change | triggers when user expands or collapses a row | row, expandedRows |
 
 ### Table Methods
 | Method | Description | Parameters |
 |------|--------|-------|
 | clearSelection | used in multiple selection Table, clear selection, might be useful when `reserve-selection` is on | selection |
 | toggleRowSelection | used in multiple selection Table, toggle if a certain row is selected. With the second parameter, you can directly set if this row is selected | row, selected |
+| toggleRowExpansion | used in expandable Table, toggle if a certain row is expanded. With the second parameter, you can directly set if this row is expanded or collapsed | row, expanded |
 | setCurrentRow | used in single selection Table, set a certain row selected. If called without any parameter, it will clear selection. | row |
+| clearSort | clear sorting, restore data to the original order | — |
+| clearFilter | clear filter | — |
 
 ### Table Slot
 | Name | Description |
 |------|--------|
-| append | Contents to be inserted after the last row. It is still nested inside the `<tbody>` tag. You may need this slot if you want to implement infinite scroll for the table. This slot will be displayed above the summary row if there is one. |
+| append | Contents to be inserted after the last row. You may need this slot if you want to implement infinite scroll for the table. This slot will be displayed above the summary row if there is one. |
 
 ### Table-column Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | type | type of the column. If set to `selection`, the column will display checkbox. If set to `index`, the column will display index of the row (staring from 1). If set to `expand`, the column will display expand icon.  | string | selection/index/expand | — |
+| index | customize indices for each row, works on columns with `type=index` | string, Function(index) | - | - |
 | label | column label | string | — | — |
 | column-key | column's key. If you need to use the filter-change event, you need this attribute to identify which column is being filtered | string | string | — | — |
 | prop |  field name. You can also use its alias: `property` | string | — | — |
@@ -1758,7 +2009,7 @@ For table of numbers, you can add an extra row at the table footer displaying ea
 | fixed | whether column is fixed at left/right. Will be fixed at left if `true` | string/boolean | true/left/right | — |
 | render-header | render function for table header of this column | Function(h, { column, $index }) | — | — |
 | sortable | whether column can be sorted. Remote sorting can be done by setting this attribute to 'custom' and listening to the `sort-change` event of Table | boolean, string | true, false, custom | false |
-| sort-method | sorting method, works when `sortable` is `true`. Should return a boolean. | Function(a, b) | — | — |
+| sort-method | sorting method, works when `sortable` is `true`. Should return a number, just like Array.sort | Function(a, b) | — | — |
 | resizable | whether column width can be resized, works when `border` of `el-table` is `true` | boolean | — | false |
 | formatter | function that formats cell content | Function(row, column, cellValue) | — | — |
 | show-overflow-tooltip | whether to hide extra content and show them in a tooltip when hovering on the cell | boolean | — | false |

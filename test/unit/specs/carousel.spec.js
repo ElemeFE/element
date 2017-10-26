@@ -11,7 +11,7 @@ describe('Carousel', () => {
       template: `
         <div>
           <el-carousel>
-            <el-carousel-item v-for="item in 3"></el-carousel-item>
+            <el-carousel-item v-for="item in 3" :key="item"></el-carousel-item>
           </el-carousel>
         </div>
       `
@@ -24,7 +24,7 @@ describe('Carousel', () => {
       template: `
         <div>
           <el-carousel :interval="50">
-            <el-carousel-item v-for="item in 3"></el-carousel-item>
+            <el-carousel-item v-for="item in 3" :key="item"></el-carousel-item>
           </el-carousel>
         </div>
       `
@@ -45,7 +45,7 @@ describe('Carousel', () => {
       template: `
         <div>
           <el-carousel :autoplay="false" :initial-index="1">
-            <el-carousel-item v-for="item in 3"></el-carousel-item>
+            <el-carousel-item v-for="item in 3" :key="item"></el-carousel-item>
           </el-carousel>
         </div>
       `
@@ -62,7 +62,7 @@ describe('Carousel', () => {
       template: `
         <div>
           <el-carousel :interval="20">
-            <el-carousel-item v-for="item in 3"></el-carousel-item>
+            <el-carousel-item v-for="item in 3" :key="item"></el-carousel-item>
           </el-carousel>
         </div>
       `
@@ -88,7 +88,7 @@ describe('Carousel', () => {
       template: `
         <div>
           <el-carousel :interval="50" @change="handleChange">
-            <el-carousel-item v-for="item in 3"></el-carousel-item>
+            <el-carousel-item v-for="item in 3" :key="item"></el-carousel-item>
           </el-carousel>
         </div>
       `,
@@ -135,7 +135,7 @@ describe('Carousel', () => {
         template: `
         <div>
           <el-carousel :autoplay="false">
-            <el-carousel-item v-for="item in 3"></el-carousel-item>
+            <el-carousel-item v-for="item in 3" :key="item"></el-carousel-item>
           </el-carousel>
         </div>
       `
@@ -155,7 +155,7 @@ describe('Carousel', () => {
         template: `
         <div>
           <el-carousel :autoplay="false" trigger="click" ref="carousel">
-            <el-carousel-item v-for="item in 3"></el-carousel-item>
+            <el-carousel-item v-for="item in 3" :key="item"></el-carousel-item>
           </el-carousel>
         </div>
       `
@@ -184,7 +184,7 @@ describe('Carousel', () => {
         template: `
         <div>
           <el-carousel :autoplay="false">
-            <el-carousel-item v-for="item in 3"></el-carousel-item>
+            <el-carousel-item v-for="item in 3" :key="item"></el-carousel-item>
           </el-carousel>
         </div>
       `
@@ -204,7 +204,7 @@ describe('Carousel', () => {
         template: `
         <div>
           <el-carousel :autoplay="false">
-            <el-carousel-item v-for="item in 3"></el-carousel-item>
+            <el-carousel-item v-for="item in 3" :key="item"></el-carousel-item>
           </el-carousel>
         </div>
       `
@@ -230,7 +230,7 @@ describe('Carousel', () => {
       template: `
         <div>
           <el-carousel :autoplay="false" type="card">
-            <el-carousel-item v-for="item in 7"></el-carousel-item>
+            <el-carousel-item v-for="item in 7" :key="item"></el-carousel-item>
           </el-carousel>
         </div>
       `

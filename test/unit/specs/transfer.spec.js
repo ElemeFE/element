@@ -91,11 +91,11 @@ describe('Transfer', () => {
   });
 
   it('customize', () => {
-    vm = createTransfer('v-model="value" :titles="titles" :render-content="renderFunc" :footer-format="format"', {
+    vm = createTransfer('v-model="value" :titles="titles" :render-content="renderFunc" :format="format"', {
       data() {
         return {
           value: [2],
-          titles: ['1', '2'],
+          titles: ['表1', '表2'],
           format: { noChecked: 'no', hasChecked: 'has' },
           renderFunc(h, option) {
             return <span>{ option.key } - { option.label }</span>;
@@ -104,9 +104,10 @@ describe('Transfer', () => {
       }
     });
     const transfer = vm.$refs.transfer.$el;
-    expect(transfer.querySelector('.el-transfer-panel__header').innerText).to.equal('1');
-    expect(transfer.querySelector('.el-checkbox__label span').innerText).to.equal('1 - 备选项 1');
-    expect(transfer.querySelector('.el-transfer-panel__footer .el-checkbox__label').innerText).to.equal('no');
+    const label = transfer.querySelector('.el-transfer-panel__header .el-checkbox__label');
+    expect(label.innerText.indexOf('表1') > -1).to.true;
+    expect(transfer.querySelector('.el-transfer-panel__list .el-checkbox__label span').innerText).to.equal('1 - 备选项 1');
+    expect(label.querySelector('span').innerText).to.equal('no');
   });
 
   it('check', () => {

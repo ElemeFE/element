@@ -12,7 +12,7 @@
     <div class="el-transfer__buttons">
       <el-button
         type="primary"
-        size="small"
+        :class="['el-transfer__button', hasButtonTexts ? 'is-with-texts' : '']"
         @click.native="addToLeft"
         :disabled="rightChecked.length === 0">
         <i class="el-icon-arrow-left"></i>
@@ -20,7 +20,7 @@
       </el-button>
       <el-button
         type="primary"
-        size="small"
+        :class="['el-transfer__button', hasButtonTexts ? 'is-with-texts' : '']"
         @click.native="addToRight"
         :disabled="leftChecked.length === 0">
         <span v-if="buttonTexts[1] !== undefined">{{ buttonTexts[1] }}</span>
@@ -44,11 +44,12 @@
   import Emitter from 'element-ui/src/mixins/emitter';
   import Locale from 'element-ui/src/mixins/locale';
   import TransferPanel from './transfer-panel.vue';
+  import Migrating from 'element-ui/src/mixins/migrating';
 
   export default {
     name: 'ElTransfer',
 
-    mixins: [Emitter, Locale],
+    mixins: [Emitter, Locale, Migrating],
 
     components: {
       TransferPanel,
@@ -98,7 +99,7 @@
           return [];
         }
       },
-      footerFormat: {
+      format: {
         type: Object,
         default() {
           return {};
@@ -131,6 +132,10 @@
 
       targetData() {
         return this.data.filter(item => this.value.indexOf(item[this.props.key]) > -1);
+      },
+
+      hasButtonTexts() {
+        return this.buttonTexts.length === 2;
       }
     },
 
@@ -141,6 +146,14 @@
     },
 
     methods: {
+      getMigratingConfig() {
+        return {
+          props: {
+            'footer-format': 'footer-format is renamed to format.'
+          }
+        };
+      },
+
       onSourceCheckedChange(val) {
         this.leftChecked = val;
       },

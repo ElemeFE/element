@@ -1,0 +1,8 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(radio-group) {
+  display: inline-block;
+  line-height: 1;
+  vertical-align: middle;
+}
