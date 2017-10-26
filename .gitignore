@@ -2,6 +2,7 @@ node_modules
 .DS_Store
 npm-debug.log
 lerna-debug.log
+yarn-error.log
 npm-debug.log.*
 lerna-debug.log.*
 lib

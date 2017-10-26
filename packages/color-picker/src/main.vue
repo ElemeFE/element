@@ -17,6 +17,7 @@
        @pick="confirmValue"
        @clear="clearValue"
        :color="color"
+       :show-clear="showClear"
        :show-alpha="showAlpha">
     </picker-dropdown>
   </div>
@@ -26,13 +27,20 @@
   import Color from './color';
   import PickerDropdown from './components/picker-dropdown.vue';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
+  import Emitter from 'element-ui/src/mixins/emitter';
 
   export default {
     name: 'ElColorPicker',
 
+    mixins: [ Emitter ],
+
     props: {
       value: {
         type: String
+      },
+      showClear: {
+        type: Boolean,
+        default: true
       },
       showAlpha: {
         type: Boolean
@@ -80,11 +88,13 @@
       confirmValue(value) {
         this.$emit('input', this.color.value);
         this.$emit('change', this.color.value);
+        this.dispatch('ElFormItem', 'el.form.change', [this.color.value]);
         this.showPicker = false;
       },
       clearValue() {
         this.$emit('input', null);
         this.$emit('change', null);
+        this.dispatch('ElFormItem', 'el.form.change', [null]);
         this.showPanelColor = false;
         this.showPicker = false;
         this.resetColor();

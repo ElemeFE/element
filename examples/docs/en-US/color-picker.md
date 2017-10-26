@@ -4,7 +4,8 @@
       return {
         color1: '#20a0ff',
         color2: null,
-        color3: 'rgba(19, 206, 102, 0.8)'
+        color3: 'rgba(19, 206, 102, 0.8)',
+        color4: '#f0f'
       };
     },
     mounted() {
@@ -84,9 +85,28 @@ ColorPicker is a color selector supporting multiple color formats.
 ```
 :::
 
+### Clear button
+
+:::demo Set `show-clear` to `false` to hide clear button.
+```html
+<el-color-picker v-model="color4" :show-clear="false"></el-color-picker>
+
+<script>
+  export default {
+    data() {
+      return {
+        color4: '#f0f'
+      }
+    }
+  };
+</script>
+```
+:::
+
 ### Attributes
 | Attribute | Description | Type | Accepted Values | Default |
 |---------- |-------- |---------- |-------------  |-------- |
+| show-clear | whether to show clear button | boolean | — | true |
 | show-alpha | whether to display the alpha slider | boolean | — | false |
 | color-format | color format of v-model | string | hsl / hsv / hex / rgb | hex (when show-alpha is false)/ rgb (when show-alpha is true) |
 
