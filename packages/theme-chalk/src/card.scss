@@ -1,0 +1,21 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(card) {
+  border-radius: $--card-border-radius;
+  border: 1px solid $--card-border-color;
+  background-color: $--color-white;
+  overflow: hidden;
+  box-shadow: $--box-shadow-light;
+  color: $--color-text-primary;
+
+  @include e(header) {
+    padding: #{$--card-padding - 2 $--card-padding};
+    border-bottom: 1px solid $--card-border-color;
+    box-sizing: border-box;
+  }
+
+  @include e(body) {
+    padding: $--card-padding;
+  }
+}

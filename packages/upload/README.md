@@ -13,7 +13,7 @@ npm i element-upload -D
 ```javascript
 import Vue from 'vue'
 import ElUpload from 'element-upload'
-import 'element-theme-default/dist/upload.css'
+import 'element-theme-chalk/dist/upload.css'
 
 Vue.use(ElUpload)
 ```

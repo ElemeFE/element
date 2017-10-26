@@ -23,7 +23,6 @@ describe('Alert', () => {
       showIcon: true
     }, true);
     expect(vm.$el.classList.contains('el-alert--success')).to.true;
-    expect(vm.$el.querySelector('.el-icon-circle-check')).to.exist;
   });
 
   it('description', () => {

@@ -13,7 +13,7 @@ npm i element-table -D
 ```javascript
 import Vue from 'vue'
 import ElTable from 'element-table'
-import 'element-theme-default'
+import 'element-theme-chalk'
 
 Vue.use(ElTable)
 ```

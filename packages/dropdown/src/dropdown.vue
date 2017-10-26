@@ -1,6 +1,7 @@
 <script>
   import Clickoutside from 'element-ui/src/utils/clickoutside';
   import Emitter from 'element-ui/src/mixins/emitter';
+  import Migrating from 'element-ui/src/mixins/migrating';
   import ElButton from 'element-ui/packages/button';
   import ElButtonGroup from 'element-ui/packages/button-group';
 
@@ -9,7 +10,7 @@
 
     componentName: 'ElDropdown',
 
-    mixins: [Emitter],
+    mixins: [Emitter, Migrating],
 
     directives: { Clickoutside },
 
@@ -18,20 +19,32 @@
       ElButtonGroup
     },
 
+    provide() {
+      return {
+        dropdown: this
+      };
+    },
+
     props: {
       trigger: {
         type: String,
         default: 'hover'
       },
-      menuAlign: {
-        type: String,
-        default: 'end'
-      },
       type: String,
-      size: String,
+      size: {
+        type: String,
+        default: ''
+      },
       splitButton: Boolean,
       hideOnClick: {
         type: Boolean,
+        default: true
+      },
+      placement: {
+        type: String,
+        default: 'bottom-end'
+      },
+      visibleArrow: {
         default: true
       },
       showTimeout: {
@@ -52,6 +65,12 @@
       };
     },
 
+    computed: {
+      dropdownSize() {
+        return this.size || (this.$ELEMENT || {}).size;
+      }
+    },
+
     mounted() {
       this.$on('menu-item-click', this.handleMenuItemClick);
       this.initEvent();
@@ -65,6 +84,13 @@
     },
 
     methods: {
+      getMigratingConfig() {
+        return {
+          props: {
+            'menu-align': 'menu-align is renamed to placement.'
+          }
+        };
+      },
       show() {
         if (this.triggerElm.disabled) return;
         clearTimeout(this.timeout);
@@ -110,20 +136,21 @@
     },
 
     render(h) {
-      let { hide, splitButton, type, size } = this;
+      let { hide, splitButton, type, dropdownSize } = this;
 
-      var handleClick = _ => {
-        this.$emit('click');
+      var handleMainButtonClick = (event) => {
+        this.$emit('click', event);
+        hide();
       };
 
       let triggerElm = !splitButton
         ? this.$slots.default
         : (<el-button-group>
-            <el-button type={type} size={size} nativeOn-click={handleClick}>
+            <el-button type={type} size={dropdownSize} nativeOn-click={handleMainButtonClick}>
               {this.$slots.default}
             </el-button>
-            <el-button ref="trigger" type={type} size={size} class="el-dropdown__caret-button">
-              <i class="el-dropdown__icon el-icon-caret-bottom"></i>
+            <el-button ref="trigger" type={type} size={dropdownSize} class="el-dropdown__caret-button">
+              <i class="el-dropdown__icon el-icon-arrow-down"></i>
             </el-button>
           </el-button-group>);
 

@@ -1,7 +1,7 @@
 <style>
   .demo-transfer {
     .transfer-footer {
-      margin-left: 20px;
+      margin-left: 15px;
       padding: 6px 5px;
     }
   }
@@ -152,7 +152,7 @@
 
 可以对列表标题文案、按钮文案、数据项的渲染函数、列表底部的勾选状态文案、列表底部的内容区等进行自定义。
 
-:::demo 可以使用 `titles`、`button-texts`、`render-content` 和 `footer-format` 属性分别对列表标题文案、按钮文案、数据项的渲染函数和列表底部的勾选状态文案进行自定义。对于列表底部的内容区，提供了两个具名 slot：`left-footer` 和 `right-footer`。此外，如果希望某些数据项在初始化时就被勾选，可以使用 `left-default-checked` 和 `right-default-checked` 属性。最后，本例还展示了 `change` 事件的用法。注意：由于 jsfiddle 不支持 JSX 语法，所以本例在 jsfiddle 中无法运行。但是在实际的项目中，只要正确地配置了相关依赖，就可以正常运行。
+:::demo 可以使用 `titles`、`button-texts`、`render-content` 和 `format` 属性分别对列表标题文案、按钮文案、数据项的渲染函数和列表顶部的勾选状态文案进行自定义。对于列表底部的内容区，提供了两个具名 slot：`left-footer` 和 `right-footer`。此外，如果希望某些数据项在初始化时就被勾选，可以使用 `left-default-checked` 和 `right-default-checked` 属性。最后，本例还展示了 `change` 事件的用法。注意：由于 jsfiddle 不支持 JSX 语法，所以本例在 jsfiddle 中无法运行。但是在实际的项目中，只要正确地配置了相关依赖，就可以正常运行。
 ```html
 <template>
   <el-transfer
@@ -163,7 +163,7 @@
     :render-content="renderFunc"
     :titles="['Source', 'Target']"
     :button-texts="['到左边', '到右边']"
-    :footer-format="{
+    :format="{
       noChecked: '${total}',
       hasChecked: '${checked}/${total}'
     }"
@@ -264,7 +264,7 @@
 | titles | 自定义列表标题 | array | — | ['列表 1', '列表 2'] |
 | button-texts | 自定义按钮文案 | array | — | [ ] |
 | render-content | 自定义数据项渲染函数 | function(h, option) | — | — |
-| footer-format | 列表底部勾选状态文案 | object{noChecked, hasChecked} | — | { noChecked: '共 ${total} 项', hasChecked: '已选 ${checked}/${total} 项' } |
+| format | 列表顶部勾选状态文案 | object{noChecked, hasChecked} | — | { noChecked: '${checked}/${total}', hasChecked: '${checked}/${total}' } |
 | props | 数据源的字段别名 | object{key, label, disabled} | — | — |
 | left-default-checked | 初始状态下左侧列表的已勾选项的 key 数组 | array | — | [ ] |
 | right-default-checked | 初始状态下右侧列表的已勾选项的 key 数组 | array | — | [ ] |
