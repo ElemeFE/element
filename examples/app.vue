@@ -199,35 +199,6 @@
       this.localize();
       this.renderAnchorHref();
       this.goAnchor();
-      setTimeout(() => {
-        const notified = localStorage.getItem('BETA_NOTIFIED');
-        if (!notified) {
-          const h = this.$createElement;
-          const title = this.lang === 'zh-CN'
-            ? '2.0.0 Beta 发布'
-            : '2.0.0 Beta released';
-          const messages = this.lang === 'zh-CN'
-            ? ['点击', '这里', '查看详情']
-            : ['Click ', 'here', ' to learn more'];
-          this.$notify.success({
-            title,
-            duration: 0,
-            message: h('span', [
-              messages[0],
-              h('a', {
-                attrs: {
-                  target: '_blank',
-                  href: `https://github.com/ElemeFE/element/issues/${ this.lang === 'zh-CN' ? '7612' : '7613' }`
-                }
-              }, messages[1]),
-              messages[2]
-            ]),
-            onClose() {
-              localStorage.setItem('BETA_NOTIFIED', 1);
-            }
-          });
-        }
-      }, 3500);
     },
 
     created() {
