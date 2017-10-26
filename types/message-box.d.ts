@@ -139,10 +139,10 @@ export interface ElMessageBox {
   prompt: ElMessageBoxShortcutMethod
 
   /** Set default options of message boxes */
-  setDefaults (defaults: ElMessageBoxOptions)
+  setDefaults (defaults: ElMessageBoxOptions): void
 
   /** Close current message box */
-  close ()
+  close (): void
 }
 
 declare module 'vue/types/vue' {
