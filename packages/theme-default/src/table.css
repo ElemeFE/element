@@ -216,6 +216,10 @@
       }
     }
 
+    @e fixed-without-h-scroll-bar {
+      box-shadow: none;
+    }
+
     @e fixed-header-wrapper {
       position: absolute;
       left: 0;
