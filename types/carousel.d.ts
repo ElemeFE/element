@@ -36,18 +36,18 @@ export declare class ElCarousel extends ElementUIComponent {
    *
    * @param index Index of the slide to be switched to (starting from 0)
    */
-  setActiveItem (index: number)
+  setActiveItem (index: number): void
 
   /**
    * Manually switch slide by carousel item's name
    *
    * @param name The name of the corresponding `el-carousel-item`
    */
-  setActiveItem (name: string)
+  setActiveItem (name: string): void
 
   /** Switch to the previous slide */
-  prev ()
+  prev (): void
 
   /** Switch to the next slide */
-  next ()
+  next (): void
 }
