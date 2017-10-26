@@ -28,7 +28,7 @@ export const orderBy = function(array, sortKey, reverse, sortMethod) {
 
   // sort on a copy to avoid mutating original array
   return array.slice().sort(sortMethod ? function(a, b) {
-    return sortMethod(a, b) ? order : -order;
+    return (sortMethod(a, b) > 0) ? order : -order;
   } : function(a, b) {
     if (sortKey !== '$key') {
       if (isObject(a) && '$value' in a) a = a.$value;
