@@ -5,6 +5,7 @@
     :readonly="!editable || readonly"
     :disabled="disabled"
     :size="pickerSize"
+    :id="id"
     :name="name"
     v-if="!ranged"
     v-clickoutside="handleClose"
@@ -47,6 +48,7 @@
       :placeholder="startPlaceholder"
       :value="displayValue && displayValue[0]"
       :disabled="disabled"
+      :id="id && id[0]"
       :name="name && name[0]"
       @input="handleStartInput"
       @change="handleStartChange"
@@ -57,6 +59,7 @@
       :placeholder="endPlaceholder"
       :value="displayValue && displayValue[1]"
       :disabled="disabled"
+      :id="id && id[1]"
       :name="name && name[1]"
       @input="handleEndInput"
       @change="handleEndChange"
@@ -272,6 +275,16 @@ const isString = function(val) {
   return typeof val === 'string' || val instanceof String;
 };
 
+const validator = function(val) {
+  // either: String, Array of String, null / undefined
+  return (
+    val === null ||
+    val === undefined ||
+    isString(val) ||
+    (Array.isArray(val) && val.length === 2 && val.every(isString))
+  );
+};
+
 export default {
   mixins: [Emitter, NewPopper, Focus('reference')],
 
@@ -291,20 +304,16 @@ export default {
     endPlaceholder: String,
     name: {
       default: '',
-      validator(val) {
-        // either: String, Array of String, null / undefined
-        return (
-          val === null ||
-          val === undefined ||
-          isString(val) ||
-          (Array.isArray(val) && val.length === 2 && val.every(isString))
-        );
-      }
+      validator
     },
     disabled: Boolean,
     clearable: {
       type: Boolean,
       default: true
+    },
+    id: {
+      default: '',
+      validator
     },
     popperClass: String,
     editable: {

@@ -49,6 +49,7 @@
       type="text"
       :placeholder="currentPlaceholder"
       :name="name"
+      :id="id"
       :size="selectSize"
       :disabled="disabled"
       :readonly="!filterable || multiple"
@@ -208,6 +209,7 @@
 
     props: {
       name: String,
+      id: String,
       value: {
         required: true
       },

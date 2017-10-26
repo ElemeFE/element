@@ -163,6 +163,7 @@
     },
     methods: {
       validate(trigger, callback = noop) {
+        this.validateDisabled = false;
         var rules = this.getFilteredRule(trigger);
         if ((!rules || rules.length === 0) && !this._props.hasOwnProperty('required')) {
           callback();
