@@ -6,123 +6,15 @@
 
 整理中。
 
-### 配置文件
+### 使用 vue-cli
 
-新建项目，项目结构为
-```text
-|- src/  --------------------- 项目源代码
-    |- App.vue
-    |- main.js  -------------- 入口文件
-|- .babelrc  ----------------- babel 配置文件
-|- index.html  --------------- HTML 模板
-|- package.json  ------------- npm 配置文件
-|- README.md  ---------------- 项目帮助文档
-|- webpack.config.js  -------- webpack 配置文件
-```
+我们推荐使用 [vue-cli](https://github.com/vuejs/vue-cli) 初始化项目，命令如下：
 
-几个配置文件的典型配置如下：
-
-**.babelrc**
-```json
-{
-  "presets": ["vue-app"]
-}
-```
-
-<br>
-
-**package.json**
-```json
-{
-  "name": "element-starter",
-  "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --port 8086",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
-  },
-  "dependencies": {
-    "element-ui": "next",
-    "vue": "^2.4.2"
-  },
-  "devDependencies": {
-    "babel-core": "^6.0.0",
-    "babel-loader": "^6.0.0",
-    "babel-preset-vue-app": "^1.2.0",
-    "cross-env": "^1.0.6",
-    "css-loader": "^0.23.1",
-    "file-loader": "^0.8.5",
-    "style-loader": "^0.13.1",
-    "vue-loader": "^9.8.0",
-    "webpack": "beta",
-    "webpack-dev-server": "beta"
-  }
-}
-```
-
-<br>
-
-**webpack.config.js**
-```javascript
-var path = require('path')
-var webpack = require('webpack')
-
-module.exports = {
-  entry: './src/main.js',
-  output: {
-    path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
-    filename: 'build.js'
-  },
-  module: {
-    loaders: [
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader'
-      },
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
-      },
-      {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader'
-      },
-      {
-        test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
-        loader: 'file-loader'
-      },
-      {
-        test: /\.(png|jpe?g|gif|svg)(\?\S*)?$/,
-        loader: 'file-loader',
-        query: {
-          name: '[name].[ext]?[hash]'
-        }
-      }
-    ]
-  },
-  devServer: {
-    historyApiFallback: true,
-    noInfo: true
-  },
-  devtool: '#eval-source-map'
-}
-
-if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = '#source-map'
-  // http://vue-loader.vuejs.org/en/workflow/production.html
-  module.exports.plugins = (module.exports.plugins || []).concat([
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"production"'
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    })
-  ])
-}
+```shell
+> npm i -g vue-cli
+> mkdir my-project && cd my-project
+> vue init webpack
+> npm i && npm i element-ui
 ```
 
 ### 引入 Element
