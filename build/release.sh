@@ -1,6 +1,3 @@
-git checkout master
-git merge dev
-
 #!/usr/bin/env sh
 set -e
 echo "Enter release version: "
@@ -19,11 +16,7 @@ then
   echo "Releasing theme-default $VERSION ..."
   cd packages/theme-default
   npm version $VERSION --message "[release] $VERSION"
-  if [[ $VERSION =~ "beta" ]]
-  then
-    npm publish --tag beta
-  else
-    npm publish
+  npm publish
   fi
   cd ../..
 
@@ -33,16 +26,8 @@ then
   npm version $VERSION --message "[release] $VERSION"
 
   # publish
-  git push eleme master
+  git push eleme 1.x
   git push eleme refs/tags/v$VERSION
-  git checkout dev
-  git rebase master
-  git push eleme dev
 
-  if [[ $VERSION =~ "beta" ]]
-  then
-    npm publish --tag beta
-  else
-    npm publish
-  fi
+  npm publish --tag legacy
 fi

@@ -8,9 +8,9 @@ git clone -b gh-pages https://github.com/ElemeFE/element.git && cd element
 SUB_FOLDER='1.4'
 mkdir $SUB_FOLDER
 
-rm -rf *.js *.css *.map static
+# rm -rf *.js *.css *.map static
 rm -rf $SUB_FOLDER/**
-cp -rf ../../examples/element-ui/** .
+# cp -rf ../../examples/element-ui/** .
 cp -rf ../../examples/element-ui/** $SUB_FOLDER/
 cd ../..
 
