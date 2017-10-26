@@ -214,7 +214,7 @@
 
       handleClear() {
         this.date = this.defaultValue ? new Date(this.defaultValue) : new Date();
-        this.$emit('pick');
+        this.$emit('pick', null);
       },
 
       emit(value, ...args) {

@@ -90,7 +90,7 @@
       },
 
       handleClear() {
-        this.$emit('pick');
+        this.$emit('pick', null);
       },
 
       scrollToOption(selector = '.selected') {

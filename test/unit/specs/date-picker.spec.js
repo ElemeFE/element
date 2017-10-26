@@ -101,13 +101,14 @@ describe('DatePicker', () => {
     setTimeout(_ => {
       const $el = vm.$refs.compo.picker.$el;
       $el.querySelector('td.available').click();
-      vm.$nextTick(_ => {
-        vm.$el.querySelector('.el-input__icon').click();
+      setTimeout(_ => {
+        vm.$refs.compo.showClose = true;
+        vm.$refs.compo.handleClickIcon({ stopPropagation: () => null });
         setTimeout(_ => {
-          expect(vm.value).to.empty;
+          expect(vm.value).to.equal(null);
           done();
         }, DELAY);
-      });
+      }, DELAY);
     }, DELAY);
   });
 
@@ -1173,6 +1174,28 @@ describe('DatePicker', () => {
         expect(startDate.length).to.equal(1);
         expect(endDate.length).to.equal(1);
         done();
+      }, DELAY);
+    });
+
+    it('clear value', done => {
+      vm = createVue({
+        template: '<el-date-picker type="daterange" v-model="value" ref="compo" />',
+        data() {
+          return {
+            value: [new Date(2000, 9, 1), new Date(2000, 9, 2)]
+          };
+        }
+      }, true);
+
+      vm.$el.querySelector('input').focus();
+
+      setTimeout(_ => {
+        vm.$refs.compo.showClose = true;
+        vm.$refs.compo.handleClickIcon({ stopPropagation: () => null });
+        setTimeout(_ => {
+          expect(vm.value).to.equal(null);
+          done();
+        }, DELAY);
       }, DELAY);
     });
   });
