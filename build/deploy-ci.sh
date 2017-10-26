@@ -42,9 +42,7 @@ if [ "$TRAVIS_TAG" ]; then
 
   SUB_FOLDER='2.0'
   mkdir $SUB_FOLDER
-  rm -rf *.js *.css *.map static
   rm -rf $SUB_FOLDER/**
-  cp -rf ../../examples/element-ui/** .
   cp -rf ../../examples/element-ui/** $SUB_FOLDER/
   git add -A .
   git commit -m "$TRAVIS_COMMIT_MSG"

@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-git checkout dev
+git checkout 1.x
 
 if test -n "$(git status --porcelain)"; then
   echo 'Unclean working tree. Commit or stash changes first.' >&2;
