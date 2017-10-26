@@ -406,7 +406,7 @@
         this.maxDate = null;
         this.leftDate = calcDefaultValue(this.defaultValue)[0];
         this.rightDate = nextMonth(this.leftDate);
-        this.handleConfirm(false);
+        this.$emit('pick', null);
       },
 
       handleChangeRange(val) {
