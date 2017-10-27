@@ -6,6 +6,7 @@
 @include b(checkbox) {
   color: $--checkbox-color;
   font-weight: $--checkbox-font-weight;
+  font-size: $--font-size-base;
   position: relative;
   cursor: pointer;
   display: inline-block;
@@ -338,4 +339,8 @@
       @include button-size($--button-mini-padding-vertical, $--button-mini-padding-horizontal, $--button-mini-font-size, 0);
     }
   }
+}
+
+@include b(checkbox-group) {
+  font-size: 0;
 }

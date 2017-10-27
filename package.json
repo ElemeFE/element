@@ -57,7 +57,7 @@
     "throttle-debounce": "^1.0.1"
   },
   "peerDependencies": {
-    "vue": "^2.3.0"
+    "vue": "^2.5.2"
   },
   "devDependencies": {
     "algoliasearch": "^3.24.5",
