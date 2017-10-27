@@ -1,6 +1,13 @@
 <template>
-  <div class="el-color-picker" v-clickoutside="hide">
-    <div class="el-color-picker__trigger" @click="showPicker = !showPicker">
+  <div
+    :class="[
+      'el-color-picker',
+      disabled ? 'is-disabled' : '',
+      colorSize ? `el-color-picker--${ colorSize }` : ''
+    ]"
+    v-clickoutside="hide">
+    <div class="el-color-picker__mask" v-if="disabled"></div>
+    <div class="el-color-picker__trigger" @click="handleTrigger">
       <span class="el-color-picker__color" :class="{ 'is-alpha': showAlpha }">
         <span class="el-color-picker__color-inner"
           :style="{
@@ -8,11 +15,11 @@
           }"></span>
         <span class="el-color-picker__empty el-icon-close" v-if="!value && !showPanelColor"></span>
       </span>
-      <span class="el-color-picker__icon el-icon-caret-bottom"></span>
+      <span class="el-color-picker__icon el-icon-arrow-down" v-show="value || showPanelColor"></span>
     </div>
     <picker-dropdown
        ref="dropdown"
-       class="el-color-picker__panel"
+       :class="['el-color-picker__panel', popperClass || '']"
        v-model="showPicker"
        @pick="confirmValue"
        @clear="clearValue"
@@ -31,14 +38,17 @@
     name: 'ElColorPicker',
 
     props: {
-      value: {
-        type: String
-      },
-      showAlpha: {
-        type: Boolean
-      },
-      colorFormat: {
-        type: String
+      value: String,
+      showAlpha: Boolean,
+      colorFormat: String,
+      disabled: Boolean,
+      size: String,
+      popperClass: String
+    },
+
+    inject: {
+      elFormItem: {
+        default: ''
       }
     },
 
@@ -54,6 +64,14 @@
             ? `rgba(${ r }, ${ g }, ${ b }, ${ this.color.get('alpha') / 100 })`
             : `rgb(${ r }, ${ g }, ${ b })`;
         }
+      },
+
+      _elFormItemSize() {
+        return (this.elFormItem || {}).elFormItemSize;
+      },
+
+      colorSize() {
+        return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
       }
     },
 
@@ -77,6 +95,10 @@
     },
 
     methods: {
+      handleTrigger() {
+        if (this.disabled) return;
+        this.showPicker = !this.showPicker;
+      },
       confirmValue(value) {
         this.$emit('input', this.color.value);
         this.$emit('change', this.color.value);

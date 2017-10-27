@@ -95,10 +95,10 @@ export default {
     transfer: {
       noMatch: 'لايوجد بيانات مطابقة',
       noData: 'لايوجد بيانات',
-      titles: ['قائمة 1', 'قائمة 2'], // to be translated
-      filterPlaceholder: 'ادخل كلمة', // to be translated
-      noCheckedFormat: '{total} عناصر', // to be translated
-      hasCheckedFormat: '{checked}/{total} مختار' // to be translated
+      titles: ['قائمة 1', 'قائمة 2'],
+      filterPlaceholder: 'ادخل كلمة',
+      noCheckedFormat: '{total} عناصر',
+      hasCheckedFormat: '{checked}/{total} مختار'
     }
   }
 };

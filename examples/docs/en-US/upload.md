@@ -19,7 +19,7 @@
         overflow: hidden;
 
         &:hover {
-          border-color: #20a0ff;
+          border-color: #409EFF;
         }
       }
       .avatar-uploader-icon {
@@ -113,6 +113,9 @@
       },
       handleChange(file, fileList) {
         this.fileList3 = fileList.slice(-3);
+      },
+      handleExceed(files, fileList) {
+        this.$message.warning(`You can upload up to 3 files. You selected ${files.length} files this time, and ${files.length + fileList.length} files totally`);
       }
     }
   }
@@ -123,13 +126,16 @@ Upload files by clicking or drag-and-drop
 
 ### Click to upload files
 
-:::demo Customize upload button type and text using `slot`.
+:::demo Customize upload button type and text using `slot`. Set `limit` and `on-exceed` to limit the maximum number of uploads allowed and specify method when the limit is exceeded.
 ```html
 <el-upload
   class="upload-demo"
   action="https://jsonplaceholder.typicode.com/posts/"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
+  multiple
+  :limit="3"
+  :on-exceed="handleExceed"
   :file-list="fileList">
   <el-button size="small" type="primary">Click to upload</el-button>
   <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
@@ -147,6 +153,9 @@ Upload files by clicking or drag-and-drop
       },
       handlePreview(file) {
         console.log(file);
+      },
+      handleExceed(files, fileList) {
+        this.$message.warning(`The limit is 3, you selected ${files.length} files this time, add up to ${files.length + fileList.length} totally`);
       }
     }
   }
@@ -179,7 +188,7 @@ Use `before-upload` hook to limit the upload file format and size.
     overflow: hidden;
   }
   .avatar-uploader .el-upload:hover {
-    border-color: #20a0ff;
+    border-color: #409EFF;
   }
   .avatar-uploader-icon {
     font-size: 28px;
@@ -402,11 +411,13 @@ on-progress | hook function when some progress occurs | function(event, file, fi
 on-change | hook function when select file or upload file success or upload file fail | function(file, fileList) | — | — |
 before-upload | hook function before uploading with the file to be uploaded as its parameter. If `false` is returned or a `Promise` is returned and then is rejected, uploading will be aborted | function(file) | — | —
 thumbnail-mode | whether thumbnail is displayed | boolean | — | false
-file-list | default uploaded files, e.g. [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}] | array | — | []
+file-list | default uploaded files, e.g. [{name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg'}] | array | — | []
 list-type | type of fileList | string | text/picture/picture-card | text |
 auto-upload | whether to auto upload file | boolean | — | true |
 http-request | override default xhr behavior, allowing you to implement your own upload-file's request | function | — | — |
 disabled | whether to disable upload | boolean | — | false |
+limit | maximum number of uploads allowed | number | — | — |
+on-exceed | hook function when limit is exceeded | function(files, fileList) | — | - |
 
 ### Methods
 | Methods Name | Description | Parameters |

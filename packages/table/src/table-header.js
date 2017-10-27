@@ -68,6 +68,9 @@ export default {
   render(h) {
     const originColumns = this.store.states.originColumns;
     const columnRows = convertToRows(originColumns, this.columns);
+    // 是否拥有多级表头
+    const isGroup = columnRows.length > 1;
+    if (isGroup) this.$parent.isGroup = true;
 
     return (
       <table
@@ -89,10 +92,13 @@ export default {
               : ''
           }
         </colgroup>
-        <thead>
+        <thead class={ [{ 'is-group': isGroup, 'has-gutter': this.hasGutter }] }>
           {
             this._l(columnRows, (columns, rowIndex) =>
-              <tr>
+              <tr
+                style={ this.getHeaderRowStyle(rowIndex) }
+                class={ this.getHeaderRowClass(rowIndex) }
+              >
               {
                 this._l(columns, (column, cellIndex) =>
                   <th
@@ -102,7 +108,8 @@ export default {
                     on-mouseout={ this.handleMouseOut }
                     on-mousedown={ ($event) => this.handleMouseDown($event, column) }
                     on-click={ ($event) => this.handleHeaderClick($event, column) }
-                    class={ [column.id, column.order, column.headerAlign, column.className || '', rowIndex === 0 && this.isCellHidden(cellIndex, columns) ? 'is-hidden' : '', !column.children ? 'is-leaf' : '', column.labelClassName, column.sortable ? 'is-sortable' : ''] }>
+                    style={ this.getHeaderCellStyle(rowIndex, cellIndex, columns, column) }
+                    class={ this.getHeaderCellClass(rowIndex, cellIndex, columns, column) }>
                     <div class={ ['cell', column.filteredValue && column.filteredValue.length > 0 ? 'highlight' : '', column.labelClassName] }>
                     {
                       column.renderHeader
@@ -112,8 +119,12 @@ export default {
                     {
                       column.sortable
                         ? <span class="caret-wrapper" on-click={ ($event) => this.handleSortClick($event, column) }>
-                            <i class="sort-caret ascending" on-click={ ($event) => this.handleSortClick($event, column, 'ascending') }></i>
-                            <i class="sort-caret descending" on-click={ ($event) => this.handleSortClick($event, column, 'descending') }></i>
+                            <span class="sort-caret ascending" on-click={ ($event) => this.handleSortClick($event, column, 'ascending') }>
+                              <i class="el-icon-sort-up"></i>
+                            </span>
+                            <span class="sort-caret descending" on-click={ ($event) => this.handleSortClick($event, column, 'descending') }>
+                              <i class="el-icon-sort-down"></i>
+                            </span>
                           </span>
                         : ''
                     }
@@ -127,7 +138,7 @@ export default {
                 )
               }
               {
-                !this.fixed && this.layout.gutterWidth
+                this.hasGutter
                   ? <th class="gutter" style={{ width: this.layout.scrollY ? this.layout.gutterWidth + 'px' : '0' }}></th>
                   : ''
               }
@@ -165,6 +176,10 @@ export default {
   },
 
   computed: {
+    table() {
+      return this.$parent;
+    },
+
     isAllSelected() {
       return this.store.states.isAllSelected;
     },
@@ -181,8 +196,20 @@ export default {
       return this.store.states.rightFixedColumns.length;
     },
 
+    leftFixedLeafCount() {
+      return this.store.states.fixedLeafColumnsLength;
+    },
+
+    rightFixedLeafCount() {
+      return this.store.states.rightFixedLeafColumnsLength;
+    },
+
     columns() {
       return this.store.states.columns;
+    },
+
+    hasGutter() {
+      return !this.fixed && this.layout.gutterWidth;
     }
   },
 
@@ -223,17 +250,82 @@ export default {
 
   methods: {
     isCellHidden(index, columns) {
-      if (this.fixed === true || this.fixed === 'left') {
-        return index >= this.leftFixedCount;
-      } else if (this.fixed === 'right') {
-        let before = 0;
-        for (let i = 0; i < index; i++) {
-          before += columns[i].colSpan;
-        }
-        return before < this.columnsCount - this.rightFixedCount;
-      } else {
-        return (index < this.leftFixedCount) || (index >= this.columnsCount - this.rightFixedCount);
+      let start = 0;
+      for (let i = 0; i < index; i++) {
+        start += columns[i].colSpan;
       }
+      const after = start + columns[index].colSpan - 1;
+      if (this.fixed === true || this.fixed === 'left') {
+        return after >= this.leftFixedLeafCount;
+      } else if (this.fixed === 'right') {
+        return start < this.columnsCount - this.rightFixedLeafCount;
+      } else {
+        return (after < this.leftFixedLeafCount) || (start >= this.columnsCount - this.rightFixedLeafCount);
+      }
+    },
+
+    getHeaderRowStyle(rowIndex) {
+      const headerRowStyle = this.table.headerRowStyle;
+      if (typeof headerRowStyle === 'function') {
+        return headerRowStyle.call(null, { rowIndex });
+      }
+      return headerRowStyle;
+    },
+
+    getHeaderRowClass(rowIndex) {
+      const classes = [];
+
+      const headerRowClassName = this.table.headerRowClassName;
+      if (typeof headerRowClassName === 'string') {
+        classes.push(headerRowClassName);
+      } else if (typeof headerRowClassName === 'function') {
+        classes.push(headerRowClassName.call(null, { rowIndex }));
+      }
+
+      return classes.join(' ');
+    },
+
+    getHeaderCellStyle(rowIndex, columnIndex, row, column) {
+      const headerCellStyle = this.table.headerCellStyle;
+      if (typeof headerCellStyle === 'function') {
+        return headerCellStyle.call(null, {
+          rowIndex,
+          columnIndex,
+          row,
+          column
+        });
+      }
+      return headerCellStyle;
+    },
+
+    getHeaderCellClass(rowIndex, columnIndex, row, column) {
+      const classes = [column.id, column.order, column.headerAlign, column.className, column.labelClassName];
+
+      if (rowIndex === 0 && this.isCellHidden(columnIndex, row)) {
+        classes.push('is-hidden');
+      }
+
+      if (!column.children) {
+        classes.push('is-leaf');
+      }
+
+      if (column.sortable) {
+        classes.push('is-sortable');
+      }
+
+      const headerCellClassName = this.table.headerCellClassName;
+      if (typeof headerCellClassName === 'string') {
+        classes.push(headerCellClassName);
+      } else if (typeof headerCellClassName === 'function') {
+        classes.push(headerCellClassName.call(null, {
+          rowIndex,
+          columnIndex,
+          row,
+          column
+        }));
+      }
+
+      return classes.join(' ');
     },
 
     toggleAllSelection() {

@@ -1,6 +1,7 @@
 import Vue from 'vue';
+import Loading from './loading.vue';
 import { addClass, removeClass, getStyle } from 'element-ui/src/utils/dom';
-const Mask = Vue.extend(require('./loading.vue'));
+const Mask = Vue.extend(Loading);
 
 exports.install = Vue => {
   if (Vue.prototype.$isServer) return;
@@ -74,11 +75,17 @@ exports.install = Vue => {
   };
 
   Vue.directive('loading', {
-    bind: function(el, binding) {
+    bind: function(el, binding, vnode) {
+      const textExr = el.getAttribute('element-loading-text');
+      const spinnerExr = el.getAttribute('element-loading-spinner');
+      const backgroundExr = el.getAttribute('element-loading-background');
+      const vm = vnode.context;
       const mask = new Mask({
         el: document.createElement('div'),
         data: {
-          text: el.getAttribute('element-loading-text'),
+          text: vm && vm[textExr] || textExr,
+          spinner: vm && vm[spinnerExr] || spinnerExr,
+          background: vm && vm[backgroundExr] || backgroundExr,
           fullscreen: !!binding.modifiers.fullscreen
         }
       });
@@ -98,13 +105,9 @@ exports.install = Vue => {
 
     unbind: function(el, binding) {
       if (el.domInserted) {
-        if (binding.modifiers.fullscreen || binding.modifiers.body) {
-          document.body.removeChild(el.mask);
-        } else {
-          el.mask &&
-          el.mask.parentNode &&
-          el.mask.parentNode.removeChild(el.mask);
-        }
+        el.mask &&
+        el.mask.parentNode &&
+        el.mask.parentNode.removeChild(el.mask);
       }
     }
   });

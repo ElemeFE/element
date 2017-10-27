@@ -2,8 +2,8 @@
   <span>
     <transition :name="transition" @after-leave="doDestroy">
       <div
-        class="el-popover"
-        :class="[popperClass]"
+        class="el-popover el-popper"
+        :class="[popperClass, content && 'el-popover--plain']"
         ref="popper"
         v-show="!disabled && showPopper"
         :style="{ width: width + 'px' }">
@@ -52,6 +52,12 @@ export default {
   watch: {
     showPopper(newVal, oldVal) {
       newVal ? this.$emit('show') : this.$emit('hide');
+    },
+    '$refs.reference': {
+      deep: true,
+      handler(val) {
+        console.log(val);
+      }
     }
   },
 
