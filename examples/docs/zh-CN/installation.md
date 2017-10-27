@@ -8,17 +8,17 @@ npm i element-ui -S
 ```
 
 ### CDN
-目前可以通过 [unpkg.com/element-ui](https://unpkg.com/element-ui/) 获取到最新版本的资源，在页面上引入 js 和 css 文件即可开始使用。
+目前可以通过 [unpkg.com/element-ui](https://unpkg.com/element-ui@1.4/) 获取到最新版本的资源，在页面上引入 js 和 css 文件即可开始使用。
 
 ```html
 <!-- 引入样式 -->
-<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
+<link rel="stylesheet" href="https://unpkg.com/element-ui@1.4/lib/theme-default/index.css">
 <!-- 引入组件库 -->
-<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="https://unpkg.com/element-ui@1.4/lib/index.js"></script>
 ```
 
 ### Hello world
-通过 CDN 的方式我们可以很容易地使用 Element 写出一个 Hello world 页面。[在线演示](http://codepen.io/QingWei-Li/pen/vXwJrY)
+通过 CDN 的方式我们可以很容易地使用 Element 写出一个 Hello world 页面。[在线演示](https://jsfiddle.net/hzfpyvg6/18/)
 
 ```html
 <!DOCTYPE html>
@@ -26,7 +26,7 @@ npm i element-ui -S
 <head>
   <meta charset="UTF-8">
   <!-- 引入样式 -->
-  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
+  <link rel="stylesheet" href="https://unpkg.com/element-ui@1.4/lib/theme-default/index.css">
 </head>
 <body>
   <div id="app">
@@ -39,7 +39,7 @@ npm i element-ui -S
   <!-- 先引入 Vue -->
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
   <!-- 引入组件库 -->
-  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="https://unpkg.com/element-ui@1.4/lib/index.js"></script>
   <script>
     new Vue({
       el: '#app',
