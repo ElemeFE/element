@@ -1,6 +1,6 @@
 ## 更新日志
 
-### 2.0.0
+### 2.0.0 Carbon
 
 *2017-10-27*
 
@@ -137,7 +137,7 @@
   - 移除 `theme-default`
   - 最低兼容 Vue 2.5.2 和 IE 10
   - 表单组件的 `change` 事件和 Pagination 的 `current-change` 事件现在仅响应用户交互
-  - Button 和表单组件的 `size` 属性不再接受 `large` 值，可接受 `medium`、`small` 和 `mini`
+  - Button 和表单组件的 `size` 属性现在可接受 `medium`、`small` 和 `mini`
   - 为了方便使用第三方图标，Button 的 `icon` 属性、Input 的 `prefix-icon` 和 `suffix-icon` 属性、Steps 的 `icon` 属性现在需要传入完整的图标类名
 - Dialog
   - 移除 `size` 属性。现在 Dialog 的尺寸由 `width` 和 `fullscreen` 控制
