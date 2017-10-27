@@ -224,6 +224,11 @@
       }
     }
   }
+  @include m((top, bottom)) {
+    &:not(.el-tabs--border-card):not(.el-tabs--card) .el-tabs__item:nth-child(2) {
+      padding-left: 0;
+    }
+  }
   @include m(bottom) {
     .el-tabs__header {
       margin-bottom: 0;

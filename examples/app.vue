@@ -215,6 +215,35 @@
 
     mounted() {
       this.localize();
+      setTimeout(() => {
+        const notified = localStorage.getItem('RELEASE_NOTIFIED');
+        if (!notified) {
+          const h = this.$createElement;
+          const title = this.lang === 'zh-CN'
+            ? '2.0 正式发布'
+            : '2.0 available now';
+          const messages = this.lang === 'zh-CN'
+            ? ['点击', '这里', '查看详情']
+            : ['Click ', 'here', ' to learn more'];
+          this.$notify({
+            title,
+            duration: 0,
+            message: h('span', [
+              messages[0],
+              h('a', {
+                attrs: {
+                  target: '_blank',
+                  href: `https://github.com/ElemeFE/element/issues/${ this.lang === 'zh-CN' ? '7755' : '7756' }`
+                }
+              }, messages[1]),
+              messages[2]
+            ]),
+            onClose() {
+              localStorage.setItem('RELEASE_NOTIFIED', 1);
+            }
+          });
+        }
+      }, 3500);
     }
   };
 </script>
