@@ -1,6 +1,5 @@
 import { CreateElement, VNode } from 'vue'
 import { ElementUIComponent } from './component'
-import {Tree} from "./index";
 
 /** The node of the tree */
 export interface TreeNode {
