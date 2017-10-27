@@ -49,6 +49,7 @@ export function getPropByPath(obj, path, strict) {
   let keyArr = path.split('.');
   let i = 0;
   for (let len = keyArr.length; i < len - 1; ++i) {
+    if (!tempObj && !strict) break;
     let key = keyArr[i];
     if (key in tempObj) {
       tempObj = tempObj[key];
@@ -62,7 +63,7 @@ export function getPropByPath(obj, path, strict) {
   return {
     o: tempObj,
     k: keyArr[i],
-    v: tempObj[keyArr[i]]
+    v: tempObj ? tempObj[keyArr[i]] : null
   };
 };
 
