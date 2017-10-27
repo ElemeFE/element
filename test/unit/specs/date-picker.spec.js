@@ -101,13 +101,14 @@ describe('DatePicker', () => {
     setTimeout(_ => {
       const $el = vm.$refs.compo.picker.$el;
       $el.querySelector('td.available').click();
-      vm.$nextTick(_ => {
-        vm.$el.querySelector('.el-input__icon').click();
+      setTimeout(_ => {
+        vm.$refs.compo.showClose = true;
+        vm.$refs.compo.handleClickIcon({ stopPropagation: () => null });
         setTimeout(_ => {
-          expect(vm.value).to.empty;
+          expect(vm.value).to.equal(null);
           done();
         }, DELAY);
-      });
+      }, DELAY);
     }, DELAY);
   });
 
@@ -376,7 +377,7 @@ describe('DatePicker', () => {
             ref="compo"
             v-model="value"
             type="date"
-            value-format="dd-MM-yyyy" />`,
+            value-format="dd/MM yyyy" />`,
         data() {
           return {
             value: ''
@@ -395,7 +396,7 @@ describe('DatePicker', () => {
           const yyyy = today.getFullYear();
           const MM = ('0' + (today.getMonth() + 1)).slice(-2);
           const dd = '01';   // first available one should be first day of month
-          const expectValue = `${dd}-${MM}-${yyyy}`;
+          const expectValue = `${dd}/${MM} ${yyyy}`;
           expect(vm.value).to.equal(expectValue);
           expect(spy.calledOnce).to.be.true;
           expect(spy.calledWith(expectValue)).to.be.true;
@@ -411,20 +412,28 @@ describe('DatePicker', () => {
             ref="compo"
             v-model="value"
             type="date"
-            value-format="dd-MM-yyyy" />`,
+            format="yyyy-MM-dd"
+            value-format="dd/MM yyyy" />`,
         data() {
           return {
-            value: '01-02-2000'
+            value: '01/02 2000'
           };
         }
       }, true);
-      vm.$refs.compo.$el.querySelector('input').focus();
+      const input = vm.$refs.compo.$el.querySelector('input');
+      expect(input.value).to.equal('2000-02-01');
+      expect(vm.$refs.compo.parsedValue).to.be.an.instanceof(Date);
+      input.focus();
       setTimeout(_ => {
         const date = vm.$refs.compo.picker.date;
         expect(date.getFullYear()).to.equal(2000);
         expect(date.getMonth()).to.equal(1);
         expect(date.getDate()).to.equal(1);
-        done();
+        vm.$refs.compo.picker.$el.querySelector('.el-date-table .current').click();
+        setTimeout(_ => {
+          expect(input.value).to.equal('2000-02-01');
+          done();
+        }, DELAY);
       }, DELAY);
     });
 
@@ -435,8 +444,8 @@ describe('DatePicker', () => {
             ref="compo"
             v-model="value"
             type="date"
-            value-format="dd-MM-yyyy"
-            format="yyyy-MM-dd" />`,
+            format="yyyy-MM-dd"
+            value-format="dd/MM yyyy" />`,
         data() {
           return {
             value: ''
@@ -450,7 +459,7 @@ describe('DatePicker', () => {
         triggerEvent(input, 'input');
         keyDown(input, ENTER);
         setTimeout(_ => {
-          expect(vm.value).to.equal('01-10-2000');
+          expect(vm.value).to.equal('01/10 2000');
           done();
         }, DELAY);
       }, DELAY);
@@ -463,7 +472,8 @@ describe('DatePicker', () => {
             ref="compo"
             v-model="value"
             type="daterange"
-            value-format="dd-MM-yyyy" />`,
+            format="yyyy-MM-dd"
+            value-format="dd/MM yyyy" />`,
         data() {
           return {
             value: ''
@@ -482,7 +492,7 @@ describe('DatePicker', () => {
           triggerEvent(inputs[1], 'input');
           keyDown(inputs[0], ENTER);
           setTimeout(_ => {
-            expect(vm.value).to.eql(['01-10-2000', '02-10-2000']);
+            expect(vm.value).to.eql(['01/10 2000', '02/10 2000']);
             done();
           }, DELAY);
         }, DELAY);
@@ -1067,33 +1077,127 @@ describe('DatePicker', () => {
     });
   });
 
-  it('type:daterange', done => {
-    vm = createTest(DatePicker, {
-      type: 'daterange'
-    }, true);
-    const input = vm.$el.querySelector('input');
+  describe('type:daterange', () => {
+    it('works', done => {
+      vm = createVue({
+        template: '<el-date-picker type="daterange" v-model="value" ref="compo" />',
+        data() {
+          return {
+            value: ''
+          };
+        }
+      }, true);
 
-    input.click();
+      const rangePicker = vm.$refs.compo;
+      const inputs = rangePicker.$el.querySelectorAll('input');
+      inputs[0].focus();
 
-    setTimeout(_ => {
-      const panels = vm.picker.$el.querySelectorAll('.el-date-range-picker__content');
-
-      expect(Array.prototype.slice.call(panels)).to.length(2);
-
-      panels[0].querySelector('td.available').click();
       setTimeout(_ => {
-        panels[1].querySelector('td.available').click();
+        const panels = rangePicker.picker.$el.querySelectorAll('.el-date-range-picker__content');
+        expect(Array.prototype.slice.call(panels)).to.length(2);
+        panels[0].querySelector('td.available').click();
+        setTimeout(_ => {
+          panels[1].querySelector('td.available').click();
+          setTimeout(_ => {
+            inputs[0].focus();
+            setTimeout(_ => {
+              // correct highlight
+              const startDate = rangePicker.picker.$el.querySelectorAll('.start-date');
+              const endDate = rangePicker.picker.$el.querySelectorAll('.end-date');
+              const inRangeDate = rangePicker.picker.$el.querySelectorAll('.in-range');
+              expect(startDate.length).to.equal(1);
+              expect(endDate.length).to.equal(1);
+              expect(inRangeDate.length).to.above(0);
+              // value is array
+              expect(vm.value).to.be.an.instanceof(Array);
+              // input text is something like date string
+              expect(inputs[0].value.length).to.equal(10);
+              expect(inputs[1].value.length).to.equal(10);
+              done();
+            }, DELAY);
+          }, DELAY);
+        }, DELAY);
+      }, DELAY);
+    });
 
-        const {
-          minDate,
-          maxDate
-        } = vm.picker;
-        expect(minDate).to.exist;
-        expect(maxDate).to.exist;
-        expect(maxDate > minDate).to.true;
+    it('unlink panels', done => {
+      vm = createTest(DatePicker, {
+        type: 'daterange',
+        unlinkPanels: true
+      }, true);
+      const input = vm.$el.querySelector('input');
+
+      input.click();
+
+      setTimeout(_ => {
+        const panels = vm.picker.$el.querySelectorAll('.el-date-range-picker__content');
+
+        expect(Array.prototype.slice.call(panels)).to.length(2);
+
+        panels[1].querySelector('.el-icon-d-arrow-right').click();
+        panels[1].querySelector('.el-icon-arrow-right').click();
+
+        setTimeout(_ => {
+          const left = panels[0].querySelector('.el-date-range-picker__header');
+          const right = panels[1].querySelector('.is-right .el-date-range-picker__header');
+          const leftText = left.textContent.match(/\d+/g);
+          const rightText = right.textContent.match(/\d+/g);
+
+          expect(rightText[0] - leftText[0]).to.equal(1);
+          expect((rightText[1] <= 2 ? rightText[1] + 12 : rightText[1]) - leftText[1]).to.equal(2);
+
+          done();
+        }, DELAY);
+      }, DELAY);
+    });
+
+    it('daylight saving time highlight', done => {
+      // Run test with environment variable TZ=Australia/Sydney
+      // The following test uses Australian Eastern Daylight Time (AEDT)
+      // AEST -> AEDT shift happened on 2016-10-02 02:00:00
+      vm = createVue({
+        template: '<el-date-picker type="daterange" v-model="value" ref="compo" />',
+        data() {
+          return {
+            value: [new Date(2016, 9, 1), new Date(2016, 9, 3)]
+          };
+        }
+      }, true);
+
+      const rangePicker = vm.$refs.compo;
+      const inputs = rangePicker.$el.querySelectorAll('input');
+      inputs[0].focus();
+
+      setTimeout(_ => {
+        const startDate = rangePicker.picker.$el.querySelectorAll('.start-date');
+        const endDate = rangePicker.picker.$el.querySelectorAll('.end-date');
+        expect(startDate.length).to.equal(1);
+        expect(endDate.length).to.equal(1);
         done();
       }, DELAY);
-    }, DELAY);
+    });
+
+    it('clear value', done => {
+      vm = createVue({
+        template: '<el-date-picker type="daterange" v-model="value" ref="compo" />',
+        data() {
+          return {
+            value: [new Date(2000, 9, 1), new Date(2000, 9, 2)]
+          };
+        }
+      }, true);
+
+      vm.$el.querySelector('input').focus();
+
+      setTimeout(_ => {
+        vm.$refs.compo.showClose = true;
+        vm.$refs.compo.handleClickIcon({ stopPropagation: () => null });
+        setTimeout(_ => {
+          expect(vm.value).to.equal(null);
+          done();
+        }, DELAY);
+      }, DELAY);
+    });
   });
 
   describe('type:datetimerange', () => {

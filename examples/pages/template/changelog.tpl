@@ -57,6 +57,7 @@
           li {
             padding-left: 0;
             color: #555;
+            word-break: normal;
           }
 
           li::before {

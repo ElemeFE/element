@@ -60,7 +60,11 @@
 
     mixins: [Emitter],
 
-    inject: ['elFormItem'],
+    inject: {
+      elFormItem: {
+        default: ''
+      }
+    },
 
     componentName: 'ElCheckbox',
 

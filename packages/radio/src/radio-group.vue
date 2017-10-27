@@ -21,7 +21,11 @@
 
     componentName: 'ElRadioGroup',
 
-    inject: ['elFormItem'],
+    inject: {
+      elFormItem: {
+        default: ''
+      }
+    },
 
     mixins: [Emitter],
 

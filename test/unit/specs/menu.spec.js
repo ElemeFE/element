@@ -18,14 +18,14 @@ describe('Menu', () => {
     var item1 = vm.$refs.item1;
     var item2 = vm.$refs.item2;
     item1.$el.click();
-    vm.$nextTick(_ => {
+    setTimeout(_ => {
       expect(item1.$el.classList.contains('is-active')).to.be.true;
       item2.$el.click();
-      vm.$nextTick(_ => {
+      setTimeout(_ => {
         expect(item2.$el.classList.contains('is-active')).to.be.true;
         done();
-      });
-    });
+      }, 20);
+    }, 20);
   });
   it('menu-item click', done => {
     vm = createVue({
@@ -50,10 +50,10 @@ describe('Menu', () => {
     var item1 = vm.$refs.item1;
     item1.$el.click();
 
-    vm.$nextTick(_ => {
+    setTimeout(_ => {
       expect(vm.clicksCount).to.be.equal(1);
       done();
-    });
+    }, 20);
 
   });
   describe('default active', () => {
@@ -68,10 +68,10 @@ describe('Menu', () => {
       }, true);
       expect(vm.$refs.item2.$el.classList.contains('is-active')).to.be.true;
       vm.$refs.item1.$el.click();
-      vm.$nextTick(_ => {
+      setTimeout(_ => {
         expect(vm.$refs.item1.$el.classList.contains('is-active')).to.be.true;
         done();
-      });
+      }, 20);
     });
     it('dynamic active', done => {
       vm = createVue({
@@ -89,10 +89,10 @@ describe('Menu', () => {
       }, true);
       setTimeout(_ => {
         vm.active = '1';
-        vm.$nextTick(_ => {
+        setTimeout(_ => {
           expect(vm.$refs.item1.$el.classList.contains('is-active')).to.be.true;
           done();
-        });
+        }, 20);
       }, 100);
     });
     it('vertical submenu item active', done => {
@@ -114,11 +114,11 @@ describe('Menu', () => {
       }, true);
       expect(vm.$refs.submenuItem2.$el.classList.contains('is-active')).to.be.true;
 
-      vm.$nextTick(_ => {
+      setTimeout(_ => {
         expect(vm.$refs.submenu.$el.classList.contains('is-opened')).to.be.true;
         expect(vm.$refs.submenu.$el.classList.contains('is-active')).to.be.true;
         done();
-      });
+      }, 20);
     });
     it('horizontal submenu item active', done => {
       vm = createVue({
@@ -139,11 +139,11 @@ describe('Menu', () => {
       }, true);
       expect(vm.$refs.submenuItem2.$el.classList.contains('is-active')).to.be.true;
 
-      vm.$nextTick(_ => {
+      setTimeout(_ => {
         expect(vm.$refs.submenu.$el.classList.contains('is-opened')).to.be.true;
         expect(vm.$refs.submenu.$el.classList.contains('is-active')).to.be.true;
         done();
-      });
+      }, 20);
     });
   });
   describe('submenu', function() {
@@ -169,18 +169,18 @@ describe('Menu', () => {
       var submenuItem2 = vm.$refs.submenuItem2;
       var submenu = vm.$refs.submenu;
       submenu.$el.querySelector('.el-submenu__title').click();
-      vm.$nextTick(_ => {
+      setTimeout(_ => {
         expect(submenu.$el.classList.contains('is-opened')).to.be.true;
         submenuItem2.$el.click();
-        vm.$nextTick(_ => {
+        setTimeout(_ => {
           expect(submenuItem2.$el.classList.contains('is-active')).to.be.true;
           submenu.$el.querySelector('.el-submenu__title').click();
-          vm.$nextTick(_ => {
+          setTimeout(_ => {
             expect(submenu.$el.classList.contains('is-opened')).to.not.true;
             done();
-          });
-        });
-      });
+          }, 20);
+        }, 20);
+      }, 20);
     });
     it('default opened', done => {
       vm = createVue({
@@ -210,11 +210,11 @@ describe('Menu', () => {
       expect(vm.$refs.submenu1.$el.classList.contains('is-opened')).to.be.true;
       expect(vm.$refs.submenu2.$el.classList.contains('is-opened')).to.be.true;
       vm.defaultOpeneds = ['2'];
-      vm.$nextTick(_ => {
+      setTimeout(_ => {
         expect(vm.$refs.submenu1.$el.classList.contains('is-opened')).to.be.true;
         expect(vm.$refs.submenu2.$el.classList.contains('is-opened')).to.not.true;
         done();
-      });
+      }, 20);
     });
   });
   it('unique-opened', done => {
@@ -242,10 +242,10 @@ describe('Menu', () => {
       }
     }, true);
     vm.$refs.submenu2.$el.querySelector('.el-submenu__title').click();
-    vm.$nextTick(_ => {
+    setTimeout(_ => {
       expect(vm.$refs.submenu1.$el.classList.contains('is-opened')).to.not.true;
       done();
-    });
+    }, 20);
   });
   it('horizontal mode', done => {
     vm = createVue({
@@ -271,7 +271,6 @@ describe('Menu', () => {
     triggerEvent(submenu.$el, 'mouseenter');
     setTimeout(_ => {
       expect(submenu.$el.querySelector('.el-menu').style.display).to.not.ok;
-      triggerEvent(submenu.$el, 'mouseleave');
       done();
     }, 500);
   });
@@ -310,7 +309,7 @@ describe('Menu', () => {
       }, 1000);
     }, 500);
   });
-  it('menu group', done => {
+  it('menu group', () => {
     vm = createVue({
       template: `
         <el-menu mode="vertical" default-active="1">
@@ -329,6 +328,5 @@ describe('Menu', () => {
       `
     }, true);
     expect(vm.$refs.group1.$el.querySelector('.el-menu-item-group__title').innerText).to.be.equal('分组一');
-    done();
   });
 });

@@ -138,10 +138,10 @@ describe('Table', () => {
     it('tableRowClassName', done => {
       const vm = createTable(':row-class-name="tableRowClassName"', {
         methods: {
-          tableRowClassName(row, index) {
-            if (index === 1) {
+          tableRowClassName({row, rowIndex}) {
+            if (rowIndex === 1) {
               return 'info-row';
-            } else if (index === 3) {
+            } else if (rowIndex === 3) {
               return 'positive-row';
             }
 
@@ -171,8 +171,8 @@ describe('Table', () => {
     it('tableRowStyle[Function]', done => {
       const vm = createTable(':row-style="tableRowStyle"', {
         methods: {
-          tableRowStyle(row, index) {
-            if (index === 1) {
+          tableRowStyle({row, rowIndex}) {
+            if (rowIndex === 1) {
               return { height: '60px' };
             }
 
@@ -805,84 +805,6 @@ describe('Table', () => {
       }, DELAY);
     });
 
-    it('reserve-selection', done => {
-      const getData = function(page = 0) {
-        let id = 0;
-        const rows = [];
-        const row = () => {
-          return {
-            id: ++id + page * 10,
-            date: new Date().getTime()
-          };
-        };
-        let count = 10;
-
-        while (--count) {
-          rows.push(row());
-        }
-        return rows;
-      };
-      const vm = createVue({
-        template: `
-          <el-table ref="table" :row-key="rowKey" :data="testData" @selection-change="change">
-            <el-table-column type="selection" reserve-selection />
-            <el-table-column prop="id" label="id" />
-            <el-table-column prop="date" label="date" />
-          </el-table>
-        `,
-
-        created() {
-          this.testData = getData();
-        },
-
-        data() {
-          return { selected: [], testData: [] };
-        },
-
-        methods: {
-          rowKey(row) {
-            return row.id;
-          },
-
-          change(rows) {
-            this.selected = rows;
-          }
-        }
-      }, true);
-
-      setTimeout(_ => {
-        // click first
-        vm.$el.querySelectorAll('.el-checkbox')[1].click();
-
-        setTimeout(_ => {
-          expect(vm.$el.querySelectorAll('.el-checkbox__input.is-checked')).to.length(1);
-          // go to second page
-          vm.testData = getData(1);
-          setTimeout(_ => {
-             // expect no checked
-            expect(vm.$el.querySelectorAll('.el-checkbox__input.is-checked')).to.length(0);
-            // click first checkbox
-            vm.$el.querySelectorAll('.el-checkbox')[1].click();
-            vm.$el.querySelectorAll('.el-checkbox')[2].click();
-            setTimeout(_ => {
-              // back first page
-              vm.testData = getData();
-              setTimeout(_ => {
-                expect(vm.$el.querySelectorAll('.el-checkbox__input.is-checked')).to.length(1);
-                // clear
-                vm.$refs.table.clearSelection();
-                setTimeout(_ => {
-                  expect(vm.$el.querySelectorAll('.el-checkbox__input.is-checked')).to.length(0);
-                  destroyVM(vm);
-                  done();
-                }, DELAY);
-              }, DELAY);
-            }, DELAY);
-          }, DELAY);
-        }, DELAY);
-      }, DELAY);
-    });
-
     describe('type', () => {
       const createTable = function(type) {
         return createVue({
@@ -975,12 +897,12 @@ describe('Table', () => {
           extra = extra || '';
           return createVue({
             template: `
-            <el-table row-key="id" :data="testData" @expand="handleExpand" ${extra}>
+            <el-table row-key="id" :data="testData" @expand-change="handleExpand" ${extra}>
               <el-table-column type="expand">
-                <template scope="props">
+                <template slot-scope="props">
                   <div>{{props.row.name}}</div>
                 </template>
-              </el-table-column>
+            </el-table-column>
               <el-table-column prop="release" label="release" />
               <el-table-column prop="director" label="director" />
               <el-table-column prop="runtime" label="runtime" />

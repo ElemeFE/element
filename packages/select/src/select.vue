@@ -18,7 +18,7 @@
           :hit="item.hitState"
           type="info"
           @close="deleteTag($event, item)"
-          close-transition>
+          disable-transitions>
           <span class="el-select__tags-text">{{ item.currentLabel }}</span>
         </el-tag>
       </transition-group>
@@ -26,7 +26,7 @@
       <input
         type="text"
         class="el-select__input"
-        :class="`is-${ size }`"
+        :class="`is-${ selectSize }`"
         @focus="visible = true"
         :disabled="disabled"
         @keyup="managePlaceholder"
@@ -49,7 +49,8 @@
       type="text"
       :placeholder="currentPlaceholder"
       :name="name"
-      :size="size"
+      :id="id"
+      :size="selectSize"
       :disabled="disabled"
       :readonly="!filterable || multiple"
       :validate-event="false"
@@ -140,7 +141,11 @@
 
     componentName: 'ElSelect',
 
-    inject: ['elFormItem'],
+    inject: {
+      elFormItem: {
+        default: ''
+      }
+    },
 
     provide() {
       return {
@@ -204,6 +209,7 @@
 
     props: {
       name: String,
+      id: String,
       value: {
         required: true
       },
@@ -232,6 +238,7 @@
         }
       },
       defaultFirstOption: Boolean,
+      reserveKeyword: Boolean,
       valueKey: {
         type: String,
         default: 'value'
@@ -261,6 +268,12 @@
     },
 
     watch: {
+      disabled() {
+        this.$nextTick(() => {
+          this.resetInputHeight();
+        });
+      },
+
       placeholder(val) {
         this.cachedPlaceHolder = this.currentPlaceholder = val;
       },
@@ -272,6 +285,10 @@
             this.currentPlaceholder = '';
           } else {
             this.currentPlaceholder = this.cachedPlaceHolder;
+          }
+          if (this.filterable && !this.reserveKeyword) {
+            this.query = '';
+            this.handleQueryChange(this.query);
           }
         }
         this.setSelected();
@@ -532,7 +549,10 @@
           if (!this.$refs.reference) return;
           let inputChildNodes = this.$refs.reference.$el.childNodes;
           let input = [].filter.call(inputChildNodes, item => item.tagName === 'INPUT')[0];
-          input.style.height = Math.max(this.$refs.tags.clientHeight + 10, sizeMap[this.size] || 40) + 'px';
+          const tags = this.$refs.tags;
+          input.style.height = this.selected.length === 0 && this.selectSize === 'mini'
+            ? sizeMap[this.selectSize]
+            : Math.max(tags ? (tags.clientHeight + 10) : 0, sizeMap[this.selectSize] || 40) + 'px';
           if (this.visible && this.emptyText !== false) {
             this.broadcast('ElSelectDropdown', 'updatePopper');
           }

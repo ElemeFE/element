@@ -1,6 +1,6 @@
 <template>
   <div class="el-table"
-    :class="{
+    :class="[{
       'el-table--fit': fit,
       'el-table--striped': stripe,
       'el-table--border': border || isGroup,
@@ -9,11 +9,12 @@
       'el-table--fluid-height': maxHeight,
       'el-table--enable-row-hover': !store.states.isComplex,
       'el-table--enable-row-transition': (store.states.data || []).length !== 0 && (store.states.data || []).length < 100
-    }"
+    }, tableSize ? `el-table--${ tableSize }` : '']"
     @mouseleave="handleMouseLeave($event)">
     <div class="hidden-columns" ref="hiddenColumns"><slot></slot></div>
     <div class="el-table__header-wrapper" ref="headerWrapper" v-if="showHeader">
       <table-header
+        ref="tableHeader"
         :store="store"
         :layout="layout"
         :border="border"
@@ -39,6 +40,9 @@
       <div :style="{ width: bodyWidth }" class="el-table__empty-block" v-if="!data || data.length === 0">
         <span class="el-table__empty-text"><slot name="empty">{{ emptyText || t('el.table.emptyText') }}</slot></span>
       </div>
+      <div class="el-table__append-wrapper" ref="appendWrapper" v-if="$slots.append">
+        <slot name="append"></slot>
+      </div>
     </div>
     <div class="el-table__footer-wrapper" ref="footerWrapper" v-if="showSummary" v-show="data && data.length > 0">
       <table-footer
@@ -59,6 +63,7 @@
       ]">
       <div class="el-table__fixed-header-wrapper" ref="fixedHeaderWrapper" v-if="showHeader">
         <table-header
+          ref="fixedTableHeader"
           fixed="left"
           :border="border"
           :store="store"
@@ -82,6 +87,7 @@
           :row-style="rowStyle"
           :style="{ width: layout.fixedWidth ? layout.fixedWidth + 'px' : '' }">
         </table-body>
+        <div class="el-table__append-gutter" :style="{ height: layout.appendHeight + 'px' }" v-if="$slots.append"></div>
       </div>
       <div class="el-table__fixed-footer-wrapper" ref="fixedFooterWrapper" v-if="showSummary" v-show="data && data.length > 0">
         <table-footer
@@ -103,6 +109,7 @@
       ]">
       <div class="el-table__fixed-header-wrapper" ref="rightFixedHeaderWrapper" v-if="showHeader">
         <table-header
+          ref="rightFixedTableHeader"
           fixed="right"
           :border="border"
           :store="store"
@@ -149,6 +156,7 @@
   import debounce from 'throttle-debounce/debounce';
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
   import Locale from 'element-ui/src/mixins/locale';
+  import Migrating from 'element-ui/src/mixins/migrating';
   import TableStore from './table-store';
   import TableLayout from './table-layout';
   import TableBody from './table-body';
@@ -161,7 +169,7 @@
   export default {
     name: 'ElTable',
 
-    mixins: [Locale],
+    mixins: [Locale, Migrating],
 
     props: {
       data: {
@@ -170,6 +178,8 @@
           return [];
         }
       },
+
+      size: String,
 
       width: [String, Number],
 
@@ -205,6 +215,18 @@
 
       rowStyle: [Object, Function],
 
+      cellClassName: [String, Function],
+
+      cellStyle: [Object, Function],
+
+      headerRowClassName: [String, Function],
+
+      headerRowStyle: [Object, Function],
+
+      headerCellClassName: [String, Function],
+
+      headerCellStyle: [Object, Function],
+
       highlightCurrentRow: Boolean,
 
       currentRowKey: [String, Number],
@@ -217,7 +239,9 @@
 
       defaultSort: Object,
 
-      tooltipEffect: String
+      tooltipEffect: String,
+
+      spanMethod: Function
     },
 
     components: {
@@ -228,6 +252,14 @@
     },
 
     methods: {
+      getMigratingConfig() {
+        return {
+          events: {
+            expand: 'expand is renamed to expand-change'
+          }
+        };
+      },
+
       setCurrentRow(row) {
         this.store.commit('setCurrentRow', row);
       },
@@ -237,8 +269,20 @@
         this.store.updateAllSelected();
       },
 
+      toggleRowExpansion(row, expanded) {
+        this.store.toggleRowExpansion(row, expanded);
+      },
+
       clearSelection() {
         this.store.clearSelection();
+      },
+
+      clearFilter() {
+        this.store.clearFilter();
+      },
+
+      clearSort() {
+        this.store.clearSort();
       },
 
       handleMouseLeave() {
@@ -298,8 +342,8 @@
 
       doLayout() {
         this.store.updateColumns();
-        this.layout.update();
         this.updateScrollY();
+        this.layout.update();
         this.$nextTick(() => {
           if (this.height) {
             this.layout.setHeight(this.height);
@@ -310,6 +354,9 @@
           }
           if (this.$el) {
             this.isHidden = this.$el.clientWidth === 0;
+            if (this.isHidden && this.layout.bodyWidth) {
+              setTimeout(() => this.doLayout());
+            }
           }
         });
       }
@@ -321,6 +368,10 @@
     },
 
     computed: {
+      tableSize() {
+        return this.size || (this.$ELEMENT || {}).size;
+      },
+
       bodyWrapper() {
         return this.$refs.bodyWrapper;
       },
@@ -418,6 +469,10 @@
         this.layout.setHeight(value);
       },
 
+      maxHeight(value) {
+        this.layout.setMaxHeight(value);
+      },
+
       currentRowKey(newVal) {
         this.store.setCurrentRowKey(newVal);
       },
@@ -430,8 +485,13 @@
         }
       },
 
-      expandRowKeys(newVal) {
-        this.store.setExpandRowKeys(newVal);
+      expandRowKeys: {
+        immediate: true,
+        handler(newVal) {
+          if (newVal) {
+            this.store.setExpandRowKeys(newVal);
+          }
+        }
       }
     },
 

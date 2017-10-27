@@ -142,15 +142,15 @@ The `indeterminate` property can help you to achieve a 'check all' effect.
   export default {
     data() {
       return {
-        checkAll: true,
+        checkAll: false,
         checkedCities: ['Shanghai', 'Beijing'],
         cities: cityOptions,
         isIndeterminate: true
       };
     },
     methods: {
-      handleCheckAllChange(event) {
-        this.checkedCities = event.target.checked ? cityOptions : [];
+      handleCheckAllChange(val) {
+        this.checkedCities = val ? cityOptions : [];
         this.isIndeterminate = false;
       },
       handleCheckedCitiesChange(value) {
@@ -304,7 +304,7 @@ Checkbox with button styles.
 ### Checkbox-group Attributes
 | Attribute      | Description         | Type    | Options                         | Default|
 |---------- |-------- |---------- |-------------  |-------- |
-|size | size of checkbox buttons or bordered checkboxes | string | large/small | — |
+|size | size of checkbox buttons or bordered checkboxes | string | medium / small / mini | — |
 | disabled  | whether the nesting checkboxes are disabled | boolean   | — | false   |
 | min     | minimum number of checkbox checked   | number    |       —        |     —    |
 | max     | maximum number of checkbox checked   | number    |       —        |     —    |

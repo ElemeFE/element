@@ -149,7 +149,7 @@
       cursor: pointer;
       opacity: .75;
       color: $--color-text-regular;
-      transform: scale(.7);
+      //transform: scale(.7);
 
       &:hover {
         opacity: 1;
@@ -164,7 +164,7 @@
       cursor: pointer;
       opacity: 1;
       color: $--color-primary;
-      transform: translate(15%,0) scale(.7);
+      transform: translate(15%,0);
     }
     
     &:hover {
@@ -313,7 +313,7 @@
       i {
         font-size: 12px;
         margin-top: 11px;
-        transform: rotate(-45deg) scale(0.8);
+        transform: rotate(-45deg);
       }
     }
 
@@ -446,7 +446,7 @@
       i {
         font-size: 12px;
         margin-top: 12px;
-        transform: rotate(-45deg) scale(0.8);
+        transform: rotate(-45deg);
       }
     }
 
@@ -488,7 +488,7 @@
     i {
       font-size: 12px;
       margin-top: 11px;
-      transform: rotate(-45deg) scale(0.8);
+      transform: rotate(-45deg);
       color: #fff;
     }
   }

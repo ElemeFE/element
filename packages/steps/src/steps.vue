@@ -10,8 +10,12 @@
 </template>
 
 <script>
+import Migrating from 'element-ui/src/mixins/migrating';
+
 export default {
   name: 'ElSteps',
+
+  mixins: [Migrating],
 
   props: {
     space: [Number, String],
@@ -21,7 +25,6 @@ export default {
       default: 'horizontal'
     },
     alignCenter: Boolean,
-    center: Boolean,
     simple: Boolean,
     finishStatus: {
       type: String,
@@ -40,6 +43,16 @@ export default {
     };
   },
 
+  methods: {
+    getMigratingConfig() {
+      return {
+        props: {
+          'center': 'center is removed.'
+        }
+      };
+    }
+  },
+
   watch: {
     active(newVal, oldVal) {
       this.$emit('change', newVal, oldVal);
@@ -49,12 +62,6 @@ export default {
       steps.forEach((child, index) => {
         child.index = index;
       });
-      if (this.center) {
-        const len = steps.length;
-        this.$nextTick(() => {
-          this.stepOffset = steps[len - 1].$el.getBoundingClientRect().width / (len - 1);
-        });
-      }
     }
   }
 };

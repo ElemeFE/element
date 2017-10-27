@@ -5,7 +5,7 @@
   height: $--rate-height;
   line-height: 1;
 
-  &:focus:not(.focusing), &:active {
+  &:focus, &:active {
     outline-width: 0;
   }
 

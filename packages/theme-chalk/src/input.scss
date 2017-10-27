@@ -184,7 +184,7 @@
 
     .el-select,
     .el-button {
-      display: block;
+      display: inline-block;
       margin: -20px;
     }
 
@@ -239,7 +239,7 @@
   @include e(inner) {
     display: block;
     resize: vertical;
-    padding: 5px 7px;
+    padding: 5px 15px;
     line-height: 1.5;
     box-sizing: border-box;
     width: 100%;

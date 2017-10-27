@@ -13,7 +13,7 @@
       @compositionstart.native="handleComposition"
       @compositionupdate.native="handleComposition"
       @compositionend.native="handleComposition"
-      @change="handleChange"
+      @input="handleChange"
       @focus="handleFocus"
       @blur="handleBlur"
       @keydown.up.native.prevent="highlight(highlightedIndex - 1)"
@@ -27,6 +27,12 @@
       </template>
       <template slot="append" v-if="$slots.append">
         <slot name="append"></slot>
+      </template>
+      <template slot="prefix" v-if="$slots.prefix">
+        <slot name="prefix"></slot>
+      </template>
+      <template slot="suffix" v-if="$slots.suffix">
+        <slot name="suffix"></slot>
       </template>
     </el-input>
     <el-autocomplete-suggestions
@@ -45,7 +51,7 @@
         :aria-selected="highlightedIndex === index"
       >
         <slot :item="item">
-          {{ item[props.label] }}
+          {{ item[valueKey] }}
         </slot>
       </li>
     </el-autocomplete-suggestions>
@@ -57,12 +63,14 @@
   import Clickoutside from 'element-ui/src/utils/clickoutside';
   import ElAutocompleteSuggestions from './autocomplete-suggestions.vue';
   import Emitter from 'element-ui/src/mixins/emitter';
+  import Migrating from 'element-ui/src/mixins/migrating';
   import { generateId } from 'element-ui/src/utils/util';
+  import Focus from 'element-ui/src/mixins/focus';
 
   export default {
     name: 'ElAutocomplete',
 
-    mixins: [Emitter],
+    mixins: [Emitter, Focus('input'), Migrating],
 
     componentName: 'ElAutocomplete',
 
@@ -74,14 +82,9 @@
     directives: { Clickoutside },
 
     props: {
-      props: {
-        type: Object,
-        default() {
-          return {
-            label: 'value',
-            value: 'value'
-          };
-        }
+      valueKey: {
+        type: String,
+        default: 'value'
       },
       popperClass: String,
       placeholder: String,
@@ -96,8 +99,6 @@
         default: true
       },
       customItem: String,
-      icon: String,
-      onIconClick: Function,
       selectWhenUnmatched: {
         type: Boolean,
         default: false
@@ -133,6 +134,14 @@
       }
     },
     methods: {
+      getMigratingConfig() {
+        return {
+          props: {
+            'custom-item': 'custom-item is removed, use scoped slot instead.',
+            'props': 'props is removed, use value-key instead.'
+          }
+        };
+      },
       getData(queryString) {
         this.loading = true;
         this.fetchSuggestions(queryString, (suggestions) => {
@@ -147,7 +156,7 @@
       handleComposition(event) {
         if (event.type === 'compositionend') {
           this.isOnComposition = false;
-          this.handleChange(this.value);
+          this.handleChange(event.target.value);
         } else {
           this.isOnComposition = true;
         }
@@ -186,7 +195,7 @@
         }
       },
       select(item) {
-        this.$emit('input', item[this.props.label]);
+        this.$emit('input', item[this.valueKey]);
         this.$emit('select', item);
         this.$nextTick(_ => {
           this.suggestions = [];

@@ -1,16 +1,11 @@
 <style scoped>
   .headerWrapper {
     height: 80px;
-    transition: transform .3s;
-    
-    &.is-hidden {
-      transform: translateY(-80px);
-    }
   }
 
   .header {
     height: 80px;
-    background-color: rgba(32, 160, 255, 1);
+    background-color: #fff;
     color: #fff;
     top: 0;
     left: 0;
@@ -22,6 +17,10 @@
     .container {
       height: 100%;
       box-sizing: border-box;
+    }
+
+    .nav-lang-spe {
+      color: #888;
     }
 
     h1 {
@@ -92,6 +91,10 @@
       position: relative;
       cursor: pointer;
     
+      &.nav-algolia-search {
+        cursor: default;
+      }
+    
       &.lang-item,
       &:last-child {
         cursor: default;
@@ -105,85 +108,39 @@
           cursor: pointer;
           display: inline-block;
           height: 100%;
+          color: #888;
 
           &:hover {
-            opacity: 1;
-          }
-
-          &.active {
-            font-weight: 700;
-            opacity: 1;
             color: #409EFF;
           }
+          &.active {
+             font-weight: bold;
+             color: #409EFF;
+           }
         }
       }
 
       a {
         text-decoration: none;
-        color: #fff;
+        color: #888;
         display: block;
         padding: 0 22px;
-        opacity: .8;
 
         &.active,
         &:hover {
-          opacity: 1;
+          color: #333;
         }
 
         &.active::after {
           content: '';
           display: inline-block;
           position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 100%;
+          bottom: 15px;
+          left: calc(50% - 7px);
+          width: 14px;
           height: 4px;
-          background:#99d2fc;
+          background: #409EFF;
         }
-      }
-    }
-  }
-
-  .header-home {
-    position: fixed;
-    top: 0;
-    background-color: rgba(32, 160, 255, 0);
-  }
-
-  .header-light {
-    background-color: #fff;
-
-    .nav-lang {
-      color: #888;
-
-      &:hover,
-      &.acive {
-        font-weight: normal;
-        opacity: 1;
-        color: #409EFF;
-      }
-    }
-
-    .nav-lang-spe {
-      color: #888;
-    }
-
-    .nav-item {
-      a {
-        color: #888;
-        opacity: 1;
-      }
-
-      a:hover,
-      a.active {
-        color: #333;
-      }
-
-      a.active::after {
-        width: 14px;
-        left: calc(50% - 7px);
-        bottom: 15px;
-        background: #409EFF;
       }
     }
   }
@@ -210,9 +167,9 @@
 
     i {
       transition: .2s;
-      transform: scale(.6);
       font-size: 12px;
       color: #979797;
+      transform: translateY(-2px);
     }
 
     @when active {
@@ -220,7 +177,7 @@
         color: #409EFF;
       }
       i {
-        transform: rotateZ(180deg) translateY(2px) scale(.6);
+        transform: rotateZ(180deg) translateY(3px);
       }
     }
 
@@ -255,6 +212,9 @@
           padding: 0 5px;
         }
       }
+      .nav-theme-switch, .nav-algolia-search {
+        display: none;
+      }
     }
   }
 
@@ -279,42 +239,26 @@
 </style>
 <template>
   <div class="headerWrapper">
-    <header class="header"
-      ref="header"
-      :style="headerStyle"
-      :class="{
-        'header-home': isHome,
-        'header-light': isComponentPage
-      }">
+    <header class="header" ref="header">
       <div class="container">
         <h1><router-link :to="`/${ lang }`">
           <!-- logo -->
-          <slot v-if="isComponentPage">
+          <slot>
             <img
-                src="../assets/images/element-logo.svg"
-                alt="element-logo"
-                class="nav-logo">
+              src="../assets/images/element-logo.svg"
+              alt="element-logo"
+              class="nav-logo">
             <img
-                src="../assets/images/element-logo-small.svg"
-                alt="element-logo"
-                class="nav-logo-small">
-          </slot>
-          <slot v-else>
-            <img
-                src="../assets/images/element-logo-white.svg"
-                alt="element-logo"
-                class="nav-logo">
-            <img
-                src="../assets/images/element-logo-small-white.svg"
-                alt="element-logo"
-                class="nav-logo-small">
+              src="../assets/images/element-logo-small.svg"
+              alt="element-logo"
+              class="nav-logo-small">
           </slot>
 
         </router-link></h1>
 
         <!-- nav -->
         <ul class="nav">
-          <li class="nav-item">
+          <li class="nav-item nav-algolia-search" v-show="isComponentPage">
             <algolia-search></algolia-search>
           </li>
           <li class="nav-item">
@@ -384,7 +328,7 @@
           </li>
           
           <!--theme picker-->
-          <li  class="nav-item" v-show="isComponentPage">
+          <li class="nav-item nav-theme-switch" v-show="isComponentPage">
             <theme-picker></theme-picker>
           </li>
         </ul>
@@ -395,7 +339,6 @@
 <script>
   import ThemePicker from './theme-picker.vue';
   import AlgoliaSearch from './search.vue';
-  import bus from '../bus';
   import compoLang from '../i18n/component.json';
   import { version } from 'main/index.js';
 
@@ -403,13 +346,9 @@
     data() {
       return {
         active: '',
-        isHome: true,
-        headerStyle: {},
-        visible: true,
         versions: [],
         version,
-        dropdownVisible: true,
-        isComponentPage: true
+        dropdownVisible: true
       };
     },
 
@@ -418,21 +357,15 @@
       AlgoliaSearch
     },
 
-    watch: {
-      '$route.path': {
-        immediate: true,
-        handler() {
-          this.handlePathChange();
-        }
-      }
-    },
-
     computed: {
       lang() {
         return this.$route.path.split('/')[1] || 'zh-CN';
       },
       langConfig() {
         return compoLang.filter(config => config.lang === this.lang)[0]['header'];
+      },
+      isComponentPage() {
+        return /^component/.test(this.$route.name);
       }
     },
 
@@ -450,48 +383,22 @@
 
       handleDropdownToggle(visible) {
         this.dropdownVisible = visible;
-      },
-
-      handlePathChange() {
-        const routerName = this.$route.name;
-        this.isComponentPage = /^component-/.test(routerName);
-        this.isHome = /^home/.test(routerName);
-        if (this.isComponentPage) {
-          this.headerStyle.backgroundColor = '#fff';
-          return;
-        }
-        this.headerStyle.backgroundColor = `rgba(32, 160, 255, ${ this.isHome ? '0' : '1' })`;
       }
     },
 
     created() {
-      this.handlePathChange();
-
-      bus.$on('toggleHeader', visible => {
-        this.visible = visible;
-      });
-
       const xhr = new XMLHttpRequest();
       xhr.onreadystatechange = _ => {
         if (xhr.readyState === 4 && xhr.status === 200) {
-          this.versions = JSON.parse(xhr.responseText);
+          const versions = JSON.parse(xhr.responseText);
+          this.versions = Object.keys(versions).slice(-2).reduce((prev, next) => {
+            prev[next] = versions[next];
+            return prev;
+          }, {});
         }
       };
       xhr.open('GET', '/versions.json');
       xhr.send();
-    },
-
-    mounted() {
-      function scroll(fn) {
-        window.addEventListener('scroll', fn, false);
-      }
-      scroll(() => {
-        if (this.isHome) {
-          const threshold = 200;
-          let alpha = Math.min((document.documentElement.scrollTop || document.body.scrollTop), threshold) / threshold;
-          this.$refs.header.style.backgroundColor = `rgba(32, 160, 255, ${ alpha })`;
-        }
-      });
     }
   };
 </script>

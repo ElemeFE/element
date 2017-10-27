@@ -372,7 +372,6 @@
 | closable  | 标签是否可关闭   | boolean   | — |  false  |
 | addable  | 标签是否可增加   | boolean   | — |  false  |
 | editable  | 标签是否同时可增加和关闭   | boolean   | — |  false  |
-| active-name(deprecated)  | 选中选项卡的 name  | string   |  —  |  第一个选项卡的 name |
 | value  | 绑定值，选中选项卡的 name  | string   |  —  |  第一个选项卡的 name |
 | tab-position  | 选项卡所在位置 | string   |  top/right/bottom/left  |  top |
 

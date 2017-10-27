@@ -118,7 +118,7 @@
         display: block;
         line-height: 40px;
         text-align: center;
-        font-size: 12px;
+        font-size: 18px;
       }
 
       &.hover {
@@ -153,6 +153,9 @@
       .content > table {
         overflow: auto;
         display: block;
+      }
+      .page-component-up {
+        display: none;
       }
     }
   }
@@ -243,11 +246,9 @@
         this.showBackToTop = scrollTop >= 0.5 * document.body.clientHeight;
         if (this.showHeader !== this.scrollTop > scrollTop) {
           this.showHeader = this.scrollTop > scrollTop;
-          bus.$emit('toggleHeader', this.showHeader);
         }
         if (scrollTop === 0) {
           this.showHeader = true;
-          bus.$emit('toggleHeader', this.showHeader);
         }
         if (!this.navFaded) {
           bus.$emit('fadeNav');

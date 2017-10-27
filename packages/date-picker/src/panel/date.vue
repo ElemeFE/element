@@ -148,6 +148,7 @@
   } from '../util';
   import Locale from 'element-ui/src/mixins/locale';
   import ElInput from 'element-ui/packages/input';
+  import ElButton from 'element-ui/packages/button';
   import TimePicker from './time';
   import YearTable from '../basic/year-table';
   import MonthTable from '../basic/month-table';
@@ -192,8 +193,6 @@
           if (this.currentView !== 'year' || this.currentView !== 'month') {
             this.currentView = 'month';
           }
-        } else if (newVal === 'week') {
-          this.week = getWeekNumber(this.date);
         }
       }
     },
@@ -215,7 +214,7 @@
 
       handleClear() {
         this.date = this.defaultValue ? new Date(this.defaultValue) : new Date();
-        this.$emit('pick');
+        this.$emit('pick', null);
       },
 
       emit(value, ...args) {
@@ -351,7 +350,7 @@
       },
 
       handleLeave() {
-        this.$emit('dodestory');
+        this.$emit('dodestroy');
         document.body.removeEventListener('keydown', this.handleKeydown);
       },
 
@@ -433,7 +432,7 @@
     },
 
     components: {
-      TimePicker, YearTable, MonthTable, DateTable, ElInput
+      TimePicker, YearTable, MonthTable, DateTable, ElInput, ElButton
     },
 
     data() {

@@ -19,7 +19,7 @@
       :readonly="!filterable"
       :placeholder="currentLabels.length ? undefined : placeholder"
       v-model="inputValue"
-      @change="debouncedInputChange"
+      @input="debouncedInputChange"
       :validate-event="false"
       :size="size"
       :disabled="disabled"
@@ -87,7 +87,11 @@ export default {
 
   mixins: [popperMixin, emitter, Locale],
 
-  inject: ['elFormItem'],
+  inject: {
+    elFormItem: {
+      default: ''
+    }
+  },
 
   components: {
     ElInput
@@ -333,9 +337,9 @@ export default {
     },
     handleClick() {
       if (this.disabled) return;
+      this.$refs.input.focus();
       if (this.filterable) {
         this.menuVisible = true;
-        this.$refs.input.focus();
         return;
       }
       this.menuVisible = !this.menuVisible;

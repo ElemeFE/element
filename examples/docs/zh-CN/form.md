@@ -5,17 +5,15 @@
         if (!value) {
           return callback(new Error('年龄不能为空'));
         }
-        setTimeout(() => {
-          if (!Number.isInteger(value)) {
-            callback(new Error('请输入数字值'));
+        if (!Number.isInteger(value)) {
+          callback(new Error('请输入数字值'));
+        } else {
+          if (value < 18) {
+            callback(new Error('必须年满18岁'));
           } else {
-            if (value < 18) {
-              callback(new Error('必须年满18岁'));
-            } else {
-              callback();
-            }
+            callback();
           }
-        }, 1000);
+        }
       };
       var validatePass = (rule, value, callback) => {
         if (value === '') {
@@ -38,6 +36,16 @@
       };
       return {
         form: {
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
+        },
+        sizeForm: {
           name: '',
           region: '',
           date1: '',
@@ -156,10 +164,10 @@
 <style>
   .demo-form.demo-zh-CN {
     .el-select .el-input {
-      width: 360px;
+      width: 380px;
     }
     .el-form {
-      width: 440px;
+      width: 460px;
     }
 
     .line {
@@ -196,7 +204,7 @@
       }
     }
     .demo-form-normal {
-      width: 440px;
+      width: 460px;
     }
     .demo-form-inline {
       width: auto;
@@ -258,7 +266,7 @@
     </el-col>
   </el-form-item>
   <el-form-item label="即时配送">
-    <el-switch on-text="" off-text="" v-model="form.delivery"></el-switch>
+    <el-switch v-model="form.delivery"></el-switch>
   </el-form-item>
   <el-form-item label="活动性质">
     <el-checkbox-group v-model="form.type">
@@ -391,7 +399,7 @@
 
 在防止用户犯错的前提下，尽可能让用户更早地发现并纠正错误。
 
-::: demo Form 组件提供了表单验证的功能，只需要通过 `rule` 属性传入约定的验证规则，并 Form-Item 的 `prop` 属性设置为需校验的字段名即可。校验规则参见 [async-validator](https://github.com/yiminghe/async-validator)
+::: demo Form 组件提供了表单验证的功能，只需要通过 `rules` 属性传入约定的验证规则，并 Form-Item 的 `prop` 属性设置为需校验的字段名即可。校验规则参见 [async-validator](https://github.com/yiminghe/async-validator)
 ```html
 <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
   <el-form-item label="活动名称" prop="name">
@@ -417,7 +425,7 @@
     </el-col>
   </el-form-item>
   <el-form-item label="即时配送" prop="delivery">
-    <el-switch on-text="" off-text="" v-model="ruleForm.delivery"></el-switch>
+    <el-switch v-model="ruleForm.delivery"></el-switch>
   </el-form-item>
   <el-form-item label="活动性质" prop="type">
     <el-checkbox-group v-model="ruleForm.type">
@@ -529,17 +537,15 @@
         if (!value) {
           return callback(new Error('年龄不能为空'));
         }
-        setTimeout(() => {
-          if (!Number.isInteger(value)) {
-            callback(new Error('请输入数字值'));
+        if (!Number.isInteger(value)) {
+          callback(new Error('请输入数字值'));
+        } else {
+          if (value < 18) {
+            callback(new Error('必须年满18岁'));
           } else {
-            if (value < 18) {
-              callback(new Error('必须年满18岁'));
-            } else {
-              callback();
-            }
+            callback();
           }
-        }, 1000);
+        }
       };
       var validatePass = (rule, value, callback) => {
         if (value === '') {
@@ -734,34 +740,34 @@
 
 ::: demo 如果希望某个表单项或某个表单组件的尺寸不同于 Form 上的`size`属性，直接为这个表单项或表单组件设置自己的`size`即可。
 ```html
-<el-form ref="form" :model="form" label-width="80px" size="mini">
+<el-form ref="form" :model="sizeForm" label-width="80px" size="mini">
   <el-form-item label="活动名称">
-    <el-input v-model="form.name"></el-input>
+    <el-input v-model="sizeForm.name"></el-input>
   </el-form-item>
   <el-form-item label="活动区域">
-    <el-select v-model="form.region" placeholder="请选择活动区域">
+    <el-select v-model="sizeForm.region" placeholder="请选择活动区域">
       <el-option label="区域一" value="shanghai"></el-option>
       <el-option label="区域二" value="beijing"></el-option>
     </el-select>
   </el-form-item>
   <el-form-item label="活动时间">
     <el-col :span="11">
-      <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
+      <el-date-picker type="date" placeholder="选择日期" v-model="sizeForm.date1" style="width: 100%;"></el-date-picker>
     </el-col>
     <el-col class="line" :span="2">-</el-col>
     <el-col :span="11">
-      <el-time-picker type="fixed-time" placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>
+      <el-time-picker type="fixed-time" placeholder="选择时间" v-model="sizeForm.date2" style="width: 100%;"></el-time-picker>
     </el-col>
   </el-form-item>
   <el-form-item label="活动性质">
-    <el-checkbox-group v-model="form.type">
+    <el-checkbox-group v-model="sizeForm.type">
       <el-checkbox-button label="美食/餐厅线上活动" name="type"></el-checkbox-button>
       <el-checkbox-button label="地推活动" name="type"></el-checkbox-button>
       <el-checkbox-button label="线下主题活动" name="type"></el-checkbox-button>
     </el-checkbox-group>
   </el-form-item>
   <el-form-item label="特殊资源">
-    <el-radio-group v-model="form.resource" size="medium">
+    <el-radio-group v-model="sizeForm.resource" size="medium">
       <el-radio border label="线上品牌商赞助"></el-radio>
       <el-radio border label="线下场地免费"></el-radio>
     </el-radio-group>
@@ -771,6 +777,30 @@
     <el-button>取消</el-button>
   </el-form-item>
 </el-form>
+
+<script>
+  export default {
+    data() {
+      return {
+        sizeForm: {
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
+        }
+      };
+    },
+    methods: {
+      onSubmit() {
+        console.log('submit!');
+      }
+    }
+  };
+</script>
 ```
 :::
 
@@ -793,9 +823,10 @@
 
 | 方法名      | 说明          | 参数
 |---------- |-------------- | --------------
-| validate | 对整个表单进行校验的方法 | Function(callback: Function(boolean))
+| validate | 对整个表单进行校验的方法。若不传入回调函数，则会返回一个 promise | Function(callback: Function(boolean))
 | validateField | 对部分表单字段进行校验的方法 | Function(prop: string, callback: Function(errorMessage: string))
 | resetFields | 对整个表单进行重置，将所有字段值重置为初始值并移除校验结果 | -
+| clearValidate | 移除整个表单的校验结果 | -
 
 ### Form-Item Attributes
 

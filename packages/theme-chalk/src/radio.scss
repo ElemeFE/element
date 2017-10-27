@@ -11,6 +11,7 @@
   cursor: pointer;
   display: inline-block;
   white-space: nowrap;
+  outline: none;
   @include utils-user-select(none);
 
   @include when(bordered) {
@@ -69,17 +70,6 @@
         height: $--radio-bordered-mini-input-height;
         width: $--radio-bordered-mini-input-width;
       }
-    }
-  }
-
-  &:focus { /*获得焦点时 样式提醒*/
-    outline: none;
-    .el-radio__inner {
-      border-color: $--color-primary;
-    }
-
-    .is-disabled .el-radio__inner {
-      border-color: $--border-color-base;
     }
   }
 
@@ -187,6 +177,12 @@
     right: 0;
     bottom: 0;
     margin: 0;
+  }
+
+  &:focus:not(.is-focus):not(:active){ /*获得焦点时 样式提醒*/
+    .el-radio__inner {
+      box-shadow: 0 0 2px 2px $--radio-input-border-color-hover;
+    }
   }
 
   @include e(label) {

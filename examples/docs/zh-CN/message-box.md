@@ -375,7 +375,7 @@ import { MessageBox } from 'element-ui';
 | title | MessageBox 标题 | string | — | — |
 | message | MessageBox 消息正文内容 | string / VNode | — | — |
 | dangerouslyUseHTMLString | 是否将 message 属性作为 HTML 片段处理 | boolean | — | false |
-| type | 消息类型，用于显示图标 | string | success/info/warning/error | — |
+| type | 消息类型，用于显示图标 | string | success / info / warning / error | — |
 | customClass | MessageBox 的自定义类名 | string | — | — |
 | callback | 若不使用 Promise，可以使用此参数指定 MessageBox 关闭后的回调 | function(action, instance)，action 的值为'confirm'或'cancel', instance 为 MessageBox 实例，可以通过它访问实例上的属性和方法 | — | — |
 | beforeClose | MessageBox 关闭前的回调，会暂停实例的关闭 | function(action, instance, done)，action 的值为'confirm'或'cancel'；instance 为 MessageBox 实例，可以通过它访问实例上的属性和方法；done 用于关闭 MessageBox 实例 | — | — |
@@ -391,6 +391,7 @@ import { MessageBox } from 'element-ui';
 | closeOnHashChange | 是否在 hashchange 时关闭 MessageBox | boolean | — | true |
 | showInput | 是否显示输入框 | boolean | — | false（以 prompt 方式调用时为 true）|
 | inputPlaceholder | 输入框的占位符 | string | — | — |
+| inputType | 输入框的类型 | string | — | text |
 | inputValue | 输入框的初始文本 | string | — | — |
 | inputPattern | 输入框的校验表达式 | regexp | — | — |
 | inputValidator | 输入框的校验函数。可以返回布尔值或字符串，若返回一个字符串, 则返回结果会被赋值给 inputErrorMessage | function | — | — |

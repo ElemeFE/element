@@ -15,6 +15,7 @@
 </template>
 <script>
   import emitter from 'element-ui/src/mixins/emitter';
+  import Migrating from 'element-ui/src/mixins/migrating';
   import Menubar from 'element-ui/src/utils/menu/aria-menubar';
   import { addClass, removeClass, hasClass } from 'element-ui/src/utils/dom';
 
@@ -23,7 +24,7 @@
 
     componentName: 'ElMenu',
 
-    mixins: [emitter],
+    mixins: [emitter, Migrating],
 
     provide() {
       return {
@@ -147,6 +148,13 @@
       }
     },
     methods: {
+      getMigratingConfig() {
+        return {
+          props: {
+            'theme': 'theme is removed.'
+          }
+        };
+      },
       getColorChannels(color) {
         color = color.replace('#', '');
         if (/^[1-9a-fA-F]{3}$/.test(color)) {
@@ -207,7 +215,10 @@
         this.openedMenus.push(index);
       },
       closeMenu(index) {
-        this.openedMenus.splice(this.openedMenus.indexOf(index), 1);
+        const i = this.openedMenus.indexOf(index);
+        if (i !== -1) {
+          this.openedMenus.splice(i, 1);
+        }
       },
       handleSubmenuClick(submenu) {
         const { index, indexPath } = submenu;

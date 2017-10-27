@@ -214,7 +214,7 @@ export default {
           const keyCode = event.keyCode || '';
           if ((key && key === 'Enter') || (keyCode && keyCode === 13)) {
             this.reassignMaxValue(event.target);
-            this.handleChange({ target: event.target });
+            this.handleChange(event.target.value);
           }
         },
         handleChange(value) {
@@ -239,7 +239,7 @@ export default {
               value={ this.$parent.internalCurrentPage }
               domPropsValue={ this.$parent.internalCurrentPage }
               type="number"
-              onChange={ this.handleChange }
+              onInput={ this.handleChange }
               onFocus={ this.handleFocus }
               onBlur={ this.handleBlur }
               nativeOnKeyup={ this.handleKeyUp }/>

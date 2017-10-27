@@ -4,14 +4,14 @@
 @include b(select-dropdown) {
   @include e(item) {
     font-size: $--select-font-size;
-    padding: 7px 20px;
+    padding: 0 20px;
     position: relative;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     color: $--select-option-color;
     height: $--select-option-height;
-    line-height: 1.5;
+    line-height: $--select-option-height;
     box-sizing: border-box;
     cursor: pointer;
 
@@ -30,10 +30,11 @@
 
     &.selected {
       color: $--select-option-selected;
+      font-weight: bold;
     }
 
     & span {
-      line-height: 1.5 !important;
+      line-height: 34px !important;
     }
   }
 }

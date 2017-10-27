@@ -1,6 +1,7 @@
 <script>
   import Clickoutside from 'element-ui/src/utils/clickoutside';
   import Emitter from 'element-ui/src/mixins/emitter';
+  import Migrating from 'element-ui/src/mixins/migrating';
   import ElButton from 'element-ui/packages/button';
   import ElButtonGroup from 'element-ui/packages/button-group';
 
@@ -9,7 +10,7 @@
 
     componentName: 'ElDropdown',
 
-    mixins: [Emitter],
+    mixins: [Emitter, Migrating],
 
     directives: { Clickoutside },
 
@@ -45,6 +46,14 @@
       },
       visibleArrow: {
         default: true
+      },
+      showTimeout: {
+        type: Number,
+        default: 250
+      },
+      hideTimeout: {
+        type: Number,
+        default: 150
       }
     },
 
@@ -75,19 +84,26 @@
     },
 
     methods: {
+      getMigratingConfig() {
+        return {
+          props: {
+            'menu-align': 'menu-align is renamed to placement.'
+          }
+        };
+      },
       show() {
         if (this.triggerElm.disabled) return;
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
           this.visible = true;
-        }, 250);
+        }, this.showTimeout);
       },
       hide() {
         if (this.triggerElm.disabled) return;
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
           this.visible = false;
-        }, 150);
+        }, this.hideTimeout);
       },
       handleClick() {
         if (this.triggerElm.disabled) return;
@@ -134,7 +150,7 @@
               {this.$slots.default}
             </el-button>
             <el-button ref="trigger" type={type} size={dropdownSize} class="el-dropdown__caret-button">
-              <i class="el-dropdown__icon el-icon-caret-bottom"></i>
+              <i class="el-dropdown__icon el-icon-arrow-down"></i>
             </el-button>
           </el-button-group>);
 

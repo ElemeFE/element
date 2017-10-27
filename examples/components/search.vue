@@ -2,12 +2,12 @@
   <el-autocomplete
     v-model="query"
     size="small"
-    popper-class="algolia-search"
+    :popper-class="`algolia-search${ isEmpty ? ' is-empty' : '' }`"
     :fetch-suggestions="querySearch"
     :placeholder="placeholder"
     :trigger-on-focus="false"
     @select="handleSelect">
-    <template scope="props">
+    <template slot-scope="props">
       <p class="algolia-search-title" v-if="props.item.title">
         <span v-html="props.item.highlightedCompo"></span>
         <span class="algolia-search-separator">></span>
@@ -17,11 +17,19 @@
         class="algolia-search-content"
         v-if="props.item.content"
         v-html="props.item.content"></p>
-      <img
-        class="algolia-search-logo"
-        src="../assets/images/search-by-algolia.svg"
-        alt="algolia-logo"
-        v-if="props.item.img">
+      <a
+        class="algolia-search-link"
+        v-if="props.item.img"
+        target="_blank"
+        href="https://www.algolia.com/docsearch">
+        <img
+          class="algolia-search-logo"
+          src="../assets/images/search-by-algolia.svg"
+          alt="algolia-logo">
+      </a>
+      <p
+        class="algolia-search-empty"
+        v-if="props.item.isEmpty">{{ emptyText }}</p>
     </template>
   </el-autocomplete>
 </template>
@@ -29,6 +37,12 @@
 <style>
   .algolia-search {
     width: 450px !important;
+  
+    &.is-empty {
+      .el-autocomplete-suggestion__list {
+        padding-bottom: 0;
+      }
+    }
 
     .el-autocomplete-suggestion__list {
       position: static !important;
@@ -39,27 +53,8 @@
       border-bottom: solid 1px #ebebeb;
       
       &:last-child {
-        border-bottom: none;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background-color: #dfe4ed;
-        border-bottom-left-radius: 4px;
-        border-bottom-right-radius: 4px;
-        box-sizing: border-box;
-        text-align: right;
-       
-        &:hover {
-          background-color: #dfe4ed;
-        }
-        
-        img {
-          display: inline-block;
-          height: 17px;
-          margin-top: 10px;
-        }
-      }
+         border-bottom: none;
+       }
     }
     
     .algolia-highlight {
@@ -85,6 +80,35 @@
       text-overflow: ellipsis;
       white-space: nowrap;
     }
+    
+    .algolia-search-link {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding-right: 20px;
+      background-color: #dfe4ed;
+      border-bottom-left-radius: 4px;
+      border-bottom-right-radius: 4px;
+      box-sizing: border-box;
+      text-align: right;
+
+      &:hover {
+         background-color: #dfe4ed;
+       }
+    
+      img {
+        display: inline-block;
+        height: 17px;
+        margin-top: 10px;
+      }
+    }
+  
+    .algolia-search-empty {
+      margin: 5px 0;
+      text-align: center;
+      color: #999;
+    }
   }
 </style>
 
@@ -95,7 +119,8 @@
     data() {
       return {
         index: null,
-        query: ''
+        query: '',
+        isEmpty: false
       };
     },
 
@@ -106,6 +131,10 @@
 
       placeholder() {
         return this.lang === 'zh-CN' ? '搜索文档' : 'Search';
+      },
+
+      emptyText() {
+        return this.lang === 'zh-CN' ? '无匹配结果' : 'No results';
       }
     },
 
@@ -129,6 +158,7 @@
             return;
           }
           if (res.hits.length > 0) {
+            this.isEmpty = false;
             cb(res.hits.map(hit => {
               let content = hit._highlightResult.content.value.replace(/\s+/g, ' ');
               const highlightStart = content.indexOf('<span class="algolia-highlight">');
@@ -146,17 +176,16 @@
                 title: hit._highlightResult.title.value,
                 content
               };
-            }).concat({
-              img: true
-            }));
+            }).concat({ img: true }));
           } else {
-            cb([]);
+            this.isEmpty = true;
+            cb([{ isEmpty: true }]);
           }
         });
       },
 
       handleSelect(val) {
-        if (val.img) return;
+        if (val.img || val.isEmpty) return;
         const component = val.component || '';
         const anchor = val.anchor;
         this.$router.push(`/${ this.lang }/component/${ component }${ anchor ? `#${ anchor }` : '' }`);

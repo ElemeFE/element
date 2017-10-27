@@ -76,7 +76,7 @@
 
   .main-cnt {
     margin-top: -80px;
-    padding: 80px 0 120px;
+    padding: 80px 0 340px;
     box-sizing: border-box;
     min-height: 100%;
   }
@@ -84,7 +84,7 @@
   .container,
   .page-container {
     width: 1140px;
-    padding: 0 30px;
+    padding: 0;
     margin: 0 auto;
   }
 

@@ -5,6 +5,7 @@
     :readonly="!editable || readonly"
     :disabled="disabled"
     :size="pickerSize"
+    :id="id"
     :name="name"
     v-if="!ranged"
     v-clickoutside="handleClose"
@@ -31,7 +32,8 @@
     class="el-date-editor el-range-editor el-input__inner"
     :class="[
       'el-date-editor--' + type,
-      'el-range-editor--' + pickerSize,
+      pickerSize ? `el-range-editor--${ pickerSize }` : '',
+      disabled ? 'is-disabled' : '',
       pickerVisible ? 'is-active' : ''
     ]"
     @click="handleRangeClick"
@@ -45,6 +47,9 @@
     <input
       :placeholder="startPlaceholder"
       :value="displayValue && displayValue[0]"
+      :disabled="disabled"
+      :id="id && id[0]"
+      :name="name && name[0]"
       @input="handleStartInput"
       @change="handleStartChange"
       @focus="handleFocus"
@@ -53,6 +58,9 @@
     <input
       :placeholder="endPlaceholder"
       :value="displayValue && displayValue[1]"
+      :disabled="disabled"
+      :id="id && id[1]"
+      :name="name && name[1]"
       @input="handleEndInput"
       @change="handleEndChange"
       @focus="handleFocus"
@@ -69,7 +77,7 @@
 <script>
 import Vue from 'vue';
 import Clickoutside from 'element-ui/src/utils/clickoutside';
-import { formatDate, parseDate, isDate, getWeekNumber } from './util';
+import { formatDate, parseDate, isDateObject, getWeekNumber } from './util';
 import Popper from 'element-ui/src/utils/vue-popper';
 import Emitter from 'element-ui/src/mixins/emitter';
 import Focus from 'element-ui/src/mixins/focus';
@@ -229,23 +237,23 @@ const PLACEMENT_MAP = {
   right: 'bottom-end'
 };
 
-const parseAsFormatAndType = (value, cutsomFormat, type, rangeSeparator = '-') => {
+const parseAsFormatAndType = (value, customFormat, type, rangeSeparator = '-') => {
   if (!value) return null;
   const parser = (
     TYPE_VALUE_RESOLVER_MAP[type] ||
     TYPE_VALUE_RESOLVER_MAP['default']
   ).parser;
-  const format = cutsomFormat || DEFAULT_FORMATS[type];
+  const format = customFormat || DEFAULT_FORMATS[type];
   return parser(value, format, rangeSeparator);
 };
 
-const formatAsFormatAndType = (value, cutsomFormat, type) => {
+const formatAsFormatAndType = (value, customFormat, type) => {
   if (!value) return null;
   const formatter = (
     TYPE_VALUE_RESOLVER_MAP[type] ||
     TYPE_VALUE_RESOLVER_MAP['default']
   ).formatter;
-  const format = cutsomFormat || DEFAULT_FORMATS[type];
+  const format = customFormat || DEFAULT_FORMATS[type];
   return formatter(value, format);
 };
 
@@ -263,10 +271,28 @@ const valueEquals = function(a, b) {
   return false;
 };
 
+const isString = function(val) {
+  return typeof val === 'string' || val instanceof String;
+};
+
+const validator = function(val) {
+  // either: String, Array of String, null / undefined
+  return (
+    val === null ||
+    val === undefined ||
+    isString(val) ||
+    (Array.isArray(val) && val.length === 2 && val.every(isString))
+  );
+};
+
 export default {
   mixins: [Emitter, NewPopper, Focus('reference')],
 
-  inject: ['elFormItem'],
+  inject: {
+    elFormItem: {
+      default: ''
+    }
+  },
 
   props: {
     size: String,
@@ -276,11 +302,18 @@ export default {
     placeholder: String,
     startPlaceholder: String,
     endPlaceholder: String,
-    name: String,
+    name: {
+      default: '',
+      validator
+    },
     disabled: Boolean,
     clearable: {
       type: Boolean,
       default: true
+    },
+    id: {
+      default: '',
+      validator
     },
     popperClass: String,
     editable: {
@@ -296,7 +329,8 @@ export default {
     rangeSeparator: {
       default: '-'
     },
-    pickerOptions: {}
+    pickerOptions: {},
+    unlinkPanels: Boolean
   },
 
   components: { ElInput },
@@ -417,7 +451,7 @@ export default {
     },
 
     parsedValue() {
-      const isParsed = isDate(this.value) || (Array.isArray(this.value) && this.value.every(isDate));
+      const isParsed = isDateObject(this.value) || (Array.isArray(this.value) && this.value.every(isDateObject));
       if (this.valueFormat && !isParsed) {
         return parseAsFormatAndType(this.value, this.valueFormat, this.type, this.rangeSeparator) || this.value;
       } else {
@@ -449,20 +483,19 @@ export default {
     },
 
     // {parse, formatTo} Value deals maps component value with internal Date
-    // parseValue validates value according to panel, requires picker to be mounted
-    parseValue(value, customFormat) {
-      if (!value || (!Array.isArray(value) || !value.every(val => val))) {
-        return null;
+    parseValue(value) {
+      const isParsed = isDateObject(value) || (Array.isArray(value) && value.every(isDateObject));
+      if (this.valueFormat && !isParsed) {
+        return parseAsFormatAndType(value, this.valueFormat, this.type, this.rangeSeparator) || value;
+      } else {
+        return value;
       }
-      const format = customFormat || this.valueFormat;
-      const parsedValue = parseAsFormatAndType(value, format, this.type, this.rangeSeparator);
-      return this.isValidValue(parsedValue) ? parsedValue : null;
     },
 
-    formatToValue(date, customFormat) {
-      if (this.valueFormat && (isDate(date) || Array.isArray(date))) {
-        const format = customFormat || this.valueFormat;
-        return formatAsFormatAndType(date, format, this.type, this.rangeSeparator);
+    formatToValue(date) {
+      const isFormattable = isDateObject(date) || (Array.isArray(date) && date.every(isDateObject));
+      if (this.valueFormat && isFormattable) {
+        return formatAsFormatAndType(date, this.valueFormat, this.type, this.rangeSeparator);
       } else {
         return date;
       }
@@ -672,6 +705,7 @@ export default {
       this.picker.width = this.reference.getBoundingClientRect().width;
       this.picker.showTime = this.type === 'datetime' || this.type === 'datetimerange';
       this.picker.selectionMode = this.selectionMode;
+      this.picker.unlinkPanels = this.unlinkPanels;
       this.picker.arrowControl = this.arrowControl || this.timeArrowControl || false;
       if (this.format) {
         this.picker.format = this.format;
@@ -735,12 +769,9 @@ export default {
     },
 
     emitChange(val) {
-      const formatted = this.formatToValue(val);
-      if (!valueEquals(this.valueOnOpen, formatted)) {
-        this.$emit('change', formatted);
-        this.dispatch('ElFormItem', 'el.form.change', formatted);
-        this.valueOnOpen = formatted;
-      }
+      this.$emit('change', val);
+      this.dispatch('ElFormItem', 'el.form.change', val);
+      this.valueOnOpen = val;
     },
 
     emitInput(val) {

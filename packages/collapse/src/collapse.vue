@@ -25,6 +25,12 @@
       };
     },
 
+    provide() {
+      return {
+        collapse: this
+      };
+    },
+
     watch: {
       value(value) {
         this.activeNames = [].concat(value);

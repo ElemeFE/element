@@ -22,6 +22,33 @@
   }
 </script>
 
+<style>
+  .demo-box.demo-slider .source {
+    padding: 0;
+  }
+  
+  .demo-box.demo-slider .block {
+    padding: 30px 24px;
+    overflow: hidden;
+    border-bottom: solid 1px #EFF2F6;
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+  
+  .demo-box.demo-slider .demonstration {
+    font-size: 14px;
+    color: #8492a6;
+    line-height: 44px;
+  }
+  
+  .demo-box.demo-slider .demonstration + .el-slider {
+    float: right;
+    width: 70%;
+    margin-right: 20px;
+  }
+</style>
+
 ## Slider
 
 Drag the slider within a fixed range.
@@ -209,11 +236,11 @@ Selecting a range of values is supported.
 | show-input-controls | whether to display control buttons when `show-input` is true | boolean | — | true |
 | show-stops | whether to display breakpoints | boolean | — | false |
 | show-tooltip | whether to display tooltip value | boolean | — | true |
-| format-tooltip | format to display tooltip value | Function(value) | — | — |
+| format-tooltip | format to display tooltip value | function(value) | — | — |
 | range | whether to select a range | boolean | — | false |
 | vertical | vertical mode | boolean | — | false |
-| height | Slider height, required in vertical mode | String | — | — |
-| label | label for screen reader | String | — | — |
+| height | Slider height, required in vertical mode | string | — | — |
+| label | label for screen reader | string | — | — |
 |debounce| debounce delay when typing, in milliseconds, works when `show-input` is true | number | — | 300 |
 
 ## Events

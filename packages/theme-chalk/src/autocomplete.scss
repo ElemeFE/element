@@ -20,7 +20,7 @@
 
   @include e(wrap) {
     max-height: 280px;
-    padding: 6px 0;
+    padding: 10px 0;
     box-sizing: border-box;
     overflow: auto;
     background-color: $--color-white;
@@ -36,7 +36,7 @@
   & li {
     padding: 0 20px;
     margin: 0;
-    line-height: 33px;
+    line-height: 34px;
     cursor: pointer;
     color: $--color-text-regular;
     font-size: $--font-size-base;

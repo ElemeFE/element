@@ -38,7 +38,10 @@
         </i>
       </span>
       <!-- 后置内容 -->
-      <span class="el-input__suffix" v-if="$slots.suffix || suffixIcon || validateState" :style="suffixOffset">
+      <span
+        class="el-input__suffix"
+        v-if="$slots.suffix || suffixIcon || validateState && needStatusIcon"
+        :style="suffixOffset">
         <span class="el-input__suffix-inner">
           <slot name="suffix"></slot>
           <i class="el-input__icon"
@@ -66,7 +69,7 @@
       :style="textareaStyle"
       @focus="handleFocus"
       @blur="handleBlur"
-      @change="handleChange">
+      @change="handleChange"
       :aria-label="label"
     >
     </textarea>
@@ -75,6 +78,7 @@
 <script>
   import emitter from 'element-ui/src/mixins/emitter';
   import Focus from 'element-ui/src/mixins/focus';
+  import Migrating from 'element-ui/src/mixins/migrating';
   import calcTextareaHeight from './calcTextareaHeight';
   import merge from 'element-ui/src/utils/merge';
 
@@ -83,9 +87,16 @@
 
     componentName: 'ElInput',
 
-    mixins: [emitter, Focus('input')],
+    mixins: [emitter, Focus('input'), Migrating],
 
-    inject: ['elFormItem'],
+    inject: {
+      elForm: {
+        default: ''
+      },
+      elFormItem: {
+        default: ''
+      }
+    },
 
     data() {
       return {
@@ -101,15 +112,18 @@
       placeholder: String,
       size: String,
       resize: String,
+      name: String,
+      form: String,
+      id: String,
+      maxlength: Number,
+      minlength: Number,
       readonly: Boolean,
       autofocus: Boolean,
-      icon: String,
       disabled: Boolean,
       type: {
         type: String,
         default: 'text'
       },
-      name: String,
       autosize: {
         type: [Boolean, Object],
         default: false
@@ -122,9 +136,6 @@
         type: String,
         default: 'off'
       },
-      form: String,
-      maxlength: Number,
-      minlength: Number,
       max: {},
       min: {},
       step: {},
@@ -132,7 +143,6 @@
         type: Boolean,
         default: true
       },
-      onIconClick: Function,
       suffixIcon: String,
       prefixIcon: String,
       label: String
@@ -145,11 +155,14 @@
       validateState() {
         return this.elFormItem ? this.elFormItem.validateState : '';
       },
+      needStatusIcon() {
+        return this.elForm ? this.elForm.statusIcon : false;
+      },
       validateIcon() {
         return {
           validating: 'el-icon-loading',
           success: 'el-icon-circle-check',
-          error: 'el-icon-circle-cross'
+          error: 'el-icon-circle-close'
         }[this.validateState];
       },
       textareaStyle() {
@@ -170,6 +183,17 @@
     },
 
     methods: {
+      getMigratingConfig() {
+        return {
+          props: {
+            'icon': 'icon is removed, use suffix-icon / prefix-icon instead.',
+            'on-icon-click': 'on-icon-click is removed.'
+          },
+          events: {
+            'click': 'click is removed.'
+          }
+        };
+      },
       handleBlur(event) {
         this.$emit('blur', event);
         if (this.validateEvent) {
@@ -182,7 +206,13 @@
       resizeTextarea() {
         if (this.$isServer) return;
         var { autosize, type } = this;
-        if (!autosize || type !== 'textarea') return;
+        if (type !== 'textarea') return;
+        if (!autosize) {
+          this.textareaCalcStyle = {
+            minHeight: calcTextareaHeight(this.$refs.textarea).minHeight
+          };
+          return;
+        }
         const minRows = autosize.minRows;
         const maxRows = autosize.maxRows;
 

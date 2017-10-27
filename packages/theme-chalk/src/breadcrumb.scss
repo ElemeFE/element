@@ -12,10 +12,9 @@
     font-weight: bold;
     color: $--color-text-placeholder;
 
-    &[class*=el-icon] {
+    &[class*=icon] {
       margin: 0 6px;
       font-weight: normal;
-      transform: scale(.8);
     }
   }
 

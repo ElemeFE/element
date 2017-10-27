@@ -8,14 +8,16 @@
         customClass]"
       v-show="visible"
       @mouseenter="clearTimer"
-      @mouseleave="startTimer">
+      @mouseleave="startTimer"
+      role="alertdialog"
+    >
       <i :class="iconClass" v-if="iconClass"></i>
       <i :class="typeClass" v-else></i>
       <slot>
-        <p v-if="!dangerouslyUseHTMLString" class="el-message__content">{{ message }}</p>
-        <p v-else v-html="message" class="el-message__content"></p>
+        <p v-if="!dangerouslyUseHTMLString" class="el-message__content"  tabindex="0">{{ message }}</p>
+        <p v-else v-html="message" class="el-message__content"  tabindex="0"></p>
       </slot>
-      <i v-if="showClose" class="el-message__closeBtn el-icon-close" @click="close"></i>
+      <i v-if="showClose" class="el-message__closeBtn el-icon-close" @click="close" tabindex="0" role="button" aria-label="close" @keydown.enter.stop="close"></i>
     </div>
   </transition>
 </template>
@@ -42,7 +44,9 @@
         closed: false,
         timer: null,
         dangerouslyUseHTMLString: false,
-        center: false
+        center: false,
+        initFocus: null,
+        originFocus: null
       };
     },
 
@@ -83,6 +87,7 @@
         if (typeof this.onClose === 'function') {
           this.onClose(this);
         }
+        this.originFocus && this.originFocus.focus(); // 键盘焦点回归
       },
 
       clearTimer() {
@@ -97,11 +102,30 @@
             }
           }, this.duration);
         }
+      },
+      keydown(e) {
+        if (e.keyCode === 46 || e.keyCode === 8) {
+          this.clearTimer(); // detele 取消倒计时
+        } else if (e.keyCode === 27) { // esc关闭消息
+          if (!this.closed) {
+            this.close();
+          }
+        } else {
+          this.startTimer(); // 恢复倒计时
+        }
       }
     },
-
     mounted() {
       this.startTimer();
+      this.originFocus = document.activeElement;
+      this.initFocus = this.showClose ? this.$el.querySelector('.el-icon-close') : this.$el.querySelector('.el-message__content');
+      setTimeout(() => {
+        this.initFocus && this.initFocus.focus();
+      });
+      document.addEventListener('keydown', this.keydown);
+    },
+    beforeDestroy() {
+      document.removeEventListener('keydown', this.keydown);
     }
   };
 </script>

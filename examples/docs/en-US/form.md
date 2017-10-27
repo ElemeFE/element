@@ -5,17 +5,15 @@
         if (!value) {
           return callback(new Error('Please input the age'));
         }
-        setTimeout(() => {
-          if (!Number.isInteger(value)) {
-            callback(new Error('Please input digits'));
+        if (!Number.isInteger(value)) {
+          callback(new Error('Please input digits'));
+        } else {
+          if (value < 18) {
+            callback(new Error('Age must be greater than 18'));
           } else {
-            if (value < 18) {
-              callback(new Error('Age must be greater than 18'));
-            } else {
-              callback();
-            }
+            callback();
           }
-        }, 1000);
+        }
       };
       var validatePass = (rule, value, callback) => {
         if (value === '') {
@@ -38,6 +36,16 @@
       };
       return {
         form: {
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
+        },
+        sizeForm: {
           name: '',
           region: '',
           date1: '',
@@ -264,7 +272,7 @@ It includes all kinds of input items, such as `input`, `select`, `radio` and `ch
     </el-col>
   </el-form-item>
   <el-form-item label="Instant delivery">
-    <el-switch on-text="" off-text="" v-model="form.delivery"></el-switch>
+    <el-switch v-model="form.delivery"></el-switch>
   </el-form-item>
   <el-form-item label="Activity type">
     <el-checkbox-group v-model="form.type">
@@ -399,7 +407,7 @@ Depending on your design, there are several different ways to align your label e
 
 Form component allows you to verify your data, helping you find and correct errors.
 
-:::demo Just add the `rule` attribute for `Form` component, pass validation rules, and set `prop` attribute for `Form-Item` as a specific key that needs to be validated. See more information at [async-validator](https://github.com/yiminghe/async-validator).
+:::demo Just add the `rules` attribute for `Form` component, pass validation rules, and set `prop` attribute for `Form-Item` as a specific key that needs to be validated. See more information at [async-validator](https://github.com/yiminghe/async-validator).
 
 ```html
 <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
@@ -426,7 +434,7 @@ Form component allows you to verify your data, helping you find and correct erro
     </el-col>
   </el-form-item>
   <el-form-item label="Instant delivery" prop="delivery">
-    <el-switch on-text="" off-text="" v-model="ruleForm.delivery"></el-switch>
+    <el-switch v-model="ruleForm.delivery"></el-switch>
   </el-form-item>
   <el-form-item label="Activity type" prop="type">
     <el-checkbox-group v-model="ruleForm.type">
@@ -538,17 +546,15 @@ This example shows how to customize your own validation rules to finish a two-fa
         if (!value) {
           return callback(new Error('Please input the age'));
         }
-        setTimeout(() => {
-          if (!Number.isInteger(value)) {
-            callback(new Error('Please input digits'));
+        if (!Number.isInteger(value)) {
+          callback(new Error('Please input digits'));
+        } else {
+          if (value < 18) {
+            callback(new Error('Age must be greater than 18'));
           } else {
-            if (value < 18) {
-              callback(new Error('Age must be greater than 18'));
-            } else {
-              callback();
-            }
+            callback();
           }
-        }, 1000);
+        }
       };
       var validatePass = (rule, value, callback) => {
         if (value === '') {
@@ -745,33 +751,33 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 
 ::: demo Still you can fine tune each component's `size` if you don't want that component to inherit its size from From or FormIten.
 ```html
-<el-form ref="form" :model="form" label-width="120px" size="mini">
+<el-form ref="form" :model="sizeForm" label-width="120px" size="mini">
   <el-form-item label="Activity name">
-    <el-input v-model="form.name"></el-input>
+    <el-input v-model="sizeForm.name"></el-input>
   </el-form-item>
   <el-form-item label="Activity zone">
-    <el-select v-model="form.region" placeholder="please select your zone">
+    <el-select v-model="sizeForm.region" placeholder="please select your zone">
       <el-option label="Zone one" value="shanghai"></el-option>
       <el-option label="Zone two" value="beijing"></el-option>
     </el-select>
   </el-form-item>
   <el-form-item label="Activity time">
     <el-col :span="11">
-      <el-date-picker type="date" placeholder="Pick a date" v-model="form.date1" style="width: 100%;"></el-date-picker>
+      <el-date-picker type="date" placeholder="Pick a date" v-model="sizeForm.date1" style="width: 100%;"></el-date-picker>
     </el-col>
     <el-col class="line" :span="2">-</el-col>
     <el-col :span="11">
-      <el-time-picker type="fixed-time" placeholder="Pick a time" v-model="form.date2" style="width: 100%;"></el-time-picker>
+      <el-time-picker type="fixed-time" placeholder="Pick a time" v-model="sizeForm.date2" style="width: 100%;"></el-time-picker>
     </el-col>
   </el-form-item>
   <el-form-item label="Activity type">
-    <el-checkbox-group v-model="form.type">
+    <el-checkbox-group v-model="sizeForm.type">
       <el-checkbox-button label="Online activities" name="type"></el-checkbox-button>
       <el-checkbox-button label="Promotion activities" name="type"></el-checkbox-button>
     </el-checkbox-group>
   </el-form-item>
   <el-form-item label="Resources">
-    <el-radio-group v-model="form.resource" size="medium">
+    <el-radio-group v-model="sizeForm.resource" size="medium">
       <el-radio border label="Sponsor"></el-radio>
       <el-radio border label="Venue"></el-radio>
     </el-radio-group>
@@ -781,6 +787,30 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
     <el-button>Cancel</el-button>
   </el-form-item>
 </el-form>
+
+<script>
+  export default {
+    data() {
+      return {
+        sizeForm: {
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
+        }
+      };
+    },
+    methods: {
+      onSubmit() {
+        console.log('submit!');
+      }
+    }
+  };
+</script>
 ```
 :::
 
@@ -791,7 +821,7 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 | model| data of form component | object | — | — |
 | rules | validation rules of form | object | — | — |
 | inline | whether the form is inline | boolean | — | false |
-| label-position | position of label | string | left/right/top | right |
+| label-position | position of label | string | left / right / top | right |
 | label-width | width of label, and all its direct child form items will inherit this value | string | — | — |
 | label-suffix | suffix of the label | string | — | — |
 | show-message  | whether to show the error message | boolean | — | true |
@@ -803,9 +833,10 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 
 | Method | Description | Parameters |
 | ---- | ---- | ---- |
-| validate | the method to validate the whole form | Function(callback: Function(boolean)) |
+| validate | the method to validate the whole form. Returns a promise if callback is omitted | Function(callback: Function(boolean)) |
 | validateField | the method to validate a certain form item | Function(prop: string, callback: Function(errorMessage: string)) |
 | resetFields | reset all the fields and remove validation result | — |
+| clearValidate | clear validation message for all fields | -
 
 ### Form-Item Attributes
 

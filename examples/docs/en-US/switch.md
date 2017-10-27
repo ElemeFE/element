@@ -27,15 +27,15 @@
 Switch is used for switching between two opposing states.
 
 ### Basic usage
-:::demo Bind `v-model` to a `Boolean` typed variable. The `on-color` and `off-color` attribute decides the background color in two states.
+:::demo Bind `v-model` to a `Boolean` typed variable. The `active-color` and `inactive-color` attribute decides the background color in two states.
 
 ```html
 <el-switch v-model="value1">
 </el-switch>
 <el-switch
   v-model="value2"
-  on-color="#13ce66"
-  off-color="#ff4949">
+  active-color="#13ce66"
+  inactive-color="#ff4949">
 </el-switch>
 
 <script>
@@ -52,21 +52,21 @@ Switch is used for switching between two opposing states.
 :::
 
 ### Text description
-:::demo You can add `on-text` and `off-text` attribute to show texts.
+:::demo You can add `active-text` and `inactive-text` attribute to show texts.
 
 ```html
 <el-switch
   v-model="value3"
-  on-text="Pay by month"
-  off-text="Pay by year">
+  active-text="Pay by month"
+  inactive-text="Pay by year">
 </el-switch>
 <el-switch
   style="display: block"
   v-model="value4"
-  on-color="#13ce66"
-  off-color="#ff4949"
-  on-text="Pay by month"
-  off-text="Pay by year">
+  active-color="#13ce66"
+  inactive-color="#ff4949"
+  active-text="Pay by month"
+  inactive-text="Pay by year">
 </el-switch>
 
 <script>
@@ -84,16 +84,16 @@ Switch is used for switching between two opposing states.
 
 ### Extended value types
 
-:::demo You can set `on-value` and `off-value` attributes. They both receive a `Boolean`, `String` or `Number` typed value.
+:::demo You can set `active-value` and `inactive-value` attributes. They both receive a `Boolean`, `String` or `Number` typed value.
 
 ```html
 <el-tooltip :content="'Switch value: ' + value5" placement="top">
   <el-switch
     v-model="value5"
-    on-color="#13ce66"
-    off-color="#ff4949"
-    on-value="100"
-    off-value="0">
+    active-color="#13ce66"
+    inactive-color="#ff4949"
+    active-value="100"
+    inactive-value="0">
   </el-switch>
 </el-tooltip>
 
@@ -143,14 +143,14 @@ Switch is used for switching between two opposing states.
 ----| ----| ----| ----|----
 disabled | whether Switch is disabled | boolean | — | false
 width | width of Switch | number | — | 40
-on-close-icon | class name of the icon displayed when in `on` state, overrides `on-text` | string | — | —
-off-close-icon |class name of the icon displayed when in `off` state, overrides `off-text`| string | — | —
-on-text | text displayed when in `on` state | string | — | —
-off-text | text displayed when in `off` state | string | — | —
-on-value  | switch value when in `on` state | boolean / string / number | — | true
-off-value  | switch value when in `off` state | boolean / string / number | — | false
-on-color | background color when in `on` state | string | — | #409EFF
-off-color | background color when in `off` state | string | — | #C0CCDA
+active-icon-class | class name of the icon displayed when in `on` state, overrides `active-text` | string | — | —
+inactive-icon-class |class name of the icon displayed when in `off` state, overrides `inactive-text`| string | — | —
+active-text | text displayed when in `on` state | string | — | —
+inactive-text | text displayed when in `off` state | string | — | —
+active-value  | switch value when in `on` state | boolean / string / number | — | true
+inactive-value  | switch value when in `off` state | boolean / string / number | — | false
+active-color | background color when in `on` state | string | — | #409EFF
+inactive-color | background color when in `off` state | string | — | #C0CCDA
 name| input name of Switch | string | — | —
 
 ### Events
@@ -158,3 +158,8 @@ name| input name of Switch | string | — | —
  Event Name | Description | Parameters
 ---- | ----| ----
 change | triggers when value changes | value after changing
+
+### Methods
+Method | Description | Parameters
+------|--------|-------
+focus | focus the Switch component | —

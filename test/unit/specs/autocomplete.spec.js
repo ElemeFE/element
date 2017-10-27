@@ -133,7 +133,7 @@ describe('Autocomplete', () => {
         <el-autocomplete
           v-model="state"
           ref="autocomplete"
-          :props="{ label: 'address', value: 'name' }"
+          value-key="address"
           :fetch-suggestions="querySearch"
           placeholder="请输入内容autocomplete2"
         ></el-autocomplete>
