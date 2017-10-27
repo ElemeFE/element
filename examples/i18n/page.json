@@ -5,7 +5,7 @@
       "index": {
         "lang": "zh-CN",
         "titleSize": "34",
-        "paraSize": "20",
+        "paraSize": "18",
         "1": "网站快速成型工具",
         "2": "Element，一套为开发者、设计师和产品经理准备的基于 Vue 2.0 的桌面端组件库",
         "3": "指南",
@@ -97,7 +97,7 @@
       "index": {
         "lang": "en-US",
         "titleSize": "34",
-        "paraSize": "20",
+        "paraSize": "18",
         "theatreParam": "{ maxSpeed: 100 }",
         "typingFunc": ".addScene('product designers', 1800, -17, 800)\n          .addScene('UI designers', 1800, -12, 800)\n          .addScene('UX designers', 1800, -12, 800)\n          .addScene('product managers', 1800, -16, 800)\n          .addScene('FE developers', 1800, -13, 800)",
         "typingInvoke": ".addActor('line2', { speed: 1, accuracy: 1 })\n        .addScene(2600)\n        .addScene('line2:For ', 500)",

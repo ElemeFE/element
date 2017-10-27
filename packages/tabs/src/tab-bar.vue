@@ -33,10 +33,16 @@
               return true;
             } else {
               tabSize = $el[`client${firstUpperCase(sizeName)}`];
+              if (sizeName === 'width') {
+                tabSize -= index === 0 ? 20 : 40;
+              }
               return false;
             }
           });
 
+          if (sizeName === 'width' && offset !== 0) {
+            offset += 20;
+          }
           const transform = `translate${firstUpperCase(sizeDir)}(${offset}px)`;
           style[sizeName] = tabSize + 'px';
           style.transform = transform;

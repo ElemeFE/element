@@ -16,7 +16,7 @@
       font-size: <%= paraSize >px;
       line-height: 28px;
       color: #888;
-      margin: 15px 0 0;
+      margin: 10px 0 5px;
     }
   }
   .jumbotron {

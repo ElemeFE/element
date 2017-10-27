@@ -67,7 +67,7 @@ Vue.component(Button.name, Button)
 For more information, please refer to [Quick Start](http://element.eleme.io/#/en-US/component/quickstart) in our documentation.
 
 ## Browser Support
-Modern browsers and Internet Explorer 9+.
+Modern browsers and Internet Explorer 10+.
 
 ## Development
 Skip this part if you just want to use Element.
