@@ -6,12 +6,17 @@
     "expect": true,
     "sinon": true
   },
-  "plugins": ['vue'],
-  "extends": 'elemefe',
+  "plugins": ["vue"],
+  "extends": "elemefe",
   "parserOptions": {
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true,
       "jsx": true
     }
+  },
+  // add your custom rules here
+  "rules": {
+    // disable no-unused-vars eslint errors
+    "no-unused-vars": ["error", { "args": "none" }]
   }
 }
