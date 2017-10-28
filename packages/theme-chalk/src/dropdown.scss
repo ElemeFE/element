@@ -1,6 +1,7 @@
 @import "mixins/mixins";
 @import "common/var";
 @import "button";
+@import "./popper";
 
 @include b(dropdown) {
   display: inline-block;

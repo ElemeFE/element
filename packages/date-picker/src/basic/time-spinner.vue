@@ -3,6 +3,7 @@
     <template v-if="!arrowControl">
       <el-scrollbar
         @mouseenter.native="emitSelectRange('hours')"
+        @mousemove.native="adjustCurrentSpinner('hours')"
         class="el-time-spinner__wrapper"
         wrap-style="max-height: inherit;"
         view-class="el-time-spinner__list"
@@ -18,6 +19,7 @@
       </el-scrollbar>
       <el-scrollbar
         @mouseenter.native="emitSelectRange('minutes')"
+        @mousemove.native="adjustCurrentSpinner('minutes')"
         class="el-time-spinner__wrapper"
         wrap-style="max-height: inherit;"
         view-class="el-time-spinner__list"
@@ -33,6 +35,7 @@
       <el-scrollbar
         v-show="showSeconds"
         @mouseenter.native="emitSelectRange('seconds')"
+        @mousemove.native="adjustCurrentSpinner('seconds')"
         class="el-time-spinner__wrapper"
         wrap-style="max-height: inherit;"
         view-class="el-time-spinner__list"
@@ -196,16 +199,10 @@
       emitSelectRange(type) {
         if (type === 'hours') {
           this.$emit('select-range', 0, 2);
-          this.adjustSpinner('minutes', this.minutes);
-          this.adjustSpinner('seconds', this.seconds);
         } else if (type === 'minutes') {
           this.$emit('select-range', 3, 5);
-          this.adjustSpinner('hours', this.hours);
-          this.adjustSpinner('seconds', this.seconds);
         } else if (type === 'seconds') {
           this.$emit('select-range', 6, 8);
-          this.adjustSpinner('minutes', this.minutes);
-          this.adjustSpinner('hours', this.hours);
         }
         this.currentScrollbar = type;
       },
@@ -235,6 +232,10 @@
         this.adjustSpinner('hours', this.hours);
         this.adjustSpinner('minutes', this.minutes);
         this.adjustSpinner('seconds', this.seconds);
+      },
+
+      adjustCurrentSpinner(type) {
+        this.adjustSpinner(type, this[type]);
       },
 
       adjustSpinner(type, value) {

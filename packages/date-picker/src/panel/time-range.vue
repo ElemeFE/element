@@ -135,9 +135,6 @@
             this.maxDate = advanceTime(new Date(), 60 * 60 * 1000);
           }
         }
-        if (this.visible) {
-          this.$nextTick(_ => this.adjustSpinners());
-        }
       },
 
       visible(val) {

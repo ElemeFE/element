@@ -114,24 +114,13 @@
   import { t } from 'element-ui/src/locale';
   import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
   import { getValueByPath } from 'element-ui/src/utils/util';
+  import { valueEquals } from 'element-ui/src/utils/util';
   import NavigationMixin from './navigation-mixin';
 
   const sizeMap = {
     'medium': 36,
     'small': 32,
     'mini': 28
-  };
-
-  const valueEquals = (a, b) => {
-    // see: https://stackoverflow.com/questions/3115982/how-to-check-if-two-arrays-are-equal-with-javascript
-    if (a === b) return true;
-    if (!(a instanceof Array)) return false;
-    if (!(b instanceof Array)) return false;
-    if (a.length !== b.length) return false;
-    for (let i = 0; i !== a.length; ++i) {
-      if (a[i] !== b[i]) return false;
-    }
-    return true;
   };
 
   export default {

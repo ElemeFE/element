@@ -3,6 +3,7 @@ import ElSelect from 'element-ui/packages/select';
 import ElOption from 'element-ui/packages/option';
 import ElInput from 'element-ui/packages/input';
 import Locale from 'element-ui/src/mixins/locale';
+import { valueEquals } from 'element-ui/src/utils/util';
 
 export default {
   name: 'ElPagination',
@@ -147,9 +148,10 @@ export default {
       watch: {
         pageSizes: {
           immediate: true,
-          handler(value) {
-            if (Array.isArray(value)) {
-              this.$parent.internalPageSize = value.indexOf(this.$parent.pageSize) > -1
+          handler(newVal, oldVal) {
+            if (valueEquals(newVal, oldVal)) return;
+            if (Array.isArray(newVal)) {
+              this.$parent.internalPageSize = newVal.indexOf(this.$parent.pageSize) > -1
                 ? this.$parent.pageSize
                 : this.pageSizes[0];
             }
@@ -179,8 +181,7 @@ export default {
 
       components: {
         ElSelect,
-        ElOption,
-        ElInput
+        ElOption
       },
 
       methods: {
@@ -201,6 +202,8 @@ export default {
           oldValue: null
         };
       },
+
+      components: { ElInput },
 
       methods: {
         handleFocus(event) {
