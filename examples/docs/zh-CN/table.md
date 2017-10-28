@@ -298,10 +298,10 @@
         return row.tag === value;
       },
 
-      tableRowClassName({row, rowndex}) {
-        if (rowndex === 1) {
+      tableRowClassName({row, rowIndex}) {
+        if (rowIndex === 1) {
           return 'warning-row';
-        } else if (rowndex === 3) {
+        } else if (rowIndex === 3) {
           return 'success-row';
         }
         return '';

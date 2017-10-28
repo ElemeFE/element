@@ -1,6 +1,7 @@
 @import "mixins/mixins";
-@import "./input.scss";
 @import "common/var";
+@import "./input.scss";
+@import "./popper";
 
 @include b(cascader) {
   display: inline-block;

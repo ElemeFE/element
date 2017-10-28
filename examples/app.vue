@@ -202,7 +202,10 @@
     },
 
     watch: {
-      lang() {
+      lang(val) {
+        if (val === 'zh-CN') {
+          this.suggestJump();
+        }
         this.localize();
       }
     },
@@ -210,11 +213,28 @@
     methods: {
       localize() {
         use(this.lang === 'zh-CN' ? zhLocale : enLocale);
+      },
+      suggestJump() {
+        const href = location.href;
+        const preferGithub = localStorage.getItem('PREFER_GITHUB');
+        if (href.indexOf('element-cn') > -1 || preferGithub) return;
+        setTimeout(() => {
+          this.$confirm('建议大陆用户访问部署在国内的站点，是否跳转？', '提示')
+            .then(() => {
+              location.href = location.href.replace('element.', 'element-cn.');
+            })
+            .catch(() => {
+              localStorage.setItem('PREFER_GITHUB', true);
+            });
+        }, 1000);
       }
     },
 
     mounted() {
       this.localize();
+      if (this.lang === 'zh-CN') {
+        this.suggestJump();
+      }
       setTimeout(() => {
         const notified = localStorage.getItem('RELEASE_NOTIFIED');
         if (!notified) {
