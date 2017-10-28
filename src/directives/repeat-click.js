@@ -13,7 +13,8 @@ export default {
       interval = null;
     };
 
-    on(el, 'mousedown', () => {
+    on(el, 'mousedown', (e) => {
+      if (e.button !== 0) return;
       startTime = new Date();
       once(document, 'mouseup', clear);
       clearInterval(interval);
