@@ -1,5 +1,13 @@
 ## Changelog
 
+### 2.0.1
+
+*2017-10-28*
+
+- Fixed style error of RadioButton and CheckboxButton, #7793
+- Fixed TimePicker not respond to mouse scroll in some conditions, #7811
+- Fixed incomplete styles of some components when imported on demand, #7811
+
 ### 2.0.0 Carbon
 
 *2017-10-27*
