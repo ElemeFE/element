@@ -194,6 +194,15 @@
         if (value === '') {
           return;
         }
+
+        if (value.indexOf('.') === (value.length - 1)) {
+          return;
+        }
+
+        if (value.indexOf('-') === (value.length - 1)) {
+          return;
+        }
+
         const newVal = Number(value);
         if (!isNaN(newVal)) {
           this.setCurrentValue(newVal);
