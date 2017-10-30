@@ -4,7 +4,7 @@ This part walks you through the process of using Element in a webpack project.
 
 ### Use Starter Kit
 
-We provide a general [project template](https://github.com/ElementUI/element-starter) for you. For those who are familiar with [cooking](https://github.com/ElementUI/element-cooking-starter) or [Laravel](https://github.com/ElementUI/element-in-laravel-starter), we also provide corresponding templates, and you can download and use them as well.
+We provide a general [project template](https://github.com/ElementUI/element-starter/tree/1.x) for you. For those who are familiar with [cooking](https://github.com/ElementUI/element-cooking-starter) or [Laravel](https://github.com/ElementUI/element-in-laravel-starter/tree/1.x), we also provide corresponding templates, and you can download and use them as well.
 
 If you prefer not to use them, please read the following.
 
@@ -42,8 +42,8 @@ Typical configurations for these config files are:
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
-    "element-ui": "^1.0.0",
-    "vue": "^2.1.6"
+    "element-ui": "^1.4.0",
+    "vue": "^2.3.0"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",

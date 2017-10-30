@@ -3,8 +3,12 @@
 ### npm
 Installing with npm is recommended and it works seamlessly with [webpack](https://webpack.js.org/).
 
+:::tip
+Note that this doc is for 1.x, so you need the `legacy` tag when installing.
+:::
+
 ```shell
-npm i element-ui -S
+npm i element-ui@legacy -S
 ```
 
 ### CDN
@@ -16,6 +20,10 @@ Get the latest version from [unpkg.com/element-ui](https://unpkg.com/element-ui@
 <!-- import JavaScript -->
 <script src="https://unpkg.com/element-ui@1.4/lib/index.js"></script>
 ```
+
+:::tip
+We recommend our users to lock Element's version when using CDN. For example, if you're using Element 1.4.8, you can lock CSS and JavaScript files like this: `https://unpkg.com/element-ui@1.4.8/lib/theme-default/index.css`, `https://unpkg.com/element-ui@1.4.8/lib/index.js`.
+:::
 
 ### Hello world
 If you are using CDN, a hello-world page is easy with Element. [Online Demo](https://jsfiddle.net/hzfpyvg6/18/)
@@ -37,7 +45,7 @@ If you are using CDN, a hello-world page is easy with Element. [Online Demo](htt
   </div>
 </body>
   <!-- import Vue before Element -->
-  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue@2.5/dist/vue.js"></script>
   <!-- import JavaScript -->
   <script src="https://unpkg.com/element-ui@1.4/lib/index.js"></script>
   <script>
