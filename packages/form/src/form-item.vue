@@ -53,7 +53,10 @@
       label: String,
       labelWidth: String,
       prop: String,
-      required: Boolean,
+      required: {
+        type: Boolean,
+        default: undefined
+      },
       rules: [Object, Array],
       error: String,
       validateStatus: String,
@@ -165,7 +168,7 @@
       validate(trigger, callback = noop) {
         this.validateDisabled = false;
         var rules = this.getFilteredRule(trigger);
-        if ((!rules || rules.length === 0) && !this._props.hasOwnProperty('required')) {
+        if ((!rules || rules.length === 0) && this.required === undefined) {
           callback();
           return true;
         }
@@ -216,7 +219,7 @@
       getRules() {
         var formRules = this.form.rules;
         var selfRules = this.rules;
-        var requiredRule = this._props.hasOwnProperty('required') ? { required: !!this.required } : [];
+        var requiredRule = this.required !== undefined ? { required: !!this.required } : [];
 
         formRules = formRules ? formRules[this.prop] : [];
 
@@ -255,7 +258,7 @@
 
         let rules = this.getRules();
 
-        if (rules.length || this._props.hasOwnProperty('required')) {
+        if (rules.length || this.required !== undefined) {
           this.$on('el.form.blur', this.onFieldBlur);
           this.$on('el.form.change', this.onFieldChange);
         }
