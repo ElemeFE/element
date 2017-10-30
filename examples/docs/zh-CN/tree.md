@@ -137,6 +137,12 @@
     children: 'zones'
   };
 
+  const props1 = {
+    label: 'name',
+    children: 'zones',
+    isLeaf: 'leaf'
+  };
+
   const defaultProps = {
     children: 'children',
     label: 'label'
@@ -185,6 +191,23 @@
           resolve(data);
         }, 500);
       },
+      loadNode1(node, resolve) {
+        if (node.level === 0) {
+          return resolve([{ name: 'region' }]);
+        }
+        if (node.level > 1) return resolve([]);
+
+        setTimeout(() => {
+          const data = [{
+            name: 'leaf',
+            leaf: true
+          }, {
+            name: 'zone'
+          }];
+
+          resolve(data);
+        }, 500);
+      },
       getCheckedNodes() {
         console.log(this.$refs.tree.getCheckedNodes());
       },
@@ -209,23 +232,30 @@
       resetChecked() {
         this.$refs.tree.setCheckedKeys([]);
       },
-      append(store, data) {
-        store.append({ id: id++, label: 'testtest', children: [] }, data);
+      append(data) {
+        const newChild = { id: id++, label: 'testtest', children: [] };
+        if (!data.children) {
+          this.$set(data, 'children', []);
+        }
+        data.children.push(newChild);
       },
 
-      remove(store, data) {
-        store.remove(data);
+      remove(node, data) {
+        const parent = node.parent;
+        const children = parent.data.children || parent.data;
+        const index = children.findIndex(d => d.id === data.id);
+        children.splice(index, 1);
       },
 
-      renderContent(h, { node, data, store }) {
+      renderContent(h, { node, data }) {
         return (
-          <span style="white-space: normal">
+          <span style="flex: 1; display: flex; align-items: center; justify-content: space-between; font-size: 14px; padding-right: 8px;">
             <span>
               <span>{node.label}</span>
             </span>
-            <span style="float: right; margin-right: 20px">
-              <el-button size="mini" on-click={ () => this.append(store, data) }>Append</el-button>
-              <el-button size="mini" on-click={ () => this.remove(store, data) }>Delete</el-button>
+            <span>
+              <el-button style="font-size: 12px;" type="text" on-click={ () => this.append(data) }>Append</el-button>
+              <el-button style="font-size: 12px;" type="text" on-click={ () => this.remove(node, data) }>Delete</el-button>
             </span>
           </span>);
       },
@@ -241,9 +271,11 @@
         data,
         data2,
         data3,
+        data4: JSON.parse(JSON.stringify(data2)),
         regions,
         defaultProps,
         props,
+        props1,
         defaultCheckedKeys: [5],
         defaultExpandedKeys: [2, 3],
         filterText: ''
@@ -321,12 +353,11 @@
 
 ### 可选择
 
-适用于需要选择层级时使用。在下例中，由于在点击时才进行该层数据的获取，导致层级不可预知，如果没有下层数据，则点击后下拉按钮会消失。
+适用于需要选择层级时使用。
 
-::: demo
+::: demo 本例还展示了动态加载节点数据的方法。
 ```html
 <el-tree
-  :data="regions"
   :props="props"
   :load="loadNode"
   lazy
@@ -338,11 +369,6 @@
   export default {
     data() {
       return {
-        regions: [{
-          'name': 'region1'
-        }, {
-          'name': 'region2'
-        }],
         props: {
           label: 'name',
           children: 'zones'
@@ -383,6 +409,52 @@
           } else {
             data = [];
           }
+
+          resolve(data);
+        }, 500);
+      }
+    }
+  };
+</script>
+```
+:::
+
+### 懒加载自定义叶子节点
+
+::: demo 由于在点击节点时才进行该层数据的获取，默认情况下 Tree 无法预知某个节点是否为叶子节点，所以会为每个节点添加一个下拉按钮，如果节点没有下层数据，则点击后下拉按钮会消失。同时，你也可以提前告知 Tree 某个节点是否为叶子节点，从而避免在叶子节点前渲染下拉按钮。
+```html
+<el-tree
+  :props="props1"
+  :load="loadNode1"
+  lazy
+  show-checkbox>
+</el-tree>
+
+<script>
+  export default {
+    data() {
+      return {
+        props1: {
+          label: 'name',
+          children: 'zones',
+          isLeaf: 'leaf'
+        },
+      };
+    },
+    methods: {
+      loadNode1(node, resolve) {
+        if (node.level === 0) {
+          return resolve([{ name: 'region' }]);
+        }
+        if (node.level > 1) return resolve([]);
+
+        setTimeout(() => {
+          const data = [{
+            name: 'leaf',
+            leaf: true
+          }, {
+            name: 'zone'
+          }];
 
           resolve(data);
         }, 500);
@@ -615,7 +687,7 @@
 ::: demo 使用`render-content`指定渲染函数，该函数返回需要的节点区内容即可。渲染函数的用法请参考 Vue 文档。注意：由于 jsfiddle 不支持 JSX 语法，所以本例在 jsfiddle 中无法运行。但是在实际的项目中，只要正确地配置了相关依赖，就可以正常运行。
 ```html
 <el-tree
-  :data="data2"
+  :data="data4"
   :props="defaultProps"
   show-checkbox
   node-key="id"
@@ -630,7 +702,7 @@
   export default {
     data() {
       return {
-        data2: [{
+        data4: [{
           id: 1,
           label: '一级 1',
           children: [{
@@ -673,23 +745,30 @@
     },
 
     methods: {
-      append(store, data) {
-        store.append({ id: id++, label: 'testtest', children: [] }, data);
+      append(data) {
+        const newChild = { id: id++, label: 'testtest', children: [] };
+        if (!data.children) {
+          this.$set(data, 'children', []);
+        }
+        data.children.push(newChild);
       },
 
-      remove(store, data) {
-        store.remove(data);
+      remove(node, data) {
+        const parent = node.parent;
+        const children = parent.data.children || parent.data;
+        const index = children.findIndex(d => d.id === data.id);
+        children.splice(index, 1);
       },
 
       renderContent(h, { node, data, store }) {
         return (
-          <span>
+          <span style="flex: 1; display: flex; align-items: center; justify-content: space-between; font-size: 14px; padding-right: 8px;">
             <span>
               <span>{node.label}</span>
             </span>
-            <span style="float: right; margin-right: 20px">
-              <el-button size="mini" on-click={ () => this.append(store, data) }>Append</el-button>
-              <el-button size="mini" on-click={ () => this.remove(store, data) }>Delete</el-button>
+            <span>
+              <el-button style="font-size: 12px;" type="text" on-click={ () => this.append(data) }>Append</el-button>
+              <el-button style="font-size: 12px;" type="text" on-click={ () => this.remove(node, data) }>Delete</el-button>
             </span>
           </span>);
       }
@@ -858,9 +937,8 @@
 | node-key              | 每个树节点用来作为唯一标识的属性，整棵树应该是唯一的               | String                      | —    | —     |
 | props                 | 配置选项，具体看下表                               | object                      | —    | —     |
 | load                  | 加载子树数据的方法                                | function(node, resolve)     | —    | —     |
-| render-content        | 树节点的内容区的渲染 Function                      | Function(h, { node }        | —    | —     |
+| render-content        | 树节点的内容区的渲染 Function                      | Function(h, { node, data, store }        | —    | —     |
 | highlight-current     | 是否高亮当前选中节点，默认值是 false。                   | boolean                     | —    | false |
-| current-node-key      | 当前选中节点的 key，只写属性                         | string, number              | —    | —     |
 | default-expand-all    | 是否默认展开所有节点                               | boolean                     | —    | false |
 | expand-on-click-node  | 是否在点击节点的时候展开或者收缩节点， 默认值为 true，如果为 false，则只有点箭头图标的时候才会展开或者收缩节点。 | boolean                     | —    | true  |
 | auto-expand-parent    | 展开子节点的时候是否自动展开父节点                        | boolean                     | —    | true  |
@@ -877,18 +955,24 @@
 | -------- | ----------------- | ------ | ---- | ---- |
 | label    | 指定节点标签为节点对象的某个属性值 | string, function(data, node) | —    | —    |
 | children | 指定子树为节点对象的某个属性值 | string, function(data, node) | —    | —    |
-| disabled | 指定节点选择框是否禁用为节点对象的某个属性值 |  boolean, function(data, node) | —    | —    |
+| disabled | 指定节点选择框是否禁用为节点对象的某个属性值 | boolean, function(data, node) | —    | —    |
+| isLeaf | 指定节点是否为叶子节点 | boolean, function(data, node) | —    | —    |
 
 ### 方法
 `Tree` 拥有如下方法，返回目前被选中的节点数组：
 | 方法名             | 说明                                       | 参数                                       |
 | --------------- | ---------------------------------------- | ---------------------------------------- |
 | filter          | 对树节点进行筛选操作                               | 接收一个任意类型的参数，该参数会在 filter-node-method 中作为第一个参数 |
+| updateKeyChildren | 通过 keys 设置节点子元素，使用此方法必须设置 node-key 属性 | (key, data) 接收两个参数，1. 节点 key 2. 节点数据的数组 |
 | getCheckedNodes | 若节点可被选择（即 `show-checkbox` 为 `true`），则返回目前被选中的节点所组成的数组 | (leafOnly) 接收一个 boolean 类型的参数，若为 `true` 则仅返回被选中的叶子节点，默认值为 `false` |
 | setCheckedNodes | 设置目前勾选的节点，使用此方法必须设置 node-key 属性          | (nodes) 接收勾选节点数据的数组                      |
 | getCheckedKeys  | 若节点可被选择（即 `show-checkbox` 为 `true`），则返回目前被选中的节点所组成的数组 | (leafOnly) 接收一个 boolean 类型的参数，若为 `true` 则仅返回被选中的叶子节点的 keys，默认值为 `false` |
 | setCheckedKeys  | 通过 keys 设置目前勾选的节点，使用此方法必须设置 node-key 属性  | (keys, leafOnly) 接收两个参数，1. 勾选节点的 key 的数组 2. boolean 类型的参数，若为 `true` 则仅设置叶子节点的选中状态，默认值为 `false` |
 | setChecked      | 通过 key / data 设置某个节点的勾选状态，使用此方法必须设置 node-key 属性 | (key/data, checked, deep) 接收三个参数，1. 勾选节点的 key 或者 data 2. boolean 类型，节点是否选中  3. boolean 类型，是否设置子节点 ，默认为 false |
+| getCurrentKey   | 获取当前被选中节点的 key，使用此方法必须设置 node-key 属性，若没有节点被选中则返回 null | — |
+| getCurrentNode  | 获取当前被选中节点的 node，若没有节点被选中则返回 null | — |
+| setCurrentKey   | 通过 key 设置某个节点的当前选中状态，使用此方法必须设置 node-key 属性 | (key) 待被选节点的 key |
+| setCurrentNode  | 通过 node 设置某个节点的当前选中状态，使用此方法必须设置 node-key 属性 | (node) 待被选节点的 node |
 
 ### Events
 | 事件名称           | 说明             | 回调参数                                     |

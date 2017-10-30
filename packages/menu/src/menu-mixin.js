@@ -1,8 +1,8 @@
 export default {
   computed: {
     indexPath() {
-      var path = [this.index];
-      var parent = this.$parent;
+      const path = [this.index];
+      let parent = this.$parent;
       while (parent.$options.componentName !== 'ElMenu') {
         if (parent.index) {
           path.unshift(parent.index);
@@ -12,7 +12,7 @@ export default {
       return path;
     },
     rootMenu() {
-      var parent = this.$parent;
+      let parent = this.$parent;
       while (
         parent &&
         parent.$options.componentName !== 'ElMenu'

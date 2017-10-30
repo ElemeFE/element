@@ -97,8 +97,8 @@ describe('ColorPicker', () => {
     trigger.click();
 
     setTimeout(() => {
-      const value = document.querySelector('.el-color-dropdown__value');
-      expect(value.innerText.trim().toUpperCase()).to.equal('#20A0FF');
+      const input = document.querySelector('.el-color-dropdown__value input');
+      expect(input.value.trim().toUpperCase()).to.equal('#20A0FF');
       done();
     }, ANIMATION_TIME);
   });
@@ -232,7 +232,7 @@ describe('ColorPicker', () => {
       alphaBar.__vue__.handleClick({ target: null, clientX: 50, clientY: 0 });
       vm.$nextTick(() => {
         const picker = vm.$children[0];
-        expect(picker.color._alpha < 1).to.true;
+        expect(picker.color._alpha < 100).to.true;
         done();
       });
     }, ANIMATION_TIME);

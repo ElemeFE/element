@@ -1,5 +1,5 @@
 <template>
-  <div class="el-collapse">
+  <div class="el-collapse" role="tablist" aria-multiselectable="true">
     <slot></slot>
   </div>
 </template>
@@ -22,6 +22,12 @@
     data() {
       return {
         activeNames: [].concat(this.value)
+      };
+    },
+
+    provide() {
+      return {
+        collapse: this
       };
     },
 

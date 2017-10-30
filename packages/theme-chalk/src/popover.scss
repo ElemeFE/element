@@ -1,0 +1,30 @@
+@import "mixins/mixins";
+@import "common/var";
+@import "./popper";
+
+@include b(popover) {
+  position: absolute;
+  background: $--popover-fill;
+  min-width: 150px;
+  border-radius: 4px;
+  border: 1px solid $--popover-border-color;
+  padding: $--popover-padding;
+  z-index: $--index-popper;
+  color: $--color-text-regular;
+  line-height: 1.4;
+  text-align: justify;
+  word-break: break-all;
+  font-size: $--popover-font-size;
+  box-shadow: $--box-shadow-light;
+
+  @include m(plain) {
+    padding: $--popover-padding-large;
+  }
+
+  @include e(title) {
+    color: $--popover-title-color;
+    font-size: $--popover-title-font-size;
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+}

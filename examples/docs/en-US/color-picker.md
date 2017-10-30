@@ -2,9 +2,10 @@
   export default {
     data() {
       return {
-        color1: '#20a0ff',
+        color1: '#409EFF',
         color2: null,
-        color3: 'rgba(19, 206, 102, 0.8)'
+        color3: 'rgba(19, 206, 102, 0.8)',
+        color4: '#409EFF'
       };
     },
     mounted() {
@@ -21,7 +22,7 @@
     padding: 30px 0;
     text-align: center;
     border-right: solid 1px #EFF2F6;
-    float: left;
+    display: inline-block;
     width: 50%;
     box-sizing: border-box;
     &:last-child {
@@ -33,6 +34,9 @@
     color: #8492a6;
     font-size: 14px;
     margin-bottom: 20px;
+  }
+  .demo-color-picker .el-color-picker + .el-color-picker {
+    margin-left: 20px;
   }
 </style>
 
@@ -57,7 +61,7 @@ ColorPicker is a color selector supporting multiple color formats.
   export default {
     data() {
       return {
-        color1: '#20a0ff',
+        color1: '#409EFF',
         color2: null
       }
     }
@@ -84,11 +88,35 @@ ColorPicker is a color selector supporting multiple color formats.
 ```
 :::
 
+### Sizes
+
+:::demo
+```html
+<el-color-picker v-model="color4"></el-color-picker>
+<el-color-picker v-model="color4" size="medium"></el-color-picker>
+<el-color-picker v-model="color4" size="small"></el-color-picker>
+<el-color-picker v-model="color4" size="mini"></el-color-picker>
+
+<script>
+  export default {
+    data() {
+      return {
+        color4: '#409EFF'
+      }
+    }
+  };
+</script>
+```
+:::
+
 ### Attributes
 | Attribute | Description | Type | Accepted Values | Default |
 |---------- |-------- |---------- |-------------  |-------- |
+| disabled | whether to disable the ColorPicker | boolean | — | false |
+| size | size of ColorPicker | string | — | medium / small / mini |
 | show-alpha | whether to display the alpha slider | boolean | — | false |
 | color-format | color format of v-model | string | hsl / hsv / hex / rgb | hex (when show-alpha is false)/ rgb (when show-alpha is true) |
+| popper-class | custom class name for ColorPicker's dropdown | string | — | — |
 
 ### Events
 | Event Name | Description | Parameters |

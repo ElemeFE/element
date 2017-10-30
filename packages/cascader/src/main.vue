@@ -6,7 +6,7 @@
         'is-opened': menuVisible,
         'is-disabled': disabled
       },
-      size ? 'el-cascader--' + size : ''
+      cascaderSize ? 'el-cascader--' + cascaderSize : ''
     ]"
     @click="handleClick"
     @mouseenter="inputHover = true"
@@ -19,12 +19,12 @@
       :readonly="!filterable"
       :placeholder="currentLabels.length ? undefined : placeholder"
       v-model="inputValue"
-      @change="debouncedInputChange"
+      @input="debouncedInputChange"
       :validate-event="false"
       :size="size"
       :disabled="disabled"
     >
-      <template slot="icon">
+      <template slot="suffix">
         <i
           key="1"
           v-if="clearable && inputHover && currentLabels.length"
@@ -34,7 +34,7 @@
         <i
           key="2"
           v-else
-          class="el-input__icon el-icon-caret-bottom"
+          class="el-input__icon el-icon-arrow-down"
           :class="{ 'is-reverse': menuVisible }"
         ></i>
       </template>
@@ -86,6 +86,12 @@ export default {
   directives: { Clickoutside },
 
   mixins: [popperMixin, emitter, Locale],
+
+  inject: {
+    elFormItem: {
+      default: ''
+    }
+  },
 
   components: {
     ElInput
@@ -179,6 +185,12 @@ export default {
         }
       });
       return labels;
+    },
+    _elFormItemSize() {
+      return (this.elFormItem || {}).elFormItemSize;
+    },
+    cascaderSize() {
+      return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
     }
   },
 
@@ -325,9 +337,9 @@ export default {
     },
     handleClick() {
       if (this.disabled) return;
+      this.$refs.input.focus();
       if (this.filterable) {
         this.menuVisible = true;
-        this.$refs.input.$refs.input.focus();
         return;
       }
       this.menuVisible = !this.menuVisible;
