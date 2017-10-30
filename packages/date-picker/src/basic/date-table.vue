@@ -459,14 +459,14 @@
           // when the Thursday is in the next year
           // you will get week number 1, and should also update the year number
           // so add one if when you get week 1 on December
-          let year = newDate.getFullYear();
-          let month = newDate.getMonth();
-          if(weekNumber === 1 && month === 11){
-              year += 1;
+          let yearNumber = newDate.getFullYear();
+          let monthNumber = newDate.getMonth();
+          if (weekNumber === 1 && monthNumber === 11) {
+            yearNumber = yearNumber + 1;
           }
-          const value = year + 'w' + weekNumber;
+          const value = yearNumber + 'w' + weekNumber;
           this.$emit('pick', {
-            year: year,
+            year: yearNumber,
             week: weekNumber,
             value: value,
             date: newDate
