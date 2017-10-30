@@ -330,7 +330,12 @@
       font-size: 20px;
       background-color: rgba(0, 0, 0, .5);
       transition: opacity .3s;
-      @include utils-vertical-center;
+      &::after {
+        display: inline-block;
+        content: "";
+        height: 100%;
+        vertical-align: middle
+      }
 
       span {
         display: none;
