@@ -28,7 +28,7 @@ export const orderBy = function(array, sortKey, reverse, sortMethod, sortBy) {
   }
   const getKey = sortMethod ? null : function(value, index) {
     if (sortBy) {
-      if (!Array.isArray) {
+      if (!Array.isArray(sortBy)) {
         sortBy = [sortBy];
       }
       return sortBy.map(function(by) {
