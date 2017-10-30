@@ -11,6 +11,7 @@
   "menu-item-group": "./packages/menu-item-group/index.js",
   "input": "./packages/input/index.js",
   "input-number": "./packages/input-number/index.js",
+  "input-ip": "./packages/input-ip/index.js",
   "radio": "./packages/radio/index.js",
   "radio-group": "./packages/radio-group/index.js",
   "radio-button": "./packages/radio-button/index.js",
