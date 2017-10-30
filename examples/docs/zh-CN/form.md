@@ -5,15 +5,17 @@
         if (!value) {
           return callback(new Error('年龄不能为空'));
         }
-        if (!Number.isInteger(value)) {
-          callback(new Error('请输入数字值'));
-        } else {
-          if (value < 18) {
-            callback(new Error('必须年满18岁'));
+        setTimeout(() => {
+          if (!Number.isInteger(value)) {
+            callback(new Error('请输入数字值'));
           } else {
-            callback();
+            if (value < 18) {
+              callback(new Error('必须年满18岁'));
+            } else {
+              callback();
+            }
           }
-        }
+        }, 1000);
       };
       var validatePass = (rule, value, callback) => {
         if (value === '') {
@@ -331,7 +333,8 @@
       <el-option label="区域一" value="shanghai"></el-option>
       <el-option label="区域二" value="beijing"></el-option>
     </el-select>
-  </el-form-item><el-form-item>
+  </el-form-item>
+  <el-form-item>
     <el-button type="primary" @click="onSubmit">查询</el-button>
   </el-form-item>
 </el-form>
@@ -537,15 +540,17 @@
         if (!value) {
           return callback(new Error('年龄不能为空'));
         }
-        if (!Number.isInteger(value)) {
-          callback(new Error('请输入数字值'));
-        } else {
-          if (value < 18) {
-            callback(new Error('必须年满18岁'));
+        setTimeout(() => {
+          if (!Number.isInteger(value)) {
+            callback(new Error('请输入数字值'));
           } else {
-            callback();
+            if (value < 18) {
+              callback(new Error('必须年满18岁'));
+            } else {
+              callback();
+            }
           }
-        }
+        }, 1000);
       };
       var validatePass = (rule, value, callback) => {
         if (value === '') {

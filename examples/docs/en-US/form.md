@@ -5,15 +5,17 @@
         if (!value) {
           return callback(new Error('Please input the age'));
         }
-        if (!Number.isInteger(value)) {
-          callback(new Error('Please input digits'));
-        } else {
-          if (value < 18) {
-            callback(new Error('Age must be greater than 18'));
+        setTimeout(() => {
+          if (!Number.isInteger(value)) {
+            callback(new Error('Please input digits'));
           } else {
-            callback();
+            if (value < 18) {
+              callback(new Error('Age must be greater than 18'));
+            } else {
+              callback();
+            }
           }
-        }
+        }, 1000);
       };
       var validatePass = (rule, value, callback) => {
         if (value === '') {
@@ -338,7 +340,8 @@ When the vertical space is limited and the form is relatively simple, you can pu
       <el-option label="Zone one" value="shanghai"></el-option>
       <el-option label="Zone two" value="beijing"></el-option>
     </el-select>
-  </el-form-item><el-form-item>
+  </el-form-item>
+  <el-form-item>
     <el-button type="primary" @click="onSubmit">Query</el-button>
   </el-form-item>
 </el-form>
@@ -546,15 +549,17 @@ This example shows how to customize your own validation rules to finish a two-fa
         if (!value) {
           return callback(new Error('Please input the age'));
         }
-        if (!Number.isInteger(value)) {
-          callback(new Error('Please input digits'));
-        } else {
-          if (value < 18) {
-            callback(new Error('Age must be greater than 18'));
+        setTimeout(() => {
+          if (!Number.isInteger(value)) {
+            callback(new Error('Please input digits'));
           } else {
-            callback();
+            if (value < 18) {
+              callback(new Error('Age must be greater than 18'));
+            } else {
+              callback();
+            }
           }
-        }
+        }, 1000);
       };
       var validatePass = (rule, value, callback) => {
         if (value === '') {
