@@ -455,11 +455,18 @@
         } else if (selectionMode === 'day') {
           this.$emit('pick', newDate);
         } else if (selectionMode === 'week') {
-          var weekNumber = getWeekNumber(newDate);
-
-          const value = newDate.getFullYear() + 'w' + weekNumber;
+          let weekNumber = getWeekNumber(newDate);
+          // when the Thursday is in the next year
+          // you will get week number 1, and should also update the year number
+          // so add one if when you get week 1 on December
+          let yearNumber = newDate.getFullYear();
+          let monthNumber = newDate.getMonth();
+          if (weekNumber === 1 && monthNumber === 11) {
+            yearNumber = yearNumber + 1;
+          }
+          const value = yearNumber + 'w' + weekNumber;
           this.$emit('pick', {
-            year: newDate.getFullYear(),
+            year: yearNumber,
             week: weekNumber,
             value: value,
             date: newDate
