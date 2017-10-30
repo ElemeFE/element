@@ -15,14 +15,14 @@
   @include m((daterange, timerange)) {
     &.el-input,
     &.el-input__inner {
-      width: 320px;
+      width: 350px;
     }
   }
 
   @include m(datetimerange) {
     &.el-input,
     &.el-input__inner {
-      width: 370px;
+      width: 400px;
     }
   }
 
@@ -42,7 +42,7 @@
     height: 100%;
     margin: 0;
     padding: 0;
-    width: 38%;
+    width: 39%;
     text-align: center;
     font-size: $--font-size-base;
     color: $--color-text-regular;
