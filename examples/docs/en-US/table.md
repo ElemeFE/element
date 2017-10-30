@@ -1263,7 +1263,7 @@ You can also select multiple rows.
 
 Sort the data to find or compare data quickly.
 
-:::demo Set attribute `sortable` in a certain column to sort the data based on this column. It accepts `Boolean` with a default value `false`. Set table attribute `default-sort` to determine default sort column and order. To apply your own sorting rules, use `sort-method`. If you need remote sorting from backend, set `sortable` to `custom`, and listen to the `sort-change` event on Table. In the event handler, you have access to the sorting column and sorting order so that you can fetch sorted table data from API. In this example we use another attribute named `formatter` to format the value of certain columns. It accepts a function which has two parameters: `row` and `column`. You can handle it according to your own needs.
+:::demo Set attribute `sortable` in a certain column to sort the data based on this column. It accepts `Boolean` with a default value `false`. Set table attribute `default-sort` to determine default sort column and order. To apply your own sorting rules, use `sort-method` or `sort-by`. If you need remote sorting from backend, set `sortable` to `custom`, and listen to the `sort-change` event on Table. In the event handler, you have access to the sorting column and sorting order so that you can fetch sorted table data from API. In this example we use another attribute named `formatter` to format the value of certain columns. It accepts a function which has two parameters: `row` and `column`. You can handle it according to your own needs.
 ```html
 <template>
   <el-table
@@ -2010,6 +2010,7 @@ You can customize row index in `type=index` columns.
 | render-header | render function for table header of this column | Function(h, { column, $index }) | — | — |
 | sortable | whether column can be sorted. Remote sorting can be done by setting this attribute to 'custom' and listening to the `sort-change` event of Table | boolean, string | true, false, custom | false |
 | sort-method | sorting method, works when `sortable` is `true`. Should return a number, just like Array.sort | Function(a, b) | — | — |
+| sort-by | sorting by method or property, works when `sortable` is `true` and `sort-method` is `undefined`. if `sort-by` is Array, will sort by the first, if the first is equal, will sort by the second, and so on.| Function(row, index)/String/Array | — | — |
 | resizable | whether column width can be resized, works when `border` of `el-table` is `true` | boolean | — | false |
 | formatter | function that formats cell content | Function(row, column, cellValue) | — | — |
 | show-overflow-tooltip | whether to hide extra content and show them in a tooltip when hovering on the cell | boolean | — | false |
