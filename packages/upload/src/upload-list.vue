@@ -41,20 +41,20 @@
         :stroke-width="listType === 'picture-card' ? 6 : 2"
         :percentage="parsePercentage(file.percentage)">
       </el-progress>
-        <span class="el-upload-list__item-actions" v-if="listType === 'picture-card'">
+      <span class="el-upload-list__item-actions" v-if="listType === 'picture-card'">
         <span
           class="el-upload-list__item-preview"
           v-if="handlePreview && listType === 'picture-card'"
           @click="handlePreview(file)"
         >
-          <i class="el-icon-view"></i>
+          <i class="el-icon-zoom-in"></i>
         </span>
         <span
           v-if="!disabled"
           class="el-upload-list__item-delete"
           @click="$emit('remove', file)"
         >
-          <i class="el-icon-delete2"></i>
+          <i class="el-icon-delete"></i>
         </span>
       </span>
     </li>
