@@ -40,10 +40,9 @@ export const orderBy = function(array, sortKey, reverse, sortMethod, sortBy) {
       });
     }
     if (sortKey !== '$key') {
-      if (isObject(value) && '$value' in value) return [value.$value];
-    } else {
-      return [isObject(value) ? getValueByPath(value, sortKey) : value];
+      if (isObject(value) && '$value' in value) value = value.$value;
     }
+    return [isObject(value) ? getValueByPath(value, sortKey) : value];
   };
   const compare = function(a, b) {
     if (sortMethod) {
