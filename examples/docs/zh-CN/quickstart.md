@@ -4,7 +4,7 @@
 
 ### 使用 Starter Kit
 
-我们提供了通用的[项目模板](https://github.com/ElementUI/element-starter)，你可以直接使用。对于熟悉 [cooking](https://github.com/ElementUI/element-cooking-starter) 或 [Laravel](https://github.com/ElementUI/element-in-laravel-starter) 的用户，我们也准备了相应的模板，同样可以直接下载使用。
+我们提供了通用的[项目模板](https://github.com/ElementUI/element-starter/tree/1.x)，你可以直接使用。对于熟悉 [cooking](https://github.com/ElementUI/element-cooking-starter) 或 [Laravel](https://github.com/ElementUI/element-in-laravel-starter/tree/1.x) 的用户，我们也准备了相应的模板，同样可以直接下载使用。
 
 如果不希望使用我们提供的模板，请继续阅读。
 
@@ -42,8 +42,8 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
-    "element-ui": "^1.0.0",
-    "vue": "^2.1.6"
+    "element-ui": "^1.4.0",
+    "vue": "^2.3.0"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",
