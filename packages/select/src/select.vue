@@ -14,7 +14,7 @@
           v-for="item in selected"
           :key="getValueKey(item)"
           :closable="!disabled"
-          size="small"
+          :size="selectSize"
           :hit="item.hitState"
           type="info"
           @close="deleteTag($event, item)"
