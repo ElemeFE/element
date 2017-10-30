@@ -54,6 +54,7 @@ export default class TreeStore {
           node.visible = allHidden === false;
         }
       }
+      if (!value) return;
 
       if (node.visible && !node.isLeaf) node.expand();
     };
