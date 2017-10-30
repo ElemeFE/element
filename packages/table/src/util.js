@@ -18,7 +18,7 @@ const isObject = function(obj) {
 };
 
 export const orderBy = function(array, sortKey, reverse, sortMethod, sortBy) {
-  if (!sortKey && !sortMethod && (!sortBy || Array.isArray && !sortBy.length)) {
+  if (!sortKey && !sortMethod && (!sortBy || Array.isArray(sortBy) && !sortBy.length)) {
     return array;
   }
   if (typeof reverse === 'string') {
