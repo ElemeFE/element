@@ -410,6 +410,7 @@ import { Notification } from 'element-ui';
 | iconClass | 自定义图标的类名。若设置了 `type`，则 `iconClass` 会被覆盖 | string | — | — |
 | customClass | 自定义类名 | string | — | — |
 | duration | 显示时间, 毫秒。设为 0 则不会自动关闭 | number | — | 4500 |
+| position | 自定义弹出位置 | string | top-right/top-left/bottom-right/bottom-left | top-right |
 | showClose | 是否显示关闭按钮 | boolean | — | true |
 | onClose | 关闭时的回调函数 | function | — | — |
 | onClick | 点击 Notification 时的回调函数 | function | — | — |
