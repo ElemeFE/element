@@ -206,6 +206,12 @@
       bottom: 0;
       left: 11px;
     }
+
+    @include e(icon) {
+      @include when(icon) {
+        width: 24px;
+      }
+    }
   }
 
   @include when(center) {
@@ -244,10 +250,6 @@
       width: 16px;
       height: 16px;
       font-size: 12px;
-
-      @include when(icon) {
-        width: 30px;
-      }
     }
 
     @include e(icon-inner) {
