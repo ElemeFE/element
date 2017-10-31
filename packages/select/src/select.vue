@@ -26,8 +26,7 @@
       <input
         type="text"
         class="el-select__input"
-        :class="`is-${ selectSize }`"
-        @focus="visible = true"
+        :class="[selectSize ? `is-${ selectSize }` : '']"
         :disabled="disabled"
         @keyup="managePlaceholder"
         @keydown="resetInputState"
