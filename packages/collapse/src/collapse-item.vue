@@ -14,7 +14,7 @@
         tabindex="0"
         @keyup.space.enter.stop="handleEnterClick"
         :class="{'focusing': focusing}"
-        @focus="handleFocus"
+        @focus="focusing = true"
         @blur="focusing = false"
       >
         <i class="el-collapse-item__arrow el-icon-arrow-right"></i>
@@ -58,8 +58,7 @@
           display: 'block'
         },
         contentHeight: 0,
-        focusing: false,
-        isClick: false
+        focusing: false
       };
     },
 
@@ -85,19 +84,9 @@
     },
 
     methods: {
-      handleFocus() {
-        setTimeout(() => {
-          if (!this.isClick) {
-            this.focusing = true;
-          } else {
-            this.isClick = false;
-          }
-        }, 50);
-      },
       handleHeaderClick() {
-        this.dispatch('ElCollapse', 'item-click', this);
         this.focusing = false;
-        this.isClick = true;
+        this.dispatch('ElCollapse', 'item-click', this);
       },
       handleEnterClick() {
         this.dispatch('ElCollapse', 'item-click', this);

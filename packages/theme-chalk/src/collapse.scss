@@ -16,10 +16,7 @@
     font-size: $--collapse-header-size;
     font-weight: 500;
     transition: border-bottom-color .3s;
-    &:focus:not(.focusing), &:active {
-      outline-width: 0;
-    }
-
+    outline: none;
     @include e(arrow) {
       margin-right: 8px;
       transition: transform .3s;
@@ -27,6 +24,14 @@
       line-height: 48px;
       font-weight: 300;
     }
+    &.focusing:focus:not(:hover){
+      color: $--color-primary;
+    }
+
+    //&:focus{
+    //  color: $--color-primary;
+    //}
+
   }
 
   @include e(wrap) {
