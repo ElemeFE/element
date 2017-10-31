@@ -155,7 +155,7 @@
       width: 50px;
     }
 
-    .el-input__inner {
+    &.el-input .el-input__inner {
       height: $--pagination-button-height;
     }
 
