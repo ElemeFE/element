@@ -409,6 +409,7 @@ In this case you should call `Notification(options)`. We have also registered me
 | iconClass | custom icon's class. It will be overridden by `type` | string | — | — |
 | customClass | custom class name for Notification | string | — | — |
 | duration | duration before close. It will not automatically close if set 0 | number | — | 4500 |
+| position | custom position | string | top-right/top-left/bottom-right/bottom-left | top-right |
 | showClose | whether to show a close button | boolean | — | true |
 | onClose | callback function when closed | function | — | — |
 | onClick | callback function when notification clicked | function | — | — |
