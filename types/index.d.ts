@@ -283,4 +283,4 @@ declare namespace ElementUI {
   export class Upload extends ElUpload {}
 }
 
-export default ElementUI
+export = ElementUI
