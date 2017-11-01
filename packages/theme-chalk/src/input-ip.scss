@@ -1,0 +1,58 @@
+@import "mixins/mixins";
+@import "common/var";
+@import "input";
+
+@include b(input-ip) {
+  font-family: monospace;
+  white-space: nowrap;
+
+  &.el-input__inner {
+    height: auto;
+  }
+
+  &:hover {
+    border-color: $--input-hover-border;
+  }
+
+  &, &:hover {
+    &.focus-within {
+      border-color: $--input-focus-border;
+    }
+  }
+
+  @include e(ip) {
+    width: 3ch;
+    padding: 0;
+    outline: none;
+    border: none;
+    background: none;
+    color: inherit;
+    height: $--input-height;
+
+    &::placeholder {
+      color: $--input-placeholder-color;
+    }
+  }
+
+  &:not(.focus-within) {
+    @include e(ip) {
+      @for $i from 1 through 3 {
+        &[data-length="#{$i}"] {
+          width: $i * 1ch;
+        }
+      }
+    }
+  }
+
+  &:disabled {
+    background-color: $--input-disabled-fill;
+    border-color: $--input-disabled-border;
+    color: $--input-disabled-color;
+
+    @include e(ip) {
+      &::placeholder {
+        color: $--input-disabled-placeholder-color;
+      }
+    }
+  }
+}

@@ -85,6 +85,10 @@
               "title": "InputNumber 计数器"
             },
             {
+              "path": "/input-ip",
+              "title": "InputIp 输入框"
+            },
+            {
               "path": "/select",
               "title": "Select 选择器"
             },
