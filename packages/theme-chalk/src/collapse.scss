@@ -27,11 +27,6 @@
     &.focusing:focus:not(:hover){
       color: $--color-primary;
     }
-
-    //&:focus{
-    //  color: $--color-primary;
-    //}
-
   }
 
   @include e(wrap) {

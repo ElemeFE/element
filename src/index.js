@@ -248,3 +248,5 @@ module.exports = {
   Main,
   Footer
 };
+
+module.exports.default = module.exports;

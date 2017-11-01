@@ -9,6 +9,10 @@
       "href": "https://eleme.github.io/element-react/"
     },
     {
+      "name": "Element Angular",
+      "href": "https://eleme.github.io/element-angular/"
+    },
+    {
       "name": "开发指南",
       "children": [
         {
@@ -253,6 +257,10 @@
     {
       "name": "Element React",
       "href": "https://eleme.github.io/element-react/"
+    },
+    {
+      "name": "Element Angular",
+      "href": "https://eleme.github.io/element-angular/"
     },
     {
       "name": "Development",

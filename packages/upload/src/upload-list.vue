@@ -13,7 +13,7 @@
       :class="['el-upload-list__item', 'is-' + file.status, focusing ? 'focusing' : '']"
       :key="index"
       tabindex="0"
-      @keydown.delete="$emit('remove', file)"
+      @keydown.delete="!disabled && $emit('remove', file)"
       @focus="focusing = true"
       @blur="focusing = false"
       @click="focusing = false"
