@@ -59,6 +59,8 @@ module.exports = {
   Loading,
 {{list}}
 };
+
+module.exports.default = module.exports;
 `;
 
 delete Components.font;
