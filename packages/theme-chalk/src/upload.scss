@@ -6,7 +6,7 @@
   display: inline-block;
   text-align: center;
   cursor: pointer;
-
+  outline: none;
   @include e(input) {
     display: none;
   }
@@ -46,6 +46,14 @@
     &:hover {
       border-color: $--color-primary;
       color: $--color-primary;
+    }
+  }
+  &:focus {
+    border-color: $--color-primary;
+    color: $--color-primary;
+
+    .el-upload-dragger {
+      border-color: $--color-primary;
     }
   }
 }
@@ -160,11 +168,11 @@
       display: none;
       position: absolute;
       top: 5px;
-      right: 0;
+      right: 5px;
+      font-size: 12px;
       cursor: pointer;
       opacity: 1;
       color: $--color-primary;
-      transform: translate(15%,0);
     }
     
     &:hover {
@@ -189,20 +197,20 @@
         cursor: pointer;
       }
 
-      &:focus {
+      &:focus:not(:hover) {  /* 键盘focus */
         .el-icon-close-tip {
           display: inline-block;
         }
       }
 
-      &:focus:not(.focusing), &:active {
+      &:not(.focusing):focus, &:active { /* click时 */
         outline-width: 0;
         .el-icon-close-tip {
           display: none;
         }
       }
 
-      &:hover, &:focus {  /*键盘焦点时 显示提示文字 focus*/
+      &:hover, &:focus {
         .el-upload-list__item-status-label {
           display: none;
         }
