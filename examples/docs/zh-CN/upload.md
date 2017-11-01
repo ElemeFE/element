@@ -18,7 +18,7 @@
         position: relative;
         overflow: hidden;
 
-        &:hover, &:focus{
+        &:hover, &:focus {
           border-color: #409EFF;
         }
       }
