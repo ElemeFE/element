@@ -35,7 +35,6 @@
 - [Atom helper](https://github.com/ElemeFE/element-helper)
 - Starter kit
   - [element-starter](https://github.com/ElementUI/element-starter)
-  - [element-cooking-starter](https://github.com/ElementUI/element-cooking-starter)
   - [element-in-laravel-starter](https://github.com/ElementUI/element-in-laravel-starter)
 - [Design resources](https://github.com/ElementUI/Resources) (working in progress)
 - Boilerplate for bug reports
