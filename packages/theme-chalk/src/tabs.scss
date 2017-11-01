@@ -225,8 +225,13 @@
     }
   }
   @include m((top, bottom)) {
-    &:not(.el-tabs--border-card):not(.el-tabs--card) .el-tabs__item:nth-child(2) {
+    .el-tabs__item:nth-child(2) {
       padding-left: 0;
+    }
+
+    &.el-tabs--border-card .el-tabs__item:nth-child(2),
+    &.el-tabs--card .el-tabs__item:nth-child(2) {
+      padding-left: 20px;
     }
   }
   @include m(bottom) {
