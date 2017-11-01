@@ -22,7 +22,7 @@
       margin-top: 15px;
     }
 
-    > ul > .nav-item:nth-child(-n + 3) > a {
+    > ul > .nav-item:nth-child(-n + 4) > a {
       margin-top: 0;
     }
 
