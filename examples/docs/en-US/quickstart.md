@@ -42,8 +42,8 @@ Typical configurations for these config files are:
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
-    "element-ui": "^1.4.0",
-    "vue": "^2.3.0"
+    "element-ui": "legacy",
+    "vue": "2.5.2"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",
