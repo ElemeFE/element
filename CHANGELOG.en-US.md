@@ -1,5 +1,12 @@
 ## Changelog
 
+### 1.4.9
+
+*2017-11-01*
+
+- Fixed Form validating not triggered correctly in some conditions, #7744
+- Fixed range selection of DatePicker not working in Chromium 53-57 browsers, #7927
+
 ### 1.4.8
 
 *2017-10-24*
