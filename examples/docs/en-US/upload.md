@@ -247,7 +247,7 @@ Use `list-type` to change the fileList style.
   :on-remove="handleRemove">
   <i class="el-icon-plus"></i>
 </el-upload>
-<el-dialog v-model="dialogVisible" size="tiny">
+<el-dialog :visible.sync="dialogVisible" size="tiny">
   <img width="100%" :src="dialogImageUrl" alt="">
 </el-dialog>
 <script>
