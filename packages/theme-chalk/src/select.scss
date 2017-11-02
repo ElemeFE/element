@@ -62,6 +62,10 @@
         }
       }
     }
+
+    &.is-focus .el-input__inner {
+      border-color: $--select-input-focus-background;
+    }
   }
 
   > .el-input {
@@ -75,7 +79,7 @@
     margin-left: 15px;
     color: $--select-multiple-input-color;
     font-size: $--select-font-size;
-    vertical-align: baseline;
+    vertical-align: middle;
     appearance: none;
     height: 28px;
     background-color: transparent;
@@ -121,6 +125,7 @@
     &__close.el-icon-close {
       background-color: $--color-text-placeholder;
       right: -7px;
+      top: 0;
       color: $--color-white;
 
       &:hover {
