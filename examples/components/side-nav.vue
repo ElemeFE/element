@@ -3,9 +3,9 @@
     width: 100%;
     box-sizing: border-box;
     padding-right: 30px;
-    transition: opacity .5s;
-    &:hover {
-      opacity: 1 !important;
+    transition: opacity .3s;
+    &.is-fade {
+      transition: opacity 3s;
     }
 
     li {
@@ -88,6 +88,7 @@
   <div
     class="side-nav"
     @mouseenter="isFade = false"
+    :class="{ 'is-fade': isFade }"
     :style="navStyle">
     <ul>
       <li class="nav-item" v-for="item in data">
@@ -167,9 +168,7 @@
         if (this.isSmallScreen) {
           style.paddingBottom = '60px';
         }
-        if (this.isFade) {
-          style.opacity = '0.5';
-        }
+        style.opacity = this.isFade ? '0.5' : '1';
         return style;
       },
       langConfig() {

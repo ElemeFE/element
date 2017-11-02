@@ -1,7 +1,7 @@
 <template>
   <div
     class="el-step"
-    :style="[style,  isLast ? { maxWidth: 100 / stepsCount + '%' } : { marginRight: - $parent.stepOffset + 'px' }]"
+    :style="style"
     :class="[
       !isSimple && `is-${$parent.direction}`,
       isSimple && 'is-simple',
@@ -113,6 +113,7 @@ export default {
       return isSimple ? '' : space ;
     },
     style: function() {
+      const style = {};
       const parent = this.$parent;
       const len = parent.steps.length;
 
@@ -121,8 +122,15 @@ export default {
         : this.space
           ? this.space
           : 100 / (len - 1) + '%');
+      style.flexBasis = space;
+      if (this.isVertical) return style;
+      if (this.isLast) {
+        style.maxWidth = 100 / this.stepsCount + '%';
+      } else {
+        style.marginRight = -this.$parent.stepOffset + 'px';
+      }
 
-      return { flexBasis: space };
+      return style;
     }
   },
 
