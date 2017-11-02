@@ -17,6 +17,10 @@ Get the latest version from [unpkg.com/element-ui](https://unpkg.com/element-ui/
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 ```
 
+:::tip
+We recommend our users to lock Element's version when using CDN. Please refer to [unpkg.com](https://unpkg.com) for more information.
+:::
+
 ### Hello world
 If you are using CDN, a hello-world page is easy with Element. [Online Demo](https://jsfiddle.net/hzfpyvg6/14/)
 

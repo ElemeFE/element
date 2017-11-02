@@ -324,6 +324,13 @@ It includes all kinds of input items, such as `input`, `select`, `radio` and `ch
 ```
 :::
 
+:::tip
+[W3C](https://www.w3.org/MarkUp/html-spec/html-spec_8.html#SEC8.2) regulates that
+> <i>When there is only one single-line text input field in a form, the user agent should accept Enter in that field as a request to submit the form.</i>
+
+To prevent this behavior, you can add `@submit.native.prevent` on `<el-form>`.
+  :::
+
 ### Inline form
 
 When the vertical space is limited and the form is relatively simple, you can put it in one line.

@@ -27,31 +27,12 @@ import './element-variables.scss'
 Vue.use(Element)
 ```
 
-需要注意的是，覆盖字体路径变量是必需的，将其赋值为 Element 中 icon 图标所在的相对路径即可。使用这种方式可以自定义的变量为：
+:::tip
+需要注意的是，覆盖字体路径变量是必需的，将其赋值为 Element 中 icon 图标所在的相对路径即可。
+:::
 
-| 变量名 | 含义 | 默认值 |
-| ------ | ---- | ------ |
-| $--sm | 响应式布局中 `sm` 的断点值 | 768px |
-| $--md | 响应式布局中 `md` 的断点值 | 992px |
-| $--lg | 响应式布局中 `lg` 的断点值 | 1200px |
-| $--xl | 响应式布局中 `xl` 的断点值 | 1920px |
-| $--color-primary | 主题色 | #409EFF |
-| $--color-success | 表示「成功」的状态色 | #67C23A |
-| $--color-warning | 表示「警告」的状态色 | #EB9E05 |
-| $--color-danger | 表示「危险」的状态色 | #FA5555 |
-| $--color-info | 表示「信息」的状态色 | #878D99 |
-| $--color-text-primary | 主要文字色 | #2D2F33 |
-| $--color-text-regular | 常规文字色 | #5A5E66 |
-| $--color-text-secondary | 次要文字色 | #878D99 |
-| $--color-text-placeholder | 占位文字色 | #B4BCCC |
-| $--border-color-base | 一级边框 | #D8DCE5 |
-| $--border-color-light | 二级边框 | #DFE4ED |
-| $--border-color-lighter | 三级边框 | #E6EBF5 |
-| $--border-color-extra-light | 四级边框 | #EDF2FC |
-| $--font-path | icon 字体图标路径 | 'fonts' |
-
-### 深层次的定制
-如果仅仅改变以上变量不能满足你的需求，请按以下步骤进行更深层次的主题定制：
+### 命令行主题工具
+如果你的项目没有使用 SCSS，那么可以使用命令行主题工具进行深层次的主题定制：
 
 #### <strong>安装工具</strong>
 首先安装「主题生成工具」，可以全局安装或者安装在当前项目下，推荐安装在项目里，方便别人 clone 项目时能直接安装依赖并启动，这里以全局安装做演示。
@@ -80,20 +61,22 @@ et -i [可以自定义变量文件]
 如果使用默认配置，执行后当前目录会有一个 `element-variables.scss` 文件。内部包含了主题所用到的所有变量，它们使用 SCSS 的格式定义。大致结构如下：
 ```css
 $--color-primary: #409EFF !default;
-$--color-primary-light-1: mix($--color-white, $--color-primary, 10%); /* 53a8ff */
-$--color-primary-light-2: mix($--color-white, $--color-primary, 20%); /* 66b1ff */
-$--color-primary-light-3: mix($--color-white, $--color-primary, 30%); /* 79bbff */
-$--color-primary-light-4: mix($--color-white, $--color-primary, 40%); /* 8cc5ff */
-$--color-primary-light-5: mix($--color-white, $--color-primary, 50%); /* a0cfff */
-$--color-primary-light-6: mix($--color-white, $--color-primary, 60%); /* b3d8ff */
-$--color-primary-light-7: mix($--color-white, $--color-primary, 70%); /* c6e2ff */
-$--color-primary-light-8: mix($--color-white, $--color-primary, 80%); /* d9ecff */
-$--color-primary-light-9: mix($--color-white, $--color-primary, 90%); /* ecf5ff */
+$--color-primary-light-1: mix($--color-white, $--color-primary, 10%) !default; /* 53a8ff */
+$--color-primary-light-2: mix($--color-white, $--color-primary, 20%) !default; /* 66b1ff */
+$--color-primary-light-3: mix($--color-white, $--color-primary, 30%) !default; /* 79bbff */
+$--color-primary-light-4: mix($--color-white, $--color-primary, 40%) !default; /* 8cc5ff */
+$--color-primary-light-5: mix($--color-white, $--color-primary, 50%) !default; /* a0cfff */
+$--color-primary-light-6: mix($--color-white, $--color-primary, 60%) !default; /* b3d8ff */
+$--color-primary-light-7: mix($--color-white, $--color-primary, 70%) !default; /* c6e2ff */
+$--color-primary-light-8: mix($--color-white, $--color-primary, 80%) !default; /* d9ecff */
+$--color-primary-light-9: mix($--color-white, $--color-primary, 90%) !default; /* ecf5ff */
 
 $--color-success: #67c23a !default;
 $--color-warning: #eb9e05 !default;
 $--color-danger: #fa5555 !default;
 $--color-info: #878d99 !default;
+
+...
 ```
 
 #### <strong>修改变量</strong>
