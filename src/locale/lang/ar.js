@@ -16,6 +16,10 @@ export default {
       startTime: 'وقت البدء',
       endDate: 'تاريخ الانتهاء',
       endTime: 'وقت الانتهاء',
+      prevYear: 'Previous Year', // to be translated
+      nextYear: 'Next Year', // to be translated
+      prevMonth: 'Previous Month', // to be translated
+      nextMonth: 'Next Month', // to be translated
       year: '',
       month1: 'يناير',
       month2: 'فبراير',

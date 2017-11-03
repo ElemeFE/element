@@ -16,6 +16,10 @@ export default {
       startTime: 'Starttid',
       endDate: 'Slutdatum',
       endTime: 'Sluttid',
+      prevYear: 'Previous Year', // to be translated
+      nextYear: 'Next Year', // to be translated
+      prevMonth: 'Previous Month', // to be translated
+      nextMonth: 'Next Month', // to be translated
       year: 'År',
       month1: 'Januari',
       month2: 'Februari',
