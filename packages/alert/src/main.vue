@@ -1,6 +1,11 @@
 <template>
   <transition name="el-alert-fade">
-    <div class="el-alert" :class="[ typeClass ]" v-show="visible">
+    <div
+      class="el-alert"
+      :class="[typeClass, center ? 'is-center' : '']"
+      v-show="visible"
+      role="alert"
+    >
       <i class="el-alert__icon" :class="[ iconClass, isBigIcon ]" v-if="showIcon"></i>
       <div class="el-alert__content">
         <span class="el-alert__title" :class="[ isBoldTitle ]" v-if="title">{{ title }}</span>
@@ -15,9 +20,9 @@
 
 <script type="text/babel">
   const TYPE_CLASSES_MAP = {
-    'success': 'el-icon-circle-check',
+    'success': 'el-icon-success',
     'warning': 'el-icon-warning',
-    'error': 'el-icon-circle-cross'
+    'error': 'el-icon-error'
   };
   export default {
     name: 'ElAlert',
@@ -44,10 +49,8 @@
         type: String,
         default: ''
       },
-      showIcon: {
-        type: Boolean,
-        default: false
-      }
+      showIcon: Boolean,
+      center: Boolean
     },
 
     data() {
@@ -69,7 +72,7 @@
       },
 
       iconClass() {
-        return TYPE_CLASSES_MAP[this.type] || 'el-icon-information';
+        return TYPE_CLASSES_MAP[this.type] || 'el-icon-info';
       },
 
       isBigIcon() {

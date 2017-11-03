@@ -47,6 +47,16 @@
           resource: '',
           desc: ''
         },
+        sizeForm: {
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
+        },
         formInline: {
           user: '',
           region: ''
@@ -264,7 +274,7 @@ It includes all kinds of input items, such as `input`, `select`, `radio` and `ch
     </el-col>
   </el-form-item>
   <el-form-item label="Instant delivery">
-    <el-switch on-text="" off-text="" v-model="form.delivery"></el-switch>
+    <el-switch v-model="form.delivery"></el-switch>
   </el-form-item>
   <el-form-item label="Activity type">
     <el-checkbox-group v-model="form.type">
@@ -314,6 +324,13 @@ It includes all kinds of input items, such as `input`, `select`, `radio` and `ch
 ```
 :::
 
+:::tip
+[W3C](https://www.w3.org/MarkUp/html-spec/html-spec_8.html#SEC8.2) regulates that
+> <i>When there is only one single-line text input field in a form, the user agent should accept Enter in that field as a request to submit the form.</i>
+
+To prevent this behavior, you can add `@submit.native.prevent` on `<el-form>`.
+  :::
+
 ### Inline form
 
 When the vertical space is limited and the form is relatively simple, you can put it in one line.
@@ -330,7 +347,8 @@ When the vertical space is limited and the form is relatively simple, you can pu
       <el-option label="Zone one" value="shanghai"></el-option>
       <el-option label="Zone two" value="beijing"></el-option>
     </el-select>
-  </el-form-item><el-form-item>
+  </el-form-item>
+  <el-form-item>
     <el-button type="primary" @click="onSubmit">Query</el-button>
   </el-form-item>
 </el-form>
@@ -399,7 +417,7 @@ Depending on your design, there are several different ways to align your label e
 
 Form component allows you to verify your data, helping you find and correct errors.
 
-:::demo Just add the `rule` attribute for `Form` component, pass validation rules, and set `prop` attribute for `Form-Item` as a specific key that needs to be validated. See more information at [async-validator](https://github.com/yiminghe/async-validator).
+:::demo Just add the `rules` attribute for `Form` component, pass validation rules, and set `prop` attribute for `Form-Item` as a specific key that needs to be validated. See more information at [async-validator](https://github.com/yiminghe/async-validator).
 
 ```html
 <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
@@ -426,7 +444,7 @@ Form component allows you to verify your data, helping you find and correct erro
     </el-col>
   </el-form-item>
   <el-form-item label="Instant delivery" prop="delivery">
-    <el-switch on-text="" off-text="" v-model="ruleForm.delivery"></el-switch>
+    <el-switch v-model="ruleForm.delivery"></el-switch>
   </el-form-item>
   <el-form-item label="Activity type" prop="type">
     <el-checkbox-group v-model="ruleForm.type">
@@ -512,10 +530,11 @@ Form component allows you to verify your data, helping you find and correct erro
 
 ### Custom validation rules
 
-:::demo This example shows how to customize your own validation rules to finish a two-factor password verification.
+This example shows how to customize your own validation rules to finish a two-factor password verification.
 
+:::demo Here we use `status-icon` to reflect validation result as an icon.
 ```html
-<el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-width="120px" class="demo-ruleForm">
+<el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="120px" class="demo-ruleForm">
   <el-form-item label="Password" prop="pass">
     <el-input type="password" v-model="ruleForm2.pass" auto-complete="off"></el-input>
   </el-form-item>
@@ -738,6 +757,75 @@ Form component allows you to verify your data, helping you find and correct erro
 When an `el-form-item` is nested in another `el-form-item`, its label width will be `0`. You can set `label-width` on that `el-form-item` if needed.
 :::
 
+### Size control
+
+All components in a Form inherit their `size` attribute from that Form. Similarly, FormItem also has a `size` attribute.
+
+::: demo Still you can fine tune each component's `size` if you don't want that component to inherit its size from From or FormIten.
+```html
+<el-form ref="form" :model="sizeForm" label-width="120px" size="mini">
+  <el-form-item label="Activity name">
+    <el-input v-model="sizeForm.name"></el-input>
+  </el-form-item>
+  <el-form-item label="Activity zone">
+    <el-select v-model="sizeForm.region" placeholder="please select your zone">
+      <el-option label="Zone one" value="shanghai"></el-option>
+      <el-option label="Zone two" value="beijing"></el-option>
+    </el-select>
+  </el-form-item>
+  <el-form-item label="Activity time">
+    <el-col :span="11">
+      <el-date-picker type="date" placeholder="Pick a date" v-model="sizeForm.date1" style="width: 100%;"></el-date-picker>
+    </el-col>
+    <el-col class="line" :span="2">-</el-col>
+    <el-col :span="11">
+      <el-time-picker type="fixed-time" placeholder="Pick a time" v-model="sizeForm.date2" style="width: 100%;"></el-time-picker>
+    </el-col>
+  </el-form-item>
+  <el-form-item label="Activity type">
+    <el-checkbox-group v-model="sizeForm.type">
+      <el-checkbox-button label="Online activities" name="type"></el-checkbox-button>
+      <el-checkbox-button label="Promotion activities" name="type"></el-checkbox-button>
+    </el-checkbox-group>
+  </el-form-item>
+  <el-form-item label="Resources">
+    <el-radio-group v-model="sizeForm.resource" size="medium">
+      <el-radio border label="Sponsor"></el-radio>
+      <el-radio border label="Venue"></el-radio>
+    </el-radio-group>
+  </el-form-item>
+  <el-form-item size="large">
+    <el-button type="primary" @click="onSubmit">Create</el-button>
+    <el-button>Cancel</el-button>
+  </el-form-item>
+</el-form>
+
+<script>
+  export default {
+    data() {
+      return {
+        sizeForm: {
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
+        }
+      };
+    },
+    methods: {
+      onSubmit() {
+        console.log('submit!');
+      }
+    }
+  };
+</script>
+```
+:::
+
 ### Form Attributes
 
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
@@ -745,18 +833,22 @@ When an `el-form-item` is nested in another `el-form-item`, its label width will
 | model| data of form component | object | — | — |
 | rules | validation rules of form | object | — | — |
 | inline | whether the form is inline | boolean | — | false |
-| label-position | position of label | string | left/right/top | right |
+| label-position | position of label | string | left / right / top | right |
 | label-width | width of label, and all its direct child form items will inherit this value | string | — | — |
 | label-suffix | suffix of the label | string | — | — |
 | show-message  | whether to show the error message | boolean | — | true |
+| inline-message  | whether to display the error message inline with the form item | boolean | — | false |
+| status-icon  | whether to display an icon indicating the validation result | boolean | — | false |
+| size  | control the size of components in this form | string | medium / small / mini | - |
 
 ### Form Methods
 
 | Method | Description | Parameters |
 | ---- | ---- | ---- |
-| validate | the method to validate the whole form | Function(callback: Function(boolean)) |
+| validate | the method to validate the whole form. Returns a promise if callback is omitted | Function(callback: Function(boolean)) |
 | validateField | the method to validate a certain form item | Function(prop: string, callback: Function(errorMessage: string)) |
 | resetFields | reset all the fields and remove validation result | — |
+| clearValidate | clear validation message for all fields | -
 
 ### Form-Item Attributes
 
@@ -769,10 +861,17 @@ When an `el-form-item` is nested in another `el-form-item`, its label width will
 | rules | validation rules of form | object | — | — |
 | error | field error message, set its value and the field will validate error and show this message immediately | string | — | — |
 | show-message  | whether to show the error message | boolean | — | true |
-
+| inline-message  | inline style validate message | boolean | — | false |
+| size  | control the size of components in this form-item | string | medium / small / mini | - |
 
 ### Form-Item Slot
-| name | Description |
+| Name | Description |
 |------|--------|
 | — | content of Form Item |
 | label | content of label |
+
+### Form-Item Methods
+
+| Method | Description | Parameters |
+| ---- | ---- | ---- |
+| resetField | reset current field and remove validation result | — |

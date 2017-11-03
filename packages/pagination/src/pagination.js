@@ -1,7 +1,9 @@
 import Pager from './pager.vue';
 import ElSelect from 'element-ui/packages/select';
 import ElOption from 'element-ui/packages/option';
+import ElInput from 'element-ui/packages/input';
 import Locale from 'element-ui/src/mixins/locale';
+import { valueEquals } from 'element-ui/src/utils/util';
 
 export default {
   name: 'ElPagination',
@@ -32,7 +34,13 @@ export default {
       default() {
         return [10, 20, 30, 40, 50, 100];
       }
-    }
+    },
+
+    popperClass: String,
+
+    prevText: String,
+
+    nextText: String
   },
 
   data() {
@@ -100,7 +108,11 @@ export default {
             type="button"
             class={['btn-prev', { disabled: this.$parent.internalCurrentPage <= 1 }]}
             on-click={ this.$parent.prev }>
-            <i class="el-icon el-icon-arrow-left"></i>
+            {
+              this.$parent.prevText
+                ? <span>{ this.$parent.prevText }</span>
+                : <i class="el-icon el-icon-arrow-left"></i>
+            }
           </button>
         );
       }
@@ -116,7 +128,11 @@ export default {
               { disabled: this.$parent.internalCurrentPage === this.$parent.internalPageCount || this.$parent.internalPageCount === 0 }
             ]}
             on-click={ this.$parent.next }>
-            <i class="el-icon el-icon-arrow-right"></i>
+            {
+              this.$parent.nextText
+                ? <span>{ this.$parent.nextText }</span>
+                : <i class="el-icon el-icon-arrow-right"></i>
+            }
           </button>
         );
       }
@@ -132,9 +148,10 @@ export default {
       watch: {
         pageSizes: {
           immediate: true,
-          handler(value) {
-            if (Array.isArray(value)) {
-              this.$parent.internalPageSize = value.indexOf(this.$parent.pageSize) > -1
+          handler(newVal, oldVal) {
+            if (valueEquals(newVal, oldVal)) return;
+            if (Array.isArray(newVal)) {
+              this.$parent.internalPageSize = newVal.indexOf(this.$parent.pageSize) > -1
                 ? this.$parent.pageSize
                 : this.pageSizes[0];
             }
@@ -147,12 +164,13 @@ export default {
           <span class="el-pagination__sizes">
             <el-select
               value={ this.$parent.internalPageSize }
+              popperClass={ `${this.$parent.popperClass || ''} is-arrow-fixed` }
               on-input={ this.handleChange }>
               {
                 this.pageSizes.map(item =>
                   <el-option
                     value={ item }
-                    label={ item + ' ' + this.t('el.pagination.pagesize') }>
+                    label={ item + this.t('el.pagination.pagesize') }>
                   </el-option>
                 )
               }
@@ -185,6 +203,8 @@ export default {
         };
       },
 
+      components: { ElInput },
+
       methods: {
         handleFocus(event) {
           this.oldValue = event.target.value;
@@ -197,11 +217,11 @@ export default {
           const keyCode = event.keyCode || '';
           if ((key && key === 'Enter') || (keyCode && keyCode === 13)) {
             this.reassignMaxValue(event.target);
-            this.handleChange({ target: event.target });
+            this.handleChange(event.target.value);
           }
         },
-        handleChange({ target }) {
-          this.$parent.internalCurrentPage = this.$parent.getValidCurrentPage(target.value);
+        handleChange(value) {
+          this.$parent.internalCurrentPage = this.$parent.getValidCurrentPage(value);
           this.oldValue = null;
         },
         reassignMaxValue(target) {
@@ -215,18 +235,17 @@ export default {
         return (
           <span class="el-pagination__jump">
             { this.t('el.pagination.goto') }
-            <input
-              class="el-pagination__editor"
-              type="number"
+            <el-input
+              class="el-pagination__editor is-in-pagination"
               min={ 1 }
               max={ this.$parent.internalPageCount }
               value={ this.$parent.internalCurrentPage }
-              domProps-value={ this.$parent.internalCurrentPage }
-              on-change={ this.handleChange }
-              on-focus={ this.handleFocus }
-              on-blur={ this.handleBlur }
-              on-keyup={ this.handleKeyUp }
-              number/>
+              domPropsValue={ this.$parent.internalCurrentPage }
+              type="number"
+              onChange={ this.handleChange }
+              onFocus={ this.handleFocus }
+              onBlur={ this.handleBlur }
+              nativeOnKeyup={ this.handleKeyUp }/>
             { this.t('el.pagination.pageClassifier') }
           </span>
         );

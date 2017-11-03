@@ -45,54 +45,46 @@
 
 <script type="text/babel">
   import { hasClass } from 'element-ui/src/utils/dom';
+  import { isDate, range, nextDate, getDayCountOfYear } from '../util';
+
+  const datesInYear = year => {
+    const numOfDays = getDayCountOfYear(year);
+    const firstDay = new Date(year, 0, 1);
+    return range(numOfDays).map(n => nextDate(firstDay, n));
+  };
 
   export default {
     props: {
       disabledDate: {},
-      date: {},
-      year: {}
+      value: {},
+      defaultValue: {
+        validator(val) {
+          // null or valid Date Object
+          return val === null || (val instanceof Date && isDate(val));
+        }
+      },
+      date: {}
     },
 
     computed: {
       startYear() {
-        return Math.floor(this.year / 10) * 10;
+        return Math.floor(this.date.getFullYear() / 10) * 10;
       }
     },
 
     methods: {
       getCellStyle(year) {
         const style = {};
+        const today = new Date();
 
-        var date = new Date(year, 0, 1, 0);
-        var nextYear = new Date(date);
-        nextYear.setFullYear(year + 1);
-
-        var flag = false;
-        if (typeof this.disabledDate === 'function') {
-
-          while (date < nextYear) {
-            if (this.disabledDate(date)) {
-              date = new Date(date.getTime() + 8.64e7);
-            } else {
-              break;
-            }
-          }
-          if ((date - nextYear) === 0) flag = true;
-
-        }
-
-        style.disabled = flag;
-        style.current = Number(this.year) === year;
+        style.disabled = typeof this.disabledDate === 'function'
+          ? datesInYear(year).every(this.disabledDate)
+          : false;
+        style.current = this.value.getFullYear() === year;
+        style.today = today.getFullYear() === year;
+        style.default = this.defaultValue && this.defaultValue.getFullYear() === year;
 
         return style;
-      },
-
-      nextTenYear() {
-        this.$emit('pick', Number(this.year) + 10, false);
-      },
-
-      prevTenYear() {
-        this.$emit('pick', Number(this.year) - 10, false);
       },
 
       handleYearTableClick(event) {

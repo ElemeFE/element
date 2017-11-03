@@ -530,6 +530,7 @@ Enter keywords and search data from server.
     multiple
     filterable
     remote
+    reserve-keyword
     placeholder="Please enter a keyword"
     :remote-method="remoteMethod"
     :loading="loading">
@@ -662,6 +663,7 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 | no-match-text | displayed text when no data matches the filtering query | string | — | No matching data |
 | no-data-text | displayed text when there is no options | string | — | No data |
 | popper-class | custom class name for Select's dropdown | string | — | — |
+| reserve-keyword | when `multiple` and `filter` is true, whether to reserve current keyword after selecting an option | boolean | — | false |
 | default-first-option | select first matching option on enter key. Use with `filterable` or `remote` | boolean | - | false |
 
 ### Select Events
@@ -671,6 +673,8 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 | visible-change | triggers when the dropdown appears/disappears | true when it appears, and false otherwise |
 | remove-tag | triggers when a tag is removed in multiple mode | removed tag value |
 | clear | triggers when the clear icon is clicked in a clearable Select | — |
+| blur | triggers when Input blurs | (event: Event) |
+| focus | triggers when Input focuses | (event: Event) |
 
 ### Option Group Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
@@ -685,3 +689,7 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 | label | label of option, same as `value` if omitted | string/number | — | — |
 | disabled | whether option is disabled | boolean | — | false |
 
+### Methods
+| Method | Description | Parameters |
+|------|--------|-------|
+| focus | focus the Input component | - |

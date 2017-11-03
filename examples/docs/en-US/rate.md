@@ -3,7 +3,7 @@
     padding: 30px 0;
     text-align: center;
     border-right: solid 1px #EFF2F6;
-    float: left;
+    display: inline-block;
     width: 50%;
     box-sizing: border-box;
     &:last-child {
@@ -128,15 +128,15 @@ You can use different icons to distinguish different rate components.
 
 Read-only Rate is for displaying rating score. Half star is supported.
 
-:::demo Use attribute `disabled` to make the component read-only. Add `show-text` to display the rating score at the right side. Additionally, you can use attribute `text-template` to provide a text template. It must contain `{value}`, and `{value}` will be replaced with the rating score.
+:::demo Use attribute `disabled` to make the component read-only. Add `show-score` to display the rating score at the right side. Additionally, you can use attribute `score-template` to provide a score template. It must contain `{value}`, and `{value}` will be replaced with the rating score.
 
 ``` html
 <el-rate
   v-model="value5"
   disabled
-  show-text
+  show-score
   text-color="#ff9900"
-  text-template="{value} points">
+  score-template="{value} points">
 </el-rate>
 
 <script>
@@ -166,9 +166,10 @@ Read-only Rate is for displaying rating score. Half star is supported.
 | void-icon-class | class name of unselected icons | string | — | el-icon-star-off |
 | disabled-void-icon-class | class name of unselected read-only icons | string | — | el-icon-star-on |
 | show-text | whether to display texts | boolean | — | false |
+| show-score | whether to display current score. show-score and show-text cannot be true at the same time | boolean | — | false |
 | text-color | color of texts | string | — | #1F2D3D |
 | texts | text array | array | — | ['极差', '失望', '一般', '满意', '惊喜'] |
-| text-template | text template when the component is read-only | string | — | {value} |
+| score-template | score template | string | — | {value} |
 
 ### Events
 | Event Name | Description | Parameters |
