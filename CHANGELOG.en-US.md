@@ -1,5 +1,15 @@
 ## Changelog
 
+### 2.0.3
+
+*2017-11-03*
+
+- Fixed `editable` and `readonly` attributes for ranged DatePicker, #7922
+- Fixed style error of nested Tabs, #7941
+- Fixed style error of the last Step of vertical Steps, #7980
+- Fixed trigger timing of `current-change` event for Pagination, #7995
+- Fixed unregistered Tooltip in Menu, #7995
+
 ### 2.0.2
 
 *2017-10-31*
