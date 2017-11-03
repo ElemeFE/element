@@ -48,7 +48,7 @@
         required: true
       },
       route: {
-        type: Object,
+        type: [String, Object],
         required: false
       },
       disabled: {
