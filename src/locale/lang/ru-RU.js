@@ -16,6 +16,10 @@ export default {
       startTime: 'Время начала',
       endDate: 'Дата окончания',
       endTime: 'Время окончания',
+      prevYear: 'Previous Year', // to be translated
+      nextYear: 'Next Year', // to be translated
+      prevMonth: 'Previous Month', // to be translated
+      nextMonth: 'Next Month', // to be translated
       year: '',
       month1: 'Январь',
       month2: 'Февраль',

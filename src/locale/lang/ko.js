@@ -16,6 +16,10 @@ export default {
       startTime: '시작 시간',
       endDate: '종료 날짜',
       endTime: '종료 시간',
+      prevYear: 'Previous Year', // to be translated
+      nextYear: 'Next Year', // to be translated
+      prevMonth: 'Previous Month', // to be translated
+      nextMonth: 'Next Month', // to be translated
       year: '년',
       month1: '1월',
       month2: '2월',

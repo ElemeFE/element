@@ -16,6 +16,10 @@ export default {
       startTime: 'Starttijd',
       endDate: 'Einddatum',
       endTime: 'Eindtijd',
+      prevYear: 'Previous Year', // to be translated
+      nextYear: 'Next Year', // to be translated
+      prevMonth: 'Previous Month', // to be translated
+      nextMonth: 'Next Month', // to be translated
       year: '',
       month1: 'januari',
       month2: 'februari',
