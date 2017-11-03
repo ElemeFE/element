@@ -138,6 +138,33 @@
         popperClass
       } = this;
 
+      let hoverMenuRefs = {};
+      this.hoverTimer = null;
+      const hoverMenuHandler = e => {
+        const hoverHreshold = 500;
+        const offsetX = e.offsetX;
+        const width = hoverMenuRefs.activeMenu.offsetWidth;
+        const height = hoverMenuRefs.activeMenu.offsetHeight;
+
+        if (e.target === hoverMenuRefs.activeItem) {
+          clearTimeout(this.hoverTimer);
+          const {activeItem} = hoverMenuRefs;
+          const offsetY_top = activeItem.offsetTop;
+          const offsetY_Bottom = offsetY_top + activeItem.offsetHeight;
+
+          hoverMenuRefs.hoverZone.innerHTML = `
+            <path style="pointer-events: auto;" fill="transparent" d="M${offsetX} ${offsetY_top} L${width} 0 V${offsetY_top} Z" />
+            <path style="pointer-events: auto;" fill="transparent" d="M${offsetX} ${offsetY_Bottom} L${width} ${height} V${offsetY_Bottom} Z" />
+          `;
+        } else {
+          if (!this.hoverTimer) {
+            this.hoverTimer = setTimeout(() => {
+              hoverMenuRefs.hoverZone.innerHTML = '';
+            }, hoverHreshold);
+          }
+        }
+      };
+
       const menus = this._l(activeOptions, (menu, menuIndex) => {
         let isFlat = false;
         const items = this._l(menu, item => {
@@ -177,6 +204,7 @@
                 'is-active': item.value === activeValue[menuIndex],
                 'is-disabled': item.disabled
               }}
+              ref={item.value === activeValue[menuIndex] ? 'activeItem' : null}
               {...events}
             >
               {item.label}
@@ -188,19 +216,65 @@
           menuStyle.minWidth = this.inputWidth + 'px';
         }
 
+        const isHoveredMenu = expandTrigger === 'hover' && activeValue.length - 1 === menuIndex;
+        const hoverMenuEvent = {
+          on: {
+          }
+        };
+
+        if (isHoveredMenu) {
+          hoverMenuEvent.on.mousemove = hoverMenuHandler;
+          menuStyle.position = 'relative';
+        }
+
         return (
           <ul
             class={{
               'el-cascader-menu': true,
               'el-cascader-menu--flexible': isFlat
             }}
+            {...hoverMenuEvent}
             style={menuStyle}
             refInFor
             ref="menus">
             {items}
+            {
+              isHoveredMenu
+              ? (<svg
+                ref="hoverZone"
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  height: '100%',
+                  width: '100%',
+                  left: 0,
+                  pointerEvents: 'none'
+                }}
+              ></svg>) : null
+            }
           </ul>
         );
       });
+
+      if (expandTrigger === 'hover') {
+        this.$nextTick(() => {
+          const activeItem = this.$refs.activeItem;
+
+          if (activeItem) {
+            const activeMenu = activeItem.parentElement;
+            const hoverZone = this.$refs.hoverZone;
+
+            hoverMenuRefs = {
+              activeMenu,
+              activeItem,
+              hoverZone
+            };
+          } else {
+            hoverMenuRefs = {};
+          }
+        });
+      }
+
       return (
         <transition name="el-zoom-in-top" on-before-enter={this.handleMenuEnter} on-after-leave={this.handleMenuLeave}>
           <div
