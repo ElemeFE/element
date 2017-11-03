@@ -23,12 +23,15 @@
 </template>
 <script>
   import Menu from './menu-mixin';
+  import ElTooltip from 'element-ui/packages/tooltip';
   import Emitter from 'element-ui/src/mixins/emitter';
 
   export default {
     name: 'ElMenuItem',
 
     componentName: 'ElMenuItem',
+
+    components: { ElTooltip },
 
     mixins: [Menu, Emitter],
 
