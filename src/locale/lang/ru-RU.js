@@ -16,10 +16,10 @@ export default {
       startTime: 'Время начала',
       endDate: 'Дата окончания',
       endTime: 'Время окончания',
-      prevYear: 'Previous Year', // to be translated
-      nextYear: 'Next Year', // to be translated
-      prevMonth: 'Previous Month', // to be translated
-      nextMonth: 'Next Month', // to be translated
+      prevYear: 'Предыдущий год',
+      nextYear: 'Следующий год',
+      prevMonth: 'Предыдущий месяц',
+      nextMonth: 'Следующий месяц',
       year: '',
       month1: 'Январь',
       month2: 'Февраль',
@@ -82,7 +82,7 @@ export default {
       error: 'Недопустимый ввод данных'
     },
     upload: {
-      deleteTip: 'press delete to remove', // to be translated
+      deleteTip: 'Нажмите [Удалить] для удаления',
       delete: 'Удалить',
       preview: 'Превью',
       continue: 'Продолжить'
