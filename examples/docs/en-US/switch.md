@@ -114,8 +114,8 @@ Switch is used for switching between two opposing states.
 ----| ----| ----| ----|----
 disabled | whether Switch is disabled | boolean | — | false
 width | width of Switch | number | — | 58 (with text) / 46 (no text)
-on-close-icon | class name of the icon displayed when in `on` state, overrides `on-text` | string | — | —
-off-close-icon |class name of the icon displayed when in `off` state, overrides `off-text`| string | — | —
+on-icon-class | class name of the icon displayed when in `on` state, overrides `on-text` | string | — | —
+off-icon-class |class name of the icon displayed when in `off` state, overrides `off-text`| string | — | —
 on-text | text displayed when in `on` state | string | — | ON
 off-text | text displayed when in `off` state | string | — | OFF
 on-value  | switch value when in `on` state | boolean / string / number | — | true
