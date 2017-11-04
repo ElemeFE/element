@@ -1,5 +1,9 @@
 <template>
-  <div class="el-tree" :class="{ 'el-tree--highlight-current': highlightCurrent }">
+  <div
+    class="el-tree"
+    :class="{ 'el-tree--highlight-current': highlightCurrent }"
+    role="tree"
+  >
     <el-tree-node
       v-for="child in root.childNodes"
       :node="child"
@@ -33,7 +37,9 @@
       return {
         store: null,
         root: null,
-        currentNode: null
+        currentNode: null,
+        treeItems: null,
+        checkboxItems: []
       };
     },
 
@@ -101,6 +107,9 @@
         get() {
           return this.data;
         }
+      },
+      treeItemArray() {
+        return Array.prototype.slice.call(this.treeItems);
       }
     },
 
@@ -115,6 +124,11 @@
       },
       data(newVal) {
         this.store.setData(newVal);
+      },
+      checkboxItems(val) {
+        Array.prototype.forEach.call(val, (checkbox) => {
+          checkbox.setAttribute('tabindex', -1);
+        });
       }
     },
 
@@ -171,6 +185,42 @@
       updateKeyChildren(key, data) {
         if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in updateKeyChild');
         this.store.updateChildren(key, data);
+      },
+      initTabindex() {
+        this.treeItems = this.$el.querySelectorAll('.is-focusable[role=treeitem]');
+        this.checkboxItems = this.$el.querySelectorAll('input[type=checkbox]');
+        const checkedItem = this.$el.querySelectorAll('.is-checked[role=treeitem]');
+        if (checkedItem.length) {
+          checkedItem[0].setAttribute('tabindex', 0);
+          return;
+        }
+        this.treeItems[0].setAttribute('tabindex', 0);
+      },
+      handelKeydown(ev) {
+        const currentItem = ev.target;
+        const keyCode = ev.keyCode;
+        this.treeItems = this.$el.querySelectorAll('.is-focusable[role=treeitem]');
+        const currentIndex = this.treeItemArray.indexOf(currentItem);
+        let nextIndex;
+        if ([38, 40].includes(keyCode)) { // up、down
+          if (keyCode === 38) { // up
+            nextIndex = currentIndex !== 0 ? currentIndex - 1 : 0;
+          } else {
+            nextIndex = (currentIndex < this.treeItemArray.length - 1) ? currentIndex + 1 : 0;
+          }
+          this.treeItemArray[nextIndex].focus(); // 选中
+        }
+        const hasInput = currentItem.querySelector('[type="checkbox"]');
+        if ([37, 39].includes(keyCode)) { // left、right 展开
+          currentItem.click(); // 选中
+        }
+        if ([13, 32].includes(keyCode)) { // space enter选中checkbox
+          if (hasInput) {
+            hasInput.click();
+          }
+          ev.stopPropagation();
+          ev.preventDefault();
+        }
       }
     },
 
@@ -194,6 +244,14 @@
       });
 
       this.root = this.store.root;
+    },
+    mounted() {
+      this.initTabindex();
+      this.$el.addEventListener('keydown', this.handelKeydown);
+    },
+    updated() {
+      this.treeItems = this.$el.querySelectorAll('[role=treeitem]');
+      this.checkboxItems = this.$el.querySelectorAll('input[type=checkbox]');
     }
   };
 </script>
