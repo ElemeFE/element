@@ -82,7 +82,7 @@ export default {
       error: '輸入的資料不符規定!'
     },
     upload: {
-      deleteTip: '按delete鍵可刪除',
+      deleteTip: '按 delete 鍵可刪除',
       delete: '刪除',
       preview: '查看圖片',
       continue: '繼續上傳'
