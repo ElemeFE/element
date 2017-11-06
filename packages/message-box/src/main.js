@@ -204,6 +204,7 @@ MessageBox.prompt = (message, title, options) => {
 };
 
 MessageBox.close = () => {
+  instance.doClose();
   instance.visible = false;
   msgQueue = [];
   currentMsg = null;
