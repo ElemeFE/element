@@ -28,33 +28,14 @@ import './element-variables.scss'
 Vue.use(Element)
 ```
 
-Note that it is required to override icon font path to the relative path of Element's font files. You can edit the following variables in this way:
+:::tip
+Note that it is required to override icon font path to the relative path of Element's font files.
+:::
 
-| Variable | Description | Default value |
-| ------ | ---- | ------ |
-| $--sm | `sm` breakpoint for responsive layout | 768px |
-| $--md | `md` breakpoint for responsive layout | 992px |
-| $--lg | `lg` breakpoint for responsive layout | 1200px |
-| $--xl | `xl` breakpoint for responsive layout | 1920px |
-| $--color-primary | theme color | #409EFF |
-| $--color-success | color for success | #67C23A |
-| $--color-warning | color for warning | #EB9E05 |
-| $--color-danger | color for danger | #FA5555 |
-| $--color-info | color for info | #878D99 |
-| $--color-text-primary | color for primary texts | #2D2F33 |
-| $--color-text-regular | color for regular texts | #5A5E66 |
-| $--color-text-secondary | color for secondary texts | #878D99 |
-| $--color-text-placeholder | color for placeholder texts | #B4BCCC |
-| $--border-color-base | base border color | #D8DCE5 |
-| $--border-color-light | light border color | #DFE4ED |
-| $--border-color-lighter | lighter border color | #E6EBF5 |
-| $--border-color-extra-light | extra light border color | #EDF2FC |
-| $--font-path | icon font file path | 'fonts' |
+### CLI theme tool
+If you project doesn't use SCSS, you can customize themes with our CLI theme tool:
 
-### More customizations
-If you need more customization than just changing the theme color, please follow these steps:
-
-#### <strong>Install related tool</strong>
+#### <strong>Install</strong>
 First install the theme generator globally or locally. Local install is recommended because in this way, when others clone your project, npm will automatically install it for them.
 ```shell
 npm i element-theme -g
@@ -78,23 +59,25 @@ et -i [custom output file]
 > ✔ Generator variables file
 ```
 
-In `element-variables.scss` you can find all the variables we used to style Element and they are defined in SCSS format:
+In `element-variables.scss` you can find all the variables we used to style Element and they are defined in SCSS format. Here's a snippet:
 ```css
 $--color-primary: #409EFF !default;
-$--color-primary-light-1: mix($--color-white, $--color-primary, 10%); /* 53a8ff */
-$--color-primary-light-2: mix($--color-white, $--color-primary, 20%); /* 66b1ff */
-$--color-primary-light-3: mix($--color-white, $--color-primary, 30%); /* 79bbff */
-$--color-primary-light-4: mix($--color-white, $--color-primary, 40%); /* 8cc5ff */
-$--color-primary-light-5: mix($--color-white, $--color-primary, 50%); /* a0cfff */
-$--color-primary-light-6: mix($--color-white, $--color-primary, 60%); /* b3d8ff */
-$--color-primary-light-7: mix($--color-white, $--color-primary, 70%); /* c6e2ff */
-$--color-primary-light-8: mix($--color-white, $--color-primary, 80%); /* d9ecff */
-$--color-primary-light-9: mix($--color-white, $--color-primary, 90%); /* ecf5ff */
+$--color-primary-light-1: mix($--color-white, $--color-primary, 10%) !default; /* 53a8ff */
+$--color-primary-light-2: mix($--color-white, $--color-primary, 20%) !default; /* 66b1ff */
+$--color-primary-light-3: mix($--color-white, $--color-primary, 30%) !default; /* 79bbff */
+$--color-primary-light-4: mix($--color-white, $--color-primary, 40%) !default; /* 8cc5ff */
+$--color-primary-light-5: mix($--color-white, $--color-primary, 50%) !default; /* a0cfff */
+$--color-primary-light-6: mix($--color-white, $--color-primary, 60%) !default; /* b3d8ff */
+$--color-primary-light-7: mix($--color-white, $--color-primary, 70%) !default; /* c6e2ff */
+$--color-primary-light-8: mix($--color-white, $--color-primary, 80%) !default; /* d9ecff */
+$--color-primary-light-9: mix($--color-white, $--color-primary, 90%) !default; /* ecf5ff */
 
 $--color-success: #67c23a !default;
 $--color-warning: #eb9e05 !default;
 $--color-danger: #fa5555 !default;
 $--color-info: #878d99 !default;
+
+...
 ```
 
 #### <strong>Modify variables</strong>

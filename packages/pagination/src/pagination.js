@@ -242,7 +242,7 @@ export default {
               value={ this.$parent.internalCurrentPage }
               domPropsValue={ this.$parent.internalCurrentPage }
               type="number"
-              onInput={ this.handleChange }
+              onChange={ this.handleChange }
               onFocus={ this.handleFocus }
               onBlur={ this.handleBlur }
               nativeOnKeyup={ this.handleKeyUp }/>

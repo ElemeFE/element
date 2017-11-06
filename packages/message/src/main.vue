@@ -87,7 +87,18 @@
         if (typeof this.onClose === 'function') {
           this.onClose(this);
         }
-        this.originFocus && this.originFocus.focus(); // 键盘焦点回归
+        if (!this.originFocus || !this.originFocus.getBoundingClientRect) return;
+
+        // restore keyboard focus
+        const { top, left, bottom, right } = this.originFocus.getBoundingClientRect();
+        const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+        const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+        if (top >= 0 &&
+          left >= 0 &&
+          bottom <= viewportHeight &&
+          right <= viewportWidth) {
+          this.originFocus.focus();
+        }
       },
 
       clearTimer() {

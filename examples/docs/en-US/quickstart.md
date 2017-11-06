@@ -86,7 +86,7 @@ new Vue({
 })
 ```
 
-Full example (Component list reference [components.json](https://github.com/ElemeFE/element/blob/carbon/components.json))
+Full example (Component list reference [components.json](https://github.com/ElemeFE/element/blob/master/components.json))
 
 ```javascript
 import Vue from 'vue'

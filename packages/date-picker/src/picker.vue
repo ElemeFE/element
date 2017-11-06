@@ -49,6 +49,7 @@
       :value="displayValue && displayValue[0]"
       :disabled="disabled"
       :id="id && id[0]"
+      :readonly="!editable || readonly"
       :name="name && name[0]"
       @input="handleStartInput"
       @change="handleStartChange"
@@ -60,6 +61,7 @@
       :value="displayValue && displayValue[1]"
       :disabled="disabled"
       :id="id && id[1]"
+      :readonly="!editable || readonly"
       :name="name && name[1]"
       @input="handleEndInput"
       @change="handleEndChange"
@@ -162,8 +164,14 @@ const TYPE_VALUE_RESOLVER_MAP = {
   },
   week: {
     formatter(value, format) {
-      let date = formatDate(value, format);
-      const week = getWeekNumber(value);
+      let week = getWeekNumber(value);
+      let month = value.getMonth();
+      const trueDate = new Date(value);
+      if (week === 1 && month === 11) {
+        trueDate.setHours(0, 0, 0, 0);
+        trueDate.setDate(trueDate.getDate() + 3 - (trueDate.getDay() + 6) % 7);
+      }
+      let date = formatDate(trueDate, format);
 
       date = /WW/.test(date)
             ? date.replace(/WW/, week < 10 ? '0' + week : week)

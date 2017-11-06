@@ -1,6 +1,16 @@
 @import "mixins/mixins";
 @import "common/var";
 
+@include b(loading-parent) {
+  @include m(relative) {
+    position: relative !important;
+  }
+
+  @include m(hidden) {
+    overflow: hidden !important;
+  }
+}
+
 @include b(loading-mask) {
   position: absolute;
   z-index: 10000;

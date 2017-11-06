@@ -995,7 +995,14 @@ describe('Table', () => {
           'sortable :sort-method="sortMethod"', '', '', '', {
             methods: {
               sortMethod(a, b) {
-                return a.runtime < b.runtime;
+                // sort method should return number
+                if (a.runtime < b.runtime) {
+                  return 1;
+                }
+                if (a.runtime > b.runtime) {
+                  return -1;
+                }
+                return 0;
               }
             }
           });
@@ -1007,6 +1014,46 @@ describe('Table', () => {
           setTimeout(_ => {
             const lastCells = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr td:last-child');
             expect(toArray(lastCells).map(node => node.textContent)).to.eql(['100', '95', '92', '92', '80']);
+            destroyVM(vm);
+            done();
+          }, DELAY);
+        }, DELAY);
+      });
+
+      it('sortable by method', done => {
+        const vm = createTable(
+          'sortable :sort-by="sortBy"', '', '', '', {
+            methods: {
+              sortBy(a) {
+                return -a.runtime;
+              }
+            }
+          });
+
+        setTimeout(_ => {
+          const elm = vm.$el.querySelector('.caret-wrapper');
+          elm.click();
+
+          setTimeout(_ => {
+            const lastCells = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr td:last-child');
+            expect(toArray(lastCells).map(node => node.textContent)).to.eql(['100', '95', '92', '92', '80']);
+            destroyVM(vm);
+            done();
+          }, DELAY);
+        }, DELAY);
+      });
+
+      it('sortable by property', done => {
+        const vm = createTable(
+          'sortable sort-by="runtime"', '', '', '', {});
+
+        setTimeout(_ => {
+          const elm = vm.$el.querySelector('.caret-wrapper');
+          elm.click();
+
+          setTimeout(_ => {
+            const lastCells = vm.$el.querySelectorAll('.el-table__body-wrapper tbody tr td:last-child');
+            expect(toArray(lastCells).map(node => node.textContent)).to.eql(['80', '92', '92', '95', '100']);
             destroyVM(vm);
             done();
           }, DELAY);

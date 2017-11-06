@@ -49,31 +49,37 @@
             <button
               type="button"
               @click="prevYear"
+              :aria-label="t(`el.datepicker.prevYear`)"
               class="el-picker-panel__icon-btn el-date-picker__prev-btn el-icon-d-arrow-left">
             </button>
             <button
               type="button"
               @click="prevMonth"
               v-show="currentView === 'date'"
+              :aria-label="t(`el.datepicker.prevMonth`)"
               class="el-picker-panel__icon-btn el-date-picker__prev-btn el-icon-arrow-left">
             </button>
             <span
               @click="showYearPicker"
+              role="button"
               class="el-date-picker__header-label">{{ yearLabel }}</span>
             <span
               @click="showMonthPicker"
               v-show="currentView === 'date'"
+              role="button"
               class="el-date-picker__header-label"
               :class="{ active: currentView === 'month' }">{{t(`el.datepicker.month${ month + 1 }`)}}</span>
             <button
               type="button"
               @click="nextYear"
+              :aria-label="t(`el.datepicker.nextYear`)"
               class="el-picker-panel__icon-btn el-date-picker__next-btn el-icon-d-arrow-right">
             </button>
             <button
               type="button"
               @click="nextMonth"
               v-show="currentView === 'date'"
+              :aria-label="t(`el.datepicker.nextMonth`)"
               class="el-picker-panel__icon-btn el-date-picker__next-btn el-icon-arrow-right">
             </button>
           </div>

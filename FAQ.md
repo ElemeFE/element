@@ -22,7 +22,7 @@
 使用 [Scoped slot](https://vuejs.org/v2/guide/components.html#Scoped-Slots) 即可：
 ```html
 <el-table-column label="操作">
-  <template scope="props">
+  <template slot-scope="props">
     <el-button @click.native="showDetail(props.row)">查看详情</el-button>
   </template>
 </el-table-column>
@@ -115,7 +115,7 @@ For other components, the `.native` modifier is still mandatory.
 Just use [Scoped slot](https://vuejs.org/v2/guide/components.html#Scoped-Slots):
 ```html
 <el-table-column label="Operations">
-  <template scope="props">
+  <template slot-scope="props">
     <el-button @click.native="showDetail(props.row)">Details</el-button>
   </template>
 </el-table-column>

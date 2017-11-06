@@ -8,7 +8,7 @@ const sortData = (data, states) => {
   if (!sortingColumn || typeof sortingColumn.sortable === 'string') {
     return data;
   }
-  return orderBy(data, states.sortProp, states.sortOrder, sortingColumn.sortMethod);
+  return orderBy(data, states.sortProp, states.sortOrder, sortingColumn.sortMethod, sortingColumn.sortBy);
 };
 
 const getKeysMap = function(array, rowKey) {

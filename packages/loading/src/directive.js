@@ -39,14 +39,11 @@ exports.install = Vue => {
       if (el.domVisible) {
         el.instance.$on('after-leave', _ => {
           el.domVisible = false;
-          if (binding.modifiers.fullscreen && el.originalOverflow !== 'hidden') {
-            document.body.style.overflow = el.originalOverflow;
-          }
-          if (binding.modifiers.fullscreen || binding.modifiers.body) {
-            document.body.style.position = el.originalPosition;
-          } else {
-            el.style.position = el.originalPosition;
-          }
+          const target = binding.modifiers.fullscreen || binding.modifiers.body
+            ? document.body
+            : el;
+          removeClass(target, 'el-loading-parent--relative');
+          removeClass(target, 'el-loading-parent--hidden');
         });
         el.instance.visible = false;
       }
@@ -59,10 +56,10 @@ exports.install = Vue => {
       });
 
       if (el.originalPosition !== 'absolute' && el.originalPosition !== 'fixed') {
-        parent.style.position = 'relative';
+        addClass(parent, 'el-loading-parent--relative');
       }
       if (binding.modifiers.fullscreen && binding.modifiers.lock) {
-        parent.style.overflow = 'hidden';
+        addClass(parent, 'el-loading-parent--hidden');
       }
       el.domVisible = true;
 

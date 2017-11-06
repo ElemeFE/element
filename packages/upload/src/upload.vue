@@ -91,7 +91,8 @@ export default {
       const before = this.beforeUpload(rawFile);
       if (before && before.then) {
         before.then(processedFile => {
-          if (Object.prototype.toString.call(processedFile) === '[object File]') {
+          const fileType = Object.prototype.toString.call(processedFile);
+          if (fileType === '[object File]' || fileType === '[object Blob]') {
             this.post(processedFile);
           } else {
             this.post(rawFile);

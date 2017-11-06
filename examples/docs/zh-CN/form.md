@@ -5,15 +5,17 @@
         if (!value) {
           return callback(new Error('年龄不能为空'));
         }
-        if (!Number.isInteger(value)) {
-          callback(new Error('请输入数字值'));
-        } else {
-          if (value < 18) {
-            callback(new Error('必须年满18岁'));
+        setTimeout(() => {
+          if (!Number.isInteger(value)) {
+            callback(new Error('请输入数字值'));
           } else {
-            callback();
+            if (value < 18) {
+              callback(new Error('必须年满18岁'));
+            } else {
+              callback();
+            }
           }
-        }
+        }, 1000);
       };
       var validatePass = (rule, value, callback) => {
         if (value === '') {
@@ -316,6 +318,13 @@
 ```
 :::
 
+:::tip
+W3C 标准中有如下[规定](https://www.w3.org/MarkUp/html-spec/html-spec_8.html#SEC8.2)：
+> <i>When there is only one single-line text input field in a form, the user agent should accept Enter in that field as a request to submit the form.</i>
+
+即：当一个 form 元素中只有一个输入框时，在该输入框中按下回车应提交该表单。如果希望阻止这一默认行为，可以在 `<el-form>` 标签上添加 `@submit.native.prevent`。
+:::
+
 ### 行内表单
 
 当垂直方向空间受限且表单较简单时，可以在一行内放置表单。
@@ -331,7 +340,8 @@
       <el-option label="区域一" value="shanghai"></el-option>
       <el-option label="区域二" value="beijing"></el-option>
     </el-select>
-  </el-form-item><el-form-item>
+  </el-form-item>
+  <el-form-item>
     <el-button type="primary" @click="onSubmit">查询</el-button>
   </el-form-item>
 </el-form>
@@ -537,15 +547,17 @@
         if (!value) {
           return callback(new Error('年龄不能为空'));
         }
-        if (!Number.isInteger(value)) {
-          callback(new Error('请输入数字值'));
-        } else {
-          if (value < 18) {
-            callback(new Error('必须年满18岁'));
+        setTimeout(() => {
+          if (!Number.isInteger(value)) {
+            callback(new Error('请输入数字值'));
           } else {
-            callback();
+            if (value < 18) {
+              callback(new Error('必须年满18岁'));
+            } else {
+              callback();
+            }
           }
-        }
+        }, 1000);
       };
       var validatePass = (rule, value, callback) => {
         if (value === '') {
