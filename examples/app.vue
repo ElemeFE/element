@@ -187,7 +187,23 @@
   import { use } from 'main/locale';
   import zhLocale from 'main/locale/lang/zh-CN';
   import enLocale from 'main/locale/lang/en';
-  use(location.href.indexOf('zh-CN') > -1 ? zhLocale : enLocale);
+  import esLocale from 'main/locale/lang/es';
+
+  const lang = location.hash.replace('#', '').split('/')[1] || 'zh-CN';
+  const localize = lang => {
+    console.log(lang);
+    switch (lang) {
+      case 'zh-CN':
+        use(zhLocale);
+        break;
+      case 'es':
+        use(esLocale);
+        break;
+      default:
+        use(enLocale);
+    }
+  };
+  localize(lang);
 
   export default {
     name: 'app',
@@ -206,14 +222,11 @@
         if (val === 'zh-CN') {
           this.suggestJump();
         }
-        this.localize();
+        localize(val);
       }
     },
 
     methods: {
-      localize() {
-        use(this.lang === 'zh-CN' ? zhLocale : enLocale);
-      },
       suggestJump() {
         const href = location.href;
         const preferGithub = localStorage.getItem('PREFER_GITHUB');
@@ -231,7 +244,7 @@
     },
 
     mounted() {
-      this.localize();
+      localize(this.lang);
       if (this.lang === 'zh-CN') {
         this.suggestJump();
       }
