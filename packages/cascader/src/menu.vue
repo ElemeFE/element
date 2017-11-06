@@ -39,7 +39,8 @@
         value: [],
         expandTrigger: 'click',
         changeOnSelect: false,
-        popperClass: ''
+        popperClass: '',
+        hoverTimer: 0
       };
     },
 
@@ -135,13 +136,12 @@
         activeOptions,
         visible,
         expandTrigger,
-        popperClass
+        popperClass,
+        hoverThreshold
       } = this;
 
       let hoverMenuRefs = {};
-      this.hoverTimer = null;
       const hoverMenuHandler = e => {
-        const hoverHreshold = 500;
         const offsetX = e.offsetX;
         const width = hoverMenuRefs.activeMenu.offsetWidth;
         const height = hoverMenuRefs.activeMenu.offsetHeight;
@@ -160,7 +160,7 @@
           if (!this.hoverTimer) {
             this.hoverTimer = setTimeout(() => {
               hoverMenuRefs.hoverZone.innerHTML = '';
-            }, hoverHreshold);
+            }, hoverThreshold);
           }
         }
       };
