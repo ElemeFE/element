@@ -498,5 +498,255 @@
         }
       ]
     }
+  ],
+  "es": [
+    {
+      "name": "Changelog-es",
+      "path": "/changelog"
+    },
+    {
+      "name": "Element React",
+      "href": "https://eleme.github.io/element-react/"
+    },
+    {
+      "name": "Element Angular",
+      "href": "https://eleme.github.io/element-angular/"
+    },
+    {
+      "name": "Development",
+      "children": [
+        {
+          "path": "/installation",
+          "name": "Installation-es"
+        },
+        {
+          "path": "/quickstart",
+          "name": "Quick Start-es"
+        },
+        {
+          "path": "/i18n",
+          "name": "Internationalization-es"
+        },
+        {
+          "path": "/custom-theme",
+          "name": "Custom Theme-es"
+        },
+        {
+          "path": "/transition",
+          "name": "Built-in transition-es"
+        }
+      ]
+    },
+    {
+      "name": "Components",
+      "groups": [
+        {
+          "groupName": "Basic",
+          "list": [
+            {
+              "path": "/layout",
+              "title": "Layout-es"
+            },
+            {
+              "path": "/container",
+              "title": "Layout Container-es"
+            },
+            {
+              "path": "/color",
+              "title": "Color-es"
+            },
+            {
+              "path": "/typography",
+              "title": "Typography-es"
+            },
+            {
+              "path": "/icon",
+              "title": "Icon-es"
+            },
+            {
+              "path": "/button",
+              "title": "Button-es"
+            }
+          ]
+        },
+        {
+          "groupName": "Form",
+          "list": [
+            {
+              "path": "/radio",
+              "title": "Radio-es"
+            },
+            {
+              "path": "/checkbox",
+              "title": "Checkbox-es"
+            },
+            {
+              "path": "/input",
+              "title": "Input-es"
+            },
+            {
+              "path": "/input-number",
+              "title": "InputNumber-es"
+            },
+            {
+              "path": "/select",
+              "title": "Select-es"
+            },
+            {
+              "path": "/cascader",
+              "title": "Cascader-es"
+            },
+            {
+              "path": "/switch",
+              "title": "Switch-es"
+            },
+            {
+              "path": "/slider",
+              "title": "Slider-es"
+            },
+            {
+              "path": "/time-picker",
+              "title": "TimePicker-es"
+            },
+            {
+              "path": "/date-picker",
+              "title": "DatePicker-es"
+            },
+            {
+              "path": "/datetime-picker",
+              "title": "DateTimePicker-es"
+            },
+            {
+              "path": "/upload",
+              "title": "Upload-es"
+            },
+            {
+              "path": "/rate",
+              "title": "Rate-es"
+            },
+            {
+              "path": "/color-picker",
+              "title": "ColorPicker-es"
+            },
+            {
+              "path": "/transfer",
+              "title": "Transfer-es"
+            },
+            {
+              "path": "/form",
+              "title": "Form-es"
+            }
+          ]
+        },
+        {
+          "groupName": "Data",
+          "list": [
+            {
+              "path": "/table",
+              "title": "Table-es"
+            },
+            {
+              "path": "/tag",
+              "title": "Tag-es"
+            },
+            {
+              "path": "/progress",
+              "title": "Progress-es"
+            },
+            {
+              "path": "/tree",
+              "title": "Tree-es"
+            },
+            {
+              "path": "/pagination",
+              "title": "Pagination-es"
+            },
+            {
+              "path": "/badge",
+              "title": "Badge-es"
+            }
+          ]
+        },
+        {
+          "groupName": "Notice",
+          "list": [
+            {
+              "path": "/alert",
+              "title": "Alert-es"
+            },
+            {
+              "path": "/loading",
+              "title": "Loading-es"
+            },
+            {
+              "path": "/message",
+              "title": "Message-es"
+            },
+            {
+              "path": "/message-box",
+              "title": "MessageBox-es"
+            },
+            {
+              "path": "/notification",
+              "title": "Notification-es"
+            }
+          ]
+        },
+        {
+          "groupName": "Navigation",
+          "list": [
+            {
+              "path": "/menu",
+              "title": "NavMenu-es"
+            },
+            {
+              "path": "/tabs",
+              "title": "Tabs-es"
+            },
+            {
+              "path": "/breadcrumb",
+              "title": "Breadcrumb-es"
+            },
+            {
+              "path": "/dropdown",
+              "title": "Dropdown-es"
+            },
+            {
+              "path": "/steps",
+              "title": "Steps-es"
+            }
+          ]
+        },
+        {
+          "groupName": "Others",
+          "list": [
+            {
+              "path": "/dialog",
+              "title": "Dialog-es"
+            },
+            {
+              "path": "/tooltip",
+              "title": "Tooltip-es"
+            },
+            {
+              "path": "/popover",
+              "title": "Popover-es"
+            },
+            {
+              "path": "/card",
+              "title": "Card-es"
+            },
+            {
+              "path": "/carousel",
+              "title": "Carousel-es"
+            },
+            {
+              "path": "/collapse",
+              "title": "Collapse-es"
+            }
+          ]
+        }
+      ]
+    }
   ]
 }
