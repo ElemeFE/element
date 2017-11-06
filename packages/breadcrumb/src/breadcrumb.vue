@@ -17,6 +17,13 @@
         default: ''
       }
     },
+
+    provide() {
+      return {
+        elBreadcrumb: this
+      };
+    },
+
     mounted() {
       const items = this.$el.querySelectorAll('.el-breadcrumb__item');
       items[items.length - 1].setAttribute('aria-current', 'page');
