@@ -207,7 +207,7 @@
         let openedMenus = this.openedMenus;
         if (openedMenus.indexOf(index) !== -1) return;
         // 将不在该菜单路径下的其余菜单收起
-        // GT: Will not put away the rest of the menu under the menu path
+        // collapse all menu that are not under current menu item
         if (this.uniqueOpened) {
           this.openedMenus = openedMenus.filter(index => {
             return indexPath.indexOf(index) !== -1;
@@ -247,7 +247,7 @@
         }
       },
       // 初始化展开菜单
-      // GT: Initialize the launch menu
+      // initialize opened menu
       initOpenedMenu() {
         const index = this.activeIndex;
         const activeItem = this.items[index];
@@ -256,7 +256,7 @@
         let indexPath = activeItem.indexPath;
 
         // 展开该菜单项的路径上所有子菜单
-        // GT: Expand all submenus on the path of the menu item
+        // expand all submenus of the menu item
         indexPath.forEach(index => {
           let submenu = this.submenus[index];
           submenu && this.openMenu(index, submenu.indexPath);

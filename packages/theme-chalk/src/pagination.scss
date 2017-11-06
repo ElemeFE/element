@@ -23,6 +23,7 @@
 
   .el-input__inner {
     text-align: center;
+    -moz-appearance: textfield;
   }
 
   // pagesize 的下拉 icon
@@ -34,9 +35,6 @@
   .el-select .el-input {
     width: 100px;
     margin: 0 5px;
-
-    .el-input__icon {
-    }
 
     .el-input__inner {
       padding-right: 25px;
@@ -149,7 +147,6 @@
     margin: 0 2px;
     box-sizing: border-box;
     border-radius: $--pagination-border-radius;
-    -moz-appearance: textfield;
 
     &.el-input {
       width: 50px;
