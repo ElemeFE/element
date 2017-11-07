@@ -61,11 +61,12 @@
 </style>
 ## Carousel
 
-Loop a series of images or texts in a limited space
+Presentar una serie de imágenes o textos en un espacio limitado
 
-### Basic usage
+### Uso básico
 
-::: demo Combine `el-carousel` with `el-carousel-item`, and you'll get a carousel. Content of each slide is completely customizable, and you just need to place it inside  `el-carousel-item` tag. By default the carousel switches when mouse hovers over an indicator. Set `trigger` to `click`, and the carousel switches only when an indicator is clicked.
+::: demo Combina `el-carousel`  con `el-carousel-item`, para conseguir el carrusel. El contenido de cada diapositiva es completamente personalizable, y sólo tiene que colocarla dentro de la etiqueta  `el-carousel-item` . Por defecto, el carrusel cambia cuando el ratón pasa por encima de un indicador. Fije  `trigger`  para  `click`, si lo que se desea es que el carrusel cambie sólo cuando se haga clic en un indicador.
+
 ```html
 <template>
   <div class="block">
@@ -106,11 +107,12 @@ Loop a series of images or texts in a limited space
 ```
 :::
 
-### Indicators
+### Indicadores
 
-Indicators can be displayed outside the carousel
+Los indicadores de paginacion pueden mostrarse fuera del carrusel
 
-::: demo The `indicator-position` attribute determines where the indicators are located. By default they are inside the carousel, and setting `indicator-position` to `outside` moves them outside; setting `indicator-position` to `none` hides the indicators.
+::: demo El atributo  `indicator-position`  determina dónde se encuentran los indicadores de paginación. Por defecto están dentro del carrusel, y el ajuste de `indicator-position`  a `outside`  los mueve hacia fuera; en cambio `indicator-position`  a `none`  los oculta.
+
 ```html
 <template>
   <el-carousel indicator-position="outside">
@@ -140,11 +142,12 @@ Indicators can be displayed outside the carousel
 ```
 :::
 
-### Arrows
+### Flechas
 
-You can define when arrows are displayed
+Puede definir cuando se visualizan las flechas
 
-::: demo The `arrow` attribute determines when arrows are displayed. By default they appear when mouse hovers over the carousel. Setting `arrow` to `always` or `never` shows/hides the arrows permanently.
+::: demo El atributo `arrow` determina cuándo se visualizan las flechas. Por defecto aparecen cuando el ratón se desplaza sobre el carrusel. Ajuste `arrow` a `always` o `never` para mostrar u ocultar las flechas permanentemente.
+
 ```html
 <template>
   <el-carousel :interval="5000" arrow="always">
@@ -174,11 +177,12 @@ You can define when arrows are displayed
 ```
 :::
 
-### Card mode
+### Modo Card
 
-When a page is wide enough but has limited height, you can activate card mode for carousels
+Cuando una página es suficientemente ancha pero tiene una altura limitada, puede activar el modo `card` para carrusel.
 
-::: demo Setting `type` to `card` activates the card mode. Apart from the appearance, the biggest difference between card mode and common mode is that clicking the slides at both sides directly switches the carousel in card mode.
+::: demo Ajuste `type` a `card` para activar el modo tarjeta. Aparte de la apariencia, la mayor diferencia entre el modo tarjeta y el modo común es que al hacer clic en las diapositivas de ambos lados, el carrusel cambia directamente en modo tarjeta.
+
 ```html
 <template>
   <el-carousel :interval="4000" type="card" height="200px">
@@ -208,32 +212,33 @@ When a page is wide enough but has limited height, you can activate card mode fo
 ```
 :::
 
-### Carousel Attributes
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
-|---------- |-------------- |---------- |--------------------------------  |-------- |
-| height | height of the carousel | string | — | — |
-| initial-index | index of the initially active slide (starting from 0) | number | — | 0 |
-| trigger | how indicators are triggered | string | hover/click | hover |
-| autoplay | whether automatically loop the slides | boolean | — | true |
-| interval | interval of the auto loop, in milliseconds | number | — | 3000 |
-| indicator-position | position of the indicators | string | outside/none | — |
-| arrow | when arrows are shown | string | always/hover/never | hover |
-| type | type of the Carousel | string | card | — |
+### Atributos de Carousel
+| Atributo           | Descripcion                              | Tipo    | Valores aceptados  | Por Defecto |
+| ------------------ | ---------------------------------------- | ------- | ------------------ | ----------- |
+| height             | Alto del carrusel                        | string  | —                  | —           |
+| initial-index      | Indice del slider inicial activo (empieza desde 0) | number  | —                  | 0           |
+| trigger            | Evento que muestra los indicadores       | string  | hover/click        | hover       |
+| autoplay           | Si se enlazan automáticamente las diapositivas | boolean | —                  | true        |
+| interval           | Intervalo del auto loop, en milisegundos | number  | —                  | 3000        |
+| indicator-position | Posición del indicador de paginación     | string  | outside/none       | —           |
+| arrow              | Cuando se muestran las flechas           | string  | always/hover/never | hover       |
+| type               | Tipo de carrusel                         | string  | card               | —           |
 
-### Carousel Events
-| Event Name | Description | Parameters |
-|---------|---------|---------|
-| change | triggers when the active slide switches | index of the new active slide, index of the old active slide |
+### Eventos de Carousel
+| Nombre evento | Descripción                              | Parametros                               |
+| ------------- | ---------------------------------------- | ---------------------------------------- |
+| change        | Se dispara cuando el slider activo cambia | Indice del nuevo slider activo, indice del anterior slider activo. |
 
-### Carousel Methods
-| Method | Description | Parameters |
-|---------- |-------------- | -- |
-| setActiveItem | manually switch slide | index of the slide to be switched to, starting from 0; or the `name` of corresponding `el-carousel-item` |
-| prev | switch to the previous slide | — |
-| next | switch to the next slide | — |
+### Metodos de Carousel
+| Metodos       | Descripción                | Parametros                               |
+| ------------- | -------------------------- | ---------------------------------------- |
+| setActiveItem | Cambio manual de slider    | indice del slider al que se va a cambiar, empezando por 0; o el `name` del `el-carousel-item` correspondiente |
+| prev          | Cambia al slider anterior  | —                                        |
+| next          | Cambia al slider siguiente | —                                        |
 
-### Carousel-Item Attributes
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
-|---------- |-------------- |---------- |--------------------------------  |-------- |
-| name | name of the item, can be used in `setActiveItem` | string | — | — |
-| label | text content for the corresponding indicator | string | — | — |
+### Atributos de Carousel-Item
+| Atributo | Descripción                              | Tipo   | Valores aceptados | Por Defecto |
+| -------- | ---------------------------------------- | ------ | ----------------- | ----------- |
+| name     | Nombre del item que puede ser usado en `setActiveItem` | string | —                 | —           |
+| label    | Texto que se mostrara en el indicador de paginacion correspondiente | string | —                 | —           |
+
