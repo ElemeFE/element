@@ -1,11 +1,11 @@
 ## Breadcrumb
 
-Displays the location of the current page, making it easier to browser back.
+Muestra la locación de la página actual, haciendo más fácil el poder ir a la página anterior.
 
-### Basic usage
+### Uso básico
 
 
-:::demo In `el-breadcrumb`, each `el-breadcrumb-item` is a tag that stands for every level starting from homepage. This component has a `String` attribute `separator`, and it determines the separator. Its default value is '/'.
+:::demo En `el-breadcrumb`, cada `el-breadcrumb-item` es un tag que representa cada nivel empezando desde la homepage. Este componente tiene un atributo `String` llamado `separator`, el mismo determina el caracter separador. El valor por defecto es '/'.
 
 ```html
 <el-breadcrumb separator="/">
@@ -17,9 +17,9 @@ Displays the location of the current page, making it easier to browser back.
 ```
 :::
 
-### Icon separator
+### Icono separador
 
-:::demo Set `separator-class` to use `iconfont` as the separator，it will cover `separator`
+:::demo Setea `separator-class` para que utilice `iconfont` como separador，el mismo va a cubrir `separator`
 
 ```html
 <el-breadcrumb separator-class="el-icon-arrow-right">
@@ -31,17 +31,17 @@ Displays the location of the current page, making it easier to browser back.
 ```
 :::
 
-### Breadcrumb Attributes
-| Attribute      | Description          | Type      | Accepted Values            | Default|
+### Breadcrumb atributos
+| Atributo      | Descripción          | Tipo      | Valores aceptados           | Default|
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| separator | separator character | string | — | / |
-| separator-class | class name of icon separator | string | — | - |
+| separator | caracter separador | string | — | / |
+| separator-class | nombre de la clase del icono separador | string | — | - |
 
-### Breadcrumb Item Attributes
-| Attribute      | Description          | Type      | Accepted Values            | Default|
+### Breadcrumb Item atributos
+| Atributo      | Descripción          | Tipo      | Valores aceptados            | Default|
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| to | target route of the link, same as `to` of `vue-router` | string/object | — | — |
-| replace | if `true`, the navigation will not leave a history record | boolean | — | false |
+| to | ruta del link, lo mismo que `to` de `vue-router` | string/object | — | — |
+| replace | si `true`,  la navegación no dejara una entrada en la historia | boolean | — | false |
 
 
 
