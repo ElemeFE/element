@@ -1,12 +1,12 @@
 ## Badge
 
-A number or status mark on buttons and icons.
+Marcas en forma de número o estado para botones e iconos.
 
-### Basic usage
+### Uso básico
 
-Displays the amount of new messages.
+Muestra la cantidad de mensajes nuevos.
 
-:::demo The amount is defined with `value` which accepts `Number` or `String`.
+:::demo La cantidad está definida por `value` que acepta `Number` o `String`.
 
 ```html
 <el-badge :value="12" class="item">
@@ -41,11 +41,11 @@ Displays the amount of new messages.
 ```
 :::
 
-### Max value
+### Valor máximo
 
-You can customize the max value.
+Se puede customizar el valor máximo.
 
-::: demo The max value is defined by property `max` which is a `Number`. Note that it only works when `value` is also a `Number`.
+::: demo El valor máximo se define como `max` el cual es un `Number`. Nota: solo funciona si `value` es también un `Number`.
 
 ```html
 <el-badge :value="200" :max="99" class="item">
@@ -64,11 +64,11 @@ You can customize the max value.
 ```
 :::
 
-### Customizations
+### Customizaciones
 
-Displays text content other than numbers.
+Mostrar texto en vez de números.
 
-:::demo When `value` is a `String`, it can display customized text.
+:::demo Cuando `value` es un `String`, puede mostrar texto customizado.
 
 ```html
 <el-badge value="new" class="item">
@@ -87,11 +87,11 @@ Displays text content other than numbers.
 ```
 :::
 
-### Little red dot
+### Pequeño punto rojo
 
-Use a red dot to mark content that needs to be noticed.
+Puede utilizar un punto rojo para marcar contenido que debe ser notado.
 
-:::demo Use the attribute `is-dot`. It is a `Boolean`.
+:::demo Use el atributo `is-dot`. Es un `Boolean`.
 
 ```html
 <el-badge is-dot class="item">query</el-badge>
@@ -129,10 +129,10 @@ Use a red dot to mark content that needs to be noticed.
   }
 </style>
 
-### Attributes
-| Attribute          | Description            | Type            | Accepted Values                 | Default   |
+### Atributos
+| Atributo          | Descripción            | Tipo            | Valores aceptados                 | Default   |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
-| value          | display value      | string, number          |          —             |    —     |
-| max          |  maximum value, shows '{max}+' when exceeded. Only works if `value` is a `Number`   | number  |         —              |     —    |
-| is-dot       | if a little dot is displayed   | boolean  |  —  |  false |
+| value          | valor a mostrar      | string, number          |          —             |    —     |
+| max          |  valor máximo, Muestra '{max}+' cuando se excede. Solo funciona si `value` es un `Number`   | number  |         —              |     —    |
+| is-dot       | si se debe mostrar un pequeño punto  | boolean  |  —  |  false |
 | hidden | hidden badge | boolean | — | false |
