@@ -120,7 +120,7 @@ Mostrar un icono mejora la legibilidad.
 ```
 :::
 
-## Texto centrado
+### Texto centrado
 
 Para centrar el texto utilice el atributo `center`.
 
