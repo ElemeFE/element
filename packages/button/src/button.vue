@@ -1,26 +1,35 @@
 <template>
-  <button :disabled="disabled" class="el-button"
+  <button
+    class="el-button"
     @click="handleClick"
+    :disabled="disabled"
     :autofocus="autofocus"
     :type="nativeType"
     :class="[
       type ? 'el-button--' + type : '',
-      size ? 'el-button--' + size : '',
+      buttonSize ? 'el-button--' + buttonSize : '',
       {
         'is-disabled': disabled,
         'is-loading': loading,
-        'is-plain': plain
+        'is-plain': plain,
+        'is-round': round
       }
     ]"
   >
     <i class="el-icon-loading" v-if="loading" @click="handleInnerClick"></i>
-    <i :class="'el-icon-' + icon" v-if="icon && !loading" @click="handleInnerClick"></i>
+    <i :class="icon" v-if="icon && !loading" @click="handleInnerClick"></i>
     <span v-if="$slots.default" @click="handleInnerClick"><slot></slot></span>
   </button>
 </template>
 <script>
   export default {
     name: 'ElButton',
+
+    inject: {
+      elFormItem: {
+        default: ''
+      }
+    },
 
     props: {
       type: {
@@ -39,7 +48,17 @@
       loading: Boolean,
       disabled: Boolean,
       plain: Boolean,
-      autofocus: Boolean
+      autofocus: Boolean,
+      round: Boolean
+    },
+
+    computed: {
+      _elFormItemSize() {
+        return (this.elFormItem || {}).elFormItemSize;
+      },
+      buttonSize() {
+        return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
+      }
     },
 
     methods: {

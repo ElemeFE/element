@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Element from 'main/index.js';
 import App from './play/index.vue';
-import 'packages/theme-default/src/index.css';
+import 'packages/theme-chalk/src/index.scss';
 
 Vue.use(Element);
 

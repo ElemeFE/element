@@ -10,27 +10,27 @@ describe('Switch', () => {
 
   it('create', () => {
     vm = createTest(Switch, {
-      onText: 'on',
-      offText: 'off',
-      onColor: '#0f0',
-      offColor: '#f00',
+      activeText: 'on',
+      inactiveText: 'off',
+      activeColor: '#0f0',
+      inactiveColor: '#f00',
       width: 100
     });
 
     const core = vm.$el.querySelector('.el-switch__core');
     expect(core.style.backgroundColor).to.equal('rgb(255, 0, 0)');
     expect(core.style.width).to.equal('100px');
-    expect(vm.$el.querySelector('.el-switch__label--left').querySelector('span').textContent).to.equal('on');
+    expect(vm.$el.querySelector('.el-switch__label--left').querySelector('span').textContent).to.equal('off');
   });
 
   it('switch with icons', () => {
     vm = createTest(Switch, {
-      onIconClass: 'el-icon-check',
-      offIconClass: 'el-icon-close'
+      activeIconClass: 'el-icon-check',
+      inactiveIconClass: 'el-icon-close'
     });
 
     const icon = vm.$el.querySelector('.el-switch__label--left').querySelector('i');
-    expect(icon.classList.contains('el-icon-check')).to.true;
+    expect(icon.classList.contains('el-icon-close')).to.true;
   });
 
   it('value correctly update', done => {
@@ -125,7 +125,7 @@ describe('Switch', () => {
     vm = createVue({
       template: `
         <div>
-          <el-switch v-model="value" :on-value="onValue" :off-value="offValue"></el-switch>
+          <el-switch v-model="value" :active-value="onValue" :inactive-value="offValue"></el-switch>
         </div>
       `,
       data() {

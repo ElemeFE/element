@@ -1,41 +1,50 @@
 <template>
   <div
     class="el-step"
-    :style="[style,  isLast ? '' : { marginRight: - $parent.stepOffset + 'px' }]"
-    :class="['is-' + $parent.direction]">
+    :style="style"
+    :class="[
+      !isSimple && `is-${$parent.direction}`,
+      isSimple && 'is-simple',
+      isLast && !space && !isCenter && 'is-flex',
+      isCenter && !isVertical && !isSimple && 'is-center'
+     ]">
+    <!-- icon & line -->
     <div
       class="el-step__head"
-      :class="['is-' + currentStatus, { 'is-text': !icon }]">
+      :class="`is-${currentStatus}`">
       <div
         class="el-step__line"
         :style="isLast ? '' : { marginRight: $parent.stepOffset + 'px' }"
-        :class="['is-' + $parent.direction, { 'is-icon': icon }]">
+      >
         <i class="el-step__line-inner" :style="lineStyle"></i>
       </div>
 
-      <span class="el-step__icon">
+      <div class="el-step__icon" :class="`is-${icon ? 'icon' : 'text'}`">
         <slot
           v-if="currentStatus !== 'success' && currentStatus !== 'error'"
           name="icon">
-          <i v-if="icon" :class="['el-icon-' + icon]"></i>
-          <div v-else>{{ index + 1 }}</div>
+          <i v-if="icon" class="el-step__icon-inner" :class="[icon]"></i>
+          <div class="el-step__icon-inner" v-if="!icon && !isSimple">{{ index + 1 }}</div>
         </slot>
         <i
           v-else
-          :class="['el-icon-' + (currentStatus === 'success' ? 'check' : 'close')]">
+          :class="['el-icon-' + (currentStatus === 'success' ? 'check' : 'close')]"
+          class="el-step__icon-inner is-status"
+        >
         </i>
-      </span>
+      </div>
     </div>
-    <div
-      class="el-step__main"
-      :style="{ marginLeft: mainOffset }">
+    <!-- title & description -->
+    <div class="el-step__main">
       <div
         class="el-step__title"
         ref="title"
         :class="['is-' + currentStatus]">
         <slot name="title">{{ title }}</slot>
       </div>
+      <div v-if="isSimple" class="el-step__arrow"></div>
       <div
+        v-else
         class="el-step__description"
         :class="['is-' + currentStatus]">
         <slot name="description">{{ description }}</slot>
@@ -59,7 +68,6 @@ export default {
     return {
       index: -1,
       lineStyle: {},
-      mainOffset: 0,
       internalStatus: ''
     };
   },
@@ -84,31 +92,45 @@ export default {
       const prevStep = this.$parent.steps[this.index - 1];
       return prevStep ? prevStep.currentStatus : 'wait';
     },
-    isLast: function() {
+    isCenter() {
+      return this.$parent.alignCenter;
+    },
+    isVertical() {
+      return this.$parent.direction === 'vertical';
+    },
+    isSimple() {
+      return this.$parent.simple;
+    },
+    isLast() {
       const parent = this.$parent;
       return parent.steps[parent.steps.length - 1] === this;
     },
+    stepsCount() {
+      return this.$parent.steps.length;
+    },
+    space() {
+      const { isSimple, $parent: { space } } = this;
+      return isSimple ? '' : space ;
+    },
     style: function() {
+      const style = {};
       const parent = this.$parent;
-      const isCenter = parent.center;
       const len = parent.steps.length;
 
-      if (isCenter && this.isLast) {
-        return {};
+      const space = (typeof this.space === 'number'
+        ? this.space + 'px'
+        : this.space
+          ? this.space
+          : 100 / (len - 1) + '%');
+      style.flexBasis = space;
+      if (this.isVertical) return style;
+      if (this.isLast) {
+        style.maxWidth = 100 / this.stepsCount + '%';
+      } else {
+        style.marginRight = -this.$parent.stepOffset + 'px';
       }
 
-      const space = (typeof parent.space === 'number'
-        ? parent.space + 'px'
-        : parent.space
-          ? parent.space
-          : 100 / (isCenter ? len - 1 : len) + '%');
-      if (parent.direction === 'horizontal') {
-        return { width: space };
-      } else {
-        if (!this.isLast) {
-          return { height: space };
-        }
-      }
+      return style;
     }
   },
 
@@ -133,7 +155,7 @@ export default {
 
       style.transitionDelay = 150 * this.index + 'ms';
       if (status === this.$parent.processStatus) {
-        step = this.currentStatus !== 'error' ? 50 : 0;
+        step = this.currentStatus !== 'error' ? 0 : 0;
       } else if (status === 'wait') {
         step = 0;
         style.transitionDelay = (-150 * this.index) + 'ms';
@@ -149,14 +171,6 @@ export default {
   },
 
   mounted() {
-    const parent = this.$parent;
-
-    if (parent.direction === 'horizontal') {
-      if (parent.alignCenter) {
-        this.mainOffset = -this.$refs.title.getBoundingClientRect().width / 2 + 16 + 'px';
-      }
-    }
-
     const unwatch = this.$watch('index', val => {
       this.$watch('$parent.active', this.updateStatus, { immediate: true });
       unwatch();
