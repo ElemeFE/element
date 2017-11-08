@@ -73,56 +73,56 @@
 </style>
 
 ## Color
-Element uses a specific set of palettes to specify colors to provide a consistent look and feel for the products you build.
+Element utiliza un conjunto de paletas para especificar colores, y así, proporcionar una apariencia y sensación coherente para los productos que construye.
 
-### Main Color
+### Color principal
 
-The main color of Element is bright and friendly blue.
+El color principal de Element es el azul brillante y amigable.
 
 <el-row :gutter="12">
   <el-col :span="6">
-    <div class="demo-color-box bg-blue">Blue<div class="value">#409EFF</div></div>
+    <div class="demo-color-box bg-blue">Azul<div class="value">#409EFF</div></div>
   </el-col>
 </el-row>
 
-### Secondary Color
+### Color secundario
 
-Besides the main color, you need to use different scene colors in different scenarios (for example, dangerous color indicates dangerous operation)
+Además del color principal, necesitas utiizar distintos colores para diferentes escenarios (por ejemplo, el color en tono rojo indica una operación peligrosa).
 
 <el-row :gutter="12">
   <el-col :span="6">
-    <div class="demo-color-box bg-success">Success<div class="value">#67C23A</div></div>
+    <div class="demo-color-box bg-success">Éxito<div class="value">#67C23A</div></div>
   </el-col>
   <el-col :span="6">
-    <div class="demo-color-box bg-warning">Warning<div class="value">#EB9E05</div></div>
+    <div class="demo-color-box bg-warning">Precaución<div class="value">#EB9E05</div></div>
   </el-col>
   <el-col :span="6">
-    <div class="demo-color-box bg-danger">Danger<div class="value">#FA5555</div></div>
+    <div class="demo-color-box bg-danger">Peligro<div class="value">#FA5555</div></div>
   </el-col>
   <el-col :span="6">
     <div class="demo-color-box bg-info">Info<div class="value">#878D99</div></div>
   </el-col>
 </el-row>
 
-### Neutral Color
+### Color neutro
 
-Neutral colors are for text, background and border colors. You can use different neutral colors to represent the hierarchical structure.
+Los colores neutrales son para texto, fondos y bordes. Puedes usar diferentes colores neutrales para representar una estructura jeráquica.
 
 <el-row :gutter="12">
   <el-col :span="6">
     <div class="demo-color-box-group">
-      <div class="demo-color-box bg-text-primary">Primary Text<div class="value">#2D2F33</div></div>
-      <div class="demo-color-box bg-text-regular">Regular Text<div class="value">#5A5E66</div></div>
-      <div class="demo-color-box bg-text-secondary">Secondary Text<div class="value">#878D99</div></div>
-      <div class="demo-color-box bg-text-placeholder">Placeholder Text<div class="value">#B4BCCC</div></div>
+      <div class="demo-color-box bg-text-primary">Texto primario<div class="value">#2D2F33</div></div>
+      <div class="demo-color-box bg-text-regular">Texto regular<div class="value">#5A5E66</div></div>
+      <div class="demo-color-box bg-text-secondary">Texto secundario<div class="value">#878D99</div></div>
+      <div class="demo-color-box bg-text-placeholder">Texto de placeholder<div class="value">#B4BCCC</div></div>
     </div>
   </el-col>
   <el-col :span="6">
     <div class="demo-color-box-group">
-      <div class="demo-color-box bg-border-base">Base Border<div class="value">#D8DCE5</div></div>
-      <div class="demo-color-box bg-border-light">Light Border<div class="value">#DFE4ED</div></div>
-      <div class="demo-color-box bg-border-lighter">Lighter Border<div class="value">#E6EBF5</div></div>
-      <div class="demo-color-box bg-border-extra-light">Extra Light Border<div class="value">#EDF2FC</div></div>
+      <div class="demo-color-box bg-border-base">Borde base<div class="value">#D8DCE5</div></div>
+      <div class="demo-color-box bg-border-light">Borde ligero<div class="value">#DFE4ED</div></div>
+      <div class="demo-color-box bg-border-lighter">Borde claro<div class="value">#E6EBF5</div></div>
+      <div class="demo-color-box bg-border-extra-light">Borde extra claro<div class="value">#EDF2FC</div></div>
     </div>
   </el-col>
 </el-row>
