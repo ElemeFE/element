@@ -122,7 +122,7 @@ Los colores neutrales son para texto, fondos y bordes. Puedes usar diferentes co
       <div class="demo-color-box bg-border-base">Borde base<div class="value">#D8DCE5</div></div>
       <div class="demo-color-box bg-border-light">Borde ligero<div class="value">#DFE4ED</div></div>
       <div class="demo-color-box bg-border-lighter">Borde claro<div class="value">#E6EBF5</div></div>
-      <div class="demo-color-box bg-border-extra-light">Border extra claro<div class="value">#EDF2FC</div></div>
+      <div class="demo-color-box bg-border-extra-light">Borde extra claro<div class="value">#EDF2FC</div></div>
     </div>
   </el-col>
 </el-row>
