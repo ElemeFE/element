@@ -236,12 +236,12 @@
         this.suggestJump();
       }
       setTimeout(() => {
-        const notified = localStorage.getItem('RELEASE_NOTIFIED');
+        const notified = localStorage.getItem('ES_NOTIFIED');
         if (!notified) {
           const h = this.$createElement;
           const title = this.lang === 'zh-CN'
-            ? '2.0 正式发布'
-            : '2.0 available now';
+            ? '帮助我们完成西班牙语文档'
+            : 'Help us with Spanish docs';
           const messages = this.lang === 'zh-CN'
             ? ['点击', '这里', '查看详情']
             : ['Click ', 'here', ' to learn more'];
@@ -253,13 +253,13 @@
               h('a', {
                 attrs: {
                   target: '_blank',
-                  href: `https://github.com/ElemeFE/element/issues/${ this.lang === 'zh-CN' ? '7755' : '7756' }`
+                  href: 'https://github.com/ElemeFE/element/issues/8074'
                 }
               }, messages[1]),
               messages[2]
             ]),
             onClose() {
-              localStorage.setItem('RELEASE_NOTIFIED', 1);
+              localStorage.setItem('ES_NOTIFIED', 1);
             }
           });
         }
