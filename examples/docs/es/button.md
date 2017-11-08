@@ -22,11 +22,11 @@
 
 ## Button
 
-Commonly used button.
+Botones comúnmente usados.
 
-### Basic usage
+### Uso básico
 
-::: demo Use `type`, `plain` and `round` to define Button's style.
+::: demo Use `type`, `plain` y `round` para definir estilos a los botones.
 
 ```html
 <div>
@@ -58,11 +58,11 @@ Commonly used button.
 ```
 :::
 
-### Disabled Button
+### Botón deshabilitado
 
-The `disabled` attribute determines if the button is disabled.
+El atributo `disabled` determina su un botón esta deshabilitado.
 
-:::demo Use `disabled` attribute to determine whether a button is disabled. It accepts a `Boolean` value.
+:::demo Use el atributo `disabled` para determinar si un botón esta deshabilitado. Acepta un valor `Boolean`.
 
 ```html
 <div>
@@ -85,9 +85,9 @@ The `disabled` attribute determines if the button is disabled.
 ```
 :::
 
-### Text Button
+### Botón de texto
 
-Buttons without border and background.
+Botones sin borde ni fondo.
 
 :::demo
 ```html
@@ -96,11 +96,11 @@ Buttons without border and background.
 ```
 :::
 
-### Icon Button
+### Botón icono
 
-Use icons to add more meaning to Button. You can use icon alone to save some space, or use it with text.
+Use iconos para darle mayor significado a Button. Se puede usar simplemente un icono o un icono con texto.
 
-:::demo Use the `icon` attribute to add icon. You can find the icon list in Element icon component. Adding icons to the right side of the text is achievable with an `<i>` tag. Custom icons can be used as well.
+:::demo Use el atributo `icon` para agregar un icono. Puede encontrar el listado de iconos en el componente de iconos. Agregar iconos a la derecha del texto se puede conseguir con un tag `<i>`. También se pueden usar iconos custom.
 
 ```html
 <el-button type="primary" icon="el-icon-edit"></el-button>
@@ -111,11 +111,11 @@ Use icons to add more meaning to Button. You can use icon alone to save some spa
 ```
 :::
 
-### Button Group
+### Grupo de botones
 
-Displayed as a button group, can be used to group a series of similar operations.
+Mostrar un grupo de botones puede ser usado para mostrar un grupo de operaciones similares.
 
-:::demo Use tag `<el-button-group>` to group your buttons.
+:::demo Use el tag `<el-button-group>` para agrupar sus botones.
 
 ```html
 <el-button-group>
@@ -130,22 +130,22 @@ Displayed as a button group, can be used to group a series of similar operations
 ```
 :::
 
-### Loading Button
+### Botón de descarga 
 
-Click the button to load data, then the button displays a loading state.
+Cuando se hace clic en un botón para descargar datos, el botón muestra un estado de descarga.
 
-:::demo Set `loading` attribute to `true` to display loading state.
+:::demo Sete el atributo `loading` a `true` para mostrar el estado de descarga.
 
 ```html
 <el-button type="primary" :loading="true">Loading</el-button>
 ```
 :::
 
-### Sizes
+### Tamaños
 
-Besides default size, Button component provides three additional sizes for you to choose among different scenarios.
+Además del tamaño por defecto, el componente Button provee tres tamaños adicionales para utilizar en diferentes escenarios.
 
-:::demo Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
+:::demo Use el atributo `size` para setear tamaños adicionales con `medium`, `small` or `mini`.
 
 ```html
 <div>
@@ -163,15 +163,15 @@ Besides default size, Button component provides three additional sizes for you t
 ```
 :::
 
-### Attributes
-| Attribute      | Description    | Type      | Accepted values       | Default   |
+### Atributos
+| Atributo      | Descripción    | Tipo      | Valores aceptados      | Default   |
 |---------- |-------- |---------- |-------------  |-------- |
-| size     | button size   | string  |   medium / small / mini            |    —     |
-| type     | button type   | string    |   primary / success / warning / danger / info / text |     —    |
-| plain     | determine whether it's a plain button   | boolean    | — | false   |
-| round     | determine whether it's a round button   | boolean    | — | false   |
-| loading   | determine whether it's loading   | boolean    | — | false   |
-| disabled  | disable the button    | boolean   | —   | false   |
-| icon  | icon class name | string   |  —  |  —  |
-| autofocus  | same as native button's `autofocus` | boolean   |  —  |  false  |
-| native-type | same as native button's `type` | string | button / submit / reset | button |
+| size     | tamaño del botón   | string  |   medium / small / mini            |    —     |
+| type     | tipo de botón  | string    |   primary / success / warning / danger / info / text |     —    |
+| plain     | determinar si es o no un botón plano   | boolean    | — | false   |
+| round     | determinar si es o no un botón redondo   | boolean    | — | false   |
+| loading   | determinar si es o no un botón de descarga   | boolean    | — | false   |
+| disabled  | deshabilitar el botón   | boolean   | —   | false   |
+| icon  | nombre de la clase del icono | string   |  —  |  —  |
+| autofocus  | misma funcionalidad que la nativa `autofocus` | boolean   |  —  |  false  |
+| native-type | misma funcionalidad que la nativa `type` | string | button / submit / reset | button |

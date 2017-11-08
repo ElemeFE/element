@@ -19,13 +19,13 @@
 
 ## Alert
 
-Displays important alert messages.
+Mostrar mensajes de alertas importantes.
 
-### Basic usage
+### Uso básico
 
-Alert components are non-overlay elements in the page that does not disappear automatically.
+Los componentes de alertas no son elementos overlay de la página y no desaparecen automáticamente.
 
-::: demo Alert provides 4 types of themes defined by `type`, whose default value is `info`.
+::: demo Alert provee 4 tipos de temas definidos por `type`, el valor por defecto es `info`.
 
 ```html
 <template>
@@ -49,11 +49,12 @@ Alert components are non-overlay elements in the page that does not disappear au
 ```
 :::
 
-### Customizable close button
+### Customización del botón de cerrar 
 
-Customize the close button as texts or other symbols.
+Customizá el botón de cerrar como texto u otros símbolos.
 
-::: demo Alert allows you to configure if it's closable. The close button text and closing callbacks are also customizable. `closable` attribute decides if the component can be closed or not. It accepts `boolean`, and the default is `true`. You can set `close-text` attribute to replace the default cross symbol as the close button. Be careful that `close-text` must be a string. `close` event fires when the component is closed.
+::: demo Alert permite configurar si es posible cerrarla. El texto del botón de cerrado, así como los callbacks de cerrado son customizables. El atributo `closable` define si el componente puede cerrarse o no. Acepta un `boolean`, que por defecto es `true`. También puedes configurar el atributo `close-text` para reemplazar el símbolo de cerrado que se muestra por defecto. Ten cuidado que el atributo `close-text` debe ser un string. El evento `close` se dispara cuando el componente se cierra.
+
 
 ```html
 <template>
@@ -86,11 +87,12 @@ Customize the close button as texts or other symbols.
 ```
 :::
 
-### With icon
+### Usar iconos
 
-Displaying an icon improves readability.
+Mostrar un icono mejora la legibilidad.
 
-::: demo Setting the `show-icon` attribute displays an icon that corresponds with the current Alert type.
+::: demo Setear el atributo `show-icon` muestra un icono que corresponde al tipo de Alert que se está mostrando.
+
 
 ```html
 <template>
@@ -118,9 +120,9 @@ Displaying an icon improves readability.
 ```
 :::
 
-## Centered text
+### Texto centrado
 
-Use the `center` attribute to center the text.
+Para centrar el texto utilice el atributo `center`.
 
 ::: demo
 
@@ -154,11 +156,11 @@ Use the `center` attribute to center the text.
 ```
 :::
 
-### With description
+### Con descripción
 
-Description includes a message with more detailed information.
+Descripción incluye un mensaje con información más detallada.
 
-::: demo Besides the required `title` attribute, you can add a `description` attribute to help you describe the alert with more details. Description can only store text string, and it will word wrap automatically.
+::: demo Además del atributo requerido `title`, se puede agregar el atributo `description` para ayudar a describir la alerta con mas detalles. La descripción puede contener solamente un string y va a usar word wrap automáticamente.
 
 ```html
 <template>
@@ -171,9 +173,9 @@ Description includes a message with more detailed information.
 ```
 :::
 
-### With icon and description
+### Utilizando icono y descripción
 
-::: demo At last, this is an example with both icon and description.
+::: demo Finalmente este es un ejemplo utilizando icono y descripción.
 
 ```html
 <template>
@@ -205,19 +207,19 @@ Description includes a message with more detailed information.
 ```
 :::
 
-### Attributes
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
+### Atributos
+| Atributo      | Descrpción          | Tipo      | Valores válidos       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| **title** | title **REQUIRED** | string | — | — |
-| type | component type | string | success/warning/info/error | info |
-| description | descriptive text. Can also be passed with the default slot | string | — | — |
-| closable | if closable or not | boolean | — | true |
-| center | whether to center the text | boolean | — | false |
-| close-text | customized close button text | string | — | — |
-| show-icon | if a type icon is displayed | boolean | — | false |
+| **title** | Título **REQUIRED** | string | — | — |
+| type | tipo de componente | string | success/warning/info/error | info |
+| description | texto descriptivo. También puede ser pasado con el slot por defecto | string | — | — |
+| closable | si se puede cerrar o no | boolean | — | true |
+| center | si el texto debe estar centrado | boolean | — | false |
+| close-text | texto de cerrado customizado | string | — | — |
+| show-icon | si un icono del tipo de alerta se debe mostrar| boolean | — | false |
 
 
-### Events
-| Event Name | Description | Parameters |
+### Eventos
+| Nombre del evento | Descripción | Parámetros |
 |---------- |-------- |---------- |
-| close | fires when alert is closed | — |
+| close | Se dispara cuando la alerta se cierra | — |
