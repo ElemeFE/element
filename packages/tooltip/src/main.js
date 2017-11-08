@@ -114,8 +114,10 @@ export default {
 
   mounted() {
     this.referenceElm = this.$el;
-    this.$el.setAttribute('aria-describedby', this.tooltipId);
-    this.$el.setAttribute('tabindex', 0);
+    if (this.$el.nodeType === 1) {
+      this.$el.setAttribute('aria-describedby', this.tooltipId);
+      this.$el.setAttribute('tabindex', 0);
+    }
   },
   watch: {
     focusing(val) {
