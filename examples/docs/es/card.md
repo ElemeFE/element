@@ -47,13 +47,14 @@
   }
 </style>
 ## Card
-Integrate information in a card container.
+Muestra información dentro de un contenedor `card`
 
-### Basic usage
+### Uso Basico
 
-Card includes title, content and operations.
+`Card` incluye titulo, contenido y operaciones.
 
-:::demo Card is made up of `header` and `body`. `header` is optional, and its content distribution depends on a named slot.
+:::demo Card se compone de cabecera y cuerpo. La cabecera es opcional y la colocación de su  contenido depende de un slot con nombre.
+
 ```html
 <el-card class="box-card">
   <div slot="header" class="clearfix">
@@ -90,9 +91,9 @@ Card includes title, content and operations.
 ```
 :::
 
-### Simple card
+### Card simple
 
-The header part can be omitted.
+La parte de la cabecera puede omitirse.
 
 :::demo
 ```html
@@ -118,11 +119,12 @@ The header part can be omitted.
 ```
 :::
 
-### With images
+### Con imágenes
 
-Display richer content by adding some configs.
+Muestre un contenido más rico añadiendo algunas configuraciones.
 
-:::demo The `body-style` attribute defines CSS style of custom `body`. This example also uses `el-col` for layout.
+:::demo El atributo `body-style` define el estilo CSS del `body` personalizado. Este ejemplo también utiliza  `el-col` para el layout.
+
 ```html
 <el-row>
   <el-col :span="8" v-for="(o, index) in 2" :key="o" :offset="index > 0 ? 2 : 0">
@@ -183,8 +185,8 @@ export default {
 ```
 :::
 
-### Attributes
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
-|---------- |-------- |---------- |-------------  |-------- |
-| header | Title of the card. Also accepts a DOM passed by `slot#header` | string| — | — |
-| body-style | CSS style of body | object| — | { padding: '20px' } |
+### Atributos
+| Atributo   | Descripción                              | Tipo   | Valores aceptados | Por defecto         |
+| ---------- | ---------------------------------------- | ------ | ----------------- | ------------------- |
+| header     | Titulo del card. También acepta DOM pasado por `slot#header` | string | —                 | —                   |
+| body-style | Estilo CSS del cuerpo                    | object | —                 | { padding: '20px' } |
