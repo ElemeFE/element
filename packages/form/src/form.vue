@@ -42,8 +42,8 @@
     },
     watch: {
       rules() {
-        if(this.validateOnRuleChange) {
-          this.validate(()=>{});
+        if (this.validateOnRuleChange) {
+          this.validate(() => {});
         }
       }
     },
