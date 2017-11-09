@@ -2,7 +2,7 @@
 
 import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
 import scrollbarWidth from 'element-ui/src/utils/scrollbar-width';
-import * as util from './util';
+import { toObject } from 'element-ui/src/utils/util';
 import Bar from './bar';
 
 /* istanbul ignore next */
@@ -45,12 +45,15 @@ export default {
 
     if (gutter) {
       const gutterWith = `-${gutter}px`;
+      const gutterStyle = `margin-bottom: ${gutterWith}; margin-right: ${gutterWith};`;
 
       if (Array.isArray(this.wrapStyle)) {
-        style = util.toObject(this.wrapStyle);
+        style = toObject(this.wrapStyle);
         style.marginRight = style.marginBottom = gutterWith;
       } else if (typeof this.wrapStyle === 'string') {
-        style += `margin-bottom: ${gutterWith}; margin-right: ${gutterWith};`;
+        style += gutterStyle;
+      } else {
+        style = gutterStyle;
       }
     }
     const view = h(this.tag, {
@@ -63,7 +66,7 @@ export default {
         ref="wrap"
         style={ style }
         onScroll={ this.handleScroll }
-        class={ [this.wrapClass, 'el-scrollbar__wrap el-scrollbar__wrap--hidden-default'] }>
+        class={ [this.wrapClass, 'el-scrollbar__wrap', gutter ? '' : 'el-scrollbar__wrap--hidden-default'] }>
         { [view] }
       </div>
     );
@@ -104,6 +107,7 @@ export default {
     update() {
       let heightPercentage, widthPercentage;
       const wrap = this.wrap;
+      if (!wrap) return;
 
       heightPercentage = (wrap.clientHeight * 100 / wrap.scrollHeight);
       widthPercentage = (wrap.clientWidth * 100 / wrap.scrollWidth);
@@ -119,7 +123,7 @@ export default {
     !this.noresize && addResizeListener(this.$refs.resize, this.update);
   },
 
-  destroyed() {
+  beforeDestroy() {
     if (this.native) return;
     !this.noresize && removeResizeListener(this.$refs.resize, this.update);
   }

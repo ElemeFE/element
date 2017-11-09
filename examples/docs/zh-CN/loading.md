@@ -32,7 +32,18 @@
         this.fullscreenLoading = true;
         setTimeout(() => {
           this.fullscreenLoading = false;
-        }, 3000);
+        }, 2000);
+      },
+      openFullScreen2() {
+        const loading = this.$loading({
+          lock: true,
+          text: 'Loading',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+        });
+        setTimeout(() => {
+          loading.close();
+        }, 2000);
       }
     }
   }
@@ -49,7 +60,7 @@
 ```html
 <template>
   <el-table
-    v-loading.body="loading"
+    v-loading="loading"
     :data="tableData"
     style="width: 100%">
     <el-table-column
@@ -100,16 +111,18 @@
 ```
 :::
 
-### 加载文案
+### 自定义
 
-可自定义加载文案。
+可自定义加载文案、图标和背景色。
 
-:::demo 在绑定了`v-loading`指令的元素上添加`element-loading-text`属性，其值会被渲染为加载文案，并显示在加载图标的下方。
+:::demo 在绑定了`v-loading`指令的元素上添加`element-loading-text`属性，其值会被渲染为加载文案，并显示在加载图标的下方。类似地，`element-loading-spinner`和`element-loading-background`属性分别用来设定图标类名和背景色值。
 ```html
 <template>
   <el-table
     v-loading="loading2"
     element-loading-text="拼命加载中"
+    element-loading-spinner="el-icon-loading"
+    element-loading-background="rgba(0, 0, 0, 0.8)"
     :data="tableData"
     style="width: 100%">
     <el-table-column
@@ -158,7 +171,7 @@
 
 页面数据加载时显示。
 
-:::demo 当需要全屏遮罩时，可使用`fullscreen`修饰符（此时遮罩会插入至 body 上）。此时若需要锁定屏幕的滚动，可以使用`lock`修饰符。
+:::demo 当使用指令方式时，全屏遮罩需要添加`fullscreen`修饰符（遮罩会插入至 body 上），此时若需要锁定屏幕的滚动，可以使用`lock`修饰符；当使用服务方式时，遮罩默认即为全屏，无需额外设置。
 
 ```html
 <template>
@@ -166,7 +179,12 @@
     type="primary"
     @click="openFullScreen"
     v-loading.fullscreen.lock="fullscreenLoading">
-    显示整页加载，3 秒后消失
+    指令方式
+  </el-button>
+  <el-button
+    type="primary"
+    @click="openFullScreen2">
+    服务方式
   </el-button>
 </template>
 
@@ -182,7 +200,18 @@
         this.fullscreenLoading = true;
         setTimeout(() => {
           this.fullscreenLoading = false;
-        }, 3000);
+        }, 2000);
+      },
+      openFullScreen2() {
+        const loading = this.$loading({
+          lock: true,
+          text: 'Loading',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+        });
+        setTimeout(() => {
+          loading.close();
+        }, 2000);
       }
     }
   }
@@ -222,4 +251,6 @@ console.log(loadingInstance1 === loadingInstance2); // true
 | fullscreen | 同 `v-loading` 指令中的 `fullscreen` 修饰符 | boolean | — | true |
 | lock | 同 `v-loading` 指令中的 `lock` 修饰符 | boolean | — | false |
 | text | 显示在加载图标下方的加载文案 | string | — | — |
+| spinner | 自定义加载图标类名 | string | — | — |
+| background | 遮罩背景色 | string | — | — |
 | customClass | Loading 的自定义类名 | string | — | — |

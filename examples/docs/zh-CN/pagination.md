@@ -4,7 +4,7 @@
 
 ### 基础用法
 
-:::demo 设置`layout`，表示需要显示的内容，用逗号分隔，布局元素会依次显示。`prev`表示上一页，`next`为上一页，`pager`表示页码列表，除此以外还提供了`jumper`和`total`，`size`和特殊的布局符号`->`，`->`后的元素会靠右显示，`jumper`表示跳页元素，`total`表示显示页码总数，`size`用于设置每页显示的页码数量。
+:::demo 设置`layout`，表示需要显示的内容，用逗号分隔，布局元素会依次显示。`prev`表示上一页，`next`为下一页，`pager`表示页码列表，除此以外还提供了`jumper`和`total`，`size`和特殊的布局符号`->`，`->`后的元素会靠右显示，`jumper`表示跳页元素，`total`表示显示页码总数，`size`用于设置每页显示的页码数量。
 ```html
 <div class="block">
   <span class="demonstration">页数较少时的效果</span>
@@ -15,11 +15,10 @@
 </div>
 <div class="block">
   <span class="demonstration">大于 7 页时的效果</span>
-    <el-pagination
-      layout="prev, pager, next"
-      :total="1000">
-    </el-pagination>
-  </div>
+  <el-pagination
+    layout="prev, pager, next"
+    :total="1000">
+  </el-pagination>
 </div>
 ```
 :::
@@ -51,7 +50,7 @@
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="currentPage1"
+      :current-page.sync="currentPage1"
       :page-size="100"
       layout="total, prev, pager, next"
       :total="1000">
@@ -62,7 +61,7 @@
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="currentPage2"
+      :current-page.sync="currentPage2"
       :page-sizes="[100, 200, 300, 400]"
       :page-size="100"
       layout="sizes, prev, pager, next"
@@ -74,7 +73,7 @@
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="currentPage3"
+      :current-page.sync="currentPage3"
       :page-size="100"
       layout="prev, pager, next, jumper"
       :total="1000">
@@ -100,7 +99,6 @@
         console.log(`每页 ${val} 条`);
       },
       handleCurrentChange(val) {
-        this.currentPage = val;
         console.log(`当前页: ${val}`);
       }
     },
@@ -121,7 +119,6 @@
   export default {
     methods: {
       handleSizeChange(val) {
-        this.currentPage = val;
         console.log(`每页 ${val} 条`);
       },
       handleCurrentChange(val) {
@@ -156,7 +153,7 @@
     padding: 30px 0;
     text-align: center;
     border-right: solid 1px #EFF2F6;
-    float: left;
+    display: inline-block;
     width: 50%;
     box-sizing: border-box;
 
@@ -205,9 +202,12 @@
 | page-size | 每页显示条目个数 | Number | — | 10 |
 | total | 总条目数 | Number | — | — |
 | page-count | 总页数，total 和 page-count 设置任意一个就可以达到显示页码的功能；如果要支持 page-sizes 的更改，则需要使用 total 属性 | Number | — | — |
-| current-page | 当前页数 | Number | — | 1 |
+| current-page | 当前页数，支持 .sync 修饰符 | Number | — | 1 |
 | layout | 组件布局，子组件名用逗号分隔| String | `sizes`, `prev`, `pager`, `next`, `jumper`, `->`, `total`, `slot` | 'prev, pager, next, jumper, ->, total'  |
 | page-sizes | 每页显示个数选择器的选项设置 | Number[] | — |  [10, 20, 30, 40, 50, 100] |
+| popper-class | 每页显示个数选择器的下拉框类名 | string | — | — |
+| prev-text | 替代图标显示的上一页文字 | string | — | — |
+| next-text | 替代图标显示的下一页文字 | string | — | — |
 
 ### Events
 | 事件名称 | 说明 | 回调参数 |

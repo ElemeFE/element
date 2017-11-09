@@ -1,6 +1,18 @@
 {
   "zh-CN": [
     {
+      "name": "更新日志",
+      "path": "/changelog"
+    },
+    {
+      "name": "Element React",
+      "href": "https://eleme.github.io/element-react/"
+    },
+    {
+      "name": "Element Angular",
+      "href": "https://eleme.github.io/element-angular/"
+    },
+    {
       "name": "开发指南",
       "children": [
         {
@@ -18,15 +30,15 @@
         {
           "path": "/custom-theme",
           "name": "自定义主题"
+        },
+        {
+          "path": "/transition",
+          "name": "内置过渡动画"
         }
       ]
     },
     {
-      "name": "更新日志",
-      "path": "/changelog"
-    },
-    {
-      "name": "基础组件",
+      "name": "组件",
       "groups": [
         {
           "groupName": "Basic",
@@ -34,6 +46,10 @@
             {
               "path": "/layout",
               "title": "Layout 布局"
+            },
+            {
+              "path": "/container",
+              "title": "Container 布局容器"
             },
             {
               "path": "/color",
@@ -77,6 +93,10 @@
               "title": "Select 选择器"
             },
             {
+              "path": "/cascader",
+              "title": "Cascader 级联选择器"
+            },
+            {
               "path": "/switch",
               "title": "Switch 开关"
             },
@@ -103,6 +123,14 @@
             {
               "path": "/rate",
               "title": "Rate 评分"
+            },
+            {
+              "path": "/color-picker",
+              "title": "ColorPicker 颜色选择器"
+            },
+            {
+              "path": "/transfer",
+              "title": "Transfer 穿梭框"
             },
             {
               "path": "/form",
@@ -223,6 +251,18 @@
   ],
   "en-US": [
     {
+      "name": "Changelog",
+      "path": "/changelog"
+    },
+    {
+      "name": "Element React",
+      "href": "https://eleme.github.io/element-react/"
+    },
+    {
+      "name": "Element Angular",
+      "href": "https://eleme.github.io/element-angular/"
+    },
+    {
       "name": "Development",
       "children": [
         {
@@ -240,12 +280,12 @@
         {
           "path": "/custom-theme",
           "name": "Custom Theme"
+        },
+        {
+          "path": "/transition",
+          "name": "Built-in transition"
         }
       ]
-    },
-    {
-      "name": "Changelog",
-      "path": "/changelog"
     },
     {
       "name": "Components",
@@ -256,6 +296,10 @@
             {
               "path": "/layout",
               "title": "Layout"
+            },
+            {
+              "path": "/container",
+              "title": "Layout Container"
             },
             {
               "path": "/color",
@@ -299,6 +343,10 @@
               "title": "Select"
             },
             {
+              "path": "/cascader",
+              "title": "Cascader"
+            },
+            {
               "path": "/switch",
               "title": "Switch"
             },
@@ -325,6 +373,14 @@
             {
               "path": "/rate",
               "title": "Rate"
+            },
+            {
+              "path": "/color-picker",
+              "title": "ColorPicker"
+            },
+            {
+              "path": "/transfer",
+              "title": "Transfer"
             },
             {
               "path": "/form",

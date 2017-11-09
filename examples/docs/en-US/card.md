@@ -25,7 +25,7 @@
   }
 
   .item {
-    padding: 18px 0;
+    margin-bottom: 18px;
   }
 
   .button {
@@ -57,10 +57,10 @@ Card includes title, content and operations.
 ```html
 <el-card class="box-card">
   <div slot="header" class="clearfix">
-    <span style="line-height: 36px;">Card name</span>
-    <el-button style="float: right;" type="primary">Operation button</el-button>
+    <span>Card name</span>
+    <el-button style="float: right; padding: 3px 0" type="text">Operation button</el-button>
   </div>
-  <div v-for="o in 4" class="text item">
+  <div v-for="o in 4" :key="o" class="text item">
     {{'List item ' + o }}
   </div>
 </el-card>
@@ -71,16 +71,16 @@ Card includes title, content and operations.
   }
 
   .item {
-    padding: 18px 0;
+    margin-bottom: 18px;
   }
 
   .clearfix:before,
   .clearfix:after {
-      display: table;
-      content: "";
+    display: table;
+    content: "";
   }
   .clearfix:after {
-      clear: both
+    clear: both
   }
 
   .box-card {
@@ -97,7 +97,7 @@ The header part can be omitted.
 :::demo
 ```html
 <el-card class="box-card">
-  <div v-for="o in 4" class="text item">
+  <div v-for="o in 4" :key="o" class="text item">
     {{'List item ' + o }}
   </div>
 </el-card>
@@ -125,7 +125,7 @@ Display richer content by adding some configs.
 :::demo The `body-style` attribute defines CSS style of custom `body`. This example also uses `el-col` for layout.
 ```html
 <el-row>
-  <el-col :span="8" v-for="(o, index) in 2" :offset="index > 0 ? 2 : 0">
+  <el-col :span="8" v-for="(o, index) in 2" :key="o" :offset="index > 0 ? 2 : 0">
     <el-card :body-style="{ padding: '0px' }">
       <img src="~examples/assets/images/hamburger.png" class="image">
       <div style="padding: 14px;">

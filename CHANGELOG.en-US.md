@@ -1,256 +1,209 @@
 ## Changelog
 
-### 1.1.5
+### 2.0.3
 
-*2017-01-17*
+*2017-11-03*
 
-- Fixed Menu not activating corresponding menu item after router switching in router mode, #2451
-- Fixed `value` attribute of Collapse not supporting `Number` typed value, #2455
+- Fixed `editable` and `readonly` attributes for ranged DatePicker, #7922
+- Fixed style error of nested Tabs, #7941
+- Fixed style error of the last Step of vertical Steps, #7980
+- Fixed trigger timing of `current-change` event for Pagination, #7995
+- Fixed unregistered Tooltip in Menu, #7995
 
-### 1.1.4
+### 2.0.2
 
-*2017-01-16*
+*2017-10-31*
 
-- Fixed Input Number triggering `change` event when bound value is changed programmatically, #2329
-- Fixed Menu not responding to `$router` changing in router mode, #2391
-- Fixed Menu and Tree expanding state malfunctioning when clicked multiple times quickly, #2354
-- Fixed `change` event triggering mechanism of Input Number and Checkbox Group, now they do not fire when bound value is changed programmatically
-- Added `on-icon-click` attribute for Input, #2414
-- Added `disabled` attribute for Radio Group, #2411
-- Added `accordion` attribute for Tree, #2408
-- Added `show-message` attribute for Form, #2356
-- Fixed sort clicking area of Table, updated default sorting related APIs, #2309 #2405 (by @njleonzhang)
-- Fixed `firstDayOfWeek` not working in ranged typed of DatePicker, #2353
-- Fixed DatePicker displaying 1970 when initial value is null, #2388
-- Fixed `filteredValue` attribute for Table, #2348
-- Fixed scrollable Table's style with empty data, #2396
-- Added `beforeClose` attribute for MessageBox, #2204
-- Fixed filterable Select not showing dropdown when triangle icon is clicked, #2389
+- Now right-clicking the buttons of InputNumber won't change its value, #7817
+- `validate` method of Form can now wait for asynchronous validations before executing its callback, #7774 (by @Allenice)
+- Fixed range selection of DatePicker not working in Chromium 53-57 browsers, #7838
+- Fixed missing preview and delete icons of Upload when its `list-type` is picture-card, #7857
+- Added `sort-by` attribute for TableColumn, #7828 (by @wangfengming)
+- Fixed DatePicker sometimes displaying wrong year number when selecting the first week in week mode, #7860 (by @hh23485)
+- Fixed icon style error of vertical Steps, #7891
+- The hot area for node arrows in Tree is expanded, #7891
 
-Breaking change
-- The `default-sort-prop` and `default-sort-order` attributes added in 1.1.3 are now merged into an object-typed attribute
+### 2.0.1
 
-### 1.1.3
+*2017-10-28*
 
-*2017-01-09*
+- Fixed style error of RadioButton and CheckboxButton, #7793
+- Fixed TimePicker not respond to mouse scroll in some conditions, #7811
+- Fixed incomplete styles of some components when imported on demand, #7811
 
-- Fixed DatePicker not firing change event when cleared for the first time upon page load, #2167
-- Fixed DatePicker year calculating error when choosing the next year, #2152
-- Added `default-sort-prop` and `default-sort-order` attributes for Table, #2182 (by @njleonzhang)
-- Fixed filterable Select filtering other options with initial value, #2196
-- Added custom i18n processing, making Element compatible with i18n plugins other than `vue-i18n`, #2129
-- Added `resize` attribute for Input, #2263 (by @Kingwl)
-- Fixed Autocomplete not hiding dropdown when blurred, #2247
-- Fixed style issues with nested Tabs, #2212 (by @Kingwl)
-- Fixed Tabs' tab bar locating error when non-first item is initially activated, #2192
+### 2.0.0 Carbon
 
-### 1.1.2
+*2017-10-27*
 
-*2016-12-30*
+#### New features
+- General
+  - A new theme: `theme-chalk`
+  - Accessibility of the following components are improved: Alert, AutoComplete, Breadcrumb, Button, Checkbox, Collapse, Input, InputNumber, Menu, Progress, Radio, Rate, Slider, Switch, Upload
+  - Added TypeScript typings
+  - All existing icons are redesigned. Some new icons are added
+  - Added a series of breakpoint-based utility classes that hide elements when the viewport size meets certain conditions
+  - Added layout components: Container, Header, Aside, Main, Footer
+  - Now you can configure component sizes globally. When importing Element, you can add a global config object with a `size` prop to configure default sizes for all components.
+- Button
+  - Added `round` attribute. It's used for round-cornered Buttons #6643
+- TimeSelect
+  - Now can be navigated by `Up` and `Down`, and hitting `Enter` selects the time #6023
+- TimePicker
+  - Now can be navigated by arrow keys, and hitting `Enter` selects the time #6050
+  - Added `start-placeholder` and `end-placeholder`. They're placeholders for the two input boxes in range mode #7169
+  - Added `arrow-control` attribute to spin the time with arrows #7438
+- Tree
+  - Now child nodes don't render before the first expand #6257
+  - Added `check-descendants` attribute. It determines if child nodes are checked when checking their parent node in `lazy` mode #6235
+- Tag
+  - Added `size` attribute #7203
+- Datepicker
+  - Now `timeFormat` can format the TimePicker when type is set to `datetimerange` #6052
+  - Added `start-placeholder` and `end-placeholder`. They're placeholders for the two input boxes in range mode #7169
+  - Added `value-format` attribute to customize the format of the binding value, #7367
+  - Added `unlink-panels` attribute to unlink the two date panels when selecting a date range
+- MessageBox
+  - Added `closeOnHashChange` attribute #6043
+  - Added `center` attribute so that the content can be centered #7029
+  - Added `roundButton` attribute to display round Buttons #7029
+  - Added `dangerouslyUseHTMLString` attribute. When set to `true`, `message` will be parsed as HTML string<sup>*</sup> #6043
+  - Added `inputType` attribute to assign type for the inner input box, #7651
+- Dialog
+  - Added `width`、`fullscreen`、`append-to-body` attributes. Now Dialog can be nested
+  - Added `center` attribute so that the content can be centered #7042
+  - Added `focus-after-closed`、`focus-after-open` to improve accessibility #6511
+- ColorPicker
+  - Now you can type colors in the input box #6167
+  - Added `size` and `disabled` attributes #7026
+  - Added `popper-class` attribute #7351
+- Message
+  - Now color of the icons can be overridden by CSS #6207
+  - Added `dangerouslyUseHTMLString` attribute. When set to `true`, `message` will be parsed as HTML string<sup>*</sup> #6207
+  - Added `center` attribute so that the content can be centered #6875
+- Notification
+  - Added `position` attribute to configure where Notification pops up #6231
+  - Added `dangerouslyUseHTMLString` attribute. When set to `true`, `message` will be parsed as HTML string<sup>*</sup> #6231
+  - Added `showClose` attribute to hide the close button #6402
+- Rate
+  - Added `show-score` attribute to determine if current score is displayed #6295
+- Tabs
+  - Added `tab-position` attribute #6096
+- Radio
+  - Added `border` and `size` attributes #6690
+- Checkbox
+  - Added `border` and `size` attributes #6690
+- Alert
+  - Added `center` attribute so that the content can be centered #6876
+- Menu
+  - Added `background-color`, `text-color` and `active-text-color` attributes #7064
+  - Added `open` and `close` methods to open and close SubMenu programmatically, #7412
+- Form
+  - Added `inline-message` attribute to determine if the validation message is displayed in inline style #7032
+  - Added `status-icon` attribute to display a feedback icon when validated #7032
+  - Form and FormItem now have a `size` attribute. Inner components will inherit this size if not specified on themselves, #7428
+  - `validate` method will now return a promise if the callback is omitted, #7405
+  - Added `clearValidate` method for clearing validating results for all form items, #7623
+- Input
+  - Added `suffix` and `prefix` named slots, `suffixIcon` and `prefixIcon` attributes to add contents inside the input box #7032
+- Breadcrumb
+  - Added `separator-class` attribute to support icons as item separators #7203
+- Steps
+  - Added `simple` attribute to activate simple-styled Steps #7274
+- Pagination
+  - Added `prev-text` and `next-text` attributes to customize texts of previous page and next page #7005
+- Loading
+  - Now you can customize spinner icon and background color with `spinner` and `background` prop, #7390
+- Autocomplete
+  - Added `debounce` attribute, #7413
+- Upload
+  - Added `limit` and `on-exceed` attributes to limit the amount of files, #7405
+- DateTimePicker
+  - Added `time-arrow-control` attribute to activate `arrow-control` of the nesting TimePicker, #7438
+- Layout
+  - Added a new breakpoint `xl` for viewport wider than 1920px
+- Table
+  - Added `span-method` attribute for merging cells
+  - Added `clearSort` method to clear sorting programmatically
+  - Added `clearFilter` method to clear filter programmatically
+  - For expandable rows, when a row is expanded, a `.expanded` class will be added to its class list, so that you can customize its style
+  - Added `size` attribute
+  - Added `toggleRowExpansion` method to expand or collapse expandable rows programmatically
+  - Added `cell-class-name` attribute to assign class name for cells
+  - Added `cell-style` attribute to style cells
+  - Added `header-row-class-name` attribute to assign class name for header rows
+  - Added `header-row-style` attribute to style header rows
+  - Added `header-cell-class-name` attribute to assign class name for header cells
+  - Added `header-cell-style` attribute to style header cells
+  - TableColumn's `prop` attribute now accepts `object[key]` notations
+  - Added `index` attribute for TableColumn to customize row indices
+- Select
+  - Added `reserve-keyword` attribute for reserving current search keyword after selecting an option
 
-- Fixed `sortable` and `fixed` attribute of Table not working in Vue 2.1.7+
-- Fixed Input Number not resetting on blur when input with illegal values, #2098
-- Removed `title` scoped slot of Collapse, and added `title` named slot, #2100
-- Fixed range selection in TimePicker not working issue
-- Fixed Tabs' active tab switching when a non-active tab is removed, #2106
-- Fixed console error reporting when navigating Select with arrow keys, #2120
-- Fixed incorrect validation timing of filterable Select in Form, #2120
+#### Bug fixes
+- DatePicker
+  - Fixed `v-model` returning the second day of the selected week in week mode #6038
+  - Fixed the first input being cleared in `daterange` type #6021
+- DateTimePicker
+  - Fixed DateTimePicker and TimePicker affecting each other when picked #6090
+  - Fixed hour and second can be beyond limit when selecting time #6076
+- TimePicker
+  - Fixed `v-model` not update correctly when blurred #6023
+- Dialog
+  - Fixed texts having blurry edges when opening and closing nesting dropdowns #6088
+- Select
+  - Improved performance. Now Vue dev-tool won't crash when a large number of Selects are destroyed #6151
+- Table
+  - Fixed a bug that Table remains hiding when its parent element appears from `display: none`
+  - Fixed Table expanding its width when its parent element has `display: flex`
+  - Fixed a bug that fixed columns of a Table with `append` slot would disappear when data is dynamically fetched
+  - Fixed `expand-row-keys` attribute not working with initial value
+  - Fixed filter failing when `data` updates
+  - Fixed a calculation error of fixed columns layout with grouped headers
+  - Fixed a dynamic `max-height` bug
+  - Fixed some style calculation errors
 
-### 1.1.1
+#### Breaking changes
+- General
+  - Removed `theme-default`
+  - Compatible with Vue 2.5.2+ and IE 10+
+  - `change` event of form components and `current-change` event of Pagination now only trigger on user interaction
+  - `size` attribute of Button and form components now accept `medium`, `small` and `mini`
+  - To facilitate the use of third-party icons, `icon` attribute of Button and Steps, `prefix-icon` and `suffix-icon` attributes of Input now require a full class name
+- Dialog
+  - Removed `size` attribute. Now the size of Dialog can be configured by `width` and `fullscreen`
+  - Now the visibility of Dialog cannot be controlled by `v-model`
+- Rate
+  - `text-template` is renamed to `score-template`
+- Dropdown
+  - `menu-align` is renamed to `placement`. Now it supports more positions
+- Transfer
+  - `footer-format` is renamed to `format`
+- Switch
+  - Attributes starting with `on-*` will be parsed to events in JSX, making all `on-*` attributes of Switch not
+  able to work in JSX. So `on-*` attributes are renamed to `active-*`, and accordingly `off-*` attributes are renamed to `inactive-*`. This change affects the following attributes: `on-icon-class`, `off-icon-class`, `on-text`, `off-text`, `on-color`, `off-color`, `on-value`, `off-value`
+  - `active-text` and `inactive-text` attributes now don't have default values
+- Tag
+  - `type` attribute now accepts `success`, `info`, `warning` and `danger`
+- Menu
+  - Removed `theme` attribute. The color of Menu can be configured using `background-color`, `text-color` and `active-text-color`
+- Input
+  - Removed `icon` attribute. Now the suffix icon can be configured using `suffix-icon` attribute or `suffix` named slot
+  - Removed `on-icon-click` attribute and `click` event. Now to add click handler on icons, please use named slots
+  - `change` event now behaves like the native input element, which triggers only on blur or pressing enter. If you need to respond to user input in real time, you can use `input` event.
+- Autocomplete
+  - Removed `custom-item` attribute. Now the template of input suggestions can be customized using `scoped slot`
+  - Removed `props` attribute. Now you can use `value-key` attribute to designate key name of the input suggestion object for display
+- Steps
+  - Removed `center` attribute
+  - Now the Steps will fill its parent container by default
+- DatePicker
+  - The params of DatePicker's `change` event is now the binding value itself. Its format is controlled by `value-format`
+- Table
+  - Removed support for customizing column template using `inline-template`
+  - `sort-method` now aligns with `Array.sort`. It should return a number instead of a boolean
+  - `append` slot is moved outside the `tbody` element to avoid multiple rendering
+  - `expand` event is renamed to `expand-change`
+  - The params of `row-class-name` and `row-style` method is now an object
 
-*2016-12-29*
-
-- Fixed compatibility issue with latest Vue due to compilation
-
-### 1.1.0 Helium
-
-*2016-12-29*
-
-New features:
-- Two brand new components: Carousel and Collapse
-- SSR supported
-- Scrollbars' style inside components is upgraded
-- Table now supports custom templates via [scoped slots](http://vuejs.org/v2/guide/components.html#Scoped-Slots); the good old `inline-template` is still compatible, but it's no longer recommended and is likely to be removed in the future
-- Table now supports expandable rows
-- DatePicker now supports specifying the first day of week
-- TimeSelect now supports `maxTime`
-- Autocomplete now supports `popper-class`
-- To customize template of Tab-Pane, now you can use the `slot` named `label`
-
-Fixes:
-- `change` event of DatePicker incorrectly triggering multiple times, #2070
-- Width shaking of tab-pane while initializing, #1883
-
-Breaking changes:
-- Only compatible with Vue 2.1.6 and beyond
-- Parameters of Form validateField() methods are updated
-- Alert's render-content attribute is removed, and now you can pass your custom template via default slot
-- The box models of Input and Select are updated from `block` to `inline-block`
-- The box model of Tabs is updated from `inline-block` to `block`, and Tab-Pane's `label-content` attribute is removed
-- The dropdown of Autocomplete now inserts directly to `<body>`, not `<el-autocomplete>` any more
-
-### 1.0.9
-
-*2016-12-27*
-
-- Fixed DatePicker incorrectly triggering input event, #1834
-- Fixed Tree reporting `event is undefined` error in Firefox, #1945
-- Added `change` event for DatePicker, whose parameter is the formatted value, #1841
-- Added `header-align` attribute for Table, #1424
-- Fixed single select Table's highlight style not removing when data is removed, #1890
-- Fixed filterable Select lagging issue with more options, #1933
-- Fixed multiple disabled Select not disabling removing selected options issue, #2001
-- Fixed Col style not working in `xs`, #2011
-- Added `value` attribute for Tab, #2008
-- Fixed InputNumber `change` event incorrectly firing multiple times in some conditions, #1999
-- Added `clearable` attribute for DatePicker, #1994
-- Fixed Form always passing validation in async mode, #1936
-
-### 1.0.8
-
-*2016-12-20*
-
-- Fixed nested Popup from event bubbling, #1677
-- Fixed the issue that datetimerange-typed DatePicker can not select time, #1758
-- Fixed `change` event not firing correctly of Slider, #1809
-- Fixed Loading's spinner splitting while animating in some conditions, #1786
-- Added `loading-text`, `no-data-text`, `no-match-text` properties and `visible-change` event for Select, #1849
-- Added `popper-class` property for DatePicker, Select and Tooltip, #1806
-- Added `expand-on-click-node`, `current-node-key` properties and `current-change` event for Tree, #1805 #1807
-- Added the third parameter `column` for Table's `row-click` event, #1808
-- Fixed an error when pages with Checkbox switching routes due to `computed` property being cached, #1860
-- Added the tab instance as a parameter for TabPanel's `label-content` render function, #1857
-- Added infinite submenus support for NavMenu in vertical mode, #1851
-- Updated Checkbox so that it works without a binding value, #1818
-- Added `onProgress` hook for Progress, #1782
-- Fixed Tab not updating active bar with dynamic label, #1761
-- Added `filter-change` event for Table, and `column-key` property for TableColumn, #1876
-- Added `hide-on-click` property for Dropdown, #1879
-
-### 1.0.7
-
-*2016-12-14*
-
-- Fixed DatePicker dropdown appears when hovering on the clear button
-- Fixed DatePicker displays a wrong date when its initial value is null
-- Added `row-contextmenu` event and `max-height` attribute for Table, #1663 #1674
-- Added `customClass` attribute for MessageBox, #1707
-- Added `iconClass` and `customClass` attributes for Message and Notification, #1671
-- Added empty slot for Table, #1737
-- Added old value as a second parameter in change event for InputNumber
-
-### 1.0.6
-
-*2016-12-09*
-
-- Added `disabled` attribute for Tabs, #1620
-- Added `size` attribute for DatePicker input, #1440
-- Fixed `datetimerange` DatePicker's panel not showing correct date if initial value is present, #1129
-- Fixed DatePicker display error when switching year, #1607
-- Fixed DatePicker not triggering clickoutside when its icon is clicked, #1604
-- Fixed TimePicker not refreshing value after clicking the clear button, #1583
-- Fixed remote filterable Select display error when its value is an object, #1593
-- Fixed Select's clear button still working bug when it's `disabled`, #1619
-- Fixed Switch's background color error when its `disabled` attribute is dynamically changed, #1627
-- Fixed some style bugs of Table
-
-### 1.0.5
-
-*2016-12-06*
-
-- Fixed Select with async options and binding value displaying value instead of label, #1537
-- Fixed Select reports an error when initial binding value is an empty object, #1533
-- Fixed remote filtering Select not showing dropdown in some conditions, #1531
-- Fixed Slider sometimes drifting a small distance after releasing dragging, #1546
-- Fixed Steps style in IE9, #1543
-- Added Upload generating URL for all file types, #1530
-- Fixed TimeSelect style, removed flexbox, #1335
-
-### 1.0.4
-
-*2016-12-02*
-
-- Added `controls` attribute for Input Number, #1473
-- Fixed Checkbox Group and Radio Group async issue, #1511 #1514
-- Added `offset` attribute for Notification, #1419
-- Fixed Slider's value not accurate issue when dragging rapidly, #1458
-- Fixed Slider incorrectly showing multiple decimal digits issue, #1450
-- Fixed Select's binding value and displayed value not in sync in some conditions
-- Added `multiple-limit` and `allow-create` attributes for Select
-- Fixed Tree leaf nodes' triangle icon not disappear when expanded, #1438
-- Fixed Tree's view not updating issue after fetching child nodes' data, #1439
-- Fixed some Table's style issues in windows system, #1464 #1507
-- Fixed Table's first column's label not showing issue when grouping table head is used with fixed columns, #1451
-- Added `row-dblclick` event for Table, #1362
-
-### 1.0.3
-
-*2016-11-28*
-
-- Fixed `currentPage` of Pagination not working in some cases, #1336
-- Fixed `month` and `disabledDate` DatePicker's view not refreshing issue when switching year, #1158
-- Fixed `readonly` DatePicker clear button not disabled issue, #1238
-- Fixed Slider not working when binding value is `NaN` or `step` is smaller than 1, #1239 #1282
-- Added multi-header for Table, #1312
-- Added `rowStyle` for Table, #1348
-- Fixed some attributes of TableColumn can not dynamically assigned issue, #1314
-- Added `filter-node-method` attribute and `filter` method for Tree, #1257
-- Added `getCheckedKeys` and `setCheckedKeys` methods for Tree, #1254
-- Added deep nesting support for Checkbox/Radio inside Checkbox/Radio Group, #1152
-- Fixed Popper not triggering destroy issue when keep-alive, #1359
-- Added object deep validation for Form, #1363
-- Added `append` and `prepend` for Autocomplete, #1369
-- Added dynamic `pageSizes` support for Pagination, #1372
-- Added custom style API for checked buttons in Radio Button, #1380
-- Added assigning title via slot for Menu Group, #1382
-- Fixed DatePicker year switching bug, #1385
-- Added uploaded file list API for Upload, #1393
-- Added multi-type support for `label` attribute of Checkbox, #1400
-- Added `setChecked` method for Tree, #1422
-
-### 1.0.2
-
-*2016-11-18*
-
-- Added `context` for Table to specify which context to access inside of table columns, #1161
-- Added multiple languages
-- Fixed language's dynamic switching issue, #1160
-- Added `render-content` for Alert, #568
-- Added styles for focused Button, #982
-- Fixed `change` triggering timing in Switch, #1162
-- Fixed TimeSelect being disabled when start time is set to `00:00`, #676
-- Added `show-header` attribute and `header-click` method for Table, #1195
-- Improved `height` attribute for Table when set to a string, #1195
-- Fixed `selection-change` of Table not triggering in some cases, #1198
-- Fixed Table's fixed columns not disappear when `fixed` attribute is dynamically changed, #1182
-
-### 1.0.1
-
-*2016-11-16*
-
-- Fixed Pagination improperly triggering multiple `current-change` events
-- Fixed Switch style when nested in a Form, #967
-- Fixed Loading locks scroll of `body` in specific scenarios, #968
-- `span` of Col is no longer a required attribute, and its default value is `24` if omitted
-- Added `disabled` and `editable` attribute for DatePicker, #976
-- Fixed DatePicker readonly with native behavior, #976
-- Added `close` method for Message and Notification to manually close an instance
-- Added clear value feature for DatePicker, #759
-- Fixed Form reports an error when resetting a Date typed field, #937
-- Fixed Table render error using vue-loader 9.9.0
-- Added `align-center` attribute for Step, #994
-- Fixed Upload missing Progress component, #1013
-- Layout now supports responsive layout
-- Added `show-close` for Dialog
-- Fixed an error when `vue-i18n` is imported but not configured, #973
-- Fixed DatePicker not refresh view with an initial value, #1050
-- Fixed DiatePicker not refresh year when switched in month picker, #1070
-- Added $loading service
-- Added `manual` trigger in Popover
-- Added props: `nodeKey`, `emptyText`, `checkStrictly`, `defaultExpandAll`, `autoExpandParent`, `defaultCheckedKeys`, `defaultExpandedKeys` and method: `setCheckedNodes` for Tree
-
-### 1.0.0
-
-*2016-11-9*
-
-Element 1.0.0 released.
+##
+<i><sup>*</sup> Dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily lead to [XSS attacks](https://en.wikipedia.org/wiki/Cross-site_scripting). So when `dangerouslyUseHTMLString` is on, please make sure the content of `message` is trusted, and **never** assign `message` to user-provided content.</i>

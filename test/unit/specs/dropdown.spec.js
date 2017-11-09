@@ -34,12 +34,12 @@ describe('Dropdown', () => {
       triggerEvent(triggerElm, 'mouseleave');
       setTimeout(_ => {
         expect(dropdown.visible).to.not.true;
-        destroyVM(vm);
         done();
       }, 300);
     }, 400);
   });
   it('menu click', done => {
+    const myCommandObject = { name: 'CommandC' };
     vm = createVue({
       template: `
         <el-dropdown ref="dropdown">
@@ -49,12 +49,17 @@ describe('Dropdown', () => {
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item command="a">黄金糕</el-dropdown-item>
             <el-dropdown-item command="b">狮子头</el-dropdown-item>
-            <el-dropdown-item ref="commandC" command="c">螺蛳粉</el-dropdown-item>
+            <el-dropdown-item ref="commandC" :command="myCommandObject">螺蛳粉</el-dropdown-item>
             <el-dropdown-item command="d">双皮奶</el-dropdown-item>
             <el-dropdown-item command="e">蚵仔煎</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-      `
+      `,
+      data() {
+        return {
+          myCommandObject
+        };
+      }
     }, true);
     let dropdown = vm.$refs.dropdown;
     let dropdownElm = dropdown.$el;
@@ -68,8 +73,7 @@ describe('Dropdown', () => {
       vm.$refs.commandC.$el.click();
       setTimeout(_ => {
         expect(dropdown.visible).to.not.true;
-        expect(callback.calledWith('c')).to.be.true;
-        destroyVM(vm);
+        expect(callback.calledWith(myCommandObject)).to.be.true;
         done();
       }, 300);
     }, 300);
@@ -102,7 +106,6 @@ describe('Dropdown', () => {
       triggerElm.click();
       dropdown.$nextTick(_ => {
         expect(dropdown.visible).to.be.true;
-        destroyVM(vm);
         done();
       });
     });
@@ -142,7 +145,6 @@ describe('Dropdown', () => {
       triggerEvent(triggerElm, 'mouseleave');
       setTimeout(_ => {
         expect(dropdown.visible).to.not.true;
-        destroyVM(vm);
         done();
       }, 300);
     }, 300);

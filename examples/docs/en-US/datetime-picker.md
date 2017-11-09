@@ -72,9 +72,37 @@
   };
 </script>
 
+<style>
+.demo-block.demo-datetime-picker .source {
+    padding: 0;
+    display: flex;
+  }
+
+  .demo-datetime-picker .block {
+    padding: 30px 0;
+    text-align: center;
+    border-right: solid 1px #EFF2F6;
+    flex: 1;
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  .demo-datetime-picker .demonstration {
+    display: block;
+    color: #8492a6;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+</style>
+
 ## DateTimePicker
 
 Select date and time in one picker.
+
+:::tip
+DateTimePicker is derived from DatePicker and TimePicker. For a more detailed explanation on `pickerOptions` and other attributes, you can refer to DatePicker and TimePicker.
+:::
 
 ###  Date and time
 
@@ -147,7 +175,9 @@ Select date and time in one picker.
     <el-date-picker
       v-model="value3"
       type="datetimerange"
-      placeholder="Select time range">
+      range-separator="To"
+      start-placeholder="Start date"
+      end-placeholder="End date">
     </el-date-picker>
   </div>
   <div class="block">
@@ -156,7 +186,9 @@ Select date and time in one picker.
       v-model="value4"
       type="datetimerange"
       :picker-options="pickerOptions2"
-      placeholder="Select time range"
+      range-separator="To"
+      start-placeholder="Start date"
+      end-placeholder="End date"
       align="right">
     </el-date-picker>
   </div>
@@ -210,18 +242,27 @@ Select date and time in one picker.
 | editable | whether the input is editable | boolean | — | true |
 | clearable | Whether to show clear button | boolean | — | true |
 |size | size of Input | string | large/small/mini | — |
-| placeholder | placeholder | string | — | — |
+| placeholder | placeholder in non-range mode | string | — | — |
+| start-placeholder | placeholder for the start date in range mode | string | — | — |
+| end-placeholder | placeholder for the end date in range mode | string | — | — |
+| time-arrow-control | whether to pick time using arrow buttons | boolean | — | false |
 | type | type of the picker | string | year/month/date/datetime/ week/datetimerange/daterange | date |
-| format | format of the picker | string | year `yyyy` month `MM` day `dd`, hour `HH`, minute `mm`, second `ss` | yyyy-MM-dd |
+| format | format of the displayed value in the input box | string | year `yyyy` month `MM` day `dd`, hour `HH`, minute `mm`, second `ss` | yyyy-MM-dd |
 | align | alignment | left/center/right | left |
 | popper-class | custom class name for DateTimePicker's dropdown | string | — | — |
 | picker-options | additional options, check the table below | object | — | {} |
+| range-separator | range separator | string | - | '-' |
+| default-value | optional, default date of the calendar | Date | anything accepted by `new Date()` | — |
+| value-format | optional, format of binding value. If not specified, the binding value will be a Date object | string | year `yyyy`, month `MM`, day `dd`, hour `HH`, minute `mm`, second `ss` | — |
+| name | same as `name` in native input | string | — | — |
+| unlink-panels | unllink two date-panels in range-picker | boolean | — | false |
 
 ### Picker Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | shortcuts | a { text, onClick } object array to set shortcut options, check the table below | object[] | — | — |
 | disabledDate | a function determining if a date is disabled with that date as its parameter. Should return a Boolean | function | — | — |
+| firstDayOfWeek | first day of week | Number | 1 to 7 | 7 |
 
 ### shortcuts
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
@@ -229,9 +270,14 @@ Select date and time in one picker.
 | text | title of the shortcut | string | — | — |
 | onClick | callback function, triggers when the shortcut is clicked, with the `vm` as its parameter. You can change the picker value by emitting the `pick` event. Example: `vm.$emit('pick', new Date())`| function | — | — |
 
-
 ### Events
 | Event Name | Description | Parameters |
 |---------|--------|---------|
-| change | triggers when input value changes | formatted value |
+| change | triggers when user confirms the value | component's binding value |
+| blur | triggers when Input blurs | (event: Event) |
+| focus | triggers when Input focuses | (event: Event) |
 
+### Methods
+| Method | Description | Parameters |
+|------|--------|-------|
+| focus | focus the Input component | — |

@@ -1,5 +1,8 @@
+import { addClass, removeClass } from 'element-ui/src/utils/dom';
+
 class Transition {
   beforeEnter(el) {
+    addClass(el, 'collapse-transition');
     if (!el.dataset) el.dataset = {};
 
     el.dataset.oldPaddingTop = el.style.paddingTop;
@@ -26,6 +29,8 @@ class Transition {
   }
 
   afterEnter(el) {
+    // for safari: remove class then reset height is necessary
+    removeClass(el, 'collapse-transition');
     el.style.height = '';
     el.style.overflow = el.dataset.oldOverflow;
   }
@@ -42,6 +47,8 @@ class Transition {
 
   leave(el) {
     if (el.scrollHeight !== 0) {
+      // for safari: add class after set height, or it will jump to zero height suddenly, weired
+      addClass(el, 'collapse-transition');
       el.style.height = 0;
       el.style.paddingTop = 0;
       el.style.paddingBottom = 0;
@@ -49,6 +56,7 @@ class Transition {
   }
 
   afterLeave(el) {
+    removeClass(el, 'collapse-transition');
     el.style.height = '';
     el.style.overflow = el.dataset.oldOverflow;
     el.style.paddingTop = el.dataset.oldPaddingTop;
@@ -57,16 +65,12 @@ class Transition {
 }
 
 export default {
+  name: 'ElCollapseTransition',
   functional: true,
   render(h, { children }) {
     const data = {
       on: new Transition()
     };
-
-    children = children.map(item => {
-      item.data.class = ['collapse-transition'];
-      return item;
-    });
 
     return h('transition', data, children);
   }

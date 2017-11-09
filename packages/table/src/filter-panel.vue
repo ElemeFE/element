@@ -5,6 +5,7 @@
         <el-checkbox-group class="el-table-filter__checkbox-group" v-model="filteredValue">
           <el-checkbox
             v-for="filter in filters"
+            :key="filter.value"
             :label="filter.value">{{ filter.text }}</el-checkbox>
         </el-checkbox-group>
       </div>
@@ -18,11 +19,12 @@
     <div class="el-table-filter" v-else v-show="showPopper">
       <ul class="el-table-filter__list">
         <li class="el-table-filter__list-item"
-            :class="{ 'is-active': !filterValue }"
+            :class="{ 'is-active': filterValue === undefined || filterValue === null }"
             @click="handleSelect(null)">{{ t('el.table.clearFilter') }}</li>
         <li class="el-table-filter__list-item"
             v-for="filter in filters"
             :label="filter.value"
+            :key="filter.value"
             :class="{ 'is-active': isActive(filter) }"
             @click="handleSelect(filter.value)" >{{ filter.text }}</li>
       </ul>
@@ -32,6 +34,7 @@
 
 <script type="text/babel">
   import Popper from 'element-ui/src/utils/vue-popper';
+  import { PopupManager } from 'element-ui/src/utils/popup';
   import Locale from 'element-ui/src/mixins/locale';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
   import Dropdown from './dropdown';
@@ -175,6 +178,13 @@
           Dropdown.close(this);
         }
       });
+    },
+    watch: {
+      showPopper(val) {
+        if (val === true && parseInt(this.popperJS._popper.style.zIndex, 10) < PopupManager.zIndex) {
+          this.popperJS._popper.style.zIndex = PopupManager.nextZIndex();
+        }
+      }
     }
   };
 </script>

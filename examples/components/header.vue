@@ -2,9 +2,10 @@
   .headerWrapper {
     height: 80px;
   }
+
   .header {
     height: 80px;
-    background-color: rgba(32, 160, 255, 1);
+    background-color: #fff;
     color: #fff;
     top: 0;
     left: 0;
@@ -18,6 +19,10 @@
       box-sizing: border-box;
     }
 
+    .nav-lang-spe {
+      color: #888;
+    }
+
     h1 {
       margin: 0;
       float: left;
@@ -25,7 +30,7 @@
       font-weight: normal;
 
       a {
-        color: #fff;
+        color: #333;
         text-decoration: none;
         display: block;
       }
@@ -43,6 +48,7 @@
         border-radius: 3px;
       }
     }
+
     .nav {
       float: right;
       height: 100%;
@@ -52,24 +58,48 @@
       padding: 0;
       margin: 0;
     }
+
+    .nav-gap {
+      position: relative;
+      width: 1px;
+      height: 80px;
+      padding: 0 20px;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: calc(50% - 8px);
+        width: 1px;
+        height: 16px;
+        background: #ebebeb;
+      }
+    }
+
     .nav-logo,
     .nav-logo-small {
       vertical-align: sub;
     }
+
     .nav-logo-small {
       display: none;
     }
+
     .nav-item {
       margin: 0;
       float: left;
       list-style: none;
       position: relative;
       cursor: pointer;
-      margin-left: 20px;
     
+      &.nav-algolia-search {
+        cursor: default;
+      }
+    
+      &.lang-item,
       &:last-child {
         cursor: default;
         margin-left: 34px;
+
         span {
           opacity: .8;
         }
@@ -78,48 +108,88 @@
           cursor: pointer;
           display: inline-block;
           height: 100%;
+          color: #888;
+
           &:hover {
-            opacity: 1;
+            color: #409EFF;
           }
           &.active {
-            font-weight: 700;
-            opacity: 1;
-          }
+             font-weight: bold;
+             color: #409EFF;
+           }
         }
       }
 
       a {
         text-decoration: none;
-        color: #fff;
+        color: #888;
         display: block;
-        padding: 0 20px;
-        opacity: .8;
+        padding: 0 22px;
+
         &.active,
         &:hover {
-          opacity: 1;
-        }
-         
-        &.active {
-          font-weight: 700;
+          color: #333;
         }
 
-        &.active::before {
+        &.active::after {
           content: '';
-          display: block;
+          display: inline-block;
           position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 100%;
+          bottom: 15px;
+          left: calc(50% - 7px);
+          width: 14px;
           height: 4px;
-          background:#99d2fc;
+          background: #409EFF;
         }
       }
     }
   }
-  .header-home {
-    position: fixed;
-    top: 0;
-    background-color: rgba(32, 160, 255, 0);
+
+  .nav-dropdown {
+    margin-bottom: 6px;
+    padding-left: 18px;
+    width: 100%;
+
+    span {
+      display: block;
+      width: 100%;
+      font-size: 16px;
+      color: #888;
+      line-height: 40px;
+      transition: .2s;
+      padding-bottom: 6px;
+      user-select: none;
+
+      &:hover {
+         cursor: pointer;
+       }
+    }
+
+    i {
+      transition: .2s;
+      font-size: 12px;
+      color: #979797;
+      transform: translateY(-2px);
+    }
+
+    @when active {
+      span, i {
+        color: #409EFF;
+      }
+      i {
+        transform: rotateZ(180deg) translateY(3px);
+      }
+    }
+
+    &:hover {
+      span, i {
+        color: #409EFF;
+      }
+    }
+  }
+  
+  .nav-dropdown-list {
+    width: auto;
   }
 
   @media (max-width: 850px) {
@@ -133,6 +203,7 @@
       .nav-item {
         margin-left: 6px;
 
+        &.lang-item,
         &:last-child {
           margin-left: 10px;
         }
@@ -141,8 +212,12 @@
           padding: 0 5px;
         }
       }
+      .nav-theme-switch, .nav-algolia-search {
+        display: none;
+      }
     }
   }
+
   @media (max-width: 700px) {
     .header {
       .container {
@@ -153,29 +228,39 @@
         font-size: 12px;
         vertical-align: top;
       }
+      .nav-dropdown {
+        padding: 0;
+      }
+      .nav-gap {
+        padding: 0 8px;
+      }
     }
   }
 </style>
 <template>
   <div class="headerWrapper">
-    <header class="header"
-    ref="header"
-    :style="headerStyle"
-    :class="{
-      'header-home': isHome
-    }">
+    <header class="header" ref="header">
       <div class="container">
         <h1><router-link :to="`/${ lang }`">
-          <img
-            src="../assets/images/element-logo.svg"
-            alt="element-logo"
-            class="nav-logo">
-          <img
-            src="../assets/images/element-logo-small.svg"
-            alt="element-logo"
-            class="nav-logo-small">
+          <!-- logo -->
+          <slot>
+            <img
+              src="../assets/images/element-logo.svg"
+              alt="element-logo"
+              class="nav-logo">
+            <img
+              src="../assets/images/element-logo-small.svg"
+              alt="element-logo"
+              class="nav-logo-small">
+          </slot>
+
         </router-link></h1>
+
+        <!-- nav -->
         <ul class="nav">
+          <li class="nav-item nav-algolia-search" v-show="isComponentPage">
+            <algolia-search></algolia-search>
+          </li>
           <li class="nav-item">
             <router-link
               active-class="active"
@@ -195,14 +280,45 @@
               exact>{{ langConfig.resource }}
             </router-link>
           </li>
-          <li class="nav-item">
+
+          <!-- gap -->
+          <li class="nav-item" v-show="isComponentPage">
+            <div class="nav-gap"></div>
+          </li>
+
+          <!-- 版本选择器 -->
+          <li class="nav-item" v-show="isComponentPage">
+            <el-dropdown
+                trigger="click"
+                class="nav-dropdown"
+                :class="{ 'is-active': dropdownVisible }">
+              <span>
+                {{ langConfig.dropdown }}{{ version }}
+                <i class="el-icon-arrow-down el-icon--right"></i>
+              </span>
+              <el-dropdown-menu
+                  slot="dropdown"
+                  class="nav-dropdown-list"
+                  @input="handleDropdownToggle">
+                <el-dropdown-item
+                    v-for="item in Object.keys(versions)"
+                    :key="item"
+                    @click.native="switchVersion(item)">
+                  {{ item }}
+                </el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </li>
+
+          <!-- lang -->
+          <li class="nav-item lang-item">
             <span
               class="nav-lang"
               :class="{ 'active': lang === 'zh-CN' }"
               @click="switchLang('zh-CN')">
               中文
             </span>
-            <span> / </span>
+            <span class="nav-lang-spe"> / </span>
             <span
               class="nav-lang"
               :class="{ 'active': lang === 'en-US' }"
@@ -210,59 +326,79 @@
               En
             </span>
           </li>
+          
+          <!--theme picker-->
+          <li class="nav-item nav-theme-switch" v-show="isComponentPage">
+            <theme-picker></theme-picker>
+          </li>
         </ul>
       </div>
     </header>
   </div>
 </template>
 <script>
+  import ThemePicker from './theme-picker.vue';
+  import AlgoliaSearch from './search.vue';
   import compoLang from '../i18n/component.json';
+  import { version } from 'main/index.js';
 
   export default {
     data() {
       return {
         active: '',
-        isHome: false,
-        headerStyle: {}
+        versions: [],
+        version,
+        dropdownVisible: true
       };
     },
-    watch: {
-      '$route.path': {
-        immediate: true,
-        handler() {
-          this.isHome = /^home/.test(this.$route.name);
-          this.headerStyle.backgroundColor = `rgba(32, 160, 255, ${ this.isHome ? '0' : '1' })`;
-        }
-      }
+
+    components: {
+      ThemePicker,
+      AlgoliaSearch
     },
+
     computed: {
       lang() {
         return this.$route.path.split('/')[1] || 'zh-CN';
       },
       langConfig() {
         return compoLang.filter(config => config.lang === this.lang)[0]['header'];
+      },
+      isComponentPage() {
+        return /^component/.test(this.$route.name);
       }
     },
+
     methods: {
+      switchVersion(version) {
+        if (version === this.version) return;
+        location.href = `${ location.origin }/${ this.versions[version] }/${ location.hash } `;
+      },
+
       switchLang(targetLang) {
         if (this.lang === targetLang) return;
         localStorage.setItem('ELEMENT_LANGUAGE', targetLang);
         this.$router.push(this.$route.path.replace(this.lang, targetLang));
+      },
+
+      handleDropdownToggle(visible) {
+        this.dropdownVisible = visible;
       }
     },
-    mounted() {
-      function scroll(fn) {
-        window.addEventListener('scroll', () => {
-          fn();
-        }, false);
-      }
-      scroll(() => {
-        if (this.isHome) {
-          const threshold = 200;
-          let alpha = Math.min(document.body.scrollTop, threshold) / threshold;
-          this.$refs.header.style.backgroundColor = `rgba(32, 160, 255, ${ alpha })`;
+
+    created() {
+      const xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = _ => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          const versions = JSON.parse(xhr.responseText);
+          this.versions = Object.keys(versions).slice(-2).reduce((prev, next) => {
+            prev[next] = versions[next];
+            return prev;
+          }, {});
         }
-      });
+      };
+      xhr.open('GET', '/versions.json');
+      xhr.send();
     }
   };
 </script>

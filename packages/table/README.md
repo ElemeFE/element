@@ -13,7 +13,7 @@ npm i element-table -D
 ```javascript
 import Vue from 'vue'
 import ElTable from 'element-table'
-import 'element-theme-default'
+import 'element-theme-chalk'
 
 Vue.use(ElTable)
 ```
@@ -43,7 +43,6 @@ Vue.component('el-table-column', ElTableColumn)
 | row-class-name | 行的 className 的回调方法，也可以使用字符串为所有行设置一个固定的 className。 | Function(row, index)/String | — | — |
 | row-style | 行的 style 的回调方法，也可以使用一个固定的 Object 为所有行设置一样的 Style。 | Function(row, index)/Object | — | — |
 | row-key | 行数据的 Key，用来优化 Table 的渲染；在使用 reserve-selection 功能的情况下，该属性是必填的 | Function(row)/String | — | — |
-| context | 设置上下文环境，例如设置当前上下文就是 `_self`，父级就是 `$parent`，根组件 `$root`。优先读取 column 的 context 属性。 | Object | - | Table 所处上下文 |
 
 ### Table Events
 | 事件名 | 说明 | 参数 |
@@ -78,10 +77,10 @@ Vue.component('el-table-column', ElTableColumn)
 | render-header | 列标题 Label 区域渲染使用的 Function | Function(h, { column, $index }) | — | — |
 | sortable | 对应列是否可以排序，如果设置为 'custom'，则代表用户希望远程排序，需要监听 Table 的 sort-change 事件 | boolean, string | true, false, 'custom' | false |
 | sort-method | 对数据进行排序的时候使用的方法，仅当 sortable 设置为 true 的时候有效 | Function(a, b) | — | — |
+| sort-by | 对数据进行排序的时候按照 sort-by 排序，仅当 sortable 设置为 true 且没有设置 sort-method 的时候有效。如果 sort-by 为数组，则先按照第 0 个排序，如果第 0 个相等，再按照第 1 个排序，以此类推。 | Function(row, index)/String/Array | — | — |
 | resizable | 对应列是否可以通过拖动改变宽度（需要在 el-table 上设置 border 属性为真） | boolean | — | true |
 | formatter | 用来格式化内容 | Function(row, column) | — | — |
 | show-overflow-tooltip | 当内容过长被隐藏时显示 tooltip | Boolean | — | false |
-| context | 设置上下文环境，例如设置当前上下文就是 `_self`，父级就是 `$parent`，根组件 `$root` | Object | - | Table 所处上下文 |
 | inline-template | 指定该属性后可以自定义 column 模板，参考多选的时间列，通过 row 获取行信息。总共可以获取到 `{ row(当前行), column(当前列), $index(行数), store(table store) }` 以及 Table 所处的上下文环境。 | — | — |
 | align | 对齐方式 | String | left, center, right | left |
 | class-name | 列的 className | string | — | — |

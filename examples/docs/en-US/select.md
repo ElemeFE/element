@@ -105,7 +105,7 @@
         states: ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
       };
     },
-    
+
     mounted() {
       this.list = this.states.map(item => { return { value: item, label: item }; });
     },
@@ -126,6 +126,12 @@
   };
 </script>
 
+<style>
+  .demo-select .el-select {
+    width: 240px;
+  }
+</style>
+
 ## Select
 
 When there are plenty of options, use a drop-down menu to display and select desired ones.
@@ -139,6 +145,7 @@ When there are plenty of options, use a drop-down menu to display and select des
   <el-select v-model="value" placeholder="Select">
     <el-option
       v-for="item in options"
+      :key="item.value"
       :label="item.label"
       :value="item.value">
     </el-option>
@@ -182,6 +189,7 @@ When there are plenty of options, use a drop-down menu to display and select des
   <el-select v-model="value2" placeholder="Select">
     <el-option
       v-for="item in options2"
+      :key="item.value"
       :label="item.label"
       :value="item.value"
       :disabled="item.disabled">
@@ -228,12 +236,13 @@ Disable the whole component.
   <el-select v-model="value3" disabled placeholder="Select">
     <el-option
       v-for="item in options"
+      :key="item.value"
       :label="item.label"
       :value="item.value">
     </el-option>
   </el-select>
 </template>
-  
+
 <script>
   export default {
     data() {
@@ -272,6 +281,7 @@ You can clear Select using a clear icon.
   <el-select v-model="value4" clearable placeholder="Select">
     <el-option
       v-for="item in options"
+      :key="item.value"
       :label="item.label"
       :value="item.value">
     </el-option>
@@ -316,6 +326,7 @@ Multiple select uses tags to display selected options.
   <el-select v-model="value5" multiple placeholder="Select">
     <el-option
       v-for="item in options"
+      :key="item.value"
       :label="item.label"
       :value="item.value">
     </el-option>
@@ -361,6 +372,7 @@ You can customize HTML templates for options.
   <el-select v-model="value6" placeholder="Select">
     <el-option
       v-for="item in cities"
+      :key="item.value"
       :label="item.label"
       :value="item.value">
       <span style="float: left">{{ item.label }}</span>
@@ -411,9 +423,11 @@ Display options in groups.
   <el-select v-model="value7" placeholder="Select">
     <el-option-group
       v-for="group in options3"
+      :key="group.label"
       :label="group.label">
       <el-option
         v-for="item in group.options"
+        :key="item.value"
         :label="item.label"
         :value="item.value">
       </el-option>
@@ -462,12 +476,13 @@ Display options in groups.
 
 You can filter options for your desired ones.
 
-:::demo Adding `filterable` to `el-select` enables filtering. By default, Select will find all the options whose `label` attribute contains the input value. If you prefer other filtering strategies, you can pass the `filter-method`. `filter-method` is a `Function` that gets called when the input value changed, and its parameter is the current input value.
+:::demo Adding `filterable` to `el-select` enables filtering. By default, Select will find all the options whose `label` attribute contains the input value. If you prefer other filtering strategies, you can pass the `filter-method`. `filter-method` is a `Function` that gets called when the input value changes, and its parameter is the current input value.
 ```html
 <template>
   <el-select v-model="value8" filterable placeholder="Select">
     <el-option
       v-for="item in options"
+      :key="item.value"
       :label="item.label"
       :value="item.value">
     </el-option>
@@ -515,6 +530,7 @@ Enter keywords and search data from server.
     multiple
     filterable
     remote
+    reserve-keyword
     placeholder="Please enter a keyword"
     :remote-method="remoteMethod"
     :loading="loading">
@@ -593,6 +609,7 @@ Create and select new items that are not included in select options
     placeholder="Choose tags for your article">
     <el-option
       v-for="item in options5"
+      :key="item.value"
       :label="item.label"
       :value="item.value">
     </el-option>
@@ -621,11 +638,16 @@ Create and select new items that are not included in select options
 ```
 :::
 
+:::tip
+If the binding value of Select is an object, make sure to assign `value-key` as its unique identity key name.
+:::
+
 ### Select Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | multiple | whether multiple-select is activated | boolean | — | false |
 | disabled | whether Select is disabled | boolean | — | false |
+| value-key | unique identity key name for value, required when value is an object | string | — | value |
 | size | size of Input | string | large/small/mini | — |
 | clearable | whether single select can be cleared | boolean | — | false |
 | multiple-limit | maximum number of options user can select when `multiple` is `true`. No limit when set to 0 | number | — | 0 |
@@ -641,12 +663,18 @@ Create and select new items that are not included in select options
 | no-match-text | displayed text when no data matches the filtering query | string | — | No matching data |
 | no-data-text | displayed text when there is no options | string | — | No data |
 | popper-class | custom class name for Select's dropdown | string | — | — |
+| reserve-keyword | when `multiple` and `filter` is true, whether to reserve current keyword after selecting an option | boolean | — | false |
+| default-first-option | select first matching option on enter key. Use with `filterable` or `remote` | boolean | - | false |
 
 ### Select Events
 | Event Name | Description | Parameters |
 |---------|---------|---------|
 | change | triggers when the selected value changes | current selected value |
 | visible-change | triggers when the dropdown appears/disappears | true when it appears, and false otherwise |
+| remove-tag | triggers when a tag is removed in multiple mode | removed tag value |
+| clear | triggers when the clear icon is clicked in a clearable Select | — |
+| blur | triggers when Input blurs | (event: Event) |
+| focus | triggers when Input focuses | (event: Event) |
 
 ### Option Group Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
@@ -661,3 +689,7 @@ Create and select new items that are not included in select options
 | label | label of option, same as `value` if omitted | string/number | — | — |
 | disabled | whether option is disabled | boolean | — | false |
 
+### Methods
+| Method | Description | Parameters |
+|------|--------|-------|
+| focus | focus the Input component | - |

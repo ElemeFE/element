@@ -1,3 +1,4 @@
+import { hasClass, addClass, removeClass } from 'element-ui/src/utils/dom';
 import ElCheckbox from 'element-ui/packages/checkbox';
 import ElTag from 'element-ui/packages/tag';
 import Vue from 'vue';
@@ -26,13 +27,9 @@ const convertToRows = (originColumns) => {
       }
     }
     if (column.children) {
-      let childrenMax = 1;
       let colSpan = 0;
       column.children.forEach((subColumn) => {
-        const temp = traverse(subColumn, column);
-        if (temp > childrenMax) {
-          childrenMax = temp;
-        }
+        traverse(subColumn, column);
         colSpan += subColumn.colSpan;
       });
       column.colSpan = colSpan;
@@ -71,6 +68,9 @@ export default {
   render(h) {
     const originColumns = this.store.states.originColumns;
     const columnRows = convertToRows(originColumns, this.columns);
+    // 是否拥有多级表头
+    const isGroup = columnRows.length > 1;
+    if (isGroup) this.$parent.isGroup = true;
 
     return (
       <table
@@ -92,10 +92,13 @@ export default {
               : ''
           }
         </colgroup>
-        <thead>
+        <thead class={ [{ 'is-group': isGroup, 'has-gutter': this.hasGutter }] }>
           {
             this._l(columnRows, (columns, rowIndex) =>
-              <tr>
+              <tr
+                style={ this.getHeaderRowStyle(rowIndex) }
+                class={ this.getHeaderRowClass(rowIndex) }
+              >
               {
                 this._l(columns, (column, cellIndex) =>
                   <th
@@ -105,8 +108,9 @@ export default {
                     on-mouseout={ this.handleMouseOut }
                     on-mousedown={ ($event) => this.handleMouseDown($event, column) }
                     on-click={ ($event) => this.handleHeaderClick($event, column) }
-                    class={ [column.id, column.order, column.headerAlign, column.className || '', rowIndex === 0 && this.isCellHidden(cellIndex) ? 'is-hidden' : '', !column.children ? 'is-leaf' : ''] }>
-                    <div class={ ['cell', column.filteredValue && column.filteredValue.length > 0 ? 'highlight' : ''] }>
+                    style={ this.getHeaderCellStyle(rowIndex, cellIndex, columns, column) }
+                    class={ this.getHeaderCellClass(rowIndex, cellIndex, columns, column) }>
+                    <div class={ ['cell', column.filteredValue && column.filteredValue.length > 0 ? 'highlight' : '', column.labelClassName] }>
                     {
                       column.renderHeader
                         ? column.renderHeader.call(this._renderProxy, h, { column, $index: cellIndex, store: this.store, _self: this.$parent.$vnode.context })
@@ -115,8 +119,12 @@ export default {
                     {
                       column.sortable
                         ? <span class="caret-wrapper" on-click={ ($event) => this.handleSortClick($event, column) }>
-                            <i class="sort-caret ascending"></i>
-                            <i class="sort-caret descending"></i>
+                            <span class="sort-caret ascending" on-click={ ($event) => this.handleSortClick($event, column, 'ascending') }>
+                              <i class="el-icon-sort-up"></i>
+                            </span>
+                            <span class="sort-caret descending" on-click={ ($event) => this.handleSortClick($event, column, 'descending') }>
+                              <i class="el-icon-sort-down"></i>
+                            </span>
                           </span>
                         : ''
                     }
@@ -130,7 +138,7 @@ export default {
                 )
               }
               {
-                !this.fixed && this.layout.gutterWidth
+                this.hasGutter
                   ? <th class="gutter" style={{ width: this.layout.scrollY ? this.layout.gutterWidth + 'px' : '0' }}></th>
                   : ''
               }
@@ -168,6 +176,10 @@ export default {
   },
 
   computed: {
+    table() {
+      return this.$parent;
+    },
+
     isAllSelected() {
       return this.store.states.isAllSelected;
     },
@@ -184,8 +196,20 @@ export default {
       return this.store.states.rightFixedColumns.length;
     },
 
+    leftFixedLeafCount() {
+      return this.store.states.fixedLeafColumnsLength;
+    },
+
+    rightFixedLeafCount() {
+      return this.store.states.rightFixedLeafColumnsLength;
+    },
+
     columns() {
       return this.store.states.columns;
+    },
+
+    hasGutter() {
+      return !this.fixed && this.layout.gutterWidth;
     }
   },
 
@@ -225,14 +249,83 @@ export default {
   },
 
   methods: {
-    isCellHidden(index) {
-      if (this.fixed === true || this.fixed === 'left') {
-        return index >= this.leftFixedCount;
-      } else if (this.fixed === 'right') {
-        return index < this.columnsCount - this.rightFixedCount;
-      } else {
-        return (index < this.leftFixedCount) || (index >= this.columnsCount - this.rightFixedCount);
+    isCellHidden(index, columns) {
+      let start = 0;
+      for (let i = 0; i < index; i++) {
+        start += columns[i].colSpan;
       }
+      const after = start + columns[index].colSpan - 1;
+      if (this.fixed === true || this.fixed === 'left') {
+        return after >= this.leftFixedLeafCount;
+      } else if (this.fixed === 'right') {
+        return start < this.columnsCount - this.rightFixedLeafCount;
+      } else {
+        return (after < this.leftFixedLeafCount) || (start >= this.columnsCount - this.rightFixedLeafCount);
+      }
+    },
+
+    getHeaderRowStyle(rowIndex) {
+      const headerRowStyle = this.table.headerRowStyle;
+      if (typeof headerRowStyle === 'function') {
+        return headerRowStyle.call(null, { rowIndex });
+      }
+      return headerRowStyle;
+    },
+
+    getHeaderRowClass(rowIndex) {
+      const classes = [];
+
+      const headerRowClassName = this.table.headerRowClassName;
+      if (typeof headerRowClassName === 'string') {
+        classes.push(headerRowClassName);
+      } else if (typeof headerRowClassName === 'function') {
+        classes.push(headerRowClassName.call(null, { rowIndex }));
+      }
+
+      return classes.join(' ');
+    },
+
+    getHeaderCellStyle(rowIndex, columnIndex, row, column) {
+      const headerCellStyle = this.table.headerCellStyle;
+      if (typeof headerCellStyle === 'function') {
+        return headerCellStyle.call(null, {
+          rowIndex,
+          columnIndex,
+          row,
+          column
+        });
+      }
+      return headerCellStyle;
+    },
+
+    getHeaderCellClass(rowIndex, columnIndex, row, column) {
+      const classes = [column.id, column.order, column.headerAlign, column.className, column.labelClassName];
+
+      if (rowIndex === 0 && this.isCellHidden(columnIndex, row)) {
+        classes.push('is-hidden');
+      }
+
+      if (!column.children) {
+        classes.push('is-leaf');
+      }
+
+      if (column.sortable) {
+        classes.push('is-sortable');
+      }
+
+      const headerCellClassName = this.table.headerCellClassName;
+      if (typeof headerCellClassName === 'string') {
+        classes.push(headerCellClassName);
+      } else if (typeof headerCellClassName === 'function') {
+        classes.push(headerCellClassName.call(null, {
+          rowIndex,
+          columnIndex,
+          row,
+          column
+        }));
+      }
+
+      return classes.join(' ');
     },
 
     toggleAllSelection() {
@@ -255,7 +348,9 @@ export default {
       if (!filterPanel) {
         filterPanel = new Vue(FilterPanel);
         this.filterPanels[column.id] = filterPanel;
-
+        if (column.filterPlacement) {
+          filterPanel.placement = column.filterPlacement;
+        }
         filterPanel.table = table;
         filterPanel.cell = cell;
         filterPanel.column = column;
@@ -286,13 +381,14 @@ export default {
 
         this.$parent.resizeProxyVisible = true;
 
-        const tableEl = this.$parent.$el;
+        const table = this.$parent;
+        const tableEl = table.$el;
         const tableLeft = tableEl.getBoundingClientRect().left;
         const columnEl = this.$el.querySelector(`th.${column.id}`);
         const columnRect = columnEl.getBoundingClientRect();
         const minLeft = columnRect.left - tableLeft + 30;
 
-        columnEl.classList.add('noclick');
+        addClass(columnEl, 'noclick');
 
         this.dragState = {
           startMouseLeft: event.clientX,
@@ -301,7 +397,7 @@ export default {
           tableLeft
         };
 
-        const resizeProxy = this.$parent.$refs.resizeProxy;
+        const resizeProxy = table.$refs.resizeProxy;
         resizeProxy.style.left = this.dragState.startLeft + 'px';
 
         document.onselectstart = function() { return false; };
@@ -316,9 +412,14 @@ export default {
 
         const handleMouseUp = () => {
           if (this.dragging) {
+            const {
+              startColumnLeft,
+              startLeft
+            } = this.dragState;
             const finalLeft = parseInt(resizeProxy.style.left, 10);
-            const columnWidth = finalLeft - this.dragState.startColumnLeft;
+            const columnWidth = finalLeft - startColumnLeft;
             column.width = column.realWidth = columnWidth;
+            table.$emit('header-dragend', column.width, startLeft - startColumnLeft, column, event);
 
             this.store.scheduleLayout();
 
@@ -327,7 +428,7 @@ export default {
             this.draggingColumn = null;
             this.dragState = {};
 
-            this.$parent.resizeProxyVisible = false;
+            table.resizeProxyVisible = false;
           }
 
           document.removeEventListener('mousemove', handleMouseMove);
@@ -336,7 +437,7 @@ export default {
           document.ondragstart = null;
 
           setTimeout(function() {
-            columnEl.classList.remove('noclick');
+            removeClass(columnEl, 'noclick');
           }, 0);
         };
 
@@ -360,9 +461,15 @@ export default {
         const bodyStyle = document.body.style;
         if (rect.width > 12 && rect.right - event.pageX < 8) {
           bodyStyle.cursor = 'col-resize';
+          if (hasClass(target, 'is-sortable')) {
+            target.style.cursor = 'col-resize';
+          }
           this.draggingColumn = column;
         } else if (!this.dragging) {
           bodyStyle.cursor = '';
+          if (hasClass(target, 'is-sortable')) {
+            target.style.cursor = 'pointer';
+          }
           this.draggingColumn = null;
         }
       }
@@ -377,9 +484,9 @@ export default {
       return !order ? 'ascending' : order === 'ascending' ? 'descending' : null;
     },
 
-    handleSortClick(event, column) {
+    handleSortClick(event, column, givenOrder) {
       event.stopPropagation();
-      let order = this.toggleOrder(column.order);
+      let order = givenOrder || this.toggleOrder(column.order);
 
       let target = event.target;
       while (target && target.tagName !== 'TH') {
@@ -387,8 +494,8 @@ export default {
       }
 
       if (target && target.tagName === 'TH') {
-        if (target.classList.contains('noclick')) {
-          target.classList.remove('noclick');
+        if (hasClass(target, 'noclick')) {
+          removeClass(target, 'noclick');
           return;
         }
       }

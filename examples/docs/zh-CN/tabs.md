@@ -4,7 +4,9 @@
       return {
         activeName: 'second',
         activeName2: 'first',
-        tabs: [{
+        editableTabsValue: '2',
+        editableTabsValue2: '2',
+        editableTabs: [{
           title: 'Tab 1',
           name: '1',
           content: 'Tab 1 content'
@@ -13,15 +15,76 @@
           name: '2',
           content: 'Tab 2 content'
         }],
-        tabIndex: 2
+        editableTabs2: [{
+          title: 'Tab 1',
+          name: '1',
+          content: 'Tab 1 content'
+        }, {
+          title: 'Tab 2',
+          name: '2',
+          content: 'Tab 2 content'
+        }],
+        tabIndex: 2,
+        tabPosition: 'top'
       }
     },
     methods: {
-      handleRemove(tab) {
-        console.log(tab);
-      },
       handleClick(tab, event) {
         console.log(tab, event);
+      },
+      handleTabsEdit(targetName, action) {
+        if (action === 'add') {
+          let newTabName = ++this.tabIndex + '';
+          this.editableTabs.push({
+            title: 'New Tab',
+            name: newTabName,
+            content: 'New Tab content'
+          });
+          this.editableTabsValue = newTabName;
+        }
+        if (action === 'remove') {
+          let tabs = this.editableTabs;
+          let activeName = this.editableTabsValue;
+          if (activeName === targetName) {
+            tabs.forEach((tab, index) => {
+              if (tab.name === targetName) {
+                let nextTab = tabs[index + 1] || tabs[index - 1];
+                if (nextTab) {
+                  activeName = nextTab.name;
+                }
+              }
+            });
+          }
+          
+          this.editableTabsValue = activeName;
+          this.editableTabs = tabs.filter(tab => tab.name !== targetName);
+        }
+      },
+      addTab(targetName) {
+        let newTabName = ++this.tabIndex + '';
+        this.editableTabs2.push({
+          title: 'New Tab',
+          name: newTabName,
+          content: 'New Tab content'
+        });
+        this.editableTabsValue2 = newTabName;
+      },
+      removeTab(targetName) {
+        let tabs = this.editableTabs2;
+        let activeName = this.editableTabsValue2;
+        if (activeName === targetName) {
+          tabs.forEach((tab, index) => {
+            if (tab.name === targetName) {
+              let nextTab = tabs[index + 1] || tabs[index - 1];
+              if (nextTab) {
+                activeName = nextTab.name;
+              }
+            }
+          });
+        }
+        
+        this.editableTabsValue2 = activeName;
+        this.editableTabs2 = tabs.filter(tab => tab.name !== targetName);
       }
     }
   }
@@ -82,40 +145,10 @@
   export default {
     data() {
       return {
-        activeName: 'first'
+        activeName2: 'first'
       };
     },
     methods: {
-      handleClick(tab, event) {
-        console.log(tab, event);
-      }
-    }
-  };
-</script>
-```
-:::
-
-### 可关闭
-
-可以关闭标签页。
-
-:::demo 通过设置 `closable` 属性来打开 `Tabs` 的可关闭标签效果, `closable` 也可以设置在 `Tab Panel` 中实现部分标签页的可关闭效果。
-
-```html
-<template>
-  <el-tabs type="card" closable @tab-click="handleClick" @tab-remove="handleRemove">
-    <el-tab-pane label="用户管理">用户管理</el-tab-pane>
-    <el-tab-pane label="配置管理">配置管理</el-tab-pane>
-    <el-tab-pane label="角色管理">角色管理</el-tab-pane>
-    <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
-  </el-tabs>
-</template>
-<script>
-  export default {
-    methods: {
-      handleRemove(tab) {
-        console.log(tab);
-      },
       handleClick(tab, event) {
         console.log(tab, event);
       }
@@ -140,6 +173,40 @@
 ```
 :::
 
+### 位置
+
+可以通过 `tab-position` 设置标签的位置
+
+:::demo 标签一共有四个方向的设置 `tabPosition="left|right|top|bottom"`
+
+```html
+<template>
+  <el-radio-group v-model="tabPosition" style="margin-bottom: 30px;">
+    <el-radio-button label="top">top</el-radio-button>
+    <el-radio-button label="right">right</el-radio-button>
+    <el-radio-button label="bottom">bottom</el-radio-button>
+    <el-radio-button label="left">left</el-radio-button>
+  </el-radio-group>
+
+  <el-tabs :tab-position="tabPosition" style="height: 200px;">
+    <el-tab-pane label="用户管理">用户管理</el-tab-pane>
+    <el-tab-pane label="配置管理">配置管理</el-tab-pane>
+    <el-tab-pane label="角色管理">角色管理</el-tab-pane>
+    <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
+  </el-tabs>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        tabPosition: 'top'
+      };
+    }
+  };
+</script>
+```
+:::
+
 ### 自定义标签页
 
 可以通过具名 `slot` 来实现自定义标签页的内容
@@ -158,18 +225,143 @@
 ```
 :::
 
-### 动态增加标签页
+### 动态增减标签页
 
-展示如何通过触发器来动态增加标签页
+增减标签页按钮只能在选项卡样式的标签页下使用
+
+:::demo
+```html
+<el-tabs v-model="editableTabsValue" type="card" editable @edit="handleTabsEdit">
+  <el-tab-pane
+    :key="item.name"
+    v-for="(item, index) in editableTabs"
+    :label="item.title"
+    :name="item.name"
+  >
+    {{item.content}}
+  </el-tab-pane>
+</el-tabs>
+<script>
+  export default {
+    data() {
+      return {
+        editableTabsValue: '2',
+        editableTabs: [{
+          title: 'Tab 1',
+          name: '1',
+          content: 'Tab 1 content'
+        }, {
+          title: 'Tab 2',
+          name: '2',
+          content: 'Tab 2 content'
+        }],
+        tabIndex: 2
+      }
+    },
+    methods: {
+      handleTabsEdit(targetName, action) {
+        if (action === 'add') {
+          let newTabName = ++this.tabIndex + '';
+          this.editableTabs.push({
+            title: 'New Tab',
+            name: newTabName,
+            content: 'New Tab content'
+          });
+          this.editableTabsValue = newTabName;
+        }
+        if (action === 'remove') {
+          let tabs = this.editableTabs;
+          let activeName = this.editableTabsValue;
+          if (activeName === targetName) {
+            tabs.forEach((tab, index) => {
+              if (tab.name === targetName) {
+                let nextTab = tabs[index + 1] || tabs[index - 1];
+                if (nextTab) {
+                  activeName = nextTab.name;
+                }
+              }
+            });
+          }
+          
+          this.editableTabsValue = activeName;
+          this.editableTabs = tabs.filter(tab => tab.name !== targetName);
+        }
+      }
+    }
+  }
+</script>
+```
+:::
+
+### 自定义增加标签页触发器
 
 :::demo
 ```html
 <div style="margin-bottom: 20px;">
-  <el-button size="small" @click="tabs.push({ name: 'Tab ' + ++tabIndex, title: 'new Tab', content: 'new Tab content' })">add tab</el-button>
+  <el-button
+    size="small"
+    @click="addTab(editableTabsValue2)"
+  >
+    add tab
+  </el-button>
 </div>
-<el-tabs type="card" closable>
-  <el-tab-pane v-for="(item, index) in tabs" :label="item.title" :name="item.name">{{item.content}}</el-tab-pane>
+<el-tabs v-model="editableTabsValue2" type="card" closable @tab-remove="removeTab">
+  <el-tab-pane
+    v-for="(item, index) in editableTabs2"
+    :key="item.name"
+    :label="item.title"
+    :name="item.name"
+  >
+    {{item.content}}
+  </el-tab-pane>
 </el-tabs>
+<script>
+  export default {
+    data() {
+      return {
+        editableTabsValue2: '2',
+        editableTabs2: [{
+          title: 'Tab 1',
+          name: '1',
+          content: 'Tab 1 content'
+        }, {
+          title: 'Tab 2',
+          name: '2',
+          content: 'Tab 2 content'
+        }],
+        tabIndex: 2
+      }
+    },
+    methods: {
+      addTab(targetName) {
+        let newTabName = ++this.tabIndex + '';
+        this.editableTabs2.push({
+          title: 'New Tab',
+          name: newTabName,
+          content: 'New Tab content'
+        });
+        this.editableTabsValue2 = newTabName;
+      },
+      removeTab(targetName) {
+        let tabs = this.editableTabs2;
+        let activeName = this.editableTabsValue2;
+        if (activeName === targetName) {
+          tabs.forEach((tab, index) => {
+            if (tab.name === targetName) {
+              let nextTab = tabs[index + 1] || tabs[index - 1];
+              if (nextTab) {
+                activeName = nextTab.name;
+              }
+            }
+          });
+        }
+        
+        this.editableTabsValue2 = activeName;
+        this.editableTabs2 = tabs.filter(tab => tab.name !== targetName);
+      }
+    }
+  }
+</script>
 ```
 :::
 
@@ -178,14 +370,18 @@
 |---------- |-------- |---------- |-------------  |-------- |
 | type     | 风格类型   | string   | card/border-card  |     —    |
 | closable  | 标签是否可关闭   | boolean   | — |  false  |
-| active-name(deprecated)  | 选中选项卡的 name  | string   |  —  |  第一个选项卡的 name |
+| addable  | 标签是否可增加   | boolean   | — |  false  |
+| editable  | 标签是否同时可增加和关闭   | boolean   | — |  false  |
 | value  | 绑定值，选中选项卡的 name  | string   |  —  |  第一个选项卡的 name |
+| tab-position  | 选项卡所在位置 | string   |  top/right/bottom/left  |  top |
 
 ### Tabs Events
 | 事件名称 | 说明 | 回调参数 |
 |---------- |-------- |---------- |
-| tab-click  | tab 被选中的钩子 | 被选中的标签 tab 实例 |
-| tab-remove  | tab 被删除的钩子  | 被删除的标签 tab 实例 |
+| tab-click  | tab 被选中时触发 | 被选中的标签 tab 实例 |
+| tab-remove  | 点击 tab 移除按钮后触发  | 被删除的标签的 name |
+| tab-add  | 点击 tabs 的新增按钮后触发  | — |
+| edit  | 点击 tabs 的新增按钮或 tab 被关闭后触发  | (targetName, action) |
 
 ### Tab-pane Attributes
 | 参数       | 说明     | 类型      | 可选值       | 默认值   |

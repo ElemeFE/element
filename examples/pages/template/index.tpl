@@ -1,67 +1,100 @@
 <style scoped>
-  .actor {
-    min-height: 65px;
-
-    &:after {
-      content: '';
-      width: 6px;
-      height: 50px;
-      vertical-align: -8px;
-      margin-left: 5px;
-      background-color: #fff;
-      display: inline-block;
-      animation: blink 400ms infinite alternate;
-    }
-  }
   .banner {
-    position: relative;
-    height: 420px;
-    color: #fff;
-    margin-bottom: 130px;
-
-    .container {
-      position: relative;
-    }
-
-    img {
-      position: absolute;
-      top: 15px;
-      right: -10px;
-    }
-  }
-  .banner-sky {
-    position: absolute;
-    top: -150px;
-    bottom: -15px;
-    width: 100%;
-    margin-top: -140px;
-    transform: skewY(-5deg);
-    transform-origin: center;
-    background-image: linear-gradient(180deg, #0d1a44 13%, #3c4f91 56%, #5fc1e4 100%);
-  }
-  img.banner-stars {
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
+    text-align: center;
   }
   .banner-desc {
-    padding-top: 110px;
-    padding-left: 30px;
-    font-size: <%= theatreSize >px;
-    position: relative;
-    z-index: 10;
+    padding-top: 20px;
 
-    h2 {
+    h1 {
       font-size: <%= titleSize >px;
       margin: 0;
+      line-height: 48px;
+      color: #555;
     }
 
     p {
-      font-size: 14px;
-      opacity: .8;
-      width: 420px;
-      line-height: <%= paraHeight >;
-      padding-left: 3px;
+      font-size: <%= paraSize >px;
+      line-height: 28px;
+      color: #888;
+      margin: 10px 0 5px;
+    }
+  }
+  .jumbotron {
+    width: 890px;
+    height: 465px;
+    margin: 30px auto 100px;
+    position: relative;
+
+    div {
+      width: 100%;
+      height: 100%;
+      background-color: transparent;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    
+    img {
+      position: absolute;
+    }
+    
+    .jumbotron-cloud-1 {
+      right: 0;
+      top: 0;
+      height: 55px;
+    }
+
+    .jumbotron-plant-2 {
+      left: 60px;
+      top: 200px;
+    }
+    
+    .jumbotron-web {
+      height: 385px;
+      top: 35px;
+      left: 110px;
+    }
+    
+    .jumbotron-cloud-2 {
+      left: 0;
+      top: 50px;
+      height: 55px;
+    }
+    
+    .jumbotron-compo-1 {
+      left: 94px;
+      height: 90px;
+      top: 220px;
+    }
+
+    .jumbotron-compo-2 {
+      right: 73px;
+      top: 60px;
+      height: 124px;
+    }
+  
+    .jumbotron-compo-3 {
+      right: 42px;
+      top: 200px;
+      height: 120px;
+    }
+
+    .jumbotron-plant-1 {
+      bottom: 0;
+      left: 30px;
+      height: 185px;
+    }
+
+    .jumbotron-figure-1 {
+      bottom: 0;
+      right: 180px;
+      height: 140px;
+    }
+  
+    .jumbotron-figure-2 {
+      bottom: 0;
+      right: 10px;
+      height: 68px;
     }
   }
   .cards {
@@ -113,13 +146,13 @@
       font-size: 14px;
       color: #99a9bf;
       padding: 0 25px;
-      line-height: <%= paraHeight >;
+      line-height: 20px;
     }
     a {
       height: 53px;
       line-height: 52px;
       font-size: 14px;
-      color: #20a0ff;
+      color: #409EFF;
       text-align: center;
       border: 0;
       border-top: 1px solid #eaeefb;
@@ -137,17 +170,13 @@
 
       &:hover {
         color: #fff;
-        background: #20a0ff;
+        background: #409EFF;
       }
     }
     &:hover {
       bottom: 6px;
-      box-shadow: 0px 6px 18px 0px rgba(232,237,250,0.50);
+      box-shadow: 0 6px 18px 0 rgba(232,237,250,0.50);
     }
-  }
-  @keyframes blink {
-    from { opacity: 0; }
-    to { opacity: 1; }
   }
   @media (max-width: 1140px) {
     .cards {
@@ -170,6 +199,9 @@
       img {
         display: none;
       }
+    }
+    .jumbotron {
+      display: none;
     }
   }
 
@@ -204,15 +236,27 @@
 <template>
   <div>
     <div class="banner">
-      <div class="banner-sky"></div>
-      <img class="banner-stars" src="~examples/assets/images/stars.png" alt="Element">
-      <div class="container">
-        <div class="banner-desc">
-          <h2><%= 1 ></h2>
-          <div id="line2" class="actor"></div>
-          <p><%= 2 ></p>
-        </div>
-        <img src="~examples/assets/images/banner-bg.svg" alt="Element">
+      <div class="banner-desc">
+        <h1><%= 1 ></h1>
+        <p><%= 2 ></p>
+      </div>
+    </div>
+    <div class="jumbotron">
+      <div>
+        <img class="jumbotron-plant-2" src="~examples/assets/images/plant-2.png" alt="">
+        <img class="jumbotron-web" src="~examples/assets/images/web.png" alt="">
+        <img class="jumbotron-plant-1" src="~examples/assets/images/plant-1.png" alt="">
+        <img class="jumbotron-figure-1" src="~examples/assets/images/figure-1.png" alt="">
+        <img class="jumbotron-figure-2" src="~examples/assets/images/figure-2.png" alt="">
+      </div>
+      <div data-hover-layer="0">
+        <img class="jumbotron-cloud-1" src="~examples/assets/images/cloud-1.png" alt="">
+        <img class="jumbotron-cloud-2" src="~examples/assets/images/cloud-2.png" alt="">
+      </div>
+      <div data-hover-layer="1">
+        <img class="jumbotron-compo-1" src="~examples/assets/images/compo-1.png" alt="">
+        <img class="jumbotron-compo-2" src="~examples/assets/images/compo-2.png" alt="">
+        <img class="jumbotron-compo-3" src="~examples/assets/images/compo-3.png" alt="">
       </div>
     </div>
     <div class="cards">
@@ -258,32 +302,22 @@
   </div>
 </template>
 <script>
-  import theaterJS from 'theaterjs';
+  import { Hover } from 'perspective.js';
 
   export default {
     mounted() {
-      function typing(theater) {
-        theater
-          <%= typingFunc >
-          .addScene((done) => {
-            typing(theater);
-            done();
-          });
-      }
-      var theater = theaterJS(<%= theatreParam >);
-      theater
-        .on('type:start, erase:start', function() {
-          theater.getCurrentActor().$element.classList.add('typing');
-        })
-        .on('type:end, erase:end', function() {
-          theater.getCurrentActor().$element.classList.remove('typing');
-        });
-      theater
-        <%= typingInvoke >
-        .addScene((done) => {
-          typing(theater);
-          done();
-        });
+      new Hover('.jumbotron', { // eslint-disable-line
+        max: 3,
+        scale: 1,
+        perspective: 700,
+        layers: [{
+          multiple: 0.01,
+          reverseTranslate: true
+        }, {
+          multiple: 0.02,
+          reverseTranslate: true
+        }]
+      });
     }
   };
 </script>

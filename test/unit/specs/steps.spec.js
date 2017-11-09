@@ -25,7 +25,6 @@ describe('Steps', () => {
         <el-step title="step1"></el-step>
         <el-step title="step2"></el-step>
         <el-step title="step3"></el-step>
-        <el-step title="step4"></el-step>
       </el-steps>
     `);
 
@@ -39,8 +38,8 @@ describe('Steps', () => {
     `);
 
     Vue.nextTick(_ => {
-      expect(vm.$el.querySelector('.el-step')).have.deep.property('style.width').equal('25%');
-      expect(vm2.$el.querySelector('.el-step')).have.deep.property('style.width').equal('100px');
+      expect(vm.$el.querySelector('.el-step')).have.deep.property('style.webkitFlexBasis').equal('50%');
+      expect(vm2.$el.querySelector('.el-step')).have.deep.property('style.webkitFlexBasis').equal('100px');
       done();
     });
   });
@@ -118,7 +117,25 @@ describe('Steps', () => {
     `);
 
     vm.$nextTick(_ => {
-      expect(vm.$el.querySelector('.el-step')).have.deep.property('style.height').equal('200px');
+      expect(vm.$el.querySelector('.el-step')).have.deep.property('style.webkitFlexBasis').equal('200px');
+      done();
+    });
+  });
+
+  it('step:status=error', done => {
+    vm = createVue(`
+      <el-steps :active="2" process-status="process" finish-status="success" direction="horizontal">
+        <el-step title="step1"></el-step>
+        <el-step title="step2" status="error"></el-step>
+        <el-step title="step3"></el-step>
+      </el-steps>
+    `);
+
+    vm.$nextTick(_ => {
+      const errorLine = vm.$el.querySelector('.el-step:nth-child(2) .el-step__line-inner');
+      expect(errorLine.getBoundingClientRect().width).to.equal(0);
+      const nextStep = vm.$el.querySelector('.el-step:nth-child(3) .el-step__head');
+      expect(nextStep.classList.contains('is-wait')).to.equal(true);
       done();
     });
   });

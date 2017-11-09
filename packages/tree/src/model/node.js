@@ -1,28 +1,46 @@
 import objectAssign from 'element-ui/src/utils/merge';
 import { markNodeData, NODE_KEY } from './util';
 
-const reInitChecked = function(node) {
-  const siblings = node.childNodes;
-
+export const getChildState = node => {
   let all = true;
   let none = true;
-
-  for (let i = 0, j = siblings.length; i < j; i++) {
-    const sibling = siblings[i];
-    if (sibling.checked !== true || sibling.indeterminate) {
+  let allWithoutDisable = true;
+  for (let i = 0, j = node.length; i < j; i++) {
+    const n = node[i];
+    if (n.checked !== true || n.indeterminate) {
       all = false;
+      if (!n.disabled) {
+        allWithoutDisable = false;
+      }
     }
-    if (sibling.checked !== false || sibling.indeterminate) {
+    if (n.checked !== false || n.indeterminate) {
       none = false;
     }
   }
 
+  return { all, none, allWithoutDisable, half: !all && !none };
+};
+
+const reInitChecked = function(node) {
+  if (node.childNodes.length === 0) return;
+
+  const {all, none, half} = getChildState(node.childNodes);
   if (all) {
-    node.setChecked(true);
-  } else if (!all && !none) {
-    node.setChecked('half');
+    node.checked = true;
+    node.indeterminate = false;
+  } else if (half) {
+    node.checked = false;
+    node.indeterminate = true;
   } else if (none) {
-    node.setChecked(false);
+    node.checked = false;
+    node.indeterminate = false;
+  }
+
+  const parent = node.parent;
+  if (!parent || parent.level === 0) return;
+
+  if (!node.store.checkStrictly) {
+    reInitChecked(parent);
   }
 };
 
@@ -36,7 +54,8 @@ const getPropertyFromData = function(node, prop) {
   } else if (typeof config === 'string') {
     return data[config];
   } else if (typeof config === 'undefined') {
-    return '';
+    const dataProp = data[prop];
+    return dataProp === undefined ? '' : dataProp;
   }
 };
 
@@ -100,7 +119,7 @@ export default class Node {
       this.expand(null, store.autoExpandParent);
     }
 
-    if (key && store.currentNodeKey && this.key === store.currentNodeKey) {
+    if (key && store.currentNodeKey !== undefined && this.key === store.currentNodeKey) {
       store.currentNode = this;
     }
 
@@ -143,6 +162,10 @@ export default class Node {
     const nodeKey = this.store.key;
     if (this.data) return this.data[nodeKey];
     return null;
+  }
+
+  get disabled() {
+    return getPropertyFromData(this, 'disabled');
   }
 
   insertChild(child, index) {
@@ -225,6 +248,11 @@ export default class Node {
     if (this.shouldLoadData()) {
       this.loadData((data) => {
         if (data instanceof Array) {
+          if (this.checked) {
+            this.setChecked(true, true);
+          } else {
+            reInitChecked(this);
+          }
           done();
         }
       });
@@ -260,35 +288,55 @@ export default class Node {
     this.isLeaf = false;
   }
 
-  setChecked(value, deep) {
+  setChecked(value, deep, recursion, passValue) {
     this.indeterminate = value === 'half';
     this.checked = value === true;
 
-    const handleDescendants = () => {
-      if (deep) {
-        const childNodes = this.childNodes;
-        for (let i = 0, j = childNodes.length; i < j; i++) {
-          const child = childNodes[i];
-          child.setChecked(value !== false, deep);
-        }
-      }
-    };
+    if (this.store.checkStrictly) return;
 
-    if (!this.store.checkStrictly && this.shouldLoadData()) {
-      // Only work on lazy load data.
-      this.loadData(() => {
+    if (!(this.shouldLoadData() && !this.store.checkDescendants)) {
+      let { all, allWithoutDisable } = getChildState(this.childNodes);
+
+      if (!this.isLeaf && (!all && allWithoutDisable)) {
+        this.checked = false;
+        value = false;
+      }
+
+      const handleDescendants = () => {
+        if (deep) {
+          const childNodes = this.childNodes;
+          for (let i = 0, j = childNodes.length; i < j; i++) {
+            const child = childNodes[i];
+            passValue = passValue || value !== false;
+            const isCheck = child.disabled ? child.checked : passValue;
+            child.setChecked(isCheck, deep, true, passValue);
+          }
+          const { half, all } = getChildState(childNodes);
+          if (!all) {
+            this.checked = all;
+            this.indeterminate = half;
+          }
+        }
+      };
+
+      if (this.shouldLoadData()) {
+        // Only work on lazy load data.
+        this.loadData(() => {
+          handleDescendants();
+          reInitChecked(this);
+        }, {
+          checked: value !== false
+        });
+        return;
+      } else {
         handleDescendants();
-      }, {
-        checked: value !== false
-      });
-    } else {
-      handleDescendants();
+      }
     }
 
     const parent = this.parent;
     if (!parent || parent.level === 0) return;
 
-    if (!this.store.checkStrictly) {
+    if (!recursion) {
       reInitChecked(parent);
     }
   }
@@ -337,7 +385,7 @@ export default class Node {
   }
 
   loadData(callback, defaultProps = {}) {
-    if (this.store.lazy === true && this.store.load && !this.loaded && !this.loading) {
+    if (this.store.lazy === true && this.store.load && !this.loaded && (!this.loading || Object.keys(defaultProps).length)) {
       this.loading = true;
 
       const resolve = (children) => {

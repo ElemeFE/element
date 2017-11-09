@@ -1,36 +1,31 @@
 <template>
   <transition name="el-zoom-in-top" @after-leave="doDestroy">
-    <ul
+    <div
       v-show="showPopper"
-      class="el-autocomplete__suggestions"
+      class="el-autocomplete-suggestion el-popper"
       :class="{ 'is-loading': parent.loading }"
       :style="{ width: dropdownWidth }"
+      role="region"
     >
-      <li v-if="parent.loading"><i class="el-icon-loading"></i></li>
-      <template v-for="(item, index) in suggestions" v-else>
-        <li
-          v-if="!parent.customItem"
-          :class="{'highlighted': parent.highlightedIndex === index}"
-          @click="select(item)"
-        >
-          {{item.value}}
-        </li>
-        <component
-          v-else
-          :class="{'highlighted': parent.highlightedIndex === index}"
-          @click="select(item)"
-          :is="parent.customItem"
-          :item="item"
-          :index="index">
-        </component>
-      </template>
-    </ul>
+      <el-scrollbar
+        tag="ul"
+        wrap-class="el-autocomplete-suggestion__wrap"
+        view-class="el-autocomplete-suggestion__list"
+      >
+        <li v-if="parent.loading"><i class="el-icon-loading"></i></li>
+        <slot v-else>
+        </slot>
+      </el-scrollbar>
+    </div>
   </transition>
 </template>
 <script>
   import Popper from 'element-ui/src/utils/vue-popper';
   import Emitter from 'element-ui/src/mixins/emitter';
+  import ElScrollbar from 'element-ui/packages/scrollbar';
+
   export default {
+    components: { ElScrollbar },
     mixins: [Popper, Emitter],
 
     componentName: 'ElAutocompleteSuggestions',
@@ -43,15 +38,14 @@
     },
 
     props: {
-      suggestions: Array,
       options: {
         default() {
           return {
-            forceAbsolute: true,
             gpuAcceleration: false
           };
         }
-      }
+      },
+      id: String
     },
 
     methods: {
@@ -60,9 +54,18 @@
       }
     },
 
+    updated() {
+      this.$nextTick(_ => {
+        this.updatePopper();
+      });
+    },
+
     mounted() {
-      this.popperElm = this.$el;
+      this.$parent.popperElm = this.popperElm = this.$el;
       this.referenceElm = this.$parent.$refs.input.$refs.input;
+      this.referenceList = this.$el.querySelector('.el-autocomplete-suggestion__list');
+      this.referenceList.setAttribute('role', 'listbox');
+      this.referenceList.setAttribute('id', this.id);
     },
 
     created() {

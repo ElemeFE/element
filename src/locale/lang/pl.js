@@ -1,5 +1,9 @@
 export default {
   el: {
+    colorpicker: {
+      confirm: 'OK',
+      clear: 'Wyczyść'
+    },
     datepicker: {
       now: 'Teraz',
       today: 'Dzisiaj',
@@ -12,6 +16,10 @@ export default {
       startTime: 'Godzina początkowa',
       endDate: 'Data końcowa',
       endTime: 'Czas końcowa',
+      prevYear: 'Previous Year', // to be translated
+      nextYear: 'Next Year', // to be translated
+      prevMonth: 'Previous Month', // to be translated
+      nextMonth: 'Next Month', // to be translated
       year: 'rok',
       month1: 'styczeń',
       month2: 'luty',
@@ -56,6 +64,11 @@ export default {
       noData: 'Brak danych',
       placeholder: 'Wybierz'
     },
+    cascader: {
+      noMatch: 'Brak dopasowań',
+      loading: 'Ładowanie',
+      placeholder: 'Wybierz'
+    },
     pagination: {
       goto: 'Idź do',
       pagesize: '/strona',
@@ -69,6 +82,7 @@ export default {
       error: 'Wiadomość zawiera niedozwolone znaki'
     },
     upload: {
+      deleteTip: 'press delete to remove', // to be translated
       delete: 'Kasuj',
       preview: 'Podgląd',
       continue: 'Kontynuuj'
@@ -77,10 +91,19 @@ export default {
       emptyText: 'Brak danych',
       confirmFilter: 'Potwierdź',
       resetFilter: 'Resetuj',
-      clearFilter: 'Wszystko'
+      clearFilter: 'Wszystko',
+      sumText: 'Sum' // to be translated
     },
     tree: {
       emptyText: 'Brak danych'
+    },
+    transfer: {
+      noMatch: 'Brak dopasowań',
+      noData: 'Brak danych',
+      titles: ['List 1', 'List 2'], // to be translated
+      filterPlaceholder: 'Enter keyword', // to be translated
+      noCheckedFormat: '{total} items', // to be translated
+      hasCheckedFormat: '{checked}/{total} checked' // to be translated
     }
   }
 };

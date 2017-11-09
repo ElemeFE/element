@@ -1,9 +1,21 @@
+<template>
+  <li class="el-menu-item-group">
+    <div class="el-menu-item-group__title" :style="{paddingLeft: levelPadding + 'px'}">
+      <template v-if="!$slots.title">{{title}}</template>
+      <slot v-else name="title"></slot>
+    </div>
+    <ul>
+      <slot></slot>
+    </ul>
+  </li>
+</template>
 <script>
-  module.exports = {
+  export default {
     name: 'ElMenuItemGroup',
 
     componentName: 'ElMenuItemGroup',
 
+    inject: ['rootMenu'],
     props: {
       title: {
         type: String
@@ -16,29 +28,18 @@
     },
     computed: {
       levelPadding() {
-        let padding = 10;
+        let padding = 20;
         let parent = this.$parent;
+        if (this.rootMenu.collapse) return 20;
         while (parent && parent.$options.componentName !== 'ElMenu') {
           if (parent.$options.componentName === 'ElSubmenu') {
             padding += 20;
           }
           parent = parent.$parent;
         }
-        padding === 10 && (padding = 20);
         return padding;
       }
     }
   };
 </script>
 
-<template>
-  <li class="el-menu-item-group">
-    <div class="el-menu-item-group__title" :style="{paddingLeft: levelPadding + 'px'}">
-      <template v-if="!$slots.title">{{title}}</template>
-      <slot v-else name="title"></slot>
-    </div>
-    <ul>
-      <slot></slot>
-    </ul>
-  </li>
-</template>

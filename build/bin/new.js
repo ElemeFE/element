@@ -6,7 +6,7 @@ process.on('exit', () => {
 });
 
 if (!process.argv[2]) {
-  console.error('[组件名]必填.');
+  console.error('[组件名]必填 - Please enter new component name');
   process.exit(1);
 }
 
@@ -32,23 +32,12 @@ export default ${ComponentName};`
   {
     filename: 'cooking.conf.js',
     content: `var cooking = require('cooking');
-var path = require('path');
-var config = require('../../build/config');
+var gen = require('../../build/gen-single-config');
 
-cooking.set({
-  entry: {
-    index: path.join(__dirname, 'index.js')
-  },
-  dist: path.join(__dirname, 'lib'),
-  template: false,
-  format: 'umd',
-  moduleName: 'El${ComponentName}',
-  extends: ['vue2'],
-  alias: config.alias,
-  externals: { vue: config.vue }
-});
+cooking.set(gen(__dirname, 'El${ComponentName}'));
 
-module.exports = cooking.resolve();`
+module.exports = cooking.resolve();
+`
   },
   {
     filename: 'package.json',
@@ -82,11 +71,11 @@ export default {
   },
   {
     filename: path.join('../../examples/docs/zh-CN', `${componentname}.md`),
-    content: `## ${chineseName}`
+    content: `## ${ComponentName} ${chineseName}`
   },
   {
-    filename: path.join('../../examples/docs/en-us', `${componentname}.md`),
-    content: `## ${componentname}`
+    filename: path.join('../../examples/docs/en-US', `${componentname}.md`),
+    content: `## ${ComponentName}`
   },
   {
     filename: path.join('../../test/unit/specs', `${componentname}.spec.js`),
@@ -130,7 +119,7 @@ Files.forEach(file => {
 const navConfigFile = require('../../examples/nav.config.json');
 
 Object.keys(navConfigFile).forEach(lang => {
-  let groups = navConfigFile[lang][2].groups;
+  let groups = navConfigFile[lang][3].groups;
   groups[groups.length - 1].list.push({
     path: `/${componentname}`,
     title: lang === 'zh-CN' && componentname !== chineseName

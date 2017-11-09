@@ -1,6 +1,6 @@
 <template>
   <div
-    class="el-select-dropdown"
+    class="el-select-dropdown el-popper"
     :class="[{ 'is-multiple': $parent.multiple }, popperClass]"
     :style="{ minWidth: minWidth }">
     <slot></slot>
@@ -26,13 +26,16 @@
         default: 0
       },
 
-      options: {
+      popperOptions: {
         default() {
           return {
-            forceAbsolute: true,
             gpuAcceleration: false
           };
         }
+      },
+
+      visibleArrow: {
+        default: true
       }
     },
 
@@ -57,7 +60,9 @@
     mounted() {
       this.referenceElm = this.$parent.$refs.reference.$el;
       this.$parent.popperElm = this.popperElm = this.$el;
-      this.$on('updatePopper', this.updatePopper);
+      this.$on('updatePopper', () => {
+        if (this.$parent.visible) this.updatePopper();
+      });
       this.$on('destroyPopper', this.destroyPopper);
     }
   };

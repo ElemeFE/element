@@ -1,10 +1,17 @@
 <template>
-  <div class="el-tab-pane" v-show="active">
+  <div
+    class="el-tab-pane"
+    v-show="active"
+    role="tabpanel"
+    :aria-hidden="!active"
+    :id="`pane-${paneName}`"
+    :aria-labelledby="`tab-${paneName}`"
+  >
     <slot></slot>
   </div>
 </template>
 <script>
-  module.exports = {
+  export default {
     name: 'ElTabPane',
 
     componentName: 'ElTabPane',
@@ -29,6 +36,9 @@
       },
       active() {
         return this.$parent.currentName === (this.name || this.index);
+      },
+      paneName() {
+        return this.name || this.index;
       }
     },
 

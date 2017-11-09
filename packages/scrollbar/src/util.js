@@ -1,5 +1,3 @@
-import Vue from 'vue';
-
 export const BAR_MAP = {
   vertical: {
     offset: 'offsetHeight',
@@ -34,5 +32,3 @@ export function renderThumbStyle({ move, size, bar }) {
 
   return style;
 };
-
-export const toObject = Vue.util.toObject;

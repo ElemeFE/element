@@ -15,7 +15,7 @@
     padding: 30px;
     text-align: center;
     border-right: solid 1px #EFF2F6;
-    float: left;
+    display: inline-block;
     width: 50%;
     box-sizing: border-box;
     &:last-child {
@@ -73,7 +73,7 @@
   <div class="block">
     <span class="demonstration">默认 Hover 指示器触发</span>
     <el-carousel height="150px">
-      <el-carousel-item v-for="item in 4">
+      <el-carousel-item v-for="item in 4" :key="item">
         <h3>{{ item }}</h3>
       </el-carousel-item>
     </el-carousel>
@@ -81,7 +81,7 @@
   <div class="block">
     <span class="demonstration">Click 指示器触发</span>
     <el-carousel trigger="click" height="150px">
-      <el-carousel-item v-for="item in 4">
+      <el-carousel-item v-for="item in 4" :key="item">
         <h3>{{ item }}</h3>
       </el-carousel-item>
     </el-carousel>
@@ -116,7 +116,7 @@
 ```html
 <template>
   <el-carousel indicator-position="outside">
-    <el-carousel-item v-for="item in 4">
+    <el-carousel-item v-for="item in 4" :key="item">
       <h3>{{ item }}</h3>
     </el-carousel-item>
   </el-carousel>
@@ -149,7 +149,7 @@
 ```html
 <template>
   <el-carousel :interval="5000" arrow="always">
-    <el-carousel-item v-for="item in 4">
+    <el-carousel-item v-for="item in 4" :key="item">
       <h3>{{ item }}</h3>
     </el-carousel-item>
   </el-carousel>
@@ -182,7 +182,7 @@
 ```html
 <template>
   <el-carousel :interval="4000" type="card" height="200px">
-    <el-carousel-item v-for="item in 6">
+    <el-carousel-item v-for="item in 6" :key="item">
       <h3>{{ item }}</h3>
     </el-carousel-item>
   </el-carousel>
@@ -211,7 +211,7 @@
 ### Carousel Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| height | 走马灯的高度 | number | — | 300 |
+| height | 走马灯的高度 | string | — | — |
 | initial-index | 初始状态激活的幻灯片的索引，从 0 开始 | number | — | 0 |
 | trigger | 指示器的触发方式 | string | click | — |
 | autoplay | 是否自动切换 | boolean | — | true |
@@ -236,3 +236,4 @@
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | name | 幻灯片的名字，可用作 `setActiveItem` 的参数 | string | — | — |
+| label | 该幻灯片所对应指示器的文本 | string | — | — |

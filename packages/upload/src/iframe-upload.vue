@@ -1,9 +1,9 @@
 <script>
-import Cover from './cover';
+import UploadDragger from './upload-dragger.vue';
 
 export default {
   components: {
-    Cover
+    UploadDragger
   },
   props: {
     type: String,
@@ -30,31 +30,21 @@ export default {
     onRemove: {
       type: Function,
       default: function() {}
-    }
+    },
+    drag: Boolean,
+    listType: String,
+    disabled: Boolean,
+    limit: Number,
+    onExceed: Function
   },
 
   data() {
     return {
-      dragOver: false,
       mouseover: false,
       domain: '',
       file: null,
-      disabled: false
+      submitting: false
     };
-  },
-
-  computed: {
-    lastestFile() {
-      var fileList = this.$parent.fileList;
-      return fileList[fileList.length - 1];
-    },
-    showCover() {
-      var file = this.lastestFile;
-      return this.thumbnailMode && file && file.status !== 'fail';
-    },
-    thumbnailMode() {
-      return this.$parent.thumbnailMode;
-    }
   },
 
   methods: {
@@ -67,7 +57,19 @@ export default {
       }
     },
     handleChange(ev) {
-      const file = ev.target.files[0];
+      const file = ev.target.value;
+      if (file) {
+        this.uploadFiles(file);
+      }
+    },
+    uploadFiles(file) {
+      if (this.limit && this.$parent.uploadFiles.length + file.length > this.limit) {
+        this.onExceed && this.onExceed(this.fileList);
+        return;
+      }
+
+      if (this.submitting) return;
+      this.submitting = true;
       this.file = file;
       this.onStart(file);
 
@@ -86,58 +88,50 @@ export default {
       dataSpan.innerHTML = inputs.join('');
       formNode.submit();
       dataSpan.innerHTML = '';
-      this.disabled = true;
     },
     getFormNode() {
       return this.$refs.form;
     },
     getFormDataNode() {
       return this.$refs.data;
-    },
-    onDrop(e) {
-      e.preventDefault();
-      this.dragOver = false;
-      this.uploadFiles(e.dataTransfer.files);
-    },
-    handleDragover(e) {
-      e.preventDefault();
-      this.onDrop = true;
-    },
-    handleDragleave(e) {
-      e.preventDefault();
-      this.onDrop = false;
-    },
-    onload(e) {
-      this.disabled = false;
     }
   },
 
+  created() {
+    this.frameName = 'frame-' + Date.now();
+  },
+
   mounted() {
+    const self = this;
     !this.$isServer && window.addEventListener('message', (event) => {
-      var targetOrigin = new URL(this.action).origin;
-      if (event.origin !== targetOrigin) {
-        return false;
-      }
+      if (!self.file) return;
+      var targetOrigin = new URL(self.action).origin;
+      if (event.origin !== targetOrigin) return;
       var response = event.data;
       if (response.result === 'success') {
-        this.onSuccess(response, this.file);
+        self.onSuccess(response, self.file);
       } else if (response.result === 'failed') {
-        this.onSuccess(response, this.file);
+        self.onError(response, self.file);
       }
+      self.submitting = false;
+      self.file = null;
     }, false);
   },
 
   render(h) {
-    var cover = <cover image={this.lastestFile} onPreview={this.onPreview} onRemove={this.onRemove}></cover>;
-    var frameName = 'frame-' + Date.now();
+    const {
+      drag,
+      uploadFiles,
+      listType,
+      frameName,
+      disabled
+    } = this;
+    const oClass = { 'el-upload': true };
+    oClass[`el-upload--${listType}`] = true;
+
     return (
       <div
-        class={{
-          'el-upload__inner': true,
-          'el-dragger': this.type === 'drag',
-          'is-dragOver': this.dragOver,
-          'is-showCover': this.showCover
-        }}
+        class={oClass}
         on-click={this.handleClick}
         nativeOn-drop={this.onDrop}
         nativeOn-dragover={this.handleDragover}
@@ -160,8 +154,12 @@ export default {
           </input>
           <input type="hidden" name="documentDomain" value={ this.$isServer ? '' : document.domain } />
           <span ref="data"></span>
-         </form>
-        {!this.showCover ? this.$slots.default : cover}
+        </form>
+        {
+          drag
+          ? <upload-dragger on-file={uploadFiles} disabled={disabled}>{this.$slots.default}</upload-dragger>
+          : this.$slots.default
+        }
       </div>
     );
   }

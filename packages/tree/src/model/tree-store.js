@@ -54,6 +54,7 @@ export default class TreeStore {
           node.visible = allHidden === false;
         }
       }
+      if (!value) return;
 
       if (node.visible && !node.isLeaf) node.expand();
     };
@@ -132,17 +133,23 @@ export default class TreeStore {
     if (!key || !node || !node.data) return;
 
     const nodeKey = node.key;
-    if (nodeKey) this.nodesMap[node.key] = node;
+    if (nodeKey !== undefined) this.nodesMap[node.key] = node;
   }
 
   deregisterNode(node) {
     const key = this.key;
     if (!key || !node || !node.data) return;
 
+    const childNodes = node.childNodes;
+    for (let i = 0, j = childNodes.length; i < j; i++) {
+      const child = childNodes[i];
+      this.deregisterNode(child);
+    }
+
     delete this.nodesMap[node.key];
   }
 
-  getCheckedNodes(leafOnly) {
+  getCheckedNodes(leafOnly = false) {
     const checkedNodes = [];
     const traverse = function(node) {
       const childNodes = node.root ? node.root.childNodes : node.childNodes;
@@ -161,7 +168,7 @@ export default class TreeStore {
     return checkedNodes;
   }
 
-  getCheckedKeys(leafOnly) {
+  getCheckedKeys(leafOnly = false) {
     const key = this.key;
     const allNodes = this._getAllNodes();
     const keys = [];
@@ -187,18 +194,64 @@ export default class TreeStore {
     return allNodes;
   }
 
-  _setCheckedKeys(key, leafOnly, checkedKeys) {
-    const allNodes = this._getAllNodes();
-
-    allNodes.sort((a, b) => a.level > b.level ? -1 : 1);
-    allNodes.forEach((node) => {
-      if (!leafOnly || (leafOnly && node.isLeaf)) {
-        node.setChecked(!!checkedKeys[(node.data || {})[key]], !this.checkStrictly);
-      }
+  updateChildren(key, data) {
+    const node = this.nodesMap[key];
+    if (!node) return;
+    const childNodes = node.childNodes;
+    childNodes.forEach(child => {
+      this.remove(child.data);
     });
+    for (let i = 0, j = data.length; i < j; i++) {
+      const child = data[i];
+      this.append(child, node.data);
+    }
   }
 
-  setCheckedNodes(array, leafOnly = true) {
+  _setCheckedKeys(key, leafOnly = false, checkedKeys) {
+    const allNodes = this._getAllNodes().sort((a, b) => b.level - a.level);
+    const cache = Object.create(null);
+    const keys = Object.keys(checkedKeys);
+    allNodes.forEach(node => node.setChecked(false, false));
+    for (let i = 0, j = allNodes.length; i < j; i++) {
+      const node = allNodes[i];
+      const nodeKey = node.data[key].toString();
+      let checked = keys.indexOf(nodeKey) > -1;
+      if (!checked) {
+        if (node.checked && !cache[nodeKey]) {
+          node.setChecked(false, false);
+        }
+        continue;
+      }
+
+      let parent = node.parent;
+      while (parent && parent.level > 0) {
+        cache[parent.data[key]] = true;
+        parent = parent.parent;
+      }
+
+      if (node.isLeaf || this.checkStrictly) {
+        node.setChecked(true, false);
+        continue;
+      }
+      node.setChecked(true, true);
+
+      if (leafOnly) {
+        node.setChecked(false, false);
+        const traverse = function(node) {
+          const childNodes = node.childNodes;
+          childNodes.forEach((child) => {
+            if (!child.isLeaf) {
+              child.setChecked(false, false);
+            }
+            traverse(child);
+          });
+        };
+        traverse(node);
+      }
+    }
+  }
+
+  setCheckedNodes(array, leafOnly = false) {
     const key = this.key;
     const checkedKeys = {};
     array.forEach((item) => {
@@ -208,7 +261,7 @@ export default class TreeStore {
     this._setCheckedKeys(key, leafOnly, checkedKeys);
   }
 
-  setCheckedKeys(keys, leafOnly = true) {
+  setCheckedKeys(keys, leafOnly = false) {
     this.defaultCheckedKeys = keys;
     const key = this.key;
     const checkedKeys = {};
@@ -243,6 +296,12 @@ export default class TreeStore {
 
   setCurrentNode(node) {
     this.currentNode = node;
+  }
+
+  setUserCurrentNode(node) {
+    const key = node[this.key];
+    const currNode = this.nodesMap[key];
+    this.setCurrentNode(currNode);
   }
 
   setCurrentNodeKey(key) {

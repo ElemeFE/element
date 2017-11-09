@@ -24,7 +24,7 @@ describe('Tabs', () => {
     vm.$refs.tabs.$on('tab-click', spy);
 
     setTimeout(_ => {
-      const tabList = vm.$refs.tabs.$refs.tabs;
+      const tabList = vm.$refs.tabs.$refs.nav.$refs.tabs;
       expect(tabList[0].classList.contains('is-active')).to.be.true;
       expect(paneList[0].style.display).to.not.ok;
 
@@ -60,7 +60,7 @@ describe('Tabs', () => {
     }, true);
     setTimeout(_ => {
       const paneList = vm.$el.querySelector('.el-tabs__content').children;
-      const tabList = vm.$refs.tabs.$refs.tabs;
+      const tabList = vm.$refs.tabs.$refs.nav.$refs.tabs;
 
       expect(tabList[1].classList.contains('is-active')).to.be.true;
       expect(paneList[1].style.display).to.not.ok;
@@ -106,7 +106,7 @@ describe('Tabs', () => {
     vm = createVue({
       template: `
         <el-tabs type="card" ref="tabs">
-          <el-tab-pane :label="tab.label" :name="tab.name" v-for="tab in tabs">Test Content</el-tab-pane>
+          <el-tab-pane :label="tab.label" :name="tab.name" v-for="tab in tabs" :key="tab.name">Test Content</el-tab-pane>
         </el-tabs>
       `,
       data() {
@@ -140,33 +140,174 @@ describe('Tabs', () => {
       });
     }, 100);
   });
-  it('closable', done => {
+  it('editable', done => {
     vm = createVue({
       template: `
-        <el-tabs type="card" :closable="true" ref="tabs">
-          <el-tab-pane label="用户管理">A</el-tab-pane>
-          <el-tab-pane label="配置管理">B</el-tab-pane>
-          <el-tab-pane label="角色管理">C</el-tab-pane>
-          <el-tab-pane label="定时任务补偿">D</el-tab-pane>
+        <el-tabs ref="tabs" v-model="editableTabsValue" type="card" editable @edit="handleTabsEdit">
+          <el-tab-pane
+            v-for="(item, index) in editableTabs"
+            :key="item.name"
+            :label="item.title"
+            :name="item.name"
+          >
+            {{item.content}}
+          </el-tab-pane>
         </el-tabs>
-      `
+      `,
+      data() {
+        return {
+          editableTabsValue: '2',
+          editableTabs: [{
+            title: 'Tab 1',
+            name: '1',
+            content: 'Tab 1 content'
+          }, {
+            title: 'Tab 2',
+            name: '2',
+            content: 'Tab 2 content'
+          }, {
+            title: 'Tab 3',
+            name: '3',
+            content: 'Tab 3 content'
+          }],
+          tabIndex: 3
+        };
+      },
+      methods: {
+        handleTabsEdit(targetName, action) {
+          if (action === 'add') {
+            let newTabName = ++this.tabIndex + '';
+            this.editableTabs.push({
+              title: 'New Tab',
+              name: newTabName,
+              content: 'New Tab content'
+            });
+            this.editableTabsValue = newTabName;
+          }
+          if (action === 'remove') {
+            let tabs = this.editableTabs;
+            let activeName = this.editableTabsValue;
+            if (activeName === targetName) {
+              tabs.forEach((tab, index) => {
+                if (tab.name === targetName) {
+                  let nextTab = tabs[index + 1] || tabs[index - 1];
+                  if (nextTab) {
+                    activeName = nextTab.name;
+                  }
+                }
+              });
+            }
+            this.editableTabsValue = activeName;
+            this.editableTabs = tabs.filter(tab => tab.name !== targetName);
+          }
+        }
+      }
     }, true);
 
-    let spy = sinon.spy();
-    vm.$refs.tabs.$on('tab-remove', spy);
-
     setTimeout(_ => {
-      const tabList = vm.$refs.tabs.$refs.tabs;
+      const tabList = vm.$refs.tabs.$refs.nav.$refs.tabs;
       const paneList = vm.$el.querySelector('.el-tabs__content').children;
 
       tabList[1].querySelector('.el-icon-close').click();
       vm.$nextTick(_ => {
+        expect(tabList.length).to.be.equal(2);
+        expect(paneList.length).to.be.equal(2);
+        expect(tabList[1].classList.contains('is-active')).to.be.true;
+
+        vm.$refs.tabs.$el.querySelector('.el-tabs__new-tab').click();
+        vm.$nextTick(_ => {
+          expect(tabList.length).to.be.equal(3);
+          expect(paneList.length).to.be.equal(3);
+          expect(tabList[2].classList.contains('is-active')).to.be.true;
+          done();
+        });
+      });
+    }, 100);
+  });
+  it('addable & closable', done => {
+    vm = createVue({
+      template: `
+        <el-tabs
+          ref="tabs"
+          v-model="editableTabsValue"
+          type="card"
+          addable
+          closable
+          @tab-add="addTab"
+          @tab-remove="removeTab"
+        >
+          <el-tab-pane
+            v-for="(item, index) in editableTabs"
+            :label="item.title"
+            :key="item.name"
+            :name="item.name"
+          >
+            {{item.content}}
+          </el-tab-pane>
+        </el-tabs>
+      `,
+      data() {
+        return {
+          editableTabsValue: '2',
+          editableTabs: [{
+            title: 'Tab 1',
+            name: '1',
+            content: 'Tab 1 content'
+          }, {
+            title: 'Tab 2',
+            name: '2',
+            content: 'Tab 2 content'
+          }],
+          tabIndex: 2
+        };
+      },
+      methods: {
+        addTab(targetName) {
+          let newTabName = ++this.tabIndex + '';
+          this.editableTabs.push({
+            title: 'New Tab',
+            name: newTabName,
+            content: 'New Tab content'
+          });
+          this.editableTabsValue = newTabName;
+        },
+        removeTab(targetName) {
+          let tabs = this.editableTabs;
+          let activeName = this.editableTabsValue;
+          if (activeName === targetName) {
+            tabs.forEach((tab, index) => {
+              if (tab.name === targetName) {
+                let nextTab = tabs[index + 1] || tabs[index - 1];
+                if (nextTab) {
+                  activeName = nextTab.name;
+                }
+              }
+            });
+          }
+          this.editableTabsValue = activeName;
+          this.editableTabs = tabs.filter(tab => tab.name !== targetName);
+        }
+      }
+    }, true);
+
+    setTimeout(_ => {
+      const tabList = vm.$refs.tabs.$refs.nav.$refs.tabs;
+      const paneList = vm.$el.querySelector('.el-tabs__content').children;
+
+      vm.$refs.tabs.$el.querySelector('.el-tabs__new-tab').click();
+
+      vm.$nextTick(_ => {
         expect(tabList.length).to.be.equal(3);
         expect(paneList.length).to.be.equal(3);
-        expect(spy.calledOnce).to.true;
-        expect(tabList[1].innerText.trim()).to.be.equal('角色管理');
-        expect(paneList[0].innerText.trim()).to.be.equal('A');
-        done();
+        expect(tabList[2].classList.contains('is-active')).to.be.true;
+
+        tabList[2].querySelector('.el-icon-close').click();
+        vm.$nextTick(_ => {
+          expect(tabList.length).to.be.equal(2);
+          expect(paneList.length).to.be.equal(2);
+          expect(tabList[1].classList.contains('is-active')).to.be.true;
+          done();
+        });
       });
     }, 100);
   });
@@ -187,42 +328,6 @@ describe('Tabs', () => {
       done();
     }, 100);
   });
-  it('closable edge', done => {
-    vm = createVue({
-      template: `
-        <el-tabs type="card" :closable="true" ref="tabs">
-          <el-tab-pane label="用户管理">A</el-tab-pane>
-          <el-tab-pane label="配置管理">B</el-tab-pane>
-          <el-tab-pane label="角色管理">C</el-tab-pane>
-          <el-tab-pane label="定时任务补偿">D</el-tab-pane>
-        </el-tabs>
-      `
-    }, true);
-
-    vm.$nextTick(_ => {
-      const paneList = vm.$el.querySelector('.el-tabs__content').children;
-      const tabList = vm.$refs.tabs.$refs.tabs;
-
-      tabList[0].querySelector('.el-icon-close').click();
-      vm.$nextTick(_ => {
-        expect(tabList.length).to.be.equal(3);
-        expect(paneList.length).to.be.equal(3);
-        expect(tabList[0].innerText.trim()).to.be.equal('配置管理');
-        expect(paneList[0].innerText.trim()).to.be.equal('B');
-
-        tabList[2].click();
-        tabList[2].querySelector('.el-icon-close').click();
-        setTimeout(_ => {
-          expect(tabList.length).to.be.equal(2);
-          expect(paneList.length).to.be.equal(2);
-          expect(tabList[1].classList.contains('is-active')).to.be.true;
-          expect(tabList[1].innerText.trim()).to.be.equal('角色管理');
-          expect(paneList[1].innerText.trim()).to.be.equal('C');
-          done();
-        }, 100);
-      });
-    });
-  });
   it('disabled', done => {
     vm = createVue({
       template: `
@@ -236,7 +341,7 @@ describe('Tabs', () => {
     }, true);
 
     vm.$nextTick(_ => {
-      const tabList = vm.$refs.tabs.$refs.tabs;
+      const tabList = vm.$refs.tabs.$refs.nav.$refs.tabs;
 
       tabList[1].click();
       vm.$nextTick(_ => {
@@ -244,5 +349,112 @@ describe('Tabs', () => {
         done();
       });
     });
+  });
+  it('tab-position', done => {
+    vm = createVue({
+      template: `
+        <el-tabs ref="tabs" tab-position="left">
+          <el-tab-pane label="用户管理">A</el-tab-pane>
+          <el-tab-pane label="配置管理">B</el-tab-pane>
+          <el-tab-pane label="角色管理" ref="pane-click">C</el-tab-pane>
+          <el-tab-pane label="定时任务补偿">D</el-tab-pane>
+        </el-tabs>
+      `
+    }, true);
+
+    let paneList = vm.$el.querySelector('.el-tabs__content').children;
+    let spy = sinon.spy();
+
+    vm.$refs.tabs.$on('tab-click', spy);
+
+    setTimeout(_ => {
+      const tabList = vm.$refs.tabs.$refs.nav.$refs.tabs;
+      expect(tabList[0].classList.contains('is-active')).to.be.true;
+      expect(paneList[0].style.display).to.not.ok;
+
+      tabList[2].click();
+      vm.$nextTick(_ => {
+        expect(spy.withArgs(vm.$refs['pane-click']).calledOnce).to.true;
+        expect(tabList[2].classList.contains('is-active')).to.be.true;
+        expect(paneList[2].style.display).to.not.ok;
+        done();
+      });
+    }, 100);
+  });
+  it('horizonal-scrollable', done => {
+    vm = createVue({
+      template: `
+        <el-tabs ref="tabs" style="width: 200px;">
+          <el-tab-pane label="用户管理">A</el-tab-pane>
+          <el-tab-pane label="配置管理">B</el-tab-pane>
+          <el-tab-pane label="用户管理">A</el-tab-pane>
+          <el-tab-pane label="配置管理">B</el-tab-pane>
+          <el-tab-pane label="用户管理">A</el-tab-pane>
+          <el-tab-pane label="配置管理">B</el-tab-pane>
+          <el-tab-pane label="定时任务补偿">D</el-tab-pane>
+        </el-tabs>
+      `
+    }, true);
+
+    setTimeout(_ => {
+      const btnPrev = vm.$el.querySelector('.el-tabs__nav-prev');
+      btnPrev.click();
+      vm.$nextTick(_ => {
+        const tabNav = vm.$el.querySelector('.el-tabs__nav-wrap');
+        expect(tabNav.__vue__.navOffset).to.be.equal(0);
+
+        const btnNext = vm.$el.querySelector('.el-tabs__nav-next');
+        btnNext.click();
+
+        vm.$nextTick(_ => {
+          expect(tabNav.__vue__.navOffset).to.not.be.equal(0);
+
+          btnPrev.click();
+
+          vm.$nextTick(_ => {
+            expect(tabNav.__vue__.navOffset).to.be.equal(0);
+            done();
+          });
+        });
+      });
+    }, 100);
+  });
+  it('vertical-scrollable', done => {
+    vm = createVue({
+      template: `
+        <el-tabs ref="tabs" tab-position="left" style="height: 200px;">
+          <el-tab-pane label="用户管理">A</el-tab-pane>
+          <el-tab-pane label="配置管理">B</el-tab-pane>
+          <el-tab-pane label="用户管理">A</el-tab-pane>
+          <el-tab-pane label="配置管理">B</el-tab-pane>
+          <el-tab-pane label="用户管理">A</el-tab-pane>
+          <el-tab-pane label="配置管理">B</el-tab-pane>
+          <el-tab-pane label="定时任务补偿">D</el-tab-pane>
+        </el-tabs>
+      `
+    }, true);
+
+    setTimeout(_ => {
+      const btnPrev = vm.$el.querySelector('.el-tabs__nav-prev');
+      btnPrev.click();
+      vm.$nextTick(_ => {
+        const tabNav = vm.$el.querySelector('.el-tabs__nav-wrap');
+        expect(tabNav.__vue__.navOffset).to.be.equal(0);
+
+        const btnNext = vm.$el.querySelector('.el-tabs__nav-next');
+        btnNext.click();
+
+        vm.$nextTick(_ => {
+          expect(tabNav.__vue__.navOffset).to.not.be.equal(0);
+
+          btnPrev.click();
+
+          vm.$nextTick(_ => {
+            expect(tabNav.__vue__.navOffset).to.be.equal(0);
+            done();
+          });
+        });
+      });
+    }, 100);
   });
 });

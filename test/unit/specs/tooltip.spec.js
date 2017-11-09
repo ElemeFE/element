@@ -6,22 +6,27 @@ describe('Tooltip', () => {
     destroyVM(vm);
   });
 
-  it('create', () => {
+  it('create', done => {
     vm = createVue(`
-      <el-tooltip content="提示文字">
+      <el-tooltip ref="tooltip" content="提示文字">
         <button>click</button>
       </el-tooltip>`);
 
-    expect(vm.$el.querySelector('.el-tooltip__popper')).to.have.property('textContent', '提示文字');
+    vm.$nextTick(_ => {
+      expect(vm.$refs.tooltip.popperVM.$el).to.have.property('textContent', '提示文字');
+      done();
+    });
   });
 
-  it('custom popper class', () => {
+  it('custom popper class', done => {
     vm = createVue(`
-      <el-tooltip content="提示文字" popper-class="custom-popper">
+      <el-tooltip ref="tooltip" content="提示文字" popper-class="custom-popper">
         <button>click</button>
       </el-tooltip>`);
-
-    expect(vm.$el.querySelector('.el-tooltip__popper').classList.contains('custom-popper')).to.true;
+    vm.$nextTick(_ => {
+      expect(vm.$refs.tooltip.popperVM.$el.classList.contains('custom-popper')).to.true;
+      done();
+    });
   });
 
   describe('manual', () => {
@@ -73,18 +78,24 @@ describe('Tooltip', () => {
     triggerEvent(tooltip.$el, 'mouseenter');
     it('popperElm is exist', () => expect(tooltip.popperElm).to.exist);
     it('showPopper is true', () => expect(tooltip.showPopper).to.true);
-    it('close popper', () => {
+    it('close popper', done => {
       triggerEvent(tooltip.$el, 'mouseleave');
-      expect(tooltip.showPopper).to.false;
+      setTimeout(() => {
+        expect(tooltip.showPopper).to.false;
+        done();
+      }, 300);
     });
   });
 
-  it('light mode', () => {
+  it('light mode', done => {
     vm = createVue(`
-      <el-tooltip content="abc" effect="light">
+      <el-tooltip ref="tooltip" content="abc" effect="light">
         <button>abc</button>
       </el-tooltip>
     `);
-    expect(vm.$el.querySelector('.is-light')).to.exist;
+    vm.$nextTick(_ => {
+      expect(vm.$refs.tooltip.popperVM.$el.classList.contains('is-light')).to.exist;
+      done();
+    });
   });
 });

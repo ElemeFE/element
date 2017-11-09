@@ -1,47 +1,65 @@
 <template>
-  <div class="el-slider">
+  <div class="el-slider"
+    :class="{ 'is-vertical': vertical, 'el-slider--with-input': showInput }"
+     role="slider"
+     :aria-valuemin="min"
+     :aria-valuemax="max"
+     :aria-orientation="vertical ? 'vertical': 'horizontal'"
+     :aria-disabled="disabled"
+  >
     <el-input-number
-      v-model="inputValue"
-      v-if="showInput"
+      v-model="firstValue"
+      v-if="showInput && !range"
       class="el-slider__input"
-      @keyup.native="onInputChange"
       ref="input"
+      @change="$nextTick(emitChange)"
       :step="step"
       :disabled="disabled"
       :controls="showInputControls"
       :min="min"
       :max="max"
+      :debounce="debounce"
       size="small">
     </el-input-number>
     <div class="el-slider__runway"
       :class="{ 'show-input': showInput, 'disabled': disabled }"
-      @click="onSliderClick" ref="slider">
-      <div class="el-slider__bar" :style="{ width: currentPosition }"></div>
+      :style="runwayStyle"
+      @click="onSliderClick"
+      ref="slider">
       <div
-        class="el-slider__button-wrapper"
-        @mouseenter="handleMouseEnter"
-        @mouseleave="handleMouseLeave"
-        @mousedown="onButtonDown"
-        :class="{ 'hover': hovering, 'dragging': dragging }"
-        :style="{left: currentPosition}"
-        ref="button">
-        <el-tooltip placement="top" ref="tooltip">
-          <span slot="content">{{ value }}</span>
-          <div class="el-slider__button" :class="{ 'hover': hovering, 'dragging': dragging }"></div>
-        </el-tooltip>
+        class="el-slider__bar"
+        :style="barStyle">
       </div>
-      <div class="el-slider__stop" v-for="item in stops" :style="{ 'left': item + '%' }" v-if="showStops"></div>
+      <slider-button
+        :vertical="vertical"
+        v-model="firstValue"
+        ref="button1">
+      </slider-button>
+      <slider-button
+        :vertical="vertical"
+        v-model="secondValue"
+        ref="button2"
+        v-if="range">
+      </slider-button>
+      <div
+        class="el-slider__stop"
+        v-for="item in stops"
+        :style="vertical ? { 'bottom': item + '%' } : { 'left': item + '%' }"
+        v-if="showStops">
+      </div>
     </div>
   </div>
 </template>
 
 <script type="text/babel">
   import ElInputNumber from 'element-ui/packages/input-number';
-  import ElTooltip from 'element-ui/packages/tooltip';
-  import { getStyle } from 'element-ui/src/utils/dom';
+  import SliderButton from './button.vue';
+  import Emitter from 'element-ui/src/mixins/emitter';
 
   export default {
     name: 'ElSlider',
+
+    mixins: [Emitter],
 
     props: {
       min: {
@@ -56,12 +74,8 @@
         type: Number,
         default: 1
       },
-      defaultValue: {
-        type: Number,
-        default: 0
-      },
       value: {
-        type: Number,
+        type: [Number, Array],
         default: 0
       },
       showInput: {
@@ -76,179 +90,273 @@
         type: Boolean,
         default: false
       },
+      showTooltip: {
+        type: Boolean,
+        default: true
+      },
+      formatTooltip: Function,
       disabled: {
         type: Boolean,
         default: false
+      },
+      range: {
+        type: Boolean,
+        default: false
+      },
+      vertical: {
+        type: Boolean,
+        default: false
+      },
+      height: {
+        type: String
+      },
+      debounce: {
+        type: Number,
+        default: 300
+      },
+      label: {
+        type: String
       }
     },
 
     components: {
       ElInputNumber,
-      ElTooltip
+      SliderButton
     },
 
     data() {
       return {
-        precision: 0,
-        inputValue: null,
-        timeout: null,
-        hovering: false,
+        firstValue: null,
+        secondValue: null,
+        oldValue: null,
         dragging: false,
-        startX: 0,
-        currentX: 0,
-        startPos: 0,
-        newPos: null,
-        oldValue: this.value,
-        currentPosition: (this.value - this.min) / (this.max - this.min) * 100 + '%'
+        sliderSize: 1
       };
     },
 
     watch: {
-      inputValue(val) {
-        this.$emit('input', Number(val));
+      value(val, oldVal) {
+        if (this.dragging ||
+          Array.isArray(val) &&
+          Array.isArray(oldVal) &&
+          val.every((item, index) => item === oldVal[index])) {
+          return;
+        }
+        this.setValues();
       },
 
-      value(val) {
-        this.$nextTick(() => {
-          this.updatePopper();
-        });
-        if (typeof val !== 'number' || isNaN(val) || val < this.min) {
-          this.$emit('input', this.min);
-          return;
+      dragging(val) {
+        if (!val) {
+          this.setValues();
         }
-        if (val > this.max) {
-          this.$emit('input', this.max);
-          return;
+      },
+
+      firstValue(val) {
+        if (this.range) {
+          this.$emit('input', [this.minValue, this.maxValue]);
+        } else {
+          this.$emit('input', val);
         }
-        this.inputValue = val;
-        this.setPosition((val - this.min) * 100 / (this.max - this.min));
+      },
+
+      secondValue() {
+        if (this.range) {
+          this.$emit('input', [this.minValue, this.maxValue]);
+        }
+      },
+
+      min() {
+        this.setValues();
+      },
+
+      max() {
+        this.setValues();
       }
     },
 
     methods: {
-      handleMouseEnter() {
-        this.hovering = true;
-        this.$refs.tooltip.showPopper = true;
-      },
-
-      handleMouseLeave() {
-        this.hovering = false;
-        this.$refs.tooltip.showPopper = false;
-      },
-
-      updatePopper() {
-        this.$refs.tooltip.updatePopper();
-      },
-
-      setPosition(newPos) {
-        if (newPos < 0) {
-          newPos = 0;
-        } else if (newPos > 100) {
-          newPos = 100;
+      valueChanged() {
+        if (this.range) {
+          return ![this.minValue, this.maxValue]
+            .every((item, index) => item === this.oldValue[index]);
+        } else {
+          return this.value !== this.oldValue;
         }
-
-        const lengthPerStep = 100 / ((this.max - this.min) / this.step);
-        const steps = Math.round(newPos / lengthPerStep);
-        let value = steps * lengthPerStep * (this.max - this.min) * 0.01 + this.min;
-        value = parseFloat(value.toFixed(this.precision));
-        this.$emit('input', value);
-        this.currentPosition = (this.value - this.min) / (this.max - this.min) * 100 + '%';
-        if (!this.dragging) {
-          if (this.value !== this.oldValue) {
-            this.$emit('change', this.value);
-            this.oldValue = this.value;
+      },
+      setValues() {
+        const val = this.value;
+        if (this.range && Array.isArray(val)) {
+          if (val[1] < this.min) {
+            this.$emit('input', [this.min, this.min]);
+          } else if (val[0] > this.max) {
+            this.$emit('input', [this.max, this.max]);
+          } else if (val[0] < this.min) {
+            this.$emit('input', [this.min, val[1]]);
+          } else if (val[1] > this.max) {
+            this.$emit('input', [val[0], this.max]);
+          } else {
+            this.firstValue = val[0];
+            this.secondValue = val[1];
+            if (this.valueChanged()) {
+              this.dispatch('ElFormItem', 'el.form.change', [this.minValue, this.maxValue]);
+              this.oldValue = val.slice();
+            }
+          }
+        } else if (!this.range && typeof val === 'number' && !isNaN(val)) {
+          if (val < this.min) {
+            this.$emit('input', this.min);
+          } else if (val > this.max) {
+            this.$emit('input', this.max);
+          } else {
+            this.firstValue = val;
+            if (this.valueChanged()) {
+              this.dispatch('ElFormItem', 'el.form.change', val);
+              this.oldValue = val;
+            }
           }
         }
       },
 
-      onSliderClick(event) {
-        if (this.disabled || this.dragging) return;
-        const sliderOffsetLeft = this.$refs.slider.getBoundingClientRect().left;
-        this.setPosition((event.clientX - sliderOffsetLeft) / this.$sliderWidth * 100);
-      },
-
-      onInputChange() {
-        if (this.value === '') {
+      setPosition(percent) {
+        const targetValue = this.min + percent * (this.max - this.min) / 100;
+        if (!this.range) {
+          this.$refs.button1.setPosition(percent);
           return;
         }
-        if (!isNaN(this.value)) {
-          this.setPosition((this.value - this.min) * 100 / (this.max - this.min));
+        let button;
+        if (Math.abs(this.minValue - targetValue) < Math.abs(this.maxValue - targetValue)) {
+          button = this.firstValue < this.secondValue ? 'button1' : 'button2';
+        } else {
+          button = this.firstValue > this.secondValue ? 'button1' : 'button2';
+        }
+        this.$refs[button].setPosition(percent);
+      },
+
+      onSliderClick(event) {
+        if (this.disabled || this.dragging) return;
+        this.resetSize();
+        if (this.vertical) {
+          const sliderOffsetBottom = this.$refs.slider.getBoundingClientRect().bottom;
+          this.setPosition((sliderOffsetBottom - event.clientY) / this.sliderSize * 100);
+        } else {
+          const sliderOffsetLeft = this.$refs.slider.getBoundingClientRect().left;
+          this.setPosition((event.clientX - sliderOffsetLeft) / this.sliderSize * 100);
+        }
+        this.emitChange();
+      },
+
+      resetSize() {
+        if (this.$refs.slider) {
+          this.sliderSize = this.$refs.slider[`client${ this.vertical ? 'Height' : 'Width' }`];
         }
       },
 
-      onDragStart(event) {
-        this.dragging = true;
-        this.startX = event.clientX;
-        this.startPos = parseInt(this.currentPosition, 10);
-      },
-
-      onDragging(event) {
-        if (this.dragging) {
-          this.$refs.tooltip.showPopper = true;
-          this.currentX = event.clientX;
-          const diff = (this.currentX - this.startX) / this.$sliderWidth * 100;
-          this.newPos = this.startPos + diff;
-          this.setPosition(this.newPos);
-        }
-      },
-
-      onDragEnd() {
-        if (this.dragging) {
-          /*
-           * 防止在 mouseup 后立即触发 click，导致滑块有几率产生一小段位移
-           * 不使用 preventDefault 是因为 mouseup 和 click 没有注册在同一个 DOM 上
-           */
-          setTimeout(() => {
-            this.dragging = false;
-            this.$refs.tooltip.showPopper = false;
-            this.setPosition(this.newPos);
-          }, 0);
-          window.removeEventListener('mousemove', this.onDragging);
-          window.removeEventListener('mouseup', this.onDragEnd);
-          window.removeEventListener('contextmenu', this.onDragEnd);
-        }
-      },
-
-      onButtonDown(event) {
-        if (this.disabled) return;
-        this.onDragStart(event);
-        window.addEventListener('mousemove', this.onDragging);
-        window.addEventListener('mouseup', this.onDragEnd);
-        window.addEventListener('contextmenu', this.onDragEnd);
+      emitChange() {
+        this.$nextTick(() => {
+          this.$emit('change', this.range ? [this.minValue, this.maxValue] : this.value);
+        });
       }
     },
 
     computed: {
-      $sliderWidth() {
-        return parseInt(getStyle(this.$refs.slider, 'width'), 10);
-      },
-
       stops() {
-        const stopCount = (this.max - this.value) / this.step;
-        const currentLeft = parseFloat(this.currentPosition);
+        if (this.step === 0) {
+          process.env.NODE_ENV !== 'production' &&
+          console.warn('[Element Warn][Slider]step should not be 0.');
+          return [];
+        }
+        const stopCount = (this.max - this.min) / this.step;
         const stepWidth = 100 * this.step / (this.max - this.min);
         const result = [];
         for (let i = 1; i < stopCount; i++) {
-          result.push(currentLeft + i * stepWidth);
+          result.push(i * stepWidth);
         }
-        return result;
+        if (this.range) {
+          return result.filter(step => {
+            return step < 100 * (this.minValue - this.min) / (this.max - this.min) ||
+              step > 100 * (this.maxValue - this.min) / (this.max - this.min);
+          });
+        } else {
+          return result.filter(step => step > 100 * (this.firstValue - this.min) / (this.max - this.min));
+        }
+      },
+
+      minValue() {
+        return Math.min(this.firstValue, this.secondValue);
+      },
+
+      maxValue() {
+        return Math.max(this.firstValue, this.secondValue);
+      },
+
+      barSize() {
+        return this.range
+          ? `${ 100 * (this.maxValue - this.minValue) / (this.max - this.min) }%`
+          : `${ 100 * (this.firstValue - this.min) / (this.max - this.min) }%`;
+      },
+
+      barStart() {
+        return this.range
+          ? `${ 100 * (this.minValue - this.min) / (this.max - this.min) }%`
+          : '0%';
+      },
+
+      precision() {
+        let precisions = [this.min, this.max, this.step].map(item => {
+          let decimal = ('' + item).split('.')[1];
+          return decimal ? decimal.length : 0;
+        });
+        return Math.max.apply(null, precisions);
+      },
+
+      runwayStyle() {
+        return this.vertical ? { height: this.height } : {};
+      },
+
+      barStyle() {
+        return this.vertical
+          ? {
+            height: this.barSize,
+            bottom: this.barStart
+          } : {
+            width: this.barSize,
+            left: this.barStart
+          };
       }
     },
 
-    created() {
-      if (typeof this.value !== 'number' ||
-        isNaN(this.value) ||
-        this.value < this.min) {
-        this.$emit('input', this.min);
-      } else if (this.value > this.max) {
-        this.$emit('input', this.max);
+    mounted() {
+      let valuetext;
+      if (this.range) {
+        if (Array.isArray(this.value)) {
+          this.firstValue = Math.max(this.min, this.value[0]);
+          this.secondValue = Math.min(this.max, this.value[1]);
+        } else {
+          this.firstValue = this.min;
+          this.secondValue = this.max;
+        }
+        this.oldValue = [this.firstValue, this.secondValue];
+        valuetext = `${this.firstValue}-${this.secondValue}`;
+      } else {
+        if (typeof this.value !== 'number' || isNaN(this.value)) {
+          this.firstValue = this.min;
+        } else {
+          this.firstValue = Math.min(this.max, Math.max(this.min, this.value));
+        }
+        this.oldValue = this.firstValue;
+        valuetext = this.firstValue;
       }
-      let precisions = [this.min, this.max, this.step].map(item => {
-        let decimal = ('' + item).split('.')[1];
-        return decimal ? decimal.length : 0;
-      });
-      this.precision = Math.max.apply(null, precisions);
-      this.inputValue = this.inputValue || this.value;
+      this.$el.setAttribute('aria-valuetext', valuetext);
+
+      // label screen reader
+      this.$el.setAttribute('aria-label', this.label ? this.label : `slider between ${this.min} and ${this.max}`);
+
+      this.resetSize();
+      window.addEventListener('resize', this.resetSize);
+    },
+
+    beforeDestroy() {
+      window.removeEventListener('resize', this.resetSize);
     }
   };
 </script>

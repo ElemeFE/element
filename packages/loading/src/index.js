@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import loadingVue from './loading.vue';
+import { addClass, removeClass, getStyle } from 'element-ui/src/utils/dom';
 import merge from 'element-ui/src/utils/merge';
 
 const LoadingConstructor = Vue.extend(loadingVue);
@@ -18,21 +19,18 @@ LoadingConstructor.prototype.originalPosition = '';
 LoadingConstructor.prototype.originalOverflow = '';
 
 LoadingConstructor.prototype.close = function() {
-  if (this.fullscreen && this.originalOverflow !== 'hidden') {
-    document.body.style.overflow = this.originalOverflow;
-  }
-  if (this.fullscreen || this.body) {
-    document.body.style.position = this.originalPosition;
-  } else {
-    this.target.style.position = this.originalPosition;
-  }
   if (this.fullscreen) {
     fullscreenLoading = undefined;
   }
   this.$on('after-leave', _ => {
-    this.$el &&
-    this.$el.parentNode &&
-    this.$el.parentNode.removeChild(this.$el);
+    const target = this.fullscreen || this.body
+      ? document.body
+      : this.target;
+    removeClass(target, 'el-loading-parent--relative');
+    removeClass(target, 'el-loading-parent--hidden');
+    if (this.$el && this.$el.parentNode) {
+      this.$el.parentNode.removeChild(this.$el);
+    }
     this.$destroy();
   });
   this.visible = false;
@@ -41,10 +39,10 @@ LoadingConstructor.prototype.close = function() {
 const addStyle = (options, parent, instance) => {
   let maskStyle = {};
   if (options.fullscreen) {
-    instance.originalPosition = document.body.style.position;
-    instance.originalOverflow = document.body.style.overflow;
+    instance.originalPosition = getStyle(document.body, 'position');
+    instance.originalOverflow = getStyle(document.body, 'overflow');
   } else if (options.body) {
-    instance.originalPosition = document.body.style.position;
+    instance.originalPosition = getStyle(document.body, 'position');
     ['top', 'left'].forEach(property => {
       let scroll = property === 'top' ? 'scrollTop' : 'scrollLeft';
       maskStyle[property] = options.target.getBoundingClientRect()[property] +
@@ -56,7 +54,7 @@ const addStyle = (options, parent, instance) => {
       maskStyle[property] = options.target.getBoundingClientRect()[property] + 'px';
     });
   } else {
-    instance.originalPosition = parent.style.position;
+    instance.originalPosition = getStyle(parent, 'position');
   }
   Object.keys(maskStyle).forEach(property => {
     instance.$el.style[property] = maskStyle[property];
@@ -86,11 +84,11 @@ const Loading = (options = {}) => {
   });
 
   addStyle(options, parent, instance);
-  if (instance.originalPosition !== 'absolute') {
-    parent.style.position = 'relative';
+  if (instance.originalPosition !== 'absolute' && instance.originalPosition !== 'fixed') {
+    addClass(parent, 'el-loading-parent--relative');
   }
   if (options.fullscreen && options.lock) {
-    parent.style.overflow = 'hidden';
+    addClass(parent, 'el-loading-parent--hidden');
   }
   parent.appendChild(instance.$el);
   Vue.nextTick(() => {

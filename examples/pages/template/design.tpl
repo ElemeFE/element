@@ -54,7 +54,7 @@
           <img src="~examples/assets/images/controllability.png" alt="Controllability">
           <h4><%= 8 ></h4>
           <span><%= 9 ></span>
-        </ul>
+        </div>
       </el-col>
     </el-row>
     <h3><%= 10 ></h3>

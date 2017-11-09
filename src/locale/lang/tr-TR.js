@@ -1,17 +1,25 @@
 export default {
   el: {
+    colorpicker: {
+      confirm: 'Onayla',
+      clear: 'Temizle'
+    },
     datepicker: {
       now: 'Şimdi',
       today: 'Bugün',
       cancel: 'İptal',
       clear: 'Temizle',
-      confirm: 'OK',
+      confirm: 'Onayla',
       selectDate: 'Tarih seç',
       selectTime: 'Saat seç',
       startDate: 'Başlangıç Tarihi',
       startTime: 'Başlangıç Saati',
       endDate: 'Bitiş Tarihi',
       endTime: 'Bitiş Saati',
+      prevYear: 'Previous Year', // to be translated
+      nextYear: 'Next Year', // to be translated
+      prevMonth: 'Previous Month', // to be translated
+      nextMonth: 'Next Month', // to be translated
       year: '',
       month1: 'Ocak',
       month2: 'Şubat',
@@ -56,6 +64,11 @@ export default {
       noData: 'Veri yok',
       placeholder: 'Seç'
     },
+    cascader: {
+      noMatch: 'Eşleşen veri bulunamadı',
+      loading: 'Yükleniyor',
+      placeholder: 'Seç'
+    },
     pagination: {
       goto: 'Git',
       pagesize: '/page',
@@ -64,11 +77,12 @@ export default {
     },
     messagebox: {
       title: 'Mesaj',
-      confirm: 'OK',
+      confirm: 'Onayla',
       cancel: 'İptal',
       error: 'İllegal giriş'
     },
     upload: {
+      deleteTip: 'press delete to remove', // to be translated
       delete: 'Sil',
       preview: 'Görüntüle',
       continue: 'Devam'
@@ -76,11 +90,20 @@ export default {
     table: {
       emptyText: 'Veri yok',
       confirmFilter: 'Onayla',
-      resetFilter: 'Reset',
-      clearFilter: 'Hepsi'
+      resetFilter: 'Sıfırla',
+      clearFilter: 'Hepsi',
+      sumText: 'Sum'
     },
     tree: {
       emptyText: 'Veri yok'
+    },
+    transfer: {
+      noMatch: 'Eşleşen veri bulunamadı',
+      noData: 'Veri yok',
+      titles: ['Liste 1', 'Liste 2'],
+      filterPlaceholder: 'Anahtar kelimeleri gir',
+      noCheckedFormat: '{total} adet',
+      hasCheckedFormat: '{checked}/{total} seçildi'
     }
   }
 };

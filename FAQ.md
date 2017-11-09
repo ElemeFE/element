@@ -22,7 +22,7 @@
 使用 [Scoped slot](https://vuejs.org/v2/guide/components.html#Scoped-Slots) 即可：
 ```html
 <el-table-column label="操作">
-  <template scoped="props">
+  <template slot-scope="props">
     <el-button @click.native="showDetail(props.row)">查看详情</el-button>
   </template>
 </el-table-column>
@@ -55,6 +55,12 @@
 ```html
 <el-input icon="my-xxx" />
 ```
+</details>
+
+<details>
+<summary>所有组件的任意属性都支持 `.sync` 修饰符吗？</summary>
+  
+不是。对于支持 `.sync` 修饰符的属性，我们会在文档的 API 表格中注明。更多 `.sync` 的用法请查看 [Vue 文档](https://vuejs.org/v2/guide/components.html#sync-Modifier)。
 </details>
 
 <details>
@@ -109,7 +115,7 @@ For other components, the `.native` modifier is still mandatory.
 Just use [Scoped slot](https://vuejs.org/v2/guide/components.html#Scoped-Slots):
 ```html
 <el-table-column label="Operations">
-  <template scoped="props">
+  <template slot-scope="props">
     <el-button @click.native="showDetail(props.row)">Details</el-button>
   </template>
 </el-table-column>
@@ -142,6 +148,12 @@ Now you can use them as you do with built-in icons. For example, in `el-input`:
 ```html
 <el-input icon="my-xxx" />
 ```
+</details>
+
+<details>
+<summary>Can I use `.sync` modifier on every attribute?</summary>
+  
+No, only a few attributes supports the `.sync` modifier, and we have explicitly marked them on the documentation's API table. For more information about `.sync`, please refer to [Vue documentation](https://vuejs.org/v2/guide/components.html#sync-Modifier).
 </details>
 
 <details>

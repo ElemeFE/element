@@ -1,5 +1,9 @@
 export default {
   el: {
+    colorpicker: {
+      confirm: 'ตกลง',
+      clear: 'ล้างข้อมูล'
+    },
     datepicker: {
       now: 'ตอนนี้',
       today: 'วันนี้',
@@ -12,6 +16,10 @@ export default {
       startTime: 'เวลาเริ่มต้น',
       endDate: 'วันที่สิ้นสุด',
       endTime: 'เวลาสิ้นสุด',
+      prevYear: 'Previous Year', // to be translated
+      nextYear: 'Next Year', // to be translated
+      prevMonth: 'Previous Month', // to be translated
+      nextMonth: 'Next Month', // to be translated
       year: 'ปี',
       month1: 'มกราคม',
       month2: 'กุมภาพันธ์',
@@ -27,13 +35,13 @@ export default {
       month12: 'ธันวาคม',
       // week: 'week',
       weeks: {
-        sun: 'อาทิตย์',
-        mon: 'จันทร์',
-        tue: 'อังคาร',
-        wed: 'พุธ',
-        thu: 'พฤหัสบดี',
-        fri: 'ศุกร์',
-        sat: 'เสาร์'
+        sun: 'อา',
+        mon: 'จ',
+        tue: 'อ',
+        wed: 'พ',
+        thu: 'พฤ',
+        fri: 'ศ',
+        sat: 'ส'
       },
       months: {
         jan: 'มกรา',
@@ -56,6 +64,11 @@ export default {
       noData: 'ไม่พบข้อมูล',
       placeholder: 'เลือก'
     },
+    cascader: {
+      noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
+      loading: 'กำลังโหลด',
+      placeholder: 'เลือก'
+    },
     pagination: {
       goto: 'ไปที่',
       pagesize: '/หน้า',
@@ -69,6 +82,7 @@ export default {
       error: 'คุณป้อนข้อมูลไม่ถูกต้อง'
     },
     upload: {
+      deleteTip: 'press delete to remove', // to be translated
       delete: 'ลบ',
       preview: 'ตัวอย่าง',
       continue: 'ทำต่อ'
@@ -77,10 +91,19 @@ export default {
       emptyText: 'ไม่พบข้อมูล',
       confirmFilter: 'ยืนยัน',
       resetFilter: 'รีเซ็ต',
-      clearFilter: 'ทั้งหมด'
+      clearFilter: 'ทั้งหมด',
+      sumText: 'Sum' // to be translated
     },
     tree: {
       emptyText: 'ไม่พบข้อมูล'
+    },
+    transfer: {
+      noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
+      noData: 'ไม่พบข้อมูล',
+      titles: ['List 1', 'List 2'], // to be translated
+      filterPlaceholder: 'Enter keyword', // to be translated
+      noCheckedFormat: '{total} items', // to be translated
+      hasCheckedFormat: '{checked}/{total} checked' // to be translated
     }
   }
 };

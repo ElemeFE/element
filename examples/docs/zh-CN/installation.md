@@ -12,13 +12,17 @@ npm i element-ui -S
 
 ```html
 <!-- 引入样式 -->
-<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 <!-- 引入组件库 -->
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 ```
 
+:::tip
+我们建议使用 CDN 引入 Element 的用户在链接地址上锁定版本，以免将来 Element 升级时受到非兼容性更新的影响。锁定版本的方法请查看 [unpkg.com](https://unpkg.com)。
+:::
+
 ### Hello world
-通过 CDN 的方式我们可以很容易地使用 Element 写出一个 Hello world 页面。[在线演示](http://codepen.io/QingWei-Li/pen/vXwJrY)
+通过 CDN 的方式我们可以很容易地使用 Element 写出一个 Hello world 页面。[在线演示](https://jsfiddle.net/hzfpyvg6/14/)
 
 ```html
 <!DOCTYPE html>
@@ -26,12 +30,12 @@ npm i element-ui -S
 <head>
   <meta charset="UTF-8">
   <!-- 引入样式 -->
-  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 </head>
 <body>
   <div id="app">
     <el-button @click="visible = true">按钮</el-button>
-    <el-dialog v-model="visible" title="Hello world">
+    <el-dialog :visible.sync="visible" title="Hello world">
       <p>欢迎使用 Element</p>
     </el-dialog>
   </div>

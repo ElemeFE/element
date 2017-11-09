@@ -1,5 +1,9 @@
 export default {
   el: {
+    colorpicker: {
+      confirm: 'Confirmar',
+      clear: 'Limpar'
+    },
     datepicker: {
       now: 'Agora',
       today: 'Hoje',
@@ -12,7 +16,11 @@ export default {
       startTime: 'Hora inicial',
       endDate: 'Data final',
       endTime: 'Hora final',
-      year: 'Ano',
+      prevYear: 'Previous Year', // to be translated
+      nextYear: 'Next Year', // to be translated
+      prevMonth: 'Previous Month', // to be translated
+      nextMonth: 'Next Month', // to be translated
+      year: '',
       month1: 'Janeiro',
       month2: 'Fevereiro',
       month3: 'Março',
@@ -56,30 +64,46 @@ export default {
       noData: 'Sem dados',
       placeholder: 'Selecione'
     },
+    cascader: {
+      noMatch: 'Sem resultados',
+      loading: 'Carregando',
+      placeholder: 'Selecione'
+    },
     pagination: {
       goto: 'Ir para',
-      pagesize: '/pagina',
+      pagesize: '/página',
       total: 'Total {total}',
       pageClassifier: ''
     },
     messagebox: {
+      title: 'Mensagem',
       confirm: 'Confirmar',
       cancel: 'Cancelar',
       error: 'Erro!'
     },
     upload: {
+      deleteTip: 'press delete to remove', // to be translated
       delete: 'Apagar',
-      preview: 'Previsualizar',
+      preview: 'Pré-visualizar',
       continue: 'Continuar'
     },
     table: {
       emptyText: 'Sem dados',
       confirmFilter: 'Confirmar',
       resetFilter: 'Limpar',
-      clearFilter: 'Todos'
+      clearFilter: 'Todos',
+      sumText: 'Total'
     },
     tree: {
       emptyText: 'Sem dados'
+    },
+    transfer: {
+      noMatch: 'Sem resultados',
+      noData: 'Sem dados',
+      titles: ['Lista 1', 'Lista 2'],
+      filterPlaceholder: 'Digite uma palavra-chave',
+      noCheckedFormat: '{total} itens',
+      hasCheckedFormat: '{checked}/{total} selecionados'
     }
   }
 };

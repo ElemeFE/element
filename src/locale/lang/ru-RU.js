@@ -1,5 +1,9 @@
 export default {
   el: {
+    colorpicker: {
+      confirm: 'OK',
+      clear: 'Очистить'
+    },
     datepicker: {
       now: 'Сейчас',
       today: 'Сегодня',
@@ -12,6 +16,10 @@ export default {
       startTime: 'Время начала',
       endDate: 'Дата окончания',
       endTime: 'Время окончания',
+      prevYear: 'Previous Year', // to be translated
+      nextYear: 'Next Year', // to be translated
+      prevMonth: 'Previous Month', // to be translated
+      nextMonth: 'Next Month', // to be translated
       year: '',
       month1: 'Январь',
       month2: 'Февраль',
@@ -56,9 +64,14 @@ export default {
       noData: 'Нет данных',
       placeholder: 'Выбрать'
     },
+    cascader: {
+      noMatch: 'Совпадений не найдено',
+      loading: 'Загрузка',
+      placeholder: 'Выбрать'
+    },
     pagination: {
       goto: 'Перейти',
-      pagesize: '/page',
+      pagesize: 'на странице',
       total: 'Всего {total}',
       pageClassifier: ''
     },
@@ -69,6 +82,7 @@ export default {
       error: 'Недопустимый ввод данных'
     },
     upload: {
+      deleteTip: 'press delete to remove', // to be translated
       delete: 'Удалить',
       preview: 'Превью',
       continue: 'Продолжить'
@@ -77,10 +91,19 @@ export default {
       emptyText: 'Нет данных',
       confirmFilter: 'Подтвердить',
       resetFilter: 'Сбросить',
-      clearFilter: 'Все'
+      clearFilter: 'Все',
+      sumText: 'Сумма'
     },
     tree: {
       emptyText: 'Нет данных'
+    },
+    transfer: {
+      noMatch: 'Совпадений не найдено',
+      noData: 'Нет данных',
+      titles: ['Список 1', 'Список 2'],
+      filterPlaceholder: 'Введите ключевое слово',
+      noCheckedFormat: '{total} пунктов',
+      hasCheckedFormat: '{checked}/{total} выбрано'
     }
   }
 };

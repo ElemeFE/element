@@ -22,14 +22,14 @@
     padding: 30px 0;
     text-align: center;
     border-right: solid 1px #EFF2F6;
-    float: left;
+    display: inline-block;
     width: 50%;
     box-sizing: border-box;
     &:last-child {
       border-right: none;
     }
   }
-  
+
   .demo-rate .demonstration {
     display: block;
     color: #8492a6;
@@ -41,7 +41,7 @@
 ## Rate 评分
 
 评分组件
- 
+
 ### 基础用法
 
 :::demo 评分被分为三个等级，可以利用颜色对分数及情感倾向进行分级（默认情况下不区分颜色）。三个等级所对应的颜色用过`colors`属性设置，而它们对应的两个阈值则通过 `low-threshold` 和 `high-threshold` 设定。
@@ -123,14 +123,14 @@
 
 只读的评分用来展示分数，允许出现半星
 
-:::demo 为组件设置 `disabled` 属性表示组件为只读，支持小数分值。此时若设置 `show-text`，则会在右侧显示目前的分值。可以提供 `text-template` 作为显示模板，模板为一个包含了 `{value}` 的字符串，`{value}` 会被解析为分值。
+:::demo 为组件设置 `disabled` 属性表示组件为只读，支持小数分值。此时若设置 `show-score`，则会在右侧显示目前的分值。可以提供 `score-template` 作为显示模板，模板为一个包含了 `{value}` 的字符串，`{value}` 会被解析为分值。
 ``` html
 <el-rate
   v-model="value5"
   disabled
-  show-text
+  show-score
   text-color="#ff9900"
-  text-template="{value}">
+  score-template="{value}">
 </el-rate>
 
 <script>
@@ -159,10 +159,11 @@
 | icon-classes | icon 的类名数组，共有 3 个元素，为 3 个分段所对应的类名 | array | — | ['el-icon-star-on', 'el-icon-star-on','el-icon-star-on'] |
 | void-icon-class | 未选中 icon 的类名 | string | — | el-icon-star-off |
 | disabled-void-icon-class | 只读时未选中 icon 的类名 | string | — | el-icon-star-on |
-| show-text | 是否显示辅助文字 | boolean | — | false |
-| text-color | 辅助文字的颜色 | string | — | 1F2D3D |
+| show-text | 是否显示辅助文字，若为真，则会从 texts 数组中选取当前分数对应的文字内容 | boolean | — | false |
+| show-score | 是否显示当前分数，show-score 和 show-text 不能同时为真 | boolean | — | false |
+| text-color | 辅助文字的颜色 | string | — | #1F2D3D |
 | texts | 辅助文字数组 | array | — | ['极差', '失望', '一般', '满意', '惊喜'] |
-| text-template | 只读时的辅助文字模板 | string | — | {value} |
+| score-template | 分数显示模板 | string | — | {value} |
 
 ### Events
 | 事件名称      | 说明    | 回调参数      |

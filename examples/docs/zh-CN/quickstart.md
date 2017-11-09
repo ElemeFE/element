@@ -4,129 +4,19 @@
 
 ### 使用 Starter Kit
 
-我们提供了通用的[项目模板](https://github.com/ElementUI/element-starter)，你可以直接使用。对于熟悉 [cooking](https://github.com/ElementUI/element-cooking-starter) 或 [Laravel](https://github.com/ElementUI/element-in-laravel-starter) 的用户，我们也准备了相应的模板，同样可以直接下载使用。
+我们提供了通用的[项目模板](https://github.com/ElementUI/element-starter)，你可以直接使用。对于 Laravel 用户，我们也准备了相应的[模板](https://github.com/ElementUI/element-in-laravel-starter)，同样可以直接下载使用。
 
 如果不希望使用我们提供的模板，请继续阅读。
 
-### 配置文件
+### 使用 vue-cli
 
-新建项目，项目结构为
-```text
-|- src/  --------------------- 项目源代码
-    |- App.vue
-    |- main.js  -------------- 入口文件
-|- .babelrc  ----------------- babel 配置文件
-|- index.html  --------------- HTML 模板
-|- package.json  ------------- npm 配置文件
-|- README.md  ---------------- 项目帮助文档
-|- webpack.config.js  -------- webpack 配置文件
-```
+我们还可以使用 [vue-cli](https://github.com/vuejs/vue-cli) 初始化项目，命令如下：
 
-几个配置文件的典型配置如下：
-
-**.babelrc**
-```json
-{
-  "presets": [
-    ["es2015", { "modules": false }]
-  ]
-}
-```
-
-<br>
-
-**package.json**
-```json
-{
-  "name": "element-starter",
-  "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --port 8086",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
-  },
-  "dependencies": {
-    "element-ui": "^1.0.0",
-    "vue": "^2.1.6"
-  },
-  "devDependencies": {
-    "babel-core": "^6.0.0",
-    "babel-loader": "^6.0.0",
-    "babel-preset-es2015": "^6.13.2",
-    "cross-env": "^1.0.6",
-    "css-loader": "^0.23.1",
-    "file-loader": "^0.8.5",
-    "style-loader": "^0.13.1",
-    "vue-loader": "^9.8.0",
-    "webpack": "beta",
-    "webpack-dev-server": "beta"
-  }
-}
-```
-
-<br>
-
-**webpack.config.js**
-```javascript
-var path = require('path')
-var webpack = require('webpack')
-
-module.exports = {
-  entry: './src/main.js',
-  output: {
-    path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
-    filename: 'build.js'
-  },
-  module: {
-    loaders: [
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader'
-      },
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
-      },
-      {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader'
-      },
-      {
-        test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
-        loader: 'file-loader'
-      },
-      {
-        test: /\.(png|jpe?g|gif|svg)(\?\S*)?$/,
-        loader: 'file-loader',
-        query: {
-          name: '[name].[ext]?[hash]'
-        }
-      }
-    ]
-  },
-  devServer: {
-    historyApiFallback: true,
-    noInfo: true
-  },
-  devtool: '#eval-source-map'
-}
-
-if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = '#source-map'
-  // http://vue-loader.vuejs.org/en/workflow/production.html
-  module.exports.plugins = (module.exports.plugins || []).concat([
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"production"'
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    })
-  ])
-}
+```shell
+> npm i -g vue-cli
+> mkdir my-project && cd my-project
+> vue init webpack
+> npm i && npm i element-ui
 ```
 
 ### 引入 Element
@@ -139,7 +29,7 @@ if (process.env.NODE_ENV === 'production') {
 ```javascript
 import Vue from 'vue'
 import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-default/index.css'
+import 'element-ui/lib/theme-chalk/index.css'
 import App from './App.vue'
 
 Vue.use(ElementUI)
@@ -170,7 +60,7 @@ npm install babel-plugin-component -D
   "plugins": [["component", [
     {
       "libraryName": "element-ui",
-      "styleLibraryName": "theme-default"
+      "styleLibraryName": "theme-chalk"
     }
   ]]]
 }
@@ -195,6 +85,173 @@ new Vue({
   render: h => h(App)
 })
 ```
+
+完整组件列表和引入方式（完整组件列表以 [components.json](https://github.com/ElemeFE/element/blob/master/components.json) 为准）
+
+```javascript
+import Vue from 'vue'
+import {
+  Pagination,
+  Dialog,
+  Autocomplete,
+  Dropdown,
+  DropdownMenu,
+  DropdownItem,
+  Menu,
+  Submenu,
+  MenuItem,
+  MenuItemGroup,
+  Input,
+  InputNumber,
+  Radio,
+  RadioGroup,
+  RadioButton,
+  Checkbox,
+  CheckboxButton,
+  CheckboxGroup,
+  Switch,
+  Select,
+  Option,
+  OptionGroup,
+  Button,
+  ButtonGroup,
+  Table,
+  TableColumn,
+  DatePicker,
+  TimeSelect,
+  TimePicker,
+  Popover,
+  Tooltip,
+  Breadcrumb,
+  BreadcrumbItem,
+  Form,
+  FormItem,
+  Tabs,
+  TabPane,
+  Tag,
+  Tree,
+  Alert,
+  Slider,
+  Icon,
+  Row,
+  Col,
+  Upload,
+  Progress,
+  Badge,
+  Card,
+  Rate,
+  Steps,
+  Step,
+  Carousel,
+  CarouselItem,
+  Collapse,
+  CollapseItem,
+  Cascader,
+  ColorPicker,
+  Transfer,
+  Container,
+  Header,
+  Aside,
+  Main,
+  Footer,
+  Loading,
+  MessageBox,
+  Message,
+  Notification
+} from 'element-ui'
+
+Vue.use(Pagination)
+Vue.use(Dialog)
+Vue.use(Autocomplete)
+Vue.use(Dropdown)
+Vue.use(DropdownMenu)
+Vue.use(DropdownItem)
+Vue.use(Menu)
+Vue.use(Submenu)
+Vue.use(MenuItem)
+Vue.use(MenuItemGroup)
+Vue.use(Input)
+Vue.use(InputNumber)
+Vue.use(Radio)
+Vue.use(RadioGroup)
+Vue.use(RadioButton)
+Vue.use(Checkbox)
+Vue.use(CheckboxGroup)
+Vue.use(Switch)
+Vue.use(Select)
+Vue.use(Option)
+Vue.use(OptionGroup)
+Vue.use(Button)
+Vue.use(ButtonGroup)
+Vue.use(Table)
+Vue.use(TableColumn)
+Vue.use(DatePicker)
+Vue.use(TimeSelect)
+Vue.use(TimePicker)
+Vue.use(Popover)
+Vue.use(Tooltip)
+Vue.use(Breadcrumb)
+Vue.use(BreadcrumbItem)
+Vue.use(Form)
+Vue.use(FormItem)
+Vue.use(Tabs)
+Vue.use(TabPane)
+Vue.use(Tag)
+Vue.use(Tree)
+Vue.use(Alert)
+Vue.use(Slider)
+Vue.use(Icon)
+Vue.use(Row)
+Vue.use(Col)
+Vue.use(Upload)
+Vue.use(Progress)
+Vue.use(Badge)
+Vue.use(Card)
+Vue.use(Rate)
+Vue.use(Steps)
+Vue.use(Step)
+Vue.use(Carousel)
+Vue.use(CarouselItem)
+Vue.use(Collapse)
+Vue.use(CollapseItem)
+Vue.use(Cascader)
+Vue.use(ColorPicker)
+Vue.use(Container)
+Vue.use(Header)
+Vue.use(Aside)
+Vue.use(Main)
+Vue.use(Footer)
+
+Vue.use(Loading.directive)
+
+Vue.prototype.$loading = Loading.service
+Vue.prototype.$msgbox = MessageBox
+Vue.prototype.$alert = MessageBox.alert
+Vue.prototype.$confirm = MessageBox.confirm
+Vue.prototype.$prompt = MessageBox.prompt
+Vue.prototype.$notify = Notification
+Vue.prototype.$message = Message
+```
+
+### 全局配置
+在引入 Element 时，可以传入一个全局配置对象。该对象目前仅支持 `size` 字段，用于改变组件的默认尺寸。按照引入 Element 的方式，具体操作如下：
+
+完整引入 Element：
+```JS
+import Vue from 'vue'
+import Element from 'element-ui'
+Vue.use(Element, { size: 'small' })
+```
+
+按需引入 Element：
+```JS
+import Vue from 'vue'
+import { Button } from 'element-ui'
+
+Vue.prototype.$ELEMENT = { size: 'small' }
+Vue.use(Button)
+```
+按照以上设置，项目中所有拥有 `size` 属性的组件的默认尺寸均为 'small'。
 
 ### 开始使用
 

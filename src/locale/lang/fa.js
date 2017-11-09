@@ -1,5 +1,9 @@
 export default {
   el: {
+    colorpicker: {
+      confirm: 'باشد',
+      clear: 'خذف'
+    },
     datepicker: {
       now: 'اکنون',
       today: 'امروز',
@@ -12,6 +16,10 @@ export default {
       startTime: 'زمان شروع',
       endDate: 'تاریخ پایان',
       endTime: 'زمان پایان',
+      prevYear: 'Previous Year', // to be translated
+      nextYear: 'Next Year', // to be translated
+      prevMonth: 'Previous Month', // to be translated
+      nextMonth: 'Next Month', // to be translated
       year: 'سال',
       month1: 'ژانویه',
       month2: 'فوریه',
@@ -56,6 +64,11 @@ export default {
       noData: 'اطلاعاتی وجود ندارد',
       placeholder: 'انتخاب کنید'
     },
+    cascader: {
+      noMatch: 'هیچ داده‌ای پیدا نشد',
+      loading: 'بارگیری',
+      placeholder: 'انتخاب کنید'
+    },
     pagination: {
       goto: 'برو به',
       pagesize: '/صفحه',
@@ -69,6 +82,7 @@ export default {
       error: 'ورودی غیر مجاز'
     },
     upload: {
+      deleteTip: 'press delete to remove', // to be translated
       delete: 'حذف',
       preview: 'پیش‌نمایش',
       continue: 'ادهمه'
@@ -77,10 +91,19 @@ export default {
       emptyText: 'اطلاعاتی وجود ندارد',
       confirmFilter: 'تایید',
       resetFilter: 'حذف',
-      clearFilter: 'همه'
+      clearFilter: 'همه',
+      sumText: 'Sum' // to be translated
     },
     tree: {
       emptyText: 'اطلاعاتی وجود ندارد'
+    },
+    transfer: {
+      noMatch: 'هیچ داده‌ای پیدا نشد',
+      noData: 'اطلاعاتی وجود ندارد',
+      titles: ['List 1', 'List 2'], // to be translated
+      filterPlaceholder: 'Enter keyword', // to be translated
+      noCheckedFormat: '{total} items', // to be translated
+      hasCheckedFormat: '{checked}/{total} checked' // to be translated
     }
   }
 };
