@@ -30,6 +30,7 @@
 </template>
 <script>
   import Menu from './menu-mixin';
+  import ElTooltip from 'element-ui/packages/tooltip';
   import Emitter from 'element-ui/src/mixins/emitter';
 
   export default {
@@ -39,13 +40,15 @@
 
     mixins: [Menu, Emitter],
 
+    components: { ElTooltip },
+
     props: {
       index: {
         type: String,
         required: true
       },
       route: {
-        type: Object,
+        type: [String, Object],
         required: false
       },
       disabled: {

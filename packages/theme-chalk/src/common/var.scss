@@ -689,7 +689,7 @@ $--breakpoints: (
 
 $--breakpoints-spec: (
   'xs-only' : (max-width: $--sm - 1),
-  'small-and-up' : (min-width: $--sm),
+  'sm-and-up' : (min-width: $--sm),
   'sm-only': "(min-width: #{$--sm}) and (max-width: #{$--md} - 1)",
   'sm-and-down': (max-width: $--md - 1),
   'md-and-up' : (min-width: $--md),

@@ -28,6 +28,7 @@
         class="el-select__input"
         :class="[selectSize ? `is-${ selectSize }` : '']"
         :disabled="disabled"
+        @focus="handleFocus"
         @keyup="managePlaceholder"
         @keydown="resetInputState"
         @keydown.down.prevent="navigateOptions('next')"
@@ -82,7 +83,7 @@
           tag="ul"
           wrap-class="el-select-dropdown__wrap"
           view-class="el-select-dropdown__list"
-          :class="{ 'is-empty': !allowCreate && filteredOptionsCount === 0 }"
+          :class="{ 'is-empty': !allowCreate && query && filteredOptionsCount === 0 }"
           v-show="options.length > 0 && !loading">
           <el-option
             :value="query"
@@ -164,7 +165,7 @@
           return this.loadingText || this.t('el.select.loading');
         } else {
           if (this.remote && this.query === '' && this.options.length === 0) return false;
-          if (this.filterable && this.options.length > 0 && this.filteredOptionsCount === 0) {
+          if (this.filterable && this.query && this.options.length > 0 && this.filteredOptionsCount === 0) {
             return this.noMatchText || this.t('el.select.noMatch');
           }
           if (this.options.length === 0) {
@@ -538,7 +539,7 @@
           let inputChildNodes = this.$refs.reference.$el.childNodes;
           let input = [].filter.call(inputChildNodes, item => item.tagName === 'INPUT')[0];
           const tags = this.$refs.tags;
-          input.style.height = this.selected.length === 0 && this.selectSize === 'mini'
+          input.style.height = this.selected.length === 0
             ? sizeMap[this.selectSize] + 'px'
             : Math.max(tags ? (tags.clientHeight + 10) : 0, sizeMap[this.selectSize] || 40) + 'px';
           if (this.visible && this.emptyText !== false) {

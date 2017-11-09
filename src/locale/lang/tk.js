@@ -16,6 +16,10 @@ export default {
       startTime: 'Başlaýan wagty',
       endDate: 'Gutarýan güni',
       endTime: 'Gutarýan wagty',
+      prevYear: 'Previous Year', // to be translated
+      nextYear: 'Next Year', // to be translated
+      prevMonth: 'Previous Month', // to be translated
+      nextMonth: 'Next Month', // to be translated
       year: '',
       month1: 'Ýan',
       month2: 'Few',

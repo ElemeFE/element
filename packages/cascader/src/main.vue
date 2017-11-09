@@ -153,6 +153,10 @@ export default {
     beforeFilter: {
       type: Function,
       default: () => (() => {})
+    },
+    hoverThreshold: {
+      type: Number,
+      default: 500
     }
   },
 
@@ -236,6 +240,7 @@ export default {
       this.menu.expandTrigger = this.expandTrigger;
       this.menu.changeOnSelect = this.changeOnSelect;
       this.menu.popperClass = this.popperClass;
+      this.menu.hoverThreshold = this.hoverThreshold;
       this.popperElm = this.menu.$el;
       this.menu.$refs.menus[0].setAttribute('id', `cascader-menu-${this.id}`);
       this.menu.$on('pick', this.handlePick);
