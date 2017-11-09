@@ -32,14 +32,14 @@
 
             if (!tab.active) {
               if (getSize) {
-                offset += getSize($el, firstUpperCase(sizeName)/*dimension*/);
+                offset += getSize($el, firstUpperCase(sizeName)/* dimension */);
               } else {
                 offset += $el[`client${firstUpperCase(sizeName)}`];
               }
               return true;
             } else {
               if (getSize) {
-                tabSize = getSize($el, firstUpperCase(sizeName)/*dimension*/);
+                tabSize = getSize($el, firstUpperCase(sizeName)/* dimension */);
               } else {
                 tabSize = $el[`client${firstUpperCase(sizeName)}`];
                 if (sizeName === 'width') {
