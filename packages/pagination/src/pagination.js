@@ -55,10 +55,12 @@ export default {
     const layout = this.layout || '';
     if (!layout) return;
     const TEMPLATE_MAP = {
+      first: <first></first>,
       prev: <prev></prev>,
       jumper: <jumper></jumper>,
       pager: <pager currentPage={ this.internalCurrentPage } pageCount={ this.internalPageCount } on-change={ this.handleCurrentChange }></pager>,
       next: <next></next>,
+      last: <last></last>,
       sizes: <sizes pageSizes={ this.pageSizes }></sizes>,
       slot: <my-slot></my-slot>,
       total: <total></total>
@@ -101,6 +103,17 @@ export default {
         );
       }
     },
+    First: {
+      render(h) {
+        return (
+          <button
+            class={['btn-first', {disabled: this.$parent.internalCurrentPage <= 1}]}
+            on-click={ this.$parent.first }>
+            <i class="el-icon el-icon-d-arrow-left"></i>
+          </button>
+        );
+      }
+    },
     Prev: {
       render(h) {
         return (
@@ -133,6 +146,22 @@ export default {
                 ? <span>{ this.$parent.nextText }</span>
                 : <i class="el-icon el-icon-arrow-right"></i>
             }
+          </button>
+        );
+      }
+    },
+    Last: {
+      render(h) {
+        return (
+          <button
+            class={
+              [
+                'btn-last',
+                {disabled: this.$parent.internalCurrentPage === this.$parent.internalPageCount || this.$parent.internalPageCount === 0}
+              ]
+            }
+            on-click={ this.$parent.last }>
+            <i class="el-icon el-icon-d-arrow-right"></i>
           </button>
         );
       }
@@ -272,6 +301,11 @@ export default {
       this.internalCurrentPage = this.getValidCurrentPage(val);
     },
 
+    first() {
+      const newVal = 1;
+      this.internalCurrentPage = this.getValidCurrentPage(newVal);
+    },
+
     prev() {
       const newVal = this.internalCurrentPage - 1;
       this.internalCurrentPage = this.getValidCurrentPage(newVal);
@@ -279,6 +313,11 @@ export default {
 
     next() {
       const newVal = this.internalCurrentPage + 1;
+      this.internalCurrentPage = this.getValidCurrentPage(newVal);
+    },
+
+    last() {
+      const newVal = this.internalPageCount;
       this.internalCurrentPage = this.getValidCurrentPage(newVal);
     },
 
