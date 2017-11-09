@@ -1,5 +1,5 @@
 import { createVue, triggerEvent, createTest, destroyVM } from '../util';
-import Popover, { directive } from 'packages/popover';
+import Popover from 'packages/popover';
 
 describe('Popover', () => {
   let vm;
@@ -149,7 +149,7 @@ describe('Popover', () => {
       `,
 
       directives: {
-        Popover: directive
+        Popover: Popover.directive
       }
     }, true);
     const compo = vm.$refs.popover1;
@@ -203,6 +203,48 @@ describe('Popover', () => {
       document.body.click();
       expect(compo.showPopper).to.false;
     });
+  });
+
+  it('show/hide events', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-popover
+            ref="popover"
+            trigger="click"
+            @show="handleShow"
+            @hide="handleHide"
+            content="content">
+            <button slot="reference">trigger</button>
+          </el-popover>
+        </div>
+      `,
+
+      methods: {
+        handleShow() {
+          this.trigger = true;
+        },
+        handleHide() {
+          this.trigger = false;
+        }
+      },
+
+      data() {
+        return {
+          trigger: false
+        };
+      }
+    }, true);
+
+    vm.$el.querySelector('button').click();
+    setTimeout(_ => {
+      expect(vm.trigger).to.true;
+      document.body.click();
+      setTimeout(_ => {
+        expect(vm.trigger).to.false;
+        done();
+      }, 50);
+    }, 50);
   });
 
   it('destroy event', () => {

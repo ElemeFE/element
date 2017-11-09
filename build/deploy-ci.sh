@@ -3,16 +3,13 @@ mkdir temp_web
 git config --global user.name "element-bot"
 git config --global user.email "wallement@gmail.com"
 
-if [[ "$ROT_TOKEN" = "" ]]; then
+if [ "$ROT_TOKEN" = "" ]; then
   echo "Bye~"
   exit 0
 fi
 
 # release
-if [[ "$TRAVIS_TAG" ]]; then
-  # build sub folder
-  SUB_FOLDER=$(echo $TRAVIS_TAG | grep -o -E '\d+\.\d+')
-
+if [ "$TRAVIS_TAG" ]; then
   # build lib
   npm run dist
   cd temp_web
@@ -25,11 +22,11 @@ if [[ "$TRAVIS_TAG" ]]; then
   git push origin master --tags
   cd ../..
 
-  # build theme-default
+  # build theme-chalk
   cd temp_web
-  git clone https://$ROT_TOKEN@github.com/ElementUI/theme-default.git && cd theme-default
+  git clone https://$ROT_TOKEN@github.com/ElementUI/theme-chalk.git && cd theme-chalk
   rm -rf *
-  cp -rf ../../packages/theme-default/** .
+  cp -rf ../../packages/theme-chalk/** .
   git add -A .
   git commit -m "[build] $TRAVIS_TAG"
   git tag $TRAVIS_TAG
@@ -40,6 +37,10 @@ if [[ "$TRAVIS_TAG" ]]; then
   npm run deploy:build
   cd temp_web
   git clone -b gh-pages https://$ROT_TOKEN@github.com/ElemeFE/element.git && cd element
+  # build sub folder
+  echo $TRAVIS_TAG
+
+  SUB_FOLDER='2.0'
   mkdir $SUB_FOLDER
   rm -rf *.js *.css *.map static
   rm -rf $SUB_FOLDER/**
@@ -66,11 +67,11 @@ git commit -m "$TRAVIS_COMMIT_MSG"
 git push origin master
 cd ../..
 
-# push dev theme-default
+# push dev theme-chalk
 cd temp_web
-git clone -b $TRAVIS_BRANCH https://$ROT_TOKEN@github.com/ElementUI/theme-default.git && cd theme-default
+git clone -b $TRAVIS_BRANCH https://$ROT_TOKEN@github.com/ElementUI/theme-chalk.git && cd theme-chalk
 rm -rf *
-cp -rf ../../packages/theme-default/** .
+cp -rf ../../packages/theme-chalk/** .
 git add -A .
 git commit -m "$TRAVIS_COMMIT_MSG"
 git push origin $TRAVIS_BRANCH

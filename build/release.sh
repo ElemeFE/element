@@ -16,10 +16,15 @@ then
   VERSION=$VERSION npm run dist
 
   # publish theme
-  echo "Releasing theme-default $VERSION ..."
-  cd packages/theme-default
+  echo "Releasing theme-chalk $VERSION ..."
+  cd packages/theme-chalk
   npm version $VERSION --message "[release] $VERSION"
-  npm publish
+  if [[ $VERSION =~ "beta" ]]
+  then
+    npm publish --tag beta
+  else
+    npm publish
+  fi
   cd ../..
 
   # commit
@@ -34,5 +39,10 @@ then
   git rebase master
   git push eleme dev
 
-  npm publish
+  if [[ $VERSION =~ "beta" ]]
+  then
+    npm publish --tag beta
+  else
+    npm publish
+  fi
 fi

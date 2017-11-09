@@ -1,13 +1,12 @@
 import Pager from './pager.vue';
 import ElSelect from 'element-ui/packages/select';
 import ElOption from 'element-ui/packages/option';
-import Migrating from 'element-ui/src/mixins/migrating';
-import { t } from 'element-ui/src/locale';
+import ElInput from 'element-ui/packages/input';
+import Locale from 'element-ui/src/mixins/locale';
+import { valueEquals } from 'element-ui/src/utils/util';
 
 export default {
   name: 'ElPagination',
-
-  mixins: [Migrating],
 
   props: {
     pageSize: {
@@ -35,7 +34,13 @@ export default {
       default() {
         return [10, 20, 30, 40, 50, 100];
       }
-    }
+    },
+
+    popperClass: String,
+
+    prevText: String,
+
+    nextText: String
   },
 
   data() {
@@ -54,8 +59,8 @@ export default {
       jumper: <jumper></jumper>,
       pager: <pager currentPage={ this.internalCurrentPage } pageCount={ this.internalPageCount } on-change={ this.handleCurrentChange }></pager>,
       next: <next></next>,
-      sizes: <sizes></sizes>,
-      slot: <slot></slot>,
+      sizes: <sizes pageSizes={ this.pageSizes }></sizes>,
+      slot: <my-slot></my-slot>,
       total: <total></total>
     };
     const components = layout.split(',').map((item) => item.trim());
@@ -80,20 +85,34 @@ export default {
     });
 
     if (haveRightWrapper) {
-      template.children.push(rightWrapper);
+      template.children.unshift(rightWrapper);
     }
 
     return template;
   },
 
   components: {
+    MySlot: {
+      render(h) {
+        return (
+          this.$parent.$slots.default
+          ? this.$parent.$slots.default[0]
+          : ''
+        );
+      }
+    },
     Prev: {
       render(h) {
         return (
           <button
+            type="button"
             class={['btn-prev', { disabled: this.$parent.internalCurrentPage <= 1 }]}
             on-click={ this.$parent.prev }>
-            <i class="el-icon el-icon-arrow-left"></i>
+            {
+              this.$parent.prevText
+                ? <span>{ this.$parent.prevText }</span>
+                : <i class="el-icon el-icon-arrow-left"></i>
+            }
           </button>
         );
       }
@@ -103,25 +122,40 @@ export default {
       render(h) {
         return (
           <button
-            class={
-              [
-                'btn-next',
-                { disabled: this.$parent.internalCurrentPage === this.$parent.internalPageCount || this.$parent.internalPageCount === 0 }
-              ]
-            }
+            type="button"
+            class={[
+              'btn-next',
+              { disabled: this.$parent.internalCurrentPage === this.$parent.internalPageCount || this.$parent.internalPageCount === 0 }
+            ]}
             on-click={ this.$parent.next }>
-            <i class="el-icon el-icon-arrow-right"></i>
+            {
+              this.$parent.nextText
+                ? <span>{ this.$parent.nextText }</span>
+                : <i class="el-icon el-icon-arrow-right"></i>
+            }
           </button>
         );
       }
     },
 
     Sizes: {
-      created() {
-        if (Array.isArray(this.$parent.pageSizes)) {
-          this.$parent.internalPageSize = this.$parent.pageSizes.indexOf(this.$parent.pageSize) > -1
-            ? this.$parent.pageSize
-            : this.$parent.pageSizes[0];
+      mixins: [Locale],
+
+      props: {
+        pageSizes: Array
+      },
+
+      watch: {
+        pageSizes: {
+          immediate: true,
+          handler(newVal, oldVal) {
+            if (valueEquals(newVal, oldVal)) return;
+            if (Array.isArray(newVal)) {
+              this.$parent.internalPageSize = newVal.indexOf(this.$parent.pageSize) > -1
+                ? this.$parent.pageSize
+                : this.pageSizes[0];
+            }
+          }
         }
       },
 
@@ -129,17 +163,16 @@ export default {
         return (
           <span class="el-pagination__sizes">
             <el-select
-              size="small"
               value={ this.$parent.internalPageSize }
-              on-change={ this.handleChange }
-              width={ 110 }>
+              popperClass={ `${this.$parent.popperClass || ''} is-arrow-fixed` }
+              on-input={ this.handleChange }>
               {
-                this.$parent.pageSizes.map(item =>
-                    <el-option
-                      value={ item }
-                      label={ item + ' ' + t('el.pagination.pagesize') }>
-                    </el-option>
-                  )
+                this.pageSizes.map(item =>
+                  <el-option
+                    value={ item }
+                    label={ item + this.t('el.pagination.pagesize') }>
+                  </el-option>
+                )
               }
             </el-select>
           </span>
@@ -162,52 +195,70 @@ export default {
     },
 
     Jumper: {
+      mixins: [Locale],
+
       data() {
         return {
           oldValue: null
         };
       },
 
+      components: { ElInput },
+
       methods: {
         handleFocus(event) {
           this.oldValue = event.target.value;
         },
-
-        handleChange({ target }) {
-          const oldPage = this.$parent.internalCurrentPage;
-          this.$parent.internalCurrentPage = this.$parent.getValidCurrentPage(target.value);
-          if (oldPage !== this.$parent.internalCurrentPage) {
-            this.$parent.$emit('current-change', this.$parent.internalCurrentPage);
+        handleBlur({ target }) {
+          this.reassignMaxValue(target);
+        },
+        handleKeyUp(event) {
+          const key = event.key || '';
+          const keyCode = event.keyCode || '';
+          if ((key && key === 'Enter') || (keyCode && keyCode === 13)) {
+            this.reassignMaxValue(event.target);
+            this.handleChange(event.target.value);
           }
+        },
+        handleChange(value) {
+          this.$parent.internalCurrentPage = this.$parent.getValidCurrentPage(value);
           this.oldValue = null;
+        },
+        reassignMaxValue(target) {
+          if (+target.value > this.$parent.internalPageCount) {
+            target.value = this.$parent.internalPageCount;
+          }
         }
       },
 
       render(h) {
         return (
           <span class="el-pagination__jump">
-            { t('el.pagination.goto') }
-            <input
-              class="el-pagination__editor"
-              type="number"
+            { this.t('el.pagination.goto') }
+            <el-input
+              class="el-pagination__editor is-in-pagination"
               min={ 1 }
               max={ this.$parent.internalPageCount }
-              domProps-value={ this.$parent.internalCurrentPage }
-              on-change={ this.handleChange }
-              on-focus={ this.handleFocus }
-              style={{ width: '30px' }}
-              number/>
-            { t('el.pagination.pageClassifier') }
+              value={ this.$parent.internalCurrentPage }
+              domPropsValue={ this.$parent.internalCurrentPage }
+              type="number"
+              onChange={ this.handleChange }
+              onFocus={ this.handleFocus }
+              onBlur={ this.handleBlur }
+              nativeOnKeyup={ this.handleKeyUp }/>
+            { this.t('el.pagination.pageClassifier') }
           </span>
         );
       }
     },
 
     Total: {
+      mixins: [Locale],
+
       render(h) {
         return (
           typeof this.$parent.total === 'number'
-            ? <span class="el-pagination__total">{ t('el.pagination.total', { total: this.$parent.total }) }</span>
+            ? <span class="el-pagination__total">{ this.t('el.pagination.total', { total: this.$parent.total }) }</span>
             : ''
         );
       }
@@ -217,42 +268,18 @@ export default {
   },
 
   methods: {
-    getMigratingConfig() {
-      return {
-        props: {},
-        events: {
-          'currentchange': 'Pagination: currentchange has been renamed to current-change',
-          'sizechange': 'Pagination: sizechange has been renamed to size-change'
-        }
-      };
-    },
-
     handleCurrentChange(val) {
-      const oldPage = this.internalCurrentPage;
       this.internalCurrentPage = this.getValidCurrentPage(val);
-      if (oldPage !== this.internalCurrentPage) {
-        this.$emit('current-change', this.internalCurrentPage);
-      }
     },
 
     prev() {
-      const oldPage = this.internalCurrentPage;
       const newVal = this.internalCurrentPage - 1;
       this.internalCurrentPage = this.getValidCurrentPage(newVal);
-
-      if (this.internalCurrentPage !== oldPage) {
-        this.$emit('current-change', this.internalCurrentPage);
-      }
     },
 
     next() {
-      const oldPage = this.internalCurrentPage;
       const newVal = this.internalCurrentPage + 1;
       this.internalCurrentPage = this.getValidCurrentPage(newVal);
-
-      if (this.internalCurrentPage !== oldPage) {
-        this.$emit('current-change', this.internalCurrentPage);
-      }
     },
 
     getValidCurrentPage(value) {
@@ -293,19 +320,6 @@ export default {
   },
 
   watch: {
-    internalPageCount(newVal) {
-      /* istanbul ignore if */
-      const oldPage = this.internalCurrentPage;
-      if (newVal > 0 && oldPage === 0) {
-        this.internalCurrentPage = 1;
-      } else if (oldPage > newVal) {
-        this.internalCurrentPage = newVal === 0 ? 1 : newVal;
-      }
-      if (oldPage !== this.internalCurrentPage) {
-        this.$emit('current-change', this.internalCurrentPage);
-      }
-    },
-
     currentPage: {
       immediate: true,
       handler(val) {
@@ -333,7 +347,24 @@ export default {
       if (newVal !== undefined) {
         this.$nextTick(() => {
           this.internalCurrentPage = newVal;
+          if (oldVal !== newVal) {
+            this.$emit('update:currentPage', newVal);
+            this.$emit('current-change', this.internalCurrentPage);
+          }
         });
+      } else {
+        this.$emit('update:currentPage', newVal);
+        this.$emit('current-change', this.internalCurrentPage);
+      }
+    },
+
+    internalPageCount(newVal) {
+      /* istanbul ignore if */
+      const oldPage = this.internalCurrentPage;
+      if (newVal > 0 && oldPage === 0) {
+        this.internalCurrentPage = 1;
+      } else if (oldPage > newVal) {
+        this.internalCurrentPage = newVal === 0 ? 1 : newVal;
       }
     }
   }

@@ -32,12 +32,12 @@ describe('MessageBox', () => {
     });
     setTimeout(() => {
       const msgbox = document.querySelector('.el-message-box__wrapper');
-      expect(msgbox.__vue__.$parent.value).to.true;
+      expect(msgbox.__vue__.$parent.visible).to.true;
       expect(msgbox.querySelector('.el-message-box__title').textContent).to.equal('消息');
       expect(msgbox.querySelector('.el-message-box__message')
         .querySelector('p').textContent).to.equal('这是一段内容');
       MessageBox.close();
-      expect(msgbox.__vue__.$parent.value).to.false;
+      expect(msgbox.__vue__.$parent.visible).to.false;
       done();
     }, 300);
   });
@@ -50,6 +50,19 @@ describe('MessageBox', () => {
     }, 300);
   });
 
+  it('html string', done => {
+    MessageBox({
+      title: 'html string',
+      dangerouslyUseHTMLString: true,
+      message: '<strong>html string</strong>'
+    });
+    setTimeout(() => {
+      const message = document.querySelector('.el-message-box__message strong');
+      expect(message.textContent).to.equal('html string');
+      done();
+    }, 300);
+  });
+
   it('alert', done => {
     MessageBox.alert('这是一段内容', {
       title: '标题名称',
@@ -58,7 +71,7 @@ describe('MessageBox', () => {
     setTimeout(() => {
       document.querySelector('.v-modal').click();
       expect(document.querySelector('.el-message-box__wrapper')
-        .__vue__.$parent.value).to.true;
+        .__vue__.$parent.visible).to.true;
       expect(document.querySelector('.el-message-box__wrapper')
         .__vue__.$parent.type).to.equal('warning');
       done();
@@ -74,7 +87,7 @@ describe('MessageBox', () => {
       document.querySelector('.el-message-box__wrapper')
         .querySelector('.el-button--primary').click();
       expect(document.querySelector('.el-message-box__wrapper')
-        .__vue__.$parent.value).to.false;
+        .__vue__.$parent.visible).to.false;
       done();
     }, 200);
   });
@@ -142,16 +155,40 @@ describe('MessageBox', () => {
   });
 
   it('callback', done => {
+    let msgAction = '';
     MessageBox({
       title: '消息',
       message: '这是一段内容'
     }, action => {
-      expect(action).to.equal('cancel');
-      done();
+      msgAction = action;
     });
     setTimeout(() => {
       document.querySelector('.el-message-box__close').click();
-    }, 300);
+      setTimeout(() => {
+        expect(msgAction).to.equal('cancel');
+        done();
+      }, 10);
+    }, 10);
+  });
+
+  it('beforeClose', done => {
+    let msgAction = '';
+    MessageBox({
+      title: '消息',
+      message: '这是一段内容',
+      beforeClose: (action, instance) => {
+        instance.close();
+      }
+    }, action => {
+      msgAction = action;
+    });
+    setTimeout(() => {
+      document.querySelector('.el-message-box__wrapper .el-button--primary').click();
+      setTimeout(() => {
+        expect(msgAction).to.equal('confirm');
+        done();
+      }, 10);
+    }, 10);
   });
 
   describe('promise', () => {
@@ -162,9 +199,8 @@ describe('MessageBox', () => {
           done();
         });
       setTimeout(() => {
-        document.querySelector('.el-message-box__wrapper')
-          .querySelector('.el-button--primary').click();
-      }, 300);
+        document.querySelector('.el-message-box__wrapper .el-button--primary').click();
+      }, 50);
     });
 
     it('reject', done => {
@@ -174,9 +210,8 @@ describe('MessageBox', () => {
           done();
         });
       setTimeout(() => {
-        document.querySelector('.el-message-box__wrapper')
-          .querySelector('.el-button').click();
-      }, 300);
+        document.querySelector('.el-message-box__wrapper .el-button').click();
+      }, 50);
     });
   });
 });

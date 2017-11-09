@@ -1,3 +1,17 @@
+<style>
+  .demo-box.demo-popover {
+    .el-popover + .el-popover {
+      margin-left: 10px;
+    }
+    .el-input {
+      width: 360px;
+    }
+    .el-button {
+      margin-left: 10px;
+    }
+  }
+</style>
+
 <script>
   export default {
     data() {
@@ -212,12 +226,14 @@ Of course, you can nest other operations. It's more light-weight than using a di
 |  content        |  popover content, can be replaced with a default `slot`    | string            | — | — |
 |  width        |  popover width  | string, number            | — | Min width 150px |
 |  placement        |  popover placement  | string | top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end |  bottom |
+|  disabled       |  whether Popover is disabled  | boolean    | — |  false |
 |  value(v-model)        |  whether popover is visible  | Boolean           | — |  false |
 |  offset        |  popover offset  | number           | — |  0 |
-|  transition     |  popover transition animation      | string             | — | fade-in-linear |
+|  transition     |  popover transition animation      | string             | — | el-fade-in-linear |
 |  visible-arrow   |  whether a tooltip arrow is displayed or not. For more info, please refer to [Vue-popper](https://github.com/element-component/vue-popper) | boolean | — | true |
-|  options        | parameters for [popper.js](https://popper.js.org/documentation.html) | object            | please refer to [popper.js](https://popper.js.org/documentation.html) | `{ boundariesElement: 'body', gpuAcceleration: false }` |
+|  popper-options        | parameters for [popper.js](https://popper.js.org/documentation.html) | object            | please refer to [popper.js](https://popper.js.org/documentation.html) | `{ boundariesElement: 'body', gpuAcceleration: false }` |
 |  popper-class        |  custom class name for popover | string | — | — |
+|  open-delay        | delay of appearance when `trigger` is hover, in milliseconds | number | — | — |
 
 ### Slot
 | Name | Description |
@@ -225,3 +241,8 @@ Of course, you can nest other operations. It's more light-weight than using a di
 | — | text content of popover |
 | reference | HTML element that triggers popover |
 
+### Events
+| Event Name | Description | 回调参数 |
+|---------|--------|---------|
+| show | triggers when popover shows | — |
+| hide | triggers when popover hides | — |

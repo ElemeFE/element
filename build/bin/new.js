@@ -6,7 +6,7 @@ process.on('exit', () => {
 });
 
 if (!process.argv[2]) {
-  console.error('[组件名]必填.');
+  console.error('[组件名]必填 - Please enter new component name');
   process.exit(1);
 }
 
@@ -32,27 +32,17 @@ export default ${ComponentName};`
   {
     filename: 'cooking.conf.js',
     content: `var cooking = require('cooking');
-var path = require('path');
+var gen = require('../../build/gen-single-config');
 
-cooking.set({
-  entry: {
-    index: path.join(__dirname, 'index.js')
-  },
-  dist: path.join(__dirname, 'lib'),
-  template: false,
-  format: 'umd',
-  moduleName: 'El${ComponentName}',
-  extends: ['vue2'],
-  alias: config.alias,
-  externals: { vue: config.vue }
-});
+cooking.set(gen(__dirname, 'El${ComponentName}'));
 
-module.exports = cooking.resolve();`
+module.exports = cooking.resolve();
+`
   },
   {
     filename: 'package.json',
     content: `{
-  "name": "el-${componentname}",
+  "name": "element-${componentname}",
   "version": "0.0.0",
   "description": "A ${componentname} component for Vue.js.",
   "keywords": [
@@ -75,31 +65,31 @@ module.exports = cooking.resolve();`
 
 <script>
 export default {
-  name: 'el-${componentname}'
+  name: 'El${ComponentName}'
 };
 </script>`
   },
   {
     filename: path.join('../../examples/docs/zh-CN', `${componentname}.md`),
-    content: `## ${chineseName}`
+    content: `## ${ComponentName} ${chineseName}`
   },
   {
-    filename: path.join('../../examples/docs/en-us', `${componentname}.md`),
-    content: `## ${componentname}`
+    filename: path.join('../../examples/docs/en-US', `${componentname}.md`),
+    content: `## ${ComponentName}`
   },
   {
     filename: path.join('../../test/unit/specs', `${componentname}.spec.js`),
     content: `import { createTest, destroyVM } from '../util';
-import Alert from 'packages/{{componentname}}';
+import ${ComponentName} from 'packages/${componentname}';
 
-describe('{{ComponentName}}', () => {
+describe('${ComponentName}', () => {
   let vm;
   afterEach(() => {
     destroyVM(vm);
   });
 
   it('create', () => {
-    vm = createTest({{ComponentName}}, true);
+    vm = createTest(${ComponentName}, true);
     expect(vm.$el).to.exist;
   });
 });
@@ -129,7 +119,7 @@ Files.forEach(file => {
 const navConfigFile = require('../../examples/nav.config.json');
 
 Object.keys(navConfigFile).forEach(lang => {
-  let groups = navConfigFile[lang][2].groups;
+  let groups = navConfigFile[lang][3].groups;
   groups[groups.length - 1].list.push({
     path: `/${componentname}`,
     title: lang === 'zh-CN' && componentname !== chineseName

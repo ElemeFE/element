@@ -32,7 +32,18 @@
         this.fullscreenLoading = true;
         setTimeout(() => {
           this.fullscreenLoading = false;
-        }, 3000);
+        }, 2000);
+      },
+      openFullScreen2() {
+        const loading = this.$loading({
+          lock: true,
+          text: 'Loading',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+        });
+        setTimeout(() => {
+          loading.close();
+        }, 2000);
       }
     }
   }
@@ -49,7 +60,7 @@
 ```html
 <template>
   <el-table
-    v-loading.body="loading"
+    v-loading="loading"
     :data="tableData"
     style="width: 100%">
     <el-table-column
@@ -100,16 +111,18 @@
 ```
 :::
 
-### 加载文案
+### 自定义
 
-可自定义加载文案。
+可自定义加载文案、图标和背景色。
 
-:::demo 在绑定了`v-loading`指令的元素上添加`element-loading-text`属性，其值会被渲染为加载文案，并显示在加载图标的下方。
+:::demo 在绑定了`v-loading`指令的元素上添加`element-loading-text`属性，其值会被渲染为加载文案，并显示在加载图标的下方。类似地，`element-loading-spinner`和`element-loading-background`属性分别用来设定图标类名和背景色值。
 ```html
 <template>
   <el-table
     v-loading="loading2"
     element-loading-text="拼命加载中"
+    element-loading-spinner="el-icon-loading"
+    element-loading-background="rgba(0, 0, 0, 0.8)"
     :data="tableData"
     style="width: 100%">
     <el-table-column
@@ -158,7 +171,7 @@
 
 页面数据加载时显示。
 
-:::demo 当需要全屏遮罩时，可使用`fullscreen`修饰符（此时遮罩会插入至 body 上）。此时若需要锁定屏幕的滚动，可以使用`lock`修饰符。
+:::demo 当使用指令方式时，全屏遮罩需要添加`fullscreen`修饰符（遮罩会插入至 body 上），此时若需要锁定屏幕的滚动，可以使用`lock`修饰符；当使用服务方式时，遮罩默认即为全屏，无需额外设置。
 
 ```html
 <template>
@@ -166,7 +179,12 @@
     type="primary"
     @click="openFullScreen"
     v-loading.fullscreen.lock="fullscreenLoading">
-    显示整页加载，3 秒后消失
+    指令方式
+  </el-button>
+  <el-button
+    type="primary"
+    @click="openFullScreen2">
+    服务方式
   </el-button>
 </template>
 
@@ -182,7 +200,18 @@
         this.fullscreenLoading = true;
         setTimeout(() => {
           this.fullscreenLoading = false;
-        }, 3000);
+        }, 2000);
+      },
+      openFullScreen2() {
+        const loading = this.$loading({
+          lock: true,
+          text: 'Loading',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+        });
+        setTimeout(() => {
+          loading.close();
+        }, 2000);
       }
     }
   }
@@ -204,14 +233,24 @@ Loading.service(options);
 let loadingInstance = Loading.service(options);
 loadingInstance.close();
 ```
+需要注意的是，以服务的方式调用的全屏 Loading 是单例的：若在前一个全屏 Loading 关闭前再次调用全屏 Loading，并不会创建一个新的 Loading 实例，而是返回现有全屏 Loading 的实例：
+```javascript
+let loadingInstance1 = Loading.service({ fullscreen: true });
+let loadingInstance2 = Loading.service({ fullscreen: true });
+console.log(loadingInstance1 === loadingInstance2); // true
+```
+此时调用它们中任意一个的 `close` 方法都能关闭这个全屏 Loading。
+
 如果完整引入了 Element，那么 Vue.prototype 上会有一个全局方法 `$loading`，它的调用方式为：`this.$loading(options)`，同样会返回一个 Loading 实例。
 
 ### Options
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| target | Loading 需要覆盖的 DOM 节点。可传入一个 DOM 对象或字符串；<br>若传入字符串，则会将其作为参数传入 `document.querySelector`<br>以获取到对应 DOM 节点 | object/string | — | document.body |
+| target | Loading 需要覆盖的 DOM 节点。可传入一个 DOM 对象或字符串；若传入字符串，则会将其作为参数传入 `document.querySelector`以获取到对应 DOM 节点 | object/string | — | document.body |
 | body | 同 `v-loading` 指令中的 `body` 修饰符 | boolean | — | false |
 | fullscreen | 同 `v-loading` 指令中的 `fullscreen` 修饰符 | boolean | — | true |
 | lock | 同 `v-loading` 指令中的 `lock` 修饰符 | boolean | — | false |
 | text | 显示在加载图标下方的加载文案 | string | — | — |
+| spinner | 自定义加载图标类名 | string | — | — |
+| background | 遮罩背景色 | string | — | — |
 | customClass | Loading 的自定义类名 | string | — | — |

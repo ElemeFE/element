@@ -1,6 +1,7 @@
 var cooking = require('cooking');
 var config = require('./config');
 var md = require('markdown-it')();
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 var striptags = require('./strip-tags');
 var slugify = require('transliteration').slugify;
 var isProd = process.env.NODE_ENV === 'production';
@@ -29,6 +30,7 @@ cooking.set({
   publicPath: process.env.CI_ENV || '',
   hash: true,
   devServer: {
+    hostname: '0.0.0.0',
     port: 8085,
     log: false,
     publicPath: '/'
@@ -52,6 +54,16 @@ cooking.add('loader.md', {
   test: /\.md$/,
   loader: 'vue-markdown-loader'
 });
+
+cooking.add('loader.scss', {
+  test: /\.scss$/,
+  loaders: ['style-loader', 'css-loader', 'sass-loader']
+});
+
+cooking.add(
+  'output.chunkFilename',
+  isProd ? '[name].[chunkhash:7].js' : '[name].js'
+);
 
 cooking.add('vueMarkdown', {
   use: [
@@ -88,7 +100,9 @@ cooking.add('vueMarkdown', {
         }
         return '</div></demo-block>\n';
       }
-    }]
+    }],
+    [require('markdown-it-container'), 'tip'],
+    [require('markdown-it-container'), 'warning']
   ],
   preprocess: function(MarkdownIt, source) {
     MarkdownIt.renderer.rules.table_open = function() {
@@ -102,7 +116,7 @@ cooking.add('vueMarkdown', {
 var wrap = function(render) {
   return function() {
     return render.apply(this, arguments)
-      .replace('<code class="', '<code class="hljs ')
+      .replace('<code v-pre class="', '<code class="hljs ')
       .replace('<code>', '<code class="hljs">');
   };
 };
@@ -112,5 +126,8 @@ if (isProd) {
   cooking.add('externals.vue-router', 'VueRouter');
 }
 
+cooking.add('plugin.CopyWebpackPlugin', new CopyWebpackPlugin([
+  { from: 'examples/versions.json' }
+]));
 cooking.add('vue.preserveWhitespace', false);
 module.exports = cooking.resolve();

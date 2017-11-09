@@ -1,4 +1,6 @@
-import { createVue, triggerEvent, destroyVM } from '../util';
+import { createVue, triggerEvent, triggerClick, destroyVM } from '../util';
+
+const DELAY = 1;
 
 describe('InputNumber', () => {
   let vm;
@@ -38,22 +40,14 @@ describe('InputNumber', () => {
     let input = vm.$el.querySelector('input');
     let btnDecrease = vm.$el.querySelector('.el-input-number__decrease');
 
-    triggerEvent(btnDecrease, 'mouseenter');
     triggerEvent(btnDecrease, 'mousedown');
-    triggerEvent(document, 'mouseup');
+    triggerClick(document, 'mouseup');
 
-    setTimeout(_ => {
-      expect(vm.$el.querySelector('.el-input.is-active')).to.exist;
+    vm.$nextTick(_ => {
       expect(vm.value).to.be.equal(4);
       expect(input.value).to.be.equal('4');
-
-      triggerEvent(btnDecrease, 'mouseleave');
-
-      vm.$nextTick(_ => {
-        expect(vm.$el.querySelector('.el-input.is-active')).to.not.exist;
-        done();
-      });
-    }, 300);
+      done();
+    });
   });
   it('increase', done => {
     vm = createVue({
@@ -72,13 +66,13 @@ describe('InputNumber', () => {
     let btnIncrease = vm.$el.querySelector('.el-input-number__increase');
 
     triggerEvent(btnIncrease, 'mousedown');
-    triggerEvent(document, 'mouseup');
+    triggerClick(document, 'mouseup');
 
-    setTimeout(_ => {
+    vm.$nextTick(_ => {
       expect(vm.value).to.be.equal(2.5);
       expect(input.value).to.be.equal('2.5');
       done();
-    }, 100);
+    });
   });
   it('disabled', done => {
     vm = createVue({
@@ -98,21 +92,21 @@ describe('InputNumber', () => {
     let btnIncrease = vm.$el.querySelector('.el-input-number__increase');
 
     triggerEvent(btnDecrease, 'mousedown');
-    triggerEvent(document, 'mouseup');
+    triggerClick(document, 'mouseup');
 
-    triggerEvent(btnIncrease, 'mousedown');
-    triggerEvent(document, 'mouseup');
-
-    setTimeout(_ => {
+    vm.$nextTick(_ => {
       expect(vm.value).to.be.equal(2);
       expect(input.value).to.be.equal('2');
 
-      setTimeout(_ => {
+      triggerEvent(btnIncrease, 'mousedown');
+      triggerClick(document, 'mouseup');
+
+      vm.$nextTick(_ => {
         expect(vm.value).to.be.equal(2);
         expect(input.value).to.be.equal('2');
         done();
-      }, 100);
-    }, 100);
+      });
+    });
   });
   it('step', done => {
     vm = createVue({
@@ -132,21 +126,21 @@ describe('InputNumber', () => {
     let btnDecrease = vm.$el.querySelector('.el-input-number__decrease');
 
     triggerEvent(btnIncrease, 'mousedown');
-    triggerEvent(document, 'mouseup');
+    triggerClick(document, 'mouseup');
 
-    setTimeout(_ => {
+    vm.$nextTick(_ => {
       expect(vm.value).to.be.equal(8.2);
       expect(input.value).to.be.equal('8.2');
 
       triggerEvent(btnDecrease, 'mousedown');
-      triggerEvent(document, 'mouseup');
+      triggerClick(document, 'mouseup');
 
-      setTimeout(_ => {
+      vm.$nextTick(_ => {
         expect(vm.value).to.be.equal(5);
         expect(input.value).to.be.equal('5');
         done();
-      }, 100);
-    }, 100);
+      });
+    });
   });
   it('min', done => {
     vm = createVue({
@@ -179,13 +173,13 @@ describe('InputNumber', () => {
     let btnDecrease = vm.$el.querySelector('.el-input-number__decrease');
 
     triggerEvent(btnDecrease, 'mousedown');
-    triggerEvent(document, 'mouseup');
+    triggerClick(document, 'mouseup');
 
-    setTimeout(_ => {
+    vm.$nextTick(_ => {
       expect(vm.value).to.be.equal(6);
       expect(input.value).to.be.equal('6');
       done();
-    }, 100);
+    });
   });
   it('max', done => {
     vm = createVue({
@@ -218,12 +212,143 @@ describe('InputNumber', () => {
     let btnIncrease = vm.$el.querySelector('.el-input-number__increase');
 
     triggerEvent(btnIncrease, 'mousedown');
-    triggerEvent(document, 'mouseup');
+    triggerClick(document, 'mouseup');
 
-    setTimeout(_ => {
+    vm.$nextTick(_ => {
       expect(vm.value).to.be.equal(8);
       expect(input.value).to.be.equal('8');
       done();
-    }, 100);
+    });
+  });
+  it('controls', () => {
+    vm = createVue({
+      template: `
+        <el-input-number :controls="false" v-model="value" :max="8">
+        </el-input-number>
+      `,
+      data() {
+        return {
+          value: 8
+        };
+      }
+    }, true);
+
+    expect(vm.$el.querySelector('.el-input-number__decrease')).to.not.exist;
+    expect(vm.$el.querySelector('.el-input-number__increase')).to.not.exist;
+  });
+  it('invalid value reset', done => {
+    vm = createVue({
+      template: `
+        <el-input-number v-model="value" :min="5" :max="10" ref="inputNumber">
+        </el-input-number>
+      `,
+      data() {
+        return {
+          value: 5
+        };
+      }
+    }, true);
+    const inputNumber = vm.$refs.inputNumber;
+    vm.value = 100;
+    vm.$nextTick(_ => {
+      expect(inputNumber.currentValue).to.be.equal(10);
+      vm.value = 4;
+
+      vm.$nextTick(_ => {
+        expect(inputNumber.currentValue).to.be.equal(5);
+        vm.value = 'dsajkhd';
+
+        vm.$nextTick(_ => {
+          expect(inputNumber.currentValue).to.be.equal(5);
+          done();
+        });
+      });
+    });
+  });
+  describe('event:change', () => {
+    let spy;
+
+    beforeEach(() => {
+      vm = createVue({
+        template: `
+          <el-input-number v-model="value" ref="compo" :min='2' :max='3' :step='1'>
+          </el-input-number>
+        `,
+        data() {
+          return {
+            value: 2
+          };
+        }
+      }, true);
+      spy = sinon.spy();
+      vm.$refs.compo.$on('change', spy);
+    });
+
+    it('emit on input', done => {
+      vm.$refs.compo.handleInput('3');
+      setTimeout(_ => {
+        expect(spy.calledOnce).to.be.true;
+        expect(spy.args[0][0]).to.equal(3);
+        done();
+      }, DELAY);
+    });
+
+    it('emit on button', done => {
+      const btnIncrease = vm.$el.querySelector('.el-input-number__increase');
+      triggerEvent(btnIncrease, 'mousedown');
+      triggerClick(document, 'mouseup');
+      setTimeout(_ => {
+        expect(spy.calledOnce).to.be.true;
+        expect(spy.args[0][0]).to.equal(3);
+        done();
+      }, DELAY);
+    });
+
+    it('does not emit on programatic change', done => {
+      vm.value = 3;
+      setTimeout(_ => {
+        expect(spy.notCalled).to.be.true;
+        done();
+      }, DELAY);
+    });
+  });
+  it('event:focus & blur', done => {
+    vm = createVue({
+      template: `
+        <el-input-number ref="input">
+        </el-input-number>
+      `
+    }, true);
+
+    const spyFocus = sinon.spy();
+    const spyBlur = sinon.spy();
+
+    vm.$refs.input.$on('focus', spyFocus);
+    vm.$refs.input.$on('blur', spyBlur);
+    vm.$el.querySelector('input').focus();
+    vm.$el.querySelector('input').blur();
+
+    vm.$nextTick(_ => {
+      expect(spyFocus.calledOnce).to.be.true;
+      expect(spyBlur.calledOnce).to.be.true;
+      done();
+    });
+  });
+  it('focus', done => {
+    vm = createVue({
+      template: `
+        <el-input-number ref="input"></el-input-number>
+      `
+    }, true);
+
+    const spy = sinon.spy();
+
+    vm.$refs.input.$on('focus', spy);
+    vm.$refs.input.focus();
+
+    vm.$nextTick(_ => {
+      expect(spy.calledOnce).to.be.true;
+      done();
+    });
   });
 });

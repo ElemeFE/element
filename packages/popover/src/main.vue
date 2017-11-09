@@ -2,11 +2,15 @@
   <span>
     <transition :name="transition" @after-leave="doDestroy">
       <div
-        class="el-popover"
-        :class="[popperClass]"
+        class="el-popover el-popper"
+        :class="[popperClass, content && 'el-popover--plain']"
         ref="popper"
-        v-show="showPopper"
-        :style="{ width: width + 'px' }">
+        v-show="!disabled && showPopper"
+        :style="{ width: width + 'px' }"
+        role="tooltip"
+        :id="tooltipId"
+        :aria-hidden="(disabled || !showPopper) ? 'true' : 'false'"
+      >
         <div class="el-popover__title" v-if="title" v-text="title"></div>
         <slot>{{ content }}</slot>
       </div>
@@ -14,13 +18,13 @@
     <slot name="reference"></slot>
   </span>
 </template>
-
 <script>
 import Popper from 'element-ui/src/utils/vue-popper';
-import { on, off } from 'wind-dom/src/event';
+import { on, off } from 'element-ui/src/utils/dom';
+import { generateId } from 'element-ui/src/utils/util';
 
 export default {
-  name: 'el-popover',
+  name: 'ElPopover',
 
   mixins: [Popper],
 
@@ -30,7 +34,12 @@ export default {
       default: 'click',
       validator: value => ['click', 'focus', 'hover', 'manual'].indexOf(value) > -1
     },
+    openDelay: {
+      type: Number,
+      default: 0
+    },
     title: String,
+    disabled: Boolean,
     content: String,
     reference: {},
     popperClass: String,
@@ -44,24 +53,44 @@ export default {
     }
   },
 
+  computed: {
+    tooltipId() {
+      return `el-popover-${generateId()}`;
+    }
+  },
+  watch: {
+    showPopper(newVal, oldVal) {
+      newVal ? this.$emit('show') : this.$emit('hide');
+    },
+    '$refs.reference': {
+      deep: true,
+      handler(val) {
+        console.log(val);
+      }
+    }
+  },
+
   mounted() {
-    let reference = this.reference || this.$refs.reference;
+    let reference = this.referenceElm = this.reference || this.$refs.reference;
     const popper = this.popper || this.$refs.popper;
 
     if (!reference && this.$slots.reference && this.$slots.reference[0]) {
       reference = this.referenceElm = this.$slots.reference[0].elm;
     }
+    // 可访问性
+    if (reference) {
+      reference.className += ' el-tooltip';
+      reference.setAttribute('aria-describedby', this.tooltipId);
+      reference.setAttribute('tabindex', 0); // tab序列
+
+      on(reference, 'focus', this.handleFocus);
+      on(reference, 'blur', this.handleBlur);
+      on(reference, 'keydown', this.handleKeydown);
+      on(reference, 'click', this.handleClick);
+    }
     if (this.trigger === 'click') {
-      on(reference, 'click', () => { this.showPopper = !this.showPopper; });
-      on(document, 'click', (e) => {
-        if (!this.$el ||
-            !reference ||
-            this.$el.contains(e.target) ||
-            reference.contains(e.target) ||
-            !popper ||
-            popper.contains(e.target)) return;
-        this.showPopper = false;
-      });
+      on(reference, 'click', this.doToggle);
+      on(document, 'click', this.handleDocumentClick);
     } else if (this.trigger === 'hover') {
       on(reference, 'mouseenter', this.handleMouseEnter);
       on(popper, 'mouseenter', this.handleMouseEnter);
@@ -76,8 +105,8 @@ export default {
         for (let i = 0; i < len; i++) {
           if (children[i].nodeName === 'INPUT' ||
               children[i].nodeName === 'TEXTAREA') {
-            on(children[i], 'focus', () => { this.showPopper = true; });
-            on(children[i], 'blur', () => { this.showPopper = false; });
+            on(children[i], 'focus', this.doShow);
+            on(children[i], 'blur', this.doClose);
             found = true;
             break;
           }
@@ -86,36 +115,88 @@ export default {
       if (found) return;
       if (reference.nodeName === 'INPUT' ||
         reference.nodeName === 'TEXTAREA') {
-        on(reference, 'focus', () => { this.showPopper = true; });
-        on(reference, 'blur', () => { this.showPopper = false; });
+        on(reference, 'focus', this.doShow);
+        on(reference, 'blur', this.doClose);
       } else {
-        on(reference, 'mousedown', () => { this.showPopper = true; });
-        on(reference, 'mouseup', () => { this.showPopper = false; });
+        on(reference, 'mousedown', this.doShow);
+        on(reference, 'mouseup', this.doClose);
       }
     }
   },
 
   methods: {
-    handleMouseEnter() {
+    doToggle() {
+      this.showPopper = !this.showPopper;
+    },
+    doShow() {
       this.showPopper = true;
+    },
+    doClose() {
+      this.showPopper = false;
+    },
+    handleFocus() {
+      const reference = this.referenceElm;
+      reference.className += ' focusing';
+      this.showPopper = true;
+    },
+    handleClick() {
+      const reference = this.referenceElm;
+      reference.className = reference.className.replace(/\s*focusing\s*/, ' ');
+    },
+    handleBlur() {
+      const reference = this.referenceElm;
+      reference.className = reference.className.replace(/\s*focusing\s*/, ' ');
+      this.showPopper = false;
+    },
+    handleMouseEnter() {
       clearTimeout(this._timer);
+      if (this.openDelay) {
+        this._timer = setTimeout(() => {
+          this.showPopper = true;
+        }, this.openDelay);
+      } else {
+        this.showPopper = true;
+      }
+    },
+    handleKeydown(ev) {
+      if (ev.keyCode === 27) { // esc
+        this.doClose();
+      }
     },
     handleMouseLeave() {
+      clearTimeout(this._timer);
       this._timer = setTimeout(() => {
         this.showPopper = false;
       }, 200);
+    },
+    handleDocumentClick(e) {
+      let reference = this.reference || this.$refs.reference;
+      const popper = this.popper || this.$refs.popper;
+
+      if (!reference && this.$slots.reference && this.$slots.reference[0]) {
+        reference = this.referenceElm = this.$slots.reference[0].elm;
+      }
+      if (!this.$el ||
+        !reference ||
+        this.$el.contains(e.target) ||
+        reference.contains(e.target) ||
+        !popper ||
+        popper.contains(e.target)) return;
+      this.showPopper = false;
     }
   },
 
   destroyed() {
     const reference = this.reference;
 
-    off(reference, 'mouseup');
-    off(reference, 'mousedown');
-    off(reference, 'focus');
-    off(reference, 'blur');
-    off(reference, 'mouseleave');
-    off(reference, 'mouseenter');
+    off(reference, 'click', this.doToggle);
+    off(reference, 'mouseup', this.doClose);
+    off(reference, 'mousedown', this.doShow);
+    off(reference, 'focus', this.doShow);
+    off(reference, 'blur', this.doClose);
+    off(reference, 'mouseleave', this.handleMouseLeave);
+    off(reference, 'mouseenter', this.handleMouseEnter);
+    off(document, 'click', this.handleDocumentClick);
   }
 };
 </script>

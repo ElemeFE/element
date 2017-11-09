@@ -1,6 +1,6 @@
 {
-  "name": "el-loading",
-  "version": "0.0.0",
+  "name": "element-loading",
+  "version": "1.0.0",
   "description": "A loading component for Vue.js.",
   "keywords": [
     "element",
@@ -11,7 +11,5 @@
   "repository": "https://github.com/ElemeFE/element/tree/master/packages/loading",
   "author": "elemefe",
   "license": "MIT",
-  "dependencies": {
-    "wind-dom": "0.0.3"
-  }
+  "dependencies": {}
 }

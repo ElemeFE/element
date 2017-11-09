@@ -7,6 +7,15 @@
     }
   }
 </script>
+<style>
+  .demo-box.demo-alert .el-alert {
+    margin: 20px 0 0;
+  }
+
+  .demo-box.demo-alert .el-alert:first-child {
+    margin: 0;
+  }
+</style>
 
 ## Alert
 
@@ -109,6 +118,42 @@ Displaying an icon improves readability.
 ```
 :::
 
+## Centered text
+
+Use the `center` attribute to center the text.
+
+::: demo
+
+```html
+<template>
+  <el-alert
+    title="success alert"
+    type="success"
+    center
+    show-icon>
+  </el-alert>
+  <el-alert
+    title="info alert"
+    type="info"
+    center
+    show-icon>
+  </el-alert>
+  <el-alert
+    title="warning alert"
+    type="warning"
+    center
+    show-icon>
+  </el-alert>
+  <el-alert
+    title="error alert"
+    type="error"
+    center
+    show-icon>
+  </el-alert>
+</template>
+```
+:::
+
 ### With description
 
 Description includes a message with more detailed information.
@@ -165,9 +210,9 @@ Description includes a message with more detailed information.
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | **title** | title **REQUIRED** | string | — | — |
 | type | component type | string | success/warning/info/error | info |
-| description | supportive text | string | — | — |
-| render-content | render function for content area, overrides `description` | function(h) | — | — |
+| description | descriptive text. Can also be passed with the default slot | string | — | — |
 | closable | if closable or not | boolean | — | true |
+| center | whether to center the text | boolean | — | false |
 | close-text | customized close button text | string | — | — |
 | show-icon | if a type icon is displayed | boolean | — | false |
 

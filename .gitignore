@@ -12,4 +12,6 @@ examples/pages/zh-CN
 fe.element/element-ui
 .npmrc
 coverage
-yarn.lock
+waiter.config.js
+build/bin/algolia-key.js
+.envrc

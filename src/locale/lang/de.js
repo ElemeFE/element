@@ -1,17 +1,28 @@
 export default {
   el: {
+    colorpicker: {
+      confirm: 'OK',
+      clear: 'Leeren'
+    },
     datepicker: {
-      now: 'jetzt',
-      today: 'heute',
-      cancel: 'abbrechen',
-      clear: 'leeren',
+      now: 'Jetzt',
+      today: 'Heute',
+      cancel: 'Abbrechen',
+      clear: 'Leeren',
       confirm: 'OK',
       selectDate: 'Datum wählen',
-      selectTime: 'Zeit wählen',
+      selectTime: 'Uhrzeit wählen',
       startDate: 'Startdatum',
       startTime: 'Startzeit',
       endDate: 'Enddatum',
       endTime: 'Endzeit',
+      prevYear: 'Previous Year', // to be translated
+      nextYear: 'Next Year', // to be translated
+      prevMonth: 'Previous Month', // to be translated
+      nextMonth: 'Next Month', // to be translated
+      day: 'Tag',
+      week: 'Woche',
+      month: 'Monat',
       year: '',
       month1: 'Januar',
       month2: 'Februar',
@@ -24,8 +35,7 @@ export default {
       month9: 'September',
       month10: 'Oktober',
       month11: 'November',
-      month12: 'Dezmeber',
-      // week: 'Woche',
+      month12: 'Dezember',
       weeks: {
         sun: 'So',
         mon: 'Mo',
@@ -51,35 +61,50 @@ export default {
       }
     },
     select: {
-      loading: 'es lädt',
-      noMatch: 'nicht gefunden',
-      noData: 'keine Datei',
-      placeholder: 'wählen'
+      loading: 'Lädt.',
+      noMatch: 'Nichts gefunden.',
+      noData: 'Keine Daten',
+      placeholder: 'Daten wählen'
+    },
+    cascader: {
+      noMatch: 'Nichts gefunden.',
+      loading: 'Lädt.',
+      placeholder: 'Daten wählen'
     },
     pagination: {
-      goto: 'zu',
-      pagesize: '/Seite',
-      total: 'gesamt {total}',
+      goto: 'Gehe zu',
+      pagesize: 'pro Seite',
+      total: 'Gesamt {total}',
       pageClassifier: ''
     },
     messagebox: {
       confirm: 'OK',
-      cancel: 'abbrechen',
+      cancel: 'Abbrechen',
       error: 'Fehler'
     },
     upload: {
-      delete: 'löschen',
-      preview: 'vorschauen',
-      continue: 'weiter hochzuladen'
+      deleteTip: 'press delete to remove', // to be translated
+      delete: 'Löschen',
+      preview: 'Vorschau',
+      continue: 'Fortsetzen'
     },
     table: {
-      emptyText: 'keine Daten',
-      confirmFilter: 'filtern',
-      resetFilter: 'rücksetzen',
-      clearFilter: 'alles'
+      emptyText: 'Keine Daten',
+      confirmFilter: 'Anwenden',
+      resetFilter: 'Zurücksetzen',
+      clearFilter: 'Alles ',
+      sumText: 'Summe'
     },
     tree: {
-      emptyText: 'keine Daten'
+      emptyText: 'Keine Einträge'
+    },
+    transfer: {
+      noMatch: 'Nichts gefunden.',
+      noData: 'Keine Einträge',
+      titles: ['Liste 1', 'Liste 2'],
+      filterPlaceholder: 'Einträge filtern',
+      noCheckedFormat: '{total} Einträge',
+      hasCheckedFormat: '{checked}/{total} ausgewählt'
     }
   }
 };

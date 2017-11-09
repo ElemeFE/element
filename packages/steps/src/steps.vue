@@ -1,19 +1,31 @@
 <template>
-  <div class="el-steps" :class="['is-' + direction]"><slot></slot></div>
+  <div
+    class="el-steps"
+    :class="[
+       !simple && 'el-steps--' + direction,
+       simple && 'el-steps--simple'
+     ]">
+      <slot></slot>
+  </div>
 </template>
 
 <script>
+import Migrating from 'element-ui/src/mixins/migrating';
+
 export default {
-  name: 'el-steps',
+  name: 'ElSteps',
+
+  mixins: [Migrating],
 
   props: {
-    space: Number,
+    space: [Number, String],
     active: Number,
     direction: {
       type: String,
       default: 'horizontal'
     },
     alignCenter: Boolean,
+    simple: Boolean,
     finishStatus: {
       type: String,
       default: 'finish'
@@ -26,20 +38,31 @@ export default {
 
   data() {
     return {
-      steps: []
+      steps: [],
+      stepOffset: 0
     };
+  },
+
+  methods: {
+    getMigratingConfig() {
+      return {
+        props: {
+          'center': 'center is removed.'
+        }
+      };
+    }
   },
 
   watch: {
     active(newVal, oldVal) {
       this.$emit('change', newVal, oldVal);
-    }
-  },
+    },
 
-  mounted() {
-    this.steps.forEach((child, index) => {
-      child.index = index;
-    });
+    steps(steps) {
+      steps.forEach((child, index) => {
+        child.index = index;
+      });
+    }
   }
 };
 </script>

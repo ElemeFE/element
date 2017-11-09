@@ -1,220 +1,209 @@
 ## 更新日志
 
-### 1.0.2
-*2016-11-18*
+### 2.0.3
 
-- 新增 Table `context` 属性，可以指定自定义 column 内部可获取的上下文，#1161
-- 新增 多种语言支持
-- 修复 没有正确动态渲染语言的问题，#1160
-- 新增 Alert 的 `render-content` 属性，#568
-- 新增 Button 的 focus 样式，#982
-- 修复 Switch 的 `change` 事件触发时机错误的问题，#1162
-- 修复 TimeSelect 开始时间设置 `00:00` 后会被禁用的问题，#676
-- 新增 Table `show-header` 属性，`header-click` 事件。#1195
-- 完善 Table 的 `height` 属性，当 `height` 属性为字符串的时候，表示 Table 的高度受外部样式控制，#1195
-- 修复 Table 的 `selection-change` 在某些情况下不触发的问题，#1198
-- 修复 Table 动态修改 `fixed` 属性可能会造成锁定列不消失的问题，#1182
+*2017-11-03*
 
-### 1.0.1
-*2016-11-16*
+- 修复范围选择的 DatePicker `editable` 和 `readonly` 属性无法正常工作的问题，#7922
+- 修复嵌套的 Tabs 的样式错误，#7941
+- 修复纵向 Steps 中最后一个 Step 的样式错误，#7980
+- 修复 Pagination 的 `current-change` 事件触发时机错误的问题，#7995
+- 修复由于 Menu 使用了未注册的 Tooltip 造成其在按需引入时报错的问题，#7995
 
-- 修复 Pagination 错误地多次触发 `current-change` 事件的问题
-- 修复 Switch 在 Form 中的样式错误，#967
-- 修复 Loading 在某些情况下错误地锁定 `body` 滚动的问题，#968
-- Col 组件的 `span` 属性不再是必填属性，在省略的情况下其默认值为 `24`
-- 新增 DatePicker `disabled` 和 `editable` 属性，#976
-- 修复 DatePicker 的 `readonly` 与原生行为一致，现在通过设置 editable=false 禁止输入但是可通过弹框选日期，#976
-- 新增 Message 和 Notification 的 `close` 方法，用于手动关闭实例
-- 新增 DatePicker 清除功能，#759
-- 修复 Form 重置日期报错，#937
-- 修复 Tab 设置active-name不是首个tab时的样式问题，#1034
-- 修复 Table 的 inline-template 在 vue-loader 9.9.0 渲染报错
-- 新增 Step 支持内容居中对齐，#994
-- 修复 Upload 单独引入时提示 Progress 组件不存在，#1013
-- Layout 支持响应式布局
-- 新增 Dialog `show-close` 属性
-- 修复 和 `vue-i18n` 一起使用时，未初始化 i18n 会报错，#973
-- 修复 DatePicker 设置初始值后界面未更新 #1050
-- 修复 DatePicker 月份选择器直接切换年份并未更新年份数据 #1070
-- 新增 $loading 服务，用以调用 Loading
-- 新增 Popover 可手动控制显示隐藏，将 trigger 设置为 `manual`
-- 新增 Tree 的 `nodeKey`、`emptyText`、`checkStrictly`、`defaultExpandAll`、`autoExpandParent`、`defaultCheckedKeys`、`defaultExpandedKeys` 属性，`setCheckedNodes` 方法。
+### 2.0.2
 
+*2017-10-31*
 
-### 1.0.0
+- 在 InputNumber 的加减按钮上单击鼠标右键不再触发值的改变，#7817
+- Form 的 `validate` 方法现在能够正确地在异步校验完成后执行回调了，#7774（by @Allenice）
+- 修复 DatePicker 的范围选择在内核为 Chromium 53-57 的浏览器中无法使用的问题，#7838
+- 修复 `list-type` 为 picture-card 的 Upload 预览和删除图标丢失的问题，#7857
+- 新增 TableColumn 的 `sort-by` 属性，#7828（by @wangfengming）
+- 修复周模式下的 DatePicker 在选择某年第一周可能会显示为前一年第一周的问题，#7860（by @hh23485）
+- 修复垂直模式的 Steps 中图标宽度的样式错误，#7891
+- 增大了 Tree 中展开箭头的点击热区，#7891
 
-*2016-11-9*
+### 2.0.1
 
-- 修复 TimePicker 选择范围时结束时间小于开始时间会重置开始时间, #894
-- 修复结合 `vue-i18n` 使用时会提示不能覆盖 `$t` 方法的问题
-- 新增 Loading 自定义加载文案的功能，并优化了视觉表现
-- 修复 Input blur 事件的参数不是 event 对象的问题
-- `window.ELEMENT.locale.use` 改成 `window.ELEMENT.locale`
+*2017-10-28*
 
-### 1.0.0-rc.9
+- 修复 RadioButton 和 CheckboxButton 的样式问题，#7793
+- 修复 TimePicker 在某些情况下无法滚动的问题，#7811
+- 修复部分组件在按需引入时样式不完整的问题，#7811
 
-*2016-11-07*
+### 2.0.0 Carbon
 
-- 新增 MessageBox 确定按钮自动获取焦点, #721
-- 修复 Popover focus 失效, #734
-- 修复 Clickoutside 报错, #729
-- 修复 DatePicker 选择日期范围时当选中同一天再调整时间会出错
-- 更新 TimePicker 滚动条在 IE10+ 下隐藏
-- 新增 Dropdown 的 command api #432
-- 修复 Slider 在 Form 中的显示问题
-- 修复 Upload 在 onSuccess、onError 钩子无法拿到服务端返回信息的问题
-- 改善 tabs 现在支持动态更新
-- Table 新增 highlightCurrentRow 属性、新增 current-change 事件
-- TableColumn 的 showTooltipWhenOverflow 更名为 showOverflowTooltip（两个属性均可用）
-- TableColumn 新增属性 render-header
-- Pagination 新增属性 pageCount
-- DatePicker 修复重置 value 后默认选中日期没有重置, #878
+*2017-10-27*
 
-#### 非兼容性更新
+#### 新特性
+- 综合
+  - 新增 `theme-chalk` 主题
+  - 增强以下组件的可访问性：Alert、AutoComplete、Breadcrumb、Button、Checkbox、Collapse、Input、InputNumber、Menu、Progress、Radio、Rate、Slider、Switch 和 Upload
+  - 新增布局组件 Container、Header、Aside、Main 和 Footer
+  - 新增 TypeScript 类型声明
+  - 重绘了全部图标，并新增了部分图标
+  - 新增了一系列基于断点的工具类，用于当视口尺寸满足一定条件时隐藏元素
+  - 新增全局配置组件尺寸的功能。在引入 Element 时，配置 `size` 字段可以改变所有组件的默认尺寸
+- Button
+  - 新增 `round` 属性，用于圆角按钮 #6643
+- TimeSelect
+  - 可以用 `Up`、`Down` 导航，用 `Enter` 选中时间 #6023
+- TimePicker
+  - 可以用方向键导航，用 `Enter` 选中时间 #6050
+  - 新增 `start-placeholder` 和 `end-placeholder`，用于设置范围选择时两个输入框的占位符 #7169
+  - 新增 `arrow-control` 属性，提供另一种交互形式，#7438
+- Tree
+  - 子节点在首次被展开之前不进行渲染 #6257
+  - 新增 `check-descendants` 属性，设置 `lazy` 模式下勾选节点时，是否完全展开整个子树 #6235
+- Tag
+  - 新增 `size` 属性 #7203
+- Datepicker
+  - type 为 `datetimerange` 时可以使用 `timeFormat` 格式化时间选择器 #6052
+  - 新增 `start-placeholder` 和 `end-placeholder`，用于设置范围选择时两个输入框的占位符 #7169
+  - 新增 `value-format` 属性，支持对绑定值的格式进行自定义，#7367
+  - 新增 `unlink-panels` 属性，用于在选择日期范围时取消两个日期面板之间的联动
+- MessageBox
+  - 新增 `closeOnHashChange` 属性 #6043
+  - 新增 `center` 属性，提供居中布局 #7029
+  - 新增 `roundButton` 属性，使得内部按钮为圆角按钮 #7029
+  - 新增 `dangerouslyUseHTMLString` 属性，使得 `message` 支持传入 HTML 字符串<sup>*</sup> #6043
+  - 新增 `inputType` 属性，用户指定内部输入框的类型，#7651
+- Dialog
+  - 新增 `width`、`fullscreen`、`append-to-body` 属性，支持嵌套使用
+  - 新增 `center` 属性，提供居中布局 #7042
+  - 新增 `focus-after-closed`、`focus-after-open`属性，支持无障碍访问 #6511
+- ColorPicker
+  - 增加手动输入色值的支持 #6167
+  - 新增 `size` 属性，用于控制组件的大小 #7026
+  - 新增 `disabled` 属性，用于禁用组件 #7026
+  - 新增 `popper-class` 属性，#7351
+- Message
+  - 图标部分使用 icon 代替图片，从而支持通过 CSS 修改图标背景色 #6207
+  - 新增 `dangerouslyUseHTMLString` 属性，使得 `message` 属性支持传入 HTML 字符串<sup>*</sup> #6207
+  - 新增 `center` 属性，提供居中布局 #6875
+- Notification
+  - 新增 `position` 属性，用于配置 Notification 出现的位置 #6231
+  - 新增 `dangerouslyUseHTMLString` 属性，使得 `message` 属性支持传入 HTML 字符串<sup>*</sup> #6231
+  - 新增 `showClose` 属性，用于隐藏关闭按钮 #6402
+- Rate
+  - 新增 `show-score` 属性，控制是否在右侧显示当前分数 #6295
+- Tabs
+  - 新增 `tab-position` 属性，控制选项面板内容显示的上、下、左、右四个方向 #6096
+- Radio
+  - 增加 `border` 属性和 `size` 属性 #6690
+- Checkbox
+  - 增加 `border` 属性和 `size` 属性 #6690
+- Alert
+  - 新增 `center` 属性，提供居中布局 #6876
+- Menu
+  - 新增 `background-color`、`text-color` 和 `active-text-color` 属性，分别用于设置菜单的背景色、菜单的文字颜色和当前激活菜单的文字颜色 #7064
+  - 新增 `open` 和 `close` 方法，支持手动打开和关闭 SubMenu，#7412
+- Form
+  - 新增 `inline-message` 属性，设置后校验信息会以行内样式显示 #7032
+  - 新增 `status-icon` 属性，用于在输入框中显示校验结果反馈图标 #7032
+  - Form 和 FormItem 新增 `size` 属性，用于控制表单内组件的尺寸，#7428
+  - `validate` 方法在不传入 callback 的情况下返回 promise，#7405
+  - 新增 `clearValidate` 方法，用于清空所有表单项的验证信息，#7623
+- Input
+  - 新增 `suffix`、`prefix` 的 slot，以及 `suffixIcon`、`prefixIcon` 属性，用于给输入框内部增加前置和后置内容 #7032
+- Breadcrumb
+  - 新增 `separator-class` 属性，可使用图标作为分隔符 #7203
+- Steps
+  - 新增 `simple` 属性，用于开启简洁风格的步骤条 #7274
+- Pagination
+  - 新增 `prev-text` 和 `next-text` 属性，用于自定义上一页和下一页的文本 #7005
+- Loading
+  - 配置对象新增 `spinner` 和 `background` 字段，支持自定义加载图标和背景色，#7390
+- Autocomplete
+  - 新增 `debounce` 属性，#7413
+- Upload
+  - 新增 `limit` 和 `on-exceed` 属性，支持对上传文件的个数进行限制，#7405
+- DateTimePicker
+  - 新增 `time-arrow-control` 属性，用于开启时间选择器的 `arrow-control`，#7438
+- Layout
+  - 新增断点 `xl`，适用于宽度大于 1920px 的视口
+- Table
+  - 新增 `span-method` 属性，用于合并行或列
+  - 新增 `clearSort` 方法，用于清空排序状态
+  - 新增 `clearFilter` 方法，用于清空过滤状态
+  - 对于可展开行，当该行展开时会获得一个 `.expanded` 类名，方便自定义样式
+  - 新增 `size` 属性，用于控制表格尺寸
+  - 新增 `toggleRowExpansion` 方法，用于手动展开或关闭行
+  - 新增 `cell-class-name` 属性，用于指定单元格的类名
+  - 新增 `cell-style` 属性，用于指定单元格的样式
+  - 新增 `header-row-class-name` 属性，用于指定表头行的类名
+  - 新增 `header-row-style` 属性，用于指定表头行的样式
+  - 新增 `header-cell-class-name` 属性，用于指定表头单元格的类名
+  - 新增 `header-cell-style` 属性，用于指定表头单元格的样式
+  - TableColumn 的 `prop` 属性支持 `object[key]` 格式
+  - TableColumn 新增 `index` 属性，用于自定义索引值
+- Select
+  - 新增 `reserve-keyword` 属性，用于在选择某个选项后保留当前的搜索关键词
 
-- Upload on-error 钩子函数参数变更为 function(err, response, file), on-success 钩子函数参数变更为 function(response, file, fileList)
-
-### 1.0.0-rc.8
-
-*2016-10-28*
-
-- 修复 Form reset method 对日期控件不起效的问题
-- 修复 Dialog/Message Box/Tooltip/Popover/... 等若干组件的样式错误
-- 修复 Message Box 的 prompt 在打开时会携带之前的验证状态的问题
-- 修复 Autocomplete 的弹出框不会消失 #439
-- 新增 Input 图标的点击事件 #444
-- 修复 Loading 关闭后有几率滚动失效的问题
-- 修复 远程搜索的 Select 不能正确渲染默认初始值的问题
-- 修复 Switch 的 width 属性无效的问题
-- Table 增加 rowClassName 属性
-- TableColumn 增加 fixed 属性，可选值：true, false, left, right
-- TableColumn 增加属性：filters、filterMultiple、filterMethod、filteredValue
-- TableColumn[type="selection"] 增加 selectable 属性
-- 修复 Input textarea 在动态赋值时 autosize 没有触发的问题
-- 修复 Input Number min max 属性设置后点击加减出现的崩溃的bug
-- 优化 TimePicker/DatePicker 输入日期行为
-- 修复 DatePicker 输入禁用状态的日期却生效的问题 #484
-- 新增 Slider 的 disabled 属性
-- 新增 Menu 的 menu-trigger 属性
-- 新增 i18n 的支持
-
-#### 非兼容性更新
-
-- Tabs 组件的 click 和 remove 事件回调参数从 name 改为事件对应的 tab 组件实例
-- 全屏 Loading 现在默认不再锁定屏幕滚动。如果需要的话，可添加 `lock` 修饰符
-- Table 删除属性 fixedColumnCount、customCriteria、customBackgroundColors、selectionMode
-- Table 的 selectionchange、cellmouseenter、cellmouseleave、cellclick 事件更名为 selection-change、cell-mouse-enter、cell-mouse-leave、cell-click。
-- Pagination 的 currentchange、sizechange 事件更名为 current-change、size-change
-
-### 1.0.0-rc.7
-
-*2016-10-13*
-
-- Upload 新增 Data 属性支持额外数据的传输
-- DatePicker 修复 `$t` 报错
-- Popper 重构 vue-popper
-- Pagination 修复输入后再点击切换，输入框的值不更新
-- Step: 修复自定义 icon 的样式
-- 修复 Tree 组件 checkbox 点击失效的问题
-- Breadcrumb 增加路由跳转的功能
-- 修复 可清空的 Select 中清空按钮的不恰当动画
-- DatePicker 修复使用 Tab 键切换时弹出框未隐藏
-
-### 1.0.0-rc.6
-
-*2016-10-11*
-
-- 修复 Tabs 切换后 Tab-panel 被销毁的问题
-- 修复 TimePicker 错误的隐藏面板
-- 修复 Table Cell 的样式, #204
-- 修复 Menu default-active 属性不能为空的问题, #200
-- 修复 Menu unique-opened 开启后无法展开子菜单的问题, #200
-- 为 Notification 和 Message 的不同 type 添加独立的调用方法
-- 为 Message Box 和 Dialog 添加 lockScroll 属性，用于定义是否在弹框出现时将 body 滚动锁定
-- 新增 Input textarea 类型的 rows, autosize 属性
-- 为 Tree 添加 getCheckedNodes 方法和 node-click、check-change 回调
-- 新增 DatePicker 禁用日期功能 #253
-- 修复 多选可搜索的 Select 下拉选项自动展开的问题
-- 为 Dialog 添加 top 属性
-- 修复 Menu 组件垂直模式下开启 router 属性会立刻跳转的问题 #295
-- Checkbox change 事件现在只能被人为的交互操作所触发
-- 新增 Checkbox checked 属性
-- 修复 Select 远程搜索时使用键盘选择选项无法更新 v-model 的问题
-
-#### 非兼容性更新
-
-- Dropdown 组件重构，现在可以以更加的灵活方便的形式来自定义触发下拉的元素，以及可以定义下菜单的样式
-
-### 1.0.0-rc.5
-
-*2016-09-30*
-
-- 修复 Table 头部不同步的问题
-- 修复 Menu 组件 default-active 绑定动态值无法更新的问题
-- 新增特性 Menu 组件中若选中子菜单项现在会自动展开所有父级菜单
-- 修复 vue-popper 引入 popper 路径错误
-- 修复 DatePicker 初始值是合法时间类型但无法设置成功的问题
-- 修复 Pagination 的图标没有正确切换样式, #163
-- 修复 Row 组件 align 属性不生效的问题
-- 修复 Tabs 关闭标签页时对应 Tab-panel 没有移除的问题
-- 新增 Menu 组件中 MenuItem 的 route 属性
-
-#### 非兼容性更新
-- Menu 组件的 `unique-opend` 属性修正为 `unique-opened`
-
-### 1.0.0-rc.4
-
-*2016-09-21*
-
-- 修复 Select 多选时选项变为空数组后 placeholder 不出现的问题
-- 修复 Time Picker 时间选择可滚动
-- 修复 Tooltip 有时会错位的问题
-- 修复 丢失的组件 css 文件
-- 修复 Table 在 Safari 下边框没对齐
-- 修复 TimePicker 图标样式被默认图标样式覆盖
-- 修复 在 mounted 钩子函数中改变 Select 绑定值不生效的问题
-- 修复 在多个依次出现的 Dialog 或 Message Box 全部关闭后页面有几率不可滚动的问题
-- 修复 Table 初次渲染时宽度重新计算 #78
-- 新增 时间、日期选择器增加 align 属性，可设置对齐方式
-- 新增 TableColumn 的 align 属性
-- 新增 autocomplete 的 select 事件
+#### 修复
+- DatePicker
+  - 选择周数时，`v-model` 结果返回该周第二天的问题 #6038
+  - 在 `daterange` 类型中，第一次的输入会被清空的问题 #6021
+- DateTimePicker
+  - 和 TimePicker 相互影响的问题 #6090
+  - 选择时间小时和秒可超出限制的问题 #6076
+- TimePicker
+  - 失去焦点时无法正确改变 `v-model` 值的问题 #6023
+- Dialog
+  - 当含有下拉框时，下拉框的打开和关闭会造成文字虚晃的问题 #6088
+- Select
+  - 提升性能，修复组件销毁时可能导致 Vue dev-tool 卡死的问题 #6151
+- Table
+  - 修复 Table 在父元素从 `display: none` 变成其他状态时会隐藏的问题
+  - 修复 Table 在父元素为 `display: flex` 时可能出现的宽度逐渐变大的问题
+  - 修复 `append` 具名 slot 和固定列并存时，动态获取表格数据会导致固定列消失的问题
+  - 修复 `expand-row-keys` 属性初始化无效的问题
+  - 修复 `data` 改变时过滤条件失效的问题
+  - 修复多级表头时固定列隐藏情况计算错误的问题
+  - 修复 `max-height` 变更后无法恢复的问题
+  - 修复一些样式上的计算错误
 
 #### 非兼容性更新
-- Select 组件样式的 `display` 属性默认值修改为 `block`
+- 综合
+  - 移除 `theme-default`
+  - 最低兼容 Vue 2.5.2 和 IE 10
+  - 表单组件的 `change` 事件和 Pagination 的 `current-change` 事件现在仅响应用户交互
+  - Button 和表单组件的 `size` 属性现在可接受 `medium`、`small` 和 `mini`
+  - 为了方便使用第三方图标，Button 的 `icon` 属性、Input 的 `prefix-icon` 和 `suffix-icon` 属性、Steps 的 `icon` 属性现在需要传入完整的图标类名
+- Dialog
+  - 移除 `size` 属性。现在 Dialog 的尺寸由 `width` 和 `fullscreen` 控制
+  - 移除通过 `v-model` 控制 Dialog 显示和隐藏的功能
+- Rate
+  - `text-template` 属性更名为 `score-template`
+- Dropdown
+  - `menu-align` 属性变更为 `placement`，增加更多方位属性
+- Transfer
+  - `footer-format` 属性更名为 `format`
+- Switch
+  - 由于 `on-*` 属性在 JSX 中会被识别为事件，导致 Switch 所有 `on-*` 属性在 JSX 中无法正常工作，所以 `on-*` 属性更名为 `active-*`，对应地，`off-*` 属性更名为 `inactive-*`。受到影响的属性有：`on-icon-class`、`off-icon-class`、`on-text`、`off-text`、`on-color`、`off-color`、`on-value`、`off-value`
+  - `active-text` 和 `inactive-text` 属性不再有默认值
+- Tag
+  - `type` 属性现在支持 `success`、`info`、`warning` 和 `danger` 四个值
+- Menu
+  - 移除 `theme` 属性。现在通过 `background-color`、`text-color` 和 `active-text-color` 属性进行颜色的自定义
+- Input
+  - 移除 `icon` 属性。现在通过 `suffix-icon` 属性或者 `suffix` 具名 slot 来加入尾部图标
+  - 移除 `on-icon-click` 属性和 `click` 事件。现在如果需要为输入框中的图标添加点击事件，请以具名 slot 的方式添加图标
+  - `change` 事件现在仅在输入框失去焦点或用户按下回车时触发，与原生 input 元素一致。如果需要实时响应用户的输入，可以使用 `input` 事件
+- Autocomplete
+  - 移除 `custom-item` 属性。现在通过 `scoped slot` 自定义输入建议列表项的内容
+  - 移除 `props` 属性，现在使用 `value-key` 属性指定输入建议对象中用于显示的键名
+- Steps
+  - 移除 `center` 属性
+  - 现在步骤条将默认充满父容器
+  - DatePicker
+  - `change` 事件参数现在为组件的绑定值，格式由 `value-format` 控制
+- Table
+  - 移除通过 `inline-template` 自定义列模板的功能
+  - `sort-method` 现在和 `Array.sort` 保持一致的逻辑，要求返回一个数字
+  - 将 `append` slot 移至 `tbody` 元素以外，以保证其只被渲染一次
+  - `expand` 事件更名为 `expand-change`，以保证 API 的命名一致性
+  - `row-class-name` 和 `row-style` 的函数参数改为对象，以保证 API 的一致性
 
-### 1.0.0-rc.3
-
-*2016-09-09*
-
-- 修复 Slider 存在输入框时，输入框与 Slider 的值不同步的问题
-- 修复 Steps 样式
-- 修复 无法安装的问题
-
-### 1.0.0-rc.2
-
-*2016-09-09*
-
-- 修复 Upload 上传的问题，并增加上传成功和失败的钩子函数
-- Button 组件增加 `nativeType` 属性，用于组件内 `<button>` 标签的原生 `type` 属性，默认值为 `button`
-- 修复 Table 自定义模板中渲染静态数据错误
-- 修复 Table 中被固定列的高度不与其他列的高度协调的问题
-- 修复 Time Picker 的 `picker-options` 属性
-- 修复一些组件图标丢失的问题
-- 修复 远程搜索的 Select 在 Form 中的显示问题
-- 修复 Input Number 输入小数和非数字值时的问题
-- 修复 Select 选中 value 为 0 的值时绑定值不更新的问题
-- 修复 Tree 取消选择某节点后，其同级节点均被取消的问题
-- 修复 Upload 的 headers 属性设置无效
-- 修复 Pagination 包含 sizes 子组件时 page-size 无效的问题
-- 优化 增加打包成 commonjs 且不压缩的文件，默认引入 commonjs
-
-#### 非兼容性更新
-- Menu 组件 `mode` 属性默认值修改为 `vertical`
-- Progress 组件升级，增加环形进度条的类型，以及增加了诸多属性，详细请查阅文档
-- Popover 现在可以通过 slot 指定 reference
-
-### 1.0.0-rc.1
-
-*2016-08-30*
-
-Element 1.0.0-rc.1 发布
+##
+<i><sup>*</sup> 在网站上动态渲染任意 HTML 是非常危险的，因为容易导致 [XSS 攻击](https://en.wikipedia.org/wiki/Cross-site_scripting)。因此请在 `dangerouslyUseHTMLString` 打开的情况下，确保 `message` 的内容是可信的，**永远不要**将用户提交的内容赋值给 `message` 属性。</i>

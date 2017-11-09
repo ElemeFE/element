@@ -96,7 +96,7 @@ Use a red dot to mark content that needs to be noticed.
 ```html
 <el-badge is-dot class="item">query</el-badge>
 <el-badge is-dot class="item">
-  <el-button class="share-button" icon="share" type="primary"></el-button>
+  <el-button class="share-button" icon="el-icon-share" type="primary"></el-button>
 </el-badge>
 
 <style>
@@ -135,3 +135,4 @@ Use a red dot to mark content that needs to be noticed.
 | value          | display value      | string, number          |          —             |    —     |
 | max          |  maximum value, shows '{max}+' when exceeded. Only works if `value` is a `Number`   | number  |         —              |     —    |
 | is-dot       | if a little dot is displayed   | boolean  |  —  |  false |
+| hidden | hidden badge | boolean | — | false |

@@ -1,0 +1,15 @@
+{
+  "name": "element-cascader",
+  "version": "0.0.0",
+  "description": "A cascader component for Vue.js.",
+  "keywords": [
+    "element",
+    "vue",
+    "component"
+  ],
+  "main": "./lib/index.js",
+  "repository": "https://github.com/ElemeFE/element/tree/master/packages/cascader",
+  "author": "elemefe",
+  "license": "MIT",
+  "dependencies": {}
+}

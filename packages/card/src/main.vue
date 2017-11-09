@@ -11,7 +11,7 @@
 
 <script>
   export default {
-    name: 'el-card',
+    name: 'ElCard',
 
     props: ['header', 'bodyStyle']
   };

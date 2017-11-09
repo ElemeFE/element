@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import entry from './app';
 import VueRouter from 'vue-router';
-import routes from './route.config';
 import Element from 'main/index.js';
-import 'packages/theme-default/src/index.css';
+import 'packages/theme-chalk/src/index.scss';
+import routes from './route.config';
 import demoBlock from './components/demo-block.vue';
 import MainFooter from './components/footer.vue';
 import MainHeader from './components/header.vue';
@@ -26,7 +26,14 @@ const router = new VueRouter({
 });
 
 router.afterEach(route => {
-  document.title = title[route.meta.lang][route.name] || 'Element';
+  const data = title[route.meta.lang];
+  for (let val in data) {
+    if (new RegExp('^' + val, 'g').test(route.name)) {
+      document.title = data[val];
+      return;
+    }
+  }
+  document.title = 'Element';
 });
 
 new Vue({ // eslint-disable-line

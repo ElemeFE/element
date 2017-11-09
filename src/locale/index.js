@@ -6,10 +6,9 @@ import Format from './format';
 const format = Format(Vue);
 let lang = defaultLang;
 let merged = false;
-
-export const t = function(path, options) {
+let i18nHandler = function() {
   const vuei18n = Object.getPrototypeOf(this || Vue).$t;
-  if (typeof vuei18n === 'function') {
+  if (typeof vuei18n === 'function' && !!Vue.locale) {
     if (!merged) {
       merged = true;
       Vue.locale(
@@ -17,14 +16,20 @@ export const t = function(path, options) {
         deepmerge(lang, Vue.locale(Vue.config.lang) || {}, { clone: true })
       );
     }
-    return vuei18n.apply(this, [path, options]);
+    return vuei18n.apply(this, arguments);
   }
+};
+
+export const t = function(path, options) {
+  let value = i18nHandler.apply(this, arguments);
+  if (value !== null && value !== undefined) return value;
+
   const array = path.split('.');
   let current = lang;
 
-  for (var i = 0, j = array.length; i < j; i++) {
-    var property = array[i];
-    var value = current[property];
+  for (let i = 0, j = array.length; i < j; i++) {
+    const property = array[i];
+    value = current[property];
     if (i === j - 1) return format(value, options);
     if (!value) return '';
     current = value;
@@ -35,4 +40,9 @@ export const t = function(path, options) {
 export const use = function(l) {
   lang = l || lang;
 };
-export default { use, t };
+
+export const i18n = function(fn) {
+  i18nHandler = fn || i18nHandler;
+};
+
+export default { use, t, i18n };

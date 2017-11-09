@@ -6,10 +6,10 @@
           return callback(new Error('Please input the age'));
         }
         setTimeout(() => {
-          if (!Number.isInteger(age)) {
+          if (!Number.isInteger(value)) {
             callback(new Error('Please input digits'));
-          } else{
-            if (age < 18) {
+          } else {
+            if (value < 18) {
               callback(new Error('Age must be greater than 18'));
             } else {
               callback();
@@ -17,7 +17,7 @@
           }
         }, 1000);
       };
-      var validaePass = (rule, value, callback) => {
+      var validatePass = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('Please input the password'));
         } else {
@@ -27,7 +27,7 @@
           callback();
         }
       };
-      var validaePass2 = (rule, value, callback) => {
+      var validatePass2 = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('Please input the password again'));
         } else if (value !== this.ruleForm2.pass) {
@@ -47,22 +47,22 @@
           resource: '',
           desc: ''
         },
+        sizeForm: {
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
+        },
         formInline: {
           user: '',
           region: ''
         },
-        formStacked: {
-          name: '',
-          region: '',
-          type: '',
-          remark: ''
-        },
-        formAlignRight: {
-          name: '',
-          region: '',
-          type: ''
-        },
-        formAlignLeft: {
+        labelPosition: 'right',
+        formLabelAlign: {
           name: '',
           region: '',
           type: ''
@@ -111,33 +111,36 @@
         },
         rules2: {
           pass: [
-            { validator: validaePass, trigger: 'blur' }
+            { validator: validatePass, trigger: 'blur' }
           ],
           checkPass: [
-            { validator: validaePass2, trigger: 'blur' }
+            { validator: validatePass2, trigger: 'blur' }
           ],
           age: [
-            { validator: checkAge, trigger: 'change', trigger: 'blur' }
+            { validator: checkAge, trigger: 'blur' }
           ]
         },
-        dynamicForm: {
+        dynamicValidateForm: {
           domains: [{
             key: Date.now(),
             value: ''
           }],
           email: ''
         },
-        dynamicRule: {
-          email: [
-            { required: true, message: 'Please input email address', trigger: 'blur' },
-            { type: 'email', message: 'Please input correct email address', trigger: 'blur,change' }
-          ]
+        numberValidateForm: {
+          age: ''
         }
       };
     },
     methods: {
-      handleSubmit(ev) {
-        this.$refs.ruleForm.validate((valid) => {
+      onSubmit() {
+        console.log('submit!');
+      },
+      onRuleFormSubmit() {
+        console.log('onRuleFormSubmit');
+      },
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
           if (valid) {
             alert('submit!');
           } else {
@@ -146,49 +149,17 @@
           }
         });
       },
-      handleSubmit2(ev) {
-        this.$refs.ruleForm2.validate(valid => {
-          if (valid) {
-            alert('Submit');
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
-      },
-      handleSubmit3(ev) {
-        this.$refs.dynamicForm.validate(valid => {
-          if (valid) {
-            alert('Submit');
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
-      },
-      handleReset() {
-        this.$refs.ruleForm.resetFields();
-      },
-      handleReset2() {
-        this.$refs.ruleForm2.resetFields();
-      },
-      handleValidate(prop, errorMsg) {
-        console.log(prop, errorMsg);
-      },
-      onSubmit() {
-        console.log('submit!');
-      },
-      onRuleFormSubmit() {
-        console.log('onRuleFormSubmit');
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
       },
       removeDomain(item) {
-        var index = this.dynamicForm.domains.indexOf(item)
+        var index = this.dynamicValidateForm.domains.indexOf(item)
         if (index !== -1) {
-          this.dynamicForm.domains.splice(index, 1)
+          this.dynamicValidateForm.domains.splice(index, 1)
         }
       },
       addDomain() {
-        this.dynamicForm.domains.push({
+        this.dynamicValidateForm.domains.push({
           key: Date.now(),
           value: ''
         });
@@ -216,7 +187,7 @@
       padding: 0;
       list-style: none;
 
-      &:after,&:before {
+      &:after, &:before {
         content: ' ';
         display: table;
       }
@@ -243,6 +214,8 @@
       width: 480px;
     }
     .demo-form-inline {
+      width: auto;
+
       .el-input {
         width: 150px;
       }
@@ -250,20 +223,8 @@
         margin-right: 10px;
       }
     }
-    .demo-form-stacked {
-      width: 270px;
-
-      .el-select .el-input {
-        width: 100%;
-      }
-    }
     .demo-ruleForm {
       width: 480px;
-
-      .el-input,
-      .el-textarea {
-        width: auto;
-      }
 
       .el-select .el-input {
         width: 360px;
@@ -271,7 +232,6 @@
     }
     .demo-dynamic {
       .el-input {
-        display: inline-block;
         margin-right: 10px;
         width: 270px;
         vertical-align: top;
@@ -314,7 +274,7 @@ It includes all kinds of input items, such as `input`, `select`, `radio` and `ch
     </el-col>
   </el-form-item>
   <el-form-item label="Instant delivery">
-    <el-switch on-text="" off-text="" v-model="form.delivery"></el-switch>
+    <el-switch v-model="form.delivery"></el-switch>
   </el-form-item>
   <el-form-item label="Activity type">
     <el-checkbox-group v-model="form.type">
@@ -364,6 +324,13 @@ It includes all kinds of input items, such as `input`, `select`, `radio` and `ch
 ```
 :::
 
+:::tip
+[W3C](https://www.w3.org/MarkUp/html-spec/html-spec_8.html#SEC8.2) regulates that
+> <i>When there is only one single-line text input field in a form, the user agent should accept Enter in that field as a request to submit the form.</i>
+
+To prevent this behavior, you can add `@submit.native.prevent` on `<el-form>`.
+  :::
+
 ### Inline form
 
 When the vertical space is limited and the form is relatively simple, you can put it in one line.
@@ -372,14 +339,16 @@ When the vertical space is limited and the form is relatively simple, you can pu
 
 ```html
 <el-form :inline="true" :model="formInline" class="demo-form-inline">
-  <el-form-item>
+  <el-form-item label="Approved by">
     <el-input v-model="formInline.user" placeholder="Approved by"></el-input>
-  </el-form-item><el-form-item>
+  </el-form-item>
+  <el-form-item label="Activity zone">
     <el-select v-model="formInline.region" placeholder="Activity zone">
       <el-option label="Zone one" value="shanghai"></el-option>
       <el-option label="Zone two" value="beijing"></el-option>
     </el-select>
-  </el-form-item><el-form-item>
+  </el-form-item>
+  <el-form-item>
     <el-button type="primary" @click="onSubmit">Query</el-button>
   </el-form-item>
 </el-form>
@@ -407,27 +376,32 @@ When the vertical space is limited and the form is relatively simple, you can pu
 
 Depending on your design, there are several different ways to align your label element.
 
-#### Top
-
 :::demo The `label-position` attribute decides how labels align, it can be `top` or `left`. When set to `top`, labels will be placed at the top of the form field.
 
 ```html
-<el-form label-position="top" :model="formStacked" class="demo-form-stacked">
+<el-radio-group v-model="labelPosition" size="small">
+  <el-radio-button label="left">Left</el-radio-button>
+  <el-radio-button label="right">Right</el-radio-button>
+  <el-radio-button label="top">Top</el-radio-button>
+</el-radio-group>
+<div style="margin: 20px;"></div>
+<el-form :label-position="labelPosition" label-width="100px" :model="formLabelAlign">
   <el-form-item label="Name">
-    <el-input v-model="formStacked.name"></el-input>
+    <el-input v-model="formLabelAlign.name"></el-input>
   </el-form-item>
   <el-form-item label="Activity zone">
-    <el-input v-model="formStacked.region"></el-input>
+    <el-input v-model="formLabelAlign.region"></el-input>
   </el-form-item>
   <el-form-item label="Activity form">
-    <el-input v-model="formStacked.type"></el-input>
+    <el-input v-model="formLabelAlign.type"></el-input>
   </el-form-item>
 </el-form>
 <script>
   export default {
     data() {
       return {
-        formStacked: {
+        labelPosition: 'right',
+        formLabelAlign: {
           name: '',
           region: '',
           type: ''
@@ -437,78 +411,13 @@ Depending on your design, there are several different ways to align your label e
   }
 </script>
 ```
-:::
-
-#### Right
-
-:::demo When `label-position` is omitted, labels will align to the right
-
-```html
-<el-form :model="formAlignRight" label-width="120px">
-  <el-form-item label="Activity name">
-    <el-input v-model="formAlignRight.name"></el-input>
-  </el-form-item>
-  <el-form-item label="Promote area">
-    <el-input v-model="formAlignRight.region"></el-input>
-  </el-form-item>
-  <el-form-item label="Form of activity">
-    <el-input v-model="formAlignRight.type"></el-input>
-  </el-form-item>
-</el-form>
-<script>
-  export default {
-    data() {
-      return {
-        formAlignRight: {
-          name: '',
-          region: '',
-          type: ''
-        }
-      };
-    }
-  }
-</script>
-```
-:::
-
-#### Left
-
-:::demo When `label-position` is set to `top`, labels will align to the left.
-
-```html
-<el-form :model="formAlignLeft" label-position="left" label-width="120px">
-  <el-form-item label="Activity name">
-    <el-input v-model="formAlignLeft.name"></el-input>
-  </el-form-item>
-  <el-form-item label="Promotion area">
-    <el-input v-model="formAlignLeft.region"></el-input>
-  </el-form-item>
-  <el-form-item label="Activity form">
-    <el-input v-model="formAlignLeft.type"></el-input>
-  </el-form-item>
-</el-form>
-<script>
-  export default {
-    data() {
-      return {
-        formAlignLeft: {
-          name: '',
-          region: '',
-          type: ''
-        }
-      };
-    }
-  }
-</script>
-```
-
 :::
 
 ### Validation
 
 Form component allows you to verify your data, helping you find and correct errors.
 
-:::demo Just add the `rule` attribute for `Form` component, pass validation rules, and set `prop` attribute for `Form-Item` as a specific key that needs to be validated. See more information at [async-validator](https://github.com/yiminghe/async-validator).
+:::demo Just add the `rules` attribute for `Form` component, pass validation rules, and set `prop` attribute for `Form-Item` as a specific key that needs to be validated. See more information at [async-validator](https://github.com/yiminghe/async-validator).
 
 ```html
 <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
@@ -534,8 +443,8 @@ Form component allows you to verify your data, helping you find and correct erro
       </el-form-item>
     </el-col>
   </el-form-item>
-  <el-form-item label="Instant delivery">
-    <el-switch on-text="" off-text="" v-model="ruleForm.delivery"></el-switch>
+  <el-form-item label="Instant delivery" prop="delivery">
+    <el-switch v-model="ruleForm.delivery"></el-switch>
   </el-form-item>
   <el-form-item label="Activity type" prop="type">
     <el-checkbox-group v-model="ruleForm.type">
@@ -555,8 +464,8 @@ Form component allows you to verify your data, helping you find and correct erro
     <el-input type="textarea" v-model="ruleForm.desc"></el-input>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="handleSubmit">Create</el-button>
-    <el-button @click="handleReset">Reset</el-button>
+    <el-button type="primary" @click="submitForm('ruleForm')">Create</el-button>
+    <el-button @click="resetForm('ruleForm')">Reset</el-button>
   </el-form-item>
 </el-form>
 <script>
@@ -600,11 +509,8 @@ Form component allows you to verify your data, helping you find and correct erro
       };
     },
     methods: {
-      handleReset() {
-        this.$refs.ruleForm.resetFields();
-      },
-      handleSubmit(ev) {
-        this.$refs.ruleForm.validate((valid) => {
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
           if (valid) {
             alert('submit!');
           } else {
@@ -612,6 +518,9 @@ Form component allows you to verify your data, helping you find and correct erro
             return false;
           }
         });
+      },
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
       }
     }
   }
@@ -621,10 +530,11 @@ Form component allows you to verify your data, helping you find and correct erro
 
 ### Custom validation rules
 
-:::demo This example shows how to customize your own validation rules to finish a two-factor password verification.
+This example shows how to customize your own validation rules to finish a two-factor password verification.
 
+:::demo Here we use `status-icon` to reflect validation result as an icon.
 ```html
-<el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-width="120px" class="demo-ruleForm">
+<el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="120px" class="demo-ruleForm">
   <el-form-item label="Password" prop="pass">
     <el-input type="password" v-model="ruleForm2.pass" auto-complete="off"></el-input>
   </el-form-item>
@@ -632,11 +542,11 @@ Form component allows you to verify your data, helping you find and correct erro
     <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off"></el-input>
   </el-form-item>
   <el-form-item label="Age" prop="age">
-    <el-input v-model="ruleForm2.age"></el-input>
+    <el-input v-model.number="ruleForm2.age"></el-input>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="handleSubmit2">Submit</el-button>
-    <el-button @click="handleReset2">Reset</el-button>
+    <el-button type="primary" @click="submitForm('ruleForm2')">Submit</el-button>
+    <el-button @click="resetForm('ruleForm2')">Reset</el-button>
   </el-form-item>
 </el-form>
 <script>
@@ -647,10 +557,10 @@ Form component allows you to verify your data, helping you find and correct erro
           return callback(new Error('Please input the age'));
         }
         setTimeout(() => {
-          if (!Number.isInteger(age)) {
+          if (!Number.isInteger(value)) {
             callback(new Error('Please input digits'));
-          } else{
-            if (age < 18) {
+          } else {
+            if (value < 18) {
               callback(new Error('Age must be greater than 18'));
             } else {
               callback();
@@ -658,7 +568,7 @@ Form component allows you to verify your data, helping you find and correct erro
           }
         }, 1000);
       };
-      var validaePass = (rule, value, callback) => {
+      var validatePass = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('Please input the password'));
         } else {
@@ -668,7 +578,7 @@ Form component allows you to verify your data, helping you find and correct erro
           callback();
         }
       };
-      var validaePass2 = (rule, value, callback) => {
+      var validatePass2 = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('Please input the password again'));
         } else if (value !== this.ruleForm2.pass) {
@@ -685,23 +595,20 @@ Form component allows you to verify your data, helping you find and correct erro
         },
         rules2: {
           pass: [
-            { validator: validaePass, trigger: 'blur' }
+            { validator: validatePass, trigger: 'blur' }
           ],
           checkPass: [
-            { validator: validaePass2, trigger: 'blur' }
+            { validator: validatePass2, trigger: 'blur' }
           ],
           age: [
-            { validator: checkAge, trigger: 'change', trigger: 'blur' }
+            { validator: checkAge, trigger: 'blur' }
           ]
         }
       };
     },
     methods: {
-      handleReset2() {
-        this.$refs.ruleForm2.resetFields();
-      },
-      handleSubmit2(ev) {
-        this.$refs.ruleForm2.validate((valid) => {
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
           if (valid) {
             alert('submit!');
           } else {
@@ -709,6 +616,9 @@ Form component allows you to verify your data, helping you find and correct erro
             return false;
           }
         });
+      },
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
       }
     }
   }
@@ -721,51 +631,50 @@ Form component allows you to verify your data, helping you find and correct erro
 :::demo In addition to passing all validation rules at once on the form component, you can also pass the validation rules or delete rules on a single form field dynamically.
 
 ```html
-<el-form :model="dynamicForm" :rules="dynamicRule" ref="dynamicForm" label-width="120px" class="demo-dynamic">
-  <el-form-item prop="email" label="Email">
-    <el-input v-model="dynamicForm.email"></el-input>
+<el-form :model="dynamicValidateForm" ref="dynamicValidateForm" label-width="120px" class="demo-dynamic">
+  <el-form-item
+    prop="email"
+    label="Email"
+    :rules="[
+      { required: true, message: 'Please input email address', trigger: 'blur' },
+      { type: 'email', message: 'Please input correct email address', trigger: 'blur,change' }
+    ]"
+  >
+    <el-input v-model="dynamicValidateForm.email"></el-input>
   </el-form-item>
   <el-form-item
-    v-for="(domain, index) in dynamicForm.domains"
+    v-for="(domain, index) in dynamicValidateForm.domains"
     :label="'Domain' + index"
     :key="domain.key"
-    :prop="'domains:' + index"
+    :prop="'domains.' + index + '.value'"
     :rules="{
-      type: 'object', required: true,
-      fields: {
-        value: { required: true, message: 'domain can not be null', trigger: 'blur' }
-      }
+      required: true, message: 'domain can not be null', trigger: 'blur'
     }"
   >
     <el-input v-model="domain.value"></el-input><el-button @click.prevent="removeDomain(domain)">Delete</el-button>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="handleSubmit3">Submit</el-button>
+    <el-button type="primary" @click="submitForm('dynamicValidateForm')">Submit</el-button>
     <el-button @click="addDomain">New domain</el-button>
+    <el-button @click="resetForm('dynamicValidateForm')">Reset</el-button>
   </el-form-item>
 </el-form>
 <script>
   export default {
     data() {
       return {
-        dynamicForm: {
+        dynamicValidateForm: {
           domains: [{
             key: 1,
             value: ''
           }],
           email: ''
-        },
-        dynamicRule: {
-          email: [
-            { required: true, message: 'Please input email address', trigger: 'blur' },
-            { type: 'email', message: 'Please input correct email address', trigger: 'blur,change' }
-          ]
         }
       };
     },
     methods: {
-      handleSubmit3(ev) {
-        this.$refs.ruleForm.validate((valid) => {
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
           if (valid) {
             alert('submit!');
           } else {
@@ -774,15 +683,18 @@ Form component allows you to verify your data, helping you find and correct erro
           }
         });
       },
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
+      },
       removeDomain(item) {
-        var index = this.dynamicForm.domains.indexOf(item)
+        var index = this.dynamicValidateForm.domains.indexOf(item);
         if (index !== -1) {
-          this.dynamicForm.domains.splice(index, 1)
+          this.dynamicValidateForm.domains.splice(index, 1);
         }
       },
       addDomain() {
-        this.dynamicForm.domains.push({
-          key: this.dynamicForm.domains.length,
+        this.dynamicValidateForm.domains.push({
+          key: Date.now(),
           value: ''
         });
       }
@@ -790,7 +702,129 @@ Form component allows you to verify your data, helping you find and correct erro
   }
 </script>
 ```
-::: 
+:::
+
+### Number Validate
+
+::: demo Number Validate need a `.number` modifier added on the input `v-model` binding，it's used to transform the string value to the number which is provided by Vuejs.
+```html
+<el-form :model="numberValidateForm" ref="numberValidateForm" label-width="100px" class="demo-ruleForm">
+  <el-form-item
+    label="age"
+    prop="age"
+    :rules="[
+      { required: true, message: 'age is required'},
+      { type: 'number', message: 'age must be a number'}
+    ]"
+  >
+    <el-input type="age" v-model.number="numberValidateForm.age" auto-complete="off"></el-input>
+  </el-form-item>
+  <el-form-item>
+    <el-button type="primary" @click="submitForm('numberValidateForm')">Submit</el-button>
+    <el-button @click="resetForm('numberValidateForm')">Reset</el-button>
+  </el-form-item>
+</el-form>
+<script>
+  export default {
+    data() {
+      return {
+        numberValidateForm: {
+          age: ''
+        }
+      };
+    },
+    methods: {
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            alert('submit!');
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+      },
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
+      }
+    }
+  }
+</script>
+```
+:::
+
+:::tip
+When an `el-form-item` is nested in another `el-form-item`, its label width will be `0`. You can set `label-width` on that `el-form-item` if needed.
+:::
+
+### Size control
+
+All components in a Form inherit their `size` attribute from that Form. Similarly, FormItem also has a `size` attribute.
+
+::: demo Still you can fine tune each component's `size` if you don't want that component to inherit its size from From or FormIten.
+```html
+<el-form ref="form" :model="sizeForm" label-width="120px" size="mini">
+  <el-form-item label="Activity name">
+    <el-input v-model="sizeForm.name"></el-input>
+  </el-form-item>
+  <el-form-item label="Activity zone">
+    <el-select v-model="sizeForm.region" placeholder="please select your zone">
+      <el-option label="Zone one" value="shanghai"></el-option>
+      <el-option label="Zone two" value="beijing"></el-option>
+    </el-select>
+  </el-form-item>
+  <el-form-item label="Activity time">
+    <el-col :span="11">
+      <el-date-picker type="date" placeholder="Pick a date" v-model="sizeForm.date1" style="width: 100%;"></el-date-picker>
+    </el-col>
+    <el-col class="line" :span="2">-</el-col>
+    <el-col :span="11">
+      <el-time-picker type="fixed-time" placeholder="Pick a time" v-model="sizeForm.date2" style="width: 100%;"></el-time-picker>
+    </el-col>
+  </el-form-item>
+  <el-form-item label="Activity type">
+    <el-checkbox-group v-model="sizeForm.type">
+      <el-checkbox-button label="Online activities" name="type"></el-checkbox-button>
+      <el-checkbox-button label="Promotion activities" name="type"></el-checkbox-button>
+    </el-checkbox-group>
+  </el-form-item>
+  <el-form-item label="Resources">
+    <el-radio-group v-model="sizeForm.resource" size="medium">
+      <el-radio border label="Sponsor"></el-radio>
+      <el-radio border label="Venue"></el-radio>
+    </el-radio-group>
+  </el-form-item>
+  <el-form-item size="large">
+    <el-button type="primary" @click="onSubmit">Create</el-button>
+    <el-button>Cancel</el-button>
+  </el-form-item>
+</el-form>
+
+<script>
+  export default {
+    data() {
+      return {
+        sizeForm: {
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
+        }
+      };
+    },
+    methods: {
+      onSubmit() {
+        console.log('submit!');
+      }
+    }
+  };
+</script>
+```
+:::
 
 ### Form Attributes
 
@@ -799,25 +833,45 @@ Form component allows you to verify your data, helping you find and correct erro
 | model| data of form component | object | — | — |
 | rules | validation rules of form | object | — | — |
 | inline | whether the form is inline | boolean | — | false |
-| label-position | position of label | string | left/right/top | right |
-| label-width | width of label, and all form items will inherit from `Form` | string | — | — |
+| label-position | position of label | string | left / right / top | right |
+| label-width | width of label, and all its direct child form items will inherit this value | string | — | — |
 | label-suffix | suffix of the label | string | — | — |
+| show-message  | whether to show the error message | boolean | — | true |
+| inline-message  | whether to display the error message inline with the form item | boolean | — | false |
+| status-icon  | whether to display an icon indicating the validation result | boolean | — | false |
+| size  | control the size of components in this form | string | medium / small / mini | - |
 
 ### Form Methods
 
-| Method | Description |
-| ---- | ---- |
-| validate(cb) | the method to validate the whole form |
-| validateField(prop, cb) | the method to validate a certain form item |
-| resetFields | reset all the fields and remove validation result |
+| Method | Description | Parameters |
+| ---- | ---- | ---- |
+| validate | the method to validate the whole form. Returns a promise if callback is omitted | Function(callback: Function(boolean)) |
+| validateField | the method to validate a certain form item | Function(prop: string, callback: Function(errorMessage: string)) |
+| resetFields | reset all the fields and remove validation result | — |
+| clearValidate | clear validation message for all fields | -
 
 ### Form-Item Attributes
 
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 | ---- | ----| ---- | ---- | ---- |
-| prop | a key of `model` | string | keys of model that passed to `form` |
+| prop | a key of `model`. In the use of validate and resetFields method, the attribute is required | string | keys of model that passed to `form` |
 | label | label | string | — | — |
 | label-width | width of label, e.g. '50px' | string | — | — |
 | required | whether the field is required or not, will be determined by validation rules if omitted | string |  — | false |
 | rules | validation rules of form | object | — | — |
 | error | field error message, set its value and the field will validate error and show this message immediately | string | — | — |
+| show-message  | whether to show the error message | boolean | — | true |
+| inline-message  | inline style validate message | boolean | — | false |
+| size  | control the size of components in this form-item | string | medium / small / mini | - |
+
+### Form-Item Slot
+| Name | Description |
+|------|--------|
+| — | content of Form Item |
+| label | content of label |
+
+### Form-Item Methods
+
+| Method | Description | Parameters |
+| ---- | ---- | ---- |
+| resetField | reset current field and remove validation result | — |

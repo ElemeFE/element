@@ -1,5 +1,9 @@
 export default {
   el: {
+    colorpicker: {
+      confirm: 'OK',
+      clear: 'Pulisci'
+    },
     datepicker: {
       now: 'Ora',
       today: 'Oggi',
@@ -12,6 +16,10 @@ export default {
       startTime: 'Ora inizio',
       endDate: 'Data fine',
       endTime: 'Ora fine',
+      prevYear: 'Previous Year', // to be translated
+      nextYear: 'Next Year', // to be translated
+      prevMonth: 'Previous Month', // to be translated
+      nextMonth: 'Next Month', // to be translated
       year: 'Anno',
       month1: 'Gennaio',
       month2: 'Febbraio',
@@ -53,7 +61,12 @@ export default {
     select: {
       loading: 'Caricamento',
       noMatch: 'Nessuna corrispondenza',
-      noData: 'Nessun risultato',
+      noData: 'Nessun dato',
+      placeholder: 'Seleziona'
+    },
+    cascader: {
+      noMatch: 'Nessuna corrispondenza',
+      loading: 'Caricamento',
       placeholder: 'Seleziona'
     },
     pagination: {
@@ -68,6 +81,7 @@ export default {
       error: 'Input non valido'
     },
     upload: {
+      deleteTip: 'press delete to remove', // to be translated
       delete: 'Cancella',
       preview: 'Anteprima',
       continue: 'Continua'
@@ -76,10 +90,19 @@ export default {
       emptyText: 'Nessun dato',
       confirmFilter: 'Conferma',
       resetFilter: 'Reset',
-      clearFilter: 'Tutti'
+      clearFilter: 'Tutti',
+      sumText: 'Sum' // to be translated
     },
     tree: {
       emptyText: 'Nessun dato'
+    },
+    transfer: {
+      noMatch: 'Nessuna corrispondenza',
+      noData: 'Nessun dato',
+      titles: ['List 1', 'List 2'], // to be translated
+      filterPlaceholder: 'Enter keyword', // to be translated
+      noCheckedFormat: '{total} items', // to be translated
+      hasCheckedFormat: '{checked}/{total} checked' // to be translated
     }
   }
 };

@@ -1,5 +1,9 @@
 export default {
   el: {
+    colorpicker: {
+      confirm: 'OK',
+      clear: 'Xóa'
+    },
     datepicker: {
       now: 'Hiện tại',
       today: 'Hôm nay',
@@ -12,6 +16,10 @@ export default {
       startTime: 'Thời gian bắt đầu',
       endDate: 'Ngày kết thúc',
       endTime: 'Thời gian kết thúc',
+      prevYear: 'Previous Year', // to be translated
+      nextYear: 'Next Year', // to be translated
+      prevMonth: 'Previous Month', // to be translated
+      nextMonth: 'Next Month', // to be translated
       year: 'Năm',
       month1: 'Tháng 1',
       month2: 'Tháng 2',
@@ -51,9 +59,14 @@ export default {
       }
     },
     select: {
-      loading: 'Loading',
+      loading: 'Đang tải',
       noMatch: 'Dữ liệu không phù hợp',
       noData: 'Không tìm thấy dữ liệu',
+      placeholder: 'Chọn'
+    },
+    cascader: {
+      noMatch: 'Dữ liệu không phù hợp',
+      loading: 'Đang tải',
       placeholder: 'Chọn'
     },
     pagination: {
@@ -69,6 +82,7 @@ export default {
       error: 'Dữ liệu không hợp lệ'
     },
     upload: {
+      deleteTip: 'press delete to remove', // to be translated
       delete: 'Xóa',
       preview: 'Xem trước',
       continue: 'Tiếp tục'
@@ -77,10 +91,19 @@ export default {
       emptyText: 'Không có dữ liệu',
       confirmFilter: 'Xác nhận',
       resetFilter: 'Làm mới',
-      clearFilter: 'Xóa hết'
+      clearFilter: 'Xóa hết',
+      sumText: 'Tổng'
     },
     tree: {
       emptyText: 'Không có dữ liệu'
+    },
+    transfer: {
+      noMatch: 'Dữ liệu không phù hợp',
+      noData: 'Không tìm thấy dữ liệu',
+      titles: ['Danh sách 1', 'Danh sách 2'],
+      filterPlaceholder: 'Nhập từ khóa',
+      noCheckedFormat: '{total} mục',
+      hasCheckedFormat: '{checked}/{total} đã chọn '
     }
   }
 };

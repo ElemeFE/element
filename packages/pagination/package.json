@@ -1,6 +1,6 @@
 {
-  "name": "el-pagination",
-  "version": "0.0.0",
+  "name": "element-pagination",
+  "version": "1.1.0",
   "description": "A pagination component for Vue.js.",
   "keywords": [
     "element",

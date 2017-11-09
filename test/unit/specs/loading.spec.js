@@ -1,13 +1,25 @@
+import { getStyle } from '../../../src/utils/dom';
 import { createVue, destroyVM } from '../util';
 import Vue from 'vue';
 import LoadingRaw from 'packages/loading';
 const Loading = LoadingRaw.service;
 
 describe('Loading', () => {
-  let vm, loadingInstance;
+  let vm, loadingInstance, loadingInstance2;
   afterEach(() => {
     destroyVM(vm);
-    loadingInstance && loadingInstance.close();
+    if (loadingInstance) {
+      loadingInstance.close();
+      loadingInstance.$el &&
+      loadingInstance.$el.parentNode &&
+      loadingInstance.$el.parentNode.removeChild(loadingInstance.$el);
+    }
+    if (loadingInstance2) {
+      loadingInstance2.close();
+      loadingInstance2.$el &&
+      loadingInstance2.$el.parentNode &&
+      loadingInstance2.$el.parentNode.removeChild(loadingInstance2.$el);
+    }
   });
 
   describe('as a directive', () => {
@@ -131,7 +143,7 @@ describe('Loading', () => {
         }
       }, true);
       Vue.nextTick(() => {
-        expect(document.body.style.overflow).to.equal('hidden');
+        expect(getStyle(document.body, 'overflow')).to.equal('hidden');
         vm.loading = false;
         document.body.removeChild(document.querySelector('.el-loading-mask'));
         document.body.removeChild(vm.$el);
@@ -170,10 +182,10 @@ describe('Loading', () => {
     it('close', () => {
       loadingInstance = Loading();
       loadingInstance.close();
-      expect(document.querySelector('.el-loading-mask')).to.not.exist;
+      expect(loadingInstance.visible).to.false;
     });
 
-    it('target', () => {
+    it('target', done => {
       vm = createVue({
         template: `
         <div class="loading-container"></div>
@@ -181,8 +193,14 @@ describe('Loading', () => {
       }, true);
       loadingInstance = Loading({ target: '.loading-container' });
       let mask = document.querySelector('.el-loading-mask');
+      let container = document.querySelector('.loading-container');
       expect(mask).to.exist;
-      expect(mask.parentNode).to.equal(document.querySelector('.loading-container'));
+      expect(mask.parentNode).to.equal(container);
+      loadingInstance.close();
+      setTimeout(() => {
+        expect(getStyle(container, 'position')).to.equal('relative');
+        done();
+      }, 200);
     });
 
     it('body', () => {
@@ -207,9 +225,26 @@ describe('Loading', () => {
       expect(mask.classList.contains('is-fullscreen')).to.true;
     });
 
+    it('fullscreen singleton', done => {
+      loadingInstance = Loading({ fullScreen: true });
+      setTimeout(() => {
+        loadingInstance2 = Loading({ fullScreen: true });
+        setTimeout(() => {
+          let masks = document.querySelectorAll('.el-loading-mask');
+          expect(masks.length).to.equal(1);
+          loadingInstance2.close();
+          setTimeout(() => {
+            masks = document.querySelectorAll('.el-loading-mask');
+            expect(masks.length).to.equal(0);
+            done();
+          }, 350);
+        }, 10);
+      }, 10);
+    });
+
     it('lock', () => {
       loadingInstance = Loading({ lock: true });
-      expect(document.body.style.overflow).to.equal('hidden');
+      expect(getStyle(document.body, 'overflow')).to.equal('hidden');
     });
 
     it('text', () => {

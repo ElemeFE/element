@@ -53,7 +53,7 @@
         },
         value1: '',
         value2: '',
-        value3: new Date(),
+        value3: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
         value4: '',
         value5: '',
         value6: '',
@@ -99,6 +99,10 @@
 ## DateTimePicker 日期时间选择器
 
 在同一个选择器里选择日期和时间
+
+:::tip
+DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其他选项可以参照 DatePicker 和 TimePicker。
+:::
 
 ###  日期和时间点
 
@@ -170,8 +174,9 @@
     <el-date-picker
       v-model="value3"
       type="datetimerange"
-      placeholder="选择时间范围"
-      style="width:350px">
+      range-separator="至"
+      start-placeholder="开始日期"
+      end-placeholder="结束日期">
     </el-date-picker>
   </div>
   <div class="block">
@@ -180,9 +185,10 @@
       v-model="value4"
       type="datetimerange"
       :picker-options="pickerOptions2"
-      placeholder="选择时间范围"
-      align="right"
-      style="width:350px">
+      range-separator="至"
+      start-placeholder="开始日期"
+      end-placeholder="结束日期"
+      align="right">
     </el-date-picker>
   </div>
 </template>
@@ -218,7 +224,7 @@
             }
           }]
         },
-        value3: '',
+        value3: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
         value4: ''
       };
     }
@@ -231,24 +237,46 @@
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | readonly | 完全只读 | boolean | — | false |
-| disabled | 禁用 | boolean | - | false |
-| editable | 文本框可输入 | boolean | - | true |
-| placeholder | 占位内容 | string | — | — |
-| type | 显示类型 | string | year/month/date/week/<br>datetime/datetimerange/daterange | date |
-| format | 时间日期格式化 | string | 年 `yyyy`，月 `MM`，日 `dd`，<br>小时 `HH`，分 `mm`，秒 `ss` | yyyy-MM-dd |
+| disabled | 禁用 | boolean | — | false |
+| editable | 文本框可输入 | boolean | — | true |
+| clearable | 是否显示清除按钮 | boolean | — | true |
+| size          | 输入框尺寸     | string          | large, small, mini  | — |
+| placeholder | 非范围选择时的占位内容 | string | — | — |
+| start-placeholder | 范围选择时开始日期的占位内容 | string | — | — |
+| end-placeholder | 范围选择时结束日期的占位内容 | string | — | — |
+| time-arrow-control | 是否使用箭头进行时间选择 | boolean | — | false |
+| type | 显示类型 | string | year/month/date/week/ datetime/datetimerange/daterange | date |
+| format | 显示在输入框中的格式 | string | 年 `yyyy`，月 `MM`，日 `dd`，小时 `HH`，分 `mm`，秒 `ss` | yyyy-MM-dd |
 | align | 对齐方式 | string | left, center, right | left |
-| picker-options | 当前时间日期选择器特有的选项<br>参考下表 | object |  — | {} |
+| popper-class | DateTimePicker 下拉框的类名 | string | — | — |
+| picker-options | 当前时间日期选择器特有的选项参考下表 | object |  — | {} |
+| range-separator | 选择范围时的分隔符 | string | - | '-' |
+| default-value | 可选，选择器打开时默认显示的时间 | Date | 可被`new Date()`解析 | — |
+| value-format | 可选，绑定值的格式。不指定则绑定值为 Date 对象 | string | 年 `yyyy`，月 `MM`，日 `dd`，小时 `HH`，分 `mm`，秒 `ss` | — |
+| name | 原生属性 | string | — | — |
+| unlink-panels | 在范围选择器里取消两个日期面板之间的联动 | boolean | — | false |
 
 ### Picker Options
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| shortcuts | 设置快捷选项，需要传入 { text, onClick } 对象<br>用法参考 demo 或下表 | Object[] | - | - |
-| disabledDate | 设置禁用状态，参数为当前日期，要求返回 Boolean | Function | - | - |
+| shortcuts | 设置快捷选项，需要传入 { text, onClick } 对象用法参考 demo 或下表 | Object[] | — | — |
+| disabledDate | 设置禁用状态，参数为当前日期，要求返回 Boolean | Function | — | — |
+| firstDayOfWeek | 周起始日 | Number | 1 到 7 | 7 |
 
 ### Shortcuts
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | text | 标题文本 | string | — | — |
-| onClick | 选中后的回调函数，参数是 vm，可通过触发 'pick' 事件设置<br>选择器的值。例如 vm.$emit('pick', new Date()) | function | — | — |
+| onClick | 选中后的回调函数，参数是 vm，可通过触发 'pick' 事件设置选择器的值。例如 vm.$emit('pick', new Date()) | function | — | — |
 
+### Events
+| Event Name | Description | Parameters |
+|---------|--------|---------|
+| change | 用户确认选定的值时触发 | 组件绑定值。格式与绑定值一致，可受 `value-format` 控制 |
+| blur | 当 input 失去焦点时触发 | (event: Event) |
+| focus | 当 input 获得焦点时触发 | (event: Event) |
 
+### Methods
+| 方法名 | 说明 | 参数 |
+| ---- | ---- | ---- |
+| focus | 使 input 获取焦点 | — |

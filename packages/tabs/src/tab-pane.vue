@@ -1,64 +1,62 @@
+<template>
+  <div
+    class="el-tab-pane"
+    v-show="active"
+    role="tabpanel"
+    :aria-hidden="!active"
+    :id="`pane-${paneName}`"
+    :aria-labelledby="`tab-${paneName}`"
+  >
+    <slot></slot>
+  </div>
+</template>
 <script>
-  module.exports = {
-    name: 'el-tab-pane',
+  export default {
+    name: 'ElTabPane',
+
+    componentName: 'ElTabPane',
 
     props: {
-      label: {
-        type: String,
-        required: true
-      },
-      name: String
+      label: String,
+      labelContent: Function,
+      name: String,
+      closable: Boolean,
+      disabled: Boolean
     },
 
     data() {
       return {
-        counter: 0,
-        transition: '',
-        paneStyle: {
-          position: 'relative'
-        },
-        index: ''
+        index: null
       };
     },
 
-    created() {
-      if (!this.index) {
-        this.index = this.$parent.$children.indexOf(this) + 1 + '';
+    computed: {
+      isClosable() {
+        return this.closable || this.$parent.closable;
+      },
+      active() {
+        return this.$parent.currentName === (this.name || this.index);
+      },
+      paneName() {
+        return this.name || this.index;
       }
     },
 
-    computed: {
-      show() {
-        return this.$parent.currentName === this.index;
-      }
+    mounted() {
+      this.$parent.addPanes(this);
     },
 
     destroyed() {
-      if (this.$el) {
+      if (this.$el && this.$el.parentNode) {
         this.$el.parentNode.removeChild(this.$el);
       }
+      this.$parent.removePanes(this);
     },
 
     watch: {
-      name: {
-        immediate: true,
-        handler(val) {
-          this.index = val;
-        }
-      },
-      '$parent.currentName'(newValue, oldValue) {
-        if (this.index === newValue) {
-          this.transition = newValue > oldValue ? 'slideInRight' : 'slideInLeft';
-        }
-        if (this.index === oldValue) {
-          this.transition = oldValue > newValue ? 'slideInRight' : 'slideInLeft';
-        }
+      label() {
+        this.$parent.$forceUpdate();
       }
     }
   };
 </script>
-<template>
-  <div class="el-tab-pane" v-show="show && $slots.default">
-    <slot></slot>
-  </div>
-</template>

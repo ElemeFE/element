@@ -78,4 +78,13 @@ describe('Tag', () => {
     }, true);
     expect(vm.$el.classList.contains('md-fade-center')).to.be.false;
   });
+
+  it('color', () => {
+    vm = createVue({
+      template: `
+      <el-tag color="rgb(0, 0, 0)"></el-tag>
+      `
+    }, true);
+    expect(vm.$el.style.backgroundColor).to.equal('rgb(0, 0, 0)');
+  });
 });
