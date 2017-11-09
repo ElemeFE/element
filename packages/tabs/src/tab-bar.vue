@@ -24,23 +24,34 @@
           const firstUpperCase = str => {
             return str.toLowerCase().replace(/( |^)[a-z]/g, (L) => L.toUpperCase());
           };
+          const getSize = this.rootTabs.getSize;
+
           this.tabs.every((tab, index) => {
             let $el = this.$parent.$refs.tabs[index];
             if (!$el) { return false; }
 
             if (!tab.active) {
-              offset += $el[`client${firstUpperCase(sizeName)}`];
+              if (getSize) {
+                offset += getSize($el, firstUpperCase(sizeName)/*dimension*/);
+              } else {
+                offset += $el[`client${firstUpperCase(sizeName)}`];
+              }
               return true;
             } else {
-              tabSize = $el[`client${firstUpperCase(sizeName)}`];
-              if (sizeName === 'width') {
-                tabSize -= index === 0 ? 20 : 40;
+              if (getSize) {
+                tabSize = getSize($el, firstUpperCase(sizeName)/*dimension*/);
+              } else {
+                tabSize = $el[`client${firstUpperCase(sizeName)}`];
+                if (sizeName === 'width') {
+                  tabSize -= index === 0 ? 20 : 40;
+                }
               }
+
               return false;
             }
           });
 
-          if (sizeName === 'width' && offset !== 0) {
+          if (!getSize && sizeName === 'width' && offset !== 0) {
             offset += 20;
           }
           const transform = `translate${firstUpperCase(sizeDir)}(${offset}px)`;

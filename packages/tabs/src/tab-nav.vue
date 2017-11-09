@@ -53,66 +53,78 @@
 
     methods: {
       scrollPrev() {
-        const containerSize = this.$refs.navScroll[`offset${firstUpperCase(this.sizeName)}`];
+        const viewportWidth = this.$refs.navScroll[`offset${firstUpperCase(this.sizeName)}`];
         const currentOffset = this.navOffset;
 
         if (!currentOffset) return;
 
-        let newOffset = currentOffset > containerSize
-          ? currentOffset - containerSize
+        let newOffset = currentOffset > viewportWidth
+          ? currentOffset - viewportWidth
           : 0;
 
         this.navOffset = newOffset;
       },
       scrollNext() {
-        const navSize = this.$refs.nav[`offset${firstUpperCase(this.sizeName)}`];
-        const containerSize = this.$refs.navScroll[`offset${firstUpperCase(this.sizeName)}`];
+        const overviewWidth = this.$refs.nav[`offset${firstUpperCase(this.sizeName)}`];
+        const viewportWidth = this.$refs.navScroll[`offset${firstUpperCase(this.sizeName)}`];
         const currentOffset = this.navOffset;
 
-        if (navSize - currentOffset <= containerSize) return;
+        if (overviewWidth - currentOffset <= viewportWidth) return;
 
-        let newOffset = navSize - currentOffset > containerSize * 2
-          ? currentOffset + containerSize
-          : (navSize - containerSize);
+        let newOffset = overviewWidth - currentOffset > viewportWidth * 2
+          ? currentOffset + viewportWidth
+          : (overviewWidth - viewportWidth);
 
         this.navOffset = newOffset;
       },
       scrollToActiveTab() {
         if (!this.scrollable) return;
-        const nav = this.$refs.nav;
+        const overview = this.$refs.nav;
         const activeTab = this.$el.querySelector('.is-active');
-        const navScroll = this.$refs.navScroll;
+        const viewport = this.$refs.navScroll;
         const activeTabBounding = activeTab.getBoundingClientRect();
-        const navScrollBounding = navScroll.getBoundingClientRect();
-        const navBounding = nav.getBoundingClientRect();
+        const viewportBounding = viewport.getBoundingClientRect();
+        const overviewBounding = overview.getBoundingClientRect();
         const currentOffset = this.navOffset;
         let newOffset = currentOffset;
 
-        if (activeTabBounding.left < navScrollBounding.left) {
-          newOffset = currentOffset - (navScrollBounding.left - activeTabBounding.left);
+        // 可以向左滚
+        if (activeTabBounding.left < viewportBounding.left) {
+          // 现在滚过的距离-滚动的左边界到当前的tab的距离
+          newOffset = currentOffset - (viewportBounding.left - activeTabBounding.left);
         }
-        if (activeTabBounding.right > navScrollBounding.right) {
-          newOffset = currentOffset + activeTabBounding.right - navScrollBounding.right;
+        // 可以向右滚
+        if (activeTabBounding.right > viewportBounding.right) {
+          newOffset = currentOffset + activeTabBounding.right - viewportBounding.right;
         }
-        if (navBounding.right < navScrollBounding.right) {
-          newOffset = nav.offsetWidth - navScrollBounding.width;
+        if (overviewBounding.right < viewportBounding.right) {
+          newOffset = overview.offsetWidth - viewportBounding.width;
         }
         this.navOffset = Math.max(newOffset, 0);
       },
       update() {
         if (!this.$refs.nav) return;
         const sizeName = this.sizeName;
-        const navSize = this.$refs.nav[`offset${firstUpperCase(sizeName)}`];
-        const containerSize = this.$refs.navScroll[`offset${firstUpperCase(sizeName)}`];
+        const overviewWidth = this.$refs.nav[`offset${firstUpperCase(sizeName)}`];
+        const viewportWidth = this.$refs.navScroll[`offset${firstUpperCase(sizeName)}`];
+        const activeTab = this.$el.querySelector('.is-active');
+        const activeTabBounding = activeTab && activeTab.getBoundingClientRect();
+        const viewport = this.$refs.navScroll;
+        const viewportBounding = viewport.getBoundingClientRect();
         const currentOffset = this.navOffset;
 
-        if (containerSize < navSize) {
-          const currentOffset = this.navOffset;
+        // 可视区域的宽度小的话，会出滚动
+        if (viewportWidth < overviewWidth) {
           this.scrollable = this.scrollable || {};
           this.scrollable.prev = currentOffset;
-          this.scrollable.next = currentOffset + containerSize < navSize;
-          if (navSize - currentOffset < containerSize) {
-            this.navOffset = navSize - containerSize;
+          this.scrollable.next = currentOffset + viewportWidth < overviewWidth;
+          // 滚多了，要校正
+          if (overviewWidth - currentOffset < viewportWidth) {
+            // 滚到最大滚动距离
+            this.navOffset = overviewWidth - viewportWidth;
+          } else if (activeTabBounding && this.scrollable.next && activeTabBounding.right > viewportBounding.right && activeTabBounding.left < viewportBounding.right) {
+            // 现在active的tab是最后一个的时候（视窗右边界刚好处在最后一个tab的中间），在resize的时候有可能没有滚动条，这种情况下，这个tab可能没有滚完
+            this.navOffset = overviewWidth - viewportWidth;
           }
         } else {
           this.scrollable = false;

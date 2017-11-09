@@ -18,7 +18,8 @@
       tabPosition: {
         type: String,
         default: 'top'
-      }
+      },
+      getSize: Function
     },
 
     provide() {
