@@ -34,11 +34,17 @@
         type: Boolean,
         default: true
       },
-      size: String
+      size: String,
+      validateOnRuleChange: {
+        type: Boolean,
+        default: true
+      }
     },
     watch: {
       rules() {
-        this.validate();
+        if (this.validateOnRuleChange) {
+          this.validate(() => {});
+        }
       }
     },
     data() {
