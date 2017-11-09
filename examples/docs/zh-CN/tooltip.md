@@ -63,7 +63,7 @@
 <div class="box">
   <div class="top">
     <el-tooltip class="item" effect="dark" content="Top Left 提示文字" placement="top-start">
-      <span>上左</span>
+      <el-button>上左</el-button>
     </el-tooltip>
     <el-tooltip class="item" effect="dark" content="Top Center 提示文字" placement="top">
       <el-button>上边</el-button>

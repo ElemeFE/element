@@ -219,6 +219,7 @@
         const preferGithub = localStorage.getItem('PREFER_GITHUB');
         if (href.indexOf('element-cn') > -1 || preferGithub) return;
         setTimeout(() => {
+          if (this.lang !== 'zh-CN') return;
           this.$confirm('建议大陆用户访问部署在国内的站点，是否跳转？', '提示')
             .then(() => {
               location.href = location.href.replace('element.', 'element-cn.');
@@ -232,12 +233,10 @@
 
     mounted() {
       this.localize();
-      if (this.lang === 'zh-CN') {
-        this.suggestJump();
-      }
+      this.suggestJump();
       setTimeout(() => {
         const notified = localStorage.getItem('ES_NOTIFIED');
-        if (!notified) {
+        if (!notified && this.lang !== 'zh-CN') {
           const h = this.$createElement;
           const title = this.lang === 'zh-CN'
             ? '帮助我们完成西班牙语文档'
