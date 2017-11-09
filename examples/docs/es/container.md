@@ -9,7 +9,7 @@
     color: #333;
   }
   
-  #common-layouts + .demo-container {
+  #disenos-comunes + .demo-container {
     .el-header, .el-footer {
       text-align: center;
     }
@@ -57,76 +57,78 @@
   };
 </script>
 
-## Container
-Container components for scaffolding basic structure of the page:
+## Contenedor
+Componentes contenedores para iniciar una estructura básica de un sitio:
 
-`<el-container>`: wrapper container. When nested with a `<el-header>` or `<el-footer>`, all its child elements will be vertically arranged. Otherwise horizontally.
+`<el-container>`: Contenedor. Cuando este elemento se anida con un `<el-header>` o `<el-footer>`, todos los elementos secundarios se organizan verticalmente.
+De lo contrario, de forma horizontal. 
 
-`<el-header>`: container for headers.
+`<el-header>`: Contenedor para cabeceras.
 
-`<el-aside>`: container for side sections (usually a side nav).
+`<el-aside>`: Contenedor para secciones laterales (generalmente, una barra lateral).
 
-`<el-main>`: container for main sections.
+`<el-main>`: Contenedor para sección principal.
 
-`<el-footer>`: container for footers.
+`<el-footer>`: Contenedor para pie de página.
 
 :::tip
-These components use flex for layout, so please make sure your browser supports it. Besides, `<el-container>`'s direct child elements have to be one or more of the latter four components. And father element of the latter four components must be a `<el-container>`.
+Estos componentes utilizan flex para el diseño, así que asegúrate que el navegador lo soporte. Además, los elementos directos de `<el-container>` tienen que
+ser uno o más de los últimos cuatro componentes. Y el elemento padre de los últimos cuatro componentes debe ser un `<el-container>`.
 :::
 
-### Common layouts
+### Diseños comunes
 
 ::: demo
 ```html
 <el-container>
-  <el-header>Header</el-header>
-  <el-main>Main</el-main>
+  <el-header>Cabecera</el-header>
+  <el-main>Principal</el-main>
 </el-container>
 
 <el-container>
-  <el-header>Header</el-header>
-  <el-main>Main</el-main>
-  <el-footer>Footer</el-footer>
+  <el-header>Cabecera</el-header>
+  <el-main>Principal</el-main>
+  <el-footer>Pie de página</el-footer>
 </el-container>
 
 <el-container>
-  <el-aside width="200px">Aside</el-aside>
-  <el-main>Main</el-main>
+  <el-aside width="200px">Barra lateral</el-aside>
+  <el-main>Principal</el-main>
 </el-container>
 
 <el-container>
-  <el-header>Header</el-header>
+  <el-header>Cabecera</el-header>
   <el-container>
-    <el-aside width="200px">Aside</el-aside>
-    <el-main>Main</el-main>
+    <el-aside width="200px">Barra lateral</el-aside>
+    <el-main>Principal</el-main>
   </el-container>
 </el-container>
 
 <el-container>
-  <el-header>Header</el-header>
+  <el-header>Cabecera</el-header>
   <el-container>
-    <el-aside width="200px">Aside</el-aside>
+    <el-aside width="200px">Barra lateral</el-aside>
     <el-container>
-      <el-main>Main</el-main>
-      <el-footer>Footer</el-footer>
+      <el-main>Principal</el-main>
+      <el-footer>Pie de página</el-footer>
     </el-container>
   </el-container>
 </el-container>
 
 <el-container>
-  <el-aside width="200px">Aside</el-aside>
+  <el-aside width="200px">Barra lateral</el-aside>
   <el-container>
-    <el-header>Header</el-header>
-    <el-main>Main</el-main>
+    <el-header>Cabecera</el-header>
+    <el-main>Principal</el-main>
   </el-container>
 </el-container>
 
 <el-container>
-  <el-aside width="200px">Aside</el-aside>
+  <el-aside width="200px">Barra lateral</el-aside>
   <el-container>
-    <el-header>Header</el-header>
-    <el-main>Main</el-main>
-    <el-footer>Footer</el-footer>
+    <el-header>Cabecera</el-header>
+    <el-main>Principal</el-main>
+    <el-footer>Pie de página</el-footer>
   </el-container>
 </el-container>
 
@@ -168,7 +170,7 @@ These components use flex for layout, so please make sure your browser supports 
 ```
 :::
 
-### Example
+### Ejemplo
 
 ::: demo
 ```html
@@ -278,22 +280,22 @@ These components use flex for layout, so please make sure your browser supports 
 ```
 :::
 
-### Container Attributes
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
+### Atributos de contenedor
+| Atributo      | Descripción          | Tipo      | Valores aceptados       | Por defecto  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| direction | layout direction for child elements | string | horizontal / vertical | vertical when nested with `el-header` or `el-footer`; horizontal otherwise |
+| direction | dirección de diseño para elementos secundarios | string | horizontal / vertical | vertical cuando el elemento está anidado con `el-header`, de lo contrario, horizontal |
 
-### Header Attributes
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
+### Atributos de cabecera
+| Atributo      | Descripción          | Tipo      | Valores aceptados       | Por defecto  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| height | height of the header | string | — | 60px |
+| height | altura de la cabecera | string | — | 60px |
 
-### Aside Attributes
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
+### Atributos de barra lateral
+| Atributo      | Descripción          | Tipo      | Valores aceptados       | Por defecto  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| width | width of the side section | string | — | 300px |
+| width | ancho de la barra lateral | string | — | 300px |
 
-### Footer Attributes
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
+### Atributos de pie de página
+| Atributo      | Descripción          | Tipo      | Valores aceptados       | Por defecto  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| height | height of the footer | string | — | 60px |
+| height | altura del pie de página | string | — | 60px |
