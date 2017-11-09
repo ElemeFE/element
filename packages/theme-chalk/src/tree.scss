@@ -25,7 +25,12 @@
 
 @include b(tree-node) {
   white-space: nowrap;
-
+  outline: none;
+  &:focus { /* focus */
+    > .el-tree-node__content {
+      background-color: $--tree-node-hover-color;
+    }
+  }
   @include e(content) {
     display: flex;
     align-items: center;
