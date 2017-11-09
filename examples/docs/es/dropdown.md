@@ -2,7 +2,7 @@
   .demo-box {
     .el-dropdown {
       vertical-align: top;
-
+    
       & + .el-dropdown {
         margin-left: 15px;
       }
@@ -23,7 +23,7 @@
       padding: 30px 0;
       text-align: center;
       border-right: 1px solid #eff2f6;
-
+    
       &:last-child {
         border-right: 0;
       }
@@ -51,12 +51,12 @@
   }
 </script>
 ## Dropdown
-Toggleable menu for displaying lists of links and actions.
+Menú conmutable para visualizar listas de enlaces y acciones.
 
-### Basic usage
-Hover on the dropdown menu to unfold it for more actions.
+### Uso básico
+Pase el ratón por el menú desplegable para desplegarlo y obtener más acciones.
 
-:::demo The triggering element is rendered by the default `slot`, and the dropdown part is rendered by the `slot` named `dropdown`. By default, dropdown list shows when you hover on the triggering element without having to click it.
+:::demo El elemento desencadenante se representa con el slot predeterminado, y la parte desplegable se representa con el slot llamado dropdown. Por defecto, la lista desplegable se muestra cuando se pasa el ratón por encima del elemento desencadenante sin necesidad de hacer clic en él.
 
 ```html
 <el-dropdown>
@@ -86,11 +86,12 @@ Hover on the dropdown menu to unfold it for more actions.
 
 :::
 
-### Triggering element
+Elemento detonante
 
-Use the button to trigger the dropdown list.
+Utilizando un botón para activar la lista desplegable.
 
-:::demo Use `split-button` to split the triggering element into a button group with the left button being a normal button and right one the actual triggering target. If you wanna insert a separator line between item three and item four, just add a class `divider` to item four.
+:::demo Utilice `split-button` para dividir el elemento detonante en un grupo de botones, siendo el botón izquierdo un botón normal y el botón derecho el objetivo real de la detonacion. Si desea insertar una línea de separación entre la posición tres y la posición cuatro, sólo añada un divisor de clase a la posición cuatro.
+
 ```html
 <el-dropdown>
   <el-button type="primary">
@@ -139,11 +140,11 @@ Use the button to trigger the dropdown list.
 ```
 :::
 
-### How to trigger
+### Cómo detonar el evento
 
-Click the triggering element or hover on it.
+Haga clic en el elemento detonante o sobre él.
 
-:::demo Use the attribute `trigger`. By default, it is `hover`.
+:::demo Utilice el atributo `trigger`. Por defecto, es `hover`.
 
 ```html
 <el-row class="block-col-2">
@@ -197,11 +198,12 @@ Click the triggering element or hover on it.
 ```
 :::
 
-### Menu hiding behavior
+### Ocultamiento del menú
 
-Use `hide-on-click` to define if menu closes on clicking.
+Use `hide-on-click` para definir si el menú se cierra al hacer clic.
 
-:::demo By default menu will close when you click on menu items, and it can be turned off by setting hide-on-click to false.
+:::demo El menú predeterminado se cerrará cuando haga clic en los elementos del menú, y se puede desactivar configurando `hide-on-click` como false.
+
 ```html
 <el-dropdown :hide-on-click="false">
   <span class="el-dropdown-link">
@@ -228,9 +230,9 @@ Use `hide-on-click` to define if menu closes on clicking.
 ```
 :::
 
-### Command event
+### Evento command
 
-Clicking each dropdown item fires an event whose parameter is assigned by each item.
+Al hacer clic en cada elemento desplegable se detona un evento cuyo parámetro es asignado por cada elemento.
 
 :::demo
 ```html
@@ -269,11 +271,11 @@ Clicking each dropdown item fires an event whose parameter is assigned by each i
 ```
 :::
 
-### Sizes
+### Tamaños
 
-Besides default size, Dropdown component provides three additional sizes for you to choose among different scenarios.
+Además del tamaño predeterminado, el componente Dropdown proporciona tres tamaños adicionales para que pueda elegir entre diferentes escenarios
 
-:::demo Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
+:::demo Utilice el atributo `size` para establecer tamaños adicionales con `medium`, `small` o `mini`.
 
 ```html
 <el-dropdown split-button type="primary">
@@ -319,28 +321,28 @@ Besides default size, Dropdown component provides three additional sizes for you
 :::
 
 
-### Dropdown Attributes
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
-|-------------  |---------------- |---------------- |---------------------- |-------- |
-| type          | menu button type, refer to `Button` Component, only works when `split-button` is true  | string  |  —   |    —     |
-| size          | menu size, also works on the split button  | string  | medium / small / mini  |    —     |
-| split-button | whether a button group is displayed | boolean         |     —       | false   |
-| placement    | placement of pop menu | string | top/top-start/top-end/bottom/bottom-start/bottom-end  | bottom-end |
-| trigger       | how to trigger     | string  |    hover/click  |  hover |
-| hide-on-click | whether to hide menu after clicking menu-item     | boolean          | — | true |
-| show-timeout | Delay time before show a dropdown     | number          | — | 250 |
-| hide-timeout | Delay time before hide a dropdown     | number          | — | 150 |
+### Dropdown atributos
+| Atributo      | Descripción                              | Tipo    | Valores aceptados                        | Por defecto |
+| ------------- | ---------------------------------------- | ------- | ---------------------------------------- | ----------- |
+| type          | tipo de botón de menú, consulte Componente`Button`, sólo funciona cuando `split-button` es true. | string  | —                                        | —           |
+| size          | tamaño del menú, también funciona en `split-button` | string  | medium / small / mini                    | —           |
+| split-button  | si se visualiza un grupo de botones      | boolean | —                                        | false       |
+| placement     | colocación del menú                      | string  | top/top-start/top-end/bottom/bottom-start/bottom-end | bottom-end  |
+| trigger       | cómo detonar                             | string  | hover/click                              | hover       |
+| hide-on-click | si se oculta el menú después de hacer clic en el elemento | boolean | —                                        | true        |
+| show-timeout  | Tiempo de retardo antes de mostrar un dropdown | number  | —                                        | 250         |
+| hide-timeout  | Tiempo de retardo antes de ocultar un dropdown | number  | —                                        | 150         |
 
-### Dropdown Events
-| Event Name | Description | Parameters |
-|---------- |-------- |---------- |
-| click | if `split-button` is `true`, triggers when left button is clicked | — |
-| command | triggers when a dropdown item is clicked | the command dispatched from the dropdown item |
-| visible-change | triggers when the dropdown appears/disappears | true when it appears, and false otherwise |
+### Dropdown Eventos
+| Nombre         | Descripción                              | Parametros                               |
+| -------------- | ---------------------------------------- | ---------------------------------------- |
+| click          | si `split-button` es `true`, se activa al hacer clic en el botón izquierdo | —                                        |
+| command        | activa cuando se hace clic en un elemento desplegable | el comando enviado desde el elemento desplegable |
+| visible-change | se activa cuando aparece/desaparece el desplegable | true cuando aparece, y false de otro modo |
 
-### Dropdown Menu Item Attributes
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
-|-------------  |---------------- |---------------- |---------------------- |-------- |
-| command       | a command to be dispatched to Dropdown's `command` callback | string/number/object  |          —             |    —     |
-| disabled      | whether the item is disabled  | boolean  |          —             |    false     |
-| divided       | whether a divider is displayed  | boolean  |          —             |    false     |
+### Dropdown Menu Item Atributos
+| Atributo | Descripción                              | Tipo                 | Valores aceptados | Por defecto |
+| -------- | ---------------------------------------- | -------------------- | ----------------- | ----------- |
+| command  | un comando que se enviará al `command` callback del Dropdown | string/number/object | —                 | —           |
+| disabled | si el elemento está desactivado          | boolean              | —                 | false       |
+| divided  | si se visualiza un divisor               | boolean              | —                 | false       |
