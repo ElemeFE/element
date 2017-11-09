@@ -9,15 +9,15 @@
       v-show="visible"
       @mouseenter="clearTimer"
       @mouseleave="startTimer"
-      role="alertdialog"
+      role="alert"
     >
       <i :class="iconClass" v-if="iconClass"></i>
       <i :class="typeClass" v-else></i>
       <slot>
-        <p v-if="!dangerouslyUseHTMLString" class="el-message__content"  tabindex="0">{{ message }}</p>
-        <p v-else v-html="message" class="el-message__content"  tabindex="0"></p>
+        <p v-if="!dangerouslyUseHTMLString" class="el-message__content">{{ message }}</p>
+        <p v-else v-html="message" class="el-message__content"></p>
       </slot>
-      <i v-if="showClose" class="el-message__closeBtn el-icon-close" @click="close" tabindex="0" role="button" aria-label="close" @keydown.enter.stop="close"></i>
+      <i v-if="showClose" class="el-message__closeBtn el-icon-close" @click="close"></i>
     </div>
   </transition>
 </template>
@@ -44,9 +44,7 @@
         closed: false,
         timer: null,
         dangerouslyUseHTMLString: false,
-        center: false,
-        initFocus: null,
-        originFocus: null
+        center: false
       };
     },
 
@@ -87,18 +85,18 @@
         if (typeof this.onClose === 'function') {
           this.onClose(this);
         }
-        if (!this.originFocus || !this.originFocus.getBoundingClientRect) return;
-
-        // restore keyboard focus
-        const { top, left, bottom, right } = this.originFocus.getBoundingClientRect();
-        const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-        const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
-        if (top >= 0 &&
-          left >= 0 &&
-          bottom <= viewportHeight &&
-          right <= viewportWidth) {
-          this.originFocus.focus();
-        }
+//        if (!this.originFocus || !this.originFocus.getBoundingClientRect) return;
+//
+//        // restore keyboard focus
+//        const { top, left, bottom, right } = this.originFocus.getBoundingClientRect();
+//        const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+//        const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+//        if (top >= 0 &&
+//          left >= 0 &&
+//          bottom <= viewportHeight &&
+//          right <= viewportWidth) {
+//          this.originFocus.focus();
+//        }
       },
 
       clearTimer() {
@@ -115,24 +113,15 @@
         }
       },
       keydown(e) {
-        if (e.keyCode === 46 || e.keyCode === 8) {
-          this.clearTimer(); // detele 取消倒计时
-        } else if (e.keyCode === 27) { // esc关闭消息
+        if (e.keyCode === 27) { // esc关闭消息
           if (!this.closed) {
             this.close();
           }
-        } else {
-          this.startTimer(); // 恢复倒计时
         }
       }
     },
     mounted() {
       this.startTimer();
-      this.originFocus = document.activeElement;
-      this.initFocus = this.showClose ? this.$el.querySelector('.el-icon-close') : this.$el.querySelector('.el-message__content');
-      setTimeout(() => {
-        this.initFocus && this.initFocus.focus();
-      });
       document.addEventListener('keydown', this.keydown);
     },
     beforeDestroy() {

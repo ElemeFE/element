@@ -146,7 +146,7 @@ Popover 的属性与 Tooltip 很类似，它们都是基于`Vue-popper`开发的
   width="200"
   trigger="focus"
   content="这是一段内容,这是一段内容,这是一段内容,这是一段内容。">
-  <el-button slot="reference">focus 激活</el-button>
+  <span slot="reference" style="margin-left: 10px; font-size: 14px; color: #5a5e66">focus 激活</span>
 </el-popover>
 ```
 :::
