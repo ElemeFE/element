@@ -176,17 +176,17 @@
     .el-form {
       width: 480px;
     }
-
+    
     .line {
       text-align: center;
     }
-
+    
     .el-checkbox-group {
       width: 320px;
       margin: 0;
       padding: 0;
       list-style: none;
-
+    
       &:after, &:before {
         content: ' ';
         display: table;
@@ -197,14 +197,14 @@
         font-size: 0;
         height: 0;
       }
-
+    
       .el-checkbox {
         float: left;
         width: 160px;
         padding-right: 20px;
         margin: 0;
         padding: 0;
-
+    
         + .el-checkbox {
           margin-left: 0;
         }
@@ -215,7 +215,7 @@
     }
     .demo-form-inline {
       width: auto;
-
+    
       .el-input {
         width: 150px;
       }
@@ -225,7 +225,7 @@
     }
     .demo-ruleForm {
       width: 480px;
-
+    
       .el-select .el-input {
         width: 360px;
       }
@@ -245,13 +245,13 @@
 
 ## Form
 
-Form consists of `input`, `radio`, `select`, `checkbox` and so on. With form, you can collect, verify and submit data.
+Form consiste en `input`, `radio`, `select`, `checkbox`, etcétera. Con el formulario, usted puede recopilar, verificar y enviar datos.
 
-### Basic form
+### Form básico
 
-It includes all kinds of input items, such as `input`, `select`, `radio` and `checkbox`.
+Incluye todo tipo de entradas, tales como `input`, `select`, `radio` y `checkbox`.
 
-:::demo In each `form` component, you need a `form-item` field to be the container of your input item.
+:::demo En cada componente `form`, necesita un campo `form-item` para que sea el contenedor del item.
 
 ```html
 <el-form ref="form" :model="form" label-width="120px">
@@ -325,17 +325,17 @@ It includes all kinds of input items, such as `input`, `select`, `radio` and `ch
 :::
 
 :::tip
-[W3C](https://www.w3.org/MarkUp/html-spec/html-spec_8.html#SEC8.2) regulates that
-> <i>When there is only one single-line text input field in a form, the user agent should accept Enter in that field as a request to submit the form.</i>
+[W3C](https://www.w3.org/MarkUp/html-spec/html-spec_8.html#SEC8.2) reglamenta que
+> <i>Cuando sólo hay un campo de entrada de texto de una sola línea en un formulario, el agente usuario debe aceptar <b>Enter</b> en ese campo como una solicitud para enviar el formulario.</i>
 
-To prevent this behavior, you can add `@submit.native.prevent` on `<el-form>`.
+Para prevenir este comportamiento, puede agregar `@submit.native.prevent` on `<el-form>`.
   :::
 
-### Inline form
+### Formulario inline
 
-When the vertical space is limited and the form is relatively simple, you can put it in one line.
+Cuando el espacio vertical es limitado y la forma es relativamente simple, puede ponerlo en una unica línea.
 
-:::demo Set the `inline` attribute to `true` and the form will be inline.
+:::demo Establezca el atributo `inline` como `true` y el formulario sera inline.
 
 ```html
 <el-form :inline="true" :model="formInline" class="demo-form-inline">
@@ -372,11 +372,13 @@ When the vertical space is limited and the form is relatively simple, you can pu
 ```
 :::
 
-### Alignment
+### Alineamiento
 
-Depending on your design, there are several different ways to align your label element.
+Dependiendo de su diseño, hay varias maneras diferentes de alinear el elemento de la etiqueta.
 
 :::demo The `label-position` attribute decides how labels align, it can be `top` or `left`. When set to `top`, labels will be placed at the top of the form field.
+
+El atributo `label-position` decide cómo se alinean las etiquetas, puede estar `top` o `left`. Cuando se establece en `top`, las etiquetas se colocarán en la parte superior del campo de formulario.
 
 ```html
 <el-radio-group v-model="labelPosition" size="small">
@@ -413,11 +415,11 @@ Depending on your design, there are several different ways to align your label e
 ```
 :::
 
-### Validation
+### Validación
 
-Form component allows you to verify your data, helping you find and correct errors.
+El componente `form` le permite verificar sus datos, ayudándole a encontrar y corregir errores.
 
-:::demo Just add the `rules` attribute for `Form` component, pass validation rules, and set `prop` attribute for `Form-Item` as a specific key that needs to be validated. See more information at [async-validator](https://github.com/yiminghe/async-validator).
+:::demo Sólo tiene que añadir el atributo `rules` en el componente `Form`, pasar las reglas de validación y establecer el atributo `prop` para  `Form-Item` como una clave específica que necesita ser validada. Ver más información en [async-validator](https://github.com/yiminghe/async-validator).
 
 ```html
 <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
@@ -528,11 +530,12 @@ Form component allows you to verify your data, helping you find and correct erro
 ```
 :::
 
-### Custom validation rules
+### Reglas personalizadas de validación
 
-This example shows how to customize your own validation rules to finish a two-factor password verification.
+Este ejemplo muestra cómo personalizar sus propias reglas de validación para finalizar una verificación de contraseña de dos pasos.
 
-:::demo Here we use `status-icon` to reflect validation result as an icon.
+:::demo Aquí utilizamos el `status-icon` para reflejar el resultado de la validación como un icono.
+
 ```html
 <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="120px" class="demo-ruleForm">
   <el-form-item label="Password" prop="pass">
@@ -626,9 +629,9 @@ This example shows how to customize your own validation rules to finish a two-fa
 ```
 :::
 
-### Delete or add form items dynamically
+### Eliminar o agregar validaciones dinamicamente 
 
-:::demo In addition to passing all validation rules at once on the form component, you can also pass the validation rules or delete rules on a single form field dynamically.
+:::demo Además de pasar todas las reglas de validación al mismo tiempo en el componente `form`, también puede pasar las reglas de validación o borrar reglas en un único campo de formulario de forma dinámica.
 
 ```html
 <el-form :model="dynamicValidateForm" ref="dynamicValidateForm" label-width="120px" class="demo-dynamic">
@@ -704,9 +707,10 @@ This example shows how to customize your own validation rules to finish a two-fa
 ```
 :::
 
-### Number Validate
+### Validación numerica
 
-::: demo Number Validate need a `.number` modifier added on the input `v-model` binding，it's used to transform the string value to the number which is provided by Vuejs.
+::: demo La validacion numerica necesita un modificador `.number` añadido en el enlace `v-model` de entrada, sirve para transformar el valor de la cadena al número proporcionado por Vuejs.
+
 ```html
 <el-form :model="numberValidateForm" ref="numberValidateForm" label-width="100px" class="demo-ruleForm">
   <el-form-item
@@ -754,14 +758,17 @@ This example shows how to customize your own validation rules to finish a two-fa
 :::
 
 :::tip
-When an `el-form-item` is nested in another `el-form-item`, its label width will be `0`. You can set `label-width` on that `el-form-item` if needed.
+
+Cuando un `el-form-item` está anidado en otro `el-form-item`, su ancho de etiqueta será 0. Si es necesario, puede establecer el ancho de etiqueta en ese `el-form-item`.
+
 :::
 
-### Size control
+### Tamaño del control
 
-All components in a Form inherit their `size` attribute from that Form. Similarly, FormItem also has a `size` attribute.
+Todos los componentes de un formulario heredan su atributo `size`. De manera similar, FormItem también tiene un atributo `size`.
 
-::: demo Still you can fine tune each component's `size` if you don't want that component to inherit its size from From or FormIten.
+::: demo Aún así, puede ajustar el `size` de cada componente si no desea que herede su tamaño de From o FormItem.
+
 ```html
 <el-form ref="form" :model="sizeForm" label-width="120px" size="mini">
   <el-form-item label="Activity name">
@@ -826,52 +833,52 @@ All components in a Form inherit their `size` attribute from that Form. Similarl
 ```
 :::
 
-### Form Attributes
+### Form Atributos
 
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
-| ---- | ----| ---- | ---- | ---- |
-| model| data of form component | object | — | — |
-| rules | validation rules of form | object | — | — |
-| inline | whether the form is inline | boolean | — | false |
-| label-position | position of label | string | left / right / top | right |
-| label-width | width of label, and all its direct child form items will inherit this value | string | — | — |
-| label-suffix | suffix of the label | string | — | — |
-| show-message  | whether to show the error message | boolean | — | true |
-| inline-message  | whether to display the error message inline with the form item | boolean | — | false |
-| status-icon  | whether to display an icon indicating the validation result | boolean | — | false |
-| size  | control the size of components in this form | string | medium / small / mini | - |
+| Atributo       | Descripción                              | Tipo    | Valores aceptados     | Por defecto |
+| -------------- | ---------------------------------------- | ------- | --------------------- | ----------- |
+| model          | Datos del componente                     | object  | —                     | —           |
+| rules          | Reglas de validación                     | object  | —                     | —           |
+| inline         | Si el form es inline                     | boolean | —                     | false       |
+| label-position | Posicion de la etiqueta                  | string  | left / right / top    | right       |
+| label-width    | ancho de la etiqueta, y todos los form items directos descendientes heredarán este valor | string  | —                     | —           |
+| label-suffix   | sufijo de la etiqueta                    | string  | —                     | —           |
+| show-message   | si mostrar o no el mensaje de error      | boolean | —                     | true        |
+| inline-message | si desea visualizar el mensaje de error inline con la posición del form item | boolean | —                     | false       |
+| status-icon    | si desea visualizar un icono que indique el resultado de la validación | boolean | —                     | false       |
+| size           | el tamaño de los componentes en este form | string  | medium / small / mini | -           |
 
-### Form Methods
+### Form Metodos
 
-| Method | Description | Parameters |
-| ---- | ---- | ---- |
-| validate | the method to validate the whole form. Returns a promise if callback is omitted | Function(callback: Function(boolean)) |
-| validateField | the method to validate a certain form item | Function(prop: string, callback: Function(errorMessage: string)) |
-| resetFields | reset all the fields and remove validation result | — |
-| clearValidate | clear validation message for all fields | -
+| Metodo        | Descripción                              | Parametros                               |
+| ------------- | ---------------------------------------- | ---------------------------------------- |
+| validate      | el método para validar todo el formulario. Devuelve una promesa si se omite el return | Function(callback: Function(boolean))    |
+| validateField | el método para validar un determinado form item | Function(prop: string, callback: Function(errorMessage: string)) |
+| resetFields   | restablece todos los campos y elimina el resultado de validación | —                                        |
+| clearValidate | limpia mensaje de validación para todos los campos | -
 
-### Form-Item Attributes
+### Form-Item Atributos
 
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
-| ---- | ----| ---- | ---- | ---- |
-| prop | a key of `model`. In the use of validate and resetFields method, the attribute is required | string | keys of model that passed to `form` |
-| label | label | string | — | — |
-| label-width | width of label, e.g. '50px' | string | — | — |
-| required | whether the field is required or not, will be determined by validation rules if omitted | string |  — | false |
-| rules | validation rules of form | object | — | — |
-| error | field error message, set its value and the field will validate error and show this message immediately | string | — | — |
-| show-message  | whether to show the error message | boolean | — | true |
-| inline-message  | inline style validate message | boolean | — | false |
-| size  | control the size of components in this form-item | string | medium / small / mini | - |
+| Atributo       | Descripción                              | Tipo    | Valores aceptados                   | Por defecto |
+| -------------- | ---------------------------------------- | ------- | ----------------------------------- | ----------- |
+| prop           | un key de `model`. En el uso del método validate and resetFields, el atributo es obligatorio. | string  | keys of model that passed to `form` |             |
+| label          | etiqueta                                 | string  | —                                   | —           |
+| label-width    | ancho de la etiqueta, e.g. '50px'        | string  | —                                   | —           |
+| required       | si el campo es obligatorio o no, estará determinado por las reglas de validación si se omite. | string  | —                                   | false       |
+| rules          | reglas de validacion del form            | object  | —                                   | —           |
+| error          | mensaje de error de campo, establezca su valor y el campo validará el error y mostrará este mensaje inmediatamente. | string  | —                                   | —           |
+| show-message   | si mostrar o no el mensaje de error      | boolean | —                                   | true        |
+| inline-message | mensaje de validación estilo inline      | boolean | —                                   | false       |
+| size           | Tamaño de los componentes en este form item | string  | medium / small / mini               | -           |
 
 ### Form-Item Slot
-| Name | Description |
-|------|--------|
-| — | content of Form Item |
-| label | content of label |
+| Nombre | Descripción              |
+| ------ | ------------------------ |
+| —      | contenido del Form Item  |
+| label  | contenido de la etiqueta |
 
-### Form-Item Methods
+### Form-Item Metodo
 
-| Method | Description | Parameters |
-| ---- | ---- | ---- |
-| resetField | reset current field and remove validation result | — |
+| Metodo     | Descripción                              | Parametros |
+| ---------- | ---------------------------------------- | ---------- |
+| resetField | restablecer campo actual y eliminar resultado de validación | —          |
