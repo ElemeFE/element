@@ -41,7 +41,7 @@ describe('ajax', () => {
   });
   it('40x code should be error', done => {
     option.onError = e => {
-      expect(e.toString()).to.contain('404 Not found');
+      expect(e.toString()).to.contain('Not found');
       done();
     };
 
