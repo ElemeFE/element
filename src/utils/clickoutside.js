@@ -65,5 +65,6 @@ export default {
         break;
       }
     }
+    delete el[ctx];
   }
 };
