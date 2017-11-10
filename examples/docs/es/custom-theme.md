@@ -1,25 +1,25 @@
-## Custom theme
-Element uses BEM-styled CSS so that you can override styles easily. But if you need to replace styles at a large scale, e.g. change the theme color from blue to orange or green, maybe overriding them one by one is not a good idea. We provide three ways to change the style variables.
+## Tema personalizado
+Element utiliza la metodología BEM en CSS con la finalidad de que puedas sobrescribir los estilos fácilmente. Pero, si necesitas remplazar estilos a gran escala, por ejemplo, cambiar el color del tema de azul a naranja o verde, quizás reemplazarlos uno a uno no sea lo más adecuado, por ello, te proporcionamos 3 maneras de modificar los estilos.
 
-### Changing theme color
-If you just want to change the theme color of Element, the [theme preview website](https://elementui.github.io/theme-chalk-preview/#/en-US) is recommended. The theme color of Element is bright and friendly blue. By changing it, you can make Element more visually connected to specific projects.
+### Cambiando el color del tema
+Si lo que buscas es cambiar el color del tema de Element, se recomienda utilizar el [sitio de visualización de temas](https://elementui.github.io/theme-chalk-preview/#/en-US). Element utiliza un color azul brillante y amigable como tema principal. Al cambiarlo, puede hacer que Element este más conectado visualmente a proyectos específicos.
 
-The above website enables you to preview theme of a new theme color in real-time, and it can generate a complete style package based on the new theme color for you to download directly (to import new style files in your project, please refer to the 'Import custom theme' or 'Import component theme on demand' part of this section).
+Este sitio, te permitirá obtener una vista previa del tema con un nuevo color en tiempo real, y, además, obtener un paquete de estilos completo basado en el nuevo color para su descarga (para importar estos nuevos estilos, consulta la sección ‘Importar un tema personalizado’ o ‘Importar un tema de componente bajo demanda' que se encuentran dentro de esta sección).
 
-### Update SCSS variables in your project
-`theme-chalk` is written in SCSS. If your project also uses SCSS, you can directly change Element style variables. Create a new style file, e.g. `element-variables.scss`:
+### Actualizando variables SCSS en tu proyecto
+`theme-chalk` esta escrito en SCSS. Si tu proyecto también utiliza SCSS, puedes cambiar las variables de estilos de Element. Para ello, solo necesitas crear un nuevo archivo de estilos, por ejemplo, `element-variables.scss`:
 
 ```html
-/* theme color */
+/* Color del tema */
 $--color-primary: teal;
 
-/* icon font path, required */
+/* Ubicación de la fuente, obligatoria */
 $--font-path: '../node_modules/element-ui/lib/theme-chalk/fonts';
 
 @import "../node_modules/element-ui/packages/theme-chalk/src/index";
 ```
 
-Then in the entry file of your project, import this style file instead of Element's built CSS:
+Entonces, en el archivo principal del proyecto, importa este archivo de estilos en lugar de los estilos de Element:
 ```JS
 import Vue from 'vue'
 import Element from 'element-ui'
@@ -29,29 +29,29 @@ Vue.use(Element)
 ```
 
 :::tip
-Note that it is required to override icon font path to the relative path of Element's font files.
+Nota es necesario sobreescribir la ruta de la fuente por una ruta relativa de las fuentes de Element.
 :::
 
-### CLI theme tool
-If you project doesn't use SCSS, you can customize themes with our CLI theme tool:
+### CLI para generar temas
+Si tu proyecto no utiliza SCSS, puedes personalizar el tema a través de esta herramienta:
 
-#### <strong>Install</strong>
-First install the theme generator globally or locally. Local install is recommended because in this way, when others clone your project, npm will automatically install it for them.
+#### <strong>Instalación</strong>
+Primero, debes instalar el generador de temas ya sea de forma global o local. Se recomienda instalarlo de forma local, ya que de esta manera, cuando otros clonen tu proyecto, npm automáticamente los instalará para ellos.
 ```shell
 npm i element-theme -g
 ```
 
-Then install the chalk theme from npm or GitHub.
+Ahora, instala el tema `chalk` desde npm o Github.
 ```shell
-# from npm
+# desde npm
 npm i element-theme-chalk -D
 
-# from GitHub
+# desde GitHub
 npm i https://github.com/ElementUI/theme-chalk -D
 ```
 
-#### <strong>Initialize variable file</strong>
-After successfully installing the above packages, a command named `et` is available in CLI (if the packages are installed locally, use `node_modules/.bin/et` instead). Run `-i` to initialize the variable file which outputs to `element-variables.scss` by default. And you can specify its output directory as you will.
+#### <strong>Inicializar archivo de variables</strong>
+Después de haber instalado correctamente los paquetes, el comando `et` estará disponible en tu CLI (si instalaste el paquete de manera local, utilizá `node_modules/.bin/et` en su lugar). Ejecuta `-i` para inicializar un archivo de variables, puedes especificar un nombre distinto, pero por defecto, el archivo se llama `element-variables.scss`. También puedes especificar un directorio distinto.
 
 ```shell
 et -i [custom output file]
@@ -59,7 +59,7 @@ et -i [custom output file]
 > ✔ Generator variables file
 ```
 
-In `element-variables.scss` you can find all the variables we used to style Element and they are defined in SCSS format. Here's a snippet:
+En el archivo `element-variables.scss` podrás encontrar todas las variables que utiliza Element para definir los estilos y estos están definidos en SCSS. Aquí un ejemplo:
 ```css
 $--color-primary: #409EFF !default;
 $--color-primary-light-1: mix($--color-white, $--color-primary, 10%) !default; /* 53a8ff */
@@ -80,14 +80,14 @@ $--color-info: #878d99 !default;
 ...
 ```
 
-#### <strong>Modify variables</strong>
-Just edit `element-variables.scss`, e.g. changing the theme color to red:
+#### <strong>Modificando variables</strong>
+Solo debes modificar el archivo `element-variables.scss`, por ejemplo, para cambiar el color del tema a rojo:
 ```CSS
 $--color-primary: red;
 ```
 
-#### <strong>Build theme</strong>
-After saving the variable file, use `et` to build your theme. You can activate `watch` mode by adding a parameter `-w`. And if you customized the variable file's output, you need to add a parameter `-c` and variable file's name:
+#### <strong>Construyendo el tema</strong>
+Después de haber modificado el archivo de variables, utilizaremos el comando `et` para construir nuestro tema. Puedes activar el modo `watch` agregando el parámetro `-w`. Y, si deseas personalizar el nombre del archivo, debes agregar el parámetro `-c` seguido del nombre.
 ```shell
 et
 
@@ -95,8 +95,8 @@ et
 > ✔ build element theme
 ```
 
-#### <strong>Import custom theme</strong>
-By default the build theme file is placed inside `./theme`. You can specify its output directory with parameter `-o`. Importing your own theme is just like importing the default theme, only this time you import the file you just built:
+#### <strong>Importar un tema personalizado</strong>
+Por defecto, el archivo de tema construido es colocado dentro de `./theme`. Tu puedes especificar un directorio distinto utilizando el parámetro `-o`. Importar tu propio tema es igual a como si importarás el tema por defecto, únicamente tienes que importar el archivo que se construyó:
 
 ```javascript
 import '../theme/index.css'
@@ -106,8 +106,8 @@ import Vue from 'vue'
 Vue.use(ElementUI)
 ```
 
-#### <strong>Import component theme on demand</strong>
-If you are using `babel-plugin-component` for on-demand import, just modify `.babelrc` and specify `styleLibraryName` to the path where your custom theme is located relative to `.babelrc`. Note that `~` is required:
+#### <strong>Importar un tema de componente bajo demanda</strong>
+Si estas utilizando `babel-plugin-component` para importar bajo demanda, solo debes modificar el archivo `.babelrc` y especificar en la propiedad `styleLibraryName` la ruta en donde se encuentra localizado tu tema personalizado relativo a `.babelrc`. Nota el carácter `~` es obligatorio:
 ```json
 {
   "plugins": [["component", [
@@ -119,4 +119,4 @@ If you are using `babel-plugin-component` for on-demand import, just modify `.ba
 }
 ```
 
-If you are unfamiliar with `babel-plugin-component`, please refer to <a href="./#/en-US/component/quickstart">Quick Start</a>. For more details, check out the [project repository](https://github.com/ElementUI/element-theme) of `element-theme`.
+Si no estas familiarizado con `babel-plugin-component`, por favor dirígete a la documentación sobre <a href="./#/en-US/component/quickstart">Como Iniciar</a>. Para más detalles, consulta el [repositorio del proyecto](https://github.com/ElementUI/element-theme) de `element-theme`.
