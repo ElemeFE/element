@@ -331,9 +331,15 @@
             const index = i * 7 + j + (this.showWeekNumber ? -1 : 0);
             const time = nextDate(startDate, index - this.offsetDay).getTime();
 
-            cell.inRange = minDate && time >= clearHours(minDate) && time <= clearHours(maxDate);
-            cell.start = minDate && time === clearHours(minDate.getTime());
-            cell.end = maxDate && time === clearHours(maxDate.getTime());
+            if (maxDate && maxDate < minDate) {
+              cell.inRange = minDate && time >= clearHours(maxDate) && time <= clearHours(minDate);
+              cell.start = maxDate && time === clearHours(maxDate.getTime());
+              cell.end = minDate && time === clearHours(minDate.getTime());
+            } else {
+              cell.inRange = minDate && time >= clearHours(minDate) && time <= clearHours(maxDate);
+              cell.start = minDate && time === clearHours(minDate.getTime());
+              cell.end = maxDate && time === clearHours(maxDate.getTime());
+            }
           }
         }
       },
@@ -442,8 +448,9 @@
               });
             } else {
               const minDate = new Date(newDate.getTime());
+              this.rangeState.selecting = false;
 
-              this.$emit('pick', { minDate, maxDate: this.maxDate }, false);
+              this.$emit('pick', { minDate, maxDate: this.minDate });
             }
           } else if (!this.minDate) {
             const minDate = new Date(newDate.getTime());
