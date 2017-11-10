@@ -157,14 +157,14 @@
       },
       getColorChannels(color) {
         color = color.replace('#', '');
-        if (/^[1-9a-fA-F]{3}$/.test(color)) {
+        if (/^[0-9a-fA-F]{3}$/.test(color)) {
           color = color.split('');
           for (let i = 2; i >= 0; i--) {
             color.splice(i, 0, color[i]);
           }
           color = color.join('');
         }
-        if (/^[1-9a-fA-F]{6}$/.test(color)) {
+        if (/^[0-9a-fA-F]{6}$/.test(color)) {
           return {
             red: parseInt(color.slice(0, 2), 16),
             green: parseInt(color.slice(2, 4), 16),
