@@ -7,7 +7,7 @@ Instalar mediante npm es la forma recomendada ya que se integra facilmente con [
 npm i element-ui -S
 ```
 
-### CDN
+### CDN 
 Obten la última versión desde [unpkg.com/element-ui](https://unpkg.com/element-ui/) , e importa el JavaScript y los archivos CSS en tu página.
 
 ```html
