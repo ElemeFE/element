@@ -30,11 +30,11 @@
 
 ## InputNumber
 
-Input numerical values with a customizable range.
+Input de  valores numéricos con un rango personalizable.
 
-### Basic usage
+### Uso básico
 
-:::demo Bind a variable to `v-model` in `<el-input-number>` element and you are set.
+:::demo Vincule una variable con `v-model` en el elemento <el-input-number> y estará listo.
 
 ```html
 <template>
@@ -59,7 +59,7 @@ Input numerical values with a customizable range.
 
 ### Disabled
 
-:::demo The `disabled` attribute accepts a `boolean`, and if the value is `true`, the component is disabled. If you just need to control the value within a range, you can add `min` attribute to set the minimum value and `max` to set the maximum value. By default, the minimum value is `0`.
+:::demo El atributo `disabled` acepta un valor `boolean`, y si el valor es `true`, el componente queda deshabilitado. Si sólo necesita controlar el valor dentro de un rango, puede añadir un atributo `min` para establecer el valor mínimo y un valor `max` para establecer el valor máximo. Por defecto, el valor mínimo es `0`.
 
 ```html
 <template>
@@ -79,9 +79,9 @@ Input numerical values with a customizable range.
 
 ### Steps
 
-Allows you to define incremental steps.
+Le permite definir el nivel de incremento de los saltos.
 
-:::demo Add `step` attribute to set the step.
+:::demo Añada el atributo `step` para establecer el salto.
 
 ```html
 <template>
@@ -99,9 +99,9 @@ Allows you to define incremental steps.
 ```
 :::
 
-### Size
+### Tamaño
 
-Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
+Utilice el atributo `size` para establecer tamaños adicionales con `medium`, `small` o `mini`.
 
 :::demo
 
@@ -127,9 +127,10 @@ Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
 ```
 :::
 
-### Controls Position
+### Posición de los controles
 
-:::demo Set `controls-position` to decide the position of control buttons.
+:::demo Establezca `controls-position` para decidir la posición de los botones de control.
+
 ```html
 <template>
   <el-input-number v-model="num8" controls-position="right" @change="handleChange" :min="1" :max="10"></el-input-number>
@@ -151,30 +152,30 @@ Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
 ```
 :::
 
-### Attributes
+### Atributos
 
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
-|----| ----| ---| ----| -----|
-|value | binding value| number | — | — |
-|min | the minimum allowed value | number | — | 0 |
-|max | the maximum allowed value | number | — | `Infinity` |
-|step | incremental step | number | — | 1 |
-|size | size of the component | string | large/small| — |
-|disabled| whether the component is disabled | boolean | — | false |
-|controls| whether to enable the control buttons | boolean | — | true |
-|debounce| debounce delay when typing, in milliseconds | number | — | 300 |
-|controls-position | position of the control buttons | string | right | - |
-|name | same as `name` in native input | string | — | — |
-|label | label text | string | — | — |
-### Events
+| Atributo        | Descripción                              | Tipo    | Valores aceptados | Por defecto    |
+| ----------------- | ---------------------------------------- | ------- | --------------- | ---------- |
+| value             | valor vinculado                            | number  | —               | —          |
+| min               | el valor mínimo permitido                | number  | —               | 0          |
+| max               | el valor maximo permitido                | number  | —               | `Infinity` |
+| step              | incremento (salto)                        | number  | —               | 1          |
+| size              | tamaño del componente                    | string  | large/small     | —          |
+| disabled          | si el componente esta deshabilitado        | boolean | —               | false      |
+| controls          | si se activan los botones de control    | boolean | —               | true       |
+| debounce          | retardo de rebote al escribir, en milisegundos | number  | —               | 300        |
+| controls-position | posición de los botones de control          | string  | right           | -          |
+| name              | lo mismo que `name` en un input nativo           | string  | —               | —          |
+| label             | texto de la etiqueta                               | string  | —               | —          |
+### Eventos
 
-| Event Name | Description | Parameters |
-|----| ---- | -----|
-|change | triggers when the value changes | value after change |
-| blur | triggers when Input blurs | (event: Event) |
-| focus | triggers when Input focuses | (event: Event) |
+| Nombre | Descripción                     | Parámetros         |
+| ---------- | ------------------------------- | ------------------ |
+| change     | se produce cuando el valor cambia | value after change |
+| blur       | se produce cuando el componente pierde el foco | (event: Event)     |
+| focus      | se produce cuando el componente obtiene el foco | (event: Event)     |
 
-### Methods
-| Method | Description | Parameters |
-|------|--------|-------|
-| focus | focus the Input component | - |
+### Métodos
+| Método | Descripción               | Parámetro |
+| ------ | ------------------------- | ---------- |
+| focus  | coloca el foco en el elemento actual | -          |
