@@ -363,7 +363,8 @@ Las clases son:
 - `hidden-xl-only` - oculto en viewports extra grandes solamente
 
 ### Atributos Row 
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
+
+| Atributos      | Descripción          | Tipo      | Valores aceptados       | Valor por defecto  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | gutter | espaciado de la grilla | number | — | 0 |
 | type | modo del layout , puedes usar flex, funciona en navegadores modernos| string | — | — |
@@ -372,7 +373,8 @@ Las clases son:
 | tag | tag de elemento propio | string | * | div |
 
 ### Atributos Col 
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
+
+| Atributos      | Descripción          | Tipo      | Valores aceptados       | Valor por defecto  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | span | número de columnas que abarca la cuadrícula | number | — | 24 |
 | offset | especific espacio en el lado izquierdo de la grill | number | — | 0 |
