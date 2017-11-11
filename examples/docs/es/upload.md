@@ -120,13 +120,13 @@
     }
   }
 </script>
-## Upload
+## Carga de archivos
 
-Upload files by clicking or drag-and-drop
+Carga archivos haciendo clic o arrastrándolos.
 
-### Click to upload files
+### Clic para cargar archivos
 
-:::demo Customize upload button type and text using `slot`. Set `limit` and `on-exceed` to limit the maximum number of uploads allowed and specify method when the limit is exceeded.
+:::demo Personaliza el tipo y texto del botón utilizando la propiedad `slot`. Define las propiedades `limit` y `on-exceed` para limitar el número máximo de archivos a subir y especifica un método para cuando el límite ha sido excedido.
 ```html
 <el-upload
   class="upload-demo"
@@ -137,8 +137,8 @@ Upload files by clicking or drag-and-drop
   :limit="3"
   :on-exceed="handleExceed"
   :file-list="fileList">
-  <el-button size="small" type="primary">Click to upload</el-button>
-  <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
+  <el-button size="small" type="primary">Clic para subir archivo</el-button>
+  <div slot="tip" class="el-upload__tip">Solo archivos jpg/png con un tamaño menor de 500kb</div>
 </el-upload>
 <script>
   export default {
@@ -155,7 +155,7 @@ Upload files by clicking or drag-and-drop
         console.log(file);
       },
       handleExceed(files, fileList) {
-        this.$message.warning(`The limit is 3, you selected ${files.length} files this time, add up to ${files.length + fileList.length} totally`);
+        this.$message.warning(`El límite es 3, haz seleccionado ${files.length} archivos esta vez, añade hasta ${files.length + fileList.length}`);
       }
     }
   }
@@ -163,9 +163,9 @@ Upload files by clicking or drag-and-drop
 ```
 :::
 
-### User avatar upload
+### Cargar avatar de usuario
 
-Use `before-upload` hook to limit the upload file format and size.
+Utiliza el _hook_ `before-upload` para limitar el formato de archivo y su tamaño.
 
 ::: demo
 ```html
@@ -221,10 +221,10 @@ Use `before-upload` hook to limit the upload file format and size.
         const isLt2M = file.size / 1024 / 1024 < 2;
 
         if (!isJPG) {
-          this.$message.error('Avatar picture must be JPG format!');
+          this.$message.error('La imagen debe estar en formato JPG!');
         }
         if (!isLt2M) {
-          this.$message.error('Avatar picture size can not exceed 2MB!');
+          this.$message.error('La imagen excede los 2MB!');
         }
         return isJPG && isLt2M;
       }
@@ -234,9 +234,9 @@ Use `before-upload` hook to limit the upload file format and size.
 ```
 :::
 
-### Photo Wall
+### Pared de fotografías
 
-Use `list-type` to change the fileList style.
+Utiliza la propiedad `list-type` para cambiar el estilo a un listado de archivos.
 
 ::: demo
 ```html
@@ -272,7 +272,7 @@ Use `list-type` to change the fileList style.
 ```
 :::
 
-### FileList with thumbnail
+### Lista de archivos con miniatura
 
 ::: demo
 ```html
@@ -283,8 +283,8 @@ Use `list-type` to change the fileList style.
   :on-remove="handleRemove"
   :file-list="fileList2"
   list-type="picture">
-  <el-button size="small" type="primary">Click to upload</el-button>
-  <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
+  <el-button size="small" type="primary">Clic para subir archivo</el-button>
+  <div slot="tip" class="el-upload__tip">Solo archivos jpg/png con un tamaño menor de 500kb</div>
 </el-upload>
 <script>
   export default {
@@ -306,9 +306,9 @@ Use `list-type` to change the fileList style.
 ```
 :::
 
-### File list control
+### Control de lista de archivos
 
-Use `on-change` hook function to control upload file list
+Utiliza el _hook_ `on-change` para controlar la funcionalidad de la lista de archivos subidos.
 
 ::: demo
 ```html
@@ -317,8 +317,8 @@ Use `on-change` hook function to control upload file list
   action="https://jsonplaceholder.typicode.com/posts/"
   :on-change="handleChange"
   :file-list="fileList3">
-  <el-button size="small" type="primary">Click to upload</el-button>
-  <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
+  <el-button size="small" type="primary">Clic para subir archivo</el-button>
+  <div slot="tip" class="el-upload__tip">Solo archivos jpg/png con un tamaño menor de 500kb</div>
 </el-upload>
 <script>
   export default {
@@ -345,9 +345,9 @@ Use `on-change` hook function to control upload file list
 ```
 :::
 
-### Drag to upload
+### Arrastrar para cargar archivo
 
-You can drag your file to a certain area to upload it.
+Puedes arrastrar el archivo dentro de un área en especifico para cargar el archivo.
 
 ::: demo
 ```html
@@ -360,13 +360,13 @@ You can drag your file to a certain area to upload it.
   :file-list="fileList"
   multiple>
   <i class="el-icon-upload"></i>
-  <div class="el-upload__text">Drop file here or <em>click to upload</em></div>
-  <div class="el-upload__tip" slot="tip">jpg/png files with a size less than 500kb</div>
+  <div class="el-upload__text">Suelta tu archivo aquí o <em>haz clic para cargar</em></div>
+  <div slot="tip" class="el-upload__tip">Solo archivos jpg/png con un tamaño menor de 500kb</div>
 </el-upload>
 ```
 :::
 
-### Manual upload
+### Carga normal
 
 ::: demo
 ```html
@@ -375,9 +375,9 @@ You can drag your file to a certain area to upload it.
   ref="upload"
   action="https://jsonplaceholder.typicode.com/posts/"
   :auto-upload="false">
-  <el-button slot="trigger" size="small" type="primary">select file</el-button>
-  <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">upload to server</el-button>
-  <div class="el-upload__tip" slot="tip">jpg/png files with a size less than 500kb</div>
+  <el-button slot="trigger" size="small" type="primary">Selecciona un archivo</el-button>
+  <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">Cargar al servidor</el-button>
+  <div slot="tip" class="el-upload__tip">Solo archivos jpg/png con un tamaño menor de 500kb</div>
 </el-upload>
 <script>
   export default {
@@ -391,36 +391,36 @@ You can drag your file to a certain area to upload it.
 ```
 :::
 
-### Attributes
-Attribute      | Description          | Type      | Accepted Values       | Default
+### Atributos
+Atributo      | Descripción          | Tipo      | Valores aceptados       | Por defecto
 ----| ----| ----| ----| ----
-action | required, request URL | string | — | —
-headers | request headers | object | — | —
-multiple | whether uploading multiple files is permitted | boolean | — | —
-data | additions options of request | object | — | —
-name | key name for uploaded file | string | — | file
-with-credentials | whether cookies are sent | boolean | — |false
-show-file-list | whether to show the uploaded file list | boolean | — | true
- drag | whether to activate drag and drop mode | boolean | — | false
-accept | accepted [file types](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept), will not work when `thumbnail-mode` is `true` | string | — | —
-on-preview | hook function when clicking the uploaded files | function(file) | — | —
-on-remove | hook function when files are removed | function(file, fileList) | — | —
-on-success | hook function when uploaded successfully | function(response, file, fileList) | — | —
-on-error | hook function when some errors occurs | function(err, file, fileList) | — | —
-on-progress | hook function when some progress occurs | function(event, file, fileList) | — | — |
-on-change | hook function when select file or upload file success or upload file fail | function(file, fileList) | — | — |
-before-upload | hook function before uploading with the file to be uploaded as its parameter. If `false` is returned or a `Promise` is returned and then is rejected, uploading will be aborted | function(file) | — | —
-thumbnail-mode | whether thumbnail is displayed | boolean | — | false
-file-list | default uploaded files, e.g. [{name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg'}] | array | — | []
-list-type | type of fileList | string | text/picture/picture-card | text |
-auto-upload | whether to auto upload file | boolean | — | true |
-http-request | override default xhr behavior, allowing you to implement your own upload-file's request | function | — | — |
-disabled | whether to disable upload | boolean | — | false |
-limit | maximum number of uploads allowed | number | — | — |
-on-exceed | hook function when limit is exceeded | function(files, fileList) | — | - |
+action | obligatorio, URL de la petición | string | — | —
+headers | cabeceras de la petición | object | — | —
+multiple | permite subir múltiples archivos | boolean | — | —
+data | opciones adicionales de la petición | object | — | —
+name | nombre clave del archivo | string | — | file
+with-credentials | permite enviar cookies | boolean | — |false
+show-file-list | permite mostrar la lista de archivos cargados | boolean | — | true
+ drag | se permite activar el modo arrastrar y soltar | boolean | — | false
+accept | acepta [tipos de archvios](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept), puede no funcionar cuando `thumbnail-mode` esta en `true` | string | — | —
+on-preview | _hook_ lanzado al hacer clic en los archivos subidos | function(file) | — | —
+on-remove | _hook_ lanzado cuando los archivos son eliminados | function(file, fileList) | — | —
+on-success | _hook_ lanzado cuando los archivos fueron cargados correctamente | function(response, file, fileList) | — | —
+on-error | _hook_ lanzado cuando han ocurrido algunos errores | function(err, file, fileList) | — | —
+on-progress | _hook_ lanzado cuando se produce algún progreso | function(event, file, fileList) | — | — |
+on-change | _hook_ lanzado cuando el archivo seleccionado se carga correctamente o falla | function(file, fileList) | — | — |
+before-upload | _hook_ lanzado antes de que el archivo sea cargado. Si este devuelve `true` o `Promise` entonces será rechazado, la carga puede ser cancelada | function(file) | — | —
+thumbnail-mode | permite mostrar la miniatura | boolean | — | false
+file-list | archivos cargados por defecto, por ejemplo,  [{name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg'}] | array | — | []
+list-type | tipo de lista de archivos | string | text/picture/picture-card | text |
+auto-upload | se permite autocargar archivos | boolean | — | true |
+http-request | sobreescribe el comportamiento por defecto de xhr, permitiendo implementar tu propia petición de carga de archivos | function | — | — |
+disabled | permite deshabilitar la carga de archivos | boolean | — | false |
+limit | número máximo de cargas permitidas | number | — | — |
+on-exceed | _hook_ lanzado cuando el límite ha sido excedido | function(files, fileList) | — | - |
 
-### Methods
-| Methods Name | Description | Parameters |
+### Métodos
+| Nombre del método | Descripción | Parametros |
 |---------- |-------- |---------- |
-| clearFiles | clear the uploaded file list (this method is not supported in the `before-upload` hook) | — |
-| abort | cancel upload request | （ file: fileList's item ） |
+| clearFiles | limpia la lista de archivos cargados (este método no esta soportado en el _hook_ `before-upload`) | — |
+| abort | cancela la petición de carga | （ file: fileList's item ） |
