@@ -53,13 +53,14 @@
 
 ## NavMenu
 
-Menu that provides navigation for your website.
+Menú que provee la navegación para tu sitio.
 
 ### Top bar
 
-Top bar NavMenu can be used in a variety of scenarios.
+Top bar NavMenu puede ser usado en distinto escenarios.
 
-::: demo By default Menu is vertical, but you can change it to horizontal by setting the mode prop to 'horizontal'. In addition, you can use the submenu component to create a second level menu. Menu provides `background-color`, `text-color` and `active-text-color` to customize the colors.
+:::**Demo** Por defecto el menú es vertical, pero puedes hacerlo horizontal asignando a la propiedad `mode` el valor 'horizontal'. Además, puedes utilizar el componente de submenú para crear un menú de segundo nivel. Menú provee `background-color`, `text-color` y `active-text-color` para customizar los colores.
+
 ```html
 <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
   <el-menu-item index="1">Processing Center</el-menu-item>
@@ -110,9 +111,10 @@ Top bar NavMenu can be used in a variety of scenarios.
 
 ### Side bar
 
-Vertical NavMenu with sub-menus.
+NavMenu vertical con sub-menús.
 
-::: demo You can use the el-menu-item-group component to create a menu group, and the name of the group is determined by the title prop or a named slot.
+:::**Demo** Puedes utilizar el componente el-menu-item-group para crear un grupo de menú, y el nombre del grupo estará determinado por la propiedad `title` o la propiedad `slot`.
+
 ```html
 <el-row class="tac">
   <el-col :span="12">
@@ -205,9 +207,9 @@ Vertical NavMenu with sub-menus.
 
 ### Collapse
 
-Vertical NavMenu could be collapsed.
+NavMenu vertical puede ser colapsado.
 
-::: demo 
+:::**Demo**
 ```html
 <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
   <el-radio-button :label="false">expand</el-radio-button>
@@ -269,50 +271,50 @@ Vertical NavMenu could be collapsed.
 ```
 :::
 
-### Menu Attribute
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
+### Atributos Menu
+| Atributo      | Descripción          | Tipo      | Valores aceptados       | Valores por defecto  |
 |---------- |-------- |---------- |-------------  |-------- |
-| mode     | menu display mode   | string  |   horizontal / vertical   | vertical |
-| collapse  | whether the menu is collapsed (available only in vertical mode) | boolean  |   —   | false |
-| background-color  | background color of Menu (hex format) | string |   —   | #ffffff |
-| text-color  | text color of Menu (hex format) | string |   —   | #2d2f33 |
-| active-text-color  | text color of currently active menu item (hex format) | string |   —   | #409EFF |
-| default-active | index of currently active menu | string    | — | — |
-| default-openeds | array that contains keys of currently active sub-menus  | Array    | — | — |
+| mode     | modo de presentación del menú   | string  |   horizontal / vertical   | vertical |
+| collapse  | si el menú está colapsado (solo en modo vertical) | boolean  |   —   | false |
+| background-color  | color de fondo del menú (formato hexadecimal) | string |   —   | #ffffff |
+| text-color  | color de texto del menú (formato hexadecimal) | string |   —   | #2d2f33 |
+| active-text-color  | color de text del menu-item activo (formato hexadecimal) | string |   —   | #409EFF |
+| default-active | índice del menu-item activo | string    | — | — |
+| default-openeds | arreglo que contiene las llaves del sub-menus activo | Array    | — | — |
 | unique-opened  |  whether only one sub-menu can be active  | boolean   | — | false   |
-| menu-trigger | how sub-menus are triggered, only works when `mode` is 'horizontal' | string    | — | hover |
-| router  | whether `vue-router` mode is activated. If true, index will be used as 'path' to activate the route action | boolean   | — | false   |
+| menu-trigger | como dispara eventos sub-menus, solo funciona cuando `mode` es 'horizontal' | string    | — | hover |
+| router  | si el modo `vue-router` está activado. Si es verdader, índice será usado como 'path' para activar la ruta | boolean   | — | false   |
 
-### Menu Methods
-| Event Name | Description | Parameters |
+### Métodos Menu 
+| Nombre de evento | Descripción | Parámetros |
 |---------- |-------- |---------- |
-| open  | open a specific sub-menu | index: index of the sub-menu to open |
-| close  | close a specific sub-menu | index: index of the sub-menu to close |
+| open  | abre un sub-menu específico | index: índice del sub-menu para abrir |
+| close  | cierra un sub-menu específico  | index: índice del sub-menu para cerrar |
 
-### Menu Events
-| Event Name | Description | Parameters |
+### Eventos Menu 
+| Nombre de evento | Descripción | Parámetros |
 |---------- |-------- |---------- |
-| select  | callback function when menu is activated | index: index of activated menu, indexPath: index path of activated menu  |
-| open  | callback function when sub-menu expands | index: index of expanded sub-menu, indexPath: index path of expanded sub-menu |
-| close  | callback function when sub-menu collapses | index: index of collapsed sub-menu, indexPath: index path of collapsed sub-menu |
+| select  | callback ejecutado cuando el menú es activado | index: índice del menú activado, indexPath: index path del menú activado  |
+| open  | callback ejecutado cuando sub-menu se expande | index: índice del sub-menu expandido, indexPath: index path del sub-menu expandido |
+| close  | callback ejecutado cuando sub-menu colapsa | index: índice del sub-menu colapsado, indexPath: index path del menú colapsado |
 
-### Menu-Item Events
-| Event Name | Description | Parameters |
+### Eventos Menu-Item 
+| Nombre de evento | Descripción | Parámetros |
 |---------- |-------- |---------- |
-| click  | callback function when menu-item is clicked | el: menu-item instance  |
+| click  | callback ejecutado cuando se hace click sobre menu-item  | el: instancia de menu-item   |
 
-### SubMenu Attribute
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
+### Atributos SubMenu 
+| Atributo      | Descripción          | Tipo      | Valores aceptados       | Valores por defecto  |
 |---------- |-------- |---------- |-------------  |-------- |
-| index     | unique identification   | string  | — | — |
+| index     | identificador único   | string  | — | — |
 
-### Menu-Item Attribute
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
+### Atributos Menu-Item 
+| Atributo      | Descripción          | Tipo      | Valores aceptados       | Valores por defecto  |
 |---------- |-------- |---------- |-------------  |-------- |
-| index     | unique identification   | string  | — | — |
-| route     | Vue Router object   | object | — | — |
+| index     | identificador único   | string  | — | — |
+| route     | Object Vue Router   | object | — | — |
 
-### Menu-Group Attribute
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
+### Atributos Menu-Group 
+| Atributo      | Descripción          | Tipo      | Valores aceptados       | Valores por defecto  |
 |---------- |-------- |---------- |-------------  |-------- |
-| title     | group title   | string  | — | — |
+| title     | título del grupo   | string  | — | — |

@@ -1,14 +1,14 @@
-## Installation
+## Instalación
 
 ### npm
-Installing with npm is recommended and it works seamlessly with [webpack](https://webpack.js.org/).
+Instalar mediante npm es la forma recomendada ya que se integra facilmente con [webpack](https://webpack.js.org/).
 
 ```shell
 npm i element-ui -S
 ```
 
 ### CDN
-Get the latest version from [unpkg.com/element-ui](https://unpkg.com/element-ui/) , and import JavaScript and CSS file in your page.
+Obten la última versión desde [unpkg.com/element-ui](https://unpkg.com/element-ui/) , e importa el JavaScript y los archivos CSS en tu página.
 
 ```html
 <!-- import CSS -->
@@ -17,12 +17,12 @@ Get the latest version from [unpkg.com/element-ui](https://unpkg.com/element-ui/
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 ```
 
-:::tip
-We recommend our users to lock Element's version when using CDN. Please refer to [unpkg.com](https://unpkg.com) for more information.
-:::
+##Tip
+Recomendamos a nuestros usuarios congelar la versión de Elemet cuando usas un CDN. Por favor, refiérase a [unpkg.com](https://unpkg.com) para más información.
+
 
 ### Hello world
-If you are using CDN, a hello-world page is easy with Element. [Online Demo](https://jsfiddle.net/hzfpyvg6/14/)
+Si estás usando un CDN, una página con Hello-World es fácil con Element. [Online Demo](https://jsfiddle.net/hzfpyvg6/14/)
 
 ```html
 <!DOCTYPE html>
@@ -54,4 +54,5 @@ If you are using CDN, a hello-world page is easy with Element. [Online Demo](htt
   </script>
 </html>
 ```
-If you are using npm and wish to apply webpack, please continue to the next page: Quick Start.
+Si estás usando npm y deseas combinarlo con webpack, por favor continúa a la siguiente página: Quick Start
+
