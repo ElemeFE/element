@@ -132,7 +132,7 @@
       },
       handleTriggerKeyDown(ev) {
         const keyCode = ev.keyCode;
-        if ([38, 40].includes(keyCode)) { // up/down
+        if ([38, 40].indexOf(keyCode) > -1) { // up/down
           this.removeTabindex();
           this.resetTabindex(this.menuItems[0]);
           this.menuItems[0].focus();
@@ -140,7 +140,7 @@
           ev.stopPropagation();
         } else if (keyCode === 13) { // space enter选中
           this.handleClick();
-        } else if ([9, 27].includes(keyCode)) { // tab || esc
+        } else if ([9, 27].indexOf(keyCode) > -1) { // tab || esc
           this.hide();
         }
         return;
@@ -151,7 +151,7 @@
         const currentIndex = this.menuItemsArray.indexOf(target);
         const max = this.menuItemsArray.length - 1;
         let nextIndex;
-        if ([38, 40].includes(keyCode)) { // up/down
+        if ([38, 40].indexOf(keyCode) > -1) { // up/down
           if (keyCode === 38) { // up
             nextIndex = currentIndex !== 0 ? currentIndex - 1 : 0;
           } else { // down
@@ -168,7 +168,7 @@
           if (!this.hideOnClick) { // click关闭
             this.visible = false;
           }
-        } else if ([9, 27].includes(keyCode)) { // tab // esc
+        } else if ([9, 27].indexOf(keyCode) > -1) { // tab // esc
           this.hide();
           this.triggerElm.focus();
         }

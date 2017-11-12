@@ -202,7 +202,7 @@
         this.treeItems = this.$el.querySelectorAll('.is-focusable[role=treeitem]');
         const currentIndex = this.treeItemArray.indexOf(currentItem);
         let nextIndex;
-        if ([38, 40].includes(keyCode)) { // up、down
+        if ([38, 40].indexOf(keyCode) > -1) { // up、down
           if (keyCode === 38) { // up
             nextIndex = currentIndex !== 0 ? currentIndex - 1 : 0;
           } else {
@@ -211,10 +211,10 @@
           this.treeItemArray[nextIndex].focus(); // 选中
         }
         const hasInput = currentItem.querySelector('[type="checkbox"]');
-        if ([37, 39].includes(keyCode)) { // left、right 展开
+        if ([37, 39].indexOf(keyCode) > -1) { // left、right 展开
           currentItem.click(); // 选中
         }
-        if ([13, 32].includes(keyCode)) { // space enter选中checkbox
+        if ([13, 32].indexOf(keyCode) > -1) { // space enter选中checkbox
           if (hasInput) {
             hasInput.click();
           }
