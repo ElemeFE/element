@@ -9,7 +9,12 @@
       @click.stop="toggleMenu"
       ref="tags"
       :style="{ 'max-width': inputWidth - 32 + 'px' }">
-      <transition-group @after-leave="resetInputHeight">
+      <span
+        class="el-select__multiple-text"
+        v-if="collapseTags">
+        {{ multipleText }}
+      </span>
+      <transition-group @after-leave="resetInputHeight" v-if="!collapseTags">
         <el-tag
           v-for="item in selected"
           :key="getValueKey(item)"
@@ -184,6 +189,14 @@
 
       selectSize() {
         return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
+      },
+
+      multipleText() {
+        const selected = this.selected;
+        if (!selected || !selected.length) return '';
+        const length = selected.length;
+        const countText = length > 1 ? `(+${ selected.length - 1 })` : '';
+        return `${ selected[0].currentLabel } ${ countText }`;
       }
     },
 
@@ -232,7 +245,8 @@
       valueKey: {
         type: String,
         default: 'value'
-      }
+      },
+      collapseTags: Boolean
     },
 
     data() {
@@ -535,6 +549,7 @@
       },
 
       resetInputHeight() {
+        if (this.collapseTags) return;
         this.$nextTick(() => {
           if (!this.$refs.reference) return;
           let inputChildNodes = this.$refs.reference.$el.childNodes;
