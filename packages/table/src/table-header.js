@@ -119,12 +119,10 @@ export default {
                     {
                       column.sortable
                         ? <span class="caret-wrapper" on-click={ ($event) => this.handleSortClick($event, column) }>
-                            <span class="sort-caret ascending" on-click={ ($event) => this.handleSortClick($event, column, 'ascending') }>
-                              <i class="el-icon-sort-up"></i>
-                            </span>
-                            <span class="sort-caret descending" on-click={ ($event) => this.handleSortClick($event, column, 'descending') }>
-                              <i class="el-icon-sort-down"></i>
-                            </span>
+                            <i class="sort-caret ascending el-icon-caret-top" on-click={ ($event) => this.handleSortClick($event, column, 'ascending') }>
+                            </i>
+                            <i class="sort-caret descending el-icon-caret-bottom" on-click={ ($event) => this.handleSortClick($event, column, 'descending') }>
+                            </i>
                           </span>
                         : ''
                     }
