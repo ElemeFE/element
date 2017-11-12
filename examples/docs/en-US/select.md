@@ -101,6 +101,7 @@
         value8: '',
         value9: [],
         value10: [],
+        value11: [],
         loading: false,
         states: ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
       };
@@ -320,10 +321,24 @@ You can clear Select using a clear icon.
 
 Multiple select uses tags to display selected options.
 
-:::demo Set `multiple` attribute for `el-select` to enable multiple mode. In this case, the value of `v-model` will be an array of selected options.
+:::demo Set `multiple` attribute for `el-select` to enable multiple mode. In this case, the value of `v-model` will be an array of selected options. By default the selected options will be displayed as Tags. You can collapse them to a text by using `collapse-tags` attribute.
 ```html
 <template>
   <el-select v-model="value5" multiple placeholder="Select">
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+  
+  <el-select
+    v-model="value11"
+    multiple
+    collapse-tags
+    style="margin-left: 20px;"
+    placeholder="Select">
     <el-option
       v-for="item in options"
       :key="item.value"
@@ -650,6 +665,7 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 | value-key | unique identity key name for value, required when value is an object | string | — | value |
 | size | size of Input | string | large/small/mini | — |
 | clearable | whether single select can be cleared | boolean | — | false |
+| collapse-tags | whether to collapse tags to a text when multiple selecting | boolean | — | false |
 | multiple-limit | maximum number of options user can select when `multiple` is `true`. No limit when set to 0 | number | — | 0 |
 | name | the name attribute of select input | string | — | — |
 | placeholder | placeholder | string | — | Select |
