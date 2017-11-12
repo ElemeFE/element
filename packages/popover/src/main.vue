@@ -21,6 +21,7 @@
 <script>
 import Popper from 'element-ui/src/utils/vue-popper';
 import { on, off } from 'element-ui/src/utils/dom';
+import { addClass, removeClass } from 'element-ui/src/utils/dom';
 import { generateId } from 'element-ui/src/utils/util';
 
 export default {
@@ -59,14 +60,8 @@ export default {
     }
   },
   watch: {
-    showPopper(newVal, oldVal) {
-      newVal ? this.$emit('show') : this.$emit('hide');
-    },
-    '$refs.reference': {
-      deep: true,
-      handler(val) {
-        console.log(val);
-      }
+    showPopper(val) {
+      val ? this.$emit('show') : this.$emit('hide');
     }
   },
 
@@ -79,12 +74,12 @@ export default {
     }
     // 可访问性
     if (reference) {
-      reference.className += ' el-tooltip';
+      addClass(reference, 'el-popover__reference');
       reference.setAttribute('aria-describedby', this.tooltipId);
       reference.setAttribute('tabindex', 0); // tab序列
 
-      on(reference, 'focus', this.handleFocus);
-      on(reference, 'blur', this.handleBlur);
+      this.trigger !== 'click' && on(reference, 'focus', this.handleFocus);
+      this.trigger !== 'click' && on(reference, 'blur', this.handleBlur);
       on(reference, 'keydown', this.handleKeydown);
       on(reference, 'click', this.handleClick);
     }
@@ -135,17 +130,14 @@ export default {
       this.showPopper = false;
     },
     handleFocus() {
-      const reference = this.referenceElm;
-      reference.className += ' focusing';
+      addClass(this.referenceElm, 'focusing');
       this.showPopper = true;
     },
     handleClick() {
-      const reference = this.referenceElm;
-      reference.className = reference.className.replace(/\s*focusing\s*/, ' ');
+      removeClass(this.referenceElm, 'focusing');
     },
     handleBlur() {
-      const reference = this.referenceElm;
-      reference.className = reference.className.replace(/\s*focusing\s*/, ' ');
+      removeClass(this.referenceElm, 'focusing');
       this.showPopper = false;
     },
     handleMouseEnter() {
