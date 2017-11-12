@@ -1,6 +1,6 @@
 <template>
-  <ul class="el-select-group__wrap">
-    <li class="el-select-group__title" v-show="visible">{{ label }}</li>
+  <ul class="el-select-group__wrap" v-show="visible">
+    <li class="el-select-group__title">{{ label }}</li>
     <li>
       <ul class="el-select-group">
         <slot></slot>
