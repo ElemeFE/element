@@ -29,6 +29,7 @@
         :class="[selectSize ? `is-${ selectSize }` : '']"
         :disabled="disabled"
         @focus="handleFocus"
+        @click.stop
         @keyup="managePlaceholder"
         @keydown="resetInputState"
         @keydown.down.prevent="navigateOptions('next')"
