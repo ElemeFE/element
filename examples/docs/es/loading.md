@@ -49,15 +49,15 @@
   }
 </script>
 
-## Loading
+## Cargando
 
-Show animation while loading data.
+Se muestra la animación mientras se cargan los datos.
 
-### Loading inside a container
+### Cargando dentro de un contenedor
 
-Displays animation in a container (such as a table) while loading data.
+Muestra una animación en un contenedor (como en una tabla) mientras se cargan los datos.
 
-:::demo Element provides two ways to invoke Loading: directive and service. For the custom directive `v-loading`, you just need to bind a `boolean` value to it. By default, the loading mask will append to the element where the directive is used. Adding the `body` modifier makes the mask append to the body element.
+:::demo Element provee dos maneras para invocar el componente de Cargando: por directiva y por servicio. Para la directiva personalizada `v-loading`, solo necesitas enlazarlo a un valor `Boolean`. Por defecto, la máscara de carga se agregará al elemento donde se usa la directiva. Al agregar el modificador `body`, la máscara se agrega al elemento body.
 
 ```html
 <template>
@@ -67,17 +67,17 @@ Displays animation in a container (such as a table) while loading data.
     style="width: 100%">
     <el-table-column
       prop="date"
-      label="Date"
+      label="Fecha"
       width="180">
     </el-table-column>
     <el-table-column
       prop="name"
-      label="Name"
+      label="Nombre"
       width="180">
     </el-table-column>
     <el-table-column
       prop="address"
-      label="Address">
+      label="Dirección">
     </el-table-column>
   </el-table>
 </template>
@@ -113,11 +113,11 @@ Displays animation in a container (such as a table) while loading data.
 ```
 :::
 
-### Customization
+### Personalización
 
-You can customize loading text, loading spinner and background color.
+Puedes personalizar el texto de carga, spinner de carga y color de fondo.
 
-:::demo Add attribute `element-loading-text` to the element on which `v-loading` is bound, and its value will be displayed under the spinner. Similarly, `element-loading-spinner` and `element-loading-background` are for customizing loading spinner class name and background color.
+:::demo Agrega el atributo `element-loading-text` al elemento en el que `v-loading` está vinculado, y su valor se mostrará debajo del spinner. Del mismo modo, `element-loading-spinner` y `element-loading-background` son para personalizar el nombre de la clase del spinner y el color de fondo.
 ```html
 <template>
   <el-table
@@ -129,17 +129,17 @@ You can customize loading text, loading spinner and background color.
     style="width: 100%">
     <el-table-column
       prop="date"
-      label="Date"
+      label="Fecha"
       width="180">
     </el-table-column>
     <el-table-column
       prop="name"
-      label="Name"
+      label="Nombre"
       width="180">
     </el-table-column>
     <el-table-column
       prop="address"
-      label="Address">
+      label="Dirección">
     </el-table-column>
   </el-table>
 </template>
@@ -169,11 +169,11 @@ You can customize loading text, loading spinner and background color.
 ```
 :::
 
-### Full screen loading
+### Cargando a pantalla completa
 
-Show a full screen animation while loading data.
+Muestra una animación de pantalla completa mientras se cargan los datos
 
-:::demo When used as a directive, a full screen Loading requires the `fullscreen` modifier, and it will be appended to body. In this case, if you wish to disable scrolling on body, you can add another modifier `lock`. When used as a service, Loading will be full screen by default.
+:::demo Cuando se utiliza como una directiva, la carga a pantalla completa requiere el modificador `fullscreen`, y este puede ser agregado al `body`. En este caso, si deseas deshabilitas el desplazamiento en `body`, puedes agregar otro modificador `lock`. Cuando se utiliza como un servicio, el componente puede ser mostrado a pantalla completa por defecto.
 
 ```html
 <template>
@@ -181,12 +181,12 @@ Show a full screen animation while loading data.
     type="primary"
     @click="openFullScreen"
     v-loading.fullscreen.lock="fullscreenLoading">
-    As a directive
+    Como una directiva
   </el-button>
   <el-button
     type="primary"
     @click="openFullScreen2">
-    As a service
+    Como un servicio
   </el-button>
 </template>
 
@@ -221,38 +221,40 @@ Show a full screen animation while loading data.
 ```
 :::
 
-### Service
-You can also invoke Loading with a service. Import Loading service:
+### Servicio
+
+Puedes invocar el componente con un servicio. Importa el servicio:
+
 ```javascript
 import { Loading } from 'element-ui';
 ```
-Invoke it:
+Invocar:
 ```javascript
 Loading.service(options);
 ```
-The parameter `options` is the configuration of Loading, and its details can be found in the following table. `LoadingService` returns a Loading instance, and you can close it by invoking its `close` method:
+El parámetro `options` es la configuración del componente, y estos detalles pueden ser encontrados en la siguiente table. `LoadingService` devuelve una instancia del componente, y tú puedes cerrarlo invocando el método `close`:
 ```javascript
 let loadingInstance = Loading.service(options);
 loadingInstance.close();
 ```
-Note that in this case the full screen Loading is singleton. If a new full screen Loading is invoked before an existing one is closed, the existing full screen Loading instance will be returned instead of actually creating another Loading instance:
+Tenga en cuenta que, en este caso, el componente a pantalla completa es una instancia única. Si un nuevo componente de pantalla completa es invocado antes de que se cierre la existente, se devolverá la instancia existente en lugar de crear la otra instancia:
 ```javascript
 let loadingInstance1 = Loading.service({ fullscreen: true });
 let loadingInstance2 = Loading.service({ fullscreen: true });
 console.log(loadingInstance1 === loadingInstance2); // true
 ```
-Calling the `close` method on any one of them can close this full screen Loading.
+Llamar al método `close` en cualquiera de estas puede cerrarlo.
 
-If Element is imported entirely, a globally method `$loading` will be registered to Vue.prototype. You can invoke it like this: `this.$loading(options)`, and it also returns a Loading instance.
+Si Element es importado completamente, un método global `$loading` puede ser registrado a Vue.prototype. Puedes invocarlo como esto: `this.$loading(options)`, y también devuelve una instancia del componente.
 
 ### Options
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
+| Atributo      | Descripción          | Tipo      | Valores aceptados       | Por defecto  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| target | the DOM node Loading needs to cover. Accepts a DOM object or a string. If it's a string, it will be passed to `document.querySelector` to get the corresponding DOM node | object/string | — | document.body |
-| body | same as the `body` modifier of `v-loading` | boolean | — | false |
-| fullscreen | same as the `fullscreen` modifier of `v-loading` | boolean | — | true |
-| lock | same as the `lock` modifier of `v-loading` | boolean | — | false |
-| text | loading text that displays under the spinner | string | — | — |
-| spinner | class name of the custom spinner | string | — | — |
-| background | background color of the mask | string | — | — |
-| customClass | custom class name for Loading | string | — | — |
+| target | el nodo del DOM que el componente debe cubrir. Acepta un objecto DOM o una cadena. Si está es una cadena, este será pasado a `document.querySelector` para obtener el correspondiente nodo del DOM | object/string | — | document.body |
+| body | igual que el modificador `body` de `v-loading` | boolean | — | false |
+| fullscreen | igual que el modificador `fullscreen` de `v-loading` | boolean | — | true |
+| lock | igual que el modificador `lock` de `v-loading` | boolean | — | false |
+| text | texto de cargando que se muestra debajo del spinner | string | — | — |
+| spinner | nombre de clase del spinner personalizado | string | — | — |
+| background | color de fondo de la máscara | string | — | — |
+| customClass | nombre de clase personalizada para el componente | string | — | — |
