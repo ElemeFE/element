@@ -83,13 +83,13 @@
 
 ## Message
 
-Used to show feedback after an activity. The difference with Notification is that the latter is often used to show a system level passive notification.
+Utilizado para mostrar retroalimentacion despues de una actividad. La diferencia con el componente Notification es que este ultimo es utilizado para mostrar una notificacion pasiva a nivel de sistema.
 
-### Basic usage
+### Uso basico
 
-Displays at the top, and disappears after 3 seconds.
+Se muestra en la parte superior de la pagina y desaparece despues de 3 segundos.
 
-:::demo The setup of Message is very similar to notification, so parts of the options won't be explained in detail here. You can check the options table below combined with notification doc to understand it. Element has registered a `$message` method for invoking. Message can take a string or a VNode as parameter, and it will be shown as the main body.
+:::demo La configuracion del componente Message es muy similar al del componente notification, asi que parte de las opciones no seran explicadas a detalle aqui. Puedes consultar la tabla de opciones en la parte inferior conbinada con la documentacion del componente notification para comprenderla. Element a registrado un metodo `$message` para poder invocarlo. Message puede tomar una cadena o un Vnode como parametro, y lo mostrara como el cuerpo principal.
 
 ```html
 <template>
@@ -119,11 +119,11 @@ Displays at the top, and disappears after 3 seconds.
 ```
 :::
 
-### Types
+### Tipos
 
-Used to show the feedback of Success, Warning, Message and Error activities.
+Utilizados para mostrar retroalimentacion de Success, Warning, Message y Error activities.
 
-:::demo When you need more customizations, Message component can also take an object as parameter. For example, setting value of `type` can define different types, and its default is `info`. In such cases the main body is passed in as the value of `message`. Also, we have registered methods for different types, so you can directly call it without passing a type like `open4`.
+:::demo Cuando necesitas mas personalizacion, el componente Message tambien puede tomar un objeto como parametro. Por ejemplo, Estableciendo el valor de `type` puedes definir diferentes tipos, el predeterminado es `info`. En tales casos el cuerpo principal se pasa como el valor de `message`. Tambien, tenemos registrados metodos para los diferentes tipos, asi que, puedes llamarlos sin necesidad de pasar un tipo como `open4`.
 ```html
 <template>
   <el-button :plain="true" @click="open2">success</el-button>
@@ -163,9 +163,9 @@ Used to show the feedback of Success, Warning, Message and Error activities.
 
 ### Closable
 
-A close button can be added.
+Un boton para cerrar que puede ser agregado.
 
-:::demo A default Message cannot be closed manually. If you need a closable message, you can set `showClose` field. Besides, same as notification, message has a controllable `duration`. Default duration is 3000 ms, and it won't disappear when set to `0`.
+:::demo Un componente Message predeterminado no se puede cerrar manualmente. Si necesitas un componente message que pueda cerrarse, puedes establecer el campo `showClose`. Ademas, al igual que las notificaciones, message tiene un atriubuto `duration` que puede ser controlado. Por defecto la duracion es de 3000 ms, y no desaparecera al llegar a `0`.
 ```html
 <template>
   <el-button :plain="true" @click="open5">message</el-button>
@@ -214,7 +214,7 @@ A close button can be added.
 :::
 
 ### Centered text
-Use the `center` attribute to center the text.
+Utiliza el atributo `center` para centrar el texto.
 
 :::demo
 
@@ -238,10 +238,10 @@ Use the `center` attribute to center the text.
 ```
 :::
 
-### Use HTML string
-`message` supports HTML string.
+### Utiliza cadenas HTML
+`message` soporta cadenas HTML.
 
-:::demo Set `dangerouslyUseHTMLString` to true and `message` will be treated as an HTML string.
+:::demo Establece la propiedad `dangerouslyUseHTMLString` en true y `message` sera tratado como una cadena HTML.
 
 ```html
 <template>
@@ -263,15 +263,15 @@ Use the `center` attribute to center the text.
 ```
 :::
 
-:::warning
-Although `message` property supports HTML strings, dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily lead to [XSS attacks](https://en.wikipedia.org/wiki/Cross-site_scripting). So when `dangerouslyUseHTMLString` is on, please make sure the content of `message` is trusted, and **never** assign `message` to user-provided content.
+:::advertencia
+Aunque la propiedad `message` soporta cadenas HTML, realizar arbitrariamente render dinamico de HTML en nuestro sitio web puede ser muy peligroso ya que puede conducir facilmente a [XSS attacks](https://en.wikipedia.org/wiki/Cross-site_scripting). Entonces cuando `dangerouslyUseHTMLString` esta activada, asegurece que el contendio de `message` sea de confianza, y **nunca** asignar `message` a contenido generado por el usuario.
 :::
 
-### Global method
+### Metodos Globales
 
-Element has added a global method `$message` for Vue.prototype. So in a vue instance you can call `Message` like what we did in this page.
+Element ha agregado un método global llamado `$message` para Vue.prototype. Entonces en una instancia de vue puedes llamar a `Message` como lo hicimos en esta pagina.
 
-### Local import
+### Importación local
 
 Import `Message`:
 
@@ -279,24 +279,24 @@ Import `Message`:
 import { Message } from 'element-ui';
 ```
 
-In this case you should call `Message(options)`. We have also registered methods for different types, e.g. `Message.success(options)`.
-You can call `Message.closeAll()` to manually close all the instances.
+En este caso deberias llamar al metodo `Message(options)`. Tambien hemos registrado metodos para los diferentes tipos, e.g. `Message.success(options)`.
+Puedes llamar al metodo `Message.closeAll()` para cerrar manualmente todas las instancias.
 
 ### Options
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
+| Atributo      | Descripcion          | Tipo      | Valores permitidos       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| message | message text | string / VNode | — | — |
-| type | message type | string | success/warning/info/error | info |
-| iconClass | custom icon's class, overrides `type` | string | — | — |
-| dangerouslyUseHTMLString | whether `message` is treated as HTML string | boolean | — | false |
-| customClass | custom class name for Message | string | — | — |
-| duration | display duration, millisecond. If set to 0, it will not turn off automatically | number | — | 3000 |
-| showClose | whether to show a close button | boolean | — | false |
-| center | whether to center the text | boolean | — | false |
-| onClose | callback function when closed with the message instance as the parameter | function | — | — |
+| message | texto del mensaje | string / VNode | — | — |
+| type | tipo del mensaje | string | success/warning/info/error | info |
+| iconClass | clase personalizada para el icono, sobreescribe `type` | string | — | — |
+| dangerouslyUseHTMLString | utilizado para que `message` sea tratado como cadena HTML | boolean | — | false |
+| customClass | nombre de clase personalizado para el componente Message | string | — | — |
+| duration | muestra la duracion,en milisegundos. si se establece en 0, este no se apagara automaticamente | number | — | 3000 |
+| showClose | utilizado para mostrar un boton para cerrar | boolean | — | false |
+| center | utilizado para centrar el texto | boolean | — | false |
+| onClose | funcion callback ejecutada cuando se cierra con una instancia de mensaje como parametro | function | — | — |
 
-### Methods
-`Message` and `this.$message` returns the current Message instance. To manually close the instance, you can call `close` on it.
-| Method | Description |
+### Metodos
+`Message` y `this.$message` regresan una instancia del componente Message. Para cerrar manualmente la instancia, puedes llamas al metodo `close`.
+| Metodo | Descripcion |
 | ---- | ---- |
-| close | close the Message |
+| close | cierra el componente Message |
