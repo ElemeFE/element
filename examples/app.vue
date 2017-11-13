@@ -191,7 +191,6 @@
 
   const lang = location.hash.replace('#', '').split('/')[1] || 'zh-CN';
   const localize = lang => {
-    console.log(lang);
     switch (lang) {
       case 'zh-CN':
         use(zhLocale);
@@ -232,6 +231,7 @@
         const preferGithub = localStorage.getItem('PREFER_GITHUB');
         if (href.indexOf('element-cn') > -1 || preferGithub) return;
         setTimeout(() => {
+          if (this.lang !== 'zh-CN') return;
           this.$confirm('建议大陆用户访问部署在国内的站点，是否跳转？', '提示')
             .then(() => {
               location.href = location.href.replace('element.', 'element-cn.');
@@ -249,12 +249,12 @@
         this.suggestJump();
       }
       setTimeout(() => {
-        const notified = localStorage.getItem('RELEASE_NOTIFIED');
-        if (!notified) {
+        const notified = localStorage.getItem('ES_NOTIFIED');
+        if (!notified && this.lang !== 'zh-CN') {
           const h = this.$createElement;
           const title = this.lang === 'zh-CN'
-            ? '2.0 正式发布'
-            : '2.0 available now';
+            ? '帮助我们完成西班牙语文档'
+            : 'Help us with Spanish docs';
           const messages = this.lang === 'zh-CN'
             ? ['点击', '这里', '查看详情']
             : ['Click ', 'here', ' to learn more'];
@@ -266,13 +266,13 @@
               h('a', {
                 attrs: {
                   target: '_blank',
-                  href: `https://github.com/ElemeFE/element/issues/${ this.lang === 'zh-CN' ? '7755' : '7756' }`
+                  href: 'https://github.com/ElemeFE/element/issues/8074'
                 }
               }, messages[1]),
               messages[2]
             ]),
             onClose() {
-              localStorage.setItem('RELEASE_NOTIFIED', 1);
+              localStorage.setItem('ES_NOTIFIED', 1);
             }
           });
         }

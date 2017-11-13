@@ -1,12 +1,21 @@
 <template>
-  <div class="el-tree-node"
+  <div
+    class="el-tree-node"
     @click.stop="handleClick"
     v-show="node.visible"
     :class="{
       'is-expanded': expanded,
       'is-current': tree.store.currentNode === node,
-      'is-hidden': !node.visible
-    }">
+      'is-hidden': !node.visible,
+      'is-focusable': !node.disabled,
+      'is-checked': !node.disabled && node.checked
+    }"
+    role="treeitem"
+    tabindex="-1"
+    :aria-expanded="expanded"
+    :aria-disabled="node.disabled"
+    :aria-checked="node.checked"
+  >
     <div class="el-tree-node__content"
       :style="{ 'padding-left': (node.level - 1) * tree.indent + 'px' }">
       <span
@@ -20,7 +29,8 @@
         :indeterminate="node.indeterminate"
         :disabled="!!node.disabled"
         @click.native.stop
-        @change="handleCheckChange">
+        @change="handleCheckChange"
+      >
       </el-checkbox>
       <span
         v-if="node.loading"
@@ -32,7 +42,10 @@
       <div
         class="el-tree-node__children"
         v-if="childNodeRendered"
-        v-show="expanded">
+        v-show="expanded"
+        role="group"
+        :aria-expanded="expanded"
+      >
         <el-tree-node
           :render-content="renderContent"
           v-for="child in node.childNodes"
