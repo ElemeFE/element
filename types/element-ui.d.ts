@@ -68,8 +68,12 @@ import { ElUpload } from './upload'
 
 export interface InstallationOptions {
   locale: any,
-  i18n: any
+  i18n: any,
+  size: string
 }
+
+/** The version of element-ui */
+export const version: string
 
 /**
  * Install all element-ui components into Vue.
