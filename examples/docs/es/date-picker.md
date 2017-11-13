@@ -92,14 +92,15 @@
 </style>
 
 ## DatePicker
+Uso Date Picker para fecha entrada.
 
-Use Date Picker for date input.
+###  Entrar fecha
 
-###  Enter Date
+Básica fecha escoja moderado por 'día'.
 
-Basic date picker measured by 'day'.
+:::manifestación Ésta medición es decidido por el atributo 'type'.Puedes permitir rápidas opcíones por crear un `picker-options` objecto con propiedad `shortcuts`.La fecha minusválida es establecido por 
+la función `disabledDate`.
 
-:::demo The measurement is determined by the `type` attribute. You can enable quick options by creating a `picker-options` object with `shortcuts` property. The disabled date is set by `disabledDate`, which is a function.
 
 ```html
 <template>
@@ -158,11 +159,11 @@ Basic date picker measured by 'day'.
 
 :::
 
-### Other measurements
+### Otras medidas
+Puedes escoger semana,mes o año por ampliar el estándar fecha recogedor componente.
 
-You can choose week, month or year by extending the standard date picker component.
 
-:::demo
+:::manifestación
 
 ```html
 <div class="block">
@@ -206,11 +207,11 @@ You can choose week, month or year by extending the standard date picker compone
 
 :::
 
-###  Date Range
+###  el alcance de fecha
 
-Picking a date range is supported.
+escoger un alcance de fecha es apoyado.
 
-:::demo When in range mode, the left and right panels are linked by default. If you want the two panels to switch current months independently, you can use the `unlink-panels` attribute.
+:::manifestación cuando en la modalidad de fecha,los paneles izquierdos y derechoes son enlazados por defecto.Si queres los dos paneles combiar meses corrientes independientemente,puedes utilizar el atributo `unlink-panels`.
 
 ```html
 <template>
@@ -280,13 +281,13 @@ Picking a date range is supported.
 
 :::
 
-###  Default Value
+###  Valor defecto
 
-If user hasn't picked a date, shows today's calendar by default. You can use `default-value` to set another date. Its value should be parsable by `new Date()`.
+Si el usuario no se recoge una fecha,monstra la fecha de hoy por defecto. Puedes utilizar `default-value` a establecer otra fecha. Su valor deber ser parseable por `new Date()`.
 
-If type is `daterange`, `default-value` sets the left side calendar.
+Si el tipo es `daterange`,`default-value` establece el calendario del lado derecho.
 
-:::demo
+:::manifestación
 ```html
 <template>
   <div class="block">
@@ -323,12 +324,14 @@ If type is `daterange`, `default-value` sets the left side calendar.
 ```
 :::
 
-###  Formatted Value
+###  Valor  Formateado
 
-By default, DatePicker emits `Date` object. You can use `value-format` to designate the format of emitted value, it accepts the same format string of `format` attribute.
+Por defecto,DatePicker emite el objecto `Date`. Puedes utilizar `value-format` a designar el formato del valor emitido,acepta cadena del formato mismo del atributo `format`.
+
 
 :::warning
-This feature is at alpha stage. Feedback welcome.
+escenario
+Ésta característica es en alfa escenario.Bienvenivo a enviar realimentación.
 :::
 
 :::demo
@@ -370,8 +373,8 @@ This feature is at alpha stage. Feedback welcome.
 ```
 :::
 
-### Attributes
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
+### Atributos 
+| Atributos      | Descripción          | Tipo      | Valores aceptados       | Valor por defecto   |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | readonly | whether DatePicker is read only | boolean | — | false |
 | disabled | whether DatePicker is disabled | boolean | — | false |
