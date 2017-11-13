@@ -194,7 +194,7 @@
           checkedItem[0].setAttribute('tabindex', 0);
           return;
         }
-        this.treeItems[0].setAttribute('tabindex', 0);
+        this.treeItems[0] && this.treeItems[0].setAttribute('tabindex', 0);
       },
       handelKeydown(ev) {
         const currentItem = ev.target;
