@@ -334,15 +334,15 @@
   }
 </style>
 
-## Table
+## Tablas
 
-Display multiple data with similar format. You can sort, filter, compare your data in a table.
+Visualiza múltiples datos con un formato en particular. Podrás ordenar, filtrar y comparar datos en una tabla.
 
-### Basic table
+### Tabla básica
 
-Basic table is just for data display.
+La tabla básica es solo para mostrar datos.
 
-:::demo After setting attribute `data` of `el-table` with an object array, you can use `prop` (corresponding to a key of the object in `data` array) in `el-table-column` to insert data to table columns, and set the attribute `label` to define the column name. You can also use the attribute `width` to define the width of columns.
+:::demo Después de haber establecido el atributo `data` de `el-table` con un arreglo de objetos, puedes usar la propiedad `prop` (el correspondiente a la clave de un objeto dentro del arreglo `data`) en `el-table-column` para insertar datos a las columnas de la tabla, y establece el atributo `label` para definir el nombre de la columna. También puedes usar el atributo `width` para establecer el ancho de las columnas.
 
 ```html
   <template>
@@ -351,17 +351,17 @@ Basic table is just for data display.
       style="width: 100%">
       <el-table-column
         prop="date"
-        label="Date"
+        label="Fecha"
         width="180">
       </el-table-column>
       <el-table-column
         prop="name"
-        label="Name"
+        label="Nombre"
         width="180">
       </el-table-column>
       <el-table-column
         prop="address"
-        label="Address">
+        label="Dirección">
       </el-table-column>
     </el-table>
   </template>
@@ -394,11 +394,11 @@ Basic table is just for data display.
 ```
 :::
 
-### Striped Table
+### Tabla con rayas
 
-Striped table makes it easier to distinguish different rows.
+La tabla con rayas hace más fácil distinguir filas diferentes.
 
-:::demo Attribute `stripe` accepts a `Boolean`. If `true`, table will be striped.
+:::demo El atributo `stripe` también acepta un `Boolean`. Si se encuentra `true`, la tabla será rayada.
 ```html
 <template>
   <el-table
@@ -407,17 +407,17 @@ Striped table makes it easier to distinguish different rows.
     style="width: 100%">
     <el-table-column
       prop="date"
-      label="Date"
+      label="Fecha"
       width="180">
     </el-table-column>
     <el-table-column
       prop="name"
-      label="Name"
+      label="Nombre"
       width="180">
     </el-table-column>
     <el-table-column
       prop="address"
-      label="Address">
+      label="Dirección">
     </el-table-column>
   </el-table>
 </template>
@@ -450,9 +450,9 @@ Striped table makes it easier to distinguish different rows.
 ```
 :::
 
-### Table with border
+### Tabla con bordes
 
-:::demo By default, Table has no vertical border. If you need it, you can set attribute `border` to `true`.
+:::demo Por defecto, la tabla no tiene bordes verticales. Si lo necesitas, puedes establecer el atributo `border` a `true`.
 
 ```html
 <template>
@@ -462,17 +462,17 @@ Striped table makes it easier to distinguish different rows.
     style="width: 100%">
     <el-table-column
       prop="date"
-      label="Date"
+      label="Fecha"
       width="180">
     </el-table-column>
     <el-table-column
       prop="name"
-      label="Name"
+      label="Nombre"
       width="180">
     </el-table-column>
     <el-table-column
       prop="address"
-      label="Address">
+      label="Dirección">
     </el-table-column>
   </el-table>
 </template>
@@ -505,11 +505,11 @@ Striped table makes it easier to distinguish different rows.
 ```
 :::
 
-### Table with status
+### Tabla con estados
 
-You can highlight your table content to distinguish between "success, information, warning, danger" and other states.
+Tu puedes destacar el contenido de la tabla para distinguir entre "success, information, warning, danger" y otros estados.
 
-:::demo Use `row-class-name` in `el-table` to add custom classes to a certain row. Then you can style it with custom classes.
+:::demo Utiliza `row-class-name` en `el-table` para agregar clases personalizadas a una fila en específico. Y entonces, podrás darle diseño con estas clases.
 ```html
 <template>
   <el-table
@@ -518,17 +518,17 @@ You can highlight your table content to distinguish between "success, informatio
     :row-class-name="tableRowClassName">
     <el-table-column
       prop="date"
-      label="Date"
+      label="Fecha"
       width="180">
     </el-table-column>
     <el-table-column
       prop="name"
-      label="Name"
+      label="Nombre"
       width="180">
     </el-table-column>
     <el-table-column
       prop="address"
-      label="Address">
+      label="Dirección">
     </el-table-column>
   </el-table>
 </template>
@@ -581,11 +581,11 @@ You can highlight your table content to distinguish between "success, informatio
 ```
 :::
 
-### Table with fixed header
+### Tabla con cabecera fija
 
-When there are too many rows, you can use a fixed header.
+Cuando esta tiene demasiadas filas, puedes utilizar una cabecera fija.
 
-:::demo By setting the attribute `height` of `el-table`, you can fix the table header without any other codes.
+:::demo Al configurar el atributo `height` de `el-table`, puedes fijar la cabecera de la tabla sin agregar otro código.
 ```html
 <template>
   <el-table
@@ -594,17 +594,17 @@ When there are too many rows, you can use a fixed header.
     style="width: 100%">
     <el-table-column
       prop="date"
-      label="Date"
+      label="Fecha"
       width="180">
     </el-table-column>
     <el-table-column
       prop="name"
-      label="Name"
+      label="Nombre"
       width="180">
     </el-table-column>
     <el-table-column
       prop="address"
-      label="Address">
+      label="Dirección">
     </el-table-column>
   </el-table>
 </template>
@@ -649,11 +649,11 @@ When there are too many rows, you can use a fixed header.
 ```
 :::
 
-### Table with fixed column
+### Tabla con columnas fijas
 
-When there are too many columns, you can fix some of them.
+Cuando se tienen demasiadas columnas, puedes fijar alguna de estas.
 
-:::demo Attribute `fixed` is used in `el-table-column`, it accepts a `Boolean`. If `true`, the column will be fixed at left. It also accepts two string literals: 'left' and 'right', both indicating that the column will be fixed at corresponding direction.
+:::demo El atributo `fixed` es utilizado en `el-table-column`, este acepta un `Boolean`. Si es `true`, la columna será fijada a la izquierda. También acepta dos tipos: `left` y `right`, ambos indican donde debe ser fijada la columna.
 ```html
 <template>
   <el-table
@@ -662,41 +662,41 @@ When there are too many columns, you can fix some of them.
     <el-table-column
       fixed
       prop="date"
-      label="Date"
+      label="Fecha"
       width="150">
     </el-table-column>
     <el-table-column
       prop="name"
-      label="Name"
+      label="Nombre"
       width="120">
     </el-table-column>
     <el-table-column
       prop="state"
-      label="State"
+      label="Estado"
       width="120">
     </el-table-column>
     <el-table-column
       prop="city"
-      label="City"
+      label="Ciudad"
       width="120">
     </el-table-column>
     <el-table-column
       prop="address"
-      label="Address"
+      label="Dirección"
       width="300">
     </el-table-column>
     <el-table-column
       prop="zip"
-      label="Zip"
+      label="Código postal"
       width="120">
     </el-table-column>
     <el-table-column
       fixed="right"
-      label="Operations"
+      label="Operaciones"
       width="120">
       <template slot-scope="scope">
-        <el-button @click="handleClick" type="text" size="small">Detail</el-button>
-        <el-button type="text" size="small">Edit</el-button>
+        <el-button @click="handleClick" type="text" size="small">Detalle</el-button>
+        <el-button type="text" size="small">Editar</el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -751,11 +751,11 @@ When there are too many columns, you can fix some of them.
 ```
 :::
 
-### Table with fixed columns and header
+### Tabla con columnas y cabecera fija.
 
-When you have huge chunks of data to put in a table, you can fix the header and columns at the same time.
+Cuando tienes grandes cantidades de datos para colocar en una tabla, tu puedes fijar la cabecera y columnas al mismo tiempo.
 
-:::demo  Fix columns and header at the same time by combining the above two examples.
+:::demo  Fije las columnas y cabecera al mismo tiempo combinando los dos ejemeplo anteriores.
 ```html
 <template>
   <el-table
@@ -765,32 +765,32 @@ When you have huge chunks of data to put in a table, you can fix the header and 
     <el-table-column
       fixed
       prop="date"
-      label="Date"
+      label="Fecha"
       width="150">
     </el-table-column>
     <el-table-column
       prop="name"
-      label="Name"
+      label="Nombre"
       width="120">
     </el-table-column>
     <el-table-column
       prop="state"
-      label="State"
+      label="Estado"
       width="120">
     </el-table-column>
     <el-table-column
       prop="city"
-      label="City"
+      label="Ciudad"
       width="120">
     </el-table-column>
     <el-table-column
       prop="address"
-      label="Address"
+      label="Dirección"
       width="300">
     </el-table-column>
     <el-table-column
       prop="zip"
-      label="Zip"
+      label="Código postal"
       width="120">
     </el-table-column>
   </el-table>
@@ -857,11 +857,11 @@ When you have huge chunks of data to put in a table, you can fix the header and 
 ```
 :::
 
-### Fluid-height Table with fixed header (and columns)
+### Altura de tabla con cabecera fija (y columnas
 
-When the the data is dynamically changed, you might want the table to have a maximum height rather than a fixed height and to show the scroll bar if needed.
+Cuando los datos se modifican dinámicamente, es posible que necesites que la tabla tenga una altura máxima en lugar de una altura fija, y además, que se muestre la barra de desplazamiento si es necesario.
 
-:::demo  By setting the attribute `max-height` of `el-table`, you can fix the table header. The table body scrolls only if the height of the rows exceeds the max height value.
+:::demo Al configurar el atributo `max-height` de `el-table`, tu puedes fijar la cabecera de la tabla. La barra de desplazamiento únicamente se mostrará si la altura sobrepasa el valor de la altura máxima.
 ```html
 <template>
   <el-table
@@ -871,44 +871,44 @@ When the the data is dynamically changed, you might want the table to have a max
     <el-table-column
       fixed
       prop="date"
-      label="Date"
+      label="Fecha"
       width="150">
     </el-table-column>
     <el-table-column
       prop="name"
-      label="Name"
+      label="Nombre"
       width="120">
     </el-table-column>
     <el-table-column
       prop="state"
-      label="State"
+      label="Estado"
       width="120">
     </el-table-column>
     <el-table-column
       prop="city"
-      label="City"
+      label="Ciudad"
       width="120">
     </el-table-column>
     <el-table-column
       prop="address"
-      label="Address"
+      label="Dirección"
       width="300">
     </el-table-column>
     <el-table-column
       prop="zip"
-      label="Zip"
+      label="Código postal"
       width="120">
     </el-table-column>
     <el-table-column
       fixed="right"
-      label="Operations"
+      label="Operaciones"
       width="120">
       <template slot-scope="scope">
         <el-button
           @click.native.prevent="deleteRow(scope.$index, tableData4)"
           type="text"
           size="small">
-          Remove
+          Eliminar
         </el-button>
       </template>
     </el-table-column>
@@ -981,11 +981,11 @@ When the the data is dynamically changed, you might want the table to have a max
 ```
 :::
 
-### Grouping table head
+### Agrupando cabeceras de la tabla
 
-When the data structure is complex, you can use group header to show the data hierarchy.
+Cuando la estructura de datos es compleja, tu puedes hacer uso de cabeceras agrupadas para mostrar datos por jerarquía.
 
-:::demo Only need to place el-table-column inside a el-table-column, you can achieve group header.
+:::demo Solo necesitas colocar `el-table-column` dentro de un `el-table-column`, de esta forma lograrás agruparlas.
 ```html
 <template>
   <el-table
@@ -993,34 +993,34 @@ When the data structure is complex, you can use group header to show the data hi
     style="width: 100%">
     <el-table-column
       prop="date"
-      label="Date"
+      label="Fecha"
       width="150">
     </el-table-column>
-    <el-table-column label="Delivery Info">
+    <el-table-column label="Información de entrega">
       <el-table-column
         prop="name"
-        label="Name"
+        label="Nombre"
         width="120">
       </el-table-column>
-      <el-table-column label="Address Info">
+      <el-table-column label="Información de dirección">
         <el-table-column
           prop="state"
-          label="State"
+          label="Estado"
           width="120">
         </el-table-column>
         <el-table-column
           prop="city"
-          label="City"
+          label="Ciudad"
           width="120">
         </el-table-column>
         <el-table-column
           prop="address"
-          label="Address"
+          label="Dirección"
           width="300">
         </el-table-column>
         <el-table-column
           prop="zip"
-          label="Zip"
+          label="Código postal"
           width="120">
         </el-table-column>
       </el-table-column>
@@ -1089,11 +1089,11 @@ When the data structure is complex, you can use group header to show the data hi
 ```
 :::
 
-### Single select
+### Selección única
 
-Single row selection is supported.
+La selección de una fila esta soportada.
 
-:::demo Table supports single row selection. You can activate it by adding the `highlight-current-row` attribute. An event called `current-change` will be triggered when row selection changes, and its parameters are the rows after and before this change: `currentRow` and `oldCurrentRow`. If you need to display row index, you can add a new `el-table-column` with its `type` attribute assigned to `index`, and you will see the index starting from 1.
+:::demo La tabla permite la selección de una sola fila. Puede activarlo agregando el atributo `highlight-current-row`. Un evento llamado `current-change` será disparado cuando la selección de la fila cambie, sus parámetros son la fila antes y después de que ocurre el cambio: `currentRow` y `oldCurrentRow`. Si necesitas mostrar el índice de la fila, puedes agregar un nuevo `el-table-column` con el atributo `type` asignado al `index` y podrás ver el índice iniciando desde 1.
 ```html
 <template>
   <el-table
@@ -1108,22 +1108,22 @@ Single row selection is supported.
     </el-table-column>
     <el-table-column
       property="date"
-      label="Date"
+      label="Fecha"
       width="120">
     </el-table-column>
     <el-table-column
       property="name"
-      label="Name"
+      label="Nombre"
       width="120">
     </el-table-column>
     <el-table-column
       property="address"
-      label="Address">
+      label="Dirección">
     </el-table-column>
   </el-table>
   <div style="margin-top: 20px">
-    <el-button @click="setCurrent(tableData[1])">Select second row</el-button>
-    <el-button @click="setCurrent()">Clear selection</el-button>
+    <el-button @click="setCurrent(tableData[1])">Seleccionar segunda fila</el-button>
+    <el-button @click="setCurrent()">Limpiar selección</el-button>
   </div>
 </template>
 
@@ -1165,11 +1165,11 @@ Single row selection is supported.
 ```
 :::
 
-### Multiple select
+### Selección multiple
 
-You can also select multiple rows.
+También puedes seleccionar múltiples filas.
 
-:::demo Activating multiple selection is easy: simply add an `el-table-column` with its `type` set to `selection`. Apart from multiple selection, this example also uses `show-overflow-tooltip`: by default, if the content is too long, it will break into multiple lines. If you want to keep it in one line, use attribute `show-overflow-tooltip`, which accepts a `Boolean` value. When set `true`, the extra content will show in tooltip when hover on the cell.
+:::demo Activar la selección múltiple es sencillo: Solo debes agregar a `el-table-column` con su `type` establecido en `selection`. Además de la selección múltiple, este ejemplo también utiliza `show-overflow-tooltip`: por defecto, si el contenido es demasiado largo, este permite córtalo dentro de múltiples líneas. Si lo que buscas es mantenerte en una línea, utiliza el atributo `show-overflow-tooltip`, que acepta un valor `Boolean`. Cuando este está establecido en `true`, el contenido extra puede mostrar un _tooltip_ cuando se hace _hover_ sobre la celda.
 ```html
 <template>
   <el-table
@@ -1182,24 +1182,24 @@ You can also select multiple rows.
       width="55">
     </el-table-column>
     <el-table-column
-      label="Date"
+      label="Fecha"
       width="120">
       <template slot-scope="scope">{{ scope.row.date }}</template>
     </el-table-column>
     <el-table-column
       property="name"
-      label="Name"
+      label="Nombre"
       width="120">
     </el-table-column>
     <el-table-column
       property="address"
-      label="Address"
+      label="Dirección"
       show-overflow-tooltip>
     </el-table-column>
   </el-table>
   <div style="margin-top: 20px">
-    <el-button @click="toggleSelection([tableData3[1], tableData3[2]])">Toggle selection status of second and third rows</el-button>
-    <el-button @click="toggleSelection()">Clear selection</el-button>
+    <el-button @click="toggleSelection([tableData3[1], tableData3[2]])">Cambia el estado de selección de la segunda y tercera fila.</el-button>
+    <el-button @click="toggleSelection()">Limpiar selección</el-button>
   </div>
 </template>
 
@@ -1259,11 +1259,11 @@ You can also select multiple rows.
 ```
 :::
 
-### Sorting
+### Ordenamiento
 
-Sort the data to find or compare data quickly.
+Ordena los datos para encontrar o comparar información rápidamente.
 
-:::demo Set attribute `sortable` in a certain column to sort the data based on this column. It accepts `Boolean` with a default value `false`. Set table attribute `default-sort` to determine default sort column and order. To apply your own sorting rules, use `sort-method` or `sort-by`. If you need remote sorting from backend, set `sortable` to `custom`, and listen to the `sort-change` event on Table. In the event handler, you have access to the sorting column and sorting order so that you can fetch sorted table data from API. In this example we use another attribute named `formatter` to format the value of certain columns. It accepts a function which has two parameters: `row` and `column`. You can handle it according to your own needs.
+:::demo Establece el atributo `sortable` para ordenar los datos de una columna. Este acepta un `Boolean` con un valor por defecto `false`. Establece el atributo `default-sort` para determinar la columna y orden por defecto. Para aplicar tus propias reglas de ordenamiento, utiliza `sort-method` o `sort-by`. Si lo que necesitas es ordenar de forma remota desde backend, establece `sortable` a `custom`, y escucha el evento `sort-change` de la tabla. Al dispararse el evento, tendrás acceso a la columna ordenada y orden para que puedas obtener los datos de la tabla ordenada desde tu API. En este ejemplo utilizamos otro atributo llamado `formatter` para darle un formato al valor de ciertas columnas. Este acepta una función que tiene dos parámetros: `row` y `column`. Puedes disparar este de acuerdo a tus propias necesidades.
 ```html
 <template>
   <el-table
@@ -1272,18 +1272,18 @@ Sort the data to find or compare data quickly.
     style="width: 100%">
     <el-table-column
       prop="date"
-      label="Date"
+      label="Fecha"
       sortable
       width="180">
     </el-table-column>
     <el-table-column
       prop="name"
-      label="Name"
+      label="Nombre"
       width="180">
     </el-table-column>
     <el-table-column
       prop="address"
-      label="Address"
+      label="Dirección"
       :formatter="formatter">
     </el-table-column>
   </el-table>
@@ -1322,11 +1322,11 @@ Sort the data to find or compare data quickly.
 ```
 :::
 
-### Filter
+### Filtros
 
-Filter the table to find desired data.
+Filtra la tabla para encontrar la información que necesitas.
 
-:::demo Set attribute `filters` and `filter-method` in `el-table-column` makes this column filterable. `filters` is an array, and `filter-method` is a function deciding which rows are displayed. It has two parameters: `value` and `row`.
+:::demo Establece el atributo `filters` y `filter-method` en `el-table-column` haciendo esta columna filtrable. `filters` es un arreglo, y `filter-method` es una función que decide que filas se muestra. Esta tiene dos parámetros: `value` y `row`.
 ```html
 <template>
   <el-table
@@ -1334,23 +1334,23 @@ Filter the table to find desired data.
     style="width: 100%">
     <el-table-column
       prop="date"
-      label="Date"
+      label="Fecha"
       sortable
       width="180">
     </el-table-column>
     <el-table-column
       prop="name"
-      label="Name"
+      label="Nombre"
       width="180">
     </el-table-column>
     <el-table-column
       prop="address"
-      label="Address"
+      label="Dirección"
       :formatter="formatter">
     </el-table-column>
     <el-table-column
       prop="tag"
-      label="Tag"
+      label="Etiqueta"
       width="100"
       :filters="[{ text: 'Home', value: 'Home' }, { text: 'Office', value: 'Office' }]"
       :filter-method="filterTag"
@@ -1404,17 +1404,18 @@ Filter the table to find desired data.
 ```
 :::
 
-### Custom column template
+### Plantilla de columna personalizada
 
-Customize table column so it can be integrated with other components.
-:::demo You have access to the following data: row, column, $index and store (state management of Table) by [Scoped slot](https://vuejs.org/v2/guide/components.html#Scoped-Slots). (Scoped slots is supported from `1.1`, `inline-template` still works, but it's not recommended).
+Personaliza la columna de la tabla para que pueda integrarse con otros componentes.
+
+:::demo Tienes acceso a la siguiente informacion: row, column, $index, store (gestor de estados de la tabla) por [Scoped slots](https://vuejs.org/v2/guide/components.html#Scoped-Slots). (Los Scoped Slots son soportados desde `1.1`, `inline-template` todavía funciona, pero no es recomendado).
 ```html
 <template>
   <el-table
     :data="tableData"
     style="width: 100%">
     <el-table-column
-      label="Date"
+      label="Fecha"
       width="180">
       <template slot-scope="scope">
         <i class="el-icon-time"></i>
@@ -1422,7 +1423,7 @@ Customize table column so it can be integrated with other components.
       </template>
     </el-table-column>
     <el-table-column
-      label="Name"
+      label="Nombre"
       width="180">
       <template slot-scope="scope">
         <el-popover trigger="hover" placement="top">
@@ -1435,15 +1436,15 @@ Customize table column so it can be integrated with other components.
       </template>
     </el-table-column>
     <el-table-column
-      label="Operations">
+      label="Operaciones">
       <template slot-scope="scope">
         <el-button
           size="mini"
-          @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
+          @click="handleEdit(scope.$index, scope.row)">Editar</el-button>
         <el-button
           size="mini"
           type="danger"
-          @click="handleDelete(scope.$index, scope.row)">Delete</el-button>
+          @click="handleDelete(scope.$index, scope.row)">Eliminar</el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -1485,10 +1486,11 @@ Customize table column so it can be integrated with other components.
 ```
 :::
 
-### Expandable row
+### Fila expandible
 
-When the row content is too long and you do not want to display the horizontal scroll bar, you can use the expandable row feature.
-:::demo Activate expandable row by adding type="expand" and scoped slot. The template for el-table-column will be rendered as the contents of the expanded row, and you can access the same attributes as when you are using `Scoped slot` in custom column templates.
+Cuando el contenido de la fila es demasiado largo y buscas no mostrar la barra de desplazamiento horizontal, puedes utilizar la caracteristica de fila expandible.
+
+:::demo Puedes activar la fila expandible estableciendo la propiedad `type` a `expand` y Scoped Slots. La plantilla para `el-table-column` se representará como el contenido de la fila expandible, y puedes acceder a algunos atributos cuando estás usando `Scoped Slots` en plantillas de columna personalizadas.
 ```html
 <template>
   <el-table
@@ -1496,18 +1498,18 @@ When the row content is too long and you do not want to display the horizontal s
     style="width: 100%">
     <el-table-column type="expand">
       <template slot-scope="props">
-        <p>State: {{ props.row.state }}</p>
-        <p>City: {{ props.row.city }}</p>
-        <p>Address: {{ props.row.address }}</p>
-        <p>Zip: {{ props.row.zip }}</p>
+        <p>Estado: {{ props.row.state }}</p>
+        <p>Ciudad: {{ props.row.city }}</p>
+        <p>Dirección: {{ props.row.address }}</p>
+        <p>Código postal: {{ props.row.zip }}</p>
       </template>
     </el-table-column>
     <el-table-column
-      label="Date"
+      label="Fecha"
       prop="date">
     </el-table-column>
     <el-table-column
-      label="Name"
+      label="Nombre"
       prop="name">
     </el-table-column>
   </el-table>
@@ -1574,10 +1576,11 @@ When the row content is too long and you do not want to display the horizontal s
 ```
 :::
 
-### Summary row
+### Fila de resumen
 
-For table of numbers, you can add an extra row at the table footer displaying each column's sum.
-:::demo You can add the summary row by setting `show-summary` to `true`. By default, for the summary row, the first column does not sum anything up but always displays 'Sum' (you can configure the displayed text using `sum-text`), while other columns sum every number in that column up and display them. You can of course define your own sum behaviour. To do so, pass a method to `summary-method`, which returns an array, and each element of the returned array will be displayed in the columns of the summary row. The second table of this example is a detailed demo.
+Para una tabla de números, tu puedes agregar una fila extra en el pie de página de la tabla que muestra la suma de cada columna.
+
+:::demo Puedes agregar la fila de resumen configurando `show-summary` a `true`. Por defecto, para la fila de resumen, la primera columna no resume nada, pero siempre muestra la suma (puedes configurar el texto mostrado usando `sum-text`), mientras que otras columnas suman todos los números en esa columna y los muestran. Por supuesto, puedes definir tu propio comportamiento de suma. Para hacerlo, utiliza un método `summary-method`, que devuelve un array, y cada elemento que fue retornado desde el arreglo puede ser mostrado en las columnas del resumen de fila. La segunda tabla de este ejemplo es una demostración detallada.
 ```html
 <template>
   <el-table
@@ -1592,22 +1595,22 @@ For table of numbers, you can add an extra row at the table footer displaying ea
     </el-table-column>
     <el-table-column
       prop="name"
-      label="Name">
+      label="Nombre">
     </el-table-column>
     <el-table-column
       prop="amount1"
       sortable
-      label="Amount 1">
+      label="Monto 1">
     </el-table-column>
     <el-table-column
       prop="amount2"
       sortable
-      label="Amount 2">
+      label="Monto 2">
     </el-table-column>
     <el-table-column
       prop="amount3"
       sortable
-      label="Amount 3">
+      label="Monto 3">
     </el-table-column>
   </el-table>
 
@@ -1625,19 +1628,19 @@ For table of numbers, you can add an extra row at the table footer displaying ea
     </el-table-column>
     <el-table-column
       prop="name"
-      label="Name">
+      label="Nombre">
     </el-table-column>
     <el-table-column
       prop="amount1"
-      label="Cost 1 ($)">
+      label="Costo 1 ($)">
     </el-table-column>
     <el-table-column
       prop="amount2"
-      label="Cost 2 ($)">
+      label="Costo 2 ($)">
     </el-table-column>
     <el-table-column
       prop="amount3"
-      label="Cost 3 ($)">
+      label="Costo 3 ($)">
     </el-table-column>
   </el-table>
 </template>
@@ -1685,7 +1688,7 @@ For table of numbers, you can add an extra row at the table footer displaying ea
         const sums = [];
         columns.forEach((column, index) => {
           if (index === 0) {
-            sums[index] = 'Total Cost';
+            sums[index] = 'Costo total';
             return;
           }
           const values = data.map(item => Number(item[column.property]));
@@ -1711,10 +1714,11 @@ For table of numbers, you can add an extra row at the table footer displaying ea
 ```
 :::
 
-### Rowspan and colspan
+### Fusión de filas y columnas
 
-Configuring rowspan and colspan allows you to merge cells
-:::demo Use the `span-method` attribute to configure rowspan and colspan. It accepts a method, and passes an object to that method including current row `row`, current column `column`, current row index `rowIndex` and current column index `columnIndex`. The method should return an array of two numbers, the first number being `rowspan` and second `colspan`. It can also return an object with `rowsapn` and `colspan` props.
+El configurar _rowspan_ y _colspan_ te permite fusionar celdas.
+
+:::demo Utiliza el atributo `span-method` para configurar rowspan y colspan. Este acepta un método, y pasa un objeto a ese método incluyedo la fila actual `row`, columna actual `column`, índice de fila actual `rowIndex` y índice de columna actual `columnIndex`. El método debe devolver un arreglo de dos números, el primer número siendo `rowspan` y el segundo `colspan`. También puede devolver un objeto con las propiedades `rowspan` y `colspan`.
 
 ```html
 <template>
@@ -1731,22 +1735,22 @@ Configuring rowspan and colspan allows you to merge cells
       </el-table-column>
       <el-table-column
         prop="name"
-        label="Name">
+        label="Nombre">
       </el-table-column>
       <el-table-column
         prop="amount1"
         sortable
-        label="Amount 1">
+        label="Monto 1">
       </el-table-column>
       <el-table-column
         prop="amount2"
         sortable
-        label="Amount 2">
+        label="Monto 2">
       </el-table-column>
       <el-table-column
         prop="amount3"
         sortable
-        label="Amount 3">
+        label="Monto 3">
       </el-table-column>
     </el-table>
 
@@ -1762,19 +1766,19 @@ Configuring rowspan and colspan allows you to merge cells
       </el-table-column>
       <el-table-column
         prop="name"
-        label="Name">
+        label="Nombre">
       </el-table-column>
       <el-table-column
         prop="amount1"
-        label="Amount 1">
+        label="Monto 1">
       </el-table-column>
       <el-table-column
         prop="amount2"
-        label="Amount 2">
+        label="Monto 2">
       </el-table-column>
       <el-table-column
         prop="amount3"
-        label="Amount 3">
+        label="Monto 3">
       </el-table-column>
     </el-table>
   </div>
@@ -1849,10 +1853,11 @@ Configuring rowspan and colspan allows you to merge cells
 ```
 :::
 
-### Custom index
+### Índice personalizado
 
-You can customize row index in `type=index` columns.
-:::demo To customize row indices, use `index` attribute on <el-table-column> with `type=index`. If it is assigned to a number, all indices will have an offset of that number. It also accepts a method with each index (starting from `0`) as parameter, and the returned value will be displayed as index.
+Puedes personalizar el índice de la fila con la propiedad `type=index` de las columnas.
+
+:::demo Para personalizar el índice de la fila, utiliza el atributo `index` en `<el-table-column>` con `type=index`. Si este es asignado a un número, todos los índices tendrá un desplazamiento de ese número. Este también acepta un método con cada índice (iniciando desde 0) como un parámetro, y este devuelve un valor que puedes ser mostrado como índice.
 
 ```html
 <template>
@@ -1865,17 +1870,17 @@ You can customize row index in `type=index` columns.
     </el-table-column>
     <el-table-column
       prop="date"
-      label="Date"
+      label="Fecha"
       width="180">
     </el-table-column>
     <el-table-column
       prop="name"
-      label="Name"
+      label="Nombre"
       width="180">
     </el-table-column>
     <el-table-column
       prop="address"
-      label="Address">
+      label="Dirección">
     </el-table-column>
   </el-table>
 </template>
@@ -1929,99 +1934,99 @@ You can customize row index in `type=index` columns.
 ```
 :::
 
-### Table Attributes
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
+### Atributos de la tabla
+| Atributo      | Descripción          | Tipo      | Valores aceptados       | Por defecto  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| data | Table data | array | — | — |
-| height | Table's height. By default it has an `auto` height. If its value is a number, the height is measured in pixels; if its value is a string, the height is affected by external styles | string/number | — | — |
-| max-height | Table's max-height. The height of the table starts from `auto` until it reaches the maxHeight limit. The `maxHeight` is measured in pixels, same as `height` | string/number | — | — |
-| stripe | whether Table is striped | boolean | — | false |
-| border | whether Table has vertical border | boolean | — | false |
-| size | size of Table | string | medium / small / mini | — |
-| fit | whether width of column automatically fits its container | boolean | — | true |
-| show-header | whether Table header is visible | boolean | — | true |
-| highlight-current-row | whether current row is highlighted | boolean | — | false |
-| current-row-key | key of current row, a set only prop | string,number | — | — |
-| row-class-name | function that returns custom class names for a row, or a string assigning class names for every row | Function({row, rowIndex})/String | — | — |
-| row-style | function that returns custom style for a row, or an object assigning custom style for every row | Function({row, rowIndex})/Object | — | — |
-| cell-class-name | function that returns custom class names for a cell, or a string assigning class names for every cell | Function({row, rowIndex})/String | — | — |
-| cell-style | function that returns custom style for a cell, or an object assigning custom style for every cell | Function({row, rowIndex})/Object | — | — |
-| header-row-class-name | function that returns custom class names for a row in table header, or a string assigning class names for every row in table header | Function({row, rowIndex})/String | — | — |
-| header-row-style | function that returns custom style for a row in table header, or an object assigning custom style for every row in table header | Function({row, rowIndex})/Object | — | — |
-| header-cell-class-name | function that returns custom class names for a cell in table header, or a string assigning class names for every cell in table header | Function({row, rowIndex})/String | — | — |
-| header-cell-style | function that returns custom style for a cell in table header, or an object assigning custom style for every cell in table header | Function({row, rowIndex})/Object | — | — |
-| row-key | key of row data, used for optimizing rendering. Required if `reserve-selection` is on. When its type is String, multi-level access is supported, e.g. `user.info.id`, but `user.info[0].id` is not supported, in which case `Function` should be used. | Function(row)/String | — | — |
-| empty-text | Displayed text when data is empty. You can customize this area with `slot="empty"` | String | — | No Data |
-| default-expand-all | whether expand all rows by default, only works when the table has a column type="expand" | Boolean | — | false |
-| expand-row-keys | set expanded rows by this prop, prop's value is the keys of expand rows, you should set row-key before using this prop | Array | — | |
-| default-sort | set the default sort column and order. property `prop` is used to set default sort column, property `order` is used to set default sort order | Object | `order`: ascending, descending | if `prop` is set, and `order` is not set, then `order` is default to ascending |
-| tooltip-effect | tooltip `effect` property | String | dark/light | | dark |
-| show-summary | whether to display a summary row | Boolean | — | false |
-| sum-text | displayed text for the first column of summary row | String | — | Sum |
-| summary-method | custom summary method | Function({ columns, data }) | — | — |
-| span-method | method that returns rowspan and colspan | Function({ row, column, rowIndex, columnIndex }) | — | — |
+| data | Datos de la tabla | array | — | — |
+| height | Altura de la tabla. Por defecto esta tiene un tamaño `auto`. Si este valor es un número, la altura es medido en pixeles; si este valor es una cadena, la altura es afectada por estilos externos | string/number | — | — |
+| max-height | Altura máxima de la tabla. La altura de la tabla comienza desde `auto` hasta que alcanza la altura máxima. El `max-height` es medido en pixeles, lo mismo que `height` | string/number | — | — |
+| stripe | especifica si la tabla será rayada | boolean | — | false |
+| border | especifica si la tabla tiene bordes verticales | boolean | — | false |
+| size | tamaño de la tabla | string | medium / small / mini | — |
+| fit | especifica si el ancho de la columna se adapta automáticamente a su contenedor | boolean | — | true |
+| show-header | especifica si la cabecera de la tabla es visible | boolean | — | true |
+| highlight-current-row | especifica si la fila actual es resaltado | boolean | — | false |
+| current-row-key | clave de la fila actual, un ajuste de propiedad única | string,number | — | — |
+| row-class-name | función que devuelve nombres de clases personalizadas para una fila, o una cadena asignando nombres de clases para cada fila | Function({row, rowIndex})/String | — | — |
+| row-style | función que devuelve el estilo personalizado para una fila, o un objeto asignando estilos personalizado para cada fila | Function({row, rowIndex})/Object | — | — |
+| cell-class-name | función que devuelve nombres de clases personalizadas para una celda, o una cadena asignando nombres de clases para cada celda | Function({row, rowIndex})/String | — | — |
+| cell-style | función que devuelve estilos personalizados para una celda, o un objeto asignado a estilos personalizados para cada celda | Function({row, rowIndex})/Object | — | — |
+| header-row-class-name | función que devuelve nombre de clases personalizadas para una fila en la cabecera de la tabla, o una cadena asignando nombres de clases para cada fila en la cabecera de la tabla | Function({row, rowIndex})/String | — | — |
+| header-row-style | función que devuelve estilos personalizados para una fila en la cabecera de la tabla, o un objeto asignando estilos personalizados para cada fila en la cabecera de la tabla | Function({row, rowIndex})/Object | — | — |
+| header-cell-class-name | función que devuelve nombre de clases personalizadas para una celda en la cabecera de la tabla, o una cadena asignando nombres de clases para cada celda en la cabecera de la tabla | Function({row, rowIndex})/String | — | — |
+| header-cell-style | función que devuelve estilos personalizados para una celda en la cabecera de la tabla, o un objeto asignando estilos personalizados para cada celda en la cabecera de la tabla | Function({row, rowIndex})/Object | — | — |
+| row-key | clave de datos de la fila, utilizada para optimizar la representación de los datos. Es obligatorio `reserve-selection` esta habilitado. Cuando su tipo es string, se permite el acceso multinivel, por ejemplo, `user.info.id`, pero `user.info[0].id` no es permitido, en cuyo caso se debe usar una `function` | Function(row)/String | — | — |
+| empty-text | Texto mostrado cuando no existen datos. Puedes personalizar esta área con `slot="empty"` | String | — | No Data |
+| default-expand-all | especifica si todas las filas se expanden por defeto, solo funciona cuando la tabla tiene una columna `type="expand"` | Boolean | — | false |
+| expand-row-keys | establece las filas expandidas a través de esta propiedad, este valor es la clave de rilas expandidas, tu deberías establecer `row-key` antes de usar esta propiedad | Array | — | |
+| default-sort | establece la columna y orden por defecto. La propiedad `prop` es utilizada para establecer la columna de ordenamiento por defecto, la propiedad `order` es utilizada para definir el tipo de orden por defecto | Object | `order`: ascending, descending | if `prop` is set, and `order` is not set, then `order` is default to ascending |
+| tooltip-effect | propiedad `effect` para efectos en tooltip | String | dark/light | | dark |
+| show-summary | especifica si debe mostrar la fila de resumen | Boolean | — | false |
+| sum-text | texto a mostrar para la primer columna de la fila de resumen | String | — | Sum |
+| summary-method | método personaliza para resumen | Function({ columns, data }) | — | — |
+| span-method | método que devuelve _rowspan_ y _colspan_ | Function({ row, column, rowIndex, columnIndex }) | — | — |
 
-### Table Events
-| Event Name | Description | Parameters |
+### Eventos de la tabla
+| Nombre del evento| Descripción | Parámetros |
 | ---- | ---- | ---- |
-| select | triggers when user clicks the checkbox in a row | selection, row |
-| select-all | triggers when user clicks the checkbox in table header | selection |
-| selection-change | triggers when selection changes | selection |
-| cell-mouse-enter | triggers when hovering into a cell| row, column, cell, event |
-| cell-mouse-leave | triggers when hovering out of a cell | row, column, cell, event |
-| cell-click | triggers when clicking a cell | row, column, cell, event |
-| cell-dblclick | triggers when double clicking a cell | row, column, cell, event |
-| row-click | triggers when clicking a row | row, event, column |
-| row-contextmenu | triggers when user right clicks on a row | row, event |
-| row-dblclick | triggers when double clicking a row | row, event |
-| header-click | triggers when clicking a column header | column, event |
-| sort-change | triggers when Table's sorting changes | { column, prop, order } |
-| filter-change | column's key. If you need to use the filter-change event, this attribute is mandatory to identify which column is being filtered | filters |
-| current-change | triggers when current row changes | currentRow, oldCurrentRow |
-| header-dragend | triggers when finish dragging header | newWidth, oldWidth, column, event |
-| expand-change | triggers when user expands or collapses a row | row, expandedRows |
+| select | se dispara cuando el usuario hace clic al _checkbox_ (caja de selección) en una fila | selection, row |
+| select-all | se dispara cando el usuario hace clic al _checkbox_ (caja de selección) en una cabecera de la tabla | selection |
+| selection-change | se dispara cuando selección cambia | selection |
+| cell-mouse-enter | se dispara cuando se desplaza dentro de una celda | row, column, cell, event |
+| cell-mouse-leave | se dispara cuando se desplaza fuera de una celda | row, column, cell, event |
+| cell-click | se dispara cuando se hace clic en una celda | row, column, cell, event |
+| cell-dblclick | se dispara cuando se hace doble clic en una celda | row, column, cell, event |
+| row-click | se dispara cuando se hace clic en una fila | row, event, column |
+| row-contextmenu | se dispara cuando el usuario hace clic derecho en una fila | row, event |
+| row-dblclick | se dispara cuando se hace doble clic en una fila | row, event |
+| header-click | se dispara cuando se hace click en una cabecera de columna | column, event |
+| sort-change | se dispara cuando el ordenamiento de la tabla cambia | { column, prop, order } |
+| filter-change | clave de la columna. Si necesitas utilizar el evento filter-change, este atributo es obligatorio para identificar cuál columna está siendo filtrada | filters |
+| current-change | se dispara cuando la fila actual cambia | currentRow, oldCurrentRow |
+| header-dragend | se dispara cuando se deja de arrastrar la cabecera | newWidth, oldWidth, column, event |
+| expand-change | se dispara cuando el usuario expande o colapsa una fila | row, expandedRows |
 
-### Table Methods
+### Métodos de la tabla
 | Method | Description | Parameters |
 |------|--------|-------|
-| clearSelection | used in multiple selection Table, clear selection, might be useful when `reserve-selection` is on | selection |
-| toggleRowSelection | used in multiple selection Table, toggle if a certain row is selected. With the second parameter, you can directly set if this row is selected | row, selected |
-| toggleRowExpansion | used in expandable Table, toggle if a certain row is expanded. With the second parameter, you can directly set if this row is expanded or collapsed | row, expanded |
-| setCurrentRow | used in single selection Table, set a certain row selected. If called without any parameter, it will clear selection. | row |
-| clearSort | clear sorting, restore data to the original order | — |
-| clearFilter | clear filter | — |
+| clearSelection | utilizado en selección múltiple de la tabla, limpiar selección, puede ser poco útil cuando `reserve-selection` está habilitado | selection |
+| toggleRowSelection | utilizado en selección múltiple de la tabla, alterna si una cierta fila es seleccionada. Con el segundo parámetro, puedes directamente establecer si la fila es seleccionada | row, selected |
+| toggleRowExpansion | utilizado en tabla expandible, alterna si una cierta fila es expandida. Con el segundo parámetro, puedes directamente establecer si esta fila es expandida o colapsada | row, expanded |
+| setCurrentRow | utilizado en tabla con selección sencilla, establece una cierta fila seleccionada. Si es llamado sin ningún parámetro, este puede limpiar la selección | row |
+| clearSort | limpiar ordenamiento, restaurar datos a orden original | — |
+| clearFilter | limpiar filtros | — |
 
-### Table Slot
-| Name | Description |
+### Slots de la tabla
+| Nombre | Descripción |
 |------|--------|
-| append | Contents to be inserted after the last row. You may need this slot if you want to implement infinite scroll for the table. This slot will be displayed above the summary row if there is one. |
+| append | El contenido será insertado después de la última fila. Es posible que necesites este espacio si deseas implementar _scroll_ infinito para la tabla. Este espacio se mostrará sobre la fila de resumen si hay uno. |
 
-### Table-column Attributes
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
+### Atributos para las columnas de la tabla
+| Atributo      | Descripción          | Tipo      | Valores aceptados       | Por defecto  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| type | type of the column. If set to `selection`, the column will display checkbox. If set to `index`, the column will display index of the row (staring from 1). If set to `expand`, the column will display expand icon.  | string | selection/index/expand | — |
-| index | customize indices for each row, works on columns with `type=index` | string, Function(index) | - | - |
-| label | column label | string | — | — |
-| column-key | column's key. If you need to use the filter-change event, you need this attribute to identify which column is being filtered | string | string | — | — |
-| prop |  field name. You can also use its alias: `property` | string | — | — |
-| width | column width | string | — | — |
-| min-width | column minimum width. Columns with `width` has a fixed width, while columns with `min-width` has a width that is distributed in proportion | string | — | — |
-| fixed | whether column is fixed at left/right. Will be fixed at left if `true` | string/boolean | true/left/right | — |
-| render-header | render function for table header of this column | Function(h, { column, $index }) | — | — |
-| sortable | whether column can be sorted. Remote sorting can be done by setting this attribute to 'custom' and listening to the `sort-change` event of Table | boolean, string | true, false, custom | false |
-| sort-method | sorting method, works when `sortable` is `true`. Should return a number, just like Array.sort | Function(a, b) | — | — |
-| sort-by | specify which property to sort by, works when `sortable` is `true` and `sort-method` is `undefined`. If set to an Array, the column will sequentially sort by the next property if the previous one is equal | Function(row, index)/String/Array | — | — |
-| resizable | whether column width can be resized, works when `border` of `el-table` is `true` | boolean | — | false |
-| formatter | function that formats cell content | Function(row, column, cellValue) | — | — |
-| show-overflow-tooltip | whether to hide extra content and show them in a tooltip when hovering on the cell | boolean | — | false |
-| align | alignment | string | left/center/right | left |
-| header-align | alignment of the table header. If omitted, the value of the above `align` attribute will be applied | String | left/center/right | — |
-| class-name | class name of cells in the column | string | — | — |
-| label-class-name | class name of the label of this column | string | — | — |
-| selectable | function that determines if a certain row can be selected, works when `type` is 'selection' | Function(row, index) | — | — |
-| reserve-selection | whether to reserve selection after data refreshing, works when `type` is 'selection' | boolean | — | false |
-| filters | an array of data filtering options. For each element in this array, `text` and `value` are required | Array[{ text, value }] | — | — |
-| filter-placement | placement for the filter dropdown | String | same as Tooltip's `placement` | — |
-| filter-multiple | whether data filtering supports multiple options | Boolean | — | true |
-| filter-method | data filtering method. If `filter-multiple` is on, this method will be called multiple times for each row, and a row will display if one of the calls returns `true` | Function(value, row) | — | — |
-| filtered-value | filter value for selected data, might be useful when table header is rendered with `render-header` | Array | — | — |
+| type | tipo de la columna. Si se establece a `selection`, la columna puede mostrar un _checkbox_. Si se establece a `index`, la columna puede mostrar el índice de la fila (iniciando desde 1). Si se establece a `expand`, la columna puede mostrar un ícono para expandir. | string | selection/index/expand | — |
+| index | personaliza los índices para cada fila, funciona en columnas con `type=index` | string, Function(index) | - | - |
+| label | etiqueta de la columna | string | — | — |
+| column-key | clave de la columna. Si necesitas utilizar el evento `filter-change`, necesitas el atributo para identificar cual columna está siendo filtrada | string | string | — | — |
+| prop | nombre del campo. También puedes usar su alias: `property` | string | — | — |
+| width | ancho de la columna | string | — | — |
+| min-width | ancho mínimo de la columna. Columnas con `width` tienen un ancho fijo, mientras que las columnas con `min-width` tienen un ancho que se distribuye en proporción. | string | — | — |
+| fixed | especifica si la columna se fija a la izquierda o a la derecha. Se fijará a la izquierda si es `true` | string/boolean | true/left/right | — |
+| render-header | Función de renderizado para la cabecera de la tabla de esta columna | Function(h, { column, $index }) | — | — |
+| sortable | especifica que columna puede ser ordenado. El ordenamiento remoto puede ser hecho configurando el atributo `custom` y escucha al evento de tabla `sort-change` | boolean, string | true, false, custom | false |
+| sort-method | método de ordenamiento, funciona cuando `sortable` está en `true`. Debería devolver un número, al igual que Array.sort | Function(a, b) | — | — |
+| sort-by | especifica por cual propiedad de va a ordenar, funciona cuando `sortable` es `true` y `sort-method` es `undefined`. Si se establece a un arreglo, la columna ordenara secuencialmente por la siguiente propiedad si la anterior es igual | Function(row, index)/String/Array | — | — |
+| resizable | especifica si el ancho de la columna puede ser redimensionado, funciona cuando `border` de `el-table` está en `true` | boolean | — | false |
+| formatter | función que formatea el contenido de la celda | Function(row, column, cellValue) | — | — |
+| show-overflow-tooltip | especifica si el _tooltip_ debe ocultarse o mostrarse al hacer _hover_ en la celda | boolean | — | false |
+| align | alineación | string | left/center/right | left |
+| header-align | alineación de la cabecera de la tabla. Si se omite, se aplicará el valor del atributo anterior. | String | left/center/right | — |
+| class-name | nombre de clase de la celda en la columna | string | — | — |
+| label-class-name | nombre de clase de la etiqueta de esta columna class name of the label of this column | string | — | — |
+| selectable | función que determina si una cierta fila puede ser seleccionada, funciona cuando `type` esta en `selection` | Function(row, index) | — | — |
+| reserve-selection | especifica si se reserva la selección después de actualizar los datos, funciona cuando `type` está en `selection` | boolean | — | false |
+| filters | un arreglo de opciones para filtrado de datos. Para cada elemento en este arreglo, `text` y `value` son obligatorios | Array[{ text, value }] | — | — |
+| filter-placement | colocación para el menu desplegable del filtro | String | same as Tooltip's `placement` | — |
+| filter-multiple | especifica si el filtrado de datos soporta múltiples opciones | Boolean | — | true |
+| filter-method | método para filtrado de datos. Si `filter-multiple` está habilitado, este método se invocará varias veces para cada fila, y una fila puede mostrar si una de las llamadas devuelve `true`  | Function(value, row) | — | — |
+| filtered-value | el valor del filtro para los datos seleccionados, puede ser útil cuando el encabezado de la tabla se representará con `render-header` | Array | — | — |
