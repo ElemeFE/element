@@ -181,12 +181,12 @@ Muestra una animación de pantalla completa mientras se cargan los datos
     type="primary"
     @click="openFullScreen"
     v-loading.fullscreen.lock="fullscreenLoading">
-    Como una directiva
+    Como directiva
   </el-button>
   <el-button
     type="primary"
     @click="openFullScreen2">
-    Como un servicio
+    Como servicio
   </el-button>
 </template>
 
