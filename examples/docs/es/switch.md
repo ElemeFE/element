@@ -24,11 +24,10 @@
 
 ## Switch
 
-Switch es utilizdo para realizar cambios entre dos estados opuestos.
+Switch is used for switching between two opposing states.
 
-### Uso básico
-
-:::demo Enlaza `v-model` a una variable de tipo `Boolean`. Los atributos `active-color` y `inactive-color` deciden el color de fondo en cada estado.
+### Basic usage
+:::demo Bind `v-model` to a `Boolean` typed variable. The `active-color` and `inactive-color` attribute decides the background color in two states.
 
 ```html
 <el-switch v-model="value1">
@@ -52,8 +51,8 @@ Switch es utilizdo para realizar cambios entre dos estados opuestos.
 ```
 :::
 
-### Texto de descripción
-:::demo Puedes agregar los atributos `active-text` y `inactive-text` para mostrar los textos.
+### Text description
+:::demo You can add `active-text` and `inactive-text` attribute to show texts.
 
 ```html
 <el-switch
@@ -83,9 +82,9 @@ Switch es utilizdo para realizar cambios entre dos estados opuestos.
 ```
 :::
 
-### Tipos de valores extendidos
+### Extended value types
 
-:::demo Puedes establecer los atributos `active-value` y `inactive-value`. Ambos reciben valores de tipo `Boolean`, `String` o `Number`.
+:::demo You can set `active-value` and `inactive-value` attributes. They both receive a `Boolean`, `String` or `Number` typed value.
 
 ```html
 <el-tooltip :content="'Switch value: ' + value5" placement="top">
@@ -113,7 +112,7 @@ Switch es utilizdo para realizar cambios entre dos estados opuestos.
 
 ### Disabled
 
-:::demo Agregar el atributo `disabled` desactiva el componente Switch.
+:::demo Adding the `disabled` attribute disables Switch.
 
 ```html
 <el-switch
@@ -138,30 +137,29 @@ Switch es utilizdo para realizar cambios entre dos estados opuestos.
 ```
 :::
 
-### Atributos
+### Attributes
 
- Atributo      | Descripción          | Tipo      | Valores aceptados       | Por defecto
+ Attribute      | Description          | Type      | Accepted Values       | Default
 ----| ----| ----| ----|----
 disabled | whether Switch is disabled | boolean | — | false
-width | ancho del componente Switch | number | — | 40
-active-icon-class | nombre de la clase del icono mostrado en el estado `on`, sobreescribe `active-text` | string | — | —
-inactive-icon-class |nombre de la clase del icono mostrado en el estado `off`, sobreescribe `inactive-text`| string | — | —
-active-text | texto mostrado en el estado `on` | string | — | —
-inactive-text | texto mostrado en el estado `off` | string | — | —
-active-value  | cambia su valor cuando se encuentra en el estado `on` | boolean / string / number | — | true
-inactive-value  | cambia su valor cuando se encuentra en el estado `off` | boolean / string / number | — | false
-active-color | color de fondo cuando se encuentra en el estado `on` | string | — | #409EFF
-inactive-color | color de fondo cuando se encuentra en el estado `off` | string | — | #C0CCDA
-name| nombre de entrada del componente Switch | string | — | —
+width | width of Switch | number | — | 40
+active-icon-class | class name of the icon displayed when in `on` state, overrides `active-text` | string | — | —
+inactive-icon-class |class name of the icon displayed when in `off` state, overrides `inactive-text`| string | — | —
+active-text | text displayed when in `on` state | string | — | —
+inactive-text | text displayed when in `off` state | string | — | —
+active-value  | switch value when in `on` state | boolean / string / number | — | true
+inactive-value  | switch value when in `off` state | boolean / string / number | — | false
+active-color | background color when in `on` state | string | — | #409EFF
+inactive-color | background color when in `off` state | string | — | #C0CCDA
+name| input name of Switch | string | — | —
 
-### Eventos
+### Events
 
- Nombre del evento | Descripción | Parametro
+ Event Name | Description | Parameters
 ---- | ----| ----
-change | se dispara cuando el valor cambia | valor 
-después de cambiar
+change | triggers when value changes | value after changing
 
-### Metodos
-Metodo | Descripción | Parametro
+### Methods
+Method | Description | Parameters
 ------|--------|-------
-focus | foco al componente Switch | —
+focus | focus the Switch component | —
