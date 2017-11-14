@@ -1,5 +1,12 @@
 ## Changelog
 
+### 1.4.10
+
+*2017-11-14*
+
+- Fixed missing Tooltip registration in Menu, #7996
+- Fixed console error of `clientHeight` when `disabled` of Select dynamically updates, #8018 (by @wubaiqing)
+
 ### 1.4.9
 
 *2017-11-01*
