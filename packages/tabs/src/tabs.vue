@@ -10,7 +10,7 @@
 
     props: {
       type: String,
-      activeName: String,
+      activeName: String, // no use any more
       closable: Boolean,
       addable: Boolean,
       value: {},
@@ -18,7 +18,8 @@
       tabPosition: {
         type: String,
         default: 'top'
-      }
+      },
+      token: String
     },
 
     provide() {
@@ -68,6 +69,11 @@
       },
       setCurrentName(value) {
         this.currentName = value;
+        let url = new URL(window.location.href);
+        if (this.token) {
+          url.searchParams.set(this.token, value);
+          window.history.pushState(null, document.title, url.toString());
+        }
         this.$emit('input', value);
       },
       addPanes(item) {
@@ -145,6 +151,13 @@
       );
     },
     created() {
+      if (this.token) {
+        let name = this.value || this.activeName || new URL(window.location.href).searchParams.get(this.token) || 0;
+        if (!name || !this.$slots.default.find(item=>item.componentOptions.propsData.name === name)) {
+          name = this.$slots.default.length ? this.$slots.default[0].componentOptions.propsData.name : name;
+        }
+        this.setCurrentName(name);
+      }
       if (!this.currentName) {
         this.setCurrentName('0');
       }
