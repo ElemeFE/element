@@ -57,13 +57,13 @@
 
 ## Tooltip
 
-Display prompt information for mouse hover.
+Mostrar aviso de información para el hover del mouse.
 
-### Basic usage
+### Uso básico
 
-Tooltip has 9 placements.
+Tooltip tiene 9 colocaciones.
 
-:::demo Use attribute `content` to set the display content when hover. The attribute `placement` determines the position of the tooltip. Its value is `[orientation]-[alignment]` with four orientations `top`, `left`, `right`, `bottom` and three alignments `start`, `end`, `null`, and the default alignment is null. Take `placement="left-end"` for example, Tooltip will display on the left of the element which you are hovering and the bottom of the tooltip aligns with the bottom of the element.
+:::demo Usar el atributo `content` para establecer el contenido que se mostrará al hacer hover. El atributo `placement` determina la posición del tooltip. Su valor es `[orientation]-[alignment]` con cuatro orientaciones `top`, `left`, `right`, `bottom` y tres alineaciones `start`, `end`, `null`, la alineación default es null. Tome `placement="left-end"` como ejemplo, Tooltip será mostrado en la izquierda del elemento en que se esté haciendo hover y el fondo del tooltip se alineará con el fondo del elemento.
 ```html
 <div class="box">
   <div class="top">
@@ -154,11 +154,11 @@ Tooltip has 9 placements.
 :::
 
 
-### Theme
+### Tema
 
-Tooltip has two themes: `dark` and `light`。
+Tooltip tiene dos temas: `dark` and `light`.
 
-:::demo Set `effect` to modify theme, and the default value is `dark`.
+:::demo Establecer `effect` para modificar el tema, el valor por defecto es `dark`.
 ```html
 <el-tooltip content="Top center" placement="top">
   <el-button>Dark</el-button>
@@ -169,11 +169,11 @@ Tooltip has two themes: `dark` and `light`。
 ```
 :::
 
-### More Content
+### Más Contenido
 
-Display multiple lines of text and set their format.
+Despliegue múltiples líneas de texto y establezca su formato.
 
-:::demo Override attribute `content` of `el-tooltip` by adding a slot named `content`.
+:::demo Sobre-escribir el atributo `content` del `el-tooltip` al añadir un slot llamado `content`.
 ```html
 <el-tooltip placement="top">
   <div slot="content">multiple lines<br/>second line</div>
@@ -182,15 +182,15 @@ Display multiple lines of text and set their format.
 ```
 :::
 
-### Advanced usage
+### Uso Avanzado
 
-In addition to basic usages, there are some attributes that allow you to customize your own:
+Adicional a los usos básicos, existen algunos atributos que permiten la personalización: 
 
-`transition` attribute allows you to customize the animation in which the tooltip shows or hides, and the default value is el-fade-in-linear.
+el atributo `transition` permite personalizar la animación con la que el Tooltip se muestra o se esconda, el valor por defecto es `is el-fade-in-linear`.
 
-`disabled` attribute allows you to disable `tooltip`. You just need set it to `true`.
+el atributo `disabled` permite deshabilitar `tooltip`. Solo es necesario definirlo como `true`.
 
-In fact, Tooltip is an extension based on [Vue-popper](https://github.com/element-component/vue-popper), you can use any attribute that are allowed in Vue-popper.
+De hecho, Tooltip es una extension basada en [Vue-popper](https://github.com/element-component/vue-popper), es posible utilizar cualquier atributo permitido en Vue-popper.
 
 :::demo
 ```html
@@ -217,26 +217,27 @@ In fact, Tooltip is an extension based on [Vue-popper](https://github.com/elemen
 
 
 :::tip
-The `router-link` component is not supported in tooltip, please use `vm.$router.push`.
+El componente `router-link` no es soportado por Tooltip, favor de usar `vm.$router.push`.
 
-Disabled form elements are not supported for Tooltip, more information can be found at [MDN](https://developer.mozilla.org/en-US/docs/Web/Events/mouseenter). You need to wrap the disabled form element with a container element for Tooltip to work.
+Elementos de forma deshabilitados no son soportados por Tooltip, más información puede ser encontrada en [MDN](https://developer.mozilla.org/en-US/docs/Web/Events/mouseenter).
+Es necesario envolver los elementos de forma deshabilitados en un elemento contenedor para que Tooltipo funcione.
 :::
 
 
-### Attributes
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
+### Atributos
+| Atributo      | Descripción          | Tipo      | Valores Aceptados      | Default  |
 |----------------|---------|-----------|-------------|--------|
-|  effect   |  Tooltip theme  | string   | dark/light  | dark  |
-|  content  | display content, can be overridden by `slot#content` | String   | — | — |
-|  placement | position of Tooltip   | string    |  top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end |  bottom |
-|  value(v-model) | visibility of Tooltip | boolean           | — |  false |
-|  disabled       |  whether Tooltip is disabled  | boolean    | — |  false |
-|  offset        |  offset of the Tooltip   | number    | — |  0 |
-|  transition     |  animation name | string             | — | el-fade-in-linear |
-|  visible-arrow   |  whether an arrow is displayed. For more information, check [Vue-popper](https://github.com/element-component/vue-popper) page | boolean | — | true |
-|  popper-options        | [popper.js](https://popper.js.org/documentation.html) parameters | Object            | refer to [popper.js](https://popper.js.org/documentation.html) doc | `{ boundariesElement: 'body', gpuAcceleration: false }` |
-| open-delay | delay of appearance, in millisecond | number | — | 0 |
-| manual | whether to control Tooltip manually. `mouseenter` and `mouseleave` won't have effects if set to `true` | boolean | — | false |
-|  popper-class  |  custom class name for Tooltip's popper | string | — | — |
-| enterable | whether the mouse can enter the tooltip | Boolean | — | true |
-| hide-after | timeout in milliseconds to hide tooltip | number | — | 0 |
+|  effect   |  tema del Tooltip  | string   | dark/light  | dark  |
+|  content  | contenido a mostrar, puede ser sobre-escrito por `slot#content` | string   | — | — |
+|  placement | posición del Tooltip  | string    |  top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end |  bottom |
+|  value(v-model) | visibilidad del Tooltip | boolean           | — |  false |
+|  disabled       |  saber si el Tooltip se encuentra deshabilitado | boolean    | — |  false |
+|  offset        |  offset del Tooltip   | number    | — |  0 |
+|  transition     |  nombre de animación | string             | — | el-fade-in-linear |
+|  visible-arrow   |  saber si una flecha es mostrada. Para mayor información, revisar la página de [Vue-popper](https://github.com/element-component/vue-popper) | boolean | — | true |
+|  popper-options        | parámetros de [popper.js](https://popper.js.org/documentation.html) | Object            | referirse a la documentación de [popper.js](https://popper.js.org/documentation.html) | `{ boundariesElement: 'body', gpuAcceleration: false }` |
+| open-delay | retraso de la apariencia, en milisegundos | number | — | 0 |
+| manual | saber si el Tooltipo será controlado de forma manual. `mouseenter` y `mouseleave` no tendrán efecto si fue establecido como `true` | boolean | — | false |
+|  popper-class  |  nombre de clase personalizada para el popper del Tooltip | string | — | — |
+| enterable | saber si el mouse puede entrar al Tooltip | Boolean | — | true |
+| hide-after | tiempo a esperar en milisegundos para esconder el Tooltip | number | — | 0 |
