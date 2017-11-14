@@ -186,7 +186,7 @@
             // keydown up/down/left/right/enter
             events.on.keydown = (ev) => {
               const keyCode = ev.keyCode;
-              if (![37, 38, 39, 40, 13, 9, 27].includes(keyCode)) {
+              if (![37, 38, 39, 40, 13, 9, 27].indexOf(keyCode) > -1) {
                 return;
               }
               const currentEle = ev.target;
@@ -194,7 +194,7 @@
               const menuItemList = parentEle.querySelectorAll("[tabindex='-1']");
               const currentIndex = Array.prototype.indexOf.call(menuItemList, currentEle); // 当前索引
               let nextIndex, nextMenu;
-              if ([38, 40].includes(keyCode)) {
+              if ([38, 40].indexOf(keyCode) > -1) {
                 if (keyCode === 38) { // up键
                   nextIndex = currentIndex !== 0 ? (currentIndex - 1) : currentIndex;
                 } else if (keyCode === 40) { // down
