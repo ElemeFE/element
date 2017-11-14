@@ -177,6 +177,7 @@ export const addResizeListener = function(element, fn) {
 
 /* istanbul ignore next */
 export const removeResizeListener = function(element, fn) {
+  if (!element || !element.__resizeListeners__) return;
   if (attachEvent) {
     element.detachEvent('onresize', fn);
   } else {

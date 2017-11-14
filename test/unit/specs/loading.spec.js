@@ -1,3 +1,4 @@
+import { getStyle } from '../../../src/utils/dom';
 import { createVue, destroyVM } from '../util';
 import Vue from 'vue';
 import LoadingRaw from 'packages/loading';
@@ -142,7 +143,7 @@ describe('Loading', () => {
         }
       }, true);
       Vue.nextTick(() => {
-        expect(document.body.style.overflow).to.equal('hidden');
+        expect(getStyle(document.body, 'overflow')).to.equal('hidden');
         vm.loading = false;
         document.body.removeChild(document.querySelector('.el-loading-mask'));
         document.body.removeChild(vm.$el);
@@ -197,7 +198,7 @@ describe('Loading', () => {
       expect(mask.parentNode).to.equal(container);
       loadingInstance.close();
       setTimeout(() => {
-        expect(container.style.position).to.equal('relative');
+        expect(getStyle(container, 'position')).to.equal('relative');
         done();
       }, 200);
     });
@@ -243,7 +244,7 @@ describe('Loading', () => {
 
     it('lock', () => {
       loadingInstance = Loading({ lock: true });
-      expect(document.body.style.overflow).to.equal('hidden');
+      expect(getStyle(document.body, 'overflow')).to.equal('hidden');
     });
 
     it('text', () => {

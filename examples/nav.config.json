@@ -1,6 +1,18 @@
 {
   "zh-CN": [
     {
+      "name": "更新日志",
+      "path": "/changelog"
+    },
+    {
+      "name": "Element React",
+      "href": "https://eleme.github.io/element-react/"
+    },
+    {
+      "name": "Element Angular",
+      "href": "https://element-angular.faas.ele.me/"
+    },
+    {
       "name": "开发指南",
       "children": [
         {
@@ -26,15 +38,7 @@
       ]
     },
     {
-      "name": "更新日志",
-      "path": "/changelog"
-    },
-    {
-      "name": "Element React",
-      "href": "https://eleme.github.io/element-react/"
-    },
-    {
-      "name": "基础组件",
+      "name": "组件",
       "groups": [
         {
           "groupName": "Basic",
@@ -42,6 +46,10 @@
             {
               "path": "/layout",
               "title": "Layout 布局"
+            },
+            {
+              "path": "/container",
+              "title": "Container 布局容器"
             },
             {
               "path": "/color",
@@ -243,6 +251,18 @@
   ],
   "en-US": [
     {
+      "name": "Changelog",
+      "path": "/changelog"
+    },
+    {
+      "name": "Element React",
+      "href": "https://eleme.github.io/element-react/"
+    },
+    {
+      "name": "Element Angular",
+      "href": "https://element-angular.faas.ele.me/"
+    },
+    {
       "name": "Development",
       "children": [
         {
@@ -268,14 +288,6 @@
       ]
     },
     {
-      "name": "Changelog",
-      "path": "/changelog"
-    },
-    {
-      "name": "Element React",
-      "href": "https://eleme.github.io/element-react/"
-    },
-    {
       "name": "Components",
       "groups": [
         {
@@ -284,6 +296,10 @@
             {
               "path": "/layout",
               "title": "Layout"
+            },
+            {
+              "path": "/container",
+              "title": "Layout Container"
             },
             {
               "path": "/color",

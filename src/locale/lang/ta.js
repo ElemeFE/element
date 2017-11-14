@@ -16,6 +16,10 @@ export default {
       startTime: 'தொடங்கும் நேரம்',
       endDate: 'முடியும் தேதி',
       endTime: 'முடியும் நேரம்',
+      prevYear: 'Previous Year', // to be translated
+      nextYear: 'Next Year', // to be translated
+      prevMonth: 'Previous Month', // to be translated
+      nextMonth: 'Next Month', // to be translated
       year: 'வருடம்',
       month1: 'ஜனவரி',
       month2: 'பிப்ரவரி',
@@ -77,6 +81,7 @@ export default {
       error: 'பொருத்தாமில்லாத உள்ளீடு'
     },
     upload: {
+      deleteTip: 'press delete to remove', // to be translated
       delete: 'நீக்கு',
       preview: 'முன்னோட்டம் பார்',
       continue: 'தொடரு'
@@ -96,8 +101,8 @@ export default {
       noData: 'தரவு இல்லை',
       titles: ['பட்டியல் 1', 'பட்டியல் 2'],
       filterPlaceholder: 'சொல்லை உள்ளீடு செய்',
-      noCheckedFormat: '{மொத்தம்} items',
-      hasCheckedFormat: '{தேர்வு செய்யப்பட்டவைகள்}/{மொத்தம்} தேர்வு செய்யப்பட்டவைகள்'
+      noCheckedFormat: '{total} items', // to be translated
+      hasCheckedFormat: '{checked}/{total} தேர்வு செய்யப்பட்டவைகள்'
     }
   }
 };

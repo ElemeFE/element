@@ -153,7 +153,7 @@
     padding: 30px 0;
     text-align: center;
     border-right: solid 1px #EFF2F6;
-    float: left;
+    display: inline-block;
     width: 50%;
     box-sizing: border-box;
 
@@ -205,6 +205,9 @@
 | current-page | 当前页数，支持 .sync 修饰符 | Number | — | 1 |
 | layout | 组件布局，子组件名用逗号分隔| String | `sizes`, `prev`, `pager`, `next`, `jumper`, `->`, `total`, `slot` | 'prev, pager, next, jumper, ->, total'  |
 | page-sizes | 每页显示个数选择器的选项设置 | Number[] | — |  [10, 20, 30, 40, 50, 100] |
+| popper-class | 每页显示个数选择器的下拉框类名 | string | — | — |
+| prev-text | 替代图标显示的上一页文字 | string | — | — |
+| next-text | 替代图标显示的下一页文字 | string | — | — |
 
 ### Events
 | 事件名称 | 说明 | 回调参数 |

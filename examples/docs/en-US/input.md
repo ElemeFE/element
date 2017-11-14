@@ -1,18 +1,4 @@
 <script>
-  import Vue from 'vue';
-  Vue.component('my-item-en', {
-    functional: true,
-    render: function (h, ctx) {
-      var item = ctx.props.item;
-      return h('li', ctx.data, [
-        h('div', { attrs: { class: 'value' } }, [item.value]),
-        h('span', { attrs: { class: 'link' } }, [item.link])
-      ]);
-    },
-    props: {
-      item: { type: Object, required: true }
-    }
-  });
   export default {
     data() {
       return {
@@ -20,6 +6,9 @@
         input: '',
         input1: '',
         input2: '',
+        input21: '',
+        input22: '',
+        input23: '',
         input3: '',
         input4: '',
         input5: '',
@@ -66,7 +55,7 @@
       },
       createStateFilter(queryString) {
         return (state) => {
-          return (state.value.indexOf(queryString.toLowerCase()) === 0);
+          return (state.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
         };
       },
       handleSelect(item) {
@@ -85,7 +74,7 @@
 <style>
   .demo-input.demo-en-US {
     .el-select .el-input {
-      width: 110px;
+      width: 130px;
     }
     .el-input {
       width: 180px;
@@ -101,6 +90,19 @@
         vertical-align: top;
         margin: 0 10px 10px 0;
       }
+    }
+    .demo-input-suffix {
+      padding: 10px;
+    }
+    .demo-input-suffix .el-input {
+      margin-right: 15px;
+    }
+    .demo-input-label {
+      display: inline-block;
+      width: 130px;
+    }
+    .input-with-select .el-input-group__prepend {
+      background-color: #fff;
     }
     .demo-autocomplete {
       text-align: center;
@@ -190,26 +192,50 @@ export default {
 
 Add an icon to indicate input type.
 
-::: demo You can add an icon at the end of Input by setting the `icon` attribute and use `on-icon-click` hook to complete some work after clicking the icon.
-
+::: demo To add icons in Input, you can simply use `prefix-icon` and `suffix-icon` attributes. Also, the `prefix` and `suffix` named slots works as well.
 ```html
-<el-input
-  placeholder="Pick a date"
-  icon="search"
-  v-model="input2"
-  :on-icon-click="handleIconClick">
-</el-input>
+<div class="demo-input-suffix">
+  <span class="demo-input-label">Using attributes</span>
+  <el-input
+    placeholder="Pick a date"
+    suffix-icon="el-icon-date"
+    v-model="input2">
+  </el-input>
+  <el-input
+    placeholder="Type something"
+    prefix-icon="el-icon-search"
+    v-model="input21">
+  </el-input>
+</div>
+<div class="demo-input-suffix">
+  <span class="demo-input-label">Using slots</span>
+  <el-input
+    placeholder="Pick a date"
+    v-model="input22">
+    <i slot="suffix" class="el-input__icon el-icon-date"></i>
+  </el-input>
+  <el-input
+    placeholder="Type something"
+    v-model="input23">
+    <i slot="prefix" class="el-input__icon el-icon-search"></i>
+  </el-input>
+</div>
+
+<style>
+  .demo-input-label {
+    display: inline-block;
+    width: 130px;
+  }
+</style>
 
 <script>
 export default {
   data() {
     return {
-      input2: ''
-    }
-  },
-  methods: {
-    handleIconClick(ev) {
-      console.log(ev);
+      input2: '',
+      input21: '',
+      input22: '',
+      input23: ''
     }
   }
 }
@@ -295,19 +321,22 @@ Prepend or append an element, generally a label or a button.
   </el-input>
 </div>
 <div style="margin-top: 15px;">
-  <el-input placeholder="Please input" v-model="input5">
+  <el-input placeholder="Please input" v-model="input5" class="input-with-select">
     <el-select v-model="select" slot="prepend" placeholder="Select">
       <el-option label="Restaurant" value="1"></el-option>
       <el-option label="Order No." value="2"></el-option>
       <el-option label="Tel" value="3"></el-option>
     </el-select>
-    <el-button slot="append" icon="search"></el-button>
+    <el-button slot="append" icon="el-icon-search"></el-button>
   </el-input>
 </div>
 
 <style>
   .el-select .el-input {
     width: 110px;
+  }
+  .input-with-select .el-input-group__prepend {
+    background-color: #fff;
   }
 </style>
 <script>
@@ -331,11 +360,11 @@ export default {
 ```html
 <div class="demo-input-size">
   <el-input
-    size="large"
     placeholder="Please Input"
     v-model="input6">
   </el-input>
   <el-input
+    size="medium"
     placeholder="Please Input"
     v-model="input7">
   </el-input>
@@ -413,7 +442,7 @@ You can get some recommended tips based on the current input.
       },
       createFilter(queryString) {
         return (link) => {
-          return (link.value.indexOf(queryString.toLowerCase()) === 0);
+          return (link.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
         };
       },
       loadAll() {
@@ -443,18 +472,24 @@ You can get some recommended tips based on the current input.
 
 Customize how suggestions are displayed.
 
-:::demo
+:::demo Use `scoped slot` to customize suggestion items. In the scope, you can access the suggestion object via the `item` key.
 ```html
 <el-autocomplete
   popper-class="my-autocomplete"
   v-model="state3"
   :fetch-suggestions="querySearch"
-  custom-item="my-item-en"
   placeholder="Please input"
-  @select="handleSelect"
-  icon="edit"
-  :on-icon-click="handleIconClick"
-></el-autocomplete>
+  @select="handleSelect">
+  <i
+    class="el-icon-edit el-input__icon"
+    slot="suffix"
+    @click="handleIconClick">
+  </i>
+  <template slot-scope="props">
+    <div class="value">{{ props.item.value }}</div>
+    <span class="link">{{ props.item.link }}</span>
+  </template>
+</el-autocomplete>
 
 <style>
   .my-autocomplete {
@@ -475,19 +510,6 @@ Customize how suggestions are displayed.
 </style>
 
 <script>
-  Vue.component('my-item-en', {
-    functional: true,
-    render: function (h, ctx) {
-      var item = ctx.props.item;
-      return h('li', ctx.data, [
-        h('div', { attrs: { class: 'value' } }, [item.value]),
-        h('span', { attrs: { class: 'link' } }, [item.link])
-      ]);
-    },
-    props: {
-      item: { type: Object, required: true }
-    }
-  });
   export default {
     data() {
       return {
@@ -499,12 +521,12 @@ Customize how suggestions are displayed.
       querySearch(queryString, cb) {
         var links = this.links;
         var results = queryString ? link.filter(this.createFilter(queryString)) : links;
-        // call callback function to return recommended data
+        // call callback function to return suggestion objects
         cb(results);
       },
       createFilter(queryString) {
         return (link) => {
-          return (link.value.indexOf(queryString.toLowerCase()) === 0);
+          return (link.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
         };
       },
       loadAll() {
@@ -577,7 +599,7 @@ Search data from server-side.
       },
       createFilter(queryString) {
         return (link) => {
-          return (link.value.indexOf(queryString.toLowerCase()) === 0);
+          return (link.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
         };
       },
       handleSelect(item) {
@@ -596,16 +618,17 @@ Search data from server-side.
 
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 | ----| ----| ----| ---- | ----- |
-|type| Same as the `type` attribute of native input, except that it can be `textarea` | string | — | text |
-|value| binding value | string/number| — | — |
+|type| type of input | string | text / textarea | text |
+|value| binding value | string / number| — | — |
 |maxlength| maximum Input text length| number| — | — |
 |minlength| minimum Input text length| number | — | — |
 |placeholder| placeholder of Input| string | — | — |
 |disabled | whether Input is disabled | boolean | — | false |
-|size | size of Input, works when `type` is not 'textarea' | string | large/small/mini | — |
-|icon | icon name | string | — | — |
+|size | size of Input, works when `type` is not 'textarea' | string | medium / small / mini | — |
+| prefix-icon   | prefix icon class  | string          | — | — |
+| suffix-icon   | suffix icon class  | string          | — | — |
 |rows | number of rows of textarea, only works when `type` is 'textarea' | number | — | 2 |
-|autosize | whether textarea has an adaptive height, only works when `type` is 'textarea'. Can accept an object, e.g. { minRows: 2, maxRows: 6 }  | boolean/object | — | false |
+|autosize | whether textarea has an adaptive height, only works when `type` is 'textarea'. Can accept an object, e.g. { minRows: 2, maxRows: 6 }  | boolean / object | — | false |
 |auto-complete | same as `auto-complete` in native input | string | on/off | off |
 |name | same as `name` in native input | string | — | — |
 | readonly | same as `readonly` in native input | boolean | — | false |
@@ -615,15 +638,23 @@ Search data from server-side.
 |resize| control the resizability | string | none, both, horizontal, vertical | — |
 |autofocus | same as `autofocus` in native input | boolean | — | false |
 |form | same as `form` in native input | string | — | — |
-| on-icon-click | hook function when clicking on the input icon | function | — | — |
+| label | label text | string | — | — |
+
+### Input slots
+
+| Name | Description |
+|------|--------|
+| prefix | content as Input prefix |
+| suffix | content as Input suffix |
+| prepend | content to prepend before Input |
+| append | content to append after Input |
 
 ### Input Events
 
 | Event Name | Description | Parameters |
 |----| ----| ----|
-|click | triggers when the icon inside Input is clicked | (event: Event) |
-| blur | triggers when the icon inside Input is blur | (event: Event) |
-| focus | triggers when the icon inside Input is focus | (event: Event) |
+| blur | triggers when Input blurs | (event: Event) |
+| focus | triggers when Input focuses | (event: Event) |
 | change | triggers when the icon inside Input value change | (value: string \| number) |
 
 ### Autocomplete Attributes
@@ -632,21 +663,26 @@ Attribute | Description | Type | Options | Default
 |----| ----| ----| ---- | -----|
 |placeholder| the placeholder of Autocomplete| string | — | — |
 |disabled | whether Autocomplete is disabled  | boolean | — | false|
-| props | configuration options, see the following table | object | — | — |
+| valueKey | key name of the input suggestion object for display | string | — | value |
 |icon | icon name | string | — | — |
 |value | binding value | string | — | — |
-|custom-item | component name of your customized suggestion list item | string | — | — |
+| debounce | debounce delay when typing, in milliseconds | number | — | 300 |
 |fetch-suggestions | a method to fetch input suggestions. When suggestions are ready, invoke `callback(data:[])` to return them to Autocomplete | Function(queryString, callback) | — | — |
 | popper-class | custom class name for autocomplete's dropdown | string | — | — |
 | trigger-on-focus | whether show suggestions when input focus | boolean | — | true |
 | on-icon-click | hook function when clicking on the input icon | function | — | — |
+| name | same as `name` in native input | string | — | — |
 | select-when-unmatched | whether to emit a `select` event on enter when there is no autocomplete match | boolean | — | false |
+| label | label text | string | — | — |
 
-### props
-| Attribute | Description | Type | Accepted Values | Default |
-| --------- | ----------------- | ------ | ------ | ------ |
-| label     | specify which key of option object is used as the option's label | string | — | value |
-| value     | specify which key of option object is used as the option's value | string | — | value |
+### Autocomplete slots
+
+| Name | Description |
+|------|--------|
+| prefix | content as Input prefix |
+| suffix | content as Input suffix |
+| prepend | content to prepend before Input |
+| append | content to append after Input |
 
 ### Autocomplete Events
 
@@ -654,8 +690,7 @@ Attribute | Description | Type | Options | Default
 |----| ----| ----|
 |select | triggers when a suggestion is clicked | suggestion being clicked |
 
-
-
-
-
-
+### Methods
+| Method | Description | Parameters |
+|------|--------|-------|
+| focus | focus the Input component | — |

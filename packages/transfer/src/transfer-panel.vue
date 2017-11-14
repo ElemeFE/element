@@ -1,18 +1,29 @@
 <template>
   <div class="el-transfer-panel">
-    <p class="el-transfer-panel__header">{{ title }}</p>
+    <p class="el-transfer-panel__header">
+      <el-checkbox
+        v-model="allChecked"
+        @change="handleAllCheckedChange"
+        :indeterminate="isIndeterminate">
+        {{ title }}
+        <span>{{ checkedSummary }}</span>
+      </el-checkbox>
+    </p>
     
-    <div class="el-transfer-panel__body">
+    <div :class="['el-transfer-panel__body', hasFooter ? 'is-with-footer' : '']">
       <el-input
         class="el-transfer-panel__filter"
         v-model="query"
         size="small"
         :placeholder="placeholder"
-        :icon="inputIcon"
         @mouseenter.native="inputHover = true"
         @mouseleave.native="inputHover = false"
-        @click="clearQuery"
-        v-if="filterable"></el-input>
+        v-if="filterable">
+        <i slot="prefix"
+          :class="['el-input__icon', 'el-icon-' + inputIcon]"
+          @click="clearQuery"
+        ></i>
+      </el-input>
       <el-checkbox-group
         v-model="checked"
         v-show="!hasNoMatch && data.length > 0"
@@ -34,12 +45,7 @@
         class="el-transfer-panel__empty"
         v-show="data.length === 0 && !hasNoMatch">{{ t('el.transfer.noData') }}</p>
     </div>
-    
-    <p class="el-transfer-panel__footer">
-      <el-checkbox
-        v-model="allChecked"
-        @change="handleAllCheckedChange"
-        :indeterminate="isIndeterminate">{{ checkedSummary }}</el-checkbox>
+    <p class="el-transfer-panel__footer" v-if="hasFooter">
       <slot></slot>
     </p>
   </div>
@@ -95,7 +101,7 @@
       placeholder: String,
       title: String,
       filterable: Boolean,
-      footerFormat: Object,
+      format: Object,
       filterMethod: Function,
       defaultChecked: Array,
       props: Object
@@ -167,15 +173,13 @@
       checkedSummary() {
         const checkedLength = this.checked.length;
         const dataLength = this.data.length;
-        const { noChecked, hasChecked } = this.footerFormat;
+        const { noChecked, hasChecked } = this.format;
         if (noChecked && hasChecked) {
           return checkedLength > 0
             ? hasChecked.replace(/\${checked}/g, checkedLength).replace(/\${total}/g, dataLength)
             : noChecked.replace(/\${total}/g, dataLength);
         } else {
-          return checkedLength > 0
-            ? this.t('el.transfer.hasCheckedFormat', { total: dataLength, checked: checkedLength })
-            : this.t('el.transfer.noCheckedFormat', { total: dataLength });
+          return `${ checkedLength }/${ dataLength }`;
         }
       },
 
@@ -204,6 +208,10 @@
 
       disabledProp() {
         return this.props.disabled || 'disabled';
+      },
+
+      hasFooter() {
+        return !!this.$slots.default;
       }
     },
 
@@ -215,7 +223,7 @@
       },
 
       handleAllCheckedChange(value) {
-        this.checked = value.target.checked
+        this.checked = value
           ? this.checkableData.map(item => item[this.keyProp])
           : [];
       },

@@ -1,15 +1,21 @@
 var webpackConfig = require('../../build/cooking.test');
 
 // no need for app entry during tests
-delete webpackConfig.entry;
+// delete webpackConfig.entry;
 
 module.exports = function(config) {
-  config.set({
+  var configuration = {
     // to run in additional browsers:
     // 1. install corresponding karma launcher
     //    http://karma-runner.github.io/0.13/config/browsers.html
     // 2. add it to the `browsers` array below.
-    browsers: ['PhantomJS'],
+    browsers: ['Chrome'],
+    customLaunchers: {
+      Chrome_travis_ci: {
+        base: 'Chrome',
+        flags: ['--no-sandbox']
+      }
+    },
     frameworks: ['mocha', 'sinon-chai'],
     reporters: ['spec', 'coverage'],
     files: ['./index.js'],
@@ -26,6 +32,17 @@ module.exports = function(config) {
         { type: 'lcov', subdir: '.' },
         { type: 'text-summary' }
       ]
+    },
+    client: {
+      mocha: {
+        timeout: 4000
+      }
     }
-  });
+  };
+
+  if (process.env.TRAVIS) {
+    configuration.browsers = ['Chrome_travis_ci'];
+  }
+
+  config.set(configuration);
 };

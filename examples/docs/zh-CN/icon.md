@@ -11,17 +11,24 @@
 </script>
 <style>
   .demo-icon .source > i {
-    color: #8492a6;
+    color: #5a5e66;
     margin: 0 20px;
     font-size: 1.5em;
     vertical-align: middle;
+  }
+  
+  .demo-icon .source > i {
+      color: #5a5e66;
+      margin: 0 20px;
+      font-size: 1.5em;
+      vertical-align: middle;
   }
   
   .demo-icon .source > button {
     margin: 0 20px;
   }
 
-  .icon-list {
+  .page-component .content > ul.icon-list {
     overflow: hidden;
     list-style: none;
     padding: 0;
@@ -45,19 +52,28 @@
 
     @utils-vertical-center;
 
-    & span {
+    span {
       display: inline-block;
       line-height: normal;
       vertical-align: middle;
       font-family: 'Helvetica Neue',Helvetica,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',SimSun,sans-serif;
       color: #99a9bf;
     }
-    & i {
+    
+    i {
       display: block;
-      font-size: 24px;
+      font-size: 32px;
       margin-bottom: 15px;
-      color: #8492a6;
+      color: #5a5e66;
     }
+    
+    .icon-name {
+      display: inline-block;
+      padding: 0 3px;
+      height: 1em;
+      color: #5a5e66;
+    }
+    
     &:hover {
       color: rgb(92, 182, 255);
     }
@@ -76,7 +92,7 @@
 <i class="el-icon-edit"></i>
 <i class="el-icon-share"></i>
 <i class="el-icon-delete"></i>
-<el-button type="primary" icon="search">搜索</el-button>
+<el-button type="primary" icon="el-icon-search">搜索</el-button>
 
 ```
 :::
@@ -87,37 +103,7 @@
   <li v-for="name in icons" :key="name">
     <span>
       <i :class="'el-icon-' + name"></i>
-      {{'el-icon-' + name}}
+      <span class="icon-name">{{'el-icon-' + name}}</span>
     </span>
   </li>
 </ul>
-
-### 第三方图标库
-
-Element 的一些组件提供了 `icon` 属性（如 Input），如果希望传入第三方图标库中的图标，需要进行如下操作：
-<p>
-  <span>1.</span> 修改第三方图标库的前缀（见下方说明）
-</p>
-<p>
-  <span>2.</span> 添加以下 CSS：
-</p>
-
-```CSS
-[class^="el-icon-my"], [class*=" el-icon-my"] {
-  font-family:"your-font-family" !important;
-  
-  /* 以下内容参照第三方图标库本身的规则 */
-  font-size: inherit;
-  font-style:normal;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-```
-
-之后就可以像使用 Element 内置图标一样使用第三方图标。比如在 el-input 中：
-
-```html
-<el-input icon="my-xxx" />
-```
-
-关于如何修改第三方图标库的前缀，请参阅第三方图标库的文档。比如，如果使用 [iconfont.cn](http://iconfont.cn/)，则可以在「编辑项目」弹框中修改；如果使用 [Font Awesome](http://fontawesome.io/)，可以参考[这个示例](https://github.com/ElementUI/element-font-awesome)。

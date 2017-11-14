@@ -16,6 +16,10 @@ export default {
       startTime: 'Время начала',
       endDate: 'Дата окончания',
       endTime: 'Время окончания',
+      prevYear: 'Предыдущий год',
+      nextYear: 'Следующий год',
+      prevMonth: 'Предыдущий месяц',
+      nextMonth: 'Следующий месяц',
       year: '',
       month1: 'Январь',
       month2: 'Февраль',
@@ -78,6 +82,7 @@ export default {
       error: 'Недопустимый ввод данных'
     },
     upload: {
+      deleteTip: 'Нажмите [Удалить] для удаления',
       delete: 'Удалить',
       preview: 'Превью',
       continue: 'Продолжить'

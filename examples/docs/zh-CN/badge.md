@@ -98,7 +98,7 @@
 ```html
 <el-badge is-dot class="item">数据查询</el-badge>
 <el-badge is-dot class="item">
-  <el-button class="share-button" icon="share" type="primary"></el-button>
+  <el-button class="share-button" icon="el-icon-share" type="primary"></el-button>
 </el-badge>
 
 <style>
