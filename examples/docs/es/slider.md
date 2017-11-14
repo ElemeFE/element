@@ -26,7 +26,7 @@
   .demo-box.demo-slider .source {
     padding: 0;
   }
-  
+
   .demo-box.demo-slider .block {
     padding: 30px 24px;
     overflow: hidden;
@@ -35,13 +35,13 @@
       border-bottom: none;
     }
   }
-  
+
   .demo-box.demo-slider .demonstration {
     font-size: 14px;
     color: #8492a6;
     line-height: 44px;
   }
-  
+
   .demo-box.demo-slider .demonstration + .el-slider {
     float: right;
     width: 70%;
@@ -51,13 +51,13 @@
 
 ## Slider
 
-Drag the slider within a fixed range.
+Desliza el slider dentro de un rango fijo.
 
-### Basic usage
+### Uso básico
 
-The current value is displayed when the slider is being dragged.
+El valor actual se muestra cuando se inicia el arrastre del slider.
 
-:::demo Customize the initial value of the slider by setting the binding value.
+:::demo Personalice el valor inicial del slider configurando el valor vinculado.
 
 ```html
 <template>
@@ -104,11 +104,13 @@ The current value is displayed when the slider is being dragged.
 ```
 :::
 
-### Discrete values
+### Valores discretos
 
-The options can be discrete.
+Las opciones pueden ser discretas.
 
 :::demo Set step size with the `step` attribute. You can display breakpoints by setting the `show-stops` attribute.
+
+Configure el tamaño del paso con el atributo `step`. Puede visualizar los puntos de ruptura configurando el atributo `show-stops`.
 
 ```html
 <template>
@@ -142,11 +144,11 @@ The options can be discrete.
 ```
 :::
 
-### Slider with input box
+### Slider con input
 
-Set value via a input box.
+Inserte el valor a traves de un input
 
-:::demo Set the `show-input` attribute to display an input box on the right.
+:::demo Configure el atributo `show-input` para que muestre un input a la derecha.
 
 ```html
 <template>
@@ -170,11 +172,12 @@ Set value via a input box.
 ```
 :::
 
-### Range selection
+### Seleccion de rangos
 
-Selecting a range of values is supported.
+Se soporta la selección de un rango de valores.
 
-:::demo Setting the `range` attribute activates range mode, where the binding value is an array made up of two boundary values.
+:::demo El ajuste del atributo `range` activa el modo range, donde el valor vinculado es un array compuesto por dos valores límite.
+
 ```html
 <template>
   <div class="block">
@@ -199,9 +202,10 @@ Selecting a range of values is supported.
 ```
 :::
 
-### Vertical mode
+### Modo Vertical
 
-:::demo Setting the `vertical` attribute to `true` enables vertical mode. In vertical mode, the `height` attribute is required.
+:::demo El ajuste del atributo `vertical` a `true` habilita el modo vertical. En el modo vertical, se requiere el atributo `height` .
+
 ```html
 <template>
   <div class="block">
@@ -225,26 +229,26 @@ Selecting a range of values is supported.
 ```
 :::
 
-## Attributes
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
-|---------- |-------------- |---------- |--------------------------------  |-------- |
-| min | minimum value | number | — | 0 |
-| max | maximum value | number | — | 100 |
-| disabled | whether Slider is disabled | boolean | — | false |
-| step | step size | number | — | 1 |
-| show-input | whether to display an input box, works when `range` is false | boolean | — | false |
-| show-input-controls | whether to display control buttons when `show-input` is true | boolean | — | true |
-| show-stops | whether to display breakpoints | boolean | — | false |
-| show-tooltip | whether to display tooltip value | boolean | — | true |
-| format-tooltip | format to display tooltip value | function(value) | — | — |
-| range | whether to select a range | boolean | — | false |
-| vertical | vertical mode | boolean | — | false |
-| height | Slider height, required in vertical mode | string | — | — |
-| label | label for screen reader | string | — | — |
-|debounce| debounce delay when typing, in milliseconds, works when `show-input` is true | number | — | 300 |
+## Atributos
+| Atributo            | Descripción                              | Tipo            | Valores aceptados | Por defecto |
+| ------------------- | ---------------------------------------- | --------------- | ----------------- | ----------- |
+| min                 | valor minimo                             | number          | —                 | 0           |
+| max                 | valor máximo                             | number          | —                 | 100         |
+| disabled            | si el Slider esta deshabitado            | boolean         | —                 | false       |
+| step                | tamaño del paso                          | number          | —                 | 1           |
+| show-input          | Si se muestra el input, trabaja cuando`range`es false | boolean         | —                 | false       |
+| show-input-controls | si se muestran los botones de control cuando`show-input`es true | boolean         | —                 | true        |
+| show-stops          | si se muestran los puntos de ruptura (breakpoints) | boolean         | —                 | false       |
+| show-tooltip        | si se muestra el valor en un tooltip     | boolean         | —                 | true        |
+| format-tooltip      | formato para mostrar el valor del tooltip | function(value) | —                 | —           |
+| range               | si se usaran un rango                    | boolean         | —                 | false       |
+| vertical            | modo vertical                            | boolean         | —                 | false       |
+| height              | alto del Slider, requerido en modo vertical | string          | —                 | —           |
+| label               | etiqueta para screen reader              | string          | —                 | —           |
+| debounce            | retardo al escribir, en milisegundos, funciona cuando`show-input` es true. | number          | —                 | 300         |
 
-## Events
-| Event Name | Description | Parameters |
-|---------- |-------- |---------- |
-| change | triggers when the value changes (if the mouse is being dragged, this event only fires when the mouse is released) | value after changing |
+## Eventos
+| Nombre | Descripción                              | Parametros               |
+| ------ | ---------------------------------------- | ------------------------ |
+| change | se dispara cuando el valor cambia (si el ratón está comenzando el arrastre este evento sólo se disparara cuando se suelte el ratón) | valor despues del cambio |
 
