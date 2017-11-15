@@ -41,7 +41,8 @@
         expandTrigger: 'click',
         changeOnSelect: false,
         popperClass: '',
-        hoverTimer: 0
+        hoverTimer: 0,
+        clicking: false
       };
     },
 
@@ -148,9 +149,11 @@
 
       let hoverMenuRefs = {};
       const hoverMenuHandler = e => {
+        const activeMenu = hoverMenuRefs.activeMenu;
+        if (!activeMenu) return;
         const offsetX = e.offsetX;
-        const width = hoverMenuRefs.activeMenu.offsetWidth;
-        const height = hoverMenuRefs.activeMenu.offsetHeight;
+        const width = activeMenu.offsetWidth;
+        const height = activeMenu.offsetHeight;
 
         if (e.target === hoverMenuRefs.activeItem) {
           clearTimeout(this.hoverTimer);
@@ -186,7 +189,7 @@
             // keydown up/down/left/right/enter
             events.on.keydown = (ev) => {
               const keyCode = ev.keyCode;
-              if (![37, 38, 39, 40, 13, 9, 27].indexOf(keyCode) > -1) {
+              if ([37, 38, 39, 40, 13, 9, 27].indexOf(keyCode) < 0) {
                 return;
               }
               const currentEle = ev.target;
@@ -228,13 +231,24 @@
                 click: 'click',
                 hover: 'mouseenter'
               }[expandTrigger];
-              events.on[triggerEvent] = events.on['focus'] = () => { // focus 选中
+              const triggerHandler = () => {
                 this.activeItem(item, menuIndex);
                 this.$nextTick(() => {
                   // adjust self and next level
                   this.scrollMenu(this.$refs.menus[menuIndex]);
                   this.scrollMenu(this.$refs.menus[menuIndex + 1]);
                 });
+              };
+              events.on[triggerEvent] = triggerHandler;
+              events.on['mousedown'] = () => {
+                this.clicking = true;
+              };
+              events.on['focus'] = () => { // focus 选中
+                if (this.clicking) {
+                  this.clicking = false;
+                  return;
+                }
+                triggerHandler();
               };
             } else {
               events.on.click = () => {
