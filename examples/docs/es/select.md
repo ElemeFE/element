@@ -105,11 +105,11 @@
         states: ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
       };
     },
-
+    
     mounted() {
       this.list = this.states.map(item => { return { value: item, label: item }; });
     },
-
+    
     methods: {
       remoteMethod(query) {
         if (query !== '') {
@@ -134,11 +134,11 @@
 
 ## Select
 
-When there are plenty of options, use a drop-down menu to display and select desired ones.
+Cuando haya muchas opciones, utilice un menú desplegable para mostrar y seleccionar las que desee.
 
-### Basic usage
+### Uso básico
 
-:::demo `v-model` is the value of `el-option` that is currently selected.
+:::demo `v-model` es el valor de  `el-option` que está seleccionado actualmente.
 
 ```html
 <template>
@@ -180,9 +180,9 @@ When there are plenty of options, use a drop-down menu to display and select des
 ```
 :::
 
-### Disabled option
+### Disabled en el-option
 
-:::demo Set the value of `disabled` in `el-option` to `true` to disable this option.
+:::demo Establezca el valor de `disabled` en `el-option`  como `true` para deshabilitar esta opción.
 
 ```html
 <template>
@@ -226,11 +226,12 @@ When there are plenty of options, use a drop-down menu to display and select des
 ```
 :::
 
-### Disabled select
+### Disabled en el-select
 
-Disable the whole component.
+Desactivar todo el componente.
 
-:::demo Set `disabled` of `el-select` to make it disabled.
+:::demo Configure `disabled` de `el-select` para deshabilitarla.
+
 ```html
 <template>
   <el-select v-model="value3" disabled placeholder="Select">
@@ -271,11 +272,12 @@ Disable the whole component.
 ```
 :::
 
-### Clearable single select
+### Select simple limpiable
 
-You can clear Select using a clear icon.
+Puede limpiar un Select con un icono.
 
-:::demo Set `clearable` attribute for `el-select` and a clear icon will appear. Note that `clearable` is only for single select.
+:::demo Establezca el atributo `clearable` para `el-select`  y aparecerá un icono. Tenga en cuenta que la opción `clearable` es sólo para una selección individual.
+
 ```html
 <template>
   <el-select v-model="value4" clearable placeholder="Select">
@@ -316,11 +318,12 @@ You can clear Select using a clear icon.
 ```
 :::
 
-### Basic multiple select
+### Selección múltiple básica
 
-Multiple select uses tags to display selected options.
+Selección multiple utiliza tags para mostrar las opciones seleccionadas.
 
-:::demo Set `multiple` attribute for `el-select` to enable multiple mode. In this case, the value of `v-model` will be an array of selected options.
+:::demo Configure el atributo `multiple` para `el-select` para habilitar el modo múltiple. En este caso, el valor del `v-model` será un array de opciones seleccionadas.
+
 ```html
 <template>
   <el-select v-model="value5" multiple placeholder="Select">
@@ -361,11 +364,11 @@ Multiple select uses tags to display selected options.
 ```
 :::
 
-### Custom template
+### Personalizar template
 
-You can customize HTML templates for options.
+Puede personalizar templates HTML para las opciones.
 
-:::demo Insert customized HTML templates into the slot of `el-option`.
+:::demo Inserte templates HTML personalizados en el slot de `el-option`.
 
 ```html
 <template>
@@ -412,11 +415,11 @@ You can customize HTML templates for options.
 ```
 :::
 
-### Grouping
+### Agrupando
 
-Display options in groups.
+Mostrar opciones en grupos.
 
-:::demo Use `el-option-group` to group the options, and its `label` attribute stands for the name of the group.
+:::demo Utilice `el-option-group` para agrupar las opciones, y su atributo `label` representa el nombre del grupo.
 
 ```html
 <template>
@@ -472,11 +475,12 @@ Display options in groups.
 ```
 :::
 
-### Option filtering
+### Filtrado de opciones
 
-You can filter options for your desired ones.
+Puede filtrar opciones como lo desee.
 
-:::demo Adding `filterable` to `el-select` enables filtering. By default, Select will find all the options whose `label` attribute contains the input value. If you prefer other filtering strategies, you can pass the `filter-method`. `filter-method` is a `Function` that gets called when the input value changes, and its parameter is the current input value.
+:::demo Añadir `filterable` a `el-select` permite filtrar. Por defecto, Select buscará todas las opciones cuyo atributo`label` contenga el valor del input. Si prefiere otras estrategias de filtrado, puede pasar el `filter-method`. `filter-method` es una función que se llama cuando el valor del input cambia, y su parámetro es el valor del input actual.
+
 ```html
 <template>
   <el-select v-model="value8" filterable placeholder="Select">
@@ -517,11 +521,11 @@ You can filter options for your desired ones.
 ```
 :::
 
-### Remote Search
+### Búsqueda remota
 
-Enter keywords and search data from server.
+Introduzca palabras y datos para buscar desde el servidor.
 
-:::demo Set the value of `filterable` and `remote` with `true` to enable remote search, and you should pass the `remote-method`. `remote-method` is a `Function` that gets called when the input value changes, and its parameter is the current input value. Note that if `el-option` is rendered with the `v-for` directive, you should add the `key` attribute for `el-option`. Its value needs to be unique, such as `item.value` in the following example.
+:::demo Configure el valor de `filterable` y `remote` con `true` para habilitar la búsqueda remota, y debería pasar el método `remote-method`. `remote-method` es una función que se llama cuando el valor del input cambia, y su parámetro es el valor del input actual. Tenga en cuenta que si `el-option` se presenta con la directiva `v-for`, debe agregar el atributo `key` para `el-option`. Su valor tiene que ser unívoco, como el valor de `item.value` en el ejemplo siguiente.
 
 ```html
 <template>
@@ -596,9 +600,11 @@ Enter keywords and search data from server.
 ```
 :::
 
-### Create new items
-Create and select new items that are not included in select options
-:::demo By using the `allow-create` attribute, users can create new items by typing in the input box. Note that for `allow-create` to work, `filterable` must be `true`.
+### Crear nuevos items
+Crear y seleccionar nuevos items que no están incluidas en las opciones de selección.
+
+:::demo Al utilizar el atributo `allow-create`, los usuarios pueden crear nuevos elementos escribiendo en el cuadro del input. Tenga en cuenta que para que `allow-create` funcione, `filterable` debe ser `true`.
+
 ```html
 <template>
   <el-select
@@ -639,57 +645,59 @@ Create and select new items that are not included in select options
 :::
 
 :::tip
-If the binding value of Select is an object, make sure to assign `value-key` as its unique identity key name.
+
+Si el valor de encuadernación de Select es un objeto, asegúrese de asignar `value-key` como el nombre único de la clave de identidad.
+
 :::
 
-### Select Attributes
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
-|---------- |-------------- |---------- |--------------------------------  |-------- |
-| multiple | whether multiple-select is activated | boolean | — | false |
-| disabled | whether Select is disabled | boolean | — | false |
-| value-key | unique identity key name for value, required when value is an object | string | — | value |
-| size | size of Input | string | large/small/mini | — |
-| clearable | whether single select can be cleared | boolean | — | false |
-| multiple-limit | maximum number of options user can select when `multiple` is `true`. No limit when set to 0 | number | — | 0 |
-| name | the name attribute of select input | string | — | — |
-| placeholder | placeholder | string | — | Select |
-| filterable | whether Select is filterable | boolean | — | false |
-| allow-create | whether creating new items is allowed. To use this, `filterable` must be true | boolean | — | false |
-| filter-method | custom filter method | function | — | — |
-| remote | whether options are loaded from server | boolean | — | false |
-| remote-method | custom remote search method | function | — | — |
-| loading | whether Select is loading data from server | boolean | — | false |
-| loading-text | displayed text while loading data from server | string | — | Loading |
-| no-match-text | displayed text when no data matches the filtering query | string | — | No matching data |
-| no-data-text | displayed text when there is no options | string | — | No data |
-| popper-class | custom class name for Select's dropdown | string | — | — |
-| reserve-keyword | when `multiple` and `filter` is true, whether to reserve current keyword after selecting an option | boolean | — | false |
-| default-first-option | select first matching option on enter key. Use with `filterable` or `remote` | boolean | - | false |
+### Select atributos
+| Atributo             | Descripción                              | Tipo     | Valores aceptados | Por defecto      |
+| -------------------- | ---------------------------------------- | -------- | ----------------- | ---------------- |
+| multiple             | si multiple-select esta activo           | boolean  | —                 | false            |
+| disabled             | si Select esta deshabilitado             | boolean  | —                 | false            |
+| value-key            | nombre de clave de identidad única para el valor, necesario cuando el valor es un objeto. | string   | —                 | value            |
+| size                 | tamaño del Input                         | string   | large/small/mini  | —                |
+| clearable            | si el single select puede ser limpiable  | boolean  | —                 | false            |
+| multiple-limit       | maximo numero de opciones que el usuario puede seleccionar cuando `multiple` es `true`.  Sin límite cuando se fija a 0 | number   | —                 | 0                |
+| name                 | el atributo `name` del input seleccionado | string   | —                 | —                |
+| placeholder          | placeholder                              | string   | —                 | Select           |
+| filterable           | si Select es filtrable                   | boolean  | —                 | false            |
+| allow-create         | si esta permitido crear nuevos items. Para usar esto, `filterable` debe ser `true`. | boolean  | —                 | false            |
+| filter-method        | metodo de filtrado personalizado         | function | —                 | —                |
+| remote               | si las opciones se traeran desde el servidor | boolean  | —                 | false            |
+| remote-method        | metodo de busqueda remota personalizada  | function | —                 | —                |
+| loading              | si Select está cargando datos del servidor | boolean  | —                 | false            |
+| loading-text         | texto mostrado durante la carga de datos del servidor | string   | —                 | Loading          |
+| no-match-text        | texto mostrado cuando ningún dato coincide con la consulta de filtrado. | string   | —                 | No matching data |
+| no-data-text         | texto mostrado cuando no hay opciones    | string   | —                 | No data          |
+| popper-class         | nombre de clase personalizado para el menú desplegable del Select | string   | —                 | —                |
+| reserve-keyword      | cuando `multiple` y `filter` es `true`, si se debe reservar la palabra clave actual después de seleccionar una opción. | boolean  | —                 | false            |
+| default-first-option | seleccione la primera opción de coincidencia en la tecla enter. Uso con `filterable` o `remote`. | boolean  | -                 | false            |
 
-### Select Events
-| Event Name | Description | Parameters |
-|---------|---------|---------|
-| change | triggers when the selected value changes | current selected value |
-| visible-change | triggers when the dropdown appears/disappears | true when it appears, and false otherwise |
-| remove-tag | triggers when a tag is removed in multiple mode | removed tag value |
-| clear | triggers when the clear icon is clicked in a clearable Select | — |
-| blur | triggers when Input blurs | (event: Event) |
-| focus | triggers when Input focuses | (event: Event) |
+### Select Eventos
+| Nombre         | Descripción                              | Parametros                               |
+| -------------- | ---------------------------------------- | ---------------------------------------- |
+| change         | se dispara cuando el valor del select cambia | valor actual del select                  |
+| visible-change | se dispara cuando el menu desplegable aparece o desaparece | true cuando aparece, y false en otro caso |
+| remove-tag     | se dispara cuando un tag es removido en modo multiple | el valor del tag removido                |
+| clear          | se dispara cuando el icono se clickea en un Select limpiable | —                                        |
+| blur           | se dispara cuando el input pierde el foco | (event: Event)                           |
+| focus          | se dispara cuando el input obtiene el foco | (event: Event)                           |
 
-### Option Group Attributes
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
-|---------- |-------------- |---------- |--------------------------------  |-------- |
-| label | name of the group | string | — | — |
-| disabled | whether to disable all options in this group | boolean | — | false |
+### Atributos del grupo de opciones
+| Atributo | Descripción                              | Tipo    | Valores aceptados | Por defecto |
+| -------- | ---------------------------------------- | ------- | ----------------- | ----------- |
+| label    | nombre del grupo                         | string  | —                 | —           |
+| disabled | si se deshabilitan todas las opciones del grupo | boolean | —                 | false       |
 
-### Option Attributes
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
-|---------- |-------------- |---------- |--------------------------------  |-------- |
-| value | value of option | string/number/object | — | — |
-| label | label of option, same as `value` if omitted | string/number | — | — |
-| disabled | whether option is disabled | boolean | — | false |
+### Atributos de opciones
+| Atributo | Descripción                              | Tipo                 | Valores aceptados | Por defecto |
+| -------- | ---------------------------------------- | -------------------- | ----------------- | ----------- |
+| value    | valor de option                          | string/number/object | —                 | —           |
+| label    | etiqueta de option, es igual a  `value` si se omite | string/number        | —                 | —           |
+| disabled | si  option esta deshabilitado            | boolean              | —                 | false       |
 
-### Methods
-| Method | Description | Parameters |
-|------|--------|-------|
-| focus | focus the Input component | - |
+### Metodos
+| Metodo | Descripción                 | Parametros |
+| ------ | --------------------------- | ---------- |
+| focus  | Foco en el componente input | -          |
