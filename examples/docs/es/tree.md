@@ -286,11 +286,11 @@
 
 ## Tree
 
-Display a set of data with hierarchies.
+Muestra un conjunto de datos jerárquicos.
 
-### Basic usage
+### Uso básico
 
-Basic tree structure.
+Estructura básica de árbol.
 
 ::: demo
 ```html
@@ -351,11 +351,11 @@ Basic tree structure.
 ```
 :::
 
-### Selectable
+### Seleccionable
 
-Used for node selection.
+Usado para la selección de nodos.
 
-::: demo This example also shows how to load node data asynchronously.
+::: demo Este ejemplo también muestra como cargar los datos de forma asíncrona.
 ```html
 <el-tree
   :props="props"
@@ -419,9 +419,9 @@ Used for node selection.
 ```
 :::
 
-### Custom leaf node in lazy mode
+### Nodos hoja en modo perezoso
 
-::: demo A node's data is not fetched until it is clicked, so the Tree cannot predict whether a node is a leaf node. That's why a drop-down button is added to each node, and if it is a leaf node, the drop-down button will disappear when clicked. That being said, you can also tell the Tree in advance whether the node is a leaf node, avoiding the render of the drop-down button before a leaf node.
+:::demo Los datos de un nodo no son cargados hasta que no es pinchado, así que el árbol no puede predecir si es una hoja. Por eso a cada nodo se le añade el botón de desplegar, y si el nodo es una hoja el botón desaparecerá al pinchar en él. También puedes decirle al árbol que el nodo es una hoja de antemano, y así evitas que muestre el botón de desplegar.
 ```html
 <el-tree
   :props="props1"
@@ -465,11 +465,11 @@ Used for node selection.
 ```
 :::
 
-### Disabled checkbox
+### Checkbox desactivados
 
-The checkbox of a node can be set as disabled.
+El checkbox de un nodo se puede poner como desactivado.
 
-::: demo In the example, 'disabled' property is declared in defaultProps, and some nodes are set as 'disabled:true'. The corresponding checkboxes are disabled and can't be clicked.
+::: demo En el ejemplo, la propiedad 'disabled' se declara en defaultProps, y algunos nodos se ponen como 'disabled:true'. Los checkboxes correspondientes son desactivados y no se pueden pinchar.
 ```html
 <el-tree
   :data="data3"
@@ -522,10 +522,10 @@ The checkbox of a node can be set as disabled.
 ```
 :::
 
-### Default expanded and default checked
-Tree nodes can be initially expanded or checked
+### Desplegado o seleccionado por defecto
+Los nodos pueden estar desplegados o seleccionados por defecto.
 
-::: demo Use `default-expanded-keys` and `default-checked-keys` to set initially expanded and initially checked nodes respectively. Note that for them to work, `node-key` is required. Its value is the name of a key in the data object, and the value of that key should be unique across the whole tree.
+:::demo Utiliza `default-expanded-keys` y `default-checked-keys` para establecer los nodos desplegados y seleccionados respectivamente. Ten en cuenta que para que funcione es necesario que tengan `node-key`. Su valor es el nombre de una clave en el objeto data, y el valor de la clave debe ser único en todo el árbol.
 ```html
 <el-tree
   :data="data2"
@@ -586,9 +586,9 @@ Tree nodes can be initially expanded or checked
 ```
 :::
 
-### Checking tree nodes
+### Seleccionando nodos
 
-::: demo This example shows how to get and set checked nodes. They both can be done in two approaches: node and key. If you are taking the key approach, `node-key` is required.
+::: demo Este ejemplo muestra como establecer y leer nodos seleccionados. Esto se puede hacer por nodos o por claves. Si lo haces por claves el atributo `node-key` es necesario.
 ```html
 <el-tree
   :data="data2"
@@ -682,10 +682,10 @@ Tree nodes can be initially expanded or checked
 ```
 :::
 
-### Custom node content
-The content of tree nodes can be customized, so you can add icons or buttons as you will
+### Contenido personalzado en los nodos
+El contenido de los nodos puede ser personalizado, así que puedes añadir iconos y botones a tu gusto.
 
-::: demo Use `render-content` to assign a render function that returns the content of tree nodes. See Vue's documentation for a detailed introduction of render functions. Note that this demo can't run in jsfiddle because it doesn't support JSX syntax. In a real project, `render-content` will work if relevant dependencies are correctly configured.
+::: demo Utiliza `render-content` para asignar una función de renderizado que devuelve el contenido del árbol de nodos. Mira la documentación de node para una introducción detallada a las funciondes de renderizado. Ten en cuenta que este ejemplo no puede ejecutarse en jsfiddle ya que no soporta la sintaxis JSX. En un proyecto real `render-content` funcionará si las dependencias relevantes están configuradas correctamente.
 ```html
 <el-tree
   :data="data4"
@@ -779,10 +779,10 @@ The content of tree nodes can be customized, so you can add icons or buttons as 
 ```
 :::
 
-### Tree node filtering
-Tree nodes can be filtered
+### Filtrado de nodos
+Los nodos del árbol se pueden filtrar.
 
-::: demo Invoke the `filter` method of the Tree instance to filter tree nodes. Its parameter is the filtering keyword. Note that for it to work, `filter-node-method` is required, and its value is the filtering method.
+:::demo Invoca el método `filter` de la instancia de Tree para filtrar los nodos. Su parametro es la palabra de filtrado. Ten en cuenta que para que funcione es necesario `filter-node-method`, y su valor el método de filtrado.
 ```html
 <el-input
   placeholder="Filter keyword"
@@ -862,9 +862,9 @@ Tree nodes can be filtered
 ```
 :::
 
-### Accordion
+### Acordeón
 
-Only one node among the same level can be expanded at one time.
+Solo puede ser expandido un nodo del mismo nivel a la vez.
 
 ::: demo
 ```html
@@ -930,56 +930,55 @@ Only one node among the same level can be expanded at one time.
 ```
 :::
 
-### Attributes
-| Attribute             | Description                              | Type                        | Accepted Values | Default |
-| --------------------- | ---------------------------------------- | --------------------------- | --------------- | ------- |
-| data                  | tree data                                | array                       | —               | —       |
-| empty-text            | text displayed when data is void         | string                      | —               | —       |
-| node-key              | unique identity key name for nodes, its value should be unique across the whole tree | string                      | —               | —       |
-| props                 | configuration options, see the following table | object                      | —               | —       |
-| load                  | method for loading subtree data          | function(node, resolve)     | —               | —       |
-| render-content        | render function for tree node            | Function(h, { node, data, store }        | —               | —       |
-| highlight-current     | whether current node is highlighted      | boolean                     | —               | false   |
-| default-expand-all    | whether to expand all nodes by default   | boolean                     | —               | false   |
-| expand-on-click-node  | whether to expand or collapse node when clicking on the node, if false, then expand or collapse node only when clicking on the arrow icon. | —                           | true            |         |
-| auto-expand-parent    | whether to expand father node when a child node is expanded | boolean                     | —               | true    |
-| default-expanded-keys | array of keys of initially expanded nodes | array                       | —               | —       |
-| show-checkbox         | whether node is selectable               | boolean                     | —               | false   |
-| check-strictly        | whether checked state of a node not affects its father and child nodes when `show-checkbox` is `true` | boolean                     | —               | false   |
-| default-checked-keys  | array of keys of initially checked nodes | array                       | —               | —       |
-| filter-node-method    | this function will be executed on each node when use filter method. if return `false`, tree node will be hidden. | Function(value, data, node) | —               | —       |
-| accordion             | whether only one node among the same level can be expanded at one time | boolean                     | —               | false   |
-| indent                | horizontal indentation of nodes in adjacent levels in pixels | number                     | —    | 16 |
+### Atributos
+| Atributo | Descripción | Tipo | Valores aceptados | Default |
+| - | - | - | - | -|
+| data | Datos del árbol | array | — | — |
+| empty-text | Texto a mostrar cuando data es void | string | — | — |
+| node-key | Identificador único en todo el árbol para los nodos | string | — | — |
+| props | Opciones de configuración | object | — | — |
+| load | Método para cargar los datos de subárboles | function(node, resolve) | — | — |
+| render-content | Función de renderizado para los nodos | Function(h, { node, data, store }| — | — |
+| highlight-current | Si el nodo actual está resaltado | boolean | — | false |
+| default-expand-all | Expandir todos los nodos por defecto | boolean | —  | false |
+| expand-on-click-node | Si expandir o contraer un nodo al pincharlo, si es false solo se hará al pinchar en la flecha | — | true | - |
+| auto-expand-parent | Expandir un nodo padre si el hijo está seleccionado | boolean | — | true |
+| default-expanded-keys | Array de claves de los nodos expandidos inicialmente | array | — | — |
+| show-checkbox | Si un nodo es seleccionable | boolean  | —  | false |
+| check-strictly | El estado de seleccion de un nodo no afecta a sus padres o hijos, cuando `show-checkbox` es `true` | boolean | — | false |
+| default-checked-keys | Array con claves de los nodos seleccionados inicialmente | array | — | — |
+| filter-node-method | Esta función se ejecutará en cada nodo cuando se use el método filtrtar, si devuelve `false` el nodo se oculta | Function(value, data, node) | — | — |
+| accordion | Dice si solo un nodo de cada nivel puede expandirse a la vez | boolean | — | false |
+| indent | Indentación horizontal de los nodos en niveles adyacentes, en pixeles | number | — | 16 |
 
 ### props
-| Attribute | Description                              | Type   | Accepted Values | Default |
-| --------- | ---------------------------------------- | ------ | --------------- | ------- |
-| label     | specify which key of node object is used as the node's label | string, function(data, node) | —               | —       |
-| children | specify which node object is used as the node's subtree | string, function(data, node) | —               | —       |
-| disabled | specify which key of node object represents if node's checkbox is disabled | boolean, function(data, node) | —    | —    |
-| isLeaf | specify whether the node is a leaf node | boolean, function(data, node) | —    | —    |
+| Atributo | Descripción | Tipo   | Valores aceptados | Default |
+| - | -| - | - | - |
+| label | Especifica que clave del objecto nodo se utilizará como label | string, function(data, node) | — | — |
+| children | Especifica que objeto del nodo se utiliza como subárbol | string, function(data, node) | — | — |
+| isLeaf | Especifica si el nodo es una hoja | boolean, function(data, node) | — | — |
 
-### Method
-`Tree` has the following method, which returns the currently selected array of nodes.
-| Method          | Description                              | Parameters                               |
-| --------------- | ---------------------------------------- | ---------------------------------------- |
-| filter          | filter all tree nodes, filtered nodes will be hidden | Accept a parameter which will be used as first parameter for filter-node-method |
-| updateKeyChildren | set new data to node, only works when `node-key` is assigned  | (key, data) Accept two parameters: 1. key of node 2. new data |
-| getCheckedNodes | If the node can be selected (`show-checkbox` is `true`), it returns the currently selected array of nodes | Accept a boolean type parameter whose default value is `false`. If the parameter is `true`, it only returns the currently selected array of sub-nodes. |
-| setCheckedNodes | set certain nodes to be checked, only works when `node-key` is assigned | an array of nodes to be checked          |
-| getCheckedKeys  | If the node can be selected (`show-checkbox` is `true`), it returns the currently selected array of node's keys | (leafOnly) Accept a boolean type parameter whose default value is `false`. If the parameter is `true`, it only returns the currently selected array of sub-nodes. |
-| setCheckedKeys  | set certain nodes to be checked, only works when `node-key` is assigned | (keys, leafOnly) Accept two parameters: 1. an array of node's keys to be checked 2. a boolean type parameter whose default value is `false`. If the parameter is `true`, it only returns the currently selected array of sub-nodes. |
-| setChecked      | set node to be checked or not, only works when `node-key` is assigned | (key/data, checked, deep) Accept three parameters: 1. node's key or data to be checked 2. a boolean typed parameter indicating checked or not. 3. a boolean typed parameter indicating deep or not. |
-| getCurrentKey   | return the highlight node's key (null if no node is highlighted) | — |
-| getCurrentNode  | return the highlight node (null if no node is highlighted) | — |
-| setCurrentKey   | set highlighted node by key, only works when `node-key` is assigned | (key) the node's key to be highlighted |
-| setCurrentNode  | set highlighted node, only works when `node-key` is assigned | (node) the node to be highlighted |
+### Métodos
+`Tree` tiene los siguientes métodos, que devuelven el array de nodos seleccionados.
+| Método | Descripción | Parámetros |
+| - | - | - |
+| filter | Filtra los nodos del árbol, los nodos filtrados estarán ocultos | Acepta un parámetro que será usado como primer parámetro para filter-node-method |
+| updateKeyChildren | Asocia un nuevo dato al nodo, solo funciona si `node-key` está asignado | (key, data)Acepta dos parámetros: 1. clave del nodo 2. nuevo dato |
+| getCheckedNodes | Si los nodos puede ser seleccionado (`show-checkbox` es `true`), devuelve el array de nodos seleccionados | Acepta un booleano cuyo valor por defecto es `false`|
+| setCheckedNodes | Establece algunos nodos como seleccionados, solo funciona cuando `node-key` está asignado | Un array de nodos a seleccionar  |
+| getCheckedKeys  | Si los nodos pueden ser seleccionados (`show-checkbox` es `true`), devuelve un array con las claves de los nodos seleccionados | (leafOnly) Acepta un booleano que por defecto es `false`. |
+| setCheckedKeys  | Establece algunos nodos como seleccionados, solo si `node-key` está asignado| (keys, leafOnly) Acepta dos parametros: 1. un array de claves 2. un booleano cuyo valor por defecto es `false`. Si el parámetro es `true`, solo devuelve los nodos seleccionados |
+| setChecked | Establece si un nodo está seleccionado, solo funciona si `node-key` esta asignado | (key/data, checked, deep) Acepta tres parámetros: 1. la clave o dato del nodo a ser seleccionado 2. un booleano que indica si un nodo el nodo estará seleccionado 3. un booleanoque indica si se hará en profundidad |
+| getCurrentKey | devuelve la clave del nodo resaltado actualmente (null si no hay ninguno) | — |
+| getCurrentNode | devuelve el nodo resaltado (null si no hay ninguno) | — |
+| setCurrentKey | establece el nodo resaltado por la clave, solo funciona si `node-key` está asignado | (key) la clave del nodo a ser resaltado|
+| setCurrentNode | establece el nodo resaltado, solo funciona si `node-key` está asignado  | (node) nodo a ser resaltado |
 
-### Events
-| Event Name     | Description                              | Parameters                               |
-| -------------- | ---------------------------------------- | ---------------------------------------- |
-| node-click     | triggers when a node is clicked          | three parameters: node object corresponding to the node clicked, `node` property of TreeNode, TreeNode itself |
-| check-change   | triggers when the selected state of the node changes | three parameters: node object corresponding to the node whose selected state is changed, whether the node is selected, whether node's subtree has selected nodes |
-| current-change | triggers when current node changes       | two parameters: node object corresponding to the current node, `node` property of TreeNode |
-| node-expand    | triggers when current node open          | three parameters: node object corresponding to the node opened, `node` property of TreeNode, TreeNode itself |
-| node-collapse  | triggers when current node close         | three parameters: node object corresponding to the node closed, `node` property of TreeNode, TreeNode itself |
+### Eventos
+| Nombre del evento | Descripción | Parámetros |
+| - | - | - |
+| node-click | se lanza cuando un nodo es pinchado | tres parámetros: el objeto del nodo seleccionado, propiedad `node` de TreeNode y el TreeNode en si |
+| check-change | se lanza cuando el estado de selección del nodo cambia | tres parámetros: objeto nodo que se corresponde con el que ha cambiado, booleano que dice si esta seleccionado, booleano que dice si el nodo tiene hijos seleccionados |
+| current-change | cambia cuando el nodo actual cambia | dos parámetros: objeto nodo que se corresponde al nodo actual y propiedad `node` del TreeNode |
+| node-expand | se lanza cuando el nodo actual se abre | tres parámetros: el objeto del nodo abierto, propiedad `node` de TreeNode y el TreeNode en si |
+| node-collapse | se lanza cuando el nodo actual se cierra | tres parámetros: el objeto del nodo cerrado, propiedad `node` de TreeNode y el TreeNode en si |
