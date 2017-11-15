@@ -92,7 +92,7 @@
 </style>
 
 ## DatePicker
-Uso Date Picker para fecha entrada.
+Utiliza Date Picker para introducir fecha.
 
 ###  Entrar fecha
 
@@ -376,48 +376,49 @@ escenario
 ### Atributos 
 | Atributos      | Descripción          | Tipo      | Valores aceptados       | Valor por defecto   |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| readonly | whether DatePicker is read only | boolean | — | false |
-| disabled | whether DatePicker is disabled | boolean | — | false |
-| size | size of Input | string | large/small/mini | — |
-| editable | whether the input is editable | boolean | — | true |
-| clearable | Whether to show clear button | boolean | — | true |
-| placeholder | placeholder in non-range mode | string | — | — |
-| start-placeholder | placeholder for the start date in range mode | string | — | — |
-| end-placeholder | placeholder for the end date in range mode | string | — | — |
-| type | type of the picker | string | year/month/date/datetime/ week/datetimerange/daterange | date |
-| format | format of the displayed value in the input box | string | year `yyyy`, month `MM`, day `dd`, hour `HH`, minute `mm`, second `ss` | yyyy-MM-dd |
-| align | alignment | left/center/right | left |
-| popper-class | custom class name for DatePicker's dropdown | string | — | — |
-| picker-options | additional options, check the table below | object | — | {} |
-| range-separator | range separator | string | — | '-' |
-| default-value | optional, default date of the calendar | Date | anything accepted by `new Date()` | — |
-| value-format | optional, format of binding value. If not specified, the binding value will be a Date object | string | year `yyyy`, month `MM`, day `dd`, hour `HH`, minute `mm`, second `ss` | — |
-| name | same as `name` in native input | string | — | — |
-| unlink-panels | unlink two date-panels in range-picker | boolean | — | false |
+| readonly | Si la escoja de fecha es lectura sola | boolean | — | false |
+| disabled | Si la escoja de fecha es deshabilitada| boolean | — | false |
+| size | tamaño de la entrada | string | large/small/mini | — |
+| editable | Si la entrada es editable | boolean | — | true |
+| clearable | Si monstrar el botón de despejar  | boolean | — | true |
+| placeholder | placeholder en la modalidad sin-rango | string | — | — |
+| start-placeholder | placeholder para el comienzo de fecha en la modalidad de alcance  | string | — | — |
+| end-placeholder | placeholder para el fin de fecha en la modalidad de alcance | string | — | — |
+| type | tipo de la escoja | string | año/mes/fecha/fecha y hora/semana/rango de fecha y hora /rango de fecha | fecha |
+| formato | formato del valor desplegado en la caja de entrada | cadena | año `yyyy`, mes `MM`, día `dd`, hora `HH`, minuto `mm`, segundo `ss` | yyyy-MM-dd |
+| alinear
+ | alineación | izquierda/centro/derecho | izquierda |
+| popper-class | nombre de clase clientela por dropdown de DatePicker| cadena | — | — |
+| picker-options | opciones adicionales, comproba la tabla abaja | objeto | — | {} |
+| range-separator |separador de alcance | cadena | — | '-' |
+| default-value | fecha opcional y defectada del calendario| Fecha | cualquier cosa aceptada por `new Date()` | — |
+| value-format | opcional,formato de valor atado.Si no special, el valor atado sería ser un valor de fecha | cadena | año `yyyy`, mes `MM`, día `dd`, hora `HH`, minuto `mm`, segundo `ss` | — |
+| name | igual que `name` en la entrada nativa | cadena | — | — |
+| unlink-panels | desconectar dos fecha-paneles en alcance-escoja | boolean | — | falso |
 
 ### Picker Options
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
+| Atributo      | Descripción          | Tipo      | Valores aceptados       | Defecto  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| shortcuts | a { text, onClick } object array to set shortcut options, check the table below | object[] | — | — |
-| disabledDate | a function determining if a date is disabled with that date as its parameter. Should return a Boolean | function | — | — |
-| firstDayOfWeek | first day of week | Number | 1 to 7 | 7 |
-| onPick | a callback that triggers when the selected date is changed. Only for `daterange` and `datetimerange`. | Function({ maxDate, minDate }) | - | - |
+| shortcuts | un { text, onClick } objecto serie para establecer opciones atajos, comprobar la mesa abaja | objeto[] | — | — |
+| disabledDate | una función determinar si la fecha es minusválida con la fecha como su parámetro.Debería devolver un booleano| función | — | — |
+| firstDayOfWeek | primera día de semana | Number | 1 to 7 | 7 |
+| onPick | una llama de vuelta cuando la fecha escogida está cambiada. Solamente por `daterange` y `datetimerange`. | Function({ fecha, minDate }) | - | - |
 
 ### shortcuts
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
+| Atributo      | Descripción          | Tipo      | Valores aceptados       | Defecto  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| text | title of the shortcut | string | — | — |
-| onClick | callback function, triggers when the shortcut is clicked, with the `vm` as its parameter. You can change the picker value by emitting the `pick` event. Example: `vm.$emit('pick', new Date())`| function | — | — |
+| text | título del atajo | cadena | — | — |
+| onClick | función de llama de vuelta, gatillos cuando el atajo se hace clic, con el `vm` como su parámetro. Puedes cambiar el valor de escoja por emitir el evento `pick`. Ejemplo: `vm.$emit('pick', new Date())`| function | — | — |
 
 
-### Events
-| Event Name | Description | Parameters |
+### Eventos
+| Nombre de evento | Descripción | Parámetros |
 |---------|--------|---------|
-| change | triggers when user confirms the value | component's binding value |
-| blur | triggers when Input blurs | (event: Event) |
-| focus | triggers when Input focuses | (event: Event) |
+| change | gatillos cuando usuario confirma el valor | valor atado de componente |
+| blur | gatillos cuando la entrada difumina | (event: Event) |
+| focus | gatillos cuando la entrada enfoca | (event: Event) |
 
-### Methods
-| Method | Description | Parameters |
+### Métodos
+| Método | Descripción | Parámetros |
 |------|--------|-------|
-| focus | focus the Input component | — |
+| focus | enfoque la entrada de componente | — |
