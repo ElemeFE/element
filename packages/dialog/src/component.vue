@@ -1,5 +1,5 @@
 <template>
-  <transition name="dialog-fade">
+  <transition :name="transition">
     <div class="el-dialog__wrapper" v-show="visible" @click.self="handleWrapperClick">
       <div
         class="el-dialog"
@@ -39,6 +39,11 @@
     mixins: [Popup, emitter, Migrating],
 
     props: {
+      transition: {
+        type: String,
+        default: 'dialog-fade'
+      },
+
       title: {
         type: String,
         default: ''
