@@ -50,6 +50,12 @@
     font-size: 12px;
     margin: 0 3px;
   }
+
+  .el-dropdown-selfdefine { // 自定义
+    &:focus:active, &:focus:not(.focusing) {
+      outline-width: 0;
+    }
+  }
 }
 
 @include b(dropdown-menu) {
@@ -72,8 +78,8 @@
     font-size: $--font-size-base;
     color: $--color-text-regular;
     cursor: pointer;
-
-    &:not(.is-disabled):hover {
+    outline: none;
+    &:not(.is-disabled):hover, &:focus {
       background-color: $--dropdown-menuItem-hover-fill;
       color: $--dropdown-menuItem-hover-color;
     }

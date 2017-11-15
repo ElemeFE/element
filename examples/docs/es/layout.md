@@ -31,13 +31,13 @@
 
 ## Layout
 
-Quickly and easily create layouts with the basic 24-column.
+Rápido y facilmente crea un layout básico con 24 columnas.
 
-### Basic layout
+### Layout básico
 
-Create basic grid layout using columns.
+Crea un layout básico usando columnas.
 
-::: demo With `row` and `col`, we can easily manipulate the layout using the `span` attribute.
+:::**Demo** Con `row` y `col`, podemos facilmente manipular el layout usando el atributo `span`.
 ```html
 <el-row>
   <el-col :span="24"><div class="grid-content bg-purple-dark"></div></el-col>
@@ -97,11 +97,11 @@ Create basic grid layout using columns.
 ```
 :::
 
-### Column spacing
+### Espaciado de columnas
 
-Column spacing is supported.
+El espaciado de columnas está soportado.
 
-::: demo Row provides `gutter` attribute to specify spacings between columns, and its default value is 0.
+:::**Demo** Row provee el atributo `gutter` para especificar el espacio entre columnas y su valor por defecto es 0.
 ```html
 <el-row :gutter="20">
   <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
@@ -141,11 +141,11 @@ Column spacing is supported.
 ```
 :::
 
-### Hybrid layout
+### Layout híbrido
 
-Form a more complex hybrid layout by combining the basic 1/24 columns.
+Crea un complejo layout híbrido combinando el básico de 1/24 columnas.
 
-::: demo
+:::**Demo**
 ```html
 <el-row :gutter="20">
   <el-col :span="16"><div class="grid-content bg-purple"></div></el-col>
@@ -194,11 +194,11 @@ Form a more complex hybrid layout by combining the basic 1/24 columns.
 ```
 :::
 
-### Column offset
+### Offset de columnas
 
-You can specify column offsets.
+Puedes especificar offsets para las columnas.
 
-::: demo You can specify the number of column offset by setting the value of `offset` attribute of Col.
+:::**Demo** Puedes especificar el offset para una columna mediante el atributo `offset` de Col.
 
 ```html
 <el-row :gutter="20">
@@ -244,11 +244,11 @@ You can specify column offsets.
 ```
 :::
 
-### Alignment
+### Alineación
 
-Use the flex layout to make flexible alignment of columns.
+Usa flex layout para un alineamiento flexible de columnas.
 
-::: demo You can enable flex layout by setting `type` attribute to 'flex', and define the layout of child elements by setting `justify` attribute with start, center, end, space-between or space-around.
+:::**Demo** Puedes habilitar flex layout asignando el atributo `type` a 'flex', y definir el layout de elementos hijos asignando el atributo `justify` con los valores start, center, end, space-between o space-around.
 ```html
 <el-row type="flex" class="row-bg">
   <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
@@ -309,9 +309,9 @@ Use the flex layout to make flexible alignment of columns.
 
 ### Responsive Layout
 
-Taking example by Bootstrap's responsive design, five breakpoints are preset: xs, sm, md, lg and xl.
+Tomando el ejemplo de Bootstrap responsive design, existen 5 breakpoints: xs, sm, md, lg y xl.
 
-::: demo
+:::**Demo**
 ```html
 <el-row :gutter="10">
   <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1"><div class="grid-content bg-purple"></div></el-col>
@@ -341,48 +341,50 @@ Taking example by Bootstrap's responsive design, five breakpoints are preset: xs
 ```
 :::
 
-### Utility classes for hiding elements
+### Clases útiles para ocultar elementos
 
-Additionally, Element provides a series of classes for hiding elements under certain conditions. These classes can be added to any DOM elements or custom components. You need to import the following CSS file to use these classes:
+Adicionalmente, Element provee una serie de clases para ocultar elementos dadas ciertas condiciones. Estas clases pueden se agregadas a cualquier elemento del DOM o un elemento propio. Necesitas importar el siguiente archivo CSS para usar estas clases:
 
 ```js
 import 'element-ui/lib/theme-chalk/display.css';
 ```
 
-The classes are:
-- `hidden-xs-only` - hide when on extra small viewports only
-- `hidden-sm-only` - hide when on small viewports and down
-- `hidden-sm-and-down` - hide when on small viewports and down
-- `hidden-sm-and-up` - hide when on small viewports and up
-- `hidden-md-only` - hide when on medium viewports only
-- `hidden-md-and-down` - hide when on medium viewports and down
-- `hidden-md-and-up` - hide when on medium viewports and up
-- `hidden-lg-only` - hide when on large viewports only
-- `hidden-lg-and-down` - hide when on large viewports and down
-- `hidden-lg-and-up` - hide when on large viewports and up
-- `hidden-xl-only` - hide when on extra large viewports only
+Las clases son:
+- `hidden-xs-only` - oculto en viewports extra pequenhos solamente
+- `hidden-sm-only` - oculto en viewports pequenhos solamente
+- `hidden-sm-and-down` - oculto en viewports pequenhos y menores
+- `hidden-sm-and-up` - oculto en viewports pequenhos y superiores 
+- `hidden-md-only` - oculto en viewports medios solamente
+- `hidden-md-and-down` - oculto en viewports medios y menores
+- `hidden-md-and-up` - oculto en viewports medios y mayores
+- `hidden-lg-only` - ocultos en viewports grandes solamente 
+- `hidden-lg-and-down` - ocultos en viewports grandes y menores
+- `hidden-lg-and-up` - ocultos en viewports grandes y superiores
+- `hidden-xl-only` - oculto en viewports extra grandes solamente
 
-### Row Attributes
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
-|---------- |-------------- |---------- |--------------------------------  |-------- |
-| gutter | grid spacing | number | — | 0 |
-| type | layout mode, you can use flex, works in modern browsers | string | — | — |
-| justify | horizontal alignment of flex layout | string | start/end/center/space-around/space-between | start |
-| align | vertical alignment of flex layout | string | top/middle/bottom | top |
-| tag | custom element tag | string | * | div |
+### Atributos Row 
 
-### Col Attributes
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
+| Atributos      | Descripción          | Tipo      | Valores aceptados       | Valor por defecto  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| span | number of column the grid spans | number | — | 24 |
-| offset | number of spacing on the left side of the grid | number | — | 0 |
-| push |  number of columns that grid moves to the right | number | — | 0 |
-| pull |  number of columns that grid moves to the left | number | — | 0 |
-| xs | `<768px` Responsive columns or column props object | number/object (e.g. {span: 4, offset: 4}) | — | — |
-| sm | `≥768px` Responsive columns or column props object | number/object (e.g. {span: 4, offset: 4}) | — | — |
-| md | `≥992px` Responsive columns or column props object | number/object (e.g. {span: 4, offset: 4}) | — | — |
-| lg | `≥1200px` Responsive columns or column props object | number/object (e.g. {span: 4, offset: 4}) | — | — |
-| xl | `≥1920px` Responsive columns or column props object | number/object (e.g. {span: 4, offset: 4}) | — | — |
-| tag | custom element tag | string | * | div |
+| gutter | espaciado de la grilla | number | — | 0 |
+| type | modo del layout , puedes usar flex, funciona en navegadores modernos| string | — | — |
+| justify | alineación horizontal del layout flex | string | start/end/center/space-around/space-between | start |
+| align | alineación vertical del layout flex | string | top/middle/bottom | top |
+| tag | tag de elemento propio | string | * | div |
+
+### Atributos Col 
+
+| Atributos      | Descripción          | Tipo      | Valores aceptados       | Valor por defecto  |
+|---------- |-------------- |---------- |--------------------------------  |-------- |
+| span | número de columnas que abarca la cuadrícula | number | — | 24 |
+| offset | especific espacio en el lado izquierdo de la grill | number | — | 0 |
+| push |  número de columnas que la grilla se mueve hacia la derecha | number | — | 0 |
+| pull |  número de columnas que la grilla se mueve hacia la izquierda | number | — | 0 |
+| xs | `<768px` Columnas responsive u objeto con propiedades de la columna  | number/object (e.g. {span: 4, offset: 4}) | — | — |
+| sm | `≥768px` Columnas responsive u objeto con propiedades de la columna  | number/object (e.g. {span: 4, offset: 4}) | — | — |
+| md | `≥992px` Columnas responsive u objeto con propiedades de la columna  | number/object (e.g. {span: 4, offset: 4}) | — | — |
+| lg | `≥1200px` Columnas responsive u objeto con propiedades de la columna  | number/object (e.g. {span: 4, offset: 4}) | — | — | 
+| xl | `≥1920px` Columnas responsive u objeto con propiedades de la columna  | number/object (e.g. {span: 4, offset: 4}) | — | — |
+| tag | tag de elemento propio | string | * | div |
 
 

@@ -9,13 +9,12 @@
     }
   }
 </style>
-## Progress
+## Progreso
+Progreso es usado para mostrar el estado de la operación actual e informar al usuario acerca de ésta.
 
-Progress is used to show the progress of current operation, and inform the user the current status.
+### Barra de progreso lineal (porcentage externo)
 
-### Linear progress bar (external percentage)
-
-:::demo Use `percentage` attribute to set the percentage. It's **required** and must be between `0-100`.
+:::**Demo** Usa el atributo `percentage` para asignar el porcentage. Este es **requerido** y tiene que ser un valor entre `0-100`.
 ```html
 <el-progress :percentage="0"></el-progress>
 <el-progress :percentage="70"></el-progress>
@@ -24,11 +23,10 @@ Progress is used to show the progress of current operation, and inform the user 
 ```
 :::
 
-### Linear progress bar (internal percentage)
+### Barra de progreso lineal (porcentage interno)
+En este caso el porcentage no toma espacio adicional.
 
-In this case the percentage takes no additional space.
-
-:::demo `stroke-width` attribute decides the `width` of progress bar, and use `text-inside` attribute to put description inside the progress bar.
+:::**Demo** El atributo `stroke-width` decide el ancho de la barra de progreso, y usa el atributo `text-inside` para poner la descripción dentro de la misma.
 ```html
 <el-progress :text-inside="true" :stroke-width="18" :percentage="0"></el-progress>
 <el-progress :text-inside="true" :stroke-width="18" :percentage="70"></el-progress>
@@ -37,9 +35,9 @@ In this case the percentage takes no additional space.
 ```
 :::
 
-### Circular progress bar
+### Barra de progreso circular
 
-:::demo You can specify `type` attribute to `circle` to use circular progress bar, and use `width` attribute to change the size of circle.
+:::**Demo** Puedes asignar el atributo `type` como `circle` para usar la barra circular de progreso, y usar el atributo `width` para cambiar el tamanho del círculo.
 ```html
 <el-progress type="circle" :percentage="0"></el-progress>
 <el-progress type="circle" :percentage="25"></el-progress>
@@ -49,13 +47,13 @@ In this case the percentage takes no additional space.
 :::
 
 ### Attributes
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
+| Atributo      | Descripción          | Tipo      | Valores aceptado       | Valores por defecto  |
 | --- | ---- | ---- | ---- | ---- |
-| **percentage** | percentage, **required** | number | 0-100 | 0 |
-| type | the type of progress bar | string | line/circle | line |
-| stroke-width | the width of progress bar | number | — | 6 |
-| text-inside | whether to place the percentage inside progress bar, only works when `type` is 'line' | boolean | — | false |
-| status | the current status of progress bar | string | success/exception | — |
-| width | the canvas width of circle progress bar | number | — | 126 |
-| show-text | whether to show percentage | boolean | — | true |
+| **percentage** | porcenteage, **requerido** | number | 0-100 | 0 |
+| type | tipo de barra de progreso | string | line/circle | line |
+| stroke-width | ancho de la barra de progreso | number | — | 6 |
+| text-inside | mostrar el porcentage dentro de la barra de progreso, solo funciona cuando `type` es 'line' | boolean | — | false |
+| status | estado actual de la barra de progreso | string | success/exception | — |
+| width | ancho del canvas que contiene la barra de progreso circula | number | — | 126 |
+| show-text | mostrar porcentage | boolean | — | true |
 

@@ -6,7 +6,7 @@
     "expect": true,
     "sinon": true
   },
-  "plugins": ['vue'],
+  "plugins": ['vue','json'],
   "extends": 'elemefe',
   "parserOptions": {
     "ecmaFeatures": {

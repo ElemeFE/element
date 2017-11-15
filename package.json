@@ -1,6 +1,6 @@
 {
   "name": "element-ui",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "A Component Library for Vue.js.",
   "main": "lib/element-ui.common.js",
   "files": [
@@ -82,6 +82,7 @@
     "css-loader": "^0.28.7",
     "es6-promise": "^4.0.5",
     "eslint": "^3.10.2",
+    "eslint-plugin-json": "^1.2.0",
     "extract-text-webpack-plugin": "^3.0.1",
     "file-loader": "^1.1.5",
     "file-save": "^0.2.0",

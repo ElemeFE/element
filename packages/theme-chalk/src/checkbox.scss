@@ -17,6 +17,9 @@
     padding: $--checkbox-bordered-padding;
     border-radius: $--border-radius-base;
     border: $--border-base;
+    box-sizing: border-box;
+    line-height: normal;
+    height: $--checkbox-bordered-height;
 
     &.is-checked {
       border-color: $--color-primary;
@@ -34,6 +37,7 @@
     &.el-checkbox--medium {
       padding: $--checkbox-bordered-medium-padding;
       border-radius: $--button-medium-border-radius;
+      height: $--checkbox-bordered-medium-height;
 
       .el-checkbox__label {
         line-height: 17px;
@@ -49,6 +53,7 @@
     &.el-checkbox--small {
       padding: $--checkbox-bordered-small-padding;
       border-radius: $--button-small-border-radius;
+      height: $--checkbox-bordered-small-height;
 
       .el-checkbox__label {
         line-height: 15px;
@@ -69,6 +74,7 @@
     &.el-checkbox--mini {
       padding: $--checkbox-bordered-mini-padding;
       border-radius: $--button-mini-border-radius;
+      height: $--checkbox-bordered-mini-height;
 
       .el-checkbox__label {
         line-height: 12px;

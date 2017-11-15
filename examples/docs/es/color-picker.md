@@ -42,18 +42,18 @@
 
 ## ColorPicker
 
-ColorPicker is a color selector supporting multiple color formats.
+ColorPicker es un selector de color que soporta varios formatos de color.
 
-### Basic usage
+### Uso básico
 
-:::demo ColorPicker requires a string typed variable to be bound to v-model.
+:::demo ColorPicker requiere una variable de tipo string para ser enlazada a v-model.
 ```html
 <div class="block">
-  <span class="demonstration">With default value</span>
+  <span class="demonstration">Especifica valor por defecto</span>
   <el-color-picker v-model="color1"></el-color-picker>
 </div>
 <div class="block">
-  <span class="demonstration">With no default value</span>
+  <span class="demonstration">No especifica valor por defecto</span>
   <el-color-picker v-model="color2"></el-color-picker>
 </div>
 
@@ -72,7 +72,7 @@ ColorPicker is a color selector supporting multiple color formats.
 
 ### Alpha
 
-:::demo ColorPicker supports alpha channel selecting. To activate alpha selecting, just add the `show-alpha` attribute.
+:::demo ColorPicker soporta selección de canales alpha. Para activarlo sólo agrega el atributo `show-alpha`.
 ```html
 <el-color-picker v-model="color3" show-alpha></el-color-picker>
 
@@ -109,17 +109,17 @@ ColorPicker is a color selector supporting multiple color formats.
 ```
 :::
 
-### Attributes
-| Attribute | Description | Type | Accepted Values | Default |
+### Atributos
+| Atributo | Descripción | Tipo | Valores aceptados | Por defecto |
 |---------- |-------- |---------- |-------------  |-------- |
-| disabled | whether to disable the ColorPicker | boolean | — | false |
-| size | size of ColorPicker | string | — | medium / small / mini |
-| show-alpha | whether to display the alpha slider | boolean | — | false |
-| color-format | color format of v-model | string | hsl / hsv / hex / rgb | hex (when show-alpha is false)/ rgb (when show-alpha is true) |
-| popper-class | custom class name for ColorPicker's dropdown | string | — | — |
+| disabled | especifica si se deshabilita el ColorPicker | boolean | — | false |
+| size | tamaño del ColorPicker | string | — | medium / small / mini |
+| show-alpha | especifica si se muestra el control deslizante para el valor alpha | boolean | — | false |
+| color-format | formato de color del v-model | string | hsl / hsv / hex / rgb | hex (si show-alpha es false)/ rgb (si show-alpha es true) |
+| popper-class | nombre de clase para el dropdown del ColorPicker | string | — | — |
 
-### Events
-| Event Name | Description | Parameters |
+### Eventos
+| Nombre de Evento | Descripción | Parametros |
 |---------|--------|---------|
-| change | triggers when input value changes | color value |
-| active-change | triggers when the current active color changes | active color value |
+| change | se dispara cuando el valor del input cambia | valor del color |
+| active-change | se dispara cuando el actual color activo cambia | valor del color activo |

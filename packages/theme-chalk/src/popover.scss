@@ -27,4 +27,10 @@
     line-height: 1;
     margin-bottom: 12px;
   }
+
+  @include e(reference) {
+    &:focus:not(.focusing), &:focus:hover {
+      outline-width: 0;
+    }
+  }
 }

@@ -19,14 +19,12 @@
 </script>
 
 ## Radio
+Selección única entre múltiples opciones.
 
-Single selection among multiple options.
+### Uso básico
+El elemento Radio no debe tener muchas opciones. De otra manera, utilice el componente Select.
 
-### Basic usage
-
-Radio should not have too many options. Otherwise, use the Select component instead.
-
-:::demo Creating a radio component is easy, you just need to bind a variable to Radio's `v-model`. It equals to the value of `label` of the chosen radio. The type of `label` is `String`, `Number` or `Boolean`.
+:::**Demo** Crear un elemento Radio es fácil, solo necesitas enlazar(`bind`) una variable a la directiva `v-model` del Radio. Va a ser igual al valor `label` del Radio seleccionado. El tipo de dato de `label` es `String`, `Number` o `Boolean`.
 ```html
 <template>
   <el-radio v-model="radio" label="1">Option A</el-radio>
@@ -45,11 +43,11 @@ Radio should not have too many options. Otherwise, use the Select component inst
 ```
 :::
 
-### Disabled
+### Deshabilitado
 
-`disabled` attribute is used to disable the radio.
+El atributo `disabled` es utilizado para deshabilitar un Radio.
 
-:::demo You just need to add the `disabled` attribute.
+:::**Demo** Solo necesitas agregar el atributo `disabled`.
 ```html
 <template>
   <el-radio disabled v-model="radio1" label="disabled">Option A</el-radio>
@@ -68,11 +66,11 @@ Radio should not have too many options. Otherwise, use the Select component inst
 ```
 :::
 
-### Radio button group
+### Grupo de elementos Radio
 
-Suitable for choosing from some mutually exclusive options.
+Recomendado para seleccionar opciones que se excluyen mutuamente.
 
-:::demo Combine `el-radio-group` with `el-radio` to display a radio group. Bind a variable with `v-model` of `el-radio-group` element and set label value in `el-radio`. It also provides `change` event with the current value as its parameter.
+:::**Demo** Combina `el-radio-group` con `el-radio` para mostrar un grupo de Radios. Enlaza la variable con `v-model` del elemento `el-radio-group` y asigna el valor del `label` en `el-radio`. También provee el evento `change` con el valor actual como parámetro.
 
 ```html
 <el-radio-group v-model="radio2">
@@ -93,11 +91,11 @@ Suitable for choosing from some mutually exclusive options.
 ```
 :::
 
-### Button style
+### Estilo Button
 
-Radio with button styles.
+Radio con estilo de botón.
 
-:::demo You just need to change `el-radio` element into `el-radio-button` element. We also provide `size` attribute.
+:::**Demo** Solo necesitas cambiar el elemento `el-radio` a `el-radio-button`. También proveemos el atributo `size`.
 ```html
 <template>
   <div>
@@ -149,9 +147,9 @@ Radio with button styles.
 ```
 :::
 
-### With borders
+### Con bordes
 
-:::demo The `border` attribute adds a border to Radios.
+:::**Demo** El atributo `border` agrega un borde al elemento Radios.
 ```html
 <template>
   <div>
@@ -191,41 +189,43 @@ Radio with button styles.
 ```
 :::
 
-### Radio Attributes
+### Atributos de Radio
 
- Attribute      | Description          | Type      | Accepted Values       | Default
+ Atributo      | Descripción| Tipo      |Valores Aceptado| Valores por defecto
 ---- | ---- | ---- | ---- | ----
-label | the value of Radio | string / number / boolean | — | —
-disabled | whether Radio is disabled | boolean | — | false
-border  | whether to add a border around Radio  | boolean   | — | false
-size  | size of the Radio, only works when `border` is true  | string  | medium / small / mini | —
-name | native 'name' attribute | string    |      —         |     —
+label | el valor del Radio | string / number / boolean | — | —
+disabled | si el Radio está deshabilitado| boolean | — | false
+border  | agregar borde alrededor del elemento Radio  | boolean   | — | false
+size  | tamanho del elemento Radio, solo funciona si `border` es verdadero  | string  | medium / small / mini | —
+name | atributo nativo 'name'| string    |      —         |     —
 
-### Radio Events
+### Atributos de Radio-button
 
-| Event Name | Description | Parameters |
+ Atributo      | Descripción| Tipo      |Valores Aceptado| Valores por defecto
+---- | ---- | ---- | ---- | ----
+label | el valor del Radio | string / number | — | —
+disabled | si el Radio está deshabilitado | boolean | — | false
+name | atributo nativo 'name' | string    |      —         |     —
+
+### Atributos de Radio-group
+
+ Atributo      | Descripción| Tipo      |Valores Aceptado| Valores por defecto
+---- | ---- | ---- | ---- | ----
+size | tamanho de los `radio buttons` o `bordered radios` | string | medium / small / mini | —
+disabled  | si la anidación de radios está desahabilitada| boolean   | — | false
+text-color | color de las letras cuando el botón está activo | string   | — | #ffffff   |
+fill  | color del borde y fondo cuando el botón está activo | string   | — | #409EFF   |
+
+### Eventos de Radio 
+
+| Nombre de evento| Descripción| Parámetros |
 | --- | --- | --- |
-| change | triggers when the bound value changes | the label value of the chosen radio |
+| change | se dispara cuando el valor cambia | el valor del `label` del Radio seleccionado |
 
-### Radio-group Attributes
 
- Attribute      | Description          | Type      | Accepted Values       | Default
----- | ---- | ---- | ---- | ----
-size | the size of radio buttons or bordered radios | string | medium / small / mini | —
-disabled  | whether the nesting radios are disabled | boolean   | — | false
-text-color | font color when button is active | string   | — | #ffffff   |
-fill  | border and background color when button is active | string   | — | #409EFF   |
+### Eventos de Radio-group 
 
-### Radio-group Events
-
-| Event Name | Description | Parameters |
+| Nombre de evento| Descripción| Parámetros |
 | --- | --- | --- |
-| change | triggers when the bound value changes | the label value of the chosen radio |
+| change | se dispara cuando el valor cambia | el valor del `label` del Radio seleccionado |
 
-### Radio-button Attributes
-
- Attribute      | Description          | Type      | Accepted Values       | Default
----- | ---- | ---- | ---- | ----
-label | the value of radio | string / number | — | —
-disabled | whether radio is disabled | boolean | — | false
-name | native 'name' attribute | string    |      —         |     —
