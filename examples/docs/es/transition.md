@@ -1,10 +1,10 @@
-## Built-in transition
+## Transiciones incorporadas
 
-You can use Element's built-in transitions directly. Before that, please read the [transition docs](https://vuejs.org/v2/api/#transition).
+Puedes usar directamente las transiciones incorporadas en Element. Antes de hacerlo, por favor lea la [documentación](https://vuejs.org/v2/api/#transition).
 
-### fade
+### Fade
 
-:::demo We have two fading effects: `el-fade-in-linear` and `el-fade-in`.
+:::demo Tenemos dos efectos de fading: `el-fade-in-linear` y `el-fade-in`.
 ```html
 <template>
   <div>
@@ -46,9 +46,9 @@ You can use Element's built-in transitions directly. Before that, please read th
 ```
 :::
 
-### zoom
+### Zoom
 
-:::demo `el-zoom-in-center`, `el-zoom-in-top` and `el-zoom-in-bottom` are provided.
+:::demo También tenemos zoom: `el-zoom-in-center`, `el-zoom-in-top` y `el-zoom-in-bottom`.
 ```html
 <template>
   <div>
@@ -96,10 +96,8 @@ You can use Element's built-in transitions directly. Before that, please read th
 :::
 
 
-### collapse
-
-For collapse effect, use the `el-collapse-transition` component.
-
+### Colapsado
+Para efectos de colapsado usar el componente `el-collapse-transition`.
 :::demo
 ```html
 <template>
@@ -147,7 +145,7 @@ For collapse effect, use the `el-collapse-transition` component.
 ```js
 // fade/zoom
 import 'element-ui/lib/theme-chalk/base.css';
-// collapse
+// colapsar
 import CollapseTransition from 'element-ui/lib/transitions/collapse-transition';
 import Vue from 'vue'
 
