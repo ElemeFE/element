@@ -18,7 +18,7 @@ export default {
       endTime: 'Eindtijd',
       prevYear: 'Vorig jaar',
       nextYear: 'Volgend jaar',
-      prevMonth: 'Vorige maand', 
+      prevMonth: 'Vorige maand',
       nextMonth: 'Volgende maand',
       year: '',
       month1: 'januari',
@@ -82,7 +82,7 @@ export default {
       error: 'Ongeldige invoer'
     },
     upload: {
-      deleteTip: 'Kies verwijder om te wissen', 
+      deleteTip: 'Kies verwijder om te wissen',
       delete: 'Verwijder',
       preview: 'Voorbeeld',
       continue: 'Doorgaan'
@@ -92,7 +92,7 @@ export default {
       confirmFilter: 'Bevestigen',
       resetFilter: 'Reset',
       clearFilter: 'Alles',
-      sumText: 'Som' 
+      sumText: 'Som'
     },
     tree: {
       emptyText: 'Geen data'
@@ -100,9 +100,9 @@ export default {
     transfer: {
       noMatch: 'Geen overeenkomende resultaten',
       noData: 'Geen data',
-      titles: ['Lijst 1', 'Lijst 2'], 
-      filterPlaceholder: 'Geef zoekwoerd', 
-      noCheckedFormat: '{total} items', 
+      titles: ['Lijst 1', 'Lijst 2'],
+      filterPlaceholder: 'Geef zoekwoerd',
+      noCheckedFormat: '{total} items',
       hasCheckedFormat: '{checked}/{total} geselecteerd'
     }
   }
