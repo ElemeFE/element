@@ -280,13 +280,14 @@
 
 ## Cascader
 
-If the options have a clear hierarchical structure, Cascader can be used to view and select them.
+Si las opciones tienen una estructura jerárquica clara, Cascader puede utilizarse para visualizarlas y seleccionarlas.
 
-### Basic usage
+### Uso básico
 
-There are two ways to expand child option items.
+Existen dos maneras de expandir los elementos hijo de la opción.
 
-:::demo Assigning the `options` attribute to an array of options renders a Cascader. The `expand-trigger` attribute defines how child options are expanded. This example also demonstrates the `change` event, whose parameter is the value of Cascader, an array made up of the values of each selected level.
+:::demo Al asignar al atributo `options` un array de opciones, se genera un Cascader. El atributo `expand-trigger` define cómo se expanden las opciones hijo. Este ejemplo también muestra el evento `change` , cuyo parámetro es el valor de Cascader, un array formado por los valores de cada nivel seleccionado.
+
 ```html
 <div class="block">
   <span class="demonstration">Child options expand when clicked (default)</span>
@@ -519,11 +520,12 @@ There are two ways to expand child option items.
 ```
 :::
 
-### Disabled option
+### Opcion Disabled
 
-Disable an option by setting a `disabled` field in the option object.
+Para desactivar una opción configure un campo `disabled` en el objeto de opción.
 
-:::demo In this example, the first item in `options` array has a `disabled: true` field, so it is disabled. By default, Cascader checks the `disabled` field in each option object; if you are using another field name to indicate whether an option is disabled, you can assign it in the `props` attribute (see the API table below for details). And of course, field name `value`, `label` and `children` can also be customized in the same way.
+:::demo En este ejemplo, el primer elemento del array `options` tiene un campo  `disabled: true` , por lo que está desactivado. Por defecto, Cascader verifica el campo `disabled` en cada objeto de opción; si está utilizando otro nombre de campo para indicar si una opción está deshabilitada, puede asignarla en el atributo `props` (consulte la tabla API a continuación para obtener más detalles). Y por supuesto, el valor de `value`, `label` y `children` también se pueden personalizar de la misma manera.
+
 ```html
 <el-cascader
   :options="optionsWithDisabled"
@@ -735,11 +737,12 @@ Disable an option by setting a `disabled` field in the option object.
 ```
 :::
 
-### Display only the last level
+### Mostrar sólo el último nivel
 
-The input can display only the last level instead of all levels.
+Puede mostrar sólo el último nivel en lugar de todos los niveles.
 
-:::demo The `show-all-levels` attribute defines if all levels are displayed. If it is `false`, only the last level is displayed.
+:::demo El atributo `show-all-levels` define si se visualizan todos los niveles. Si es `false`, sólo se muestra el último nivel.
+
 ```html
 <el-cascader
     :options="options"
@@ -951,9 +954,9 @@ The input can display only the last level instead of all levels.
 ```
 :::
 
-### With default value
+### Con valor por defecto
 
-:::demo The default value can be defined with an array.
+:::demo El valor por defecto se puede definir con un array.
 ```html
 <el-cascader
   :options="options"
@@ -1168,9 +1171,10 @@ The input can display only the last level instead of all levels.
 
 ### Change on select
 
-Parent options can also be selected.
+También se pueden seleccionar las opciones del elemento padre.
 
-:::demo By default only the options in the last level can be selected. By assigning `change-on-select` to `true`, options in parent levels can also be selected.
+:::demo Por defecto sólo se pueden seleccionar las opciones del último nivel. Al asignar `change-on-select` a `true`, también se pueden seleccionar opciones en los niveles superiores.
+
 ```html
 <el-cascader
   :options="options"
@@ -1382,11 +1386,12 @@ Parent options can also be selected.
 ```
 :::
 
-### Dynamically load child options
+### Carga dinamica de elementos hijos
 
-Load child options when their parent option is clicked or hovered over.
+Se puede hacer una carga dinamica de elementos hijos cuando se hace clic en el elemento padre o se pasa el ratón sobre el.
 
-:::demo In this example, the options array does not have data of cities when initialized. With the `active-item-change` event, you can load the cities of a specific state dynamically. Besides, this example also demonstrates how `props` is used.
+:::demo En este ejemplo, el array de opciones no tiene datos de ciudades cuando se inicializa. Con el evento `active-item-change`, puede cargar dinámicamente las ciudades de un estado específico. Además, este ejemplo también demuestra cómo se utilizan los`props`.
+
 ```html
 <el-cascader
   :options="options2"
@@ -1433,11 +1438,12 @@ Load child options when their parent option is clicked or hovered over.
 ```
 :::
 
-### Filterable
+### Filtrable
 
-Search and select options with a keyword.
+Buscar y seleccionar opciones con una palabra clave.
 
-:::demo Adding `filterable` to `el-cascader` enables filtering
+:::demo Añadir `filterable` a `el-cascader` permite filtrar
+
 ```html
 <div class="block">
   <span class="demonstration">Only options of the last level can be selected</span>
@@ -1663,34 +1669,35 @@ Search and select options with a keyword.
 ```
 :::
 
-### Attributes
-| Attribute | Description         | Type    | Options       | Default|
-|---------- |-------------------- |---------|-------------  |-------- |
-| options   | data of the options | array | — | — |
-| props | configuration options, see the following table | object | — | — |
-| value | selected value | array | — | — |
-| popper-class | custom class name for Cascader's dropdown | string | — | — |
-| placeholder | input placeholder | string | — | Select |
-| disabled  | whether Cascader is disabled | boolean |  — | false |
-| clearable  | whether selected value can be cleared | boolean | — | false |
-| expand-trigger  | trigger mode of expanding current item | string | click / hover | click |
-| show-all-levels | whether to display all levels of the selected value in the input | boolean | — | true |
-| filterable  | whether the options can be searched | boolean | — | — |
-| debounce | debounce delay when typing filter keyword, in milliseconds | number | — | 300 |
-| change-on-select | whether selecting an option of any level is permitted | boolean | — | false |
-| size  | size of Input | string | medium / small / mini | — |
-| before-filter | hook function before filtering with the value to be filtered as its parameter. If `false` is returned or a `Promise` is returned and then is rejected, filtering will be aborted | function(value) | — | — |
+### Atributos
+| Atributo         | Descripción                              | Tipo            | Opciones              | Por defecto |
+| ---------------- | ---------------------------------------- | --------------- | --------------------- | ----------- |
+| options          | datos de las opciones                    | array           | —                     | —           |
+| props            | opciones de configuration,  mire la tabla siguiente | object          | —                     | —           |
+| value            | valor seleccionado                       | array           | —                     | —           |
+| popper-class     | nombre de clase para el Cascader's dropdown | string          | —                     | —           |
+| placeholder      | input placeholder                        | string          | —                     | Select      |
+| disabled         | si Cascader esta disabled                | boolean         | —                     | false       |
+| clearable        | si se puede borrar el valor seleccionado | boolean         | —                     | false       |
+| expand-trigger   | evento del elemento actual para expandirse. | string          | click / hover         | click       |
+| show-all-levels  | si mostrar todos los niveles del valor seleccionado en la entrada | boolean         | —                     | true        |
+| filterable       | si se pueden buscar las opciones         | boolean         | —                     | —           |
+| debounce         | retardo al escribir la palabra clave del filtro, en milisegundos | number          | —                     | 300         |
+| change-on-select | si se permite seleccionar una opción de cualquier nivel | boolean         | —                     | false       |
+| size             | tamaño del input                         | string          | medium / small / mini | —           |
+| before-filter    | funcion antes de filtrar con el valor a filtrar como parámetro. Si se devuelve `false` o se devuelve una `Promise` y luego es rechazada, el filtrado será abortado. | function(value) | —                     | —           |
 
 ### props
-| Attribute | Description | Type | Accepted Values | Default |
-| --------- | ----------------- | ------ | ------ | ------ |
-| label     | specify which key of option object is used as the option's label | string | — | — |
-| value     | specify which key of option object is used as the option's value | string | — | — |
-| children  | specify which key of option object is used as the option's child options | string | — | — |
-| disabled  | specify which key of option object indicates if the option is disabled | string | — | — |
+| Atributo | Descripción                              | Tipo   | Valores aceptados | Por defecto |
+| -------- | ---------------------------------------- | ------ | ----------------- | ----------- |
+| label    | especifica qué clave del elemento de la opción se utiliza como etiqueta | string | —                 | —           |
+| value    | especifica qué clave del elemento de la opción se utiliza como valor | string | —                 | —           |
+| children | especifica qué clave del elemento de la opción se utiliza como hijo | string | —                 | —           |
+| disabled | especifica qué clave del elemento de la opción indica si está deshabilitada | string | —                 | —           |
 
-### Events
-| Event Name | Description | Parameters |
-|---------- |-------- |---------- |
-| change  | triggers when the binding value changes | value |
-| active-item-change | triggers when active option changes, only works when `change-on-select` is `false` | an array of active options |
+### Eventos
+| Nombre             | Descripción                              | Parametros                |
+| ------------------ | ---------------------------------------- | ------------------------- |
+| change             | se dispara cuando el valor cambia        | valor                     |
+| active-item-change | se dispara cuando cambia la opción activa, sólo funciona cuando `change-on-select` es `false`. | array de opciones activas |
+

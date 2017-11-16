@@ -5,7 +5,7 @@
         active: 0
       };
     },
-
+    
     methods: {
       next() {
         if (this.active++ > 2) this.active = 0;
@@ -16,13 +16,13 @@
 
 ## Steps
 
-Guide the user to complete tasks in accordance with the process. Its steps can be set according to the actual application scenario and the number of the steps can't be less than 2.
+Guía al usuario para completar tareas de acuerdo con el proceso. Sus pasos pueden configurarse de acuerdo con el escenario de aplicación real y el número de pasos no puede ser inferior a dos.
 
-### Basic usage
+### Uso básico
 
-Simple step bar.
+Barra de pasos simple.
 
-:::demo Set `active` attribute with `Number` type, which indicates the index of steps and starts from 0. You can set `space` attribute when the width of the step needs to be fixed which accepts `Boolean` type. The unit of the `space` attribute is `px`. If not set, it is responsive. Setting the `finish-status` attribute can change the state of the steps that have been completed.
+:::demo Defina el atributo `active` con un valor de tipo `Number`, que indica el índice de pasos y comienza desde 0. Puede definir el atributo `space` cuando es necesario fijar el ancho del paso que acepta el tipo `Boolean`. La unidad del atributo `space` es px. Si no está configurado, es responsive. La configuración del atributo `finish-status` puede cambiar el estado de los pasos completados.
 
 ```html
 <el-steps :active="active" finish-status="success">
@@ -51,11 +51,11 @@ Simple step bar.
 ```
 :::
 
-### Step bar that contains status
+### Step bar con el status
 
-Shows the status of the step for each step.
+Muestra el estado del step para cada paso.
 
-:::demo Use `title` attribute to set the name of the step, or override the attribute by using a named `slot`. We have listed all the slot names for you at the end of this page.
+:::demo Utilice el atributo `title` para establecer el nombre del paso, o sobreescriba el atributo usando un slot con nombre. Hemos enumerado todos los nombres de slots al final de esta página.
 
 ```html
 <el-steps :space="200" :active="1" finish-status="success">
@@ -66,9 +66,9 @@ Shows the status of the step for each step.
 ```
 :::
 
-### Center 
+### Centrado 
 
-Title and desription can be centered.
+El título y la descripción pueden estar centrados.
 
 :::demo
 ```html
@@ -81,9 +81,9 @@ Title and desription can be centered.
 ```
 :::
 
-### Step bar with description
+### Step bar con descripción
 
-There is description for each step.
+Puede poner una descripción para cada paso.
 
 :::demo
 ```html
@@ -97,9 +97,9 @@ There is description for each step.
 
 ### Step bar with icon
 
-A variety of custom icons can be used in the step bar.
+En la barra de pasos se pueden utilizar diversos iconos personalizados.
 
-:::demo The icon is set by the `icon` property. The types of icons can be found in the document for the Icon component. In addition, you can customize the icon through a named `slot`.
+:::demo El icono se define mediante la propiedad `icon`. Los tipos de iconos se pueden encontrar en la descripción del componente Icono. Además, puede personalizar el icono a través de un slot con nombre.
 
 ```html
 <el-steps :active="1">
@@ -110,11 +110,11 @@ A variety of custom icons can be used in the step bar.
 ```
 :::
 
-### Vertical step bar
+### Step bar vertical
 
-Vertical step bars.
+Step bar vertical.
 
-:::demo You only need to set the `direction` attribute to` vertical` in the `el-steps` element.
+:::demo Sólo tiene que fijar el atributo `direction`  a ` vertical` en el elemento `el-steps`.
 
 ```html
 <div style="height: 300px;">
@@ -127,8 +127,8 @@ Vertical step bars.
 ```
 :::
 
-### Simple step bar
-Simple step bars, where `align-center`, `description`, `direction` and `space` will be ignored.
+### Step bar simple
+Step bar simple, donde se ignorará `align-center`, `description`, `direction` y `space`.
 
 :::demo
 ```html
@@ -147,30 +147,30 @@ Simple step bars, where `align-center`, `description`, `direction` and `space` w
 ```
 :::
 
-### Steps Attributes
+### Steps atributos
 
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
-|---------- |-------- |---------- |-------------  |-------- |
-| space | the spacing of each step, will be responsive if omitted. Supports percentage. | number / string | — | — |
-| direction | display direction | string | vertical/horizontal | horizontal |
-| active | current activation step  | number | — | 0 |
-| process-status | status of current step | string | wait / process / finish / error / success | process |
-| finish-status | status of end step | string | wait / process / finish / error / success | finish |
-| align-center | center title and description | boolean | — | false |
-| simple | whether to apply simple theme | boolean | - | false |
+| Atributo       | Descripción                              | Tipo            | Valores aceptados                        | Por defecto |
+| -------------- | ---------------------------------------- | --------------- | ---------------------------------------- | ----------- |
+| space          | el espaciado de cada paso, será responsivo si se omite. Soporta porcentaje. | number / string | —                                        | —           |
+| direction      | dirección de visualización               | string          | vertical/horizontal                      | horizontal  |
+| active         | actual paso de activación                | number          | —                                        | 0           |
+| process-status | status del paso actual                   | string          | wait / process / finish / error / success | process     |
+| finish-status  | status del paso final                    | string          | wait / process / finish / error / success | finish      |
+| align-center   | centrado de título y descripción         | boolean         | —                                        | false       |
+| simple         | si aplicar un tema simple                | boolean         | -                                        | false       |
 
-### Step Attributes
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
-|---------- |-------- |---------- |-------------  |-------- |
-| title | step title | string | — | — |
-| description | step description | string | — | — |
-| icon | step icon | step icon's class name. Icons can be passed via named slot as well | string | — |
-| status | current status. It will be automatically set by Steps if not configured. | wait / process / finish / error / success | - |
+### Step atributos
+| Atributo    | Descripción                              | Tipo                                     | Valores aceptados | Por defecto |
+| ----------- | ---------------------------------------- | ---------------------------------------- | ----------------- | ----------- |
+| title       | titulo del paso                          | string                                   | —                 | —           |
+| description | descripción del paso                     | string                                   | —                 | —           |
+| icon        | icono del paso                           | nombre de la clase del icono del paso. Los iconos también se pueden pasar a través del slot con nombre | string            | —           |
+| status      | estado actual. Se configurará automáticamente mediante Steps si no está configurado. | wait / process / finish / error / success | -                 |             |
 
 ### Step Slot
-| Name | Description |
-|----|----|
-| icon | custom icon |
-| title | step title |
-| description | step description |
+| Name        | Description          |
+| ----------- | -------------------- |
+| icon        | Icono personalizado  |
+| title       | Titulo del paso      |
+| description | Descripcion del paso |
 

@@ -67,11 +67,11 @@
 
 ## Icon
 
-Element provides a set of common icons.
+Element proporciona un conjunto de iconos propios.
 
-### Basic usage
+### Uso básico
 
-Just assign the class name to `el-icon-iconName`.
+Simplemente asigna el nombre de la clase a `el-icon-iconName`.
 
 :::demo
 
@@ -84,7 +84,7 @@ Just assign the class name to `el-icon-iconName`.
 ```
 :::
 
-### Icons
+### Iconos
 
 <ul class="icon-list">
   <li v-for="name in icons" :key="name">
