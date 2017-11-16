@@ -98,15 +98,16 @@
 
 ## DateTimePicker
 
-Select date and time in one picker.
+seleccionar fecha y tiempo juntos en una escoja.
 
-:::tip
-DateTimePicker is derived from DatePicker and TimePicker. For a more detailed explanation on `pickerOptions` and other attributes, you can refer to DatePicker and TimePicker.
+:::propina
+DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más detallada sobre `pickerOptions` y otros atributos,puedes referirse a DatePicker y TimePicker.
 :::
 
-###  Date and time
+###  Fecha y hora
 
-:::demo You can select date and time in one picker at the same time by setting `type` to `datetime`. The way to use shortcuts is the same as Date Picker.
+:::manifestación Puedes seleccionar fecha y tiempo juntos en una escoja al mismo tiempo por establecer `type` a `datetime`.El método a utilizar atajos es mismo que Date Picker.
+
 
 ```html
 <template>
@@ -164,9 +165,9 @@ DateTimePicker is derived from DatePicker and TimePicker. For a more detailed ex
 ```
 :::
 
-### Date and time range
+### alcance de fecha y tiempo
 
-:::demo You can select date and time range by setting `type` to `datetimerange`.
+:::manifestación Puedes seleccionar fecha y tiempo por establecer `type` a `datetimerange`.
 
 ```html
 <template>
@@ -234,50 +235,50 @@ DateTimePicker is derived from DatePicker and TimePicker. For a more detailed ex
 ```
 :::
 
-### Attributes
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
+### Atributos
+| Atributos      | Descripción          | Tipo      | Valores aceptados       | Defecto  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| readonly | whether DatePicker is read only | boolean | — | false |
-| disabled | whether DatePicker is disabled | boolean | — | false |
-| editable | whether the input is editable | boolean | — | true |
-| clearable | Whether to show clear button | boolean | — | true |
-|size | size of Input | string | large/small/mini | — |
-| placeholder | placeholder in non-range mode | string | — | — |
-| start-placeholder | placeholder for the start date in range mode | string | — | — |
-| end-placeholder | placeholder for the end date in range mode | string | — | — |
-| time-arrow-control | whether to pick time using arrow buttons | boolean | — | false |
-| type | type of the picker | string | year/month/date/datetime/ week/datetimerange/daterange | date |
-| format | format of the displayed value in the input box | string | year `yyyy` month `MM` day `dd`, hour `HH`, minute `mm`, second `ss` | yyyy-MM-dd |
-| align | alignment | left/center/right | left |
-| popper-class | custom class name for DateTimePicker's dropdown | string | — | — |
-| picker-options | additional options, check the table below | object | — | {} |
-| range-separator | range separator | string | - | '-' |
-| default-value | optional, default date of the calendar | Date | anything accepted by `new Date()` | — |
-| value-format | optional, format of binding value. If not specified, the binding value will be a Date object | string | year `yyyy`, month `MM`, day `dd`, hour `HH`, minute `mm`, second `ss` | — |
-| name | same as `name` in native input | string | — | — |
-| unlink-panels | unllink two date-panels in range-picker | boolean | — | false |
+| readonly | cuando DatePicker es lectura sola | boolean | — | false |
+| disabled | cuando DatePicker es deshabilitada | boolean | — | false |
+| editable | Si la entrada es editable | boolean | — | true |
+| clearable | Si monstrar el botón de despejar | boolean | — | true |
+|size | tamaño de la entrada | string | large/small/mini | — |
+| placeholder | placeholder en la modalidad sin-rango | string | — | — |
+| start-placeholder | placeholder para el comienzo de fecha en la modalidad de alcance | string | — | — |
+| end-placeholder | placeholder para el fin de fecha en la modalidad de alcance | string | — | — |
+| time-arrow-control | si se escoja tiempo utilizando botones de flecha | boolean | — | false |
+| type | tipo de la escoja | string | year/month/date/datetime/ week/datetimerange/daterange | date |
+| format | formato de valor mostrado en la caja de entrada | string | año `yyyy` mes `MM` día `dd`, hora `HH`, minuto `mm`, segundo `ss` | yyyy-MM-dd |
+| alinear | alineación | left/center/right | left |
+| popper-class | nombre de clase clientela por dropdown de DatePicker | string | — | — |
+| picker-options | opciones adicionales, comproba la tabla abaja | object | — | {} |
+| range-separator | separador de alcance | string | - | '-' |
+| default-value | fecha opcional y defectada del calendario| Fecha | cualquier cosa aceptada por `new Date()` — |
+| value-format | opcional,formato de valor atado.Si no special, el valor atado sería ser un valor de fecha | cadena | año `yyyy`, mes `MM`, día `dd`, hora `HH`, minuto `mm`, segundo `ss` | — |
+| name | igual que `name` en la entrada nativa | string | — | — |
+| unlink-panels | desconectar dos fecha-paneles en alcance-escoja | boolean | — | false |
 
 ### Picker Options
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
+| Atributo      | Descripción          | Tipo      | Valores aceptados      | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| shortcuts | a { text, onClick } object array to set shortcut options, check the table below | object[] | — | — |
-| disabledDate | a function determining if a date is disabled with that date as its parameter. Should return a Boolean | function | — | — |
-| firstDayOfWeek | first day of week | Number | 1 to 7 | 7 |
+| shortcuts | un { text, onClick } objecto serie para establecer opciones atajos, comprobar la mesa abaja | objeto[] | — | — |
+| disabledDate | una función determinar si la fecha es minusválida con la fecha como su parámetro.Debería devolver un booleano | función | — | — |
+| firstDayOfWeek | primera día de semana | Número | 1 to 7 | 7 |
 
-### shortcuts
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
+### atajos
+| Atributo      | Descripción          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | text | title of the shortcut | string | — | — |
-| onClick | callback function, triggers when the shortcut is clicked, with the `vm` as its parameter. You can change the picker value by emitting the `pick` event. Example: `vm.$emit('pick', new Date())`| function | — | — |
+| onClick | función de llama de vuelta, gatillos cuando el atajo se hace clic, con el `vm` como su parámetro. Puedes cambiar el valor de escoja por emitir el evento `pick`. Ejemplo: `vm.$emit('pick', new Date())`| function | — | — |
 
-### Events
-| Event Name | Description | Parameters |
+### Eventos
+| Nombre de evento | Descripción | Parámetros |
 |---------|--------|---------|
-| change | triggers when user confirms the value | component's binding value |
-| blur | triggers when Input blurs | (event: Event) |
-| focus | triggers when Input focuses | (event: Event) |
+| change | gatillos cuando usuario confirma el valor | valor atado de componente |
+| blur | gatillos cuando la entrada difumina | (event: Event) |
+| focus | gatillos cuando la entrada enfoca | (event: Event) |
 
-### Methods
-| Method | Description | Parameters |
+### Métodos
+| Método | Descripción | Parámetros |
 |------|--------|-------|
-| focus | focus the Input component | — |
+| focus | enfoque la entrada de componente | — |
