@@ -16,6 +16,10 @@ export default {
       startTime: 'Start Time',
       endDate: 'End Date',
       endTime: 'End Time',
+      prevYear: 'Previous Year',
+      nextYear: 'Next Year',
+      prevMonth: 'Previous Month',
+      nextMonth: 'Next Month',
       year: '',
       month1: 'Jan',
       month2: 'Feb',
@@ -78,6 +82,7 @@ export default {
       error: 'Illegal input'
     },
     upload: {
+      deleteTip: 'press delete to remove',
       delete: 'Delete',
       preview: 'Preview',
       continue: 'Continue'

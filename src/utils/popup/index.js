@@ -50,10 +50,6 @@ const getDOM = function(dom) {
 };
 
 export default {
-  model: {
-    prop: 'visible',
-    event: 'visible-change'
-  },
   props: {
     visible: {
       type: Boolean,
@@ -146,7 +142,6 @@ export default {
     open(options) {
       if (!this.rendered) {
         this.rendered = true;
-        this.$emit('visible-change', true);
       }
 
       const props = merge({}, this.$props || this, options);
@@ -174,8 +169,6 @@ export default {
       if (this.opened) return;
 
       this._opening = true;
-
-      this.$emit('visible-change', true);
 
       const dom = getDOM(this.$el);
 
@@ -247,7 +240,6 @@ export default {
     },
 
     doClose() {
-      this.$emit('visible-change', false);
       this._closing = true;
 
       this.onClose && this.onClose();

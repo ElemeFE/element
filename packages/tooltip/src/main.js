@@ -1,6 +1,7 @@
 import Popper from 'element-ui/src/utils/vue-popper';
 import debounce from 'throttle-debounce/debounce';
 import { getFirstComponentChild } from 'element-ui/src/utils/vdom';
+import { generateId } from 'element-ui/src/utils/util';
 import Vue from 'vue';
 
 export default {
@@ -48,10 +49,15 @@ export default {
 
   data() {
     return {
-      timeoutPending: null
+      timeoutPending: null,
+      focusing: false
     };
   },
-
+  computed: {
+    tooltipId() {
+      return `el-tooltip-${generateId()}`;
+    }
+  },
   beforeCreate() {
     if (this.$isServer) return;
 
@@ -75,6 +81,9 @@ export default {
             onMouseleave={ () => { this.setExpectedState(false); this.debounceClose(); } }
             onMouseenter= { () => { this.setExpectedState(true); } }
             ref="popper"
+            role="tooltip"
+            id={this.tooltipId}
+            aria-hidden={ (this.disabled || !this.showPopper) ? 'true' : 'false' }
             v-show={!this.disabled && this.showPopper}
             class={
               ['el-tooltip__popper', 'is-' + this.effect, this.popperClass]
@@ -87,24 +96,38 @@ export default {
     if (!this.$slots.default || !this.$slots.default.length) return this.$slots.default;
 
     const vnode = getFirstComponentChild(this.$slots.default);
+
     if (!vnode) return vnode;
+
     const data = vnode.data = vnode.data || {};
     const on = vnode.data.on = vnode.data.on || {};
     const nativeOn = vnode.data.nativeOn = vnode.data.nativeOn || {};
 
     data.staticClass = this.concatClass(data.staticClass, 'el-tooltip');
-    on.mouseenter = this.addEventHandle(on.mouseenter, this.show);
-    on.mouseleave = this.addEventHandle(on.mouseleave, this.hide);
-    nativeOn.mouseenter = this.addEventHandle(nativeOn.mouseenter, this.show);
-    nativeOn.mouseleave = this.addEventHandle(nativeOn.mouseleave, this.hide);
-
+    nativeOn.mouseenter = on.mouseenter = this.addEventHandle(on.mouseenter, this.show);
+    nativeOn.mouseleave = on.mouseleave = this.addEventHandle(on.mouseleave, this.hide);
+    nativeOn.focus = on.focus = this.addEventHandle(on.focus, this.handleFocus);
+    nativeOn.blur = on.blur = this.addEventHandle(on.blur, this.handleBlur);
+    nativeOn.click = on.click = this.addEventHandle(on.click, () => { this.focusing = false; });
     return vnode;
   },
 
   mounted() {
     this.referenceElm = this.$el;
+    if (this.$el.nodeType === 1) {
+      this.$el.setAttribute('aria-describedby', this.tooltipId);
+      this.$el.setAttribute('tabindex', 0);
+    }
   },
-
+  watch: {
+    focusing(val) {
+      if (val) {
+        this.referenceElm.className += ' focusing';
+      } else {
+        this.referenceElm.className = this.referenceElm.className.replace('focusing', '');
+      }
+    }
+  },
   methods: {
     show() {
       this.setExpectedState(true);
@@ -115,7 +138,14 @@ export default {
       this.setExpectedState(false);
       this.debounceClose();
     },
-
+    handleFocus() {
+      this.focusing = true;
+      this.show();
+    },
+    handleBlur() {
+      this.focusing = false;
+      this.hide();
+    },
     addEventHandle(old, fn) {
       if (!old) {
         return fn;

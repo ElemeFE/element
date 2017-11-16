@@ -17,15 +17,20 @@
       :class="{ current: isWeekActive(row[1]) }">
       <td
         v-for="cell in row"
-        :class="getCellClasses(cell)"
-        v-text="cell.type === 'today' ? t('el.datepicker.today') : cell.text"></td>
+        :class="getCellClasses(cell)">
+        <div>
+          <span>
+            {{ cell.text }}
+          </span>
+        </div>
+      </td>
     </tr>
     </tbody>
   </table>
 </template>
 
 <script>
-  import { getFirstDayOfMonth, getDayCountOfMonth, getWeekNumber, getStartDateOfMonth, DAY_DURATION } from '../util';
+  import { getFirstDayOfMonth, getDayCountOfMonth, getWeekNumber, getStartDateOfMonth, nextDate, isDate } from '../util';
   import { hasClass } from 'element-ui/src/utils/dom';
   import Locale from 'element-ui/src/mixins/locale';
 
@@ -46,13 +51,16 @@
         validator: val => val >= 1 && val <= 7
       },
 
+      value: {},
+
+      defaultValue: {
+        validator(val) {
+          // either: null, valid Date object, Array of valid Date objects
+          return val === null || isDate(val) || (Array.isArray(val) && val.every(isDate));
+        }
+      },
+
       date: {},
-
-      year: {},
-
-      month: {},
-
-      week: {},
 
       selectionMode: {
         default: 'day'
@@ -93,8 +101,12 @@
         return WEEKS.concat(WEEKS).slice(week, week + 7);
       },
 
-      monthDate() {
-        return this.date.getDate();
+      year() {
+        return this.date.getFullYear();
+      },
+
+      month() {
+        return this.date.getMonth();
       },
 
       startDate() {
@@ -102,6 +114,7 @@
       },
 
       rows() {
+        // TODO: refactory rows / getCellClasses
         const date = new Date(this.year, this.month, 1);
         let day = getFirstDayOfMonth(date); // day of first day
         const dateCountOfMonth = getDayCountOfMonth(date.getFullYear(), date.getMonth());
@@ -123,7 +136,7 @@
 
           if (this.showWeekNumber) {
             if (!row[0]) {
-              row[0] = { type: 'week', text: getWeekNumber(new Date(startDate.getTime() + DAY_DURATION * (i * 7 + 1))) };
+              row[0] = { type: 'week', text: getWeekNumber(nextDate(startDate, i * 7 + 1)) };
             }
           }
 
@@ -136,7 +149,7 @@
             cell.type = 'normal';
 
             const index = i * 7 + j;
-            const time = startDate.getTime() + DAY_DURATION * (index - offset);
+            const time = nextDate(startDate, index - offset).getTime();
             cell.inRange = time >= clearHours(this.minDate) && time <= clearHours(this.maxDate);
             cell.start = this.minDate && time === clearHours(this.minDate);
             cell.end = this.maxDate && time === clearHours(this.maxDate);
@@ -227,9 +240,16 @@
     },
 
     methods: {
+      cellMatchesDate(cell, date) {
+        const value = new Date(date);
+        return this.year === value.getFullYear() &&
+          this.month === value.getMonth() &&
+          Number(cell.text) === value.getDate();
+      },
+
       getCellClasses(cell) {
         const selectionMode = this.selectionMode;
-        const monthDate = this.monthDate;
+        const defaultValue = this.defaultValue ? Array.isArray(this.defaultValue) ? this.defaultValue : [this.defaultValue] : [];
 
         let classes = [];
         if ((cell.type === 'normal' || cell.type === 'today') && !cell.disabled) {
@@ -241,8 +261,11 @@
           classes.push(cell.type);
         }
 
-        if (selectionMode === 'day' && (cell.type === 'normal' || cell.type === 'today') &&
-          Number(this.year) === this.date.getFullYear() && this.month === this.date.getMonth() && monthDate === Number(cell.text)) {
+        if (cell.type === 'normal' && defaultValue.some(date => this.cellMatchesDate(cell, date))) {
+          classes.push('default');
+        }
+
+        if (selectionMode === 'day' && (cell.type === 'normal' || cell.type === 'today') && this.cellMatchesDate(cell, this.value)) {
           classes.push('current');
         }
 
@@ -266,22 +289,8 @@
       },
 
       getDateOfCell(row, column) {
-        const startDate = this.startDate;
-
-        return new Date(startDate.getTime() + (row * 7 + (column - (this.showWeekNumber ? 1 : 0)) - this.offsetDay) * DAY_DURATION);
-      },
-
-      getCellByDate(date) {
-        const startDate = this.startDate;
-        const rows = this.rows;
-        const index = (date - startDate) / DAY_DURATION;
-        const row = rows[Math.floor(index / 7)];
-
-        if (this.showWeekNumber) {
-          return row[index % 7 + 1];
-        } else {
-          return row[index % 7];
-        }
+        const offsetFromStart = row * 7 + (column - (this.showWeekNumber ? 1 : 0)) - this.offsetDay;
+        return nextDate(this.startDate, offsetFromStart);
       },
 
       isWeekActive(cell) {
@@ -302,7 +311,7 @@
 
         newDate.setDate(parseInt(cell.text, 10));
 
-        return getWeekNumber(newDate) === this.week;
+        return getWeekNumber(newDate) === getWeekNumber(this.date);
       },
 
       markRange(maxDate) {
@@ -313,14 +322,14 @@
 
         const rows = this.rows;
         const minDate = this.minDate;
-        for (var i = 0, k = rows.length; i < k; i++) {
+        for (let i = 0, k = rows.length; i < k; i++) {
           const row = rows[i];
-          for (var j = 0, l = row.length; j < l; j++) {
+          for (let j = 0, l = row.length; j < l; j++) {
             if (this.showWeekNumber && j === 0) continue;
 
             const cell = row[j];
             const index = i * 7 + j + (this.showWeekNumber ? -1 : 0);
-            const time = startDate.getTime() + DAY_DURATION * (index - this.offsetDay);
+            const time = nextDate(startDate, index - this.offsetDay).getTime();
 
             cell.inRange = minDate && time >= clearHours(minDate) && time <= clearHours(maxDate);
             cell.start = minDate && time === clearHours(minDate.getTime());
@@ -338,7 +347,13 @@
           rangeState: this.rangeState
         });
 
-        const target = event.target;
+        let target = event.target;
+        if (target.tagName === 'SPAN') {
+          target = target.parentNode.parentNode;
+        }
+        if (target.tagName === 'DIV') {
+          target = target.parentNode;
+        }
         if (target.tagName !== 'TD') return;
 
         const column = target.cellIndex;
@@ -355,11 +370,17 @@
 
       handleClick(event) {
         let target = event.target;
+        if (target.tagName === 'SPAN') {
+          target = target.parentNode.parentNode;
+        }
+        if (target.tagName === 'DIV') {
+          target = target.parentNode;
+        }
 
         if (target.tagName !== 'TD') return;
         if (hasClass(target, 'disabled') || hasClass(target, 'week')) return;
 
-        var selectionMode = this.selectionMode;
+        const selectionMode = this.selectionMode;
 
         if (selectionMode === 'week') {
           target = target.parentNode.cells[1];
@@ -407,6 +428,9 @@
             this.$emit('pick', { minDate, maxDate }, false);
             this.rangeState.selecting = true;
             this.markRange(this.minDate);
+            this.$nextTick(() => {
+              this.handleMouseMove(event);
+            });
           } else if (this.minDate && !this.maxDate) {
             if (newDate >= this.minDate) {
               const maxDate = new Date(newDate.getTime());

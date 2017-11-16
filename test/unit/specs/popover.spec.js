@@ -205,57 +205,46 @@ describe('Popover', () => {
     });
   });
 
-  describe('event', (done) => {
-    const createVM = (trigger) => {
-      return createVue({
-        template: `
-          <div>
-            <el-popover
-              ref="popover"
-              trigger="${trigger}"
-              @show="handleShow"
-              @hide="handleHide"
-              content="content">
-              <button slot="reference">trigger ${trigger}</button>
-            </el-popover>
-          </div>
-        `,
+  it('show/hide events', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-popover
+            ref="popover"
+            trigger="click"
+            @show="handleShow"
+            @hide="handleHide"
+            content="content">
+            <button slot="reference">trigger</button>
+          </el-popover>
+        </div>
+      `,
 
-        methods: {
-          handleShow() {
-            this.trigger = true;
-          },
-          handleHide() {
-            this.trigger = false;
-          }
+      methods: {
+        handleShow() {
+          this.trigger = true;
         },
-
-        data() {
-          return {
-            trigger: false
-          };
+        handleHide() {
+          this.trigger = false;
         }
-      }, true);
-    };
+      },
 
-    it('show/hide', () => {
-      vm = createVM('click');
-      const compo = vm.$refs.popover;
+      data() {
+        return {
+          trigger: false
+        };
+      }
+    }, true);
 
-      vm.$el.querySelector('button').click();
-      expect(compo.showPopper).to.true;
-      expect(vm.trigger).to.false;
+    vm.$el.querySelector('button').click();
+    setTimeout(_ => {
+      expect(vm.trigger).to.true;
       document.body.click();
-      expect(compo.showPopper).to.false;
       setTimeout(_ => {
-        expect(vm.trigger).to.true;
-        document.body.click();
-        setTimeout(_ => {
-          expect(vm.trigger).to.false;
-        }, 50);
+        expect(vm.trigger).to.false;
         done();
       }, 50);
-    });
+    }, 50);
   });
 
   it('destroy event', () => {

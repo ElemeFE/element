@@ -119,7 +119,7 @@ describe('Tree', () => {
   const ALL_NODE_COUNT = 9;
 
   it('create', () => {
-    vm = getTreeVm(':props="defaultProps"');
+    vm = getTreeVm(':props="defaultProps" default-expand-all');
     expect(document.querySelector('.el-tree')).to.exist;
     expect(document.querySelectorAll('.el-tree > .el-tree-node').length).to.equal(3);
     expect(document.querySelectorAll('.el-tree .el-tree-node').length).to.equal(ALL_NODE_COUNT);
@@ -245,7 +245,7 @@ describe('Tree', () => {
     tree.filter('2-1');
 
     setTimeout(() => {
-      expect(tree.$el.querySelectorAll('.el-tree-node.is-hidden').length).to.equal(7);
+      expect(tree.$el.querySelectorAll('.el-tree-node.is-hidden').length).to.equal(3);
       done();
     }, 100);
   });
@@ -259,13 +259,19 @@ describe('Tree', () => {
     expect(vm.$el.querySelectorAll('.el-tree-node.is-expanded').length).to.equal(3);
   });
 
-  it('autoExpandParent = false', () => {
+  it('autoExpandParent = false', (done) => {
     vm = getTreeVm(':props="defaultProps" :default-expanded-keys="defaultExpandedKeys" node-key="id" :auto-expand-parent="false"', {
       created() {
-        this.defaultExpandedKeys = [111];
+        this.defaultExpandedKeys = [11];
       }
     });
-    expect(vm.$el.querySelectorAll('.el-tree-node.is-expanded').length).to.equal(1);
+    expect(vm.$el.querySelectorAll('.el-tree-node.is-expanded').length).to.equal(0);
+    const firstNode = document.querySelector('.el-tree-node__content');
+    firstNode.querySelector('.el-tree-node__expand-icon').click();
+    setTimeout(() => {
+      expect(document.querySelectorAll('.el-tree-node.is-expanded').length).to.equal(2);
+      done();
+    }, 100);
   });
 
   it('defaultCheckedKeys & check-strictly = false', () => {
@@ -289,34 +295,41 @@ describe('Tree', () => {
   it('show checkbox', done => {
     vm = getTreeVm(':props="defaultProps" show-checkbox');
     const tree = vm.$children[0];
-    const secondNode = document.querySelectorAll('.el-tree-node__content')[3];
+    const secondNode = document.querySelectorAll('.el-tree-node__content')[1];
     const nodeCheckbox = secondNode.querySelector('.el-checkbox');
     expect(nodeCheckbox).to.be.exist;
     nodeCheckbox.click();
-    expect(tree.getCheckedNodes().length).to.equal(3);
-    expect(tree.getCheckedNodes(true).length).to.equal(2);
-    const firstLeaf = secondNode.nextElementSibling.querySelector('.el-tree-node__content');
-    const leafCheckbox = firstLeaf.querySelector('.el-checkbox');
-    vm.$nextTick(() => {
-      leafCheckbox.click();
-      expect(tree.getCheckedNodes().length).to.equal(1);
-      done();
-    });
+    setTimeout(() => {
+      expect(tree.getCheckedNodes().length).to.equal(3);
+      expect(tree.getCheckedNodes(true).length).to.equal(2);
+      secondNode.querySelector('.el-tree-node__expand-icon').click();
+      setTimeout(() => {
+        const firstLeaf = secondNode.nextElementSibling.querySelector('.el-tree-node__content');
+        const leafCheckbox = firstLeaf.querySelector('.el-checkbox');
+        leafCheckbox.click();
+        setTimeout(() => {
+          expect(tree.getCheckedNodes().length).to.equal(1);
+          done();
+        }, 10);
+      }, 10);
+    }, 10);
   });
 
   it('setCheckedNodes', (done) => {
     vm = getTreeVm(':props="defaultProps" show-checkbox node-key="id"');
     const tree = vm.$children[0];
-    const secondNode = document.querySelectorAll('.el-tree-node__content')[3];
+    const secondNode = document.querySelectorAll('.el-tree-node__content')[1];
     const nodeCheckbox = secondNode.querySelector('.el-checkbox');
     nodeCheckbox.click();
-    expect(tree.getCheckedNodes().length).to.equal(3);
-    expect(tree.getCheckedNodes(true).length).to.equal(2);
-    vm.$nextTick(() => {
-      tree.setCheckedNodes([]);
-      expect(tree.getCheckedNodes().length).to.equal(0);
-      done();
-    });
+    setTimeout(() => {
+      expect(tree.getCheckedNodes().length).to.equal(3);
+      expect(tree.getCheckedNodes(true).length).to.equal(2);
+      setTimeout(() => {
+        tree.setCheckedNodes([]);
+        expect(tree.getCheckedNodes().length).to.equal(0);
+        done();
+      }, 10);
+    }, 10);
   });
 
   it('setCheckedKeys', () => {
@@ -399,8 +412,51 @@ describe('Tree', () => {
     }, 0);
   });
 
+  it('setCurrentKey', (done) => {
+    vm = getTreeVm(':props="defaultProps" show-checkbox node-key="id"');
+    const tree = vm.$children[0];
+    tree.setCurrentKey(111);
+    vm.$nextTick(() => {
+      expect(tree.store.currentNode.data.id).to.equal(111);
+      done();
+    });
+  });
+
+  it('setCurrentNode', (done) => {
+    vm = getTreeVm(':props="defaultProps" show-checkbox node-key="id"');
+    const tree = vm.$children[0];
+    tree.setCurrentNode({
+      id: 111,
+      label: '三级 1-1'
+    });
+    vm.$nextTick(() => {
+      expect(tree.store.currentNode.data.id).to.equal(111);
+      done();
+    });
+  });
+
+  it('getCurrentKey', (done) => {
+    vm = getTreeVm(':props="defaultProps" show-checkbox node-key="id"');
+    const tree = vm.$children[0];
+    tree.setCurrentKey(111);
+    vm.$nextTick(() => {
+      expect(tree.getCurrentKey()).to.equal(111);
+      done();
+    });
+  });
+
+  it('getCurrentNode', (done) => {
+    vm = getTreeVm(':props="defaultProps" show-checkbox node-key="id"');
+    const tree = vm.$children[0];
+    tree.setCurrentKey(111);
+    vm.$nextTick(() => {
+      expect(tree.getCurrentNode().id).to.equal(111);
+      done();
+    });
+  });
+
   it('set disabled checkbox', done => {
-    vm = getDisableTreeVm(':props="defaultProps" show-checkbox node-key="id"');
+    vm = getDisableTreeVm(':props="defaultProps" show-checkbox node-key="id" default-expand-all');
     const node = document.querySelectorAll('.el-tree-node__content')[2];
     const nodeCheckbox = node.querySelector('.el-checkbox input');
     vm.$nextTick(() => {
@@ -410,7 +466,7 @@ describe('Tree', () => {
   });
 
   it('check strictly', (done) => {
-    vm = getTreeVm(':props="defaultProps" show-checkbox check-strictly');
+    vm = getTreeVm(':props="defaultProps" show-checkbox check-strictly default-expand-all');
     const tree = vm.$children[0];
     const secondNode = document.querySelectorAll('.el-tree-node__content')[3];
     const nodeCheckbox = secondNode.querySelector('.el-checkbox');
@@ -463,13 +519,107 @@ describe('Tree', () => {
         }
       }
     });
-    const firstNode = document.querySelector('.el-tree-node__content');
-    expect(firstNode.nextElementSibling.childNodes.length).to.equal(0);
-    firstNode.click();
+    const nodes = document.querySelectorAll('.el-tree-node__content');
+    expect(nodes.length).to.equal(2);
+    nodes[0].click();
     setTimeout(() => {
-      expect(firstNode.nextElementSibling.childNodes.length).to.equal(2);
+      expect(document.querySelectorAll('.el-tree-node__content').length).to.equal(4);
       done();
     }, 100);
+  });
+
+  it('lazy defaultChecked', done => {
+    vm = getTreeVm(':props="defaultProps" node-key="id" lazy :load="loadNode" show-checkbox', {
+      methods: {
+        loadNode(node, resolve) {
+          if (node.level === 0) {
+            return resolve([{ label: 'region1', id: this.count++ }, { label: 'region2', id: this.count++ }]);
+          }
+          if (node.level > 4) return resolve([]);
+          setTimeout(() => {
+            resolve([{
+              label: 'zone' + this.count,
+              id: this.count++
+            }, {
+              label: 'zone' + this.count,
+              id: this.count++
+            }]);
+          }, 50);
+        }
+      }
+    });
+    const tree = vm.$children[0];
+    const firstNode = document.querySelector('.el-tree-node__content');
+    const initStatus = firstNode.querySelector('.is-indeterminate');
+    expect(initStatus).to.equal(null);
+    tree.store.setCheckedKeys([3]);
+    firstNode.querySelector('.el-tree-node__expand-icon').click();
+    setTimeout(() => {
+      const clickStatus = firstNode.querySelector('.is-indeterminate');
+      expect(clickStatus).to.not.equal(null);
+      const child = document.querySelectorAll('.el-tree-node__content')[1];
+      expect(child.querySelector('input').checked).to.equal(true);
+      done();
+    }, 300);
+  });
+
+  it('lazy expandOnChecked', done => {
+    vm = getTreeVm(':props="defaultProps" node-key="id" lazy :load="loadNode" show-checkbox check-descendants', {
+      methods: {
+        loadNode(node, resolve) {
+          if (node.level === 0) {
+            return resolve([{ label: 'region1', id: this.count++ }, { label: 'region2', id: this.count++ }]);
+          }
+          if (node.level > 2) return resolve([]);
+          setTimeout(() => {
+            resolve([{
+              label: 'zone' + this.count,
+              id: this.count++
+            }, {
+              label: 'zone' + this.count,
+              id: this.count++
+            }]);
+          }, 10);
+        }
+      }
+    });
+    const tree = vm.$children[0];
+    tree.store.setCheckedKeys([1]);
+    setTimeout(() => {
+      const checkedKeys = tree.getCheckedKeys();
+      expect(checkedKeys.length).to.equal(7);
+      done();
+    }, 400);
+  });
+
+  it('lazy without expandOnChecked', done => {
+    vm = getTreeVm(':props="defaultProps" node-key="id" lazy :load="loadNode" show-checkbox', {
+      methods: {
+        loadNode(node, resolve) {
+          if (node.level === 0) {
+            return resolve([{ label: 'region1', id: this.count++ }, { label: 'region2', id: this.count++ }]);
+          }
+          if (node.level > 4) return resolve([]);
+          setTimeout(() => {
+            resolve([{
+              label: 'zone' + this.count,
+              id: this.count++
+            }, {
+              label: 'zone' + this.count,
+              id: this.count++
+            }]);
+          }, 50);
+        }
+      }
+    });
+    const tree = vm.$children[0];
+    tree.store.setCheckedKeys([1]);
+    setTimeout(() => {
+      const nodes = document.querySelectorAll('.el-tree-node__content');
+      expect(nodes[0].querySelector('input').checked).to.equal(true);
+      expect(nodes.length).to.equal(2);
+      done();
+    }, 300);
   });
 
   it('accordion', done => {
@@ -514,7 +664,7 @@ describe('Tree', () => {
       }
     });
     const firstNode = document.querySelector('.el-tree-node__content');
-    expect(firstNode.nextElementSibling.childNodes.length).to.equal(0);
+    expect(firstNode.nextElementSibling).to.not.exist;
     firstNode.click();
     setTimeout(() => {
       expect(vm.nodeExpended).to.equal(true);
@@ -526,5 +676,22 @@ describe('Tree', () => {
         done();
       }, 100);
     }, 100);
+  });
+
+  it('updateKeyChildren', (done) => {
+    vm = getTreeVm(':props="defaultProps" show-checkbox node-key="id" default-expand-all');
+    const tree = vm.$children[0];
+    tree.updateKeyChildren(1, [{
+      id: 111,
+      label: '三级 1-1'
+    }]);
+    const node = document.querySelectorAll('.el-tree-node__content')[2];
+    const label = node.querySelector('.el-tree-node__label');
+    vm.$nextTick(() => {
+      expect(tree.store.nodesMap['11']).to.equal(undefined);
+      expect(tree.store.nodesMap['1'].childNodes[0].data.id).to.equal(111);
+      expect(label.textContent).to.equal('三级 1-1');
+      done();
+    });
   });
 });

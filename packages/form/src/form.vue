@@ -12,6 +12,12 @@
 
     componentName: 'ElForm',
 
+    provide() {
+      return {
+        elForm: this
+      };
+    },
+
     props: {
       model: Object,
       rules: Object,
@@ -22,10 +28,13 @@
         default: ''
       },
       inline: Boolean,
+      inlineMessage: Boolean,
+      statusIcon: Boolean,
       showMessage: {
         type: Boolean,
         default: true
-      }
+      },
+      size: String
     },
     watch: {
       rules() {
@@ -61,11 +70,27 @@
           field.resetField();
         });
       },
+      clearValidate() {
+        this.fields.forEach(field => {
+          field.clearValidate();
+        });
+      },
       validate(callback) {
         if (!this.model) {
           console.warn('[Element Warn][Form]model is required for validate to work!');
           return;
-        };
+        }
+
+        let promise;
+        // if no callback, return promise
+        if (typeof callback !== 'function' && window.Promise) {
+          promise = new window.Promise((resolve, reject) => {
+            callback = function(valid) {
+              valid ? resolve(valid) : reject(valid);
+            };
+          });
+        }
+
         let valid = true;
         let count = 0;
         // 如果需要验证的fields为空，调用验证时立刻返回callback
@@ -82,9 +107,13 @@
             }
           });
         });
+
+        if (promise) {
+          return promise;
+        }
       },
       validateField(prop, cb) {
-        var field = this.fields.filter(field => field.prop === prop)[0];
+        let field = this.fields.filter(field => field.prop === prop)[0];
         if (!field) { throw new Error('must call validateField with valid prop string!'); }
 
         field.validate('', cb);

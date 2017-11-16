@@ -7,21 +7,44 @@
     margin: 0;
     padding: 0;
     height: 100%;
+    font-family: 'Helvetica Neue',Helvetica,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',SimSun,sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+
+    &.is-component {
+      overflow: hidden;
+    }
   }
 
   #app {
     height: 100%;
-  }
+    
+    @when component {
+      overflow-y: hidden;
 
-  body {
-    font-family: 'Helvetica Neue',Helvetica,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',SimSun,sans-serif;
-    overflow: auto;
-    font-weight: 400;
-    -webkit-font-smoothing: antialiased;
+      .main-cnt {
+        padding: 0;
+        margin-top: 0;
+        height: 100%;
+        min-height: auto;
+      }
+
+      .headerWrapper {
+        position: fixed;
+        width: 100%;
+        left: 0;
+        top: 0;
+        z-index: 1500;
+        
+        .container {
+          padding: 0;
+        }
+      }
+    }
   }
 
   a {
-    color: #4078c0;
+    color: #409EFF;
     text-decoration: none;
   }
 
@@ -44,7 +67,7 @@
     font-family: Menlo, Monaco, Consolas, Courier, monospace;
     font-size: 12px;
     padding: 18px 24px;
-    background-color: #f9fafc;
+    background-color: #fafafa;
     border: solid 1px #eaeefb;
     margin-bottom: 25px;
     border-radius: 4px;
@@ -53,7 +76,7 @@
 
   .main-cnt {
     margin-top: -80px;
-    padding: 80px 0 120px;
+    padding: 80px 0 340px;
     box-sizing: border-box;
     min-height: 100%;
   }
@@ -61,7 +84,7 @@
   .container,
   .page-container {
     width: 1140px;
-    padding: 0 30px;
+    padding: 0;
     margin: 0 auto;
   }
 
@@ -107,10 +130,23 @@
       background-color: #ECF8FF;
       border-radius: 4px;
       border-left: #50bfff 5px solid;
-      margin-top: 20px;
+      margin: 20px 0;
 
       code {
-        background-color: rgba(#fff, .7);
+        background-color: rgba(255, 255, 255, .7);
+        color: #445368;
+      }
+    }
+
+    .warning {
+      padding: 8px 16px;
+      background-color: #fff6f7;
+      border-radius: 4px;
+      border-left: #FE6C6F 5px solid;
+      margin: 20px 0;
+
+      code {
+        background-color: rgba(255, 255, 255, .7);
         color: #445368;
       }
     }
@@ -118,118 +154,6 @@
   .demo {
     margin: 20px 0;
   }
-  
-  .carbon-teaser {
-    border-radius: 0;
-    overflow: hidden;
-
-    .el-dialog__header {
-      display: none;
-    }
-
-    .el-dialog__body {
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      position: relative;
-      background: #000;
-    }
-
-    .carbon-teaser__main {
-      height: 100vh;
-      min-height: 600px;
-    }
-
-    .carbon-teaser__close {
-      position: absolute;
-      width: 40px;
-      height: 40px;
-      top: 25px;
-      right: 45px;
-      text-align: center;
-      cursor: pointer;
-      opacity: .8;
-      transition: .2s ease-out;
-
-      &::after,
-      &::before {
-         position: absolute;
-         content: '';
-         display: inline-block;
-         width: 4px;
-         border-radius: 1px;
-         height: 40px;
-         background: #ff3737;
-         box-shadow: 1px 0 1px 0 rgba(255, 255, 255, .3) inset, -2px 0 1px 0 rgba(0, 0, 0, .1) inset;
-         transition: .2s ease-out;
-      }
-
-      &::after {
-        transform: rotate(45deg);
-      }
-
-      &::before {
-        transform: rotate(-45deg);
-      }
-
-      &:hover {
-         opacity: 1;
-
-         &::after,
-         &::before {
-            box-shadow: 2px 0 1px 0 rgba(255, 255, 255, .4) inset, -2px 0 1px 0 rgba(0, 0, 0, .1) inset, 0 0 10px 3px #ff1616;
-         }
-      }
-
-    }
-
-    .carbon-teaser__button {
-      position: absolute;
-      bottom: 12%;
-      display: block;
-      width: 400px;
-      height: 19.11%;
-
-      [class*=carbon-teaser__more] {
-        position: absolute;
-        top: 0;
-        display: block;
-        width: 100%;
-        height: 100%;
-        cursor: pointer;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: auto 80%;
-        transition: .2s ease-in;
-      }
-
-      [class*=dark] {
-        background-image: url(~examples/assets/images/button-d-cn.png);
-        &.is-en {
-          background-image: url(~examples/assets/images/button-d-en.png);
-        }
-      }
-
-      [class*=light] {
-        opacity: 0;
-        background-image: url(~examples/assets/images/button-l-cn.png);
-        &.is-en {
-          background-image: url(~examples/assets/images/button-l-en.png);
-        }
-      }
-
-      &:hover {
-        [class*=light] {
-          opacity: 1;
-        }
-
-        [class*=dark] {
-          opacity: 0;
-        }
-      }
-    }
-  }
-  
   @media (max-width: 1140px) {
     .container,
     .page-container {
@@ -242,33 +166,20 @@
     .page-container {
       padding: 0 20px;
     }
+  
+    #app.is-component .headerWrapper .container {
+      padding: 0 12px;
+    }
   }
 </style>
 
 <template>
-  <div id="app">
+  <div id="app" :class="{ 'is-component': isComponent }">
     <main-header v-if="lang !== 'play'"></main-header>
     <div class="main-cnt">
       <router-view></router-view>
     </div>
-    <main-footer v-if="lang !== 'play'"></main-footer>
-    <el-dialog
-      :visible.sync="dialogVisible"
-      size="full"
-      custom-class="carbon-teaser"
-      @close="handleDialogClose"
-      :close-on-press-escape="false"
-      :close-on-click-modal="false">
-      <img
-        src="https://i.loli.net/2017/09/27/59cb11edaa26d.jpg"
-        class="carbon-teaser__main">
-      <a :href="hrefOfCarbonLearnMore" target="_blank" class="carbon-teaser__button">
-        <span class="carbon-teaser__more-dark" :class="lang !== 'zh-CN' && 'is-en'"></span>
-        <span class="carbon-teaser__more-light" :class="lang !== 'zh-CN' && 'is-en'"></span>
-      </a>
-
-      <div class="carbon-teaser__close" @click="dialogVisible = false"></div>
-    </el-dialog>
+    <main-footer v-if="lang !== 'play' && !isComponent"></main-footer>
   </div>
 </template>
 
@@ -281,24 +192,20 @@
   export default {
     name: 'app',
 
-    data() {
-      return {
-        dialogVisible: false
-      };
-    },
-
     computed: {
       lang() {
         return this.$route.path.split('/')[1] || 'zh-CN';
       },
-
-      hrefOfCarbonLearnMore() {
-        return this.lang === 'zh-CN' ? 'https://github.com/ElemeFE/element/issues/7236' : 'https://github.com/ElemeFE/element/issues/7237';
+      isComponent() {
+        return /^component-/.test(this.$route.name || '');
       }
     },
 
     watch: {
-      lang() {
+      lang(val) {
+        if (val === 'zh-CN') {
+          this.suggestJump();
+        }
         this.localize();
       }
     },
@@ -307,60 +214,55 @@
       localize() {
         use(this.lang === 'zh-CN' ? zhLocale : enLocale);
       },
-
-      renderAnchorHref() {
-        if (/changelog/g.test(location.href)) return;
-        const anchors = document.querySelectorAll('h2 a,h3 a');
-        const basePath = location.href.split('#').splice(0, 2).join('#');
-
-        [].slice.call(anchors).forEach(a => {
-          const href = a.getAttribute('href');
-          a.href = basePath + href;
-        });
-      },
-
-      goAnchor() {
-        if (location.href.match(/#/g).length > 1) {
-          const anchor = location.href.match(/#[^#]+$/g);
-          if (!anchor) return;
-          const elm = document.querySelector(anchor[0]);
-          if (!elm) return;
-
-          setTimeout(_ => {
-            document.documentElement.scrollTop = document.body.scrollTop = elm.offsetTop + 120;
-          }, 50);
-        }
-      },
-
-      handleDialogClose() {
-        localStorage.setItem('CARBON_TEASER_V2', 1);
+      suggestJump() {
+        const href = location.href;
+        const preferGithub = localStorage.getItem('PREFER_GITHUB');
+        if (href.indexOf('element-cn') > -1 || preferGithub) return;
+        setTimeout(() => {
+          if (this.lang !== 'zh-CN') return;
+          this.$confirm('建议大陆用户访问部署在国内的站点，是否跳转？', '提示')
+            .then(() => {
+              location.href = location.href.replace('element.', 'element-cn.');
+            })
+            .catch(() => {
+              localStorage.setItem('PREFER_GITHUB', true);
+            });
+        }, 1000);
       }
     },
 
     mounted() {
       this.localize();
-      this.renderAnchorHref();
-      this.goAnchor();
-
-      const intrigued = localStorage.getItem('CARBON_TEASER_V2');
-      if (!intrigued) {
-        const img = new Image();
-        img.onload = () => {
-          this.dialogVisible = true;
-        };
-        img.src = 'https://i.loli.net/2017/09/27/59cb11edaa26d.jpg';
-      }
-    },
-
-    created() {
-      window.addEventListener('hashchange', () => {
-        if (location.href.match(/#/g).length < 2) {
-          document.documentElement.scrollTop = document.body.scrollTop = 0;
-          this.renderAnchorHref();
-        } else {
-          this.goAnchor();
+      this.suggestJump();
+      setTimeout(() => {
+        const notified = localStorage.getItem('ES_NOTIFIED');
+        if (!notified && this.lang !== 'zh-CN') {
+          const h = this.$createElement;
+          const title = this.lang === 'zh-CN'
+            ? '帮助我们完成西班牙语文档'
+            : 'Help us with Spanish docs';
+          const messages = this.lang === 'zh-CN'
+            ? ['点击', '这里', '查看详情']
+            : ['Click ', 'here', ' to learn more'];
+          this.$notify({
+            title,
+            duration: 0,
+            message: h('span', [
+              messages[0],
+              h('a', {
+                attrs: {
+                  target: '_blank',
+                  href: 'https://github.com/ElemeFE/element/issues/8074'
+                }
+              }, messages[1]),
+              messages[2]
+            ]),
+            onClose() {
+              localStorage.setItem('ES_NOTIFIED', 1);
+            }
+          });
         }
-      });
+      }, 3500);
     }
   };
 </script>
