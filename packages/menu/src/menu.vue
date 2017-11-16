@@ -119,7 +119,7 @@
     data() {
       return {
         activeIndex: this.defaultActive,
-        openedMenus: this.defaultOpeneds ? this.defaultOpeneds.slice(0) : [],
+        openedMenus: (this.defaultOpeneds && !this.collapse) ? this.defaultOpeneds.slice(0) : [],
         items: {},
         submenus: {}
       };
