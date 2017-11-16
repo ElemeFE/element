@@ -110,8 +110,7 @@
 
 Puedes buscar y filtrar los items.
 
-::demo Pon el atributo `filterable` a true para permitir el filtrado.
-Por defecto si el `label` del item contiene el término buscado será incluido en el resultado. También puedes implementar tu propio método de filtrado con el atributo `filter-method`, que recibe un método y le pasa la búsqueda y cada item. Los items para los que devuelva true serán incluidos en el resultado de la búsqueda.
+::demo Pon el atributo `filterable` a true para permitir el filtrado.Por defecto si el `label` del item contiene el término buscado será incluido en el resultado. También puedes implementar tu propio método de filtrado con el atributo `filter-method`, que recibe un método y le pasa la búsqueda y cada item. Los items para los que devuelva true serán incluidos en el resultado de la búsqueda.
 ```html
 <template>
   <el-transfer
@@ -222,7 +221,7 @@ Puedes customizar los títulos, botones, la función de renderizado de los items
 
 Por defecto Transfer busca los atributos `key`, `label`, y `disabled` en cada elemento. Si tus datos tienen un nombre diferente para la clave puedes usar el atributo `props` para añadir alias.
 
-::: En este ejemplo los elementos no tienen `key`y `label`, en vez de eso tienen `value` y `desc`. Así que tienes que añadir alias para `key` y `label`.
+:::demo En este ejemplo los elementos no tienen `key`y `label`, en vez de eso tienen `value` y `desc`. Así que tienes que añadir alias para `key` y `label`.
 ```html
 <template>
   <el-transfer
