@@ -12,9 +12,9 @@
     "resource": "Resource | Element"
   },
   "es": {
-    "home": "Element - A Desktop UI Toolkit for Web",
-    "guide": "Guide | Element",
-    "component": "Component | Element",
-    "resource": "Resource | Element"
+    "home": "Element - Un kit de interfaz de usuario para la web",
+    "guide": "Guía | Element",
+    "component": "Componentes | Element",
+    "resource": "Recursos | Element"
   }
 }

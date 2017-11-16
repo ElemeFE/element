@@ -1,4 +1,5 @@
 @import "mixins/mixins";
+@import "mixins/utils";
 @import "common/var";
 @import "select-dropdown";
 @import "input";
@@ -86,6 +87,14 @@
     @include when(mini) {
       height: 14px;
     }
+  }
+
+  @include e(multiple-text) {
+    margin-left: 15px;
+    color: $--input-color;
+    font-size: $--font-size-base;
+    display: block;
+    @include utils-ellipsis;
   }
 
   @include e(close) {

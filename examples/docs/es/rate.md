@@ -39,13 +39,14 @@
   }
 </script>
 
-## Rate
+## Calificación
 
-Used for rating
+Usado para la calificación
 
-### Basic usage
+### Uso básico
 
-:::demo Rate divides rating scores into three levels and these levels can be distinguished by using different background colors. By default background colors are the same, but you can assign them to reflect three levels using the `colors` attribute, and their two thresholds can be defined by `low-threshold` and `high-threshold`.
+:::**Demo** Clasificación divide las puntuaciones en tres niveles y estos niveles pueden distinguirse usando diferentes colores de fondo. Por defecto los colores de fondo son iguales, pero puedes asignarlos para reflejar los tres niveles usando el atributo `colors` y sus dos umbrales pueden ser definidos con `low-treshold` y `high-treshold`.
+
 
 ``` html
 <div class="block">
@@ -73,11 +74,11 @@ Used for rating
 ```
 :::
 
-### With text
+### Con texto
 
-Using text to indicate rating score
+Usa texto para indicar la puntuación
 
-:::demo Add attribute `show-text` to display text at the right of Rate. You can assign texts for different scores using `texts`. `texts` is an array whose length should be equal to the max score `max`.
+:::**Demo** Agrega el atributo `show-text` para mostrar texto a la derecha del componente. Puedes asignar textos para las distintas puntuaciones usando `texts`. `texts` es un arreglo cuya longitud debe ser igual a la máxima puntuación `max`.
 
 ``` html
 <el-rate
@@ -98,11 +99,11 @@ Using text to indicate rating score
 ```
 :::
 
-### More icons
+### Más iconos
 
-You can use different icons to distinguish different rate components.
+Puedes utilizar iconos para diferenciar cada componente.
 
-:::demo You can customize icons for three different levels using `icon-classes`. In this example, we also use `void-icon-class` to set the icon if it is unselected.
+:::**Demo** Puedes customizar iconos para tres niveles diferentes usando `icon-classes`. En este ejemplo también usamos `void-icon-class` para asignar un icono si no está seleccionado.
 
 ``` html
 <el-rate
@@ -124,11 +125,11 @@ You can use different icons to distinguish different rate components.
 ```
 :::
 
-### Read-only
+### Solo lectura
 
-Read-only Rate is for displaying rating score. Half star is supported.
+La calificación de solo lectura is para mostrar la puntuación. Soporta media estrella.
 
-:::demo Use attribute `disabled` to make the component read-only. Add `show-score` to display the rating score at the right side. Additionally, you can use attribute `score-template` to provide a score template. It must contain `{value}`, and `{value}` will be replaced with the rating score.
+:::**Demo** Usa el atributo `disabled` para hacer el componente de solo lectura. Agrega `show-score` para mostrar la puntuación en el lado derecho. Además, puedes usar el atributo `score-template` para proveer una plantilla. Tiene que contener `{value}`, y `{value}` será sustituido por la puntuación.
 
 ``` html
 <el-rate
@@ -151,27 +152,27 @@ Read-only Rate is for displaying rating score. Half star is supported.
 ```
 :::
 
-### Attributes
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
+### Atributos
+| Atributo     | Descripción| Tipo| Valores aceptado| Valores por defecto|
 |---------- |-------- |---------- |-------------  |-------- |
-| max | max rating score | number | — | 5 |
-| disabled | whether Rate is read-only | boolean | — | false |
-| allow-half | whether picking half start is allowed | boolean | — | false |
-| low-threshold | threshold value between low and medium level. The value itself will be included in low level | number | — | 2 |
-| high-threshold | threshold value between medium and high level. The value itself will be included in high level | number | — | 4 |
-| colors | color array for icons. It should have 3 elements, each of which corresponds with a score level  | array | — | ['#F7BA2A', '#F7BA2A', '#F7BA2A'] |
-| void-color | color of unselected icons | string | — | #C6D1DE |
-| disabled-void-color | color of unselected read-only icons | string | — | #EFF2F7 |
-| icon-classes |  array of class names of icons. It should have 3 elements, each of which corresponds with a score level | array | — | ['el-icon-star-on', 'el-icon-star-on','el-icon-star-on'] |
-| void-icon-class | class name of unselected icons | string | — | el-icon-star-off |
-| disabled-void-icon-class | class name of unselected read-only icons | string | — | el-icon-star-on |
-| show-text | whether to display texts | boolean | — | false |
-| show-score | whether to display current score. show-score and show-text cannot be true at the same time | boolean | — | false |
-| text-color | color of texts | string | — | #1F2D3D |
-| texts | text array | array | — | ['极差', '失望', '一般', '满意', '惊喜'] |
-| score-template | score template | string | — | {value} |
+| max | puntuación máxima | number | — | 5 |
+| disabled | si la calificación es de solo lectura | boolean | — | false |
+| allow-half | si escoger media estrella está permitido | boolean | — | false |
+| low-threshold | valor del umbral entre nivel bajo y medio. El valor será incluido en el nivel bajo | number | — | 2 |
+| high-threshold | valor del umbral entre nivel bajo y medio. El valor será incluido en el nivel alto | number | — | 4 |
+| colors | arreglo de colores para iconos. Debe tener 3 elementos, cada uno corresponde a un nivel de puntuación | array | — | ['#F7BA2A', '#F7BA2A', '#F7BA2A'] |
+| void-color | color para iconos no seleccionados | string | — | #C6D1DE |
+| disabled-void-color | color para las iconos no seleccionados de solo lectura | string | — | #EFF2F7 |
+| icon-classes |  arreglo de nombres para clases de iconos. Debe tener 3 elementos, cada uno corresponde a un nivel de puntuación | array | — | ['el-icon-star-on', 'el-icon-star-on','el-icon-star-on'] |
+| void-icon-class | nombre de clase para iconos no seleccionados | string | — | el-icon-star-off |
+| disabled-void-icon-class | nombre de clase para elementos no seleccionados de solo lectura | string | — | el-icon-star-on |
+| show-text | muestra el texto | boolean | — | false |
+| show-score | muestra puntuación actual. `show-score` y `show-text` no pueden ser verdaderos al mismo tiempo | boolean | — | false |
+| text-color | color del texto | string | — | #1F2D3D |
+| texts | arreglo de textos | array | — | ['极差', '失望', '一般', '满意', '惊喜'] |
+| score-template | plantilla de puntuación | string | — | {value} |
 
 ### Events
-| Event Name | Description | Parameters |
+| Nombre del evento | Descripción | Parámetros |
 |---------- |-------- |---------- |
-| change | Triggers when rate value is changed | value after changing |
+| change | Se dispara cuando la puntuación es cambiada | valor luego del cambio |

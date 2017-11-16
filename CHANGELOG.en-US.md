@@ -1,5 +1,15 @@
 ## Changelog
 
+### 2.0.4
+
+*2017-11-10*
+
+- Improved accessibility for Cascader, Dropdown, Message, Notification, Popover, Tooltip and Tree
+- Fixed Container resize when the width of viewport decreases, #8042
+- Fixed Tree's `updateKeyChildren` incorrectly deleting child nodes, #8100
+- Fixed bordered CheckboxButton's height when nested in a Form, #8100
+- Fixed Menu's parsing error for custom colors, #8153 (by @zhouyixiang)
+
 ### 2.0.3
 
 *2017-11-03*

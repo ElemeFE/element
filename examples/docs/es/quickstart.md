@@ -1,16 +1,16 @@
-## Quick start
+## Inicio rápido
 
-This part walks you through the process of using Element in a webpack project.
+Esta sección te guía en el proceso de usar Element con webpack en un proyecto.
 
-### Use Starter Kit
+### Usa la plantilla de Kit de inicio
 
-We provide a general [project template](https://github.com/ElementUI/element-starter) for you. For Laravel users, we also have a [template](https://github.com/ElementUI/element-in-laravel-starter). You can download and use them directly.
+Proveemos una plantilla general [project template](https://github.com/ElementUI/element-starter) para ti. Para los usuarios de Laravel, también tenemos [template](https://github.com/ElementUI/element-in-laravel-starter). Puedes descargarlas y agregarlas directamente también.
 
-If you prefer not to use them, please read the following.
+Si prefieres no utilizarlas, lee las siguientes secciones de este documento.
 
-### Use vue-cli
+### Usando vue-cli
 
-We can also start a project using [vue-cli](https://github.com/vuejs/vue-cli):
+Podemos empezar un proyecto utilizando [vue-cli](https://github.com/vuejs/vue-cli):
 
 ```shell
 > npm i -g vue-cli
@@ -19,11 +19,11 @@ We can also start a project using [vue-cli](https://github.com/vuejs/vue-cli):
 > npm i && npm i element-ui
 ```
 
-### Import Element
+### Importando Element
 
-You can import Element entirely, or just import what you need. Let's start with fully import.
+Puedes importar Element completamente o solamente importar lo que necesites. Comencemos importando todo.
 
-#### Fully import
+#### Importando todo
 
 In main.js:
 ```javascript
@@ -39,19 +39,19 @@ new Vue({
   render: h => h(App)
 })
 ```
-The above imports Element entirely. Note that CSS file needs to be imported separately.
+El código anterior importa Element completamente. Nótese que el archivo CSS necesita ser incluido por separado.
 
-#### On demand
+#### En demanda
 
-With the help of [babel-plugin-component](https://github.com/QingWei-Li/babel-plugin-component), we can import components we actually need, making the project smaller than otherwise.
+Con la ayuda de [babel-plugin-component](https://github.com/QingWei-Li/babel-plugin-component), podemos importar los componentes que necesitamos, haciendo nuestro proyecto más pequenho que de la otra manera.
 
-First, install babel-plugin-component:
+Primero, instala babel-plugin-component:
 
 ```bash
 npm install babel-plugin-component -D
 ```
 
-Then edit .babelrc:
+Luego edita .babelrc:
 ```json
 {
   "presets": [
@@ -66,7 +66,7 @@ Then edit .babelrc:
 }
 ```
 
-Next, if you need Button and Select, edit main.js:
+Luego, si necesitas Button y Select, edita main.js:
 
 ```javascript
 import Vue from 'vue'
@@ -86,7 +86,7 @@ new Vue({
 })
 ```
 
-Full example (Component list reference [components.json](https://github.com/ElemeFE/element/blob/master/components.json))
+Ejemplo completo (Referencia completa de componentes [components.json](https://github.com/ElemeFE/element/blob/master/components.json))
 
 ```javascript
 import Vue from 'vue'
@@ -233,17 +233,17 @@ Vue.prototype.$notify = Notification
 Vue.prototype.$message = Message
 ```
 
-### Global config
-When importing Element, you can define a global config object. For now this object has only one property: `size`, which sets the default size for all components:
+### Configuración global
+Cuando importas Element, puedes definir un objeto global de configuración. Por ahora este elemento solo contiene una propiedad: `size`, que define el tamanho por defecto de todos los componentes:
 
-Fully import Element：
+Importando Element completamente：
 ```JS
 import Vue from 'vue'
 import Element from 'element-ui'
 Vue.use(Element, { size: 'small' })
 ```
 
-Partial import Element：
+Importando Element parcialmente：
 ```JS
 import Vue from 'vue'
 import { Button } from 'element-ui'
@@ -251,11 +251,10 @@ import { Button } from 'element-ui'
 Vue.prototype.$ELEMENT = { size: 'small' }
 Vue.use(Button)
 ```
-With the above config, the default size of all components that have size attribute will be 'small'.
+Con la anterior configuración, el tamanho por defecto de todos los componentes que tienen el atributo `size` será `small`.
 
-### Start coding
-
-Now you have implemented Vue and Element to your project, and it's time to write your code. Start development mode:
+### Empieza ya!
+Ahora haz incorporado Vue y Element a tu proyecto es tiempo para comenzar a programar. Inicia el modo de desarrollo:
 
 ```bash
 # visit localhost:8086
@@ -267,4 +266,4 @@ Build:
 ```bash
 npm run build
 ```
-Please refer to each component's documentation to learn how to use them.
+Por favor, refiérase a la documentación de cada componente para aprender cómo usarlos.

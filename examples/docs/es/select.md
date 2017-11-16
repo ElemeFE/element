@@ -101,6 +101,7 @@
         value8: '',
         value9: [],
         value10: [],
+        value11: [],
         loading: false,
         states: ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
       };
@@ -322,7 +323,7 @@ Puede limpiar un Select con un icono.
 
 Selección multiple utiliza tags para mostrar las opciones seleccionadas.
 
-:::demo Configure el atributo `multiple` para `el-select` para habilitar el modo múltiple. En este caso, el valor del `v-model` será un array de opciones seleccionadas.
+:::demo Configure el atributo `multiple` para `el-select` para habilitar el modo múltiple. En este caso, el valor del `v-model` será un array de opciones seleccionadas. By default the selected options will be displayed as Tags. You can collapse them to a text by using `collapse-tags` attribute.
 
 ```html
 <template>
@@ -332,6 +333,20 @@ Selección multiple utiliza tags para mostrar las opciones seleccionadas.
       :key="item.value"
       :label="item.label"
       :value="item.value">
+    </el-option>
+  </el-select>
+
+  <el-select
+    v-model="value11"
+    multiple
+    collapse-tags
+    style="margin-left: 20px;"
+    placeholder="Select">
+    <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value">
     </el-option>
   </el-select>
 </template>
@@ -655,6 +670,7 @@ Si el valor de encuadernación de Select es un objeto, asegúrese de asignar `va
 | -------------------- | ---------------------------------------- | -------- | ----------------- | ---------------- |
 | multiple             | si multiple-select esta activo           | boolean  | —                 | false            |
 | disabled             | si Select esta deshabilitado             | boolean  | —                 | false            |
+| collapse-tags | whether to collapse tags to a text when multiple selecting | boolean | — | false |
 | value-key            | nombre de clave de identidad única para el valor, necesario cuando el valor es un objeto. | string   | —                 | value            |
 | size                 | tamaño del Input                         | string   | large/small/mini  | —                |
 | clearable            | si el single select puede ser limpiable  | boolean  | —                 | false            |

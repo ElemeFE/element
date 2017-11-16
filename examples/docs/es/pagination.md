@@ -48,13 +48,12 @@
   }
 </style>
 
-## Pagination
+## Paginación
+Si tiene que mostrar muchos datos en una página, utiliza la paginación.
 
-If you have too much data to display in one page, use pagination.
+### Uso básico
 
-### Basic usage
-
-:::demo Set `layout` with different pagination elements you wish to display separated with a comma. Pagination elements are: `prev` (a button navigating to the previous page), `next` (a button navigating to the next page), `pager` (page list), `jumper` (a jump-to input), `total` (total item count), `size` (a select to determine page size) and `->`(every element after this symbol will be pulled to the right).
+:::**Demo** Asigna en el atributo `layout` los diferentes elementos que quieres utilizar separados por coma. Los elementos de paginación son: `prev` (un botón para navegar a la página anterior), `next` (un botón para navegar a la siguiente página), `pager` (lista de página), `jumper` (un `input` para saltar a una página determinada), `total` (total de elementos), `size` (un `select` para seleccionar el tamanho de la página ) y `->`(todo elemento situado luego de este símbolo será halado a la derecha).
 ```html
 <div class="block">
   <span class="demonstration">When you have few pages</span>
@@ -73,11 +72,11 @@ If you have too much data to display in one page, use pagination.
 ```
 :::
 
-### Small Pagination
+### Paginación pequenha
 
-Use small pagination in the case of limited space.
+Usa una paginación pequenha en caso de espacio limitado.
 
-:::demo Just set the `small` attribute to `true` and the Pagination becomes smaller.
+:::**Demo** Solo pon el atributo `small` como `true` y la Paginación se volverá pequenha.
 ```html
 <el-pagination
   small
@@ -87,11 +86,11 @@ Use small pagination in the case of limited space.
 ```
 :::
 
-### More elements
+### Más elementos
 
-Add more modules based on your scenario.
+Agrega más modulos basados en tu escenario.
 
-:::demo This example is a complete use case. It uses `size-change` and `current-change` event to handle page size changes and current page changes. `page-sizes` accepts an array of integers, each of which represents a different page size in the `sizes` select options, e.g. `[100, 200, 300, 400]` indicates that the select will have four options: 100, 200, 300 or 400 items per page.
+:::**Demo** Este ejemplo es un completo caso de uso. Este utiliza los eventos `size-change` y `current-change` para manejar el tamanho de página y el cambio de página. El atributo `page-sizes` acepta un arrelgo de enteros, cada uno representa un diferente valor del atributo `sizes` que es un `select`, ejemplo `[100, 200, 300, 400]` indicará que el `select` tendrá las opciones: 100, 200, 300 o 400 elementos por página.
 
 ```html
 <template>
@@ -195,27 +194,27 @@ Add more modules based on your scenario.
   }
 </script>
 
-### Attributes
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
+### Atributos
+| Atributo      | Descripción          | Tipo      | Valores aceptados       | Valores por defecto  |
 |--------------------|----------------------------------------------------------|-------------------|-------------|--------|
-| small              |   whether to use small pagination    | boolean |      —       | false |
-| page-size              | item count of each page  | number |      —       | 10 |
-| total | total item count | number | — | — |
-| page-count | total page count. Set either `total` or `page-count` and pages will be displayed; if you need `page-sizes`, `total` is required | number | — | — |
-| current-page | current page number, supports the .sync modifier | number | — | 1 |
-| layout | layout of Pagination, elements separated with a comma | string | `sizes`, `prev`, `pager`, `next`, `jumper`, `->`, `total`, `slot` | 'prev, pager, next, jumper, ->, total'  |
-| page-sizes | options of item count per page | number[] | — |  [10, 20, 30, 40, 50, 100] |
-| popper-class | custom class name for the page size Select's dropdown | string | — | — |
-| prev-text | text for the prev button | string | — | — |
-| next-text | text for the next button | string | — | — |
+| small              |   usar paginación pequenha    | boolean |      —       | false |
+| page-size              | cantidad de elementos por página  | number |      —       | 10 |
+| total | total de elementos | number | — | — |
+| page-count | total de páginas. Asigna `total` o `page-count` y las páginas serán mostradas; si necesitas `page-sizes`, `total` es **requerido** | number | — | — |
+| current-page | número actual de la página, soporta el modificador .sync | number | — | 1 |
+| layout | layout de la paginación, elementos separados por coma | string | `sizes`, `prev`, `pager`, `next`, `jumper`, `->`, `total`, `slot` | 'prev, pager, next, jumper, ->, total'  |
+| page-sizes | opciones para la cantidad de elementos por página | number[] | — |  [10, 20, 30, 40, 50, 100] |
+| popper-class | clase propia para el `dropdown` del `select` del número de páginas | string | — | — |
+| prev-text | texto para el botón `prev` | string | — | — |
+| next-text | texto para el botón `next` | string | — | — |
 
-### Events
-| Event Name | Description | Parameters |
+### Eventos
+| Nombre del evento | Descripción | Parámetros |
 |---------|--------|---------|
-| size-change | triggers when `page-size` changes | the new `page-size` |
-| current-change | triggers when `current-page` changes | the new `current-page` |
+| size-change | se dispara cuando `page-size` cambia | nuevo valor de `page-size` |
+| current-change | se dispara cuando `current-page` cambia | nuevo valor de `current-page` |
 
 ### Slot
-| Name | Description |
+| Nombre | Descripción |
 | --- | --- |
-| — | custom content. To use this, you need to declare `slot` in `layout` |
+| — | Elemento propio. Para utilizar esto necesitas declarar `slot` en el `layout` |

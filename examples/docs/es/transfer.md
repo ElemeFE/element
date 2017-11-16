@@ -72,8 +72,8 @@
 
 ## Transfer
 
-### Basic usage
-:::demo Data is passed to Transfer via the `data` attribute. The data needs to be an object array, and each object should have these attributes: `key` being the identification of the data item, `label` being the displayed text, and `disabled` indicating if the data item is disabled. Items inside the target list are in sync with the variable binding to `v-model`, and the value of that variable is an array of target item keys. So, if you don't want the target list be initially empty, you can initialize the `v-model` with an array.
+### Uso básico
+:::demo Los datos se pasan a Transfer a través del atributo `data`. Los datos tienen que ser un array de objetos, y cada objeto debe tener estos atributos: `key` que será el identificador del item, `label` que será el texto a mostrar, y `disabled` que indicará si el elemento esta desactivado. Los items dentro de la lista destino están sincronizados con la variable asociada a `v-model`, y el valor de esa variable es un array de claves de los elementos de la lista destino. Así que si no quieres que la lista destino esté vacía inicialmente puedes inicializar el `v-model` con un array.
 ```html
 <template>
   <el-transfer
@@ -106,11 +106,11 @@
 ```
 :::
 
-### Filterable
+### Filtrar
 
-You can search and filter data items.
+Puedes buscar y filtrar los items.
 
-:::demo Set the `filterable` attribute to `true` to enable filter mode. By default, if the data item `label` contains the search keyword, it will be included in the search result. Also, you can implement you own filter method with the `filter-method` attribute. It takes a method and passes search keyword and each data item to it whenever the keyword changes. For a certain data item, if the method returns true, it will be included in the result list.
+::demo Pon el atributo `filterable` a true para permitir el filtrado.Por defecto si el `label` del item contiene el término buscado será incluido en el resultado. También puedes implementar tu propio método de filtrado con el atributo `filter-method`, que recibe un método y le pasa la búsqueda y cada item. Los items para los que devuelva true serán incluidos en el resultado de la búsqueda.
 ```html
 <template>
   <el-transfer
@@ -153,9 +153,9 @@ You can search and filter data items.
 
 ### Customizable
 
-You can customize list titles, button texts, render function for data items, checking status texts in list footer and list footer contents.
+Puedes customizar los títulos, botones, la función de renderizado de los items, el texto de status de la cabecera y el contenido del pie.
 
-:::demo Use `titles`, `button-texts`, `render-content` and `format` to respectively customize list titles, button texts, render function for data items, checking status texts in list header. For list footer contents, two named slots are provided: `left-footer` and `right-footer`. Plus, if you want some items initially checked, you can use `left-default-checked` and `right-default-checked`. Finally, this example demonstrate the `change` event. Note that this demo can't run in jsfiddle because it doesn't support JSX syntax. In a real project, `render-content` will work if relevant dependencies are correctly configured.
+:::demo Usa `titles`, `button-texts`, `render-content` y `format` respectivamente para customizar los títulos de las listas, el texto de los botones, la función de renderizado para los items y el texto de la cabecera que muestra el estado de los items. Para el pie de la lista hay dos slots: `left-footer` y `right-footer`. Además, si quieres algunos items marcados inicialmente pudes usar `left-default-checked` y `right-default-checked`. Finalmente este ejemplo muestra el evento `change`. Ten en cuenta que este ejemplo no se puede ejecutar en jsfiddle porque no soporta sintaxis JSX. En un proyecto real `render-content` funcionará si las dependencias son configuradas correctamente.
 ```html
 <template>
   <el-transfer
@@ -219,8 +219,9 @@ You can customize list titles, button texts, render function for data items, che
 
 ### Prop aliases
 
-By default, Transfer looks for `key`, `label` and `disabled` in a data item. If your data items have different key names, you can use the `props` attribute to define aliases.
-:::demo The data items in this example do not have `key`s or `label`s, instead they have `value`s and `desc`s. So you need to set aliases for `key` and `label`.
+Por defecto Transfer busca los atributos `key`, `label`, y `disabled` en cada elemento. Si tus datos tienen un nombre diferente para la clave puedes usar el atributo `props` para añadir alias.
+
+:::demo En este ejemplo los elementos no tienen `key`y `label`, en vez de eso tienen `value` y `desc`. Así que tienes que añadir alias para `key` y `label`.
 ```html
 <template>
   <el-transfer
@@ -257,28 +258,29 @@ By default, Transfer looks for `key`, `label` and `disabled` in a data item. If 
 ```
 :::
 
-### Attributes
-| Attribute | Description | Type  | Accepted Values | Default |
+### Atributos
+| Atriburo | Descripcion | Tipo  | Valores aceptados | Por defecto |
 |---------- |-------- |---------- |-------------  |-------- |
-| data | data source | array[{ key, label, disabled }] | — | [ ] |
-| filterable | whether Transfer is filterable | boolean | — | false |
-| filter-placeholder | placeholder for the filter input | string | — | Enter keyword |
-| filter-method | custom filter method | function | — | — |
-| titles | custom list titles | array | — | ['List 1', 'List 2'] |
-| button-texts | custom button texts | array | — | [ ] |
-| render-content | custom render function for data items | function(h, option) | — | — |
-| format | texts for checking status in list header | object{noChecked, hasChecked} | — | { noChecked: '${checked}/${total}', hasChecked: '${checked}/${total}' } |
-| props | prop aliases for data source | object{key, label, disabled} | — | — |
-| left-default-checked | key array of initially checked data items of the left list | array | — | [ ] |
-| right-default-checked | key array of initially checked data items of the right list | array | — | [ ] |
+| data | Origen de datos | array[{ key, label, disabled }] | — | [ ] |
+| filterable | Si se puede filtrar | boolean | — | false |
+| filter-placeholder | Placeholder para el input del filtro| string | — | Enter keyword |
+| filter-method | Método de filtrado | function | — | — |
+| titles | Títulos de las listas | array | — | ['List 1', 'List 2'] |
+| button-texts | Texto de los botones | array | — | [ ] |
+| render-content | Función de renderizado | function(h, option) | — | — |
+| format | Texto para el status en el header| object{noChecked, hasChecked} | — | { noChecked: '${checked}/${total}', hasChecked: '${checked}/${total}' } |
+| props | prop alias para el origen de datos | object{key, label, disabled} | — | — |
+| left-default-checked | Array de claves de los elementos marcados inicialmente en la lista de la izquierda | array | — | [ ] |
+| right-default-checked | Array de claves de los elementos marcados inicialmente en la lista de la derecha | array | — | [ ] |
 
 ### Slot
-| Name | Description |
+| Nombre | Descripcion |
 |------|--------|
-| left-footer | content of left list footer |
-| right-footer | content of right list footer |
+| left-footer | Contenido del footer de la lista de la izquierda |
+| right-footer | Contenido del footer de la lista de la derecha |
 
-### Events
-| Event Name | Description | Parameters |
+### Eventos
+| Nombre | Descripcion | Parametros |
 |---------- |-------- |---------- |
-| change | triggers when data items change in the right list | key array of current data items in the right list, transfer direction (left or right), moved item keys |
+| change | se lanzá cuando los elementos cambian en la lista de la derecha | array con las claves de los elementos de la lista de la derecha |
+

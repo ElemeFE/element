@@ -137,16 +137,20 @@ $--checkbox-checked-icon-color: $--fill-base !default;
 
 $--checkbox-input-border-color-hover: $--color-primary !default;
 
+$--checkbox-bordered-height: 40px !default;
 $--checkbox-bordered-padding: 9px 20px 9px 10px !default;
 $--checkbox-bordered-medium-padding: 7px 20px 7px 10px !default;
-$--checkbox-bordered-small-padding: 3px 15px 7px 10px !default;
-$--checkbox-bordered-mini-padding: 1px 15px 5px 10px !default;
+$--checkbox-bordered-small-padding: 5px 15px 5px 10px !default;
+$--checkbox-bordered-mini-padding: 3px 15px 3px 10px !default;
 $--checkbox-bordered-medium-input-height: 14px !default;
 $--checkbox-bordered-medium-input-width: 14px !default;
+$--checkbox-bordered-medium-height: 36px !default;
 $--checkbox-bordered-small-input-height: 12px !default;
 $--checkbox-bordered-small-input-width: 12px !default;
+$--checkbox-bordered-small-height: 32px !default;
 $--checkbox-bordered-mini-input-height: 12px !default;
 $--checkbox-bordered-mini-input-width: 12px !default;
+$--checkbox-bordered-mini-height: 28px !default;
 
 $--checkbox-button-font-size: $--font-size-base !default;
 $--checkbox-button-checked-fill: $--color-primary !default;
@@ -183,16 +187,20 @@ $--radio-checked-icon-color: $--color-primary !default;
 
 $--radio-input-border-color-hover: $--color-primary !default;
 
-$--radio-bordered-padding: 10px 20px 10px 10px !default;
-$--radio-bordered-medium-padding: 8px 20px 8px 10px !default;
-$--radio-bordered-small-padding: 6px 15px 6px 10px !default;
-$--radio-bordered-mini-padding: 4px 15px 4px 10px !default;
+$--radio-bordered-height: 40px !default;
+$--radio-bordered-padding: 12px 20px 0 10px !default;
+$--radio-bordered-medium-padding: 10px 20px 0 10px !default;
+$--radio-bordered-small-padding: 8px 15px 0 10px !default;
+$--radio-bordered-mini-padding: 6px 15px 0 10px !default;
 $--radio-bordered-medium-input-height: 14px !default;
 $--radio-bordered-medium-input-width: 14px !default;
+$--radio-bordered-medium-height: 36px !default;
 $--radio-bordered-small-input-height: 12px !default;
 $--radio-bordered-small-input-width: 12px !default;
+$--radio-bordered-small-height: 32px !default;
 $--radio-bordered-mini-input-height: 12px !default;
 $--radio-bordered-mini-input-width: 12px !default;
+$--radio-bordered-mini-height: 28px !default;
 
 $--radio-button-font-size: $--font-size-base !default;
 $--radio-button-checked-fill: $--color-primary !default;

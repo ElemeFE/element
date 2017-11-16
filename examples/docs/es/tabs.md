@@ -90,15 +90,15 @@
   }
 </script>
 
-## Tabs
+## Tabulación
 
-Divide data collections which are related yet belong to different types.
+Divide collecciones de datos que están relacionados pero pertenecen a diferentes tipos.
 
-### Basic usage
+### Uso básico
 
-Basic and concise tabs.
+Tabulación básica y concisa
 
-:::demo Tabs provide a selective card functionality. By default the first tab is selected as active, and you can activate any tab by setting the `value` attribute.
+:::demo de Tabulación provee funcionalidad de tarjeta selectiva. Por defecto, la primer pestaña es seleccionada como activa, y es posible activar cualquier pestaña estableciendo el atributo de `value`.
 
 ```html
 <template>
@@ -126,11 +126,11 @@ Basic and concise tabs.
 ```
 :::
 
-### Card Style
+### Estilo de Tarjeta
 
-Tabs styled as cards.
+Pestañas diseñadas como tarjetas.
 
-:::demo Set `type` to `card` can get a card-styled tab.
+:::demo Establecer `type` a `card` para obtener una pestaña diseñada como tarjeta.
 
 ```html
 <template>
@@ -158,11 +158,11 @@ Tabs styled as cards.
 ```
 :::
 
-### Border card
+### Tarjeta con Bordes
 
-Border card tabs.
+Pestañas de tarjeta con bordes.
 
-:::demo Set `type` to `border-card`.
+:::demo Establecer `type` a `border-card`.
 
 ```html
 <el-tabs type="border-card">
@@ -175,11 +175,11 @@ Border card tabs.
 
 :::
 
-### Tab position
+### Posición de tabulación
 
-You can use `tab-position` attribute to set the tab's position.
+Es posible usar el atributo `tab-position` para establecer la posición de la tabulación.
 
-:::demo You can choose from four directions: `tabPosition="left|right|top|bottom"`
+:::demo Es posible escoger entre cuatro direcciones: `tabPosition="left|right|top|bottom"`
 
 ```html
 <template>
@@ -209,9 +209,9 @@ You can use `tab-position` attribute to set the tab's position.
 ```
 :::
 
-### Custom Tab
+### Pestaña Personalizada
 
-You can use named slot to customize the tab label content.
+Es posible usar slots nombrados para personalizar el contenido de la etiqueta de la pestaña.
 
 :::demo
 ```html
@@ -227,9 +227,9 @@ You can use named slot to customize the tab label content.
 ```
 :::
 
-### Add & close tab
+### Agregar y cerrar pestaña
 
-Only card type Tabs support addable & closeable.
+Solo las pestañas de tipo tarjeta soportan adición y cierre.
 
 :::demo
 ```html
@@ -295,7 +295,7 @@ Only card type Tabs support addable & closeable.
 ```
 :::
 
-### Customized trigger button of new tab
+### Botón disparador personalizado de la nueva pestaña
 
 :::demo
 ```html
@@ -367,28 +367,28 @@ Only card type Tabs support addable & closeable.
 ```
 :::
 
-### Tabs Attributes
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
+### Atributos de Pestañas
+| Atributo      | Descripción          | Tipo      | Valores Aceptados      | Default  |
 |---------- |-------- |---------- |-------------  |-------- |
-| type     | type of Tab | string   | card/border-card  |     —    |
-| closable  | whether Tab is closable | boolean   | — |  false  |
-| addable  | whether Tab is addable   | boolean   | — |  false  |
-| editable  | whether Tab is addable and closable | boolean   | — |  false  |
-| value  | name of the selected tab  | string   |  —  |  name of first tab |
-| tab-position  | position of tabs | string   |  top/right/bottom/left  |  top |
+| type     | tipo de Pestaña | string   | card/border-card  |     —    |
+| closable  | si la Pestaña es cerrable | boolean   | — |  false  |
+| addable  | si la Pestaña es añadible   | boolean   | — |  false  |
+| editable  | si la Pestaña es añadible y cerrable | boolean   | — |  false  |
+| value  | nombre de la pestaña seleccionada  | string   |  —  |  nombre de la primer pestaña |
+| tab-position  | posición de tabulación | string   |  top/right/bottom/left  |  top |
 
-### Tabs Events
-| Event Name | Description | Parameters |
+### Eventos de Pestañas
+| Nombre de Evento | Descripción | Parámetros |
 |---------- |-------- |---------- |
-| tab-click  | triggers when a tab is clicked | clicked tab |
-| tab-remove  | triggers when tab-remove button is clicked | name of the removed tab |
-| tab-add  | triggers when tab-add button is clicked  | — |
-| edit  | triggers when tab-add button or tab-remove is clicked | (targetName, action) |
+| tab-click  | se lanza cuando se hace click a una pestaña | pestaña clickeada |
+| tab-remove  | se lanza cuando se hace click al botón tab-remove | nombre de la pestaña removida |
+| tab-add  | se lanza cuando se hace click al botón tab-add | — |
+| edit  | se lanza cuando los botones de tab-add y/o tab-remove son clickeados | (targetName, action) |
 
-### Tab-pane Attributes
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
+### Attributos del Tab-pane
+| Atributo      | Descripción          | Tipo      | Valores Aceptados      | Default  |
 |---------- |-------- |---------- |-------------  |-------- |
-| label     | title of the tab   | string   | — |    —     |
-| disabled | whether Tab is disabled | boolean | — | false |
-| name      | identifier corresponding to the activeName of Tabs, representing the alias of the tab-pane | string | — | ordinal number of the tab-pane in the sequence, e.g. the first tab-pane is '1' |
+| label     | título de la pestaña   | string   | — |    —     |
+| disabled  | si la Tabulación está deshabilitada | boolean | — | false |
+| name      | identificador correspondiente al activeName de la Tabulación, representando el alias del tab-pane | string | — | número ordinal del tab-pane en la secuencia, p.ej el primer tab-pane de pestañas es '1' |
 | closable  | whether Tab is closable | boolean   | — |  false  |

@@ -26,11 +26,11 @@
 
 ## Collapse
 
-Use Collapse to store contents.
+Use Collapse para almacenar contenidos.
 
-### Basic usage
+### Uso básico
 
-You can expand multiple panels
+Puedes expandir varios paneles
 
 :::demo
 ```html
@@ -65,11 +65,11 @@ You can expand multiple panels
 ```
 :::
 
-### Accordion
+### Acordeón
 
-In accordion mode, only one panel can be expanded at once
+En modo acordeón sólo un panel puede ser expandido a la vez
 
-:::demo Activate accordion mode using the `accordion` attribute.
+:::demo Activa el modo acordeón usado el atributo `accordion`.
 ```html
 <el-collapse v-model="activeName" accordion>
   <el-collapse-item title="Consistency" name="1">
@@ -102,9 +102,9 @@ In accordion mode, only one panel can be expanded at once
 ```
 :::
 
-### Custom title
+### Título personalizado
 
-Besides using the `title` attribute, you can customize panel title with named slots, which makes adding custom content, e.g. icons, possible.
+Además de usar el atributo `title`, se puede personalizar el título del panel con named slots, esto hace posible agregar contenido personalizado, por ejemplo: iconos.
 
 :::demo
 ```html
@@ -133,19 +133,20 @@ Besides using the `title` attribute, you can customize panel title with named sl
 ```
 :::
 
-### Collapse Attributes
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
+### Atributos de Collapse
+| Atributo      | Descripción          | Tipo      | Valores aceptados       | Por Defecto  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| accordion | whether to activate accordion mode | boolean | — | false |
-| value | currently active panel | string (accordion mode)/array (non-accordion mode) | — | — |
+| accordion | especifica si activa el modo acordeón | boolean | — | false |
+| value | panel activo | string (modo acordeón)/array (No modo acordeón) | — | — |
 
-### Collapse Events
-| Event Name | Description | Parameters |
+### Eventos de Collapse
+| Nombre de Evento | Descripción | Parametros |
 |---------|---------|---------|
-| change | triggers when active panels change | activeNames: array (non-accordion mode)/string (accordion mode) |
+| change | se dispara cuando los paneles activos cambian | activeNames: array (No modo acordeón)/string (modo acordeón) |
 
-### Collapse Item Attributes
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
+
+### Atributos de Collapse Item
+| Atributo      | Descripción          | Tipo      | Valores aceptados       | Por Defecto  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| name | unique identification of the panel | string/number | — | — |
-| title | title of the panel | string | — | — |
+| name | identificador único del panel | string/number | — | — |
+| title | título del panel | string | — | — |

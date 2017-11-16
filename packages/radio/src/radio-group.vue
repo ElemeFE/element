@@ -53,9 +53,10 @@
     },
     mounted() {
       // 当radioGroup没有默认选项时，第一个可以选中Tab导航
-      let radios = this.$el.querySelectorAll('[type=radio]');
-      if (![].some.call(radios, radio => radio.checked)) {
-        this.$el.querySelectorAll('[role=radio]')[0].tabIndex = 0;
+      const radios = this.$el.querySelectorAll('[type=radio]');
+      const firstLabel = this.$el.querySelectorAll('[role=radio]')[0];
+      if (![].some.call(radios, radio => radio.checked) && firstLabel) {
+        firstLabel.tabIndex = 0;
       }
     },
     methods: {

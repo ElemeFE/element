@@ -64,32 +64,32 @@
   {
     "lang": "es",
     "demo-block": {
-      "hide-text": "Hide",
-      "show-text": "Expand",
-      "button-text": "Try it!",
-      "tooltip-text": "Run this demo on jsfiddle.net"
+      "hide-text": "Ocultar",
+      "show-text": "Mostrar",
+      "button-text": "Probar",
+      "tooltip-text": "Prueba este ejemplo en jsfiddle.net"
     },
     "footer": {
-      "links": "Links",
+      "links": "Enlaces",
       "repo": "GitHub",
-      "community": "Community",
-      "changelog": "Changelog",
-      "theme": "Theme CLI tool",
-      "preview": "Online theme generator",
+      "community": "Comunidad",
+      "changelog": "Lista de cambios",
+      "theme": "Generador de temas por CLI",
+      "preview": "Generador de temas en línea",
       "faq": "FAQ",
       "gitter": "Gitter",
-      "starter": "Starter kit",
-      "feedback": "Feedback",
-      "contribution": "Contribution",
+      "starter": "Kit de inicio",
+      "feedback": "Comentarios",
+      "contribution": "Contribución",
       "eleme": "Eleme"
     },
     "header": {
-      "guide": "Guide",
-      "components": "Component",
-      "resource": "Resource"
+      "guide": "Guía",
+      "components": "Componentes",
+      "resource": "Recursos"
     },
     "nav": {
-      "dropdown": "Version: "
+      "dropdown": "Versión: "
     }
   }
 ]

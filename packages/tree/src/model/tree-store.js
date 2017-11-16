@@ -198,9 +198,10 @@ export default class TreeStore {
     const node = this.nodesMap[key];
     if (!node) return;
     const childNodes = node.childNodes;
-    childNodes.forEach(child => {
+    for (let i = childNodes.length - 1; i >= 0; i--) {
+      const child = childNodes[i];
       this.remove(child.data);
-    });
+    }
     for (let i = 0, j = data.length; i < j; i++) {
       const child = data[i];
       this.append(child, node.data);
