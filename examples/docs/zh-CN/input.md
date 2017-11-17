@@ -799,10 +799,10 @@ export default {
 ### Input slots
 | name | 说明 |
 |------|--------|
-| prefix | 输入框头部内容 |
-| suffix | 输入框尾部内容 |
-| prepend | 输入框前置内容 |
-| append | 输入框后置内容 |
+| prefix | 输入框头部内容，只对 `type="text"` 有效 |
+| suffix | 输入框尾部内容，只对 `type="text"` 有效 |
+| prepend | 输入框前置内容，只对 `type="text"` 有效 |
+| append | 输入框后置内容，只对 `type="text"` 有效 |
 
 ### Input Events
 | 事件名称 | 说明 | 回调参数 |

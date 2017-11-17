@@ -514,7 +514,7 @@
 
       dateFormat() {
         if (this.format) {
-          return this.format.replace('HH', '').replace(':mm', '').replace(':ss', '').trim();
+          return this.format.replace('HH', '').replace(/[^a-zA-Z]*mm/, '').replace(/[^a-zA-Z]*ss/, '').trim();
         } else {
           return 'yyyy-MM-dd';
         }

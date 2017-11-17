@@ -3,6 +3,9 @@
     data() {
       return {
         pickerOptions1: {
+          disabledDate(time) {
+            return time.getTime() > Date.now();
+          },
           shortcuts: [{
             text: 'Today',
             onClick(picker) {
@@ -127,6 +130,9 @@ Basic date picker measured by 'day'.
     data() {
       return {
         pickerOptions1: {
+          disabledDate(time) {
+            return time.getTime() > Date.now();
+          },
           shortcuts: [{
             text: 'Today',
             onClick(picker) {
