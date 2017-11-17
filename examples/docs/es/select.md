@@ -323,7 +323,7 @@ Puede limpiar un Select con un icono.
 
 Selección multiple utiliza tags para mostrar las opciones seleccionadas.
 
-:::demo Configure el atributo `multiple` para `el-select` para habilitar el modo múltiple. En este caso, el valor del `v-model` será un array de opciones seleccionadas. By default the selected options will be displayed as Tags. You can collapse them to a text by using `collapse-tags` attribute.
+:::demo Configure el atributo `multiple` para `el-select` para habilitar el modo múltiple. En este caso, el valor del `v-model` será un array de opciones seleccionadas. De forma predeterminada, las opciones seleccionadas se mostrarán como tags. Se pueden contraer a un texto utilizando el atributo  `collapse-tags`.
 
 ```html
 <template>
@@ -670,7 +670,7 @@ Si el valor de encuadernación de Select es un objeto, asegúrese de asignar `va
 | -------------------- | ---------------------------------------- | -------- | ----------------- | ---------------- |
 | multiple             | si multiple-select esta activo           | boolean  | —                 | false            |
 | disabled             | si Select esta deshabilitado             | boolean  | —                 | false            |
-| collapse-tags | whether to collapse tags to a text when multiple selecting | boolean | — | false |
+| collapse-tags        | si se colapsan los tags a un texto cuando `multiple` es `true`. | boolean  | —                 | false            |
 | value-key            | nombre de clave de identidad única para el valor, necesario cuando el valor es un objeto. | string   | —                 | value            |
 | size                 | tamaño del Input                         | string   | large/small/mini  | —                |
 | clearable            | si el single select puede ser limpiable  | boolean  | —                 | false            |
