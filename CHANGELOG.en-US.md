@@ -1,5 +1,16 @@
 ## Changelog
 
+### 2.0.5
+
+*2017-11-17*
+
+- Fixed Popover, Tree, Breadcrumb and Cascader regression in 2.0.4, #8188 #8217 #8283
+- Fixed memory leak of clickoutside directive, #8168 #8225 (by @badpunman @STLighter)
+- Fixed multiple Select height when its value is cleared, #8317 (by @luciy)
+- Added `collapse-tags` attribute for multiple Select to replace tags with one line of text, #8190
+- Fixed high CPU consumption caused by hidden Table, #8351
+- Now you can use `doLayout` method of Table to update its layout, #8351
+
 ### 2.0.4
 
 *2017-11-10*
