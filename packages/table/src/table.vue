@@ -345,19 +345,12 @@
         this.updateScrollY();
         this.layout.update();
         this.$nextTick(() => {
-          if (this.destroyed) return;
           if (this.height) {
             this.layout.setHeight(this.height);
           } else if (this.maxHeight) {
             this.layout.setMaxHeight(this.maxHeight);
           } else if (this.shouldUpdateHeight) {
             this.layout.updateHeight();
-          }
-          if (this.$el) {
-            this.isHidden = this.$el.clientWidth === 0;
-            if (this.isHidden && this.layout.bodyWidth) {
-              setTimeout(() => this.debouncedLayout());
-            }
           }
         });
       }
@@ -497,7 +490,6 @@
     },
 
     destroyed() {
-      this.destroyed = true;
       if (this.windowResizeListener) removeResizeListener(this.$el, this.windowResizeListener);
     },
 
@@ -538,8 +530,7 @@
         resizeProxyVisible: false,
         // 是否拥有多级表头
         isGroup: false,
-        scrollPosition: 'left',
-        destroyed: false
+        scrollPosition: 'left'
       };
     }
   };
