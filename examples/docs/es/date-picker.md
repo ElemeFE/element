@@ -96,7 +96,7 @@ Utiliza Date Picker para introducir fecha.
 
 ###  Entrar fecha
 
-Fecha escoja básica moderado por 'day'.
+Selector de fecha básico limitado por día.
 
 :::manifestación Ésta medición es decidido por el atributo 'type'.Puedes permitir rápidas opcíones por crear un `picker-options` objecto con propiedad `shortcuts`.La fecha minusválida es establecido por 
 la función `disabledDate`.

@@ -73,15 +73,16 @@
   }
 </style>
 
-## Dialog
+## Diálogo
 
-Informs users while preserving the current page state.
+Informar usuarios cuando preserva el estado de página corriente.
 
 ### Basic usage
 
-Dialog pops up a dialog box, and it's quite customizable.
+Diálogo que se surge una caja de diálogo,y es bastante personalizable.
 
-:::demo Set the `visible` attribute with a `Boolean`, and Dialog shows when it is `true`. The Dialog has two parts: `body` and `footer`, and the latter requires a `slot` named `footer`. The optional `title` attribute (empty by default) is for defining a title. Finally, this example demonstrates how `before-close` is used.
+:::manifestación Establece el atributo con un `Boolean`, y Diálogo muestra cuando es `true`.El Diálogo tiene dos partes:`body` y `footer`, y el último exige un `slot`llamado `footer`.El atributo opcional `title` (vacío por defecto) es para definir un título.Finalmente,este ejemplo demostra cómo `before-close` es usado.
+
 
 ```html
 <el-button type="text" @click="dialogVisible = true">click to open the Dialog</el-button>
@@ -119,15 +120,17 @@ Dialog pops up a dialog box, and it's quite customizable.
 ```
 :::
 
-:::tip
-`before-close` only works when user clicks the close icon or the backdrop. If you have buttons that close the Dialog in the `footer` named slot, you can add what you would do with `before-close` in the buttons' click event handler.
+:::propina
+
+`before-close` solamente funciona cuando usuarios se hacen clic el icono de cerrar o el fondo.Si tienes botones que cercan el Diálogo en el `footer` que se llamado slot,puedes añadir que harías con `before-close` en controlador del evento click de los botones.
 :::
 
-### Customizations
+### Personalizaciones
 
-The content of Dialog can be anything, even a table or a form. This example shows how to use Element Table and Form with Dialog。
 
-:::demo
+El contenido de Diálogo puede ser cualquier cosa,hasta una mesa o un formulario.Este ejemplo muestra cómo utilizar Mesa y Formulario de Element con Diálogo.
+
+:::manifestación
 
 ```html
 <!-- Table -->
@@ -203,9 +206,10 @@ The content of Dialog can be anything, even a table or a form. This example show
 ```
 :::
 
-### Nested Dialog
-If a Dialog is nested in another Dialog, `append-to-body` is required.
-:::demo Normally we do not recommend using nested Dialog. If you need multiple Dialogs rendered on the page, you can simply flat them so that they're siblings to each other. If you must nest a Dialog inside another Dialog, set `append-to-body` of the nested Dialog to true, and it will append to body instead of its parent node, so both Dialogs can be correctly rendered.
+### Diálogo anidado
+Si un cuadro de diálogo está anidado en otro cuadro de diálogo,`append-to-body` es requerido.
+:::manifestación Normalmente no recomendamos el uso de Diálogo anidado.Si necesitas varios cuadros de diálogo representados en la página,puedes aplastarlos simplemente así que serían hermanos el uno al otro.Si tienes que anidar un cuadro de diálogo dentro de otro cuadro de diálogo,establece `append-to-body` del diálogo anidado a verdadero,y se agregará al cuerpo en combio de su nodo padre,asi que ambos diálogos pueden ser renderizados correctamente.
+
 ```html
 <template>
   <el-button type="text" @click="outerVisible = true">open the outer Dialog</el-button>
@@ -271,11 +275,11 @@ Dialog's content can be centered.
 ```
 :::
 
-:::tip
-`center` only affects Dialog's header and footer. The body of Dialog can be anything, so sometimes it may not look good when centered. You need to write some CSS if you wish to center the body as well.
+:::propina
+`center` afecta a cabezazos y pies de Diálogo.El cuerpo de Diálogo puede ser cualquier cosa,asi que a veces no puede verse bien cuando está centrado.Necesitas escribir algunos CSS si quieres centrar el cuerpo también.
 :::
 
-:::tip
+:::propina
 If the variable bound to `visible` is managed in Vuex store, the `.sync` can not work properly. In this case, please remove the `.sync` modifier, listen to `open` and `close` events of Dialog, and commit Vuex mutations to update the value of that variable in the event handlers.
 :::
 
