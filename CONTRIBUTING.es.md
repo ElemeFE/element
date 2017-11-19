@@ -1,15 +1,15 @@
 ﻿# Guía para Contribuidores a `Element UI`
 
-¡Hola! Gracias por elegir `Element UI`.
+¡Hola! Gracias por elegir [Element UI](http://element.eleme.io/#/en-US).
 
-`Element UI` es un archivo de componentes para desarrolladores y para gerentes de productos ‘web’ basado en ‘Vue 2.0’
+`Element UI` es un archivo de componentes para desarrolladores y para gerentes de productos ‘web’ basado en [Vue 2.0](https://vuejs.org/)
 
 Estamos orgullosos de que usted esta interesado en contribuir al proyecto `Element`. Antes de someter sus contribuciones, por favor tome un momentito para leer estas simples guías para contribuidores.
 
 
 ## Guía Para Reportar Problemas (“Issues”)
 
-- “Issues” son exclusivamente para informar de errores, sugerencias o solicitaciones para funcionalidad adicional referente a diseño. Preguntas de otro tipo corren el riesgo de ser cerradas inmediatamente. Sí tiene preguntas sobre el uso de `Element`, vea [Gitter](https://gitter.im/element-en/Lobby) para más ayuda.
+- [“Issues”]( https://elementui.github.io/issue-generator) son exclusivamente para informar de errores, sugerencias o solicitaciones para funcionalidad adicional referente a diseño. Preguntas de otro tipo corren el riesgo de ser cerradas inmediatamente. Sí tiene preguntas sobre el uso de `Element`, vea [Gitter](https://gitter.im/element-en/Lobby) para más ayuda.
 
 - Antes de someter un informe sobre algún problema, sírvase de revisar  sí ya hubo un informe.
 
