@@ -16,10 +16,10 @@ export default {
       startTime: 'زمان شروع',
       endDate: 'تاریخ پایان',
       endTime: 'زمان پایان',
-      prevYear: 'سال قبل', // to be translated
-      nextYear: 'سال بعد', // to be translated
-      prevMonth: 'ماه قبل', // to be translated
-      nextMonth: 'ماه بعد', // to be translated
+      prevYear: 'سال قبل',
+      nextYear: 'سال بعد',
+      prevMonth: 'ماه قبل',
+      nextMonth: 'ماه بعد',
       year: 'سال',
       month1: 'ژانویه',
       month2: 'فوریه',
@@ -101,7 +101,7 @@ export default {
       noMatch: 'هیچ داده‌ای پیدا نشد',
       noData: 'اطلاعاتی وجود ندارد',
       titles: ['List 1', 'List 2'], // to be translated
-      filterPlaceholder: 'کلید واژه هارو وارد کن', // to be translated
+      filterPlaceholder: 'کلید واژه هارو وارد کن',
       noCheckedFormat: '{total} items', // to be translated
       hasCheckedFormat: '{checked}/{total} checked' // to be translated
     }
