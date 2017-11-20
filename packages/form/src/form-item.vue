@@ -176,6 +176,11 @@
         this.validateState = 'validating';
 
         var descriptor = {};
+        if (rules && rules.length > 0) {
+          rules.forEach(rule => {
+            delete rule.trigger;
+          });
+        }
         descriptor[this.prop] = rules;
 
         var validator = new AsyncValidator(descriptor);
