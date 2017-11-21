@@ -203,6 +203,17 @@ export default {
         handleChange({ target }) {
           this.$parent.internalCurrentPage = this.$parent.getValidCurrentPage(target.value);
           this.oldValue = null;
+          this.resetValueIfNeed(target);
+        },
+        resetValueIfNeed(target) {
+          const num = parseInt(target.value, 10);
+          if (!isNaN(num)) {
+            if (num < 1) {
+              target.value = 1;
+            } else {
+              this.reassignMaxValue(target);
+            }
+          }
         },
         reassignMaxValue(target) {
           if (+target.value > this.$parent.internalPageCount) {
