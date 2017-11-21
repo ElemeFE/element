@@ -138,7 +138,8 @@ export default {
       if (!this.store.states.isComplex) return;
       const el = this.$el;
       if (!el) return;
-      const rows = el.querySelectorAll('tbody > tr.el-table__row');
+      const tr = el.querySelector('tbody').children;
+      const rows = [].filter.call(tr, row => hasClass(row, 'el-table__row'));
       const oldRow = rows[oldVal];
       const newRow = rows[newVal];
       if (oldRow) {
@@ -153,7 +154,8 @@ export default {
       const el = this.$el;
       if (!el) return;
       const data = this.store.states.data;
-      const rows = el.querySelectorAll('tbody > tr.el-table__row');
+      const tr = el.querySelector('tbody').children;
+      const rows = [].filter.call(tr, row => hasClass(row, 'el-table__row'));
       const oldRow = rows[data.indexOf(oldVal)];
       const newRow = rows[data.indexOf(newVal)];
       if (oldRow) {
