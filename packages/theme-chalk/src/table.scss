@@ -426,9 +426,11 @@
   }
 
   .caret-wrapper {
-    position: absolute;
-    display: inline-block;
-    height: 100%;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    height: 34px;
+    width: 24px;
     vertical-align: middle;
     cursor: pointer;
     overflow: initial;
@@ -440,14 +442,13 @@
     overflow: hidden;
     font-size: 15px;
     position: absolute;
-    left: 4px;
 
     &.ascending {
-      top: 1px;
+      top: 5px;
     }
 
     &.descending {
-      bottom: 1px;
+      bottom: 7px;
     }
   }
 
