@@ -153,7 +153,7 @@ export default {
       const el = this.$el;
       if (!el) return;
       const data = this.store.states.data;
-      const rows = el.querySelectorAll('tbody > tr.el-table__row');
+      const rows = [].slice.call(el.querySelector('tbody').children).filter(item => item.classList.contains('el-table__row'));
       const oldRow = rows[data.indexOf(oldVal)];
       const newRow = rows[data.indexOf(newVal)];
       if (oldRow) {
