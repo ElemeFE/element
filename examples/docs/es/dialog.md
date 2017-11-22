@@ -81,7 +81,7 @@ Informar usuarios cuando preserva el estado de página corriente.
 
 Diálogo que se surge una caja de diálogo,y es bastante personalizable.
 
-:::manifestación Establece el atributo con un `Boolean`, y Diálogo muestra cuando es `true`.El Diálogo tiene dos partes:`body` y `footer`, y el último exige un `slot`llamado `footer`.El atributo opcional `title` (vacío por defecto) es para definir un título.Finalmente,este ejemplo demostra cómo `before-close` es usado.
+:::demo Establece el atributo con un `Boolean`, y Diálogo muestra cuando es `true`.El Diálogo tiene dos partes:`body` y `footer`, y el último exige un `slot`llamado `footer`.El atributo opcional `title` (vacío por defecto) es para definir un título.Finalmente,este ejemplo demostra cómo `before-close` es usado.
 
 
 ```html
@@ -120,7 +120,7 @@ Diálogo que se surge una caja de diálogo,y es bastante personalizable.
 ```
 :::
 
-:::propina
+:::tip
 
 `before-close` solamente funciona cuando usuarios se hacen clic el icono de cerrar o el fondo.Si tienes botones que cercan el Diálogo en el `footer` que se llamado slot,puedes añadir que harías con `before-close` en controlador del evento click de los botones.
 :::
@@ -130,7 +130,7 @@ Diálogo que se surge una caja de diálogo,y es bastante personalizable.
 
 El contenido de Diálogo puede ser cualquier cosa,hasta una mesa o un formulario.Este ejemplo muestra cómo utilizar Mesa y Formulario de Element con Diálogo.
 
-:::manifestación
+:::demo
 
 ```html
 <!-- Table -->
@@ -208,7 +208,7 @@ El contenido de Diálogo puede ser cualquier cosa,hasta una mesa o un formulario
 
 ### Diálogo anidado
 Si un cuadro de diálogo está anidado en otro cuadro de diálogo,`append-to-body` es requerido.
-:::manifestación Normalmente no recomendamos el uso de Diálogo anidado.Si necesitas varios cuadros de diálogo representados en la página,puedes aplastarlos simplemente así que serían hermanos el uno al otro.Si tienes que anidar un cuadro de diálogo dentro de otro cuadro de diálogo,establece `append-to-body` del diálogo anidado a verdadero,y se agregará al cuerpo en combio de su nodo padre,asi que ambos diálogos pueden ser renderizados correctamente.
+:::demo Normalmente no recomendamos el uso de Diálogo anidado.Si necesitas varios cuadros de diálogo representados en la página,puedes aplastarlos simplemente así que serían hermanos el uno al otro.Si tienes que anidar un cuadro de diálogo dentro de otro cuadro de diálogo,establece `append-to-body` del diálogo anidado a verdadero,y se agregará al cuerpo en combio de su nodo padre,asi que ambos diálogos pueden ser renderizados correctamente.
 
 ```html
 <template>
@@ -243,10 +243,10 @@ Si un cuadro de diálogo está anidado en otro cuadro de diálogo,`append-to-bod
 
 :::
 
-### Centered content
-Dialog's content can be centered.
+### Contenido centrado
+el contenido de Diálogo se puede centrar.
 
-:::demo Setting `center` to `true` will center dialog's header and footer horizontally.
+:::demo establecer `center` en `true` se centrará el encabezado y el pie de página del cuadro de diálogo horizontalmente.
 
 ```html
 <el-button type="text" @click="centerDialogVisible = true">Click to open the Dialog</el-button>
@@ -275,26 +275,26 @@ Dialog's content can be centered.
 ```
 :::
 
-:::propina
+:::tip
 `center` afecta a cabezazos y pies de Diálogo.El cuerpo de Diálogo puede ser cualquier cosa,asi que a veces no puede verse bien cuando está centrado.Necesitas escribir algunos CSS si quieres centrar el cuerpo también.
 :::
 
-:::propina
+:::tip
 Si el variable obligado a `visible` es manejado en el almacén Vuex,el `.sync` no puede funcionar correctamente.En este caso,quita el modificador `.sync` por favor,escucha a eventos `open` y `close` de Diálogo,y comete Vuex mutaciones para actualizar el valor de la variable en los controladores de eventos.
 
 :::
 
-### Attributes
+### Atributo
 
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
+| Atributo      | Descripción          | Tipo      | Valores aceptados       | Defecto  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| visible   | visibility of Dialog, supports the .sync modifier | boolean | — | false |
-| title     | title of Dialog. Can also be passed with a named slot (see the following table) | string    | — | — |
-| width     | width of Dialog | string    | — | 50% |
-| fullscreen     | whether the Dialog takes up full screen | boolean    | — | false |
+| visible   | visibilidad del Diálogo, apoya el modificador .sync | boolean | — | false |
+| title     | título de Diálogo. También se puede pasar con una ranura nombrada (ver la tabla siguiente) | string    | — | — |
+| width     | anchura de Diálogo| string    | — | 50% |
+| fullscreen | si el diálogo ocupa pantalla completa | boolean     | — | false |
 | top      | value for `margin-top` of Dialog CSS | string    | — | 15vh |
-| modal     | whether a mask is displayed | boolean   | — | true |
-| modal-append-to-body     | whether to append modal to body element. If false, the modal will be appended to Dialog's parent element | boolean   | — | true |
+| modal     | si se muestra una máscara | boolean   | — | true |
+| modal-append-to-body | si adjuntar modal al elemento de cuerpo. Si es falso,el modal se agregará al elemento principal de Diálogo | boolean   | — | true |
 | append-to-body     | whether to append Dialog itself to body. A nested Dialog should have this attribute set to `true` | boolean   | — | false |
 | lock-scroll     | whether scroll of body is disabled while Dialog is displayed | boolean   | — | true |
 | custom-class      | custom class names for Dialog | string    | — | — |

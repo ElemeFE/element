@@ -100,13 +100,13 @@
 
 seleccionar fecha y tiempo juntos en una escoja.
 
-:::propina
+:::tip
 DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más detallada sobre `pickerOptions` y otros atributos,puedes referirse a DatePicker y TimePicker.
 :::
 
 ###  Fecha y hora
 
-:::manifestación Puedes seleccionar fecha y tiempo juntos en una escoja al mismo tiempo por establecer `type` a `datetime`.El método a utilizar atajos es mismo que Date Picker.
+:::demo Puedes seleccionar fecha y tiempo juntos en una escoja al mismo tiempo por establecer `type` a `datetime`.El método a utilizar atajos es mismo que Date Picker.
 
 
 ```html
@@ -167,7 +167,7 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
 
 ### alcance de fecha y tiempo
 
-:::manifestación Puedes seleccionar fecha y tiempo por establecer `type` a `datetimerange`.
+:::demo Puedes seleccionar fecha y tiempo por establecer `type` a `datetimerange`.
 
 ```html
 <template>
