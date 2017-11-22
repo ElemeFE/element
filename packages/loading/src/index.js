@@ -19,21 +19,23 @@ LoadingConstructor.prototype.originalPosition = '';
 LoadingConstructor.prototype.originalOverflow = '';
 
 LoadingConstructor.prototype.close = function() {
-  if (this.fullscreen) {
-    fullscreenLoading = undefined;
-  }
-  this.$on('after-leave', _ => {
-    const target = this.fullscreen || this.body
-      ? document.body
-      : this.target;
-    removeClass(target, 'el-loading-parent--relative');
-    removeClass(target, 'el-loading-parent--hidden');
-    if (this.$el && this.$el.parentNode) {
-      this.$el.parentNode.removeChild(this.$el);
+  Vue.nextTick(() => {
+    if (this.fullscreen) {
+      fullscreenLoading = undefined;
     }
-    this.$destroy();
+    this.$on('after-leave', _ => {
+      const target = this.fullscreen || this.body
+        ? document.body
+        : this.target;
+      removeClass(target, 'el-loading-parent--relative');
+      removeClass(target, 'el-loading-parent--hidden');
+      if (this.$el && this.$el.parentNode) {
+        this.$el.parentNode.removeChild(this.$el);
+      }
+      this.$destroy();
+    });
+    this.visible = false;
   });
-  this.visible = false;
 };
 
 const addStyle = (options, parent, instance) => {
