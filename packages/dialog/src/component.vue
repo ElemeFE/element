@@ -107,7 +107,6 @@
 
     watch: {
       visible(val) {
-        this.$emit('update:visible', val);
         if (val) {
           this.closed = false;
           this.$emit('open');
