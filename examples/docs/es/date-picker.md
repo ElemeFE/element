@@ -98,7 +98,7 @@ Utiliza Date Picker para introducir fecha.
 
 Selector de fecha básico limitado por día.
 
-:::manifestación Ésta medición es decidido por el atributo 'type'.Puedes permitir rápidas opcíones por crear un `picker-options` objecto con propiedad `shortcuts`.La fecha minusválida es establecido por 
+:::demo Ésta medición es decidido por el atributo 'type'.Puedes permitir rápidas opcíones por crear un `picker-options` objecto con propiedad `shortcuts`.La fecha minusválida es establecido por 
 la función `disabledDate`.
 
 
@@ -163,7 +163,7 @@ la función `disabledDate`.
 Puedes escoger semana,mes o año por ampliar el estándar fecha recogedor componente.
 
 
-:::manifestación
+:::demo
 
 ```html
 <div class="block">
@@ -211,7 +211,7 @@ Puedes escoger semana,mes o año por ampliar el estándar fecha recogedor compon
 
 escoger un alcance de fecha es apoyado.
 
-:::manifestación cuando en la modalidad de fecha,los paneles izquierdos y derechoes son enlazados por defecto.Si queres los dos paneles combiar meses corrientes independientemente,puedes utilizar el atributo `unlink-panels`.
+:::demo cuando en la modalidad de fecha,los paneles izquierdos y derechoes son enlazados por defecto.Si queres los dos paneles combiar meses corrientes independientemente,puedes utilizar el atributo `unlink-panels`.
 
 ```html
 <template>
@@ -287,7 +287,7 @@ Si el usuario no se recoge una fecha,monstra la fecha de hoy por defecto. Puedes
 
 Si el tipo es `daterange`,`default-value` establece el calendario del lado derecho.
 
-:::manifestación
+:::demo
 ```html
 <template>
   <div class="block">
