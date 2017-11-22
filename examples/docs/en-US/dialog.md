@@ -77,13 +77,11 @@
 
 Informs users while preserving the current page state.
 
-### Uso básico
+### Basic usage
 
-Dialog 
 Dialog pops up a dialog box, and it's quite customizable.
 
-:::demo Set the `visible` attribute with a `Boolean`, and Dialog shows when it is `true`. The Dialog has two parts: `body` and `footer`, and the latter requires a `slot` named `footer`. The optional `title` attribute (empty by default) is for defining a title. Finally, this example demostra como  `before-close`es usado.
-
+:::demo Set the `visible` attribute with a `Boolean`, and Dialog shows when it is `true`. The Dialog has two parts: `body` and `footer`, and the latter requires a `slot` named `footer`. The optional `title` attribute (empty by default) is for defining a title. Finally, this example demonstrates how `before-close` is used.
 
 ```html
 <el-button type="text" @click="dialogVisible = true">click to open the Dialog</el-button>
@@ -127,7 +125,6 @@ Dialog pops up a dialog box, and it's quite customizable.
 
 ### Customizations
 
-El contenido de Dialog
 The content of Dialog can be anything, even a table or a form. This example shows how to use Element Table and Form with Dialog。
 
 :::demo

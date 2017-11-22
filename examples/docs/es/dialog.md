@@ -280,7 +280,8 @@ Dialog's content can be centered.
 :::
 
 :::propina
-If the variable bound to `visible` is managed in Vuex store, the `.sync` can not work properly. In this case, please remove the `.sync` modifier, listen to `open` and `close` events of Dialog, and commit Vuex mutations to update the value of that variable in the event handlers.
+Si el variable obligado a `visible` es manejado en el almacén Vuex,el `.sync` no puede funcionar correctamente.En este caso,quita el modificador `.sync` por favor,escucha a eventos `open` y `close` de Diálogo,y comete Vuex mutaciones para actualizar el valor de la variable en los controladores de eventos.
+
 :::
 
 ### Attributes
