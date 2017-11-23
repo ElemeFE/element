@@ -644,10 +644,10 @@ Search data from server-side.
 
 | Name | Description |
 |------|--------|
-| prefix | content as Input prefix |
-| suffix | content as Input suffix |
-| prepend | content to prepend before Input |
-| append | content to append after Input |
+| prefix | content as Input prefix, only works when `type` is 'text' |
+| suffix | content as Input suffix, only works when `type` is 'text' |
+| prepend | content to prepend before Input, only works when `type` is 'text' |
+| append | content to append after Input, only works when `type` is 'text' |
 
 ### Input Events
 

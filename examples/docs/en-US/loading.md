@@ -233,7 +233,9 @@ Loading.service(options);
 The parameter `options` is the configuration of Loading, and its details can be found in the following table. `LoadingService` returns a Loading instance, and you can close it by invoking its `close` method:
 ```javascript
 let loadingInstance = Loading.service(options);
-loadingInstance.close();
+this.$nextTick(() => { // Loading should be closed asynchronously
+  loadingInstance.close();
+});
 ```
 Note that in this case the full screen Loading is singleton. If a new full screen Loading is invoked before an existing one is closed, the existing full screen Loading instance will be returned instead of actually creating another Loading instance:
 ```javascript
