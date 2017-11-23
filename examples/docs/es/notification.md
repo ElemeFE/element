@@ -3,13 +3,13 @@
     methods: {
       open() {
         const h = this.$createElement;
-
+    
         this.$notify({
           title: 'Title',
           message: h('i', { style: 'color: teal' }, 'This is a reminder')
         });
       },
-
+    
       open2() {
         this.$notify({
           title: 'Prompt',
@@ -17,7 +17,7 @@
           duration: 0
         });
       },
-
+    
       open3() {
         this.$notify({
           title: 'Success',
@@ -25,7 +25,7 @@
           type: 'success'
         });
       },
-
+    
       open4() {
         this.$notify({
           title: 'Warning',
@@ -33,28 +33,28 @@
           type: 'warning'
         });
       },
-
+    
       open5() {
         this.$notify.info({
           title: 'Info',
           message: 'This is an info message'
         });
       },
-
+    
       open6() {
         this.$notify.error({
           title: 'Error',
           message: 'This is an error message'
         });
       },
-
+    
       open7() {
         this.$notify({
           title: 'Custom Position',
           message: 'I\'m at the top right corner'
         });
       },
-
+    
       open8() {
         this.$notify({
           title: 'Custom Position',
@@ -62,7 +62,7 @@
           position: 'bottom-right'
         });
       },
-
+    
       open9() {
         this.$notify({
           title: 'Custom Position',
@@ -70,7 +70,7 @@
           position: 'bottom-left'
         });
       },
-
+    
       open10() {
         this.$notify({
           title: 'Custom Position',
@@ -78,7 +78,7 @@
           position: 'top-left'
         });
       },
-
+    
       open11() {
         this.$notify.success({
           title: 'Success',
@@ -86,7 +86,7 @@
           offset: 100
         });
       },
-
+    
       open12() {
         this.$notify({
           title: 'HTML String',
@@ -102,7 +102,7 @@
           showClose: false
         });
       },
-
+    
       onClose() {
         console.log('Notification is closed');
       }
@@ -112,11 +112,11 @@
 
 ## Notification
 
-Displays a global notification message at a corner of the page.
+Muestra un mensaje de notificación global en una esquina de la página.
 
-### Basic usage
+### Uso básico
 
-::: demo Element has registered the `$notify` method and it receives an object as its parameter. In the simplest case, you can set the `title` field and the` message` field for the title and body of the notification. By default, the notification automatically closes after 4500ms, but by setting `duration` you can control its duration. Specifically, if set to `0`, it will not close automatically. Note that `duration` receives a `Number` in milliseconds.
+::: demo Element ha registrado el método`$notify` y recibe un objeto como parámetro. En el caso más sencillo, puede establecer el campo de `title` y el campo de ` message` para el título y el cuerpo de la notificación. De forma predeterminada, la notificación se cierra automáticamente después de 4500ms, pero configurando `duration`  se puede controlar su duración. Específicamente, si está configurado en `0`, no se cerrará automáticamente. Tenga en cuenta que `duration` recibe un `Number` en milisegundos.
 
 ```html
 <template>
@@ -157,11 +157,12 @@ Displays a global notification message at a corner of the page.
 ```
 :::
 
-### With types
+### Tipos de notificaciones
 
-We provide four types: success, warning, info and error.
+Proporcionamos cuatro tipos: success, warning, info y error.
 
-::: demo Element provides four notification types: `success`, `warning`, `info` and `error`. They are set by the `type` field, and other values will be ignored. We also registered methods for these types that can be invoked directly like `open5` and `open6` without passing a `type` field.
+::: demo Element proporciona cuatro tipos de notificación: `success`, `warning`, `info` y `error`. Se definen por el campo  `type`  y se ignorarán otros valores. También se han registrado métodos para estos tipos que se pueden invocar directamente como en el ejemplo `open5` y `open6` sin pasar un campo `type`.
+
 ```html
 <template>
   <el-button
@@ -224,11 +225,12 @@ We provide four types: success, warning, info and error.
 ```
 :::
 
-### Custom position
+### Posicion personalizada
 
-Notification can emerge from any corner you like.
+La notificación puede surgir de cualquier rincón que uno desee.
 
-::: demo The `position` attribute defines which corner Notification slides in. It can be `top-right`, `top-left`, `bottom-right` or `bottom-left`. Defaults to `top-right`.
+::: demo El atributo `position` define desde qué esquina se desliza la notificación. Puede ser `top-right`, `top-left`, `bottom-right` o `bottom-left`. Predeterminado: `top-right`.
+
 ```html
 <template>
   <el-button
@@ -292,11 +294,12 @@ Notification can emerge from any corner you like.
 ```
 :::
 
-### With offset
+### Desplazamiento
 
-Customize Notification's offset from the edge of the screen.
+Personalizar el desplazamiento de notificación desde el borde de la pantalla.
 
-::: demo Set the `offset` attribute to customize Notification's offset from the edge of the screen. Note that every Notification instance of the same moment should have the same offset.
+::: demo Configure el atributo `offset` para personalizar el desplazamiento de la notificación desde el borde de la pantalla. Tenga en cuenta que cada instancia de la notificación del mismo momento debe tener el mismo desplazamiento.
+
 ```html
 <template>
   <el-button
@@ -322,10 +325,11 @@ Customize Notification's offset from the edge of the screen.
 ```
 :::
 
-### Use HTML string
-`message` supports HTML string.
+### Usando cadenas HTML
+`message` soporta cadenas HTML.
 
-::: demo Set `dangerouslyUseHTMLString` to true and `message` will be treated as an HTML string.
+::: demo Configure `dangerouslyUseHTMLString` a true y `message` se tratará como una cadena HTML.
+
 ```html
 <template>
   <el-button
@@ -352,14 +356,17 @@ Customize Notification's offset from the edge of the screen.
 :::
 
 :::warning
-Although `message` property supports HTML strings, dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily lead to [XSS attacks](https://en.wikipedia.org/wiki/Cross-site_scripting). So when `dangerouslyUseHTMLString` is on, please make sure the content of `message` is trusted, and **never** assign `message` to user-provided content.
+
+Aunque la propiedad `message` soporta cadenas HTML, el renderizado dinámico de HTML arbitrario en su sitio web puede ser muy peligroso porque puede conducir fácilmente a [ataques XSS](https://en.wikipedia.org/wiki/Cross-site_scripting). Por lo tanto, cuando `dangerouslyUseHTMLString` está a true, por favor asegúrese de que el contenido del mensaje es confiable, y **nunca** asigne `message` al contenido proporcionado por el usuario.
+
 :::
 
-### Hide close button
+### Ocultar boton de cerrar
 
-It is possible to hide the close button
+Es posible ocultar el botón de cerrar
 
-::: demo Set the `showClose` attribute to `false` so the notification cannot be closed by the user.
+::: demo Configure el atributo `showClose` como `false` para que el usuario no pueda cerrar la notificación.
+
 ```html
 <template>
   <el-button
@@ -385,38 +392,41 @@ It is possible to hide the close button
 ```
 :::
 
-### Global method
+### Metodo global
 
-Element has added a global method `$notify` for Vue.prototype. So in a vue instance you can call `Notification` like what we did in this page.
+Element ha añadido un método global `$notify` para Vue.prototype. Así que en una instancia de vue se puede llamar `Notification` como lo hacemos en esta página.
 
-### Local import
+### Importar localmente
 
-Import `Notification`:
+Importar `Notification`:
 
 ```javascript
 import { Notification } from 'element-ui';
 ```
 
-In this case you should call `Notification(options)`. We have also registered methods for different types, e.g. `Notification.success(options)`.
+En este caso, debe llamar a `Notification(options)`. También se han registrado métodos para diferentes tipos, e.j. `Notification.success(options)`.
 
-### Options
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
-|---------- |-------------- |---------- |--------------------------------  |-------- |
-| title | title | string | — | — |
-| message | description text | string/Vue.VNode | — | — |
-| dangerouslyUseHTMLString | whether `message` is treated as HTML string | boolean | — | false |
-| type | notification type | string | success/warning/info/error | — |
-| iconClass | custom icon's class. It will be overridden by `type` | string | — | — |
-| customClass | custom class name for Notification | string | — | — |
-| duration | duration before close. It will not automatically close if set 0 | number | — | 4500 |
-| position | custom position | string | top-right/top-left/bottom-right/bottom-left | top-right |
-| showClose | whether to show a close button | boolean | — | true |
-| onClose | callback function when closed | function | — | — |
-| onClick | callback function when notification clicked | function | — | — |
-| offset | offset from the top edge of the screen. Every Notification instance of the same moment should have the same offset | number | — | 0 |
+### Opciones
+| Atributo                 | Descripción                              | Tipo             | Valores aceptados                        | Por defecto |
+| ------------------------ | ---------------------------------------- | ---------------- | ---------------------------------------- | ----------- |
+| title                    | titulo                                   | string           | —                                        | —           |
+| message                  | mensaje                                  | string/Vue.VNode | —                                        | —           |
+| dangerouslyUseHTMLString | si  `message` es tratado como una cadena HTML | boolean          | —                                        | false       |
+| type                     | tipo de notificacion                     | string           | success/warning/info/error               | —           |
+| iconClass                | clase personalizada de icono. Será anulado por `type` | string           | —                                        | —           |
+| customClass              | nombre de clase personalizado para la notificacion | string           | —                                        | —           |
+| duration                 | duracion antes de cerrar. Si no se quiere que se cierre automaticamente este valor debe estar a 0 | number           | —                                        | 4500        |
+| position                 | posicion personalizada                   | string           | top-right/top-left/bottom-right/bottom-left | top-right   |
+| showClose                | si se muestra el boton de cerrar         | boolean          | —                                        | true        |
+| onClose                  | funcion que se ejecuta cuando la notificación se cierra | function         | —                                        | —           |
+| onClick                  | funcion que se ejecuta cuando se hace click en la notificación | function         | —                                        | —           |
+| offset                   | desplazamiento desde el borde superior de la pantalla. Cada instancia de notificación del mismo momento debe tener siempre el mismo desplazamiento. | number           | —                                        | 0           |
 
-### Methods
+### Metodos
 `Notification` and `this.$notify` returns the current Notification instance. To manually close the instance, you can call `close` on it.
-| Method | Description |
-| ---- | ---- |
-| close | close the Notification |
+
+`Notification` y `this.$notify` devuelven la instancia de notificación actual. Para cerrar manualmente la instancia, puede llamar al métodol `close`.
+
+| Metodo | Descripción            |
+| ------ | ---------------------- |
+| close  | cierra la notificación |
