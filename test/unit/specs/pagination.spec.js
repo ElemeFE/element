@@ -223,50 +223,22 @@ describe('Pagination', () => {
     };
 
     changeValue(1);
-
     setTimeout(() => {
-      expect(vm.page).to.equal(1);
-      expect(input.value).to.equal('1');
-
-      changeValue(10000);
-
+      expect(input.value).to.equal(1);
+      // 多次输入不在min-max区间内的数字
+      changeValue(0);
       setTimeout(() => {
-        expect(vm.page).to.equal(10);
-
-        changeValue('我好帅');
-
+        expect(input.value).to.equal(1);
+        changeValue(0);
         setTimeout(() => {
-          expect(vm.page).to.equal(1);
-          expect(input.value).to.equal('1');
-
-          // 多次输入不在min-max区间内的数字
-          input.value = 0;
-          triggerEvent(input, 'change');
-          setTimeout(()=>{
-            expect(vm.page).to.equal(1);
-            expect(input.value).to.equal('1');
-
-            input.value = 0;
-            triggerEvent(input, 'change');
-            setTimeout(()=>{
-              expect(vm.page).to.equal(1);
-              expect(input.value).to.equal('1');
-
-              input.value = 1000;
-              triggerEvent(input, 'change');
-              setTimeout(()=>{
-                expect(vm.page).to.equal(10);
-                expect(input.value).to.equal('10');
-
-                input.value = 1000;
-                triggerEvent(input, 'change');
-                setTimeout(()=>{
-                  expect(vm.page).to.equal(10);
-                  expect(input.value).to.equal('10');
-
-                  done();
-                }, 50);
-              }, 50);
+          expect(input.value).to.equal(1);
+          changeValue(1000);
+          setTimeout(() => {
+            expect(input.value).to.equal(10);
+            changeValue(1000);
+            setTimeout(() => {
+              expect(input.value).to.equal(10);
+              done();
             }, 50);
           }, 50);
         }, 50);
