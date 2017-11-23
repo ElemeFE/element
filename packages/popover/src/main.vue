@@ -131,14 +131,14 @@ export default {
     },
     handleFocus() {
       addClass(this.referenceElm, 'focusing');
-      this.showPopper = true;
+      if (this.trigger !== 'manual') this.showPopper = true;
     },
     handleClick() {
       removeClass(this.referenceElm, 'focusing');
     },
     handleBlur() {
       removeClass(this.referenceElm, 'focusing');
-      this.showPopper = false;
+      if (this.trigger !== 'manual') this.showPopper = false;
     },
     handleMouseEnter() {
       clearTimeout(this._timer);
@@ -151,7 +151,7 @@ export default {
       }
     },
     handleKeydown(ev) {
-      if (ev.keyCode === 27) { // esc
+      if (ev.keyCode === 27 && this.trigger !== 'manual') { // esc
         this.doClose();
       }
     },
