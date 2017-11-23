@@ -495,10 +495,9 @@
           if (!this.$refs.reference) return;
           let inputChildNodes = this.$refs.reference.$el.childNodes;
           let input = [].filter.call(inputChildNodes, item => item.tagName === 'INPUT')[0];
-          const tags = this.$refs.tags;
-          input.style.height = this.selected.length === 0
-            ? sizeMap[this.size] + 'px'
-            : Math.max(tags ? (tags.clientHeight + 6) : 0, sizeMap[this.size] || 36) + 'px';
+          const tagsClientHeight = this.$refs.tags && this.$refs.tags.clientHeight || 0;
+          const defaultSize = sizeMap[this.size || 'small'];
+          input.style.height = Math.max(tagsClientHeight, defaultSize) + 6 +'px';
           if (this.visible && this.emptyText !== false) {
             this.broadcast('ElSelectDropdown', 'updatePopper');
           }
