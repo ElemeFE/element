@@ -214,6 +214,7 @@ describe('Pagination', () => {
     triggerEvent(input, 'change');
     setTimeout(() => {
       expect(vm.page).to.equal(1);
+      expect(input.value).to.equal('1');
 
       input.value = 10000;
       triggerEvent(input, 'change');
@@ -225,7 +226,38 @@ describe('Pagination', () => {
         triggerEvent(input, 'change');
         setTimeout(() => {
           expect(vm.page).to.equal(1);
-          done();
+          expect(input.value).to.equal('1');
+
+          // 多次输入不在min-max区间内的数字
+          input.value = 0;
+          triggerEvent(input, 'change');
+          setTimeout(()=>{
+            expect(vm.page).to.equal(1);
+            expect(input.value).to.equal('1');
+
+            input.value = 0;
+            triggerEvent(input, 'change');
+            setTimeout(()=>{
+              expect(vm.page).to.equal(1);
+              expect(input.value).to.equal('1');
+
+              input.value = 1000;
+              triggerEvent(input, 'change');
+              setTimeout(()=>{
+                expect(vm.page).to.equal(10);
+                expect(input.value).to.equal('10');
+
+                input.value = 1000;
+                triggerEvent(input, 'change');
+                setTimeout(()=>{
+                  expect(vm.page).to.equal(10);
+                  expect(input.value).to.equal('10');
+
+                  done();
+                }, 50);
+              }, 50);
+            }, 50);
+          }, 50);
         }, 50);
       }, 50);
     }, 50);
