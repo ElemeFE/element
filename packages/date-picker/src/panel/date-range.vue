@@ -508,7 +508,7 @@
           this.minTimePickerVisible = visible;
         }
 
-        if (this.maxDate && this.maxDate.getTime() < this.minDate.getTime()) {
+        if (!this.maxDate || this.maxDate && this.maxDate.getTime() < this.minDate.getTime()) {
           this.maxDate = new Date(this.minDate);
         }
       },
