@@ -229,9 +229,7 @@ Proporcionamos cuatro tipos: success, warning, info y error.
 
 La notificación puede surgir de cualquier rincón que uno desee.
 
-::: demo The `position` attribute defines which corner Notification slides in. It can be `top-right`, `top-left`, `bottom-right` or `bottom-left`. Defaults to `top-right`.
-
-El atributo `position` define desde qué esquina se desliza la notificación. Puede ser `top-right`, `top-left`, `bottom-right` o `bottom-left`. Predeterminado: `top-right`.
+::: demo El atributo `position` define desde qué esquina se desliza la notificación. Puede ser `top-right`, `top-left`, `bottom-right` o `bottom-left`. Predeterminado: `top-right`.
 
 ```html
 <template>
