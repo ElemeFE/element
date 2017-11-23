@@ -11,6 +11,7 @@
       :style="{ 'max-width': inputWidth - 32 + 'px' }">
       <span
         class="el-select__multiple-text"
+        v-show="multipleText"
         v-if="collapseTags">
         {{ multipleText }}
       </span>
@@ -65,8 +66,8 @@
       @blur="handleBlur"
       @mousedown.native="handleMouseDown"
       @keyup.native="debouncedOnInputChange"
-      @keydown.native.down.prevent="navigateOptions('next')"
-      @keydown.native.up.prevent="navigateOptions('prev')"
+      @keydown.native.down.stop.prevent="navigateOptions('next')"
+      @keydown.native.up.stop.prevent="navigateOptions('prev')"
       @keydown.native.enter.prevent="selectOption"
       @keydown.native.esc.stop.prevent="visible = false"
       @keydown.native.tab="visible = false"
@@ -375,7 +376,8 @@
         });
         this.hoverIndex = -1;
         if (this.multiple && this.filterable) {
-          this.inputLength = this.$refs.input.value.length * 15 + 20;
+          const length = this.$refs.input.value.length * 15 + 20;
+          this.inputLength = this.collapseTags ? Math.min(50, length) : length;
           this.managePlaceholder();
           this.resetInputHeight();
         }
