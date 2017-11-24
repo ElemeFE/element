@@ -165,7 +165,7 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
 ```
 :::
 
-### alcance de fecha y tiempo
+### Alcance de fecha y tiempo
 
 :::demo Puedes seleccionar fecha y tiempo por establecer `type` a `datetimerange`.
 
@@ -236,49 +236,49 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
 :::
 
 ### Atributos
-| Atributos      | Descripción          | Tipo      | Valores aceptados       | Defecto  |
-|---------- |-------------- |---------- |--------------------------------  |-------- |
-| readonly | cuando DatePicker es lectura sola | boolean | — | false |
-| disabled | cuando DatePicker es deshabilitada | boolean | — | false |
-| editable | Si la entrada es editable | boolean | — | true |
-| clearable | Si monstrar el botón de despejar | boolean | — | true |
-|size | tamaño de la entrada | string | large/small/mini | — |
-| placeholder | placeholder en la modalidad sin-rango | string | — | — |
-| start-placeholder | placeholder para el comienzo de fecha en la modalidad de alcance | string | — | — |
-| end-placeholder | placeholder para el fin de fecha en la modalidad de alcance | string | — | — |
-| time-arrow-control | si se escoja tiempo utilizando botones de flecha | boolean | — | false |
-| type | tipo de la escoja | string | year/month/date/datetime/ week/datetimerange/daterange | date |
-| format | formato de valor mostrado en la caja de entrada | string | año `yyyy` mes `MM` día `dd`, hora `HH`, minuto `mm`, segundo `ss` | yyyy-MM-dd |
-| alinear | alineación | left/center/right | left |
-| popper-class | nombre de clase clientela por dropdown de DatePicker | string | — | — |
-| picker-options | opciones adicionales, comproba la tabla abaja | object | — | {} |
-| range-separator | separador de alcance | string | - | '-' |
-| default-value | fecha opcional y defectada del calendario| Fecha | cualquier cosa aceptada por `new Date()` — |
-| value-format | opcional,formato de valor atado.Si no special, el valor atado sería ser un valor de fecha | cadena | año `yyyy`, mes `MM`, día `dd`, hora `HH`, minuto `mm`, segundo `ss` | — |
-| name | igual que `name` en la entrada nativa | string | — | — |
-| unlink-panels | desconectar dos fecha-paneles en alcance-escoja | boolean | — | false |
+| Atributos          | Descripción                              | Tipo              | Valores aceptados                        | Defecto    |
+| ------------------ | ---------------------------------------- | ----------------- | ---------------------------------------- | ---------- |
+| readonly           | cuando DatePicker es lectura sola        | boolean           | —                                        | false      |
+| disabled           | cuando DatePicker es deshabilitada       | boolean           | —                                        | false      |
+| editable           | Si la entrada es editable                | boolean           | —                                        | true       |
+| clearable          | Si monstrar el botón de despejar         | boolean           | —                                        | true       |
+| size               | tamaño de la entrada                     | string            | large/small/mini                         | —          |
+| placeholder        | placeholder en la modalidad sin-rango    | string            | —                                        | —          |
+| start-placeholder  | placeholder para el comienzo de fecha en la modalidad de alcance | string            | —                                        | —          |
+| end-placeholder    | placeholder para el fin de fecha en la modalidad de alcance | string            | —                                        | —          |
+| time-arrow-control | si se escoja tiempo utilizando botones de flecha | boolean           | —                                        | false      |
+| type               | tipo de la escoja                        | string            | year/month/date/datetime/ week/datetimerange/daterange | date       |
+| format             | formato de valor mostrado en la caja de entrada | string            | año `yyyy` mes `MM` día `dd`, hora `HH`, minuto `mm`, segundo `ss` | yyyy-MM-dd |
+| alinear            | alineación                               | left/center/right | left                                     |            |
+| popper-class       | nombre de clase clientela por dropdown de DatePicker | string            | —                                        | —          |
+| picker-options     | opciones adicionales, comproba la tabla abaja | object            | —                                        | {}         |
+| range-separator    | separador de alcance                     | string            | -                                        | '-'        |
+| default-value      | fecha opcional y defectada del calendario | Fecha             | cualquier cosa aceptada por `new Date()` — |            |
+| value-format       | opcional,formato de valor atado.Si no special, el valor atado sería ser un valor de fecha | cadena            | año `yyyy`, mes `MM`, día `dd`, hora `HH`, minuto `mm`, segundo `ss` | —          |
+| name               | igual que `name` en la entrada nativa    | string            | —                                        | —          |
+| unlink-panels      | desconectar dos fecha-paneles en alcance-escoja | boolean           | —                                        | false      |
 
 ### Picker Options
-| Atributo      | Descripción          | Tipo      | Valores aceptados      | Default  |
-|---------- |-------------- |---------- |--------------------------------  |-------- |
-| shortcuts | un { text, onClick } objecto serie para establecer opciones atajos, comprobar la mesa abaja | objeto[] | — | — |
-| disabledDate | una función determinar si la fecha es minusválida con la fecha como su parámetro.Debería devolver un booleano | función | — | — |
-| firstDayOfWeek | primera día de semana | Número | 1 to 7 | 7 |
+| Atributo       | Descripción                              | Tipo     | Valores aceptados | Default |
+| -------------- | ---------------------------------------- | -------- | ----------------- | ------- |
+| shortcuts      | un { text, onClick } objecto serie para establecer opciones atajos, comprobar la mesa abaja | objeto[] | —                 | —       |
+| disabledDate   | una función determinar si la fecha es minusválida con la fecha como su parámetro.Debería devolver un booleano | función  | —                 | —       |
+| firstDayOfWeek | primera día de semana                    | Número   | 1 to 7            | 7       |
 
 ### atajos
-| Atributo      | Descripción          | Type      | Accepted Values       | Default  |
-|---------- |-------------- |---------- |--------------------------------  |-------- |
-| text | title of the shortcut | string | — | — |
-| onClick | función de llama de vuelta, gatillos cuando el atajo se hace clic, con el `vm` como su parámetro. Puedes cambiar el valor de escoja por emitir el evento `pick`. Ejemplo: `vm.$emit('pick', new Date())`| function | — | — |
+| Atributo | Descripción                              | Type     | Accepted Values | Default |
+| -------- | ---------------------------------------- | -------- | --------------- | ------- |
+| text     | title of the shortcut                    | string   | —               | —       |
+| onClick  | función de llama de vuelta, gatillos cuando el atajo se hace clic, con el `vm` como su parámetro. Puedes cambiar el valor de escoja por emitir el evento `pick`. Ejemplo: `vm.$emit('pick', new Date())` | function | —               | —       |
 
 ### Eventos
-| Nombre de evento | Descripción | Parámetros |
-|---------|--------|---------|
-| change | gatillos cuando usuario confirma el valor | valor atado de componente |
-| blur | gatillos cuando la entrada difumina | (event: Event) |
-| focus | gatillos cuando la entrada enfoca | (event: Event) |
+| Nombre de evento | Descripción                              | Parámetros                |
+| ---------------- | ---------------------------------------- | ------------------------- |
+| change           | gatillos cuando usuario confirma el valor | valor atado de componente |
+| blur             | gatillos cuando la entrada difumina      | (event: Event)            |
+| focus            | gatillos cuando la entrada enfoca        | (event: Event)            |
 
 ### Métodos
-| Método | Descripción | Parámetros |
-|------|--------|-------|
-| focus | enfoque la entrada de componente | — |
+| Método | Descripción                      | Parámetros |
+| ------ | -------------------------------- | ---------- |
+| focus  | enfoque la entrada de componente | —          |
