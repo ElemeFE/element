@@ -103,6 +103,8 @@
         type: Boolean,
         default: false
       },
+      prefixIcon: String,
+      suffixIcon: String,
       label: String,
       debounce: {
         type: Number,
