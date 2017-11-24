@@ -1,5 +1,12 @@
 ## Changelog
 
+### 1.4.11
+
+*2017-11-24*
+
+- Now Pagination's jumper will correct invalid page inputs, #8408 (by @decadef20)
+- Fixed high CPU consumption caused by hidden Table, #8484
+
 ### 1.4.10
 
 *2017-11-14*
