@@ -387,7 +387,7 @@ Esta característica está en la etapa alfa. Feedback bienvenido.
 | placeholder       | placeholder cuando el modo NO es rango   | string            | —                                        | —           |
 | start-placeholder | placeholder para la fecha de inicio en modo rango | string            | —                                        | —           |
 | end-placeholder   | placeholder para la fecha final en modo rango | string            | —                                        | —           |
-| type              | tipo de picker                           | string            | year/month/date/datetime/ week/datetimerange/daterange | date        |
+| type              | tipo de selector                         | string            | year/month/date/datetime/ week/datetimerange/daterange | date        |
 | format            | formato en que se muestra el valor en el input | string            | año `yyyy`, mes `MM`, dia `dd`, hora `HH`, minuto `mm`, segundo `ss` | yyyy-MM-dd  |
 | align             | alineación                               | left/center/right | left                                     |             |
 | popper-class      | nombre de clase personalizada para el dropdown de DatePicker | string            | —                                        | —           |
@@ -421,6 +421,6 @@ Esta característica está en la etapa alfa. Feedback bienvenido.
 | focus  | se dispara cuando el input obtiene el foco | (event: Event)               |
 
 ### Metodos
-| Metodo | Descripción                | Parameteros |
-| ------ | -------------------------- | ----------- |
-| focus  | coloca el foco en el input | —           |
+| Metodo | Descripción                | Parametros |
+| ------ | -------------------------- | ---------- |
+| focus  | coloca el foco en el input | —          |

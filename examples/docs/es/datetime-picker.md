@@ -98,15 +98,16 @@
 
 ## DateTimePicker
 
-Select date and time in one picker.
+Seleccionar fecha y hora en un selector.
 
 :::tip
-DateTimePicker is derived from DatePicker and TimePicker. For a more detailed explanation on `pickerOptions` and other attributes, you can refer to DatePicker and TimePicker.
+DateTimePicker se deriva de DatePicker y TimePicker. Para una explicación más detallada sobre `pickerOptions` y otros atributos, puede referirse a DatePicker y TimePicker.
+
 :::
 
-###  Date and time
+###  Fecha y hora
 
-:::demo You can select date and time in one picker at the same time by setting `type` to `datetime`. The way to use shortcuts is the same as Date Picker.
+:::demo Puede seleccionar la fecha y la hora en un selector al mismo tiempo configurando `type` y `datetime`. La forma de utilizar los accesos directos es la misma que Date Picker.
 
 ```html
 <template>
@@ -164,9 +165,9 @@ DateTimePicker is derived from DatePicker and TimePicker. For a more detailed ex
 ```
 :::
 
-### Date and time range
+### Rango de fecha y hora
 
-:::demo You can select date and time range by setting `type` to `datetimerange`.
+:::demo Puede seleccionar el rango de fecha y hora ajustando `type` y `datetimerange`.
 
 ```html
 <template>
@@ -234,50 +235,50 @@ DateTimePicker is derived from DatePicker and TimePicker. For a more detailed ex
 ```
 :::
 
-### Attributes
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
-|---------- |-------------- |---------- |--------------------------------  |-------- |
-| readonly | whether DatePicker is read only | boolean | — | false |
-| disabled | whether DatePicker is disabled | boolean | — | false |
-| editable | whether the input is editable | boolean | — | true |
-| clearable | Whether to show clear button | boolean | — | true |
-|size | size of Input | string | large/small/mini | — |
-| placeholder | placeholder in non-range mode | string | — | — |
-| start-placeholder | placeholder for the start date in range mode | string | — | — |
-| end-placeholder | placeholder for the end date in range mode | string | — | — |
-| time-arrow-control | whether to pick time using arrow buttons | boolean | — | false |
-| type | type of the picker | string | year/month/date/datetime/ week/datetimerange/daterange | date |
-| format | format of the displayed value in the input box | string | year `yyyy` month `MM` day `dd`, hour `HH`, minute `mm`, second `ss` | yyyy-MM-dd |
-| align | alignment | left/center/right | left |
-| popper-class | custom class name for DateTimePicker's dropdown | string | — | — |
-| picker-options | additional options, check the table below | object | — | {} |
-| range-separator | range separator | string | - | '-' |
-| default-value | optional, default date of the calendar | Date | anything accepted by `new Date()` | — |
-| value-format | optional, format of binding value. If not specified, the binding value will be a Date object | string | year `yyyy`, month `MM`, day `dd`, hour `HH`, minute `mm`, second `ss` | — |
-| name | same as `name` in native input | string | — | — |
-| unlink-panels | unllink two date-panels in range-picker | boolean | — | false |
+### Atributos
+| Atributo           | Descripción                              | Tipo              | Valores aceptados                        | Por defecto |
+| ------------------ | ---------------------------------------- | ----------------- | ---------------------------------------- | ----------- |
+| readonly           | si DatePicker es solo de lectura         | boolean           | —                                        | false       |
+| disabled           | si DatePicker esta deshabilitado         | boolean           | —                                        | false       |
+| editable           | si el input es editable                  | boolean           | —                                        | true        |
+| clearable          | si muestra el boton de limpieza          | boolean           | —                                        | true        |
+| size               | tamaño del Input                         | string            | large/small/mini                         | —           |
+| placeholder        | placeholder en el input cuando el modo NO es range | string            | —                                        | —           |
+| start-placeholder  | placeholder para la fecha inicial en el modo range | string            | —                                        | —           |
+| end-placeholder    | placeholder para la fecha final en el modo range | string            | —                                        | —           |
+| time-arrow-control | si el selector de hora usa los botones de flecha | boolean           | —                                        | false       |
+| type               | tipo de selector                         | string            | year/month/date/datetime/ week/datetimerange/daterange | date        |
+| format             | formato del valor mostrado en el input   | string            | año `yyyy` mes `MM` día `dd`, hora `HH`, minuto `mm`, segundo `ss` | yyyy-MM-dd  |
+| align              | alineación                               | left/center/right | left                                     |             |
+| popper-class       | nombre de la clase personalizada para el dropdown de DateTimePicker | string            | —                                        | —           |
+| picker-options     | opciones adicionales, verifique en la tabla inferior | object            | —                                        | {}          |
+| range-separator    | separador de rango                       | string            | -                                        | '-'         |
+| default-value      | opcional, valor por defecto del calendario | Date              | cualquiera aceptado por `new Date()`     | —           |
+| value-format       | opcional, formato del valor enlazado. Si no se especifica el valor enlazado debe ser un objeto Date | string            | año `yyyy`, mes `MM`, dia `dd`, hora `HH`, minuto `mm`, segundo `ss` | —           |
+| name               | lo mismo que `name` en un input nativo   | string            | —                                        | —           |
+| unlink-panels      | desvincular los dos date-panels en el range-picker | boolean           | —                                        | false       |
 
-### Picker Options
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
-|---------- |-------------- |---------- |--------------------------------  |-------- |
-| shortcuts | a { text, onClick } object array to set shortcut options, check the table below | object[] | — | — |
-| disabledDate | a function determining if a date is disabled with that date as its parameter. Should return a Boolean | function | — | — |
-| firstDayOfWeek | first day of week | Number | 1 to 7 | 7 |
+### Opciones del selector
+| Atributo       | Descripción                              | Tipo     | Valores aceptados | Por defecto |
+| -------------- | ---------------------------------------- | -------- | ----------------- | ----------- |
+| shortcuts      | { text, onClick } un array de objetos para establecer opciones de acceso directo, verifique la tabla siguiente | object[] | —                 | —           |
+| disabledDate   | una función que determina si una fecha está desactivada con esa fecha como parámetro. Debería devolver un valor booleano | function | —                 | —           |
+| firstDayOfWeek | Primer dia de la semana                  | Number   | 1 to 7            | 7           |
 
-### shortcuts
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
-|---------- |-------------- |---------- |--------------------------------  |-------- |
-| text | title of the shortcut | string | — | — |
-| onClick | callback function, triggers when the shortcut is clicked, with the `vm` as its parameter. You can change the picker value by emitting the `pick` event. Example: `vm.$emit('pick', new Date())`| function | — | — |
+### Accesos directos
+| Atributo | Descripción                              | Tipo     | Valores aceptados | Por defecto |
+| -------- | ---------------------------------------- | -------- | ----------------- | ----------- |
+| text     | título del acceso directo                | string   | —                 | —           |
+| onClick  | una función se dispara al hacer clic en el acceso directo, con`vm`como parámetro. Puede modificar el valor del picker emitiendo el evento `pick`. Ejemplo: `vm.$emit('pick', new Date())` | function | —                 | —           |
 
-### Events
-| Event Name | Description | Parameters |
-|---------|--------|---------|
-| change | triggers when user confirms the value | component's binding value |
-| blur | triggers when Input blurs | (event: Event) |
-| focus | triggers when Input focuses | (event: Event) |
+### Eventos
+| Nombre | Descripción                              | Parametros                |
+| ------ | ---------------------------------------- | ------------------------- |
+| change | se dispara cuando el usuario confirma el valor | component's binding value |
+| blur   | se dispara cuando el input pierde el foco | (event: Event)            |
+| focus  | se dispara cuando el input obtiene el foco | (event: Event)            |
 
-### Methods
-| Method | Description | Parameters |
-|------|--------|-------|
-| focus | focus the Input component | — |
+### Metodos
+| Metodo | Descripción                | Parametros |
+| ------ | -------------------------- | ---------- |
+| focus  | coloca el foco en el input | —          |
