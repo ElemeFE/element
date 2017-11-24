@@ -3,6 +3,9 @@
     data() {
       return {
         pickerOptions1: {
+          disabledDate(time) {
+            return time.getTime() > Date.now();
+          },
           shortcuts: [{
             text: 'Today',
             onClick(picker) {
@@ -94,6 +97,15 @@
 ## DatePicker
 Utiliza Date Picker para introducir fecha.
 
+<<<<<<< HEAD
+Utilice Date Picker para introducir la fecha.
+
+###  Ingresar Fecha
+
+Date Picker básico por "día".
+
+:::demo La medida está determinada por el atributo `type` . Puede habilitar las opciones rápidas creando un objeto `picker-options` con la propiedad `shortcuts`. La fecha desactivada se ajusta mediante `disabledDate`, que es una función.
+=======
 ###  Entrar fecha
 
 Selector de fecha básico limitado por día.
@@ -101,6 +113,7 @@ Selector de fecha básico limitado por día.
 :::demo Ésta medición es decidido por el atributo 'type'.Puedes permitir rápidas opcíones por crear un `picker-options` objecto con propiedad `shortcuts`.La fecha minusválida es establecido por 
 la función `disabledDate`.
 
+>>>>>>> 4c81a5c2921b7eeff2675e7d8fb0de7896687b18
 
 ```html
 <template>
@@ -128,6 +141,9 @@ la función `disabledDate`.
     data() {
       return {
         pickerOptions1: {
+          disabledDate(time) {
+            return time.getTime() > Date.now();
+          },
           shortcuts: [{
             text: 'Today',
             onClick(picker) {
@@ -159,9 +175,15 @@ la función `disabledDate`.
 
 :::
 
+<<<<<<< HEAD
+### Otras mediciones
+
+Puede seleccionar la semana, el mes o el año extendiendo el componente date picker estándar.
+=======
 ### Otras medidas
 Puedes escoger semana,mes o año por ampliar el estándar fecha recogedor componente.
 
+>>>>>>> 4c81a5c2921b7eeff2675e7d8fb0de7896687b18
 
 :::demo
 
@@ -207,11 +229,19 @@ Puedes escoger semana,mes o año por ampliar el estándar fecha recogedor compon
 
 :::
 
+<<<<<<< HEAD
+###  Rango de fechas
+
+Se soporta la selección de un rango de fechas.
+
+:::demo En modo de rango, los paneles izquierdo y derecho están vinculados por defecto. Si desea que los dos paneles cambien los meses actuales de forma independiente, puede utilizar el atributo `unlink-panels`.
+=======
 ###  el alcance de fecha
 
 escoger un alcance de fecha es apoyado.
 
 :::demo cuando en la modalidad de fecha,los paneles izquierdos y derechoes son enlazados por defecto.Si queres los dos paneles combiar meses corrientes independientemente,puedes utilizar el atributo `unlink-panels`.
+>>>>>>> 4c81a5c2921b7eeff2675e7d8fb0de7896687b18
 
 ```html
 <template>
@@ -281,11 +311,19 @@ escoger un alcance de fecha es apoyado.
 
 :::
 
+<<<<<<< HEAD
+###  Valor por defecto
+
+Si el usuario no ha escogido una fecha, muestra el calendario de hoy por defecto. Puede utilizar `default-value` para fijar otra fecha. Su valor debe ser definido por `new Date()`.
+
+Si el tipo es `daterange`, `default-value` establece el calendario del lado izquierdo.
+=======
 ###  Valor defecto
 
 Si el usuario no se recoge una fecha,monstra la fecha de hoy por defecto. Puedes utilizar `default-value` a establecer otra fecha. Su valor deber ser parseable por `new Date()`.
 
 Si el tipo es `daterange`,`default-value` establece el calendario del lado derecho.
+>>>>>>> 4c81a5c2921b7eeff2675e7d8fb0de7896687b18
 
 :::demo
 ```html
@@ -324,6 +362,14 @@ Si el tipo es `daterange`,`default-value` establece el calendario del lado derec
 ```
 :::
 
+<<<<<<< HEAD
+###  Formato del valor
+
+De forma predeterminada, DatePicker emite el objet `Date`. Puede utilizar `value-format` para designar el formato del valor emitido, acepta la misma cadena de formato del atributo `format`.
+
+:::warning
+Esta característica está en la etapa alfa. Feedback bienvenido.
+=======
 ###  Valor  Formateado
 
 Por defecto,DatePicker emite el objecto `Date`. Puedes utilizar `value-format` a designar el formato del valor emitido,acepta cadena del formato mismo del atributo `format`.
@@ -332,6 +378,7 @@ Por defecto,DatePicker emite el objecto `Date`. Puedes utilizar `value-format` a
 :::warning
 escenario
 Ésta característica es en alfa escenario.Bienvenivo a enviar realimentación.
+>>>>>>> 4c81a5c2921b7eeff2675e7d8fb0de7896687b18
 :::
 
 :::demo
@@ -373,6 +420,56 @@ escenario
 ```
 :::
 
+<<<<<<< HEAD
+### Atributos
+| Atributo          | Descripción                              | Tipo              | Valores aceptados                        | Por defecto |
+| ----------------- | ---------------------------------------- | ----------------- | ---------------------------------------- | ----------- |
+| readonly          | si DatePicker es solo de lectura         | boolean           | —                                        | false       |
+| disabled          | si DatePicker esta deshabilitado         | boolean           | —                                        | false       |
+| size              | tamaño del input                         | string            | large/small/mini                         | —           |
+| editable          | si el input es editable                  | boolean           | —                                        | true        |
+| clearable         | si se muestra el boton de borrado        | boolean           | —                                        | true        |
+| placeholder       | placeholder cuando el modo NO es rango   | string            | —                                        | —           |
+| start-placeholder | placeholder para la fecha de inicio en modo rango | string            | —                                        | —           |
+| end-placeholder   | placeholder para la fecha final en modo rango | string            | —                                        | —           |
+| type              | tipo de picker                           | string            | year/month/date/datetime/ week/datetimerange/daterange | date        |
+| format            | formato en que se muestra el valor en el input | string            | año `yyyy`, mes `MM`, dia `dd`, hora `HH`, minuto `mm`, segundo `ss` | yyyy-MM-dd  |
+| align             | alineación                               | left/center/right | left                                     |             |
+| popper-class      | nombre de clase personalizada para el dropdown de DatePicker | string            | —                                        | —           |
+| picker-options    | opciones adicionales, chequee la tabla debajo | object            | —                                        | {}          |
+| range-separator   | separador de rangos                      | string            | —                                        | '-'         |
+| default-value     | opcional, valor por defecto para el calendario | Date              | cualquiera aceptado por `new Date()`     | —           |
+| value-format      | opcional, formato del valor enlazado. Si no esta especificado, el valor enlazado será un objeto Date. | string            | año `yyyy`, mes `MM`, dia `dd`, hora `HH`, minuto `mm`, segundo `ss` | —           |
+| name              | igual que `name` en el input nativo      | string            | —                                        | —           |
+| unlink-panels     | desvincular los dos paneles de fecha en el range-picker | boolean           | —                                        | false       |
+
+### Opciones del Picker
+| Atributo       | Descripción                              | Tipo                           | Valores aceptados | Por defecto |
+| -------------- | ---------------------------------------- | ------------------------------ | ----------------- | ----------- |
+| shortcuts      | { text, onClick } un array de objetos para establecer opciones de acceso directo, verifique la tabla siguiente | object[]                       | —                 | —           |
+| disabledDate   | una función que determina si una fecha está desactivada con esa fecha como parámetro. Debería devolver un valor booleano | function                       | —                 | —           |
+| firstDayOfWeek | primer dia de la semana                  | Number                         | 1 to 7            | 7           |
+| onPick         | una función que se dispara cuando se cambia la fecha seleccionada. Solamente para `daterange` y `datetimerange`. | Function({ maxDate, minDate }) | -                 | -           |
+
+### Accesso directo
+| Atributo | Descripción                              | Tipo     | Valores aceptados | Por defecto |
+| -------- | ---------------------------------------- | -------- | ----------------- | ----------- |
+| text     | título del acceso directo                | string   | —                 | —           |
+| onClick  | una función se dispara al hacer clic en el acceso directo, con`vm`como parámetro. Puede modificar el valor del picker emitiendo el evento `pick`. Ejemplo: `vm.$emit('pick', new Date())` | function | —                 | —           |
+
+
+### Eventos
+| Nombre | Descripción                              | Parametros                   |
+| ------ | ---------------------------------------- | ---------------------------- |
+| change | se dispara cuando el usuario confirma el valor | valor enlazado al componente |
+| blur   | se dispara cuando el input pierde el foco | (event: Event)               |
+| focus  | se dispara cuando el input obtiene el foco | (event: Event)               |
+
+### Metodos
+| Metodo | Descripción                | Parameteros |
+| ------ | -------------------------- | ----------- |
+| focus  | coloca el foco en el input | —           |
+=======
 ### Atributos 
 | Atributos      | Descripción          | Tipo      | Valores aceptados       | Valor por defecto   |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -422,3 +519,4 @@ escenario
 | Método | Descripción | Parámetros |
 |------|--------|-------|
 | focus | enfoque la entrada de componente | — |
+>>>>>>> 4c81a5c2921b7eeff2675e7d8fb0de7896687b18
