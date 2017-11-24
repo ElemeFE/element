@@ -77,7 +77,7 @@
 
 Informar usuarios cuando preserva el estado de página corriente.
 
-### Basic usage
+### Uso Básico
 
 Diálogo que se surge una caja de diálogo,y es bastante personalizable.
 
@@ -286,34 +286,34 @@ Si el variable obligado a `visible` es manejado en el almacén Vuex,el `.sync` n
 
 ### Atributo
 
-| Atributo      | Descripción          | Tipo      | Valores aceptados       | Defecto  |
-|---------- |-------------- |---------- |--------------------------------  |-------- |
-| visible   | visibilidad del Diálogo, apoya el modificador .sync | boolean | — | false |
-| title     | título de Diálogo. También se puede pasar con una ranura nombrada (ver la tabla siguiente) | string    | — | — |
-| width     | anchura de Diálogo| string    | — | 50% |
-| fullscreen | si el diálogo ocupa pantalla completa | boolean     | — | false |
-| top      | valor de `margin-top` del Diálogo CSS | string    | — | 15vh |
-| modal     | si se muestra una máscara | boolean   | — | true |
-| modal-append-to-body | si adjuntar modal al elemento de cuerpo. Si es falso,el modal se agregará al elemento principal de Diálogo | boolean   | — | true |
-| append-to-body     | Si adjuntar el cuadro de diálogo al cuerpo | boolean   | — | false |
-| lock-scroll     | Si voluta de cuerpo está desactivado mientras se muestra el cuadro de diálogo | boolean   | — | true |
-| custom-class      | nombres de clase personalizada para el Diálogo | string    | — | — |
-| close-on-click-modal | si el Diálogo puede ser cerrado por haciendo clic en la máscara | boolean    | — | true |
-| close-on-press-escape | si el Diálogo puede ser cerrado por presionando ESC | boolean    | — | true |
-| show-close |si mostrar un botón de cerrar | boolean    | — | true |
-| before-close | una devolución de llamada antes de que se cierre el cuadro de diálogo, y evitará el cuadro de diálogo de cerrar |función(done) `done`se usa para cerrar el diálog | — | — |
-| center | si alinear el encabezado y el pie de página en el centro | boolean | — | false |
+| Atributo              | Descripción                              | Tipo                                     | Valores aceptados | Defecto |
+| --------------------- | ---------------------------------------- | ---------------------------------------- | ----------------- | ------- |
+| visible               | visibilidad del Diálogo, apoya el modificador .sync | boolean                                  | —                 | false   |
+| title                 | título de Diálogo. También se puede pasar con una ranura nombrada (ver la tabla siguiente) | string                                   | —                 | —       |
+| width                 | anchura de Diálogo                       | string                                   | —                 | 50%     |
+| fullscreen            | si el diálogo ocupa pantalla completa    | boolean                                  | —                 | false   |
+| top                   | valor de `margin-top` del Diálogo CSS    | string                                   | —                 | 15vh    |
+| modal                 | si se muestra una máscara                | boolean                                  | —                 | true    |
+| modal-append-to-body  | si adjuntar modal al elemento de cuerpo. Si es falso,el modal se agregará al elemento principal de Diálogo | boolean                                  | —                 | true    |
+| append-to-body        | Si adjuntar el cuadro de diálogo al cuerpo | boolean                                  | —                 | false   |
+| lock-scroll           | Si voluta de cuerpo está desactivado mientras se muestra el cuadro de diálogo | boolean                                  | —                 | true    |
+| custom-class          | nombres de clase personalizada para el Diálogo | string                                   | —                 | —       |
+| close-on-click-modal  | si el Diálogo puede ser cerrado por haciendo clic en la máscara | boolean                                  | —                 | true    |
+| close-on-press-escape | si el Diálogo puede ser cerrado por presionando ESC | boolean                                  | —                 | true    |
+| show-close            | si mostrar un botón de cerrar            | boolean                                  | —                 | true    |
+| before-close          | una devolución de llamada antes de que se cierre el cuadro de diálogo, y evitará el cuadro de diálogo de cerrar | función(done) `done`se usa para cerrar el diálog | —                 | —       |
+| center                | si alinear el encabezado y el pie de página en el centro | boolean                                  | —                 | false   |
 
 ### Ranura
 
-| Nombre | Descripcíon |
-|------|--------|
-| — | contenido de Diálogo |
-| title | contenido del título de Diálogo |
-| footer | contenido del pie de página de Diálogo|
+| Nombre | Descripcíon                            |
+| ------ | -------------------------------------- |
+| —      | contenido de Diálogo                   |
+| title  | contenido del título de Diálogo        |
+| footer | contenido del pie de página de Diálogo |
 
 ### Eventos
-| Nombre de Eventos | Descripcíon | Parámetros |
-|---------- |-------- |---------- |
-| open | se activa cuando se abre el cuadro de Diálogo | — |
-| close | se dispara cuando el Diálogo se cierra | — |
+| Nombre de Eventos | Descripcíon                              | Parámetros |
+| ----------------- | ---------------------------------------- | ---------- |
+| open              | se activa cuando se abre el cuadro de Diálogo | —          |
+| close             | se dispara cuando el Diálogo se cierra   | —          |
