@@ -210,23 +210,27 @@ export default {
           this.oldValue = event.target.value;
         },
         handleBlur({ target }) {
-          this.reassignMaxValue(target);
-        },
-        handleKeyUp(event) {
-          const key = event.key || '';
-          const keyCode = event.keyCode || '';
-          if ((key && key === 'Enter') || (keyCode && keyCode === 13)) {
-            this.reassignMaxValue(event.target);
-            this.handleChange(event.target.value);
-          }
+          this.resetValueIfNeed(target.value);
+          this.reassignMaxValue(target.value);
         },
         handleChange(value) {
           this.$parent.internalCurrentPage = this.$parent.getValidCurrentPage(value);
           this.oldValue = null;
+          this.resetValueIfNeed(value);
         },
-        reassignMaxValue(target) {
-          if (+target.value > this.$parent.internalPageCount) {
-            target.value = this.$parent.internalPageCount;
+        resetValueIfNeed(value) {
+          const num = parseInt(value, 10);
+          if (!isNaN(num)) {
+            if (num < 1) {
+              this.$refs.input.$el.querySelector('input').value = 1;
+            } else {
+              this.reassignMaxValue(value);
+            }
+          }
+        },
+        reassignMaxValue(value) {
+          if (+value > this.$parent.internalPageCount) {
+            this.$refs.input.$el.querySelector('input').value = this.$parent.internalPageCount;
           }
         }
       },
@@ -242,10 +246,10 @@ export default {
               value={ this.$parent.internalCurrentPage }
               domPropsValue={ this.$parent.internalCurrentPage }
               type="number"
+              ref="input"
               onChange={ this.handleChange }
               onFocus={ this.handleFocus }
-              onBlur={ this.handleBlur }
-              nativeOnKeyup={ this.handleKeyUp }/>
+              onBlur={ this.handleBlur }/>
             { this.t('el.pagination.pageClassifier') }
           </span>
         );

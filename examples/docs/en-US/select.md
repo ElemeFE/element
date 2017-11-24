@@ -368,7 +368,8 @@ Multiple select uses tags to display selected options.
           value: 'Option5',
           label: 'Option5'
         }],
-        value5: []
+        value5: [],
+        value11: []
       }
     }
   }

@@ -142,7 +142,7 @@
     @include button-size($--button-mini-padding-vertical, $--button-mini-padding-horizontal, $--button-mini-font-size, $--button-mini-border-radius);
   }
   @include m(text) {
-    border: none;
+    border-color: transparent;
     color: $--color-primary;
     background: transparent;
     padding-left: 0;

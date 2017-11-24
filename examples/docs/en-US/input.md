@@ -674,6 +674,8 @@ Attribute | Description | Type | Options | Default
 | name | same as `name` in native input | string | — | — |
 | select-when-unmatched | whether to emit a `select` event on enter when there is no autocomplete match | boolean | — | false |
 | label | label text | string | — | — |
+| prefix-icon | prefix icon class | string | — | — |
+| suffix-icon | suffix icon class | string | — | — |
 
 ### Autocomplete slots
 

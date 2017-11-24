@@ -24,7 +24,7 @@
 
     data() {
       return {
-        size: this.dropdown.size
+        size: this.dropdown.dropdownSize
       };
     },
 
