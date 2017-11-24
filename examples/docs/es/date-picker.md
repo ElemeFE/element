@@ -100,7 +100,7 @@ Utilice Date Picker para introducir la fecha.
 
 ###  Ingresar Fecha
 
-Date Picker básico por "día".
+Date Picker básico por día.
 
 :::demo La medida está determinada por el atributo `type` . Puede habilitar las opciones rápidas creando un objeto `picker-options` con la propiedad `shortcuts`. La fecha desactivada se ajusta mediante `disabledDate`, que es una función.
 
