@@ -1669,6 +1669,7 @@ Search and select options with a keyword.
 | options   | data of the options | array | — | — |
 | props | configuration options, see the following table | object | — | — |
 | value | selected value | array | — | — |
+| separator | option separator | string | — | / |
 | popper-class | custom class name for Cascader's dropdown | string | — | — |
 | placeholder | input placeholder | string | — | Select |
 | disabled  | whether Cascader is disabled | boolean |  — | false |
