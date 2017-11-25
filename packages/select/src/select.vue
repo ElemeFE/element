@@ -615,8 +615,17 @@
       },
 
       selectOption() {
+        const visibleOptions = this.options.filter(option => option.visible);
         if (this.options[this.hoverIndex]) {
           this.handleOptionSelect(this.options[this.hoverIndex]);
+        } else if (visibleOptions.length) {
+          const newOption = this.getNewOption();
+          if (newOption && newOption.value.length > 0) {
+            this.handleOptionSelect(newOption);
+          } else if (visibleOptions.length === 1) {
+            const option = visibleOptions[0];
+            this.handleOptionSelect(option);
+          }
         }
       },
 
@@ -690,7 +699,12 @@
         } else {
           return getValueByPath(item.value, this.valueKey);
         }
+      },
+
+      getNewOption() {
+        return this.options.filter(option => option.created)[0];
       }
+
     },
 
     created() {
