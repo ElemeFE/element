@@ -560,7 +560,7 @@
           let input = [].filter.call(inputChildNodes, item => item.tagName === 'INPUT')[0];
           const tags = this.$refs.tags;
           input.style.height = this.selected.length === 0
-            ? sizeMap[this.selectSize] || 40 + 'px'
+            ? (sizeMap[this.selectSize] || 40) + 'px'
             : Math.max(tags ? (tags.clientHeight + 10) : 0, sizeMap[this.selectSize] || 40) + 'px';
           if (this.visible && this.emptyText !== false) {
             this.broadcast('ElSelectDropdown', 'updatePopper');
