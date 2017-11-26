@@ -475,7 +475,11 @@
         immediate: true,
         handler(val) {
           this.store.commit('setData', val);
-          if (this.$ready) this.doLayout();
+          if (this.$ready) {
+            this.$nextTick(() => {
+              this.doLayout();
+            });
+          }
         }
       },
 
