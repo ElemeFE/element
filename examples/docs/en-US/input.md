@@ -197,7 +197,7 @@ export default {
 <el-input
   placeholder="Please input"
   v-model="input10"
-  :clearable="true">
+  clearable>
 </el-input>
 
 <script>
@@ -663,6 +663,7 @@ Search data from server-side.
 |autofocus | same as `autofocus` in native input | boolean | — | false |
 |form | same as `form` in native input | string | — | — |
 | label | label text | string | — | — |
+| clearable | whether to show clear button | boolean | — | false |
 
 ### Input slots
 
