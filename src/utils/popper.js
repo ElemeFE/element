@@ -909,6 +909,7 @@
 
         var len         = isVertical ? 'height' : 'width';
         var side        = isVertical ? 'top' : 'left';
+        var translate   = isVertical ? 'translateY' : 'translateX';
         var altSide     = isVertical ? 'left' : 'top';
         var opSide      = isVertical ? 'bottom' : 'right';
         var arrowSize   = getOuterSizes(arrow)[len];
@@ -932,7 +933,7 @@
         var sideValue = center - popper[side];
 
         // prevent arrow from being placed not contiguously to its popper
-        sideValue = Math.max(Math.min(popper[len] - arrowSize - 3, sideValue), 3);
+        sideValue = Math.max(Math.min(popper[len] - arrowSize - 8, sideValue), 8);
         arrowStyle[side] = sideValue;
         arrowStyle[altSide] = ''; // make sure to remove any old style from the arrow
 
