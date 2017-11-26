@@ -16,6 +16,7 @@
         input7: '',
         input8: '',
         input9: '',
+        input10: '',
         textarea: '',
         textarea2: '',
         textarea3: '',
@@ -181,6 +182,29 @@ export default {
   data() {
     return {
       input1: ''
+    }
+  }
+}
+</script>
+```
+:::
+
+### Clearable
+
+::: demo Make the Input clearable with the `clearable` attribute.
+
+```html
+<el-input
+  placeholder="Please input"
+  v-model="input10"
+  :clearable="true">
+</el-input>
+
+<script>
+export default {
+  data() {
+    return {
+      input10: ''
     }
   }
 }
