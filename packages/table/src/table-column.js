@@ -185,16 +185,24 @@ export default {
         parent = parent.$parent;
       }
       return parent;
+    },
+    columnOrTableParent() {
+      let parent = this.$parent;
+      while (parent && !parent.tableId && !parent.columnId) {
+        parent = parent.$parent;
+      }
+      return parent;
     }
   },
 
   created() {
     this.customRender = this.$options.render;
     this.$options.render = h => h('div', this.$slots.default);
-    this.columnId = (this.$parent.tableId || (this.$parent.columnId + '_')) + 'column_' + columnIdSeed++;
 
-    let parent = this.$parent;
+    let parent = this.columnOrTableParent;
     let owner = this.owner;
+    this.columnId = (parent.tableId || parent.columnId + '_') + 'column_' + columnIdSeed++;
+
     this.isSubColumn = owner !== parent;
 
     let type = this.type;
@@ -376,10 +384,10 @@ export default {
 
   mounted() {
     const owner = this.owner;
-    const parent = this.$parent;
+    const parent = this.columnOrTableParent;
     let columnIndex;
 
-    if (!this.isSubColumn) {
+    if (!this.isSubColumn || parent.tableId) {
       columnIndex = [].indexOf.call(parent.$refs.hiddenColumns.children, this.$el);
     } else {
       columnIndex = [].indexOf.call(parent.$el.children, this.$el);
