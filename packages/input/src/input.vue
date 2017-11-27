@@ -10,7 +10,10 @@
       'el-input--prefix': $slots.prefix || prefixIcon,
       'el-input--suffix': $slots.suffix || suffixIcon
     }
-  ]">
+    ]"
+    @mouseenter="hovering = true"
+    @mouseleave="hovering = false"
+  >
     <template v-if="type !== 'textarea'">
       <!-- 前置元素 -->
       <div class="el-input-group__prepend" v-if="$slots.prepend"  tabindex="0">
@@ -40,14 +43,20 @@
       <!-- 后置内容 -->
       <span
         class="el-input__suffix"
-        v-if="$slots.suffix || suffixIcon || validateState && needStatusIcon"
+        v-if="$slots.suffix || suffixIcon || showClear || validateState && needStatusIcon"
         :style="suffixOffset">
         <span class="el-input__suffix-inner">
-          <slot name="suffix"></slot>
-          <i class="el-input__icon"
-            v-if="suffixIcon"
-            :class="suffixIcon">
-          </i>
+          <template v-if="!showClear">
+            <slot name="suffix"></slot>
+            <i class="el-input__icon"
+              v-if="suffixIcon"
+              :class="suffixIcon">
+            </i>
+          </template>
+          <i v-else
+            class="el-input__icon el-icon-circle-close el-input__clear"
+            @click="clear"
+          ></i>
         </span>
         <i class="el-input__icon"
           v-if="validateState"
@@ -102,7 +111,9 @@
         currentValue: this.value,
         textareaCalcStyle: {},
         prefixOffset: null,
-        suffixOffset: null
+        suffixOffset: null,
+        hovering: false,
+        focused: false
       };
     },
 
@@ -144,7 +155,11 @@
       },
       suffixIcon: String,
       prefixIcon: String,
-      label: String
+      label: String,
+      clearable: {
+        type: Boolean,
+        default: false
+      }
     },
 
     computed: {
@@ -172,6 +187,9 @@
       },
       isGroup() {
         return this.$slots.prepend || this.$slots.append;
+      },
+      showClear() {
+        return this.clearable && this.currentValue !== '' && (this.focused || this.hovering);
       }
     },
 
@@ -197,6 +215,7 @@
         };
       },
       handleBlur(event) {
+        this.focused = false;
         this.$emit('blur', event);
         if (this.validateEvent) {
           this.dispatch('ElFormItem', 'el.form.blur', [this.currentValue]);
@@ -221,6 +240,7 @@
         this.textareaCalcStyle = calcTextareaHeight(this.$refs.textarea, minRows, maxRows);
       },
       handleFocus(event) {
+        this.focused = true;
         this.$emit('focus', event);
       },
       handleInput(event) {
@@ -252,6 +272,12 @@
         if (this.$slots[pendant]) {
           return { transform: `translateX(${place === 'suf' ? '-' : ''}${this.$el.querySelector(`.el-input-group__${pendant}`).offsetWidth}px)` };
         }
+      },
+      clear() {
+        this.$emit('input', '');
+        this.$emit('change', '');
+        this.setCurrentValue('');
+        this.focus();
       }
     },
 

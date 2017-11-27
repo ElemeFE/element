@@ -16,6 +16,7 @@
         input7: '',
         input8: '',
         input9: '',
+        input10: '',
         textarea: '',
         textarea2: '',
         textarea3: '',
@@ -181,6 +182,29 @@ export default {
   data() {
     return {
       input1: ''
+    }
+  }
+}
+</script>
+```
+:::
+
+### Clearable
+
+::: demo Make the Input clearable with the `clearable` attribute.
+
+```html
+<el-input
+  placeholder="Please input"
+  v-model="input10"
+  clearable>
+</el-input>
+
+<script>
+export default {
+  data() {
+    return {
+      input10: ''
     }
   }
 }
@@ -639,6 +663,7 @@ Search data from server-side.
 |autofocus | same as `autofocus` in native input | boolean | — | false |
 |form | same as `form` in native input | string | — | — |
 | label | label text | string | — | — |
+| clearable | whether to show clear button | boolean | — | false |
 
 ### Input slots
 
