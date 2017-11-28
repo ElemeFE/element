@@ -73,6 +73,18 @@ If you have too much data to display in one page, use pagination.
 ```
 :::
 
+### Buttons with background color
+
+:::demo Set the `background` attribute and the buttons will have a background color.
+```html
+<el-pagination
+  background
+  layout="prev, pager, next"
+  :total="1000">
+</el-pagination>
+```
+:::
+
 ### Small Pagination
 
 Use small pagination in the case of limited space.
@@ -199,6 +211,7 @@ Add more modules based on your scenario.
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |--------------------|----------------------------------------------------------|-------------------|-------------|--------|
 | small              |   whether to use small pagination    | boolean |      —       | false |
+| background | whether the buttons have a background color | Boolean | — | false |
 | page-size              | item count of each page  | number |      —       | 10 |
 | total | total item count | number | — | — |
 | page-count | total page count. Set either `total` or `page-count` and pages will be displayed; if you need `page-sizes`, `total` is required | number | — | — |
