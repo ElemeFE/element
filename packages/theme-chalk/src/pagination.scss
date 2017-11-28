@@ -75,6 +75,7 @@
     .el-icon {
       display: block;
       font-size: 12px;
+      font-weight: bold;
     }
   }
 
@@ -162,6 +163,46 @@
       margin: 0;
     }
   }
+
+  @include when(background) {
+    .btn-prev,
+    .btn-next,
+    .el-pager li {
+      margin: 0 5px;
+      background-color: $--color-info-lighter;
+      color: $--color-text-regular;
+      min-width: 30px;
+      border-radius: 2px;
+    }
+
+    .btn-prev, .btn-next {
+      padding: 0;
+
+      &.disabled {
+        color: $--color-text-placeholder;
+      }
+    }
+
+    .el-pager li {
+      &:hover {
+        color: $--pagination-hover-fill;
+      }
+
+      &.active {
+        background-color: $--color-primary;
+        color: $--color-white;
+      }
+    }
+
+    &.el-pagination--small {
+      .btn-prev,
+      .btn-next,
+      .el-pager li {
+        margin: 0 3px;
+        min-width: 22px;
+      }
+    }
+  }
 }
 
 @include b(pager) {
@@ -173,8 +214,8 @@
   padding: 0;
   margin: 0;
 
-  .el-icon-more::before {
-    vertical-align: -4px;
+  .more::before {
+    line-height: 30px;
   }
 
   li {

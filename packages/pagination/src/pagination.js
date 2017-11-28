@@ -40,7 +40,9 @@ export default {
 
     prevText: String,
 
-    nextText: String
+    nextText: String,
+
+    background: Boolean
   },
 
   data() {
@@ -51,7 +53,10 @@ export default {
   },
 
   render(h) {
-    let template = <div class='el-pagination'></div>;
+    let template = <div class={['el-pagination', {
+      'is-background': this.background,
+      'el-pagination--small': this.small
+    }] }></div>;
     const layout = this.layout || '';
     if (!layout) return;
     const TEMPLATE_MAP = {
@@ -66,10 +71,6 @@ export default {
     const components = layout.split(',').map((item) => item.trim());
     const rightWrapper = <div class="el-pagination__rightwrapper"></div>;
     let haveRightWrapper = false;
-
-    if (this.small) {
-      template.data.class += ' el-pagination--small';
-    }
 
     components.forEach(compo => {
       if (compo === '->') {
