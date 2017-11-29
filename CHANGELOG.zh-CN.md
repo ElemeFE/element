@@ -1,5 +1,16 @@
 ## 更新日志
 
+### 2.0.6
+
+*2017-11-29*
+
+- 修复 Table 排序图标的样式问题，#8405
+- 修复 `trigger` 为 manual 的 Popover 的触发问题，#8467
+- 新增 Autocomplete 的 `prefix-icon` 和 `suffix-icon` 属性，#8446（by @liyanlong）
+- 新增 Cascader 的 `separator` 属性，#8501
+- 新增 Input 的 `clearable` 属性，#8509（by @lbogdan）
+- 新增 Pagination 的 `background` 属性，#8553
+
 ### 2.0.5
 
 *2017-11-17*

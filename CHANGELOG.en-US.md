@@ -1,5 +1,16 @@
 ## Changelog
 
+### 2.0.6
+
+*2017-11-29*
+
+- Fixed style bug of Table's sorting icons, #8405
+- Fixed trigger mechanism for Popover when its `trigger` is manual, #8467
+- Added `prefix-icon` and `suffix-icon` attributes for Autocomplete, #8446 (by @liyanlong)
+- Added `separator` attribute for Cascader, #8501
+- Added `clearable` attribute for Input, #8509 (by @lbogdan)
+- Added `background` attribute for Pagination, #8553
+
 ### 2.0.5
 
 *2017-11-17*
