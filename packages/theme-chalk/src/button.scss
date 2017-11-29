@@ -159,6 +159,12 @@
       border-color: transparent;
       background-color: transparent;
     }
+
+    &.is-disabled,
+    &.is-disabled:hover,
+    &.is-disabled:focus {
+      border-color: transparent;
+    }
   }
 }
 
