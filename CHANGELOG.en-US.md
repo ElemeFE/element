@@ -1,5 +1,11 @@
 ## Changelog
 
+### 2.0.7
+
+*2017-11-29*
+
+- Fixed disabled text button style, #8570
+
 ### 2.0.6
 
 *2017-11-29*
