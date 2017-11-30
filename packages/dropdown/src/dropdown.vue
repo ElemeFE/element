@@ -126,7 +126,8 @@
           this.visible = false;
         }, this.hideTimeout);
       },
-      handleClick() {
+      handleClick(e) {
+        e.stopPropagation()
         if (this.triggerElm.disabled) return;
         this.visible = !this.visible;
       },
