@@ -647,6 +647,7 @@ Search data from server-side.
 |maxlength| maximum Input text length| number| — | — |
 |minlength| minimum Input text length| number | — | — |
 |placeholder| placeholder of Input| string | — | — |
+| clearable | whether to show clear button | boolean | — | false |
 |disabled | whether Input is disabled | boolean | — | false |
 |size | size of Input, works when `type` is not 'textarea' | string | medium / small / mini | — |
 | prefix-icon   | prefix icon class  | string          | — | — |
@@ -663,7 +664,6 @@ Search data from server-side.
 |autofocus | same as `autofocus` in native input | boolean | — | false |
 |form | same as `form` in native input | string | — | — |
 | label | label text | string | — | — |
-| clearable | whether to show clear button | boolean | — | false |
 
 ### Input slots
 

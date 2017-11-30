@@ -16,6 +16,7 @@
         input7: '',
         input8: '',
         input9: '',
+        input10: '',
         textarea: '',
         textarea2: '',
         textarea3: '',
@@ -220,6 +221,29 @@ export default {
     }
   }
 }
+</script>
+```
+:::
+
+### 可清空
+
+::: demo 使用`clearable`属性即可得到一个可清空的输入框
+
+```html
+<el-input
+  placeholder="请输入内容"
+  v-model="input10"
+  clearable>
+</el-input>
+
+<script>
+  export default {
+    data() {
+      return {
+        input10: ''
+      }
+    }
+  }
 </script>
 ```
 :::
@@ -779,6 +803,7 @@ export default {
 | maxlength     | 最大输入长度      | number          |  —  | — |
 | minlength     | 最小输入长度      | number          | — | — |
 | placeholder   | 输入框占位文本    | string          | — | — |
+| clearable     | 是否可清空        | boolean         | — | false |
 | disabled      | 禁用            | boolean         | — | false   |
 | size          | 输入框尺寸，只在 `type!="textarea"` 时有效      | string          | medium / small / mini  | — |
 | prefix-icon   | 输入框头部图标    | string          | — | — |
