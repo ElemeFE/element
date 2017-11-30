@@ -1,5 +1,11 @@
 ## Changelog
 
+### 1.4.12
+
+*2017-11-30*
+
+- Fixed input height error of Select when `size` is not assigned, #8460
+
 ### 1.4.11
 
 *2017-11-24*

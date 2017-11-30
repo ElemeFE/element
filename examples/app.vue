@@ -199,6 +199,15 @@
       this.localize();
       this.renderAnchorHref();
       this.goAnchor();
+      setTimeout(() => {
+        const title = this.lang === 'zh-CN' ? '提示' : 'Notice';
+        const message = this.lang === 'zh-CN' ? 'Element 1.x 已停止维护，请升级至 2.x' : 'Element 1.x is no longer maintained. Please upgrade to 2.x';
+        this.$notify({
+          title,
+          message,
+          duration: 0
+        });
+      }, 3000);
     },
 
     created() {
