@@ -100,10 +100,10 @@ export default {
     transfer: {
       noMatch: 'Тохирох өгөгдөл байхгүй',
       noData: 'Өгөгдөл байхгүй',
-      titles: ['Жагсаалт 1', 'Жагсаалт 2'], // to be translated
-      filterPlaceholder: 'Утга оруул', // to be translated
-      noCheckedFormat: '{total} өгөгдөл', // to be translated
-      hasCheckedFormat: '{checked}/{total} сонгосон' // to be translated
+      titles: ['Жагсаалт 1', 'Жагсаалт 2'],
+      filterPlaceholder: 'Утга оруул',
+      noCheckedFormat: '{total} өгөгдөл',
+      hasCheckedFormat: '{checked}/{total} сонгосон'
     }
   }
 };
