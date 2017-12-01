@@ -55,7 +55,7 @@ export default {
         sep: '9 сар',
         oct: '10 сар',
         nov: '11 сар',
-        dev: '12 сар',
+        dec: '12 сар',
       }
     },
     select: {
