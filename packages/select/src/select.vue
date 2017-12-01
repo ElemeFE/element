@@ -9,7 +9,13 @@
       @click.stop="toggleMenu"
       ref="tags"
       :style="{ 'max-width': inputWidth - 32 + 'px' }">
-      <transition-group @after-leave="resetInputHeight">
+      <span
+        class="el-select__multiple-text"
+        v-show="multipleText"
+        v-if="collapseTags">
+        {{ multipleText }}
+      </span>
+      <transition-group @after-leave="resetInputHeight" v-if="!collapseTags">
         <el-tag
           v-for="item in selected"
           :key="getValueKey(item)"
@@ -29,6 +35,7 @@
         :class="[selectSize ? `is-${ selectSize }` : '']"
         :disabled="disabled"
         @focus="handleFocus"
+        @click.stop
         @keyup="managePlaceholder"
         @keydown="resetInputState"
         @keydown.down.prevent="navigateOptions('next')"
@@ -59,8 +66,8 @@
       @blur="handleBlur"
       @mousedown.native="handleMouseDown"
       @keyup.native="debouncedOnInputChange"
-      @keydown.native.down.prevent="navigateOptions('next')"
-      @keydown.native.up.prevent="navigateOptions('prev')"
+      @keydown.native.down.stop.prevent="navigateOptions('next')"
+      @keydown.native.up.stop.prevent="navigateOptions('prev')"
       @keydown.native.enter.prevent="selectOption"
       @keydown.native.esc.stop.prevent="visible = false"
       @keydown.native.tab="visible = false"
@@ -83,6 +90,7 @@
           tag="ul"
           wrap-class="el-select-dropdown__wrap"
           view-class="el-select-dropdown__list"
+          ref="scrollbar"
           :class="{ 'is-empty': !allowCreate && query && filteredOptionsCount === 0 }"
           v-show="options.length > 0 && !loading">
           <el-option
@@ -183,6 +191,14 @@
 
       selectSize() {
         return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
+      },
+
+      multipleText() {
+        const selected = this.selected;
+        if (!selected || !selected.length) return '';
+        const length = selected.length;
+        const countText = length > 1 ? `(+${ selected.length - 1 })` : '';
+        return `${ selected[0].currentLabel } ${ countText }`;
       }
     },
 
@@ -231,7 +247,8 @@
       valueKey: {
         type: String,
         default: 'value'
-      }
+      },
+      collapseTags: Boolean
     },
 
     data() {
@@ -360,7 +377,8 @@
         });
         this.hoverIndex = -1;
         if (this.multiple && this.filterable) {
-          this.inputLength = this.$refs.input.value.length * 15 + 20;
+          const length = this.$refs.input.value.length * 15 + 20;
+          this.inputLength = this.collapseTags ? Math.min(50, length) : length;
           this.managePlaceholder();
           this.resetInputHeight();
         }
@@ -400,6 +418,7 @@
           const menu = this.$refs.popper.$el.querySelector('.el-select-dropdown__wrap');
           scrollIntoView(menu, target);
         }
+        this.$refs.scrollbar && this.$refs.scrollbar.handleScroll();
       },
 
       handleMenuEnter() {
@@ -534,13 +553,14 @@
       },
 
       resetInputHeight() {
+        if (this.collapseTags) return;
         this.$nextTick(() => {
           if (!this.$refs.reference) return;
           let inputChildNodes = this.$refs.reference.$el.childNodes;
           let input = [].filter.call(inputChildNodes, item => item.tagName === 'INPUT')[0];
           const tags = this.$refs.tags;
           input.style.height = this.selected.length === 0
-            ? sizeMap[this.selectSize] + 'px'
+            ? (sizeMap[this.selectSize] || 40) + 'px'
             : Math.max(tags ? (tags.clientHeight + 10) : 0, sizeMap[this.selectSize] || 40) + 'px';
           if (this.visible && this.emptyText !== false) {
             this.broadcast('ElSelectDropdown', 'updatePopper');

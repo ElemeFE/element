@@ -20,9 +20,12 @@
         separatorClass: ''
       };
     },
+
+    inject: ['elBreadcrumb'],
+
     mounted() {
-      this.separator = this.$parent.separator;
-      this.separatorClass = this.$parent.separatorClass;
+      this.separator = this.elBreadcrumb.separator;
+      this.separatorClass = this.elBreadcrumb.separatorClass;
       let self = this;
       if (this.to) {
         let link = this.$refs.link;

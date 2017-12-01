@@ -216,7 +216,7 @@
           var inputPattern = this.inputPattern;
           if (inputPattern && !inputPattern.test(this.inputValue || '')) {
             this.editorErrorMessage = this.inputErrorMessage || t('el.messagebox.error');
-            addClass(this.$refs.input.$el.querySelector('input'), 'invalid');
+            addClass(this.getInputElement(), 'invalid');
             return false;
           }
           var inputValidator = this.inputValidator;
@@ -224,7 +224,7 @@
             var validateResult = inputValidator(this.inputValue);
             if (validateResult === false) {
               this.editorErrorMessage = this.inputErrorMessage || t('el.messagebox.error');
-              addClass(this.$refs.input.$el.querySelector('input'), 'invalid');
+              addClass(this.getInputElement(), 'invalid');
               return false;
             }
             if (typeof validateResult === 'string') {
@@ -234,13 +234,17 @@
           }
         }
         this.editorErrorMessage = '';
-        removeClass(this.$refs.input.$el.querySelector('input'), 'invalid');
+        removeClass(this.getInputElement(), 'invalid');
         return true;
       },
       getFistFocus() {
         const $btns = this.$el.querySelector('.el-message-box__btns .el-button');
         const $title = this.$el.querySelector('.el-message-box__btns .el-message-box__title');
         return $btns && $btns[0] || $title;
+      },
+      getInputElement() {
+        const inputRefs = this.$refs.input.$refs;
+        return inputRefs.input || inputRefs.textarea;
       }
     },
 
@@ -266,19 +270,19 @@
           }
           this.focusAfterClosed = document.activeElement;
           messageBox = new Dialog(this.$el, this.focusAfterClosed, this.getFistFocus());
-        };
+        }
 
         // prompt
         if (this.$type !== 'prompt') return;
         if (val) {
           setTimeout(() => {
             if (this.$refs.input && this.$refs.input.$el) {
-              this.$refs.input.$el.querySelector('input').focus();
+              this.getInputElement().focus();
             }
           }, 500);
         } else {
           this.editorErrorMessage = '';
-          removeClass(this.$refs.input.$el.querySelector('input'), 'invalid');
+          removeClass(this.getInputElement(), 'invalid');
         }
       }
     },

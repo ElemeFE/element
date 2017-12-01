@@ -18,10 +18,6 @@
 
 > A Vue.js 2.0 UI Toolkit for Web.
 
-<!--<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/bD3dKbdDE2F7Ky9LUN1kjTFK/ElemeFE/element'>-->
-  <!--<img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/bD3dKbdDE2F7Ky9LUN1kjTFK/ElemeFE/element.svg' />-->
-<!--</a >-->
-
 ## Links
 - Homepage and documentation
   - International users: http://element.eleme.io/

@@ -22,6 +22,7 @@
               <span class="el-date-range-picker__time-picker-wrap">
                 <el-input
                   size="small"
+                  :disabled="rangeState.selecting"
                   ref="minInput"
                   :placeholder="t('el.datepicker.startDate')"
                   class="el-date-range-picker__editor"
@@ -32,6 +33,7 @@
               <span class="el-date-range-picker__time-picker-wrap">
                 <el-input
                   size="small"
+                  :disabled="rangeState.selecting"
                   :placeholder="t('el.datepicker.startTime')"
                   class="el-date-range-picker__editor"
                   :value="minVisibleTime"
@@ -51,6 +53,7 @@
               <span class="el-date-range-picker__time-picker-wrap">
                 <el-input
                   size="small"
+                  :disabled="rangeState.selecting"
                   :placeholder="t('el.datepicker.endDate')"
                   class="el-date-range-picker__editor"
                   :value="maxVisibleDate"
@@ -61,6 +64,7 @@
               <span class="el-date-range-picker__time-picker-wrap">
                 <el-input
                   size="small"
+                  :disabled="rangeState.selecting"
                   ref="maxInput"
                   :placeholder="t('el.datepicker.endTime')"
                   class="el-date-range-picker__editor"
@@ -508,7 +512,7 @@
           this.minTimePickerVisible = visible;
         }
 
-        if (this.maxDate && this.maxDate.getTime() < this.minDate.getTime()) {
+        if (!this.maxDate || this.maxDate && this.maxDate.getTime() < this.minDate.getTime()) {
           this.maxDate = new Date(this.minDate);
         }
       },

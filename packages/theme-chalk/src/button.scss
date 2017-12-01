@@ -142,7 +142,7 @@
     @include button-size($--button-mini-padding-vertical, $--button-mini-padding-horizontal, $--button-mini-font-size, $--button-mini-border-radius);
   }
   @include m(text) {
-    border: none;
+    border-color: transparent;
     color: $--color-primary;
     background: transparent;
     padding-left: 0;
@@ -158,6 +158,12 @@
       color: mix($--color-black, $--color-primary, $--button-active-shade-percent);
       border-color: transparent;
       background-color: transparent;
+    }
+
+    &.is-disabled,
+    &.is-disabled:hover,
+    &.is-disabled:focus {
+      border-color: transparent;
     }
   }
 }

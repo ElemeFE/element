@@ -426,20 +426,30 @@
   }
 
   .caret-wrapper {
-    position: relative;
     display: inline-flex;
+    flex-direction: column;
     align-items: center;
-    height: 13px;
+    height: 34px;
     width: 24px;
+    vertical-align: middle;
     cursor: pointer;
     overflow: initial;
   }
 
   .sort-caret {
-    color: $--icon-color-base;
+    color: $--color-text-placeholder;
     width: 14px;
     overflow: hidden;
-    font-size: 13px;
+    font-size: 15px;
+    position: absolute;
+
+    &.ascending {
+      top: 5px;
+    }
+
+    &.descending {
+      bottom: 7px;
+    }
   }
 
   .ascending .sort-caret.ascending {

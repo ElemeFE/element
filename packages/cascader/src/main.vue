@@ -10,9 +10,12 @@
     ]"
     @click="handleClick"
     @mouseenter="inputHover = true"
+    @focus="inputHover = true"
     @mouseleave="inputHover = false"
+    @blur="inputHover = false"
     ref="reference"
     v-clickoutside="handleClickoutside"
+    @keydown="handleKeydown"
   >
     <el-input
       ref="input"
@@ -43,7 +46,7 @@
       <template v-if="showAllLevels">
         <template v-for="(label, index) in currentLabels">
           {{ label }}
-          <span v-if="index < currentLabels.length - 1"> / </span>
+          <span v-if="index < currentLabels.length - 1"> {{ separator }} </span>
         </template>
       </template>
       <template v-else>
@@ -63,6 +66,7 @@ import emitter from 'element-ui/src/mixins/emitter';
 import Locale from 'element-ui/src/mixins/locale';
 import { t } from 'element-ui/src/locale';
 import debounce from 'throttle-debounce/debounce';
+import { generateId } from 'element-ui/src/utils/util';
 
 const popperMixin = {
   props: {
@@ -119,6 +123,10 @@ export default {
         return [];
       }
     },
+    separator: {
+      type: String,
+      default: '/'
+    },
     placeholder: {
       type: String,
       default() {
@@ -149,6 +157,10 @@ export default {
     beforeFilter: {
       type: Function,
       default: () => (() => {})
+    },
+    hoverThreshold: {
+      type: Number,
+      default: 500
     }
   },
 
@@ -191,11 +203,15 @@ export default {
     },
     cascaderSize() {
       return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
+    },
+    id() {
+      return generateId();
     }
   },
 
   watch: {
     menuVisible(value) {
+      this.$refs.input.$refs.input.setAttribute('aria-expanded', value);
       value ? this.showMenu() : this.hideMenu();
     },
     value(value) {
@@ -203,6 +219,10 @@ export default {
     },
     currentValue(value) {
       this.dispatch('ElFormItem', 'el.form.change', [value]);
+    },
+    currentLabels(value) {
+      const inputLabel = this.showAllLevels ? value.join('/') : value[value.length - 1] ;
+      this.$refs.input.$refs.input.setAttribute('value', inputLabel);
     },
     options: {
       deep: true,
@@ -224,10 +244,13 @@ export default {
       this.menu.expandTrigger = this.expandTrigger;
       this.menu.changeOnSelect = this.changeOnSelect;
       this.menu.popperClass = this.popperClass;
+      this.menu.hoverThreshold = this.hoverThreshold;
       this.popperElm = this.menu.$el;
+      this.menu.$refs.menus[0].setAttribute('id', `cascader-menu-${this.id}`);
       this.menu.$on('pick', this.handlePick);
       this.menu.$on('activeItemChange', this.handleActiveItemChange);
       this.menu.$on('menuLeave', this.doDestroy);
+      this.menu.$on('closeInside', this.handleClickoutside);
     },
     showMenu() {
       if (!this.menu) {
@@ -245,12 +268,30 @@ export default {
     hideMenu() {
       this.inputValue = '';
       this.menu.visible = false;
+      this.$refs.input.focus();
     },
     handleActiveItemChange(value) {
       this.$nextTick(_ => {
         this.updatePopper();
       });
       this.$emit('active-item-change', value);
+    },
+    handleKeydown(e) {
+      const keyCode = e.keyCode;
+      if (keyCode === 13) {
+        this.handleClick();
+      } else if (keyCode === 40) { // down
+        this.menuVisible = true; // 打开
+        setTimeout(() => {
+          const firstMenu = this.popperElm.querySelectorAll('.el-cascader-menu')[0];
+          firstMenu.querySelectorAll("[tabindex='-1']")[0].focus();
+        });
+        e.stopPropagation();
+        e.preventDefault();
+      } else if (keyCode === 27 || keyCode === 9) { // esc  tab
+        this.inputValue = '';
+        if (this.menu) this.menu.visible = false;
+      }
     },
     handlePick(value, close = true) {
       this.currentValue = value;

@@ -16,6 +16,7 @@
         input7: '',
         input8: '',
         input9: '',
+        input10: '',
         textarea: '',
         textarea2: '',
         textarea3: '',
@@ -181,6 +182,29 @@ export default {
   data() {
     return {
       input1: ''
+    }
+  }
+}
+</script>
+```
+:::
+
+### Clearable
+
+::: demo Make the Input clearable with the `clearable` attribute.
+
+```html
+<el-input
+  placeholder="Please input"
+  v-model="input10"
+  clearable>
+</el-input>
+
+<script>
+export default {
+  data() {
+    return {
+      input10: ''
     }
   }
 }
@@ -623,6 +647,7 @@ Search data from server-side.
 |maxlength| maximum Input text length| number| — | — |
 |minlength| minimum Input text length| number | — | — |
 |placeholder| placeholder of Input| string | — | — |
+| clearable | whether to show clear button | boolean | — | false |
 |disabled | whether Input is disabled | boolean | — | false |
 |size | size of Input, works when `type` is not 'textarea' | string | medium / small / mini | — |
 | prefix-icon   | prefix icon class  | string          | — | — |
@@ -644,10 +669,10 @@ Search data from server-side.
 
 | Name | Description |
 |------|--------|
-| prefix | content as Input prefix |
-| suffix | content as Input suffix |
-| prepend | content to prepend before Input |
-| append | content to append after Input |
+| prefix | content as Input prefix, only works when `type` is 'text' |
+| suffix | content as Input suffix, only works when `type` is 'text' |
+| prepend | content to prepend before Input, only works when `type` is 'text' |
+| append | content to append after Input, only works when `type` is 'text' |
 
 ### Input Events
 
@@ -674,6 +699,8 @@ Attribute | Description | Type | Options | Default
 | name | same as `name` in native input | string | — | — |
 | select-when-unmatched | whether to emit a `select` event on enter when there is no autocomplete match | boolean | — | false |
 | label | label text | string | — | — |
+| prefix-icon | prefix icon class | string | — | — |
+| suffix-icon | suffix icon class | string | — | — |
 
 ### Autocomplete slots
 

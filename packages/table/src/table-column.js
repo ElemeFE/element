@@ -65,8 +65,8 @@ const forced = {
     sortable: false
   },
   expand: {
-    renderHeader: function(h, {}) {
-      return '';
+    renderHeader: function(h, { column }) {
+      return column.label || '';
     },
     renderCell: function(h, { row, store }, proxy) {
       const expanded = store.states.expandRows.indexOf(row) > -1;

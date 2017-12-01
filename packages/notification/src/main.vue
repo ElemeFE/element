@@ -6,7 +6,9 @@
       :style="positionStyle"
       @mouseenter="clearTimer()"
       @mouseleave="startTimer()"
-      @click="click">
+      @click="click"
+      role="alert"
+    >
       <i
         class="el-notification__icon"
         :class="[ typeClass, iconClass ]"
@@ -119,9 +121,19 @@
             }
           }, this.duration);
         }
+      },
+      keydown(e) {
+        if (e.keyCode === 46 || e.keyCode === 8) {
+          this.clearTimer(); // detele 取消倒计时
+        } else if (e.keyCode === 27) { // esc关闭消息
+          if (!this.closed) {
+            this.close();
+          }
+        } else {
+          this.startTimer(); // 恢复倒计时
+        }
       }
     },
-
     mounted() {
       if (this.duration > 0) {
         this.timer = setTimeout(() => {
@@ -130,6 +142,11 @@
           }
         }, this.duration);
       }
+      document.addEventListener('keydown', this.keydown);
+    },
+    beforeDestroy() {
+      document.removeEventListener('keydown', this.keydown);
     }
   };
 </script>
+

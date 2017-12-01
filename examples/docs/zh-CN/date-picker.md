@@ -2,14 +2,9 @@
   module.exports = {
     data() {
       return {
-        pickerOptions0: {
-          disabledDate(time) {
-            return time.getTime() > Date.now();
-          }
-        },
         pickerOptions1: {
           disabledDate(time) {
-            return time.getTime() < Date.now() - 8.64e7;
+            return time.getTime() > Date.now();
           },
           shortcuts: [{
             text: '今天',
@@ -115,8 +110,7 @@
     <el-date-picker
       v-model="value1"
       type="date"
-      placeholder="选择日期"
-      :picker-options="pickerOptions0">
+      placeholder="选择日期">
     </el-date-picker>
   </div>
   <div class="block">
@@ -135,12 +129,10 @@
   export default {
     data() {
       return {
-        pickerOptions0: {
+        pickerOptions1: {
           disabledDate(time) {
             return time.getTime() > Date.now();
-          }
-        },
-        pickerOptions1: {
+          },
           shortcuts: [{
             text: '今天',
             onClick(picker) {

@@ -119,7 +119,7 @@
     data() {
       return {
         activeIndex: this.defaultActive,
-        openedMenus: this.defaultOpeneds ? this.defaultOpeneds.slice(0) : [],
+        openedMenus: (this.defaultOpeneds && !this.collapse) ? this.defaultOpeneds.slice(0) : [],
         items: {},
         submenus: {}
       };
@@ -141,7 +141,9 @@
 
       },
       defaultOpeneds(value) {
-        this.openedMenus = value;
+        if (!this.collapse) {
+          this.openedMenus = value;
+        }
       },
       collapse(value) {
         if (value) this.openedMenus = [];
@@ -157,14 +159,14 @@
       },
       getColorChannels(color) {
         color = color.replace('#', '');
-        if (/^[1-9a-fA-F]{3}$/.test(color)) {
+        if (/^[0-9a-fA-F]{3}$/.test(color)) {
           color = color.split('');
           for (let i = 2; i >= 0; i--) {
             color.splice(i, 0, color[i]);
           }
           color = color.join('');
         }
-        if (/^[1-9a-fA-F]{6}$/.test(color)) {
+        if (/^[0-9a-fA-F]{6}$/.test(color)) {
           return {
             red: parseInt(color.slice(0, 2), 16),
             green: parseInt(color.slice(2, 4), 16),
@@ -207,6 +209,7 @@
         let openedMenus = this.openedMenus;
         if (openedMenus.indexOf(index) !== -1) return;
         // 将不在该菜单路径下的其余菜单收起
+        // collapse all menu that are not under current menu item
         if (this.uniqueOpened) {
           this.openedMenus = openedMenus.filter(index => {
             return indexPath.indexOf(index) !== -1;
@@ -246,6 +249,7 @@
         }
       },
       // 初始化展开菜单
+      // initialize opened menu
       initOpenedMenu() {
         const index = this.activeIndex;
         const activeItem = this.items[index];
@@ -254,6 +258,7 @@
         let indexPath = activeItem.indexPath;
 
         // 展开该菜单项的路径上所有子菜单
+        // expand all submenus of the menu item
         indexPath.forEach(index => {
           let submenu = this.submenus[index];
           submenu && this.openMenu(index, submenu.indexPath);

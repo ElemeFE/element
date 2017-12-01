@@ -8,7 +8,7 @@ We are excited that you are interested in contributing to Element. Before submit
 
 ## Issue Guidelines
 
-- Issues are exclusively for bug reports, feature requests and design-related topics. Other questions may be closed directly. If any questions come up when you are using Element, please hit [Gitter](https://gitter.im/ElemeFE/element) for help.
+- Issues are exclusively for bug reports, feature requests and design-related topics. Other questions may be closed directly. If any questions come up when you are using Element, please hit [Gitter](https://gitter.im/element-en/Lobby) for help.
 
 - Before submitting an issue, please check if similar problems have already been issued.
 

@@ -1990,6 +1990,7 @@ You can customize row index in `type=index` columns.
 | setCurrentRow | used in single selection Table, set a certain row selected. If called without any parameter, it will clear selection. | row |
 | clearSort | clear sorting, restore data to the original order | — |
 | clearFilter | clear filter | — |
+| doLayout | Refresh the layout of Table. When the visibility of Table changes, you may need to call this method to get a correct layout | — |
 
 ### Table Slot
 | Name | Description |

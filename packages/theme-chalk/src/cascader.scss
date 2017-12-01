@@ -128,7 +128,7 @@
     line-height: 1.5;
     box-sizing: border-box;
     cursor: pointer;
-
+    outline: none;
     @include m(extensible) {
       &:after {
         font-family: 'element-icons';
@@ -154,7 +154,7 @@
       color: $--select-option-selected;
     }
 
-    &:hover {
+    &:hover, &:focus:not(:active) {
       background-color: $--select-option-hover-background;
     }
 
