@@ -20,7 +20,7 @@ export default {
       nextYear: 'Дараа жил',
       prevMonth: 'Өмнөх сар',
       nextMonth: 'Дараа сар',
-      year: 'Жил',
+      year: 'он',
       month1: '1 сар',
       month2: '2 сар',
       month3: '3 сар',
@@ -44,18 +44,18 @@ export default {
         sat: 'Бям'
       },
       months: {
-        jan: '1',
-        feb: '2',
-        mar: '3',
-        apr: '4',
-        may: '5',
-        jun: '6',
-        jul: '7',
-        aug: '8',
-        sep: '9',
-        oct: '10',
-        nov: '11',
-        dec: '12'
+        jan: '1 сар',
+        feb: '2 сар',
+        mar: '3 сар',
+        apr: '4 сар',
+        may: '5 сар',
+        jun: '6 сар',
+        jul: '7 сар',
+        aug: '8 сар',
+        sep: '9 сар',
+        oct: '10 сар',
+        nov: '11 сар',
+        dec: '12 сар'
       }
     },
     select: {
