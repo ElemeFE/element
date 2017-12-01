@@ -48,7 +48,7 @@ const forced = {
   },
   index: {
     renderHeader: function(h, { column }) {
-      return column.label || '#';
+      return column.renderHeaderIndex && column.renderHeaderIndex(h, { column }) || (column.label || '#');
     },
     renderCell: function(h, { $index, column }) {
       let i = $index + 1;
@@ -129,6 +129,7 @@ export default {
     width: {},
     minWidth: {},
     renderHeader: Function,
+    renderHeaderIndex: Function,
     sortable: {
       type: [String, Boolean],
       default: false
@@ -227,6 +228,7 @@ export default {
       type,
       renderCell: null,
       renderHeader: this.renderHeader,
+      renderHeaderIndex: this.renderHeaderIndex,
       minWidth,
       width,
       isColumnGroup,
