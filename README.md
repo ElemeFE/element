@@ -1,7 +1,6 @@
 <p align="center">
   <img src="https://cdn.rawgit.com/ElemeFE/element/dev/element_logo.svg">
 </p>
-
 # Element
 
 [![Build Status](https://travis-ci.org/ElemeFE/element.svg?branch=master)](https://travis-ci.org/ElemeFE/element)
