@@ -13,7 +13,7 @@
     display: inline-block;
     margin-right: 17px;
     border-radius: 4px;
-
+    
     .name {
       position: absolute;
       bottom: 0;
@@ -72,11 +72,11 @@
   }
 </style>
 
-## Typography
+## Tipografía
 
-We create a font convention to ensure the best presentation across different platforms.
+Creamos una convención de fuentes para asegurar la mejor presentación en diferentes plataformas.
 
-### Chinese Font
+### Fuente en chino
 
 <div class="demo-typo-box typo-PingFang">
   和畅惠风
@@ -91,7 +91,7 @@ We create a font convention to ensure the best presentation across different pla
   <div class="name">Microsoft YaHei</div>
 </div>
 
-### English / Numberic Font
+### Inglés / Fuente Numérica
 
 <div class="demo-typo-box typo-Helvetica-neue">
   RGag
@@ -112,7 +112,7 @@ We create a font convention to ensure the best presentation across different pla
 font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
 ```
 
-### Font Convention
+### Convención de fuentes
 
 <table class="demo-typo-size">
   <tbody>
