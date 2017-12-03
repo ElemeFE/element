@@ -38,14 +38,14 @@
     color: #666;
     font-size: 13px;
     transition: color .15s linear;
-
+    
     border-right: 1px solid #eee;
     border-bottom: 1px solid #eee;
     margin-right: -1px;
     margin-bottom: -1px;
-
+    
     @utils-vertical-center;
-
+    
     & span {
       display: inline-block;
       line-height: normal;

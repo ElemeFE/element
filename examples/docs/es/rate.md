@@ -45,7 +45,7 @@ Usado para la calificación
 
 ### Uso básico
 
-:::**Demo** Clasificación divide las puntuaciones en tres niveles y estos niveles pueden distinguirse usando diferentes colores de fondo. Por defecto los colores de fondo son iguales, pero puedes asignarlos para reflejar los tres niveles usando el atributo `colors` y sus dos umbrales pueden ser definidos con `low-treshold` y `high-treshold`.
+:::demo Clasificación divide las puntuaciones en tres niveles y estos niveles pueden distinguirse usando diferentes colores de fondo. Por defecto los colores de fondo son iguales, pero puedes asignarlos para reflejar los tres niveles usando el atributo `colors` y sus dos umbrales pueden ser definidos con `low-treshold` y `high-treshold`.
 
 
 ``` html
@@ -78,7 +78,7 @@ Usado para la calificación
 
 Usa texto para indicar la puntuación
 
-:::**Demo** Agrega el atributo `show-text` para mostrar texto a la derecha del componente. Puedes asignar textos para las distintas puntuaciones usando `texts`. `texts` es un arreglo cuya longitud debe ser igual a la máxima puntuación `max`.
+:::demo Agregar el atributo `show-text` para mostrar texto a la derecha del componente. Puede asignar textos para las distintas puntuaciones usando `texts`. `texts` es un arreglo cuya longitud debe ser igual a la máxima puntuación `max`.
 
 ``` html
 <el-rate
@@ -101,9 +101,9 @@ Usa texto para indicar la puntuación
 
 ### Más iconos
 
-Puedes utilizar iconos para diferenciar cada componente.
+Puede utilizar iconos para diferenciar cada componente.
 
-:::**Demo** Puedes customizar iconos para tres niveles diferentes usando `icon-classes`. En este ejemplo también usamos `void-icon-class` para asignar un icono si no está seleccionado.
+:::demo Puede customizar iconos para tres niveles diferentes usando `icon-classes`. En este ejemplo también usamos `void-icon-class` para asignar un icono si no está seleccionado.
 
 ``` html
 <el-rate
@@ -127,9 +127,9 @@ Puedes utilizar iconos para diferenciar cada componente.
 
 ### Solo lectura
 
-La calificación de solo lectura is para mostrar la puntuación. Soporta media estrella.
+La calificación de solo lectura es para mostrar la puntuación. Soporta media estrella.
 
-:::**Demo** Usa el atributo `disabled` para hacer el componente de solo lectura. Agrega `show-score` para mostrar la puntuación en el lado derecho. Además, puedes usar el atributo `score-template` para proveer una plantilla. Tiene que contener `{value}`, y `{value}` será sustituido por la puntuación.
+:::demo Use el atributo `disabled` para hacer el componente de solo lectura. Agregar `show-score` para mostrar la puntuación en el lado derecho. Además, puede usar el atributo `score-template` para proveer una plantilla. Tiene que contener `{value}`, y `{value}` será sustituido por la puntuación.
 
 ``` html
 <el-rate
@@ -153,26 +153,26 @@ La calificación de solo lectura is para mostrar la puntuación. Soporta media e
 :::
 
 ### Atributos
-| Atributo     | Descripción| Tipo| Valores aceptado| Valores por defecto|
-|---------- |-------- |---------- |-------------  |-------- |
-| max | puntuación máxima | number | — | 5 |
-| disabled | si la calificación es de solo lectura | boolean | — | false |
-| allow-half | si escoger media estrella está permitido | boolean | — | false |
-| low-threshold | valor del umbral entre nivel bajo y medio. El valor será incluido en el nivel bajo | number | — | 2 |
-| high-threshold | valor del umbral entre nivel bajo y medio. El valor será incluido en el nivel alto | number | — | 4 |
-| colors | arreglo de colores para iconos. Debe tener 3 elementos, cada uno corresponde a un nivel de puntuación | array | — | ['#F7BA2A', '#F7BA2A', '#F7BA2A'] |
-| void-color | color para iconos no seleccionados | string | — | #C6D1DE |
-| disabled-void-color | color para las iconos no seleccionados de solo lectura | string | — | #EFF2F7 |
-| icon-classes |  arreglo de nombres para clases de iconos. Debe tener 3 elementos, cada uno corresponde a un nivel de puntuación | array | — | ['el-icon-star-on', 'el-icon-star-on','el-icon-star-on'] |
-| void-icon-class | nombre de clase para iconos no seleccionados | string | — | el-icon-star-off |
-| disabled-void-icon-class | nombre de clase para elementos no seleccionados de solo lectura | string | — | el-icon-star-on |
-| show-text | muestra el texto | boolean | — | false |
-| show-score | muestra puntuación actual. `show-score` y `show-text` no pueden ser verdaderos al mismo tiempo | boolean | — | false |
-| text-color | color del texto | string | — | #1F2D3D |
-| texts | arreglo de textos | array | — | ['极差', '失望', '一般', '满意', '惊喜'] |
-| score-template | plantilla de puntuación | string | — | {value} |
+| Atributo                 | Descripción                              | Tipo    | Valores aceptado | Por defecto                              |
+| ------------------------ | ---------------------------------------- | ------- | ---------------- | ---------------------------------------- |
+| max                      | puntuación máxima                        | number  | —                | 5                                        |
+| disabled                 | si la calificación es de solo lectura    | boolean | —                | false                                    |
+| allow-half               | si escoger media estrella está permitido | boolean | —                | false                                    |
+| low-threshold            | valor del umbral entre nivel bajo y medio. El valor será incluido en el nivel bajo | number  | —                | 2                                        |
+| high-threshold           | valor del umbral entre nivel bajo y medio. El valor será incluido en el nivel alto | number  | —                | 4                                        |
+| colors                   | arreglo de colores para iconos. Debe tener 3 elementos, cada uno corresponde a un nivel de puntuación | array   | —                | ['#F7BA2A', '#F7BA2A', '#F7BA2A']        |
+| void-color               | color para iconos no seleccionados       | string  | —                | #C6D1DE                                  |
+| disabled-void-color      | color para las iconos no seleccionados de solo lectura | string  | —                | #EFF2F7                                  |
+| icon-classes             | arreglo de nombres para clases de iconos. Debe tener 3 elementos, cada uno corresponde a un nivel de puntuación | array   | —                | ['el-icon-star-on', 'el-icon-star-on','el-icon-star-on'] |
+| void-icon-class          | nombre de clase para iconos no seleccionados | string  | —                | el-icon-star-off                         |
+| disabled-void-icon-class | nombre de clase para elementos no seleccionados de solo lectura | string  | —                | el-icon-star-on                          |
+| show-text                | muestra el texto                         | boolean | —                | false                                    |
+| show-score               | muestra puntuación actual. `show-score` y `show-text` no pueden ser verdaderos al mismo tiempo | boolean | —                | false                                    |
+| text-color               | color del texto                          | string  | —                | #1F2D3D                                  |
+| texts                    | arreglo de textos                        | array   | —                | ['极差', '失望', '一般', '满意', '惊喜']           |
+| score-template           | plantilla de puntuación                  | string  | —                | {value}                                  |
 
-### Events
-| Nombre del evento | Descripción | Parámetros |
-|---------- |-------- |---------- |
-| change | Se dispara cuando la puntuación es cambiada | valor luego del cambio |
+### Eventos
+| Nombre del evento | Descripción                              | Parámetros             |
+| ----------------- | ---------------------------------------- | ---------------------- |
+| change            | Se dispara cuando la puntuación es cambiada | valor luego del cambio |

@@ -92,13 +92,13 @@
 
 ## Tabulación
 
-Divide collecciones de datos que están relacionados pero pertenecen a diferentes tipos.
+Divide colecciones de datos que están relacionados pero pertenecen a diferentes tipos.
 
 ### Uso básico
 
 Tabulación básica y concisa
 
-:::demo de Tabulación provee funcionalidad de tarjeta selectiva. Por defecto, la primer pestaña es seleccionada como activa, y es posible activar cualquier pestaña estableciendo el atributo de `value`.
+:::demo Tabulación provee funcionalidad de tarjeta selectiva. Por defecto, la primer pestaña es seleccionada como activa, y es posible activar cualquier pestaña estableciendo el atributo de `value`.
 
 ```html
 <template>
@@ -211,7 +211,7 @@ Es posible usar el atributo `tab-position` para establecer la posición de la ta
 
 ### Pestaña Personalizada
 
-Es posible usar slots nombrados para personalizar el contenido de la etiqueta de la pestaña.
+Es posible usar slots con nombre para personalizar el contenido de la etiqueta de la pestaña.
 
 :::demo
 ```html
@@ -368,27 +368,27 @@ Solo las pestañas de tipo tarjeta soportan adición y cierre.
 :::
 
 ### Atributos de Pestañas
-| Atributo      | Descripción          | Tipo      | Valores Aceptados      | Default  |
-|---------- |-------- |---------- |-------------  |-------- |
-| type     | tipo de Pestaña | string   | card/border-card  |     —    |
-| closable  | si la Pestaña es cerrable | boolean   | — |  false  |
-| addable  | si la Pestaña es añadible   | boolean   | — |  false  |
-| editable  | si la Pestaña es añadible y cerrable | boolean   | — |  false  |
-| value  | nombre de la pestaña seleccionada  | string   |  —  |  nombre de la primer pestaña |
-| tab-position  | posición de tabulación | string   |  top/right/bottom/left  |  top |
+| Atributo     | Descripción                          | Tipo    | Valores aceptados     | Por defecto                 |
+| ------------ | ------------------------------------ | ------- | --------------------- | --------------------------- |
+| type         | tipo de Pestaña                      | string  | card/border-card      | —                           |
+| closable     | si la Pestaña es cerrable            | boolean | —                     | false                       |
+| addable      | si la Pestaña es añadible            | boolean | —                     | false                       |
+| editable     | si la Pestaña es añadible y cerrable | boolean | —                     | false                       |
+| value        | nombre de la pestaña seleccionada    | string  | —                     | nombre de la primer pestaña |
+| tab-position | posición de tabulación               | string  | top/right/bottom/left | top                         |
 
 ### Eventos de Pestañas
-| Nombre de Evento | Descripción | Parámetros |
-|---------- |-------- |---------- |
-| tab-click  | se lanza cuando se hace click a una pestaña | pestaña clickeada |
-| tab-remove  | se lanza cuando se hace click al botón tab-remove | nombre de la pestaña removida |
-| tab-add  | se lanza cuando se hace click al botón tab-add | — |
-| edit  | se lanza cuando los botones de tab-add y/o tab-remove son clickeados | (targetName, action) |
+| Nombre de Evento | Descripción                              | Parámetros                    |
+| ---------------- | ---------------------------------------- | ----------------------------- |
+| tab-click        | se lanza cuando se hace click a una pestaña | pestaña clickeada             |
+| tab-remove       | se lanza cuando se hace click al botón tab-remove | nombre de la pestaña removida |
+| tab-add          | se lanza cuando se hace click al botón tab-add | —                             |
+| edit             | se lanza cuando los botones de tab-add y/o tab-remove son clickeados | (targetName, action)          |
 
 ### Attributos del Tab-pane
-| Atributo      | Descripción          | Tipo      | Valores Aceptados      | Default  |
-|---------- |-------- |---------- |-------------  |-------- |
-| label     | título de la pestaña   | string   | — |    —     |
-| disabled  | si la Tabulación está deshabilitada | boolean | — | false |
-| name      | identificador correspondiente al activeName de la Tabulación, representando el alias del tab-pane | string | — | número ordinal del tab-pane en la secuencia, p.ej el primer tab-pane de pestañas es '1' |
-| closable  | whether Tab is closable | boolean   | — |  false  |
+| Atributo | Descripción                              | Tipo    | Valores Aceptados | Default                                  |
+| -------- | ---------------------------------------- | ------- | ----------------- | ---------------------------------------- |
+| label    | título de la pestaña                     | string  | —                 | —                                        |
+| disabled | si la Tabulación está deshabilitada      | boolean | —                 | false                                    |
+| name     | identificador correspondiente al activeName de la Tabulación, representando el alias del tab-pane | string  | —                 | número ordinal del tab-pane en la secuencia, p.ej el primer tab-pane de pestañas es '1' |
+| closable | si el Tab es cerrable                    | boolean | —                 | false                                    |

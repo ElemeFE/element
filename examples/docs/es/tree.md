@@ -4,16 +4,16 @@
       width: 20px;
       background: #ddd;
     }
-
+    
     .folder {
       width: 20px;
       background: #888;
     }
-
+    
     .buttons {
       margin-top: 20px;
     }
-
+    
     .filter-tree {
       margin-top: 20px;
     }
@@ -154,7 +154,7 @@
         this.$refs.tree2.filter(val);
       }
     },
-
+    
     methods: {
       handleCheckChange(data, checked, indeterminate) {
         console.log(data, checked, indeterminate);
@@ -175,7 +175,7 @@
         } else {
           hasChild = Math.random() > 0.5;
         }
-
+    
         setTimeout(function() {
           let data;
           if (hasChild) {
@@ -187,7 +187,7 @@
           } else {
             data = [];
           }
-
+    
           resolve(data);
         }, 500);
       },
@@ -196,7 +196,7 @@
           return resolve([{ name: 'region' }]);
         }
         if (node.level > 1) return resolve([]);
-
+    
         setTimeout(() => {
           const data = [{
             name: 'leaf',
@@ -204,7 +204,7 @@
           }, {
             name: 'zone'
           }];
-
+    
           resolve(data);
         }, 500);
       },
@@ -239,14 +239,14 @@
         }
         data.children.push(newChild);
       },
-
+    
       remove(node, data) {
         const parent = node.parent;
         const children = parent.data.children || parent.data;
         const index = children.findIndex(d => d.id === data.id);
         children.splice(index, 1);
       },
-
+    
       renderContent(h, { node, data, store }) {
         return (
           <span style="flex: 1; display: flex; align-items: center; justify-content: space-between; font-size: 14px; padding-right: 8px;">
@@ -259,13 +259,13 @@
             </span>
           </span>);
       },
-
+    
       filterNode(value, data) {
         if (!value) return true;
         return data.label.indexOf(value) !== -1;
       }
     },
-
+    
     data() {
       return {
         data,
@@ -421,7 +421,7 @@ Usado para la selección de nodos.
 
 ### Nodos hoja en modo perezoso
 
-:::demo Los datos de un nodo no son cargados hasta que no es pinchado, así que el árbol no puede predecir si es una hoja. Por eso a cada nodo se le añade el botón de desplegar, y si el nodo es una hoja el botón desaparecerá al pinchar en él. También puedes decirle al árbol que el nodo es una hoja de antemano, y así evitas que muestre el botón de desplegar.
+:::demo Los datos de un nodo no son cargados hasta que no es pinchado, así que el árbol no puede predecir si es una hoja. Por eso a cada nodo se le añade el botón de desplegar, y si el nodo es una hoja el botón desaparecerá al pinchar en él. También puede decirle al árbol que el nodo es una hoja de antemano, y así evita que muestre el botón de desplegar.
 ```html
 <el-tree
   :props="props1"
@@ -525,7 +525,7 @@ El checkbox de un nodo se puede poner como desactivado.
 ### Desplegado o seleccionado por defecto
 Los nodos pueden estar desplegados o seleccionados por defecto.
 
-:::demo Utiliza `default-expanded-keys` y `default-checked-keys` para establecer los nodos desplegados y seleccionados respectivamente. Ten en cuenta que para que funcione es necesario que tengan `node-key`. Su valor es el nombre de una clave en el objeto data, y el valor de la clave debe ser único en todo el árbol.
+:::demo Utilice `default-expanded-keys` y `default-checked-keys` para establecer los nodos desplegados y seleccionados respectivamente. Tenga en cuenta que para que funcione es necesario que tengan `node-key`. Su valor es el nombre de una clave en el objeto data, y el valor de la clave debe ser único en todo el árbol.
 ```html
 <el-tree
   :data="data2"
@@ -588,7 +588,7 @@ Los nodos pueden estar desplegados o seleccionados por defecto.
 
 ### Seleccionando nodos
 
-::: demo Este ejemplo muestra como establecer y leer nodos seleccionados. Esto se puede hacer por nodos o por claves. Si lo haces por claves el atributo `node-key` es necesario.
+::: demo Este ejemplo muestra como establecer y leer nodos seleccionados. Esto se puede hacer por nodos o por claves. Si lo hace por claves el atributo `node-key` es necesario.
 ```html
 <el-tree
   :data="data2"
@@ -682,10 +682,10 @@ Los nodos pueden estar desplegados o seleccionados por defecto.
 ```
 :::
 
-### Contenido personalzado en los nodos
-El contenido de los nodos puede ser personalizado, así que puedes añadir iconos y botones a tu gusto.
+### Contenido personalizado en los nodos
+El contenido de los nodos puede ser personalizado, así que puede añadir iconos y botones a su gusto.
 
-::: demo Utiliza `render-content` para asignar una función de renderizado que devuelve el contenido del árbol de nodos. Mira la documentación de node para una introducción detallada a las funciondes de renderizado. Ten en cuenta que este ejemplo no puede ejecutarse en jsfiddle ya que no soporta la sintaxis JSX. En un proyecto real `render-content` funcionará si las dependencias relevantes están configuradas correctamente.
+::: demo Utilice `render-content` para asignar una función de renderizado que devuelve el contenido del árbol de nodos. Mire la documentación de node para una introducción detallada a las funciondes de renderizado. Ten en cuenta que este ejemplo no puede ejecutarse en jsfiddle ya que no soporta la sintaxis JSX. En un proyecto real `render-content` funcionará si las dependencias relevantes están configuradas correctamente.
 ```html
 <el-tree
   :data="data4"
@@ -782,7 +782,7 @@ El contenido de los nodos puede ser personalizado, así que puedes añadir icono
 ### Filtrado de nodos
 Los nodos del árbol se pueden filtrar.
 
-:::demo Invoca el método `filter` de la instancia de Tree para filtrar los nodos. Su parametro es la palabra de filtrado. Ten en cuenta que para que funcione es necesario `filter-node-method`, y su valor el método de filtrado.
+:::demo Invoque el método `filter` de la instancia de Tree para filtrar los nodos. Su parametro es la palabra de filtrado. Tenga en cuenta que para que funcione es necesario `filter-node-method`, y su valor el método de filtrado.
 ```html
 <el-input
   placeholder="Filter keyword"
@@ -931,54 +931,54 @@ Solo puede ser expandido un nodo del mismo nivel a la vez.
 :::
 
 ### Atributos
-| Atributo | Descripción | Tipo | Valores aceptados | Default |
-| - | - | - | - | -|
-| data | Datos del árbol | array | — | — |
-| empty-text | Texto a mostrar cuando data es void | string | — | — |
-| node-key | Identificador único en todo el árbol para los nodos | string | — | — |
-| props | Opciones de configuración | object | — | — |
-| load | Método para cargar los datos de subárboles | function(node, resolve) | — | — |
-| render-content | Función de renderizado para los nodos | Function(h, { node, data, store }| — | — |
-| highlight-current | Si el nodo actual está resaltado | boolean | — | false |
-| default-expand-all | Expandir todos los nodos por defecto | boolean | —  | false |
-| expand-on-click-node | Si expandir o contraer un nodo al pincharlo, si es false solo se hará al pinchar en la flecha | — | true | - |
-| auto-expand-parent | Expandir un nodo padre si el hijo está seleccionado | boolean | — | true |
-| default-expanded-keys | Array de claves de los nodos expandidos inicialmente | array | — | — |
-| show-checkbox | Si un nodo es seleccionable | boolean  | —  | false |
-| check-strictly | El estado de seleccion de un nodo no afecta a sus padres o hijos, cuando `show-checkbox` es `true` | boolean | — | false |
-| default-checked-keys | Array con claves de los nodos seleccionados inicialmente | array | — | — |
-| filter-node-method | Esta función se ejecutará en cada nodo cuando se use el método filtrtar, si devuelve `false` el nodo se oculta | Function(value, data, node) | — | — |
-| accordion | Dice si solo un nodo de cada nivel puede expandirse a la vez | boolean | — | false |
-| indent | Indentación horizontal de los nodos en niveles adyacentes, en pixeles | number | — | 16 |
+| Atributo              | Descripción                              | Tipo                              | Valores aceptados | Por defecto |
+| --------------------- | ---------------------------------------- | --------------------------------- | ----------------- | ----------- |
+| data                  | Datos del árbol                          | array                             | —                 | —           |
+| empty-text            | Texto a mostrar cuando data es void      | string                            | —                 | —           |
+| node-key              | Identificador único en todo el árbol para los nodos | string                            | —                 | —           |
+| props                 | Opciones de configuración                | object                            | —                 | —           |
+| load                  | Método para cargar los datos de subárboles | function(node, resolve)           | —                 | —           |
+| render-content        | Función de renderizado para los nodos    | Function(h, { node, data, store } | —                 | —           |
+| highlight-current     | Si el nodo actual está resaltado         | boolean                           | —                 | false       |
+| default-expand-all    | Expandir todos los nodos por defecto     | boolean                           | —                 | false       |
+| expand-on-click-node  | Si expandir o contraer un nodo al pincharlo, si es false solo se hará al pinchar en la flecha | —                                 | true              | -           |
+| auto-expand-parent    | Expandir un nodo padre si el hijo está seleccionado | boolean                           | —                 | true        |
+| default-expanded-keys | Array de claves de los nodos expandidos inicialmente | array                             | —                 | —           |
+| show-checkbox         | Si un nodo es seleccionable              | boolean                           | —                 | false       |
+| check-strictly        | El estado de seleccion de un nodo no afecta a sus padres o hijos, cuando `show-checkbox` es `true` | boolean                           | —                 | false       |
+| default-checked-keys  | Array con claves de los nodos seleccionados inicialmente | array                             | —                 | —           |
+| filter-node-method    | Esta función se ejecutará en cada nodo cuando se use el método filtrtar, si devuelve `false` el nodo se oculta | Function(value, data, node)       | —                 | —           |
+| accordion             | Si solo un nodo de cada nivel puede expandirse a la vez | boolean                           | —                 | false       |
+| indent                | Indentación horizontal de los nodos en niveles adyacentes, en pixeles | number                            | —                 | 16          |
 
 ### props
-| Atributo | Descripción | Tipo   | Valores aceptados | Default |
-| - | -| - | - | - |
-| label | Especifica que clave del objecto nodo se utilizará como label | string, function(data, node) | — | — |
-| children | Especifica que objeto del nodo se utiliza como subárbol | string, function(data, node) | — | — |
-| isLeaf | Especifica si el nodo es una hoja | boolean, function(data, node) | — | — |
+| Atributo | Descripción                              | Tipo                          | Valores aceptados | Por defecto |
+| -------- | ---------------------------------------- | ----------------------------- | ----------------- | ----------- |
+| label    | Especifica que clave del objecto nodo se utilizará como label | string, function(data, node)  | —                 | —           |
+| children | Especifica que objeto del nodo se utiliza como subárbol | string, function(data, node)  | —                 | —           |
+| isLeaf   | Especifica si el nodo es una hoja        | boolean, function(data, node) | —                 | —           |
 
 ### Métodos
 `Tree` tiene los siguientes métodos, que devuelven el array de nodos seleccionados.
-| Método | Descripción | Parámetros |
-| - | - | - |
-| filter | Filtra los nodos del árbol, los nodos filtrados estarán ocultos | Acepta un parámetro que será usado como primer parámetro para filter-node-method |
+| Método            | Descripción                              | Parámetros                               |
+| ----------------- | ---------------------------------------- | ---------------------------------------- |
+| filter            | Filtra los nodos del árbol, los nodos filtrados estarán ocultos | Acepta un parámetro que será usado como primer parámetro para filter-node-method |
 | updateKeyChildren | Asocia un nuevo dato al nodo, solo funciona si `node-key` está asignado | (key, data)Acepta dos parámetros: 1. clave del nodo 2. nuevo dato |
-| getCheckedNodes | Si los nodos puede ser seleccionado (`show-checkbox` es `true`), devuelve el array de nodos seleccionados | Acepta un booleano cuyo valor por defecto es `false`|
-| setCheckedNodes | Establece algunos nodos como seleccionados, solo funciona cuando `node-key` está asignado | Un array de nodos a seleccionar  |
-| getCheckedKeys  | Si los nodos pueden ser seleccionados (`show-checkbox` es `true`), devuelve un array con las claves de los nodos seleccionados | (leafOnly) Acepta un booleano que por defecto es `false`. |
-| setCheckedKeys  | Establece algunos nodos como seleccionados, solo si `node-key` está asignado| (keys, leafOnly) Acepta dos parametros: 1. un array de claves 2. un booleano cuyo valor por defecto es `false`. Si el parámetro es `true`, solo devuelve los nodos seleccionados |
-| setChecked | Establece si un nodo está seleccionado, solo funciona si `node-key` esta asignado | (key/data, checked, deep) Acepta tres parámetros: 1. la clave o dato del nodo a ser seleccionado 2. un booleano que indica si un nodo el nodo estará seleccionado 3. un booleanoque indica si se hará en profundidad |
-| getCurrentKey | devuelve la clave del nodo resaltado actualmente (null si no hay ninguno) | — |
-| getCurrentNode | devuelve el nodo resaltado (null si no hay ninguno) | — |
-| setCurrentKey | establece el nodo resaltado por la clave, solo funciona si `node-key` está asignado | (key) la clave del nodo a ser resaltado|
-| setCurrentNode | establece el nodo resaltado, solo funciona si `node-key` está asignado  | (node) nodo a ser resaltado |
+| getCheckedNodes   | Si los nodos puede ser seleccionado (`show-checkbox` es `true`), devuelve el array de nodos seleccionados | Acepta un booleano cuyo valor por defecto es `false` |
+| setCheckedNodes   | Establece algunos nodos como seleccionados, solo funciona cuando `node-key` está asignado | Un array de nodos a seleccionar          |
+| getCheckedKeys    | Si los nodos pueden ser seleccionados (`show-checkbox` es `true`), devuelve un array con las claves de los nodos seleccionados | (leafOnly) Acepta un booleano que por defecto es `false`. |
+| setCheckedKeys    | Establece algunos nodos como seleccionados, solo si `node-key` está asignado | (keys, leafOnly) Acepta dos parametros: 1. un array de claves 2. un booleano cuyo valor por defecto es `false`. Si el parámetro es `true`, solo devuelve los nodos seleccionados |
+| setChecked        | Establece si un nodo está seleccionado, solo funciona si `node-key` esta asignado | (key/data, checked, deep) Acepta tres parámetros: 1. la clave o dato del nodo a ser seleccionado 2. un booleano que indica si un nodo el nodo estará seleccionado 3. un booleanoque indica si se hará en profundidad |
+| getCurrentKey     | devuelve la clave del nodo resaltado actualmente (null si no hay ninguno) | —                                        |
+| getCurrentNode    | devuelve el nodo resaltado (null si no hay ninguno) | —                                        |
+| setCurrentKey     | establece el nodo resaltado por la clave, solo funciona si `node-key` está asignado | (key) la clave del nodo a ser resaltado  |
+| setCurrentNode    | establece el nodo resaltado, solo funciona si `node-key` está asignado | (node) nodo a ser resaltado              |
 
 ### Eventos
-| Nombre del evento | Descripción | Parámetros |
-| - | - | - |
-| node-click | se lanza cuando un nodo es pinchado | tres parámetros: el objeto del nodo seleccionado, propiedad `node` de TreeNode y el TreeNode en si |
-| check-change | se lanza cuando el estado de selección del nodo cambia | tres parámetros: objeto nodo que se corresponde con el que ha cambiado, booleano que dice si esta seleccionado, booleano que dice si el nodo tiene hijos seleccionados |
-| current-change | cambia cuando el nodo actual cambia | dos parámetros: objeto nodo que se corresponde al nodo actual y propiedad `node` del TreeNode |
-| node-expand | se lanza cuando el nodo actual se abre | tres parámetros: el objeto del nodo abierto, propiedad `node` de TreeNode y el TreeNode en si |
-| node-collapse | se lanza cuando el nodo actual se cierra | tres parámetros: el objeto del nodo cerrado, propiedad `node` de TreeNode y el TreeNode en si |
+| Nombre del evento | Descripción                              | Parámetros                               |
+| ----------------- | ---------------------------------------- | ---------------------------------------- |
+| node-click        | se lanza cuando un nodo es pinchado      | tres parámetros: el objeto del nodo seleccionado, propiedad `node` de TreeNode y el TreeNode en si |
+| check-change      | se lanza cuando el estado de selección del nodo cambia | tres parámetros: objeto nodo que se corresponde con el que ha cambiado, booleano que dice si esta seleccionado, booleano que dice si el nodo tiene hijos seleccionados |
+| current-change    | cambia cuando el nodo actual cambia      | dos parámetros: objeto nodo que se corresponde al nodo actual y propiedad `node` del TreeNode |
+| node-expand       | se lanza cuando el nodo actual se abre   | tres parámetros: el objeto del nodo abierto, propiedad `node` de TreeNode y el TreeNode en si |
+| node-collapse     | se lanza cuando el nodo actual se cierra | tres parámetros: el objeto del nodo cerrado, propiedad `node` de TreeNode y el TreeNode en si |

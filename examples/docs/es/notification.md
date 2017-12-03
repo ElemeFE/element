@@ -161,7 +161,7 @@ Muestra un mensaje de notificación global en una esquina de la página.
 
 Proporcionamos cuatro tipos: success, warning, info y error.
 
-::: demo Element proporciona cuatro tipos de notificación: `success`, `warning`, `info` y `error`. Se definen por el campo  `type`  y se ignorarán otros valores. También se han registrado métodos para estos tipos que se pueden invocar directamente como en el ejemplo `open5` y `open6` sin pasar un campo `type`.
+::: demo Element proporciona cuatro tipos de notificación: `success`, `warning`, `info` y `error`. Se definen por el campo `type`  y se ignorarán otros valores. También se han registrado métodos para estos tipos que se pueden invocar directamente como en el ejemplo `open5` y `open6` sin pasar un campo `type`.
 
 ```html
 <template>
@@ -423,9 +423,9 @@ En este caso, debe llamar a `Notification(options)`. También se han registrado 
 | offset                   | desplazamiento desde el borde superior de la pantalla. Cada instancia de notificación del mismo momento debe tener siempre el mismo desplazamiento. | number           | —                                        | 0           |
 
 ### Metodos
-`Notification` and `this.$notify` returns the current Notification instance. To manually close the instance, you can call `close` on it.
+`Notification` y `this.$notify` devuelven la instancia de la notificacion actual. Para cerrar manualmente la instancia, se puede llamar `close` para ello.
 
-`Notification` y `this.$notify` devuelven la instancia de notificación actual. Para cerrar manualmente la instancia, puede llamar al métodol `close`.
+`Notification` y `this.$notify` devuelven la instancia de notificación actual. Para cerrar manualmente la instancia, puede llamar al método `close`.
 
 | Metodo | Descripción            |
 | ------ | ---------------------- |

@@ -28,7 +28,7 @@ Switch es utilizdo para realizar cambios entre dos estados opuestos.
 
 ### Uso básico
 
-:::demo Enlaza `v-model` a una variable de tipo `Boolean`. Los atributos `active-color` y `inactive-color` deciden el color de fondo en cada estado.
+:::demo Enlace `v-model` a una variable de tipo `Boolean`. Los atributos `active-color` y `inactive-color` deciden el color de fondo en cada estado.
 
 ```html
 <el-switch v-model="value1">
@@ -53,7 +53,7 @@ Switch es utilizdo para realizar cambios entre dos estados opuestos.
 :::
 
 ### Texto de descripción
-:::demo Puedes agregar los atributos `active-text` y `inactive-text` para mostrar los textos.
+:::demo Puede agregar los atributos `active-text` y `inactive-text` para mostrar los textos.
 
 ```html
 <el-switch
@@ -85,7 +85,7 @@ Switch es utilizdo para realizar cambios entre dos estados opuestos.
 
 ### Tipos de valores extendidos
 
-:::demo Puedes establecer los atributos `active-value` y `inactive-value`. Ambos reciben valores de tipo `Boolean`, `String` o `Number`.
+:::demo Puede establecer los atributos `active-value` y `inactive-value`. Ambos reciben valores de tipo `Boolean`, `String` o `Number`.
 
 ```html
 <el-tooltip :content="'Switch value: ' + value5" placement="top">
@@ -140,28 +140,28 @@ Switch es utilizdo para realizar cambios entre dos estados opuestos.
 
 ### Atributos
 
- Atributo      | Descripción          | Tipo      | Valores aceptados       | Por defecto
-----| ----| ----| ----|----
-disabled | whether Switch is disabled | boolean | — | false
-width | ancho del componente Switch | number | — | 40
-active-icon-class | nombre de la clase del icono mostrado en el estado `on`, sobreescribe `active-text` | string | — | —
-inactive-icon-class |nombre de la clase del icono mostrado en el estado `off`, sobreescribe `inactive-text`| string | — | —
-active-text | texto mostrado en el estado `on` | string | — | —
-inactive-text | texto mostrado en el estado `off` | string | — | —
-active-value  | cambia su valor cuando se encuentra en el estado `on` | boolean / string / number | — | true
-inactive-value  | cambia su valor cuando se encuentra en el estado `off` | boolean / string / number | — | false
-active-color | color de fondo cuando se encuentra en el estado `on` | string | — | #409EFF
-inactive-color | color de fondo cuando se encuentra en el estado `off` | string | — | #C0CCDA
-name| nombre de entrada del componente Switch | string | — | —
+| Atributo            | Descripción                              | Tipo                      | Valores aceptados | Por defecto |
+| ------------------- | ---------------------------------------- | ------------------------- | ----------------- | ----------- |
+| disabled            | si Switch esta deshabilitado             | boolean                   | —                 | false       |
+| width               | ancho del componente Switch              | number                    | —                 | 40          |
+| active-icon-class   | nombre de la clase del icono mostrado en el estado `on`, sobreescribe `active-text` | string                    | —                 | —           |
+| inactive-icon-class | nombre de la clase del icono mostrado en el estado `off`, sobreescribe `inactive-text` | string                    | —                 | —           |
+| active-text         | texto mostrado en el estado `on`         | string                    | —                 | —           |
+| inactive-text       | texto mostrado en el estado `off`        | string                    | —                 | —           |
+| active-value        | cambia su valor cuando se encuentra en el estado `on` | boolean / string / number | —                 | true        |
+| inactive-value      | cambia su valor cuando se encuentra en el estado `off` | boolean / string / number | —                 | false       |
+| active-color        | color de fondo cuando se encuentra en el estado `on` | string                    | —                 | #409EFF     |
+| inactive-color      | color de fondo cuando se encuentra en el estado `off` | string                    | —                 | #C0CCDA     |
+| name                | nombre de entrada del componente Switch  | string                    | —                 | —           |
 
 ### Eventos
 
- Nombre del evento | Descripción | Parametro
----- | ----| ----
-change | se dispara cuando el valor cambia | valor 
+| Nombre del evento | Descripción                       | Parametro |
+| ----------------- | --------------------------------- | --------- |
+| change            | se dispara cuando el valor cambia | valor     |
 después de cambiar
 
 ### Metodos
-Metodo | Descripción | Parametro
-------|--------|-------
-focus | foco al componente Switch | —
+| Metodo | Descripción               | Parametro |
+| ------ | ------------------------- | --------- |
+| focus  | foco al componente Switch | —         |

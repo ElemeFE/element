@@ -4,7 +4,7 @@
       open() {
         this.$message('This is a message.');
       },
-
+    
       openVn() {
         const h = this.$createElement;
         this.$message({
@@ -14,32 +14,32 @@
           ])
         });
       },
-
+    
       open2() {
         this.$message({
           message: 'Congrats, this is a success message.',
           type: 'success'
         });
       },
-
+    
       open3() {
         this.$message({
           message: 'Warning, this is a warning message.',
           type: 'warning'
         });
       },
-
+    
       open4() {
         this.$message.error('Oops, this is a error message.');
       },
-
+    
       open5() {
         this.$message({
           showClose: true,
           message: 'This is a message.'
         });
       },
-
+    
       open6() {
         this.$message({
           showClose: true,
@@ -47,7 +47,7 @@
           type: 'success'
         });
       },
-
+    
       open7() {
         this.$message({
           showClose: true,
@@ -55,7 +55,7 @@
           type: 'warning'
         });
       },
-
+    
       open8() {
         this.$message({
           showClose: true,
@@ -63,14 +63,14 @@
           type: 'error'
         });
       },
-
+    
       openCenter() {
         this.$message({
           message: 'Centered text',
           center: true
         });
       },
-
+    
       openHTML() {
         this.$message({
           dangerouslyUseHTMLString: true,
@@ -89,7 +89,7 @@ Utilizado para mostrar retroalimentacion despues de una actividad. La diferencia
 
 Se muestra en la parte superior de la pagina y desaparece despues de 3 segundos.
 
-:::demo La configuracion del componente Message es muy similar al del componente notification, asi que parte de las opciones no seran explicadas a detalle aqui. Puedes consultar la tabla de opciones en la parte inferior conbinada con la documentacion del componente notification para comprenderla. Element a registrado un metodo `$message` para poder invocarlo. Message puede tomar una cadena o un Vnode como parametro, y lo mostrara como el cuerpo principal.
+:::demo La configuracion del componente Message es muy similar al del componente notification, asi que parte de las opciones no seran explicadas en detalle aqui. Puedes consultar la tabla de opciones en la parte inferior conbinada con la documentacion del componente notification para comprenderla. Element a registrado un metodo `$message` para poder invocarlo. Message puede tomar una cadena o un Vnode como parametro, y lo mostrara como el cuerpo principal.
 
 ```html
 <template>
@@ -123,7 +123,7 @@ Se muestra en la parte superior de la pagina y desaparece despues de 3 segundos.
 
 Utilizados para mostrar retroalimentacion de Success, Warning, Message y Error activities.
 
-:::demo Cuando necesitas mas personalizacion, el componente Message tambien puede tomar un objeto como parametro. Por ejemplo, Estableciendo el valor de `type` puedes definir diferentes tipos, el predeterminado es `info`. En tales casos el cuerpo principal se pasa como el valor de `message`. Tambien, tenemos registrados metodos para los diferentes tipos, asi que, puedes llamarlos sin necesidad de pasar un tipo como `open4`.
+:::demo Cuando necesite mas personalizacion, el componente Message tambien puede tomar un objeto como parametro. Por ejemplo, estableciendo el valor de `type` puede definir diferentes tipos, el predeterminado es `info`. En tales casos el cuerpo principal se pasa como el valor de `message`. Tambien, hay registrados metodos para los diferentes tipos, asi que, puedes llamarlos sin necesidad de pasar un tipo como `open4`.
 ```html
 <template>
   <el-button :plain="true" @click="open2">success</el-button>
@@ -263,13 +263,13 @@ Utiliza el atributo `center` para centrar el texto.
 ```
 :::
 
-:::advertencia
+:::warning
 Aunque la propiedad `message` soporta cadenas HTML, realizar arbitrariamente render dinamico de HTML en nuestro sitio web puede ser muy peligroso ya que puede conducir facilmente a [XSS attacks](https://en.wikipedia.org/wiki/Cross-site_scripting). Entonces cuando `dangerouslyUseHTMLString` esta activada, asegurece que el contendio de `message` sea de confianza, y **nunca** asignar `message` a contenido generado por el usuario.
 :::
 
 ### Metodos Globales
 
-Element ha agregado un método global llamado `$message` para Vue.prototype. Entonces en una instancia de vue puedes llamar a `Message` como lo hicimos en esta pagina.
+Element ha agregado un método global llamado `$message` para Vue.prototype. Entonces en una instancia de vue puede llamar a `Message` como lo hicimos en esta pagina.
 
 ### Importación local
 
@@ -279,24 +279,24 @@ Import `Message`:
 import { Message } from 'element-ui';
 ```
 
-En este caso deberias llamar al metodo `Message(options)`. Tambien hemos registrado metodos para los diferentes tipos, e.g. `Message.success(options)`.
-Puedes llamar al metodo `Message.closeAll()` para cerrar manualmente todas las instancias.
+En este caso deberia llamar al metodo `Message(options)`. Tambien se han registrado metodos para los diferentes tipos, e.g. `Message.success(options)`.
+Puede llamar al metodo `Message.closeAll()` para cerrar manualmente todas las instancias.
 
 ### Options
-| Atributo      | Descripcion          | Tipo      | Valores permitidos       | Default  |
-|---------- |-------------- |---------- |--------------------------------  |-------- |
-| message | texto del mensaje | string / VNode | — | — |
-| type | tipo del mensaje | string | success/warning/info/error | info |
-| iconClass | clase personalizada para el icono, sobreescribe `type` | string | — | — |
-| dangerouslyUseHTMLString | utilizado para que `message` sea tratado como cadena HTML | boolean | — | false |
-| customClass | nombre de clase personalizado para el componente Message | string | — | — |
-| duration | muestra la duracion,en milisegundos. si se establece en 0, este no se apagara automaticamente | number | — | 3000 |
-| showClose | utilizado para mostrar un boton para cerrar | boolean | — | false |
-| center | utilizado para centrar el texto | boolean | — | false |
-| onClose | funcion callback ejecutada cuando se cierra con una instancia de mensaje como parametro | function | — | — |
+| Atributo                 | Descripcion                              | Tipo           | Valores permitidos         | Por defecto |
+| ------------------------ | ---------------------------------------- | -------------- | -------------------------- | ----------- |
+| message                  | texto del mensaje                        | string / VNode | —                          | —           |
+| type                     | tipo del mensaje                         | string         | success/warning/info/error | info        |
+| iconClass                | clase personalizada para el icono, sobreescribe `type` | string         | —                          | —           |
+| dangerouslyUseHTMLString | utilizado para que `message` sea tratado como cadena HTML | boolean        | —                          | false       |
+| customClass              | nombre de clase personalizado para el componente Message | string         | —                          | —           |
+| duration                 | muestra la duracion,en milisegundos. si se establece en 0, este no se apagara automaticamente | number         | —                          | 3000        |
+| showClose                | utilizado para mostrar un boton para cerrar | boolean        | —                          | false       |
+| center                   | utilizado para centrar el texto          | boolean        | —                          | false       |
+| onClose                  | funcion callback ejecutada cuando se cierra con una instancia de mensaje como parametro | function       | —                          | —           |
 
 ### Metodos
-`Message` y `this.$message` regresan una instancia del componente Message. Para cerrar manualmente la instancia, puedes llamas al metodo `close`.
-| Metodo | Descripcion |
-| ---- | ---- |
-| close | cierra el componente Message |
+`Message` y `this.$message` regresan una instancia del componente Message. Para cerrar manualmente la instancia, puede llamar al metodo `close`.
+| Metodo | Descripcion                  |
+| ------ | ---------------------------- |
+| close  | cierra el componente Message |

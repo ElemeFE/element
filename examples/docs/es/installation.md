@@ -8,7 +8,7 @@ npm i element-ui -S
 ```
 
 ### CDN 
-Obten la última versión desde [unpkg.com/element-ui](https://unpkg.com/element-ui/) , e importa el JavaScript y los archivos CSS en tu página.
+Obtenga la última versión desde [unpkg.com/element-ui](https://unpkg.com/element-ui/) , e importe el JavaScript y los archivos CSS en su página.
 
 ```html
 <!-- import CSS -->
@@ -22,7 +22,7 @@ Recomendamos a nuestros usuarios congelar la versión de Elemet cuando usas un C
 
 
 ### Hello world
-Si estás usando un CDN, una página con Hello-World es fácil con Element. [Online Demo](https://jsfiddle.net/hzfpyvg6/14/)
+Si esta usando un CDN, una página con Hello-World es fácil con Element. [Online Demo](https://jsfiddle.net/hzfpyvg6/14/)
 
 ```html
 <!DOCTYPE html>
@@ -54,5 +54,5 @@ Si estás usando un CDN, una página con Hello-World es fácil con Element. [Onl
   </script>
 </html>
 ```
-Si estás usando npm y deseas combinarlo con webpack, por favor continúa a la siguiente página: Quick Start
+Si esta usando npm y desea combinarlo con webpack, por favor continue a la siguiente página: Quick Start
 
