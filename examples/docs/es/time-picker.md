@@ -8,13 +8,13 @@
 
 ## Selector de Tiempo
 
-Usar el Selector de Tiempo para entradas de tiempo.
+Use el Time Picker para input de tipo time.
 
 ### Selector de tiempo fijo
 
 Provee una lista de tiempo fijo para que los usuarios escogan.
 
-:::demo Usar el tag `el-time-select`, se pueden asignar tiempo de inicio, tiempo de finalización y salto de tiempo con `start`, `end` y `step`.
+:::demo Use el tag `el-time-select`, se pueden asignar tiempo de inicio, tiempo de finalización y salto de tiempo con `start`, `end` y `step`.
 ```html
 <el-time-select
   v-model="value1"
@@ -171,46 +171,46 @@ Es posible escoger un rango de tiempo arbitrario.
 </script>
 
 ### Atributos
-| Atributo      | Descripción          | Tipo      | Valores Aceptados      | Default  |
-|---------- |-------------- |---------- |--------------------------------  |-------- |
-| readonly | saber si el Selector de Fecha está en modo de sólo lectura | boolean | — | false |
-| disabled | saber si el Selector de Fecha se encuentra deshabilitado | boolean | — | false |
-| editable | saber si el input puede ser editado | boolean | — | true |
-| clearable | saber si mostrar el botón de borrado | boolean | — | true |
-| size | tamaño del input | string | medium / small / mini | — |
-| placeholder | placeholder en un modo fuera de rango | string | — | — |
-| start-placeholder | placeholder para el tiempo de inicio en modo de rango | string | — | — |
-| end-placeholder | placeholder para el tiempo de finalización en modo de rango | string | — | — |
-| is-range | saber si es posible escoger un rango de tiempo, solo funciona con `<el-time-picker>` | boolean | — | false |
-| arrow-control | saber si es posible escoger el tiempo usando los botones de flecha, solo funciona con `<el-time-picker>` | boolean | — | false |
-| value | valor del selector  | Fecha para Selector de Tiempo, string para el Seleccionador de Tiempo | hour `HH`, minute `mm`, second `ss` | HH:mm:ss |
-| align | alineación | left / center / right | left |
-| popper-class | nombre de clase personalizada para el dropdown del Selector de Tiempo | string | — | — |
-| picker-options | opciones adicionales, revisar la tabla posterior | object | — | {} |
-| range-separator | separador de rango | string | - | '-' |
-| default-value | opcional, fecha por defecto del calendario | Fecha para Selector de Tiempo, string para el Seleccionador de Tiempo | cualquier cosa aceptada por `new Date()` para el Selector de Tiempo,  Selector de Tiempo, valor seleccionable para el Seleccionador de Tiempo | — |
-| value-format | opcional, solo para Selector de Tiempo, formato de valor limitado | string | hour `HH`, minute `mm`, second `ss` | — |
-| name | así como `name` en input nativo | string | — | — |
+| Atributo          | Descripción                              | Tipo                                     | Valores aceptados                        | Por defecto |
+| ----------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- | ----------- |
+| readonly          | si el Time Picker está en modo de sólo lectura | boolean                                  | —                                        | false       |
+| disabled          | si el Time Picker se encuentra deshabilitado | boolean                                  | —                                        | false       |
+| editable          | si el input puede ser editado            | boolean                                  | —                                        | true        |
+| clearable         | si mostrar el botón de borrado           | boolean                                  | —                                        | true        |
+| size              | tamaño del input                         | string                                   | medium / small / mini                    | —           |
+| placeholder       | placeholder en un modo fuera de rango    | string                                   | —                                        | —           |
+| start-placeholder | placeholder para el tiempo de inicio en modo de rango | string                                   | —                                        | —           |
+| end-placeholder   | placeholder para el tiempo de finalización en modo de rango | string                                   | —                                        | —           |
+| is-range          | si es posible escoger un rango de tiempo, solo funciona con `<el-time-picker>` | boolean                                  | —                                        | false       |
+| arrow-control     | si es posible escoger el tiempo usando los botones de flecha, solo funciona con `<el-time-picker>` | boolean                                  | —                                        | false       |
+| value             | valor del selector                       | Fecha para Selector de Tiempo, string para el Seleccionador de Tiempo | hour `HH`, minute `mm`, second `ss`      | HH:mm:ss    |
+| align             | alineación                               | left / center / right                    | left                                     |             |
+| popper-class      | nombre de clase personalizada para el dropdown del Time Picker | string                                   | —                                        | —           |
+| picker-options    | opciones adicionales, revisar la tabla posterior | object                                   | —                                        | {}          |
+| range-separator   | separador de rango                       | string                                   | -                                        | '-'         |
+| default-value     | opcional, fecha por defecto del calendario | Fecha para Selector de Tiempo, string para el Seleccionador de Tiempo | cualquier cosa aceptada por `new Date()` para el Selector de Tiempo,  Selector de Tiempo, valor seleccionable para el Seleccionador de Tiempo | —           |
+| value-format      | opcional, solo para Time Picker, formato de valor limitado | string                                   | hour `HH`, minute `mm`, second `ss`      | —           |
+| name              | como `name` en input nativo              | string                                   | —                                        | —           |
 
-### Opciones para Seleccionador de Tiempo
-| Atributo      | Descripción          | Tipo      | Valores Aceptados       | Default  |
-|---------- |-------------- |---------- |--------------------------------  |-------- |
-| start | tiempo de inicio | string | — | 09:00 |
-| end | tiempo de finalización | string | — | 18:00 |
-| step | salto de tiempo | string | — | 00:30 |
-| minTime | tiempo mínimo, cualquier tiempo antes de éste será deshabilitado | string | — | 00:00 |
-| maxTime | tiempo máximo, cualquier tiempo después de éste será deshabilitado | string | — | — |
+### Opciones para Time Picker
+| Atributo | Descripción                              | Tipo   | Valores aceptados | Por defecto |
+| -------- | ---------------------------------------- | ------ | ----------------- | ----------- |
+| start    | tiempo de inicio                         | string | —                 | 09:00       |
+| end      | tiempo de finalización                   | string | —                 | 18:00       |
+| step     | salto de tiempo                          | string | —                 | 00:30       |
+| minTime  | tiempo mínimo, cualquier tiempo antes de éste será deshabilitado | string | —                 | 00:00       |
+| maxTime  | tiempo máximo, cualquier tiempo después de éste será deshabilitado | string | —                 | —           |
 
-### Opciones para Selector de Tiempo
-| Atributo      | Descripción          | Tipo      | Valores Aceptados       | Default  |
-|---------- |-------------- |---------- |--------------------------------  |-------- |
-| selectableRange | rango de tiempo disponible p.ej. `'18:30:00 - 20:30:00'`ó`['09:30:00 - 12:00:00', '14:30:00 - 18:30:00']` | string / array | — | — |
-| format | formato para el selector | string | hour `HH`, minute `mm`, second `ss` | HH:mm:ss |
+### Opciones para Time Picker
+| Atributo        | Descripción                              | Tipo           | Valores aceptados                   | Por defecto |
+| --------------- | ---------------------------------------- | -------------- | ----------------------------------- | ----------- |
+| selectableRange | rango de tiempo disponible p.ej. `'18:30:00 - 20:30:00'`ó`['09:30:00 - 12:00:00', '14:30:00 - 18:30:00']` | string / array | —                                   | —           |
+| format          | formato para el selector                 | string         | hour `HH`, minute `mm`, second `ss` | HH:mm:ss    |
 
 
 ### Eventos
-| Nombre de Evento | Descripción | Parámetros |
-|---------|--------|---------|
-| change | se lanza cuando el usuario confirma el valor | valor limitado del componente |
-| blur | se lanza cuando el input se difumina | (event: Event) |
-| focus | se lanza cuando el input se enfoca | (event: Event) |
+| Nombre de Evento | Descripción                              | Parámetros                    |
+| ---------------- | ---------------------------------------- | ----------------------------- |
+| change           | se lanza cuando el usuario confirma el valor | valor limitado del componente |
+| blur             | se lanza cuando el input se difumina     | (event: Event)                |
+| focus            | se lanza cuando el input se enfoca       | (event: Event)                |

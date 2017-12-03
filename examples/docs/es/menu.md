@@ -19,7 +19,7 @@
     }
     .tac {
       text-align: center;
-
+    
       .el-menu-vertical-demo {
         display: inline-block;
         text-align: left;
@@ -59,7 +59,7 @@ Menú que provee la navegación para tu sitio.
 
 Top bar NavMenu puede ser usado en distinto escenarios.
 
-:::**Demo** Por defecto el menú es vertical, pero puedes hacerlo horizontal asignando a la propiedad `mode` el valor 'horizontal'. Además, puedes utilizar el componente de submenú para crear un menú de segundo nivel. Menú provee `background-color`, `text-color` y `active-text-color` para customizar los colores.
+:::**Demo** Por defecto el menú es vertical, pero puede hacerlo horizontal asignando a la propiedad `mode` el valor 'horizontal'. Además, puede utilizar el componente de submenú para crear un menú de segundo nivel. Menú provee `background-color`, `text-color` y `active-text-color` para customizar los colores.
 
 ```html
 <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
@@ -113,7 +113,7 @@ Top bar NavMenu puede ser usado en distinto escenarios.
 
 NavMenu vertical con sub-menús.
 
-:::**Demo** Puedes utilizar el componente el-menu-item-group para crear un grupo de menú, y el nombre del grupo estará determinado por la propiedad `title` o la propiedad `slot`.
+:::**Demo** Puede utilizar el componente `el-menu-item-group` para crear un grupo de menú, y el nombre del grupo estará determinado por la propiedad `title` o la propiedad `slot`.
 
 ```html
 <el-row class="tac">
@@ -272,49 +272,49 @@ NavMenu vertical puede ser colapsado.
 :::
 
 ### Atributos Menu
-| Atributo      | Descripción          | Tipo      | Valores aceptados       | Valores por defecto  |
-|---------- |-------- |---------- |-------------  |-------- |
-| mode     | modo de presentación del menú   | string  |   horizontal / vertical   | vertical |
-| collapse  | si el menú está colapsado (solo en modo vertical) | boolean  |   —   | false |
-| background-color  | color de fondo del menú (formato hexadecimal) | string |   —   | #ffffff |
-| text-color  | color de texto del menú (formato hexadecimal) | string |   —   | #2d2f33 |
-| active-text-color  | color de text del menu-item activo (formato hexadecimal) | string |   —   | #409EFF |
-| default-active | índice del menu-item activo | string    | — | — |
-| default-openeds | arreglo que contiene las llaves del sub-menus activo | Array    | — | — |
-| unique-opened  |  whether only one sub-menu can be active  | boolean   | — | false   |
-| menu-trigger | como dispara eventos sub-menus, solo funciona cuando `mode` es 'horizontal' | string    | — | hover |
-| router  | si el modo `vue-router` está activado. Si es verdader, índice será usado como 'path' para activar la ruta | boolean   | — | false   |
+| Atributo          | Descripción                              | Tipo    | Valores aceptados     | Por defecto |
+| ----------------- | ---------------------------------------- | ------- | --------------------- | ----------- |
+| mode              | modo de presentación del menú            | string  | horizontal / vertical | vertical    |
+| collapse          | si el menú está colapsado (solo en modo vertical) | boolean | —                     | false       |
+| background-color  | color de fondo del menú (formato hexadecimal) | string  | —                     | #ffffff     |
+| text-color        | color de texto del menú (formato hexadecimal) | string  | —                     | #2d2f33     |
+| active-text-color | color de text del menu-item activo (formato hexadecimal) | string  | —                     | #409EFF     |
+| default-active    | índice del menu-item activo              | string  | —                     | —           |
+| default-openeds   | arreglo que contiene las llaves del sub-menus activo | Array   | —                     | —           |
+| unique-opened     | si solo un submenu puede ser activo      | boolean | —                     | false       |
+| menu-trigger      | como dispara eventos sub-menus, solo funciona cuando `mode` es 'horizontal' | string  | —                     | hover       |
+| router            | si el modo `vue-router` está activado. Si es verdader, índice será usado como 'path' para activar la ruta | boolean | —                     | false       |
 
 ### Métodos Menu 
-| Nombre de evento | Descripción | Parámetros |
-|---------- |-------- |---------- |
-| open  | abre un sub-menu específico | index: índice del sub-menu para abrir |
-| close  | cierra un sub-menu específico  | index: índice del sub-menu para cerrar |
+| Nombre de evento | Descripción                   | Parámetros                             |
+| ---------------- | ----------------------------- | -------------------------------------- |
+| open             | abre un sub-menu específico   | index: índice del sub-menu para abrir  |
+| close            | cierra un sub-menu específico | index: índice del sub-menu para cerrar |
 
 ### Eventos Menu 
-| Nombre de evento | Descripción | Parámetros |
-|---------- |-------- |---------- |
-| select  | callback ejecutado cuando el menú es activado | index: índice del menú activado, indexPath: index path del menú activado  |
-| open  | callback ejecutado cuando sub-menu se expande | index: índice del sub-menu expandido, indexPath: index path del sub-menu expandido |
-| close  | callback ejecutado cuando sub-menu colapsa | index: índice del sub-menu colapsado, indexPath: index path del menú colapsado |
+| Nombre de evento | Descripción                              | Parámetros                               |
+| ---------------- | ---------------------------------------- | ---------------------------------------- |
+| select           | callback ejecutado cuando el menú es activado | index: índice del menú activado, indexPath: index path del menú activado |
+| open             | callback ejecutado cuando sub-menu se expande | index: índice del sub-menu expandido, indexPath: index path del sub-menu expandido |
+| close            | callback ejecutado cuando sub-menu colapsa | index: índice del sub-menu colapsado, indexPath: index path del menú colapsado |
 
 ### Eventos Menu-Item 
-| Nombre de evento | Descripción | Parámetros |
-|---------- |-------- |---------- |
-| click  | callback ejecutado cuando se hace click sobre menu-item  | el: instancia de menu-item   |
+| Nombre de evento | Descripción                              | Parámetros                 |
+| ---------------- | ---------------------------------------- | -------------------------- |
+| click            | callback ejecutado cuando se hace click sobre menu-item | el: instancia de menu-item |
 
 ### Atributos SubMenu 
-| Atributo      | Descripción          | Tipo      | Valores aceptados       | Valores por defecto  |
-|---------- |-------- |---------- |-------------  |-------- |
-| index     | identificador único   | string  | — | — |
+| Atributo | Descripción         | Tipo   | Valores aceptados | Por defecto |
+| -------- | ------------------- | ------ | ----------------- | ----------- |
+| index    | identificador único | string | —                 | —           |
 
 ### Atributos Menu-Item 
-| Atributo      | Descripción          | Tipo      | Valores aceptados       | Valores por defecto  |
-|---------- |-------- |---------- |-------------  |-------- |
-| index     | identificador único   | string  | — | — |
-| route     | Object Vue Router   | object | — | — |
+| Atributo | Descripción         | Tipo   | Valores aceptados | Por defecto |
+| -------- | ------------------- | ------ | ----------------- | ----------- |
+| index    | identificador único | string | —                 | —           |
+| route    | Objeto Vue Router   | object | —                 | —           |
 
 ### Atributos Menu-Group 
-| Atributo      | Descripción          | Tipo      | Valores aceptados       | Valores por defecto  |
-|---------- |-------- |---------- |-------------  |-------- |
-| title     | título del grupo   | string  | — | — |
+| Atributo | Descripción      | Tipo   | Valores aceptados | Por defecto |
+| -------- | ---------------- | ------ | ----------------- | ----------- |
+| title    | título del grupo | string | —                 | —           |

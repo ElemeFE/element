@@ -1,6 +1,6 @@
 ## Breadcrumb
 
-Muestra la locación de la página actual, haciendo más fácil el poder ir a la página anterior.
+Muestra la localización de la página actual, haciendo más fácil el poder ir a la página anterior.
 
 ### Uso básico
 
@@ -19,7 +19,7 @@ Muestra la locación de la página actual, haciendo más fácil el poder ir a la
 
 ### Icono separador
 
-:::demo Setea `separator-class` para que utilice `iconfont` como separador，el mismo va a cubrir `separator`
+:::demo Setee `separator-class` para que utilice `iconfont` como separador，el mismo va a cubrir `separator`
 
 ```html
 <el-breadcrumb separator-class="el-icon-arrow-right">
@@ -32,16 +32,16 @@ Muestra la locación de la página actual, haciendo más fácil el poder ir a la
 :::
 
 ### Breadcrumb atributos
-| Atributo      | Descripción          | Tipo      | Valores aceptados           | Default|
-|---------- |-------------- |---------- |--------------------------------  |-------- |
-| separator | caracter separador | string | — | / |
-| separator-class | nombre de la clase del icono separador | string | — | - |
+| Atributo        | Descripción                            | Tipo   | Valores aceptados | Por defecto |
+| --------------- | -------------------------------------- | ------ | ----------------- | ----------- |
+| separator       | caracter separador                     | string | —                 | /           |
+| separator-class | nombre de la clase del icono separador | string | —                 | -           |
 
 ### Breadcrumb Item atributos
-| Atributo      | Descripción          | Tipo      | Valores aceptados            | Default|
-|---------- |-------------- |---------- |--------------------------------  |-------- |
-| to | ruta del link, lo mismo que `to` de `vue-router` | string/object | — | — |
-| replace | si `true`,  la navegación no dejara una entrada en la historia | boolean | — | false |
+| Atributo | Descripción                              | Tipo          | Valores aceptados | Por defecto |
+| -------- | ---------------------------------------- | ------------- | ----------------- | ----------- |
+| to       | ruta del link, lo mismo que `to` de `vue-router` | string/object | —                 | —           |
+| replace  | si `true`,  la navegación no dejara una entrada en la historia | boolean       | —                 | false       |
 
 
 

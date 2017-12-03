@@ -6,7 +6,7 @@
     box-sizing: border-box;
     color: #fff;
     font-size: 14px;
-
+    
     & .value {
       font-size: 12px;
       opacity: 0.69;
@@ -87,7 +87,7 @@ El color principal de Element es el azul brillante y amigable.
 
 ### Color secundario
 
-Además del color principal, necesitas utiizar distintos colores para diferentes escenarios (por ejemplo, el color en tono rojo indica una operación peligrosa).
+Además del color principal, se necesitan utilizar distintos colores para diferentes escenarios (por ejemplo, el color en tono rojo indica una operación peligrosa).
 
 <el-row :gutter="12">
   <el-col :span="6">
@@ -106,7 +106,7 @@ Además del color principal, necesitas utiizar distintos colores para diferentes
 
 ### Color neutro
 
-Los colores neutrales son para texto, fondos y bordes. Puedes usar diferentes colores neutrales para representar una estructura jeráquica.
+Los colores neutrales son para texto, fondos y bordes. Puede usar diferentes colores neutrales para representar una estructura jeráquica.
 
 <el-row :gutter="12">
   <el-col :span="6">

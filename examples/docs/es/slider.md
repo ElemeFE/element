@@ -108,9 +108,7 @@ El valor actual se muestra cuando se inicia el arrastre del slider.
 
 Las opciones pueden ser discretas.
 
-:::demo Set step size with the `step` attribute. You can display breakpoints by setting the `show-stops` attribute.
-
-Configure el tamaño del paso con el atributo `step`. Puede visualizar los puntos de ruptura configurando el atributo `show-stops`.
+:::demo Configure el tamaño del paso con el atributo `step`. Puede visualizar los puntos de ruptura configurando el atributo `show-stops`.
 
 ```html
 <template>

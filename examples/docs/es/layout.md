@@ -37,7 +37,7 @@ Rápido y facilmente crea un layout básico con 24 columnas.
 
 Crea un layout básico usando columnas.
 
-:::**Demo** Con `row` y `col`, podemos facilmente manipular el layout usando el atributo `span`.
+:::**Demo** Con `row` y `col`, puede facilmente manipular el layout usando el atributo `span`.
 ```html
 <el-row>
   <el-col :span="24"><div class="grid-content bg-purple-dark"></div></el-col>
@@ -248,7 +248,7 @@ Puedes especificar offsets para las columnas.
 
 Usa flex layout para un alineamiento flexible de columnas.
 
-:::**Demo** Puedes habilitar flex layout asignando el atributo `type` a 'flex', y definir el layout de elementos hijos asignando el atributo `justify` con los valores start, center, end, space-between o space-around.
+:::**Demo** Puede habilitar flex layout asignando el atributo `type` a 'flex', y definir el layout de elementos hijos asignando el atributo `justify` con los valores start, center, end, space-between o space-around.
 ```html
 <el-row type="flex" class="row-bg">
   <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
@@ -343,17 +343,17 @@ Tomando el ejemplo de Bootstrap responsive design, existen 5 breakpoints: xs, sm
 
 ### Clases útiles para ocultar elementos
 
-Adicionalmente, Element provee una serie de clases para ocultar elementos dadas ciertas condiciones. Estas clases pueden se agregadas a cualquier elemento del DOM o un elemento propio. Necesitas importar el siguiente archivo CSS para usar estas clases:
+Adicionalmente, Element provee una serie de clases para ocultar elementos dadas ciertas condiciones. Estas clases pueden se agregadas a cualquier elemento del DOM o un elemento propio. Necesita importar el siguiente archivo CSS para usar estas clases:
 
 ```js
 import 'element-ui/lib/theme-chalk/display.css';
 ```
 
 Las clases son:
-- `hidden-xs-only` - oculto en viewports extra pequenhos solamente
-- `hidden-sm-only` - oculto en viewports pequenhos solamente
-- `hidden-sm-and-down` - oculto en viewports pequenhos y menores
-- `hidden-sm-and-up` - oculto en viewports pequenhos y superiores 
+- `hidden-xs-only` - oculto en viewports extra pequeños solamente
+- `hidden-sm-only` - oculto en viewports pequeños solamente
+- `hidden-sm-and-down` - oculto en viewports pequeños y menores
+- `hidden-sm-and-up` - oculto en viewports pequeños y superiores 
 - `hidden-md-only` - oculto en viewports medios solamente
 - `hidden-md-and-down` - oculto en viewports medios y menores
 - `hidden-md-and-up` - oculto en viewports medios y mayores
@@ -364,27 +364,27 @@ Las clases son:
 
 ### Atributos Row 
 
-| Atributos      | Descripción          | Tipo      | Valores aceptados       | Valor por defecto  |
-|---------- |-------------- |---------- |--------------------------------  |-------- |
-| gutter | espaciado de la grilla | number | — | 0 |
-| type | modo del layout , puedes usar flex, funciona en navegadores modernos| string | — | — |
-| justify | alineación horizontal del layout flex | string | start/end/center/space-around/space-between | start |
-| align | alineación vertical del layout flex | string | top/middle/bottom | top |
-| tag | tag de elemento propio | string | * | div |
+| Atributos | Descripción                              | Tipo   | Valores aceptados                        | Valor por defecto |
+| --------- | ---------------------------------------- | ------ | ---------------------------------------- | ----------------- |
+| gutter    | espaciado de la grilla                   | number | —                                        | 0                 |
+| type      | modo del layout , puedes usar flex, funciona en navegadores modernos | string | —                                        | —                 |
+| justify   | alineación horizontal del layout flex    | string | start/end/center/space-around/space-between | start             |
+| align     | alineación vertical del layout flex      | string | top/middle/bottom                        | top               |
+| tag       | tag de elemento propio                   | string | *                                        | div               |
 
 ### Atributos Col 
 
-| Atributos      | Descripción          | Tipo      | Valores aceptados       | Valor por defecto  |
-|---------- |-------------- |---------- |--------------------------------  |-------- |
-| span | número de columnas que abarca la cuadrícula | number | — | 24 |
-| offset | especific espacio en el lado izquierdo de la grill | number | — | 0 |
-| push |  número de columnas que la grilla se mueve hacia la derecha | number | — | 0 |
-| pull |  número de columnas que la grilla se mueve hacia la izquierda | number | — | 0 |
-| xs | `<768px` Columnas responsive u objeto con propiedades de la columna  | number/object (e.g. {span: 4, offset: 4}) | — | — |
-| sm | `≥768px` Columnas responsive u objeto con propiedades de la columna  | number/object (e.g. {span: 4, offset: 4}) | — | — |
-| md | `≥992px` Columnas responsive u objeto con propiedades de la columna  | number/object (e.g. {span: 4, offset: 4}) | — | — |
-| lg | `≥1200px` Columnas responsive u objeto con propiedades de la columna  | number/object (e.g. {span: 4, offset: 4}) | — | — | 
-| xl | `≥1920px` Columnas responsive u objeto con propiedades de la columna  | number/object (e.g. {span: 4, offset: 4}) | — | — |
-| tag | tag de elemento propio | string | * | div |
+| Atributos | Descripción                              | Tipo                                     | Valores aceptados | Valor por defecto |
+| --------- | ---------------------------------------- | ---------------------------------------- | ----------------- | ----------------- |
+| span      | número de columnas que abarca la cuadrícula | number                                   | —                 | 24                |
+| offset    | especific espacio en el lado izquierdo de la grill | number                                   | —                 | 0                 |
+| push      | número de columnas que la grilla se mueve hacia la derecha | number                                   | —                 | 0                 |
+| pull      | número de columnas que la grilla se mueve hacia la izquierda | number                                   | —                 | 0                 |
+| xs        | `<768px` Columnas responsive u objeto con propiedades de la columna | number/object (e.g. {span: 4, offset: 4}) | —                 | —                 |
+| sm        | `≥768px` Columnas responsive u objeto con propiedades de la columna | number/object (e.g. {span: 4, offset: 4}) | —                 | —                 |
+| md        | `≥992px` Columnas responsive u objeto con propiedades de la columna | number/object (e.g. {span: 4, offset: 4}) | —                 | —                 |
+| lg        | `≥1200px` Columnas responsive u objeto con propiedades de la columna | number/object (e.g. {span: 4, offset: 4}) | —                 | —                 |
+| xl        | `≥1920px` Columnas responsive u objeto con propiedades de la columna | number/object (e.g. {span: 4, offset: 4}) | —                 | —                 |
+| tag       | tag de elemento propio                   | string                                   | *                 | div               |
 
 

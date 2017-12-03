@@ -8,11 +8,11 @@
     }
     .el-button-group {
       margin-bottom: 20px;
-
+    
       .el-button + .el-button {
         margin-left: 0;
       }
-
+    
       & + .el-button-group {
         margin-left: 10px;
       }
@@ -134,7 +134,7 @@ Mostrar un grupo de botones puede ser usado para mostrar un grupo de operaciones
 
 Cuando se hace clic en un botón para descargar datos, el botón muestra un estado de descarga.
 
-:::demo Sete el atributo `loading` a `true` para mostrar el estado de descarga.
+:::demo Ajuste el atributo `loading` a `true` para mostrar el estado de descarga.
 
 ```html
 <el-button type="primary" :loading="true">Loading</el-button>
@@ -164,14 +164,14 @@ Además del tamaño por defecto, el componente Button provee tres tamaños adici
 :::
 
 ### Atributos
-| Atributo      | Descripción    | Tipo      | Valores aceptados      | Default   |
-|---------- |-------- |---------- |-------------  |-------- |
-| size     | tamaño del botón   | string  |   medium / small / mini            |    —     |
-| type     | tipo de botón  | string    |   primary / success / warning / danger / info / text |     —    |
-| plain     | determinar si es o no un botón plano   | boolean    | — | false   |
-| round     | determinar si es o no un botón redondo   | boolean    | — | false   |
-| loading   | determinar si es o no un botón de descarga   | boolean    | — | false   |
-| disabled  | deshabilitar el botón   | boolean   | —   | false   |
-| icon  | nombre de la clase del icono | string   |  —  |  —  |
-| autofocus  | misma funcionalidad que la nativa `autofocus` | boolean   |  —  |  false  |
-| native-type | misma funcionalidad que la nativa `type` | string | button / submit / reset | button |
+| Atributo    | Descripción                              | Tipo    | Valores aceptados                        | Por defecto |
+| ----------- | ---------------------------------------- | ------- | ---------------------------------------- | ----------- |
+| size        | tamaño del botón                         | string  | medium / small / mini                    | —           |
+| type        | tipo de botón                            | string  | primary / success / warning / danger / info / text | —           |
+| plain       | determinar si es o no un botón plano     | boolean | —                                        | false       |
+| round       | determinar si es o no un botón redondo   | boolean | —                                        | false       |
+| loading     | determinar si es o no un botón de descarga | boolean | —                                        | false       |
+| disabled    | deshabilitar el botón                    | boolean | —                                        | false       |
+| icon        | nombre de la clase del icono             | string  | —                                        | —           |
+| autofocus   | misma funcionalidad que la nativa `autofocus` | boolean | —                                        | false       |
+| native-type | misma funcionalidad que la nativa `type` | string  | button / submit / reset                  | button      |

@@ -4,9 +4,9 @@ Esta sección te guía en el proceso de usar Element con webpack en un proyecto.
 
 ### Usa la plantilla de Kit de inicio
 
-Proveemos una plantilla general [project template](https://github.com/ElementUI/element-starter) para ti. Para los usuarios de Laravel, también tenemos [template](https://github.com/ElementUI/element-in-laravel-starter). Puedes descargarlas y agregarlas directamente también.
+Proveemos una plantilla general [project template](https://github.com/ElementUI/element-starter). Para los usuarios de Laravel, también tenemos [template](https://github.com/ElementUI/element-in-laravel-starter). Puedes descargarlas y agregarlas directamente también.
 
-Si prefieres no utilizarlas, lee las siguientes secciones de este documento.
+Si prefiere no utilizarlas, lee las siguientes secciones de este documento.
 
 ### Usando vue-cli
 
@@ -21,7 +21,7 @@ Podemos empezar un proyecto utilizando [vue-cli](https://github.com/vuejs/vue-cl
 
 ### Importando Element
 
-Puedes importar Element completamente o solamente importar lo que necesites. Comencemos importando todo.
+Puede importar Element completamente o solamente importar lo que necesite. Comencemos importando todo.
 
 #### Importando todo
 
@@ -43,15 +43,15 @@ El código anterior importa Element completamente. Nótese que el archivo CSS ne
 
 #### En demanda
 
-Con la ayuda de [babel-plugin-component](https://github.com/QingWei-Li/babel-plugin-component), podemos importar los componentes que necesitamos, haciendo nuestro proyecto más pequenho que de la otra manera.
+Con la ayuda de [babel-plugin-component](https://github.com/QingWei-Li/babel-plugin-component), podemos importar los componentes que necesitamos, haciendo nuestro proyecto más pequeño que de la otra manera.
 
-Primero, instala babel-plugin-component:
+Primero, instale babel-plugin-component:
 
 ```bash
 npm install babel-plugin-component -D
 ```
 
-Luego edita .babelrc:
+Luego edite .babelrc:
 ```json
 {
   "presets": [
@@ -66,7 +66,7 @@ Luego edita .babelrc:
 }
 ```
 
-Luego, si necesitas Button y Select, edita main.js:
+Luego, si necesita Button y Select, edite main.js:
 
 ```javascript
 import Vue from 'vue'
@@ -234,7 +234,7 @@ Vue.prototype.$message = Message
 ```
 
 ### Configuración global
-Cuando importas Element, puedes definir un objeto global de configuración. Por ahora este elemento solo contiene una propiedad: `size`, que define el tamanho por defecto de todos los componentes:
+Cuando importa Element, puede definir un objeto global de configuración. Por ahora este elemento solo contiene una propiedad: `size`, que define el tamaño por defecto de todos los componentes:
 
 Importando Element completamente：
 ```JS
@@ -251,10 +251,10 @@ import { Button } from 'element-ui'
 Vue.prototype.$ELEMENT = { size: 'small' }
 Vue.use(Button)
 ```
-Con la anterior configuración, el tamanho por defecto de todos los componentes que tienen el atributo `size` será `small`.
+Con la anterior configuración, el tamaño por defecto de todos los componentes que tienen el atributo `size` será `small`.
 
-### Empieza ya!
-Ahora haz incorporado Vue y Element a tu proyecto es tiempo para comenzar a programar. Inicia el modo de desarrollo:
+### Empiece ya!
+Ahora ha incorporado Vue y Element a su proyecto y es el momento para comenzar a programar. Inicie el modo de desarrollo:
 
 ```bash
 # visit localhost:8086

@@ -1673,7 +1673,7 @@ Buscar y seleccionar opciones con una palabra clave.
 | Atributo         | Descripción                              | Tipo            | Opciones              | Por defecto |
 | ---------------- | ---------------------------------------- | --------------- | --------------------- | ----------- |
 | options          | datos de las opciones                    | array           | —                     | —           |
-| props            | opciones de configuration,  mire la tabla siguiente | object          | —                     | —           |
+| props            | opciones de configuracion,  mire la tabla siguiente | object          | —                     | —           |
 | value            | valor seleccionado                       | array           | —                     | —           |
 | popper-class     | nombre de clase para el Cascader's dropdown | string          | —                     | —           |
 | placeholder      | input placeholder                        | string          | —                     | Select      |
