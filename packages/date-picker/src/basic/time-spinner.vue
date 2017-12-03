@@ -15,7 +15,7 @@
           v-for="(disabled, hour) in hoursList"
           track-by="hour"
           class="el-time-spinner__item"
-          :class="{ 'active': hour === hours, 'disabled': disabled }">{{ ('0' + hour).slice(-2) }}</li>
+          :class="{ 'active': hour === hours, 'disabled': disabled }">{{ ('0' + (amPmMode ? (hour % 12 || 12) : hour )).slice(-2) }}{{amPm(hour)}}</li>
       </el-scrollbar>
       <el-scrollbar
         @mouseenter.native="emitSelectRange('minutes')"
@@ -60,7 +60,7 @@
             class="el-time-spinner__item"
             :class="{ 'active': hour === hours, 'disabled': hoursList[hour] }"
             v-for="hour in arrowHourList">
-            {{ hour === undefined ? '' : ('0' + hour).slice(-2) }}
+            {{ ('0' + (amPmMode ? (hour % 12 || 12) : hour )).slice(-2) }}{{amPm(hour)}}
           </li>
         </ul>
       </div>
@@ -116,7 +116,11 @@
         type: Boolean,
         default: true
       },
-      arrowControl: Boolean
+      arrowControl: Boolean,
+      amPmMode: {
+        type: String,
+        default: '' // 'a': am/pm; 'A': AM/PM
+      }
     },
 
     computed: {
@@ -273,6 +277,15 @@
 
         this.modifyDateField(label, now);
         this.adjustSpinner(label, now);
+      },
+      amPm(hour) {
+        let shouldShowAmPm = this.amPmMode.toLowerCase() === 'a';
+        if (!shouldShowAmPm) return '';
+        let isCapital = this.amPmMode === 'A';
+        let content = ' ';
+        if (shouldShowAmPm) content = content.concat((hour < 12) ? 'am' : 'pm');
+        if (isCapital) content = content.toUpperCase();
+        return content;
       }
     }
   };

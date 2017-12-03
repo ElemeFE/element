@@ -15,6 +15,7 @@
             <time-spinner
               ref="minSpinner"
               :show-seconds="showSeconds"
+              :am-pm-mode="amPmMode"
               @change="handleMinChange"
               :arrow-control="arrowControl"
               @select-range="setMinSelectionRange"
@@ -30,6 +31,7 @@
             <time-spinner
               ref="maxSpinner"
               :show-seconds="showSeconds"
+              :am-pm-mode="amPmMode"
               @change="handleMaxChange"
               :arrow-control="arrowControl"
               @select-range="setMaxSelectionRange"
@@ -100,6 +102,11 @@
 
       btnDisabled() {
         return this.minDate.getTime() > this.maxDate.getTime();
+      },
+      amPmMode() {
+        if ((this.format || '').indexOf('A') !== -1) return 'A';
+        if ((this.format || '').indexOf('a') !== -1) return 'a';
+        return '';
       }
     },
 
