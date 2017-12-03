@@ -86,7 +86,7 @@ Pase el ratón por el menú desplegable para desplegarlo y obtener más acciones
 
 :::
 
-Elemento detonante
+### Elemento detonante
 
 Utilizando un botón para activar la lista desplegable.
 

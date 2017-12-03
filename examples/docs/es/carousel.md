@@ -61,11 +61,11 @@
 </style>
 ## Carousel
 
-Presentar una serie de imágenes o textos en un espacio limitado
+Presenta una serie de imágenes o textos en un espacio limitado
 
 ### Uso básico
 
-::: demo Combina `el-carousel`  con `el-carousel-item`, para conseguir el carrusel. El contenido de cada diapositiva es completamente personalizable, y sólo tiene que colocarla dentro de la etiqueta  `el-carousel-item` . Por defecto, el carrusel cambia cuando el ratón pasa por encima de un indicador. Fije  `trigger`  para  `click`, si lo que se desea es que el carrusel cambie sólo cuando se haga clic en un indicador.
+::: demo Combine `el-carousel`  con `el-carousel-item`, para conseguir el carrusel. El contenido de cada diapositiva es completamente personalizable, y sólo tiene que colocarla dentro de la etiqueta  `el-carousel-item` . Por defecto, el carrusel cambia cuando el ratón pasa por encima de un indicador. Fije  `trigger`  para  `click`, si lo que se desea es que el carrusel cambie sólo cuando se haga clic en un indicador.
 
 ```html
 <template>
@@ -213,7 +213,7 @@ Cuando una página es suficientemente ancha pero tiene una altura limitada, pued
 :::
 
 ### Atributos de Carousel
-| Atributo           | Descripcion                              | Tipo    | Valores aceptados  | Por Defecto |
+| Atributo           | Descripcion                              | Tipo    | Valores aceptados  | Por defecto |
 | ------------------ | ---------------------------------------- | ------- | ------------------ | ----------- |
 | height             | Alto del carrusel                        | string  | —                  | —           |
 | initial-index      | Indice del slider inicial activo (empieza desde 0) | number  | —                  | 0           |
@@ -237,7 +237,7 @@ Cuando una página es suficientemente ancha pero tiene una altura limitada, pued
 | next          | Cambia al slider siguiente | —                                        |
 
 ### Atributos de Carousel-Item
-| Atributo | Descripción                              | Tipo   | Valores aceptados | Por Defecto |
+| Atributo | Descripción                              | Tipo   | Valores aceptados | Por defecto |
 | -------- | ---------------------------------------- | ------ | ----------------- | ----------- |
 | name     | Nombre del item que puede ser usado en `setActiveItem` | string | —                 | —           |
 | label    | Texto que se mostrara en el indicador de paginacion correspondiente | string | —                 | —           |

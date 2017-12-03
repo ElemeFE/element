@@ -98,15 +98,15 @@
 
 ## DateTimePicker
 
-seleccionar fecha y tiempo juntos en una escoja.
+Seleccionar fecha y tiempo juntos en un picker.
 
 :::tip
-DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más detallada sobre `pickerOptions` y otros atributos,puedes referirse a DatePicker y TimePicker.
+DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más detallada sobre `pickerOptions` y otros atributos, puede referirse a DatePicker y TimePicker.
 :::
 
 ###  Fecha y hora
 
-:::demo Puedes seleccionar fecha y tiempo juntos en una escoja al mismo tiempo por establecer `type` a `datetime`.El método a utilizar atajos es mismo que Date Picker.
+:::demo Puede seleccionar la fecha y la hora en un picker al mismo tiempo configurando el tipo de fecha y la hora. La forma de utilizar los atajos es la misma que con Date Picker.
 
 
 ```html
@@ -167,7 +167,7 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
 
 ### Alcance de fecha y tiempo
 
-:::demo Puedes seleccionar fecha y tiempo por establecer `type` a `datetimerange`.
+:::demo Puede seleccionar la fecha y el rango de tiempo ajustando `type` a `datetimerange`.
 
 ```html
 <template>
@@ -236,49 +236,49 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
 :::
 
 ### Atributos
-| Atributos          | Descripción                              | Tipo              | Valores aceptados                        | Defecto    |
-| ------------------ | ---------------------------------------- | ----------------- | ---------------------------------------- | ---------- |
-| readonly           | cuando DatePicker es lectura sola        | boolean           | —                                        | false      |
-| disabled           | cuando DatePicker es deshabilitada       | boolean           | —                                        | false      |
-| editable           | Si la entrada es editable                | boolean           | —                                        | true       |
-| clearable          | Si monstrar el botón de despejar         | boolean           | —                                        | true       |
-| size               | tamaño de la entrada                     | string            | large/small/mini                         | —          |
-| placeholder        | placeholder en la modalidad sin-rango    | string            | —                                        | —          |
-| start-placeholder  | placeholder para el comienzo de fecha en la modalidad de alcance | string            | —                                        | —          |
-| end-placeholder    | placeholder para el fin de fecha en la modalidad de alcance | string            | —                                        | —          |
-| time-arrow-control | si se escoja tiempo utilizando botones de flecha | boolean           | —                                        | false      |
-| type               | tipo de la escoja                        | string            | year/month/date/datetime/ week/datetimerange/daterange | date       |
-| format             | formato de valor mostrado en la caja de entrada | string            | año `yyyy` mes `MM` día `dd`, hora `HH`, minuto `mm`, segundo `ss` | yyyy-MM-dd |
-| alinear            | alineación                               | left/center/right | left                                     |            |
-| popper-class       | nombre de clase clientela por dropdown de DatePicker | string            | —                                        | —          |
-| picker-options     | opciones adicionales, comproba la tabla abaja | object            | —                                        | {}         |
-| range-separator    | separador de alcance                     | string            | -                                        | '-'        |
-| default-value      | fecha opcional y defectada del calendario | Fecha             | cualquier cosa aceptada por `new Date()` — |            |
-| value-format       | opcional,formato de valor atado.Si no special, el valor atado sería ser un valor de fecha | cadena            | año `yyyy`, mes `MM`, día `dd`, hora `HH`, minuto `mm`, segundo `ss` | —          |
-| name               | igual que `name` en la entrada nativa    | string            | —                                        | —          |
-| unlink-panels      | desconectar dos fecha-paneles en alcance-escoja | boolean           | —                                        | false      |
+| Atributos          | Descripción                              | Tipo              | Valores aceptados                        | Por defecto |
+| ------------------ | ---------------------------------------- | ----------------- | ---------------------------------------- | ----------- |
+| readonly           | si DatePicker es solo de lectura         | boolean           | —                                        | false       |
+| disabled           | si DatePicker esta deshabilitada         | boolean           | —                                        | false       |
+| editable           | Si la entrada es editable                | boolean           | —                                        | true        |
+| clearable          | Si mostrar el botón de `clear`           | boolean           | —                                        | true        |
+| size               | tamaño del input                         | string            | large/small/mini                         | —           |
+| placeholder        | placeholder cuando el modo NO es Range   | string            | —                                        | —           |
+| start-placeholder  | placeholder para el inicio de fecha en el modo Range | string            | —                                        | —           |
+| end-placeholder    | placeholder para el fin de fecha en el modo Range | string            | —                                        | —           |
+| time-arrow-control | si se puede modificar el `time`  utilizando botones con flechas | boolean           | —                                        | false       |
+| type               | tipo del picker                          | string            | year/month/date/datetime/ week/datetimerange/daterange | date        |
+| format             | formato de valor mostrado en el input    | string            | año `yyyy` mes `MM` día `dd`, hora `HH`, minuto `mm`, segundo `ss` | yyyy-MM-dd  |
+| alinear            | alineación                               | left/center/right | left                                     |             |
+| popper-class       | nombre de clase personalizado para el Dropdown de DatePicker | string            | —                                        | —           |
+| picker-options     | opciones adicionales, Comprueba la tabla de mas abajo | object            | —                                        | {}          |
+| range-separator    | separador de rango                       | string            | -                                        | '-'         |
+| default-value      | opcional, fecha predeterminada del calendario | Fecha             | cualquier cosa aceptada por `new Date()` — |             |
+| value-format       | opcional, formato de valor de enlazado. Si no se especifica, el valor de enlazado será un objeto Date | cadena            | año `yyyy`, mes `MM`, día `dd`, hora `HH`, minuto `mm`, segundo `ss` | —           |
+| name               | igual que `name` en la entrada nativa    | string            | —                                        | —           |
+| unlink-panels      | desconectar dos date-panels en range-picker | boolean           | —                                        | false       |
 
 ### Picker Options
-| Atributo       | Descripción                              | Tipo     | Valores aceptados | Default |
-| -------------- | ---------------------------------------- | -------- | ----------------- | ------- |
-| shortcuts      | un { text, onClick } objecto serie para establecer opciones atajos, comprobar la mesa abaja | objeto[] | —                 | —       |
-| disabledDate   | una función determinar si la fecha es minusválida con la fecha como su parámetro.Debería devolver un booleano | función  | —                 | —       |
-| firstDayOfWeek | primera día de semana                    | Número   | 1 to 7            | 7       |
+| Atributo       | Descripción                              | Tipo     | Valores aceptados | Por defecto |
+| -------------- | ---------------------------------------- | -------- | ----------------- | ----------- |
+| shortcuts      | un array de objetos { text, onClick } para establecer las opciones de acceso directo, verifique la tabla debajo | objeto[] | —                 | —           |
+| disabledDate   | una función que determina si una fecha está desactivada con esa fecha como parámetro. Debería devolver un booleano | función  | —                 | —           |
+| firstDayOfWeek | primera día de semana                    | Número   | 1 to 7            | 7           |
 
-### atajos
-| Atributo | Descripción                              | Type     | Accepted Values | Default |
-| -------- | ---------------------------------------- | -------- | --------------- | ------- |
-| text     | title of the shortcut                    | string   | —               | —       |
-| onClick  | función de llama de vuelta, gatillos cuando el atajo se hace clic, con el `vm` como su parámetro. Puedes cambiar el valor de escoja por emitir el evento `pick`. Ejemplo: `vm.$emit('pick', new Date())` | function | —               | —       |
+### Accesos directos
+| Atributo | Descripción                              | Tipo     | Valores aceptados | Por defecto |
+| -------- | ---------------------------------------- | -------- | ----------------- | ----------- |
+| text     | título del acceso directo                | string   | —                 | —           |
+| onClick  | la funcion se dispara cuando se hace clic en el acceso directo, con el `vm` como parámetro. Puede modificar el valor del picker emitiendo el evento`pick`. Ejemplo: `vm.$emit('pick', new Date())` | function | —                 | —           |
 
 ### Eventos
-| Nombre de evento | Descripción                              | Parámetros                |
-| ---------------- | ---------------------------------------- | ------------------------- |
-| change           | gatillos cuando usuario confirma el valor | valor atado de componente |
-| blur             | gatillos cuando la entrada difumina      | (event: Event)            |
-| focus            | gatillos cuando la entrada enfoca        | (event: Event)            |
+| Nombre de evento | Descripción                              | Parámetros                    |
+| ---------------- | ---------------------------------------- | ----------------------------- |
+| change           | Se dispara cuando el usuario confirma el valor | valor enlazado del componente |
+| blur             | Se dispara cuando el input pierde el foco | (event: Event)                |
+| focus            | Se dispara cuando el input obtiene el foco | (event: Event)                |
 
 ### Métodos
-| Método | Descripción                      | Parámetros |
-| ------ | -------------------------------- | ---------- |
-| focus  | enfoque la entrada de componente | —          |
+| Método | Descripción      | Parámetros |
+| ------ | ---------------- | ---------- |
+| focus  | foco en el input | —          |

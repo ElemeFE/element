@@ -103,7 +103,7 @@
 
 Similar a un Tooltip, Popover está construido con `Vue-popper`. Así que para atributos duplicados, por favor refiérase a la documentación de Tooltip.
 
-:::**Demo** Agrega `ref` al popover, luego en el botón usa la directiva `v-popover` para asociar el botón y el popover. El atributo `trigger` es usado para definir como el popover se dispara: `hover`, `click` o `focus`. De manera alternatica puedes especificar la referencia utilizando un `[named slot](https://vuejs.org/v2/guide/components.html#Named-Slots).
+:::**Demo** Agrega `ref` al popover, luego en el botón usa la directiva `v-popover` para asociar el botón y el popover. El atributo `trigger` es usado para definir como el popover se dispara: `hover`, `click` o `focus`. De manera alternativa puede especificar la referencia utilizando un [slot con nombre](https://vuejs.org/v2/guide/components.html#Named-Slots).
 
 ```html
 <el-popover
@@ -218,30 +218,30 @@ Por supuesto, puedes anidar otras operaciones. Es más ligero que utilizar un `d
 
 
 ### Atributos
-| Atributo      | Descripción          | Tipo      | Valores aceptados       | Valores por defecto  |
-|--------------------|----------------------------------------------------------|-------------------|-------------|--------|
-| trigger | cómo se dispara el popover | string  | click/focus/hover/manual |    click    |
-|  title              | título del popover  | string | — | — |
-|  content        |  contenido del popover, puede ser sustituido por un `slot`  | string            | — | — |
-|  width        |  ancho del popover   | string, number            | — | Min width 150px |
-|  placement        |  posición del popover en la pantalla   | string | top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end |  bottom |
-|  disabled       |  si el popover está deshabilitado  | boolean    | — |  false |
-|  value(v-model)        |  si el popover está visible  | Boolean           | — |  false |
-|  offset        |  popover offset  | number           | — |  0 |
-|  transition     |  popover transition animation      | string             | — | el-fade-in-linear |
-|  visible-arrow   |  si una flecha del tooltip is mostrada o no. Para más información, por favor refiérase a [Vue-popper](https://github.com/element-component/vue-popper) | boolean | — | true |
-|  popper-options        | parámetros para [popper.js](https://popper.js.org/documentation.html) | object            | por favor, refiérase a [popper.js](https://popper.js.org/documentation.html) | `{ boundariesElement: 'body', gpuAcceleration: false }` |
-|  popper-class        |  clase propia para popover | string | — | — |
-|  open-delay        | retraso de la aparición cuando `trigger` es hover, en milisegundos | number | — | — |
+| Atributo       | Descripción                              | Tipo           | Valores aceptados                        | Por defecto                              |
+| -------------- | ---------------------------------------- | -------------- | ---------------------------------------- | ---------------------------------------- |
+| trigger        | cómo se dispara el popover               | string         | click/focus/hover/manual                 | click                                    |
+| title          | título del popover                       | string         | —                                        | —                                        |
+| content        | contenido del popover, puede ser sustituido por un `slot` | string         | —                                        | —                                        |
+| width          | ancho del popover                        | string, number | —                                        | Min width 150px                          |
+| placement      | posición del popover en la pantalla      | string         | top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end | bottom                                   |
+| disabled       | si el popover está deshabilitado         | boolean        | —                                        | false                                    |
+| value(v-model) | si el popover está visible               | Boolean        | —                                        | false                                    |
+| offset         | popover offset                           | number         | —                                        | 0                                        |
+| transition     | popover transition animation             | string         | —                                        | el-fade-in-linear                        |
+| visible-arrow  | si una flecha del tooltip es mostrada o no. Para más información, por favor refiérase a [Vue-popper](https://github.com/element-component/vue-popper) | boolean        | —                                        | true                                     |
+| popper-options | parámetros para [popper.js](https://popper.js.org/documentation.html) | object         | por favor, refiérase a [popper.js](https://popper.js.org/documentation.html) | `{ boundariesElement: 'body', gpuAcceleration: false }` |
+| popper-class   | clase propia para popover                | string         | —                                        | —                                        |
+| open-delay     | retraso de la aparición cuando `trigger` es hover, en milisegundos | number         | —                                        | —                                        |
 
 ### Slot
-| Nombre | Descripción |
-| --- | --- |
-| — | texto contenido en popover |
+| Nombre    | Descripción                          |
+| --------- | ------------------------------------ |
+| —         | texto contenido en popover           |
 | reference | elemento HTML que dispara el popover |
 
 ### Eventos
-| Nombre del evento | Descripción | Parámetros |
-|---------|--------|---------|
-| show | se dispara cuando se muestra el popover | — |
-| hide | se dispara cuando se oculta el popover | — |
+| Nombre del evento | Descripción                             | Parámetros |
+| ----------------- | --------------------------------------- | ---------- |
+| show              | se dispara cuando se muestra el popover | —          |
+| hide              | se dispara cuando se oculta el popover  | —          |

@@ -43,7 +43,7 @@ Muestra la cantidad de mensajes nuevos.
 
 ### Valor máximo
 
-Se puede customizar el valor máximo.
+Se puede personalizar el valor máximo.
 
 ::: demo El valor máximo se define como `max` el cual es un `Number`. Nota: solo funciona si `value` es también un `Number`.
 
@@ -64,11 +64,11 @@ Se puede customizar el valor máximo.
 ```
 :::
 
-### Customizaciones
+### Personalizaciones
 
 Mostrar texto en vez de números.
 
-:::demo Cuando `value` es un `String`, puede mostrar texto customizado.
+:::demo Cuando `value` es un `String`, puede mostrar texto personalizado.
 
 ```html
 <el-badge value="new" class="item">
@@ -130,9 +130,9 @@ Puede utilizar un punto rojo para marcar contenido que debe ser notado.
 </style>
 
 ### Atributos
-| Atributo          | Descripción            | Tipo            | Valores aceptados                 | Default   |
-|-------------  |---------------- |---------------- |---------------------- |-------- |
-| value          | valor a mostrar      | string, number          |          —             |    —     |
-| max          |  valor máximo, Muestra '{max}+' cuando se excede. Solo funciona si `value` es un `Number`   | number  |         —              |     —    |
-| is-dot       | si se debe mostrar un pequeño punto  | boolean  |  —  |  false |
-| hidden | hidden badge | boolean | — | false |
+| Atributo | Descripción                              | Tipo           | Valores aceptados | Por defecto |
+| -------- | ---------------------------------------- | -------------- | ----------------- | ----------- |
+| value    | valor a mostrar                          | string, number | —                 | —           |
+| max      | valor máximo, Muestra '{max}+' cuando se excede. Solo funciona si `value` es un `Number` | number         | —                 | —           |
+| is-dot   | si se debe mostrar un pequeño punto      | boolean        | —                 | false       |
+| hidden   | hidden badge                             | boolean        | —                 | false       |

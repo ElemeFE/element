@@ -4,11 +4,11 @@
     color: #333;
     line-height: 60px;
   }
-  
+
   .el-aside {
     color: #333;
   }
-  
+
   #disenos-comunes + .demo-container {
     .el-header, .el-footer {
       text-align: center;
@@ -72,8 +72,7 @@ De lo contrario, de forma horizontal.
 `<el-footer>`: Contenedor para pie de página.
 
 :::tip
-Estos componentes utilizan flex para el diseño, así que asegúrate que el navegador lo soporte. Además, los elementos directos de `<el-container>` tienen que
-ser uno o más de los últimos cuatro componentes. Y el elemento padre de los últimos cuatro componentes debe ser un `<el-container>`.
+Estos componentes utilizan flex para el diseño, así que asegurese que el navegador lo soporta. Además, los elementos directos de `<el-container>` tienen que ser uno o más de los últimos cuatro componentes. Y el elemento padre de los últimos cuatro componentes debe ser un `<el-container>`.
 :::
 
 ### Diseños comunes
@@ -281,21 +280,21 @@ ser uno o más de los últimos cuatro componentes. Y el elemento padre de los ú
 :::
 
 ### Atributos de contenedor
-| Atributo      | Descripción          | Tipo      | Valores aceptados       | Por defecto  |
-|---------- |-------------- |---------- |--------------------------------  |-------- |
+| Atributo  | Descripción                              | Tipo   | Valores aceptados     | Por defecto                              |
+| --------- | ---------------------------------------- | ------ | --------------------- | ---------------------------------------- |
 | direction | dirección de diseño para elementos secundarios | string | horizontal / vertical | vertical cuando el elemento está anidado con `el-header`, de lo contrario, horizontal |
 
 ### Atributos de cabecera
-| Atributo      | Descripción          | Tipo      | Valores aceptados       | Por defecto  |
-|---------- |-------------- |---------- |--------------------------------  |-------- |
-| height | altura de la cabecera | string | — | 60px |
+| Atributo | Descripción           | Tipo   | Valores aceptados | Por defecto |
+| -------- | --------------------- | ------ | ----------------- | ----------- |
+| height   | altura de la cabecera | string | —                 | 60px        |
 
 ### Atributos de barra lateral
-| Atributo      | Descripción          | Tipo      | Valores aceptados       | Por defecto  |
-|---------- |-------------- |---------- |--------------------------------  |-------- |
-| width | ancho de la barra lateral | string | — | 300px |
+| Atributo | Descripción               | Tipo   | Valores aceptados | Por defecto |
+| -------- | ------------------------- | ------ | ----------------- | ----------- |
+| width    | ancho de la barra lateral | string | —                 | 300px       |
 
 ### Atributos de pie de página
-| Atributo      | Descripción          | Tipo      | Valores aceptados       | Por defecto  |
-|---------- |-------------- |---------- |--------------------------------  |-------- |
-| height | altura del pie de página | string | — | 60px |
+| Atributo | Descripción              | Tipo   | Valores aceptados | Por defecto |
+| -------- | ------------------------ | ------ | ----------------- | ----------- |
+| height   | altura del pie de página | string | —                 | 60px        |

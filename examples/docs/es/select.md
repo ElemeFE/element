@@ -690,7 +690,7 @@ Si el valor de encuadernación de Select es un objeto, asegúrese de asignar `va
 | reserve-keyword      | cuando `multiple` y `filter` es `true`, si se debe reservar la palabra clave actual después de seleccionar una opción. | boolean  | —                 | false            |
 | default-first-option | seleccione la primera opción de coincidencia en la tecla enter. Uso con `filterable` o `remote`. | boolean  | -                 | false            |
 
-### Select Eventos
+### Eventos Select
 | Nombre         | Descripción                              | Parametros                               |
 | -------------- | ---------------------------------------- | ---------------------------------------- |
 | change         | se dispara cuando el valor del select cambia | valor actual del select                  |

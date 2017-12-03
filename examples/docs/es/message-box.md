@@ -12,7 +12,7 @@
           }
         });
       },
-
+    
       open2() {
         this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
           confirmButtonText: 'OK',
@@ -34,7 +34,7 @@
           }, 200);
         });
       },
-
+    
       open3() {
         this.$prompt('Please input your email', 'Tips', {
           confirmButtonText: 'OK',
@@ -57,7 +57,7 @@
           }, 200);
         });
       },
-
+    
       open4() {
         const h = this.$createElement;
         this.$msgbox({
@@ -92,13 +92,13 @@
           }, 200);
         });
       },
-
+    
       open5() {
         this.$alert('<strong>This is <i>HTML</i> string</strong>', 'HTML String', {
           dangerouslyUseHTMLString: true
         });
       },
-
+    
       open6() {
         this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
           confirmButtonText: 'OK',
@@ -132,7 +132,7 @@ Por diseño los message box nos proveen de simulaciones de sistemas como los com
 
 Alert interrumpe las operaciones realizadas hasta que el usuario confirme la alerta.
 
-:::demo Desplegar una alerta utilizando el metodo `$alert`. Simula el sistema `alert`, y no puede ser cerrado al presionar la tecla ESC o al dar click fuera de la caja. En este ejemplo, dos parametros son recibidos `message` y `title`. Vale la pena mencionar que cuando la caja es cerrada, regresa un objeto `Promise` para su procesaimiento posteriormente. Si no estas seguro si el navegador soporta `Promise`, deberias importar una libreria de terceros de polyfill o utilizar callbacks.
+:::demo Desplegar una alerta utilizando el metodo `$alert`. Simula el sistema `alert`, y no puede ser cerrado al presionar la tecla ESC o al dar click fuera de la caja. En este ejemplo, dos parametros son recibidos `message` y `title`. Vale la pena mencionar que cuando la caja es cerrada, regresa un objeto `Promise` para su procesamiento posteriormente. Si no estas seguro si el navegador soporta `Promise`, deberias importar una libreria de terceros de polyfill o utilizar callbacks.
 
 ```html
 <template>
@@ -164,7 +164,7 @@ Alert interrumpe las operaciones realizadas hasta que el usuario confirme la ale
 Confirm es utilizado para preguntar al usuario y recibir una confirmacion.
 
 
-:::demo llamando al metodo `$confirm` para abrir el componente confirm, y simula el sistema `confirm`.Tambien podemos perzonalizar a gran medida el componente Message Box al mandar un tercer atributo llamado `options` que es literalmente un objeto . El atributo `type` indica el tipo de mensaje, y su valor puede ser `success`, `error`, `info` y `warning`. Se debe tener en cuenta que el segundo atributo `title` debe ser de tipo `string`, y si es de tipo `object`, sera manejado como el atributo `options`. Aqui utilizamos `Promise` para manejar posteriormente el proceso. 
+:::demo Llamando al metodo `$confirm` para abrir el componente confirm, y simula el sistema `confirm`. Tambien podemos personalizar a gran medida el componente Message Box al mandar un tercer atributo llamado `options` que es literalmente un objeto. El atributo `type` indica el tipo de mensaje, y su valor puede ser `success`, `error`, `info` y `warning`. Se debe tener en cuenta que el segundo atributo `title` debe ser de tipo `string`, y si es de tipo `object`, sera manejado como el atributo `options`. Aqui utilizamos `Promise` para manejar posteriormente el proceso. 
 
 ```html
 <template>
@@ -202,7 +202,7 @@ Confirm es utilizado para preguntar al usuario y recibir una confirmacion.
 
 Prompt es utilizado cuando se requiere entrada de informacion del usuario.
 
-:::demo LLamando al metodo `$prompt` desplegamos el componente prompt, y simula el sistema `prompt`.Puedes utilizar el parametro `inputPattern` para especificar tu propio patron RegExp. Utiliza el parametro `inputValidator` para especificar el metodo de validacion, y debería regresar un valor de tipo `Boolean` o `String`. Al regresar `false` o `String` significa que la validacion a fallado, y la cadena regresada se usara como `inputErrorMessage`.Ademas, puedes perzonalizar el atributo placeholder del input box con el parametro `inputPlaceholder`.
+:::demo Llamando al metodo `$prompt` desplegamos el componente prompt, y simula el sistema `prompt`.Puedes utilizar el parametro `inputPattern` para especificar tu propio patron RegExp. Utiliza el parametro `inputValidator` para especificar el metodo de validacion, y debería regresar un valor de tipo `Boolean` o `String`. Al regresar `false` o `String` significa que la validacion a fallado, y la cadena regresada se usara como `inputErrorMessage`. Ademas, puedes perzonalizar el atributo placeholder del input box con el parametro `inputPlaceholder`.
 
 ```html
 <template>
@@ -240,7 +240,7 @@ Prompt es utilizado cuando se requiere entrada de informacion del usuario.
 
 Puede ser personalizado para mostrar diversos contenidos.
 
-:::demo Los tres metodos mencionados anteriormente son un rempaquetado del metodo `$msgbox`. En este ejemplo se realiza una llamada al metodo `$msgbox` directamente utilizando el atributo `showCancelButton`, el cual es utilizado para indicar si el boton cancelar es mostrado en pantalla. Ademas podemos utilizar el atributo `cancelButtonClass` para agregar un estilo personalizado y el atributo `cancelButtonText` para personalizar el texto del boton (el boton de confirmacion tambien cuenta con estos campos, y podras encontrar una lista completa de estos atributos al final de esta documentacion). Este ejemplo tambien utiliza el atributo `beforeClose`.Es un metodo que es disparado cuando una instancia del componente MessageBox es cerrada, y su ejecucion detendra el cierre de la instancia. Tiene tres parametros: `action`, `instance` y `done`. Al utilizarla te permite maniluplar la instancia antes de que sea cerrada, e.g. activando `loading` para el boton de confirmacion; puedes invocar el metodo `done` para cerrar la instancia del componente MessageBox  (si el metodo `done` no es llamado dentro del atributo `beforeClose`, la instancia no podra cerrarse).
+:::demo Los tres metodos mencionados anteriormente son un rempaquetado del metodo `$msgbox`. En este ejemplo se realiza una llamada al metodo `$msgbox` directamente utilizando el atributo `showCancelButton`, el cual es utilizado para indicar si el boton cancelar es mostrado en pantalla. Ademas podemos utilizar el atributo `cancelButtonClass` para agregar un estilo personalizado y el atributo `cancelButtonText` para personalizar el texto del boton (el boton de confirmacion tambien cuenta con estos campos, y podra encontrar una lista completa de estos atributos al final de esta documentacion). Este ejemplo tambien utiliza el atributo `beforeClose`. Es un metodo que es disparado cuando una instancia del componente MessageBox es cerrada, y su ejecucion detendra el cierre de la instancia. Tiene tres parametros: `action`, `instance` y `done`. Al utilizarla te permite manipular la instancia antes de que sea cerrada, e.g. activando `loading` para el boton de confirmacion; puede invocar el metodo `done` para cerrar la instancia del componente MessageBox  (si el metodo `done` no es llamado dentro del atributo `beforeClose`, la instancia no podra cerrarse).
 
 ```html
 <template>
@@ -291,7 +291,7 @@ Puede ser personalizado para mostrar diversos contenidos.
 ### Utiliza cadenas HTML
 `message` soporta cadenas HTML.
 
-:::demo Establece el valor de `dangerouslyUseHTMLString` a true y `message` sera tratado como una cadena HTML.
+:::demo Establezca el valor de `dangerouslyUseHTMLString` a true y `message` sera tratado como una cadena HTML.
 
 ```html
 <template>
@@ -312,7 +312,7 @@ Puede ser personalizado para mostrar diversos contenidos.
 ```
 :::
 
-:::advertencia
+:::warning
 Aunque la propiedad `message` soporta cadenas HTML, realizar arbitrariamente render dinamico de HTML en nuestro sitio web puede ser muy peligroso ya que puede conducir facilmente a [XSS attacks](https://en.wikipedia.org/wiki/Cross-site_scripting). Entonces cuando `dangerouslyUseHTMLString` esta activada, asegurece que el contendio de `message` sea de confianza, y **nunca** asignar `message` a contenido generado por el usuario.
 :::
 
@@ -373,31 +373,31 @@ Los metodos correspondientes: `MessageBox`, `MessageBox.alert`, `MessageBox.conf
 
 ### Opciones
 
-| Atributo      | Descripción          | Tipo      | Valores Permitidos      | Default  |
-|---------- |-------------- |---------- |--------------------------------  |-------- |
-| title | titulo del componente MessageBox | string | — | — |
-| message | contenido del componente MessageBox | string | — | — |
-| dangerouslyUseHTMLString | utilizado para que `message` sea tratado como una cadena HTML | boolean | — | false |
-| type | tipo de mensaje , utilizado para mostrar el  icono | string | success / info / warning / error | — |
-| customClass | nombre de la clase personzalida para el componente MessageBox | string | — | — |
-| callback | MessageBox callback al cerrar si no deseas utilizar Promise | function(action), donde la accion puede ser 'confirm' o 'cancel', e `instance`  es la instancia del componente MessageBox. Puedes acceder a los metodos y atributos de esa instancia | — | — |
-| beforeClose | callback llamado antes de cerrar el componente MessageBox, y previene que el componente MessageBox se cierre | function(action, instance, done), donde `action` pueden ser 'confirm' o 'cancel'; `instance` es la instancia del componente MessageBox, Puedes acceder a los metodos y atributos de esa instancia; `done` es para cerrar la instancia | — | — |
-| lockScroll | utilizado para bloquear el desplazamiento del contenido del MessageBox prompts | boolean | — | true |
-| showCancelButton | utlizado para mostrar un boton cancelar | boolean | — | false (true cuando es llamado con confirm y prompt) |
-| showConfirmButton |utlizado para mostrar un boton confirmar | boolean | — | true |
-| cancelButtonText | contenido de texto del boton cancelar | string | — | Cancel |
-| confirmButtonText | contenido de texto del boton confirmar | string | — | OK |
-| cancelButtonClass | nombre de la clase personalizada del boton cancelar | string | — | — |
-| confirmButtonClass | nombre de la clase personalizada del boton confirmar | string | — | — |
-| closeOnClickModal | utilizado para que que el componenteMessageBox pueda ser cerrado al dar click en la mascara | boolean | — | true (false cuando es llamado con alert) |
-| closeOnPressEscape | utilizado para que que el componenteMessageBox pueda ser cerrado al presionar la tecla ESC | boolean | — | true (false cuando es llamado con alert) |
-| closeOnHashChange | utilizado para cerra el componente MessageBox cuando hash cambie | boolean | — | true |
-| showInput | utilizado para mostrar el componente input| boolean | — | false (true cuando es llamado con prompt) |
-| inputPlaceholder | placeholder para el componente input | string | — | — |
-| inputType | tipo del componente input | string | — | text |
-| inputValue | valor inicial del componente input | string | — | — |
-| inputPattern | regexp del componente input | regexp | — | — |
-| inputValidator | funcion de validacion del componente input. Debe regresar un valor de tipo boolean o string. Si regresa un valor tipo string, sera asignado a inputErrorMessage | function | — | — |
-| inputErrorMessage | mensaje de error cuando la validacion falla | string | — | Illegal input |
-| center | utilizado para alinear el contenido al centro | boolean | — | false |
-| roundButton | utilizado para redondear el boton | boolean | — | false |
+| Atributo                 | Descripción                              | Tipo                                     | Valores Permitidos               | Por defecto                              |
+| ------------------------ | ---------------------------------------- | ---------------------------------------- | -------------------------------- | ---------------------------------------- |
+| title                    | titulo del componente MessageBox         | string                                   | —                                | —                                        |
+| message                  | contenido del componente MessageBox      | string                                   | —                                | —                                        |
+| dangerouslyUseHTMLString | utilizado para que `message` sea tratado como una cadena HTML | boolean                                  | —                                | false                                    |
+| type                     | tipo de mensaje , utilizado para mostrar el  icono | string                                   | success / info / warning / error | —                                        |
+| customClass              | nombre de la clase personzalida para el componente MessageBox | string                                   | —                                | —                                        |
+| callback                 | MessageBox callback al cerrar si no desea utilizar Promise | function(action), donde la accion puede ser 'confirm' o 'cancel', e `instance`  es la instancia del componente MessageBox. Puedes acceder a los metodos y atributos de esa instancia | —                                | —                                        |
+| beforeClose              | callback llamado antes de cerrar el componente MessageBox, y previene que el componente MessageBox se cierre | function(action, instance, done), donde `action` pueden ser 'confirm' o 'cancel'; `instance` es la instancia del componente MessageBox, Puedes acceder a los metodos y atributos de esa instancia; `done` es para cerrar la instancia | —                                | —                                        |
+| lockScroll               | utilizado para bloquear el desplazamiento del contenido del MessageBox prompts | boolean                                  | —                                | true                                     |
+| showCancelButton         | utlizado para mostrar un boton cancelar  | boolean                                  | —                                | false (true cuando es llamado con confirm y prompt) |
+| showConfirmButton        | utlizado para mostrar un boton confirmar | boolean                                  | —                                | true                                     |
+| cancelButtonText         | contenido de texto del boton cancelar    | string                                   | —                                | Cancel                                   |
+| confirmButtonText        | contenido de texto del boton confirmar   | string                                   | —                                | OK                                       |
+| cancelButtonClass        | nombre de la clase personalizada del boton cancelar | string                                   | —                                | —                                        |
+| confirmButtonClass       | nombre de la clase personalizada del boton confirmar | string                                   | —                                | —                                        |
+| closeOnClickModal        | utilizado para que que el componenteMessageBox pueda ser cerrado al dar click en la mascara | boolean                                  | —                                | true (false cuando es llamado con alert) |
+| closeOnPressEscape       | utilizado para que que el componenteMessageBox pueda ser cerrado al presionar la tecla ESC | boolean                                  | —                                | true (false cuando es llamado con alert) |
+| closeOnHashChange        | utilizado para cerra el componente MessageBox cuando hash cambie | boolean                                  | —                                | true                                     |
+| showInput                | utilizado para mostrar el componente input | boolean                                  | —                                | false (true cuando es llamado con prompt) |
+| inputPlaceholder         | placeholder para el componente input     | string                                   | —                                | —                                        |
+| inputType                | tipo del componente input                | string                                   | —                                | text                                     |
+| inputValue               | valor inicial del componente input       | string                                   | —                                | —                                        |
+| inputPattern             | regexp del componente input              | regexp                                   | —                                | —                                        |
+| inputValidator           | funcion de validacion del componente input. Debe regresar un valor de tipo boolean o string. Si regresa un valor tipo string, sera asignado a inputErrorMessage | function                                 | —                                | —                                        |
+| inputErrorMessage        | mensaje de error cuando la validacion falla | string                                   | —                                | Illegal input                            |
+| center                   | utilizado para alinear el contenido al centro | boolean                                  | —                                | false                                    |
+| roundButton              | utilizado para redondear el boton        | boolean                                  | —                                | false                                    |

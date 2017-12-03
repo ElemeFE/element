@@ -73,15 +73,15 @@
   }
 </style>
 
-## Diálogo
+## Dialog
 
-Informar usuarios cuando preserva el estado de página corriente.
+Informar a usuarios preservando el estado de la página actual.
 
 ### Uso Básico
 
-Diálogo que se surge una caja de diálogo,y es bastante personalizable.
+Dialog abre una caja de diálogo, y es bastante personalizable.
 
-:::demo Establece el atributo con un `Boolean`, y Diálogo muestra cuando es `true`.El Diálogo tiene dos partes:`body` y `footer`, y el último exige un `slot`llamado `footer`.El atributo opcional `title` (vacío por defecto) es para definir un título.Finalmente,este ejemplo demostra cómo `before-close` es usado.
+:::demo Establezca el atributo `visible` con un booleano, y el Dialog se muestra cuando es `true`. El diálogo tiene dos partes: `body` y `footer`,  este último requiere un slot llamado `footer`. El atributo `title` es opcional (vacío por defecto) y sirve para definir un título. Por último, este ejemplo muestra cómo se utiliza `before-close`.
 
 
 ```html
@@ -122,13 +122,14 @@ Diálogo que se surge una caja de diálogo,y es bastante personalizable.
 
 :::tip
 
-`before-close` solamente funciona cuando usuarios se hacen clic el icono de cerrar o el fondo.Si tienes botones que cercan el Diálogo en el `footer` que se llamado slot,puedes añadir que harías con `before-close` en controlador del evento click de los botones.
+`before-close`  sólo funciona cuando el usuario hace clic en el icono de cerrar o en el fondo. Si tiene botones que cierran el cuadro de diálogo en el slot llamado `footer`, puede agregar lo que haría `before-close` en el manejador de eventos de los botones.
+
 :::
 
 ### Personalizaciones
 
 
-El contenido de Diálogo puede ser cualquier cosa,hasta una mesa o un formulario.Este ejemplo muestra cómo utilizar Mesa y Formulario de Element con Diálogo.
+El contenido del Diálogo puede ser cualquier cosa, incluso una tabla o un formulario. Este ejemplo muestra cómo usar Element Table y Form con Dialog
 
 :::demo
 
@@ -207,8 +208,9 @@ El contenido de Diálogo puede ser cualquier cosa,hasta una mesa o un formulario
 :::
 
 ### Diálogo anidado
-Si un cuadro de diálogo está anidado en otro cuadro de diálogo,`append-to-body` es requerido.
-:::demo Normalmente no recomendamos el uso de Diálogo anidado.Si necesitas varios cuadros de diálogo representados en la página,puedes aplastarlos simplemente así que serían hermanos el uno al otro.Si tienes que anidar un cuadro de diálogo dentro de otro cuadro de diálogo,establece `append-to-body` del diálogo anidado a verdadero,y se agregará al cuerpo en combio de su nodo padre,asi que ambos diálogos pueden ser renderizados correctamente.
+Si un diálogo está anidado en otro diálogo, se requiere append-to-body.
+
+:::demo Normalmente no recomendamos el uso de Dialog anidado. Si necesita que se muestren múltiples diálogos en la página, puede simplemente aplanarlos para que sean hermanos entre sí. Si debe anidar un Diálogo dentro de otro Diálogo, establezca `append-to-body` del Diálogo anidado como true, y lo añadirá al cuerpo en lugar de su nodo padre, para que ambos Diálogos puedan ser correctamente renderizados.
 
 ```html
 <template>
@@ -244,9 +246,9 @@ Si un cuadro de diálogo está anidado en otro cuadro de diálogo,`append-to-bod
 :::
 
 ### Contenido centrado
-el contenido de Diálogo se puede centrar.
+El contenido de Diálogo se puede centrar.
 
-:::demo establecer `center` en `true` se centrará el encabezado y el pie de página del cuadro de diálogo horizontalmente.
+:::demo Ajuste `center` en `true` para centrar el encabezado y el pie de página del cuadro de diálogo horizontalmente.
 
 ```html
 <el-button type="text" @click="centerDialogVisible = true">Click to open the Dialog</el-button>
@@ -276,35 +278,36 @@ el contenido de Diálogo se puede centrar.
 :::
 
 :::tip
-`center` afecta a cabezazos y pies de Diálogo.El cuerpo de Diálogo puede ser cualquier cosa,asi que a veces no puede verse bien cuando está centrado.Necesitas escribir algunos CSS si quieres centrar el cuerpo también.
+`center` sólo afecta al encabezado y pie de página de Dialog. El cuerpo de Dialog puede ser cualquier cosa, así que a veces no se ve bien cuando está centrado. Necesitas escribir algún CSS si deseas centrar el cuerpo también.
 :::
 
 :::tip
-Si el variable obligado a `visible` es manejado en el almacén Vuex,el `.sync` no puede funcionar correctamente.En este caso,quita el modificador `.sync` por favor,escucha a eventos `open` y `close` de Diálogo,y comete Vuex mutaciones para actualizar el valor de la variable en los controladores de eventos.
+
+Si la variable ligada a `visible` se gestiona en el Vuex store, el `.sync` no puede funcionar correctamente. En este caso, elimine el modificador `.sync`, escuche los eventos de `open` y `close` Dialog, y confirme las mutaciones Vuex para actualizar el valor de esa variable en los manejadores de eventos.
 
 :::
 
 ### Atributo
 
-| Atributo              | Descripción                              | Tipo                                     | Valores aceptados | Defecto |
-| --------------------- | ---------------------------------------- | ---------------------------------------- | ----------------- | ------- |
-| visible               | visibilidad del Diálogo, apoya el modificador .sync | boolean                                  | —                 | false   |
-| title                 | título de Diálogo. También se puede pasar con una ranura nombrada (ver la tabla siguiente) | string                                   | —                 | —       |
-| width                 | anchura de Diálogo                       | string                                   | —                 | 50%     |
-| fullscreen            | si el diálogo ocupa pantalla completa    | boolean                                  | —                 | false   |
-| top                   | valor de `margin-top` del Diálogo CSS    | string                                   | —                 | 15vh    |
-| modal                 | si se muestra una máscara                | boolean                                  | —                 | true    |
-| modal-append-to-body  | si adjuntar modal al elemento de cuerpo. Si es falso,el modal se agregará al elemento principal de Diálogo | boolean                                  | —                 | true    |
-| append-to-body        | Si adjuntar el cuadro de diálogo al cuerpo | boolean                                  | —                 | false   |
-| lock-scroll           | Si voluta de cuerpo está desactivado mientras se muestra el cuadro de diálogo | boolean                                  | —                 | true    |
-| custom-class          | nombres de clase personalizada para el Diálogo | string                                   | —                 | —       |
-| close-on-click-modal  | si el Diálogo puede ser cerrado por haciendo clic en la máscara | boolean                                  | —                 | true    |
-| close-on-press-escape | si el Diálogo puede ser cerrado por presionando ESC | boolean                                  | —                 | true    |
-| show-close            | si mostrar un botón de cerrar            | boolean                                  | —                 | true    |
-| before-close          | una devolución de llamada antes de que se cierre el cuadro de diálogo, y evitará el cuadro de diálogo de cerrar | función(done) `done`se usa para cerrar el diálog | —                 | —       |
-| center                | si alinear el encabezado y el pie de página en el centro | boolean                                  | —                 | false   |
+| Atributo              | Descripción                              | Tipo                                     | Valores aceptados | Por defecto |
+| --------------------- | ---------------------------------------- | ---------------------------------------- | ----------------- | ----------- |
+| visible               | visibilidad del Diálogo, apoya el modificador .sync | boolean                                  | —                 | false       |
+| title                 | título de Diálogo. También se puede pasar con un slot con nombre (ver la tabla siguiente) | string                                   | —                 | —           |
+| width                 | anchura de Diálogo                       | string                                   | —                 | 50%         |
+| fullscreen            | si el diálogo ocupa pantalla completa    | boolean                                  | —                 | false       |
+| top                   | valor de `margin-top` del Diálogo CSS    | string                                   | —                 | 15vh        |
+| modal                 | si se muestra una máscara                | boolean                                  | —                 | true        |
+| modal-append-to-body  | si adjuntar modal al elemento de cuerpo. Si es falso,el modal se agregará al elemento principal de Diálogo | boolean                                  | —                 | true        |
+| append-to-body        | Si adjuntar el cuadro de diálogo al cuerpo | boolean                                  | —                 | false       |
+| lock-scroll           | Si el scroll del cuerpo está desactivado mientras se muestra el cuadro de diálogo | boolean                                  | —                 | true        |
+| custom-class          | nombres de clase personalizada para el Diálogo | string                                   | —                 | —           |
+| close-on-click-modal  | si el Diálogo puede ser cerrado haciendo clic en la máscara | boolean                                  | —                 | true        |
+| close-on-press-escape | si el Diálogo puede ser cerrado presionando ESC | boolean                                  | —                 | true        |
+| show-close            | si mostrar un botón de cerrar            | boolean                                  | —                 | true        |
+| before-close          | una devolución de llamada antes de que se cierre el cuadro de diálogo, y evitar cerrar el cuadro de diálogo | función(done) `done`se usa para cerrar el diálog | —                 | —           |
+| center                | si alinear el encabezado y el pie de página en el centro | boolean                                  | —                 | false       |
 
-### Ranura
+### Slots
 
 | Nombre | Descripcíon                            |
 | ------ | -------------------------------------- |
@@ -313,7 +316,7 @@ Si el variable obligado a `visible` es manejado en el almacén Vuex,el `.sync` n
 | footer | contenido del pie de página de Diálogo |
 
 ### Eventos
-| Nombre de Eventos | Descripcíon                              | Parámetros |
-| ----------------- | ---------------------------------------- | ---------- |
-| open              | se activa cuando se abre el cuadro de Diálogo | —          |
-| close             | se dispara cuando el Diálogo se cierra   | —          |
+| Nombre de Evento | Descripcíon                              | Parámetros |
+| ---------------- | ---------------------------------------- | ---------- |
+| open             | se activa cuando se abre el cuadro de Diálogo | —          |
+| close            | se dispara cuando el Diálogo se cierra   | —          |

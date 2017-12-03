@@ -376,9 +376,7 @@ Cuando el espacio vertical es limitado y la forma es relativamente simple, puede
 
 Dependiendo de su diseño, hay varias maneras diferentes de alinear el elemento de la etiqueta.
 
-:::demo The `label-position` attribute decides how labels align, it can be `top` or `left`. When set to `top`, labels will be placed at the top of the form field.
-
-El atributo `label-position` decide cómo se alinean las etiquetas, puede estar `top` o `left`. Cuando se establece en `top`, las etiquetas se colocarán en la parte superior del campo de formulario.
+:::demo El atributo `label-position` decide cómo se alinean las etiquetas, puede estar `top` o `left`. Cuando se establece en `top`, las etiquetas se colocarán en la parte superior del campo de formulario.
 
 ```html
 <el-radio-group v-model="labelPosition" size="small">

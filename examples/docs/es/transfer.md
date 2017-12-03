@@ -61,7 +61,7 @@
         }
       };
     },
-
+    
     methods: {
       handleChange(value, direction, movedKeys) {
         console.log(value, direction, movedKeys);
@@ -73,7 +73,7 @@
 ## Transfer
 
 ### Uso básico
-:::demo Los datos se pasan a Transfer a través del atributo `data`. Los datos tienen que ser un array de objetos, y cada objeto debe tener estos atributos: `key` que será el identificador del item, `label` que será el texto a mostrar, y `disabled` que indicará si el elemento esta desactivado. Los items dentro de la lista destino están sincronizados con la variable asociada a `v-model`, y el valor de esa variable es un array de claves de los elementos de la lista destino. Así que si no quieres que la lista destino esté vacía inicialmente puedes inicializar el `v-model` con un array.
+:::demo Los datos se pasan a Transfer a través del atributo `data`. Los datos tienen que ser un array de objetos, y cada objeto debe tener estos atributos: `key` que será el identificador del item, `label` que será el texto a mostrar, y `disabled` que indicará si el elemento esta desactivado. Los items dentro de la lista destino están sincronizados con la variable asociada a `v-model`, y el valor de esa variable es un array de claves de los elementos de la lista destino. Así que si no quiere que la lista destino esté vacía inicialmente puede inicializar el `v-model` con un array.
 ```html
 <template>
   <el-transfer
@@ -108,9 +108,9 @@
 
 ### Filtrar
 
-Puedes buscar y filtrar los items.
+Puede buscar y filtrar los items.
 
-::demo Pon el atributo `filterable` a true para permitir el filtrado.Por defecto si el `label` del item contiene el término buscado será incluido en el resultado. También puedes implementar tu propio método de filtrado con el atributo `filter-method`, que recibe un método y le pasa la búsqueda y cada item. Los items para los que devuelva true serán incluidos en el resultado de la búsqueda.
+::demo Ponga el atributo `filterable` a true para permitir el filtrado.Por defecto si el `label` del item contiene el término buscado será incluido en el resultado. También puede implementar su propio método de filtrado con el atributo `filter-method`, que recibe un método y le pasa la búsqueda y cada item. Los items para los que devuelva true serán incluidos en el resultado de la búsqueda.
 ```html
 <template>
   <el-transfer
@@ -151,11 +151,11 @@ Puedes buscar y filtrar los items.
 ```
 :::
 
-### Customizable
+### Personalizable
 
-Puedes customizar los títulos, botones, la función de renderizado de los items, el texto de status de la cabecera y el contenido del pie.
+Puede personalizar los títulos, botones, la función de renderizado de los items, el texto de status de la cabecera y el contenido del pie.
 
-:::demo Usa `titles`, `button-texts`, `render-content` y `format` respectivamente para customizar los títulos de las listas, el texto de los botones, la función de renderizado para los items y el texto de la cabecera que muestra el estado de los items. Para el pie de la lista hay dos slots: `left-footer` y `right-footer`. Además, si quieres algunos items marcados inicialmente pudes usar `left-default-checked` y `right-default-checked`. Finalmente este ejemplo muestra el evento `change`. Ten en cuenta que este ejemplo no se puede ejecutar en jsfiddle porque no soporta sintaxis JSX. En un proyecto real `render-content` funcionará si las dependencias son configuradas correctamente.
+:::demo Use `titles`, `button-texts`, `render-content` y `format` respectivamente para personalizar los títulos de las listas, el texto de los botones, la función de renderizado para los items y el texto de la cabecera que muestra el estado de los items. Para el pie de la lista hay dos slots: `left-footer` y `right-footer`. Además, si quiere algunos items marcados inicialmente puede usar `left-default-checked` y `right-default-checked`. Finalmente este ejemplo muestra el evento `change`. Tenga en cuenta que este ejemplo no se puede ejecutar en jsfiddle porque no soporta sintaxis JSX. En un proyecto real `render-content` funcionará si las dependencias son configuradas correctamente.
 ```html
 <template>
   <el-transfer
@@ -217,11 +217,11 @@ Puedes customizar los títulos, botones, la función de renderizado de los items
 ```
 :::
 
-### Prop aliases
+### Prop con alias
 
-Por defecto Transfer busca los atributos `key`, `label`, y `disabled` en cada elemento. Si tus datos tienen un nombre diferente para la clave puedes usar el atributo `props` para añadir alias.
+Por defecto Transfer busca los atributos `key`, `label`, y `disabled` en cada elemento. Si sus datos tienen un nombre diferente para la clave puede usar el atributo `props` para añadir alias.
 
-:::demo En este ejemplo los elementos no tienen `key`y `label`, en vez de eso tienen `value` y `desc`. Así que tienes que añadir alias para `key` y `label`.
+:::demo En este ejemplo los elementos no tienen `key`y `label`, en vez de eso tienen `value` y `desc`. Así que tiene que añadir alias para `key` y `label`.
 ```html
 <template>
   <el-transfer
@@ -259,28 +259,28 @@ Por defecto Transfer busca los atributos `key`, `label`, y `disabled` en cada el
 :::
 
 ### Atributos
-| Atriburo | Descripcion | Tipo  | Valores aceptados | Por defecto |
-|---------- |-------- |---------- |-------------  |-------- |
-| data | Origen de datos | array[{ key, label, disabled }] | — | [ ] |
-| filterable | Si se puede filtrar | boolean | — | false |
-| filter-placeholder | Placeholder para el input del filtro| string | — | Enter keyword |
-| filter-method | Método de filtrado | function | — | — |
-| titles | Títulos de las listas | array | — | ['List 1', 'List 2'] |
-| button-texts | Texto de los botones | array | — | [ ] |
-| render-content | Función de renderizado | function(h, option) | — | — |
-| format | Texto para el status en el header| object{noChecked, hasChecked} | — | { noChecked: '${checked}/${total}', hasChecked: '${checked}/${total}' } |
-| props | prop alias para el origen de datos | object{key, label, disabled} | — | — |
-| left-default-checked | Array de claves de los elementos marcados inicialmente en la lista de la izquierda | array | — | [ ] |
-| right-default-checked | Array de claves de los elementos marcados inicialmente en la lista de la derecha | array | — | [ ] |
+| Atriburo              | Descripcion                              | Tipo                            | Valores aceptados | Por defecto                              |
+| --------------------- | ---------------------------------------- | ------------------------------- | ----------------- | ---------------------------------------- |
+| data                  | Origen de datos                          | array[{ key, label, disabled }] | —                 | [ ]                                      |
+| filterable            | Si se puede filtrar                      | boolean                         | —                 | false                                    |
+| filter-placeholder    | Placeholder para el input del filtro     | string                          | —                 | Enter keyword                            |
+| filter-method         | Método de filtrado                       | function                        | —                 | —                                        |
+| titles                | Títulos de las listas                    | array                           | —                 | ['List 1', 'List 2']                     |
+| button-texts          | Texto de los botones                     | array                           | —                 | [ ]                                      |
+| render-content        | Función de renderizado                   | function(h, option)             | —                 | —                                        |
+| format                | Texto para el status en el header        | object{noChecked, hasChecked}   | —                 | { noChecked: '${checked}/${total}', hasChecked: '${checked}/${total}' } |
+| props                 | prop alias para el origen de datos       | object{key, label, disabled}    | —                 | —                                        |
+| left-default-checked  | Array de claves de los elementos marcados inicialmente en la lista de la izquierda | array                           | —                 | [ ]                                      |
+| right-default-checked | Array de claves de los elementos marcados inicialmente en la lista de la derecha | array                           | —                 | [ ]                                      |
 
 ### Slot
-| Nombre | Descripcion |
-|------|--------|
-| left-footer | Contenido del footer de la lista de la izquierda |
+| Nombre       | Descripcion                              |
+| ------------ | ---------------------------------------- |
+| left-footer  | Contenido del footer de la lista de la izquierda |
 | right-footer | Contenido del footer de la lista de la derecha |
 
 ### Eventos
-| Nombre | Descripcion | Parametros |
-|---------- |-------- |---------- |
+| Nombre | Descripcion                              | Parametros                               |
+| ------ | ---------------------------------------- | ---------------------------------------- |
 | change | se lanzá cuando los elementos cambian en la lista de la derecha | array con las claves de los elementos de la lista de la derecha |
 

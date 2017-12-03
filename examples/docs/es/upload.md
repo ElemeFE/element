@@ -17,7 +17,7 @@
         cursor: pointer;
         position: relative;
         overflow: hidden;
-
+    
         &:hover, &:focus {
           border-color: #409EFF;
         }
@@ -102,7 +102,7 @@
       beforeAvatarUpload(file) {
         const isJPG = file.type === 'image/jpeg';
         const isLt2M = file.size / 1024 / 1024 < 2;
-
+    
         if (!isJPG) {
           this.$message.error('Avatar picture must be JPG format!');
         }
@@ -126,7 +126,7 @@ Carga archivos haciendo clic o arrastrándolos.
 
 ### Clic para cargar archivos
 
-:::demo Personaliza el tipo y texto del botón utilizando la propiedad `slot`. Define las propiedades `limit` y `on-exceed` para limitar el número máximo de archivos a subir y especifica un método para cuando el límite ha sido excedido.
+:::demo Personalice el tipo y texto del botón utilizando la propiedad `slot`. Defina las propiedades `limit` y `on-exceed` para limitar el número máximo de archivos a subir y especifique un método para cuando el límite ha sido excedido.
 ```html
 <el-upload
   class="upload-demo"
@@ -165,7 +165,7 @@ Carga archivos haciendo clic o arrastrándolos.
 
 ### Cargar avatar de usuario
 
-Utiliza el _hook_ `before-upload` para limitar el formato de archivo y su tamaño.
+Utilice el _hook_ `before-upload` para limitar el formato de archivo y su tamaño.
 
 ::: demo
 ```html
@@ -236,7 +236,7 @@ Utiliza el _hook_ `before-upload` para limitar el formato de archivo y su tamañ
 
 ### Pared de fotografías
 
-Utiliza la propiedad `list-type` para cambiar el estilo a un listado de archivos.
+Utilice la propiedad `list-type` para cambiar el estilo a un listado de archivos.
 
 ::: demo
 ```html
@@ -308,7 +308,7 @@ Utiliza la propiedad `list-type` para cambiar el estilo a un listado de archivos
 
 ### Control de lista de archivos
 
-Utiliza el _hook_ `on-change` para controlar la funcionalidad de la lista de archivos subidos.
+Utilice el _hook_ `on-change` para controlar la funcionalidad de la lista de archivos subidos.
 
 ::: demo
 ```html
@@ -347,7 +347,7 @@ Utiliza el _hook_ `on-change` para controlar la funcionalidad de la lista de arc
 
 ### Arrastrar para cargar archivo
 
-Puedes arrastrar el archivo dentro de un área en especifico para cargar el archivo.
+Puede arrastrar el archivo dentro de un área en especifico para cargar el archivo.
 
 ::: demo
 ```html
@@ -392,35 +392,35 @@ Puedes arrastrar el archivo dentro de un área en especifico para cargar el arch
 :::
 
 ### Atributos
-Atributo      | Descripción          | Tipo      | Valores aceptados       | Por defecto
-----| ----| ----| ----| ----
-action | obligatorio, URL de la petición | string | — | —
-headers | cabeceras de la petición | object | — | —
-multiple | especifica si se permite subir múltiples archivos | boolean | — | —
-data | opciones adicionales de la petición | object | — | —
-name | nombre clave del archivo | string | — | file
-with-credentials | especifica si enviará cookies | boolean | — |false
-show-file-list | especifica si se debe mostrar la lista de archivos cargados | boolean | — | true
- drag | se especifica si se activará el modo arrastrar y soltar | boolean | — | false
-accept | acepta [tipos de archvios](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept), puede no funcionar cuando `thumbnail-mode` esta en `true` | string | — | —
-on-preview | _hook_ lanzado al hacer clic en los archivos subidos | function(file) | — | —
-on-remove | _hook_ lanzado cuando los archivos son eliminados | function(file, fileList) | — | —
-on-success | _hook_ lanzado cuando los archivos fueron cargados correctamente | function(response, file, fileList) | — | —
-on-error | _hook_ lanzado cuando han ocurrido algunos errores | function(err, file, fileList) | — | —
-on-progress | _hook_ lanzado cuando se produce algún progreso | function(event, file, fileList) | — | — |
-on-change | _hook_ lanzado cuando el archivo seleccionado se carga correctamente o falla | function(file, fileList) | — | — |
-before-upload | _hook_ lanzado antes de que el archivo sea cargado. Si este devuelve `true` o `Promise` entonces será rechazado, la carga puede ser cancelada | function(file) | — | —
-thumbnail-mode | especifica si se mostrará la miniatura | boolean | — | false
-file-list | archivos cargados por defecto, por ejemplo,  [{name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg'}] | array | — | []
-list-type | tipo de lista de archivos | string | text/picture/picture-card | text |
-auto-upload | se especifica si se autocargan archivos | boolean | — | true |
-http-request | sobreescribe el comportamiento por defecto de xhr, permitiendo implementar tu propia petición de carga de archivos | function | — | — |
-disabled | especifica si se deshabilita la carga de archivos | boolean | — | false |
-limit | número máximo de cargas permitidas | number | — | — |
-on-exceed | _hook_ lanzado cuando el límite ha sido excedido | function(files, fileList) | — | - |
+| Atributo         | Descripción                              | Tipo                               | Valores aceptados         | Por defecto |
+| ---------------- | ---------------------------------------- | ---------------------------------- | ------------------------- | ----------- |
+| action           | obligatorio, URL de la petición          | string                             | —                         | —           |
+| headers          | cabeceras de la petición                 | object                             | —                         | —           |
+| multiple         | especifica si se permite subir múltiples archivos | boolean                            | —                         | —           |
+| data             | opciones adicionales de la petición      | object                             | —                         | —           |
+| name             | nombre clave del archivo                 | string                             | —                         | file        |
+| with-credentials | especifica si enviará cookies            | boolean                            | —                         | false       |
+| show-file-list   | especifica si se debe mostrar la lista de archivos cargados | boolean                            | —                         | true        |
+| drag             | se especifica si se activará el modo arrastrar y soltar | boolean                            | —                         | false       |
+| accept           | acepta [tipos de archivos](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept), puede no funcionar cuando `thumbnail-mode` esta en `true` | string                             | —                         | —           |
+| on-preview       | _hook_ lanzado al hacer clic en los archivos subidos | function(file)                     | —                         | —           |
+| on-remove        | _hook_ lanzado cuando los archivos son eliminados | function(file, fileList)           | —                         | —           |
+| on-success       | _hook_ lanzado cuando los archivos fueron cargados correctamente | function(response, file, fileList) | —                         | —           |
+| on-error         | _hook_ lanzado cuando han ocurrido algunos errores | function(err, file, fileList)      | —                         | —           |
+| on-progress      | _hook_ lanzado cuando se produce algún progreso | function(event, file, fileList)    | —                         | —           |
+| on-change        | _hook_ lanzado cuando el archivo seleccionado se carga correctamente o falla | function(file, fileList)           | —                         | —           |
+| before-upload    | _hook_ lanzado antes de que el archivo sea cargado. Si este devuelve `true` o `Promise` entonces será rechazado, la carga puede ser cancelada | function(file)                     | —                         | —           |
+| thumbnail-mode   | especifica si se mostrará la miniatura   | boolean                            | —                         | false       |
+| file-list        | archivos cargados por defecto, por ejemplo,  [{name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg'}] | array                              | —                         | []          |
+| list-type        | tipo de lista de archivos                | string                             | text/picture/picture-card | text        |
+| auto-upload      | se especifica si se autocargan archivos  | boolean                            | —                         | true        |
+| http-request     | sobreescribe el comportamiento por defecto de xhr, permitiendo implementar tu propia petición de carga de archivos | function                           | —                         | —           |
+| disabled         | especifica si se deshabilita la carga de archivos | boolean                            | —                         | false       |
+| limit            | número máximo de cargas permitidas       | number                             | —                         | —           |
+| on-exceed        | _hook_ lanzado cuando el límite ha sido excedido | function(files, fileList)          | —                         | -           |
 
 ### Métodos
-| Nombre del método | Descripción | Parametros |
-|---------- |-------- |---------- |
-| clearFiles | limpia la lista de archivos cargados (este método no esta soportado en el _hook_ `before-upload`) | — |
-| abort | cancela la petición de carga | （ file: fileList's item ） |
+| Nombre del método | Descripción                              | Parametros                |
+| ----------------- | ---------------------------------------- | ------------------------- |
+| clearFiles        | limpia la lista de archivos cargados (este método no esta soportado en el _hook_ `before-upload`) | —                         |
+| abort             | cancela la petición de carga             | （ file: fileList's item ） |

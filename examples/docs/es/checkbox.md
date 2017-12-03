@@ -197,7 +197,7 @@ Las propiedades `min` y `max` pueden limitar la cantidad de elementos selecciona
 
 Checkbox con estilo tipo Botón.
 
-:::demo Sólo debes cambiar el elemento `el-checkbox` por el elemento `el-checkbox-button`. También proveemos el atributo `size`.
+:::demo Sólo debe cambiar el elemento `el-checkbox` por el elemento `el-checkbox-button`. También proveemos el atributo `size`.
 ```html
 <template>
   <div>
@@ -284,44 +284,44 @@ Checkbox con estilo tipo Botón.
 :::
 
 ### Atributos de Checkbox
-| Atributo      | Descripción         | Tipo    | Opciones                         | Por defecto|
-|---------- |-------- |---------- |-------------  |-------- |
-| label     | valor del Checkbox si es usado dentro de un tag `checkbox-group`   | string / number / boolean   |       —        |     —    |
-| true-label | valor del Checkbox si está marcado   | string / number    |       —        |     —    |
-| false-label | valor del Checkbox si no está marcado   | string / number    |      —         |     —    |
-| disabled  | especifica si el Checkbox está deshabilitado   | boolean   |  — | false   |
-| border  | especifica si agrega un borde alrededor del Checkbox  | boolean   | — | false   |
-| size  | tamaño del Checkbox, sólo funciona si `border` es true  | string  | medium / small / mini | — |
-| name | atributo 'name' nativo | string    |      —         |     —    |
-| checked  | especifica si el Checkbox está marcado   | boolean   |  — | false   |
-| indeterminate  | similar a `indeterminate` en el checkbox nativo | boolean   |  — | false   |
+| Atributo      | Descripción                              | Tipo                      | Valores aceptados     | Por defecto |
+| ------------- | ---------------------------------------- | ------------------------- | --------------------- | ----------- |
+| label         | valor del Checkbox si es usado dentro de un tag `checkbox-group` | string / number / boolean | —                     | —           |
+| true-label    | valor del Checkbox si está marcado       | string / number           | —                     | —           |
+| false-label   | valor del Checkbox si no está marcado    | string / number           | —                     | —           |
+| disabled      | especifica si el Checkbox está deshabilitado | boolean                   | —                     | false       |
+| border        | especifica si agrega un borde alrededor del Checkbox | boolean                   | —                     | false       |
+| size          | tamaño del Checkbox, sólo funciona si `border` es true | string                    | medium / small / mini | —           |
+| name          | atributo 'name' nativo                   | string                    | —                     | —           |
+| checked       | especifica si el Checkbox está marcado   | boolean                   | —                     | false       |
+| indeterminate | similar a `indeterminate` en el checkbox nativo | boolean                   | —                     | false       |
 
 ### Eventos de Checkbox
-| Nombre | Descripción | Parametros |
-|---------- |-------- |---------- |
-| change  | se ejecuta cuando el valor enlazado cambia | el valor actualizado |
+| Nombre | Descripción                              | Parametros           |
+| ------ | ---------------------------------------- | -------------------- |
+| change | se ejecuta cuando el valor enlazado cambia | el valor actualizado |
 
 ### Atributos de Checkbox-group
-| Atributo      | Descripción         | Tipo    | Opciones                         | Por Defecto|
-|---------- |-------- |---------- |-------------  |-------- |
-|size | tamaño de los checkboxes de tipo botón o los checkboxes con border | string | medium / small / mini | — |
-| disabled  | especifica si los checkboxes anidados están deshabilitados | boolean   | — | false   |
-| min     | cantidad mínima de checkboxes que deben ser marcados   | number    |       —        |     —    |
-| max     | cantidad máxima de checkboxes que pueden ser marcados   | number    |       —        |     —    |
-|text-color | color de fuente cuando el botón está activo | string   | — | #ffffff   |
-|fill  | color de border y de fondo cuando el botón está activo | string   | — | #409EFF   |
+| Atributo   | Descripción                              | Tipo    | Valores aceptados     | Por Defecto |
+| ---------- | ---------------------------------------- | ------- | --------------------- | ----------- |
+| size       | tamaño de los checkboxes de tipo botón o los checkboxes con border | string  | medium / small / mini | —           |
+| disabled   | especifica si los checkboxes anidados están deshabilitados | boolean | —                     | false       |
+| min        | cantidad mínima de checkboxes que deben ser marcados | number  | —                     | —           |
+| max        | cantidad máxima de checkboxes que pueden ser marcados | number  | —                     | —           |
+| text-color | color de fuente cuando el botón está activo | string  | —                     | #ffffff     |
+| fill       | color de border y de fondo cuando el botón está activo | string  | —                     | #409EFF     |
 
 ### Eventos de Checkbox-group
-| Nombre de Evento | Descripción | Parametros |
-|---------- |-------- |---------- |
-| change  | se ejecuta cuando el valor enlazado cambia | el valor actualizado |
+| Nombre de Evento | Descripción                              | Parametros           |
+| ---------------- | ---------------------------------------- | -------------------- |
+| change           | se ejecuta cuando el valor enlazado cambia | el valor actualizado |
 
 ### Atributos de Checkbox-button
-| Atributo      | Descripción         | Tipo    | Opciones                         | Por defecto|
-|---------- |-------- |---------- |-------------  |-------- |
-| label     | valor del checkbox cuando es usado dentro de un `checkbox-group` | string / number / boolean  |       —        |     —    |
-| true-label | valor del checkbox si este está marcado | string / number | — |     —    |
-| false-label | valor del checkbox si este no está marcado | string / number    |      —         |     —    |
-| disabled  | especifica si el checkbox está deshabilitado | boolean   |  — | false   |
-| name | atributo 'name' del checbox nativo | string    |      —         |     —    |
-| checked  | si el checkbox está marcado | boolean   |  — | false   |
+| Atributo    | Descripción                              | Tipo                      | Valores aceptados | Por defecto |
+| ----------- | ---------------------------------------- | ------------------------- | ----------------- | ----------- |
+| label       | valor del checkbox cuando es usado dentro de un `checkbox-group` | string / number / boolean | —                 | —           |
+| true-label  | valor del checkbox si este está marcado  | string / number           | —                 | —           |
+| false-label | valor del checkbox si este no está marcado | string / number           | —                 | —           |
+| disabled    | especifica si el checkbox está deshabilitado | boolean                   | —                 | false       |
+| name        | atributo 'name' del checbox nativo       | string                    | —                 | —           |
+| checked     | si el checkbox está marcado              | boolean                   | —                 | false       |

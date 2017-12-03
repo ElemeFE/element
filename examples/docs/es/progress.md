@@ -37,23 +37,23 @@ En este caso el porcentage no toma espacio adicional.
 
 ### Barra de progreso circular
 
-:::**Demo** Puedes asignar el atributo `type` como `circle` para usar la barra circular de progreso, y usar el atributo `width` para cambiar el tamanho del círculo.
+:::**Demo** Puede asignar el atributo `type` como `circle` para usar la barra circular de progreso, y usar el atributo `width` para cambiar el tamaño del círculo.
 ```html
 <el-progress type="circle" :percentage="0"></el-progress>
 <el-progress type="circle" :percentage="25"></el-progress>
 <el-progress type="circle" :percentage="100" status="success"></el-progress>
 <el-progress type="circle" :percentage="50" status="exception"></el-progress>
-``` 
+```
 :::
 
-### Attributes
-| Atributo      | Descripción          | Tipo      | Valores aceptado       | Valores por defecto  |
-| --- | ---- | ---- | ---- | ---- |
-| **percentage** | porcenteage, **requerido** | number | 0-100 | 0 |
-| type | tipo de barra de progreso | string | line/circle | line |
-| stroke-width | ancho de la barra de progreso | number | — | 6 |
-| text-inside | mostrar el porcentage dentro de la barra de progreso, solo funciona cuando `type` es 'line' | boolean | — | false |
-| status | estado actual de la barra de progreso | string | success/exception | — |
-| width | ancho del canvas que contiene la barra de progreso circula | number | — | 126 |
-| show-text | mostrar porcentage | boolean | — | true |
+### Atributos
+| Atributo     | Descripción                              | Tipo    | Valores aceptado  | Por defecto |
+| ------------ | ---------------------------------------- | ------- | ----------------- | ----------- |
+| percentage   | porcentaje, requerido                    | number  | 0-100             | 0           |
+| type         | tipo de barra de progreso                | string  | line/circle       | line        |
+| stroke-width | ancho de la barra de progreso            | number  | —                 | 6           |
+| text-inside  | mostrar el porcentaje dentro de la barra de progreso, solo funciona cuando `type` es 'line' | boolean | —                 | false       |
+| status       | estado actual de la barra de progreso    | string  | success/exception | —           |
+| width        | ancho del canvas que contiene la barra de progreso circula | number  | —                 | 126         |
+| show-text    | mostrar porcentaje                       | boolean | —                 | true        |
 
