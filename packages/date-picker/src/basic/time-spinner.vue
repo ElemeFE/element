@@ -15,7 +15,9 @@
           v-for="(disabled, hour) in hoursList"
           track-by="hour"
           class="el-time-spinner__item"
-          :class="{ 'active': hour === hours, 'disabled': disabled }">{{ ('0' + (amPmMode ? (hour % 12 || 12) : hour )).slice(-2) }}{{amPm(hour)}}</li>
+          :class="{ 'active': hour === hours, 'disabled': disabled }">
+          {{ hour === undefined ? '' : ('0' + (amPmMode ? (hour % 12 || 12) : hour )).slice(-2) }}{{amPm(hour)}}
+        </li>
       </el-scrollbar>
       <el-scrollbar
         @mouseenter.native="emitSelectRange('minutes')"
@@ -60,7 +62,7 @@
             class="el-time-spinner__item"
             :class="{ 'active': hour === hours, 'disabled': hoursList[hour] }"
             v-for="hour in arrowHourList">
-            {{ ('0' + (amPmMode ? (hour % 12 || 12) : hour )).slice(-2) }}{{amPm(hour)}}
+            {{ hour === undefined ? '' : ('0' + (amPmMode ? (hour % 12 || 12) : hour )).slice(-2) }}{{amPm(hour)}}
           </li>
         </ul>
       </div>
