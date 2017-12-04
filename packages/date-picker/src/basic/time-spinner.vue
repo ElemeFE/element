@@ -282,8 +282,7 @@
         let shouldShowAmPm = this.amPmMode.toLowerCase() === 'a';
         if (!shouldShowAmPm) return '';
         let isCapital = this.amPmMode === 'A';
-        let content = ' ';
-        if (shouldShowAmPm) content = content.concat((hour < 12) ? 'am' : 'pm');
+        let content = (hour < 12) ? ' am' : ' pm';
         if (isCapital) content = content.toUpperCase();
         return content;
       }
