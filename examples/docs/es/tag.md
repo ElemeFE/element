@@ -18,14 +18,14 @@
       handleClose(tag) {
         this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
       },
-
+    
       showInput() {
         this.inputVisible = true;
         this.$nextTick(_ => {
           this.$refs.saveTagInput.$refs.input.focus();
         });
       },
-
+    
       handleInputConfirm() {
         let inputValue = this.inputValue;
         if (inputValue) {
@@ -59,11 +59,11 @@
 
 ## Tag
 
-Used for marking and selection.
+Se utiliza para marcar y seleccionar.
 
-### Basic usage
+### Uso básico
 
-::: demo Use the `type` attribute to define Tag's type. In addition, the `color` attribute can be used to set the background color of the Tag.
+::: demo Utilice el atributo `type` para definir el tipo de etiqueta. Además, el atributo `color` se puede utilizar para establecer el color de fondo de la etiqueta.
 
 ```html
 <el-tag>Tag One</el-tag>
@@ -74,9 +74,9 @@ Used for marking and selection.
 ```
 :::
 
-### Removable Tag
+### Etiqueta removible
 
-:::demo `closable` attribute can be used to define a removable tag. It accepts a `Boolean`. By default the removal of Tag has a fading animation. If you don't want to use it, you can set the `disable-transitions` attribute, which accepts a `Boolean`, to `true`. `close` event triggers when Tag is removed.
+:::demo el atributo `closable` puede usarse para definir una etiqueta removible. Acepta un `Boolean`. De forma predeterminada, la eliminación de la etiqueta tiene una animación que se desvanece. Si no quiere usarlo, puede configurar el atributo `disable-transitions` , que acepta `Boolean`, como `true`. Se dispara el evento `close` cuando la etiqueta es removida. 
 
 ```html
 <el-tag
@@ -105,9 +105,9 @@ Used for marking and selection.
 ```
 :::
 
-### Edit Dynamically
+### Editar dinámicamente
 
-You can use the `close` event to add and remove tag dynamically.
+Puede utilizar el evento `close` para añadir y eliminar etiquetas dinámicamente.
 
 :::demo
 ```html
@@ -184,11 +184,11 @@ You can use the `close` event to add and remove tag dynamically.
 ```
 :::
 
-### Sizes
+### Tamaños
 
-Besides default size, Tag component provides three additional sizes for you to choose among different scenarios.
+Además del tamaño predeterminado, el componente Tag proporciona tres tamaños adicionales para que pueda elegir entre diferentes escenarios.
 
-:::demo Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
+:::demo Utilice el atributo `size` para establecer tamaños adicionales con `medium`, `small` o `mini`.
 
 ```html
 <el-tag>Default</el-tag>
@@ -198,18 +198,18 @@ Besides default size, Tag component provides three additional sizes for you to c
 ```
 :::
 
-### Attributes
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
-|---------- |-------------- |---------- |--------------------------------  |-------- |
-| type | theme | string | success/info/warning/danger | — |
-| closable | whether Tag can be removed | boolean | — | false |
-| disable-transitions | whether to disable animations | boolean | — | false |
-| hit | whether Tag has a highlighted border | boolean | — | false |
-| color | background color of the Tag | string | — | — |
-| size | tag size | string | medium / small / mini | — |
+### Atributos
+| Atributo            | Descripción                         | Tipo    | Valores aceptados           | Por defecto |
+| ------------------- | ----------------------------------- | ------- | --------------------------- | ----------- |
+| type                | tema                                | string  | success/info/warning/danger | —           |
+| closable            | si el Tag puede ser removido        | boolean | —                           | false       |
+| disable-transitions | si se deshabilitan las animaciones  | boolean | —                           | false       |
+| hit                 | si el  Tag tiene un borde resaltado | boolean | —                           | false       |
+| color               | color de fondo del Tag              | string  | —                           | —           |
+| size                | tamaño del Tag                      | string  | medium / small / mini       | —           |
 
 
-### Events
-| Event Name | Description | Parameters |
-|---------- |-------- |---------- |
-| close | triggers when Tag is removed | — |
+### Eventos
+| Nombre | Descripción                          | Parametros |
+| ------ | ------------------------------------ | ---------- |
+| close  | se disoara cuando el Tag es removido | —          |
