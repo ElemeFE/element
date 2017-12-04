@@ -74,7 +74,7 @@
       limitReached() {
         if (this.select.multiple) {
           return !this.itemSelected &&
-            this.select.value.length >= this.select.multipleLimit &&
+            (this.select.value || []).length >= this.select.multipleLimit &&
             this.select.multipleLimit > 0;
         } else {
           return false;
