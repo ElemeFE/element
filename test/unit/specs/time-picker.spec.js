@@ -26,6 +26,30 @@ describe('TimePicker', () => {
     expect(vm.$el.querySelector('input').value).to.equal('18-40-00');
   });
 
+  it('set AM/PM format', done => {
+    vm = createTest(TimePicker, {
+      format: 'hh:mm:ss A',
+      value: new Date(2016, 9, 10, 18, 40)
+    }, true);
+
+    const input = vm.$el.querySelector('input');
+
+    expect(vm.$el.querySelector('input').value).to.equal('06:40:00 PM');
+
+    input.blur();
+    input.focus();
+
+    setTimeout(_ => {
+      const list = vm.picker.$el.querySelectorAll('.el-time-spinner__list');
+      const hoursEl = list[0];
+      expect(hoursEl.querySelectorAll('.el-time-spinner__item')[0].textContent).to.equal('12 AM');
+      expect(hoursEl.querySelectorAll('.el-time-spinner__item')[1].textContent).to.equal('01 AM');
+      expect(hoursEl.querySelectorAll('.el-time-spinner__item')[12].textContent).to.equal('12 PM');
+      expect(hoursEl.querySelectorAll('.el-time-spinner__item')[15].textContent).to.equal('03 PM');
+      done();
+    }, DELAY);
+  });
+
   it('default value', done => {
     vm = createTest(TimePicker, {
       value: new Date(2016, 9, 10, 18, 40)
