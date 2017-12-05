@@ -34,7 +34,6 @@ describe('Dropdown', () => {
       triggerEvent(triggerElm, 'mouseleave');
       setTimeout(_ => {
         expect(dropdown.visible).to.not.true;
-        destroyVM(vm);
         done();
       }, 300);
     }, 400);
@@ -75,7 +74,6 @@ describe('Dropdown', () => {
       setTimeout(_ => {
         expect(dropdown.visible).to.not.true;
         expect(callback.calledWith(myCommandObject)).to.be.true;
-        destroyVM(vm);
         done();
       }, 300);
     }, 300);
@@ -108,7 +106,6 @@ describe('Dropdown', () => {
       triggerElm.click();
       dropdown.$nextTick(_ => {
         expect(dropdown.visible).to.be.true;
-        destroyVM(vm);
         done();
       });
     });
@@ -148,11 +145,10 @@ describe('Dropdown', () => {
       triggerEvent(triggerElm, 'mouseleave');
       setTimeout(_ => {
         expect(dropdown.visible).to.not.true;
-        destroyVM(vm);
         done();
       }, 300);
     }, 300);
-  }).timeout(3000);
+  });
   it('hide on click', done => {
     vm = createVue({
       template: `

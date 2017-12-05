@@ -1,0 +1,13 @@
+@import "mixins/mixins";
+
+@include b(container) {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  box-sizing: border-box;
+  min-width: 0;
+
+  @include when(vertical) {
+    flex-direction: column;
+  }
+}

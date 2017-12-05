@@ -1,7 +1,9 @@
 import Pager from './pager.vue';
 import ElSelect from 'element-ui/packages/select';
 import ElOption from 'element-ui/packages/option';
+import ElInput from 'element-ui/packages/input';
 import Locale from 'element-ui/src/mixins/locale';
+import { valueEquals } from 'element-ui/src/utils/util';
 
 export default {
   name: 'ElPagination',
@@ -32,7 +34,15 @@ export default {
       default() {
         return [10, 20, 30, 40, 50, 100];
       }
-    }
+    },
+
+    popperClass: String,
+
+    prevText: String,
+
+    nextText: String,
+
+    background: Boolean
   },
 
   data() {
@@ -43,7 +53,10 @@ export default {
   },
 
   render(h) {
-    let template = <div class='el-pagination'></div>;
+    let template = <div class={['el-pagination', {
+      'is-background': this.background,
+      'el-pagination--small': this.small
+    }] }></div>;
     const layout = this.layout || '';
     if (!layout) return;
     const TEMPLATE_MAP = {
@@ -58,10 +71,6 @@ export default {
     const components = layout.split(',').map((item) => item.trim());
     const rightWrapper = <div class="el-pagination__rightwrapper"></div>;
     let haveRightWrapper = false;
-
-    if (this.small) {
-      template.data.class += ' el-pagination--small';
-    }
 
     components.forEach(compo => {
       if (compo === '->') {
@@ -100,7 +109,11 @@ export default {
             type="button"
             class={['btn-prev', { disabled: this.$parent.internalCurrentPage <= 1 }]}
             on-click={ this.$parent.prev }>
-            <i class="el-icon el-icon-arrow-left"></i>
+            {
+              this.$parent.prevText
+                ? <span>{ this.$parent.prevText }</span>
+                : <i class="el-icon el-icon-arrow-left"></i>
+            }
           </button>
         );
       }
@@ -116,7 +129,11 @@ export default {
               { disabled: this.$parent.internalCurrentPage === this.$parent.internalPageCount || this.$parent.internalPageCount === 0 }
             ]}
             on-click={ this.$parent.next }>
-            <i class="el-icon el-icon-arrow-right"></i>
+            {
+              this.$parent.nextText
+                ? <span>{ this.$parent.nextText }</span>
+                : <i class="el-icon el-icon-arrow-right"></i>
+            }
           </button>
         );
       }
@@ -132,9 +149,10 @@ export default {
       watch: {
         pageSizes: {
           immediate: true,
-          handler(value) {
-            if (Array.isArray(value)) {
-              this.$parent.internalPageSize = value.indexOf(this.$parent.pageSize) > -1
+          handler(newVal, oldVal) {
+            if (valueEquals(newVal, oldVal)) return;
+            if (Array.isArray(newVal)) {
+              this.$parent.internalPageSize = newVal.indexOf(this.$parent.pageSize) > -1
                 ? this.$parent.pageSize
                 : this.pageSizes[0];
             }
@@ -147,12 +165,13 @@ export default {
           <span class="el-pagination__sizes">
             <el-select
               value={ this.$parent.internalPageSize }
+              popperClass={ `${this.$parent.popperClass || ''} is-arrow-fixed` }
               on-input={ this.handleChange }>
               {
                 this.pageSizes.map(item =>
                   <el-option
                     value={ item }
-                    label={ item + ' ' + this.t('el.pagination.pagesize') }>
+                    label={ item + this.t('el.pagination.pagesize') }>
                   </el-option>
                 )
               }
@@ -185,28 +204,34 @@ export default {
         };
       },
 
+      components: { ElInput },
+
       methods: {
         handleFocus(event) {
           this.oldValue = event.target.value;
         },
         handleBlur({ target }) {
-          this.reassignMaxValue(target);
+          this.resetValueIfNeed(target.value);
+          this.reassignMaxValue(target.value);
         },
-        handleKeyUp(event) {
-          const key = event.key || '';
-          const keyCode = event.keyCode || '';
-          if ((key && key === 'Enter') || (keyCode && keyCode === 13)) {
-            this.reassignMaxValue(event.target);
-            this.handleChange({ target: event.target });
+        handleChange(value) {
+          this.$parent.internalCurrentPage = this.$parent.getValidCurrentPage(value);
+          this.oldValue = null;
+          this.resetValueIfNeed(value);
+        },
+        resetValueIfNeed(value) {
+          const num = parseInt(value, 10);
+          if (!isNaN(num)) {
+            if (num < 1) {
+              this.$refs.input.$el.querySelector('input').value = 1;
+            } else {
+              this.reassignMaxValue(value);
+            }
           }
         },
-        handleChange({ target }) {
-          this.$parent.internalCurrentPage = this.$parent.getValidCurrentPage(target.value);
-          this.oldValue = null;
-        },
-        reassignMaxValue(target) {
-          if (+target.value > this.$parent.internalPageCount) {
-            target.value = this.$parent.internalPageCount;
+        reassignMaxValue(value) {
+          if (+value > this.$parent.internalPageCount) {
+            this.$refs.input.$el.querySelector('input').value = this.$parent.internalPageCount;
           }
         }
       },
@@ -215,18 +240,17 @@ export default {
         return (
           <span class="el-pagination__jump">
             { this.t('el.pagination.goto') }
-            <input
-              class="el-pagination__editor"
-              type="number"
+            <el-input
+              class="el-pagination__editor is-in-pagination"
               min={ 1 }
               max={ this.$parent.internalPageCount }
               value={ this.$parent.internalCurrentPage }
-              domProps-value={ this.$parent.internalCurrentPage }
-              on-change={ this.handleChange }
-              on-focus={ this.handleFocus }
-              on-blur={ this.handleBlur }
-              on-keyup={ this.handleKeyUp }
-              number/>
+              domPropsValue={ this.$parent.internalCurrentPage }
+              type="number"
+              ref="input"
+              onChange={ this.handleChange }
+              onFocus={ this.handleFocus }
+              onBlur={ this.handleBlur }/>
             { this.t('el.pagination.pageClassifier') }
           </span>
         );

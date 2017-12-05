@@ -16,6 +16,10 @@ export default {
       startTime: 'Čas Začátku',
       endDate: 'Datum Konce',
       endTime: 'Čas Konce',
+      prevYear: 'Previous Year', // to be translated
+      nextYear: 'Next Year', // to be translated
+      prevMonth: 'Previous Month', // to be translated
+      nextMonth: 'Next Month', // to be translated
       day: 'Den',
       week: 'Týden',
       month: 'Měsíc',
@@ -80,6 +84,7 @@ export default {
       error: 'Neplatný vstup'
     },
     upload: {
+      deleteTip: 'press delete to remove', // to be translated
       delete: 'Vymazat',
       preview: 'Náhled',
       continue: 'Pokračovat'
