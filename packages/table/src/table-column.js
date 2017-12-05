@@ -111,7 +111,8 @@ const DEFAULT_RENDER_CELL = function(h, { row, column }) {
   if (column && column.formatter) {
     return column.formatter(row, column, value);
   }
-  return value;
+
+  return value || column.emptyText || '';
 };
 
 export default {
@@ -158,6 +159,7 @@ export default {
       type: Boolean,
       default: true
     },
+    emptyText: String,
     index: [Number, Function]
   },
 
@@ -250,6 +252,7 @@ export default {
       filterOpened: false,
       filteredValue: this.filteredValue || [],
       filterPlacement: this.filterPlacement || '',
+      emptyText: this.emptyText,
       index: this.index
     });
 

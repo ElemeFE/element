@@ -73,6 +73,10 @@
     display: block;
   }
 
+  & .el-icon-loading {
+    z-index: 100;
+  }
+
   @include e(input) {
     border: none;
     outline: none;

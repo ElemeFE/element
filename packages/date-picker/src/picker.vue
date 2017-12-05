@@ -19,15 +19,11 @@
     @mouseleave.native="showClose = false"
     @change.native="handleChange"
     :validateEvent="false"
-    @mouseenter.native="handleMouseEnterIcon"
-    @mouseleave.native="showClose = false"
     :prefix-icon="triggerClass"
     ref="reference">
     <i slot="suffix"
       class="el-input__icon"
       @click="handleClickIcon"
-      @mouseenter="handleMouseEnterIcon"
-      @mouseleave="showClose = false"
       :class="{ 'el-icon-circle-close': showClose }"
       v-if="haveTrigger">
     </i>
