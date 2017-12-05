@@ -33,7 +33,7 @@ export default {
       month10: 'Қазан',
       month11: 'Қараша',
       month12: 'Желтоқсан',
-       week: 'Апта',
+      week: 'Апта',
       weeks: {
         sun: 'Жек',
         mon: 'Дүй',
