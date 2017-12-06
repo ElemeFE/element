@@ -38,7 +38,10 @@
                 :time-arrow-control="arrowControl"
                 @pick="handleTimePick"
                 :visible="timePickerVisible"
-                @mounted="proxyTimePickerDataProperties">
+                @mounted="proxyTimePickerDataProperties"
+                :start="start"
+                :end="end"
+                :step="step">
               </time-picker>
             </span>
           </div>
@@ -454,6 +457,9 @@
         currentView: 'date',
         disabledDate: '',
         firstDayOfWeek: 7,
+        start: '09:00',
+        end: '18:00',
+        step: '00:30',
         showWeekNumber: false,
         timePickerVisible: false,
         format: '',
