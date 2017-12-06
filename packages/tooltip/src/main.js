@@ -1,5 +1,6 @@
 import Popper from 'element-ui/src/utils/vue-popper';
 import debounce from 'throttle-debounce/debounce';
+import { addClass, removeClass } from 'element-ui/src/utils/dom';
 import { getFirstComponentChild } from 'element-ui/src/utils/vdom';
 import { generateId } from 'element-ui/src/utils/util';
 import Vue from 'vue';
@@ -122,9 +123,9 @@ export default {
   watch: {
     focusing(val) {
       if (val) {
-        this.referenceElm.className += ' focusing';
+        addClass(this.referenceElm, 'focusing');
       } else {
-        this.referenceElm.className = this.referenceElm.className.replace('focusing', '');
+        removeClass(this.referenceElm, 'focusing');
       }
     }
   },
