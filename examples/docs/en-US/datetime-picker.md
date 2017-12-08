@@ -247,13 +247,13 @@ DateTimePicker is derived from DatePicker and TimePicker. For a more detailed ex
 | end-placeholder | placeholder for the end date in range mode | string | — | — |
 | time-arrow-control | whether to pick time using arrow buttons | boolean | — | false |
 | type | type of the picker | string | year/month/date/datetime/ week/datetimerange/daterange | date |
-| format | format of the displayed value in the input box | string | year `yyyy` month `MM` day `dd`, hour `HH`, minute `mm`, second `ss` | yyyy-MM-dd |
+| format | format of the displayed value in the input box | string | year `yyyy` month `MM` day `dd`, hour `HH`, minute `mm`, second `ss`, AM/PM `A` | yyyy-MM-dd |
 | align | alignment | left/center/right | left |
 | popper-class | custom class name for DateTimePicker's dropdown | string | — | — |
 | picker-options | additional options, check the table below | object | — | {} |
 | range-separator | range separator | string | - | '-' |
 | default-value | optional, default date of the calendar | Date | anything accepted by `new Date()` | — |
-| value-format | optional, format of binding value. If not specified, the binding value will be a Date object | string | year `yyyy`, month `MM`, day `dd`, hour `HH`, minute `mm`, second `ss` | — |
+| value-format | optional, format of binding value. If not specified, the binding value will be a Date object | string | year `yyyy`, month `MM`, day `dd`, hour `HH`, minute `mm`, second `ss`, AM/PM `A` | — |
 | name | same as `name` in native input | string | — | — |
 | unlink-panels | unllink two date-panels in range-picker | boolean | — | false |
 
