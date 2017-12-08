@@ -81,7 +81,7 @@ describe('Dropdown', () => {
   it('trigger', done => {
     vm = createVue({
       template: `
-        <el-dropdown trigger="click" ref="dropdown" >
+        <el-dropdown trigger="click" ref="dropdown">
           <span class="el-dropdown-link">
             下拉菜单trigger click<i class="el-icon-caret-bottom el-icon-right"></i>
           </span>
@@ -100,7 +100,7 @@ describe('Dropdown', () => {
     let triggerElm = dropdownElm.children[0];
 
     triggerEvent(triggerElm, 'mouseenter');
-    setTimeout(_ => {
+    dropdown.$nextTick(_ => {
       expect(dropdown.visible).to.not.true;
       triggerElm.click();
       setTimeout(_ => {
