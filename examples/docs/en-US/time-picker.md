@@ -183,13 +183,13 @@ Can pick an arbitrary time range.
 | end-placeholder | placeholder for the end time in range mode | string | — | — |
 | is-range | whether to pick a time range, only works with `<el-time-picker>` | boolean | — | false |
 | arrow-control | whether to pick time using arrow buttons, only works with `<el-time-picker>` | boolean | — | false |
-| value | value of the picker | Date for Time Picker, and string for Time Select | hour `HH`, minute `mm`, second `ss` | HH:mm:ss |
+| value | value of the picker | Date for Time Picker, and string for Time Select | - | - |
 | align | alignment | left / center / right | left |
 | popper-class | custom class name for TimePicker's dropdown | string | — | — |
 | picker-options | additional options, check the table below | object | — | {} |
 | range-separator | range separator | string | - | '-' |
 | default-value | optional, default date of the calendar | Date for TimePicker, string for TimeSelect | anything accepted by `new Date()` for TimePicker, selectable value for TimeSelect | — |
-| value-format | optional, only for TimePicker, format of bounded value | string | hour `HH`, minute `mm`, second `ss` | — |
+| value-format | optional, only for TimePicker, format of bounded value | string | hour `HH`, minute `mm`, second `ss`, AM/PM `A` | — |
 | name | same as `name` in native input | string | — | — |
 
 ### Time Select Options
@@ -205,7 +205,7 @@ Can pick an arbitrary time range.
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | selectableRange | available time range, e.g.`'18:30:00 - 20:30:00'`or`['09:30:00 - 12:00:00', '14:30:00 - 18:30:00']` | string / array | — | — |
-| format | format of the picker | string | hour `HH`, minute `mm`, second `ss` | HH:mm:ss |
+| format | format of the picker | string | hour `HH`, minute `mm`, second `ss`, AM/PM `A` | HH:mm:ss |
 
 
 ### Events

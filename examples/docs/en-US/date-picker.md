@@ -388,13 +388,13 @@ This feature is at alpha stage. Feedback welcome.
 | start-placeholder | placeholder for the start date in range mode | string | — | — |
 | end-placeholder | placeholder for the end date in range mode | string | — | — |
 | type | type of the picker | string | year/month/date/datetime/ week/datetimerange/daterange | date |
-| format | format of the displayed value in the input box | string | year `yyyy`, month `MM`, day `dd`, hour `HH`, minute `mm`, second `ss` | yyyy-MM-dd |
+| format | format of the displayed value in the input box | string | year `yyyy`, month `MM`, day `dd`, hour `HH`, minute `mm`, second `ss`, AM/PM `A` | yyyy-MM-dd |
 | align | alignment | left/center/right | left |
 | popper-class | custom class name for DatePicker's dropdown | string | — | — |
 | picker-options | additional options, check the table below | object | — | {} |
 | range-separator | range separator | string | — | '-' |
 | default-value | optional, default date of the calendar | Date | anything accepted by `new Date()` | — |
-| value-format | optional, format of binding value. If not specified, the binding value will be a Date object | string | year `yyyy`, month `MM`, day `dd`, hour `HH`, minute `mm`, second `ss` | — |
+| value-format | optional, format of binding value. If not specified, the binding value will be a Date object | string | year `yyyy`, month `MM`, day `dd`, hour `HH`, minute `mm`, second `ss`, AM/PM `A` | — |
 | name | same as `name` in native input | string | — | — |
 | unlink-panels | unlink two date-panels in range-picker | boolean | — | false |
 

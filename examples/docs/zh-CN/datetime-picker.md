@@ -246,13 +246,13 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
 | end-placeholder | 范围选择时结束日期的占位内容 | string | — | — |
 | time-arrow-control | 是否使用箭头进行时间选择 | boolean | — | false |
 | type | 显示类型 | string | year/month/date/week/ datetime/datetimerange/daterange | date |
-| format | 显示在输入框中的格式 | string | 年 `yyyy`，月 `MM`，日 `dd`，小时 `HH`，分 `mm`，秒 `ss` | yyyy-MM-dd |
+| format | 显示在输入框中的格式 | string | 年 `yyyy`，月 `MM`，日 `dd`，小时 `HH`，分 `mm`，秒 `ss`，AM/PM `A` | yyyy-MM-dd |
 | align | 对齐方式 | string | left, center, right | left |
 | popper-class | DateTimePicker 下拉框的类名 | string | — | — |
 | picker-options | 当前时间日期选择器特有的选项参考下表 | object |  — | {} |
 | range-separator | 选择范围时的分隔符 | string | - | '-' |
 | default-value | 可选，选择器打开时默认显示的时间 | Date | 可被`new Date()`解析 | — |
-| value-format | 可选，绑定值的格式。不指定则绑定值为 Date 对象 | string | 年 `yyyy`，月 `MM`，日 `dd`，小时 `HH`，分 `mm`，秒 `ss` | — |
+| value-format | 可选，绑定值的格式。不指定则绑定值为 Date 对象 | string | 年 `yyyy`，月 `MM`，日 `dd`，小时 `HH`，分 `mm`，秒 `ss`，AM/PM `A` | — |
 | name | 原生属性 | string | — | — |
 | unlink-panels | 在范围选择器里取消两个日期面板之间的联动 | boolean | — | false |
 
