@@ -128,7 +128,11 @@
       },
       handleClick() {
         if (this.triggerElm.disabled) return;
-        this.visible = !this.visible;
+        if (this.visible) {
+          this.hide();
+        } else {
+          this.show();
+        }
       },
       handleTriggerKeyDown(ev) {
         const keyCode = ev.keyCode;
