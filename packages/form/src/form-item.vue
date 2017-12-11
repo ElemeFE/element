@@ -226,7 +226,7 @@
         var selfRules = this.rules;
         var requiredRule = this.required !== undefined ? { required: !!this.required } : [];
 
-        formRules = formRules ? formRules[this.prop] : [];
+        formRules = formRules ? getPropByPath(formRules, this.prop || '').v : [];
 
         return [].concat(selfRules || formRules || []).concat(requiredRule);
       },
@@ -250,6 +250,7 @@
       }
     },
     mounted() {
+      console.log(11, this.prop);
       if (this.prop) {
         this.dispatch('ElForm', 'el.form.addField', [this]);
 
