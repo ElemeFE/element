@@ -89,14 +89,6 @@
     }
   }
 
-  @include e(multiple-text) {
-    margin-left: 15px;
-    color: $--input-color;
-    font-size: $--font-size-base;
-    display: inline;
-    @include utils-ellipsis;
-  }
-
   @include e(close) {
     cursor: pointer;
     position: absolute;
