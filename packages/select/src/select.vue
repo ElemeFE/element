@@ -9,9 +9,8 @@
       @click.stop="toggleMenu"
       ref="tags"
       :style="{ 'max-width': inputWidth - 32 + 'px' }">
-      <transition-group  v-if="collapseTags && selected.length">
+      <div v-if="collapseTags && selected.length">
         <el-tag
-          :key="getValueKey(selected[0])"
           :closable="!disabled"
           size="small"
           :hit="selected[0].hitState"
@@ -21,15 +20,14 @@
           <span class="el-select__tags-text">{{ selected[0].currentLabel }}</span>
         </el-tag>
         <el-tag
-          v-show="selected.length > 1"
-          key="el__select__collapse"
+          v-if="selected.length > 1"
           :closable="false"
           size="small"
           type="info"
-        >
+          disable-transitions>
           <span class="el-select__tags-text">+ {{ selected.length - 1 }}</span>
         </el-tag>
-      </transition-group>
+      </div>
       <transition-group @after-leave="resetInputHeight" v-if="!collapseTags">
         <el-tag
           v-for="item in selected"
