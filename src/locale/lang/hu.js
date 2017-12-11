@@ -99,7 +99,7 @@ export default {
     transfer: {
       noMatch: 'Nincs találat',
       noData: 'Nincs adat',
-      titles: ['Lista 1', 'Lista 2'], 
+      titles: ['Lista 1', 'Lista 2'],
       filterPlaceholder: 'Kulcsszó',
       noCheckedFormat: '{total} elem',
       hasCheckedFormat: '{checked}/{total} kiválasztva'
