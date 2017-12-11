@@ -38,7 +38,8 @@
     },
     watch: {
       rules() {
-        this.validate();
+        //传一个空的callback，动态创建验证信息时控制台抛出异常：Uncaught (in promise)
+        this.validate(function(){});
       }
     },
     data() {
