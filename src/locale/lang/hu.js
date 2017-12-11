@@ -33,7 +33,6 @@ export default {
       month10: 'Október',
       month11: 'November',
       month12: 'December',
-      // week: 'week',
       weeks: {
         sun: 'Vas',
         mon: 'Hét',
@@ -100,10 +99,10 @@ export default {
     transfer: {
       noMatch: 'Nincs találat',
       noData: 'Nincs adat',
-      titles: ['Lista 1', 'Lista 2'], // to be translated
-      filterPlaceholder: 'Kulcsszó', // to be translated
-      noCheckedFormat: '{total} elem', // to be translated
-      hasCheckedFormat: '{checked}/{total} kiválasztva' // to be translated
+      titles: ['Lista 1', 'Lista 2'], 
+      filterPlaceholder: 'Kulcsszó',
+      noCheckedFormat: '{total} elem',
+      hasCheckedFormat: '{checked}/{total} kiválasztva'
     }
   }
 };
