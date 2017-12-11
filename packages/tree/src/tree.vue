@@ -194,10 +194,12 @@
           checkedItem[0].setAttribute('tabindex', 0);
           return;
         }
-        this.treeItems[0].setAttribute('tabindex', 0);
+        this.treeItems[0] && this.treeItems[0].setAttribute('tabindex', 0);
       },
       handelKeydown(ev) {
         const currentItem = ev.target;
+        if (currentItem.className.indexOf('el-tree-node') === -1) return;
+        ev.preventDefault();
         const keyCode = ev.keyCode;
         this.treeItems = this.$el.querySelectorAll('.is-focusable[role=treeitem]');
         const currentIndex = this.treeItemArray.indexOf(currentItem);
@@ -218,8 +220,6 @@
           if (hasInput) {
             hasInput.click();
           }
-          ev.stopPropagation();
-          ev.preventDefault();
         }
       }
     },

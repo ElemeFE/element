@@ -102,12 +102,11 @@ describe('Dropdown', () => {
     triggerEvent(triggerElm, 'mouseenter');
     dropdown.$nextTick(_ => {
       expect(dropdown.visible).to.not.true;
-
       triggerElm.click();
-      dropdown.$nextTick(_ => {
+      setTimeout(_ => {
         expect(dropdown.visible).to.be.true;
         done();
-      });
+      }, 300);
     });
   });
   it('split button', done => {

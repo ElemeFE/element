@@ -128,7 +128,11 @@
       },
       handleClick() {
         if (this.triggerElm.disabled) return;
-        this.visible = !this.visible;
+        if (this.visible) {
+          this.hide();
+        } else {
+          this.show();
+        }
       },
       handleTriggerKeyDown(ev) {
         const keyCode = ev.keyCode;
@@ -194,7 +198,7 @@
         if (!this.splitButton) { // 自定义
           this.triggerElm.setAttribute('role', 'button');
           this.triggerElm.setAttribute('tabindex', '0');
-          this.triggerElm.className += ' el-dropdown-selfdefine'; // 控制
+          this.triggerElm.setAttribute('class', this.triggerElm.getAttribute('class') + ' el-dropdown-selfdefine'); // 控制
         }
       },
       initEvent() {

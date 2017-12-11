@@ -46,7 +46,7 @@
       <template v-if="showAllLevels">
         <template v-for="(label, index) in currentLabels">
           {{ label }}
-          <span v-if="index < currentLabels.length - 1"> / </span>
+          <span v-if="index < currentLabels.length - 1"> {{ separator }} </span>
         </template>
       </template>
       <template v-else>
@@ -122,6 +122,10 @@ export default {
       default() {
         return [];
       }
+    },
+    separator: {
+      type: String,
+      default: '/'
     },
     placeholder: {
       type: String,

@@ -11,7 +11,7 @@
       <slot></slot>
       <i class="el-tag__close el-icon-close"
         v-if="closable"
-        @click="handleClose"></i>
+        @click.stop="handleClose"></i>
     </span>
   </transition>
 </template>

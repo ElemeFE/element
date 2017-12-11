@@ -1,5 +1,33 @@
 ## 更新日志
 
+### 2.0.7
+
+*2017-11-29*
+
+- 修复禁用文字按钮的样式问题，#8570
+
+### 2.0.6
+
+*2017-11-29*
+
+- 修复 Table 排序图标的样式问题，#8405
+- 修复 `trigger` 为 manual 的 Popover 的触发问题，#8467
+- 新增 Autocomplete 的 `prefix-icon` 和 `suffix-icon` 属性，#8446（by @liyanlong）
+- 新增 Cascader 的 `separator` 属性，#8501
+- 新增 Input 的 `clearable` 属性，#8509（by @lbogdan）
+- 新增 Pagination 的 `background` 属性，#8553
+
+### 2.0.5
+
+*2017-11-17*
+
+- 修复上个版本引入的 Popover、Tree、Breadcrumb、Cascader 的 bug，#8188 #8217 #8283
+- 修复 clickoutside 指令的内存泄露问题，#8168 #8225（by @badpunman @STLighter）
+- 修复默认尺寸的多选 Select 在清空选项后输入框高度不随之更新的问题，#8317（by @luciy）
+- 新增 Select 的 `collapse-tags` 属性，用于在多选时以文字代替 Tag，避免组件高度的增大，#8190
+- 修复被隐藏的 Table 会造成 CPU 占用持续增加的问题，#8351
+- 开放 Table 的 `doLayout` 方法，用于重新计算 Table 的布局，#8351
+
 ### 2.0.4
 
 *2017-11-10*

@@ -25,8 +25,8 @@ $--color-primary-light-7: mix($--color-white, $--color-primary, 70%) !default; /
 $--color-primary-light-8: mix($--color-white, $--color-primary, 80%) !default; /* d9ecff */
 $--color-primary-light-9: mix($--color-white, $--color-primary, 90%) !default; /* ecf5ff */
 
-$--color-success: #67c23a !default;
-$--color-warning: #eb9e05 !default;
+$--color-success: #5cb87a !default;
+$--color-warning: #e6a23c !default;
 $--color-danger: #fa5555 !default;
 $--color-info: #878d99 !default;
 
@@ -329,6 +329,7 @@ $--input-placeholder-color: $--color-text-placeholder !default;
 $--input-max-width: 314px !default;
 
 $--input-hover-border: $--border-color-hover !default;
+$--input-clear-hover-color: $--color-text-secondary !default;
 
 $--input-focus-border: $--color-primary !default;
 $--input-focus-fill: $--color-white !default;

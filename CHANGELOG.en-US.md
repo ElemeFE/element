@@ -1,5 +1,33 @@
 ## Changelog
 
+### 2.0.7
+
+*2017-11-29*
+
+- Fixed disabled text button style, #8570
+
+### 2.0.6
+
+*2017-11-29*
+
+- Fixed style bug of Table's sorting icons, #8405
+- Fixed trigger mechanism for Popover when its `trigger` is manual, #8467
+- Added `prefix-icon` and `suffix-icon` attributes for Autocomplete, #8446 (by @liyanlong)
+- Added `separator` attribute for Cascader, #8501
+- Added `clearable` attribute for Input, #8509 (by @lbogdan)
+- Added `background` attribute for Pagination, #8553
+
+### 2.0.5
+
+*2017-11-17*
+
+- Fixed Popover, Tree, Breadcrumb and Cascader regression in 2.0.4, #8188 #8217 #8283
+- Fixed memory leak of clickoutside directive, #8168 #8225 (by @badpunman @STLighter)
+- Fixed multiple Select height when its value is cleared, #8317 (by @luciy)
+- Added `collapse-tags` attribute for multiple Select to replace tags with one line of text, #8190
+- Fixed high CPU consumption caused by hidden Table, #8351
+- Now you can use `doLayout` method of Table to update its layout, #8351
+
 ### 2.0.4
 
 *2017-11-10*

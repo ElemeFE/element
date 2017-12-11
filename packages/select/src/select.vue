@@ -11,6 +11,7 @@
       :style="{ 'max-width': inputWidth - 32 + 'px' }">
       <span
         class="el-select__multiple-text"
+        v-show="multipleText"
         v-if="collapseTags">
         {{ multipleText }}
       </span>
@@ -65,8 +66,8 @@
       @blur="handleBlur"
       @mousedown.native="handleMouseDown"
       @keyup.native="debouncedOnInputChange"
-      @keydown.native.down.prevent="navigateOptions('next')"
-      @keydown.native.up.prevent="navigateOptions('prev')"
+      @keydown.native.down.stop.prevent="navigateOptions('next')"
+      @keydown.native.up.stop.prevent="navigateOptions('prev')"
       @keydown.native.enter.prevent="selectOption"
       @keydown.native.esc.stop.prevent="visible = false"
       @keydown.native.tab="visible = false"
@@ -89,6 +90,7 @@
           tag="ul"
           wrap-class="el-select-dropdown__wrap"
           view-class="el-select-dropdown__list"
+          ref="scrollbar"
           :class="{ 'is-empty': !allowCreate && query && filteredOptionsCount === 0 }"
           v-show="options.length > 0 && !loading">
           <el-option
@@ -375,7 +377,8 @@
         });
         this.hoverIndex = -1;
         if (this.multiple && this.filterable) {
-          this.inputLength = this.$refs.input.value.length * 15 + 20;
+          const length = this.$refs.input.value.length * 15 + 20;
+          this.inputLength = this.collapseTags ? Math.min(50, length) : length;
           this.managePlaceholder();
           this.resetInputHeight();
         }
@@ -415,6 +418,7 @@
           const menu = this.$refs.popper.$el.querySelector('.el-select-dropdown__wrap');
           scrollIntoView(menu, target);
         }
+        this.$refs.scrollbar && this.$refs.scrollbar.handleScroll();
       },
 
       handleMenuEnter() {
@@ -556,7 +560,7 @@
           let input = [].filter.call(inputChildNodes, item => item.tagName === 'INPUT')[0];
           const tags = this.$refs.tags;
           input.style.height = this.selected.length === 0
-            ? sizeMap[this.selectSize] + 'px'
+            ? (sizeMap[this.selectSize] || 40) + 'px'
             : Math.max(tags ? (tags.clientHeight + 10) : 0, sizeMap[this.selectSize] || 40) + 'px';
           if (this.visible && this.emptyText !== false) {
             this.broadcast('ElSelectDropdown', 'updatePopper');
