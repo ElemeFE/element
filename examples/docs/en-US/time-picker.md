@@ -212,5 +212,5 @@ Can pick an arbitrary time range.
 | Event Name | Description | Parameters |
 |---------|--------|---------|
 | change | triggers when user confirms the value | component's bounded value |
-| blur | triggers when Input blurs | (event: Event) |
-| focus | triggers when Input focuses | (event: Event) |
+| blur | triggers when Input blurs | component instance |
+| focus | triggers when Input focuses | component instance |

@@ -240,12 +240,14 @@ describe('TimePicker', () => {
     vm.$refs.picker.$on('focus', spyFocus);
     vm.$refs.picker.$on('blur', spyBlur);
     vm.$el.querySelector('input').focus();
-    vm.$el.querySelector('input').blur();
 
     vm.$nextTick(_ => {
       expect(spyFocus.calledOnce).to.be.true;
-      expect(spyBlur.calledOnce).to.be.true;
-      done();
+      vm.$refs.picker.pickerVisible = false;
+      vm.$nextTick(_ => {
+        expect(spyBlur.calledOnce).to.be.true;
+        done();
+      });
     });
   });
 

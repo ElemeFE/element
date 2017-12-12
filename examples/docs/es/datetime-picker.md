@@ -275,8 +275,8 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
 | Nombre de evento | Descripción                              | Parámetros                    |
 | ---------------- | ---------------------------------------- | ----------------------------- |
 | change           | Se dispara cuando el usuario confirma el valor | valor enlazado del componente |
-| blur             | Se dispara cuando el input pierde el foco | (event: Event)                |
-| focus            | Se dispara cuando el input obtiene el foco | (event: Event)                |
+| blur             | Se dispara cuando el input pierde el foco | instancia del componente                |
+| focus            | Se dispara cuando el input obtiene el foco | instancia del componente                |
 
 ### Métodos
 | Método | Descripción      | Parámetros |
