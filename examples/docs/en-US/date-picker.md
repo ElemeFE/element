@@ -417,8 +417,8 @@ This feature is at alpha stage. Feedback welcome.
 | Event Name | Description | Parameters |
 |---------|--------|---------|
 | change | triggers when user confirms the value | component's binding value |
-| blur | triggers when Input blurs | (event: Event) |
-| focus | triggers when Input focuses | (event: Event) |
+| blur | triggers when Input blurs | component instance |
+| focus | triggers when Input focuses | component instance |
 
 ### Methods
 | Method | Description | Parameters |

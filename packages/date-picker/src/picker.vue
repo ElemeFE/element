@@ -11,7 +11,6 @@
     v-clickoutside="handleClose"
     :placeholder="placeholder"
     @focus="handleFocus"
-    @blur="handleBlur"
     @keydown.native="handleKeydown"
     :value="displayValue"
     @input="value => userInput = value"
@@ -371,6 +370,7 @@ export default {
           this.userInput = null;
         }
         this.dispatch('ElFormItem', 'el.form.blur');
+        this.$emit('blur', this);
         this.blur();
       }
     },
@@ -599,9 +599,6 @@ export default {
 
     handleClose() {
       this.pickerVisible = false;
-      if (this.ranged) {
-        this.$emit('blur', this);
-      }
     },
 
     handleFocus() {
@@ -611,10 +608,6 @@ export default {
         this.pickerVisible = true;
       }
       this.$emit('focus', this);
-    },
-
-    handleBlur() {
-      this.$emit('blur', this);
     },
 
     handleKeydown(event) {

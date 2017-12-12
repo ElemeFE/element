@@ -212,8 +212,8 @@
 | 事件名 | 说明 | 参数 |
 |---------|--------|---------|
 | change | 用户确认选定的值时触发 | 组件绑定值 |
-| blur | 当 input 失去焦点时触发 | (event: Event) |
-| focus | 当 input 获得焦点时触发 | (event: Event) |
+| blur | 当 input 失去焦点时触发 | 组件实例 |
+| focus | 当 input 获得焦点时触发 | 组件实例 |
 
 ### Methods
 | 方法名 | 说明 | 参数 |

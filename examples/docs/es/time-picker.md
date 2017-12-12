@@ -212,5 +212,5 @@ Es posible escoger un rango de tiempo arbitrario.
 | Nombre de Evento | Descripción                              | Parámetros                    |
 | ---------------- | ---------------------------------------- | ----------------------------- |
 | change           | se lanza cuando el usuario confirma el valor | valor limitado del componente |
-| blur             | se lanza cuando el input se difumina     | (event: Event)                |
-| focus            | se lanza cuando el input se enfoca       | (event: Event)                |
+| blur             | se lanza cuando el input se difumina     | instancia del componente                |
+| focus            | se lanza cuando el input se enfoca       | instancia del componente                |

@@ -418,8 +418,8 @@ Esta característica está en la etapa alfa. Feedback bienvenido.
 | Nombre | Descripción                              | Parametros                   |
 | ------ | ---------------------------------------- | ---------------------------- |
 | change | se dispara cuando el usuario confirma el valor | valor enlazado al componente |
-| blur   | se dispara cuando el input pierde el foco | (event: Event)               |
-| focus  | se dispara cuando el input obtiene el foco | (event: Event)               |
+| blur   | se dispara cuando el input pierde el foco | instancia del componente               |
+| focus  | se dispara cuando el input obtiene el foco | instancia del componente               |
 
 ### Metodos
 | Metodo | Descripción                | Parameteros |
