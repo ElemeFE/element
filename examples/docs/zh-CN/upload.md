@@ -115,6 +115,15 @@
       },
       handleExceed(files, fileList) {
         this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+      },
+      handleBeforeRemove(file, fileList) {
+        return new Promise((resolve, reject) => {
+          if (confirm('It looks good, are you sure to remove?')) {
+            resolve()
+          } else {
+            reject()
+          }
+        });
       }
     }
   }
@@ -126,13 +135,14 @@
 
 ### 点击上传
 
-:::demo 通过 slot 你可以传入自定义的上传按钮类型和文字提示。可通过设置 `limit` 和 `on-exceed` 来限制上传文件的个数和定义超出限制时的行为。
+:::demo 通过 slot 你可以传入自定义的上传按钮类型和文字提示。可通过设置 `limit` 和 `on-exceed` 来限制上传文件的个数和定义超出限制时的行为。可通过设置 `before-remove` 来阻止删除操作。
 ```html
 <el-upload
   class="upload-demo"
   action="https://jsonplaceholder.typicode.com/posts/"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
+  :before-remove="handleBeforeRemove"
   multiple
   :limit="3"
   :on-exceed="handleExceed"
@@ -156,6 +166,15 @@
       },
       handleExceed(files, fileList) {
         this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+      },
+      handleBeforeRemove(file, fileList) {
+        return new Promise((resolve, reject) => {
+          if (confirm('It looks good, are you sure to remove?')) {
+            resolve()
+          } else {
+            reject()
+          }
+        });
       }
     }
   }
@@ -419,6 +438,7 @@
 | on-progress | 文件上传时的钩子 | function(event, file, fileList) | — | — |
 | on-change | 文件状态改变时的钩子，添加文件、上传成功和上传失败时都会被调用 | function(file, fileList) | — | — |
 | before-upload | 上传文件之前的钩子，参数为上传的文件，若返回 false 或者返回 Promise 且被 reject，则停止上传。 | function(file) | — | — |
+| before-remove | 删除文件之前的钩子，参数为上传的文件和文件列表，若返回 false 或者返回 Promise 且被 reject，则停止上传。| function(file, fileList) | — | — |
 | list-type | 文件列表的类型 | string | text/picture/picture-card | text |
 | auto-upload | 是否在选取文件后立即进行上传 | boolean | — | true |
 | file-list | 上传的文件列表, 例如: [{name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg'}] | array | — | [] |

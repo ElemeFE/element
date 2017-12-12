@@ -53,6 +53,7 @@ export default {
       default: 'select'
     },
     beforeUpload: Function,
+    beforeRemove: Function,
     onRemove: {
       type: Function,
       default: noop
@@ -175,10 +176,30 @@ export default {
       if (raw) {
         file = this.getFile(raw);
       }
-      this.abort(file);
-      let fileList = this.uploadFiles;
-      fileList.splice(fileList.indexOf(file), 1);
-      this.onRemove(file, fileList);
+      let doRemove = () => {
+        this.abort(file);
+        let fileList = this.uploadFiles;
+        fileList.splice(fileList.indexOf(file), 1);
+        this.onRemove(file, fileList);
+      };
+
+      if (!this.beforeRemove) {
+        doRemove();
+        return;
+      }
+
+      const before = this.beforeRemove(file, this.uploadFiles);
+      if (before && before.then) {
+        before.then(() => {
+          doRemove();
+        }, () => {
+          // do nothing
+        });
+      } else if (before !== false) {
+        doRemove();
+      } else {
+        // do nothing
+      }
     },
     getFile(rawFile) {
       let fileList = this.uploadFiles;
