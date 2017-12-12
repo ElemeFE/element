@@ -119,9 +119,9 @@
       handleBeforeRemove(file, fileList) {
         return new Promise((resolve, reject) => {
           if (confirm('It looks good, are you sure to remove?')) {
-            resolve()
+            resolve();
           } else {
-            reject()
+            reject();
           }
         });
       }
@@ -170,9 +170,9 @@
       handleBeforeRemove(file, fileList) {
         return new Promise((resolve, reject) => {
           if (confirm('It looks good, are you sure to remove?')) {
-            resolve()
+            resolve();
           } else {
-            reject()
+            reject();
           }
         });
       }

@@ -192,13 +192,9 @@ export default {
       if (before && before.then) {
         before.then(() => {
           doRemove();
-        }, () => {
-          // do nothing
-        });
+        }, noop);
       } else if (before !== false) {
         doRemove();
-      } else {
-        // do nothing
       }
     },
     getFile(rawFile) {

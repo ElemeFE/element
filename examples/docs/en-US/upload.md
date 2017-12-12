@@ -120,9 +120,9 @@
       handleBeforeRemove(file, fileList) {
         return new Promise((resolve, reject) => {
           if (confirm('It looks good, are you sure to remove?')) {
-            resolve()
+            resolve();
           } else {
-            reject()
+            reject();
           }
         });
       }
@@ -170,9 +170,9 @@ Upload files by clicking or drag-and-drop
       handleBeforeRemove(file, fileList) {
         return new Promise((resolve, reject) => {
           if (confirm('It looks good, are you sure to remove?')) {
-            resolve()
+            resolve();
           } else {
-            reject()
+            reject();
           }
         });
       }
