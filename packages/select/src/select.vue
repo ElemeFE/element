@@ -691,16 +691,26 @@
 
       checkDefaultFirstOption() {
         this.hoverIndex = -1;
+        // highlight the created option
+        let hasCreated = false;
+        for (let i = this.options.length - 1; i >= 0; i--) {
+          if (this.options[i].created) {
+            hasCreated = true;
+            this.hoverIndex = i;
+            break;
+          }
+        }
+        if (hasCreated) return;
         for (let i = 0; i !== this.options.length; ++i) {
           const option = this.options[i];
           if (this.query) {
-            // pick first options that passes the filter
+            // highlight first options that passes the filter
             if (!option.disabled && !option.groupDisabled && option.visible) {
               this.hoverIndex = i;
               break;
             }
           } else {
-            // pick currently selected option
+            // highlight currently selected option
             if (option.itemSelected) {
               this.hoverIndex = i;
               break;
