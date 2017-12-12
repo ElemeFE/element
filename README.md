@@ -79,7 +79,7 @@ We have collected some [frequently asked questions](https://github.com/ElemeFE/e
 Please make sure to read the contributing guide ([中文](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.zh-CN.md) | [English](https://github.com/ElemeFE/element/blob/master/.github/CONTRIBUTING.en-US.md)) before making a pull request.
 
 ## Special Thanks
-English documentation is brought to you by SwiftGG Translation Team. Our special thanks go to these fellows:
+English documentation is brought to you by SwiftGG Translation Team:
 - [raychenfj](https://github.com/raychenfj)
 - [kevin](http://thekevin.cn/)
 - [曾小涛](https://github.com/zengxiaotao)
@@ -90,6 +90,18 @@ English documentation is brought to you by SwiftGG Translation Team. Our special
 - [梁杰](http://numbbbbb.com)
 - [Changing](https://github.com/sunzhuo11)
 - [mmoaay](https://github.com/mmoaay)
+
+Spanish documentation is made possible by these community developers:
+- [adavie1](https://github.com/adavie1)
+- [carmencitaqiu](https://github.com/carmencitaqiu)
+- [coderdiaz](https://github.com/coderdiaz)
+- [fedegar33](https://github.com/fedegar33)
+- [Gonzalo2310](https://github.com/Gonzalo2310)
+- [lesterbx](https://github.com/lesterbx)
+- [ProgramerGuy](https://github.com/ProgramerGuy)
+- [SantiagoGdaR](https://github.com/SantiagoGdaR)
+- [sigfriedCub1990](https://github.com/sigfriedCub1990)
+- [thechosenjuan](https://github.com/thechosenjuan)
 
 ## Donation
 If you find Element useful, you can buy us a cup of coffee

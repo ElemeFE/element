@@ -26,7 +26,7 @@ Botones comúnmente usados.
 
 ### Uso básico
 
-::: demo Use `type`, `plain` y `round` para definir estilos a los botones.
+:::demo Use `type`, `plain` y `round` para definir estilos a los botones.
 
 ```html
 <div>

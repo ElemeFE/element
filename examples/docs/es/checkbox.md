@@ -74,7 +74,7 @@ Checkbox puede ser usado para alternar entre dos estados.
 
 Estado deshabilitado para el checkbox.
 
-::: demo Setear el atributo `disabled`.
+:::demo Setear el atributo `disabled`.
 
 ```html
 <template>

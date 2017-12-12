@@ -76,42 +76,42 @@
 </style>
 <template>
   <div>
-    <h2>Navigation</h2>
+    <h2>Navegación</h2>
     <div class="block">
-      <p>Navigation focuses on solving the users' problems of where to go and how to get there. Generally it can be categorized into 'sidebar navigation' and 'top navigation'.</p>
+      <p>La navegación se centra en resolver los problemas de los usuarios sobre donde ir y como llegar ahí. En general, se puede categorizar en 'navegación de barra lateral' y 'navegación superior'.</p>
     </div>
     <div class="block">
-      <h3>Choose the right navigation</h3>
-      <p>An appropriate navigation gives users a smooth experience, while an inappropriate one leads to confusion. Here are the differences between sidebar navigation and top navigation</p>
+      <h3>Elige la navegación correcta</h3>
+      <p>Una navegación apropiada provee a los usuarios una mejor experiencia, mientras que una inapropiada genera confusión. Esta es la diferencia entre la navegación de la barra lateral y la navegación superior.</p>
     </div>
     <div class="block">
-      <h3>Side Navigation</h3>
+      <h3>Navegación lateral</h3>
       <el-row :gutter="20">
         <el-col :span="9">
-          <p>Fix the navigation at the left edge, thus improves its visibility, making it easier to switch between pages. In this case, the top area of the page holds commonly used tools, e.g. search bar, help button, notice button, etc. Suitable for background management or utility websites.</p>
+          <p>Fija la navegación del lado izquierdo, esto permitirá una mejor visibilidad, lo que facilitará el cambio de pagina. En este caso, el área superior de la pagina contiene herramientas comúnmente utilizadas, por ejemplo, barra de búsqueda, botón de ayuda, botón de aviso, etc. Adecuado para sitios web de gestión.</p>
         </el-col>
         <el-col :span="15" class="nav-demos">
-          <img src="~examples/assets/images/navbar_1.png" alt="Level 1 categories" @click="enlarge(846, $event)">
-          <h5>Level 1 categories</h5>
-          <p>Suitable for simply structured sites with only one level of pages. No breadcrumb is needed.</p>
-          <img src="~examples/assets/images/navbar_2.png" alt="Level 2 categories" @click="enlarge(846, $event)">
-          <h5>Level 2 categories</h5>
-          <p>Sidebar displays up to two levels of navigation. Breadcrumbs are recommended in combination of second level navigation, making it easier for the users to locate and navigate.</p>
-          <img src="~examples/assets/images/navbar_3.png" alt="Level 3 categories" @click="enlarge(846, $event)">
-          <h5>Level 3 categories</h5>
-          <p>Suitable for complicated utility websites. The left sidebar holds first level navigation, and the middle column displays second level navigation or other utility options.</p>
+          <img src="~examples/assets/images/navbar_1.png" alt="Categorías de Nivel 1" @click="enlarge(846, $event)">
+          <h5>Categorías de Nivel 1</h5>
+          <p>Adecuado para sitios con una estructura simple con un solo nivel de páginas. No se necesita un 'breadcrumb'.</p>
+          <img src="~examples/assets/images/navbar_2.png" alt="Categorías de Nivel 2" @click="enlarge(846, $event)">
+          <h5>Categorías de Nivel 2</h5>
+          <p>La barra lateral muestra hasta dos niveles de navegación. Se recomienda utilizar un 'breadcrumb' en combinación con la navegación de segundo nivel, lo que facilita la localización y navegación de los usuarios.</p>
+          <img src="~examples/assets/images/navbar_3.png" alt="Categorías de Nivel 3" @click="enlarge(846, $event)">
+          <h5>Categorías de Nivel 3</h5>
+          <p>Adecuado para sitios web bastante complejos. La barra lateral izquierda contiene navegación de primer nivel, y la columna central muestra navegación de segundo nivel u otras opciones de utilidad.</p>
         </el-col>
       </el-row>
     </div>
     <div class="block">
-      <h3>Top Navigation</h3>
+      <h3>Navegación superior</h3>
       <el-row>
         <el-col :span="10">
-          <p>Conforms to the normal browsing order from top to bottom, which makes things more natural. The navigation amount and text length are limited to the width of the top.</p>
+          <p>Se ajusta de acuerdo a la exploración normal de arriba a abajo, lo que hace que las cosas sean más naturales. La cantidad de navegación y la longitud del texto están limitadas al ancho de la parte superior.</p>
         </el-col>
         <el-col :span="14" class="nav-demos">
           <img src="~examples/assets/images/navbar_0.png" alt="" @click="enlarge(846, $event)">
-          <p>Suitable for sites with few navigations and large chunks.</p>
+          <p>Adecuado para sitios con pocas navegaciones y grandes trozos.</p>
         </el-col>
       </el-row>
     </div>

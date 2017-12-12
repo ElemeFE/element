@@ -12,7 +12,7 @@
 
 <style>
   .demo-icon .source > i {
-    color: #8492a6;
+    color: #606266;
     margin: 0 20px;
     font-size: 1.5em;
     vertical-align: middle;
@@ -46,18 +46,24 @@
     
     @utils-vertical-center;
     
-    & span {
+    span {
       display: inline-block;
       line-height: normal;
       vertical-align: middle;
       font-family: 'Helvetica Neue',Helvetica,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',SimSun,sans-serif;
       color: #99a9bf;
     }
-    & i {
+    i {
       display: block;
-      font-size: 24px;
+      font-size: 32px;
       margin-bottom: 15px;
-      color: #8492a6;
+      color: #606266;
+    }
+    .icon-name {
+      display: inline-block;
+      padding: 0 3px;
+      height: 1em;
+      color: #606266;
     }
     &:hover {
       color: rgb(92, 182, 255);
@@ -90,7 +96,7 @@ Simplemente asigna el nombre de la clase a `el-icon-iconName`.
   <li v-for="name in icons" :key="name">
     <span>
       <i :class="'el-icon-' + name"></i>
-      {{'el-icon-' + name}}
+      <span class="icon-name">{{'el-icon-' + name}}</span>
     </span>
   </li>
 </ul>

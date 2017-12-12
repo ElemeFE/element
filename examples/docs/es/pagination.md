@@ -53,7 +53,7 @@ Si tiene que mostrar muchos datos en una página, utilice la paginación.
 
 ### Uso básico
 
-:::**Demo** Asigne en el atributo `layout` los diferentes elementos que quiere utilizar separados por coma. Los elementos de paginación son: `prev` (un botón para navegar a la página anterior), `next` (un botón para navegar a la siguiente página), `pager` (lista de página), `jumper` (un `input` para saltar a una página determinada), `total` (total de elementos), `size` (un `select` para seleccionar el tamaño de la página ) y `->`(todo elemento situado luego de este símbolo será movido a la derecha).
+:::demo Asigne en el atributo `layout` los diferentes elementos que quiere utilizar separados por coma. Los elementos de paginación son: `prev` (un botón para navegar a la página anterior), `next` (un botón para navegar a la siguiente página), `pager` (lista de página), `jumper` (un `input` para saltar a una página determinada), `total` (total de elementos), `size` (un `select` para seleccionar el tamaño de la página ) y `->`(todo elemento situado luego de este símbolo será movido a la derecha).
 ```html
 <div class="block">
   <span class="demonstration">When you have few pages</span>
@@ -76,7 +76,7 @@ Si tiene que mostrar muchos datos en una página, utilice la paginación.
 
 Usa una paginación pequeña en caso de espacio limitado.
 
-:::**Demo** Solo ponga el atributo `small` como `true` y la Paginación se volverá pequeña.
+:::demo Solo ponga el atributo `small` como `true` y la Paginación se volverá pequeña.
 ```html
 <el-pagination
   small
@@ -90,7 +90,7 @@ Usa una paginación pequeña en caso de espacio limitado.
 
 Agrega más modulos basados en su escenario.
 
-:::**Demo** Este ejemplo es un completo caso de uso. Utiliza los eventos `size-change` y `current-change` para manejar el tamaño de página y el cambio de página. El atributo `page-sizes` acepta un arreglo de enteros, cada uno representa un diferente valor del atributo `sizes` que es un `select`, ejemplo `[100, 200, 300, 400]` indicará que el `select` tendrá las opciones: 100, 200, 300 o 400 elementos por página.
+:::demo Este ejemplo es un completo caso de uso. Utiliza los eventos `size-change` y `current-change` para manejar el tamaño de página y el cambio de página. El atributo `page-sizes` acepta un arreglo de enteros, cada uno representa un diferente valor del atributo `sizes` que es un `select`, ejemplo `[100, 200, 300, 400]` indicará que el `select` tendrá las opciones: 100, 200, 300 o 400 elementos por página.
 
 ```html
 <template>

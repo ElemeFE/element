@@ -59,7 +59,7 @@
 
 适用广泛的基础用法。
 
-::: demo 导航菜单默认为垂直模式，通过`mode`属性可以使导航菜单变更为水平模式。另外，在菜单中通过`submenu`组件可以生成二级菜单。Menu 还提供了`background-color`、`text-color`和`active-text-color`，分别用于设置菜单的背景色、菜单的文字颜色和当前激活菜单的文字颜色。
+:::demo 导航菜单默认为垂直模式，通过`mode`属性可以使导航菜单变更为水平模式。另外，在菜单中通过`submenu`组件可以生成二级菜单。Menu 还提供了`background-color`、`text-color`和`active-text-color`，分别用于设置菜单的背景色、菜单的文字颜色和当前激活菜单的文字颜色。
 
 ```html
 <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
@@ -113,7 +113,7 @@
 
 垂直菜单，可内嵌子菜单。
 
-::: demo 通过`el-menu-item-group`组件可以实现菜单进行分组，分组名可以通过`title`属性直接设定，也可以通过具名 slot 来设定。
+:::demo 通过`el-menu-item-group`组件可以实现菜单进行分组，分组名可以通过`title`属性直接设定，也可以通过具名 slot 来设定。
 ```html
 <el-row class="tac">
   <el-col :span="12">
@@ -208,7 +208,7 @@
 
 ### 折叠
 
-::: demo
+:::demo
 ```html
 <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
   <el-radio-button :label="false">展开</el-radio-button>
@@ -276,7 +276,7 @@
 | mode     | 模式   | string  |   horizontal / vertical   | vertical |
 | collapse  | 是否水平折叠收起菜单（仅在 mode 为 vertical 时可用）| boolean  |   —   | false |
 | background-color  | 菜单的背景色（仅支持 hex 格式） | string |   —   | #ffffff |
-| text-color  | 菜单的文字颜色（仅支持 hex 格式） | string |   —   | #2d2f33 |
+| text-color  | 菜单的文字颜色（仅支持 hex 格式） | string |   —   | #303133 |
 | active-text-color  | 当前激活菜单的文字颜色（仅支持 hex 格式） | string |   —   | #409EFF |
 | default-active | 当前激活菜单的 index | string    | — | — |
 | default-openeds | 当前打开的sub-menu的 key 数组 | Array    | — | — |

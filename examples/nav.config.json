@@ -501,7 +501,7 @@
   ],
   "es": [
     {
-      "name": "Changelog-es",
+      "name": "Changelog",
       "path": "/changelog"
     },
     {
@@ -517,23 +517,23 @@
       "children": [
         {
           "path": "/installation",
-          "name": "Installation-es"
+          "name": "Installation"
         },
         {
           "path": "/quickstart",
-          "name": "Quick Start-es"
+          "name": "Quick Start"
         },
         {
           "path": "/i18n",
-          "name": "Internationalization-es"
+          "name": "Internationalization"
         },
         {
           "path": "/custom-theme",
-          "name": "Custom Theme-es"
+          "name": "Custom Theme"
         },
         {
           "path": "/transition",
-          "name": "Built-in transition-es"
+          "name": "Built-in transition"
         }
       ]
     },
@@ -545,27 +545,27 @@
           "list": [
             {
               "path": "/layout",
-              "title": "Layout-es"
+              "title": "Layout"
             },
             {
               "path": "/container",
-              "title": "Layout Container-es"
+              "title": "Layout Container"
             },
             {
               "path": "/color",
-              "title": "Color-es"
+              "title": "Color"
             },
             {
               "path": "/typography",
-              "title": "Typography-es"
+              "title": "Typography"
             },
             {
               "path": "/icon",
-              "title": "Icon-es"
+              "title": "Icon"
             },
             {
               "path": "/button",
-              "title": "Button-es"
+              "title": "Button"
             }
           ]
         },
@@ -574,67 +574,67 @@
           "list": [
             {
               "path": "/radio",
-              "title": "Radio-es"
+              "title": "Radio"
             },
             {
               "path": "/checkbox",
-              "title": "Checkbox-es"
+              "title": "Checkbox"
             },
             {
               "path": "/input",
-              "title": "Input-es"
+              "title": "Input"
             },
             {
               "path": "/input-number",
-              "title": "InputNumber-es"
+              "title": "InputNumber"
             },
             {
               "path": "/select",
-              "title": "Select-es"
+              "title": "Select"
             },
             {
               "path": "/cascader",
-              "title": "Cascader-es"
+              "title": "Cascader"
             },
             {
               "path": "/switch",
-              "title": "Switch-es"
+              "title": "Switch"
             },
             {
               "path": "/slider",
-              "title": "Slider-es"
+              "title": "Slider"
             },
             {
               "path": "/time-picker",
-              "title": "TimePicker-es"
+              "title": "TimePicker"
             },
             {
               "path": "/date-picker",
-              "title": "DatePicker-es"
+              "title": "DatePicker"
             },
             {
               "path": "/datetime-picker",
-              "title": "DateTimePicker-es"
+              "title": "DateTimePicker"
             },
             {
               "path": "/upload",
-              "title": "Upload-es"
+              "title": "Upload"
             },
             {
               "path": "/rate",
-              "title": "Rate-es"
+              "title": "Rate"
             },
             {
               "path": "/color-picker",
-              "title": "ColorPicker-es"
+              "title": "ColorPicker"
             },
             {
               "path": "/transfer",
-              "title": "Transfer-es"
+              "title": "Transfer"
             },
             {
               "path": "/form",
-              "title": "Form-es"
+              "title": "Form"
             }
           ]
         },
@@ -643,27 +643,27 @@
           "list": [
             {
               "path": "/table",
-              "title": "Table-es"
+              "title": "Table"
             },
             {
               "path": "/tag",
-              "title": "Tag-es"
+              "title": "Tag"
             },
             {
               "path": "/progress",
-              "title": "Progress-es"
+              "title": "Progress"
             },
             {
               "path": "/tree",
-              "title": "Tree-es"
+              "title": "Tree"
             },
             {
               "path": "/pagination",
-              "title": "Pagination-es"
+              "title": "Pagination"
             },
             {
               "path": "/badge",
-              "title": "Badge-es"
+              "title": "Badge"
             }
           ]
         },
@@ -672,23 +672,23 @@
           "list": [
             {
               "path": "/alert",
-              "title": "Alert-es"
+              "title": "Alert"
             },
             {
               "path": "/loading",
-              "title": "Loading-es"
+              "title": "Loading"
             },
             {
               "path": "/message",
-              "title": "Message-es"
+              "title": "Message"
             },
             {
               "path": "/message-box",
-              "title": "MessageBox-es"
+              "title": "MessageBox"
             },
             {
               "path": "/notification",
-              "title": "Notification-es"
+              "title": "Notification"
             }
           ]
         },
@@ -697,23 +697,23 @@
           "list": [
             {
               "path": "/menu",
-              "title": "NavMenu-es"
+              "title": "NavMenu"
             },
             {
               "path": "/tabs",
-              "title": "Tabs-es"
+              "title": "Tabs"
             },
             {
               "path": "/breadcrumb",
-              "title": "Breadcrumb-es"
+              "title": "Breadcrumb"
             },
             {
               "path": "/dropdown",
-              "title": "Dropdown-es"
+              "title": "Dropdown"
             },
             {
               "path": "/steps",
-              "title": "Steps-es"
+              "title": "Steps"
             }
           ]
         },
@@ -722,27 +722,27 @@
           "list": [
             {
               "path": "/dialog",
-              "title": "Dialog-es"
+              "title": "Dialog"
             },
             {
               "path": "/tooltip",
-              "title": "Tooltip-es"
+              "title": "Tooltip"
             },
             {
               "path": "/popover",
-              "title": "Popover-es"
+              "title": "Popover"
             },
             {
               "path": "/card",
-              "title": "Card-es"
+              "title": "Card"
             },
             {
               "path": "/carousel",
-              "title": "Carousel-es"
+              "title": "Carousel"
             },
             {
               "path": "/collapse",
-              "title": "Collapse-es"
+              "title": "Collapse"
             }
           ]
         }

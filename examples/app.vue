@@ -249,30 +249,25 @@
         this.suggestJump();
       }
       setTimeout(() => {
-        const notified = localStorage.getItem('ES_NOTIFIED');
-        if (!notified && this.lang !== 'zh-CN') {
-          const h = this.$createElement;
+        const notified = localStorage.getItem('ES_NOTIFIED_2');
+        if (!notified && this.lang !== 'es') {
           const title = this.lang === 'zh-CN'
-            ? '帮助我们完成西班牙语文档'
-            : 'Help us with Spanish docs';
-          const messages = this.lang === 'zh-CN'
-            ? ['点击', '这里', '查看详情']
-            : ['Click ', 'here', ' to learn more'];
+            ? '西班牙语文档正式上线'
+            : 'Spanish docs now available';
+          const message = this.lang === 'zh-CN'
+            ? '点击这里进行切换'
+            : 'Click here to switch';
+          const self = this;
           this.$notify({
             title,
             duration: 0,
-            message: h('span', [
-              messages[0],
-              h('a', {
-                attrs: {
-                  target: '_blank',
-                  href: 'https://github.com/ElemeFE/element/issues/8074'
-                }
-              }, messages[1]),
-              messages[2]
-            ]),
+            message,
+            onClick() {
+              self.$router.push('/es');
+              localStorage.setItem('ES_NOTIFIED_2', 1);
+            },
             onClose() {
-              localStorage.setItem('ES_NOTIFIED', 1);
+              localStorage.setItem('ES_NOTIFIED_2', 1);
             }
           });
         }

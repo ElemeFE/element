@@ -25,7 +25,7 @@ Mostrar mensajes de alertas importantes.
 
 Los componentes de alertas no son elementos overlay de la página y no desaparecen automáticamente.
 
-::: demo Alert provee 4 tipos de temas definidos por `type`, el valor por defecto es `info`.
+:::demo Alert provee 4 tipos de temas definidos por `type`, el valor por defecto es `info`.
 
 ```html
 <template>
@@ -53,7 +53,7 @@ Los componentes de alertas no son elementos overlay de la página y no desaparec
 
 Personalizar el botón de cerrar como texto u otros símbolos.
 
-::: demo Alert permite configurar si es posible cerrarla. El texto del botón de cerrado, así como los callbacks de cerrado son personalizables. El atributo `closable` define si el componente puede cerrarse o no. Acepta un `boolean`, que por defecto es `true`. También puede configurar el atributo `close-text` para reemplazar el símbolo de cerrado que se muestra por defecto. El atributo `close-text` debe ser un string. El evento `close` se dispara cuando el componente se cierra.
+:::demo Alert permite configurar si es posible cerrarla. El texto del botón de cerrado, así como los callbacks de cerrado son personalizables. El atributo `closable` define si el componente puede cerrarse o no. Acepta un `boolean`, que por defecto es `true`. También puede configurar el atributo `close-text` para reemplazar el símbolo de cerrado que se muestra por defecto. El atributo `close-text` debe ser un string. El evento `close` se dispara cuando el componente se cierra.
 
 
 ```html
@@ -91,7 +91,7 @@ Personalizar el botón de cerrar como texto u otros símbolos.
 
 Mostrar un icono mejora la legibilidad.
 
-::: demo Setear el atributo `show-icon` muestra un icono que corresponde al tipo de Alert que se está mostrando.
+:::demo Setear el atributo `show-icon` muestra un icono que corresponde al tipo de Alert que se está mostrando.
 
 
 ```html
@@ -124,7 +124,7 @@ Mostrar un icono mejora la legibilidad.
 
 Para centrar el texto utilice el atributo `center`.
 
-::: demo
+:::demo
 
 ```html
 <template>
@@ -160,7 +160,7 @@ Para centrar el texto utilice el atributo `center`.
 
 Descripción incluye un mensaje con información más detallada.
 
-::: demo Además del atributo requerido `title`, se puede agregar el atributo `description` para ayudar a describir la alerta con mas detalles. La descripción puede contener solamente un string y va a usar word wrap automáticamente.
+:::demo Además del atributo requerido `title`, se puede agregar el atributo `description` para ayudar a describir la alerta con mas detalles. La descripción puede contener solamente un string y va a usar word wrap automáticamente.
 
 ```html
 <template>
@@ -175,7 +175,7 @@ Descripción incluye un mensaje con información más detallada.
 
 ### Utilizando icono y descripción
 
-::: demo Finalmente este es un ejemplo utilizando icono y descripción.
+:::demo Finalmente este es un ejemplo utilizando icono y descripción.
 
 ```html
 <template>

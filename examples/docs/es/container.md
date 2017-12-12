@@ -77,7 +77,7 @@ Estos componentes utilizan flex para el diseño, así que asegurese que el naveg
 
 ### Diseños comunes
 
-::: demo
+:::demo
 ```html
 <el-container>
   <el-header>Cabecera</el-header>
@@ -171,7 +171,7 @@ Estos componentes utilizan flex para el diseño, así que asegurese que el naveg
 
 ### Ejemplo
 
-::: demo
+:::demo
 ```html
 <el-container style="height: 500px; border: 1px solid #eee">
   <el-aside width="200px" style="background-color: rgb(238, 241, 246)">

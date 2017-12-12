@@ -120,41 +120,41 @@
 </style>
 <template>
   <div class="page-container page-resource">
-    <h2>Resource</h2>
-    <div class="resource-placeholder">
-      <img src="~examples/assets/images/resource-placeholder.svg" alt="">
-      <h4>Under construction</h4>
-      <p>Please wait while we prepare the design resources</p>
-    </div>
+    <h2>Recursos</h2>
+    <!--<div class="resource-placeholder">-->
+      <!--<img src="~examples/assets/images/resource-placeholder.svg" alt="">-->
+      <!--<h4>En construcción</h4>-->
+      <!--<p>Se están desarrollando más recursos</p>-->
+    <!--</div>-->
     
-    <!--<p>Under construction.</p>-->
-    <!--<div class="cards">-->
-      <!--<ul class="container">-->
+    <p>Se están desarrollando más recursos</p>
+    <div class="cards">
+      <ul class="container">
         <!--<li>-->
           <!--<div class="card">-->
             <!--<img src="~examples/assets/images/Axure-Components.svg" alt="">-->
-            <!--<h3>Axure Components</h3>-->
-            <!--<p>By importing Element UI in Axure, you can easily apply all the components we provide during interaction design.</p>-->
-            <!--<a href="https://github.com/ElementUI/Resources/raw/master/Element_Components_v1.1.0.rplib">Download</a>-->
+            <!--<h3>Componetes de Axure</h3>-->
+            <!--<p>Mediante la importación de elementos de interfaz de usuario en Axure, se puede aplicar fácilmente a todos los componentes que proporcionamos durante el diseño de interacción.</p>-->
+            <!--<a href="https://github.com/ElementUI/Resources/raw/master/Element_Components_v1.1.0.rplib">Descarga</a>-->
           <!--</div>-->
         <!--</li>-->
-        <!--<li>-->
-          <!--<div class="card">-->
-            <!--<img src="~examples/assets/images/Sketch-Template.svg" alt="">-->
-            <!--<h3>Sketch Template</h3>-->
-            <!--<p>Apply components from Element template, so you can improve design efficiency while keeping a unified visual style.</p>-->
-            <!--<a href="https://github.com/ElementUI/Resources/raw/master/Element%20UI%20Kit_v1.3.sketch">Download</a>-->
-          <!--</div>-->
-        <!--</li>-->
+        <li>
+          <div class="card">
+            <img src="~examples/assets/images/Sketch-Template.svg" alt="">
+            <h3>Plantilla de Sketch</h3>
+            <p>Aplica componentes de la plantilla Element para que pueda mejorarla eficiencia del diseño manteniendo un estilo visual unificado.</p>
+            <a href="https://github.com/ElementUI/Resources/raw/master/Element%20UI%20Kit_v2.0.sketch">Descarga</a>
+          </div>
+        </li>
         <!--<li>-->
           <!--<div class="card">-->
             <!--<img src="~examples/assets/images/Module.svg" alt="">-->
-            <!--<h3>Interaction Design Documentation</h3>-->
-            <!--<p>Take a closer look at the interaction design documentation. Learn more details of each component from a microcosmic perspective.</p>-->
-            <!--<a href="https://github.com/ElementUI/Resources/raw/master/Element%20Components%20Documentation.zip">Download</a>-->
+            <!--<h3>Documentación de diseño de interacción</h3>-->
+            <!--<p>Eche un vistazo más de cerca a la documentación de diseño de interacción. Conoce más detalles de cada componente desde una perspectiva microcósmica.</p>-->
+            <!--<a href="https://github.com/ElementUI/Resources/raw/master/Element%20Components%20Documentation.zip">Descarga</a>-->
           <!--</div>-->
         <!--</li>-->
-      <!--</ul>-->
-    <!--</div>-->
+      </ul>
+    </div>
   </div>
 </template>

@@ -37,7 +37,7 @@ Rápido y facilmente crea un layout básico con 24 columnas.
 
 Crea un layout básico usando columnas.
 
-:::**Demo** Con `row` y `col`, puede facilmente manipular el layout usando el atributo `span`.
+:::demo Con `row` y `col`, puede facilmente manipular el layout usando el atributo `span`.
 ```html
 <el-row>
   <el-col :span="24"><div class="grid-content bg-purple-dark"></div></el-col>
@@ -101,7 +101,7 @@ Crea un layout básico usando columnas.
 
 El espaciado de columnas está soportado.
 
-:::**Demo** Row provee el atributo `gutter` para especificar el espacio entre columnas y su valor por defecto es 0.
+:::demo Row provee el atributo `gutter` para especificar el espacio entre columnas y su valor por defecto es 0.
 ```html
 <el-row :gutter="20">
   <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
@@ -145,7 +145,7 @@ El espaciado de columnas está soportado.
 
 Crea un complejo layout híbrido combinando el básico de 1/24 columnas.
 
-:::**Demo**
+:::demo
 ```html
 <el-row :gutter="20">
   <el-col :span="16"><div class="grid-content bg-purple"></div></el-col>
@@ -198,7 +198,7 @@ Crea un complejo layout híbrido combinando el básico de 1/24 columnas.
 
 Puedes especificar offsets para las columnas.
 
-:::**Demo** Puedes especificar el offset para una columna mediante el atributo `offset` de Col.
+:::demo Puedes especificar el offset para una columna mediante el atributo `offset` de Col.
 
 ```html
 <el-row :gutter="20">
@@ -248,7 +248,7 @@ Puedes especificar offsets para las columnas.
 
 Usa flex layout para un alineamiento flexible de columnas.
 
-:::**Demo** Puede habilitar flex layout asignando el atributo `type` a 'flex', y definir el layout de elementos hijos asignando el atributo `justify` con los valores start, center, end, space-between o space-around.
+:::demo Puede habilitar flex layout asignando el atributo `type` a 'flex', y definir el layout de elementos hijos asignando el atributo `justify` con los valores start, center, end, space-between o space-around.
 ```html
 <el-row type="flex" class="row-bg">
   <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
@@ -311,7 +311,7 @@ Usa flex layout para un alineamiento flexible de columnas.
 
 Tomando el ejemplo de Bootstrap responsive design, existen 5 breakpoints: xs, sm, md, lg y xl.
 
-:::**Demo**
+:::demo
 ```html
 <el-row :gutter="10">
   <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1"><div class="grid-content bg-purple"></div></el-col>

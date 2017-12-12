@@ -167,7 +167,7 @@ Upload files by clicking or drag-and-drop
 
 Use `before-upload` hook to limit the upload file format and size.
 
-::: demo
+:::demo
 ```html
 <el-upload
   class="avatar-uploader"
@@ -238,7 +238,7 @@ Use `before-upload` hook to limit the upload file format and size.
 
 Use `list-type` to change the fileList style.
 
-::: demo
+:::demo
 ```html
 <el-upload
   action="https://jsonplaceholder.typicode.com/posts/"
@@ -274,7 +274,7 @@ Use `list-type` to change the fileList style.
 
 ### FileList with thumbnail
 
-::: demo
+:::demo
 ```html
 <el-upload
   class="upload-demo"
@@ -310,7 +310,7 @@ Use `list-type` to change the fileList style.
 
 Use `on-change` hook function to control upload file list
 
-::: demo
+:::demo
 ```html
 <el-upload
   class="upload-demo"
@@ -349,7 +349,7 @@ Use `on-change` hook function to control upload file list
 
 You can drag your file to a certain area to upload it.
 
-::: demo
+:::demo
 ```html
 <el-upload
   class="upload-demo"
@@ -368,7 +368,7 @@ You can drag your file to a certain area to upload it.
 
 ### Manual upload
 
-::: demo
+:::demo
 ```html
 <el-upload
   class="upload-demo"

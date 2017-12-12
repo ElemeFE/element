@@ -292,7 +292,7 @@ Muestra un conjunto de datos jerárquicos.
 
 Estructura básica de árbol.
 
-::: demo
+:::demo
 ```html
 <el-tree :data="data" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
 
@@ -355,7 +355,7 @@ Estructura básica de árbol.
 
 Usado para la selección de nodos.
 
-::: demo Este ejemplo también muestra como cargar los datos de forma asíncrona.
+:::demo Este ejemplo también muestra como cargar los datos de forma asíncrona.
 ```html
 <el-tree
   :props="props"
@@ -469,7 +469,7 @@ Usado para la selección de nodos.
 
 El checkbox de un nodo se puede poner como desactivado.
 
-::: demo En el ejemplo, la propiedad 'disabled' se declara en defaultProps, y algunos nodos se ponen como 'disabled:true'. Los checkboxes correspondientes son desactivados y no se pueden pinchar.
+:::demo En el ejemplo, la propiedad 'disabled' se declara en defaultProps, y algunos nodos se ponen como 'disabled:true'. Los checkboxes correspondientes son desactivados y no se pueden pinchar.
 ```html
 <el-tree
   :data="data3"
@@ -588,7 +588,7 @@ Los nodos pueden estar desplegados o seleccionados por defecto.
 
 ### Seleccionando nodos
 
-::: demo Este ejemplo muestra como establecer y leer nodos seleccionados. Esto se puede hacer por nodos o por claves. Si lo hace por claves el atributo `node-key` es necesario.
+:::demo Este ejemplo muestra como establecer y leer nodos seleccionados. Esto se puede hacer por nodos o por claves. Si lo hace por claves el atributo `node-key` es necesario.
 ```html
 <el-tree
   :data="data2"
@@ -685,7 +685,7 @@ Los nodos pueden estar desplegados o seleccionados por defecto.
 ### Contenido personalizado en los nodos
 El contenido de los nodos puede ser personalizado, así que puede añadir iconos y botones a su gusto.
 
-::: demo Utilice `render-content` para asignar una función de renderizado que devuelve el contenido del árbol de nodos. Mire la documentación de node para una introducción detallada a las funciondes de renderizado. Ten en cuenta que este ejemplo no puede ejecutarse en jsfiddle ya que no soporta la sintaxis JSX. En un proyecto real `render-content` funcionará si las dependencias relevantes están configuradas correctamente.
+:::demo Utilice `render-content` para asignar una función de renderizado que devuelve el contenido del árbol de nodos. Mire la documentación de node para una introducción detallada a las funciondes de renderizado. Ten en cuenta que este ejemplo no puede ejecutarse en jsfiddle ya que no soporta la sintaxis JSX. En un proyecto real `render-content` funcionará si las dependencias relevantes están configuradas correctamente.
 ```html
 <el-tree
   :data="data4"
@@ -866,7 +866,7 @@ Los nodos del árbol se pueden filtrar.
 
 Solo puede ser expandido un nodo del mismo nivel a la vez.
 
-::: demo
+:::demo
 ```html
 <el-tree
   :data="data"

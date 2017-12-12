@@ -38,37 +38,37 @@
     background-color: #ff4949;
   }
   .bg-info {
-    background-color: #878D99;
+    background-color: #909399;
   }
 
   .bg-text-primary {
-    background-color: #2d2f33;
+    background-color: #303133;
   }
   .bg-text-regular {
-    background-color: #5a5e66;
+    background-color: #303133;
   }
   .bg-text-secondary {
-    background-color: #878d99;
+    background-color: #909399;
   }
   .bg-text-placeholder {
-    background-color: #b4bccc;
+    background-color: #c0c4cc;
   }
 
   .bg-border-base {
-    background-color: #d8dce5;
+    background-color: #dcdfe6;
   }
   .bg-border-light {
-    background-color: #dfe4ed;
+    background-color: #e4e7ed;
   }
   .bg-border-lighter {
-    background-color: #e6ebf5;
+    background-color: #ebeef5;
   }
   .bg-border-extra-light {
-    background-color: #edf2fc;
+    background-color: #f2f6fc;
   }
 
   [class*=" bg-border-"] {
-    color: #5a5e66;
+    color: #303133;
   }
 </style>
 
@@ -94,13 +94,13 @@ Además del color principal, se necesitan utilizar distintos colores para difere
     <div class="demo-color-box bg-success">Éxito<div class="value">#67C23A</div></div>
   </el-col>
   <el-col :span="6">
-    <div class="demo-color-box bg-warning">Precaución<div class="value">#EB9E05</div></div>
+    <div class="demo-color-box bg-warning">Precaución<div class="value">#E6A23C</div></div>
   </el-col>
   <el-col :span="6">
-    <div class="demo-color-box bg-danger">Peligro<div class="value">#FA5555</div></div>
+    <div class="demo-color-box bg-danger">Peligro<div class="value">#F56C6C</div></div>
   </el-col>
   <el-col :span="6">
-    <div class="demo-color-box bg-info">Info<div class="value">#878D99</div></div>
+    <div class="demo-color-box bg-info">Info<div class="value">#909399</div></div>
   </el-col>
 </el-row>
 
@@ -111,18 +111,18 @@ Los colores neutrales son para texto, fondos y bordes. Puede usar diferentes col
 <el-row :gutter="12">
   <el-col :span="6">
     <div class="demo-color-box-group">
-      <div class="demo-color-box bg-text-primary">Texto primario<div class="value">#2D2F33</div></div>
-      <div class="demo-color-box bg-text-regular">Texto regular<div class="value">#5A5E66</div></div>
-      <div class="demo-color-box bg-text-secondary">Texto secundario<div class="value">#878D99</div></div>
-      <div class="demo-color-box bg-text-placeholder">Texto de placeholder<div class="value">#B4BCCC</div></div>
+      <div class="demo-color-box bg-text-primary">Texto primario<div class="value">#303133</div></div>
+      <div class="demo-color-box bg-text-regular">Texto regular<div class="value">#303133</div></div>
+      <div class="demo-color-box bg-text-secondary">Texto secundario<div class="value">#909399</div></div>
+      <div class="demo-color-box bg-text-placeholder">Texto de placeholder<div class="value">#C0C4CC</div></div>
     </div>
   </el-col>
   <el-col :span="6">
     <div class="demo-color-box-group">
-      <div class="demo-color-box bg-border-base">Borde base<div class="value">#D8DCE5</div></div>
-      <div class="demo-color-box bg-border-light">Borde ligero<div class="value">#DFE4ED</div></div>
-      <div class="demo-color-box bg-border-lighter">Borde claro<div class="value">#E6EBF5</div></div>
-      <div class="demo-color-box bg-border-extra-light">Borde extra claro<div class="value">#EDF2FC</div></div>
+      <div class="demo-color-box bg-border-base">Borde base<div class="value">#DCDFE6</div></div>
+      <div class="demo-color-box bg-border-light">Borde ligero<div class="value">#E4E7ED</div></div>
+      <div class="demo-color-box bg-border-lighter">Borde claro<div class="value">#EBEEF5</div></div>
+      <div class="demo-color-box bg-border-extra-light">Borde extra claro<div class="value">#F2F6FC</div></div>
     </div>
   </el-col>
 </el-row>

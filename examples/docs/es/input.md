@@ -72,7 +72,7 @@
 </script>
 
 <style>
-  .demo-input.demo-en-US {
+  .demo-input.demo-es {
     .el-select .el-input {
       width: 130px;
     }
@@ -148,7 +148,7 @@ Ingresa datos usando el ratón o teclado.
 
 ### Uso básico
 
-::: demo
+:::demo
 
 ```html
 <el-input placeholder="Please input" v-model="input"></el-input>
@@ -167,7 +167,7 @@ export default {
 
 ### Disabled
 
-::: demo Deshabilite el Input con el atributo  `disabled`.
+:::demo Deshabilite el Input con el atributo  `disabled`.
 
 ```html
 <el-input
@@ -192,7 +192,7 @@ export default {
 
 Añada un icono para indicar el tipo de Input.
 
-::: demo Para añadir iconos en el Input, puede utilizar los atributos `prefix-icon` y `suffix-icon` . Además, los slots con nombre `prefix` y `suffix` también funcionan.
+:::demo Para añadir iconos en el Input, puede utilizar los atributos `prefix-icon` y `suffix-icon` . Además, los slots con nombre `prefix` y `suffix` también funcionan.
 
 ```html
 <div class="demo-input-suffix">
@@ -248,7 +248,7 @@ export default {
 
 Redimensiona para introducir varias líneas de información de texto. Agrege el atributo `type="textarea"` para cambiar el `input` al tipo nativo `textarea`.
 
-::: demo Controle la altura ajustando el prop `rows`.
+:::demo Controle la altura ajustando el prop `rows`.
 
 ```html
 <el-input
@@ -274,7 +274,7 @@ export default {
 
 El ajuste del prop `autosize` en el tipo de Input textarea hace que la altura se ajuste automáticamente en función del contenido. Se puede proporcionar opciones en un objeto para autodimensionar y especificar el número mínimo y máximo de líneas que el textarea puede ajustar automáticamente.
 
-::: demo
+:::demo
 
 ```html
 <el-input
@@ -308,7 +308,7 @@ export default {
 
 Añade un elemento antes o después del input, generalmente una etiqueta o un botón.
 
-::: demo Utilice el `slot` para seleccionar si el elemento se colocara antes (prepend) o después (append) del Input.
+:::demo Utilice el `slot` para seleccionar si el elemento se colocara antes (prepend) o después (append) del Input.
 
 ```html
 <div>
@@ -357,7 +357,7 @@ export default {
 
 ### Tamaño
 
-::: demo Añada el atributo `size` para cambiar el tamaño del Input. Además del tamaño predeterminado, hay otras tres opciones: `large`, `small` y `mini`.
+:::demo Añada el atributo `size` para cambiar el tamaño del Input. Además del tamaño predeterminado, hay otras tres opciones: `large`, `small` y `mini`.
 
 ```html
 <div class="demo-input-size">
@@ -401,7 +401,7 @@ export default {
 
 Puede obtener algunas sugerencias basadas en la entrada actual.
 
-::: demo El componente Autocomplete proporciona sugerencias de entrada. El atributo `fetch-suggestions` es un método que devuelve la entrada sugerida. En este ejemplo, `querySearch(queryString, cb)` devuelve las sugerencias al componente mediante `cb(data)` cuando están listas.
+:::demo El componente Autocomplete proporciona sugerencias de entrada. El atributo `fetch-suggestions` es un método que devuelve la entrada sugerida. En este ejemplo, `querySearch(queryString, cb)` devuelve las sugerencias al componente mediante `cb(data)` cuando están listas.
 
 ```html
 <el-row class="demo-autocomplete">
@@ -563,7 +563,7 @@ Personalice cómo se muestran las sugerencias.
 
 Búsqueda de datos desde el servidor.
 
-::: demo
+:::demo
 ```html
 <el-autocomplete
   v-model="state4"
