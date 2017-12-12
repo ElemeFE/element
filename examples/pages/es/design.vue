@@ -26,57 +26,57 @@
 </style>
 <template>
   <div>
-    <h2>Design Disciplines</h2>
+    <h2>Disciplinas de diseño</h2>
     <el-row :gutter="14" class="cards">
       <el-col :xs="12" :sm="6">
         <div class="card">
           <img src="~examples/assets/images/consistency.png" alt="Consistency">
-          <h4>Consistency</h4>
+          <h4>Consistencia</h4>
           <span></span>
         </div>
       </el-col>
       <el-col :xs="12" :sm="6">
         <div class="card">
           <img src="~examples/assets/images/feedback.png" alt="Feedback">
-          <h4>Feedback</h4>
+          <h4>Comentarios</h4>
           <span></span>
         </div>
       </el-col>
       <el-col :xs="12" :sm="6">
         <div class="card">
           <img src="~examples/assets/images/efficiency.png" alt="Efficiency">
-          <h4>Efficiency</h4>
+          <h4>Eficiencia</h4>
           <span></span>
         </div>
       </el-col>
       <el-col :xs="12" :sm="6">
         <div class="card">
           <img src="~examples/assets/images/controllability.png" alt="Controllability">
-          <h4>Controllability</h4>
+          <h4>Control</h4>
           <span></span>
         </div>
       </el-col>
     </el-row>
-    <h3>Consistency</h3>
+    <h3>Consistencia</h3>
     <ul>
-      <li><strong>Consistent with real life: </strong>in line with the process and logic of real life, and comply with languages and habits that the users are used to.</li>
-      <li><strong>Consistent within interface: </strong>all elements should be consistent, such as: design style, icons and texts, position of elements, etc.</li>
+      <li><strong>Consistente con la vida real: </strong>en línea con el proceso y la vida real, y cumple con los idiomas y hábitos a los que los usuarios están acostumbrados.</li>
+      <li><strong>Consistente dentro de la interfaz: </strong>todos los elementos deben ser consistentes, como: estilo de diseño, iconos y texto, posición de los elementos, etc.</li>
     </ul>
-    <h3>Feedback</h3>
+    <h3>Comentarios</h3>
     <ul>
-      <li><strong>Operation feedback: </strong>enable the users to clearly perceive their operations by style updates and interactive effects.</li>
-      <li><strong>Visual feedback: </strong>reflect current state by updating or rearranging elements of the page.</li>
+      <li><strong>Comentarios sobre la operación: </strong>Permite a los usuarios percibir claramente las operaciones mediante actualizaciones de estilo y efectos interactivos.</li>
+      <li><strong>Comentarios visuales: </strong>Refleja el estado actual al actualizar o reorganizar los elementos de la página.</li>
     </ul>
-    <h3>Efficiency</h3>
+    <h3>Eficiencia</h3>
     <ul>
-      <li><strong>Simplify the process: </strong>keep operating process simple and intuitive.</li>
-      <li><strong>Definite and clear: </strong>enunciate your intentions clearly so that the users can quickly understand and make decisions.</li>
-      <li><strong>Easy to identify: </strong>the interface should be straightforward, which helps the users to identify and frees them from memorizing and recalling.</li>
+      <li><strong>Simplifica el proceso: </strong>Mantiene el proceso operativo simple e intuitivo.</li>
+      <li><strong>Bien definido y claro: </strong>Expresa las intenciones claramente para que los usuarios puedan comprender y tomar decisiones rápidamente.</li>
+      <li><strong>Fácil de identificar: </strong>La interfaz debe ser sencilla, lo que permitirá a los usuarios a identificar y liberarlos de la memorización y recuerdos.</li>
     </ul>
-    <h3>Controllability</h3>
+    <h3>Control</h3>
     <ul>
-      <li><strong>Decision making: </strong>giving advices about operations is acceptable, but do not make decisions for the users.</li>
-      <li><strong>Controlled consequences: </strong>users should be granted the freedom to operate, including canceling, aborting or terminating current operation.</li>
+      <li><strong>Toma de decisiones: </strong>Brindar consejos sobres las operaciones es aceptable, pero no tomar desiciones para los usuarios.</li>
+      <li><strong>Consecuencias controladas: </strong>Los usuarios deben tener la libertad de operar, incluida la cancelación, el aborto o la terminación de las operaciones actuales.</li>
     </ul>
   </div>
 </template>

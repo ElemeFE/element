@@ -103,7 +103,7 @@
 
 Similar a un Tooltip, Popover está construido con `Vue-popper`. Así que para atributos duplicados, por favor refiérase a la documentación de Tooltip.
 
-:::**Demo** Agrega `ref` al popover, luego en el botón usa la directiva `v-popover` para asociar el botón y el popover. El atributo `trigger` es usado para definir como el popover se dispara: `hover`, `click` o `focus`. De manera alternativa puede especificar la referencia utilizando un [slot con nombre](https://vuejs.org/v2/guide/components.html#Named-Slots).
+:::demo Agrega `ref` al popover, luego en el botón usa la directiva `v-popover` para asociar el botón y el popover. El atributo `trigger` es usado para definir como el popover se dispara: `hover`, `click` o `focus`. De manera alternativa puede especificar la referencia utilizando un [slot con nombre](https://vuejs.org/v2/guide/components.html#Named-Slots).
 
 ```html
 <el-popover
@@ -140,7 +140,7 @@ Similar a un Tooltip, Popover está construido con `Vue-popper`. Así que para a
 ### Información anidada
 Otros componentes pueden anidarse dentro de popover. A continuación un ejemplo de una tabla anidada.
 
-:::**Demo** Reemplaza el atributo `content` con un `slot`.
+:::demo Reemplaza el atributo `content` con un `slot`.
 
 ```html
 <el-popover
@@ -189,7 +189,7 @@ Otros componentes pueden anidarse dentro de popover. A continuación un ejemplo 
 
 Por supuesto, puedes anidar otras operaciones. Es más ligero que utilizar un `dialog`.
 
-:::**Demo**
+:::demo
 ```html
 <el-popover
   ref="popover5"

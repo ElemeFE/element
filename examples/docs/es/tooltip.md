@@ -9,7 +9,7 @@
 </script>
 
 <style>
-  .demo-tooltip.demo-en-US {
+  .demo-tooltip.demo-es {
     &:first-of-type .source {
       .el-button {
         width: 110px;

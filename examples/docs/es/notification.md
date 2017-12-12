@@ -116,7 +116,7 @@ Muestra un mensaje de notificación global en una esquina de la página.
 
 ### Uso básico
 
-::: demo Element ha registrado el método`$notify` y recibe un objeto como parámetro. En el caso más sencillo, puede establecer el campo de `title` y el campo de ` message` para el título y el cuerpo de la notificación. De forma predeterminada, la notificación se cierra automáticamente después de 4500ms, pero configurando `duration`  se puede controlar su duración. Específicamente, si está configurado en `0`, no se cerrará automáticamente. Tenga en cuenta que `duration` recibe un `Number` en milisegundos.
+:::demo Element ha registrado el método`$notify` y recibe un objeto como parámetro. En el caso más sencillo, puede establecer el campo de `title` y el campo de ` message` para el título y el cuerpo de la notificación. De forma predeterminada, la notificación se cierra automáticamente después de 4500ms, pero configurando `duration`  se puede controlar su duración. Específicamente, si está configurado en `0`, no se cerrará automáticamente. Tenga en cuenta que `duration` recibe un `Number` en milisegundos.
 
 ```html
 <template>
@@ -161,7 +161,7 @@ Muestra un mensaje de notificación global en una esquina de la página.
 
 Proporcionamos cuatro tipos: success, warning, info y error.
 
-::: demo Element proporciona cuatro tipos de notificación: `success`, `warning`, `info` y `error`. Se definen por el campo `type`  y se ignorarán otros valores. También se han registrado métodos para estos tipos que se pueden invocar directamente como en el ejemplo `open5` y `open6` sin pasar un campo `type`.
+:::demo Element proporciona cuatro tipos de notificación: `success`, `warning`, `info` y `error`. Se definen por el campo `type`  y se ignorarán otros valores. También se han registrado métodos para estos tipos que se pueden invocar directamente como en el ejemplo `open5` y `open6` sin pasar un campo `type`.
 
 ```html
 <template>
@@ -229,7 +229,7 @@ Proporcionamos cuatro tipos: success, warning, info y error.
 
 La notificación puede surgir de cualquier rincón que uno desee.
 
-::: demo El atributo `position` define desde qué esquina se desliza la notificación. Puede ser `top-right`, `top-left`, `bottom-right` o `bottom-left`. Predeterminado: `top-right`.
+:::demo El atributo `position` define desde qué esquina se desliza la notificación. Puede ser `top-right`, `top-left`, `bottom-right` o `bottom-left`. Predeterminado: `top-right`.
 
 ```html
 <template>
@@ -298,7 +298,7 @@ La notificación puede surgir de cualquier rincón que uno desee.
 
 Personalizar el desplazamiento de notificación desde el borde de la pantalla.
 
-::: demo Configure el atributo `offset` para personalizar el desplazamiento de la notificación desde el borde de la pantalla. Tenga en cuenta que cada instancia de la notificación del mismo momento debe tener el mismo desplazamiento.
+:::demo Configure el atributo `offset` para personalizar el desplazamiento de la notificación desde el borde de la pantalla. Tenga en cuenta que cada instancia de la notificación del mismo momento debe tener el mismo desplazamiento.
 
 ```html
 <template>
@@ -328,7 +328,7 @@ Personalizar el desplazamiento de notificación desde el borde de la pantalla.
 ### Usando cadenas HTML
 `message` soporta cadenas HTML.
 
-::: demo Configure `dangerouslyUseHTMLString` a true y `message` se tratará como una cadena HTML.
+:::demo Configure `dangerouslyUseHTMLString` a true y `message` se tratará como una cadena HTML.
 
 ```html
 <template>
@@ -365,7 +365,7 @@ Aunque la propiedad `message` soporta cadenas HTML, el renderizado dinámico de 
 
 Es posible ocultar el botón de cerrar
 
-::: demo Configure el atributo `showClose` como `false` para que el usuario no pueda cerrar la notificación.
+:::demo Configure el atributo `showClose` como `false` para que el usuario no pueda cerrar la notificación.
 
 ```html
 <template>

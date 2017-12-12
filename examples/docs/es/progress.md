@@ -14,7 +14,7 @@ Progreso es usado para mostrar el estado de la operación actual e informar al u
 
 ### Barra de progreso lineal (porcentage externo)
 
-:::**Demo** Usa el atributo `percentage` para asignar el porcentage. Este es **requerido** y tiene que ser un valor entre `0-100`.
+:::demo Usa el atributo `percentage` para asignar el porcentage. Este es **requerido** y tiene que ser un valor entre `0-100`.
 ```html
 <el-progress :percentage="0"></el-progress>
 <el-progress :percentage="70"></el-progress>
@@ -26,7 +26,7 @@ Progreso es usado para mostrar el estado de la operación actual e informar al u
 ### Barra de progreso lineal (porcentage interno)
 En este caso el porcentage no toma espacio adicional.
 
-:::**Demo** El atributo `stroke-width` decide el ancho de la barra de progreso, y usa el atributo `text-inside` para poner la descripción dentro de la misma.
+:::demo El atributo `stroke-width` decide el ancho de la barra de progreso, y usa el atributo `text-inside` para poner la descripción dentro de la misma.
 ```html
 <el-progress :text-inside="true" :stroke-width="18" :percentage="0"></el-progress>
 <el-progress :text-inside="true" :stroke-width="18" :percentage="70"></el-progress>
@@ -37,7 +37,7 @@ En este caso el porcentage no toma espacio adicional.
 
 ### Barra de progreso circular
 
-:::**Demo** Puede asignar el atributo `type` como `circle` para usar la barra circular de progreso, y usar el atributo `width` para cambiar el tamaño del círculo.
+:::demo Puede asignar el atributo `type` como `circle` para usar la barra circular de progreso, y usar el atributo `width` para cambiar el tamaño del círculo.
 ```html
 <el-progress type="circle" :percentage="0"></el-progress>
 <el-progress type="circle" :percentage="25"></el-progress>

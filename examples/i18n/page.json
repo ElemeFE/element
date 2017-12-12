@@ -106,10 +106,7 @@
         "9": "Download relevant design resources for shaping page prototype or visual draft, increasing design efficiency.",
         "lang": "en-US",
         "titleSize": "34",
-        "paraSize": "18",
-        "theatreParam": "{ maxSpeed: 100 }",
-        "typingFunc": ".addScene('product designers', 1800, -17, 800)\n          .addScene('UI designers', 1800, -12, 800)\n          .addScene('UX designers', 1800, -12, 800)\n          .addScene('product managers', 1800, -16, 800)\n          .addScene('FE developers', 1800, -13, 800)",
-        "typingInvoke": ".addActor('line2', { speed: 1, accuracy: 1 })\n        .addScene(2600)\n        .addScene('line2:For ', 500)"
+        "paraSize": "18"
       },
       "component": {},
       "changelog": {
@@ -182,7 +179,7 @@
         "9": "Take a closer look at the interaction design documentation. Learn more details of each component from a microcosmic perspective.",
         "paraHeight": "1.6",
         "placeholder1": "Under construction",
-        "placeholder2": "Please wait while we prepare the design resources"
+        "placeholder2": "More resources are being developed"
       }
     }
   },
@@ -201,15 +198,12 @@
         "9": "Descarga los recursos de diseño relevantes para dar forma a un prototipo o borrador, aumentando la eficiencia del diseño.",
         "lang": "es",
         "titleSize": "34",
-        "paraSize": "18",
-        "theatreParam": "{ maxSpeed: 100 }",
-        "typingFunc": ".addScene('product designers', 1800, -17, 800)\n          .addScene('UI designers', 1800, -12, 800)\n          .addScene('UX designers', 1800, -12, 800)\n          .addScene('product managers', 1800, -16, 800)\n          .addScene('FE developers', 1800, -13, 800)",
-        "typingInvoke": ".addActor('line2', { speed: 1, accuracy: 1 })\n        .addScene(2600)\n        .addScene('line2:For ', 500)"
+        "paraSize": "18"
       },
       "component": {},
       "changelog": {
         "1": "Lista de cambios",
-        "2": "en-US"
+        "2": "es"
       },
       "design": {
         "1": "Disciplinas de diseño",
@@ -277,7 +271,7 @@
         "9": "Eche un vistazo más de cerca a la documentación de diseño de interacción. Conoce más detalles de cada componente desde una perspectiva microcósmica.",
         "paraHeight": "1.6",
         "placeholder1": "En construcción",
-        "placeholder2": "Por favor espere mientras preparamos los recursos de diseño"
+        "placeholder2": "Se están desarrollando más recursos"
       }
     }
   }

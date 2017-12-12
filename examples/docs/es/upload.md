@@ -167,7 +167,7 @@ Carga archivos haciendo clic o arrastrándolos.
 
 Utilice el _hook_ `before-upload` para limitar el formato de archivo y su tamaño.
 
-::: demo
+:::demo
 ```html
 <el-upload
   class="avatar-uploader"
@@ -238,7 +238,7 @@ Utilice el _hook_ `before-upload` para limitar el formato de archivo y su tamañ
 
 Utilice la propiedad `list-type` para cambiar el estilo a un listado de archivos.
 
-::: demo
+:::demo
 ```html
 <el-upload
   action="https://jsonplaceholder.typicode.com/posts/"
@@ -274,7 +274,7 @@ Utilice la propiedad `list-type` para cambiar el estilo a un listado de archivos
 
 ### Lista de archivos con miniatura
 
-::: demo
+:::demo
 ```html
 <el-upload
   class="upload-demo"
@@ -310,7 +310,7 @@ Utilice la propiedad `list-type` para cambiar el estilo a un listado de archivos
 
 Utilice el _hook_ `on-change` para controlar la funcionalidad de la lista de archivos subidos.
 
-::: demo
+:::demo
 ```html
 <el-upload
   class="upload-demo"
@@ -349,7 +349,7 @@ Utilice el _hook_ `on-change` para controlar la funcionalidad de la lista de arc
 
 Puede arrastrar el archivo dentro de un área en especifico para cargar el archivo.
 
-::: demo
+:::demo
 ```html
 <el-upload
   class="upload-demo"
@@ -368,7 +368,7 @@ Puede arrastrar el archivo dentro de un área en especifico para cargar el archi
 
 ### Carga normal
 
-::: demo
+:::demo
 ```html
 <el-upload
   class="upload-demo"

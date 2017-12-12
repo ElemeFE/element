@@ -237,8 +237,8 @@
   <div>
     <div class="banner">
       <div class="banner-desc">
-        <h1>A Desktop UI Library</h1>
-        <p>Element, a Vue 2.0 based component library for developers, designers and product managers</p>
+        <h1>Un kit de interfaz de usuario para la web</h1>
+        <p>Element, una librería de componentes basada en Vue 2.0 para desarrolladores, diseñadores y jefes de producto</p>
       </div>
     </div>
     <div class="jumbotron">
@@ -264,36 +264,36 @@
         <li>
           <div class="card">
             <img src="~examples/assets/images/guide.png" alt="">
-            <h3>Guide</h3>
-            <p>Understand the design guidelines, helping designers build product that's logically sound, reasonably structured and easy to use.</p>
+            <h3>Guía</h3>
+            <p>Entender los líneamientos de diseño, ayudando a diseñadores a crear productos que sean lógicos, razonablemente estructurados y fáciles de usar.</p>
             <router-link
               active-class="active"
-              to="/en-US/guide/design"
-              exact>View Detail
+              to="/es/guide/design"
+              exact>Ver detalle
             </router-link>
           </div>
         </li>
         <li>
           <div class="card">
             <img src="~examples/assets/images/component.png" alt="">
-            <h3>Component</h3>
-            <p>Experience interaction details by strolling through component demos. Use encapsulated code to improve developing efficiency.</p>
+            <h3>Componentes</h3>
+            <p>Experimenta la interacción al pasear con los ejemplos de los componentes. Utiliza el código encapsulado para mejorar la eficiencia en el desarrollo.</p>
             <router-link
               active-class="active"
-              to="/en-US/component/layout"
-              exact>View Detail
+              to="/es/component/layout"
+              exact>Ver detalle
             </router-link>
           </div>
         </li>
         <li>
           <div class="card">
             <img src="~examples/assets/images/resource.png" alt="">
-            <h3>Resource</h3>
-            <p>Download relevant design resources for shaping page prototype or visual draft, increasing design efficiency.</p>
+            <h3>Recursos</h3>
+            <p>Descarga los recursos de diseño relevantes para dar forma a un prototipo o borrador, aumentando la eficiencia del diseño.</p>
             <router-link
               active-class="active"
-              to="/en-US/resource"
-              exact>View Detail
+              to="/es/resource"
+              exact>Ver detalle
             </router-link>
           </div>
         </li>

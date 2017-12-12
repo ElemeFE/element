@@ -118,7 +118,7 @@
 
 适用性广泛的通知栏
 
-::: demo Notification 组件提供通知功能，Element 注册了`$notify`方法，接收一个`options`字面量参数，在最简单的情况下，你可以设置`title`字段和`message`字段，用于设置通知的标题和正文。默认情况下，经过一段时间后 Notification 组件会自动关闭，但是通过设置`duration`，可以控制关闭的时间间隔，特别的是，如果设置为`0`，则不会自动关闭。注意：`duration`接收一个`Number`，单位为毫秒，默认为`4500`。
+:::demo Notification 组件提供通知功能，Element 注册了`$notify`方法，接收一个`options`字面量参数，在最简单的情况下，你可以设置`title`字段和`message`字段，用于设置通知的标题和正文。默认情况下，经过一段时间后 Notification 组件会自动关闭，但是通过设置`duration`，可以控制关闭的时间间隔，特别的是，如果设置为`0`，则不会自动关闭。注意：`duration`接收一个`Number`，单位为毫秒，默认为`4500`。
 ```html
 <template>
   <el-button
@@ -162,7 +162,7 @@
 
 带有 icon，常用来显示「成功、警告、消息、错误」类的系统消息
 
-::: demo Element 为 Notification 组件准备了四种通知类型：`success`, `warning`, `info`, `error`。通过`type`字段来设置，除此以外的值将被忽略。同时，我们也为 Notification 的各种 type 注册了方法，可以在不传入`type`字段的情况下像`open5`和`open6`那样直接调用。
+:::demo Element 为 Notification 组件准备了四种通知类型：`success`, `warning`, `info`, `error`。通过`type`字段来设置，除此以外的值将被忽略。同时，我们也为 Notification 的各种 type 注册了方法，可以在不传入`type`字段的情况下像`open5`和`open6`那样直接调用。
 ```html
 <template>
   <el-button
@@ -229,7 +229,7 @@
 
 可以让 Notification 从屏幕四角中的任意一角弹出
 
-::: demo 使用`position`属性定义 Notification 的弹出位置，支持四个选项：`top-right`、`top-left`、`bottom-right`、`bottom-left`，默认为`top-right`。
+:::demo 使用`position`属性定义 Notification 的弹出位置，支持四个选项：`top-right`、`top-left`、`bottom-right`、`bottom-left`，默认为`top-right`。
 ```html
 <template>
   <el-button
@@ -297,7 +297,7 @@
 
 让 Notification 偏移一些位置
 
-::: demo Notification 提供设置偏移量的功能，通过设置 `offset` 字段，可以使弹出的消息距屏幕边缘偏移一段距离。注意在同一时刻，所有的 Notification 实例应当具有一个相同的偏移量。
+:::demo Notification 提供设置偏移量的功能，通过设置 `offset` 字段，可以使弹出的消息距屏幕边缘偏移一段距离。注意在同一时刻，所有的 Notification 实例应当具有一个相同的偏移量。
 ```html
 <template>
   <el-button
@@ -326,7 +326,7 @@
 ### 使用 HTML 片段
 `message` 属性支持传入 HTML 片段
 
-::: demo 将`dangerouslyUseHTMLString`属性设置为 true，`message` 就会被当作 HTML 片段处理。
+:::demo 将`dangerouslyUseHTMLString`属性设置为 true，`message` 就会被当作 HTML 片段处理。
 ```html
 <template>
   <el-button
@@ -360,7 +360,7 @@
 
 可以不显示关闭按钮
 
-::: demo 将`showClose`属性设置为`false`即可隐藏关闭按钮。
+:::demo 将`showClose`属性设置为`false`即可隐藏关闭按钮。
 ```html
 <template>
   <el-button

@@ -138,9 +138,9 @@
   <div class="page-changelog">
     <div class="heading">
       <el-button class="fr">
-        <a href="https://github.com/ElemeFE/element/releases" target="_blank">Github Releases</a>
+        <a href="https://github.com/ElemeFE/element/releases" target="_blank">GitHub Releases</a>
       </el-button>
-      Changelog
+      Lista de cambios
     </div>
     <ul class="timeline" ref="timeline">
     </ul>
@@ -148,7 +148,7 @@
   </div>
 </template>
 <script>
-  import ChangeLog from '../../../CHANGELOG.en-US.md';
+  import ChangeLog from '../../../CHANGELOG.es.md';
 
   export default {
     components: {

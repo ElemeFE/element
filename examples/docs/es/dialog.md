@@ -243,8 +243,6 @@ Si un diálogo está anidado en otro diálogo, se requiere append-to-body.
 ```
 :::
 
-:::
-
 ### Contenido centrado
 El contenido de Diálogo se puede centrar.
 

@@ -78,11 +78,11 @@
         navsData: [
           {
             path: '/design',
-            name: 'Design Disciplines'
+            name: 'Disciplinas de diseño'
           },
           {
             path: '/nav',
-            name: 'Navigation'
+            name: 'Navegación'
           }
         ]
       };

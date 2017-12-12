@@ -45,7 +45,7 @@ Muestra la cantidad de mensajes nuevos.
 
 Se puede personalizar el valor máximo.
 
-::: demo El valor máximo se define como `max` el cual es un `Number`. Nota: solo funciona si `value` es también un `Number`.
+:::demo El valor máximo se define como `max` el cual es un `Number`. Nota: solo funciona si `value` es también un `Number`.
 
 ```html
 <el-badge :value="200" :max="99" class="item">

@@ -63,7 +63,7 @@ Se utiliza para marcar y seleccionar.
 
 ### Uso básico
 
-::: demo Utilice el atributo `type` para definir el tipo de etiqueta. Además, el atributo `color` se puede utilizar para establecer el color de fondo de la etiqueta.
+:::demo Utilice el atributo `type` para definir el tipo de etiqueta. Además, el atributo `color` se puede utilizar para establecer el color de fondo de la etiqueta.
 
 ```html
 <el-tag>Tag One</el-tag>

@@ -83,7 +83,7 @@ const registerRoute = (navConfig) => {
         description: page.description,
         lang
       },
-      name: 'component-' + (page.title || page.name),
+      name: 'component-' + lang + (page.title || page.name),
       component: component.default || component
     };
 

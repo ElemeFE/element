@@ -169,7 +169,7 @@
 </script>
 
 <style>
-  .demo-form.demo-en-US {
+  .demo-form.demo-es {
     .el-select .el-input {
       width: 360px;
     }
@@ -231,6 +231,8 @@
       }
     }
     .demo-dynamic {
+      width: 500px;
+
       .el-input {
         margin-right: 10px;
         width: 270px;
@@ -707,7 +709,7 @@ Este ejemplo muestra cómo personalizar sus propias reglas de validación para f
 
 ### Validación numerica
 
-::: demo La validacion numerica necesita un modificador `.number` añadido en el enlace `v-model` de entrada, sirve para transformar el valor de la cadena al número proporcionado por Vuejs.
+:::demo La validacion numerica necesita un modificador `.number` añadido en el enlace `v-model` de entrada, sirve para transformar el valor de la cadena al número proporcionado por Vuejs.
 
 ```html
 <el-form :model="numberValidateForm" ref="numberValidateForm" label-width="100px" class="demo-ruleForm">
@@ -765,7 +767,7 @@ Cuando un `el-form-item` está anidado en otro `el-form-item`, su ancho de etiqu
 
 Todos los componentes de un formulario heredan su atributo `size`. De manera similar, FormItem también tiene un atributo `size`.
 
-::: demo Aún así, puede ajustar el `size` de cada componente si no desea que herede su tamaño de From o FormItem.
+:::demo Aún así, puede ajustar el `size` de cada componente si no desea que herede su tamaño de From o FormItem.
 
 ```html
 <el-form ref="form" :model="sizeForm" label-width="120px" size="mini">
