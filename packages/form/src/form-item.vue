@@ -251,7 +251,6 @@
       }
     },
     mounted() {
-      console.log(11, this.prop);
       if (this.prop) {
         this.dispatch('ElForm', 'el.form.addField', [this]);
 

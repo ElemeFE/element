@@ -1,5 +1,15 @@
 ## Changelog
 
+### 2.0.8
+
+*2017-12-12*
+
+- Added Spanish documentation
+- Fixed `show-timeout` of Dropdown not working when trigger is click, #8734 (por @presidenten)
+- Fixed Form validation timing for rules whose trigger is blur, #8776
+- Fixed blur event of ranged DatePicker, #8784
+- `format` of TimePicker now supports AM/PM, #8620 (por @firesh)
+
 ### 2.0.7
 
 *2017-11-29*
@@ -14,7 +24,7 @@
 - Corregido activacion para Popover cuando `trigger` es manual, #8467
 - Añadidos los atributos `prefix-icon` y `suffix-icon`  para Autocomplete, #8446 (por @liyanlong)
 - Añadido el atributo `separator` para Cascader, #8501
-- Añadido atributo `clearable` para Input, #8509 (by @lbogdan)
+- Añadido atributo `clearable` para Input, #8509 (por @lbogdan)
 - Añadido atributo `background` para Pagination, #8553
 
 ### 2.0.5
@@ -36,7 +46,7 @@
 - Arreglado el cambio de tamaño del Container cuando el ancho de la vista disminuye, #8042
 - Arreglado Tree's `updateKeyChildren` borraba incorrectamente los nodos hijos, #8100
 - Arreglado la altura de los bordes de CheckboxBotón's cuando esta anidado en un Form, #8100
-- Arreglado error de análisis de los Menu's para los colores personalizados, #8153 (by @zhouyixiang)
+- Arreglado error de análisis de los Menu's para los colores personalizados, #8153 (por @zhouyixiang)
 
 ### 2.0.3
 
