@@ -438,27 +438,28 @@
   }
 
   .sort-caret {
-    color: $--color-text-placeholder;
-    width: 14px;
-    overflow: hidden;
-    font-size: 15px;
+    width: 0;
+    height: 0;
+    border: solid 5px transparent;
     position: absolute;
 
     &.ascending {
+      border-bottom-color: $--color-text-placeholder;
       top: 5px;
     }
 
     &.descending {
+      border-top-color: $--color-text-placeholder;
       bottom: 7px;
     }
   }
 
   .ascending .sort-caret.ascending {
-    color: $--color-primary;
+    border-bottom-color: $--color-primary;
   }
 
   .descending .sort-caret.descending {
-    color: $--color-primary;
+    border-top-color: $--color-primary;
   }
 
   .hidden-columns {
