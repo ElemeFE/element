@@ -1,7 +1,7 @@
 import { createTest, createVue, triggerEvent, destroyVM } from '../util';
 import Select from 'packages/select';
 
-describe('Select', () => {
+describe.only('Select', () => {
   const getSelectVm = (configs = {}, options) => {
     ['multiple', 'clearable', 'filterable', 'allowCreate', 'remote'].forEach(config => {
       configs[config] = configs[config] || false;
@@ -500,6 +500,40 @@ describe('Select', () => {
         target[0].click();
         setTimeout(() => {
           expect(select.value.indexOf('new') > -1).to.true;
+          done();
+        }, 10);
+      }, 10);
+    }, 10);
+  });
+
+  it('allow create on enter', done => {
+    vm = getSelectVm({ filterable: true, allowCreate: true });
+    const select = vm.$children[0];
+    select.$el.querySelector('input').focus();
+    setTimeout(() => {
+      select.selectedLabel = 'new';
+      select.onInputChange();
+      setTimeout(() => {
+        select.selectOption();
+        setTimeout(() => {
+          expect(select.value.indexOf('new') > -1).to.true;
+          done();
+        }, 10);
+      }, 10);
+    }, 10);
+  });
+
+  it('allow create on enter for existing options', done => {
+    vm = getSelectVm({ filterable: true, allowCreate: true });
+    const select = vm.$children[0];
+    select.$el.querySelector('input').focus();
+    setTimeout(() => {
+      select.selectedLabel = '1';
+      select.onInputChange();
+      setTimeout(() => {
+        select.selectOption();
+        setTimeout(() => {
+          expect(select.value.indexOf('1') > -1).to.true;
           done();
         }, 10);
       }, 10);
