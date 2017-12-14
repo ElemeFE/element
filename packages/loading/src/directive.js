@@ -76,6 +76,7 @@ exports.install = Vue => {
       const textExr = el.getAttribute('element-loading-text');
       const spinnerExr = el.getAttribute('element-loading-spinner');
       const backgroundExr = el.getAttribute('element-loading-background');
+      const customClassExr = el.getAttribute('element-loading-custom-class');
       const vm = vnode.context;
       const mask = new Mask({
         el: document.createElement('div'),
@@ -83,6 +84,7 @@ exports.install = Vue => {
           text: vm && vm[textExr] || textExr,
           spinner: vm && vm[spinnerExr] || spinnerExr,
           background: vm && vm[backgroundExr] || backgroundExr,
+          customClass: vm && vm[customClassExr] || customClassExr,
           fullscreen: !!binding.modifiers.fullscreen
         }
       });
