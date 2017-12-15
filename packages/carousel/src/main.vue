@@ -9,6 +9,7 @@
       :style="{ height: height }">
       <transition name="carousel-arrow-left">
         <button
+          type="button"
           v-if="arrow !== 'never'"
           v-show="arrow === 'always' || hover"
           @mouseenter="handleButtonEnter('left')"
@@ -20,6 +21,7 @@
       </transition>
       <transition name="carousel-arrow-right">
         <button
+          type="button"
           v-if="arrow !== 'never'"
           v-show="arrow === 'always' || hover"
           @mouseenter="handleButtonEnter('right')"
