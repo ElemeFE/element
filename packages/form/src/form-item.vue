@@ -73,9 +73,12 @@
       size: String
     },
     watch: {
-      error(value) {
-        this.validateMessage = value;
-        this.validateState = value ? 'error' : '';
+      error: {
+        immediate: true,
+        handler(value) {
+          this.validateMessage = value;
+          this.validateState = value ? 'error' : '';
+        }
       },
       validateStatus(value) {
         this.validateState = value;
