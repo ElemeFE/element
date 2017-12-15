@@ -48,7 +48,7 @@
         :class="[selectSize ? `is-${ selectSize }` : '']"
         :disabled="disabled"
         @focus="handleFocus"
-        @click.stop
+        @click.stop.native="handleFocus"
         @keyup="managePlaceholder"
         @keydown="resetInputState"
         @keydown.down.prevent="navigateOptions('next')"
@@ -76,8 +76,8 @@
       :validate-event="false"
       :class="{ 'is-focus': visible }"
       @focus="handleFocus"
+      @click.stop.native="handleFocus"
       @blur="handleBlur"
-      @mousedown.native="handleMouseDown"
       @keyup.native="debouncedOnInputChange"
       @keydown.native.down.stop.prevent="navigateOptions('next')"
       @keydown.native.up.stop.prevent="navigateOptions('prev')"
@@ -89,7 +89,7 @@
       @mouseleave.native="inputHovering = false">
       <i slot="suffix"
        :class="['el-select__caret', 'el-input__icon', 'el-icon-' + iconClass]"
-       @click="handleIconClick"
+       @click.stop.native="handleIconClick"
       ></i>
     </el-input>
     <transition
@@ -280,7 +280,9 @@
         query: '',
         previousQuery: '',
         inputHovering: false,
-        currentPlaceholder: ''
+        currentPlaceholder: '',
+        optionSelected: false,
+        prevFocusTime: null
       };
     },
 
@@ -496,8 +498,24 @@
       },
 
       handleFocus(event) {
-        this.visible = true;
-        this.$emit('focus', event);
+        const callMyFunction = () => {
+          if (this.disabled) {
+            return;
+          }
+
+          if (this.optionSelected) {
+            this.optionSelected = false;
+          } else {
+            this.visible = !this.visible;
+          }
+        };
+
+        const now = new Date().getTime();
+        const prevTime = this.prevFocusTime;
+        this.prevFocusTime = now;
+        if (!prevTime || now - prevTime > 100) {
+          callMyFunction();
+        }
       },
 
       handleBlur(event) {
@@ -509,14 +527,6 @@
           this.deleteSelected(event);
         } else {
           this.toggleMenu();
-        }
-      },
-
-      handleMouseDown(event) {
-        if (event.target.tagName !== 'INPUT') return;
-        if (this.visible) {
-          this.handleClose();
-          event.preventDefault();
         }
       },
 
@@ -615,7 +625,13 @@
           this.emitChange(option.value);
           this.visible = false;
         }
-        this.$nextTick(() => this.scrollToOption(option));
+
+        this.optionSelected = true;
+
+        this.$nextTick(() => {
+          this.scrollToOption(option);
+          this.$refs.reference.focus();
+        });
       },
 
       getValueIndex(arr = [], value) {
@@ -646,6 +662,11 @@
       },
 
       selectOption() {
+        if (!this.visible) {
+          this.visible = true;
+          return;
+        }
+
         if (this.options[this.hoverIndex]) {
           this.handleOptionSelect(this.options[this.hoverIndex]);
         }
