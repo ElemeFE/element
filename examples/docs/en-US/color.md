@@ -45,7 +45,7 @@
     background-color: #303133;
   }
   .bg-text-regular {
-    background-color: #303133;
+    background-color: #606266;
   }
   .bg-text-secondary {
     background-color: #909399;
@@ -112,7 +112,7 @@ Neutral colors are for text, background and border colors. You can use different
   <el-col :span="6">
     <div class="demo-color-box-group">
       <div class="demo-color-box bg-text-primary">Primary Text<div class="value">#303133</div></div>
-      <div class="demo-color-box bg-text-regular">Regular Text<div class="value">#303133</div></div>
+      <div class="demo-color-box bg-text-regular">Regular Text<div class="value">#606266</div></div>
       <div class="demo-color-box bg-text-secondary">Secondary Text<div class="value">#909399</div></div>
       <div class="demo-color-box bg-text-placeholder">Placeholder Text<div class="value">#C0C4CC</div></div>
     </div>

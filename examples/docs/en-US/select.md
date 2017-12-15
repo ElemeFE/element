@@ -614,7 +614,7 @@ Enter keywords and search data from server.
 
 ### Create new items
 Create and select new items that are not included in select options
-:::demo By using the `allow-create` attribute, users can create new items by typing in the input box. Note that for `allow-create` to work, `filterable` must be `true`.
+:::demo By using the `allow-create` attribute, users can create new items by typing in the input box. Note that for `allow-create` to work, `filterable` must be `true`. This example also demonstrates `default-first-option`. When this attribute is set to `true`, you can select the first option in the current option list by hitting enter without having to navigate with mouse or arrow keys.
 ```html
 <template>
   <el-select
@@ -622,6 +622,7 @@ Create and select new items that are not included in select options
     multiple
     filterable
     allow-create
+    default-first-option
     placeholder="Choose tags for your article">
     <el-option
       v-for="item in options5"
