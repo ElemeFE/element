@@ -116,14 +116,8 @@
       handleExceed(files, fileList) {
         this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
       },
-      handleBeforeRemove(file, fileList) {
-        return new Promise((resolve, reject) => {
-          if (confirm('It looks good, are you sure to remove?')) {
-            resolve();
-          } else {
-            reject();
-          }
-        });
+      beforeRemove(file, fileList) {
+        return this.$confirm(`确定移除 ${ file.name }？`);
       }
     }
   }
@@ -135,14 +129,14 @@
 
 ### 点击上传
 
-:::demo 通过 slot 你可以传入自定义的上传按钮类型和文字提示。可通过设置 `limit` 和 `on-exceed` 来限制上传文件的个数和定义超出限制时的行为。可通过设置 `before-remove` 来阻止删除操作。
+:::demo 通过 slot 你可以传入自定义的上传按钮类型和文字提示。可通过设置`limit`和`on-exceed`来限制上传文件的个数和定义超出限制时的行为。可通过设置`before-remove`来阻止文件移除操作。
 ```html
 <el-upload
   class="upload-demo"
   action="https://jsonplaceholder.typicode.com/posts/"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
-  :before-remove="handleBeforeRemove"
+  :before-remove="beforeRemove"
   multiple
   :limit="3"
   :on-exceed="handleExceed"
@@ -167,14 +161,8 @@
       handleExceed(files, fileList) {
         this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
       },
-      handleBeforeRemove(file, fileList) {
-        return new Promise((resolve, reject) => {
-          if (confirm('It looks good, are you sure to remove?')) {
-            resolve();
-          } else {
-            reject();
-          }
-        });
+      beforeRemove(file, fileList) {
+        return this.$confirm(`确定移除 ${ file.name }？`);
       }
     }
   }

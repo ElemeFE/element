@@ -144,6 +144,18 @@
         }
         return index;
       },
+      getNodePath(data) {
+        if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in getNodePath');
+        const node = this.store.getNode(data);
+        if (!node) return [];
+        const path = [node.data];
+        let parent = node.parent;
+        while (parent && parent !== this.root) {
+          path.push(parent.data);
+          parent = parent.parent;
+        }
+        return path.reverse();
+      },
       getCheckedNodes(leafOnly) {
         return this.store.getCheckedNodes(leafOnly);
       },

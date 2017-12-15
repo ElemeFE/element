@@ -185,16 +185,15 @@ export default {
 
       if (!this.beforeRemove) {
         doRemove();
-        return;
-      }
-
-      const before = this.beforeRemove(file, this.uploadFiles);
-      if (before && before.then) {
-        before.then(() => {
+      } else if (typeof this.beforeRemove === 'function') {
+        const before = this.beforeRemove(file, this.uploadFiles);
+        if (before && before.then) {
+          before.then(() => {
+            doRemove();
+          }, noop);
+        } else if (before !== false) {
           doRemove();
-        }, noop);
-      } else if (before !== false) {
-        doRemove();
+        }
       }
     },
     getFile(rawFile) {
