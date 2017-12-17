@@ -32,6 +32,7 @@
         :false-value="falseLabel"
         v-model="model"
         @change="handleChange"
+        @keydown="handleKeyDown"
         @focus="focus = true"
         @blur="focus = false">
       <input
@@ -43,6 +44,7 @@
         :name="name"
         v-model="model"
         @change="handleChange"
+        @keydown="handleKeyDown"
         @focus="focus = true"
         @blur="focus = false">
     </span>
@@ -189,6 +191,12 @@
             this.dispatch('ElCheckboxGroup', 'change', [this._checkboxGroup.value]);
           }
         });
+      },
+      handleKeyDown(evt) {
+        let target = evt.target;
+        if (evt.keyCode === 13) {
+          target.click();
+        }
       }
     },
 
