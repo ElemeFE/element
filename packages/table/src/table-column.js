@@ -99,7 +99,11 @@ const getDefaultColumn = function(type, options) {
     column.minWidth = 80;
   }
 
-  column.realWidth = column.width || column.minWidth;
+  if (column.hasOwnProperty('width')) {
+    column.realWidth = column.width;
+  } else {
+    column.realWidth = column.minWidth;
+  }
 
   return column;
 };
