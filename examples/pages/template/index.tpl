@@ -29,13 +29,13 @@
     img {
       margin-right: 20px;
     }
-  
+
     div {
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
-  
+
     p {
       margin: 0;
       line-height: 1.8;
@@ -57,11 +57,11 @@
       top: 0;
       left: 0;
     }
-    
+
     img {
       position: absolute;
     }
-    
+
     .jumbotron-cloud-1 {
       right: 0;
       top: 0;
@@ -72,19 +72,19 @@
       left: 60px;
       top: 200px;
     }
-    
+
     .jumbotron-web {
       height: 385px;
       top: 35px;
       left: 110px;
     }
-    
+
     .jumbotron-cloud-2 {
       left: 0;
       top: 50px;
       height: 55px;
     }
-    
+
     .jumbotron-compo-1 {
       left: 94px;
       height: 90px;
@@ -96,7 +96,7 @@
       top: 60px;
       height: 124px;
     }
-  
+
     .jumbotron-compo-3 {
       right: 42px;
       top: 200px;
@@ -114,7 +114,7 @@
       right: 180px;
       height: 140px;
     }
-  
+
     .jumbotron-figure-2 {
       bottom: 0;
       right: 10px;
@@ -288,7 +288,7 @@
       <img width="35px" src="~examples/assets/images/tipe.svg" alt="tipe.io">
       <div>
         <p>Sponsored by Tipe.io</p>
-        <p>Next Generation Headless CMS</p>
+        <p>Next Generation API-first CMS</p>
       </div>
     </a>
     <div class="cards">
