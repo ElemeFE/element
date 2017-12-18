@@ -114,11 +114,7 @@ export default {
   },
 
   mounted() {
-    this.referenceElm = this.$el;
-    if (this.$el.nodeType === 1) {
-      this.$el.setAttribute('aria-describedby', this.tooltipId);
-      this.$el.setAttribute('tabindex', 0);
-    }
+    this.makeReferenceLink();
   },
   watch: {
     focusing(val) {
@@ -130,7 +126,15 @@ export default {
     }
   },
   methods: {
+    makeReferenceLink() {
+      this.referenceElm = this.$el;
+      if (this.$el.nodeType === 1) {
+        this.$el.setAttribute('aria-describedby', this.tooltipId);
+        this.$el.setAttribute('tabindex', 0);
+      }
+    },
     show() {
+      this.makeReferenceLink();
       this.setExpectedState(true);
       this.handleShowPopper();
     },
