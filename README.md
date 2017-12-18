@@ -18,6 +18,18 @@
 
 > A Vue.js 2.0 UI Toolkit for Web.
 
+<p align="center">
+  <b>Special thanks to the generous sponsorship by:</b>
+</p>
+<p align="center">
+  <a href="https://tipe.io/?ref=element" target="_blank">Tipo.io</a>
+</p>
+<p align="center">
+  <a href="https://tipe.io/?ref=element" target="_blank">
+    <img style="vertical-align: middle" width="150px" src="https://user-images.githubusercontent.com/10095631/34094742-79218b1c-e409-11e7-8efc-65e14c0e15c3.png">
+  </a>
+</p>
+
 ## Links
 - Homepage and documentation
   - International users: http://element.eleme.io/

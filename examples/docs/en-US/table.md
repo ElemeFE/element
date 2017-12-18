@@ -1407,7 +1407,7 @@ Filter the table to find desired data.
 ### Custom column template
 
 Customize table column so it can be integrated with other components.
-:::demo You have access to the following data: row, column, $index and store (state management of Table) by [Scoped slot](https://vuejs.org/v2/guide/components.html#Scoped-Slots). (Scoped slots is supported from `1.1`, `inline-template` still works, but it's not recommended).
+:::demo You have access to the following data: row, column, $index and store (state management of Table) by [Scoped slot](https://vuejs.org/v2/guide/components.html#Scoped-Slots).
 ```html
 <template>
   <el-table
@@ -1944,8 +1944,8 @@ You can customize row index in `type=index` columns.
 | current-row-key | key of current row, a set only prop | string,number | — | — |
 | row-class-name | function that returns custom class names for a row, or a string assigning class names for every row | Function({row, rowIndex})/String | — | — |
 | row-style | function that returns custom style for a row, or an object assigning custom style for every row | Function({row, rowIndex})/Object | — | — |
-| cell-class-name | function that returns custom class names for a cell, or a string assigning class names for every cell | Function({row, rowIndex})/String | — | — |
-| cell-style | function that returns custom style for a cell, or an object assigning custom style for every cell | Function({row, rowIndex})/Object | — | — |
+| cell-class-name | function that returns custom class names for a cell, or a string assigning class names for every cell | Function({row, column, rowIndex, columnIndex})/String | — | — |
+| cell-style | function that returns custom style for a cell, or an object assigning custom style for every cell | Function({row, column, rowIndex, columnIndex})/Object | — | — |
 | header-row-class-name | function that returns custom class names for a row in table header, or a string assigning class names for every row in table header | Function({row, rowIndex})/String | — | — |
 | header-row-style | function that returns custom style for a row in table header, or an object assigning custom style for every row in table header | Function({row, rowIndex})/Object | — | — |
 | header-cell-class-name | function that returns custom class names for a cell in table header, or a string assigning class names for every cell in table header | Function({row, rowIndex})/String | — | — |
