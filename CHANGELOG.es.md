@@ -75,9 +75,6 @@
 
 *2017-10-28*
 
-- Fixed style error of RadioButton and CheckboxButton, #7793
-- Fixed TimePicker not respond to mouse scroll in some conditions, #7811
-- Fixed incomplete styles of some components when imported on demand, #7811
 - Corregido error de estilo de RadioButton y CheckboxButton, #7793
 - Corregido TimePicker no responde al desplazamiento del ratón en algunas condiciones, #7811
 - Corregido estilos incompletos de algunos componentes cuando se importan bajo demanda, #7811
