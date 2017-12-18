@@ -19,10 +19,34 @@
       margin: 10px 0 5px;
     }
   }
+  .sponsor {
+    margin: 0 auto 50px;
+    display: flex;
+    width: 400px;
+    height: 100px;
+    justify-content: center;
+
+    img {
+      margin-right: 20px;
+    }
+  
+    div {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  
+    p {
+      margin: 0;
+      line-height: 1.8;
+      color: #999;
+      font-size: 14px;
+    }
+  }
   .jumbotron {
     width: 890px;
     height: 465px;
-    margin: 30px auto 100px;
+    margin: 30px auto;
     position: relative;
 
     div {
@@ -183,6 +207,7 @@
       width: 100%;
       .container {
         width: 100%;
+        margin: 0;
       }
     }
     .banner .container {
@@ -259,6 +284,13 @@
         <img class="jumbotron-compo-3" src="~examples/assets/images/compo-3.png" alt="">
       </div>
     </div>
+    <a class="sponsor" href="https://tipe.io/?ref=element" target="_blank">
+      <img width="35px" src="~examples/assets/images/tipe.svg" alt="tipe.io">
+      <div>
+        <p>Sponsored by Tipe.io</p>
+        <p>Next Generation Headless CMS</p>
+      </div>
+    </a>
     <div class="cards">
       <ul class="container">
         <li>
