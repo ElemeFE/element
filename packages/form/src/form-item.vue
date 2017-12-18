@@ -230,7 +230,7 @@
         var selfRules = this.rules;
         var requiredRule = this.required !== undefined ? { required: !!this.required } : [];
 
-        formRules = formRules ? getPropByPath(formRules, this.prop || '').v : [];
+        formRules = formRules ? getPropByPath(formRules, this.prop || '').o[this.prop || ''] : [];
 
         return [].concat(selfRules || formRules || []).concat(requiredRule);
       },
