@@ -168,6 +168,7 @@
     overflow: hidden;
     user-select: none;
     text-align: left;
+    background-color: $--table-header-background;
 
     div {
       display: inline-block;
