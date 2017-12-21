@@ -301,8 +301,8 @@
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | index     | 唯一标志   | string  | — | — |
-| show-timeout | 展开sub-menu的延时 | number | — | 300 |
-| hide-timeout | 收起sub-menu的延时 | number | — | 300 |
+| show-timeout | 展开 sub-menu 的延时 | number | — | 300 |
+| hide-timeout | 收起 sub-menu 的延时 | number | — | 300 |
 
 ### Menu-Item Attribute
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
