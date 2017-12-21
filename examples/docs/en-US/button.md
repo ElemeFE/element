@@ -26,7 +26,7 @@ Commonly used button.
 
 ### Basic usage
 
-::: demo Use `type`, `plain` and `round` to define Button's style.
+:::demo Use `type`, `plain` and `round` to define Button's style.
 
 ```html
 <div>

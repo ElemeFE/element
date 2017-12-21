@@ -9,6 +9,7 @@
       :style="{ height: height }">
       <transition name="carousel-arrow-left">
         <button
+          type="button"
           v-if="arrow !== 'never'"
           v-show="arrow === 'always' || hover"
           @mouseenter="handleButtonEnter('left')"
@@ -20,6 +21,7 @@
       </transition>
       <transition name="carousel-arrow-right">
         <button
+          type="button"
           v-if="arrow !== 'never'"
           v-show="arrow === 'always' || hover"
           @mouseenter="handleButtonEnter('right')"
@@ -193,12 +195,16 @@ export default {
         return;
       }
       let length = this.items.length;
+      const oldIndex = this.activeIndex;
       if (index < 0) {
         this.activeIndex = length - 1;
       } else if (index >= length) {
         this.activeIndex = 0;
       } else {
         this.activeIndex = index;
+      }
+      if (oldIndex === this.activeIndex) {
+        this.resetItemPosition(oldIndex);
       }
     },
 

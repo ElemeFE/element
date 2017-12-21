@@ -139,10 +139,22 @@
       margin: 10px;
     }
   }
+  @media (max-width: 1140px) {
+    .footer {
+      height: auto;
+    }
+  }
+  
+  @media (max-width: 1000px) {
+    .footer-social {
+      display: none;
+    }
+  }
+  
   @media (max-width: 768px) {
     .footer {
-      .footer-social {
-        display: none;
+      .footer-main {
+        margin-bottom: 30px;
       }
     }
   }

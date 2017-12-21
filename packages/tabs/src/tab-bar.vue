@@ -34,7 +34,7 @@
             } else {
               tabSize = $el[`client${firstUpperCase(sizeName)}`];
               if (sizeName === 'width') {
-                tabSize -= index === 0 ? 20 : 40;
+                tabSize -= (index === 0 || index === this.tabs.length - 1) ? 20 : 40;
               }
               return false;
             }

@@ -1,5 +1,32 @@
 ## Changelog
 
+### 2.0.8
+
+*2017-12-12*
+
+- Added Spanish documentation
+- Fixed `show-timeout` of Dropdown not working when trigger is click, #8734 (by @presidenten)
+- Fixed Form validation timing for rules whose trigger is blur, #8776
+- Fixed blur event of ranged DatePicker, #8784
+- `format` of TimePicker now supports AM/PM, #8620 (by @firesh)
+
+### 2.0.7
+
+*2017-11-29*
+
+- Fixed disabled text button style, #8570
+
+### 2.0.6
+
+*2017-11-29*
+
+- Fixed style bug of Table's sorting icons, #8405
+- Fixed trigger mechanism for Popover when its `trigger` is manual, #8467
+- Added `prefix-icon` and `suffix-icon` attributes for Autocomplete, #8446 (by @liyanlong)
+- Added `separator` attribute for Cascader, #8501
+- Added `clearable` attribute for Input, #8509 (by @lbogdan)
+- Added `background` attribute for Pagination, #8553
+
 ### 2.0.5
 
 *2017-11-17*

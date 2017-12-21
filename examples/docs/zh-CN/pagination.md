@@ -23,6 +23,18 @@
 ```
 :::
 
+### 带有背景色的分页
+
+:::demo 设置`background`属性可以为分页按钮添加背景色。
+```html
+<el-pagination
+  background
+  layout="prev, pager, next"
+  :total="1000">
+</el-pagination>
+```
+:::
+
 ### 小型分页
 
 在空间有限的情况下，可以使用简单的小型分页。
@@ -199,6 +211,7 @@
 | 参数               | 说明                                                     | 类型              | 可选值      | 默认值 |
 |--------------------|----------------------------------------------------------|-------------------|-------------|--------|
 | small | 是否使用小型分页样式 | Boolean | — | false |
+| background | 是否为分页按钮添加背景色 | Boolean | — | false |
 | page-size | 每页显示条目个数 | Number | — | 10 |
 | total | 总条目数 | Number | — | — |
 | page-count | 总页数，total 和 page-count 设置任意一个就可以达到显示页码的功能；如果要支持 page-sizes 的更改，则需要使用 total 属性 | Number | — | — |

@@ -231,6 +231,8 @@
       }
     }
     .demo-dynamic {
+      width: 500px;
+
       .el-input {
         margin-right: 10px;
         width: 270px;
@@ -706,7 +708,7 @@ This example shows how to customize your own validation rules to finish a two-fa
 
 ### Number Validate
 
-::: demo Number Validate need a `.number` modifier added on the input `v-model` binding，it's used to transform the string value to the number which is provided by Vuejs.
+:::demo Number Validate need a `.number` modifier added on the input `v-model` binding，it's used to transform the string value to the number which is provided by Vuejs.
 ```html
 <el-form :model="numberValidateForm" ref="numberValidateForm" label-width="100px" class="demo-ruleForm">
   <el-form-item
@@ -761,7 +763,7 @@ When an `el-form-item` is nested in another `el-form-item`, its label width will
 
 All components in a Form inherit their `size` attribute from that Form. Similarly, FormItem also has a `size` attribute.
 
-::: demo Still you can fine tune each component's `size` if you don't want that component to inherit its size from From or FormIten.
+:::demo Still you can fine tune each component's `size` if you don't want that component to inherit its size from From or FormIten.
 ```html
 <el-form ref="form" :model="sizeForm" label-width="120px" size="mini">
   <el-form-item label="Activity name">

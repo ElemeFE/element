@@ -1,5 +1,32 @@
 ## 更新日志
 
+### 2.0.8
+
+*2017-12-12*
+
+- 新增西班牙语文档
+- 修复 `show-timeout` 对点击触发的 Dropdown 无效的问题，#8734（by @presidenten）
+- 修复 Form 对于 `trigger` 为 blur 的校验规则触发时机有误的问题，#8776
+- 修复 DatePicker 在范围选择时 blur 事件触发时机有误的问题，#8784
+- TimePicker 的 `format` 新增对 AM/PM 的支持，#8620（by @firesh）
+
+### 2.0.7
+
+*2017-11-29*
+
+- 修复禁用文字按钮的样式问题，#8570
+
+### 2.0.6
+
+*2017-11-29*
+
+- 修复 Table 排序图标的样式问题，#8405
+- 修复 `trigger` 为 manual 的 Popover 的触发问题，#8467
+- 新增 Autocomplete 的 `prefix-icon` 和 `suffix-icon` 属性，#8446（by @liyanlong）
+- 新增 Cascader 的 `separator` 属性，#8501
+- 新增 Input 的 `clearable` 属性，#8509（by @lbogdan）
+- 新增 Pagination 的 `background` 属性，#8553
+
 ### 2.0.5
 
 *2017-11-17*

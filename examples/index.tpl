@@ -9,7 +9,6 @@
   </head>
   <body>
     <div id="app"></div><% if (process.env.NODE_ENV === 'production') { %>
-    <!--<script src="https://app.codesponsor.io/scripts/qFcVkt4f3DQEg4zrwINGVg?theme=light&height=250&width=240"></script>-->
     <script>
       if (!window.Promise) {
         document.write('<script src="//shadow.elemecdn.com/npm/es6-promise@4.1.1/dist/es6-promise.min.js"><\/script><script>ES6Promise.polyfill()<\/script>')

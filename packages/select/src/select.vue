@@ -9,11 +9,24 @@
       @click.stop="toggleMenu"
       ref="tags"
       :style="{ 'max-width': inputWidth - 32 + 'px' }">
-      <span
-        class="el-select__multiple-text"
-        v-show="multipleText"
-        v-if="collapseTags">
-        {{ multipleText }}
+      <span v-if="collapseTags && selected.length">
+        <el-tag
+          :closable="!disabled"
+          size="small"
+          :hit="selected[0].hitState"
+          type="info"
+          @close="deleteTag($event, selected[0])"
+          disable-transitions>
+          <span class="el-select__tags-text">{{ selected[0].currentLabel }}</span>
+        </el-tag>
+        <el-tag
+          v-if="selected.length > 1"
+          :closable="false"
+          size="small"
+          type="info"
+          disable-transitions>
+          <span class="el-select__tags-text">+ {{ selected.length - 1 }}</span>
+        </el-tag>
       </span>
       <transition-group @after-leave="resetInputHeight" v-if="!collapseTags">
         <el-tag
@@ -90,6 +103,7 @@
           tag="ul"
           wrap-class="el-select-dropdown__wrap"
           view-class="el-select-dropdown__list"
+          ref="scrollbar"
           :class="{ 'is-empty': !allowCreate && query && filteredOptionsCount === 0 }"
           v-show="options.length > 0 && !loading">
           <el-option
@@ -190,14 +204,6 @@
 
       selectSize() {
         return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
-      },
-
-      multipleText() {
-        const selected = this.selected;
-        if (!selected || !selected.length) return '';
-        const length = selected.length;
-        const countText = length > 1 ? `(+${ selected.length - 1 })` : '';
-        return `${ selected[0].currentLabel } ${ countText }`;
       }
     },
 
@@ -417,6 +423,7 @@
           const menu = this.$refs.popper.$el.querySelector('.el-select-dropdown__wrap');
           scrollIntoView(menu, target);
         }
+        this.$refs.scrollbar && this.$refs.scrollbar.handleScroll();
       },
 
       handleMenuEnter() {
@@ -558,7 +565,7 @@
           let input = [].filter.call(inputChildNodes, item => item.tagName === 'INPUT')[0];
           const tags = this.$refs.tags;
           input.style.height = this.selected.length === 0
-            ? sizeMap[this.selectSize] || 40 + 'px'
+            ? (sizeMap[this.selectSize] || 40) + 'px'
             : Math.max(tags ? (tags.clientHeight + 10) : 0, sizeMap[this.selectSize] || 40) + 'px';
           if (this.visible && this.emptyText !== false) {
             this.broadcast('ElSelectDropdown', 'updatePopper');
@@ -684,16 +691,26 @@
 
       checkDefaultFirstOption() {
         this.hoverIndex = -1;
+        // highlight the created option
+        let hasCreated = false;
+        for (let i = this.options.length - 1; i >= 0; i--) {
+          if (this.options[i].created) {
+            hasCreated = true;
+            this.hoverIndex = i;
+            break;
+          }
+        }
+        if (hasCreated) return;
         for (let i = 0; i !== this.options.length; ++i) {
           const option = this.options[i];
           if (this.query) {
-            // pick first options that passes the filter
+            // highlight first options that passes the filter
             if (!option.disabled && !option.groupDisabled && option.visible) {
               this.hoverIndex = i;
               break;
             }
           } else {
-            // pick currently selected option
+            // highlight currently selected option
             if (option.itemSelected) {
               this.hoverIndex = i;
               break;

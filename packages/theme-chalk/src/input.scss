@@ -8,6 +8,18 @@
   width: 100%;
   @include scroll-bar;
 
+  & .el-input__clear {
+    color: $--input-icon-color;
+    font-size: $--input-font-size;
+    line-height: 16px;
+    cursor: pointer;
+    transition: $--color-transition-base;
+
+    &:hover {
+      color: $--input-clear-hover-color;
+    }
+  }
+
   @include e(inner) {
     -webkit-appearance: none;
     background-color: $--input-fill;
@@ -235,6 +247,7 @@
   display: inline-block;
   width: 100%;
   vertical-align: bottom;
+  font-size: $--font-size-base;
 
   @include e(inner) {
     display: block;
@@ -243,7 +256,7 @@
     line-height: 1.5;
     box-sizing: border-box;
     width: 100%;
-    font-size: $--font-size-base;
+    font-size: inherit;
     color: $--input-color;
     background-color: $--input-fill;
     background-image: none;
