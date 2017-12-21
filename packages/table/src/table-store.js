@@ -352,6 +352,8 @@ TableStore.prototype.updateColumns = function() {
 
   states.columns = [].concat(fixedLeafColumns).concat(leafColumns).concat(rightFixedLeafColumns);
   states.isComplex = states.fixedColumns.length > 0 || states.rightFixedColumns.length > 0;
+
+  this.states = {...states};
 };
 
 TableStore.prototype.isSelected = function(row) {
