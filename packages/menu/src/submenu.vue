@@ -55,6 +55,14 @@
       index: {
         type: String,
         required: true
+      },
+      showTimeout: {
+        type: Number,
+        default: 300
+      },
+      hideTimeout: {
+        type: Number,
+        default: 300
       }
     },
 
@@ -156,7 +164,7 @@
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
           this.rootMenu.openMenu(this.index, this.indexPath);
-        }, 300);
+        }, this.showTimeout);
       },
       handleMouseleave() {
         const {rootMenu} = this;
@@ -169,7 +177,7 @@
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
           this.rootMenu.closeMenu(this.index);
-        }, 300);
+        }, this.hideTimeout);
       },
       handleTitleMouseenter() {
         if (this.mode === 'horizontal' && !this.rootMenu.backgroundColor) return;
