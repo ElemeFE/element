@@ -40,7 +40,7 @@ const MessageBoxConstructor = Vue.extend(msgboxVue);
 
 let currentMsg, instance;
 let msgQueue = [];
-
+let uniqueId = 1;
 const defaultCallback = action => {
   if (currentMsg) {
     let callback = currentMsg.callback;
@@ -64,7 +64,7 @@ const defaultCallback = action => {
     }
   }
 };
-let uniqueId = 1;
+
 const initInstance = () => {
   instance = new MessageBoxConstructor({
     el: document.createElement('div')
