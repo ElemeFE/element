@@ -3,7 +3,7 @@ import Select from 'packages/select';
 
 describe('Select', () => {
   const getSelectVm = (configs = {}, options) => {
-    ['multiple', 'clearable', 'filterable', 'allowCreate', 'remote'].forEach(config => {
+    ['multiple', 'clearable', 'filterable', 'allowCreate', 'remote', 'collapseTags'].forEach(config => {
       configs[config] = configs[config] || false;
     });
     configs.multipleLimit = configs.multipleLimit || 0;
@@ -34,12 +34,14 @@ describe('Select', () => {
       template: `
         <div>
           <el-select
+            ref="select"
             v-model="value"
             :multiple="multiple"
             :multiple-limit="multipleLimit"
             :popper-class="popperClass"
             :clearable="clearable"
             :filterable="filterable"
+            :collapse-tags="collapseTags"
             :allow-create="allowCreate"
             :filterMethod="filterMethod"
             :remote="remote"
@@ -63,6 +65,7 @@ describe('Select', () => {
           multipleLimit: configs.multipleLimit,
           clearable: configs.clearable,
           filterable: configs.filterable,
+          collapseTags: configs.collapseTags,
           allowCreate: configs.allowCreate,
           popperClass: configs.popperClass,
           loading: false,
@@ -714,38 +717,28 @@ describe('Select', () => {
     }, 10);
   });
 
-  describe.only('resetInputHeight', () => {
+  describe('resetInputHeight', () => {
+    const getSelectComponentVm = (configs) => {
+      vm = getSelectVm(configs || {});
+      return vm.$refs.select;
+    };
+
     it('should reset height if collapse-tags option is disabled', () => {
-      vm = createVue({
-        template: `
-          <el-select ref="select"></el-select>
-        `
-      });
-      const select = vm.$refs.select;
+      const select = getSelectComponentVm();
       sinon.stub(select, '$nextTick');
       select.resetInputHeight();
       expect(select.$nextTick.callCount).to.equal(1);
     });
 
     it('should not reset height if collapse-tags option is enabled', () => {
-      vm = createVue({
-        template: `
-          <el-select ref="select" collapse-tags></el-select>
-        `
-      });
-      const select = vm.$refs.select;
+      const select = getSelectComponentVm({ collapseTags: true });
       sinon.stub(select, '$nextTick');
       select.resetInputHeight();
       expect(select.$nextTick.callCount).to.equal(0);
     });
 
     it('should reset height if both collapse-tags and filterable are enabled', () => {
-      vm = createVue({
-        template: `
-          <el-select ref="select" collapse-tags filterable></el-select>
-        `
-      });
-      const select = vm.$refs.select;
+      const select = getSelectComponentVm({ collapseTags: true, filterable: true });
       sinon.stub(select, '$nextTick');
       select.resetInputHeight();
       expect(select.$nextTick.callCount).to.equal(1);
