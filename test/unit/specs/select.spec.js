@@ -713,4 +713,42 @@ describe('Select', () => {
       }, 10);
     }, 10);
   });
+
+  describe.only('resetInputHeight', () => {
+    it('should reset height if collapse-tags option is disabled', () => {
+      vm = createVue({
+        template: `
+          <el-select ref="select"></el-select>
+        `
+      });
+      const select = vm.$refs.select;
+      sinon.stub(select, '$nextTick');
+      select.resetInputHeight();
+      expect(select.$nextTick.callCount).to.equal(1);
+    });
+
+    it('should not reset height if collapse-tags option is enabled', () => {
+      vm = createVue({
+        template: `
+          <el-select ref="select" collapse-tags></el-select>
+        `
+      });
+      const select = vm.$refs.select;
+      sinon.stub(select, '$nextTick');
+      select.resetInputHeight();
+      expect(select.$nextTick.callCount).to.equal(0);
+    });
+
+    it('should reset height if both collapse-tags and filterable are enabled', () => {
+      vm = createVue({
+        template: `
+          <el-select ref="select" collapse-tags filterable></el-select>
+        `
+      });
+      const select = vm.$refs.select;
+      sinon.stub(select, '$nextTick');
+      select.resetInputHeight();
+      expect(select.$nextTick.callCount).to.equal(1);
+    });
+  });
 });
