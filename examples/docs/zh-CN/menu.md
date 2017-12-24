@@ -293,7 +293,7 @@
 ### Menu Events
 | 事件名称      | 说明    | 回调参数      |
 |---------- |-------- |---------- |
-| select  | 菜单激活回调 | index: 选中菜单项的 indexPath: 选中菜单项的 index path  |
+| select  | 菜单激活回调 | index: 选中菜单项的 index, indexPath: 选中菜单项的 index path  |
 | open  | sub-menu 展开的回调 | index: 打开的 sub-menu 的 index， indexPath: 打开的 sub-menu 的 index path  |
 | close  | sub-menu 收起的回调 | index: 收起的 sub-menu 的 index， indexPath: 收起的 sub-menu 的 index path  |
 
