@@ -8,6 +8,7 @@
       v-for="child in root.childNodes"
       :node="child"
       :props="props"
+      :render-after-expand="renderAfterExpand"
       :key="getNodeKey(child)"
       :render-content="renderContent"
       @node-expand="handleNodeExpand">
@@ -52,6 +53,10 @@
         default() {
           return t('el.tree.emptyText');
         }
+      },
+      renderAfterExpand: {
+        type: Boolean,
+        default: true
       },
       nodeKey: String,
       checkStrictly: Boolean,
