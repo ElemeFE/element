@@ -41,7 +41,7 @@
     <el-collapse-transition>
       <div
         class="el-tree-node__children"
-        v-if="childNodeRendered"
+        v-if="!renderAfterExpand || childNodeRendered"
         v-show="expanded"
         role="group"
         :aria-expanded="expanded"
@@ -49,6 +49,7 @@
         <el-tree-node
           :render-content="renderContent"
           v-for="child in node.childNodes"
+          :render-after-expand="renderAfterExpand"
           :key="getNodeKey(child)"
           :node="child"
           @node-expand="handleChildNodeExpand">
@@ -77,7 +78,11 @@
         }
       },
       props: {},
-      renderContent: Function
+      renderContent: Function,
+      renderAfterExpand: {
+        type: Boolean,
+        default: true
+      }
     },
 
     components: {
