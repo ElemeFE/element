@@ -120,19 +120,28 @@
     },
 
     watch: {
-      'node.indeterminate'(val) {
-        this.handleSelectChange(this.node.checked, val);
+      'node.indeterminate':{
+        handler(val) {
+          this.handleSelectChange(this.node.checked, val);
+        },
+        deep:true
       },
 
-      'node.checked'(val) {
-        this.handleSelectChange(val, this.node.indeterminate);
+      'node.checked':{
+        handler(val) {
+          this.handleSelectChange(val, this.node.indeterminate);
+        },
+        deep:true
       },
 
-      'node.expanded'(val) {
-        this.$nextTick(() => this.expanded = val);
-        if (val) {
-          this.childNodeRendered = true;
-        }
+      'node.expanded':{
+        handler(val) {
+          this.$nextTick(() => this.expanded = val);
+          if (val) {
+            this.childNodeRendered = true;
+          }
+        },
+        deep:true
       }
     },
 
