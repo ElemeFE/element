@@ -937,6 +937,7 @@ Solo puede ser expandido un nodo del mismo nivel a la vez.
 | empty-text            | Texto a mostrar cuando data es void      | string                            | —                 | —           |
 | node-key              | Identificador único en todo el árbol para los nodos | string                            | —                 | —           |
 | props                 | Opciones de configuración                | object                            | —                 | —           |
+| render-after-expand   | si se mostrarán los nodos hijo sólo después de que se desglose por primera vez un nodo padre | boolean                           | —                 | true        |
 | load                  | Método para cargar los datos de subárboles | function(node, resolve)           | —                 | —           |
 | render-content        | Función de renderizado para los nodos    | Function(h, { node, data, store } | —                 | —           |
 | highlight-current     | Si el nodo actual está resaltado         | boolean                           | —                 | false       |
