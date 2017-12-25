@@ -71,7 +71,7 @@ export default {
     },
     onProgress: {
       type: Function,
-      default: noop
+      default: null
     },
     onError: {
       type: Function,
@@ -263,7 +263,6 @@ export default {
         limit: this.limit,
         'on-exceed': this.onExceed,
         'on-start': this.handleStart,
-        'on-progress': this.handleProgress,
         'on-success': this.handleSuccess,
         'on-error': this.handleError,
         'on-preview': this.onPreview,
@@ -272,6 +271,7 @@ export default {
       },
       ref: 'upload-inner'
     };
+    uploadData.props['on-progress'] = this.onProgress ? this.handleProgress : null;
 
     const trigger = this.$slots.trigger || this.$slots.default;
     const uploadComponent = (typeof FormData !== 'undefined' || this.$isServer)

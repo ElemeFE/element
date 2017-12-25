@@ -36,7 +36,7 @@ export default function upload(option) {
   const xhr = new XMLHttpRequest();
   const action = option.action;
 
-  if (xhr.upload) {
+  if (xhr.upload && typeof option.onProgress === 'function') {
     xhr.upload.onprogress = function progress(e) {
       if (e.total > 0) {
         e.percent = e.loaded / e.total * 100;
