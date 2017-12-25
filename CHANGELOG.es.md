@@ -4,11 +4,11 @@
 
 *2017-12-24*
 
-- Added `before-remove` hook function for Upload, #8788 (by @firesh)
-- Fixed initial value of `error` not working for FormItem, #8840
-- Now Loading directive supports custom class name by assigning `element-loading-custom-class` attribute, #8826 (by @earlymeme)
-- Fixed CarouselItem becoming invisible when data is asynchronously updated, #8921
-- Added `renderAfterExpand` attribute for Tree, #8972
+- Añadida la función de enganche (hook) `before-remove`  para Upload, #8788 (by @firesh)
+- Arreglado el valor inicial de error que no funcionaba para FormItem, #8840
+- Ahora la directiva Loading soporta nombre de clase personalizado asignando el atributo `element-loading-custom-class`, #8826 (por @earlymeme)
+- Arreglado CarouselItem que se ponía invisible cuando los datos eran actualizados asincrónicamente, #8921
+- Añadido el atributo `renderAfterExpand` para Tree, #8972
 
 ### 2.0.8
 
