@@ -6,7 +6,9 @@
       :style="positionStyle"
       @mouseenter="clearTimer()"
       @mouseleave="startTimer()"
-      @click="click">
+      @click="click"
+      role="alert"
+    >
       <i
         class="el-notification__icon"
         :class="[ typeClass, iconClass ]"
@@ -14,7 +16,7 @@
       </i>
       <div class="el-notification__group" :class="{ 'is-with-icon': typeClass || iconClass }">
         <h2 class="el-notification__title" v-text="title"></h2>
-        <div class="el-notification__content">
+        <div class="el-notification__content" v-show="message">
           <slot>
             <p v-if="!dangerouslyUseHTMLString">{{ message }}</p>
             <p v-else v-html="message"></p>
@@ -119,9 +121,19 @@
             }
           }, this.duration);
         }
+      },
+      keydown(e) {
+        if (e.keyCode === 46 || e.keyCode === 8) {
+          this.clearTimer(); // detele 取消倒计时
+        } else if (e.keyCode === 27) { // esc关闭消息
+          if (!this.closed) {
+            this.close();
+          }
+        } else {
+          this.startTimer(); // 恢复倒计时
+        }
       }
     },
-
     mounted() {
       if (this.duration > 0) {
         this.timer = setTimeout(() => {
@@ -130,6 +142,11 @@
           }
         }, this.duration);
       }
+      document.addEventListener('keydown', this.keydown);
+    },
+    beforeDestroy() {
+      document.removeEventListener('keydown', this.keydown);
     }
   };
 </script>
+

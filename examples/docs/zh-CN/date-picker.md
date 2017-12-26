@@ -2,14 +2,9 @@
   module.exports = {
     data() {
       return {
-        pickerOptions0: {
-          disabledDate(time) {
-            return time.getTime() > Date.now();
-          }
-        },
         pickerOptions1: {
           disabledDate(time) {
-            return time.getTime() < Date.now() - 8.64e7;
+            return time.getTime() > Date.now();
           },
           shortcuts: [{
             text: '今天',
@@ -115,8 +110,7 @@
     <el-date-picker
       v-model="value1"
       type="date"
-      placeholder="选择日期"
-      :picker-options="pickerOptions0">
+      placeholder="选择日期">
     </el-date-picker>
   </div>
   <div class="block">
@@ -135,12 +129,10 @@
   export default {
     data() {
       return {
-        pickerOptions0: {
+        pickerOptions1: {
           disabledDate(time) {
             return time.getTime() > Date.now();
-          }
-        },
-        pickerOptions1: {
+          },
           shortcuts: [{
             text: '今天',
             onClick(picker) {
@@ -392,13 +384,13 @@
 | start-placeholder | 范围选择时开始日期的占位内容 | string | — | — |
 | end-placeholder | 范围选择时结束日期的占位内容 | string | — | — |
 | type | 显示类型 | string | year/month/date/week/ datetime/datetimerange/daterange | date |
-| format | 显示在输入框中的格式 | string | 年 `yyyy`，月 `MM`，日 `dd`，小时 `HH`，分 `mm`，秒 `ss` | yyyy-MM-dd |
+| format | 显示在输入框中的格式 | string | 年 `yyyy`，月 `MM`，日 `dd`，小时 `HH`，分 `mm`，秒 `ss`，AM/PM `A` | yyyy-MM-dd |
 | align | 对齐方式 | string | left, center, right | left |
 | popper-class | DatePicker 下拉框的类名 | string | — | — |
 | picker-options | 当前时间日期选择器特有的选项参考下表 | object |  — | {} |
 | range-separator | 选择范围时的分隔符 | string | — | '-' |
 | default-value | 可选，选择器打开时默认显示的时间 | Date | 可被`new Date()`解析 | — |
-| value-format | 可选，绑定值的格式。不指定则绑定值为 Date 对象 | string | 年 `yyyy`，月 `MM`，日 `dd`，小时 `HH`，分 `mm`，秒 `ss` | — |
+| value-format | 可选，绑定值的格式。不指定则绑定值为 Date 对象 | string | 年 `yyyy`，月 `MM`，日 `dd`，小时 `HH`，分 `mm`，秒 `ss`，AM/PM `A` | — |
 | name | 原生属性 | string | — | — |
 | unlink-panels | 在范围选择器里取消两个日期面板之间的联动 | boolean | — | false |
 
@@ -420,8 +412,8 @@
 | 事件名称      | 说明    | 回调参数      |
 |---------|--------|---------|
 | change | 用户确认选定的值时触发 | 组件绑定值。格式与绑定值一致，可受 `value-format` 控制 |
-| blur | 当 input 失去焦点时触发 | (event: Event) |
-| focus | 当 input 获得焦点时触发 | (event: Event) |
+| blur | 当 input 失去焦点时触发 | 组件实例 |
+| focus | 当 input 获得焦点时触发 | 组件实例 |
 
 ### Methods
 | 方法名 | 说明 | 参数 |

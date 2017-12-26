@@ -165,9 +165,15 @@
         }
       },
       handleChange(ev) {
+        if (this.isLimitExceeded) return;
+        let value;
+        if (ev.target.checked) {
+          value = this.trueLabel === undefined ? true : this.trueLabel;
+        } else {
+          value = this.falseLabel === undefined ? false : this.falseLabel;
+        }
+        this.$emit('change', value, ev);
         this.$nextTick(() => {
-          if (this.isLimitExceeded) return;
-          this.$emit('change', this.model, ev);
           if (this._checkboxGroup) {
             this.dispatch('ElCheckboxGroup', 'change', [this._checkboxGroup.value]);
           }

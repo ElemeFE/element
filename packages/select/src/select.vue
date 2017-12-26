@@ -9,7 +9,26 @@
       @click.stop="toggleMenu"
       ref="tags"
       :style="{ 'max-width': inputWidth - 32 + 'px' }">
-      <transition-group @after-leave="resetInputHeight">
+      <span v-if="collapseTags && selected.length">
+        <el-tag
+          :closable="!disabled"
+          size="small"
+          :hit="selected[0].hitState"
+          type="info"
+          @close="deleteTag($event, selected[0])"
+          disable-transitions>
+          <span class="el-select__tags-text">{{ selected[0].currentLabel }}</span>
+        </el-tag>
+        <el-tag
+          v-if="selected.length > 1"
+          :closable="false"
+          size="small"
+          type="info"
+          disable-transitions>
+          <span class="el-select__tags-text">+ {{ selected.length - 1 }}</span>
+        </el-tag>
+      </span>
+      <transition-group @after-leave="resetInputHeight" v-if="!collapseTags">
         <el-tag
           v-for="item in selected"
           :key="getValueKey(item)"
@@ -26,9 +45,10 @@
       <input
         type="text"
         class="el-select__input"
-        :class="`is-${ selectSize }`"
-        @focus="visible = true"
+        :class="[selectSize ? `is-${ selectSize }` : '']"
         :disabled="disabled"
+        @focus="handleFocus"
+        @click.stop
         @keyup="managePlaceholder"
         @keydown="resetInputState"
         @keydown.down.prevent="navigateOptions('next')"
@@ -59,8 +79,8 @@
       @blur="handleBlur"
       @mousedown.native="handleMouseDown"
       @keyup.native="debouncedOnInputChange"
-      @keydown.native.down.prevent="navigateOptions('next')"
-      @keydown.native.up.prevent="navigateOptions('prev')"
+      @keydown.native.down.stop.prevent="navigateOptions('next')"
+      @keydown.native.up.stop.prevent="navigateOptions('prev')"
       @keydown.native.enter.prevent="selectOption"
       @keydown.native.esc.stop.prevent="visible = false"
       @keydown.native.tab="visible = false"
@@ -83,7 +103,8 @@
           tag="ul"
           wrap-class="el-select-dropdown__wrap"
           view-class="el-select-dropdown__list"
-          :class="{ 'is-empty': !allowCreate && filteredOptionsCount === 0 }"
+          ref="scrollbar"
+          :class="{ 'is-empty': !allowCreate && query && filteredOptionsCount === 0 }"
           v-show="options.length > 0 && !loading">
           <el-option
             :value="query"
@@ -114,24 +135,13 @@
   import { t } from 'element-ui/src/locale';
   import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
   import { getValueByPath } from 'element-ui/src/utils/util';
+  import { valueEquals } from 'element-ui/src/utils/util';
   import NavigationMixin from './navigation-mixin';
 
   const sizeMap = {
     'medium': 36,
     'small': 32,
     'mini': 28
-  };
-
-  const valueEquals = (a, b) => {
-    // see: https://stackoverflow.com/questions/3115982/how-to-check-if-two-arrays-are-equal-with-javascript
-    if (a === b) return true;
-    if (!(a instanceof Array)) return false;
-    if (!(b instanceof Array)) return false;
-    if (a.length !== b.length) return false;
-    for (let i = 0; i !== a.length; ++i) {
-      if (a[i] !== b[i]) return false;
-    }
-    return true;
   };
 
   export default {
@@ -176,7 +186,7 @@
           return this.loadingText || this.t('el.select.loading');
         } else {
           if (this.remote && this.query === '' && this.options.length === 0) return false;
-          if (this.filterable && this.options.length > 0 && this.filteredOptionsCount === 0) {
+          if (this.filterable && this.query && this.options.length > 0 && this.filteredOptionsCount === 0) {
             return this.noMatchText || this.t('el.select.noMatch');
           }
           if (this.options.length === 0) {
@@ -242,7 +252,8 @@
       valueKey: {
         type: String,
         default: 'value'
-      }
+      },
+      collapseTags: Boolean
     },
 
     data() {
@@ -371,7 +382,8 @@
         });
         this.hoverIndex = -1;
         if (this.multiple && this.filterable) {
-          this.inputLength = this.$refs.input.value.length * 15 + 20;
+          const length = this.$refs.input.value.length * 15 + 20;
+          this.inputLength = this.collapseTags ? Math.min(50, length) : length;
           this.managePlaceholder();
           this.resetInputHeight();
         }
@@ -411,6 +423,7 @@
           const menu = this.$refs.popper.$el.querySelector('.el-select-dropdown__wrap');
           scrollIntoView(menu, target);
         }
+        this.$refs.scrollbar && this.$refs.scrollbar.handleScroll();
       },
 
       handleMenuEnter() {
@@ -545,13 +558,14 @@
       },
 
       resetInputHeight() {
+        if (this.collapseTags) return;
         this.$nextTick(() => {
           if (!this.$refs.reference) return;
           let inputChildNodes = this.$refs.reference.$el.childNodes;
           let input = [].filter.call(inputChildNodes, item => item.tagName === 'INPUT')[0];
           const tags = this.$refs.tags;
-          input.style.height = this.selected.length === 0 && this.selectSize === 'mini'
-            ? sizeMap[this.selectSize]
+          input.style.height = this.selected.length === 0
+            ? (sizeMap[this.selectSize] || 40) + 'px'
             : Math.max(tags ? (tags.clientHeight + 10) : 0, sizeMap[this.selectSize] || 40) + 'px';
           if (this.visible && this.emptyText !== false) {
             this.broadcast('ElSelectDropdown', 'updatePopper');
@@ -677,16 +691,26 @@
 
       checkDefaultFirstOption() {
         this.hoverIndex = -1;
+        // highlight the created option
+        let hasCreated = false;
+        for (let i = this.options.length - 1; i >= 0; i--) {
+          if (this.options[i].created) {
+            hasCreated = true;
+            this.hoverIndex = i;
+            break;
+          }
+        }
+        if (hasCreated) return;
         for (let i = 0; i !== this.options.length; ++i) {
           const option = this.options[i];
           if (this.query) {
-            // pick first options that passes the filter
+            // highlight first options that passes the filter
             if (!option.disabled && !option.groupDisabled && option.visible) {
               this.hoverIndex = i;
               break;
             }
           } else {
-            // pick currently selected option
+            // highlight currently selected option
             if (option.itemSelected) {
               this.hoverIndex = i;
               break;

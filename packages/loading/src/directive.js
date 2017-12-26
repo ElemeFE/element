@@ -39,14 +39,11 @@ exports.install = Vue => {
       if (el.domVisible) {
         el.instance.$on('after-leave', _ => {
           el.domVisible = false;
-          if (binding.modifiers.fullscreen && el.originalOverflow !== 'hidden') {
-            document.body.style.overflow = el.originalOverflow;
-          }
-          if (binding.modifiers.fullscreen || binding.modifiers.body) {
-            document.body.style.position = el.originalPosition;
-          } else {
-            el.style.position = el.originalPosition;
-          }
+          const target = binding.modifiers.fullscreen || binding.modifiers.body
+            ? document.body
+            : el;
+          removeClass(target, 'el-loading-parent--relative');
+          removeClass(target, 'el-loading-parent--hidden');
         });
         el.instance.visible = false;
       }
@@ -59,10 +56,10 @@ exports.install = Vue => {
       });
 
       if (el.originalPosition !== 'absolute' && el.originalPosition !== 'fixed') {
-        parent.style.position = 'relative';
+        addClass(parent, 'el-loading-parent--relative');
       }
       if (binding.modifiers.fullscreen && binding.modifiers.lock) {
-        parent.style.overflow = 'hidden';
+        addClass(parent, 'el-loading-parent--hidden');
       }
       el.domVisible = true;
 
@@ -79,6 +76,7 @@ exports.install = Vue => {
       const textExr = el.getAttribute('element-loading-text');
       const spinnerExr = el.getAttribute('element-loading-spinner');
       const backgroundExr = el.getAttribute('element-loading-background');
+      const customClassExr = el.getAttribute('element-loading-custom-class');
       const vm = vnode.context;
       const mask = new Mask({
         el: document.createElement('div'),
@@ -86,6 +84,7 @@ exports.install = Vue => {
           text: vm && vm[textExr] || textExr,
           spinner: vm && vm[spinnerExr] || spinnerExr,
           background: vm && vm[backgroundExr] || backgroundExr,
+          customClass: vm && vm[customClassExr] || customClassExr,
           fullscreen: !!binding.modifiers.fullscreen
         }
       });
@@ -108,6 +107,7 @@ exports.install = Vue => {
         el.mask &&
         el.mask.parentNode &&
         el.mask.parentNode.removeChild(el.mask);
+        toggleLoading(el, { value: false, modifiers: binding.modifiers });
       }
     }
   });

@@ -1,9 +1,14 @@
 <template>
-  <div class="el-tree" :class="{ 'el-tree--highlight-current': highlightCurrent }">
+  <div
+    class="el-tree"
+    :class="{ 'el-tree--highlight-current': highlightCurrent }"
+    role="tree"
+  >
     <el-tree-node
       v-for="child in root.childNodes"
       :node="child"
       :props="props"
+      :render-after-expand="renderAfterExpand"
       :key="getNodeKey(child)"
       :render-content="renderContent"
       @node-expand="handleNodeExpand">
@@ -33,7 +38,9 @@
       return {
         store: null,
         root: null,
-        currentNode: null
+        currentNode: null,
+        treeItems: null,
+        checkboxItems: []
       };
     },
 
@@ -46,6 +53,10 @@
         default() {
           return t('el.tree.emptyText');
         }
+      },
+      renderAfterExpand: {
+        type: Boolean,
+        default: true
       },
       nodeKey: String,
       checkStrictly: Boolean,
@@ -101,6 +112,9 @@
         get() {
           return this.data;
         }
+      },
+      treeItemArray() {
+        return Array.prototype.slice.call(this.treeItems);
       }
     },
 
@@ -115,6 +129,11 @@
       },
       data(newVal) {
         this.store.setData(newVal);
+      },
+      checkboxItems(val) {
+        Array.prototype.forEach.call(val, (checkbox) => {
+          checkbox.setAttribute('tabindex', -1);
+        });
       }
     },
 
@@ -129,6 +148,18 @@
           return node.data[nodeKey];
         }
         return index;
+      },
+      getNodePath(data) {
+        if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in getNodePath');
+        const node = this.store.getNode(data);
+        if (!node) return [];
+        const path = [node.data];
+        let parent = node.parent;
+        while (parent && parent !== this.root) {
+          path.push(parent.data);
+          parent = parent.parent;
+        }
+        return path.reverse();
       },
       getCheckedNodes(leafOnly) {
         return this.store.getCheckedNodes(leafOnly);
@@ -171,6 +202,42 @@
       updateKeyChildren(key, data) {
         if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in updateKeyChild');
         this.store.updateChildren(key, data);
+      },
+      initTabindex() {
+        this.treeItems = this.$el.querySelectorAll('.is-focusable[role=treeitem]');
+        this.checkboxItems = this.$el.querySelectorAll('input[type=checkbox]');
+        const checkedItem = this.$el.querySelectorAll('.is-checked[role=treeitem]');
+        if (checkedItem.length) {
+          checkedItem[0].setAttribute('tabindex', 0);
+          return;
+        }
+        this.treeItems[0] && this.treeItems[0].setAttribute('tabindex', 0);
+      },
+      handelKeydown(ev) {
+        const currentItem = ev.target;
+        if (currentItem.className.indexOf('el-tree-node') === -1) return;
+        ev.preventDefault();
+        const keyCode = ev.keyCode;
+        this.treeItems = this.$el.querySelectorAll('.is-focusable[role=treeitem]');
+        const currentIndex = this.treeItemArray.indexOf(currentItem);
+        let nextIndex;
+        if ([38, 40].indexOf(keyCode) > -1) { // up、down
+          if (keyCode === 38) { // up
+            nextIndex = currentIndex !== 0 ? currentIndex - 1 : 0;
+          } else {
+            nextIndex = (currentIndex < this.treeItemArray.length - 1) ? currentIndex + 1 : 0;
+          }
+          this.treeItemArray[nextIndex].focus(); // 选中
+        }
+        const hasInput = currentItem.querySelector('[type="checkbox"]');
+        if ([37, 39].indexOf(keyCode) > -1) { // left、right 展开
+          currentItem.click(); // 选中
+        }
+        if ([13, 32].indexOf(keyCode) > -1) { // space enter选中checkbox
+          if (hasInput) {
+            hasInput.click();
+          }
+        }
       }
     },
 
@@ -194,6 +261,14 @@
       });
 
       this.root = this.store.root;
+    },
+    mounted() {
+      this.initTabindex();
+      this.$el.addEventListener('keydown', this.handelKeydown);
+    },
+    updated() {
+      this.treeItems = this.$el.querySelectorAll('[role=treeitem]');
+      this.checkboxItems = this.$el.querySelectorAll('input[type=checkbox]');
     }
   };
 </script>

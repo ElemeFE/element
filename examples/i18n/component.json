@@ -60,5 +60,36 @@
     "nav": {
       "dropdown": "Version: "
     }
+  },
+  {
+    "lang": "es",
+    "demo-block": {
+      "hide-text": "Ocultar",
+      "show-text": "Mostrar",
+      "button-text": "Probar",
+      "tooltip-text": "Prueba este ejemplo en jsfiddle.net"
+    },
+    "footer": {
+      "links": "Enlaces",
+      "repo": "GitHub",
+      "community": "Comunidad",
+      "changelog": "Lista de cambios",
+      "theme": "Generador de temas por CLI",
+      "preview": "Generador de temas en línea",
+      "faq": "FAQ",
+      "gitter": "Gitter",
+      "starter": "Kit de inicio",
+      "feedback": "Comentarios",
+      "contribution": "Contribución",
+      "eleme": "Eleme"
+    },
+    "header": {
+      "guide": "Guía",
+      "components": "Componentes",
+      "resource": "Recursos"
+    },
+    "nav": {
+      "dropdown": "Versión: "
+    }
   }
 ]

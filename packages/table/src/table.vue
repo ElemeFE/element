@@ -352,12 +352,6 @@
           } else if (this.shouldUpdateHeight) {
             this.layout.updateHeight();
           }
-          if (this.$el) {
-            this.isHidden = this.$el.clientWidth === 0;
-            if (this.isHidden && this.layout.bodyWidth) {
-              setTimeout(() => this.doLayout());
-            }
-          }
         });
       }
     },
@@ -481,7 +475,11 @@
         immediate: true,
         handler(val) {
           this.store.commit('setData', val);
-          if (this.$ready) this.doLayout();
+          if (this.$ready) {
+            this.$nextTick(() => {
+              this.doLayout();
+            });
+          }
         }
       },
 

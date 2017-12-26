@@ -1,6 +1,6 @@
 {
   "name": "element-ui",
-  "version": "2.0.0-rc.1",
+  "version": "2.0.9",
   "description": "A Component Library for Vue.js.",
   "main": "lib/element-ui.common.js",
   "files": [
@@ -57,7 +57,7 @@
     "throttle-debounce": "^1.0.1"
   },
   "peerDependencies": {
-    "vue": "^2.3.0"
+    "vue": "^2.5.2"
   },
   "devDependencies": {
     "algoliasearch": "^3.24.5",
@@ -82,6 +82,7 @@
     "css-loader": "^0.28.7",
     "es6-promise": "^4.0.5",
     "eslint": "^3.10.2",
+    "eslint-plugin-json": "^1.2.0",
     "extract-text-webpack-plugin": "^3.0.1",
     "file-loader": "^1.1.5",
     "file-save": "^0.2.0",

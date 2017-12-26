@@ -20,8 +20,6 @@ const components = [
 ];
 
 const install = function(Vue, opts = {}) {
-  /* istanbul ignore if */
-  if (install.installed) return;
   locale.use(opts.locale);
   locale.i18n(opts.i18n);
 
@@ -59,6 +57,8 @@ module.exports = {
   Loading,
 {{list}}
 };
+
+module.exports.default = module.exports;
 `;
 
 delete Components.font;

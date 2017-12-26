@@ -168,6 +168,7 @@
     overflow: hidden;
     user-select: none;
     text-align: left;
+    background-color: $--table-header-background;
 
     div {
       display: inline-block;
@@ -230,10 +231,6 @@
       white-space: nowrap;
       min-width: 50px;
     }
-  }
-
-  th:first-child .cell, td:first-child .cell {
-    padding-left: 0;
   }
 
   // 拥有多级表头
@@ -430,28 +427,40 @@
   }
 
   .caret-wrapper {
-    position: relative;
     display: inline-flex;
+    flex-direction: column;
     align-items: center;
-    height: 13px;
+    height: 34px;
     width: 24px;
+    vertical-align: middle;
     cursor: pointer;
     overflow: initial;
+    position: relative;
   }
 
   .sort-caret {
-    color: $--icon-color-base;
-    width: 14px;
-    overflow: hidden;
-    font-size: 13px;
+    width: 0;
+    height: 0;
+    border: solid 5px transparent;
+    position: absolute;
+
+    &.ascending {
+      border-bottom-color: $--color-text-placeholder;
+      top: 5px;
+    }
+
+    &.descending {
+      border-top-color: $--color-text-placeholder;
+      bottom: 7px;
+    }
   }
 
   .ascending .sort-caret.ascending {
-    color: $--color-primary;
+    border-bottom-color: $--color-primary;
   }
 
   .descending .sort-caret.descending {
-    color: $--color-primary;
+    border-top-color: $--color-primary;
   }
 
   .hidden-columns {

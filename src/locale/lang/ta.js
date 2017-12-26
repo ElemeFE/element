@@ -16,6 +16,10 @@ export default {
       startTime: 'தொடங்கும் நேரம்',
       endDate: 'முடியும் தேதி',
       endTime: 'முடியும் நேரம்',
+      prevYear: 'Previous Year', // to be translated
+      nextYear: 'Next Year', // to be translated
+      prevMonth: 'Previous Month', // to be translated
+      nextMonth: 'Next Month', // to be translated
       year: 'வருடம்',
       month1: 'ஜனவரி',
       month2: 'பிப்ரவரி',

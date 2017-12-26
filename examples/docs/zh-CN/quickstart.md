@@ -4,11 +4,13 @@
 
 ### 使用 Starter Kit
 
-整理中。
+我们提供了通用的[项目模板](https://github.com/ElementUI/element-starter)，你可以直接使用。对于 Laravel 用户，我们也准备了相应的[模板](https://github.com/ElementUI/element-in-laravel-starter)，同样可以直接下载使用。
+
+如果不希望使用我们提供的模板，请继续阅读。
 
 ### 使用 vue-cli
 
-我们推荐使用 [vue-cli](https://github.com/vuejs/vue-cli) 初始化项目，命令如下：
+我们还可以使用 [vue-cli](https://github.com/vuejs/vue-cli) 初始化项目，命令如下：
 
 ```shell
 > npm i -g vue-cli
@@ -84,7 +86,7 @@ new Vue({
 })
 ```
 
-完整组件列表和引入方式（完整组件列表以 [components.json](https://github.com/ElemeFE/element/blob/carbon/components.json) 为准）
+完整组件列表和引入方式（完整组件列表以 [components.json](https://github.com/ElemeFE/element/blob/master/components.json) 为准）
 
 ```javascript
 import Vue from 'vue'
@@ -174,6 +176,7 @@ Vue.use(Radio)
 Vue.use(RadioGroup)
 Vue.use(RadioButton)
 Vue.use(Checkbox)
+Vue.use(CheckboxButton)
 Vue.use(CheckboxGroup)
 Vue.use(Switch)
 Vue.use(Select)

@@ -1,3 +1,4 @@
+import { getStyle } from '../../../src/utils/dom';
 import { createVue, destroyVM } from '../util';
 import Vue from 'vue';
 import LoadingRaw from 'packages/loading';
@@ -142,7 +143,7 @@ describe('Loading', () => {
         }
       }, true);
       Vue.nextTick(() => {
-        expect(document.body.style.overflow).to.equal('hidden');
+        expect(getStyle(document.body, 'overflow')).to.equal('hidden');
         vm.loading = false;
         document.body.removeChild(document.querySelector('.el-loading-mask'));
         document.body.removeChild(vm.$el);
@@ -167,6 +168,25 @@ describe('Loading', () => {
         const text = mask.querySelector('.el-loading-text');
         expect(text).to.exist;
         expect(text.textContent).to.equal('拼命加载中');
+        done();
+      });
+    });
+
+    it('customClass', done => {
+      vm = createVue({
+        template: `
+        <div v-loading="loading" element-loading-custom-class="loading-custom-class"></div>
+      `,
+
+        data() {
+          return {
+            loading: true
+          };
+        }
+      }, true);
+      Vue.nextTick(() => {
+        const mask = document.querySelector('.el-loading-mask');
+        expect(mask.classList.contains('loading-custom-class')).to.true;
         done();
       });
     });
@@ -197,7 +217,7 @@ describe('Loading', () => {
       expect(mask.parentNode).to.equal(container);
       loadingInstance.close();
       setTimeout(() => {
-        expect(container.style.position).to.equal('relative');
+        expect(getStyle(container, 'position')).to.equal('relative');
         done();
       }, 200);
     });
@@ -243,7 +263,7 @@ describe('Loading', () => {
 
     it('lock', () => {
       loadingInstance = Loading({ lock: true });
-      expect(document.body.style.overflow).to.equal('hidden');
+      expect(getStyle(document.body, 'overflow')).to.equal('hidden');
     });
 
     it('text', () => {
@@ -251,6 +271,12 @@ describe('Loading', () => {
       const text = document.querySelector('.el-loading-text');
       expect(text).to.exist;
       expect(text.textContent).to.equal('Loading...');
+    });
+
+    it('customClass', () => {
+      loadingInstance = Loading({ customClass: 'el-loading-custom-class' });
+      const customClass = document.querySelector('.el-loading-custom-class');
+      expect(customClass).to.exist;
     });
   });
 });

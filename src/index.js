@@ -142,8 +142,6 @@ const components = [
 ];
 
 const install = function(Vue, opts = {}) {
-  /* istanbul ignore if */
-  if (install.installed) return;
   locale.use(opts.locale);
   locale.i18n(opts.i18n);
 
@@ -173,7 +171,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 };
 
 module.exports = {
-  version: '2.0.0-rc.1',
+  version: '2.0.9',
   locale: locale.use,
   i18n: locale.i18n,
   install,
@@ -248,3 +246,5 @@ module.exports = {
   Main,
   Footer
 };
+
+module.exports.default = module.exports;

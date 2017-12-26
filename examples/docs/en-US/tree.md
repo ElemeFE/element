@@ -292,7 +292,7 @@ Display a set of data with hierarchies.
 
 Basic tree structure.
 
-::: demo
+:::demo
 ```html
 <el-tree :data="data" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
 
@@ -355,7 +355,7 @@ Basic tree structure.
 
 Used for node selection.
 
-::: demo This example also shows how to load node data asynchronously.
+:::demo This example also shows how to load node data asynchronously.
 ```html
 <el-tree
   :props="props"
@@ -421,7 +421,7 @@ Used for node selection.
 
 ### Custom leaf node in lazy mode
 
-::: demo A node's data is not fetched until it is clicked, so the Tree cannot predict whether a node is a leaf node. That's why a drop-down button is added to each node, and if it is a leaf node, the drop-down button will disappear when clicked. That being said, you can also tell the Tree in advance whether the node is a leaf node, avoiding the render of the drop-down button before a leaf node.
+:::demo A node's data is not fetched until it is clicked, so the Tree cannot predict whether a node is a leaf node. That's why a drop-down button is added to each node, and if it is a leaf node, the drop-down button will disappear when clicked. That being said, you can also tell the Tree in advance whether the node is a leaf node, avoiding the render of the drop-down button before a leaf node.
 ```html
 <el-tree
   :props="props1"
@@ -469,7 +469,7 @@ Used for node selection.
 
 The checkbox of a node can be set as disabled.
 
-::: demo In the example, 'disabled' property is declared in defaultProps, and some nodes are set as 'disabled:true'. The corresponding checkboxes are disabled and can't be clicked.
+:::demo In the example, 'disabled' property is declared in defaultProps, and some nodes are set as 'disabled:true'. The corresponding checkboxes are disabled and can't be clicked.
 ```html
 <el-tree
   :data="data3"
@@ -525,7 +525,7 @@ The checkbox of a node can be set as disabled.
 ### Default expanded and default checked
 Tree nodes can be initially expanded or checked
 
-::: demo Use `default-expanded-keys` and `default-checked-keys` to set initially expanded and initially checked nodes respectively. Note that for them to work, `node-key` is required. Its value is the name of a key in the data object, and the value of that key should be unique across the whole tree.
+:::demo Use `default-expanded-keys` and `default-checked-keys` to set initially expanded and initially checked nodes respectively. Note that for them to work, `node-key` is required. Its value is the name of a key in the data object, and the value of that key should be unique across the whole tree.
 ```html
 <el-tree
   :data="data2"
@@ -588,7 +588,7 @@ Tree nodes can be initially expanded or checked
 
 ### Checking tree nodes
 
-::: demo This example shows how to get and set checked nodes. They both can be done in two approaches: node and key. If you are taking the key approach, `node-key` is required.
+:::demo This example shows how to get and set checked nodes. They both can be done in two approaches: node and key. If you are taking the key approach, `node-key` is required.
 ```html
 <el-tree
   :data="data2"
@@ -685,7 +685,7 @@ Tree nodes can be initially expanded or checked
 ### Custom node content
 The content of tree nodes can be customized, so you can add icons or buttons as you will
 
-::: demo Use `render-content` to assign a render function that returns the content of tree nodes. See Vue's documentation for a detailed introduction of render functions. Note that this demo can't run in jsfiddle because it doesn't support JSX syntax. In a real project, `render-content` will work if relevant dependencies are correctly configured.
+:::demo Use `render-content` to assign a render function that returns the content of tree nodes. See Vue's documentation for a detailed introduction of render functions. Note that this demo can't run in jsfiddle because it doesn't support JSX syntax. In a real project, `render-content` will work if relevant dependencies are correctly configured.
 ```html
 <el-tree
   :data="data4"
@@ -782,7 +782,7 @@ The content of tree nodes can be customized, so you can add icons or buttons as 
 ### Tree node filtering
 Tree nodes can be filtered
 
-::: demo Invoke the `filter` method of the Tree instance to filter tree nodes. Its parameter is the filtering keyword. Note that for it to work, `filter-node-method` is required, and its value is the filtering method.
+:::demo Invoke the `filter` method of the Tree instance to filter tree nodes. Its parameter is the filtering keyword. Note that for it to work, `filter-node-method` is required, and its value is the filtering method.
 ```html
 <el-input
   placeholder="Filter keyword"
@@ -866,7 +866,7 @@ Tree nodes can be filtered
 
 Only one node among the same level can be expanded at one time.
 
-::: demo
+:::demo
 ```html
 <el-tree
   :data="data"
@@ -937,6 +937,7 @@ Only one node among the same level can be expanded at one time.
 | empty-text            | text displayed when data is void         | string                      | —               | —       |
 | node-key              | unique identity key name for nodes, its value should be unique across the whole tree | string                      | —               | —       |
 | props                 | configuration options, see the following table | object                      | —               | —       |
+| render-after-expand   | whether to render child nodes only after a parent node is expanded for the first time | boolean | — | true |
 | load                  | method for loading subtree data          | function(node, resolve)     | —               | —       |
 | render-content        | render function for tree node            | Function(h, { node, data, store }        | —               | —       |
 | highlight-current     | whether current node is highlighted      | boolean                     | —               | false   |

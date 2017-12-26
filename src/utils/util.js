@@ -49,6 +49,7 @@ export function getPropByPath(obj, path, strict) {
   let keyArr = path.split('.');
   let i = 0;
   for (let len = keyArr.length; i < len - 1; ++i) {
+    if (!tempObj && !strict) break;
     let key = keyArr[i];
     if (key in tempObj) {
       tempObj = tempObj[key];
@@ -62,7 +63,7 @@ export function getPropByPath(obj, path, strict) {
   return {
     o: tempObj,
     k: keyArr[i],
-    v: tempObj[keyArr[i]]
+    v: tempObj ? tempObj[keyArr[i]] : null
   };
 };
 
@@ -70,3 +71,14 @@ export const generateId = function() {
   return Math.floor(Math.random() * 10000);
 };
 
+export const valueEquals = (a, b) => {
+  // see: https://stackoverflow.com/questions/3115982/how-to-check-if-two-arrays-are-equal-with-javascript
+  if (a === b) return true;
+  if (!(a instanceof Array)) return false;
+  if (!(b instanceof Array)) return false;
+  if (a.length !== b.length) return false;
+  for (let i = 0; i !== a.length; ++i) {
+    if (a[i] !== b[i]) return false;
+  }
+  return true;
+};

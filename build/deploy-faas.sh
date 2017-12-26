@@ -15,3 +15,4 @@ cd ../..
 
 # deploy domestic site
 faas deploy alpha
+rm -rf temp_web

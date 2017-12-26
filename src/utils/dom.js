@@ -86,10 +86,8 @@ export function addClass(el, cls) {
 
     if (el.classList) {
       el.classList.add(clsName);
-    } else {
-      if (!hasClass(el, clsName)) {
-        curClass += ' ' + clsName;
-      }
+    } else if (!hasClass(el, clsName)) {
+      curClass += ' ' + clsName;
     }
   }
   if (!el.classList) {
@@ -109,10 +107,8 @@ export function removeClass(el, cls) {
 
     if (el.classList) {
       el.classList.remove(clsName);
-    } else {
-      if (hasClass(el, clsName)) {
-        curClass = curClass.replace(' ' + clsName + ' ', ' ');
-      }
+    } else if (hasClass(el, clsName)) {
+      curClass = curClass.replace(' ' + clsName + ' ', ' ');
     }
   }
   if (!el.classList) {

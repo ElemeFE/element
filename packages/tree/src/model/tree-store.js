@@ -54,6 +54,7 @@ export default class TreeStore {
           node.visible = allHidden === false;
         }
       }
+      if (!value) return;
 
       if (node.visible && !node.isLeaf) node.expand();
     };
@@ -197,7 +198,7 @@ export default class TreeStore {
     const node = this.nodesMap[key];
     if (!node) return;
     const childNodes = node.childNodes;
-    for (let i = 0, j = childNodes.length; i < j; i++) {
+    for (let i = childNodes.length - 1; i >= 0; i--) {
       const child = childNodes[i];
       this.remove(child.data);
     }

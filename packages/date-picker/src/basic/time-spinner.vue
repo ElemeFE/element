@@ -3,6 +3,7 @@
     <template v-if="!arrowControl">
       <el-scrollbar
         @mouseenter.native="emitSelectRange('hours')"
+        @mousemove.native="adjustCurrentSpinner('hours')"
         class="el-time-spinner__wrapper"
         wrap-style="max-height: inherit;"
         view-class="el-time-spinner__list"
@@ -12,12 +13,12 @@
         <li
           @click="handleClick('hours', { value: hour, disabled: disabled })"
           v-for="(disabled, hour) in hoursList"
-          track-by="hour"
           class="el-time-spinner__item"
-          :class="{ 'active': hour === hours, 'disabled': disabled }">{{ ('0' + hour).slice(-2) }}</li>
+          :class="{ 'active': hour === hours, 'disabled': disabled }">{{ ('0' + (amPmMode ? (hour % 12 || 12) : hour )).slice(-2) }}{{ amPm(hour) }}</li>
       </el-scrollbar>
       <el-scrollbar
         @mouseenter.native="emitSelectRange('minutes')"
+        @mousemove.native="adjustCurrentSpinner('minutes')"
         class="el-time-spinner__wrapper"
         wrap-style="max-height: inherit;"
         view-class="el-time-spinner__list"
@@ -33,6 +34,7 @@
       <el-scrollbar
         v-show="showSeconds"
         @mouseenter.native="emitSelectRange('seconds')"
+        @mousemove.native="adjustCurrentSpinner('seconds')"
         class="el-time-spinner__wrapper"
         wrap-style="max-height: inherit;"
         view-class="el-time-spinner__list"
@@ -56,9 +58,7 @@
           <li
             class="el-time-spinner__item"
             :class="{ 'active': hour === hours, 'disabled': hoursList[hour] }"
-            v-for="hour in arrowHourList">
-            {{ hour === undefined ? '' : ('0' + hour).slice(-2) }}
-          </li>
+            v-for="hour in arrowHourList">{{ hour === undefined ? '' : ('0' + (amPmMode ? (hour % 12 || 12) : hour )).slice(-2) + amPm(hour) }}</li>
         </ul>
       </div>
       <div
@@ -113,7 +113,11 @@
         type: Boolean,
         default: true
       },
-      arrowControl: Boolean
+      arrowControl: Boolean,
+      amPmMode: {
+        type: String,
+        default: '' // 'a': am/pm; 'A': AM/PM
+      }
     },
 
     computed: {
@@ -196,16 +200,10 @@
       emitSelectRange(type) {
         if (type === 'hours') {
           this.$emit('select-range', 0, 2);
-          this.adjustSpinner('minutes', this.minutes);
-          this.adjustSpinner('seconds', this.seconds);
         } else if (type === 'minutes') {
           this.$emit('select-range', 3, 5);
-          this.adjustSpinner('hours', this.hours);
-          this.adjustSpinner('seconds', this.seconds);
         } else if (type === 'seconds') {
           this.$emit('select-range', 6, 8);
-          this.adjustSpinner('minutes', this.minutes);
-          this.adjustSpinner('hours', this.hours);
         }
         this.currentScrollbar = type;
       },
@@ -235,6 +233,10 @@
         this.adjustSpinner('hours', this.hours);
         this.adjustSpinner('minutes', this.minutes);
         this.adjustSpinner('seconds', this.seconds);
+      },
+
+      adjustCurrentSpinner(type) {
+        this.adjustSpinner(type, this[type]);
       },
 
       adjustSpinner(type, value) {
@@ -272,6 +274,14 @@
 
         this.modifyDateField(label, now);
         this.adjustSpinner(label, now);
+      },
+      amPm(hour) {
+        let shouldShowAmPm = this.amPmMode.toLowerCase() === 'a';
+        if (!shouldShowAmPm) return '';
+        let isCapital = this.amPmMode === 'A';
+        let content = (hour < 12) ? ' am' : ' pm';
+        if (isCapital) content = content.toUpperCase();
+        return content;
       }
     }
   };

@@ -5,15 +5,17 @@
         if (!value) {
           return callback(new Error('Please input the age'));
         }
-        if (!Number.isInteger(value)) {
-          callback(new Error('Please input digits'));
-        } else {
-          if (value < 18) {
-            callback(new Error('Age must be greater than 18'));
+        setTimeout(() => {
+          if (!Number.isInteger(value)) {
+            callback(new Error('Please input digits'));
           } else {
-            callback();
+            if (value < 18) {
+              callback(new Error('Age must be greater than 18'));
+            } else {
+              callback();
+            }
           }
-        }
+        }, 1000);
       };
       var validatePass = (rule, value, callback) => {
         if (value === '') {
@@ -229,6 +231,8 @@
       }
     }
     .demo-dynamic {
+      width: 500px;
+
       .el-input {
         margin-right: 10px;
         width: 270px;
@@ -322,6 +326,13 @@ It includes all kinds of input items, such as `input`, `select`, `radio` and `ch
 ```
 :::
 
+:::tip
+[W3C](https://www.w3.org/MarkUp/html-spec/html-spec_8.html#SEC8.2) regulates that
+> <i>When there is only one single-line text input field in a form, the user agent should accept Enter in that field as a request to submit the form.</i>
+
+To prevent this behavior, you can add `@submit.native.prevent` on `<el-form>`.
+  :::
+
 ### Inline form
 
 When the vertical space is limited and the form is relatively simple, you can put it in one line.
@@ -338,7 +349,8 @@ When the vertical space is limited and the form is relatively simple, you can pu
       <el-option label="Zone one" value="shanghai"></el-option>
       <el-option label="Zone two" value="beijing"></el-option>
     </el-select>
-  </el-form-item><el-form-item>
+  </el-form-item>
+  <el-form-item>
     <el-button type="primary" @click="onSubmit">Query</el-button>
   </el-form-item>
 </el-form>
@@ -546,15 +558,17 @@ This example shows how to customize your own validation rules to finish a two-fa
         if (!value) {
           return callback(new Error('Please input the age'));
         }
-        if (!Number.isInteger(value)) {
-          callback(new Error('Please input digits'));
-        } else {
-          if (value < 18) {
-            callback(new Error('Age must be greater than 18'));
+        setTimeout(() => {
+          if (!Number.isInteger(value)) {
+            callback(new Error('Please input digits'));
           } else {
-            callback();
+            if (value < 18) {
+              callback(new Error('Age must be greater than 18'));
+            } else {
+              callback();
+            }
           }
-        }
+        }, 1000);
       };
       var validatePass = (rule, value, callback) => {
         if (value === '') {
@@ -694,7 +708,7 @@ This example shows how to customize your own validation rules to finish a two-fa
 
 ### Number Validate
 
-::: demo Number Validate need a `.number` modifier added on the input `v-model` binding，it's used to transform the string value to the number which is provided by Vuejs.
+:::demo Number Validate need a `.number` modifier added on the input `v-model` binding，it's used to transform the string value to the number which is provided by Vuejs.
 ```html
 <el-form :model="numberValidateForm" ref="numberValidateForm" label-width="100px" class="demo-ruleForm">
   <el-form-item
@@ -749,7 +763,7 @@ When an `el-form-item` is nested in another `el-form-item`, its label width will
 
 All components in a Form inherit their `size` attribute from that Form. Similarly, FormItem also has a `size` attribute.
 
-::: demo Still you can fine tune each component's `size` if you don't want that component to inherit its size from From or FormIten.
+:::demo Still you can fine tune each component's `size` if you don't want that component to inherit its size from From or FormIten.
 ```html
 <el-form ref="form" :model="sizeForm" label-width="120px" size="mini">
   <el-form-item label="Activity name">

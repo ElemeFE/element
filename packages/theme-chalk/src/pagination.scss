@@ -23,6 +23,7 @@
 
   .el-input__inner {
     text-align: center;
+    -moz-appearance: textfield;
   }
 
   // pagesize 的下拉 icon
@@ -34,9 +35,6 @@
   .el-select .el-input {
     width: 100px;
     margin: 0 5px;
-
-    .el-input__icon {
-    }
 
     .el-input__inner {
       padding-right: 25px;
@@ -77,6 +75,7 @@
     .el-icon {
       display: block;
       font-size: 12px;
+      font-weight: bold;
     }
   }
 
@@ -149,13 +148,12 @@
     margin: 0 2px;
     box-sizing: border-box;
     border-radius: $--pagination-border-radius;
-    -moz-appearance: textfield;
 
     &.el-input {
       width: 50px;
     }
 
-    .el-input__inner {
+    &.el-input .el-input__inner {
       height: $--pagination-button-height;
     }
 
@@ -163,6 +161,46 @@
     .el-input__inner::-webkit-outer-spin-button {
       -webkit-appearance: none;
       margin: 0;
+    }
+  }
+
+  @include when(background) {
+    .btn-prev,
+    .btn-next,
+    .el-pager li {
+      margin: 0 5px;
+      background-color: $--color-info-lighter;
+      color: $--color-text-regular;
+      min-width: 30px;
+      border-radius: 2px;
+    }
+
+    .btn-prev, .btn-next {
+      padding: 0;
+
+      &.disabled {
+        color: $--color-text-placeholder;
+      }
+    }
+
+    .el-pager li {
+      &:hover {
+        color: $--pagination-hover-fill;
+      }
+
+      &.active {
+        background-color: $--color-primary;
+        color: $--color-white;
+      }
+    }
+
+    &.el-pagination--small {
+      .btn-prev,
+      .btn-next,
+      .el-pager li {
+        margin: 0 3px;
+        min-width: 22px;
+      }
     }
   }
 }
@@ -176,8 +214,8 @@
   padding: 0;
   margin: 0;
 
-  .el-icon-more::before {
-    vertical-align: -4px;
+  .more::before {
+    line-height: 30px;
   }
 
   li {

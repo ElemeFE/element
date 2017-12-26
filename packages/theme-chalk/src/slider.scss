@@ -140,12 +140,12 @@
   @include when(vertical) {
     position: relative;
     .el-slider__runway {
-      width: 4px;
+      width: $--slider-height;
       height: 100%;
       margin: 0 16px;
     }
     .el-slider__bar {
-      width: 4px;
+      width: $--slider-height;
       height: auto;
       border-radius: 0 0 3px 3px;
     }

@@ -359,12 +359,14 @@ describe('DatePicker', () => {
       vm.$refs.picker.$on('focus', spyFocus);
       vm.$refs.picker.$on('blur', spyBlur);
       vm.$el.querySelector('input').focus();
-      vm.$el.querySelector('input').blur();
 
       vm.$nextTick(_ => {
         expect(spyFocus.calledOnce).to.be.true;
-        expect(spyBlur.calledOnce).to.be.true;
-        done();
+        vm.$refs.picker.pickerVisible = false;
+        vm.$nextTick(_ => {
+          expect(spyBlur.calledOnce).to.be.true;
+          done();
+        });
       });
     });
   });
@@ -1140,10 +1142,10 @@ describe('DatePicker', () => {
         setTimeout(_ => {
           const left = panels[0].querySelector('.el-date-range-picker__header');
           const right = panels[1].querySelector('.is-right .el-date-range-picker__header');
-          const leftText = left.textContent.match(/\d+/g);
-          const rightText = right.textContent.match(/\d+/g);
+          const leftText = left.textContent.match(/\d+/g).map(i => Number(i));
+          const rightText = right.textContent.match(/\d+/g).map(i => Number(i));
 
-          expect(rightText[0] - leftText[0]).to.equal(1);
+          expect((rightText[1] <= 2 ? rightText[0] - 1 : rightText[0]) - leftText[0]).to.equal(1);
           expect((rightText[1] <= 2 ? rightText[1] + 12 : rightText[1]) - leftText[1]).to.equal(2);
 
           done();

@@ -16,6 +16,7 @@
         input7: '',
         input8: '',
         input9: '',
+        input10: '',
         textarea: '',
         textarea2: '',
         textarea3: '',
@@ -185,7 +186,7 @@
 
 ### 基础用法
 
-::: demo
+:::demo
 ```html
 <el-input v-model="input" placeholder="请输入内容"></el-input>
 
@@ -204,7 +205,7 @@ export default {
 
 ### 禁用状态
 
-::: demo 通过 `disabled` 属性指定是否禁用 input 组件
+:::demo 通过 `disabled` 属性指定是否禁用 input 组件
 ```html
 <el-input
   placeholder="请输入内容"
@@ -224,11 +225,34 @@ export default {
 ```
 :::
 
+### 可清空
+
+:::demo 使用`clearable`属性即可得到一个可清空的输入框
+
+```html
+<el-input
+  placeholder="请输入内容"
+  v-model="input10"
+  clearable>
+</el-input>
+
+<script>
+  export default {
+    data() {
+      return {
+        input10: ''
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### 带 icon 的输入框
 
 带有图标标记输入类型
 
-::: demo 可以通过 `prefix-icon` 和 `suffix-icon` 属性在 input 组件首部和尾部增加显示图标，也可以通过 slot 来放置图标。
+:::demo 可以通过 `prefix-icon` 和 `suffix-icon` 属性在 input 组件首部和尾部增加显示图标，也可以通过 slot 来放置图标。
 ```html
 <div class="demo-input-suffix">
   属性方式：
@@ -276,7 +300,7 @@ export default {
 
 用于输入多行文本信息，通过将 `type` 属性的值指定为 textarea。
 
-::: demo 文本域高度可通过 `rows` 属性控制
+:::demo 文本域高度可通过 `rows` 属性控制
 ```html
 <el-input
   type="textarea"
@@ -301,7 +325,7 @@ export default {
 
 通过设置 `autosize` 属性可以使得文本域的高度能够根据文本内容自动进行调整，并且 `autosize` 还可以设定为一个对象，指定最小行数和最大行数。
 
-::: demo
+:::demo
 ```html
 <el-input
   type="textarea"
@@ -334,7 +358,7 @@ export default {
 
 可前置或后置元素，一般为标签或按钮
 
-::: demo 可通过 slot 来指定在 input 中前置或者后置内容。
+:::demo 可通过 slot 来指定在 input 中前置或者后置内容。
 ```html
 <div>
   <el-input placeholder="请输入内容" v-model="input3">
@@ -381,7 +405,7 @@ export default {
 
 ### 尺寸
 
-::: demo 可通过 `size` 属性指定输入框的尺寸，除了默认的大小外，还提供了 large、small 和 mini 三种尺寸。
+:::demo 可通过 `size` 属性指定输入框的尺寸，除了默认的大小外，还提供了 large、small 和 mini 三种尺寸。
 ```html
 <div class="demo-input-size">
   <el-input
@@ -428,7 +452,7 @@ export default {
 
 根据输入内容提供对应的输入建议
 
-::: demo autocomplete 是一个可带输入建议的输入框组件，`fetch-suggestions` 是一个返回输入建议的方法属性，如 querySearch(queryString, cb)，在该方法中你可以在你的输入建议数据准备好时通过 cb(data) 返回到 autocomplete 组件中。
+:::demo autocomplete 是一个可带输入建议的输入框组件，`fetch-suggestions` 是一个返回输入建议的方法属性，如 querySearch(queryString, cb)，在该方法中你可以在你的输入建议数据准备好时通过 cb(data) 返回到 autocomplete 组件中。
 ```html
 <el-row class="demo-autocomplete">
   <el-col :span="12">
@@ -542,7 +566,7 @@ export default {
 
 可自定义输入建议的显示
 
-::: demo 使用`scoped slot`自定义输入建议的模板。该 scope 的参数为`item`，表示当前输入建议对象。
+:::demo 使用`scoped slot`自定义输入建议的模板。该 scope 的参数为`item`，表示当前输入建议对象。
 ```html
 <el-autocomplete
   popper-class="my-autocomplete"
@@ -674,7 +698,7 @@ export default {
 
 从服务端搜索数据
 
-::: demo
+:::demo
 ```html
 <el-autocomplete
   v-model="state4"
@@ -779,6 +803,7 @@ export default {
 | maxlength     | 最大输入长度      | number          |  —  | — |
 | minlength     | 最小输入长度      | number          | — | — |
 | placeholder   | 输入框占位文本    | string          | — | — |
+| clearable     | 是否可清空        | boolean         | — | false |
 | disabled      | 禁用            | boolean         | — | false   |
 | size          | 输入框尺寸，只在 `type!="textarea"` 时有效      | string          | medium / small / mini  | — |
 | prefix-icon   | 输入框头部图标    | string          | — | — |
@@ -799,10 +824,10 @@ export default {
 ### Input slots
 | name | 说明 |
 |------|--------|
-| prefix | 输入框头部内容 |
-| suffix | 输入框尾部内容 |
-| prepend | 输入框前置内容 |
-| append | 输入框后置内容 |
+| prefix | 输入框头部内容，只对 `type="text"` 有效 |
+| suffix | 输入框尾部内容，只对 `type="text"` 有效 |
+| prepend | 输入框前置内容，只对 `type="text"` 有效 |
+| append | 输入框后置内容，只对 `type="text"` 有效 |
 
 ### Input Events
 | 事件名称 | 说明 | 回调参数 |
@@ -831,6 +856,8 @@ export default {
 | name | 原生属性 | string | — | — |
 | select-when-unmatched | 在输入没有任何匹配建议的情况下，按下回车是否触发 `select` 事件 | boolean | — | false |
 | label | 输入框关联的label文字 | string | — | — |
+| prefix-icon | 输入框头部图标 | string | — | — |
+| suffix-icon | 输入框尾部图标 | string | — | — |
 
 ### Autocomplete slots
 | name | 说明 |

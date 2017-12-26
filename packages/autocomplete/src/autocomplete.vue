@@ -92,6 +92,8 @@
       name: String,
       size: String,
       value: String,
+      maxlength: Number,
+      minlength: Number,
       autofocus: Boolean,
       fetchSuggestions: Function,
       triggerOnFocus: {
@@ -103,6 +105,8 @@
         type: Boolean,
         default: false
       },
+      prefixIcon: String,
+      suffixIcon: String,
       label: String,
       debounce: {
         type: Number,

@@ -65,8 +65,8 @@ const forced = {
     sortable: false
   },
   expand: {
-    renderHeader: function(h, {}) {
-      return '';
+    renderHeader: function(h, { column }) {
+      return column.label || '';
     },
     renderCell: function(h, { row, store }, proxy) {
       const expanded = store.states.expandRows.indexOf(row) > -1;
@@ -99,7 +99,7 @@ const getDefaultColumn = function(type, options) {
     column.minWidth = 80;
   }
 
-  column.realWidth = column.width || column.minWidth;
+  column.realWidth = column.width === undefined ? column.minWidth : column.width;
 
   return column;
 };
@@ -134,6 +134,7 @@ export default {
       default: false
     },
     sortMethod: Function,
+    sortBy: [String, Function, Array],
     resizable: {
       type: Boolean,
       default: true
@@ -184,17 +185,24 @@ export default {
         parent = parent.$parent;
       }
       return parent;
+    },
+    columnOrTableParent() {
+      let parent = this.$parent;
+      while (parent && !parent.tableId && !parent.columnId) {
+        parent = parent.$parent;
+      }
+      return parent;
     }
   },
 
   created() {
     this.customRender = this.$options.render;
     this.$options.render = h => h('div', this.$slots.default);
-    this.columnId = (this.$parent.tableId || (this.$parent.columnId + '_')) + 'column_' + columnIdSeed++;
 
-    let parent = this.$parent;
+    let parent = this.columnOrTableParent;
     let owner = this.owner;
     this.isSubColumn = owner !== parent;
+    this.columnId = (parent.tableId || (parent.columnId + '_')) + 'column_' + columnIdSeed++;
 
     let type = this.type;
 
@@ -234,6 +242,7 @@ export default {
       headerAlign: this.headerAlign ? 'is-' + this.headerAlign : (this.align ? 'is-' + this.align : null),
       sortable: this.sortable === '' ? true : this.sortable,
       sortMethod: this.sortMethod,
+      sortBy: this.sortBy,
       resizable: this.resizable,
       showOverflowTooltip: this.showOverflowTooltip || this.showTooltipWhenOverflow,
       formatter: this.formatter,
@@ -374,7 +383,7 @@ export default {
 
   mounted() {
     const owner = this.owner;
-    const parent = this.$parent;
+    const parent = this.columnOrTableParent;
     let columnIndex;
 
     if (!this.isSubColumn) {

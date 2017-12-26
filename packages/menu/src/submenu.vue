@@ -173,11 +173,13 @@
       },
       handleTitleMouseenter() {
         if (this.mode === 'horizontal' && !this.rootMenu.backgroundColor) return;
-        this.$refs['submenu-title'].style.backgroundColor = this.rootMenu.hoverBackground;
+        const title = this.$refs['submenu-title'];
+        title && (title.style.backgroundColor = this.rootMenu.hoverBackground);
       },
       handleTitleMouseleave() {
         if (this.mode === 'horizontal' && !this.rootMenu.backgroundColor) return;
-        this.$refs['submenu-title'].style.backgroundColor = this.rootMenu.backgroundColor || '';
+        const title = this.$refs['submenu-title'];
+        title && (title.style.backgroundColor = this.rootMenu.backgroundColor || '');
       }
     },
     created() {

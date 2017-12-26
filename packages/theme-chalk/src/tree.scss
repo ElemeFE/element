@@ -25,7 +25,12 @@
 
 @include b(tree-node) {
   white-space: nowrap;
-
+  outline: none;
+  &:focus { /* focus */
+    > .el-tree-node__content {
+      background-color: $--tree-node-hover-color;
+    }
+  }
   @include e(content) {
     display: flex;
     align-items: center;
@@ -33,7 +38,7 @@
     cursor: pointer;
 
     & > .el-tree-node__expand-icon {
-      margin: 0 8px;
+      padding: 6px;
     }
     & > .el-checkbox {
       margin-right: 8px;
@@ -45,13 +50,8 @@
 
   @include e(expand-icon) {
     cursor: pointer;
-    width: 0;
-    height: 0;
-    margin-left: 10px;
-    border: 3.5px solid transparent;
-    border-right-width: 0;
-    border-left-color: $--tree-expand-icon-color;
-    border-left-width: 6px;
+    color: $--tree-expand-icon-color;
+    font-size: 12px;
 
     transform: rotate(0deg);
     transition: transform 0.3s ease-in-out;
@@ -61,7 +61,7 @@
     }
 
     &.is-leaf {
-      border-color: transparent;
+      color: transparent;
       cursor: default;
     }
   }

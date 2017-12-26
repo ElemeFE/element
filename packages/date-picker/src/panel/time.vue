@@ -10,6 +10,7 @@
           @change="handleChange"
           :arrow-control="useArrow"
           :show-seconds="showSeconds"
+          :am-pm-mode="amPmMode"
           @select-range="setSelectionRange"
           :date="date">
         </time-spinner>
@@ -51,6 +52,8 @@
         if (val) {
           this.oldValue = this.value;
           this.$nextTick(() => this.$refs.spinner.emitSelectRange('hours'));
+        } else {
+          this.needInitAdjust = true;
         }
       },
 
@@ -63,8 +66,9 @@
         }
 
         this.date = date;
-        if (this.visible) {
+        if (this.visible && this.needInitAdjust) {
           this.$nextTick(_ => this.adjustSpinners());
+          this.needInitAdjust = false;
         }
       },
 
@@ -90,7 +94,8 @@
         selectableRange: [],
         selectionRange: [0, 2],
         disabled: false,
-        arrowControl: false
+        arrowControl: false,
+        needInitAdjust: true
       };
     },
 
@@ -100,6 +105,11 @@
       },
       useArrow() {
         return this.arrowControl || this.timeArrowControl || false;
+      },
+      amPmMode() {
+        if ((this.format || '').indexOf('A') !== -1) return 'A';
+        if ((this.format || '').indexOf('a') !== -1) return 'a';
+        return '';
       }
     },
 

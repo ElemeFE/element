@@ -30,7 +30,7 @@ export interface LoadingServiceOptions {
 /** Loading Component */
 export declare class ElLoadingComponent extends Vue {
   /** Close the Loading instance */
-  close ()
+  close (): void
 }
 
 /** Loading directive definition */
@@ -46,7 +46,7 @@ export interface ElLoadingDirective extends VNodeDirective {
 /** Show animation while loading data */
 export interface ElLoading {
   /** Install Loading directive into Vue */
-  install (vue: typeof Vue)
+  install (vue: typeof Vue): void
 
   /** If you do not have a specific DOM node to attach the Loading directive, or if you simply prefer not to use Loading as a directive, you can call this service with some configs to open a Loading instance. */
   service (options: LoadingServiceOptions): ElLoadingComponent
