@@ -163,6 +163,11 @@
     cursor: pointer;
   }
 
+  thead th > .cell {
+    display: inline-flex;
+    align-items: center;
+  }
+
   th {
     white-space: nowrap;
     overflow: hidden;
