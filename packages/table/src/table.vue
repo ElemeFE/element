@@ -433,6 +433,8 @@
             maxHeight -= this.layout.headerHeight;
           }
 
+          maxHeight -= this.layout.footerHeight;
+
           style = {
             'max-height': maxHeight + 'px'
           };
