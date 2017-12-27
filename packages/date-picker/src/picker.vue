@@ -362,10 +362,7 @@ export default {
         this.valueOnOpen = this.value;
       } else {
         this.hidePicker();
-	// determine only real user change 
-	if (this.valueOnOpen !== this.value) {
-          this.emitChange(this.value);
-	}
+        this.emitChange(this.value);
         // flush user input if it is parsable
         // this.displayValue here is not a typo, it merges text for both panels in range mode
         const parsedValue = this.parseString(this.displayValue);
@@ -773,9 +770,12 @@ export default {
     },
 
     emitChange(val) {
-      this.$emit('change', val);
-      this.dispatch('ElFormItem', 'el.form.change', val);
-      this.valueOnOpen = val;
+      // determine user real change only
+      if (val !== this.valueOnOpen) {
+        this.$emit('change', val);
+        this.dispatch('ElFormItem', 'el.form.change', val);
+        this.valueOnOpen = val;
+      }
     },
 
     emitInput(val) {
