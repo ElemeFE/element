@@ -28,7 +28,7 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    color: color($--color-primary s(16%) l(44%));
+    color: $--color-text-secondary;
   }
 
   // 展开行
