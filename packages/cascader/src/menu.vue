@@ -6,7 +6,7 @@
   const copyArray = (arr, props) => {
     if (!arr || !Array.isArray(arr) || !props) return arr;
     const result = [];
-    const configurableProps = ['__IS__FLAT__OPTIONS', 'label', 'value', 'disabled'];
+    const configurableProps = ['__IS__FLAT__OPTIONS', 'label', 'value', 'disabled', 'clickable'];
     const childrenProp = props.children || 'children';
     arr.forEach(item => {
       const itemCopy = {};
@@ -65,7 +65,7 @@
         cache: false,
         get() {
           const activeValue = this.activeValue;
-          const configurableProps = ['label', 'value', 'children', 'disabled'];
+          const configurableProps = ['label', 'value', 'children', 'disabled', 'clickable'];
 
           const formatOptions = options => {
             options.forEach(option => {
@@ -249,6 +249,13 @@
                   return;
                 }
                 triggerHandler();
+              };
+              if (expandTrigger === 'hover') {
+                events.on.click = () => {
+                  if (item.clickable) {
+                    this.select(item, menuIndex);
+                  }
+                };
               };
             } else {
               events.on.click = () => {

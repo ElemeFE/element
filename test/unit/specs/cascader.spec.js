@@ -714,4 +714,78 @@ describe('Cascader', () => {
       done();
     }, 100);
   });
+  it('clickable options', done => {
+    vm = createVue({
+      template: `
+        <el-cascader
+          ref="cascader"
+          placeholder="请选择"
+          :options="options"
+          expand-trigger="hover"
+          v-model="selectedOptions"
+        ></el-cascader>
+      `,
+      data() {
+        return {
+          options: [{
+            value: 'zhejiang',
+            label: 'Zhejiang',
+            children: [{
+              value: 'hangzhou',
+              label: 'Hangzhou',
+              clickable: true,
+              children: [{
+                value: 'xihu',
+                label: 'West Lake'
+              }]
+            }, {
+              value: 'ningbo',
+              label: 'NingBo',
+              children: [{
+                value: 'jiangbei',
+                label: 'Jiang Bei'
+              }]
+            }]
+          }, {
+            value: 'jiangsu',
+            label: 'Jiangsu',
+            children: [{
+              value: 'nanjing',
+              label: 'Nanjing',
+              children: [{
+                value: 'zhonghuamen',
+                label: 'Zhong Hua Men'
+              }]
+            }]
+          }],
+          selectedOptions: []
+        };
+      }
+    }, true);
+    expect(vm.$el).to.be.exist;
+    vm.$el.click();
+    setTimeout(_ => {
+      expect(document.body.querySelector('.el-cascader-menus')).to.be.exist;
+
+      const menu = vm.$refs.cascader.menu;
+      const menuElm = menu.$el;
+      const item1 = menuElm.querySelector('.el-cascader-menu__item');
+
+      triggerEvent(item1, 'mouseenter');
+      menu.$nextTick(_ => {
+        expect(menuElm.children.length).to.be.equal(3);
+        expect(item1.classList.contains('is-active')).to.be.true;
+
+        const item2 = menuElm.children[2].querySelector('.el-cascader-menu__item');
+        item2.click();
+
+        setTimeout(_ => {
+          expect(document.body.querySelector('.el-cascader-menus').style.display).to.be.equal('none');
+          expect(vm.selectedOptions[0]).to.be.equal('zhejiang');
+          expect(vm.selectedOptions[1]).to.be.equal('hangzhou');
+          done();
+        }, 500);
+      });
+    }, 300);
+  });
 });
