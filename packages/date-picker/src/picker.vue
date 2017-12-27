@@ -362,7 +362,10 @@ export default {
         this.valueOnOpen = this.value;
       } else {
         this.hidePicker();
-        this.emitChange(this.value);
+	// determine only real user change 
+	if (this.valueOnOpen !== this.value) {
+          this.emitChange(this.value);
+	}
         // flush user input if it is parsable
         // this.displayValue here is not a typo, it merges text for both panels in range mode
         const parsedValue = this.parseString(this.displayValue);
