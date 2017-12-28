@@ -820,6 +820,7 @@ export default {
 | autofocus | 原生属性，自动获取焦点 | boolean | true, false | false |
 | form | 原生属性 | string | — | — |
 | label | 输入框关联的label文字 | string | — | — |
+| tabindex | 输入框的tabindex | string | - | - |
 
 ### Input slots
 | name | 说明 |
