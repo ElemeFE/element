@@ -107,6 +107,7 @@ exports.install = Vue => {
         el.mask &&
         el.mask.parentNode &&
         el.mask.parentNode.removeChild(el.mask);
+        toggleLoading(el, { value: false, modifiers: binding.modifiers });
       }
     }
   });

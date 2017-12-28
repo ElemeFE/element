@@ -96,7 +96,7 @@ const isFirefox = typeof navigator !== 'undefined' && navigator.userAgent.toLowe
 
 export const mousewheel = function(element, callback) {
   if (element && element.addEventListener) {
-    element.addEventListener(isFirefox ? 'DOMMouseScroll' : 'mousewheel', callback);
+    element.addEventListener(isFirefox ? 'DOMMouseScroll' : 'mousewheel', callback, { passive: true });
   }
 };
 

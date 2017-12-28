@@ -1,5 +1,15 @@
 ## Changelog
 
+### 2.0.9🎄
+
+*2017-12-24*
+
+- Añadida la función de enganche (hook) `before-remove`  para Upload, #8788 (by @firesh)
+- Arreglado el valor inicial de error que no funcionaba para FormItem, #8840
+- Ahora la directiva Loading soporta nombre de clase personalizado asignando el atributo `element-loading-custom-class`, #8826 (por @earlymeme)
+- Arreglado CarouselItem que se ponía invisible cuando los datos eran actualizados asincrónicamente, #8921
+- Añadido el atributo `renderAfterExpand` para Tree, #8972
+
 ### 2.0.8
 
 *2017-12-12*

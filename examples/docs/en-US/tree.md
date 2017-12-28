@@ -937,6 +937,7 @@ Only one node among the same level can be expanded at one time.
 | empty-text            | text displayed when data is void         | string                      | —               | —       |
 | node-key              | unique identity key name for nodes, its value should be unique across the whole tree | string                      | —               | —       |
 | props                 | configuration options, see the following table | object                      | —               | —       |
+| render-after-expand   | whether to render child nodes only after a parent node is expanded for the first time | boolean | — | true |
 | load                  | method for loading subtree data          | function(node, resolve)     | —               | —       |
 | render-content        | render function for tree node            | Function(h, { node, data, store }        | —               | —       |
 | highlight-current     | whether current node is highlighted      | boolean                     | —               | false   |
