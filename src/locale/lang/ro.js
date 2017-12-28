@@ -100,10 +100,10 @@ export default {
     transfer: {
       noMatch: 'Nu există date potrivite',
       noData: 'Nu există date',
-      titles: ['Lista 1', 'Lista 2'], // to be translated
-      filterPlaceholder: 'Introduceți cuvântul cheie', // to be translated
-      noCheckedFormat: '{total} elemente', // to be translated
-      hasCheckedFormat: '{checked}/{total} verificate' // to be translated
+      titles: ['Lista 1', 'Lista 2'],
+      filterPlaceholder: 'Introduceți cuvântul cheie',
+      noCheckedFormat: '{total} elemente',
+      hasCheckedFormat: '{checked}/{total} verificate'
     }
   }
 };
