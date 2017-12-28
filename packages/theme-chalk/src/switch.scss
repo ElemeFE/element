@@ -2,7 +2,8 @@
 @import "common/var";
 
 @include b(switch) {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   position: relative;
   font-size: $--switch-font-size;
   line-height: $--switch-height;

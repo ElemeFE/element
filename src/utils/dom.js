@@ -86,7 +86,7 @@ export function addClass(el, cls) {
 
     if (el.classList) {
       el.classList.add(clsName);
-    } else if (hasClass(el, clsName)) {
+    } else if (!hasClass(el, clsName)) {
       curClass += ' ' + clsName;
     }
   }

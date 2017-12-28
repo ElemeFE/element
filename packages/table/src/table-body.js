@@ -22,7 +22,8 @@ export default {
     rowClassName: [String, Function],
     rowStyle: [Object, Function],
     fixed: String,
-    highlight: Boolean
+    highlight: Boolean,
+    rowlength: [Number]
   },
 
   render(h) {
@@ -129,6 +130,21 @@ export default {
             )
           }
         </tbody>
+        {
+          this.rowlength > 0 && this.rowlength - this.data.length > 0 ? (<tbody>{
+            this._l(this.rowlength - this.data.length, (row, $index) =>
+              [<tr>
+                {
+                  this._l(this.columns, (column, cellIndex) =>
+                    <td>
+                      <div class="cell">&nbsp;</div>
+                    </td>)
+                }
+              </tr>
+              ])
+          }
+        </tbody>) : ''
+        }
       </table>
     );
   },

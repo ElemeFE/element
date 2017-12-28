@@ -35,7 +35,8 @@
         :row-class-name="rowClassName"
         :row-style="rowStyle"
         :highlight="highlightCurrentRow"
-        :style="{ width: bodyWidth }">
+        :style="{ width: bodyWidth }"
+        :rowlength="rowLength">
       </table-body>
       <div :style="{ width: bodyWidth }" class="el-table__empty-block" v-if="!data || data.length === 0">
         <span class="el-table__empty-text"><slot name="empty">{{ emptyText || t('el.table.emptyText') }}</slot></span>
@@ -241,7 +242,9 @@
 
       tooltipEffect: String,
 
-      spanMethod: Function
+      spanMethod: Function,
+
+      rowLength: [Number]
     },
 
     components: {

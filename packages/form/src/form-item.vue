@@ -73,9 +73,12 @@
       size: String
     },
     watch: {
-      error(value) {
-        this.validateMessage = value;
-        this.validateState = value ? 'error' : '';
+      error: {
+        immediate: true,
+        handler(value) {
+          this.validateMessage = value;
+          this.validateState = value ? 'error' : '';
+        }
       },
       validateStatus(value) {
         this.validateState = value;
@@ -227,7 +230,7 @@
         var selfRules = this.rules;
         var requiredRule = this.required !== undefined ? { required: !!this.required } : [];
 
-        formRules = formRules ? getPropByPath(formRules, this.prop || '').v : [];
+        formRules = formRules ? getPropByPath(formRules, this.prop || '').o[this.prop || ''] : [];
 
         return [].concat(selfRules || formRules || []).concat(requiredRule);
       },

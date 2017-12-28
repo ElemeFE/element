@@ -1,14 +1,24 @@
 ## Changelog
 
+### 2.0.9🎄
+
+*2017-12-24*
+
+- Añadida la función de enganche (hook) `before-remove`  para Upload, #8788 (by @firesh)
+- Arreglado el valor inicial de error que no funcionaba para FormItem, #8840
+- Ahora la directiva Loading soporta nombre de clase personalizado asignando el atributo `element-loading-custom-class`, #8826 (por @earlymeme)
+- Arreglado CarouselItem que se ponía invisible cuando los datos eran actualizados asincrónicamente, #8921
+- Añadido el atributo `renderAfterExpand` para Tree, #8972
+
 ### 2.0.8
 
 *2017-12-12*
 
-- Added Spanish documentation
-- Fixed `show-timeout` of Dropdown not working when trigger is click, #8734 (por @presidenten)
-- Fixed Form validation timing for rules whose trigger is blur, #8776
-- Fixed blur event of ranged DatePicker, #8784
-- `format` of TimePicker now supports AM/PM, #8620 (por @firesh)
+- Agregada la documentacion en español
+- Arreglado `show-timeout` de Dropdown que no funcionaba cuando se disparaba el click, #8734 (por @presidenten)
+- Arreglado el tiempo de validacion del Form cuando se disparaba el blur, #8776
+- Arreglado el evento de perdida de foco (blur) del DatePicker por rangos, #8784
+- `format` de TimePicker ahora soporta AM/PM, #8620 (por @firesh)
 
 ### 2.0.7
 
@@ -75,9 +85,6 @@
 
 *2017-10-28*
 
-- Fixed style error of RadioButton and CheckboxButton, #7793
-- Fixed TimePicker not respond to mouse scroll in some conditions, #7811
-- Fixed incomplete styles of some components when imported on demand, #7811
 - Corregido error de estilo de RadioButton y CheckboxButton, #7793
 - Corregido TimePicker no responde al desplazamiento del ratón en algunas condiciones, #7811
 - Corregido estilos incompletos de algunos componentes cuando se importan bajo demanda, #7811
@@ -103,10 +110,10 @@
 - TimePicker
   - Ahora puede ser navegado por  `Up` y `Down`, y presionando `Enter` selecciona la hora #6050
   - Añadido `start-placeholder` y `end-placeholder`. Son placeholder's para las dos casillas de input en modo range #7169
-  -  Añadido el atributo `arrow-control` para hacer girar el tiempo con las flechas #7438
+  - Añadido el atributo `arrow-control` para hacer girar el tiempo con las flechas #7438
 - Tree
   - Ahora los nodos hijo no se renderizan antes de la primera expansión #6257
-  -  Añadido el atributo `check-descendants`. Determina si los nodos hijo se seleccionan al seleccionar su nodo padre en modo `lazy` #6235
+  - Añadido el atributo `check-descendants`. Determina si los nodos hijo se seleccionan al seleccionar su nodo padre en modo `lazy` #6235
 - Tag
   - Atributo `size` añadido #7203
 - Datepicker
@@ -123,7 +130,7 @@
 - Dialog
   - Añadidos los atributos `width`, `fullscreen`, `append-to-body`. Ahora Dialog puede ser anidado
   - Atributo `center` agregado para que el contenido pueda ser centrado #7042
-  -  Añadidos  `focus-after-closed`, `focus-after-open`  para mejorar la accesibilidad #6511
+  - Añadidos  `focus-after-closed`, `focus-after-open`  para mejorar la accesibilidad #6511
 - ColorPicker
   - Ahora puede escribir colores en el input #6167
   - Añadidos atributos `size` y `disabled` #7026
@@ -195,7 +202,7 @@
 
 - DatePicker
   -  Arreglado  `v-model`  que devolvia el segundo día de la semana seleccionada en modo week #6038
-  - Arreglado el primer input comenzaba borrado con el type `daterange`  #6021
+  -  Arreglado el primer input comenzaba borrado con el type `daterange`  #6021
 - DateTimePicker
   - Arreglado DateTimePicker y TimePicker que se afectaban entre sí cuando se seleccionaban #6090
   - Arreglado la hora y el segundo podian estar más allá del límite al seleccionar el tiempo #6076
@@ -225,7 +232,7 @@
   - Para facilitar el uso de iconos de terceros, los atributos `icon` de Button y Steps y los atributos  `prefix-icon` y `suffix-icon`  del input ahora requieren un nombre de clase completo.
 - Dialog
   - Atributo `size` eliminado. Ahora el tamaño de Dialog se puede configurar con  `width` y `fullscreen`
-  -  Ahora la visibilidad del Diálogo no puede ser controlada por `v-model`
+  - Ahora la visibilidad del Diálogo no puede ser controlada por `v-model`
 - Rate
   - `text-template` a sido renombrado a `score-template`
 - Dropdown

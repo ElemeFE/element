@@ -18,6 +18,18 @@
 
 > A Vue.js 2.0 UI Toolkit for Web.
 
+<p align="center">
+  <b>Special thanks to the generous sponsorship by:</b>
+</p>
+<p align="center">
+  <a href="https://tipe.io/?ref=element" target="_blank">Tipe.io</a>
+</p>
+<p align="center">
+  <a href="https://tipe.io/?ref=element" target="_blank">
+    <img style="vertical-align: middle" height="150px" alt="Tipe CMS" src="https://user-images.githubusercontent.com/1016365/34124854-48fafa06-e3e9-11e7-8c04-251055feebee.png">
+  </a>
+</p>
+
 ## Links
 - Homepage and documentation
   - International users: http://element.eleme.io/

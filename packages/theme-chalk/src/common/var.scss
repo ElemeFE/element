@@ -292,7 +292,7 @@ $--message-danger-color: $--color-danger !default;
 -------------------------- */
 $--notification-width: 330px !default;
 $--notification-padding: 14px 26px 14px 13px !default;
-$--notification-raduis: 8px !default;
+$--notification-radius: 8px !default;
 $--notification-shadow: $--box-shadow-light !default;
 $--notification-border-color: $--border-color-lighter !default;
 $--notification-icon-size: 24px !default;
@@ -480,7 +480,7 @@ $--table-text-color: $--color-text-regular !default;
 $--table-header-color: $--color-text-secondary !default;
 $--table-row-hover-background: $--background-color-base !default;
 $--table-current-row-background: $--color-primary-light-9 !default;
-$--table-header-background: $--color-text-secondary !default;
+$--table-header-background: $--color-white !default;
 $--table-footer-background: $--color-text-placeholder !default;
 $--table-fixed-box-shadow: 0 0 10px rgba(0, 0, 0, .12) !default;
 
