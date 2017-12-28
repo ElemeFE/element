@@ -20,7 +20,7 @@ export default {
       nextYear: 'Année suivante',
       prevMonth: 'Mois précédent',
       nextMonth: 'Mois suivant',
-      year: 'Année',
+      year: '',
       month1: 'Janvier',
       month2: 'Février',
       month3: 'Mars',
