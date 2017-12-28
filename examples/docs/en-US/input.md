@@ -664,6 +664,7 @@ Search data from server-side.
 |autofocus | same as `autofocus` in native input | boolean | — | false |
 |form | same as `form` in native input | string | — | — |
 | label | label text | string | — | — |
+| tabindex | input tabindex | string | - | - |
 
 ### Input slots
 

@@ -643,6 +643,7 @@ Búsqueda de datos desde el servidor.
 | autofocus     | igual que `autofocus` en el input nativo | boolean          | —                                | false       |
 | form          | igual que `form` en el input nativo      | string           | —                                | —           |
 | label         | texto de la etiqueta                     | string           | —                                | —           |
+| tabindex | caja de entrada tabindex | string | - | - |
 
 ### Input slots
 
