@@ -138,8 +138,7 @@ export default {
                   this._l(this.columns, (column, cellIndex) =>
                     <td>
                       <div class="cell">&nbsp;</div>
-                    </td>
-                  )
+                    </td>)
                 }
               </tr>
               ])
