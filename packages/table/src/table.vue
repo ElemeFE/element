@@ -242,6 +242,8 @@
 
       tooltipEffect: String,
 
+      spanMethod: Function,
+      
       rowLength: [Number]
     },
 
