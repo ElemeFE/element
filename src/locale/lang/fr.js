@@ -20,7 +20,7 @@ export default {
       nextYear: 'Année suivante',
       prevMonth: 'Mois précédent',
       nextMonth: 'Mois suivant',
-      year: '',
+      year: '', // In french, like in english, we don't say "Année" after the year number.
       month1: 'Janvier',
       month2: 'Février',
       month3: 'Mars',
