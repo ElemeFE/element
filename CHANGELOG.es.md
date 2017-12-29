@@ -1,5 +1,14 @@
 ## Changelog
 
+### 2.0.10
+
+*2017-12-29*
+
+- Fixed wrong max height calculation of Table when fixed column and summary row co-exist, #9026
+- Fixed uncompiled color style of empty text in Table, #9028
+- Now DatePicker only emits `change` event when value is truly changed, #9029 (by @remizovvv)
+- Added `tabindex` attribute for Input, #9041 (by @dicklwm)
+
 ### 2.0.9🎄
 
 *2017-12-24*
