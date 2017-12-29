@@ -38,7 +38,7 @@
         :style="{ width: bodyWidth }"
         :rowlength="rowLength">
       </table-body>
-      <div :style="{ width: bodyWidth }" class="el-table__empty-block" v-if="!data || data.length === 0">
+      <div :style="{ width: bodyWidth }" class="el-table__empty-block" v-if="(!data || data.length === 0)&&!rowlength>0">
         <span class="el-table__empty-text"><slot name="empty">{{ emptyText || t('el.table.emptyText') }}</slot></span>
       </div>
       <div class="el-table__append-wrapper" ref="appendWrapper" v-if="$slots.append">
@@ -244,7 +244,7 @@
 
       spanMethod: Function,
 
-      rowLength: [Number]
+      rowLength: [String, Number]
     },
 
     components: {
