@@ -131,8 +131,8 @@ export default {
               this.rowlength > 0 && this.rowlength - this.data.length > 0
                 ? this._l(this.rowlength - this.data.length, (row, $index) =>
                   [<tr
-                    style={this.rowStyle ? this.getRowStyle(row, $index) : null}
-                    class={[this.getRowClass(row, $index)]}>
+                    style={this.rowStyle ? this.getRowStyle(row, this.data.length % 2 === 0 ? $index : $index + 1) : null}
+                    class={[this.getRowClass(row, this.data.length % 2 === 0 ? $index : $index + 1)]}>
                     {
                       this._l(this.columns, (column, cellIndex) =>
                         <td>
