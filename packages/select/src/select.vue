@@ -12,7 +12,7 @@
       <span v-if="collapseTags && selected.length">
         <el-tag
           :closable="!disabled"
-          size="small"
+          :size="collapseTagSize"
           :hit="selected[0].hitState"
           type="info"
           @close="deleteTag($event, selected[0])"
@@ -22,7 +22,7 @@
         <el-tag
           v-if="selected.length > 1"
           :closable="false"
-          size="small"
+          :size="collapseTagSize"
           type="info"
           disable-transitions>
           <span class="el-select__tags-text">+ {{ selected.length - 1 }}</span>
@@ -204,6 +204,12 @@
 
       selectSize() {
         return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
+      },
+
+      collapseTagSize() {
+        return ['small', 'mini'].indexOf(this.selectSize) > -1
+          ? 'mini'
+          : 'small';
       }
     },
 
