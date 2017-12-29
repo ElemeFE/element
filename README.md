@@ -32,8 +32,8 @@
 
 ## Links
 - Homepage and documentation
-  - International users: http://element.eleme.io/
-  - Chinese users: http://element-cn.eleme.io/
+  - International users: http://element.eleme.io/#/en-US
+  - Chinese users: http://element-cn.eleme.io/#/zh-CN
 - [awesome-element](https://github.com/ElementUI/awesome-element)
 - [FAQ](./FAQ.md)
 - [Customize theme](http://element.eleme.io/#/en-US/component/custom-theme)
