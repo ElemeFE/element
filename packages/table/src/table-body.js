@@ -23,7 +23,7 @@ export default {
     rowStyle: [Object, Function],
     fixed: String,
     highlight: Boolean,
-    rowlength: [Number]
+    rowlength: [String, Number]
   },
 
   render(h) {
