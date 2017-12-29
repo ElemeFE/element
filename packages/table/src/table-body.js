@@ -127,24 +127,22 @@ export default {
               ]
             ).concat(
               <el-tooltip effect={ this.table.tooltipEffect } placement="top" ref="tooltip" content={ this.tooltipContent }></el-tooltip>
+            ).concat(
+              this.rowlength > 0 && this.rowlength - this.data.length > 0
+                ? this._l(this.rowlength - this.data.length, (row, $index) =>
+                  [<tr
+                    style={this.rowStyle ? this.getRowStyle(row, $index) : null}
+                    class={[this.getRowClass(row, $index)]}>
+                    {
+                      this._l(this.columns, (column, cellIndex) =>
+                        <td>
+                          <div class="cell">&nbsp;</div>
+                        </td>)
+                    }
+                  </tr>]) : ''
             )
           }
         </tbody>
-        {
-          this.rowlength > 0 && this.rowlength - this.data.length > 0 ? (<tbody>{
-            this._l(this.rowlength - this.data.length, (row, $index) =>
-              [<tr>
-                {
-                  this._l(this.columns, (column, cellIndex) =>
-                    <td>
-                      <div class="cell">&nbsp;</div>
-                    </td>)
-                }
-              </tr>
-              ])
-          }
-        </tbody>) : ''
-        }
       </table>
     );
   },
