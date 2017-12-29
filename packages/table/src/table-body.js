@@ -132,12 +132,22 @@ export default {
                 ? this._l(this.rowlength - this.data.length, (row, $index) =>
                   [<tr
                     style={this.rowStyle ? this.getRowStyle(row, this.data.length % 2 === 0 ? $index : $index + 1) : null}
-                    class={[this.getRowClass(row, this.data.length % 2 === 0 ? $index : $index + 1)]}>
+                    class={[this.getRowClass(row, this.data.length % 2 === 0 ? $index : $index + 1)]}
+                    on-contextmenu={ ($event) => this.handleContextMenu($event, row) }
+                    on-mouseenter={ _ => this.handleMouseEnter(this.data.length + $index) }
+                    on-mouseleave={ _ => this.handleMouseLeave() }>
                     {
                       this._l(this.columns, (column, cellIndex) =>
-                        <td>
+                        <td
+                          style={ this.getCellStyle($index, cellIndex, row, column) }
+                          class={ this.getCellClass($index, cellIndex, row, column) }
+                          on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
+                          on-mouseleave={ this.handleCellMouseLeave }>
                           <div class="cell">&nbsp;</div>
                         </td>)
+                    }
+                    {
+                      !this.fixed && this.layout.scrollY && this.layout.gutterWidth ? <td class="gutter" /> : ''
                     }
                   </tr>]) : ''
             )

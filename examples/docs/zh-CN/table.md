@@ -700,7 +700,7 @@
   <el-table
     :data="tableData"
     border
-    style="width: 100%">
+    style="width: 100%" row-length="10">
     <el-table-column
       fixed
       prop="date"

@@ -86,7 +86,8 @@
           :highlight="highlightCurrentRow"
           :row-class-name="rowClassName"
           :row-style="rowStyle"
-          :style="{ width: layout.fixedWidth ? layout.fixedWidth + 'px' : '' }">
+          :style="{ width: layout.fixedWidth ? layout.fixedWidth + 'px' : '' }"
+          :rowlength="rowLength">
         </table-body>
         <div class="el-table__append-gutter" :style="{ height: layout.appendHeight + 'px' }" v-if="$slots.append"></div>
       </div>
@@ -130,7 +131,8 @@
           :row-class-name="rowClassName"
           :row-style="rowStyle"
           :highlight="highlightCurrentRow"
-          :style="{ width: layout.rightFixedWidth ? layout.rightFixedWidth + 'px' : '' }">
+          :style="{ width: layout.rightFixedWidth ? layout.rightFixedWidth + 'px' : '' }"
+          :rowlength="rowLength">
         </table-body>
       </div>
       <div class="el-table__fixed-footer-wrapper" ref="rightFixedFooterWrapper" v-if="showSummary" v-show="data && data.length > 0">
