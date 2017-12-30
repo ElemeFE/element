@@ -4,10 +4,10 @@
 
 *2017-12-29*
 
-- Fixed wrong max height calculation of Table when fixed column and summary row co-exist, #9026
-- Fixed uncompiled color style of empty text in Table, #9028
-- Now DatePicker only emits `change` event when value is truly changed, #9029 (by @remizovvv)
-- Added `tabindex` attribute for Input, #9041 (by @dicklwm)
+- Corregido el calculo incorrecto de la altura máxima de Table cuando fixed column y summary row coexisten, #9026
+- Solucionado el estilo de color que no lo compilaba para textos vacíos en Table, #9028
+- Ahora DatePicker sólo emite el evento `change` cuando el valor cambia verdaderamente, #9029 (by @remizovvv)
+- Añadido atributo `tabindex` para Input, #9041 (by @dicklwm)
 
 ### 2.0.9🎄
 
