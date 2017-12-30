@@ -58,6 +58,11 @@
       return {
         activeNames: ['1']
       };
+    },
+    methods: {
+      handleChange(val) {
+        console.log(val);
+      }
     }
   }
 </script>
