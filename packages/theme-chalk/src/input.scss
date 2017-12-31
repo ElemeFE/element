@@ -233,12 +233,18 @@
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
     }
+    .el-select .el-input.is-focus .el-input__inner {
+      border-color: transparent;
+    }
   }
 
   @include m(append) {
     .el-input__inner {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
+    }
+    .el-select .el-input.is-focus .el-input__inner {
+      border-color: transparent;
     }
   }
 }
