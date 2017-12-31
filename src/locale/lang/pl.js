@@ -16,10 +16,10 @@ export default {
       startTime: 'Godzina początkowa',
       endDate: 'Data końcowa',
       endTime: 'Czas końcowa',
-      prevYear: 'Poprzedni rok', // to be translated
-      nextYear: 'Następny rok', // to be translated
-      prevMonth: 'Poprzedni miesiąc', // to be translated
-      nextMonth: 'Następny miesiąc', // to be translated
+      prevYear: 'Poprzedni rok',
+      nextYear: 'Następny rok',
+      prevMonth: 'Poprzedni miesiąc',
+      nextMonth: 'Następny miesiąc',
       year: 'rok',
       month1: 'styczeń',
       month2: 'luty',
