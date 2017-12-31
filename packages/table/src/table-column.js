@@ -280,6 +280,14 @@ export default {
       return;
     }
 
+    column.renderHeader = function(h, {column}) {
+      // 如果存在slot自定header，则使用自定义组件代替label
+      if (_self.$scopedSlots.header) {
+        return _self.$scopedSlots.header ? _self.$scopedSlots.header() : _self.label;
+      }
+      return _self.label;
+    };
+
     column.renderCell = function(h, data) {
       if (_self.$scopedSlots.default) {
         renderCell = () => _self.$scopedSlots.default(data);

@@ -35,9 +35,10 @@
         :row-class-name="rowClassName"
         :row-style="rowStyle"
         :highlight="highlightCurrentRow"
-        :style="{ width: bodyWidth }">
+        :style="{ width: bodyWidth }"
+        :rowlength="rowLength">
       </table-body>
-      <div :style="{ width: bodyWidth }" class="el-table__empty-block" v-if="!data || data.length === 0">
+      <div :style="{ width: bodyWidth }" class="el-table__empty-block" v-if="(!data || data.length === 0)&&!rowlength>0">
         <span class="el-table__empty-text"><slot name="empty">{{ emptyText || t('el.table.emptyText') }}</slot></span>
       </div>
       <div class="el-table__append-wrapper" ref="appendWrapper" v-if="$slots.append">
@@ -85,7 +86,8 @@
           :highlight="highlightCurrentRow"
           :row-class-name="rowClassName"
           :row-style="rowStyle"
-          :style="{ width: layout.fixedWidth ? layout.fixedWidth + 'px' : '' }">
+          :style="{ width: layout.fixedWidth ? layout.fixedWidth + 'px' : '' }"
+          :rowlength="rowLength">
         </table-body>
         <div class="el-table__append-gutter" :style="{ height: layout.appendHeight + 'px' }" v-if="$slots.append"></div>
       </div>
@@ -129,7 +131,8 @@
           :row-class-name="rowClassName"
           :row-style="rowStyle"
           :highlight="highlightCurrentRow"
-          :style="{ width: layout.rightFixedWidth ? layout.rightFixedWidth + 'px' : '' }">
+          :style="{ width: layout.rightFixedWidth ? layout.rightFixedWidth + 'px' : '' }"
+          :rowlength="rowLength">
         </table-body>
       </div>
       <div class="el-table__fixed-footer-wrapper" ref="rightFixedFooterWrapper" v-if="showSummary" v-show="data && data.length > 0">
@@ -241,7 +244,9 @@
 
       tooltipEffect: String,
 
-      spanMethod: Function
+      spanMethod: Function,
+
+      rowLength: [String, Number]
     },
 
     components: {

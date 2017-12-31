@@ -700,7 +700,7 @@
   <el-table
     :data="tableData"
     border
-    style="width: 100%">
+    style="width: 100%" row-length="10">
     <el-table-column
       fixed
       prop="date"
@@ -1373,7 +1373,7 @@
 <template>
   <el-table
     :data="tableData"
-    style="width: 100%">
+    style="width: 100%" :row-length="10">
     <el-table-column
       prop="date"
       label="日期"
@@ -1454,10 +1454,13 @@
 <template>
   <el-table
     :data="tableData"
-    style="width: 100%">
+    style="width: 100%" :row-length="10">
     <el-table-column
       label="日期"
       width="180">
+      <template slot-scope="header" slot="header">
+        <span style="color:red">日期</span>测试
+      </template>
       <template slot-scope="scope">
         <i class="el-icon-time"></i>
         <span style="margin-left: 10px">{{ scope.row.date }}</span>
