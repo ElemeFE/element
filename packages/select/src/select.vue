@@ -666,7 +666,7 @@
           value.splice(index, 1);
           this.$emit('input', value);
           this.emitChange(value);
-          this.$emit('remove-tag', tag);
+          this.$emit('remove-tag', tag.value);
         }
         event.stopPropagation();
       },
