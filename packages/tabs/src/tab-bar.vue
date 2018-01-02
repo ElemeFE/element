@@ -33,8 +33,8 @@
               return true;
             } else {
               tabSize = $el[`client${firstUpperCase(sizeName)}`];
-              if (sizeName === 'width') {
-                tabSize -= index === 0 ? 20 : 40;
+              if (sizeName === 'width' && this.tabs.length > 1) {
+                tabSize -= (index === 0 || index === this.tabs.length - 1) ? 20 : 40;
               }
               return false;
             }

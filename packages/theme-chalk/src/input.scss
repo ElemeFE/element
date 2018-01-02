@@ -233,12 +233,18 @@
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
     }
+    .el-select .el-input.is-focus .el-input__inner {
+      border-color: transparent;
+    }
   }
 
   @include m(append) {
     .el-input__inner {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
+    }
+    .el-select .el-input.is-focus .el-input__inner {
+      border-color: transparent;
     }
   }
 }
@@ -247,6 +253,7 @@
   display: inline-block;
   width: 100%;
   vertical-align: bottom;
+  font-size: $--font-size-base;
 
   @include e(inner) {
     display: block;
@@ -255,7 +262,7 @@
     line-height: 1.5;
     box-sizing: border-box;
     width: 100%;
-    font-size: $--font-size-base;
+    font-size: inherit;
     color: $--input-color;
     background-color: $--input-fill;
     background-image: none;

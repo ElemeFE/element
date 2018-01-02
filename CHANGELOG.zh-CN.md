@@ -1,5 +1,34 @@
 ## 更新日志
 
+### 2.0.10
+
+*2017-12-29*
+
+- 修复了 Table 在固定列和合计行并存时的高度计算错误的问题，#9026
+- 修复了 Table 样式 SCSS 文件错误编译的问题，#9028
+- 现在 DatePicker 的 `change` 事件只会在 `value` 真正改变的时候触发，#9029（by @remizovvv）
+- 新增 Input 的 `tabindex` 属性，#9041（by @dicklwm）
+
+### 2.0.9🎄
+
+*2017-12-24*
+
+- 新增 Upload 的 `before-remove` 钩子方法，#8788（by @firesh）
+- 修复 FormItem 的 `error` 属性初始值无效的问题，#8840
+- 通过指令调用的 Loading 现在支持以 `element-loading-custom-class` 属性的方式设置自定义类名，#8826（by @earlymeme）
+- 修复 CarouselItem 为异步获取时被隐藏的问题，#8921
+- 新增 Tree 的 `renderAfterExpand` 属性，#8972
+
+### 2.0.8
+
+*2017-12-12*
+
+- 新增西班牙语文档
+- 修复 `show-timeout` 对点击触发的 Dropdown 无效的问题，#8734（by @presidenten）
+- 修复 Form 对于 `trigger` 为 blur 的校验规则触发时机有误的问题，#8776
+- 修复 DatePicker 在范围选择时 blur 事件触发时机有误的问题，#8784
+- TimePicker 的 `format` 新增对 AM/PM 的支持，#8620（by @firesh）
+
 ### 2.0.7
 
 *2017-11-29*

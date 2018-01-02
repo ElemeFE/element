@@ -74,7 +74,7 @@ Checkbox can be used alone to switch between two states.
 
 Disabled state for checkbox.
 
-::: demo Set the `disabled` attribute.
+:::demo Set the `disabled` attribute.
 
 ```html
 <template>

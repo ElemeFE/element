@@ -1,5 +1,34 @@
 ## Changelog
 
+### 2.0.10
+
+*2017-12-29*
+
+- Fixed wrong max height calculation of Table when fixed column and summary row co-exist, #9026
+- Fixed uncompiled color style of empty text in Table, #9028
+- Now DatePicker only emits `change` event when value is truly changed, #9029 (by @remizovvv)
+- Added `tabindex` attribute for Input, #9041 (by @dicklwm)
+
+### 2.0.9🎄
+
+*2017-12-24*
+
+- Added `before-remove` hook function for Upload, #8788 (by @firesh)
+- Fixed initial value of `error` not working for FormItem, #8840
+- Now Loading directive supports custom class name by assigning `element-loading-custom-class` attribute, #8826 (by @earlymeme)
+- Fixed CarouselItem becoming invisible when data is asynchronously updated, #8921
+- Added `renderAfterExpand` attribute for Tree, #8972
+
+### 2.0.8
+
+*2017-12-12*
+
+- Added Spanish documentation
+- Fixed `show-timeout` of Dropdown not working when trigger is click, #8734 (by @presidenten)
+- Fixed Form validation timing for rules whose trigger is blur, #8776
+- Fixed blur event of ranged DatePicker, #8784
+- `format` of TimePicker now supports AM/PM, #8620 (by @firesh)
+
 ### 2.0.7
 
 *2017-11-29*

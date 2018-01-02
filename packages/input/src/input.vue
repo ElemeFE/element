@@ -20,6 +20,7 @@
         <slot name="prepend"></slot>
       </div>
       <input
+        :tabindex="tabindex"
         v-if="type !== 'textarea'"
         class="el-input__inner"
         v-bind="$props"
@@ -70,6 +71,7 @@
     </template>
     <textarea
       v-else
+      :tabindex="tabindex"
       class="el-textarea__inner"
       :value="currentValue"
       @input="handleInput"
@@ -159,7 +161,8 @@
       clearable: {
         type: Boolean,
         default: false
-      }
+      },
+      tabindex: String
     },
 
     computed: {

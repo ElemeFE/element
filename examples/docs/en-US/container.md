@@ -76,7 +76,7 @@ These components use flex for layout, so please make sure your browser supports 
 
 ### Common layouts
 
-::: demo
+:::demo
 ```html
 <el-container>
   <el-header>Header</el-header>
@@ -170,7 +170,7 @@ These components use flex for layout, so please make sure your browser supports 
 
 ### Example
 
-::: demo
+:::demo
 ```html
 <el-container style="height: 500px; border: 1px solid #eee">
   <el-aside width="200px" style="background-color: rgb(238, 241, 246)">

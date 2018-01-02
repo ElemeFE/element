@@ -260,6 +260,7 @@
 
     computed: {
       stops() {
+        if (!this.showStops) return [];
         if (this.step === 0) {
           process.env.NODE_ENV !== 'production' &&
           console.warn('[Element Warn][Slider]step should not be 0.');

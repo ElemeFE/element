@@ -8,6 +8,7 @@
       v-for="child in root.childNodes"
       :node="child"
       :props="props"
+      :render-after-expand="renderAfterExpand"
       :key="getNodeKey(child)"
       :render-content="renderContent"
       @node-expand="handleNodeExpand">
@@ -52,6 +53,10 @@
         default() {
           return t('el.tree.emptyText');
         }
+      },
+      renderAfterExpand: {
+        type: Boolean,
+        default: true
       },
       nodeKey: String,
       checkStrictly: Boolean,
@@ -143,6 +148,18 @@
           return node.data[nodeKey];
         }
         return index;
+      },
+      getNodePath(data) {
+        if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in getNodePath');
+        const node = this.store.getNode(data);
+        if (!node) return [];
+        const path = [node.data];
+        let parent = node.parent;
+        while (parent && parent !== this.root) {
+          path.push(parent.data);
+          parent = parent.parent;
+        }
+        return path.reverse();
       },
       getCheckedNodes(leafOnly) {
         return this.store.getCheckedNodes(leafOnly);
