@@ -130,26 +130,29 @@
       }
     },
     watch: {
-      defaultActive(value) {
-        const item = this.items[value];
-        if (item) {
-          this.activeIndex = item.index;
-          this.initOpenedMenu();
-        } else {
-          this.activeIndex = '';
-        }
+      defaultActive: 'updateActiveIndex',
 
-      },
       defaultOpeneds(value) {
         if (!this.collapse) {
           this.openedMenus = value;
         }
       },
+
       collapse(value) {
         if (value) this.openedMenus = [];
       }
     },
     methods: {
+      updateActiveIndex() {
+        const item = this.items[this.defaultActive];
+        if (item) {
+          this.activeIndex = item.index;
+          this.initOpenedMenu();
+        } else {
+          this.activeIndex = null;
+        }
+      },
+
       getMigratingConfig() {
         return {
           props: {
@@ -287,6 +290,7 @@
       if (this.mode === 'horizontal') {
         new Menubar(this.$el); // eslint-disable-line
       }
+      this.$watch('items', this.updateActiveIndex);
     }
   };
 </script>

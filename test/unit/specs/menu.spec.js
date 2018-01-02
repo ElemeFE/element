@@ -329,4 +329,37 @@ describe('Menu', () => {
     }, true);
     expect(vm.$refs.group1.$el.querySelector('.el-menu-item-group__title').innerText).to.be.equal('分组一');
   });
+  it('dynamic menus, issue 9092', done => {
+    vm = createVue({
+      template: `
+          <el-menu :default-active="active">
+            <el-menu-item
+              v-ref="menus"
+              v-for="menu in menus"
+              :index="menu.name"
+              :key="menu.name">
+              {{menu.description}}
+            </el-menu-item>
+          </el-menu>
+        `,
+      data() {
+        return {
+          active: '',
+          menus: []
+        };
+      }
+    }, true);
+    setTimeout(_ => {
+      vm.active = '2';
+      vm.menus = [
+          {name: '1', description: 'happy'},
+          {name: '2', description: 'new'},
+          {name: '3', description: 'year'}
+      ];
+      setTimeout(_ => {
+        expect(vm.$el.querySelector('.el-menu-item.is-active').innerText).to.equal('new');
+        done();
+      }, 20);
+    }, 100);
+  });
 });
