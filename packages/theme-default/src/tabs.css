@@ -3,6 +3,7 @@
 
 @component-namespace el {
   @b tabs {
+    clear: both;
     @e header {
       border-bottom: 1px solid var(--color-base-gray);
       padding: 0;
