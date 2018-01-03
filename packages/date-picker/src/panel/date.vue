@@ -360,8 +360,8 @@
         document.body.removeEventListener('keydown', this.handleKeydown);
       },
 
-      handleKeydown(e) {
-        const keyCode = e.keyCode;
+      handleKeydown(event) {
+        const keyCode = event.keyCode;
         const list = [38, 40, 37, 39];
         if (this.visible && !this.timePickerVisible) {
           if (list.indexOf(keyCode) !== -1) {
