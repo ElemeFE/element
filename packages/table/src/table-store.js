@@ -249,7 +249,7 @@ TableStore.prototype.mutations = {
       states.reserveSelection = column.reserveSelection;
     }
 
-    this.updateColumns();  // hack for dynamics insert column
+    this.updateColumns(); // hack for dynamics insert column
     this.scheduleLayout();
   },
 
@@ -259,7 +259,7 @@ TableStore.prototype.mutations = {
       _columns.splice(_columns.indexOf(column), 1);
     }
 
-    this.updateColumns();  // hack for dynamics remove column
+    this.updateColumns(); // hack for dynamics remove column
     this.scheduleLayout();
   },
 

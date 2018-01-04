@@ -4,3 +4,4 @@ src/utils/date.js
 node_modules
 lib
 coverage
+*.md

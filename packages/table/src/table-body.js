@@ -116,12 +116,12 @@ export default {
                   !this.fixed && this.layout.scrollY && this.layout.gutterWidth ? <td class="gutter" /> : ''
                 }
               </tr>,
-                this.store.states.expandRows.indexOf(row) > -1
+              this.store.states.expandRows.indexOf(row) > -1
                 ? (<tr>
-                    <td colspan={ this.columns.length } class="el-table__expanded-cell">
-                      { this.table.renderExpanded ? this.table.renderExpanded(h, { row, $index, store: this.store }) : ''}
-                    </td>
-                  </tr>)
+                  <td colspan={ this.columns.length } class="el-table__expanded-cell">
+                    { this.table.renderExpanded ? this.table.renderExpanded(h, { row, $index, store: this.store }) : ''}
+                  </td>
+                </tr>)
                 : ''
               ]
             ).concat(

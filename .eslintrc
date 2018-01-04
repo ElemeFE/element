@@ -6,7 +6,7 @@
     "expect": true,
     "sinon": true
   },
-  "plugins": ["html"],
+  "plugins": ["html", "json"],
   "extends": "elemefe",
   "rules": {
     "no-restricted-globals": ["error", "event", "fdescribe"]

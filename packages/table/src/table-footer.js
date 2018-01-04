@@ -55,25 +55,25 @@ export default {
         </colgroup>
         <tbody class={ [{ 'has-gutter': this.hasGutter }] }>
           <tr>
-          {
-            this._l(this.columns, (column, cellIndex) =>
-              <td
-                colspan={ column.colSpan }
-                rowspan={ column.rowSpan }
-                class={ [column.id, column.headerAlign, column.className || '', this.isCellHidden(cellIndex, this.columns) ? 'is-hidden' : '', !column.children ? 'is-leaf' : '', column.labelClassName] }>
-                <div class={ ['cell', column.labelClassName] }>
-                {
-                  this.summaryMethod ? this.summaryMethod({ columns: this.columns, data: this.store.states.data })[cellIndex] : sums[cellIndex]
-                }
-                </div>
-              </td>
-            )
-          }
-          {
-            this.hasGutter
-              ? <td class="gutter" style={{ width: this.layout.scrollY ? this.layout.gutterWidth + 'px' : '0' }}></td>
-              : ''
-          }
+            {
+              this._l(this.columns, (column, cellIndex) =>
+                <td
+                  colspan={ column.colSpan }
+                  rowspan={ column.rowSpan }
+                  class={ [column.id, column.headerAlign, column.className || '', this.isCellHidden(cellIndex, this.columns) ? 'is-hidden' : '', !column.children ? 'is-leaf' : '', column.labelClassName] }>
+                  <div class={ ['cell', column.labelClassName] }>
+                    {
+                      this.summaryMethod ? this.summaryMethod({ columns: this.columns, data: this.store.states.data })[cellIndex] : sums[cellIndex]
+                    }
+                  </div>
+                </td>
+              )
+            }
+            {
+              this.hasGutter
+                ? <td class="gutter" style={{ width: this.layout.scrollY ? this.layout.gutterWidth + 'px' : '0' }}></td>
+                : ''
+            }
           </tr>
         </tbody>
       </table>
