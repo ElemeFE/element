@@ -173,8 +173,8 @@ const TYPE_VALUE_RESOLVER_MAP = {
       let date = formatDate(trueDate, format);
 
       date = /WW/.test(date)
-            ? date.replace(/WW/, week < 10 ? '0' + week : week)
-            : date.replace(/W/, week);
+        ? date.replace(/WW/, week < 10 ? '0' + week : week)
+        : date.replace(/W/, week);
       return date;
     },
     parser(text) {
@@ -349,7 +349,7 @@ export default {
       pickerVisible: false,
       showClose: false,
       userInput: null,
-      valueOnOpen: null,  // value when picker opens, used to determine whether to emit change
+      valueOnOpen: null, // value when picker opens, used to determine whether to emit change
       unwatchPickerOptions: null
     };
   },

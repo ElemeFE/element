@@ -89,7 +89,7 @@ export default {
     },
     listType: {
       type: String,
-      default: 'text'   // text,picture,picture-card
+      default: 'text' // text,picture,picture-card
     },
     httpRequest: Function,
     disabled: Boolean,
@@ -275,16 +275,16 @@ export default {
 
     const trigger = this.$slots.trigger || this.$slots.default;
     const uploadComponent = (typeof FormData !== 'undefined' || this.$isServer)
-        ? <upload {...uploadData}>{trigger}</upload>
-        : <iframeUpload {...uploadData}>{trigger}</iframeUpload>;
+      ? <upload {...uploadData}>{trigger}</upload>
+      : <iframeUpload {...uploadData}>{trigger}</iframeUpload>;
 
     return (
       <div>
         { this.listType === 'picture-card' ? uploadList : ''}
         {
           this.$slots.trigger
-          ? [uploadComponent, this.$slots.default]
-          : uploadComponent
+            ? [uploadComponent, this.$slots.default]
+            : uploadComponent
         }
         {this.$slots.tip}
         { this.listType !== 'picture-card' ? uploadList : ''}

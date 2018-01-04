@@ -369,7 +369,7 @@
             event.stopPropagation();
             event.preventDefault();
           }
-          if (keyCode === 13) {    // Enter
+          if (keyCode === 13) { // Enter
             this.$emit('pick', this.date, false);
           }
         }
@@ -431,8 +431,8 @@
       isValidValue(value) {
         return value && !isNaN(value) && (
           typeof this.disabledDate === 'function'
-          ? !this.disabledDate(value)
-          : true
+            ? !this.disabledDate(value)
+            : true
         );
       }
     },

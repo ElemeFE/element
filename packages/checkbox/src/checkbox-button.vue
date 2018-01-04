@@ -79,7 +79,7 @@
         get() {
           return this._checkboxGroup
             ? this.store : this.value !== undefined
-            ? this.value : this.selfModel;
+              ? this.value : this.selfModel;
         },
 
         set(val) {

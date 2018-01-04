@@ -108,7 +108,7 @@
 
     props: {
       date: {},
-      defaultValue: {},  // reserved for future use
+      defaultValue: {}, // reserved for future use
       showSeconds: {
         type: Boolean,
         default: true

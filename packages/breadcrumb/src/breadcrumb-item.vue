@@ -33,7 +33,7 @@
         link.addEventListener('click', _ => {
           let to = this.to;
           self.replace ? self.$router.replace(to)
-                       : self.$router.push(to);
+            : self.$router.push(to);
         });
       }
     }
