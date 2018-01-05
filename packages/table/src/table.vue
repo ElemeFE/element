@@ -224,9 +224,8 @@
 
     methods: {
     
-      toggleRowSelection(row, selected) {
-        this.store.toggleRowSelection(row, selected);
-        this.store.updateAllSelected();
+      toggleRowExpansion(row, expanded) {
+        this.store.toggleRowExpansion(row, expanded);
       },
       
       setCurrentRow(row) {
