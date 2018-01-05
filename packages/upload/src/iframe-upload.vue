@@ -157,8 +157,8 @@ export default {
         </form>
         {
           drag
-          ? <upload-dragger on-file={uploadFiles} disabled={disabled}>{this.$slots.default}</upload-dragger>
-          : this.$slots.default
+            ? <upload-dragger on-file={uploadFiles} disabled={disabled}>{this.$slots.default}</upload-dragger>
+            : this.$slots.default
         }
       </div>
     );

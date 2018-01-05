@@ -352,9 +352,9 @@ describe('Menu', () => {
     setTimeout(_ => {
       vm.active = '2';
       vm.menus = [
-          {name: '1', description: 'happy'},
-          {name: '2', description: 'new'},
-          {name: '3', description: 'year'}
+        {name: '1', description: 'happy'},
+        {name: '2', description: 'new'},
+        {name: '3', description: 'year'}
       ];
       setTimeout(_ => {
         expect(vm.$el.querySelector('.el-menu-item.is-active').innerText).to.equal('new');

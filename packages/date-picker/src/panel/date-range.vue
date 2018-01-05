@@ -588,10 +588,10 @@
           value && value[0] && value[1] &&
           isDate(value[0]) && isDate(value[1]) &&
           value[0].getTime() <= value[1].getTime() && (
-            typeof this.disabledDate === 'function'
+          typeof this.disabledDate === 'function'
             ? !this.disabledDate(value[0]) && !this.disabledDate(value[1])
             : true
-          );
+        );
       }
     },
 

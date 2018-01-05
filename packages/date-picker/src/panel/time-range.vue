@@ -227,7 +227,7 @@
         const keyCode = event.keyCode;
         const mapping = { 38: -1, 40: 1, 37: -1, 39: 1 };
 
-         // Left or Right
+        // Left or Right
         if (keyCode === 37 || keyCode === 39) {
           const step = mapping[keyCode];
           this.changeSelectionRange(step);

@@ -111,8 +111,8 @@ fileSave(path.join(__dirname, '../../components.json'))
 // 创建 package
 Files.forEach(file => {
   fileSave(path.join(PackagePath, file.filename))
-  .write(file.content, 'utf8')
-  .end('\n');
+    .write(file.content, 'utf8')
+    .end('\n');
 });
 
 // 添加到 nav.config.json
@@ -123,8 +123,8 @@ Object.keys(navConfigFile).forEach(lang => {
   groups[groups.length - 1].list.push({
     path: `/${componentname}`,
     title: lang === 'zh-CN' && componentname !== chineseName
-        ? `${ComponentName} ${chineseName}`
-        : ComponentName
+      ? `${ComponentName} ${chineseName}`
+      : ComponentName
   });
 });
 

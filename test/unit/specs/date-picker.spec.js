@@ -397,7 +397,7 @@ describe('DatePicker', () => {
           const today = new Date();
           const yyyy = today.getFullYear();
           const MM = ('0' + (today.getMonth() + 1)).slice(-2);
-          const dd = '01';   // first available one should be first day of month
+          const dd = '01'; // first available one should be first day of month
           const expectValue = `${dd}/${MM} ${yyyy}`;
           expect(vm.value).to.equal(expectValue);
           expect(spy.calledOnce).to.be.true;
