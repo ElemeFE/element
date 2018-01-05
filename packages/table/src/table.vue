@@ -223,6 +223,11 @@
     },
 
     methods: {
+    
+      toggleRowExpansion(row, expanded) {
+        this.store.toggleRowExpansion(row, expanded);
+      },
+      
       setCurrentRow(row) {
         this.store.commit('setCurrentRow', row);
       },
