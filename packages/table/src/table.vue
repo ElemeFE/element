@@ -223,6 +223,12 @@
     },
 
     methods: {
+    
+      toggleRowSelection(row, selected) {
+        this.store.toggleRowSelection(row, selected);
+        this.store.updateAllSelected();
+      },
+      
       setCurrentRow(row) {
         this.store.commit('setCurrentRow', row);
       },
