@@ -122,7 +122,7 @@
         ref: 'nav'
       };
       const header = (
-        <div class="el-tabs__header">
+        <div class={['el-tabs__header', `is-${tabPosition}`]}>
           {newButton}
           <tab-nav { ...navData }></tab-nav>
         </div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="el-tabs__active-bar" :style="barStyle"></div>
+  <div class="el-tabs__active-bar" :class="`is-${ rootTabs.tabPosition }`" :style="barStyle"></div>
 </template>
 <script>
   export default {
