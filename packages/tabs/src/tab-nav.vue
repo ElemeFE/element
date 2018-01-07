@@ -196,6 +196,7 @@
           <div
             class={{
               'el-tabs__item': true,
+              [`is-${ this.rootTabs.tabPosition }`]: true,
               'is-active': pane.active,
               'is-disabled': pane.disabled,
               'is-closable': closable,
@@ -204,12 +205,12 @@
             id={`tab-${tabName}`}
             aria-controls={`pane-${tabName}`}
             role="tab"
-            aria-selected= { pane.active }
+            aria-selected={ pane.active }
             ref="tabs"
-            tabindex= {tabindex}
+            tabindex={tabindex}
             refInFor
-            on-focus= { ()=> { setFocus(); }}
-            on-blur = { ()=> { removeFocus(); }}
+            on-focus={ ()=> { setFocus(); }}
+            on-blur ={ ()=> { removeFocus(); }}
             on-click={(ev) => { removeFocus(); onTabClick(pane, tabName, ev); }}
             on-keydown={(ev) => { if (closable && (ev.keyCode === 46 || ev.keyCode === 8)) { onTabRemove(pane, ev);} }}
           >
@@ -219,7 +220,7 @@
         );
       });
       return (
-        <div class={['el-tabs__nav-wrap', scrollable ? 'is-scrollable' : '']}>
+        <div class={['el-tabs__nav-wrap', scrollable ? 'is-scrollable' : '', `is-${ this.rootTabs.tabPosition }`]}>
           {scrollBtn}
           <div class={['el-tabs__nav-scroll']} ref="navScroll">
             <div class="el-tabs__nav" ref="nav" style={navStyle} role="tablist" on-keydown={ changeTab }>
