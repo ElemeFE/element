@@ -431,7 +431,6 @@
     display: inline-flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     height: 34px;
     width: 24px;
     vertical-align: middle;
@@ -445,6 +444,7 @@
     height: 0;
     border: solid 5px transparent;
     position: absolute;
+    left: 7px;
 
     &.ascending {
       border-bottom-color: $--color-text-placeholder;
