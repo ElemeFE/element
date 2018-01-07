@@ -505,7 +505,7 @@ export default {
       let sortOrder;
       const sortingColumn = states.sortingColumn;
 
-      if (sortingColumn !== column) {
+      if (sortingColumn !== column || (sortingColumn === column && sortingColumn.order === null)) {
         if (sortingColumn) {
           sortingColumn.order = null;
         }
