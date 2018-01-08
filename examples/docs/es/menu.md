@@ -64,7 +64,7 @@ Top bar NavMenu puede ser usado en distinto escenarios.
 ```html
 <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
   <el-menu-item index="1">Processing Center</el-menu-item>
-  <el-submenu index="2" show-timeout="10" hide-timeout="10">
+  <el-submenu index="2">
     <template slot="title">Workspace</template>
     <el-menu-item index="2-1">item one</el-menu-item>
     <el-menu-item index="2-2">item two</el-menu-item>
@@ -307,8 +307,8 @@ NavMenu vertical puede ser colapsado.
 | Atributo | Descripción         | Tipo   | Valores aceptados | Por defecto |
 | -------- | ------------------- | ------ | ----------------- | ----------- |
 | index    | identificador único | string | —                 | —           |
-| show-timeout | Tiempo de retardo antes de mostrar un sub-menu | number | — | 300 |
-| hide-timeout | Tiempo de retardo antes de ocultar un sub-menu | number | — | 300 |
+| show-timeout | timeout before showing a sub-menu | number | — | 300 |
+| hide-timeout | timeout before hiding a sub-menu | number | — | 300 |
 
 ### Atributos Menu-Item 
 | Atributo | Descripción         | Tipo   | Valores aceptados | Por defecto |

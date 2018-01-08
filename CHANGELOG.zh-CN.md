@@ -1,5 +1,16 @@
 ## 更新日志
 
+### 2.0.11
+
+*2018-01-08*
+
+- 修复 Input 的 `prepend` 或 `append` slot 中 Select 的边框颜色错误，#9089
+- 修复 Select 的 `remove-tag` 事件参数与文档不符的问题，#9090
+- 新增 SubMenu 的 `show-timeout` 和 `hide-timeout` 属性，#8934（by @HugoLew）
+- 修复按需引入 Table 时 `show-overflow-tooltip` 的 Tooltip 样式丢失的问题，#9130
+- 修复 Table 在执行 `clearSort` 后点击对应列的排序图标无法正常排序的问题，#9100（by @zEmily）
+- 捷克语的 i18n 配置文件由 `cz` 重命名为 `cs-CZ`，#9164
+
 ### 2.0.10
 
 *2017-12-29*

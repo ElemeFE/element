@@ -36,8 +36,8 @@ const LOAD_DOCS_MAP = {
   },
   'es': path => {
     return r => require.ensure([], () =>
-        r(require(`./docs/es${path}.md`)),
-      'es');
+      r(require(`./docs/es${path}.md`)),
+    'es');
   }
 };
 
