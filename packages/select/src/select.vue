@@ -564,7 +564,7 @@
       },
 
       resetInputHeight() {
-        if (this.collapseTags) return;
+        if (this.collapseTags && !this.filterable) return;
         this.$nextTick(() => {
           if (!this.$refs.reference) return;
           let inputChildNodes = this.$refs.reference.$el.childNodes;
