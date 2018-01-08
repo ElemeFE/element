@@ -4,12 +4,12 @@
 
 *2018-01-08*
 
-- Fixed border color issue of Select when in `prepend` or `append` slot of Input, #9089
-- Fixed `remove-tag` event's parameter of Select, #9090
-- Added `show-timeout` and `hide-timeout` attributes for SubMenu, #8934 (by @HugoLew)
-- Fixed missing Tooltip style of `show-overflow-tooltip` when Table is imported on demand, #9130
-- Fixed Table column's sorting malfunctioning after `clearSort` is executed on that column, #9100 (by @zEmily)
-- i18n config file for Czech is renamed from `cz` to `cs-CZ`, #9164
+- Corregido el problema de color del borde del Select cuando está el slot `prepend` o `append`  del Input, #9089
+- Corregido el parámetro  `remove-tag` de Select, #9090
+- Añadido los atributos `show-timeout` y `hide-timeout` para SubMenu, #8934 (por @HugoLew)
+- Corregido el estilo de Tooltip de  `show-overflow-tooltip`  que faltaba cuando Table era importada bajo demanda, #9130
+- Se ha corregido el mal funcionamiento de ordenación de la columna de Table despues que  `clearSort`  era ejecutado en esa columna, #9100 (por @zEmily)
+- El fichero de configuración i18n para el checo se renombra de `cz` a `cs-CZ`, #9164
 
 ### 2.0.10
 

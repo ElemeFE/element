@@ -304,11 +304,11 @@ NavMenu vertical puede ser colapsado.
 | click            | callback ejecutado cuando se hace click sobre menu-item | el: instancia de menu-item |
 
 ### Atributos SubMenu 
-| Atributo | Descripción         | Tipo   | Valores aceptados | Por defecto |
-| -------- | ------------------- | ------ | ----------------- | ----------- |
-| index    | identificador único | string | —                 | —           |
-| show-timeout | timeout before showing a sub-menu | number | — | 300 |
-| hide-timeout | timeout before hiding a sub-menu | number | — | 300 |
+| Atributo     | Descripción                              | Tipo   | Valores aceptados | Por defecto |
+| ------------ | ---------------------------------------- | ------ | ----------------- | ----------- |
+| index        | identificador único                      | string | —                 | —           |
+| show-timeout | tiempo de espera antes de mostrar un submenú | number | —                 | 300         |
+| hide-timeout | tiempo de espera antes de ocultar un submenú | number | —                 | 300         |
 
 ### Atributos Menu-Item 
 | Atributo | Descripción         | Tipo   | Valores aceptados | Por defecto |
