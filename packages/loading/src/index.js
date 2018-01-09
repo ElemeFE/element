@@ -30,6 +30,9 @@ LoadingConstructor.prototype.close = function() {
     fullscreenLoading = undefined;
   }
   this.$on('after-leave', _ => {
+    if (!this.$el || !this.$el.parentNode) {
+      console.log('nate-log  after leave no parent');
+    }
     this.$el &&
     this.$el.parentNode &&
     this.$el.parentNode.removeChild(this.$el);
