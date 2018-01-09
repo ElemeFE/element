@@ -44,7 +44,7 @@ exports.install = Vue => {
             : el;
           removeClass(target, 'el-loading-parent--relative');
           removeClass(target, 'el-loading-parent--hidden');
-
+          
           el.instance.hiding = false;
         });
 
