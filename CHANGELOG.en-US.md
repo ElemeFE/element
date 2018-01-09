@@ -1,5 +1,15 @@
 ## Changelog
 
+### 2.0.8
+
+*2017-12-12*
+
+- Added Spanish documentation
+- Fixed `show-timeout` of Dropdown not working when trigger is click, #8734 (by @presidenten)
+- Fixed Form validation timing for rules whose trigger is blur, #8776
+- Fixed blur event of ranged DatePicker, #8784
+- `format` of TimePicker now supports AM/PM, #8620 (by @firesh)
+
 ### 2.0.7
 
 *2017-11-29*

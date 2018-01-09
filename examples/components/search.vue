@@ -46,7 +46,7 @@
 
     .el-autocomplete-suggestion__list {
       position: static !important;
-      padding-bottom: 31px;
+      padding-bottom: 28px;
     }
 
     li {
@@ -87,14 +87,14 @@
       left: 0;
       width: 100%;
       padding-right: 20px;
-      background-color: #dfe4ed;
+      background-color: #e4e7ed;
       border-bottom-left-radius: 4px;
       border-bottom-right-radius: 4px;
       box-sizing: border-box;
       text-align: right;
 
       &:hover {
-         background-color: #dfe4ed;
+         background-color: #e4e7ed;
        }
     
       img {
@@ -120,7 +120,24 @@
       return {
         index: null,
         query: '',
-        isEmpty: false
+        isEmpty: false,
+        langs: {
+          'zh-CN': {
+            search: '搜索文档',
+            empty: '无匹配结果',
+            index: 'zh'
+          },
+          'en-US': {
+            search: 'Search',
+            empty: 'No results',
+            index: 'en'
+          },
+          'es': {
+            search: 'Buscar',
+            empty: 'No hay datos que coincidan',
+            index: 'es'
+          }
+        }
       };
     },
 
@@ -130,11 +147,11 @@
       },
 
       placeholder() {
-        return this.lang === 'zh-CN' ? '搜索文档' : 'Search';
+        return this.lang ? this.langs[this.lang].search : '';
       },
 
       emptyText() {
-        return this.lang === 'zh-CN' ? '无匹配结果' : 'No results';
+        return this.lang ? this.langs[this.lang].empty : '';
       }
     },
 
@@ -147,7 +164,7 @@
     methods: {
       initIndex() {
         const client = algoliasearch('9NLTR1QH8B', 'a75cbec97cda75ab7334fed9219ecc57');
-        this.index = client.initIndex(`element-${ this.lang === 'zh-CN' ? 'zh' : 'en' }`);
+        this.index = client.initIndex(`element-${ this.lang ? this.langs[this.lang].index : 'zh' }`);
       },
 
       querySearch(query, cb) {

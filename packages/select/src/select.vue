@@ -9,11 +9,24 @@
       @click.stop="toggleMenu"
       ref="tags"
       :style="{ 'max-width': inputWidth - 32 + 'px' }">
-      <span
-        class="el-select__multiple-text"
-        v-show="multipleText"
-        v-if="collapseTags">
-        {{ multipleText }}
+      <span v-if="collapseTags && selected.length">
+        <el-tag
+          :closable="!disabled"
+          size="small"
+          :hit="selected[0].hitState"
+          type="info"
+          @close="deleteTag($event, selected[0])"
+          disable-transitions>
+          <span class="el-select__tags-text">{{ selected[0].currentLabel }}</span>
+        </el-tag>
+        <el-tag
+          v-if="selected.length > 1"
+          :closable="false"
+          size="small"
+          type="info"
+          disable-transitions>
+          <span class="el-select__tags-text">+ {{ selected.length - 1 }}</span>
+        </el-tag>
       </span>
       <transition-group @after-leave="resetInputHeight" v-if="!collapseTags">
         <el-tag
@@ -195,14 +208,6 @@
 
       selectSize() {
         return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
-      },
-
-      multipleText() {
-        const selected = this.selected;
-        if (!selected || !selected.length) return '';
-        const length = selected.length;
-        const countText = length > 1 ? `(+${ selected.length - 1 })` : '';
-        return `${ selected[0].currentLabel } ${ countText }`;
       }
     },
 

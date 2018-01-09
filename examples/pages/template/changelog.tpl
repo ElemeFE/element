@@ -138,7 +138,7 @@
   <div class="page-changelog">
     <div class="heading">
       <el-button class="fr">
-        <a href="https://github.com/ElemeFE/element/releases" target="_blank">Github Releases</a>
+        <a href="https://github.com/ElemeFE/element/releases" target="_blank">GitHub Releases</a>
       </el-button>
       <%= 1 >
     </div>

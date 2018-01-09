@@ -223,16 +223,36 @@
       .container {
         padding: 0 12px;
       }
-      .nav-item a,
-      .nav-lang {
-        font-size: 12px;
-        vertical-align: top;
+      .nav-item {
+        a {
+          font-size: 12px;
+          vertical-align: top;
+        }
+
+        &.lang-item {
+          height: 100%;
+         
+          .nav-lang {
+            display: flex;
+            align-items: center;
+            
+            span {
+              padding-bottom: 0;
+            }
+          }
+        }
       }
       .nav-dropdown {
         padding: 0;
+        span {
+          font-size: 12px;
+        }
       }
       .nav-gap {
         padding: 0 8px;
+      }
+      .nav-versions {
+        display: none;
       }
     }
   }
@@ -287,44 +307,51 @@
           </li>
 
           <!-- 版本选择器 -->
-          <li class="nav-item" v-show="isComponentPage">
+          <li class="nav-item nav-versions" v-show="isComponentPage">
             <el-dropdown
-                trigger="click"
-                class="nav-dropdown"
-                :class="{ 'is-active': dropdownVisible }">
+              trigger="click"
+              class="nav-dropdown"
+              :class="{ 'is-active': verDropdownVisible }">
               <span>
-                {{ langConfig.dropdown }}{{ version }}
+                {{ version }}
                 <i class="el-icon-arrow-down el-icon--right"></i>
               </span>
               <el-dropdown-menu
-                  slot="dropdown"
-                  class="nav-dropdown-list"
-                  @input="handleDropdownToggle">
+                slot="dropdown"
+                class="nav-dropdown-list"
+                @input="handleVerDropdownToggle">
                 <el-dropdown-item
-                    v-for="item in Object.keys(versions)"
-                    :key="item"
-                    @click.native="switchVersion(item)">
+                  v-for="item in Object.keys(versions)"
+                  :key="item"
+                  @click.native="switchVersion(item)">
                   {{ item }}
                 </el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </li>
 
-          <!-- lang -->
+          <!-- 语言选择器 -->
           <li class="nav-item lang-item">
-            <span
-              class="nav-lang"
-              :class="{ 'active': lang === 'zh-CN' }"
-              @click="switchLang('zh-CN')">
-              中文
-            </span>
-            <span class="nav-lang-spe"> / </span>
-            <span
-              class="nav-lang"
-              :class="{ 'active': lang === 'en-US' }"
-              @click="switchLang('en-US')">
-              En
-            </span>
+            <el-dropdown
+              trigger="click"
+              class="nav-dropdown nav-lang"
+              :class="{ 'is-active': langDropdownVisible }">
+              <span>
+                {{ displayedLang }}
+                <i class="el-icon-arrow-down el-icon--right"></i>
+              </span>
+              <el-dropdown-menu
+                slot="dropdown"
+                class="nav-dropdown-list"
+                @input="handleLangDropdownToggle">
+                <el-dropdown-item
+                  v-for="(value, key) in langs"
+                  :key="key"
+                  @click.native="switchLang(key)">
+                  {{ value }}
+                </el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
           </li>
           
           <!--theme picker-->
@@ -348,7 +375,13 @@
         active: '',
         versions: [],
         version,
-        dropdownVisible: true
+        verDropdownVisible: true,
+        langDropdownVisible: true,
+        langs: {
+          'zh-CN': '中文',
+          'en-US': 'English',
+          'es': 'Español'
+        }
       };
     },
 
@@ -360,6 +393,9 @@
     computed: {
       lang() {
         return this.$route.path.split('/')[1] || 'zh-CN';
+      },
+      displayedLang() {
+        return this.langs[this.lang] || '中文';
       },
       langConfig() {
         return compoLang.filter(config => config.lang === this.lang)[0]['header'];
@@ -381,8 +417,12 @@
         this.$router.push(this.$route.path.replace(this.lang, targetLang));
       },
 
-      handleDropdownToggle(visible) {
-        this.dropdownVisible = visible;
+      handleVerDropdownToggle(visible) {
+        this.verDropdownVisible = visible;
+      },
+
+      handleLangDropdownToggle(visible) {
+        this.langDropdownVisible = visible;
       }
     },
 

@@ -1,5 +1,15 @@
 ## 更新日志
 
+### 2.0.8
+
+*2017-12-12*
+
+- 新增西班牙语文档
+- 修复 `show-timeout` 对点击触发的 Dropdown 无效的问题，#8734（by @presidenten）
+- 修复 Form 对于 `trigger` 为 blur 的校验规则触发时机有误的问题，#8776
+- 修复 DatePicker 在范围选择时 blur 事件触发时机有误的问题，#8784
+- TimePicker 的 `format` 新增对 AM/PM 的支持，#8620（by @firesh）
+
 ### 2.0.7
 
 *2017-11-29*

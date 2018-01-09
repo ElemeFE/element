@@ -45,7 +45,7 @@ Displays the amount of new messages.
 
 You can customize the max value.
 
-::: demo The max value is defined by property `max` which is a `Number`. Note that it only works when `value` is also a `Number`.
+:::demo The max value is defined by property `max` which is a `Number`. Note that it only works when `value` is also a `Number`.
 
 ```html
 <el-badge :value="200" :max="99" class="item">

@@ -11,17 +11,10 @@
 </script>
 <style>
   .demo-icon .source > i {
-    color: #5a5e66;
+    color: #606266;
     margin: 0 20px;
     font-size: 1.5em;
     vertical-align: middle;
-  }
-  
-  .demo-icon .source > i {
-      color: #5a5e66;
-      margin: 0 20px;
-      font-size: 1.5em;
-      vertical-align: middle;
   }
   
   .demo-icon .source > button {
@@ -64,14 +57,14 @@
       display: block;
       font-size: 32px;
       margin-bottom: 15px;
-      color: #5a5e66;
+      color: #606266;
     }
     
     .icon-name {
       display: inline-block;
       padding: 0 3px;
       height: 1em;
-      color: #5a5e66;
+      color: #606266;
     }
     
     &:hover {
