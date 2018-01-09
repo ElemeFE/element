@@ -15,6 +15,7 @@
       addable: Boolean,
       value: {},
       editable: Boolean,
+      activeBarWidth: Number,
       tabPosition: {
         type: String,
         default: 'top'
@@ -94,6 +95,7 @@
         panes,
         editable,
         addable,
+        activeBarWidth,
         tabPosition
       } = this;
 
@@ -117,7 +119,8 @@
           onTabRemove: handleTabRemove,
           editable,
           type,
-          panes
+          panes,
+          activeBarWidth
         },
         ref: 'nav'
       };

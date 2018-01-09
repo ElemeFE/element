@@ -1,5 +1,5 @@
 ### 运行开发环境即可查看demo
-
+#### 接口类修改
 1. tabs 组件可以自定义下划线的宽度 [demo](http://localhost:8080/#/zh-CN/component/tabs)
 
     Tabs Attributes
@@ -32,3 +32,15 @@
     参数 | 说明 | 类型 | 可选值 | 默认值
     ----|----|----|----|----
     loading-icon | 输入框右边显示一个转圈 | boolean | -- | false
+
+5. InputNumber 组件支持小数位数限制[demo](http://localhost:8080/#/zh-CN/component/input-number)
+
+    InpuNumber Attributes
+
+    参数 | 说明 | 类型 | 可选值 | 默认值
+    ----|----|----|----|----
+    decimal | 小数位数限制 | number | — | null 
+
+
+#### 优化类修改：
+1. DatePicker清除按钮mouseenter位置改变

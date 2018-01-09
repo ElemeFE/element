@@ -28,7 +28,8 @@
         type: Function,
         default: noop
       },
-      type: String
+      type: String,
+      activeBarWidth: Number
     },
 
     data() {
@@ -170,6 +171,7 @@
         scrollable,
         scrollNext,
         scrollPrev,
+        activeBarWidth,
         changeTab,
         setFocus,
         removeFocus
@@ -197,6 +199,7 @@
             class={{
               'el-tabs__item': true,
               'is-active': pane.active,
+              'el-tabs__notice': pane.hasNotice,
               'is-disabled': pane.disabled,
               'is-closable': closable,
               'is-focus': this.isFocus
@@ -223,7 +226,7 @@
           {scrollBtn}
           <div class={['el-tabs__nav-scroll']} ref="navScroll">
             <div class="el-tabs__nav" ref="nav" style={navStyle} role="tablist" on-keydown={ changeTab }>
-              {!type ? <tab-bar tabs={panes}></tab-bar> : null}
+              {!type ? <tab-bar tabs={panes} active-width={activeBarWidth}></tab-bar> : null}
               {tabs}
             </div>
           </div>

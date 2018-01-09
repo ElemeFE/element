@@ -143,7 +143,7 @@
 :::demo `v-model`的值为当前被选中的`el-option`的 value 属性值
 ```html
 <template>
-  <el-select v-model="value" placeholder="请选择">
+  <el-select :loading-icon="true" v-model="value" placeholder="请选择">
     <el-option
       v-for="item in options"
       :key="item.value"
@@ -538,9 +538,9 @@
 <template>
   <el-select
     v-model="value9"
-    multiple
     filterable
     remote
+    allow-create
     reserve-keyword
     placeholder="请输入关键词"
     :remote-method="remoteMethod"
@@ -677,6 +677,7 @@
 | popper-class | Select 下拉框的类名 | string | — | — |
 | reserve-keyword | 多选且可搜索时，是否在选中一个选项后保留当前的搜索关键词 | boolean | — | false |
 | default-first-option | 在输入框按下回车，选择第一个匹配项。需配合 `filterable` 或 `remote` 使用 | boolean | - | false |
+| loading-icon | 输入框右边显示一个转圈 | boolean | - | false |
 
 ### Select Events
 | 事件名称 | 说明 | 回调参数 |

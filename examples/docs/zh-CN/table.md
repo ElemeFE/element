@@ -393,7 +393,8 @@
       <el-table-column
         prop="date"
         label="日期"
-        width="180">
+        width="180"
+        emptyText="hello">
       </el-table-column>
       <el-table-column
         prop="name"
@@ -1214,6 +1215,7 @@
   <el-table
     ref="multipleTable"
     :data="tableData3"
+    :auto-checkbox="true"
     tooltip-effect="dark"
     style="width: 100%"
     @selection-change="handleSelectionChange">
@@ -2018,6 +2020,7 @@
 | default-expand-all | 是否默认展开所有行，当 Table 中存在 type="expand" 的 Column 的时候有效 | Boolean | — | false |
 | expand-row-keys | 可以通过该属性设置 Table 目前的展开行，需要设置 row-key 属性才能使用，该属性为展开行的 keys 数组。| Array | — | |
 | default-sort | 默认的排序列的prop和顺序。它的`prop`属性指定默认的排序的列，`order`指定默认排序的顺序| Object | `order`: ascending, descending | 如果只指定了`prop`, 没有指定`order`, 则默认顺序是ascending |
+| auto-checkbox | 复选框默认隐藏 | boolean | - | false |
 | tooltip-effect | tooltip `effect` 属性 | String | dark/light | | dark |
 | show-summary | 是否在表尾显示合计行 | Boolean | — | false |
 | sum-text | 合计行第一列的文本 | String | — | 合计 |
@@ -2089,3 +2092,4 @@
 | filter-multiple | 数据过滤的选项是否多选 | Boolean | — | true |
 | filter-method | 数据过滤使用的方法，如果是多选的筛选项，对每一条数据会执行多次，任意一次返回 true 就会显示。 | Function(value, row) | — | — |
 | filtered-value | 选中的数据过滤项，如果需要自定义表头过滤的渲染方式，可能会需要此属性。 | Array | — | — |
+| empty-text | cell里面没有数据时显示的信息 | Array | — | — |

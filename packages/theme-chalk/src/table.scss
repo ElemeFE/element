@@ -185,6 +185,7 @@
       word-wrap: normal;
       text-overflow: ellipsis;
       display: inline-block;
+      line-height: 30px;
       vertical-align: middle;
       width: 100%;
       box-sizing: border-box;
@@ -192,6 +193,14 @@
       &.highlight {
         color: $--color-primary;
       }
+    }
+
+    > .cell > label {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     &.required > div::before {
@@ -229,6 +238,40 @@
     &.el-tooltip {
       white-space: nowrap;
       min-width: 50px;
+    }
+  }
+
+  & .el-table-column--selection .cell {
+    height: 100%;
+    padding: 0;
+  }
+
+  & .auto-show-box-cell {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:hover {
+      & .auto-display-checkbox {
+        display: block;
+      }
+      & .checkbox-label {
+        display: none;
+      }
+    }
+  }
+
+  & .auto-show-box-cell .auto-display-checkbox {
+    display: none;
+  }
+
+  & .show-cell-checkbox {
+    .auto-display-checkbox {
+      display: block;
+    }
+    .checkbox-label {
+      display: none;
     }
   }
 
