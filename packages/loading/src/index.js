@@ -30,6 +30,8 @@ LoadingConstructor.prototype.close = function() {
     removeClass(target, 'el-loading-parent--hidden');
     if (this.$el && this.$el.parentNode) {
       this.$el.parentNode.removeChild(this.$el);
+    } else {
+      console.log('loading log remove parent node failed')
     }
     this.$destroy();
   });
