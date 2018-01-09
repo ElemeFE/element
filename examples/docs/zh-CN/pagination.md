@@ -23,6 +23,18 @@
 ```
 :::
 
+### 带有背景色的分页
+
+:::demo 设置`background`属性可以为分页按钮添加背景色。
+```html
+<el-pagination
+  background
+  layout="prev, pager, next"
+  :total="1000">
+</el-pagination>
+```
+:::
+
 ### 小型分页
 
 在空间有限的情况下，可以使用简单的小型分页。
@@ -153,7 +165,7 @@
     padding: 30px 0;
     text-align: center;
     border-right: solid 1px #EFF2F6;
-    float: left;
+    display: inline-block;
     width: 50%;
     box-sizing: border-box;
 
@@ -199,12 +211,16 @@
 | 参数               | 说明                                                     | 类型              | 可选值      | 默认值 |
 |--------------------|----------------------------------------------------------|-------------------|-------------|--------|
 | small | 是否使用小型分页样式 | Boolean | — | false |
+| background | 是否为分页按钮添加背景色 | Boolean | — | false |
 | page-size | 每页显示条目个数 | Number | — | 10 |
 | total | 总条目数 | Number | — | — |
 | page-count | 总页数，total 和 page-count 设置任意一个就可以达到显示页码的功能；如果要支持 page-sizes 的更改，则需要使用 total 属性 | Number | — | — |
 | current-page | 当前页数，支持 .sync 修饰符 | Number | — | 1 |
 | layout | 组件布局，子组件名用逗号分隔| String | `sizes`, `prev`, `pager`, `next`, `jumper`, `->`, `total`, `slot` | 'prev, pager, next, jumper, ->, total'  |
 | page-sizes | 每页显示个数选择器的选项设置 | Number[] | — |  [10, 20, 30, 40, 50, 100] |
+| popper-class | 每页显示个数选择器的下拉框类名 | string | — | — |
+| prev-text | 替代图标显示的上一页文字 | string | — | — |
+| next-text | 替代图标显示的下一页文字 | string | — | — |
 
 ### Events
 | 事件名称 | 说明 | 回调参数 |

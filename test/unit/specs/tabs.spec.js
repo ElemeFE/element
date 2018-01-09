@@ -106,7 +106,7 @@ describe('Tabs', () => {
     vm = createVue({
       template: `
         <el-tabs type="card" ref="tabs">
-          <el-tab-pane :label="tab.label" :name="tab.name" v-for="tab in tabs">Test Content</el-tab-pane>
+          <el-tab-pane :label="tab.label" :name="tab.name" v-for="tab in tabs" :key="tab.name">Test Content</el-tab-pane>
         </el-tabs>
       `,
       data() {
@@ -146,6 +146,7 @@ describe('Tabs', () => {
         <el-tabs ref="tabs" v-model="editableTabsValue" type="card" editable @edit="handleTabsEdit">
           <el-tab-pane
             v-for="(item, index) in editableTabs"
+            :key="item.name"
             :label="item.title"
             :name="item.name"
           >
@@ -238,6 +239,7 @@ describe('Tabs', () => {
           <el-tab-pane
             v-for="(item, index) in editableTabs"
             :label="item.title"
+            :key="item.name"
             :name="item.name"
           >
             {{item.content}}
@@ -347,5 +349,112 @@ describe('Tabs', () => {
         done();
       });
     });
+  });
+  it('tab-position', done => {
+    vm = createVue({
+      template: `
+        <el-tabs ref="tabs" tab-position="left">
+          <el-tab-pane label="用户管理">A</el-tab-pane>
+          <el-tab-pane label="配置管理">B</el-tab-pane>
+          <el-tab-pane label="角色管理" ref="pane-click">C</el-tab-pane>
+          <el-tab-pane label="定时任务补偿">D</el-tab-pane>
+        </el-tabs>
+      `
+    }, true);
+
+    let paneList = vm.$el.querySelector('.el-tabs__content').children;
+    let spy = sinon.spy();
+
+    vm.$refs.tabs.$on('tab-click', spy);
+
+    setTimeout(_ => {
+      const tabList = vm.$refs.tabs.$refs.nav.$refs.tabs;
+      expect(tabList[0].classList.contains('is-active')).to.be.true;
+      expect(paneList[0].style.display).to.not.ok;
+
+      tabList[2].click();
+      vm.$nextTick(_ => {
+        expect(spy.withArgs(vm.$refs['pane-click']).calledOnce).to.true;
+        expect(tabList[2].classList.contains('is-active')).to.be.true;
+        expect(paneList[2].style.display).to.not.ok;
+        done();
+      });
+    }, 100);
+  });
+  it('horizonal-scrollable', done => {
+    vm = createVue({
+      template: `
+        <el-tabs ref="tabs" style="width: 200px;">
+          <el-tab-pane label="用户管理">A</el-tab-pane>
+          <el-tab-pane label="配置管理">B</el-tab-pane>
+          <el-tab-pane label="用户管理">A</el-tab-pane>
+          <el-tab-pane label="配置管理">B</el-tab-pane>
+          <el-tab-pane label="用户管理">A</el-tab-pane>
+          <el-tab-pane label="配置管理">B</el-tab-pane>
+          <el-tab-pane label="定时任务补偿">D</el-tab-pane>
+        </el-tabs>
+      `
+    }, true);
+
+    setTimeout(_ => {
+      const btnPrev = vm.$el.querySelector('.el-tabs__nav-prev');
+      btnPrev.click();
+      vm.$nextTick(_ => {
+        const tabNav = vm.$el.querySelector('.el-tabs__nav-wrap');
+        expect(tabNav.__vue__.navOffset).to.be.equal(0);
+
+        const btnNext = vm.$el.querySelector('.el-tabs__nav-next');
+        btnNext.click();
+
+        vm.$nextTick(_ => {
+          expect(tabNav.__vue__.navOffset).to.not.be.equal(0);
+
+          btnPrev.click();
+
+          vm.$nextTick(_ => {
+            expect(tabNav.__vue__.navOffset).to.be.equal(0);
+            done();
+          });
+        });
+      });
+    }, 100);
+  });
+  it('vertical-scrollable', done => {
+    vm = createVue({
+      template: `
+        <el-tabs ref="tabs" tab-position="left" style="height: 200px;">
+          <el-tab-pane label="用户管理">A</el-tab-pane>
+          <el-tab-pane label="配置管理">B</el-tab-pane>
+          <el-tab-pane label="用户管理">A</el-tab-pane>
+          <el-tab-pane label="配置管理">B</el-tab-pane>
+          <el-tab-pane label="用户管理">A</el-tab-pane>
+          <el-tab-pane label="配置管理">B</el-tab-pane>
+          <el-tab-pane label="定时任务补偿">D</el-tab-pane>
+        </el-tabs>
+      `
+    }, true);
+
+    setTimeout(_ => {
+      const btnPrev = vm.$el.querySelector('.el-tabs__nav-prev');
+      btnPrev.click();
+      vm.$nextTick(_ => {
+        const tabNav = vm.$el.querySelector('.el-tabs__nav-wrap');
+        expect(tabNav.__vue__.navOffset).to.be.equal(0);
+
+        const btnNext = vm.$el.querySelector('.el-tabs__nav-next');
+        btnNext.click();
+
+        vm.$nextTick(_ => {
+          expect(tabNav.__vue__.navOffset).to.not.be.equal(0);
+
+          btnPrev.click();
+
+          vm.$nextTick(_ => {
+            expect(tabNav.__vue__.navOffset).to.be.equal(0);
+            done();
+          });
+        });
+      });
+    }, 100);
   });
 });

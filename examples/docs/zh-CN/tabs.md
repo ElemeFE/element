@@ -18,13 +18,14 @@
         editableTabs2: [{
           title: 'Tab 1',
           name: '1',
-          content: 'Tab 1 content',
+          content: 'Tab 1 content'
         }, {
           title: 'Tab 2',
           name: '2',
-          content: 'Tab 2 content',
+          content: 'Tab 2 content'
         }],
-        tabIndex: 2
+        tabIndex: 2,
+        tabPosition: 'top'
       }
     },
     methods: {
@@ -101,8 +102,8 @@
 
 ```html
 <template>
-  <el-tabs v-model="activeName" @tab-click="handleClick" :active-bar-width="30">
-    <el-tab-pane label="用户管理" name="first" :has-notice="true">用户管理</el-tab-pane>
+  <el-tabs v-model="activeName" @tab-click="handleClick">
+    <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
     <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
     <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
     <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
@@ -169,6 +170,40 @@
   <el-tab-pane label="角色管理">角色管理</el-tab-pane>
   <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
 </el-tabs>
+```
+:::
+
+### 位置
+
+可以通过 `tab-position` 设置标签的位置
+
+:::demo 标签一共有四个方向的设置 `tabPosition="left|right|top|bottom"`
+
+```html
+<template>
+  <el-radio-group v-model="tabPosition" style="margin-bottom: 30px;">
+    <el-radio-button label="top">top</el-radio-button>
+    <el-radio-button label="right">right</el-radio-button>
+    <el-radio-button label="bottom">bottom</el-radio-button>
+    <el-radio-button label="left">left</el-radio-button>
+  </el-radio-group>
+
+  <el-tabs :tab-position="tabPosition" style="height: 200px;">
+    <el-tab-pane label="用户管理">用户管理</el-tab-pane>
+    <el-tab-pane label="配置管理">配置管理</el-tab-pane>
+    <el-tab-pane label="角色管理">角色管理</el-tab-pane>
+    <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
+  </el-tabs>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        tabPosition: 'top'
+      };
+    }
+  };
+</script>
 ```
 :::
 
@@ -337,9 +372,8 @@
 | closable  | 标签是否可关闭   | boolean   | — |  false  |
 | addable  | 标签是否可增加   | boolean   | — |  false  |
 | editable  | 标签是否同时可增加和关闭   | boolean   | — |  false  |
-| active-name(deprecated)  | 选中选项卡的 name  | string   |  —  |  第一个选项卡的 name |
 | value  | 绑定值，选中选项卡的 name  | string   |  —  |  第一个选项卡的 name |
-| active-bar-width  | 激活条的宽度  |  number   |  —  |  — |
+| tab-position  | 选项卡所在位置 | string   |  top/right/bottom/left  |  top |
 
 ### Tabs Events
 | 事件名称 | 说明 | 回调参数 |
@@ -356,4 +390,3 @@
 | disabled | 是否禁用 | boolean | — | false |
 | name      | 与选项卡 activeName 对应的标识符，表示选项卡别名 | string | — | 该选项卡在选项卡列表中的顺序值，如第一个选项卡则为'1' |
 | closable  | 标签是否可关闭   | boolean   | — |  false  |
-| has-notice  | 是否显示提示   | boolean   | — |  false  |

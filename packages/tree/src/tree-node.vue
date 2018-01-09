@@ -1,16 +1,25 @@
 <template>
-  <div class="el-tree-node"
+  <div
+    class="el-tree-node"
     @click.stop="handleClick"
     v-show="node.visible"
     :class="{
-      'is-expanded': childNodeRendered && expanded,
+      'is-expanded': expanded,
       'is-current': tree.store.currentNode === node,
-      'is-hidden': !node.visible
-    }">
+      'is-hidden': !node.visible,
+      'is-focusable': !node.disabled,
+      'is-checked': !node.disabled && node.checked
+    }"
+    role="treeitem"
+    tabindex="-1"
+    :aria-expanded="expanded"
+    :aria-disabled="node.disabled"
+    :aria-checked="node.checked"
+  >
     <div class="el-tree-node__content"
       :style="{ 'padding-left': (node.level - 1) * tree.indent + 'px' }">
       <span
-        class="el-tree-node__expand-icon"
+        class="el-tree-node__expand-icon el-icon-caret-right"
         @click.stop="handleExpandIconClick"
         :class="{ 'is-leaf': node.isLeaf, expanded: !node.isLeaf && expanded }">
       </span>
@@ -18,8 +27,10 @@
         v-if="showCheckbox"
         v-model="node.checked"
         :indeterminate="node.indeterminate"
+        :disabled="!!node.disabled"
+        @click.native.stop
         @change="handleCheckChange"
-        @click.native.stop="handleUserClick">
+      >
       </el-checkbox>
       <span
         v-if="node.loading"
@@ -30,7 +41,11 @@
     <el-collapse-transition>
       <div
         class="el-tree-node__children"
-        v-show="expanded">
+        v-if="childNodeRendered"
+        v-show="expanded"
+        role="group"
+        :aria-expanded="expanded"
+      >
         <el-tree-node
           :render-content="renderContent"
           v-for="child in node.childNodes"
@@ -109,7 +124,7 @@
       },
 
       'node.expanded'(val) {
-        this.expanded = val;
+        this.$nextTick(() => this.expanded = val);
         if (val) {
           this.childNodeRendered = true;
         }
@@ -155,16 +170,8 @@
         }
       },
 
-      handleUserClick() {
-        if (this.node.indeterminate) {
-          this.node.setChecked(this.node.checked, !this.tree.checkStrictly);
-        }
-      },
-
-      handleCheckChange(ev) {
-        if (!this.node.indeterminate) {
-          this.node.setChecked(ev.target.checked, !this.tree.checkStrictly);
-        }
+      handleCheckChange(value, ev) {
+        this.node.setChecked(ev.target.checked, !this.tree.checkStrictly);
       },
 
       handleChildNodeExpand(nodeData, node, instance) {

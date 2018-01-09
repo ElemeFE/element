@@ -2,11 +2,15 @@
   <span>
     <transition :name="transition" @after-leave="doDestroy">
       <div
-        class="el-popover"
-        :class="[popperClass]"
+        class="el-popover el-popper"
+        :class="[popperClass, content && 'el-popover--plain']"
         ref="popper"
         v-show="!disabled && showPopper"
-        :style="{ width: width + 'px' }">
+        :style="{ width: width + 'px' }"
+        role="tooltip"
+        :id="tooltipId"
+        :aria-hidden="(disabled || !showPopper) ? 'true' : 'false'"
+      >
         <div class="el-popover__title" v-if="title" v-text="title"></div>
         <slot>{{ content }}</slot>
       </div>
@@ -14,10 +18,11 @@
     <slot name="reference"></slot>
   </span>
 </template>
-
 <script>
 import Popper from 'element-ui/src/utils/vue-popper';
 import { on, off } from 'element-ui/src/utils/dom';
+import { addClass, removeClass } from 'element-ui/src/utils/dom';
+import { generateId } from 'element-ui/src/utils/util';
 
 export default {
   name: 'ElPopover',
@@ -29,6 +34,10 @@ export default {
       type: String,
       default: 'click',
       validator: value => ['click', 'focus', 'hover', 'manual'].indexOf(value) > -1
+    },
+    openDelay: {
+      type: Number,
+      default: 0
     },
     title: String,
     disabled: Boolean,
@@ -45,18 +54,34 @@ export default {
     }
   },
 
+  computed: {
+    tooltipId() {
+      return `el-popover-${generateId()}`;
+    }
+  },
   watch: {
-    showPopper(newVal, oldVal) {
-      newVal ? this.$emit('show') : this.$emit('hide');
+    showPopper(val) {
+      val ? this.$emit('show') : this.$emit('hide');
     }
   },
 
   mounted() {
-    let reference = this.reference || this.$refs.reference;
+    let reference = this.referenceElm = this.reference || this.$refs.reference;
     const popper = this.popper || this.$refs.popper;
 
     if (!reference && this.$slots.reference && this.$slots.reference[0]) {
       reference = this.referenceElm = this.$slots.reference[0].elm;
+    }
+    // 可访问性
+    if (reference) {
+      addClass(reference, 'el-popover__reference');
+      reference.setAttribute('aria-describedby', this.tooltipId);
+      reference.setAttribute('tabindex', 0); // tab序列
+
+      this.trigger !== 'click' && on(reference, 'focus', this.handleFocus);
+      this.trigger !== 'click' && on(reference, 'blur', this.handleBlur);
+      on(reference, 'keydown', this.handleKeydown);
+      on(reference, 'click', this.handleClick);
     }
     if (this.trigger === 'click') {
       on(reference, 'click', this.doToggle);
@@ -104,11 +129,34 @@ export default {
     doClose() {
       this.showPopper = false;
     },
+    handleFocus() {
+      addClass(this.referenceElm, 'focusing');
+      if (this.trigger !== 'manual') this.showPopper = true;
+    },
+    handleClick() {
+      removeClass(this.referenceElm, 'focusing');
+    },
+    handleBlur() {
+      removeClass(this.referenceElm, 'focusing');
+      if (this.trigger !== 'manual') this.showPopper = false;
+    },
     handleMouseEnter() {
-      this.showPopper = true;
       clearTimeout(this._timer);
+      if (this.openDelay) {
+        this._timer = setTimeout(() => {
+          this.showPopper = true;
+        }, this.openDelay);
+      } else {
+        this.showPopper = true;
+      }
+    },
+    handleKeydown(ev) {
+      if (ev.keyCode === 27 && this.trigger !== 'manual') { // esc
+        this.doClose();
+      }
     },
     handleMouseLeave() {
+      clearTimeout(this._timer);
       this._timer = setTimeout(() => {
         this.showPopper = false;
       }, 200);

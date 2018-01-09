@@ -43,7 +43,9 @@ export default {
       type: Function,
       default: ajax
     },
-    disabled: Boolean
+    disabled: Boolean,
+    limit: Number,
+    onExceed: Function
   },
 
   data() {
@@ -64,6 +66,11 @@ export default {
       this.uploadFiles(files);
     },
     uploadFiles(files) {
+      if (this.limit && this.fileList.length + files.length > this.limit) {
+        this.onExceed && this.onExceed(files, this.fileList);
+        return;
+      }
+
       let postFiles = Array.prototype.slice.call(files);
       if (!this.multiple) { postFiles = postFiles.slice(0, 1); }
 
@@ -84,18 +91,19 @@ export default {
       const before = this.beforeUpload(rawFile);
       if (before && before.then) {
         before.then(processedFile => {
-          if (Object.prototype.toString.call(processedFile) === '[object File]') {
+          const fileType = Object.prototype.toString.call(processedFile);
+          if (fileType === '[object File]' || fileType === '[object Blob]') {
             this.post(processedFile);
           } else {
             this.post(rawFile);
           }
         }, () => {
-          this.onRemove(rawFile, true);
+          this.onRemove(null, rawFile);
         });
       } else if (before !== false) {
         this.post(rawFile);
       } else {
-        this.onRemove(rawFile, true);
+        this.onRemove(null, rawFile);
       }
     },
     abort(file) {
@@ -142,7 +150,13 @@ export default {
     },
     handleClick() {
       if (!this.disabled) {
+        this.$refs.input.value = null;
         this.$refs.input.click();
+      }
+    },
+    handleKeydown(e) {
+      if (e.keyCode === 13 || e.keyCode === 32) {
+        this.handleClick();
       }
     }
   },
@@ -157,19 +171,21 @@ export default {
       accept,
       listType,
       uploadFiles,
-      disabled
+      disabled,
+      handleKeydown
     } = this;
     const data = {
       class: {
         'el-upload': true
       },
       on: {
-        click: handleClick
+        click: handleClick,
+        keydown: handleKeydown
       }
     };
     data.class[`el-upload--${listType}`] = true;
     return (
-      <div {...data}>
+      <div {...data} tabindex="0" >
         {
           drag
           ? <upload-dragger disabled={disabled} on-file={uploadFiles}>{this.$slots.default}</upload-dragger>

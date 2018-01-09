@@ -25,7 +25,7 @@ Displays important alert messages.
 
 Alert components are non-overlay elements in the page that does not disappear automatically.
 
-::: demo Alert provides 4 types of themes defined by `type`, whose default value is `info`.
+:::demo Alert provides 4 types of themes defined by `type`, whose default value is `info`.
 
 ```html
 <template>
@@ -53,7 +53,7 @@ Alert components are non-overlay elements in the page that does not disappear au
 
 Customize the close button as texts or other symbols.
 
-::: demo Alert allows you to configure if it's closable. The close button text and closing callbacks are also customizable. `closable` attribute decides if the component can be closed or not. It accepts `boolean`, and the default is `true`. You can set `close-text` attribute to replace the default cross symbol as the close button. Be careful that `close-text` must be a string. `close` event fires when the component is closed.
+:::demo Alert allows you to configure if it's closable. The close button text and closing callbacks are also customizable. `closable` attribute decides if the component can be closed or not. It accepts `boolean`, and the default is `true`. You can set `close-text` attribute to replace the default cross symbol as the close button. Be careful that `close-text` must be a string. `close` event fires when the component is closed.
 
 ```html
 <template>
@@ -90,7 +90,7 @@ Customize the close button as texts or other symbols.
 
 Displaying an icon improves readability.
 
-::: demo Setting the `show-icon` attribute displays an icon that corresponds with the current Alert type.
+:::demo Setting the `show-icon` attribute displays an icon that corresponds with the current Alert type.
 
 ```html
 <template>
@@ -118,11 +118,47 @@ Displaying an icon improves readability.
 ```
 :::
 
+## Centered text
+
+Use the `center` attribute to center the text.
+
+:::demo
+
+```html
+<template>
+  <el-alert
+    title="success alert"
+    type="success"
+    center
+    show-icon>
+  </el-alert>
+  <el-alert
+    title="info alert"
+    type="info"
+    center
+    show-icon>
+  </el-alert>
+  <el-alert
+    title="warning alert"
+    type="warning"
+    center
+    show-icon>
+  </el-alert>
+  <el-alert
+    title="error alert"
+    type="error"
+    center
+    show-icon>
+  </el-alert>
+</template>
+```
+:::
+
 ### With description
 
 Description includes a message with more detailed information.
 
-::: demo Besides the required `title` attribute, you can add a `description` attribute to help you describe the alert with more details. Description can only store text string, and it will word wrap automatically.
+:::demo Besides the required `title` attribute, you can add a `description` attribute to help you describe the alert with more details. Description can only store text string, and it will word wrap automatically.
 
 ```html
 <template>
@@ -137,7 +173,7 @@ Description includes a message with more detailed information.
 
 ### With icon and description
 
-::: demo At last, this is an example with both icon and description.
+:::demo At last, this is an example with both icon and description.
 
 ```html
 <template>
@@ -176,6 +212,7 @@ Description includes a message with more detailed information.
 | type | component type | string | success/warning/info/error | info |
 | description | descriptive text. Can also be passed with the default slot | string | — | — |
 | closable | if closable or not | boolean | — | true |
+| center | whether to center the text | boolean | — | false |
 | close-text | customized close button text | string | — | — |
 | show-icon | if a type icon is displayed | boolean | — | false |
 
