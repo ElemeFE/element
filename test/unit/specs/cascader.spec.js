@@ -714,7 +714,7 @@ describe('Cascader', () => {
       done();
     }, 100);
   });
-  describe('Input Events', () => {
+  describe('Cascader Events', () => {
     it('event:focus & blur', done => {
       vm = createVue({
         template: `
