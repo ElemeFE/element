@@ -1062,7 +1062,7 @@
         if (parent === root.document) {
             // Firefox puts the scrollTOp value on `documentElement` instead of `body`, we then check which of them is
             // greater than 0 and return the proper element
-            if (root.document.body.scrollTop) {
+            if (root.document.body.scrollTop || root.document.body.scrollLeft) {
                 return root.document.body;
             } else {
                 return root.document.documentElement;
