@@ -37,15 +37,21 @@ exports.install = Vue => {
       });
     } else {
       if (el.domVisible) {
-        el.instance.$on('after-leave', _ => {
+        const onAfterLeave = _ => {
           el.domVisible = false;
           const target = binding.modifiers.fullscreen || binding.modifiers.body
             ? document.body
             : el;
           removeClass(target, 'el-loading-parent--relative');
           removeClass(target, 'el-loading-parent--hidden');
-        });
+
+          el.instance.hiding = false;
+          el.instance.$off('after-leave', onAfterLeave);
+        };
+
+        el.instance.$on('after-leave', onAfterLeave);
         el.instance.visible = false;
+        el.instance.hiding = true;
       }
     }
   };
@@ -65,7 +71,11 @@ exports.install = Vue => {
 
       parent.appendChild(el.mask);
       Vue.nextTick(() => {
-        el.instance.visible = true;
+        if (el.instance.hiding) {
+          el.instance.$emit('after-leave');
+        } else {
+          el.instance.visible = true;
+        };
       });
       el.domInserted = true;
     }
