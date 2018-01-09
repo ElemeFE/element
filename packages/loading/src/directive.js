@@ -37,7 +37,7 @@ exports.install = Vue => {
       });
     } else {
       if (el.domVisible) {
-        const onAfterLeave = _ => {
+        el.instance.$once('after-leave', _ => {
           el.domVisible = false;
           const target = binding.modifiers.fullscreen || binding.modifiers.body
             ? document.body
@@ -46,10 +46,8 @@ exports.install = Vue => {
           removeClass(target, 'el-loading-parent--hidden');
 
           el.instance.hiding = false;
-          el.instance.$off('after-leave', onAfterLeave);
-        };
+        });
 
-        el.instance.$on('after-leave', onAfterLeave);
         el.instance.visible = false;
         el.instance.hiding = true;
       }
