@@ -90,6 +90,9 @@ const TableStore = function(table, initialState = {}) {
     leafColumns: [],
     fixedLeafColumns: [],
     rightFixedLeafColumns: [],
+    leafColumnsLength: 0,
+    fixedLeafColumnsLength: 0,
+    rightFixedLeafColumnsLength: 0,
     isComplex: false,
     _data: null,
     filteredData: null,
@@ -352,8 +355,6 @@ TableStore.prototype.updateColumns = function() {
 
   states.columns = [].concat(fixedLeafColumns).concat(leafColumns).concat(rightFixedLeafColumns);
   states.isComplex = states.fixedColumns.length > 0 || states.rightFixedColumns.length > 0;
-
-  this.states = merge({}, states);
 };
 
 TableStore.prototype.isSelected = function(row) {
