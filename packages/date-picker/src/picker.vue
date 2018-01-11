@@ -23,7 +23,7 @@
     <i slot="suffix"
       class="el-input__icon"
       @click="handleClickIcon"
-      :class="{ suffixIconClass: showClose }"
+      :class="[showClose ? '' + suffixIcon : '']"
       v-if="haveTrigger">
     </i>
   </el-input>
@@ -53,6 +53,7 @@
       @input="handleStartInput"
       @change="handleStartChange"
       @focus="handleFocus"
+      :prefix-icon="triggerClass"
       class="el-range-input">
     <span class="el-range-separator">{{ rangeSeparator }}</span>
     <input
@@ -65,11 +66,12 @@
       @input="handleEndInput"
       @change="handleEndChange"
       @focus="handleFocus"
+      :prefix-icon="triggerClass"
       class="el-range-input">
     <i
       @click="handleClickIcon"
       v-if="haveTrigger"
-      :class="{ 'el-icon-circle-close': showClose }"
+      :class="[showClose ? '' + suffixIcon : '']"
       class="el-input__icon el-range__close-icon">
     </i>
   </div>
@@ -310,7 +312,10 @@ export default {
     startPlaceholder: String,
     endPlaceholder: String,
     prefixIcon: String,
-    suffixIcon: String,
+    suffixIcon: {
+      type: String,
+      default: 'el-icon-circle-close'
+    },
     name: {
       default: '',
       validator
@@ -409,10 +414,6 @@ export default {
       return [];
     },
 
-    suffixIconClass() {
-      return this.suffixIcon || 'el-icon-circle-close';
-    },
-
     valueIsEmpty() {
       const val = this.value;
       if (Array.isArray(val)) {
@@ -430,7 +431,7 @@ export default {
     },
 
     triggerClass() {
-      return this.prefixIcon || (this.type.indexOf('time') !== -1 ? 'el-icon-time' : 'el-icon-date');
+      return this.prefixIcon || (this.type.indexOf('time') !== -1 ? 'el-icon-time' : 'el-icon-date');
     },
 
     selectionMode() {
