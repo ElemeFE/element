@@ -23,7 +23,7 @@
     <i slot="suffix"
       class="el-input__icon"
       @click="handleClickIcon"
-      :class="{ 'el-icon-circle-close': showClose }"
+      :class="{ suffixIconClass: showClose }"
       v-if="haveTrigger">
     </i>
   </el-input>
@@ -309,6 +309,8 @@ export default {
     placeholder: String,
     startPlaceholder: String,
     endPlaceholder: String,
+    prefixIcon: String,
+    suffixIcon: String,
     name: {
       default: '',
       validator
@@ -407,6 +409,10 @@ export default {
       return [];
     },
 
+    suffixIconClass() {
+      return this.suffixIcon || 'el-icon-circle-close';
+    },
+
     valueIsEmpty() {
       const val = this.value;
       if (Array.isArray(val)) {
@@ -424,7 +430,7 @@ export default {
     },
 
     triggerClass() {
-      return this.type.indexOf('time') !== -1 ? 'el-icon-time' : 'el-icon-date';
+      return this.prefixIcon || (this.type.indexOf('time') !== -1 ? 'el-icon-time' : 'el-icon-date');
     },
 
     selectionMode() {
