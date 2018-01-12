@@ -2,6 +2,7 @@
 @import "common/var";
 
 @include b(tree) {
+  position: relative;
   cursor: default;
   background: $--color-white;
   color: $--tree-text-color;
@@ -20,6 +21,13 @@
     top: 50%;
     transform: translate(-50%, -50%);
     color: mix($--color-primary, rgb(158, 68, 0), 50%);
+  }
+
+  @include e(drag-indicator) {
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background-color: $--color-primary;
   }
 }
 
@@ -45,6 +53,17 @@
     }
     &:hover {
       background-color: $--tree-node-hover-color;
+    }
+
+    .el-tree.dragging & {
+      cursor: move;
+
+      & * {
+        pointer-events: none;
+      }
+    }
+    .el-tree.dragging.drop-not-allow & {
+      cursor: not-allowed;
     }
   }
 

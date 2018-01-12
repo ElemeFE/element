@@ -6,6 +6,11 @@ export default class TreeStore {
     this.currentNode = null;
     this.currentNodeKey = null;
 
+    this.dragSourceNode = null;
+    this.dragTargetNode = null;
+    this.dragTargetDom = null;
+    this.allowDrop = true;
+
     for (let option in options) {
       if (options.hasOwnProperty(option)) {
         this[option] = options[option];

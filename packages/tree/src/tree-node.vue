@@ -16,6 +16,14 @@
     :aria-expanded="expanded"
     :aria-disabled="node.disabled"
     :aria-checked="node.checked"
+    :draggable="tree.draggable"
+    @dragstart.stop="handleDragStart"
+    @dragenter.stop="handleDragEnter"
+    @dragleave.stop="handleDragLeave"
+    @dragover.stop="handleDragOver"
+    @dragend.stop="handleDragEnd"
+    @drop.stop="handleDrop"
+    ref="node"
   >
     <div class="el-tree-node__content"
       :style="{ 'padding-left': (node.level - 1) * tree.indent + 'px' }">
@@ -199,6 +207,92 @@
       handleChildNodeExpand(nodeData, node, instance) {
         this.broadcast('ElTreeNode', 'tree-node-expand', node);
         this.tree.$emit('node-expand', nodeData, node, instance);
+      },
+
+      handleDragStart(ev) {
+        if (typeof this.tree.allowDrag === 'function' && !this.tree.allowDrag(this.node)) {
+          ev.preventDefault();
+          return false;
+        }
+        ev.dataTransfer.effectAllowed = 'move';
+        ev.dataTransfer.setData('text/plain', this.node.label);
+        this.node.store.dragSourceNode = this.node;
+        this.node.store.dragFromDom = this.$refs.node;
+        this.node.store.allowDrop = true;
+        this.tree.$emit('node-drag-start', this.node, ev);
+      },
+
+      handleDragEnter(ev) {
+        ev.preventDefault();
+        const store = this.node.store;
+        const from = store.dragSourceNode;
+        let node = this.node;
+        let dom = this.$refs.node;
+
+        if (!from) return;
+
+        while (node.level > from.level && node.level > 1) {
+          node = node.parent
+          dom = this.$parent.$refs.node;
+        }
+        store.dragTargetNode = node;
+        store.dragTargetDom = dom;
+
+        if (!this.tree.dropAt) {
+          ev.dataTransfer.dropEffect = 'none';
+          store.allowDrop = false;
+        } else {
+          ev.dataTransfer.dropEffect = 'move';
+          store.allowDrop = true;
+        }
+
+        this.tree.$emit('node-drag-enter', this.node, ev);
+      },
+
+      handleDragLeave(ev) {
+        ev.preventDefault();
+        if (!this.node.store.dragSourceNode) return;
+        this.tree.$emit('node-drag-leave', this.node, ev);
+      },
+
+      handleDragOver(ev) {
+        ev.dataTransfer.dropEffect = this.node.store.allowDrop ? 'move' : 'none';
+        ev.preventDefault();
+      },
+
+      handleDrop(ev) {
+        ev.preventDefault();
+      },
+
+      handleDragEnd(ev) {
+        const from = this.node.store.dragSourceNode;
+        const target = this.node.store.dragTargetNode;
+        let position = this.tree.dropAt;
+
+        if (!from) return;
+
+        if (typeof this.tree.allowDrop === 'function' && !this.tree.allowDrop(from, target)) {
+          position = null;
+        }
+        ev.preventDefault();
+        ev.dataTransfer.dropEffect = 'move';
+
+        if (target && from && from !== target && position) {
+          const index = from.parent.childNodes.indexOf(from);
+          from.parent.childNodes.splice(index, 1);
+          if (from.parent.childNodes.length === 0) {
+            from.parent.isLeaf = true;
+          }
+          position.parent.childNodes.splice(position.index, 0, from);
+          from.parent = position.parent;
+          from.parent.isLeaf = false;
+        }
+        this.tree.$emit('node-drag-end', from, target, position, ev);
+        this.node.store.dragTargetNode = null;
+        this.node.store.dragSourceNode = null;
+        this.node.store.dragTargetDom = null;
+
+        return false;
       }
     },
 
