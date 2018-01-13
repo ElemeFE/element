@@ -1,4 +1,4 @@
-<script>
+﻿<script>
   export default {
     data() {
       return {
@@ -544,7 +544,7 @@ Customize how suggestions are displayed.
     methods: {
       querySearch(queryString, cb) {
         var links = this.links;
-        var results = queryString ? link.filter(this.createFilter(queryString)) : links;
+        var results = queryString ? links.filter(this.createFilter(queryString)) : links;
         // call callback function to return suggestion objects
         cb(results);
       },
