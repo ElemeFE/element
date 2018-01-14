@@ -15,7 +15,8 @@ export interface ElUploadInternalFileDetail {
   size: number,
   percentage: number,
   uid: number,
-  raw: File
+  raw: File,
+  url?: string
 }
 
 export interface ElUploadProgressEvent extends ProgressEvent {
