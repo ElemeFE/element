@@ -23,6 +23,8 @@
       :placeholder="currentLabels.length ? undefined : placeholder"
       v-model="inputValue"
       @input="debouncedInputChange"
+      @focus="handleFocus"
+      @blur="handleBlur"
       :validate-event="false"
       :size="size"
       :disabled="disabled"
@@ -384,6 +386,12 @@ export default {
         return;
       }
       this.menuVisible = !this.menuVisible;
+    },
+    handleFocus(event) {
+      this.$emit('focus', event);
+    },
+    handleBlur(event) {
+      this.$emit('blur', event);
     }
   },
 

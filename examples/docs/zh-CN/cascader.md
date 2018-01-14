@@ -1695,3 +1695,5 @@
 |---------- |-------- |---------- |
 | change | 当绑定值变化时触发的事件 | 当前值 |
 | active-item-change | 当父级选项变化时触发的事件，仅在 `change-on-select` 为 `false` 时可用 | 各父级选项组成的数组 |
+| blur | 在 Cascader 失去焦点时触发 | (event: Event) |
+| focus | 在 Cascader 获得焦点时触发 | (event: Event) |
