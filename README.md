@@ -15,7 +15,7 @@
 [![Join the chat at https://gitter.im/element-en/Lobby](https://badges.gitter.im/element-en/Lobby.svg)](https://gitter.im/element-en/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)(English)
 [![OpenCollective](https://opencollective.com/element/backers/badge.svg)](#backers) 
 [![OpenCollective](https://opencollective.com/element/sponsors/badge.svg)](#sponsors)
-
+ [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 > A Vue.js 2.0 UI Toolkit for Web.
 
 <p align="center">
@@ -193,4 +193,4 @@ Become a sponsor and get your logo on our README on Github with a link to your s
 
 
 ## LICENSE
-MIT
+[MIT](LICENSE)
