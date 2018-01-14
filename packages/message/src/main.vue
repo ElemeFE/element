@@ -5,6 +5,7 @@
         'el-message',
         type && !iconClass ? `el-message--${ type }` : '',
         center ? 'is-center' : '',
+        showClose ? 'is-closable' : '',
         customClass]"
       v-show="visible"
       @mouseenter="clearTimer"
