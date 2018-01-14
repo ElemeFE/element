@@ -23,6 +23,12 @@
     justify-content: center;
   }
 
+  @include when(closable) {
+    .el-message__content {
+      padding-right: 16px;
+    }
+  }
+
   p {
     margin: 0;
   }
