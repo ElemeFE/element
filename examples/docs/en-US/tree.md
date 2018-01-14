@@ -938,7 +938,7 @@ Only one node among the same level can be expanded at one time.
 | node-key              | unique identity key name for nodes, its value should be unique across the whole tree | string                      | —               | —       |
 | props                 | configuration options, see the following table | object                      | —               | —       |
 | render-after-expand   | whether to render child nodes only after a parent node is expanded for the first time | boolean | — | true |
-| load                  | method for loading subtree data, lazy prop must be true  | function(node, resolve)     | —               | —       |
+| load                  | method for loading subtree data, only works when `lazy` is true  | function(node, resolve)     | —               | —       |
 | render-content        | render function for tree node            | Function(h, { node, data, store }        | —               | —       |
 | highlight-current     | whether current node is highlighted      | boolean                     | —               | false   |
 | default-expand-all    | whether to expand all nodes by default   | boolean                     | —               | false   |
@@ -951,7 +951,7 @@ Only one node among the same level can be expanded at one time.
 | filter-node-method    | this function will be executed on each node when use filter method. if return `false`, tree node will be hidden. | Function(value, data, node) | —               | —       |
 | accordion             | whether only one node among the same level can be expanded at one time | boolean                     | —               | false   |
 | indent                | horizontal indentation of nodes in adjacent levels in pixels | number                     | —    | 16 |
-| lazy              |  lazy load leaf node used with load method  | boolean                     | —    | false |
+| lazy                  | whether to lazy load leaf node, used with `load` attribute  | boolean                     | —    | false |
 
 ### props
 | Attribute | Description                              | Type   | Accepted Values | Default |

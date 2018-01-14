@@ -237,7 +237,7 @@
               location.href = location.href.replace('element.', 'element-cn.');
             })
             .catch(() => {
-              localStorage.setItem('PREFER_GITHUB', true);
+              localStorage.setItem('PREFER_GITHUB', 'true');
             });
         }, 1000);
       }
@@ -248,30 +248,30 @@
       if (this.lang === 'zh-CN') {
         this.suggestJump();
       }
-      setTimeout(() => {
-        const notified = localStorage.getItem('ES_NOTIFIED_2');
-        if (!notified && this.lang !== 'es') {
-          const title = this.lang === 'zh-CN'
-            ? '西班牙语文档正式上线'
-            : 'Spanish docs now available';
-          const message = this.lang === 'zh-CN'
-            ? '点击这里进行切换'
-            : 'Click here to switch';
-          const self = this;
-          this.$notify({
-            title,
-            duration: 0,
-            message,
-            onClick() {
-              self.$router.push('/es');
-              localStorage.setItem('ES_NOTIFIED_2', 1);
-            },
-            onClose() {
-              localStorage.setItem('ES_NOTIFIED_2', 1);
-            }
-          });
-        }
-      }, 3500);
+      // setTimeout(() => {
+      //   const notified = localStorage.getItem('ES_NOTIFIED_2');
+      //   if (!notified && this.lang !== 'es') {
+      //     const title = this.lang === 'zh-CN'
+      //       ? '西班牙语文档正式上线'
+      //       : 'Spanish docs now available';
+      //     const message = this.lang === 'zh-CN'
+      //       ? '点击这里进行切换'
+      //       : 'Click here to switch';
+      //     const self = this;
+      //     this.$notify({
+      //       title,
+      //       duration: 0,
+      //       message,
+      //       onClick() {
+      //         self.$router.push('/es');
+      //         localStorage.setItem('ES_NOTIFIED_2', 1);
+      //       },
+      //       onClose() {
+      //         localStorage.setItem('ES_NOTIFIED_2', 1);
+      //       }
+      //     });
+      //   }
+      // }, 3500);
     }
   };
 </script>
