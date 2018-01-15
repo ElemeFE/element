@@ -256,6 +256,8 @@ DateTimePicker is derived from DatePicker and TimePicker. For a more detailed ex
 | value-format | optional, format of binding value. If not specified, the binding value will be a Date object | string | year `yyyy`, month `MM`, day `dd`, hour `HH`, minute `mm`, second `ss`, AM/PM `A` | — |
 | name | same as `name` in native input | string | — | — |
 | unlink-panels | unllink two date-panels in range-picker | boolean | — | false |
+| prefix-icon | Custom prefix icon class | string | — | el-icon-date |
+| clear-icon | Custom clear icon class | string | — | el-icon-circle-close |
 
 ### Picker Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |

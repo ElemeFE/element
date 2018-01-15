@@ -191,6 +191,8 @@ Can pick an arbitrary time range.
 | default-value | optional, default date of the calendar | Date for TimePicker, string for TimeSelect | anything accepted by `new Date()` for TimePicker, selectable value for TimeSelect | — |
 | value-format | optional, only for TimePicker, format of bounded value | string | hour `HH`, minute `mm`, second `ss`, AM/PM `A` | — |
 | name | same as `name` in native input | string | — | — |
+| prefix-icon | Custom prefix icon class | string | — | el-icon-time |
+| clear-icon | Custom clear icon class | string | — | el-icon-circle-close |
 
 ### Time Select Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |

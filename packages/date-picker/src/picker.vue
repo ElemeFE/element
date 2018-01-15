@@ -23,7 +23,7 @@
     <i slot="suffix"
       class="el-input__icon"
       @click="handleClickIcon"
-      :class="[showClose ? '' + suffixIcon : '']"
+      :class="[showClose ? '' + clearIcon : '']"
       v-if="haveTrigger">
     </i>
   </el-input>
@@ -71,7 +71,7 @@
     <i
       @click="handleClickIcon"
       v-if="haveTrigger"
-      :class="[showClose ? '' + suffixIcon : '']"
+      :class="[showClose ? '' + clearIcon : '']"
       class="el-input__icon el-range__close-icon">
     </i>
   </div>
@@ -312,7 +312,7 @@ export default {
     startPlaceholder: String,
     endPlaceholder: String,
     prefixIcon: String,
-    suffixIcon: {
+    clearIcon: {
       type: String,
       default: 'el-icon-circle-close'
     },
