@@ -398,6 +398,8 @@ Esta característica está en la etapa alfa. Feedback bienvenido.
 | value-format      | opcional, formato del valor enlazado. Si no esta especificado, el valor enlazado será un objeto Date. | string            | año `yyyy`, mes `MM`, dia `dd`, hora `HH`, minuto `mm`, segundo `ss` | —           |
 | name              | igual que `name` en el input nativo      | string            | —                                        | —           |
 | unlink-panels     | desvincular los dos paneles de fecha en el range-picker | boolean           | —                                        | false       |
+| prefix-icon | Custom prefix icon class | string | — | el-icon-date |
+| clear-icon | Custom clear icon class | string | — | el-icon-circle-close |
 
 ### Opciones del Picker
 | Atributo       | Descripción                              | Tipo                           | Valores aceptados | Por defecto |

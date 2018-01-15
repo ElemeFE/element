@@ -1332,7 +1332,7 @@ Ordena los datos para encontrar o comparar información rápidamente.
 
 Filtra la tabla para encontrar la información que necesita.
 
-:::demo Establezca el atributo `filters` y `filter-method` en `el-table-column` haciendo esta columna filtrable. `filters` es un arreglo, y `filter-method` es una función que decide que filas se muestra. Esta tiene tres parámetros: `value` y `row` y `column`.
+:::demo Establezca el atributo `filters` y `filter-method` en `el-table-column` haciendo esta columna filtrable. `filters` es un arreglo, y `filter-method` es una función que decide que filas se muestra. Esta tiene tres parámetros: `value`, `row` y `column`.
 ```html
 <template>
   <el-table
