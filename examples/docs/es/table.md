@@ -240,6 +240,7 @@
       handleDelete(index, row) {
         console.log(index, row);
       },
+
       handleSelectionChange(val) {
         this.multipleSelection = val;
       },
@@ -255,7 +256,12 @@
       filterTag(value, row) {
         return row.tag === value;
       },
-    
+
+      filterHandler(value, row, column) {
+        const property = column['property'];
+        return row[property] === value;
+      },
+
       tableRowClassName({row, rowIndex}) {
         if (rowIndex === 1) {
           return 'warning-row';
@@ -1326,7 +1332,7 @@ Ordena los datos para encontrar o comparar información rápidamente.
 
 Filtra la tabla para encontrar la información que necesita.
 
-:::demo Establezca el atributo `filters` y `filter-method` en `el-table-column` haciendo esta columna filtrable. `filters` es un arreglo, y `filter-method` es una función que decide que filas se muestra. Esta tiene dos parámetros: `value` y `row`.
+:::demo Establezca el atributo `filters` y `filter-method` en `el-table-column` haciendo esta columna filtrable. `filters` es un arreglo, y `filter-method` es una función que decide que filas se muestra. Esta tiene tres parámetros: `value` y `row` y `column`.
 ```html
 <template>
   <el-table
@@ -1336,7 +1342,10 @@ Filtra la tabla para encontrar la información que necesita.
       prop="date"
       label="Fecha"
       sortable
-      width="180">
+      width="180"
+      :filters="[{text: '2016-05-01', value: '2016-05-01'}, {text: '2016-05-02', value: '2016-05-02'}, {text: '2016-05-03', value: '2016-05-03'}, {text: '2016-05-04', value: '2016-05-04'}]"
+      :filter-method="filterHandler"
+    >
     </el-table-column>
     <el-table-column
       prop="name"
@@ -1397,6 +1406,10 @@ Filtra la tabla para encontrar la información que necesita.
       },
       filterTag(value, row) {
         return row.tag === value;
+      },
+      filterHandler(value, row, column) {
+        const property = column['property'];
+        return row[property] === value;
       }
     }
   }
@@ -2028,5 +2041,5 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | filters               | un arreglo de opciones para filtrado de datos. Para cada elemento en este arreglo, `text` y `value` son obligatorios | Array[{ text, value }]            | —                             | —           |
 | filter-placement      | colocación para el menu desplegable del filtro | String                            | same as Tooltip's `placement` | —           |
 | filter-multiple       | especifica si el filtrado de datos soporta múltiples opciones | Boolean                           | —                             | true        |
-| filter-method         | método para filtrado de datos. Si `filter-multiple` está habilitado, este método se invocará varias veces para cada fila, y una fila puede mostrar si una de las llamadas devuelve `true` | Function(value, row)              | —                             | —           |
+| filter-method         | método para filtrado de datos. Si `filter-multiple` está habilitado, este método se invocará varias veces para cada fila, y una fila puede mostrar si una de las llamadas devuelve `true` | Function(value, row, column)              | —                             | —           |
 | filtered-value        | el valor del filtro para los datos seleccionados, puede ser útil cuando el encabezado de la tabla se representará con `render-header` | Array                             | —                             | —           |
