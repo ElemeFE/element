@@ -88,7 +88,7 @@
       @mouseenter.native="inputHovering = true"
       @mouseleave.native="inputHovering = false">
       <i slot="suffix"
-       :class="['el-select__caret', 'el-input__icon', 'el-icon-' + iconClass]"
+       :class="['el-select__caret', 'el-input__icon', iconClass]"
        @click="handleIconClick"
       ></i>
     </el-input>
@@ -174,7 +174,7 @@
           !this.multiple &&
           this.value !== undefined &&
           this.value !== '';
-        return criteria ? 'circle-close is-show-close' : (this.remote && this.filterable ? '' : 'arrow-up');
+        return criteria ? (this.clearIcon + ' is-show-close') : (this.remote && this.filterable ? '' : this.caretIcon);
       },
 
       debounce() {
@@ -259,7 +259,15 @@
         type: String,
         default: 'value'
       },
-      collapseTags: Boolean
+      collapseTags: Boolean,
+      caretIcon: {
+        type: String,
+        default: 'el-icon-arrow-up'
+      },
+      clearIcon: {
+        type: String,
+        default: 'el-icon-circle-close'
+      }
     },
 
     data() {
@@ -418,7 +426,7 @@
 
       handleIconShow() {
         let icon = this.$el.querySelector('.el-input__icon');
-        if (icon && !hasClass(icon, 'el-icon-circle-close')) {
+        if (icon && !hasClass(icon, this.clearIcon)) {
           addClass(icon, 'is-reverse');
         }
       },
@@ -505,7 +513,7 @@
       },
 
       handleIconClick(event) {
-        if (this.iconClass.indexOf('circle-close') > -1) {
+        if (this.iconClass.indexOf(this.clearIcon) > -1) {
           this.deleteSelected(event);
         } else {
           this.toggleMenu();
