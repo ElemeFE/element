@@ -1247,7 +1247,6 @@ describe('DatePicker', () => {
     });
 
     it('select daterange with defaultTime min', done => {
-      const defaultTimeMin = new Date(2000, 10, 10, 11, 59, 59);
 
       const vmWithDefaultTime = createVue({
         template: `
@@ -1256,7 +1255,7 @@ describe('DatePicker', () => {
         data() {
           return {
             value: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
-            defaultTime: [defaultTimeMin]
+            defaultTime: ['11:59:59']
           };
         }
       }, true).$refs.compo;
@@ -1280,14 +1279,12 @@ describe('DatePicker', () => {
                 minDate,
                 maxDate
               } = vmWithDefaultTime.picker;
-              expect(minDate.getHours()).to.be.equal(defaultTimeMin.getHours());
-              expect(minDate.getMinutes()).to.be.equal(defaultTimeMin.getMinutes());
-              expect(minDate.getSeconds()).to.be.equal(defaultTimeMin.getSeconds());
-              expect(minDate.getMilliseconds()).to.be.equal(defaultTimeMin.getMilliseconds());
+              expect(minDate.getHours()).to.be.equal(11);
+              expect(minDate.getMinutes()).to.be.equal(59);
+              expect(minDate.getSeconds()).to.be.equal(59);
               expect(maxDate.getHours()).to.be.equal(0);
               expect(maxDate.getMinutes()).to.be.equal(0);
               expect(maxDate.getSeconds()).to.be.equal(0);
-              expect(maxDate.getMilliseconds()).to.be.equal(0);
               done();
             }, DELAY);
           }, DELAY);
@@ -1296,9 +1293,6 @@ describe('DatePicker', () => {
     });
 
     it('select daterange with defaultTime min & max', done => {
-      const defaultTimeMin = new Date(2000, 10, 10, 11, 59, 59);
-      const defaultTimeMax = new Date(2000, 10, 10, 18, 0, 0);
-
       const vmWithDefaultTime = createVue({
         template: `
           <el-date-picker ref="compo" type="datetimerange" v-model="value" :default-time="defaultTime"></el-date-picker>
@@ -1306,7 +1300,7 @@ describe('DatePicker', () => {
         data() {
           return {
             value: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
-            defaultTime: [defaultTimeMin, defaultTimeMax]
+            defaultTime: ['11:59:59', '18:00:00']
           };
         }
       }, true).$refs.compo;
@@ -1330,14 +1324,12 @@ describe('DatePicker', () => {
                 minDate,
                 maxDate
               } = vmWithDefaultTime.picker;
-              expect(minDate.getHours()).to.be.equal(defaultTimeMin.getHours());
-              expect(minDate.getMinutes()).to.be.equal(defaultTimeMin.getMinutes());
-              expect(minDate.getSeconds()).to.be.equal(defaultTimeMin.getSeconds());
-              expect(minDate.getMilliseconds()).to.be.equal(defaultTimeMin.getMilliseconds());
-              expect(maxDate.getHours()).to.be.equal(defaultTimeMax.getHours());
-              expect(maxDate.getMinutes()).to.be.equal(defaultTimeMax.getMinutes());
-              expect(maxDate.getSeconds()).to.be.equal(defaultTimeMax.getSeconds());
-              expect(maxDate.getMilliseconds()).to.be.equal(defaultTimeMax.getMilliseconds());
+              expect(minDate.getHours()).to.be.equal(11);
+              expect(minDate.getMinutes()).to.be.equal(59);
+              expect(minDate.getSeconds()).to.be.equal(59);
+              expect(maxDate.getHours()).to.be.equal(18);
+              expect(maxDate.getMinutes()).to.be.equal(0);
+              expect(maxDate.getSeconds()).to.be.equal(0);
               done();
             }, DELAY);
           }, DELAY);

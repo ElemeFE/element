@@ -217,7 +217,7 @@
     if (date == null || time == null) {
       return date;
     }
-    time = new Date(time);
+    time = parseDate(time, 'HH:mm:ss');
     return modifyTime(
       date,
       time.getHours(),

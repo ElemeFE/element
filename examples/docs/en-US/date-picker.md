@@ -66,9 +66,7 @@
         value10: '',
         value11: '',
         value12: '',
-        value13: '',
-        defaultTimeWithMin: [new Date(2018, 1, 1, 12)],
-        defaultTimeWithMinMax: [new Date(2018, 1, 1, 12), new Date(2018, 1, 1, 8)]
+        value13: ''
       };
     }
   };
@@ -337,7 +335,7 @@ If type is `daterange`, `default-value` sets the left side calendar.
 
 When picking date range on the date panel with type `datetimerange`, `00:00:00` will be used as the default time value for start & end date. We can control it with option `default-time`.
 
-`default-time` accepts an array with each item parsable by `new Date()`. The first item controls time value of the start date and the second item controls time value of the end date.
+`default-time` accepts an array of string. The first item controls time value of the start date and the second item controls time value of the end date.
 
 :::demo
 ```html
@@ -349,7 +347,7 @@ When picking date range on the date panel with type `datetimerange`, `00:00:00` 
       type="datetimerange"
       start-placeholder="Start Date"
       end-placeholder="End Date"
-      :default-time="defaultTimeWithMin">
+      :default-time="['12:00:00']">
     </el-date-picker>
   </div>
   <div class="block">
@@ -359,7 +357,7 @@ When picking date range on the date panel with type `datetimerange`, `00:00:00` 
       type="datetimerange"
       start-placeholder="Start Date"
       end-placeholder="End Date"
-      :default-time="defaultTimeWithMinMax">
+      :default-time="['12:00:00', '08:00:00']">
     </el-date-picker>
   </div>
 </template>
@@ -369,9 +367,7 @@ When picking date range on the date panel with type `datetimerange`, `00:00:00` 
     data() {
       return {
         value12: '',
-        value13: '',
-        defaultTimeWithMin: [new Date(2018, 1, 1, 12)],
-        defaultTimeWithMinMax: [new Date(2018, 1, 1, 12), new Date(2018, 1, 1, 8)]
+        value13: ''
       };
     }
   };
@@ -444,7 +440,7 @@ This feature is at alpha stage. Feedback welcome.
 | picker-options | additional options, check the table below | object | — | {} |
 | range-separator | range separator | string | — | '-' |
 | default-value | optional, default date of the calendar | Date | anything accepted by `new Date()` | — |
-| default-time | optional, the time value to use when select datetime range in date table (type `datetimerange`) | Date[] | Array with length 2, each item accepted by `new Date()`. The first item for the start datetime and then second item for the end datetime | — |
+| default-time | optional, the time value to use when select datetime range in date table (type `datetimerange`) | string[] | Array with length 2, each item is a string like `12:00:00`. The first item for the start datetime and then second item for the end datetime | — |
 | value-format | optional, format of binding value. If not specified, the binding value will be a Date object | string | year `yyyy`, month `MM`, day `dd`, hour `HH`, minute `mm`, second `ss`, AM/PM `A` | — |
 | name | same as `name` in native input | string | — | — |
 | unlink-panels | unlink two date-panels in range-picker | boolean | — | false |

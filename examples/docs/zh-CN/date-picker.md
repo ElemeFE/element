@@ -66,9 +66,7 @@
         value10: '',
         value11: '',
         value12: '',
-        value13: '',
-        defaultTimeWithMin: [new Date(2018, 1, 1, 12)],
-        defaultTimeWithMinMax: [new Date(2018, 1, 1, 12), new Date(2018, 1, 1, 8)]
+        value13: ''
       };
     }
   };
@@ -332,7 +330,7 @@
 
 使用类型`datetimerange`选择时间范围时，在日期选择面板中选定起始与结束的日期，默认会使用该日期的`00:00:00`作为起始与结束的时刻；通过选项`default-time`可以控制选中起始与结束日期时所使用的具体时刻。
 
-`default-time`接受一个数组，数组每项需要能够被`new Date()`解析，其中第一项控制起始日期的具体时刻，第二项控制结束日期的具体时刻。
+`default-time`接受一个数组，数组每项值为字符串，形如`12:00:00`，其中第一项控制起始日期的具体时刻，第二项控制结束日期的具体时刻。
 
 :::demo
 ```html
@@ -344,7 +342,7 @@
       type="datetimerange"
       start-placeholder="开始日期"
       end-placeholder="结束日期"
-      :default-time="defaultTimeWithMin">
+      :default-time="['12:00:00']">
     </el-date-picker>
   </div>
   <div class="block">
@@ -354,7 +352,7 @@
       type="datetimerange"
       start-placeholder="开始日期"
       end-placeholder="结束日期"
-      :default-time="defaultTimeWithMinMax">
+      :default-time="['12:00:00', '08:00:00']">
     </el-date-picker>
   </div>
 </template>
@@ -364,9 +362,7 @@
     data() {
       return {
         value12: '',
-        value13: '',
-        defaultTimeWithMin: [new Date(2018, 1, 1, 12)],
-        defaultTimeWithMinMax: [new Date(2018, 1, 1, 12), new Date(2018, 1, 1, 8)]
+        value13: ''
       };
     }
   };
@@ -440,7 +436,7 @@
 | picker-options | 当前时间日期选择器特有的选项参考下表 | object |  — | {} |
 | range-separator | 选择范围时的分隔符 | string | — | '-' |
 | default-value | 可选，选择器打开时默认显示的时间 | Date | 可被`new Date()`解析 | — |
-| default-time | 可选，选择器 type 为 `datetimerange`，范围选择选中日期时所使用的当日内具体时刻 | Date[] | 数组，长度为 2，每项可被`new Date()`解析，第一项指定开始日期的时刻，第二项指定结束日期的时刻，不指定会使用时刻 `00:00:00` | — |
+| default-time | 可选，选择器 type 为 `datetimerange`，范围选择选中日期时所使用的当日内具体时刻 | string[] | 数组，长度为 2，每项值为字符串，形如`12:00:00`，第一项指定开始日期的时刻，第二项指定结束日期的时刻，不指定会使用时刻 `00:00:00` | — |
 | value-format | 可选，绑定值的格式。不指定则绑定值为 Date 对象 | string | 年 `yyyy`，月 `MM`，日 `dd`，小时 `HH`，分 `mm`，秒 `ss`，AM/PM `A` | — |
 | name | 原生属性 | string | — | — |
 | unlink-panels | 在范围选择器里取消两个日期面板之间的联动 | boolean | — | false |
