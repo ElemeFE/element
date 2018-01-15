@@ -53,7 +53,6 @@
       @input="handleStartInput"
       @change="handleStartChange"
       @focus="handleFocus"
-      :prefix-icon="triggerClass"
       class="el-range-input">
     <span class="el-range-separator">{{ rangeSeparator }}</span>
     <input
@@ -66,7 +65,6 @@
       @input="handleEndInput"
       @change="handleEndChange"
       @focus="handleFocus"
-      :prefix-icon="triggerClass"
       class="el-range-input">
     <i
       @click="handleClickIcon"
