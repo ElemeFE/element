@@ -444,7 +444,7 @@ This feature is at alpha stage. Feedback welcome.
 | picker-options | additional options, check the table below | object | — | {} |
 | range-separator | range separator | string | — | '-' |
 | default-value | optional, default date of the calendar | Date | anything accepted by `new Date()` | — |
-| default-time | optional, the time value to use when select datetime range in date table (type `datetimerange`) | Date[] | Array with length 1 or 2, each item accepted by `new Date()`. The first item for the start datetime and then second item for the end datetime | — |
+| default-time | optional, the time value to use when select datetime range in date table (type `datetimerange`) | Date[] | Array with length 2, each item accepted by `new Date()`. The first item for the start datetime and then second item for the end datetime | — |
 | value-format | optional, format of binding value. If not specified, the binding value will be a Date object | string | year `yyyy`, month `MM`, day `dd`, hour `HH`, minute `mm`, second `ss`, AM/PM `A` | — |
 | name | same as `name` in native input | string | — | — |
 | unlink-panels | unlink two date-panels in range-picker | boolean | — | false |

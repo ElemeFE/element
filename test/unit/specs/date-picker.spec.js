@@ -1249,11 +1249,17 @@ describe('DatePicker', () => {
     it('select daterange with defaultTime min', done => {
       const defaultTimeMin = new Date(2000, 10, 10, 11, 59, 59);
 
-      const vmWithDefaultTime = createTest(DatePicker, {
-        type: 'datetimerange',
-        value: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
-        defaultTime: [defaultTimeMin]
-      }, true);
+      const vmWithDefaultTime = createVue({
+        template: `
+          <el-date-picker ref="compo" type="datetimerange" v-model="value" :default-time="defaultTime"></el-date-picker>
+        `,
+        data() {
+          return {
+            value: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
+            defaultTime: [defaultTimeMin]
+          };
+        }
+      }, true).$refs.compo;
 
       setTimeout(_ => {
         vmWithDefaultTime.$el.click();
@@ -1293,11 +1299,17 @@ describe('DatePicker', () => {
       const defaultTimeMin = new Date(2000, 10, 10, 11, 59, 59);
       const defaultTimeMax = new Date(2000, 10, 10, 18, 0, 0);
 
-      const vmWithDefaultTime = createTest(DatePicker, {
-        type: 'datetimerange',
-        value: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
-        defaultTime: [defaultTimeMin, defaultTimeMax]
-      }, true);
+      const vmWithDefaultTime = createVue({
+        template: `
+          <el-date-picker ref="compo" type="datetimerange" v-model="value" :default-time="defaultTime"></el-date-picker>
+        `,
+        data() {
+          return {
+            value: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
+            defaultTime: [defaultTimeMin, defaultTimeMax]
+          };
+        }
+      }, true).$refs.compo;
 
       setTimeout(_ => {
         vmWithDefaultTime.$el.click();
