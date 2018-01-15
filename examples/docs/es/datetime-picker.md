@@ -257,6 +257,8 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
 | value-format       | opcional, formato de valor de enlazado. Si no se especifica, el valor de enlazado será un objeto Date | cadena            | año `yyyy`, mes `MM`, día `dd`, hora `HH`, minuto `mm`, segundo `ss` | —           |
 | name               | igual que `name` en la entrada nativa    | string            | —                                        | —           |
 | unlink-panels      | desconectar dos date-panels en range-picker | boolean           | —                                        | false       |
+| prefix-icon | Custom prefix icon class | string | — | el-icon-date |
+| clear-icon | Custom clear icon class | string | — | el-icon-circle-close |
 
 ### Picker Options
 | Atributo       | Descripción                              | Tipo     | Valores aceptados | Por defecto |

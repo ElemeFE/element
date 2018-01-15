@@ -255,6 +255,8 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
 | value-format | 可选，绑定值的格式。不指定则绑定值为 Date 对象 | string | 年 `yyyy`，月 `MM`，日 `dd`，小时 `HH`，分 `mm`，秒 `ss`，AM/PM `A` | — |
 | name | 原生属性 | string | — | — |
 | unlink-panels | 在范围选择器里取消两个日期面板之间的联动 | boolean | — | false |
+| prefix-icon | 自定义头部图标的类名 | string | — | el-icon-date |
+| clear-icon | 自定义清空图标的类名 | string | — | el-icon-circle-close |
 
 ### Picker Options
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
