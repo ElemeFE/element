@@ -83,6 +83,18 @@
     }
   }
 
+  @include m(scrollable-x) {
+    .el-table__body-wrapper {
+      overflow-x: auto;
+    }
+  }
+
+  @include m(scrollable-y) {
+    .el-table__body-wrapper {
+      overflow-y: auto;
+    }
+  }
+
   thead {
     color: $--table-header-color;
     font-weight: 500;
@@ -296,6 +308,7 @@
     top: 0;
     left: 0;
     overflow-x: hidden;
+    overflow-y: hidden;
     box-shadow: $--table-fixed-box-shadow;
 
     &::before {
@@ -372,6 +385,7 @@
 
   @include e((header, body, footer)) {
     table-layout: fixed;
+    border-collapse: separate;
   }
 
   @include e((header-wrapper, footer-wrapper)) {
@@ -384,36 +398,36 @@
   }
 
   @include e(body-wrapper) {
-    overflow: auto;
+    overflow: hidden;
     position: relative;
 
-    @include when(scroll-none) {
+    @include when(scrolling-none) {
       ~ .el-table__fixed,
       ~ .el-table__fixed-right {
         box-shadow: none;
       }
     }
 
-    @include when(scroll-left) {
+    @include when(scrolling-left) {
       ~ .el-table__fixed {
         box-shadow: none;
       }
     }
 
-    @include when(scroll-right) {
+    @include when(scrolling-right) {
       ~ .el-table__fixed-right {
         box-shadow: none;
       }
     }
 
     .el-table--border {
-      @include when(scroll-right) {
+      @include when(scrolling-right) {
         ~ .el-table__fixed-right {
           border-left: $--table-border;
         }
       }
 
-      @include when(scroll-left) {
+      @include when(scrolling-left) {
         ~ .el-table__fixed {
           border-right: $--table-border;
         }
