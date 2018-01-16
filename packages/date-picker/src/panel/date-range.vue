@@ -213,6 +213,19 @@
     }
   };
 
+  const modifyWithGivenTime = (date, time) => {
+    if (date == null || time == null) {
+      return date;
+    }
+    time = parseDate(time, 'HH:mm:ss');
+    return modifyTime(
+      date,
+      time.getHours(),
+      time.getMinutes(),
+      time.getSeconds()
+    );
+  };
+
   export default {
     mixins: [Locale],
 
@@ -301,6 +314,7 @@
         popperClass: '',
         value: [],
         defaultValue: null,
+        defaultTime: null,
         minDate: '',
         maxDate: '',
         leftDate: new Date(),
@@ -412,8 +426,9 @@
       },
 
       handleChangeRange(val) {
-        this.minDate = val.minDate;
-        this.maxDate = val.maxDate;
+        const defaultTime = this.defaultTime || [];
+        this.minDate = modifyWithGivenTime(val.minDate, defaultTime[0]);
+        this.maxDate = modifyWithGivenTime(val.maxDate, defaultTime[1]);
         this.rangeState = val.rangeState;
       },
 
@@ -480,17 +495,21 @@
       },
 
       handleRangePick(val, close = true) {
-        if (this.maxDate === val.maxDate && this.minDate === val.minDate) {
+        const defaultTime = this.defaultTime || [];
+        const minDate = modifyWithGivenTime(val.minDate, defaultTime[0]);
+        const maxDate = modifyWithGivenTime(val.maxDate, defaultTime[1]);
+
+        if (this.maxDate === maxDate && this.minDate === minDate) {
           return;
         }
         this.onPick && this.onPick(val);
-        this.maxDate = val.maxDate;
-        this.minDate = val.minDate;
+        this.maxDate = maxDate;
+        this.minDate = minDate;
 
         // workaround for https://github.com/ElemeFE/element/issues/7539, should remove this block when we don't have to care about Chromium 55 - 57
         setTimeout(() => {
-          this.maxDate = val.maxDate;
-          this.minDate = val.minDate;
+          this.maxDate = maxDate;
+          this.minDate = minDate;
         }, 10);
         if (!close || this.showTime) return;
         this.handleConfirm();
