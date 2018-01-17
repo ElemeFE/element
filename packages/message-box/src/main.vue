@@ -51,6 +51,7 @@
             v-for="button in buttons"
             :key="button.text"
             :loading="button.loading"
+            :type="button.type"
             :class="[ button.class ]"
             :round="button.roundButton"
             size="small"
