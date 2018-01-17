@@ -1272,20 +1272,23 @@ describe('DatePicker', () => {
           triggerEvent(leftCell, 'click', true);
           setTimeout(_ => {
             triggerEvent(rightCell, 'mousemove', true);
-            triggerEvent(rightCell, 'click', true);
-
             setTimeout(_ => {
-              const {
-                minDate,
-                maxDate
-              } = vmWithDefaultTime.picker;
-              expect(minDate.getHours()).to.be.equal(11);
-              expect(minDate.getMinutes()).to.be.equal(59);
-              expect(minDate.getSeconds()).to.be.equal(59);
-              expect(maxDate.getHours()).to.be.equal(0);
-              expect(maxDate.getMinutes()).to.be.equal(0);
-              expect(maxDate.getSeconds()).to.be.equal(0);
-              done();
+              expect(rightCell.classList.contains('in-range')).to.be.true;
+
+              triggerEvent(rightCell, 'click', true);
+              setTimeout(_ => {
+                const {
+                  minDate,
+                  maxDate
+                } = vmWithDefaultTime.picker;
+                expect(minDate.getHours()).to.be.equal(11);
+                expect(minDate.getMinutes()).to.be.equal(59);
+                expect(minDate.getSeconds()).to.be.equal(59);
+                expect(maxDate.getHours()).to.be.equal(0);
+                expect(maxDate.getMinutes()).to.be.equal(0);
+                expect(maxDate.getSeconds()).to.be.equal(0);
+                done();
+              }, DELAY);
             }, DELAY);
           }, DELAY);
         }, DELAY);
@@ -1317,20 +1320,23 @@ describe('DatePicker', () => {
           triggerEvent(leftCell, 'click', true);
           setTimeout(_ => {
             triggerEvent(rightCell, 'mousemove', true);
-            triggerEvent(rightCell, 'click', true);
-
             setTimeout(_ => {
-              const {
-                minDate,
-                maxDate
-              } = vmWithDefaultTime.picker;
-              expect(minDate.getHours()).to.be.equal(11);
-              expect(minDate.getMinutes()).to.be.equal(59);
-              expect(minDate.getSeconds()).to.be.equal(59);
-              expect(maxDate.getHours()).to.be.equal(18);
-              expect(maxDate.getMinutes()).to.be.equal(0);
-              expect(maxDate.getSeconds()).to.be.equal(0);
-              done();
+              expect(rightCell.classList.contains('in-range')).to.be.true;
+
+              triggerEvent(rightCell, 'click', true);
+              setTimeout(_ => {
+                const {
+                  minDate,
+                  maxDate
+                } = vmWithDefaultTime.picker;
+                expect(minDate.getHours()).to.be.equal(11);
+                expect(minDate.getMinutes()).to.be.equal(59);
+                expect(minDate.getSeconds()).to.be.equal(59);
+                expect(maxDate.getHours()).to.be.equal(18);
+                expect(maxDate.getMinutes()).to.be.equal(0);
+                expect(maxDate.getSeconds()).to.be.equal(0);
+                done();
+              }, DELAY);
             }, DELAY);
           }, DELAY);
         }, DELAY);
