@@ -277,12 +277,6 @@
       }
     }
 
-    .has-gutter {
-      th:nth-last-of-type(2), td:nth-last-of-type(2) {
-        border-right: none;
-      }
-    }
-
     th.gutter:last-of-type {
       border-bottom: $--table-border;
       border-bottom-width: 1px;
