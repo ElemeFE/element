@@ -137,7 +137,10 @@ export default {
                 }
                 {
                   this.hasGutter
-                    ? <th class="gutter" style={{ width: this.layout.scrollY ? this.layout.gutterWidth + 'px' : '0' }}></th>
+                    ? <th class="gutter" style={{
+                      width: this.layout.scrollY ? this.layout.gutterWidth + 'px' : '0',
+                      display: this.layout.scrollY ? '' : 'none'
+                    }}></th>
                     : ''
                 }
               </tr>
