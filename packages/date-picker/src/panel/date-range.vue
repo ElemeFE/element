@@ -426,9 +426,8 @@
       },
 
       handleChangeRange(val) {
-        const defaultTime = this.defaultTime || [];
-        this.minDate = modifyWithGivenTime(val.minDate, defaultTime[0]);
-        this.maxDate = modifyWithGivenTime(val.maxDate, defaultTime[1]);
+        this.minDate = val.minDate;
+        this.maxDate = val.maxDate;
         this.rangeState = val.rangeState;
       },
 
