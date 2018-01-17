@@ -122,9 +122,11 @@ const HAVE_TRIGGER_TYPES = [
   'datetimerange'
 ];
 const DATE_FORMATTER = function(value, format) {
+  if (format === 'timestamp') return value.getTime();
   return formatDate(value, format);
 };
 const DATE_PARSER = function(text, format) {
+  if (format === 'timestamp') return new Date(Number(text));
   return parseDate(text, format);
 };
 const RANGE_FORMATTER = function(value, format) {
@@ -133,7 +135,7 @@ const RANGE_FORMATTER = function(value, format) {
     const end = value[1];
 
     if (start && end) {
-      return [formatDate(start, format), formatDate(end, format)];
+      return [DATE_FORMATTER(start, format), DATE_FORMATTER(end, format)];
     }
   }
   return '';
@@ -146,7 +148,7 @@ const RANGE_PARSER = function(array, format, separator) {
     const range1 = array[0];
     const range2 = array[1];
 
-    return [parseDate(range1, format), parseDate(range2, format)];
+    return [DATE_PARSER(range1, format), DATE_PARSER(range2, format)];
   }
   return [];
 };
