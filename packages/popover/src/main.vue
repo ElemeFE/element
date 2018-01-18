@@ -48,6 +48,10 @@ export default {
     visibleArrow: {
       default: true
     },
+    arrowOffset: {
+      type: Number,
+      default: 0
+    },
     transition: {
       type: String,
       default: 'fade-in-linear'
