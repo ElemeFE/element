@@ -65,8 +65,7 @@
         value9: '',
         value10: '',
         value11: '',
-        value12: '',
-        value13: ''
+        value12: []
       };
     }
   };
@@ -311,6 +310,7 @@ If type is `daterange`, `default-value` sets the left side calendar.
     <el-date-picker
       v-model="value9"
       type="daterange"
+      align="right"
       start-placeholder="Start Date"
       end-placeholder="End Date"
       default-value="2010-10-01">
@@ -331,33 +331,21 @@ If type is `daterange`, `default-value` sets the left side calendar.
 ```
 :::
 
-###  Default start & end time value
+###  Default time for start date and end date
 
-When picking date range on the date panel with type `datetimerange`, `00:00:00` will be used as the default time value for start & end date. We can control it with option `default-time`.
+When picking a date range, you can assign the time part for start date and end date.
 
-`default-time` accepts an array of string. The first item controls time value of the start date and the second item controls time value of the end date.
-
-:::demo
+:::demo By default, the time part of start date and end date are both `00:00:00`. Setting `default-time` can change their time respectively. It accepts an array of up to two strings with the format of `12:00:00`. The first string sets the time for the start date, and the second for the end date.
 ```html
 <template>
   <div class="block">
-    <span class="demonstration">start date time 12:00:00</span>
+    <p>Component value：{{ value12 }}</p>
     <el-date-picker
       v-model="value12"
-      type="datetimerange"
-      start-placeholder="Start Date"
-      end-placeholder="End Date"
-      :default-time="['12:00:00']">
-    </el-date-picker>
-  </div>
-  <div class="block">
-    <span class="demonstration">start date time 12:00:00, end date time 08:00:00</span>
-    <el-date-picker
-      v-model="value13"
-      type="datetimerange"
-      start-placeholder="Start Date"
-      end-placeholder="End Date"
-      :default-time="['12:00:00', '08:00:00']">
+      type="daterange"
+      start-placeholder="Start date"
+      end-placeholder="End date"
+      :default-time="['00:00:00', '23:59:59']">
     </el-date-picker>
   </div>
 </template>
@@ -366,8 +354,7 @@ When picking date range on the date panel with type `datetimerange`, `00:00:00` 
   export default {
     data() {
       return {
-        value12: '',
-        value13: ''
+        value12: []
       };
     }
   };
@@ -440,7 +427,7 @@ This feature is at alpha stage. Feedback welcome.
 | picker-options | additional options, check the table below | object | — | {} |
 | range-separator | range separator | string | — | '-' |
 | default-value | optional, default date of the calendar | Date | anything accepted by `new Date()` | — |
-| default-time | optional, the time value to use when select datetime range in date table (type `datetimerange`) | string[] | Array with length 2, each item is a string like `12:00:00`. The first item for the start datetime and then second item for the end datetime | — |
+| default-time | optional, the time value to use when selecting date range | string[] | Array with length 2, each item is a string like `12:00:00`. The first item for the start date and then second item for the end date | — |
 | value-format | optional, format of binding value. If not specified, the binding value will be a Date object | string | year `yyyy`, month `MM`, day `dd`, hour `HH`, minute `mm`, second `ss`, AM/PM `A` | — |
 | name | same as `name` in native input | string | — | — |
 | unlink-panels | unlink two date-panels in range-picker | boolean | — | false |

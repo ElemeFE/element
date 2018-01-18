@@ -64,7 +64,8 @@
         value8: '',
         value9: '',
         value10: '',
-        value11: ''
+        value11: '',
+        value12: []
       };
     }
   };
@@ -310,6 +311,7 @@ Si el tipo es `daterange`, `default-value` establece el calendario del lado izqu
     <el-date-picker
       v-model="value9"
       type="daterange"
+      align="right"
       start-placeholder="Start Date"
       end-placeholder="End Date"
       default-value="2010-10-01">
@@ -323,6 +325,37 @@ Si el tipo es `daterange`, `default-value` establece el calendario del lado izqu
       return {
         value8: '',
         value9: ''
+      };
+    }
+  };
+</script>
+```
+:::
+
+###  Default time for start date and end date
+
+When picking a date range, you can assign the time part for start date and end date.
+
+:::demo By default, the time part of start date and end date are both `00:00:00`. Setting `default-time` can change their time respectively. It accepts an array of up to two strings with the format of `12:00:00`. The first string sets the time for the start date, and the second for the end date.
+```html
+<template>
+  <div class="block">
+    <p>Component value：{{ value12 }}</p>
+    <el-date-picker
+      v-model="value12"
+      type="daterange"
+      start-placeholder="Start date"
+      end-placeholder="End date"
+      :default-time="['00:00:00', '23:59:59']">
+    </el-date-picker>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        value12: []
       };
     }
   };
@@ -395,6 +428,7 @@ Esta característica está en la etapa alfa. Feedback bienvenido.
 | picker-options    | opciones adicionales, chequee la tabla debajo | object            | —                                        | {}          |
 | range-separator   | separador de rangos                      | string            | —                                        | '-'         |
 | default-value     | opcional, valor por defecto para el calendario | Date              | cualquiera aceptado por `new Date()`     | —           |
+| default-time      | optional, the time value to use when selecting date range | string[] | Array with length 2, each item is a string like `12:00:00`. The first item for the start date and then second item for the end date | — |
 | value-format      | opcional, formato del valor enlazado. Si no esta especificado, el valor enlazado será un objeto Date. | string            | año `yyyy`, mes `MM`, dia `dd`, hora `HH`, minuto `mm`, segundo `ss` | —           |
 | name              | igual que `name` en el input nativo      | string            | —                                        | —           |
 | unlink-panels     | desvincular los dos paneles de fecha en el range-picker | boolean           | —                                        | false       |
