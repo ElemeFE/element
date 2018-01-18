@@ -446,11 +446,19 @@
       getOption(value) {
         let option;
         const isObject = Object.prototype.toString.call(value).toLowerCase() === '[object object]';
+        const isNumberic = !window.isNaN(window.parseFloat(value)) && window.isFinite(value);
         for (let i = this.cachedOptions.length - 1; i >= 0; i--) {
           const cachedOption = this.cachedOptions[i];
-          const isEqual = isObject
-            ? getValueByPath(cachedOption.value, this.valueKey) === getValueByPath(value, this.valueKey)
-            : cachedOption.value === value;
+          let isEqual;
+          if (isObject) {
+            isEqual = getValueByPath(cachedOption.value, this.valueKey) === getValueByPath(value, this.valueKey)
+          } else {
+            if (isNumberic) {
+              isEqual = +cachedOption.value === +value;
+            } else {
+              isEqual = cachedOption.value === value;
+            }
+          }
           if (isEqual) {
             option = cachedOption;
             break;

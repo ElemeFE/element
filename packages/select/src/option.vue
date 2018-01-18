@@ -55,6 +55,10 @@
         return Object.prototype.toString.call(this.value).toLowerCase() === '[object object]';
       },
 
+      isNumberic() {
+        return !window.isNaN(window.parseFloat(this.value)) && window.isFinite(this.value);
+      },
+
       currentLabel() {
         return this.label || (this.isObject ? '' : this.value);
       },
@@ -94,6 +98,9 @@
     methods: {
       isEqual(a, b) {
         if (!this.isObject) {
+          if (this.isNumberic) {
+            return +a === +b;
+          }
           return a === b;
         } else {
           const valueKey = this.select.valueKey;
