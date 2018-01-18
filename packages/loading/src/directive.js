@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Loading from './loading.vue';
 import { addClass, removeClass, getStyle } from 'element-ui/src/utils/dom';
+import afterLeave from 'element-ui/src/utils/after-leave';
 const Mask = Vue.extend(Loading);
 
 exports.install = Vue => {
@@ -36,19 +37,17 @@ exports.install = Vue => {
         }
       });
     } else {
-      if (el.domVisible) {
-        el.instance.$once('after-leave', _ => {
-          el.domVisible = false;
-          const target = binding.modifiers.fullscreen || binding.modifiers.body
-            ? document.body
-            : el;
-          removeClass(target, 'el-loading-parent--relative');
-          removeClass(target, 'el-loading-parent--hidden');
-          el.instance.hiding = false;
-        });
-        el.instance.visible = false;
-        el.instance.hiding = true;
-      }
+      afterLeave(el.instance, _ => {
+        el.domVisible = false;
+        const target = binding.modifiers.fullscreen || binding.modifiers.body
+          ? document.body
+          : el;
+        removeClass(target, 'el-loading-parent--relative');
+        removeClass(target, 'el-loading-parent--hidden');
+        el.instance.hiding = false;
+      }, 300, true);
+      el.instance.visible = false;
+      el.instance.hiding = true;
     }
   };
   const insertDom = (parent, el, binding) => {
