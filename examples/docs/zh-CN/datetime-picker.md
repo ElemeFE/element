@@ -56,17 +56,7 @@
         value3: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
         value4: '',
         value5: '',
-        value6: '',
-        value7: '',
-        value8: '',
-        value9: '',
-        value10: '',
-        value11: '',
-        value12: '',
-        value13: '',
-        value14: '',
-        value15: '',
-        value16: ''
+        value6: ''
       };
     }
   };
@@ -233,6 +223,47 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
 ```
 :::
 
+### 默认的起始与结束时刻
+
+:::demo 使用`datetimerange`进行范围选择时，在日期选择面板中选定起始与结束的日期，默认会使用该日期的`00:00:00`作为起始与结束的时刻；通过选项`default-time`可以控制选中起始与结束日期时所使用的具体时刻。`default-time`接受一个数组，数组每项值为字符串，形如`12:00:00`，其中第一项控制起始日期的具体时刻，第二项控制结束日期的具体时刻。
+```html
+<template>
+  <div class="block">
+    <span class="demonstration">起始日期时刻为 12:00:00</span>
+    <el-date-picker
+      v-model="value5"
+      type="datetimerange"
+      start-placeholder="开始日期"
+      end-placeholder="结束日期"
+      :default-time="['12:00:00']">
+    </el-date-picker>
+  </div>
+  <div class="block">
+    <span class="demonstration">起始日期时刻为 12:00:00，结束日期时刻为 08:00:00</span>
+    <el-date-picker
+      v-model="value6"
+      type="datetimerange"
+      align="right"
+      start-placeholder="开始日期"
+      end-placeholder="结束日期"
+      :default-time="['12:00:00', '08:00:00']">
+    </el-date-picker>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        value5: '',
+        value6: ''
+      };
+    }
+  };
+</script>
+```
+:::
+
 ### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -252,6 +283,7 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
 | picker-options | 当前时间日期选择器特有的选项参考下表 | object |  — | {} |
 | range-separator | 选择范围时的分隔符 | string | - | '-' |
 | default-value | 可选，选择器打开时默认显示的时间 | Date | 可被`new Date()`解析 | — |
+| default-time | 范围选择时选中日期的默认具体时刻 | string[] | 数组，长度为 2，每项值为字符串，形如`12:00:00`，第一项指定开始日期的时刻，第二项指定结束日期的时刻，不指定会使用时刻 `00:00:00` | — |
 | value-format | 可选，绑定值的格式。不指定则绑定值为 Date 对象 | string | 年 `yyyy`，月 `MM`，日 `dd`，小时 `HH`，分 `mm`，秒 `ss`，AM/PM `A` | — |
 | name | 原生属性 | string | — | — |
 | unlink-panels | 在范围选择器里取消两个日期面板之间的联动 | boolean | — | false |
