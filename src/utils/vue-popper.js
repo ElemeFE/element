@@ -31,6 +31,10 @@ export default {
     },
     value: Boolean,
     visibleArrow: Boolean,
+    arrowOffset: {
+      type: Number,
+      default: 35
+    },
     transition: String,
     appendToBody: {
       type: Boolean,
@@ -95,6 +99,7 @@ export default {
 
       options.placement = this.currentPlacement;
       options.offset = this.offset;
+      options.arrowOffset = this.arrowOffset;
       this.popperJS = new PopperJS(reference, popper, options);
       this.popperJS.onCreate(_ => {
         this.$emit('created', this);
