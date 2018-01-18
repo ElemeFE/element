@@ -109,7 +109,15 @@ export default {
     },
 
     updatePopper() {
-      this.popperJS ? this.popperJS.update() : this.createPopper();
+      const popperJS = this.popperJS;
+      if (popperJS) {
+        popperJS.update();
+        if (popperJS._popper) {
+          popperJS._popper.style.zIndex = PopupManager.nextZIndex();
+        }
+      } else {
+        this.createPopper();
+      }
     },
 
     doDestroy() {
