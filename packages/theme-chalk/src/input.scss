@@ -297,3 +297,10 @@
     }
   }
 }
+
+/** disalbe default clear on IE */
+.el-input__inner::-ms-clear {
+  display: none;
+  width: 0;
+  height: 0;
+}
