@@ -3,6 +3,7 @@
   import menuMixin from './menu-mixin';
   import Emitter from 'element-ui/src/mixins/emitter';
   import Popper from 'element-ui/src/utils/vue-popper';
+  import MenuList from './menu-list';
 
   export default {
     name: 'ElSubmenu',
@@ -11,13 +12,9 @@
 
     mixins: [menuMixin, Emitter, Popper],
 
-    components: { ElCollapseTransition },
+    components: { ElCollapseTransition, MenuList },
 
     props: {
-      transformOrigin: {
-        type: [Boolean, String],
-        default: false
-      },
       index: {
         type: String,
         required: true
@@ -105,17 +102,12 @@
             ? this.activeTextColor
             : this.textColor
         };
+      },
+      popperPlacement() {
+        return this.mode === 'horizontal' ? 'bottom-start' : 'right-start';
       }
     },
     methods: {
-      handleCollapseToggle(value) {
-        if (value) {
-          this.initPopper();
-        } else {
-          this.doDestroy();
-          document.body.removeChild(this.popperElm);
-        }
-      },
       addItem(item) {
         this.$set(this.items, item.index, item);
       },
@@ -173,23 +165,11 @@
         if (this.mode === 'horizontal' && !this.rootMenu.backgroundColor) return;
         const title = this.$refs['submenu-title'];
         title && (title.style.backgroundColor = this.rootMenu.backgroundColor || '');
-      },
-      updatePlacement() {
-        this.currentPlacement = this.mode === 'horizontal' ? 'bottom-start' : 'right-start';
-      },
-      initPopper() {
-        this.referenceElm = this.$el;
-        this.popperElm = this.$refs.menu;
-        this.updatePlacement();
       }
     },
     created() {
       this.parentMenu.addSubmenu(this);
       this.rootMenu.addSubmenu(this);
-      this.$on('toggle-collapse', this.handleCollapseToggle);
-    },
-    mounted() {
-      this.initPopper();
     },
     beforeDestroy() {
       this.parentMenu.removeSubmenu(this);
@@ -204,41 +184,9 @@
         backgroundColor,
         $slots,
         rootMenu,
-        currentPlacement,
-        menuTransitionName,
+        isMenuPopup,
         mode
       } = this;
-
-      const popupMenu = (
-        <transition name={menuTransitionName}>
-          <div
-            ref="menu"
-            v-show={opened}
-            class={[`el-menu--${mode}`]}
-            on-mouseenter={this.handleMouseenter}
-            on-mouseleave={this.handleMouseleave}
-            on-focus={this.handleMouseenter}>
-            <ul
-              role="menu"
-              class={['el-menu el-menu--popup', `el-menu--popup-${currentPlacement}`]}
-              style={{ backgroundColor: rootMenu.backgroundColor || '' }}>
-              {$slots.default}
-            </ul>
-          </div>
-        </transition>
-      );
-
-      const inlineMenu = (
-        <el-collapse-transition>
-          <ul
-            role="menu"
-            class="el-menu el-menu--inline"
-            v-show={opened}
-            style={{ backgroundColor: rootMenu.backgroundColor || '' }}>
-            {$slots.default}
-          </ul>
-        </el-collapse-transition>
-      );
 
       return (
         <li
@@ -270,7 +218,15 @@
             }}>
             </i>
           </div>
-          {this.isMenuPopup ? popupMenu : inlineMenu}
+          <MenuList
+            visible={opened}
+            menu-popup={isMenuPopup}
+            append-to-body={isMenuPopup && this.$parent === rootMenu}
+            placement={this.popperPlacement}
+            on-mouseenter={this.handleMouseenter}
+            on-mouseleave={this.handleMouseleave}>
+            {$slots.default}
+          </MenuList>
         </li>
       );
     }

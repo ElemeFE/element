@@ -103,6 +103,9 @@
       border-bottom: 2px solid $--color-primary;
       color: $--color-text-primary;
     }
+    & .el-menu--popup {
+      padding: 5px 0;
+    }
   }
   @include m(collapse) {
     width: 64px;
@@ -159,10 +162,9 @@
     z-index: 100;
     min-width: 200px;
     border: none;
-    padding: 5px 0;
     border-radius: $--border-radius-small;
     box-shadow: $--box-shadow-light;
-    overflow: hidden;
+    // overflow: hidden;
 
     &-bottom-start {
       margin-top: 5px;
