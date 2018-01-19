@@ -246,10 +246,6 @@
         if (this.mode === 'horizontal' || this.collapse) {
           this.openedMenus = [];
         }
-
-        if (this.router) {
-          this.routeToItem(item);
-        }
       },
       // 初始化展开菜单
       // initialize opened menu
@@ -266,14 +262,6 @@
           let submenu = this.submenus[index];
           submenu && this.openMenu(index, submenu.indexPath);
         });
-      },
-      routeToItem(item) {
-        let route = item.route || item.index;
-        try {
-          this.$router.push(route);
-        } catch (e) {
-          console.error(e);
-        }
       },
       open(index) {
         const { indexPath } = this.submenus[index.toString()];
