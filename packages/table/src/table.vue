@@ -239,6 +239,8 @@
 
       defaultSort: Object,
 
+      serverSort: Boolean,
+
       tooltipEffect: String,
 
       spanMethod: Function
@@ -359,6 +361,9 @@
     created() {
       this.tableId = 'el-table_' + tableIdSeed + '_';
       this.debouncedLayout = debounce(50, () => this.doLayout());
+      if (this.serverSort) {
+        this.store.commit('setServerSort');
+      }
     },
 
     computed: {

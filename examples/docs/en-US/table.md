@@ -1,7 +1,10 @@
 <script>
+  import { orderBy } from '../../../packages/table/src/util';
+
   export default {
     data() {
       return {
+        loading: false,
         tableData: [{
           date: '2016-05-03',
           name: 'Tom',
@@ -276,6 +279,15 @@
       deleteRow(index, rows) {
         rows.splice(index, 1);
       },
+
+      sortChange(obj) {
+        console.log(obj);
+        this.loading = true;
+        setTimeout(() => {
+          this.loading = false;
+          this.tableData = orderBy(this.tableData, obj.prop, obj.order);
+        }, 1000);
+      }
 
       arraySpanMethod({ row, column, rowIndex, columnIndex }) {
         if (rowIndex % 2 === 0) {
@@ -1277,6 +1289,9 @@ Sort the data to find or compare data quickly.
   <el-table
     :data="tableData"
     :default-sort = "{prop: 'date', order: 'descending'}"
+    :server-sort="true"
+    @sort-change="sortChange"
+    v-loading="loading"
     style="width: 100%">
     <el-table-column
       prop="date"
@@ -1301,6 +1316,7 @@ Sort the data to find or compare data quickly.
   export default {
     data() {
       return {
+        loading: false,
         tableData: [{
           date: '2016-05-03',
           name: 'Tom',
@@ -1323,6 +1339,14 @@ Sort the data to find or compare data quickly.
     methods: {
       formatter(row, column) {
         return row.address;
+      },
+      sortChange(obj) {
+        console.log(obj);
+        this.loading = true;
+        setTimeout(() => {
+          this.loading = false;
+          this.tableData = orderBy(this.tableData, obj.prop, obj.order);
+        }, 1000);
       }
     }
   }

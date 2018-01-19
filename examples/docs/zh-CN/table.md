@@ -1,7 +1,10 @@
 <script>
+  import { orderBy } from '../../../packages/table/src/util';
+
   export default {
     data() {
       return {
+        loading: false,
         tableData: [{
           date: '2016-05-03',
           name: '王小虎',
@@ -315,6 +318,15 @@
       deleteRow(index, rows) {
         rows.splice(index, 1);
       },
+
+      sortChange(obj) {
+        console.log(obj);
+        this.loading = true;
+        setTimeout(() => {
+          this.loading = false;
+          this.tableData = orderBy(this.tableData, obj.prop, obj.order);
+        }, 1000);
+      }
 
       arraySpanMethod({ row, column, rowIndex, columnIndex }) {
         if (rowIndex % 2 === 0) {
@@ -1315,6 +1327,9 @@
     :data="tableData"
     style="width: 100%"
     :default-sort = "{prop: 'date', order: 'descending'}"
+    :server-sort="true"
+    @sort-change="sortChange"
+    v-loading="loading"
     >
     <el-table-column
       prop="date"
@@ -1340,6 +1355,7 @@
   export default {
     data() {
       return {
+        loading: false,
         tableData: [{
           date: '2016-05-02',
           name: '王小虎',
@@ -1362,6 +1378,14 @@
     methods: {
       formatter(row, column) {
         return row.address;
+      },
+      sortChange(obj) {
+        console.log(obj);
+        this.loading = true;
+        setTimeout(() => {
+          this.loading = false;
+          this.tableData = orderBy(this.tableData, obj.prop, obj.order);
+        }, 1000);
       }
     }
   }
@@ -2030,6 +2054,8 @@
 | default-expand-all | 是否默认展开所有行，当 Table 中存在 type="expand" 的 Column 的时候有效 | Boolean | — | false |
 | expand-row-keys | 可以通过该属性设置 Table 目前的展开行，需要设置 row-key 属性才能使用，该属性为展开行的 keys 数组。| Array | — | |
 | default-sort | 默认的排序列的prop和顺序。它的`prop`属性指定默认的排序的列，`order`指定默认排序的顺序| Object | `order`: ascending, descending | 如果只指定了`prop`, 没有指定`order`, 则默认顺序是ascending |
+| server-sort | 是否为服务器端排序，需配合 `sort-change` 事件使用，通过配置为 `true`，然后在 `sort-change` 监听事件中发起异步请求，来更新表格排序数据。 | Boolean | — | false |
+| tooltip-effect | tooltip `effect` 属性 | String | dark/light | | dark |
 | tooltip-effect | tooltip `effect` 属性 | String | dark/light | | dark |
 | show-summary | 是否在表尾显示合计行 | Boolean | — | false |
 | sum-text | 合计行第一列的文本 | String | — | 合计 |

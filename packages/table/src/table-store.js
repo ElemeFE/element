@@ -108,7 +108,8 @@ const TableStore = function(table, initialState = {}) {
     hoverRow: null,
     filters: {},
     expandRows: [],
-    defaultExpandAll: false
+    defaultExpandAll: false,
+    serverSort: false
   };
 
   for (let prop in initialState) {
@@ -135,7 +136,12 @@ TableStore.prototype.mutations = {
     });
 
     states.filteredData = data;
-    states.data = sortData((data || []), states);
+
+    if (!this.states.serverSort) {
+      states.data = sortData((data || []), states);
+    } else {
+      states.data = (data || []);
+    }
 
     // states.data.forEach((item) => {
     //   if (!item.$extra) {
@@ -184,7 +190,9 @@ TableStore.prototype.mutations = {
   },
 
   changeSortCondition(states, options) {
-    states.data = sortData((states.filteredData || states._data || []), states);
+    if (!this.states.serverSort) {
+      states.data = sortData((states.filteredData || states._data || []), states);
+    }
 
     if (!options || !options.silent) {
       this.table.$emit('sort-change', {
@@ -195,6 +203,10 @@ TableStore.prototype.mutations = {
     }
 
     Vue.nextTick(() => this.table.updateScrollY());
+  },
+
+  setServerSort() {
+    this.states.serverSort = true;
   },
 
   filterChange(states, options) {
@@ -225,7 +237,12 @@ TableStore.prototype.mutations = {
     });
 
     states.filteredData = data;
-    states.data = sortData(data, states);
+
+    if (!this.states.serverSort) {
+      states.data = sortData(data, states);
+    } else {
+      states.data = (data || []);
+    }
 
     if (!silent) {
       this.table.$emit('filter-change', filters);
