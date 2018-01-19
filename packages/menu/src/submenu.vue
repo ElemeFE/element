@@ -4,20 +4,32 @@
   import Emitter from 'element-ui/src/mixins/emitter';
   import Popper from 'element-ui/src/utils/vue-popper';
 
-  export default {
-    name: 'ElSubmenu',
-
-    componentName: 'ElSubmenu',
-
-    mixins: [menuMixin, Emitter, Popper],
-
-    components: { ElCollapseTransition },
-
+  const poperMixins = {
     props: {
       transformOrigin: {
         type: [Boolean, String],
         default: false
       },
+      offset: Popper.props.offset,
+      boundariesPadding: Popper.props.boundariesPadding,
+      popperOptions: Popper.props.popperOptions
+    },
+    data: Popper.data,
+    methods: Popper.methods,
+    beforeDestroy: Popper.beforeDestroy,
+    deactivated: Popper.deactivated
+  };
+
+  export default {
+    name: 'ElSubmenu',
+
+    componentName: 'ElSubmenu',
+
+    mixins: [menuMixin, Emitter, poperMixins],
+
+    components: { ElCollapseTransition },
+
+    props: {
       index: {
         type: String,
         required: true
@@ -43,11 +55,18 @@
     watch: {
       opened(val) {
         if (this.isMenuPopup) {
-          this.showPopper = val;
+          this.$nextTick(_ => {
+            this.updatePopper();
+          });
         }
       }
     },
     computed: {
+      // popper option
+      appendToBody() {
+        console.log(this.rootMenu === this.$parent);
+        return this.rootMenu === this.$parent;
+      },
       menuTransitionName() {
         return this.rootMenu.collapse ? 'el-zoom-in-left' : 'el-zoom-in-top';
       },
@@ -113,7 +132,6 @@
           this.initPopper();
         } else {
           this.doDestroy();
-          document.body.removeChild(this.popperElm);
         }
       },
       addItem(item) {
