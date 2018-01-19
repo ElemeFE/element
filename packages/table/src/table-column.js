@@ -32,8 +32,10 @@ const defaults = {
 
 const forced = {
   selection: {
-    renderHeader: function(h) {
+    renderHeader: function(h, { store }) {
       return <el-checkbox
+        disabled={ !store.states.filteredData.length }
+        indeterminate={ store.states.selection.length > 0 && !this.isAllSelected }
         nativeOn-click={ this.toggleAllSelection }
         value={ this.isAllSelected } />;
     },
