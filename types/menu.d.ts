@@ -34,4 +34,7 @@ export declare class ElMenu extends ElementUIComponent {
 
   /** Whether vue-router mode is activated. If true, index will be used as 'path' to activate the route action */
   router: boolean
+
+  /** Whether the menu collapse transition is active */
+  collapseTransition: boolean
 }
