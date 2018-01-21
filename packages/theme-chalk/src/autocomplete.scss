@@ -15,10 +15,6 @@
   box-shadow: $--box-shadow-light;
   border-radius: $--border-radius-base;
 
-  &.el-popper .popper__arrow {
-    left: 24px !important;
-  }
-
   @include e(wrap) {
     max-height: 280px;
     padding: 10px 0;

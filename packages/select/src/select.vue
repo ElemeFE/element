@@ -278,7 +278,7 @@
         selectedLabel: '',
         hoverIndex: -1,
         query: '',
-        previousQuery: '',
+        previousQuery: null,
         inputHovering: false,
         currentPlaceholder: ''
       };
@@ -323,6 +323,7 @@
             this.$refs.input.blur();
           }
           this.query = '';
+          this.previousQuery = null;
           this.selectedLabel = '';
           this.inputLength = 20;
           this.resetHoverIndex();
@@ -382,6 +383,10 @@
     methods: {
       handleQueryChange(val) {
         if (this.previousQuery === val) return;
+        if (this.previousQuery === null && typeof this.filterMethod === 'function') {
+          this.previousQuery = val;
+          return;
+        }
         this.previousQuery = val;
         this.$nextTick(() => {
           if (this.visible) this.broadcast('ElSelectDropdown', 'updatePopper');

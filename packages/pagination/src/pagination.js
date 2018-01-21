@@ -172,9 +172,9 @@ export default {
         return (
           <span class="el-pagination__sizes">
             <el-select
-              value={this.$parent.internalPageSize}
-              popperClass={`${this.$parent.popperClass || ''} is-arrow-fixed`}
-              on-input={this.handleChange}>
+              value={ this.$parent.internalPageSize }
+              popperClass={ this.$parent.popperClass || '' }
+              on-input={ this.handleChange }>
               {
                 this.pageSizes.map(item =>
                   <el-option
