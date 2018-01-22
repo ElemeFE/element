@@ -204,10 +204,14 @@ TableStore.prototype.mutations = {
     this.scheduleLayout();
   },
 
-  removeColumn(states, column) {
-    let _columns = states._columns;
-    if (_columns) {
-      _columns.splice(_columns.indexOf(column), 1);
+  removeColumn(states, column, parent) {
+    let array = states._columns;
+    if (parent) {
+      array = parent.children;
+      if (!array) array = parent.children = [];
+    }
+    if (array) {
+      array.splice(array.indexOf(column), 1);
     }
 
     this.updateColumns();  // hack for dynamics remove column
