@@ -645,6 +645,66 @@ describe('DatePicker', () => {
     });
   });
 
+  describe('can be cleared using keyboard', () => {
+    it('works for type=date, when blur', done => {
+      vm = createVue({
+        template: `
+          <el-date-picker ref="compo" v-model="value" format="yyyy-MM-dd" type="date" />
+        `,
+        data() {
+          return {
+            value: new Date()
+          };
+        }
+      }, true);
+
+      const input = vm.$el.querySelector('input');
+
+      input.blur();
+      input.focus();
+
+      setTimeout(_ => {
+        // NOTE: simplified test
+        vm.$refs.compo.userInput = '';
+        vm.$refs.compo.handleChange();
+        setTimeout(_ => {
+          expect(vm.value).to.equal(null);
+          done();
+        }, DELAY);
+      }, DELAY);
+    });
+
+    it('works for type=date, when keydown.enter', done => {
+      vm = createVue({
+        template: `
+          <el-date-picker ref="compo" v-model="value" format="yyyy-MM-dd" type="date" />
+        `,
+        data() {
+          return {
+            value: new Date()
+          };
+        }
+      }, true);
+
+      const input = vm.$el.querySelector('input');
+
+      input.blur();
+      input.focus();
+
+      setTimeout(_ => {
+        // NOTE: simplified test
+        vm.$refs.compo.userInput = '';
+        keyDown(input, ENTER);
+        setTimeout(_ => {
+          expect(vm.value).to.equal(null);
+          done();
+        }, DELAY);
+      }, DELAY);
+    });
+
+    // TODO: implement the same feature for range panels
+  });
+
   describe('nagivation', _ => {
     const click = (el, cbk = () => {}) => {
       el.click();
