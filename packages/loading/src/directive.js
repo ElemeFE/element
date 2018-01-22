@@ -4,7 +4,8 @@ import { addClass, removeClass, getStyle } from 'element-ui/src/utils/dom';
 import afterLeave from 'element-ui/src/utils/after-leave';
 const Mask = Vue.extend(Loading);
 
-exports.install = Vue => {
+const loadingDirective = {};
+loadingDirective.install = Vue => {
   if (Vue.prototype.$isServer) return;
   const toggleLoading = (el, binding) => {
     if (binding.value) {
@@ -117,3 +118,5 @@ exports.install = Vue => {
     }
   });
 };
+
+export default loadingDirective;
