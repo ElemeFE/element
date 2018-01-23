@@ -64,7 +64,6 @@
     computed: {
       // popper option
       appendToBody() {
-        console.log(this.rootMenu === this.$parent);
         return this.rootMenu === this.$parent;
       },
       menuTransitionName() {
