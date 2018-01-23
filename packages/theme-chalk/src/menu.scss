@@ -8,6 +8,7 @@
   font-size: 14px;
   color: $--menu-item-color;
   padding: 0 20px;
+  list-style: none;
   cursor: pointer;
   position: relative;
   transition: border-color .3s, background-color .3s, color .3s;
@@ -24,21 +25,14 @@
   background-color: $--menu-item-fill;
   @include utils-clearfix;
 
-  & li {
-    list-style: none;
-  }
-
   @include m(horizontal) {
     border-right: none;
     border-bottom: solid 1px #e6e6e6;
-    & .el-menu-item {
+    & > .el-menu-item {
       float: left;
       height: 60px;
       line-height: 60px;
       margin: 0;
-      cursor: pointer;
-      position: relative;
-      box-sizing: border-box;
       border-bottom: 2px solid transparent;
       color: $--color-text-secondary;
 
@@ -51,26 +45,22 @@
         background-color: #fff;
       }
     }
-    & .el-submenu {
+    & > .el-submenu {
       float: left;
-      position: relative;
-      &:focus {
+
+      &:focus,
+      &:hover {
         outline: none;
-        > .el-submenu__title {
+        .el-submenu__title {
           color: $--color-text-primary;
         }
       }
-      > .el-menu {
-        position: absolute;
-        top: 65px;
-        left: 0;
-        border: none;
-        padding: 5px 0;
-        background-color: $--color-white;
-        z-index: 100;
-        min-width: 100%;
-        box-shadow: $--box-shadow-light;
-        border-radius: $--border-radius-small;
+
+      &.is-active {
+        .el-submenu__title {
+          border-bottom: 2px solid $--color-primary;
+          color: $--color-text-primary;
+        }
       }
 
       & .el-submenu__title {
@@ -78,20 +68,11 @@
         line-height: 60px;
         border-bottom: 2px solid transparent;
         color: $--color-text-secondary;
-      }
 
-      .el-submenu__title:hover {
-        background-color: #fff;
+        &:hover {
+          background-color: #fff;
+        }
       }
-
-      & .el-menu-item {
-        background-color: $--color-white;
-        float: none;
-        height: 36px;
-        line-height: 36px;
-        padding: 0 10px;
-      }
-
       & .el-submenu__icon-arrow {
         position: static;
         vertical-align: middle;
@@ -99,14 +80,26 @@
         margin-top: -3px;
       }
     }
+    & .el-menu {
+      & .el-menu-item {
+        background-color: $--color-white;
+        float: none;
+        height: 36px;
+        line-height: 36px;
+        padding: 0 10px;
+        color: $--color-text-secondary;
+
+        &.is-active {
+          color: $--color-text-primary;
+        }
+      }
+    }
     & .el-menu-item:hover,
-    & .el-submenu__title:hover,
     & .el-menu-item:focus {
       outline: none;
       color: $--color-text-primary;
     }
-    & > .el-menu-item.is-active,
-    & > .el-submenu.is-active .el-submenu__title {
+    & > .el-menu-item.is-active {
       border-bottom: 2px solid $--color-primary;
       color: $--color-text-primary;
     }
@@ -162,6 +155,21 @@
       }
     }
   }
+  @include m(popup) {
+    z-index: 100;
+    min-width: 200px;
+    border: none;
+    padding: 5px 0;
+    border-radius: $--border-radius-small;
+    box-shadow: $--box-shadow-light;
+
+    &-bottom-start {
+      margin-top: 5px;
+    }
+    &-right-start {
+      margin-left: 5px;
+    }
+  }
 }
 @include b(menu-item) {
   @include menu-item;
@@ -198,6 +206,10 @@
 }
   
 @include b(submenu) {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+
   @include e(title) {
     position: relative;
     @include menu-item;

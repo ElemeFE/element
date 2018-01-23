@@ -127,6 +127,9 @@
     computed: {
       hoverBackground() {
         return this.backgroundColor ? this.mixColor(this.backgroundColor, 0.2) : '';
+      },
+      isMenuPopup() {
+        return this.mode === 'horizontal' || (this.mode === 'vertical' && this.collapse);
       }
     },
     watch: {
@@ -140,6 +143,7 @@
 
       collapse(value) {
         if (value) this.openedMenus = [];
+        this.broadcast('ElSubmenu', 'toggle-collapse', value);
       }
     },
     methods: {
