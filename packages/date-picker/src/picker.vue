@@ -14,9 +14,9 @@
     @keydown.native="handleKeydown"
     :value="displayValue"
     @input="value => userInput = value"
+    @change="handleChange"
     @mouseenter.native="handleMouseEnter"
     @mouseleave.native="showClose = false"
-    @change.native="handleChange"
     :validateEvent="false"
     :prefix-icon="triggerClass"
     ref="reference">
@@ -545,6 +545,11 @@ export default {
           }
         }
       }
+      if (this.userInput === '') {
+        this.emitInput(null);
+        this.emitChange(null);
+        this.userInput = null;
+      }
     },
 
     handleStartInput(event) {
@@ -648,9 +653,8 @@ export default {
       }
 
       // Enter
-      if (keyCode === 13 && this.displayValue) {
-        const value = this.parseString(this.displayValue);
-        if (this.isValidValue(value)) {
+      if (keyCode === 13) {
+        if (this.userInput === '' || this.isValidValue(this.parseString(this.displayValue))) {
           this.handleChange();
           this.pickerVisible = this.picker.visible = false;
           this.blur();
