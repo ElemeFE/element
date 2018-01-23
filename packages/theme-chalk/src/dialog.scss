@@ -3,7 +3,6 @@
 @import "common/var";
 @import "common/popup";
 
-
 @include b(dialog) {
   position: relative;
   margin: 0 auto 50px;
@@ -82,18 +81,13 @@
   @include m(center) {
     text-align: center;
 
-    @include e(header) {
-      padding-top: 30px;
-    }
-
     @include e(body) {
       text-align: initial;
-      padding: 25px ($--dialog-padding-primary + 12px) 30px;
+      padding: 25px ($--dialog-padding-primary + 5px) 30px;
     }
 
     @include e(footer) {
       text-align: inherit;
-      padding-bottom: 30px;
     }
   }
 }
