@@ -81,7 +81,6 @@ import Clickoutside from 'element-ui/src/utils/clickoutside';
 import { formatDate, parseDate, isDateObject, getWeekNumber } from './util';
 import Popper from 'element-ui/src/utils/vue-popper';
 import Emitter from 'element-ui/src/mixins/emitter';
-import Focus from 'element-ui/src/mixins/focus';
 import ElInput from 'element-ui/packages/input';
 import merge from 'element-ui/src/utils/merge';
 
@@ -294,7 +293,7 @@ const validator = function(val) {
 };
 
 export default {
-  mixins: [Emitter, NewPopper, Focus('reference')],
+  mixins: [Emitter, NewPopper],
 
   inject: {
     elFormItem: {
@@ -493,6 +492,14 @@ export default {
   },
 
   methods: {
+    focus() {
+      if (!this.ranged) {
+        this.$refs.reference.focus();
+      } else {
+        this.handleFocus();
+      }
+    },
+
     blur() {
       this.refInput.forEach(input => input.blur());
     },
