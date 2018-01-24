@@ -100,8 +100,10 @@
         this.$el.style.backgroundColor = this.backgroundColor;
       },
       handleClick() {
-        this.dispatch('ElMenu', 'item-click', this);
-        this.$emit('click', this);
+        if (!this.disabled) {
+          this.dispatch('ElMenu', 'item-click', this);
+          this.$emit('click', this);
+        };
       }
     },
     created() {
