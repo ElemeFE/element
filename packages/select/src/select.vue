@@ -47,6 +47,7 @@
         class="el-select__input"
         :class="[selectSize ? `is-${ selectSize }` : '']"
         :disabled="disabled"
+        :autocomplete="autoComplete"
         @focus="handleFocus"
         @click.stop
         @keyup="managePlaceholder"
@@ -70,6 +71,7 @@
       :placeholder="currentPlaceholder"
       :name="name"
       :id="id"
+      :auto-complete="autoComplete"
       :size="selectSize"
       :disabled="disabled"
       :readonly="!filterable || multiple"
@@ -228,6 +230,10 @@
       id: String,
       value: {
         required: true
+      },
+      autoComplete: {
+        type: String,
+        default: 'off'
       },
       size: String,
       disabled: Boolean,
