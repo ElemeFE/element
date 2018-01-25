@@ -38,7 +38,7 @@
     },
     watch: {
       rules() {
-        this.validate();
+        this.validate(()=>{});
       }
     },
     data() {
