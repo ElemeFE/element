@@ -33,7 +33,7 @@
           v-for="item in selected"
           :key="getValueKey(item)"
           :closable="!disabled"
-          size="small"
+          :size="collapseTagSize"
           :hit="item.hitState"
           type="info"
           @close="deleteTag($event, item)"
@@ -581,7 +581,7 @@
           let inputChildNodes = this.$refs.reference.$el.childNodes;
           let input = [].filter.call(inputChildNodes, item => item.tagName === 'INPUT')[0];
           const tags = this.$refs.tags;
-          input.style.height = this.selected.length === 0
+          input.style.height = this.selected.length === 0 || (tags && tags.clientHeight < sizeMap[this.selectSize])
             ? (sizeMap[this.selectSize] || 40) + 'px'
             : Math.max(tags ? (tags.clientHeight + 10) : 0, sizeMap[this.selectSize] || 40) + 'px';
           if (this.visible && this.emptyText !== false) {
