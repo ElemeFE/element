@@ -395,9 +395,17 @@
           //       should allow them to be set individually in the future
           if (this.minDate) {
             this.leftDate = this.minDate;
-            this.rightDate = this.unlinkPanels && this.maxDate
-              ? this.maxDate
-              : nextMonth(this.leftDate);
+            if (this.unlinkPanels && this.maxDate) {
+              const minDateYear = this.minDate.getFullYear();
+              const minDateMonth = this.minDate.getMonth();
+              const maxDateYear = this.maxDate.getFullYear();
+              const maxDateMonth = this.maxDate.getMonth();
+              this.rightDate = minDateYear === maxDateYear && minDateMonth === maxDateMonth
+                ? nextMonth(this.maxDate)
+                : this.maxDate;
+            } else {
+              this.rightDate = nextMonth(this.leftDate);
+            }
           } else {
             this.leftDate = calcDefaultValue(this.defaultValue)[0];
             this.rightDate = nextMonth(this.leftDate);
