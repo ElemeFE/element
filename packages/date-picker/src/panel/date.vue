@@ -333,8 +333,12 @@
       },
 
       changeToNow() {
-        this.date = new Date();
-        this.emit(this.date);
+        // NOTE: not a permanent solution
+        //       consider disable "now" button in the future
+        if (!this.disabledDate || !this.disabledDate(new Date())) {
+          this.date = new Date();
+          this.emit(this.date);
+        }
       },
 
       confirm() {
