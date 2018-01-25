@@ -468,6 +468,7 @@
         if (this.isProduct) {
           arr.unshift('');
         }
+
         return arr;
       }
     },
