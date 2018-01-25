@@ -108,6 +108,7 @@ export default {
                       on-mouseout={ this.handleMouseOut }
                       on-mousedown={ ($event) => this.handleMouseDown($event, column) }
                       on-click={ ($event) => this.handleHeaderClick($event, column) }
+                      on-contextmenu={ ($event) => this.handleHeaderContextMenu($event, column) }
                       style={ this.getHeaderCellStyle(rowIndex, cellIndex, columns, column) }
                       class={ this.getHeaderCellClass(rowIndex, cellIndex, columns, column) }>
                       <div class={ ['cell', column.filteredValue && column.filteredValue.length > 0 ? 'highlight' : '', column.labelClassName] }>
@@ -373,6 +374,10 @@ export default {
       this.$parent.$emit('header-click', column, event);
     },
 
+    handleHeaderContextMenu(event, column) {
+      this.$parent.$emit('header-contextmenu', column, event);
+    },
+    
     handleMouseDown(event, column) {
       if (this.$isServer) return;
       if (column.children && column.children.length > 0) return;
