@@ -253,6 +253,8 @@
 
       hasListMenu: Boolean, // 左侧是否有操作
 
+      isProduct: Boolean, // 是否为产品列表
+
       filterArray: Array, // 被过滤掉的字段
 
       advanced: Boolean // 是否开启高级筛选
@@ -459,11 +461,14 @@
           return this.filterArray.indexOf(item.attr) === -1;
         });
         if (this.hasListMenu) {
-          let a = [''];
-          return a.concat(arr);
-        } else {
-          return arr;
+          arr.unshift('');
         }
+
+        // 如果是产品列表页，左侧会有展开的箭头，所以要加一列
+        if (this.isProduct) {
+          arr.unshift('');
+        }
+        return arr;
       }
     },
 
