@@ -33,7 +33,7 @@
           v-for="item in selected"
           :key="getValueKey(item)"
           :closable="!disabled"
-          size="small"
+          :size="collapseTagSize"
           :hit="item.hitState"
           type="info"
           @close="deleteTag($event, item)"
@@ -581,9 +581,13 @@
           let inputChildNodes = this.$refs.reference.$el.childNodes;
           let input = [].filter.call(inputChildNodes, item => item.tagName === 'INPUT')[0];
           const tags = this.$refs.tags;
+          const sizeInMap = sizeMap[this.selectSize] || 40;
           input.style.height = this.selected.length === 0
-            ? (sizeMap[this.selectSize] || 40) + 'px'
-            : Math.max(tags ? (tags.clientHeight + 10) : 0, sizeMap[this.selectSize] || 40) + 'px';
+            ? sizeInMap + 'px'
+            : Math.max(
+              tags ? (tags.clientHeight + (tags.clientHeight > sizeInMap ? 6 : 0)) : 0,
+              sizeInMap
+            ) + 'px';
           if (this.visible && this.emptyText !== false) {
             this.broadcast('ElSelectDropdown', 'updatePopper');
           }

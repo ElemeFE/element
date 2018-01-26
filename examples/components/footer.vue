@@ -10,7 +10,7 @@
         <a href="https://github.com/ElementUI/element-theme" class="footer-main-link" target="_blank">{{ langConfig.theme }}</a>
         <a href="https://github.com/ElementUI/theme-chalk-preview" class="footer-main-link" target="_blank">{{ langConfig.preview }}</a>
         <a href="https://github.com/eleme/element-react" class="footer-main-link" target="_blank">Element-React</a>
-        <a href="https://github.com/eleme/element-angular" class="footer-main-link" target="_blank">Element-Angular</a>
+        <a href="https://github.com/ElemeFE/element-angular" class="footer-main-link" target="_blank">Element-Angular</a>
       </div>
       <div class="footer-main">
         <h4>{{ langConfig.community }}</h4>

@@ -39,7 +39,7 @@
 - [Customize theme](http://element.eleme.io/#/en-US/component/custom-theme)
 - [Preview and generate theme online](https://elementui.github.io/theme-chalk-preview)
 - [Element for React](https://github.com/eleme/element-react)
-- [Element for Angular](https://github.com/eleme/element-angular)
+- [Element for Angular](https://github.com/ElemeFE/element-angular)
 - [Atom helper](https://github.com/ElemeFE/element-helper)
 - Starter kit
   - [element-starter](https://github.com/ElementUI/element-starter)
