@@ -121,7 +121,7 @@ export default {
         ? this.space + 'px'
         : this.space
           ? this.space
-          : 100 / (len - 1) + '%');
+          : 100 / (len - (this.isCenter ? 0 : 1)) + '%');
       style.flexBasis = space;
       if (this.isVertical) return style;
       if (this.isLast) {
