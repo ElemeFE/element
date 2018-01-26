@@ -12,7 +12,7 @@
     }, tableSize ? `el-table--${ tableSize }` : '']"
     @mouseleave="handleMouseLeave($event)">
     <div class="hidden-columns" ref="hiddenColumns"><slot></slot></div>
-    <div class="el-table__header-wrapper" ref="headerWrapper" v-if="showHeader">
+    <div class="el-table__header-wrapper" ref="headerWrapper" v-if="showHeader" v-mousewheel="handleHeaderFooterMousewheel">
       <table-header
         ref="tableHeader"
         :store="store"
@@ -44,7 +44,7 @@
         <slot name="append"></slot>
       </div>
     </div>
-    <div class="el-table__footer-wrapper" ref="footerWrapper" v-if="showSummary" v-show="data && data.length > 0">
+    <div class="el-table__footer-wrapper" ref="footerWrapper" v-if="showSummary" v-show="data && data.length > 0" v-mousewheel="handleHeaderFooterMousewheel">
       <table-footer
         :store="store"
         :layout="layout"
@@ -57,6 +57,7 @@
     </div>
     <div class="el-table__fixed" ref="fixedWrapper"
       v-if="fixedColumns.length > 0"
+      v-mousewheel="handleFixedMousewheel"
       :style="[
         { width: layout.fixedWidth ? layout.fixedWidth + 'px' : '' },
         fixedHeight
@@ -102,6 +103,7 @@
     </div>
     <div class="el-table__fixed-right" ref="rightFixedWrapper"
       v-if="rightFixedColumns.length > 0"
+      v-mousewheel="handleFixedMousewheel"
       :style="[
         { width: layout.rightFixedWidth ? layout.rightFixedWidth + 'px' : '' },
         { right: layout.scrollY ? (border ? layout.gutterWidth : (layout.gutterWidth || 0)) + 'px' : '' },
@@ -155,6 +157,7 @@
   import throttle from 'throttle-debounce/throttle';
   import debounce from 'throttle-debounce/debounce';
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
+  import Mousewheel from 'element-ui/src/directives/mousewheel';
   import Locale from 'element-ui/src/mixins/locale';
   import Migrating from 'element-ui/src/mixins/migrating';
   import TableStore from './table-store';
@@ -162,7 +165,6 @@
   import TableBody from './table-body';
   import TableHeader from './table-header';
   import TableFooter from './table-footer';
-  import { mousewheel } from './util';
 
   let tableIdSeed = 1;
 
@@ -170,6 +172,10 @@
     name: 'ElTable',
 
     mixins: [Locale, Migrating],
+
+    directives: {
+      Mousewheel
+    },
 
     props: {
       data: {
@@ -294,10 +300,35 @@
         this.layout.updateScrollY();
       },
 
+      handleFixedMousewheel(event, data) {
+        const bodyWrapper = this.bodyWrapper;
+        if (Math.abs(data.spinY) > 0) {
+          const currentScrollTop = bodyWrapper.scrollTop;
+          if (data.pixelY < 0 && currentScrollTop !== 0) {
+            event.preventDefault();
+          }
+          if (data.pixelY > 0 && bodyWrapper.scrollHeight - bodyWrapper.clientHeight > currentScrollTop) {
+            event.preventDefault();
+          }
+          bodyWrapper.scrollTop += Math.ceil(data.pixelY / 5);
+        } else {
+          bodyWrapper.scrollLeft += Math.ceil(data.pixelX / 5);
+        }
+      },
+
+      handleHeaderFooterMousewheel(event, data) {
+        const { pixelX, pixelY } = data;
+        if (Math.abs(pixelX) >= Math.abs(pixelY)) {
+          event.preventDefault();
+          this.bodyWrapper.scrollLeft += data.pixelX / 5;
+        }
+      },
+
       bindEvents() {
         const { headerWrapper, footerWrapper } = this.$refs;
         const refs = this.$refs;
         let self = this;
+
         this.bodyWrapper.addEventListener('scroll', function() {
           if (headerWrapper) headerWrapper.scrollLeft = this.scrollLeft;
           if (footerWrapper) footerWrapper.scrollLeft = this.scrollLeft;
@@ -313,24 +344,6 @@
             self.scrollPosition = 'middle';
           }
         });
-
-        const scrollBodyWrapper = event => {
-          const { deltaX, deltaY } = event;
-
-          if (Math.abs(deltaX) < Math.abs(deltaY)) return;
-
-          if (deltaX > 0) {
-            this.bodyWrapper.scrollLeft += 10;
-          } else if (deltaX < 0) {
-            this.bodyWrapper.scrollLeft -= 10;
-          }
-        };
-        if (headerWrapper) {
-          mousewheel(headerWrapper, throttle(16, scrollBodyWrapper));
-        }
-        if (footerWrapper) {
-          mousewheel(footerWrapper, throttle(16, scrollBodyWrapper));
-        }
 
         if (this.fit) {
           this.windowResizeListener = throttle(50, () => {
