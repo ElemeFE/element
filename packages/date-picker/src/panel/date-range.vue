@@ -301,7 +301,9 @@
       enableMonthArrow() {
         const nextMonth = (this.leftMonth + 1) % 12;
         const yearOffset = this.leftMonth + 1 >= 12 ? 1 : 0;
-        return this.unlinkPanels && new Date(`${this.leftYear + yearOffset}-${nextMonth + 1}`) < new Date(`${this.rightYear}-${this.rightMonth + 1}`);
+        const leftMonth = nextMonth + 1 >= 10 ? nextMonth + 1 : '0' + (nextMonth + 1);
+        const rightMonth = this.rightMonth + 1 >= 10 ? this.rightMonth + 1 : '0' + (this.rightMonth + 1);
+        return this.unlinkPanels && new Date(`${this.leftYear + yearOffset}-${leftMonth}`) < new Date(`${this.rightYear}-${rightMonth}`);
       },
 
       enableYearArrow() {
