@@ -1,6 +1,55 @@
 @import "mixins/mixins";
 @import "common/var";
 
+@include b(textarea) {
+  display: inline-block;
+  width: 100%;
+  vertical-align: bottom;
+  font-size: $--font-size-base;
+
+  @include e(inner) {
+    display: block;
+    resize: vertical;
+    padding: 5px 15px;
+    line-height: 1.5;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: inherit;
+    color: $--input-color;
+    background-color: $--input-fill;
+    background-image: none;
+    border: $--input-border;
+    border-radius: $--input-border-radius;
+    transition: $--border-transition-base;
+
+    &::placeholder {
+      color: $--input-placeholder-color;
+    }
+
+    &:hover {
+      border-color: $--input-hover-border;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $--input-focus-border;
+    }
+  }
+
+  @include when(disabled) {
+    .el-textarea__inner {
+      background-color: $--input-disabled-fill;
+      border-color: $--input-disabled-border;
+      color: $--input-disabled-color;
+      cursor: not-allowed;
+
+      &::placeholder {
+        color: $--input-disabled-placeholder-color;
+      }
+    }
+  }
+}
+
 @include b(input) {
   position: relative;
   font-size: $--font-size-base;
@@ -245,55 +294,6 @@
     }
     .el-select .el-input.is-focus .el-input__inner {
       border-color: transparent;
-    }
-  }
-}
-
-@include b(textarea) {
-  display: inline-block;
-  width: 100%;
-  vertical-align: bottom;
-  font-size: $--font-size-base;
-
-  @include e(inner) {
-    display: block;
-    resize: vertical;
-    padding: 5px 15px;
-    line-height: 1.5;
-    box-sizing: border-box;
-    width: 100%;
-    font-size: inherit;
-    color: $--input-color;
-    background-color: $--input-fill;
-    background-image: none;
-    border: $--input-border;
-    border-radius: $--input-border-radius;
-    transition: $--border-transition-base;
-
-    &::placeholder {
-      color: $--input-placeholder-color;
-    }
-
-    &:hover {
-      border-color: $--input-hover-border;
-    }
-
-    &:focus {
-      outline: none;
-      border-color: $--input-focus-border;
-    }
-  }
-
-  @include when(disabled) {
-    .el-textarea__inner {
-      background-color: $--input-disabled-fill;
-      border-color: $--input-disabled-border;
-      color: $--input-disabled-color;
-      cursor: not-allowed;
-
-      &::placeholder {
-        color: $--input-disabled-placeholder-color;
-      }
     }
   }
 }
