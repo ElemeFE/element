@@ -405,6 +405,15 @@ TableStore.prototype.toggleRowExpansion = function(row, expanded) {
   }
 };
 
+TableStore.prototype.isRowExpanded = function(row) {
+  const { expandRows = [], rowKey } = this.states;
+  if (rowKey) {
+    const expandMap = getKeysMap(expandRows, rowKey);
+    return !!expandMap[getRowIdentity(row, rowKey)];
+  }
+  return expandRows.indexOf(row) !== -1;
+};
+
 TableStore.prototype.cleanSelection = function() {
   const selection = this.states.selection || [];
   const data = this.states.data;

@@ -116,7 +116,7 @@ export default {
                   !this.fixed && this.layout.scrollY && this.layout.gutterWidth ? <td class="gutter" /> : ''
                 }
               </tr>,
-              this.store.states.expandRows.indexOf(row) > -1
+              this.store.isRowExpanded(row)
                 ? (<tr>
                   <td colspan={ this.columns.length } class="el-table__expanded-cell">
                     { this.table.renderExpanded ? this.table.renderExpanded(h, { row, $index, store: this.store }) : ''}
