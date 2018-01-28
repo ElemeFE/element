@@ -1144,6 +1144,32 @@ describe('DatePicker', () => {
       }, DELAY);
     });
 
+    it('type:daterange unlink:true', done => {
+      vm = createVue({
+        template: '<el-date-picker type="daterange" unlink-panels v-model="value" ref="compo" />',
+        data() {
+          return {
+            value: [new Date(2000, 9, 1), new Date(2000, 9, 2)]
+          };
+        }
+      }, true);
+
+      const rangePicker = vm.$refs.compo;
+      const inputs = rangePicker.$el.querySelectorAll('input');
+      setTimeout(_ => {
+        inputs[0].focus();
+        setTimeout(_ => {
+          const panels = rangePicker.picker.$el.querySelectorAll('.el-date-range-picker__content');
+          const left = panels[0].querySelector('.el-date-range-picker__header');
+          const right = panels[1].querySelector('.is-right .el-date-range-picker__header');
+          const leftText = left.textContent.match(/\d+/g).map(i => Number(i));
+          const rightText = right.textContent.match(/\d+/g).map(i => Number(i));
+          expect(rightText[1] - leftText[1]).to.equal(1); // one month
+          done();
+        }, DELAY);
+      }, DELAY);
+    });
+
     it('unlink panels', done => {
       vm = createTest(DatePicker, {
         type: 'daterange',
