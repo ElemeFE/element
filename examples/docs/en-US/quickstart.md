@@ -165,7 +165,7 @@ Then edit .babelrc:
   "presets": [
     ["es2015", { "modules": false }]
   ],
-  "plugins": [["component",{
+  "plugins": [["component", {
       "libraryName": "element-ui",
       "styleLibraryName": "theme-default"
     }
