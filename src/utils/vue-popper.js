@@ -16,6 +16,10 @@ const stop = e => e.stopPropagation();
  */
 export default {
   props: {
+    transformOrigin: {
+      type: [Boolean, String],
+      default: true
+    },
     placement: {
       type: String,
       default: 'bottom'
@@ -31,6 +35,10 @@ export default {
     },
     value: Boolean,
     visibleArrow: Boolean,
+    arrowOffset: {
+      type: Number,
+      default: 35
+    },
     transition: String,
     appendToBody: {
       type: Boolean,
@@ -95,6 +103,7 @@ export default {
 
       options.placement = this.currentPlacement;
       options.offset = this.offset;
+      options.arrowOffset = this.arrowOffset;
       this.popperJS = new PopperJS(reference, popper, options);
       this.popperJS.onCreate(_ => {
         this.$emit('created', this);
@@ -109,7 +118,15 @@ export default {
     },
 
     updatePopper() {
-      this.popperJS ? this.popperJS.update() : this.createPopper();
+      const popperJS = this.popperJS;
+      if (popperJS) {
+        popperJS.update();
+        if (popperJS._popper) {
+          popperJS._popper.style.zIndex = PopupManager.nextZIndex();
+        }
+      } else {
+        this.createPopper();
+      }
     },
 
     doDestroy() {
@@ -126,6 +143,7 @@ export default {
     },
 
     resetTransformOrigin() {
+      if (!this.transformOrigin) return;
       let placementMap = {
         top: 'bottom',
         bottom: 'top',
@@ -134,7 +152,9 @@ export default {
       };
       let placement = this.popperJS._popper.getAttribute('x-placement').split('-')[0];
       let origin = placementMap[placement];
-      this.popperJS._popper.style.transformOrigin = ['top', 'bottom'].indexOf(placement) > -1 ? `center ${ origin }` : `${ origin } center`;
+      this.popperJS._popper.style.transformOrigin = typeof this.transformOrigin === 'string'
+        ? this.transformOrigin
+        : ['top', 'bottom'].indexOf(placement) > -1 ? `center ${ origin }` : `${ origin } center`;
     },
 
     appendArrow(element) {

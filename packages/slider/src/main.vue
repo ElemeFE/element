@@ -1,16 +1,24 @@
 <template>
   <div class="el-slider"
-    :class="{ 'is-vertical': vertical, 'el-slider--with-input': showInput }">
+    :class="{ 'is-vertical': vertical, 'el-slider--with-input': showInput }"
+     role="slider"
+     :aria-valuemin="min"
+     :aria-valuemax="max"
+     :aria-orientation="vertical ? 'vertical': 'horizontal'"
+     :aria-disabled="disabled"
+  >
     <el-input-number
       v-model="firstValue"
       v-if="showInput && !range"
       class="el-slider__input"
       ref="input"
+      @change="$nextTick(emitChange)"
       :step="step"
       :disabled="disabled"
       :controls="showInputControls"
       :min="min"
       :max="max"
+      :debounce="debounce"
       size="small">
     </el-input-number>
     <div class="el-slider__runway"
@@ -46,7 +54,6 @@
 <script type="text/babel">
   import ElInputNumber from 'element-ui/packages/input-number';
   import SliderButton from './button.vue';
-  import { getStyle } from 'element-ui/src/utils/dom';
   import Emitter from 'element-ui/src/mixins/emitter';
 
   export default {
@@ -102,6 +109,13 @@
       },
       height: {
         type: String
+      },
+      debounce: {
+        type: Number,
+        default: 300
+      },
+      label: {
+        type: String
       }
     },
 
@@ -115,7 +129,8 @@
         firstValue: null,
         secondValue: null,
         oldValue: null,
-        dragging: false
+        dragging: false,
+        sliderSize: 1
       };
     },
 
@@ -183,7 +198,6 @@
             this.firstValue = val[0];
             this.secondValue = val[1];
             if (this.valueChanged()) {
-              this.$emit('change', [this.minValue, this.maxValue]);
               this.dispatch('ElFormItem', 'el.form.change', [this.minValue, this.maxValue]);
               this.oldValue = val.slice();
             }
@@ -196,7 +210,6 @@
           } else {
             this.firstValue = val;
             if (this.valueChanged()) {
-              this.$emit('change', val);
               this.dispatch('ElFormItem', 'el.form.change', val);
               this.oldValue = val;
             }
@@ -221,22 +234,38 @@
 
       onSliderClick(event) {
         if (this.disabled || this.dragging) return;
+        this.resetSize();
         if (this.vertical) {
           const sliderOffsetBottom = this.$refs.slider.getBoundingClientRect().bottom;
-          this.setPosition((sliderOffsetBottom - event.clientY) / this.$sliderSize * 100);
+          this.setPosition((sliderOffsetBottom - event.clientY) / this.sliderSize * 100);
         } else {
           const sliderOffsetLeft = this.$refs.slider.getBoundingClientRect().left;
-          this.setPosition((event.clientX - sliderOffsetLeft) / this.$sliderSize * 100);
+          this.setPosition((event.clientX - sliderOffsetLeft) / this.sliderSize * 100);
         }
+        this.emitChange();
+      },
+
+      resetSize() {
+        if (this.$refs.slider) {
+          this.sliderSize = this.$refs.slider[`client${ this.vertical ? 'Height' : 'Width' }`];
+        }
+      },
+
+      emitChange() {
+        this.$nextTick(() => {
+          this.$emit('change', this.range ? [this.minValue, this.maxValue] : this.value);
+        });
       }
     },
 
     computed: {
-      $sliderSize() {
-        return parseInt(getStyle(this.$refs.slider, (this.vertical ? 'height' : 'width')), 10);
-      },
-
       stops() {
+        if (!this.showStops) return [];
+        if (this.step === 0) {
+          process.env.NODE_ENV !== 'production' &&
+          console.warn('[Element Warn][Slider]step should not be 0.');
+          return [];
+        }
         const stopCount = (this.max - this.min) / this.step;
         const stepWidth = 100 * this.step / (this.max - this.min);
         const result = [];
@@ -298,6 +327,7 @@
     },
 
     mounted() {
+      let valuetext;
       if (this.range) {
         if (Array.isArray(this.value)) {
           this.firstValue = Math.max(this.min, this.value[0]);
@@ -307,6 +337,7 @@
           this.secondValue = this.max;
         }
         this.oldValue = [this.firstValue, this.secondValue];
+        valuetext = `${this.firstValue}-${this.secondValue}`;
       } else {
         if (typeof this.value !== 'number' || isNaN(this.value)) {
           this.firstValue = this.min;
@@ -314,7 +345,19 @@
           this.firstValue = Math.min(this.max, Math.max(this.min, this.value));
         }
         this.oldValue = this.firstValue;
+        valuetext = this.firstValue;
       }
+      this.$el.setAttribute('aria-valuetext', valuetext);
+
+      // label screen reader
+      this.$el.setAttribute('aria-label', this.label ? this.label : `slider between ${this.min} and ${this.max}`);
+
+      this.resetSize();
+      window.addEventListener('resize', this.resetSize);
+    },
+
+    beforeDestroy() {
+      window.removeEventListener('resize', this.resetSize);
     }
   };
 </script>

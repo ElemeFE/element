@@ -1,3 +1,53 @@
+<style>
+  .demo-pagination .source.first {
+    padding: 0;
+  }
+
+  .demo-pagination .first .block {
+    padding: 30px 0;
+    text-align: center;
+    border-right: solid 1px #EFF2F6;
+    display: inline-block;
+    width: 50%;
+    box-sizing: border-box;
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  .demo-pagination .first .demonstration {
+    display: block;
+    color: #8492a6;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  .demo-pagination .source.last {
+    padding: 0;
+  }
+
+  .demo-pagination .last .block {
+    padding: 30px 24px;
+    border-bottom: solid 1px #EFF2F6;
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .demo-pagination .last .demonstration {
+    font-size: 14px;
+    color: #8492a6;
+    line-height: 44px;
+  }
+
+  .demo-pagination .last .demonstration + .el-pagination {
+    float: right;
+    width: 70%;
+    margin: 5px 20px 0 0;
+  }
+</style>
+
 ## Pagination
 
 If you have too much data to display in one page, use pagination.
@@ -20,6 +70,18 @@ If you have too much data to display in one page, use pagination.
     :total="1000">
   </el-pagination>
 </div>
+```
+:::
+
+### Buttons with background color
+
+:::demo Set the `background` attribute and the buttons will have a background color.
+```html
+<el-pagination
+  background
+  layout="prev, pager, next"
+  :total="1000">
+</el-pagination>
 ```
 :::
 
@@ -149,12 +211,16 @@ Add more modules based on your scenario.
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |--------------------|----------------------------------------------------------|-------------------|-------------|--------|
 | small              |   whether to use small pagination    | boolean |      —       | false |
+| background | whether the buttons have a background color | Boolean | — | false |
 | page-size              | item count of each page  | number |      —       | 10 |
 | total | total item count | number | — | — |
 | page-count | total page count. Set either `total` or `page-count` and pages will be displayed; if you need `page-sizes`, `total` is required | number | — | — |
 | current-page | current page number, supports the .sync modifier | number | — | 1 |
 | layout | layout of Pagination, elements separated with a comma | string | `sizes`, `prev`, `pager`, `next`, `jumper`, `->`, `total`, `slot` | 'prev, pager, next, jumper, ->, total'  |
 | page-sizes | options of item count per page | number[] | — |  [10, 20, 30, 40, 50, 100] |
+| popper-class | custom class name for the page size Select's dropdown | string | — | — |
+| prev-text | text for the prev button | string | — | — |
+| next-text | text for the next button | string | — | — |
 
 ### Events
 | Event Name | Description | Parameters |

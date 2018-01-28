@@ -10,13 +10,62 @@
     }
   }
 </script>
+<style>
+  .demo-carousel .block {
+    padding: 30px;
+    text-align: center;
+    border-right: solid 1px #EFF2F6;
+    display: inline-block;
+    width: 50%;
+    box-sizing: border-box;
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  .demo-carousel .demonstration {
+    display: block;
+    color: #8492a6;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  .demo-carousel .el-carousel__container {
+    text-align: center;
+  }
+
+  .demo-carousel .el-carousel__item {
+    h3 {
+      color: #fff;
+      font-size: 18px;
+      line-height: 300px;
+      margin: 0;
+    }
+    &:nth-child(2n) {
+      background-color: #99a9bf;
+    }
+    &:nth-child(2n+1) {
+      background-color: #d3dce6;
+    }
+  }
+
+  .demo-carousel .small h3 {
+    font-size: 14px;
+    line-height: 150px;
+  }
+
+  .demo-carousel .medium h3 {
+    font-size: 14px;
+    line-height: 200px;
+  }
+</style>
 ## Carousel
 
 Loop a series of images or texts in a limited space
 
 ### Basic usage
 
-::: demo Combine `el-carousel` with `el-carousel-item`, and you'll get a carousel. Content of each slide is completely customizable, and you just need to place it inside  `el-carousel-item` tag. By default the carousel switches when mouse hovers over an indicator. Set `trigger` to `click`, and the carousel switches only when an indicator is clicked.
+:::demo Combine `el-carousel` with `el-carousel-item`, and you'll get a carousel. Content of each slide is completely customizable, and you just need to place it inside  `el-carousel-item` tag. By default the carousel switches when mouse hovers over an indicator. Set `trigger` to `click`, and the carousel switches only when an indicator is clicked.
 ```html
 <template>
   <div class="block">
@@ -45,11 +94,11 @@ Loop a series of images or texts in a limited space
     line-height: 150px;
     margin: 0;
   }
-  
+
   .el-carousel__item:nth-child(2n) {
     background-color: #99a9bf;
   }
-  
+
   .el-carousel__item:nth-child(2n+1) {
     background-color: #d3dce6;
   }
@@ -61,7 +110,7 @@ Loop a series of images or texts in a limited space
 
 Indicators can be displayed outside the carousel
 
-::: demo The `indicator-position` attribute determines where the indicators are located. By default they are inside the carousel, and setting `indicator-position` to `outside` moves them outside; setting `indicator-position` to `none` hides the indicators.
+:::demo The `indicator-position` attribute determines where the indicators are located. By default they are inside the carousel, and setting `indicator-position` to `outside` moves them outside; setting `indicator-position` to `none` hides the indicators.
 ```html
 <template>
   <el-carousel indicator-position="outside">
@@ -79,11 +128,11 @@ Indicators can be displayed outside the carousel
     line-height: 300px;
     margin: 0;
   }
-  
+
   .el-carousel__item:nth-child(2n) {
     background-color: #99a9bf;
   }
-  
+
   .el-carousel__item:nth-child(2n+1) {
     background-color: #d3dce6;
   }
@@ -95,7 +144,7 @@ Indicators can be displayed outside the carousel
 
 You can define when arrows are displayed
 
-::: demo The `arrow` attribute determines when arrows are displayed. By default they appear when mouse hovers over the carousel. Setting `arrow` to `always` or `never` shows/hides the arrows permanently.
+:::demo The `arrow` attribute determines when arrows are displayed. By default they appear when mouse hovers over the carousel. Setting `arrow` to `always` or `never` shows/hides the arrows permanently.
 ```html
 <template>
   <el-carousel :interval="5000" arrow="always">
@@ -113,11 +162,11 @@ You can define when arrows are displayed
     line-height: 300px;
     margin: 0;
   }
-  
+
   .el-carousel__item:nth-child(2n) {
     background-color: #99a9bf;
   }
-  
+
   .el-carousel__item:nth-child(2n+1) {
     background-color: #d3dce6;
   }
@@ -129,7 +178,7 @@ You can define when arrows are displayed
 
 When a page is wide enough but has limited height, you can activate card mode for carousels
 
-::: demo Setting `type` to `card` activates the card mode. Apart from the appearance, the biggest difference between card mode and common mode is that clicking the slides at both sides directly switches the carousel in card mode.
+:::demo Setting `type` to `card` activates the card mode. Apart from the appearance, the biggest difference between card mode and common mode is that clicking the slides at both sides directly switches the carousel in card mode.
 ```html
 <template>
   <el-carousel :interval="4000" type="card" height="200px">
@@ -147,11 +196,11 @@ When a page is wide enough but has limited height, you can activate card mode fo
     line-height: 200px;
     margin: 0;
   }
-  
+
   .el-carousel__item:nth-child(2n) {
     background-color: #99a9bf;
   }
-  
+
   .el-carousel__item:nth-child(2n+1) {
     background-color: #d3dce6;
   }

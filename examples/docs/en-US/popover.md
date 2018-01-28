@@ -1,3 +1,17 @@
+<style>
+  .demo-box.demo-popover {
+    .el-popover + .el-popover {
+      margin-left: 10px;
+    }
+    .el-input {
+      width: 360px;
+    }
+    .el-button {
+      margin-left: 10px;
+    }
+  }
+</style>
+
 <script>
   export default {
     data() {
@@ -219,6 +233,7 @@ Of course, you can nest other operations. It's more light-weight than using a di
 |  visible-arrow   |  whether a tooltip arrow is displayed or not. For more info, please refer to [Vue-popper](https://github.com/element-component/vue-popper) | boolean | — | true |
 |  popper-options        | parameters for [popper.js](https://popper.js.org/documentation.html) | object            | please refer to [popper.js](https://popper.js.org/documentation.html) | `{ boundariesElement: 'body', gpuAcceleration: false }` |
 |  popper-class        |  custom class name for popover | string | — | — |
+|  open-delay        | delay of appearance when `trigger` is hover, in milliseconds | number | — | — |
 
 ### Slot
 | Name | Description |

@@ -1,0 +1,96 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(loading-parent) {
+  @include m(relative) {
+    position: relative !important;
+  }
+
+  @include m(hidden) {
+    overflow: hidden !important;
+  }
+}
+
+@include b(loading-mask) {
+  position: absolute;
+  z-index: 10000;
+  background-color: rgba(255, 255, 255, .9);
+  margin: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transition: opacity 0.3s;
+
+  @include when(fullscreen) {
+    position: fixed;
+
+    .el-loading-spinner {
+      margin-top: #{- $--loading-fullscreen-spinner-size / 2};
+
+      .circular {
+        height: $--loading-fullscreen-spinner-size;
+        width: $--loading-fullscreen-spinner-size;
+      }
+    }
+  }
+}
+
+@include b(loading-spinner) {
+  top: 50%;
+  margin-top: #{- $--loading-spinner-size / 2};
+  width: 100%;
+  text-align: center;
+  position: absolute;
+
+  .el-loading-text {
+    color: $--color-primary;
+    margin: 3px 0;
+    font-size: 14px;
+  }
+
+  .circular {
+    height: $--loading-spinner-size;
+    width: $--loading-spinner-size;
+    animation: loading-rotate 2s linear infinite;
+  }
+
+  .path {
+    animation: loading-dash 1.5s ease-in-out infinite;
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: 0;
+    stroke-width: 2;
+    stroke: $--color-primary;
+    stroke-linecap: round;
+  }
+
+  i {
+    color: $--color-primary;
+  }
+}
+
+.el-loading-fade-enter,
+.el-loading-fade-leave-active {
+  opacity: 0;
+}
+
+@keyframes loading-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loading-dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -40px;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -120px;
+  }
+}

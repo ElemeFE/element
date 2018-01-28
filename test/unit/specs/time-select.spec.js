@@ -27,7 +27,6 @@ describe('TimeSelect', () => {
       expect(vm.picker.end).to.equal('18:30');
       expect(vm.picker.step).to.equal('00:15');
       expect(vm.$el.querySelector('input').getAttribute('placeholder')).to.equal('test');
-      destroyVM(vm);
       done();
     });
   });
@@ -60,7 +59,6 @@ describe('TimeSelect', () => {
       target.click();
       Vue.nextTick(_ => {
         expect(vm.value).to.equal(time);
-        destroyVM(vm);
         done();
       });
     });
@@ -79,7 +77,6 @@ describe('TimeSelect', () => {
       expect(input.value).to.equal('14:30');
       expect(vm.picker.$el.querySelector('.selected')).to.be.ok;
       expect(vm.picker.$el.querySelector('.selected').textContent).to.equal('14:30');
-      destroyVM(vm);
       done();
     }, 50);
   });
@@ -104,7 +101,6 @@ describe('TimeSelect', () => {
       const elm = elms[elms.length - 1];
 
       expect(elm.textContent).to.equal('14:30');
-      destroyVM(vm);
       done();
     }, 50);
   });
@@ -134,8 +130,7 @@ describe('TimeSelect', () => {
       vm.value = '10:30';
 
       setTimeout(_ => {
-        expect(picker.picker.value).to.equal('09:30');
-        destroyVM(vm);
+        expect(picker.picker.value).to.equal('10:30');
         done();
       }, 50);
     }, 50);
@@ -161,7 +156,6 @@ describe('TimeSelect', () => {
       const elm = picker.picker.$el.querySelector('.disabled');
 
       expect(elm.textContent).to.equal('14:30');
-      destroyVM(vm);
       done();
     }, 50);
   });
@@ -191,11 +185,59 @@ describe('TimeSelect', () => {
       vm.value = '10:30';
 
       setTimeout(_ => {
-        expect(picker.picker.value).to.equal('09:30');
-        destroyVM(vm);
+        expect(picker.picker.value).to.equal('10:30');
         done();
       }, 50);
     }, 50);
   });
 
+  it('event focus and blur', done => {
+    vm = createVue({
+      template: `
+        <el-time-select
+          ref="picker"
+          :picker-options="{
+            start: '08:30',
+            step: '00:15',
+            end: '18:30'
+          }"
+          placeholder="选择时间">
+        </el-time-select>
+      `
+    }, true);
+
+    const spyFocus = sinon.spy();
+    const spyBlur = sinon.spy();
+
+    vm.$refs.picker.$on('focus', spyFocus);
+    vm.$refs.picker.$on('blur', spyBlur);
+    vm.$el.querySelector('input').focus();
+
+    vm.$nextTick(_ => {
+      expect(spyFocus.calledOnce).to.be.true;
+      vm.$refs.picker.pickerVisible = false;
+      vm.$nextTick(_ => {
+        expect(spyBlur.calledOnce).to.be.true;
+        done();
+      });
+    });
+  });
+
+  it('focus', done => {
+    vm = createVue({
+      template: `
+        <el-time-select ref="picker"></el-time-select>
+      `
+    }, true);
+
+    const spy = sinon.spy();
+
+    vm.$refs.picker.$on('focus', spy);
+    vm.$refs.picker.focus();
+
+    vm.$nextTick(_ => {
+      expect(spy.calledOnce).to.be.true;
+      done();
+    });
+  });
 });

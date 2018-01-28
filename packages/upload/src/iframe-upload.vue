@@ -33,7 +33,9 @@ export default {
     },
     drag: Boolean,
     listType: String,
-    disabled: Boolean
+    disabled: Boolean,
+    limit: Number,
+    onExceed: Function
   },
 
   data() {
@@ -61,6 +63,11 @@ export default {
       }
     },
     uploadFiles(file) {
+      if (this.limit && this.$parent.uploadFiles.length + file.length > this.limit) {
+        this.onExceed && this.onExceed(this.fileList);
+        return;
+      }
+
       if (this.submitting) return;
       this.submitting = true;
       this.file = file;
@@ -150,8 +157,8 @@ export default {
         </form>
         {
           drag
-          ? <upload-dragger on-file={uploadFiles} disabled={disabled}>{this.$slots.default}</upload-dragger>
-          : this.$slots.default
+            ? <upload-dragger on-file={uploadFiles} disabled={disabled}>{this.$slots.default}</upload-dragger>
+            : this.$slots.default
         }
       </div>
     );

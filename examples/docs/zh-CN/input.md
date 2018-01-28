@@ -1,18 +1,4 @@
 <script>
-  import Vue from 'vue';
-  Vue.component('my-item-zh', {
-    functional: true,
-    render: function (h, ctx) {
-      var item = ctx.props.item;
-      return h('li', ctx.data, [
-        h('div', { attrs: { class: 'name' } }, [item.value]),
-        h('span', { attrs: { class: 'addr' } }, [item.address])
-      ]);
-    },
-    props: {
-      item: { type: Object, required: true }
-    }
-  });
   export default {
     data() {
       return {
@@ -20,6 +6,9 @@
         input: '',
         input1: '',
         input2: '',
+        input21: '',
+        input22: '',
+        input23: '',
         input3: '',
         input4: '',
         input5: '',
@@ -27,6 +16,7 @@
         input7: '',
         input8: '',
         input9: '',
+        input10: '',
         textarea: '',
         textarea2: '',
         textarea3: '',
@@ -107,7 +97,7 @@
       },
       createStateFilter(queryString) {
         return (state) => {
-          return (state.value.indexOf(queryString.toLowerCase()) === 0);
+          return (state.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
         };
       },
       handleSelect(item) {
@@ -126,7 +116,7 @@
 <style>
   .demo-input.demo-zh-CN {
     .el-select .el-input {
-      width: 110px;
+      width: 130px;
     }
     .el-input {
       width: 180px;
@@ -142,6 +132,9 @@
         vertical-align: top;
         margin: 0 10px 10px 0;
       }
+    }
+    .input-with-select .el-input-group__prepend {
+      background-color: #fff;
     }
     .demo-autocomplete {
       text-align: center;
@@ -179,6 +172,12 @@
       }
     }
   }
+  .demo-input-suffix {
+    margin-bottom: 15px;
+    .el-input {
+      margin-right: 15px;
+    }
+  }
 </style>
 
 ## Input 输入框
@@ -187,7 +186,7 @@
 
 ### 基础用法
 
-::: demo
+:::demo
 ```html
 <el-input v-model="input" placeholder="请输入内容"></el-input>
 
@@ -206,7 +205,7 @@ export default {
 
 ### 禁用状态
 
-::: demo 通过 `disabled` 属性指定是否禁用 input 组件
+:::demo 通过 `disabled` 属性指定是否禁用 input 组件
 ```html
 <el-input
   placeholder="请输入内容"
@@ -226,29 +225,70 @@ export default {
 ```
 :::
 
+### 可清空
+
+:::demo 使用`clearable`属性即可得到一个可清空的输入框
+
+```html
+<el-input
+  placeholder="请输入内容"
+  v-model="input10"
+  clearable>
+</el-input>
+
+<script>
+  export default {
+    data() {
+      return {
+        input10: ''
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### 带 icon 的输入框
 
 带有图标标记输入类型
 
-::: demo 可以通过 `icon` 属性在 input 组件尾部增加显示图标，可以通过 `on-icon-click` 钩子函数来在点击图标后执行需要的逻辑。
+:::demo 可以通过 `prefix-icon` 和 `suffix-icon` 属性在 input 组件首部和尾部增加显示图标，也可以通过 slot 来放置图标。
 ```html
-<el-input
-  placeholder="请选择日期"
-  icon="search"
-  v-model="input2"
-  :on-icon-click="handleIconClick">
-</el-input>
+<div class="demo-input-suffix">
+  属性方式：
+  <el-input
+    placeholder="请选择日期"
+    suffix-icon="el-icon-date"
+    v-model="input2">
+  </el-input>
+  <el-input
+    placeholder="请输入内容"
+    prefix-icon="el-icon-search"
+    v-model="input21">
+  </el-input>
+</div>
+<div class="demo-input-suffix">
+  slot 方式：
+  <el-input
+    placeholder="请选择日期"
+    v-model="input22">
+    <i slot="suffix" class="el-input__icon el-icon-date"></i>
+  </el-input>
+  <el-input
+    placeholder="请输入内容"
+    v-model="input23">
+    <i slot="prefix" class="el-input__icon el-icon-search"></i>
+  </el-input>
+</div>
 
 <script>
 export default {
   data() {
     return {
-      input2: ''
-    }
-  },
-  methods: {
-    handleIconClick(ev) {
-      console.log(ev);
+      input2: '',
+      input21: '',
+      input22: '',
+      input23: ''
     }
   }
 }
@@ -260,7 +300,7 @@ export default {
 
 用于输入多行文本信息，通过将 `type` 属性的值指定为 textarea。
 
-::: demo 文本域高度可通过 `rows` 属性控制
+:::demo 文本域高度可通过 `rows` 属性控制
 ```html
 <el-input
   type="textarea"
@@ -285,7 +325,7 @@ export default {
 
 通过设置 `autosize` 属性可以使得文本域的高度能够根据文本内容自动进行调整，并且 `autosize` 还可以设定为一个对象，指定最小行数和最大行数。
 
-::: demo
+:::demo
 ```html
 <el-input
   type="textarea"
@@ -318,7 +358,7 @@ export default {
 
 可前置或后置元素，一般为标签或按钮
 
-::: demo 可通过 slot 来指定在 input 中前置或者后置内容。
+:::demo 可通过 slot 来指定在 input 中前置或者后置内容。
 ```html
 <div>
   <el-input placeholder="请输入内容" v-model="input3">
@@ -331,18 +371,21 @@ export default {
   </el-input>
 </div>
 <div style="margin-top: 15px;">
-  <el-input placeholder="请输入内容" v-model="input5">
+  <el-input placeholder="请输入内容" v-model="input5" class="input-with-select">
     <el-select v-model="select" slot="prepend" placeholder="请选择">
       <el-option label="餐厅名" value="1"></el-option>
       <el-option label="订单号" value="2"></el-option>
       <el-option label="用户电话" value="3"></el-option>
     </el-select>
-    <el-button slot="append" icon="search"></el-button>
+    <el-button slot="append" icon="el-icon-search"></el-button>
   </el-input>
 </div>
 <style>
   .el-select .el-input {
-    width: 110px;
+    width: 130px;
+  }
+  .input-with-select .el-input-group__prepend {
+    background-color: #fff;
   }
 </style>
 <script>
@@ -362,26 +405,30 @@ export default {
 
 ### 尺寸
 
-::: demo 可通过 `size` 属性指定输入框的尺寸，除了默认的大小外，还提供了 large、small 和 mini 三种尺寸。
+:::demo 可通过 `size` 属性指定输入框的尺寸，除了默认的大小外，还提供了 large、small 和 mini 三种尺寸。
 ```html
 <div class="demo-input-size">
   <el-input
-    size="large"
     placeholder="请输入内容"
+    suffix-icon="el-icon-date"
     v-model="input6">
   </el-input>
   <el-input
+    size="medium"
     placeholder="请输入内容"
+    suffix-icon="el-icon-date"
     v-model="input7">
   </el-input>
   <el-input
     size="small"
     placeholder="请输入内容"
+    suffix-icon="el-icon-date"
     v-model="input8">
   </el-input>
   <el-input
     size="mini"
     placeholder="请输入内容"
+    suffix-icon="el-icon-date"
     v-model="input9">
   </el-input>
 </div>
@@ -405,7 +452,7 @@ export default {
 
 根据输入内容提供对应的输入建议
 
-::: demo autocomplete 是一个可带输入建议的输入框组件，`fetch-suggestions` 是一个返回输入建议的方法属性，如 querySearch(queryString, cb)，在该方法中你可以在你的输入建议数据准备好时通过 cb(data) 返回到 autocomplete 组件中。
+:::demo autocomplete 是一个可带输入建议的输入框组件，`fetch-suggestions` 是一个返回输入建议的方法属性，如 querySearch(queryString, cb)，在该方法中你可以在你的输入建议数据准备好时通过 cb(data) 返回到 autocomplete 组件中。
 ```html
 <el-row class="demo-autocomplete">
   <el-col :span="12">
@@ -448,7 +495,7 @@ export default {
       },
       createFilter(queryString) {
         return (restaurant) => {
-          return (restaurant.value.indexOf(queryString.toLowerCase()) === 0);
+          return (restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
         };
       },
       loadAll() {
@@ -519,18 +566,24 @@ export default {
 
 可自定义输入建议的显示
 
-::: demo
+:::demo 使用`scoped slot`自定义输入建议的模板。该 scope 的参数为`item`，表示当前输入建议对象。
 ```html
 <el-autocomplete
   popper-class="my-autocomplete"
   v-model="state3"
   :fetch-suggestions="querySearch"
-  custom-item="my-item-zh"
   placeholder="请输入内容"
-  @select="handleSelect"
-  icon="edit"
-  :on-icon-click="handleIconClick"
-></el-autocomplete>
+  @select="handleSelect">
+  <i
+    class="el-icon-edit el-input__icon"
+    slot="suffix"
+    @click="handleIconClick">
+  </i>
+  <template slot-scope="props">
+    <div class="name">{{ props.item.value }}</div>
+    <span class="addr">{{ props.item.address }}</span>
+  </template>
+</el-autocomplete>
 
 <style>
 .my-autocomplete {
@@ -555,19 +608,6 @@ export default {
 </style>
 
 <script>
-  Vue.component('my-item-zh', {
-    functional: true,
-    render: function (h, ctx) {
-      var item = ctx.props.item;
-      return h('li', ctx.data, [
-        h('div', { attrs: { class: 'name' } }, [item.value]),
-        h('span', { attrs: { class: 'addr' } }, [item.address])
-      ]);
-    },
-    props: {
-      item: { type: Object, required: true }
-    }
-  });
   export default {
     data() {
       return {
@@ -584,7 +624,7 @@ export default {
       },
       createFilter(queryString) {
         return (restaurant) => {
-          return (restaurant.value.indexOf(queryString.toLowerCase()) === 0);
+          return (restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
         };
       },
       loadAll() {
@@ -658,7 +698,7 @@ export default {
 
 从服务端搜索数据
 
-::: demo
+:::demo
 ```html
 <el-autocomplete
   v-model="state4"
@@ -739,7 +779,7 @@ export default {
       },
       createStateFilter(queryString) {
         return (state) => {
-          return (state.value.indexOf(queryString.toLowerCase()) === 0);
+          return (state.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
         };
       },
       handleSelect(item) {
@@ -758,16 +798,18 @@ export default {
 
 | 参数          | 说明            | 类型            | 可选值                 | 默认值   |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
-| type         | 类型   | string  | text/textarea | text |
-| value         | 绑定值           | string, number  | — | — |
+| type         | 类型   | string  | text / textarea | text |
+| value         | 绑定值           | string / number  | — | — |
 | maxlength     | 最大输入长度      | number          |  —  | — |
 | minlength     | 最小输入长度      | number          | — | — |
 | placeholder   | 输入框占位文本    | string          | — | — |
+| clearable     | 是否可清空        | boolean         | — | false |
 | disabled      | 禁用            | boolean         | — | false   |
-| size          | 输入框尺寸，只在 `type!="textarea"` 时有效      | string          | large, small, mini  | — |
-| icon          | 输入框尾部图标    | string          | — | — |
+| size          | 输入框尺寸，只在 `type!="textarea"` 时有效      | string          | medium / small / mini  | — |
+| prefix-icon   | 输入框头部图标    | string          | — | — |
+| suffix-icon   | 输入框尾部图标    | string          | — | — |
 | rows          | 输入框行数，只对 `type="textarea"` 有效  |  number | — |  2   |
-| autosize      | 自适应内容高度，只对 `type="textarea"` 有效，可传入对象，如，{ minRows: 2, maxRows: 6 }  |  boolean/object | — |  false   |
+| autosize      | 自适应内容高度，只对 `type="textarea"` 有效，可传入对象，如，{ minRows: 2, maxRows: 6 }  |  boolean / object | — |  false   |
 | auto-complete | 原生属性，自动补全 | string | on, off | off |
 | name | 原生属性 | string | — | — |
 | readonly | 原生属性，是否只读 | boolean | — | false |
@@ -777,15 +819,28 @@ export default {
 | resize | 控制是否能被用户缩放 | string | none, both, horizontal, vertical | — |
 | autofocus | 原生属性，自动获取焦点 | boolean | true, false | false |
 | form | 原生属性 | string | — | — |
-| on-icon-click | 点击 Input 内的图标的钩子函数 | function | — | — |
+| label | 输入框关联的label文字 | string | — | — |
+| tabindex | 输入框的tabindex | string | - | - |
+
+### Input slots
+| name | 说明 |
+|------|--------|
+| prefix | 输入框头部内容，只对 `type="text"` 有效 |
+| suffix | 输入框尾部内容，只对 `type="text"` 有效 |
+| prepend | 输入框前置内容，只对 `type="text"` 有效 |
+| append | 输入框后置内容，只对 `type="text"` 有效 |
 
 ### Input Events
 | 事件名称 | 说明 | 回调参数 |
 |---------|--------|---------|
-| click | 点击 Input 内的图标时触发 | (event: Event) |
 | blur | 在 Input 失去焦点时触发 | (event: Event) |
 | focus | 在 Input 获得焦点时触发 | (event: Event) |
 | change | 在 Input 值改变时触发 | (value: string \| number) |
+
+### Input Methods
+| 方法名 | 说明 | 参数 |
+| ---- | ---- | ---- |
+| focus | 使 input 获取焦点 | - |
 
 ### Autocomplete Attributes
 
@@ -793,13 +848,25 @@ export default {
 |-------------  |---------------- |---------------- |---------------------- |-------- |
 | placeholder   | 输入框占位文本   | string          | — | — |
 | disabled      | 禁用            | boolean         | — | false   |
-| value         | 必填值输入绑定值   | string  | — | — |
-| custom-item  | 通过该参数指定自定义的输入建议列表项的组件名 | string  | — | — |
+| valueKey | 输入建议对象中用于显示的键名 | string | — | value |
+| value         | 必填值，输入绑定值   | string  | — | — |
+| debounce      | 获取输入建议的去抖延时 | number         | — | 300 |
 | fetch-suggestions | 返回输入建议的方法，仅当你的输入建议数据 resolve 时，通过调用 callback(data:[]) 来返回它  | Function(queryString, callback)  | — | — |
 | popper-class | Autocomplete 下拉列表的类名 | string | — | — |
 | trigger-on-focus | 是否在输入框 focus 时显示建议列表 | boolean | — | true |
-| on-icon-click | 点击图标的回调函数 | function | — | — |
-| icon          | 输入框尾部图标    | string          | — | — |
+| name | 原生属性 | string | — | — |
+| select-when-unmatched | 在输入没有任何匹配建议的情况下，按下回车是否触发 `select` 事件 | boolean | — | false |
+| label | 输入框关联的label文字 | string | — | — |
+| prefix-icon | 输入框头部图标 | string | — | — |
+| suffix-icon | 输入框尾部图标 | string | — | — |
+
+### Autocomplete slots
+| name | 说明 |
+|------|--------|
+| prefix | 输入框头部内容 |
+| suffix | 输入框尾部内容 |
+| prepend | 输入框前置内容 |
+| append | 输入框后置内容 |
 
 ### Autocomplete Events
 | 事件名称 | 说明 | 回调参数 |

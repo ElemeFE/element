@@ -11,8 +11,7 @@
 </script>
 <style>
   .demo-icon .source > i {
-    font-size: 24px;
-    color: #8492a6;
+    color: #606266;
     margin: 0 20px;
     font-size: 1.5em;
     vertical-align: middle;
@@ -22,7 +21,7 @@
     margin: 0 20px;
   }
 
-  .icon-list {
+  .page-component .content > ul.icon-list {
     overflow: hidden;
     list-style: none;
     padding: 0;
@@ -46,19 +45,28 @@
 
     @utils-vertical-center;
 
-    & span {
+    span {
       display: inline-block;
       line-height: normal;
       vertical-align: middle;
       font-family: 'Helvetica Neue',Helvetica,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',SimSun,sans-serif;
       color: #99a9bf;
     }
-    & i {
+    
+    i {
       display: block;
-      font-size: 24px;
+      font-size: 32px;
       margin-bottom: 15px;
-      color: #8492a6;
+      color: #606266;
     }
+    
+    .icon-name {
+      display: inline-block;
+      padding: 0 3px;
+      height: 1em;
+      color: #606266;
+    }
+    
     &:hover {
       color: rgb(92, 182, 255);
     }
@@ -77,7 +85,7 @@
 <i class="el-icon-edit"></i>
 <i class="el-icon-share"></i>
 <i class="el-icon-delete"></i>
-<el-button type="primary" icon="search">搜索</el-button>
+<el-button type="primary" icon="el-icon-search">搜索</el-button>
 
 ```
 :::
@@ -88,7 +96,7 @@
   <li v-for="name in icons" :key="name">
     <span>
       <i :class="'el-icon-' + name"></i>
-      {{'el-icon-' + name}}
+      <span class="icon-name">{{'el-icon-' + name}}</span>
     </span>
   </li>
 </ul>

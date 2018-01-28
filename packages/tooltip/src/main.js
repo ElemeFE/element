@@ -1,6 +1,8 @@
 import Popper from 'element-ui/src/utils/vue-popper';
 import debounce from 'throttle-debounce/debounce';
+import { addClass, removeClass, on, off } from 'element-ui/src/utils/dom';
 import { getFirstComponentChild } from 'element-ui/src/utils/vdom';
+import { generateId } from 'element-ui/src/utils/util';
 import Vue from 'vue';
 
 export default {
@@ -39,9 +41,24 @@ export default {
     enterable: {
       type: Boolean,
       default: true
+    },
+    hideAfter: {
+      type: Number,
+      default: 0
     }
   },
 
+  data() {
+    return {
+      timeoutPending: null,
+      focusing: false
+    };
+  },
+  computed: {
+    tooltipId() {
+      return `el-tooltip-${generateId()}`;
+    }
+  },
   beforeCreate() {
     if (this.$isServer) return;
 
@@ -65,6 +82,9 @@ export default {
             onMouseleave={ () => { this.setExpectedState(false); this.debounceClose(); } }
             onMouseenter= { () => { this.setExpectedState(true); } }
             ref="popper"
+            role="tooltip"
+            id={this.tooltipId}
+            aria-hidden={ (this.disabled || !this.showPopper) ? 'true' : 'false' }
             v-show={!this.disabled && this.showPopper}
             class={
               ['el-tooltip__popper', 'is-' + this.effect, this.popperClass]
@@ -77,12 +97,10 @@ export default {
     if (!this.$slots.default || !this.$slots.default.length) return this.$slots.default;
 
     const vnode = getFirstComponentChild(this.$slots.default);
-    if (!vnode) return vnode;
-    const data = vnode.data = vnode.data || {};
-    const on = vnode.data.on = vnode.data.on || {};
 
-    on.mouseenter = this.addEventHandle(on.mouseenter, () => { this.setExpectedState(true); this.handleShowPopper(); });
-    on.mouseleave = this.addEventHandle(on.mouseleave, () => { this.setExpectedState(false); this.debounceClose(); });
+    if (!vnode) return vnode;
+
+    const data = vnode.data = vnode.data || {};
     data.staticClass = this.concatClass(data.staticClass, 'el-tooltip');
 
     return vnode;
@@ -90,11 +108,45 @@ export default {
 
   mounted() {
     this.referenceElm = this.$el;
+    if (this.$el.nodeType === 1) {
+      this.$el.setAttribute('aria-describedby', this.tooltipId);
+      this.$el.setAttribute('tabindex', 0);
+      on(this.referenceElm, 'mouseenter', this.show);
+      on(this.referenceElm, 'mouseleave', this.hide);
+      on(this.referenceElm, 'focus', this.handleFocus);
+      on(this.referenceElm, 'blur', this.handleBlur);
+      on(this.referenceElm, 'click', this.removeFocusing);
+    }
   },
-
+  watch: {
+    focusing(val) {
+      if (val) {
+        addClass(this.referenceElm, 'focusing');
+      } else {
+        removeClass(this.referenceElm, 'focusing');
+      }
+    }
+  },
   methods: {
-    addEventHandle(old, fn) {
-      return old ? Array.isArray(old) ? old.concat(fn) : [old, fn] : fn;
+    show() {
+      this.setExpectedState(true);
+      this.handleShowPopper();
+    },
+
+    hide() {
+      this.setExpectedState(false);
+      this.debounceClose();
+    },
+    handleFocus() {
+      this.focusing = true;
+      this.show();
+    },
+    handleBlur() {
+      this.focusing = false;
+      this.hide();
+    },
+    removeFocusing() {
+      this.focusing = false;
     },
 
     concatClass(a, b) {
@@ -108,16 +160,38 @@ export default {
       this.timeout = setTimeout(() => {
         this.showPopper = true;
       }, this.openDelay);
+
+      if (this.hideAfter > 0) {
+        this.timeoutPending = setTimeout(() => {
+          this.showPopper = false;
+        }, this.hideAfter);
+      }
     },
 
     handleClosePopper() {
       if (this.enterable && this.expectedState || this.manual) return;
       clearTimeout(this.timeout);
+
+      if (this.timeoutPending) {
+        clearTimeout(this.timeoutPending);
+      }
       this.showPopper = false;
     },
 
     setExpectedState(expectedState) {
+      if (expectedState === false) {
+        clearTimeout(this.timeoutPending);
+      }
       this.expectedState = expectedState;
     }
+  },
+
+  destroyed() {
+    const reference = this.referenceElm;
+    off(reference, 'mouseenter', this.show);
+    off(reference, 'mouseleave', this.hide);
+    off(reference, 'focus', this.handleFocus);
+    off(reference, 'blur', this.handleBlur);
+    off(reference, 'click', this.removeFocusing);
   }
 };

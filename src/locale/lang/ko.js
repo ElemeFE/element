@@ -16,6 +16,10 @@ export default {
       startTime: '시작 시간',
       endDate: '종료 날짜',
       endTime: '종료 시간',
+      prevYear: '지난해',
+      nextYear: '다음해',
+      prevMonth: '지난달',
+      nextMonth: '다음달',
       year: '년',
       month1: '1월',
       month2: '2월',
@@ -62,6 +66,7 @@ export default {
     },
     cascader: {
       noMatch: '맞는 데이터가 없습니다',
+      loading: '불러오는 중',
       placeholder: '선택'
     },
     pagination: {
@@ -77,6 +82,7 @@ export default {
       error: '올바르지 않은 입력'
     },
     upload: {
+      deleteTip: '클릭시 삭제됩니다',
       delete: '삭제',
       preview: '미리보기',
       continue: '계속하기'
@@ -86,7 +92,7 @@ export default {
       confirmFilter: '확인',
       resetFilter: '초기화',
       clearFilter: '전체',
-      sumText: 'Sum' // to be translated
+      sumText: '합'
     },
     tree: {
       emptyText: '데이터 없음'
@@ -94,10 +100,10 @@ export default {
     transfer: {
       noMatch: '맞는 데이터가 없습니다',
       noData: '데이터 없음',
-      titles: ['List 1', 'List 2'], // to be translated
-      filterPlaceholder: 'Enter keyword', // to be translated
-      noCheckedFormat: '{total} items', // to be translated
-      hasCheckedFormat: '{checked}/{total} checked' // to be translated
+      titles: ['리스트 1', '리스트 2'],
+      filterPlaceholder: ' 입력하세요',
+      noCheckedFormat: '{total} 항목',
+      hasCheckedFormat: '{checked}/{total} 선택됨'
     }
   }
 };

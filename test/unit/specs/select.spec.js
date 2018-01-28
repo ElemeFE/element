@@ -3,7 +3,7 @@ import Select from 'packages/select';
 
 describe('Select', () => {
   const getSelectVm = (configs = {}, options) => {
-    ['multiple', 'clearable', 'filterable', 'allowCreate', 'remote'].forEach(config => {
+    ['multiple', 'clearable', 'filterable', 'allowCreate', 'remote', 'collapseTags'].forEach(config => {
       configs[config] = configs[config] || false;
     });
     configs.multipleLimit = configs.multipleLimit || 0;
@@ -34,12 +34,14 @@ describe('Select', () => {
       template: `
         <div>
           <el-select
+            ref="select"
             v-model="value"
             :multiple="multiple"
             :multiple-limit="multipleLimit"
             :popper-class="popperClass"
             :clearable="clearable"
             :filterable="filterable"
+            :collapse-tags="collapseTags"
             :allow-create="allowCreate"
             :filterMethod="filterMethod"
             :remote="remote"
@@ -63,6 +65,7 @@ describe('Select', () => {
           multipleLimit: configs.multipleLimit,
           clearable: configs.clearable,
           filterable: configs.filterable,
+          collapseTags: configs.collapseTags,
           allowCreate: configs.allowCreate,
           popperClass: configs.popperClass,
           loading: false,
@@ -113,6 +116,7 @@ describe('Select', () => {
             <el-option
               v-for="item in options"
               :label="item.label"
+              :key="item.value"
               :value="item.value">
             </el-option>
           </el-select>
@@ -139,7 +143,6 @@ describe('Select', () => {
   });
 
   it('single select', done => {
-    sinon.stub(window.console, 'log');
     vm = createVue({
       template: `
         <div>
@@ -147,6 +150,7 @@ describe('Select', () => {
             <el-option
               v-for="item in options"
               :label="item.label"
+              :key="item.value"
               :value="item.value">
               <p>{{item.label}} {{item.value}}</p>
             </el-option>
@@ -172,13 +176,14 @@ describe('Select', () => {
             value: '选项5',
             label: '北京烤鸭'
           }],
-          value: ''
+          value: '',
+          count: 0
         };
       },
 
       methods: {
         handleChange() {
-          console.log('changed');
+          this.count++;
         }
       }
     }, true);
@@ -188,12 +193,12 @@ describe('Select', () => {
     options[2].click();
     setTimeout(() => {
       expect(vm.value).to.equal('选项3');
-      expect(window.console.log.callCount).to.equal(1);
+      expect(vm.count).to.equal(1);
+      triggerEvent(options[2], 'mouseenter');
       options[4].click();
       setTimeout(() => {
         expect(vm.value).to.equal('选项5');
-        expect(window.console.log.callCount).to.equal(2);
-        window.console.log.restore();
+        expect(vm.count).to.equal(2);
         done();
       }, 100);
     }, 100);
@@ -226,6 +231,7 @@ describe('Select', () => {
             <el-option
               v-for="item in options"
               :label="item.label"
+              :key="item.value"
               :value="item.value">
             </el-option>
           </el-select>
@@ -285,6 +291,44 @@ describe('Select', () => {
     }, 100);
   });
 
+  it('object typed value', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-select v-model="value" value-key="id">
+            <el-option
+              v-for="item in options"
+              :label="item.label"
+              :key="item.id"
+              :value="item">
+            </el-option>
+          </el-select>
+        </div>
+      `,
+
+      data() {
+        return {
+          options: [{
+            id: 1,
+            label: 'label1'
+          }, {
+            id: 2,
+            label: 'label2'
+          }],
+          value: {
+            id: 1,
+            label: 'label1'
+          }
+        };
+      }
+    }, true);
+    setTimeout(() => {
+      expect(vm.$el.querySelector('.el-input__inner').value).to.equal('label1');
+      expect(vm.$el.querySelector('.el-select-dropdown__item').classList.contains('selected'));
+      done();
+    }, 100);
+  });
+
   it('custom el-option template', () => {
     vm = createVue({
       template: `
@@ -293,6 +337,7 @@ describe('Select', () => {
             <el-option
               v-for="item in options"
               :label="item.label"
+              :key="item.value"
               :value="item.value">
               <p>{{item.label}} {{item.value}}</p>
             </el-option>
@@ -320,11 +365,13 @@ describe('Select', () => {
           <el-select v-model="value">
             <el-option-group
               v-for="group in options"
+              :key="group.label"
               :disabled="group.disabled"
               :label="group.label">
               <el-option
                 v-for="item in group.options"
                 :label="item.label"
+                :key="item.value"
                 :value="item.value">
               </el-option>
             </el-option-group>
@@ -404,6 +451,45 @@ describe('Select', () => {
     }, 10);
   });
 
+  it('default-first-option', done => {
+    vm = createVue({
+      template: `
+        <div>
+          <el-select
+            v-model="value"
+            default-first-option
+            filterable
+          >
+            <el-option
+              v-for="item in options"
+              :label="item"
+              :key="item"
+              :value="item"
+            />
+          </el-select>
+        </div>
+      `,
+      data() {
+        return {
+          options: ['1', '2', '3', '4', '5'],
+          value: ''
+        };
+      }
+    }, true);
+
+    const select = vm.$children[0];
+    setTimeout(() => {
+      select.$el.querySelector('input').focus();
+      select.query = '3';
+      select.handleQueryChange('3');
+      select.selectOption();
+      setTimeout(() => {
+        expect(select.value).to.equal('3');
+        done();
+      }, 10);
+    }, 10);
+  });
+
   it('allow create', done => {
     vm = getSelectVm({ filterable: true, allowCreate: true });
     const select = vm.$children[0];
@@ -453,6 +539,7 @@ describe('Select', () => {
             <el-option
               v-for="item in options"
               :label="item.label"
+              :key="item.value"
               :value="item.value">
               <p>{{item.label}} {{item.value}}</p>
             </el-option>
@@ -488,20 +575,22 @@ describe('Select', () => {
         }
       }
     }, true);
-    const tagCloseIcons = vm.$el.querySelectorAll('.el-tag__close');
     expect(vm.value.length).to.equal(2);
-    tagCloseIcons[1].click();
     setTimeout(() => {
-      expect(vm.value.length).to.equal(1);
-      expect(window.console.log.callCount).to.equal(1);
-      tagCloseIcons[0].click();
+      const tagCloseIcons = vm.$el.querySelectorAll('.el-tag__close');
+      tagCloseIcons[1].click();
       setTimeout(() => {
-        expect(vm.value.length).to.equal(0);
-        expect(window.console.log.callCount).to.equal(2);
-        window.console.log.restore();
-        done();
-      }, 100);
-    }, 100);
+        expect(vm.value.length).to.equal(1);
+        expect(window.console.log.callCount).to.equal(1);
+        tagCloseIcons[0].click();
+        setTimeout(() => {
+          expect(vm.value.length).to.equal(0);
+          expect(window.console.log.callCount).to.equal(2);
+          window.console.log.restore();
+          done();
+        }, 50);
+      }, 50);
+    }, 50);
   });
 
   it('multiple limit', done => {
@@ -538,10 +627,9 @@ describe('Select', () => {
     });
     const select = vm.$children[0];
     vm.$nextTick(() => {
-      select.query = '面';
+      select.handleQueryChange('面');
       setTimeout(() => {
         expect(select.filteredOptionsCount).to.equal(1);
-        select.query = '';
         select.options[0].$el.click();
         vm.$nextTick(() => {
           expect(vm.value[0]).to.equal('选项4');
@@ -554,6 +642,106 @@ describe('Select', () => {
           });
         });
       }, 250);
+    });
+  });
+
+  it('event:focus & blur', done => {
+    vm = createVue({
+      template: `
+        <el-select ref="select"></el-select>
+      `
+    }, true);
+
+    const spyFocus = sinon.spy();
+    const spyBlur = sinon.spy();
+
+    vm.$refs.select.$on('focus', spyFocus);
+    vm.$refs.select.$on('blur', spyBlur);
+    vm.$el.querySelector('input').focus();
+    vm.$el.querySelector('input').blur();
+
+    vm.$nextTick(_ => {
+      expect(spyFocus.calledOnce).to.be.true;
+      expect(spyBlur.calledOnce).to.be.true;
+      done();
+    });
+  });
+
+  it('focus', done => {
+    vm = createVue({
+      template: `
+        <el-select ref="select"></el-select>
+      `
+    }, true);
+    const spy = sinon.spy();
+
+    vm.$refs.select.$on('focus', spy);
+    vm.$refs.select.focus();
+
+    vm.$nextTick(_ => {
+      expect(spy.calledOnce).to.be.true;
+      done();
+    });
+  });
+
+  it('only emit change on user input', done => {
+    let callCount = 0;
+    vm = createVue({
+      template: `
+        <div>
+          <el-select v-model="value" @change="change" ref="select">
+            <el-option label="1" :value="1" />
+            <el-option label="2" :value="2" />
+            <el-option label="3" :value="3" />
+          </el-select>
+        </div>
+      `,
+      data() {
+        return {
+          value: 1,
+          change: () => ++callCount
+        };
+      }
+    });
+
+    vm.value = 2;
+    setTimeout(() => {
+      expect(callCount).to.equal(0);
+      const options = vm.$el.querySelectorAll('.el-select-dropdown__item');
+      triggerEvent(options[2], 'mouseenter');
+      options[2].click();
+      setTimeout(() => {
+        expect(callCount).to.equal(1);
+        done();
+      }, 10);
+    }, 10);
+  });
+
+  describe('resetInputHeight', () => {
+    const getSelectComponentVm = (configs) => {
+      vm = getSelectVm(configs || {});
+      return vm.$refs.select;
+    };
+
+    it('should reset height if collapse-tags option is disabled', () => {
+      const select = getSelectComponentVm();
+      sinon.stub(select, '$nextTick');
+      select.resetInputHeight();
+      expect(select.$nextTick.callCount).to.equal(1);
+    });
+
+    it('should not reset height if collapse-tags option is enabled', () => {
+      const select = getSelectComponentVm({ collapseTags: true });
+      sinon.stub(select, '$nextTick');
+      select.resetInputHeight();
+      expect(select.$nextTick.callCount).to.equal(0);
+    });
+
+    it('should reset height if both collapse-tags and filterable are enabled', () => {
+      const select = getSelectComponentVm({ collapseTags: true, filterable: true });
+      sinon.stub(select, '$nextTick');
+      select.resetInputHeight();
+      expect(select.$nextTick.callCount).to.equal(1);
     });
   });
 });

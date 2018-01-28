@@ -16,6 +16,10 @@ export default {
       startTime: 'Hora Inici',
       endDate: 'Data Final',
       endTime: 'Hora Final',
+      prevYear: 'Previous Year', // to be translated
+      nextYear: 'Next Year', // to be translated
+      prevMonth: 'Previous Month', // to be translated
+      nextMonth: 'Next Month', // to be translated
       year: 'Any',
       month1: 'Gener',
       month2: 'Febrer',
@@ -62,6 +66,7 @@ export default {
     },
     cascader: {
       noMatch: 'No hi ha dades que coincideixin',
+      loading: 'Carregant',
       placeholder: 'Seleccionar'
     },
     pagination: {
@@ -76,6 +81,7 @@ export default {
       error: 'Entrada invàlida'
     },
     upload: {
+      deleteTip: 'press delete to remove', // to be translated
       delete: 'Eliminar',
       preview: 'Vista Prèvia',
       continue: 'Continuar'
@@ -85,7 +91,7 @@ export default {
       confirmFilter: 'Confirmar',
       resetFilter: 'Netejar',
       clearFilter: 'Tot',
-      sumText: 'Sum' // to be translated
+      sumText: 'Tot'
     },
     tree: {
       emptyText: 'Sense Dades'
@@ -93,10 +99,10 @@ export default {
     transfer: {
       noMatch: 'No hi ha dades que coincideixin',
       noData: 'Sense Dades',
-      titles: ['List 1', 'List 2'], // to be translated
-      filterPlaceholder: 'Enter keyword', // to be translated
-      noCheckedFormat: '{total} items', // to be translated
-      hasCheckedFormat: '{checked}/{total} checked' // to be translated
+      titles: ['Llista 1', 'Llista 2'],
+      filterPlaceholder: 'Introdueix la paraula clau',
+      noCheckedFormat: '{total} ítems',
+      hasCheckedFormat: '{checked}/{total} seleccionats'
     }
   }
 };

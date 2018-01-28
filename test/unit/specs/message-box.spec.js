@@ -50,6 +50,19 @@ describe('MessageBox', () => {
     }, 300);
   });
 
+  it('html string', done => {
+    MessageBox({
+      title: 'html string',
+      dangerouslyUseHTMLString: true,
+      message: '<strong>html string</strong>'
+    });
+    setTimeout(() => {
+      const message = document.querySelector('.el-message-box__message strong');
+      expect(message.textContent).to.equal('html string');
+      done();
+    }, 300);
+  });
+
   it('alert', done => {
     MessageBox.alert('这是一段内容', {
       title: '标题名称',
@@ -86,15 +99,30 @@ describe('MessageBox', () => {
       inputErrorMessage: 'validation failed'
     });
     setTimeout(() => {
-      expect(document.querySelector('.el-message-box__input')).to.exist;
       const messageBox = document.querySelector('.el-message-box__wrapper').__vue__.$parent;
+      expect(messageBox.$el.querySelector('.el-message-box__input')).to.exist;
+      const haveFocus = messageBox.$el.querySelector('input').isSameNode(document.activeElement);
+      expect(haveFocus).to.true;
       messageBox.inputValue = 'no';
       setTimeout(() => {
-        expect(document.querySelector('.el-message-box__errormsg')
+        expect(messageBox.$el.querySelector('.el-message-box__errormsg')
           .textContent).to.equal('validation failed');
         done();
       }, 100);
-    }, 200);
+    }, 700);
+  });
+
+  it('prompt: focus on textarea', done => {
+    MessageBox.prompt('这是一段内容', {
+      inputType: 'textarea',
+      title: '标题名称'
+    });
+    setTimeout(() => {
+      const messageBox = document.querySelector('.el-message-box__wrapper').__vue__.$parent;
+      const haveFocus = messageBox.$el.querySelector('textarea').isSameNode(document.activeElement);
+      expect(haveFocus).to.true;
+      done();
+    }, 700);
   });
 
   describe('custom validator', () => {
@@ -151,9 +179,11 @@ describe('MessageBox', () => {
     });
     setTimeout(() => {
       document.querySelector('.el-message-box__close').click();
-      expect(msgAction).to.equal('cancel');
-      done();
-    }, 50);
+      setTimeout(() => {
+        expect(msgAction).to.equal('cancel');
+        done();
+      }, 10);
+    }, 10);
   });
 
   it('beforeClose', done => {

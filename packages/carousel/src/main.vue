@@ -9,6 +9,7 @@
       :style="{ height: height }">
       <transition name="carousel-arrow-left">
         <button
+          type="button"
           v-if="arrow !== 'never'"
           v-show="arrow === 'always' || hover"
           @mouseenter="handleButtonEnter('left')"
@@ -20,6 +21,7 @@
       </transition>
       <transition name="carousel-arrow-right">
         <button
+          type="button"
           v-if="arrow !== 'never'"
           v-show="arrow === 'always' || hover"
           @mouseenter="handleButtonEnter('right')"
@@ -49,7 +51,6 @@
 
 <script>
 import throttle from 'throttle-debounce/throttle';
-import debounce from 'throttle-debounce/debounce';
 import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
 
 export default {
@@ -103,12 +104,16 @@ export default {
 
   watch: {
     items(val) {
-      if (val.length > 0) this.setActiveItem(0);
+      if (val.length > 0) this.setActiveItem(this.initialIndex);
     },
 
     activeIndex(val, oldVal) {
-      this.resetItemPosition();
+      this.resetItemPosition(oldVal);
       this.$emit('change', val, oldVal);
+    },
+
+    autoplay(val) {
+      val ? this.startTimer() : this.pauseTimer();
     }
   },
 
@@ -153,9 +158,9 @@ export default {
       this.items = this.$children.filter(child => child.$options.name === 'ElCarouselItem');
     },
 
-    resetItemPosition() {
+    resetItemPosition(oldIndex) {
       this.items.forEach((item, index) => {
-        item.translateItem(index, this.activeIndex);
+        item.translateItem(index, this.activeIndex, oldIndex);
       });
     },
 
@@ -190,12 +195,16 @@ export default {
         return;
       }
       let length = this.items.length;
+      const oldIndex = this.activeIndex;
       if (index < 0) {
         this.activeIndex = length - 1;
       } else if (index >= length) {
         this.activeIndex = 0;
       } else {
         this.activeIndex = index;
+      }
+      if (oldIndex === this.activeIndex) {
+        this.resetItemPosition(oldIndex);
       }
     },
 
@@ -219,7 +228,6 @@ export default {
   },
 
   created() {
-    this.handleItemChange = debounce(100, this.updateItems);
     this.throttledArrowClick = throttle(300, true, index => {
       this.setActiveItem(index);
     });

@@ -3,17 +3,20 @@
     class="el-checkbox-button"
       :class="[
         size ? 'el-checkbox-button--' + size : '',
-        { 'is-disabled': disabled },
+        { 'is-disabled': isDisabled },
         { 'is-checked': isChecked },
         { 'is-focus': focus },
       ]"
+    role="checkbox"
+    :aria-checked="isChecked"
+    :aria-disabled="isDisabled"
     >
     <input
       v-if="trueLabel || falseLabel"
       class="el-checkbox-button__original"
       type="checkbox"
       :name="name"
-      :disabled="disabled"
+      :disabled="isDisabled"
       :true-value="trueLabel"
       :false-value="falseLabel"
       v-model="model"
@@ -25,7 +28,7 @@
       class="el-checkbox-button__original"
       type="checkbox"
       :name="name"
-      :disabled="disabled"
+      :disabled="isDisabled"
       :value="label"
       v-model="model"
       @change="handleChange"
@@ -48,10 +51,17 @@
 
     mixins: [Emitter],
 
+    inject: {
+      elFormItem: {
+        default: ''
+      }
+    },
+
     data() {
       return {
         selfModel: false,
-        focus: false
+        focus: false,
+        isLimitExceeded: false
       };
     },
 
@@ -69,21 +79,21 @@
         get() {
           return this._checkboxGroup
             ? this.store : this.value !== undefined
-            ? this.value : this.selfModel;
+              ? this.value : this.selfModel;
         },
 
         set(val) {
           if (this._checkboxGroup) {
-            let isLimitExceeded = false;
+            this.isLimitExceeded = false;
             (this._checkboxGroup.min !== undefined &&
               val.length < this._checkboxGroup.min &&
-              (isLimitExceeded = true));
+              (this.isLimitExceeded = true));
 
             (this._checkboxGroup.max !== undefined &&
               val.length > this._checkboxGroup.max &&
-              (isLimitExceeded = true));
+              (this.isLimitExceeded = true));
 
-            isLimitExceeded === false &&
+            this.isLimitExceeded === false &&
             this.dispatch('ElCheckboxGroup', 'input', [val]);
           } else if (this.value !== undefined) {
             this.$emit('input', val);
@@ -129,8 +139,18 @@
         };
       },
 
+      _elFormItemSize() {
+        return (this.elFormItem || {}).elFormItemSize;
+      },
+
       size() {
-        return this._checkboxGroup.size;
+        return this._checkboxGroup.checkboxGroupSize || this._elFormItemSize || (this.$ELEMENT || {}).size;
+      },
+
+      isDisabled() {
+        return this._checkboxGroup
+          ? this._checkboxGroup.disabled || this.disabled
+          : this.disabled;
       }
     },
     methods: {
@@ -145,12 +165,19 @@
         }
       },
       handleChange(ev) {
-        this.$emit('change', ev);
-        if (this._checkboxGroup) {
-          this.$nextTick(_ => {
-            this.dispatch('ElCheckboxGroup', 'change', [this._checkboxGroup.value]);
-          });
+        if (this.isLimitExceeded) return;
+        let value;
+        if (ev.target.checked) {
+          value = this.trueLabel === undefined ? true : this.trueLabel;
+        } else {
+          value = this.falseLabel === undefined ? false : this.falseLabel;
         }
+        this.$emit('change', value, ev);
+        this.$nextTick(() => {
+          if (this._checkboxGroup) {
+            this.dispatch('ElCheckboxGroup', 'change', [this._checkboxGroup.value]);
+          }
+        });
       }
     },
 

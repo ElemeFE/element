@@ -1,9 +1,9 @@
 function getError(action, option, xhr) {
   let msg;
   if (xhr.response) {
-    msg = `${xhr.status} ${xhr.response.error || xhr.response}`;
+    msg = `${xhr.response.error || xhr.response}`;
   } else if (xhr.responseText) {
-    msg = `${xhr.status} ${xhr.responseText}`;
+    msg = `${xhr.responseText}`;
   } else {
     msg = `fail to post ${action} ${xhr.status}`;
   }
@@ -48,7 +48,7 @@ export default function upload(option) {
   const formData = new FormData();
 
   if (option.data) {
-    Object.keys(option.data).map(key => {
+    Object.keys(option.data).forEach(key => {
       formData.append(key, option.data[key]);
     });
   }

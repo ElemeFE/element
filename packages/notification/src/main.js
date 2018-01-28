@@ -1,17 +1,19 @@
 import Vue from 'vue';
+import Main from './main.vue';
 import { PopupManager } from 'element-ui/src/utils/popup';
 import { isVNode } from 'element-ui/src/utils/vdom';
-let NotificationConstructor = Vue.extend(require('./main.vue'));
+const NotificationConstructor = Vue.extend(Main);
 
 let instance;
 let instances = [];
 let seed = 1;
 
-var Notification = function(options) {
+const Notification = function(options) {
   if (Vue.prototype.$isServer) return;
   options = options || {};
-  let userOnClose = options.onClose;
-  let id = 'notification_' + seed++;
+  const userOnClose = options.onClose;
+  const id = 'notification_' + seed++;
+  const position = options.position || 'top-right';
 
   options.onClose = function() {
     Notification.close(id, userOnClose);
@@ -23,7 +25,7 @@ var Notification = function(options) {
 
   if (isVNode(options.message)) {
     instance.$slots.default = [options.message];
-    options.message = '';
+    options.message = 'REPLACED_BY_VNODE';
   }
   instance.id = id;
   instance.vm = instance.$mount();
@@ -32,13 +34,12 @@ var Notification = function(options) {
   instance.dom = instance.vm.$el;
   instance.dom.style.zIndex = PopupManager.nextZIndex();
 
-  const offset = options.offset || 0;
-  let topDist = offset;
-  for (let i = 0, len = instances.length; i < len; i++) {
-    topDist += instances[i].$el.offsetHeight + 16;
-  }
-  topDist += 16;
-  instance.top = topDist;
+  let verticalOffset = options.offset || 0;
+  instances.filter(item => item.position === position).forEach(item => {
+    verticalOffset += item.$el.offsetHeight + 16;
+  });
+  verticalOffset += 16;
+  instance.verticalOffset = verticalOffset;
   instances.push(instance);
   return instance.vm;
 };
@@ -56,23 +57,29 @@ var Notification = function(options) {
 });
 
 Notification.close = function(id, userOnClose) {
-  let index;
-  let removedHeight;
-  for (var i = 0, len = instances.length; i < len; i++) {
-    if (id === instances[i].id) {
-      if (typeof userOnClose === 'function') {
-        userOnClose(instances[i]);
-      }
+  let index = -1;
+  const len = instances.length;
+  const instance = instances.filter((instance, i) => {
+    if (instance.id === id) {
       index = i;
-      removedHeight = instances[i].dom.offsetHeight;
-      instances.splice(i, 1);
-      break;
+      return true;
     }
-  }
+    return false;
+  })[0];
+  if (!instance) return;
 
-  if (len > 1) {
-    for (i = index; i < len - 1 ; i++) {
-      instances[i].dom.style.top = parseInt(instances[i].dom.style.top, 10) - removedHeight - 16 + 'px';
+  if (typeof userOnClose === 'function') {
+    userOnClose(instance);
+  }
+  instances.splice(index, 1);
+
+  if (len <= 1) return;
+  const position = instance.position;
+  const removedHeight = instance.dom.offsetHeight;
+  for (let i = index; i < len - 1 ; i++) {
+    if (instances[i].position === position) {
+      instances[i].dom.style[instance.verticalProperty] =
+        parseInt(instances[i].dom.style[instance.verticalProperty], 10) - removedHeight - 16 + 'px';
     }
   }
 };

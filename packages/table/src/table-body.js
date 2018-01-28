@@ -1,5 +1,5 @@
 import { getCell, getColumnByCell, getRowIdentity } from './util';
-import { hasClass } from 'element-ui/src/utils/dom';
+import { hasClass, addClass, removeClass } from 'element-ui/src/utils/dom';
 import ElCheckbox from 'element-ui/packages/checkbox';
 import ElTooltip from 'element-ui/packages/tooltip';
 import debounce from 'throttle-debounce/debounce';
@@ -14,6 +14,7 @@ export default {
     store: {
       required: true
     },
+    stripe: Boolean,
     context: {},
     layout: {
       required: true
@@ -54,31 +55,75 @@ export default {
                 on-mouseleave={ _ => this.handleMouseLeave() }
                 class={ [this.getRowClass(row, $index)] }>
                 {
-                  this._l(this.columns, (column, cellIndex) =>
-                    <td
-                      class={ [column.id, column.align, column.className || '', columnsHidden[cellIndex] ? 'is-hidden' : '' ] }
-                      on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
-                      on-mouseleave={ this.handleCellMouseLeave }>
-                      {
-                        column.renderCell.call(this._renderProxy, h, { row, column, $index, store: this.store, _self: this.context || this.table.$vnode.context }, columnsHidden[cellIndex])
+                  this._l(this.columns, (column, cellIndex) => {
+                    const { rowspan, colspan } = this.getSpan(row, column, $index, cellIndex);
+                    if (!rowspan || !colspan) {
+                      return '';
+                    } else {
+                      if (rowspan === 1 && colspan === 1) {
+                        return (
+                          <td
+                            style={ this.getCellStyle($index, cellIndex, row, column) }
+                            class={ this.getCellClass($index, cellIndex, row, column) }
+                            on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
+                            on-mouseleave={ this.handleCellMouseLeave }>
+                            {
+                              column.renderCell.call(
+                                this._renderProxy,
+                                h,
+                                {
+                                  row,
+                                  column,
+                                  $index,
+                                  store: this.store,
+                                  _self: this.context || this.table.$vnode.context
+                                },
+                                columnsHidden[cellIndex]
+                              )
+                            }
+                          </td>
+                        );
+                      } else {
+                        return (
+                          <td
+                            style={ this.getCellStyle($index, cellIndex, row, column) }
+                            class={ this.getCellClass($index, cellIndex, row, column) }
+                            rowspan={ rowspan }
+                            colspan={ colspan }
+                            on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
+                            on-mouseleave={ this.handleCellMouseLeave }>
+                            {
+                              column.renderCell.call(
+                                this._renderProxy,
+                                h,
+                                {
+                                  row,
+                                  column,
+                                  $index,
+                                  store: this.store,
+                                  _self: this.context || this.table.$vnode.context
+                                },
+                                columnsHidden[cellIndex]
+                              )
+                            }
+                          </td>
+                        );
                       }
-                    </td>
-                  )
+                    }
+                  })
                 }
                 {
                   !this.fixed && this.layout.scrollY && this.layout.gutterWidth ? <td class="gutter" /> : ''
                 }
               </tr>,
-                this.store.states.expandRows.indexOf(row) > -1
+              this.store.isRowExpanded(row)
                 ? (<tr>
-                    <td colspan={ this.columns.length } class="el-table__expanded-cell">
-                      { this.table.renderExpanded ? this.table.renderExpanded(h, { row, $index, store: this.store }) : ''}
-                    </td>
-                  </tr>)
+                  <td colspan={ this.columns.length } class="el-table__expanded-cell">
+                    { this.table.renderExpanded ? this.table.renderExpanded(h, { row, $index, store: this.store }) : ''}
+                  </td>
+                </tr>)
                 : ''
               ]
-            ).concat(
-              this._self.$parent.$slots.append
             ).concat(
               <el-tooltip effect={ this.table.tooltipEffect } placement="top" ref="tooltip" content={ this.tooltipContent }></el-tooltip>
             )
@@ -93,14 +138,15 @@ export default {
       if (!this.store.states.isComplex) return;
       const el = this.$el;
       if (!el) return;
-      const rows = el.querySelectorAll('tbody > tr');
+      const tr = el.querySelector('tbody').children;
+      const rows = [].filter.call(tr, row => hasClass(row, 'el-table__row'));
       const oldRow = rows[oldVal];
       const newRow = rows[newVal];
       if (oldRow) {
-        oldRow.classList.remove('hover-row');
+        removeClass(oldRow, 'hover-row');
       }
       if (newRow) {
-        newRow.classList.add('hover-row');
+        addClass(newRow, 'hover-row');
       }
     },
     'store.states.currentRow'(newVal, oldVal) {
@@ -108,16 +154,17 @@ export default {
       const el = this.$el;
       if (!el) return;
       const data = this.store.states.data;
-      const rows = el.querySelectorAll('tbody > tr');
+      const tr = el.querySelector('tbody').children;
+      const rows = [].filter.call(tr, row => hasClass(row, 'el-table__row'));
       const oldRow = rows[data.indexOf(oldVal)];
       const newRow = rows[data.indexOf(newVal)];
       if (oldRow) {
-        oldRow.classList.remove('current-row');
-      } else if (rows) {
-        [].forEach.call(rows, row => row.classList.remove('current-row'));
+        removeClass(oldRow, 'current-row');
+      } else {
+        [].forEach.call(rows, row => removeClass(row, 'current-row'));
       }
       if (newRow) {
-        newRow.classList.add('current-row');
+        addClass(newRow, 'current-row');
       }
     }
   },
@@ -133,6 +180,14 @@ export default {
 
     columnsCount() {
       return this.store.states.columns.length;
+    },
+
+    leftFixedLeafCount() {
+      return this.store.states.fixedLeafColumnsLength;
+    },
+
+    rightFixedLeafCount() {
+      return this.store.states.rightFixedLeafColumnsLength;
     },
 
     leftFixedCount() {
@@ -169,30 +224,106 @@ export default {
 
     isColumnHidden(index) {
       if (this.fixed === true || this.fixed === 'left') {
-        return index >= this.leftFixedCount;
+        return index >= this.leftFixedLeafCount;
       } else if (this.fixed === 'right') {
-        return index < this.columnsCount - this.rightFixedCount;
+        return index < this.columnsCount - this.rightFixedLeafCount;
       } else {
-        return (index < this.leftFixedCount) || (index >= this.columnsCount - this.rightFixedCount);
+        return (index < this.leftFixedLeafCount) || (index >= this.columnsCount - this.rightFixedLeafCount);
       }
     },
 
-    getRowStyle(row, index) {
-      const rowStyle = this.rowStyle;
+    getSpan(row, column, rowIndex, columnIndex) {
+      let rowspan = 1;
+      let colspan = 1;
+
+      const fn = this.table.spanMethod;
+      if (typeof fn === 'function') {
+        const result = fn({
+          row,
+          column,
+          rowIndex,
+          columnIndex
+        });
+
+        if (Array.isArray(result)) {
+          rowspan = result[0];
+          colspan = result[1];
+        } else if (typeof result === 'object') {
+          rowspan = result.rowspan;
+          colspan = result.colspan;
+        }
+      }
+
+      return {
+        rowspan,
+        colspan
+      };
+    },
+
+    getRowStyle(row, rowIndex) {
+      const rowStyle = this.table.rowStyle;
       if (typeof rowStyle === 'function') {
-        return rowStyle.call(null, row, index);
+        return rowStyle.call(null, {
+          row,
+          rowIndex
+        });
       }
       return rowStyle;
     },
 
-    getRowClass(row, index) {
-      const classes = [];
+    getRowClass(row, rowIndex) {
+      const classes = ['el-table__row'];
 
-      const rowClassName = this.rowClassName;
+      if (this.stripe && rowIndex % 2 === 1) {
+        classes.push('el-table__row--striped');
+      }
+      const rowClassName = this.table.rowClassName;
       if (typeof rowClassName === 'string') {
         classes.push(rowClassName);
       } else if (typeof rowClassName === 'function') {
-        classes.push(rowClassName.call(null, row, index) || '');
+        classes.push(rowClassName.call(null, {
+          row,
+          rowIndex
+        }));
+      }
+
+      if (this.store.states.expandRows.indexOf(row) > -1) {
+        classes.push('expanded');
+      }
+
+      return classes.join(' ');
+    },
+
+    getCellStyle(rowIndex, columnIndex, row, column) {
+      const cellStyle = this.table.cellStyle;
+      if (typeof cellStyle === 'function') {
+        return cellStyle.call(null, {
+          rowIndex,
+          columnIndex,
+          row,
+          column
+        });
+      }
+      return cellStyle;
+    },
+
+    getCellClass(rowIndex, columnIndex, row, column) {
+      const classes = [column.id, column.align, column.className];
+
+      if (this.isColumnHidden(columnIndex)) {
+        classes.push('is-hidden');
+      }
+
+      const cellClassName = this.table.cellClassName;
+      if (typeof cellClassName === 'string') {
+        classes.push(cellClassName);
+      } else if (typeof cellClassName === 'function') {
+        classes.push(cellClassName.call(null, {
+          rowIndex,
+          columnIndex,
+          row,
+          column
+        }));
       }
 
       return classes.join(' ');
@@ -211,12 +342,12 @@ export default {
       // 判断是否text-overflow, 如果是就显示tooltip
       const cellChild = event.target.querySelector('.cell');
 
-      if (hasClass(cellChild, 'el-tooltip') && cellChild.scrollWidth > cellChild.offsetWidth) {
+      if (hasClass(cellChild, 'el-tooltip') && cellChild.scrollWidth > cellChild.offsetWidth && this.$refs.tooltip) {
         const tooltip = this.$refs.tooltip;
 
-        this.tooltipContent = cell.innerText;
+        this.tooltipContent = cell.textContent || cell.innerText;
         tooltip.referenceElm = cell;
-        tooltip.$refs.popper.style.display = 'none';
+        tooltip.$refs.popper && (tooltip.$refs.popper.style.display = 'none');
         tooltip.doDestroy();
         tooltip.setExpectedState(true);
         this.activateTooltip(tooltip);
@@ -271,7 +402,7 @@ export default {
     },
 
     handleExpandClick(row) {
-      this.store.commit('toggleRowExpanded', row);
+      this.store.toggleRowExpansion(row);
     }
   }
 };

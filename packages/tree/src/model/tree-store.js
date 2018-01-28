@@ -54,6 +54,7 @@ export default class TreeStore {
           node.visible = allHidden === false;
         }
       }
+      if (!value) return;
 
       if (node.visible && !node.isLeaf) node.expand();
     };
@@ -139,6 +140,12 @@ export default class TreeStore {
     const key = this.key;
     if (!key || !node || !node.data) return;
 
+    const childNodes = node.childNodes;
+    for (let i = 0, j = childNodes.length; i < j; i++) {
+      const child = childNodes[i];
+      this.deregisterNode(child);
+    }
+
     delete this.nodesMap[node.key];
   }
 
@@ -187,62 +194,62 @@ export default class TreeStore {
     return allNodes;
   }
 
+  updateChildren(key, data) {
+    const node = this.nodesMap[key];
+    if (!node) return;
+    const childNodes = node.childNodes;
+    for (let i = childNodes.length - 1; i >= 0; i--) {
+      const child = childNodes[i];
+      this.remove(child.data);
+    }
+    for (let i = 0, j = data.length; i < j; i++) {
+      const child = data[i];
+      this.append(child, node.data);
+    }
+  }
+
   _setCheckedKeys(key, leafOnly = false, checkedKeys) {
-    const allNodes = this._getAllNodes();
-    allNodes.sort((a, b) => b.level - a.level);
-
+    const allNodes = this._getAllNodes().sort((a, b) => b.level - a.level);
+    const cache = Object.create(null);
     const keys = Object.keys(checkedKeys);
-    allNodes.forEach((node) => {
-      let checked = keys.indexOf(node.data[key] + '') > -1;
-
-      if (!node.isLeaf) {
-        if (!this.checkStrictly) {
-          const childNodes = node.childNodes;
-
-          let all = true;
-          let none = true;
-
-          for (let i = 0, j = childNodes.length; i < j; i++) {
-            const child = childNodes[i];
-            if (child.checked !== true || child.indeterminate) {
-              all = false;
-            }
-            if (child.checked !== false || child.indeterminate) {
-              none = false;
-            }
-          }
-
-          if (all) {
-            node.setChecked(true, !this.checkStrictly);
-          } else if (!all && !none) {
-            checked = checked ? true : 'half';
-            node.setChecked(checked, !this.checkStrictly && checked === true);
-          } else if (none) {
-            node.setChecked(checked, !this.checkStrictly);
-          }
-        } else {
-          node.setChecked(checked, false);
-        }
-
-        if (leafOnly) {
+    allNodes.forEach(node => node.setChecked(false, false));
+    for (let i = 0, j = allNodes.length; i < j; i++) {
+      const node = allNodes[i];
+      const nodeKey = node.data[key].toString();
+      let checked = keys.indexOf(nodeKey) > -1;
+      if (!checked) {
+        if (node.checked && !cache[nodeKey]) {
           node.setChecked(false, false);
-          const traverse = function(node) {
-            const childNodes = node.childNodes;
-
-            childNodes.forEach((child) => {
-              if (!child.isLeaf) {
-                child.setChecked(false, false);
-              }
-              traverse(child);
-            });
-          };
-
-          traverse(node);
         }
-      } else {
-        node.setChecked(checked, false);
+        continue;
       }
-    });
+
+      let parent = node.parent;
+      while (parent && parent.level > 0) {
+        cache[parent.data[key]] = true;
+        parent = parent.parent;
+      }
+
+      if (node.isLeaf || this.checkStrictly) {
+        node.setChecked(true, false);
+        continue;
+      }
+      node.setChecked(true, true);
+
+      if (leafOnly) {
+        node.setChecked(false, false);
+        const traverse = function(node) {
+          const childNodes = node.childNodes;
+          childNodes.forEach((child) => {
+            if (!child.isLeaf) {
+              child.setChecked(false, false);
+            }
+            traverse(child);
+          });
+        };
+        traverse(node);
+      }
+    }
   }
 
   setCheckedNodes(array, leafOnly = false) {
@@ -290,6 +297,12 @@ export default class TreeStore {
 
   setCurrentNode(node) {
     this.currentNode = node;
+  }
+
+  setUserCurrentNode(node) {
+    const key = node[this.key];
+    const currNode = this.nodesMap[key];
+    this.setCurrentNode(currNode);
   }
 
   setCurrentNodeKey(key) {

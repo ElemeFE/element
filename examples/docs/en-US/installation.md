@@ -12,13 +12,17 @@ Get the latest version from [unpkg.com/element-ui](https://unpkg.com/element-ui/
 
 ```html
 <!-- import CSS -->
-<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 <!-- import JavaScript -->
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 ```
 
+:::tip
+We recommend our users to lock Element's version when using CDN. Please refer to [unpkg.com](https://unpkg.com) for more information.
+:::
+
 ### Hello world
-If you are using CDN, a hello-world page is easy with Element. [Online Demo](http://codepen.io/QingWei-Li/pen/vXwJrY)
+If you are using CDN, a hello-world page is easy with Element. [Online Demo](https://jsfiddle.net/hzfpyvg6/14/)
 
 ```html
 <!DOCTYPE html>
@@ -26,12 +30,12 @@ If you are using CDN, a hello-world page is easy with Element. [Online Demo](htt
 <head>
   <meta charset="UTF-8">
   <!-- import CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 </head>
 <body>
   <div id="app">
     <el-button @click="visible = true">Button</el-button>
-    <el-dialog v-model="visible" title="Hello world">
+    <el-dialog :visible.sync="visible" title="Hello world">
       <p>Try Element</p>
     </el-dialog>
   </div>

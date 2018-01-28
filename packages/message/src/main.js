@@ -1,12 +1,14 @@
 import Vue from 'vue';
+import Main from './main.vue';
 import { PopupManager } from 'element-ui/src/utils/popup';
-let MessageConstructor = Vue.extend(require('./main.vue'));
+import { isVNode } from 'element-ui/src/utils/vdom';
+let MessageConstructor = Vue.extend(Main);
 
 let instance;
 let instances = [];
 let seed = 1;
 
-var Message = function(options) {
+const Message = function(options) {
   if (Vue.prototype.$isServer) return;
   options = options || {};
   if (typeof options === 'string') {
@@ -20,11 +22,14 @@ var Message = function(options) {
   options.onClose = function() {
     Message.close(id, userOnClose);
   };
-
   instance = new MessageConstructor({
     data: options
   });
   instance.id = id;
+  if (isVNode(instance.message)) {
+    instance.$slots.default = [instance.message];
+    instance.message = null;
+  }
   instance.vm = instance.$mount();
   document.body.appendChild(instance.vm.$el);
   instance.vm.visible = true;

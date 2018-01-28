@@ -16,6 +16,10 @@ export default {
       startTime: 'เวลาเริ่มต้น',
       endDate: 'วันที่สิ้นสุด',
       endTime: 'เวลาสิ้นสุด',
+      prevYear: 'Previous Year', // to be translated
+      nextYear: 'Next Year', // to be translated
+      prevMonth: 'Previous Month', // to be translated
+      nextMonth: 'Next Month', // to be translated
       year: 'ปี',
       month1: 'มกราคม',
       month2: 'กุมภาพันธ์',
@@ -62,6 +66,7 @@ export default {
     },
     cascader: {
       noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
+      loading: 'กำลังโหลด',
       placeholder: 'เลือก'
     },
     pagination: {
@@ -77,6 +82,7 @@ export default {
       error: 'คุณป้อนข้อมูลไม่ถูกต้อง'
     },
     upload: {
+      deleteTip: 'press delete to remove', // to be translated
       delete: 'ลบ',
       preview: 'ตัวอย่าง',
       continue: 'ทำต่อ'
