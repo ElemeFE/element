@@ -35,6 +35,7 @@
         default: true
       },
       size: String,
+      disabled: Boolean,
       validateOnRuleChange: {
         type: Boolean,
         default: true

@@ -3,7 +3,7 @@
     type === 'textarea' ? 'el-textarea' : 'el-input',
     inputSize ? 'el-input--' + inputSize : '',
     {
-      'is-disabled': disabled,
+      'is-disabled': inputDisabled,
       'el-input-group': $slots.prepend || $slots.append,
       'el-input-group--append': $slots.append,
       'el-input-group--prepend': $slots.prepend,
@@ -16,7 +16,7 @@
   >
     <template v-if="type !== 'textarea'">
       <!-- 前置元素 -->
-      <div class="el-input-group__prepend" v-if="$slots.prepend"  tabindex="0">
+      <div class="el-input-group__prepend" v-if="$slots.prepend">
         <slot name="prepend"></slot>
       </div>
       <input
@@ -24,6 +24,7 @@
         v-if="type !== 'textarea'"
         class="el-input__inner"
         v-bind="$props"
+        :disabled="inputDisabled"
         :autocomplete="autoComplete"
         :value="currentValue"
         ref="input"
@@ -77,6 +78,7 @@
       @input="handleInput"
       ref="textarea"
       v-bind="$props"
+      :disabled="inputDisabled"
       :style="textareaStyle"
       @focus="handleFocus"
       @blur="handleBlur"
@@ -187,6 +189,9 @@
       },
       inputSize() {
         return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
+      },
+      inputDisabled() {
+        return this.disabled || (this.elForm || {}).disabled;
       },
       isGroup() {
         return this.$slots.prepend || this.$slots.append;

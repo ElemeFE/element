@@ -4,7 +4,7 @@
     :class="[
       {
         'is-opened': menuVisible,
-        'is-disabled': disabled
+        'is-disabled': cascaderDisabled
       },
       cascaderSize ? 'el-cascader--' + cascaderSize : ''
     ]"
@@ -27,7 +27,7 @@
       @blur="handleBlur"
       :validate-event="false"
       :size="size"
-      :disabled="disabled"
+      :disabled="cascaderDisabled"
     >
       <template slot="suffix">
         <i
@@ -95,6 +95,9 @@ export default {
   mixins: [popperMixin, emitter, Locale],
 
   inject: {
+    elForm: {
+      default: ''
+    },
     elFormItem: {
       default: ''
     }
@@ -206,6 +209,9 @@ export default {
     },
     cascaderSize() {
       return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
+    },
+    cascaderDisabled() {
+      return this.disabled || (this.elForm || {}).disabled;
     },
     id() {
       return generateId();
@@ -380,7 +386,7 @@ export default {
       this.menuVisible = false;
     },
     handleClick() {
-      if (this.disabled) return;
+      if (this.cascaderDisabled) return;
       this.$refs.input.focus();
       if (this.filterable) {
         this.menuVisible = true;

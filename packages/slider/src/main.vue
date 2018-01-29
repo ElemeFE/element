@@ -5,7 +5,7 @@
      :aria-valuemin="min"
      :aria-valuemax="max"
      :aria-orientation="vertical ? 'vertical': 'horizontal'"
-     :aria-disabled="disabled"
+     :aria-disabled="sliderDisabled"
   >
     <el-input-number
       v-model="firstValue"
@@ -14,7 +14,7 @@
       ref="input"
       @change="$nextTick(emitChange)"
       :step="step"
-      :disabled="disabled"
+      :disabled="sliderDisabled"
       :controls="showInputControls"
       :min="min"
       :max="max"
@@ -22,7 +22,7 @@
       size="small">
     </el-input-number>
     <div class="el-slider__runway"
-      :class="{ 'show-input': showInput, 'disabled': disabled }"
+      :class="{ 'show-input': showInput, 'disabled': sliderDisabled }"
       :style="runwayStyle"
       @click="onSliderClick"
       ref="slider">
@@ -60,6 +60,12 @@
     name: 'ElSlider',
 
     mixins: [Emitter],
+
+    inject: {
+      elForm: {
+        default: ''
+      }
+    },
 
     props: {
       min: {
@@ -233,7 +239,7 @@
       },
 
       onSliderClick(event) {
-        if (this.disabled || this.dragging) return;
+        if (this.sliderDisabled || this.dragging) return;
         this.resetSize();
         if (this.vertical) {
           const sliderOffsetBottom = this.$refs.slider.getBoundingClientRect().bottom;
@@ -323,6 +329,10 @@
             width: this.barSize,
             left: this.barStart
           };
+      },
+
+      sliderDisabled() {
+        return this.disabled || (this.elForm || {}).disabled;
       }
     },
 

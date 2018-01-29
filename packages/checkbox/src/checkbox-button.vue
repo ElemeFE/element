@@ -52,6 +52,9 @@
     mixins: [Emitter],
 
     inject: {
+      elForm: {
+        default: ''
+      },
       elFormItem: {
         default: ''
       }
@@ -149,8 +152,8 @@
 
       isDisabled() {
         return this._checkboxGroup
-          ? this._checkboxGroup.disabled || this.disabled
-          : this.disabled;
+          ? this._checkboxGroup.disabled || this.disabled || (this.elForm || {}).disabled
+          : this.disabled || (this.elForm || {}).disabled;
       }
     },
     methods: {

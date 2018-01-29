@@ -31,6 +31,9 @@ export declare class ElForm extends ElementUIComponent {
   /** Whether the form is inline */
   inline: boolean
 
+  /** Whether the form is disabled */
+  disabled: boolean
+
   /** Position of label */
   labelPosition: FormItemLabelPosition
 
@@ -48,6 +51,9 @@ export declare class ElForm extends ElementUIComponent {
 
   /** Whether to display an icon indicating the validation result */
   statusIcon: boolean
+
+  /** Whether to trigger validation when the `rules` prop is changed */
+  validateOnRuleChange: boolean
 
   /** Controls the size of components in this form */
   size: ElementUIComponentSize
