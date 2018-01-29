@@ -20,6 +20,14 @@ export default {
 
     pageCount: Number,
 
+    pagerCount: {
+      type: Number,
+      validator(value) {
+        return value > 2 && value < 22 && (value | 0) === value;
+      },
+      default: 7
+    },
+
     currentPage: {
       type: Number,
       default: 1
@@ -56,15 +64,15 @@ export default {
     let template = <div class={['el-pagination', {
       'is-background': this.background,
       'el-pagination--small': this.small
-    }] }></div>;
+    }]}></div>;
     const layout = this.layout || '';
     if (!layout) return;
     const TEMPLATE_MAP = {
       prev: <prev></prev>,
       jumper: <jumper></jumper>,
-      pager: <pager currentPage={ this.internalCurrentPage } pageCount={ this.internalPageCount } on-change={ this.handleCurrentChange }></pager>,
+      pager: <pager currentPage={this.internalCurrentPage} pageCount={this.internalPageCount} pagerCount={this.pagerCount} on-change={this.handleCurrentChange}></pager>,
       next: <next></next>,
-      sizes: <sizes pageSizes={ this.pageSizes }></sizes>,
+      sizes: <sizes pageSizes={this.pageSizes}></sizes>,
       slot: <my-slot></my-slot>,
       total: <total></total>
     };
@@ -108,10 +116,10 @@ export default {
           <button
             type="button"
             class={['btn-prev', { disabled: this.$parent.internalCurrentPage <= 1 }]}
-            on-click={ this.$parent.prev }>
+            on-click={this.$parent.prev}>
             {
               this.$parent.prevText
-                ? <span>{ this.$parent.prevText }</span>
+                ? <span>{this.$parent.prevText}</span>
                 : <i class="el-icon el-icon-arrow-left"></i>
             }
           </button>
@@ -128,10 +136,10 @@ export default {
               'btn-next',
               { disabled: this.$parent.internalCurrentPage === this.$parent.internalPageCount || this.$parent.internalPageCount === 0 }
             ]}
-            on-click={ this.$parent.next }>
+            on-click={this.$parent.next}>
             {
               this.$parent.nextText
-                ? <span>{ this.$parent.nextText }</span>
+                ? <span>{this.$parent.nextText}</span>
                 : <i class="el-icon el-icon-arrow-right"></i>
             }
           </button>
@@ -170,8 +178,8 @@ export default {
               {
                 this.pageSizes.map(item =>
                   <el-option
-                    value={ item }
-                    label={ item + this.t('el.pagination.pagesize') }>
+                    value={item}
+                    label={item + this.t('el.pagination.pagesize')}>
                   </el-option>
                 )
               }
@@ -239,19 +247,19 @@ export default {
       render(h) {
         return (
           <span class="el-pagination__jump">
-            { this.t('el.pagination.goto') }
+            {this.t('el.pagination.goto')}
             <el-input
               class="el-pagination__editor is-in-pagination"
-              min={ 1 }
-              max={ this.$parent.internalPageCount }
-              value={ this.$parent.internalCurrentPage }
-              domPropsValue={ this.$parent.internalCurrentPage }
+              min={1}
+              max={this.$parent.internalPageCount}
+              value={this.$parent.internalCurrentPage}
+              domPropsValue={this.$parent.internalCurrentPage}
               type="number"
               ref="input"
-              onChange={ this.handleChange }
-              onFocus={ this.handleFocus }
-              onBlur={ this.handleBlur }/>
-            { this.t('el.pagination.pageClassifier') }
+              onChange={this.handleChange}
+              onFocus={this.handleFocus}
+              onBlur={this.handleBlur} />
+            {this.t('el.pagination.pageClassifier')}
           </span>
         );
       }
@@ -263,7 +271,7 @@ export default {
       render(h) {
         return (
           typeof this.$parent.total === 'number'
-            ? <span class="el-pagination__total">{ this.t('el.pagination.total', { total: this.$parent.total }) }</span>
+            ? <span class="el-pagination__total">{this.t('el.pagination.total', { total: this.$parent.total })}</span>
             : ''
         );
       }

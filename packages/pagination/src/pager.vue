@@ -1,29 +1,25 @@
 <template>
-  <ul @click="onPagerClick" class="el-pager">
-    <li
-      :class="{ active: currentPage === 1 }"
+  <ul @click="onPagerClick"
+    class="el-pager">
+    <li :class="{ active: currentPage === 1 }"
       v-if="pageCount > 0"
       class="number">1</li>
-    <li
-      class="el-icon more btn-quickprev"
+    <li class="el-icon more btn-quickprev"
       :class="[quickprevIconClass]"
       v-if="showPrevMore"
       @mouseenter="quickprevIconClass = 'el-icon-d-arrow-left'"
       @mouseleave="quickprevIconClass = 'el-icon-more'">
     </li>
-    <li
-      v-for="pager in pagers"
+    <li v-for="pager in pagers"
       :class="{ active: currentPage === pager }"
       class="number">{{ pager }}</li>
-    <li
-      class="el-icon more btn-quicknext"
+    <li class="el-icon more btn-quicknext"
       :class="[quicknextIconClass]"
       v-if="showNextMore"
       @mouseenter="quicknextIconClass = 'el-icon-d-arrow-right'"
       @mouseleave="quicknextIconClass = 'el-icon-more'">
     </li>
-    <li
-      :class="{ active: currentPage === pageCount }"
+    <li :class="{ active: currentPage === pageCount }"
       class="number"
       v-if="pageCount > 1">{{ pageCount }}</li>
   </ul>
@@ -36,7 +32,9 @@
     props: {
       currentPage: Number,
 
-      pageCount: Number
+      pageCount: Number,
+
+      pagerCount: Number
     },
 
     watch: {
@@ -52,6 +50,8 @@
     methods: {
       onPagerClick(event) {
         const target = event.target;
+        const pagerOffset = this.pagerCount - 2;
+
         if (target.tagName === 'UL') {
           return;
         }
@@ -62,9 +62,9 @@
 
         if (target.className.indexOf('more') !== -1) {
           if (target.className.indexOf('quickprev') !== -1) {
-            newPage = currentPage - 5;
+            newPage = currentPage - pagerOffset;
           } else if (target.className.indexOf('quicknext') !== -1) {
-            newPage = currentPage + 5;
+            newPage = currentPage + pagerOffset;
           }
         }
 
@@ -87,7 +87,8 @@
 
     computed: {
       pagers() {
-        const pagerCount = 7;
+        const pagerCount = this.pagerCount;
+        const halfPagerNumber = (pagerCount - 1) / 2;
 
         const currentPage = Number(this.currentPage);
         const pageCount = Number(this.pageCount);
@@ -96,11 +97,11 @@
         let showNextMore = false;
 
         if (pageCount > pagerCount) {
-          if (currentPage > pagerCount - 3) {
+          if (currentPage > pagerCount - halfPagerNumber) {
             showPrevMore = true;
           }
 
-          if (currentPage < pageCount - 3) {
+          if (currentPage < pageCount - halfPagerNumber) {
             showNextMore = true;
           }
         }
@@ -118,7 +119,7 @@
           }
         } else if (showPrevMore && showNextMore) {
           const offset = Math.floor(pagerCount / 2) - 1;
-          for (let i = currentPage - offset ; i <= currentPage + offset; i++) {
+          for (let i = currentPage - offset; i <= currentPage + offset; i++) {
             array.push(i);
           }
         } else {
