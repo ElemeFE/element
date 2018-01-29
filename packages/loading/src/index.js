@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import loadingVue from './loading.vue';
 import { addClass, removeClass, getStyle } from 'element-ui/src/utils/dom';
+import { PopupManager } from 'element-ui/src/utils/popup';
 import afterLeave from 'element-ui/src/utils/after-leave';
 import merge from 'element-ui/src/utils/merge';
 
@@ -42,6 +43,7 @@ const addStyle = (options, parent, instance) => {
   if (options.fullscreen) {
     instance.originalPosition = getStyle(document.body, 'position');
     instance.originalOverflow = getStyle(document.body, 'overflow');
+    maskStyle.zIndex = PopupManager.nextZIndex();
   } else if (options.body) {
     instance.originalPosition = getStyle(document.body, 'position');
     ['top', 'left'].forEach(property => {
