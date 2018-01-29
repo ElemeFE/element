@@ -11,7 +11,7 @@
       :style="{ 'max-width': inputWidth - 32 + 'px' }">
       <span v-if="collapseTags && selected.length">
         <el-tag
-          :closable="!disabled"
+          :closable="!selectDisabled"
           :size="collapseTagSize"
           :hit="selected[0].hitState"
           type="info"
@@ -32,7 +32,7 @@
         <el-tag
           v-for="item in selected"
           :key="getValueKey(item)"
-          :closable="!disabled"
+          :closable="!selectDisabled"
           :size="collapseTagSize"
           :hit="item.hitState"
           type="info"
@@ -46,7 +46,7 @@
         type="text"
         class="el-select__input"
         :class="[selectSize ? `is-${ selectSize }` : '']"
-        :disabled="disabled"
+        :disabled="selectDisabled"
         :autocomplete="autoComplete"
         @focus="handleFocus"
         @click.stop
@@ -73,7 +73,7 @@
       :id="id"
       :auto-complete="autoComplete"
       :size="selectSize"
-      :disabled="disabled"
+      :disabled="selectDisabled"
       :readonly="!filterable || multiple"
       :validate-event="false"
       :class="{ 'is-focus': visible }"
@@ -154,6 +154,10 @@
     componentName: 'ElSelect',
 
     inject: {
+      elForm: {
+        default: ''
+      },
+
       elFormItem: {
         default: ''
       }
@@ -171,7 +175,7 @@
       },
       iconClass() {
         let criteria = this.clearable &&
-          !this.disabled &&
+          !this.selectDisabled &&
           this.inputHovering &&
           !this.multiple &&
           this.value !== undefined &&
@@ -206,6 +210,10 @@
 
       selectSize() {
         return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
+      },
+
+      selectDisabled() {
+        return this.disabled || (this.elForm || {}).disabled;
       },
 
       collapseTagSize() {
@@ -291,7 +299,7 @@
     },
 
     watch: {
-      disabled() {
+      selectDisabled() {
         this.$nextTick(() => {
           this.resetInputHeight();
         });
@@ -652,7 +660,7 @@
       },
 
       toggleMenu() {
-        if (!this.disabled) {
+        if (!this.selectDisabled) {
           this.visible = !this.visible;
           if (this.visible) {
             (this.$refs.input || this.$refs.reference).focus();
@@ -676,7 +684,7 @@
 
       deleteTag(event, tag) {
         let index = this.selected.indexOf(tag);
-        if (index > -1 && !this.disabled) {
+        if (index > -1 && !this.selectDisabled) {
           const value = this.value.slice();
           value.splice(index, 1);
           this.$emit('input', value);

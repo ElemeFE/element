@@ -14,7 +14,7 @@
       @mousemove="setCurrentValue(item, $event)"
       @mouseleave="resetCurrentValue"
       @click="selectValue(item)"
-      :style="{ cursor: disabled ? 'auto' : 'pointer' }">
+      :style="{ cursor: rateDisabled ? 'auto' : 'pointer' }">
       <i
         :class="[classes[item - 1], { 'hover': hoverIndex === item }]"
         class="el-rate__icon"
@@ -39,6 +39,12 @@
     name: 'ElRate',
 
     mixins: [Migrating],
+
+    inject: {
+      elForm: {
+        default: ''
+      }
+    },
 
     data() {
       return {
@@ -130,7 +136,7 @@
       text() {
         let result = '';
         if (this.showScore) {
-          result = this.scoreTemplate.replace(/\{\s*value\s*\}/, this.disabled
+          result = this.scoreTemplate.replace(/\{\s*value\s*\}/, this.rateDisabled
             ? this.value
             : this.currentValue);
         } else if (this.showText) {
@@ -141,7 +147,7 @@
 
       decimalStyle() {
         let width = '';
-        if (this.disabled) {
+        if (this.rateDisabled) {
           width = `${ this.valueDecimal < 50 ? 0 : 50 }%`;
         }
         if (this.allowHalf) {
@@ -162,7 +168,7 @@
       },
 
       voidClass() {
-        return this.disabled ? this.classMap.disabledVoidClass : this.classMap.voidClass;
+        return this.rateDisabled ? this.classMap.disabledVoidClass : this.classMap.voidClass;
       },
 
       activeClass() {
@@ -197,6 +203,10 @@
           result.push(this.voidClass);
         }
         return result;
+      },
+
+      rateDisabled() {
+        return this.disabled || (this.elForm || {}).disabled;
       }
     },
 
@@ -229,7 +239,7 @@
       },
 
       showDecimalIcon(item) {
-        let showWhenDisabled = this.disabled && this.valueDecimal > 0 && item - 1 < this.value && item > this.value;
+        let showWhenDisabled = this.rateDisabled && this.valueDecimal > 0 && item - 1 < this.value && item > this.value;
         /* istanbul ignore next */
         let showWhenAllowHalf = this.allowHalf &&
           this.pointerAtLeftHalf &&
@@ -239,14 +249,14 @@
       },
 
       getIconStyle(item) {
-        const voidColor = this.disabled ? this.colorMap.disabledVoidColor : this.colorMap.voidColor;
+        const voidColor = this.rateDisabled ? this.colorMap.disabledVoidColor : this.colorMap.voidColor;
         return {
           color: item <= this.currentValue ? this.activeColor : voidColor
         };
       },
 
       selectValue(value) {
-        if (this.disabled) {
+        if (this.rateDisabled) {
           return;
         }
         if (this.allowHalf && this.pointerAtLeftHalf) {
@@ -286,7 +296,7 @@
       },
 
       setCurrentValue(value, event) {
-        if (this.disabled) {
+        if (this.rateDisabled) {
           return;
         }
         /* istanbul ignore if */
@@ -307,7 +317,7 @@
       },
 
       resetCurrentValue() {
-        if (this.disabled) {
+        if (this.rateDisabled) {
           return;
         }
         if (this.allowHalf) {

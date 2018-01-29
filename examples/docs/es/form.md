@@ -846,7 +846,9 @@ Todos los componentes de un formulario heredan su atributo `size`. De manera sim
 | show-message   | si mostrar o no el mensaje de error      | boolean | —                     | true        |
 | inline-message | si desea visualizar el mensaje de error inline con la posición del form item | boolean | —                     | false       |
 | status-icon    | si desea visualizar un icono que indique el resultado de la validación | boolean | —                     | false       |
-| size           | el tamaño de los componentes en este form | string  | medium / small / mini | -           |
+| validate-on-rule-change  | whether to trigger validation when the `rules` prop is changed | boolean | — | true |
+| size           | el tamaño de los componentes en este form | string  | medium / small / mini | —           |
+| disabled | whether to disabled all components in this form. If set to true, it cannot be overridden by its inner components' `disabled` prop | boolean | — | false |
 
 ### Form Metodos
 

@@ -23,6 +23,12 @@ export default {
     uploader: this
   },
 
+  inject: {
+    elForm: {
+      default: ''
+    }
+  },
+
   props: {
     action: {
       type: String,
@@ -107,6 +113,12 @@ export default {
       draging: false,
       tempIndex: 1
     };
+  },
+
+  computed: {
+    uploadDisabled() {
+      return this.disabled || (this.elForm || {}).disabled;
+    }
   },
 
   watch: {
@@ -235,7 +247,7 @@ export default {
     if (this.showFileList) {
       uploadList = (
         <UploadList
-          disabled={this.disabled}
+          disabled={this.uploadDisabled}
           listType={this.listType}
           files={this.uploadFiles}
           on-remove={this.handleRemove}
@@ -259,7 +271,7 @@ export default {
         fileList: this.uploadFiles,
         autoUpload: this.autoUpload,
         listType: this.listType,
-        disabled: this.disabled,
+        disabled: this.uploadDisabled,
         limit: this.limit,
         'on-exceed': this.onExceed,
         'on-start': this.handleStart,
