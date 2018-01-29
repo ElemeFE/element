@@ -1993,7 +1993,7 @@ You can customize row index in `type=index` columns.
 | sort-change | triggers when Table's sorting changes | { column, prop, order } |
 | filter-change | column's key. If you need to use the filter-change event, this attribute is mandatory to identify which column is being filtered | filters |
 | current-change | triggers when current row changes | currentRow, oldCurrentRow |
-| header-dragend | triggers when finish dragging header | newWidth, oldWidth, column, event |
+| header-dragend | triggers after changing a column's width by dragging the column header's border | newWidth, oldWidth, column, event |
 | expand-change | triggers when user expands or collapses a row | row, expandedRows |
 
 ### Table Methods
