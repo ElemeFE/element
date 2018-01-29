@@ -1990,6 +1990,7 @@ You can customize row index in `type=index` columns.
 | row-contextmenu | triggers when user right clicks on a row | row, event |
 | row-dblclick | triggers when double clicking a row | row, event |
 | header-click | triggers when clicking a column header | column, event |
+| header-contextmenu | triggers when user right clicks on a column header | column, event |
 | sort-change | triggers when Table's sorting changes | { column, prop, order } |
 | filter-change | column's key. If you need to use the filter-change event, this attribute is mandatory to identify which column is being filtered | filters |
 | current-change | triggers when current row changes | currentRow, oldCurrentRow |
