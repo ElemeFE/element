@@ -92,9 +92,7 @@ const Loading = (options = {}) => {
     addClass(parent, 'el-loading-parent--hidden');
   }
   parent.appendChild(instance.$el);
-  Vue.nextTick(() => {
-    instance.visible = true;
-  });
+  instance.visible = true;
   if (options.fullscreen) {
     fullscreenLoading = instance;
   }
