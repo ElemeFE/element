@@ -3,8 +3,13 @@ import { hasClass, addClass, removeClass } from 'element-ui/src/utils/dom';
 import ElCheckbox from 'element-ui/packages/checkbox';
 import ElTooltip from 'element-ui/packages/tooltip';
 import debounce from 'throttle-debounce/debounce';
+import LayoutObserver from './layout-observer';
 
 export default {
+  name: 'ElTableBody',
+
+  mixins: [LayoutObserver],
+
   components: {
     ElCheckbox,
     ElTooltip
@@ -16,9 +21,6 @@ export default {
     },
     stripe: Boolean,
     context: {},
-    layout: {
-      required: true
-    },
     rowClassName: [String, Function],
     rowStyle: [Object, Function],
     fixed: String,
@@ -35,11 +37,7 @@ export default {
         border="0">
         <colgroup>
           {
-            this._l(this.columns, column =>
-              <col
-                name={ column.id }
-                width={ column.realWidth || column.width }
-              />)
+            this._l(this.columns, column => <col name={ column.id } />)
           }
         </colgroup>
         <tbody>
@@ -111,9 +109,6 @@ export default {
                       }
                     }
                   })
-                }
-                {
-                  !this.fixed && this.layout.scrollY && this.layout.gutterWidth ? <td class="gutter" /> : ''
                 }
               </tr>,
               this.store.isRowExpanded(row)
@@ -344,7 +339,7 @@ export default {
 
       if (hasClass(cellChild, 'el-tooltip') && cellChild.scrollWidth > cellChild.offsetWidth && this.$refs.tooltip) {
         const tooltip = this.$refs.tooltip;
-
+        // TODO 会引起整个 Table 的重新渲染，需要优化
         this.tooltipContent = cell.textContent || cell.innerText;
         tooltip.referenceElm = cell;
         tooltip.$refs.popper && (tooltip.$refs.popper.style.display = 'none');
@@ -363,7 +358,7 @@ export default {
       const cell = getCell(event);
       if (!cell) return;
 
-      const oldHoverState = this.table.hoverState;
+      const oldHoverState = this.table.hoverState || {};
       this.table.$emit('cell-mouse-leave', oldHoverState.row, oldHoverState.column, oldHoverState.cell, event);
     },
 

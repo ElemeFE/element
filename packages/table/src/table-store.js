@@ -94,7 +94,6 @@ const TableStore = function(table, initialState = {}) {
     fixedLeafColumnsLength: 0,
     rightFixedLeafColumnsLength: 0,
     isComplex: false,
-    _data: null,
     filteredData: null,
     data: null,
     sortingColumn: null,
@@ -136,15 +135,6 @@ TableStore.prototype.mutations = {
 
     states.filteredData = data;
     states.data = sortData((data || []), states);
-
-    // states.data.forEach((item) => {
-    //   if (!item.$extra) {
-    //     Object.defineProperty(item, '$extra', {
-    //       value: {},
-    //       enumerable: false
-    //     });
-    //   }
-    // });
 
     this.updateCurrentRow();
 
@@ -252,8 +242,10 @@ TableStore.prototype.mutations = {
       states.reserveSelection = column.reserveSelection;
     }
 
-    this.updateColumns(); // hack for dynamics insert column
-    this.scheduleLayout();
+    if (this.table.$ready) {
+      this.updateColumns(); // hack for dynamics insert column
+      this.scheduleLayout();
+    }
   },
 
   removeColumn(states, column, parent) {
@@ -266,8 +258,10 @@ TableStore.prototype.mutations = {
       array.splice(array.indexOf(column), 1);
     }
 
-    this.updateColumns(); // hack for dynamics remove column
-    this.scheduleLayout();
+    if (this.table.$ready) {
+      this.updateColumns(); // hack for dynamics remove column
+      this.scheduleLayout();
+    }
   },
 
   setHoverRow(states, row) {
@@ -370,7 +364,9 @@ TableStore.prototype.clearSelection = function() {
   const states = this.states;
   states.isAllSelected = false;
   const oldSelection = states.selection;
-  states.selection = [];
+  if (states.selection.length) {
+    states.selection = [];
+  }
   if (oldSelection.length > 0) {
     this.table.$emit('selection-change', states.selection ? states.selection.slice() : []);
   }
@@ -531,8 +527,11 @@ TableStore.prototype.updateAllSelected = function() {
   states.isAllSelected = isAllSelected;
 };
 
-TableStore.prototype.scheduleLayout = function() {
-  this.table.debouncedLayout();
+TableStore.prototype.scheduleLayout = function(updateColumns) {
+  if (updateColumns) {
+    this.updateColumns();
+  }
+  this.table.debouncedUpdateLayout();
 };
 
 TableStore.prototype.setCurrentRowKey = function(key) {
