@@ -101,7 +101,7 @@
         return this.value === this.activeValue;
       },
       transform() {
-        return this.checked ? `translate3d(${ this.coreWidth - 20 }px, 0, 0)` : '';
+        return this.checked ? `translateX(${ this.coreWidth - 20 }px)` : '';
       }
     },
     watch: {
