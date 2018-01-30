@@ -214,7 +214,6 @@
 
 <script type="text/babel">
   import ElCheckbox from 'element-ui/packages/checkbox';
-  import throttle from 'throttle-debounce/throttle';
   import debounce from 'throttle-debounce/debounce';
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
   import Mousewheel from 'element-ui/src/directives/mousewheel';
