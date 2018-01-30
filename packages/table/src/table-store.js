@@ -298,6 +298,7 @@ TableStore.prototype.mutations = {
 
   toggleAllSelection: debounce(10, function(states) {
     const data = states.data || [];
+    if (data.length === 0) return;
     const value = !states.isAllSelected;
     const selection = this.states.selection;
     let selectionChanged = false;
