@@ -110,18 +110,22 @@
           }
         };
       },
-      show() {
+      show(options = {}) {
         if (this.triggerElm.disabled) return;
         clearTimeout(this.timeout);
+
+        const timeout = options.noTimeout ? 0 : this.showTimeout;
         this.timeout = setTimeout(() => {
           this.visible = true;
         }, this.showTimeout);
       },
-      hide() {
+      hide(options = {}) {
         if (this.triggerElm.disabled) return;
         this.removeTabindex();
         this.resetTabindex(this.triggerElm);
         clearTimeout(this.timeout);
+
+        const timeout = options.noTimeout ? 0 : this.hideTimeout;
         this.timeout = setTimeout(() => {
           this.visible = false;
         }, this.hideTimeout);
@@ -129,9 +133,9 @@
       handleClick() {
         if (this.triggerElm.disabled) return;
         if (this.visible) {
-          this.hide();
+          this.hide({ noTimeout: true });
         } else {
-          this.show();
+          this.show({ noTimeout: true });
         }
       },
       handleTriggerKeyDown(ev) {
