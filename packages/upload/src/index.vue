@@ -155,10 +155,12 @@ export default {
 
       this.uploadFiles.push(file);
       this.onChange(file, this.uploadFiles);
+      this.$emit('change', file, this.uploadFiles);
     },
     handleProgress(ev, rawFile) {
       const file = this.getFile(rawFile);
       this.onProgress(ev, file, this.uploadFiles);
+      this.$emit('progress', ev, file, this.uploadFiles);
       file.status = 'uploading';
       file.percentage = ev.percent || 0;
     },
@@ -172,6 +174,7 @@ export default {
         this.onSuccess(res, file, this.uploadFiles);
         this.onChange(file, this.uploadFiles);
         this.$emit('success', res, file, this.uploadFiles);
+        this.$emit('change', file, this.uploadFiles);
       }
     },
     handleError(err, rawFile) {
@@ -183,7 +186,9 @@ export default {
       fileList.splice(fileList.indexOf(file), 1);
 
       this.onError(err, file, this.uploadFiles);
+      this.$emit('error', res, file, this.uploadFiles);
       this.onChange(file, this.uploadFiles);
+      this.$emit('change', file, this.uploadFiles);
     },
     handleRemove(file, raw) {
       if (raw) {
@@ -194,6 +199,7 @@ export default {
         let fileList = this.uploadFiles;
         fileList.splice(fileList.indexOf(file), 1);
         this.onRemove(file, fileList);
+        this.$emit('remove', file, fileList);
       };
 
       if (!this.beforeRemove) {
