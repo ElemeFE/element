@@ -1948,7 +1948,7 @@ You can customize row index in `type=index` columns.
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | data | Table data | array | — | — |
-| height | Table's height. By default it has an `auto` height. If its value is a number, the height is measured in pixels; if its value is a string, the height is affected by external styles | string/number | — | — |
+| height | Table's height. By default it has an `auto` height. If its value is a number, the height is measured in pixels; if its value is a string, the value will be assigned to element's style.height, the height is affected by external styles | string/number | — | — |
 | max-height | Table's max-height. The height of the table starts from `auto` until it reaches the maxHeight limit. The `maxHeight` is measured in pixels, same as `height` | string/number | — | — |
 | stripe | whether Table is striped | boolean | — | false |
 | border | whether Table has vertical border | boolean | — | false |

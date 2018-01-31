@@ -90,6 +90,15 @@ describe('Table', () => {
       }, DELAY);
     });
 
+    it('height as string', done => {
+      const vm = createTable('height="100pt"');
+      setTimeout(_ => {
+        expect(vm.$el.style.height).to.equal('100pt');
+        destroyVM(vm);
+        done();
+      }, DELAY);
+    });
+
     it('maxHeight', done => {
       const vm = createTable('max-height="134"');
       setTimeout(_ => {
