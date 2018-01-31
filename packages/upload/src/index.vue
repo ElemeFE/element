@@ -170,8 +170,8 @@ export default {
         file.response = res;
 
         this.onSuccess(res, file, this.uploadFiles);
-        this.$emit('success', res, file, this.uploadFiles);
         this.onChange(file, this.uploadFiles);
+        this.$emit('success', res, file, this.uploadFiles);
       }
     },
     handleError(err, rawFile) {
