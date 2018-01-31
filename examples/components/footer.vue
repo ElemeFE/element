@@ -21,7 +21,7 @@
         <a href="https://github.com/ElementUI/awesome-element" class="footer-main-link" target="_blank">Awesome Element</a>
       </div>
       <div class="footer-social">
-        <p class="footer-social-title">Element {{ version && version.slice(0, 3) }} Carbon</p>
+        <p class="footer-social-title">Element {{ version && version.slice(0, 3) }} Charcoal</p>
         <el-popover
           ref="weixin"
           placement="top"
