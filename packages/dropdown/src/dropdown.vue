@@ -115,7 +115,7 @@
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
           this.visible = true;
-        }, this.showTimeout);
+        }, this.trigger === 'click' ? 0 : this.showTimeout);
       },
       hide() {
         if (this.triggerElm.disabled) return;
@@ -124,7 +124,7 @@
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
           this.visible = false;
-        }, this.hideTimeout);
+        }, this.trigger === 'click' ? 0 : this.hideTimeout);
       },
       handleClick() {
         if (this.triggerElm.disabled) return;
