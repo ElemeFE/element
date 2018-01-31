@@ -186,7 +186,7 @@ export default {
       fileList.splice(fileList.indexOf(file), 1);
 
       this.onError(err, file, this.uploadFiles);
-      this.$emit('error', res, file, this.uploadFiles);
+      this.$emit('error', err, file, this.uploadFiles);
       this.onChange(file, this.uploadFiles);
       this.$emit('change', file, this.uploadFiles);
     },
