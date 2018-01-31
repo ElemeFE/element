@@ -150,7 +150,8 @@
     prevYear,
     nextYear,
     prevMonth,
-    nextMonth
+    nextMonth,
+    changeYearMonthAndClampDate
   } from '../util';
   import Locale from 'element-ui/src/mixins/locale';
   import ElInput from 'element-ui/packages/input';
@@ -304,7 +305,7 @@
           this.date = modifyDate(this.date, this.year, month, 1);
           this.emit(this.date);
         } else {
-          this.date = modifyDate(this.date, this.year, month, this.monthDate);
+          this.date = changeYearMonthAndClampDate(this.date, this.year, month);
           // TODO: should emit intermediate value ??
           // this.emit(this.date);
           this.currentView = 'date';
@@ -325,7 +326,7 @@
           this.date = modifyDate(this.date, year, 0, 1);
           this.emit(this.date);
         } else {
-          this.date = modifyDate(this.date, year, this.month, this.monthDate);
+          this.date = changeYearMonthAndClampDate(this.date, year, this.month);
           // TODO: should emit intermediate value ??
           // this.emit(this.date, true);
           this.currentView = 'month';

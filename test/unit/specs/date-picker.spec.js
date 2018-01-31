@@ -850,6 +850,24 @@ describe('DatePicker', () => {
         });
       });
     });
+
+    it('month label with fewer dates', done => {
+      navigationTest(new Date(2000, 6, 31), _ => {
+        const $el = vm.$refs.compo.picker.$el;
+        const monthLabel = $el.querySelectorAll('.el-date-picker__header-label')[1];
+        click(monthLabel, _ => {
+          setTimeout(_ => {
+            const juneLabel = $el.querySelectorAll('.el-month-table td a')[5];
+            juneLabel.click();
+            setTimeout(_ => {
+              expect(getYearLabel()).to.include('2000');
+              expect(getMonthLabel()).to.include('6');
+              done();
+            }, DELAY);
+          }, DELAY);
+        });
+      });
+    });
   });
 
   it('type:month', done => {

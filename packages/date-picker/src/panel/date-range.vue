@@ -190,6 +190,8 @@
     isDate,
     modifyDate,
     modifyTime,
+    prevYear,
+    nextYear,
     prevMonth,
     nextMonth
   } from '../util';
@@ -557,15 +559,12 @@
         }
       },
 
+      // leftPrev*, rightNext* need to take care of `unlinkPanels`
       leftPrevYear() {
-        this.leftDate = modifyDate(this.leftDate, this.leftYear - 1, this.leftMonth, this.leftMonthDate);
+        this.leftDate = prevYear(this.leftDate);
         if (!this.unlinkPanels) {
           this.rightDate = nextMonth(this.leftDate);
         }
-      },
-
-      leftNextYear() {
-        this.leftDate = modifyDate(this.leftDate, this.leftYear + 1, this.leftMonth, this.leftMonthDate);
       },
 
       leftPrevMonth() {
@@ -575,25 +574,13 @@
         }
       },
 
-      leftNextMonth() {
-        this.leftDate = nextMonth(this.leftDate);
-      },
-
-      rightPrevYear() {
-        this.rightDate = modifyDate(this.rightDate, this.rightYear - 1, this.rightMonth, this.rightMonthDate);
-      },
-
       rightNextYear() {
         if (!this.unlinkPanels) {
-          this.leftDate = modifyDate(this.leftDate, this.leftYear + 1, this.leftMonth, this.leftMonthDate);
+          this.leftDate = nextYear(this.leftDate);
           this.rightDate = nextMonth(this.leftDate);
         } else {
-          this.rightDate = modifyDate(this.rightDate, this.rightYear + 1, this.rightMonth, this.rightMonthDate);
+          this.rightDate = nextYear(this.rightDate);
         }
-      },
-
-      rightPrevMonth() {
-        this.rightDate = prevMonth(this.rightDate);
       },
 
       rightNextMonth() {
@@ -603,6 +590,23 @@
         } else {
           this.rightDate = nextMonth(this.rightDate);
         }
+      },
+
+      // leftNext*, rightPrev* are called when `unlinkPanels` is true
+      leftNextYear() {
+        this.leftDate = nextYear(this.leftDate);
+      },
+
+      leftNextMonth() {
+        this.leftDate = nextMonth(this.leftDate);
+      },
+
+      rightPrevYear() {
+        this.rightDate = prevYear(this.rightDate);
+      },
+
+      rightPrevMonth() {
+        this.rightDate = prevMonth(this.rightDate);
       },
 
       handleConfirm(visible = false) {
