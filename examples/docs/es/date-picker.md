@@ -65,7 +65,8 @@
         value9: '',
         value10: '',
         value11: '',
-        value12: []
+        value12: '',
+        value13: []
       };
     }
   };
@@ -332,6 +333,87 @@ Si el tipo es `daterange`, `default-value` establece el calendario del lado izqu
 ```
 :::
 
+###  Formatos de Date
+Utilice `format` para controlar el formato del texto visualizado en el input. Utilice `value-format` para controlar el formato del valor vinculado.
+
+Por defecto, el componente acepta y emite un objeto Date. A continuación se soportan cadenas de formato, usando UTC 2017-01-02 03:04:05 como ejemplo:
+
+:::warning
+Preste atención a la capitalización
+:::
+
+| formato     | significado  | nota                                     | ejemplo       |
+| ----------- | ------------ | ---------------------------------------- | ------------- |
+| `yyyy`      | año          |                                          | 2017          |
+| `M`         | mes          | no acepta 0                              | 1             |
+| `MM`        | mes          |                                          | 01            |
+| `W`         | semana       | solamente para semanas en picker's `format`; no acepta 0 | 1             |
+| `WW`        | semana       | solamente para semanas en  picker's `format` | 01            |
+| `d`         | dia          | no acepta 0                              | 2             |
+| `dd`        | dia          |                                          | 02            |
+| `H`         | hora         | 24-hora reloj; no acepta 0               | 3             |
+| `HH`        | hora         | 24-hora reloj                            | 03            |
+| `h`         | hora         | 12-hora reloj;  debe usarse con `A` o `a`; no acepta 0 | 3             |
+| `hh`        | hour         | 12-hora reloj;  debe usarse con `A` o `a` | 03            |
+| `m`         | minuto       | no acepta 0                              | 4             |
+| `mm`        | minuto       |                                          | 04            |
+| `s`         | segundo      | no acepta 0                              | 5             |
+| `ss`        | segundo      |                                          | 05            |
+| `A`         | AM/PM        | solamente para `format`, mayusculas      | AM            |
+| `a`         | am/pm        | solamente para `format`, minúsculas      | am            |
+| `timestamp` | JS timestamp | solamente para `value-format`; valor vinculado debe ser un `number` | 1483326245000 |
+
+:::demo
+```html
+<template>
+  <div class="block">
+    <span class="demonstration">Emits Date object</span>
+    <div class="demonstration">Value: {{ value10 }}</div>
+    <el-date-picker
+      v-model="value10"
+      type="date"
+      placeholder="Pick a Date"
+      format="yyyy/MM/dd">
+    </el-date-picker>
+  </div>
+  <div class="block">
+    <span class="demonstration">Use value-format</span>
+    <div class="demonstration">Value: {{ value11 }}</div>
+    <el-date-picker
+      v-model="value11"
+      type="date"
+      placeholder="Pick a Date"
+      format="yyyy/MM/dd"
+      value-format="yyyy-MM-dd">
+    </el-date-picker>
+  </div>
+  <div class="block">
+    <span class="demonstration">Timestamp</span>
+    <div class="demonstration">Value：{{ value12 }}</div>
+    <el-date-picker
+      v-model="value12"
+      type="date"
+      placeholder="Pick a Date"
+      format="yyyy/MM/dd"
+      value-format="timestamp">
+    </el-date-picker>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        value10: '',
+        value11: '',
+        value12: ''
+      };
+    }
+  };
+</script>
+```
+:::
+
 ###  Hora por defecto para comienzo y fin de fecha
 
 Al seleccionar un intervalo de fechas, puede asignar la hora para la fecha de inicio y la fecha final.
@@ -357,53 +439,6 @@ Al seleccionar un intervalo de fechas, puede asignar la hora para la fecha de in
     data() {
       return {
         value12: []
-      };
-    }
-  };
-</script>
-```
-:::
-
-###  Formato del valor
-
-De forma predeterminada, DatePicker emite el objet `Date`. Puede utilizar `value-format` para designar el formato del valor emitido, acepta la misma cadena de formato del atributo `format`.
-
-:::warning
-Esta característica está en la etapa alfa. Feedback bienvenido.
- :::
-
-:::demo
-```html
-<template>
-  <div class="block">
-    <span class="demonstration">Emits Date object</span>
-    <div class="demonstration">Value: {{ value10 }}</div>
-    <el-date-picker
-      v-model="value10"
-      type="date"
-      placeholder="Pick a Date"
-      format="yyyy/MM/dd">
-    </el-date-picker>
-  </div>
-  <div class="block">
-    <span class="demonstration">Emits formatted date</span>
-    <div class="demonstration">Value: {{ value11 }}</div>
-    <el-date-picker
-      v-model="value11"
-      type="date"
-      placeholder="Pick a Date"
-      format="yyyy/MM/dd"
-      value-format="yyyy-MM-dd">
-    </el-date-picker>
-  </div>
-</template>
-
-<script>
-  export default {
-    data() {
-      return {
-        value10: '',
-        value11: '',
       };
     }
   };
