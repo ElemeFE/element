@@ -458,14 +458,14 @@ Al seleccionar un intervalo de fechas, puede asignar la hora para la fecha de in
 | start-placeholder | placeholder para la fecha de inicio en modo rango | string            | —                                        | —                    |
 | end-placeholder   | placeholder para la fecha final en modo rango | string            | —                                        | —                    |
 | type              | tipo de picker                           | string            | year/month/date/datetime/ week/datetimerange/daterange | date                 |
-| format            | formato en que se muestra el valor en el input | string            | ver [date formats](#/en-US/component/date-picker#date-formats) | yyyy-MM-dd           |
+| format            | formato en que se muestra el valor en el input | string            | ver [date formats](#/es/component/date-picker#date-formats) | yyyy-MM-dd           |
 | align             | alineación                               | left/center/right | left                                     |                      |
 | popper-class      | nombre de clase personalizada para el dropdown de DatePicker | string            | —                                        | —                    |
 | picker-options    | opciones adicionales, chequee la tabla debajo | object            | —                                        | {}                   |
 | range-separator   | separador de rangos                      | string            | —                                        | '-'                  |
 | default-value     | opcional, valor por defecto para el calendario | Date              | cualquiera aceptado por `new Date()`     | —                    |
 | default-time      | opcional, los valores para las horas que se deben usar en la seleccion de fechas cuando se usa el modo rango | string[]          | Array de dos valores, cada uno es un string del estilo `12:00:00`. El primer elemento es para la fecha de inicio y el segundo es para la fecha final. | —                    |
-| value-format      | opcional, formato del valor enlazado. Si no esta especificado, el valor enlazado será un objeto Date. | string            | ver [date formats](#/en-US/component/date-picker#date-formats) | —                    |
+| value-format      | opcional, formato del valor enlazado. Si no esta especificado, el valor enlazado será un objeto Date. | string            | ver [date formats](#/es/component/date-picker#date-formats) | —                    |
 | name              | igual que `name` en el input nativo      | string            | —                                        | —                    |
 | unlink-panels     | desvincular los dos paneles de fecha en el range-picker | boolean           | —                                        | false                |
 | prefix-icon       | Clase personalizada para el icono prefijado | string            | —                                        | el-icon-date         |
