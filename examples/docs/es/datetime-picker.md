@@ -279,14 +279,14 @@ DateTimePicker se deriva de DatePicker y TimePicker. Por una explicación más d
 | end-placeholder    | placeholder para el fin de fecha en el modo Range | string            | —                                        | —                    |
 | time-arrow-control | si se puede modificar el `time`  utilizando botones con flechas | boolean           | —                                        | false                |
 | type               | tipo del picker                          | string            | year/month/date/datetime/ week/datetimerange/daterange | date                 |
-| format             | formato de valor mostrado en el input    | string            | ver [date formats](#/en-US/component/date-picker#date-formats) | yyyy-MM-dd           |
-| alinear            | alineación                               | left/center/right | left                                     |                      |
+| format             | formato de valor mostrado en el input    | string            | ver [date formats](#/es/component/date-picker#date-formats) | yyyy-MM-dd           |
+| align              | alineación                               | left/center/right | left                                     |                      |
 | popper-class       | nombre de clase personalizado para el Dropdown de DatePicker | string            | —                                        | —                    |
 | picker-options     | opciones adicionales, Comprueba la tabla de mas abajo | object            | —                                        | {}                   |
 | range-separator    | separador de rango                       | string            | -                                        | '-'                  |
 | default-value      | opcional, fecha predeterminada del calendario | Fecha             | cualquier cosa aceptada por `new Date()` — |                      |
 | default-time       | the time value to use when selecting date range | string[]          | Array with length 2, each item is a string like `12:00:00`. The first item for the start date and then second item for the end date | —                    |
-| value-format       | opcional, formato de valor de enlazado. Si no se especifica, el valor de enlazado será un objeto Date | cadena            | ver [date formats](#/en-US/component/date-picker#date-formats) | —                    |
+| value-format       | opcional, formato de valor de enlazado. Si no se especifica, el valor de enlazado será un objeto Date | cadena            | ver [date formats](#/es/component/date-picker#date-formats) | —                    |
 | name               | igual que `name` en la entrada nativa    | string            | —                                        | —                    |
 | unlink-panels      | desconectar dos date-panels en range-picker | boolean           | —                                        | false                |
 | prefix-icon        | Clase personalizada para el icono prefijado | string            | —                                        | el-icon-date         |
