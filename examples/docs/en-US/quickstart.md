@@ -258,7 +258,7 @@ With the above config, the default size of all components that have size attribu
 Now you have implemented Vue and Element to your project, and it's time to write your code. Start development mode:
 
 ```bash
-# visit localhost:8086
+# visit localhost:8085
 npm run dev
 ```
 
