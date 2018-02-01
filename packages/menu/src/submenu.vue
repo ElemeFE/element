@@ -41,7 +41,8 @@
       hideTimeout: {
         type: Number,
         default: 300
-      }
+      },
+      popperClass: String
     },
 
     data() {
@@ -223,7 +224,8 @@
         rootMenu,
         currentPlacement,
         menuTransitionName,
-        mode
+        mode,
+        popperClass
       } = this;
 
       const popupMenu = (
@@ -231,7 +233,7 @@
           <div
             ref="menu"
             v-show={opened}
-            class={[`el-menu--${mode}`]}
+            class={[`el-menu--${mode}`, popperClass]}
             on-mouseenter={this.handleMouseenter}
             on-mouseleave={this.handleMouseleave}
             on-focus={this.handleMouseenter}>
