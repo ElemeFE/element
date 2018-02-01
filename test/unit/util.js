@@ -64,18 +64,18 @@ exports.createTest = function(Compo, propsData = {}, mounted = false) {
  * @param  {*} opts
  */
 exports.triggerEvent = function(elm, name, ...opts) {
+  
   let eventName;
+  let evt = null;
 
   if (/^mouse|click/.test(name)) {
-    eventName = 'MouseEvents';
+      evt = new MouseEvent(name, ...opts);
   } else if (/^key/.test(name)) {
-    eventName = 'KeyboardEvent';
+      evt = new KeyboardEvent(name, ...opts);
   } else {
-    eventName = 'HTMLEvents';
+      evt = new Event(name, ...opts);
   }
-  const evt = document.createEvent(eventName);
 
-  evt.initEvent(name, ...opts);
   elm.dispatchEvent
     ? elm.dispatchEvent(evt)
     : elm.fireEvent('on' + name, evt);
