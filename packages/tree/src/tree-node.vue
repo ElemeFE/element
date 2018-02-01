@@ -220,6 +220,23 @@
           }
         });
       }
+    },
+    updated() {
+      this.$nextTick(() => {
+        let store = this.tree.store;
+        let nodeKey = this.tree.nodeKey;
+        let currentNode = store.getCurrentNode();
+        let allNodes = store._getAllNodes();
+        if (currentNode) {
+          for (let nodeIndex = 0; nodeIndex < allNodes.length; nodeIndex++) {
+            if (currentNode.level === allNodes[nodeIndex].level) {
+              if (currentNode.expanded && currentNode.data[nodeKey] !== allNodes[nodeIndex].data[nodeKey]) {
+                allNodes[nodeIndex].collapse();
+              }
+            }
+          }
+        }
+      });
     }
   };
 </script>
