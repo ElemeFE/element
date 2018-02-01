@@ -65,7 +65,8 @@
         value9: '',
         value10: '',
         value11: '',
-        value12: []
+        value12: '',
+        value13: []
       };
     }
   };
@@ -332,11 +333,93 @@ Si el tipo es `daterange`, `default-value` establece el calendario del lado izqu
 ```
 :::
 
-###  Default time for start date and end date
+###  Formatos de Date
+Utilice `format` para controlar el formato del texto visualizado en el input. Utilice `value-format` para controlar el formato del valor vinculado.
 
-When picking a date range, you can assign the time part for start date and end date.
+Por defecto, el componente acepta y emite un objeto Date. A continuación se soportan cadenas de formato, usando UTC 2017-01-02 03:04:05 como ejemplo:
 
-:::demo By default, the time part of start date and end date are both `00:00:00`. Setting `default-time` can change their time respectively. It accepts an array of up to two strings with the format of `12:00:00`. The first string sets the time for the start date, and the second for the end date.
+:::warning
+Preste atención a la capitalización
+:::
+
+| formato     | significado  | nota                                     | ejemplo       |
+| ----------- | ------------ | ---------------------------------------- | ------------- |
+| `yyyy`      | año          |                                          | 2017          |
+| `M`         | mes          | no acepta 0                              | 1             |
+| `MM`        | mes          |                                          | 01            |
+| `W`         | semana       | solamente para semanas en picker's `format`; no acepta 0 | 1             |
+| `WW`        | semana       | solamente para semanas en  picker's `format` | 01            |
+| `d`         | dia          | no acepta 0                              | 2             |
+| `dd`        | dia          |                                          | 02            |
+| `H`         | hora         | 24-hora reloj; no acepta 0               | 3             |
+| `HH`        | hora         | 24-hora reloj                            | 03            |
+| `h`         | hora         | 12-hora reloj;  debe usarse con `A` o `a`; no acepta 0 | 3             |
+| `hh`        | hour         | 12-hora reloj;  debe usarse con `A` o `a` | 03            |
+| `m`         | minuto       | no acepta 0                              | 4             |
+| `mm`        | minuto       |                                          | 04            |
+| `s`         | segundo      | no acepta 0                              | 5             |
+| `ss`        | segundo      |                                          | 05            |
+| `A`         | AM/PM        | solamente para `format`, mayusculas      | AM            |
+| `a`         | am/pm        | solamente para `format`, minúsculas      | am            |
+| `timestamp` | JS timestamp | solamente para `value-format`; valor vinculado debe ser un `number` | 1483326245000 |
+
+:::demo
+```html
+<template>
+  <div class="block">
+    <span class="demonstration">Emits Date object</span>
+    <div class="demonstration">Value: {{ value10 }}</div>
+    <el-date-picker
+      v-model="value10"
+      type="date"
+      placeholder="Pick a Date"
+      format="yyyy/MM/dd">
+    </el-date-picker>
+  </div>
+  <div class="block">
+    <span class="demonstration">Use value-format</span>
+    <div class="demonstration">Value: {{ value11 }}</div>
+    <el-date-picker
+      v-model="value11"
+      type="date"
+      placeholder="Pick a Date"
+      format="yyyy/MM/dd"
+      value-format="yyyy-MM-dd">
+    </el-date-picker>
+  </div>
+  <div class="block">
+    <span class="demonstration">Timestamp</span>
+    <div class="demonstration">Value：{{ value12 }}</div>
+    <el-date-picker
+      v-model="value12"
+      type="date"
+      placeholder="Pick a Date"
+      format="yyyy/MM/dd"
+      value-format="timestamp">
+    </el-date-picker>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        value10: '',
+        value11: '',
+        value12: ''
+      };
+    }
+  };
+</script>
+```
+:::
+
+###  Hora por defecto para comienzo y fin de fecha
+
+Al seleccionar un intervalo de fechas, puede asignar la hora para la fecha de inicio y la fecha final.
+
+:::demo Por defecto, la hora de la fecha de inicio y final es `00:00:00`. Configurar `default-time`  puede cambiar la hora respectivamente. Acepta un array de hasta dos cadenas con el formato  `12:00:00`. La primera cadena fija la hora para la fecha de inicio y la segunda para la fecha final.
+
 ```html
 <template>
   <div class="block">
@@ -363,77 +446,30 @@ When picking a date range, you can assign the time part for start date and end d
 ```
 :::
 
-###  Formato del valor
-
-De forma predeterminada, DatePicker emite el objet `Date`. Puede utilizar `value-format` para designar el formato del valor emitido, acepta la misma cadena de formato del atributo `format`.
-
-:::warning
-Esta característica está en la etapa alfa. Feedback bienvenido.
- :::
-
-:::demo
-```html
-<template>
-  <div class="block">
-    <span class="demonstration">Emits Date object</span>
-    <div class="demonstration">Value: {{ value10 }}</div>
-    <el-date-picker
-      v-model="value10"
-      type="date"
-      placeholder="Pick a Date"
-      format="yyyy/MM/dd">
-    </el-date-picker>
-  </div>
-  <div class="block">
-    <span class="demonstration">Emits formatted date</span>
-    <div class="demonstration">Value: {{ value11 }}</div>
-    <el-date-picker
-      v-model="value11"
-      type="date"
-      placeholder="Pick a Date"
-      format="yyyy/MM/dd"
-      value-format="yyyy-MM-dd">
-    </el-date-picker>
-  </div>
-</template>
-
-<script>
-  export default {
-    data() {
-      return {
-        value10: '',
-        value11: '',
-      };
-    }
-  };
-</script>
-```
-:::
-
 ### Atributos
-| Atributo          | Descripción                              | Tipo              | Valores aceptados                        | Por defecto |
-| ----------------- | ---------------------------------------- | ----------------- | ---------------------------------------- | ----------- |
-| readonly          | si DatePicker es solo de lectura         | boolean           | —                                        | false       |
-| disabled          | si DatePicker esta deshabilitado         | boolean           | —                                        | false       |
-| size              | tamaño del input                         | string            | large/small/mini                         | —           |
-| editable          | si el input es editable                  | boolean           | —                                        | true        |
-| clearable         | si se muestra el boton de borrado        | boolean           | —                                        | true        |
-| placeholder       | placeholder cuando el modo NO es rango   | string            | —                                        | —           |
-| start-placeholder | placeholder para la fecha de inicio en modo rango | string            | —                                        | —           |
-| end-placeholder   | placeholder para la fecha final en modo rango | string            | —                                        | —           |
-| type              | tipo de picker                           | string            | year/month/date/datetime/ week/datetimerange/daterange | date        |
-| format            | formato en que se muestra el valor en el input | string            | año `yyyy`, mes `MM`, dia `dd`, hora `HH`, minuto `mm`, segundo `ss` | yyyy-MM-dd  |
-| align             | alineación                               | left/center/right | left                                     |             |
-| popper-class      | nombre de clase personalizada para el dropdown de DatePicker | string            | —                                        | —           |
-| picker-options    | opciones adicionales, chequee la tabla debajo | object            | —                                        | {}          |
-| range-separator   | separador de rangos                      | string            | —                                        | '-'         |
-| default-value     | opcional, valor por defecto para el calendario | Date              | cualquiera aceptado por `new Date()`     | —           |
-| default-time      | optional, the time value to use when selecting date range | string[] | Array with length 2, each item is a string like `12:00:00`. The first item for the start date and then second item for the end date | — |
-| value-format      | opcional, formato del valor enlazado. Si no esta especificado, el valor enlazado será un objeto Date. | string            | año `yyyy`, mes `MM`, dia `dd`, hora `HH`, minuto `mm`, segundo `ss` | —           |
-| name              | igual que `name` en el input nativo      | string            | —                                        | —           |
-| unlink-panels     | desvincular los dos paneles de fecha en el range-picker | boolean           | —                                        | false       |
-| prefix-icon | Custom prefix icon class | string | — | el-icon-date |
-| clear-icon | Custom clear icon class | string | — | el-icon-circle-close |
+| Atributo          | Descripción                              | Tipo              | Valores aceptados                        | Por defecto          |
+| ----------------- | ---------------------------------------- | ----------------- | ---------------------------------------- | -------------------- |
+| readonly          | si DatePicker es solo de lectura         | boolean           | —                                        | false                |
+| disabled          | si DatePicker esta deshabilitado         | boolean           | —                                        | false                |
+| size              | tamaño del input                         | string            | large/small/mini                         | —                    |
+| editable          | si el input es editable                  | boolean           | —                                        | true                 |
+| clearable         | si se muestra el boton de borrado        | boolean           | —                                        | true                 |
+| placeholder       | placeholder cuando el modo NO es rango   | string            | —                                        | —                    |
+| start-placeholder | placeholder para la fecha de inicio en modo rango | string            | —                                        | —                    |
+| end-placeholder   | placeholder para la fecha final en modo rango | string            | —                                        | —                    |
+| type              | tipo de picker                           | string            | year/month/date/datetime/ week/datetimerange/daterange | date                 |
+| format            | formato en que se muestra el valor en el input | string            | ver [date formats](#/es/component/date-picker#date-formats) | yyyy-MM-dd           |
+| align             | alineación                               | left/center/right | left                                     |                      |
+| popper-class      | nombre de clase personalizada para el dropdown de DatePicker | string            | —                                        | —                    |
+| picker-options    | opciones adicionales, chequee la tabla debajo | object            | —                                        | {}                   |
+| range-separator   | separador de rangos                      | string            | —                                        | '-'                  |
+| default-value     | opcional, valor por defecto para el calendario | Date              | cualquiera aceptado por `new Date()`     | —                    |
+| default-time      | opcional, los valores para las horas que se deben usar en la seleccion de fechas cuando se usa el modo rango | string[]          | Array de dos valores, cada uno es un string del estilo `12:00:00`. El primer elemento es para la fecha de inicio y el segundo es para la fecha final. | —                    |
+| value-format      | opcional, formato del valor enlazado. Si no esta especificado, el valor enlazado será un objeto Date. | string            | ver [date formats](#/es/component/date-picker#date-formats) | —                    |
+| name              | igual que `name` en el input nativo      | string            | —                                        | —                    |
+| unlink-panels     | desvincular los dos paneles de fecha en el range-picker | boolean           | —                                        | false                |
+| prefix-icon       | Clase personalizada para el icono prefijado | string            | —                                        | el-icon-date         |
+| clear-icon        | Clase personalizada para el icono `clear` | string            | —                                        | el-icon-circle-close |
 
 ### Opciones del Picker
 | Atributo       | Descripción                              | Tipo                           | Valores aceptados | Por defecto |
@@ -454,8 +490,8 @@ Esta característica está en la etapa alfa. Feedback bienvenido.
 | Nombre | Descripción                              | Parametros                   |
 | ------ | ---------------------------------------- | ---------------------------- |
 | change | se dispara cuando el usuario confirma el valor | valor enlazado al componente |
-| blur   | se dispara cuando el input pierde el foco | instancia del componente               |
-| focus  | se dispara cuando el input obtiene el foco | instancia del componente               |
+| blur   | se dispara cuando el input pierde el foco | instancia del componente     |
+| focus  | se dispara cuando el input obtiene el foco | instancia del componente     |
 
 ### Metodos
 | Metodo | Descripción                | Parameteros |
