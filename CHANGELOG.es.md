@@ -6,53 +6,53 @@
 
 #### New features
 - Cascader
-  - Added `focus` and `blur` events, #9184 (by @viewweiwu)
+  - Agregados los eventos `focus` y `blur`, #9184 (by @viewweiwu)
 - Table
-  - The `filter-method` now has a third param `column`, #9196 (by @liyanlong)
+  - El `filter-method` ahora tiene un tercer parámetro `column`, #9196 (by @liyanlong)
 - DatePicker
-  - Added `prefix-icon` and `clear-icon` attributes, #9237 (by @AdamSGit)
-  - Added `default-time` attribute, #9094 (by @nighca)
-  - `value-format` now supports `timestamp`, #9319 (by @wacky6)
+  - Agregados los atributos `prefix-icon` y `clear-icon`, #9237 (by @AdamSGit)
+  - Agregado el atributo `default-time`, #9094 (by @nighca)
+  - `value-format` ahora soporta `timestamp`, #9319 (by @wacky6)
 - InputNumber
-  - Now the binding value can be `undefined`, #9361
+  - Ahora el valor vinculado puede ser `undefined`, #9361
 - Select
-  - Added `auto-complete` attribute, #9388
+  - Agregado el atributo `auto-complete`, #9388
 - Form
-  - Added `disabled` attribute, #9529
-  - Added `validateOnRuleChange` attribute, #8141
-- Notificaition
-  - Added `closeAll` method, #9514
+  - Agregado el atributo `disabled`, #9529
+  - Agregado el atributo `validateOnRuleChange`, #8141
+- Notification
+  - Agregado el metodo `closeAll`, #9514
 
 #### Bug fixes
 - InputNumber
-  - Fixed value resetting when typing decimal point, #9116
+  - Arreglado el reseteo del valor cuando tiene punto decimal, #9116
 - Dropdown
-  - Fixed dropdown menu incorrect positioning when the page only has a horizontal scrollbar in some browsers, #9138 (by @banzhuanmei)
+  - Arreglado el dropdown menu que tenia un posicionamiento incorrecto cuando la página sólo tiene una barra de desplazamiento horizontal en algunos navegadores, #9138 (by @banzhuanmei)
 - Table
-  - Fixed an error in calculating number of fixed columns after the column data changes, #9188（by @kolesoffac）
-  - Fixed the border of the last column of the grouped header not properly displayed, #9326
-  - Fixed incorrect positioning of table header in Safari, #9327
-  - Fixed expanded row collapsing when the table data changes, #9462
-  - Fixed unnecessary multiple renders in some conditions, #9426
-  - Fixed column width calculation error when `width` of TableColumn changes, #9426
+  - Corregido un error en el cálculo del número de columnas fijas después de que los datos de la columna cambian, #9188（by @kolesoffac）
+  - Corregido el borde de la última columna de la cabecera agrupada que no se visualizaba correctamente., #9326
+  - Corregido el posicionamiento incorrecto del header de la tabla en Safari, #9327
+  - Corregido fila expandida colapsaba cuando cambiaban los datos de la tabla, #9462
+  - Corregido renders múltiples innecesarios en algunas condiciones, #9426
+  - Corregido un error de calculo en el ancho de la columna cuando `width` cambiaba en TableColumn, #9426
 - Loading
-  - Fixed Loading not hiding correctly in some conditions, #9313
+  - Corregido que en algunas ocasiones el loading no se ocultaba correctamente, #9313
 - DatePicker
-  - Fixed `focus` method not working in range mode, #9437
-  - Fixed clicking the "now" button still selecting the current date even if it is disabled, #9470 (by @wacky6)
-  - Fixed date clamping when navigating, #9577 (by @wacky6)
+  - Corregido el metodo `focus` que no funcionaba en modo `range`, #9437
+  - Corregido si se hacia clic en el botón "now" seguia seleccionando la fecha actual aunque estuviera desactivado, #9470 (by @wacky6)
+  - Corregido fijación de fechas al navegar, #9577 (by @wacky6)
 - Steps
-  - Fixed style error in IE 11, #9454
+  - Corregido error de estilos en IE 11, #9454
 
 #### Breaking changes
 - Menu
-  - The popup menu in `collapse` mode now appends directly to `body`, so that it is visible when nested in Aside, #9263
+  - El menú desplegable en modo `collapse` ahora se agrega directamente al `body`, de modo que es visible cuando está anidado en Aside, #9263
 - Table
-  - Now checking the checkboxes in multi-selection Table doesn't trigger `row-click` event, #9467
+  - Ahora, al marcar los checkboxes en la Tabla de selección múltiple no se activa el evento `row-click`, #9467
 - Loading
-  - The `z-index` of non-fullscreen loading mask is changed to 2000. The `z-index` of fullscreen loading mask will update dynamically with the popup components, #9522
+  - El `z-index` de la máscara de carga non-fullscreen se cambia a 2000. El `z-index` de la máscara de carga fullscreen se actualiza dinámicamente con los componentes emergentes, #9522
 - Dropdown
-  - `show-timeout` and `hide-timeout` attributes now only works when trigger is `hover`, #9573
+  - Los atributos `show-timeout` y `hide-timeout` ahora solo trabajan si se dispara `hover`, #9573
 
 ### 2.0.11
 
