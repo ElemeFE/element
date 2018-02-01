@@ -431,7 +431,7 @@
       xhr.onreadystatechange = _ => {
         if (xhr.readyState === 4 && xhr.status === 200) {
           const versions = JSON.parse(xhr.responseText);
-          this.versions = Object.keys(versions).slice(-2).reduce((prev, next) => {
+          this.versions = Object.keys(versions).reduce((prev, next) => {
             prev[next] = versions[next];
             return prev;
           }, {});

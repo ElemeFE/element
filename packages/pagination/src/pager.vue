@@ -13,6 +13,7 @@
     </li>
     <li
       v-for="pager in pagers"
+      :key="pager"
       :class="{ active: currentPage === pager }"
       class="number">{{ pager }}</li>
     <li
