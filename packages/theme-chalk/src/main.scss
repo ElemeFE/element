@@ -4,6 +4,7 @@
 @include b(main) {
   flex: 1;
   overflow: auto;
+  display: block;
   box-sizing: border-box;
   padding: $--main-padding;
 }
