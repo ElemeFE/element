@@ -41,13 +41,13 @@
       querySearch(queryString, cb) {
         var links = this.links;
         var results = queryString ? links.filter(this.createStateFilter(queryString)) : links;
-    
+
         cb(results);
       },
       querySearchAsync(queryString, cb) {
         var links = this.links;
         var results = queryString ? links.filter(this.createStateFilter(queryString)) : links;
-    
+
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
           cb(results);
@@ -106,17 +106,17 @@
     }
     .demo-autocomplete {
       text-align: center;
-    
+
       .sub-title {
         margin-bottom: 10px;
         font-size: 14px;
         color: #8492a6;
       }
-    
+
       .el-col:not(:last-child) {
         border-right: 1px solid rgba(224,230,237,0.50);
       }
-    
+
       .el-autocomplete {
         text-align: left;
       }
@@ -126,7 +126,7 @@
     li {
       line-height: normal;
       padding: 7px *;
-    
+
       .name {
         text-overflow: ellipsis;
         overflow: hidden;
@@ -668,7 +668,7 @@ Atributo | Descripción | Tipo | Opciones | Por defecto
 |----| ----| ----| ---- | -----|
 |placeholder| el placeholder del Autocomplete| string | — | — |
 |disabled | si el Autocompete esta deshabilitado  | boolean | — | false|
-| valueKey | nombre del campo del objeto de sugerencia del input para la visualización | string | — | value |
+| value-key | nombre del campo del objeto de sugerencia del input para la visualización | string | — | value |
 |icon | nombre del icono | string | — | — |
 |value | valor enlazado | string | — | — |
 | debounce | retardo al escribir, en milisegundos | number | — | 300 |
