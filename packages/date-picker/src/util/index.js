@@ -181,43 +181,37 @@ export const timeWithinRange = function(date, selectableRange, format) {
   return limitedDate.getTime() === date.getTime();
 };
 
-export const prevMonth = function(date) {
-  let year = date.getFullYear();
-  let month = date.getMonth();
-  if (month === 0) {
-    year -= 1;
-    month = 11;
-  } else {
-    month -= 1;
-  }
+export const changeYearMonthAndClampDate = function(date, year, month) {
+  // clamp date to the number of days in `year`, `month`
+  // eg: (2010-1-31, 2010, 2) => 2010-2-28
   const monthDate = Math.min(date.getDate(), getDayCountOfMonth(year, month));
   return modifyDate(date, year, month, monthDate);
+};
+
+export const prevMonth = function(date) {
+  const year = date.getFullYear();
+  const month = date.getMonth();
+  return month === 0
+    ? changeYearMonthAndClampDate(date, year - 1, 11)
+    : changeYearMonthAndClampDate(date, year, month - 1);
 };
 
 export const nextMonth = function(date) {
-  let year = date.getFullYear();
-  let month = date.getMonth();
-  if (month === 11) {
-    year += 1;
-    month = 0;
-  } else {
-    month += 1;
-  }
-  const monthDate = Math.min(date.getDate(), getDayCountOfMonth(year, month));
-  return modifyDate(date, year, month, monthDate);
+  const year = date.getFullYear();
+  const month = date.getMonth();
+  return month === 11
+    ? changeYearMonthAndClampDate(date, year + 1, 0)
+    : changeYearMonthAndClampDate(date, year, month + 1);
 };
 
-// check for leap year Feburary
 export const prevYear = function(date, amount = 1) {
-  const year = date.getFullYear() - amount;
+  const year = date.getFullYear();
   const month = date.getMonth();
-  const monthDate = Math.min(date.getDate(), getDayCountOfMonth(year, month));
-  return modifyDate(date, year, month, monthDate);
+  return changeYearMonthAndClampDate(date, year - amount, month);
 };
 
 export const nextYear = function(date, amount = 1) {
-  const year = date.getFullYear() + amount;
+  const year = date.getFullYear();
   const month = date.getMonth();
-  const monthDate = Math.min(date.getDate(), getDayCountOfMonth(year, month));
-  return modifyDate(date, year, month, monthDate);
+  return changeYearMonthAndClampDate(date, year + amount, month);
 };

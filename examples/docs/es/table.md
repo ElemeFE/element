@@ -240,7 +240,7 @@
       handleDelete(index, row) {
         console.log(index, row);
       },
-
+    
       handleSelectionChange(val) {
         this.multipleSelection = val;
       },
@@ -256,12 +256,12 @@
       filterTag(value, row) {
         return row.tag === value;
       },
-
+    
       filterHandler(value, row, column) {
         const property = column['property'];
         return row[property] === value;
       },
-
+    
       tableRowClassName({row, rowIndex}) {
         if (rowIndex === 1) {
           return 'warning-row';
@@ -1951,7 +1951,7 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | Atributo               | Descripción                              | Tipo                                     | Valores aceptados              | Por defecto                              |
 | ---------------------- | ---------------------------------------- | ---------------------------------------- | ------------------------------ | ---------------------------------------- |
 | data                   | Datos de la tabla                        | array                                    | —                              | —                                        |
-| height                 | Altura de la tabla. Por defecto esta tiene un tamaño `auto`. Si este valor es un número, la altura es medido en pixeles; si este valor es una cadena, la altura es afectada por estilos externos | string/number                            | —                              | —                                        |
+| height                 | Altura de la tabla. Por defecto esta tiene un tamaño `auto`. Si este valor es un número, la altura es medido en pixeles; si este valor es una cadena, la altura es afectada por estilos externos. | string/number                            | —                              | —                                        |
 | max-height             | Altura máxima de la tabla. La altura de la tabla comienza desde `auto` hasta que alcanza la altura máxima. El `max-height` es medido en pixeles, lo mismo que `height` | string/number                            | —                              | —                                        |
 | stripe                 | especifica si la tabla será en franjas   | boolean                                  | —                              | false                                    |
 | border                 | especifica si la tabla tiene bordes verticales | boolean                                  | —                              | false                                    |
@@ -1962,8 +1962,8 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | current-row-key        | clave de la fila actual, un ajuste de propiedad única | string,number                            | —                              | —                                        |
 | row-class-name         | función que devuelve nombres de clases personalizadas para una fila, o una cadena asignando nombres de clases para cada fila | Function({row, rowIndex})/String         | —                              | —                                        |
 | row-style              | función que devuelve el estilo personalizado para una fila, o un objeto asignando estilos personalizado para cada fila | Function({row, rowIndex})/Object         | —                              | —                                        |
-| cell-class-name        | función que devuelve nombres de clases personalizadas para una celda, o una cadena asignando nombres de clases para cada celda | Function({row, column, rowIndex, columnIndex})/String         | —                              | —                                        |
-| cell-style             | función que devuelve estilos personalizados para una celda, o un objeto asignado a estilos personalizados para cada celda | Function({row, column, rowIndex, columnIndex})/Object         | —                              | —                                        |
+| cell-class-name        | función que devuelve nombres de clases personalizadas para una celda, o una cadena asignando nombres de clases para cada celda | Function({row, column, rowIndex, columnIndex})/String | —                              | —                                        |
+| cell-style             | función que devuelve estilos personalizados para una celda, o un objeto asignado a estilos personalizados para cada celda | Function({row, column, rowIndex, columnIndex})/Object | —                              | —                                        |
 | header-row-class-name  | función que devuelve nombre de clases personalizadas para una fila en la cabecera de la tabla, o una cadena asignando nombres de clases para cada fila en la cabecera de la tabla | Function({row, rowIndex})/String         | —                              | —                                        |
 | header-row-style       | función que devuelve estilos personalizados para una fila en la cabecera de la tabla, o un objeto asignando estilos personalizados para cada fila en la cabecera de la tabla | Function({row, rowIndex})/Object         | —                              | —                                        |
 | header-cell-class-name | función que devuelve nombre de clases personalizadas para una celda en la cabecera de la tabla, o una cadena asignando nombres de clases para cada celda en la cabecera de la tabla | Function({row, rowIndex})/String         | —                              | —                                        |
@@ -1980,25 +1980,25 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | span-method            | método que devuelve _rowspan_ y _colspan_ | Function({ row, column, rowIndex, columnIndex }) | —                              | —                                        |
 
 ### Eventos de la tabla
-| Nombre del evento | Descripción                              | Parámetros                        |
-| ----------------- | ---------------------------------------- | --------------------------------- |
-| select            | se dispara cuando el usuario hace clic al _checkbox_ (caja de selección) en una fila | selection, row                    |
-| select-all        | se dispara cando el usuario hace clic al _checkbox_ (caja de selección) en una cabecera de la tabla | selection                         |
-| selection-change  | se dispara cuando selección cambia       | selection                         |
-| cell-mouse-enter  | se dispara cuando se desplaza dentro de una celda | row, column, cell, event          |
-| cell-mouse-leave  | se dispara cuando se desplaza fuera de una celda | row, column, cell, event          |
-| cell-click        | se dispara cuando se hace clic en una celda | row, column, cell, event          |
-| cell-dblclick     | se dispara cuando se hace doble clic en una celda | row, column, cell, event          |
-| row-click         | se dispara cuando se hace clic en una fila | row, event, column                |
-| row-contextmenu   | se dispara cuando el usuario hace clic derecho en una fila | row, event                        |
-| row-dblclick      | se dispara cuando se hace doble clic en una fila | row, event                        |
-| header-click      | se dispara cuando se hace click en una cabecera de columna | column, event                     |
-| header-contextmenu | se dispara cuando el usuario hace clic derecho en una cabecera de columna | column, event |
-| sort-change       | se dispara cuando el ordenamiento de la tabla cambia | { column, prop, order }           |
-| filter-change     | clave de la columna. Si necesitas utilizar el evento filter-change, este atributo es obligatorio para identificar cuál columna está siendo filtrada | filters                           |
-| current-change    | se dispara cuando la fila actual cambia  | currentRow, oldCurrentRow         |
-| header-dragend    | se dispara cuando se deja de arrastrar la cabecera | newWidth, oldWidth, column, event |
-| expand-change     | se dispara cuando el usuario expande o colapsa una fila | row, expandedRows                 |
+| Nombre del evento  | Descripción                              | Parámetros                        |
+| ------------------ | ---------------------------------------- | --------------------------------- |
+| select             | se dispara cuando el usuario hace clic al _checkbox_ (caja de selección) en una fila | selection, row                    |
+| select-all         | se dispara cando el usuario hace clic al _checkbox_ (caja de selección) en una cabecera de la tabla | selection                         |
+| selection-change   | se dispara cuando selección cambia       | selection                         |
+| cell-mouse-enter   | se dispara cuando se desplaza dentro de una celda | row, column, cell, event          |
+| cell-mouse-leave   | se dispara cuando se desplaza fuera de una celda | row, column, cell, event          |
+| cell-click         | se dispara cuando se hace clic en una celda | row, column, cell, event          |
+| cell-dblclick      | se dispara cuando se hace doble clic en una celda | row, column, cell, event          |
+| row-click          | se dispara cuando se hace clic en una fila | row, event, column                |
+| row-contextmenu    | se dispara cuando el usuario hace clic derecho en una fila | row, event                        |
+| row-dblclick       | se dispara cuando se hace doble clic en una fila | row, event                        |
+| header-click       | se dispara cuando se hace click en una cabecera de columna | column, event                     |
+| header-contextmenu | se dispara cuando el usuario hace clic derecho en una cabecera de columna | column, event                     |
+| sort-change        | se dispara cuando el ordenamiento de la tabla cambia | { column, prop, order }           |
+| filter-change      | clave de la columna. Si necesitas utilizar el evento filter-change, este atributo es obligatorio para identificar cuál columna está siendo filtrada | filters                           |
+| current-change     | se dispara cuando la fila actual cambia  | currentRow, oldCurrentRow         |
+| header-dragend     | se dispara después de modificar el ancho de una columna arrastrando el borde de la cabecera. | newWidth, oldWidth, column, event |
+| expand-change      | se dispara cuando el usuario expande o colapsa una fila | row, expandedRows                 |
 
 ### Métodos de la tabla
 | Metodo             | Descripción                              | Parametros    |
@@ -2042,5 +2042,5 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | filters               | un arreglo de opciones para filtrado de datos. Para cada elemento en este arreglo, `text` y `value` son obligatorios | Array[{ text, value }]            | —                             | —           |
 | filter-placement      | colocación para el menu desplegable del filtro | String                            | same as Tooltip's `placement` | —           |
 | filter-multiple       | especifica si el filtrado de datos soporta múltiples opciones | Boolean                           | —                             | true        |
-| filter-method         | método para filtrado de datos. Si `filter-multiple` está habilitado, este método se invocará varias veces para cada fila, y una fila puede mostrar si una de las llamadas devuelve `true` | Function(value, row, column)              | —                             | —           |
+| filter-method         | método para filtrado de datos. Si `filter-multiple` está habilitado, este método se invocará varias veces para cada fila, y una fila puede mostrar si una de las llamadas devuelve `true` | Function(value, row, column)      | —                             | —           |
 | filtered-value        | el valor del filtro para los datos seleccionados, puede ser útil cuando el encabezado de la tabla se representará con `render-header` | Array                             | —                             | —           |

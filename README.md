@@ -21,14 +21,22 @@
 <p align="center">
   <b>Special thanks to the generous sponsorship by:</b>
 </p>
-<p align="center">
-  <a href="https://tipe.io/?ref=element" target="_blank">Tipe.io</a>
-</p>
-<p align="center">
-  <a href="https://tipe.io/?ref=element" target="_blank">
-    <img style="vertical-align: middle" height="150px" alt="Tipe CMS" src="https://user-images.githubusercontent.com/1016365/34124854-48fafa06-e3e9-11e7-8c04-251055feebee.png">
-  </a>
-</p>
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="middle">
+        <a href="https://tipe.io/?ref=element" target="_blank">
+          <img width="150px" src="https://user-images.githubusercontent.com/1016365/34124854-48fafa06-e3e9-11e7-8c04-251055feebee.png">
+        </a>
+      </td>
+      <td align="center" valign="middle">
+        <a href="https://www.duohui.cn/?utm_source=element&utm_medium=web&utm_campaign=element-index" target="_blank">
+          <img width="150px" src="https://user-images.githubusercontent.com/10095631/35603534-bb24470c-0678-11e8-8bcc-17ceaef8cbef.png">
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ## Links
 - Homepage and documentation

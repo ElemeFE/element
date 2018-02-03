@@ -3,6 +3,7 @@ import ElCheckbox from 'element-ui/packages/checkbox';
 import ElTag from 'element-ui/packages/tag';
 import Vue from 'vue';
 import FilterPanel from './filter-panel.vue';
+import LayoutObserver from './layout-observer';
 
 const getAllColumns = (columns) => {
   const result = [];
@@ -65,13 +66,14 @@ const convertToRows = (originColumns) => {
 export default {
   name: 'ElTableHeader',
 
+  mixins: [LayoutObserver],
+
   render(h) {
     const originColumns = this.store.states.originColumns;
     const columnRows = convertToRows(originColumns, this.columns);
     // 是否拥有多级表头
     const isGroup = columnRows.length > 1;
     if (isGroup) this.$parent.isGroup = true;
-
     return (
       <table
         class="el-table__header"
@@ -80,16 +82,10 @@ export default {
         border="0">
         <colgroup>
           {
-            this._l(this.columns, column =>
-              <col
-                name={ column.id }
-                width={ column.realWidth || column.width }
-              />)
+            this._l(this.columns, column => <col name={ column.id } />)
           }
           {
-            !this.fixed && this.layout.gutterWidth
-              ? <col name="gutter" width={ this.layout.scrollY ? this.layout.gutterWidth : '' }></col>
-              : ''
+            this.hasGutter ? <col name="gutter" /> : ''
           }
         </colgroup>
         <thead class={ [{ 'is-group': isGroup, 'has-gutter': this.hasGutter }] }>
@@ -137,12 +133,7 @@ export default {
                   )
                 }
                 {
-                  this.hasGutter
-                    ? <th class="gutter" style={{
-                      width: this.layout.scrollY ? this.layout.gutterWidth + 'px' : '0',
-                      display: this.layout.scrollY ? '' : 'none'
-                    }}></th>
-                    : ''
+                  this.hasGutter ? <th class="gutter"></th> : ''
                 }
               </tr>
             )
@@ -155,9 +146,6 @@ export default {
   props: {
     fixed: String,
     store: {
-      required: true
-    },
-    layout: {
       required: true
     },
     border: Boolean,
@@ -211,7 +199,7 @@ export default {
     },
 
     hasGutter() {
-      return !this.fixed && this.layout.gutterWidth;
+      return !this.fixed && this.tableLayout.gutterWidth;
     }
   },
 
