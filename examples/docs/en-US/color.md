@@ -25,7 +25,20 @@
     }
   }
   .bg-blue {
-    background-color: #409EFF;
+    background-color: #5E82FC;
+  }
+  .bg-green {
+    background-color: #7DCB46;
+  }
+  .bg-red {
+    background-color: #EC5657;
+  }
+  .bg-brown {
+    background-color: #EBB242;
+  }
+  .bg-smoke {
+    color: #4A4E59;
+    background-color: #F4F5F9;
   }
 
   .bg-success {
@@ -41,30 +54,21 @@
     background-color: #909399;
   }
 
-  .bg-text-primary {
-    background-color: #303133;
+  .bg-text-darkest {
+    background-color: #1E1E28;
   }
-  .bg-text-regular {
-    background-color: #606266;
+  .bg-text-dark {
+    background-color: #4A4E59;
   }
-  .bg-text-secondary {
-    background-color: #909399;
+  .bg-text-medium {
+    background-color: #909090;
   }
-  .bg-text-placeholder {
-    background-color: #c0c4cc;
+  .bg-text-light {
+    background-color: #CCCCCC;
   }
-
-  .bg-border-base {
-    background-color: #dcdfe6;
-  }
-  .bg-border-light {
-    background-color: #e4e7ed;
-  }
-  .bg-border-lighter {
-    background-color: #ebeef5;
-  }
-  .bg-border-extra-light {
-    background-color: #f2f6fc;
+  .bg-text-white {
+    color: #4A4E59;
+    background-color: #FFFFFF;
   }
 
   [class*=" bg-border-"] {
@@ -79,50 +83,42 @@ Element uses a specific set of palettes to specify colors to provide a consisten
 
 The main color of Element is bright and friendly blue.
 
-<el-row :gutter="12">
-  <el-col :span="6">
-    <div class="demo-color-box bg-blue">Blue<div class="value">#409EFF</div></div>
+<el-row :gutter="10">
+  <el-col :span="4">
+    <div class="demo-color-box bg-blue">Blueberry<div class="value">#5E82FC</div></div>
+  </el-col>
+  <el-col :span="4">
+    <div class="demo-color-box bg-green">Mantis<div class="value">#7DCB46</div></div>
+  </el-col>
+  <el-col :span="4">
+    <div class="demo-color-box bg-red">Sunset Orange<div class="value">#EC5657</div></div>
+  </el-col>
+  <el-col :span="4">
+    <div class="demo-color-box bg-brown">Meat Brown<div class="value">#EBB242</div></div>
+  </el-col>
+  <el-col :span="4">
+    <div class="demo-color-box bg-smoke">White Smoke<div class="value">#F4F5F9</div></div>
   </el-col>
 </el-row>
 
-### Secondary Color
+### Text Color
 
-Besides the main color, you need to use different scene colors in different scenarios (for example, dangerous color indicates dangerous operation)
+Text colors are for text.
 
-<el-row :gutter="12">
-  <el-col :span="6">
-    <div class="demo-color-box bg-success">Success<div class="value">#67C23A</div></div>
+<el-row :gutter="10">
+  <el-col :span="4">
+    <div class="demo-color-box bg-text-darkest">Dark Gunmetal<div class="value">#1E1E28</div></div>
   </el-col>
-  <el-col :span="6">
-    <div class="demo-color-box bg-warning">Warning<div class="value">#E6A23C</div></div>
+  <el-col :span="4">
+    <div class="demo-color-box bg-text-dark">Davy's Grey<div class="value">#4A4E59</div></div>
   </el-col>
-  <el-col :span="6">
-    <div class="demo-color-box bg-danger">Danger<div class="value">#F56C6C</div></div>
+  <el-col :span="4">
+    <div class="demo-color-box bg-text-medium">Taupe Gray<div class="value">#909090</div></div>
   </el-col>
-  <el-col :span="6">
-    <div class="demo-color-box bg-info">Info<div class="value">#909399</div></div>
+  <el-col :span="4">
+    <div class="demo-color-box bg-text-light">Pastel Gray<div class="value">#CCCCCC</div></div>
   </el-col>
-</el-row>
-
-### Neutral Color
-
-Neutral colors are for text, background and border colors. You can use different neutral colors to represent the hierarchical structure.
-
-<el-row :gutter="12">
-  <el-col :span="6">
-    <div class="demo-color-box-group">
-      <div class="demo-color-box bg-text-primary">Primary Text<div class="value">#303133</div></div>
-      <div class="demo-color-box bg-text-regular">Regular Text<div class="value">#606266</div></div>
-      <div class="demo-color-box bg-text-secondary">Secondary Text<div class="value">#909399</div></div>
-      <div class="demo-color-box bg-text-placeholder">Placeholder Text<div class="value">#C0C4CC</div></div>
-    </div>
-  </el-col>
-  <el-col :span="6">
-    <div class="demo-color-box-group">
-      <div class="demo-color-box bg-border-base">Base Border<div class="value">#DCDFE6</div></div>
-      <div class="demo-color-box bg-border-light">Light Border<div class="value">#E4E7ED</div></div>
-      <div class="demo-color-box bg-border-lighter">Lighter Border<div class="value">#EBEEF5</div></div>
-      <div class="demo-color-box bg-border-extra-light">Extra Light Border<div class="value">#F2F6FC</div></div>
-    </div>
+  <el-col :span="4">
+    <div class="demo-color-box bg-text-white">White<div class="value">#FFFFFF</div></div>
   </el-col>
 </el-row>

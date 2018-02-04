@@ -2,20 +2,10 @@ import navConfig from './nav.config.json';
 import langs from './i18n/route.json';
 
 const LOAD_MAP = {
-  'zh-CN': name => {
-    return r => require.ensure([], () =>
-      r(require(`./pages/zh-CN/${name}.vue`)),
-    'zh-CN');
-  },
   'en-US': name => {
     return r => require.ensure([], () =>
       r(require(`./pages/en-US/${name}.vue`)),
     'en-US');
-  },
-  'es': name => {
-    return r => require.ensure([], () =>
-      r(require(`./pages/es/${name}.vue`)),
-    'es');
   }
 };
 
@@ -24,20 +14,10 @@ const load = function(lang, path) {
 };
 
 const LOAD_DOCS_MAP = {
-  'zh-CN': path => {
-    return r => require.ensure([], () =>
-      r(require(`./docs/zh-CN${path}.md`)),
-    'zh-CN');
-  },
   'en-US': path => {
     return r => require.ensure([], () =>
       r(require(`./docs/en-US${path}.md`)),
     'en-US');
-  },
-  'es': path => {
-    return r => require.ensure([], () =>
-      r(require(`./docs/es${path}.md`)),
-    'es');
   }
 };
 

@@ -30,39 +30,50 @@
   }
   .demo-typo-size {
     .h1 {
-      font-size: 20px;
+      font-size: 28px;
+      letter-spacing: -0.4px;
+      line-height: 30px;
+      font-weight: bold;
     }
     .h2 {
-      font-size: 18px;
+      font-size: 22px;
+      letter-spacing: -0.3px;
+      line-height: 24px;
+      font-weight: bold;
     }
     .h3 {
-      font-size: 16px;
+      font-size: 17px;
+      letter-spacing: -0.2px;
+      font-weight: bold;
+    }
+    .h4 {
+      font-size: 15px;
+      letter-spacing: -0.1px;
+      font-weight: bold;
     }
     .text-regular {
+      font-size: 17px;
+      letter-spacing: -0.2px;
+      line-height: 20px;
+      margin: 10px 0 0;
+    }
+    .text-secondary {
       font-size: 14px;
+      letter-spacing: -0.2px;
+      margin: 8px 0 0;
     }
-    .text-small {
-      font-size: 13px;
-    }
-    .text-smaller {
-      font-size: 12px;
+    .text-note {
+      font-size: 11px;
+      letter-spacing: -0.1px;
+      line-height: 12px;
+      margin: 4px 0 0;
     }
     .color-dark-light {
       color: #99a9bf;
     }
   }
-  .typo-PingFang {
-    font-family: 'PingFang SC';
-  }
-  .typo-Hiragino {
-    font-family: 'Hiragino Sans GB';
-  }
-  .typo-Microsoft {
-    font-family: 'Microsoft YaHei';
-  }
-  /* 英文 */
-  .typo-Helvetica-Neue {
-    font-family: 'Helvetica Neue';
+  .typo-Roboto {
+    font-family: 'Roboto';
   }
   .typo-Helvetica {
     font-family: 'Helvetica';
@@ -76,26 +87,11 @@
 
 We create a font convention to ensure the best presentation across different platforms.
 
-### Chinese Font
-
-<div class="demo-typo-box typo-PingFang">
-  和畅惠风
-  <div class="name">PingFang SC</div>
-</div>
-<div class="demo-typo-box typo-Hiragino">
-  和畅惠风
-  <div class="name">Hiragino Sans GB</div>
-</div>
-<div class="demo-typo-box typo-Microsoft">
-  和畅惠风
-  <div class="name">Microsoft YaHei</div>
-</div>
-
 ### English / Numberic Font
 
-<div class="demo-typo-box typo-Helvetica-neue">
+<div class="demo-typo-box typo-Roboto">
   RGag
-  <div class="name">Helvetica Neue</div>
+  <div class="name">Roboto</div>
 </div>
 <div class="demo-typo-box typo-Helvetica">
   RGag
@@ -109,7 +105,7 @@ We create a font convention to ensure the best presentation across different pla
 ### Font-family
 
 ```css
-font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+font-family: "Roboto",Helvetica,Arial,sans-serif;
 ```
 
 ### Font Convention
@@ -117,34 +113,39 @@ font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Micros
 <table class="demo-typo-size">
   <tbody>
     <tr>
-      <td class="h1">Main Title</td>
-      <td class="h1">Build with Element</td>
-      <td class="color-dark-light">20px  Extra large</td>
+      <td class="h1">Заголовок первого уровня</td>
+      <td class="h1">Build with TM-Ui</td>
+      <td class="color-dark-light">@fontH1Product { font-size: 28px; line-height: 30px; font-weight: bold; letter-spacing: -0.4px; }</td>
     </tr>
     <tr>
-      <td class="h2">Title</td>
-      <td class="h2">Build with Element</td>
-      <td class="color-dark-light">18px large</td>
+      <td class="h2">Заголовок второго уровня</td>
+      <td class="h2">Build with TM-Ui</td>
+      <td class="color-dark-light">@fontH2Product { font-size: 22px; line-height: 24px; font-weight: bold; letter-spacing: -0.3px; }</td>
     </tr>
     <tr>
-      <td class="h3">Small Title</td>
-      <td class="h3">Build with Element</td>
-      <td class="color-dark-light">16px Medium</td>
+      <td class="h3">Заголовок третьего уровня</td>
+      <td class="h3">Build with TM-Ui</td>
+      <td class="color-dark-light">@fontH3Product { font-size: 17px; line-height: 20px; font-weight: bold; letter-spacing: -0.2px; }</td>
     </tr>
     <tr>
-      <td class="text-regular">Body</td>
-      <td class="text-regular">Build with Element</td>
-      <td class="color-dark-light">14px Small</td>
+      <td class="h4">Заголовок четвертого уровня</td>
+      <td class="h4">Build with TM-Ui</td>
+      <td class="color-dark-light">@fontH4Product { font-size: 15px; line-height: 18px; font-weight: bold; letter-spacing: -0.1px; }</td>
     </tr>
     <tr>
-      <td class="text-small">Body (small)</td>
-      <td class="text-small">Build with Element</td>
-      <td class="color-dark-light">13px Extra Small</td>
+      <td class="text-regular">Шрифт для основного текста</td>
+      <td class="text-regular">Build with TM-Ui</td>
+      <td class="color-dark-light">@fontBodyProduct { font-size: 17px; line-height: 20px; font-weight: regular; letter-spacing: -0.2px; margin: 10px 0 0; }</td>
     </tr>
     <tr>
-      <td class="text-smaller">Supplementary text</td>
-      <td class="text-smaller">Build with Element</td>
-      <td class="color-dark-light">12px Extra Extra Small</td>
+      <td class="text-secondary">Шрифт для вторичного текста</td>
+      <td class="text-secondary">Build with TM-Ui</td>
+      <td class="color-dark-light">@fontSecondaryProduct { font-size: 14px; line-height: 16px; font-weight: regular; letter-spacing: -0.2px; margin: 8px 0 0; }</td>
+    </tr>
+    <tr>
+      <td class="text-note">Шрифт для сносок</td>
+      <td class="text-note">Build with TM-Ui</td>
+      <td class="color-dark-light">@fontNoteProduct { font-size: 11px; line-height: 12px; font-weight: regular; letter-spacing: -0.1; margin: 4px 0 0; }</td>
     </tr>
   </tbody>
 </table>

@@ -1,0 +1,86 @@
+button
+ types:
+ 	- default (primary)
+ 	- secondary
+ 	- create
+ 	- order
+ 	- book
+ 	- geo
+ 	- close
+ 	- add new unit
+
+input
+ types:
+ 	- default (small)
+ 	- large
+
+checkbox
+ types:
+ 	- default (small)
+ 	- large (at map)
+
+radio
+
+select
+ types:
+ 	- sort
+
+dropdown
+ types:
+ 	- direction/place
+ 	- passengers/guests (tabs: abstract/from list)
+ 	- class
+ 	- company
+ 	- time
+ options:
+ 	- tab
+ 	- search
+ 	- list
+ 	- group (inner things)
+
+calendar
+ options:
+ 	- tab (one-way, return)
+
+
+tooltip
+ direction:
+ 	- default (top)
+ 	- right
+
+order-action
+ types:
+ 	- repeat
+ 	- favorite
+ 	- delete
+
+tab
+ types:
+ 	- avia
+ 	- hotel
+
+toggler
+ sort:
+ 	- by date
+ 	- by ???
+
+status
+ types:
+ 	- paid
+ 	- confirm
+ 	- waiting
+
+tags
+ colors:
+  	- orange
+  	- grey
+
+hotel-info
+ types:
+ 	- free-rooms
+
+additional-flight-options
+ types:
+ 	- transfer
+ 	- insurance
+ 	- aeroexpress

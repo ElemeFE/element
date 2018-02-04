@@ -18,7 +18,6 @@ import RadioButton from '../packages/radio-button/index.js';
 import Checkbox from '../packages/checkbox/index.js';
 import CheckboxButton from '../packages/checkbox-button/index.js';
 import CheckboxGroup from '../packages/checkbox-group/index.js';
-import Switch from '../packages/switch/index.js';
 import Select from '../packages/select/index.js';
 import Option from '../packages/option/index.js';
 import OptionGroup from '../packages/option-group/index.js';
@@ -32,17 +31,12 @@ import TimePicker from '../packages/time-picker/index.js';
 import Popover from '../packages/popover/index.js';
 import Tooltip from '../packages/tooltip/index.js';
 import MessageBox from '../packages/message-box/index.js';
-import Breadcrumb from '../packages/breadcrumb/index.js';
-import BreadcrumbItem from '../packages/breadcrumb-item/index.js';
 import Form from '../packages/form/index.js';
 import FormItem from '../packages/form-item/index.js';
 import Tabs from '../packages/tabs/index.js';
 import TabPane from '../packages/tab-pane/index.js';
 import Tag from '../packages/tag/index.js';
-import Tree from '../packages/tree/index.js';
-import Alert from '../packages/alert/index.js';
 import Notification from '../packages/notification/index.js';
-import Slider from '../packages/slider/index.js';
 import Loading from '../packages/loading/index.js';
 import Icon from '../packages/icon/index.js';
 import Row from '../packages/row/index.js';
@@ -51,19 +45,11 @@ import Upload from '../packages/upload/index.js';
 import Progress from '../packages/progress/index.js';
 import Spinner from '../packages/spinner/index.js';
 import Message from '../packages/message/index.js';
-import Badge from '../packages/badge/index.js';
-import Card from '../packages/card/index.js';
-import Rate from '../packages/rate/index.js';
-import Steps from '../packages/steps/index.js';
-import Step from '../packages/step/index.js';
 import Carousel from '../packages/carousel/index.js';
 import Scrollbar from '../packages/scrollbar/index.js';
 import CarouselItem from '../packages/carousel-item/index.js';
 import Collapse from '../packages/collapse/index.js';
 import CollapseItem from '../packages/collapse-item/index.js';
-import Cascader from '../packages/cascader/index.js';
-import ColorPicker from '../packages/color-picker/index.js';
-import Transfer from '../packages/transfer/index.js';
 import Container from '../packages/container/index.js';
 import Header from '../packages/header/index.js';
 import Aside from '../packages/aside/index.js';
@@ -91,7 +77,6 @@ const components = [
   Checkbox,
   CheckboxButton,
   CheckboxGroup,
-  Switch,
   Select,
   Option,
   OptionGroup,
@@ -104,35 +89,22 @@ const components = [
   TimePicker,
   Popover,
   Tooltip,
-  Breadcrumb,
-  BreadcrumbItem,
   Form,
   FormItem,
   Tabs,
   TabPane,
   Tag,
-  Tree,
-  Alert,
-  Slider,
   Icon,
   Row,
   Col,
   Upload,
   Progress,
   Spinner,
-  Badge,
-  Card,
-  Rate,
-  Steps,
-  Step,
   Carousel,
   Scrollbar,
   CarouselItem,
   Collapse,
   CollapseItem,
-  Cascader,
-  ColorPicker,
-  Transfer,
   Container,
   Header,
   Aside,
@@ -195,7 +167,6 @@ module.exports = {
   Checkbox,
   CheckboxButton,
   CheckboxGroup,
-  Switch,
   Select,
   Option,
   OptionGroup,
@@ -209,17 +180,12 @@ module.exports = {
   Popover,
   Tooltip,
   MessageBox,
-  Breadcrumb,
-  BreadcrumbItem,
   Form,
   FormItem,
   Tabs,
   TabPane,
   Tag,
-  Tree,
-  Alert,
   Notification,
-  Slider,
   Icon,
   Row,
   Col,
@@ -227,19 +193,11 @@ module.exports = {
   Progress,
   Spinner,
   Message,
-  Badge,
-  Card,
-  Rate,
-  Steps,
-  Step,
   Carousel,
   Scrollbar,
   CarouselItem,
   Collapse,
   CollapseItem,
-  Cascader,
-  ColorPicker,
-  Transfer,
   Container,
   Header,
   Aside,

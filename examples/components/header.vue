@@ -265,11 +265,11 @@
           <!-- logo -->
           <slot>
             <img
-              src="../assets/images/element-logo.svg"
+              src="../assets/images/logo.svg"
               alt="element-logo"
               class="nav-logo">
             <img
-              src="../assets/images/element-logo-small.svg"
+              src="../assets/images/logo-small.svg"
               alt="element-logo"
               class="nav-logo-small">
           </slot>
@@ -330,29 +330,29 @@
             </el-dropdown>
           </li>
 
-          <!-- 语言选择器 -->
-          <li class="nav-item lang-item">
-            <el-dropdown
-              trigger="click"
-              class="nav-dropdown nav-lang"
-              :class="{ 'is-active': langDropdownVisible }">
-              <span>
-                {{ displayedLang }}
-                <i class="el-icon-arrow-down el-icon--right"></i>
-              </span>
-              <el-dropdown-menu
-                slot="dropdown"
-                class="nav-dropdown-list"
-                @input="handleLangDropdownToggle">
-                <el-dropdown-item
-                  v-for="(value, key) in langs"
-                  :key="key"
-                  @click.native="switchLang(key)">
-                  {{ value }}
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
-          </li>
+          <!--&lt;!&ndash; 语言选择器 &ndash;&gt;-->
+          <!--<li class="nav-item lang-item">-->
+            <!--<el-dropdown-->
+              <!--trigger="click"-->
+              <!--class="nav-dropdown nav-lang"-->
+              <!--:class="{ 'is-active': langDropdownVisible }">-->
+              <!--<span>-->
+                <!--{{ displayedLang }}-->
+                <!--<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
+              <!--</span>-->
+              <!--<el-dropdown-menu-->
+                <!--slot="dropdown"-->
+                <!--class="nav-dropdown-list"-->
+                <!--@input="handleLangDropdownToggle">-->
+                <!--<el-dropdown-item-->
+                  <!--v-for="(value, key) in langs"-->
+                  <!--:key="key"-->
+                  <!--@click.native="switchLang(key)">-->
+                  <!--{{ value }}-->
+                <!--</el-dropdown-item>-->
+              <!--</el-dropdown-menu>-->
+            <!--</el-dropdown>-->
+          <!--</li>-->
           
           <!--theme picker-->
           <li class="nav-item nav-theme-switch" v-show="isComponentPage">
@@ -378,9 +378,7 @@
         verDropdownVisible: true,
         langDropdownVisible: true,
         langs: {
-          'zh-CN': '中文',
-          'en-US': 'English',
-          'es': 'Español'
+          'en-US': 'English'
         }
       };
     },
@@ -392,7 +390,7 @@
 
     computed: {
       lang() {
-        return this.$route.path.split('/')[1] || 'zh-CN';
+        return this.$route.path.split('/')[1] || 'en-US';
       },
       displayedLang() {
         return this.langs[this.lang] || '中文';

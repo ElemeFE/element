@@ -7,7 +7,7 @@
     margin: 0;
     padding: 0;
     height: 100%;
-    font-family: 'Helvetica Neue',Helvetica,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',SimSun,sans-serif;
+    font-family: 'Roboto',Helvetica,sans-serif;
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
 
@@ -189,7 +189,7 @@
   import enLocale from 'main/locale/lang/en';
   import esLocale from 'main/locale/lang/es';
 
-  const lang = location.hash.replace('#', '').split('/')[1] || 'zh-CN';
+  const lang = location.hash.replace('#', '').split('/')[1] || 'en-US';
   const localize = lang => {
     switch (lang) {
       case 'zh-CN':
@@ -209,7 +209,7 @@
 
     computed: {
       lang() {
-        return this.$route.path.split('/')[1] || 'zh-CN';
+        return this.$route.path.split('/')[1] || 'en-US';
       },
       isComponent() {
         return /^component-/.test(this.$route.name || '');
