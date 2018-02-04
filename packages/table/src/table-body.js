@@ -396,7 +396,8 @@ export default {
       table.$emit(`row-${name}`, row, event, column);
     },
 
-    handleExpandClick(row) {
+    handleExpandClick(row, e) {
+      e.stopPropagation();
       this.store.toggleRowExpansion(row);
     }
   }
