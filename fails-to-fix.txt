@@ -1,0 +1,134 @@
+1) automatically close
+     Message
+     Error: Uncaught AssertionError: expected <div role="alert" class="el-message el-message--info" style="z-index: 2252; display: none;"><i class="el-message__icon el-icon-info"></i><p class="el-message__content">灰风</p><!----></div> to not exist (/Users/nbrylev/Documents/Development/Work/tmc24-components/node_modules/chai/chai.js:206)
+
+2) manually close
+     Message
+     Error: Uncaught AssertionError: expected <div role="alert" class="el-message el-message--info is-closable" style="z-index: 2253; display: none;"><i class="el-message__icon el-icon-info"></i><p class="el-message__content">夏天</p><i class="el-message__closeBtn el-icon-close"></i></div> to not exist (/Users/nbrylev/Documents/Development/Work/tmc24-components/node_modules/chai/chai.js:206)
+
+3) close all
+     Message
+     Error: Uncaught AssertionError: expected <div role="alert" class="el-message el-message--info" style="z-index: 2256; display: none;"><i class="el-message__icon el-icon-info"></i><p class="el-message__content">夏天</p><!----></div> to not exist (/Users/nbrylev/Documents/Development/Work/tmc24-components/node_modules/chai/chai.js:206)
+
+4) invoke with type
+     Message
+     AssertionError: expected 'info' to equal 'success'
+    at Context.<anonymous> (webpack:///test/unit/specs/message.spec.js:90:66 <- index.js:42170:67)
+
+5) center
+     Message
+     AssertionError: expected false to be true
+    at Context.<anonymous> (webpack:///test/unit/specs/message.spec.js:99:85 <- index.js:42179:85)
+
+6) automatically close
+     Notification
+     Error: Uncaught AssertionError: expected <div role="alert" class="el-notification right" style="top: 16px; z-index: 2275; display: none;"><!----><div class="el-notification__group"><h2 class="el-notification__title"></h2><div class="el-notification__content"><p>玻璃蜡烛</p></div><div class="el-notification__closeBtn el-icon-close"></div></div></div> to not exist (/Users/nbrylev/Documents/Development/Work/tmc24-components/node_modules/chai/chai.js:206)
+
+7) manually close
+     Notification
+     Error: Uncaught AssertionError: expected <div role="alert" class="el-notification right" style="top: 16px; z-index: 2276; display: none;"><!----><div class="el-notification__group"><h2 class="el-notification__title"></h2><div class="el-notification__content"><p>苍白母马</p></div><div class="el-notification__closeBtn el-icon-close"></div></div></div> to not exist (/Users/nbrylev/Documents/Development/Work/tmc24-components/node_modules/chai/chai.js:206)
+
+8) create
+     Pagination
+     TypeError: elm.querySelector is not a function
+    at Context.<anonymous> (webpack:///test/unit/specs/pagination.spec.js:13:15 <- index.js:42441:16)
+
+9) set layout
+     Pagination
+     TypeError: elm.querySelector is not a function
+    at Context.<anonymous> (webpack:///test/unit/specs/pagination.spec.js:30:15 <- index.js:42458:16)
+
+10) layout: all in right, need clear float
+     Pagination
+     TypeError: elm.querySelector is not a function
+    at Context.<anonymous> (webpack:///test/unit/specs/pagination.spec.js:49:24 <- index.js:42477:25)
+
+11) custom slot
+     Pagination
+     TypeError: vm.$el.querySelector is not a function
+    at Context.<anonymous> (webpack:///test/unit/specs/pagination.spec.js:66:18 <- index.js:42487:19)
+
+12) small
+     Pagination
+     TypeError: Cannot read property 'contains' of undefined
+    at Context.<anonymous> (webpack:///test/unit/specs/pagination.spec.js:73:28 <- index.js:42494:29)
+
+13) pageSize
+     Pagination
+     TypeError: vm.$el.querySelectorAll is not a function
+    at Context.<anonymous> (webpack:///test/unit/specs/pagination.spec.js:82:18 <- index.js:42503:19)
+
+14) pageCount
+     Pagination
+     TypeError: vm.$el.querySelectorAll is not a function
+    at Context.<anonymous> (webpack:///test/unit/specs/pagination.spec.js:91:18 <- index.js:42512:19)
+
+15) will work without total & page-count
+     Pagination
+     TypeError: vm.$el.querySelector is not a function
+    at Context.<anonymous> (webpack:///test/unit/specs/pagination.spec.js:100:11 <- index.js:42521:12)
+
+16) currentPage
+     Pagination
+     TypeError: vm.$el.querySelector is not a function
+    at Context.<anonymous> (webpack:///test/unit/specs/pagination.spec.js:119:18 <- index.js:42540:19)
+
+17) set currentPage & total
+     Pagination
+     TypeError: vm.$el.querySelector is not a function
+    at Context.<anonymous> (webpack:///test/unit/specs/pagination.spec.js:150:18 <- index.js:42565:19)
+
+18) pageSizes
+     Pagination
+     TypeError: vm.$el.querySelector is not a function
+    at Context.<anonymous> (webpack:///test/unit/specs/pagination.spec.js:166:18 <- index.js:42581:19)
+
+19) pageSizes:not found pageSize
+     Pagination
+     TypeError: vm.$el.querySelector is not a function
+    at Context.<anonymous> (webpack:///test/unit/specs/pagination.spec.js:180:18 <- index.js:42595:19)
+
+20) jumper: change value
+     Pagination
+     TypeError: Cannot read property '$emit' of null
+    at changeValue (webpack:///test/unit/specs/pagination.spec.js:220:12 <- index.js:42628:13)
+    at Context.<anonymous> (webpack:///test/unit/specs/pagination.spec.js:225:4 <- index.js:42633:5)
+
+21) event:current-change
+     Pagination
+     TypeError: vm.$el.querySelector is not a function
+    at Context.<anonymous> (webpack:///test/unit/specs/pagination.spec.js:261:24 <- index.js:42665:23)
+
+22) event:size-change
+     Pagination
+     Error: Uncaught TypeError: vm.$el.querySelectorAll is not a function (webpack:///test/unit/specs/pagination.spec.js:296:6 <- index.js:42694)
+
+23) pageSize > total
+     Pagination
+     TypeError: vm.$el.querySelector is not a function
+    at Context.<anonymous> (webpack:///test/unit/specs/pagination.spec.js:323:25 <- index.js:42716:24)
+
+24) click ul
+     Pagination click pager
+     TypeError: vm.$el.querySelector is not a function
+    at Context.<anonymous> (webpack:///test/unit/specs/pagination.spec.js:340:13 <- index.js:42733:14)
+
+25) click li
+     Pagination click pager
+     TypeError: vm.$el.querySelectorAll is not a function
+    at Context.<anonymous> (webpack:///test/unit/specs/pagination.spec.js:349:13 <- index.js:42742:14)
+
+26) click next icon-more
+     Pagination click pager
+     TypeError: vm.$el.querySelector is not a function
+    at Context.<anonymous> (webpack:///test/unit/specs/pagination.spec.js:358:13 <- index.js:42751:14)
+
+27) click prev icon-more
+     Pagination click pager
+     TypeError: vm.$el.querySelector is not a function
+    at Context.<anonymous> (webpack:///test/unit/specs/pagination.spec.js:367:13 <- index.js:42760:14)
+
+28) click last page
+     Pagination click pager
+     TypeError: vm.$el.querySelectorAll is not a function
+    at Context.<anonymous> (webpack:///test/unit/specs/pagination.spec.js:380:27 <- index.js:42773:26)
