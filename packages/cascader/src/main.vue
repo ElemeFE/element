@@ -23,6 +23,8 @@
       :placeholder="currentLabels.length ? undefined : placeholder"
       v-model="inputValue"
       @input="debouncedInputChange"
+      @focus="handleFocus"
+      @blur="handleBlur"
       :validate-event="false"
       :size="size"
       :disabled="disabled"
@@ -75,6 +77,7 @@ const popperMixin = {
       default: 'bottom-start'
     },
     appendToBody: Popper.props.appendToBody,
+    arrowOffset: Popper.props.arrowOffset,
     offset: Popper.props.offset,
     boundariesPadding: Popper.props.boundariesPadding,
     popperOptions: Popper.props.popperOptions
@@ -384,6 +387,12 @@ export default {
         return;
       }
       this.menuVisible = !this.menuVisible;
+    },
+    handleFocus(event) {
+      this.$emit('focus', event);
+    },
+    handleBlur(event) {
+      this.$emit('blur', event);
     }
   },
 

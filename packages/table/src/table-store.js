@@ -90,6 +90,9 @@ const TableStore = function(table, initialState = {}) {
     leafColumns: [],
     fixedLeafColumns: [],
     rightFixedLeafColumns: [],
+    leafColumnsLength: 0,
+    fixedLeafColumnsLength: 0,
+    rightFixedLeafColumnsLength: 0,
     isComplex: false,
     _data: null,
     filteredData: null,
@@ -126,7 +129,7 @@ TableStore.prototype.mutations = {
       const column = getColumnById(this.states, columnId);
       if (column && column.filterMethod) {
         data = data.filter((row) => {
-          return values.some(value => column.filterMethod.call(null, value, row));
+          return values.some(value => column.filterMethod.call(null, value, row, column));
         });
       }
     });
@@ -216,7 +219,7 @@ TableStore.prototype.mutations = {
       const column = getColumnById(this.states, columnId);
       if (column && column.filterMethod) {
         data = data.filter((row) => {
-          return values.some(value => column.filterMethod.call(null, value, row));
+          return values.some(value => column.filterMethod.call(null, value, row, column));
         });
       }
     });
@@ -253,10 +256,14 @@ TableStore.prototype.mutations = {
     this.scheduleLayout();
   },
 
-  removeColumn(states, column) {
-    let _columns = states._columns;
-    if (_columns) {
-      _columns.splice(_columns.indexOf(column), 1);
+  removeColumn(states, column, parent) {
+    let array = states._columns;
+    if (parent) {
+      array = parent.children;
+      if (!array) array = parent.children = [];
+    }
+    if (array) {
+      array.splice(array.indexOf(column), 1);
     }
 
     this.updateColumns(); // hack for dynamics remove column

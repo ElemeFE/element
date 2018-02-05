@@ -32,4 +32,8 @@
       outline-width: 0;
     }
   }
+
+  &:focus:active, &:focus {
+    outline-width: 0;
+  }
 }

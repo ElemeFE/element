@@ -162,7 +162,6 @@ Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
 |size | size of the component | string | large/small| — |
 |disabled| whether the component is disabled | boolean | — | false |
 |controls| whether to enable the control buttons | boolean | — | true |
-|debounce| debounce delay when typing, in milliseconds | number | — | 300 |
 |controls-position | position of the control buttons | string | right | - |
 |name | same as `name` in native input | string | — | — |
 |label | label text | string | — | — |

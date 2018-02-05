@@ -163,7 +163,6 @@ Utilice el atributo `size` para establecer tamaños adicionales con `medium`, `s
 | size              | tamaño del componente                    | string  | large/small       | —           |
 | disabled          | si el componente esta deshabilitado      | boolean | —                 | false       |
 | controls          | si se activan los botones de control     | boolean | —                 | true        |
-| debounce          | retardo de rebote al escribir, en milisegundos | number  | —                 | 300         |
 | controls-position | posición de los botones de control       | string  | right             | -           |
 | name              | lo mismo que `name` en un input nativo   | string  | —                 | —           |
 | label             | texto de la etiqueta                     | string  | —                 | —           |

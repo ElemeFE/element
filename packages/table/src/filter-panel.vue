@@ -110,6 +110,7 @@
           column: this.column,
           values: filteredValue
         });
+        this.table.store.updateAllSelected();
       }
     },
 

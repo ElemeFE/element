@@ -96,10 +96,6 @@
   @include e(link-btn) {
     vertical-align: middle;
   }
-
-  .popper__arrow {
-    transform: translateX(-400%);
-  }
 }
 
 .el-picker-panel *[slot=sidebar],

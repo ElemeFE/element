@@ -25,7 +25,7 @@
     <div
       class="el-table__body-wrapper"
       ref="bodyWrapper"
-      :class="[`is-scroll-${scrollPosition}`]"
+      :class="[layout.scrollX ? `is-scroll-${scrollPosition}` : 'is-scroll-none']"
       :style="[bodyHeight]">
       <table-body
         :context="context"

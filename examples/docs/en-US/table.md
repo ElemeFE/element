@@ -216,9 +216,11 @@
 
         return sums;
       },
+
       setCurrent(row) {
         this.$refs.singleTable.setCurrentRow(row);
       },
+
       toggleSelection(rows) {
         if (rows) {
           rows.forEach(row => {
@@ -240,6 +242,7 @@
       handleDelete(index, row) {
         console.log(index, row);
       },
+
       handleSelectionChange(val) {
         this.multipleSelection = val;
       },
@@ -254,6 +257,11 @@
 
       filterTag(value, row) {
         return row.tag === value;
+      },
+
+      filterHandler(value, row, column) {
+        const property = column['property'];
+        return row[property] === value;
       },
 
       tableRowClassName({row, rowIndex}) {
@@ -1326,7 +1334,7 @@ Sort the data to find or compare data quickly.
 
 Filter the table to find desired data.
 
-:::demo Set attribute `filters` and `filter-method` in `el-table-column` makes this column filterable. `filters` is an array, and `filter-method` is a function deciding which rows are displayed. It has two parameters: `value` and `row`.
+:::demo Set attribute `filters` and `filter-method` in `el-table-column` makes this column filterable. `filters` is an array, and `filter-method` is a function deciding which rows are displayed. It has three parameters: `value`, `row` and `column`.
 ```html
 <template>
   <el-table
@@ -1336,7 +1344,10 @@ Filter the table to find desired data.
       prop="date"
       label="Date"
       sortable
-      width="180">
+      width="180"
+      :filters="[{text: '2016-05-01', value: '2016-05-01'}, {text: '2016-05-02', value: '2016-05-02'}, {text: '2016-05-03', value: '2016-05-03'}, {text: '2016-05-04', value: '2016-05-04'}]"
+      :filter-method="filterHandler"
+    >
     </el-table-column>
     <el-table-column
       prop="name"
@@ -1397,6 +1408,10 @@ Filter the table to find desired data.
       },
       filterTag(value, row) {
         return row.tag === value;
+      },
+      filterHandler(value, row, column) {
+        const property = column['property'];
+        return row[property] === value;
       }
     }
   }
@@ -2024,5 +2039,5 @@ You can customize row index in `type=index` columns.
 | filters | an array of data filtering options. For each element in this array, `text` and `value` are required | Array[{ text, value }] | — | — |
 | filter-placement | placement for the filter dropdown | String | same as Tooltip's `placement` | — |
 | filter-multiple | whether data filtering supports multiple options | Boolean | — | true |
-| filter-method | data filtering method. If `filter-multiple` is on, this method will be called multiple times for each row, and a row will display if one of the calls returns `true` | Function(value, row) | — | — |
+| filter-method | data filtering method. If `filter-multiple` is on, this method will be called multiple times for each row, and a row will display if one of the calls returns `true` | Function(value, row, column) | — | — |
 | filtered-value | filter value for selected data, might be useful when table header is rendered with `render-header` | Array | — | — |

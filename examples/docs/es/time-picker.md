@@ -191,6 +191,8 @@ Es posible escoger un rango de tiempo arbitrario.
 | default-value     | opcional, fecha por defecto del calendario | Fecha para Selector de Tiempo, string para el Seleccionador de Tiempo | cualquier cosa aceptada por `new Date()` para el Selector de Tiempo,  Selector de Tiempo, valor seleccionable para el Seleccionador de Tiempo | —           |
 | value-format      | opcional, solo para Time Picker, formato de valor limitado | string                                   | hour `HH`, minute `mm`, second `ss`      | —           |
 | name              | como `name` en input nativo              | string                                   | —                                        | —           |
+| prefix-icon | Custom prefix icon class | string | — | el-icon-time |
+| clear-icon | Custom clear icon class | string | — | el-icon-circle-close |
 
 ### Opciones para Time Picker
 | Atributo | Descripción                              | Tipo   | Valores aceptados | Por defecto |
