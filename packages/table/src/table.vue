@@ -421,7 +421,7 @@
         }
 
         const height = el.offsetHeight;
-        if (this.height && oldHeight !== height) {
+        if ((this.height || this.shouldUpdateHeight) && oldHeight !== height) {
           shouldUpdateLayout = true;
         }
 
