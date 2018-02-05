@@ -1,3 +1,5 @@
+Element Bootstrap 4
+
 <p align="center">
   <img src="https://cdn.rawgit.com/ElemeFE/element/dev/element_logo.svg">
 </p>
@@ -200,5 +202,4 @@ Become a sponsor and get your logo on our README on Github with a link to your s
 
 
 
-## LICENSE
 [MIT](LICENSE)
