@@ -524,10 +524,20 @@
 
       fixedHeight() {
         if (this.maxHeight) {
+          if (this.showSummary) {
+            return {
+              bottom: 0
+            };
+          }
           return {
             bottom: (this.layout.scrollX && this.data.length) ? this.layout.gutterWidth + 'px' : ''
           };
         } else {
+          if (this.showSummary) {
+            return {
+              height: this.layout.tableHeight ? this.layout.tableHeight + 'px' : ''
+            }
+          }
           return {
             height: this.layout.viewportHeight ? this.layout.viewportHeight + 'px' : ''
           };
