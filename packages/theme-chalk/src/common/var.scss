@@ -14,7 +14,7 @@ $--color-transition-base: color .2s cubic-bezier(.645,.045,.355,1) !default;
 $--color-white: #fff !default;
 $--color-black: #000 !default;
 
-$--color-primary: #409EFF !default;
+$--color-primary: #7dcb46 !default;
 $--color-primary-light-1: mix($--color-white, $--color-primary, 10%) !default; /* 53a8ff */
 $--color-primary-light-2: mix($--color-white, $--color-primary, 20%) !default; /* 66b1ff */
 $--color-primary-light-3: mix($--color-white, $--color-primary, 30%) !default; /* 79bbff */
@@ -26,6 +26,7 @@ $--color-primary-light-8: mix($--color-white, $--color-primary, 80%) !default; /
 $--color-primary-light-9: mix($--color-white, $--color-primary, 90%) !default; /* ecf5ff */
 
 $--color-success: #67c23a !default;
+$--color-secondary: #7dcb46 !default;
 $--color-warning: #e6a23c !default;
 $--color-danger: #f56c6c !default;
 $--color-info: #909399 !default;
@@ -42,7 +43,7 @@ $--color-info-lighter: mix($--color-white, $--color-info, 90%) !default;
 
 $--color-text-primary: #303133 !default;
 $--color-text-regular: #606266 !default;
-$--color-text-secondary: #909399 !default;
+$--color-text-secondary: #ffffff !default;
 $--color-text-placeholder: #c0c4cc !default;
 
 /* Link
@@ -52,7 +53,7 @@ $--link-hover-color: $--color-primary !default;
 
 /* Background
 -------------------------- */
-$--background-color-base: #f5f7fa !default;
+$--background-color-base: #cccccc !default;
 
 /* Border
 -------------------------- */
@@ -81,7 +82,7 @@ $--fill-base: $--color-white !default;
 /* Font
 -------------------------- */
 $--font-path: 'fonts' !default;
-$--font-size-base: 14px !default;
+$--font-size-base: 12px !default;
 $--font-size-small: 13px !default;
 $--font-size-large: 18px !default;
 $--font-color-disabled-base: #bbb !default;
@@ -393,10 +394,10 @@ $--tab-vertical-header-count-fill: $--color-text-secondary !default;
 
 /* Button
 -------------------------- */
-$--button-font-size: 14px !default;
+$--button-font-size: 12px !default;
 $--button-font-weight: $--font-weight-primary !default;
 $--button-border-radius: $--border-radius-base !default;
-$--button-padding-vertical: 12px !default;
+$--button-padding-vertical: 15px !default;
 $--button-padding-horizontal: 20px !default;
 
 $--button-medium-font-size: 14px !default;
@@ -429,6 +430,10 @@ $--button-primary-fill: $--color-primary !default;
 $--button-success-border: $--color-success !default;
 $--button-success-color: $--color-white !default;
 $--button-success-fill: $--color-success !default;
+
+$--button-secondary-border: $--color-secondary !default;
+$--button-secondary-color: $--color-secondary !default;
+$--button-secondary-fill: $--color-white !default;
 
 $--button-warning-border: $--color-warning !default;
 $--button-warning-color: $--color-white !default;

@@ -23,56 +23,97 @@
     &:hover,
     &:focus,
     &:active {
-      color: mix($--color-white, $color, 40%);
-      background-color: mix($--color-white, $color, 90%);
-      border-color: mix($--color-white, $color, 80%);
+      color: $--color-white;
+      background-color: $--background-color-base;
+      border-color: $--background-color-base;
     }
   }
 }
 
-@mixin button-variant($color, $background-color, $border-color) {
+@mixin button-variant($color, $background-color, $border-color, $background-color-hover: 'auto') {
   color: $color;
   background-color: $background-color;
   border-color: $border-color;
+  @if $background-color-hover == 'auto' {
 
-  &:hover,
-  &:focus {
-    background: mix($--color-white, $background-color, $--button-hover-tint-percent);
-    border-color: mix($--color-white, $border-color, $--button-hover-tint-percent);
-    color: $color;
+    &:hover,
+    &:focus {
+      background: mix($--color-white, $background-color, $--button-hover-tint-percent);
+      border-color: mix($--color-white, $border-color, $--button-hover-tint-percent);
+      color: $color;
+    }
+
+    &:active {
+      background: mix($--color-black, $background-color, $--button-active-shade-percent);
+      border-color: mix($--color-black, $border-color, $--button-active-shade-percent);
+      color: $color;
+      outline: none;
+    }
+
+    &.is-active {
+      background: mix($--color-black, $background-color, $--button-active-shade-percent);
+      border-color: mix($--color-black, $border-color, $--button-active-shade-percent);
+      color: $color;
+    }
+
+    &.is-disabled {
+      &,
+      &:hover,
+      &:focus,
+      &:active {
+        color: $--color-white;
+        background-color: mix($background-color, $--color-white);
+        border-color: mix($border-color, $--color-white);
+      }
+    }
+
+    &.is-plain {
+      @include button-plain($background-color);
+    }
+
+  } @else {
+    &:hover,
+    &:focus {
+      background: $background-color-hover;
+      border-color: $background-color-hover;
+      color: $--color-white;
+    }
+
+    &:active {
+      background: $background-color-hover;
+      border-color: $background-color-hover;
+      color: $--color-white;
+      outline: none;
+    }
+
+    &.is-active {
+      background: $background-color-hover;
+      border-color: $background-color-hover;
+      color: $--color-white;
+    }
+
+    &.is-disabled {
+      &,
+      &:hover,
+      &:focus,
+      &:active {
+        background: $background-color-hover;
+        border-color: $background-color-hover;
+        color: $--color-white
+      }
+    }
+
+    &.is-plain {
+      @include button-plain($background-color);
+    }
+
   }
   
-  &:active {
-    background: mix($--color-black, $background-color, $--button-active-shade-percent);
-    border-color: mix($--color-black, $border-color, $--button-active-shade-percent);
-    color: $color;
-    outline: none;
-  }
-
-  &.is-active {
-    background: mix($--color-black, $background-color, $--button-active-shade-percent);
-    border-color: mix($--color-black, $border-color, $--button-active-shade-percent);
-    color: $color;
-  }
-
-  &.is-disabled {
-    &,
-    &:hover,
-    &:focus,
-    &:active {
-      color: $--color-white;
-      background-color: mix($background-color, $--color-white);
-      border-color: mix($border-color, $--color-white);
-    }
-  }
-
-  &.is-plain {
-    @include button-plain($background-color);
-  }
 }
 
 @mixin button-size($padding-vertical, $padding-horizontal, $font-size, $border-radius) {
   padding: $padding-vertical $padding-horizontal;
+  min-width: 200px;
   font-size: $font-size;
   border-radius: $border-radius;
   &.is-round {

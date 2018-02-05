@@ -123,6 +123,9 @@
   @include m(success) {
     @include button-variant($--button-success-color, $--button-success-fill, $--button-success-border);
   }
+  @include m(secondary) {
+    @include button-variant($--button-secondary-color, $--button-secondary-fill, $--button-secondary-border, $--color-success);
+  }
   @include m(warning) {
     @include button-variant($--button-warning-color, $--button-warning-fill, $--button-warning-border);
   }
