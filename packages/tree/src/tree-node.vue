@@ -2,6 +2,7 @@
   <div
     class="el-tree-node"
     @click.stop="handleClick"
+    @contextmenu="($event) => this.handleContextMenu($event)"
     v-show="node.visible"
     :class="{
       'is-expanded': expanded,
@@ -162,6 +163,10 @@
           this.handleExpandIconClick();
         }
         this.tree.$emit('node-click', this.node.data, this.node, this);
+      },
+
+      handleContextMenu(event) {
+        this.tree.$emit('node-contextmenu', event, this.node.data, this.node, this);
       },
 
       handleExpandIconClick() {
