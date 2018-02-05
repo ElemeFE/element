@@ -204,7 +204,7 @@
 
       showNewOption() {
         let hasExistingOption = this.options.filter(option => !option.created)
-          .some(option => option.currentLabel === this.query);
+          .some(option => this.filterCaseInsensitive ? option.currentLabel.toString().toUpperCase() === this.query.toString().toUpperCase() : option.currentLabel === this.query);
         return this.filterable && this.allowCreate && this.query !== '' && !hasExistingOption;
       },
 
@@ -256,6 +256,7 @@
       noDataText: String,
       remoteMethod: Function,
       filterMethod: Function,
+      filterCaseInsensitive: Boolean,
       multiple: Boolean,
       multipleLimit: {
         type: Number,
