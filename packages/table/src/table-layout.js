@@ -56,7 +56,7 @@ class TableLayout {
     }
     this.height = value;
 
-    if (!el && value) return Vue.nextTick(() => this.setHeight(value, prop));
+    if (!el && (value || value === 0)) return Vue.nextTick(() => this.setHeight(value, prop));
 
     if (typeof value === 'number') {
       el.style[prop] = value + 'px';
