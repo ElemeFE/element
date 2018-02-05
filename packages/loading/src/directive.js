@@ -1,10 +1,12 @@
 import Vue from 'vue';
 import Loading from './loading.vue';
 import { addClass, removeClass, getStyle } from 'element-ui/src/utils/dom';
+import { PopupManager } from 'element-ui/src/utils/popup';
 import afterLeave from 'element-ui/src/utils/after-leave';
 const Mask = Vue.extend(Loading);
 
-exports.install = Vue => {
+const loadingDirective = {};
+loadingDirective.install = Vue => {
   if (Vue.prototype.$isServer) return;
   const toggleLoading = (el, binding) => {
     if (binding.value) {
@@ -12,6 +14,7 @@ exports.install = Vue => {
         if (binding.modifiers.fullscreen) {
           el.originalPosition = getStyle(document.body, 'position');
           el.originalOverflow = getStyle(document.body, 'overflow');
+          el.maskStyle.zIndex = PopupManager.nextZIndex();
 
           addClass(el.mask, 'is-fullscreen');
           insertDom(document.body, el, binding);
@@ -70,7 +73,7 @@ exports.install = Vue => {
           el.instance.$emit('after-leave');
         } else {
           el.instance.visible = true;
-        };
+        }
       });
       el.domInserted = true;
     }
@@ -117,3 +120,5 @@ exports.install = Vue => {
     }
   });
 };
+
+export default loadingDirective;

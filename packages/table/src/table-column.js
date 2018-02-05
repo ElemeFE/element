@@ -32,13 +32,16 @@ const defaults = {
 
 const forced = {
   selection: {
-    renderHeader: function(h) {
+    renderHeader: function(h, { store }) {
       return <el-checkbox
+        disabled={ store.states.data && store.states.data.length === 0 }
+        indeterminate={ store.states.selection.length > 0 && !this.isAllSelected }
         nativeOn-click={ this.toggleAllSelection }
         value={ this.isAllSelected } />;
     },
     renderCell: function(h, { row, column, store, $index }) {
       return <el-checkbox
+        nativeOn-click={ (event) => event.stopPropagation() }
         value={ store.isSelected(row) }
         disabled={ column.selectable ? !column.selectable.call(null, row, $index) : false }
         on-input={ () => { store.commit('rowSelectedChanged', row); } } />;
@@ -111,6 +114,26 @@ const DEFAULT_RENDER_CELL = function(h, { row, column }) {
     return column.formatter(row, column, value);
   }
   return value;
+};
+
+const parseWidth = (width) => {
+  if (width !== undefined) {
+    width = parseInt(width, 10);
+    if (isNaN(width)) {
+      width = null;
+    }
+  }
+  return width;
+};
+
+const parseMinWidth = (minWidth) => {
+  if (minWidth !== undefined) {
+    minWidth = parseInt(minWidth, 10);
+    if (isNaN(minWidth)) {
+      minWidth = 80;
+    }
+  }
+  return minWidth;
 };
 
 export default {
@@ -202,25 +225,12 @@ export default {
     let parent = this.columnOrTableParent;
     let owner = this.owner;
     this.isSubColumn = owner !== parent;
-    this.columnId = (parent.tableId || (parent.columnId + '_')) + 'column_' + columnIdSeed++;
+    this.columnId = (parent.tableId || parent.columnId) + '_column_' + columnIdSeed++;
 
     let type = this.type;
 
-    let width = this.width;
-    if (width !== undefined) {
-      width = parseInt(width, 10);
-      if (isNaN(width)) {
-        width = null;
-      }
-    }
-
-    let minWidth = this.minWidth;
-    if (minWidth !== undefined) {
-      minWidth = parseInt(minWidth, 10);
-      if (isNaN(minWidth)) {
-        minWidth = 80;
-      }
-    }
+    const width = parseWidth(this.width);
+    const minWidth = parseMinWidth(this.minWidth);
 
     let isColumnGroup = false;
 
@@ -350,14 +360,14 @@ export default {
 
     width(newVal) {
       if (this.columnConfig) {
-        this.columnConfig.width = newVal;
+        this.columnConfig.width = parseWidth(newVal);
         this.owner.store.scheduleLayout();
       }
     },
 
     minWidth(newVal) {
       if (this.columnConfig) {
-        this.columnConfig.minWidth = newVal;
+        this.columnConfig.minWidth = parseMinWidth(newVal);
         this.owner.store.scheduleLayout();
       }
     },
@@ -365,7 +375,7 @@ export default {
     fixed(newVal) {
       if (this.columnConfig) {
         this.columnConfig.fixed = newVal;
-        this.owner.store.scheduleLayout();
+        this.owner.store.scheduleLayout(true);
       }
     },
 

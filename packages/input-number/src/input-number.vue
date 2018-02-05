@@ -2,7 +2,7 @@
   <div class="el-input-number"
     :class="[
       inputNumberSize ? 'el-input-number--' + inputNumberSize : '',
-      { 'is-disabled': disabled },
+      { 'is-disabled': inputNumberDisabled },
       { 'is-without-controls': !controls },
       { 'is-controls-right': controlsAtRight }
     ]"
@@ -30,7 +30,7 @@
     <el-input
       ref="input"
       :value="currentValue"
-      :disabled="disabled"
+      :disabled="inputNumberDisabled"
       :size="inputNumberSize"
       :max="max"
       :min="min"
@@ -60,6 +60,9 @@
     name: 'ElInputNumber',
     mixins: [Focus('input')],
     inject: {
+      elForm: {
+        default: ''
+      },
       elFormItem: {
         default: ''
       }
@@ -134,6 +137,9 @@
       },
       inputNumberSize() {
         return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
+      },
+      inputNumberDisabled() {
+        return this.disabled || (this.elForm || {}).disabled;
       }
     },
     methods: {
@@ -166,13 +172,13 @@
         return this.toPrecision((precisionFactor * val - precisionFactor * step) / precisionFactor);
       },
       increase() {
-        if (this.disabled || this.maxDisabled) return;
+        if (this.inputNumberDisabled || this.maxDisabled) return;
         const value = this.value || 0;
         const newVal = this._increase(value, this.step);
         this.setCurrentValue(newVal);
       },
       decrease() {
-        if (this.disabled || this.minDisabled) return;
+        if (this.inputNumberDisabled || this.minDisabled) return;
         const value = this.value || 0;
         const newVal = this._decrease(value, this.step);
         this.setCurrentValue(newVal);
@@ -209,7 +215,7 @@
       innerInput.setAttribute('aria-valuemax', this.max);
       innerInput.setAttribute('aria-valuemin', this.min);
       innerInput.setAttribute('aria-valuenow', this.currentValue);
-      innerInput.setAttribute('aria-disabled', this.disabled);
+      innerInput.setAttribute('aria-disabled', this.inputNumberDisabled);
     },
     updated() {
       let innerInput = this.$refs.input.$refs.input;

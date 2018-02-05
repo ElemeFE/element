@@ -16,6 +16,10 @@ const stop = e => e.stopPropagation();
  */
 export default {
   props: {
+    transformOrigin: {
+      type: [Boolean, String],
+      default: true
+    },
     placement: {
       type: String,
       default: 'bottom'
@@ -139,6 +143,7 @@ export default {
     },
 
     resetTransformOrigin() {
+      if (!this.transformOrigin) return;
       let placementMap = {
         top: 'bottom',
         bottom: 'top',
@@ -147,7 +152,9 @@ export default {
       };
       let placement = this.popperJS._popper.getAttribute('x-placement').split('-')[0];
       let origin = placementMap[placement];
-      this.popperJS._popper.style.transformOrigin = ['top', 'bottom'].indexOf(placement) > -1 ? `center ${ origin }` : `${ origin } center`;
+      this.popperJS._popper.style.transformOrigin = typeof this.transformOrigin === 'string'
+        ? this.transformOrigin
+        : ['top', 'bottom'].indexOf(placement) > -1 ? `center ${ origin }` : `${ origin } center`;
     },
 
     appendArrow(element) {

@@ -60,7 +60,7 @@
 
     computed: {
       disabled() {
-        return this.$parent.disabled;
+        return this.$parent.sliderDisabled;
       },
 
       max() {

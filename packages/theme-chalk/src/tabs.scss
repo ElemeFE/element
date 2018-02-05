@@ -99,6 +99,11 @@
       outline: none;
     }
 
+    &:focus.is-active.is-focus:not(:active) {
+      box-shadow: 0 0 2px 2px #409eff inset;
+      border-radius: 3px;
+    }
+
     & .el-icon-close {
       border-radius: 50%;
       text-align: center;

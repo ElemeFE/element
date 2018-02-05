@@ -397,7 +397,7 @@ Import `Notification`:
 import { Notification } from 'element-ui';
 ```
 
-In this case you should call `Notification(options)`. We have also registered methods for different types, e.g. `Notification.success(options)`.
+In this case you should call `Notification(options)`. We have also registered methods for different types, e.g. `Notification.success(options)`. You can call `Notification.closeAll()` to manually close all the instances.
 
 ### Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |

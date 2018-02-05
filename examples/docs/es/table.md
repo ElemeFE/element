@@ -1993,6 +1993,7 @@ Puede personalizar el índice de la fila con la propiedad `type=index` de las co
 | row-contextmenu   | se dispara cuando el usuario hace clic derecho en una fila | row, event                        |
 | row-dblclick      | se dispara cuando se hace doble clic en una fila | row, event                        |
 | header-click      | se dispara cuando se hace click en una cabecera de columna | column, event                     |
+| header-contextmenu | se dispara cuando el usuario hace clic derecho en una cabecera de columna | column, event |
 | sort-change       | se dispara cuando el ordenamiento de la tabla cambia | { column, prop, order }           |
 | filter-change     | clave de la columna. Si necesitas utilizar el evento filter-change, este atributo es obligatorio para identificar cuál columna está siendo filtrada | filters                           |
 | current-change    | se dispara cuando la fila actual cambia  | currentRow, oldCurrentRow         |

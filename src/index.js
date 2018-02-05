@@ -168,10 +168,10 @@ const install = function(Vue, opts = {}) {
 /* istanbul ignore if */
 if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue);
-};
+}
 
 module.exports = {
-  version: '2.0.11',
+  version: '2.1.0',
   locale: locale.use,
   i18n: locale.i18n,
   install,

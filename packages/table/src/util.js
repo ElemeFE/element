@@ -92,14 +92,6 @@ export const getColumnByCell = function(table, cell) {
   return null;
 };
 
-const isFirefox = typeof navigator !== 'undefined' && navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
-
-export const mousewheel = function(element, callback) {
-  if (element && element.addEventListener) {
-    element.addEventListener(isFirefox ? 'DOMMouseScroll' : 'mousewheel', callback, { passive: true });
-  }
-};
-
 export const getRowIdentity = (row, rowKey) => {
   if (!row) throw new Error('row is required when get row identity');
   if (typeof rowKey === 'string') {

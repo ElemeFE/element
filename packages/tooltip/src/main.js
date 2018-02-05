@@ -21,6 +21,10 @@ export default {
       type: String,
       default: 'dark'
     },
+    arrowOffset: {
+      type: Number,
+      default: 0
+    },
     popperClass: String,
     content: String,
     visibleArrow: {

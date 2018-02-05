@@ -1948,7 +1948,7 @@ You can customize row index in `type=index` columns.
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | data | Table data | array | — | — |
-| height | Table's height. By default it has an `auto` height. If its value is a number, the height is measured in pixels; if its value is a string, the height is affected by external styles | string/number | — | — |
+| height | Table's height. By default it has an `auto` height. If its value is a number, the height is measured in pixels; if its value is a string, the value will be assigned to element's style.height, the height is affected by external styles | string/number | — | — |
 | max-height | Table's max-height. The height of the table starts from `auto` until it reaches the maxHeight limit. The `maxHeight` is measured in pixels, same as `height` | string/number | — | — |
 | stripe | whether Table is striped | boolean | — | false |
 | border | whether Table has vertical border | boolean | — | false |
@@ -1990,10 +1990,11 @@ You can customize row index in `type=index` columns.
 | row-contextmenu | triggers when user right clicks on a row | row, event |
 | row-dblclick | triggers when double clicking a row | row, event |
 | header-click | triggers when clicking a column header | column, event |
+| header-contextmenu | triggers when user right clicks on a column header | column, event |
 | sort-change | triggers when Table's sorting changes | { column, prop, order } |
 | filter-change | column's key. If you need to use the filter-change event, this attribute is mandatory to identify which column is being filtered | filters |
 | current-change | triggers when current row changes | currentRow, oldCurrentRow |
-| header-dragend | triggers when finish dragging header | newWidth, oldWidth, column, event |
+| header-dragend | triggers after changing a column's width by dragging the column header's border | newWidth, oldWidth, column, event |
 | expand-change | triggers when user expands or collapses a row | row, expandedRows |
 
 ### Table Methods

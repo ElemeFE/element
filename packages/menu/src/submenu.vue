@@ -1,53 +1,31 @@
-<template>
-  <li
-    :class="{
-      'el-submenu': true,
-      'is-active': active,
-      'is-opened': opened
-    }"
-    @mouseenter="handleMouseenter"
-    @mouseleave="handleMouseleave"
-    @focus="handleMouseenter"
-    role="menuitem"
-    aria-haspopup="true"
-    :aria-expanded="opened"
-  >
-    <div
-      class="el-submenu__title"
-      ref="submenu-title"
-      @click="handleClick"
-      @mouseenter="handleTitleMouseenter"
-      @mouseleave="handleTitleMouseleave"
-      :style="[paddingStyle, titleStyle, { backgroundColor }]">
-      <slot name="title"></slot>
-      <i :class="{
-        'el-submenu__icon-arrow': true,
-        'el-icon-arrow-down': rootMenu.mode === 'horizontal' || rootMenu.mode === 'vertical' && !rootMenu.collapse,
-        'el-icon-arrow-right': rootMenu.mode === 'vertical' && rootMenu.collapse
-      }">
-      </i>
-    </div>
-    <template v-if="rootMenu.mode === 'horizontal' || (rootMenu.mode === 'vertical' && rootMenu.collapse)">
-      <transition :name="menuTransitionName">
-        <ul class="el-menu" v-show="opened" :style="{ backgroundColor: rootMenu.backgroundColor || '' }" role="menu"><slot></slot></ul>
-      </transition>
-    </template>
-    <el-collapse-transition v-else>
-      <ul class="el-menu" v-show="opened" :style="{ backgroundColor: rootMenu.backgroundColor || '' }" role="menu"><slot></slot></ul>
-    </el-collapse-transition>
-  </li>
-</template>
 <script>
   import ElCollapseTransition from 'element-ui/src/transitions/collapse-transition';
   import menuMixin from './menu-mixin';
   import Emitter from 'element-ui/src/mixins/emitter';
+  import Popper from 'element-ui/src/utils/vue-popper';
+
+  const poperMixins = {
+    props: {
+      transformOrigin: {
+        type: [Boolean, String],
+        default: false
+      },
+      offset: Popper.props.offset,
+      boundariesPadding: Popper.props.boundariesPadding,
+      popperOptions: Popper.props.popperOptions
+    },
+    data: Popper.data,
+    methods: Popper.methods,
+    beforeDestroy: Popper.beforeDestroy,
+    deactivated: Popper.deactivated
+  };
 
   export default {
     name: 'ElSubmenu',
 
     componentName: 'ElSubmenu',
 
-    mixins: [menuMixin, Emitter],
+    mixins: [menuMixin, Emitter, poperMixins],
 
     components: { ElCollapseTransition },
 
@@ -68,12 +46,26 @@
 
     data() {
       return {
+        popperJS: null,
         timeout: null,
         items: {},
         submenus: {}
       };
     },
+    watch: {
+      opened(val) {
+        if (this.isMenuPopup) {
+          this.$nextTick(_ => {
+            this.updatePopper();
+          });
+        }
+      }
+    },
     computed: {
+      // popper option
+      appendToBody() {
+        return this.rootMenu === this.$parent;
+      },
       menuTransitionName() {
         return this.rootMenu.collapse ? 'el-zoom-in-left' : 'el-zoom-in-top';
       },
@@ -114,6 +106,9 @@
       mode() {
         return this.rootMenu.mode;
       },
+      isMenuPopup() {
+        return this.rootMenu.isMenuPopup;
+      },
       titleStyle() {
         if (this.mode !== 'horizontal') {
           return {
@@ -131,6 +126,13 @@
       }
     },
     methods: {
+      handleCollapseToggle(value) {
+        if (value) {
+          this.initPopper();
+        } else {
+          this.doDestroy();
+        }
+      },
       addItem(item) {
         this.$set(this.items, item.index, item);
       },
@@ -188,15 +190,106 @@
         if (this.mode === 'horizontal' && !this.rootMenu.backgroundColor) return;
         const title = this.$refs['submenu-title'];
         title && (title.style.backgroundColor = this.rootMenu.backgroundColor || '');
+      },
+      updatePlacement() {
+        this.currentPlacement = this.mode === 'horizontal' ? 'bottom-start' : 'right-start';
+      },
+      initPopper() {
+        this.referenceElm = this.$el;
+        this.popperElm = this.$refs.menu;
+        this.updatePlacement();
       }
     },
     created() {
       this.parentMenu.addSubmenu(this);
       this.rootMenu.addSubmenu(this);
+      this.$on('toggle-collapse', this.handleCollapseToggle);
+    },
+    mounted() {
+      this.initPopper();
     },
     beforeDestroy() {
       this.parentMenu.removeSubmenu(this);
       this.rootMenu.removeSubmenu(this);
+    },
+    render(h) {
+      const {
+        active,
+        opened,
+        paddingStyle,
+        titleStyle,
+        backgroundColor,
+        $slots,
+        rootMenu,
+        currentPlacement,
+        menuTransitionName,
+        mode
+      } = this;
+
+      const popupMenu = (
+        <transition name={menuTransitionName}>
+          <div
+            ref="menu"
+            v-show={opened}
+            class={[`el-menu--${mode}`]}
+            on-mouseenter={this.handleMouseenter}
+            on-mouseleave={this.handleMouseleave}
+            on-focus={this.handleMouseenter}>
+            <ul
+              role="menu"
+              class={['el-menu el-menu--popup', `el-menu--popup-${currentPlacement}`]}
+              style={{ backgroundColor: rootMenu.backgroundColor || '' }}>
+              {$slots.default}
+            </ul>
+          </div>
+        </transition>
+      );
+
+      const inlineMenu = (
+        <el-collapse-transition>
+          <ul
+            role="menu"
+            class="el-menu el-menu--inline"
+            v-show={opened}
+            style={{ backgroundColor: rootMenu.backgroundColor || '' }}>
+            {$slots.default}
+          </ul>
+        </el-collapse-transition>
+      );
+
+      return (
+        <li
+          class={{
+            'el-submenu': true,
+            'is-active': active,
+            'is-opened': opened
+          }}
+          role="menuitem"
+          aria-haspopup="true"
+          aria-expanded={opened}
+          on-mouseenter={this.handleMouseenter}
+          on-mouseleave={this.handleMouseleave}
+          on-focus={this.handleMouseenter}
+        >
+          <div
+            class="el-submenu__title"
+            ref="submenu-title"
+            on-click={this.handleClick}
+            on-mouseenter={this.handleTitleMouseenter}
+            on-mouseleave={this.handleTitleMouseleave}
+            style={[paddingStyle, titleStyle, { backgroundColor }]}
+          >
+            {$slots.title}
+            <i class={{
+              'el-submenu__icon-arrow': true,
+              'el-icon-arrow-down': rootMenu.mode === 'horizontal' || rootMenu.mode === 'vertical' && !rootMenu.collapse,
+              'el-icon-arrow-right': rootMenu.mode === 'vertical' && rootMenu.collapse
+            }}>
+            </i>
+          </div>
+          {this.isMenuPopup ? popupMenu : inlineMenu}
+        </li>
+      );
     }
   };
 </script>

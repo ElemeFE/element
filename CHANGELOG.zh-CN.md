@@ -1,5 +1,59 @@
 ## 更新日志
 
+### 2.1.0 Charcoal
+
+*2018-01-31*
+
+#### 新特性
+- Cascader
+  - 新增 `focus` 和 `blur` 事件，#9184（by @viewweiwu）
+- Table
+  - `filter-method` 方法加入第三个参数 `column`，#9196（by @liyanlong）
+- DatePicker
+  - 新增 `prefix-icon` 和 `clear-icon` 属性，#9237（by @AdamSGit）
+  - 新增 `default-time` 属性，#9094（by @nighca）
+  - `value-format` 属性增加对 `timestamp` 的支持，#9319（by @wacky6）
+- InputNumber
+  - 组件绑定变量的值支持 `undefined`，#9361
+- Select
+  - 新增 `auto-complete` 属性，#9388
+- Form
+  - 新增 `disabled` 属性，#9529
+  - 新增 `validateOnRuleChange` 属性，#8141
+- Notificaition
+  - 新增 `closeAll` 方法，#9514
+
+#### 修复
+- InputNumber
+  - 修复初始输入小数点时被重置的问题，#9116
+- Dropdown
+  - 修复当页面仅有水平滚动条时，某些浏览器下拉菜单定位错误的问题，#9138（by @banzhuanmei）
+- Table
+  - 修复带有固定列的 Table 在列数据变化后固定列的个数计算错误的问题，#9188（by @kolesoffac）
+  - 修复多级表头最后一列的边框不能正确显示的问题，#9326
+  - 修复在 Safari 浏览器中表头错位的问题，#9327
+  - 修复带有展开行的表格在展开某一行后，当表格数据更新但 `row-key` 值不变时，该行会自动收起的问题，#9462
+  - 修复在一些情况下不必要的多次渲染问题，#9426
+  - 修复动态改变 TableColumn 的 `width` 属性时，其宽度计算错误的问题，#9426
+- Loading
+  - 修复某些情况下 Loading 不能被正确隐藏的问题，#9313
+- DatePicker
+  - 修复 `focus` 方法在范围选择时无效的问题，#9437
+  - 修复当目前时刻处于不可选择的范围内时，点击面板上的「此刻」按钮仍能选中目前时刻的问题，#9470（by @wacky6）
+  - 修复当在月选择面板中选中天数较少的月份时，日期面板呈现下一个月的问题，#9577（by @wacky6）
+- Steps
+  - 修复在 IE 11 中的样式问题，#9454
+
+#### 非兼容性更新
+- Menu
+  - `collapse` 状态下的弹出菜单现在会插入至 body 元素，修复其位于 Aside 内时弹出菜单不可见的问题，#9263
+- Table
+  - 勾选多选表格的 checkbox 时不再同时触发 `row-click` 事件，#9467
+- Loading
+  - 非全屏 Loading 遮罩层的 `z-index` 修改为 2000；全屏 Loading 遮罩层的 `z-index` 值会随页面上的弹出组件动态更新，#9522
+- Dropdown
+  - `show-timeout` 和 `hide-timeout` 属性现在仅在 trigger 为 `hover` 时生效，#9573
+
 ### 2.0.11
 
 *2018-01-08*

@@ -57,12 +57,11 @@ npm install babel-plugin-component -D
   "presets": [
     ["es2015", { "modules": false }]
   ],
-  "plugins": [["component", [
-    {
+  "plugins": [["component", {
       "libraryName": "element-ui",
       "styleLibraryName": "theme-chalk"
     }
-  ]]]
+  ]]
 }
 ```
 

@@ -404,7 +404,7 @@ Importar `Notification`:
 import { Notification } from 'element-ui';
 ```
 
-En este caso, debe llamar a `Notification(options)`. También se han registrado métodos para diferentes tipos, e.j. `Notification.success(options)`.
+En este caso, debe llamar a `Notification(options)`. También se han registrado métodos para diferentes tipos, e.j. `Notification.success(options)`. Puede llamar al metodo `Notification.closeAll()` para cerrar manualmente todas las instancias.
 
 ### Opciones
 | Atributo                 | Descripción                              | Tipo             | Valores aceptados                        | Por defecto |

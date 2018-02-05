@@ -210,7 +210,7 @@ If a Dialog is nested in another Dialog, `append-to-body` is required.
 <template>
   <el-button type="text" @click="outerVisible = true">open the outer Dialog</el-button>
   
-  <el-dialog title="Outter Dialog" :visible.sync="outerVisible">
+  <el-dialog title="Outer Dialog" :visible.sync="outerVisible">
     <el-dialog
         width="30%"
         title="Inner Dialog"
