@@ -9,9 +9,9 @@
     }
     .el-dropdown-link {
       cursor: pointer;
-      color: #20a0ff;
+      color: #409EFF;
     }
-    .el-icon-caret-bottom {
+    .el-icon-arrow-down {
       font-size: 12px;
     }
   }
@@ -63,7 +63,7 @@
 ```html
 <el-dropdown>
   <span class="el-dropdown-link">
-    下拉菜单<i class="el-icon-caret-bottom el-icon--right"></i>
+    下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
   </span>
   <el-dropdown-menu slot="dropdown">
     <el-dropdown-item>黄金糕</el-dropdown-item>
@@ -74,6 +74,17 @@
   </el-dropdown-menu>
 </el-dropdown>
 ```
+
+<style>
+  .el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+  }
+  .el-icon-arrow-down {
+    font-size: 12px;
+  }
+</style>
+
 :::
 
 ### 触发对象
@@ -85,7 +96,7 @@
 ```html
 <el-dropdown>
   <el-button type="primary">
-    更多菜单<i class="el-icon-caret-bottom el-icon--right"></i>
+    更多菜单<i class="el-icon-arrow-down el-icon--right"></i>
   </el-button>
   <el-dropdown-menu slot="dropdown">
     <el-dropdown-item>黄金糕</el-dropdown-item>
@@ -106,6 +117,28 @@
   </el-dropdown-menu>
 </el-dropdown>
 
+<style>
+  .el-dropdown {
+    vertical-align: top;
+  }
+  .el-dropdown + .el-dropdown {
+    margin-left: 15px;
+  }
+  .el-icon-arrow-down {
+    font-size: 12px;
+  }
+</style>
+
+<script>
+  export default {
+    methods: {
+      handleClick() {
+        alert('button click');
+      }
+    }
+  }
+</script>
+
 ```
 :::
 
@@ -120,7 +153,7 @@
     <span class="demonstration">hover 激活</span>
     <el-dropdown>
       <span class="el-dropdown-link">
-        下拉菜单<i class="el-icon-caret-bottom el-icon--right"></i>
+        下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item>黄金糕</el-dropdown-item>
@@ -135,7 +168,7 @@
     <span class="demonstration">click 激活</span>
     <el-dropdown trigger="click">
       <span class="el-dropdown-link">
-        下拉菜单<i class="el-icon-caret-bottom el-icon--right"></i>
+        下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item>黄金糕</el-dropdown-item>
@@ -148,6 +181,23 @@
   </el-col>
 </el-row>
 ```
+
+<style>
+  .el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+  }
+  .el-icon-arrow-down {
+    font-size: 12px;
+  }
+  .demonstration {
+    display: block;
+    color: #8492a6;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+</style>
+
 :::
 
 ### 菜单隐藏方式
@@ -158,7 +208,7 @@
 ```html
 <el-dropdown :hide-on-click="false">
   <span class="el-dropdown-link">
-    下拉菜单<i class="el-icon-caret-bottom el-icon--right"></i>
+    下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
   </span>
   <el-dropdown-menu slot="dropdown">
     <el-dropdown-item>黄金糕</el-dropdown-item>
@@ -168,6 +218,16 @@
     <el-dropdown-item divided>蚵仔煎</el-dropdown-item>
   </el-dropdown-menu>
 </el-dropdown>
+
+<style>
+  .el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+  }
+  .el-icon-arrow-down {
+    font-size: 12px;
+  }
+</style>
 ```
 :::
 
@@ -179,7 +239,7 @@
 ```html
 <el-dropdown @command="handleCommand">
   <span class="el-dropdown-link">
-    下拉菜单<i class="el-icon-caret-bottom el-icon--right"></i>
+    下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
   </span>
   <el-dropdown-menu slot="dropdown">
     <el-dropdown-item command="a">黄金糕</el-dropdown-item>
@@ -189,6 +249,17 @@
     <el-dropdown-item command="e" divided>蚵仔煎</el-dropdown-item>
   </el-dropdown-menu>
 </el-dropdown>
+
+<style>
+  .el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+  }
+  .el-icon-arrow-down {
+    font-size: 12px;
+  }
+</style>
+
 <script>
   export default {
     methods: {
@@ -201,15 +272,70 @@
 ```
 :::
 
+### 不同尺寸
+
+Dropdown 组件提供除了默认值以外的三种尺寸，可以在不同场景下选择合适的尺寸。
+
+:::demo 额外的尺寸：`medium`、`small`、`mini`，通过设置`size`属性来配置它们。
+
+```html
+<el-dropdown split-button type="primary">
+  默认尺寸
+  <el-dropdown-menu slot="dropdown">
+    <el-dropdown-item>黄金糕</el-dropdown-item>
+    <el-dropdown-item>狮子头</el-dropdown-item>
+    <el-dropdown-item>螺蛳粉</el-dropdown-item>
+    <el-dropdown-item>双皮奶</el-dropdown-item>
+    <el-dropdown-item>蚵仔煎</el-dropdown-item>
+  </el-dropdown-menu>
+</el-dropdown>
+
+<el-dropdown size="medium" split-button type="primary">
+  中等尺寸
+  <el-dropdown-menu slot="dropdown">
+    <el-dropdown-item>黄金糕</el-dropdown-item>
+    <el-dropdown-item>狮子头</el-dropdown-item>
+    <el-dropdown-item>螺蛳粉</el-dropdown-item>
+    <el-dropdown-item>双皮奶</el-dropdown-item>
+    <el-dropdown-item>蚵仔煎</el-dropdown-item>
+  </el-dropdown-menu>
+</el-dropdown>
+
+<el-dropdown size="small" split-button type="primary">
+  小型尺寸
+  <el-dropdown-menu slot="dropdown">
+    <el-dropdown-item>黄金糕</el-dropdown-item>
+    <el-dropdown-item>狮子头</el-dropdown-item>
+    <el-dropdown-item>螺蛳粉</el-dropdown-item>
+    <el-dropdown-item>双皮奶</el-dropdown-item>
+    <el-dropdown-item>蚵仔煎</el-dropdown-item>
+  </el-dropdown-menu>
+</el-dropdown>
+
+<el-dropdown size="mini" split-button type="primary">
+  超小尺寸
+  <el-dropdown-menu slot="dropdown">
+    <el-dropdown-item>黄金糕</el-dropdown-item>
+    <el-dropdown-item>狮子头</el-dropdown-item>
+    <el-dropdown-item>螺蛳粉</el-dropdown-item>
+    <el-dropdown-item>双皮奶</el-dropdown-item>
+    <el-dropdown-item>蚵仔煎</el-dropdown-item>
+  </el-dropdown-menu>
+</el-dropdown>
+```
+:::
+
 ### Dropdown Attributes
 | 参数          | 说明            | 类型            | 可选值                 | 默认值   |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
 | type          | 菜单按钮类型，同 Button 组件(只在`split-button`为 true 的情况下有效)   | string  |          —             |    —     |
-| size          | 菜单按钮尺寸，同 Button 组件(只在`split-button`为 true 的情况下有效)     | string          | — | — |
+| size          | 菜单尺寸，在`split-button`为 true 的情况下也对触发按钮生效  | string | medium / small / mini | — |
 | split-button  | 下拉触发元素呈现为按钮组    | boolean  |    —  |  false |
-| menu-align    | 菜单水平对齐方向     | string          | start, end  | end |
+| placement    | 菜单弹出位置     | string | top/top-start/top-end/bottom/bottom-start/bottom-end  | bottom-end |
 | trigger       | 触发下拉的行为     | string          | hover, click  | hover |
 | hide-on-click | 是否在点击菜单项后隐藏菜单     | boolean          | — | true |
+| show-timeout  | 展开下拉菜单的延时（仅在 trigger 为 hover 时有效）| number          | — | 250 |
+| hide-timeout  | 收起下拉菜单的延时（仅在 trigger 为 hover 时有效）| number          | — | 150 |
 
 ### Dropdown Events
 | 事件名称      | 说明    | 回调参数      |

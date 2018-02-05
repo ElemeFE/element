@@ -16,6 +16,10 @@ export default {
       startTime: '시작 시간',
       endDate: '종료 날짜',
       endTime: '종료 시간',
+      prevYear: '지난해',
+      nextYear: '다음해',
+      prevMonth: '지난달',
+      nextMonth: '다음달',
       year: '년',
       month1: '1월',
       month2: '2월',
@@ -78,6 +82,7 @@ export default {
       error: '올바르지 않은 입력'
     },
     upload: {
+      deleteTip: '클릭시 삭제됩니다',
       delete: '삭제',
       preview: '미리보기',
       continue: '계속하기'

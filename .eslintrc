@@ -6,8 +6,11 @@
     "expect": true,
     "sinon": true
   },
-  "plugins": ['vue'],
-  "extends": 'elemefe',
+  "plugins": ["html", "json"],
+  "extends": "elemefe",
+  "rules": {
+    "no-restricted-globals": ["error", "event", "fdescribe"]
+  },
   "parserOptions": {
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true,

@@ -5,17 +5,21 @@ export default {
       clear: 'Arassala'
     },
     datepicker: {
-      now: 'Ýaňy',
+      now: 'Şuwagt',
       today: 'Şügün',
       cancel: 'Bes et',
       clear: 'Arassala',
       confirm: 'OK',
       selectDate: 'Güni saýlaň',
       selectTime: 'Wagty saýlaň',
-      startDate: 'Başlaýan Güni',
-      startTime: 'Başlaýan Wagty',
-      endDate: 'Sonky Güni',
-      endTime: 'Sonky Wagty',
+      startDate: 'Başlaýan güni',
+      startTime: 'Başlaýan wagty',
+      endDate: 'Gutarýan güni',
+      endTime: 'Gutarýan wagty',
+      prevYear: 'Previous Year', // to be translated
+      nextYear: 'Next Year', // to be translated
+      prevMonth: 'Previous Month', // to be translated
+      nextMonth: 'Next Month', // to be translated
       year: '',
       month1: 'Ýan',
       month2: 'Few',
@@ -25,7 +29,7 @@ export default {
       month6: 'Iýn',
       month7: 'Iýl',
       month8: 'Awg',
-      month9: 'Sep',
+      month9: 'Sen',
       month10: 'Okt',
       month11: 'Noý',
       month12: 'Dek',
@@ -63,7 +67,7 @@ export default {
     cascader: {
       noMatch: 'Hiçzat tapylmady',
       loading: 'Indirilýär',
-      placeholder: 'saýlaň'
+      placeholder: 'Saýlaň'
     },
     pagination: {
       goto: 'Git',
@@ -78,6 +82,7 @@ export default {
       error: 'Ýalňyş girizme'
     },
     upload: {
+      deleteTip: 'Pozmak üçin "poz" düwmä basyň',
       delete: 'Poz',
       preview: 'Gör',
       continue: 'Dowam et'
@@ -97,7 +102,7 @@ export default {
       noData: 'Hiçzat ýok',
       titles: ['Sanaw 1', 'Sanaw 2'],
       filterPlaceholder: 'Gözleg sözlerini giriziň',
-      noCheckedFormat: '{total} element',
+      noCheckedFormat: '{total} sany',
       hasCheckedFormat: '{checked}/{total} saýlanan'
     }
   }

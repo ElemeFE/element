@@ -15,15 +15,41 @@
         width: 110px;
       }
     }
+    .el-tooltip + .el-tooltip {
+      margin-left: 15px;
+    }
     .box {
+      width: 400px;
+    
+      .top {
+        text-align: center;
+      }
+      
       .left {
         float: left;
         width: 110px;
       }
-
+      
       .right {
         float: right;
         width: 110px;
+      }
+      
+      .bottom {
+        clear: both;
+        text-align: center;
+      }
+      
+      .item {
+        margin: 4px;
+      }
+      
+      .left .el-tooltip__popper,
+      .right .el-tooltip__popper {
+        padding: 8px 10px;
+      }
+      .el-tooltip {
+        margin-left: 0;
       }
     }
   }
@@ -193,7 +219,7 @@ In fact, Tooltip is an extension based on [Vue-popper](https://github.com/elemen
 :::tip
 The `router-link` component is not supported in tooltip, please use `vm.$router.push`.
 
-Disabled form elements are not supported in tooltip, see more information at [MDN](https://developer.mozilla.org/en-US/docs/Web/Events/mouseenter), please wrap disabled form elements.
+Disabled form elements are not supported for Tooltip, more information can be found at [MDN](https://developer.mozilla.org/en-US/docs/Web/Events/mouseenter). You need to wrap the disabled form element with a container element for Tooltip to work.
 :::
 
 
@@ -213,3 +239,4 @@ Disabled form elements are not supported in tooltip, see more information at [MD
 | manual | whether to control Tooltip manually. `mouseenter` and `mouseleave` won't have effects if set to `true` | boolean | — | false |
 |  popper-class  |  custom class name for Tooltip's popper | string | — | — |
 | enterable | whether the mouse can enter the tooltip | Boolean | — | true |
+| hide-after | timeout in milliseconds to hide tooltip | number | — | 0 |

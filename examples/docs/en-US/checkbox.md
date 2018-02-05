@@ -8,6 +8,10 @@
         checked: true,
         checked1: false,
         checked2: true,
+        checked3: true,
+        checked4: false,
+        checked5: false,
+        checked6: true,
         isValid: 'valid',
         checkAll: false,
         cities: cityOptions,
@@ -15,16 +19,19 @@
         checkedCities1: ['Shanghai', 'Beijing'],
         isIndeterminate: true,
         checkboxGroup1: ['Shanghai'],
-        checkboxGroup2: ['Beijing'],
-        checkboxGroup3: ['Guangzhou']
+        checkboxGroup2: ['Shanghai'],
+        checkboxGroup3: ['Shanghai'],
+        checkboxGroup4: ['Shanghai'],
+        checkboxGroup5: [],
+        checkboxGroup6: []
       };
     },
     methods: {
       handleChange(ev) {
         console.log(ev);
       },
-      handleCheckAllChange(event) {
-        this.checkedCities = event.target.checked ? cityOptions : [];
+      handleCheckAllChange(val) {
+        this.checkedCities = val ? cityOptions : [];
         this.isIndeterminate = false;
       },
       handleCheckedCitiesChange(value) {
@@ -67,7 +74,7 @@ Checkbox can be used alone to switch between two states.
 
 Disabled state for checkbox.
 
-::: demo Set the `disabled` attribute.
+:::demo Set the `disabled` attribute.
 
 ```html
 <template>
@@ -135,15 +142,15 @@ The `indeterminate` property can help you to achieve a 'check all' effect.
   export default {
     data() {
       return {
-        checkAll: true,
+        checkAll: false,
         checkedCities: ['Shanghai', 'Beijing'],
         cities: cityOptions,
         isIndeterminate: true
       };
     },
     methods: {
-      handleCheckAllChange(event) {
-        this.checkedCities = event.target.checked ? cityOptions : [];
+      handleCheckAllChange(val) {
+        this.checkedCities = val ? cityOptions : [];
         this.isIndeterminate = false;
       },
       handleCheckedCitiesChange(value) {
@@ -190,21 +197,29 @@ The `min` and `max` properties can help you to limit the number of checked items
 
 Checkbox with button styles.
 
-:::demo You just need to change `<el-checkbox>` element into `<el-checkbox-button>` element. We also provide `size` attribute for these buttons: `large` and `small`.
+:::demo You just need to change `el-checkbox` element into `el-checkbox-button` element. We also provide `size` attribute.
 ```html
 <template>
-  <div style="margin: 15px 0;"></div>
-  <el-checkbox-group v-model="checkboxGroup1">
-    <el-checkbox-button v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox-button>
-  </el-checkbox-group>
-  <div style="margin: 15px 0;"></div>
-  <el-checkbox-group v-model="checkboxGroup2" size="small">
-    <el-checkbox-button v-for="city in cities" :label="city" :disabled="city === 'Shenzhen'" :key="city">{{city}}</el-checkbox-button>
-  </el-checkbox-group>
-  <div style="margin: 15px 0;"></div>
-  <el-checkbox-group v-model="checkboxGroup3" size="large" fill="#324057" text-color="#a4aebd" :min="1" :max="3">
-    <el-checkbox-button v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox-button>
-  </el-checkbox-group>
+  <div>
+    <el-checkbox-group v-model="checkboxGroup1">
+      <el-checkbox-button v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox-button>
+    </el-checkbox-group>
+  </div>
+  <div style="margin-top: 20px">
+    <el-checkbox-group v-model="checkboxGroup2" size="medium">
+      <el-checkbox-button v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox-button>
+    </el-checkbox-group>
+  </div>
+  <div style="margin-top: 20px">
+    <el-checkbox-group v-model="checkboxGroup3" size="small">
+      <el-checkbox-button v-for="city in cities" :label="city" :disabled="city === 'Beijing'" :key="city">{{city}}</el-checkbox-button>
+    </el-checkbox-group>
+  </div>
+  <div style="margin-top: 20px">
+    <el-checkbox-group v-model="checkboxGroup4" size="mini" disabled>
+      <el-checkbox-button v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox-button>
+    </el-checkbox-group>
+  </div>
 </template>
 <script>
   const cityOptions = ['Shanghai', 'Beijing', 'Guangzhou', 'Shenzhen'];
@@ -213,9 +228,54 @@ Checkbox with button styles.
     data () {
       return {
         checkboxGroup1: ['Shanghai'],
-        checkboxGroup2: ['Beijing'],
-        checkboxGroup3: ['Guangzhou'],
+        checkboxGroup2: ['Shanghai'],
+        checkboxGroup3: ['Shanghai'],
+        checkboxGroup4: ['Shanghai'],
         cities: cityOptions
+      };
+    }
+  }
+</script>
+```
+:::
+
+### With borders
+
+:::demo The `border` attribute adds a border to Checkboxes.
+```html
+<template>
+  <div>
+    <el-checkbox v-model="checked3" label="Option1" border></el-checkbox>
+    <el-checkbox v-model="checked4" label="Option2" border></el-checkbox>
+  </div>
+  <div style="margin-top: 20px">
+    <el-checkbox v-model="checked5" label="Option1" border size="medium"></el-checkbox>
+    <el-checkbox v-model="checked6" label="Option2" border size="medium"></el-checkbox>
+  </div>
+  <div style="margin-top: 20px">
+    <el-checkbox-group v-model="checkboxGroup5" size="small">
+      <el-checkbox label="Option1" border></el-checkbox>
+      <el-checkbox label="Option2" border disabled></el-checkbox>
+    </el-checkbox-group>
+  </div>
+  <div style="margin-top: 20px">
+    <el-checkbox-group v-model="checkboxGroup6" size="mini" disabled>
+      <el-checkbox label="Option1" border></el-checkbox>
+      <el-checkbox label="Option2" border></el-checkbox>
+    </el-checkbox-group>
+  </div>
+</template>
+
+<script>
+  export default {
+    data () {
+      return {
+        checked3: true,
+        checked4: false,
+        checked5: false,
+        checked6: true,
+        checkboxGroup5: [],
+        checkboxGroup6: []
       };
     }
   }
@@ -226,25 +286,42 @@ Checkbox with button styles.
 ### Checkbox Attributes
 | Attribute      | Description         | Type    | Options                         | Default|
 |---------- |-------- |---------- |-------------  |-------- |
-| label     | value of the checkbox when used inside a `checkbox-group`   | string    |       —        |     —    |
-| true-label | value of the checkbox if it's checked   | string, number    |       —        |     —    |
-| false-label | value of the checkbox if it's not checked   | string, number    |      —         |     —    |
+| label     | value of the Checkbox when used inside a `checkbox-group`   | string / number / boolean   |       —        |     —    |
+| true-label | value of the Checkbox if it's checked   | string / number    |       —        |     —    |
+| false-label | value of the Checkbox if it's not checked   | string / number    |      —         |     —    |
+| disabled  | whether the Checkbox is disabled   | boolean   |  — | false   |
+| border  | whether to add a border around Checkbox  | boolean   | — | false   |
+| size  | size of the Checkbox, only works when `border` is true  | string  | medium / small / mini | — |
 | name | native 'name' attribute | string    |      —         |     —    |
-| disabled  | if the checkbox is disabled   | boolean   |  — | false   |
-| checked  | if the checkbox is checked   | boolean   |  — | false   |
+| checked  | if the Checkbox is checked   | boolean   |  — | false   |
 | indeterminate  | same as `indeterminate` in native checkbox | boolean   |  — | false   |
-
-### Checkbox-group Attributes
-| Attribute      | Description         | Type    | Options                         | Default|
-|---------- |-------- |---------- |-------------  |-------- |
-|size | the size of checkbox buttons | string | large/small | —
-|fill  | border and background color when button is active | string   | — | #20a0ff   |
-|text-color | font color when button is active | string   | — | #ffffff   |
-| min     | minimum number of checkbox checked   | number    |       —        |     —    |
-| max     | maximum number of checkbox checked   | number    |       —        |     —    |
 
 ### Checkbox Events
 | Event Name | Description | Parameters |
 |---------- |-------- |---------- |
-| change  | triggers when the binding value changes | Event object |
+| change  | triggers when the binding value changes | the updated value |
 
+### Checkbox-group Attributes
+| Attribute      | Description         | Type    | Options                         | Default|
+|---------- |-------- |---------- |-------------  |-------- |
+|size | size of checkbox buttons or bordered checkboxes | string | medium / small / mini | — |
+| disabled  | whether the nesting checkboxes are disabled | boolean   | — | false   |
+| min     | minimum number of checkbox checked   | number    |       —        |     —    |
+| max     | maximum number of checkbox checked   | number    |       —        |     —    |
+|text-color | font color when button is active | string   | — | #ffffff   |
+|fill  | border and background color when button is active | string   | — | #409EFF   |
+
+### Checkbox-group Events
+| Event Name | Description | Parameters |
+|---------- |-------- |---------- |
+| change  | triggers when the binding value changes | the updated value |
+
+### Checkbox-button Attributes
+| Attribute      | Description         | Type    | Options                         | Default|
+|---------- |-------- |---------- |-------------  |-------- |
+| label     | value of the checkbox when used inside a `checkbox-group` | string / number / boolean  |       —        |     —    |
+| true-label | value of the checkbox if it's checked | string / number | — |     —    |
+| false-label | value of the checkbox if it's not checked | string / number    |      —         |     —    |
+| disabled  | whether the checkbox is disabled | boolean   |  — | false   |
+| name | native 'name' attribute | string    |      —         |     —    |
+| checked  | if the checkbox is checked | boolean   |  — | false   |

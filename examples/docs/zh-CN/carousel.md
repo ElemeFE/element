@@ -15,7 +15,7 @@
     padding: 30px;
     text-align: center;
     border-right: solid 1px #EFF2F6;
-    float: left;
+    display: inline-block;
     width: 50%;
     box-sizing: border-box;
     &:last-child {
@@ -67,7 +67,7 @@
 
 适用广泛的基础用法
 
-::: demo 结合使用`el-carousel`和`el-carousel-item`标签就得到了一个走马灯。幻灯片的内容是任意的，需要放在`el-carousel-item`标签中。默认情况下，在鼠标 hover 底部的指示器时就会触发切换。通过设置`trigger`属性为`click`，可以达到点击触发的效果。
+:::demo 结合使用`el-carousel`和`el-carousel-item`标签就得到了一个走马灯。幻灯片的内容是任意的，需要放在`el-carousel-item`标签中。默认情况下，在鼠标 hover 底部的指示器时就会触发切换。通过设置`trigger`属性为`click`，可以达到点击触发的效果。
 ```html
 <template>
   <div class="block">
@@ -112,7 +112,7 @@
 
 可以将指示器的显示位置设置在容器外部
 
-::: demo `indicator-position`属性定义了指示器的位置。默认情况下，它会显示在走马灯内部，设置为`outside`则会显示在外部；设置为`none`则不会显示指示器。
+:::demo `indicator-position`属性定义了指示器的位置。默认情况下，它会显示在走马灯内部，设置为`outside`则会显示在外部；设置为`none`则不会显示指示器。
 ```html
 <template>
   <el-carousel indicator-position="outside">
@@ -145,7 +145,7 @@
 ### 切换箭头
 可以设置切换箭头的显示时机
 
-::: demo `arrow`属性定义了切换箭头的显示时机。默认情况下，切换箭头只有在鼠标 hover 到走马灯上时才会显示；若将`arrow`设置为`always`，则会一直显示；设置为`never`，则会一直隐藏。
+:::demo `arrow`属性定义了切换箭头的显示时机。默认情况下，切换箭头只有在鼠标 hover 到走马灯上时才会显示；若将`arrow`设置为`always`，则会一直显示；设置为`never`，则会一直隐藏。
 ```html
 <template>
   <el-carousel :interval="5000" arrow="always">
@@ -178,7 +178,7 @@
 ### 卡片化
 当页面宽度方向空间空余，但高度方向空间匮乏时，可使用卡片风格
 
-::: demo 将`type`属性设置为`card`即可启用卡片模式。从交互上来说，卡片模式和一般模式的最大区别在于，可以通过直接点击两侧的幻灯片进行切换。
+:::demo 将`type`属性设置为`card`即可启用卡片模式。从交互上来说，卡片模式和一般模式的最大区别在于，可以通过直接点击两侧的幻灯片进行切换。
 ```html
 <template>
   <el-carousel :interval="4000" type="card" height="200px">

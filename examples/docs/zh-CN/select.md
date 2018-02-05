@@ -101,6 +101,7 @@
         value8: '',
         value9: '',
         value10: [],
+        value11: [],
         loading: false,
         states: ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
       };
@@ -319,10 +320,24 @@
 
 适用性较广的基础多选，用 Tag 展示已选项
 
-:::demo 为`el-select`设置`multiple`属性即可启用多选，此时`v-model`的值为当前选中值所组成的数组
+:::demo 为`el-select`设置`multiple`属性即可启用多选，此时`v-model`的值为当前选中值所组成的数组。默认情况下选中值会以 Tag 的形式展现，你也可以设置`collapse-tags`属性将它们合并为一段文字。
 ```html
 <template>
   <el-select v-model="value5" multiple placeholder="请选择">
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+
+  <el-select
+    v-model="value11"
+    multiple
+    collapse-tags
+    style="margin-left: 20px;"
+    placeholder="请选择">
     <el-option
       v-for="item in options"
       :key="item.value"
@@ -352,7 +367,8 @@
           value: '选项5',
           label: '北京烤鸭'
         }],
-        value5: []
+        value5: [],
+        value11: []
       }
     }
   }
@@ -525,6 +541,7 @@
     multiple
     filterable
     remote
+    reserve-keyword
     placeholder="请输入关键词"
     :remote-method="remoteMethod"
     :loading="loading">
@@ -592,7 +609,7 @@
 
 ### 创建条目
 可以创建并选中选项中不存在的条目
-:::demo 使用`allow-create`属性即可通过在输入框中输入文字来创建新的条目。注意此时`filterable`必须为真。
+:::demo 使用`allow-create`属性即可通过在输入框中输入文字来创建新的条目。注意此时`filterable`必须为真。本例还使用了`default-first-option`属性，在该属性打开的情况下，按下回车就可以选中当前选项列表中的第一个选项，无需使用鼠标或键盘方向键进行定位。
 ```html
 <template>
   <el-select
@@ -600,6 +617,7 @@
     multiple
     filterable
     allow-create
+    default-first-option
     placeholder="请选择文章标签">
     <el-option
       v-for="item in options5"
@@ -642,14 +660,16 @@
 | multiple | 是否多选 | boolean | — | false |
 | disabled | 是否禁用 | boolean | — | false |
 | value-key | 作为 value 唯一标识的键名，绑定值为对象类型时必填 | string | — | value |
-| size | 输入框尺寸 | string | large/small/mini | — |
+| size | 输入框尺寸 | string | medium/small/mini | — |
 | clearable | 单选时是否可以清空选项 | boolean | — | false |
+| collapse-tags | 多选时是否将选中值按文字的形式展示 | boolean | — | false |
 | multiple-limit | 多选时用户最多可以选择的项目数，为 0 则不限制 | number | — | 0 |
 | name | select input 的 name 属性 | string | — | — |
+| auto-complete | select input 的 autocomplete 属性 | string | — | off |
 | placeholder | 占位符 | string | — | 请选择 |
 | filterable | 是否可搜索 | boolean | — | false |
 | allow-create | 是否允许用户创建新条目，需配合 `filterable` 使用 | boolean | — | false |
-| filter-method | 自定义过滤方法 | function | — | — |
+| filter-method | 自定义搜索方法 | function | — | — |
 | remote | 是否为远程搜索 | boolean | — | false |
 | remote-method | 远程搜索方法 | function | — | — |
 | loading | 是否正在从远程获取数据 | boolean | — | false |
@@ -657,6 +677,7 @@
 | no-match-text | 搜索条件无匹配时显示的文字 | string | — | 无匹配数据 |
 | no-data-text | 选项为空时显示的文字 | string | — | 无数据 |
 | popper-class | Select 下拉框的类名 | string | — | — |
+| reserve-keyword | 多选且可搜索时，是否在选中一个选项后保留当前的搜索关键词 | boolean | — | false |
 | default-first-option | 在输入框按下回车，选择第一个匹配项。需配合 `filterable` 或 `remote` 使用 | boolean | - | false |
 
 ### Select Events
@@ -666,6 +687,8 @@
 | visible-change | 下拉框出现/隐藏时触发 | 出现则为 true，隐藏则为 false |
 | remove-tag | 多选模式下移除tag时触发 | 移除的tag值 |
 | clear | 可清空的单选模式下用户点击清空按钮时触发 | — |
+| blur | 当 input 失去焦点时触发 | (event: Event) |
+| focus | 当 input 获得焦点时触发 | (event: Event) |
 
 ### Option Group Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
@@ -679,3 +702,8 @@
 | value | 选项的值 | string/number/object | — | — |
 | label | 选项的标签，若不设置则默认与 `value` 相同 | string/number | — | — |
 | disabled | 是否禁用该选项 | boolean | — | false |
+
+### Methods
+| 方法名 | 说明 | 参数 |
+| ---- | ---- | ---- |
+| focus | 使 input 获取焦点 | - |

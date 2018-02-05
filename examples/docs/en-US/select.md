@@ -101,6 +101,7 @@
         value8: '',
         value9: [],
         value10: [],
+        value11: [],
         loading: false,
         states: ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
       };
@@ -320,10 +321,24 @@ You can clear Select using a clear icon.
 
 Multiple select uses tags to display selected options.
 
-:::demo Set `multiple` attribute for `el-select` to enable multiple mode. In this case, the value of `v-model` will be an array of selected options.
+:::demo Set `multiple` attribute for `el-select` to enable multiple mode. In this case, the value of `v-model` will be an array of selected options. By default the selected options will be displayed as Tags. You can collapse them to a text by using `collapse-tags` attribute.
 ```html
 <template>
   <el-select v-model="value5" multiple placeholder="Select">
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+  
+  <el-select
+    v-model="value11"
+    multiple
+    collapse-tags
+    style="margin-left: 20px;"
+    placeholder="Select">
     <el-option
       v-for="item in options"
       :key="item.value"
@@ -353,7 +368,8 @@ Multiple select uses tags to display selected options.
           value: 'Option5',
           label: 'Option5'
         }],
-        value5: []
+        value5: [],
+        value11: []
       }
     }
   }
@@ -530,6 +546,7 @@ Enter keywords and search data from server.
     multiple
     filterable
     remote
+    reserve-keyword
     placeholder="Please enter a keyword"
     :remote-method="remoteMethod"
     :loading="loading">
@@ -597,7 +614,7 @@ Enter keywords and search data from server.
 
 ### Create new items
 Create and select new items that are not included in select options
-:::demo By using the `allow-create` attribute, users can create new items by typing in the input box. Note that for `allow-create` to work, `filterable` must be `true`.
+:::demo By using the `allow-create` attribute, users can create new items by typing in the input box. Note that for `allow-create` to work, `filterable` must be `true`. This example also demonstrates `default-first-option`. When this attribute is set to `true`, you can select the first option in the current option list by hitting enter without having to navigate with mouse or arrow keys.
 ```html
 <template>
   <el-select
@@ -605,6 +622,7 @@ Create and select new items that are not included in select options
     multiple
     filterable
     allow-create
+    default-first-option
     placeholder="Choose tags for your article">
     <el-option
       v-for="item in options5"
@@ -649,8 +667,10 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 | value-key | unique identity key name for value, required when value is an object | string | — | value |
 | size | size of Input | string | large/small/mini | — |
 | clearable | whether single select can be cleared | boolean | — | false |
+| collapse-tags | whether to collapse tags to a text when multiple selecting | boolean | — | false |
 | multiple-limit | maximum number of options user can select when `multiple` is `true`. No limit when set to 0 | number | — | 0 |
 | name | the name attribute of select input | string | — | — |
+| auto-complete | the autocomplete attribute of select input | string | — | off |
 | placeholder | placeholder | string | — | Select |
 | filterable | whether Select is filterable | boolean | — | false |
 | allow-create | whether creating new items is allowed. To use this, `filterable` must be true | boolean | — | false |
@@ -662,6 +682,7 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 | no-match-text | displayed text when no data matches the filtering query | string | — | No matching data |
 | no-data-text | displayed text when there is no options | string | — | No data |
 | popper-class | custom class name for Select's dropdown | string | — | — |
+| reserve-keyword | when `multiple` and `filter` is true, whether to reserve current keyword after selecting an option | boolean | — | false |
 | default-first-option | select first matching option on enter key. Use with `filterable` or `remote` | boolean | - | false |
 
 ### Select Events
@@ -671,6 +692,8 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 | visible-change | triggers when the dropdown appears/disappears | true when it appears, and false otherwise |
 | remove-tag | triggers when a tag is removed in multiple mode | removed tag value |
 | clear | triggers when the clear icon is clicked in a clearable Select | — |
+| blur | triggers when Input blurs | (event: Event) |
+| focus | triggers when Input focuses | (event: Event) |
 
 ### Option Group Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
@@ -685,3 +708,7 @@ If the binding value of Select is an object, make sure to assign `value-key` as 
 | label | label of option, same as `value` if omitted | string/number | — | — |
 | disabled | whether option is disabled | boolean | — | false |
 
+### Methods
+| Method | Description | Parameters |
+|------|--------|-------|
+| focus | focus the Input component | - |

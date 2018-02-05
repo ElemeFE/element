@@ -16,6 +16,10 @@ export default {
       startTime: 'Godzina początkowa',
       endDate: 'Data końcowa',
       endTime: 'Czas końcowa',
+      prevYear: 'Poprzedni rok',
+      nextYear: 'Następny rok',
+      prevMonth: 'Poprzedni miesiąc',
+      nextMonth: 'Następny miesiąc',
       year: 'rok',
       month1: 'styczeń',
       month2: 'luty',
@@ -78,6 +82,7 @@ export default {
       error: 'Wiadomość zawiera niedozwolone znaki'
     },
     upload: {
+      deleteTip: 'press delete to remove', // to be translated
       delete: 'Kasuj',
       preview: 'Podgląd',
       continue: 'Kontynuuj'

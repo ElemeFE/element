@@ -263,7 +263,7 @@
     padding: 30px 0;
     text-align: center;
     border-right: solid 1px #EFF2F6;
-    float: left;
+    display: inline-block;
     width: 50%;
     box-sizing: border-box;
     &:last-child {
@@ -1669,6 +1669,7 @@ Search and select options with a keyword.
 | options   | data of the options | array | — | — |
 | props | configuration options, see the following table | object | — | — |
 | value | selected value | array | — | — |
+| separator | option separator | string | — | / |
 | popper-class | custom class name for Cascader's dropdown | string | — | — |
 | placeholder | input placeholder | string | — | Select |
 | disabled  | whether Cascader is disabled | boolean |  — | false |
@@ -1676,9 +1677,10 @@ Search and select options with a keyword.
 | expand-trigger  | trigger mode of expanding current item | string | click / hover | click |
 | show-all-levels | whether to display all levels of the selected value in the input | boolean | — | true |
 | filterable  | whether the options can be searched | boolean | — | — |
-| debounce | debounce delay when typing filter keyword, in millisecond | number | — | 300 |
+| debounce | debounce delay when typing filter keyword, in milliseconds | number | — | 300 |
 | change-on-select | whether selecting an option of any level is permitted | boolean | — | false |
-| size  | size of Input | string | large / small / mini | — |
+| size  | size of Input | string | medium / small / mini | — |
+| before-filter | hook function before filtering with the value to be filtered as its parameter. If `false` is returned or a `Promise` is returned and then is rejected, filtering will be aborted | function(value) | — | — |
 
 ### props
 | Attribute | Description | Type | Accepted Values | Default |
@@ -1687,10 +1689,11 @@ Search and select options with a keyword.
 | value     | specify which key of option object is used as the option's value | string | — | — |
 | children  | specify which key of option object is used as the option's child options | string | — | — |
 | disabled  | specify which key of option object indicates if the option is disabled | string | — | — |
-| before-filter | hook function before filtering with the value to be filtered as its parameter. If `false` is returned or a `Promise` is returned and then is rejected, filtering will be aborted | function(value) | — | — |
 
 ### Events
 | Event Name | Description | Parameters |
 |---------- |-------- |---------- |
 | change  | triggers when the binding value changes | value |
 | active-item-change | triggers when active option changes, only works when `change-on-select` is `false` | an array of active options |
+| blur | triggers when Cascader blurs | (event: Event) |
+| focus | triggers when Cascader focuses | (event: Event) |

@@ -23,6 +23,12 @@ export default {
     uploader: this
   },
 
+  inject: {
+    elForm: {
+      default: ''
+    }
+  },
+
   props: {
     action: {
       type: String,
@@ -53,6 +59,7 @@ export default {
       default: 'select'
     },
     beforeUpload: Function,
+    beforeRemove: Function,
     onRemove: {
       type: Function,
       default: noop
@@ -88,10 +95,15 @@ export default {
     },
     listType: {
       type: String,
-      default: 'text'   // text,picture,picture-card
+      default: 'text' // text,picture,picture-card
     },
     httpRequest: Function,
-    disabled: Boolean
+    disabled: Boolean,
+    limit: Number,
+    onExceed: {
+      type: Function,
+      default: noop
+    }
   },
 
   data() {
@@ -101,6 +113,12 @@ export default {
       draging: false,
       tempIndex: 1
     };
+  },
+
+  computed: {
+    uploadDisabled() {
+      return this.disabled || (this.elForm || {}).disabled;
+    }
   },
 
   watch: {
@@ -139,13 +157,13 @@ export default {
       this.onChange(file, this.uploadFiles);
     },
     handleProgress(ev, rawFile) {
-      var file = this.getFile(rawFile);
+      const file = this.getFile(rawFile);
       this.onProgress(ev, file, this.uploadFiles);
       file.status = 'uploading';
       file.percentage = ev.percent || 0;
     },
     handleSuccess(res, rawFile) {
-      var file = this.getFile(rawFile);
+      const file = this.getFile(rawFile);
 
       if (file) {
         file.status = 'success';
@@ -156,8 +174,8 @@ export default {
       }
     },
     handleError(err, rawFile) {
-      var file = this.getFile(rawFile);
-      var fileList = this.uploadFiles;
+      const file = this.getFile(rawFile);
+      const fileList = this.uploadFiles;
 
       file.status = 'fail';
 
@@ -170,14 +188,29 @@ export default {
       if (raw) {
         file = this.getFile(raw);
       }
-      this.abort(file);
-      var fileList = this.uploadFiles;
-      fileList.splice(fileList.indexOf(file), 1);
-      this.onRemove(file, fileList);
+      let doRemove = () => {
+        this.abort(file);
+        let fileList = this.uploadFiles;
+        fileList.splice(fileList.indexOf(file), 1);
+        this.onRemove(file, fileList);
+      };
+
+      if (!this.beforeRemove) {
+        doRemove();
+      } else if (typeof this.beforeRemove === 'function') {
+        const before = this.beforeRemove(file, this.uploadFiles);
+        if (before && before.then) {
+          before.then(() => {
+            doRemove();
+          }, noop);
+        } else if (before !== false) {
+          doRemove();
+        }
+      }
     },
     getFile(rawFile) {
-      var fileList = this.uploadFiles;
-      var target;
+      let fileList = this.uploadFiles;
+      let target;
       fileList.every(item => {
         target = rawFile.uid === item.uid ? item : null;
         return !target;
@@ -209,12 +242,12 @@ export default {
   },
 
   render(h) {
-    var uploadList;
+    let uploadList;
 
     if (this.showFileList) {
       uploadList = (
         <UploadList
-          disabled={this.disabled}
+          disabled={this.uploadDisabled}
           listType={this.listType}
           files={this.uploadFiles}
           on-remove={this.handleRemove}
@@ -223,7 +256,7 @@ export default {
       );
     }
 
-    var uploadData = {
+    const uploadData = {
       props: {
         type: this.type,
         drag: this.drag,
@@ -238,7 +271,9 @@ export default {
         fileList: this.uploadFiles,
         autoUpload: this.autoUpload,
         listType: this.listType,
-        disabled: this.disabled,
+        disabled: this.uploadDisabled,
+        limit: this.limit,
+        'on-exceed': this.onExceed,
         'on-start': this.handleStart,
         'on-progress': this.handleProgress,
         'on-success': this.handleSuccess,
@@ -252,16 +287,16 @@ export default {
 
     const trigger = this.$slots.trigger || this.$slots.default;
     const uploadComponent = (typeof FormData !== 'undefined' || this.$isServer)
-        ? <upload {...uploadData}>{trigger}</upload>
-        : <iframeUpload {...uploadData}>{trigger}</iframeUpload>;
+      ? <upload {...uploadData}>{trigger}</upload>
+      : <iframeUpload {...uploadData}>{trigger}</iframeUpload>;
 
     return (
       <div>
         { this.listType === 'picture-card' ? uploadList : ''}
         {
           this.$slots.trigger
-          ? [uploadComponent, this.$slots.default]
-          : uploadComponent
+            ? [uploadComponent, this.$slots.default]
+            : uploadComponent
         }
         {this.$slots.tip}
         { this.listType !== 'picture-card' ? uploadList : ''}

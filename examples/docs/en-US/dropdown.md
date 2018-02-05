@@ -9,9 +9,9 @@
     }
     .el-dropdown-link {
       cursor: pointer;
-      color: #20a0ff;
+      color: #409EFF;
     }
-    .el-icon-caret-bottom {
+    .el-icon-arrow-down {
       font-size: 12px;
     }
   }
@@ -61,7 +61,7 @@ Hover on the dropdown menu to unfold it for more actions.
 ```html
 <el-dropdown>
   <span class="el-dropdown-link">
-    Dropdown List<i class="el-icon-caret-bottom el-icon--right"></i>
+    Dropdown List<i class="el-icon-arrow-down el-icon--right"></i>
   </span>
   <el-dropdown-menu slot="dropdown">
     <el-dropdown-item>Action 1</el-dropdown-item>
@@ -71,6 +71,17 @@ Hover on the dropdown menu to unfold it for more actions.
     <el-dropdown-item divided>Action 5</el-dropdown-item>
   </el-dropdown-menu>
 </el-dropdown>
+
+<style>
+  .el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+  }
+  .el-icon-arrow-down {
+    font-size: 12px;
+  }
+</style>
+
 ```
 
 :::
@@ -83,7 +94,7 @@ Use the button to trigger the dropdown list.
 ```html
 <el-dropdown>
   <el-button type="primary">
-    Dropdown List<i class="el-icon-caret-bottom el-icon--right"></i>
+    Dropdown List<i class="el-icon-arrow-down el-icon--right"></i>
   </el-button>
   <el-dropdown-menu slot="dropdown">
     <el-dropdown-item>Action 1</el-dropdown-item>
@@ -103,6 +114,28 @@ Use the button to trigger the dropdown list.
     <el-dropdown-item>Action 5</el-dropdown-item>
   </el-dropdown-menu>
 </el-dropdown>
+
+<style>
+  .el-dropdown {
+    vertical-align: top;
+  }
+  .el-dropdown + .el-dropdown {
+    margin-left: 15px;
+  }
+  .el-icon-arrow-down {
+    font-size: 12px;
+  }
+</style>
+
+<script>
+  export default {
+    methods: {
+      handleClick() {
+        alert('button click');
+      }
+    }
+  }
+</script>
 ```
 :::
 
@@ -118,7 +151,7 @@ Click the triggering element or hover on it.
     <span class="demonstration">hover to trigger</span>
     <el-dropdown>
       <span class="el-dropdown-link">
-        Dropdown List<i class="el-icon-caret-bottom el-icon--right"></i>
+        Dropdown List<i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item>Action 1</el-dropdown-item>
@@ -133,7 +166,7 @@ Click the triggering element or hover on it.
     <span class="demonstration">click to trigger</span>
     <el-dropdown trigger="click">
       <span class="el-dropdown-link">
-        Dropdown List<i class="el-icon-caret-bottom el-icon--right"></i>
+        Dropdown List<i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item>Action 1</el-dropdown-item>
@@ -145,6 +178,22 @@ Click the triggering element or hover on it.
     </el-dropdown>
   </el-col>
 </el-row>
+
+<style>
+  .el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+  }
+  .el-icon-arrow-down {
+    font-size: 12px;
+  }
+  .demonstration {
+    display: block;
+    color: #8492a6;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+</style>
 ```
 :::
 
@@ -156,7 +205,7 @@ Use `hide-on-click` to define if menu closes on clicking.
 ```html
 <el-dropdown :hide-on-click="false">
   <span class="el-dropdown-link">
-    Dropdown List<i class="el-icon-caret-bottom el-icon--right"></i>
+    Dropdown List<i class="el-icon-arrow-down el-icon--right"></i>
   </span>
   <el-dropdown-menu slot="dropdown">
     <el-dropdown-item>Action 1</el-dropdown-item>
@@ -166,6 +215,16 @@ Use `hide-on-click` to define if menu closes on clicking.
     <el-dropdown-item divided>Action 5</el-dropdown-item>
   </el-dropdown-menu>
 </el-dropdown>
+
+<style>
+  .el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+  }
+  .el-icon-arrow-down {
+    font-size: 12px;
+  }
+</style>
 ```
 :::
 
@@ -177,7 +236,7 @@ Clicking each dropdown item fires an event whose parameter is assigned by each i
 ```html
 <el-dropdown @command="handleCommand">
   <span class="el-dropdown-link">
-    Dropdown List<i class="el-icon-caret-bottom el-icon--right"></i>
+    Dropdown List<i class="el-icon-arrow-down el-icon--right"></i>
   </span>
   <el-dropdown-menu slot="dropdown">
     <el-dropdown-item command="a">Action 1</el-dropdown-item>
@@ -187,6 +246,17 @@ Clicking each dropdown item fires an event whose parameter is assigned by each i
     <el-dropdown-item command="e" divided>Action 5</el-dropdown-item>
   </el-dropdown-menu>
 </el-dropdown>
+
+<style>
+  .el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+  }
+  .el-icon-arrow-down {
+    font-size: 12px;
+  }
+</style>
+
 <script>
   export default {
     methods: {
@@ -199,17 +269,67 @@ Clicking each dropdown item fires an event whose parameter is assigned by each i
 ```
 :::
 
+### Sizes
+
+Besides default size, Dropdown component provides three additional sizes for you to choose among different scenarios.
+
+:::demo Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
+
+```html
+<el-dropdown split-button type="primary">
+  Default
+  <el-dropdown-menu slot="dropdown">
+    <el-dropdown-item>Action 1</el-dropdown-item>
+    <el-dropdown-item>Action 2</el-dropdown-item>
+    <el-dropdown-item>Action 3</el-dropdown-item>
+    <el-dropdown-item>Action 4</el-dropdown-item>
+  </el-dropdown-menu>
+</el-dropdown>
+
+<el-dropdown size="medium" split-button type="primary">
+  Medium
+  <el-dropdown-menu slot="dropdown">
+    <el-dropdown-item>Action 1</el-dropdown-item>
+    <el-dropdown-item>Action 2</el-dropdown-item>
+    <el-dropdown-item>Action 3</el-dropdown-item>
+    <el-dropdown-item>Action 4</el-dropdown-item>
+  </el-dropdown-menu>
+</el-dropdown>
+
+<el-dropdown size="small" split-button type="primary">
+  Small
+  <el-dropdown-menu slot="dropdown">
+   <el-dropdown-item>Action 1</el-dropdown-item>
+   <el-dropdown-item>Action 2</el-dropdown-item>
+   <el-dropdown-item>Action 3</el-dropdown-item>
+   <el-dropdown-item>Action 4</el-dropdown-item>
+  </el-dropdown-menu>
+</el-dropdown>
+
+<el-dropdown size="mini" split-button type="primary">
+  Mini
+  <el-dropdown-menu slot="dropdown">
+    <el-dropdown-item>Action 1</el-dropdown-item>
+    <el-dropdown-item>Action 2</el-dropdown-item>
+    <el-dropdown-item>Action 3</el-dropdown-item>
+    <el-dropdown-item>Action 4</el-dropdown-item>
+  </el-dropdown-menu>
+</el-dropdown>
+```
+:::
+
 
 ### Dropdown Attributes
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
-| type          | menu button type, refer to `Button` Component, only works when `split-button` is true  | string  |          —             |    —     |
-| size          | menu button size, refer to `Button` Component, only works when `split-button` is true  | string  |          —             |    —     |
+| type          | menu button type, refer to `Button` Component, only works when `split-button` is true  | string  |  —   |    —     |
+| size          | menu size, also works on the split button  | string  | medium / small / mini  |    —     |
 | split-button | whether a button group is displayed | boolean         |     —       | false   |
-| size          | component size, refer to `Button` component     | string          | large, small, mini  |  —  |
-| menu-align    | horizontal alignment     | string          | start/end  | end |
+| placement    | placement of pop menu | string | top/top-start/top-end/bottom/bottom-start/bottom-end  | bottom-end |
 | trigger       | how to trigger     | string  |    hover/click  |  hover |
 | hide-on-click | whether to hide menu after clicking menu-item     | boolean          | — | true |
+| show-timeout | Delay time before show a dropdown (only works when trigger is `hover`) | number | — | 250 |
+| hide-timeout | Delay time before hide a dropdown (only works when trigger is `hover`) | number | — | 150 |
 
 ### Dropdown Events
 | Event Name | Description | Parameters |

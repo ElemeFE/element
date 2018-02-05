@@ -7,7 +7,9 @@
         num3: 5,
         num4: 1,
         num5: 1,
-        num6: 1
+        num6: 1,
+        num7: 1,
+        num8: 1
       }
     },
     methods: {
@@ -99,15 +101,16 @@ Allows you to define incremental steps.
 
 ### Size
 
-Additional `large` and `small` sizes of the input box are available
+Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
 
 :::demo
 
 ```html
 <template>
-  <el-input-number size="large" v-model="num4"></el-input-number>
-  <el-input-number v-model="num5"></el-input-number>
-  <el-input-number size="small" v-model="num6"></el-input-number>
+  <el-input-number v-model="num4"></el-input-number>
+    <el-input-number size="medium" v-model="num5"></el-input-number>
+    <el-input-number size="small" v-model="num6"></el-input-number>
+    <el-input-number size="mini" v-model="num7"></el-input-number>
 </template>
 <script>
   export default {
@@ -115,7 +118,32 @@ Additional `large` and `small` sizes of the input box are available
       return {
         num4: 1,
         num5: 1,
-        num6: 1
+        num6: 1,
+        num7: 1
+      }
+    }
+  };
+</script>
+```
+:::
+
+### Controls Position
+
+:::demo Set `controls-position` to decide the position of control buttons.
+```html
+<template>
+  <el-input-number v-model="num8" controls-position="right" @change="handleChange" :min="1" :max="10"></el-input-number>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        num8: 1
+      };
+    },
+    methods: {
+      handleChange(value) {
+        console.log(value);
       }
     }
   };
@@ -128,16 +156,24 @@ Additional `large` and `small` sizes of the input box are available
 | Attribute      | Description          | Type      | Accepted Values       | Default  |
 |----| ----| ---| ----| -----|
 |value | binding value| number | — | — |
-|min | the minimum allowed value | number | — | 0 |
+|min | the minimum allowed value | number | — | `-Infinity` |
 |max | the maximum allowed value | number | — | `Infinity` |
 |step | incremental step | number | — | 1 |
 |size | size of the component | string | large/small| — |
 |disabled| whether the component is disabled | boolean | — | false |
 |controls| whether to enable the control buttons | boolean | — | true |
-|debounce| debounce delay when typing, in millisecond | number | — | 300 |
-
+|controls-position | position of the control buttons | string | right | - |
+|name | same as `name` in native input | string | — | — |
+|label | label text | string | — | — |
 ### Events
 
 | Event Name | Description | Parameters |
 |----| ---- | -----|
 |change | triggers when the value changes | value after change |
+| blur | triggers when Input blurs | (event: Event) |
+| focus | triggers when Input focuses | (event: Event) |
+
+### Methods
+| Method | Description | Parameters |
+|------|--------|-------|
+| focus | focus the Input component | - |

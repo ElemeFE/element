@@ -16,7 +16,8 @@ export default {
     xs: [Number, Object],
     sm: [Number, Object],
     md: [Number, Object],
-    lg: [Number, Object]
+    lg: [Number, Object],
+    xl: [Number, Object]
   },
 
   computed: {
@@ -38,16 +39,16 @@ export default {
     }
 
     ['span', 'offset', 'pull', 'push'].forEach(prop => {
-      if (this[prop]) {
+      if (this[prop] || this[prop] === 0) {
         classList.push(
           prop !== 'span'
-          ? `el-col-${prop}-${this[prop]}`
-          : `el-col-${this[prop]}`
+            ? `el-col-${prop}-${this[prop]}`
+            : `el-col-${this[prop]}`
         );
       }
     });
 
-    ['xs', 'sm', 'md', 'lg'].forEach(size => {
+    ['xs', 'sm', 'md', 'lg', 'xl'].forEach(size => {
       if (typeof this[size] === 'number') {
         classList.push(`el-col-${size}-${this[size]}`);
       } else if (typeof this[size] === 'object') {
@@ -55,8 +56,8 @@ export default {
         Object.keys(props).forEach(prop => {
           classList.push(
             prop !== 'span'
-            ? `el-col-${size}-${prop}-${props[prop]}`
-            : `el-col-${size}-${props[prop]}`
+              ? `el-col-${size}-${prop}-${props[prop]}`
+              : `el-col-${size}-${props[prop]}`
           );
         });
       }
