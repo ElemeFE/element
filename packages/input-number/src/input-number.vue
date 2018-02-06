@@ -40,7 +40,7 @@
       @keydown.down.native.prevent="decrease"
       @blur="handleBlur"
       @focus="handleFocus"
-      @change="handleInputChange"
+      @input="debounceHandleInput"
     >
       <template slot="prepend" v-if="$slots.prepend">
         <slot name="prepend"></slot>
@@ -53,6 +53,7 @@
 </template>
 <script>
   import ElInput from 'element-ui/packages/input';
+  import debounce from 'throttle-debounce/debounce';
   import Focus from 'element-ui/src/mixins/focus';
   import RepeatClick from 'element-ui/src/directives/repeat-click';
 
@@ -96,6 +97,10 @@
       controlsPosition: {
         type: String,
         default: ''
+      },
+      debounce: {
+        type: Number,
+        default: 300
       },
       name: String,
       label: String
@@ -202,12 +207,31 @@
         this.$emit('input', newVal);
         this.currentValue = newVal;
       },
-      handleInputChange(value) {
+      handleInput(value) {
+        if (value === '') {
+          return;
+        }
+
+        if (value.indexOf('.') === (value.length - 1)) {
+          return;
+        }
+
+        if (value.indexOf('-') === (value.length - 1)) {
+          return;
+        }
+
         const newVal = value === '' ? undefined : Number(value);
         if (!isNaN(newVal) || value === '') {
           this.setCurrentValue(newVal);
+        } else {
+          this.$refs.input.setCurrentValue(this.currentValue);
         }
       }
+    },
+    created() {
+      this.debounceHandleInput = debounce(this.debounce, value => {
+        this.handleInput(value);
+      });
     },
     mounted() {
       let innerInput = this.$refs.input.$refs.input;
