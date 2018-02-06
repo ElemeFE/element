@@ -536,7 +536,7 @@
           if (this.showSummary) {
             return {
               height: this.layout.tableHeight ? this.layout.tableHeight + 'px' : ''
-            }
+            };
           }
           return {
             height: this.layout.viewportHeight ? this.layout.viewportHeight + 'px' : ''
