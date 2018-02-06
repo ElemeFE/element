@@ -221,7 +221,9 @@
         }
 
         const newVal = value === '' ? undefined : Number(value);
-        if (!isNaN(newVal) || value === '') {
+        const oldVal = this.currentValue;
+
+        if ((!isNaN(newVal) || value === '') && newVal !== oldVal) {
           this.setCurrentValue(newVal);
         } else {
           this.$refs.input.setCurrentValue(this.currentValue);
