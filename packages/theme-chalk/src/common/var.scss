@@ -13,8 +13,10 @@ $--color-transition-base: color .2s cubic-bezier(.645,.045,.355,1) !default;
 -------------------------- */
 $--color-white: #fff !default;
 $--color-black: #000 !default;
+$--color-green: #7dcb46 !default;
+$--color-grey: #cccccc !default;
 
-$--color-primary: #67c23a !default;
+$--color-primary: $--color-green !default;
 $--color-primary-light-1: mix($--color-white, $--color-primary, 10%) !default; /* 53a8ff */
 $--color-primary-light-2: mix($--color-white, $--color-primary, 20%) !default; /* 66b1ff */
 $--color-primary-light-3: mix($--color-white, $--color-primary, 30%) !default; /* 79bbff */
@@ -26,7 +28,7 @@ $--color-primary-light-8: mix($--color-white, $--color-primary, 80%) !default; /
 $--color-primary-light-9: mix($--color-white, $--color-primary, 90%) !default; /* ecf5ff */
 
 $--color-success: #67c23a !default;
-$--color-secondary: #67c23a !default;
+$--color-secondary: $--color-green !default;
 $--color-warning: #e6a23c !default;
 $--color-danger: #f56c6c !default;
 $--color-info: #909399 !default;
@@ -42,7 +44,7 @@ $--color-danger-lighter: mix($--color-white, $--color-danger, 90%) !default;
 $--color-info-lighter: mix($--color-white, $--color-info, 90%) !default;
 
 $--color-text-primary: #303133 !default;
-$--color-text-secondary: #67c23a !default;
+$--color-text-secondary: $--color-green !default;
 $--color-text-regular: #606266 !default; 
 $--color-text-placeholder: #c0c4cc !default;
 
@@ -395,19 +397,19 @@ $--tab-vertical-header-count-fill: $--color-text-secondary !default;
 
 /* Button
 -------------------------- */
-$--button-font-size: 14px !default;
+$--button-font-size: 12px !default;
 $--button-font-weight: $--font-weight-primary !default;
 $--button-border-radius: $--border-radius-base !default;
 $--button-padding-vertical: 12px !default;
 $--button-padding-horizontal: 20px !default;
 
 $--button-font-size-tm: 12px !default;
-$--button-padding-vertical-tm: 15px !default;
+$--button-padding-vertical-tm: 12px !default;
 $--button-padding-horizontal-tm: 20px !default;
 
-$--button-medium-font-size: 14px !default;
+$--button-medium-font-size: 12px !default;
 $--button-medium-border-radius: $--border-radius-base !default;
-$--button-medium-padding-vertical: 10px !default;
+$--button-medium-padding-vertical: 12px !default;
 $--button-medium-padding-horizontal: 20px !default;
 
 $--button-small-font-size: 12px !default;
@@ -424,9 +426,9 @@ $--button-default-color: $--color-text-regular !default;
 $--button-default-fill: $--color-white !default;
 $--button-default-border: $--border-color-base !default;
 
-$--button-disabled-color: $--color-text-placeholder !default;
-$--button-disabled-fill: $--color-white !default;
-$--button-disabled-border: $--border-color-lighter !default;
+$--button-disabled-color: $--color-white !default;
+$--button-disabled-fill: $--color-grey !default;
+$--button-disabled-border: $--color-grey !default;
 
 $--button-primary-border: $--color-primary !default;
 $--button-primary-color: $--color-white !default;
