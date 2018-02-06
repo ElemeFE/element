@@ -979,6 +979,7 @@ Solo puede ser expandido un nodo del mismo nivel a la vez.
 | Nombre del evento | Descripción                              | Parámetros                               |
 | ----------------- | ---------------------------------------- | ---------------------------------------- |
 | node-click        | se lanza cuando un nodo es pinchado      | tres parámetros: el objeto del nodo seleccionado, propiedad `node` de TreeNode y el TreeNode en si |
+| node-contextmenu     | triggers when a node is clicked by right button      | four parameters: event, node object corresponding to the node clicked, `node` property of TreeNode, TreeNode itself |
 | check-change      | se lanza cuando el estado de selección del nodo cambia | tres parámetros: objeto nodo que se corresponde con el que ha cambiado, booleano que dice si esta seleccionado, booleano que dice si el nodo tiene hijos seleccionados |
 | current-change    | cambia cuando el nodo actual cambia      | dos parámetros: objeto nodo que se corresponde al nodo actual y propiedad `node` del TreeNode |
 | node-expand       | se lanza cuando el nodo actual se abre   | tres parámetros: el objeto del nodo abierto, propiedad `node` de TreeNode y el TreeNode en si |
