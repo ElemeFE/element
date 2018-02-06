@@ -97,13 +97,15 @@
         },
         render(h) {
           const parent = this.$parent;
+          const tree = parent.tree;
           const node = this.node;
-          const data = node.data;
-          const store = node.store;
+          const { data, store } = node;
           return (
             parent.renderContent
-              ? parent.renderContent.call(parent._renderProxy, h, { _self: parent.tree.$vnode.context, node, data, store })
-              : <span class="el-tree-node__label">{ this.node.label }</span>
+              ? parent.renderContent.call(parent._renderProxy, h, { _self: tree.$vnode.context, node, data, store })
+              : tree.$scopedSlots.default
+                ? tree.$scopedSlots.default({ node, data })
+                : <span class="el-tree-node__label">{ this.node.label }</span>
           );
         }
       }

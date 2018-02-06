@@ -501,6 +501,63 @@ describe('Tree', () => {
     expect(button.textContent).to.equal('一级 1');
   });
 
+  it('scoped slot', () => {
+    vm = createVue({
+      template: `
+        <el-tree ref="tree" :data="data">
+          <div slot-scope="scope" class="custom-tree-template">
+            <span>{{ scope.node.label }}</span>
+            <el-button></el-button>
+          </div>
+        </el-tree>
+        `,
+
+      data() {
+        return {
+          data: [{
+            id: 1,
+            label: '一级 1',
+            children: [{
+              id: 11,
+              label: '二级 1-1',
+              children: [{
+                id: 111,
+                label: '三级 1-1'
+              }]
+            }]
+          }, {
+            id: 2,
+            label: '一级 2',
+            children: [{
+              id: 21,
+              label: '二级 2-1'
+            }, {
+              id: 22,
+              label: '二级 2-2'
+            }]
+          }, {
+            id: 3,
+            label: '一级 3',
+            children: [{
+              id: 31,
+              label: '二级 3-1'
+            }, {
+              id: 32,
+              label: '二级 3-2'
+            }]
+          }]
+        };
+      }
+    }, true);
+    const firstNode = document.querySelector('.custom-tree-template');
+    expect(firstNode).to.exist;
+    const span = firstNode.querySelector('span');
+    const button = firstNode.querySelector('.el-button');
+    expect(span).to.exist;
+    expect(span.innerText).to.equal('一级 1');
+    expect(button).to.exist;
+  });
+
   it('load node', done => {
     vm = getTreeVm(':props="defaultProps" lazy :load="loadNode" show-checkbox', {
       methods: {
