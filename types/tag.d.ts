@@ -1,9 +1,9 @@
-import { ElementUIComponent, ElementUIComponentSize } from './component'
+import { TmUIComponent, TmUIComponentSize } from './component'
 
 export type TagType = 'primary' | 'gray' | 'success' | 'warning' | 'danger'
 
 /** Tag Component */
-export declare class ElTag extends ElementUIComponent {
+export declare class TmTag extends TmUIComponent {
   /** Theme */
   type: TagType
 
@@ -20,5 +20,5 @@ export declare class ElTag extends ElementUIComponent {
   color: string
 
   /** Tag size */
-  size: ElementUIComponentSize
+  size: TmUIComponentSize
 }

@@ -36,7 +36,7 @@ describe('Loading', () => {
         }
       });
       Vue.nextTick(() => {
-        const mask = vm.$el.querySelector('.el-loading-mask');
+        const mask = vm.$el.querySelector('.tm-loading-mask');
         expect(mask).to.exist;
         vm.loading = false;
         setTimeout(() => {
@@ -78,7 +78,7 @@ describe('Loading', () => {
           vm1.show = false;
           vm2.show = false;
           Vue.nextTick(() => {
-            expect(document.querySelector('.el-loading-mask')).to.not.exist;
+            expect(document.querySelector('.tm-loading-mask')).to.not.exist;
             done();
           });
         });
@@ -98,7 +98,7 @@ describe('Loading', () => {
         }
       }, true);
       Vue.nextTick(() => {
-        const mask = document.querySelector('.el-loading-mask');
+        const mask = document.querySelector('.tm-loading-mask');
         expect(mask.parentNode === document.body).to.true;
         vm.loading = false;
         document.body.removeChild(mask);
@@ -120,7 +120,7 @@ describe('Loading', () => {
         }
       }, true);
       Vue.nextTick(() => {
-        const mask = document.querySelector('.el-loading-mask');
+        const mask = document.querySelector('.tm-loading-mask');
         expect(mask.parentNode === document.body).to.true;
         expect(mask.classList.contains('is-fullscreen')).to.true;
         vm.loading = false;
@@ -145,7 +145,7 @@ describe('Loading', () => {
       Vue.nextTick(() => {
         expect(getStyle(document.body, 'overflow')).to.equal('hidden');
         vm.loading = false;
-        document.body.removeChild(document.querySelector('.el-loading-mask'));
+        document.body.removeChild(document.querySelector('.tm-loading-mask'));
         document.body.removeChild(vm.$el);
         done();
       });
@@ -164,8 +164,8 @@ describe('Loading', () => {
         }
       }, true);
       Vue.nextTick(() => {
-        const mask = document.querySelector('.el-loading-mask');
-        const text = mask.querySelector('.el-loading-text');
+        const mask = document.querySelector('.tm-loading-mask');
+        const text = mask.querySelector('.tm-loading-text');
         expect(text).to.exist;
         expect(text.textContent).to.equal('拼命加载中');
         done();
@@ -185,7 +185,7 @@ describe('Loading', () => {
         }
       }, true);
       Vue.nextTick(() => {
-        const mask = document.querySelector('.el-loading-mask');
+        const mask = document.querySelector('.tm-loading-mask');
         expect(mask.classList.contains('loading-custom-class')).to.true;
         done();
       });
@@ -195,7 +195,7 @@ describe('Loading', () => {
   describe('as a service', () => {
     it('create', () => {
       loadingInstance = Loading();
-      expect(document.querySelector('.el-loading-mask')).to.exist;
+      expect(document.querySelector('.tm-loading-mask')).to.exist;
     });
 
     it('close', () => {
@@ -211,7 +211,7 @@ describe('Loading', () => {
       `
       }, true);
       loadingInstance = Loading({ target: '.loading-container' });
-      let mask = document.querySelector('.el-loading-mask');
+      let mask = document.querySelector('.tm-loading-mask');
       let container = document.querySelector('.loading-container');
       expect(mask).to.exist;
       expect(mask.parentNode).to.equal(container);
@@ -232,14 +232,14 @@ describe('Loading', () => {
         target: '.loading-container',
         body: true
       });
-      let mask = document.querySelector('.el-loading-mask');
+      let mask = document.querySelector('.tm-loading-mask');
       expect(mask).to.exist;
       expect(mask.parentNode).to.equal(document.body);
     });
 
     it('fullscreen', () => {
       loadingInstance = Loading({ fullScreen: true });
-      const mask = document.querySelector('.el-loading-mask');
+      const mask = document.querySelector('.tm-loading-mask');
       expect(mask.parentNode).to.equal(document.body);
       expect(mask.classList.contains('is-fullscreen')).to.true;
     });
@@ -249,11 +249,11 @@ describe('Loading', () => {
       setTimeout(() => {
         loadingInstance2 = Loading({ fullScreen: true });
         setTimeout(() => {
-          let masks = document.querySelectorAll('.el-loading-mask');
+          let masks = document.querySelectorAll('.tm-loading-mask');
           expect(masks.length).to.equal(1);
           loadingInstance2.close();
           setTimeout(() => {
-            masks = document.querySelectorAll('.el-loading-mask');
+            masks = document.querySelectorAll('.tm-loading-mask');
             expect(masks.length).to.equal(0);
             done();
           }, 350);
@@ -268,14 +268,14 @@ describe('Loading', () => {
 
     it('text', () => {
       loadingInstance = Loading({ text: 'Loading...' });
-      const text = document.querySelector('.el-loading-text');
+      const text = document.querySelector('.tm-loading-text');
       expect(text).to.exist;
       expect(text.textContent).to.equal('Loading...');
     });
 
     it('customClass', () => {
-      loadingInstance = Loading({ customClass: 'el-loading-custom-class' });
-      const customClass = document.querySelector('.el-loading-custom-class');
+      loadingInstance = Loading({ customClass: 'tm-loading-custom-class' });
+      const customClass = document.querySelector('.tm-loading-custom-class');
       expect(customClass).to.exist;
     });
   });

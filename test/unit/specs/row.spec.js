@@ -10,7 +10,7 @@ describe('Row', () => {
   it('create', () => {
     vm = createTest(Row, true);
     let rowElm = vm.$el;
-    expect(rowElm.classList.contains('el-row')).to.be.true;
+    expect(rowElm.classList.contains('tm-row')).to.be.true;
   });
   it('gutter', () => {
     vm = createTest(Row, {
@@ -25,7 +25,7 @@ describe('Row', () => {
       type: 'flex'
     }, true);
     let rowElm = vm.$el;
-    expect(rowElm.classList.contains('el-row--flex')).to.be.true;
+    expect(rowElm.classList.contains('tm-row--flex')).to.be.true;
   });
   it('justify', () => {
     vm = createTest(Row, {

@@ -1,10 +1,10 @@
 <style>
   .demo-box.demo-progress {
-    .el-progress--line {
+    .tm-progress--line {
       margin-bottom: 15px;
       width: 350px;
     }
-    .el-progress--circle {
+    .tm-progress--circle {
       margin-right: 15px;
     }
   }
@@ -17,10 +17,10 @@ Progress is used to show the progress of current operation, and inform the user 
 
 :::demo Use `percentage` attribute to set the percentage. It's **required** and must be between `0-100`.
 ```html
-<el-progress :percentage="0"></el-progress>
-<el-progress :percentage="70"></el-progress>
-<el-progress :percentage="100" status="success"></el-progress>
-<el-progress :percentage="50" status="exception"></el-progress>
+<tm-progress :percentage="0"></tm-progress>
+<tm-progress :percentage="70"></tm-progress>
+<tm-progress :percentage="100" status="success"></tm-progress>
+<tm-progress :percentage="50" status="exception"></tm-progress>
 ```
 :::
 
@@ -30,10 +30,10 @@ In this case the percentage takes no additional space.
 
 :::demo `stroke-width` attribute decides the `width` of progress bar, and use `text-inside` attribute to put description inside the progress bar.
 ```html
-<el-progress :text-inside="true" :stroke-width="18" :percentage="0"></el-progress>
-<el-progress :text-inside="true" :stroke-width="18" :percentage="70"></el-progress>
-<el-progress :text-inside="true" :stroke-width="18" :percentage="100" status="success"></el-progress>
-<el-progress :text-inside="true" :stroke-width="18" :percentage="50" status="exception"></el-progress>
+<tm-progress :text-inside="true" :stroke-width="18" :percentage="0"></tm-progress>
+<tm-progress :text-inside="true" :stroke-width="18" :percentage="70"></tm-progress>
+<tm-progress :text-inside="true" :stroke-width="18" :percentage="100" status="success"></tm-progress>
+<tm-progress :text-inside="true" :stroke-width="18" :percentage="50" status="exception"></tm-progress>
 ```
 :::
 
@@ -41,10 +41,10 @@ In this case the percentage takes no additional space.
 
 :::demo You can specify `type` attribute to `circle` to use circular progress bar, and use `width` attribute to change the size of circle.
 ```html
-<el-progress type="circle" :percentage="0"></el-progress>
-<el-progress type="circle" :percentage="25"></el-progress>
-<el-progress type="circle" :percentage="100" status="success"></el-progress>
-<el-progress type="circle" :percentage="50" status="exception"></el-progress>
+<tm-progress type="circle" :percentage="0"></tm-progress>
+<tm-progress type="circle" :percentage="25"></tm-progress>
+<tm-progress type="circle" :percentage="100" status="success"></tm-progress>
+<tm-progress type="circle" :percentage="50" status="exception"></tm-progress>
 ``` 
 :::
 

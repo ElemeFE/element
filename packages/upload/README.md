@@ -12,7 +12,7 @@ npm i element-upload -D
 ## Usage
 ```javascript
 import Vue from 'vue'
-import ElUpload from 'element-upload'
+import TmUpload from 'element-upload'
 import 'element-theme-chalk/dist/upload.css'
 
 Vue.use(ElUpload)
@@ -22,9 +22,9 @@ or
 
 ```javascript
 import Vue from 'vue'
-import ElUpload from 'element-upload'
+import TmUpload from 'element-upload'
 
-Vue.component('el-upload', ElUpload)
+Vue.component('tm-upload', TmUpload)
 ```
 
 ### Attribute

@@ -2,7 +2,7 @@
   <table
     cellspacing="0"
     cellpadding="0"
-    class="el-date-table"
+    class="tm-date-table"
     @click="handleClick"
     @mousemove="handleMouseMove"
     :class="{ 'is-week-mode': selectionMode === 'week' }">
@@ -12,7 +12,7 @@
       <th v-for="week in WEEKS">{{ t('el.datepicker.weeks.' + week) }}</th>
     </tr>
     <tr
-      class="el-date-table__row"
+      class="tm-date-table__row"
       v-for="row in rows"
       :class="{ current: isWeekActive(row[1]) }">
       <td

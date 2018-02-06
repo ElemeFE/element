@@ -10,7 +10,7 @@ describe('Dialog', () => {
     vm = createVue({
       template: `
         <div>
-          <el-dialog :title="title" :visible="visible"></el-dialog>
+          <tm-dialog :title="title" :visible="visible"></tm-dialog>
         </div>
       `,
 
@@ -24,7 +24,7 @@ describe('Dialog', () => {
     const dialog = vm.$children[0];
     setTimeout(() => {
       expect(document.querySelector('.v-modal')).to.exist;
-      expect(vm.$el.querySelector('.el-dialog__title').textContent).to.equal('dialog test');
+      expect(vm.$el.querySelector('.tm-dialog__title').textContent).to.equal('dialog test');
       expect(dialog.$el.style.display).to.not.equal('none');
       done();
     }, 10);
@@ -34,13 +34,13 @@ describe('Dialog', () => {
     vm = createVue({
       template: `
         <div>
-          <el-dialog :title="title" :visible="visible">
+          <tm-dialog :title="title" :visible="visible">
             <span>这是一段信息</span>
             <span slot="footer" class="dialog-footer">
-              <el-button @click.native="dialogVisible = false">取消</el-button>
-              <el-button type="primary" @click.native="dialogVisible = false">确定</el-button>
+              <tm-button @click.native="dialogVisible = false">取消</tm-button>
+              <tm-button type="primary" @click.native="dialogVisible = false">确定</tm-button>
             </span>
-          </el-dialog>
+          </tm-dialog>
         </div>
       `,
 
@@ -52,8 +52,8 @@ describe('Dialog', () => {
       }
     }, true);
     setTimeout(() => {
-      const footerBtns = vm.$el.querySelectorAll('.el-dialog__footer .el-button');
-      expect(vm.$el.querySelector('.el-dialog__body span').textContent).to.equal('这是一段信息');
+      const footerBtns = vm.$el.querySelectorAll('.tm-dialog__footer .tm-button');
+      expect(vm.$el.querySelector('.tm-dialog__body span').textContent).to.equal('这是一段信息');
       expect(footerBtns.length).to.equal(2);
       expect(footerBtns[0].querySelector('span').textContent).to.equal('取消');
       expect(footerBtns[1].querySelector('span').textContent).to.equal('确定');
@@ -65,7 +65,7 @@ describe('Dialog', () => {
     vm = createVue({
       template: `
         <div>
-          <el-dialog :title="title" append-to-body :visible="visible"></el-dialog>
+          <tm-dialog :title="title" append-to-body :visible="visible"></tm-dialog>
         </div>
       `,
 
@@ -87,9 +87,9 @@ describe('Dialog', () => {
     vm = createVue({
       template: `
         <div>
-          <el-dialog :title="title" :visible.sync="visible">
+          <tm-dialog :title="title" :visible.sync="visible">
             <span>这是一段信息</span>
-          </el-dialog>
+          </tm-dialog>
         </div>
       `,
 
@@ -118,9 +118,9 @@ describe('Dialog', () => {
       return createVue(Object.assign({
         template: `
           <div>
-            <el-dialog ${ props } :title="title" :visible="visible">
+            <tm-dialog ${ props } :title="title" :visible="visible">
               <span>这是一段信息</span>
-            </el-dialog>
+            </tm-dialog>
           </div>
         `,
 
@@ -135,17 +135,17 @@ describe('Dialog', () => {
 
     it('fullscreen', () => {
       vm = getDialogVm('fullscreen');
-      expect(vm.$el.querySelector('.el-dialog').classList.contains('is-fullscreen')).to.true;
+      expect(vm.$el.querySelector('.tm-dialog').classList.contains('is-fullscreen')).to.true;
     });
 
     it('top', () => {
       vm = getDialogVm('top="100px"');
-      expect(vm.$el.querySelector('.el-dialog').style.marginTop).to.equal('100px');
+      expect(vm.$el.querySelector('.tm-dialog').style.marginTop).to.equal('100px');
     });
 
     it('custom-class', () => {
       vm = getDialogVm('custom-class="my-dialog"');
-      expect(vm.$el.querySelector('.el-dialog').classList.contains('my-dialog')).to.true;
+      expect(vm.$el.querySelector('.tm-dialog').classList.contains('my-dialog')).to.true;
     });
   });
 
@@ -153,13 +153,13 @@ describe('Dialog', () => {
     vm = createVue({
       template: `
         <div>
-          <el-dialog
+          <tm-dialog
             @open="handleOpen"
             @close="handleClose"
             :title="title"
             :visible.sync="visible">
             <span>这是一段信息</span>
-          </el-dialog>
+          </tm-dialog>
         </div>
       `,
 

@@ -1,26 +1,26 @@
 <template>
   <transition name="dialog-fade">
-    <div class="el-dialog__wrapper" v-show="visible" @click.self="handleWrapperClick">
+    <div class="tm-dialog__wrapper" v-show="visible" @click.self="handleWrapperClick">
       <div
-        class="el-dialog"
-        :class="[{ 'is-fullscreen': fullscreen, 'el-dialog--center': center }, customClass]"
+        class="tm-dialog"
+        :class="[{ 'is-fullscreen': fullscreen, 'tm-dialog--center': center }, customClass]"
         ref="dialog"
         :style="style">
-        <div class="el-dialog__header">
+        <div class="tm-dialog__header">
           <slot name="title">
-            <span class="el-dialog__title">{{ title }}</span>
+            <span class="tm-dialog__title">{{ title }}</span>
           </slot>
           <button
             type="button"
-            class="el-dialog__headerbtn"
+            class="tm-dialog__headerbtn"
             aria-label="Close"
             v-if="showClose"
             @click="handleClose">
-            <i class="el-dialog__close el-icon el-icon-close"></i>
+            <i class="tm-dialog__close tm-icon tm-icon-close"></i>
           </button>
         </div>
-        <div class="el-dialog__body" v-if="rendered"><slot></slot></div>
-        <div class="el-dialog__footer" v-if="$slots.footer">
+        <div class="tm-dialog__body" v-if="rendered"><slot></slot></div>
+        <div class="tm-dialog__footer" v-if="$slots.footer">
           <slot name="footer"></slot>
         </div>
       </div>
@@ -34,7 +34,7 @@
   import emitter from 'element-ui/src/mixins/emitter';
 
   export default {
-    name: 'ElDialog',
+    name: 'TmDialog',
 
     mixins: [Popup, emitter, Migrating],
 
@@ -164,8 +164,8 @@
         }
       },
       updatePopper() {
-        this.broadcast('ElSelectDropdown', 'updatePopper');
-        this.broadcast('ElDropdownMenu', 'updatePopper');
+        this.broadcast('TmSelectDropdown', 'updatePopper');
+        this.broadcast('TmDropdownMenu', 'updatePopper');
       }
     },
 

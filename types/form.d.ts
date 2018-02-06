@@ -1,4 +1,4 @@
-import { ElementUIComponent, ElementUIComponentSize } from './component'
+import { TmUIComponent, TmUIComponentSize } from './component'
 
 export type FormItemLabelPosition = 'left' | 'right' | 'top'
 
@@ -21,7 +21,7 @@ export interface ValidateFieldCallback {
 }
 
 /** Form Component */
-export declare class ElForm extends ElementUIComponent {
+export declare class TmForm extends TmUIComponent {
   /** Data of form component */
   model: object
 
@@ -56,7 +56,7 @@ export declare class ElForm extends ElementUIComponent {
   validateOnRuleChange: boolean
 
   /** Controls the size of components in this form */
-  size: ElementUIComponentSize
+  size: TmUIComponentSize
 
   /**
    * Validate the whole form

@@ -9,16 +9,16 @@
   font-size: $--font-size-base;
   line-height: $--input-height;
 
-  .el-input,
-  .el-input__inner {
+  .tm-input,
+  .tm-input__inner {
     cursor: pointer;
   }
 
-  .el-input__icon {
+  .tm-input__icon {
     transition: none;
   }
 
-  .el-icon-arrow-down {
+  .tm-icon-arrow-down {
     transition: transform .3s;
     font-size: 14px;
 
@@ -27,7 +27,7 @@
     }
   }
 
-  .el-icon-circle-close {
+  .tm-icon-circle-close {
     z-index: #{$--index-normal + 1};
     transition: $--color-transition-base;
 
@@ -78,7 +78,7 @@
   }
 
   @include when(disabled) {
-    .el-cascader__label {
+    .tm-cascader__label {
       z-index: #{$--index-normal + 1};
       color: $--disabled-color-base;
     }
@@ -169,7 +169,7 @@
     max-height: 180px;
     overflow: auto;
 
-    .el-cascader-menu__item {
+    .tm-cascader-menu__item {
       overflow: visible;
     }
   }

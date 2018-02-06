@@ -1,4 +1,4 @@
-import { ElementUIComponent, ElementUIComponentSize, ElementUIHorizontalAlignment } from './component'
+import { TmUIComponent, TmUIComponentSize, TmUIHorizontalAlignment } from './component'
 
 export type DatePickerType = 'year' | 'month' | 'date' | 'datetime' | 'week' | 'datetimerange' | 'daterange'
 export type FirstDayOfWeek = 1 | 2 | 3 | 4 | 5 | 6 | 7
@@ -34,7 +34,7 @@ export interface ShortcutClickEventHandler {
    * You can change the picker value by emitting the pick event.
    * Example: `vm.$emit('pick', new Date())`
    */
-  (vm: ElDatePicker): void
+  (vm: TmDatePicker): void
 }
 
 /** Shortcut options */
@@ -46,7 +46,7 @@ export interface Shortcut {
   onClick?: ShortcutClickEventHandler
 }
 
-/** Options of el-date-picker */
+/** Options of tm-date-picker */
 export interface DatePickerOptions {
   /** An object array to set shortcut options */
   shortcuts?: Shortcut[]
@@ -62,7 +62,7 @@ export interface DatePickerOptions {
 }
 
 /** DatePicker Component */
-export declare class ElDatePicker extends ElementUIComponent {
+export declare class TmDatePicker extends TmUIComponent {
   /** The value of the date picker */
   value: Date | string | Date[] | string[]
 
@@ -73,7 +73,7 @@ export declare class ElDatePicker extends ElementUIComponent {
   disabled: boolean
 
   /** Size of Input */
-  size: ElementUIComponentSize
+  size: TmUIComponentSize
 
   /** Whether the input is editable */
   editable: boolean
@@ -97,7 +97,7 @@ export declare class ElDatePicker extends ElementUIComponent {
   format: string
 
   /** Alignment */
-  align: ElementUIHorizontalAlignment
+  align: TmUIHorizontalAlignment
 
   /** Custom class name for DatePicker's dropdown */
   popperClass: string

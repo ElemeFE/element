@@ -1,16 +1,16 @@
 <template>
-  <form class="el-form" :class="[
-    labelPosition ? 'el-form--label-' + labelPosition : '',
-    { 'el-form--inline': inline }
+  <form class="tm-form" :class="[
+    labelPosition ? 'tm-form--label-' + labelPosition : '',
+    { 'tm-form--inline': inline }
   ]">
     <slot></slot>
   </form>
 </template>
 <script>
   export default {
-    name: 'ElForm',
+    name: 'TmForm',
 
-    componentName: 'ElForm',
+    componentName: 'TmForm',
 
     provide() {
       return {

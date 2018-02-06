@@ -83,42 +83,42 @@ Element uses a specific set of palettes to specify colors to provide a consisten
 
 The main color of Element is bright and friendly blue.
 
-<el-row :gutter="10">
-  <el-col :span="4">
+<tm-row :gutter="10">
+  <tm-col :span="4">
     <div class="demo-color-box bg-blue">Blueberry<div class="value">#5E82FC</div></div>
-  </el-col>
-  <el-col :span="4">
+  </tm-col>
+  <tm-col :span="4">
     <div class="demo-color-box bg-green">Mantis<div class="value">#7DCB46</div></div>
-  </el-col>
-  <el-col :span="4">
+  </tm-col>
+  <tm-col :span="4">
     <div class="demo-color-box bg-red">Sunset Orange<div class="value">#EC5657</div></div>
-  </el-col>
-  <el-col :span="4">
+  </tm-col>
+  <tm-col :span="4">
     <div class="demo-color-box bg-brown">Meat Brown<div class="value">#EBB242</div></div>
-  </el-col>
-  <el-col :span="4">
+  </tm-col>
+  <tm-col :span="4">
     <div class="demo-color-box bg-smoke">White Smoke<div class="value">#F4F5F9</div></div>
-  </el-col>
-</el-row>
+  </tm-col>
+</tm-row>
 
 ### Text Color
 
 Text colors are for text.
 
-<el-row :gutter="10">
-  <el-col :span="4">
+<tm-row :gutter="10">
+  <tm-col :span="4">
     <div class="demo-color-box bg-text-darkest">Dark Gunmetal<div class="value">#1E1E28</div></div>
-  </el-col>
-  <el-col :span="4">
+  </tm-col>
+  <tm-col :span="4">
     <div class="demo-color-box bg-text-dark">Davy's Grey<div class="value">#4A4E59</div></div>
-  </el-col>
-  <el-col :span="4">
+  </tm-col>
+  <tm-col :span="4">
     <div class="demo-color-box bg-text-medium">Taupe Gray<div class="value">#909090</div></div>
-  </el-col>
-  <el-col :span="4">
+  </tm-col>
+  <tm-col :span="4">
     <div class="demo-color-box bg-text-light">Pastel Gray<div class="value">#CCCCCC</div></div>
-  </el-col>
-  <el-col :span="4">
+  </tm-col>
+  <tm-col :span="4">
     <div class="demo-color-box bg-text-white">White<div class="value">#FFFFFF</div></div>
-  </el-col>
-</el-row>
+  </tm-col>
+</tm-row>

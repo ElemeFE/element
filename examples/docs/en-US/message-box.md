@@ -136,7 +136,7 @@ Alert interrupts user operation until the user confirms.
 
 ```html
 <template>
-  <el-button type="text" @click="open">Click to open the Message Box</el-button>
+  <tm-button type="text" @click="open">Click to open the Message Box</tm-button>
 </template>
 
 <script>
@@ -167,7 +167,7 @@ Confirm is used to ask users' confirmation.
 
 ```html
 <template>
-  <el-button type="text" @click="open2">Click to open the Message Box</el-button>
+  <tm-button type="text" @click="open2">Click to open the Message Box</tm-button>
 </template>
 
 <script>
@@ -205,7 +205,7 @@ Prompt is used when user input is required.
 
 ```html
 <template>
-  <el-button type="text" @click="open3">Click to open Message Box</el-button>
+  <tm-button type="text" @click="open3">Click to open Message Box</tm-button>
 </template>
 
 <script>
@@ -243,7 +243,7 @@ Can be customized to show various content.
 
 ```html
 <template>
-  <el-button type="text" @click="open4">Click to open Message Box</el-button>
+  <tm-button type="text" @click="open4">Click to open Message Box</tm-button>
 </template>
 
 <script>
@@ -294,7 +294,7 @@ Can be customized to show various content.
 
 ```html
 <template>
-  <el-button type="text" @click="open5">Click to open Message Box</el-button>
+  <tm-button type="text" @click="open5">Click to open Message Box</tm-button>
 </template>
 
 <script>
@@ -322,7 +322,7 @@ Content of MessageBox can be centered.
 
 ```html
 <template>
-  <el-button type="text" @click="open6">Click to open Message Box</el-button>
+  <tm-button type="text" @click="open6">Click to open Message Box</tm-button>
 </template>
 
 <script>

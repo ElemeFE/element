@@ -1,10 +1,10 @@
-import { ElementUIComponent } from './component'
+import { TmUIComponent } from './component'
 import { PopoverPlacement } from './popover'
 
 export type TooltipEffect = 'dark' | 'light'
 
 /** Tooltip Component */
-export declare class ElTooltip extends ElementUIComponent {
+export declare class TmTooltip extends TmUIComponent {
   /** Tooltip theme */
   effect: TooltipEffect
 

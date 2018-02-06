@@ -1,16 +1,16 @@
 <template>
-  <div class="el-collapse-item">
+  <div class="tm-collapse-item">
     <div
       role="tab"
       :aria-expanded="isActive"
-      :aria-controls="`el-collapse-content-${id}`"
-      :aria-describedby ="`el-collapse-content-${id}`"
+      :aria-controls="`tm-collapse-content-${id}`"
+      :aria-describedby ="`tm-collapse-content-${id}`"
     >
       <div
-        class="el-collapse-item__header"
+        class="tm-collapse-item__header"
         @click="handleHeaderClick"
         role="button"
-        :id="`el-collapse-head-${id}`"
+        :id="`tm-collapse-head-${id}`"
         tabindex="0"
         @keyup.space.enter.stop="handleEnterClick"
         :class="{
@@ -21,41 +21,41 @@
         @blur="focusing = false"
       >
         <i
-          class="el-collapse-item__arrow el-icon-arrow-right"
+          class="tm-collapse-item__arrow tm-icon-arrow-right"
           :class="{'is-active': isActive}">
         </i>
         <slot name="title">{{title}}</slot>
       </div>
     </div>
-    <el-collapse-transition>
+    <tm-collapse-transition>
       <div
-        class="el-collapse-item__wrap"
+        class="tm-collapse-item__wrap"
         v-show="isActive"
         role="tabpanel"
         :aria-hidden="!isActive"
-        :aria-labelledby="`el-collapse-head-${id}`"
-        :id="`el-collapse-content-${id}`"
+        :aria-labelledby="`tm-collapse-head-${id}`"
+        :id="`tm-collapse-content-${id}`"
       >
-        <div class="el-collapse-item__content">
+        <div class="tm-collapse-item__content">
           <slot></slot>
         </div>
       </div>
-    </el-collapse-transition>
+    </tm-collapse-transition>
   </div>
 </template>
 <script>
-  import ElCollapseTransition from 'element-ui/src/transitions/collapse-transition';
+  import TmCollapseTransition from 'element-ui/src/transitions/collapse-transition';
   import Emitter from 'element-ui/src/mixins/emitter';
   import { generateId } from 'element-ui/src/utils/util';
 
   export default {
-    name: 'ElCollapseItem',
+    name: 'TmCollapseItem',
 
-    componentName: 'ElCollapseItem',
+    componentName: 'TmCollapseItem',
 
     mixins: [Emitter],
 
-    components: { ElCollapseTransition },
+    components: { TmCollapseTransition },
 
     data() {
       return {
@@ -101,12 +101,12 @@
         }, 50);
       },
       handleHeaderClick() {
-        this.dispatch('ElCollapse', 'item-click', this);
+        this.dispatch('TmCollapse', 'item-click', this);
         this.focusing = false;
         this.isClick = true;
       },
       handleEnterClick() {
-        this.dispatch('ElCollapse', 'item-click', this);
+        this.dispatch('TmCollapse', 'item-click', this);
       }
     }
   };

@@ -13,7 +13,7 @@
   margin: 5px 0;
 
   @include when(multiple) {
-    & .el-select-dropdown__item.selected {
+    & .tm-select-dropdown__item.selected {
       color: $--select-option-selected;
       background-color: $--select-dropdown-background;
 
@@ -34,7 +34,7 @@
     }
   }
 
-  .el-scrollbar.is-empty .el-select-dropdown__list{
+  .tm-scrollbar.is-empty .tm-select-dropdown__list{
     padding: 0;
   }
 }

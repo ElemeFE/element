@@ -12,7 +12,7 @@ npm i element-loading -D
 ## Usage
 ```javascript
 import Vue from 'vue'
-import ElLoading from 'element-loading'
+import TmLoading from 'element-loading'
 import 'element-theme-chalk/dist/loading.css'
 
 Vue.use(ElLoading)
@@ -38,7 +38,7 @@ console.log(loadingInstance1 === loadingInstance2); // true
 ```
 此时调用它们中任意一个的 `close` 方法都能关闭这个全屏 Loading。
 
-如果完整引入了 Element，那么 Vue.prototype 上会有一个全局方法 `$loading`，它的调用方式为：`this.$loading(options)`，同样会返回一个 Loading 实例。
+如果完整引入了 Tmement，那么 Vue.prototype 上会有一个全局方法 `$loading`，它的调用方式为：`this.$loading(options)`，同样会返回一个 Loading 实例。
 
 ### Options
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |

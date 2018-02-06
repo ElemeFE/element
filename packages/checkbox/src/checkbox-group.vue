@@ -2,9 +2,9 @@
   import Emitter from 'element-ui/src/mixins/emitter';
 
   export default {
-    name: 'ElCheckboxGroup',
+    name: 'TmCheckboxGroup',
 
-    componentName: 'ElCheckboxGroup',
+    componentName: 'TmCheckboxGroup',
 
     mixins: [Emitter],
 
@@ -35,14 +35,14 @@
 
     watch: {
       value(value) {
-        this.dispatch('ElFormItem', 'el.form.change', [value]);
+        this.dispatch('TmFormItem', 'el.form.change', [value]);
       }
     }
   };
 </script>
 
 <template>
-  <div class="el-checkbox-group" role="group" aria-label="checkbox-group">
+  <div class="tm-checkbox-group" role="group" aria-label="checkbox-group">
     <slot></slot>
   </div>
 </template>

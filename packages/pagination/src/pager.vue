@@ -1,15 +1,15 @@
 <template>
-  <ul @click="onPagerClick" class="el-pager">
+  <ul @click="onPagerClick" class="tm-pager">
     <li
       :class="{ active: currentPage === 1 }"
       v-if="pageCount > 0"
       class="number">1</li>
     <li
-      class="el-icon more btn-quickprev"
+      class="tm-icon more btn-quickprev"
       :class="[quickprevIconClass]"
       v-if="showPrevMore"
-      @mouseenter="quickprevIconClass = 'el-icon-d-arrow-left'"
-      @mouseleave="quickprevIconClass = 'el-icon-more'">
+      @mouseenter="quickprevIconClass = 'tm-icon-d-arrow-left'"
+      @mouseleave="quickprevIconClass = 'tm-icon-more'">
     </li>
     <li
       v-for="pager in pagers"
@@ -17,11 +17,11 @@
       :class="{ active: currentPage === pager }"
       class="number">{{ pager }}</li>
     <li
-      class="el-icon more btn-quicknext"
+      class="tm-icon more btn-quicknext"
       :class="[quicknextIconClass]"
       v-if="showNextMore"
-      @mouseenter="quicknextIconClass = 'el-icon-d-arrow-right'"
-      @mouseleave="quicknextIconClass = 'el-icon-more'">
+      @mouseenter="quicknextIconClass = 'tm-icon-d-arrow-right'"
+      @mouseleave="quicknextIconClass = 'tm-icon-more'">
     </li>
     <li
       :class="{ active: currentPage === pageCount }"
@@ -32,7 +32,7 @@
 
 <script type="text/babel">
   export default {
-    name: 'ElPager',
+    name: 'TmPager',
 
     props: {
       currentPage: Number,
@@ -42,11 +42,11 @@
 
     watch: {
       showPrevMore(val) {
-        if (!val) this.quickprevIconClass = 'el-icon-more';
+        if (!val) this.quickprevIconClass = 'tm-icon-more';
       },
 
       showNextMore(val) {
-        if (!val) this.quicknextIconClass = 'el-icon-more';
+        if (!val) this.quicknextIconClass = 'tm-icon-more';
       }
     },
 
@@ -140,8 +140,8 @@
         current: null,
         showPrevMore: false,
         showNextMore: false,
-        quicknextIconClass: 'el-icon-more',
-        quickprevIconClass: 'el-icon-more'
+        quicknextIconClass: 'tm-icon-more',
+        quickprevIconClass: 'tm-icon-more'
       };
     }
   };

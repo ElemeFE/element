@@ -1,14 +1,14 @@
 1) automatically close
      Message
-     Error: Uncaught AssertionError: expected <div role="alert" class="el-message el-message--info" style="z-index: 2252; display: none;"><i class="el-message__icon el-icon-info"></i><p class="el-message__content">灰风</p><!----></div> to not exist (/Users/nbrylev/Documents/Development/Work/tmc24-components/node_modules/chai/chai.js:206)
+     Error: Uncaught AssertionError: expected <div role="alert" class="tm-message tm-message--info" style="z-index: 2252; display: none;"><i class="tm-message__icon tm-icon-info"></i><p class="tm-message__content">灰风</p><!----></div> to not exist (/Users/nbrylev/Documents/Development/Work/tmc24-components/node_modules/chai/chai.js:206)
 
 2) manually close
      Message
-     Error: Uncaught AssertionError: expected <div role="alert" class="el-message el-message--info is-closable" style="z-index: 2253; display: none;"><i class="el-message__icon el-icon-info"></i><p class="el-message__content">夏天</p><i class="el-message__closeBtn el-icon-close"></i></div> to not exist (/Users/nbrylev/Documents/Development/Work/tmc24-components/node_modules/chai/chai.js:206)
+     Error: Uncaught AssertionError: expected <div role="alert" class="tm-message tm-message--info is-closable" style="z-index: 2253; display: none;"><i class="tm-message__icon tm-icon-info"></i><p class="tm-message__content">夏天</p><i class="tm-message__closeBtn tm-icon-close"></i></div> to not exist (/Users/nbrylev/Documents/Development/Work/tmc24-components/node_modules/chai/chai.js:206)
 
 3) close all
      Message
-     Error: Uncaught AssertionError: expected <div role="alert" class="el-message el-message--info" style="z-index: 2256; display: none;"><i class="el-message__icon el-icon-info"></i><p class="el-message__content">夏天</p><!----></div> to not exist (/Users/nbrylev/Documents/Development/Work/tmc24-components/node_modules/chai/chai.js:206)
+     Error: Uncaught AssertionError: expected <div role="alert" class="tm-message tm-message--info" style="z-index: 2256; display: none;"><i class="tm-message__icon tm-icon-info"></i><p class="tm-message__content">夏天</p><!----></div> to not exist (/Users/nbrylev/Documents/Development/Work/tmc24-components/node_modules/chai/chai.js:206)
 
 4) invoke with type
      Message
@@ -22,11 +22,11 @@
 
 6) automatically close
      Notification
-     Error: Uncaught AssertionError: expected <div role="alert" class="el-notification right" style="top: 16px; z-index: 2275; display: none;"><!----><div class="el-notification__group"><h2 class="el-notification__title"></h2><div class="el-notification__content"><p>玻璃蜡烛</p></div><div class="el-notification__closeBtn el-icon-close"></div></div></div> to not exist (/Users/nbrylev/Documents/Development/Work/tmc24-components/node_modules/chai/chai.js:206)
+     Error: Uncaught AssertionError: expected <div role="alert" class="tm-notification right" style="top: 16px; z-index: 2275; display: none;"><!----><div class="tm-notification__group"><h2 class="tm-notification__title"></h2><div class="tm-notification__content"><p>玻璃蜡烛</p></div><div class="tm-notification__closeBtn tm-icon-close"></div></div></div> to not exist (/Users/nbrylev/Documents/Development/Work/tmc24-components/node_modules/chai/chai.js:206)
 
 7) manually close
      Notification
-     Error: Uncaught AssertionError: expected <div role="alert" class="el-notification right" style="top: 16px; z-index: 2276; display: none;"><!----><div class="el-notification__group"><h2 class="el-notification__title"></h2><div class="el-notification__content"><p>苍白母马</p></div><div class="el-notification__closeBtn el-icon-close"></div></div></div> to not exist (/Users/nbrylev/Documents/Development/Work/tmc24-components/node_modules/chai/chai.js:206)
+     Error: Uncaught AssertionError: expected <div role="alert" class="tm-notification right" style="top: 16px; z-index: 2276; display: none;"><!----><div class="tm-notification__group"><h2 class="tm-notification__title"></h2><div class="tm-notification__content"><p>苍白母马</p></div><div class="tm-notification__closeBtn tm-icon-close"></div></div></div> to not exist (/Users/nbrylev/Documents/Development/Work/tmc24-components/node_modules/chai/chai.js:206)
 
 8) create
      Pagination

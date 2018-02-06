@@ -40,7 +40,7 @@
 
 <style>
   .demo-box.demo-tag {
-    .el-tag + .el-tag {
+    .tm-tag + .tm-tag {
       margin-left: 10px;
     }
     .button-new-tag {
@@ -66,11 +66,11 @@ Used for marking and selection.
 :::demo Use the `type` attribute to define Tag's type. In addition, the `color` attribute can be used to set the background color of the Tag.
 
 ```html
-<el-tag>Tag One</el-tag>
-<el-tag type="success">Tag Two</el-tag>
-<el-tag type="info">Tag Three</el-tag>
-<el-tag type="warning">Tag Four</el-tag>
-<el-tag type="danger">Tag Five</el-tag>
+<tm-tag>Tag One</tm-tag>
+<tm-tag type="success">Tag Two</tm-tag>
+<tm-tag type="info">Tag Three</tm-tag>
+<tm-tag type="warning">Tag Four</tm-tag>
+<tm-tag type="danger">Tag Five</tm-tag>
 ```
 :::
 
@@ -79,13 +79,13 @@ Used for marking and selection.
 :::demo `closable` attribute can be used to define a removable tag. It accepts a `Boolean`. By default the removal of Tag has a fading animation. If you don't want to use it, you can set the `disable-transitions` attribute, which accepts a `Boolean`, to `true`. `close` event triggers when Tag is removed.
 
 ```html
-<el-tag
+<tm-tag
   v-for="tag in tags"
   :key="tag.name"
   closable
   :type="tag.type">
   {{tag.name}}
-</el-tag>
+</tm-tag>
 
 <script>
   export default {
@@ -111,15 +111,15 @@ You can use the `close` event to add and remove tag dynamically.
 
 :::demo
 ```html
-<el-tag
+<tm-tag
   :key="tag"
   v-for="tag in dynamicTags"
   closable
   :disable-transitions="false"
   @close="handleClose(tag)">
   {{tag}}
-</el-tag>
-<el-input
+</tm-tag>
+<tm-input
   class="input-new-tag"
   v-if="inputVisible"
   v-model="inputValue"
@@ -128,11 +128,11 @@ You can use the `close` event to add and remove tag dynamically.
   @keyup.enter.native="handleInputConfirm"
   @blur="handleInputConfirm"
 >
-</el-input>
-<el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
+</tm-input>
+<tm-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</tm-button>
 
 <style>
-  .el-tag + .el-tag {
+  .tm-tag + .tm-tag {
     margin-left: 10px;
   }
   .button-new-tag {
@@ -191,10 +191,10 @@ Besides default size, Tag component provides three additional sizes for you to c
 :::demo Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
 
 ```html
-<el-tag>Default</el-tag>
-<el-tag size="medium">Medium</el-tag>
-<el-tag size="small">Small</el-tag>
-<el-tag size="mini">Mini</el-tag>
+<tm-tag>Default</tm-tag>
+<tm-tag size="medium">Medium</tm-tag>
+<tm-tag size="small">Small</tm-tag>
+<tm-tag size="mini">Mini</tm-tag>
 ```
 :::
 

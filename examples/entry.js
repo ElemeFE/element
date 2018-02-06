@@ -33,7 +33,7 @@ router.afterEach(route => {
       return;
     }
   }
-  document.title = 'Element';
+  document.title = 'Tm-consulting';
 });
 
 new Vue({ // eslint-disable-line

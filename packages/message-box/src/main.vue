@@ -1,7 +1,7 @@
 <template>
   <transition name="msgbox-fade">
     <div
-      class="el-message-box__wrapper"
+      class="tm-message-box__wrapper"
       tabindex="-1"
       v-show="visible"
       @click.self="handleWrapperClick"
@@ -9,32 +9,32 @@
       aria-modal="true"
       :aria-label="title || 'dialog'"
     >
-      <div class="el-message-box" :class="[customClass, center && 'el-message-box--center']">
-        <div class="el-message-box__header" v-if="title !== undefined">
-          <div class="el-message-box__title">
-            <div class="el-message-box__status" :class="[ typeClass ]" v-if="typeClass && center"></div>
+      <div class="tm-message-box" :class="[customClass, center && 'tm-message-box--center']">
+        <div class="tm-message-box__header" v-if="title !== undefined">
+          <div class="tm-message-box__title">
+            <div class="tm-message-box__status" :class="[ typeClass ]" v-if="typeClass && center"></div>
             <span>{{ title }}</span>
           </div>
           <button type="button"
-                  class="el-message-box__headerbtn"
+                  class="tm-message-box__headerbtn"
                   aria-label="Close"
                   v-if="showClose"
                   @click="handleAction('cancel')"
                   @keydown.enter="handleAction('cancel')"
           >
-            <i class="el-message-box__close el-icon-close"></i>
+            <i class="tm-message-box__close tm-icon-close"></i>
           </button>
         </div>
-        <div class="el-message-box__content" v-if="message !== ''">
-          <div class="el-message-box__status" :class="[ typeClass ]" v-if="typeClass && !center"></div>
-          <div class="el-message-box__message">
+        <div class="tm-message-box__content" v-if="message !== ''">
+          <div class="tm-message-box__status" :class="[ typeClass ]" v-if="typeClass && !center"></div>
+          <div class="tm-message-box__message">
             <slot>
               <p v-if="!dangerouslyUseHTMLString">{{ message }}</p>
               <p v-else v-html="message"></p>
             </slot>
           </div>
-          <div class="el-message-box__input" v-show="showInput">
-            <el-input
+          <div class="tm-message-box__input" v-show="showInput">
+            <tm-input
               v-model="inputValue"
               :type="inputType"
               @compositionstart.native="handleComposition"
@@ -42,12 +42,12 @@
               @compositionend.native="handleComposition"
               @keyup.enter.native="handleKeyup"
               :placeholder="inputPlaceholder"
-              ref="input"></el-input>
-            <div class="el-message-box__errormsg" :style="{ visibility: !!editorErrorMessage ? 'visible' : 'hidden' }">{{ editorErrorMessage }}</div>
+              ref="input"></tm-input>
+            <div class="tm-message-box__errormsg" :style="{ visibility: !!editorErrorMessage ? 'visible' : 'hidden' }">{{ editorErrorMessage }}</div>
           </div>
         </div>
-        <div class="el-message-box__btns">
-          <el-button
+        <div class="tm-message-box__btns">
+          <tm-button
             :loading="cancelButtonLoading"
             :class="[ cancelButtonClasses ]"
             v-show="showCancelButton"
@@ -57,8 +57,8 @@
             @keydown.enter="handleAction('cancel')"
           >
             {{ cancelButtonText || t('el.messagebox.cancel') }}
-          </el-button>
-          <el-button
+          </tm-button>
+          <tm-button
             :loading="confirmButtonLoading"
             ref="confirm"
             :class="[ confirmButtonClasses ]"
@@ -69,7 +69,7 @@
             @keydown.enter="handleAction('confirm')"
           >
             {{ confirmButtonText || t('el.messagebox.confirm') }}
-          </el-button>
+          </tm-button>
         </div>
       </div>
     </div>
@@ -79,8 +79,8 @@
 <script type="text/babel">
   import Popup from 'element-ui/src/utils/popup';
   import Locale from 'element-ui/src/mixins/locale';
-  import ElInput from 'element-ui/packages/input';
-  import ElButton from 'element-ui/packages/button';
+  import TmInput from 'element-ui/packages/input';
+  import TmButton from 'element-ui/packages/button';
   import { addClass, removeClass } from 'element-ui/src/utils/dom';
   import { t } from 'element-ui/src/locale';
   import Dialog from 'element-ui/src/utils/aria-dialog';
@@ -127,17 +127,17 @@
     },
 
     components: {
-      ElInput,
-      ElButton
+      TmInput,
+      TmButton
     },
 
     computed: {
       typeClass() {
-        return this.type && typeMap[this.type] ? `el-icon-${ typeMap[this.type] }` : '';
+        return this.type && typeMap[this.type] ? `tm-icon-${ typeMap[this.type] }` : '';
       },
 
       confirmButtonClasses() {
-        return `el-button--primary ${ this.confirmButtonClass }`;
+        return `tm-button--primary ${ this.confirmButtonClass }`;
       },
       cancelButtonClasses() {
         return `${ this.cancelButtonClass }`;
@@ -238,8 +238,8 @@
         return true;
       },
       getFistFocus() {
-        const $btns = this.$el.querySelector('.el-message-box__btns .el-button');
-        const $title = this.$el.querySelector('.el-message-box__btns .el-message-box__title');
+        const $btns = this.$el.querySelector('.tm-message-box__btns .tm-button');
+        const $title = this.$el.querySelector('.tm-message-box__btns .tm-message-box__title');
         return $btns && $btns[0] || $title;
       },
       getInputElement() {

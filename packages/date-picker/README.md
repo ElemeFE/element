@@ -11,7 +11,7 @@ npm i element-datepicker -S
 A:
 ```javascript
 import Vue from 'vue'
-import ElDatePicker from 'element-datepicker'
+import TmDatePicker from 'element-datepicker'
 
 Vue.use(ElDatePicker)
 ```
@@ -29,7 +29,7 @@ Vue.component(TimeSelect.name, TimeSelect);
 C:
 ```html
 <script src="path/to/vue/dist/vue.js"></script>
-<script src="path/to/el-datepicker/index.js"></script>
+<script src="path/to/tm-datepicker/index.js"></script>
 <script>
   Vue.use(ElDatePicker);
 </script>

@@ -9,18 +9,18 @@ describe('Dropdown', () => {
   it('create', done => {
     vm = createVue({
       template: `
-        <el-dropdown ref="dropdown">
-          <span class="el-dropdown-link">
-            下拉菜单<i class="el-icon-caret-bottom el-icon-right"></i>
+        <tm-dropdown ref="dropdown">
+          <span class="tm-dropdown-link">
+            下拉菜单<i class="tm-icon-caret-bottom tm-icon-right"></i>
           </span>
-          <el-dropdown-menu slot="dropdown" class="dropdown-test-creat">
-            <el-dropdown-item>黄金糕</el-dropdown-item>
-            <el-dropdown-item>狮子头</el-dropdown-item>
-            <el-dropdown-item>螺蛳粉</el-dropdown-item>
-            <el-dropdown-item>双皮奶</el-dropdown-item>
-            <el-dropdown-item>蚵仔煎</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
+          <tm-dropdown-menu slot="dropdown" class="dropdown-test-creat">
+            <tm-dropdown-item>黄金糕</tm-dropdown-item>
+            <tm-dropdown-item>狮子头</tm-dropdown-item>
+            <tm-dropdown-item>螺蛳粉</tm-dropdown-item>
+            <tm-dropdown-item>双皮奶</tm-dropdown-item>
+            <tm-dropdown-item>蚵仔煎</tm-dropdown-item>
+          </tm-dropdown-menu>
+        </tm-dropdown>
       `
     }, true);
     let dropdown = vm.$refs.dropdown;
@@ -42,18 +42,18 @@ describe('Dropdown', () => {
     const myCommandObject = { name: 'CommandC' };
     vm = createVue({
       template: `
-        <el-dropdown ref="dropdown">
-          <span class="el-dropdown-link">
-            下拉菜单<i class="el-icon-caret-bottom el-icon-right"></i>
+        <tm-dropdown ref="dropdown">
+          <span class="tm-dropdown-link">
+            下拉菜单<i class="tm-icon-caret-bottom tm-icon-right"></i>
           </span>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="a">黄金糕</el-dropdown-item>
-            <el-dropdown-item command="b">狮子头</el-dropdown-item>
-            <el-dropdown-item ref="commandC" :command="myCommandObject">螺蛳粉</el-dropdown-item>
-            <el-dropdown-item command="d">双皮奶</el-dropdown-item>
-            <el-dropdown-item command="e">蚵仔煎</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
+          <tm-dropdown-menu slot="dropdown">
+            <tm-dropdown-item command="a">黄金糕</tm-dropdown-item>
+            <tm-dropdown-item command="b">狮子头</tm-dropdown-item>
+            <tm-dropdown-item ref="commandC" :command="myCommandObject">螺蛳粉</tm-dropdown-item>
+            <tm-dropdown-item command="d">双皮奶</tm-dropdown-item>
+            <tm-dropdown-item command="e">蚵仔煎</tm-dropdown-item>
+          </tm-dropdown-menu>
+        </tm-dropdown>
       `,
       data() {
         return {
@@ -81,18 +81,18 @@ describe('Dropdown', () => {
   it('trigger', done => {
     vm = createVue({
       template: `
-        <el-dropdown trigger="click" ref="dropdown">
-          <span class="el-dropdown-link">
-            下拉菜单trigger click<i class="el-icon-caret-bottom el-icon-right"></i>
+        <tm-dropdown trigger="click" ref="dropdown">
+          <span class="tm-dropdown-link">
+            下拉菜单trigger click<i class="tm-icon-caret-bottom tm-icon-right"></i>
           </span>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>黄金糕</el-dropdown-item>
-            <el-dropdown-item @click.native="handleClick">狮子头</el-dropdown-item>
-            <el-dropdown-item>螺蛳粉</el-dropdown-item>
-            <el-dropdown-item>双皮奶</el-dropdown-item>
-            <el-dropdown-item>蚵仔煎</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
+          <tm-dropdown-menu slot="dropdown">
+            <tm-dropdown-item>黄金糕</tm-dropdown-item>
+            <tm-dropdown-item @click.native="handleClick">狮子头</tm-dropdown-item>
+            <tm-dropdown-item>螺蛳粉</tm-dropdown-item>
+            <tm-dropdown-item>双皮奶</tm-dropdown-item>
+            <tm-dropdown-item>蚵仔煎</tm-dropdown-item>
+          </tm-dropdown-menu>
+        </tm-dropdown>
       `
     }, true);
     let dropdownElm = vm.$el;
@@ -112,26 +112,26 @@ describe('Dropdown', () => {
   it('split button', done => {
     vm = createVue({
       template: `
-        <el-dropdown split-button type="primary" ref="dropdown">
+        <tm-dropdown split-button type="primary" ref="dropdown">
           更多菜单
-          <el-dropdown-menu slot="dropdown" class="dropdown-test-split-button">
-            <el-dropdown-item>黄金糕</el-dropdown-item>
-            <el-dropdown-item>狮子头</el-dropdown-item>
-            <el-dropdown-item>螺蛳粉</el-dropdown-item>
-            <el-dropdown-item>双皮奶</el-dropdown-item>
-            <el-dropdown-item>蚵仔煎</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
+          <tm-dropdown-menu slot="dropdown" class="dropdown-test-split-button">
+            <tm-dropdown-item>黄金糕</tm-dropdown-item>
+            <tm-dropdown-item>狮子头</tm-dropdown-item>
+            <tm-dropdown-item>螺蛳粉</tm-dropdown-item>
+            <tm-dropdown-item>双皮奶</tm-dropdown-item>
+            <tm-dropdown-item>蚵仔煎</tm-dropdown-item>
+          </tm-dropdown-menu>
+        </tm-dropdown>
       `
     }, true);
 
     let dropdown = vm.$refs.dropdown;
     let dropdownElm = dropdown.$el;
-    let triggerElm = dropdownElm.querySelector('.el-dropdown__caret-button');
+    let triggerElm = dropdownElm.querySelector('.tm-dropdown__caret-button');
     var callback = sinon.spy();
 
     dropdown.$on('click', callback);
-    dropdownElm.querySelector('.el-button').click();
+    dropdownElm.querySelector('.tm-button').click();
 
     setTimeout(_ => {
       expect(callback.called).to.be.true;
@@ -151,18 +151,18 @@ describe('Dropdown', () => {
   it('hide on click', done => {
     vm = createVue({
       template: `
-        <el-dropdown ref="dropdown" :hide-on-click="false">
-          <span class="el-dropdown-link">
-            下拉菜单<i class="el-icon-caret-bottom el-icon-right"></i>
+        <tm-dropdown ref="dropdown" :hide-on-click="false">
+          <span class="tm-dropdown-link">
+            下拉菜单<i class="tm-icon-caret-bottom tm-icon-right"></i>
           </span>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="a">黄金糕</el-dropdown-item>
-            <el-dropdown-item command="b">狮子头</el-dropdown-item>
-            <el-dropdown-item ref="commandC" command="c">螺蛳粉</el-dropdown-item>
-            <el-dropdown-item command="d">双皮奶</el-dropdown-item>
-            <el-dropdown-item command="e">蚵仔煎</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
+          <tm-dropdown-menu slot="dropdown">
+            <tm-dropdown-item command="a">黄金糕</tm-dropdown-item>
+            <tm-dropdown-item command="b">狮子头</tm-dropdown-item>
+            <tm-dropdown-item ref="commandC" command="c">螺蛳粉</tm-dropdown-item>
+            <tm-dropdown-item command="d">双皮奶</tm-dropdown-item>
+            <tm-dropdown-item command="e">蚵仔煎</tm-dropdown-item>
+          </tm-dropdown-menu>
+        </tm-dropdown>
       `
     }, true);
     let dropdown = vm.$refs.dropdown;

@@ -4,18 +4,18 @@ You can use Element's built-in transitions directly. Before that, please read th
 
 ### fade
 
-:::demo We have two fading effects: `el-fade-in-linear` and `el-fade-in`.
+:::demo We have two fading effects: `tm-fade-in-linear` and `tm-fade-in`.
 ```html
 <template>
   <div>
-    <el-button @click="show = !show">Click Me</el-button>
+    <tm-button @click="show = !show">Click Me</tm-button>
 
     <div style="display: flex; margin-top: 20px; height: 100px;">
-      <transition name="el-fade-in-linear">
-        <div v-show="show" class="transition-box">.el-fade-in-linear</div>
+      <transition name="tm-fade-in-linear">
+        <div v-show="show" class="transition-box">.tm-fade-in-linear</div>
       </transition>
-      <transition name="el-fade-in">
-        <div v-show="show" class="transition-box">.el-fade-in</div>
+      <transition name="tm-fade-in">
+        <div v-show="show" class="transition-box">.tm-fade-in</div>
       </transition>
     </div>
   </div>
@@ -48,23 +48,23 @@ You can use Element's built-in transitions directly. Before that, please read th
 
 ### zoom
 
-:::demo `el-zoom-in-center`, `el-zoom-in-top` and `el-zoom-in-bottom` are provided.
+:::demo `tm-zoom-in-center`, `tm-zoom-in-top` and `tm-zoom-in-bottom` are provided.
 ```html
 <template>
   <div>
-    <el-button @click="show2 = !show2">Click Me</el-button>
+    <tm-button @click="show2 = !show2">Click Me</tm-button>
 
     <div style="display: flex; margin-top: 20px; height: 100px;">
-      <transition name="el-zoom-in-center">
-        <div v-show="show2" class="transition-box">.el-zoom-in-center</div>
+      <transition name="tm-zoom-in-center">
+        <div v-show="show2" class="transition-box">.tm-zoom-in-center</div>
       </transition>
 
-      <transition name="el-zoom-in-top">
-        <div v-show="show2" class="transition-box">.el-zoom-in-top</div>
+      <transition name="tm-zoom-in-top">
+        <div v-show="show2" class="transition-box">.tm-zoom-in-top</div>
       </transition>
 
-      <transition name="el-zoom-in-bottom">
-        <div v-show="show2" class="transition-box">.el-zoom-in-bottom</div>
+      <transition name="tm-zoom-in-bottom">
+        <div v-show="show2" class="transition-box">.tm-zoom-in-bottom</div>
       </transition>
     </div>
   </div>
@@ -98,21 +98,21 @@ You can use Element's built-in transitions directly. Before that, please read th
 
 ### collapse
 
-For collapse effect, use the `el-collapse-transition` component.
+For collapse effect, use the `tm-collapse-transition` component.
 
 :::demo
 ```html
 <template>
   <div>
-    <el-button @click="show3 = !show3">Click Me</el-button>
+    <tm-button @click="show3 = !show3">Click Me</tm-button>
 
     <div style="margin-top: 20px; height: 200px;">
-      <el-collapse-transition>
+      <tm-collapse-transition>
         <div v-show="show3">
-          <div class="transition-box">el-collapse-transition</div>
-          <div class="transition-box">el-collapse-transition</div>
+          <div class="transition-box">tm-collapse-transition</div>
+          <div class="transition-box">tm-collapse-transition</div>
         </div>
-      </el-collapse-transition>
+      </tm-collapse-transition>
     </div>
   </div>
 </template>

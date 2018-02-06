@@ -9,7 +9,7 @@ var classList = [];
 
 nodes.forEach((node) => {
   var selector = node.selector || '';
-  var reg = new RegExp(/\.el-icon-([^:]+):before/);
+  var reg = new RegExp(/\.tm-icon-([^:]+):before/);
   var arr = selector.match(reg);
 
   if (arr && arr[1]) {

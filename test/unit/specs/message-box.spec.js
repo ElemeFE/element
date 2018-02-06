@@ -16,7 +16,7 @@ describe('MessageBox', () => {
   });
 
   afterEach(() => {
-    const el = document.querySelector('.el-message-box__wrapper');
+    const el = document.querySelector('.tm-message-box__wrapper');
     if (!el) return;
     if (el.parentNode) {
       el.parentNode.removeChild(el);
@@ -31,10 +31,10 @@ describe('MessageBox', () => {
       message: '这是一段内容'
     });
     setTimeout(() => {
-      const msgbox = document.querySelector('.el-message-box__wrapper');
+      const msgbox = document.querySelector('.tm-message-box__wrapper');
       expect(msgbox.__vue__.$parent.visible).to.true;
-      expect(msgbox.querySelector('.el-message-box__title').textContent).to.equal('消息');
-      expect(msgbox.querySelector('.el-message-box__message')
+      expect(msgbox.querySelector('.tm-message-box__title').textContent).to.equal('消息');
+      expect(msgbox.querySelector('.tm-message-box__message')
         .querySelector('p').textContent).to.equal('这是一段内容');
       MessageBox.close();
       expect(msgbox.__vue__.$parent.visible).to.false;
@@ -45,7 +45,7 @@ describe('MessageBox', () => {
   it('invoke with strings', done => {
     MessageBox('消息', '这是一段内容', 'success');
     setTimeout(() => {
-      expect(document.querySelector('.el-message-box__wrapper')).to.exist;
+      expect(document.querySelector('.tm-message-box__wrapper')).to.exist;
       done();
     }, 300);
   });
@@ -57,7 +57,7 @@ describe('MessageBox', () => {
       message: '<strong>html string</strong>'
     });
     setTimeout(() => {
-      const message = document.querySelector('.el-message-box__message strong');
+      const message = document.querySelector('.tm-message-box__message strong');
       expect(message.textContent).to.equal('html string');
       done();
     }, 300);
@@ -70,9 +70,9 @@ describe('MessageBox', () => {
     });
     setTimeout(() => {
       document.querySelector('.v-modal').click();
-      expect(document.querySelector('.el-message-box__wrapper')
+      expect(document.querySelector('.tm-message-box__wrapper')
         .__vue__.$parent.visible).to.true;
-      expect(document.querySelector('.el-message-box__wrapper')
+      expect(document.querySelector('.tm-message-box__wrapper')
         .__vue__.$parent.type).to.equal('warning');
       done();
     }, 300);
@@ -84,9 +84,9 @@ describe('MessageBox', () => {
       type: 'warning'
     });
     setTimeout(() => {
-      document.querySelector('.el-message-box__wrapper')
-        .querySelector('.el-button--primary').click();
-      expect(document.querySelector('.el-message-box__wrapper')
+      document.querySelector('.tm-message-box__wrapper')
+        .querySelector('.tm-button--primary').click();
+      expect(document.querySelector('.tm-message-box__wrapper')
         .__vue__.$parent.visible).to.false;
       done();
     }, 200);
@@ -99,13 +99,13 @@ describe('MessageBox', () => {
       inputErrorMessage: 'validation failed'
     });
     setTimeout(() => {
-      const messageBox = document.querySelector('.el-message-box__wrapper').__vue__.$parent;
-      expect(messageBox.$el.querySelector('.el-message-box__input')).to.exist;
+      const messageBox = document.querySelector('.tm-message-box__wrapper').__vue__.$parent;
+      expect(messageBox.$el.querySelector('.tm-message-box__input')).to.exist;
       const haveFocus = messageBox.$el.querySelector('input').isSameNode(document.activeElement);
       expect(haveFocus).to.true;
       messageBox.inputValue = 'no';
       setTimeout(() => {
-        expect(messageBox.$el.querySelector('.el-message-box__errormsg')
+        expect(messageBox.$el.querySelector('.tm-message-box__errormsg')
           .textContent).to.equal('validation failed');
         done();
       }, 100);
@@ -118,7 +118,7 @@ describe('MessageBox', () => {
       title: '标题名称'
     });
     setTimeout(() => {
-      const messageBox = document.querySelector('.el-message-box__wrapper').__vue__.$parent;
+      const messageBox = document.querySelector('.tm-message-box__wrapper').__vue__.$parent;
       const haveFocus = messageBox.$el.querySelector('textarea').isSameNode(document.activeElement);
       expect(haveFocus).to.true;
       done();
@@ -136,14 +136,14 @@ describe('MessageBox', () => {
         inputValidator: validator
       });
       setTimeout(() => {
-        const messageBox = document.querySelector('.el-message-box__wrapper').__vue__.$parent;
+        const messageBox = document.querySelector('.tm-message-box__wrapper').__vue__.$parent;
         messageBox.inputValue = 'no';
         setTimeout(() => {
-          expect(document.querySelector('.el-message-box__errormsg')
+          expect(document.querySelector('.tm-message-box__errormsg')
             .textContent).to.equal('wrong');
           messageBox.inputValue = 'test';
           setTimeout(() => {
-            expect(document.querySelector('.el-message-box__errormsg')
+            expect(document.querySelector('.tm-message-box__errormsg')
               .textContent).to.equal('');
             done();
           }, 100);
@@ -158,10 +158,10 @@ describe('MessageBox', () => {
         inputValidator: validator
       });
       setTimeout(() => {
-        const messageBox = document.querySelector('.el-message-box__wrapper').__vue__.$parent;
+        const messageBox = document.querySelector('.tm-message-box__wrapper').__vue__.$parent;
         messageBox.inputValue = 'no';
         setTimeout(() => {
-          expect(document.querySelector('.el-message-box__errormsg')
+          expect(document.querySelector('.tm-message-box__errormsg')
             .textContent).to.equal('输入的数据不合法!');
           done();
         }, 100);
@@ -178,7 +178,7 @@ describe('MessageBox', () => {
       msgAction = action;
     });
     setTimeout(() => {
-      document.querySelector('.el-message-box__close').click();
+      document.querySelector('.tm-message-box__close').click();
       setTimeout(() => {
         expect(msgAction).to.equal('cancel');
         done();
@@ -198,7 +198,7 @@ describe('MessageBox', () => {
       msgAction = action;
     });
     setTimeout(() => {
-      document.querySelector('.el-message-box__wrapper .el-button--primary').click();
+      document.querySelector('.tm-message-box__wrapper .tm-button--primary').click();
       setTimeout(() => {
         expect(msgAction).to.equal('confirm');
         done();
@@ -214,7 +214,7 @@ describe('MessageBox', () => {
           done();
         });
       setTimeout(() => {
-        document.querySelector('.el-message-box__wrapper .el-button--primary').click();
+        document.querySelector('.tm-message-box__wrapper .tm-button--primary').click();
       }, 50);
     });
 
@@ -225,7 +225,7 @@ describe('MessageBox', () => {
           done();
         });
       setTimeout(() => {
-        document.querySelector('.el-message-box__wrapper .el-button').click();
+        document.querySelector('.tm-message-box__wrapper .tm-button').click();
       }, 50);
     });
   });

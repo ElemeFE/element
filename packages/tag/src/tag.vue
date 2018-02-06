@@ -1,15 +1,15 @@
 <template>
-  <transition :name="disableTransitions ? '' : 'el-zoom-in-center'">
+  <transition :name="disableTransitions ? '' : 'tm-zoom-in-center'">
     <span
-      class="el-tag"
+      class="tm-tag"
       :class="[
-        type ? 'el-tag--' + type : '',
-        tagSize && `el-tag--${tagSize}`,
+        type ? 'tm-tag--' + type : '',
+        tagSize && `tm-tag--${tagSize}`,
         {'is-hit': hit}
       ]"
       :style="{backgroundColor: color}">
       <slot></slot>
-      <i class="el-tag__close el-icon-close"
+      <i class="tm-tag__close tm-icon-close"
         v-if="closable"
         @click.stop="handleClose"></i>
     </span>
@@ -17,7 +17,7 @@
 </template>
 <script>
   export default {
-    name: 'ElTag',
+    name: 'TmTag',
     props: {
       text: String,
       closable: Boolean,

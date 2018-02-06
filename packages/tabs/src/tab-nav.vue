@@ -177,8 +177,8 @@
       } = this;
       const scrollBtn = scrollable
         ? [
-          <span class={['el-tabs__nav-prev', scrollable.prev ? '' : 'is-disabled']} on-click={scrollPrev}><i class="el-icon-arrow-left"></i></span>,
-          <span class={['el-tabs__nav-next', scrollable.next ? '' : 'is-disabled']} on-click={scrollNext}><i class="el-icon-arrow-right"></i></span>
+          <span class={['tm-tabs__nav-prev', scrollable.prev ? '' : 'is-disabled']} on-click={scrollPrev}><i class="tm-icon-arrow-left"></i></span>,
+          <span class={['tm-tabs__nav-next', scrollable.next ? '' : 'is-disabled']} on-click={scrollNext}><i class="tm-icon-arrow-right"></i></span>
         ] : null;
 
       const tabs = this._l(panes, (pane, index) => {
@@ -188,7 +188,7 @@
         pane.index = `${index}`;
 
         const btnClose = closable
-          ? <span class="el-icon-close" on-click={(ev) => { onTabRemove(pane, ev); }}></span>
+          ? <span class="tm-icon-close" on-click={(ev) => { onTabRemove(pane, ev); }}></span>
           : null;
 
         const tabLabelContent = pane.$slots.label || pane.label;
@@ -196,7 +196,7 @@
         return (
           <div
             class={{
-              'el-tabs__item': true,
+              'tm-tabs__item': true,
               [`is-${ this.rootTabs.tabPosition }`]: true,
               'is-active': pane.active,
               'is-disabled': pane.disabled,
@@ -221,10 +221,10 @@
         );
       });
       return (
-        <div class={['el-tabs__nav-wrap', scrollable ? 'is-scrollable' : '', `is-${ this.rootTabs.tabPosition }`]}>
+        <div class={['tm-tabs__nav-wrap', scrollable ? 'is-scrollable' : '', `is-${ this.rootTabs.tabPosition }`]}>
           {scrollBtn}
-          <div class={['el-tabs__nav-scroll']} ref="navScroll">
-            <div class="el-tabs__nav" ref="nav" style={navStyle} role="tablist" on-keydown={ changeTab }>
+          <div class={['tm-tabs__nav-scroll']} ref="navScroll">
+            <div class="tm-tabs__nav" ref="nav" style={navStyle} role="tablist" on-keydown={ changeTab }>
               {!type ? <tab-bar tabs={panes}></tab-bar> : null}
               {tabs}
             </div>

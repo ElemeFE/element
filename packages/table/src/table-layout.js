@@ -44,7 +44,7 @@ class TableLayout {
     if (typeof height !== 'string' && typeof height !== 'number') return;
     const bodyWrapper = this.table.bodyWrapper;
     if (this.table.$el && bodyWrapper) {
-      const body = bodyWrapper.querySelector('.el-table__body');
+      const body = bodyWrapper.querySelector('.tm-table__body');
       this.scrollY = body.offsetHeight > this.bodyHeight;
     }
   }

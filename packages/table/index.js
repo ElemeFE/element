@@ -1,8 +1,8 @@
-import ElTable from './src/table';
+import TmTable from './src/table';
 
 /* istanbul ignore next */
-ElTable.install = function(Vue) {
-  Vue.component(ElTable.name, ElTable);
+TmTable.install = function(Vue) {
+  Vue.component(TmTable.name, TmTable);
 };
 
-export default ElTable;
+export default TmTable;

@@ -1,11 +1,11 @@
 <template>
   <div
-    class="el-carousel"
-    :class="{ 'el-carousel--card': type === 'card' }"
+    class="tm-carousel"
+    :class="{ 'tm-carousel--card': type === 'card' }"
     @mouseenter.stop="handleMouseEnter"
     @mouseleave.stop="handleMouseLeave">
     <div
-      class="el-carousel__container"
+      class="tm-carousel__container"
       :style="{ height: height }">
       <transition name="carousel-arrow-left">
         <button
@@ -15,8 +15,8 @@
           @mouseenter="handleButtonEnter('left')"
           @mouseleave="handleButtonLeave"
           @click.stop="throttledArrowClick(activeIndex - 1)"
-          class="el-carousel__arrow el-carousel__arrow--left">
-          <i class="el-icon-arrow-left"></i>
+          class="tm-carousel__arrow tm-carousel__arrow--left">
+          <i class="tm-icon-arrow-left"></i>
         </button>
       </transition>
       <transition name="carousel-arrow-right">
@@ -27,23 +27,23 @@
           @mouseenter="handleButtonEnter('right')"
           @mouseleave="handleButtonLeave"
           @click.stop="throttledArrowClick(activeIndex + 1)"
-          class="el-carousel__arrow el-carousel__arrow--right">
-          <i class="el-icon-arrow-right"></i>
+          class="tm-carousel__arrow tm-carousel__arrow--right">
+          <i class="tm-icon-arrow-right"></i>
         </button>
       </transition>
       <slot></slot>
     </div>
     <ul
-      class="el-carousel__indicators"
+      class="tm-carousel__indicators"
       v-if="indicatorPosition !== 'none'"
-      :class="{ 'el-carousel__indicators--labels': hasLabel, 'el-carousel__indicators--outside': indicatorPosition === 'outside' || type === 'card' }">
+      :class="{ 'tm-carousel__indicators--labels': hasLabel, 'tm-carousel__indicators--outside': indicatorPosition === 'outside' || type === 'card' }">
       <li
         v-for="(item, index) in items"
-        class="el-carousel__indicator"
+        class="tm-carousel__indicator"
         :class="{ 'is-active': index === activeIndex }"
         @mouseenter="throttledIndicatorHover(index)"
         @click.stop="handleIndicatorClick(index)">
-        <button class="el-carousel__button"><span v-if="hasLabel">{{ item.label }}</span></button>
+        <button class="tm-carousel__button"><span v-if="hasLabel">{{ item.label }}</span></button>
       </li>
     </ul>
   </div>
@@ -54,7 +54,7 @@ import throttle from 'throttle-debounce/throttle';
 import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
 
 export default {
-  name: 'ElCarousel',
+  name: 'TmCarousel',
 
   props: {
     initialIndex: {
@@ -155,7 +155,7 @@ export default {
     },
 
     updateItems() {
-      this.items = this.$children.filter(child => child.$options.name === 'ElCarouselItem');
+      this.items = this.$children.filter(child => child.$options.name === 'TmCarouselItem');
     },
 
     resetItemPosition(oldIndex) {

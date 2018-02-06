@@ -12,14 +12,14 @@ describe('Button', () => {
       type: 'primary'
     }, true);
     let buttonElm = vm.$el;
-    expect(buttonElm.classList.contains('el-button--primary')).to.be.true;
+    expect(buttonElm.classList.contains('tm-button--primary')).to.be.true;
   });
   it('icon', () => {
     vm = createTest(Button, {
-      icon: 'el-icon-search'
+      icon: 'tm-icon-search'
     }, true);
     let buttonElm = vm.$el;
-    expect(buttonElm.querySelector('.el-icon-search')).to.be.ok;
+    expect(buttonElm.querySelector('.tm-icon-search')).to.be.ok;
   });
   it('nativeType', () => {
     vm = createTest(Button, {
@@ -34,7 +34,7 @@ describe('Button', () => {
     }, true);
     let buttonElm = vm.$el;
     expect(buttonElm.classList.contains('is-loading')).to.be.true;
-    expect(buttonElm.querySelector('.el-icon-loading')).to.be.ok;
+    expect(buttonElm.querySelector('.tm-icon-loading')).to.be.ok;
   });
   it('disabled', () => {
     vm = createTest(Button, {
@@ -48,7 +48,7 @@ describe('Button', () => {
       size: 'medium'
     }, true);
     let buttonElm = vm.$el;
-    expect(buttonElm.classList.contains('el-button--medium')).to.be.true;
+    expect(buttonElm.classList.contains('tm-button--medium')).to.be.true;
   });
   it('plain', () => {
     vm = createTest(Button, {
@@ -61,7 +61,7 @@ describe('Button', () => {
     let result;
     vm = createVue({
       template: `
-        <el-button @click="handleClick"></el-button>
+        <tm-button @click="handleClick"></tm-button>
       `,
       methods: {
         handleClick(evt) {

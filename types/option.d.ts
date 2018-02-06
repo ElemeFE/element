@@ -1,7 +1,7 @@
-import { ElementUIComponent } from './component'
+import { TmUIComponent } from './component'
 
 /** Dropdown Select Option Component */
-export declare class ElOption extends ElementUIComponent {
+export declare class TmOption extends TmUIComponent {
   /** Value of option */
   value: any
 

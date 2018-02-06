@@ -61,7 +61,7 @@
       text-align: center;
       position: static;
       transform: none;
-      .el-carousel__indicator:hover button {
+      .tm-carousel__indicator:hover button {
         opacity: 0.64;
       }
       button {
@@ -76,14 +76,14 @@
       transform: none;
       text-align: center;
 
-      .el-carousel__button {
+      .tm-carousel__button {
         height: auto;
         width: auto;
         padding: 2px 18px;
         font-size: 12px;
       }
 
-      .el-carousel__indicator {
+      .tm-carousel__indicator {
         padding: 6px 4px;
       }
     }

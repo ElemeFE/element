@@ -1,4 +1,4 @@
-import { ElementUIComponent } from './component'
+import { TmUIComponent } from './component'
 
 export type ListType = 'text' | 'picture' | 'picture-card'
 export type FileUploadStatus = 'ready' | 'uploading' | 'success' | 'fail'
@@ -9,7 +9,7 @@ export interface FileListItem {
   status?: FileUploadStatus
 }
 
-export interface ElUploadInternalFileDetail {
+export interface TmUploadInternalFileDetail {
   status: FileUploadStatus,
   name: string,
   size: number,
@@ -19,24 +19,24 @@ export interface ElUploadInternalFileDetail {
   url?: string
 }
 
-export interface ElUploadProgressEvent extends ProgressEvent {
+export interface TmUploadProgressEvent extends ProgressEvent {
   percent: number
 }
 
 export interface HttpRequestOptions {
   headers: object,
   withCredentials: boolean,
-  file: ElUploadInternalFileDetail,
+  file: TmUploadInternalFileDetail,
   data: object,
   filename: string,
   action: string,
-  onProgress: (e: ElUploadProgressEvent) => void,
+  onProgress: (e: TmUploadProgressEvent) => void,
   onSuccess: (response: any) => void,
   onError: (err: ErrorEvent) => void
 }
 
 /** Upload Component */
-export declare class ElUpload extends ElementUIComponent {
+export declare class TmUpload extends TmUIComponent {
   /** Request URL (required) */
   action: string
 
@@ -65,25 +65,25 @@ export declare class ElUpload extends ElementUIComponent {
   accept: string
 
   /** Hook function when clicking the uploaded files */
-  onPreview: (file: ElUploadInternalFileDetail) => void
+  onPreview: (file: TmUploadInternalFileDetail) => void
 
   /** Hook function when files are removed */
-  onRemove: (file: ElUploadInternalFileDetail, fileList: ElUploadInternalFileDetail[]) => void
+  onRemove: (file: TmUploadInternalFileDetail, fileList: TmUploadInternalFileDetail[]) => void
 
   /** Hook function when uploaded successfully */
-  onSuccess: (response: any, file: ElUploadInternalFileDetail, fileList: ElUploadInternalFileDetail) => void
+  onSuccess: (response: any, file: TmUploadInternalFileDetail, fileList: TmUploadInternalFileDetail) => void
 
   /** Hook function when some errors occurs */
-  onError: (err: ErrorEvent, file: ElUploadInternalFileDetail, fileList: ElUploadInternalFileDetail) => void
+  onError: (err: ErrorEvent, file: TmUploadInternalFileDetail, fileList: TmUploadInternalFileDetail) => void
 
   /** Hook function when some progress occurs */
-  onProgress: (event: ElUploadProgressEvent, file: ElUploadInternalFileDetail, fileList: ElUploadInternalFileDetail) => void
+  onProgress: (event: TmUploadProgressEvent, file: TmUploadInternalFileDetail, fileList: TmUploadInternalFileDetail) => void
 
   /** Hook function when file status change */
-  onChange: (file: ElUploadInternalFileDetail, fileList: ElUploadInternalFileDetail[]) => void
+  onChange: (file: TmUploadInternalFileDetail, fileList: TmUploadInternalFileDetail[]) => void
 
   /** Hook function before uploading with the file to be uploaded as its parameter. If false or a Promise is returned, uploading will be aborted */
-  beforeUpload: (file: ElUploadInternalFileDetail) => boolean | Promise<File | boolean>
+  beforeUpload: (file: TmUploadInternalFileDetail) => boolean | Promise<File | boolean>
 
   /** Whether thumbnail is displayed */
   thumbnailMode: boolean
@@ -107,5 +107,5 @@ export declare class ElUpload extends ElementUIComponent {
   limit: number
 
   /** Hook function when limit is exceeded */
-  onExceed: (file: ElUploadInternalFileDetail, fileList: ElUploadInternalFileDetail[]) => void
+  onExceed: (file: TmUploadInternalFileDetail, fileList: TmUploadInternalFileDetail[]) => void
 }

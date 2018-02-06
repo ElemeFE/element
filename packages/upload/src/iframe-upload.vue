@@ -126,8 +126,8 @@ export default {
       frameName,
       disabled
     } = this;
-    const oClass = { 'el-upload': true };
-    oClass[`el-upload--${listType}`] = true;
+    const oClass = { 'tm-upload': true };
+    oClass[`tm-upload--${listType}`] = true;
 
     return (
       <div
@@ -145,7 +145,7 @@ export default {
         </iframe>
         <form ref="form" action={this.action} target={frameName} enctype="multipart/form-data" method="POST">
           <input
-            class="el-upload__input"
+            class="tm-upload__input"
             type="file"
             ref="input"
             name="file"

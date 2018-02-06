@@ -9,8 +9,8 @@ describe('Checkbox', () => {
   it('create', done => {
     vm = createVue({
       template: `
-        <el-checkbox v-model="checked">
-        </el-checkbox>
+        <tm-checkbox v-model="checked">
+        </tm-checkbox>
       `,
       data() {
         return {
@@ -19,7 +19,7 @@ describe('Checkbox', () => {
       }
     }, true);
     let checkboxElm = vm.$el;
-    expect(checkboxElm.classList.contains('el-checkbox')).to.be.true;
+    expect(checkboxElm.classList.contains('tm-checkbox')).to.be.true;
     checkboxElm.click();
     vm.$nextTick(_ => {
       expect(checkboxElm.querySelector('.is-checked')).to.be.ok;
@@ -29,11 +29,11 @@ describe('Checkbox', () => {
   it('disabled', () => {
     vm = createVue({
       template: `
-        <el-checkbox
+        <tm-checkbox
           v-model="checked"
           disabled
         >
-        </el-checkbox>
+        </tm-checkbox>
       `,
       data() {
         return {
@@ -47,8 +47,8 @@ describe('Checkbox', () => {
   it('change event', done => {
     vm = createVue({
       template: `
-        <el-checkbox v-model="checked" @change="onChange">
-        </el-checkbox>
+        <tm-checkbox v-model="checked" @change="onChange">
+        </tm-checkbox>
       `,
       methods: {
         onChange(val) {
@@ -76,12 +76,12 @@ describe('Checkbox', () => {
   it('checkbox group', done => {
     vm = createVue({
       template: `
-        <el-checkbox-group v-model="checkList">
-          <el-checkbox label="a" ref="a"></el-checkbox>
-          <el-checkbox label="b" ref="b"></el-checkbox>
-          <el-checkbox label="c" ref="c"></el-checkbox>
-          <el-checkbox label="d" ref="d"></el-checkbox>
-        </el-checkbox-group>
+        <tm-checkbox-group v-model="checkList">
+          <tm-checkbox label="a" ref="a"></tm-checkbox>
+          <tm-checkbox label="b" ref="b"></tm-checkbox>
+          <tm-checkbox label="c" ref="c"></tm-checkbox>
+          <tm-checkbox label="d" ref="d"></tm-checkbox>
+        </tm-checkbox-group>
       `,
       data() {
         return {
@@ -100,10 +100,10 @@ describe('Checkbox', () => {
   it('checkbox group change event', done => {
     vm = createVue({
       template: `
-        <el-checkbox-group v-model="checkList" @change="onChange">
-          <el-checkbox label="a" ref="a"></el-checkbox>
-          <el-checkbox label="b" ref="b"></el-checkbox>
-        </el-checkbox-group>
+        <tm-checkbox-group v-model="checkList" @change="onChange">
+          <tm-checkbox label="a" ref="a"></tm-checkbox>
+          <tm-checkbox label="b" ref="b"></tm-checkbox>
+        </tm-checkbox-group>
       `,
       methods: {
         onChange(val) {
@@ -128,16 +128,16 @@ describe('Checkbox', () => {
   it('checkbox group minimum and maximum', done => {
     vm = createVue({
       template: `
-        <el-checkbox-group 
+        <tm-checkbox-group 
           v-model="checkList" 
           :min="1" 
           :max="2"
         >
-          <el-checkbox label="a" ref="a"></el-checkbox>
-          <el-checkbox label="b" ref="b"></el-checkbox>
-          <el-checkbox label="c" ref="c"></el-checkbox>
-          <el-checkbox label="d" ref="d"></el-checkbox>
-        </el-checkbox-group>
+          <tm-checkbox label="a" ref="a"></tm-checkbox>
+          <tm-checkbox label="b" ref="b"></tm-checkbox>
+          <tm-checkbox label="c" ref="c"></tm-checkbox>
+          <tm-checkbox label="d" ref="d"></tm-checkbox>
+        </tm-checkbox-group>
       `,
       data() {
         return {
@@ -167,14 +167,14 @@ describe('Checkbox', () => {
   it('nested group', done => {
     vm = createVue({
       template: `
-        <el-checkbox-group v-model="checkList">
-          <el-row>
-            <el-checkbox label="a" ref="a"></el-checkbox>
-            <el-checkbox label="b" ref="b"></el-checkbox>
-            <el-checkbox label="c" ref="c"></el-checkbox>
-            <el-checkbox label="d" ref="d"></el-checkbox>
-          </el-row>
-        </el-checkbox-group>
+        <tm-checkbox-group v-model="checkList">
+          <tm-row>
+            <tm-checkbox label="a" ref="a"></tm-checkbox>
+            <tm-checkbox label="b" ref="b"></tm-checkbox>
+            <tm-checkbox label="c" ref="c"></tm-checkbox>
+            <tm-checkbox label="d" ref="d"></tm-checkbox>
+          </tm-row>
+        </tm-checkbox-group>
       `,
       data() {
         return {
@@ -193,7 +193,7 @@ describe('Checkbox', () => {
   it('true false label', done => {
     vm = createVue({
       template: `
-        <el-checkbox true-label="a" :false-label="3" v-model="checked"></el-checkbox>
+        <tm-checkbox true-label="a" :false-label="3" v-model="checked"></tm-checkbox>
       `,
       data() {
         return {
@@ -211,10 +211,10 @@ describe('Checkbox', () => {
     vm = createVue({
       template: `
         <div>
-          <el-checkbox v-model="checked" checked></el-checkbox>
-          <el-checkbox-group v-model="checklist">
-            <el-checkbox checked label="a"></el-checkbox>
-          </el-checkbox-group>
+          <tm-checkbox v-model="checked" checked></tm-checkbox>
+          <tm-checkbox-group v-model="checklist">
+            <tm-checkbox checked label="a"></tm-checkbox>
+          </tm-checkbox-group>
         </div>
       `,
       data() {
@@ -237,8 +237,8 @@ describe('Checkbox', () => {
     it('create', done => {
       vm = createVue({
         template: `
-          <el-checkbox-button v-model="checked">
-          </el-checkbox-button>
+          <tm-checkbox-button v-model="checked">
+          </tm-checkbox-button>
         `,
         data() {
           return {
@@ -247,7 +247,7 @@ describe('Checkbox', () => {
         }
       }, true);
       let checkboxElm = vm.$el;
-      expect(checkboxElm.classList.contains('el-checkbox-button')).to.be.true;
+      expect(checkboxElm.classList.contains('tm-checkbox-button')).to.be.true;
       checkboxElm.click();
       vm.$nextTick(_ => {
         expect(checkboxElm.classList.contains('is-checked')).to.be.ok;
@@ -257,11 +257,11 @@ describe('Checkbox', () => {
     it('disabled', () => {
       vm = createVue({
         template: `
-          <el-checkbox-button
+          <tm-checkbox-button
             v-model="checked"
             disabled
           >
-          </el-checkbox-button>
+          </tm-checkbox-button>
         `,
         data() {
           return {
@@ -276,8 +276,8 @@ describe('Checkbox', () => {
     it('change event', done => {
       vm = createVue({
         template: `
-        <el-checkbox-button v-model="checked" @change="onChange">
-        </el-checkbox-button>
+        <tm-checkbox-button v-model="checked" @change="onChange">
+        </tm-checkbox-button>
       `,
         methods: {
           onChange(val) {
@@ -306,12 +306,12 @@ describe('Checkbox', () => {
     it('checkbox group', done => {
       vm = createVue({
         template: `
-          <el-checkbox-group v-model="checkList">
-            <el-checkbox-button label="a" ref="a"></el-checkbox-button>
-            <el-checkbox-button label="b" ref="b"></el-checkbox-button>
-            <el-checkbox-button label="c" ref="c"></el-checkbox-button>
-            <el-checkbox-button label="d" ref="d"></el-checkbox-button>
-          </el-checkbox-group>
+          <tm-checkbox-group v-model="checkList">
+            <tm-checkbox-button label="a" ref="a"></tm-checkbox-button>
+            <tm-checkbox-button label="b" ref="b"></tm-checkbox-button>
+            <tm-checkbox-button label="c" ref="c"></tm-checkbox-button>
+            <tm-checkbox-button label="d" ref="d"></tm-checkbox-button>
+          </tm-checkbox-group>
         `,
         data() {
           return {
@@ -335,12 +335,12 @@ describe('Checkbox', () => {
     it('checkbox-button group change event', done => {
       vm = createVue({
         template: `
-        <el-checkbox-group v-model="checkList" @change="onChange">
-          <el-checkbox-button label="a" ref="a"></el-checkbox-button>
-          <el-checkbox-button label="b" ref="b"></el-checkbox-button>
-          <el-checkbox-button label="c" ref="c"></el-checkbox-button>
-          <el-checkbox-button label="d" ref="d"></el-checkbox-button>
-        </el-checkbox-group>
+        <tm-checkbox-group v-model="checkList" @change="onChange">
+          <tm-checkbox-button label="a" ref="a"></tm-checkbox-button>
+          <tm-checkbox-button label="b" ref="b"></tm-checkbox-button>
+          <tm-checkbox-button label="c" ref="c"></tm-checkbox-button>
+          <tm-checkbox-button label="d" ref="d"></tm-checkbox-button>
+        </tm-checkbox-group>
       `,
         methods: {
           onChange(val) {
@@ -368,12 +368,12 @@ describe('Checkbox', () => {
     it('checkbox group props', () => {
       vm = createVue({
         template: `
-          <el-checkbox-group v-model="checkList" size="large" fill="#FF0000" text-color="#000">
-            <el-checkbox-button label="a" ref="a"></el-checkbox-button>
-            <el-checkbox-button label="b" ref="b"></el-checkbox-button>
-            <el-checkbox-button label="c" ref="c"></el-checkbox-button>
-            <el-checkbox-button label="d" ref="d"></el-checkbox-button>
-          </el-checkbox-group>
+          <tm-checkbox-group v-model="checkList" size="large" fill="#FF0000" text-color="#000">
+            <tm-checkbox-button label="a" ref="a"></tm-checkbox-button>
+            <tm-checkbox-button label="b" ref="b"></tm-checkbox-button>
+            <tm-checkbox-button label="c" ref="c"></tm-checkbox-button>
+            <tm-checkbox-button label="d" ref="d"></tm-checkbox-button>
+          </tm-checkbox-group>
         `,
         data() {
           return {
@@ -383,11 +383,11 @@ describe('Checkbox', () => {
       }, true);
       expect(vm.checkList.length === 2).to.be.true;
       expect(vm.$refs.a.$el.classList.contains('is-checked')).to.be.true;
-      expect(vm.$refs.a.$el.classList.contains('el-checkbox-button--large')).to.be.true;
-      expect(vm.$refs.a.$el.querySelector('.el-checkbox-button__inner').style.backgroundColor).to.be.eql('rgb(255, 0, 0)');
-      expect(vm.$refs.a.$el.querySelector('.el-checkbox-button__inner').style.boxShadow).to.be.eql('rgb(255, 0, 0) -1px 0px 0px 0px');
-      expect(vm.$refs.a.$el.querySelector('.el-checkbox-button__inner').style.borderColor).to.be.eql('rgb(255, 0, 0)');
-      expect(vm.$refs.a.$el.querySelector('.el-checkbox-button__inner').style.color).to.be.eql('rgb(0, 0, 0)');
+      expect(vm.$refs.a.$el.classList.contains('tm-checkbox-button--large')).to.be.true;
+      expect(vm.$refs.a.$el.querySelector('.tm-checkbox-button__inner').style.backgroundColor).to.be.eql('rgb(255, 0, 0)');
+      expect(vm.$refs.a.$el.querySelector('.tm-checkbox-button__inner').style.boxShadow).to.be.eql('rgb(255, 0, 0) -1px 0px 0px 0px');
+      expect(vm.$refs.a.$el.querySelector('.tm-checkbox-button__inner').style.borderColor).to.be.eql('rgb(255, 0, 0)');
+      expect(vm.$refs.a.$el.querySelector('.tm-checkbox-button__inner').style.color).to.be.eql('rgb(0, 0, 0)');
       expect(vm.$refs.b.$el.classList.contains('is-checked')).to.be.false;
       expect(vm.$refs.c.$el.classList.contains('is-checked')).to.be.false;
       expect(vm.$refs.d.$el.classList.contains('is-checked')).to.be.true;
@@ -396,16 +396,16 @@ describe('Checkbox', () => {
     it('checkbox group minimum and maximum', done => {
       vm = createVue({
         template: `
-          <el-checkbox-group 
+          <tm-checkbox-group 
             v-model="checkList" 
             :min="1" 
             :max="2"
           >
-            <el-checkbox-button label="a" ref="a"></el-checkbox-button>
-            <el-checkbox-button label="b" ref="b"></el-checkbox-button>
-            <el-checkbox-button label="c" ref="c"></el-checkbox-button>
-            <el-checkbox-button label="d" ref="d"></el-checkbox-button>
-          </el-checkbox-group>
+            <tm-checkbox-button label="a" ref="a"></tm-checkbox-button>
+            <tm-checkbox-button label="b" ref="b"></tm-checkbox-button>
+            <tm-checkbox-button label="c" ref="c"></tm-checkbox-button>
+            <tm-checkbox-button label="d" ref="d"></tm-checkbox-button>
+          </tm-checkbox-group>
         `,
         data() {
           return {
@@ -435,14 +435,14 @@ describe('Checkbox', () => {
     it('nested group', done => {
       vm = createVue({
         template: `
-          <el-checkbox-group v-model="checkList">
-            <el-row>
-              <el-checkbox-button label="a" ref="a"></el-checkbox-button>
-              <el-checkbox-button label="b" ref="b"></el-checkbox-button>
-              <el-checkbox-button label="c" ref="c"></el-checkbox-button>
-              <el-checkbox-button label="d" ref="d"></el-checkbox-button>
-            </el-row>
-          </el-checkbox-group>
+          <tm-checkbox-group v-model="checkList">
+            <tm-row>
+              <tm-checkbox-button label="a" ref="a"></tm-checkbox-button>
+              <tm-checkbox-button label="b" ref="b"></tm-checkbox-button>
+              <tm-checkbox-button label="c" ref="c"></tm-checkbox-button>
+              <tm-checkbox-button label="d" ref="d"></tm-checkbox-button>
+            </tm-row>
+          </tm-checkbox-group>
         `,
         data() {
           return {
@@ -461,11 +461,11 @@ describe('Checkbox', () => {
     it('true false label', done => {
       vm = createVue({
         template: `
-          <el-checkbox-button 
+          <tm-checkbox-button 
             true-label="a" 
             :false-label="3" 
             v-model="checked"
-          ></el-checkbox-button>
+          ></tm-checkbox-button>
         `,
         data() {
           return {
@@ -483,10 +483,10 @@ describe('Checkbox', () => {
       vm = createVue({
         template: `
           <div>
-            <el-checkbox-button v-model="checked" checked></el-checkbox-button>
-            <el-checkbox-group v-model="checklist">
-              <el-checkbox-button checked label="a"></el-checkbox-button>
-            </el-checkbox-group>
+            <tm-checkbox-button v-model="checked" checked></tm-checkbox-button>
+            <tm-checkbox-group v-model="checklist">
+              <tm-checkbox-button checked label="a"></tm-checkbox-button>
+            </tm-checkbox-group>
           </div>
         `,
         data() {

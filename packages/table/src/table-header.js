@@ -1,6 +1,6 @@
 import { hasClass, addClass, removeClass } from 'element-ui/src/utils/dom';
-import ElCheckbox from 'element-ui/packages/checkbox';
-import ElTag from 'element-ui/packages/tag';
+import TmCheckbox from 'element-ui/packages/checkbox';
+import TmTag from 'element-ui/packages/tag';
 import Vue from 'vue';
 import FilterPanel from './filter-panel.vue';
 import LayoutObserver from './layout-observer';
@@ -64,7 +64,7 @@ const convertToRows = (originColumns) => {
 };
 
 export default {
-  name: 'ElTableHeader',
+  name: 'TmTableHeader',
 
   mixins: [LayoutObserver],
 
@@ -76,7 +76,7 @@ export default {
     if (isGroup) this.$parent.isGroup = true;
     return (
       <table
-        class="el-table__header"
+        class="tm-table__header"
         cellspacing="0"
         cellpadding="0"
         border="0">
@@ -125,7 +125,7 @@ export default {
                         }
                         {
                           column.filterable
-                            ? <span class="el-table__column-filter-trigger" on-click={ ($event) => this.handleFilterClick($event, column) }><i class={ ['el-icon-arrow-down', column.filterOpened ? 'el-icon-arrow-up' : ''] }></i></span>
+                            ? <span class="tm-table__column-filter-trigger" on-click={ ($event) => this.handleFilterClick($event, column) }><i class={ ['tm-icon-arrow-down', column.filterOpened ? 'tm-icon-arrow-up' : ''] }></i></span>
                             : ''
                         }
                       </div>
@@ -161,8 +161,8 @@ export default {
   },
 
   components: {
-    ElCheckbox,
-    ElTag
+    TmCheckbox,
+    TmTag
   },
 
   computed: {

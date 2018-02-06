@@ -10,8 +10,8 @@
   height: $--switch-height;
   vertical-align: middle;
   @include when(disabled) {
-    & .el-switch__core,
-    & .el-switch__label {
+    & .tm-switch__core,
+    & .tm-switch__label {
       cursor: not-allowed;
     }
   }
@@ -49,7 +49,7 @@
     height: 0;
     opacity: 0;
     margin: 0;
-    &:focus ~ .el-switch__core {
+    &:focus ~ .tm-switch__core {
       outline: 1px solid $--color-primary;
     }
   }
@@ -69,7 +69,7 @@
     transition: border-color .3s, background-color .3s;
     vertical-align: middle;
 
-    & .el-switch__button {
+    & .tm-switch__button {
       position: absolute;
       top: 1px;
       left: 1px;
@@ -82,7 +82,7 @@
   }
 
   @include when(checked) {
-    .el-switch__core {
+    .tm-switch__core {
       border-color: $--switch-on-color;
       background-color: $--switch-on-color;
     }
@@ -93,13 +93,13 @@
   }
 
   @include m(wide) {
-    .el-switch__label {
-      &.el-switch__label--left {
+    .tm-switch__label {
+      &.tm-switch__label--left {
         span {
           left: 10px;
         }
       }
-      &.el-switch__label--right {
+      &.tm-switch__label--right {
         span {
           right: 10px;
         }

@@ -10,12 +10,12 @@ describe('Autocomplete', () => {
       template: `
         <div>
           <button class="btn">a</button>
-          <el-autocomplete
+          <tm-autocomplete
             ref="autocomplete"
             v-model="state"
             :fetch-suggestions="querySearch"
             placeholder="请输入内容autocomplete1"
-          ></el-autocomplete>
+          ></tm-autocomplete>
         </div>
       `,
       data() {
@@ -57,7 +57,7 @@ describe('Autocomplete', () => {
     setTimeout(_ => {
       const suggestions = vm.$refs.autocomplete.$refs.suggestions.$el;
       expect(suggestions.style.display).to.not.equal('none');
-      expect(suggestions.querySelectorAll('.el-autocomplete-suggestion__list li').length).to.be.equal(4);
+      expect(suggestions.querySelectorAll('.tm-autocomplete-suggestion__list li').length).to.be.equal(4);
 
       triggerClick(document);
       setTimeout(_ => {
@@ -69,12 +69,12 @@ describe('Autocomplete', () => {
   it('select', done => {
     vm = createVue({
       template: `
-        <el-autocomplete
+        <tm-autocomplete
           v-model="state"
           ref="autocomplete"
           :fetch-suggestions="querySearch"
           placeholder="请输入内容autocomplete2"
-        ></el-autocomplete>
+        ></tm-autocomplete>
       `,
       data() {
         return {
@@ -116,7 +116,7 @@ describe('Autocomplete', () => {
 
     setTimeout(_ => {
       const suggestions = autocomplete.$refs.suggestions.$el;
-      const suggestionList = suggestions.querySelectorAll('.el-autocomplete-suggestion__list li');
+      const suggestionList = suggestions.querySelectorAll('.tm-autocomplete-suggestion__list li');
       suggestionList[1].click();
       setTimeout(_ => {
         expect(inputElm.value).to.be.equal('Hot honey 首尔炸鸡（仙霞路）');
@@ -130,13 +130,13 @@ describe('Autocomplete', () => {
   it('props', done => {
     vm = createVue({
       template: `
-        <el-autocomplete
+        <tm-autocomplete
           v-model="state"
           ref="autocomplete"
           value-key="address"
           :fetch-suggestions="querySearch"
           placeholder="请输入内容autocomplete2"
-        ></el-autocomplete>
+        ></tm-autocomplete>
       `,
       data() {
         return {
@@ -178,7 +178,7 @@ describe('Autocomplete', () => {
 
     setTimeout(_ => {
       const suggestions = autocomplete.$refs.suggestions.$el;
-      const suggestionList = suggestions.querySelectorAll('.el-autocomplete-suggestion__list li');
+      const suggestionList = suggestions.querySelectorAll('.tm-autocomplete-suggestion__list li');
       expect(suggestionList[1].innerHTML === '上海市长宁区淞虹路661号');
       suggestionList[1].click();
       setTimeout(_ => {
@@ -193,12 +193,12 @@ describe('Autocomplete', () => {
   it('highlight', done => {
     vm = createVue({
       template: `
-        <el-autocomplete
+        <tm-autocomplete
           ref="autocomplete"
           v-model="state"
           :fetch-suggestions="querySearch"
           placeholder="请输入内容autocomplete3"
-        ></el-autocomplete>
+        ></tm-autocomplete>
       `,
       data() {
         return {
@@ -256,8 +256,8 @@ describe('Autocomplete', () => {
     setTimeout(_ => {
       autocomplete.highlight(8);
       vm.$nextTick(_ => {
-        const suggestions = autocomplete.$refs.suggestions.$el.querySelector('.el-autocomplete-suggestion__wrap');
-        let suggestionsList = suggestions.querySelectorAll('.el-autocomplete-suggestion__list li');
+        const suggestions = autocomplete.$refs.suggestions.$el.querySelector('.tm-autocomplete-suggestion__wrap');
+        let suggestionsList = suggestions.querySelectorAll('.tm-autocomplete-suggestion__list li');
         let highlightedItem = suggestionsList[8];
         expect(highlightedItem.classList.contains('highlighted')).to.be.true;
         expect(suggestions.scrollTop === highlightedItem.scrollHeight).to.be.true;
@@ -268,12 +268,12 @@ describe('Autocomplete', () => {
   it('highlight out of bounds', done => {
     vm = createVue({
       template: `
-        <el-autocomplete
+        <tm-autocomplete
           ref="autocomplete"
           v-model="state"
           :fetch-suggestions="querySearch"
           placeholder="请输入内容autocomplete3"
-        ></el-autocomplete>
+        ></tm-autocomplete>
       `,
       data() {
         return {
@@ -321,7 +321,7 @@ describe('Autocomplete', () => {
       autocomplete.highlight(15);
       vm.$nextTick(_ => {
         const suggestions = autocomplete.$refs.suggestions.$el;
-        const suggestionsList = suggestions.querySelectorAll('.el-autocomplete-suggestion__list li');
+        const suggestionsList = suggestions.querySelectorAll('.tm-autocomplete-suggestion__list li');
         let highlightedItem = suggestionsList[11];
         expect(highlightedItem.className).to.be.equal('highlighted');
         done();
@@ -331,13 +331,13 @@ describe('Autocomplete', () => {
   it('triggerOnFocus', done => {
     vm = createVue({
       template: `
-        <el-autocomplete
+        <tm-autocomplete
           ref="autocomplete"
           v-model="state"
           :fetch-suggestions="querySearch"
           :trigger-on-focus="false"
           placeholder="请输入内容autocomplete1"
-        ></el-autocomplete>
+        ></tm-autocomplete>
       `,
       data() {
         return {
@@ -381,13 +381,13 @@ describe('Autocomplete', () => {
   it('event:focus & blur', done => {
     vm = createVue({
       template: `
-        <el-autocomplete
+        <tm-autocomplete
           ref="input"
           v-model="state"
           :fetch-suggestions="querySearch"
           :trigger-on-focus="false"
           placeholder="请输入内容autocomplete1"
-        ></el-autocomplete>
+        ></tm-autocomplete>
       `,
       data() {
         return {

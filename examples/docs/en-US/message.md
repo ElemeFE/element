@@ -93,8 +93,8 @@ Displays at the top, and disappears after 3 seconds.
 
 ```html
 <template>
-  <el-button :plain="true" @click="open">Show message</el-button>
-  <el-button :plain="true" @click="openVn">VNode</el-button>
+  <tm-button :plain="true" @click="open">Show message</tm-button>
+  <tm-button :plain="true" @click="openVn">VNode</tm-button>
 </template>
 
 <script>
@@ -126,10 +126,10 @@ Used to show the feedback of Success, Warning, Message and Error activities.
 :::demo When you need more customizations, Message component can also take an object as parameter. For example, setting value of `type` can define different types, and its default is `info`. In such cases the main body is passed in as the value of `message`. Also, we have registered methods for different types, so you can directly call it without passing a type like `open4`.
 ```html
 <template>
-  <el-button :plain="true" @click="open2">success</el-button>
-  <el-button :plain="true" @click="open3">warning</el-button>
-  <el-button :plain="true" @click="open">message</el-button>
-  <el-button :plain="true" @click="open4">error</el-button>
+  <tm-button :plain="true" @click="open2">success</tm-button>
+  <tm-button :plain="true" @click="open3">warning</tm-button>
+  <tm-button :plain="true" @click="open">message</tm-button>
+  <tm-button :plain="true" @click="open4">error</tm-button>
 </template>
 
 <script>
@@ -168,10 +168,10 @@ A close button can be added.
 :::demo A default Message cannot be closed manually. If you need a closable message, you can set `showClose` field. Besides, same as notification, message has a controllable `duration`. Default duration is 3000 ms, and it won't disappear when set to `0`.
 ```html
 <template>
-  <el-button :plain="true" @click="open5">message</el-button>
-  <el-button :plain="true" @click="open6">success</el-button>
-  <el-button :plain="true" @click="open7">warning</el-button>
-  <el-button :plain="true" @click="open8">error</el-button>
+  <tm-button :plain="true" @click="open5">message</tm-button>
+  <tm-button :plain="true" @click="open6">success</tm-button>
+  <tm-button :plain="true" @click="open7">warning</tm-button>
+  <tm-button :plain="true" @click="open8">error</tm-button>
 </template>
 
 <script>
@@ -220,7 +220,7 @@ Use the `center` attribute to center the text.
 
 ```html
 <template>
-  <el-button :plain="true" @click="openCenter">Centered text</el-button>
+  <tm-button :plain="true" @click="openCenter">Centered text</tm-button>
 </template>
 
 <script>
@@ -245,7 +245,7 @@ Use the `center` attribute to center the text.
 
 ```html
 <template>
-  <el-button :plain="true" @click="openHTML">Use HTML String</el-button>
+  <tm-button :plain="true" @click="openHTML">Use HTML String</tm-button>
 </template>
 
 <script>

@@ -22,7 +22,7 @@
 
 <style>
   .demo-box.demo-input-number {
-    .el-input-number + .el-input-number {
+    .tm-input-number + .tm-input-number {
       margin-left: 10px;
     }
   }
@@ -34,11 +34,11 @@ Input numerical values with a customizable range.
 
 ### Basic usage
 
-:::demo Bind a variable to `v-model` in `<el-input-number>` element and you are set.
+:::demo Bind a variable to `v-model` in `<tm-input-number>` element and you are set.
 
 ```html
 <template>
-  <el-input-number v-model="num1" @change="handleChange" :min="1" :max="10"></el-input-number>
+  <tm-input-number v-model="num1" @change="handleChange" :min="1" :max="10"></tm-input-number>
 </template>
 <script>
   export default {
@@ -63,7 +63,7 @@ Input numerical values with a customizable range.
 
 ```html
 <template>
-  <el-input-number v-model="num2" :disabled="true"></el-input-number>
+  <tm-input-number v-model="num2" :disabled="true"></tm-input-number>
 </template>
 <script>
   export default {
@@ -85,7 +85,7 @@ Allows you to define incremental steps.
 
 ```html
 <template>
-  <el-input-number v-model="num3" :step="2"></el-input-number>
+  <tm-input-number v-model="num3" :step="2"></tm-input-number>
 </template>
 <script>
   export default {
@@ -107,10 +107,10 @@ Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
 
 ```html
 <template>
-  <el-input-number v-model="num4"></el-input-number>
-    <el-input-number size="medium" v-model="num5"></el-input-number>
-    <el-input-number size="small" v-model="num6"></el-input-number>
-    <el-input-number size="mini" v-model="num7"></el-input-number>
+  <tm-input-number v-model="num4"></tm-input-number>
+    <tm-input-number size="medium" v-model="num5"></tm-input-number>
+    <tm-input-number size="small" v-model="num6"></tm-input-number>
+    <tm-input-number size="mini" v-model="num7"></tm-input-number>
 </template>
 <script>
   export default {
@@ -132,7 +132,7 @@ Use attribute `size` to set additional sizes with `medium`, `small` or `mini`.
 :::demo Set `controls-position` to decide the position of control buttons.
 ```html
 <template>
-  <el-input-number v-model="num8" controls-position="right" @change="handleChange" :min="1" :max="10"></el-input-number>
+  <tm-input-number v-model="num8" controls-position="right" @change="handleChange" :min="1" :max="10"></tm-input-number>
 </template>
 <script>
   export default {

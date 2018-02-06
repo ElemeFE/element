@@ -4,7 +4,7 @@ import Notification from 'packages/notification';
 
 describe('Notification', () => {
   afterEach(() => {
-    const el = document.querySelector('.el-notification');
+    const el = document.querySelector('.tm-notification');
     if (!el) return;
     if (el.parentNode) {
       el.parentNode.removeChild(el);
@@ -19,9 +19,9 @@ describe('Notification', () => {
       message: '玻璃蜡烛',
       duration: 500
     });
-    expect(document.querySelector('.el-notification')).to.exist;
+    expect(document.querySelector('.tm-notification')).to.exist;
     setTimeout(() => {
-      expect(document.querySelector('.el-notification')).to.not.exist;
+      expect(document.querySelector('.tm-notification')).to.not.exist;
       done();
     }, 1000);
   });
@@ -31,9 +31,9 @@ describe('Notification', () => {
       message: '苍白母马'
     });
     setTimeout(() => {
-      document.querySelector('.el-notification__closeBtn').click();
+      document.querySelector('.tm-notification__closeBtn').click();
       setTimeout(() => {
-        expect(document.querySelector('.el-notification')).to.not.exist;
+        expect(document.querySelector('.tm-notification')).to.not.exist;
         done();
       }, 500);
     }, 500);
@@ -45,10 +45,10 @@ describe('Notification', () => {
       message: '狮鹫',
       duration: 0
     });
-    const group = document.querySelector('.el-notification__group');
-    const title = group.querySelector('.el-notification__title');
-    const message = group.querySelector('.el-notification__content p');
-    expect(document.querySelector('.el-notification')).to.exist;
+    const group = document.querySelector('.tm-notification__group');
+    const title = group.querySelector('.tm-notification__title');
+    const message = group.querySelector('.tm-notification__content p');
+    expect(document.querySelector('.tm-notification')).to.exist;
     expect(title.textContent).to.equal('狮子');
     expect(message.textContent).to.equal('狮鹫');
   });
@@ -60,7 +60,7 @@ describe('Notification', () => {
       dangerouslyUseHTMLString: true,
       duration: 0
     });
-    const message = document.querySelector('.el-notification__content strong');
+    const message = document.querySelector('.tm-notification__content strong');
     expect(message.textContent).to.equal('狮鹫');
   });
 
@@ -71,8 +71,8 @@ describe('Notification', () => {
     Notification({
       message: h('p', { style: { color: 'red' } }, '大美兴，川普王')
     });
-    const group = document.querySelector('.el-notification__group');
-    const message = group.querySelector('.el-notification__content');
+    const group = document.querySelector('.tm-notification__group');
+    const message = group.querySelector('.tm-notification__content');
 
     expect(message.innerHTML).to.equal('<p style="color: red;">大美兴，川普王</p>');
   });
@@ -82,15 +82,15 @@ describe('Notification', () => {
     const h = fakeVM.$createElement;
 
     Notification.error(h('p', { style: { color: 'green' } }, '+1s'));
-    const group = document.querySelector('.el-notification__group');
-    const message = group.querySelector('.el-notification__content');
+    const group = document.querySelector('.tm-notification__group');
+    const message = group.querySelector('.tm-notification__content');
 
     expect(message.innerHTML).to.equal('<p style="color: green;">+1s</p>');
   });
 
   it('invoke with type', () => {
     Notification.success('太阳之子');
-    expect(document.querySelector('.el-notification').__vue__.type).to.equal('success');
+    expect(document.querySelector('.tm-notification').__vue__.type).to.equal('success');
   });
 
   it('reset timer', done => {
@@ -99,10 +99,10 @@ describe('Notification', () => {
       duration: 1000
     });
     setTimeout(() => {
-      triggerEvent(document.querySelector('.el-notification'), 'mouseenter');
+      triggerEvent(document.querySelector('.tm-notification'), 'mouseenter');
       setTimeout(() => {
-        triggerEvent(document.querySelector('.el-notification'), 'mouseleave');
-        expect(document.querySelector('.el-notification')).to.exist;
+        triggerEvent(document.querySelector('.tm-notification'), 'mouseleave');
+        expect(document.querySelector('.tm-notification')).to.exist;
         done();
       }, 700);
     }, 500);
@@ -114,7 +114,7 @@ describe('Notification', () => {
       showClose: false
     });
     setTimeout(() => {
-      expect(document.querySelector('.el-notification__closeBtn')).to.not.exist;
+      expect(document.querySelector('.tm-notification__closeBtn')).to.not.exist;
       done();
     }, 500);
   });

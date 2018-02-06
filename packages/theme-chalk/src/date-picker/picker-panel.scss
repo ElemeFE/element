@@ -98,8 +98,8 @@
   }
 }
 
-.el-picker-panel *[slot=sidebar],
-.el-picker-panel__sidebar {
+.tm-picker-panel *[slot=sidebar],
+.tm-picker-panel__sidebar {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -111,7 +111,7 @@
   overflow: auto;
 }
 
-.el-picker-panel *[slot=sidebar] + .el-picker-panel__body,
-.el-picker-panel__sidebar + .el-picker-panel__body {
+.tm-picker-panel *[slot=sidebar] + .tm-picker-panel__body,
+.tm-picker-panel__sidebar + .tm-picker-panel__body {
   margin-left: 110px;
 }

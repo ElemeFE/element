@@ -128,7 +128,7 @@
 </script>
 
 <style>
-  .demo-select .el-select {
+  .demo-select .tm-select {
     width: 240px;
   }
 </style>
@@ -139,18 +139,18 @@ When there are plenty of options, use a drop-down menu to display and select des
 
 ### Basic usage
 
-:::demo `v-model` is the value of `el-option` that is currently selected.
+:::demo `v-model` is the value of `tm-option` that is currently selected.
 
 ```html
 <template>
-  <el-select v-model="value" placeholder="Select">
-    <el-option
+  <tm-select v-model="value" placeholder="Select">
+    <tm-option
       v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value">
-    </el-option>
-  </el-select>
+    </tm-option>
+  </tm-select>
 </template>
 
 <script>
@@ -183,19 +183,19 @@ When there are plenty of options, use a drop-down menu to display and select des
 
 ### Disabled option
 
-:::demo Set the value of `disabled` in `el-option` to `true` to disable this option.
+:::demo Set the value of `disabled` in `tm-option` to `true` to disable this option.
 
 ```html
 <template>
-  <el-select v-model="value2" placeholder="Select">
-    <el-option
+  <tm-select v-model="value2" placeholder="Select">
+    <tm-option
       v-for="item in options2"
       :key="item.value"
       :label="item.label"
       :value="item.value"
       :disabled="item.disabled">
-    </el-option>
-  </el-select>
+    </tm-option>
+  </tm-select>
 </template>
 
 <script>
@@ -231,17 +231,17 @@ When there are plenty of options, use a drop-down menu to display and select des
 
 Disable the whole component.
 
-:::demo Set `disabled` of `el-select` to make it disabled.
+:::demo Set `disabled` of `tm-select` to make it disabled.
 ```html
 <template>
-  <el-select v-model="value3" disabled placeholder="Select">
-    <el-option
+  <tm-select v-model="value3" disabled placeholder="Select">
+    <tm-option
       v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value">
-    </el-option>
-  </el-select>
+    </tm-option>
+  </tm-select>
 </template>
 
 <script>
@@ -276,17 +276,17 @@ Disable the whole component.
 
 You can clear Select using a clear icon.
 
-:::demo Set `clearable` attribute for `el-select` and a clear icon will appear. Note that `clearable` is only for single select.
+:::demo Set `clearable` attribute for `tm-select` and a clear icon will appear. Note that `clearable` is only for single select.
 ```html
 <template>
-  <el-select v-model="value4" clearable placeholder="Select">
-    <el-option
+  <tm-select v-model="value4" clearable placeholder="Select">
+    <tm-option
       v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value">
-    </el-option>
-  </el-select>
+    </tm-option>
+  </tm-select>
 </template>
 
 <script>
@@ -321,31 +321,31 @@ You can clear Select using a clear icon.
 
 Multiple select uses tags to display selected options.
 
-:::demo Set `multiple` attribute for `el-select` to enable multiple mode. In this case, the value of `v-model` will be an array of selected options. By default the selected options will be displayed as Tags. You can collapse them to a text by using `collapse-tags` attribute.
+:::demo Set `multiple` attribute for `tm-select` to enable multiple mode. In this case, the value of `v-model` will be an array of selected options. By default the selected options will be displayed as Tags. You can collapse them to a text by using `collapse-tags` attribute.
 ```html
 <template>
-  <el-select v-model="value5" multiple placeholder="Select">
-    <el-option
+  <tm-select v-model="value5" multiple placeholder="Select">
+    <tm-option
       v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value">
-    </el-option>
-  </el-select>
+    </tm-option>
+  </tm-select>
   
-  <el-select
+  <tm-select
     v-model="value11"
     multiple
     collapse-tags
     style="margin-left: 20px;"
     placeholder="Select">
-    <el-option
+    <tm-option
       v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value">
-    </el-option>
-  </el-select>
+    </tm-option>
+  </tm-select>
 </template>
 
 <script>
@@ -381,20 +381,20 @@ Multiple select uses tags to display selected options.
 
 You can customize HTML templates for options.
 
-:::demo Insert customized HTML templates into the slot of `el-option`.
+:::demo Insert customized HTML templates into the slot of `tm-option`.
 
 ```html
 <template>
-  <el-select v-model="value6" placeholder="Select">
-    <el-option
+  <tm-select v-model="value6" placeholder="Select">
+    <tm-option
       v-for="item in cities"
       :key="item.value"
       :label="item.label"
       :value="item.value">
       <span style="float: left">{{ item.label }}</span>
       <span style="float: right; color: #8492a6; font-size: 13px">{{ item.value }}</span>
-    </el-option>
-  </el-select>
+    </tm-option>
+  </tm-select>
 </template>
 
 <script>
@@ -432,23 +432,23 @@ You can customize HTML templates for options.
 
 Display options in groups.
 
-:::demo Use `el-option-group` to group the options, and its `label` attribute stands for the name of the group.
+:::demo Use `tm-option-group` to group the options, and its `label` attribute stands for the name of the group.
 
 ```html
 <template>
-  <el-select v-model="value7" placeholder="Select">
-    <el-option-group
+  <tm-select v-model="value7" placeholder="Select">
+    <tm-option-group
       v-for="group in options3"
       :key="group.label"
       :label="group.label">
-      <el-option
+      <tm-option
         v-for="item in group.options"
         :key="item.value"
         :label="item.label"
         :value="item.value">
-      </el-option>
-    </el-option-group>
-  </el-select>
+      </tm-option>
+    </tm-option-group>
+  </tm-select>
 </template>
 
 <script>
@@ -492,17 +492,17 @@ Display options in groups.
 
 You can filter options for your desired ones.
 
-:::demo Adding `filterable` to `el-select` enables filtering. By default, Select will find all the options whose `label` attribute contains the input value. If you prefer other filtering strategies, you can pass the `filter-method`. `filter-method` is a `Function` that gets called when the input value changes, and its parameter is the current input value.
+:::demo Adding `filterable` to `tm-select` enables filtering. By default, Select will find all the options whose `label` attribute contains the input value. If you prefer other filtering strategies, you can pass the `filter-method`. `filter-method` is a `Function` that gets called when the input value changes, and its parameter is the current input value.
 ```html
 <template>
-  <el-select v-model="value8" filterable placeholder="Select">
-    <el-option
+  <tm-select v-model="value8" filterable placeholder="Select">
+    <tm-option
       v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value">
-    </el-option>
-  </el-select>
+    </tm-option>
+  </tm-select>
 </template>
 
 <script>
@@ -537,11 +537,11 @@ You can filter options for your desired ones.
 
 Enter keywords and search data from server.
 
-:::demo Set the value of `filterable` and `remote` with `true` to enable remote search, and you should pass the `remote-method`. `remote-method` is a `Function` that gets called when the input value changes, and its parameter is the current input value. Note that if `el-option` is rendered with the `v-for` directive, you should add the `key` attribute for `el-option`. Its value needs to be unique, such as `item.value` in the following example.
+:::demo Set the value of `filterable` and `remote` with `true` to enable remote search, and you should pass the `remote-method`. `remote-method` is a `Function` that gets called when the input value changes, and its parameter is the current input value. Note that if `tm-option` is rendered with the `v-for` directive, you should add the `key` attribute for `tm-option`. Its value needs to be unique, such as `item.value` in the following example.
 
 ```html
 <template>
-  <el-select
+  <tm-select
     v-model="value9"
     multiple
     filterable
@@ -550,13 +550,13 @@ Enter keywords and search data from server.
     placeholder="Please enter a keyword"
     :remote-method="remoteMethod"
     :loading="loading">
-    <el-option
+    <tm-option
       v-for="item in options4"
       :key="item.value"
       :label="item.label"
       :value="item.value">
-    </el-option>
-  </el-select>
+    </tm-option>
+  </tm-select>
 </template>
 
 <script>
@@ -617,20 +617,20 @@ Create and select new items that are not included in select options
 :::demo By using the `allow-create` attribute, users can create new items by typing in the input box. Note that for `allow-create` to work, `filterable` must be `true`. This example also demonstrates `default-first-option`. When this attribute is set to `true`, you can select the first option in the current option list by hitting enter without having to navigate with mouse or arrow keys.
 ```html
 <template>
-  <el-select
+  <tm-select
     v-model="value10"
     multiple
     filterable
     allow-create
     default-first-option
     placeholder="Choose tags for your article">
-    <el-option
+    <tm-option
       v-for="item in options5"
       :key="item.value"
       :label="item.label"
       :value="item.value">
-    </el-option>
-  </el-select>
+    </tm-option>
+  </tm-select>
 </template>
 
 <script>

@@ -1,41 +1,41 @@
 <template>
-  <transition name="el-zoom-in-top" @after-leave="$emit('dodestroy')">
+  <transition name="tm-zoom-in-top" @after-leave="$emit('dodestroy')">
     <div
       v-show="visible"
-      class="el-picker-panel el-date-range-picker el-popper"
+      class="tm-picker-panel tm-date-range-picker tm-popper"
       :class="[{
         'has-sidebar': $slots.sidebar || shortcuts,
         'has-time': showTime
       }, popperClass]">
-      <div class="el-picker-panel__body-wrapper">
-        <slot name="sidebar" class="el-picker-panel__sidebar"></slot>
-        <div class="el-picker-panel__sidebar" v-if="shortcuts">
+      <div class="tm-picker-panel__body-wrapper">
+        <slot name="sidebar" class="tm-picker-panel__sidebar"></slot>
+        <div class="tm-picker-panel__sidebar" v-if="shortcuts">
           <button
             type="button"
-            class="el-picker-panel__shortcut"
+            class="tm-picker-panel__shortcut"
             v-for="shortcut in shortcuts"
             @click="handleShortcutClick(shortcut)">{{shortcut.text}}</button>
         </div>
-        <div class="el-picker-panel__body">
-          <div class="el-date-range-picker__time-header" v-if="showTime">
-            <span class="el-date-range-picker__editors-wrap">
-              <span class="el-date-range-picker__time-picker-wrap">
-                <el-input
+        <div class="tm-picker-panel__body">
+          <div class="tm-date-range-picker__time-header" v-if="showTime">
+            <span class="tm-date-range-picker__editors-wrap">
+              <span class="tm-date-range-picker__time-picker-wrap">
+                <tm-input
                   size="small"
                   :disabled="rangeState.selecting"
                   ref="minInput"
                   :placeholder="t('el.datepicker.startDate')"
-                  class="el-date-range-picker__editor"
+                  class="tm-date-range-picker__editor"
                   :value="minVisibleDate"
                   @input.native="handleDateInput($event, 'min')"
                   @change.native="handleDateChange($event, 'min')" />
               </span>
-              <span class="el-date-range-picker__time-picker-wrap">
-                <el-input
+              <span class="tm-date-range-picker__time-picker-wrap">
+                <tm-input
                   size="small"
                   :disabled="rangeState.selecting"
                   :placeholder="t('el.datepicker.startTime')"
-                  class="el-date-range-picker__editor"
+                  class="tm-date-range-picker__editor"
                   :value="minVisibleTime"
                   @focus="minTimePickerVisible = !minTimePickerVisible"
                   @change.native="handleTimeChange($event, 'min')" />
@@ -48,26 +48,26 @@
                 </time-picker>
               </span>
             </span>
-            <span class="el-icon-arrow-right"></span>
-            <span class="el-date-range-picker__editors-wrap is-right">
-              <span class="el-date-range-picker__time-picker-wrap">
-                <el-input
+            <span class="tm-icon-arrow-right"></span>
+            <span class="tm-date-range-picker__editors-wrap is-right">
+              <span class="tm-date-range-picker__time-picker-wrap">
+                <tm-input
                   size="small"
                   :disabled="rangeState.selecting"
                   :placeholder="t('el.datepicker.endDate')"
-                  class="el-date-range-picker__editor"
+                  class="tm-date-range-picker__editor"
                   :value="maxVisibleDate"
                   :readonly="!minDate"
                   @input.native="handleDateInput($event, 'max')"
                   @change.native="handleDateChange($event, 'max')" />
               </span>
-              <span class="el-date-range-picker__time-picker-wrap">
-                <el-input
+              <span class="tm-date-range-picker__time-picker-wrap">
+                <tm-input
                   size="small"
                   :disabled="rangeState.selecting"
                   ref="maxInput"
                   :placeholder="t('el.datepicker.endTime')"
-                  class="el-date-range-picker__editor"
+                  class="tm-date-range-picker__editor"
                   :value="maxVisibleTime"
                   @focus="minDate && (maxTimePickerVisible = !maxTimePickerVisible)"
                   :readonly="!minDate"
@@ -82,30 +82,30 @@
               </span>
             </span>
           </div>
-          <div class="el-picker-panel__content el-date-range-picker__content is-left">
-            <div class="el-date-range-picker__header">
+          <div class="tm-picker-panel__content tm-date-range-picker__content is-left">
+            <div class="tm-date-range-picker__header">
               <button
                 type="button"
                 @click="leftPrevYear"
-                class="el-picker-panel__icon-btn el-icon-d-arrow-left"></button>
+                class="tm-picker-panel__icon-btn tm-icon-d-arrow-left"></button>
               <button
                 type="button"
                 @click="leftPrevMonth"
-                class="el-picker-panel__icon-btn el-icon-arrow-left"></button>
+                class="tm-picker-panel__icon-btn tm-icon-arrow-left"></button>
               <button
                 type="button"
                 @click="leftNextYear"
                 v-if="unlinkPanels"
                 :disabled="!enableYearArrow"
                 :class="{ 'is-disabled': !enableYearArrow }"
-                class="el-picker-panel__icon-btn el-icon-d-arrow-right"></button>
+                class="tm-picker-panel__icon-btn tm-icon-d-arrow-right"></button>
               <button
                 type="button"
                 @click="leftNextMonth"
                 v-if="unlinkPanels"
                 :disabled="!enableMonthArrow"
                 :class="{ 'is-disabled': !enableMonthArrow }"
-                class="el-picker-panel__icon-btn el-icon-arrow-right"></button>
+                class="tm-picker-panel__icon-btn tm-icon-arrow-right"></button>
               <div>{{ leftLabel }}</div>
             </div>
             <date-table
@@ -121,30 +121,30 @@
               @pick="handleRangePick">
             </date-table>
           </div>
-          <div class="el-picker-panel__content el-date-range-picker__content is-right">
-            <div class="el-date-range-picker__header">
+          <div class="tm-picker-panel__content tm-date-range-picker__content is-right">
+            <div class="tm-date-range-picker__header">
               <button
                 type="button"
                 @click="rightPrevYear"
                 v-if="unlinkPanels"
                 :disabled="!enableYearArrow"
                 :class="{ 'is-disabled': !enableYearArrow }"
-                class="el-picker-panel__icon-btn el-icon-d-arrow-left"></button>
+                class="tm-picker-panel__icon-btn tm-icon-d-arrow-left"></button>
               <button
                 type="button"
                 @click="rightPrevMonth"
                 v-if="unlinkPanels"
                 :disabled="!enableMonthArrow"
                 :class="{ 'is-disabled': !enableMonthArrow }"
-                class="el-picker-panel__icon-btn el-icon-arrow-left"></button>
+                class="tm-picker-panel__icon-btn tm-icon-arrow-left"></button>
               <button
                 type="button"
                 @click="rightNextYear"
-                class="el-picker-panel__icon-btn el-icon-d-arrow-right"></button>
+                class="tm-picker-panel__icon-btn tm-icon-d-arrow-right"></button>
               <button
                 type="button"
                 @click="rightNextMonth"
-                class="el-picker-panel__icon-btn el-icon-arrow-right"></button>
+                class="tm-picker-panel__icon-btn tm-icon-arrow-right"></button>
               <div>{{ rightLabel }}</div>
             </div>
             <date-table
@@ -162,22 +162,22 @@
           </div>
         </div>
       </div>
-      <div class="el-picker-panel__footer" v-if="showTime">
-        <el-button
+      <div class="tm-picker-panel__footer" v-if="showTime">
+        <tm-button
           size="mini"
           type="text"
-          class="el-picker-panel__link-btn"
+          class="tm-picker-panel__link-btn"
           @click="handleClear">
           {{ t('el.datepicker.clear') }}
-        </el-button>
-        <el-button
+        </tm-button>
+        <tm-button
           plain
           size="mini"
-          class="el-picker-panel__link-btn"
+          class="tm-picker-panel__link-btn"
           :disabled="btnDisabled"
           @click="handleConfirm()">
           {{ t('el.datepicker.confirm') }}
-        </el-button>
+        </tm-button>
       </div>
     </div>
   </transition>
@@ -198,8 +198,8 @@
   import Locale from 'element-ui/src/mixins/locale';
   import TimePicker from './time';
   import DateTable from '../basic/date-table';
-  import ElInput from 'element-ui/packages/input';
-  import ElButton from 'element-ui/packages/button';
+  import TmInput from 'element-ui/packages/input';
+  import TmButton from 'element-ui/packages/button';
 
   const advanceDate = (date, amount) => {
     return new Date(new Date(date).getTime() + amount);
@@ -625,6 +625,6 @@
       }
     },
 
-    components: { TimePicker, DateTable, ElInput, ElButton }
+    components: { TimePicker, DateTable, TmInput, TmButton }
   };
 </script>

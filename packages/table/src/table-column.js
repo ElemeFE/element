@@ -1,5 +1,5 @@
-import ElCheckbox from 'element-ui/packages/checkbox';
-import ElTag from 'element-ui/packages/tag';
+import TmCheckbox from 'element-ui/packages/checkbox';
+import TmTag from 'element-ui/packages/tag';
 import objectAssign from 'element-ui/src/utils/merge';
 import { getPropByPath } from 'element-ui/src/utils/util';
 
@@ -14,7 +14,7 @@ const defaults = {
     minWidth: 48,
     realWidth: 48,
     order: '',
-    className: 'el-table-column--selection'
+    className: 'tm-table-column--selection'
   },
   expand: {
     width: 48,
@@ -33,14 +33,14 @@ const defaults = {
 const forced = {
   selection: {
     renderHeader: function(h, { store }) {
-      return <el-checkbox
+      return <tm-checkbox
         disabled={ store.states.data && store.states.data.length === 0 }
         indeterminate={ store.states.selection.length > 0 && !this.isAllSelected }
         nativeOn-click={ this.toggleAllSelection }
         value={ this.isAllSelected } />;
     },
     renderCell: function(h, { row, column, store, $index }) {
-      return <el-checkbox
+      return <tm-checkbox
         nativeOn-click={ (event) => event.stopPropagation() }
         value={ store.isSelected(row) }
         disabled={ column.selectable ? !column.selectable.call(null, row, $index) : false }
@@ -73,14 +73,14 @@ const forced = {
     },
     renderCell: function(h, { row, store }, proxy) {
       const expanded = store.states.expandRows.indexOf(row) > -1;
-      return <div class={ 'el-table__expand-icon ' + (expanded ? 'el-table__expand-icon--expanded' : '') }
+      return <div class={ 'tm-table__expand-icon ' + (expanded ? 'tm-table__expand-icon--expanded' : '') }
         on-click={ () => proxy.handleExpandClick(row) }>
-        <i class='el-icon el-icon-arrow-right'></i>
+        <i class='tm-icon tm-icon-arrow-right'></i>
       </div>;
     },
     sortable: false,
     resizable: false,
-    className: 'el-table__expand-column'
+    className: 'tm-table__expand-column'
   }
 };
 
@@ -137,7 +137,7 @@ const parseMinWidth = (minWidth) => {
 };
 
 export default {
-  name: 'ElTableColumn',
+  name: 'TmTableColumn',
 
   props: {
     type: {
@@ -197,8 +197,8 @@ export default {
   },
 
   components: {
-    ElCheckbox,
-    ElTag
+    TmCheckbox,
+    TmTag
   },
 
   computed: {
@@ -300,7 +300,7 @@ export default {
       }
 
       return _self.showOverflowTooltip || _self.showTooltipWhenOverflow
-        ? <div class="cell el-tooltip" style={ {width: (data.column.realWidth || data.column.width) - 1 + 'px'} }>{ renderCell(h, data) }</div>
+        ? <div class="cell tm-tooltip" style={ {width: (data.column.realWidth || data.column.width) - 1 + 'px'} }>{ renderCell(h, data) }</div>
         : <div class="cell">{ renderCell(h, data) }</div>;
     };
   },

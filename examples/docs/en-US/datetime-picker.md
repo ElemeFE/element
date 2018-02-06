@@ -102,20 +102,20 @@ DateTimePicker is derived from DatePicker and TimePicker. For a more detailed ex
 <template>
   <div class="block">
     <span class="demonstration">Default</span>
-    <el-date-picker
+    <tm-date-picker
       v-model="value1"
       type="datetime"
       placeholder="Select date and time">
-    </el-date-picker>
+    </tm-date-picker>
   </div>
   <div class="block">
     <span class="demonstration">With shortcuts</span>
-    <el-date-picker
+    <tm-date-picker
       v-model="value2"
       type="datetime"
       placeholder="Select date and time"
       :picker-options="pickerOptions1">
-    </el-date-picker>
+    </tm-date-picker>
   </div>
 </template>
 
@@ -162,17 +162,17 @@ DateTimePicker is derived from DatePicker and TimePicker. For a more detailed ex
 <template>
   <div class="block">
     <span class="demonstration">Default</span>
-    <el-date-picker
+    <tm-date-picker
       v-model="value3"
       type="datetimerange"
       range-separator="To"
       start-placeholder="Start date"
       end-placeholder="End date">
-    </el-date-picker>
+    </tm-date-picker>
   </div>
   <div class="block">
     <span class="demonstration">With shortcuts</span>
-    <el-date-picker
+    <tm-date-picker
       v-model="value4"
       type="datetimerange"
       :picker-options="pickerOptions2"
@@ -180,7 +180,7 @@ DateTimePicker is derived from DatePicker and TimePicker. For a more detailed ex
       start-placeholder="Start date"
       end-placeholder="End date"
       align="right">
-    </el-date-picker>
+    </tm-date-picker>
   </div>
 </template>
 
@@ -231,24 +231,24 @@ DateTimePicker is derived from DatePicker and TimePicker. For a more detailed ex
 <template>
   <div class="block">
     <span class="demonstration">Start date time 12:00:00</span>
-    <el-date-picker
+    <tm-date-picker
       v-model="value5"
       type="datetimerange"
       start-placeholder="Start Date"
       end-placeholder="End Date"
       :default-time="['12:00:00']">
-    </el-date-picker>
+    </tm-date-picker>
   </div>
   <div class="block">
     <span class="demonstration">Start date time 12:00:00, end date time 08:00:00</span>
-    <el-date-picker
+    <tm-date-picker
       v-model="value6"
       type="datetimerange"
       align="right"
       start-placeholder="Start Date"
       end-placeholder="End Date"
       :default-time="['12:00:00', '08:00:00']">
-    </el-date-picker>
+    </tm-date-picker>
   </div>
 </template>
 
@@ -288,8 +288,8 @@ DateTimePicker is derived from DatePicker and TimePicker. For a more detailed ex
 | value-format | optional, format of binding value. If not specified, the binding value will be a Date object | string | see [date formats](#/en-US/component/date-picker#date-formats) | — |
 | name | same as `name` in native input | string | — | — |
 | unlink-panels | unllink two date-panels in range-picker | boolean | — | false |
-| prefix-icon | Custom prefix icon class | string | — | el-icon-date |
-| clear-icon | Custom clear icon class | string | — | el-icon-circle-close |
+| prefix-icon | Custom prefix icon class | string | — | tm-icon-date |
+| clear-icon | Custom clear icon class | string | — | tm-icon-circle-close |
 
 ### Picker Options
 | Attribute      | Description          | Type      | Accepted Values       | Default  |

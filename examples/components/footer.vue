@@ -1,4 +1,4 @@
-<template>
+<template xmlns:v-popover="http://www.w3.org/1999/xhtml">
   <footer class="footer">
     <div class="container">
       <div class="footer-main">
@@ -22,7 +22,7 @@
       </div>
       <div class="footer-social">
         <p class="footer-social-title">Element {{ version && version.slice(0, 3) }} Charcoal</p>
-        <el-popover
+        <tm-popover
           ref="weixin"
           placement="top"
           width="120"
@@ -30,8 +30,8 @@
           trigger="hover">
           <div class="footer-popover-title">{{ langConfig.eleme }} UED</div>
           <img src="../assets/images/qrcode.png" alt="">
-        </el-popover>
-        <i class="doc-icon-weixin elementdoc" v-popover:weixin></i>
+        </tm-popover>
+        <i class="doc-icon-weixin elementdoc" v-popover:weixin=""></i>
         <a href="https://github.com/elemefe" target="_blank">
           <i class="doc-icon-github elementdoc"></i>
         </a>
@@ -119,7 +119,7 @@
     }
   }
 
-  .el-popover.footer-popover {
+  .tm-popover.footer-popover {
     padding: 0;
     min-width: 120px;
     line-height: normal;
@@ -173,7 +173,7 @@
 
     computed: {
       lang() {
-        return this.$route.path.split('/')[1] || 'zh-CN';
+        return this.$route.path.split('/')[1] || 'en-US';
       },
 
       langConfig() {
@@ -181,7 +181,7 @@
       },
 
       gitterLink() {
-        return this.lang === 'zh-CN' ? 'https://gitter.im/ElemeFE/element' : 'https://gitter.im/element-en/Lobby';
+        return 'https://google.com';
       }
     }
   };

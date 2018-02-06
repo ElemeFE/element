@@ -85,7 +85,7 @@ export const getColumnById = function(table, columnId) {
 };
 
 export const getColumnByCell = function(table, cell) {
-  const matches = (cell.className || '').match(/el-table_[^\s]+/gm);
+  const matches = (cell.className || '').match(/tm-table_[^\s]+/gm);
   if (matches) {
     return getColumnById(table, matches[0]);
   }

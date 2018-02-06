@@ -1,8 +1,8 @@
-import ElDropdownMenu from '../dropdown/src/dropdown-menu';
+import TmDropdownMenu from '../dropdown/src/dropdown-menu';
 
 /* istanbul ignore next */
-ElDropdownMenu.install = function(Vue) {
-  Vue.component(ElDropdownMenu.name, ElDropdownMenu);
+TmDropdownMenu.install = function(Vue) {
+  Vue.component(TmDropdownMenu.name, TmDropdownMenu);
 };
 
-export default ElDropdownMenu;
+export default TmDropdownMenu;

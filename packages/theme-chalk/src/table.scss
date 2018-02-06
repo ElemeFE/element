@@ -52,7 +52,7 @@
       transform: rotate(90deg);
     }
 
-    > .el-icon {
+    > .tm-icon {
       position: absolute;
       left: 50%;
       top: 50%;
@@ -84,13 +84,13 @@
   }
 
   @include m(scrollable-x) {
-    .el-table__body-wrapper {
+    .tm-table__body-wrapper {
       overflow-x: auto;
     }
   }
 
   @include m(scrollable-y) {
-    .el-table__body-wrapper {
+    .tm-table__body-wrapper {
       overflow-y: auto;
     }
   }
@@ -240,7 +240,7 @@
     padding-left: 10px;
     padding-right: 10px;
 
-    &.el-tooltip {
+    &.tm-tooltip {
       white-space: nowrap;
       min-width: 50px;
     }
@@ -336,9 +336,9 @@
     left: auto;
     right: 0;
 
-    .el-table__fixed-header-wrapper,
-    .el-table__fixed-body-wrapper,
-    .el-table__fixed-footer-wrapper {
+    .tm-table__fixed-header-wrapper,
+    .tm-table__fixed-body-wrapper,
+    .tm-table__fixed-footer-wrapper {
       left: auto;
       right: 0;
     }
@@ -402,33 +402,33 @@
     position: relative;
 
     @include when(scrolling-none) {
-      ~ .el-table__fixed,
-      ~ .el-table__fixed-right {
+      ~ .tm-table__fixed,
+      ~ .tm-table__fixed-right {
         box-shadow: none;
       }
     }
 
     @include when(scrolling-left) {
-      ~ .el-table__fixed {
+      ~ .tm-table__fixed {
         box-shadow: none;
       }
     }
 
     @include when(scrolling-right) {
-      ~ .el-table__fixed-right {
+      ~ .tm-table__fixed-right {
         box-shadow: none;
       }
     }
 
-    .el-table--border {
+    .tm-table--border {
       @include when(scrolling-right) {
-        ~ .el-table__fixed-right {
+        ~ .tm-table__fixed-right {
           border-left: $--table-border;
         }
       }
 
       @include when(scrolling-left) {
-        ~ .el-table__fixed {
+        ~ .tm-table__fixed {
           border-right: $--table-border;
         }
       }
@@ -480,8 +480,8 @@
   }
 
   @include m(striped) {
-    & .el-table__body {
-      & tr.el-table__row--striped {
+    & .tm-table__body {
+      & tr.tm-table__row--striped {
         td {
           background: #FAFAFA;
         }
@@ -495,7 +495,7 @@
 
   @include e(body) {
     tr.hover-row {
-      &, &.el-table__row--striped {
+      &, &.tm-table__row--striped {
         &, &.current-row {
           > td {
             background-color: $--table-current-row-background;
@@ -532,20 +532,20 @@
   }
 
   @include m(enable-row-transition) {
-    .el-table__body td {
+    .tm-table__body td {
       transition: background-color .25s ease;
     }
   }
 
   @include m(enable-row-hover) {
-    .el-table__body tr:hover > td {
+    .tm-table__body tr:hover > td {
       background-color: $--table-row-hover-background;
     }
   }
 
   @include m(fluid-height) {
-    .el-table__fixed,
-    .el-table__fixed-right {
+    .tm-table__fixed,
+    .tm-table__fixed-right {
       bottom: 0;
       overflow: hidden;
     }

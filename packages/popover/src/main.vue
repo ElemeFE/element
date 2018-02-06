@@ -2,8 +2,8 @@
   <span>
     <transition :name="transition" @after-leave="doDestroy">
       <div
-        class="el-popover el-popper"
-        :class="[popperClass, content && 'el-popover--plain']"
+        class="tm-popover tm-popper"
+        :class="[popperClass, content && 'tm-popover--plain']"
         ref="popper"
         v-show="!disabled && showPopper"
         :style="{ width: width + 'px' }"
@@ -11,7 +11,7 @@
         :id="tooltipId"
         :aria-hidden="(disabled || !showPopper) ? 'true' : 'false'"
       >
-        <div class="el-popover__title" v-if="title" v-text="title"></div>
+        <div class="tm-popover__title" v-if="title" v-text="title"></div>
         <slot>{{ content }}</slot>
       </div>
     </transition>
@@ -25,7 +25,7 @@ import { addClass, removeClass } from 'element-ui/src/utils/dom';
 import { generateId } from 'element-ui/src/utils/util';
 
 export default {
-  name: 'ElPopover',
+  name: 'TmPopover',
 
   mixins: [Popper],
 
@@ -60,7 +60,7 @@ export default {
 
   computed: {
     tooltipId() {
-      return `el-popover-${generateId()}`;
+      return `tm-popover-${generateId()}`;
     }
   },
   watch: {
@@ -78,7 +78,7 @@ export default {
     }
     // 可访问性
     if (reference) {
-      addClass(reference, 'el-popover__reference');
+      addClass(reference, 'tm-popover__reference');
       reference.setAttribute('aria-describedby', this.tooltipId);
       reference.setAttribute('tabindex', 0); // tab序列
       popper.setAttribute('tabindex', 0);

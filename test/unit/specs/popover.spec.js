@@ -11,12 +11,12 @@ describe('Popover', () => {
     const createVM = (trigger) => {
       return createVue(`
         <div>
-          <el-popover
+          <tm-popover
             ref="popover"
             trigger="${trigger}"
             content="content">
             <button slot="reference">trigger ${trigger}</button>
-          </el-popover>
+          </tm-popover>
         </div>
       `, true);
     };
@@ -62,14 +62,14 @@ describe('Popover', () => {
     it('focus input in children node', () => {
       vm = createVue(`
         <div>
-          <el-popover
+          <tm-popover
             ref="popover"
             trigger="focus"
             content="content">
             <div slot="reference">
               <input type="text" value="trigger focus" />
             </div>
-          </el-popover>
+          </tm-popover>
         </div>
       `, true);
       const compo = vm.$refs.popover;
@@ -84,14 +84,14 @@ describe('Popover', () => {
     it('focus textarea in children node', () => {
       vm = createVue(`
         <div>
-          <el-popover
+          <tm-popover
             ref="popover"
             trigger="focus"
             content="content">
             <div slot="reference">
               <textarea></textarea>
             </div>
-          </el-popover>
+          </tm-popover>
         </div>
       `, true);
       const compo = vm.$refs.popover;
@@ -106,12 +106,12 @@ describe('Popover', () => {
     it('focus input', () => {
       vm = createVue(`
         <div>
-          <el-popover
+          <tm-popover
             ref="popover"
             trigger="focus"
             content="content">
             <input type="text" slot="reference" value="trigger focus" />
-          </el-popover>
+          </tm-popover>
         </div>
       `, true);
       const compo = vm.$refs.popover;
@@ -139,11 +139,11 @@ describe('Popover', () => {
     const vm = createVue({
       template: `
         <div>
-          <el-popover
+          <tm-popover
             ref="popover1"
             trigger="click"
             content="content">
-          </el-popover>
+          </tm-popover>
           <button v-popover:popover1>create by directive</button>
         </div>
       `,
@@ -155,7 +155,7 @@ describe('Popover', () => {
     const compo = vm.$refs.popover1;
 
     it('render', () => {
-      expect(vm.$el.querySelector('.el-popover')).to.have.deep.property('textContent').include('content');
+      expect(vm.$el.querySelector('.tm-popover')).to.have.deep.property('textContent').include('content');
     });
 
     it('triggering click', done => {
@@ -176,18 +176,18 @@ describe('Popover', () => {
   describe('create by slot', () => {
     const vm = createVue(`
       <div>
-        <el-popover
+        <tm-popover
           ref="popover"
           trigger="click"
           content="content">
           <button slot="reference">create by slot</button>
-        </el-popover>
+        </tm-popover>
       </div>
     `, true);
     const compo = vm.$refs.popover;
 
     it('render', () => {
-      expect(vm.$el.querySelector('.el-popover')).to.have.deep.property('textContent').include('content');
+      expect(vm.$el.querySelector('.tm-popover')).to.have.deep.property('textContent').include('content');
     });
 
     it('triggering click', done => {
@@ -209,14 +209,14 @@ describe('Popover', () => {
     vm = createVue({
       template: `
         <div>
-          <el-popover
+          <tm-popover
             ref="popover"
             trigger="click"
             @show="handleShow"
             @hide="handleHide"
             content="content">
             <button slot="reference">trigger</button>
-          </el-popover>
+          </tm-popover>
         </div>
       `,
 

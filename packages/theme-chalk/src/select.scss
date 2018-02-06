@@ -13,12 +13,12 @@
   position: relative;
 
   &:hover {
-    .el-input__inner {
+    .tm-input__inner {
       border-color: $--select-border-color-hover;
     }
   }
 
-  .el-input__inner {
+  .tm-input__inner {
     cursor: pointer;
     padding-right: 35px;
 
@@ -27,8 +27,8 @@
     }
   }
 
-  .el-input {
-    & .el-select__caret {
+  .tm-input {
+    & .tm-select__caret {
       color: $--select-input-color;
       font-size: $--select-input-font-size;
       transition: transform .3s;
@@ -55,7 +55,7 @@
     }
 
     &.is-disabled {
-      & .el-input__inner {
+      & .tm-input__inner {
         cursor: not-allowed;
 
         &:hover {
@@ -64,12 +64,12 @@
       }
     }
 
-    &.is-focus .el-input__inner {
+    &.is-focus .tm-input__inner {
       border-color: $--select-input-focus-background;
     }
   }
 
-  > .el-input {
+  > .tm-input {
     display: block;
   }
 
@@ -115,17 +115,17 @@
     flex-wrap: wrap;
   }
 
-  .el-tag__close {
+  .tm-tag__close {
     margin-top: -2px;
   }
 
-  .el-tag {
+  .tm-tag {
     box-sizing: border-box;
     border-color: transparent;
     margin: 2px 0 2px 6px;
     background-color: #f0f2f5;
 
-    &__close.el-icon-close {
+    &__close.tm-icon-close {
       background-color: $--color-text-placeholder;
       right: -7px;
       top: 0;

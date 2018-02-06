@@ -1,7 +1,7 @@
-import { ElementUIComponent } from './component'
+import { TmUIComponent } from './component'
 
 /** Container Component */
-export declare class ElContainer extends ElementUIComponent {
-  /** Layout direction for child elements */
+export declare class TmContainer extends TmUIComponent {
+  /** Layout direction for child eleTms */
   direction: 'horizontal' | 'vertical'
 }

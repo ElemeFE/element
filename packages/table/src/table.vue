@@ -1,23 +1,23 @@
 <template>
-  <div class="el-table"
+  <div class="tm-table"
     :class="[{
-      'el-table--fit': fit,
-      'el-table--striped': stripe,
-      'el-table--border': border || isGroup,
-      'el-table--hidden': isHidden,
-      'el-table--group': isGroup,
-      'el-table--fluid-height': maxHeight,
-      'el-table--scrollable-x': layout.scrollX,
-      'el-table--scrollable-y': layout.scrollY,
-      'el-table--enable-row-hover': !store.states.isComplex,
-      'el-table--enable-row-transition': (store.states.data || []).length !== 0 && (store.states.data || []).length < 100
-    }, tableSize ? `el-table--${ tableSize }` : '']"
+      'tm-table--fit': fit,
+      'tm-table--striped': stripe,
+      'tm-table--border': border || isGroup,
+      'tm-table--hidden': isHidden,
+      'tm-table--group': isGroup,
+      'tm-table--fluid-height': maxHeight,
+      'tm-table--scrollable-x': layout.scrollX,
+      'tm-table--scrollable-y': layout.scrollY,
+      'tm-table--enable-row-hover': !store.states.isComplex,
+      'tm-table--enable-row-transition': (store.states.data || []).length !== 0 && (store.states.data || []).length < 100
+    }, tableSize ? `tm-table--${ tableSize }` : '']"
     @mouseleave="handleMouseLeave($event)">
     <div class="hidden-columns" ref="hiddenColumns"><slot></slot></div>
     <div
       v-if="showHeader"
       v-mousewheel="handleHeaderFooterMousewheel"
-      class="el-table__header-wrapper"
+      class="tm-table__header-wrapper"
       ref="headerWrapper">
       <table-header
         ref="tableHeader"
@@ -30,7 +30,7 @@
       </table-header>
     </div>
     <div
-      class="el-table__body-wrapper"
+      class="tm-table__body-wrapper"
       ref="bodyWrapper"
       :class="[layout.scrollX ? `is-scrolling-${scrollPosition}` : 'is-scrolling-none']"
       :style="[bodyHeight]">
@@ -47,18 +47,18 @@
       </table-body>
       <div
         v-if="!data || data.length === 0"
-        class="el-table__empty-block"
+        class="tm-table__empty-block"
         ref="emptyBlock"
         :style="{
           width: bodyWidth
         }">
-        <span class="el-table__empty-text">
+        <span class="tm-table__empty-text">
           <slot name="empty">{{ emptyText || t('el.table.emptyText') }}</slot>
         </span>
       </div>
       <div
         v-if="$slots.append"
-        class="el-table__append-wrapper"
+        class="tm-table__append-wrapper"
         ref="appendWrapper">
         <slot name="append"></slot>
       </div>
@@ -67,7 +67,7 @@
       v-if="showSummary"
       v-show="data && data.length > 0"
       v-mousewheel="handleHeaderFooterMousewheel"
-      class="el-table__footer-wrapper"
+      class="tm-table__footer-wrapper"
       ref="footerWrapper">
       <table-footer
         :store="store"
@@ -83,7 +83,7 @@
     <div
       v-if="fixedColumns.length > 0"
       v-mousewheel="handleFixedMousewheel"
-      class="el-table__fixed"
+      class="tm-table__fixed"
       ref="fixedWrapper"
       :style="[{
         width: layout.fixedWidth ? layout.fixedWidth + 'px' : ''
@@ -91,7 +91,7 @@
       fixedHeight]">
       <div
         v-if="showHeader"
-        class="el-table__fixed-header-wrapper"
+        class="tm-table__fixed-header-wrapper"
         ref="fixedHeaderWrapper" >
         <table-header
           ref="fixedTableHeader"
@@ -103,7 +103,7 @@
           }"></table-header>
       </div>
       <div
-        class="el-table__fixed-body-wrapper"
+        class="tm-table__fixed-body-wrapper"
         ref="fixedBodyWrapper"
         :style="[{
           top: layout.headerHeight + 'px'
@@ -122,7 +122,7 @@
         </table-body>
         <div
           v-if="$slots.append"
-          class="el-table__append-gutter"
+          class="tm-table__append-gutter"
           :style="{
             height: layout.appendHeight + 'px'
           }"></div>
@@ -130,7 +130,7 @@
       <div
         v-if="showSummary"
         v-show="data && data.length > 0"
-        class="el-table__fixed-footer-wrapper"
+        class="tm-table__fixed-footer-wrapper"
         ref="fixedFooterWrapper">
         <table-footer
           fixed="left"
@@ -146,7 +146,7 @@
     <div
       v-if="rightFixedColumns.length > 0"
       v-mousewheel="handleFixedMousewheel"
-      class="el-table__fixed-right"
+      class="tm-table__fixed-right"
       ref="rightFixedWrapper"
       :style="[{
         width: layout.rightFixedWidth ? layout.rightFixedWidth + 'px' : '',
@@ -154,7 +154,7 @@
       },
       fixedHeight]">
       <div v-if="showHeader"
-        class="el-table__fixed-header-wrapper"
+        class="tm-table__fixed-header-wrapper"
         ref="rightFixedHeaderWrapper">
         <table-header
           ref="rightFixedTableHeader"
@@ -166,7 +166,7 @@
           }"></table-header>
       </div>
       <div
-        class="el-table__fixed-body-wrapper"
+        class="tm-table__fixed-body-wrapper"
         ref="rightFixedBodyWrapper"
         :style="[{
           top: layout.headerHeight + 'px'
@@ -187,7 +187,7 @@
       <div
         v-if="showSummary"
         v-show="data && data.length > 0"
-        class="el-table__fixed-footer-wrapper"
+        class="tm-table__fixed-footer-wrapper"
         ref="rightFixedFooterWrapper">
         <table-footer
           fixed="right"
@@ -202,18 +202,18 @@
     </div>
     <div
       v-if="rightFixedColumns.length > 0"
-      class="el-table__fixed-right-patch"
+      class="tm-table__fixed-right-patch"
       ref="rightFixedPatch"
       :style="{
         width: layout.scrollY ? layout.gutterWidth + 'px' : '0',
         height: layout.headerHeight + 'px'
       }"></div>
-    <div class="el-table__column-resize-proxy" ref="resizeProxy" v-show="resizeProxyVisible"></div>
+    <div class="tm-table__column-resize-proxy" ref="resizeProxy" v-show="resizeProxyVisible"></div>
   </div>
 </template>
 
 <script type="text/babel">
-  import ElCheckbox from 'element-ui/packages/checkbox';
+  import TmCheckbox from 'element-ui/packages/checkbox';
   import debounce from 'throttle-debounce/debounce';
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
   import Mousewheel from 'element-ui/src/directives/mousewheel';
@@ -228,7 +228,7 @@
   let tableIdSeed = 1;
 
   export default {
-    name: 'ElTable',
+    name: 'TmTable',
 
     mixins: [Locale, Migrating],
 
@@ -313,7 +313,7 @@
       TableHeader,
       TableFooter,
       TableBody,
-      ElCheckbox
+      TmCheckbox
     },
 
     methods: {
@@ -441,7 +441,7 @@
     },
 
     created() {
-      this.tableId = 'el-table_' + tableIdSeed++;
+      this.tableId = 'tm-table_' + tableIdSeed++;
       this.debouncedUpdateLayout = debounce(50, () => this.doLayout());
     },
 

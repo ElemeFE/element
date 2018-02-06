@@ -1,5 +1,5 @@
 <style>
-  .demo-loading .el-table {
+  .demo-loading .tm-table {
     border: none;
   }
 </style>
@@ -38,7 +38,7 @@
         const loading = this.$loading({
           lock: true,
           text: 'Loading',
-          spinner: 'el-icon-loading',
+          spinner: 'tm-icon-loading',
           background: 'rgba(0, 0, 0, 0.7)'
         });
         setTimeout(() => {
@@ -61,25 +61,25 @@ Displays animation in a container (such as a table) while loading data.
 
 ```html
 <template>
-  <el-table
+  <tm-table
     v-loading="loading"
     :data="tableData"
     style="width: 100%">
-    <el-table-column
+    <tm-table-column
       prop="date"
       label="Date"
       width="180">
-    </el-table-column>
-    <el-table-column
+    </tm-table-column>
+    <tm-table-column
       prop="name"
       label="Name"
       width="180">
-    </el-table-column>
-    <el-table-column
+    </tm-table-column>
+    <tm-table-column
       prop="address"
       label="Address">
-    </el-table-column>
-  </el-table>
+    </tm-table-column>
+  </tm-table>
 </template>
 
 <style>
@@ -120,28 +120,28 @@ You can customize loading text, loading spinner and background color.
 :::demo Add attribute `element-loading-text` to the element on which `v-loading` is bound, and its value will be displayed under the spinner. Similarly, `element-loading-spinner` and `element-loading-background` are for customizing loading spinner class name and background color.
 ```html
 <template>
-  <el-table
+  <tm-table
     v-loading="loading2"
     element-loading-text="Loading..."
-    element-loading-spinner="el-icon-loading"
+    element-loading-spinner="tm-icon-loading"
     element-loading-background="rgba(0, 0, 0, 0.8)"
     :data="tableData"
     style="width: 100%">
-    <el-table-column
+    <tm-table-column
       prop="date"
       label="Date"
       width="180">
-    </el-table-column>
-    <el-table-column
+    </tm-table-column>
+    <tm-table-column
       prop="name"
       label="Name"
       width="180">
-    </el-table-column>
-    <el-table-column
+    </tm-table-column>
+    <tm-table-column
       prop="address"
       label="Address">
-    </el-table-column>
-  </el-table>
+    </tm-table-column>
+  </tm-table>
 </template>
 
 <script>
@@ -177,17 +177,17 @@ Show a full screen animation while loading data.
 
 ```html
 <template>
-  <el-button
+  <tm-button
     type="primary"
     @click="openFullScreen"
     v-loading.fullscreen.lock="fullscreenLoading">
     As a directive
-  </el-button>
-  <el-button
+  </tm-button>
+  <tm-button
     type="primary"
     @click="openFullScreen2">
     As a service
-  </el-button>
+  </tm-button>
 </template>
 
 <script>
@@ -208,7 +208,7 @@ Show a full screen animation while loading data.
         const loading = this.$loading({
           lock: true,
           text: 'Loading',
-          spinner: 'el-icon-loading',
+          spinner: 'tm-icon-loading',
           background: 'rgba(0, 0, 0, 0.7)'
         });
         setTimeout(() => {

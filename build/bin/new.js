@@ -34,7 +34,7 @@ export default ${ComponentName};`
     content: `var cooking = require('cooking');
 var gen = require('../../build/gen-single-config');
 
-cooking.set(gen(__dirname, 'El${ComponentName}'));
+cooking.set(gen(__dirname, 'Tm${ComponentName}'));
 
 module.exports = cooking.resolve();
 `
@@ -60,12 +60,12 @@ module.exports = cooking.resolve();
   {
     filename: 'src/main.vue',
     content: `<template>
-  <div class="el-${componentname}"></div>
+  <div class="tm-${componentname}"></div>
 </template>
 
 <script>
 export default {
-  name: 'El${ComponentName}'
+  name: 'Tm${ComponentName}'
 };
 </script>`
   },

@@ -1,8 +1,8 @@
-import ElOptionGroup from '../select/src/option-group';
+import TmOptionGroup from '../select/src/option-group';
 
 /* istanbul ignore next */
-ElOptionGroup.install = function(Vue) {
-  Vue.component(ElOptionGroup.name, ElOptionGroup);
+TmOptionGroup.install = function(Vue) {
+  Vue.component(TmOptionGroup.name, TmOptionGroup);
 };
 
-export default ElOptionGroup;
+export default TmOptionGroup;

@@ -64,24 +64,24 @@
     }
   }
 
-  .el-icon-success {
+  .tm-icon-success {
     color: $--notification-success-color;
   }
 
-  .el-icon-error {
+  .tm-icon-error {
     color: $--notification-danger-color;
   }
 
-  .el-icon-info {
+  .tm-icon-info {
     color: $--notification-info-color;
   }
 
-  .el-icon-warning {
+  .tm-icon-warning {
     color: $--notification-warning-color;
   }
 }
 
-.el-notification-fade-enter {
+.tm-notification-fade-enter {
   &.right {
     right: 0;
     transform: translateX(100%);
@@ -93,6 +93,6 @@
   }
 }
 
-.el-notification-fade-leave-active {
+.tm-notification-fade-leave-active {
   opacity: 0;
 }

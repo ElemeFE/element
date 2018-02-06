@@ -32,7 +32,7 @@
       color: $--color-primary;
     }
 
-    & [class*="el-icon-"] {
+    & [class*="tm-icon-"] {
       line-height: 0.9;
 
       & + span {
@@ -49,7 +49,7 @@
     left: -999px;
 
     &:checked {
-      & + .el-radio-button__inner {
+      & + .tm-radio-button__inner {
         color: $--radio-button-checked-color;
         background-color: $--radio-button-checked-fill;
         border-color: $--radio-button-checked-border-color;
@@ -58,7 +58,7 @@
     }
 
     &:disabled {
-      & + .el-radio-button__inner {
+      & + .tm-radio-button__inner {
         color: $--button-disabled-color;
         cursor: not-allowed;
         background-image: none;
@@ -66,43 +66,43 @@
         border-color: $--button-disabled-border;
         box-shadow: none;
       }
-      &:checked + .el-radio-button__inner {
+      &:checked + .tm-radio-button__inner {
         background-color: $--radio-button-disabled-checked-fill;
       }
     }
   }
 
   &:first-child {
-    .el-radio-button__inner {
+    .tm-radio-button__inner {
       border-left: $--border-base;
       border-radius: $--border-radius-base 0 0 $--border-radius-base;
       box-shadow: none !important;
     }
   }
   &:last-child {
-    .el-radio-button__inner {
+    .tm-radio-button__inner {
       border-radius: 0 $--border-radius-base $--border-radius-base 0;
     }
   }
 
   &:first-child:last-child {
-    .el-radio-button__inner {
+    .tm-radio-button__inner {
       border-radius: $--border-radius-base;
     }
   }
 
   @include m(medium) {
-    & .el-radio-button__inner {
+    & .tm-radio-button__inner {
       @include button-size($--button-medium-padding-vertical, $--button-medium-padding-horizontal, $--button-medium-font-size, 0);
     }
   }
   @include m(small) {
-    & .el-radio-button__inner {
+    & .tm-radio-button__inner {
       @include button-size($--button-small-padding-vertical, $--button-small-padding-horizontal, $--button-small-font-size, 0);
     }
   }
   @include m(mini) {
-    & .el-radio-button__inner {
+    & .tm-radio-button__inner {
       @include button-size($--button-mini-padding-vertical, $--button-mini-padding-horizontal, $--button-mini-font-size, 0);
     }
   }

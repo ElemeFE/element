@@ -21,7 +21,7 @@
   transition: .1s;
   font-weight: $--button-font-weight;
   @include utils-user-select(none);
-  & + .el-button {
+  & + .tm-button {
     margin-left: 10px;
   }
 
@@ -44,7 +44,7 @@
     border: 0;
   }
 
-  & [class*="el-icon-"] {
+  & [class*="tm-icon-"] {
     & + span {
       margin-left: 5px;
     }
@@ -82,7 +82,7 @@
       border-color: $--button-disabled-border;
     }
 
-    &.el-button--text {
+    &.tm-button--text {
       background-color: transparent;
     }
 
@@ -173,10 +173,10 @@
   display: inline-block;
   vertical-align: middle;
 
-  & .el-button {
+  & .tm-button {
     float: left;
     position: relative;
-    & + .el-button {
+    & + .tm-button {
       margin-left: 0;
     }
 
@@ -213,7 +213,7 @@
   }
 
   @each $type in (primary, success, warning, danger, info) {
-    .el-button--#{$type} {
+    .tm-button--#{$type} {
       &:first-child {
         border-right-color: rgba($--color-white, 0.5);
       }

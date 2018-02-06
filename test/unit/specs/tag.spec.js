@@ -9,11 +9,11 @@ describe('Tag', () => {
   it('create', () => {
     vm = createVue({
       template: `
-      <el-tag></el-tag>
+      <tm-tag></tm-tag>
       `
     }, true);
-    expect(vm.$el.classList.contains('el-tag')).to.be.true;
-    expect(vm.$el.classList.contains('el-tag__close')).to.be.false;
+    expect(vm.$el.classList.contains('tm-tag')).to.be.true;
+    expect(vm.$el.classList.contains('tm-tag__close')).to.be.false;
     expect(vm.$el.classList.contains('is-hit')).to.be.false;
     expect(vm.$el.classList.contains('md-fade-center')).to.be.false;
   });
@@ -21,7 +21,7 @@ describe('Tag', () => {
   it('text', () => {
     vm = createVue({
       template: `
-      <el-tag>标签</el-tag>
+      <tm-tag>标签</tm-tag>
       `
     }, true);
     expect(vm.$el.textContent.length).to.be.at.least(2);
@@ -30,16 +30,16 @@ describe('Tag', () => {
   it('type', () => {
     vm = createVue({
       template: `
-      <el-tag type="primary"></el-tag>
+      <tm-tag type="primary"></tm-tag>
       `
     }, true);
-    expect(vm.$el.classList.contains('el-tag--primary')).to.be.true;
+    expect(vm.$el.classList.contains('tm-tag--primary')).to.be.true;
   });
 
   it('hit', () => {
     vm = createVue({
       template: `
-      <el-tag hit></el-tag>
+      <tm-tag hit></tm-tag>
       `
     }, true);
     expect(vm.$el.classList.contains('is-hit')).to.be.true;
@@ -48,7 +48,7 @@ describe('Tag', () => {
   it('closable', done => {
     vm = createVue({
       template: `
-      <el-tag closable @close="handleClose">关闭标签</el-tag>
+      <tm-tag closable @close="handleClose">关闭标签</tm-tag>
       `,
       data() {
         return {
@@ -61,7 +61,7 @@ describe('Tag', () => {
         }
       }
     }, true);
-    var closeBtn = vm.$el.querySelector('.el-tag .el-tag__close');
+    var closeBtn = vm.$el.querySelector('.tm-tag .tm-tag__close');
     expect(closeBtn).to.exist;
     closeBtn.click();
     vm.$nextTick(_ => {
@@ -73,7 +73,7 @@ describe('Tag', () => {
   it('closeTransition', () => {
     vm = createVue({
       template: `
-      <el-tag closable closeTransition></el-tag>
+      <tm-tag closable closeTransition></tm-tag>
       `
     }, true);
     expect(vm.$el.classList.contains('md-fade-center')).to.be.false;
@@ -82,7 +82,7 @@ describe('Tag', () => {
   it('color', () => {
     vm = createVue({
       template: `
-      <el-tag color="rgb(0, 0, 0)"></el-tag>
+      <tm-tag color="rgb(0, 0, 0)"></tm-tag>
       `
     }, true);
     expect(vm.$el.style.backgroundColor).to.equal('rgb(0, 0, 0)');

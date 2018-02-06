@@ -3,7 +3,7 @@ import Vue from 'vue'
 export type MessageType = 'success' | 'warning' | 'info' | 'error'
 
 /** Message Component */
-export declare class ElMessageComponent extends Vue {
+export declare class TmMessageComponent extends Vue {
   /** Close the Loading instance */
   close (): void
 }
@@ -14,11 +14,11 @@ export interface CloseEventHandler {
    *
    * @param instance The message component that is being closed
    */
-  (instance: ElMessageComponent): void
+  (instance: TmMessageComponent): void
 }
 
 /** Options used in Message */
-export interface ElMessageOptions {
+export interface TmMessageOptions {
   /** Message text */
   message: string
 
@@ -47,29 +47,29 @@ export interface ElMessageOptions {
   onClose?: CloseEventHandler
 }
 
-export interface ElMessage {
+export interface TmMessage {
   /** Show an info message */
-  (text: string): ElMessageComponent
+  (text: string): TmMessageComponent
 
   /** Show message */
-  (options: ElMessageOptions): ElMessageComponent
+  (options: TmMessageOptions): TmMessageComponent
 
   /** Show a success message */
-  success (text: string): ElMessageComponent
+  success (text: string): TmMessageComponent
 
   /** Show a warning message */
-  warning (text: string): ElMessageComponent
+  warning (text: string): TmMessageComponent
 
   /** Show an info message */
-  info (text: string): ElMessageComponent
+  info (text: string): TmMessageComponent
 
   /** Show an error message */
-  error (text: string): ElMessageComponent
+  error (text: string): TmMessageComponent
 }
 
 declare module 'vue/types/vue' {
   interface Vue {
   /** Used to show feedback after an activity. The difference with Notification is that the latter is often used to show a system level passive notification. */
-    $message: ElMessage
+    $message: TmMessage
   }
 }

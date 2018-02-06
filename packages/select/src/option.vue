@@ -2,7 +2,7 @@
   <li
     @mouseenter="hoverItem"
     @click.stop="selectOptionClick"
-    class="el-select-dropdown__item"
+    class="tm-select-dropdown__item"
     v-show="visible"
     :class="{
       'selected': itemSelected,
@@ -22,9 +22,9 @@
   export default {
     mixins: [Emitter],
 
-    name: 'ElOption',
+    name: 'TmOption',
 
-    componentName: 'ElOption',
+    componentName: 'TmOption',
 
     inject: ['select'],
 
@@ -84,10 +84,10 @@
 
     watch: {
       currentLabel() {
-        if (!this.created && !this.select.remote) this.dispatch('ElSelect', 'setSelected');
+        if (!this.created && !this.select.remote) this.dispatch('TmSelect', 'setSelected');
       },
       value() {
-        if (!this.created && !this.select.remote) this.dispatch('ElSelect', 'setSelected');
+        if (!this.created && !this.select.remote) this.dispatch('TmSelect', 'setSelected');
       }
     },
 
@@ -124,7 +124,7 @@
 
       selectOptionClick() {
         if (this.disabled !== true && this.groupDisabled !== true) {
-          this.dispatch('ElSelect', 'handleOptionClick', this);
+          this.dispatch('TmSelect', 'handleOptionClick', this);
         }
       },
 

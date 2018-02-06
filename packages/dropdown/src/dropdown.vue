@@ -2,22 +2,22 @@
   import Clickoutside from 'element-ui/src/utils/clickoutside';
   import Emitter from 'element-ui/src/mixins/emitter';
   import Migrating from 'element-ui/src/mixins/migrating';
-  import ElButton from 'element-ui/packages/button';
-  import ElButtonGroup from 'element-ui/packages/button-group';
+  import TmButton from 'element-ui/packages/button';
+  import TmButtonGroup from 'element-ui/packages/button-group';
   import { generateId } from 'element-ui/src/utils/util';
 
   export default {
-    name: 'ElDropdown',
+    name: 'TmDropdown',
 
-    componentName: 'ElDropdown',
+    componentName: 'TmDropdown',
 
     mixins: [Emitter, Migrating],
 
     directives: { Clickoutside },
 
     components: {
-      ElButton,
-      ElButtonGroup
+      TmButton,
+      TmButtonGroup
     },
 
     provide() {
@@ -87,11 +87,11 @@
 
     watch: {
       visible(val) {
-        this.broadcast('ElDropdownMenu', 'visible', val);
+        this.broadcast('TmDropdownMenu', 'visible', val);
         this.$emit('visible-change', val);
       },
       focusing(val) {
-        const selfDefine = this.$el.querySelector('.el-dropdown-selfdefine');
+        const selfDefine = this.$el.querySelector('.tm-dropdown-selfdefine');
         if (selfDefine) { // 自定义
           if (val) {
             selfDefine.className += ' focusing';
@@ -198,7 +198,7 @@
         if (!this.splitButton) { // 自定义
           this.triggerElm.setAttribute('role', 'button');
           this.triggerElm.setAttribute('tabindex', '0');
-          this.triggerElm.setAttribute('class', (this.triggerElm.getAttribute('class') || '') + ' el-dropdown-selfdefine'); // 控制
+          this.triggerElm.setAttribute('class', (this.triggerElm.getAttribute('class') || '') + ' tm-dropdown-selfdefine'); // 控制
         }
       },
       initEvent() {
@@ -250,17 +250,17 @@
 
       let triggerElm = !splitButton
         ? this.$slots.default
-        : (<el-button-group>
-          <el-button type={type} size={dropdownSize} nativeOn-click={handleMainButtonClick}>
+        : (<tm-button-group>
+          <tm-button type={type} size={dropdownSize} nativeOn-click={handleMainButtonClick}>
             {this.$slots.default}
-          </el-button>
-          <el-button ref="trigger" type={type} size={dropdownSize} class="el-dropdown__caret-button">
-            <i class="el-dropdown__icon el-icon-arrow-down"></i>
-          </el-button>
-        </el-button-group>);
+          </tm-button>
+          <tm-button ref="trigger" type={type} size={dropdownSize} class="tm-dropdown__caret-button">
+            <i class="tm-dropdown__icon tm-icon-arrow-down"></i>
+          </tm-button>
+        </tm-button-group>);
 
       return (
-        <div class="el-dropdown" v-clickoutside={hide}>
+        <div class="tm-dropdown" v-clickoutside={hide}>
           {triggerElm}
           {this.$slots.dropdown}
         </div>

@@ -1,12 +1,12 @@
 <template>
   <div
-    class="el-progress"
+    class="tm-progress"
     :class="[
-      'el-progress--' + type,
+      'tm-progress--' + type,
       status ? 'is-' + status : '',
       {
-        'el-progress--without-text': !showText,
-        'el-progress--text-inside': textInside,
+        'tm-progress--without-text': !showText,
+        'tm-progress--text-inside': textInside,
       }
     ]"
     role="progressbar"
@@ -14,21 +14,21 @@
     aria-valuemin="0"
     aria-valuemax="100"
   >
-    <div class="el-progress-bar" v-if="type === 'line'">
-      <div class="el-progress-bar__outer" :style="{height: strokeWidth + 'px'}">
-        <div class="el-progress-bar__inner" :style="barStyle">
-          <div class="el-progress-bar__innerText" v-if="showText && textInside">{{percentage}}%</div>
+    <div class="tm-progress-bar" v-if="type === 'line'">
+      <div class="tm-progress-bar__outer" :style="{height: strokeWidth + 'px'}">
+        <div class="tm-progress-bar__inner" :style="barStyle">
+          <div class="tm-progress-bar__innerText" v-if="showText && textInside">{{percentage}}%</div>
         </div>
       </div>
     </div>
-    <div class="el-progress-circle" :style="{height: width + 'px', width: width + 'px'}" v-else>
+    <div class="tm-progress-circle" :style="{height: width + 'px', width: width + 'px'}" v-else>
       <svg viewBox="0 0 100 100">
-        <path class="el-progress-circle__track" :d="trackPath" stroke="#e5e9f2" :stroke-width="relativeStrokeWidth" fill="none"></path>
-        <path class="el-progress-circle__path" :d="trackPath" stroke-linecap="round" :stroke="stroke" :stroke-width="relativeStrokeWidth" fill="none" :style="circlePathStyle"></path>
+        <path class="tm-progress-circle__track" :d="trackPath" stroke="#e5e9f2" :stroke-width="relativeStrokeWidth" fill="none"></path>
+        <path class="tm-progress-circle__path" :d="trackPath" stroke-linecap="round" :stroke="stroke" :stroke-width="relativeStrokeWidth" fill="none" :style="circlePathStyle"></path>
       </svg>
     </div>
     <div
-      class="el-progress__text"
+      class="tm-progress__text"
       v-if="showText && !textInside"
       :style="{fontSize: progressTextSize + 'px'}"
     >
@@ -39,7 +39,7 @@
 </template>
 <script>
   export default {
-    name: 'ElProgress',
+    name: 'TmProgress',
     props: {
       type: {
         type: String,
@@ -114,9 +114,9 @@
       },
       iconClass() {
         if (this.type === 'line') {
-          return this.status === 'success' ? 'el-icon-circle-check' : 'el-icon-circle-cross';
+          return this.status === 'success' ? 'tm-icon-circle-check' : 'tm-icon-circle-cross';
         } else {
-          return this.status === 'success' ? 'el-icon-check' : 'el-icon-close';
+          return this.status === 'success' ? 'tm-icon-check' : 'tm-icon-close';
         }
       },
       progressTextSize() {

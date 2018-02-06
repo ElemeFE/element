@@ -1,5 +1,5 @@
 import { VNode, VNodeDirective } from 'vue'
-import { ElementUIComponent } from './component'
+import { TmUIComponent } from './component'
 
 export type PopoverTrigger = 'click' | 'focus' | 'hover' | 'manual'
 export type PopoverPlacement = 'top' | 'top-start' | 'top-end' | 'bottom' | 'bottom-start' | 'bottom-end' | 'left' | 'left-start' | 'left-end' | 'right' | 'right-start' | 'right-end'
@@ -15,13 +15,13 @@ export interface PopoverSlots {
 }
 
 /** Popover directive definition */
-export interface ElPopoverDirective extends VNodeDirective {
+export interface TmPopoverDirective extends VNodeDirective {
   name: 'popover',
   arg: string
 }
 
 /** Popover Component */
-export declare class ElPopover extends ElementUIComponent {
+export declare class TmPopover extends TmUIComponent {
   /** How the popover is triggered */
   trigger: PopoverTrigger
 

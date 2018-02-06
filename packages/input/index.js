@@ -1,8 +1,8 @@
-import ElInput from './src/input';
+import TmInput from './src/input';
 
 /* istanbul ignore next */
-ElInput.install = function(Vue) {
-  Vue.component(ElInput.name, ElInput);
+TmInput.install = function(Vue) {
+  Vue.component(TmInput.name, TmInput);
 };
 
-export default ElInput;
+export default TmInput;

@@ -23,7 +23,7 @@
     background-color: $--alert-success-color;
     color: $--color-success;
 
-    .el-alert__description {
+    .tm-alert__description {
       color: $--color-success;
     }
   }
@@ -32,7 +32,7 @@
     background-color: $--alert-info-color;
     color: $--color-info;
 
-    .el-alert__description {
+    .tm-alert__description {
       color: $--color-info;
     }
   }
@@ -41,7 +41,7 @@
     background-color: $--alert-warning-color;
     color: $--color-warning;
 
-    .el-alert__description {
+    .tm-alert__description {
       color: $--color-warning;
     }
   }
@@ -50,7 +50,7 @@
     background-color: $--alert-danger-color;
     color: $--color-danger;
 
-    .el-alert__description {
+    .tm-alert__description {
       color: $--color-danger;
     }
   }
@@ -77,7 +77,7 @@
     }
   }
 
-  & .el-alert__description {
+  & .tm-alert__description {
     font-size: $--alert-description-font-size;
     margin: 5px 0 0 0;
   }
@@ -99,7 +99,7 @@
   }
 }
 
-.el-alert-fade-enter,
-.el-alert-fade-leave-active {
+.tm-alert-fade-enter,
+.tm-alert-fade-leave-active {
   opacity: 0;
 }

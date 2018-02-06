@@ -12,7 +12,7 @@ const getPanel = function(type) {
 export default {
   mixins: [Picker],
 
-  name: 'ElDatePicker',
+  name: 'TmDatePicker',
 
   props: {
     type: {

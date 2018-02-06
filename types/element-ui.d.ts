@@ -1,57 +1,57 @@
 import Vue from 'vue'
-import { ElementUIComponent, ElementUIComponentSize, ElementUIHorizontalAlignment } from './component'
+import { TmUIComponent, TmUIComponentSize, TmUIHorizontalAlignment } from './component'
 
-import { ElAside } from './aside'
-import { ElAutocomplete } from './autocomplete'
-import { ElButton } from './button'
-import { ElButtonGroup } from './button-group'
-import { ElCarousel } from './carousel'
-import { ElCarouselItem } from './carousel-item'
-import { ElCheckbox } from './checkbox'
-import { ElCheckboxGroup } from './checkbox-group'
-import { ElCol } from './col'
-import { ElCollapse } from './collapse'
-import { ElCollapseItem } from './collapse-item'
-import { ElContainer } from './container'
-import { ElDatePicker } from './date-picker'
-import { ElDialog } from './dialog'
-import { ElDropdown } from './dropdown'
-import { ElDropdownItem } from './dropdown-item'
-import { ElDropdownMenu } from './dropdown-menu'
-import { ElFooter } from './footer'
-import { ElForm } from './form'
-import { ElFormItem } from './form-item'
-import { ElHeader } from './header'
-import { ElInput } from './input'
-import { ElInputNumber } from './input-number'
-import { ElLoading } from './loading'
-import { ElMain } from './main'
-import { ElMenu } from './menu'
-import { ElMenuItem } from './menu-item'
-import { ElMenuItemGroup } from './menu-item-group'
-import { ElMessage } from './message'
-import { ElMessageBox } from './message-box'
-import { ElNotification } from './notification'
-import { ElOption } from './option'
-import { ElOptionGroup } from './option-group'
-import { ElPagination } from './pagination'
-import { ElPopover } from './popover'
-import { ElProgress } from './progress'
-import { ElRadio } from './radio'
-import { ElRadioButton } from './radio-button'
-import { ElRadioGroup } from './radio-group'
-import { ElRow } from './row'
-import { ElSelect } from './select'
-import { ElSubmenu } from './submenu'
-import { ElTable } from './table'
-import { ElTableColumn } from './table-column'
-import { ElTag } from './tag'
-import { ElTabs } from './tabs'
-import { ElTabPane } from './tab-pane'
-import { ElTimePicker } from './time-picker'
-import { ElTimeSelect } from './time-select'
-import { ElTooltip } from './tooltip'
-import { ElUpload } from './upload'
+import { TmAside} from './aside'
+import { TmAutocomplete } from './autocomplete'
+import { TmButton } from './button'
+import { TmButtonGroup } from './button-group'
+import { TmCarousel } from './carousel'
+import { TmCarouselItem } from './carousel-item'
+import { TmCheckbox } from './checkbox'
+import { TmCheckboxGroup } from './checkbox-group'
+import { TmCol } from './col'
+import { TmCollapse } from './collapse'
+import { TmCollapseItem } from './collapse-item'
+import { TmContainer } from './container'
+import { TmDatePicker } from './date-picker'
+import { TmDialog } from './dialog'
+import { TmDropdown } from './dropdown'
+import { TmDropdownItem } from './dropdown-item'
+import { TmDropdownMenu } from './dropdown-menu'
+import { TmFooter } from './footer'
+import { TmForm } from './form'
+import { TmFormItem } from './form-item'
+import { TmHeader } from './header'
+import { TmInput } from './input'
+import { TmInputNumber } from './input-number'
+import { TmLoading } from './loading'
+import { TmMain } from './main'
+import { TmMenu } from './menu'
+import { TmMenuItem } from './menu-item'
+import { TmMenuItemGroup } from './menu-item-group'
+import { TmMessage } from './message'
+import { TmMessageBox } from './message-box'
+import { TmNotification } from './notification'
+import { TmOption } from './option'
+import { TmOptionGroup } from './option-group'
+import { TmPagination } from './pagination'
+import { TmPopover } from './popover'
+import { TmProgress } from './progress'
+import { TmRadio } from './radio'
+import { TmRadioButton } from './radio-button'
+import { TmRadioGroup } from './radio-group'
+import { TmRow } from './row'
+import { TmSelect } from './select'
+import { TmSubmenu } from './submenu'
+import { TmTable } from './table'
+import { TmTableColumn } from './table-column'
+import { TmTag } from './tag'
+import { TmTabs } from './tabs'
+import { TmTabPane } from './tab-pane'
+import { TmTimePicker } from './time-picker'
+import { TmTimeSelect } from './time-select'
+import { TmTooltip } from './tooltip'
+import { TmUpload } from './upload'
 
 export interface InstallationOptions {
   locale: any,
@@ -59,176 +59,176 @@ export interface InstallationOptions {
   size: string
 }
 
-/** The version of element-ui */
+/** The version of tm-ui */
 export const version: string
 
 /**
- * Install all element-ui components into Vue.
+ * Install all tm-ui components into Vue.
  * Please do not invoke this method directly.
- * Call `Vue.use(ElementUI)` to install.
+ * Call `Vue.use(TmUI)` to install.
  */
 export function install (vue: typeof Vue, options: InstallationOptions): void
 
-/** ElementUI component common definition */
-export type Component = ElementUIComponent
+/** TmUI component common definition */
+export type Component = TmUIComponent
 
 /** Component size definition for button, input, etc */
-export type ComponentSize = ElementUIComponentSize
+export type ComponentSize = TmUIComponentSize
 
 /** Horizontal alignment */
-export type HorizontalAlignment = ElementUIHorizontalAlignment
+export type HorizontalAlignment = TmUIHorizontalAlignment
 
 /** Show animation while loading data */
-export const Loading: ElLoading
+export const Loading: TmLoading
 
 /** Used to show feedback after an activity. The difference with Notification is that the latter is often used to show a system level passive notification. */
-export const Message: ElMessage
+export const Message: TmMessage
 
 /** A set of modal boxes simulating system message box, mainly for message prompt, success tips, error messages and query information */
-export const MessageBox: ElMessageBox
+export const MessageBox: TmMessageBox
 
 /** Displays a global notification message at the upper right corner of the page */
-export const Notification: ElNotification
+export const Notification: TmNotification
 
 // TS cannot merge imported class with namespace, so declare subclasses instead
 
 /** Aside Component */
-export class Aside extends ElAside {}
+export class Aside extends TmAside {}
 
 /** Autocomplete Component */
-export class Autocomplete extends ElAutocomplete {}
+export class Autocomplete extends TmAutocomplete {}
 
 /** Button Component */
-export class Button extends ElButton {}
+export class Button extends TmButton {}
 
 /** Button Group Component */
-export class ButtonGroup extends ElButtonGroup {}
+export class ButtonGroup extends TmButtonGroup {}
 
 /** Carousel Component */
-export class Carousel extends ElCarousel {}
+export class Carousel extends TmCarousel {}
 
 /** Carousel Item Component */
-export class CarouselItem extends ElCarouselItem {}
+export class CarouselItem extends TmCarouselItem {}
 
 /** Checkbox Component */
-export class Checkbox extends ElCheckbox {}
+export class Checkbox extends TmCheckbox {}
 
 /** Checkbox Group Component */
-export class CheckboxGroup extends ElCheckboxGroup {}
+export class CheckboxGroup extends TmCheckboxGroup {}
 
 /** Colunm Layout Component */
-export class Col extends ElCol {}
+export class Col extends TmCol {}
 
 /** Collapse Component */
-export class Collapse extends ElCollapse {}
+export class Collapse extends TmCollapse {}
 
 /** Collapse Item Component */
-export class CollapseItem extends ElCollapseItem {}
+export class CollapseItem extends TmCollapseItem {}
 
 /** Container Component */
-export class Container extends ElContainer {}
+export class Container extends TmContainer {}
 
 /** Date Picker Component */
-export class DatePicker extends ElDatePicker {}
+export class DatePicker extends TmDatePicker {}
 
 /** Dialog Component */
-export class Dialog extends ElDialog {}
+export class Dialog extends TmDialog {}
 
 /** Dropdown Component */
-export class Dropdown extends ElDropdown {}
+export class Dropdown extends TmDropdown {}
 
 /** Dropdown Item Component */
-export class DropdownItem extends ElDropdownItem {}
+export class DropdownItem extends TmDropdownItem {}
 
 /** Dropdown Menu Component */
-export class DropdownMenu extends ElDropdownMenu {}
+export class DropdownMenu extends TmDropdownMenu {}
 
 /** Footer Component */
-export class Footer extends ElFooter {}
+export class Footer extends TmFooter {}
 
 /** Form Component */
-export class Form extends ElForm {}
+export class Form extends TmForm {}
 
 /** Form Item Component */
-export class FormItem extends ElFormItem {}
+export class FormItem extends TmFormItem {}
 
 /** Header Component */
-export class Header extends ElHeader {}
+export class Header extends TmHeader {}
 
 /** Input Component */
-export class Input extends ElInput {}
+export class Input extends TmInput {}
 
 /** Input Number Component */
-export class InputNumber extends ElInputNumber {}
+export class InputNumber extends TmInputNumber {}
 
 /** Main Component */
-export class Main extends ElMain {}
+export class Main extends TmMain {}
 
 /** Menu that provides navigation for your website */
-export class Menu extends ElMenu {}
+export class Menu extends TmMenu {}
 
 /** Menu Item Component */
-export class MenuItem extends ElMenuItem {}
+export class MenuItem extends TmMenuItem {}
 
 /** Menu Item Group Component */
-export class MenuItemGroup extends ElMenuItemGroup {}
+export class MenuItemGroup extends TmMenuItemGroup {}
 
 /** Dropdown Select Option Component */
-export class Option extends ElOption {}
+export class Option extends TmOption {}
 
 /** Dropdown Select Option Group Component */
-export class OptionGroup extends ElOptionGroup {}
+export class OptionGroup extends TmOptionGroup {}
 
 /** Pagination Component */
-export class Pagination extends ElPagination {}
+export class Pagination extends TmPagination {}
 
 /** Popover Component */
-export class Popover extends ElPopover {}
+export class Popover extends TmPopover {}
 
 /** Progress Component */
-export class Progress extends ElProgress {}
+export class Progress extends TmProgress {}
 
 /** Radio Component */
-export class Radio extends ElRadio {}
+export class Radio extends TmRadio {}
 
 /** Radio Button Component */
-export class RadioButton extends ElRadioButton {}
+export class RadioButton extends TmRadioButton {}
 
 /** Radio Group Component */
-export class RadioGroup extends ElRadioGroup {}
+export class RadioGroup extends TmRadioGroup {}
 
 /** Row Layout Component */
-export class Row extends ElRow {}
+export class Row extends TmRow {}
 
 /** Dropdown Select Component */
-export class Select extends ElSelect {}
+export class Select extends TmSelect {}
 
 /** Submenu Component */
-export class Submenu extends ElSubmenu {}
+export class Submenu extends TmSubmenu {}
 
 /** Table Component */
-export class Table extends ElTable {}
+export class Table extends TmTable {}
 
 /** Table Column Component */
-export class TableColumn extends ElTableColumn {}
+export class TableColumn extends TmTableColumn {}
 
 /** Tabs Component */
-export class Tabs extends ElTabs {}
+export class Tabs extends TmTabs {}
 
 /** Tab Pane Component */
-export class TabPane extends ElTabPane {}
+export class TabPane extends TmTabPane {}
 
 /** Tag Component */
-export class Tag extends ElTag {}
+export class Tag extends TmTag {}
 
 /** TimePicker Component */
-export class TimePicker extends ElTimePicker {}
+export class TimePicker extends TmTimePicker {}
 
 /** TimeSelect Component */
-export class TimeSelect extends ElTimeSelect {}
+export class TimeSelect extends TmTimeSelect {}
 
 /** Tooltip Component */
-export class Tooltip extends ElTooltip {}
+export class Tooltip extends TmTooltip {}
 
 /** Upload Component */
-export class Upload extends ElUpload {}
+export class Upload extends TmUpload {}

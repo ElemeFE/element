@@ -1,6 +1,6 @@
 <template>
   <div
-    class="el-radio-group"
+    class="tm-radio-group"
     role="radiogroup"
     @keydown="handleKeydown"
   >
@@ -17,9 +17,9 @@
     DOWN: 40
   });
   export default {
-    name: 'ElRadioGroup',
+    name: 'TmRadioGroup',
 
-    componentName: 'ElRadioGroup',
+    componentName: 'TmRadioGroup',
 
     inject: {
       elFormItem: {
@@ -95,7 +95,7 @@
     },
     watch: {
       value(value) {
-        this.dispatch('ElFormItem', 'el.form.change', [this.value]);
+        this.dispatch('TmFormItem', 'el.form.change', [this.value]);
       }
     }
   };

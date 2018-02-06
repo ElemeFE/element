@@ -12,7 +12,7 @@ npm i element-pagination -D
 ## Usage
 ```javascript
 import Vue from 'vue'
-import ElPagination from 'element-pagination'
+import TmPagination from 'element-pagination'
 import 'element-theme-chalk/dist/pagination.css'
 
 Vue.use(ElPagination)
@@ -22,9 +22,9 @@ or
 
 ```javascript
 import Vue from 'vue'
-import ElPagination from 'element-pagination'
+import TmPagination from 'element-pagination'
 
-Vue.component('el-pagination', ElPagination)
+Vue.component('tm-pagination', TmPagination)
 ```
 
 ### Attributes

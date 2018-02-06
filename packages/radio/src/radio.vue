@@ -1,8 +1,8 @@
 <template>
   <label
-    class="el-radio"
+    class="tm-radio"
     :class="[
-      border && radioSize ? 'el-radio--' + radioSize : '',
+      border && radioSize ? 'tm-radio--' + radioSize : '',
       { 'is-disabled': isDisabled },
       { 'is-focus': focus },
       { 'is-bordered': border },
@@ -14,15 +14,15 @@
     :tabindex="tabIndex"
     @keydown.space.stop.prevent="model = label"
   >
-    <span class="el-radio__input"
+    <span class="tm-radio__input"
       :class="{
         'is-disabled': isDisabled,
         'is-checked': model === label
       }"
     >
-      <span class="el-radio__inner"></span>
+      <span class="tm-radio__inner"></span>
       <input
-        class="el-radio__original"
+        class="tm-radio__original"
         :value="label"
         type="radio"
         v-model="model"
@@ -34,7 +34,7 @@
         tabindex="-1"
       >
     </span>
-    <span class="el-radio__label">
+    <span class="tm-radio__label">
       <slot></slot>
       <template v-if="!$slots.default">{{label}}</template>
     </span>
@@ -44,7 +44,7 @@
   import Emitter from 'element-ui/src/mixins/emitter';
 
   export default {
-    name: 'ElRadio',
+    name: 'TmRadio',
 
     mixins: [Emitter],
 
@@ -58,7 +58,7 @@
       }
     },
 
-    componentName: 'ElRadio',
+    componentName: 'TmRadio',
 
     props: {
       value: {},
@@ -78,7 +78,7 @@
       isGroup() {
         let parent = this.$parent;
         while (parent) {
-          if (parent.$options.componentName !== 'ElRadioGroup') {
+          if (parent.$options.componentName !== 'TmRadioGroup') {
             parent = parent.$parent;
           } else {
             this._radioGroup = parent;
@@ -93,7 +93,7 @@
         },
         set(val) {
           if (this.isGroup) {
-            this.dispatch('ElRadioGroup', 'input', [val]);
+            this.dispatch('TmRadioGroup', 'input', [val]);
           } else {
             this.$emit('input', val);
           }
@@ -122,7 +122,7 @@
       handleChange() {
         this.$nextTick(() => {
           this.$emit('change', this.model);
-          this.isGroup && this.dispatch('ElRadioGroup', 'handleChange', this.model);
+          this.isGroup && this.dispatch('TmRadioGroup', 'handleChange', this.model);
         });
       }
     }

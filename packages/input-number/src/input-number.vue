@@ -1,33 +1,33 @@
 <template>
-  <div class="el-input-number"
+  <div class="tm-input-number"
     :class="[
-      inputNumberSize ? 'el-input-number--' + inputNumberSize : '',
+      inputNumberSize ? 'tm-input-number--' + inputNumberSize : '',
       { 'is-disabled': inputNumberDisabled },
       { 'is-without-controls': !controls },
       { 'is-controls-right': controlsAtRight }
     ]"
   >
     <span
-      class="el-input-number__decrease"
+      class="tm-input-number__decrease"
       role="button"
       v-if="controls"
       v-repeat-click="decrease"
       :class="{'is-disabled': minDisabled}"
       @keydown.enter="decrease"
     >
-      <i :class="`el-icon-${controlsAtRight ? 'arrow-down' : 'minus'}`"></i>
+      <i :class="`tm-icon-${controlsAtRight ? 'arrow-down' : 'minus'}`"></i>
     </span>
     <span
-      class="el-input-number__increase"
+      class="tm-input-number__increase"
       role="button"
       v-if="controls"
       v-repeat-click="increase"
       :class="{'is-disabled': maxDisabled}"
       @keydown.enter="increase"
     >
-      <i :class="`el-icon-${controlsAtRight ? 'arrow-up' : 'plus'}`"></i>
+      <i :class="`tm-icon-${controlsAtRight ? 'arrow-up' : 'plus'}`"></i>
     </span>
-    <el-input
+    <tm-input
       ref="input"
       :value="currentValue"
       :disabled="inputNumberDisabled"
@@ -48,16 +48,16 @@
       <template slot="append" v-if="$slots.append">
         <slot name="append"></slot>
       </template>
-    </el-input>
+    </tm-input>
   </div>
 </template>
 <script>
-  import ElInput from 'element-ui/packages/input';
+  import TmInput from 'element-ui/packages/input';
   import Focus from 'element-ui/src/mixins/focus';
   import RepeatClick from 'element-ui/src/directives/repeat-click';
 
   export default {
-    name: 'ElInputNumber',
+    name: 'TmInputNumber',
     mixins: [Focus('input')],
     inject: {
       elForm: {
@@ -71,7 +71,7 @@
       repeatClick: RepeatClick
     },
     components: {
-      ElInput
+      TmInput
     },
     props: {
       step: {

@@ -11,11 +11,11 @@
 <style>
   .demo-tooltip.demo-en-US {
     &:first-of-type .source {
-      .el-button {
+      .tm-button {
         width: 110px;
       }
     }
-    .el-tooltip + .el-tooltip {
+    .tm-tooltip + .tm-tooltip {
       margin-left: 15px;
     }
     .box {
@@ -44,11 +44,11 @@
         margin: 4px;
       }
       
-      .left .el-tooltip__popper,
-      .right .el-tooltip__popper {
+      .left .tm-tooltip__popper,
+      .right .tm-tooltip__popper {
         padding: 8px 10px;
       }
-      .el-tooltip {
+      .tm-tooltip {
         margin-left: 0;
       }
     }
@@ -67,49 +67,49 @@ Tooltip has 9 placements.
 ```html
 <div class="box">
   <div class="top">
-    <el-tooltip class="item" effect="dark" content="Top Left prompts info" placement="top-start">
-      <el-button>top-start</el-button>
-    </el-tooltip>
-    <el-tooltip class="item" effect="dark" content="Top Center prompts info" placement="top">
-      <el-button>top</el-button>
-    </el-tooltip>
-    <el-tooltip class="item" effect="dark" content="Top Right prompts info" placement="top-end">
-      <el-button>top-end</el-button>
-    </el-tooltip>
+    <tm-tooltip class="item" effect="dark" content="Top Left prompts info" placement="top-start">
+      <tm-button>top-start</tm-button>
+    </tm-tooltip>
+    <tm-tooltip class="item" effect="dark" content="Top Center prompts info" placement="top">
+      <tm-button>top</tm-button>
+    </tm-tooltip>
+    <tm-tooltip class="item" effect="dark" content="Top Right prompts info" placement="top-end">
+      <tm-button>top-end</tm-button>
+    </tm-tooltip>
   </div>
   <div class="left">
-    <el-tooltip class="item" effect="dark" content="Left Top prompts info" placement="left-start">
-      <el-button>left-start</el-button>
-    </el-tooltip>
-    <el-tooltip class="item" effect="dark" content="Left Center prompts info" placement="left">
-      <el-button>left</el-button>
-    </el-tooltip>
-    <el-tooltip class="item" effect="dark" content="Left Bottom prompts info" placement="left-end">
-      <el-button>left-end</el-button>
-    </el-tooltip>
+    <tm-tooltip class="item" effect="dark" content="Left Top prompts info" placement="left-start">
+      <tm-button>left-start</tm-button>
+    </tm-tooltip>
+    <tm-tooltip class="item" effect="dark" content="Left Center prompts info" placement="left">
+      <tm-button>left</tm-button>
+    </tm-tooltip>
+    <tm-tooltip class="item" effect="dark" content="Left Bottom prompts info" placement="left-end">
+      <tm-button>left-end</tm-button>
+    </tm-tooltip>
   </div>
 
   <div class="right">
-    <el-tooltip class="item" effect="dark" content="Right Top prompts info" placement="right-start">
-      <el-button>right-start</el-button>
-    </el-tooltip>
-    <el-tooltip class="item" effect="dark" content="Right Center prompts info" placement="right">
-      <el-button>right</el-button>
-    </el-tooltip>
-    <el-tooltip class="item" effect="dark" content="Right Bottom prompts info" placement="right-end">
-      <el-button>right-end</el-button>
-    </el-tooltip>
+    <tm-tooltip class="item" effect="dark" content="Right Top prompts info" placement="right-start">
+      <tm-button>right-start</tm-button>
+    </tm-tooltip>
+    <tm-tooltip class="item" effect="dark" content="Right Center prompts info" placement="right">
+      <tm-button>right</tm-button>
+    </tm-tooltip>
+    <tm-tooltip class="item" effect="dark" content="Right Bottom prompts info" placement="right-end">
+      <tm-button>right-end</tm-button>
+    </tm-tooltip>
   </div>
   <div class="bottom">
-    <el-tooltip class="item" effect="dark" content="Bottom Left prompts info" placement="bottom-start">
-      <el-button>bottom-start</el-button>
-    </el-tooltip>
-    <el-tooltip class="item" effect="dark" content="Bottom Center prompts info" placement="bottom">
-      <el-button>bottom</el-button>
-    </el-tooltip>
-    <el-tooltip class="item" effect="dark" content="Bottom Right prompts info" placement="bottom-end">
-      <el-button>bottom-end</el-button>
-    </el-tooltip>
+    <tm-tooltip class="item" effect="dark" content="Bottom Left prompts info" placement="bottom-start">
+      <tm-button>bottom-start</tm-button>
+    </tm-tooltip>
+    <tm-tooltip class="item" effect="dark" content="Bottom Center prompts info" placement="bottom">
+      <tm-button>bottom</tm-button>
+    </tm-tooltip>
+    <tm-tooltip class="item" effect="dark" content="Bottom Right prompts info" placement="bottom-end">
+      <tm-button>bottom-end</tm-button>
+    </tm-tooltip>
   </div>
 </div>
 
@@ -140,12 +140,12 @@ Tooltip has 9 placements.
       margin: 4px;
     }
 
-    .left .el-tooltip__popper,
-    .right .el-tooltip__popper {
+    .left .tm-tooltip__popper,
+    .right .tm-tooltip__popper {
       padding: 8px 10px;
     }
 
-    .el-button {
+    .tm-button {
       width: 110px;
     }
   }
@@ -160,12 +160,12 @@ Tooltip has two themes: `dark` and `light`。
 
 :::demo Set `effect` to modify theme, and the default value is `dark`.
 ```html
-<el-tooltip content="Top center" placement="top">
-  <el-button>Dark</el-button>
-</el-tooltip>
-<el-tooltip content="Bottom center" placement="bottom" effect="light">
-  <el-button>Light</el-button>
-</el-tooltip>
+<tm-tooltip content="Top center" placement="top">
+  <tm-button>Dark</tm-button>
+</tm-tooltip>
+<tm-tooltip content="Bottom center" placement="bottom" effect="light">
+  <tm-button>Light</tm-button>
+</tm-tooltip>
 ```
 :::
 
@@ -173,12 +173,12 @@ Tooltip has two themes: `dark` and `light`。
 
 Display multiple lines of text and set their format.
 
-:::demo Override attribute `content` of `el-tooltip` by adding a slot named `content`.
+:::demo Override attribute `content` of `tm-tooltip` by adding a slot named `content`.
 ```html
-<el-tooltip placement="top">
+<tm-tooltip placement="top">
   <div slot="content">multiple lines<br/>second line</div>
-  <el-button>Top center</el-button>
-</el-tooltip>
+  <tm-button>Top center</tm-button>
+</tm-tooltip>
 ```
 :::
 
@@ -186,7 +186,7 @@ Display multiple lines of text and set their format.
 
 In addition to basic usages, there are some attributes that allow you to customize your own:
 
-`transition` attribute allows you to customize the animation in which the tooltip shows or hides, and the default value is el-fade-in-linear.
+`transition` attribute allows you to customize the animation in which the tooltip shows or hides, and the default value is tm-fade-in-linear.
 
 `disabled` attribute allows you to disable `tooltip`. You just need set it to `true`.
 
@@ -195,9 +195,9 @@ In fact, Tooltip is an extension based on [Vue-popper](https://github.com/elemen
 :::demo
 ```html
 <template>
-  <el-tooltip :disabled="disabled" content="click to close tooltip function" placement="bottom" effect="light">
-    <el-button @click="disabled = !disabled">click to {{disabled ? 'active' : 'close'}} tooltip function</el-button>
-  </el-tooltip>
+  <tm-tooltip :disabled="disabled" content="click to close tooltip function" placement="bottom" effect="light">
+    <tm-button @click="disabled = !disabled">click to {{disabled ? 'active' : 'close'}} tooltip function</tm-button>
+  </tm-tooltip>
 </template>
 
 <style>
@@ -232,7 +232,7 @@ Disabled form elements are not supported for Tooltip, more information can be fo
 |  value(v-model) | visibility of Tooltip | boolean           | — |  false |
 |  disabled       |  whether Tooltip is disabled  | boolean    | — |  false |
 |  offset        |  offset of the Tooltip   | number    | — |  0 |
-|  transition     |  animation name | string             | — | el-fade-in-linear |
+|  transition     |  animation name | string             | — | tm-fade-in-linear |
 |  visible-arrow   |  whether an arrow is displayed. For more information, check [Vue-popper](https://github.com/element-component/vue-popper) page | boolean | — | true |
 |  popper-options        | [popper.js](https://popper.js.org/documentation.html) parameters | Object            | refer to [popper.js](https://popper.js.org/documentation.html) doc | `{ boundariesElement: 'body', gpuAcceleration: false }` |
 | open-delay | delay of appearance, in millisecond | number | — | 0 |

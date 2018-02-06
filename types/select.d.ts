@@ -1,4 +1,4 @@
-import { ElementUIComponent, ElementUIComponentSize } from './component'
+import { TmUIComponent, TmUIComponentSize } from './component'
 
 export interface QueryChangeHandler {
   /**
@@ -8,7 +8,7 @@ export interface QueryChangeHandler {
 }
 
 /** Dropdown Select Component */
-export declare class ElSelect extends ElementUIComponent {
+export declare class TmSelect extends TmUIComponent {
   /** The form input value */
   value: any
 
@@ -22,7 +22,7 @@ export declare class ElSelect extends ElementUIComponent {
   valueKey: string
 
   /** Size of Input */
-  size: ElementUIComponentSize
+  size: TmUIComponentSize
 
   /** Whether single select can be cleared */
   clearable: boolean

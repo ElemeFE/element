@@ -1,5 +1,5 @@
 <script>
-  import ElCollapseTransition from 'element-ui/src/transitions/collapse-transition';
+  import TmCollapseTransition from 'element-ui/src/transitions/collapse-transition';
   import menuMixin from './menu-mixin';
   import Emitter from 'element-ui/src/mixins/emitter';
   import Popper from 'element-ui/src/utils/vue-popper';
@@ -21,13 +21,13 @@
   };
 
   export default {
-    name: 'ElSubmenu',
+    name: 'TmSubmenu',
 
-    componentName: 'ElSubmenu',
+    componentName: 'TmSubmenu',
 
     mixins: [menuMixin, Emitter, poperMixins],
 
-    components: { ElCollapseTransition },
+    components: { TmCollapseTransition },
 
     props: {
       index: {
@@ -68,7 +68,7 @@
         return this.rootMenu === this.$parent;
       },
       menuTransitionName() {
-        return this.rootMenu.collapse ? 'el-zoom-in-left' : 'el-zoom-in-top';
+        return this.rootMenu.collapse ? 'tm-zoom-in-left' : 'tm-zoom-in-top';
       },
       opened() {
         return this.rootMenu.openedMenus.indexOf(this.index) > -1;
@@ -154,7 +154,7 @@
         ) {
           return;
         }
-        this.dispatch('ElMenu', 'submenu-click', this);
+        this.dispatch('TmMenu', 'submenu-click', this);
       },
       handleMouseenter() {
         const {rootMenu} = this;
@@ -233,13 +233,13 @@
           <div
             ref="menu"
             v-show={opened}
-            class={[`el-menu--${mode}`, popperClass]}
+            class={[`tm-menu--${mode}`, popperClass]}
             on-mouseenter={this.handleMouseenter}
             on-mouseleave={this.handleMouseleave}
             on-focus={this.handleMouseenter}>
             <ul
               role="menu"
-              class={['el-menu el-menu--popup', `el-menu--popup-${currentPlacement}`]}
+              class={['tm-menu tm-menu--popup', `tm-menu--popup-${currentPlacement}`]}
               style={{ backgroundColor: rootMenu.backgroundColor || '' }}>
               {$slots.default}
             </ul>
@@ -248,21 +248,21 @@
       );
 
       const inlineMenu = (
-        <el-collapse-transition>
+        <tm-collapse-transition>
           <ul
             role="menu"
-            class="el-menu el-menu--inline"
+            class="tm-menu tm-menu--inline"
             v-show={opened}
             style={{ backgroundColor: rootMenu.backgroundColor || '' }}>
             {$slots.default}
           </ul>
-        </el-collapse-transition>
+        </tm-collapse-transition>
       );
 
       return (
         <li
           class={{
-            'el-submenu': true,
+            'tm-submenu': true,
             'is-active': active,
             'is-opened': opened
           }}
@@ -274,7 +274,7 @@
           on-focus={this.handleMouseenter}
         >
           <div
-            class="el-submenu__title"
+            class="tm-submenu__title"
             ref="submenu-title"
             on-click={this.handleClick}
             on-mouseenter={this.handleTitleMouseenter}
@@ -283,9 +283,9 @@
           >
             {$slots.title}
             <i class={{
-              'el-submenu__icon-arrow': true,
-              'el-icon-arrow-down': rootMenu.mode === 'horizontal' || rootMenu.mode === 'vertical' && !rootMenu.collapse,
-              'el-icon-arrow-right': rootMenu.mode === 'vertical' && rootMenu.collapse
+              'tm-submenu__icon-arrow': true,
+              'tm-icon-arrow-down': rootMenu.mode === 'horizontal' || rootMenu.mode === 'vertical' && !rootMenu.collapse,
+              'tm-icon-arrow-right': rootMenu.mode === 'vertical' && rootMenu.collapse
             }}>
             </i>
           </div>

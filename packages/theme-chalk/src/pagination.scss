@@ -21,22 +21,22 @@
     box-sizing: border-box;
   }
 
-  .el-input__inner {
+  .tm-input__inner {
     text-align: center;
     -moz-appearance: textfield;
   }
 
   // pagesize 的下拉 icon
-  .el-input__suffix {
+  .tm-input__suffix {
     right: 0;
     transform: scale(.8);
   }
 
-  .el-select .el-input {
+  .tm-select .tm-input {
     width: 100px;
     margin: 0 5px;
 
-    .el-input__inner {
+    .tm-input__inner {
       padding-right: 25px;
       border-radius: $--pagination-border-radius;
       height: $--pagination-button-height;
@@ -72,7 +72,7 @@
     margin: 0;
     color: $--pagination-button-color;
 
-    .el-icon {
+    .tm-icon {
       display: block;
       font-size: 12px;
       font-weight: bold;
@@ -90,8 +90,8 @@
   @include m(small) {
     .btn-prev,
     .btn-next,
-    .el-pager li,
-    .el-pager li:last-child {
+    .tm-pager li,
+    .tm-pager li:last-child {
       border-color: transparent;
       font-size: 12px;
       line-height: 22px;
@@ -109,7 +109,7 @@
     font-weight: normal;
     color: $--color-text-regular;
 
-    .el-input .el-input__inner {
+    .tm-input .tm-input__inner {
       font-size: $--pagination-font-size;
       padding-left: 8px;
 
@@ -130,7 +130,7 @@
     font-weight: normal;
     color: $--color-text-regular;
 
-    .el-input__inner {
+    .tm-input__inner {
       padding: 0 3px;
     }
   }
@@ -149,16 +149,16 @@
     box-sizing: border-box;
     border-radius: $--pagination-border-radius;
 
-    &.el-input {
+    &.tm-input {
       width: 50px;
     }
 
-    &.el-input .el-input__inner {
+    &.tm-input .tm-input__inner {
       height: $--pagination-button-height;
     }
 
-    .el-input__inner::-webkit-inner-spin-button,
-    .el-input__inner::-webkit-outer-spin-button {
+    .tm-input__inner::-webkit-inner-spin-button,
+    .tm-input__inner::-webkit-outer-spin-button {
       -webkit-appearance: none;
       margin: 0;
     }
@@ -167,7 +167,7 @@
   @include when(background) {
     .btn-prev,
     .btn-next,
-    .el-pager li {
+    .tm-pager li {
       margin: 0 5px;
       background-color: $--color-info-lighter;
       color: $--color-text-regular;
@@ -183,7 +183,7 @@
       }
     }
 
-    .el-pager li {
+    .tm-pager li {
       &:hover {
         color: $--pagination-hover-fill;
       }
@@ -194,10 +194,10 @@
       }
     }
 
-    &.el-pagination--small {
+    &.tm-pagination--small {
       .btn-prev,
       .btn-next,
-      .el-pager li {
+      .tm-pager li {
         margin: 0 3px;
         min-width: 22px;
       }

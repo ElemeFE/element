@@ -120,16 +120,16 @@ Displays a global notification message at a corner of the page.
 
 ```html
 <template>
-  <el-button
+  <tm-button
     plain
     @click="open">
     Closes automatically
-  </el-button>
-  <el-button
+  </tm-button>
+  <tm-button
     plain
     @click="open2">
     Won't close automatically
-    </el-button>
+    </tm-button>
 </template>
 
 <script>
@@ -164,26 +164,26 @@ We provide four types: success, warning, info and error.
 :::demo Element provides four notification types: `success`, `warning`, `info` and `error`. They are set by the `type` field, and other values will be ignored. We also registered methods for these types that can be invoked directly like `open5` and `open6` without passing a `type` field.
 ```html
 <template>
-  <el-button
+  <tm-button
     plain
     @click="open3">
     Success
-  </el-button>
-  <el-button
+  </tm-button>
+  <tm-button
     plain
     @click="open4">
     Warning
-  </el-button>
-  <el-button
+  </tm-button>
+  <tm-button
     plain
     @click="open5">
     Info
-  </el-button>
-  <el-button
+  </tm-button>
+  <tm-button
     plain
     @click="open6">
     Error
-  </el-button>
+  </tm-button>
 </template>
 
 <script>
@@ -231,26 +231,26 @@ Notification can emerge from any corner you like.
 :::demo The `position` attribute defines which corner Notification slides in. It can be `top-right`, `top-left`, `bottom-right` or `bottom-left`. Defaults to `top-right`.
 ```html
 <template>
-  <el-button
+  <tm-button
     plain
     @click="open7">
     Top Right
-  </el-button>
-  <el-button
+  </tm-button>
+  <tm-button
     plain
     @click="open8">
     Bottom Right
-  </el-button>
-  <el-button
+  </tm-button>
+  <tm-button
     plain
     @click="open9">
     Bottom Left
-  </el-button>
-  <el-button
+  </tm-button>
+  <tm-button
     plain
     @click="open10">
     Top Left
-  </el-button>
+  </tm-button>
 </template>
 
 <script>
@@ -299,11 +299,11 @@ Customize Notification's offset from the edge of the screen.
 :::demo Set the `offset` attribute to customize Notification's offset from the edge of the screen. Note that every Notification instance of the same moment should have the same offset.
 ```html
 <template>
-  <el-button
+  <tm-button
     plain
     @click="open11">
     Notification with offset
-  </el-button>
+  </tm-button>
 </template>
 
 <script>
@@ -328,11 +328,11 @@ Customize Notification's offset from the edge of the screen.
 :::demo Set `dangerouslyUseHTMLString` to true and `message` will be treated as an HTML string.
 ```html
 <template>
-  <el-button
+  <tm-button
     plain
     @click="open12">
     Use HTML String
-  </el-button>
+  </tm-button>
 </template>
 
 <script>
@@ -362,11 +362,11 @@ It is possible to hide the close button
 :::demo Set the `showClose` attribute to `false` so the notification cannot be closed by the user.
 ```html
 <template>
-  <el-button
+  <tm-button
     plain
     @click="open13">
     Hide close button
-    </el-button>
+    </tm-button>
 </template>
 
 <script>

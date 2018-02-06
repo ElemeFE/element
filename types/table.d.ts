@@ -1,4 +1,4 @@
-import { ElementUIComponent } from './component'
+import { TmUIComponent } from './component'
 import { TooltipEffect } from './tooltip'
 
 export type SortOrder = 'ascending' | 'descending'
@@ -18,7 +18,7 @@ export interface SummaryMethodParams {
 }
 
 /** Table Component */
-export declare class ElTable extends ElementUIComponent {
+export declare class TmTable extends TmUIComponent {
   /** Table data */
   data: object[]
 

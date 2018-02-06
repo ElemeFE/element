@@ -4,7 +4,7 @@ import Panel from '../panel/time-select';
 export default {
   mixins: [Picker],
 
-  name: 'ElTimeSelect',
+  name: 'TmTimeSelect',
 
   beforeCreate() {
     this.type = 'time-select';

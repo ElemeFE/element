@@ -11,7 +11,7 @@
       width: 360px;
     }
     .avatar-uploader {
-      .el-upload {
+      .tm-upload {
         border: 1px dashed #d9d9d9;
         border-radius: 6px;
         cursor: pointer;
@@ -131,7 +131,7 @@ Upload files by clicking or drag-and-drop
 
 :::demo Customize upload button type and text using `slot`. Set `limit` and `on-exceed` to limit the maximum number of uploads allowed and specify method when the limit is exceeded. Plus, you can abort removing a file in the `before-remove` hook.
 ```html
-<el-upload
+<tm-upload
   class="upload-demo"
   action="https://jsonplaceholder.typicode.com/posts/"
   :on-preview="handlePreview"
@@ -141,9 +141,9 @@ Upload files by clicking or drag-and-drop
   :limit="3"
   :on-exceed="handleExceed"
   :file-list="fileList">
-  <el-button size="small" type="primary">Click to upload</el-button>
-  <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
-</el-upload>
+  <tm-button size="small" type="primary">Click to upload</tm-button>
+  <div slot="tip" class="tm-upload__tip">jpg/png files with a size less than 500kb</div>
+</tm-upload>
 <script>
   export default {
     data() {
@@ -176,25 +176,25 @@ Use `before-upload` hook to limit the upload file format and size.
 
 :::demo
 ```html
-<el-upload
+<tm-upload
   class="avatar-uploader"
   action="https://jsonplaceholder.typicode.com/posts/"
   :show-file-list="false"
   :on-success="handleAvatarSuccess"
   :before-upload="beforeAvatarUpload">
   <img v-if="imageUrl" :src="imageUrl" class="avatar">
-  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-</el-upload>
+  <i v-else class="tm-icon-plus avatar-uploader-icon"></i>
+</tm-upload>
 
 <style>
-  .avatar-uploader .el-upload {
+  .avatar-uploader .tm-upload {
     border: 1px dashed #d9d9d9;
     border-radius: 6px;
     cursor: pointer;
     position: relative;
     overflow: hidden;
   }
-  .avatar-uploader .el-upload:hover {
+  .avatar-uploader .tm-upload:hover {
     border-color: #409EFF;
   }
   .avatar-uploader-icon {
@@ -247,16 +247,16 @@ Use `list-type` to change the fileList style.
 
 :::demo
 ```html
-<el-upload
+<tm-upload
   action="https://jsonplaceholder.typicode.com/posts/"
   list-type="picture-card"
   :on-preview="handlePictureCardPreview"
   :on-remove="handleRemove">
-  <i class="el-icon-plus"></i>
-</el-upload>
-<el-dialog :visible.sync="dialogVisible">
+  <i class="tm-icon-plus"></i>
+</tm-upload>
+<tm-dialog :visible.sync="dialogVisible">
   <img width="100%" :src="dialogImageUrl" alt="">
-</el-dialog>
+</tm-dialog>
 <script>
   export default {
     data() {
@@ -283,16 +283,16 @@ Use `list-type` to change the fileList style.
 
 :::demo
 ```html
-<el-upload
+<tm-upload
   class="upload-demo"
   action="https://jsonplaceholder.typicode.com/posts/"
   :on-preview="handlePreview"
   :on-remove="handleRemove"
   :file-list="fileList2"
   list-type="picture">
-  <el-button size="small" type="primary">Click to upload</el-button>
-  <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
-</el-upload>
+  <tm-button size="small" type="primary">Click to upload</tm-button>
+  <div slot="tip" class="tm-upload__tip">jpg/png files with a size less than 500kb</div>
+</tm-upload>
 <script>
   export default {
     data() {
@@ -319,14 +319,14 @@ Use `on-change` hook function to control upload file list
 
 :::demo
 ```html
-<el-upload
+<tm-upload
   class="upload-demo"
   action="https://jsonplaceholder.typicode.com/posts/"
   :on-change="handleChange"
   :file-list="fileList3">
-  <el-button size="small" type="primary">Click to upload</el-button>
-  <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
-</el-upload>
+  <tm-button size="small" type="primary">Click to upload</tm-button>
+  <div slot="tip" class="tm-upload__tip">jpg/png files with a size less than 500kb</div>
+</tm-upload>
 <script>
   export default {
     data() {
@@ -358,7 +358,7 @@ You can drag your file to a certain area to upload it.
 
 :::demo
 ```html
-<el-upload
+<tm-upload
   class="upload-demo"
   drag
   action="https://jsonplaceholder.typicode.com/posts/"
@@ -366,10 +366,10 @@ You can drag your file to a certain area to upload it.
   :on-remove="handleRemove"
   :file-list="fileList"
   multiple>
-  <i class="el-icon-upload"></i>
-  <div class="el-upload__text">Drop file here or <em>click to upload</em></div>
-  <div class="el-upload__tip" slot="tip">jpg/png files with a size less than 500kb</div>
-</el-upload>
+  <i class="tm-icon-upload"></i>
+  <div class="tm-upload__text">Drop file here or <em>click to upload</em></div>
+  <div class="tm-upload__tip" slot="tip">jpg/png files with a size less than 500kb</div>
+</tm-upload>
 ```
 :::
 
@@ -377,15 +377,15 @@ You can drag your file to a certain area to upload it.
 
 :::demo
 ```html
-<el-upload
+<tm-upload
   class="upload-demo"
   ref="upload"
   action="https://jsonplaceholder.typicode.com/posts/"
   :auto-upload="false">
-  <el-button slot="trigger" size="small" type="primary">select file</el-button>
-  <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">upload to server</el-button>
-  <div class="el-upload__tip" slot="tip">jpg/png files with a size less than 500kb</div>
-</el-upload>
+  <tm-button slot="trigger" size="small" type="primary">select file</tm-button>
+  <tm-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">upload to server</tm-button>
+  <div class="tm-upload__tip" slot="tip">jpg/png files with a size less than 500kb</div>
+</tm-upload>
 <script>
   export default {
     methods: {

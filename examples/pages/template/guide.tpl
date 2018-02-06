@@ -60,14 +60,14 @@
 </style>
 <template>
   <div class="page-container page-guide">
-    <el-row>
-      <el-col :xs="24" :sm="5">
+    <tm-row>
+      <tm-col :xs="24" :sm="5">
         <side-nav :data="navsData" :base="`/${ lang }/guide`"></side-nav>
-      </el-col>
-      <el-col :xs="24" :sm="19">
+      </tm-col>
+      <tm-col :xs="24" :sm="19">
         <router-view class="content"></router-view>
-      </el-col>
-    </el-row>
+      </tm-col>
+    </tm-row>
   </div>
 </template>
 <script>

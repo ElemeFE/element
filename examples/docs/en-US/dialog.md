@@ -58,16 +58,16 @@
     .full-image {
       width: 100%;
     }
-    .el-dialog__wrapper {
+    .tm-dialog__wrapper {
       margin: 0;
     }
-    .el-select {
+    .tm-select {
       width: 300px;
     }
-    .el-input {
+    .tm-input {
       width: 300px;
     }
-    .el-button--text {
+    .tm-button--text {
       margin-right: 15px;
     }
   }
@@ -84,19 +84,19 @@ Dialog pops up a dialog box, and it's quite customizable.
 :::demo Set the `visible` attribute with a `Boolean`, and Dialog shows when it is `true`. The Dialog has two parts: `body` and `footer`, and the latter requires a `slot` named `footer`. The optional `title` attribute (empty by default) is for defining a title. Finally, this example demonstrates how `before-close` is used.
 
 ```html
-<el-button type="text" @click="dialogVisible = true">click to open the Dialog</el-button>
+<tm-button type="text" @click="dialogVisible = true">click to open the Dialog</tm-button>
 
-<el-dialog
+<tm-dialog
   title="Tips"
   :visible.sync="dialogVisible"
   width="30%"
   :before-close="handleClose">
   <span>This is a message</span>
   <span slot="footer" class="dialog-footer">
-    <el-button @click="dialogVisible = false">Cancel</el-button>
-    <el-button type="primary" @click="dialogVisible = false">Confirm</el-button>
+    <tm-button @click="dialogVisible = false">Cancel</tm-button>
+    <tm-button type="primary" @click="dialogVisible = false">Confirm</tm-button>
   </span>
-</el-dialog>
+</tm-dialog>
 
 <script>
   export default {
@@ -131,36 +131,36 @@ The content of Dialog can be anything, even a table or a form. This example show
 
 ```html
 <!-- Table -->
-<el-button type="text" @click="dialogTableVisible = true">open a Table nested Dialog</el-button>
+<tm-button type="text" @click="dialogTableVisible = true">open a Table nested Dialog</tm-button>
 
-<el-dialog title="Shipping address" :visible.sync="dialogTableVisible">
-  <el-table :data="gridData">
-    <el-table-column property="date" label="Date" width="150"></el-table-column>
-    <el-table-column property="name" label="Name" width="200"></el-table-column>
-    <el-table-column property="address" label="Address"></el-table-column>
-  </el-table>
-</el-dialog>
+<tm-dialog title="Shipping address" :visible.sync="dialogTableVisible">
+  <tm-table :data="gridData">
+    <tm-table-column property="date" label="Date" width="150"></tm-table-column>
+    <tm-table-column property="name" label="Name" width="200"></tm-table-column>
+    <tm-table-column property="address" label="Address"></tm-table-column>
+  </tm-table>
+</tm-dialog>
 
 <!-- Form -->
-<el-button type="text" @click="dialogFormVisible = true">open a Form nested Dialog</el-button>
+<tm-button type="text" @click="dialogFormVisible = true">open a Form nested Dialog</tm-button>
 
-<el-dialog title="Shipping address" :visible.sync="dialogFormVisible">
-  <el-form :model="form">
-    <el-form-item label="Promotion name" :label-width="formLabelWidth">
-      <el-input v-model="form.name" auto-complete="off"></el-input>
-    </el-form-item>
-    <el-form-item label="Zones" :label-width="formLabelWidth">
-      <el-select v-model="form.region" placeholder="Please select a zone">
-        <el-option label="Zone No.1" value="shanghai"></el-option>
-        <el-option label="Zone No.2" value="beijing"></el-option>
-      </el-select>
-    </el-form-item>
-  </el-form>
+<tm-dialog title="Shipping address" :visible.sync="dialogFormVisible">
+  <tm-form :model="form">
+    <tm-form-item label="Promotion name" :label-width="formLabelWidth">
+      <tm-input v-model="form.name" auto-complete="off"></tm-input>
+    </tm-form-item>
+    <tm-form-item label="Zones" :label-width="formLabelWidth">
+      <tm-select v-model="form.region" placeholder="Please select a zone">
+        <tm-option label="Zone No.1" value="shanghai"></tm-option>
+        <tm-option label="Zone No.2" value="beijing"></tm-option>
+      </tm-select>
+    </tm-form-item>
+  </tm-form>
   <span slot="footer" class="dialog-footer">
-    <el-button @click="dialogFormVisible = false">Cancel</el-button>
-    <el-button type="primary" @click="dialogFormVisible = false">Confirm</el-button>
+    <tm-button @click="dialogFormVisible = false">Cancel</tm-button>
+    <tm-button type="primary" @click="dialogFormVisible = false">Confirm</tm-button>
   </span>
-</el-dialog>
+</tm-dialog>
 
 <script>
   export default {
@@ -208,20 +208,20 @@ If a Dialog is nested in another Dialog, `append-to-body` is required.
 :::demo Normally we do not recommend using nested Dialog. If you need multiple Dialogs rendered on the page, you can simply flat them so that they're siblings to each other. If you must nest a Dialog inside another Dialog, set `append-to-body` of the nested Dialog to true, and it will append to body instead of its parent node, so both Dialogs can be correctly rendered.
 ```html
 <template>
-  <el-button type="text" @click="outerVisible = true">open the outer Dialog</el-button>
+  <tm-button type="text" @click="outerVisible = true">open the outer Dialog</tm-button>
   
-  <el-dialog title="Outer Dialog" :visible.sync="outerVisible">
-    <el-dialog
+  <tm-dialog title="Outer Dialog" :visible.sync="outerVisible">
+    <tm-dialog
         width="30%"
         title="Inner Dialog"
         :visible.sync="innerVisible"
         append-to-body>
-    </el-dialog>
+    </tm-dialog>
     <div slot="footer" class="dialog-footer">
-      <el-button @click="outerVisible = false">Cancel</el-button>
-      <el-button type="primary" @click="innerVisible = true">open the inner Dialog</el-button>
+      <tm-button @click="outerVisible = false">Cancel</tm-button>
+      <tm-button type="primary" @click="innerVisible = true">open the inner Dialog</tm-button>
     </div>
-  </el-dialog>
+  </tm-dialog>
 </template>
 
 <script>
@@ -245,19 +245,19 @@ Dialog's content can be centered.
 :::demo Setting `center` to `true` will center dialog's header and footer horizontally.
 
 ```html
-<el-button type="text" @click="centerDialogVisible = true">Click to open the Dialog</el-button>
+<tm-button type="text" @click="centerDialogVisible = true">Click to open the Dialog</tm-button>
 
-<el-dialog
+<tm-dialog
   title="Warning"
   :visible.sync="centerDialogVisible"
   width="30%"
   center>
   <span>It should be noted that the content will not be aligned in center by default</span>
   <span slot="footer" class="dialog-footer">
-    <el-button @click="centerDialogVisible = false">Cancel</el-button>
-    <el-button type="primary" @click="centerDialogVisible = false">Confirm</el-button>
+    <tm-button @click="centerDialogVisible = false">Cancel</tm-button>
+    <tm-button type="primary" @click="centerDialogVisible = false">Confirm</tm-button>
   </span>
-</el-dialog>
+</tm-dialog>
 
 <script>
   export default {

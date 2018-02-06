@@ -1,17 +1,17 @@
 <template>
-  <el-menu-collapse-transition>
-    <ul class="el-menu"
+  <tm-menu-collapse-transition>
+    <ul class="tm-menu"
       :key="+collapse"
       :style="{ backgroundColor: backgroundColor || '' }"
       :class="{
-        'el-menu--horizontal': mode === 'horizontal',
-        'el-menu--collapse': collapse
+        'tm-menu--horizontal': mode === 'horizontal',
+        'tm-menu--collapse': collapse
       }"
       role="menubar"
     >
       <slot></slot>
     </ul>
-  </el-menu-collapse-transition>
+  </tm-menu-collapse-transition>
 </template>
 <script>
   import emitter from 'element-ui/src/mixins/emitter';
@@ -20,9 +20,9 @@
   import { addClass, removeClass, hasClass } from 'element-ui/src/utils/dom';
 
   export default {
-    name: 'ElMenu',
+    name: 'TmMenu',
 
-    componentName: 'ElMenu',
+    componentName: 'TmMenu',
 
     mixins: [emitter, Migrating],
 
@@ -33,7 +33,7 @@
     },
 
     components: {
-      'el-menu-collapse-transition': {
+      'tm-menu-collapse-transition': {
         functional: true,
         render(createElement, context) {
           const data = {
@@ -46,23 +46,23 @@
               },
 
               enter(el) {
-                addClass(el, 'el-opacity-transition');
+                addClass(el, 'tm-opacity-transition');
                 el.style.opacity = 1;
               },
 
               afterEnter(el) {
-                removeClass(el, 'el-opacity-transition');
+                removeClass(el, 'tm-opacity-transition');
                 el.style.opacity = '';
               },
 
               beforeLeave(el) {
                 if (!el.dataset) el.dataset = {};
 
-                if (hasClass(el, 'el-menu--collapse')) {
-                  removeClass(el, 'el-menu--collapse');
+                if (hasClass(el, 'tm-menu--collapse')) {
+                  removeClass(el, 'tm-menu--collapse');
                   el.dataset.oldOverflow = el.style.overflow;
                   el.dataset.scrollWidth = el.scrollWidth;
-                  addClass(el, 'el-menu--collapse');
+                  addClass(el, 'tm-menu--collapse');
                 }
 
                 el.style.width = el.scrollWidth + 'px';
@@ -70,7 +70,7 @@
               },
 
               leave(el) {
-                if (!hasClass(el, 'el-menu--collapse')) {
+                if (!hasClass(el, 'tm-menu--collapse')) {
                   addClass(el, 'horizontal-collapse-transition');
                   el.style.width = '64px';
                 } else {
@@ -81,7 +81,7 @@
 
               afterLeave(el) {
                 removeClass(el, 'horizontal-collapse-transition');
-                if (hasClass(el, 'el-menu--collapse')) {
+                if (hasClass(el, 'tm-menu--collapse')) {
                   el.style.width = el.dataset.scrollWidth + 'px';
                 } else {
                   el.style.width = '64px';
@@ -143,7 +143,7 @@
 
       collapse(value) {
         if (value) this.openedMenus = [];
-        this.broadcast('ElSubmenu', 'toggle-collapse', value);
+        this.broadcast('TmSubmenu', 'toggle-collapse', value);
       }
     },
     methods: {

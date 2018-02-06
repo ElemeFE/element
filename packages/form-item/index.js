@@ -1,8 +1,8 @@
-import ElFormItem from '../form/src/form-item';
+import TmFormItem from '../form/src/form-item';
 
 /* istanbul ignore next */
-ElFormItem.install = function(Vue) {
-  Vue.component(ElFormItem.name, ElFormItem);
+TmFormItem.install = function(Vue) {
+  Vue.component(TmFormItem.name, TmFormItem);
 };
 
-export default ElFormItem;
+export default TmFormItem;

@@ -279,7 +279,7 @@
         <!-- nav -->
         <ul class="nav">
           <li class="nav-item nav-algolia-search" v-show="isComponentPage">
-            <algolia-search></algolia-search>
+            <algolia-search/>
           </li>
           <li class="nav-item">
             <router-link
@@ -308,55 +308,55 @@
 
           <!-- 版本选择器 -->
           <li class="nav-item nav-versions" v-show="isComponentPage">
-            <el-dropdown
+            <tm-dropdown
               trigger="click"
               class="nav-dropdown"
               :class="{ 'is-active': verDropdownVisible }">
               <span>
                 {{ version }}
-                <i class="el-icon-arrow-down el-icon--right"></i>
+                <i class="tm-icon-arrow-down tm-icon--right"></i>
               </span>
-              <el-dropdown-menu
+              <tm-dropdown-menu
                 slot="dropdown"
                 class="nav-dropdown-list"
                 @input="handleVerDropdownToggle">
-                <el-dropdown-item
+                <tm-dropdown-item
                   v-for="item in Object.keys(versions)"
                   :key="item"
                   @click.native="switchVersion(item)">
                   {{ item }}
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
+                </tm-dropdown-item>
+              </tm-dropdown-menu>
+            </tm-dropdown>
           </li>
 
           <!--&lt;!&ndash; 语言选择器 &ndash;&gt;-->
           <!--<li class="nav-item lang-item">-->
-            <!--<el-dropdown-->
+            <!--<tm-dropdown-->
               <!--trigger="click"-->
               <!--class="nav-dropdown nav-lang"-->
               <!--:class="{ 'is-active': langDropdownVisible }">-->
               <!--<span>-->
                 <!--{{ displayedLang }}-->
-                <!--<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
+                <!--<i class="tm-icon-arrow-down tm-icon&#45;&#45;right"></i>-->
               <!--</span>-->
-              <!--<el-dropdown-menu-->
+              <!--<tm-dropdown-menu-->
                 <!--slot="dropdown"-->
                 <!--class="nav-dropdown-list"-->
                 <!--@input="handleLangDropdownToggle">-->
-                <!--<el-dropdown-item-->
+                <!--<tm-dropdown-item-->
                   <!--v-for="(value, key) in langs"-->
                   <!--:key="key"-->
                   <!--@click.native="switchLang(key)">-->
                   <!--{{ value }}-->
-                <!--</el-dropdown-item>-->
-              <!--</el-dropdown-menu>-->
-            <!--</el-dropdown>-->
+                <!--</tm-dropdown-item>-->
+              <!--</tm-dropdown-menu>-->
+            <!--</tm-dropdown>-->
           <!--</li>-->
           
           <!--theme picker-->
           <li class="nav-item nav-theme-switch" v-show="isComponentPage">
-            <theme-picker></theme-picker>
+            <theme-picker/>
           </li>
         </ul>
       </div>

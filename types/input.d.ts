@@ -1,4 +1,4 @@
-import { ElementUIComponent, ElementUIComponentSize } from './component'
+import { TmUIComponent, TmUIComponentSize } from './component'
 
 /** The resizability of el-input component */
 export type Resizability = 'none' | 'both' | 'horizontal' | 'vertical'
@@ -19,7 +19,7 @@ export interface IconClickEventHandler {
 }
 
 /** Input Component */
-export declare class ElInput extends ElementUIComponent {
+export declare class TmInput extends TmUIComponent {
   /** Type of input */
   type: InputType
 
@@ -39,7 +39,7 @@ export declare class ElInput extends ElementUIComponent {
   disabled: boolean
 
   /** Size of Input, works when type is not 'textarea' */
-  size: ElementUIComponentSize
+  size: TmUIComponentSize
 
   /** Prefix icon class */
   prefixIcon: string

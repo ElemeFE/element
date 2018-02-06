@@ -13,11 +13,11 @@
     width: 438px;
   }
 
-  &.has-time .el-picker-panel__body-wrapper {
+  &.has-time .tm-picker-panel__body-wrapper {
     position: relative;
   }
 
-  .el-picker-panel__content {
+  .tm-picker-panel__content {
     width: 292px;
   }
 
@@ -51,7 +51,7 @@
       padding-bottom: 12px;
       border-bottom: solid 1px $--border-color-lighter;
 
-      & + .el-picker-panel__content {
+      & + .tm-picker-panel__content {
         margin-top: 0;
       }
     }

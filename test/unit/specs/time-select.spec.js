@@ -35,8 +35,8 @@ describe('TimeSelect', () => {
     vm = createVue({
       template: `
         <div>
-          <el-time-select ref="compo" v-model="value">
-          </el-time-select>
+          <tm-time-select ref="compo" v-model="value">
+          </tm-time-select>
         </div>
       `,
 
@@ -83,12 +83,12 @@ describe('TimeSelect', () => {
 
   it('set minTime', done => {
     vm = createVue(`
-      <el-time-select
+      <tm-time-select
         ref="picker"
         :picker-options="{
           minTime: '14:30'
         }">
-      </el-time-select>
+      </tm-time-select>
     `, true);
     const input = vm.$el.querySelector('input');
     const picker = vm.$refs.picker;
@@ -108,13 +108,13 @@ describe('TimeSelect', () => {
   it('minTime < value', done => {
     vm = createVue({
       template: `
-        <el-time-select
+        <tm-time-select
           ref="picker"
           v-model="value"
           :picker-options="{
             minTime: '14:30'
           }">
-        </el-time-select>
+        </tm-time-select>
       `,
       data() {
         return { value: '09:30' };
@@ -138,13 +138,13 @@ describe('TimeSelect', () => {
 
   it('set maxTime', done => {
     vm = createVue(`
-      <el-time-select
+      <tm-time-select
         ref="picker"
         :picker-options="{
           maxTime: '14:30',
           step: '00:30'
         }">
-      </el-time-select>
+      </tm-time-select>
     `, true);
     const input = vm.$el.querySelector('input');
     const picker = vm.$refs.picker;
@@ -163,13 +163,13 @@ describe('TimeSelect', () => {
   it('maxTime > value', done => {
     vm = createVue({
       template: `
-        <el-time-select
+        <tm-time-select
           ref="picker"
           v-model="value"
           :picker-options="{
             maxTime: '14:30'
           }">
-        </el-time-select>
+        </tm-time-select>
       `,
       data() {
         return { value: '09:30' };
@@ -194,7 +194,7 @@ describe('TimeSelect', () => {
   it('event focus and blur', done => {
     vm = createVue({
       template: `
-        <el-time-select
+        <tm-time-select
           ref="picker"
           :picker-options="{
             start: '08:30',
@@ -202,7 +202,7 @@ describe('TimeSelect', () => {
             end: '18:30'
           }"
           placeholder="选择时间">
-        </el-time-select>
+        </tm-time-select>
       `
     }, true);
 
@@ -226,7 +226,7 @@ describe('TimeSelect', () => {
   it('focus', done => {
     vm = createVue({
       template: `
-        <el-time-select ref="picker"></el-time-select>
+        <tm-time-select ref="picker"></tm-time-select>
       `
     }, true);
 

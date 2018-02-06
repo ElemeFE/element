@@ -112,9 +112,9 @@ describe('Upload', () => {
       uploader = createVue({
         render(h) {
           return (
-            <el-upload {...props} ref="upload">
-              <el-button size="small" type="primary">点击上传</el-button>
-            </el-upload>
+            <tm-upload {...props} ref="upload">
+              <tm-button size="small" type="primary">点击上传</tm-button>
+            </tm-upload>
           );
         }
       }, true).$refs.upload;
@@ -179,7 +179,7 @@ describe('Upload', () => {
 
       handlers.onSuccess = (res, file, fileList) => {
         uploader.$nextTick(_ => {
-          uploader.$el.querySelector('.el-upload-list .is-success a').click();
+          uploader.$el.querySelector('.tm-upload-list .is-success a').click();
         });
       };
 
@@ -197,7 +197,7 @@ describe('Upload', () => {
       const files = [file];
 
       handlers.onSuccess = (res, file, fileList) => {
-        uploader.$el.querySelector('.el-upload-list .el-icon-close').click();
+        uploader.$el.querySelector('.tm-upload-list .tm-icon-close').click();
         uploader.$nextTick(_ => {
           expect(uploader.fileList.length).to.equal(0);
           done();

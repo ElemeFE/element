@@ -35,8 +35,8 @@
     }
 
     &:last-child {
-      .el-breadcrumb__inner,
-      .el-breadcrumb__inner a {
+      .tm-breadcrumb__inner,
+      .tm-breadcrumb__inner a {
         &, &:hover {
           font-weight: normal;
           color: $--color-text-regular;
@@ -44,7 +44,7 @@
         }
       }
 
-      .el-breadcrumb__separator {
+      .tm-breadcrumb__separator {
         display: none;
       }
     }

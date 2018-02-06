@@ -3,7 +3,7 @@ import Message from 'packages/message';
 
 describe('Message', () => {
   afterEach(() => {
-    const el = document.querySelector('.el-message');
+    const el = document.querySelector('.tm-message');
     if (!el) return;
     if (el.parentNode) {
       el.parentNode.removeChild(el);
@@ -18,11 +18,11 @@ describe('Message', () => {
       message: '灰风',
       duration: 500
     });
-    const message = document.querySelector('.el-message__content');
-    expect(document.querySelector('.el-message')).to.exist;
+    const message = document.querySelector('.tm-message__content');
+    expect(document.querySelector('.tm-message')).to.exist;
     expect(message.textContent).to.equal('灰风');
     setTimeout(() => {
-      expect(document.querySelector('.el-message')).to.not.exist;
+      expect(document.querySelector('.tm-message')).to.not.exist;
       done();
     }, 1000);
   });
@@ -33,9 +33,9 @@ describe('Message', () => {
       showClose: true
     });
     setTimeout(() => {
-      document.querySelector('.el-message__closeBtn').click();
+      document.querySelector('.tm-message__closeBtn').click();
       setTimeout(() => {
-        expect(document.querySelector('.el-message')).to.not.exist;
+        expect(document.querySelector('.tm-message')).to.not.exist;
         done();
       }, 500);
     }, 500);
@@ -44,11 +44,11 @@ describe('Message', () => {
   it('custom icon', done => {
     Message({
       message: '夏天',
-      iconClass: 'el-icon-close'
+      iconClass: 'tm-icon-close'
     });
     setTimeout(() => {
-      const icon = document.querySelector('.el-message i');
-      expect(icon.classList.contains('el-icon-close')).to.true;
+      const icon = document.querySelector('.tm-message i');
+      expect(icon.classList.contains('tm-icon-close')).to.true;
       done();
     }, 500);
   });
@@ -58,7 +58,7 @@ describe('Message', () => {
       message: '<strong>夏天</strong>',
       dangerouslyUseHTMLString: true
     });
-    const message = document.querySelector('.el-message strong');
+    const message = document.querySelector('.tm-message strong');
     expect(message.textContent).to.equal('夏天');
   });
 
@@ -74,7 +74,7 @@ describe('Message', () => {
     setTimeout(() => {
       Message.closeAll();
       setTimeout(() => {
-        expect(document.querySelector('.el-message')).to.not.exist;
+        expect(document.querySelector('.tm-message')).to.not.exist;
         done();
       }, 500);
     }, 500);
@@ -82,12 +82,12 @@ describe('Message', () => {
 
   it('create', () => {
     Message('娜梅莉亚');
-    expect(document.querySelector('.el-message')).to.exist;
+    expect(document.querySelector('.tm-message')).to.exist;
   });
 
   it('invoke with type', () => {
     Message.success('毛毛狗');
-    expect(document.querySelector('.el-message').__vue__.type).to.equal('success');
+    expect(document.querySelector('.tm-message').__vue__.type).to.equal('success');
   });
 
   it('center', () => {
@@ -96,7 +96,7 @@ describe('Message', () => {
       center: true,
       duration: 0
     });
-    expect(document.querySelector('.el-message').classList.contains('is-center')).to.true;
+    expect(document.querySelector('.tm-message').classList.contains('is-center')).to.true;
   });
 
   it('reset timer', done => {
@@ -105,9 +105,9 @@ describe('Message', () => {
       duration: 1000
     });
     setTimeout(() => {
-      triggerEvent(document.querySelector('.el-message'), 'mouseenter');
+      triggerEvent(document.querySelector('.tm-message'), 'mouseenter');
       setTimeout(() => {
-        expect(document.querySelector('.el-message')).to.exist;
+        expect(document.querySelector('.tm-message')).to.exist;
         done();
       }, 700);
     }, 500);

@@ -1,10 +1,10 @@
-import ElTableColumn from './src/table-column';
-import ElTable from './src/table';
+import TmTableColumn from './src/table-column';
+import TmTable from './src/table';
 
 /* istanbul ignore next */
 export default function(Vue) {
-  Vue.component(ElTable.name, ElTable);
-  Vue.component(ElTableColumn.name, ElTableColumn);
+  Vue.component(TmTable.name, TmTable);
+  Vue.component(TmTableColumn.name, TmTableColumn);
 };
 
-export { ElTable, ElTableColumn };
+export { TmTable, TmTableColumn };

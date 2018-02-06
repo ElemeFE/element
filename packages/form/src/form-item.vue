@@ -1,24 +1,24 @@
 <template>
-  <div class="el-form-item" :class="[{
-      'el-form-item--feedback': elForm && elForm.statusIcon,
+  <div class="tm-form-item" :class="[{
+      'tm-form-item--feedback': elForm && elForm.statusIcon,
       'is-error': validateState === 'error',
       'is-validating': validateState === 'validating',
       'is-success': validateState === 'success',
       'is-required': isRequired || required
     },
-    sizeClass ? 'el-form-item--' + sizeClass : ''
+    sizeClass ? 'tm-form-item--' + sizeClass : ''
   ]">
-    <label :for="labelFor" class="el-form-item__label" v-bind:style="labelStyle" v-if="label || $slots.label">
+    <label :for="labelFor" class="tm-form-item__label" v-bind:style="labelStyle" v-if="label || $slots.label">
       <slot name="label">{{label + form.labelSuffix}}</slot>
     </label>
-    <div class="el-form-item__content" v-bind:style="contentStyle">
+    <div class="tm-form-item__content" v-bind:style="contentStyle">
       <slot></slot>
-      <transition name="el-zoom-in-top">
+      <transition name="tm-zoom-in-top">
         <div
           v-if="validateState === 'error' && showMessage && form.showMessage"
-          class="el-form-item__error"
+          class="tm-form-item__error"
           :class="{
-            'el-form-item__error--inline': typeof inlineMessage === 'boolean'
+            'tm-form-item__error--inline': typeof inlineMessage === 'boolean'
               ? inlineMessage
               : (elForm && elForm.inlineMessage || false)
           }"
@@ -36,9 +36,9 @@
   import { noop, getPropByPath } from 'element-ui/src/utils/util';
 
   export default {
-    name: 'ElFormItem',
+    name: 'TmFormItem',
 
-    componentName: 'ElFormItem',
+    componentName: 'TmFormItem',
 
     mixins: [emitter],
 
@@ -111,8 +111,8 @@
       form() {
         let parent = this.$parent;
         let parentName = parent.$options.componentName;
-        while (parentName !== 'ElForm') {
-          if (parentName === 'ElFormItem') {
+        while (parentName !== 'TmForm') {
+          if (parentName === 'TmFormItem') {
             this.isNested = true;
           }
           parent = parent.$parent;
@@ -255,7 +255,7 @@
     },
     mounted() {
       if (this.prop) {
-        this.dispatch('ElForm', 'el.form.addField', [this]);
+        this.dispatch('TmForm', 'el.form.addField', [this]);
 
         let initialValue = this.fieldValue;
         if (Array.isArray(initialValue)) {
@@ -274,7 +274,7 @@
       }
     },
     beforeDestroy() {
-      this.dispatch('ElForm', 'el.form.removeField', [this]);
+      this.dispatch('TmForm', 'el.form.removeField', [this]);
     }
   };
 </script>

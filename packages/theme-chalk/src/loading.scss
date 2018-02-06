@@ -25,7 +25,7 @@
   @include when(fullscreen) {
     position: fixed;
 
-    .el-loading-spinner {
+    .tm-loading-spinner {
       margin-top: #{- $--loading-fullscreen-spinner-size / 2};
 
       .circular {
@@ -43,7 +43,7 @@
   text-align: center;
   position: absolute;
 
-  .el-loading-text {
+  .tm-loading-text {
     color: $--color-primary;
     margin: 3px 0;
     font-size: 14px;
@@ -69,8 +69,8 @@
   }
 }
 
-.el-loading-fade-enter,
-.el-loading-fade-leave-active {
+.tm-loading-fade-enter,
+.tm-loading-fade-leave-active {
   opacity: 0;
 }
 

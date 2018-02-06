@@ -2,7 +2,7 @@
   import TabNav from './tab-nav';
 
   export default {
-    name: 'ElTabs',
+    name: 'TmTabs',
 
     components: {
       TabNav
@@ -72,7 +72,7 @@
       },
       addPanes(item) {
         const index = this.$slots.default.filter(item => {
-          return item.elm.nodeType === 1 && /\bel-tab-pane\b/.test(item.elm.className);
+          return item.elm.nodeType === 1 && /\btm-tab-pane\b/.test(item.elm.className);
         }).indexOf(item.$vnode);
         this.panes.splice(index, 0, item);
       },
@@ -100,12 +100,12 @@
       const newButton = editable || addable
         ? (
           <span
-            class="el-tabs__new-tab"
+            class="tm-tabs__new-tab"
             on-click={ handleTabAdd }
             tabindex="0"
             on-keydown={ (ev) => { if (ev.keyCode === 13) { handleTabAdd(); }} }
           >
-            <i class="el-icon-plus"></i>
+            <i class="tm-icon-plus"></i>
           </span>
         )
         : null;
@@ -122,23 +122,23 @@
         ref: 'nav'
       };
       const header = (
-        <div class={['el-tabs__header', `is-${tabPosition}`]}>
+        <div class={['tm-tabs__header', `is-${tabPosition}`]}>
           {newButton}
           <tab-nav { ...navData }></tab-nav>
         </div>
       );
       const panels = (
-        <div class="el-tabs__content">
+        <div class="tm-tabs__content">
           {this.$slots.default}
         </div>
       );
 
       return (
         <div class={{
-          'el-tabs': true,
-          'el-tabs--card': type === 'card',
-          [`el-tabs--${tabPosition}`]: true,
-          'el-tabs--border-card': type === 'border-card'
+          'tm-tabs': true,
+          'tm-tabs--card': type === 'card',
+          [`tm-tabs--${tabPosition}`]: true,
+          'tm-tabs--border-card': type === 'border-card'
         }}>
           { tabPosition !== 'bottom' ? [header, panels] : [panels, header] }
         </div>

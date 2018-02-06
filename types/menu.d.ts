@@ -1,10 +1,10 @@
-import { ElementUIComponent } from './component'
+import { TmUIComponent } from './component'
 
 export type MenuDisplayMode = 'horizontal' | 'vertical'
 export type MenuTheme = 'light' | 'dark'
 
 /** Menu that provides navigation for your website */
-export declare class ElMenu extends ElementUIComponent {
+export declare class TmMenu extends TmUIComponent {
   /** Menu display mode */
   mode: MenuDisplayMode
 

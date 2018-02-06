@@ -1,4 +1,4 @@
-import { ElementUIComponent } from './component'
+import { TmUIComponent } from './component'
 
 /** Horizontal alignment of flex layout */
 export type HorizontalAlignment = 'start' | 'end' | 'center' | 'space-around' | 'space-between'
@@ -7,7 +7,7 @@ export type HorizontalAlignment = 'start' | 'end' | 'center' | 'space-around' | 
 export type VertialAlignment = 'top' | 'middle' | 'bottom'
 
 /** Row Layout Component */
-export declare class ElRow extends ElementUIComponent {
+export declare class TmRow extends TmUIComponent {
   /** Grid spacing */
   gutter: number
 
@@ -20,6 +20,6 @@ export declare class ElRow extends ElementUIComponent {
   /** Vertical alignment of flex layout */
   align: VertialAlignment
 
-  /** Custom element tag */
+  /** Custom Tm tag */
   tag: string
 }

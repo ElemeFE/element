@@ -1,4 +1,4 @@
-import { ElementUIComponent } from './component'
+import { TmUIComponent } from './component'
 
 /** Responsive column props */
 export interface ResponsiveColumnProperties {
@@ -13,7 +13,7 @@ export interface ResponsiveColumnProperties {
 export type ResponsiveColumn = number | ResponsiveColumnProperties
 
 /** Colunm Layout Component */
-export declare class ElCol extends ElementUIComponent {
+export declare class TmCol extends TmUIComponent {
   /** Number of column the grid spans */
   span: number
 
@@ -41,6 +41,6 @@ export declare class ElCol extends ElementUIComponent {
   /** ≥1920px Responsive columns or column props object */
   xl: ResponsiveColumn
 
-  /** custom element tag */
+  /** custom Tm tag */
   tag: string
 }

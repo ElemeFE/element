@@ -1,8 +1,8 @@
 <template>
   <label
-    class="el-radio-button"
+    class="tm-radio-button"
     :class="[
-      size ? 'el-radio-button--' + size : '',
+      size ? 'tm-radio-button--' + size : '',
       { 'is-active': value === label },
       { 'is-disabled': isDisabled },
       { 'is-focus': focus }
@@ -14,7 +14,7 @@
     @keydown.space.stop.prevent="value = label"
   >
     <input
-      class="el-radio-button__orig-radio"
+      class="tm-radio-button__orig-radio"
       :value="label"
       type="radio"
       v-model="value"
@@ -25,7 +25,7 @@
       @focus="focus = true"
       @blur="focus = false"
     >
-    <span class="el-radio-button__inner" :style="value === label ? activeStyle : null">
+    <span class="tm-radio-button__inner" :style="value === label ? activeStyle : null">
       <slot></slot>
       <template v-if="!$slots.default">{{label}}</template>
     </span>
@@ -35,7 +35,7 @@
   import Emitter from 'element-ui/src/mixins/emitter';
 
   export default {
-    name: 'ElRadioButton',
+    name: 'TmRadioButton',
 
     mixins: [Emitter],
 
@@ -70,7 +70,7 @@
       _radioGroup() {
         let parent = this.$parent;
         while (parent) {
-          if (parent.$options.componentName !== 'ElRadioGroup') {
+          if (parent.$options.componentName !== 'TmRadioGroup') {
             parent = parent.$parent;
           } else {
             return parent;
@@ -103,7 +103,7 @@
     methods: {
       handleChange() {
         this.$nextTick(() => {
-          this.dispatch('ElRadioGroup', 'handleChange', this.value);
+          this.dispatch('TmRadioGroup', 'handleChange', this.value);
         });
       }
     }

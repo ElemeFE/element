@@ -1,7 +1,7 @@
 <template>
-  <el-input
-    class="el-date-editor"
-    :class="'el-date-editor--' + type"
+  <tm-input
+    class="tm-date-editor"
+    :class="'tm-date-editor--' + type"
     :readonly="!editable || readonly"
     :disabled="pickerDisabled"
     :size="pickerSize"
@@ -21,17 +21,17 @@
     :prefix-icon="triggerClass"
     ref="reference">
     <i slot="suffix"
-      class="el-input__icon"
+      class="tm-input__icon"
       @click="handleClickIcon"
       :class="[showClose ? '' + clearIcon : '']"
       v-if="haveTrigger">
     </i>
-  </el-input>
+  </tm-input>
   <div
-    class="el-date-editor el-range-editor el-input__inner"
+    class="tm-date-editor tm-range-editor tm-input__inner"
     :class="[
-      'el-date-editor--' + type,
-      pickerSize ? `el-range-editor--${ pickerSize }` : '',
+      'tm-date-editor--' + type,
+      pickerSize ? `tm-range-editor--${ pickerSize }` : '',
       pickerDisabled ? 'is-disabled' : '',
       pickerVisible ? 'is-active' : ''
     ]"
@@ -42,7 +42,7 @@
     ref="reference"
     v-clickoutside="handleClose"
     v-else>
-    <i :class="['el-input__icon', 'el-range__icon', triggerClass]"></i>
+    <i :class="['tm-input__icon', 'tm-range__icon', triggerClass]"></i>
     <input
       :placeholder="startPlaceholder"
       :value="displayValue && displayValue[0]"
@@ -53,8 +53,8 @@
       @input="handleStartInput"
       @change="handleStartChange"
       @focus="handleFocus"
-      class="el-range-input">
-    <span class="el-range-separator">{{ rangeSeparator }}</span>
+      class="tm-range-input">
+    <span class="tm-range-separator">{{ rangeSeparator }}</span>
     <input
       :placeholder="endPlaceholder"
       :value="displayValue && displayValue[1]"
@@ -65,12 +65,12 @@
       @input="handleEndInput"
       @change="handleEndChange"
       @focus="handleFocus"
-      class="el-range-input">
+      class="tm-range-input">
     <i
       @click="handleClickIcon"
       v-if="haveTrigger"
       :class="[showClose ? '' + clearIcon : '']"
-      class="el-input__icon el-range__close-icon">
+      class="tm-input__icon tm-range__close-icon">
     </i>
   </div>
 </template>
@@ -81,7 +81,7 @@ import Clickoutside from 'element-ui/src/utils/clickoutside';
 import { formatDate, parseDate, isDateObject, getWeekNumber } from './util';
 import Popper from 'element-ui/src/utils/vue-popper';
 import Emitter from 'element-ui/src/mixins/emitter';
-import ElInput from 'element-ui/packages/input';
+import TmInput from 'element-ui/packages/input';
 import merge from 'element-ui/src/utils/merge';
 
 const NewPopper = {
@@ -317,7 +317,7 @@ export default {
     prefixIcon: String,
     clearIcon: {
       type: String,
-      default: 'el-icon-circle-close'
+      default: 'tm-icon-circle-close'
     },
     name: {
       default: '',
@@ -351,7 +351,7 @@ export default {
     unlinkPanels: Boolean
   },
 
-  components: { ElInput },
+  components: { TmInput },
 
   directives: { Clickoutside },
 
@@ -380,7 +380,7 @@ export default {
         if (this.userInput && parsedValue && this.isValidValue(parsedValue)) {
           this.userInput = null;
         }
-        this.dispatch('ElFormItem', 'el.form.blur');
+        this.dispatch('TmFormItem', 'el.form.blur');
         this.$emit('blur', this);
         this.blur();
       }
@@ -435,7 +435,7 @@ export default {
     },
 
     triggerClass() {
-      return this.prefixIcon || (this.type.indexOf('time') !== -1 ? 'el-icon-time' : 'el-icon-date');
+      return this.prefixIcon || (this.type.indexOf('time') !== -1 ? 'tm-icon-time' : 'tm-icon-date');
     },
 
     selectionMode() {
@@ -801,7 +801,7 @@ export default {
       // determine user real change only
       if (val !== this.valueOnOpen) {
         this.$emit('change', val);
-        this.dispatch('ElFormItem', 'el.form.change', val);
+        this.dispatch('TmFormItem', 'el.form.change', val);
         this.valueOnOpen = val;
       }
     },

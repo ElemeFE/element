@@ -41,7 +41,7 @@
     line-height: 44px;
   }
 
-  .demo-pagination .last .demonstration + .el-pagination {
+  .demo-pagination .last .demonstration + .tm-pagination {
     float: right;
     width: 70%;
     margin: 5px 20px 0 0;
@@ -58,17 +58,17 @@ If you have too much data to display in one page, use pagination.
 ```html
 <div class="block">
   <span class="demonstration">When you have few pages</span>
-  <el-pagination
+  <tm-pagination
     layout="prev, pager, next"
     :total="50">
-  </el-pagination>
+  </tm-pagination>
 </div>
 <div class="block">
   <span class="demonstration">When you have more than 7 pages</span>
-  <el-pagination
+  <tm-pagination
     layout="prev, pager, next"
     :total="1000">
-  </el-pagination>
+  </tm-pagination>
 </div>
 ```
 :::
@@ -77,11 +77,11 @@ If you have too much data to display in one page, use pagination.
 
 :::demo Set the `background` attribute and the buttons will have a background color.
 ```html
-<el-pagination
+<tm-pagination
   background
   layout="prev, pager, next"
   :total="1000">
-</el-pagination>
+</tm-pagination>
 ```
 :::
 
@@ -91,11 +91,11 @@ Use small pagination in the case of limited space.
 
 :::demo Just set the `small` attribute to `true` and the Pagination becomes smaller.
 ```html
-<el-pagination
+<tm-pagination
   small
   layout="prev, pager, next"
   :total="50">
-</el-pagination>
+</tm-pagination>
 ```
 :::
 
@@ -109,18 +109,18 @@ Add more modules based on your scenario.
 <template>
   <div class="block">
     <span class="demonstration">Total item count</span>
-    <el-pagination
+    <tm-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page.sync="currentPage1"
       :page-size="100"
       layout="total, prev, pager, next"
       :total="1000">
-    </el-pagination>
+    </tm-pagination>
   </div>
   <div class="block">
     <span class="demonstration">Change page size</span>
-    <el-pagination
+    <tm-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page.sync="currentPage2"
@@ -128,22 +128,22 @@ Add more modules based on your scenario.
       :page-size="100"
       layout="sizes, prev, pager, next"
       :total="1000">
-    </el-pagination>
+    </tm-pagination>
   </div>
   <div class="block">
     <span class="demonstration">Jump to</span>
-    <el-pagination
+    <tm-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page.sync="currentPage3"
       :page-size="100"
       layout="prev, pager, next, jumper"
       :total="1000">
-    </el-pagination>
+    </tm-pagination>
   </div>
   <div class="block">
     <span class="demonstration">All combined</span>
-    <el-pagination
+    <tm-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page.sync="currentPage4"
@@ -151,7 +151,7 @@ Add more modules based on your scenario.
       :page-size="100"
       layout="total, sizes, prev, pager, next, jumper"
       :total="400">
-    </el-pagination>
+    </tm-pagination>
   </div>
 </template>
 <script>

@@ -9,14 +9,14 @@
   color: $--color-text-regular;
   font-size: $--font-size-base;
 
-  .el-button-group {
+  .tm-button-group {
     display: block;
-    .el-button {
+    .tm-button {
       float: none;
     }
   }
 
-  & .el-dropdown__caret-button {
+  & .tm-dropdown__caret-button {
     padding-left: 5px;
     padding-right: 5px;
     position: relative;
@@ -42,7 +42,7 @@
       }
     }
 
-    & .el-dropdown__icon {
+    & .tm-dropdown__icon {
       padding-left: 0;
     }
   }
@@ -51,7 +51,7 @@
     margin: 0 3px;
   }
 
-  .el-dropdown-selfdefine { // 自定义
+  .tm-dropdown-selfdefine { // 自定义
     &:focus:active, &:focus:not(.focusing) {
       outline-width: 0;
     }
@@ -115,7 +115,7 @@
       padding: 0 17px;
       font-size: 14px;
 
-      &.el-dropdown-menu__item--divided {
+      &.tm-dropdown-menu__item--divided {
         $divided-offset: 6px;
         margin-top: $divided-offset;
 
@@ -135,7 +135,7 @@
       padding: 0 15px;
       font-size: 13px;
 
-      &.el-dropdown-menu__item--divided {
+      &.tm-dropdown-menu__item--divided {
         $divided-offset: 4px;
         margin-top: $divided-offset;
 
@@ -155,7 +155,7 @@
       padding: 0 10px;
       font-size: 12px;
 
-      &.el-dropdown-menu__item--divided {
+      &.tm-dropdown-menu__item--divided {
         $divided-offset: 3px;
         margin-top: $divided-offset;
 

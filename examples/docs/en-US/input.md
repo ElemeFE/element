@@ -74,20 +74,20 @@
 
 <style>
   .demo-input.demo-en-US {
-    .el-select .el-input {
+    .tm-select .tm-input {
       width: 130px;
     }
-    .el-input {
+    .tm-input {
       width: 180px;
     }
-    .el-textarea {
+    .tm-textarea {
       width: 414px;
     }
-    .el-input-group {
+    .tm-input-group {
       width: 100%;
     }
     .demo-input-size {
-      .el-input {
+      .tm-input {
         vertical-align: top;
         margin: 0 10px 10px 0;
       }
@@ -95,14 +95,14 @@
     .demo-input-suffix {
       padding: 10px;
     }
-    .demo-input-suffix .el-input {
+    .demo-input-suffix .tm-input {
       margin-right: 15px;
     }
     .demo-input-label {
       display: inline-block;
       width: 130px;
     }
-    .input-with-select .el-input-group__prepend {
+    .input-with-select .tm-input-group__prepend {
       background-color: #fff;
     }
     .demo-autocomplete {
@@ -114,16 +114,16 @@
         color: #8492a6;
       }
 
-      .el-col:not(:last-child) {
+      .tm-col:not(:last-child) {
         border-right: 1px solid rgba(224,230,237,0.50);
       }
 
-      .el-autocomplete {
+      .tm-autocomplete {
         text-align: left;
       }
     }
   }
-  .el-autocomplete-suggestion.my-autocomplete {
+  .tm-autocomplete-suggestion.my-autocomplete {
     li {
       line-height: normal;
       padding: 7px *;
@@ -152,7 +152,7 @@ Input data using mouse or keyboard.
 :::demo
 
 ```html
-<el-input placeholder="Please input" v-model="input"></el-input>
+<tm-input placeholder="Please input" v-model="input"></tm-input>
 
 <script>
 export default {
@@ -171,11 +171,11 @@ export default {
 :::demo Disable the Input with the `disabled` attribute.
 
 ```html
-<el-input
+<tm-input
   placeholder="Please input"
   v-model="input1"
   :disabled="true">
-</el-input>
+</tm-input>
 
 <script>
 export default {
@@ -194,11 +194,11 @@ export default {
 :::demo Make the Input clearable with the `clearable` attribute.
 
 ```html
-<el-input
+<tm-input
   placeholder="Please input"
   v-model="input10"
   clearable>
-</el-input>
+</tm-input>
 
 <script>
 export default {
@@ -220,29 +220,29 @@ Add an icon to indicate input type.
 ```html
 <div class="demo-input-suffix">
   <span class="demo-input-label">Using attributes</span>
-  <el-input
+  <tm-input
     placeholder="Pick a date"
-    suffix-icon="el-icon-date"
+    suffix-icon="tm-icon-date"
     v-model="input2">
-  </el-input>
-  <el-input
+  </tm-input>
+  <tm-input
     placeholder="Type something"
-    prefix-icon="el-icon-search"
+    prefix-icon="tm-icon-search"
     v-model="input21">
-  </el-input>
+  </tm-input>
 </div>
 <div class="demo-input-suffix">
   <span class="demo-input-label">Using slots</span>
-  <el-input
+  <tm-input
     placeholder="Pick a date"
     v-model="input22">
-    <i slot="suffix" class="el-input__icon el-icon-date"></i>
-  </el-input>
-  <el-input
+    <i slot="suffix" class="tm-input__icon tm-icon-date"></i>
+  </tm-input>
+  <tm-input
     placeholder="Type something"
     v-model="input23">
-    <i slot="prefix" class="el-input__icon el-icon-search"></i>
-  </el-input>
+    <i slot="prefix" class="tm-input__icon tm-icon-search"></i>
+  </tm-input>
 </div>
 
 <style>
@@ -274,12 +274,12 @@ Resizable for entering multiple lines of text information. Add attribute `type="
 :::demo Control the height by setting the `rows` prop.
 
 ```html
-<el-input
+<tm-input
   type="textarea"
   :rows="2"
   placeholder="Please input"
   v-model="textarea">
-</el-input>
+</tm-input>
 
 <script>
 export default {
@@ -300,19 +300,19 @@ Setting the `autosize` prop for a textarea type of Input makes the height to aut
 :::demo
 
 ```html
-<el-input
+<tm-input
   type="textarea"
   autosize
   placeholder="Please input"
   v-model="textarea2">
-</el-input>
+</tm-input>
 <div style="margin: 20px 0;"></div>
-<el-input
+<tm-input
   type="textarea"
   :autosize="{ minRows: 2, maxRows: 4}"
   placeholder="Please input"
   v-model="textarea3">
-</el-input>
+</tm-input>
 
 <script>
 export default {
@@ -335,31 +335,31 @@ Prepend or append an element, generally a label or a button.
 
 ```html
 <div>
-  <el-input placeholder="Please input" v-model="input3">
+  <tm-input placeholder="Please input" v-model="input3">
     <template slot="prepend">Http://</template>
-  </el-input>
+  </tm-input>
 </div>
 <div style="margin-top: 15px;">
-  <el-input placeholder="Please input" v-model="input4">
+  <tm-input placeholder="Please input" v-model="input4">
     <template slot="append">.com</template>
-  </el-input>
+  </tm-input>
 </div>
 <div style="margin-top: 15px;">
-  <el-input placeholder="Please input" v-model="input5" class="input-with-select">
-    <el-select v-model="select" slot="prepend" placeholder="Select">
-      <el-option label="Restaurant" value="1"></el-option>
-      <el-option label="Order No." value="2"></el-option>
-      <el-option label="Tel" value="3"></el-option>
-    </el-select>
-    <el-button slot="append" icon="el-icon-search"></el-button>
-  </el-input>
+  <tm-input placeholder="Please input" v-model="input5" class="input-with-select">
+    <tm-select v-model="select" slot="prepend" placeholder="Select">
+      <tm-option label="Restaurant" value="1"></tm-option>
+      <tm-option label="Order No." value="2"></tm-option>
+      <tm-option label="Tel" value="3"></tm-option>
+    </tm-select>
+    <tm-button slot="append" icon="tm-icon-search"></tm-button>
+  </tm-input>
 </div>
 
 <style>
-  .el-select .el-input {
+  .tm-select .tm-input {
     width: 110px;
   }
-  .input-with-select .el-input-group__prepend {
+  .input-with-select .tm-input-group__prepend {
     background-color: #fff;
   }
 </style>
@@ -383,25 +383,25 @@ export default {
 :::demo Add `size` attribute to change the size of Input. In addition to the default size, there are three other options: `large`, `small` and `mini`.
 ```html
 <div class="demo-input-size">
-  <el-input
+  <tm-input
     placeholder="Please Input"
     v-model="input6">
-  </el-input>
-  <el-input
+  </tm-input>
+  <tm-input
     size="medium"
     placeholder="Please Input"
     v-model="input7">
-  </el-input>
-  <el-input
+  </tm-input>
+  <tm-input
     size="small"
     placeholder="Please Input"
     v-model="input8">
-  </el-input>
-  <el-input
+  </tm-input>
+  <tm-input
     size="mini"
     placeholder="Please Input"
     v-model="input9">
-  </el-input>
+  </tm-input>
 </div>
 
 <script>
@@ -425,29 +425,29 @@ You can get some recommended tips based on the current input.
 
 :::demo Autocomplete component provides input suggestions. The `fetch-suggestions` attribute is a method that returns suggested input. In this example, `querySearch(queryString, cb)` returns suggestions to Autocomplete via `cb(data)` when suggestions are ready.
 ```html
-<el-row class="demo-autocomplete">
-  <el-col :span="12">
+<tm-row class="demo-autocomplete">
+  <tm-col :span="12">
     <div class="sub-title">list suggestions when activated</div>
-    <el-autocomplete
+    <tm-autocomplete
       class="inline-input"
       v-model="state1"
       :fetch-suggestions="querySearch"
       placeholder="Please Input"
       @select="handleSelect"
-    ></el-autocomplete>
-  </el-col>
-  <el-col :span="12">
+    ></tm-autocomplete>
+  </tm-col>
+  <tm-col :span="12">
     <div class="sub-title">list suggestions on input</div>
-    <el-autocomplete
+    <tm-autocomplete
       class="inline-input"
       v-model="state2"
       :fetch-suggestions="querySearch"
       placeholder="Please Input"
       :trigger-on-focus="false"
       @select="handleSelect"
-    ></el-autocomplete>
-  </el-col>
-</el-row>
+    ></tm-autocomplete>
+  </tm-col>
+</tm-row>
 <script>
   export default {
     data() {
@@ -498,14 +498,14 @@ Customize how suggestions are displayed.
 
 :::demo Use `scoped slot` to customize suggestion items. In the scope, you can access the suggestion object via the `item` key.
 ```html
-<el-autocomplete
+<tm-autocomplete
   popper-class="my-autocomplete"
   v-model="state3"
   :fetch-suggestions="querySearch"
   placeholder="Please input"
   @select="handleSelect">
   <i
-    class="el-icon-edit el-input__icon"
+    class="tm-icon-edit tm-input__icon"
     slot="suffix"
     @click="handleIconClick">
   </i>
@@ -513,7 +513,7 @@ Customize how suggestions are displayed.
     <div class="value">{{ props.item.value }}</div>
     <span class="link">{{ props.item.link }}</span>
   </template>
-</el-autocomplete>
+</tm-autocomplete>
 
 <style>
   .my-autocomplete {
@@ -585,12 +585,12 @@ Search data from server-side.
 
 :::demo
 ```html
-<el-autocomplete
+<tm-autocomplete
   v-model="state4"
   :fetch-suggestions="querySearchAsync"
   placeholder="Please input"
   @select="handleSelect"
-></el-autocomplete>
+></tm-autocomplete>
 <script>
   export default {
     data() {

@@ -2,15 +2,15 @@
   <transition-group
     tag="ul"
     :class="[
-      'el-upload-list',
-      'el-upload-list--' + listType,
+      'tm-upload-list',
+      'tm-upload-list--' + listType,
       { 'is-disabled': disabled }
     ]"
-    name="el-list"
+    name="tm-list"
   >
     <li
       v-for="(file, index) in files"
-      :class="['el-upload-list__item', 'is-' + file.status, focusing ? 'focusing' : '']"
+      :class="['tm-upload-list__item', 'is-' + file.status, focusing ? 'focusing' : '']"
       :key="index"
       tabindex="0"
       @keydown.delete="!disabled && $emit('remove', file)"
@@ -19,42 +19,42 @@
       @click="focusing = false"
     >
       <img
-        class="el-upload-list__item-thumbnail"
+        class="tm-upload-list__item-thumbnail"
         v-if="file.status !== 'uploading' && ['picture-card', 'picture'].indexOf(listType) > -1"
         :src="file.url" alt=""
       >
-      <a class="el-upload-list__item-name" @click="handleClick(file)">
-        <i class="el-icon-document"></i>{{file.name}}
+      <a class="tm-upload-list__item-name" @click="handleClick(file)">
+        <i class="tm-icon-document"></i>{{file.name}}
       </a>
-      <label class="el-upload-list__item-status-label">
+      <label class="tm-upload-list__item-status-label">
         <i :class="{
-          'el-icon-upload-success': true,
-          'el-icon-circle-check': listType === 'text',
-          'el-icon-check': ['picture-card', 'picture'].indexOf(listType) > -1
+          'tm-icon-upload-success': true,
+          'tm-icon-circle-check': listType === 'text',
+          'tm-icon-check': ['picture-card', 'picture'].indexOf(listType) > -1
         }"></i>
       </label>
-      <i class="el-icon-close" v-if="!disabled" @click="$emit('remove', file)"></i>
-      <i class="el-icon-close-tip" v-if="!disabled">{{ t('el.upload.deleteTip') }}</i> <!--因为close按钮只在li:focus的时候 display, li blur后就不存在了，所以键盘导航时永远无法 focus到 close按钮上-->
-      <el-progress
+      <i class="tm-icon-close" v-if="!disabled" @click="$emit('remove', file)"></i>
+      <i class="tm-icon-close-tip" v-if="!disabled">{{ t('el.upload.deleteTip') }}</i> <!--因为close按钮只在li:focus的时候 display, li blur后就不存在了，所以键盘导航时永远无法 focus到 close按钮上-->
+      <tm-progress
         v-if="file.status === 'uploading'"
         :type="listType === 'picture-card' ? 'circle' : 'line'"
         :stroke-width="listType === 'picture-card' ? 6 : 2"
         :percentage="parsePercentage(file.percentage)">
-      </el-progress>
-      <span class="el-upload-list__item-actions" v-if="listType === 'picture-card'">
+      </tm-progress>
+      <span class="tm-upload-list__item-actions" v-if="listType === 'picture-card'">
         <span
-          class="el-upload-list__item-preview"
+          class="tm-upload-list__item-preview"
           v-if="handlePreview && listType === 'picture-card'"
           @click="handlePreview(file)"
         >
-          <i class="el-icon-zoom-in"></i>
+          <i class="tm-icon-zoom-in"></i>
         </span>
         <span
           v-if="!disabled"
-          class="el-upload-list__item-delete"
+          class="tm-upload-list__item-delete"
           @click="$emit('remove', file)"
         >
-          <i class="el-icon-delete"></i>
+          <i class="tm-icon-delete"></i>
         </span>
       </span>
     </li>
@@ -62,7 +62,7 @@
 </template>
 <script>
   import Locale from 'element-ui/src/mixins/locale';
-  import ElProgress from 'element-ui/packages/progress';
+  import TmProgress from 'element-ui/packages/progress';
 
   export default {
     mixins: [Locale],
@@ -72,7 +72,7 @@
         focusing: false
       };
     },
-    components: { ElProgress },
+    components: { TmProgress },
 
     props: {
       files: {

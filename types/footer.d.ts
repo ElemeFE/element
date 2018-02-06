@@ -1,7 +1,7 @@
-import { ElementUIComponent } from './component'
+import { TmUIComponent } from './component'
 
 /** Footer Component */
-export declare class ElFooter extends ElementUIComponent {
+export declare class TmFooter extends TmUIComponent {
   /** Height of the footer */
   height: string
 }

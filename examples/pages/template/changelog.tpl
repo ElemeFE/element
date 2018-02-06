@@ -6,7 +6,7 @@
       float: right;
       padding: 0;
 
-      &.el-button {
+      &.tm-button {
         transform: translateY(-3px);
       }
 
@@ -137,9 +137,9 @@
 <template>
   <div class="page-changelog">
     <div class="heading">
-      <el-button class="fr">
+      <tm-button class="fr">
         <a href="https://github.com/ElemeFE/element/releases" target="_blank">GitHub Releases</a>
-      </el-button>
+      </tm-button>
       <%= 1 >
     </div>
     <ul class="timeline" ref="timeline">

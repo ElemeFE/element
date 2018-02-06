@@ -1,4 +1,4 @@
-import { ElementUIComponent } from './component'
+import { TmUIComponent } from './component'
 import { IconClickEventHandler } from './input'
 
 export interface FetchSuggestionsCallback {
@@ -21,7 +21,7 @@ export interface FetchSuggestions {
 }
 
 /** Autocomplete Component */
-export declare class ElAutocomplete extends ElementUIComponent {
+export declare class TmAutocomplete extends TmUIComponent {
   /** The placeholder of Autocomplete */
   placeholder: string
 

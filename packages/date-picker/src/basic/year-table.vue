@@ -1,5 +1,5 @@
 <template>
-  <table @click="handleYearTableClick" class="el-year-table">
+  <table @click="handleYearTableClick" class="tm-year-table">
     <tbody>
     <tr>
       <td class="available" :class="getCellStyle(startYear + 0)">

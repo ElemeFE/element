@@ -28,8 +28,8 @@ LoadingConstructor.prototype.close = function() {
     const target = this.fullscreen || this.body
       ? document.body
       : this.target;
-    removeClass(target, 'el-loading-parent--relative');
-    removeClass(target, 'el-loading-parent--hidden');
+    removeClass(target, 'tm-loading-parent--relative');
+    removeClass(target, 'tm-loading-parent--hidden');
     if (this.$el && this.$el.parentNode) {
       this.$el.parentNode.removeChild(this.$el);
     }
@@ -88,10 +88,10 @@ const Loading = (options = {}) => {
 
   addStyle(options, parent, instance);
   if (instance.originalPosition !== 'absolute' && instance.originalPosition !== 'fixed') {
-    addClass(parent, 'el-loading-parent--relative');
+    addClass(parent, 'tm-loading-parent--relative');
   }
   if (options.fullscreen && options.lock) {
-    addClass(parent, 'el-loading-parent--hidden');
+    addClass(parent, 'tm-loading-parent--hidden');
   }
   parent.appendChild(instance.$el);
   Vue.nextTick(() => {

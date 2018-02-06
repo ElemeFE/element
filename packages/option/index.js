@@ -1,8 +1,8 @@
-import ElOption from '../select/src/option';
+import TmOption from '../select/src/option';
 
 /* istanbul ignore next */
-ElOption.install = function(Vue) {
-  Vue.component(ElOption.name, ElOption);
+TmOption.install = function(Vue) {
+  Vue.component(TmOption.name, TmOption);
 };
 
-export default ElOption;
+export default TmOption;

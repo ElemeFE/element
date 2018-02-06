@@ -4,12 +4,12 @@
 
 @include b(form) {
   @include m(label-left) {
-    & .el-form-item__label {
+    & .tm-form-item__label {
       text-align: left;
     }
   }
   @include m(label-top) {
-    & .el-form-item__label {
+    & .tm-form-item__label {
       float: none;
       display: inline-block;
       text-align: left;
@@ -17,20 +17,20 @@
     }
   }
   @include m(inline) {
-    & .el-form-item {
+    & .tm-form-item {
       display: inline-block;
       margin-right: 10px;
       vertical-align: top;
     }
-    & .el-form-item__label {
+    & .tm-form-item__label {
       float: none;
       display: inline-block;
     }
-    & .el-form-item__content {
+    & .tm-form-item__content {
       display: inline-block;
       vertical-align: top;
     }
-    &.el-form--label-top .el-form-item__content {
+    &.tm-form--label-top .tm-form-item__content {
       display: block;
     }
   }
@@ -39,47 +39,47 @@
   margin-bottom: 22px;
   @include utils-clearfix;
 
-  & .el-form-item {
+  & .tm-form-item {
     margin-bottom: 0;
   }
 
-  & .el-input__validateIcon {
+  & .tm-input__validateIcon {
     display: none;
   }
 
   @include m(medium) {
-    .el-form-item__label {
+    .tm-form-item__label {
       line-height: 36px;
     }
-    .el-form-item__content {
+    .tm-form-item__content {
       line-height: 36px;
     }
   }
   @include m(small) {
-    .el-form-item__label {
+    .tm-form-item__label {
       line-height: 32px;
     }
-    .el-form-item__content {
+    .tm-form-item__content {
       line-height: 32px;
     }
-    &.el-form-item {
+    &.tm-form-item {
       margin-bottom: 18px;
     }
-    .el-form-item__error {
+    .tm-form-item__error {
       padding-top: 2px;
     }
   }
   @include m(mini) {
-    .el-form-item__label {
+    .tm-form-item__label {
       line-height: 28px;
     }
-    .el-form-item__content {
+    .tm-form-item__content {
       line-height: 28px;
     }
-    &.el-form-item {
+    &.tm-form-item {
       margin-bottom: 18px;
     }
-    .el-form-item__error {
+    .tm-form-item__error {
       padding-top: 1px;
     }
   }
@@ -119,7 +119,7 @@
   }
 
   @include when(required) {
-    .el-form-item__label:before {
+    .tm-form-item__label:before {
       content: '*';
       color: $--color-danger;
       margin-right: 4px;
@@ -127,41 +127,41 @@
   }
 
   @include when(error) {
-    & .el-input__inner,
-    & .el-textarea__inner {
+    & .tm-input__inner,
+    & .tm-textarea__inner {
       &, &:focus {
         border-color: $--color-danger;
       }
     }
-    & .el-input-group__append,
-    & .el-input-group__prepend {
-      & .el-input__inner {
+    & .tm-input-group__append,
+    & .tm-input-group__prepend {
+      & .tm-input__inner {
         border-color: transparent;
       }
     }
-    .el-input__validateIcon {
+    .tm-input__validateIcon {
       color: $--color-danger;
     }
   }
   @include when(success) {
-    & .el-input__inner,
-    & .el-textarea__inner {
+    & .tm-input__inner,
+    & .tm-textarea__inner {
       &, &:focus {
         border-color: $--color-success;
       }
     }
-    & .el-input-group__append,
-    & .el-input-group__prepend {
-      & .el-input__inner {
+    & .tm-input-group__append,
+    & .tm-input-group__prepend {
+      & .tm-input__inner {
         border-color: transparent;
       }
     }
-    .el-input__validateIcon {
+    .tm-input__validateIcon {
       color: $--color-success;
     }
   }
   @include m(feedback) {
-    .el-input__validateIcon {
+    .tm-input__validateIcon {
       display: inline-block;
     }
   }

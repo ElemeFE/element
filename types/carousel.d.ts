@@ -1,4 +1,4 @@
-import { ElementUIComponent } from './component'
+import { TmUIComponent } from './component'
 
 export type CarouselIndicatorTrigger = 'hover' | 'click'
 export type CarouselIndicatorPosition = 'outside' | 'none'
@@ -6,7 +6,7 @@ export type CarouselArrowVisibility = 'always' | 'hover' | 'never'
 export type CarouselType = 'card'
 
 /** Loop a series of images or texts in a limited space */
-export declare class ElCarousel extends ElementUIComponent {
+export declare class TmCarousel extends TmUIComponent {
   /** Height of the carousel */
   height: number
 
@@ -41,7 +41,7 @@ export declare class ElCarousel extends ElementUIComponent {
   /**
    * Manually switch slide by carousel item's name
    *
-   * @param name The name of the corresponding `el-carousel-item`
+   * @param name The name of the corresponding `tm-caroustm-item`
    */
   setActiveItem (name: string): void
 

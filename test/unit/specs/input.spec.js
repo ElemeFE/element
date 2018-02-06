@@ -9,13 +9,13 @@ describe('Input', () => {
   it('create', () => {
     vm = createVue({
       template: `
-        <el-input
+        <tm-input
           :minlength="3"
           :maxlength="5"
           placeholder="请输入内容"
           @focus="handleFocus"
           value="input">
-        </el-input>
+        </tm-input>
       `,
       data() {
         return {
@@ -40,8 +40,8 @@ describe('Input', () => {
   it('disabled', () => {
     vm = createVue({
       template: `
-        <el-input disabled>
-        </el-input>
+        <tm-input disabled>
+        </tm-input>
       `
     }, true);
     expect(vm.$el.querySelector('input').getAttribute('disabled')).to.ok;
@@ -50,53 +50,53 @@ describe('Input', () => {
   it('suffixIcon', () => {
     vm = createVue({
       template: `
-        <el-input suffix-icon="time"></el-input>
+        <tm-input suffix-icon="time"></tm-input>
       `
     }, true);
-    var icon = vm.$el.querySelector('.el-input__icon');
+    var icon = vm.$el.querySelector('.tm-input__icon');
     expect(icon).to.be.exist;
   });
 
   it('prefixIcon', () => {
     vm = createVue({
       template: `
-        <el-input prefix-icon="time"></el-input>
+        <tm-input prefix-icon="time"></tm-input>
       `
     }, true);
-    var icon = vm.$el.querySelector('.el-input__icon');
+    var icon = vm.$el.querySelector('.tm-input__icon');
     expect(icon).to.be.exist;
   });
 
   it('size', () => {
     vm = createVue({
       template: `
-        <el-input size="large">
-        </el-input>
+        <tm-input size="large">
+        </tm-input>
       `
     }, true);
 
-    expect(vm.$el.classList.contains('el-input--large')).to.true;
+    expect(vm.$el.classList.contains('tm-input--large')).to.true;
   });
 
   it('type', () => {
     vm = createVue({
       template: `
-        <el-input type="textarea">
-        </el-input>
+        <tm-input type="textarea">
+        </tm-input>
       `
     }, true);
 
-    expect(vm.$el.classList.contains('el-textarea')).to.true;
+    expect(vm.$el.classList.contains('tm-textarea')).to.true;
   });
 
   it('rows', () => {
     vm = createVue({
       template: `
-        <el-input type="textarea" :rows="3">
-        </el-input>
+        <tm-input type="textarea" :rows="3">
+        </tm-input>
       `
     }, true);
-    expect(vm.$el.querySelector('.el-textarea__inner').getAttribute('rows')).to.be.equal('3');
+    expect(vm.$el.querySelector('.tm-textarea__inner').getAttribute('rows')).to.be.equal('3');
   });
 
   // Github issue #2836
@@ -104,7 +104,7 @@ describe('Input', () => {
     vm = createVue({
       template: `
         <div>
-          <el-input type="textarea" :resize="resize"></el-input>
+          <tm-input type="textarea" :resize="resize"></tm-input>
         </div>
       `,
       data: {
@@ -112,10 +112,10 @@ describe('Input', () => {
       }
     }, true);
     vm.$nextTick(() => {
-      expect(vm.$el.querySelector('.el-textarea__inner').style.resize).to.be.equal(vm.resize);
+      expect(vm.$el.querySelector('.tm-textarea__inner').style.resize).to.be.equal(vm.resize);
       vm.resize = 'horizontal';
       vm.$nextTick(() => {
-        expect(vm.$el.querySelector('.el-textarea__inner').style.resize).to.be.equal(vm.resize);
+        expect(vm.$el.querySelector('.tm-textarea__inner').style.resize).to.be.equal(vm.resize);
         done();
       });
     });
@@ -125,20 +125,20 @@ describe('Input', () => {
     vm = createVue({
       template: `
         <div>
-          <el-input
+          <tm-input
             ref="limitSize"
             type="textarea"
             :autosize="{minRows: 3, maxRows: 5}"
             v-model="textareaValue"
           >
-          </el-input>
-          <el-input
+          </tm-input>
+          <tm-input
             ref="limitlessSize"
             type="textarea"
             autosize
             v-model="textareaValue"
           >
-          </el-input>
+          </tm-input>
         </div>
       `,
       data() {
@@ -164,8 +164,8 @@ describe('Input', () => {
   it('focus', done => {
     vm = createVue({
       template: `
-        <el-input ref="input">
-        </el-input>
+        <tm-input ref="input">
+        </tm-input>
       `
     }, true);
 
@@ -184,11 +184,11 @@ describe('Input', () => {
     it('event:focus & blur', done => {
       vm = createVue({
         template: `
-          <el-input
+          <tm-input
             ref="input"
             placeholder="请输入内容"
             value="input">
-          </el-input>
+          </tm-input>
         `
       }, true);
 
@@ -210,11 +210,11 @@ describe('Input', () => {
       // NOTE: should be same as native's change behavior
       vm = createVue({
         template: `
-          <el-input
+          <tm-input
             ref="input"
             placeholder="请输入内容"
             :value="input">
-          </el-input>
+          </tm-input>
         `,
         data() {
           return {

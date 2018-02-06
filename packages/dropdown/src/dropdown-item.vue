@@ -1,9 +1,9 @@
 <template>
   <li
-    class="el-dropdown-menu__item"
+    class="tm-dropdown-menu__item"
     :class="{
       'is-disabled': disabled,
-      'el-dropdown-menu__item--divided': divided
+      'tm-dropdown-menu__item--divided': divided
     }"
     @click="handleClick"
     :aria-disabled="disabled"
@@ -16,7 +16,7 @@
   import Emitter from 'element-ui/src/mixins/emitter';
 
   export default {
-    name: 'ElDropdownItem',
+    name: 'TmDropdownItem',
 
     mixins: [Emitter],
 
@@ -28,7 +28,7 @@
 
     methods: {
       handleClick(e) {
-        this.dispatch('ElDropdown', 'menu-item-click', [this.command, this]);
+        this.dispatch('TmDropdown', 'menu-item-click', [this.command, this]);
       }
     }
   };

@@ -1,12 +1,12 @@
 import Pager from './pager.vue';
-import ElSelect from 'element-ui/packages/select';
-import ElOption from 'element-ui/packages/option';
-import ElInput from 'element-ui/packages/input';
+import TmSelect from 'element-ui/packages/select';
+import TmOption from 'element-ui/packages/option';
+import TmInput from 'element-ui/packages/input';
 import Locale from 'element-ui/src/mixins/locale';
 import { valueEquals } from 'element-ui/src/utils/util';
 
 export default {
-  name: 'ElPagination',
+  name: 'TmPagination',
 
   props: {
     pageSize: {
@@ -53,9 +53,9 @@ export default {
   },
 
   render(h) {
-    let template = <div class={['el-pagination', {
+    let template = <div class={['tm-pagination', {
       'is-background': this.background,
-      'el-pagination--small': this.small
+      'tm-pagination--small': this.small
     }] }></div>;
     const layout = this.layout || '';
     if (!layout) return;
@@ -69,7 +69,7 @@ export default {
       total: <total></total>
     };
     const components = layout.split(',').map((item) => item.trim());
-    const rightWrapper = <div class="el-pagination__rightwrapper"></div>;
+    const rightWrapper = <div class="tm-pagination__rightwrapper"></div>;
     let haveRightWrapper = false;
 
     components.forEach(compo => {
@@ -112,7 +112,7 @@ export default {
             {
               this.$parent.prevText
                 ? <span>{ this.$parent.prevText }</span>
-                : <i class="el-icon el-icon-arrow-left"></i>
+                : <i class="tm-icon tm-icon-arrow-left"></i>
             }
           </button>
         );
@@ -132,7 +132,7 @@ export default {
             {
               this.$parent.nextText
                 ? <span>{ this.$parent.nextText }</span>
-                : <i class="el-icon el-icon-arrow-right"></i>
+                : <i class="tm-icon tm-icon-arrow-right"></i>
             }
           </button>
         );
@@ -162,27 +162,27 @@ export default {
 
       render(h) {
         return (
-          <span class="el-pagination__sizes">
-            <el-select
+          <span class="tm-pagination__sizes">
+            <tm-select
               value={ this.$parent.internalPageSize }
               popperClass={ this.$parent.popperClass || '' }
               on-input={ this.handleChange }>
               {
                 this.pageSizes.map(item =>
-                  <el-option
+                  <tm-option
                     value={ item }
                     label={ item + this.t('el.pagination.pagesize') }>
-                  </el-option>
+                  </tm-option>
                 )
               }
-            </el-select>
+            </tm-select>
           </span>
         );
       },
 
       components: {
-        ElSelect,
-        ElOption
+        TmSelect,
+        TmOption
       },
 
       methods: {
@@ -204,7 +204,7 @@ export default {
         };
       },
 
-      components: { ElInput },
+      components: { TmInput },
 
       methods: {
         handleFocus(event) {
@@ -243,10 +243,10 @@ export default {
 
       render(h) {
         return (
-          <span class="el-pagination__jump">
+          <span class="tm-pagination__jump">
             { this.t('el.pagination.goto') }
-            <el-input
-              class="el-pagination__editor is-in-pagination"
+            <tm-input
+              class="tm-pagination__editor is-in-pagination"
               min={ 1 }
               max={ this.$parent.internalPageCount }
               value={ this.$parent.internalCurrentPage }
@@ -269,7 +269,7 @@ export default {
       render(h) {
         return (
           typeof this.$parent.total === 'number'
-            ? <span class="el-pagination__total">{ this.t('el.pagination.total', { total: this.$parent.total }) }</span>
+            ? <span class="tm-pagination__total">{ this.t('el.pagination.total', { total: this.$parent.total }) }</span>
             : ''
         );
       }

@@ -1,5 +1,5 @@
 import { VNode } from 'vue'
-import { ElementUIComponent } from './component'
+import { TmUIComponent } from './component'
 
 export interface DialogSlots {
   /** Content of the Dialog */
@@ -15,7 +15,7 @@ export interface DialogSlots {
 }
 
 /** Informs users while preserving the current page state */
-export declare class ElDialog extends ElementUIComponent {
+export declare class TmDialog extends TmUIComponent {
   /** Title of Dialog */
   title: string
 
@@ -31,7 +31,7 @@ export declare class ElDialog extends ElementUIComponent {
   /** Whether a mask is displayed */
   modal: boolean
 
-  /** Whether to append modal to body element. If false, the modal will be appended to Dialog's parent element */
+  /** Whether to append modal to body Tm. If false, the modal will be appended to Dialog's parent Tm */
   modalAppendToBody: boolean
 
   /** Whether scroll of body is disabled while Dialog is displayed */

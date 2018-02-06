@@ -1,14 +1,14 @@
 <template>
   <div :class="[
-    type === 'textarea' ? 'el-textarea' : 'el-input',
-    inputSize ? 'el-input--' + inputSize : '',
+    type === 'textarea' ? 'tm-textarea' : 'tm-input',
+    inputSize ? 'tm-input--' + inputSize : '',
     {
       'is-disabled': inputDisabled,
-      'el-input-group': $slots.prepend || $slots.append,
-      'el-input-group--append': $slots.append,
-      'el-input-group--prepend': $slots.prepend,
-      'el-input--prefix': $slots.prefix || prefixIcon,
-      'el-input--suffix': $slots.suffix || suffixIcon
+      'tm-input-group': $slots.prepend || $slots.append,
+      'tm-input-group--append': $slots.append,
+      'tm-input-group--prepend': $slots.prepend,
+      'tm-input--prefix': $slots.prefix || prefixIcon,
+      'tm-input--suffix': $slots.suffix || suffixIcon
     }
     ]"
     @mouseenter="hovering = true"
@@ -16,13 +16,13 @@
   >
     <template v-if="type !== 'textarea'">
       <!-- 前置元素 -->
-      <div class="el-input-group__prepend" v-if="$slots.prepend">
+      <div class="tm-input-group__prepend" v-if="$slots.prepend">
         <slot name="prepend"></slot>
       </div>
       <input
         :tabindex="tabindex"
         v-if="type !== 'textarea'"
-        class="el-input__inner"
+        class="tm-input__inner"
         v-bind="$props"
         :disabled="inputDisabled"
         :autocomplete="autoComplete"
@@ -35,45 +35,45 @@
         :aria-label="label"
       >
       <!-- 前置内容 -->
-      <span class="el-input__prefix" v-if="$slots.prefix || prefixIcon" :style="prefixOffset">
+      <span class="tm-input__prefix" v-if="$slots.prefix || prefixIcon" :style="prefixOffset">
         <slot name="prefix"></slot>
-        <i class="el-input__icon"
+        <i class="tm-input__icon"
            v-if="prefixIcon"
            :class="prefixIcon">
         </i>
       </span>
       <!-- 后置内容 -->
       <span
-        class="el-input__suffix"
+        class="tm-input__suffix"
         v-if="$slots.suffix || suffixIcon || showClear || validateState && needStatusIcon"
         :style="suffixOffset">
-        <span class="el-input__suffix-inner">
+        <span class="tm-input__suffix-inner">
           <template v-if="!showClear">
             <slot name="suffix"></slot>
-            <i class="el-input__icon"
+            <i class="tm-input__icon"
               v-if="suffixIcon"
               :class="suffixIcon">
             </i>
           </template>
           <i v-else
-            class="el-input__icon el-icon-circle-close el-input__clear"
+            class="tm-input__icon tm-icon-circle-close tm-input__clear"
             @click="clear"
           ></i>
         </span>
-        <i class="el-input__icon"
+        <i class="tm-input__icon"
           v-if="validateState"
-          :class="['el-input__validateIcon', validateIcon]">
+          :class="['tm-input__validateIcon', validateIcon]">
         </i>
       </span>
       <!-- 后置元素 -->
-      <div class="el-input-group__append" v-if="$slots.append">
+      <div class="tm-input-group__append" v-if="$slots.append">
         <slot name="append"></slot>
       </div>
     </template>
     <textarea
       v-else
       :tabindex="tabindex"
-      class="el-textarea__inner"
+      class="tm-textarea__inner"
       :value="currentValue"
       @input="handleInput"
       ref="textarea"
@@ -95,9 +95,9 @@
   import merge from 'element-ui/src/utils/merge';
 
   export default {
-    name: 'ElInput',
+    name: 'TmInput',
 
-    componentName: 'ElInput',
+    componentName: 'TmInput',
 
     mixins: [emitter, Migrating],
 
@@ -179,9 +179,9 @@
       },
       validateIcon() {
         return {
-          validating: 'el-icon-loading',
-          success: 'el-icon-circle-check',
-          error: 'el-icon-circle-close'
+          validating: 'tm-icon-loading',
+          success: 'tm-icon-circle-check',
+          error: 'tm-icon-circle-close'
         }[this.validateState];
       },
       textareaStyle() {
@@ -226,7 +226,7 @@
         this.focused = false;
         this.$emit('blur', event);
         if (this.validateEvent) {
-          this.dispatch('ElFormItem', 'el.form.blur', [this.currentValue]);
+          this.dispatch('TmFormItem', 'el.form.blur', [this.currentValue]);
         }
       },
       inputSelect() {
@@ -266,7 +266,7 @@
         });
         this.currentValue = value;
         if (this.validateEvent) {
-          this.dispatch('ElFormItem', 'el.form.change', [value]);
+          this.dispatch('TmFormItem', 'el.form.change', [value]);
         }
       },
       calcIconOffset(place) {
@@ -278,7 +278,7 @@
         const pendant = pendantMap[place];
 
         if (this.$slots[pendant]) {
-          return { transform: `translateX(${place === 'suf' ? '-' : ''}${this.$el.querySelector(`.el-input-group__${pendant}`).offsetWidth}px)` };
+          return { transform: `translateX(${place === 'suf' ? '-' : ''}${this.$el.querySelector(`.tm-input-group__${pendant}`).offsetWidth}px)` };
         }
       },
       clear() {

@@ -12,11 +12,11 @@
     width: 100%;
   }
 
-  .el-picker-panel__body {
+  .tm-picker-panel__body {
     min-width: 513px;
   }
 
-  .el-picker-panel__content {
+  .tm-picker-panel__content {
     margin: 0;
   }
 
@@ -52,7 +52,7 @@
     }
 
     @include when(right) {
-      .el-date-range-picker__header {
+      .tm-date-range-picker__header {
 
         div {
           margin-left: 50px;
@@ -80,7 +80,7 @@
     width: 100%;
     box-sizing: border-box;
 
-    > .el-icon-arrow-right {
+    > .tm-icon-arrow-right {
       font-size: 20px;
       vertical-align: middle;
       display: table-cell;
@@ -93,7 +93,7 @@
     display: table-cell;
     padding: 0 5px;
 
-    .el-picker-panel {
+    .tm-picker-panel {
       position: absolute;
       top: 13px;
       right: 0;

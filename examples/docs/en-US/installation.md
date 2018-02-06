@@ -34,10 +34,10 @@ If you are using CDN, a hello-world page is easy with Element. [Online Demo](htt
 </head>
 <body>
   <div id="app">
-    <el-button @click="visible = true">Button</el-button>
-    <el-dialog :visible.sync="visible" title="Hello world">
+    <tm-button @click="visible = true">Button</tm-button>
+    <tm-dialog :visible.sync="visible" title="Hello world">
       <p>Try Element</p>
-    </el-dialog>
+    </tm-dialog>
   </div>
 </body>
   <!-- import Vue before Element -->

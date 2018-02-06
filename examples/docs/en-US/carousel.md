@@ -30,11 +30,11 @@
     margin-bottom: 20px;
   }
 
-  .demo-carousel .el-carousel__container {
+  .demo-carousel .tm-carousel__container {
     text-align: center;
   }
 
-  .demo-carousel .el-carousel__item {
+  .demo-carousel .tm-carousel__item {
     h3 {
       color: #fff;
       font-size: 18px;
@@ -65,29 +65,29 @@ Loop a series of images or texts in a limited space
 
 ### Basic usage
 
-:::demo Combine `el-carousel` with `el-carousel-item`, and you'll get a carousel. Content of each slide is completely customizable, and you just need to place it inside  `el-carousel-item` tag. By default the carousel switches when mouse hovers over an indicator. Set `trigger` to `click`, and the carousel switches only when an indicator is clicked.
+:::demo Combine `tm-carousel` with `tm-carousel-item`, and you'll get a carousel. Content of each slide is completely customizable, and you just need to place it inside  `tm-carousel-item` tag. By default the carousel switches when mouse hovers over an indicator. Set `trigger` to `click`, and the carousel switches only when an indicator is clicked.
 ```html
 <template>
   <div class="block">
     <span class="demonstration">Switch when indicator is hovered (default)</span>
-    <el-carousel height="150px">
-      <el-carousel-item v-for="item in 4" :key="item">
+    <tm-carousel height="150px">
+      <tm-carousel-item v-for="item in 4" :key="item">
         <h3>{{ item }}</h3>
-      </el-carousel-item>
-    </el-carousel>
+      </tm-carousel-item>
+    </tm-carousel>
   </div>
   <div class="block">
     <span class="demonstration">Switch when indicator is clicked</span>
-    <el-carousel trigger="click" height="150px">
-      <el-carousel-item v-for="item in 4" :key="item">
+    <tm-carousel trigger="click" height="150px">
+      <tm-carousel-item v-for="item in 4" :key="item">
         <h3>{{ item }}</h3>
-      </el-carousel-item>
-    </el-carousel>
+      </tm-carousel-item>
+    </tm-carousel>
   </div>
 </template>
 
 <style>
-  .el-carousel__item h3 {
+  .tm-carousel__item h3 {
     color: #475669;
     font-size: 14px;
     opacity: 0.75;
@@ -95,11 +95,11 @@ Loop a series of images or texts in a limited space
     margin: 0;
   }
 
-  .el-carousel__item:nth-child(2n) {
+  .tm-carousel__item:nth-child(2n) {
     background-color: #99a9bf;
   }
 
-  .el-carousel__item:nth-child(2n+1) {
+  .tm-carousel__item:nth-child(2n+1) {
     background-color: #d3dce6;
   }
 </style>
@@ -113,15 +113,15 @@ Indicators can be displayed outside the carousel
 :::demo The `indicator-position` attribute determines where the indicators are located. By default they are inside the carousel, and setting `indicator-position` to `outside` moves them outside; setting `indicator-position` to `none` hides the indicators.
 ```html
 <template>
-  <el-carousel indicator-position="outside">
-    <el-carousel-item v-for="item in 4" :key="item">
+  <tm-carousel indicator-position="outside">
+    <tm-carousel-item v-for="item in 4" :key="item">
       <h3>{{ item }}</h3>
-    </el-carousel-item>
-  </el-carousel>
+    </tm-carousel-item>
+  </tm-carousel>
 </template>
 
 <style>
-  .el-carousel__item h3 {
+  .tm-carousel__item h3 {
     color: #475669;
     font-size: 18px;
     opacity: 0.75;
@@ -129,11 +129,11 @@ Indicators can be displayed outside the carousel
     margin: 0;
   }
 
-  .el-carousel__item:nth-child(2n) {
+  .tm-carousel__item:nth-child(2n) {
     background-color: #99a9bf;
   }
 
-  .el-carousel__item:nth-child(2n+1) {
+  .tm-carousel__item:nth-child(2n+1) {
     background-color: #d3dce6;
   }
 </style>
@@ -147,15 +147,15 @@ You can define when arrows are displayed
 :::demo The `arrow` attribute determines when arrows are displayed. By default they appear when mouse hovers over the carousel. Setting `arrow` to `always` or `never` shows/hides the arrows permanently.
 ```html
 <template>
-  <el-carousel :interval="5000" arrow="always">
-    <el-carousel-item v-for="item in 4" :key="item">
+  <tm-carousel :interval="5000" arrow="always">
+    <tm-carousel-item v-for="item in 4" :key="item">
       <h3>{{ item }}</h3>
-    </el-carousel-item>
-  </el-carousel>
+    </tm-carousel-item>
+  </tm-carousel>
 </template>
 
 <style>
-  .el-carousel__item h3 {
+  .tm-carousel__item h3 {
     color: #475669;
     font-size: 18px;
     opacity: 0.75;
@@ -163,11 +163,11 @@ You can define when arrows are displayed
     margin: 0;
   }
 
-  .el-carousel__item:nth-child(2n) {
+  .tm-carousel__item:nth-child(2n) {
     background-color: #99a9bf;
   }
 
-  .el-carousel__item:nth-child(2n+1) {
+  .tm-carousel__item:nth-child(2n+1) {
     background-color: #d3dce6;
   }
 </style>
@@ -181,15 +181,15 @@ When a page is wide enough but has limited height, you can activate card mode fo
 :::demo Setting `type` to `card` activates the card mode. Apart from the appearance, the biggest difference between card mode and common mode is that clicking the slides at both sides directly switches the carousel in card mode.
 ```html
 <template>
-  <el-carousel :interval="4000" type="card" height="200px">
-    <el-carousel-item v-for="item in 6" :key="item">
+  <tm-carousel :interval="4000" type="card" height="200px">
+    <tm-carousel-item v-for="item in 6" :key="item">
       <h3>{{ item }}</h3>
-    </el-carousel-item>
-  </el-carousel>
+    </tm-carousel-item>
+  </tm-carousel>
 </template>
 
 <style>
-  .el-carousel__item h3 {
+  .tm-carousel__item h3 {
     color: #475669;
     font-size: 14px;
     opacity: 0.75;
@@ -197,11 +197,11 @@ When a page is wide enough but has limited height, you can activate card mode fo
     margin: 0;
   }
 
-  .el-carousel__item:nth-child(2n) {
+  .tm-carousel__item:nth-child(2n) {
     background-color: #99a9bf;
   }
 
-  .el-carousel__item:nth-child(2n+1) {
+  .tm-carousel__item:nth-child(2n+1) {
     background-color: #d3dce6;
   }
 </style>
@@ -228,7 +228,7 @@ When a page is wide enough but has limited height, you can activate card mode fo
 ### Carousel Methods
 | Method | Description | Parameters |
 |---------- |-------------- | -- |
-| setActiveItem | manually switch slide | index of the slide to be switched to, starting from 0; or the `name` of corresponding `el-carousel-item` |
+| setActiveItem | manually switch slide | index of the slide to be switched to, starting from 0; or the `name` of corresponding `tm-carousel-item` |
 | prev | switch to the previous slide | — |
 | next | switch to the next slide | — |
 

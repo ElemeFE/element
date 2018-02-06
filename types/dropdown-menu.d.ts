@@ -1,4 +1,4 @@
-import { ElementUIComponent } from './component'
+import { TmUIComponent } from './component'
 
 /** Dropdown Menu Component */
-export declare class ElDropdownMenu extends ElementUIComponent {}
+export declare class TmDropdownMenu extends TmUIComponent {}

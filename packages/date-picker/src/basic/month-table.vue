@@ -1,5 +1,5 @@
 <template>
-  <table @click="handleMonthTableClick" class="el-month-table">
+  <table @click="handleMonthTableClick" class="tm-month-table">
     <tbody>
     <tr>
       <td :class="getCellStyle(0)">

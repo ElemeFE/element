@@ -16,7 +16,7 @@ export default {
       startTime: 'Időpont-tól',
       endDate: 'Dátum-ig',
       endTime: 'Időpont-ig',
-      prevYear: 'Előző év',
+      prevYear: 'Tmőző év',
       nextYear: 'Következő év',
       prevMonth: 'Előző hónap',
       nextMonth: 'Következő hónap',

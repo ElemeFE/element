@@ -1,8 +1,8 @@
-import ElProgress from './src/progress';
+import TmProgress from './src/progress';
 
 /* istanbul ignore next */
-ElProgress.install = function(Vue) {
-  Vue.component(ElProgress.name, ElProgress);
+TmProgress.install = function(Vue) {
+  Vue.component(TmProgress.name, TmProgress);
 };
 
-export default ElProgress;
+export default TmProgress;

@@ -1,7 +1,7 @@
-import { ElementUIComponent } from './component'
+import { TmUIComponent } from './component'
 
 /** Pagination Component */
-export declare class ElPagination extends ElementUIComponent {
+export declare class TmPagination extends TmUIComponent {
   /** Whether to use small pagination */
   small: boolean
 

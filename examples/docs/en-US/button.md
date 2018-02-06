@@ -1,19 +1,19 @@
 <style>
   .demo-box.demo-button {
-    .el-row {
+    .tm-row {
       margin-bottom: 10px;
     }
-    .el-button + .el-button {
+    .tm-button + .tm-button {
       margin-left: 10px;
     }
-    .el-button-group {
+    .tm-button-group {
       margin-bottom: 20px;
 
-      .el-button + .el-button {
+      .tm-button + .tm-button {
         margin-left: 0;
       }
 
-      & + .el-button-group {
+      & + .tm-button-group {
         margin-left: 10px;
       }
     }
@@ -30,30 +30,30 @@ Commonly used button.
 
 ```html
 <div>
-  <el-button>Default</el-button>
-  <el-button type="primary">Primary</el-button>
-  <el-button type="success">Success</el-button>
-  <el-button type="info">Info</el-button>
-  <el-button type="warning">Warning</el-button>
-  <el-button type="danger">Danger</el-button>
+  <tm-button>Default</tm-button>
+  <tm-button type="primary">Primary</tm-button>
+  <tm-button type="success">Success</tm-button>
+  <tm-button type="info">Info</tm-button>
+  <tm-button type="warning">Warning</tm-button>
+  <tm-button type="danger">Danger</tm-button>
 </div>
 
 <div style="margin: 20px 0">
-  <el-button plain>Plain</el-button>
-  <el-button type="primary" plain>Primary</el-button>
-  <el-button type="success" plain>Success</el-button>
-  <el-button type="info" plain>Info</el-button>
-  <el-button type="warning" plain>Warning</el-button>
-  <el-button type="danger" plain>Danger</el-button>
+  <tm-button plain>Plain</tm-button>
+  <tm-button type="primary" plain>Primary</tm-button>
+  <tm-button type="success" plain>Success</tm-button>
+  <tm-button type="info" plain>Info</tm-button>
+  <tm-button type="warning" plain>Warning</tm-button>
+  <tm-button type="danger" plain>Danger</tm-button>
 </div>
 
 <div>
-  <el-button round>Round</el-button>
-  <el-button type="primary" round>Primary</el-button>
-  <el-button type="success" round>Success</el-button>
-  <el-button type="info" round>Info</el-button>
-  <el-button type="warning" round>Warning</el-button>
-  <el-button type="danger" round>Danger</el-button>
+  <tm-button round>Round</tm-button>
+  <tm-button type="primary" round>Primary</tm-button>
+  <tm-button type="success" round>Success</tm-button>
+  <tm-button type="info" round>Info</tm-button>
+  <tm-button type="warning" round>Warning</tm-button>
+  <tm-button type="danger" round>Danger</tm-button>
 </div>
 ```
 :::
@@ -66,21 +66,21 @@ The `disabled` attribute determines if the button is disabled.
 
 ```html
 <div>
-  <el-button disabled>Default</el-button>
-  <el-button type="primary" disabled>Primary</el-button>
-  <el-button type="success" disabled>Success</el-button>
-  <el-button type="info" disabled>Info</el-button>
-  <el-button type="warning" disabled>Warning</el-button>
-  <el-button type="danger" disabled>Danger</el-button>
+  <tm-button disabled>Default</tm-button>
+  <tm-button type="primary" disabled>Primary</tm-button>
+  <tm-button type="success" disabled>Success</tm-button>
+  <tm-button type="info" disabled>Info</tm-button>
+  <tm-button type="warning" disabled>Warning</tm-button>
+  <tm-button type="danger" disabled>Danger</tm-button>
 </div>
 
 <div style="margin-top: 20px">
-  <el-button plain disabled>Plain</el-button>
-  <el-button type="primary" plain disabled>Primary</el-button>
-  <el-button type="success" plain disabled>Success</el-button>
-  <el-button type="info" plain disabled>Info</el-button>
-  <el-button type="warning" plain disabled>Warning</el-button>
-  <el-button type="danger" plain disabled>Danger</el-button>
+  <tm-button plain disabled>Plain</tm-button>
+  <tm-button type="primary" plain disabled>Primary</tm-button>
+  <tm-button type="success" plain disabled>Success</tm-button>
+  <tm-button type="info" plain disabled>Info</tm-button>
+  <tm-button type="warning" plain disabled>Warning</tm-button>
+  <tm-button type="danger" plain disabled>Danger</tm-button>
 </div>
 ```
 :::
@@ -91,8 +91,8 @@ Buttons without border and background.
 
 :::demo
 ```html
-<el-button type="text">Text Button</el-button>
-<el-button type="text" disabled>Text Button</el-button>
+<tm-button type="text">Text Button</tm-button>
+<tm-button type="text" disabled>Text Button</tm-button>
 ```
 :::
 
@@ -103,11 +103,11 @@ Use icons to add more meaning to Button. You can use icon alone to save some spa
 :::demo Use the `icon` attribute to add icon. You can find the icon list in Element icon component. Adding icons to the right side of the text is achievable with an `<i>` tag. Custom icons can be used as well.
 
 ```html
-<el-button type="primary" icon="el-icon-edit"></el-button>
-<el-button type="primary" icon="el-icon-share"></el-button>
-<el-button type="primary" icon="el-icon-delete"></el-button>
-<el-button type="primary" icon="el-icon-search">Search</el-button>
-<el-button type="primary">Upload<i class="el-icon-upload el-icon-right"></i></el-button>
+<tm-button type="primary" icon="tm-icon-edit"></tm-button>
+<tm-button type="primary" icon="tm-icon-share"></tm-button>
+<tm-button type="primary" icon="tm-icon-delete"></tm-button>
+<tm-button type="primary" icon="tm-icon-search">Search</tm-button>
+<tm-button type="primary">Upload<i class="tm-icon-upload tm-icon-right"></i></tm-button>
 ```
 :::
 
@@ -115,18 +115,18 @@ Use icons to add more meaning to Button. You can use icon alone to save some spa
 
 Displayed as a button group, can be used to group a series of similar operations.
 
-:::demo Use tag `<el-button-group>` to group your buttons.
+:::demo Use tag `<tm-button-group>` to group your buttons.
 
 ```html
-<el-button-group>
-  <el-button type="primary" icon="el-icon-arrow-left">Previous Page</el-button>
-  <el-button type="primary">Next Page<i class="el-icon-arrow-right el-icon-right"></i></el-button>
-</el-button-group>
-<el-button-group>
-  <el-button type="primary" icon="el-icon-edit"></el-button>
-  <el-button type="primary" icon="el-icon-share"></el-button>
-  <el-button type="primary" icon="el-icon-delete"></el-button>
-</el-button-group>
+<tm-button-group>
+  <tm-button type="primary" icon="tm-icon-arrow-left">Previous Page</tm-button>
+  <tm-button type="primary">Next Page<i class="tm-icon-arrow-right tm-icon-right"></i></tm-button>
+</tm-button-group>
+<tm-button-group>
+  <tm-button type="primary" icon="tm-icon-edit"></tm-button>
+  <tm-button type="primary" icon="tm-icon-share"></tm-button>
+  <tm-button type="primary" icon="tm-icon-delete"></tm-button>
+</tm-button-group>
 ```
 :::
 
@@ -137,7 +137,7 @@ Click the button to load data, then the button displays a loading state.
 :::demo Set `loading` attribute to `true` to display loading state.
 
 ```html
-<el-button type="primary" :loading="true">Loading</el-button>
+<tm-button type="primary" :loading="true">Loading</tm-button>
 ```
 :::
 
@@ -149,16 +149,16 @@ Besides default size, Button component provides three additional sizes for you t
 
 ```html
 <div>
-  <el-button>Default</el-button>
-  <el-button size="medium">Medium</el-button>
-  <el-button size="small">Small</el-button>
-  <el-button size="mini">Mini</el-button>
+  <tm-button>Default</tm-button>
+  <tm-button size="medium">Medium</tm-button>
+  <tm-button size="small">Small</tm-button>
+  <tm-button size="mini">Mini</tm-button>
 </div>
 <div style="margin-top: 20px">
-  <el-button round>Default</el-button>
-  <el-button size="medium" round>Medium</el-button>
-  <el-button size="small" round>Small</el-button>
-  <el-button size="mini" round>Mini</el-button>
+  <tm-button round>Default</tm-button>
+  <tm-button size="medium" round>Medium</tm-button>
+  <tm-button size="small" round>Small</tm-button>
+  <tm-button size="mini" round>Mini</tm-button>
 </div>
 ```
 :::

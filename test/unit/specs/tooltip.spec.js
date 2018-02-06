@@ -8,9 +8,9 @@ describe('Tooltip', () => {
 
   it('create', done => {
     vm = createVue(`
-      <el-tooltip ref="tooltip" content="提示文字">
+      <tm-tooltip ref="tooltip" content="提示文字">
         <button>click</button>
-      </el-tooltip>`);
+      </tm-tooltip>`);
 
     vm.$nextTick(_ => {
       expect(vm.$refs.tooltip.popperVM.$el).to.have.property('textContent', '提示文字');
@@ -20,9 +20,9 @@ describe('Tooltip', () => {
 
   it('custom popper class', done => {
     vm = createVue(`
-      <el-tooltip ref="tooltip" content="提示文字" popper-class="custom-popper">
+      <tm-tooltip ref="tooltip" content="提示文字" popper-class="custom-popper">
         <button>click</button>
-      </el-tooltip>`);
+      </tm-tooltip>`);
     vm.$nextTick(_ => {
       expect(vm.$refs.tooltip.popperVM.$el.classList.contains('custom-popper')).to.true;
       done();
@@ -32,9 +32,9 @@ describe('Tooltip', () => {
   describe('manual', () => {
     const vm = createVue({
       template: `
-        <el-tooltip ref="tooltip" manual content="abc" v-model="show">
+        <tm-tooltip ref="tooltip" manual content="abc" v-model="show">
           <button>click</button>
-        </el-tooltip>
+        </tm-tooltip>
       `,
 
       data() {
@@ -69,9 +69,9 @@ describe('Tooltip', () => {
 
   describe('hover', () => {
     const vm = createVue(`
-      <el-tooltip ref="tooltip" content="提示文字">
+      <tm-tooltip ref="tooltip" content="提示文字">
         <button>click</button>
-      </el-tooltip>
+      </tm-tooltip>
     `);
     const tooltip = vm.$refs.tooltip;
 
@@ -89,9 +89,9 @@ describe('Tooltip', () => {
 
   it('light mode', done => {
     vm = createVue(`
-      <el-tooltip ref="tooltip" content="abc" effect="light">
+      <tm-tooltip ref="tooltip" content="abc" effect="light">
         <button>abc</button>
-      </el-tooltip>
+      </tm-tooltip>
     `);
     vm.$nextTick(_ => {
       expect(vm.$refs.tooltip.popperVM.$el.classList.contains('is-light')).to.exist;

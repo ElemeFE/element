@@ -82,7 +82,7 @@ export default {
     },
     upload: {
       deleteTip: 'press delete to remove', // to be translated
-      delete: 'Eliminar',
+      delete: 'Tmiminar',
       preview: 'Vista Prèvia',
       continue: 'Continuar'
     },
