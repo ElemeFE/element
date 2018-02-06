@@ -20,6 +20,20 @@
   }
 </style>
 
+### TM Button
+
+The `disabled` attribute determines if the button is disabled.
+
+:::demo Use `disabled` attribute to determine whether a button is disabled. It accepts a `Boolean` value.
+
+```html
+<div style="margin: 20px 0"> 
+  <tm-button type="primary">Primary</tm-button>
+  <tm-button type="secondary">Secondary</tm-button> 
+</div> 
+```
+:::
+
 ## Button
 
 Commonly used button.
@@ -28,7 +42,7 @@ Commonly used button.
 
 :::demo Use `type`, `plain` and `round` to define Button's style.
 
-```html
+```html 
 <div>
   <tm-button>Default</tm-button>
   <tm-button type="primary">Primary</tm-button>

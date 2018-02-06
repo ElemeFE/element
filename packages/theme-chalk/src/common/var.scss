@@ -14,7 +14,7 @@ $--color-transition-base: color .2s cubic-bezier(.645,.045,.355,1) !default;
 $--color-white: #fff !default;
 $--color-black: #000 !default;
 
-$--color-primary: #409EFF !default;
+$--color-primary: #67c23a !default;
 $--color-primary-light-1: mix($--color-white, $--color-primary, 10%) !default; /* 53a8ff */
 $--color-primary-light-2: mix($--color-white, $--color-primary, 20%) !default; /* 66b1ff */
 $--color-primary-light-3: mix($--color-white, $--color-primary, 30%) !default; /* 79bbff */
@@ -26,6 +26,7 @@ $--color-primary-light-8: mix($--color-white, $--color-primary, 80%) !default; /
 $--color-primary-light-9: mix($--color-white, $--color-primary, 90%) !default; /* ecf5ff */
 
 $--color-success: #67c23a !default;
+$--color-secondary: #67c23a !default;
 $--color-warning: #e6a23c !default;
 $--color-danger: #f56c6c !default;
 $--color-info: #909399 !default;
@@ -41,8 +42,8 @@ $--color-danger-lighter: mix($--color-white, $--color-danger, 90%) !default;
 $--color-info-lighter: mix($--color-white, $--color-info, 90%) !default;
 
 $--color-text-primary: #303133 !default;
-$--color-text-regular: #606266 !default;
-$--color-text-secondary: #909399 !default;
+$--color-text-secondary: #67c23a !default;
+$--color-text-regular: #606266 !default; 
 $--color-text-placeholder: #c0c4cc !default;
 
 /* Link
@@ -53,6 +54,7 @@ $--link-hover-color: $--color-primary !default;
 /* Background
 -------------------------- */
 $--background-color-base: #f5f7fa !default;
+$--background-color-secondary: #fff !default;
 
 /* Border
 -------------------------- */
@@ -399,6 +401,10 @@ $--button-border-radius: $--border-radius-base !default;
 $--button-padding-vertical: 12px !default;
 $--button-padding-horizontal: 20px !default;
 
+$--button-font-size-tm: 12px !default;
+$--button-padding-vertical-tm: 15px !default;
+$--button-padding-horizontal-tm: 20px !default;
+
 $--button-medium-font-size: 14px !default;
 $--button-medium-border-radius: $--border-radius-base !default;
 $--button-medium-padding-vertical: 10px !default;
@@ -429,6 +435,10 @@ $--button-primary-fill: $--color-primary !default;
 $--button-success-border: $--color-success !default;
 $--button-success-color: $--color-white !default;
 $--button-success-fill: $--color-success !default;
+
+$--button-secondary-border: $--color-success !default;
+$--button-secondary-color: $--color-white !default;
+$--button-secondary-fill: $--color-white !default;
 
 $--button-warning-border: $--color-warning !default;
 $--button-warning-color: $--color-white !default;

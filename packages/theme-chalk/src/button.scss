@@ -118,13 +118,16 @@
     padding: 12px 23px;
   }
   @include m(primary) {
-    @include button-variant($--button-primary-color, $--button-primary-fill, $--button-primary-border);
+    @include button-variant-tm($--button-primary-color, $--button-primary-fill, $--button-primary-border);
   }
   @include m(success) {
     @include button-variant($--button-success-color, $--button-success-fill, $--button-success-border);
   }
   @include m(warning) {
     @include button-variant($--button-warning-color, $--button-warning-fill, $--button-warning-border);
+  }
+  @include m(secondary) {
+    @include button-variant-tm($--color-text-secondary, $--background-color-secondary, $--button-secondary-border);
   }
   @include m(danger) {
     @include button-variant($--button-danger-color, $--button-danger-fill, $--button-danger-border);
