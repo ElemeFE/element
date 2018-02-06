@@ -42,6 +42,7 @@
 - Homepage and documentation
   - International users: http://element.eleme.io/#/en-US
   - Chinese users: http://element-cn.eleme.io/#/zh-CN
+  - Spanish users: http://element.eleme.io/#/es
 - [awesome-element](https://github.com/ElementUI/awesome-element)
 - [FAQ](./FAQ.md)
 - [Customize theme](http://element.eleme.io/#/en-US/component/custom-theme)
@@ -49,6 +50,7 @@
 - [Element for React](https://github.com/eleme/element-react)
 - [Element for Angular](https://github.com/ElemeFE/element-angular)
 - [Atom helper](https://github.com/ElemeFE/element-helper)
+- [Visual Studio Code helper](https://github.com/ElemeFE/vscode-element-helper)
 - Starter kit
   - [element-starter](https://github.com/ElementUI/element-starter)
   - [element-in-laravel-starter](https://github.com/ElementUI/element-in-laravel-starter)
