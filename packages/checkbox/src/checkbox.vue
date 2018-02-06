@@ -31,6 +31,7 @@
         :true-value="trueLabel"
         :false-value="falseLabel"
         v-model="model"
+        v-on="$listeners"
         @change="handleChange"
         @focus="focus = true"
         @blur="focus = false">
@@ -42,6 +43,7 @@
         :value="label"
         :name="name"
         v-model="model"
+        v-on="$listeners"
         @change="handleChange"
         @focus="focus = true"
         @blur="focus = false">

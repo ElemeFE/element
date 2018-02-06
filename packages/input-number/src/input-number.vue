@@ -36,6 +36,7 @@
       :min="min"
       :name="name"
       :label="label"
+      v-on="$listeners"
       @keydown.up.native.prevent="increase"
       @keydown.down.native.prevent="decrease"
       @blur="handleBlur"
