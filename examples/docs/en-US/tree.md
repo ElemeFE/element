@@ -1042,6 +1042,11 @@ Only one node among the same level can be expanded at one time.
 | getCurrentNode  | return the highlight node (null if no node is highlighted) | — |
 | setCurrentKey   | set highlighted node by key, only works when `node-key` is assigned | (key) the node's key to be highlighted |
 | setCurrentNode  | set highlighted node, only works when `node-key` is assigned | (node) the node to be highlighted |
+| getNode         | get node by data or key | (data) the node's data or key |
+| remove          | remove a node | (data) the node's data or node to be delete |
+| append          | append a child node for a node in tree | (data, parentNode) Accept two parameters: 1. child node's data 2. parent node's data, key or node |
+| insertBefore    | insert a node before a node in tree | (data, refNode) (data, parentNode) Accept two parameters: 1. sibling node's data 2. reference node's data, key or node |
+| insertAfter     | insert a node after a node in tree   | (data, refNode) 1. sibling node's data 2. reference node's data, key or node |
 
 ### Events
 | Event Name     | Description                              | Parameters                               |

@@ -455,6 +455,54 @@ describe('Tree', () => {
     });
   });
 
+  it('getNode', () => {
+    vm = getTreeVm(':props="defaultProps" node-key="id"');
+    const tree = vm.$children[0];
+    const node = tree.getNode(111);
+    expect(node.data.id).to.equal(111);
+  });
+
+  it('remove', (done) => {
+    vm = getTreeVm(':props="defaultProps" node-key="id"');
+    const tree = vm.$children[0];
+    tree.remove(1);
+    vm.$nextTick(() => {
+      expect(vm.data[0].id).to.equal(2);
+      expect(tree.getNode(1)).to.equal(null);
+      done();
+    });
+  });
+
+  it('append', () => {
+    vm = getTreeVm(':props="defaultProps" node-key="id"');
+    const tree = vm.$children[0];
+    const nodeData = { id: 88, label: '88' };
+    tree.append(nodeData, tree.getNode(1));
+
+    expect(vm.data[0].children.length).to.equal(2);
+    expect(tree.getNode(88).data).to.equal(nodeData);
+  });
+
+  it('insertBefore', () => {
+    vm = getTreeVm(':props="defaultProps" node-key="id"');
+    const tree = vm.$children[0];
+    const nodeData = { id: 88, label: '88' };
+    tree.insertBefore(nodeData, tree.getNode(11));
+    expect(vm.data[0].children.length).to.equal(2);
+    expect(vm.data[0].children[0]).to.equal(nodeData);
+    expect(tree.getNode(88).data).to.equal(nodeData);
+  });
+
+  it('insertAfter', () => {
+    vm = getTreeVm(':props="defaultProps" node-key="id"');
+    const tree = vm.$children[0];
+    const nodeData = { id: 88, label: '88' };
+    tree.insertAfter(nodeData, tree.getNode(11));
+    expect(vm.data[0].children.length).to.equal(2);
+    expect(vm.data[0].children[1]).to.equal(nodeData);
+    expect(tree.getNode(88).data).to.equal(nodeData);
+  });
+
   it('set disabled checkbox', done => {
     vm = getDisableTreeVm(':props="defaultProps" show-checkbox node-key="id" default-expand-all');
     const node = document.querySelectorAll('.el-tree-node__content')[2];

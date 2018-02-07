@@ -64,6 +64,7 @@
   import ElCollapseTransition from 'element-ui/src/transitions/collapse-transition';
   import ElCheckbox from 'element-ui/packages/checkbox';
   import emitter from 'element-ui/src/mixins/emitter';
+  import { getNodeKey } from './model/util';
 
   export default {
     name: 'ElTreeNode',
@@ -140,12 +141,8 @@
     },
 
     methods: {
-      getNodeKey(node, index) {
-        const nodeKey = this.tree.nodeKey;
-        if (nodeKey && node) {
-          return node.data[nodeKey];
-        }
-        return index;
+      getNodeKey(node) {
+        return getNodeKey(this.tree.nodeKey, node.data);
       },
 
       handleSelectChange(checked, indeterminate) {

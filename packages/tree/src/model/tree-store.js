@@ -64,15 +64,18 @@ export default class TreeStore {
 
   setData(newVal) {
     const instanceChanged = newVal !== this.root.data;
-    this.root.setData(newVal);
     if (instanceChanged) {
+      this.root.setData(newVal);
       this._initDefaultCheckedNodes();
+    } else {
+      this.root.updateChildren();
     }
   }
 
   getNode(data) {
+    if (data instanceof Node) return data;
     const key = typeof data !== 'object' ? data : getNodeKey(this.key, data);
-    return this.nodesMap[key];
+    return this.nodesMap[key] || null;
   }
 
   insertBefore(data, refData) {

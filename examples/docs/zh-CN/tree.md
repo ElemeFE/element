@@ -1027,7 +1027,9 @@
 | isLeaf | 指定节点是否为叶子节点 | boolean, function(data, node) | —    | —    |
 
 ### 方法
-`Tree` 拥有如下方法，返回目前被选中的节点数组：
+`Tree` 内部使用了 Node 类型的对象来包装用户传入的数据，用来保存目前节点的状态。
+`Tree` 拥有如下方法：
+
 | 方法名             | 说明                                       | 参数                                       |
 | --------------- | ---------------------------------------- | ---------------------------------------- |
 | filter          | 对树节点进行筛选操作                               | 接收一个任意类型的参数，该参数会在 filter-node-method 中作为第一个参数 |
@@ -1041,6 +1043,11 @@
 | getCurrentNode  | 获取当前被选中节点的 node，若没有节点被选中则返回 null | — |
 | setCurrentKey   | 通过 key 设置某个节点的当前选中状态，使用此方法必须设置 node-key 属性 | (key) 待被选节点的 key |
 | setCurrentNode  | 通过 node 设置某个节点的当前选中状态，使用此方法必须设置 node-key 属性 | (node) 待被选节点的 node |
+| getNode         | 根据 data 或者 key 拿到 Tree 组件中的 node | (data) 要获得 node 的 key 或者 data |
+| remove          | 删除 Tree 中的一个节点 | (data) 要删除的节点的 data、key 或者 node |
+| append          | 为 Tree 中的一个节点追加一个子节点 | (data, parentNode) 接收两个参数，1. 要追加的子节点的 data 2. 子节点的 parent 的 data、key 或者 node |
+| insertBefore    | 为 Tree 的一个节点的前面增加一个节点  | (data, refNode) 接收两个参数，1. 要增加的节点的 data 2. 要增加的节点的后一个节点的 data、key 或者 node |
+| insertAfter     | 为 Tree 的一个节点的后面增加一个节点  | (data, refNode) 接收两个参数，1. 要增加的节点的 data 2. 要增加的节点的前一个节点的 data、key 或者 node |
 
 ### Events
 | 事件名称           | 说明             | 回调参数                                     |

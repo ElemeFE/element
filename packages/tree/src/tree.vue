@@ -21,6 +21,7 @@
 
 <script>
   import TreeStore from './model/tree-store';
+  import { getNodeKey } from './model/util';
   import ElTreeNode from './tree-node.vue';
   import {t} from 'element-ui/src/locale';
   import emitter from 'element-ui/src/mixins/emitter';
@@ -142,12 +143,8 @@
         if (!this.filterNodeMethod) throw new Error('[Tree] filterNodeMethod is required when filter');
         this.store.filter(value);
       },
-      getNodeKey(node, index) {
-        const nodeKey = this.nodeKey;
-        if (nodeKey && node) {
-          return node.data[nodeKey];
-        }
-        return index;
+      getNodeKey(node) {
+        return getNodeKey(this.nodeKey, node.data);
       },
       getNodePath(data) {
         if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in getNodePath');
@@ -194,6 +191,21 @@
       setCurrentKey(key) {
         if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in setCurrentKey');
         this.store.setCurrentNodeKey(key);
+      },
+      getNode(data) {
+        return this.store.getNode(data);
+      },
+      remove(data) {
+        this.store.remove(data);
+      },
+      append(data, parentNode) {
+        this.store.append(data, parentNode);
+      },
+      insertBefore(data, refNode) {
+        this.store.insertBefore(data, refNode);
+      },
+      insertAfter(data, refNode) {
+        this.store.insertAfter(data, refNode);
       },
       handleNodeExpand(nodeData, node, instance) {
         this.broadcast('ElTreeNode', 'tree-node-expand', node);
