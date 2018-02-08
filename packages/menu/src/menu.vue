@@ -243,7 +243,9 @@
         }
       },
       handleItemClick(item) {
-        let { index, indexPath } = item;
+        const { index, indexPath } = item;
+        const oldActiveIndex = this.activeIndex;
+
         this.activeIndex = item.index;
         this.$emit('select', index, indexPath, item);
 
@@ -252,7 +254,10 @@
         }
 
         if (this.router) {
-          this.routeToItem(item);
+          this.routeToItem(item, error => {
+            this.activeIndex = oldActiveIndex;
+            console.error(error);
+          });
         }
       },
       // 初始化展开菜单
@@ -271,10 +276,10 @@
           submenu && this.openMenu(index, submenu.indexPath);
         });
       },
-      routeToItem(item) {
+      routeToItem(item, onError) {
         let route = item.route || item.index;
         try {
-          this.$router.push(route);
+          this.$router.push(route, () => {}, onError);
         } catch (e) {
           console.error(e);
         }
