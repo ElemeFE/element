@@ -281,6 +281,10 @@
     border-right: none;
     border-bottom: none;
 
+    &.el-loading-parent--relative {
+      border: none;
+    }
+
     th, td {
       border-right: $--table-border;
 
