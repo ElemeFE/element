@@ -75,6 +75,7 @@
         type: Boolean,
         default: false
       },
+      checkShowCheckbox: Function,
       props: {
         default() {
           return {
