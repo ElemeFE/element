@@ -187,6 +187,12 @@
       setChecked(data, checked, deep) {
         this.store.setChecked(data, checked, deep);
       },
+      getHalfCheckedNodes() {
+        return this.store.getHalfCheckedNodes();
+      },
+      getHalfCheckedKeys() {
+        return this.store.getHalfCheckedKeys();
+      },
       setCurrentNode(node) {
         if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in setCurrentNode');
         this.store.setUserCurrentNode(node);
