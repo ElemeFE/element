@@ -100,7 +100,7 @@ loadingDirective.install = Vue => {
       el.mask = mask.$el;
       el.maskStyle = {};
 
-      toggleLoading(el, binding);
+      binding.value && toggleLoading(el, binding);
     },
 
     update: function(el, binding) {
