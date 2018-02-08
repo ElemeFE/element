@@ -81,7 +81,8 @@
       }
     }
     & .el-menu {
-      & .el-menu-item {
+      & .el-menu-item,
+      & .el-submenu__title {
         background-color: $--color-white;
         float: none;
         height: 36px;
