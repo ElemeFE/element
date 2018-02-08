@@ -1022,9 +1022,9 @@
 | 参数       | 说明                | 类型     | 可选值  | 默认值  |
 | -------- | ----------------- | ------ | ---- | ---- |
 | label    | 指定节点标签为节点对象的某个属性值 | string, function(data, node) | —    | —    |
-| children | 指定子树为节点对象的某个属性值 | string, function(data, node) | —    | —    |
+| children | 指定子树为节点对象的某个属性值 | string | —    | —    |
 | disabled | 指定节点选择框是否禁用为节点对象的某个属性值 | boolean, function(data, node) | —    | —    |
-| isLeaf | 指定节点是否为叶子节点 | boolean, function(data, node) | —    | —    |
+| isLeaf | 指定节点是否为叶子节点，仅在指定了 lazy 属性的情况下生效 | boolean, function(data, node) | —    | —    |
 
 ### 方法
 `Tree` 拥有如下方法，返回目前被选中的节点数组：
