@@ -125,7 +125,7 @@
       <li class="nav-item sponsors">
         <a>Sponsors</a>
         <ul class="pure-menu-list sub-nav">
-          <li class="nav-item">
+          <li class="nav-item" v-show="lang !== 'zh-CN'">
             <a href="https://tipe.io/?ref=element" target="_blank">
               <img src="~examples/assets/images/tipe.svg" alt="tipe.io">
             </a>
@@ -217,8 +217,11 @@
         style.opacity = this.isFade ? '0.5' : '1';
         return style;
       },
+      lang() {
+        return this.$route.meta.lang;
+      },
       langConfig() {
-        return compoLang.filter(config => config.lang === this.$route.meta.lang)[0]['nav'];
+        return compoLang.filter(config => config.lang === this.lang)[0]['nav'];
       }
     },
     methods: {

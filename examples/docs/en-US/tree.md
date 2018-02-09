@@ -1045,10 +1045,10 @@ Only one node among the same level can be expanded at one time.
 | setCurrentKey   | set highlighted node by key, only works when `node-key` is assigned | (key) the node's key to be highlighted |
 | setCurrentNode  | set highlighted node, only works when `node-key` is assigned | (node) the node to be highlighted |
 | getNode         | get node by data or key | (data) the node's data or key |
-| remove          | remove a node | (data) the node's data or node to be delete |
-| append          | append a child node for a node in tree | (data, parentNode) Accept two parameters: 1. child node's data 2. parent node's data, key or node |
-| insertBefore    | insert a node before a node in tree | (data, refNode) (data, parentNode) Accept two parameters: 1. sibling node's data 2. reference node's data, key or node |
-| insertAfter     | insert a node after a node in tree   | (data, refNode) 1. sibling node's data 2. reference node's data, key or node |
+| remove          | remove a node | (data) the node's data or node to be deleted |
+| append          | append a child node to a given node in the tree | (data, parentNode) 1. child node's data to be appended 2. parent node's data, key or node |
+| insertBefore    | insert a node before a given node in the tree | (data, refNode) 1. node's data to be inserted 2. reference node's data, key or node |
+| insertAfter     | insert a node after a given node in the tree   | (data, refNode) 1. node's data to be inserted 2. reference node's data, key or node |
 
 ### Events
 | Event Name     | Description                              | Parameters                               |
@@ -1056,7 +1056,7 @@ Only one node among the same level can be expanded at one time.
 | node-click     | triggers when a node is clicked          | three parameters: node object corresponding to the node clicked, `node` property of TreeNode, TreeNode itself |
 | node-contextmenu     | triggers when a node is clicked by right button          | four parameters: event, node object corresponding to the node clicked, `node` property of TreeNode, TreeNode itself |
 | check-change   | triggers when the selected state of the node changes | three parameters: node object corresponding to the node whose selected state is changed, whether the node is selected, whether node's subtree has selected nodes |
-| check   | triggers after click checkbox of node | two parameters: node object corresponding to the node whose selected state is changed, tree checked status object which has four props: checkedNodes, checkedKeys, halfCheckedNodes, halfCheckedKeys |
+| check   | triggers after clicking the checkbox of a node | two parameters: node object corresponding to the node that is checked / unchecked, tree checked status object which has four props: checkedNodes, checkedKeys, halfCheckedNodes, halfCheckedKeys |
 | current-change | triggers when current node changes       | two parameters: node object corresponding to the current node, `node` property of TreeNode |
 | node-expand    | triggers when current node open          | three parameters: node object corresponding to the node opened, `node` property of TreeNode, TreeNode itself |
 | node-collapse  | triggers when current node close         | three parameters: node object corresponding to the node closed, `node` property of TreeNode, TreeNode itself |
