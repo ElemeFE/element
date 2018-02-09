@@ -1023,9 +1023,9 @@ Only one node among the same level can be expanded at one time.
 | Attribute | Description                              | Type   | Accepted Values | Default |
 | --------- | ---------------------------------------- | ------ | --------------- | ------- |
 | label     | specify which key of node object is used as the node's label | string, function(data, node) | —               | —       |
-| children | specify which node object is used as the node's subtree | string, function(data, node) | —               | —       |
+| children | specify which node object is used as the node's subtree | string | —               | —       |
 | disabled | specify which key of node object represents if node's checkbox is disabled | boolean, function(data, node) | —    | —    |
-| isLeaf | specify whether the node is a leaf node | boolean, function(data, node) | —    | —    |
+| isLeaf | specify whether the node is a leaf node, only works when lazy load is enabled | boolean, function(data, node) | —    | —    |
 
 ### Method
 `Tree` has the following method, which returns the currently selected array of nodes.

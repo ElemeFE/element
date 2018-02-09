@@ -13,7 +13,7 @@
     .buttons {
       margin-top: 20px;
     }
-    
+
     .filter-tree {
       margin-top: 20px;
     }
@@ -1022,8 +1022,8 @@ Solo puede ser expandido un nodo del mismo nivel a la vez.
 | Atributo | Descripción                              | Tipo                          | Valores aceptados | Por defecto |
 | -------- | ---------------------------------------- | ----------------------------- | ----------------- | ----------- |
 | label    | Especifica que clave del objecto nodo se utilizará como label | string, function(data, node)  | —                 | —           |
-| children | Especifica que objeto del nodo se utiliza como subárbol | string, function(data, node)  | —                 | —           |
-| isLeaf   | Especifica si el nodo es una hoja        | boolean, function(data, node) | —                 | —           |
+| children | Especifica que objeto del nodo se utiliza como subárbol | string | —                 | —           |
+| isLeaf   | Especifica si el nodo es una hoja, only works when lazy load is enabled        | boolean, function(data, node) | —                 | —           |
 
 ### Métodos
 `Tree` tiene los siguientes métodos, que devuelven el array de nodos seleccionados.
