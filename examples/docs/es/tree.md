@@ -1043,10 +1043,10 @@ Solo puede ser expandido un nodo del mismo nivel a la vez.
 | setCurrentKey     | establece el nodo resaltado por la clave, solo funciona si `node-key` está asignado | (key) la clave del nodo a ser resaltado  |
 | setCurrentNode    | establece el nodo resaltado, solo funciona si `node-key` está asignado | (node) nodo a ser resaltado              |
 | getNode         | get node by data or key | (data) the node's data or key |
-| remove          | remove a node | (data) the node's data or node to be delete |
-| append          | append a child node for a node in tree | (data, parentNode) Accept two parameters: 1. child node's data 2. parent node's data, key or node |
-| insertBefore    | insert a node before a node in tree | (data, refNode) (data, parentNode) Accept two parameters: 1. sibling node's data 2. reference node's data, key or node |
-| insertAfter     | insert a node after a node in tree   | (data, refNode) 1. sibling node's data 2. reference node's data, key or node |
+| remove          | remove a node | (data) the node's data or node to be deleted |
+| append          | append a child node to a given node in the tree | (data, parentNode) 1. child node's data to be appended 2. parent node's data, key or node |
+| insertBefore    | insert a node before a given node in the tree | (data, refNode) 1. node's data to be inserted 2. reference node's data, key or node |
+| insertAfter     | insert a node after a given node in the tree   | (data, refNode) 1. node's data to be inserted 2. reference node's data, key or node |
 
 ### Eventos
 | Nombre del evento | Descripción                              | Parámetros                               |
@@ -1054,7 +1054,7 @@ Solo puede ser expandido un nodo del mismo nivel a la vez.
 | node-click        | se lanza cuando un nodo es pinchado      | tres parámetros: el objeto del nodo seleccionado, propiedad `node` de TreeNode y el TreeNode en si |
 | node-contextmenu     | triggers when a node is clicked by right button      | four parameters: event, node object corresponding to the node clicked, `node` property of TreeNode, TreeNode itself |
 | check-change      | se lanza cuando el estado de selección del nodo cambia | tres parámetros: objeto nodo que se corresponde con el que ha cambiado, booleano que dice si esta seleccionado, booleano que dice si el nodo tiene hijos seleccionados |
-| check   | triggers after click checkbox of node | two parameters: node object corresponding to the node whose selected state is changed, tree checked status object which has four props: checkedNodes, checkedKeys, halfCheckedNodes, halfCheckedKeys |
+| check   | triggers after clicking the checkbox of a node | two parameters: node object corresponding to the node that is checked / unchecked, tree checked status object which has four props: checkedNodes, checkedKeys, halfCheckedNodes, halfCheckedKeys |
 | current-change    | cambia cuando el nodo actual cambia      | dos parámetros: objeto nodo que se corresponde al nodo actual y propiedad `node` del TreeNode |
 | node-expand       | se lanza cuando el nodo actual se abre   | tres parámetros: el objeto del nodo abierto, propiedad `node` de TreeNode y el TreeNode en si |
 | node-collapse     | se lanza cuando el nodo actual se cierra | tres parámetros: el objeto del nodo cerrado, propiedad `node` de TreeNode y el TreeNode en si |
