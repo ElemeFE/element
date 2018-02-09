@@ -193,7 +193,9 @@
         title && (title.style.backgroundColor = this.rootMenu.backgroundColor || '');
       },
       updatePlacement() {
-        this.currentPlacement = this.mode === 'horizontal' ? 'bottom-start' : 'right-start';
+        this.currentPlacement = this.mode === 'horizontal' && this.rootMenu === this.$parent
+          ? 'bottom-start'
+          : 'right-start';
       },
       initPopper() {
         this.referenceElm = this.$el;
@@ -225,7 +227,8 @@
         currentPlacement,
         menuTransitionName,
         mode,
-        popperClass
+        popperClass,
+        $parent
       } = this;
 
       const popupMenu = (
@@ -259,6 +262,11 @@
         </el-collapse-transition>
       );
 
+      const submenuTitleIcon = (
+        rootMenu.mode === 'horizontal' && $parent === rootMenu ||
+        rootMenu.mode === 'vertical' && !rootMenu.collapse
+      ) ? 'el-icon-arrow-down' : 'el-icon-arrow-right';
+
       return (
         <li
           class={{
@@ -282,12 +290,7 @@
             style={[paddingStyle, titleStyle, { backgroundColor }]}
           >
             {$slots.title}
-            <i class={{
-              'el-submenu__icon-arrow': true,
-              'el-icon-arrow-down': rootMenu.mode === 'horizontal' || rootMenu.mode === 'vertical' && !rootMenu.collapse,
-              'el-icon-arrow-right': rootMenu.mode === 'vertical' && rootMenu.collapse
-            }}>
-            </i>
+            <i class={[ 'el-submenu__icon-arrow', submenuTitleIcon ]}></i>
           </div>
           {this.isMenuPopup ? popupMenu : inlineMenu}
         </li>
