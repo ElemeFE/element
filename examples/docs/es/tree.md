@@ -1036,6 +1036,8 @@ Solo puede ser expandido un nodo del mismo nivel a la vez.
 | getCheckedKeys    | Si los nodos pueden ser seleccionados (`show-checkbox` es `true`), devuelve un array con las claves de los nodos seleccionados | (leafOnly) Acepta un booleano que por defecto es `false`. |
 | setCheckedKeys    | Establece algunos nodos como seleccionados, solo si `node-key` está asignado | (keys, leafOnly) Acepta dos parametros: 1. un array de claves 2. un booleano cuyo valor por defecto es `false`. Si el parámetro es `true`, solo devuelve los nodos seleccionados |
 | setChecked        | Establece si un nodo está seleccionado, solo funciona si `node-key` esta asignado | (key/data, checked, deep) Acepta tres parámetros: 1. la clave o dato del nodo a ser seleccionado 2. un booleano que indica si un nodo el nodo estará seleccionado 3. un booleanoque indica si se hará en profundidad |
+| getHalfCheckedNodes | If the node can be selected (`show-checkbox` is `true`), it returns the currently half selected array of nodes | - |
+| getHalfCheckedKeys | If the node can be selected (`show-checkbox` is `true`), it returns the currently half selected array of node's keys | - |
 | getCurrentKey     | devuelve la clave del nodo resaltado actualmente (null si no hay ninguno) | —                                        |
 | getCurrentNode    | devuelve el nodo resaltado (null si no hay ninguno) | —                                        |
 | setCurrentKey     | establece el nodo resaltado por la clave, solo funciona si `node-key` está asignado | (key) la clave del nodo a ser resaltado  |
@@ -1052,6 +1054,7 @@ Solo puede ser expandido un nodo del mismo nivel a la vez.
 | node-click        | se lanza cuando un nodo es pinchado      | tres parámetros: el objeto del nodo seleccionado, propiedad `node` de TreeNode y el TreeNode en si |
 | node-contextmenu     | triggers when a node is clicked by right button      | four parameters: event, node object corresponding to the node clicked, `node` property of TreeNode, TreeNode itself |
 | check-change      | se lanza cuando el estado de selección del nodo cambia | tres parámetros: objeto nodo que se corresponde con el que ha cambiado, booleano que dice si esta seleccionado, booleano que dice si el nodo tiene hijos seleccionados |
+| check   | triggers after click checkbox of node | two parameters: node object corresponding to the node whose selected state is changed, tree checked status object which has four props: checkedNodes, checkedKeys, halfCheckedNodes, halfCheckedKeys |
 | current-change    | cambia cuando el nodo actual cambia      | dos parámetros: objeto nodo que se corresponde al nodo actual y propiedad `node` del TreeNode |
 | node-expand       | se lanza cuando el nodo actual se abre   | tres parámetros: el objeto del nodo abierto, propiedad `node` de TreeNode y el TreeNode en si |
 | node-collapse     | se lanza cuando el nodo actual se cierra | tres parámetros: el objeto del nodo cerrado, propiedad `node` de TreeNode y el TreeNode en si |

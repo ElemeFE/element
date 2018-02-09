@@ -181,6 +181,15 @@
 
       handleCheckChange(value, ev) {
         this.node.setChecked(ev.target.checked, !this.tree.checkStrictly);
+        this.$nextTick(() => {
+          const store = this.tree.store;
+          this.tree.$emit('check', this.node.data, {
+            checkedNodes: store.getCheckedNodes(),
+            checkedKeys: store.getCheckedKeys(),
+            halfCheckedNodes: store.getHalfCheckedNodes(),
+            halfCheckedKeys: store.getHalfCheckedKeys(),
+          });
+        });
       },
 
       handleChildNodeExpand(nodeData, node, instance) {

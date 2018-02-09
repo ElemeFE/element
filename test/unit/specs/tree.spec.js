@@ -315,6 +315,26 @@ describe('Tree', () => {
     }, 10);
   });
 
+  it('check', done => {
+    vm = getTreeVm(':props="defaultProps" show-checkbox @check="handleCheck"', {
+      methods: {
+        handleCheck(data, args) {
+          this.data = data;
+          this.args = args;
+        }
+      }
+    });
+    const secondNode = document.querySelectorAll('.el-tree-node__content')[1];
+    const nodeCheckbox = secondNode.querySelector('.el-checkbox');
+    expect(nodeCheckbox).to.be.exist;
+    nodeCheckbox.click();
+    setTimeout(() => {
+      expect(vm.args.checkedNodes.length).to.equal(3);
+      expect(vm.data.id).to.equal(2);
+      done();
+    }, 10);
+  });
+
   it('setCheckedNodes', (done) => {
     vm = getTreeVm(':props="defaultProps" show-checkbox node-key="id"');
     const tree = vm.$children[0];

@@ -1038,6 +1038,8 @@ Only one node among the same level can be expanded at one time.
 | getCheckedKeys  | If the node can be selected (`show-checkbox` is `true`), it returns the currently selected array of node's keys | (leafOnly) Accept a boolean type parameter whose default value is `false`. If the parameter is `true`, it only returns the currently selected array of sub-nodes. |
 | setCheckedKeys  | set certain nodes to be checked, only works when `node-key` is assigned | (keys, leafOnly) Accept two parameters: 1. an array of node's keys to be checked 2. a boolean type parameter whose default value is `false`. If the parameter is `true`, it only returns the currently selected array of sub-nodes. |
 | setChecked      | set node to be checked or not, only works when `node-key` is assigned | (key/data, checked, deep) Accept three parameters: 1. node's key or data to be checked 2. a boolean typed parameter indicating checked or not. 3. a boolean typed parameter indicating deep or not. |
+| getHalfCheckedNodes | If the node can be selected (`show-checkbox` is `true`), it returns the currently half selected array of nodes | - |
+| getHalfCheckedKeys | If the node can be selected (`show-checkbox` is `true`), it returns the currently half selected array of node's keys | - |
 | getCurrentKey   | return the highlight node's key (null if no node is highlighted) | — |
 | getCurrentNode  | return the highlight node (null if no node is highlighted) | — |
 | setCurrentKey   | set highlighted node by key, only works when `node-key` is assigned | (key) the node's key to be highlighted |
@@ -1054,6 +1056,7 @@ Only one node among the same level can be expanded at one time.
 | node-click     | triggers when a node is clicked          | three parameters: node object corresponding to the node clicked, `node` property of TreeNode, TreeNode itself |
 | node-contextmenu     | triggers when a node is clicked by right button          | four parameters: event, node object corresponding to the node clicked, `node` property of TreeNode, TreeNode itself |
 | check-change   | triggers when the selected state of the node changes | three parameters: node object corresponding to the node whose selected state is changed, whether the node is selected, whether node's subtree has selected nodes |
+| check   | triggers after click checkbox of node | two parameters: node object corresponding to the node whose selected state is changed, tree checked status object which has four props: checkedNodes, checkedKeys, halfCheckedNodes, halfCheckedKeys |
 | current-change | triggers when current node changes       | two parameters: node object corresponding to the current node, `node` property of TreeNode |
 | node-expand    | triggers when current node open          | three parameters: node object corresponding to the node opened, `node` property of TreeNode, TreeNode itself |
 | node-collapse  | triggers when current node close         | three parameters: node object corresponding to the node closed, `node` property of TreeNode, TreeNode itself |
