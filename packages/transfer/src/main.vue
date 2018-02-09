@@ -2,6 +2,7 @@
   <div class="el-transfer">
     <transfer-panel
       v-bind="$props"
+      ref="leftPanel"
       :data="sourceData"
       :title="titles[0] || t('el.transfer.titles.0')"
       :default-checked="leftDefaultChecked"
@@ -29,6 +30,7 @@
     </div>
     <transfer-panel
       v-bind="$props"
+      ref="rightPanel"
       :data="targetData"
       :title="titles[1] || t('el.transfer.titles.1')"
       :default-checked="rightDefaultChecked"
@@ -183,6 +185,14 @@
         });
         this.$emit('input', currentValue);
         this.$emit('change', currentValue, 'right', this.leftChecked);
+      },
+
+      clearQuery(which) {
+        if (which === 'left') {
+          this.$refs.leftPanel.query = '';
+        } else if (which === 'right') {
+          this.$refs.rightPanel.query = '';
+        }
       }
     }
   };

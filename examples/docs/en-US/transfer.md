@@ -278,6 +278,11 @@ By default, Transfer looks for `key`, `label` and `disabled` in a data item. If 
 | left-footer | content of left list footer |
 | right-footer | content of right list footer |
 
+### Methods
+| Method | Description | Parameters |
+| ---- | ---- | ---- |
+| clearQuery | clear the filter keyword of a certain panel | 'left' / 'right' |
+
 ### Events
 | Event Name | Description | Parameters |
 |---------- |-------- |---------- |

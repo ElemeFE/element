@@ -279,6 +279,11 @@ Por defecto Transfer busca los atributos `key`, `label`, y `disabled` en cada el
 | left-footer  | Contenido del footer de la lista de la izquierda |
 | right-footer | Contenido del footer de la lista de la derecha |
 
+### Methods
+| Method | Description | Parameters |
+| ---- | ---- | ---- |
+| clearQuery | clear the filter keyword of a certain panel | 'left' / 'right' |
+
 ### Eventos
 | Nombre | Descripcion                              | Parametros                               |
 | ------ | ---------------------------------------- | ---------------------------------------- |
