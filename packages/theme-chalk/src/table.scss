@@ -104,6 +104,13 @@
         background: $--background-color-base;
       }
     }
+    
+    &.has-selection {
+      th:last-child {
+        padding: 5px 14px;
+        font-weight: 500;
+      }
+    }
   }
 
   th, td {

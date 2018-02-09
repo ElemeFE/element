@@ -73,7 +73,10 @@ export default {
     const columnRows = convertToRows(originColumns, this.columns);
     // 是否拥有多级表头
     const isGroup = columnRows.length > 1;
+    const hasSelection = this.store.states.selection.length > 0;
+    const selectedRows = this.store.states.selection.length;
     if (isGroup) this.$parent.isGroup = true;
+    if (hasSelection) this.$parent.hasSelection = true;
     return (
       <table
         class="el-table__header"
@@ -88,7 +91,7 @@ export default {
             this.hasGutter ? <col name="gutter" /> : ''
           }
         </colgroup>
-        <thead class={ [{ 'is-group': isGroup, 'has-gutter': this.hasGutter }] }>
+        <thead class={ [{ 'is-group': isGroup, 'has-selection': hasSelection, 'has-gutter': this.hasGutter }] }>
           {
             this._l(columnRows, (columns, rowIndex) =>
               <tr
@@ -131,6 +134,28 @@ export default {
                       </div>
                     </th>
                   )
+                }
+                {
+                  this.hasGutter ? <th class="gutter"></th> : ''
+                }
+              </tr>
+            )
+          }
+          {
+            this._l(columnRows, (columns, rowIndex) =>
+              <tr
+                style={ this.getHeaderRowStyle(rowIndex) }
+                class={ this.getHeaderRowClass(rowIndex) }
+              >
+                {
+                  hasSelection
+                    ? <th
+                      colspan={ columns.length }
+                      style={ this.getHeaderCellStyle(rowIndex, 0, columns, 0) }
+                      class={ this.getHeaderCellClass(rowIndex, 0, columns, 0) }>
+                      총 { selectedRows }개의 검사기록이 선택되었습니다.
+                    </th>
+                    : ''
                 }
                 {
                   this.hasGutter ? <th class="gutter"></th> : ''
