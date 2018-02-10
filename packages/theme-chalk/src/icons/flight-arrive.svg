@@ -1,0 +1,11 @@
+<svg width="20px" height="19px" viewBox="0 0 20 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon/hover/airplane_down" transform="translate(-2.000000, -2.000000)">
+            <g>
+                <polygon id="c" points="0 0 24 0 24 24 0 24"></polygon>
+                <path d="M2.5,19 L21.5,19 L21.5,21 L2.5,21 L2.5,19 Z M9.68,13.27 L14.03,14.43 L19.34,15.85 C20.14,16.06 20.96,15.59 21.18,14.79 C21.39,13.99 20.92,13.17 20.12,12.95 L14.81,11.53 L12.05,2.51 L10.12,2 L10.12,10.28 L5.15,8.95 L4.22,6.63 L2.77,6.24 L2.77,11.41 L4.37,11.84 L9.68,13.27 Z" id="Shape" fill="#000000" fill-rule="nonzero"></path>
+            </g>
+        </g>
+    </g>
+</svg>

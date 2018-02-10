@@ -1,0 +1,11 @@
+<svg width="18px" height="12px" viewBox="0 0 18 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon/default/sourting" transform="translate(-3.000000, -6.000000)">
+            <g id="icon_sort">
+                <polygon id="Shape" points="0 0 24 0 24 24 0 24"></polygon>
+                <path d="M3,18 L9,18 L9,16 L3,16 L3,18 Z M3,6 L3,8 L21,8 L21,6 L3,6 Z M3,13 L15,13 L15,11 L3,11 L3,13 Z" id="Shape" fill="#000000" fill-rule="nonzero"></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,16 @@
+<svg width="19px" height="18px" viewBox="0 0 19 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <polygon id="path-1" points="0 0 24 0 24 24 0 24"></polygon>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon/default/airplane" transform="translate(-2.000000, -3.000000)">
+            <g>
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="Shape"></g>
+                <path d="M22.7279221,14.7279221 L22.7279221,12.7279221 L14.3068694,7.72792206 L14.3068694,2.22792206 C14.3068694,1.39792206 13.6016063,0.727922061 12.7279221,0.727922061 C11.8542379,0.727922061 11.1489747,1.39792206 11.1489747,2.22792206 L11.1489747,7.72792206 L2.72792206,12.7279221 L2.72792206,14.7279221 L11.1489747,12.2279221 L11.1489747,17.7279221 L9.04371154,19.2279221 L9.04371154,20.7279221 L12.7279221,19.7279221 L16.4121326,20.7279221 L16.4121326,19.2279221 L14.3068694,17.7279221 L14.3068694,12.2279221 L22.7279221,14.7279221 Z" id="Shape" fill="#000000" fill-rule="nonzero" mask="url(#mask-2)" transform="translate(12.727922, 10.727922) rotate(45.000000) translate(-12.727922, -10.727922) "></path>
+            </g>
+        </g>
+    </g>
+</svg>

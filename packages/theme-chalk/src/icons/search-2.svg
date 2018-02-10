@@ -1,0 +1,12 @@
+<svg width="19px" height="19px" viewBox="0 0 19 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon/default/search" transform="translate(-3.000000, -3.000000)">
+            <g>
+                <polygon id="Shape" points="0 0 24 0 24 24 0 24"></polygon>
+                <path d="M11,19 C6.581722,19 3,15.418278 3,11 C3,6.581722 6.581722,3 11,3 C15.418278,3 19,6.581722 19,11 C19,15.418278 15.418278,19 11,19 Z M11,17 C14.3137085,17 17,14.3137085 17,11 C17,7.6862915 14.3137085,5 11,5 C7.6862915,5 5,7.6862915 5,11 C5,14.3137085 7.6862915,17 11,17 Z" id="Oval-2" fill="#000000"></path>
+                <path d="M20.5,20.5 L16,16" id="Path-3" stroke="#000000" stroke-width="2"></path>
+            </g>
+        </g>
+    </g>
+</svg>

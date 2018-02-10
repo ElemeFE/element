@@ -1,0 +1,11 @@
+<svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon/default/edit" transform="translate(-5.000000, -5.000000)">
+            <g id="Shape">
+                <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                <path d="M5,16.0837384 L5,19 L7.91626163,19 L16.5172893,10.3989724 L13.6010276,7.48271073 L5,16.0837384 Z M18.7725316,8.14373004 C19.0758228,7.84043883 19.0758228,7.35050687 18.7725316,7.04721566 L16.9527843,5.22746841 C16.6494931,4.9241772 16.1595612,4.9241772 15.85627,5.22746841 L14.4331343,6.65060408 L17.3493959,9.56686571 L18.7725316,8.14373004 Z" fill="#000000" fill-rule="nonzero"></path>
+            </g>
+        </g>
+    </g>
+</svg>

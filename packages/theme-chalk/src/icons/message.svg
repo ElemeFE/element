@@ -1,0 +1,10 @@
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon/active/feedback" transform="translate(-2.000000, -2.000000)" fill="#000000" fill-rule="nonzero">
+            <g id="icon_feedback_active">
+                <path d="M20,2 L4,2 C2.9,2 2.01,2.9 2.01,4 L2,22 L6,18 L20,18 C21.1,18 22,17.1 22,16 L22,4 C22,2.9 21.1,2 20,2 Z M13,14 L11,14 L11,12 L13,12 L13,14 Z M13,10 L11,10 L11,6 L13,6 L13,10 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,10 @@
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon/active/policy" transform="translate(-2.000000, -2.000000)" fill="#000000" fill-rule="nonzero">
+            <g id="icon_policy_active">
+                <path d="M11,2 L11,22 C5.93,21.5 2,17.21 2,12 C2,6.79 5.93,2.5 11,2 Z M13.03,2 L13.03,10.99 L22,10.99 C21.53,6.25 17.76,2.47 13.03,2 Z M13.03,13.01 L13.03,22 C17.77,21.53 21.53,17.75 22,13.01 L13.03,13.01 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>
