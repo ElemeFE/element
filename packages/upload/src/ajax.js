@@ -12,6 +12,7 @@ function getError(action, option, xhr) {
   err.status = xhr.status;
   err.method = 'post';
   err.url = action;
+  err.resposne = xhr.resposne || xhr.responseText;
   return err;
 }
 
