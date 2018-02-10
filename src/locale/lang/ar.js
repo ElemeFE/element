@@ -1,38 +1,38 @@
 export default {
   el: {
     colorpicker: {
-      confirm: 'موافق',
-      clear: 'إزالة'
+      confirm: 'تأكيد',
+      clear: 'مسح'
     },
     datepicker: {
       now: 'الآن',
       today: 'اليوم',
       cancel: 'إلغاء',
-      clear: 'إزالة',
-      confirm: 'موافق',
-      selectDate: 'أختر التاريخ',
-      selectTime: 'أختر الوقت',
+      clear: 'مسح',
+      confirm: 'تأكيد',
+      selectDate: 'اختر التاريخ',
+      selectTime: 'اختر الوقت',
       startDate: 'تاريخ البدء',
       startTime: 'وقت البدء',
       endDate: 'تاريخ الانتهاء',
       endTime: 'وقت الانتهاء',
-      prevYear: 'Previous Year', // to be translated
-      nextYear: 'Next Year', // to be translated
-      prevMonth: 'Previous Month', // to be translated
-      nextMonth: 'Next Month', // to be translated
-      year: '',
-      month1: 'يناير',
-      month2: 'فبراير',
-      month3: 'مارس',
-      month4: 'ابريل',
-      month5: 'مايو',
-      month6: 'يونيو',
-      month7: 'يوليو',
-      month8: 'أغسطس',
-      month9: 'سبتمبر',
-      month10: 'أكتوبر',
-      month11: 'نوفمبر',
-      month12: 'ديسمبر',
+      prevYear: 'السنة الماضية', // to be translated
+      nextYear: 'السنة القادمة', // to be translated
+      prevMonth: 'الشهر الماضي', // to be translated
+      nextMonth: 'الشهر القادم', // to be translated
+      year: 'سنة',
+      month1: 'كانون الثاني',
+      month2: 'شباط',
+      month3: 'آذار',
+      month4: 'نيسان',
+      month5: 'أيار',
+      month6: 'حزيران',
+      month7: 'تموز',
+      month8: 'آب',
+      month9: 'أيلول',
+      month10: 'تشرين الأول',
+      month11: 'تشرين الثاني',
+      month12: 'كانون الأول',
       week: 'أسبوع',
       weeks: {
         sun: 'الأحد',
@@ -44,33 +44,33 @@ export default {
         sat: 'السبت'
       },
       months: {
-        jan: 'يناير',
-        feb: 'فبراير',
-        mar: 'مارس',
-        apr: 'أبريل',
-        may: 'مايو',
-        jun: 'يونيو',
-        jul: 'يوليو',
-        aug: 'أغسطس',
-        sep: 'سبتمبر',
-        oct: 'أكتوبر',
-        nov: 'نوفمبر',
-        dec: 'ديسمبر'
+        jan: 'كانون الثاني',
+        feb: 'شباط',
+        mar: 'آذار',
+        apr: 'نيسان',
+        may: 'أيار',
+        jun: 'حزيران',
+        jul: 'تموز',
+        aug: 'آب',
+        sep: 'أيلول',
+        oct: 'تشرين الأول',
+        nov: 'تشرين الثاني',
+        dec: 'كانون الأول'
       }
     },
     select: {
       loading: 'جار التحميل',
-      noMatch: 'لايوجد بيانات مطابقة',
-      noData: 'لايوجد بيانات',
-      placeholder: 'أختر'
+      noMatch: 'لا يوجد بيانات مطابقة',
+      noData: 'لا يوجد بيانات',
+      placeholder: 'اختر'
     },
     cascader: {
       noMatch: 'لايوجد بيانات مطابقة',
       loading: 'جار التحميل',
-      placeholder: 'أختر'
+      placeholder: 'اختر'
     },
     pagination: {
-      goto: 'أذهب إلى',
+      goto: 'اذهب إلى',
       pagesize: '/صفحة',
       total: 'الكل {total}',
       pageClassifier: ''
@@ -84,7 +84,7 @@ export default {
     upload: {
       delete: 'حذف',
       preview: 'عرض',
-      continue: 'إستمرار'
+      continue: 'استمرار'
     },
     table: {
       emptyText: 'لايوجد بيانات',
@@ -100,7 +100,7 @@ export default {
       noMatch: 'لايوجد بيانات مطابقة',
       noData: 'لايوجد بيانات',
       titles: ['قائمة 1', 'قائمة 2'],
-      filterPlaceholder: 'ادخل كلمة',
+      filterPlaceholder: 'أدخل كلمة',
       noCheckedFormat: '{total} عناصر',
       hasCheckedFormat: '{checked}/{total} مختار'
     }
