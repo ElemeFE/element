@@ -58,6 +58,7 @@ export default {
       type: String,
       default: 'select'
     },
+    beforeStart: Function,
     beforeUpload: Function,
     beforeRemove: Function,
     onRemove: {
@@ -136,25 +137,38 @@ export default {
 
   methods: {
     handleStart(rawFile) {
-      rawFile.uid = Date.now() + this.tempIndex++;
-      let file = {
-        status: 'ready',
-        name: rawFile.name,
-        size: rawFile.size,
-        percentage: 0,
-        uid: rawFile.uid,
-        raw: rawFile
+      const doStart = (rawFile) => {
+        rawFile.uid = Date.now() + this.tempIndex++;
+        let file = {
+          status: 'ready',
+          name: rawFile.name,
+          size: rawFile.size,
+          percentage: 0,
+          uid: rawFile.uid,
+          raw: rawFile
+        };
+
+        try {
+          file.url = URL.createObjectURL(rawFile);
+        } catch (err) {
+          console.error(err);
+          return;
+        }
+
+        this.uploadFiles.push(file);
+        this.onChange(file, this.uploadFiles);
       };
 
-      try {
-        file.url = URL.createObjectURL(rawFile);
-      } catch (err) {
-        console.error(err);
-        return;
+      if (this.beforeStart && typeof this.beforeStart === 'function') {
+        const before = this.beforeStart(rawFile);
+        if (before && before.then) {
+          before.then(() => {
+            doStart(rawFile);
+          }, noop);
+        } else if (before !== false) {
+            doStart(rawFile);
+        }
       }
-
-      this.uploadFiles.push(file);
-      this.onChange(file, this.uploadFiles);
     },
     handleProgress(ev, rawFile) {
       const file = this.getFile(rawFile);
