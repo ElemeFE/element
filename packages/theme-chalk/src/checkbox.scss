@@ -229,7 +229,7 @@
     margin: 0;
     width: 0;
     height: 0;
-    left: -999px;
+    z-index: -1;
   }
 
   @include e(label) {
@@ -288,7 +288,7 @@
     outline: none;
     position: absolute;
     margin: 0;
-    left: -999px;
+    z-index: -1;
   }
 
   &.is-checked {
