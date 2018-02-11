@@ -43,81 +43,81 @@ export default {
         <tbody>
           {
             this._l(this.data, (row, $index) =>
-              [<tr
-                style={ this.rowStyle ? this.getRowStyle(row, $index) : null }
-                key={ this.table.rowKey ? this.getKeyOfRow(row, $index) : $index }
-                on-dblclick={ ($event) => this.handleDoubleClick($event, row) }
-                on-click={ ($event) => this.handleClick($event, row) }
-                on-contextmenu={ ($event) => this.handleContextMenu($event, row) }
-                on-mouseenter={ _ => this.handleMouseEnter($index) }
-                on-mouseleave={ _ => this.handleMouseLeave() }
-                class={ [this.getRowClass(row, $index)] }>
-                {
-                  this._l(this.columns, (column, cellIndex) => {
-                    const { rowspan, colspan } = this.getSpan(row, column, $index, cellIndex);
-                    if (!rowspan || !colspan) {
-                      return '';
-                    } else {
-                      if (rowspan === 1 && colspan === 1) {
-                        return (
-                          <td
-                            style={ this.getCellStyle($index, cellIndex, row, column) }
-                            class={ this.getCellClass($index, cellIndex, row, column) }
-                            on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
-                            on-mouseleave={ this.handleCellMouseLeave }>
-                            {
-                              column.renderCell.call(
-                                this._renderProxy,
-                                h,
-                                {
-                                  row,
-                                  column,
-                                  $index,
-                                  store: this.store,
-                                  _self: this.context || this.table.$vnode.context
-                                },
-                                columnsHidden[cellIndex]
-                              )
-                            }
-                          </td>
-                        );
+              [
+                <tr
+                  style={ this.rowStyle ? this.getRowStyle(row, $index) : null }
+                  key={ this.table.rowKey ? this.getKeyOfRow(row, $index) : $index }
+                  on-dblclick={ ($event) => this.handleDoubleClick($event, row) }
+                  on-click={ ($event) => this.handleClick($event, row) }
+                  on-contextmenu={ ($event) => this.handleContextMenu($event, row) }
+                  on-mouseenter={ _ => this.handleMouseEnter($index) }
+                  on-mouseleave={ _ => this.handleMouseLeave() }
+                  class={ [this.getRowClass(row, $index)] }>
+                  {
+                    this._l(this.columns, (column, cellIndex) => {
+                      const { rowspan, colspan } = this.getSpan(row, column, $index, cellIndex);
+                      if (!rowspan || !colspan) {
+                        return '';
                       } else {
-                        return (
-                          <td
-                            style={ this.getCellStyle($index, cellIndex, row, column) }
-                            class={ this.getCellClass($index, cellIndex, row, column) }
-                            rowspan={ rowspan }
-                            colspan={ colspan }
-                            on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
-                            on-mouseleave={ this.handleCellMouseLeave }>
-                            {
-                              column.renderCell.call(
-                                this._renderProxy,
-                                h,
-                                {
-                                  row,
-                                  column,
-                                  $index,
-                                  store: this.store,
-                                  _self: this.context || this.table.$vnode.context
-                                },
-                                columnsHidden[cellIndex]
-                              )
-                            }
-                          </td>
-                        );
+                        if (rowspan === 1 && colspan === 1) {
+                          return (
+                            <td
+                              style={ this.getCellStyle($index, cellIndex, row, column) }
+                              class={ this.getCellClass($index, cellIndex, row, column) }
+                              on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
+                              on-mouseleave={ this.handleCellMouseLeave }>
+                              {
+                                column.renderCell.call(
+                                  this._renderProxy,
+                                  h,
+                                  {
+                                    row,
+                                    column,
+                                    $index,
+                                    store: this.store,
+                                    _self: this.context || this.table.$vnode.context
+                                  },
+                                  columnsHidden[cellIndex]
+                                )
+                              }
+                            </td>
+                          );
+                        } else {
+                          return (
+                            <td
+                              style={ this.getCellStyle($index, cellIndex, row, column) }
+                              class={ this.getCellClass($index, cellIndex, row, column) }
+                              rowspan={ rowspan }
+                              colspan={ colspan }
+                              on-mouseenter={ ($event) => this.handleCellMouseEnter($event, row) }
+                              on-mouseleave={ this.handleCellMouseLeave }>
+                              {
+                                column.renderCell.call(
+                                  this._renderProxy,
+                                  h,
+                                  {
+                                    row,
+                                    column,
+                                    $index,
+                                    store: this.store,
+                                    _self: this.context || this.table.$vnode.context
+                                  },
+                                  columnsHidden[cellIndex]
+                                )
+                              }
+                            </td>
+                          );
+                        }
                       }
-                    }
-                  })
-                }
-              </tr>,
-              this.store.isRowExpanded(row)
-                ? (<tr>
-                  <td colspan={ this.columns.length } class="el-table__expanded-cell">
-                    { this.table.renderExpanded ? this.table.renderExpanded(h, { row, $index, store: this.store }) : ''}
-                  </td>
-                </tr>)
-                : ''
+                    })
+                  }
+                </tr>,
+                this.store.isRowExpanded(row) ? (
+                  <tr>
+                    <td colspan={ this.columns.length } class="el-table__expanded-cell">
+                      { this.table.renderExpanded ? this.table.renderExpanded(h, { row, $index, store: this.store }) : ''}
+                    </td>
+                  </tr>) : ''
               ]
             ).concat(
               <el-tooltip effect={ this.table.tooltipEffect } placement="top" ref="tooltip" content={ this.tooltipContent }></el-tooltip>
