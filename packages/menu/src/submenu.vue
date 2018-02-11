@@ -43,7 +43,15 @@
         default: 300
       },
       popperClass: String,
-      disabled: Boolean
+      disabled: Boolean,
+      horizontalIcon: {
+        type: String,
+        default: 'el-icon-arrow-down'
+      },
+      verticalIcon: {
+        type: String,
+        default: 'el-icon-arrow-right'
+      }
     },
 
     data() {
@@ -231,6 +239,8 @@
         mode,
         disabled,
         popperClass,
+        horizontalIcon,
+        verticalIcon,
         $slots,
         $parent
       } = this;
@@ -269,7 +279,7 @@
       const submenuTitleIcon = (
         rootMenu.mode === 'horizontal' && $parent === rootMenu ||
         rootMenu.mode === 'vertical' && !rootMenu.collapse
-      ) ? 'el-icon-arrow-down' : 'el-icon-arrow-right';
+      ) ? horizontalIcon : verticalIcon;
 
       return (
         <li
