@@ -1,5 +1,7 @@
 <template>
-  <i :class="'tm-icon-' + name"></i>
+  <svg class="tm-icon">
+    <use :xlink:href="'#icon-' + name"></use>
+  </svg>
 </template>
 
 <script>

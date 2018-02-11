@@ -9,6 +9,8 @@ var mixinsList = fs.readdirSync(path.resolve(__dirname, '../src/mixins'));
 var transitionList = fs.readdirSync(path.resolve(__dirname, '../src/transitions'));
 var externals = {};
 
+var SvgStore = require('webpack-svgstore-plugin');
+
 Object.keys(Components).forEach(function(key) {
   externals[`element-ui/packages/${key}`] = `element-ui/lib/${key}`;
 });
@@ -57,3 +59,14 @@ exports.postcss = function(webapck) {
     require('postcss-salad')(saladConfig)
   ];
 };
+
+exports.plugins = [
+  new SvgStore({
+    svgoOptions: {
+      plugins: [
+        { removeTitle: true }
+      ]
+    },
+    prefix: 'icon-'
+  })
+];
