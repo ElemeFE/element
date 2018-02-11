@@ -489,7 +489,9 @@
         td {
           background: #FAFAFA;
         }
-
+        &.selected-row td {
+          background-color: $--table-selected-row-background;
+        }
         &.current-row td {
           background-color: $--table-current-row-background;
         }
@@ -507,7 +509,9 @@
         }
       }
     }
-
+    tr.selected-row > td {
+      background-color: $--table-selected-row-background;
+    }
     tr.current-row > td {
       background-color: $--table-current-row-background;
     }
@@ -546,7 +550,9 @@
       &:hover > td {
         background-color: $--table-row-hover-background;
       }
-
+      &.selected-row:hover > td {
+        background-color: $--table-selected-row-background;
+      }
       &.current-row:hover > td {
         background-color: $--table-current-row-background;
       }

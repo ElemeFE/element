@@ -24,7 +24,8 @@ export default {
     rowClassName: [String, Function],
     rowStyle: [Object, Function],
     fixed: String,
-    highlight: Boolean
+    highlight: Boolean,
+    selectOnClick: Boolean
   },
 
   render(h) {
@@ -160,6 +161,20 @@ export default {
       }
       if (newRow) {
         addClass(newRow, 'current-row');
+      }
+    },
+    'store.states.selection'(newVal, oldVal) {
+      if (!this.selectOnClick) return;
+      const el = this.$el;
+      if (!el) return;
+      const data = this.store.states.data;
+      const tr = el.querySelector('tbody').children;
+      const rows = [].filter.call(tr, row => hasClass(row, 'el-table__row'));
+      [].forEach.call(rows, row => removeClass(row, 'selected-row'));
+      const selectedIndexes = newVal.map(v => data.indexOf(v));
+      const selectedRows = rows.filter((r, i) => selectedIndexes.includes(i));
+      if (selectedRows) {
+        selectedRows.forEach(r => addClass(r, 'selected-row'));
       }
     }
   },
@@ -380,6 +395,9 @@ export default {
 
     handleClick(event, row) {
       this.store.commit('setCurrentRow', row);
+      if (this.selectOnClick) {
+        this.store.commit('rowSelectedChanged', row);
+      }
       this.handleEvent(event, row, 'click');
     },
 
