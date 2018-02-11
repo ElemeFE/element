@@ -213,15 +213,15 @@
 
       validate() {
         if (this.$type === 'prompt') {
-          var inputPattern = this.inputPattern;
+          const inputPattern = this.inputPattern;
           if (inputPattern && !inputPattern.test(this.inputValue || '')) {
             this.editorErrorMessage = this.inputErrorMessage || t('el.messagebox.error');
             addClass(this.getInputElement(), 'invalid');
             return false;
           }
-          var inputValidator = this.inputValidator;
+          const inputValidator = this.inputValidator;
           if (typeof inputValidator === 'function') {
-            var validateResult = inputValidator(this.inputValue);
+            const validateResult = inputValidator(this.inputValue);
             if (validateResult === false) {
               this.editorErrorMessage = this.inputErrorMessage || t('el.messagebox.error');
               addClass(this.getInputElement(), 'invalid');

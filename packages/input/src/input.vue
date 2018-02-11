@@ -234,7 +234,7 @@
       },
       resizeTextarea() {
         if (this.$isServer) return;
-        var { autosize, type } = this;
+        const { autosize, type } = this;
         if (type !== 'textarea') return;
         if (!autosize) {
           this.textareaCalcStyle = {

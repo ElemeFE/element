@@ -131,7 +131,7 @@
         const disabledDate = this.disabledDate;
         const now = clearHours(new Date());
 
-        for (var i = 0; i < 6; i++) {
+        for (let i = 0; i < 6; i++) {
           const row = rows[i];
 
           if (this.showWeekNumber) {
@@ -140,7 +140,7 @@
             }
           }
 
-          for (var j = 0; j < 7; j++) {
+          for (let j = 0; j < 7; j++) {
             let cell = row[this.showWeekNumber ? j + 1 : j];
             if (!cell) {
               cell = { row: i, column: j, type: 'normal', inRange: false, start: false, end: false };
@@ -455,7 +455,7 @@
         } else if (selectionMode === 'day') {
           this.$emit('pick', newDate);
         } else if (selectionMode === 'week') {
-          var weekNumber = getWeekNumber(newDate);
+          const weekNumber = getWeekNumber(newDate);
 
           const value = newDate.getFullYear() + 'w' + weekNumber;
           this.$emit('pick', {
