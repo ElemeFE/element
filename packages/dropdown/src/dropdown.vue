@@ -243,7 +243,7 @@
     render(h) {
       let { hide, splitButton, type, dropdownSize } = this;
 
-      var handleMainButtonClick = (event) => {
+      const handleMainButtonClick = (event) => {
         this.$emit('click', event);
         hide();
       };

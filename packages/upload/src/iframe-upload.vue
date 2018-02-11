@@ -105,9 +105,9 @@ export default {
     const self = this;
     !this.$isServer && window.addEventListener('message', (event) => {
       if (!self.file) return;
-      var targetOrigin = new URL(self.action).origin;
+      const targetOrigin = new URL(self.action).origin;
       if (event.origin !== targetOrigin) return;
-      var response = event.data;
+      const response = event.data;
       if (response.result === 'success') {
         self.onSuccess(response, self.file);
       } else if (response.result === 'failed') {

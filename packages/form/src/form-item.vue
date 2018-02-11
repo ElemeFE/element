@@ -89,20 +89,20 @@
         return this.for || this.prop;
       },
       labelStyle() {
-        var ret = {};
+        const ret = {};
         if (this.form.labelPosition === 'top') return ret;
-        var labelWidth = this.labelWidth || this.form.labelWidth;
+        const labelWidth = this.labelWidth || this.form.labelWidth;
         if (labelWidth) {
           ret.width = labelWidth;
         }
         return ret;
       },
       contentStyle() {
-        var ret = {};
+        const ret = {};
         const label = this.label;
         if (this.form.labelPosition === 'top' || this.form.inline) return ret;
         if (!label && !this.labelWidth && this.isNested) return ret;
-        var labelWidth = this.labelWidth || this.form.labelWidth;
+        const labelWidth = this.labelWidth || this.form.labelWidth;
         if (labelWidth) {
           ret.marginLeft = labelWidth;
         }
@@ -123,10 +123,10 @@
       fieldValue: {
         cache: false,
         get() {
-          var model = this.form.model;
+          const model = this.form.model;
           if (!model || !this.prop) { return; }
 
-          var path = this.prop;
+          let path = this.prop;
           if (path.indexOf(':') !== -1) {
             path = path.replace(/:/, '.');
           }
@@ -171,7 +171,7 @@
     methods: {
       validate(trigger, callback = noop) {
         this.validateDisabled = false;
-        var rules = this.getFilteredRule(trigger);
+        const rules = this.getFilteredRule(trigger);
         if ((!rules || rules.length === 0) && this.required === undefined) {
           callback();
           return true;
@@ -179,7 +179,7 @@
 
         this.validateState = 'validating';
 
-        var descriptor = {};
+        const descriptor = {};
         if (rules && rules.length > 0) {
           rules.forEach(rule => {
             delete rule.trigger;
@@ -187,8 +187,8 @@
         }
         descriptor[this.prop] = rules;
 
-        var validator = new AsyncValidator(descriptor);
-        var model = {};
+        const validator = new AsyncValidator(descriptor);
+        const model = {};
 
         model[this.prop] = this.fieldValue;
 
@@ -226,16 +226,16 @@
         }
       },
       getRules() {
-        var formRules = this.form.rules;
-        var selfRules = this.rules;
-        var requiredRule = this.required !== undefined ? { required: !!this.required } : [];
+        let formRules = this.form.rules;
+        const selfRules = this.rules;
+        const requiredRule = this.required !== undefined ? { required: !!this.required } : [];
 
         formRules = formRules ? getPropByPath(formRules, this.prop || '').o[this.prop || ''] : [];
 
         return [].concat(selfRules || formRules || []).concat(requiredRule);
       },
       getFilteredRule(trigger) {
-        var rules = this.getRules();
+        const rules = this.getRules();
 
         return rules.filter(rule => {
           return !rule.trigger || rule.trigger.indexOf(trigger) !== -1;
