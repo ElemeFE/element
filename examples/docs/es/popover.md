@@ -125,6 +125,9 @@ Similar a un Tooltip, Popover está construido con `Vue-popper`. Así que para a
 </el-popover>
 
 <el-button v-popover:popover1>Hover to activate</el-button>
+<el-button v-popover:popover1>Hover2 to activate</el-button>
+<el-button v-popover:popover1>Hover3 to activate</el-button>
+
 <el-button v-popover:popover2>Click to activate</el-button>
 <el-popover
   placement="right"

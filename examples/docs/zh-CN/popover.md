@@ -133,12 +133,15 @@ Popover 的属性与 Tooltip 很类似，它们都是基于`Vue-popper`开发的
   ref="popover2"
   placement="bottom"
   title="标题"
-  width="200"
+  width="400"
   trigger="click"
-  content="这是一段内容,这是一段内容,这是一段内容,这是一段内容。">
+  content="click  click 这是一段内容,这是一段内容。">
 </el-popover>
 
 <el-button v-popover:popover1>hover 激活</el-button>
+<el-button v-popover:popover1>hover2 激活</el-button>
+<el-button v-popover:popover1>hover3 激活</el-button>
+
 <el-button v-popover:popover2>click 激活</el-button>
 <el-popover
   placement="right"
