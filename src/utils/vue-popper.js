@@ -71,6 +71,9 @@ export default {
     },
 
     showPopper(val) {
+      if (this.popperJS) {
+        this.popperJS._reference = this.referenceElm;
+      }
       val ? this.updatePopper() : this.destroyPopper();
       this.$emit('input', val);
     }
