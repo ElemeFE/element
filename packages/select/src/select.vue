@@ -100,6 +100,7 @@
       @after-leave="doDestroy">
       <el-select-menu
         ref="popper"
+        :append-to-body="popperAppendToBody"
         v-show="visible && emptyText !== false">
         <el-scrollbar
           tag="ul"
@@ -273,7 +274,11 @@
         type: String,
         default: 'value'
       },
-      collapseTags: Boolean
+      collapseTags: Boolean,
+      popperAppendToBody: {
+        type: Boolean,
+        default: true
+      }
     },
 
     data() {
