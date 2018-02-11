@@ -542,8 +542,14 @@
   }
 
   @include m(enable-row-hover) {
-    .el-table__body tr:hover > td {
-      background-color: $--table-row-hover-background;
+    .el-table__body tr {
+      &:hover > td {
+        background-color: $--table-row-hover-background;
+      }
+
+      &.current-row:hover > td {
+        background-color: $--table-current-row-background;
+      }
     }
   }
 
