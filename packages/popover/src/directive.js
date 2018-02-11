@@ -5,10 +5,10 @@ export default {
 
     if (vnode.context.$refs[_ref].$refs.reference) {
 
-		vnode.context.$refs[_ref].$refs.reference.push(el);
+      vnode.context.$refs[_ref].$refs.reference.push(el);
     } else {
 
-		vnode.context.$refs[_ref].$refs.reference = [el];
+      vnode.context.$refs[_ref].$refs.reference = [el];
     }
   }
 };
