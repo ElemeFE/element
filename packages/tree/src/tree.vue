@@ -221,6 +221,9 @@
         if (!this.nodeKey) throw new Error('[Tree] nodeKey is required in updateKeyChild');
         this.store.updateChildren(key, data);
       },
+      getNode(nodeData) {
+        return this.store.getNode(nodeData)
+      },
       initTabindex() {
         this.treeItems = this.$el.querySelectorAll('.is-focusable[role=treeitem]');
         this.checkboxItems = this.$el.querySelectorAll('input[type=checkbox]');
