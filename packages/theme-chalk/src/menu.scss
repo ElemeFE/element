@@ -14,6 +14,26 @@
   transition: border-color .3s, background-color .3s, color .3s;
   box-sizing: border-box;
   white-space: nowrap;
+
+  * {
+    vertical-align: middle;
+  }
+
+  i {
+    color: $--color-text-secondary;
+  }
+
+  &:hover,
+  &:focus {
+    outline: none;
+    background-color: $--menu-item-hover-fill;
+  }
+
+  @include when(disabled) {
+    opacity: 0.25;
+    cursor: not-allowed;
+    background: none !important;
+  }
 }
 
 @include b(menu) {
@@ -41,7 +61,8 @@
         color: inherit;
       }
 
-      &:hover, &:focus{
+      &:not(.is-disabled):hover,
+      &:not(.is-disabled):focus{
         background-color: #fff;
       }
     }
@@ -95,8 +116,8 @@
         }
       }
     }
-    & .el-menu-item:hover,
-    & .el-menu-item:focus {
+    & .el-menu-item:not(.is-disabled):hover,
+    & .el-menu-item:not(.is-disabled):focus {
       outline: none;
       color: $--color-text-primary;
     }
@@ -182,22 +203,6 @@
     font-size: 18px;
     vertical-align: middle;
   }
-  & * {
-    vertical-align: middle;
-  }
-  &:first-child {
-    margin-left: 0;
-  }
-  &:last-child {
-    margin-right: 0;
-  }
-  &:hover, &:focus {
-    outline: none;
-    background-color: $--menu-item-hover-fill;
-  }
-  i {
-    color: $--color-text-secondary;
-  }
   @include when(active) {
     color: $--color-primary;
     i {
@@ -212,16 +217,7 @@
   padding-left: 0;
 
   @include e(title) {
-    position: relative;
     @include menu-item;
-
-    & * {
-      vertical-align: middle;
-    }
-
-    i {
-      color: $--color-text-secondary;
-    }
 
     &:hover {
       background-color: $--menu-item-hover-fill;
@@ -252,6 +248,14 @@
   @include when(opened) {
     > .el-submenu__title .el-submenu__icon-arrow {
       transform: rotateZ(180deg);
+    }
+  }
+  @include when(disabled) {
+    .el-submenu__title,
+    .el-menu-item {
+      opacity: 0.25;
+      cursor: not-allowed;
+      background: none !important;
     }
   }
   [class^="el-icon-"] {
