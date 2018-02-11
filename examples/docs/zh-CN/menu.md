@@ -76,7 +76,8 @@
       <el-menu-item index="2-4-3">选项3</el-menu-item>
     </el-submenu>
   </el-submenu>
-  <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
+  <el-menu-item index="3" disabled>消息中心</el-menu-item>
+  <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
 </el-menu>
 <div class="line"></div>
 <el-menu
@@ -100,7 +101,8 @@
       <el-menu-item index="2-4-3">选项3</el-menu-item>
     </el-submenu>
   </el-submenu>
-  <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
+  <el-menu-item index="3" disabled>消息中心</el-menu-item>
+  <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
 </el-menu>
 
 <script>
@@ -157,9 +159,13 @@
         <i class="el-icon-menu"></i>
         <span slot="title">导航二</span>
       </el-menu-item>
-      <el-menu-item index="3">
-        <i class="el-icon-setting"></i>
+      <el-menu-item index="3" disabled>
+        <i class="el-icon-document"></i>
         <span slot="title">导航三</span>
+      </el-menu-item>
+      <el-menu-item index="4">
+        <i class="el-icon-setting"></i>
+        <span slot="title">导航四</span>
       </el-menu-item>
     </el-menu>
   </el-col>
@@ -195,9 +201,13 @@
         <i class="el-icon-menu"></i>
         <span slot="title">导航二</span>
       </el-menu-item>
-      <el-menu-item index="3">
-        <i class="el-icon-setting"></i>
+      <el-menu-item index="3" disabled>
+        <i class="el-icon-document"></i>
         <span slot="title">导航三</span>
+      </el-menu-item>
+      <el-menu-item index="4">
+        <i class="el-icon-setting"></i>
+        <span slot="title">导航四</span>
       </el-menu-item>
     </el-menu>
   </el-col>
@@ -249,9 +259,13 @@
     <i class="el-icon-menu"></i>
     <span slot="title">导航二</span>
   </el-menu-item>
-  <el-menu-item index="3">
-    <i class="el-icon-setting"></i>
+  <el-menu-item index="3" disabled>
+    <i class="el-icon-document"></i>
     <span slot="title">导航三</span>
+  </el-menu-item>
+  <el-menu-item index="4">
+    <i class="el-icon-setting"></i>
+    <span slot="title">导航四</span>
   </el-menu-item>
 </el-menu>
 
@@ -316,12 +330,14 @@
 | popper-class | 弹出菜单的自定义类名 | string | — | — |
 | show-timeout | 展开 sub-menu 的延时 | number | — | 300 |
 | hide-timeout | 收起 sub-menu 的延时 | number | — | 300 |
+| disabled  | 是否禁用 | boolean | — | false |
 
 ### Menu-Item Attribute
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | index     | 唯一标志   | string  | — | — |
 | route     | Vue Router 路径对象 | Object | — | — |
+| disabled  | 是否禁用 | boolean | — | false |
 
 ### Menu-Group Attribute
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |

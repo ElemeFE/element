@@ -42,7 +42,8 @@
         type: Number,
         default: 300
       },
-      popperClass: String
+      popperClass: String,
+      disabled: Boolean
     },
 
     data() {
@@ -147,20 +148,22 @@
         delete this.submenus[item.index];
       },
       handleClick() {
-        const {rootMenu} = this;
+        const { rootMenu, disabled } = this;
         if (
           (rootMenu.menuTrigger === 'hover' && rootMenu.mode === 'horizontal') ||
-          (rootMenu.collapse && rootMenu.mode === 'vertical')
+          (rootMenu.collapse && rootMenu.mode === 'vertical') ||
+          disabled
         ) {
           return;
         }
         this.dispatch('ElMenu', 'submenu-click', this);
       },
       handleMouseenter() {
-        const {rootMenu} = this;
+        const { rootMenu, disabled } = this;
         if (
           (rootMenu.menuTrigger === 'click' && rootMenu.mode === 'horizontal') ||
-          (!rootMenu.collapse && rootMenu.mode === 'vertical')
+          (!rootMenu.collapse && rootMenu.mode === 'vertical') ||
+          disabled
         ) {
           return;
         }
@@ -222,12 +225,13 @@
         paddingStyle,
         titleStyle,
         backgroundColor,
-        $slots,
         rootMenu,
         currentPlacement,
         menuTransitionName,
         mode,
+        disabled,
         popperClass,
+        $slots,
         $parent
       } = this;
 
@@ -272,7 +276,8 @@
           class={{
             'el-submenu': true,
             'is-active': active,
-            'is-opened': opened
+            'is-opened': opened,
+            'is-disabled': disabled
           }}
           role="menuitem"
           aria-haspopup="true"
