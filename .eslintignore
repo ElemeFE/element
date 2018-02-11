@@ -1,6 +1,7 @@
 src/utils/popper.js
 src/utils/date.js
 examples/play
+packages/theme-chalk
 *.sh
 node_modules
 lib
