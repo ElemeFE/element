@@ -2017,6 +2017,7 @@
 | show-header | 是否显示表头 | boolean | — | true |
 | highlight-current-row | 是否要高亮当前行 | boolean | — | false |
 | current-row-key | 当前行的 key，只写属性 | String,Number | — | — |
+| select-on-click | 是否可以通过点击行来选中行，会高亮被选中行，通过checkbox选中的行也会被高亮 | boolean | - | false |
 | row-class-name | 行的 className 的回调方法，也可以使用字符串为所有行设置一个固定的 className。 | Function({row, rowIndex})/String | — | — |
 | row-style | 行的 style 的回调方法，也可以使用一个固定的 Object 为所有行设置一样的 Style。 | Function({row, rowIndex})/Object | — | — |
 | cell-class-name | 单元格的 className 的回调方法，也可以使用字符串为所有单元格设置一个固定的 className。 | Function({row, column, rowIndex, columnIndex})/String | — | — |

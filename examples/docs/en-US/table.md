@@ -1957,6 +1957,7 @@ You can customize row index in `type=index` columns.
 | show-header | whether Table header is visible | boolean | — | true |
 | highlight-current-row | whether current row is highlighted | boolean | — | false |
 | current-row-key | key of current row, a set only prop | string,number | — | — |
+| select-on-click | whether the row could be selected and highlighted by click. the selected rows are highlighted even if the rows are selected by checkbox | boolean | - | false |
 | row-class-name | function that returns custom class names for a row, or a string assigning class names for every row | Function({row, rowIndex})/String | — | — |
 | row-style | function that returns custom style for a row, or an object assigning custom style for every row | Function({row, rowIndex})/Object | — | — |
 | cell-class-name | function that returns custom class names for a cell, or a string assigning class names for every cell | Function({row, column, rowIndex, columnIndex})/String | — | — |
