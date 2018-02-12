@@ -71,16 +71,16 @@ export default {
       val ? this.$emit('show') : this.$emit('hide');
     },
     referenceElm(Elm) {
-      if (this.popperJS) {
+      if (Elm && this.popperJS) {
         this.popperJS._reference = this.referenceElm;
+        this.updatePopper();
       }
-      this.updatePopper();
     }
   },
 
   mounted() {
     var _this = this;
-
+    alert(2);
     if (!this.$refs.reference) {
       this.$refs.reference = [];
     }
@@ -91,6 +91,7 @@ export default {
       reference = [this.$slots.reference[0].elm];
     }
     this.referenceElm = reference[0];
+
     // 可访问性
     if (reference) {
       reference.forEach(function(reference, index, arry) {

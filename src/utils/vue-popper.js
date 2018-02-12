@@ -71,7 +71,7 @@ export default {
     },
 
     showPopper(val) {
-      if (this.popperJS) {
+      if (val && this.popperJS && this.referenceElm) {
         this.popperJS._reference = this.referenceElm;
       }
       val ? this.updatePopper() : this.destroyPopper();
