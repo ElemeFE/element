@@ -282,7 +282,7 @@ Por defecto Transfer busca los atributos `key`, `label`, y `disabled` en cada el
 ### Methods
 | Method | Description | Parameters |
 | ---- | ---- | ---- |
-| clearQuery | clear the filter keyword of a certain panel | 'left' / 'right' |
+| clearQuery | borra la palabra clave del filtro de un determinado panel | 'left' / 'right' |
 
 ### Eventos
 | Nombre | Descripcion                              | Parametros                               |

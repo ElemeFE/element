@@ -690,7 +690,7 @@ Si el valor de encuadernación de Select es un objeto, asegúrese de asignar `va
 | popper-class         | nombre de clase personalizado para el menú desplegable del Select | string   | —                 | —                |
 | reserve-keyword      | cuando `multiple` y `filter` es `true`, si se debe reservar la palabra clave actual después de seleccionar una opción. | boolean  | —                 | false            |
 | default-first-option | seleccione la primera opción de coincidencia en la tecla enter. Uso con `filterable` o `remote`. | boolean  | -                 | false            |
-| popper-append-to-body| whether to append the popper menu to body. If the positioning of the popper is wrong, you can try to set this prop to false | boolean | - | true |
+| popper-append-to-body| si añadir o no el menu popup al body. Si el posicionamiento del popup es incorrecto, puede intentar poner este `prop` en `false`. | boolean | - | true |
 
 ### Eventos Select
 | Nombre         | Descripción                              | Parametros                               |
