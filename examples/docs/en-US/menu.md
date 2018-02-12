@@ -334,7 +334,7 @@ Vertical NavMenu could be collapsed.
 | popper-class | custom class name for the popup menu | string | — | — |
 | show-timeout | timeout before showing a sub-menu | number | — | 300 |
 | hide-timeout | timeout before hiding a sub-menu | number | — | 300 |
-| disabled | whether disabled | boolean | — | false |
+| disabled | whether the sub-menu is disabled | boolean | — | false |
 
 ### Menu-Item Attribute
 | Attribute      | Description          | Type      | Accepted Values       | Default  |

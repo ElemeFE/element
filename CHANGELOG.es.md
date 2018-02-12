@@ -1,5 +1,34 @@
 ## Changelog
 
+### 2.2.0 Graphite
+
+*2018-02-12*
+
+### New features
+- Menu
+  - Added `popper-class` and `disabled` attributes for SubMenu, #9604 #9771
+  - Horizontal Menu now supports multi-layered SubMenu, #9741
+- Tree
+  - Added `node-contextmenu` event, #9678
+  - Now you can customize node template using scoped slot, #9686
+  - Added `getNode`, `remove`, `append`, `insertBefore`, `insertAfter`, `getCheckedKeys`, `getHalfCheckedNodes`, `getHalfCheckedKeys` methods and `check` event, #9718 #9730
+- Transfer
+  - Added `clearQuery` method, #9753
+- Select
+  - Added `popper-append-to-body` attribute, #9782
+
+### Bug fixes
+- Table
+  - Fixed clicking expanding icon of an expandable row triggers `row-click` event, #9654
+  - Fixed layout not update when column width is changed by user dragging, #9668
+  - Fixed style issue when summary row co-exists with fixed columns, #9667
+- Container
+  - Fixed container components not stretching in IE11, #9655
+- Loading
+  - Fixed Loading not showing when the value of `v-loading` is changed to true in the `mounted` hook, #9722
+- Switch
+  - Fixed two native click events are triggered when Switch is clicked, #9760
+
 ### 2.1.0 Charcoal
 
 *2018-01-31*
