@@ -256,7 +256,6 @@ Con la anterior configuración, el tamaño por defecto de todos los componentes 
 Ahora ha incorporado Vue y Element a su proyecto y es el momento para comenzar a programar. Inicie el modo de desarrollo:
 
 ```bash
-# visit localhost:8086
 npm run dev
 ```
 
