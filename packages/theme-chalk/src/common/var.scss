@@ -42,8 +42,8 @@ $--color-info-lighter: mix($--color-white, $--color-info, 90%) !default;
 
 $--color-text-primary: #909090 !default;
 $--color-text-regular: #1e1e28 !default;
-$--color-text-secondary: #7F95E1 !default;
-$--color-text-placeholder: #CCCCCC !default;
+$--color-text-secondary: #7f95e1 !default;
+$--color-text-placeholder: #cccccc !default;
 
 /* Link
 -------------------------- */
@@ -52,7 +52,7 @@ $--link-hover-color: $--color-primary !default;
 
 /* Background
 -------------------------- */
-$--background-color-base: #F4F5F9 !default;
+$--background-color-base: #f4f5f9 !default;
 
 /* Border
 -------------------------- */
@@ -81,9 +81,9 @@ $--fill-base: $--color-white !default;
 /* Font
 -------------------------- */
 $--font-path: 'fonts' !default;
-$--font-size-base: 17px !default;
-$--font-size-small: 14px !default;
-$--font-size-large: 20px !default;
+$--font-size-base: 14px !default;
+$--font-size-small: 12px !default;
+$--font-size-large: 18px !default;
 $--font-color-disabled-base: #909090 !default;
 $--font-weight-primary: 500 !default;
 $--font-line-height-primary: 20px !default;
@@ -106,7 +106,7 @@ $--disabled-border-base: $--border-color-light !default;
 
 /* Icon
 -------------------------- */
-$--icon-color: #CCCCCC !default;
+$--icon-color: #cccccc !default;
 $--icon-color-base: $--color-info !default;
 
 /* Checkbox
