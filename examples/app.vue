@@ -1,7 +1,6 @@
 <style lang="css">
   @import 'highlight.js/styles/color-brewer.css';
   @import 'assets/styles/common.css';
-  @import 'assets/styles/fonts/style.css';
 
   html, body {
     margin: 0;
