@@ -11,7 +11,7 @@
   ],
   "typings": "types/index.d.ts",
   "scripts": {
-    "bootstrap": "yarn",
+    "bootstrap": "yarn || npm i",
     "build:file": "node build/bin/iconInit.js & node build/bin/build-entry.js & node build/bin/i18n.js & node build/bin/version.js",
     "build:theme": "node build/bin/gen-cssfile && gulp build --gulpfile packages/theme-chalk/gulpfile.js && cp-cli packages/theme-chalk/lib lib/theme-chalk",
     "build:utils": "cross-env BABEL_ENV=utils babel src --out-dir lib --ignore src/index.js",
