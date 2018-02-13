@@ -22,8 +22,15 @@
     cursor: pointer;
     padding-right: 35px;
 
+    &:hover {
+      & + .tm-input__suffix .tm-select__caret,
+      & + .tm-input__prefix .tm-select__caret {
+        color: $--select-icon-hover-color;
+      }
+    }
+
     &:focus {
-      border-color: $--select-input-focus-background;
+      border-color: $--select-close-hover-color;
     }
   }
 
@@ -60,12 +67,22 @@
 
         &:hover {
           border-color: $--select-disabled-border;
+
+          & + .tm-input__suffix .tm-select__caret,
+          & + .tm-input__prefix .tm-select__caret {
+            color: $--color-text-placeholder;
+          }
         }
       }
     }
 
     &.is-focus .tm-input__inner {
       border-color: $--select-input-focus-background;
+
+      & + .tm-input__suffix .tm-select__caret,
+      & + .tm-input__prefix .tm-select__caret {
+        color: $--select-icon-hover-color;
+      }
     }
   }
 

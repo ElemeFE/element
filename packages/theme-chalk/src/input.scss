@@ -92,11 +92,21 @@
 
     &:hover {
       border-color: $--input-hover-border;
+
+      & + .tm-input__suffix,
+      & + .tm-input__prefix {
+        color: $--input-icon-hover-color;
+      }
     }
 
     &:focus {
       outline: none;
       border-color: $--input-focus-border;
+
+      & + .tm-input__suffix,
+      & + .tm-input__prefix {
+        color: $--input-icon-focus-color;
+      }
     }
   }
 
