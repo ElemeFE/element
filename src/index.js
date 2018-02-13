@@ -121,6 +121,9 @@ const install = function(Vue, opts = {}) {
     Vue.component(component.name, component);
   });
 
+  var __svg__ = { path: '../packages/icon/svgs/*.svg', name: 'packages/icon/svgs/[hash].sprite.svg' };
+  require('../node_modules/webpack-svgstore-plugin/src/helpers/svgxhr')(__svg__);
+
   Vue.use(Loading.directive);
 
   const ELEMENT = {};

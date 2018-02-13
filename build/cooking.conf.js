@@ -1,6 +1,8 @@
 var cooking = require('cooking');
 var config = require('./config');
 
+var WebpackSvgStore = require('webpack-svgstore-plugin');
+
 cooking.set({
   entry: './src/index.js',
   dist: './lib',
@@ -9,8 +11,7 @@ cooking.set({
   moduleName: 'ELEMENT',
   extends: ['vue2'],
   alias: config.alias,
-  externals: { vue: config.vue },
-  plugins: config.plugins
+  externals: { vue: config.vue }
 });
 
 cooking.add('output.filename', 'index.js');
@@ -20,4 +21,12 @@ cooking.add('loader.scss', {
   loaders: ['style-loader', 'css-loader', 'sass-loader']
 });
 cooking.add('vue.preserveWhitespace', false);
+cooking.add('plugin.SvgStorePlugin', new WebpackSvgStore({
+  svgoOptions: {
+    plugins: [
+      { removeTitle: true }
+    ]
+  },
+  prefix: 'icon-'
+}));
 module.exports = cooking.resolve();

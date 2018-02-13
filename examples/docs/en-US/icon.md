@@ -95,7 +95,9 @@ Just assign the class name to `tm-icon-iconName`.
 <ul class="icon-list">
   <li v-for="name in icons" :key="name">
     <span>
-      <tm-icon :name="name"></tm-icon>
+      <svg class="tm-icon">
+         <use :xlink:href="'#icon-' + name"></use>
+      </svg>
       <!-- <i :class="'tm-icon-' + name"></i> -->
       <span class="icon-name">{{name}}</span>
     </span>
