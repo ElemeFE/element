@@ -45,11 +45,18 @@
       vertical-align: middle;
       color: #99a9bf;
     }
+    .tm-icon {
+      width: 30px;
+      height: 30px;
+      display: block;
+      margin: 0 auto 10px;
+    }
     .icon-name {
-      display: inline-block;
+      display: block;
       padding: 0 3px;
       height: 1em;
       color: #606266;
+      font-size: 14px;
     }
     &:hover {
       color: rgb(92, 182, 255);
@@ -59,24 +66,25 @@
 
 ## Icon
 
-Element provides a set of common icons.
+TM-Ui provides a set of common icons. It uses a svg-sprite so you are able to change color of it through CSS property `fill`.
 
 ### Basic usage
 
-Just assign the class name to `tm-icon-iconName`.
+Just use a `tm-icon` component with `name` parameter.
 
 :::demo
 
 ```html
-<i class="tm-icon-edit"></i>
-<i class="tm-icon-share"></i>
-<i class="tm-icon-delete"></i>
-<tm-button type="primary" icon="tm-icon-search">Search</tm-button>
-
+Oh my god, it's a non-jingle <tm-icon name="bell"></tm-icon> !
 ```
 :::
 
+<tm-icon name="warning"></tm-icon> Other components with icons will be here a bit later :)
+
 ### Icons
+
+Here is a list of our default SVG icons.
+<br>If it isn't enough you can add some yours at `packages/theme-chalk/src/icons/`
 
 <ul class="icon-list">
   <li v-for="name in icons" :key="name">
