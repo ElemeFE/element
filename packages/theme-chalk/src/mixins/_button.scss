@@ -75,7 +75,7 @@
   padding: $padding-vertical $padding-horizontal;
   font-size: $font-size;
   border-radius: $border-radius;
-  min-width: 150px;
+  min-width: 226px;
   &.is-round {
     padding: $padding-vertical $padding-horizontal;
   }
@@ -87,25 +87,27 @@
   border-color: $border-color;
   font-size: $--button-font-size-tm;
   padding: $--button-padding-vertical-tm $--button-padding-horizontal-tm; 
+  min-width: 192px;
+  font-weight: 500;
 
   &:hover,
   &:focus {
-    background: $--color-success;
-    border-color: $--color-success;
-    color: $--color-white;
+    background: $border-color;
+    border-color: $border-color;
+    color: $background-color;
   }
   
   &:active {
-    background: $--color-success;
-    border-color: $--color-success;
-    color: $--color-white;
+    background: $border-color;
+    border-color: $border-color;
+    color: $background-color;
     outline: none;
   }
 
   &.is-active {
-    background: $--color-success;
-    border-color: $--color-success;
-    color: $--color-white;
+    background: $border-color;
+    border-color: $border-color;
+    color: $background-color;
   }
 
   &.is-disabled {

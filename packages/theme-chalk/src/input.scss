@@ -73,8 +73,9 @@
     -webkit-appearance: none;
     background-color: $--input-fill;
     background-image: none;
-    border-radius: $--input-border-radius;
-    border: $--input-border;
+    border-radius: 0px;
+    border: none;
+    border-right: 1px solid $--input-border-color;
     box-sizing: border-box;
     color: $--input-color;
     display: inline-block;
@@ -82,7 +83,7 @@
     height: $--input-height;
     line-height: 1;
     outline: none;
-    padding: 0 15px;
+    padding: 0 16px;
     transition: $--border-transition-base;
     width: 100%;
 

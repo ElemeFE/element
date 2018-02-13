@@ -13,7 +13,7 @@ $--color-transition-base: color .2s cubic-bezier(.645,.045,.355,1) !default;
 -------------------------- */
 $--color-white: #fff !default;
 $--color-black: #000 !default;
-$--color-green: #7dcb46 !default;
+$--color-green: #5dc376 !default;
 $--color-grey: #cccccc !default;
 
 $--color-primary: $--color-green !default;
@@ -27,8 +27,9 @@ $--color-primary-light-7: mix($--color-white, $--color-primary, 70%) !default; /
 $--color-primary-light-8: mix($--color-white, $--color-primary, 80%) !default; /* d9ecff */
 $--color-primary-light-9: mix($--color-white, $--color-primary, 90%) !default; /* ecf5ff */
 
-$--color-success: #67c23a !default;
+$--color-success: #5dc376 !default;
 $--color-secondary: $--color-green !default;
+$--color-close: #cccccc !default;
 $--color-warning: #e6a23c !default;
 $--color-danger: #f56c6c !default;
 $--color-info: #909399 !default;
@@ -318,24 +319,24 @@ $--notification-danger-color: $--color-danger !default;
 /* Input
 -------------------------- */
 $--input-font-size: $--font-size-base !default;
-$--input-color: $--color-text-regular !default;
+$--input-color: #1e1e28 !default;
 $--input-width: 140px !default;
 $--input-height: 40px !default;
 $--input-border: $--border-base !default;
-$--input-border-color: $--border-color-base !default;
-$--input-border-radius: $--border-radius-base !default;
+$--input-border-color: $--color-grey !default;
+$--input-border-radius: 0px !default;
 $--input-border-color-hover: $--border-color-hover !default;
 $--input-fill: $--color-white !default;
 $--input-fill-disabled: $--disabled-fill-base !default;
 $--input-color-disabled: $--font-color-disabled-base !default;
-$--input-icon-color: $--color-text-placeholder !default;
-$--input-placeholder-color: $--color-text-placeholder !default;
+$--input-icon-color: $--color-grey !default;
+$--input-placeholder-color: $--color-grey !default;
 $--input-max-width: 314px !default;
 
-$--input-hover-border: $--border-color-hover !default;
-$--input-clear-hover-color: $--color-text-secondary !default;
+$--input-hover-border: $--color-grey !default;
+$--input-clear-hover-color: $--color-grey !default;
 
-$--input-focus-border: $--color-primary !default;
+$--input-focus-border: $--color-grey !default;
 $--input-focus-fill: $--color-white !default;
 
 $--input-disabled-fill: $--disabled-fill-base !default;
@@ -397,17 +398,17 @@ $--tab-vertical-header-count-fill: $--color-text-secondary !default;
 
 /* Button
 -------------------------- */
-$--button-font-size: 12px !default;
+$--button-font-size: 14px !default;
 $--button-font-weight: $--font-weight-primary !default;
 $--button-border-radius: $--border-radius-base !default;
-$--button-padding-vertical: 12px !default;
+$--button-padding-vertical: 16px !default;
 $--button-padding-horizontal: 20px !default;
 
-$--button-font-size-tm: 12px !default;
+$--button-font-size-tm: 14px !default;
 $--button-padding-vertical-tm: 12px !default;
 $--button-padding-horizontal-tm: 20px !default;
 
-$--button-medium-font-size: 12px !default;
+$--button-medium-font-size: 14px !default;
 $--button-medium-border-radius: $--border-radius-base !default;
 $--button-medium-padding-vertical: 12px !default;
 $--button-medium-padding-horizontal: 20px !default;
@@ -427,6 +428,7 @@ $--button-default-fill: $--color-white !default;
 $--button-default-border: $--border-color-base !default;
 
 $--button-disabled-color: $--color-white !default;
+$--button-disabled-secondary-color: $--color-green !default;
 $--button-disabled-fill: $--color-grey !default;
 $--button-disabled-border: $--color-grey !default;
 
@@ -441,6 +443,14 @@ $--button-success-fill: $--color-success !default;
 $--button-secondary-border: $--color-success !default;
 $--button-secondary-color: $--color-white !default;
 $--button-secondary-fill: $--color-white !default;
+
+$--button-secondary-cancel-border: $--color-close !default;
+$--button-secondary-cancel-color: #909090 !default;
+$--button-secondary-cancel-fill: $--color-white !default;
+
+$--button-secondary-delete-border: #ec5657 !default;
+$--button-secondary-delete-color: #ec5657 !default;
+$--button-secondary-delete-fill: $--color-white !default;
 
 $--button-warning-border: $--color-warning !default;
 $--button-warning-color: $--color-white !default;

@@ -85,7 +85,13 @@
     &.tm-button--text {
       background-color: transparent;
     }
-
+    &.tm-button--secondary{
+      &,
+      &:hover,
+      &:focus { 
+        color: mix($--button-disabled-secondary-color, $--color-white);
+      }
+    }
     &.is-plain {
       &,
       &:hover,
@@ -128,6 +134,12 @@
   }
   @include m(secondary) {
     @include button-variant-tm($--color-text-secondary, $--background-color-secondary, $--button-secondary-border);
+  }
+  @include m(secondary-cancel) {
+    @include button-variant-tm($--button-secondary-cancel-color, $--button-secondary-cancel-fill, $--button-secondary-cancel-border);
+  }
+  @include m(secondary-delete) {
+    @include button-variant-tm($--button-secondary-delete-color, $--button-secondary-delete-fill, $--button-secondary-delete-border);
   }
   @include m(danger) {
     @include button-variant($--button-danger-color, $--button-danger-fill, $--button-danger-border);

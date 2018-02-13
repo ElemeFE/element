@@ -28,8 +28,10 @@ The `disabled` attribute determines if the button is disabled.
 
 ```html
 <div style="margin: 20px 0"> 
-  <tm-button type="primary">Primary</tm-button>
+  <tm-button type="primary" disabled>Primary</tm-button>
   <tm-button type="secondary">Secondary</tm-button> 
+  <tm-button type="secondary-cancel">Cancel</tm-button>
+  <tm-button type="secondary-delete">Delete</tm-button>
 </div> 
 ```
 :::
