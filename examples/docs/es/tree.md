@@ -13,31 +13,31 @@
     .buttons {
       margin-top: 20px;
     }
-
+    
     .filter-tree {
       margin-top: 20px;
     }
-
+    
     .custom-tree-container {
       display: flex;
       margin: -24px;
     }
-  
+      
     .block {
       flex: 1;
       padding: 8px 24px 24px;
-  
+      
       &:first-child {
         border-right: solid 1px #eff2f6;
       }
-  
+      
       > p {
         text-align: center;
         margin: 0;
         line-height: 4;
       }
     }
-  
+      
     .custom-tree-node {
       flex: 1;
       display: flex;
@@ -1036,25 +1036,25 @@ Solo puede ser expandido un nodo del mismo nivel a la vez.
 | getCheckedKeys    | Si los nodos pueden ser seleccionados (`show-checkbox` es `true`), devuelve un array con las claves de los nodos seleccionados | (leafOnly) Acepta un booleano que por defecto es `false`. |
 | setCheckedKeys    | Establece algunos nodos como seleccionados, solo si `node-key` está asignado | (keys, leafOnly) Acepta dos parametros: 1. un array de claves 2. un booleano cuyo valor por defecto es `false`. Si el parámetro es `true`, solo devuelve los nodos seleccionados |
 | setChecked        | Establece si un nodo está seleccionado, solo funciona si `node-key` esta asignado | (key/data, checked, deep) Acepta tres parámetros: 1. la clave o dato del nodo a ser seleccionado 2. un booleano que indica si un nodo el nodo estará seleccionado 3. un booleanoque indica si se hará en profundidad |
-| getHalfCheckedNodes | If the node can be selected (`show-checkbox` is `true`), it returns the currently half selected array of nodes | - |
-| getHalfCheckedKeys | If the node can be selected (`show-checkbox` is `true`), it returns the currently half selected array of node's keys | - |
+| getHalfCheckedNodes | Si el nodo puede ser seleccionado (`show-checkbox` es `true`), devuelve la mitad de la matriz de nodos actualmente seleccionada. | - |
+| getHalfCheckedKeys | Si el nodo puede ser seleccionado (`show-checkbox` es `true`), devuelve la mitad de la matriz de claves del nodo actualmente seleccionado. | - |
 | getCurrentKey     | devuelve la clave del nodo resaltado actualmente (null si no hay ninguno) | —                                        |
 | getCurrentNode    | devuelve el nodo resaltado (null si no hay ninguno) | —                                        |
 | setCurrentKey     | establece el nodo resaltado por la clave, solo funciona si `node-key` está asignado | (key) la clave del nodo a ser resaltado  |
 | setCurrentNode    | establece el nodo resaltado, solo funciona si `node-key` está asignado | (node) nodo a ser resaltado              |
-| getNode         | get node by data or key | (data) the node's data or key |
-| remove          | remove a node | (data) the node's data or node to be deleted |
-| append          | append a child node to a given node in the tree | (data, parentNode) 1. child node's data to be appended 2. parent node's data, key or node |
-| insertBefore    | insert a node before a given node in the tree | (data, refNode) 1. node's data to be inserted 2. reference node's data, key or node |
-| insertAfter     | insert a node after a given node in the tree   | (data, refNode) 1. node's data to be inserted 2. reference node's data, key or node |
+| getNode         | devuelve el nodo por el dato o la clave | (data) los datos o clave del nodo |
+| remove          | elimina un nodo | (data) los datos del nodo o nodo a borrar |
+| append          | añadir un nodo hijo a un nodo determinado del árbol | (data, parentNode) 1. los datos del nodo hijo que se añadirán 2. los datos del nodo padre, clave o nodo |
+| insertBefore    | insertar un nodo antes de un nodo dado en el árbol | (data, refNode) 1. Datos del nodo que se insertarán 2. Datos del nodo de referencia, clave o nodo |
+| insertAfter     | insertar un nodo después de un nodo dado en el árbol | (data, refNode) 1. Datos del nodo que se insertarán 2. Datos del nodo de referencia, clave o nodo |
 
 ### Eventos
 | Nombre del evento | Descripción                              | Parámetros                               |
 | ----------------- | ---------------------------------------- | ---------------------------------------- |
 | node-click        | se lanza cuando un nodo es pinchado      | tres parámetros: el objeto del nodo seleccionado, propiedad `node` de TreeNode y el TreeNode en si |
-| node-contextmenu     | triggers when a node is clicked by right button      | four parameters: event, node object corresponding to the node clicked, `node` property of TreeNode, TreeNode itself |
+| node-contextmenu     | se lanza cuando en un nodo se hace click con el boton derecho | cuatro parámetros: evento, el objeto nodo sobre el que se hizo click, la propiedad `node`  del TreeNode, el TreeNode en si mismo |
 | check-change      | se lanza cuando el estado de selección del nodo cambia | tres parámetros: objeto nodo que se corresponde con el que ha cambiado, booleano que dice si esta seleccionado, booleano que dice si el nodo tiene hijos seleccionados |
-| check   | triggers after clicking the checkbox of a node | two parameters: node object corresponding to the node that is checked / unchecked, tree checked status object which has four props: checkedNodes, checkedKeys, halfCheckedNodes, halfCheckedKeys |
+| check   | se activa al hacer clic en la casilla de selección de un nodo | dos parámetros: objeto de nodo correspondiente al nodo que se marca/desmarca, objeto de status de árbol verificado que tiene cuatro puntales: checkedNodes, checkedKeys, halfCheckedNodes, halfCheckedKeys |
 | current-change    | cambia cuando el nodo actual cambia      | dos parámetros: objeto nodo que se corresponde al nodo actual y propiedad `node` del TreeNode |
 | node-expand       | se lanza cuando el nodo actual se abre   | tres parámetros: el objeto del nodo abierto, propiedad `node` de TreeNode y el TreeNode en si |
 | node-collapse     | se lanza cuando el nodo actual se cierra | tres parámetros: el objeto del nodo cerrado, propiedad `node` de TreeNode y el TreeNode en si |
@@ -1062,4 +1062,4 @@ Solo puede ser expandido un nodo del mismo nivel a la vez.
 ### Scoped slot
 | name | Description |
 |------|--------|
-| — | Custom content for tree nodes. The scope parameter is { node, data } |
+| — | Contenido personalizado para nodos de tree. El parámetro del scope es { node, data }. |

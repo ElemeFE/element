@@ -6,28 +6,30 @@
 
 ### New features
 - Menu
-  - Added `popper-class` and `disabled` attributes for SubMenu, #9604 #9771
-  - Horizontal Menu now supports multi-layered SubMenu, #9741
+  - Agregados los atributos  `popper-class` y `disabled` para SubMenu, #9604 #9771
+  - Menu Horizontal ahora soporta SubMenu multi-capas, #9741
 - Tree
-  - Added `node-contextmenu` event, #9678
-  - Now you can customize node template using scoped slot, #9686
-  - Added `getNode`, `remove`, `append`, `insertBefore`, `insertAfter`, `getCheckedKeys`, `getHalfCheckedNodes`, `getHalfCheckedKeys` methods and `check` event, #9718 #9730
+  - Agregado el evento `node-contextmenu`, #9678
+  - Ahora se puede personalizar el template del nodo usando scoped slot, #9686
+  - Agregados los metodos  `getNode`, `remove`, `append`, `insertBefore`, `insertAfter`, `getCheckedKeys`, `getHalfCheckedNodes`, `getHalfCheckedKeys` y el evento `check`, #9718 #9730
 - Transfer
-  - Added `clearQuery` method, #9753
+  - Agregado el metodo `clearQuery`, #9753
 - Select
-  - Added `popper-append-to-body` attribute, #9782
+  - Agregado el atributo `popper-append-to-body`, #9782
 
 ### Bug fixes
 - Table
-  - Fixed clicking expanding icon of an expandable row triggers `row-click` event, #9654
-  - Fixed layout not update when column width is changed by user dragging, #9668
-  - Fixed style issue when summary row co-exists with fixed columns, #9667
+  - Corregido el icono de expansión de una fila expandible que al hacer click activaba el evento `row-click`, #9654
+  - Corregido el layout que no se actualizaba cuando el ancho de columna era cambiado por el usuario arrastrando, #9668
+  - Corregido problema de estilo cuando la fila de resumen coexistia con columnas fijas, #9667
 - Container
-  - Fixed container components not stretching in IE11, #9655
+  - Corregido componentes del Container que no se estiraban en IE11, #9655
 - Loading
-  - Fixed Loading not showing when the value of `v-loading` is changed to true in the `mounted` hook, #9722
+  - Corregido Loading no se mostraba cuando el valor de `v-loading` era cambiado a true en el `hook`  `mounted`, #9722
 - Switch
-  - Fixed two native click events are triggered when Switch is clicked, #9760
+  - Corregido se disparaban los dos eventos nativos de click cuando se hacia click en el Switch, #9760
+
+    ​
 
 ### 2.1.0 Charcoal
 

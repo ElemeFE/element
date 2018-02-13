@@ -310,7 +310,7 @@ NavMenu vertical puede ser colapsado.
 | unique-opened     | si solo un submenu puede ser activo      | boolean | —                     | false       |
 | menu-trigger      | como dispara eventos sub-menus, solo funciona cuando `mode` es 'horizontal' | string  | —                     | hover       |
 | router            | si el modo `vue-router` está activado. Si es verdader, índice será usado como 'path' para activar la ruta | boolean | —                     | false       |
-| disabled | whether disabled | boolean | — | false |
+| disabled | si esta `disabled` | boolean | — | false |
 
 ### Métodos Menu 
 | Nombre de evento | Descripción                   | Parámetros                             |
@@ -334,17 +334,17 @@ NavMenu vertical puede ser colapsado.
 | Atributo     | Descripción                              | Tipo   | Valores aceptados | Por defecto |
 | ------------ | ---------------------------------------- | ------ | ----------------- | ----------- |
 | index        | identificador único                      | string | —                 | —           |
-| popper-class | custom class name for the popup menu     | string | —                 | —           |
+| popper-class | nombre personalizado de la clase del menu popup | string | —                 | —           |
 | show-timeout | tiempo de espera antes de mostrar un submenú | number | —                 | 300         |
 | hide-timeout | tiempo de espera antes de ocultar un submenú | number | —                 | 300         |
-| disabled | whether the sub-menu is disabled | boolean | — | false |
+| disabled | si esta `disabled` el sub-menu | boolean | — | false |
 
 ### Atributos Menu-Item 
 | Atributo | Descripción         | Tipo   | Valores aceptados | Por defecto |
 | -------- | ------------------- | ------ | ----------------- | ----------- |
 | index    | identificador único | string | —                 | —           |
 | route    | Objeto Vue Router   | object | —                 | —           |
-| disabled | whether disabled | boolean | — | false |
+| disabled | si esta `disabled` | boolean | — | false |
 
 ### Atributos Menu-Group 
 | Atributo | Descripción      | Tipo   | Valores aceptados | Por defecto |
