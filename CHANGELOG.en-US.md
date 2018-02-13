@@ -4,7 +4,7 @@
 
 *2018-02-12*
 
-### New features
+#### New features
 - Menu
   - Added `popper-class` and `disabled` attributes for SubMenu, #9604 #9771
   - Horizontal Menu now supports multi-layered SubMenu, #9741
@@ -17,7 +17,7 @@
 - Select
   - Added `popper-append-to-body` attribute, #9782
 
-### Bug fixes
+#### Bug fixes
 - Table
   - Fixed clicking expanding icon of an expandable row triggers `row-click` event, #9654
   - Fixed layout not update when column width is changed by user dragging, #9668
