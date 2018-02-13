@@ -15,6 +15,16 @@
   font-size: $--font-size-base;
   @include utils-user-select(none);
 
+  &:hover {
+    .tm-radio__inner {
+      border-color: $--color-text-primary;
+    }
+
+    .tm-radio__label {
+      color: $--color-text-regular;
+    }
+  }
+
   @include when(bordered) {
     padding: $--radio-bordered-padding;
     border-radius: $--border-radius-base;
@@ -28,7 +38,8 @@
 
     &.is-disabled {
       cursor: not-allowed;
-      border-color: $--border-color-lighter;
+      border-color: $--border-color-light;
+      background-color: $--color-primary-light-8;
     }
 
     & + .tm-radio.is-bordered {
@@ -109,11 +120,11 @@
       }
       &.is-checked {
         .tm-radio__inner {
-          background-color: $--radio-disabled-checked-input-fill;
-          border-color: $--radio-disabled-checked-input-border-color;
+          background-color: $--color-secondary-light-8;
+          border-color: $--color-secondary-light-5;
 
           &::after {
-            background-color: $--radio-disabled-checked-icon-color;
+            background-color: $--color-primary-light-2;
           }
         }
       }
@@ -134,7 +145,7 @@
       }
 
       & + .tm-radio__label {
-        color: $--radio-checked-text-color;
+        color: #000;
       }
     }
 
