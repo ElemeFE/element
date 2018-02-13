@@ -4,7 +4,7 @@
 
 *2018-02-12*
 
-### New features
+#### New features
 - Menu
   - Agregados los atributos  `popper-class` y `disabled` para SubMenu, #9604 #9771
   - Menu Horizontal ahora soporta SubMenu multi-capas, #9741
@@ -17,7 +17,7 @@
 - Select
   - Agregado el atributo `popper-append-to-body`, #9782
 
-### Bug fixes
+#### Bug fixes
 - Table
   - Corregido el icono de expansión de una fila expandible que al hacer click activaba el evento `row-click`, #9654
   - Corregido el layout que no se actualizaba cuando el ancho de columna era cambiado por el usuario arrastrando, #9668
