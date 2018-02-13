@@ -1,0 +1,13 @@
+<svg width="14px" height="15px" viewBox="0 0 14 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Symbols" stroke="none" stroke-width="1" fill-rule="evenodd">
+        <g id="icon/default/rate/half">
+            <g id="ic_star_rate_black_half">
+                <mask id="mask-2" fill="white">
+                    <polygon id="path-1" points="7 11.2130435 11.3283333 14.5 9.67166667 9.19217391 14 5.97826087 8.69166667 5.97826087 7 0.5 5.30833333 5.97826087 0 5.97826087 4.32833333 9.19217391 2.67166667 14.5"></polygon>
+                </mask>
+                <use id="Mask" fill="#EBB242" fill-rule="nonzero" xlink:href="#path-1"></use>
+                <rect fill="#000000" mask="url(#mask-2)" x="7" y="-3" width="9" height="19"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

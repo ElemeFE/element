@@ -11,13 +11,6 @@
 </script>
 
 <style>
-  .demo-icon .source > i {
-    color: #606266;
-    margin: 0 20px;
-    font-size: 1.5em;
-    vertical-align: middle;
-  }
-
   .demo-icon .source > button {
     margin: 0 20px;
   }
@@ -50,14 +43,7 @@
       display: inline-block;
       line-height: normal;
       vertical-align: middle;
-      font-family: 'Helvetica Neue',Helvetica,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',SimSun,sans-serif;
       color: #99a9bf;
-    }
-    i {
-      display: block;
-      font-size: 32px;
-      margin-bottom: 15px;
-      color: #606266;
     }
     .icon-name {
       display: inline-block;
@@ -95,10 +81,7 @@ Just assign the class name to `tm-icon-iconName`.
 <ul class="icon-list">
   <li v-for="name in icons" :key="name">
     <span>
-      <svg class="tm-icon">
-         <use :xlink:href="'#icon-' + name"></use>
-      </svg>
-      <!-- <i :class="'tm-icon-' + name"></i> -->
+      <tm-icon :name="name"></tm-icon>
       <span class="icon-name">{{name}}</span>
     </span>
   </li>

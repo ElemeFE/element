@@ -1,0 +1,7 @@
+<svg width="12px" height="9px" viewBox="0 0 12 9" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Symbols" stroke="none" stroke-width="1" fill-rule="evenodd">
+        <g id="icon/default/pay" transform="translate(-2.000000, -3.000000)">
+            <path d="M12.53,3 L3.17,3 C2.52065,3 2.00585,3.500625 2.00585,4.125 L2,10.875 C2,11.499375 2.52065,12 3.17,12 L12.53,12 C13.17935,12 13.7,11.499375 13.7,10.875 L13.7,4.125 C13.7,3.500625 13.17935,3 12.53,3 Z M11.9,11.1 L2.9,11.1 L2.9,7.5 L11.9,7.5 L11.9,11.1 Z M11.9,4.8 L2.9,4.8 L2.9,3.9 L11.9,3.9 L11.9,4.8 Z" id="pay" fill="#000000" fill-rule="nonzero"></path>
+        </g>
+    </g>
+</svg>

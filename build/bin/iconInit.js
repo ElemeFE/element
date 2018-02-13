@@ -7,7 +7,7 @@ var path = require('path');
 // var nodes = postcss.parse(fontFile).nodes;
 var classList = [];
 
-var iconsDir = fs.readdirSync(path.resolve(__dirname, '../../packages/icon/svgs'));
+var iconsDir = fs.readdirSync(path.resolve(__dirname, '../../packages/theme-chalk/src/icons'));
 
 iconsDir.forEach(file => {
    classList.push(file.replace('.svg', ''));
