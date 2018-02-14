@@ -39,11 +39,17 @@ jobs:
           name: Assemble project
           command: yarn run deploy:build
 
+      - save_cache:
+          paths:
+            - examples/element-ui
+          key: project-dist-{{ .Revision }}
+
   build:
     machine: true
     working_directory: ~/repo
     steps:
-      - checkout
+      - restore_cache:
+          key: project-dist-{{ .Revision }}
       - run:
           name: Build container with nginx for SPA application
           command: docker build -t tmconsulting/tmc24-components:develop .
