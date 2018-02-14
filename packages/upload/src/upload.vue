@@ -1,4 +1,5 @@
 <script>
+// TODO: Run `npm run test:watch` and check warnings
 import ajax from './ajax';
 import UploadDragger from './upload-dragger.vue';
 

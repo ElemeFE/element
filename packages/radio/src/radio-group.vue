@@ -8,6 +8,7 @@
   </div>
 </template>
 <script>
+  // TODO: Run `npm run test:watch` and check warnings
   import Emitter from 'element-ui/src/mixins/emitter';
 
   const keyCode = Object.freeze({

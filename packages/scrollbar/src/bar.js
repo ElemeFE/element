@@ -1,3 +1,4 @@
+// TODO: Run `npm run test:watch` and check warnings
 import { on, off } from 'element-ui/src/utils/dom';
 import { renderThumbStyle, BAR_MAP } from './util';
 

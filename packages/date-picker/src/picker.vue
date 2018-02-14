@@ -76,6 +76,7 @@
 </template>
 
 <script>
+// TODO: Run `npm run test:watch` and check warnings
 import Vue from 'vue';
 import Clickoutside from 'element-ui/src/utils/clickoutside';
 import { formatDate, parseDate, isDateObject, getWeekNumber } from './util';

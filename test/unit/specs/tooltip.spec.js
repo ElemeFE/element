@@ -1,3 +1,4 @@
+// TODO: Run `npm run test:watch` and check warnings
 import { createVue, triggerEvent, destroyVM } from '../util';
 
 describe('Tooltip', () => {

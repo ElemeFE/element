@@ -1,4 +1,5 @@
 <script>
+  // TODO: Run `npm run test:watch` and check warnings
   import TabNav from './tab-nav';
 
   export default {

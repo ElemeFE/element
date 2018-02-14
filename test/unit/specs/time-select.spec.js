@@ -1,3 +1,4 @@
+// TODO: Run `npm run test:watch` and check warnings
 import { createTest, createVue, destroyVM } from '../util';
 import TimeSelect from 'packages/time-select';
 import Vue from 'vue';

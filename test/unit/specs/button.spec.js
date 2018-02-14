@@ -1,3 +1,4 @@
+// TODO: Run `npm run test:watch` and check warnings
 import { createTest, createVue, destroyVM } from '../util';
 import Button from 'packages/button';
 

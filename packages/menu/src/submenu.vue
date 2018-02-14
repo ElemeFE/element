@@ -1,4 +1,5 @@
 <script>
+  // TODO: Run `npm run test:watch` and check warnings
   import TmCollapseTransition from 'element-ui/src/transitions/collapse-transition';
   import menuMixin from './menu-mixin';
   import Emitter from 'element-ui/src/mixins/emitter';

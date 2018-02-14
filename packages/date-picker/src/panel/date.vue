@@ -138,6 +138,7 @@
 </template>
 
 <script type="text/babel">
+  // TODO: Run `npm run test:watch` and check warnings
   import {
     formatDate,
     parseDate,

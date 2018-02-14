@@ -10,6 +10,7 @@ describe('Pagination', () => {
     vm = createTest(Pagination);
     const elm = vm.$el;
     // prev
+    // TODO: TypeError: elm.querySelector is not a function
     expect(elm.querySelector('button.btn-prev')).to.exist;
     // pager
     expect(elm.querySelector('ul.tm-pager')).to.exist;
@@ -27,6 +28,7 @@ describe('Pagination', () => {
     });
     const elm = vm.$el;
     // prev
+    // TODO: TypeError: elm.querySelector is not a function
     expect(elm.querySelector('button.btn-prev')).to.exist;
     // pager
     expect(elm.querySelector('ul.tm-pager')).to.exist;
@@ -41,6 +43,7 @@ describe('Pagination', () => {
   });
 
   it('layout: all in right, need clear float', () => {
+    // TODO: TypeError: elm.querySelector is not a function
     vm = createTest(Pagination, {
       layout: '->, prev, pager, next',
       total: 100
@@ -53,6 +56,7 @@ describe('Pagination', () => {
   });
 
   it('custom slot', () => {
+    // TODO: TypeError: vm.$el.querySelector is not a function
     vm = createVue({
       template: `
         <tm-pagination
@@ -67,6 +71,7 @@ describe('Pagination', () => {
   });
 
   it('small', () => {
+    // TODO: TypeError: Cannot read property 'contains' of undefined
     vm = createTest(Pagination, {
       small: true
     });
@@ -246,6 +251,7 @@ describe('Pagination', () => {
     }, 50);
   });
 
+  // TODO: TypeError: vm.$el.querySelector is not a function
   it('event:current-change', (done) => {
     vm = createVue({
       template: `
@@ -275,6 +281,7 @@ describe('Pagination', () => {
     }, 50);
   });
 
+  // TODO: Error: Uncaught TypeError: vm.$el.querySelectorAll is not a function
   it('event:size-change', done => {
     vm = createVue({
       template: `
@@ -293,6 +300,7 @@ describe('Pagination', () => {
     expect(vm.trigger).to.false;
 
     setTimeout(_ => {
+      // TODO: TypeError: vm.$el.querySelector is not a function
       vm.$el.querySelectorAll('li.tm-select-dropdown__item')[1].click();
       setTimeout(_ => {
         expect(vm.trigger).to.true;
@@ -372,7 +380,7 @@ describe('Pagination', () => {
         done();
       }, 50);
     });
-
+    // TODO: TypeError: vm.$el.querySelectorAll is not a function
     it('click last page', done => {
       vm = createTest(Pagination, {
         total: 1000

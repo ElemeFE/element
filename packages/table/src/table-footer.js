@@ -1,3 +1,4 @@
+// TODO: Run `npm run test:watch` and check warnings
 import LayoutObserver from './layout-observer';
 
 export default {

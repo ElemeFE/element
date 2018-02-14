@@ -1,3 +1,4 @@
+// TODO: Run `npm run test:watch` and check warnings
 import { createVue, triggerEvent, triggerClick, destroyVM } from '../util';
 
 const DELAY = 1;
