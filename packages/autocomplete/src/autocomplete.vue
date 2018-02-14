@@ -58,6 +58,7 @@
   </div>
 </template>
 <script>
+  // TODO: Run `npm run test:watch` and check warnings
   import debounce from 'throttle-debounce/debounce';
   import TmInput from 'element-ui/packages/input';
   import Clickoutside from 'element-ui/src/utils/clickoutside';

@@ -1,3 +1,4 @@
+// TODO: Run `npm run test:watch` and check warnings
 import Popper from 'element-ui/src/utils/vue-popper';
 import debounce from 'throttle-debounce/debounce';
 import { addClass, removeClass, on, off } from 'element-ui/src/utils/dom';

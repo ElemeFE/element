@@ -31,6 +31,7 @@
 </template>
 
 <script type="text/babel">
+  // TODO: Run `npm run test:watch` and check warnings
   import { limitTimeRange, isDate, clearMilliseconds, timeWithinRange } from '../util';
   import Locale from 'element-ui/src/mixins/locale';
   import TimeSpinner from '../basic/time-spinner';

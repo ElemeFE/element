@@ -1,3 +1,4 @@
+// TODO: Run `npm run test:watch` and check warnings
 import { createTest, createVue, triggerEvent, destroyVM } from '../util';
 import Select from 'packages/select';
 
