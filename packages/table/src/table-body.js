@@ -1,3 +1,4 @@
+// TODO: Run `npm run test:watch` and check warnings
 import { getCell, getColumnByCell, getRowIdentity } from './util';
 import { hasClass, addClass, removeClass } from 'element-ui/src/utils/dom';
 import TmCheckbox from 'element-ui/packages/checkbox';

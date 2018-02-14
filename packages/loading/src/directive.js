@@ -1,3 +1,4 @@
+// TODO: Run `npm run test:watch` and check warnings
 import Vue from 'vue';
 import Loading from './loading.vue';
 import { addClass, removeClass, getStyle } from 'element-ui/src/utils/dom';

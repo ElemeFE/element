@@ -87,6 +87,7 @@ describe('Message', () => {
 
   it('invoke with type', () => {
     Message.success('毛毛狗');
+    // TODO: AssertionError: expected 'info' to equal 'success'
     expect(document.querySelector('.tm-message').__vue__.type).to.equal('success');
   });
 
@@ -96,6 +97,7 @@ describe('Message', () => {
       center: true,
       duration: 0
     });
+    // TODO: AssertionError: expected false to be true
     expect(document.querySelector('.tm-message').classList.contains('is-center')).to.true;
   });
 

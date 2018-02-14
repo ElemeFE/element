@@ -30,6 +30,7 @@
   </div>
 </template>
 <script>
+  // TODO: Run `npm run test:watch` and check warnings
   import AsyncValidator from 'async-validator';
   import emitter from 'element-ui/src/mixins/emitter';
   import objectAssign from 'element-ui/src/utils/merge';

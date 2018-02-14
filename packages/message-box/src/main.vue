@@ -77,6 +77,7 @@
 </template>
 
 <script type="text/babel">
+  // TODO: Run `npm run test:watch` and check warnings
   import Popup from 'element-ui/src/utils/popup';
   import Locale from 'element-ui/src/mixins/locale';
   import TmInput from 'element-ui/packages/input';

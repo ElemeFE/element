@@ -1,3 +1,4 @@
+// TODO: Run `npm run test:watch` and check warnings
 import Pager from './pager.vue';
 import TmSelect from 'element-ui/packages/select';
 import TmOption from 'element-ui/packages/option';

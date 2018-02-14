@@ -1,4 +1,5 @@
 <script>
+  // TODO: Run `npm run test:watch` and check warnings
   import TabBar from './tab-bar';
   import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
 
