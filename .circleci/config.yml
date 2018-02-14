@@ -42,9 +42,9 @@ jobs:
       - save_cache:
           paths:
             - examples/element-ui
-          key: project-dist-{{ .Revision }}
+          key: project-dist-{{ .Revision }} # .BuildNum
 
-  build:
+  image:
     machine: true
     working_directory: ~/repo
     steps:
@@ -54,11 +54,6 @@ jobs:
       - run:
           name: Build container with nginx for SPA application
           command: docker build -t tmconsulting/tmc24-components:develop .
-
-  push:
-    machine: true
-    working_directory: ~/repo
-    steps:
       - run:
           name: Login to the docker hub
           command: docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
@@ -71,9 +66,6 @@ workflows:
   build_test_and_push:
     jobs:
       - assemble
-      - build:
+      - image:
           requires:
             - assemble
-      - push:
-          requires:
-            - build
