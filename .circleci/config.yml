@@ -69,4 +69,4 @@ workflows:
             - assemble
       - push:
           requires:
-            - push
+            - build
