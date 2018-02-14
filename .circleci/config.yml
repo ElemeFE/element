@@ -58,3 +58,15 @@ jobs:
       - run:
           name: Push image to registry
           command: docker push tmconsulting/tmc24-components:develop
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - assemble
+      - build
+          requires:
+            - assemble
+      - push
+          requires:
+            - push
