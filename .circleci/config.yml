@@ -48,6 +48,7 @@ jobs:
     machine: true
     working_directory: ~/repo
     steps:
+      - checkout
       - restore_cache:
           key: project-dist-{{ .Revision }}
       - run:
