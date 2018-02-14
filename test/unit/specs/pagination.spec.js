@@ -10,7 +10,7 @@ describe('Pagination', () => {
     vm = createTest(Pagination);
     const elm = vm.$el;
     // prev
-    // TODO: TypeError: elm.querySelector is not a function
+    // TODO: [TESTERROR] TypeError: elm.querySelector is not a function
     expect(elm.querySelector('button.btn-prev')).to.exist;
     // pager
     expect(elm.querySelector('ul.tm-pager')).to.exist;
@@ -28,7 +28,7 @@ describe('Pagination', () => {
     });
     const elm = vm.$el;
     // prev
-    // TODO: TypeError: elm.querySelector is not a function
+    // TODO: [TESTERROR] TypeError: elm.querySelector is not a function
     expect(elm.querySelector('button.btn-prev')).to.exist;
     // pager
     expect(elm.querySelector('ul.tm-pager')).to.exist;
@@ -43,7 +43,7 @@ describe('Pagination', () => {
   });
 
   it('layout: all in right, need clear float', () => {
-    // TODO: TypeError: elm.querySelector is not a function
+    // TODO: [TESTERROR] TypeError: elm.querySelector is not a function
     vm = createTest(Pagination, {
       layout: '->, prev, pager, next',
       total: 100
@@ -56,7 +56,7 @@ describe('Pagination', () => {
   });
 
   it('custom slot', () => {
-    // TODO: TypeError: vm.$el.querySelector is not a function
+    // TODO: [TESTERROR] TypeError: vm.$el.querySelector is not a function
     vm = createVue({
       template: `
         <tm-pagination
@@ -71,7 +71,7 @@ describe('Pagination', () => {
   });
 
   it('small', () => {
-    // TODO: TypeError: Cannot read property 'contains' of undefined
+    // TODO: [TESTERROR] TypeError: Cannot read property 'contains' of undefined
     vm = createTest(Pagination, {
       small: true
     });
@@ -83,7 +83,7 @@ describe('Pagination', () => {
       pageSize: 25,
       total: 100
     });
-
+    // TODO: [TESTERROR] TypeError: vm.$el.querySelectorAll is not a function
     expect(vm.$el.querySelectorAll('li.number')).to.length(4);
   });
 
@@ -92,7 +92,7 @@ describe('Pagination', () => {
       pageSize: 25,
       pageCount: 4
     });
-
+    // TODO: [TESTERROR] TypeError: vm.$el.querySelectorAll is not a function
     expect(vm.$el.querySelectorAll('li.number')).to.length(4);
   });
 
@@ -101,7 +101,7 @@ describe('Pagination', () => {
       pageSize: 25,
       currentPage: 2
     });
-
+    // TODO: [TESTERROR] TypeError: vm.$el.querySelectorAll is not a function
     vm.$el.querySelector('.btn-prev').click();
 
     setTimeout(() => {
@@ -120,7 +120,7 @@ describe('Pagination', () => {
       total: 200,
       currentPage: 3
     });
-
+    // TODO: [TESTERROR] TypeError: vm.$el.querySelectorAll is not a function
     expect(vm.$el.querySelector('li.number.active')).to.have.property('textContent').to.equal('3');
   });
 
@@ -151,7 +151,7 @@ describe('Pagination', () => {
         };
       }
     }, true);
-
+    // TODO: [TESTERROR] TypeError: vm.$el.querySelectorAll is not a function
     expect(vm.$el.querySelector('li.number.active')).to.have.property('textContent').to.equal('10');
     vm.resetTotal();
     setTimeout(() => {
@@ -167,7 +167,7 @@ describe('Pagination', () => {
       total: 1000,
       layout: 'sizes, prev, pager, next'
     });
-
+    // TODO: [TESTERROR] TypeError: vm.$el.querySelectorAll is not a function
     expect(vm.$el.querySelector('.tm-select-dropdown__item.selected')).to.property('textContent').include('35');
     expect([].slice.call(vm.$el.querySelectorAll('.tm-select-dropdown__item'))
       .map(node => parseInt(node.textContent, 10)))
@@ -181,7 +181,7 @@ describe('Pagination', () => {
       total: 1000,
       layout: 'sizes, prev, pager, next'
     });
-
+    // TODO: [TESTERROR] TypeError: vm.$el.querySelectorAll is not a function
     expect(vm.$el.querySelector('.tm-select-dropdown__item.selected')).to.property('textContent').include('10');
   });
 
@@ -227,7 +227,7 @@ describe('Pagination', () => {
       input.$emit('change', value);
     };
 
-    changeValue(1);
+    changeValue(1); // TODO: [TESTERROR] Cannot read property '$emit' of null
     setTimeout(() => {
       expect(input.value).to.equal(1);
       // 多次输入不在min-max区间内的数字
@@ -251,7 +251,7 @@ describe('Pagination', () => {
     }, 50);
   });
 
-  // TODO: TypeError: vm.$el.querySelector is not a function
+  // TODO: [TESTERROR] TypeError: vm.$el.querySelector is not a function
   it('event:current-change', (done) => {
     vm = createVue({
       template: `
@@ -264,6 +264,7 @@ describe('Pagination', () => {
         return { change: false };
       }
     });
+    // TODO: [TESTERROR] TypeError: vm.$el.querySelectorAll is not a function
     const next = vm.$el.querySelector('button.btn-next');
     const prev = vm.$el.querySelector('button.btn-prev');
 
@@ -281,7 +282,7 @@ describe('Pagination', () => {
     }, 50);
   });
 
-  // TODO: Error: Uncaught TypeError: vm.$el.querySelectorAll is not a function
+  // TODO: [TESTERROR] Error: Uncaught TypeError: vm.$el.querySelectorAll is not a function
   it('event:size-change', done => {
     vm = createVue({
       template: `
@@ -300,7 +301,7 @@ describe('Pagination', () => {
     expect(vm.trigger).to.false;
 
     setTimeout(_ => {
-      // TODO: TypeError: vm.$el.querySelector is not a function
+      // TODO: [TESTERROR] TypeError: vm.$el.querySelector is not a function
       vm.$el.querySelectorAll('li.tm-select-dropdown__item')[1].click();
       setTimeout(_ => {
         expect(vm.trigger).to.true;
@@ -328,6 +329,7 @@ describe('Pagination', () => {
         return { page: 1 };
       }
     });
+    // TODO: [TESTERROR] TypeError: vm.$el.querySelectorAll is not a function
     const input = vm.$el.querySelector('.tm-pagination__jump input');
 
     input.value = 2;
@@ -340,6 +342,7 @@ describe('Pagination', () => {
   });
 
   describe('click pager', () => {
+    // TODO: [TESTERROR] TypeError: vm.$el.querySelectorAll is not a function
     it('click ul', () => {
       vm = createTest(Pagination, {
         total: 1000
@@ -348,7 +351,7 @@ describe('Pagination', () => {
       vm.$el.querySelector('.tm-pager').click();
       expect(vm.internalCurrentPage).to.equal(1);
     });
-
+    // TODO: [TESTERROR] TypeError: vm.$el.querySelectorAll is not a function
     it('click li', () => {
       vm = createTest(Pagination, {
         total: 1000
@@ -357,7 +360,7 @@ describe('Pagination', () => {
       vm.$el.querySelectorAll('.tm-pager li.number')[1].click();
       expect(vm.internalCurrentPage).to.equal(2);
     });
-
+    // TODO: [TESTERROR] TypeError: vm.$el.querySelectorAll is not a function
     it('click next icon-more', () => {
       vm = createTest(Pagination, {
         total: 1000
@@ -366,7 +369,7 @@ describe('Pagination', () => {
       vm.$el.querySelector('.tm-pager .more').click();
       expect(vm.internalCurrentPage).to.equal(6);
     });
-
+    // TODO: [TESTERROR] TypeError: vm.$el.querySelectorAll is not a function
     it('click prev icon-more', done => {
       vm = createTest(Pagination, {
         total: 1000
@@ -380,7 +383,7 @@ describe('Pagination', () => {
         done();
       }, 50);
     });
-    // TODO: TypeError: vm.$el.querySelectorAll is not a function
+    // TODO: [TESTERROR] TypeError: vm.$el.querySelectorAll is not a function
     it('click last page', done => {
       vm = createTest(Pagination, {
         total: 1000
