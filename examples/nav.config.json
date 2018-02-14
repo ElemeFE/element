@@ -1,6 +1,10 @@
 {
   "en-US": [
     {
+      "name": "Changelog",
+      "path": "/changelog"
+    },
+    {
       "name": "Development",
       "children": [
         {

@@ -121,15 +121,12 @@
 
       p {
         margin: 0;
-      }
-
-      em {
-        position: absolute;
-        right: 30px;
-        font-style: normal;
-        top: 23px;
-        font-size: 16px;
-        color: #666;
+        em {
+          font-size: 16px;
+          color: #666;
+          margin: 15px 35px 0;
+          display: block;
+        }
       }
     }
   }
@@ -148,7 +145,7 @@
   </div>
 </template>
 <script>
-  import ChangeLog from '../../../CHANGELOG.<%= 2 >.md';
+  import ChangeLog from '../../../CHANGELOG.md';
 
   export default {
     components: {
