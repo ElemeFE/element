@@ -4,7 +4,7 @@
 #
 version: 2
 jobs:
-  assets:
+  build:
     docker:
       # specify the version you desire here
       - image: circleci/node:9.5-browsers
@@ -43,6 +43,7 @@ jobs:
     machine: true
     working_directory: ~/repo
     steps:
+      - checkout
       - run:
           name: Build container with nginx for SPA application
           command: docker build -t tmconsulting/tmc24-components:develop .
