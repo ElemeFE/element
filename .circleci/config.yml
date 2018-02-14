@@ -45,7 +45,7 @@ jobs:
     steps:
       - run:
           name: Build container with nginx for SPA application
-          command: docker build tmconsulting/tmc24-components:develop
+          command: docker build -t tmconsulting/tmc24-components:develop .
 
   push:
     machine: true
