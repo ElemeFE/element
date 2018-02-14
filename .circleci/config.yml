@@ -4,7 +4,7 @@
 #
 version: 2
 jobs:
-  build:
+  assemble:
     docker:
       # specify the version you desire here
       - image: circleci/node:9.5-browsers
