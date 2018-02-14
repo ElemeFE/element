@@ -61,12 +61,12 @@ jobs:
 
 workflows:
   version: 2
-  build_and_test:
+  build_test_and_push:
     jobs:
       - assemble
-      - build
+      - build:
           requires:
             - assemble
-      - push
+      - push:
           requires:
             - push
