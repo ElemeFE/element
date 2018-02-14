@@ -4,7 +4,7 @@
 #
 version: 2
 jobs:
-  build:
+  assets:
     docker:
       # specify the version you desire here
       - image: circleci/node:9.5-browsers
@@ -36,17 +36,24 @@ jobs:
       # TODO run tests before deploy and docker build.
 
       - run:
-          name: Build project
+          name: Assemble project
           command: yarn run deploy:build
 
-      - run:
-          name: Login to the docker hub
-          command: docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-
+  build:
+    machine: true
+    working_directory: ~/repo
+    steps:
       - run:
           name: Build container with nginx for SPA application
           command: docker build tmconsulting/tmc24-components:develop
 
+  push:
+    machine: true
+    working_directory: ~/repo
+    steps:
+      - run:
+          name: Login to the docker hub
+          command: docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
       - run:
           name: Push image to registry
           command: docker push tmconsulting/tmc24-components:develop
