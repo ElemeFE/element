@@ -1,4 +1,3 @@
-// TODO: Run `npm run test:watch` and check warnings
 import Popper from 'element-ui/src/utils/vue-popper';
 import debounce from 'throttle-debounce/debounce';
 import { addClass, removeClass, on, off } from 'element-ui/src/utils/dom';
@@ -69,7 +68,7 @@ export default {
 
     this.popperVM = new Vue({
       data: { node: '' },
-      render(h) {
+      render() {
         return this.node;
       }
     }).$mount();
@@ -77,7 +76,7 @@ export default {
     this.debounceClose = debounce(200, () => this.handleClosePopper());
   },
 
-  render(h) {
+  render() {
     if (this.popperVM) {
       this.popperVM.node = (
         <transition

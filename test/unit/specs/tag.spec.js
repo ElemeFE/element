@@ -1,4 +1,3 @@
-// TODO: Run `npm run test:watch` and check warnings
 import { createVue, destroyVM } from '../util';
 
 describe('Tag', () => {
@@ -65,7 +64,7 @@ describe('Tag', () => {
     var closeBtn = vm.$el.querySelector('.tm-tag .tm-tag__close');
     expect(closeBtn).to.exist;
     closeBtn.click();
-    vm.$nextTick(_ => {
+    vm.$nextTick(() => {
       expect(vm.isClose).to.true;
       done();
     });

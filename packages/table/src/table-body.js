@@ -1,4 +1,3 @@
-// TODO: Run `npm run test:watch` and check warnings
 import { getCell, getColumnByCell, getRowIdentity } from './util';
 import { hasClass, addClass, removeClass } from 'element-ui/src/utils/dom';
 import TmCheckbox from 'element-ui/packages/checkbox';
@@ -50,8 +49,8 @@ export default {
                 on-dblclick={ ($event) => this.handleDoubleClick($event, row) }
                 on-click={ ($event) => this.handleClick($event, row) }
                 on-contextmenu={ ($event) => this.handleContextMenu($event, row) }
-                on-mouseenter={ _ => this.handleMouseEnter($index) }
-                on-mouseleave={ _ => this.handleMouseLeave() }
+                on-mouseenter={ () => this.handleMouseEnter($index) }
+                on-mouseleave={ () => this.handleMouseLeave() }
                 class={ [this.getRowClass(row, $index)] }>
                 {
                   this._l(this.columns, (column, cellIndex) => {

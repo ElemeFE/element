@@ -1,4 +1,3 @@
-// TODO: Run `npm run test:watch` and check warnings
 import MessageBox from 'packages/message-box';
 
 describe('MessageBox', () => {
@@ -153,7 +152,7 @@ describe('MessageBox', () => {
     });
 
     it('returns false', done => {
-      const validator = value => false;
+      const validator = () => false;
       MessageBox.prompt('这是一段内容', {
         title: '标题名称',
         inputValidator: validator

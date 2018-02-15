@@ -89,7 +89,6 @@
   </div>
 </template>
 <script>
-  // TODO: Run `npm run test:watch` and check warnings
   import emitter from 'element-ui/src/mixins/emitter';
   import Migrating from 'element-ui/src/mixins/migrating';
   import calcTextareaHeight from './calcTextareaHeight';
@@ -203,7 +202,7 @@
     },
 
     watch: {
-      'value'(val, oldValue) {
+      'value'(val) {
         this.setCurrentValue(val);
       }
     },
@@ -262,7 +261,7 @@
       },
       setCurrentValue(value) {
         if (value === this.currentValue) return;
-        this.$nextTick(_ => {
+        this.$nextTick(() => {
           this.resizeTextarea();
         });
         this.currentValue = value;

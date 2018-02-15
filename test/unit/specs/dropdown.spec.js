@@ -1,4 +1,3 @@
-// TODO: Run `npm run test:watch` and check warnings
 import { createVue, triggerEvent, destroyVM } from '../util';
 
 describe('Dropdown', () => {
@@ -29,11 +28,11 @@ describe('Dropdown', () => {
     let triggerElm = dropdownElm.children[0];
 
     triggerEvent(triggerElm, 'mouseenter');
-    setTimeout(_ => {
+    setTimeout(() => {
       expect(dropdown.visible).to.be.true;
 
       triggerEvent(triggerElm, 'mouseleave');
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(dropdown.visible).to.not.true;
         done();
       }, 300);
@@ -70,9 +69,9 @@ describe('Dropdown', () => {
     dropdown.$on('command', callback);
 
     triggerEvent(triggerElm, 'mouseenter');
-    setTimeout(_ => {
+    setTimeout(() => {
       vm.$refs.commandC.$el.click();
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(dropdown.visible).to.not.true;
         expect(callback.calledWith(myCommandObject)).to.be.true;
         done();
@@ -101,10 +100,10 @@ describe('Dropdown', () => {
     let triggerElm = dropdownElm.children[0];
 
     triggerEvent(triggerElm, 'mouseenter');
-    dropdown.$nextTick(_ => {
+    dropdown.$nextTick(() => {
       expect(dropdown.visible).to.not.true;
       triggerElm.click();
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(dropdown.visible).to.be.true;
         done();
       }, 300);
@@ -134,16 +133,16 @@ describe('Dropdown', () => {
     dropdown.$on('click', callback);
     dropdownElm.querySelector('.tm-button').click();
 
-    setTimeout(_ => {
+    setTimeout(() => {
       expect(callback.called).to.be.true;
     }, 300);
 
     triggerEvent(triggerElm, 'mouseenter');
-    setTimeout(_ => {
+    setTimeout(() => {
       expect(dropdown.visible).to.be.true;
 
       triggerEvent(triggerElm, 'mouseleave');
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(dropdown.visible).to.not.true;
         done();
       }, 300);
@@ -174,9 +173,9 @@ describe('Dropdown', () => {
     dropdown.$on('command', callback);
 
     triggerEvent(triggerElm, 'mouseenter');
-    setTimeout(_ => {
+    setTimeout(() => {
       vm.$refs.commandC.$el.click();
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(dropdown.visible).to.true;
         expect(callback.calledWith('c')).to.be.true;
         done();

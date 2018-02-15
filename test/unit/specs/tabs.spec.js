@@ -1,4 +1,3 @@
-// TODO: Run `npm run test:watch` and check warnings
 import { createVue, destroyVM } from '../util';
 
 describe('Tabs', () => {
@@ -24,13 +23,13 @@ describe('Tabs', () => {
 
     vm.$refs.tabs.$on('tab-click', spy);
 
-    setTimeout(_ => {
+    setTimeout(() => {
       const tabList = vm.$refs.tabs.$refs.nav.$refs.tabs;
       expect(tabList[0].classList.contains('is-active')).to.be.true;
       expect(paneList[0].style.display).to.not.ok;
 
       tabList[2].click();
-      vm.$nextTick(_ => {
+      vm.$nextTick(() => {
         expect(spy.withArgs(vm.$refs['pane-click']).calledOnce).to.true;
         expect(tabList[2].classList.contains('is-active')).to.be.true;
         expect(paneList[2].style.display).to.not.ok;
@@ -59,7 +58,7 @@ describe('Tabs', () => {
         }
       }
     }, true);
-    setTimeout(_ => {
+    setTimeout(() => {
       const paneList = vm.$el.querySelector('.tm-tabs__content').children;
       const tabList = vm.$refs.tabs.$refs.nav.$refs.tabs;
 
@@ -67,7 +66,7 @@ describe('Tabs', () => {
       expect(paneList[1].style.display).to.not.ok;
 
       tabList[3].click();
-      vm.$nextTick(_ => {
+      vm.$nextTick(() => {
         expect(tabList[3].classList.contains('is-active')).to.be.true;
         expect(paneList[3].style.display).to.not.ok;
         expect(vm.activeName === 'tab-D');
@@ -205,18 +204,18 @@ describe('Tabs', () => {
       }
     }, true);
 
-    setTimeout(_ => {
+    setTimeout(() => {
       const tabList = vm.$refs.tabs.$refs.nav.$refs.tabs;
       const paneList = vm.$el.querySelector('.tm-tabs__content').children;
 
       tabList[1].querySelector('.tm-icon-close').click();
-      vm.$nextTick(_ => {
+      vm.$nextTick(() => {
         expect(tabList.length).to.be.equal(2);
         expect(paneList.length).to.be.equal(2);
         expect(tabList[1].classList.contains('is-active')).to.be.true;
 
         vm.$refs.tabs.$el.querySelector('.tm-tabs__new-tab').click();
-        vm.$nextTick(_ => {
+        vm.$nextTick(() => {
           expect(tabList.length).to.be.equal(3);
           expect(paneList.length).to.be.equal(3);
           expect(tabList[2].classList.contains('is-active')).to.be.true;
@@ -263,7 +262,7 @@ describe('Tabs', () => {
         };
       },
       methods: {
-        addTab(targetName) {
+        addTab() {
           let newTabName = ++this.tabIndex + '';
           this.editableTabs.push({
             title: 'New Tab',
@@ -291,19 +290,19 @@ describe('Tabs', () => {
       }
     }, true);
 
-    setTimeout(_ => {
+    setTimeout(() => {
       const tabList = vm.$refs.tabs.$refs.nav.$refs.tabs;
       const paneList = vm.$el.querySelector('.tm-tabs__content').children;
 
       vm.$refs.tabs.$el.querySelector('.tm-tabs__new-tab').click();
 
-      vm.$nextTick(_ => {
+      vm.$nextTick(() => {
         expect(tabList.length).to.be.equal(3);
         expect(paneList.length).to.be.equal(3);
         expect(tabList[2].classList.contains('is-active')).to.be.true;
 
         tabList[2].querySelector('.tm-icon-close').click();
-        vm.$nextTick(_ => {
+        vm.$nextTick(() => {
           expect(tabList.length).to.be.equal(2);
           expect(paneList.length).to.be.equal(2);
           expect(tabList[1].classList.contains('is-active')).to.be.true;
@@ -341,11 +340,11 @@ describe('Tabs', () => {
       `
     }, true);
 
-    vm.$nextTick(_ => {
+    vm.$nextTick(() => {
       const tabList = vm.$refs.tabs.$refs.nav.$refs.tabs;
 
       tabList[1].click();
-      vm.$nextTick(_ => {
+      vm.$nextTick(() => {
         expect(tabList[1].classList.contains('is-active')).to.not.true;
         done();
       });
@@ -368,13 +367,13 @@ describe('Tabs', () => {
 
     vm.$refs.tabs.$on('tab-click', spy);
 
-    setTimeout(_ => {
+    setTimeout(() => {
       const tabList = vm.$refs.tabs.$refs.nav.$refs.tabs;
       expect(tabList[0].classList.contains('is-active')).to.be.true;
       expect(paneList[0].style.display).to.not.ok;
 
       tabList[2].click();
-      vm.$nextTick(_ => {
+      vm.$nextTick(() => {
         expect(spy.withArgs(vm.$refs['pane-click']).calledOnce).to.true;
         expect(tabList[2].classList.contains('is-active')).to.be.true;
         expect(paneList[2].style.display).to.not.ok;
@@ -397,22 +396,22 @@ describe('Tabs', () => {
       `
     }, true);
 
-    setTimeout(_ => {
+    setTimeout(() => {
       const btnPrev = vm.$el.querySelector('.tm-tabs__nav-prev');
       btnPrev.click();
-      vm.$nextTick(_ => {
+      vm.$nextTick(() => {
         const tabNav = vm.$el.querySelector('.tm-tabs__nav-wrap');
         expect(tabNav.__vue__.navOffset).to.be.equal(0);
 
         const btnNext = vm.$el.querySelector('.tm-tabs__nav-next');
         btnNext.click();
 
-        vm.$nextTick(_ => {
+        vm.$nextTick(() => {
           expect(tabNav.__vue__.navOffset).to.not.be.equal(0);
 
           btnPrev.click();
 
-          vm.$nextTick(_ => {
+          vm.$nextTick(() => {
             expect(tabNav.__vue__.navOffset).to.be.equal(0);
             done();
           });
@@ -435,22 +434,22 @@ describe('Tabs', () => {
       `
     }, true);
 
-    setTimeout(_ => {
+    setTimeout(() => {
       const btnPrev = vm.$el.querySelector('.tm-tabs__nav-prev');
       btnPrev.click();
-      vm.$nextTick(_ => {
+      vm.$nextTick(() => {
         const tabNav = vm.$el.querySelector('.tm-tabs__nav-wrap');
         expect(tabNav.__vue__.navOffset).to.be.equal(0);
 
         const btnNext = vm.$el.querySelector('.tm-tabs__nav-next');
         btnNext.click();
 
-        vm.$nextTick(_ => {
+        vm.$nextTick(() => {
           expect(tabNav.__vue__.navOffset).to.not.be.equal(0);
 
           btnPrev.click();
 
-          vm.$nextTick(_ => {
+          vm.$nextTick(() => {
             expect(tabNav.__vue__.navOffset).to.be.equal(0);
             done();
           });

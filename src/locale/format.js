@@ -7,7 +7,7 @@ const RE_NARGS = /(%|)\{([0-9a-zA-Z_]+)\}/g;
  *  - Inspired:
  *    https://github.com/Matt-Esch/string-template/index.js
  */
-export default function(Vue) {
+export default function() {
 
   /**
    * template

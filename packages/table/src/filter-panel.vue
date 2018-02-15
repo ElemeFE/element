@@ -33,7 +33,6 @@
 </template>
 
 <script type="text/babel">
-  // TODO: Run `npm run test:watch` and check warnings
   import Popper from 'element-ui/src/utils/vue-popper';
   import { PopupManager } from 'element-ui/src/utils/popup';
   import Locale from 'element-ui/src/mixins/locale';
@@ -63,7 +62,7 @@
       }
     },
 
-    customRender(h) {
+    customRender() {
       return (<div class="tm-table-filter">
         <div class="tm-table-filter__content">
         </div>

@@ -1,4 +1,3 @@
-// TODO: Run `npm run test:watch` and check warnings
 import { createVue, triggerEvent, triggerClick, destroyVM } from '../util';
 
 const DELAY = 1;
@@ -44,7 +43,7 @@ describe('InputNumber', () => {
     triggerEvent(btnDecrease, 'mousedown');
     triggerClick(document, 'mouseup');
 
-    vm.$nextTick(_ => {
+    vm.$nextTick(() => {
       expect(vm.value).to.be.equal(4);
       expect(input.value).to.be.equal('4');
       done();
@@ -69,7 +68,7 @@ describe('InputNumber', () => {
     triggerEvent(btnIncrease, 'mousedown');
     triggerClick(document, 'mouseup');
 
-    vm.$nextTick(_ => {
+    vm.$nextTick(() => {
       expect(vm.value).to.be.equal(2.5);
       expect(input.value).to.be.equal('2.5');
       done();
@@ -95,14 +94,14 @@ describe('InputNumber', () => {
     triggerEvent(btnDecrease, 'mousedown');
     triggerClick(document, 'mouseup');
 
-    vm.$nextTick(_ => {
+    vm.$nextTick(() => {
       expect(vm.value).to.be.equal(2);
       expect(input.value).to.be.equal('2');
 
       triggerEvent(btnIncrease, 'mousedown');
       triggerClick(document, 'mouseup');
 
-      vm.$nextTick(_ => {
+      vm.$nextTick(() => {
         expect(vm.value).to.be.equal(2);
         expect(input.value).to.be.equal('2');
         done();
@@ -129,14 +128,14 @@ describe('InputNumber', () => {
     triggerEvent(btnIncrease, 'mousedown');
     triggerClick(document, 'mouseup');
 
-    vm.$nextTick(_ => {
+    vm.$nextTick(() => {
       expect(vm.value).to.be.equal(8.2);
       expect(input.value).to.be.equal('8.2');
 
       triggerEvent(btnDecrease, 'mousedown');
       triggerClick(document, 'mouseup');
 
-      vm.$nextTick(_ => {
+      vm.$nextTick(() => {
         expect(vm.value).to.be.equal(5);
         expect(input.value).to.be.equal('5');
         done();
@@ -176,7 +175,7 @@ describe('InputNumber', () => {
     triggerEvent(btnDecrease, 'mousedown');
     triggerClick(document, 'mouseup');
 
-    vm.$nextTick(_ => {
+    vm.$nextTick(() => {
       expect(vm.value).to.be.equal(6);
       expect(input.value).to.be.equal('6');
       done();
@@ -215,7 +214,7 @@ describe('InputNumber', () => {
     triggerEvent(btnIncrease, 'mousedown');
     triggerClick(document, 'mouseup');
 
-    vm.$nextTick(_ => {
+    vm.$nextTick(() => {
       expect(vm.value).to.be.equal(8);
       expect(input.value).to.be.equal('8');
       done();
@@ -251,15 +250,15 @@ describe('InputNumber', () => {
     }, true);
     const inputNumber = vm.$refs.inputNumber;
     vm.value = 100;
-    vm.$nextTick(_ => {
+    vm.$nextTick(() => {
       expect(inputNumber.currentValue).to.be.equal(10);
       vm.value = 4;
 
-      vm.$nextTick(_ => {
+      vm.$nextTick(() => {
         expect(inputNumber.currentValue).to.be.equal(5);
         vm.value = 'dsajkhd';
 
-        vm.$nextTick(_ => {
+        vm.$nextTick(() => {
           expect(inputNumber.currentValue).to.be.equal(5);
           done();
         });
@@ -287,7 +286,7 @@ describe('InputNumber', () => {
 
     it('emit on input', done => {
       vm.$refs.compo.handleInputChange('3');
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(spy.calledOnce).to.be.true;
         expect(spy.args[0][0]).to.equal(3);
         done();
@@ -298,7 +297,7 @@ describe('InputNumber', () => {
       const btnIncrease = vm.$el.querySelector('.tm-input-number__increase');
       triggerEvent(btnIncrease, 'mousedown');
       triggerClick(document, 'mouseup');
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(spy.calledOnce).to.be.true;
         expect(spy.args[0][0]).to.equal(3);
         done();
@@ -307,7 +306,7 @@ describe('InputNumber', () => {
 
     it('does not emit on programatic change', done => {
       vm.value = 3;
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(spy.notCalled).to.be.true;
         done();
       }, DELAY);
@@ -329,7 +328,7 @@ describe('InputNumber', () => {
     vm.$el.querySelector('input').focus();
     vm.$el.querySelector('input').blur();
 
-    vm.$nextTick(_ => {
+    vm.$nextTick(() => {
       expect(spyFocus.calledOnce).to.be.true;
       expect(spyBlur.calledOnce).to.be.true;
       done();
@@ -347,7 +346,7 @@ describe('InputNumber', () => {
     vm.$refs.input.$on('focus', spy);
     vm.$refs.input.focus();
 
-    vm.$nextTick(_ => {
+    vm.$nextTick(() => {
       expect(spy.calledOnce).to.be.true;
       done();
     });

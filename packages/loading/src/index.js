@@ -1,4 +1,3 @@
-// TODO: Run `npm run test:watch` and check warnings
 import Vue from 'vue';
 import loadingVue from './loading.vue';
 import { addClass, removeClass, getStyle } from 'element-ui/src/utils/dom';
@@ -25,7 +24,7 @@ LoadingConstructor.prototype.close = function() {
   if (this.fullscreen) {
     fullscreenLoading = undefined;
   }
-  afterLeave(this, _ => {
+  afterLeave(this, () => {
     const target = this.fullscreen || this.body
       ? document.body
       : this.target;

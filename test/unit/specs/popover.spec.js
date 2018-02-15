@@ -1,4 +1,3 @@
-// TODO: Run `npm run test:watch` and check warnings
 import { createVue, triggerEvent, createTest, destroyVM } from '../util';
 import Popover from 'packages/popover';
 
@@ -40,7 +39,7 @@ describe('Popover', () => {
       triggerEvent(button, 'mouseenter');
       expect(compo.showPopper).to.true;
       triggerEvent(button, 'mouseleave');
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(compo.showPopper).to.false;
         done();
       }, 250); // 代码里是 200ms
@@ -54,7 +53,7 @@ describe('Popover', () => {
       triggerEvent(button, 'mouseenter');
       expect(compo.showPopper).to.false;
       triggerEvent(button, 'mouseleave');
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(compo.showPopper).to.false;
         done();
       }, 250); // 代码里是 200ms
@@ -162,7 +161,7 @@ describe('Popover', () => {
     it('triggering click', done => {
       vm.$el.querySelector('button').click();
       expect(compo.popperElm).to.not.exist;
-      vm.$nextTick(_ => {
+      vm.$nextTick(() => {
         expect(compo).to.have.deep.property('popperElm.style.display').not.equal('none');
         done();
       });
@@ -194,7 +193,7 @@ describe('Popover', () => {
     it('triggering click', done => {
       vm.$el.querySelector('button').click();
       expect(compo.popperElm).to.not.exist;
-      vm.$nextTick(_ => {
+      vm.$nextTick(() => {
         expect(compo).to.have.deep.property('popperElm.style.display').not.equal('none');
         done();
       });
@@ -238,10 +237,10 @@ describe('Popover', () => {
     }, true);
 
     vm.$el.querySelector('button').click();
-    setTimeout(_ => {
+    setTimeout(() => {
       expect(vm.trigger).to.true;
       document.body.click();
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(vm.trigger).to.false;
         done();
       }, 50);

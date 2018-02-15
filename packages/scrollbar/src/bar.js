@@ -1,4 +1,3 @@
-// TODO: Run `npm run test:watch` and check warnings
 import { on, off } from 'element-ui/src/utils/dom';
 import { renderThumbStyle, BAR_MAP } from './util';
 
@@ -22,7 +21,7 @@ export default {
     }
   },
 
-  render(h) {
+  render() {
     const { size, move, bar } = this;
 
     return (
@@ -75,7 +74,7 @@ export default {
       this.wrap[this.bar.scroll] = (thumbPositionPercentage * this.wrap[this.bar.scrollSize] / 100);
     },
 
-    mouseUpDocumentHandler(e) {
+    mouseUpDocumentHandler() {
       this.cursorDown = false;
       this[this.bar.axis] = 0;
       off(document, 'mousemove', this.mouseMoveDocumentHandler);

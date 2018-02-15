@@ -1,4 +1,3 @@
-// TODO: Run `npm run test:watch` and check warnings
 import { createVue, triggerEvent, destroyVM } from '../util';
 
 describe('Tooltip', () => {
@@ -13,7 +12,7 @@ describe('Tooltip', () => {
         <button>click</button>
       </tm-tooltip>`);
 
-    vm.$nextTick(_ => {
+    vm.$nextTick(() => {
       expect(vm.$refs.tooltip.popperVM.$el).to.have.property('textContent', '提示文字');
       done();
     });
@@ -24,7 +23,7 @@ describe('Tooltip', () => {
       <tm-tooltip ref="tooltip" content="提示文字" popper-class="custom-popper">
         <button>click</button>
       </tm-tooltip>`);
-    vm.$nextTick(_ => {
+    vm.$nextTick(() => {
       expect(vm.$refs.tooltip.popperVM.$el.classList.contains('custom-popper')).to.true;
       done();
     });
@@ -50,7 +49,7 @@ describe('Tooltip', () => {
     });
     it('show', done => {
       vm.show = true;
-      vm.$nextTick(_ => {
+      vm.$nextTick(() => {
         expect(tooltip.showPopper).to.true;
         done();
       });
@@ -61,7 +60,7 @@ describe('Tooltip', () => {
     });
     it('hidden', done => {
       vm.show = false;
-      vm.$nextTick(_ => {
+      vm.$nextTick(() => {
         expect(tooltip.showPopper).to.false;
         done();
       });
@@ -94,7 +93,7 @@ describe('Tooltip', () => {
         <button>abc</button>
       </tm-tooltip>
     `);
-    vm.$nextTick(_ => {
+    vm.$nextTick(() => {
       expect(vm.$refs.tooltip.popperVM.$el.classList.contains('is-light')).to.exist;
       done();
     });

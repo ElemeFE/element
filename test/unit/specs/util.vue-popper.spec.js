@@ -1,4 +1,3 @@
-// TODO: Run `npm run test:watch` and check warnings
 import VuePopper from 'element-ui/src/utils/vue-popper';
 import { createTest } from '../util';
 
@@ -118,10 +117,10 @@ describe('Utils:VuePopper', () => {
     const vm = createTest(Popper);
     expect(vm.popperJS).to.not.exist;
     vm.showPopper = true;
-    setTimeout(_ => {
+    setTimeout(() => {
       expect(vm.popperJS).to.exist;
       vm.showPopper = false;
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(vm.popperJS).to.exist;
       }, 50);
       done();

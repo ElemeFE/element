@@ -1,4 +1,3 @@
-// TODO: Run `npm run test:watch` and check warnings
 import { createVue, triggerEvent, destroyVM } from '../util';
 
 const DELAY = 10;
@@ -42,7 +41,7 @@ describe('Table', () => {
     });
 
     it('head', done => {
-      setTimeout(_ => {
+      setTimeout(() => {
         const ths = toArray(vm.$el.querySelectorAll('thead th'));
 
         expect(ths.map(node => node.textContent).filter(o => o))
@@ -84,7 +83,7 @@ describe('Table', () => {
 
     it('height', done => {
       const vm = createTable('height="134"');
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(vm.$el.style.height).to.equal('134px');
         destroyVM(vm);
         done();
@@ -93,7 +92,7 @@ describe('Table', () => {
 
     it('height as string', done => {
       const vm = createTable('height="100pt"');
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(vm.$el.style.height).to.equal('100pt');
         destroyVM(vm);
         done();
@@ -102,7 +101,7 @@ describe('Table', () => {
 
     it('maxHeight', done => {
       const vm = createTable('max-height="134"');
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(vm.$el.style.maxHeight).to.equal('134px');
         destroyVM(vm);
         done();
@@ -111,7 +110,7 @@ describe('Table', () => {
 
     it('stripe', done => {
       const vm = createTable('stripe');
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(vm.$el.classList.contains('tm-table--striped')).to.true;
         destroyVM(vm);
         done();
@@ -120,7 +119,7 @@ describe('Table', () => {
 
     it('border', done => {
       const vm = createTable('border');
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(vm.$el.classList.contains('tm-table--border')).to.true;
         destroyVM(vm);
         done();
@@ -129,7 +128,7 @@ describe('Table', () => {
 
     it('fit', done => {
       const vm = createTable(':fit="false"');
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(vm.$el.classList.contains('tm-table--fit')).to.false;
         destroyVM(vm);
         done();
@@ -138,7 +137,7 @@ describe('Table', () => {
 
     it('show-header', done => {
       const vm = createTable(':show-header="false"');
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(vm.$el.querySelectorAll('.tm-table__header-wrapper').length).to.equal(0);
         destroyVM(vm);
         done();
@@ -149,6 +148,7 @@ describe('Table', () => {
       const vm = createTable(':row-class-name="tableRowClassName"', {
         methods: {
           tableRowClassName({row, rowIndex}) {
+            console.log(row, rowIndex);
             if (rowIndex === 1) {
               return 'info-row';
             } else if (rowIndex === 3) {
@@ -160,7 +160,7 @@ describe('Table', () => {
         }
       });
 
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(vm.$el.querySelectorAll('.info-row')).to.length(1);
         expect(vm.$el.querySelectorAll('.positive-row')).to.length(1);
         destroyVM(vm);
@@ -171,7 +171,7 @@ describe('Table', () => {
     it('tableRowStyle[Object]', done => {
       const vm = createTable(':row-style="{ height: \'60px\' }"', {});
 
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(vm.$el.querySelector('.tm-table__body tr').style.height).to.equal('60px');
         destroyVM(vm);
         done();
@@ -182,6 +182,7 @@ describe('Table', () => {
       const vm = createTable(':row-style="tableRowStyle"', {
         methods: {
           tableRowStyle({row, rowIndex}) {
+            console.log(row, rowIndex);
             if (rowIndex === 1) {
               return { height: '60px' };
             }
@@ -191,7 +192,7 @@ describe('Table', () => {
         }
       });
 
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(vm.$el.querySelector('.tm-table__body tr:nth-child(1)').style.height).to.equal('');
         expect(vm.$el.querySelector('.tm-table__body tr:nth-child(2)').style.height).to.equal('60px');
         destroyVM(vm);
@@ -218,15 +219,15 @@ describe('Table', () => {
           return { currentRowKey: null };
         }
       }, true);
-      setTimeout(_ => {
+      setTimeout(() => {
         vm.currentRowKey = 1;
         const tr = vm.$el.querySelector('.tm-table__body-wrapper tbody tr');
-        setTimeout(_ => {
+        setTimeout(() => {
           expect(tr.classList.contains('current-row')).to.be.true;
           vm.currentRowKey = 2;
 
           const rows = vm.$el.querySelectorAll('.tm-table__body-wrapper tbody tr');
-          setTimeout(_ => {
+          setTimeout(() => {
             expect(tr.classList.contains('current-row')).to.be.false;
             expect(rows[1].classList.contains('current-row')).to.be.true;
             destroyVM(vm);
@@ -286,7 +287,7 @@ describe('Table', () => {
     it('click dropdown', done => {
       const btn = vm.$el.querySelector('.tm-table__column-filter-trigger');
       triggerEvent(btn, 'click', true, false);
-      setTimeout(_ => {
+      setTimeout(() => {
         const filter = document.body.querySelector('.tm-table-filter');
         expect(filter).to.exist;
         document.body.removeChild(filter);
@@ -298,15 +299,15 @@ describe('Table', () => {
       const btn = vm.$el.querySelector('.tm-table__column-filter-trigger');
 
       triggerEvent(btn, 'click', true, false);
-      setTimeout(_ => {
+      setTimeout(() => {
         const filter = document.body.querySelector('.tm-table-filter');
 
         // John Lasseter
         triggerEvent(filter.querySelector('.tm-checkbox'), 'click', true, false);
         // confrim button
-        setTimeout(_ => {
+        setTimeout(() => {
           triggerEvent(filter.querySelector('.tm-table-filter__bottom button'), 'click', true, false);
-          setTimeout(_ => {
+          setTimeout(() => {
             expect(vm.filters['director']).to.be.eql(['John Lasseter']);
             expect(vm.$el.querySelectorAll('.tm-table__body-wrapper tbody tr')).to.length(3);
             document.body.removeChild(filter);
@@ -320,15 +321,15 @@ describe('Table', () => {
       const btn = vm.$el.querySelector('.tm-table__column-filter-trigger');
 
       triggerEvent(btn, 'click', true, false);
-      setTimeout(_ => {
+      setTimeout(() => {
         const filter = document.body.querySelector('.tm-table-filter');
 
         // John Lasseter
         triggerEvent(filter.querySelector('.tm-checkbox'), 'click', true, false);
-        setTimeout(_ => {
+        setTimeout(() => {
           // reset button
           triggerEvent(filter.querySelectorAll('.tm-table-filter__bottom button')[1], 'click', true, false);
-          setTimeout(_ => {
+          setTimeout(() => {
             expect(vm.filters['director']).to.be.eql([]);
             expect(filter.querySelector('.tm-table-filter__bottom button').classList.contains('is-disabled')).to.true;
             document.body.removeChild(filter);
@@ -341,7 +342,7 @@ describe('Table', () => {
   });
 
   describe('events', () => {
-    const createTable = function(prop = '', opts) {
+    const createTable = function(prop = '') {
       return createVue({
         template: `
           <tm-table :data="testData" @${prop}="handleEvent">
@@ -372,7 +373,7 @@ describe('Table', () => {
     it('select', done => {
       const vm = createTable('select');
 
-      setTimeout(_ => {
+      setTimeout(() => {
         vm.$el.querySelectorAll('.tm-checkbox')[1].click();
         expect(vm.result).to.length(2);
         expect(vm.result[1]).to.have.property('name').to.equal(getTestData()[0].name);
@@ -384,9 +385,9 @@ describe('Table', () => {
     it('select-all', done => {
       const vm = createTable('select-all');
 
-      setTimeout(_ => {
+      setTimeout(() => {
         vm.$el.querySelector('.tm-checkbox').click();
-        setTimeout(_ => {
+        setTimeout(() => {
           expect(vm.result).to.length(1);
           expect(vm.result[0]).to.length(getTestData().length);
           destroyVM(vm);
@@ -397,7 +398,7 @@ describe('Table', () => {
 
     it('selection-change', done => {
       const vm = createTable('selection-change');
-      setTimeout(_ => {
+      setTimeout(() => {
         vm.$el.querySelectorAll('.tm-checkbox')[1].click();
         expect(vm.result).to.length(1);
         destroyVM(vm);
@@ -408,7 +409,7 @@ describe('Table', () => {
     it('cell-mouse-enter', done => {
       const vm = createTable('cell-mouse-enter');
 
-      setTimeout(_ => {
+      setTimeout(() => {
         const cell = vm.$el.querySelectorAll('.tm-table__body .cell')[2]; // first row
         triggerEvent(cell.parentNode, 'mouseenter');
         expect(vm.result).to.length(4); // row, column, cell, event
@@ -421,7 +422,7 @@ describe('Table', () => {
     it('cell-mouse-leave', done => {
       const vm = createTable('cell-mouse-leave');
 
-      setTimeout(_ => {
+      setTimeout(() => {
         const cell = vm.$el.querySelectorAll('.tm-table__body .cell')[7]; // second row
         const cell2 = vm.$el.querySelectorAll('.tm-table__body .cell')[2]; // first row
 
@@ -437,7 +438,7 @@ describe('Table', () => {
     it('cell-click', done => {
       const vm = createTable('cell-click');
 
-      setTimeout(_ => {
+      setTimeout(() => {
         const cell = vm.$el.querySelectorAll('.tm-table__body .cell')[2]; // first row
 
         cell.parentNode.click();
@@ -451,7 +452,7 @@ describe('Table', () => {
     it('row-click', done => {
       const vm = createTable('row-click');
 
-      setTimeout(_ => {
+      setTimeout(() => {
         const cell = vm.$el.querySelectorAll('.tm-table__body .cell')[2]; // first row
 
         triggerEvent(cell.parentNode.parentNode, 'click');
@@ -465,7 +466,7 @@ describe('Table', () => {
     it('row-dblclick', done => {
       const vm = createTable('row-dblclick');
 
-      setTimeout(_ => {
+      setTimeout(() => {
         const cell = vm.$el.querySelectorAll('.tm-table__body .cell')[2]; // first row
 
         triggerEvent(cell.parentNode.parentNode, 'dblclick');
@@ -479,7 +480,7 @@ describe('Table', () => {
     it('current-change', done => {
       const vm = createTable('current-change');
 
-      setTimeout(_ => {
+      setTimeout(() => {
         const cell = vm.$el.querySelectorAll('.tm-table__body .cell')[2]; // first row
 
         triggerEvent(cell.parentNode.parentNode, 'click');
@@ -505,7 +506,7 @@ describe('Table', () => {
     it('header-click', done => {
       const vm = createTable('header-click');
 
-      setTimeout(_ => {
+      setTimeout(() => {
         const cell = vm.$el.querySelectorAll('.tm-table__header th')[1]; // header[prop='name']
 
         triggerEvent(cell, 'click');
@@ -537,7 +538,7 @@ describe('Table', () => {
 
     it('label', done => {
       const vm = createTable('label="啊哈哈哈"', 'label="啊啦啦啦"');
-      setTimeout(_ => {
+      setTimeout(() => {
         const ths = toArray(vm.$el.querySelectorAll('thead th'))
           .map(node => node.textContent).filter(o => o);
 
@@ -549,7 +550,7 @@ describe('Table', () => {
 
     it('width', done => {
       const vm = createTable('width="123px"', ':width="102"', 'width="39"');
-      setTimeout(_ => {
+      setTimeout(() => {
         const ths = toArray(vm.$el.querySelectorAll('.tm-table__header-wrapper col'))
           .map(node => node.width).filter(o => o);
 
@@ -564,7 +565,7 @@ describe('Table', () => {
         'fixed label="test1"',
         'fixed="right" label="test2"',
         'fixed="left" label="test3"');
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(toArray(vm.$el.querySelectorAll('.tm-table__fixed th:not(.is-hidden)'))
           .map(node => node.textContent))
           .to.eql(['test1', 'test3']);
@@ -587,7 +588,7 @@ describe('Table', () => {
         {},
         'border');
 
-      setTimeout(_ => {
+      setTimeout(() => {
         const firstCol = vm.$el.querySelector('thead th');
         triggerEvent(firstCol, 'mousemove');
         triggerEvent(firstCol, 'mousedown');
@@ -600,13 +601,13 @@ describe('Table', () => {
       const vm = createTable(
         ':formatter="renderCell"', '', '', '', {
           methods: {
-            renderCell(row, column) {
+            renderCell(row) {
               return `[${row.name}]`;
             }
           }
         });
 
-      setTimeout(_ => {
+      setTimeout(() => {
         const cells = toArray(vm.$el.querySelectorAll('.tm-table__body-wrapper tbody tr td:first-child'));
         expect(cells.map(n => n.textContent)).to.eql(getTestData().map(o => `[${o.name}]`));
         destroyVM(vm);
@@ -616,7 +617,7 @@ describe('Table', () => {
 
     it('show-overflow-tooltip', done => {
       const vm = createTable('show-overflow-tooltip');
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(vm.$el.querySelectorAll('.tm-tooltip')).to.length(5);
         destroyVM(vm);
         done();
@@ -625,7 +626,7 @@ describe('Table', () => {
 
     it('show-tooltip-when-overflow', done => { // old version prop name
       const vm = createTable('show-tooltip-when-overflow');
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(vm.$el.querySelectorAll('.tm-tooltip')).to.length(5);
         destroyVM(vm);
         done();
@@ -655,7 +656,7 @@ describe('Table', () => {
         }
       });
 
-      setTimeout(_ => {
+      setTimeout(() => {
         const headerCell = vm.$el.querySelector('.tm-table__header-wrapper thead tr th:first-child .cell');
         expect(headerCell.textContent).to.equal('0:name');
         destroyVM(vm);
@@ -665,7 +666,7 @@ describe('Table', () => {
 
     it('align', done => {
       const vm = createTable('align="left"', 'align="right"', 'align="center"');
-      setTimeout(_ => {
+      setTimeout(() => {
         var len = getTestData().length + 1;
         expect(vm.$el.querySelectorAll('.is-left')).to.length(len);
         expect(vm.$el.querySelectorAll('.is-right')).to.length(len);
@@ -677,7 +678,7 @@ describe('Table', () => {
 
     it('class-name', done => {
       const vm = createTable('class-name="column-1"', 'class-name="column-2 column-class-a"', 'class-name="column-class-a"');
-      setTimeout(_ => {
+      setTimeout(() => {
         var len = getTestData().length + 1;
         expect(vm.$el.querySelectorAll('.column-1')).to.length(len);
         expect(vm.$el.querySelectorAll('.column-2')).to.length(len);
@@ -718,9 +719,9 @@ describe('Table', () => {
         }
       }, true);
 
-      setTimeout(_ => {
+      setTimeout(() => {
         vm.$el.querySelector('.tm-checkbox').click();
-        setTimeout(_ => {
+        setTimeout(() => {
           expect(vm.selected).to.length(2);
           destroyVM(vm);
           done();
@@ -752,7 +753,7 @@ describe('Table', () => {
             this.selected = rows;
           },
 
-          filterSelect(row, index) {
+          filterSelect() {
             return false;
           }
         }
@@ -760,9 +761,9 @@ describe('Table', () => {
 
       vm.testData = getTestData();
 
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(vm.$el.querySelector('.tm-checkbox').__vue__.checked).to.be.false;
-        setTimeout(_ => {
+        setTimeout(() => {
           expect(vm.selected).to.length(0);
           destroyVM(vm);
           done();
@@ -801,12 +802,12 @@ describe('Table', () => {
         }
       }, true);
 
-      setTimeout(_ => {
+      setTimeout(() => {
         vm.$el.querySelector('.tm-checkbox').click();
-        setTimeout(_ => {
+        setTimeout(() => {
           expect(vm.selected).to.length(5);
           vm.testData.splice(0, 1);
-          setTimeout(_ => {
+          setTimeout(() => {
             expect(vm.selected).to.length(4);
             destroyVM(vm);
             done();
@@ -848,7 +849,7 @@ describe('Table', () => {
         const vm = createTable('selection');
 
         it('render', done => {
-          setTimeout(_ => {
+          setTimeout(() => {
             expect(vm.$el.querySelectorAll('.tm-checkbox')).to.length(getTestData().length + 1);
             done();
           }, DELAY);
@@ -857,7 +858,7 @@ describe('Table', () => {
         it('select all', done => {
           vm.$el.querySelector('.tm-checkbox').click();
 
-          setTimeout(_ => {
+          setTimeout(() => {
             expect(vm.selected).to.length(getTestData().length);
             done();
           }, DELAY);
@@ -866,7 +867,7 @@ describe('Table', () => {
         it('cancel all', done => {
           vm.$el.querySelector('.tm-checkbox').click();
 
-          setTimeout(_ => {
+          setTimeout(() => {
             expect(vm.selected).to.length(0);
             destroyVM(vm);
             done();
@@ -876,10 +877,10 @@ describe('Table', () => {
         it('select one', done => {
           const vm2 = createTable('selection');
 
-          setTimeout(_ => {
+          setTimeout(() => {
             vm2.$el.querySelectorAll('.tm-checkbox')[1].click();
 
-            setTimeout(_ => {
+            setTimeout(() => {
               expect(vm2.selected).to.length(1);
               expect(vm2.selected[0].name).to.equal(getTestData()[0].name);
               destroyVM(vm2);
@@ -893,7 +894,7 @@ describe('Table', () => {
         const vm = createTable('index');
 
         it('render', done => {
-          setTimeout(_ => {
+          setTimeout(() => {
             expect(toArray(vm.$el.querySelectorAll('.tm-table__body-wrapper tbody tr td:first-child'))
               .map(node => node.textContent)).to.eql(['1', '2', '3', '4', '5']);
             destroyVM(vm);
@@ -937,7 +938,7 @@ describe('Table', () => {
 
         it('works', done => {
           const vm = createInstance();
-          setTimeout(_ => {
+          setTimeout(() => {
             expect(vm.$el.querySelectorAll('td.tm-table__expand-column').length).to.equal(5);
             destroyVM(vm);
             done();
@@ -946,13 +947,13 @@ describe('Table', () => {
 
         it('should expand when click icon', done => {
           const vm = createInstance();
-          setTimeout(_ => {
+          setTimeout(() => {
             vm.$el.querySelector('td.tm-table__expand-column .tm-table__expand-icon').click();
-            setTimeout(_ => {
+            setTimeout(() => {
               expect(vm.$el.querySelectorAll('.tm-table__expanded-cell').length).to.equal(1);
               expect(vm.expandCount).to.equal(1);
               vm.$el.querySelector('td.tm-table__expand-column .tm-table__expand-icon').click();
-              setTimeout(_ => {
+              setTimeout(() => {
                 expect(vm.$el.querySelectorAll('.tm-table__expanded-cell').length).to.equal(0);
                 expect(vm.expandCount).to.equal(2);
                 destroyVM(vm);
@@ -964,12 +965,12 @@ describe('Table', () => {
 
         it('should set expanded rows using expandRowKeys', done => {
           const vm = createInstance(':expand-row-keys="expandRowKeys"');
-          setTimeout(_ => {
+          setTimeout(() => {
             vm.expandRowKeys = [1, 3];
-            setTimeout(_ => {
+            setTimeout(() => {
               expect(vm.$el.querySelectorAll('.tm-table__expanded-cell').length).to.equal(2);
               vm.expandRowKeys = [2];
-              setTimeout(_ => {
+              setTimeout(() => {
                 expect(vm.$el.querySelectorAll('.tm-table__expanded-cell').length).to.equal(1);
                 destroyVM(vm);
                 done();
@@ -980,7 +981,7 @@ describe('Table', () => {
 
         it('should default-expand-all when default-expand-all is true', done => {
           const vm = createInstance('default-expand-all');
-          setTimeout(_ => {
+          setTimeout(() => {
             expect(vm.$el.querySelectorAll('.tm-table__expanded-cell').length).to.equal(5);
             destroyVM(vm);
             done();
@@ -993,7 +994,7 @@ describe('Table', () => {
 
       it('render', done => {
         const vm = createTable('', '', '', 'sortable');
-        setTimeout(_ => {
+        setTimeout(() => {
           expect(vm.$el.querySelectorAll('.caret-wrapper')).to.length(1);
           destroyVM(vm);
           done();
@@ -1017,11 +1018,11 @@ describe('Table', () => {
             }
           });
 
-        setTimeout(_ => {
+        setTimeout(() => {
           const elm = vm.$el.querySelector('.caret-wrapper');
           elm.click();
 
-          setTimeout(_ => {
+          setTimeout(() => {
             const lastCells = vm.$el.querySelectorAll('.tm-table__body-wrapper tbody tr td:last-child');
             expect(toArray(lastCells).map(node => node.textContent)).to.eql(['100', '95', '92', '92', '80']);
             destroyVM(vm);
@@ -1040,11 +1041,11 @@ describe('Table', () => {
             }
           });
 
-        setTimeout(_ => {
+        setTimeout(() => {
           const elm = vm.$el.querySelector('.caret-wrapper');
           elm.click();
 
-          setTimeout(_ => {
+          setTimeout(() => {
             const lastCells = vm.$el.querySelectorAll('.tm-table__body-wrapper tbody tr td:last-child');
             expect(toArray(lastCells).map(node => node.textContent)).to.eql(['100', '95', '92', '92', '80']);
             destroyVM(vm);
@@ -1057,11 +1058,11 @@ describe('Table', () => {
         const vm = createTable(
           'sortable sort-by="runtime"', '', '', '', {});
 
-        setTimeout(_ => {
+        setTimeout(() => {
           const elm = vm.$el.querySelector('.caret-wrapper');
           elm.click();
 
-          setTimeout(_ => {
+          setTimeout(() => {
             const lastCells = vm.$el.querySelectorAll('.tm-table__body-wrapper tbody tr td:last-child');
             expect(toArray(lastCells).map(node => node.textContent)).to.eql(['80', '92', '92', '95', '100']);
             destroyVM(vm);
@@ -1079,11 +1080,11 @@ describe('Table', () => {
             }
           }
         }, '@sort-change="sortChange"');
-        setTimeout(_ => {
+        setTimeout(() => {
           const elm = vm.$el.querySelector('.caret-wrapper');
 
           elm.click();
-          setTimeout(_ => {
+          setTimeout(() => {
             expect(result).to.exist;
             destroyVM(vm);
             done();
@@ -1099,7 +1100,7 @@ describe('Table', () => {
         const elm = vm.$el.querySelector('.caret-wrapper');
 
         elm.click();
-        setTimeout(_ => {
+        setTimeout(() => {
           const lastCells = vm.$el.querySelectorAll('.tm-table__body-wrapper tbody tr td:last-child');
           expect(toArray(lastCells).map(node => node.textContent))
             .to.eql(['80', '92', '92', '95', '100']);
@@ -1111,7 +1112,7 @@ describe('Table', () => {
         const elm = vm.$el.querySelector('.caret-wrapper');
 
         elm.click();
-        setTimeout(_ => {
+        setTimeout(() => {
           const lastCells = vm.$el.querySelectorAll('.tm-table__body-wrapper tbody tr td:last-child');
           expect(toArray(lastCells).map(node => node.textContent))
             .to.eql(['100', '95', '92', '92', '80']);
@@ -1139,7 +1140,7 @@ describe('Table', () => {
         }
       }, true);
 
-      setTimeout(_ => {
+      setTimeout(() => {
         const footer = vm.$el.querySelector('.tm-table__footer');
         expect(footer).to.exist;
         const cells = toArray(footer.querySelectorAll('.cell'));
@@ -1165,7 +1166,7 @@ describe('Table', () => {
         }
       }, true);
 
-      setTimeout(_ => {
+      setTimeout(() => {
         const cells = toArray(vm.$el.querySelectorAll('.tm-table__footer .cell'));
         expect(cells[0].innerText).to.equal('Time');
         destroyVM(vm);
@@ -1209,7 +1210,7 @@ describe('Table', () => {
         }
       }, true);
 
-      setTimeout(_ => {
+      setTimeout(() => {
         const cells = toArray(vm.$el.querySelectorAll('.tm-table__footer .cell'));
         expect(cells[1].innerText).to.equal('9996');
         destroyVM(vm);
@@ -1237,7 +1238,7 @@ describe('Table', () => {
         }
       }, true);
 
-      setTimeout(_ => {
+      setTimeout(() => {
         const trs = vm.$el.querySelectorAll('.tm-table__header tr');
         expect(trs.length).equal(2);
         const firstRowHeader = trs[0].querySelectorAll('th .cell').length;
@@ -1273,7 +1274,7 @@ describe('Table', () => {
         }
       }, true);
 
-      setTimeout(_ => {
+      setTimeout(() => {
         const trs = vm.$el.querySelectorAll('.tm-table__header tr');
         expect(trs.length).equal(3);
         const firstRowHeader = trs[0].querySelectorAll('th .cell').length;
@@ -1308,7 +1309,7 @@ describe('Table', () => {
         }
       }, true);
 
-      setTimeout(_ => {
+      setTimeout(() => {
         const trs = vm.$el.querySelectorAll('.tm-table__header tr');
         expect(trs.length).equal(2);
         const firstRowLength = trs[0].querySelectorAll('th .cell').length;
@@ -1569,7 +1570,7 @@ describe('Table', () => {
   });
 
   describe('methods', () => {
-    const createTable = function(prop = '', opts) {
+    const createTable = function(prop = '') {
       return createVue({
         template: `
           <tm-table ref="table" :data="testData" @${prop}="handleEvent">
@@ -1648,13 +1649,13 @@ describe('Table', () => {
         this.testData = getTestData();
       }
     }, true);
-    setTimeout(_ => {
+    setTimeout(() => {
       const tr = vm.$el.querySelector('.tm-table__body-wrapper tbody tr');
       triggerEvent(tr, 'mouseenter', true, false);
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(tr.classList.contains('hover-row')).to.true;
         triggerEvent(tr, 'mouseleave', true, false);
-        setTimeout(_ => {
+        setTimeout(() => {
           expect(tr.classList.contains('hover-row')).to.false;
           destroyVM(vm);
           done();
@@ -1678,15 +1679,15 @@ describe('Table', () => {
         this.testData = getTestData();
       }
     }, true);
-    setTimeout(_ => {
+    setTimeout(() => {
       const tr = vm.$el.querySelector('.tm-table__body-wrapper tbody tr');
       triggerEvent(tr, 'click', true, false);
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(tr.classList.contains('current-row')).to.be.true;
         const rows = vm.$el.querySelectorAll('.tm-table__body-wrapper tbody tr');
 
         triggerEvent(rows[2], 'click', true, false);
-        setTimeout(_ => {
+        setTimeout(() => {
           expect(tr.classList.contains('current-row')).to.be.false;
           expect(rows[2].classList.contains('current-row')).to.be.true;
           destroyVM(vm);

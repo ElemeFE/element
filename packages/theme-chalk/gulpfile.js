@@ -16,10 +16,4 @@ gulp.task('compile', function() {
     .pipe(gulp.dest('./lib'));
 });
 
-gulp.task('copyfont', function() {
-  return gulp.src('./src/fonts/**')
-    .pipe(cssmin())
-    .pipe(gulp.dest('./lib/fonts'));
-});
-
-gulp.task('build', ['compile', 'copyfont']);
+gulp.task('build', ['compile']);

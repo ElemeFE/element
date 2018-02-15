@@ -1,4 +1,3 @@
-// TODO: Run `npm run test:watch` and check warnings
 import { createVue, destroyVM } from '../util';
 
 describe('Carousel', () => {
@@ -124,7 +123,7 @@ describe('Carousel', () => {
         </div>
       `
     });
-    setTimeout(_ => {
+    setTimeout(() => {
       expect(vm.$el.querySelector('.tm-carousel__button').innerText).to.equal('1');
       done();
     }, 10);

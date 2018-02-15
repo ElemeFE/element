@@ -1,5 +1,4 @@
 <script>
-// TODO: Run `npm run test:watch` and check warnings
 import UploadDragger from './upload-dragger.vue';
 
 export default {
@@ -119,7 +118,7 @@ export default {
     }, false);
   },
 
-  render(h) {
+  render() {
     const {
       drag,
       uploadFiles,

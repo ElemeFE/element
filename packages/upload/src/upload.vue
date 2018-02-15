@@ -1,5 +1,4 @@
 <script>
-// TODO: Run `npm run test:watch` and check warnings
 import ajax from './ajax';
 import UploadDragger from './upload-dragger.vue';
 
@@ -82,7 +81,7 @@ export default {
         if (this.autoUpload) this.upload(rawFile);
       });
     },
-    upload(rawFile, file) {
+    upload(rawFile) {
       this.$refs.input.value = null;
 
       if (!this.beforeUpload) {
@@ -162,7 +161,7 @@ export default {
     }
   },
 
-  render(h) {
+  render() {
     let {
       handleClick,
       drag,

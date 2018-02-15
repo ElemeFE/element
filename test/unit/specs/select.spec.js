@@ -1,4 +1,3 @@
-// TODO: Run `npm run test:watch` and check warnings
 import { createTest, createVue, triggerEvent, destroyVM } from '../util';
 import Select from 'packages/select';
 
@@ -661,7 +660,7 @@ describe('Select', () => {
     vm.$el.querySelector('input').focus();
     vm.$el.querySelector('input').blur();
 
-    vm.$nextTick(_ => {
+    vm.$nextTick(() => {
       expect(spyFocus.calledOnce).to.be.true;
       expect(spyBlur.calledOnce).to.be.true;
       done();
@@ -679,7 +678,7 @@ describe('Select', () => {
     vm.$refs.select.$on('focus', spy);
     vm.$refs.select.focus();
 
-    vm.$nextTick(_ => {
+    vm.$nextTick(() => {
       expect(spy.calledOnce).to.be.true;
       done();
     });

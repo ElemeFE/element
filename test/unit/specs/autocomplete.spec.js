@@ -1,4 +1,3 @@
-// TODO: Run `npm run test:watch` and check warnings
 import { createVue, triggerClick, destroyVM } from '../util';
 
 describe('Autocomplete', () => {
@@ -55,13 +54,13 @@ describe('Autocomplete', () => {
 
     expect(inputElm.getAttribute('placeholder')).to.be.equal('请输入内容autocomplete1');
 
-    setTimeout(_ => {
+    setTimeout(() => {
       const suggestions = vm.$refs.autocomplete.$refs.suggestions.$el;
       expect(suggestions.style.display).to.not.equal('none');
       expect(suggestions.querySelectorAll('.tm-autocomplete-suggestion__list li').length).to.be.equal(4);
 
       triggerClick(document);
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(suggestions.style.display).to.be.equal('none');
         done();
       }, 500);
@@ -115,11 +114,11 @@ describe('Autocomplete', () => {
     autocomplete.$on('select', spy);
     inputElm.focus();
 
-    setTimeout(_ => {
+    setTimeout(() => {
       const suggestions = autocomplete.$refs.suggestions.$el;
       const suggestionList = suggestions.querySelectorAll('.tm-autocomplete-suggestion__list li');
       suggestionList[1].click();
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(inputElm.value).to.be.equal('Hot honey 首尔炸鸡（仙霞路）');
         expect(vm.state).to.be.equal('Hot honey 首尔炸鸡（仙霞路）');
         expect(spy.withArgs().calledOnce).to.be.true;
@@ -177,12 +176,12 @@ describe('Autocomplete', () => {
     autocomplete.$on('select', spy);
     inputElm.focus();
 
-    setTimeout(_ => {
+    setTimeout(() => {
       const suggestions = autocomplete.$refs.suggestions.$el;
       const suggestionList = suggestions.querySelectorAll('.tm-autocomplete-suggestion__list li');
       expect(suggestionList[1].innerHTML === '上海市长宁区淞虹路661号');
       suggestionList[1].click();
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(inputElm.value).to.be.equal('上海市长宁区淞虹路661号');
         expect(vm.state).to.be.equal('上海市长宁区淞虹路661号');
         expect(spy.withArgs().calledOnce).to.be.true;
@@ -254,9 +253,9 @@ describe('Autocomplete', () => {
 
     inputElm.focus();
 
-    setTimeout(_ => {
+    setTimeout(() => {
       autocomplete.highlight(8);
-      vm.$nextTick(_ => {
+      vm.$nextTick(() => {
         const suggestions = autocomplete.$refs.suggestions.$el.querySelector('.tm-autocomplete-suggestion__wrap');
         let suggestionsList = suggestions.querySelectorAll('.tm-autocomplete-suggestion__list li');
         let highlightedItem = suggestionsList[8];
@@ -318,9 +317,9 @@ describe('Autocomplete', () => {
     let inputElm = vm.$el.querySelector('input');
     inputElm.focus();
 
-    setTimeout(_ => {
+    setTimeout(() => {
       autocomplete.highlight(15);
-      vm.$nextTick(_ => {
+      vm.$nextTick(() => {
         const suggestions = autocomplete.$refs.suggestions.$el;
         const suggestionsList = suggestions.querySelectorAll('.tm-autocomplete-suggestion__list li');
         let highlightedItem = suggestionsList[11];
@@ -373,7 +372,7 @@ describe('Autocomplete', () => {
     let inputElm = vm.$el.querySelector('input');
     inputElm.focus();
 
-    setTimeout(_ => {
+    setTimeout(() => {
       let suggestions = vm.$refs.autocomplete.$refs.suggestions.$el;
       expect(suggestions.style.display).to.be.equal('none');
       done();
@@ -429,7 +428,7 @@ describe('Autocomplete', () => {
     vm.$el.querySelector('input').focus();
     vm.$el.querySelector('input').blur();
 
-    vm.$nextTick(_ => {
+    vm.$nextTick(() => {
       expect(spyFocus.calledOnce).to.be.true;
       expect(spyBlur.calledOnce).to.be.true;
       done();

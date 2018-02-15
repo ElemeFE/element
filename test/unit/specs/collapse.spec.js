@@ -1,4 +1,3 @@
-// TODO: Run `npm run test:watch` and check warnings
 import { createVue, destroyVM } from '../util';
 
 describe('Collapse', () => {
@@ -39,13 +38,13 @@ describe('Collapse', () => {
 
     expect(vm.$refs.item1.isActive).to.be.true;
     vm.$refs.item3.$el.querySelector('.tm-collapse-item__header').click();
-    vm.$nextTick(_ => {
+    vm.$nextTick(() => {
       expect(vm.$refs.item1.isActive).to.be.true;
       expect(vm.$refs.item3.isActive).to.be.true;
 
       vm.$refs.item1.$el.querySelector('.tm-collapse-item__header').click();
 
-      vm.$nextTick(_ => {
+      vm.$nextTick(() => {
         expect(vm.$refs.item1.isActive).to.be.false;
         done();
       });
@@ -84,7 +83,7 @@ describe('Collapse', () => {
 
     expect(vm.$refs.item1.isActive).to.be.true;
     vm.$refs.item3.$el.querySelector('.tm-collapse-item__header').click();
-    vm.$nextTick(_ => {
+    vm.$nextTick(() => {
       expect(vm.$refs.item1.isActive).to.be.false;
       expect(vm.$refs.item3.isActive).to.be.true;
       done();
@@ -123,7 +122,7 @@ describe('Collapse', () => {
     const spy = sinon.spy();
     vm.$refs.collapse.$on('change', spy);
     vm.$refs.item3.$el.querySelector('.tm-collapse-item__header').click();
-    vm.$nextTick(_ => {
+    vm.$nextTick(() => {
       expect(spy.withArgs().calledOnce).to.be.true;
       done();
     });

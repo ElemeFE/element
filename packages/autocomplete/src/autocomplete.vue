@@ -58,7 +58,6 @@
   </div>
 </template>
 <script>
-  // TODO: Run `npm run test:watch` and check warnings
   import debounce from 'throttle-debounce/debounce';
   import TmInput from 'element-ui/packages/input';
   import Clickoutside from 'element-ui/src/utils/clickoutside';
@@ -184,7 +183,7 @@
       handleBlur(event) {
         this.$emit('blur', event);
       },
-      close(e) {
+      close() {
         this.activated = false;
       },
       handleKeyEnter(e) {
@@ -193,7 +192,7 @@
           this.select(this.suggestions[this.highlightedIndex]);
         } else if (this.selectWhenUnmatched) {
           this.$emit('select', {value: this.value});
-          this.$nextTick(_ => {
+          this.$nextTick(() => {
             this.suggestions = [];
             this.highlightedIndex = -1;
           });
@@ -202,7 +201,7 @@
       select(item) {
         this.$emit('input', item[this.valueKey]);
         this.$emit('select', item);
-        this.$nextTick(_ => {
+        this.$nextTick(() => {
           this.suggestions = [];
           this.highlightedIndex = -1;
         });

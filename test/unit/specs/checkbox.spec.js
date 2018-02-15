@@ -1,4 +1,3 @@
-// TODO: Run `npm run test:watch` and check warnings
 import { createVue, destroyVM } from '../util';
 
 describe('Checkbox', () => {
@@ -22,7 +21,7 @@ describe('Checkbox', () => {
     let checkboxElm = vm.$el;
     expect(checkboxElm.classList.contains('tm-checkbox')).to.be.true;
     checkboxElm.click();
-    vm.$nextTick(_ => {
+    vm.$nextTick(() => {
       expect(checkboxElm.querySelector('.is-checked')).to.be.ok;
       done();
     });
@@ -65,10 +64,10 @@ describe('Checkbox', () => {
     }, true);
     let checkboxElm = vm.$el;
     checkboxElm.click();
-    setTimeout(_ => {
+    setTimeout(() => {
       expect(vm.data).to.true;
       vm.checked = false;
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(vm.data).to.true;
         done();
       }, 10);
@@ -92,7 +91,7 @@ describe('Checkbox', () => {
     }, true);
     expect(vm.checkList.length === 0).to.be.true;
     vm.$refs.a.$el.click();
-    vm.$nextTick(_ => {
+    vm.$nextTick(() => {
       expect(vm.checkList.indexOf('a') !== -1).to.be.true;
       done();
     });
@@ -119,7 +118,7 @@ describe('Checkbox', () => {
       }
     }, true);
     vm.$refs.a.$el.click();
-    setTimeout(_ => {
+    setTimeout(() => {
       expect(vm.data).to.deep.equal(['a']);
       vm.checkList = ['b'];
       done();
@@ -185,7 +184,7 @@ describe('Checkbox', () => {
     }, true);
     expect(vm.checkList.length === 0).to.be.true;
     vm.$refs.a.$el.click();
-    vm.$nextTick(_ => {
+    vm.$nextTick(() => {
       expect(vm.checkList.indexOf('a') !== -1).to.be.true;
       done();
     });
@@ -203,7 +202,7 @@ describe('Checkbox', () => {
       }
     }, true);
     vm.$el.click();
-    vm.$nextTick(_ => {
+    vm.$nextTick(() => {
       expect(vm.checked === 3).to.be.true;
       done();
     });
@@ -250,7 +249,7 @@ describe('Checkbox', () => {
       let checkboxElm = vm.$el;
       expect(checkboxElm.classList.contains('tm-checkbox-button')).to.be.true;
       checkboxElm.click();
-      vm.$nextTick(_ => {
+      vm.$nextTick(() => {
         expect(checkboxElm.classList.contains('is-checked')).to.be.ok;
         done();
       });
@@ -294,10 +293,10 @@ describe('Checkbox', () => {
       }, true);
       let checkboxElm = vm.$el;
       checkboxElm.click();
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(vm.data).to.true;
         vm.checked = false;
-        setTimeout(_ => {
+        setTimeout(() => {
           expect(vm.data).to.true;
           done();
         }, 10);
@@ -322,10 +321,10 @@ describe('Checkbox', () => {
       }, true);
       expect(vm.checkList.length === 0).to.be.true;
       vm.$refs.a.$el.click();
-      vm.$nextTick(_ => {
+      vm.$nextTick(() => {
         expect(vm.checkList.indexOf('a') !== -1).to.be.true;
         vm.$refs.b.$el.click();
-        vm.$nextTick(_ => {
+        vm.$nextTick(() => {
           expect(vm.checkList.indexOf('a') !== -1).to.be.true;
           expect(vm.checkList.indexOf('b') !== -1).to.be.true;
           done();
@@ -356,10 +355,10 @@ describe('Checkbox', () => {
         }
       }, true);
       vm.$refs.a.$el.click();
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(vm.data).to.deep.equal(['a']);
         vm.checkList = ['b'];
-        setTimeout(_ => {
+        setTimeout(() => {
           expect(vm.data).to.deep.equal(['a']);
           done();
         }, 10);
@@ -453,7 +452,7 @@ describe('Checkbox', () => {
       }, true);
       expect(vm.checkList.length === 0).to.be.true;
       vm.$refs.a.$el.click();
-      vm.$nextTick(_ => {
+      vm.$nextTick(() => {
         expect(vm.checkList.indexOf('a') !== -1).to.be.true;
         done();
       });
@@ -475,7 +474,7 @@ describe('Checkbox', () => {
         }
       }, true);
       vm.$el.click();
-      vm.$nextTick(_ => {
+      vm.$nextTick(() => {
         expect(vm.checked === 3).to.be.true;
         done();
       });

@@ -1,4 +1,3 @@
-// TODO: Run `npm run test:watch` and check warnings
 import Vue from 'vue';
 import {
   PopupManager
@@ -106,7 +105,7 @@ export default {
       options.offset = this.offset;
       options.arrowOffset = this.arrowOffset;
       this.popperJS = new PopperJS(reference, popper, options);
-      this.popperJS.onCreate(_ => {
+      this.popperJS.onCreate(() => {
         this.$emit('created', this);
         this.resetTransformOrigin();
         this.$nextTick(this.updatePopper);

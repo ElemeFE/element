@@ -1,4 +1,3 @@
-// TODO: Run `npm run test:watch` and check warnings
 import { createTest, createVue, destroyVM } from '../util';
 import Button from 'packages/button';
 
@@ -72,7 +71,7 @@ describe('Button', () => {
     }, true);
     vm.$el.click();
 
-    setTimeout(_ => {
+    setTimeout(() => {
       expect(result).to.exist;
       done();
     }, 20);

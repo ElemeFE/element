@@ -1,4 +1,3 @@
-// TODO: Run `npm run test:watch` and check warnings
 import Pager from './pager.vue';
 import TmSelect from 'element-ui/packages/select';
 import TmOption from 'element-ui/packages/option';
@@ -53,7 +52,7 @@ export default {
     };
   },
 
-  render(h) {
+  render() {
     let template = <div class={['tm-pagination', {
       'is-background': this.background,
       'tm-pagination--small': this.small
@@ -95,7 +94,7 @@ export default {
 
   components: {
     MySlot: {
-      render(h) {
+      render() {
         return (
           this.$parent.$slots.default
             ? this.$parent.$slots.default[0]
@@ -104,7 +103,7 @@ export default {
       }
     },
     Prev: {
-      render(h) {
+      render() {
         return (
           <button
             type="button"
@@ -121,7 +120,7 @@ export default {
     },
 
     Next: {
-      render(h) {
+      render() {
         return (
           <button
             type="button"
@@ -161,7 +160,7 @@ export default {
         }
       },
 
-      render(h) {
+      render() {
         return (
           <span class="tm-pagination__sizes">
             <tm-select
@@ -242,7 +241,7 @@ export default {
         }
       },
 
-      render(h) {
+      render() {
         return (
           <span class="tm-pagination__jump">
             { this.t('el.pagination.goto') }
@@ -267,7 +266,7 @@ export default {
     Total: {
       mixins: [Locale],
 
-      render(h) {
+      render() {
         return (
           typeof this.$parent.total === 'number'
             ? <span class="tm-pagination__total">{ this.t('el.pagination.total', { total: this.$parent.total }) }</span>

@@ -213,7 +213,7 @@ export default {
       const states = this.store.states;
       states.sortProp = this.defaultSort.prop;
       states.sortOrder = this.defaultSort.order || 'ascending';
-      this.$nextTick(_ => {
+      this.$nextTick(() => {
         for (let i = 0, length = this.columns.length; i < length; i++) {
           let column = this.columns[i];
           if (column.property === states.sortProp) {

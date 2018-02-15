@@ -13,7 +13,6 @@
   </li>
 </template>
 <script>
-  // TODO: Run `npm run test:watch` and check warnings
   import Emitter from 'element-ui/src/mixins/emitter';
 
   export default {
@@ -28,7 +27,7 @@
     },
 
     methods: {
-      handleClick(e) {
+      handleClick() {
         this.dispatch('TmDropdown', 'menu-item-click', [this.command, this]);
       }
     }
