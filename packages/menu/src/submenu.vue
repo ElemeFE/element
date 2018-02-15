@@ -1,5 +1,4 @@
 <script>
-  // TODO: Run `npm run test:watch` and check warnings
   import TmCollapseTransition from 'element-ui/src/transitions/collapse-transition';
   import menuMixin from './menu-mixin';
   import Emitter from 'element-ui/src/mixins/emitter';
@@ -55,9 +54,9 @@
       };
     },
     watch: {
-      opened(val) {
+      opened() {
         if (this.isMenuPopup) {
-          this.$nextTick(_ => {
+          this.$nextTick(() => {
             this.updatePopper();
           });
         }
@@ -214,7 +213,7 @@
       this.parentMenu.removeSubmenu(this);
       this.rootMenu.removeSubmenu(this);
     },
-    render(h) {
+    render() {
       const {
         active,
         opened,

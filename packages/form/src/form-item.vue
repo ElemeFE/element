@@ -30,7 +30,6 @@
   </div>
 </template>
 <script>
-  // TODO: Run `npm run test:watch` and check warnings
   import AsyncValidator from 'async-validator';
   import emitter from 'element-ui/src/mixins/emitter';
   import objectAssign from 'element-ui/src/utils/merge';
@@ -193,7 +192,7 @@
 
         model[this.prop] = this.fieldValue;
 
-        validator.validate(model, { firstFields: true }, (errors, fields) => {
+        validator.validate(model, { firstFields: true }, (errors) => {
           this.validateState = !errors ? 'success' : 'error';
           this.validateMessage = errors ? errors[0].message : '';
 

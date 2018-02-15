@@ -1,4 +1,3 @@
-// TODO: Run `npm run test:watch` and check warnings
 import { createTest, createVue, destroyVM } from '../util';
 import TimeSelect from 'packages/time-select';
 import Vue from 'vue';
@@ -23,7 +22,7 @@ describe('TimeSelect', () => {
     input.focus();
     input.blur();
 
-    Vue.nextTick(_ => {
+    Vue.nextTick(() => {
       expect(vm.picker.start).to.equal('08:30');
       expect(vm.picker.end).to.equal('18:30');
       expect(vm.picker.step).to.equal('00:15');
@@ -52,13 +51,13 @@ describe('TimeSelect', () => {
     input.focus();
     input.blur();
 
-    Vue.nextTick(_ => {
+    Vue.nextTick(() => {
       const items = vm.$refs.compo.picker.$el.querySelectorAll('.time-select-item');
       const target = items[4];
       const time = target.textContent;
 
       target.click();
-      Vue.nextTick(_ => {
+      Vue.nextTick(() => {
         expect(vm.value).to.equal(time);
         done();
       });
@@ -74,7 +73,7 @@ describe('TimeSelect', () => {
     input.focus();
     input.blur();
 
-    setTimeout(_ => {
+    setTimeout(() => {
       expect(input.value).to.equal('14:30');
       expect(vm.picker.$el.querySelector('.selected')).to.be.ok;
       expect(vm.picker.$el.querySelector('.selected').textContent).to.equal('14:30');
@@ -97,7 +96,7 @@ describe('TimeSelect', () => {
     input.focus();
     input.blur();
 
-    setTimeout(_ => {
+    setTimeout(() => {
       const elms = picker.picker.$el.querySelectorAll('.disabled');
       const elm = elms[elms.length - 1];
 
@@ -127,10 +126,10 @@ describe('TimeSelect', () => {
     input.focus();
     input.blur();
 
-    setTimeout(_ => {
+    setTimeout(() => {
       vm.value = '10:30';
 
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(picker.picker.value).to.equal('10:30');
         done();
       }, 50);
@@ -153,7 +152,7 @@ describe('TimeSelect', () => {
     input.focus();
     input.blur();
 
-    setTimeout(_ => {
+    setTimeout(() => {
       const elm = picker.picker.$el.querySelector('.disabled');
 
       expect(elm.textContent).to.equal('14:30');
@@ -182,10 +181,10 @@ describe('TimeSelect', () => {
     input.focus();
     input.blur();
 
-    setTimeout(_ => {
+    setTimeout(() => {
       vm.value = '10:30';
 
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(picker.picker.value).to.equal('10:30');
         done();
       }, 50);
@@ -214,10 +213,10 @@ describe('TimeSelect', () => {
     vm.$refs.picker.$on('blur', spyBlur);
     vm.$el.querySelector('input').focus();
 
-    vm.$nextTick(_ => {
+    vm.$nextTick(() => {
       expect(spyFocus.calledOnce).to.be.true;
       vm.$refs.picker.pickerVisible = false;
-      vm.$nextTick(_ => {
+      vm.$nextTick(() => {
         expect(spyBlur.calledOnce).to.be.true;
         done();
       });
@@ -236,7 +235,7 @@ describe('TimeSelect', () => {
     vm.$refs.picker.$on('focus', spy);
     vm.$refs.picker.focus();
 
-    vm.$nextTick(_ => {
+    vm.$nextTick(() => {
       expect(spy.calledOnce).to.be.true;
       done();
     });

@@ -7,7 +7,6 @@
   </form>
 </template>
 <script>
-  // TODO: Run `npm run test:watch` and check warnings
   export default {
     name: 'TmForm',
 
@@ -105,7 +104,7 @@
         if (this.fields.length === 0 && callback) {
           callback(true);
         }
-        this.fields.forEach((field, index) => {
+        this.fields.forEach((field) => {
           field.validate('', errors => {
             if (errors) {
               valid = false;

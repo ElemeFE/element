@@ -300,10 +300,10 @@ describe('Pagination', () => {
 
     expect(vm.trigger).to.false;
 
-    setTimeout(_ => {
+    setTimeout(() => {
       // TODO: [TESTERROR] TypeError: vm.$el.querySelector is not a function
       vm.$el.querySelectorAll('li.tm-select-dropdown__item')[1].click();
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(vm.trigger).to.true;
         done();
       }, 50);
@@ -376,7 +376,7 @@ describe('Pagination', () => {
       }, true);
 
       vm.$el.querySelector('.btn-quicknext.more').click();
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(vm.$el.querySelector('.btn-quickprev.more')).to.exist;
         vm.$el.querySelector('.btn-quickprev.more').click();
         expect(vm.internalCurrentPage).to.equal(1);
@@ -391,7 +391,7 @@ describe('Pagination', () => {
       const nodes = vm.$el.querySelectorAll('li.number');
 
       nodes[nodes.length - 1].click();
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(vm.$el.querySelector('.btn-quickprev.more')).to.exist;
         expect(vm.$el.querySelector('.btn-quicknext.more')).to.not.exist;
         done();

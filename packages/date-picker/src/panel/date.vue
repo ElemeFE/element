@@ -138,7 +138,6 @@
 </template>
 
 <script type="text/babel">
-  // TODO: Run `npm run test:watch` and check warnings
   import {
     formatDate,
     parseDate,
@@ -169,7 +168,7 @@
       showTime(val) {
         /* istanbul ignore if */
         if (!val) return;
-        this.$nextTick(_ => {
+        this.$nextTick(() => {
           const inputElm = this.$refs.input.$el;
           if (inputElm) {
             this.pickerWidth = inputElm.getBoundingClientRect().width + 10;

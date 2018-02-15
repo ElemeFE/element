@@ -20,7 +20,6 @@
   </transition>
 </template>
 <script>
-  // TODO: Run `npm run test:watch` and check warnings
   import Popper from 'element-ui/src/utils/vue-popper';
   import Emitter from 'element-ui/src/mixins/emitter';
   import TmScrollbar from 'element-ui/packages/scrollbar';
@@ -56,7 +55,7 @@
     },
 
     updated() {
-      this.$nextTick(_ => {
+      this.$nextTick(() => {
         this.updatePopper();
       });
     },

@@ -1,4 +1,3 @@
-// TODO: Run `npm run test:watch` and check warnings
 import LayoutObserver from './layout-observer';
 
 export default {
@@ -6,7 +5,7 @@ export default {
 
   mixins: [LayoutObserver],
 
-  render(h) {
+  render() {
     const sums = [];
     this.columns.forEach((column, index) => {
       if (index === 0) {

@@ -1,4 +1,3 @@
-// TODO: Run `npm run test:watch` and check warnings
 import Vue from 'vue';
 import Loading from './loading.vue';
 import { addClass, removeClass, getStyle } from 'element-ui/src/utils/dom';
@@ -41,7 +40,7 @@ loadingDirective.install = Vue => {
         }
       });
     } else {
-      afterLeave(el.instance, _ => {
+      afterLeave(el.instance, () => {
         el.domVisible = false;
         const target = binding.modifiers.fullscreen || binding.modifiers.body
           ? document.body

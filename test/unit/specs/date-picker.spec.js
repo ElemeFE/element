@@ -1,4 +1,3 @@
-// TODO: Run `npm run test:watch` and check warnings
 import {
   createTest,
   createVue,
@@ -55,7 +54,7 @@ describe('DatePicker', () => {
     input.blur();
     input.focus();
 
-    setTimeout(_ => {
+    setTimeout(() => {
       const $el = vm.$refs.compo.picker.$el;
       const spans = $el.querySelectorAll('.tm-date-picker__header-label');
       const arrowLeftElm = $el.querySelector('.tm-date-picker__prev-btn.tm-icon-arrow-left');
@@ -73,11 +72,11 @@ describe('DatePicker', () => {
       while (--count) {
         arrowRightElm.click();
       }
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(spans[0].textContent).to.include(date.getFullYear() - 1);
         expect(spans[1].textContent).to.include(date.getMonth() + 1);
         $el.querySelector('td.available').click();
-        vm.$nextTick(_ => {
+        vm.$nextTick(() => {
           expect(vm.value).to.exist;
         });
         done();
@@ -99,13 +98,13 @@ describe('DatePicker', () => {
     const input = vm.$el.querySelector('input');
 
     input.focus();
-    setTimeout(_ => {
+    setTimeout(() => {
       const $el = vm.$refs.compo.picker.$el;
       $el.querySelector('td.available').click();
-      setTimeout(_ => {
+      setTimeout(() => {
         vm.$refs.compo.showClose = true;
         vm.$refs.compo.handleClickIcon({ stopPropagation: () => null });
-        setTimeout(_ => {
+        setTimeout(() => {
           expect(vm.value).to.equal(null);
           done();
         }, DELAY);
@@ -127,12 +126,12 @@ describe('DatePicker', () => {
     const input = vm.$el.querySelector('input');
 
     input.focus();
-    setTimeout(_ => {
+    setTimeout(() => {
       const $el = vm.$refs.compo.picker.$el;
       $el.querySelector('td.available').click();
-      vm.$nextTick(_ => {
+      vm.$nextTick(() => {
         vm.$el.querySelector('.tm-input__icon').click();
-        setTimeout(_ => {
+        setTimeout(() => {
           expect(vm.value).to.be.exist;
           done();
         }, DELAY);
@@ -155,14 +154,14 @@ describe('DatePicker', () => {
 
     input.blur();
     input.focus();
-    setTimeout(_ => {
+    setTimeout(() => {
       const $el = vm.$refs.compo.picker.$el;
       $el.querySelector('.tm-date-picker__next-btn.tm-icon-arrow-right').click();
-      setTimeout(_ => {
+      setTimeout(() => {
         $el.querySelector('td.available').click();
-        vm.$nextTick(_ => {
+        vm.$nextTick(() => {
           vm.value = '';
-          setTimeout(_ => {
+          setTimeout(() => {
             expect(vm.$refs.compo.picker.date.getDate()).to.equal(new Date().getDate());
             done();
           }, DELAY);
@@ -183,7 +182,7 @@ describe('DatePicker', () => {
     vm.$refs.picker.$on('focus', spy);
     vm.$refs.picker.focus();
 
-    vm.$nextTick(_ => {
+    vm.$nextTick(() => {
       expect(spy.calledOnce).to.be.true;
       done();
     });
@@ -217,16 +216,16 @@ describe('DatePicker', () => {
     input.blur();
     input.focus();
 
-    setTimeout(_ => {
+    setTimeout(() => {
       const picker = vm.$refs.compo.picker;
 
       // programatic modification of bound value does not emit cange
       vm.value = new Date(2000, 9, 2);
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(onChangeValue).to.not.exist;
         // user interaction does emit change
         picker.$el.querySelector('td.available').click();
-        setTimeout(_ => {
+        setTimeout(() => {
           expect(onChangeValue.getTime()).to.equal(vm.value.getTime());
           done();
         }, DELAY);
@@ -252,7 +251,7 @@ describe('DatePicker', () => {
             @input="handleInput" />`,
 
         methods: {
-          handleInput(val) {
+          handleInput() {
             emitted = true;
           }
         },
@@ -269,20 +268,20 @@ describe('DatePicker', () => {
       input.blur();
       input.focus();
 
-      setTimeout(_ => {
+      setTimeout(() => {
         const picker = vm.$refs.compo.picker;
 
         picker.$el.querySelector('td.available').click();
-        setTimeout(_ => {
+        setTimeout(() => {
           expect(emitted).to.true;
           emitted = false;
 
-          setTimeout(_ => {
+          setTimeout(() => {
             input.blur();
             input.focus();
 
             picker.$el.querySelector('td.available').click();
-            setTimeout(_ => {
+            setTimeout(() => {
               expect(emitted).to.false;
               done();
             }, DELAY);
@@ -302,7 +301,7 @@ describe('DatePicker', () => {
             @input="handleInput" />`,
 
         methods: {
-          handleInput(val) {
+          handleInput() {
             emitted = true;
           }
         },
@@ -318,25 +317,25 @@ describe('DatePicker', () => {
 
       input.click();
 
-      setTimeout(_ => {
+      setTimeout(() => {
         const picker = vm.$refs.compo.picker;
 
         picker.$el.querySelector('td.available').click();
-        setTimeout(_ => {
+        setTimeout(() => {
           picker.$el.querySelector('td.available + td.available').click();
-          setTimeout(_ => {
+          setTimeout(() => {
             expect(emitted).to.true;
             emitted = false;
 
-            setTimeout(_ => {
+            setTimeout(() => {
               input.blur();
               input.focus();
 
               const picker = vm.$refs.compo.picker;
               picker.$el.querySelector('td.available').click();
-              setTimeout(_ => {
+              setTimeout(() => {
                 picker.$el.querySelector('td.available + td.available').click();
-                setTimeout(_ => {
+                setTimeout(() => {
                   expect(emitted).to.false;
                   done();
                 });
@@ -361,10 +360,10 @@ describe('DatePicker', () => {
       vm.$refs.picker.$on('blur', spyBlur);
       vm.$el.querySelector('input').focus();
 
-      vm.$nextTick(_ => {
+      vm.$nextTick(() => {
         expect(spyFocus.calledOnce).to.be.true;
         vm.$refs.picker.pickerVisible = false;
-        vm.$nextTick(_ => {
+        vm.$nextTick(() => {
           expect(spyBlur.calledOnce).to.be.true;
           done();
         });
@@ -392,9 +391,9 @@ describe('DatePicker', () => {
       vm.$refs.compo.$on('change', spy);
 
       vm.$refs.compo.$el.querySelector('input').focus();
-      setTimeout(_ => {
+      setTimeout(() => {
         vm.$refs.compo.picker.$el.querySelector('.tm-date-table td.available').click();
-        setTimeout(_ => {
+        setTimeout(() => {
           const today = new Date();
           const yyyy = today.getFullYear();
           const MM = ('0' + (today.getMonth() + 1)).slice(-2);
@@ -427,13 +426,13 @@ describe('DatePicker', () => {
       expect(input.value).to.equal('2000-02-01');
       expect(vm.$refs.compo.parsedValue).to.be.an.instanceof(Date);
       input.focus();
-      setTimeout(_ => {
+      setTimeout(() => {
         const date = vm.$refs.compo.picker.date;
         expect(date.getFullYear()).to.equal(2000);
         expect(date.getMonth()).to.equal(1);
         expect(date.getDate()).to.equal(1);
         vm.$refs.compo.picker.$el.querySelector('.tm-date-table .current').click();
-        setTimeout(_ => {
+        setTimeout(() => {
           expect(input.value).to.equal('2000-02-01');
           done();
         }, DELAY);
@@ -457,11 +456,11 @@ describe('DatePicker', () => {
       }, true);
       const input = vm.$refs.compo.$el.querySelector('input');
       input.focus();
-      setTimeout(_ => {
+      setTimeout(() => {
         input.value = '2000-10-01';
         triggerEvent(input, 'input');
         keyDown(input, ENTER);
-        setTimeout(_ => {
+        setTimeout(() => {
           expect(vm.value).to.equal('01/10 2000');
           done();
         }, DELAY);
@@ -485,16 +484,16 @@ describe('DatePicker', () => {
       }, true);
       const inputs = vm.$refs.compo.$el.querySelectorAll('input');
       inputs[0].focus();
-      setTimeout(_ => {
+      setTimeout(() => {
         inputs[0].value = '2000-10-01';
         triggerEvent(inputs[0], 'input');
         keyDown(inputs[0], TAB);
-        setTimeout(_ => {
+        setTimeout(() => {
           inputs[1].focus();
           inputs[1].value = '2000-10-02';
           triggerEvent(inputs[1], 'input');
           keyDown(inputs[0], ENTER);
-          setTimeout(_ => {
+          setTimeout(() => {
             expect(vm.value).to.eql(['01/10 2000', '02/10 2000']);
             done();
           }, DELAY);
@@ -519,13 +518,13 @@ describe('DatePicker', () => {
       }, true);
       const input = vm.$refs.compo.$el.querySelector('input');
       input.focus();
-      setTimeout(_ => {
+      setTimeout(() => {
         // check timestamp is parsed internally
         expect(vm.$refs.compo.parsedValue.getTime()).to.equal(vm.value);
         input.value = '2000-10-01';
         triggerEvent(input, 'input');
         keyDown(input, ENTER);
-        setTimeout(_ => {
+        setTimeout(() => {
           expect(vm.value).to.equal(new Date(2000, 9, 1).getTime());
           done();
         }, DELAY);
@@ -549,19 +548,19 @@ describe('DatePicker', () => {
       }, true);
       const inputs = vm.$refs.compo.$el.querySelectorAll('input');
       inputs[0].focus();
-      setTimeout(_ => {
+      setTimeout(() => {
         // check timestamp is parsed internally
         expect(vm.$refs.compo.parsedValue[0].getTime()).to.equal(vm.value[0]);
         expect(vm.$refs.compo.parsedValue[1].getTime()).to.equal(vm.value[1]);
         inputs[0].value = '2000-10-01';
         triggerEvent(inputs[0], 'input');
         keyDown(inputs[0], TAB);
-        setTimeout(_ => {
+        setTimeout(() => {
           inputs[1].focus();
           inputs[1].value = '2000-10-02';
           triggerEvent(inputs[1], 'input');
           keyDown(inputs[0], ENTER);
-          setTimeout(_ => {
+          setTimeout(() => {
             expect(vm.value).to.eql([
               new Date(2000, 9, 1).getTime(),
               new Date(2000, 9, 2).getTime()
@@ -574,7 +573,7 @@ describe('DatePicker', () => {
   });
 
   describe('default value', done => {
-    it('it works', done => {
+    it('it works', () => {
       let defaultValue = '2000-01-01';
       let expectValue = new Date(2000, 0, 1);
 
@@ -588,14 +587,14 @@ describe('DatePicker', () => {
       }, true);
 
       vm.$el.querySelector('input').focus();
-      setTimeout(_ => {
+      setTimeout(() => {
         const $el = vm.$refs.compo.picker.$el;
         expect($el.querySelector('.tm-month-table td.default')).to.exist;
         expect($el.querySelector('.tm-year-table td.default')).to.exist;
         const defaultEls = $el.querySelectorAll('.tm-date-table td.default');
         expect(defaultEls.length).to.equal(1);
         defaultEls[0].click();
-        setTimeout(_ => {
+        setTimeout(() => {
           expect(vm.value).to.eql(expectValue);
           done();
         }, DELAY);
@@ -618,14 +617,14 @@ describe('DatePicker', () => {
 
       const input = vm.$el.querySelector('input');
       input.focus();
-      setTimeout(_ => {
+      setTimeout(() => {
         let $el = vm.$refs.compo.picker.$el;
         expect($el.querySelector('.tm-date-table td.current')).to.exist;
         vm.defaultValue = defaultValue;
         triggerEvent(vm.$refs.compo.$el, 'mouseenter');
-        setTimeout(_ => {
+        setTimeout(() => {
           vm.$el.querySelector('.tm-icon-circle-close').click();
-          setTimeout(_ => {
+          setTimeout(() => {
             input.focus();
             setTimeout(() => {
               $el = vm.$refs.compo.picker.$el;
@@ -667,7 +666,7 @@ describe('DatePicker', () => {
 
     it('tab', done => {
       keyDown(input, TAB);
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(datePicker.pickerVisible).to.false;
         done();
       }, DELAY);
@@ -676,9 +675,9 @@ describe('DatePicker', () => {
     it('enter', done => {
       input.value = '2000-10-1';
       triggerEvent(input, 'input');
-      vm.$nextTick(_ => {
+      vm.$nextTick(() => {
         keyDown(input, ENTER);
-        setTimeout(_ => {
+        setTimeout(() => {
           expect(datePicker.pickerVisible).to.false;
           expect(datePicker.picker.date.getFullYear()).to.equal(2000);
           expect(datePicker.picker.date.getMonth()).to.equal(9);
@@ -693,7 +692,7 @@ describe('DatePicker', () => {
       input.value = inputText;
       triggerEvent(input, 'input');
       keyDown(input, LEFT);
-      vm.$nextTick(_ => {
+      vm.$nextTick(() => {
         expect(input.value).to.equal(inputText);
         done();
       });
@@ -703,9 +702,9 @@ describe('DatePicker', () => {
       const date = new Date(2000, 9, 1);
       const prevDate = new Date(2000, 9, 0);
       vm.value = date;
-      vm.$nextTick(_ => {
+      vm.$nextTick(() => {
         keyDown(input, LEFT);
-        setTimeout(_ => {
+        setTimeout(() => {
           expect(datePicker.pickerVisible).to.true;
           expect(datePicker.picker.date.getFullYear()).to.equal(prevDate.getFullYear());
           expect(datePicker.picker.date.getMonth()).to.equal(prevDate.getMonth());
@@ -734,11 +733,11 @@ describe('DatePicker', () => {
       input.blur();
       input.focus();
 
-      setTimeout(_ => {
+      setTimeout(() => {
         // NOTE: simplified test
         vm.$refs.compo.userInput = '';
         vm.$refs.compo.handleChange();
-        setTimeout(_ => {
+        setTimeout(() => {
           expect(vm.value).to.equal(null);
           done();
         }, DELAY);
@@ -762,11 +761,11 @@ describe('DatePicker', () => {
       input.blur();
       input.focus();
 
-      setTimeout(_ => {
+      setTimeout(() => {
         // NOTE: simplified test
         vm.$refs.compo.userInput = '';
         keyDown(input, ENTER);
-        setTimeout(_ => {
+        setTimeout(() => {
           expect(vm.value).to.equal(null);
           done();
         }, DELAY);
@@ -776,7 +775,7 @@ describe('DatePicker', () => {
     // TODO: implement the same feature for range panels
   });
 
-  describe('nagivation', _ => {
+  describe('nagivation', () => {
     const click = (el, cbk = () => {}) => {
       el.click();
       setTimeout(cbk, DELAY);
@@ -794,7 +793,7 @@ describe('DatePicker', () => {
         }
       }, true);
       vm.$refs.compo.$el.querySelector('input').focus();
-      setTimeout(_ => {
+      setTimeout(() => {
         const $el = vm.$refs.compo.picker.$el;
         prevMonth = $el.querySelector('button.tm-icon-arrow-left');
         prevYear = $el.querySelector('button.tm-icon-d-arrow-left');
@@ -807,19 +806,19 @@ describe('DatePicker', () => {
     };
 
     it('month, year', done => {
-      navigationTest(new Date(2000, 0, 1), _ => {
+      navigationTest(new Date(2000, 0, 1), () => {
         expect(getYearLabel()).to.include('2000');
         expect(getMonthLabel()).to.include('1');
-        click(prevMonth, _ => {
+        click(prevMonth, () => {
           expect(getYearLabel()).to.include('1999');
           expect(getMonthLabel()).to.include('12');
-          click(prevYear, _ => {
+          click(prevYear, () => {
             expect(getYearLabel()).to.include('1998');
             expect(getMonthLabel()).to.include('12');
-            click(nextMonth, _ => {
+            click(nextMonth, () => {
               expect(getYearLabel()).to.include('1999');
               expect(getMonthLabel()).to.include('1');
-              click(nextYear, _ => {
+              click(nextYear, () => {
                 expect(getYearLabel()).to.include('2000');
                 expect(getMonthLabel()).to.include('1');
                 done();
@@ -832,8 +831,8 @@ describe('DatePicker', () => {
 
     it('month with fewer dates', done => {
       // July has 31 days, June has 30
-      navigationTest(new Date(2000, 6, 31), _ => {
-        click(prevMonth, _ => {
+      navigationTest(new Date(2000, 6, 31), () => {
+        click(prevMonth, () => {
           expect(getYearLabel()).to.include('2000');
           expect(getMonthLabel()).to.include('6');
           done();
@@ -843,8 +842,8 @@ describe('DatePicker', () => {
 
     it('year with fewer Feburary dates', done => {
       // Feburary 2008 has 29 days, Feburary 2007 has 28
-      navigationTest(new Date(2008, 1, 29), _ => {
-        click(prevYear, _ => {
+      navigationTest(new Date(2008, 1, 29), () => {
+        click(prevYear, () => {
           expect(getYearLabel()).to.include('2007');
           expect(getMonthLabel()).to.include('2');
           done();
@@ -853,14 +852,14 @@ describe('DatePicker', () => {
     });
 
     it('month label with fewer dates', done => {
-      navigationTest(new Date(2000, 6, 31), _ => {
+      navigationTest(new Date(2000, 6, 31), () => {
         const $el = vm.$refs.compo.picker.$el;
         const monthLabel = $el.querySelectorAll('.tm-date-picker__header-label')[1];
-        click(monthLabel, _ => {
-          setTimeout(_ => {
+        click(monthLabel, () => {
+          setTimeout(() => {
             const juneLabel = $el.querySelectorAll('.tm-month-table td a')[5];
             juneLabel.click();
-            setTimeout(_ => {
+            setTimeout(() => {
               expect(getYearLabel()).to.include('2000');
               expect(getMonthLabel()).to.include('6');
               done();
@@ -880,7 +879,7 @@ describe('DatePicker', () => {
     input.blur();
     input.focus();
 
-    setTimeout(_ => {
+    setTimeout(() => {
       expect(vm.picker.$el.querySelector('.tm-month-table').style.display).to.be.empty;
       expect(vm.picker.$el.querySelector('.tm-year-table').style.display).to.be.equal('none');
       vm.picker.$el.querySelector('.tm-month-table a.cell').click();
@@ -898,7 +897,7 @@ describe('DatePicker', () => {
     input.blur();
     input.focus();
 
-    setTimeout(_ => {
+    setTimeout(() => {
       expect(vm.picker.$el.querySelector('.tm-year-table').style.display).to.empty;
       expect(vm.picker.$el.querySelector('.tm-month-table').style.display).to.be.equal('none');
 
@@ -953,12 +952,12 @@ describe('DatePicker', () => {
       const input = vm.$refs.compo.$el.querySelector('input');
       input.blur();
       input.focus();
-      setTimeout(_ => {
+      setTimeout(() => {
         const datePanel = vm.$refs.compo.picker;
         const dateInput = datePanel.$el.querySelector('.tm-date-picker__time-header > span:nth-child(1) input');
         const timeInput = datePanel.$el.querySelector('.tm-date-picker__time-header > span:nth-child(2) input');
         timeInput.focus();
-        setTimeout(_ => {
+        setTimeout(() => {
           const timePanel = datePanel.$refs.timepicker;
           // both input shows correct value
           expect(dateInput.value).to.equal('2000-10-01');
@@ -970,7 +969,7 @@ describe('DatePicker', () => {
           expect(seconds.textContent).to.include('01');
           // sets value updates displayed value
           vm.value = new Date(2001, 10, 2, 11, 1, 2);
-          setTimeout(_ => {
+          setTimeout(() => {
             expect(dateInput.value).to.equal('2001-11-02');
             expect(timeInput.value).to.equal('11:01:02');
             const [hours, minutes, seconds] = timePanel.$el.querySelectorAll('.tm-time-spinner ul li.active');
@@ -989,7 +988,7 @@ describe('DatePicker', () => {
       const date = new Date(1999, 10, 10, 10, 10);
 
       vm.picker.$el.querySelector('.tm-picker-panel__link-btn').click();
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(vm.picker.date > date).to.true;
         done();
       }, DELAY);
@@ -999,7 +998,7 @@ describe('DatePicker', () => {
       const input = vm.picker.$el.querySelectorAll('.tm-date-picker__editor-wrap input')[1];
       triggerEvent(input, 'focus');
 
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(vm.picker.$el.querySelector('.tm-time-panel')).to.have.deep.property('style.display').to.equal('');
         done();
       }, DELAY);
@@ -1010,7 +1009,7 @@ describe('DatePicker', () => {
 
       input.value = '20:30:33';
       triggerEvent(input, 'change', true);
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(vm.picker.date.getHours()).to.equal(20);
         expect(vm.picker.date.getMinutes()).to.equal(30);
         expect(vm.picker.date.getSeconds()).to.equal(33);
@@ -1023,7 +1022,7 @@ describe('DatePicker', () => {
 
       input.value = '2017-2-2';
       triggerEvent(input, 'change', true);
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(vm.picker.date.getFullYear()).to.equal(2017);
         expect(vm.picker.date.getMonth()).to.equal(1);
         expect(vm.picker.date.getDate()).to.equal(2);
@@ -1037,11 +1036,11 @@ describe('DatePicker', () => {
       input.focus();
       input.blur();
 
-      setTimeout(_ => {
+      setTimeout(() => {
         const button = vm.picker.$el.querySelector('.tm-time-panel .confirm');
         button.click();
 
-        setTimeout(_ => {
+        setTimeout(() => {
           expect(input.value).to.exist;
           done();
         }, DELAY);
@@ -1063,13 +1062,13 @@ describe('DatePicker', () => {
         input.blur();
         input.focus();
 
-        setTimeout(_ => {
+        setTimeout(() => {
           const timeInput = vm.$refs.compo.picker.$el.querySelector('.tm-date-picker__time-header > span:nth-child(2) input');
           timeInput.focus();
-          setTimeout(_ => {
+          setTimeout(() => {
             const cancel = vm.$refs.compo.picker.$refs.timepicker.$el.querySelector('button.cancel');
             cancel.click();
-            setTimeout(_ => {
+            setTimeout(() => {
               expect(vm.value).to.equal('');
               expect(vm.$refs.compo.pickerVisible).to.true;
               done();
@@ -1094,16 +1093,16 @@ describe('DatePicker', () => {
 
         const oldValue = vm.value.toISOString();
 
-        setTimeout(_ => {
+        setTimeout(() => {
           const timeInput = vm.$refs.compo.picker.$el.querySelector('.tm-date-picker__time-header > span:nth-child(2) input');
           timeInput.focus();
-          setTimeout(_ => {
+          setTimeout(() => {
             const nextTime = vm.$refs.compo.picker.$refs.timepicker.$el.querySelector('.active + *');
             nextTime.click();
-            setTimeout(_ => {
+            setTimeout(() => {
               const cancel = vm.$refs.compo.picker.$refs.timepicker.$el.querySelector('button.cancel');
               cancel.click();
-              setTimeout(_ => {
+              setTimeout(() => {
                 expect(vm.value.toISOString()).to.equal(oldValue);
                 expect(vm.$refs.compo.pickerVisible).to.true;
                 done();
@@ -1127,10 +1126,10 @@ describe('DatePicker', () => {
         }
       }, true);
       vm.$refs.compo.$el.querySelector('input').focus();
-      setTimeout(_ => {
+      setTimeout(() => {
         // click now button
         vm.$refs.compo.picker.$el.querySelector('.tm-picker-panel__footer .tm-button--text').click();
-        setTimeout(_ => {
+        setTimeout(() => {
           expect(vm.value).to.equal('');
           done();
         }, DELAY);
@@ -1160,7 +1159,7 @@ describe('DatePicker', () => {
 
     it('click cell', done => {
       vm.picker.$el.querySelector('.tm-date-table__row .available').click();
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(vm.picker.week).to.exist;
         done();
       }, DELAY);
@@ -1179,10 +1178,10 @@ describe('DatePicker', () => {
     it('select month', done => {
       vm.picker.$el.querySelectorAll('.tm-date-picker__header-label')[1].click();
 
-      setTimeout(_ => {
+      setTimeout(() => {
         vm.picker.$el.querySelector('.tm-month-table .cell').click();
 
-        setTimeout(_ => {
+        setTimeout(() => {
           expect(vm.picker.$el.querySelector('.tm-date-table.is-week-mode').style.display).to.equal('');
           done();
         }, DELAY);
@@ -1205,15 +1204,15 @@ describe('DatePicker', () => {
       const inputs = rangePicker.$el.querySelectorAll('input');
       inputs[0].focus();
 
-      setTimeout(_ => {
+      setTimeout(() => {
         const panels = rangePicker.picker.$el.querySelectorAll('.tm-date-range-picker__content');
         expect(Array.prototype.slice.call(panels)).to.length(2);
         panels[0].querySelector('td.available').click();
-        setTimeout(_ => {
+        setTimeout(() => {
           panels[1].querySelector('td.available').click();
-          setTimeout(_ => {
+          setTimeout(() => {
             inputs[0].focus();
-            setTimeout(_ => {
+            setTimeout(() => {
               // correct highlight
               const startDate = rangePicker.picker.$el.querySelectorAll('.start-date');
               const endDate = rangePicker.picker.$el.querySelectorAll('.end-date');
@@ -1245,9 +1244,9 @@ describe('DatePicker', () => {
 
       const rangePicker = vm.$refs.compo;
       const inputs = rangePicker.$el.querySelectorAll('input');
-      setTimeout(_ => {
+      setTimeout(() => {
         inputs[0].focus();
-        setTimeout(_ => {
+        setTimeout(() => {
           const panels = rangePicker.picker.$el.querySelectorAll('.tm-date-range-picker__content');
           const left = panels[0].querySelector('.tm-date-range-picker__header');
           const right = panels[1].querySelector('.is-right .tm-date-range-picker__header');
@@ -1268,7 +1267,7 @@ describe('DatePicker', () => {
 
       input.click();
 
-      setTimeout(_ => {
+      setTimeout(() => {
         const panels = vm.picker.$el.querySelectorAll('.tm-date-range-picker__content');
 
         expect(Array.prototype.slice.call(panels)).to.length(2);
@@ -1276,7 +1275,7 @@ describe('DatePicker', () => {
         panels[1].querySelector('.tm-icon-d-arrow-right').click();
         panels[1].querySelector('.tm-icon-arrow-right').click();
 
-        setTimeout(_ => {
+        setTimeout(() => {
           const left = panels[0].querySelector('.tm-date-range-picker__header');
           const right = panels[1].querySelector('.is-right .tm-date-range-picker__header');
           const leftText = left.textContent.match(/\d+/g).map(i => Number(i));
@@ -1307,7 +1306,7 @@ describe('DatePicker', () => {
       const inputs = rangePicker.$el.querySelectorAll('input');
       inputs[0].focus();
 
-      setTimeout(_ => {
+      setTimeout(() => {
         const startDate = rangePicker.picker.$el.querySelectorAll('.start-date');
         const endDate = rangePicker.picker.$el.querySelectorAll('.end-date');
         expect(startDate.length).to.equal(1);
@@ -1328,10 +1327,10 @@ describe('DatePicker', () => {
 
       vm.$el.querySelector('input').focus();
 
-      setTimeout(_ => {
+      setTimeout(() => {
         vm.$refs.compo.showClose = true;
         vm.$refs.compo.handleClickIcon({ stopPropagation: () => null });
-        setTimeout(_ => {
+        setTimeout(() => {
           expect(vm.value).to.equal(null);
           done();
         }, DELAY);
@@ -1354,14 +1353,14 @@ describe('DatePicker', () => {
         }, true);
 
         vm.$el.querySelector('input').focus();
-        setTimeout(_ => {
+        setTimeout(() => {
           const $el = vm.$refs.compo.picker.$el;
           const defaultEls = $el.querySelectorAll('.tm-date-table td.default');
           expect(defaultEls.length).to.equal(1);
           defaultEls[0].click();
-          setTimeout(_ => {
+          setTimeout(() => {
             $el.querySelector('.tm-date-table td.default + td').click();
-            setTimeout(_ => {
+            setTimeout(() => {
               expect(vm.value).to.eql(expectValue);
               done();
             }, DELAY);
@@ -1384,13 +1383,13 @@ describe('DatePicker', () => {
         }, true);
 
         vm.$el.querySelector('input').focus();
-        setTimeout(_ => {
+        setTimeout(() => {
           const defaultEls = vm.$refs.compo.picker.$el.querySelectorAll('.tm-date-table td.default');
           expect(defaultEls.length).to.equal(2);
           defaultEls[0].click();
-          setTimeout(_ => {
+          setTimeout(() => {
             defaultEls[1].click();
-            setTimeout(_ => {
+            setTimeout(() => {
               expect(vm.value).to.eql(expectValue);
               done();
             }, DELAY);
@@ -1426,11 +1425,11 @@ describe('DatePicker', () => {
 
       triggerEvent(leftCell, 'mousemove', true);
       triggerEvent(leftCell, 'click', true);
-      setTimeout(_ => {
+      setTimeout(() => {
         triggerEvent(rightCell, 'mousemove', true);
         triggerEvent(rightCell, 'click', true);
 
-        setTimeout(_ => {
+        setTimeout(() => {
           const {
             minDate,
             maxDate
@@ -1458,23 +1457,23 @@ describe('DatePicker', () => {
         }
       }, true).$refs.compo;
 
-      setTimeout(_ => {
+      setTimeout(() => {
         vmWithDefaultTime.$el.click();
 
-        setTimeout(_ => {
+        setTimeout(() => {
           const pickers = vmWithDefaultTime.picker.$el.querySelectorAll('.tm-date-range-picker__content');
           const leftCell = pickers[0].querySelector('td.available');
           const rightCell = pickers[1].querySelector('td.available');
 
           triggerEvent(leftCell, 'mousemove', true);
           triggerEvent(leftCell, 'click', true);
-          setTimeout(_ => {
+          setTimeout(() => {
             triggerEvent(rightCell, 'mousemove', true);
-            setTimeout(_ => {
+            setTimeout(() => {
               expect(rightCell.classList.contains('in-range')).to.be.true;
 
               triggerEvent(rightCell, 'click', true);
-              setTimeout(_ => {
+              setTimeout(() => {
                 const {
                   minDate,
                   maxDate
@@ -1506,23 +1505,23 @@ describe('DatePicker', () => {
         }
       }, true).$refs.compo;
 
-      setTimeout(_ => {
+      setTimeout(() => {
         vmWithDefaultTime.$el.click();
 
-        setTimeout(_ => {
+        setTimeout(() => {
           const pickers = vmWithDefaultTime.picker.$el.querySelectorAll('.tm-date-range-picker__content');
           const leftCell = pickers[0].querySelector('td.available');
           const rightCell = pickers[1].querySelector('td.available');
 
           triggerEvent(leftCell, 'mousemove', true);
           triggerEvent(leftCell, 'click', true);
-          setTimeout(_ => {
+          setTimeout(() => {
             triggerEvent(rightCell, 'mousemove', true);
-            setTimeout(_ => {
+            setTimeout(() => {
               expect(rightCell.classList.contains('in-range')).to.be.true;
 
               triggerEvent(rightCell, 'click', true);
-              setTimeout(_ => {
+              setTimeout(() => {
                 const {
                   minDate,
                   maxDate
@@ -1557,7 +1556,7 @@ describe('DatePicker', () => {
         rightBtn.click();
       }
 
-      setTimeout(_ => {
+      setTimeout(() => {
         const newLeft = left.textContent.match(/\d+/g);
         const newRight = right.textContent.match(/\d+/g);
         expect(leftText[1] - newLeft[1]).to.equal(2);
@@ -1585,7 +1584,7 @@ describe('DatePicker', () => {
         rightBtn.click();
       }
 
-      setTimeout(_ => {
+      setTimeout(() => {
         const newLeft = left.textContent.match(/\d+/g);
         const newRight = right.textContent.match(/\d+/g);
 
@@ -1605,16 +1604,16 @@ describe('DatePicker', () => {
 
       triggerEvent(leftCell, 'mousemove', true);
       triggerEvent(leftCell, 'click', true);
-      setTimeout(_ => {
+      setTimeout(() => {
         triggerEvent(rightCell, 'mousemove', true);
         triggerEvent(rightCell, 'click', true);
 
-        setTimeout(_ => {
+        setTimeout(() => {
           triggerEvent(input, 'input');
           input.value = '1989-6-4';
           triggerEvent(input, 'change', true);
 
-          setTimeout(_ => {
+          setTimeout(() => {
             const minDate = vm.picker.minDate;
             expect(minDate.getFullYear()).to.equal(1989);
             expect(minDate.getMonth()).to.equal(5);
@@ -1634,20 +1633,20 @@ describe('DatePicker', () => {
 
       triggerEvent(leftCell, 'mousemove', true);
       triggerEvent(leftCell, 'click', true);
-      setTimeout(_ => {
+      setTimeout(() => {
         triggerEvent(rightCell, 'mousemove', true);
         triggerEvent(rightCell, 'click', true);
 
-        setTimeout(_ => {
+        setTimeout(() => {
           triggerEvent(input2, 'input');
           input2.value = '1988-6-4';
           triggerEvent(input2, 'change');
 
-          setTimeout(_ => {
+          setTimeout(() => {
             triggerEvent(input, 'input');
             input.value = '1989-6-4';
             triggerEvent(input, 'change', true);
-            setTimeout(_ => {
+            setTimeout(() => {
               expect(vm.picker.maxDate > vm.picker.minDate).to.true;
               done();
             }, DELAY);
@@ -1662,11 +1661,11 @@ describe('DatePicker', () => {
       input.focus();
       input.blur();
 
-      setTimeout(_ => {
+      setTimeout(() => {
         const button = vm.picker.$el.querySelector('.tm-date-range-picker__time-picker-wrap .tm-time-panel .confirm');
         button.click();
 
-        setTimeout(_ => {
+        setTimeout(() => {
           expect(input.value).to.exist;
           done();
         }, DELAY);
@@ -1690,7 +1689,7 @@ describe('DatePicker', () => {
     input.blur();
     input.focus();
 
-    setTimeout(_ => {
+    setTimeout(() => {
       const firstWeek = vm.picker.$el.querySelector('tr th');
       expect(firstWeek.innerText).to.equal(chineseWeek[i - 1]);
       done();
@@ -1718,14 +1717,14 @@ describe('DatePicker', () => {
     input.blur();
     input.focus();
 
-    setTimeout(_ => {
+    setTimeout(() => {
       const shortcut = vm.picker.$el.querySelector('.tm-picker-panel__shortcut');
 
       expect(shortcut.textContent).to.be.equal('今天');
       expect(vm.picker.$el.querySelector('.tm-picker-panel__sidebar')).to.be.ok;
 
       shortcut.click();
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(test).to.true;
         done();
       }, DELAY);
@@ -1760,7 +1759,7 @@ describe('DatePicker', () => {
       const date = new Date(3000, 10, 10, 10, 10, 10);
       vm.picker.value = date;
 
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(vm.picker.date.getTime() === date.getTime()).to.true;
         done();
       }, DELAY);

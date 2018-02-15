@@ -76,7 +76,6 @@
 </template>
 
 <script>
-// TODO: Run `npm run test:watch` and check warnings
 import Vue from 'vue';
 import Clickoutside from 'element-ui/src/utils/clickoutside';
 import { formatDate, parseDate, isDateObject, getWeekNumber } from './util';
@@ -585,7 +584,7 @@ export default {
       }
     },
 
-    handleStartChange(event) {
+    handleStartChange() {
       const value = this.parseString(this.userInput && this.userInput[0]);
       if (value) {
         this.userInput = [this.formatToString(value), this.displayValue[1]];
@@ -598,7 +597,7 @@ export default {
       }
     },
 
-    handleEndChange(event) {
+    handleEndChange() {
       const value = this.parseString(this.userInput && this.userInput[1]);
       if (value) {
         this.userInput = [this.displayValue[0], this.formatToString(value)];

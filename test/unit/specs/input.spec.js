@@ -1,4 +1,3 @@
-// TODO: Run `npm run test:watch` and check warnings
 import { createVue, destroyVM } from '../util';
 
 describe('Input', () => {
@@ -155,7 +154,7 @@ describe('Input', () => {
     expect(limitlessSizeInput.textareaStyle.height).to.be.equal('201px');
 
     vm.textareaValue = '';
-    setTimeout(_ => {
+    setTimeout(() => {
       expect(limitSizeInput.textareaStyle.height).to.be.equal('75px');
       expect(limitlessSizeInput.textareaStyle.height).to.be.equal('33px');
       done();
@@ -175,7 +174,7 @@ describe('Input', () => {
     vm.$refs.input.$on('focus', spy);
     vm.$refs.input.focus();
 
-    vm.$nextTick(_ => {
+    vm.$nextTick(() => {
       expect(spy.calledOnce).to.be.true;
       done();
     });
@@ -201,7 +200,7 @@ describe('Input', () => {
       vm.$el.querySelector('input').focus();
       vm.$el.querySelector('input').blur();
 
-      vm.$nextTick(_ => {
+      vm.$nextTick(() => {
         expect(spyFocus.calledOnce).to.be.true;
         expect(spyBlur.calledOnce).to.be.true;
         done();
@@ -236,7 +235,7 @@ describe('Input', () => {
       // simplified test, component should emit change when native does
       simulateEvent('1', 'input');
       simulateEvent('2', 'change');
-      vm.$nextTick(_ => {
+      vm.$nextTick(() => {
         expect(spy.calledWith('2')).to.be.true;
         expect(spy.calledOnce).to.be.true;
         done();

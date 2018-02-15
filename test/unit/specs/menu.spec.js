@@ -1,4 +1,3 @@
-// TODO: Run `npm run test:watch` and check warnings
 import { createVue, triggerEvent, destroyVM } from '../util';
 
 describe('Menu', () => {
@@ -19,10 +18,10 @@ describe('Menu', () => {
     var item1 = vm.$refs.item1;
     var item2 = vm.$refs.item2;
     item1.$el.click();
-    setTimeout(_ => {
+    setTimeout(() => {
       expect(item1.$el.classList.contains('is-active')).to.be.true;
       item2.$el.click();
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(item2.$el.classList.contains('is-active')).to.be.true;
         done();
       }, 20);
@@ -51,7 +50,7 @@ describe('Menu', () => {
     var item1 = vm.$refs.item1;
     item1.$el.click();
 
-    setTimeout(_ => {
+    setTimeout(() => {
       expect(vm.clicksCount).to.be.equal(1);
       done();
     }, 20);
@@ -69,7 +68,7 @@ describe('Menu', () => {
       }, true);
       expect(vm.$refs.item2.$el.classList.contains('is-active')).to.be.true;
       vm.$refs.item1.$el.click();
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(vm.$refs.item1.$el.classList.contains('is-active')).to.be.true;
         done();
       }, 20);
@@ -88,9 +87,9 @@ describe('Menu', () => {
           };
         }
       }, true);
-      setTimeout(_ => {
+      setTimeout(() => {
         vm.active = '1';
-        setTimeout(_ => {
+        setTimeout(() => {
           expect(vm.$refs.item1.$el.classList.contains('is-active')).to.be.true;
           done();
         }, 20);
@@ -115,7 +114,7 @@ describe('Menu', () => {
       }, true);
       expect(vm.$refs.submenuItem2.$el.classList.contains('is-active')).to.be.true;
 
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(vm.$refs.submenu.$el.classList.contains('is-opened')).to.be.true;
         expect(vm.$refs.submenu.$el.classList.contains('is-active')).to.be.true;
         done();
@@ -140,7 +139,7 @@ describe('Menu', () => {
       }, true);
       expect(vm.$refs.submenuItem2.$el.classList.contains('is-active')).to.be.true;
 
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(vm.$refs.submenu.$el.classList.contains('is-opened')).to.be.true;
         expect(vm.$refs.submenu.$el.classList.contains('is-active')).to.be.true;
         done();
@@ -170,13 +169,13 @@ describe('Menu', () => {
       var submenuItem2 = vm.$refs.submenuItem2;
       var submenu = vm.$refs.submenu;
       submenu.$el.querySelector('.tm-submenu__title').click();
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(submenu.$el.classList.contains('is-opened')).to.be.true;
         submenuItem2.$el.click();
-        setTimeout(_ => {
+        setTimeout(() => {
           expect(submenuItem2.$el.classList.contains('is-active')).to.be.true;
           submenu.$el.querySelector('.tm-submenu__title').click();
-          setTimeout(_ => {
+          setTimeout(() => {
             expect(submenu.$el.classList.contains('is-opened')).to.not.true;
             done();
           }, 20);
@@ -211,7 +210,7 @@ describe('Menu', () => {
       expect(vm.$refs.submenu1.$el.classList.contains('is-opened')).to.be.true;
       expect(vm.$refs.submenu2.$el.classList.contains('is-opened')).to.be.true;
       vm.defaultOpeneds = ['2'];
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(vm.$refs.submenu1.$el.classList.contains('is-opened')).to.be.true;
         expect(vm.$refs.submenu2.$el.classList.contains('is-opened')).to.not.true;
         done();
@@ -243,7 +242,7 @@ describe('Menu', () => {
       }
     }, true);
     vm.$refs.submenu2.$el.querySelector('.tm-submenu__title').click();
-    setTimeout(_ => {
+    setTimeout(() => {
       expect(vm.$refs.submenu1.$el.classList.contains('is-opened')).to.not.true;
       done();
     }, 20);
@@ -270,7 +269,7 @@ describe('Menu', () => {
     expect(vm.$el.classList.contains('tm-menu--horizontal')).to.be.true;
     var submenu = vm.$refs.submenu;
     triggerEvent(submenu.$el, 'mouseenter');
-    setTimeout(_ => {
+    setTimeout(() => {
       expect(document.body.querySelector('.tm-menu--popup').parentElement.style.display).to.not.ok;
       done();
     }, 500);
@@ -301,10 +300,10 @@ describe('Menu', () => {
     triggerEvent(submenu.$el, 'mouseenter');
     triggerElm.click();
 
-    setTimeout(_ => {
+    setTimeout(() => {
       expect(document.body.querySelector('.tm-menu--popup').parentElement.style.display).to.not.ok;
       triggerElm.click();
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(document.body.querySelector('.tm-menu--popup').parentElement.style.display).to.be.equal('none');
         done();
       }, 1000);
@@ -350,14 +349,14 @@ describe('Menu', () => {
         };
       }
     }, true);
-    setTimeout(_ => {
+    setTimeout(() => {
       vm.active = '2';
       vm.menus = [
         {name: '1', description: 'happy'},
         {name: '2', description: 'new'},
         {name: '3', description: 'year'}
       ];
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(vm.$el.querySelector('.tm-menu-item.is-active').innerText).to.equal('new');
         done();
       }, 20);

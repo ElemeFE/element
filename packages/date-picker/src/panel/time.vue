@@ -31,7 +31,6 @@
 </template>
 
 <script type="text/babel">
-  // TODO: Run `npm run test:watch` and check warnings
   import { limitTimeRange, isDate, clearMilliseconds, timeWithinRange } from '../util';
   import Locale from 'element-ui/src/mixins/locale';
   import TimeSpinner from '../basic/time-spinner';
@@ -68,7 +67,7 @@
 
         this.date = date;
         if (this.visible && this.needInitAdjust) {
-          this.$nextTick(_ => this.adjustSpinners());
+          this.$nextTick(() => this.adjustSpinners());
           this.needInitAdjust = false;
         }
       },

@@ -1,4 +1,3 @@
-// TODO: Run `npm run test:watch` and check warnings
 import { createTest, destroyVM, createVue } from '../util';
 import TimePicker from 'packages/time-picker';
 
@@ -40,7 +39,7 @@ describe('TimePicker', () => {
     input.blur();
     input.focus();
 
-    setTimeout(_ => {
+    setTimeout(() => {
       const list = vm.picker.$el.querySelectorAll('.tm-time-spinner__list');
       const hoursEl = list[0];
       expect(hoursEl.querySelectorAll('.tm-time-spinner__item')[0].textContent).to.equal('12 AM');
@@ -62,7 +61,7 @@ describe('TimePicker', () => {
     input.focus();
     input.blur();
 
-    setTimeout(_ => {
+    setTimeout(() => {
       const times = vm.picker.$el.querySelectorAll('.active');
 
       expect(times[0].textContent).to.equal('18');
@@ -87,7 +86,7 @@ describe('TimePicker', () => {
     input.blur();
     input.focus();
 
-    setTimeout(_ => {
+    setTimeout(() => {
       const list = timePicker.picker.$el.querySelectorAll('.tm-time-spinner__list');
 
       const hoursEl = list[0];
@@ -99,11 +98,11 @@ describe('TimePicker', () => {
 
       // click hour, minute, second one at a time.
       hourEl.click();
-      vm.$nextTick(_ => {
+      vm.$nextTick(() => {
         minuteEl.click();
-        vm.$nextTick(_ => {
+        vm.$nextTick(() => {
           secondEl.click();
-          setTimeout(_ => {
+          setTimeout(() => {
             const date = timePicker.picker.date;
             expect(hourEl.classList.contains('active')).to.true;
             expect(minuteEl.classList.contains('active')).to.true;
@@ -133,10 +132,10 @@ describe('TimePicker', () => {
     input.blur();
     input.focus();
 
-    setTimeout(_ => {
+    setTimeout(() => {
       timePicker.picker.$el.querySelector('.tm-time-panel__btn.cancel').click();
 
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(vm.value).to.equal('');
         done();
       }, DELAY);
@@ -158,10 +157,10 @@ describe('TimePicker', () => {
     input.blur();
     input.focus();
 
-    setTimeout(_ => {
+    setTimeout(() => {
       timePicker.picker.$el.querySelector('.tm-time-panel__btn.confirm').click();
 
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(vm.value.toISOString()).to.exist;
         done();
       }, DELAY);
@@ -178,7 +177,7 @@ describe('TimePicker', () => {
     input.blur();
     input.focus();
 
-    setTimeout(_ => {
+    setTimeout(() => {
       expect(vm.picker.$el.querySelectorAll('.tm-time-spinner__wrapper')[2].style.display).to.equal('none');
       done();
     }, 20);
@@ -194,7 +193,7 @@ describe('TimePicker', () => {
     input.blur();
     input.focus();
 
-    setTimeout(_ => {
+    setTimeout(() => {
       expect(vm.picker.$el.querySelectorAll('.tm-time-spinner__wrapper')[2].style.display).to.equal('none');
       done();
     }, DELAY);
@@ -211,7 +210,7 @@ describe('TimePicker', () => {
     input.blur();
     input.focus();
 
-    setTimeout(_ => {
+    setTimeout(() => {
       const list = vm.picker.$el.querySelectorAll('.tm-time-spinner__list');
       const hoursEl = list[0];
       const disabledHours = [].slice
@@ -242,10 +241,10 @@ describe('TimePicker', () => {
     vm.$refs.picker.$on('blur', spyBlur);
     vm.$el.querySelector('input').focus();
 
-    vm.$nextTick(_ => {
+    vm.$nextTick(() => {
       expect(spyFocus.calledOnce).to.be.true;
       vm.$refs.picker.pickerVisible = false;
-      vm.$nextTick(_ => {
+      vm.$nextTick(() => {
         expect(spyBlur.calledOnce).to.be.true;
         done();
       });
@@ -268,7 +267,7 @@ describe('TimePicker', () => {
     vm.$refs.picker.$on('focus', spy);
     vm.$refs.picker.focus();
 
-    vm.$nextTick(_ => {
+    vm.$nextTick(() => {
       expect(spy.calledOnce).to.be.true;
       done();
     });
@@ -289,7 +288,7 @@ describe('TimePicker(range)', () => {
 
     vm.$el.querySelector('input').click();
 
-    setTimeout(_ => {
+    setTimeout(() => {
       expect(vm.picker.$el.querySelectorAll('.tm-time-range-picker__cell')).to.length(2);
       expect(vm.picker.minDate.getTime()).to.equal(new Date(2016, 9, 10, 18, 40).getTime());
       expect(vm.picker.maxDate.getTime()).to.equal(new Date(2016, 9, 10, 19, 40).getTime());
@@ -312,7 +311,7 @@ describe('TimePicker(range)', () => {
     const timePicker = vm.$refs.compo;
     timePicker.$el.querySelector('input').click();
 
-    setTimeout(_ => {
+    setTimeout(() => {
       expect(timePicker.picker.minDate.getTime()).to.equal(defaultValue[0].getTime());
       expect(timePicker.picker.maxDate.getTime()).to.equal(defaultValue[1].getTime());
       done();
@@ -331,9 +330,9 @@ describe('TimePicker(range)', () => {
 
     const timePicker = vm.$refs.compo;
     timePicker.$el.querySelector('input').click();
-    setTimeout(_ => {
+    setTimeout(() => {
       timePicker.picker.$el.querySelector('.cancel').click();
-      setTimeout(_ => {
+      setTimeout(() => {
         expect(timePicker.picker.visible).to.false;
         expect(vm.value).to.equal('');
         done();

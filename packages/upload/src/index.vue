@@ -1,5 +1,4 @@
 <script>
-// TODO: Run `npm run test:watch` and check warnings
 import UploadList from './upload-list';
 import Upload from './upload';
 import IframeUpload from './iframe-upload';
@@ -242,7 +241,7 @@ export default {
     }
   },
 
-  render(h) {
+  render() {
     let uploadList;
 
     if (this.showFileList) {

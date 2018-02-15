@@ -1,4 +1,3 @@
-// TODO: Run `npm run test:watch` and check warnings
 import { createVue, destroyVM } from '../util';
 
 const DELAY = 50;
@@ -130,7 +129,7 @@ describe('Form', () => {
     }, true);
     vm.$refs.form.validate(valid => {
       expect(valid).to.not.true;
-      vm.$refs.form.$nextTick(_ => {
+      vm.$refs.form.$nextTick(() => {
         expect(vm.$el.querySelector('.tm-form-item__error')).to.not.exist;
         done();
       });
@@ -186,7 +185,7 @@ describe('Form', () => {
     }, true);
     vm.setValue();
     vm.$refs.form.resetFields();
-    vm.$refs.form.$nextTick(_ => {
+    vm.$refs.form.$nextTick(() => {
       expect(vm.form.name).to.equal('');
       expect(vm.form.address).to.equal('');
       expect(vm.form.type.length).to.equal(0);
@@ -268,15 +267,15 @@ describe('Form', () => {
       vm.$refs.form.validate(valid => {
         let field = vm.$refs.field;
         expect(valid).to.not.true;
-        vm.$refs.form.$nextTick(_ => {
+        vm.$refs.form.$nextTick(() => {
           expect(field.validateMessage).to.equal('请输入活动名称');
           vm.setValue('aaaaa');
 
-          vm.$refs.form.$nextTick(_ => {
+          vm.$refs.form.$nextTick(() => {
             expect(field.validateMessage).to.equal('');
             vm.setValue('aa');
 
-            vm.$refs.form.$nextTick(_ => {
+            vm.$refs.form.$nextTick(() => {
               expect(field.validateMessage).to.equal('请输入活动名称');
               done();
             });
@@ -314,15 +313,15 @@ describe('Form', () => {
       vm.$refs.form.validate(valid => {
         let field = vm.$refs.field;
         expect(valid).to.not.true;
-        vm.$refs.form.$nextTick(_ => {
+        vm.$refs.form.$nextTick(() => {
           expect(field.validateMessage).to.equal('请输入活动名称');
           vm.setValue('aaaaa');
 
-          vm.$refs.form.$nextTick(_ => {
+          vm.$refs.form.$nextTick(() => {
             expect(field.validateMessage).to.equal('');
             vm.setValue('aa');
 
-            vm.$refs.form.$nextTick(_ => {
+            vm.$refs.form.$nextTick(() => {
               expect(field.validateMessage).to.equal('请输入活动名称');
               done();
             });
@@ -358,15 +357,15 @@ describe('Form', () => {
       vm.$refs.form.validate(valid => {
         let field = vm.$refs.field;
         expect(valid).to.false;
-        setTimeout(_ => {
+        setTimeout(() => {
           expect(field.validateMessage).to.equal('请选择活动区域');
           // programatic modification of bound value does not triggers change validation
           vm.form.region = 'shanghai';
-          setTimeout(_ => {
+          setTimeout(() => {
             expect(field.validateMessage).to.equal('请选择活动区域');
             // user modification of bound value triggers change validation
             vm.$refs.opt.$el.click();
-            setTimeout(_ => {
+            setTimeout(() => {
               expect(field.validateMessage).to.equal('');
               done();
             }, 100);
@@ -399,18 +398,18 @@ describe('Form', () => {
       vm.$refs.form.validate(valid => {
         let field = vm.$refs.field;
         expect(valid).to.not.true;
-        setTimeout(_ => {
+        setTimeout(() => {
           expect(field.validateMessage).to.equal('请选择日期');
           // programatic modification does not trigger change
           vm.value = new Date();
-          setTimeout(_ => {
+          setTimeout(() => {
             expect(field.validateMessage).to.equal('请选择日期');
             vm.value = '';
             // user modification triggers change
             const input = vm.$refs.picker.$el.querySelector('input');
             input.blur();
             input.focus();
-            setTimeout(_ => {
+            setTimeout(() => {
               const keyDown = (el, keyCode) => {
                 const evt = document.createEvent('Events');
                 evt.initEvent('keydown', true, true);
@@ -418,9 +417,9 @@ describe('Form', () => {
                 el.dispatchEvent(evt);
               };
               keyDown(input, 37);
-              setTimeout(_ => {
+              setTimeout(() => {
                 keyDown(input, 13);
-                setTimeout(_ => {
+                setTimeout(() => {
                   expect(field.validateMessage).to.equal('');
                   done();
                 }, DELAY);
@@ -455,20 +454,20 @@ describe('Form', () => {
       vm.$refs.form.validate(valid => {
         let field = vm.$refs.field;
         expect(valid).to.not.true;
-        setTimeout(_ => {
+        setTimeout(() => {
           expect(field.validateMessage).to.equal('请选择时间');
           // programatic modification does not trigger change
           vm.value = new Date();
-          setTimeout(_ => {
+          setTimeout(() => {
             expect(field.validateMessage).to.equal('请选择时间');
             vm.value = '';
             // user modification triggers change
             const input = vm.$refs.picker.$el.querySelector('input');
             input.blur();
             input.focus();
-            setTimeout(_ => {
+            setTimeout(() => {
               vm.$refs.picker.picker.$el.querySelector('.confirm').click();
-              setTimeout(_ => {
+              setTimeout(() => {
                 expect(field.validateMessage).to.equal('');
                 done();
               }, DELAY);
@@ -512,11 +511,11 @@ describe('Form', () => {
       vm.$refs.form.validate(valid => {
         let field = vm.$refs.field;
         expect(valid).to.not.true;
-        vm.$refs.form.$nextTick(_ => {
+        vm.$refs.form.$nextTick(() => {
           expect(field.validateMessage).to.equal('请选择活动类型');
           vm.setValue(['地推活动']);
 
-          vm.$refs.form.$nextTick(_ => {
+          vm.$refs.form.$nextTick(() => {
             expect(field.validateMessage).to.equal('');
             done();
           });
@@ -556,11 +555,11 @@ describe('Form', () => {
       vm.$refs.form.validate(valid => {
         let field = vm.$refs.field;
         expect(valid).to.not.true;
-        vm.$refs.form.$nextTick(_ => {
+        vm.$refs.form.$nextTick(() => {
           expect(field.validateMessage).to.equal('请选择活动类型');
           vm.setValue('线下场地免费');
 
-          vm.$refs.form.$nextTick(_ => {
+          vm.$refs.form.$nextTick(() => {
             expect(field.validateMessage).to.equal('');
             done();
           });
@@ -636,11 +635,11 @@ describe('Form', () => {
       vm.$refs.form.validate(valid => {
         let field = vm.$refs.field;
         expect(valid).to.not.true;
-        vm.$refs.form.$nextTick(_ => {
+        vm.$refs.form.$nextTick(() => {
           expect(field.validateMessage).to.equal('长度至少为5');
           vm.setValue('aaaaaa');
 
-          vm.$refs.form.$nextTick(_ => {
+          vm.$refs.form.$nextTick(() => {
             expect(field.validateMessage).to.equal('');
             done();
           });
@@ -680,7 +679,7 @@ describe('Form', () => {
         expect(valid).to.true;
         vm.error = '输入不合法';
 
-        vm.$refs.field.$nextTick(_ => {
+        vm.$refs.field.$nextTick(() => {
           expect(field.validateState).to.equal('error');
           expect(field.validateMessage).to.equal('输入不合法');
           done();

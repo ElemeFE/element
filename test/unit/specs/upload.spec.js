@@ -1,4 +1,3 @@
-// TODO: Run `npm run test:watch` and check warnings
 import { createVue, destroyVM } from '../util.js';
 import ajax from 'packages/upload/src/ajax';
 const noop = () => {
@@ -111,7 +110,7 @@ describe('Upload', () => {
 
     beforeEach(() => {
       uploader = createVue({
-        render(h) {
+        render() {
           return (
             <tm-upload {...props} ref="upload">
               <tm-button size="small" type="primary">点击上传</tm-button>
@@ -154,7 +153,7 @@ describe('Upload', () => {
       file.name = 'fail.png';
       const files = [file];
 
-      handlers.onError = (err, file, fileList) => {
+      handlers.onError = (err, file) => {
         expect(err instanceof Error).to.equal(true);
         expect(file.name).to.equal('fail.png');
         done();
@@ -178,8 +177,8 @@ describe('Upload', () => {
         done();
       };
 
-      handlers.onSuccess = (res, file, fileList) => {
-        uploader.$nextTick(_ => {
+      handlers.onSuccess = () => {
+        uploader.$nextTick(() => {
           uploader.$el.querySelector('.tm-upload-list .is-success a').click();
         });
       };
@@ -197,9 +196,9 @@ describe('Upload', () => {
       file.name = 'success.png';
       const files = [file];
 
-      handlers.onSuccess = (res, file, fileList) => {
+      handlers.onSuccess = () => {
         uploader.$el.querySelector('.tm-upload-list .tm-icon-close').click();
-        uploader.$nextTick(_ => {
+        uploader.$nextTick(() => {
           expect(uploader.fileList.length).to.equal(0);
           done();
         });
@@ -218,9 +217,9 @@ describe('Upload', () => {
       file.name = 'success.png';
       const files = [file];
 
-      handlers.onSuccess = (res, file, fileList) => {
+      handlers.onSuccess = () => {
         uploader.clearFiles();
-        uploader.$nextTick(_ => {
+        uploader.$nextTick(() => {
           expect(uploader.fileList.length).to.equal(0);
           done();
         });
@@ -247,14 +246,14 @@ describe('Upload', () => {
         type: 'xml'
       }];
 
-      handlers.onExceed = (files, fileList) => {
-        uploader.$nextTick(_ => {
+      handlers.onExceed = () => {
+        uploader.$nextTick(() => {
           expect(uploader.uploadFiles.length).to.equal(1);
           done();
         });
       };
 
-      uploader.$nextTick(_ => uploader.$refs['upload-inner'].handleChange({ target: { files }}));
+      uploader.$nextTick(() => uploader.$refs['upload-inner'].handleChange({ target: { files }}));
     });
   });
 });

@@ -1,5 +1,4 @@
 <script>
-  // TODO: Run `npm run test:watch` and check warnings
   import TabNav from './tab-nav';
 
   export default {
@@ -42,9 +41,9 @@
       value(value) {
         this.setCurrentName(value);
       },
-      currentName(value) {
+      currentName() {
         if (this.$refs.nav) {
-          this.$nextTick(_ => {
+          this.$nextTick(() => {
             this.$refs.nav.scrollToActiveTab();
           });
         }
@@ -85,7 +84,7 @@
         }
       }
     },
-    render(h) {
+    render() {
       let {
         type,
         handleTabClick,
