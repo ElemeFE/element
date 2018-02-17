@@ -15,6 +15,16 @@
   font-size: $--font-size-base;
   @include utils-user-select(none);
 
+  &:hover {
+    .tm-radio__inner {
+      border-color: $--color-text-primary;
+    }
+
+    .tm-radio__label {
+      color: $--color-text-regular;
+    }
+  }
+
   @include when(bordered) {
     padding: $--radio-bordered-padding;
     border-radius: $--border-radius-base;
@@ -28,7 +38,8 @@
 
     &.is-disabled {
       cursor: not-allowed;
-      border-color: $--border-color-lighter;
+      border-color: $--border-color-light;
+      background-color: $--color-primary-light-8;
     }
 
     & + .tm-radio.is-bordered {
@@ -41,12 +52,20 @@
       padding: $--radio-bordered-medium-padding;
       border-radius: $--button-medium-border-radius;
       height: $--radio-bordered-medium-height;
+
       .tm-radio__label {
         font-size: $--button-medium-font-size;
       }
+
       .tm-radio__inner {
         height: $--radio-bordered-medium-input-height;
         width: $--radio-bordered-medium-input-width;
+      }
+
+      &.is-checked {
+        .tm-radio__inner {
+          border-width: 5px;
+        }
       }
     }
   }
@@ -55,12 +74,20 @@
       padding: $--radio-bordered-small-padding;
       border-radius: $--button-small-border-radius;
       height: $--radio-bordered-small-height;
+
       .tm-radio__label {
         font-size: $--button-small-font-size;
       }
+
       .tm-radio__inner {
         height: $--radio-bordered-small-input-height;
         width: $--radio-bordered-small-input-width;
+      }
+
+      &.is-checked {
+        .tm-radio__inner {
+          border-width: 4px;
+        }
       }
     }
   }
@@ -94,14 +121,8 @@
 
     @include when(disabled) {
       .tm-radio__inner {
-        background-color: $--radio-disabled-input-fill;
         border-color: $--radio-disabled-input-border-color;
         cursor: not-allowed;
-
-        &::after {
-          cursor: not-allowed;
-          background-color: $--radio-disabled-icon-color;
-        }
 
         & + .tm-radio__label {
           cursor: not-allowed;
@@ -109,12 +130,7 @@
       }
       &.is-checked {
         .tm-radio__inner {
-          background-color: $--radio-disabled-checked-input-fill;
-          border-color: $--radio-disabled-checked-input-border-color;
-
-          &::after {
-            background-color: $--radio-disabled-checked-icon-color;
-          }
+          border-color: $--color-secondary-light-5;
         }
       }
       & + span.tm-radio__label {
@@ -125,8 +141,8 @@
 
     @include when(checked) {
       .tm-radio__inner {
+        border-width: $--border-width-radio-checked-base;
         border-color: $--radio-checked-input-border-color;
-        background: $--radio-checked-icon-color;
 
         &::after {
           transform: translate(-50%, -50%) scale(1);
@@ -134,7 +150,7 @@
       }
 
       & + .tm-radio__label {
-        color: $--radio-checked-text-color;
+        color: #000;
       }
     }
 
@@ -157,19 +173,6 @@
 
     &:hover {
       border-color: $--radio-input-border-color-hover;
-    }
-
-    &::after {
-      width: 4px;
-      height: 4px;
-      border-radius: $--radio-input-border-radius;
-      background-color: $--color-white;
-      content: "";
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      transition: transform .15s cubic-bezier(.71,-.46,.88,.6);
     }
   }
 

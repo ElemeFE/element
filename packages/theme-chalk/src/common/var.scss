@@ -15,15 +15,26 @@ $--color-white: #fff !default;
 $--color-black: #000 !default;
 
 $--color-primary: #cccccc !default;
-$--color-primary-light-1: mix($--color-white, $--color-primary, 10%) !default; /* 53a8ff */
-$--color-primary-light-2: mix($--color-white, $--color-primary, 20%) !default; /* 66b1ff */
-$--color-primary-light-3: mix($--color-white, $--color-primary, 30%) !default; /* 79bbff */
-$--color-primary-light-4: mix($--color-white, $--color-primary, 40%) !default; /* 8cc5ff */
-$--color-primary-light-5: mix($--color-white, $--color-primary, 50%) !default; /* a0cfff */
-$--color-primary-light-6: mix($--color-white, $--color-primary, 60%) !default; /* b3d8ff */
-$--color-primary-light-7: mix($--color-white, $--color-primary, 70%) !default; /* c6e2ff */
-$--color-primary-light-8: mix($--color-white, $--color-primary, 80%) !default; /* d9ecff */
-$--color-primary-light-9: mix($--color-white, $--color-primary, 90%) !default; /* ecf5ff */
+$--color-primary-light-1: mix($--color-white, $--color-primary, 10%) !default;
+$--color-primary-light-2: mix($--color-white, $--color-primary, 20%) !default;
+$--color-primary-light-3: mix($--color-white, $--color-primary, 30%) !default;
+$--color-primary-light-4: mix($--color-white, $--color-primary, 40%) !default;
+$--color-primary-light-5: mix($--color-white, $--color-primary, 50%) !default;
+$--color-primary-light-6: mix($--color-white, $--color-primary, 60%) !default;
+$--color-primary-light-7: mix($--color-white, $--color-primary, 70%) !default;
+$--color-primary-light-8: mix($--color-white, $--color-primary, 80%) !default;
+$--color-primary-light-9: mix($--color-white, $--color-primary, 90%) !default;
+
+$--color-secondary: #7f95e1 !default;
+$--color-secondary-light-1: mix($--color-white, $--color-secondary, 10%) !default;
+$--color-secondary-light-2: mix($--color-white, $--color-secondary, 20%) !default;
+$--color-secondary-light-3: mix($--color-white, $--color-secondary, 30%) !default;
+$--color-secondary-light-4: mix($--color-white, $--color-secondary, 40%) !default;
+$--color-secondary-light-5: mix($--color-white, $--color-secondary, 50%) !default;
+$--color-secondary-light-6: mix($--color-white, $--color-secondary, 60%) !default;
+$--color-secondary-light-7: mix($--color-white, $--color-secondary, 70%) !default;
+$--color-secondary-light-8: mix($--color-white, $--color-secondary, 80%) !default;
+$--color-secondary-light-9: mix($--color-white, $--color-secondary, 90%) !default;
 
 $--color-success: #67c23a !default;
 $--color-warning: #e6a23c !default;
@@ -57,13 +68,16 @@ $--background-color-base: #f4f5f9 !default;
 /* Border
 -------------------------- */
 $--border-width-base: 1px !default;
+$--border-width-radio-base: 2px !default;
+$--border-width-radio-checked-base: 6px !default;
 $--border-style-base: solid !default;
-$--border-color-base: #cccccc !default;
-$--border-color-light: #e4e7ed !default;
-$--border-color-lighter: #ebeef5 !default;
-$--border-color-extra-light: #f2f6fc !default;
+$--border-color-base: $--color-text-placeholder !default;
+$--border-color-light: mix($--color-white, $--border-color-base, 20%) !default;
+$--border-color-lighter: mix($--color-white, $--border-color-base, 50%) !default;
+$--border-color-extra-light: mix($--color-white, $--border-color-base, 80%) !default;
 $--border-color-hover: $--color-text-placeholder !default;
 $--border-base: $--border-width-base $--border-style-base $--border-color-base !default;
+$--border-radio-base: $--border-width-radio-base $--border-style-base $--border-color-base !default;
 $--border-radius-base: 6px !default;
 $--border-radius-small: 2px !default;
 $--border-radius-circle: 100% !default;
@@ -163,12 +177,12 @@ $--checkbox-button-checked-border-color: $--color-primary !default;
 -------------------------- */
 $--radio-font-size: 14px !default;
 $--radio-font-weight: $--font-weight-primary !default;
-$--radio-color: $--color-text-regular !default;
-$--radio-input-height: 14px !default;
-$--radio-input-width: 14px !default;
+$--radio-color: $--color-text-primary !default;
+$--radio-input-height: 18px !default;
+$--radio-input-width: 18px !default;
 $--radio-input-border-radius: $--border-radius-circle !default;
 $--radio-input-fill: $--color-white !default;
-$--radio-input-border: $--border-base !default;
+$--radio-input-border: $--border-radio-base !default;
 $--radio-input-border-color: $--border-color-base !default;
 $--radio-icon-color: $--color-white !default;
 
@@ -181,9 +195,9 @@ $--radio-disabled-checked-input-fill: $--disabled-fill-base !default;
 $--radio-disabled-checked-icon-color: $--color-text-placeholder !default;
 
 $--radio-checked-text-color: $--color-primary !default;
-$--radio-checked-input-border-color: $--color-primary !default;
+$--radio-checked-input-border-color: $--color-text-secondary !default;
 $--radio-checked-input-fill: $--color-white !default;
-$--radio-checked-icon-color: $--color-primary !default;
+$--radio-checked-icon-color: $--color-text-secondary !default;
 
 $--radio-input-border-color-hover: $--color-primary !default;
 
@@ -203,10 +217,10 @@ $--radio-bordered-mini-input-width: 12px !default;
 $--radio-bordered-mini-height: 28px !default;
 
 $--radio-button-font-size: $--font-size-base !default;
-$--radio-button-checked-fill: $--color-primary !default;
+$--radio-button-checked-fill: $--color-text-secondary !default;
 $--radio-button-checked-color: $--color-white !default;
-$--radio-button-checked-border-color: $--color-primary !default;
-$--radio-button-disabled-checked-fill: $--border-color-extra-light !default;
+$--radio-button-checked-border-color: $--color-text-secondary !default;
+$--radio-button-disabled-checked-fill: $--color-secondary-light-5 !default;
 
 /* Select
 -------------------------- */
@@ -421,9 +435,9 @@ $--button-default-color: $--color-text-regular !default;
 $--button-default-fill: $--color-white !default;
 $--button-default-border: $--border-color-base !default;
 
-$--button-disabled-color: $--color-text-placeholder !default;
-$--button-disabled-fill: $--color-white !default;
-$--button-disabled-border: $--border-color-lighter !default;
+$--button-disabled-color: $--color-white !default;
+$--button-disabled-fill: $--color-primary-light-5 !default;
+$--button-disabled-border: $--color-primary-light-2 !default;
 
 $--button-primary-border: $--color-primary !default;
 $--button-primary-color: $--color-white !default;

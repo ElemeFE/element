@@ -16,7 +16,7 @@
     border: $--border-base;
     font-weight: $--button-font-weight;
     border-left: 0;
-    color: $--button-default-color;
+    color: $--color-text-primary;
     -webkit-appearance: none;
     text-align: center;
     box-sizing: border-box;
@@ -29,7 +29,7 @@
     @include button-size($--button-padding-vertical, $--button-padding-horizontal, $--button-font-size, 0);
 
     &:hover {
-      color: $--color-primary;
+      color: $--color-text-regular;
     }
 
     & [class*="tm-icon-"] {
@@ -66,8 +66,10 @@
         border-color: $--button-disabled-border;
         box-shadow: none;
       }
+
       &:checked + .tm-radio-button__inner {
         background-color: $--radio-button-disabled-checked-fill;
+        border-color: $--color-secondary-light-2;
       }
     }
   }
