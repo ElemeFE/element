@@ -68,6 +68,8 @@ $--background-color-base: #f4f5f9 !default;
 /* Border
 -------------------------- */
 $--border-width-base: 1px !default;
+$--border-width-radio-base: 2px !default;
+$--border-width-radio-checked-base: 6px !default;
 $--border-style-base: solid !default;
 $--border-color-base: $--color-text-placeholder !default;
 $--border-color-light: mix($--color-white, $--border-color-base, 20%) !default;
@@ -75,6 +77,7 @@ $--border-color-lighter: mix($--color-white, $--border-color-base, 50%) !default
 $--border-color-extra-light: mix($--color-white, $--border-color-base, 80%) !default;
 $--border-color-hover: $--color-text-placeholder !default;
 $--border-base: $--border-width-base $--border-style-base $--border-color-base !default;
+$--border-radio-base: $--border-width-radio-base $--border-style-base $--border-color-base !default;
 $--border-radius-base: 6px !default;
 $--border-radius-small: 2px !default;
 $--border-radius-circle: 100% !default;
@@ -179,7 +182,7 @@ $--radio-input-height: 18px !default;
 $--radio-input-width: 18px !default;
 $--radio-input-border-radius: $--border-radius-circle !default;
 $--radio-input-fill: $--color-white !default;
-$--radio-input-border: $--border-base !default;
+$--radio-input-border: $--border-radio-base !default;
 $--radio-input-border-color: $--border-color-base !default;
 $--radio-icon-color: $--color-white !default;
 
