@@ -16,12 +16,7 @@
       ref="control"
       :class="{ 'is-fixed': fixedControl }"
       @click="isExpanded = !isExpanded">
-      <transition name="arrow-slide">
-        <i :class="[iconClass, { 'hovering': hovering }]"></i>
-      </transition>
-      <transition name="text-slide">
-        <span v-show="hovering">{{ controlText }}</span>
-      </transition>
+      <span>{{ controlText }}</span>
       <tm-tooltip effect="dark" :content="langConfig['tooltip-text']" placement="right">
         <transition name="text-slide">
           <tm-button
@@ -258,10 +253,6 @@
 
       blockClass() {
         return `demo-${ this.lang } demo-${ this.$router.currentRoute.path.split('/').pop() }`;
-      },
-
-      iconClass() {
-        return this.isExpanded ? 'tm-icon-caret-top' : 'tm-icon-caret-bottom';
       },
 
       controlText() {
