@@ -20,12 +20,19 @@
     :validateEvent="false"
     :prefix-icon="triggerClass"
     ref="reference">
-    <i slot="suffix"
-      class="tm-input__icon"
-      @click="handleClickIcon"
-      :class="[showClose ? '' + clearIcon : '']"
-      v-if="haveTrigger">
-    </i>
+    <tm-icon :iconName="clearIcon"
+             slot="suffix"
+             :onClick="handleClickIcon"
+             v-show="showClose"
+             v-if="haveTrigger">
+    </tm-icon>
+    <!--<i slot="suffix"-->
+       <!--class="tm-icon-cross"-->
+       <!--@click="handleClickIcon"-->
+       <!--v-show="showClose"-->
+       <!--v-if="haveTrigger">-->
+    <!--</i>-->
+    <!--v-if="haveTrigger && showClose"-->
   </tm-input>
   <div
     class="tm-date-editor tm-range-editor tm-input__inner"
@@ -317,7 +324,7 @@ export default {
     prefixIcon: String,
     clearIcon: {
       type: String,
-      default: 'tm-icon-circle-close'
+      default: 'cross'
     },
     name: {
       default: '',

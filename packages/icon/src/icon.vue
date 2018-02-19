@@ -1,7 +1,7 @@
 <template>
-  <svg class="tm-icon">
-    <use :xlink:href="'#icon-' + name"></use>
-  </svg>
+  <i :class="className" @click="onClick">
+    <svg><use :xlink:href="'#icon-' + iconName"></use></svg>
+  </i>
 </template>
 
 <script>
@@ -9,7 +9,22 @@
     name: 'TmIcon',
 
     props: {
-      name: String
+      iconName: String,
+      iconClass: {
+        type: String,
+        default: ''
+      },
+      onClick: {
+        type: Function,
+        default: () => {
+          console.log('helllo biyatch');
+        }
+      }
+    },
+    computed: {
+      className() {
+        return 'tm-icon tm-icon-' + this.iconName + ' ' + this.iconClass;
+      }
     }
   };
 </script>
