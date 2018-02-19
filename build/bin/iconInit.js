@@ -10,7 +10,7 @@ var classList = [];
 var iconsDir = fs.readdirSync(path.resolve(__dirname, '../../packages/theme-chalk/src/icons'));
 
 iconsDir.forEach(file => {
-   classList.push(file.replace('.svg', ''));
+  classList.push(file.replace('.svg', ''));
 });
 
 // nodes.forEach((node) => {
