@@ -128,28 +128,28 @@ $--icon-color-base: $--color-info !default;
 $--checkbox-font-size: 14px !default;
 $--checkbox-font-weight: $--font-weight-primary !default;
 $--checkbox-color: $--color-text-regular !default;
-$--checkbox-input-height: 14px !default;
-$--checkbox-input-width: 14px !default;
+$--checkbox-input-height: 18px !default;
+$--checkbox-input-width: 18px !default;
 $--checkbox-input-border-radius: $--border-radius-small !default;
 $--checkbox-input-fill: $--color-white !default;
 $--checkbox-input-border: $--border-base !default;
 $--checkbox-input-border-color: $--border-color-base !default;
 $--checkbox-icon-color: $--color-white !default;
 
-$--checkbox-disabled-input-border-color: $--border-color-base !default;
-$--checkbox-disabled-input-fill: #edf2fc !default;
-$--checkbox-disabled-icon-color: $--color-text-placeholder !default;
+$--checkbox-disabled-input-border-color: $--color-primary-light-8 !default;
+$--checkbox-disabled-input-fill: $--color-primary-light-8 !default;
+$--checkbox-disabled-icon-color: $--disabled-fill-base !default;
 
-$--checkbox-disabled-checked-input-fill: $--border-color-extra-light !default;
-$--checkbox-disabled-checked-input-border-color: $--border-color-base !default;
-$--checkbox-disabled-checked-icon-color: $--color-text-placeholder !default;
+$--checkbox-disabled-checked-input-fill: $--color-secondary-light-8 !default;
+$--checkbox-disabled-checked-input-border-color: $--color-secondary-light-8 !default;
+$--checkbox-disabled-checked-icon-color: $--color-white !default;
 
-$--checkbox-checked-text-color: $--color-primary !default;
-$--checkbox-checked-input-border-color: $--color-primary !default;
-$--checkbox-checked-input-fill: $--color-primary !default;
+$--checkbox-checked-text-color: $--color-text-regular !default;
+$--checkbox-checked-input-border-color: $--color-secondary !default;
+$--checkbox-checked-input-fill: $--color-secondary !default;
 $--checkbox-checked-icon-color: $--fill-base !default;
 
-$--checkbox-input-border-color-hover: $--color-primary !default;
+$--checkbox-input-border-color-hover: $--color-text-regular !default;
 
 $--checkbox-bordered-height: 40px !default;
 $--checkbox-bordered-padding: 9px 20px 9px 10px !default;
@@ -167,9 +167,9 @@ $--checkbox-bordered-mini-input-width: 12px !default;
 $--checkbox-bordered-mini-height: 28px !default;
 
 $--checkbox-button-font-size: $--font-size-base !default;
-$--checkbox-button-checked-fill: $--color-primary !default;
+$--checkbox-button-checked-fill: $--color-secondary !default;
 $--checkbox-button-checked-color: $--color-white !default;
-$--checkbox-button-checked-border-color: $--color-primary !default;
+$--checkbox-button-checked-border-color: $--color-secondary !default;
 
 
 
