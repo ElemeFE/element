@@ -25,50 +25,50 @@
     }
   }
   .bg-blue {
-    background-color: #5E82FC;
+    background-color: #7f95e1;
   }
   .bg-green {
-    background-color: #7DCB46;
+    background-color: #5dc376;
   }
   .bg-red {
-    background-color: #EC5657;
+    background-color: #ec5657;
   }
   .bg-brown {
-    background-color: #EBB242;
+    background-color: #ebb242;
   }
   .bg-smoke {
-    color: #4A4E59;
-    background-color: #F4F5F9;
+    color: #1e1e28;
+    background-color: #f4f5f9;
   }
 
   .bg-success {
-    background-color: #13CE66;
+    background-color: #5dc376;
   }
   .bg-warning {
-    background-color: #f7ba2a;
+    background-color: #ebb242;
   }
   .bg-danger {
-    background-color: #ff4949;
+    background-color: #ec5657;
   }
   .bg-info {
-    background-color: #909399;
+    background-color: #7f95e1;
   }
 
   .bg-text-darkest {
-    background-color: #1E1E28;
+    background-color: #1e1e28;
   }
   .bg-text-dark {
-    background-color: #4A4E59;
+    background-color: #3f4557;
   }
   .bg-text-medium {
     background-color: #909090;
   }
   .bg-text-light {
-    background-color: #CCCCCC;
+    background-color: #cccccc;
   }
   .bg-text-white {
     color: #4A4E59;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
   }
 
   [class*=" bg-border-"] {
@@ -85,19 +85,19 @@ The main color of Element is bright and friendly blue.
 
 <tm-row :gutter="10">
   <tm-col :span="4">
-    <div class="demo-color-box bg-blue">Blueberry<div class="value">#5E82FC</div></div>
+    <div class="demo-color-box bg-blue">Blueberry<div class="value">#7f95e1</div></div>
   </tm-col>
   <tm-col :span="4">
-    <div class="demo-color-box bg-green">Mantis<div class="value">#7DCB46</div></div>
+    <div class="demo-color-box bg-green">Mantis<div class="value">#5dc376</div></div>
   </tm-col>
   <tm-col :span="4">
-    <div class="demo-color-box bg-red">Sunset Orange<div class="value">#EC5657</div></div>
+    <div class="demo-color-box bg-red">Sunset Orange<div class="value">#ec5657</div></div>
   </tm-col>
   <tm-col :span="4">
-    <div class="demo-color-box bg-brown">Meat Brown<div class="value">#EBB242</div></div>
+    <div class="demo-color-box bg-brown">Meat Brown<div class="value">#ebb242</div></div>
   </tm-col>
   <tm-col :span="4">
-    <div class="demo-color-box bg-smoke">White Smoke<div class="value">#F4F5F9</div></div>
+    <div class="demo-color-box bg-smoke">White Smoke<div class="value">#f4f5f9</div></div>
   </tm-col>
 </tm-row>
 
@@ -107,18 +107,18 @@ Text colors are for text.
 
 <tm-row :gutter="10">
   <tm-col :span="4">
-    <div class="demo-color-box bg-text-darkest">Dark Gunmetal<div class="value">#1E1E28</div></div>
+    <div class="demo-color-box bg-text-darkest">Dark Gunmetal<div class="value">#1e1e28</div></div>
   </tm-col>
   <tm-col :span="4">
-    <div class="demo-color-box bg-text-dark">Davy's Grey<div class="value">#4A4E59</div></div>
+    <div class="demo-color-box bg-text-dark">Davy's Grey<div class="value">#3f4557</div></div>
   </tm-col>
   <tm-col :span="4">
     <div class="demo-color-box bg-text-medium">Taupe Gray<div class="value">#909090</div></div>
   </tm-col>
   <tm-col :span="4">
-    <div class="demo-color-box bg-text-light">Pastel Gray<div class="value">#CCCCCC</div></div>
+    <div class="demo-color-box bg-text-light">Pastel Gray<div class="value">#cccccc</div></div>
   </tm-col>
   <tm-col :span="4">
-    <div class="demo-color-box bg-text-white">White<div class="value">#FFFFFF</div></div>
+    <div class="demo-color-box bg-text-white">White<div class="value">#ffffff</div></div>
   </tm-col>
 </tm-row>
