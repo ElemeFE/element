@@ -70,12 +70,12 @@ TM-Ui provides a set of common icons. It uses a svg-sprite so you are able to ch
 
 ### Basic usage
 
-Just use a `tm-icon` component with `name` parameter.
+Just use a `tm-icon` component with `icon-name` parameter.
 
 :::demo
 
 ```html
-Oh my god, it's a non-jingle <tm-icon name="bell"></tm-icon> !
+Oh my god, it's an airplane - <tm-icon icon-name="airplane"></tm-icon> !
 ```
 :::
 
@@ -89,7 +89,7 @@ Here is a list of our default SVG icons.
 <ul class="icon-list">
   <li v-for="name in icons" :key="name">
     <span>
-      <tm-icon :name="name"></tm-icon>
+      <tm-icon :icon-name="name"></tm-icon>
       <span class="icon-name">{{name}}</span>
     </span>
   </li>
