@@ -13,6 +13,12 @@
   white-space: nowrap;
   user-select: none;
 
+  &:hover {
+    .tm-checkbox__inner {
+      border-color: $--checkbox-input-border-color-hover;
+    }
+  }
+
   @include when(bordered) {
     padding: $--checkbox-bordered-padding;
     border-radius: $--border-radius-base;
@@ -47,6 +53,13 @@
       .tm-checkbox__inner {
         height: $--checkbox-bordered-medium-input-height;
         width: $--checkbox-bordered-medium-input-width;
+
+        &::after {
+          top: 1px;
+          left: 4px;
+          height: 6px;
+          width: 3px;
+        }
       }
     }
 
@@ -65,8 +78,11 @@
         width: $--checkbox-bordered-small-input-width;
 
         &::after {
+          top: 1px;
+          left: 4px;
           height: 6px;
           width: 2px;
+          border-width: 1px;
         }
       }
     }
@@ -162,7 +178,7 @@
     }
     @include when(focus) { /*focus时 视觉上区分*/
       .tm-checkbox__inner {
-        border-color: $--checkbox-input-border-color-hover;
+        border-color: $--border-base;
       }
     }
     @include when(indeterminate) {
@@ -201,22 +217,18 @@
     transition: border-color .25s cubic-bezier(.71,-.46,.29,1.46),
     background-color .25s cubic-bezier(.71,-.46,.29,1.46);
 
-    &:hover {
-      border-color: $--checkbox-input-border-color-hover;
-    }
-
     &::after {
       box-sizing: content-box;
       content: "";
-      border: 1px solid $--checkbox-checked-icon-color;
+      border: 2px solid $--checkbox-checked-icon-color;
       border-left: 0;
       border-top: 0;
-      height: 7px;
-      left: 4px;
+      height: 8px;
+      left: 5px;
       position: absolute;
-      top: 1px;
+      top: 2px;
       transform: rotate(45deg) scaleY(0);
-      width: 3px;
+      width: 4px;
       transition: transform .15s cubic-bezier(.71,-.46,.88,.6) .05s;
       transform-origin: center;
     }
@@ -258,7 +270,7 @@
     background: $--button-default-fill;
     border: $--border-base;
     border-left: 0;
-    color: $--button-default-color;
+    color: $--color-text-placeholder;
     -webkit-appearance: none;
     text-align: center;
     box-sizing: border-box;
@@ -271,7 +283,7 @@
     @include button-size($--button-padding-vertical, $--button-padding-horizontal, $--button-font-size, 0);
 
     &:hover {
-      color: $--color-primary;
+      color: $--color-text-regular;
     }
 
     & [class*="tm-icon-"] {
@@ -321,7 +333,7 @@
 
   &.is-focus {
     & .tm-checkbox-button__inner {
-      border-color: $--checkbox-button-checked-border-color;
+      border-color: $--border-color-base;
     }
   }
 
