@@ -97,6 +97,7 @@ $--border-radius-circle: 100% !default;
 $--box-shadow-base: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04) !default;
 $--box-shadow-dark: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .12) !default;
 $--box-shadow-light: 0 2px 12px 0 rgba(0, 0, 0, 0.1) !default;
+$--box-shadow-popover: 0 2px 8px 0 rgba(0, 0, 0, 0.24) !default;
 
 /* Fill
 -------------------------- */
@@ -530,11 +531,12 @@ $--pagination-hover-color: $--color-white !default;
 $--popover-fill: $--color-white !default;
 $--popover-font-size: $--font-size-base !default;
 $--popover-border-color: $--border-color-lighter !default;
-$--popover-arrow-size: 6px !default;
-$--popover-padding: 12px !default;
+$--popover-arrow-size: 8px !default;
+$--popover-padding: 24px 27px 15px 26px !default;
 $--popover-padding-large: 18px 20px !default;
 $--popover-title-font-size: 16px !default;
 $--popover-title-color: $--color-text-primary !default;
+$--popover-border-radius: 5px !default;
 
 /* Tooltip
 -------------------------- */

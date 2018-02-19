@@ -6,7 +6,7 @@
   position: absolute;
   background: $--popover-fill;
   min-width: 150px;
-  border-radius: 4px;
+  border-radius: $--popover-border-radius;
   border: 1px solid $--popover-border-color;
   padding: $--popover-padding;
   z-index: $--index-popper;
@@ -14,11 +14,7 @@
   line-height: 1.4;
   text-align: justify;
   font-size: $--popover-font-size;
-  box-shadow: $--box-shadow-light;
-
-  @include m(plain) {
-    padding: $--popover-padding-large;
-  }
+  box-shadow: $--box-shadow-popover;
 
   @include e(title) {
     color: $--popover-title-color;
