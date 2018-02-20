@@ -165,25 +165,36 @@
        }
     }
 
-    i {
-      transition: .2s;
-      font-size: 12px;
-      color: #979797;
-      transform: translateY(-2px);
+    .tm-icon {
+      fill: #979797;
+
+      svg {
+        width: 12px;
+        height: 12px;
+        transition: .2s;
+        transform: translateY(-2px);
+      }
     }
 
     @when active {
       span, i {
         color: #409EFF;
       }
-      i {
-        transform: rotateZ(180deg) translateY(3px);
+      .tm-icon {
+        fill: #409EFF;
+
+        svg {
+          transform: rotateZ(180deg) translateY(3px);
+        }
       }
     }
 
     &:hover {
       span, i {
         color: #409EFF;
+      }
+      .tm-icon {
+        fill: #409EFF;
       }
     }
   }
@@ -314,7 +325,7 @@
               :class="{ 'is-active': verDropdownVisible }">
               <span>
                 {{ version }}
-                <i class="tm-icon-arrow-down tm-icon--right"></i>
+                <tm-icon class="tm-icon--right" name="arrow-down"></tm-icon>
               </span>
               <tm-dropdown-menu
                 slot="dropdown"

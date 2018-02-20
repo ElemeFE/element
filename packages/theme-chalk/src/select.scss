@@ -25,7 +25,7 @@
     &:hover {
       & + .tm-input__suffix .tm-select__caret,
       & + .tm-input__prefix .tm-select__caret {
-        color: $--select-icon-hover-color;
+        fill: $--select-icon-hover-color;
       }
     }
 
@@ -36,15 +36,22 @@
 
   .tm-input {
     & .tm-select__caret {
-      color: $--select-input-color;
+      fill: $--select-input-color;
       font-size: $--select-input-font-size;
-      transition: transform .3s;
-      transform: rotateZ(180deg);
-      line-height: 16px;
+      line-height: 42px;
       cursor: pointer;
 
-      @include when(reverse) {
+      svg {
+        width: 12px;
+        height: 12px;
+        transition: transform .3s;
         transform: rotateZ(0deg);
+      }
+
+      @include when(reverse) {
+        svg {
+          transform: rotateZ(180deg);
+        }
       }
 
       @include when(show-close) {
@@ -81,7 +88,7 @@
 
       & + .tm-input__suffix .tm-select__caret,
       & + .tm-input__prefix .tm-select__caret {
-        color: $--select-icon-hover-color;
+        fill: $--select-icon-hover-color;
       }
     }
   }
@@ -146,15 +153,10 @@
       background-color: $--color-text-placeholder;
       right: -7px;
       top: 0;
-      color: $--color-white;
+      fill: $--color-white;
 
       &:hover {
         background-color: $--color-text-secondary;
-      }
-
-      &::before {
-        display: block;
-        transform: translate(0, .5px);
       }
     }
   }

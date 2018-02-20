@@ -12,7 +12,9 @@
         wrap-class="tm-autocomplete-suggestion__wrap"
         view-class="tm-autocomplete-suggestion__list"
       >
-        <li v-if="parent.loading"><i class="tm-icon-loading"></i></li>
+        <li v-if="parent.loading">
+          <tm-icon name="loader"></tm-icon>
+        </li>
         <slot v-else>
         </slot>
       </tm-scrollbar>

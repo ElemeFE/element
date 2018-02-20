@@ -1,6 +1,6 @@
 <template>
   <i :class="className" @click="onClick">
-    <svg><use :xlink:href="'#icon-' + iconName"></use></svg>
+    <svg><use :xlink:href="'#icon-' + name"></use></svg>
   </i>
 </template>
 
@@ -9,21 +9,22 @@
     name: 'TmIcon',
 
     props: {
-      iconName: String,
-      iconClass: {
-        type: String,
-        default: ''
-      },
+      name: String,
       onClick: {
         type: Function,
-        default: () => {
-          console.log('helllo biyatch');
-        }
+        default: () => {}
       }
     },
     computed: {
       className() {
-        return 'tm-icon tm-icon-' + this.iconName + ' ' + this.iconClass;
+        let className = 'tm-icon';
+        if (this.name) {
+          className += ' tm-icon-' + this.name;
+          if (this.name === 'loader') {
+            className += ' tm-icon-loading';
+          }
+        }
+        return className;
       }
     }
   };

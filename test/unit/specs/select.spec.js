@@ -284,7 +284,7 @@ describe('Select', () => {
     select.inputHovering = true;
     setTimeout(() => {
       const icon = vm.$el.querySelector('.tm-input__icon');
-      expect(icon.classList.contains('tm-icon-circle-close')).to.true;
+      expect(icon.classList.contains('tm-icon-cross')).to.true;
       icon.click();
       expect(vm.value).to.equal('');
       done();
