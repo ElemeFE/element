@@ -37,10 +37,10 @@
       <!-- 前置内容 -->
       <span class="tm-input__prefix" v-if="$slots.prefix || prefixIcon" :style="prefixOffset">
         <slot name="prefix"></slot>
-        <i class="tm-input__icon"
-           v-if="prefixIcon"
-           :class="prefixIcon">
-        </i>
+        <tm-icon class="tm-input__icon"
+                 v-if="prefixIcon"
+                 :name="prefixIcon">
+        </tm-icon>
       </span>
       <!-- 后置内容 -->
       <span
@@ -50,20 +50,21 @@
         <span class="tm-input__suffix-inner">
           <template v-if="!showClear">
             <slot name="suffix"></slot>
-            <i class="tm-input__icon"
-              v-if="suffixIcon"
-              :class="suffixIcon">
-            </i>
+            <tm-icon class="tm-input__icon"
+                     v-if="suffixIcon"
+                     :name="suffixIcon">
+            </tm-icon>
           </template>
-          <i v-else
-            class="tm-input__icon tm-icon-circle-close tm-input__clear"
-            @click="clear"
-          ></i>
+          <tm-icon v-else
+                   name="cross"
+                   class="tm-input__icon tm-input__clear"
+                   :on-click="clear">
+          </tm-icon>
         </span>
-        <i class="tm-input__icon"
-          v-if="validateState"
-          :class="['tm-input__validateIcon', validateIcon]">
-        </i>
+        <tm-icon class="tm-input__icon"
+                 v-if="validateState"
+                 :icon="validateIcon">
+        </tm-icon>
       </span>
       <!-- 后置元素 -->
       <div class="tm-input-group__append" v-if="$slots.append">
@@ -179,9 +180,9 @@
       },
       validateIcon() {
         return {
-          validating: 'tm-icon-loading',
-          success: 'tm-icon-circle-check',
-          error: 'tm-icon-circle-close'
+          validating: 'loader',
+          success: 'check',
+          error: 'cross'
         }[this.validateState];
       },
       textareaStyle() {

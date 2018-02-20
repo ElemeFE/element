@@ -20,7 +20,7 @@
     :validateEvent="false"
     :prefix-icon="triggerClass"
     ref="reference">
-    <tm-icon :iconName="clearIcon"
+    <tm-icon :name="clearIcon"
              slot="suffix"
              :onClick="handleClickIcon"
              v-show="showClose"

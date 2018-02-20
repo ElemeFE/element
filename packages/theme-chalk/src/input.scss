@@ -58,14 +58,19 @@
   @include scroll-bar;
 
   & .tm-input__clear {
-    color: $--input-icon-color;
+    fill: $--input-icon-color;
     font-size: $--input-font-size;
-    line-height: 16px;
+    line-height: $--input-height+2;
     cursor: pointer;
     transition: $--color-transition-base;
 
     &:hover {
-      color: $--input-clear-hover-color;
+      fill: $--input-clear-hover-color;
+    }
+
+    svg {
+      width: $--icon-size-small;
+      height: $--icon-size-small;
     }
   }
 
@@ -96,6 +101,10 @@
       & + .tm-input__suffix,
       & + .tm-input__prefix {
         color: $--input-icon-hover-color;
+
+        .tm-icon {
+          fill: $--input-icon-hover-color;
+        }
       }
     }
 
@@ -106,6 +115,10 @@
       & + .tm-input__suffix,
       & + .tm-input__prefix {
         color: $--input-icon-focus-color;
+
+        .tm-icon {
+          fill: $--input-icon-focus-color;
+        }
       }
     }
   }
@@ -119,6 +132,10 @@
     color: $--input-icon-color;
     transition: all .3s;
     pointer-events: none;
+
+    .tm-icon {
+      fill: $--input-icon-color;
+    }
   }
 
   @include e(suffix-inner) {
@@ -133,6 +150,10 @@
     text-align: center;
     color: $--input-icon-color;
     transition: all .3s;
+
+    .tm-icon {
+      fill: $--input-icon-color;
+    }
   }
 
   @include e(icon) {
@@ -140,14 +161,11 @@
     width: 25px;
     text-align: center;
     transition: all .3s;
-    line-height: $--input-height;
+    line-height: $--input-height+4;
 
-    &:after {
-      content: '';
-      height: 100%;
-      width: 0;
-      display: inline-block;
-      vertical-align: middle;
+    svg {
+      width: $--icon-size-base;
+      height: $--icon-size-base;
     }
   }
 
