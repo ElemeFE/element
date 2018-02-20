@@ -89,10 +89,11 @@
       @paste.native="debouncedOnInputChange"
       @mouseenter.native="inputHovering = true"
       @mouseleave.native="inputHovering = false">
-      <i slot="suffix"
-       :class="['tm-select__caret', 'tm-input__icon', 'tm-icon-' + iconClass]"
-       @click="handleIconClick"
-      ></i>
+      <tm-icon slot="suffix"
+               class="tm-select__caret tm-input__icon"
+               :name="iconName"
+               :on-click="handleIconClick">
+      </tm-icon>
     </tm-input>
     <transition
       name="tm-zoom-in-top"
@@ -173,14 +174,14 @@
       _elFormItemSize() {
         return (this.elFormItem || {}).elFormItemSize;
       },
-      iconClass() {
+      iconName() {
         let criteria = this.clearable &&
           !this.selectDisabled &&
           this.inputHovering &&
           !this.multiple &&
           this.value !== undefined &&
           this.value !== '';
-        return criteria ? 'circle-close is-show-close' : (this.remote && this.filterable ? '' : 'arrow-up');
+        return criteria ? 'cross' : (this.remote && this.filterable ? '' : 'arrow-down');
       },
 
       debounce() {
@@ -437,7 +438,7 @@
 
       handleIconShow() {
         let icon = this.$el.querySelector('.tm-input__icon');
-        if (icon && !hasClass(icon, 'tm-icon-circle-close')) {
+        if (icon && !hasClass(icon, 'tm-icon-cross')) {
           addClass(icon, 'is-reverse');
         }
       },
@@ -524,7 +525,7 @@
       },
 
       handleIconClick(event) {
-        if (this.iconClass.indexOf('circle-close') > -1) {
+        if (this.iconName.indexOf('cross') > -1) {
           this.deleteSelected(event);
         } else {
           this.toggleMenu();

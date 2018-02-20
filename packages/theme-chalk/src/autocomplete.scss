@@ -75,6 +75,10 @@
     }
 
     & .tm-icon-loading {
+      svg {
+        width: $--icon-size-base+2;
+        height: $--icon-size-base+2;
+      }
       vertical-align: middle;
     }
   }

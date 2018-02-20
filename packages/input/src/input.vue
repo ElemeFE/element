@@ -61,9 +61,9 @@
                    :on-click="clear">
           </tm-icon>
         </span>
-        <tm-icon class="tm-input__icon"
+        <tm-icon class="tm-input__validateIcon tm-input__icon"
                  v-if="validateState"
-                 :icon="validateIcon">
+                 :name="validateIcon">
         </tm-icon>
       </span>
       <!-- 后置元素 -->

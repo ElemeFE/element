@@ -17,7 +17,14 @@
     },
     computed: {
       className() {
-        return 'tm-icon tm-icon-' + this.name;
+        let className = 'tm-icon';
+        if (this.name) {
+          className += ' tm-icon-' + this.name;
+          if (this.name === 'loader') {
+            className += ' tm-icon-loading';
+          }
+        }
+        return className;
       }
     }
   };
