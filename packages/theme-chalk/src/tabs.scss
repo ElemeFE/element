@@ -138,6 +138,19 @@
     overflow: hidden;
     position: relative;
   }
+  @include e(icon) {
+    height: $--tab-flow-icon-size;
+    width: $--tab-flow-icon-size;
+    display: block;
+    fill: $--tab-flow-icon-color;
+    > svg {
+      height: $--tab-flow-icon-size;
+      width: 2$--tab-flow-icon-size;
+    }
+    + .tm-tabs__label {
+      margin-left: 6px;
+    }
+  }
   @include m(card) {
     > .tm-tabs__header {
       border-bottom: 1px solid $--border-color-light;
@@ -476,6 +489,47 @@
           border-bottom-color: rgb(209, 219, 229);
         }
       }
+    }
+  }
+  @include m(flow) {
+    margin-top: 16px;
+    margin-bottom: 16px;
+    .tm-tabs__item {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: $--tab-flow-item-height;
+      padding: 0 $--tab-flow-item-padding;
+      box-sizing: border-box;
+      font-size: 14px;
+      line-height: 6px;
+      text-align: center;
+      color: $--tab-flow-item-text-color;
+      background-color: transparent;
+      border: $--tab-flow-item-border;
+      border-radius: 4px;
+      &.is-active {
+        background-color: $--tab-flow-item-active-color;
+        border-color: $--tab-flow-item-active-color;
+        box-shadow: $--tab-flow-item-shadow;
+      }
+      &.is-bottom, &.is-top {
+        &:nth-child(2), &:last-child {
+          padding: 0 $--tab-flow-item-padding;
+        }
+      }
+      & + .tm-tabs__item {
+        margin-left: $--tab-flow-item-padding;
+      }
+    }
+    .tm-tabs__nav {
+      padding: $--tab-flow-item-padding 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .tm-tabs__nav-wrap:after {
+      content: normal;
     }
   }
 }

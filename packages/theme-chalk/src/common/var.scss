@@ -418,6 +418,14 @@ $--tab-header-fill-hover: rgba($--color-black, 0.06) !default;
 $--tab-vertical-header-width: 90px !default;
 $--tab-vertical-header-count-color: $--color-white !default;
 $--tab-vertical-header-count-fill: $--color-text-secondary !default;
+$--tab-flow-icon-color: $--color-pastel-gray !default;
+$--tab-flow-icon-size: 20px !default;
+$--tab-flow-item-padding: 16px !default;
+$--tab-flow-item-height: 40px !default;
+$--tab-flow-item-active-color: $--color-white !default;
+$--tab-flow-item-text-color: #646464 !default;
+$--tab-flow-item-border: 2px solid rgba(0, 0, 0, 0.08) !default;
+$--tab-flow-item-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.04) !default;
 
 /* Button
 -------------------------- */

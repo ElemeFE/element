@@ -25,7 +25,7 @@
     "dist:all": "node build/bin/build-all.js && npm run build:theme",
     "i18n": "node build/bin/i18n.js",
     "lint": "eslint src/**/* test/**/* packages/**/* build/**/* --quiet",
-    "test": "npm run lint && npm run build:theme && cross-env CI_ENV=/dev/ karma start test/unit/karma.conf.js --single-run",
+    "test": "npm run lint && npm run build:theme && cross-env CI_ENV=/dev/ karma start test/unit/karma.conf.js",
     "test:watch": "npm run build:theme && karma start test/unit/karma.conf.js"
   },
   "faas": {

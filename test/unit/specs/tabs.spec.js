@@ -457,4 +457,32 @@ describe('Tabs', () => {
       });
     }, 100);
   });
+  it('flow type', done => {
+      vm = createVue({
+          template: `
+            <tm-tabs type="flow" ref="tabs" tab-position="left" style="height: 200px;">
+              <tm-tab-pane label="test">test</tm-tab-pane>
+            </tm-tabs>
+          `
+      }, true);
+      setTimeout(() => {
+          const isFlow = vm.$el.classList.contains('tm-tabs--flow');
+          expect(isFlow).to.true;
+          done();
+      }, 100);
+  });
+  it('icon', done => {
+      vm = createVue({
+          template: `
+            <tm-tabs ref="tabs" tab-position="left" style="height: 200px;">
+              <tm-tab-pane label="test" icon="airplane">test</tm-tab-pane>
+            </tm-tabs>
+          `
+      }, true);
+      setTimeout(() => {
+          const tabs = vm.$el.querySelector('.tm-icon-airplane');
+          expect(!!tabs).to.true;
+          done();
+      }, 100);
+  });
 });
