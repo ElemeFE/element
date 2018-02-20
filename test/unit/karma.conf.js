@@ -37,8 +37,7 @@ module.exports = function(config) {
       mocha: {
         timeout: 4000
       }
-    },
-    singleRun: true
+    }
   };
 
   if (process.env.TRAVIS) {
