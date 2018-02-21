@@ -1,4 +1,4 @@
-export * from './element-ui'
+export * from './tmconsulting-ui'
 
-import * as ElementUI from './element-ui'
-export default ElementUI
+import * as TMui from './tmconsulting-ui'
+export default TMui

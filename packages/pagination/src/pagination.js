@@ -1,9 +1,9 @@
 import Pager from './pager.vue';
-import TmSelect from 'element-ui/packages/select';
-import TmOption from 'element-ui/packages/option';
-import TmInput from 'element-ui/packages/input';
-import Locale from 'element-ui/src/mixins/locale';
-import { valueEquals } from 'element-ui/src/utils/util';
+import TmSelect from 'tmconsulting-ui/packages/select';
+import TmOption from 'tmconsulting-ui/packages/option';
+import TmInput from 'tmconsulting-ui/packages/input';
+import Locale from 'tmconsulting-ui/src/mixins/locale';
+import { valueEquals } from 'tmconsulting-ui/src/utils/util';
 
 export default {
   name: 'TmPagination',

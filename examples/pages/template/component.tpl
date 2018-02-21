@@ -231,7 +231,7 @@
           const elm = document.querySelector(anchor[0]);
           if (!elm) return;
 
-          setTimeout(_ => {
+          setTimeout(() => {
             this.componentScrollBox.scrollTop = elm.offsetTop;
           }, 50);
         }

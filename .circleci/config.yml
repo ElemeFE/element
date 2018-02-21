@@ -44,7 +44,7 @@ jobs:
 
       - save_cache:
           paths:
-            - examples/element-ui
+            - examples/tmconsulting-ui
           key: project-dist-{{ .Revision }} # .BuildNum
 
   image:

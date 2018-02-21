@@ -1,7 +1,7 @@
 import { getCell, getColumnByCell, getRowIdentity } from './util';
-import { hasClass, addClass, removeClass } from 'element-ui/src/utils/dom';
-import TmCheckbox from 'element-ui/packages/checkbox';
-import TmTooltip from 'element-ui/packages/tooltip';
+import { hasClass, addClass, removeClass } from 'tmconsulting-ui/src/utils/dom';
+import TmCheckbox from 'tmconsulting-ui/packages/checkbox';
+import TmTooltip from 'tmconsulting-ui/packages/tooltip';
 import debounce from 'throttle-debounce/debounce';
 import LayoutObserver from './layout-observer';
 

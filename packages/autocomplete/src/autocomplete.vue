@@ -59,13 +59,13 @@
 </template>
 <script>
   import debounce from 'throttle-debounce/debounce';
-  import TmInput from 'element-ui/packages/input';
-  import Clickoutside from 'element-ui/src/utils/clickoutside';
+  import TmInput from 'tmconsulting-ui/packages/input';
+  import Clickoutside from 'tmconsulting-ui/src/utils/clickoutside';
   import TmAutocompleteSuggestions from './autocomplete-suggestions.vue';
-  import Emitter from 'element-ui/src/mixins/emitter';
-  import Migrating from 'element-ui/src/mixins/migrating';
-  import { generateId } from 'element-ui/src/utils/util';
-  import Focus from 'element-ui/src/mixins/focus';
+  import Emitter from 'tmconsulting-ui/src/mixins/emitter';
+  import Migrating from 'tmconsulting-ui/src/mixins/migrating';
+  import { generateId } from 'tmconsulting-ui/src/utils/util';
+  import Focus from 'tmconsulting-ui/src/mixins/focus';
 
   export default {
     name: 'TmAutocomplete',

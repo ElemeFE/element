@@ -123,22 +123,22 @@
 </template>
 
 <script type="text/babel">
-  import Emitter from 'element-ui/src/mixins/emitter';
-  import Focus from 'element-ui/src/mixins/focus';
-  import Locale from 'element-ui/src/mixins/locale';
-  import TmInput from 'element-ui/packages/input';
+  import Emitter from 'tmconsulting-ui/src/mixins/emitter';
+  import Focus from 'tmconsulting-ui/src/mixins/focus';
+  import Locale from 'tmconsulting-ui/src/mixins/locale';
+  import TmInput from 'tmconsulting-ui/packages/input';
   import TmSelectMenu from './select-dropdown.vue';
   import TmOption from './option.vue';
-  import TmTag from 'element-ui/packages/tag';
-  import TmScrollbar from 'element-ui/packages/scrollbar';
+  import TmTag from 'tmconsulting-ui/packages/tag';
+  import TmScrollbar from 'tmconsulting-ui/packages/scrollbar';
   import debounce from 'throttle-debounce/debounce';
-  import Clickoutside from 'element-ui/src/utils/clickoutside';
-  import { addClass, removeClass, hasClass } from 'element-ui/src/utils/dom';
-  import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
-  import { t } from 'element-ui/src/locale';
-  import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
-  import { getValueByPath } from 'element-ui/src/utils/util';
-  import { valueEquals } from 'element-ui/src/utils/util';
+  import Clickoutside from 'tmconsulting-ui/src/utils/clickoutside';
+  import { addClass, removeClass, hasClass } from 'tmconsulting-ui/src/utils/dom';
+  import { addResizeListener, removeResizeListener } from 'tmconsulting-ui/src/utils/resize-event';
+  import { t } from 'tmconsulting-ui/src/locale';
+  import scrollIntoView from 'tmconsulting-ui/src/utils/scroll-into-view';
+  import { getValueByPath } from 'tmconsulting-ui/src/utils/util';
+  import { valueEquals } from 'tmconsulting-ui/src/utils/util';
   import NavigationMixin from './navigation-mixin';
 
   const sizeMap = {

@@ -14,18 +14,18 @@ The above website enables you to preview theme of a new theme color in real-time
 $--color-primary: teal;
 
 /* icon font path, required */
-$--font-path: '~element-ui/lib/theme-chalk/fonts';
+$--font-path: '~tmconsulting-ui/lib/theme-chalk/fonts';
 
-@import "~element-ui/packages/theme-chalk/src/index";
+@import "~tmconsulting-ui/packages/theme-chalk/src/index";
 ```
 
 Then in the entry file of your project, import this style file instead of Element's built CSS:
 ```JS
 import Vue from 'vue'
-import Element from 'element-ui'
+import TMui from 'tmconsulting-ui'
 import './element-variables.scss'
 
-Vue.use(Element)
+Vue.use(TMui)
 ```
 
 :::tip
@@ -100,10 +100,10 @@ By default the build theme file is placed inside `./theme`. You can specify its 
 
 ```javascript
 import '../theme/index.css'
-import ElementUI from 'element-ui'
+import TMui from 'tmconsulting-ui'
 import Vue from 'vue'
 
-Vue.use(ElementUI)
+Vue.use(TMui)
 ```
 
 #### <strong>Import component theme on demand</strong>
@@ -112,7 +112,7 @@ If you are using `babel-plugin-component` for on-demand import, just modify `.ba
 {
   "plugins": [["component", [
     {
-      "libraryName": "element-ui",
+      "libraryName": "tmconsulting-ui",
       "styleLibraryName": "~theme"
     }
   ]]]

@@ -19,22 +19,22 @@ TM-Ui is a based on [ElementUI](https://github.com/ElemeFE/element) UI Toolkit. 
 
 ## Install
 ```shell
-npm install element-ui -S
+npm install tmconsulting-ui -S
 ```
 
 ## Quick Start
 ``` javascript
 import Vue from 'vue'
-import Element from 'element-ui'
+import TMui from 'tmconsulting-ui'
 
-Vue.use(Element)
+Vue.use(TMui)
 
 // or
 import {
   Select,
   Button
   // ...
-} from 'element-ui'
+} from 'tmconsulting-ui'
 
 Vue.component(Select.name, Select)
 Vue.component(Button.name, Button)

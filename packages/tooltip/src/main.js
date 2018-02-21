@@ -1,8 +1,8 @@
-import Popper from 'element-ui/src/utils/vue-popper';
+import Popper from 'tmconsulting-ui/src/utils/vue-popper';
 import debounce from 'throttle-debounce/debounce';
-import { addClass, removeClass, on, off } from 'element-ui/src/utils/dom';
-import { getFirstComponentChild } from 'element-ui/src/utils/vdom';
-import { generateId } from 'element-ui/src/utils/util';
+import { addClass, removeClass, on, off } from 'tmconsulting-ui/src/utils/dom';
+import { getFirstComponentChild } from 'tmconsulting-ui/src/utils/vdom';
+import { generateId } from 'tmconsulting-ui/src/utils/util';
 import Vue from 'vue';
 
 export default {

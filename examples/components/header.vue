@@ -429,7 +429,7 @@
 
     created() {
       const xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = _ => {
+      xhr.onreadystatechange = () => {
         if (xhr.readyState === 4 && xhr.status === 200) {
           const versions = JSON.parse(xhr.responseText);
           this.versions = Object.keys(versions).reduce((prev, next) => {

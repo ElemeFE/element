@@ -1,10 +1,10 @@
 <script>
-  import Clickoutside from 'element-ui/src/utils/clickoutside';
-  import Emitter from 'element-ui/src/mixins/emitter';
-  import Migrating from 'element-ui/src/mixins/migrating';
-  import TmButton from 'element-ui/packages/button';
-  import TmButtonGroup from 'element-ui/packages/button-group';
-  import { generateId } from 'element-ui/src/utils/util';
+  import Clickoutside from 'tmconsulting-ui/src/utils/clickoutside';
+  import Emitter from 'tmconsulting-ui/src/mixins/emitter';
+  import Migrating from 'tmconsulting-ui/src/mixins/migrating';
+  import TmButton from 'tmconsulting-ui/packages/button';
+  import TmButtonGroup from 'tmconsulting-ui/packages/button-group';
+  import { generateId } from 'tmconsulting-ui/src/utils/util';
 
   export default {
     name: 'TmDropdown',

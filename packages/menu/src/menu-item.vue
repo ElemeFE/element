@@ -30,8 +30,8 @@
 </template>
 <script>
   import Menu from './menu-mixin';
-  import TmTooltip from 'element-ui/packages/tooltip';
-  import Emitter from 'element-ui/src/mixins/emitter';
+  import TmTooltip from 'tmconsulting-ui/packages/tooltip';
+  import Emitter from 'tmconsulting-ui/src/mixins/emitter';
 
   export default {
     name: 'TmMenuItem',
