@@ -48,9 +48,9 @@
 </template>
 
 <script type="text/babel">
-  import Locale from 'element-ui/src/mixins/locale';
+  import Locale from 'tmconsulting-ui/src/mixins/locale';
   import { isDate, range, getDayCountOfMonth, nextDate } from '../util';
-  import { hasClass } from 'element-ui/src/utils/dom';
+  import { hasClass } from 'tmconsulting-ui/src/utils/dom';
 
   const datesInMonth = (year, month) => {
     const numOfDays = getDayCountOfMonth(year, month);

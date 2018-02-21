@@ -1,5 +1,5 @@
 // TODO: Run `npm run test:watch` and check warnings
-import { hasOwn } from 'element-ui/src/utils/util';
+import { hasOwn } from 'tmconsulting-ui/src/utils/util';
 
 const RE_NARGS = /(%|)\{([0-9a-zA-Z_]+)\}/g;
 /**

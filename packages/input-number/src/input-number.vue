@@ -52,9 +52,9 @@
   </div>
 </template>
 <script>
-  import TmInput from 'element-ui/packages/input';
-  import Focus from 'element-ui/src/mixins/focus';
-  import RepeatClick from 'element-ui/src/directives/repeat-click';
+  import TmInput from 'tmconsulting-ui/packages/input';
+  import Focus from 'tmconsulting-ui/src/mixins/focus';
+  import RepeatClick from 'tmconsulting-ui/src/directives/repeat-click';
 
   export default {
     name: 'TmInputNumber',

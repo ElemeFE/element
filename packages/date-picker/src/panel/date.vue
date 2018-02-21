@@ -153,9 +153,9 @@
     nextMonth,
     changeYearMonthAndClampDate
   } from '../util';
-  import Locale from 'element-ui/src/mixins/locale';
-  import TmInput from 'element-ui/packages/input';
-  import TmButton from 'element-ui/packages/button';
+  import Locale from 'tmconsulting-ui/src/mixins/locale';
+  import TmInput from 'tmconsulting-ui/packages/input';
+  import TmButton from 'tmconsulting-ui/packages/button';
   import TimePicker from './time';
   import YearTable from '../basic/year-table';
   import MonthTable from '../basic/month-table';

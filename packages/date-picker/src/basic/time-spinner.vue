@@ -96,8 +96,8 @@
 
 <script type="text/babel">
   import { getRangeHours, modifyTime } from '../util';
-  import TmScrollbar from 'element-ui/packages/scrollbar';
-  import RepeatClick from 'element-ui/src/directives/repeat-click';
+  import TmScrollbar from 'tmconsulting-ui/packages/scrollbar';
+  import RepeatClick from 'tmconsulting-ui/src/directives/repeat-click';
 
   export default {
     components: { TmScrollbar },

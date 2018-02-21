@@ -84,12 +84,12 @@
 
 <script>
 import Vue from 'vue';
-import Clickoutside from 'element-ui/src/utils/clickoutside';
+import Clickoutside from 'tmconsulting-ui/src/utils/clickoutside';
 import { formatDate, parseDate, isDateObject, getWeekNumber } from './util';
-import Popper from 'element-ui/src/utils/vue-popper';
-import Emitter from 'element-ui/src/mixins/emitter';
-import TmInput from 'element-ui/packages/input';
-import merge from 'element-ui/src/utils/merge';
+import Popper from 'tmconsulting-ui/src/utils/vue-popper';
+import Emitter from 'tmconsulting-ui/src/mixins/emitter';
+import TmInput from 'tmconsulting-ui/packages/input';
+import merge from 'tmconsulting-ui/src/utils/merge';
 
 const NewPopper = {
   props: {

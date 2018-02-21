@@ -18,8 +18,8 @@
 </template>
 
 <script type="text/babel">
-  import TmScrollbar from 'element-ui/packages/scrollbar';
-  import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
+  import TmScrollbar from 'tmconsulting-ui/packages/scrollbar';
+  import scrollIntoView from 'tmconsulting-ui/src/utils/scroll-into-view';
 
   const parseTime = function(time) {
     const values = (time || '').split(':');

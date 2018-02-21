@@ -61,8 +61,8 @@
   </transition-group>
 </template>
 <script>
-  import Locale from 'element-ui/src/mixins/locale';
-  import TmProgress from 'element-ui/packages/progress';
+  import Locale from 'tmconsulting-ui/src/mixins/locale';
+  import TmProgress from 'tmconsulting-ui/packages/progress';
 
   export default {
     mixins: [Locale],

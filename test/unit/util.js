@@ -1,7 +1,7 @@
 import Vue from 'vue';
-import Element from 'main/index.js';
+import TMui from 'main/index.js';
 
-Vue.use(Element);
+Vue.use(TMui);
 
 let id = 0;
 
