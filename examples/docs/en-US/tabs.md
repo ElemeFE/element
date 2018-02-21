@@ -126,6 +126,38 @@ Basic and concise tabs.
 ```
 :::
 
+### Flow usage
+
+Flow tabs.
+
+:::demo Tabs provide a selective card functionality. By default the first tab is selected as active, and you can activate any tab by setting the `value` attribute. Use `icon` attribute to set the icon name
+
+```html
+<template>
+  <tm-tabs type="flow" v-model="activeName" @tab-click="handleClick">
+    <tm-tab-pane label="User" name="first" icon="airplane">User</tm-tab-pane>
+    <tm-tab-pane label="Config" name="second">Config</tm-tab-pane>
+    <tm-tab-pane label="Role" name="third">Role</tm-tab-pane>
+    <tm-tab-pane name="fourth" icon="airplane"></tm-tab-pane>
+  </tm-tabs>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        activeName: 'first'
+      };
+    },
+    methods: {
+      handleClick(tab, event) {
+        console.log(tab, event);
+      }
+    }
+  };
+</script>
+```
+:::
+
 ### Card Style
 
 Tabs styled as cards.
