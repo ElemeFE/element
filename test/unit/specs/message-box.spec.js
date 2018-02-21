@@ -162,7 +162,7 @@ describe('MessageBox', () => {
         messageBox.inputValue = 'no';
         setTimeout(() => {
           expect(document.querySelector('.tm-message-box__errormsg')
-            .textContent).to.equal('输入的数据不合法!');
+            .textContent).to.equal('Illegal input');
           done();
         }, 100);
       }, 200);

@@ -87,7 +87,7 @@ describe('Select', () => {
   it('create', () => {
     vm = createTest(Select, true);
     expect(vm.$el.className).to.equal('tm-select');
-    expect(vm.$el.querySelector('.tm-input__inner').placeholder).to.equal('请选择');
+    expect(vm.$el.querySelector('.tm-input__inner').placeholder).to.equal('Select');
     vm.toggleMenu();
     expect(vm.visible).to.true;
   });
